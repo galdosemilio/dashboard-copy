@@ -1,0 +1,15 @@
+<mat-form-field [class.readonly]="isReadonly">
+  <span *ngIf="prefix" matPrefix>{{ prefix }}</span>
+  <span *ngIf="isReadonly">{{ value }}</span>
+  <input matInput [type]="type"
+    [attr.hidden]="isReadonly ? '' : null"
+    [placeholder]="placeholder"
+    [required]="isRequired"
+    [readonly]="isReadonly"
+    [attr.disabled]="isReadonly ? '' : null"
+    [value]="value"
+    (input)="onChange($event.target.value)"
+    (blur)="propagateTouch()"
+    (change)="$event.stopPropagation()">
+  <span *ngIf="suffix" matSuffix>{{ suffix }}</span>
+</mat-form-field>

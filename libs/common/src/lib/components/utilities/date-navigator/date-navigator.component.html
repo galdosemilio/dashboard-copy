@@ -1,0 +1,22 @@
+<mat-grid-list cols="6" rowHeight="30px">
+
+  <mat-grid-tile [colspan]="1" (click)="changeDate(false)">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="4">
+    <div>
+      <input [matDatepicker]="picker" [max]="_limit" (dateChange)="pickerDate($event.value)">
+      <span (click)="picker.open()">
+        {{ _range }}
+      </span>
+      <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker [startAt]="_start"></mat-datepicker>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" (click)="changeDate(true)" [class.disabled]="_maxReached">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </mat-grid-tile>
+
+</mat-grid-list>

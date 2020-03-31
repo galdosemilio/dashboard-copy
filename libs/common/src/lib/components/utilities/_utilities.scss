@@ -1,0 +1,17 @@
+@import './avatar/avatar';
+@import './badge/badge';
+@import './date-navigator/date-navigator';
+@import './help/help';
+@import './logo/logo';
+@import './paginator/paginator';
+@import './progress-circle/progress-circle';
+
+@mixin ccr-utilities($theme, $config) {
+  @include ccr-component-avatar($theme, $config);
+  @include ccr-component-badge($theme, $config);
+  @include ccr-component-date-navigator($theme, $config);
+  @include ccr-component-help($theme, $config);
+  @include ccr-component-logo($theme, $config);
+  @include ccr-component-paginator($theme, $config);
+  @include ccr-component-progress-circle($theme, $config);
+}

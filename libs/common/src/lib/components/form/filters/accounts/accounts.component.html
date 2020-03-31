@@ -1,0 +1,19 @@
+<ng-container [formGroup]="form" novalidate>
+  <ccr-form-field-text
+    formControlName="query"
+    [placeholder]="'GLOBAL.FILTER_BY_NAME' | translate"
+  ></ccr-form-field-text>
+
+  <ccr-autocompleter-organization
+    formControlName="organization"
+    [placeholder]="'GLOBAL.ORGANIZATION' | translate"
+  ></ccr-autocompleter-organization>
+
+  <mat-checkbox
+    *ngIf="_isAdmin"
+    formControlName="includeInactive">
+    {{ 'GLOBAL.INCLUDE_INACTIVE' | translate }}
+  </mat-checkbox>
+
+  <!-- TODO non-admin: add accessType filter -->
+</ng-container>

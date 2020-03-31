@@ -1,0 +1,15 @@
+<mat-form-field [class.readonly]="isReadonly">
+  <mat-select
+  [class.mat-select-invalid]="_control?.invalid && _control?.touched"
+  [placeholder]="placeholder"
+  [required]="isRequired"
+  [disabled]="isReadonly"
+  [(value)]="selected"
+  (selectionChange)="onChange()"
+  (blur)="propagateTouch()"
+  (change)="$event.stopPropagation()">
+    <mat-option *ngFor="let state of states" [value]="state.value">
+      {{ state.viewValue[language] }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,415 @@
+@mixin ccr-generic-content($theme, $config) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  /**
+  * Styled Component Elements.
+  * Needs to wrap the component with .ccr-content to enable the decoration,
+  * without it the Component may look generic.
+  */
+  .ccr-content {
+    h3 {
+      display: block !important;
+      line-height: 22px;
+      font-size: 16px;
+      font-weight: normal;
+      margin: 0 0 20px;
+      text-transform: uppercase;
+
+      > .mat-icon {
+        vertical-align: bottom;
+      }
+
+      > .mat-subheader {
+        color: mat-color($foreground, hint-text);
+        font-size: 90%;
+        padding: 0;
+        text-transform: none;
+      }
+    }
+
+    .ccr-panel {
+      border: 1px solid mat-color($foreground, divider);
+      margin-bottom: 25px;
+      padding: 0 25px 5px;
+
+      > h3 {
+        background: mat-color($background, app-bar);
+        line-height: 30px;
+        margin: 0 -25px 20px;
+        padding: 0 10px;
+      }
+      /* TODO adjust the icon at the beginning*/
+    }
+  }
+
+  /**
+  * Standard Heading.
+
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+    <h2 fxFlex>{{'CTX.TITLE' | translate}}</h2>
+  </div>
+  <div class="ccr-htools" fxLayout="row" fxLayoutAlign=" center">
+    <mat-form-field class="ccr-mini" floatPlaceholder="never">
+      <mat-select placeholder="{{'CTX.FILTER' | translate}}" ...
+    </mat-form-field>
+    <ccr-paginator #paginator [length]="source.total" ...
+  </div>
+</div>
+  */
+  .ccr-heading {
+    margin-top: 35px;
+    @media #{map-get($config, lte-xs)} {
+      margin-top: 20px;
+      > .mat-button {
+        display: none;
+      }
+    }
+    &:first-child {
+      margin-top: 0 !important;
+      > .ccr-name {
+        padding-top: 0;
+      }
+    }
+
+    > .mat-button {
+      float: right;
+    }
+  }
+
+  .ccr-title {
+    margin-bottom: 10px;
+
+    h2 {
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 28px;
+      margin: 0;
+      text-align: left;
+      @media #{map-get($config, lte-xs)} {
+        text-align: center;
+        width: 100%;
+        word-wrap: break-word;
+      }
+    }
+
+    h2 + .mat-button {
+      line-height: 25px;
+      margin: 2px 0 0 15px;
+      padding: 0 10px 0 4px !important;
+      mat-icon {
+        height: 24px;
+        width: 22px;
+      }
+    }
+
+    .ccr-icon-button {
+      @media #{map-get($config, lte-xs)} {
+        min-width: 20px;
+        margin-top: 7px;
+        padding: 4px 5px 4px 3px;
+        /*
+        .mat-button-wrapper > span {
+          display: none;
+        }
+        */
+      }
+    }
+  }
+
+  .ccr-filters {
+    margin-bottom: 10px;
+    padding: 3px 10px 3px 15px;
+    background: mat-color($background, tools);
+    @media #{map-get($config, lte-xs)} {
+      margin: 0;
+    }
+
+    .mat-form-field {
+      margin-right: 12px;
+      min-width: 160px;
+
+      .mat-form-field-wrapper {
+        margin-bottom: -1.25em + 0.1em;
+      }
+      .mat-form-field-label {
+        color: mat-color($foreground, secondary-text);
+      }
+      .mat-form-field-underline {
+        background-color: mat-color($foreground, secondary-text);
+      }
+    }
+  }
+
+  /**
+  * Name title.
+
+<div class="ccr-name" fxLayout="row">
+  <ccr-avatar size="big" [account]="account.id"></ccr-avatar>
+  <h2 fxFlex>{{ entityName | capitalize }}</h2>
+</div>
+  */
+  .ccr-name {
+    padding: 15px 0px;
+    @media #{map-get($config, lte-md)} {
+      padding-top: 0;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 70px;
+      margin: 0;
+      overflow: hidden;
+      padding-left: 7px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  /**
+  * Standard Tabs.
+
+<div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch" fxLayoutGap="5px">
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['...']">...</a>
+</div>
+  */
+  .ccr-tabs {
+    overflow-x: overlay;
+    a {
+      background-color: mat-color($background, header);
+      color: mat-color($foreground, text);
+      padding: 8px 12px;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      &:hover {
+        background-color: darken(mat-color($background, header), 4%);
+      }
+      &.active {
+        background-color: var(--primary, mat-color($primary));
+        color: var(--primary-contrast, mat-color($primary, default-contrast));
+      }
+    }
+  }
+
+  /**
+  * Center Tabs.
+
+<ul class="ccr-tabs-center" fxLayout="row" fxLayoutAlign="center stretch">
+  <li><a mat-button [class.active]="...">{{'CTX.TAB_TITLE' | translate}}</a></li>
+</ul>
+  */
+  .ccr-tabs-center {
+    margin: 0;
+    padding: 0;
+    overflow-x: overlay;
+    max-width: 100%;
+    @media #{map-get($config, lte-xs)} {
+      margin-bottom: 5px;
+    }
+
+    li {
+      display: block;
+      list-style-type: none;
+      white-space: nowrap;
+
+      .mat-button {
+        min-width: auto;
+        font-size: 18px;
+        font-weight: 400;
+        &.active {
+          font-weight: 600;
+        }
+        @media #{map-get($config, lte-md)} {
+          padding: 0 5px;
+          font-size: 16px;
+        }
+
+        .mat-button-focus-overlay {
+          background-color: mat-color($background, hover);
+        }
+      }
+
+      &:not(:last-child):after {
+        content: '|';
+        font-size: 24px;
+        font-weight: 300;
+        margin: 0 7px 0 3px;
+      }
+    }
+  }
+
+  /**
+  * Action Buttons.
+
+<div class="ccr-action-buttons" fxLayoutAlign="center center">
+  <button type="button" mat-button class="ccr-button" color="primary" ...
+</div>
+  */
+
+  .ccr-action-buttons {
+    > button:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  /**
+  * Utils.
+  */
+  .ccr-spacing {
+    margin: 20px 0;
+    @media #{map-get($config, lte-md)} {
+      margin: 10px 0;
+    }
+  }
+
+  .ccr-container {
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+
+    @media #{map-get($config, lte-md)} {
+      margin: 10px 0;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .ccr-container-mini {
+    margin: 10px 0;
+    max-width: 100%;
+    position: relative;
+
+    @media #{map-get($config, lte-md)} {
+      margin: 5px 0;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .ccr-dashboard-pane {
+    min-height: 320px;
+  }
+
+  /**
+  * Forms.
+  */
+  .ccr-select-outline {
+    .mat-input-element,
+    .mat-select {
+      border-radius: 15px;
+      border-width: 1px;
+      border-style: solid;
+      line-height: 33px;
+      margin-bottom: 0;
+      overflow: hidden; /* avoid over width */
+
+      &:hover {
+        background-color: mat-color($background, box-shadow);
+      }
+    }
+    .mat-select-trigger {
+      height: 28px;
+      color: currentColor;
+    }
+    .mat-input-element,
+    .mat-form-field-infix {
+      padding: 0 10px;
+      @media #{map-get($config, lte-md)} {
+        padding: 0 5px;
+      }
+    }
+    .mat-input-placeholder {
+      color: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: normal;
+      line-height: 35px;
+      text-align: center;
+      text-transform: none;
+    }
+  }
+
+  .ccr-datepicker-colored {
+    background-color: var(--primary-a12, mat-color($primary, 50));
+    line-height: 30px;
+
+    .mat-form-field-wrapper {
+      height: 30px;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+    .mat-form-field-infix {
+      border-width: 0;
+      padding: 0 12px;
+    }
+    .mat-form-field-underline {
+      background-color: transparent;
+      bottom: 0;
+    }
+  }
+
+  .ccr-button-group {
+    display: inline-flex;
+
+    .mat-button {
+      flex: 0 1 auto;
+      padding: 0 7px;
+      position: relative;
+    }
+
+    .mat-button,
+    .mat-button .mat-button-ripple,
+    .mat-button .mat-button-focus-overlay {
+      border-radius: 15px;
+    }
+
+    .mat-button {
+      &.active {
+        background-color: mat-color($background, odd);
+      }
+      &:first-child:not(:last-child) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        .mat-button-ripple,
+        .mat-button-focus-overlay {
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+      &:last-child:not(:first-child) {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        .mat-button-ripple,
+        .mat-button-focus-overlay {
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
+      }
+    }
+
+    .mat-button + .mat-button {
+      margin-left: -1px;
+    }
+  }
+
+  .ccr-form-row {
+    .mat-slide-toggle {
+      padding-bottom: 1em;
+    }
+  }
+
+  .ccr-placeholder {
+    .mat-form-field-placeholder,
+    .mat-form-field-placeholder-wrapper {
+      overflow: visible;
+    }
+  }
+}

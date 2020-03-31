@@ -1,0 +1,67 @@
+@mixin ccr-generic-table-picker($theme, $config) {
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .ccr-table-picker {
+    display: block;
+    border: 1px solid transparent;
+    margin-bottom: 1.296875em;
+
+    .ccr-table {
+      &.ccr-empty,
+      &.ccr-errors,
+      &.ccr-loading {
+        min-height: 124px;
+      }
+
+      .ccr-overlay {
+        mat-spinner {
+          padding-top: 0;
+        }
+      }
+
+      mat-table {
+        mat-row {
+          @media #{map-get($config, lte-xs)} {
+            padding: 0 0 5px 0;
+          }
+        }
+
+        .mat-column-actions {
+          flex: 0 0 15%;
+          @media #{map-get($config, lte-xs)} {
+            min-width: 50px;
+          }
+        }
+
+        mat-cell {
+          &.mat-column-actions {
+            span.ccr-picked,
+            mat-icon.ccr-picked {
+              color: var(--accent, mat-color($accent));
+            }
+          }
+        }
+      }
+    }
+
+    &.ng-invalid.ng-touched[required] {
+      border-color: var(--warn, mat-color($warn));
+
+      /*
+      mat-header-cell {
+        &.mat-column-actions {
+          border-bottom: 1px solid var(--warn, mat-color($warn));
+        }
+      }
+      */
+
+      .mat-column-actions {
+        button .mat-icon {
+          border: 1px solid var(--warn, mat-color($warn));
+          border-radius: 14px;
+        }
+      }
+    }
+  }
+}

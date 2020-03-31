@@ -1,0 +1,6 @@
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="source.isLoading || source.hasErrors()">
+  <mat-spinner *ngIf="source.isLoading"></mat-spinner>
+  <div class="ccr-errors" *ngIf="!source.isLoading && source.hasErrors()">
+    <span *ngFor="let error of source.getErrors()">{{ error | translate }}</span>
+  </div>
+</div>

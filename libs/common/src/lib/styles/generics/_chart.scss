@@ -1,0 +1,52 @@
+@mixin ccr-generic-chart($theme, $config) {
+  $background: map-get($theme, background);
+
+  .ccr-chart {
+    .ccr-container {
+      min-height: 400px;
+      margin-bottom: 30px !important;
+      @media #{map-get($config, gte-sm)} {
+        margin: 10px 0 0;
+      }
+    }
+
+    .mat-select {
+      margin: 0;
+      padding: 0;
+
+      .mat-select-trigger {
+        background: mat-color($background, tools);
+        height: 36px;
+
+        .mat-select-arrow {
+          margin-right: 12px;
+        }
+        .mat-select-value {
+          line-height: 36px;
+          text-align: center;
+        }
+        .mat-select-underline {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .mat-button {
+      background-color: mat-color($background, tools);
+      height: 100%;
+      padding: 1px 0;
+    }
+  }
+
+  .scrollable {
+    overflow-x: auto;
+  }
+
+  .ccr-chart-embedded {
+    margin-top: -10px;
+  }
+  .mat-option.ccr-embedded {
+    line-height: 36px;
+    height: 36px;
+  }
+}

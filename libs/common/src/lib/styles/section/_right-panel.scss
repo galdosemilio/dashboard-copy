@@ -1,0 +1,81 @@
+// TODO move this to the corresponding components
+
+/*
+* Patient add measurement
+*/
+add-rightpanel-measurements {
+  form {
+    padding: 5px 30px 12px 20px;
+  }
+  .component-heading {
+    padding-top: 1.34375em;
+    position: relative;
+
+    .mat-form-field-placeholder {
+      display: block;
+      -webkit-transform: translateY(-1.28125em) scale(0.75) perspective(100px)
+        translateZ(0.001px);
+      transform: translateY(-1.28125em) scale(0.75) perspective(100px) translateZ(0.001px);
+      -ms-transform: translateY(-1.28125em) scale(0.75);
+      width: 133.33333333%;
+    }
+  }
+  .mat-radio-group {
+    padding-bottom: 1.25em;
+  }
+  .mat-radio-button {
+    margin-bottom: 10px;
+  }
+}
+
+/*
+* Patient add measurement
+*/
+ccr-panel-note {
+  width: 100%;
+}
+
+add-note-dialog {
+  .mat-input-wrapper {
+    width: 100%;
+  }
+}
+
+/*
+* Consultation
+*/
+ccr-consultation {
+  .contents {
+    padding: 5px 30px 12px 20px;
+  }
+  mat-radio-group {
+    margin-bottom: 25px;
+  }
+}
+
+/*
+ * Availability ccr-consultation subforms
+ */
+ccr-add-consultation,
+ccr-set-unavailability {
+  form {
+    > div {
+      // padding: 5px 40px 12px 20px;
+
+      .mat-icon {
+        cursor: pointer;
+      }
+      .participants {
+        margin-bottom: 20px;
+        .participantType {
+          font-size: 13.5px;
+          margin-left: 5px;
+        }
+      }
+
+      > mat-form-field.ng-touched.ng-invalid .mat-form-field-wrapper {
+        margin-bottom: 1em;
+      }
+    }
+  }
+}

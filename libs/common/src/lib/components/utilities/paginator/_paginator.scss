@@ -1,0 +1,23 @@
+@mixin ccr-component-paginator($theme, $config) {
+  $foreground: map-get($theme, foreground);
+
+  ccr-paginator {
+    display: block;
+    text-align: right;
+    width: 100%;
+
+    button {
+      background-color: transparent !important;
+    }
+
+    @media #{map-get($config, lte-xs)} {
+      button {
+        min-width: 40px !important;
+        padding: 0;
+        .mat-button-wrapper > span {
+          display: none;
+        }
+      }
+    }
+  }
+}

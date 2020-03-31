@@ -1,0 +1,16 @@
+<mat-form-field [class.readonly]="isReadonly">
+  <input matInput type="email"
+    [placeholder]="placeholder"
+    [required]="isRequired"
+    [readonly]="isReadonly"
+    [attr.disabled]="isReadonly ? '' : null"
+    [value]="value"
+    (input)="onChange($event.target.value)"
+    (blur)="propagateTouch()"
+    (change)="$event.stopPropagation()">
+
+  <mat-error>
+    <ng-content select="mat-error"></ng-content>
+  </mat-error>
+  <mat-hint *ngIf="isEmailCaseSensitive(value)">{{ 'NOTIFY.EMAIL.EMAIL_CASE_SENSITIVE' | translate }}</mat-hint>
+</mat-form-field>

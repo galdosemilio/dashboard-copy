@@ -1,0 +1,13 @@
+/**
+ * Material Mixins
+ */
+
+@import '../material/form-field/form-field-theme';
+@import '../material/overrides';
+
+@mixin ccr-settings-material($theme, $typography) {
+  @include mat-core($typography);
+  @include angular-material-theme($theme);
+  @include ccr-form-field-theme($theme);
+  @include ccr-material-overrides($theme);
+}

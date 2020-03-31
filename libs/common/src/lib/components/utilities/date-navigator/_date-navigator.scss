@@ -1,0 +1,58 @@
+@mixin ccr-component-date-navigator($theme, $config) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  date-navigator,
+  date-range-navigator {
+    background-color: mat-color($background, tools);
+    display: block;
+    margin-bottom: 15px;
+    padding: 4px 0;
+    position: relative;
+    text-align: center;
+    user-select: none;
+    width: 100%;
+    @media #{map-get($config, lte-xs)} {
+      margin-bottom: 10px;
+    }
+
+    mat-grid-tile {
+      &:first-child,
+      &:last-child {
+        cursor: pointer;
+        &:not(.disabled):hover {
+          /* TODO configurable gap */
+          background-color: darken(mat-color($background, tools), 5%);
+        }
+      }
+      &.disabled {
+        cursor: default;
+        mat-icon {
+          opacity: 0.3;
+        }
+      }
+
+      div {
+        align-items: center;
+        display: flex;
+        font-size: 14px;
+        justify-content: center;
+        line-height: 40px;
+        text-transform: uppercase;
+        > span {
+          cursor: pointer;
+          margin-right: 5px;
+        }
+        > input {
+          visibility: hidden;
+          width: 1px;
+        }
+      }
+    }
+
+    .text-separator {
+      color: mat-color($foreground, text);
+      font-weight: bold;
+    }
+  }
+}

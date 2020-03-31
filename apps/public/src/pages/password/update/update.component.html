@@ -1,0 +1,56 @@
+<mat-card *ngIf="!serverError">
+  <mat-card-header>
+    <h2 mat-card-title *ngIf="formType === 'create'">{{ 'GLOBAL.SET_PASSWORD' | translate }}</h2>
+    <h2 mat-card-title *ngIf="formType !== 'create'">{{ 'GLOBAL.RESET_PASSWORD' | translate }}</h2>
+  </mat-card-header>
+
+  <mat-card-content [ngSwitch]="mode">
+    <div *ngSwitchCase="'default'" fxLayout="column" fxLayoutGap="15px">
+    <form [formGroup]="form" (keydown.enter)="onSubmit()" fxLayout="column">
+      <mat-form-field readonly>
+        <input readonly matInput type="text"
+          formControlName="email"
+          [attr.disabled]="true"
+          [placeholder]="'GLOBAL.EMAIL' | translate">
+      </mat-form-field>
+
+      <ccr-form-field-password
+        required formControlName="password" layout="row"
+      ></ccr-form-field-password>
+
+      <ccr-form-field-consent required
+        *ngIf="consentRequired"
+        formControlName="consent"
+        [consentRequired]="consentRequired"
+      ></ccr-form-field-consent>
+    </form>
+
+    <button mat-flat-button color="primary" type="button" class="ccr-button"
+    [disabled]="isProcessing" (click)="onSubmit()">
+      {{ 'GLOBAL.SAVE_PASSWORD' | translate }}
+    </button>
+    </div>
+
+    <div *ngSwitchDefault [formGroup]="mfaForm">
+        <ccr-mfa-code-input
+        [loading]="isProcessing"
+        [mode]="mode"
+        [useParentForm]="false"
+        (modeChange)="mode = $event || mode"
+        (resendSMS)="onSubmit()"
+        (reset)="setMode('default')"
+        (submit)="onSubmitMFA()"
+        ccrBindForm="code"></ccr-mfa-code-input>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="serverError">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'GLOBAL.ERROR' | translate }}</h2>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{ serverError }}</p>
+  </mat-card-content>
+</mat-card>

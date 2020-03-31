@@ -1,0 +1,45 @@
+{
+  "npmScope": "dashboard",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "provider": {
+      "tags": []
+    },
+    "provider-e2e": {
+      "tags": [],
+      "implicitDependencies": ["provider"]
+    },
+    "admin": {
+      "tags": []
+    },
+    "admin-e2e": {
+      "tags": [],
+      "implicitDependencies": ["admin"]
+    },
+    "public": {
+      "tags": []
+    },
+    "public-e2e": {
+      "tags": [],
+      "implicitDependencies": ["public"]
+    },
+    "common": {
+      "tags": []
+    },
+    "layout": {
+      "tags": []
+    },
+    "backend": {
+      "tags": []
+    }
+  }
+}

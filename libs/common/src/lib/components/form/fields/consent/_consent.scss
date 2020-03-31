@@ -1,0 +1,24 @@
+@mixin ccr-form-field-consent($theme, $config) {
+  $warn: map-get($theme, warn);
+
+  ccr-form-field-consent.mat-form-field {
+    display: block;
+    font-size: 14px;
+    margin-top: 1.5em;
+    margin-left: 29px;
+    width: auto !important;
+
+    mat-checkbox {
+      .mat-checkbox-layout {
+        display: inline;
+        .mat-checkbox-label {
+          line-height: 150%;
+          white-space: normal;
+        }
+      }
+    }
+    > * {
+      line-height: 150%;
+    }
+  }
+}

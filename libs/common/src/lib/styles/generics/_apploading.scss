@@ -1,0 +1,10 @@
+@mixin ccr-generic-apploading($theme, $config) {
+  ccr-root:empty::after {
+    background: transparent url('/assets/loading.gif') no-repeat center center;
+    content: '';
+
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+}

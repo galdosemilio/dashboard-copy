@@ -1,0 +1,26 @@
+@import 'settings/normalize';
+@import 'settings/material';
+@import 'settings/mixings';
+@import 'settings/generics';
+
+/**
+* Configuration Mixins
+*/
+@mixin ccr-settings($theme, $typography, $config) {
+  @font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('/assets/fonts/BebasNeueRegular/BebasNeueRegular.eot?#iefix')
+        format('embedded-opentype'),
+      url('/assets/fonts/BebasNeueRegular/BebasNeueRegular.otf') format('opentype'),
+      url('/assets/fonts/BebasNeueRegular/BebasNeueRegular.woff') format('woff'),
+      url('/assets/fonts/BebasNeueRegular/BebasNeueRegular.ttf') format('truetype'),
+      url('/assets/fonts/BebasNeueRegular/BebasNeueRegular.svg#BebasNeueRegular')
+        format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @include ccr-settings-normalize();
+  @include ccr-settings-generics($theme, $config);
+  @include ccr-settings-material($theme, $typography);
+}

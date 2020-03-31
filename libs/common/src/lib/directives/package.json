@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../../../node_modules/ng-packagr/package.schema.json",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts",
+      "umdModuleIds": {
+        "@ngx-translate/core": "ngx-translate.core",
+        "ngx-moment": "ngx-moment",
+        "lodash": "_",
+        "moment": "moment",
+        "moment-timezone": "moment",
+        "selvera-api": "selvera-api"
+      }
+    }
+  }
+}

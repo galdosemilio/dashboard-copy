@@ -1,0 +1,124 @@
+@import '../material/button';
+
+@mixin ccr-generic-button($theme, $config) {
+  $background: map-get($theme, background);
+  $primary: map-get($theme, primary);
+
+  /**
+   * Standard Button.
+   * Always specify the material color.
+
+<a mat-button color="warn" class="ccr-button" ...>...</a>
+<button mat-raised-button color="primary" class="ccr-button" ...>...</button>
+<a mat-button color="primary" class="ccr-icon-button" ...>
+  <mat-icon>add</mat-icon>
+  <span>{{'CTX.BUTTON' | translate}}</span>
+</a>
+
+   */
+  .mat-button,
+  .mat-flat-button,
+  .mat-raised-button {
+    &.ccr-button,
+    &.ccr-icon,
+    &.ccr-icon-button {
+      border-radius: map-get($config, button-border-radius) !important;
+      border-width: 1px;
+      border-style: solid;
+      line-height: map-get($config, button-border-radius) * 2;
+      padding: 0 map-get($config, button-border-radius);
+
+      .mat-button-wrapper > span {
+        display: inline-block;
+      }
+      .mat-button-focus-overlay,
+      .mat-button-ripple {
+        border-radius: map-get($config, button-border-radius);
+      }
+    }
+
+    &.ccr-icon,
+    &.ccr-icon-button {
+      padding-left: 7px;
+      mat-icon {
+        height: 26px;
+        width: 26px;
+      }
+    }
+    &.ccr-icon {
+      min-width: 26px;
+      padding: 0 2px;
+    }
+    &.ccr-icon-button {
+      mat-icon {
+        padding-right: 4px;
+      }
+    }
+  }
+
+  .mat-button {
+    @include _ccr-button-theme-property($theme, 'background', default-contrast);
+    @include _ccr-button-theme-property($theme, 'color', default);
+    @include _ccr-button-ripple-color($theme, default-contrast, 0.15);
+    @include _ccr-button-focus-overlay-color($theme);
+  }
+
+  .mat-flat-button,
+  .mat-raised-button {
+    @include _ccr-button-theme-property($theme, 'background', default);
+    @include _ccr-button-theme-property($theme, 'color', default-contrast);
+    @include _ccr-button-ripple-color($theme, default, 0.15);
+    @include _ccr-button-focus-overlay-color($theme);
+  }
+
+  a.mat-button:hover {
+    text-decoration: none;
+  }
+
+  /**
+   * Button Group.
+   */
+  .ccr-button-group {
+    display: inline-flex;
+
+    .mat-button {
+      flex: 0 1 auto;
+      padding: 0 7px;
+      position: relative;
+    }
+
+    .mat-button,
+    .mat-button .mat-button-ripple,
+    .mat-button .mat-button-focus-overlay {
+      border-radius: 15px;
+    }
+
+    .mat-button {
+      &.active {
+        background-color: mat-color($background, odd);
+      }
+      &:first-child:not(:last-child) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        .mat-button-ripple,
+        .mat-button-focus-overlay {
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+      &:last-child:not(:first-child) {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        .mat-button-ripple,
+        .mat-button-focus-overlay {
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
+      }
+    }
+
+    .mat-button + .mat-button {
+      margin-left: -1px;
+    }
+  }
+}

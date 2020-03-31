@@ -1,0 +1,58 @@
+@mixin ccr-material-overrides($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+
+  .mat-step-header .mat-step-icon {
+    background-color: var(--accent, mat-color($accent));
+  }
+
+  .mat-form-field {
+    &.readonly {
+      .mat-select-value {
+        color: mat-color($foreground, base);
+      }
+    }
+  }
+
+  .mat-select-trigger {
+    width: 100%;
+  }
+  .mat-select-disabled {
+    .mat-select-arrow-wrapper {
+      display: none;
+    }
+  }
+
+  .mat-form-field {
+    &.ng-touched.ng-invalid {
+      .mat-checkbox-frame {
+        border-color: mat-color($warn);
+      }
+    }
+  }
+
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: var(--accent, mat-color($accent));
+  }
+
+  .mat-button {
+    &.mat-primary {
+      background: white !important;
+      color: var(--primary) !important;
+    }
+  }
+  .mat-flat-button {
+    &.mat-primary {
+      border: 1px solid var(--primary) !important;
+    }
+    &.mat-accent {
+      border: 1px solid var(--accent) !important;
+    }
+    &.mat-warn {
+      border: 1px solid var(--warn) !important;
+    }
+  }
+}

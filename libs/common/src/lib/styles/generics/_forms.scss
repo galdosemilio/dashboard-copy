@@ -1,0 +1,50 @@
+@mixin ccr-generic-forms($theme, $config) {
+  $foreground: map-get($theme, foreground);
+  $warn: map-get($theme, warn);
+
+  .ccr-content {
+    ccr-autocompleter-account,
+    ccr-autocompleter-organization {
+      margin-top: 0.9em;
+    }
+  }
+
+  input[readonly] {
+    cursor: default;
+  }
+
+  .mat-form-field {
+    width: 100%;
+
+    &.readonly {
+      mat-datepicker-toggle {
+        display: none;
+      }
+      .mat-select-disabled {
+        .mat-select-value {
+          color: mat-color($foreground, base);
+        }
+        .mat-select-arrow {
+          border: none;
+        }
+      }
+    }
+
+    &:not(.mat-focused) {
+      .mat-form-field-ripple {
+        height: 1px;
+      }
+    }
+  }
+
+  .mat-form-field-invalid {
+    [matprefix],
+    [matsuffix] {
+      color: var(--warn, mat-color($warn));
+    }
+  }
+
+  .ccr-action-buttons {
+    margin-top: 15px;
+  }
+}

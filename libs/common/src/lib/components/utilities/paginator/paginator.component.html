@@ -1,0 +1,20 @@
+
+<button mat-button type="button"
+  class="mat-paginator-navigation-previous"
+  (click)="previousPage()"
+  [attr.aria-label]="_intl.previousPageLabel"
+  [disabled]="!hasPreviousPage()">
+
+  <mat-icon>keyboard_arrow_left</mat-icon>
+  <span>{{ 'GLOBAL.PREVIOUS' | translate }}</span>
+</button>
+
+<button mat-button type="button"
+  class="mat-paginator-navigation-next"
+  (click)="nextPage()"
+  [attr.aria-label]="_intl.nextPageLabel"
+  [disabled]="!hasNextPage()">
+
+  <span>{{ 'GLOBAL.NEXT' | translate }}</span>
+  <mat-icon>keyboard_arrow_right</mat-icon>
+</button>

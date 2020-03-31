@@ -1,0 +1,17 @@
+<mat-form-field [class.readonly]="isReadonly">
+  <input matInput ccrNumberOnly
+    [placeholder]="placeholder"
+    [required]="isRequired"
+    [readonly]="isReadonly"
+    [attr.disabled]="isReadonly ? '' : null"
+    [value]="value"
+    (input)="onChange($event.target.value)"
+    (blur)="propagateTouch()"
+    (change)="$event.stopPropagation()">
+
+  <mat-error>
+    <ng-content select="mat-error"></ng-content>
+  </mat-error>
+  <span *ngIf="prefix" matSuffix>{{ prefix }}</span>
+  <span *ngIf="suffix" matSuffix>{{ suffix }}</span>
+</mat-form-field>

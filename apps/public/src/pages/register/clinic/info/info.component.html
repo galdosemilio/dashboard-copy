@@ -1,0 +1,92 @@
+<ccr-page-section [orgId]="this.context.organizationId" section="REGISTER.INFO.DESCRIPTION"></ccr-page-section>
+
+<form [formGroup]="formGroup" (keydown.enter)="accepted && onSubmit()">
+  <div [class]="hideLanguageSelector ? 'hide-language-selector' : ''">
+    <div class="section-header">{{ 'GLOBAL.SELECT_LANGUAGE' | translate }}</div>
+
+    <ng-container formGroupName="account">
+      <ccr-form-field-lang
+      formControlName="preferredLocales"
+      ></ccr-form-field-lang>
+    </ng-container>
+  </div>
+
+  <div formGroupName="organization">
+    <div class="section-header">{{ 'PAGE.REGISTER.STEP1.DEFAULT.CLINIC_INFORMATION' | translate }}</div>
+
+    <mat-form-field>
+      <input matInput formControlName="name" [placeholder]="'GLOBAL.CLINIC_NAME' | translate">
+    </mat-form-field>
+    <ng-container formGroupName="address">
+      <mat-form-field>
+        <input matInput formControlName="street" [placeholder]="'GLOBAL.STREET_ADDRESS' | translate">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="city" [placeholder]="'GLOBAL.CITY' | translate">
+      </mat-form-field>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0px">
+        <mat-form-field fxFlex="1 1 33%">
+          <input matInput formControlName="state" [placeholder]="'GLOBAL.STATE' | translate">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="1 1 33%">
+          <input matInput [ccrNumberOnly]="numericPostalCode" formControlName="postalCode" [placeholder]="'GLOBAL.POSTAL_CODE' | translate">
+        </mat-form-field>
+
+        <ccr-form-field-country fxFlex="1 1 33%" formControlName="country" [placeholder]="'GLOBAL.COUNTRY' | translate"></ccr-form-field-country>
+      </div>
+    </ng-container>
+  </div>
+
+  <div formGroupName="account">
+    <div class="section-header">{{ 'PAGE.REGISTER.STEP1.DEFAULT.ACCOUNT_INFORMATION' | translate }}</div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0px">
+      <mat-form-field fxFlex="1 1 auto">
+        <input matInput formControlName="firstName" [placeholder]="'GLOBAL.FIRST_NAME' | translate">
+      </mat-form-field>
+      <mat-form-field fxFlex="1 1 auto">
+        <input matInput formControlName="lastName" [placeholder]="'GLOBAL.LAST_NAME' | translate">
+      </mat-form-field>
+    </div>
+
+    <ccr-form-field-email
+      formControlName="email"
+      [placeholder]="'GLOBAL.EMAIL_ADDRESS' | translate"
+    ></ccr-form-field-email>
+
+    <mat-form-field>
+      <input matInput ccrNumberOnly formControlName="phone" [placeholder]="'GLOBAL.PHONE_NUMBER' | translate">
+    </mat-form-field>
+  </div>
+  <ccr-page-section [orgId]="this.context.organizationId" section="REGISTER.INFO.PACKAGE"></ccr-page-section>
+
+  <div fxLayout="column" fxLayoutAlign="center stretch">
+
+    <ccr-form-field-consent
+      [(ngModel)]="accepted"
+      [ngModelOptions]="{standalone: true}"
+    ></ccr-form-field-consent>
+
+    <div
+    *ngIf="showNewsletterCheckbox"
+    class="mat-form-field newsletter-checkbox"
+    formGroupName="organization">
+      <mat-checkbox
+      [(ngModel)]="newsletter"
+      formControlName="newsletter">
+      </mat-checkbox>
+      <span>{{ 'FIELD.NEWSLETTER.CONSENT_TEXT' | translate }}</span>
+    </div>
+
+    <button
+    [disabled]="!accepted || (showNewsletterCheckbox && !newsletter)"
+    (click)="onSubmit()"
+    class="nextStep"
+    mat-button
+    type="button">
+      {{ 'GLOBAL.CONTINUE' | translate }}
+    </button>
+  </div>
+
+</form>

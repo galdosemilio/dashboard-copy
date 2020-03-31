@@ -1,0 +1,60 @@
+@mixin ccr-component-avatar($theme, $config) {
+  $primary: map-get($theme, primary);
+
+  ccr-avatar {
+    display: inline-block;
+    line-height: 0.5;
+    position: relative;
+
+    div {
+      align-items: center;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+
+      &.ccr-size-bigger {
+        height: 70px;
+        width: 70px;
+      }
+
+      &.ccr-size-big {
+        height: 56px;
+        width: 56px;
+      }
+
+      &.ccr-size-messages {
+        height: 42px;
+        width: 42px;
+      }
+
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .mat-icon {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+
+      font-size: 36px;
+      height: 36px;
+      width: 36px;
+    }
+
+    &.ccr-editable:hover {
+      cursor: pointer;
+      img {
+        opacity: 0.5;
+      }
+      .mat-icon {
+        display: inline-block;
+        opacity: 1;
+        text-shadow: -1px -1px 20px mat-color($primary, default-contrast);
+      }
+    }
+  }
+}
