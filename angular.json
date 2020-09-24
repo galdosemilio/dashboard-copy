@@ -208,7 +208,9 @@
               "axios",
               "tinycolor2",
               "url-parse",
-              "qs"
+              "qs",
+              "moment-timezone",
+              "moment"
             ]
           },
           "configurations": {
@@ -230,13 +232,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "24kb",
+                  "maximumError": "48kb"
                 }
               ]
             },
@@ -258,13 +260,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "24kb",
+                  "maximumError": "48kb"
                 }
               ]
             }
