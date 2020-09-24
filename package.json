@@ -62,7 +62,6 @@
     "rxjs": "~6.5.0",
     "selvera-api": "^11.16.0",
     "tinycolor2": "^1.4.1",
-    "tslib": "^2.0.1",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
