@@ -1,0 +1,103 @@
+@mixin ccr-layout-search($theme, $config) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+
+  /* global style for search-box */
+  .search-box {
+    background: transparent;
+    border: 1px solid var(--tooltip-contrast, mat-color($primary, default-contrast));
+    border-radius: 14px;
+    box-shadow: 0 0 1px 0px var(--tooltip-contrast, mat-color($primary, default-contrast)) inset,
+      0 0 1px 0px var(--tooltip-contrast, mat-color($primary, default-contrast));
+    font-size: 1rem;
+    height: 30px;
+    outline: none;
+    padding: 0px 40px 0 15px;
+  }
+
+  .search-box[disabled] {
+    border-color: mat-color($foreground, stroke);
+  }
+
+  .mat-autocomplete-panel {
+    mat-option {
+      height: auto;
+      line-height: initial;
+      margin: 8px auto;
+      p {
+        margin: 0;
+        span {
+          font-size: 0.72em;
+          font-style: italic;
+          margin-left: 5px;
+          opacity: 0.8;
+          text-transform: uppercase;
+        }
+        &.email {
+          font-size: 0.85em;
+          font-weight: 300;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  ccr-search {
+    > div {
+      width: 100%;
+      position: relative;
+      > ccr-icon-search {
+        position: absolute;
+        right: 12px;
+        top: 5px;
+      }
+    }
+  }
+
+  /* top menubar styles for search-box */
+  ccr-topbar {
+    ccr-search {
+      align-items: center;
+      display: flex;
+      padding-left: 30px;
+      width: 400px;
+      @media #{map-get($config, lte-xs)} {
+        display: none;
+      }
+      @media #{map-get($config, sm-md)} {
+        padding: 0 15px;
+      }
+    }
+    .search-box {
+      color: var(--tooltip-contrast, mat-color($primary, default-contrast));
+      width: calc(100% - 57px);
+    }
+    .search-box::-webkit-input-placeholder {
+      /* WebKit, Blink, Edge */
+      color: var(--tooltip-contrast, mat-color($primary, darker-contrast));
+    }
+    .search-box::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: var(--tooltip-contrast, mat-color($primary, darker-contrast));
+      opacity: 1;
+    }
+  }
+
+  /* sidenav styles for search-box */
+  ccr-menu {
+    .sidenav-search-container {
+      text-align: center;
+      ccr-search {
+        display: none;
+        padding: 0 7px 15px;
+        @media #{map-get($config, lte-xs)} {
+          display: inline-block;
+        }
+        .search-box {
+          border-color: mat-color($foreground, base);
+          width: 151px;
+        }
+      }
+    }
+  }
+}

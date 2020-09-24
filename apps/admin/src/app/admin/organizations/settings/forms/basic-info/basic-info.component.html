@@ -1,0 +1,12 @@
+<mat-grid-list [cols]="1" [formGroup]="form" rowHeight="70px">
+  <mat-grid-tile [colspan]="1">
+    <mat-form-field>
+      <input
+      [placeholder]="'ADMIN.ORGS.SETTINGS.DISPLAY_NAME' | translate"
+      (blur)="onSubmit()"
+      data-cy="org-setting-displayname"
+      formControlName="displayName"
+      matInput>
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>

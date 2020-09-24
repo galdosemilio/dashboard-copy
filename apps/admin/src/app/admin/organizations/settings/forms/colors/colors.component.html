@@ -1,0 +1,41 @@
+<mat-grid-list [cols]="colSpan !== 1 ? 4 : 1" [formGroup]="form" rowHeight="70px">
+  <mat-grid-tile>
+    <ccr-form-field-color
+      data-cy="org-setting-colors-primary"
+      formControlName="primary"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.COLOR_PRIMARY' | translate"
+    ></ccr-form-field-color>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-form-field-color
+      data-cy="org-setting-colors-secondary"
+      formControlName="secondary"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.COLOR_SECONDARY' | translate"
+    ></ccr-form-field-color>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-form-field-color
+      data-cy="org-setting-colors-accent"
+      formControlName="accent"
+      [allowClear]="true"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.COLOR_ACCENT' | translate"
+    ></ccr-form-field-color>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <mat-select
+      data-cy="org-setting-colors-toolbar"
+      formControlName="toolbar"
+      [disableOptionCentering]="true"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.COLOR_TOOLBAR' | translate">
+        <mat-option *ngFor="let color of toolbarColors" [value]="color.value">
+          {{ color.viewValue | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+
+</mat-grid-list>

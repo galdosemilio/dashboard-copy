@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { CCRFacade } from '@coachcare/backend/store';

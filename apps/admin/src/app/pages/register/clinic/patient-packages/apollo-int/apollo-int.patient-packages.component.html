@@ -1,0 +1,45 @@
+<div class="section-header">{{ 'SECTION.APOLLO_INT.PACKAGE.AVAILABLE_PACKAGES' | translate }}</div>
+
+<div fxLayout="column" fxLayoutAlign="center">
+  <div
+  class="packages-selector"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutGap="20px"
+  fxLayoutGap.xs="20px">
+    <div
+    class="package-item"
+    fxLayout="column"
+    fxFlex="1 1 auto"
+    *ngFor="let package of packages">
+      <div
+      class="package-header"
+      fxLayout="row"
+      fxLayoutAlign="center center">
+      </div>
+      <div class="package-body" fxLayout="column" fxFlex="1 1 auto" fxLayoutAlign="center">
+        <img class="package-image" [attr.src]="package.image" />
+        <div class="package-content" fxLayout="column" fxLayoutAlign="top center">
+          <div class="package-name">
+            {{ package.name | translate }}
+          </div>
+          <div class="package-value">
+            {{ package.value | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+  class="packages-footer"
+  fxLayout="row"
+  fxLayoutAlign="center center">
+    <img class="footer-image" [attr.src]="'/assets/tracker-body.png'" />
+    <div class="footer-sub-text">
+      <span>
+        {{ 'SECTION.APOLLO_INT.PACKAGE.OPTIONAL_ADD_ON' | translate }}
+      </span>
+      <span><b>{{ 'SECTION.APOLLO_INT.PACKAGE.ACTIVITY_BODY' | translate }}</b></span>
+    </div>
+  </div>
+</div>

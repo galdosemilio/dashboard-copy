@@ -19,7 +19,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import { _ } from '@coachcare/backend/shared';
+import { _ } from '@coachcare/common/shared';
 
 @Component({
   selector: 'ccr-form-field-password',
@@ -45,7 +45,8 @@ import { _ } from '@coachcare/backend/shared';
     '[class.mat-form-field-disabled]': '_control.disabled'
   }
 })
-export class PasswordFormFieldComponent implements ControlValueAccessor, OnInit {
+export class PasswordFormFieldComponent
+  implements ControlValueAccessor, OnInit {
   form: FormGroup;
 
   @Input() formControlName: string;
@@ -134,7 +135,9 @@ export class PasswordFormFieldComponent implements ControlValueAccessor, OnInit 
     this.oneNumber = password.match('(?=.*[0-9])');
     this.oneSpecialChar = password.match('(?=.*[^a-zA-Z0-9])');
     this.hasNoSequences = password.length > 2 && !password.match(/(.)\1{2,}/);
-    this.hasMinLength = this.minLength ? password.length >= this.minLength : true;
+    this.hasMinLength = this.minLength
+      ? password.length >= this.minLength
+      : true;
     this.passwordMatch = password ? password === confirm : false;
 
     if (!this.oneLowercaseLetter) {

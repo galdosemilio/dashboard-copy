@@ -17,11 +17,11 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import { SelectorOption } from '@coachcare/backend/shared';
 import {
   GENDERS,
   MEASUREMENT_UNITS,
   PHONE_TYPES,
+  SelectorOption,
   STATUSES
 } from '@coachcare/common/shared';
 import { SelectorFormFieldTypes } from './types.interface';
@@ -49,7 +49,8 @@ import { SelectorFormFieldTypes } from './types.interface';
     '[class.mat-form-field-disabled]': '_control?.disabled'
   }
 })
-export class SelectorFormFieldComponent implements ControlValueAccessor, OnInit {
+export class SelectorFormFieldComponent
+  implements ControlValueAccessor, OnInit {
   @Input() formControlName: string;
   @Input() type: SelectorFormFieldTypes;
 

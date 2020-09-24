@@ -4,6 +4,7 @@ export * from './consent/index';
 export * from './email/index';
 export * from './lang-selector/index';
 export * from './number/index';
+export * from './option-block';
 export * from './password/index';
 export * from './selector/index';
 export * from './state/index';

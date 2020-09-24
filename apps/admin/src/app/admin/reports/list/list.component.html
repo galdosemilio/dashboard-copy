@@ -1,0 +1,23 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center">
+    <h2 fxFlex="0 0 auto">Reports</h2>
+  </div>
+</div>
+
+<ol data-cy="report-listing">
+  <li>
+    <h4 (click)="downloadReport('inactiveClinics')">Inactive Clinics Report <i class="material-icons">cloud_download</i></h4>
+    <p>All clinics over the last 30 days, with a listing of the 'active' coaches and patients within that clinic over that time period.  'Active' is defined as <em>any</em> API activity during the last 30 days.  The CSV report has the following columns:</p>
+    <ul>
+      <li><strong>Organization ID</strong> The ID of the organization being reported</li>
+      <li><strong>Organization Name</strong> The name of the organization being reported</li>
+      <li><strong>Organization Hierarchy</strong> The list of organization IDs that precede the one being reported (inclusive)</li>
+      <li><strong>Providers Total</strong> The total number of coach accounts within this organization</li>
+      <li><strong>Providers Active Count</strong> The number of coach accounts within this organization that had <em>any</em> activity over the last 30 days</li>
+      <li><strong>Providers Active Percentage</strong> The percentage of coach accounts within this organization that had <em>any</em> activity over the last 30 days</li>
+      <li><strong>Clients Total</strong> The total number of patient accounts within this organization</li>
+      <li><strong>Clients Active Count</strong> The number of patient accounts within this organization that had <em>any</em> activity over the last 30 days</li>
+      <li><strong>Clients Active Percentage</strong> The percentage of patient accounts within this organization that had <em>any</em> activity over the last 30 days</li>
+    </ul>
+  </li>
+</ol>

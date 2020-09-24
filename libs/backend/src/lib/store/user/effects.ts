@@ -1,0 +1,48 @@
+import { Injectable } from '@angular/core';
+import { Account, Session } from '@coachcare/backend/services';
+import { CcrRolesMap } from '@coachcare/backend/shared';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
+import { defer, from, Observable, of as obsOf } from 'rxjs';
+import { catchError, concatMap, switchMap } from 'rxjs/operators';
+
+import { SessionActions, SessionState } from '@coachcare/backend/store/session';
+import * as actions from './actions';
+
+@Injectable()
+export class UserEffects {
+  constructor(private actions$: Actions, private account: Account, private session: Session) {}
+
+  /**
+   * Effects
+   */
+  @Effect()
+  init$: Observable<Action> = defer(() => from(this.session.check())).pipe(
+    concatMap(res => from(this.account.getSingle(res))),
+    concatMap(res => obsOf(new actions.LoadUser(res))),
+    catchError(err => obsOf(new SessionActions.SessionLoaded({ loaded: true })))
+  );
+
+  @Effect()
+  loadUser$: Observable<Action> = this.actions$.pipe(
+    ofType<actions.LoadUser>(actions.ActionTypes.LOAD),
+    switchMap(action => {
+      const langs = action.payload.preferredLocales;
+      const state: SessionState.State = {
+        language: langs.length ? langs[0] : '',
+        loaded: true,
+        loggedIn: true,
+        account: CcrRolesMap(action.payload.accountType.id)
+      };
+      return obsOf(new SessionActions.SessionLoaded(state));
+    })
+  );
+
+  @Effect()
+  login$: Observable<Action> = this.actions$.pipe(
+    ofType<SessionActions.Login>(SessionActions.ActionTypes.LOGIN),
+    switchMap(action => {
+      return obsOf(new actions.UpdateUser(action.payload));
+    })
+  );
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@coachcare/layout';
 import { _ } from '@coachcare/backend/shared';
 import { ConfirmDialog } from '@coachcare/common/dialogs/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -62,7 +62,12 @@ export class NotifierService {
   }
 
   success(message: any, action = '', duration?: number | undefined): void {
-    this.snack(this.translate(message), action, duration, NotifierStatus.success);
+    this.snack(
+      this.translate(message),
+      action,
+      duration,
+      NotifierStatus.success
+    );
   }
 
   info(message: any, action = '', duration?: number | undefined): void {
@@ -70,7 +75,12 @@ export class NotifierService {
   }
 
   warning(message: any, action = '', duration?: number | undefined): void {
-    this.snack(this.translate(message), action, duration, NotifierStatus.warning);
+    this.snack(
+      this.translate(message),
+      action,
+      duration,
+      NotifierStatus.warning
+    );
   }
 
   error(message: any, action = '', duration?: number | undefined): void {

@@ -1,0 +1,15 @@
+<mat-calendar cdkTrapFocus
+    [id]="datepicker.id"
+    [ngClass]="datepicker.panelClass"
+    [type]="datepicker.type"
+    [startAt]="datepicker.startAt"
+    [startView]="datepicker.startView"
+    [clockStep]="datepicker.clockStep"
+    [twelveHour]="datepicker.twelveHour"
+    [minDate]="datepicker._minDate"
+    [maxDate]="datepicker._maxDate"
+    [dateFilter]="datepicker._dateFilter"
+    [selected]="datepicker._selected"
+    (selectedChange)="datepicker.select($event)"
+    (_userSelection)="datepicker.close()">
+</mat-calendar>

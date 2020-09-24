@@ -1,0 +1,42 @@
+
+<div *ngIf="!form.value.mfaInherit" [formGroup]="form">
+  <div [class.readonly]="readonly" class="slide-toggle-wrapper" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-slide-toggle formControlName="mfaEnabled">{{ 'ADMIN.ORGS.SETTINGS.MFA_ENABLED' | translate }}</mat-slide-toggle>
+    <button
+    *ngIf="form.controls['mfaInherit'].enabled"
+    (click)="onMarkAsInherited()"
+    class="ccr-button"
+    color="primary"
+    mat-button>{{ 'ADMIN.ORGS.SETTINGS.INHERIT_MFA' | translate }}</button>
+  </div>
+  <div
+  *ngFor="let section of sections"
+  [formGroup]="form.get('raw').get(section.id)"
+  class="org-permissions"
+  fxLayout="row"
+  fxLayout.fx="column">
+    <span fxFlex="30%" fxLayout=" center">
+      {{ section.displayName | translate }}
+    </span>
+
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px" fxFlex>
+      <div *ngFor="let accountType of accountTypes" fxLayoutAlign=" center">
+        <mat-checkbox [name]="accountType.id" [formControlName]="accountType.id">
+          {{ accountType.displayName | translate }}
+        </mat-checkbox>
+      </div>
+    </div>
+  </div>
+  <small *ngIf="mfaPref && mfaPref.organization.id !== organization">
+    {{ 'ADMIN.ORGS.SETTINGS.MFA_INHERITED' | translate:{org:mfaPref.organization.name} }}
+  </small>
+</div>
+
+<div *ngIf="form.value.mfaInherit" class="inherited-wrapper" fxLayout="column" fxLayoutAlign="center center">
+  <p>{{ 'ADMIN.ORGS.SETTINGS.MARKED_AS_INHERITED' | translate }}</p>
+  <button
+  (click)="onEditInherited()"
+  class="ccr-button"
+  color="accent"
+  mat-button>{{ 'ADMIN.ORGS.SETTINGS.EDIT_INHERITED' | translate }}</button>
+</div>

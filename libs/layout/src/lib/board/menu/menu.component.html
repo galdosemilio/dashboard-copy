@@ -1,0 +1,18 @@
+<mat-toolbar [color]="palette.toolbar" routerLink="/">
+  <!-- logo as background here -->
+</mat-toolbar>
+
+<mat-sidenav-content>
+  <mat-nav-list disableRipple="false" [class.open]="isOpened">
+    <div class="sidenav-search-container" *ngIf="size === 'xs'">
+      <ccr-search [fill]="palette.base"></ccr-search>
+    </div>
+
+    <ccr-menuitem
+      *ngFor="let menuItem of menuItems"
+      [menuItem]="menuItem"
+      [isMenuOpened]="isOpened"
+      [parent]="_this"
+    ></ccr-menuitem>
+  </mat-nav-list>
+</mat-sidenav-content>

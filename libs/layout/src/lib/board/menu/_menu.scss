@@ -1,0 +1,220 @@
+@mixin ccr-layout-menu($theme, $config) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  /* FIXME check why does not override material styles */
+  .mat-drawer {
+    background-color: mat-color($primary, '900-contrast');
+    box-shadow: 1px 0 0 mat-color($background, box-shadow);
+    min-width: 0 !important;
+    overflow: hidden !important;
+    transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1) !important;
+    width: map-get($config, menu-width);
+
+    &.open {
+      width: 225px !important;
+    }
+
+    @media #{map-get($config, lte-xs)} {
+      margin-top: map-get($config, topbar-height);
+      width: 0 !important;
+    }
+    @media #{map-get($config, sm-md)} {
+      width: 80px !important;
+    }
+  }
+
+  ccr-menu {
+    > .mat-toolbar {
+      background: var(--primary-contrast, mat-color($primary, default-contrast))
+        url(/assets/logo.png) center center no-repeat;
+      background-size: cover;
+      box-shadow: none;
+      cursor: pointer;
+      @media #{map-get($config, lte-xs)} {
+        display: none !important;
+      }
+      @media #{map-get($config, sm-md)} {
+        background-image: url(/assets/logo-mark.png);
+        background-size: auto;
+      }
+    }
+    > mat-sidenav-content {
+      margin-left: 0 !important;
+    }
+    mat-sidenav-content > mat-nav-list {
+      // position: fixed;
+      // bottom: map-get($config, footer-height);
+      // left: 0;
+      // right: 0;
+      // top: map-get($config, topbar-height);
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-top: 20px !important;
+      padding-bottom: 20px;
+      @media #{map-get($config, sm-md)} {
+        padding: 0 !important;
+      }
+      @media #{map-get($config, lte-xs)} {
+        bottom: map-get($config, footer-height) + map-get($config, topbar-height);
+        top: 0;
+      }
+
+      .mat-list-item {
+        position: relative;
+        transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        &:focus {
+          background: darken(
+            mat-color($primary, '900-contrast'),
+            map-get($config, menu-color-change) * 3
+          );
+        }
+        &:active,
+        &:focus {
+          outline: none;
+        }
+
+        .ccr-badge {
+          position: absolute;
+          /* left: 25px; */
+          right: 19px;
+          top: 13px;
+        }
+
+        &.level1 {
+          /*
+          &.active > .mat-list-item-content {
+            color: mat-color($foreground, base);
+            font-weight: 600;
+          }
+          */
+          text-transform: uppercase;
+          &:hover {
+            background: darken(
+              mat-color($primary, '900-contrast'),
+              map-get($config, menu-color-change) * 3
+            );
+          }
+        }
+        &.level2 {
+          height: 36px;
+
+          &.active > .mat-list-item-content {
+            background-color: darken(
+              mat-color($primary, '900-contrast'),
+              map-get($config, menu-color-change) * 2.5
+            );
+            color: mat-color($foreground, base);
+            font-weight: 600;
+          }
+          > .mat-list-item-content {
+            padding-left: map-get($config, menu-padding) * 1;
+            background-color: darken(
+              mat-color($primary, '900-contrast'),
+              map-get($config, menu-color-change) * 1
+            );
+            &:hover {
+              background-color: darken(
+                mat-color($primary, '900-contrast'),
+                map-get($config, menu-color-change) * 2
+              );
+            }
+          }
+          mat-icon.mat-icon.material-icons {
+            padding-left: 15px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+          }
+        }
+
+        > .mat-list-item-content {
+          > span {
+            flex: 1;
+            margin-left: 10px;
+            transition: inherit;
+            @media #{map-get($config, sm-md)} {
+              display: none;
+            }
+          }
+          > i.material-icons {
+            @media #{map-get($config, sm-md)} {
+              display: none;
+            }
+          }
+          > mat-icon {
+            height: 18px;
+            font-size: 18px;
+            transition: inherit;
+            @media #{map-get($config, sm-md)} {
+              font-size: 26px;
+              line-height: 46px;
+              padding-left: 11px;
+              height: 100%;
+              width: 100%;
+            }
+          }
+
+          -webkit-font-smoothing: antialiased;
+          color: mat-color($foreground, text);
+          font-size: 14px;
+          font-weight: 400;
+          letter-spacing: 0.14px;
+          line-height: 40px;
+          transition: all 0.4s cubic-bezier(0.35, 0, 0.25, 1);
+          padding: 0 16px;
+          @media #{map-get($config, sm-md)} {
+            padding-top: 10px;
+            height: auto;
+          }
+
+          > i.material-icons:last-child {
+            line-height: 40px;
+            transition: 0.4s transform cubic-bezier(0.25, 0.8, 0.25, 1);
+            &:before {
+              content: 'keyboard_arrow_down';
+            }
+          }
+        }
+      }
+
+      &.open mat-list-item {
+        > .mat-list-item-content {
+          > span,
+          > i.material-icons {
+            @media #{map-get($config, sm-md)} {
+              display: inline-block;
+            }
+          }
+          > mat-icon {
+            @media #{map-get($config, sm-md)} {
+              font-size: 18px;
+              line-height: 22px;
+              height: 18px;
+              width: 18px;
+            }
+          }
+        }
+      }
+
+      .active > .mat-list-item-content > i.material-icons:last-child {
+        transform: rotate(180deg) translateZ(0);
+      }
+
+      .active:not(.nav-dropdown) > .mat-list-item:not(:hover) {
+        background-color: darken(mat-color($primary, '900-contrast'), 4%) !important;
+      }
+
+      .nav-children {
+        padding-top: 0;
+        overflow: hidden;
+        transition: height 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        &:not(.active) {
+          transition: height 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+          height: 0 !important;
+        }
+      }
+    }
+  }
+}

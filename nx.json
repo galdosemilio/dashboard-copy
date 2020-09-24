@@ -40,6 +40,9 @@
     },
     "backend": {
       "tags": []
+    },
+    "datepicker": {
+      "tags": []
     }
   }
 }

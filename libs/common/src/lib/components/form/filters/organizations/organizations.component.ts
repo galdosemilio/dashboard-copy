@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/layout';
 import { AppDataSource } from '@coachcare/backend/model';
 // import { ContextService } from '@coachcare/common/services';
 import { isNull, pickBy } from 'lodash';
@@ -9,7 +9,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'ccr-filter-organizations',
   templateUrl: './organizations.component.html',
-  providers: [{ provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'auto' } }]
+  providers: [
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'auto' } }
+  ]
 })
 export class OrganizationsFilterComponent implements OnInit {
   form: FormGroup;
@@ -20,7 +22,9 @@ export class OrganizationsFilterComponent implements OnInit {
 
   @Output() change = new EventEmitter<any>();
 
-  constructor(private builder: FormBuilder /*, private context: ContextService*/) {}
+  constructor(
+    private builder: FormBuilder /*, private context: ContextService*/
+  ) {}
 
   ngOnInit() {
     this.setup();
@@ -37,10 +41,7 @@ export class OrganizationsFilterComponent implements OnInit {
     });
 
     this.source.addOptional(
-      this.form.valueChanges.pipe(
-        debounceTime(500),
-        distinctUntilChanged()
-      ),
+      this.form.valueChanges.pipe(debounceTime(500), distinctUntilChanged()),
       () => pickBy(this.form.value, v => !isNull(v))
     );
   }

@@ -1,0 +1,48 @@
+<div class="ccr-table" [class.ccr-loading]="source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
+
+  <mat-table [dataSource]="source" matSort>
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row)" [class.clickable]="row.isActive">
+        {{ row.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'GLOBAL.NAME' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row)" [class.clickable]="row.isActive">
+        {{ row.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ACTIONS' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign="end center" fxLayoutAlign.xs=" center" fxFlex.xs="100%">
+
+        <span *ngIf="row.isActive" (click)="onEdit(row)">{{ 'GLOBAL.EDIT' | translate }}</span>
+        <button *ngIf="row.isActive" (click)="onEdit(row)" mat-icon-button [title]="'GLOBAL.EDIT' | translate"><mat-icon>edit</mat-icon></button>
+
+        <span *ngIf="!row.isActive" (click)="onActivate(row)">{{ 'GLOBAL.ACTIVATE' | translate }}</span>
+        <button *ngIf="!row.isActive" (click)="onActivate(row)" mat-icon-button [title]="'GLOBAL.ACTIVATE' | translate"><mat-icon>power_settings_new</mat-icon></button>
+
+        <span *ngIf="row.isActive" (click)="onDeactivate(row)">{{ 'GLOBAL.DEACTIVATE' | translate }}</span>
+        <button *ngIf="row.isActive" (click)="onDeactivate(row)" mat-icon-button [title]="'GLOBAL.DEACTIVATE' | translate"><mat-icon>delete</mat-icon></button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayout="row wrap"
+    *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+  <ccr-table-overlay [source]="source" [emptyMsg]="'NOTIFY.ERROR.NO_ORGANIZATIONS' | translate"></ccr-table-overlay>
+</div>

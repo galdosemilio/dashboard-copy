@@ -1,0 +1,31 @@
+<div [formGroup]="form" class="phone-input-container" fxLayout="row"
+    fxLayoutAlign="stretch center" fxLayoutGap="10px">
+    <mat-form-field [class.has-flag]="currentCodeDisplay?.flagIcon" fxFlex="39%">
+        <mat-select formControlName="countryCode">
+            <mat-select-trigger>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <img
+                    *ngIf="currentCodeDisplay?.flagIcon"
+                    [src]="'./assets/flag/' + currentCodeDisplay.flagIcon"
+                    class="flag">
+                    <p>{{ currentCodeDisplay ? currentCodeDisplay.label : '' }}</p>
+                </div>
+            </mat-select-trigger>
+            <mat-option *ngFor="let countryCode of countryCodes"
+                [value]="countryCode.code">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <img
+                    *ngIf="countryCode?.flagIcon"
+                    [src]="'./assets/flag/' + countryCode.flagIcon"
+                    class="flag">
+                    <p>{{ countryCode.lang[this.currentLang] }} ({{ countryCode.code }})</p>
+                </div>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'GLOBAL.PHONE' | translate }}</mat-label>
+        <input formControlName="phone" matInput placeholder="1 2345 6789" required type="tel">
+    </mat-form-field>
+</div>

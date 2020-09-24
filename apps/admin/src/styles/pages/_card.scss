@@ -1,0 +1,59 @@
+@import 'variables';
+
+.ccr-page-card {
+  display: flex;
+  flex: 1 1 100% !important;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
+
+  .mat-card {
+    background: transparent;
+    box-shadow: none !important;
+    max-width: 390px;
+    width: 90%;
+
+    @media #{ccr-media(lte-xs)} {
+      padding: 33px 16px 56px; // bottom for .page-inner
+    }
+
+    .mat-card-header {
+      display: block;
+      text-align: center;
+      user-select: none;
+
+      h2 {
+        margin: 0 0 0.3em;
+      }
+      img {
+        max-height: 100px;
+        max-width: 100%;
+        margin-bottom: 1em;
+      }
+    }
+
+    form input[type='text'],
+    form input[type='email'],
+    form input[type='password'] {
+      padding: 3px;
+    }
+    form input[type='submit'] {
+      margin-top: 12px;
+    }
+  }
+
+  .mat-card-content > p {
+    font-size: 1.2em;
+    text-align: center;
+  }
+}
+
+color-picker {
+  position: fixed;
+  display: flex;
+  z-index: 100;
+}
+
+.color-picker {
+  top: -300px !important;
+}

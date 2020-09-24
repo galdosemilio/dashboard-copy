@@ -11,6 +11,7 @@ export const COOKIE_SELVERA_PROVIDER = 'SELVERAprovider';
 export const COOKIE_SELVERA_ADMIN = 'SELVERAadmin';
 export const STORAGE_PROVIDER_URL = 'ccrProviderRoute';
 export const STORAGE_ADMIN_URL = 'ccrAdminRoute';
+export const STORAGE_HIDE_REGISTER_COMPANY = 'ccrHideRegisterNewCompanyLink';
 
 /**
  * Cookie Service

@@ -2,16 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import {
-  MatAutocompleteModule,
-  MatCheckboxModule,
-  MatDividerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatSelectModule,
-  MatTooltipModule
-} from '@angular/material';
 import { CcrDirectivesModule } from '@coachcare/common/directives';
 import { TranslateModule } from '@ngx-translate/core';
 import { ColorPickerModule } from 'ngx-color-picker';
@@ -41,14 +31,6 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     ColorPickerModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
     TranslateModule.forChild(),
     CcrDirectivesModule
   ],

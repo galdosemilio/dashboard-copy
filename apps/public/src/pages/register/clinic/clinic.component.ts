@@ -7,9 +7,24 @@
  * @param {Boolean} [hideSteps] If true, hide the 1-2-3 or 1-2 steps
  * @param {String} [selectedLanguage] Set selected language default (will work regardless of hideLanguageSelector setting)
  */
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_LABEL_GLOBAL_OPTIONS, MatDialog, MatStepper } from '@angular/material';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {
+  MAT_LABEL_GLOBAL_OPTIONS,
+  MatDialog,
+  MatStepper
+} from '@coachcare/layout';
 import { ActivatedRoute } from '@angular/router';
 import { resolveConfig } from '@board/pages/config/section.config';
 import { ClinicRegisterRequest, Register } from '@coachcare/backend/services';
@@ -30,7 +45,9 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
   selector: 'ccr-page-register-clinic',
   templateUrl: './clinic.component.html',
   styleUrls: ['./clinic.component.scss'],
-  providers: [{ provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'never' } }],
+  providers: [
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'never' } }
+  ],
   host: {
     class: 'ccr-page-content'
   }
@@ -63,7 +80,10 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
     private store: CCRFacade
   ) {
     this.org.pref$.subscribe(pref => {
-      this.logoUrl = pref.assets && pref.assets.logoUrl ? pref.assets.logoUrl : '/assets/logo.png';
+      this.logoUrl =
+        pref.assets && pref.assets.logoUrl
+          ? pref.assets.logoUrl
+          : '/assets/logo.png';
       this.orgName = { displayName: pref.displayName || 'CoachCare' };
     });
   }
@@ -125,22 +145,29 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
       const cookieLang = this.cookie.get(COOKIE_LANG);
       const queryLang =
-        params.hasOwnProperty('selectedLanguage') && params.selectedLanguage !== undefined
+        params.hasOwnProperty('selectedLanguage') &&
+        params.selectedLanguage !== undefined
           ? params.selectedLanguage
           : undefined;
       this.paymentRequired = params.hasOwnProperty('creditCard')
         ? params.creditCard === 'optional'
           ? false
           : params.creditCard === 'skip'
-            ? undefined
-            : true
+          ? undefined
+          : true
         : true;
-      this.step2.controls.token.setValidators(this.paymentRequired ? Validators.required : null);
+      this.step2.controls.token.setValidators(
+        this.paymentRequired ? Validators.required : null
+      );
       this.hideSteps =
-        params.hasOwnProperty('hideSteps') && params.hideSteps === 'true' ? false : true;
+        params.hasOwnProperty('hideSteps') && params.hideSteps === 'true'
+          ? false
+          : true;
 
       this.hideTitle =
-        params.hasOwnProperty('hideTitle') && params.hideTitle === 'true' ? false : true;
+        params.hasOwnProperty('hideTitle') && params.hideTitle === 'true'
+          ? false
+          : true;
 
       if (cookieLang) {
         this.store.changeLang(cookieLang);
@@ -158,7 +185,10 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
       }
     });
 
-    this.showLogo = resolveConfig('REGISTER.SHOW_REGISTER_ICON', this.context.organizationId);
+    this.showLogo = resolveConfig(
+      'REGISTER.SHOW_REGISTER_ICON',
+      this.context.organizationId
+    );
   }
 
   validateStep1(step1: FormGroup) {
@@ -194,7 +224,10 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
   }
 
   nextStep(stepper: MatStepper) {
-    if (stepper.selectedIndex === 0 && stepper.selectedIndex < stepper._steps.length - 2) {
+    if (
+      stepper.selectedIndex === 0 &&
+      stepper.selectedIndex < stepper._steps.length - 2
+    ) {
       // organization and contact info completed
       this.changeStep(stepper, 1);
     } else if (stepper.selectedIndex === stepper._steps.length - 2) {

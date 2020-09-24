@@ -1,0 +1,15 @@
+<div [formGroup]="form" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+  <mat-form-field fxFlex="49%">
+    <mat-select formControlName="plan">
+      <mat-option *ngFor="let clinicPlan of clinicPlans" [value]="clinicPlan.id">{{ clinicPlan.name | translate }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="planBillingPeriods.length" fxFlex="49%">
+    <mat-select formControlName="billingPeriod">
+      <mat-option *ngFor="let planBillingPeriod of planBillingPeriods" [value]="planBillingPeriod.value">
+        {{ planBillingPeriod.viewValue | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

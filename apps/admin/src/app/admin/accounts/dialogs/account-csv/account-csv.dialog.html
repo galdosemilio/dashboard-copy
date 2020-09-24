@@ -1,0 +1,39 @@
+<div matDialogTitle>
+  <div>
+    <span matDialogTitle [innerHTML]="'GLOBAL.DOWNLOAD_CSV' | translate"></span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <div fxLayout="column" fxLayoutAlign="start center">
+    <ccr-autocompleter-organization #autocompleter
+      (change)="orgSelected($event)"
+      [placeholder]="'GLOBAL.ORG_TO_EXCLUDE' | translate"
+    ></ccr-autocompleter-organization>
+    <div
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px">
+      <button
+      *ngFor="let org of excludedOrgs; let i = index;"
+      [disabled]="isLoading"
+      (click)="removeOrganization(i)"
+      mat-button
+      class="ccr-icon-button org-button">
+        <mat-icon>delete</mat-icon>
+        {{ org.name }}
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+  [disabled]="isLoading"
+  (click)="downloadCSV()"
+  mat-button
+  class="ccr-button">{{ 'GLOBAL.DOWNLOAD_CSV' | translate }}</button>
+</mat-dialog-actions>

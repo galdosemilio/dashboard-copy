@@ -1,0 +1,44 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center" fxLayoutGap="10px">
+    <ng-container [ngSwitch]="accountType">
+      <h2 fxFlex="0 0 auto" *ngSwitchCase="'1'">{{ 'ACCOUNT._ADMINS' | translate }}</h2>
+      <h2 fxFlex="0 0 auto" *ngSwitchCase="'2'">{{ 'ACCOUNT._COACHES' | translate }}</h2>
+      <h2 fxFlex="0 0 auto" *ngSwitchCase="'3'">{{ 'ACCOUNT._PATIENTS' | translate }}</h2>
+    </ng-container>
+
+    <a
+    *ngIf="accountType === '2'"
+    (click)="openCSVDialog()" color="primary"
+    class="ccr-icon-button"
+    fxFlex="0 0 auto" fxFlex.xs="100%"
+    mat-button>
+      <mat-icon>file_download</mat-icon>
+      <span>{{ 'GLOBAL.DOWNLOAD_CSV' | translate }}</span>
+    </a>
+
+    <a mat-button color="primary" class="ccr-icon-button"
+    fxFlex="0 0 auto" fxFlex.xs="100%" routerLink="create">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'GLOBAL.CREATE' | translate }}</span>
+    </a>
+
+  </div>
+
+  <div class="ccr-filters" fxLayout="row" fxLayoutAlign=" center">
+    <ccr-filter-accounts
+      fxFlex="initial" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign=" center"
+      [source]="source"
+    ></ccr-filter-accounts>
+
+    <ccr-paginator fxFlex #paginator
+      [length]="source.total"
+      [pageIndex]="0"
+      [pageSize]="10"
+    ></ccr-paginator>
+  </div>
+</div>
+
+<ccr-accounts-table
+  [source]="source"
+  [columns]="columns"
+></ccr-accounts-table>

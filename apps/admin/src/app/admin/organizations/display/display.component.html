@@ -1,0 +1,31 @@
+<div class="ccr-heading">
+  <a mat-button color="primary" class="ccr-button" [routerLink]="[ routes.list() ]">
+    {{ 'GLOBAL.BACK' | translate }}
+  </a>
+
+  <div class="ccr-name" fxLayout="row" fxLayoutAlign.xs="center">
+    <!-- TODO setup organization logo -->
+    <!-- <ccr-logo size="bigger"></ccr-logo> -->
+    <h2 *ngIf="!id">{{ 'ADMIN.ORGS.CREATE_NEW' | translate }}</h2>
+    <h2 *ngIf="id">{{ item?.name }}</h2>
+  </div>
+</div>
+
+<ng-container *ngIf="id; else create">
+  <div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch" fxLayoutGap="5px">
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['data']">{{ 'GLOBAL.INFORMATION' | translate }}</a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['tree']">{{ 'GLOBAL.HIERARCHY' | translate }}</a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['settings']">{{ 'GLOBAL.SETTINGS' | translate }}</a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['email-template']">{{ 'GLOBAL.EMAIL_TEMPLATES' | translate }}</a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['labels']">{{ 'SIDENAV.LABELS' | translate }}</a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['marketing']">{{ 'SIDENAV.MARKETING' | translate }}</a>
+  </div>
+
+  <div class="ccr-subcomponent">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+
+<ng-template #create>
+  <ccr-organizations-form></ccr-organizations-form>
+</ng-template>

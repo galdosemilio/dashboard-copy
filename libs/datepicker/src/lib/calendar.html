@@ -1,0 +1,142 @@
+<div [class]="'mat-calendar-header mat-calendar-type-' + type">
+
+  <div class="mat-calendar-header-date">
+    <button class="mat-calendar-header-date-year mat-calendar-control"
+    [class.mat-calendar-control-active]="view == 'years'"
+    [@controlActive]="view == 'years' ? 'active' : ''"
+    [attr.aria-label]="_intl.switchToYearViewLabel"
+    (click)="changeView('years')">
+      {{ _yearButtonText }}
+    </button>
+
+    <button class="mat-calendar-header-date-month mat-calendar-control"
+    [class.mat-calendar-control-active]="view == 'month' || view == 'year'"
+    [@controlActive]="view == 'month' || view == 'year' ? 'active' : ''"
+    [attr.aria-label]="_intl.switchToMonthViewLabel"
+    (click)="changeView('month')">
+      <span class="mat-calendar-header-date-dayname">{{ _dayButtonText }}, </span>
+      <span class="mat-calendar-header-date-monthday">{{ _monthdayButtonText }}</span>
+    </button>
+  </div>
+
+  <div class="mat-calendar-header-time">
+    <div class="mat-calendar-header-time-hour">
+      <button class="mat-calendar-control"
+      [class.mat-calendar-control-active]="view == 'clock' && _hourView"
+      [@controlActive]="view == 'clock' && _hourView ? 'active' : ''"
+      [attr.aria-label]="_intl.switchToHourViewLabel"
+      (click)="_showHourView()">
+        {{ _hourButtonText }}
+      </button>
+      <span>:</span>
+      <button class="mat-calendar-control"
+      [class.mat-calendar-control-active]="view == 'clock' && !_hourView"
+      [@controlActive]="view == 'clock' && !_hourView ? 'active' : ''"
+      [attr.aria-label]="_intl.switchToMinuteViewLabel"
+      (click)="_showMinuteView()">
+        {{ _minuteButtonText }}
+      </button>
+    </div>
+    <div class="mat-calendar-header-time-ampm" *ngIf="twelveHour">
+      <button class="mat-calendar-control"
+      [class.mat-calendar-control-active]="_isAm"
+      [@controlActive]="_isAm ? 'active' : ''"
+      [attr.aria-label]="_intl.setToAMLabel"
+      (click)="_toggleAmPm(true)">
+        AM
+      </button>
+      <button class="mat-calendar-control"
+      [class.mat-calendar-control-active]="!_isAm"
+      [@controlActive]="!_isAm ? 'active' : ''"
+      [attr.aria-label]="_intl.setToPMLabel"
+      (click)="_toggleAmPm(false)">
+        PM
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [class]="'mat-calendar-content mat-calendar-view-' + view">
+
+  <div class="mat-calendar-heading" *ngIf="view === 'month' || view === 'year'">
+    <button mat-icon-button class="mat-calendar-previous-button"
+      (click)="_previousClicked()" [disabled]="!_previousEnabled()"
+      [attr.aria-label]="_prevButtonLabel">
+    </button>
+
+    <button class="mat-calendar-heading-period mat-calendar-control mat-calendar-control-active"
+    [@slideCalendar]="_animationDir" (@slideCalendar.done)="_animationDir = ''"
+    (click)="_currentPeriodClicked()"
+    [attr.aria-label]="_periodButtonLabel">
+      <strong>{{ _periodButtonText }}</strong>
+    </button>
+
+    <button mat-icon-button class="mat-calendar-next-button"
+      (click)="_nextClicked()" [disabled]="!_nextEnabled()"
+      [attr.aria-label]="_nextButtonLabel">
+    </button>
+  </div>
+
+  <div class="mat-calendar-main" [ngSwitch]="view" cdkMonitorSubtreeFocus tabindex="-1">
+
+    <mat-clock-view
+      *ngSwitchCase="'clock'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="_dateFilterForViews"
+      [clockStep]="clockStep"
+      [twelveHour]="twelveHour"
+      [hourView]="_hourView"
+      (selectedTime)="_timeSelected($event)"
+      (selectedChange)="_timeChanged($event)"
+      (changeView)="_hourView = !_hourView">
+    </mat-clock-view>
+
+    <mat-month-view
+      *ngSwitchCase="'month'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="_dateFilterForViews"
+      [maxDate]="maxDate"
+      [minDate]="minDate"
+      [animationDir]="_animationDir"
+      (selectedChange)="_dateSelected($event)"
+      (_userSelection)="_showHourView()">
+    </mat-month-view>
+
+    <mat-year-view
+      *ngSwitchCase="'year'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="_dateFilterForViews"
+      [maxDate]="maxDate"
+      [minDate]="minDate"
+      [animationDir]="_animationDir"
+      (selectedChange)="_monthSelected($event)">
+    </mat-year-view>
+
+    <mat-years-view
+      *ngSwitchCase="'years'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="_dateFilterForViews"
+      [maxDate]="maxDate"
+      [minDate]="minDate"
+      (selectedChange)="_yearSelected($event)">
+    </mat-years-view>
+  </div>
+
+  <div class="mat-calendar-footer">
+    <button mat-button
+    (click)="_cancelClicked()"
+    [attr.aria-label]="_intl.buttonCancelLabel">
+      {{ _intl.buttonCancelText }}
+    </button>
+
+    <button mat-button
+    (click)="_submitClicked()"
+    [attr.aria-label]="_intl.buttonSubmitLabel">
+      {{ _intl.buttonSubmitText }}
+    </button>
+  </div>
+</div>

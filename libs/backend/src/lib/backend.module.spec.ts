@@ -1,14 +1,22 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
+import { environment } from '@coachcare/backend/tests';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { BackendModule } from './backend.module';
 
 describe('BackendModule', () => {
-  beforeEach(async(() => {
+  beforeAll(() => {
     TestBed.configureTestingModule({
-      imports: [BackendModule]
+      imports: [
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
+        BackendModule.forRoot(environment)
+      ]
     }).compileComponents();
-  }));
+  });
 
-  it('should create', () => {
+  it('defined', () => {
     expect(BackendModule).toBeDefined();
   });
 });

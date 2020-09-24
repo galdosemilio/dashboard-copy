@@ -21,7 +21,7 @@ import {
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger
-} from '@coachcare/layout/material';
+} from '@coachcare/layout';
 import { OrgAccessRequest, Organization } from '@coachcare/backend/npm-api';
 import { AutocompleterOption } from '@coachcare/common/shared';
 import { find, result } from 'lodash';

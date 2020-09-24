@@ -21,6 +21,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@board/*": [
+        "apps/admin/src/app/*"
+      ],
       "@coachcare/common": [
         "libs/common/src/index.ts"
       ],
@@ -38,6 +41,9 @@
       ],
       "@coachcare/backend/*": [
         "libs/backend/src/lib/*"
+      ],
+      "@coachcare/datepicker": [
+        "libs/datepicker/src/index.ts"
       ]
     }
   },

@@ -1,0 +1,18 @@
+<div>
+  <ccr-icon-search [fill]="fill" [size]="20" [stroke]="5"></ccr-icon-search>
+  <input type="text" class="search-box"
+  [attr.disabled]="isDisabled ? '' : null"
+  [formControl]="searchCtrl"
+  [matAutocomplete]="search"
+  [placeholder]="'MENU.SEARCH' | translate">
+
+  <mat-autocomplete #search="matAutocomplete">
+    <mat-option *ngFor="let result of results" (onSelectionChange)="onSelect(result)">
+      <p matLine *ngIf="result">
+        {{ result.viewValue }}
+        <span *ngIf="result.viewSubvalue">{{ result.viewSubvalue | translate }}</span>
+      </p>
+      <p matLine *ngIf="result && result.viewNote">{{ result.viewNote | translate }}</p>
+    </mat-option>
+  </mat-autocomplete>
+</div>

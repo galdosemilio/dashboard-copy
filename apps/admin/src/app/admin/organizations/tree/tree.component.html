@@ -1,0 +1,53 @@
+<div class="ccr-content">
+
+  <div class="ccr-panel">
+    <h3>{{ 'GLOBAL.HIERARCHY' | translate }}</h3>
+
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <!-- Leaf node -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding indent="80">
+        <button mat-icon-button disabled></button>
+          <span *ngIf="!isEmpty(node)">
+            {{ node.nodeName | translate }}
+            (ID {{ node.org.id }})
+          </span>
+          <ng-container *ngIf="isEmpty(node)">
+            <span *ngIf="node.nodeName === 'NO_CHILD'; then no_child else no_parent"></span>
+            <ng-template #no_child>
+              {{ 'ADMIN.ORGS.NO_CHILD_CLINIC' | translate }}
+            </ng-template>
+            <ng-template #no_parent>
+              {{ 'ADMIN.ORGS.NO_PARENT_CLINIC' | translate }}
+            </ng-template>
+          </ng-container>
+        <button mat-icon-button *ngIf="treeControl.getLevel(node) && !isEmpty(node)" (click)="onDelete(node)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-tree-node>
+
+      <!-- expandable node -->
+      <mat-tree-node *matTreeNodeDef="let node; when: hasChild">
+        <button
+          mat-icon-button
+          [attr.aria-label]="'toggle ' + node.filename"
+          (click)="loadChildren(node)"
+          matTreeNodeToggle>
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+          </mat-icon>
+        </button>
+        {{ node.nodeName | translate }}
+        <a mat-icon-button color="primary" class="ccr-icon-button" (click)="createDialog(node)">
+          <mat-icon>add</mat-icon>
+        </a>
+      </mat-tree-node>
+
+      <mat-tree-node *matTreeNodeDef="let node; when: isLoadMore" matTreeNodePadding indent="80">
+        <button mat-button (click)="loadMore(node)">
+          {{ 'ADMIN.ORGS.LOAD_MORE' | translate }}
+        </button>
+      </mat-tree-node>
+    </mat-tree>
+
+  </div>
+</div>

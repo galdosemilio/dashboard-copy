@@ -1,0 +1,41 @@
+<div *ngIf="hasChildren; then branch else leaf"></div>
+
+<ng-template #branch>
+
+  <mat-list-item class="nav-dropdown {{levelClass}}" [ngClass]="{'active': active }" (click)="clicked($event)">
+    <ccr-badge *ngIf="menuItem.unread">{{ menuItem.unread }}</ccr-badge>
+    <mat-icon *ngIf="menuItem.icon !== null">{{ menuItem.icon }}</mat-icon>
+    <span>{{ menuItem.navName | translate }}</span>
+    <i class="material-icons"></i>
+  </mat-list-item>
+
+  <mat-nav-list class="nav-children {{levelClass}}"
+    [ngClass]="{'active': active }"
+    [disableRipple]="false"
+    [ngStyle]="{'height.px': height}">
+    <ccr-menuitem
+      *ngFor="let child of menuItem.children"
+      [menuItem]="child"
+      [level]="level + 1"
+      [parent]="_this"
+    ></ccr-menuitem>
+  </mat-nav-list>
+
+</ng-template>
+
+<ng-template #leaf>
+
+  <mat-list-item *ngIf="menuItem.navRoute" class="mat-list-item {{levelClass}}"
+  [routerLink]="menuItem.navRoute" routerLinkActive="active">
+    <ccr-badge *ngIf="menuItem.unread">{{ menuItem.unread }}</ccr-badge>
+    <mat-icon *ngIf="menuItem.icon !== null">{{ menuItem.icon }}</mat-icon>
+    <span>{{ menuItem.navName | translate }}</span>
+  </mat-list-item>
+
+  <mat-list-item *ngIf="menuItem.navLink" class="mat-list-item {{levelClass}}"
+  (click)="newWindow(menuItem.navLink)">
+    <mat-icon *ngIf="menuItem.icon !== null">{{ menuItem.icon }}</mat-icon>
+    <span>{{ menuItem.navName | translate }}</span>
+  </mat-list-item>
+
+</ng-template>

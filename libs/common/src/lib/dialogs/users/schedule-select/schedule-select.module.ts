@@ -7,7 +7,7 @@ import {
   MatIconModule,
   MatProgressSpinnerModule,
   MatSelectModule
-} from '@angular/material';
+} from '@coachcare/layout';
 import { CcrIconsComponentsModule } from '@coachcare/common/components/icons';
 import { TranslateModule } from '@ngx-translate/core';
 import { ScheduleSelectDialog } from './schedule-select.dialog';

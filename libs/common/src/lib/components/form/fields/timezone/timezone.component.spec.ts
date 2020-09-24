@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@coachcare/layout';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { TimezoneFormFieldComponent } from './timezone.component';
@@ -12,8 +12,11 @@ describe('Form.TimezoneSelectComponent', () => {
     selector: `ccr-test-host-component`,
     template: `
       <form [formGroup]="form">
-        <ccr-form-field-timezone formControlName="test"></ccr-form-field-timezone>
-      </form>`
+        <ccr-form-field-timezone
+          formControlName="test"
+        ></ccr-form-field-timezone>
+      </form>
+    `
   })
   class TestHostComponent implements OnInit {
     form: FormGroup;
@@ -30,19 +33,17 @@ describe('Form.TimezoneSelectComponent', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          ReactiveFormsModule,
-          MatSelectModule,
-          TranslateModule.forRoot()
-        ],
-        declarations: [TestHostComponent, TimezoneFormFieldComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        TranslateModule.forRoot()
+      ],
+      declarations: [TestHostComponent, TimezoneFormFieldComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

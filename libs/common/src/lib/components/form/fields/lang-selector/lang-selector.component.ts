@@ -17,7 +17,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import { SelectorOption } from '@coachcare/backend/shared';
+import { SelectorOption } from '@coachcare/common/shared';
 import { LanguageService } from '@coachcare/common/services/language.service';
 import { LOCALES } from '@coachcare/common/shared';
 import { differenceWith, isEqual } from 'lodash';

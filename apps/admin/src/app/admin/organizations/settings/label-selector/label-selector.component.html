@@ -1,0 +1,32 @@
+<div [ngSwitch]="state">
+  <div *ngSwitchCase="'ready'" [formGroup]="form" fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div *ngIf="!readonly" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-form-field fxFlex>
+        <mat-select [placeholder]="'SIDENAV.LABELS' | translate" formControlName="selectedAssociation">
+          <mat-option
+          *ngFor="let pkg of shownPackages"
+          [value]="pkg.id">
+          (id {{ pkg.id }}) {{ pkg.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-icon (click)="addPackage()">add_circle_outline</mat-icon>
+    </div>
+
+    <mat-chip-list>
+      <mat-chip *ngFor="let pkg of selectedPackages" [removable]="true">
+        (id {{ pkg.id }}) {{ pkg.title }}
+        <mat-icon *ngIf="!readonly" matChipRemove (click)="removePackage(pkg)">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <div *ngSwitchCase="'loading'" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner diameter="40" strokeWidth="3"></mat-spinner>
+  </div>
+
+  <div *ngSwitchCase="'no-associations'">
+    <small>{{ 'ADMIN.ORGS.SETTINGS.NO_LABEL_ASSOCIATIONS' | translate }}</small>
+  </div>
+</div>

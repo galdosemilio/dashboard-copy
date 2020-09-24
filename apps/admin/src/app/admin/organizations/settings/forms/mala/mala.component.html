@@ -1,0 +1,67 @@
+<mat-grid-list [cols]="3" [formGroup]="form" rowHeight="70px">
+
+    <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-mala-appname"
+      formControlName="appName"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.APP_NAME' | translate"
+      (blur)="onSubmit()">
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-mala-iosbundleid"
+      formControlName="iosBundleId"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.IOS_BUNDLE_ID' | translate"
+      (blur)="onSubmit()">
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-mala-androidbundleid"
+      formControlName="androidBundleId"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.ANDROID_BUNDLE_ID' | translate"
+      (blur)="onSubmit()">
+    </mat-form-field>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-grid-list [cols]="3" [formGroup]="form" rowHeight="70px">
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-mala-firebaseprojectname"
+      formControlName="firebaseProjectName"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.FIREBASE_PROJECT_NAME' | translate"
+      (blur)="onSubmit()">
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-mala-appstoreconnectteamid"
+      formControlName="appStoreConnectTeamId"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.APPSTORE_CONNECT_TEAM_ID' | translate"
+      (blur)="onSubmit()">
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-mala-developerportalteamid"
+      formControlName="developerPortalTeamId"
+      [placeholder]="'ADMIN.ORGS.SETTINGS.DEVELOPER_PORTAL_TEAM_ID' | translate"
+      (blur)="onSubmit()">
+    </mat-form-field>
+  </mat-grid-tile>
+
+</mat-grid-list>

@@ -1,0 +1,52 @@
+<div
+fxLayout="column"
+fxLayoutAlign="start stretch"
+fxLayoutGap="35px">
+  <div class="section-header">{{'REGISTER.CLINIC.PRICING' | translate }}</div>
+
+  <div
+  class="billing-term-container"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="start center"
+  fxLayoutAlign.xs="start stretch"
+  fxLayoutGap="5px">
+    <div fxFlex="59%">
+      <ccr-clinic-plan-selector (select)="onClinicPlanSelect($event)"></ccr-clinic-plan-selector>
+    </div>
+
+    <p class="full-benefits-link" fxFlex>
+      <a href="https://www.coachcare.com/pricing/" target="_blank">{{ 'REGISTER.CLINIC.VIEW_BENEFITS_PRICING' | translate }}</a>
+    </p>
+  </div>
+
+  <div
+  class="billing-summary-container"
+  fxLayout="row"
+  fxLayout.sm="column"
+  fxLayout.xs="column"
+  fxLayoutAlign="start start"
+  fxLayoutAlign.sm="start stretch"
+  fxLayoutAlign.xs="start stretch"
+  fxLayoutGap="20px"
+  fxLayoutGap.sm="10px">
+    <p class="item-list-label" fxFlex="20%">{{ 'REGISTER.CLINIC.YOUR_PLAN_SELECTION' | translate }}</p>
+
+    <div class="item-list" fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+      <ccr-billing-summary-item
+        *ngIf="clinicPlanSelection"
+        [billingPeriod]="clinicPlanSelection.billing"
+        [item]="clinicPlanSelection.plan">
+      </ccr-billing-summary-item>
+    </div>
+  </div>
+
+  <button
+  [disabled]="formGroup.invalid"
+  (click)="onSubmit()"
+  class="nextStep"
+  mat-button
+  type="button">
+    {{ 'GLOBAL.CONTINUE' | translate }}
+  </button>
+</div>

@@ -6,7 +6,7 @@ import {
   MatDialogModule,
   MatGridListModule,
   MatIconModule
-} from '@angular/material';
+} from '@coachcare/layout';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ConfirmDialog } from './confirm/confirm.dialog';

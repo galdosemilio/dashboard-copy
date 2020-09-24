@@ -1,0 +1,57 @@
+<div class="ccr-plain" fxFlexFill fxLayout="column">
+  <header>
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+      <h1 class="company-name">{{ displayName }}</h1>
+      <div class="logo"></div>
+      <a *ngIf="headerLink" class="text-right" href="https://www.coachcare.com/">
+        {{ 'LAYOUT.BACK_TO_MAINSITE' | translate }} &raquo;
+      </a>
+    </div>
+  </header>
+
+  <main fxFlex>
+    <div class="container router-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="page-inner"></div>
+  </main>
+
+  <footer>
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="end start" (click)="selectLanguage()">
+        <mat-icon>language</mat-icon>
+        <span fxFlexAlign="end" fxFlexOffset="5px">{{ 'GLOBAL.SELECT_LANGUAGE' | translate }}</span>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column"
+      fxLayoutAlign="end center" fxLayoutAlign.xs="center center" fxLayoutGap.xs="7px">
+        <div>
+          <a href="{{ linkSupport || 'LINK.SUPPORT' | translate }}" target="_blank"  rel="noopener noreferrer">
+            {{ 'LAYOUT.CONTACT_US' | translate }}
+          </a>
+          <span class="text-separator">|</span>
+          <a href="{{ linkTerms || 'LINK.TERMS_OF_SERVICE' | translate }}" target="_blank" rel="noopener noreferrer">
+            {{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}
+          </a>
+        </div>
+        <span class="text-separator" fxShow fxHide.xs>|</span>
+        <div>
+          <a href="{{ linkPrivacy || 'LINK.PRIVACY_POLICY' | translate }}" target="_blank" rel="noopener noreferrer">
+            {{ 'LAYOUT.PRIVACY_POLICY' | translate }}
+          </a>
+          <span class="text-separator">|</span>
+          <a href="{{ linkHipaa || 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">
+            {{ 'LAYOUT.HIPAA' | translate }}
+          </a>
+          <span class="text-separator">|</span>
+          <a href="{{ linkMsa || 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">
+            {{ 'LAYOUT.MSA' | translate }}
+          </a>
+          <span class="text-separator">|</span>
+          <a href="{{ linkDpa || 'LINK.DPA' | translate }}" target="_blank" rel="noopener noreferrer">
+            {{ 'LAYOUT.DPA' | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

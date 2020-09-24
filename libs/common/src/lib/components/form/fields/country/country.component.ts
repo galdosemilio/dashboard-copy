@@ -17,8 +17,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import { resolveConfig } from '@board/pages/config/section.config';
-import { SelectorOption } from '@coachcare/backend/shared';
+import { SelectorOption } from '@coachcare/common/shared';
 import { ContextService } from '@coachcare/common/services';
 import { MAIN_REG_COUNTRIES, REG_COUNTRIES } from '@coachcare/common/shared';
 import { TranslateService } from '@ngx-translate/core';
@@ -53,6 +52,7 @@ export class CountryFormFieldComponent implements ControlValueAccessor, OnInit {
 
   @Input() disabled: any;
   @Input() placeholder: string;
+  @Input() priorityCountries: any[] = [];
   @Input() readonly: any;
   @Input() required: any;
 
@@ -100,11 +100,7 @@ export class CountryFormFieldComponent implements ControlValueAccessor, OnInit {
         viewValue: country.name,
         value: country.id
       }));
-      const priorityCountry: string[] =
-        resolveConfig(
-          'REGISTER.INFO.PRIORITY_COUNTRY',
-          this.context.organizationId || ''
-        ) || [];
+      const priorityCountry: string[] = this.priorityCountries || [];
 
       this.mainOptions = intersectionWith(
         list,

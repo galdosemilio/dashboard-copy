@@ -1,0 +1,45 @@
+@mixin ccr-layout-footer($theme, $config) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  ccr-footer {
+    position: fixed;
+    height: map-get($config, footer-height);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    background: mat-color($background, 'background');
+    border-top: 1px solid mat-color($foreground, divider);
+    color: mat-color($foreground, secondary-text);
+    font-size: 80%;
+    line-height: map-get($config, footer-height);
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      margin: 0;
+      padding: 0 25px;
+      white-space: nowrap;
+
+      @media #{map-get($config, lte-xs)} {
+        justify-content: space-between;
+
+        li {
+          display: none;
+        }
+        li:first-child,
+        li:last-child {
+          display: block;
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit !important;
+    }
+  }
+}

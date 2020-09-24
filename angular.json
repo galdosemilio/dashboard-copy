@@ -146,6 +146,13 @@
             "aot": true,
             "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
             "styles": ["apps/admin/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/common/src/lib/styles",
+                "libs/common/src/lib",
+                "libs/datepicker/src/lib"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -451,6 +458,38 @@
             "tsConfig": "libs/backend/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/backend/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "datepicker": {
+      "projectType": "library",
+      "root": "libs/datepicker",
+      "sourceRoot": "libs/datepicker/src",
+      "prefix": "dashboard",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/datepicker/tsconfig.lib.json",
+              "libs/datepicker/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/datepicker/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/datepicker/jest.config.js",
+            "tsConfig": "libs/datepicker/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/datepicker/src/test-setup.ts"
           }
         }
       },

@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../../../node_modules/ng-packagr/package.schema.json",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts",
+      "umdModuleIds": {
+        "axios": "axios",
+        "qs": "qs",
+        "lodash": "_",
+        "moment": "moment",
+        "moment-timezone": "moment"
+      }
+    }
+  }
+}

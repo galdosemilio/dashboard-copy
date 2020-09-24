@@ -1,6 +1,16 @@
-import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatAutocompleteTrigger, MatDialogRef } from '@angular/material';
+import {
+  MAT_DIALOG_DATA,
+  MatAutocompleteTrigger,
+  MatDialogRef
+} from '@coachcare/layout';
 import {
   Account,
   AccountAccessData,
@@ -48,10 +58,7 @@ export class ScheduleSelectDialog implements OnInit {
 
     this.searchCtrl = new FormControl();
     this.searchCtrl.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged()
-      )
+      .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe(query => {
         if (query) {
           this.searchAccounts(query);
@@ -65,7 +72,9 @@ export class ScheduleSelectDialog implements OnInit {
     this.organization
       .getList({ account: this.data.user.id })
       .then(res => {
-        this.clinics = res.data.filter(c => c.permissions && c.permissions.admin);
+        this.clinics = res.data.filter(
+          c => c.permissions && c.permissions.admin
+        );
         if (this.clinics.length > 0) {
           this.selectedClinic = this.clinics[0];
         }

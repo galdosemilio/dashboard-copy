@@ -1,6 +1,13 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@coachcare/layout';
 import { ActivatedRoute } from '@angular/router';
 import { resolveConfig } from '@board/pages/config/section.config';
 import { _, FormUtils } from '@coachcare/backend/shared';
@@ -54,7 +61,8 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
       this.hideLanguageSelector =
-        params.hasOwnProperty('hideLanguageSelector') && params.hideLanguageSelector === 'true'
+        params.hasOwnProperty('hideLanguageSelector') &&
+        params.hideLanguageSelector === 'true'
           ? true
           : false;
 
@@ -69,13 +77,17 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
         selectedLanguage = 'en';
       }
 
-      const preferredLocales = this.formGroup.get('account.preferredLocales') as FormControl;
+      const preferredLocales = this.formGroup.get(
+        'account.preferredLocales'
+      ) as FormControl;
       preferredLocales.setValue([selectedLanguage]);
 
       this.store.changeLang(selectedLanguage);
     });
 
-    const country = this.formGroup.get('organization.address.country') as FormControl;
+    const country = this.formGroup.get(
+      'organization.address.country'
+    ) as FormControl;
     country.setValue('');
     this.subscribeToEvents();
   }
@@ -115,7 +127,9 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToEvents() {
-    const preferredLocales = this.formGroup.get('account.preferredLocales') as FormControl;
+    const preferredLocales = this.formGroup.get(
+      'account.preferredLocales'
+    ) as FormControl;
     preferredLocales.valueChanges.pipe(untilDestroyed(this)).subscribe(lang => {
       if (lang && lang[0] !== this.language.get()) {
         this.store.changeLang(lang[0]);

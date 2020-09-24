@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'dashboard-root',
+  selector: 'ccr-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'admin';
+export class AppComponent implements OnInit {
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    if (window.navigator.userAgent.match(/(MSIE|Trident)/)) {
+      this.router.navigate(['/unsupported-browser']);
+    }
+  }
 }

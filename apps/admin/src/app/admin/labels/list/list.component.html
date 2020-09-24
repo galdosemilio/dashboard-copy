@@ -1,0 +1,29 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center">
+    <h2 fxFlex="0 0 auto">{{ 'SIDENAV.LABELS' | translate }}</h2>
+
+    <a mat-button color="primary" class="ccr-icon-button"
+    fxFlex="0 0 auto" fxFlex.xs="100%" routerLink="create">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'GLOBAL.CREATE' | translate }}</span>
+    </a>
+
+  </div>
+
+  <div class="ccr-filters" fxLayout="row" fxLayoutAlign=" center">
+    <ccr-filter-labels fxFlex="initial" fxLayout="row" fxLayoutGap="12px"
+      [source]="source"
+    ></ccr-filter-labels>
+
+    <ccr-paginator fxFlex #paginator
+      [length]="source.total"
+      [pageIndex]="0"
+      [pageSize]="10"
+    ></ccr-paginator>
+  </div>
+</div>
+
+<ccr-package-table
+  [source]="source"
+  [columns]="columns"
+></ccr-package-table>

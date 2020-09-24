@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@coachcare/layout';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { StateFormFieldComponent } from './state.component';
@@ -13,7 +13,8 @@ describe('Form.StateSelectComponent', () => {
     template: `
       <form [formGroup]="form">
         <ccr-form-field-state formControlName="test"></ccr-form-field-state>
-      </form>`
+      </form>
+    `
   })
   class TestHostComponent implements OnInit {
     form: FormGroup;
@@ -30,19 +31,17 @@ describe('Form.StateSelectComponent', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          ReactiveFormsModule,
-          MatSelectModule,
-          TranslateModule.forRoot()
-        ],
-        declarations: [TestHostComponent, StateFormFieldComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        TranslateModule.forRoot()
+      ],
+      declarations: [TestHostComponent, StateFormFieldComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

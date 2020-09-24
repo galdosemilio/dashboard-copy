@@ -1,6 +1,12 @@
-import { Component, forwardRef, Inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  Inject,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@coachcare/layout';
 import { ActivatedRoute } from '@angular/router';
 import { MFACodeInputMode } from '@board/shared/mfa-code-input';
 import {
@@ -72,7 +78,8 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     private translate: TranslateService
   ) {
     this.store.pipe(select(OrgPrefSelectors.selectAssets)).subscribe(assets => {
-      this.logoUrl = assets && assets.logoUrl ? assets.logoUrl : '/assets/logo.png';
+      this.logoUrl =
+        assets && assets.logoUrl ? assets.logoUrl : '/assets/logo.png';
     });
 
     this.store.pipe(select(OrgPrefSelectors.selectOrgPref)).subscribe(prefs => {
@@ -87,7 +94,10 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       }
 
       this.showRegisterCompany =
-        params.hideRegisterCompany === 'true' || params.hideRegisterCompany === true ? false : true;
+        params.hideRegisterCompany === 'true' ||
+        params.hideRegisterCompany === true
+          ? false
+          : true;
     });
   }
 
@@ -99,7 +109,9 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       password: ''
     });
     this.mfaForm = this.builder.group({});
-    this.resolveBadgeLinks(this.translate.currentLang.split('-')[0].toLowerCase());
+    this.resolveBadgeLinks(
+      this.translate.currentLang.split('-')[0].toLowerCase()
+    );
     this.resolveMobileAppRedirects();
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
@@ -123,7 +135,8 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
         ...this.form.value,
         deviceType: DeviceTypeIds.Web,
         allowedAccountTypes: [AccountTypeIds.Admin, AccountTypeIds.Provider],
-        organization: this.context.organizationId || this.environment.defaultOrgId
+        organization:
+          this.context.organizationId || this.environment.defaultOrgId
       };
 
       this.isLoggingIn = true;
@@ -138,7 +151,11 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
         })
         .catch((err: any) => {
           this.isLoggingIn = false;
-          if (err && err.data && err.data.code === 'mfa.instance.not-verified') {
+          if (
+            err &&
+            err.data &&
+            err.data.code === 'mfa.instance.not-verified'
+          ) {
             this.dialog.open(ConfirmDialog, {
               data: {
                 title: _('GLOBAL.ERROR'),
@@ -170,10 +187,13 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
         ...this.form.value,
         deviceType: DeviceTypeIds.Web,
         allowedAccountTypes: [AccountTypeIds.Admin, AccountTypeIds.Provider],
-        organization: this.context.organizationId || this.environment.defaultOrgId,
+        organization:
+          this.context.organizationId || this.environment.defaultOrgId,
         token: {
           type: this.mode === 'backup_code' ? 'backup' : 'totp',
-          value: this.mfaForm.value.code.code ? this.mfaForm.value.code.code.replace(/\s/g, '') : ''
+          value: this.mfaForm.value.code.code
+            ? this.mfaForm.value.code.code.replace(/\s/g, '')
+            : ''
         }
       });
     } catch (error) {
@@ -198,15 +218,19 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
 
   private async resolveMobileAppRedirects() {
     try {
-      this.androidLink = (await this.mobileApp.getAndroidRedirect({
-        id: this.context.organizationId || ''
-      })).redirect;
+      this.androidLink = (
+        await this.mobileApp.getAndroidRedirect({
+          id: this.context.organizationId || ''
+        })
+      ).redirect;
     } catch (error) {}
 
     try {
-      this.iosLink = (await this.mobileApp.getiOsRedirect({
-        id: this.context.organizationId || ''
-      })).redirect;
+      this.iosLink = (
+        await this.mobileApp.getiOsRedirect({
+          id: this.context.organizationId || ''
+        })
+      ).redirect;
     } catch (error) {}
   }
 

@@ -1,0 +1,41 @@
+@import 'variables';
+
+.option-block {
+  border: 1px solid mat-color($ccr-foreground, icon);
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 15px;
+  text-align: left;
+
+  &:hover {
+    border: 1px solid var(--primary-lighten);
+  }
+
+  &.active {
+    border: 1px solid var(--primary);
+
+    &:hover {
+      border: 1px solid var(--primary);
+    }
+  }
+
+  h4 {
+    font-size: 20px;
+    margin-top: 5px;
+    text-align: left;
+  }
+
+  small {
+    line-height: 110%;
+  }
+
+  .app-button-container {
+    margin-top: 15px;
+  }
+
+  .badge-button {
+    height: 42px;
+    width: auto;
+  }
+}

@@ -1,0 +1,7 @@
+ccr-page-login {
+  .mat-spinner {
+    circle {
+      stroke: var(--primary-contrast, mat-color($ccr-primary, default-contrast));
+    }
+  }
+}

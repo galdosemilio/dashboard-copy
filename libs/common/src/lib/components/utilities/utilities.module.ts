@@ -1,17 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  MatButtonModule,
-  MatChipsModule,
-  MatGridListModule,
-  MatIconModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule
-} from '@angular/material';
 import { CcrDirectivesModule } from '@coachcare/common/directives';
-import { MatDatepickerModule } from '@coachcare/datepicker';
 import { TranslateModule } from '@ngx-translate/core';
 import { AvatarComponent } from './avatar/avatar.component';
 import { BadgeComponent } from './badge/badge.component';
@@ -28,14 +18,6 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
   imports: [
     CommonModule,
     FlexLayoutModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatGridListModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
     CcrDirectivesModule,
     TranslateModule.forChild()
   ],
@@ -59,7 +41,6 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
     DateRangeNavigatorComponent,
     HelpComponent,
     LogoComponent,
-    MatChipsModule,
     PaginatorComponent,
     ProgressCircleComponent,
     TableOverlayComponent

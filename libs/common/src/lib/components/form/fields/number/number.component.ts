@@ -18,7 +18,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import { MatInput } from '@angular/material';
+import { MatInput } from '@coachcare/layout';
 
 @Component({
   selector: 'ccr-form-field-number',
