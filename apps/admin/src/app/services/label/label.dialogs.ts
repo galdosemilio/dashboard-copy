@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 
 import { LabelsDatabase } from '@coachcare/backend/data';
 import { TitledEntity } from '@coachcare/backend/services';
@@ -18,18 +18,18 @@ export class LabelDialogs {
       const data: PromptDialogData = {
         title: _('PROMPT.LABEL.CONFIRM_ACTIVATE'),
         content: _('PROMPT.LABEL.CONFIRM_ACTIVATE_PROMPT'),
-        contentParams: { item: `${item.title}` }
+        contentParams: { item: `${item.title}` },
       };
 
       this.dialog
         .open(PromptDialog, { data: data })
         .afterClosed()
-        .subscribe(confirm => {
+        .subscribe((confirm) => {
           if (confirm) {
             this.database
               .update({
                 id: item.id,
-                isActive: true
+                isActive: true,
               })
               .then(resolve)
               .catch(reject);
@@ -45,18 +45,18 @@ export class LabelDialogs {
       const data: PromptDialogData = {
         title: _('PROMPT.LABEL.CONFIRM_DEACTIVATE'),
         content: _('PROMPT.LABEL.CONFIRM_DEACTIVATE_PROMPT'),
-        contentParams: { item: `${item.title}` }
+        contentParams: { item: `${item.title}` },
       };
 
       this.dialog
         .open(PromptDialog, { data: data })
         .afterClosed()
-        .subscribe(confirm => {
+        .subscribe((confirm) => {
           if (confirm) {
             this.database
               .update({
                 id: item.id,
-                isActive: false
+                isActive: false,
               })
               .then(resolve)
               .catch(reject);

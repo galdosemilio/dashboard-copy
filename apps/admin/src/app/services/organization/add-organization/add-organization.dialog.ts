@@ -1,6 +1,6 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 
 import { OrganizationsDatabase } from '@coachcare/backend/data';
 import { UpdateOrganizationRequest } from '@coachcare/backend/services';
@@ -19,7 +19,7 @@ export interface AccountCreateDialogData {
   selector: 'ccr-add-organization-dialog',
   templateUrl: 'add-organization.dialog.html',
   host: { class: 'ccr-dialog' },
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 // tslint:disable-next-line:component-class-suffix
 export class AddOrganizationDialog {
@@ -51,12 +51,12 @@ export class AddOrganizationDialog {
     if (this.data.addChild) {
       req = {
         id: this.selectedOrganization,
-        parentOrganizationId: this.data.organization
+        parentOrganizationId: this.data.organization,
       };
     } else {
       req = {
         id: this.data.organization,
-        parentOrganizationId: this.selectedOrganization
+        parentOrganizationId: this.selectedOrganization,
       };
     }
     this.database
@@ -65,7 +65,7 @@ export class AddOrganizationDialog {
         this.notifier.success(_('NOTIFY.SUCCESS.ORG_ADDED'));
         this.dialogRef.close(true);
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
           this.notifier.error(err);

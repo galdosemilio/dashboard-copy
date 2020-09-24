@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule } from '@coachcare/layout';
-import { MatIconModule } from '@coachcare/layout';
-import { MatMenuModule } from '@coachcare/layout';
+import { MatButtonModule } from '@coachcare/common/material';
+import { MatIconModule } from '@coachcare/common/material';
+import { MatMenuModule } from '@coachcare/common/material';
 import { CcrPipesModule } from '@coachcare/common/pipes';
 import {
   AuthService,
@@ -10,7 +10,7 @@ import {
   CookieService,
   EventsService,
   LanguageService,
-  LayoutService
+  LayoutService,
 } from '@coachcare/common/services';
 import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,7 +27,7 @@ class MockAuthService {
 
 @Component({
   selector: 'ccr-search',
-  template: ''
+  template: '',
 })
 class MockSearchComponent {
   @Input() fill: string;
@@ -35,7 +35,7 @@ class MockSearchComponent {
 
 @Component({
   selector: 'ccr-icon-user',
-  template: ''
+  template: '',
 })
 class MockIconUserComponent {
   @Input() fill: string;
@@ -52,42 +52,42 @@ describe('Layout.TopbarComponent', () => {
         MatIconModule,
         MatMenuModule,
         TranslateModule.forRoot(),
-        CcrPipesModule
+        CcrPipesModule,
       ],
       declarations: [
         TopbarComponent,
         MockSearchComponent,
-        MockIconUserComponent
+        MockIconUserComponent,
       ],
       providers: [
         {
           provide: APP_ENVIRONMENT,
-          useValue: environment
+          useValue: environment,
         },
         {
           provide: APP_CONFIG,
-          useValue: projectConfig
+          useValue: projectConfig,
         },
         {
           provide: ApiService,
           useFactory: ApiFactory,
-          deps: [APP_ENVIRONMENT]
+          deps: [APP_ENVIRONMENT],
         },
         {
           provide: User,
           useFactory: UserFactory,
-          deps: [ApiService]
+          deps: [ApiService],
         },
         {
           provide: AuthService,
-          useClass: MockAuthService
+          useClass: MockAuthService,
         },
         CookieService,
         ConfigService,
         EventsService,
         LanguageService,
-        LayoutService
-      ]
+        LayoutService,
+      ],
     }).compileComponents();
   }));
 

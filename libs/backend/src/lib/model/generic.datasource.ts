@@ -1,6 +1,6 @@
 import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
-import { MatPaginator, MatSort } from '@coachcare/layout';
+import { MatPaginator, MatSort } from '@coachcare/common/material';
 import { _ } from '@coachcare/backend/shared';
 import { isEmpty, isFunction } from 'lodash';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -13,7 +13,7 @@ import {
   switchMap,
   take,
   takeUntil,
-  tap
+  tap,
 } from 'rxjs/operators';
 import { AppDatabase } from './generic.database';
 
@@ -117,7 +117,7 @@ export abstract class AppDataSource<
     return (this.showErrors || force) && !!this._errors.length;
   }
   // overridable error handler
-  errorHandler = function(err) {
+  errorHandler = function (err) {
     this.addError(err);
   };
 
@@ -252,7 +252,7 @@ export abstract class AppDataSource<
   }
 
   query(): Observable<R> {
-    const values = this.getters.map(f => f());
+    const values = this.getters.map((f) => f());
 
     // add defaults at the beggining
     values.unshift(this.defaults);
@@ -288,7 +288,7 @@ export abstract class AppDataSource<
 
     return stream.pipe(
       takeUntil(this.disconnect$),
-      skipWhile(val => !this.startWithNull && val[1] === 'trigger.init'),
+      skipWhile((val) => !this.startWithNull && val[1] === 'trigger.init'),
       switchMap(() => {
         this.preQuery();
         this.change$.next();
@@ -306,7 +306,7 @@ export abstract class AppDataSource<
         ).pipe(
           take(3),
           // delay check
-          tap(pos => {
+          tap((pos) => {
             if (typeof pos === 'number') {
               if (pos < 2) {
                 this.loadingMsg = !pos ? this.waitMsg : this.delayMsg;
@@ -318,8 +318,8 @@ export abstract class AppDataSource<
             }
           }),
           // discard timer result
-          filter(result => typeof result !== 'number'),
-          catchError(err => {
+          filter((result) => typeof result !== 'number'),
+          catchError((err) => {
             // isolate error
             this.errorHandler(err);
             return obsOf(this.defaultFetch());

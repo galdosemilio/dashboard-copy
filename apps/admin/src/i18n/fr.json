@@ -1,0 +1,697 @@
+{
+  "ACCOUNT": {
+    "ASSIGN": "Assigner",
+    "ASSOCIATE": "Associer",
+    "CREATE_ADMIN": "Créer administrateur",
+    "CREATE_ASSIGNMENT": "Créer tâche",
+    "CREATE_ASSOCIATION": "Créer association",
+    "CREATE_COACH": "Créer coach",
+    "CREATE_PATIENT": "Créer patient",
+    "DEASSIGN": "Retirer",
+    "DISSOCIATE": "Dissocier",
+    "_ADMINS": "Administrateurs",
+    "_COACHES": "Coachs",
+    "_PATIENTS": "Patients"
+  },
+  "ADMIN": {
+    "ASSOCIATIONS": "Associations",
+    "LOGS": {
+      "APP_NAME": "App",
+      "CREATED_AT": "Date",
+      "_TITLE": "Connexions"
+    },
+    "ORGS": {
+      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Campagne active Statut Association",
+      "ACTIVE_CAMPAIGN_IS_INHERITED": "Cette liste de campagnes actives est disponible pour cette clinique à partir d'une clinique pour parents.",
+      "ACTIVE_CAMPAIGN_LISTS": "Listes de campagne active",
+      "ADD_CHILD_ORG": "Ajouter une clinique enfant",
+      "ADD_PARENT_ORG": "Ajouter une clinique parent",
+      "ASSOC_ACTIVE_CAMPAIGN": "Campagne active associée",
+      "ASSOC_ALL_PROVIDERS": "Inscrire Rétroactivement tous les fournisseurs à ou en dessous de cette clinique",
+      "ASSOC_ALL_PROVIDERS_CURRENT": "fournisseur inscription {{provider}} ...",
+      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "Les fournisseurs suivants ont présenté des erreurs lors d'une tentative de les inscrire:",
+      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "Tous les fournisseurs inscrits avec succès",
+      "ASSOC_ALL_PROVIDERS_WARNING": "Vous êtes sur le point d'inscrire tous les fournisseurs de cette clinique; cette opération peut prendre un certain temps pour terminer, êtes-vous sûr de vouloir continuer?",
+      "ASSOC_PROVIDER_CAMPAIGN": "Rétroactivement inscrire un fournisseur",
+      "CHILD_ORGS": "Cliniques pour enfant",
+      "CREATE_NEW": "Créer une clinique",
+      "DELETE_LIST_ASSOCIATION": "Supprimer la campagne active Liste Association",
+      "DELETE_LIST_ASSOCIATION_CONTENT": "Etes-vous sûr de vouloir supprimer l'association à la liste {{list}}?",
+      "EDIT_ACTIVE_CAMPAIGN": "Modifier la campagne active Liste Association",
+      "LOAD_MORE": "Charger plus",
+      "MARKETING_DESCRIPTION": "Ces listes de campagne active sont associées à ou au-dessus de cette organisation. Lorsqu'un fournisseur est ajouté à ou en dessous de cette organisation, ils seront automatiquement inscrits dans les listes ci-dessous.<br><br>Les fournisseurs qui ont déjà été associés à cette organisation lorsque la liste de campagne active a été ajouté ne sera pas automatiquement inscrit. Vous pouvez rétroactifs s'inscrire un ou tous les fournisseurs dans les listes de campagne active nouvellement ajoutée en utilisant le \"Rétroactivement Inscrivez-vous ...\" boutons.",
+      "NO_CHILD_CLINIC": "Cette clinique n’a pas de clinique enfant",
+      "NO_PARENT_CLINIC": "Pas de clinique parent pour cette clinique.",
+      "ORGANIZATION": "Clinique",
+      "PARENT_ORG": "Clinique parent",
+      "SELECTED_PROVIDER": "Fournisseur sélectionné: {{provider}}",
+      "SELECT_PROVIDER": "Sélectionner un fournisseur",
+      "SETTINGS": {
+        "ANDROID_BUNDLE_ID": "Android Bundle ID",
+        "APPID": "Identifiants application",
+        "APPSTORE_CONNECT_TEAM_ID": "AppStore Équipe Connect ID",
+        "APP_NAME": "Nom de l'application",
+        "BCC_EMAIL": "",
+        "CODE_ENTRY_HELP": "Texte Digicode Aide",
+        "COLOR_ACCENT": "Accent",
+        "COLOR_PRIMARY": "Primaire",
+        "COLOR_SECONDARY": "Secondaire",
+        "COLOR_TOOLBAR": "Barre d’outils couleur",
+        "DEVELOPER_PORTAL_TEAM_ID": "Portail Équipe Développeur ID",
+        "DISPLAY_NAME": "Afficher le nom",
+        "EDIT_INHERITED": "Modifier les préférences héritées",
+        "EMPTY_BCC_EMAILS": "",
+        "FIREBASE_PROJECT_NAME": "Nom du projet Firebase",
+        "ICON_HINT": "Les mises à jour des icônes seront visibles après 24 heures",
+        "IMAGES": "Images",
+        "INHERIT_MFA": "Hériter des préférences",
+        "IOS_BUNDLE_ID": "iOS Bundle ID",
+        "LOGO_HINT": "Les mises à jour de logo seront visibles après 24h",
+        "MALA": "MALA",
+        "MARKED_AS_INHERITED": "Préférences marquées comme héritées",
+        "MFA_ENABLED": "Authentification multi-facteurs activée",
+        "MFA_INHERITED": "Hérité de {{ org }}",
+        "MFA_LOGIN": "S'identifier",
+        "MFA_PASSWORD_UPDATE": "Mise à jour du mot de passe",
+        "NO_LABEL_ASSOCIATIONS": "Il n'y a aucune phase associée à cette organisation",
+        "SPLASH_HINT": "Les mises à jour Splash seront visibles après 24 heures"
+      },
+      "TITLE": "Cliniques"
+    }
+  },
+  "BOARD": {
+    "BACK": "Retour",
+    "BASIC_INFORMATION": "Informations",
+    "DELETE_MFA_INSTANCE": "Désactiver le canal d’authentification à double facteur",
+    "PERSONAL_INFORMATION": "Informations personnelles",
+    "SECURITY": "Sécurité"
+  },
+  "CLINIC_PLANS": {
+    "COACH_CARE": {
+      "H_SYSTEM": "Système de santé",
+      "H_SYSTEM_LAST_STEP": "Nous vous remercions de votre inscription au CoachCare Plan de surveillance à distance! S'il vous plaît attendre à recevoir un formulaire de commande détaillant les prix et d'autres termes par AdobeSign pour votre signature électronique.<br><br><strong>S'il vous plaît Note:.. Vous devez exécuter ce bon de commande avant que nous puissions commencer à construire votre application</strong>",
+      "R_MONITORING": "Surveillance à distance",
+      "R_MONITORING_LAST_STEP": "Nous vous remercions de votre inscription au CoachCare Plan de surveillance à distance! S'il vous plaît attendre à recevoir un formulaire de commande détaillant les prix et d'autres termes par AdobeSign pour votre signature électronique.<br><br><strong>S'il vous plaît Remarque: Vous devez exécuter ce bon de commande avant que nous puissions commencer à construire votre application.</strong>",
+      "TRACK": "Piste",
+      "TRACK_LAST_STEP": "Nous vous remercions de vous inscrire au plan CoachCare piste!",
+      "V_HEALTH": "Santé virtuelle",
+      "V_HEALTH_LAST_STEP": "Nous vous remercions de votre inscription au plan de la santé virtuel CoachCare!"
+    }
+  },
+  "EMAIL_TEMPLATE_CATS": {
+    "CLIENT": "Client",
+    "OTHER": "Autre"
+  },
+  "EMAIL_TEMPLATE_OPS": {
+    "INTERNAL_REGISTRATION": "Enregistrement interne",
+    "INTERNAL_REGISTRATION_PLAN": "Enregistrement interne (avec plans)",
+    "NEW_ACCOUNT": "Nouveau compte"
+  },
+  "FIELD": {
+    "CONSENT": {
+      "TEXT_CLIENT": "En cochant cette case et en soumettant ce formulaire, j’adhère aux",
+      "TEXT_GDPR": "Si je suis un résident de l’UE / Royaume-Uni, j’accepte également",
+      "TEXT_PROVIDER": "En cochant cette case et en sélectionnant Continuer, j’accepte"
+    },
+    "NEWSLETTER": {
+      "CONSENT_TEXT": "En cochant cette case et en sélectionnant Continuer, j'accepte de recevoir la lettre d'information numérique CoachConnect qui inclura des mises à jour mensuelles sur les caractéristiques et les fonctionnalités de ma plate-forme."
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "Les mots de passe doivent être identiques",
+      "HAS_NO_SEQUENCES": "Ne contient pas 2 caractères identiques consécutifs",
+      "MIN_LENGTH": "Contient au moins 8 caractères",
+      "ONE_LOWERCASE_LETTER": "Contient une minuscule",
+      "ONE_NUMBER": "Contient un chiffre",
+      "ONE_SPECIAL_CHARACTER": "Contient un caractère spécial",
+      "ONE_UPPERCASE_LETTER": "Contient une majuscule",
+      "REQUIREMENTS": "Critères mot de passe"
+    }
+  },
+  "GLOBAL": {
+    "ABOUT": "À propos",
+    "ACTIONS": "Actions",
+    "ACTIVATE": "Activer",
+    "ACTIVE": "Actif",
+    "ADD_LANGUAGE": "Ajouter une langue",
+    "ADMIN": "Administrateur",
+    "ALL": "Tout",
+    "AND": "et",
+    "ANNUAL": "Annuel",
+    "APP_STORE": "AppStore",
+    "ASSOCIATE": "Associer",
+    "AUTO_ENROLL_CLIENT": "Inscription automatique du client sur l'association",
+    "BACK": "Retour",
+    "BASIC_INFORMATION": "Informations",
+    "BCC_EMAILS": "",
+    "BIRTHDAY": "Anniversaire",
+    "CANCEL": "Annuler",
+    "CATEGORY": "",
+    "CITY": "Ville",
+    "CLIENT": "Client",
+    "CLINICS": "Cliniques",
+    "CLINIC_NAME": "Nom de la clinique",
+    "CLOSE": "",
+    "COACH": "Fournisseur",
+    "COACHES": "Coachs",
+    "COLORS": "Couleurs",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+    "CONTACT": "Contact",
+    "CONTINUE": "Continuer",
+    "COUNTRY": "Pays",
+    "CREATE": "Créer",
+    "CREATE_EMAIL_TEMPLATE": "",
+    "DASHBOARD": "Tableau de bord",
+    "DEACTIVATE": "Désactiver",
+    "DELETE": "",
+    "DESCRIPTION": "La description",
+    "DIGITAL_LIBRARY": "Bibliothèque digitale",
+    "DISABLED": "Désactivé",
+    "DONE": "Fait !",
+    "DOWNLOAD_CSV": "",
+    "EDIT": "Éditer",
+    "EMAIL": "Mail",
+    "EMAIL_ADDRESS": "Adresse mail",
+    "EMAIL_TEMPLATES": "",
+    "ENABLED": "Activé",
+    "ENROLL": "Inscrire",
+    "ERROR": "Erreur !",
+    "FEATURES": "Fonctionnalités",
+    "FIELD_REQUIRED": "Champ obligatoire",
+    "FILE_VAULT": "Coffre Fort",
+    "FILTER_BY_ACCOUNT": "Filtrer par compte",
+    "FILTER_BY_NAME": "Filtrer par nom",
+    "FIRST_NAME": "Prénom",
+    "FORGOT_PASSWORD": "Mot de passe oublié?",
+    "GENDER": "Genre",
+    "HEIGHT": "Taille",
+    "HIERARCHY": "Hiérarchie",
+    "HTML": "",
+    "INACTIVE": "Inactif",
+    "INCLUDE_INACTIVE": "Inclure inactif",
+    "INFORMATION": "Information",
+    "INHERIT": "Hériter",
+    "LABEL": "Phase",
+    "LANGUAGE": "Langue",
+    "LAST_NAME": "Nom",
+    "LOCALE": "",
+    "LOCATION": "Localisation",
+    "MANAGER": "Manager",
+    "MEASUREMENT": "Mesure",
+    "MESSAGING": "Messagerie",
+    "MONTHLY": "Mensuel",
+    "NAME": "Nom",
+    "NEXT": "Suivant",
+    "NO": "Non",
+    "NO_ENTRIES_FOR_FIELD": "Il n'y a pas d'entrées pour ce champ",
+    "OK": "OK",
+    "OPEN_PATIENT_ENROLLMENT": "Ouvrir l’inscription patient",
+    "OPERATION": "",
+    "ORGANIZATION": "Clinique",
+    "ORG_ID": "Organisation ID",
+    "ORG_NAME": "Nom de l'organisation",
+    "ORG_TO_EXCLUDE": "",
+    "PASSWORD": "Mot de passe",
+    "PATIENT": "Patient",
+    "PATIENTS": "Patients",
+    "PATIENT_AUTOMATIC_DISASSOCIATION": "Dissociation automatique du patient",
+    "PHONE": "Téléphone",
+    "PHONE_NUMBER": "Numéro de téléphone",
+    "PHONE_TYPE": "Type de téléphone",
+    "PLAY_STORE": "Play Store",
+    "POSTAL_CODE": "Code postal",
+    "PREVIOUS": "Précédent",
+    "PROFILE": "Profil",
+    "PROVIDER": "Fournisseur",
+    "REGISTER_NEW_CLINIC": "Inscrire une nouvelle entreprise",
+    "REQUEST_RESET": "Réinitialiser le mot de passe",
+    "RESET_PASSWORD": "Réinitialiser le mot de passe",
+    "RETRY": "Recommencez",
+    "RPM": "RPM",
+    "SAVE": "Sauvegarder",
+    "SAVE_PASSWORD": "Sauvegarder le mot de passe",
+    "SEARCH_COACH": "Rechercher un coach",
+    "SEARCH_COACH_OR_PATIENT": "Rechercher un coach ou un patient",
+    "SECURITY": "Sécurité",
+    "SELECT_LANGUAGE": "Choisir la langue",
+    "SEQUENCES": "Séquences",
+    "SETTINGS": "Paramètres",
+    "SET_PASSWORD": "Créer un mot de passe",
+    "SHORT_CODE": "Raccourci",
+    "SIGN_FROM_APP": "Patients, veuillez vous connecter sur votre application mobile",
+    "SIGN_IN": "Se connecter en tant que fournisseur",
+    "STATE": "État",
+    "STATUS": "Statut",
+    "STREET_ADDRESS": "Adresse",
+    "SUBJECT": "",
+    "SUBMIT": "Soumettre",
+    "TEXT": "",
+    "TIMEZONE": "Fuseau horaire",
+    "TITLE": "Titre",
+    "TO": "À",
+    "UPDATE": "Mise à jour",
+    "UPDATE_EMAIL_TEMPLATE": "",
+    "UPLOAD_IN_PROGRESS": "Mise à jour en cours",
+    "VERIFICATION_CODE": "Code de vérification",
+    "VIDEOCONFERENCE": "Conférence vidéo",
+    "YES": "Oui"
+  },
+  "LABEL": {
+    "CREATE_NEW": "Créer un label",
+    "DESCRIPTION": "Description"
+  },
+  "LAYOUT": {
+    "BACK_TO_MAINSITE": "Retour àcoachcare.com",
+    "CONTACT_US": "Nous contacter",
+    "DPA": "GDPR DPA",
+    "HIPAA": "HIPAA BAA",
+    "MASTER_SUBSCRIPTION_AGREEMENT": "Contrat d’abonnement principal",
+    "MSA": "CAP",
+    "POWEREDBY": "{{company}}",
+    "PRIVACY_POLICY": "Politique de confidentialité",
+    "TERMS_OF_SERVICE": "Conditions d’utilisation"
+  },
+  "LINK": {
+    "DPA": "https://www.coachcare.com/dpa/",
+    "HIPAA": "https://www.coachcare.com/hipaa/",
+    "MSA": "https://www.coachcare.com/agreement/",
+    "PRIVACY_POLICY": "https://www.coachcare.com/privacy/",
+    "SUPPORT": "https://coachcare.zendesk.com/hc/en-us/requests/new",
+    "TERMS_OF_SERVICE": "https://www.coachcare.com/terms/"
+  },
+  "MENU": {
+    "HELLO": "Bonjour {{userName}}.",
+    "LANGUAGE": "Langue",
+    "LOGOUT": "Déconnexion",
+    "PROFILE": "Profil",
+    "SEARCH": "Recherche"
+  },
+  "MFA": {
+    "AUTHENTICATOR": "Authentificateur",
+    "AUTHENTICATOR_STEP1": "Installer LastPass Authenticator, Google Authenticator, Microsoft Authenticator ou toute autre application d’authentification de votre choix sur votre téléphone mobile.",
+    "AUTHENTICATOR_STEP2": "Ouvrez l'application et sélectionnez Ajouter un compte.",
+    "AUTHENTICATOR_STEP3": "Scannez le code QR ci-dessous.",
+    "AUTHENTICATOR_STEP4": "Entrez le code de vérification à 6 chiffres généré par votre application Authenticator.",
+    "AUTH_INFO": "Ouvrez l’application d’authentification et consultez le code affiché sur votre compte. Puis, écrivez-le dans le champ ci-dessous pour vérifier votre identité. <br/><br/> Vous pouvez également cliquez sur “Utiliser le code de secours” pour utiliser l’un des codes reçus lors de l’activation de l’authentification à plusieurs facteurs.",
+    "BACKUP_CODE": "Code de secours",
+    "BACKUP_CODES_INFO": "Voici une liste des codes de vérification de secours dans le cas où vous perdriez l'accès au canal d'authentification à deux facteurs que vous avez choisi. <br/> <strong> Gardez-les dans un endroit sûr car ce sera la seule façon de récupérer l'accès à votre compte. Gardez à l'esprit que chaque code ne peut être utilisé qu'une seule fois. </ Strong>",
+    "BACKUP_CODE_INFO": "Écrivez l’un des codes de secours reçus lors de l’activation de l’authentification à plusieurs facteurs puis débarrassez-vous en. Notez que chaque code ne peut être utilisé qu’une seule fois.",
+    "CONTINUE_TO_DASHBOARD": "Continuer vers le tableau de bord",
+    "DOWNLOAD_BACKUP_CODES": "Télécharger les codes de secours",
+    "GOOGLE_AUTHENTICATOR": "Google Authenticator",
+    "LAST_PASS_AUTHENTICATOR": "LastPass Authenticator",
+    "MFA_LOGIN_HELP_PROMPT": "Si vous rencontrez des difficultés pour vous connecter, veuillez <a href=mailto:support@coachcare.com?subject=MFA%20Login%20Assistance&body=I%20need%20support%20metting%20my%20MFA%20login\"> contacter l'assistance </a>. à l'aide.\"",
+    "MICROSOFT_AUTHENTICATOR": "Microsoft Authenticator",
+    "ORG_ENFORCEMENT_INFO": "Votre organisation impose l'utilisation de l'authentification à deux facteurs. S'il vous plaît, sélectionnez un canal d'authentification à deux facteurs pour démarrer le processus d'installation.",
+    "REGEN_QR": "Générer un nouveau QR Code",
+    "RESEND_SMS": "Renvoyer le SMS",
+    "SECRET_KEY_PROMPT": "Ou vous pouvez entrer cette clé secrète dans votre application Authenticator: <br/> <strong> {{ key }} </ strong>",
+    "SEND_BACKUP_CODE": "Envoyer le code de secours",
+    "SEND_VERIFICATION_CODE": "Soumettre le code de vérification",
+    "SMS": "SMS",
+    "SMS_INFO": "Nous avons envoyé un SMS avec un code de vérification à votre numéro de téléphone enregistré. Lorsque vous le recevrez, écrivez-le dans le champ de texte ci-dessous pour vérifier votre identité. <br/> Vous pouvez également cliquer sur « Utilisez le code de sauvegarde » pour utiliser l'un des codes de sauvegarde que vous avez reçus lorsque vous avez activé l’authentification à plusieurs facteurs.",
+    "SMS_PHONE_CONFIRM": "S'il vous plaît, vérifiez votre numéro de téléphone dans le champ ci-dessous. S’il est incorrect, mettez le à jour. Gardez à l'esprit que le téléphone doit être en mesure de recevoir des SMS.",
+    "USE_BACKUP_CODE": "Utiliser le code de secours",
+    "VERIFICATION_CODE": "Code de vérification"
+  },
+  "MOMENTJS": {
+    "LASWEEK": "(Dernier) dddd",
+    "TODAY": "(Aujourd’hui)",
+    "TOMORROW": "(Demain)",
+    "YESTERDAY": "(Hier)"
+  },
+  "NOTIFY": {
+    "EMAIL": {
+      "EMAIL_CASE_SENSITIVE": "Votre adresse-mail est sensible aux majuscules"
+    },
+    "ERROR": {
+      "AVATAR_UPLOAD_FAILED": "Le téléchargement a échoué, veuillez réessayer",
+      "EMAIL_ALREADY_REGISTERED": "L’adresse mail est déjà enregistrée",
+      "EMPTY_USER_LISTING": "Aucun résultat d’utilisateurs",
+      "FILL_THE_FORM": "Veuillez compléter tous les champs avant de continuer",
+      "INVALID_EMAIL": "Veuillez entrer une adresse mail valide",
+      "MFA_NOT_VERIFIED": "Veuillez ré-essayer de vous connecter au bout de 5 minutes",
+      "MIN_CHARS": "Doit contenir au moins ((min)) caractères.",
+      "NO_ACTIVE_CAMPAIGNS": "Il n'y a pas d'associations Liste campagne active",
+      "NO_EMAIL_TEMPLATES": "",
+      "NO_LOG_MESSAGES": "Aucune connexion pour cet utilisateur",
+      "NO_ORGANIZATIONS": "Aucun résultat d’organisation",
+      "NO_RESULTING_LABELS": "Aucun résultat de labels"
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "Assurez-vous que les mots de passe sont identiques.",
+      "HAS_NO_SEQUENCES": "Ne répétez pas le même caractère plus de deux fois",
+      "MIN_LENGTH": "Veuillez entrer un mot de passe contenant au moins 6 caractères",
+      "ONE_LOWERCASE_LETTER": "Veuillez entrer un mot de passe contenant au moins une minuscule.",
+      "ONE_NUMBER": "Veuillez entrer un mot de passe contenant au moins un chiffre.",
+      "ONE_SPECIAL_CHARACTER": "Veuillez entrer un mot de passe contenant au moins un caractère spécial.",
+      "ONE_UPPERCASE_LETTER": "Veuillez entrer un mot de passe contenant au moins une majuscule."
+    },
+    "SOURCE": {
+      "DEFAULT_DELAY": "Données en cours de chargement…",
+      "DEFAULT_TIMEOUT": "Le temps de chargement a été dépassé, veuillez réessayer.",
+      "DEFAULT_WAIT": "Veuillez patienter…",
+      "NO_ASSIGNED_CLIENTS": "Aucun client assigné",
+      "NO_ASSIGNED_PROVIDERS": "Aucun fournisseur assigné",
+      "NO_ASSOCIATIONS": "Aucune association pour le moment",
+      "NO_DATA_AVAILABLE": "Aucune donnée disponible."
+    },
+    "SUCCESS": {
+      "ACC_ACTIVATED": "Compte activé",
+      "ACC_CREATED": "Compte créé",
+      "ACC_DEACTIVATED": "Compte désactivé",
+      "ACC_UPDATED": "Compte mis à jour",
+      "ACTIVE_CAMPAIGN_DELETED": "Association supprimé avec succès Liste campagne active.",
+      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "Association créée avec succès Liste campagne active.",
+      "ACTIVE_CAMPAIGN_UPDATED": "Association Liste campagne active mise à jour.",
+      "CHECK_RESET_EMAIL": "Si nous trouvons un compte associé à l'adresse e-mail que vous avez entré, nous vous enverrons un nouveau mot de passe par e-mail dans les prochaines minutes. Si vous ne recevez pas de courriel, assurez-vous de vérifier votre dossier spam, ou essayez d'autres adresses e-mail que vous pourriez avoir utilisé pour le compte.",
+      "CLINIC_REMOVED": "Clinique effacée",
+      "EMAIL_TEMPLATE_SAVED": "",
+      "LABEL_ACTIVATED": "Phase activé",
+      "LABEL_CREATED": "Phase créé",
+      "LABEL_DEACTIVATED": "Phase désactivé",
+      "LABEL_UPDATED": "Phase mis à jour",
+      "MFA_VERIFIED": "Canal d’authentification à double facteur vérifié avec succès",
+      "ORG_ACTIVATED": "Clinique activée",
+      "ORG_ADDED": "Clinique ajoutée",
+      "ORG_CREATED": "Clinique crée",
+      "ORG_DEACTIVATED": "Clinique désactivée",
+      "ORG_DISOCCIATED": "Clinique dissociée",
+      "ORG_UPDATED": "Clinique mise à jour",
+      "PASSWORD_RESET": "Mot de passe réinitialisé avec succès ! <br /< Vous pouvez l’utiliser pour vous connecter.",
+      "PASSWORD_SETTED": "Mot de passe créé avec succès !<br />Vous pouvez maintenant vous connecter.",
+      "PERM_UPDATED": "Autorisation mise à jour",
+      "PHASE_UPDATED": "Phase mise à jour avec succès.",
+      "PHONE_NUMBER_UPDATED": "numéro de téléphone mis à jour avec succès.",
+      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Fournisseur associé avec succès à la liste de campagne active.",
+      "SETTINGS_UPDATED": "Paramètres mis à jour"
+    }
+  },
+  "PAGE": {
+    "APPLE": {
+      "ACCOUNT": "Compte développeur Apple"
+    },
+    "APP_NOT_FOUND": {
+      "REDIRECTING": "Redirection…",
+      "TITLE": "App introuvable"
+    },
+    "IMPLEMENTATION": {
+      "MOBILE": "Implémentation de l’application mobile"
+    },
+    "MEETING_CANCEL": {
+      "BUTTON_CANCEL": "ANNULER RENCONTRE",
+      "BUTTON_KEEP": "MAINTENIR RENCONTRE",
+      "CONFIRM_PROMPT": "Êtes-vous sûr de vouloir annuler la rencontre du <b>{{day}}</b> à <b>{{time}}</b>?",
+      "MESSAGE_ERROR": "Erreur lors de l’annulation de la rencontre,<br />veuillez réessayer.",
+      "MESSAGE_KEPT": "Votre rencontre n’a pas été changée pour le <b>{{day}}</b> à <b>{{time}}</b>.",
+      "MESSAGE_SUCCESS": "Votre rencontre a été annulée. Veuillez utiliser l’application pour planifier une nouvelle rencontre.",
+      "TITLE": "ANNULER RENCONTRE",
+      "TITLE_KEPT": "Rencontre maintenue",
+      "TITLE_SUCCESS": "Rencontre annulée"
+    },
+    "NOT_FOUND": {
+      "CONTENT": "Veuillez contacter le <a href=https://coachcare.zendesk.com/hc/en-us/requests/new\"> Support CoachCare </a> pour plus d'assistance. \"",
+      "TITLE": "Page introuvable"
+    },
+    "REGISTER": {
+      "HEADER": {
+        "APOLLO": {
+          "TITLE": "Enregistrez-vous sur la plate-forme Apollo Care"
+        },
+        "DEFAULT": {
+          "TITLE": "CONSTRUISONS VOTRE {{displayName}} Plate-forme"
+        },
+        "INHEALTH": {
+          "TITLE": "Inscrivez-vous sur la plateforme inHealth"
+        },
+        "SHAKEIT": {
+          "TITLE": "Enregistrez-vous sur la plate-forme Shake It"
+        }
+      },
+      "HERO": {
+        "APOLLO": {
+          "POWERED_BY": "Distribué par CoachCare",
+          "WELCOME_MESSAGE": "La plate-forme Apollo Care met en avant des cliniques de perte de poids via une application mobile, un tableau de bord pour coach et des appareils connectés combinés en une plate-forme intégrée afin d’améliorer les soins aux patients et d’augmenter l’efficacité des cliniques.",
+          "WELCOME_TITLE": "Bienvenue sur Apollo Care !"
+        },
+        "BA": {
+          "WELCOME_MESSAGE": "La plate-forme Bariatric Advantage alimente les cliniques de perte de poids avec une application mobile, un tableau de bord pour entraîneur et des appareils connectés, réunis dans une plate-forme intégrée pour améliorer les soins aux patients et accroître l'efficacité de la clinique.",
+          "WELCOME_TITLE": "Bienvenue sur Bariatric Advantage !"
+        },
+        "DEFAULT": {
+          "CLINIC_REGISTRATION": "Enregistrement de clinique"
+        },
+        "GWLP": {
+          "WELCOME_MESSAGE": "La plate-forme Global Weight Loss alimente les cliniques de perte de poids avec une application mobile, un tableau de bord pour entraîneur et des appareils connectés, réunis dans une plate-forme intégrée pour améliorer les soins aux patients et accroître l'efficacité de la clinique.",
+          "WELCOME_TITLE": "Bienvenue sur Global Weight Loss !"
+        },
+        "INHEALTH": {
+          "WELCOME_MESSAGE": "La plate-forme inHealth alimente les cliniques de perte de poids avec une application mobile, un tableau de bord pour entraîneur et des appareils connectés, combinés dans une plate-forme intégrée pour améliorer les soins aux patients et accroître l'efficacité des cliniques.",
+          "WELCOME_TITLE": "Bienvenue sur inHealth !"
+        },
+        "NUTRIMOST": {
+          "WELCOME_MESSAGE": "La plate-forme Nutrimost alimente les cliniques de perte de poids avec une application mobile, un tableau de bord pour entraîneur et des appareils connectés, combinés dans une plate-forme intégrée pour améliorer les soins aux patients et accroître l'efficacité des cliniques.",
+          "WELCOME_TITLE": "Bienvenue sur Nutrimost !"
+        },
+        "SHAKEIT": {
+          "POWERED_BY": "Distribué par CoachCare",
+          "WELCOME_MESSAGE": "La plate-forme Shake It met en avant des cliniques de perte de poids via une application mobile, un tableau de bord pour coach et des appareils connectés combinés en une plate-forme intégrée afin d’améliorer les soins aux patients et d’augmenter l’efficacité des cliniques.",
+          "WELCOME_TITLE": "Bienvenue sur Shake It !"
+        }
+      },
+      "STEP1": {
+        "APOLLO": {
+          "COMPLETE_SIGNUP": "Veuillez remplir ce formulaire d’inscription rapide et facile afin de recevoir un accès à votre application Apollo Care ainsi qu’aux plate-formes appareil et web."
+        },
+        "DEFAULT": {
+          "ACCOUNT_INFORMATION": "Informations du compte",
+          "CLINIC_INFORMATION": "Informations de la clinique",
+          "COMPLETE_SIGNUP": "Une fois votre inscription terminée, nous entamerons le processus de mise en œuvre.",
+          "MOBILE_APP_TYPE": "Type d'application mobile",
+          "MOB_APP_TYPE_CHOOSE": "Veuillez sélectionner le type d'application mobile que vous souhaitez proposer à vos patients en cliquant sur votre option préférée.",
+          "ORGANIZATION_DETAILS": "D’abord, dites-nous en un peu plus sur votre organisation et la personne à contacter.",
+          "WELCOME_PLATFORM_PAGE": "Bienvenue sur la {{clinic}} page d'inscription à la plateforme."
+        },
+        "INHEALTH": {
+          "COMPLETE_SIGNUP": "Veuillez remplir ce formulaire d’inscription rapide et facile pour avoir accès à votre application inHealth, à votre plate-forme Web et à votre plate-forme."
+        },
+        "SHAKEIT": {
+          "COMPLETE_SIGNUP": "Veuillez remplir ce formulaire d’inscription rapide et facile afin de recevoir un accès à votre application Shake It ainsi qu’aux plate-formes appareil et web."
+        }
+      },
+      "STEP2": {
+        "BILLING_INFORMATION": "Informations de facturation",
+        "CONFIRMATION_BOX_MESSAGE": "En cochant cette case et en sélectionnant Continuer, j'accepte d'être légalement lié par ce bon de commande. La souscription à ce bon de commande est pour un an et n'est pas annulable avant l'expiration du terme. Ce formulaire de commande est régi par les <a href={{ msaLink }Name\" target=\"_blank\"> contrat-clé d'abonnement </a>. \"",
+        "PAYMENT_INFO": "Vous n’avez plus qu’à entrer vos informations de paiement pour accéder à votre nouvelle plateforme personnalisée.",
+        "SKIP": "Passer"
+      },
+      "STEP3": {
+        "APOLLO": {
+          "ALL_DONE": "<strong>Voilà!<strong>",
+          "CUSTOM_COACHCARE": "Bienvenue sur la plate-forme Apollo Care distribuée par CoachCare ! Vous recevrez bientôt un e-mail contenant un lien qui permet l’activation du tableau de bord de votre compte administrateur, le choix d’un mot de passe et la connexion à votre compte. De plus, vous recevrez séparément une confirmation par mail contenant les informations relatives à votre clinique.",
+          "QUESTIONS": "Si vous avez des questions, n'hésitez pas à contacter notre équipe de mise en œuvre à l'adresse <a href=mailto:implementation@coachcare.com\">implementation@coachcare.com</a> ou à votre contact commercial. \"",
+          "WELCOME": "Nous sommes ravis de commencer à travailler avec vous et encore une fois, bienvenue sur la plate-forme Apollo Care !"
+        },
+        "DEFAULT": {
+          "ALL_DONE": "<strong>Voilà!<strong>",
+          "CUSTOM_COACHCARE": "Votre application {{displayName}} personnalisée, votre plateforme Web et votre appareil seront prêts dans quelques semaines seulement. D'ici là, nous fournirons des mises à jour régulières sur nos progrès dans la construction de votre plateforme.",
+          "EMAIL_CONFIRMATION": "Vous recevrez bientôt un e-mail contenant un lien qui permet l’activation du tableau de bord de votre compte administrateur, le choix d’un mot de passe et la connexion à votre compte. De plus, vous recevrez séparément une confirmation par mail contenant les informations relatives à votre clinique. Le gestionnaire de votre compte se présentera également à vous et répondra à vos questions.",
+          "EXCITED_WORKING_AGAIN": "",
+          "IMPLEMENTATION_SPECIALIST": "",
+          "NEAR_COMPLETION": "Lorsque nous aurons presque terminé, nous vous contacterons pour planifier une session d’entraînement avec vos coachs et pour paramétrer leurs comptes, ainsi que finaliser votre commande d’appareils.",
+          "REGISTER_NEW_CLINIC": "Enregistrer une nouvelle clinique",
+          "WELCOME_PLATFORM": ""
+        },
+        "ITG": {
+          "CONFIRMATION": "Toutes nos félicitations! Votre organisation a été enregistrée avec succès. Un spécialiste de la mise en œuvre vous contactera sous peu pour planifier une formation en direct, si vous le souhaitez."
+        },
+        "SHAKEIT": {
+          "ALL_DONE": "<strong>Voilà!<strong>",
+          "CUSTOM_COACHCARE": "Bienvenue sur la plate-forme Shake It distribuée par CoachCare ! Vous recevrez bientôt un e-mail contenant un lien qui permet l’activation du tableau de bord de votre compte administrateur, le choix d’un mot de passe et la connexion à votre compte. De plus, vous recevrez séparément une confirmation par mail contenant les informations relatives à votre clinique.",
+          "QUESTIONS": "Si vous avez des questions, n'hésitez pas à contacter notre équipe de mise en œuvre à l'adresse <a href=mailto:implementation@coachcare.com\">implementation@coachcare.com</a> ou à votre contact commercial. \"",
+          "WELCOME": "Nous sommes ravis de commencer à travailler avec vous et encore une fois, bienvenue sur la plate-forme Shake It!"
+        }
+      }
+    },
+    "UNSUPPORTED_BROWSER": {
+      "DESCRIPTION": "Nous vous recommandons de changer votre navigateur par défaut par l'un de ceux énumérés ci-dessous.",
+      "TITLE": "Votre navigateur actuel n’est pas pris en charge par cette application."
+    }
+  },
+  "PERMS": {
+    "ACCESSALL": "Voir tout",
+    "ACCESSALL_HELP": "<p> La permission <b>’VOIR TOUT'</b> permet à un coach de voir tous les clients et toutes les données clients associés à la clinique sélectionnée. Il s’agit d’une fonctionnalité appropriée si vos clients consultent différents coachs dans votre clinique ou si vos coachs se remplacent fréquemment auprès des patients. Cela peut également servir à l’équipe en charge du service client.</p>",
+    "ADMIN": "Administrateur",
+    "ADMIN_HELP": "<p>La permission <b>'ADMIN'</b> permet à un coach d’ajouter, supprimer et gérer les comptes client et coach, ainsi que de modifier les paramètres de la clinique. Il s’agit d’une fonctionnalité destinée aux employés qui s’occupent de la gestion des coachs, du service client et de l’inscription de nouveau clients.</p>",
+    "CLIENT_PHI": "Client PHI",
+    "_TITLE": "Autorisations"
+  },
+  "PHASE": {
+    "DISABLED": "Désactivé",
+    "DISASSOCIATE": "Dissocier",
+    "ENABLED": "Activée",
+    "IS_INHERITED": "Cet ensemble est disponible pour votre clinique depuis une clinique parent"
+  },
+  "PROMPT": {
+    "ACCS": {
+      "CONFIRM_ACTIVATE": "Activer compte",
+      "CONFIRM_ACTIVATE_PROMPT": "Voulez-vous vraiment activer « {{item}} »?",
+      "CONFIRM_DEACTIVATE": "Désactiver compte",
+      "CONFIRM_DEACTIVATE_PROMPT": "Voulez-vous vraiment désactiver « {{item}} »?",
+      "DEACTIVATE_MFA": "Désactiver le canal d’authentification à double facteur",
+      "DEACTIVATE_MFA_PROMPT": "Vous êtes sur le point de désactiver le canal d'authentification à deux facteurs pour ce compte. Cela signifie que l'utilisateur ne sera pas invité à entrer un code de vérification quand il essaie de se connecter ou de réinitialiser son mot de passe. <br/> <strong> Êtes-vous sûr de vouloir continuer? </ Strong>"
+    },
+    "EMAIL_TEMPLATE": {
+      "DELETE": "",
+      "DELETE_PROMPT": ""
+    },
+    "LABEL": {
+      "CONFIRM_ACTIVATE": "Activer label",
+      "CONFIRM_ACTIVATE_PROMPT": "Voulez-vous vraiment activer « {{item}} »?",
+      "CONFIRM_DEACTIVATE": "Désactiver label",
+      "CONFIRM_DEACTIVATE_PROMPT": "Voulez-vous vraiment désactiver « {{item}} »?"
+    },
+    "LABELS": {
+      "DISABLE": "Désactiver la phase",
+      "DISABLE_PROMPT": "Voulez-vous vraiment désactiver la phase '{{label}}'?",
+      "DISOCCIATE": "Phase de dissociation",
+      "DISOCCIATE_PROMPT": "Voulez-vous vraiment dissocier la phase '{{label}}'?",
+      "ENABLE": "Activer la phase",
+      "ENABLE_PROMPT": "Voulez-vous vraiment activer la phase '{{label}}'?"
+    },
+    "ORGS": {
+      "CONFIRM_ACTIVATE": "Activer clinique",
+      "CONFIRM_ACTIVATE_PROMPT": "Voulez-vous vraiment activer « {{item}} »?",
+      "CONFIRM_DEACTIVATE": "Désactiver clinique",
+      "CONFIRM_DEACTIVATE_PROMPT": "Voulez-vous vraiment désactiver « {{item}} »?",
+      "CONFIRM_REMOVE_CHILD": "Effacer enfant",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "L’organisation d’enfant n’aura aucun parent après cette suppression",
+      "CONFIRM_REMOVE_ORG": "Désactiver clinique",
+      "CONFIRM_REMOVE_ORG_PROMPT": "Voulez-vous vraiment désactiver « {{item}} »?",
+      "CONFIRM_REMOVE_PARENT": "Effacer parent",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "Cette organisation n’aura aucun parent après cette suppression",
+      "DISOCCIATE": "Dissocier clinique",
+      "DISOCCIATE_PROMPT": "Voulez-vous vraiment dissocier « {{item}} »?"
+    }
+  },
+  "REGISTER": {
+    "CLINIC": {
+      "AMOUNT_PER_MONTH": "${{amount}} par mois",
+      "BILLED_ANNUALLY": "(Facturé ${{amount}} par an)",
+      "BILLED_MONTHLY": "(Facturé ${{amount}} mois)",
+      "PRICING": "établissement des prix",
+      "REQUEST_ORDER_FORM": "Formulaire de demande de commande pour les prix et les conditions",
+      "VIEW_BENEFITS_PRICING": "Voir tous les avantages et prix",
+      "YOUR_PLAN_SELECTION": "Votre plan de sélection"
+    },
+    "STEP1": {
+      "ROBARD": {
+        "MOB_APP_1_DESCRIPTION": "Les patients téléchargeront l'application MyHealthyJourney et saisiront le code unique à 4 chiffres de votre clinique pour accéder à toutes les fonctionnalités de l'application. L'application mobile et le tableau de bord de votre fournisseur seront en ligne dans les 48 heures suivant la réception du formulaire de mise en œuvre de la plateforme.",
+        "MOB_APP_1_TITLE": "MyHealthyJourney App",
+        "MOB_APP_2_DESCRIPTION": "Les patients téléchargeront l'application personnalisée de votre clinique pour accéder à toutes les fonctionnalités de l'application. Ce processus obligera votre clinique à remplir le formulaire de mise en œuvre de la plateforme et à demander un <a href=\"https://dashboard.coachcare.com/register/apple?baseOrg=4118\" target=\"_blank\">Apple Compte développeur</a>.",
+        "MOB_APP_2_SMALLTEXT": "Ce processus peut prendre jusqu'à trois semaines avant que l'application ne soit disponible pour que vos patients puissent l'utiliser.",
+        "MOB_APP_2_TITLE": "Application personnalisée de marque"
+      }
+    }
+  },
+  "ROLE": {
+    "ADMIN": "Administrateur",
+    "COACH": "Coach",
+    "MANAGER": "Manager",
+    "PATIENT": "Patient"
+  },
+  "SECTION": {
+    "APOLLOUS": {
+      "PACKAGE": {
+        "ACTIVITY_SLEEP": "Tracker d’activité et de sommeil",
+        "APOLLO_COACHING_SERVICES": "Services de coaching Apollo",
+        "AVAILABLE_PATIENT_PACKAGES": "FORFAITS PATIENT DISPONIBLES",
+        "AVAILABLE_PATIENT_PACKAGES_DETAILS": "Vous pourrez choisir un forfait pour chaque patient dans le tableau de bord Web Apollo Care",
+        "BODY_COMPOSITION_SCALE": "Balance de composition corporelle",
+        "COACH_PLUS": "Care plus",
+        "COACH_PLUS_SERVICE": "Care Plus avec Service de Coaching Apollo",
+        "MOBILE_APP": "Application mobile",
+        "OPTIONAL_ADD": "Option facultative:"
+      }
+    },
+    "APOLLO_INT": {
+      "PACKAGE": {
+        "ACTIVITY_BODY": "Tracker d’activité & Balance de composition corporelle",
+        "APOLLO_CARE_BRONE": "Apollo Care BRONZE",
+        "APOLLO_CARE_GOLD": "Apollo Care OR",
+        "APOLLO_CARE_SILVER": "Apollo Care ARGENT",
+        "AVAILABLE_PACKAGES": "FORFAITS DISPONIBLES",
+        "OPTIONAL_ADD_ON": "Option facultative:",
+        "UNLIMITED_PATIENTS": "patients illimités",
+        "UP_TO_25": "jusqu'à 25 patients",
+        "UP_TO_75": "jusqu'à 75 patients"
+      }
+    }
+  },
+  "SELECTOR": {
+    "AUTOCOMPLETE": {
+      "NO_MATCHING_ACCOUNTS": "Aucun compte correspondant",
+      "NO_MATCHING_ADMINS": "Aucun administrateur correspondant",
+      "NO_MATCHING_CLIENTS": "Aucun client correspondant",
+      "NO_MATCHING_PROVIDERS": "Aucun fournisseur correspondant"
+    },
+    "COUNTRIES": {
+      "AE": "Émirats Arabes Unis",
+      "AU": "Australie",
+      "BH": "Bahrain",
+      "CA": "Canada",
+      "CL": "Chili",
+      "CO": "Colombie",
+      "DK": "Danemark",
+      "ES": "Espagne",
+      "GB": "Royaume Uni",
+      "IE": "Irlande",
+      "IL": "Israël",
+      "KW": "Koweit",
+      "LB": "Liban",
+      "MX": "Mexique",
+      "NZ": "Nouvelle-Zélande",
+      "OM": "Oman",
+      "SA": "Arabie Saoudite",
+      "US": "États-Unis"
+    },
+    "GENDER": {
+      "FEMALE": "Femme",
+      "MALE": "Homme"
+    },
+    "PHONE_TYPE": {
+      "ANDROID": "Android",
+      "IOS": "iOS"
+    },
+    "STATUS": {
+      "ACTIVE": "Actif",
+      "ALL": "Tout",
+      "INACTIVE": "Inactif"
+    },
+    "UNITSYS": {
+      "METRIC": "Métrique",
+      "UK": "Système impérial",
+      "US": "US"
+    }
+  },
+  "SIDENAV": {
+    "ACCOUNTS": "Comptes",
+    "ADMINS": "Administrateurs",
+    "ALERTS": "Alertes",
+    "COACHES": "Coachs",
+    "LABELS": "Phases",
+    "LIBRARY": "Bibliothèque digitale",
+    "MARKETING": "Commercialisation",
+    "MESSAGES": "Messages",
+    "NOTIFICATIONS": "Notifications",
+    "ORGANIZATIONS": "Organisations",
+    "OVERVIEW": "Vue d’ensemble",
+    "PATIENTS": "Patients",
+    "REPORTS": "Rapports",
+    "RESOURCES": "Ressources",
+    "SCHEDULE": "Planning",
+    "SCHEDULE_AVAILABLE": "Gérer la disponibilité",
+    "SCHEDULE_VIEW": "Voir planning",
+    "SUPPORT": "Aide",
+    "USER_STATISTICS": "Statistiques utilisateur"
+  }
+}

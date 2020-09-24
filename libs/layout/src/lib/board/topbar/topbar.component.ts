@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { TranslationsObject } from '@coachcare/backend/shared';
 import { _ } from '@coachcare/backend/shared';
 import { LanguagesDialog } from '@coachcare/common/dialogs/core';
 import {
   AuthService,
   ConfigService,
-  LayoutService
+  LayoutService,
 } from '@coachcare/common/services';
 import { AppPalette } from '@coachcare/common/shared';
 import { User } from 'selvera-api';
@@ -14,7 +14,7 @@ import { User } from 'selvera-api';
 @Component({
   selector: 'ccr-topbar',
   templateUrl: './topbar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopbarComponent {
   @Input() translations: TranslationsObject = {};
@@ -36,9 +36,9 @@ export class TopbarComponent {
   selectLanguage() {
     this.dialog.open(LanguagesDialog, {
       data: {
-        title: _('GLOBAL.SELECT_LANGUAGE')
+        title: _('GLOBAL.SELECT_LANGUAGE'),
       },
-      panelClass: 'ccr-lang-dialog'
+      panelClass: 'ccr-lang-dialog',
     });
   }
 

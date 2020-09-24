@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import {
   ActiveCampaignDataSource,
-  ActiveCampaignListItem
+  ActiveCampaignListItem,
 } from '@coachcare/backend/data';
 import { getterPaginator } from '@coachcare/backend/model';
 import { _, SelectorOption } from '@coachcare/backend/shared';
@@ -17,7 +17,7 @@ import { EditActiveCampaignDialogComponent } from '../../dialogs';
 @Component({
   selector: 'ccr-organizations-active-campaign-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 export class OrganizationActiveCampaignTableComponent
   implements OnDestroy, OnInit {
@@ -32,22 +32,22 @@ export class OrganizationActiveCampaignTableComponent
     'organizationId',
     'organizationName',
     'status',
-    'actions'
+    'actions',
   ];
   public form: FormGroup;
   public statusOptions: SelectorOption[] = [
     {
       value: 'all',
-      viewValue: _('GLOBAL.ALL')
+      viewValue: _('GLOBAL.ALL'),
     },
     {
       value: 'active',
-      viewValue: _('GLOBAL.ACTIVE')
+      viewValue: _('GLOBAL.ACTIVE'),
     },
     {
       value: 'inactive',
-      viewValue: _('GLOBAL.INACTIVE')
-    }
+      viewValue: _('GLOBAL.INACTIVE'),
+    },
   ];
 
   constructor(
@@ -70,7 +70,7 @@ export class OrganizationActiveCampaignTableComponent
       false,
       this.form.controls.status.valueChanges.pipe(debounceTime(200)),
       () => ({
-        status: this.form.value.status
+        status: this.form.value.status,
       })
     );
   }
@@ -81,12 +81,12 @@ export class OrganizationActiveCampaignTableComponent
         data: {
           title: _('ADMIN.ORGS.DELETE_LIST_ASSOCIATION'),
           content: _('ADMIN.ORGS.DELETE_LIST_ASSOCIATION_CONTENT'),
-          contentParams: { list: entry.name }
+          contentParams: { list: entry.name },
         },
-        width: '60vw'
+        width: '60vw',
       })
       .afterClosed()
-      .subscribe(async confirm => {
+      .subscribe(async (confirm) => {
         try {
           if (!confirm) {
             return;
@@ -105,10 +105,10 @@ export class OrganizationActiveCampaignTableComponent
     this.dialog
       .open(EditActiveCampaignDialogComponent, {
         data: { activeCampaign: entry },
-        width: '60vw'
+        width: '60vw',
       })
       .afterClosed()
-      .subscribe(refresh => {
+      .subscribe((refresh) => {
         if (!refresh) {
           return;
         }
@@ -119,7 +119,7 @@ export class OrganizationActiveCampaignTableComponent
 
   private createForm(): void {
     this.form = this.fb.group({
-      status: ['all', Validators.required]
+      status: ['all', Validators.required],
     });
   }
 }

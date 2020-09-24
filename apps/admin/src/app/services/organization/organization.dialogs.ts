@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 
 import { OrganizationsDatabase } from '@coachcare/backend/data';
 import { Entity, NamedEntity } from '@coachcare/backend/services';
@@ -18,18 +18,18 @@ export class OrganizationDialogs {
       const data: PromptDialogData = {
         title: _('PROMPT.ORGS.CONFIRM_ACTIVATE'),
         content: _('PROMPT.ORGS.CONFIRM_ACTIVATE_PROMPT'),
-        contentParams: { item: `${item.name}` }
+        contentParams: { item: `${item.name}` },
       };
 
       this.dialog
         .open(PromptDialog, { data: data })
         .afterClosed()
-        .subscribe(confirm => {
+        .subscribe((confirm) => {
           if (confirm) {
             this.database
               .update({
                 id: item.id,
-                isActive: true
+                isActive: true,
               })
               .then(resolve)
               .catch(reject);
@@ -45,18 +45,18 @@ export class OrganizationDialogs {
       const data: PromptDialogData = {
         title: _('PROMPT.ORGS.CONFIRM_DEACTIVATE'),
         content: _('PROMPT.ORGS.CONFIRM_DEACTIVATE_PROMPT'),
-        contentParams: { item: `${item.name}` }
+        contentParams: { item: `${item.name}` },
       };
 
       this.dialog
         .open(PromptDialog, { data: data })
         .afterClosed()
-        .subscribe(confirm => {
+        .subscribe((confirm) => {
           if (confirm) {
             this.database
               .update({
                 id: item.id,
-                isActive: false
+                isActive: false,
               })
               .then(resolve)
               .catch(reject);
@@ -72,18 +72,15 @@ export class OrganizationDialogs {
       const data: PromptDialogData = {
         title: _('PROMPT.ORGS.CONFIRM_REMOVE_ORG'),
         content: _('PROMPT.ORGS.CONFIRM_REMOVE_ORG_PROMPT'),
-        contentParams: { item: `${item.name}` }
+        contentParams: { item: `${item.name}` },
       };
 
       this.dialog
         .open(PromptDialog, { data })
         .afterClosed()
-        .subscribe(confirm => {
+        .subscribe((confirm) => {
           if (confirm) {
-            this.database
-              .delete(item.id)
-              .then(resolve)
-              .catch(reject);
+            this.database.delete(item.id).then(resolve).catch(reject);
           } else {
             reject();
           }
@@ -96,12 +93,12 @@ export class OrganizationDialogs {
       this.dialog
         .open(PromptDialog, { data })
         .afterClosed()
-        .subscribe(confirm => {
+        .subscribe((confirm) => {
           if (confirm) {
             this.database
               .update({
                 id: item.id,
-                parentOrganizationId: null
+                parentOrganizationId: null,
               })
               .then(resolve)
               .catch(reject);

@@ -6,10 +6,10 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { _ } from '@coachcare/backend/shared';
 import { ConfirmDialog } from '@coachcare/common/dialogs/core';
 import { StripeService } from '@coachcare/common/services';
@@ -21,7 +21,7 @@ import { get } from 'lodash';
 @Component({
   selector: 'ccr-page-register-clinic-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  styleUrls: ['./payment.component.scss'],
 })
 export class RegisterClinicPaymentPageComponent
   implements OnInit, AfterViewInit {
@@ -56,7 +56,7 @@ export class RegisterClinicPaymentPageComponent
     if (this.context.organizationId) {
       this.store
         .pipe(select(OrgPrefSelectors.selectOrgPref))
-        .subscribe(pref => {
+        .subscribe((pref) => {
           this.linkMsa = get(pref, 'mala.custom.links.msa');
         });
     }
@@ -74,11 +74,11 @@ export class RegisterClinicPaymentPageComponent
       base: {
         fontSize: '16px',
         letterSpacing: '0.02rem',
-        textTransform: 'none'
-      }
+        textTransform: 'none',
+      },
     };
     this.cardNumber = this.elements.create('cardNumber', {
-      style: style
+      style: style,
     });
     const cardExpiry = this.elements.create('cardExpiry', { style: style });
     const cardCvc = this.elements.create('cardCvc', { style: style });
@@ -138,8 +138,8 @@ export class RegisterClinicPaymentPageComponent
         this.dialog.open(ConfirmDialog, {
           data: {
             title: _('GLOBAL.ERROR'),
-            content: this.errorMessage
-          }
+            content: this.errorMessage,
+          },
         });
         this.isProcessing = false;
       });

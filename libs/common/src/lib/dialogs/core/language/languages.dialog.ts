@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { CCRFacade } from '@coachcare/backend/store';
@@ -12,8 +12,8 @@ import { localeList } from './languages.locales';
   templateUrl: 'languages.dialog.html',
   styleUrls: ['languages.dialog.scss'],
   host: {
-    class: 'ccr-dialog ccr-plain'
-  }
+    class: 'ccr-dialog ccr-plain',
+  },
 })
 export class LanguagesDialog implements OnDestroy {
   locales: any;
@@ -36,7 +36,7 @@ export class LanguagesDialog implements OnDestroy {
     this.lang = this.language.get();
     this.store.lang$
       .pipe(untilDestroyed(this))
-      .subscribe(lang => (this.lang = lang || this.lang));
+      .subscribe((lang) => (this.lang = lang || this.lang));
   }
 
   ngOnDestroy() {}

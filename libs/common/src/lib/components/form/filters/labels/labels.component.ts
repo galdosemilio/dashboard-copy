@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/layout';
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/common/material';
 import { AppDataSource } from '@coachcare/backend/model';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -8,8 +8,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   selector: 'ccr-filter-labels',
   templateUrl: './labels.component.html',
   providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'auto' } }
-  ]
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'auto' } },
+  ],
 })
 export class LabelsFilterComponent implements OnInit {
   form: FormGroup;
@@ -32,7 +32,7 @@ export class LabelsFilterComponent implements OnInit {
 
   setup() {
     this.form = this.builder.group({
-      includeInActive: null
+      includeInActive: null,
     });
 
     this.source.addOptional(

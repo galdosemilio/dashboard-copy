@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@coachcare/layout';
+import { MatDialogRef } from '@coachcare/common/material';
 import { LabelsDatabase } from '@coachcare/backend/data';
 import { FormUtils } from '@coachcare/backend/shared';
 import { NotifierService } from '@coachcare/common/services';
@@ -9,8 +9,8 @@ import { NotifierService } from '@coachcare/common/services';
   selector: 'ccr-organizations-create-label-dialog',
   templateUrl: './create-label.dialog.html',
   host: {
-    class: 'ccr-dialog ccr-plain'
-  }
+    class: 'ccr-dialog ccr-plain',
+  },
 })
 export class CreateLabelDialogComponent implements OnInit {
   public form: FormGroup;
@@ -46,7 +46,7 @@ export class CreateLabelDialogComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       title: ['', Validators.required],
-      description: ['']
+      description: [''],
     });
   }
 }

@@ -2,43 +2,43 @@ import { ENTER, ESCAPE, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   Overlay,
   OverlayContainer,
-  ScrollDispatcher
+  ScrollDispatcher,
 } from '@angular/cdk/overlay';
 import {
   createKeyboardEvent,
   dispatchEvent,
   dispatchFakeEvent,
   dispatchKeyboardEvent,
-  dispatchMouseEvent
+  dispatchMouseEvent,
 } from '@coachcare/testing';
 import {
   Component,
   FactoryProvider,
   Type,
   ValueProvider,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import {
   ComponentFixture,
   fakeAsync,
   flush,
   inject,
-  TestBed
+  TestBed,
 } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DEC, JAN, JUL, JUN, SEP } from '@coachcare/layout';
-import { MatFormField, MatFormFieldModule } from '@coachcare/layout';
+import { MatFormField, MatFormFieldModule } from '@coachcare/common/material';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
-import { MatInputModule } from '@coachcare/layout';
+import { MatInputModule } from '@coachcare/common';
 import { MatDatepicker } from './datepicker';
 import { MatDatepickerInput } from './datepicker-input';
 import { MatDatepickerToggle } from './datepicker-toggle';
 import {
   MAT_DATEPICKER_SCROLL_STRATEGY,
   MatDatepickerIntl,
-  MatDatepickerModule
+  MatDatepickerModule,
 } from './index';
 import { Directionality } from '@angular/cdk/bidi';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
@@ -62,16 +62,16 @@ describe('MatDatepicker', () => {
         MatInputModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
-        ...imports
+        ...imports,
       ],
       providers,
-      declarations: [component, ...entryComponents]
+      declarations: [component, ...entryComponents],
     });
 
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [entryComponents]
-      }
+        entryComponents: [entryComponents],
+      },
     }).compileComponents();
 
     return TestBed.createComponent(component);
@@ -456,14 +456,14 @@ describe('MatDatepicker', () => {
             [
               {
                 provide: ScrollDispatcher,
-                useValue: { scrolled: () => scrolledSubject }
+                useValue: { scrolled: () => scrolledSubject },
               },
               {
                 provide: MAT_DATEPICKER_SCROLL_STRATEGY,
                 deps: [Overlay],
                 useFactory: (overlay: Overlay) => () =>
-                  overlay.scrollStrategies.close()
-              }
+                  overlay.scrollStrategies.close(),
+              },
             ]
           );
 
@@ -504,7 +504,7 @@ describe('MatDatepicker', () => {
     describe('datepicker with too many inputs', () => {
       it('should throw when multiple inputs registered', fakeAsync(() => {
         let fixture = createComponent(MultiInputDatepicker, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         expect(() => fixture.detectChanges()).toThrow();
       }));
@@ -564,7 +564,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerWithStartViewYear, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
 
@@ -616,7 +616,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerWithStartViewMultiYear, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
 
@@ -819,7 +819,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerWithFormControl, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
 
@@ -1018,7 +1018,7 @@ describe('MatDatepicker', () => {
     describe('datepicker with custom mat-datepicker-toggle icon', () => {
       it('should be able to override the mat-datepicker-toggle icon', fakeAsync(() => {
         const fixture = createComponent(DatepickerWithCustomIcon, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
 
@@ -1094,7 +1094,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerWithMinAndMaxValidation, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
 
@@ -1178,7 +1178,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerWithFilterAndValidation, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
 
@@ -1232,7 +1232,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerWithChangeAndInputEvents, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
 
@@ -1325,7 +1325,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerWithISOStrings, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         testComponent = fixture.componentInstance;
       }));
@@ -1391,7 +1391,7 @@ describe('MatDatepicker', () => {
 
       beforeEach(fakeAsync(() => {
         fixture = createComponent(DatepickerOpeningOnFocus, [
-          MatNativeDateModule
+          MatNativeDateModule,
         ]);
         fixture.detectChanges();
         testComponent = fixture.componentInstance;
@@ -1447,8 +1447,8 @@ describe('MatDatepicker', () => {
           [
             {
               provide: Directionality,
-              useValue: { value: 'rtl' }
-            }
+              useValue: { value: 'rtl' },
+            },
           ]
         );
 
@@ -1471,8 +1471,8 @@ describe('MatDatepicker', () => {
           [
             {
               provide: Directionality,
-              useFactory: () => dirProvider
-            }
+              useFactory: () => dirProvider,
+            },
           ]
         );
 
@@ -1508,8 +1508,8 @@ describe('MatDatepicker', () => {
           [
             {
               provide: Directionality,
-              useValue: { value: 'rtl' }
-            }
+              useValue: { value: 'rtl' },
+            },
           ]
         );
 
@@ -1702,7 +1702,7 @@ describe('MatDatepicker', () => {
       [attr.disabled]="disabled"
       [opened]="opened"
     ></mat-datepicker>
-  `
+  `,
 })
 class StandardDatepicker {
   opened = false;
@@ -1718,14 +1718,12 @@ class StandardDatepicker {
     <input [matDatepicker]="d" /><input [matDatepicker]="d" /><mat-datepicker
       #d
     ></mat-datepicker>
-  `
+  `,
 })
 class MultiInputDatepicker {}
 
 @Component({
-  template: `
-    <mat-datepicker #d></mat-datepicker>
-  `
+  template: ` <mat-datepicker #d></mat-datepicker> `,
 })
 class NoInputDatepicker {
   @ViewChild('d') datepicker: MatDatepicker<Date>;
@@ -1735,7 +1733,7 @@ class NoInputDatepicker {
   template: `
     <input [matDatepicker]="d" [value]="date" />
     <mat-datepicker #d [startAt]="startDate"></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithStartAt {
   date = new Date(2020, JAN, 1);
@@ -1751,7 +1749,7 @@ class DatepickerWithStartAt {
       startView="year"
       (monthSelected)="onYearSelection()"
     ></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithStartViewYear {
   date = new Date(2020, JAN, 1);
@@ -1768,7 +1766,7 @@ class DatepickerWithStartViewYear {
       startView="multi-year"
       (yearSelected)="onMultiYearSelection()"
     ></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithStartViewMultiYear {
   date = new Date(2020, JAN, 1);
@@ -1781,7 +1779,7 @@ class DatepickerWithStartViewMultiYear {
   template: `
     <input [(ngModel)]="selected" [matDatepicker]="d" />
     <mat-datepicker #d></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithNgModel {
   selected: Date | null = null;
@@ -1794,7 +1792,7 @@ class DatepickerWithNgModel {
     <input [formControl]="formControl" [matDatepicker]="d" />
     <mat-datepicker-toggle [for]="d"></mat-datepicker-toggle>
     <mat-datepicker #d></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithFormControl {
   formControl = new FormControl();
@@ -1808,7 +1806,7 @@ class DatepickerWithFormControl {
     <input [matDatepicker]="d" />
     <mat-datepicker-toggle [for]="d"></mat-datepicker-toggle>
     <mat-datepicker #d [touchUi]="touchUI"></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithToggle {
   @ViewChild('d') datepicker: MatDatepicker<Date>;
@@ -1823,7 +1821,7 @@ class DatepickerWithToggle {
       <div class="custom-icon" matDatepickerToggleIcon></div>
     </mat-datepicker-toggle>
     <mat-datepicker #d></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithCustomIcon {}
 
@@ -1833,7 +1831,7 @@ class DatepickerWithCustomIcon {}
       <input matInput [matDatepicker]="d" />
       <mat-datepicker #d></mat-datepicker>
     </mat-form-field>
-  `
+  `,
 })
 class FormFieldDatepicker {
   @ViewChild('d') datepicker: MatDatepicker<Date>;
@@ -1851,7 +1849,7 @@ class FormFieldDatepicker {
     />
     <mat-datepicker-toggle [for]="d"></mat-datepicker-toggle>
     <mat-datepicker #d></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithMinAndMaxValidation {
   @ViewChild('d') datepicker: MatDatepicker<Date>;
@@ -1869,7 +1867,7 @@ class DatepickerWithMinAndMaxValidation {
     />
     <mat-datepicker-toggle [for]="d"></mat-datepicker-toggle>
     <mat-datepicker #d [touchUi]="true"></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithFilterAndValidation {
   @ViewChild('d') datepicker: MatDatepicker<Date>;
@@ -1887,7 +1885,7 @@ class DatepickerWithFilterAndValidation {
       (dateInput)="onDateInput()"
     />
     <mat-datepicker #d [touchUi]="true"></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithChangeAndInputEvents {
   @ViewChild('d') datepicker: MatDatepicker<Date>;
@@ -1905,7 +1903,7 @@ class DatepickerWithChangeAndInputEvents {
   template: `
     <input [matDatepicker]="d" [(ngModel)]="date" />
     <mat-datepicker #d></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithi18n {
   date: Date | null = new Date(2010, JAN, 1);
@@ -1917,7 +1915,7 @@ class DatepickerWithi18n {
   template: `
     <input [matDatepicker]="d" [(ngModel)]="value" [min]="min" [max]="max" />
     <mat-datepicker #d [startAt]="startAt"></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithISOStrings {
   value = new Date(2017, JUN, 1).toISOString();
@@ -1936,7 +1934,7 @@ class DatepickerWithISOStrings {
       (closed)="closedSpy()"
       #d
     ></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithEvents {
   selected: Date | null = null;
@@ -1949,7 +1947,7 @@ class DatepickerWithEvents {
   template: `
     <input (focus)="d.open()" [matDatepicker]="d" />
     <mat-datepicker #d="matDatepicker"></mat-datepicker>
-  `
+  `,
 })
 class DatepickerOpeningOnFocus {
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
@@ -1962,7 +1960,7 @@ class DatepickerOpeningOnFocus {
       #ch
       [calendarHeaderComponent]="CustomHeaderForDatepicker"
     ></mat-datepicker>
-  `
+  `,
 })
 class DatepickerWithCustomHeader {
   @ViewChild('ch') datepicker: MatDatepicker<Date>;
@@ -1972,6 +1970,6 @@ class DatepickerWithCustomHeader {
   template: `
     <div>Custom element</div>
     <mat-calendar-header></mat-calendar-header>
-  `
+  `,
 })
 class CustomHeaderForDatepicker {}

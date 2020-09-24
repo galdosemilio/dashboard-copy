@@ -1,0 +1,697 @@
+{
+  "ACCOUNT": {
+    "ASSIGN": "Assign",
+    "ASSOCIATE": "Associate",
+    "CREATE_ADMIN": "Create Admin",
+    "CREATE_ASSIGNMENT": "Create Assignment",
+    "CREATE_ASSOCIATION": "Create Association",
+    "CREATE_COACH": "Create Coach",
+    "CREATE_PATIENT": "Create Patient",
+    "DEASSIGN": "Deassign",
+    "DISSOCIATE": "Dissociate",
+    "_ADMINS": "Administrators",
+    "_COACHES": "Coaches",
+    "_PATIENTS": "Patients"
+  },
+  "ADMIN": {
+    "ASSOCIATIONS": "Associations",
+    "LOGS": {
+      "APP_NAME": "App",
+      "CREATED_AT": "Date",
+      "_TITLE": "Logs"
+    },
+    "ORGS": {
+      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "مركز جمعية حملة نشطة",
+      "ACTIVE_CAMPAIGN_IS_INHERITED": "قائمة الحملات النشطة هذه متاحة لهذه العيادة من عيادة الآباء.",
+      "ACTIVE_CAMPAIGN_LISTS": "قوائم حملة نشطة",
+      "ADD_CHILD_ORG": "عيادات الطفل",
+      "ADD_PARENT_ORG": "Add parent clinic",
+      "ASSOC_ACTIVE_CAMPAIGN": "حملة نشطة المنتسبين",
+      "ASSOC_ALL_PROVIDERS": "تسجيل بأثر رجعي جميع مقدمي عند أو أقل من هذه العيادة",
+      "ASSOC_ALL_PROVIDERS_CURRENT": "تسجيل مزود {{provider}} ...",
+      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "قدم مقدمي الأخطاء التالية عند محاولة إلحاقهم:",
+      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "التحق جميع مقدمي بنجاح",
+      "ASSOC_ALL_PROVIDERS_WARNING": "كنت على وشك الالتحاق ALL مقدمي من هذه العيادة. هذه العملية يمكن أن تستغرق بعض الوقت لإكمال، هل أنت متأكد من أنك تريد المتابعة؟",
+      "ASSOC_PROVIDER_CAMPAIGN": "تسجيل بأثر رجعي مزود واحد",
+      "CHILD_ORGS": "Child Clinics",
+      "CREATE_NEW": "إنشاء عيادة",
+      "DELETE_LIST_ASSOCIATION": "حملة نشطة الحذف جمعية قائمة",
+      "DELETE_LIST_ASSOCIATION_CONTENT": "هل أنت متأكد أنك تريد حذف الجمعية إلى قائمة {{list}}؟",
+      "EDIT_ACTIVE_CAMPAIGN": "تحرير الحملة النشطة جمعية قائمة",
+      "LOAD_MORE": "تحميل المزيد",
+      "MARKETING_DESCRIPTION": "ترتبط القوائم الحملة النشطة هذه عند أو فوق هذه المنظمة. عند إضافة مزود أو يقل عن هذه المنظمة، التي سيتم إدراجهم تلقائيا في القوائم هو مبين أدناه.<br><br> مقدمي التي ارتبطت بالفعل إلى هذه المنظمة عندما تم إضافة قائمة الحملة النشطة لن يكون تلقائيا المسجلين. تستطيع بأثر رجعي تسجل واحد أو جميع مقدمي في قوائم الحملة النشطة المضافة حديثا باستخدام \"بأثر رجعي تسجل ... \" الأزرار.",
+      "NO_CHILD_CLINIC": "This clinic has no child clinic",
+      "NO_PARENT_CLINIC": "This clinic has no parent clinic.",
+      "ORGANIZATION": "Clinic",
+      "PARENT_ORG": "عيادة الوالدين",
+      "SELECTED_PROVIDER": "مزود المختارة: {{provider}}",
+      "SELECT_PROVIDER": "حدد مزود",
+      "SETTINGS": {
+        "ANDROID_BUNDLE_ID": "Android Bundle ID",
+        "APPID": "Application IDs",
+        "APPSTORE_CONNECT_TEAM_ID": "AppStore Connect Team ID",
+        "APP_NAME": "App Name",
+        "BCC_EMAIL": "رسائل BCC الإلكترونية (مفصولة بفواصل)",
+        "CODE_ENTRY_HELP": "نص قانون الدخول مساعدة",
+        "COLOR_ACCENT": "Accent",
+        "COLOR_PRIMARY": "Primary",
+        "COLOR_SECONDARY": "Secondary",
+        "COLOR_TOOLBAR": "Toolbar Color",
+        "DEVELOPER_PORTAL_TEAM_ID": "Developer Portal Team ID",
+        "DISPLAY_NAME": "Display Name",
+        "EDIT_INHERITED": "تحرير التفضيلات الموروثة",
+        "EMPTY_BCC_EMAILS": "لا توجد رسائل بريد إلكتروني خفية تم إعدادها لهذه المؤسسة.",
+        "FIREBASE_PROJECT_NAME": "Firebase Project Name",
+        "ICON_HINT": "Icon updates will be visible after 24 hours",
+        "IMAGES": "Images",
+        "INHERIT_MFA": "وراثة التفضيلات",
+        "IOS_BUNDLE_ID": "iOS Bundle ID",
+        "LOGO_HINT": "Logo updates will be visible after 24 hours",
+        "MALA": "MALA",
+        "MARKED_AS_INHERITED": "التفضيلات المحددة موروثة",
+        "MFA_ENABLED": "تم تمكين المصادقة متعددة العوامل",
+        "MFA_INHERITED": "موروثة من {{ org }}",
+        "MFA_LOGIN": "تسجيل الدخول",
+        "MFA_PASSWORD_UPDATE": "تحديث كلمة المرور",
+        "NO_LABEL_ASSOCIATIONS": "لا توجد مراحل مرتبطة بهذه المنظمة",
+        "SPLASH_HINT": "Splash updates will be visible after 24 hours"
+      },
+      "TITLE": "العيادات"
+    }
+  },
+  "BOARD": {
+    "BACK": "Go Back",
+    "BASIC_INFORMATION": "Basic Information",
+    "DELETE_MFA_INSTANCE": "إلغاء تنشيط قناة المصادقة ثنائية العوامل",
+    "PERSONAL_INFORMATION": "Personal Information",
+    "SECURITY": "الأمان"
+  },
+  "CLINIC_PLANS": {
+    "COACH_CARE": {
+      "H_SYSTEM": "نظام الصحة",
+      "H_SYSTEM_LAST_STEP": "شكرا لك على التسجيل للCoachCare خطة المراقبة عن بعد! يرجى تتوقع الحصول على تفاصيل التسعير نموذج طلب والشروط الأخرى عن طريق AdobeSign للتوقيع الإلكتروني الخاص بك <br><br><strong>الرجاء ملاحظة:.. يجب تنفيذ هذا نموذج طلب قبل أن نتمكن من البدء في بناء التطبيق  قوي</strong>",
+      "R_MONITORING": "مراقبة عن بعد",
+      "R_MONITORING_LAST_STEP": "شكرا لك على التسجيل للCoachCare خطة المراقبة عن بعد! يرجى تتوقع الحصول على تفاصيل التسعير نموذج طلب والشروط الأخرى عن طريق AdobeSign للتوقيع الإلكتروني الخاص بك <br><br><strong>الرجاء ملاحظة:.. يجب تنفيذ هذا نموذج طلب قبل أن نتمكن من البدء في بناء التطبيق قوي</strong>",
+      "TRACK": "مسار",
+      "TRACK_LAST_STEP": "شكرا لتسجيلك لخطة CoachCare المسار!",
+      "V_HEALTH": "الصحة الظاهرية",
+      "V_HEALTH_LAST_STEP": "شكرا لتسجيلك للخطة الصحية الافتراضية CoachCare!"
+    }
+  },
+  "EMAIL_TEMPLATE_CATS": {
+    "CLIENT": "زبون",
+    "OTHER": "آخر"
+  },
+  "EMAIL_TEMPLATE_OPS": {
+    "INTERNAL_REGISTRATION": "التسجيل الداخلي",
+    "INTERNAL_REGISTRATION_PLAN": "التسجيل الداخلي (مع الخطط)",
+    "NEW_ACCOUNT": "حساب جديد"
+  },
+  "FIELD": {
+    "CONSENT": {
+      "TEXT_CLIENT": "By checking this box and submitting this form, I agree to the app's",
+      "TEXT_GDPR": "إذا كنت مقيم في أحدى دول الاتحاد الأوروبي / المملكة المتحدة، فأنا أوافق أيضًا على اتفاقية",
+      "TEXT_PROVIDER": "بتحديد هذا المربع وتحديد \"متابعة\" فإني أوافق على:"
+    },
+    "NEWSLETTER": {
+      "CONSENT_TEXT": "بتحديد هذا المربع وتحديد \"متابعة\" ، أوافق على تلقي الرسالة الإخبارية الرقمية الخاصة بـ CoachConnect والتي ستتضمن تحديثات شهرية على ميزات ووظائف النظام الأساسي الخاص بي."
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "يجب أن تكون كلمتا المرور متطابقتين",
+      "HAS_NO_SEQUENCES": "لا يحتوي على أكثر من حرفين متتاليين",
+      "MIN_LENGTH": "تتكون من 8 رموز على الأقل",
+      "ONE_LOWERCASE_LETTER": "تحتوي حرف صغير",
+      "ONE_NUMBER": "تحتوي رقم",
+      "ONE_SPECIAL_CHARACTER": "تحتوي رمز",
+      "ONE_UPPERCASE_LETTER": "تحتوي حرف كبير",
+      "REQUIREMENTS": "متطلبات كلمة المرور"
+    }
+  },
+  "GLOBAL": {
+    "ABOUT": "About",
+    "ACTIONS": "إجراءات",
+    "ACTIVATE": "Activate",
+    "ACTIVE": "نشيط",
+    "ADD_LANGUAGE": "إضافة لغة",
+    "ADMIN": "مشرف",
+    "ALL": "الكل",
+    "AND": "and",
+    "ANNUAL": "سنوي",
+    "APP_STORE": "متجر التطبيقات",
+    "ASSOCIATE": "مساعد",
+    "AUTO_ENROLL_CLIENT": "لصناعة السيارات في تسجيل العميل على جمعية",
+    "BACK": "عودة للخلف",
+    "BASIC_INFORMATION": "معلومات أساسيّة",
+    "BCC_EMAILS": "BCC رسائل البريد الإلكتروني",
+    "BIRTHDAY": "Birthday",
+    "CANCEL": "إلغاء",
+    "CATEGORY": "الفئة",
+    "CITY": "المدينة",
+    "CLIENT": "عميل",
+    "CLINICS": "العيادات ",
+    "CLINIC_NAME": "اسم العيادة",
+    "CLOSE": "قريب",
+    "COACH": "مزود",
+    "COACHES": "المدربين",
+    "COLORS": "Colors",
+    "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+    "CONTACT": "الاتصال",
+    "CONTINUE": "متابعة",
+    "COUNTRY": "الدولة",
+    "CREATE": "إنشاء",
+    "CREATE_EMAIL_TEMPLATE": "إنشاء قالب البريد الإلكتروني",
+    "DASHBOARD": "لوحة التحكم",
+    "DEACTIVATE": "تعطيل",
+    "DELETE": "حذف",
+    "DESCRIPTION": "وصف",
+    "DIGITAL_LIBRARY": "المكتبة الرقمية",
+    "DISABLED": "معاق",
+    "DONE": "انتهيت!",
+    "DOWNLOAD_CSV": "تنزيل ملف CSV",
+    "EDIT": "تعديل",
+    "EMAIL": "البريد الإلكتروني",
+    "EMAIL_ADDRESS": "عنوان البريد الإلكتروني",
+    "EMAIL_TEMPLATES": "قوالب البريد الإلكتروني",
+    "ENABLED": "تمكين",
+    "ENROLL": "يتسجل، يلتحق",
+    "ERROR": "خطأ",
+    "FEATURES": "المميزات",
+    "FIELD_REQUIRED": "حقل مطلوب",
+    "FILE_VAULT": "قبو ملف",
+    "FILTER_BY_ACCOUNT": "فرز وفق الحساب",
+    "FILTER_BY_NAME": "فرز وفق الاسم",
+    "FIRST_NAME": "الاسم الأول",
+    "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟",
+    "GENDER": "Gender",
+    "HEIGHT": "Height",
+    "HIERARCHY": "المراتب",
+    "HTML": "HTML",
+    "INACTIVE": "غير نشط",
+    "INCLUDE_INACTIVE": "Include Inactive",
+    "INFORMATION": "معلومات",
+    "INHERIT": "يرث",
+    "LABEL": "مرحلة",
+    "LANGUAGE": "لغة",
+    "LAST_NAME": "الاسم الأخير",
+    "LOCALE": "مكان",
+    "LOCATION": "الموقع",
+    "MANAGER": "مدير",
+    "MEASUREMENT": "Measurement",
+    "MESSAGING": "الرسائل",
+    "MONTHLY": "شهريا",
+    "NAME": "الاسم",
+    "NEXT": "التالي",
+    "NO": "لا",
+    "NO_ENTRIES_FOR_FIELD": "لا توجد مقالات لهذا الحقل",
+    "OK": "موافق",
+    "OPEN_PATIENT_ENROLLMENT": "فتح تسجيل المريض",
+    "OPERATION": "عملية",
+    "ORGANIZATION": "العيادة",
+    "ORG_ID": "ID منظمة",
+    "ORG_NAME": "اسم المؤسسة",
+    "ORG_TO_EXCLUDE": "بحث المنظمات لاستبعادها",
+    "PASSWORD": "كلمة المرور",
+    "PATIENT": "صبور",
+    "PATIENTS": "المرضى",
+    "PATIENT_AUTOMATIC_DISASSOCIATION": "المريض التلقائي التفكك",
+    "PHONE": "الهاتف",
+    "PHONE_NUMBER": "رقم الهاتف",
+    "PHONE_TYPE": "Phone Type",
+    "PLAY_STORE": "لعب المتجر",
+    "POSTAL_CODE": "الرمز البريدي",
+    "PREVIOUS": "السابق",
+    "PROFILE": "Profile",
+    "PROVIDER": "مزود",
+    "REGISTER_NEW_CLINIC": "تسجيل شركة جديدة",
+    "REQUEST_RESET": "إعادة تعيين كلمة المرور",
+    "RESET_PASSWORD": "إعادة تعيين كلمة المرور",
+    "RETRY": "إعادة المحاولة",
+    "RPM": "RPM",
+    "SAVE": "حفظ",
+    "SAVE_PASSWORD": "حفظ كلمة المرور",
+    "SEARCH_COACH": "البحث عن مدرب",
+    "SEARCH_COACH_OR_PATIENT": "البحث عن مدرب أو مريض",
+    "SECURITY": "الأمان",
+    "SELECT_LANGUAGE": "اختار اللغة",
+    "SEQUENCES": "متواليات",
+    "SETTINGS": "Settings",
+    "SET_PASSWORD": "إنشاء كلمة مرور",
+    "SHORT_CODE": "رقم مختصر",
+    "SIGN_FROM_APP": "المرضى، يُرجى تسجيل الدخول عبر تطبيق الهاتف الخاص بكم",
+    "SIGN_IN": "تسجيل الدخول كمُزوّد",
+    "STATE": "الولاية",
+    "STATUS": "Status",
+    "STREET_ADDRESS": "عنوان الشارع",
+    "SUBJECT": "موضوع",
+    "SUBMIT": "خضع",
+    "TEXT": "نص",
+    "TIMEZONE": "Timezone",
+    "TITLE": "Title",
+    "TO": "إلى",
+    "UPDATE": "تحديث",
+    "UPDATE_EMAIL_TEMPLATE": "تحديث قالب البريد الإلكتروني",
+    "UPLOAD_IN_PROGRESS": "Upload in Progress",
+    "VERIFICATION_CODE": "شيفرة التأكيد",
+    "VIDEOCONFERENCE": "مؤتمر عبر الفيديو",
+    "YES": "نعم"
+  },
+  "LABEL": {
+    "CREATE_NEW": "إنشاء المرحلة",
+    "DESCRIPTION": "Description"
+  },
+  "LAYOUT": {
+    "BACK_TO_MAINSITE": "عودة إلى coachcare.com",
+    "CONTACT_US": "تواصل معنا",
+    "DPA": "GDPR DPA",
+    "HIPAA": "اتفاقية HIPAA BAA",
+    "MASTER_SUBSCRIPTION_AGREEMENT": "اتفاقية الاشتراك الرئيسية",
+    "MSA": "MSA",
+    "POWEREDBY": "{{company}}",
+    "PRIVACY_POLICY": "سياسة الخصوصية",
+    "TERMS_OF_SERVICE": "بنود الخدمة"
+  },
+  "LINK": {
+    "DPA": "https://www.coachcare.com/dpa/",
+    "HIPAA": "https://www.coachcare.com/hipaa/",
+    "MSA": "https://www.coachcare.com/agreement/",
+    "PRIVACY_POLICY": "https://www.coachcare.com/privacy/",
+    "SUPPORT": "https://coachcare.zendesk.com/hc/en-us/requests/new",
+    "TERMS_OF_SERVICE": "https://www.coachcare.com/terms/"
+  },
+  "MENU": {
+    "HELLO": "{{userName}} مرحبًا",
+    "LANGUAGE": "Language",
+    "LOGOUT": "تسجيل الخروج",
+    "PROFILE": "الملف الشخصي",
+    "SEARCH": "بحث"
+  },
+  "MFA": {
+    "AUTHENTICATOR": "الموثق",
+    "AUTHENTICATOR_STEP1": "قم بتثبيت LastPass Authenticator أو Google Authenticator أو Microsoft Authenticator أو أي تطبيق Authenticator آخر من اختيارك على هاتفك المحمول.",
+    "AUTHENTICATOR_STEP2": "افتح التطبيق وحدد \"إضافة حساب\".",
+    "AUTHENTICATOR_STEP3": "مسح رمز الاستجابة السريعة أدناه.",
+    "AUTHENTICATOR_STEP4": "أدخل رمز التحقق المكون من 6 أرقام الذي تم إنشاؤه بواسطة تطبيق Authenticator.",
+    "AUTH_INFO": "افتح تطبيق الموثق الخاص بك وشاهد الكود الذي يعرضه لحسابك. بعد ذلك ، اكتبها في حقل النص أدناه للتحقق من هويتك.<br/><br/>يمكنك أيضًا النقر فوق \"استخدام رمز النسخ الاحتياطي\" لاستخدام أحد رموز النسخ الاحتياطي التي تلقيتها عند تنشيط المصادقة متعددة العوامل.",
+    "BACKUP_CODE": "كود النسخ الاحتياطي",
+    "BACKUP_CODES_INFO": "في ما يلي قائمة برموز التحقق الاحتياطية في حالة فقد إمكانية الوصول إلى قناة المصادقة ثنائية العوامل التي اخترتها.<br/><br/><strong>احتفظ بها في مكان آمن حيث ستكون هذه هي الطريقة الوحيدة لاستعادة الوصول إلى حسابك. ضع في اعتبارك أنه يمكن استخدام كل رمز مرة واحدة فقط.</strong>",
+    "BACKUP_CODE_INFO": "اكتب أيًا من رموز النسخ الاحتياطي التي تلقيتها عند تنشيط المصادقة متعددة العوامل وتجاهلها. ضع في اعتبارك أنه يمكن استخدام كل رمز مرة واحدة فقط.",
+    "CONTINUE_TO_DASHBOARD": "متابعة لوحة القيادة",
+    "DOWNLOAD_BACKUP_CODES": "تنزيل رموز النسخ الاحتياطي",
+    "GOOGLE_AUTHENTICATOR": "مصدق جوجل",
+    "LAST_PASS_AUTHENTICATOR": "LastPass المصادقة",
+    "MFA_LOGIN_HELP_PROMPT": "إذا كنت تواجه مشكلة في تسجيل الدخول ، فيرجى <a href=\"mailto:support@coachcare.com?subject=MFA%20Login%20Assistance&body=I%20need%20support%20resetting%20my%20MFA%20login\">الاتصال بالدعم</a> للحصول على المساعدة.",
+    "MICROSOFT_AUTHENTICATOR": "مصدق مايكروسوفت",
+    "ORG_ENFORCEMENT_INFO": "تفرض مؤسستك استخدام المصادقة الثنائية. من فضلك ، حدد قناة مصادقة ثنائية لبدء عملية الإعداد.",
+    "REGEN_QR": "تجديد رمز الاستجابة السريعة",
+    "RESEND_SMS": "اعادة الرسال الرسالة",
+    "SECRET_KEY_PROMPT": "أو يمكنك إدخال هذا المفتاح السري في تطبيق Authenticator الخاص بك:<br/><strong>{{ key }}</strong>",
+    "SEND_BACKUP_CODE": "إرسال رمز النسخ الاحتياطي",
+    "SEND_VERIFICATION_CODE": "إرسال رمز التحقق",
+    "SMS": "رسالة قصيرة",
+    "SMS_INFO": "لقد أرسلنا لك رسالة نصية قصيرة تحتوي على رمز التحقق إلى رقم هاتفك المسجل. عند استلامها ، اكتبها في حقل النص أدناه للتحقق من هويتك.<br/><br/>يمكنك أيضًا النقر فوق \"استخدام رمز النسخ الاحتياطي\" لاستخدام أحد رموز النسخ الاحتياطي التي تلقيتها عندما قمت بتنشيط متعدد العوامل المصادقة.",
+    "SMS_PHONE_CONFIRM": "من فضلك ، تحقق من رقم هاتفك في الحقل أدناه. إذا كان غير صحيح ، قم بتحديثه. ضع في اعتبارك أن الهاتف يجب أن يكون قادرًا على استقبال الرسائل القصيرة.",
+    "USE_BACKUP_CODE": "استخدام رمز النسخ الاحتياطي",
+    "VERIFICATION_CODE": "شيفرة التأكيد"
+  },
+  "MOMENTJS": {
+    "LASWEEK": "[Last] dddd",
+    "TODAY": "[Today]",
+    "TOMORROW": "[Tomorrow]",
+    "YESTERDAY": "[Yesterday]"
+  },
+  "NOTIFY": {
+    "EMAIL": {
+      "EMAIL_CASE_SENSITIVE": "عنوان البريد الإلكتروني حساس لحالة الأحرف"
+    },
+    "ERROR": {
+      "AVATAR_UPLOAD_FAILED": "لقد فشل التحميل، يُرجى إعادة المحاولة",
+      "EMAIL_ALREADY_REGISTERED": "عنوان البريد الإلكتروني مسجل بالفعل",
+      "EMPTY_USER_LISTING": "No resulting users",
+      "FILL_THE_FORM": "يُرجى إكمال جميع الحقول قبل المتابعة",
+      "INVALID_EMAIL": "يُرجى إدخال عنوان بريد إلكتروني صالح",
+      "MFA_NOT_VERIFIED": "يرجى محاولة تسجيل الدخول مرة أخرى بعد 5 دقائق.",
+      "MIN_CHARS": "يجب أن تحتوي  {{min}}  رمزًا.",
+      "NO_ACTIVE_CAMPAIGNS": "لا توجد جمعيات قائمة الحملة النشطة",
+      "NO_EMAIL_TEMPLATES": "لا توجد قوالب بريد إلكتروني لهذه المؤسسة.",
+      "NO_LOG_MESSAGES": "There are no logs for this user",
+      "NO_ORGANIZATIONS": "لم تنشأ أي منظمات",
+      "NO_RESULTING_LABELS": "No resulting labels"
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "يُرجى التأكد من تطابق كلمة المرور الخاصة بك.",
+      "HAS_NO_SEQUENCES": "Please do not repeat the same character more than twice.",
+      "MIN_LENGTH": "يُرجى إدخال كلمة مرور تتكون من 6 رموز على الأقل",
+      "ONE_LOWERCASE_LETTER": "يُرجى إدخال كلمة مرور تحتوى حرف صغير واحد على الأقل",
+      "ONE_NUMBER": "يُرجى إدخال كلمة مرور تحتوى رقمًا واحدًا على الأقل",
+      "ONE_SPECIAL_CHARACTER": "Please enter a password that have at least one special character.",
+      "ONE_UPPERCASE_LETTER": "يُرجى إدخال كلمة مرور تحتوي حرف كبير واحد على الأقل"
+    },
+    "SOURCE": {
+      "DEFAULT_DELAY": "البيانات قيد التحميل...",
+      "DEFAULT_TIMEOUT": "انتهى وقت التحميل، يُرجى إعادة المحاولة",
+      "DEFAULT_WAIT": "يُرجى الانتظار...",
+      "NO_ASSIGNED_CLIENTS": "There are no assigned clients",
+      "NO_ASSIGNED_PROVIDERS": "There are no assigned providers",
+      "NO_ASSOCIATIONS": "There are no associations at the moment",
+      "NO_DATA_AVAILABLE": "لا تتوفر بيانات"
+    },
+    "SUCCESS": {
+      "ACC_ACTIVATED": "Account activated",
+      "ACC_CREATED": "Account created",
+      "ACC_DEACTIVATED": "Account deactivated",
+      "ACC_UPDATED": "Account updated",
+      "ACTIVE_CAMPAIGN_DELETED": "حذف جمعية قائمة حملة نشطة بنجاح.",
+      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "خلقت جمعية قائمة حملة نشطة بنجاح.",
+      "ACTIVE_CAMPAIGN_UPDATED": "جمعية قائمة حملة نشطة تجديد بنجاح.",
+      "CHECK_RESET_EMAIL": "إذا وجدنا حسابًا مرتبطًا بعنوان البريد الإلكتروني الذي أدخلته ، فسنرسل إليك رسالة بريد إلكتروني لإعادة تعيين كلمة المرور في الدقائق القليلة القادمة. إذا لم تستلم بريدًا إلكترونيًا ، فتأكد من التحقق من مجلد البريد العشوائي ، أو جرب عناوين البريد الإلكتروني الأخرى التي قد تكون استخدمتها لحسابك.",
+      "CLINIC_REMOVED": "تمّ إزالة العيادة",
+      "EMAIL_TEMPLATE_SAVED": "تم حفظ قالب البريد الإلكتروني بنجاح.",
+      "LABEL_ACTIVATED": "تنشيط المرحلة",
+      "LABEL_CREATED": "المرحلة التي تم إنشاؤها",
+      "LABEL_DEACTIVATED": "المرحلة المعطلة",
+      "LABEL_UPDATED": "المرحلة المحدثة",
+      "MFA_VERIFIED": "تم التحقق من قناة المصادقة ثنائية العوامل بنجاح.",
+      "ORG_ACTIVATED": "Clinic activated",
+      "ORG_ADDED": "Clinic added",
+      "ORG_CREATED": "تمّ إنشاء المنظمة",
+      "ORG_DEACTIVATED": "تمّ تعطيل العيادة",
+      "ORG_DISOCCIATED": "Clinic dissociated",
+      "ORG_UPDATED": "تمّ تحديث المنظمة",
+      "PASSWORD_RESET": "تمّ إعادة ضبط كلمة المرور بنجاح!<br />يمكنك استخدامها لتسجيل الدخول",
+      "PASSWORD_SETTED": "تمّ إنشاء كلمة المرور بنجاح!<br />يمكنك الآن تسجيل الدخول",
+      "PERM_UPDATED": "Permission updated",
+      "PHASE_UPDATED": "تم تحديث المرحلة بنجاح.",
+      "PHONE_NUMBER_UPDATED": "تم تحديث رقم الهاتف بنجاح.",
+      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "مزود المرتبطة بنجاح إلى قائمة الحملة النشطة.",
+      "SETTINGS_UPDATED": "Settings Updated"
+    }
+  },
+  "PAGE": {
+    "APPLE": {
+      "ACCOUNT": "حساب مطور في آبل"
+    },
+    "APP_NOT_FOUND": {
+      "REDIRECTING": "إعادة توجيه...",
+      "TITLE": "لا يمكن العثور على التطبيق"
+    },
+    "IMPLEMENTATION": {
+      "MOBILE": "تنفيذ تطبيقات الجوال"
+    },
+    "MEETING_CANCEL": {
+      "BUTTON_CANCEL": "إلغاء اجتماع",
+      "BUTTON_KEEP": "إبقاء الاجتماع",
+      "CONFIRM_PROMPT": "هل أنت متأكد أنك تريد إلغاء اجتماعك المُقرّر <b>{{day}}</b> at <b>{{time}}</b>",
+      "MESSAGE_ERROR": "حدث خطأ أثناء إلغاء الاجتماع، يُرجى إعادة المحاولة",
+      "MESSAGE_KEPT": "لم يتم تغيير اجتماعك المقرر  <b>{{day}}</b> at <b>{{time}}</b>",
+      "MESSAGE_SUCCESS": "لقد تمّ إلغاء اجتماعك، يُرجى استخدام التطبيق الخاص بك لتحديد موعد اجتماع آخر",
+      "TITLE": "إلغاء اجتماع",
+      "TITLE_KEPT": "تمّ إبقاء الاجتماع",
+      "TITLE_SUCCESS": "تمّ إلغاء الاجتماع"
+    },
+    "NOT_FOUND": {
+      "CONTENT": "يرجى التواصل مع <a href=\"https://coachcare.zendesk.com/hc/en-us/requests/new\">CoachCare Support</a> للمزيد من المساعدة",
+      "TITLE": "لا يمكن إيجاد الصفحة"
+    },
+    "REGISTER": {
+      "HEADER": {
+        "APOLLO": {
+          "TITLE": "دعنا نساعدك على التسجيل في منصة Apollo Care"
+        },
+        "DEFAULT": {
+          "TITLE": "هيا بنا نبني منصة {{displayName}} الخاصة بك"
+        },
+        "INHEALTH": {
+          "TITLE": "دعنا نساعدك على التسجيل في منصة inHealth"
+        },
+        "SHAKEIT": {
+          "TITLE": "دعنا نساعدك على التسجيل في منصة Shake It"
+        }
+      },
+      "HERO": {
+        "APOLLO": {
+          "POWERED_BY": "مدعوم من CoachCare",
+          "WELCOME_MESSAGE": "تقوم منصة Apollo Care بتوفير عيادات لإنقاص الوزن مع توفير تطبيق للهواتف المحمولة، شاشة عرض المدرب، وأجهزة مرتبطة ومتجمعة ومتكاملة في منصة لتطوير العناية بالمريض ولزيادة كفاءة العيادة.",
+          "WELCOME_TITLE": "مرحبًا بك في Apollo Care!"
+        },
+        "BA": {
+          "WELCOME_MESSAGE": "تقوم منصة {{ org }} بتوفير عيادات لإنقاص الوزن مع توفير تطبيق للهواتف المحمولة، شاشة عرض المدرب، وأجهزة مرتبطة ومتجمعة ومتكاملة في منصة لتطوير العناية بالمريض ولزيادة كفاءة العيادة.",
+          "WELCOME_TITLE": "مرحبًا بك في {{ org }}!"
+        },
+        "DEFAULT": {
+          "CLINIC_REGISTRATION": "تسجيل العيادة"
+        },
+        "GWLP": {
+          "WELCOME_MESSAGE": "تعمل منصة جلوبال لتخفيف الوزن على تزويد عيادات إنقاص الوزن بتطبيق جوال ولوحة القيادة الخاصة بالأجهزة والأجهزة المتصلة مجتمعة في منصة واحدة متكاملة لتحسين رعاية المرضى وزيادة كفاءة العيادات.",
+          "WELCOME_TITLE": "مرحبا بكم في العالمية لتخفيف الوزن!"
+        },
+        "INHEALTH": {
+          "WELCOME_MESSAGE": "تقوم منصة inHealth بتوفير عيادات لإنقاص الوزن مع توفير تطبيق للهواتف المحمولة، شاشة عرض المدرب، وأجهزة مرتبطة ومتجمعة ومتكاملة في منصة لتطوير العناية بالمريض ولزيادة كفاءة العيادة.",
+          "WELCOME_TITLE": "مرحبًا بك في inHealth!"
+        },
+        "NUTRIMOST": {
+          "WELCOME_MESSAGE": "تقوم منصة NutriMost بتوفير عيادات لإنقاص الوزن مع توفير تطبيق للهواتف المحمولة، شاشة عرض المدرب، وأجهزة مرتبطة ومتجمعة ومتكاملة في منصة لتطوير العناية بالمريض ولزيادة كفاءة العيادة.",
+          "WELCOME_TITLE": "مرحبًا بك في NutriMost!"
+        },
+        "SHAKEIT": {
+          "POWERED_BY": "مدعوم من CoachCare",
+          "WELCOME_MESSAGE": "وتمتلك منصة Shake It صلاحيات لإنقاص الوزن مع تطبيق للجوال ولوحة قيادة مدرب وأجهزة متصلة في منصة واحدة متكاملة لتحسين رعاية المرضى وزيادة كفاءة العيادة.",
+          "WELCOME_TITLE": "مرحبًا بك في Shake It!"
+        }
+      },
+      "STEP1": {
+        "APOLLO": {
+          "COMPLETE_SIGNUP": "يرجى إكمال نموذج التسجيل السريع والسهل هذا لتلقي الوصول إلى تطبيق Apollo Care ، على الويب ، والنظام الأساسي للجهاز."
+        },
+        "DEFAULT": {
+          "ACCOUNT_INFORMATION": "معلومات الحساب",
+          "CLINIC_INFORMATION": "معلومات العيادة",
+          "COMPLETE_SIGNUP": "بمجرد الانتهاء من التسجيل ، سنبدأ عملية التنفيذ.",
+          "MOBILE_APP_TYPE": "نوع تطبيق الجوال",
+          "MOB_APP_TYPE_CHOOSE": "يرجى تحديد نوع تطبيق الهاتف المحمول الذي ترغب في تقديمه لمرضاك من خلال النقر على الخيار المفضل لديك.",
+          "ORGANIZATION_DETAILS": "بدايًة، من فضلك أخبرنا قليلًا عن منظمتك وعن الشخص الذي سيكون محور التركيز في تواصلنا",
+          "WELCOME_PLATFORM_PAGE": "مرحبًا بك في {{clinic}} صفحة تسجيل النظام الأساسي."
+        },
+        "INHEALTH": {
+          "COMPLETE_SIGNUP": "يرجى إكمال نموذج التسجيل السريع والسهل هذا لتلقي الوصول إلى تطبيق inHealth ، على الويب ، والنظام الأساسي للجهاز."
+        },
+        "SHAKEIT": {
+          "COMPLETE_SIGNUP": "يرجى إكمال نموذج التسجيل السريع والسهل هذا لتلقي الوصول إلى تطبيق Shake It ، على الويب ، والنظام الأساسي للجهاز."
+        }
+      },
+      "STEP2": {
+        "BILLING_INFORMATION": "معلومات الفواتير",
+        "CONFIRMATION_BOX_MESSAGE": "بتحديد هذا المربع وتحديد \"متابعة\"، أوافق على الالتزام قانونًا باستخدام نموذج الطلب هذا. يكون الاشتراك في نموذج الطلب هذا لمدة عام واحد ولا يمكن إلغاؤه قبل انتهاء المدة. يخضع نموذج الطلب هذا لشروط <a href=\"{{ msaLink }}\" target=\"_blank\">اتفاقية الاشتراك الرئيسي</a>.",
+        "PAYMENT_INFO": "كل ما نحتاجه الآن هو معلومات الدفع الخاصة بك وسوف تكون في طريقك نحو المنصّة المخصصة الجديدة الخاصة بك.",
+        "SKIP": "Skip"
+      },
+      "STEP3": {
+        "APOLLO": {
+          "ALL_DONE": "<strong>لقد انتهيت<strong>",
+          "CUSTOM_COACHCARE": "مرحبًا بك في منصة Apollo Care المدعومة من CoachCare!  ستتلقى رسالة بريد إلكتروني قريباً تحتوي على رابط لتفعيل حساب الإدارة الخاص بك وتعيين كلمة المرور الخاصة بك وتسجيل الدخول إلى لوحة المعلومات. بالإضافة إلى ذلك ، ستتلقى تأكيدًا إلكترونيًا منفصلًا يتضمن معلومات عيادتك.",
+          "QUESTIONS": "إذا كان لديك أي أسئلة ، فيرجى عدم التردد في الاتصال بفريق التنفيذ من خلال <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> أو اتصل بمندوب مبيعاتك.",
+          "WELCOME": "نحن متحمسون لبدء العمل معك ومرحبًا بكومرة ​​أخرى في منصة Apollo Care!"
+        },
+        "DEFAULT": {
+          "ALL_DONE": "<strong>!انتهيت<strong>",
+          "CUSTOM_COACHCARE": "سيكون تطبيق {{ displayName }} المُخصص الخاص بك ، ومنصة الويب والجهاز جاهزين في غضون أسابيع قليلة. وحتى ذلك الحين ، سنقدم لك تحديثات منتظمة حول تقدمنا في بناء النظام الأساسي الخاص بك.",
+          "EMAIL_CONFIRMATION": "ستتلقى رسالة بريد إلكتروني قريباً تحتوي على رابط لتنشيط حساب المسؤول وتعيين كلمة المرور الخاصة بك وتسجيل الدخول إلى لوحة المعلومات. بالإضافة إلى ذلك ، ستتلقى تأكيدًا إلكترونيًا منفصلًا يتضمن معلومات عيادتك. وسيتواصل مدير حسابك أيضًا لتقديم نفسه والإجابة عن أي أسئلة.",
+          "EXCITED_WORKING_AGAIN": "مرة أخرى ، يسرنا أن نبدأ العمل معك ومرحبا بكم في منصة {{displayName}}!",
+          "IMPLEMENTATION_SPECIALIST": "يرجى ملاحظة أن أخصائي تنفيذ سيتواصل معك قريباً. سيكون تطبيق {{displayName}} المخصص ، منصة الويب والجهاز جاهزًا خلال بضعة أسابيع فقط. حتى ذلك الحين ، سوف نقدم تحديثات منتظمة عن التقدم الذي أحرزناه في بناء النظام الأساسي الخاص بك.",
+          "NEAR_COMPLETION": "ونحن نقترب من الاكتمال ، وسوف نتصل بك لتقديم معلومات التدريب ، وإعداد حسابات فريقك ووضع اللمسات الأخيرة على طلبك جهازك.",
+          "REGISTER_NEW_CLINIC": "تسجيل عيادة جديدة",
+          "WELCOME_PLATFORM": "مرحبًا بك في النظام الأساسي {{displayName}} المدعوم من CoachCare! ستتلقى رسالة تأكيد بالبريد الإلكتروني للتسجيل قريبًا. ستتلقى أيضًا رسالة بريد إلكتروني لتفعيل حساب مسؤول لوحة المعلومات."
+        },
+        "ITG": {
+          "CONFIRMATION": "تهانينا! تم تسجيل مؤسستك بنجاح. سيقوم أخصائي تنفيذ بالتواصل معك قريبًا لجدولة التدريب المباشر حسب الرغبة."
+        },
+        "SHAKEIT": {
+          "ALL_DONE": "<strong>كله تمام!<strong>",
+          "CUSTOM_COACHCARE": "مرحبًا بك في منصة Shake It المدعومة من CoachCare! ستتلقى رسالة بريد إلكتروني قريباً تحتوي على رابط لتنشيط حساب المسؤول وتعيين كلمة المرور الخاصة بك وتسجيل الدخول إلى لوحة المعلومات. بالإضافة إلى ذلك ، ستتلقى تأكيدًا إلكترونيًا منفصلًا يتضمن معلومات عيادتك.",
+          "QUESTIONS": "إذا كان لديك أي أسئلة ، فيرجى عدم التردد في الاتصال بفريق التنفيذ على <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> أو اتصال مبيعاتك.",
+          "WELCOME": "نحن متحمسون لبدء العمل معك ومرة ​​أخرى مرحبًا بكم في منصة Shake It!"
+        }
+      }
+    },
+    "UNSUPPORTED_BROWSER": {
+      "DESCRIPTION": "نوصي بتغيير متصفحك المفضل إلى أي من تلك المذكورة أدناه.",
+      "TITLE": "متصفحك الحالي غير مدعوم من هذا التطبيق."
+    }
+  },
+  "PERMS": {
+    "ACCESSALL": "View All",
+    "ACCESSALL_HELP": "<p> The <b>'VIEW ALL'</b> permission allows a coach to view all client and all clients data associated to the selected clinic. This is appropriate if your clients typically see different coaches when they visit your clinic or if your coaches frequently cover patients for each other. This is also appropriate for staff that handle customer service tasks.</p>",
+    "ADMIN": "Admin",
+    "ADMIN_HELP": "<p>The <b>'ADMIN'</b> permission allows a coach to add, delete and manage client and coach accounts, as well as edit clinic settings. This is appropriate for staff at your clinic that manage coaches, handle customer service or onboard new clients.</p>",
+    "CLIENT_PHI": "Client PHI",
+    "_TITLE": "Permissions"
+  },
+  "PHASE": {
+    "DISABLED": "معاق",
+    "DISASSOCIATE": "فصل",
+    "ENABLED": "ممكّن",
+    "IS_INHERITED": "هذه الحزمة متاحة لعيادتك من عيادة والدين"
+  },
+  "PROMPT": {
+    "ACCS": {
+      "CONFIRM_ACTIVATE": "Activate Account",
+      "CONFIRM_ACTIVATE_PROMPT": "Do you really want to activate '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "Deactivate Account",
+      "CONFIRM_DEACTIVATE_PROMPT": "Do you really want to deactivate '{{item}}'?",
+      "DEACTIVATE_MFA": "إلغاء تنشيط قناة المصادقة ثنائية العوامل",
+      "DEACTIVATE_MFA_PROMPT": "أنت على وشك تعطيل قناة المصادقة ثنائية العوامل لهذا الحساب. هذا يعني أنه لن تتم مطالبة المستخدم برمز التحقق عندما يحاول تسجيل الدخول أو إعادة تعيين كلمة المرور الخاصة به.<br/><br/><strong>هل أنت متأكد من رغبتك في المتابعة؟</strong>"
+    },
+    "EMAIL_TEMPLATE": {
+      "DELETE": "حذف قالب البريد الإلكتروني",
+      "DELETE_PROMPT": "هل أنت متأكد من أنك تريد حذف قالب البريد الإلكتروني هذا؟"
+    },
+    "LABEL": {
+      "CONFIRM_ACTIVATE": "تفعيل المرحلة",
+      "CONFIRM_ACTIVATE_PROMPT": "Do you really want to activate '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "إلغاء تنشيط المرحلة",
+      "CONFIRM_DEACTIVATE_PROMPT": "Do you really want to deactivate '{{item}}'?"
+    },
+    "LABELS": {
+      "DISABLE": "تعطيل المرحلة",
+      "DISABLE_PROMPT": "هل أنت متأكد من أنك تريد تعطيل المرحلة \"{{label}}\"؟",
+      "DISOCCIATE": "فصل المرحلة",
+      "DISOCCIATE_PROMPT": "هل أنت متأكد من أنك تريد فصل المرحلة '{{label}}'؟",
+      "ENABLE": "تمكين المرحلة",
+      "ENABLE_PROMPT": "هل أنت متأكد من أنك تريد تمكين المرحلة \"{{label}}\"؟"
+    },
+    "ORGS": {
+      "CONFIRM_ACTIVATE": "Activate Clinic",
+      "CONFIRM_ACTIVATE_PROMPT": "Do you really want to activate '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "Deactivate Clinic",
+      "CONFIRM_DEACTIVATE_PROMPT": "Do you really want to deactivate '{{item}}'?",
+      "CONFIRM_REMOVE_CHILD": "إزالة طفل",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "ان تمتلك منظمة الطفل أي والد بعد هذه الإزالة",
+      "CONFIRM_REMOVE_ORG": "Deactivate Clinic",
+      "CONFIRM_REMOVE_ORG_PROMPT": "Do you really want to deactivate '{{item}}'?",
+      "CONFIRM_REMOVE_PARENT": "إزالة والد",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "لن تمتلك هذا المنظمة تنظيم أبوي بعد هذه الإزالة",
+      "DISOCCIATE": "Dissociate Clinic",
+      "DISOCCIATE_PROMPT": "Do you really want to dissociate '{{item}}'?"
+    }
+  },
+  "REGISTER": {
+    "CLINIC": {
+      "AMOUNT_PER_MONTH": "$ {{amount}} شهريا",
+      "BILLED_ANNUALLY": "(وصفت $ {{amount}}  سنويا)",
+      "BILLED_MONTHLY": "(وصفت $ {{amount}}  شهريا)",
+      "PRICING": "التسعير",
+      "REQUEST_ORDER_FORM": "نموذج طلب للحصول على أسعار وشروط",
+      "VIEW_BENEFITS_PRICING": "فوائد مرأى ومسمع والتسعير",
+      "YOUR_PLAN_SELECTION": "اختيار خطتك"
+    },
+    "STEP1": {
+      "ROBARD": {
+        "MOB_APP_1_DESCRIPTION": "سينزّل المرضى تطبيق MyHealthyJourney وإدخال الرمز الفريد المكون من 4 أرقام في عيادتك للوصول إلى الميزات الكاملة للتطبيق. ستبقى لوحة تحكم تطبيق الهاتف المحمول وعيادة العيادة الخاصة بك في غضون 48 ساعة بعد تلقي نموذج تطبيق المنصة.",
+        "MOB_APP_1_TITLE": "تطبيق MyHealthyJourney",
+        "MOB_APP_2_DESCRIPTION": "سينزّل المرضى التطبيق المخصص للعلامة التجارية في عيادتك للوصول إلى الميزات الكاملة للتطبيق. تتطلب هذه العملية من عيادتك إكمال نموذج تنفيذ النظام الأساسي والتقدم بطلب للحصول على <a href=\"https://dashboard.coachcare.com/register/apple؟baseOrg=4118\" target=\"_blank\">Apple حساب المطور</a>.",
+        "MOB_APP_2_SMALLTEXT": "قد تستغرق هذه العملية ما يصل إلى ثلاثة أسابيع قبل أن يصبح التطبيق متاحًا لمرضاك لاستخدامه.",
+        "MOB_APP_2_TITLE": "تطبيق مخصص للعلامات التجارية"
+      }
+    }
+  },
+  "ROLE": {
+    "ADMIN": "Admin",
+    "COACH": "Coach",
+    "MANAGER": "Manager",
+    "PATIENT": "Patient"
+  },
+  "SECTION": {
+    "APOLLOUS": {
+      "PACKAGE": {
+        "ACTIVITY_SLEEP": "النشاط ومتتبع النوم",
+        "APOLLO_COACHING_SERVICES": "خدمات التدريب أبولو",
+        "AVAILABLE_PATIENT_PACKAGES": "حزم المتاحة للمرضى",
+        "AVAILABLE_PATIENT_PACKAGES_DETAILS": "ستتمكن من اختيار حزمة لكل مريض ضمن لوحة تحكم ويب Apollo Care",
+        "BODY_COMPOSITION_SCALE": "مقياس تكوين الجسم",
+        "COACH_PLUS": "العناية بلس",
+        "COACH_PLUS_SERVICE": "رعاية بلس مع خدمة تدريب أبولو",
+        "MOBILE_APP": "تطبيق الجوال",
+        "OPTIONAL_ADD": "إضافة اختياري:"
+      }
+    },
+    "APOLLO_INT": {
+      "PACKAGE": {
+        "ACTIVITY_BODY": "تعقب النشاط ومقياس تكوين الجسم",
+        "APOLLO_CARE_BRONE": "أبولو كير البرونزي",
+        "APOLLO_CARE_GOLD": "أبولو كير الذهبي",
+        "APOLLO_CARE_SILVER": "أبولو كير الفضي",
+        "AVAILABLE_PACKAGES": "الحزم المتاحة",
+        "OPTIONAL_ADD_ON": ":إضافة اختياري على",
+        "UNLIMITED_PATIENTS": "عدد غير محدود من المرضى",
+        "UP_TO_25": "ما يصل إلى 25 مريضا",
+        "UP_TO_75": "ما يصل إلى 75 مريضا"
+      }
+    }
+  },
+  "SELECTOR": {
+    "AUTOCOMPLETE": {
+      "NO_MATCHING_ACCOUNTS": "No matching accounts",
+      "NO_MATCHING_ADMINS": "No matching admins",
+      "NO_MATCHING_CLIENTS": "No matching clients",
+      "NO_MATCHING_PROVIDERS": "No matching providers"
+    },
+    "COUNTRIES": {
+      "AE": "الامارات العربية",
+      "AU": "أستراليا",
+      "BH": "البحرين",
+      "CA": "كندا",
+      "CL": "تشيلي",
+      "CO": "كولومبيا",
+      "DK": "الدنمارك",
+      "ES": "إسبانيا",
+      "GB": "المملكة المتحدة",
+      "IE": "إيرلندا",
+      "IL": "إسرائيل",
+      "KW": "الكويت",
+      "LB": "لبنان",
+      "MX": "المكسيك",
+      "NZ": "نيوزيلندا",
+      "OM": "سلطنة عمان",
+      "SA": "المملكة العربية السعودية",
+      "US": "الولايات المتحدة"
+    },
+    "GENDER": {
+      "FEMALE": "أنثى",
+      "MALE": "ذكر"
+    },
+    "PHONE_TYPE": {
+      "ANDROID": "أندرويد",
+      "IOS": "iOS"
+    },
+    "STATUS": {
+      "ACTIVE": "Active",
+      "ALL": "All",
+      "INACTIVE": "Inactive"
+    },
+    "UNITSYS": {
+      "METRIC": "متري",
+      "UK": "بريطانيا",
+      "US": "أميركا"
+    }
+  },
+  "SIDENAV": {
+    "ACCOUNTS": "الحسابات",
+    "ADMINS": "Admins",
+    "ALERTS": "التنبيهات",
+    "COACHES": "Coaches",
+    "LABELS": "المراحل",
+    "LIBRARY": "المكتبة الرقمية",
+    "MARKETING": "تسويق",
+    "MESSAGES": "الرسائل",
+    "NOTIFICATIONS": "إشعارات",
+    "ORGANIZATIONS": "Organizations",
+    "OVERVIEW": "نظرة عامة",
+    "PATIENTS": "Patients",
+    "REPORTS": "تقارير",
+    "RESOURCES": "المصادر",
+    "SCHEDULE": "الجدول",
+    "SCHEDULE_AVAILABLE": "ضبط التوفر",
+    "SCHEDULE_VIEW": "عرض الجدول",
+    "SUPPORT": "الدعم",
+    "USER_STATISTICS": "إحصاءات المستخدم"
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@coachcare/layout';
+import { MatSort } from '@coachcare/common/material';
 import { Router } from '@angular/router';
 import { getterSorter } from '@coachcare/backend/model';
 import { _ } from '@coachcare/backend/shared';
@@ -8,14 +8,14 @@ import { NotifierService } from '@coachcare/common/services';
 import { OrganizationDialogs, OrganizationRoutes } from '@board/services';
 import {
   OrganizationsDatabase,
-  OrganizationsDataSource
+  OrganizationsDataSource,
 } from '@coachcare/backend/data';
 import { OrgEntityExtended } from '@coachcare/backend/services';
 
 @Component({
   selector: 'ccr-organizations-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 export class OrganizationsTableComponent implements OnInit, OnDestroy {
   @Input() columns = [];
@@ -61,7 +61,7 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
         row.isActive = true;
         this.notifier.success(_('NOTIFY.SUCCESS.ORG_ACTIVATED'));
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
           this.notifier.error(err);
@@ -76,7 +76,7 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
         row.isActive = false;
         this.notifier.success(_('NOTIFY.SUCCESS.ORG_DEACTIVATED'));
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
           this.notifier.error(err);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@coachcare/layout';
+import { MatSelectModule } from '@coachcare/common/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { TimezoneFormFieldComponent } from './timezone.component';
@@ -16,7 +16,7 @@ describe('Form.TimezoneSelectComponent', () => {
           formControlName="test"
         ></ccr-form-field-timezone>
       </form>
-    `
+    `,
   })
   class TestHostComponent implements OnInit {
     form: FormGroup;
@@ -25,7 +25,7 @@ describe('Form.TimezoneSelectComponent', () => {
 
     ngOnInit() {
       this.form = this.builder.group({
-        test: null
+        test: null,
       });
     }
   }
@@ -39,9 +39,9 @@ describe('Form.TimezoneSelectComponent', () => {
         NoopAnimationsModule,
         ReactiveFormsModule,
         MatSelectModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
       ],
-      declarations: [TestHostComponent, TimezoneFormFieldComponent]
+      declarations: [TestHostComponent, TimezoneFormFieldComponent],
     }).compileComponents();
   }));
 

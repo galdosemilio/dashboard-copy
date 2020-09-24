@@ -7,7 +7,7 @@ import {
   PAGE_DOWN,
   PAGE_UP,
   RIGHT_ARROW,
-  UP_ARROW
+  UP_ARROW,
 } from '@angular/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@coachcare/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -23,8 +23,8 @@ import {
   MAY,
   NOV,
   OCT,
-  SEP
-} from '@coachcare/layout';
+  SEP,
+} from '@coachcare/common';
 import { By } from '@angular/platform-browser';
 import { MatCalendarBody } from './calendar-body';
 import { MatYearView } from './year-view';
@@ -42,11 +42,11 @@ describe('MatYearView', () => {
 
         // Test components.
         StandardYearView,
-        YearViewWithDateFilter
+        YearViewWithDateFilter,
       ],
       providers: [
-        { provide: Directionality, useFactory: () => (dir = { value: 'ltr' }) }
-      ]
+        { provide: Directionality, useFactory: () => (dir = { value: 'ltr' }) },
+      ],
     });
 
     TestBed.compileComponents();
@@ -395,7 +395,7 @@ describe('MatYearView', () => {
       [(selected)]="selected"
       (monthSelected)="selectedMonth = $event"
     ></mat-year-view>
-  `
+  `,
 })
 class StandardYearView {
   date = new Date(2017, JAN, 5);
@@ -411,7 +411,7 @@ class StandardYearView {
       [activeDate]="activeDate"
       [dateFilter]="dateFilter"
     ></mat-year-view>
-  `
+  `,
 })
 class YearViewWithDateFilter {
   activeDate = new Date(2017, JAN, 1);

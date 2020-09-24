@@ -2,17 +2,17 @@ import {
   MatAutocomplete,
   MatAutocompleteModule,
   MatAutocompleteTrigger,
-  MatAutocompleteSelectedEvent
+  MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
 import {
   MatAnchor,
   MatButton,
-  MatButtonModule
+  MatButtonModule,
 } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {
   MAT_LABEL_GLOBAL_OPTIONS,
-  MatNativeDateModule
+  MatNativeDateModule,
 } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
@@ -26,12 +26,12 @@ import {
   MatDialogContent,
   MatDialogModule,
   MatDialogRef,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
-  MatFormFieldModule
+  MatFormFieldModule,
 } from '@angular/material/form-field';
 import {
   MatGridAvatarCssMatStyler,
@@ -40,30 +40,45 @@ import {
   MatGridTile,
   MatGridTileFooterCssMatStyler,
   MatGridTileHeaderCssMatStyler,
-  MatGridTileText
+  MatGridTileText,
 } from '@angular/material/grid-list';
 import {
   MatIcon,
   MatIconModule,
-  MatIconRegistry
+  MatIconRegistry,
 } from '@angular/material/icon';
 import { MatInput, MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatListItem, MatListModule, MatNavList } from '@angular/material/list';
+import {
+  _MatMenu,
+  MatMenu,
+  MatMenuItem,
+  MatMenuModule,
+  MatMenuPanel,
+  MatMenuTrigger,
+} from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import {
+  MatProgressSpinner,
+  MatProgressSpinnerModule,
+} from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import {
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavContent,
+  MatSidenavModule,
+} from '@angular/material/sidenav';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
-  MatTreeModule
+  MatTreeModule,
 } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -101,9 +116,20 @@ export {
   MatIconRegistry,
   MatIconModule,
   MatInput,
+  MatListItem,
   MatListModule,
+  MatNavList,
+  _MatMenu,
+  MatMenu,
+  MatMenuItem,
   MatMenuModule,
+  MatMenuPanel,
+  MatMenuTrigger,
+  MatProgressSpinner,
   MatSelectChange,
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavContent,
   MatSidenavModule,
   MatSnackBar,
   MatSnackBarModule,
@@ -111,10 +137,11 @@ export {
   MatSortModule,
   MatStepper,
   MatStepperModule,
+  MatToolbar,
   MatToolbarModule,
   MatTreeFlatDataSource,
   MatTreeFlattener,
-  MatPaginator
+  MatPaginator,
 };
 
 export const CcrMaterialModules = [
@@ -136,7 +163,7 @@ export const CcrMaterialModules = [
   MatNativeDateModule,
   MatPaginatorModule,
   MatProgressBarModule,
-  MatProgressSpinner,
+  MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
@@ -146,5 +173,5 @@ export const CcrMaterialModules = [
   MatTableModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule
+  MatTreeModule,
 ];

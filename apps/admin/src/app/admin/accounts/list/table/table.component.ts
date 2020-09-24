@@ -4,9 +4,9 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { MatSort } from '@coachcare/layout';
+import { MatSort } from '@coachcare/common/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountDialogs, AccountRoutes } from '@board/services';
 import { AccountsDatabase, AccountsDataSource } from '@coachcare/backend/data';
@@ -19,7 +19,7 @@ import { NotifierService } from '@coachcare/common/services';
   selector: 'ccr-accounts-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountsTableComponent implements OnInit, OnDestroy {
   @Input() columns = [];
@@ -60,7 +60,7 @@ export class AccountsTableComponent implements OnInit, OnDestroy {
         row.isActive = true;
         this.notifier.success(_('NOTIFY.SUCCESS.ACC_ACTIVATED'));
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
           this.notifier.error(err);
@@ -75,7 +75,7 @@ export class AccountsTableComponent implements OnInit, OnDestroy {
         row.isActive = false;
         this.notifier.success(_('NOTIFY.SUCCESS.ACC_DEACTIVATED'));
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
           this.notifier.error(err);

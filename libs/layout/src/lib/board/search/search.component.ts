@@ -5,10 +5,10 @@ import {
   Input,
   OnInit,
   Optional,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteTrigger } from '@coachcare/layout';
+import { MatAutocompleteTrigger } from '@coachcare/common/material';
 import { Router } from '@angular/router';
 import { AppDataSource, SearchDataSource } from '@coachcare/backend/model';
 import { AutocompleterOption } from '@coachcare/backend/shared';
@@ -20,7 +20,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'ccr-search',
-  templateUrl: './search.component.html'
+  templateUrl: './search.component.html',
 })
 export class SearchComponent implements OnInit {
   @HostBinding('class.disabled') isDisabled = false;
@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit {
     this.searchCtrl = new FormControl();
     this.searchCtrl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe(query => {
+      .subscribe((query) => {
         typeof query === 'string'
           ? this.search(query)
           : this.trigger.closePanel();

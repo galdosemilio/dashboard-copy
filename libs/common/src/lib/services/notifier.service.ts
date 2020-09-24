@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@coachcare/layout';
+import { MatDialog, MatSnackBar } from '@coachcare/common/material';
 import { _ } from '@coachcare/backend/shared';
 import { ConfirmDialog } from '@coachcare/common/dialogs/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,7 +9,7 @@ export enum NotifierStatus {
   success = 'ccr-snack-success',
   info = 'ccr-snack-info',
   warning = 'ccr-snack-warning',
-  error = 'ccr-snack-error'
+  error = 'ccr-snack-error',
 }
 
 @Injectable()
@@ -28,7 +28,7 @@ export class NotifierService {
   // TODO remove any and use an specific ComponentType
   snackFromComponent(component: any, duration: number | undefined): void {
     this.snackbar.openFromComponent(component, {
-      duration: duration ? duration : this.duration
+      duration: duration ? duration : this.duration,
     });
   }
 
@@ -45,7 +45,7 @@ export class NotifierService {
     const show = (msg: string) => {
       this.snackbar.open(msg, action, {
         duration: duration ? duration : this.duration,
-        panelClass: [status]
+        panelClass: [status],
       });
     };
 
@@ -96,8 +96,8 @@ export class NotifierService {
     this.dialog.open(ConfirmDialog, {
       data: {
         title: _('GLOBAL.DONE'),
-        content: this.translate(msg)
-      }
+        content: this.translate(msg),
+      },
     });
   }
 
@@ -105,8 +105,8 @@ export class NotifierService {
     this.dialog.open(ConfirmDialog, {
       data: {
         title: _('GLOBAL.ERROR'),
-        content: this.translate(err)
-      }
+        content: this.translate(err),
+      },
     });
   }
 

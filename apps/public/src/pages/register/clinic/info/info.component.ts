@@ -4,10 +4,10 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { ActivatedRoute } from '@angular/router';
 import { resolveConfig } from '@board/pages/config/section.config';
 import { _, FormUtils } from '@coachcare/backend/shared';
@@ -17,7 +17,7 @@ import {
   ContextService,
   COOKIE_LANG,
   CookieService,
-  LanguageService
+  LanguageService,
 } from '@coachcare/common/services';
 import { LOCALES } from '@coachcare/common/shared';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,7 +27,7 @@ import { Account } from 'selvera-api';
 @Component({
   selector: 'ccr-page-register-clinic-info',
   templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss']
+  styleUrls: ['./info.component.scss'],
 })
 export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
   @Input() formGroup: FormGroup;
@@ -59,7 +59,7 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
       true
     );
 
-    this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.hideLanguageSelector =
         params.hasOwnProperty('hideLanguageSelector') &&
         params.hideLanguageSelector === 'true'
@@ -73,7 +73,7 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
             : params.selectedLanguage.toLowerCase()
           : this.cookie.get(COOKIE_LANG) || 'en';
 
-      if (!LOCALES.find(local => local.code === selectedLanguage)) {
+      if (!LOCALES.find((local) => local.code === selectedLanguage)) {
         selectedLanguage = 'en';
       }
 
@@ -102,8 +102,8 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
           this.dialog.open(ConfirmDialog, {
             data: {
               title: _('GLOBAL.ERROR'),
-              content: _('NOTIFY.ERROR.EMAIL_ALREADY_REGISTERED')
-            }
+              content: _('NOTIFY.ERROR.EMAIL_ALREADY_REGISTERED'),
+            },
           });
         })
         .catch(() => this.nextStep.emit());
@@ -121,8 +121,8 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
     this.dialog.open(ConfirmDialog, {
       data: {
         title: _('GLOBAL.ERROR'),
-        content: err
-      }
+        content: err,
+      },
     });
   }
 
@@ -130,12 +130,14 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
     const preferredLocales = this.formGroup.get(
       'account.preferredLocales'
     ) as FormControl;
-    preferredLocales.valueChanges.pipe(untilDestroyed(this)).subscribe(lang => {
-      if (lang && lang[0] !== this.language.get()) {
-        this.store.changeLang(lang[0]);
-      }
-    });
-    this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(lang => {
+    preferredLocales.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((lang) => {
+        if (lang && lang[0] !== this.language.get()) {
+          this.store.changeLang(lang[0]);
+        }
+      });
+    this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe((lang) => {
       const cleanLang = Array.isArray(lang.lang) ? lang.lang : [lang.lang];
       preferredLocales.patchValue(cleanLang);
     });

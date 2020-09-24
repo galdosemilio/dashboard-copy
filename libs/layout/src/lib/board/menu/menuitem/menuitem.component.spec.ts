@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@coachcare/layout';
-import { MatListModule } from '@coachcare/layout';
+import { MatIconModule } from '@coachcare/common/material';
+import { MatListModule } from '@coachcare/common/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuItemComponent } from './menuitem.component';
@@ -12,7 +12,7 @@ describe('Layout.MenuItemComponent', () => {
 
   @Component({
     selector: 'ccr-badge',
-    template: ''
+    template: '',
   })
   class MockBadgeComponent {}
 
@@ -22,9 +22,9 @@ describe('Layout.MenuItemComponent', () => {
         MatIconModule,
         MatListModule,
         TranslateModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
-      declarations: [MenuItemComponent, MockBadgeComponent]
+      declarations: [MenuItemComponent, MockBadgeComponent],
     }).compileComponents();
   }));
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { AccountPassword } from '@coachcare/backend/services';
 import { _, FormUtils } from '@coachcare/backend/shared';
 import { ConfirmDialog } from '@coachcare/common/dialogs/core';
@@ -11,8 +11,8 @@ import { ContextService } from '@coachcare/common/services';
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss'],
   host: {
-    class: 'ccr-page-card'
-  }
+    class: 'ccr-page-card',
+  },
 })
 export class PasswordResetPageComponent implements OnInit {
   form: FormGroup;
@@ -27,7 +27,7 @@ export class PasswordResetPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.builder.group({
-      email: ''
+      email: '',
     });
   }
 
@@ -41,7 +41,7 @@ export class PasswordResetPageComponent implements OnInit {
 
       const request = {
         email: this.form.value.email,
-        organization: this.context.organizationId || undefined
+        organization: this.context.organizationId || undefined,
       };
 
       this.password
@@ -50,8 +50,8 @@ export class PasswordResetPageComponent implements OnInit {
           this.dialog.open(ConfirmDialog, {
             data: {
               title: _('GLOBAL.DONE'),
-              content: _('NOTIFY.SUCCESS.CHECK_RESET_EMAIL')
-            }
+              content: _('NOTIFY.SUCCESS.CHECK_RESET_EMAIL'),
+            },
           });
           this.isProcessing = false;
         })
@@ -59,8 +59,8 @@ export class PasswordResetPageComponent implements OnInit {
           this.dialog.open(ConfirmDialog, {
             data: {
               title: _('GLOBAL.ERROR'),
-              content: err
-            }
+              content: err,
+            },
           });
           this.isProcessing = false;
         });

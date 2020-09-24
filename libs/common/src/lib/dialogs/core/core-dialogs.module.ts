@@ -5,8 +5,8 @@ import {
   MatButtonModule,
   MatDialogModule,
   MatGridListModule,
-  MatIconModule
-} from '@coachcare/layout';
+  MatIconModule,
+} from '@coachcare/common/material';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ConfirmDialog } from './confirm/confirm.dialog';
@@ -21,10 +21,10 @@ import { PromptDialog } from './prompt/prompt.dialog';
     MatDialogModule,
     MatGridListModule,
     MatIconModule,
-    TranslateModule
+    TranslateModule,
   ],
   declarations: [ConfirmDialog, PromptDialog, LanguagesDialog],
   entryComponents: [ConfirmDialog, PromptDialog, LanguagesDialog],
-  exports: [ConfirmDialog, PromptDialog, LanguagesDialog]
+  exports: [ConfirmDialog, PromptDialog, LanguagesDialog],
 })
 export class CcrCoreDialogsModule {}

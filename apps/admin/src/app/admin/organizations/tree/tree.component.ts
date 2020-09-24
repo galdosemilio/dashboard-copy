@@ -1,19 +1,22 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@coachcare/layout';
+import {
+  MatTreeFlatDataSource,
+  MatTreeFlattener,
+} from '@coachcare/common/material';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import {
   AddOrganizationDialog,
   OrganizationDialogs,
-  OrganizationParams
+  OrganizationParams,
 } from '@board/services';
 import {
   ClinicFlatNode,
   ClinicNode,
-  OrganizationsTreeDatabase
+  OrganizationsTreeDatabase,
 } from '@coachcare/backend/data';
 import { OrganizationSingle } from '@coachcare/backend/services';
 import { _ } from '@coachcare/backend/shared';
@@ -23,7 +26,7 @@ import { NotifierService } from '@coachcare/common/services';
 @Component({
   selector: 'ccr-organizations-tree',
   templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss']
+  styleUrls: ['./tree.component.scss'],
 })
 export class OrganizationsTreeComponent implements OnInit {
   organzation: OrganizationSingle;
@@ -67,7 +70,7 @@ export class OrganizationsTreeComponent implements OnInit {
       this.treeFlattener
     );
 
-    this.database.dataChange.subscribe(data => {
+    this.database.dataChange.subscribe((data) => {
       this.dataSource.data = data;
     });
 
@@ -85,7 +88,7 @@ export class OrganizationsTreeComponent implements OnInit {
       nodeName: node.nodeName,
       nodeType: node.nodeType,
       org: node.org,
-      loadMoreParentItem: node.loadMoreParentItem
+      loadMoreParentItem: node.loadMoreParentItem,
     };
 
     this.nodeMap.set(node.nodeName, newNode);
@@ -139,13 +142,13 @@ export class OrganizationsTreeComponent implements OnInit {
               ? _('ADMIN.ORGS.ADD_CHILD_ORG')
               : _('ADMIN.ORGS.ADD_PARENT_ORG'),
           organization: node.org.id,
-          addChild: node.nodeType === 'childNode'
+          addChild: node.nodeType === 'childNode',
         },
         disableClose: true,
-        panelClass: 'ccr-full-dialog'
+        panelClass: 'ccr-full-dialog',
       })
       .afterClosed()
-      .subscribe(res => {
+      .subscribe((res) => {
         if (res) {
           this.database.initialize(this.organzation);
           this.treeControl.expand(this.treeControl.dataNodes[0]);
@@ -161,7 +164,7 @@ export class OrganizationsTreeComponent implements OnInit {
       content: node.org.hierarchyPath.includes(this.organzation.id)
         ? _('PROMPT.ORGS.CONFIRM_REMOVE_CHILD_PROMPT')
         : _('PROMPT.ORGS.CONFIRM_REMOVE_PARENT_PROMPT'),
-      contentParams: { item: `${node.org.name}` }
+      contentParams: { item: `${node.org.name}` },
     };
 
     const org = node.org.hierarchyPath.includes(this.organzation.id)
@@ -174,7 +177,7 @@ export class OrganizationsTreeComponent implements OnInit {
         this.treeControl.expand(this.treeControl.dataNodes[0]);
         this.notifier.success(_('NOTIFY.SUCCESS.CLINIC_REMOVED'));
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
           this.notifier.error(err);

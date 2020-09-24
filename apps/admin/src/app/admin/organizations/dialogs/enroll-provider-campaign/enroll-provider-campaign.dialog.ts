@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 import { _ } from '@coachcare/backend/shared';
 import { NotifierService } from '@coachcare/common/services';
 import { ActiveCampaign } from 'selvera-api';
@@ -13,7 +13,7 @@ interface EnrollProviderCampaignDialogData {
   selector: 'ccr-organizations-enroll-provider-campaign-dialog',
   templateUrl: './enroll-provider-campaign.dialog.html',
   styleUrls: ['./enroll-provider-campaign.dialog.scss'],
-  host: { class: 'ccr-dialog' }
+  host: { class: 'ccr-dialog' },
 })
 export class EnrollProviderCampaignDialogComponent implements OnInit {
   public form: FormGroup;
@@ -46,7 +46,7 @@ export class EnrollProviderCampaignDialogComponent implements OnInit {
 
       await this.activeCampaign.createNewsletterSubscription({
         account: formValue.provider,
-        organization: this.organizationId
+        organization: this.organizationId,
       });
 
       this.notifier.success(
@@ -62,7 +62,7 @@ export class EnrollProviderCampaignDialogComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      provider: ['', Validators.required]
+      provider: ['', Validators.required],
     });
   }
 }

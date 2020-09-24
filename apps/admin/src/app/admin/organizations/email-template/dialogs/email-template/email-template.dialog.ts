@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 import { _ } from '@coachcare/backend/shared';
 import { NotifierService } from '@coachcare/common/services';
 import { Organization } from 'selvera-api';
@@ -21,35 +21,35 @@ interface SelectorOption {
   selector: 'ccr-organizations-email-template-dialog',
   templateUrl: './email-template.dialog.html',
   host: {
-    class: 'ccr-dialog'
-  }
+    class: 'ccr-dialog',
+  },
 })
 export class EmailTemplateDialogComponent implements OnInit {
   categories: SelectorOption[] = [
     {
       value: 'client',
-      displayValue: _('EMAIL_TEMPLATE_CATS.CLIENT')
+      displayValue: _('EMAIL_TEMPLATE_CATS.CLIENT'),
     },
     {
       value: 'other',
-      displayValue: _('EMAIL_TEMPLATE_CATS.OTHER')
-    }
+      displayValue: _('EMAIL_TEMPLATE_CATS.OTHER'),
+    },
   ];
   form: FormGroup;
   id: string;
   operations: SelectorOption[] = [
     {
       value: 'internal-registration',
-      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION')
+      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION'),
     },
     {
       value: 'internal-registration-plan',
-      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION_PLAN')
+      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION_PLAN'),
     },
     {
       value: 'new-account',
-      displayValue: _('EMAIL_TEMPLATE_OPS.NEW_ACCOUNT')
-    }
+      displayValue: _('EMAIL_TEMPLATE_OPS.NEW_ACCOUNT'),
+    },
   ];
   orgId: string;
   title: string;
@@ -80,12 +80,12 @@ export class EmailTemplateDialogComponent implements OnInit {
       if (this.id) {
         await this.organization.updateEmailTemplate({
           id: this.id,
-          ...this.form.value
+          ...this.form.value,
         });
       } else {
         await this.organization.createEmailTemplate({
           ...this.form.value,
-          organization: this.orgId
+          organization: this.orgId,
         });
       }
       this.notify.success(_('NOTIFY.SUCCESS.EMAIL_TEMPLATE_SAVED'));
@@ -102,7 +102,7 @@ export class EmailTemplateDialogComponent implements OnInit {
       category: ['', Validators.required],
       subject: [''],
       html: [''],
-      text: ['']
+      text: [''],
     });
   }
 }

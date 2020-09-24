@@ -4,11 +4,14 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
   MissingTranslationHandler,
   TranslateLoader,
-  TranslateModule
+  TranslateModule,
 } from '@ngx-translate/core';
 
 import { MissingStringsHandler } from '@coachcare/backend/shared';
-import { I18N_CATALOGS, TranslateLoaderFactory } from '@coachcare/common/services';
+import {
+  I18N_CATALOGS,
+  TranslateLoaderFactory,
+} from '@coachcare/common/services';
 import { AppLocaleCode, locales } from '@coachcare/common/shared';
 
 // register supported locales
@@ -22,20 +25,20 @@ locales.forEach(async (code: AppLocaleCode) => {
 });
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class AppI18nModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<TranslateModule> {
     return TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: TranslateLoaderFactory,
-        deps: [HttpClient, I18N_CATALOGS]
+        deps: [HttpClient, I18N_CATALOGS],
       },
       missingTranslationHandler: {
         provide: MissingTranslationHandler,
-        useClass: MissingStringsHandler
-      }
+        useClass: MissingStringsHandler,
+      },
     });
   }
 }

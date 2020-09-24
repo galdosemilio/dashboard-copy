@@ -3,10 +3,10 @@ import {
   forwardRef,
   Inject,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { ActivatedRoute } from '@angular/router';
 import { MFACodeInputMode } from '@board/shared/mfa-code-input';
 import {
@@ -16,7 +16,7 @@ import {
   LoginSessionRequest,
   LoginSessionResponse,
   MobileApp,
-  Session
+  Session,
 } from '@coachcare/backend/services';
 import { _, FormUtils } from '@coachcare/backend/shared';
 import { SessionActions } from '@coachcare/backend/store/session';
@@ -27,7 +27,7 @@ import {
   COOKIE_ROLE,
   CookieService,
   NotifierService,
-  STORAGE_HIDE_REGISTER_COMPANY
+  STORAGE_HIDE_REGISTER_COMPANY,
 } from '@coachcare/common/services';
 import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared';
 import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store';
@@ -42,14 +42,14 @@ type LoginPageMode = 'patient';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   host: {
-    class: 'ccr-page-card'
+    class: 'ccr-page-card',
   },
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => LoginPageComponent)
-    }
-  ]
+      useExisting: forwardRef(() => LoginPageComponent),
+    },
+  ],
 })
 export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
   androidLink: string;
@@ -78,16 +78,20 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     private store: Store<OrgPrefState.State>,
     private translate: TranslateService
   ) {
-    this.store.pipe(select(OrgPrefSelectors.selectAssets)).subscribe(assets => {
-      this.logoUrl =
-        assets && assets.logoUrl ? assets.logoUrl : '/assets/logo.png';
-    });
+    this.store
+      .pipe(select(OrgPrefSelectors.selectAssets))
+      .subscribe((assets) => {
+        this.logoUrl =
+          assets && assets.logoUrl ? assets.logoUrl : '/assets/logo.png';
+      });
 
-    this.store.pipe(select(OrgPrefSelectors.selectOrgPref)).subscribe(prefs => {
-      this.orgName = prefs.displayName || '';
-    });
+    this.store
+      .pipe(select(OrgPrefSelectors.selectOrgPref))
+      .subscribe((prefs) => {
+        this.orgName = prefs.displayName || '';
+      });
 
-    this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       const accountType = params.accountType;
 
       if (accountType === AccountTypeIds.Client) {
@@ -103,7 +107,7 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
   ngOnInit() {
     this.form = this.builder.group({
       email: '',
-      password: ''
+      password: '',
     });
     this.mfaForm = this.builder.group({});
     this.resolveBadgeLinks(
@@ -133,13 +137,13 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
         deviceType: DeviceTypeIds.Web,
         allowedAccountTypes: [AccountTypeIds.Admin, AccountTypeIds.Provider],
         organization:
-          this.context.organizationId || this.environment.defaultOrgId
+          this.context.organizationId || this.environment.defaultOrgId,
       };
 
       this.isLoggingIn = true;
       this.session
         .login(request)
-        .then(response => {
+        .then((response) => {
           if (response.mfa) {
             this.detectMFA(response);
           }
@@ -156,15 +160,15 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
             this.dialog.open(ConfirmDialog, {
               data: {
                 title: _('GLOBAL.ERROR'),
-                content: _('NOTIFY.ERROR.MFA_NOT_VERIFIED')
-              }
+                content: _('NOTIFY.ERROR.MFA_NOT_VERIFIED'),
+              },
             });
           } else {
             this.dialog.open(ConfirmDialog, {
               data: {
                 title: _('GLOBAL.ERROR'),
-                content: err.data ? err.data.message : err
-              }
+                content: err.data ? err.data.message : err,
+              },
             });
           }
         });
@@ -190,8 +194,8 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
           type: this.mode === 'backup_code' ? 'backup' : 'totp',
           value: this.mfaForm.value.code.code
             ? this.mfaForm.value.code.code.replace(/\s/g, '')
-            : ''
-        }
+            : '',
+        },
       });
     } catch (error) {
       this.notify.error(error);
@@ -217,7 +221,7 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     try {
       this.androidLink = (
         await this.mobileApp.getAndroidRedirect({
-          id: this.context.organizationId || ''
+          id: this.context.organizationId || '',
         })
       ).redirect;
     } catch (error) {}
@@ -225,7 +229,7 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     try {
       this.iosLink = (
         await this.mobileApp.getiOsRedirect({
-          id: this.context.organizationId || ''
+          id: this.context.organizationId || '',
         })
       ).redirect;
     } catch (error) {}

@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -10,7 +15,7 @@ import { initialState } from './state';
 import { CCRFacade } from './store.facade';
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class CCRStoreModule {
   constructor(
@@ -23,14 +28,14 @@ export class CCRStoreModule {
     }
   }
 
-  static forParent(): ModuleWithProviders[] {
+  static forParent(): ModuleWithProviders<NgModule>[] {
     return [
       {
         ngModule: CCRStoreModule,
-        providers: [CCRFacade]
+        providers: [CCRFacade],
       },
       StoreModule.forFeature(NAME, reducers, { initialState }),
-      EffectsModule.forFeature(effects)
+      EffectsModule.forFeature(effects),
     ];
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { ActivatedRoute } from '@angular/router';
 import {
   EmailTemplatesDatabase,
-  EmailTemplatesDataSource
+  EmailTemplatesDataSource,
 } from '@coachcare/backend/data';
 import { _ } from '@coachcare/backend/shared';
 import { ContextService } from '@coachcare/common/services';
@@ -12,7 +12,7 @@ import { EmailTemplateDialogComponent } from './dialogs';
 
 @Component({
   selector: 'ccr-organizations-email-template',
-  templateUrl: './email-template.component.html'
+  templateUrl: './email-template.component.html',
 })
 export class EmailTemplateComponent implements OnDestroy, OnInit {
   orgId: string;
@@ -31,9 +31,9 @@ export class EmailTemplateComponent implements OnDestroy, OnInit {
     this.source = new EmailTemplatesDataSource(this.database);
     this.source.addDefault({ organization: this.context.organizationId });
 
-    this.route.data.pipe(untilDestroyed(this)).subscribe(data => {
+    this.route.data.pipe(untilDestroyed(this)).subscribe((data) => {
       this.source.addDefault({
-        organization: data.org.id || this.context.organizationId
+        organization: data.org.id || this.context.organizationId,
       });
       this.source.refresh();
       this.orgId = data.org.id || this.context.organizationId;
@@ -44,11 +44,11 @@ export class EmailTemplateComponent implements OnDestroy, OnInit {
     this.dialog
       .open(EmailTemplateDialogComponent, {
         data: { orgId: this.orgId },
-        width: '60vw'
+        width: '60vw',
       })
       .afterClosed()
       .pipe(untilDestroyed(this))
-      .subscribe(refresh => {
+      .subscribe((refresh) => {
         if (refresh) {
           this.source.refresh();
         }

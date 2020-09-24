@@ -1,0 +1,24 @@
+{
+  "LAYOUT": {
+    "BACK_TO_MAINSITE": "Back to coachcare.com",
+    "CONTACT_US": "Contact Us",
+    "HIPAA": "HIPAA BAA",
+    "MSA": "MSA",
+    "POWEREDBY": "{{company}}",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "TERMS_OF_SERVICE": "Terms of Service"
+  },
+  "LINK": {
+    "HIPAA": "https://www.coachcare.com/hipaa/",
+    "MSA": "https://www.coachcare.com/agreement/",
+    "PRIVACY_POLICY": "https://www.coachcare.com/privacy/",
+    "SUPPORT": "https://coachcare.zendesk.com/hc/en-us/requests/new",
+    "TERMS_OF_SERVICE": "https://www.coachcare.com/terms/"
+  },
+  "MENU": {
+    "HELLO": "Hello {{userName}}.",
+    "LOGOUT": "Logout",
+    "PROFILE": "Profile",
+    "SEARCH": "Search"
+  }
+}

@@ -12,20 +12,20 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
 import {
   MAT_LABEL_GLOBAL_OPTIONS,
   MatDialog,
-  MatStepper
-} from '@coachcare/layout';
+  MatStepper,
+} from '@coachcare/common/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { resolveConfig } from '@board/pages/config/section.config';
 import { Register } from '@coachcare/backend/services';
@@ -37,7 +37,7 @@ import {
   ContextService,
   COOKIE_LANG,
   CookieService,
-  LanguageService
+  LanguageService,
 } from '@coachcare/common/services';
 import { AppStoreFacade, OrgPrefState } from '@coachcare/common/store';
 import { get } from 'lodash';
@@ -51,11 +51,11 @@ import { LastStepComponentProps } from './last-step';
   templateUrl: './clinic.component.html',
   styleUrls: ['./clinic.component.scss'],
   providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'never' } }
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'never' } },
   ],
   host: {
-    class: 'ccr-page-content'
-  }
+    class: 'ccr-page-content',
+  },
 })
 export class RegisterClinicPageComponent implements OnDestroy, OnInit {
   isLoading = false;
@@ -90,7 +90,7 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
     private router: Router,
     private store: CCRFacade
   ) {
-    this.org.pref$.subscribe(pref => {
+    this.org.pref$.subscribe((pref) => {
       this.logoUrl =
         pref.assets && pref.assets.logoUrl
           ? pref.assets.logoUrl
@@ -118,7 +118,7 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
     if (this.mobAppTypes && this.mobAppTypes.length) {
       this.mobAppTypes = this.mobAppTypes.map((mobAppType, index) => ({
         ...mobAppType,
-        index
+        index,
       }));
     }
 
@@ -140,11 +140,11 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
 
     this.plan = this.builder.group({
       type: ['', Validators.required],
-      billingPeriod: ['']
+      billingPeriod: [''],
     });
 
     this.step0 = this.builder.group({
-      parentOrganizationId: ['', Validators.required]
+      parentOrganizationId: ['', Validators.required],
     });
 
     this.step1 = this.builder.group(
@@ -159,9 +159,9 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
             city: ['', Validators.required],
             state: [null, Validators.required],
             postalCode: ['', Validators.required],
-            country: ['US', Validators.required]
+            country: ['US', Validators.required],
           }),
-          isActive: true
+          isActive: true,
         }),
         account: this.builder.group({
           firstName: ['', Validators.required],
@@ -170,19 +170,19 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
           phone: ['', Validators.required],
           timezone: timezone !== '' ? timezone : 'America/New_York',
           preferredLocales: [lang],
-          isActive: true
-        })
+          isActive: true,
+        }),
       },
       {
-        validator: this.validateStep1
+        validator: this.validateStep1,
       }
     );
 
     this.step2 = this.builder.group({
-      token: ['']
+      token: [''],
     });
 
-    this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       const cookieLang = this.cookie.get(COOKIE_LANG);
       const queryLang =
         params.hasOwnProperty('selectedLanguage') &&
@@ -217,9 +217,9 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
         setTimeout(() => {
           this.dialog.open(LanguagesDialog, {
             data: {
-              title: _('GLOBAL.SELECT_LANGUAGE')
+              title: _('GLOBAL.SELECT_LANGUAGE'),
             },
-            panelClass: 'ccr-lang-dialog'
+            panelClass: 'ccr-lang-dialog',
           });
         });
       }
@@ -280,12 +280,12 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
           firstName: data.account.firstName,
           lastName: data.account.lastName,
           email: data.account.email,
-          phone: data.account.phone
+          phone: data.account.phone,
         };
         if (this.step2.value.token) {
           data.paymentData = {
             email: data.account.email,
-            token: this.step2.value.token
+            token: this.step2.value.token,
           };
         }
         if (this.plan.valid) {
@@ -304,8 +304,8 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
             this.dialog.open(ConfirmDialog, {
               data: {
                 title: _('GLOBAL.ERROR'),
-                content: err
-              }
+                content: err,
+              },
             });
           });
         break;
@@ -345,7 +345,7 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
       if (this.top) {
         this.top.nativeElement.scrollIntoView({
           behavior: 'smooth',
-          block: 'start'
+          block: 'start',
         });
       }
     }, 25);

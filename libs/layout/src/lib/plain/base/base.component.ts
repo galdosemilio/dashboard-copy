@@ -3,14 +3,14 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import {
   ActivatedRoute,
   ActivatedRouteSnapshot,
   NavigationEnd,
-  Router
+  Router,
 } from '@angular/router';
 import { _ } from '@coachcare/backend/shared';
 import { ContextService } from '@coachcare/common/services';
@@ -25,7 +25,7 @@ import { PlainLayoutConfig } from '../plain-layout.config';
   selector: 'ccr-plain-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class BaseComponent implements OnInit, OnDestroy {
   headerLink = false;
@@ -54,9 +54,9 @@ export class BaseComponent implements OnInit, OnDestroy {
     // listen the current route data
     this.subs[0] = this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         map(() => this.activatedRoute.snapshot),
-        map(route => {
+        map((route) => {
           while (route.firstChild) {
             route = route.firstChild;
           }
@@ -83,15 +83,15 @@ export class BaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subs.forEach(s => s.unsubscribe());
+    this.subs.forEach((s) => s.unsubscribe());
   }
 
   selectLanguage() {
     this.dialog.open(LanguagesDialog, {
       data: {
-        title: _('GLOBAL.SELECT_LANGUAGE')
+        title: _('GLOBAL.SELECT_LANGUAGE'),
       },
-      panelClass: 'ccr-lang-dialog'
+      panelClass: 'ccr-lang-dialog',
     });
   }
 }

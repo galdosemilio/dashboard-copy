@@ -10,8 +10,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
 
 import {
   SharedComponents,
-  SharedEntryComponents
+  SharedEntryComponents,
 } from '@board/shared/shared.barrel';
+import { CcrMaterialModule } from '@coachcare/common/material/material.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {
     ReactiveFormsModule,
     TranslateModule.forChild(),
     AppCommonModule.forChild(),
-    CcrFormFieldsModule
+    CcrFormFieldsModule,
+    CcrMaterialModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -34,9 +36,9 @@ import {
     AppCommonModule,
     CcrFormFieldsModule,
     ColorPickerModule,
-    SharedComponents
+    SharedComponents,
   ],
   declarations: SharedComponents,
-  entryComponents: SharedEntryComponents
+  entryComponents: SharedEntryComponents,
 })
 export class SharedModule {}

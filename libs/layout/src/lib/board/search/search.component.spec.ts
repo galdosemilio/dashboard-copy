@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@coachcare/layout';
-import { MatDialogModule } from '@coachcare/layout';
-import { MatSnackBarModule } from '@coachcare/layout';
+import { MatAutocompleteModule } from '@coachcare/common/material';
+import { MatDialogModule } from '@coachcare/common/material';
+import { MatSnackBarModule } from '@coachcare/common/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   AuthService,
@@ -12,7 +12,7 @@ import {
   CookieService,
   EventsService,
   LanguageService,
-  NotifierService
+  NotifierService,
 } from '@coachcare/common/services';
 import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared';
 import { TranslateModule } from '@ngx-translate/core';
@@ -20,7 +20,7 @@ import { Account, ApiService, User } from 'selvera-api';
 import {
   AccountFactory,
   ApiFactory,
-  UserFactory
+  UserFactory,
 } from '../../../services/api.services';
 import { environment, projectConfig } from '../../../tests/index';
 import { SearchComponent } from './search.component';
@@ -32,7 +32,7 @@ class MockAuthService {
 }
 @Component({
   selector: 'ccr-icon-search',
-  template: ''
+  template: '',
 })
 class MockIconSearchComponent {
   @Input() fill: string;
@@ -51,44 +51,44 @@ describe('Layout.SearchComponent', () => {
         MatSnackBarModule,
         ReactiveFormsModule,
         TranslateModule.forRoot(),
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [SearchComponent, MockIconSearchComponent],
       providers: [
         {
           provide: APP_ENVIRONMENT,
-          useValue: environment
+          useValue: environment,
         },
         {
           provide: APP_CONFIG,
-          useValue: projectConfig
+          useValue: projectConfig,
         },
         {
           provide: ApiService,
           useFactory: ApiFactory,
-          deps: [APP_ENVIRONMENT]
+          deps: [APP_ENVIRONMENT],
         },
         {
           provide: Account,
           useFactory: AccountFactory,
-          deps: [ApiService]
+          deps: [ApiService],
         },
         {
           provide: User,
           useFactory: UserFactory,
-          deps: [ApiService]
+          deps: [ApiService],
         },
         {
           provide: AuthService,
-          useClass: MockAuthService
+          useClass: MockAuthService,
         },
         CookieService,
         ConfigService,
         ContextService,
         EventsService,
         LanguageService,
-        NotifierService
-      ]
+        NotifierService,
+      ],
     }).compileComponents();
   }));
 

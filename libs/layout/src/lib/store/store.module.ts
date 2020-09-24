@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -9,7 +14,7 @@ import { NAME } from './selectors';
 import { initialState } from './state';
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class LayoutStoreModule {
   constructor(
@@ -22,10 +27,10 @@ export class LayoutStoreModule {
     }
   }
 
-  static forParent(): ModuleWithProviders[] {
+  static forParent(): ModuleWithProviders<NgModule>[] {
     return [
       StoreModule.forFeature(NAME, reducers, { initialState }),
-      EffectsModule.forFeature(effects)
+      EffectsModule.forFeature(effects),
     ];
   }
 }

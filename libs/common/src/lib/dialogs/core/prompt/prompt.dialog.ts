@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 import { _ } from '@coachcare/backend/shared';
 import { PromptDialogData } from './prompt-data.interface';
 
@@ -7,8 +7,8 @@ import { PromptDialogData } from './prompt-data.interface';
   selector: 'ccr-dialog-prompt',
   templateUrl: 'prompt.dialog.html',
   host: {
-    class: 'ccr-dialog ccr-prompt'
-  }
+    class: 'ccr-dialog ccr-prompt',
+  },
 })
 export class PromptDialog {
   title = '';
@@ -26,7 +26,7 @@ export class PromptDialog {
       no: _('GLOBAL.NO'),
       yes: _('GLOBAL.YES'),
       color: 'warn',
-      ...data
+      ...data,
     };
   }
 }

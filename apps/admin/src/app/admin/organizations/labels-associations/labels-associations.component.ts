@@ -3,25 +3,25 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   MatAutocompleteSelectedEvent,
   MatDialog,
-  MatSelectChange
-} from '@coachcare/layout';
+  MatSelectChange,
+} from '@coachcare/common/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizationParams } from '@board/services';
 import {
   LabelsOrganizationDatabase,
   LabelsOrganizationDataSource,
-  PackageAssociationElement
+  PackageAssociationElement,
 } from '@coachcare/backend/data';
 import { getterPaginator } from '@coachcare/backend/model';
 import {
   PackageOrganization,
-  PackageSingle
+  PackageSingle,
 } from '@coachcare/backend/services';
 import { _ } from '@coachcare/backend/shared';
 import { PaginatorComponent } from '@coachcare/common/components';
@@ -35,7 +35,7 @@ import { CreateLabelDialogComponent } from '../dialogs';
 @Component({
   selector: 'ccr-organizations-labels-associations',
   templateUrl: './labels-associations.component.html',
-  styleUrls: ['./labels-associations.component.scss']
+  styleUrls: ['./labels-associations.component.scss'],
 })
 export class LabelsAssociationsComponent implements OnDestroy, OnInit {
   @ViewChild(PaginatorComponent, { static: true })
@@ -47,7 +47,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
     'description',
     'organization',
     'status',
-    'actions'
+    'actions',
   ];
   public form: FormGroup;
   public labels: PackageSingle[] = [];
@@ -88,7 +88,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
       if (this.params.org) {
         await this.packageOrganization.create({
           organization: this.params.org.id,
-          package: this.selectedLabelId
+          package: this.selectedLabelId,
         });
       }
       this.selectedLabelId = '';
@@ -106,7 +106,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
 
   public autocompleteDisplayWith(value: any): string {
     const label = this.labels
-      ? this.labels.find(l => l.id === value)
+      ? this.labels.find((l) => l.id === value)
       : undefined;
     return label ? label.title : '';
   }
@@ -121,13 +121,13 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
     const data: PromptDialogData = {
       title: _('PROMPT.LABELS.DISABLE'),
       content: _('PROMPT.LABELS.DISABLE_PROMPT'),
-      contentParams: { label: association.package.title }
+      contentParams: { label: association.package.title },
     };
 
     this.dialog
       .open(PromptDialog, { data })
       .afterClosed()
-      .subscribe(async confirm => {
+      .subscribe(async (confirm) => {
         try {
           if (!confirm) {
             this.source.refresh();
@@ -140,16 +140,16 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
           if (association.inherited && this.params.org) {
             const entity = await this.packageOrganization.create({
               organization: this.params.org.id,
-              package: association.package.id
+              package: association.package.id,
             });
             await this.packageOrganization.update({
               id: entity.id,
-              isActive: false
+              isActive: false,
             });
           } else {
             await this.packageOrganization.update({
               id: association.id,
-              isActive: false
+              isActive: false,
             });
           }
 
@@ -173,13 +173,13 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
     const data: PromptDialogData = {
       title: _('PROMPT.LABELS.DISOCCIATE'),
       content: _('PROMPT.LABELS.DISOCCIATE_PROMPT'),
-      contentParams: { label: association.package.title }
+      contentParams: { label: association.package.title },
     };
 
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()
-      .subscribe(async confirm => {
+      .subscribe(async (confirm) => {
         try {
           if (!confirm) {
             this.source.refresh();
@@ -206,13 +206,13 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
     const data: PromptDialogData = {
       title: _('PROMPT.LABELS.ENABLE'),
       content: _('PROMPT.LABELS.ENABLE_PROMPT'),
-      contentParams: { label: association.package.title }
+      contentParams: { label: association.package.title },
     };
 
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()
-      .subscribe(async confirm => {
+      .subscribe(async (confirm) => {
         try {
           if (!confirm) {
             this.source.refresh();
@@ -225,12 +225,12 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
           if (association.inherited && this.params.org) {
             await this.packageOrganization.create({
               organization: this.params.org.id,
-              package: association.package.id
+              package: association.package.id,
             });
           } else {
             await this.packageOrganization.update({
               id: association.id,
-              isActive: true
+              isActive: true,
             });
           }
 
@@ -281,7 +281,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
 
   public showLabelDialog(): void {
     const dialog = this.dialog.open(CreateLabelDialogComponent);
-    dialog.afterClosed().subscribe(result => {
+    dialog.afterClosed().subscribe((result) => {
       if (result && result.id) {
         this.selectedLabelId = result.id;
         this.associate();
@@ -310,7 +310,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
       organization: this.params.org
         ? this.params.org.id
         : this.context.organizationId,
-      status: 'all'
+      status: 'all',
     });
   }
 
@@ -320,7 +320,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
       const labels = await this.packageService.getAll({
         isActive: true,
         limit: 'all',
-        offset: 0
+        offset: 0,
       });
       this.labels = labels.data.sort((prev, next) =>
         Number(prev.id) < Number(next.id)
@@ -341,7 +341,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
     const query = this.form.value.query;
     const queryRegex = new RegExp(`${query}`, 'gi');
     this.shownLabels = query
-      ? this.labels.filter(label => queryRegex.test(label.title))
+      ? this.labels.filter((label) => queryRegex.test(label.title))
       : this.labels.slice();
     this.cdr.detectChanges();
   }

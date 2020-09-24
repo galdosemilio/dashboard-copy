@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CcrDirectivesModule } from '@coachcare/common/directives';
+import { CcrMaterialModule } from '@coachcare/common/material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { UserSearchComponent } from './autocompleters';
 
 import { AccountAutocompleterComponent } from './autocompleters/account/account.component';
 import { OrganizationAutocompleterComponent } from './autocompleters/organization/organization.component';
@@ -32,7 +34,8 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     FlexLayoutModule,
     ReactiveFormsModule,
     TranslateModule.forChild(),
-    CcrDirectivesModule
+    CcrDirectivesModule,
+    CcrMaterialModule,
   ],
   declarations: [
     // fields
@@ -53,7 +56,8 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     // filters
     AccountFilterComponent,
     LabelsFilterComponent,
-    OrganizationsFilterComponent
+    OrganizationsFilterComponent,
+    UserSearchComponent,
   ],
   exports: [
     // fields
@@ -74,7 +78,8 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     // filters
     AccountFilterComponent,
     LabelsFilterComponent,
-    OrganizationsFilterComponent
-  ]
+    OrganizationsFilterComponent,
+    UserSearchComponent,
+  ],
 })
 export class CcrFormFieldsModule {}

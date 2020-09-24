@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatListModule } from '@coachcare/layout';
-import { MatToolbarModule } from '@coachcare/layout';
+import { MatListModule } from '@coachcare/common/material';
+import { MatToolbarModule } from '@coachcare/common/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ConfigService, EventsService } from '@coachcare/common/services';
 import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared';
@@ -16,7 +16,7 @@ describe('Layout.MenuComponent', () => {
 
   @Component({
     selector: 'ccr-search',
-    template: ''
+    template: '',
   })
   class MockSearchComponent {
     @Input() fill: string;
@@ -24,7 +24,7 @@ describe('Layout.MenuComponent', () => {
 
   @Component({
     selector: 'ccr-menuitem',
-    template: ''
+    template: '',
   })
   class MockMenuItemComponent {
     @Input() menuItem: any;
@@ -40,25 +40,25 @@ describe('Layout.MenuComponent', () => {
       providers: [
         {
           provide: APP_ENVIRONMENT,
-          useValue: environment
+          useValue: environment,
         },
         {
           provide: APP_CONFIG,
-          useValue: projectConfig
+          useValue: projectConfig,
         },
         {
           provide: ApiService,
           useFactory: ApiFactory,
-          deps: [APP_ENVIRONMENT]
+          deps: [APP_ENVIRONMENT],
         },
         {
           provide: Message,
           useFactory: MessageFactory,
-          deps: [ApiService]
+          deps: [ApiService],
         },
         ConfigService,
-        EventsService
-      ]
+        EventsService,
+      ],
     }).compileComponents();
   }));
 

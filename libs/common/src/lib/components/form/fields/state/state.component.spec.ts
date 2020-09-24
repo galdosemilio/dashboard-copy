@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@coachcare/layout';
+import { MatSelectModule } from '@coachcare/common/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { StateFormFieldComponent } from './state.component';
@@ -14,7 +14,7 @@ describe('Form.StateSelectComponent', () => {
       <form [formGroup]="form">
         <ccr-form-field-state formControlName="test"></ccr-form-field-state>
       </form>
-    `
+    `,
   })
   class TestHostComponent implements OnInit {
     form: FormGroup;
@@ -23,7 +23,7 @@ describe('Form.StateSelectComponent', () => {
 
     ngOnInit() {
       this.form = this.builder.group({
-        test: null
+        test: null,
       });
     }
   }
@@ -37,9 +37,9 @@ describe('Form.StateSelectComponent', () => {
         NoopAnimationsModule,
         ReactiveFormsModule,
         MatSelectModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
       ],
-      declarations: [TestHostComponent, StateFormFieldComponent]
+      declarations: [TestHostComponent, StateFormFieldComponent],
     }).compileComponents();
   }));
 

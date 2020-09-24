@@ -6,8 +6,8 @@ import {
   MatAutocompleteModule,
   MatButtonModule,
   MatDialogModule,
-  MatProgressSpinnerModule
-} from '@coachcare/layout';
+  MatProgressSpinnerModule,
+} from '@coachcare/common/material';
 import { CcrScheduleSelectModule } from './schedule-select/schedule-select.module';
 
 @NgModule({
@@ -19,8 +19,8 @@ import { CcrScheduleSelectModule } from './schedule-select/schedule-select.modul
     MatButtonModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    CcrScheduleSelectModule
+    CcrScheduleSelectModule,
   ],
-  exports: [CcrScheduleSelectModule]
+  exports: [CcrScheduleSelectModule],
 })
 export class CcrUsersDialogsModule {}

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 import { NamedEntity } from '@coachcare/backend/services';
 import { _ } from '@coachcare/backend/shared';
 import { NotifierService } from '@coachcare/common/services';
@@ -14,7 +14,7 @@ export interface AssociateActiveCampaignDialogData {
   selector: 'ccr-organizations-associate-active-campaign-dialog',
   templateUrl: './associate-active-campaign.dialog.html',
   styleUrls: ['./associate-active-campaign.dialog.scss'],
-  host: { class: 'ccr-dialog' }
+  host: { class: 'ccr-dialog' },
 })
 export class AssociateActiveCampaignDialogComponent implements OnInit {
   public activeCampaigns: NamedEntity[] = [];
@@ -38,7 +38,7 @@ export class AssociateActiveCampaignDialogComponent implements OnInit {
     try {
       const formValue = this.form.value;
       const selectedCampaign = this.activeCampaigns.find(
-        campaign => campaign.id === formValue.campaign
+        (campaign) => campaign.id === formValue.campaign
       );
 
       if (!selectedCampaign) {
@@ -47,7 +47,7 @@ export class AssociateActiveCampaignDialogComponent implements OnInit {
 
       await this.activeCampaign.createListAssociation({
         list: { id: selectedCampaign.id, name: selectedCampaign.name },
-        organization: this.data.organizationId
+        organization: this.data.organizationId,
       });
 
       this.notifier.success(
@@ -61,7 +61,7 @@ export class AssociateActiveCampaignDialogComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      campaign: ['', Validators.required]
+      campaign: ['', Validators.required],
     });
   }
 

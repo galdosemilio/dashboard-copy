@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSidenavModule } from '@coachcare/layout';
-import { MatToolbarModule } from '@coachcare/layout';
+import { MatSidenavModule } from '@coachcare/common/material';
+import { MatToolbarModule } from '@coachcare/common/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   ConfigService,
   EventsService,
-  LayoutService
+  LayoutService,
 } from '@coachcare/common/services';
 import { APP_CONFIG } from '@coachcare/common/shared';
 import { projectConfig } from '@coachcare/common/tests';
@@ -16,7 +16,7 @@ import { BaseComponent } from './base.component';
 
 @Component({
   selector: 'ccr-menu',
-  template: ''
+  template: '',
 })
 class MockMenuComponent {
   @Input() isOpened = false;
@@ -24,7 +24,7 @@ class MockMenuComponent {
 
 @Component({
   selector: 'ccr-topbar',
-  template: ''
+  template: '',
 })
 class MockTopbarComponent {
   @Input() translations: any = {};
@@ -34,7 +34,7 @@ class MockTopbarComponent {
 
 @Component({
   selector: 'ccr-footer',
-  template: ''
+  template: '',
 })
 class MockFooterComponent {}
 
@@ -49,23 +49,23 @@ describe('Layout.BaseComponent', () => {
         MatSidenavModule,
         MatToolbarModule,
         RouterTestingModule,
-        TranslateModule.forChild()
+        TranslateModule.forChild(),
       ],
       declarations: [
         MockFooterComponent,
         MockMenuComponent,
         MockTopbarComponent,
-        BaseComponent
+        BaseComponent,
       ],
       providers: [
         {
           provide: APP_CONFIG,
-          useValue: projectConfig
+          useValue: projectConfig,
         },
         ConfigService,
         EventsService,
-        LayoutService
-      ]
+        LayoutService,
+      ],
     }).compileComponents();
   }));
 

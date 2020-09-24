@@ -3,20 +3,20 @@ import {
   Inject,
   OnInit,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatAutocompleteTrigger,
-  MatDialogRef
-} from '@coachcare/layout';
+  MatDialogRef,
+} from '@coachcare/common/material';
 import {
   Account,
   AccountAccessData,
   AccountTypeIds,
   Organization,
-  OrgListSegment
+  OrgListSegment,
 } from '@coachcare/backend/services';
 import { ConfigService, NotifierService } from '@coachcare/common/services';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -27,8 +27,8 @@ import { ScheduleSelectData } from './schedule-select-data.interface';
   templateUrl: 'schedule-select.dialog.html',
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'ccr-dialog'
-  }
+    class: 'ccr-dialog',
+  },
 })
 export class ScheduleSelectDialog implements OnInit {
   @ViewChild(MatAutocompleteTrigger, { static: false })
@@ -59,7 +59,7 @@ export class ScheduleSelectDialog implements OnInit {
     this.searchCtrl = new FormControl();
     this.searchCtrl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe(query => {
+      .subscribe((query) => {
         if (query) {
           this.searchAccounts(query);
         } else {
@@ -71,16 +71,16 @@ export class ScheduleSelectDialog implements OnInit {
 
     this.organization
       .getList({ account: this.data.user.id })
-      .then(res => {
+      .then((res) => {
         this.clinics = res.data.filter(
-          c => c.permissions && c.permissions.admin
+          (c) => c.permissions && c.permissions.admin
         );
         if (this.clinics.length > 0) {
           this.selectedClinic = this.clinics[0];
         }
         this.isLoading = false;
       })
-      .catch(err => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err));
   }
 
   selectDefault() {
@@ -102,7 +102,7 @@ export class ScheduleSelectDialog implements OnInit {
       this.account.getList({
         query,
         accountType: AccountTypeIds.Provider,
-        organization: this.selectedClinic.organization.id
+        organization: this.selectedClinic.organization.id,
       })
     );
 
@@ -111,21 +111,21 @@ export class ScheduleSelectDialog implements OnInit {
         this.account.getList({
           query,
           accountType: AccountTypeIds.Client,
-          organization: this.selectedClinic.organization.id
+          organization: this.selectedClinic.organization.id,
         })
       );
     }
 
     Promise.all(promises)
-      .then(results => {
+      .then((results) => {
         this.accounts = [];
-        results.forEach(res => {
+        results.forEach((res) => {
           this.accounts = this.accounts.concat(res.accounts);
         });
         if (this.accounts.length > 0) {
           this.trigger.openPanel();
         }
       })
-      .catch(err => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err));
   }
 }

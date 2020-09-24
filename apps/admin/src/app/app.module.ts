@@ -1,6 +1,6 @@
 // tslint:disable:no-invalid-template-strings
 import { NgModule } from '@angular/core';
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/layout';
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/common/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, UrlSerializer } from '@angular/router';
 import { AppCommonModule } from '@coachcare/common';
@@ -16,7 +16,7 @@ import { PlusSignSerializer } from './services';
 // last ones overwrite the first
 export const catalogs: TranslateCatalogs = {
   // common: './assets/i18n/common/${ lang }.json',
-  dashboard: './assets/i18n/dashboard/${ lang }.json'
+  dashboard: './assets/i18n/admin/${ lang }.json',
 };
 
 @NgModule({
@@ -28,14 +28,14 @@ export const catalogs: TranslateCatalogs = {
     RouterModule.forRoot(routes, {
       enableTracing: false, // debugging
       initialNavigation: 'enabled',
-      paramsInheritanceStrategy: 'always'
-    })
+      paramsInheritanceStrategy: 'always',
+    }),
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
     { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
-    { provide: UrlSerializer, useClass: PlusSignSerializer }
-  ]
+    { provide: UrlSerializer, useClass: PlusSignSerializer },
+  ],
 })
 export class AppModule {}

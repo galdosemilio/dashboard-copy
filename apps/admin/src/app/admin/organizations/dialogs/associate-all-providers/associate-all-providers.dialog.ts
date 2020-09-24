@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 import { AccountTypeIds, ActiveCampaign } from '@coachcare/backend/services';
 import { ContextService, NotifierService } from '@coachcare/common/services';
 import { sleep } from '@coachcare/common/shared';
@@ -14,7 +14,7 @@ export interface AssociateAllProvidersDialogData {
   selector: 'ccr-organizations-associate-all-providers-dialog',
   templateUrl: './associate-all-providers.dialog.html',
   styleUrls: ['./associate-all-providers.dialog.scss'],
-  host: { class: 'ccr-dialog' }
+  host: { class: 'ccr-dialog' },
 })
 export class AssociateAllProvidersDialogComponent implements OnInit {
   public currentProvider = '';
@@ -60,14 +60,14 @@ export class AssociateAllProvidersDialogComponent implements OnInit {
               organization: this.organizationId,
               accountType: AccountTypeIds.Provider,
               offset: 0,
-              limit: 'all'
+              limit: 'all',
             })
           ).data;
 
-      const associationPromises = providers.map(provider =>
+      const associationPromises = providers.map((provider) =>
         this.activeCampaign.createNewsletterSubscription({
           account: provider.id,
-          organization: this.organizationId
+          organization: this.organizationId,
         })
       );
 
@@ -101,7 +101,7 @@ export class AssociateAllProvidersDialogComponent implements OnInit {
         this.cdr.detectChanges();
       }
 
-      this.failedProviders = failedRequests.map(index => providers[index]);
+      this.failedProviders = failedRequests.map((index) => providers[index]);
 
       this.state = 'results';
       this.progress = 0;

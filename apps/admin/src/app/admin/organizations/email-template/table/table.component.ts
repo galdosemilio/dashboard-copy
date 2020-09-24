@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { EmailTemplatesDataSource } from '@coachcare/backend/data';
 import { _ } from '@coachcare/backend/shared';
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core';
@@ -11,7 +11,7 @@ import { EmailTemplateDialogComponent } from '../dialogs';
 
 @Component({
   selector: 'ccr-organizations-email-template-table',
-  templateUrl: './table.component.html'
+  templateUrl: './table.component.html',
 })
 export class EmailTemplateTableComponent implements OnDestroy {
   @Input() orgId: string;
@@ -31,13 +31,13 @@ export class EmailTemplateTableComponent implements OnDestroy {
     try {
       const data: PromptDialogData = {
         title: _('PROMPT.EMAIL_TEMPLATE.DELETE'),
-        content: _('PROMPT.EMAIL_TEMPLATE.DELETE_PROMPT')
+        content: _('PROMPT.EMAIL_TEMPLATE.DELETE_PROMPT'),
       };
       this.dialog
         .open(PromptDialog, { data: data })
         .afterClosed()
         .pipe(untilDestroyed(this))
-        .subscribe(async confirm => {
+        .subscribe(async (confirm) => {
           if (confirm) {
             await this.organization.deleteEmailTemplate(template.id);
             this.source.refresh();
@@ -54,13 +54,13 @@ export class EmailTemplateTableComponent implements OnDestroy {
         data: {
           title: _('GLOBAL.UPDATE_EMAIL_TEMPLATE'),
           emailTemplate: emailTemplate,
-          orgId: this.orgId
+          orgId: this.orgId,
         },
-        width: '60vw'
+        width: '60vw',
       })
       .afterClosed()
       .pipe(untilDestroyed(this))
-      .subscribe(refresh => {
+      .subscribe((refresh) => {
         if (refresh) {
           this.source.refresh();
         }

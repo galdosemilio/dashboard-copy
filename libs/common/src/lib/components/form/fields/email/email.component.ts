@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   SkipSelf,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -16,9 +16,9 @@ import {
   ControlValueAccessor,
   FormControl,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { MatInput } from '@coachcare/layout';
+import { MatInput } from '@coachcare/common/material';
 
 @Component({
   selector: 'ccr-form-field-email',
@@ -27,21 +27,21 @@ import { MatInput } from '@coachcare/layout';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => EmailFormFieldComponent),
-      multi: true
+      multi: true,
     },
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => EmailFormFieldComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
   // tslint:disable-next-line:use-host-property-decorator
   host: {
     class: 'mat-form-field',
     '[class.mat-input-invalid]': '_control?.invalid && _control?.touched',
     '[class.mat-form-field-invalid]': '_control?.invalid && _control?.touched',
-    '[class.mat-form-field-disabled]': '_control?.disabled'
-  }
+    '[class.mat-form-field-disabled]': '_control?.disabled',
+  },
 })
 export class EmailFormFieldComponent implements ControlValueAccessor, OnInit {
   @Input() formControlName: string;

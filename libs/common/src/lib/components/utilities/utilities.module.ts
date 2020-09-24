@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CcrDirectivesModule } from '@coachcare/common/directives';
+import { CcrMaterialModule } from '@coachcare/common/material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AvatarComponent } from './avatar/avatar.component';
 import { BadgeComponent } from './badge/badge.component';
@@ -19,7 +20,8 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
     CommonModule,
     FlexLayoutModule,
     CcrDirectivesModule,
-    TranslateModule.forChild()
+    CcrMaterialModule,
+    TranslateModule.forChild(),
   ],
   declarations: [
     AvatarComponent,
@@ -31,7 +33,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
     LogoComponent,
     PaginatorComponent,
     ProgressCircleComponent,
-    TableOverlayComponent
+    TableOverlayComponent,
   ],
   exports: [
     AvatarComponent,
@@ -43,7 +45,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
     LogoComponent,
     PaginatorComponent,
     ProgressCircleComponent,
-    TableOverlayComponent
-  ]
+    TableOverlayComponent,
+  ],
 })
 export class CcrUtilityComponentsModule {}

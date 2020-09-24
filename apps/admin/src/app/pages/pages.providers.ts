@@ -1,4 +1,4 @@
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/layout';
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/common/material';
 import { AppDownloadGuard } from '@board/pages/services/app-download.guard';
 import { PasswordUpdateGuard } from '@board/pages/services/password-update.guard';
 import { RouteWildcardGuard } from '@board/pages/services/route-wildcard.guard';
@@ -8,16 +8,16 @@ export {
   AppDownloadGuard,
   PasswordUpdateGuard,
   RouteWildcardGuard,
-  SessionGuard
+  SessionGuard,
 };
 
 export const PagesProviders = [
-  { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+  { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
 ];
 
 export const PagesRoutings = [
   AppDownloadGuard,
   PasswordUpdateGuard,
   RouteWildcardGuard,
-  SessionGuard
+  SessionGuard,
 ];

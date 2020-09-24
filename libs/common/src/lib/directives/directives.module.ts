@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatDialogModule } from '@coachcare/layout';
+import { MatButtonModule, MatDialogModule } from '@coachcare/common/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { AvatarDirective } from './avatar.directive';
 import { BindFormDirective } from './bind-form.directive';
@@ -17,7 +17,7 @@ import { NumberOnlyDirective } from './number-only.directive';
     DetectKeyDirective,
     LinkActiveDirective,
     LogoDirective,
-    NumberOnlyDirective
+    NumberOnlyDirective,
   ],
   exports: [
     AvatarDirective,
@@ -25,7 +25,7 @@ import { NumberOnlyDirective } from './number-only.directive';
     DetectKeyDirective,
     LinkActiveDirective,
     LogoDirective,
-    NumberOnlyDirective
-  ]
+    NumberOnlyDirective,
+  ],
 })
 export class CcrDirectivesModule {}

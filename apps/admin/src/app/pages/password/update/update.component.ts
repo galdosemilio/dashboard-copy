@@ -1,11 +1,11 @@
 import { Component, forwardRef, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MFACodeInputMode } from '@board/shared/mfa-code-input';
 import {
   AccountPassword,
-  UpdateAccountPasswordResponse
+  UpdateAccountPasswordResponse,
 } from '@coachcare/backend/services';
 import { _, FormUtils } from '@coachcare/backend/shared';
 import { ConfirmDialog } from '@coachcare/common/dialogs/core';
@@ -18,14 +18,14 @@ import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared';
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss'],
   host: {
-    class: 'ccr-page-card'
+    class: 'ccr-page-card',
   },
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useValue: forwardRef(() => PasswordUpdatePageComponent)
-    }
-  ]
+      useValue: forwardRef(() => PasswordUpdatePageComponent),
+    },
+  ],
 })
 export class PasswordUpdatePageComponent implements OnInit {
   accountType: string;
@@ -54,7 +54,7 @@ export class PasswordUpdatePageComponent implements OnInit {
       code: '',
       password: '',
       consent: undefined,
-      retry: true
+      retry: true,
     });
     this.mfaForm = this.builder.group({});
 
@@ -65,7 +65,7 @@ export class PasswordUpdatePageComponent implements OnInit {
       this.form.patchValue({
         email: params.email || '',
         code: params.code || '',
-        consent: this.consentRequired ? false : undefined
+        consent: this.consentRequired ? false : undefined,
       });
     });
   }
@@ -83,7 +83,7 @@ export class PasswordUpdatePageComponent implements OnInit {
         const response = (await this.password.update({
           ...this.form.value,
           organization:
-            this.context.organizationId || this.environment.defaultOrgId
+            this.context.organizationId || this.environment.defaultOrgId,
         })) as UpdateAccountPasswordResponse;
 
         if (response && response.mfa) {
@@ -98,8 +98,8 @@ export class PasswordUpdatePageComponent implements OnInit {
       this.dialog.open(ConfirmDialog, {
         data: {
           title: _('GLOBAL.ERROR'),
-          content: error
-        }
+          content: error,
+        },
       });
       this.serverError = error;
     } finally {
@@ -126,8 +126,8 @@ export class PasswordUpdatePageComponent implements OnInit {
           type: this.mode === 'backup_code' ? 'backup' : 'totp',
           value: this.mfaForm.value.code.code
             ? this.mfaForm.value.code.code.replace(/\s/g, '')
-            : ''
-        }
+            : '',
+        },
       });
       this.showSuccessDialog();
     } catch (error) {
@@ -162,8 +162,8 @@ export class PasswordUpdatePageComponent implements OnInit {
         content:
           this.formType === 'create'
             ? _('NOTIFY.SUCCESS.PASSWORD_SETTED')
-            : _('NOTIFY.SUCCESS.PASSWORD_RESET')
-      }
+            : _('NOTIFY.SUCCESS.PASSWORD_RESET'),
+      },
     });
 
     dialogConfirm.afterClosed().subscribe(() => {

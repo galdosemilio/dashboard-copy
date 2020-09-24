@@ -10,7 +10,7 @@
       },
       "root": "apps/provider",
       "sourceRoot": "apps/provider/src",
-      "prefix": "dashboard",
+      "prefix": "provider",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -131,7 +131,7 @@
       },
       "root": "apps/admin",
       "sourceRoot": "apps/admin/src",
-      "prefix": "dashboard",
+      "prefix": "admin",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -142,7 +142,28 @@
             "polyfills": "apps/admin/src/polyfills.ts",
             "tsConfig": "apps/admin/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "libs/layout/src/assets/favicon/",
+                "output": ""
+              },
+              {
+                "glob": "robots.txt",
+                "input": "apps/admin/",
+                "output": ""
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/layout/src/assets/",
+                "output": "assets"
+              },
+              {
+                "glob": "*.json",
+                "input": "apps/admin/src/i18n/",
+                "output": "assets/i18n/admin/"
+              }
+            ],
             "styles": ["apps/admin/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -151,7 +172,15 @@
                 "libs/datepicker/src/lib"
               ]
             },
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "selvera-api",
+              "qrcode",
+              "axios",
+              "tinycolor2",
+              "url-parse"
+            ]
           },
           "configurations": {
             "production": {

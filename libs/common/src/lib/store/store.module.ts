@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -12,7 +17,7 @@ import { AppRouterStateSerializer } from './router/serializer';
 import { AppStoreFacade } from './store.facade';
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class AppStoreModule {
   constructor(
@@ -25,18 +30,18 @@ export class AppStoreModule {
     }
   }
 
-  static forRoot(environment: AppEnvironment): ModuleWithProviders[] {
+  static forRoot(environment: AppEnvironment): ModuleWithProviders<NgModule>[] {
     return [
       {
         ngModule: AppStoreModule,
-        providers: [AppStoreFacade]
+        providers: [AppStoreFacade],
       },
       StoreModule.forRoot(reducers, {
-        metaReducers: !environment.production ? devMetaReducers : []
+        metaReducers: !environment.production ? devMetaReducers : [],
       }),
       EffectsModule.forRoot(effects),
       StoreRouterConnectingModule.forRoot({
-        serializer: AppRouterStateSerializer
+        serializer: AppRouterStateSerializer,
       }),
       // {
       //   ngModule: ,
@@ -49,7 +54,7 @@ export class AppStoreModule {
       // },
       !environment.production
         ? StoreDevtoolsModule.instrument({ maxAge: 50 })
-        : { ngModule: AppStoreModule }
+        : { ngModule: AppStoreModule },
     ];
   }
 }

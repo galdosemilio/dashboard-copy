@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   SkipSelf,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -16,24 +16,24 @@ import {
   ControlValueAccessor,
   FormControl,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import {
   MatAutocompleteSelectedEvent,
-  MatAutocompleteTrigger
-} from '@coachcare/layout';
+  MatAutocompleteTrigger,
+} from '@coachcare/common/material';
 import {
   Account,
   AccountAccessData,
   AccountTypeId,
   AccountFullData,
   AccListAllRequest,
-  AccListRequest
+  AccListRequest,
 } from '@coachcare/backend/npm-api';
 import {
   _,
   AutocompleterOption,
-  TranslationsObject
+  TranslationsObject,
 } from '@coachcare/common/shared';
 // import { ContextService } from '@coachcare/common/services';
 import { TranslateService } from '@ngx-translate/core';
@@ -47,21 +47,21 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => AccountAutocompleterComponent),
-      multi: true
+      multi: true,
     },
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => AccountAutocompleterComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
   // tslint:disable-next-line:use-host-property-decorator
   host: {
     class: 'mat-form-field',
     '[class.mat-input-invalid]': '_control?.invalid && _control?.touched',
     '[class.mat-form-field-invalid]': '_control?.invalid && _control?.touched',
-    '[class.mat-form-field-disabled]': '_control?.disabled'
-  }
+    '[class.mat-form-field-disabled]': '_control?.disabled',
+  },
 })
 export class AccountAutocompleterComponent
   implements ControlValueAccessor, OnInit {
@@ -123,13 +123,13 @@ export class AccountAutocompleterComponent
     this._input = new FormControl();
     this._input.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe(query => {
+      .subscribe((query) => {
         typeof query === 'string' && query !== ''
           ? this.fetch({ query })
           : this.trigger.closePanel();
       });
 
-    this._input.valueChanges.subscribe(val => {
+    this._input.valueChanges.subscribe((val) => {
       // ensure the seleted value is inside the options
       // this is required on form intialization
       if (val && val.value && !find(this.items, { value: val.value })) {
@@ -219,7 +219,7 @@ export class AccountAutocompleterComponent
         organization: this.organization,
         limit: 7,
         // TODO add strict here
-        ...(args as AccListAllRequest)
+        ...(args as AccListAllRequest),
       });
     } else {
       request = this.accounts.getList({
@@ -227,16 +227,16 @@ export class AccountAutocompleterComponent
         organization: this.organization,
         limit: 7,
         strict: this.strict,
-        ...(args as AccListRequest)
+        ...(args as AccListRequest),
       });
     }
 
-    request.then(res => {
+    request.then((res) => {
       if (res.data.length) {
         // fill the resulting accounts
         this.items = res.data.map((c: AccountAccessData | AccountFullData) => ({
           value: c.id,
-          viewValue: `${c.firstName} ${c.lastName}`
+          viewValue: `${c.firstName} ${c.lastName}`,
         }));
       } else {
         // set the empty message
@@ -284,8 +284,8 @@ export class AccountAutocompleterComponent
         _('SELECTOR.AUTOCOMPLETE.NO_MATCHING_ADMINS'),
         _('SELECTOR.AUTOCOMPLETE.NO_MATCHING_PROVIDERS'),
         _('SELECTOR.AUTOCOMPLETE.NO_MATCHING_CLIENTS'),
-        _('SELECTOR.AUTOCOMPLETE.NO_MATCHING_ACCOUNTS')
+        _('SELECTOR.AUTOCOMPLETE.NO_MATCHING_ACCOUNTS'),
       ])
-      .subscribe(translations => (this.i18n = translations));
+      .subscribe((translations) => (this.i18n = translations));
   }
 }

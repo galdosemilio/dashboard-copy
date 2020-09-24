@@ -5,16 +5,16 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { MatSort } from '@coachcare/layout';
+import { MatSort } from '@coachcare/common/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataSource, getterSorter } from '@coachcare/backend/model';
 import {
   AccountSingle,
   AccountTypeId,
-  AccountTypeIds
+  AccountTypeIds,
 } from '@coachcare/backend/services';
 import { _ } from '@coachcare/backend/shared';
 
@@ -22,7 +22,7 @@ import { _ } from '@coachcare/backend/shared';
   selector: 'ccr-affiliated-accounts-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AffiliatedAccountsTableComponent implements OnInit, OnDestroy {
   @Input() columns = [];

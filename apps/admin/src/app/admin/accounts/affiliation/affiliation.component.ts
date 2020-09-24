@@ -1,22 +1,22 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { ActivatedRoute } from '@angular/router';
 import { AccountParams } from '@board/services';
 import {
   GetListSegment,
-  OrganizationsDataSource
+  OrganizationsDataSource,
 } from '@coachcare/backend/data';
 import { getterPaginator } from '@coachcare/backend/model';
 import {
   AccountSingle,
   AccountTypeId,
   CreateOrganizationAssociationRequest,
-  DeleteOrganizationAssociationRequest
+  DeleteOrganizationAssociationRequest,
 } from '@coachcare/backend/services';
 import { _ } from '@coachcare/backend/shared';
 import {
   OrganizationAutocompleterComponent,
-  PaginatorComponent
+  PaginatorComponent,
 } from '@coachcare/common/components';
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core';
 import { NotifierService } from '@coachcare/common/services';
@@ -28,7 +28,7 @@ import { Affiliation } from 'selvera-api';
   templateUrl: './affiliation.component.html',
   styleUrls: ['./affiliation.component.scss'],
   providers: [OrganizationsDataSource],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AffiliationComponent implements OnInit {
   @ViewChild(OrganizationAutocompleterComponent, { static: true })
@@ -57,10 +57,10 @@ export class AffiliationComponent implements OnInit {
     // setup source
     this.source.addRequired(this.refresh$, () => ({
       user: this.account.id,
-      strict: true
+      strict: true,
     }));
 
-    this.source.connect().subscribe(data => (this.data = data));
+    this.source.connect().subscribe((data) => (this.data = data));
 
     this.route.data.subscribe((data: AccountParams) => {
       this.accountType = data.accountType;
@@ -77,7 +77,7 @@ export class AffiliationComponent implements OnInit {
   associate() {
     const req: CreateOrganizationAssociationRequest = {
       organization: this.org,
-      account: this.account.id
+      account: this.account.id,
     };
     this.affiliation
       .associate(req)
@@ -86,23 +86,23 @@ export class AffiliationComponent implements OnInit {
         this.autocompleter.reset();
         this.source.refresh({ offset: 0 });
       })
-      .catch(err => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err));
   }
 
   dissociate(org: GetListSegment): void {
     const data: PromptDialogData = {
       title: _('PROMPT.ORGS.DISOCCIATE'),
       content: _('PROMPT.ORGS.DISOCCIATE_PROMPT'),
-      contentParams: { item: `${org.name}` }
+      contentParams: { item: `${org.name}` },
     };
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()
-      .subscribe(confirm => {
+      .subscribe((confirm) => {
         if (confirm) {
           const req: DeleteOrganizationAssociationRequest = {
             account: this.account.id,
-            organization: org.id
+            organization: org.id,
           };
           this.affiliation
             .disassociate(req)
@@ -110,7 +110,7 @@ export class AffiliationComponent implements OnInit {
               this.notifier.success(_('NOTIFY.SUCCESS.ORG_DISOCCIATED'));
               this.source.refresh({ offset: 0 });
             })
-            .catch(err => this.notifier.error(err));
+            .catch((err) => this.notifier.error(err));
         }
       });
   }

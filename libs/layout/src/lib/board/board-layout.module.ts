@@ -9,8 +9,8 @@ import {
   MatListModule,
   MatMenuModule,
   MatSidenavModule,
-  MatToolbarModule
-} from '@coachcare/layout';
+  MatToolbarModule,
+} from '@coachcare/common/material';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -43,7 +43,7 @@ import { BoardLayout } from './board-layout.component';
     TranslateModule.forChild(),
     CcrPipesModule,
     CcrIconsComponentsModule,
-    CcrUtilityComponentsModule
+    CcrUtilityComponentsModule,
   ],
   declarations: [
     BaseComponent,
@@ -52,8 +52,8 @@ import { BoardLayout } from './board-layout.component';
     MenuItemComponent,
     SearchComponent,
     TopbarComponent,
-    BoardLayout
+    BoardLayout,
   ],
-  exports: [BoardLayout]
+  exports: [BoardLayout],
 })
 export class BoardLayoutModule {}

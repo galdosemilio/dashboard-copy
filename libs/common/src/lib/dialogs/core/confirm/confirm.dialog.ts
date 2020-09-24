@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/layout';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
 import { _ } from '@coachcare/backend/shared';
 import { ConfirmDialogData } from './confirm-data.interface';
 
@@ -10,8 +10,8 @@ import { ConfirmDialogData } from './confirm-data.interface';
   selector: 'ccr-dialog-confirm',
   templateUrl: 'confirm.dialog.html',
   host: {
-    class: 'ccr-dialog ccr-confirm'
-  }
+    class: 'ccr-dialog ccr-confirm',
+  },
 })
 export class ConfirmDialog {
   title = '';
@@ -28,7 +28,7 @@ export class ConfirmDialog {
       contentParams: {},
       accept: _('GLOBAL.OK'),
       color: '',
-      ...data
+      ...data,
     };
   }
 }

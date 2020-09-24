@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 
 import { effects } from './effects';
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class PagesStoreModule {
   constructor(
@@ -18,7 +23,7 @@ export class PagesStoreModule {
     }
   }
 
-  static forParent(): ModuleWithProviders[] {
+  static forParent(): ModuleWithProviders<NgModule>[] {
     return [EffectsModule.forFeature(effects)];
   }
 }

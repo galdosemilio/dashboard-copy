@@ -6,8 +6,8 @@ import {
   MatDialogModule,
   MatIconModule,
   MatProgressSpinnerModule,
-  MatSelectModule
-} from '@coachcare/layout';
+  MatSelectModule,
+} from '@coachcare/common/material';
 import { CcrIconsComponentsModule } from '@coachcare/common/components/icons';
 import { TranslateModule } from '@ngx-translate/core';
 import { ScheduleSelectDialog } from './schedule-select.dialog';
@@ -23,10 +23,10 @@ import { ScheduleSelectDialog } from './schedule-select.dialog';
     MatProgressSpinnerModule,
     MatSelectModule,
     TranslateModule,
-    CcrIconsComponentsModule
+    CcrIconsComponentsModule,
   ],
   declarations: [ScheduleSelectDialog],
   entryComponents: [ScheduleSelectDialog],
-  exports: [ScheduleSelectDialog]
+  exports: [ScheduleSelectDialog],
 })
 export class CcrScheduleSelectModule {}

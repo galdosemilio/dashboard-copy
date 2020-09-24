@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@coachcare/layout';
+import { MatDialog } from '@coachcare/common/material';
 import { ActivatedRoute } from '@angular/router';
 import { AccountsDataSource } from '@coachcare/backend/data';
 import { getterPaginator } from '@coachcare/backend/model';
@@ -11,7 +11,7 @@ import { AccountCSVDialogComponent } from '../dialogs';
   selector: 'ccr-accounts-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [AccountsDataSource]
+  providers: [AccountsDataSource],
 })
 export class AccountsListComponent implements OnInit, OnDestroy {
   accountType: AccountTypeId;
@@ -31,7 +31,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
     this.route.data.subscribe((data: any) => {
       this.accountType = data.accountType;
       this.source.addDefault({
-        accountType: this.accountType
+        accountType: this.accountType,
       });
     });
 
