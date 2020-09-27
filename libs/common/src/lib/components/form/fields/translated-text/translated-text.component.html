@@ -1,0 +1,41 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutGap="15px">
+  <div *ngIf="!selectedLanguages || !selectedLanguages.length">
+    {{ 'GLOBAL.NO_ENTRIES_FOR_FIELD' | translate }}
+  </div>
+
+  <div *ngFor="let language of selectedLanguages" formGroupName="texts" class="language-input" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field class="language-field" floatLabel="always" fxFlex="25%">
+      <input matInput [placeholder]="'GLOBAL.LANGUAGE' | translate" readonly type="text" [value]="language.viewValue">
+    </mat-form-field>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+        <mat-form-field>
+          <textarea
+          [formControlName]="language.value"
+          [placeholder]="label | translate"
+          cols="30"
+          matInput
+          rows="3"></textarea>
+        </mat-form-field>
+
+        <mat-error *ngIf="form.controls.texts['controls'][language.value].touched && form.hasError(language.value)">
+          <small>{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</small>
+        </mat-error>
+      </div>
+
+      <mat-icon (click)="onRemoveLanguage(language)" class="clickable">close</mat-icon>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <mat-form-field floatLabel="never" fxFlex="25%">
+      <mat-select (selectionChange)="onNewLanguageSelect($event)" formControlName="newLanguage">
+        <mat-option selected [value]="-1">{{ 'GLOBAL.ADD_LANGUAGE' | translate }}</mat-option>
+        <mat-option *ngFor="let language of availableLanguages" [value]="language.value">
+          {{ language.viewValue | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

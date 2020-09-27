@@ -4,15 +4,19 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrganizationFeaturePrefs, OrganizationParams, OrganizationRoutes } from '@board/services';
+import {
+  OrganizationFeaturePrefs,
+  OrganizationParams,
+  OrganizationRoutes,
+} from '@board/services';
 import {
   OrganizationPreference,
   OrganizationPreferenceSingle,
-  OrganizationSingle
+  OrganizationSingle,
 } from '@coachcare/backend/services';
 import { _, FormUtils } from '@coachcare/backend/shared';
 import { BINDFORM_TOKEN } from '@coachcare/common/directives';
@@ -30,9 +34,9 @@ import { debounceTime } from 'rxjs/operators';
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => OrganizationsSettingsComponent)
-    }
-  ]
+      useExisting: forwardRef(() => OrganizationsSettingsComponent),
+    },
+  ],
 })
 export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
   @ViewChild(JsonEditorComponent, { static: false })
@@ -77,7 +81,8 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
       this.item = data.org;
       this.id = data.org ? data.org.id : undefined;
       const prefs: OrganizationPreferenceSingle | undefined = data.prefs;
-      const featurePrefs: OrganizationFeaturePrefs | undefined = data.featurePrefs;
+      const featurePrefs: OrganizationFeaturePrefs | undefined =
+        data.featurePrefs;
       // setup the FormGroup
       this.createPreferencesFrom();
 
@@ -90,17 +95,21 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
 
         const logoFilename = this.logoUrl ? this.logoUrl.split('/').pop() : '';
         const iconFilename = this.iconUrl ? this.iconUrl.split('/').pop() : '';
-        const splashFilename = this.splashUrl ? this.splashUrl.split('/').pop() : '';
+        const splashFilename = this.splashUrl
+          ? this.splashUrl.split('/').pop()
+          : '';
         // reformat the preferences to fill the form
         const { mala, appIds, ...rset } = prefs;
         onboarding = (rset as any).onboarding;
         this.clientPackages =
-          onboarding && onboarding.client ? [...onboarding.client.packages] : [];
+          onboarding && onboarding.client
+            ? [...onboarding.client.packages]
+            : [];
         const { displayName, id, bccEmails } = rset as any;
 
         if (this.id !== id) {
           this.organizationPreference.create({
-            id: this.id || ''
+            id: this.id || '',
           });
         }
 
@@ -117,7 +126,8 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
             color: prefs.assets ? prefs.assets.color : {},
             bccEmails,
             autoEnrollClientLabelId: this.clientPackages.slice(),
-            openAssociation: (rset as any).openAssociation
+            openAssociation: (rset as any).openAssociation,
+            clinicCodeHelp: (rset as any).clinicCodeHelp,
           },
           ['bccEmails']
         );
@@ -142,13 +152,13 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
             developerPortalTeamId,
             firebaseProjectName,
             iosBundleId,
-            other: { ...other }
-          }
+            other: { ...other },
+          },
         });
 
         this.form.patchValue({
           ...this.initialPreference,
-          ...this.initialAdminPreference
+          ...this.initialAdminPreference,
         });
       }
 
@@ -161,14 +171,14 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
       this.editorOptions.mode = 'tree'; // set only one mode
 
       if (this.readonly) {
-        this.reactiveControls.forEach(controlName => {
+        this.reactiveControls.forEach((controlName) => {
           const control = this.form.get(controlName);
           if (control) {
             control.disable();
           }
         });
       } else {
-        this.reactiveControls.forEach(controlName => {
+        this.reactiveControls.forEach((controlName) => {
           const control = this.form.get(controlName);
           if (control) {
             control.enable();
@@ -184,15 +194,36 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
       mala: {
         ...mala,
         other: {
-          ...data
-        }
-      }
+          ...data,
+        },
+      },
     });
+  }
+
+  public async onChangeCodeHelpText(data: any): Promise<void> {
+    const helpTextArray = Object.keys(data).map((key) => {
+      const codeHelpText = {
+        locale: key,
+        content: data[key] as string,
+      };
+      return codeHelpText;
+    });
+
+    try {
+      await this.organizationPreference.update({
+        id: this.id || '',
+        clinicCodeHelp: helpTextArray,
+      });
+
+      this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'));
+    } catch (error) {
+      this.notifier.error(error);
+    }
   }
 
   public onAdminPrefsChange(adminPrefs: any): void {
     const mergedObject = { ...this.initialAdminPreference };
-    Object.keys(adminPrefs).forEach(key => {
+    Object.keys(adminPrefs).forEach((key) => {
       mergedObject[key] = mergedObject[key]
         ? { ...mergedObject[key], ...adminPrefs[key] }
         : adminPrefs[key];
@@ -206,15 +237,12 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
     this.form = this.builder.group({
       id: null,
       mala: this.builder.group({
-        other: {}
-      })
+        other: {},
+      }),
     });
 
     this.form.valueChanges
-      .pipe(
-        debounceTime(1000),
-        untilDestroyed(this)
-      )
+      .pipe(debounceTime(1000), untilDestroyed(this))
       .subscribe(() => {
         if (this.firstLoadPassed) {
           this.onUpdate();
@@ -234,7 +262,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
           ...(this.initialAdminPreference && this.initialAdminPreference.mala
             ? this.initialAdminPreference.mala
             : {}),
-          ...mala
+          ...mala,
         };
         mala.androidBundleId = mala.androidBundleId || null;
         mala.appStoreConnectTeamId = mala.appStoreConnectTeamId || null;
@@ -244,7 +272,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
 
         const adminPreference = FormUtils.pruneEmpty(
           {
-            mala
+            mala,
           },
           ['appIds', 'mala']
         );
@@ -257,7 +285,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
             request.push(
               this.organizationPreference.updateAdminPreference({
                 id: this.id || '',
-                ...adminPreference
+                ...adminPreference,
               })
             );
           }
@@ -269,7 +297,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
             request.push(
               this.organizationPreference.updateAdminPreference({
                 id: this.id || '',
-                ...adminPreference
+                ...adminPreference,
               })
             );
           }
@@ -280,7 +308,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
         this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'));
         this.router.navigate(['../'], {
           relativeTo: this.route,
-          queryParams: { updated: new Date().getTime() }
+          queryParams: { updated: new Date().getTime() },
         });
       } else {
         FormUtils.markAsTouched(this.form);

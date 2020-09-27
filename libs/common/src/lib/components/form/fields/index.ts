@@ -10,3 +10,4 @@ export * from './selector/index';
 export * from './state/index';
 export * from './text/index';
 export * from './timezone/index';
+export * from './translated-text';

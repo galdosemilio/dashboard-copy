@@ -10,6 +10,7 @@ import { UserSearchComponent } from './autocompleters';
 
 import { AccountAutocompleterComponent } from './autocompleters/account/account.component';
 import { OrganizationAutocompleterComponent } from './autocompleters/organization/organization.component';
+import { TranslatedTextFormFieldComponent } from './fields';
 
 import { ColorFormFieldComponent } from './fields/color/color.component';
 import { ConsentFormFieldComponent } from './fields/consent/consent.component';
@@ -50,6 +51,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     StateFormFieldComponent,
     TextFormFieldComponent,
     TimezoneFormFieldComponent,
+    TranslatedTextFormFieldComponent,
     // autocompleters
     AccountAutocompleterComponent,
     OrganizationAutocompleterComponent,
@@ -72,6 +74,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     StateFormFieldComponent,
     TextFormFieldComponent,
     TimezoneFormFieldComponent,
+    TranslatedTextFormFieldComponent,
     // autocompleters
     AccountAutocompleterComponent,
     OrganizationAutocompleterComponent,

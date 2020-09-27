@@ -4,8 +4,8 @@ import {
   MatCardModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule
-} from '@angular/material';
+  MatInputModule,
+} from '@coachcare/common/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CommonTestingModule } from '@coachcare/common';
@@ -15,23 +15,21 @@ describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          ReactiveFormsModule,
-          MatCardModule,
-          MatDialogModule,
-          MatFormFieldModule,
-          MatInputModule,
-          RouterTestingModule,
-          CommonTestingModule.forRoot()
-        ],
-        declarations: [LoginPageComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        RouterTestingModule,
+        CommonTestingModule.forRoot(),
+      ],
+      declarations: [LoginPageComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginPageComponent);

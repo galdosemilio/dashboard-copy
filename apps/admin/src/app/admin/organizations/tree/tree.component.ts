@@ -1,13 +1,13 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import {
+  MatDialog,
   MatTreeFlatDataSource,
   MatTreeFlattener,
 } from '@coachcare/common/material';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { MatDialog } from '@coachcare/common/material';
 import {
   AddOrganizationDialog,
   OrganizationDialogs,

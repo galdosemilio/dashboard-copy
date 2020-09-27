@@ -6,8 +6,8 @@ import {
   MatInputModule,
   MatProgressBarModule,
   MatSelectModule,
-  MatStepperModule
-} from '@angular/material';
+  MatStepperModule,
+} from '@coachcare/common/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CommonTestingModule } from '@coachcare/common';
@@ -26,37 +26,35 @@ describe('RegisterClinicPageComponent', () => {
     elements: () => ({
       create: () => ({
         mount: (id: string) => {},
-        addEventListener: () => {}
-      })
-    })
+        addEventListener: () => {},
+      }),
+    }),
   });
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          CcrFormFieldsModule,
-          ReactiveFormsModule,
-          FormsModule,
-          MatDialogModule,
-          MatFormFieldModule,
-          MatInputModule,
-          MatProgressBarModule,
-          MatSelectModule,
-          MatStepperModule,
-          RouterTestingModule,
-          CommonTestingModule.forRoot()
-        ],
-        declarations: [
-          RegisterClinicPageComponent,
-          // TODO mock these
-          RegisterClinicInfoPageComponent,
-          RegisterClinicPaymentPageComponent
-        ]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        CcrFormFieldsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatProgressBarModule,
+        MatSelectModule,
+        MatStepperModule,
+        RouterTestingModule,
+        CommonTestingModule.forRoot(),
+      ],
+      declarations: [
+        RegisterClinicPageComponent,
+        // TODO mock these
+        RegisterClinicInfoPageComponent,
+        RegisterClinicPaymentPageComponent,
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterClinicPageComponent);

@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": "593",
+      "isActive": true,
+      "createdAt": "2020-02-14 03:17:21.774596+00",
+      "updatedAt": "2020-02-14 03:17:21.774596+00",
+      "organization": {
+        "id": "3378",
+        "name": "0000 - Test - IP Clinic (SD)"
+      },
+      "package": {
+        "id": "20",
+        "title": "Phase 1",
+        "description": "Phase 1",
+        "isActive": true,
+        "createdAt": "2016-10-21 01:04:32.868268+00",
+        "updatedAt": "2018-10-08 07:32:59.090567+00"
+      }
+    }
+  ],
+  "pagination": {}
+}

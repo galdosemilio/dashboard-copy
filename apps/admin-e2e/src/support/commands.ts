@@ -1,31 +1,42 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-// eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
   interface Chainable<Subject> {
-    login(email: string, password: string): void;
+    setTimezone(value: string): Chainable<void>;
+    setOrganization(value: 'ccr' | 'cmwl'): Chainable<void>;
   }
 }
-//
-// -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+
+Cypress.Commands.add('setTimezone', (tz: 'en' | 'aet') => {
+  let tzProper: string;
+
+  switch (tz) {
+    case 'aet':
+      tzProper = 'Australia/Sydney';
+      break;
+    default:
+      tzProper = 'America/New_York';
+  }
+
+  cy.log(`setting timezone to ${tzProper}...`);
+  Cypress.env('timezone', tzProper);
 });
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('setOrganization', (org: 'ccr' | 'cmwl') => {
+  let translatedOrg: number;
+
+  switch (org) {
+    case 'cmwl':
+      translatedOrg = 6955;
+      break;
+    case 'ccr':
+      translatedOrg = 1;
+    default:
+      translatedOrg = 1;
+  }
+
+  cy.log(`setting organizationId to ${translatedOrg}...`);
+  Cypress.env('organizationId', translatedOrg);
+});
+
+Cypress.Commands.add('setOrgCookie', (orgId: string) => {
+  cy.setCookie('ccrOrg', orgId);
+});

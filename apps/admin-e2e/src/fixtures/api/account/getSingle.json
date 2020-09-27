@@ -1,0 +1,21 @@
+{
+  "accountType": {
+    "id": "1",
+    "title": "Admin"
+  },
+  "createdAt": "2018-01-24T16:43:22.359Z",
+  "email": "admin@coachcare.com",
+  "firstName": "Admin",
+  "id": "2180",
+  "isActive": true,
+  "lastName": "Coachcare",
+  "measurementPreference": "us",
+  "phone": "1234567890",
+  "phoneType": "android",
+  "preference": {
+    "calendarView": "list",
+    "healthyBadgeStation": "badge"
+  },
+  "preferredLocales": [],
+  "timezone": "America/New_York"
+}

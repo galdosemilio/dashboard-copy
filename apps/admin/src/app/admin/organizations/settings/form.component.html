@@ -53,6 +53,16 @@
       </div>
     </div>
 
+    <div class="ccr-panel" [hidden]="section !== 'mala'">
+      <h3>{{ 'ADMIN.ORGS.SETTINGS.CODE_ENTRY_HELP' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-form-field-translated-text
+        [initial]="initialPreference?.clinicCodeHelp"
+        [label]="'ADMIN.ORGS.SETTINGS.CODE_ENTRY_HELP' | translate"
+        (update)="onChangeCodeHelpText($event)"></ccr-form-field-translated-text>
+      </div>
+    </div>
+
     <div class="json-editor-panel" [hidden]="section !== 'mala'" data-cy="org-settings-section-json">
       <json-editor data-cy="org-setting-jsoneditor" [options]="editorOptions" [data]="initialJsonEditor" (change)="onChangeJsonEditor($event)"></json-editor>
     </div>

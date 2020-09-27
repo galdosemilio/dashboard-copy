@@ -9,7 +9,7 @@ export {
   MFACodeInputComponent,
   NotFoundPageComponent,
   PhoneInputComponent,
-  UnsupportedBrowserPageComponent
+  UnsupportedBrowserPageComponent,
 };
 
 export const SharedComponents = [
@@ -17,7 +17,7 @@ export const SharedComponents = [
   MFACodeInputComponent,
   NotFoundPageComponent,
   PhoneInputComponent,
-  UnsupportedBrowserPageComponent
+  UnsupportedBrowserPageComponent,
 ];
 
 export const SharedEntryComponents = [];

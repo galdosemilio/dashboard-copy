@@ -4,8 +4,8 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule
-} from '@angular/material';
+  MatSelectModule,
+} from '@coachcare/common/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CommonTestingModule } from '@coachcare/common';
@@ -16,25 +16,23 @@ describe('RegisterClinicInfoPageComponent', () => {
   // let component: RegisterClinicInfoPageComponent;
   // let fixture: ComponentFixture<RegisterClinicInfoPageComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          CcrFormFieldsModule,
-          ReactiveFormsModule,
-          FormsModule,
-          MatDialogModule,
-          MatFormFieldModule,
-          MatInputModule,
-          MatSelectModule,
-          RouterTestingModule,
-          CommonTestingModule.forRoot()
-        ],
-        declarations: [RegisterClinicInfoPageComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        CcrFormFieldsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        RouterTestingModule,
+        CommonTestingModule.forRoot(),
+      ],
+      declarations: [RegisterClinicInfoPageComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     // fixture = TestBed.createComponent(RegisterClinicInfoPageComponent);

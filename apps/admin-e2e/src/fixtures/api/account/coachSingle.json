@@ -1,0 +1,14 @@
+{
+  "accountType": {"id": "2", "title": "Provider"},
+  "countryCode": "+1",
+  "createdAt": "2018-11-09T15:31:02.583Z",
+  "email": "232323_sss@grr.la",
+  "firstName": "1030",
+  "id": "5606",
+  "isActive": true,
+  "lastName": "232323",
+  "measurementPreference": "metric",
+  "phone": "232323232345",
+  "preferredLocales": ["en-gb", "en"],
+  "timezone": "America/New_York"
+}

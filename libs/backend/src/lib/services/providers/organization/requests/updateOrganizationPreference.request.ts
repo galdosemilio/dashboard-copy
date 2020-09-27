@@ -21,4 +21,5 @@ export interface UpdateOrganizationPreferenceRequest {
   displayName?: string;
   /** Color palette. */
   color?: Partial<Color>;
+  clinicCodeHelp?: any[];
 }

@@ -4,8 +4,8 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatFormFieldModule,
-  MatInputModule
-} from '@angular/material';
+  MatInputModule,
+} from '@coachcare/common/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CommonTestingModule } from '@coachcare/common';
@@ -16,24 +16,22 @@ describe('PasswordUpdatePageComponent', () => {
   let component: PasswordUpdatePageComponent;
   let fixture: ComponentFixture<PasswordUpdatePageComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          CcrFormFieldsModule,
-          ReactiveFormsModule,
-          MatCardModule,
-          MatCheckboxModule,
-          MatFormFieldModule,
-          MatInputModule,
-          RouterTestingModule,
-          CommonTestingModule.forRoot()
-        ],
-        declarations: [PasswordUpdatePageComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        CcrFormFieldsModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatInputModule,
+        RouterTestingModule,
+        CommonTestingModule.forRoot(),
+      ],
+      declarations: [PasswordUpdatePageComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PasswordUpdatePageComponent);

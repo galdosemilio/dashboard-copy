@@ -9,9 +9,9 @@ export const COOKIE_CALL_DEVICES_MODAL = 'ccrCallDevicesModal';
 export const COOKIE_ORG_EXP = 30;
 export const COOKIE_SELVERA_PROVIDER = 'SELVERAprovider';
 export const COOKIE_SELVERA_ADMIN = 'SELVERAadmin';
+export const STORAGE_HIDE_REGISTER_COMPANY = 'ccrHideRegisterNewCompanyLink';
 export const STORAGE_PROVIDER_URL = 'ccrProviderRoute';
 export const STORAGE_ADMIN_URL = 'ccrAdminRoute';
-export const STORAGE_HIDE_REGISTER_COMPANY = 'ccrHideRegisterNewCompanyLink';
 
 /**
  * Cookie Service
@@ -139,9 +139,8 @@ export class CookieService {
 
     if (!this.devRegex.test(window.location.href)) {
       cookieString += 'secure;';
+      cookieString += 'SameSite=None;';
     }
-
-    cookieString += 'SameSite=None;';
 
     this.document.cookie = cookieString;
   }

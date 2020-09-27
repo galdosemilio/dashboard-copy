@@ -8,5 +8,12 @@
   "video": true,
   "videosFolder": "../../dist/cypress/apps/admin-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/admin-e2e/screenshots",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": true,
+  "env": {
+    "adminId": "2180",
+    "patientId": "6784",
+    "organizationId": "3378",
+    "providerId": "5606",
+    "timezone": "et"
+  }
 }

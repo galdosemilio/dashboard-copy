@@ -1,0 +1,14 @@
+@import 'variables';
+
+ccr-form-field-translated-text {
+  .language-input {
+    border: 1px solid mat-color($ccr-background, selected-disabled-button);
+    padding: 15px 15px;
+  }
+
+  .language-field {
+    div.mat-form-field-underline {
+      display: none !important;
+    }
+  }
+}
