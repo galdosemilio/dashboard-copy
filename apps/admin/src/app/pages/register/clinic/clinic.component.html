@@ -16,7 +16,9 @@
         <p>{{ 'PAGE.REGISTER.STEP1.DEFAULT.WELCOME_PLATFORM_PAGE' | translate:{ clinic: orgName.displayName } }}</p>
         <p>{{ 'PAGE.REGISTER.STEP1.DEFAULT.MOB_APP_TYPE_CHOOSE' | translate }}</p>
 
-        <ccr-form-field-block [options]="mobAppTypes" (selectionChange)="onBlockOptionSelect($event)"></ccr-form-field-block>
+        <ccr-form-field-block
+        [options]="mobAppTypes"
+        (selectionChange)="onBlockOptionSelect($event)"></ccr-form-field-block>
 
         <div fxLayoutAlign="center" fxLayoutGap="1%">
           <button class="nextStep" mat-button type="button" [disabled]="step0.invalid" (click)="nextStep(stepper)">

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 export interface BlockOption {
@@ -14,12 +21,15 @@ export interface BlockOption {
 @Component({
   selector: 'ccr-form-field-block',
   templateUrl: './option-block.component.html',
-  styleUrls: ['./option-block.component.scss']
+  styleUrls: ['./option-block.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OptionBlockFieldComponent implements OnInit {
   @Input() options: BlockOption[] = [];
 
-  @Output() selectionChange: EventEmitter<BlockOption> = new EventEmitter<BlockOption>();
+  @Output() selectionChange: EventEmitter<BlockOption> = new EventEmitter<
+    BlockOption
+  >();
 
   public androidButtonLink: string;
   public iosButtonLink: string;
@@ -32,7 +42,9 @@ export class OptionBlockFieldComponent implements OnInit {
       return;
     }
 
-    this.resolveBadgeLinks(this.translate.currentLang.split('-')[0].toLowerCase());
+    this.resolveBadgeLinks(
+      this.translate.currentLang.split('-')[0].toLowerCase()
+    );
   }
 
   public onOptionSelect(option: BlockOption): void {

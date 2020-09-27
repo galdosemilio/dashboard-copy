@@ -9,6 +9,7 @@ import {
   MatButton,
   MatButtonModule,
 } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import {
   MAT_LABEL_GLOBAL_OPTIONS,
@@ -147,6 +148,7 @@ export {
 export const CcrMaterialModules = [
   MatAutocompleteModule,
   MatButtonModule,
+  MatSlideToggleModule,
   MatCardModule,
   MatCheckboxModule,
   MatChipsModule,

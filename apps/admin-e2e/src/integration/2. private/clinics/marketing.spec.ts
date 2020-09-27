@@ -1,11 +1,11 @@
 import { standardSetup } from '../../../support';
 
-describe('Clinic Marketing List Management', function() {
+describe('Clinic Marketing List Management', function () {
   beforeEach(() => {
     cy.setTimezone('et');
   });
 
-  it('Properly shows the list of associated marketing lists', function() {
+  it('Properly shows the list of associated marketing lists', function () {
     standardSetup(true);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -56,7 +56,7 @@ describe('Clinic Marketing List Management', function() {
       .should('exist');
   });
 
-  it('Properly filters the list of associated marketing lists', function() {
+  it('Properly filters the list of associated marketing lists', function () {
     standardSetup(true);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -68,12 +68,10 @@ describe('Clinic Marketing List Management', function() {
       .click({ force: true });
     cy.tick(1000);
 
-    cy.get('mat-option')
-      .contains('All')
-      .click({ force: true });
+    cy.get('mat-option').contains('All').click({ force: true });
     cy.tick(1000);
 
-    cy.wait('@activeCampaignListAssociationGetRequest').should(xhr => {
+    cy.wait('@activeCampaignListAssociationGetRequest').should((xhr) => {
       expect(xhr.url).to.contain('status=all');
     });
 
@@ -82,12 +80,10 @@ describe('Clinic Marketing List Management', function() {
       .click({ force: true });
     cy.tick(1000);
 
-    cy.get('mat-option')
-      .contains('Inactive')
-      .click({ force: true });
+    cy.get('mat-option').contains('Inactive').click({ force: true });
     cy.tick(1000);
 
-    cy.wait('@activeCampaignListAssociationGetRequest').should(xhr => {
+    cy.wait('@activeCampaignListAssociationGetRequest').should((xhr) => {
       expect(xhr.url).to.contain('status=inactive');
     });
 
@@ -96,22 +92,20 @@ describe('Clinic Marketing List Management', function() {
       .click({ force: true });
     cy.tick(1000);
 
-    cy.get('mat-option')
-      .contains('Active')
-      .click({ force: true });
+    cy.get('mat-option').contains('Active').click({ force: true });
     cy.tick(1000);
 
-    cy.wait('@activeCampaignListAssociationGetRequest').should(xhr => {
+    cy.wait('@activeCampaignListAssociationGetRequest').should((xhr) => {
       expect(xhr.url).to.contain('status=active');
     });
   });
 
-  it('Properly disables the retroactive buttons if list is empty', function() {
+  it('Properly disables the retroactive buttons if list is empty', function () {
     standardSetup(true, undefined, [
       {
         url: '1.0/active-campaign/list/association**',
-        fixture: 'fixture:/api/general/emptyDataEmptyPagination'
-      }
+        fixture: 'fixture:/api/general/emptyDataEmptyPagination',
+      },
     ]);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -131,7 +125,7 @@ describe('Clinic Marketing List Management', function() {
       .should('be.disabled');
   });
 
-  it('Prevents users from deleting inherited associations of marketing lists', function() {
+  it('Prevents users from deleting inherited associations of marketing lists', function () {
     standardSetup(true);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -157,7 +151,7 @@ describe('Clinic Marketing List Management', function() {
       .should('be.disabled');
   });
 
-  it('Allows admins to add marketing list associations', function() {
+  it('Allows admins to add marketing list associations', function () {
     standardSetup(true);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -175,9 +169,7 @@ describe('Clinic Marketing List Management', function() {
       .click({ force: true });
     cy.tick(1000);
 
-    cy.get('mat-option')
-      .contains('TEST')
-      .click({ force: true });
+    cy.get('mat-option').contains('TEST').click({ force: true });
     cy.tick(1000);
 
     cy.get('mat-dialog-container')
@@ -186,7 +178,7 @@ describe('Clinic Marketing List Management', function() {
       .click({ force: true });
     cy.tick(1000);
 
-    cy.wait('@activeCampaignListAssociationPostRequest').should(xhr => {
+    cy.wait('@activeCampaignListAssociationPostRequest').should((xhr) => {
       expect(xhr.request.body.list.id).to.equal('12');
       expect(xhr.request.body.list.name).to.equal('TEST');
       expect(xhr.request.body.organization).to.equal('3378');
@@ -195,7 +187,7 @@ describe('Clinic Marketing List Management', function() {
     cy.wait(2000);
   });
 
-  it('Allows admins to remove a local marketing list association', function() {
+  it('Allows admins to remove a local marketing list association', function () {
     standardSetup(true);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -219,14 +211,14 @@ describe('Clinic Marketing List Management', function() {
       .click({ force: true });
     cy.tick(1000);
 
-    cy.wait('@activeCampaignListAssociationDeleteRequest').should(xhr => {
+    cy.wait('@activeCampaignListAssociationDeleteRequest').should((xhr) => {
       expect(xhr.url).to.contain('34');
     });
 
     cy.wait(2000);
   });
 
-  it('Allows admins to retroactively enroll one provider', function() {
+  it('Allows admins to retroactively enroll one provider', function () {
     standardSetup(true);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -244,13 +236,11 @@ describe('Clinic Marketing List Management', function() {
     cy.tick(1000);
 
     cy.get('mat-dialog-container')
-      .find('input[placeholder="Select Provider"]')
+      .find('input[data-placeholder="Select Provider"]')
       .type('test');
     cy.tick(1000);
 
-    cy.get('mat-option')
-      .contains('1030')
-      .click({ force: true });
+    cy.get('mat-option').contains('1030').click({ force: true });
     cy.tick(1000);
 
     cy.get('mat-dialog-container')
@@ -259,15 +249,17 @@ describe('Clinic Marketing List Management', function() {
       .click({ force: true });
     cy.tick(1000);
 
-    cy.wait('@activeCampaignListSubscriptionPostRequest').should(xhr => {
+    cy.wait('@activeCampaignListSubscriptionPostRequest').should((xhr) => {
       expect(xhr.request.body.account).to.equal('5606');
-      expect(xhr.request.body.organization).to.equal(Cypress.env('organizationId'));
+      expect(xhr.request.body.organization).to.equal(
+        Cypress.env('organizationId')
+      );
     });
 
     cy.wait(2000);
   });
 
-  it('Allows admins to retroactively enroll all providers at or below the current clinic', function() {
+  it('Allows admins to retroactively enroll all providers at or below the current clinic', function () {
     standardSetup(true);
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`);
@@ -289,14 +281,18 @@ describe('Clinic Marketing List Management', function() {
       .contains('Yes')
       .click({ force: true });
 
-    cy.wait('@activeCampaignListSubscriptionPostRequest').should(xhr => {
+    cy.wait('@activeCampaignListSubscriptionPostRequest').should((xhr) => {
       expect(xhr.request.body.account).to.equal('5606');
-      expect(xhr.request.body.organization).to.equal(Cypress.env('organizationId'));
+      expect(xhr.request.body.organization).to.equal(
+        Cypress.env('organizationId')
+      );
     });
 
-    cy.wait('@activeCampaignListSubscriptionPostRequest').should(xhr => {
+    cy.wait('@activeCampaignListSubscriptionPostRequest').should((xhr) => {
       expect(xhr.request.body.account).to.equal('5608');
-      expect(xhr.request.body.organization).to.equal(Cypress.env('organizationId'));
+      expect(xhr.request.body.organization).to.equal(
+        Cypress.env('organizationId')
+      );
     });
 
     cy.wait(2000);
