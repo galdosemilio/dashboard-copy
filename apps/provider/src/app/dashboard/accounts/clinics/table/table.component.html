@@ -4,14 +4,14 @@
 
     <ng-container cdkColumnDef="id">
       <mat-header-cell *cdkHeaderCellDef>ID</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+      <mat-cell *cdkCellDef="let row" (click)="showClinic(row)" fxLayoutAlign=" center" fxFlex.xs="grow">
         {{ row.organization.id }}
       </mat-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="name">
       <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{'BOARD.NAME' | translate}}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+      <mat-cell *cdkCellDef="let row" (click)="showClinic(row)" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{'BOARD.NAME' | translate}}</span>
         {{ row.organization.name }}
       </mat-cell>
@@ -19,7 +19,7 @@
 
     <ng-container cdkColumnDef="address">
       <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ADDRESS' | translate}}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+      <mat-cell *cdkCellDef="let row" (click)="showClinic(row)" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{'BOARD.ADDRESS' | translate}}</span>
         {{ row.organization.address.street }}
       </mat-cell>
@@ -27,7 +27,7 @@
 
     <ng-container cdkColumnDef="city">
       <mat-header-cell *cdkHeaderCellDef>{{'BOARD.CITY' | translate}}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+      <mat-cell *cdkCellDef="let row" (click)="showClinic(row)" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{'BOARD.CITY' | translate}}</span>
         {{ row.organization.address.city }}
       </mat-cell>
@@ -35,7 +35,7 @@
 
     <ng-container cdkColumnDef="state">
       <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{'BOARD.STATE' | translate}}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+      <mat-cell *cdkCellDef="let row" (click)="showClinic(row)" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{'BOARD.STATE' | translate}}</span>
         {{ row.organization.address.state }}
       </mat-cell>
@@ -43,7 +43,7 @@
 
     <ng-container cdkColumnDef="zip">
       <mat-header-cell *cdkHeaderCellDef fxShow fxHide.sm>{{'BOARD.ZIP' | translate}}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxShow fxHide.sm fxLayoutAlign=" center" fxFlex.xs="grow">
+      <mat-cell *cdkCellDef="let row" (click)="showClinic(row)" fxShow fxHide.sm fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{'BOARD.ZIP' | translate}}</span>
         {{ row.organization.address.postalCode }}
       </mat-cell>
@@ -51,7 +51,7 @@
 
     <ng-container cdkColumnDef="contact">
       <mat-header-cell *cdkHeaderCellDef fxShow fxHide.sm>{{'BOARD.CONTACT_INFO' | translate}}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxShow fxHide.sm fxLayoutAlign=" center" fxFlex.xs="grow">
+      <mat-cell *cdkCellDef="let row" (click)="showClinic(row)" fxShow fxHide.sm fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{'BOARD.CONTACT_INFO' | translate}}</span>
         <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
           <span>{{ row.organization.contact.firstName }} {{ row.organization.contact.lastName }}</span>
@@ -64,9 +64,13 @@
     <ng-container cdkColumnDef="actions">
       <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
-        <ng-container *ngIf="row.isDirect">
-          <span (click)="onRemove(row)">{{'BOARD.REMOVE' | translate}}</span>
-          <button mat-icon-button title="{{'BOARD.REMOVE' | translate}}" (click)="onRemove(row)"><mat-icon>delete</mat-icon></button>
+        <ng-container>
+          <button
+          [title]="'BOARD.OPEN_IN_NEW' | translate"
+          (click)="showClinic(row, true); $event.stopPropagation();"
+          mat-icon-button>
+            <mat-icon>open_in_new</mat-icon>
+          </button>
         </ng-container>
       </mat-cell>
     </ng-container>

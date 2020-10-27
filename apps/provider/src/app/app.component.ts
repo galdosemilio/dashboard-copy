@@ -13,6 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import pdfMake from 'pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { CallLayoutService } from './layout/call/services/call-layout.service';
+import { RecoverCall } from './layout/store/call';
 
 @Component({
   selector: 'app-root',
@@ -24,12 +26,14 @@ export class AppComponent implements OnDestroy, OnInit {
   ccrBeforeUnload(): void {
     this.timeTracker.stashTime();
     this.clearAccountsPaginationCache();
+    this.callLayout.storeCallSettings();
   }
   config: AppBreakpoints;
 
   private globalKey = 'GLOBAL';
 
   constructor(
+    private callLayout: CallLayoutService,
     private intl: MatDatepickerIntl,
     private timeTracker: TimeTrackerService,
     private translate: TranslateService,
@@ -48,6 +52,8 @@ export class AppComponent implements OnDestroy, OnInit {
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
       .subscribe(() => this.onLangChange());
+
+    this.store.dispatch(new RecoverCall());
   }
 
   public onResize(): void {

@@ -5,7 +5,10 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { STORAGE_CALL_WINDOW_CORNER } from '@app/config';
+import {
+  STORAGE_CALL_WINDOW_CORNER,
+  STORAGE_VIDEOCONFERENCE_SETTINGS
+} from '@app/config';
 import { UIState } from '@app/layout/store';
 import { callSelector } from '@app/layout/store/call';
 import {
@@ -22,17 +25,20 @@ import {
   ParticipantDeclined,
   PlayCallEndedAudio,
   Reinitialize,
+  SetAttemptingReconnect,
   Source,
   UPDATE_CALL_STATUS_TO_ENDED,
   UpdateCallStatusToEnded
 } from '@app/layout/store/call/call.action';
 import { CallState } from '@app/layout/store/call/call.state';
 import { NotifierService } from '@app/service/notifier.service';
+import { sleep } from '@app/shared';
 import { ConnectionStats, ConnectionStatus } from '@app/shared/selvera-api';
 import { _ } from '@app/shared/utils/i18n.utils';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { auditTime, map, tap } from 'rxjs/operators';
 import * as CallActions from '../../store/call';
@@ -94,6 +100,9 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
   private callAttemptDuration = 90000;
   private callWindow: Element;
   private currentRemoteVideoState: boolean;
+  private inactivityTimeout: number = 60000;
+  private inactivityTimeoutActive: boolean = false;
+  private dataTrackTimeout: number = 4;
   private ringingCountdownInterval: any;
 
   constructor(
@@ -184,14 +193,18 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
         this.callState.source === Source.OUTBOUND ||
         (this.callState.source === Source.INBOUND && this.callState.isReconnect)
       ) {
+        const storageSettings = JSON.parse(
+          window.localStorage.getItem(STORAGE_VIDEOCONFERENCE_SETTINGS)
+        );
         this.store.dispatch(
           new CreateLocalTracks({
             enableAudio: this.callState.hasAudioDeviceAccess,
-            enableVideo: false,
+            enableVideo: (storageSettings && storageSettings.video) || false,
             roomName: this.callState.room.name,
             authenticationToken: this.callState.twilioToken
           })
         );
+        window.localStorage.removeItem(STORAGE_VIDEOCONFERENCE_SETTINGS);
       }
     } else {
       this.store.dispatch(new Reinitialize());
@@ -272,6 +285,8 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
+    this.checkRemoteConnectivityAge(remoteConnStats);
+
     this.remoteConnectionStatus = remoteConnStats.status;
 
     switch (this.remoteConnectionStatus) {
@@ -290,10 +305,30 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.currentRemoteVideoState = remoteConnStats.hasMobileVideoEnabled;
 
+    if (!this.twilioBandwidth.listenToVideoDataTrack) {
+      return;
+    }
+
     if (remoteConnStats.hasMobileVideoEnabled) {
       this.twilioService.showVideoContainer(remoteConnStats.id);
     } else {
       this.twilioService.hideVideoContainer(remoteConnStats.id);
+    }
+  }
+
+  private checkRemoteConnectivityAge(remoteConnStats: ConnectionStats) {
+    if (this.twilioBandwidth.currentRemoteConnSkips > 0) {
+      --this.twilioBandwidth.currentRemoteConnSkips;
+      return;
+    }
+
+    const age = moment().diff(moment(remoteConnStats.timestamp), 'seconds');
+
+    if (age >= this.dataTrackTimeout && !this.callState.isAttemptingToReconnect) {
+      this.store.dispatch(new SetAttemptingReconnect(true));
+      this.startInactivityTimeout();
+    } else if (age < this.dataTrackTimeout && this.callState.isAttemptingToReconnect) {
+      this.store.dispatch(new SetAttemptingReconnect(false));
     }
   }
 
@@ -354,6 +389,21 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
         $event.clientX - this.dragHandleCoords.x
       }px;`
     );
+  }
+
+  private async startInactivityTimeout(): Promise<void> {
+    if (this.inactivityTimeoutActive) {
+      return;
+    }
+
+    this.inactivityTimeoutActive = true;
+    await sleep(this.inactivityTimeout);
+
+    if (this.callState.isAttemptingToReconnect) {
+      this.store.dispatch(new HangUp());
+    }
+
+    this.inactivityTimeoutActive = false;
   }
 
   private startFollowingPointer() {

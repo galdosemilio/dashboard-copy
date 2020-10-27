@@ -1,0 +1,370 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6796",
+        "firstName": "John",
+        "lastName": "Doe",
+        "dateOfBirth": "1974-05-31"
+      },
+      "organization": {
+        "id": "6955",
+        "name": "Center for Medical Weight Loss",
+        "hierarchyPath": ["6955", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": { "timestamp": "2019-06-29T22:18:22.147Z", "count": 1 }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": { "timestamp": "2020-06-07T22:18:22.147Z", "count": 1 },
+            "next": {
+              "earliestEligibleAt": "2020-07-07T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": { "required": 16, "count": 30 },
+                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "notification": { "count": 30 }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              },
+              "liveInteraction": { "count": 0, "required": 1 }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              }
+            }
+          }
+        }
+      ],
+      "anyCodeLastEligibleAt": "2020-06-07T22:18:22.147Z",
+      "rpm": {
+        "isActive": true,
+        "changedAt": "2019-06-13T22:18:22.147+00:00",
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true
+        },
+        "consentedAt": "2019-06-13T22:18:22.147+00:00",
+        "educationProvidedAt": "2019-06-13T22:18:22.147+00:00",
+        "deviceProvidedAt": "2019-06-13T22:18:22.147+00:00"
+      }
+    },
+    {
+      "account": {
+        "id": "5527",
+        "firstName": "toantsh",
+        "lastName": "trants",
+        "dateOfBirth": "2000-03-08"
+      },
+      "organization": {
+        "id": "31",
+        "name": "CoachCare Clinic Test",
+        "hierarchyPath": ["31", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": { "timestamp": "2019-06-14T14:10:17.992Z", "count": 1 }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": { "timestamp": "2020-06-22T14:10:17.992Z", "count": 1 },
+            "next": {
+              "earliestEligibleAt": "2020-07-22T11:00:00.000Z",
+              "transmissions": {
+                "distinctDates": { "required": 16, "count": 30 },
+                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "notification": { "count": 30 }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-07-30T11:00:00.000Z",
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              },
+              "liveInteraction": { "count": 0, "required": 1 }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-07-30T11:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              }
+            }
+          }
+        }
+      ],
+      "anyCodeLastEligibleAt": "2020-06-22T14:10:17.992Z",
+      "rpm": {
+        "isActive": true,
+        "changedAt": "2019-05-29T14:10:17.992+00:00",
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true
+        },
+        "consentedAt": "2019-05-29T14:10:17.992+00:00",
+        "educationProvidedAt": "2019-05-29T14:10:17.992+00:00",
+        "deviceProvidedAt": "2019-05-29T14:10:17.992+00:00"
+      }
+    },
+    {
+      "account": {
+        "id": "6344",
+        "firstName": "1111Lasjsbjbsdjh1  1aaa",
+        "lastName": "asdabjhasbdah",
+        "dateOfBirth": "2003-02-13"
+      },
+      "organization": {
+        "id": "7147",
+        "name": "Erik test",
+        "hierarchyPath": ["7147", "31", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": { "next": { "earliestEligibleAt": "2020-07-09T04:00:00.000Z" } }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-07-23T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": { "required": 16, "count": 7 },
+                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "notification": { "count": 7 }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              },
+              "liveInteraction": { "count": 0, "required": 1 }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              }
+            }
+          }
+        }
+      ],
+      "rpm": {
+        "isActive": true,
+        "changedAt": "2020-06-23T17:14:48.495+00:00",
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true
+        },
+        "consentedAt": "2020-06-23T17:14:48.495+00:00",
+        "educationProvidedAt": "2020-06-23T17:14:48.495+00:00",
+        "deviceProvidedAt": "2020-06-23T17:14:48.495+00:00"
+      }
+    },
+    {
+      "account": {
+        "id": "6154",
+        "firstName": "Lascario Client",
+        "lastName": "Pacheco",
+        "dateOfBirth": "1993-12-01"
+      },
+      "organization": {
+        "id": "3919",
+        "name": "123 Test Clinic",
+        "hierarchyPath": ["3919", "3882", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": { "next": { "earliestEligibleAt": "2020-07-10T04:00:00.000Z" } }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-07-24T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": { "required": 16, "count": 6 },
+                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "notification": { "count": 6 }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              },
+              "liveInteraction": { "count": 0, "required": 1 }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              }
+            }
+          }
+        }
+      ],
+      "rpm": {
+        "isActive": true,
+        "changedAt": "2020-06-24T20:50:39.857+00:00",
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true
+        },
+        "consentedAt": "2020-06-24T20:50:39.857+00:00",
+        "educationProvidedAt": "2020-06-24T20:50:39.857+00:00",
+        "deviceProvidedAt": "2020-06-24T20:50:39.857+00:00"
+      }
+    },
+    {
+      "account": {
+        "id": "292",
+        "firstName": "Eric",
+        "lastName": "Di Bari",
+        "dateOfBirth": "1984-08-22"
+      },
+      "organization": {
+        "id": "31",
+        "name": "CoachCare Clinic Test",
+        "hierarchyPath": ["31", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": { "next": { "earliestEligibleAt": "2020-07-16T04:00:00.000Z" } }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-07-30T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": { "required": 16, "count": 0 },
+                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "notification": { "count": 0 }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              },
+              "liveInteraction": { "count": 0, "required": 1 }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              }
+            }
+          }
+        }
+      ],
+      "rpm": {
+        "isActive": true,
+        "changedAt": "2020-06-30T18:09:49.052+00:00",
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true
+        },
+        "consentedAt": "2020-06-30T18:09:49.052+00:00",
+        "educationProvidedAt": "2020-06-30T18:09:49.052+00:00",
+        "deviceProvidedAt": "2020-06-30T18:09:49.052+00:00"
+      }
+    }
+  ],
+  "pagination": { "next": 10 }
+}

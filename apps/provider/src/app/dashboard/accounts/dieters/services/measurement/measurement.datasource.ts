@@ -31,8 +31,10 @@ import {
 import { MeasurementDatabase } from './measurement.database';
 
 export class MeasurementDataSource extends ChartDataSource<any, MeasurementCriteria> {
+  hasMissingWeight: boolean = false;
   measurement: MeasurementSummaryData;
   palette: CCRPalette;
+  requiresWeight: MeasurementSummaryData[] = ['bodyFat', 'leanMass'];
 
   distanceNote: Array<boolean> = [];
   result$: Subject<any> = new Subject<any>();
@@ -341,8 +343,14 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
   }
 
   mapChart(result: Array<MeasurementSummarySegment>): ChartData {
+    this.hasMissingWeight = false;
+
     if (!result || !result.length) {
       return this.defaultChart();
+    }
+
+    if (this.requiresWeight.indexOf(this.measurement) > -1) {
+      this.hasMissingWeight = result.some((element) => !element.weight);
     }
 
     const linePoints =

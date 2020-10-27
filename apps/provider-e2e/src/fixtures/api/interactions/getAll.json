@@ -1,0 +1,152 @@
+{
+  "data": [
+    {
+      "id": "6019",
+      "initiator": {
+        "id": "2852",
+        "firstName": "Lascario",
+        "lastName": "Pacheco Arrieta",
+        "email": "zcyon@coachcare.com"
+      },
+      "organization": { "id": "30", "name": "CoachCare", "hierarchyPath": ["30"] },
+      "type": { "id": "2", "name": "External audio call" },
+      "source": { "id": "2", "name": "Manual" },
+      "includeInCodeBilling": false,
+      "participants": {
+        "requested": [
+          {
+            "id": "2852",
+            "firstName": "Lascario",
+            "lastName": "Pacheco Arrieta",
+            "email": "zcyon@coachcare.com"
+          },
+          {
+            "id": "6154",
+            "firstName": "Lascario Client",
+            "lastName": "Pacheco",
+            "email": "lascarioinreact@gmail.com"
+          }
+        ],
+        "attended": [
+          {
+            "id": "2852",
+            "firstName": "Lascario",
+            "lastName": "Pacheco Arrieta",
+            "email": "zcyon@coachcare.com"
+          },
+          {
+            "id": "6154",
+            "firstName": "Lascario Client",
+            "lastName": "Pacheco",
+            "email": "lascarioinreact@gmail.com"
+          }
+        ]
+      },
+      "status": "ended",
+      "time": { "start": "2020-10-03T03:28:00+00:00", "end": "2020-10-03T03:43:00+00:00" }
+    },
+    {
+      "id": "5982",
+      "initiator": {
+        "id": "2852",
+        "firstName": "Lascario",
+        "lastName": "Pacheco Arrieta",
+        "email": "zcyon@coachcare.com"
+      },
+      "subaccount": { "id": "462" },
+      "organization": { "id": "30", "name": "CoachCare", "hierarchyPath": ["30"] },
+      "source": { "id": "1", "name": "Twilio" },
+      "includeInCodeBilling": true,
+      "room": "2852-1601532187795",
+      "participants": {
+        "requested": [
+          {
+            "id": "2852",
+            "firstName": "Lascario",
+            "lastName": "Pacheco Arrieta",
+            "email": "zcyon@coachcare.com"
+          },
+          {
+            "id": "6154",
+            "firstName": "Lascario Client",
+            "lastName": "Pacheco",
+            "email": "lascarioinreact@gmail.com"
+          }
+        ],
+        "attended": [
+          {
+            "id": "2852",
+            "firstName": "Lascario",
+            "lastName": "Pacheco Arrieta",
+            "email": "zcyon@coachcare.com",
+            "callIdentity": "059b83bc903b"
+          },
+          {
+            "id": "6154",
+            "firstName": "Lascario Client",
+            "lastName": "Pacheco",
+            "email": "lascarioinreact@gmail.com",
+            "callIdentity": "fa02d45a0ef0"
+          }
+        ]
+      },
+      "status": "ended",
+      "time": {
+        "start": "2020-10-01T06:03:10.261478+00:00",
+        "end": "2020-10-01T06:36:49.54314+00:00"
+      }
+    },
+    {
+      "id": "5981",
+      "initiator": {
+        "id": "2852",
+        "firstName": "Lascario",
+        "lastName": "Pacheco Arrieta",
+        "email": "zcyon@coachcare.com"
+      },
+      "subaccount": { "id": "462" },
+      "organization": { "id": "30", "name": "CoachCare", "hierarchyPath": ["30"] },
+      "source": { "id": "1", "name": "Twilio" },
+      "includeInCodeBilling": true,
+      "room": "2852-1601531703484",
+      "participants": {
+        "requested": [
+          {
+            "id": "2852",
+            "firstName": "Lascario",
+            "lastName": "Pacheco Arrieta",
+            "email": "zcyon@coachcare.com"
+          },
+          {
+            "id": "6154",
+            "firstName": "Lascario Client",
+            "lastName": "Pacheco",
+            "email": "lascarioinreact@gmail.com"
+          }
+        ],
+        "attended": [
+          {
+            "id": "2852",
+            "firstName": "Lascario",
+            "lastName": "Pacheco Arrieta",
+            "email": "zcyon@coachcare.com",
+            "callIdentity": "fdf2eba8e297"
+          },
+          {
+            "id": "6154",
+            "firstName": "Lascario Client",
+            "lastName": "Pacheco",
+            "email": "lascarioinreact@gmail.com",
+            "callIdentity": "f53c337f3c9d"
+          }
+        ]
+      },
+      "status": "ended",
+      "time": {
+        "start": "2020-10-01T05:55:05.932502+00:00",
+        "end": "2020-10-01T05:55:51.078209+00:00"
+      }
+    }
+  ],
+  "pagination": { "next": 10 }
+}

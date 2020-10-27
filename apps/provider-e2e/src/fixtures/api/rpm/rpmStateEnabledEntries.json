@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "account": { "id": "3" },
+      "createdBy": { "id": "1" },
+      "organization": { "id": "1", "name": "CoachCare Clinic" },
+      "isActive": true,
+      "conditions": {
+        "patientConsented": true,
+        "hasMedicalNecessity": true,
+        "hadFaceToFace": true,
+        "receivedDevice": true,
+        "goalsSet": true
+      },
+      "trigger": "manual",
+      "createdAt": "2020-07-07 21:05:54.092+00"
+    }
+  ],
+  "pagination": {}
+}

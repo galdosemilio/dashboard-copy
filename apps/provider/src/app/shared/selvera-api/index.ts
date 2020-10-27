@@ -35,7 +35,8 @@ export {
   AccountPreferences,
   AccountPreferenceType,
   AccSortProperties,
-  accSortProperties
+  accSortProperties,
+  LoginHistoryItem
 } from 'selvera-api/dist/lib/selvera-api/providers/account/entities';
 export {
   AccActivityRequest,
@@ -45,7 +46,8 @@ export {
   AccListRequest,
   AccPreferencesRequest,
   AccUpdateRequest,
-  AvatarSubmitRequest
+  AvatarSubmitRequest,
+  GetLoginHistoryRequest
 } from 'selvera-api/dist/lib/selvera-api/providers/account/requests';
 export {
   AccAddResponse,
@@ -564,6 +566,10 @@ export * from 'selvera-api/dist/lib/selvera-api/providers/sequence/responses';
 export * from 'selvera-api/dist/lib/selvera-api/providers/sequence/entities';
 
 export * from 'selvera-api/dist/lib/selvera-api/providers/zendesk/entities';
+
+export * from 'selvera-api/dist/lib/selvera-api/providers/interaction/requests';
+export * from 'selvera-api/dist/lib/selvera-api/providers/interaction/responses';
+export * from 'selvera-api/dist/lib/selvera-api/providers/interaction/entities';
 
 /**
  * API interfaces.

@@ -46,7 +46,6 @@ export class RPMComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.toggle.defaults = {
-      // disableDragValue: true,
       disableToggleValue: true,
     };
   }

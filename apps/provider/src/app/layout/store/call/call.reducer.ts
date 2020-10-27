@@ -47,6 +47,7 @@ export function callReducer(state = initialState, action: Action): CallState {
     case Actions.INITIATE_CALL:
       return {
         ...state,
+        billableService: (action as Actions.InitiateCall).payload.billableService,
         isCallStarted: true,
         isMicrophoneEnabled: true,
         isRemoteVideoEnabled: false,
@@ -66,7 +67,7 @@ export function callReducer(state = initialState, action: Action): CallState {
         isCallStarted: true,
         isRemoteVideoEnabled: false,
         hasVideoStarted: false,
-        source: Source.INBOUND,
+        source: (action as Actions.ReceiveCall).payload.source || Source.INBOUND,
         isReconnect: (action as Actions.ReceiveCall).payload.isReconnect,
         callId: (action as Actions.ReceiveCall).payload.callId,
         room: {
@@ -314,7 +315,8 @@ export function callReducer(state = initialState, action: Action): CallState {
         source: (action as Actions.InitiateCall).payload.source,
         isReconnect: (action as Actions.InitiateCall).payload.isReconnect,
         callId: (action as Actions.InitiateCall).payload.callId,
-        room: (action as Actions.InitiateCall).payload.room
+        room: (action as Actions.InitiateCall).payload.room,
+        billableService: (action as Actions.InitiateCall).payload.billableService
       };
     case Actions.SET_CALL_END:
       return {
@@ -344,6 +346,16 @@ export function callReducer(state = initialState, action: Action): CallState {
         ...state,
         isBeingDragged: !state.isBeingDragged,
         lastPosition: (action as Actions.ToggleDrag).payload || undefined
+      };
+    case Actions.SET_ATTEMPTING_RECONNECT:
+      return {
+        ...state,
+        isAttemptingToReconnect: (action as Actions.SetAttemptingReconnect).payload
+      };
+    case Actions.SET_RECONNECTION_BUMPER:
+      return {
+        ...state,
+        reconnectionBumper: (action as Actions.SetReconnectionBumper).payload
       };
     default: {
       return state;

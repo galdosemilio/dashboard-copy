@@ -1,0 +1,83 @@
+{
+    "data": [
+        {
+            "dosage": 2,
+            "id": "33",
+            "organization": {
+                "id": "31"
+            },
+            "supplement": {
+                "id": "1",
+                "fullName": "Multivitamin",
+                "shortName": "multiVitamin",
+                "isActive": true
+            }
+        },
+        {
+            "dosage": 2,
+            "id": "127",
+            "organization": {
+                "id": "31"
+            },
+            "supplement": {
+                "id": "47",
+                "fullName": "omega61",
+                "shortName": "6",
+                "isActive": true
+            }
+        },
+        {
+            "dosage": 1,
+            "id": "34",
+            "organization": {
+                "id": "31"
+            },
+            "supplement": {
+                "id": "2",
+                "fullName": "Cal-Mag",
+                "shortName": "calMag",
+                "isActive": true
+            }
+        },
+        {
+            "dosage": 1,
+            "id": "35",
+            "organization": {
+                "id": "31"
+            },
+            "supplement": {
+                "id": "3",
+                "fullName": "Omega 3",
+                "shortName": "omega3",
+                "isActive": true
+            }
+        },
+        {
+            "dosage": 1,
+            "id": "36",
+            "organization": {
+                "id": "31"
+            },
+            "supplement": {
+                "id": "4",
+                "fullName": "Potassium",
+                "shortName": "potassium",
+                "isActive": true
+            }
+        },
+        {
+            "dosage": 1,
+            "id": "37",
+            "organization": {
+                "id": "31"
+            },
+            "supplement": {
+                "id": "5",
+                "fullName": "Salt",
+                "shortName": "salt",
+                "isActive": true
+            }
+        }
+    ],
+    "pagination": {}
+}

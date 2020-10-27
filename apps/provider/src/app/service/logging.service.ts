@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AddLogRequest } from '@app/shared/selvera-api';
-import { Logging } from 'selvera-api';
 import { environment } from '../../environments/environment';
+import { Logging } from 'selvera-api';
 import { LanguageService } from './language.service';
 
 interface Log extends Partial<AddLogRequest> {

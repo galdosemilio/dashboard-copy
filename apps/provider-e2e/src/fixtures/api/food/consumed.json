@@ -1,0 +1,98 @@
+{
+  "data": [
+    {
+      "id": "3438335",
+      "account": {
+        "id": "2"
+      },
+      "consumedAt": "2019-12-31T03:00:00.000Z",
+      "createdAt": "2019-12-31T03:00:00.000Z",
+      "type": {
+        "id": 1,
+        "description": "Breakfast"
+      },
+      "serving": "2.5",
+      "isFavorite": false,
+      "meal": {
+        "id": "2335991",
+        "name": "Chocolate Mint Pudding & Shake",
+        "imageUrl": ""
+      },
+      "summary": {
+        "availableCarbohydrate": 1000,
+        "calorie": 100,
+        "carbohydrate": 1000,
+        "cholesterol": 10,
+        "fiber": 1000,
+        "potassium": 100,
+        "protein": 10000,
+        "saturatedFat": 10,
+        "sodium": 100,
+        "totalFat": 1000
+      }
+    },
+    {
+      "id": "3429226",
+      "account": {
+        "id": "1"
+      },
+      "consumedAt": "2020-01-01T03:00:00.000Z",
+      "createdAt": "2020-01-01T03:00:00.000Z",
+      "type": {
+        "id": 2,
+        "description": "Lunch"
+      },
+      "serving": "1",
+      "isFavorite": false,
+      "meal": {
+        "id": "2335980",
+        "name": "Chocolate Beverage - Natural",
+        "imageUrl": "https://cdn.coachcare.com/food/robard/2335980-chocolate_beverage_natural.jpg"
+      },
+      "summary": {
+        "availableCarbohydrate": 2000,
+        "calorie": 200,
+        "carbohydrate": 2000,
+        "cholesterol": 20,
+        "fiber": 2000,
+        "potassium": 200,
+        "protein": 20000,
+        "saturatedFat": 20,
+        "sodium": 200,
+        "totalFat": 2000
+      }
+    },
+    {
+      "id": "3425499",
+      "account": {
+        "id": "91"
+      },
+      "consumedAt": "2020-01-01T03:00:00.000Z",
+      "createdAt": "2020-01-01T03:00:00.000Z",
+      "type": {
+        "id": 3,
+        "description": "Dinner"
+      },
+      "serving": "1.75",
+      "isFavorite": false,
+      "meal": {
+        "id": "2335970",
+        "name": "Caramel Cocoa Bar",
+        "imageUrl": "https://cdn.coachcare.com/food/robard/2335970-caramel_cocoa_bar.jpg"
+      },
+      "summary": {
+        "availableCarbohydrate": 3000,
+        "calorie": 300,
+        "carbohydrate": 3000,
+        "cholesterol": 30,
+        "fiber": 3000,
+        "potassium": 300,
+        "protein": 30000,
+        "saturatedFat": 30,
+        "sodium": 300,
+        "totalFat": 3000
+      }
+    }
+  ],
+  "pagination": {}
+}

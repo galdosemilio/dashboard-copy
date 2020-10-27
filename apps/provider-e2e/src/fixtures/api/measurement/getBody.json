@@ -1,0 +1,119 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "3"
+      },
+      "device": {
+        "id": "9",
+        "title": "HealthKit",
+        "description": "Apple HealthKit"
+      },
+      "id": "793863",
+      "recordedAt": "2020-01-01T01:00:00.000Z",
+      "bmi": 22528,
+      "weight": 83000,
+      "bodyFat": 17000,
+      "bloodPressureDiastolic": 20,
+      "bloodPressureSystolic": 20,
+      "heartRate": 20,
+      "totalCholesterol": 20,
+      "ldl": 20,
+      "hdl": 20,
+      "vldl": 20,
+      "triglycerides": 20,
+      "fastingGlucose": 20,
+      "hba1c": 20000,
+      "insulin": 20,
+      "hsCrp": 200000,
+      "updatedAt": "2020-01-13T19:18:41.744Z",
+      "temperature": 1800,
+      "respirationRate": 20,
+      "totalBodyWater": 27934,
+      "extracellularWaterToBodyWater": 47748,
+      "visceralAdiposeTissue": 15000,
+      "visceralFatMass": 499
+    },
+    {
+      "account": {
+        "id": "3"
+      },
+      "device": {
+        "id": "9",
+        "title": "HealthKit",
+        "description": "Apple HealthKit"
+      },
+      "id": "793862",
+      "recordedAt": "2019-12-31T02:00:00.000Z",
+      "bmi": 22528,
+      "weight": 83500,
+      "bodyFat": 17500,
+      "visceralAdiposeTissue": 15000
+    },
+    {
+      "account": {
+        "id": "3"
+      },
+      "device": {
+        "id": "9",
+        "title": "HealthKit",
+        "description": "Apple HealthKit"
+      },
+      "id": "793820",
+      "recordedAt": "2019-12-30T03:00:00.000Z",
+      "bmi": 22528,
+      "weight": 84000,
+      "bodyFat": 18000,
+      "visceralAdiposeTissue": 15000
+    },
+    {
+      "account": {
+        "id": "3"
+      },
+      "device": {
+        "id": "9",
+        "title": "HealthKit",
+        "description": "Apple HealthKit"
+      },
+      "id": "793820",
+      "recordedAt": "2019-12-29T01:00:00.000Z",
+      "bmi": 22528,
+      "weight": 85000,
+      "bodyFat": 19000,
+      "visceralAdiposeTissue": 5000
+    },
+    {
+      "account": {
+        "id": "3"
+      },
+      "device": {
+        "id": "9",
+        "title": "HealthKit",
+        "description": "Apple HealthKit"
+      },
+      "id": "793820",
+      "recordedAt": "2019-12-28T23:00:00.000Z",
+      "bmi": 22528,
+      "weight": 86000,
+      "bodyFat": 20000,
+      "visceralAdiposeTissue": 30000
+    },
+    {
+      "account": {
+        "id": "3"
+      },
+      "device": {
+        "id": "9",
+        "title": "HealthKit",
+        "description": "Apple HealthKit"
+      },
+      "id": "793820",
+      "recordedAt": "2019-12-27T00:00:00.001Z",
+      "bmi": 22528,
+      "weight": 90000,
+      "bodyFat": 30000,
+      "visceralAdiposeTissue": 21000
+    }
+  ],
+  "pagination": {}
+}

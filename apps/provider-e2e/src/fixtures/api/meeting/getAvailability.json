@@ -1,0 +1,20 @@
+{
+  "entries": [
+    {
+      "ids": ["894040"],
+      "account": "1",
+      "startTime": "2019-12-31T00:00:00.000Z",
+      "endTime": "2019-12-31T22:00:00.000Z",
+      "timezone": "America/New_York",
+      "isSingle": false
+    },
+    {
+      "ids": ["894054"],
+      "account": "1",
+      "startTime": "2020-01-01T00:00:00.000Z",
+      "endTime": "2020-01-01T22:00:00.000Z",
+      "timezone": "America/New_York",
+      "isSingle": false
+    }
+  ]
+}

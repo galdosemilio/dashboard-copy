@@ -8,3 +8,4 @@ export const STORAGE_FIRST_TIME_GUIDE = 'ccrFirstTimeGuide';
 export const STORAGE_RPM_GUIDE = 'ccrRPMGuide';
 export const STORAGE_NEWS_LAST_SEEN_TIMESTAMP = 'ccrNewsLastSeenTimestamp';
 export const STORAGE_TIME_TRACKER_STASH = 'ccrTimeTrackerStash';
+export const STORAGE_VIDEOCONFERENCE_SETTINGS = 'ccrVideoConferenceSettings';

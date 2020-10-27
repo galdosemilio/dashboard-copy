@@ -48,11 +48,16 @@
 </div>
 
 <div class="messages-footer" fxFlex="nogrow">
-  <textarea rows="2" [(ngModel)]="newMessage" [detectKey]="'Enter'" (keyPressed)="sendMessage()"
+  <textarea rows="2" [(ngModel)]="newMessage" [detectKey]="'Enter'" supressOnShiftKeyHold="true" (keyPressed)="sendMessage()"
     [placeholder]="'BOARD.TYPE_YOUR_MESSAGES_HERE' | translate"></textarea>
   <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
     <mat-icon>send</mat-icon> {{'GLOBAL.SEND' | translate}}
   </button>
+  <ccr-popup-description
+    [title]="'BOARD.MESSAGES_HELP_TITLE' | translate"
+    [description]="'BOARD.MESSAGES_HELP_DESCRIPTION' | translate"
+    [showIntro]="false"
+  ></ccr-popup-description>
 </div>
 
 <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="loading || disabled">

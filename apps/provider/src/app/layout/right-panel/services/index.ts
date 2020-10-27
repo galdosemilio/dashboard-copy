@@ -1,3 +1,4 @@
+import { AlertsDatabase } from '@app/dashboard';
 import { ConsultationsDataService } from './consultations-data.service';
 import { MeasurementsDataService } from './measurements-data.service';
 import { NotificationsDataService } from './notifications-data.service';
@@ -14,6 +15,7 @@ export {
 };
 
 export const RightPanelServices = [
+  AlertsDatabase,
   ConsultationsDataService,
   MeasurementsDataService,
   NotificationsDataService,

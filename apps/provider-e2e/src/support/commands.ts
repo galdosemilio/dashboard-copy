@@ -1,31 +1,48 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-// eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
   interface Chainable<Subject> {
-    login(email: string, password: string): void;
+    setTimezone(value: string): Chainable<void>;
+    setOrganization(value: string): Chainable<void>;
   }
 }
-//
-// -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+
+Cypress.Commands.add('setTimezone', (tz: 'en' | 'aet') => {
+  let tzProper: string;
+
+  switch (tz) {
+    case 'aet':
+      tzProper = 'Australia/Sydney';
+      break;
+    default:
+      tzProper = 'America/New_York';
+  }
+
+  cy.log(`setting timezone to ${tzProper}...`);
+  Cypress.env('timezone', tzProper);
 });
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('setOrganization', (org: string) => {
+  let translatedOrg: number;
+
+  switch (org) {
+    case 'cmwl':
+      translatedOrg = 6955;
+      break;
+    case 'ccr':
+      translatedOrg = 1;
+      break;
+    case 'mdteam':
+      translatedOrg = 7384;
+      break;
+    case 'inhealth':
+      translatedOrg = 7242;
+      break;
+    case 'shiftsetgo':
+      translatedOrg = 7355;
+      break;
+    default:
+      translatedOrg = 1;
+  }
+
+  cy.log(`setting organizationId to ${translatedOrg}...`);
+  Cypress.env('organizationId', translatedOrg);
+});

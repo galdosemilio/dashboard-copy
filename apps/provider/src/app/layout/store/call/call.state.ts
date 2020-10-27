@@ -1,3 +1,5 @@
+import { BillableService } from '@app/dashboard/reports/communications/models';
+
 export const WindowState = {
   DEFAULT: 'DEFAULT',
   MINIMIZED: 'MINIMIZED',
@@ -34,6 +36,7 @@ export interface CallEndState {
 }
 
 export interface CallState {
+  billableService: BillableService;
   isSupported: boolean;
   isCallStarted: boolean;
   isReconnect: boolean;
@@ -66,6 +69,8 @@ export interface CallState {
   fetchDevicesSuccess: boolean;
   isBeingDragged: boolean;
   lastPosition: any;
+  isAttemptingToReconnect: boolean;
+  reconnectionBumper: boolean;
 }
 
 export const initialRoom: RoomState = {
@@ -81,6 +86,11 @@ export const initialCallEndState: CallEndState = {
 };
 
 export const initialState: CallState = {
+  billableService: {
+    id: '',
+    name: '',
+    displayName: ''
+  },
   isSupported: false,
   isCallStarted: false,
   isReconnect: false,
@@ -112,5 +122,7 @@ export const initialState: CallState = {
   fetchDevicesSuccess: false,
   lastPosition: undefined,
   isBeingDragged: false,
-  conferencingEnabled: false
+  conferencingEnabled: false,
+  isAttemptingToReconnect: false,
+  reconnectionBumper: false
 };

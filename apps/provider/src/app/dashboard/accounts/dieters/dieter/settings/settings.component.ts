@@ -22,9 +22,10 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
     'devices',
     'forms',
     'sequences',
-    'calls',
+    'communications',
     'associations',
-    'file-vault'
+    'file-vault',
+    'login-history'
   ];
   component = 'profile';
   defaultComponents = [
@@ -33,9 +34,10 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
     'devices',
     'forms',
     'sequences',
-    'calls',
+    'communications',
     'associations',
-    'file-vault'
+    'file-vault',
+    'login-history'
   ];
   defaultForm: Form;
   fillForm: Form;
@@ -82,7 +84,7 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
         this.components.splice(this.components.indexOf('file-vault'), 1);
       }
       if (!showCalls) {
-        this.components.splice(this.components.indexOf('calls'), 1);
+        this.components.splice(this.components.indexOf('communications'), 1);
       }
 
       if (Array.isArray(hiddenTabs)) {

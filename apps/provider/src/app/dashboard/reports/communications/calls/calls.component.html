@@ -1,6 +1,18 @@
 <p data-cy="callLogClinicNotice" [innerHTML]="'REPORTS.COMMS_CALLS_DESCRIPTION' | translate:{clinic: clinic}"></p>
 
 <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
+    <div fxFlex>
+        <button
+        *ngIf="allowCreation"
+        (click)="showAddInteractionDialog()"
+        mat-button
+        class="ccr-icon-button"
+        color="primary">
+            <mat-icon>add</mat-icon>
+            {{ 'REPORTS.CREATE_MANUAL_INTERACTION' | translate }}
+        </button>
+    </div>
+
     <button mat-button fxFlex="nogrow" class="ccr-align-center"
     [disabled]="!source.isLoaded || source.isEmpty || isLoading" (click)="downloadCSV()">
       {{ 'REPORTS.EXPORT_CSV' | translate }}
@@ -18,12 +30,43 @@
 <ccr-datasource-overlay class="ccr-table" [source]="source">
 
     <mat-table [dataSource]="source" data-cy="callLogTable">
+        <ng-container cdkColumnDef="type">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.TYPE' | translate}}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'SEQUENCING.TYPE' | translate}}</span>
+                {{ row.type.displayName | translate }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="rpmBillable">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.BILLABLE_SERVICE' | translate}}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'REPORTS.BILLABLE_SERVICE' | translate}}</span>
+                <span *ngIf="!allowCreation || !row.canUpdateRpmBilling">
+                    {{ row.billableService.displayName | translate }}
+                </span>
+                <mat-form-field *ngIf="allowCreation && row.canUpdateRpmBilling" fxFlex="75%">
+                    <mat-select
+                    [ngModel]="row.billableService.id"
+                    (selectionChange)="onRpmBillableChange(row, $event)">
+                        <mat-option
+                        *ngFor="let billServ of billableServices"
+                        [value]="billServ.id">
+                            {{ billServ.displayName | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+
         <ng-container cdkColumnDef="participants">
         <mat-header-cell *cdkHeaderCellDef>{{'RIGHT_PANEL.PARTICIPANTS' | translate}}</mat-header-cell>
         <mat-cell *cdkCellDef="let row" fxLayout="column" fxLayoutAlign="start start" fxFlex.xs="grow">
             <span>{{'RIGHT_PANEL.PARTICIPANTS' | translate}}</span>
             <p *ngFor="let participant of row.participants" class="participant">
-                {{ participant.firstName }} {{ participant.lastName }} (ID: {{ participant.id }})<i class="ccr-marker" *ngIf="participant.isInitiator">&nbsp;*</i>
+                {{ participant.firstName }} {{ participant.lastName }}<i class="ccr-marker" *ngIf="participant.isInitiator">&nbsp;*</i>
+                <br>
+                <small>(ID: {{ participant.id }})</small>
             </p>
         </mat-cell>
         </ng-container>
@@ -32,7 +75,11 @@
             <mat-header-cell *cdkHeaderCellDef>{{'BOARD.CLINIC' | translate}}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
                 <span>{{'BOARD.CLINIC' | translate}}</span>
-                {{ row.organization.name }} (ID: {{ row.organization.id }})
+                <p>
+                    {{ row.organization.name }}
+                    <br>
+                    <small>(ID: {{ row.organization.id }})</small>
+                </p>
             </mat-cell>
         </ng-container>
 
@@ -41,20 +88,28 @@
         <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
             <span>{{'GLOBAL.TIME' | translate}}</span>
             {{ row.time.start | amDateFormat:'ddd, MMM D YYYY h:mm a' }}
+            <br>
+            {{ row.time.duration }} {{ 'GLOBAL.MINUTES' | translate | lowercase }}
         </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="duration">
-        <mat-header-cell *cdkHeaderCellDef>{{'REPORTS.DURATION' | translate}}</mat-header-cell>
-        <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
-            <span>{{'REPORTS.DURATION' | translate}}</span>
-            {{ row.time.duration }} {{ 'GLOBAL.MINUTES' | translate }}
+        <ng-container cdkColumnDef="actions">
+        <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxFlex.xs="grow">
+            <span>{{'BOARD.ACTIONS' | translate}}</span>
+            <button
+            *ngIf="row.canBeDeleted"
+            [title]="'GLOBAL.DELETE' | translate"
+            (click)="showRemoveInteractionDialog(row)"
+            mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
         </mat-cell>
         </ng-container>
 
-        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-header-row *cdkHeaderRowDef="shownColumns"></mat-header-row>
         <mat-row fxLayoutWrap
-        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        *cdkRowDef="let row; columns: shownColumns; let even = even; let odd = odd"
         [ngClass]="{
             'row-even': even,
             'row-odd': odd
@@ -65,3 +120,7 @@
 </ccr-datasource-overlay>
 
 <small class="table-hint"><i class="ccr-marker">&nbsp;*</i> {{ 'REPORTS.CALL_INITIATOR' | translate }}</small>
+<br>
+<small *ngIf="source.hasNonDeletableEntry" class="table-hint">
+    {{ 'REPORTS.NON_DELETABLE_INTERACTIONS' | translate }}
+</small>

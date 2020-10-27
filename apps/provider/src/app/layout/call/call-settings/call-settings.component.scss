@@ -21,7 +21,7 @@ $video-preview-width: 200px;
 }
 
 .help-link {
-  color: var(--primary, mat-color($ccr-primary)) !important;
+  color: var(--primary) !important;
   display: block;
   font-size: 0.95em;
   padding-top: 5px;
@@ -42,7 +42,7 @@ $video-preview-width: 200px;
   }
 
   &.active {
-    background-color: var(--primary, mat-color($ccr-primary));
+    background-color: var(--primary);
   }
 }
 

@@ -25,8 +25,8 @@
         {{ 'SIDENAV.SEQUENCES' | translate }}
       </a>
     </li>
-    <li *ngIf="components.indexOf('calls') > -1">
-      <a mat-button [routerLink]="['.', {s: 'calls'}]" [class.active]="section === 'calls'">
+    <li *ngIf="components.indexOf('communications') > -1">
+      <a mat-button [routerLink]="['.', {s: 'communications'}]" [class.active]="section === 'communications'">
         {{ 'REPORTS.COMMS_CALLS' | translate }}
       </a>
     </li>
@@ -38,6 +38,11 @@
     <li *ngIf="components.indexOf('file-vault') > -1">
       <a mat-button [routerLink]="['.', {s: 'file-vault'}]" [class.active]="section === 'file-vault'">
         {{ 'GLOBAL.FILE_VAULT' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('login-history') > -1">
+      <a mat-button [routerLink]="['.', {s: 'login-history'}]" [class.active]="section === 'login-history'">
+        {{ 'GLOBAL.LOGIN_HISTORY' | translate }}
       </a>
     </li>
   </ul>
@@ -83,8 +88,8 @@
 
   </ng-container>
 
-  <ng-container *ngSwitchCase="'calls'">
-    <app-reports-calls [account]="account"></app-reports-calls>
+  <ng-container *ngSwitchCase="'communications'">
+    <app-reports-calls [allowCreation]="true" [account]="account"></app-reports-calls>
   </ng-container>
 
   <ng-container *ngSwitchCase="'associations'">
@@ -93,5 +98,9 @@
 
   <ng-container *ngSwitchCase="'file-vault'">
     <app-dieter-file-vault></app-dieter-file-vault>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'login-history'">
+    <ccr-login-history [patientMode]="true"></ccr-login-history>
   </ng-container>
 </div>

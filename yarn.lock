@@ -10899,10 +10899,10 @@ selfsigned@^1.10.7:
   dependencies:
     node-forge "0.9.0"
 
-selvera-api@^11.16.0:
-  version "11.16.0"
-  resolved "https://npm.coachcare.io/selvera-api/-/selvera-api-11.16.0.tgz#e42e87b224be06fd42e9074f99f3f98ee2218475"
-  integrity sha512-Hj8F3SptZ5v5x0s+MSwUGGp+lUtZ91LK9dMRQNHSyv809QSBQs+pr4Kz3o9j0Jz+pT1zzAXLf8XNjZyypb95+g==
+selvera-api@^11.20.1:
+  version "11.20.1"
+  resolved "https://npm.coachcare.io/selvera-api/-/selvera-api-11.20.1.tgz#ea401b69d09ca8220c4a84742ea1ad948634b67a"
+  integrity sha512-itQfLuv1aMC/Y7j4MwODmKDRZ7Mxf1criAjC/6mdWsZ/s3WIvGZPiowzNGxUHtd/Wga8i0IgodQqupqp5bAzog==
   dependencies:
     "@types/socket.io-client" "^1.4.32"
     "@types/twilio-video" "^2.0.12"

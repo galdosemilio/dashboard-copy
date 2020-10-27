@@ -5,6 +5,7 @@ export * from './form-submissions/form-submissions.component';
 export * from './utils';
 
 import {
+  FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
   PatientSelectDialog,
@@ -71,6 +72,7 @@ export const FormsComponents = [
   DietersTableComponent,
   EmbedContentPickerComponent,
   FormAddendumTableComponent,
+  FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
   FormFormComponent,
@@ -91,6 +93,7 @@ export const FormsComponents = [
 ];
 
 export const FormsEntryComponents = [
+  FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
   PatientSelectDialog,

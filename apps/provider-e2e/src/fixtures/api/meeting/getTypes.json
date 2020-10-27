@@ -1,0 +1,23 @@
+{
+    "meetingTypes":[
+       {
+          "typeId":1,
+          "code":"1on1initial",
+          "description":"Initial 1 on 1 meeting",
+          "isActive":true,
+          "durations":[
+             "00:15:00",
+             "00:30:00"
+          ]
+       },
+       {
+          "typeId":2,
+          "code":"1on1",
+          "description":"1 on 1 meeting",
+          "isActive":true,
+          "durations":[
+             "01:00:00"
+          ]
+       }
+    ]
+ }

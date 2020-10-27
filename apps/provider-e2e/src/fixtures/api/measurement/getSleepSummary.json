@@ -1,0 +1,48 @@
+{
+    "data": [
+        {
+            "date": "2019-12-26T00:00:00.000Z",
+            "sleepMinutes": 0,
+            "sleepQuality": 0
+        },
+        {
+            "date": "2019-12-27T00:00:00.000Z",
+            "sleepMinutes": 3500,
+            "sleepQuality": 50
+        },
+        {
+            "date": "2019-12-28T00:00:00.000Z",
+            "sleepMinutes": 0,
+            "sleepQuality": 0
+        },
+        {
+            "date": "2019-12-29T00:00:00.000Z",
+            "sleepMinutes": 0,
+            "sleepQuality": 0
+        },
+        {
+            "date": "2019-12-30T00:00:00.000Z",
+            "sleepMinutes": 1000,
+            "sleepQuality": 12
+        },
+        {
+            "date": "2019-12-31T00:00:00.000Z",
+            "sleepMinutes": 0,
+            "sleepQuality": 0
+        },
+        {
+            "date": "2020-01-01T00:00:00.000Z",
+            "sleepMinutes": 0,
+            "sleepQuality": 0
+        }
+    ],
+    "summary": {
+        "sleepMinutesMin": 0,
+        "sleepMinutesMax": 3500,
+        "sleepMinutesAverage": 640,
+        "sleepQualityAverage": 12,
+        "previousSleepStart": "2019-12-30T22:00:00.000Z",
+        "previousSleepEnd": "2019-12-31T23:40:00.000Z",
+        "previousSleepTotal": 1000
+    }
+}

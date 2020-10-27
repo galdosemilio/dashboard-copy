@@ -15,7 +15,7 @@ export interface ConfirmDialogData {
 @Component({
   selector: 'app-dialog-confirm',
   templateUrl: 'confirm.dialog.html',
-  host: { class: 'ccr-confirm' },
+  host: { class: 'ccr-dialog' },
 })
 export class ConfirmDialog {
   title = '';

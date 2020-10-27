@@ -62,3 +62,7 @@ tr.header {
 .row-odd td.cdk-column-actions {
   background: mat-color($ccr-background, odd);
 }
+
+.text-right {
+  float: right;
+}

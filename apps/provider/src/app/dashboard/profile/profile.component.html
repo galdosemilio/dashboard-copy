@@ -29,12 +29,20 @@ fxLayoutAlign=" stretch">
     {{ 'GLOBAL.SECURITY' | translate }}
   </a>
   <a
-  [class.active]="section === 'calls'"
-  [routerLink]="['.', { s: 'calls' }]"
+  [class.active]="section === 'communications'"
+  [routerLink]="['.', { s: 'communications' }]"
   ccrLinkActive="active"
   fxFlex
   fxLayoutAlign="center center">
     {{ 'REPORTS.COMMS_CALLS' | translate }}
+  </a>
+  <a
+  [class.active]="section === 'login-history'"
+  [routerLink]="['.', { s: 'login-history' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center">
+    {{ 'GLOBAL.LOGIN_HISTORY' | translate }}
   </a>
 </div>
 
@@ -51,8 +59,13 @@ fxLayoutAlign=" stretch">
     <app-profile-security></app-profile-security>
   </ng-container>
 
-  <ng-container *ngSwitchCase="'calls'">
+  <ng-container *ngSwitchCase="'communications'">
     <br>
     <app-reports-calls [account]="profile.id"></app-reports-calls>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'login-history'">
+    <br>
+    <ccr-login-history [account]="profile.id"></ccr-login-history>
   </ng-container>
 </ng-container>

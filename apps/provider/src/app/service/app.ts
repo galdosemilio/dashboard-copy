@@ -31,6 +31,7 @@ import {
   FormSubmission,
   Goal,
   Hydration,
+  Interaction,
   Logging,
   MeasurementActivity,
   MeasurementBody,
@@ -172,6 +173,9 @@ export function ccrGoalFactory(ccrApiService: ApiService) {
 }
 export function ccrHydrationFactory(ccrApiService: ApiService) {
   return new Hydration(ccrApiService);
+}
+export function ccrInteractionFactory(ccrApiService: ApiService) {
+  return new Interaction(ccrApiService);
 }
 export function ccrLoggingFactory(ccrApiService: ApiService) {
   return new Logging(ccrApiService);
@@ -387,6 +391,11 @@ export function AppProviders() {
     {
       provide: Hydration,
       useFactory: ccrHydrationFactory,
+      deps: [ApiService]
+    },
+    {
+      provide: Interaction,
+      useFactory: ccrInteractionFactory,
       deps: [ApiService]
     },
     {

@@ -5,18 +5,32 @@ import { MatDialog, MatDialogRef } from '@coachcare/common/material';
 import {
   COOKIE_CALL_BROWSERS_MODAL,
   COOKIE_CALL_DEVICES_MODAL,
+  STORAGE_VIDEOCONFERENCE_SETTINGS,
 } from '@app/config';
+import { BILLABLE_SERVICES } from '@app/dashboard/reports/communications/models';
 import { AccessRequiredDialogComponent } from '@app/layout/call/access-required-dialog/access-required-dialog.component';
 import { BrowserSupportDialogComponent } from '@app/layout/call/browser-support-dialog/browser-support-dialog.component';
 import { CallSettingsComponent } from '@app/layout/call/call-settings/call-settings.component';
 import { CallWindowComponent } from '@app/layout/call/call-window/call-window.component';
+import { UIState } from '@app/layout/store';
+import {
+  CloseCallsBeforeInitiate,
+  ReceiveCall,
+  Source,
+  StoreCallSettings,
+} from '@app/layout/store/call';
+import { ContextService, NotifierService } from '@app/service';
+import { CallRatingDialog } from '@app/shared';
+import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { WindowState } from '../../store/call/call.state';
+import { Interaction } from 'selvera-api';
 import { AccessDeniedDialogComponent } from '../access-denied-dialog/access-denied-dialog.component';
 
 @Injectable()
 export class CallLayoutService implements OnDestroy {
+  private callRatingModalOpen: boolean;
   private overlayCallRef: OverlayRef;
   private overlaySettingsRef: OverlayRef;
 
@@ -24,8 +38,13 @@ export class CallLayoutService implements OnDestroy {
 
   constructor(
     private _overlay: Overlay,
+    private context: ContextService,
     private cookie: CookieService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private notifier: NotifierService,
+    private store: Store<UIState>,
+    private deviceDetector: DeviceDetectorService,
+    private interaction: Interaction
   ) {}
 
   ngOnDestroy() {}
@@ -42,11 +61,127 @@ export class CallLayoutService implements OnDestroy {
     }, 0);
   }
 
+  public showCallRatingModal(): void {
+    if (this.callRatingModalOpen) {
+      return;
+    }
+
+    this.callRatingModalOpen = true;
+
+    let modal;
+    if (this.deviceDetector.isDesktop) {
+      modal = this.dialog.open(CallRatingDialog, { width: '30vw' });
+    } else if (this.deviceDetector.isTablet) {
+      modal = this.dialog.open(CallRatingDialog, { width: '60vw' });
+    } else {
+      modal = this.dialog.open(CallRatingDialog, {
+        width: '100vw',
+        panelClass: 'ccr-full-dialog',
+      });
+    }
+
+    modal.afterClosed().subscribe(() => (this.callRatingModalOpen = false));
+  }
+
   showSettings() {
     this.dialog.open(CallSettingsComponent, {
       width: '60vw',
       panelClass: 'ccr-full-dialog',
     });
+  }
+
+  async recoverCall() {
+    try {
+      const calls = await this.interaction.getAllSelf({
+        status: 'in-progress',
+        limit: 1,
+      });
+
+      if (!calls.data.length) {
+        window.localStorage.removeItem(STORAGE_VIDEOCONFERENCE_SETTINGS);
+        return;
+      }
+
+      const videoConferenceData = JSON.parse(
+        window.localStorage.getItem(STORAGE_VIDEOCONFERENCE_SETTINGS)
+      );
+
+      let billableService;
+
+      const recentCall = calls.data[0];
+      const isInitiator = recentCall.initiator.id === this.context.user.id;
+
+      if (recentCall.billableService) {
+        const foundBillServ = Object.values(BILLABLE_SERVICES).find(
+          (billServ) => billServ.id === recentCall.billableService.id
+        );
+        billableService = foundBillServ
+          ? foundBillServ
+          : BILLABLE_SERVICES.none;
+      } else {
+        billableService = BILLABLE_SERVICES.none;
+      }
+
+      if (
+        videoConferenceData &&
+        !videoConferenceData.participantJoined &&
+        isInitiator
+      ) {
+        this.store.dispatch(
+          new CloseCallsBeforeInitiate({
+            billableService: billableService,
+            callId: '',
+            isReconnect: false,
+            source: Source.OUTBOUND,
+            room: {
+              name: recentCall.room,
+              organizationId: recentCall.organization.id,
+              initiatorId: recentCall.initiator.id,
+              participants: recentCall.participants.requested.map(
+                (recentCallParticipant) => ({
+                  id: recentCallParticipant.id,
+                  name: `${
+                    recentCallParticipant.firstName
+                  } ${recentCallParticipant.lastName[0].toUpperCase()}.`,
+                  isParticipating: false,
+                  isAvailable: false,
+                  hasFetchedStatus: false,
+                  callIdentity: '',
+                })
+              ),
+            },
+          })
+        );
+      } else {
+        this.store.dispatch(
+          new ReceiveCall({
+            billableService: billableService,
+            callId: recentCall.id,
+            isReconnect: true,
+            source: isInitiator ? Source.OUTBOUND : Source.INBOUND,
+            room: {
+              name: recentCall.room,
+              organizationId: recentCall.organization.id,
+              initiatorId: recentCall.initiator.id,
+              participants: recentCall.participants.attended.map(
+                (recentCallParticipant) => ({
+                  id: recentCallParticipant.id,
+                  name: `${
+                    recentCallParticipant.firstName
+                  } ${recentCallParticipant.lastName[0].toUpperCase()}.`,
+                  isParticipating: true,
+                  isAvailable: false,
+                  hasFetchedStatus: false,
+                  callIdentity: '',
+                })
+              ),
+            },
+          })
+        );
+      }
+    } catch (error) {
+      this.notifier.error(error);
+    }
   }
 
   closeSettings() {
@@ -94,6 +229,10 @@ export class CallLayoutService implements OnDestroy {
 
     const callWindowComponent = new ComponentPortal(CallWindowComponent);
     this.overlayCallRef.attach(callWindowComponent);
+  }
+
+  public storeCallSettings() {
+    this.store.dispatch(new StoreCallSettings());
   }
 
   private createDefaultWindowOverlayConfig(

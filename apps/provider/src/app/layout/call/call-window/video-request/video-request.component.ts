@@ -4,7 +4,6 @@ import { callSelector } from '@app/layout/store/call/call.selector';
 import { CallState } from '@app/layout/store/call/call.state';
 import { UIState } from '@app/layout/store/state';
 import { select, Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Subject, timer } from 'rxjs';
 
 @Component({
@@ -14,12 +13,13 @@ import { Subject, timer } from 'rxjs';
 })
 export class CallVideoRequestComponent implements OnInit {
   callState: CallState;
+  acceptedCall: boolean = false;
   audioPopupTrigger: Subject<void> = new Subject<void>();
 
   private acceptingTimeout: any;
   constructor(private store: Store<UIState>) {
     this.store
-      .pipe(untilDestroyed(this), select(callSelector))
+      .pipe(select(callSelector))
       .subscribe((callState) => (this.callState = callState));
   }
 
@@ -30,6 +30,7 @@ export class CallVideoRequestComponent implements OnInit {
   ngOnDestroy() {}
 
   onAcceptVideo() {
+    this.acceptedCall = true;
     this.store.dispatch(
       new CreateLocalTracks({
         enableAudio: this.callState.hasAudioDeviceAccess,
@@ -47,6 +48,7 @@ export class CallVideoRequestComponent implements OnInit {
     ) {
       this.audioPopupTrigger.next();
     } else {
+      this.acceptedCall = true;
       this.store.dispatch(
         new CreateLocalTracks({
           enableAudio: this.callState.hasAudioDeviceAccess,
@@ -67,7 +69,7 @@ export class CallVideoRequestComponent implements OnInit {
       this.acceptingTimeout.unsubscribe();
       this.acceptingTimeout = null;
     }
-    const source = timer(600000);
+    const source = timer(120000);
     // output: 0
     this.acceptingTimeout = source.subscribe((elapsed) => {
       this.acceptingTimeout.unsubscribe();

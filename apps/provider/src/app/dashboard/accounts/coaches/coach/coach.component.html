@@ -42,12 +42,20 @@ data-cy="coachProfileMenu">
     {{ 'GLOBAL.CLINICS' | translate }}
   </a>
   <a
-  [class.active]="section === 'calls'"
-  [routerLink]="['.', { s: 'calls' }]"
+  [class.active]="section === 'communications'"
+  [routerLink]="['.', { s: 'communications' }]"
   ccrLinkActive="active"
   fxFlex
   fxLayoutAlign="center center">
     {{ 'REPORTS.COMMS_CALLS' | translate }}
+  </a>
+  <a
+  [class.active]="section === 'login-history'"
+  [routerLink]="['.', { s: 'login-history' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center">
+    {{ 'GLOBAL.LOGIN_HISTORY' | translate }}
   </a>
 </div>
 
@@ -60,7 +68,11 @@ data-cy="coachProfileMenu">
       <ccr-account-associations [showPermissions]="true"></ccr-account-associations>
     </div>
 
-    <div *ngSwitchCase="'calls'">
+    <div *ngSwitchCase="'communications'">
       <app-reports-calls [account]="coachId"></app-reports-calls>
+    </div>
+
+    <div *ngSwitchCase="'login-history'">
+      <ccr-login-history></ccr-login-history>
     </div>
 </div>

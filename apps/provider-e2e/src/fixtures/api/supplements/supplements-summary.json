@@ -1,0 +1,139 @@
+{
+    "summary": [
+        {
+            "date": "2019-12-25",
+            "consumption": []
+        },
+        {
+            "date": "2019-12-26",
+            "consumption": []
+        },
+        {
+            "date": "2019-12-27",
+            "consumption": []
+        },
+        {
+            "date": "2019-12-28",
+            "consumption": []
+        },
+        {
+            "date": "2019-12-29",
+            "consumption": [
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "3",
+                        "name": "Omega 3",
+                        "shortName": "omega3"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "1",
+                        "name": "Multivitamin",
+                        "shortName": "multiVitamin"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "2",
+                        "name": "Cal-Mag",
+                        "shortName": "calMag"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "47",
+                        "name": "omega61",
+                        "shortName": "6"
+                    }
+                }
+            ]
+        },
+        {
+            "date": "2019-12-30",
+            "consumption": [
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "47",
+                        "name": "omega61",
+                        "shortName": "6"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "3",
+                        "name": "Omega 3",
+                        "shortName": "omega3"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "1",
+                        "name": "Multivitamin",
+                        "shortName": "multiVitamin"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "2",
+                        "name": "Cal-Mag",
+                        "shortName": "calMag"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "4",
+                        "name": "Potassium",
+                        "shortName": "potassium"
+                    }
+                }
+            ]
+        },
+        {
+            "date": "2019-12-31",
+            "consumption": [
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "1",
+                        "name": "Multivitamin",
+                        "shortName": "multiVitamin"
+                    }
+                },
+                {
+                    "quantity": 2,
+                    "supplement": {
+                        "id": "47",
+                        "name": "omega61",
+                        "shortName": "6"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "4",
+                        "name": "Potassium",
+                        "shortName": "potassium"
+                    }
+                },
+                {
+                    "quantity": 1,
+                    "supplement": {
+                        "id": "2",
+                        "name": "Cal-Mag",
+                        "shortName": "calMag"
+                    }
+                }
+            ]
+        }
+    ]
+}

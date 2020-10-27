@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "organization": {
+        "id": "1",
+        "name": "CoachCare",
+        "address": {
+          "city": "New York",
+          "state": "NY - New York",
+          "street": "150 West 28th Street",
+          "country": "US",
+          "postalCode": "10001"
+        },
+        "contact": {
+          "email": "eric@coachcare.com",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "shortcode": "ccr",
+        "hierarchyPath": [1]
+      },
+      "isDirect": true,
+      "permissions": {
+        "admin": false,
+        "viewAll": true,
+        "allowClientPhi": true
+      },
+      "associatedAt": "2019-05-08T18:07:44.907Z"
+    },
+    {
+      "organization": {
+        "id": "6955",
+        "name": "Center for Medical Weight Loss",
+        "address": {
+          "city": "New York",
+          "state": "NY - New York",
+          "street": "150 West 28th Street",
+          "country": "US",
+          "postalCode": "10001"
+        },
+        "contact": {
+          "email": "eric@coachcare.com",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "shortcode": "cmwl",
+        "hierarchyPath": [1, 6955]
+      },
+      "isDirect": true,
+      "permissions": {
+        "admin": false,
+        "viewAll": true,
+        "allowClientPhi": true
+      },
+      "associatedAt": "2019-05-08T18:07:44.907Z"
+    }
+  ],
+  "pagination": {}
+}

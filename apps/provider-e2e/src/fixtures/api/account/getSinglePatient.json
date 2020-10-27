@@ -1,0 +1,25 @@
+{
+  "id": "3",
+  "firstName": "Eric ",
+  "lastName": "Di Bari",
+  "email": "eric.dibari@gmail.com",
+  "isActive": true,
+  "createdAt": "2015-05-18T18:11:18.586Z",
+  "accountType": {
+    "id": "3",
+    "title": "Client"
+  },
+  "measurementPreference": "us",
+  "timezone": "America/New_York",
+  "preferredLocales": ["en-au", "en"],
+  "phone": "5188948256",
+  "phoneType": "ios",
+  "clientData": {
+    "birthday": "1984-08-22",
+    "height": 191,
+    "gender": "male",
+    "bmr": 2,
+    "startedAt": "2019-06-21T23:55:53.231+00:00"
+  },
+  "preference": null
+}

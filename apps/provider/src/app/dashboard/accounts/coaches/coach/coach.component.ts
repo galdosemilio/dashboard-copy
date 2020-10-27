@@ -6,7 +6,7 @@ import { AccSingleResponse } from '@app/shared/selvera-api';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
-type CoachComponentSection = 'profile' | 'clinics' | 'calls';
+type CoachComponentSection = 'profile' | 'clinics' | 'communications' | 'login-history';
 
 @Component({
   selector: 'app-coach',

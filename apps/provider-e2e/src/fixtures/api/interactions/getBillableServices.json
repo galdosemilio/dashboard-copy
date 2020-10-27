@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": "1", "name": "RPM", "status": "active" },
+    { "id": "2", "name": "Telehealth", "status": "active" }
+  ],
+  "pagination": {}
+}

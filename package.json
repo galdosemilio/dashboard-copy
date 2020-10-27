@@ -11,7 +11,7 @@
     "build": "node --max-old-space-size=6144 node_modules/.bin/ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
-    "e2e": "ng e2e",
+    "e2e": "node --max-old-space-size=6144 node_modules/.bin/nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
@@ -70,7 +70,7 @@
     "ngx-take-until-destroy": "^5.4.0",
     "pdfmake": "^0.1.68",
     "rxjs": "~6.6.3",
-    "selvera-api": "^11.16.0",
+    "selvera-api": "^11.20.1",
     "tinycolor2": "^1.4.1",
     "twilio-video": "^2.7.3",
     "zone.js": "^0.11.1"

@@ -1,0 +1,105 @@
+<div matDialogTitle>
+    <div>
+        <!-- <mat-icon>add_circle_outline</mat-icon> -->
+        <!-- <span>{{ 'BOARD.CLINIC_NEW' | translate }}</span> -->
+    </div>
+    <button
+    (click)="$event.preventDefault(); close('closeButton');"
+    matDialogClose>
+        <mat-icon>cancel</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+    <div
+    class="call-end-survey"
+    [class.big]="selectedOption === 'bad'"
+    [formGroup]="form"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="15px">
+        <div
+        class="call-end-survey-inner"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="15px">
+            <h3>{{ 'CALL.HOW_WAS_CALL' | translate }}</h3>
+
+            <div class="option-container" fxLayout="row" fxLayoutAlign="center center">
+                <div fxFlex="35%" fxLayoutAlign="center center">
+                    <mat-icon
+                        [class.active]="selectedOption === 'ok'"
+                        (click)="markActiveOption('ok')"
+                        class="happy"
+                        fontSet="far"
+                        fontIcon="fa-smile-beam">
+                    </mat-icon>
+                </div>
+                <div fxFlex="35%" fxLayoutAlign="center center">
+                    <mat-icon
+                        [class.active]="selectedOption === 'bad'"
+                        (click)="markActiveOption('bad')"
+                        class="sad"
+                        fontSet="far"
+                        fontIcon="fa-frown">
+                    </mat-icon>
+                </div>
+            </div>
+
+            <div class="notice-container">
+                <h5 *ngIf="selectedOption === 'bad'">{{ 'CALL.HAD_ISSUES' | translate }}</h5>
+                <h5 *ngIf="selectedOption === 'ok'">{{ 'CALL.EVERYTHING_GREAT' | translate }}</h5>
+                <h5 *ngIf="!selectedOption">{{ 'CALL.SELECT_OPTION' | translate }}</h5>
+            </div>
+
+            <div
+            [class.hidden]="selectedOption !== 'bad'"
+            fxLayout="column"
+            fxLayoutAlign="start stretch"
+            fxLayoutGap="10px">
+                <div
+                fxLayout="column"
+                fxLayoutAlign="start stretch"
+                fxLayoutGap="15px">
+                    <div
+                    fxLayout="column"
+                    fxLayoutAlign="start stretch"
+                    fxLayoutGap="5px">
+                        <mat-checkbox formControlName="coachDeviceIssue">{{ 'CALL.MY_MIC_OR_CAM' | translate }}</mat-checkbox>
+                        <mat-checkbox formControlName="patientDeviceIssue">{{ 'CALL.PATIENT_MIC_OR_CAM' | translate }}</mat-checkbox>
+                        <mat-checkbox formControlName="couldNotConnect">{{ 'CALL.COULD_NOT_CONNECT' | translate }}</mat-checkbox>
+                        <mat-checkbox formControlName="unexpectedCallDrop">{{ 'CALL.CALL_DROPPED' | translate }}</mat-checkbox>
+                        <mat-checkbox formControlName="other">{{ 'CALL.OTHER' | translate }}</mat-checkbox>
+                    </div>
+                </div>
+            </div>
+
+            <div [class.hidden]="!selectedOption">
+                <div class="textarea-container" fxLayout="column" fxLayoutAlign="start stretch">
+                    <small>{{ 'CALL.ADDITIONAL_COMMENTS' | translate }}</small>
+                    <mat-form-field class="ccr-form-field" floatLabel="always" fxFlex>
+                        <textarea
+                            formControlName="additionalComments"
+                            matInput
+                            cols="30"
+                            rows="3">
+                        </textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div>
+        <button
+        [disabled]="form.invalid || isLoading || !remotePeerLogData"
+        (click)="onSubmit()"
+        class="ccr-button"
+        mat-button
+        color="primary">
+            {{ 'CALL.SEND_REVIEW' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>

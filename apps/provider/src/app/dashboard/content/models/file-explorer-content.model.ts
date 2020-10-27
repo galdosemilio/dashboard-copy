@@ -4,7 +4,7 @@ import {
 } from '@app/dashboard/content/models/content-type.map';
 import { FILE_TYPE_MAP } from '@app/dashboard/content/models/file-type.map';
 import { Icon } from '@app/dashboard/content/models/icon.interface';
-import { Package } from '@app/dashboard/content/models/package.model';
+import { Package } from '@app/shared/components/package-table';
 import { ContentOrganization } from '@app/shared/selvera-api';
 
 export interface FileExplorerContentMetadata {

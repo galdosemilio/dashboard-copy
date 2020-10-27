@@ -4,7 +4,6 @@ import 'moment-timezone';
 import { Schedule } from 'selvera-api';
 
 import { Meeting } from '@app/dashboard/schedule/models';
-import { ContextService } from '@app/service';
 import { FetchAllMeetingRequest } from '@app/shared/selvera-api';
 
 @Injectable()

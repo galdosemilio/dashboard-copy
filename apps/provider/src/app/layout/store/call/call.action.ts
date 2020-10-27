@@ -1,13 +1,14 @@
+import { BillableService } from '@app/dashboard/reports/communications/models';
 import { TwilioConfiguration } from '@app/layout/call/services/twilio.service';
 import { CallEndState, RoomState } from '@app/layout/store/call/call.state';
 import {
   Call,
-  CreateCallRequest,
+  CreateCallInteractionRequest,
+  CreateCallTokenRequest,
   FetchCallDetailsRequest,
   FetchCallDetailsResponse,
   FetchCallsRequest,
   UpdateCallRequest,
-  VideoTokenRequest,
   VideoTokenResponse
 } from '@app/shared/selvera-api';
 import { Action } from '@ngrx/store';
@@ -101,6 +102,10 @@ export const ATTEMPT_CLOSE_CALL = 'CALL attempt close a call';
 export const OPEN_CALL_BROWSER_SUPPORT = 'CALL Open call browser support';
 export const NO_ACTION = 'CALL No action';
 export const TOGGLE_DRAG = 'CALL toggle drag';
+export const RECOVER_CALL = 'CALL recover call';
+export const SET_ATTEMPTING_RECONNECT = 'CALL set attempting to reconnect';
+export const SET_RECONNECTION_BUMPER = 'CALL set reconnection bumper';
+export const STORE_CALL_SETTINGS = 'CALL store call window settings';
 
 export const Source = {
   INBOUND: 'INBOUND',
@@ -112,6 +117,7 @@ export interface CallDetail {
   isReconnect: boolean;
   source: string;
   room: RoomState;
+  billableService: BillableService;
 }
 
 export interface CallConfiguration {
@@ -166,7 +172,7 @@ export class ReceiveCall implements Action {
 export class FetchTwilioToken implements Action {
   readonly type = FETCH_TWILIO_TOKEN;
 
-  constructor(public payload: VideoTokenRequest) {}
+  constructor(public payload: CreateCallTokenRequest) {}
 }
 
 export class FetchTwilioTokenComplete implements Action {
@@ -260,7 +266,7 @@ export class FetchSubaccountFailed implements Action {
 
 export class SaveCall implements Action {
   readonly type = SAVE_CALL;
-  constructor(public payload: CreateCallRequest) {}
+  constructor(public payload: CreateCallInteractionRequest) {}
 }
 
 export class SaveCallComplete implements Action {
@@ -546,6 +552,30 @@ export class ToggleDrag implements Action {
   constructor(public payload: any) {}
 }
 
+export class RecoverCall implements Action {
+  readonly type = RECOVER_CALL;
+
+  constructor() {}
+}
+
+export class SetAttemptingReconnect implements Action {
+  readonly type = SET_ATTEMPTING_RECONNECT;
+
+  constructor(public payload: boolean) {}
+}
+
+export class SetReconnectionBumper implements Action {
+  readonly type = SET_RECONNECTION_BUMPER;
+
+  constructor(public payload: boolean) {}
+}
+
+export class StoreCallSettings implements Action {
+  readonly type = STORE_CALL_SETTINGS;
+
+  constructor() {}
+}
+
 // Actions data type
 export type Actions =
   | InitiateCall
@@ -624,4 +654,8 @@ export type Actions =
   | AttemptCloseCall
   | OpenCallBrowserSupport
   | NoAction
-  | ToggleDrag;
+  | ToggleDrag
+  | RecoverCall
+  | SetAttemptingReconnect
+  | SetReconnectionBumper
+  | StoreCallSettings;

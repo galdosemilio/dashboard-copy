@@ -32,6 +32,7 @@ import {
   LocaleSelectDialog,
   LocaleTableComponent
 } from './locale-selector';
+import { LoginHistoryComponent } from './login-history';
 import { CcrMessagesComponent } from './messages/messages.component';
 import { OrganizationSearchComponent } from './organization-search';
 import { PackageEnrollComponent } from './package-enroll';
@@ -81,6 +82,7 @@ export {
   LocaleFormFieldComponent,
   LocaleSelectDialog,
   LocaleTableComponent,
+  LoginHistoryComponent,
   OrganizationSearchComponent,
   PackageSelectorComponent,
   PackageEnrollComponent,
@@ -125,6 +127,7 @@ export const CmpComponents = [
   LocaleFormFieldComponent,
   LocaleSelectDialog,
   LocaleTableComponent,
+  LoginHistoryComponent,
   OrganizationSearchComponent,
   PackageSelectorComponent,
   PackageEnrollComponent,

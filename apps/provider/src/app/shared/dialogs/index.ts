@@ -1,5 +1,7 @@
 export * from './account-redirect';
+export * from './add-manual-interaction';
 export * from './add-recipient';
+export * from './call-rating';
 export * from './confirm.dialog';
 export * from './grid.dialog';
 export * from './languages.dialog';
@@ -13,7 +15,9 @@ export * from './view-image';
 export * from './walkthrough';
 
 import { AccountRedirectDialog } from './account-redirect';
+import { AddManualInteractionDialog } from './add-manual-interaction';
 import { AddRecipientDialog } from './add-recipient';
+import { CallRatingDialog } from './call-rating/call-rating.dialog';
 import { ConfirmDialog } from './confirm.dialog';
 import { GridDialog } from './grid.dialog';
 import { LanguagesDialog } from './languages.dialog';
@@ -28,7 +32,9 @@ import { WalkthroughDialog } from './walkthrough';
 
 export const Dialogs = [
   AccountRedirectDialog,
+  AddManualInteractionDialog,
   AddRecipientDialog,
+  CallRatingDialog,
   ConfirmDialog,
   GridDialog,
   LanguagesDialog,

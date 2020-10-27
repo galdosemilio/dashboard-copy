@@ -6,7 +6,7 @@ import { AccSingleResponse, AccUpdateRequest } from '@app/shared/selvera-api';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Account } from 'selvera-api';
 
-type ProviderProfileSection = 'calls' | 'profile' | 'security';
+type ProviderProfileSection = 'communications' | 'profile' | 'security' | 'login-history';
 
 @Component({
   selector: 'app-profile',

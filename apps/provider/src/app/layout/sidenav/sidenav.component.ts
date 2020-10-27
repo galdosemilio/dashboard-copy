@@ -1,33 +1,26 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NavigationStart, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { findIndex, get } from 'lodash';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { Messaging, Organization, Sequence } from 'selvera-api';
-
 import { CCRConfig, CCRPalette } from '@app/config';
+import { resolveConfig } from '@app/config/section';
+import { SidenavOptions } from '@app/config/section/consts';
 import { FetchSubaccount } from '@app/layout/store/call/call.action';
 import {
   ContextService,
   EventsService,
   NotifierService,
   PlatformUpdatesService,
-  SelectedOrganization,
+  SelectedOrganization
 } from '@app/service';
 import { _ } from '@app/shared';
 import { configSelector } from '@app/store/config';
-
-import { FormControl } from '@angular/forms';
-import { resolveConfig } from '@app/config/section';
-import { SidenavOptions } from '@app/config/section/consts';
+import { select, Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
+import { findIndex, get } from 'lodash';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { Messaging, Organization } from 'selvera-api';
 import { SidenavItem } from './sidenav-item/sidenav-item.component';
 
 export interface SidenavOrg {
@@ -37,7 +30,7 @@ export interface SidenavOrg {
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './sidenav.component.html',
+  templateUrl: './sidenav.component.html'
 })
 export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input()
@@ -59,6 +52,9 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   searchNext: number = 0;
   searchQuery: string = undefined;
 
+  private currentLang: string;
+  private isOrphaned: boolean;
+
   constructor(
     router: Router,
     private bus: EventsService,
@@ -68,7 +64,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     private orgservice: Organization,
     private platformUpdates: PlatformUpdatesService,
     private store: Store<CCRConfig>,
-    private sequence: Sequence
+    private translate: TranslateService
   ) {
     this.store
       .pipe(select(configSelector))
@@ -91,10 +87,19 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.currentLang = this.translate.currentLang;
+    this.isOrphaned = this.context.isOrphaned;
+
     this.initSearch();
 
     this.context.orphanedAccount$.subscribe((isOrphaned) => {
-      this.initNavigation(!isOrphaned);
+      this.isOrphaned = isOrphaned;
+      this.initNavigation(!this.isOrphaned);
+    });
+
+    this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
+      this.currentLang = this.translate.currentLang;
+      this.updateContactLinks();
     });
 
     this.context.organization$.subscribe((org) => {
@@ -107,45 +112,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
           ? org.assets.logoUrl
           : './assets/logo.png';
 
-      let idxProviderContactChild;
-      let idxProviderFaqChild;
-      const providerContactLink = this.context.isOrphaned
-        ? undefined
-        : get(this.context.organization.mala, 'custom.links.providerContact');
-      const providerFaqLink = this.context.isOrphaned
-        ? undefined
-        : get(this.context.organization.mala, 'custom.links.providerFaq');
-      const idxProviderContact = this.sidenavItems.findIndex(
-        (item) =>
-          item.children &&
-          (idxProviderContactChild = item.children.findIndex(
-            (child) => child.navName === _('SIDENAV.CONTACT_SUPPORT')
-          )) > -1
-      );
-      idxProviderFaqChild =
-        idxProviderContact && this.sidenavItems.length > 0
-          ? this.sidenavItems[idxProviderContact].children.findIndex(
-              (child) => child.navName === _('SIDENAV.FAQ_SUPPORT')
-            )
-          : -1;
-
-      if (idxProviderContact > -1) {
-        if (idxProviderContactChild > -1) {
-          this.sidenavItems[idxProviderContact].children[
-            idxProviderContactChild
-          ].navLink = providerContactLink
-            ? providerContactLink
-            : 'https://coachcare.zendesk.com/hc/en-us/requests/new';
-        }
-
-        if (idxProviderFaqChild > -1) {
-          this.sidenavItems[idxProviderContact].children[
-            idxProviderFaqChild
-          ].navLink = providerFaqLink
-            ? providerFaqLink
-            : 'https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard';
-        }
-      }
+      this.updateContactLinks();
     });
 
     // listen event to refresh unread
@@ -194,16 +161,14 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
       query,
       status: 'active',
       offset: this.searchNext,
-      limit: 24,
+      limit: 24
     });
     const sidenavOrgs = orgs.data.map((org) => ({
       id: org.organization.id,
-      name: org.organization.name,
+      name: org.organization.name
     }));
     this.organizations =
-      this.searchNext === 0
-        ? sidenavOrgs
-        : this.organizations.concat(sidenavOrgs);
+      this.searchNext === 0 ? sidenavOrgs : this.organizations.concat(sidenavOrgs);
     this.searchNext = orgs.pagination.next || 0;
     this.isSearchingClinics = false;
   }
@@ -216,7 +181,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             code: SidenavOptions.DASHBOARD,
             navName: _('GLOBAL.DASHBOARD'),
             navRoute: 'dashboard',
-            icon: 'dashboard',
+            icon: 'dashboard'
           },
           {
             navName: _('SIDENAV.ACCOUNTS'),
@@ -227,21 +192,21 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 code: SidenavOptions.ACCOUNTS_PATIENTS,
                 navName: _('GLOBAL.PATIENTS'),
                 navRoute: 'accounts/patients',
-                icon: 'person',
+                icon: 'person'
               },
               {
                 code: SidenavOptions.ACCOUNTS_COACHES,
                 navName: _('GLOBAL.COACHES'),
                 navRoute: 'accounts/coaches',
-                icon: 'assignment_ind',
+                icon: 'assignment_ind'
               },
               {
                 code: SidenavOptions.ACCOUNTS_CLINICS,
                 navName: _('GLOBAL.CLINICS'),
                 navRoute: 'accounts/clinics',
-                icon: 'domain',
-              },
-            ],
+                icon: 'domain'
+              }
+            ]
           },
           {
             navName: _('SIDENAV.SCHEDULE'),
@@ -252,21 +217,21 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 code: SidenavOptions.SCHEDULE_LIST,
                 navName: _('SIDENAV.SCHEDULE_LIST'),
                 navRoute: 'schedule/list',
-                icon: 'schedule',
+                icon: 'schedule'
               },
               {
                 code: SidenavOptions.SCHEDULE_SCHEDULE,
                 navName: _('SIDENAV.SCHEDULE_VIEW'),
                 navRoute: 'schedule/view',
-                icon: 'schedule',
+                icon: 'schedule'
               },
               {
                 code: SidenavOptions.SCHEDULE_AVAILABILITY,
                 navName: _('SIDENAV.SCHEDULE_AVAILABLE'),
                 navRoute: 'schedule/available',
-                icon: 'event_available',
-              },
-            ],
+                icon: 'event_available'
+              }
+            ]
           },
           {
             code: SidenavOptions.MESSAGES,
@@ -274,7 +239,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             route: 'messages',
             navRoute: 'messages',
             icon: 'chat',
-            badge: 0,
+            badge: 0
           },
           {
             code: SidenavOptions.DIGITAL_LIBRARY,
@@ -282,7 +247,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             route: 'library',
             navRoute: 'library',
             icon: 'folder',
-            badge: 0,
+            badge: 0
           },
           {
             navName: _('SIDENAV.ALERTS'),
@@ -293,15 +258,15 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 code: SidenavOptions.ALERT_NOTIFICATIONS,
                 navName: _('SIDENAV.NOTIFICATIONS'),
                 navRoute: 'alerts/notifications',
-                icon: 'warning',
+                icon: 'warning'
               },
               {
                 code: SidenavOptions.ALERT_SETTINGS,
                 navName: _('SIDENAV.SETTINGS'),
                 navRoute: 'alerts/settings',
-                icon: 'settings',
-              },
-            ],
+                icon: 'settings'
+              }
+            ]
           },
           {
             navName: _('SIDENAV.REPORTS'),
@@ -312,38 +277,38 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 code: SidenavOptions.REPORT_OVERVIEW,
                 navName: _('SIDENAV.OVERVIEW'),
                 navRoute: 'reports/overview',
-                icon: 'equalizer',
+                icon: 'equalizer'
               },
               {
                 code: SidenavOptions.REPORT_STATISTICS,
                 navName: _('SIDENAV.USER_STATISTICS'),
                 navRoute: 'reports/statistics',
-                icon: 'timeline',
+                icon: 'timeline'
               },
               {
                 code: SidenavOptions.RPM_BILLING,
                 navName: _('SIDENAV.RPM'),
                 navRoute: 'reports/rpm',
-                icon: 'receipt',
+                icon: 'receipt'
               },
               {
                 code: SidenavOptions.COMMUNICATIONS,
                 navName: _('SIDENAV.COMMUNICATIONS'),
                 navRoute: 'reports/communications',
-                icon: 'perm_phone_msg',
-              },
-            ],
+                icon: 'perm_phone_msg'
+              }
+            ]
           },
           {
             navName: _('SIDENAV.SEQUENCES'),
             navRoute: '/sequences',
-            icon: 'playlist_add_track',
+            icon: 'playlist_add_track'
           },
           {
             code: SidenavOptions.STORE,
             navName: _('SIDENAV.STORE'),
             navLink: 'https://store.coachcare.com/',
-            icon: 'shopping_cart',
+            icon: 'shopping_cart'
           },
           {
             badge: 10,
@@ -357,29 +322,72 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 code: SidenavOptions.RESOURCES_PLATFORM_UPDATES,
                 navName: _('SIDENAV.PLATFORM_UPDATES'),
                 navRoute: '/resources/platform-updates',
-                icon: 'live_help',
+                icon: 'live_help'
               },
               {
                 code: SidenavOptions.RESOURCES_FAQ,
                 navName: _('SIDENAV.FAQ_SUPPORT'),
-                navLink:
-                  'https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard',
-                icon: 'live_help',
+                navLink: `https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard?lang=${this.currentLang}`,
+                icon: 'live_help'
               },
               {
                 code: SidenavOptions.RESOURCES_CONTACT,
                 navName: _('SIDENAV.CONTACT_SUPPORT'),
-                navLink: 'https://coachcare.zendesk.com/hc/en-us/requests/new',
-                icon: 'live_help',
-              },
+                navLink: `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${this.currentLang}`,
+                icon: 'live_help'
+              }
               // { navName: _('SIDENAV.MARKETING'), navRoute: 'resources/marketing' },
               // { navName: _('SIDENAV.FAQS'), navRoute: 'resources/faqs' }
-            ],
-          },
+            ]
+          }
         ];
 
     this.updateUnread();
     this.updateSections(this.context.organization);
+  }
+
+  private updateContactLinks(): void {
+    const baseLang = this.currentLang.split('-')[0];
+
+    let idxProviderContactChild;
+    let idxProviderFaqChild;
+    const providerContactLink = this.context.isOrphaned
+      ? undefined
+      : get(this.context.organization.mala, 'custom.links.providerContact');
+    const providerFaqLink = this.context.isOrphaned
+      ? undefined
+      : get(this.context.organization.mala, 'custom.links.providerFaq');
+    const idxProviderContact = this.sidenavItems.findIndex(
+      (item) =>
+        item.children &&
+        (idxProviderContactChild = item.children.findIndex(
+          (child) => child.navName === _('SIDENAV.CONTACT_SUPPORT')
+        )) > -1
+    );
+    idxProviderFaqChild =
+      idxProviderContact && this.sidenavItems.length > 0
+        ? this.sidenavItems[idxProviderContact].children.findIndex(
+            (child) => child.navName === _('SIDENAV.FAQ_SUPPORT')
+          )
+        : -1;
+
+    if (idxProviderContact > -1) {
+      if (idxProviderContactChild > -1) {
+        this.sidenavItems[idxProviderContact].children[
+          idxProviderContactChild
+        ].navLink = providerContactLink
+          ? providerContactLink
+          : `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${baseLang}`;
+      }
+
+      if (idxProviderFaqChild > -1) {
+        this.sidenavItems[idxProviderContact].children[
+          idxProviderFaqChild
+        ].navLink = providerFaqLink
+          ? providerFaqLink
+          : `https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard?lang=${baseLang}`;
+      }
+    }
   }
 
   updateNavigation() {
@@ -405,9 +413,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
       });
     }
 
-    const resourcesItemIndex = findIndex(this.sidenavItems, {
-      route: 'resources',
-    });
+    const resourcesItemIndex = findIndex(this.sidenavItems, { route: 'resources' });
 
     if (resourcesItemIndex <= -1) {
       return;
@@ -433,8 +439,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
 
   updateSections(org: SelectedOrganization) {
     let hiddenOptions = resolveConfig('SIDENAV.HIDDEN_OPTIONS', org);
-    const shownOptions =
-      resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true) || [];
+    const shownOptions = resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true) || [];
 
     if (Array.isArray(hiddenOptions) && Array.isArray(shownOptions)) {
       hiddenOptions = hiddenOptions.filter(
@@ -457,17 +462,11 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     const messagingElementIndex = this.sidenavItems.findIndex(
       (item) => item.navName === _('SIDENAV.MESSAGES')
     );
-    const commsEnabled = get(
-      org,
-      'preferences.comms.videoConferencing.isEnabled',
-      false
-    );
+    const commsEnabled = get(org, 'preferences.comms.videoConferencing.isEnabled', false);
     const commsElementIndex = this.sidenavItems.findIndex(
       (item) =>
         item.children &&
-        !!item.children.find(
-          (child) => child.navName === _('SIDENAV.COMMUNICATIONS')
-        )
+        !!item.children.find((child) => child.navName === _('SIDENAV.COMMUNICATIONS'))
     );
     const idx = findIndex(this.sidenavItems, { navName: _('SIDENAV.LIBRARY') });
 
@@ -477,12 +476,12 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
       children:
         item.children && item.children.length
           ? item.children.map((child) => ({ ...child, cssClass: '' }))
-          : undefined,
+          : undefined
     }));
 
     this.sidenavItems[idx] = {
       ...this.sidenavItems[idx],
-      cssClass: enabled ? '' : 'hidden',
+      cssClass: enabled ? '' : 'hidden'
     };
 
     if (rpmElementIndex > -1 && !rpmEnabled) {
@@ -491,41 +490,35 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
       );
       this.sidenavItems[rpmElementIndex].children[childIndex] = {
         ...this.sidenavItems[rpmElementIndex].children[childIndex],
-        cssClass: 'hidden',
+        cssClass: 'hidden'
       };
     }
 
     if (commsElementIndex > -1 && !commsEnabled) {
-      const childIndex = this.sidenavItems[
-        commsElementIndex
-      ].children.findIndex(
+      const childIndex = this.sidenavItems[commsElementIndex].children.findIndex(
         (item) => item.navName === _('SIDENAV.COMMUNICATIONS')
       );
       this.sidenavItems[commsElementIndex].children[childIndex] = {
         ...this.sidenavItems[commsElementIndex].children[childIndex],
-        cssClass: 'hidden',
+        cssClass: 'hidden'
       };
     }
 
     if (sequencesElementIndex > -1 && !sequencesEnabled) {
       this.sidenavItems[sequencesElementIndex] = {
         ...this.sidenavItems[sequencesElementIndex],
-        cssClass: 'hidden',
+        cssClass: 'hidden'
       };
     }
 
     if (messagingElementIndex > -1 && !messagingEnabled) {
       this.sidenavItems[messagingElementIndex] = {
         ...this.sidenavItems[messagingElementIndex],
-        cssClass: 'hidden',
+        cssClass: 'hidden'
       };
     }
 
-    if (
-      this.sidenavItems &&
-      this.sidenavItems.length &&
-      Array.isArray(hiddenOptions)
-    ) {
+    if (this.sidenavItems && this.sidenavItems.length && Array.isArray(hiddenOptions)) {
       hiddenOptions.forEach((option) => {
         let existingChildrenIndex = -1;
         const existingItem = this.sidenavItems.find(
@@ -565,8 +558,8 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
         functionType: 'onLogoError',
         url: event.target.src,
         organization: this.organization.id,
-        message: 'Failed to load the clinic logo',
-      },
+        message: 'Failed to load the clinic logo'
+      }
     });
   }
 }

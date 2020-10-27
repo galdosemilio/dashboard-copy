@@ -1,0 +1,92 @@
+<div matDialogTitle>
+    <div>
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>{{'REPORTS.CREATE_MANUAL_INTERACTION' | translate}}</span>
+    </div>
+    <button matDialogClose *ngIf="!isLoading"><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+        <mat-form-field>
+            <mat-select [placeholder]="'SEQUENCING.TYPE' | translate" formControlName="interactionType">
+                <mat-option *ngFor="let type of interactionTypes" [value]="type.id">
+                    {{ type.displayName | translate }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select [placeholder]="'REPORTS.BILLABLE_SERVICE' | translate" formControlName="billableService">
+                <mat-option *ngFor="let billServ of billableServices" [value]="billServ.id">
+                    {{ billServ.displayName | translate }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <ccr-date-input
+                formControlName="startDate"
+                [max]="now"
+                [placeholder]="'SEQUENCING.START_DATE' | translate"
+                fxFlex>
+            </ccr-date-input>
+
+
+            <mat-form-field hideRequiredMarker="true">
+                <input matInput required formControlName="startTime" readonly="true" (click)="pickerStart.open()"
+                [matDatepicker]="pickerStart" [placeholder]="'BOARD.START_TIME' | translate">
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker type="time" clockStep="5" #pickerStart></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field>
+                <input
+                [placeholder]="'GLOBAL.DURATION' | translate"
+                formControlName="durationMagnitude"
+                matInput
+                type="number">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select [placeholder]="'UNIT.UNITS' | translate" formControlName="durationUnit">
+                    <mat-option *ngFor="let duration of durations" [value]="duration.value">
+                        {{ duration.displayValue | translate | lowercase }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div>
+        <small *ngIf="form?.getError('rpmBillingConflict')" class="error">
+            {{ 'REPORTS.INTERACTION_START_DATE_CONFLICT' | translate }}
+        </small>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div>
+        <button
+        (click)="onSubmit()"
+        [disabled]="form.invalid || isLoading"
+        mat-button
+        class="ccr-icon-button"
+        color="primary">
+        <mat-icon>add</mat-icon>
+            {{ 'GLOBAL.CREATE' | translate }}
+        </button>
+
+        <button
+        [disabled]="isLoading"
+        matDialogClose
+        mat-button
+        class="ccr-button">
+            {{ 'GLOBAL.CANCEL' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>

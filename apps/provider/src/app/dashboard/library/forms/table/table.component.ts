@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Sort } from '@coachcare/common/material';
+import { MatDialog, Sort } from '@coachcare/common/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Form } from '@app/dashboard/library/forms/models';
 import { FormsDatasource } from '@app/dashboard/library/forms/services';
+import { FormCloneDialog, FormCloneDialogData } from '../dialogs';
 
 @Component({
   selector: 'app-library-forms-table',
@@ -28,7 +29,28 @@ export class FormsTableComponent {
     'actions',
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  onCloneForm(form: Form): void {
+    const data: FormCloneDialogData = {
+      form,
+    };
+
+    this.dialog
+      .open(FormCloneDialog, { data, width: '50vw' })
+      .afterClosed()
+      .subscribe((refresh) => {
+        if (!refresh) {
+          return;
+        }
+
+        this.datasource.refresh();
+      });
+  }
 
   onDisplayForm(form: Form): void {
     this.router.navigate([form.id], { relativeTo: this.route });

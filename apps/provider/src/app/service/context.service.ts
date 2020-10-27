@@ -30,6 +30,7 @@ import {
   OrganizationPreferences,
   OrganizationWithAddress,
   OrgPreferencesResponse,
+  OrgSingleResponse,
   RPMPreferenceSingle
 } from '@app/shared/selvera-api';
 import { UpdatePalette } from '@app/store/config';
@@ -498,6 +499,22 @@ export class ContextService {
       });
     }
     return account.organizations[0].id;
+  }
+
+  /**
+   * Displayed clinic
+   */
+
+  public clinic$: BehaviorSubject<OrgSingleResponse> = new BehaviorSubject<
+    OrgSingleResponse
+  >(null);
+
+  set clinic(clinic: any) {
+    this.clinic$.next(clinic);
+  }
+
+  get clinic(): any {
+    return this.clinic$.getValue();
   }
 
   private resolveCommsPreference(

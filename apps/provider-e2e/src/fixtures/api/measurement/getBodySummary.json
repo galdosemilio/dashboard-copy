@@ -1,0 +1,114 @@
+{
+    "data":[
+       {
+          "key":"bmi",
+          "value":{
+             "record":{
+                "first":{
+                   "id":"1708",
+                   "value":22984,
+                   "recordedAt":"2015-02-12 15:20:01+00"
+                },
+                "last":{
+                   "id":"796989",
+                   "value":19002,
+                   "recordedAt":"2019-06-12 03:11:11+00"
+                },
+                "count":173
+             },
+             "change":{
+                "value":18,
+                "percentage":0.08
+             }
+          }
+       },
+       {
+          "key":"bodyFat",
+          "value":{
+             "record":{
+                "first":{
+                   "id":"1708",
+                   "value":16500,
+                   "recordedAt":"2015-02-12 15:20:01+00"
+                },
+                "last":{
+                   "id":"796655",
+                   "value":20000,
+                   "recordedAt":"2019-04-26 17:52:08+00"
+                },
+                "count":108
+             },
+             "change":{
+                "value":3500,
+                "percentage":21.21
+             }
+          }
+       },
+       {
+          "key":"hydration",
+          "value":{
+             "record":{
+                "first":{
+                   "id":"1708",
+                   "value":60900,
+                   "recordedAt":"2015-02-12 15:20:01+00"
+                },
+                "last":{
+                   "id":"615990",
+                   "value":62000,
+                   "recordedAt":"2018-02-14 00:00:00+00"
+                },
+                "count":96
+             },
+             "change":{
+                "value":1100,
+                "percentage":1.81
+             }
+          }
+       },
+       {
+          "key":"weight",
+          "value":{
+             "record":{
+                "first":{
+                   "id":"1708",
+                   "value":82100,
+                   "recordedAt":"2015-02-12 15:20:01+00"
+                },
+                "last":{
+                   "id":"796989",
+                   "value":83915,
+                   "recordedAt":"2019-06-12 03:11:11+00"
+                },
+                "count":173
+             },
+             "change":{
+                "value":1815,
+                "percentage":2.21
+             }
+          }
+       },
+       {
+          "key":"leanMass",
+          "value":{
+             "record":{
+                "first":{
+                   "id":"1708",
+                   "value":83500,
+                   "recordedAt":"2015-02-12 15:20:01+00"
+                },
+                "last":{
+                   "id":"796655",
+                   "value":80000,
+                   "recordedAt":"2019-04-26 17:52:08+00"
+                },
+                "count":108
+             },
+             "change":{
+                "value":-3500,
+                "percentage":-4.19
+             }
+          }
+       }
+    ]
+ }

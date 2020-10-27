@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TwilioBandwidthService } from '@app/layout/call/services/twilio-bandwidth.service';
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { Conference } from 'selvera-api';
+import { Interaction } from 'selvera-api';
 
 import {
   connect,
@@ -10,7 +10,7 @@ import {
   createLocalVideoTrack
 } from 'twilio-video';
 
-import { VideoTokenRequest, VideoTokenResponse } from '@app/shared/selvera-api';
+import { CreateCallTokenRequest, CreateCallTokenResponse } from '@app/shared/selvera-api';
 import { _ } from '@app/shared/utils/i18n.utils';
 
 import { LoggingService } from '@app/service';
@@ -79,8 +79,8 @@ export class TwilioService {
   public videoStopped$ = new BehaviorSubject<string>('');
 
   constructor(
+    private interaction: Interaction,
     private logging: LoggingService,
-    private videoConference: Conference,
     private deviceService: DeviceDetectorService,
     private twilioBandwidthService: TwilioBandwidthService
   ) {
@@ -100,8 +100,10 @@ export class TwilioService {
     this.callEndingAudio = new Audio('assets/call-end.mp3');
   }
 
-  initialize(videoTokenRequest: VideoTokenRequest): Observable<VideoTokenResponse> {
-    return from(this.videoConference.fetchToken(videoTokenRequest));
+  initialize(
+    callTokenRequest: CreateCallTokenRequest
+  ): Observable<CreateCallTokenResponse> {
+    return from(this.interaction.createCallToken(callTokenRequest));
   }
 
   setActiveRoom(room) {
@@ -169,13 +171,33 @@ export class TwilioService {
           self.currentRoom.on('participantConnected', this.onParticipantConnected);
 
           // When a Participant leaves the Room, detach its Tracks.
-          this.currentRoom.on('participantDisconnected', function (participant) {
+          this.currentRoom.on('participantDisconnected', (participant) => {
             if (this.participants && this.participants.length) {
               this.participants = this.participants.filter(
                 (part) => part.identity !== participant.identity
               );
             }
             self.participantDisconnected$.next(participant.identity);
+
+            const audioContainer = document.getElementById(
+              this.remoteAudioMediaElementId
+            );
+            const videoContainer = document.getElementById(
+              this.remoteVideoMediaElementId
+            );
+
+            if (audioContainer) {
+              while (audioContainer.firstChild) {
+                audioContainer.removeChild(audioContainer.lastChild);
+              }
+            }
+
+            if (videoContainer) {
+              const videoElements = videoContainer.getElementsByTagName('video');
+              while (videoElements.length) {
+                videoContainer.removeChild(videoElements.item(0));
+              }
+            }
           });
 
           // Once the LocalParticipant leaves the room, detach the Tracks
@@ -203,7 +225,6 @@ export class TwilioService {
     if (this.localVideoTrack) {
       this.localVideoTrack.disable();
       this.localVideoTrack.stop();
-      this.twilioBandwidthService.sendMobileCameraOffMessage();
 
       if (this.currentRoom) {
         this.currentRoom.localParticipant.videoTracks.forEach((publication) => {
@@ -230,7 +251,6 @@ export class TwilioService {
       const element = track.attach();
       element.style.height = '100%';
       container.appendChild(element);
-      this.twilioBandwidthService.sendMobileCameraOnMessage();
     });
   }
 
@@ -314,7 +334,7 @@ export class TwilioService {
   }
 
   attachTrack(publication, container) {
-    if (container) {
+    if (container && !publication.track.isStopped) {
       const element = publication.track.attach();
       element.style.height = '100%';
       container.appendChild(element);
@@ -388,6 +408,10 @@ export class TwilioService {
     if (participant) {
       this.videoStopped$.next(participant.identity);
     }
+  }
+
+  public setRemoteConnSkips(): void {
+    this.twilioBandwidthService.setRemoteConnSkips();
   }
 
   public showVideoContainer(sid: string) {

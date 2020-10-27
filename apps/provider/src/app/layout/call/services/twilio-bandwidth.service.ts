@@ -9,6 +9,8 @@ import { LocalDataTrack, Room } from 'twilio-video';
 export class TwilioBandwidthService {
   public currentRoom: Room = null;
   public connectionUpdate$: Subject<ConnectionStats[]> = new Subject<ConnectionStats[]>();
+  public listenToVideoDataTrack: boolean = false;
+  public currentRemoteConnSkips: number = 0;
 
   private dataTrack: LocalDataTrack = null;
   private dataTrackPublished: any = {};
@@ -16,7 +18,7 @@ export class TwilioBandwidthService {
   private subscriptions = [];
   private monitorInterval: any;
   private monitorIntervalTimeout: number = 1000;
-  private releasedCamera: boolean = false;
+  private readonly REMOTE_CONNECTIVITY_SKIPS: number = 5;
 
   constructor(private context: ContextService, private loggingService: LoggingService) {
     this.onMessageReceived = this.onMessageReceived.bind(this);
@@ -44,13 +46,11 @@ export class TwilioBandwidthService {
 
   public onMessageReceived(raw: string): void {
     this.roomMonitor.onMessageReceived(raw);
+    const message = JSON.parse(raw);
 
-    if (this.releasedCamera) {
-      return;
+    if (message.type === 3 || message.type === 4) {
+      this.listenToVideoDataTrack = true;
     }
-
-    this.sendMobileCameraOnMessage();
-    this.releasedCamera = true;
   }
 
   public sendMobileCameraOffMessage(): void {
@@ -69,12 +69,16 @@ export class TwilioBandwidthService {
     this.roomMonitor.sendMobileOnMessage();
   }
 
+  public setRemoteConnSkips(): void {
+    this.currentRemoteConnSkips = this.REMOTE_CONNECTIVITY_SKIPS;
+  }
+
   public stopMonitoringRoom(): void {
     if (!this.roomMonitor) {
       return;
     }
 
-    this.releasedCamera = false;
+    this.listenToVideoDataTrack = false;
     clearInterval(this.monitorInterval);
     this.roomMonitor.stopMonitoringRoom();
     this.unsubscribe();

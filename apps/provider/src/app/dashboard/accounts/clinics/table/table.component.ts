@@ -8,11 +8,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialog, MatSort, Sort } from '@coachcare/common/material';
-import { Affiliation } from 'selvera-api';
-
+import { Router } from '@angular/router';
 import { ClinicsDataSource } from '@app/dashboard/accounts/clinics/services';
 import { ContextService, NotifierService } from '@app/service';
 import { _, PromptDialog, PromptDialogData } from '@app/shared';
+import { OrganizationAccess } from '@app/shared/selvera-api';
+import { Affiliation } from 'selvera-api';
 
 @Component({
   selector: 'app-clinics-table',
@@ -27,8 +28,9 @@ export class ClinicsTableComponent implements OnInit {
     'address',
     'city',
     'state',
-    'zip' /*, 'actions'*/,
+    'zip',
     'contact',
+    'actions',
   ];
   @Input()
   source: ClinicsDataSource | null;
@@ -44,7 +46,8 @@ export class ClinicsTableComponent implements OnInit {
     private dialog: MatDialog,
     private affiliation: Affiliation,
     private context: ContextService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -80,5 +83,16 @@ export class ClinicsTableComponent implements OnInit {
 
   onSort(sort: Sort) {
     this.onSorted.emit(sort);
+  }
+
+  public showClinic(row: OrganizationAccess, newTab?: boolean): void {
+    if (newTab) {
+      window.open(
+        `${window.location.href.split('?')[0]}/${row.organization.id}`,
+        '_blank'
+      );
+    } else {
+      this.router.navigate(['/accounts/clinics', row.organization.id]);
+    }
   }
 }

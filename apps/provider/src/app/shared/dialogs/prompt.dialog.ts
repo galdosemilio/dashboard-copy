@@ -16,7 +16,7 @@ export interface PromptDialogData {
 @Component({
   selector: 'app-dialog-prompt',
   templateUrl: 'prompt.dialog.html',
-  host: { class: 'ccr-prompt' },
+  host: { class: 'ccr-dialog' },
 })
 export class PromptDialog {
   title = '';

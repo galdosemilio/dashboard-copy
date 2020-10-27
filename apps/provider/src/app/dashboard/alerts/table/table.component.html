@@ -15,6 +15,14 @@
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'REPORTS.ALERT_TYPE' | translate }}</span>
         <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
+        {{ getAlertTypeName(row) | translate }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="notice">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.ALERT_NOTICE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.ALERT_NOTICE' | translate }}</span>
         {{ row.detail | translate: row.params }}
       </mat-cell>
     </ng-container>

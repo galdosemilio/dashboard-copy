@@ -1,0 +1,20 @@
+{
+  "id": "1",
+  "firstName": "Eric",
+  "lastName": "Di Bari",
+  "email": "eric@websprout.org",
+  "isActive": true,
+  "createdAt": "2015-02-11T12:36:33.116Z",
+  "accountType": {
+    "id": "2",
+    "title": "Provider"
+  },
+  "measurementPreference": "us",
+  "timezone": "America/New_York",
+  "preferredLocales": ["en"],
+  "phone": "(405) 255-7327",
+  "phoneType": null,
+  "preference": {
+    "defaultOrganization": "1"
+  }
+}

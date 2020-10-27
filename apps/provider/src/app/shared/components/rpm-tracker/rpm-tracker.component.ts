@@ -38,13 +38,16 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       this._iterationAmount,
       this.currentCodeAndTracking.trackableCode.maxEligibleAmount
     );
-    this.iterationAmountArray = new Array(Math.max(this._iterationAmount, 1)).fill('');
+    this.iterationAmountArray = new Array(
+      Math.min(
+        this._iterationAmount + 1,
+        this.currentCodeAndTracking.trackableCode.maxEligibleAmount
+      )
+    ).fill('');
     this.currentIteration = Math.min(
       this.currentCodeAndTracking.trackableCode.maxEligibleAmount,
       this._iterationAmount + 1
     );
-
-    console.log({ iAmount: this._iterationAmount, cI: this.currentIteration });
   }
 
   private get iterationAmount(): number {
@@ -223,7 +226,6 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       this.currentCodeAndTracking = this.resolveCurrentRPMBillingCode(
         rpmBillingReportEntry
       );
-      console.log({ currentCodeAndTracking: this.currentCodeAndTracking });
       this.requiredIterationSeconds =
         get(
           this.currentCodeAndTracking,
@@ -260,16 +262,15 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
           'billingItem.eligibility.next.alreadyEligibleCount',
           codeAndTracking.trackableCode.maxEligibleAmount
         );
-        this.seconds =
+        this.seconds = get(
+          codeAndTracking,
+          'billingItem.eligibility.next.monitoring.total.seconds.tracked',
           get(
             codeAndTracking,
-            'billingItem.eligibility.next.monitoring.total.seconds.tracked'
-          ) ||
-          get(
-            codeAndTracking,
-            'billingItem.eligibility.next.monitoring.total.seconds.elapsed'
-          ) ||
-          1200;
+            'billingItem.eligibility.next.monitoring.total.seconds.elapsed',
+            1200
+          )
+        );
 
         this.seconds = Math.min(this.seconds, this.requiredIterationSeconds);
 

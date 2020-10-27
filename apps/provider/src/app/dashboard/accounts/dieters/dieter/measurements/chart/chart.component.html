@@ -52,3 +52,7 @@
 <p class="footnotes" *ngIf="source.distanceNote.includes(true)">
   {{ 'MEASUREMENT.DISTANCE_NOTE' | translate }}
 </p>
+
+<p class="footnotes" *ngIf="source.hasMissingWeight">
+  {{ 'MEASUREMENT.MISSING_WEIGHT_NOTE' | translate }}
+</p>

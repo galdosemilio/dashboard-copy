@@ -11,7 +11,7 @@ import {
   EmbeddedContentViewerComponent,
   FolderCreateDialog,
   InsertFormDialog,
-  PackageSelectDialog,
+  PackageSelectDialog
 } from './dialogs';
 import { FileExplorerContentSelectorComponent } from './file-explorer-content-selector/file-explorer-content-selector.component';
 import { FileExplorerContentComponent } from './file-explorer-content/file-explorer-content.component';
@@ -26,40 +26,9 @@ import {
   ContentFormComponent,
   FileFormComponent,
   HyperlinkFormComponent,
-  YoutubeFormComponent,
+  YoutubeFormComponent
 } from './forms';
-import {
-  ContentUploadService,
-  FileExplorerDatabase,
-  FileUploadGuard,
-} from './services';
-import { SelectedContentTableComponent } from './components';
-
-export {
-  ContentComponent,
-  ContentBatchCopyDialog,
-  ContentCreateDialog,
-  ContentEditDialog,
-  ContentMoveDialog,
-  ContentFormComponent,
-  EmbeddedContentViewerComponent,
-  FileExplorerComponent,
-  FileExplorerContentComponent,
-  FileExplorerContentSelectorComponent,
-  FileExplorerDetailsComponent,
-  FileExplorerGridComponent,
-  FileExplorerInlineEditorComponent,
-  FileExplorerListComponent,
-  FileExplorerTableComponent,
-  FileFormComponent,
-  FileUploadTrackerComponent,
-  FolderCreateDialog,
-  InsertFormDialog,
-  PackageSelectDialog,
-  HyperlinkFormComponent,
-  YoutubeFormComponent,
-  SelectedContentTableComponent,
-};
+import { ContentUploadService, FileExplorerDatabase, FileUploadGuard } from './services';
 
 export const ContentComponents = [
   ...ContentSharedComponents,
@@ -84,7 +53,7 @@ export const ContentComponents = [
   InsertFormDialog,
   PackageSelectDialog,
   HyperlinkFormComponent,
-  YoutubeFormComponent,
+  YoutubeFormComponent
 ];
 
 export const ContentEntryComponents = [
@@ -95,11 +64,11 @@ export const ContentEntryComponents = [
   EmbeddedContentViewerComponent,
   FolderCreateDialog,
   InsertFormDialog,
-  PackageSelectDialog,
+  PackageSelectDialog
 ];
 
 export const ContentProviders = [
   ContentUploadService,
   FileExplorerDatabase,
-  FileUploadGuard,
+  FileUploadGuard
 ];

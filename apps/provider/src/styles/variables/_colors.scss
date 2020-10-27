@@ -25,7 +25,7 @@ $ccr-base: (
   A100: #f8b1b1,
   A200: #ff5252,
   A400: #ff1744,
-  A700: #d50000
+  A700: #d50000,
 );
 
 $ccr-contrast: (
@@ -42,7 +42,7 @@ $ccr-contrast: (
   A100: #504c4a,
   A200: #ffffff,
   A400: #ffffff,
-  A700: #ffffff
+  A700: #ffffff,
 );
 
 // foreground and background colors
@@ -67,7 +67,7 @@ $ccr-foreground: (
   error: #f2dede,
   table-actions: #a6a6a6,
   stroke: #ddddde,
-  progress-circle: #807d7c
+  progress-circle: #807d7c,
 );
 
 $ccr-background: (
@@ -97,18 +97,28 @@ $ccr-background: (
   even: #fff,
   odd: #f5f5f5,
   search: #ededed,
-  selected: #f5f5f5
+  selected: #f5f5f5,
 );
 
 // material variables
 @import '../../theming';
 
-$ccr-palette: map-merge($ccr-base, (contrast: $ccr-contrast));
+$ccr-palette: map-merge(
+  $ccr-base,
+  (
+    contrast: $ccr-contrast,
+  )
+);
 
 // general colors
 $ccr-primary: mat-palette($ccr-palette);
 $ccr-accent: mat-palette($ccr-palette, A200, A100, A400);
 $ccr-warn: mat-palette($ccr-palette);
+$ccr-success: saturate(
+  lighten(adjust-hue(mat-color($ccr-background, success), -25%), 10%),
+  10%
+);
+$ccr-danger: lighten(mat-color($ccr-background, error), 10%);
 
 $mat-light-theme-background: $ccr-background;
 $mat-light-theme-foreground: $ccr-foreground;

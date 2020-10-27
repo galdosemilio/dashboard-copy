@@ -10,7 +10,7 @@ export class AlertNotification {
   public triggeredBy: any;
 
   constructor(args: any) {
-    this.alertCode = AlertNotification.calculateAlertTypeCode(args.id);
+    this.alertCode = AlertNotification.calculateAlertTypeCode(args.type.id);
     this.alertDescription = args.type.description || '';
     this.createdAt = args.createdAt || '';
     this.detail = args.detail || '';

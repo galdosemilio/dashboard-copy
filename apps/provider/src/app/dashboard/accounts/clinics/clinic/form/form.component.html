@@ -1,0 +1,110 @@
+<form [formGroup]="form" novalidate>
+    <div class="ccr-content">
+
+      <div class="ccr-panel">
+        <h3>{{ 'BOARD.CLINIC_INFORMATION' | translate }}</h3>
+        <div class="ccr-grid" fxLayout="column">
+          <mat-grid-list [cols]="colSpan" rowHeight="70px">
+            <mat-grid-tile [colspan]="colSpan">
+              <mat-form-field>
+                <input matInput
+                formControlName="name" [readonly]="readonly"
+                [placeholder]="'BOARD.NAME' | translate">
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+      </div>
+
+      <div class="ccr-panel" formGroupName="contact">
+        <h3>{{ 'BOARD.CONTACT_INFO' | translate }}</h3>
+        <div class="ccr-grid" fxLayout="column">
+          <mat-grid-list [cols]="colSpan" rowHeight="70px">
+
+            <mat-grid-tile>
+              <mat-form-field>
+                <input matInput
+                formControlName="firstName" [readonly]="readonly"
+                [placeholder]="'BOARD.FIRST_NAME' | translate">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field>
+                <input matInput [readonly]="readonly"
+                formControlName="lastName"
+                [placeholder]="'BOARD.LAST_NAME' | translate">
+              </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput [readonly]="readonly"
+                    formControlName="email"
+                    [placeholder]="'BOARD.EMAIL' | translate">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput [readonly]="readonly"
+                    formControlName="phone"
+                    [placeholder]="'BOARD.PHONE' | translate">
+                </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+        </div>
+      </div>
+
+      <div class="ccr-panel" formGroupName="address">
+        <h3>{{ 'GLOBAL.LOCATION' | translate }}</h3>
+        <div class="ccr-grid" fxLayout="column">
+          <mat-grid-list [cols]="colSpan" rowHeight="70px">
+
+            <mat-grid-tile>
+              <mat-form-field>
+                <input matInput
+                formControlName="street" [readonly]="readonly"
+                [placeholder]="'BOARD.STREET' | translate">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field>
+                <input matInput
+                formControlName="city" [readonly]="readonly"
+                [placeholder]="'BOARD.CITY' | translate">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field>
+                <input matInput
+                formControlName="state" [readonly]="readonly"
+                [placeholder]="'BOARD.STATE' | translate">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field>
+                <input matInput
+                formControlName="postalCode" [readonly]="readonly"
+                [placeholder]="'BOARD.POSTAL_CODE' | translate">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput
+                  formControlName="country" [readonly]="readonly"
+                  [placeholder]="'BOARD.COUNTRY' | translate">
+                </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+        </div>
+      </div>
+    </div>
+  </form>

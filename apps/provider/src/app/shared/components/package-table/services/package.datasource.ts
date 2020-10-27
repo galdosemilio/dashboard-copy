@@ -1,21 +1,23 @@
-import { Package } from '@app/dashboard/content/models/package.model';
 import { ContextService } from '@app/service';
 import { CcrPaginator } from '@app/shared/components';
 import { TableDataSource } from '@app/shared/model';
 import {
-  FetchPackageResponse,
   GetAllPackageOrganizationRequest,
   GetAllPackageOrganizationResponse,
+  PackageAssociation,
   PackageOrganizationSingle
 } from '@app/shared/selvera-api';
 import { Observable } from 'rxjs';
+import { Package } from '../models';
 import { PackageDatabase } from './package.database';
 
 export class PackageDatasource extends TableDataSource<
   Package,
   GetAllPackageOrganizationResponse,
-  any
+  GetAllPackageOrganizationRequest
 > {
+  public hasInheritedPackage: boolean = false;
+
   constructor(
     protected context: ContextService,
     protected database: PackageDatabase,
@@ -43,16 +45,20 @@ export class PackageDatasource extends TableDataSource<
     return this.database.fetch(criteria);
   }
 
-  mapResult(result: any): any[] {
+  mapResult(result: GetAllPackageOrganizationResponse): Package[] {
     this.total = result.pagination.next
       ? result.pagination.next + 1
       : this.criteria.offset + result.data.length;
 
-    const resultArray: any[] = result.data || [];
-    return resultArray.map(
+    const resultArray: PackageAssociation[] = result.data || [];
+    const mappedResult = resultArray.map(
       (r: PackageOrganizationSingle) =>
-        new Package({ ...r.package, organization: r.organization })
+        new Package(r.package, r, { organizationId: this.criteria.organization })
     );
+
+    this.hasInheritedPackage = mappedResult.some((pkg) => pkg.isInherited);
+
+    return mappedResult;
   }
 
   // TODO: maybe create a parent class that holds this method? -- Zcyon

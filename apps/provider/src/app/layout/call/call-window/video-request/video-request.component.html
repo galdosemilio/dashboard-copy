@@ -1,7 +1,8 @@
 <div class="call-notification" xFlex fxLayout="column" fxLayoutAlign="center center">
   <button
   (click)="onAcceptAudio()"
-  [class.disabled]="!callState?.hasAudioDeviceAccess || !callState.audioInputDevices?.length"
+  [class.disabled]="!callState?.hasAudioDeviceAccess || !callState.audioInputDevices?.length || acceptedCall"
+  [disabled]="acceptedCall"
   mat-mini-fab>
     <mat-icon>phone</mat-icon>
     <ccr-popup-description
@@ -20,13 +21,13 @@ class="call-notification"
 fxLayout="column"
 fxLayoutAlign="center center"
 xFlex>
-  <button mat-mini-fab (click)="onAcceptVideo()">
+  <button mat-mini-fab [class.disabled]="acceptedCall" [disabled]="acceptedCall" (click)="onAcceptVideo()">
     <mat-icon>videocam</mat-icon>
   </button>
   <label>{{ 'CALL.ACCEPT_VIDEO' | translate }}</label>
 </div>
  <div class="call-notification" xFlex fxLayout="column" fxLayoutAlign="center center">
-  <button mat-mini-fab (click)="onRejectCall()">
+  <button mat-mini-fab [class.disabled]="acceptedCall" [disabled]="acceptedCall" (click)="onRejectCall()">
     <mat-icon>call_end</mat-icon>
   </button>
   <label>{{ 'CALL.REJECT' | translate }}</label>

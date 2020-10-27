@@ -1,22 +1,12 @@
 import { RouterModule, Routes } from '@angular/router';
-
 import { FileUploadGuard } from '@app/dashboard/content/services';
 import {
   AuthGuard,
-  ConferenceGuard,
   ListingPaginationGuard,
   OrphanedAccountGuard,
 } from '@app/service';
-import {
-  ClinicsComponent,
-  ContentComponent,
-  // FaqsComponent,
-  // MarketingComponent,
-  FormsComponent,
-  LibraryComponent,
-  ProfileComponent,
-  // SupportComponent
-} from './';
+import { LibraryComponent, ProfileComponent } from './';
+import { ClinicsRoutes } from './accounts/clinics/clinics.routing';
 import { CoachesRoutes } from './accounts/coaches/coaches.routing';
 import { DietersRoutes } from './accounts/dieters/dieters.routing';
 import { AlertsRoutes } from './alerts/alerts.routing';
@@ -45,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'accounts/clinics',
-        component: ClinicsComponent,
+        children: ClinicsRoutes,
       },
       {
         path: 'schedule',

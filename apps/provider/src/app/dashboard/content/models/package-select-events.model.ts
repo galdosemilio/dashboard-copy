@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { Package } from './package.model';
+import { Package } from '@app/shared/components/package-table';
 
 export class PackageSelectEvents {
   packageSelected: EventEmitter<Package>;

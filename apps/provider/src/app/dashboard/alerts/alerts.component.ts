@@ -22,7 +22,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
   alerts = [
     { viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined },
     { viewValue: _('REPORTS.TYPE_MEASUREMENTS'), value: '1' },
-    { viewValue: _('REPORTS.TYPE_INACTIVITY'), value: 1 },
+    { viewValue: _('REPORTS.TYPE_INACTIVITY'), value: 2 },
     { viewValue: _('REPORTS.TYPE_WEIGHT_THRESHOLD'), value: '5' }
   ];
 
@@ -55,6 +55,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
     }));
     this.source.addOptional(this.refresh$, () => {
       const k = findIndex(this.alerts, { value: this.alert });
+      console.log({ alerts: this.alerts, alert: this.alert });
       return k === 0
         ? {}
         : typeof this.alert === 'string'

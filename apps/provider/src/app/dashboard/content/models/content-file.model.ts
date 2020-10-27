@@ -8,7 +8,7 @@ import {
 } from '@app/dashboard/content/models/file-explorer-content.model';
 import { FILE_TYPE_MAP } from '@app/dashboard/content/models/file-type.map';
 import { Icon } from '@app/dashboard/content/models/icon.interface';
-import { Package } from '@app/dashboard/content/models/package.model';
+import { Package } from '@app/shared/components/package-table';
 
 export class ContentFile implements Partial<FileExplorerContent> {
   public file: File;

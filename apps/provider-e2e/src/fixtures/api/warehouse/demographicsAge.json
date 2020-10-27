@@ -1,0 +1,47 @@
+{
+  "data": [
+    {
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "buckets": [
+        {
+          "bucket": {
+            "name": "18-24 years"
+          },
+          "count": 4,
+          "percentage": 12.12
+        },
+        {
+          "bucket": {
+            "name": "25-34 years"
+          },
+          "count": 10,
+          "percentage": 30.3
+        },
+        {
+          "bucket": {
+            "name": "35-44 years"
+          },
+          "count": 9,
+          "percentage": 27.27
+        },
+        {
+          "bucket": {
+            "name": "45-54 years"
+          },
+          "count": 1,
+          "percentage": 3.03
+        },
+        {
+          "bucket": {
+            "name": "Under 18 years"
+          },
+          "count": 9,
+          "percentage": 27.27
+        }
+      ]
+    }
+  ]
+}

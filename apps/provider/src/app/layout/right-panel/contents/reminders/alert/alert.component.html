@@ -9,11 +9,12 @@
     (click)="onDismissAll(alert)" size="16"
   ></ccr-icon-dismiss-all>
 
-  <div class="item-heading">
+  <div class="item-heading no-margin-bottom">
     <ccr-alert-icon [icon]="alert.icon" [size]="18"></ccr-alert-icon>
     <span>{{ alert.detail | translate: alert.params }}</span>
   </div>
   <div class="item-body">
-    {{ alert.createdAt | ccrUtc | amTimeAgo }}
+    <small *ngIf="alert.texts" class="alert-type">{{ alert.texts?.title | translate }}<br></small>
+    <span>{{ alert.createdAt | ccrUtc | amTimeAgo }}</span>
   </div>
 </div>

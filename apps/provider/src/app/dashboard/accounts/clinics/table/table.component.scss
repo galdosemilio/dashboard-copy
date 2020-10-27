@@ -20,9 +20,24 @@
   }
 }
 
+button {
+  z-index: 999;
+
+  &.disabled {
+    mat-icon {
+      color: mat-color($ccr-foreground, divider) !important;
+      cursor: default;
+    }
+  }
+}
+
 .mat-cell {
   padding: 5px 5px 5px 0;
   &:last-child {
     @include horizontal-padding-right(0);
   }
+}
+
+.mat-row {
+  cursor: pointer;
 }

@@ -1,0 +1,144 @@
+{
+    "data": [
+        {
+            "date": "2019-12-25",
+            "recordedDateCount": "0",
+            "calories": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "protein": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "carbohydrates": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "totalFat": {
+                "dailyAverage": 0,
+                "total": 0
+            }
+        },
+        {
+            "date": "2019-12-26",
+            "recordedDateCount": "0",
+            "calories": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "protein": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "carbohydrates": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "totalFat": {
+                "dailyAverage": 0,
+                "total": 0
+            }
+        },
+        {
+            "date": "2019-12-27",
+            "recordedDateCount": "0",
+            "calories": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "protein": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "carbohydrates": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "totalFat": {
+                "dailyAverage": 0,
+                "total": 0
+            }
+        },
+        {
+            "date": "2019-12-28",
+            "recordedDateCount": "0",
+            "calories": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "protein": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "carbohydrates": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "totalFat": {
+                "dailyAverage": 0,
+                "total": 0
+            }
+        },
+        {
+            "date": "2019-12-29",
+            "recordedDateCount": "1",
+            "calories": {
+                "dailyAverage": 100,
+                "total": 100
+            },
+            "protein": {
+                "dailyAverage": 10000,
+                "total": 10000
+            },
+            "carbohydrates": {
+                "dailyAverage": 10000,
+                "total": 10000
+            },
+            "totalFat": {
+                "dailyAverage": 10000,
+                "total": 10000
+            }
+        },
+        {
+            "date": "2019-12-30",
+            "recordedDateCount": "0",
+            "calories": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "protein": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "carbohydrates": {
+                "dailyAverage": 0,
+                "total": 0
+            },
+            "totalFat": {
+                "dailyAverage": 0,
+                "total": 0
+            }
+        },
+        {
+            "date": "2019-12-31",
+            "recordedDateCount": "2",
+            "calories": {
+                "dailyAverage": 150,
+                "total": 300
+            },
+            "protein": {
+                "dailyAverage": 15000,
+                "total": 30000
+            },
+            "carbohydrates": {
+                "dailyAverage": 15000,
+                "total": 30000
+            },
+            "totalFat": {
+                "dailyAverage": 15000,
+                "total": 30000
+            }
+        }
+    ]
+}

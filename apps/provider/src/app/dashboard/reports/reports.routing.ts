@@ -30,10 +30,10 @@ export const ReportsRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'calls'
+        redirectTo: 'communications'
       },
       {
-        path: 'calls',
+        path: 'communications',
         component: CallsComponent
       }
     ]

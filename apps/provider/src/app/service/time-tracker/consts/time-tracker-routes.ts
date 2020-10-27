@@ -208,12 +208,12 @@ export const TIME_TRACKER_ROUTES: { [key: string]: TimeTrackerRoute } = {
   reportCommsRoot: {
     id: '30',
     routeSegments: ['reports', 'communications'],
-    tags: ['reports', 'communications', 'calls']
+    tags: ['reports', 'communications', 'communications']
   },
   reportCommsCalls: {
     id: '30',
-    routeSegments: ['reports', 'communications', 'calls'],
-    tags: ['reports', 'communications', 'calls']
+    routeSegments: ['reports', 'communications', 'communications'],
+    tags: ['reports', 'communications', 'communications']
   },
   sequencesListing: {
     id: '31',

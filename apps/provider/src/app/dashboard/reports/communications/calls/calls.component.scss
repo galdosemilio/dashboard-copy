@@ -1,3 +1,15 @@
+button.disabled {
+  opacity: 0.5;
+  mat-icon {
+    cursor: auto !important;
+  }
+}
+
+.mat-column-type {
+  flex: 0.7 !important;
+  word-break: break-word;
+}
+
 .participant {
   margin: 5px 0;
 }

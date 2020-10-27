@@ -14,7 +14,10 @@
     </mat-toolbar>
     <div fxLayout="row">
       <div fxFlex>
-        <router-outlet></router-outlet>
+        <router-outlet>
+
+        <ccr-call-rating *ngIf="showVideoRating"></ccr-call-rating>
+        </router-outlet>
       </div>
       <app-right-panel *ngIf="panelEnabled && layout.panel.enabled" [class.open]="layout.panel.opened"></app-right-panel>
     </div>

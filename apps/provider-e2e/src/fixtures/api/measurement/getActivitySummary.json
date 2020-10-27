@@ -1,0 +1,61 @@
+{
+    "data": [
+        {
+            "date": "2019-12-26T00:00:00.000Z",
+            "stepTotal": 20,
+            "stepAverage": 20,
+            "distanceTotal": 0,
+            "distanceAverage": 0
+        },
+        {
+            "date": "2019-12-27T00:00:00.000Z",
+            "stepTotal": 0,
+            "stepAverage": 0,
+            "distanceTotal": 0,
+            "distanceAverage": 0
+        },
+        {
+            "date": "2019-12-28T00:00:00.000Z",
+            "stepTotal": 0,
+            "stepAverage": 0,
+            "distanceTotal": 0,
+            "distanceAverage": 0
+        },
+        {
+            "date": "2019-12-29T00:00:00.000Z",
+            "stepTotal": 0,
+            "stepAverage": 0,
+            "distanceTotal": 0,
+            "distanceAverage": 0
+        },
+        {
+            "date": "2019-12-30T00:00:00.000Z",
+            "stepTotal": 0,
+            "stepAverage": 0,
+            "distanceTotal": 0,
+            "distanceAverage": 0
+        },
+        {
+            "date": "2019-12-31T00:00:00.000Z",
+            "stepTotal": 0,
+            "stepAverage": 0,
+            "distanceTotal": 0,
+            "distanceAverage": 0
+        },
+        {
+            "date": "2020-01-01T00:00:00.000Z",
+            "stepTotal": 50,
+            "stepAverage": 50,
+            "distanceTotal": 0,
+            "distanceAverage": 0
+        }
+    ],
+    "summary": {
+        "stepsMin": 20,
+        "stepsMax": 50,
+        "stepsAverage": 35,
+        "distanceMin": 0,
+        "distanceMax": 0,
+        "distanceAverage": 0
+    }
+}

@@ -32,11 +32,11 @@
     <app-call-room #roomComponent></app-call-room>
     <div class="ccr-overlapping-panel" xFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
       <div fxFlex="65" fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="5px">
-        <span [hidden]="callState?.participantJoined || callState?.controlsState === 'NOTIFYING'">
-          {{ (callState?.isReconnect ? ('CALL.RECONNECTING' | translate) : ('CALL.CALLING' | translate)) | uppercase }}...
+        <span [hidden]="!callState?.isAttemptingToReconnect && (callState?.participantJoined || callState?.controlsState === 'NOTIFYING')">
+          {{ ((callState?.isReconnect || callState?.isAttemptingToReconnect) ? ('CALL.RECONNECTING' | translate) : ('CALL.CALLING' | translate)) | uppercase }}...
         </span>
         <small
-        [hidden]="callState?.participantJoined || callState?.controlsState === 'NOTIFYING'"
+        [hidden]="callState?.isAttemptingToReconnect || callState?.participantJoined || callState?.controlsState === 'NOTIFYING'"
         class="call-timeout-help">
           {{ 'CALL.CALL_ATTEMPT_COUNTDOWN' | translate:{ seconds: ringingCountdown } }}
         </small>

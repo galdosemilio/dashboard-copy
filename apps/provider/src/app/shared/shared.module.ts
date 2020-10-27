@@ -61,13 +61,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ChartsModule } from 'ng2-charts';
 import { MomentModule } from 'ngx-moment';
-import {
-  Components,
-  EntryComponents,
-  Providers,
-  MatMomentDateModule,
-  MissingStringsHandler,
-} from './index';
+import { Components, EntryComponents, Providers } from './index';
 import { AppLocaleCode, locales } from './utils';
 
 // register supported locales
@@ -129,7 +123,6 @@ const SHARED_MODULES = [
   MomentModule,
   ChartsModule,
   QRCodeModule,
-  MatMomentDateModule,
 ];
 
 @NgModule({

@@ -1,0 +1,8 @@
+{
+  "data": [
+    { "service": "google" },
+    { "service": "fitbit" },
+    { "service": "levl" },
+    { "service": "healthkit", "token": { "createdAt": "2020-08-14T14:46:44.301Z" } }
+  ]
+}

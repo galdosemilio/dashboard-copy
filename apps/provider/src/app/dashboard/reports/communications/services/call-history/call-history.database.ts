@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { CcrDatabase } from '@app/shared';
-import { FetchCallsRequest, FetchCallsResponse } from '@app/shared/selvera-api';
+import {
+  GetAllInteractionsRequest,
+  InteractionSingle,
+  PagedResponse
+} from '@app/shared/selvera-api';
 import { from, Observable } from 'rxjs';
-import { Conference } from 'selvera-api';
+import { Interaction } from 'selvera-api';
 
 @Injectable()
 export class CallHistoryDatabase implements CcrDatabase {
-  constructor(private conference: Conference) {}
+  constructor(private interaction: Interaction) {}
 
-  fetch(criteria: FetchCallsRequest): Observable<FetchCallsResponse> {
-    return from(this.conference.fetchCalls(criteria));
+  public fetch(
+    criteria: GetAllInteractionsRequest
+  ): Observable<PagedResponse<InteractionSingle>> {
+    return from(this.interaction.getAll(criteria));
   }
 }
