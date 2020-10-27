@@ -9,7 +9,8 @@ import { _, locIsRtl } from '@app/shared/utils';
 import { ConfigService } from './config.service';
 import { EventsService } from './events.service';
 
-import * as moment from 'moment-timezone';
+import * as momentTz from 'moment-timezone';
+import * as moment from 'moment';
 import 'moment/locale/ar';
 import 'moment/locale/da';
 import 'moment/locale/he';
@@ -50,7 +51,9 @@ export class LanguageService {
 
     if (this.get() && this.translate.getLangs().indexOf(this.get()) > -1) {
       this.use(this.get());
-    } else if (this.translate.getLangs().indexOf(this.translate.getBrowserLang()) > -1) {
+    } else if (
+      this.translate.getLangs().indexOf(this.translate.getBrowserLang()) > -1
+    ) {
       this.set(this.translate.getBrowserLang());
     } else {
       this.set(config.lang.default);
@@ -67,7 +70,7 @@ export class LanguageService {
       m: 57,
       h: 24,
       d: 28,
-      M: 12
+      M: 12,
     });
 
     Object.keys(values).forEach((unit) => {
@@ -76,7 +79,7 @@ export class LanguageService {
   }
 
   setupTimezone(user: Profile) {
-    moment.tz.setDefault(user.timezone);
+    momentTz.tz.setDefault(user.timezone);
   }
 
   get(): string {
@@ -92,7 +95,7 @@ export class LanguageService {
       this.account
         .update({
           id: this.uid,
-          preferredLocales: [language]
+          preferredLocales: [language],
         })
         .then(() => {});
     }
@@ -120,7 +123,7 @@ export class LanguageService {
         _('MOMENTJS.YESTERDAY'),
         _('MOMENTJS.TODAY'),
         _('MOMENTJS.TOMORROW'),
-        _('MOMENTJS.LASWEEK')
+        _('MOMENTJS.LASWEEK'),
       ])
       .subscribe((translations) => {
         moment.updateLocale(this.getLangCode(lang), {
@@ -130,8 +133,8 @@ export class LanguageService {
             nextDay: translations['MOMENTJS.TOMORROW'],
             lastWeek: translations['MOMENTJS.LASWEEK'],
             nextWeek: 'dddd',
-            sameElse: 'MMM D, YYYY'
-          }
+            sameElse: 'MMM D, YYYY',
+          },
         });
       });
   }

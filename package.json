@@ -85,7 +85,6 @@
     "@nrwl/jest": "10.2.1",
     "@nrwl/workspace": "10.2.1",
     "@types/jest": "26.0.14",
-    "@types/moment-timezone": "^0.5.30",
     "@types/node": "~14.11.2",
     "codelyzer": "~6.0.0",
     "cypress": "^5.2.0",
