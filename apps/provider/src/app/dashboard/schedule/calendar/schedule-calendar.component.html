@@ -1,0 +1,84 @@
+
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="end">
+    <h2 fxFlex>{{'SIDENAV.SCHEDULE_VIEW' | translate}}</h2>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap.xs="10px">
+  <div fxFlex="0 1 auto" fxLayoutAlign="start" fxLayoutAlign.xs="center" class="calendar-options">
+    <span class="meeting">{{'BOARD.CONSULTATIONS' | translate}}</span>
+    <span class="available">{{'BOARD.AVAILABLE' | translate}}</span>
+    <span class="unavailable">{{'BOARD.UNAVAILABLE' | translate}}</span>
+    <!-- <mat-icon [matTooltip]="'BOARD.SCHEDULE_TOOLTIP' | translate">help</mat-icon> -->
+  </div>
+
+  <div fxFlex="auto" fxFlex.xs="1 1 100%" fxLayoutAlign="end" fxLayoutAlign.xs="center" fxLayoutAlign.sm="start" fxLayoutGap="7px">
+    <ccr-select-user
+      [title]="'BOARD.SELECT_SCHEDULE' | translate"
+      [default]="'BOARD.MY_SCHEDULE' | translate"
+      [onlyProviders]="true"
+    ></ccr-select-user>
+    <div class="ccr-button-group">
+      <button type="button" mat-button class="ccr-icon-button"
+      (click)="timerange = 'day'" [class.active]="timerange === 'day'"
+      [matTooltip]="'BOARD.DAILY_VIEW' | translate" matTooltipPosition="above">
+        <mat-icon>view_day</mat-icon>
+        {{'GLOBAL.DAY' | translate}}
+      </button>
+      <button type="button" mat-button class="ccr-icon-button"
+      (click)="timerange = 'week'" [class.active]="timerange === 'week'"
+      [matTooltip]="'BOARD.WEEKLY_VIEW' | translate" matTooltipPosition="above">
+        <mat-icon>view_week</mat-icon>
+        {{'GLOBAL.WEEK' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<date-navigator
+[date]="dates.current"
+[max]="false"
+[timeframe]="timerange"
+(selectedDate)="selectedDate($event)"
+direction="forward">
+</date-navigator>
+
+<div class="calendar-wrapper">
+  <table fxFlex="grow" fxLayout="column" class="calendar" [class.week]="timerange == 'week'">
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let date of days">{{ date }}</th>
+      </tr>
+    </thead>
+    <tbody #tbody class="calendar-body" data-cy="schedule-calendar-view-body">
+      <tr #trow *ngFor="let block of timeBlocks; let i = index;" [class.seven-am-row]="i === 28">
+        <td>{{(i % 2 === 0) ? block.display : ''}}</td>
+        <td *ngFor="let cell of block.cells" [class.available]="cell?.isAvailable">
+          <div *ngIf="cell?.meeting" class="meeting meeting-selectable"
+          [class.meeting-selected]="cell.meeting.id === selectedMeeting"
+          [class.meeting-unavailable]="cell.meeting.type.id === '4'"
+          [style.height.px]="calculateHeight(cell.meeting)"
+          [style.top.%]="calculateTop(cell.meeting)"
+          (click)="clickMeeting(cell.meeting)">
+            <div class="meeting-content">
+              <div class="meeting-time">{{ cell.meeting.timeToDisplay }}</div>
+              <div class="meeting-title">{{ cell.meeting.title | translate }}</div>
+              <div
+              *ngIf="cell.meeting.attendees && cell.meeting.attendees.length"
+              class="meeting-participans">
+              <span *ngIf="cell.meeting.attendees.length === 1">
+                {{ 'BOARD.SCHEDULE_ATTENDEE' | translate:{ amount: cell.meeting.attendees.length } }}
+              </span>
+              <span *ngIf="cell.meeting.attendees.length > 1">
+                {{ 'BOARD.SCHEDULE_ATTENDEES' | translate:{ amount: cell.meeting.attendees.length } }}
+              </span>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

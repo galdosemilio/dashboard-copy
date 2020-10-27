@@ -1,0 +1,44 @@
+<div matDialogTitle>
+    <div [ngSwitch]="state">
+        <span *ngSwitchCase="'form'">{{ 'SEQUENCING.BULK_REMOVE_RECIPIENTS' | translate }}</span>
+        <span *ngSwitchCase="'processing'">{{ 'SEQUENCING.BULK_UNENROLLING' | translate }}</span>
+    </div>
+    <button *ngIf="state === 'form'" matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div [ngSwitch]="state">
+        <div
+        *ngSwitchCase="'form'"
+        [formGroup]="form"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        fxLayoutGap="10px">
+            <p>{{ 'SEQUENCING.BULK_UNENROLL_DESCRIPTION' | translate }}</p>
+            <ccr-organization-search (select)="onOrgSelect($event)"[ancestor]="data.sequence.organization.id" [showEmptyOption]="false"></ccr-organization-search>
+
+            <small *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
+        </div>
+
+        <div
+        *ngSwitchCase="'processing'"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        fxLayoutGap="10px">
+            <p>{{ 'SEQUENCING.PROCESSING_BULK_ENROLLMENT' | translate:{org: currentOrg?.name} }}</p>
+            <mat-progress-bar [value]="bulkUnenrollProgress" color="primary"></mat-progress-bar>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div [ngSwitch]="state">
+        <div *ngSwitchCase="'form'">
+            <button [disabled]="form.invalid" (click)="onBulkUnenroll()" class="ccr-button" color="primary" mat-button>
+                {{ 'SEQUENCING.UNENROLL_RECIPIENTS' | translate }}
+            </button>
+        </div>
+    </div>
+</mat-dialog-actions>

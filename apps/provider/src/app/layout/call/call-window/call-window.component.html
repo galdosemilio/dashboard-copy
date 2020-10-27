@@ -1,0 +1,69 @@
+<div class="ccr-call-window-drag-backdrop" [class.hidden]="!callState?.isBeingDragged">
+  <div class="ccr-call-window-drag-hint">
+    <h4>
+      {{ 'CALL.DRAG_HINT' | translate }}
+    </h4>
+  </div>
+
+  <div
+  *ngFor="let sticky of stickyAreas"
+  [ngStyle]="{'top.%': sticky.y > 0 ? sticky.y : undefined, 'left.%': sticky.x > 0 ? sticky.x : undefined, 'bottom.%': sticky.y < 0 ? -sticky.y : undefined, 'right.%': sticky.x < 0 ? -sticky.x : undefined, 'width.%': sticky.width, 'height.%': sticky.height }"
+  class="ccr-call-window-sticky">
+    &nbsp;
+  </div>
+</div>
+
+<div class="ccr-call-window-container">
+  <div class="ccr-overlay-title" xFlex fxLayout="row" fxLayoutAlign="start middle"
+  [ngClass]="{'fullscreen':callState?.windowState != 'MAXIMIZED'}">
+    <div
+    (mousedown)="callState?.windowState === 'DEFAULT' && followPointer()"
+    app-call-header-text
+    fxFlex
+    fxLayoutAlign="start center"
+    fxLayoutGap="5px">
+    </div>
+    <app-call-header-controls fxFlex fxLayoutAlign="end center">
+    </app-call-header-controls>
+  </div>
+
+  <div class="ccr-overlay-separator" *ngIf="callState?.windowState !== 'FULLSCREEN'"></div>
+  <div [ngClass]="{'container-overlap':callState?.windowState != 'MINIMIZED'}">
+    <app-call-room #roomComponent></app-call-room>
+    <div class="ccr-overlapping-panel" xFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
+      <div fxFlex="65" fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="5px">
+        <span [hidden]="callState?.participantJoined || callState?.controlsState === 'NOTIFYING'">
+          {{ (callState?.isReconnect ? ('CALL.RECONNECTING' | translate) : ('CALL.CALLING' | translate)) | uppercase }}...
+        </span>
+        <small
+        [hidden]="callState?.participantJoined || callState?.controlsState === 'NOTIFYING'"
+        class="call-timeout-help">
+          {{ 'CALL.CALL_ATTEMPT_COUNTDOWN' | translate:{ seconds: ringingCountdown } }}
+        </small>
+      </div>
+    </div>
+    <div class="ccr-overlapping-panel" xFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
+      <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
+        <div class="ccr-caller" *ngIf="!callState.hasVideoStarted">
+          <ccr-avatar size="bigger" [account]="callState?.room?.recipient?.id" matListIcon></ccr-avatar>
+        </div>
+      </div>
+      <div class="overlay-actions" fxFlex="40" fxLayout="column" fxLayoutAlign="end center"
+        *ngIf="callState?.windowState != 'MINIMIZED'" >
+        <div [ngSwitch]="remoteConnectionStatus" class="slow-conn-warning">
+          <small *ngSwitchCase="3">
+            <mat-icon fontSet="fas" fontIcon="fa-video-slash"></mat-icon>
+            <p>{{ 'CALL.MOB_BACKGROUND' | translate }}</p>
+          </small>
+        </div>
+
+        <div app-call-video-request xFlex fxLayout="row" fxLayoutAlign="start center"
+          fxLayoutGap="20px"
+          class="notification" *ngIf="callState?.controlsState === 'NOTIFYING'" ></div>
+
+        <div app-call-controls xFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px"
+          class="call-controls" *ngIf="callState?.controlsState === 'CALL_ON_GOING'"></div>
+      </div>
+    </div>
+  </div>
+</div>

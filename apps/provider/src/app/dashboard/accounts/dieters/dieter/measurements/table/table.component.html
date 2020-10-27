@@ -1,0 +1,548 @@
+<ccr-datasource-overlay class="ccr-table ccr-table-stats" [source]="source">
+
+  <table mat-table [dataSource]="source">
+
+    <ng-template #empty>-</ng-template>
+
+    <ng-container matColumnDef="date" [sticky]="true">
+      <th mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</th>
+      <td mat-cell *matCellDef="let row" [ngClass]="{ 'ccr-text-right': !row.isHeader && !row.isEmpty }">
+        <ng-container *ngIf="row.isHeader">
+            {{ row.date | amDateFormat:'ddd MMM D, YYYY' }}
+        </ng-container>
+        <ng-container *ngIf="!row.isHeader">
+            {{ !row.isEmpty && row.usesNewAPI ? (row.date | amDateFormat:'h:mm a') : (row.date | amDateFormat:'ddd MMM D, YYYY') }}
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="device">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.DEVICE' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+          <ng-container *ngIf="!row.isHeader">
+          <ng-container *ngIf="row.device; else empty">
+              {{ row.device.title }}
+          </ng-container>
+          </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.WEIGHT' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.weight; else empty">
+          {{ row.weight.toFixed(1) }}
+          <small>{{ 'composition' | unitLabel: row.weight | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bmi">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.BMI' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.bmi; else empty">
+          {{ row.bmi.toFixed(1) }}
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="visceralFatPercentage">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.VISCERAL_FAT' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.visceralFatPercentage; else empty">
+          {{ row.visceralFat.toFixed(1) }}
+          <small>{{ 'composition' | unitLabel: row.visceralFat | translate }}</small>
+          <small>({{ row.visceralFatPercentage.toFixed(1) }}%)</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="visceralFatTanita">
+      <th mat-header-cell *matHeaderCellDef>
+        <span>{{ 'MEASUREMENT.VISCERAL_FAT_TANITA.VISCERAL_FAT_TANITA' | translate }}</span>
+        <ccr-popup-description
+          isGrid="true"
+          [gridData]="visceralFatRatingTooltip"
+        ></ccr-popup-description>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.visceralFatTanita; else empty">
+          {{ row.visceralFatTanita.toFixed() }}
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="visceralAdiposeTissue">
+      <th mat-header-cell *matHeaderCellDef>
+        <span>{{ 'MEASUREMENT.VISCERAL_ADIP_TISSUE' | translate }}</span>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.visceralAdiposeTissue; else empty">
+          {{ row.visceralAdiposeTissue.toFixed(1) }}
+          <small>{{ 'UNIT.LT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bodyFat">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.BODY_FAT' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.bodyFat; else empty">
+          {{ row.bodyFat.toFixed(1) }}
+          <small>{{ 'composition' | unitLabel: row.bodyFat | translate }}</small>
+          <small>({{ row.bodyFatPercentage.toFixed(1) }}%)</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="leanMass">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.LEAN_MASS' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.leanMass; else empty">
+          {{ row.leanMass.toFixed(1) }}
+          <small>{{ 'composition' | unitLabel: row.leanMass | translate }}</small>
+          <small>({{ row.leanMassPercentage.toFixed(1) }}%)</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="waterPercentage">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.HYDRATION' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.water; else empty">
+          {{ row.water.toFixed(1) }}
+          <small>{{ 'composition' | unitLabel: row.leanMass | translate }}</small>
+          <small>({{ row.waterPercentage.toFixed(1) }}%)</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="extracellularWaterToBodyWater">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.EXTRACELLULAR_WATER' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.extracellularWaterToBodyWater; else empty">
+          {{ row.extracellularWaterToBodyWater.toFixed(1) }}
+          <small>%</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalBodyWater">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.TOTAL_BODY_WATER' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.totalBodyWater; else empty">
+          {{ row.totalBodyWater }}
+          <small>{{ 'UNIT.MLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="visceralFatMass">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.VISCERAL_FAT_MASS' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.visceralFatMass; else empty">
+          {{ row.visceralFatMass.toFixed(1) }}
+          <small>{{ 'UNIT.G' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="waist">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.WAIST' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.waist; else empty">
+          {{ row.waist.toFixed(1) }}
+          <small>{{ 'circumference' | unitLabel | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="arm">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.ARM' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.arm; else empty">
+          {{ row.arm.toFixed(1) }}
+          <small>{{ 'circumference' | unitLabel | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="chest">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.CHEST' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.chest; else empty">
+          {{ row.chest.toFixed(1) }}
+          <small>{{ 'circumference' | unitLabel | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hip">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.HIP' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.hip; else empty">
+          {{ row.hip.toFixed(1) }}
+          <small>{{ 'circumference' | unitLabel | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="thigh">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.THIGH' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.thigh; else empty">
+          {{ row.thigh.toFixed(1) }}
+          <small>{{ 'circumference' | unitLabel | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="neck">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.NECK' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.neck; else empty">
+          {{ row.neck.toFixed(1) }}
+          <small>{{ 'circumference' | unitLabel | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="thorax">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.THORAX' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.thorax; else empty">
+          {{ row.thorax.toFixed(1) }}
+          <small>{{ 'circumference' | unitLabel | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="steps">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.STEPS' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.stepTotal; else empty">
+          {{ row.stepTotal | number }}
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="average">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.STEP_AVERAGE' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.stepAverage; else empty">
+          {{ row.stepAverage | number }}
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="distance">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.DISTANCE' | translate }}</th>
+      <td mat-cell *matCellDef="let row; let index = index;">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.distanceTotal; else empty">
+          {{ row.distanceTotal.toFixed(2) }} <small>{{ 'distance' | unitLabel | translate }}</small>
+          <i class="ccr-marker" *ngIf="source.distanceNote[index]">&nbsp;*</i>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="calories">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.CALORIES' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.calories; else empty">
+          {{ row.calories | number }}
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="protein">
+      <th mat-header-cell *matHeaderCellDef>{{ 'BOARD.PROTEIN' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.protein; else empty">
+          {{ row.protein.toFixed(1) | number }}<small>{{ 'UNIT.G' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="carbohydrates">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.CARBS' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.carbohydrates; else empty">
+          {{ row.carbohydrates.toFixed(1) | number }}<small>{{ 'UNIT.G' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalFat">
+      <th mat-header-cell *matHeaderCellDef>{{ 'BOARD.FAT' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.totalFat; else empty">
+          {{ row.totalFat.toFixed(1) | number }}<small>{{ 'UNIT.G' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.SLEEP' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.sleepMinutes; else empty">
+          {{ row.sleepMinutes.toFixed(1) | number }} <small>{{ 'UNIT.HRS' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sleepQuality">
+      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.RESTFULNESS' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <!-- TODO add a help description here -->
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.sleepQuality; else empty">
+          {{ row.sleepQuality }}<small class="perc">%</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalCholesterol">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.TOTAL_CHOLESTEROL' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.totalCholesterol; else empty">
+          {{ row.totalCholesterol }}
+          <small>{{ 'UNIT.MGR' | translate }}/{{ 'UNIT.DLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ldl">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.LDL' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.ldl; else empty">
+          {{ row.ldl }}
+          <small>{{ 'UNIT.MGR' | translate }}/{{ 'UNIT.DLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hdl">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.HDL' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.hdl; else empty">
+          {{ row.hdl }}
+          <small>{{ 'UNIT.MGR' | translate }}/{{ 'UNIT.DLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vldl">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.VLDL' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.vldl; else empty">
+          {{ row.vldl }}
+          <small>{{ 'UNIT.MGR' | translate }}/{{ 'UNIT.DLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="triglycerides">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.TRIGLYCERIDES' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.triglycerides; else empty">
+          {{ row.triglycerides }}
+          <small>{{ 'UNIT.MGR' | translate }}/{{ 'UNIT.DLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fastingGlucose">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.FASTING_GLUCOSE' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.fastingGlucose; else empty">
+          {{ row.fastingGlucose }}
+          <small>{{ 'UNIT.MGR' | translate }}/{{ 'UNIT.DLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hba1c">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.HBA1C' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.hba1c; else empty">
+          {{ row.hba1c }}
+          <small>%</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hsCrp">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.HSCRP' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.hsCrp; else empty">
+          {{ row.hsCrp }}
+          <small>{{'UNIT.MGR' | translate}}/{{ 'UNIT.LT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="temperature">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.TEMPERATURE' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.temperature; else empty">
+          {{ row.temperature }}
+          <small>{{ measurementPreference === 'metric' || measurementPreference === 'uk' ? '&#8451;' : '&#8457;' }}</small>
+        </ng-container>
+        </ng-container>
+        <!-- TODO unitLabel temperature -->
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="respirationRate">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.RESPIRATION_RATE' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.respirationRate; else empty">
+          {{ row.respirationRate }}
+          <small>/min</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="heartRate">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.HEART_RATE' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.heartRate; else empty">
+          {{ row.heartRate }}
+          <small>/min</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bloodPressureString">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.BLOOD_PRESSURE' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.bloodPressureString; else empty">
+          {{ row.bloodPressureString }}
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="insulin">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.INSULIN' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.insulin; else empty">
+          {{ row.insulin }}
+          <small>uU/{{ 'UNIT.MLT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ketones">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.KETONES' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.ketones; else empty">
+          {{ row.ketones }}
+          <small>mmol/{{ 'UNIT.LT' | translate }}</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" [stickyEnd]="true">
+      <th mat-header-cell *matHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</th>
+      <td mat-cell *matCellDef="let row" class="action-icon">
+        <div [class.hidden]="row.isHeader || row.isEmpty">
+          <mat-icon
+          [ngClass]="{ 'disabled': !row.device, 'clickable': row.device }"
+          [matTooltip]="'MEASUREMENT.DELETE' | translate"
+          (click)="deleteBodyMeasurement(row)">delete</mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row
+      *matRowDef="let row; columns: columns; let even = even; let odd = odd;"
+      [ngClass]="{ 'row-even': row.usesNewAPI ? row.even : even, 'row-odd': row.usesNewAPI ? row.odd : odd, 'header': row.isHeader, 'bold': row.usesNewAPI ? row.isEmpty : true }">
+    </tr>
+  </table>
+
+  <p class="footnotes" *ngIf="source.distanceNote.includes(true)">
+    <i class="ccr-marker">*</i> {{ 'MEASUREMENT.DISTANCE_NOTE' | translate }}
+  </p>
+
+</ccr-datasource-overlay>

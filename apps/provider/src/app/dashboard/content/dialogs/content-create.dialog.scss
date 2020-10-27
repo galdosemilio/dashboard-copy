@@ -1,0 +1,93 @@
+@import 'variables';
+
+.mat-dialog-content {
+  padding-top: 0;
+  .ccr-close-content-create-text {
+    margin-top: 20px;
+  }
+}
+
+.dialog-stepper {
+  .step {
+    &-body {
+      padding-top: 1%;
+      min-height: 75px;
+      @media #{$small-and-down} {
+        min-height: 142px;
+      }
+
+      .ccr-icon-button {
+        mat-icon {
+          fill: var(--primary, mat-color($ccr-primary));
+        }
+
+        mat-icon.font-based {
+          font-size: 16px;
+          height: 16px;
+          width: 16px;
+        }
+
+        mat-icon.svg-based {
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+
+.selected-content-wrapper {
+  width: 100%;
+
+  &-label {
+    font-weight: normal;
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.queued {
+  &-item-list {
+    overflow-y: scroll;
+    height: 125px;
+    width: 100%;
+
+    & > div {
+      width: 100%;
+    }
+
+    &-wrapper {
+      width: 100%;
+    }
+
+    &-title {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .item-name {
+      margin: 7px 0;
+      width: 70%;
+      word-wrap: break-word;
+      font-size: 14px;
+    }
+
+    .item-icon {
+      cursor: default;
+      height: 18px;
+
+      &.font-based {
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    .remove-item-icon {
+      cursor: pointer;
+    }
+  }
+
+  &-buttons-wrapper {
+    width: 95%;
+  }
+}

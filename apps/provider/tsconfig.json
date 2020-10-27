@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node", "jest"]
+    "types": [
+      "node",
+      "jest"
+    ]
   },
   "files": [],
   "include": [],
@@ -12,5 +15,8 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "angularCompilerOptions": {
+    "enableIvy": false
+  }
 }

@@ -1,0 +1,28 @@
+<div matDialogTitle>
+    <div>
+        <span>{{ 'GLOBAL.NOTICE' | translate}}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <p [innerHTML]="'BOARD.ACC_MULTI_ASSOCIATION' | translate"></p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button
+    (click)="goToAssociationListing()"
+    mat-button
+    class="ccr-button"
+    color="primary">
+        {{ 'BOARD.GO_TO_ASSOCIATIONS' | translate }}
+    </button>
+    <button
+    mat-button
+    matDialogClose
+    class="ccr-button">
+        {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

@@ -9,11 +9,16 @@ import {
   MatButton,
   MatButtonModule,
 } from '@angular/material/button';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {
+  MatSlideToggle,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import {
   MAT_LABEL_GLOBAL_OPTIONS,
   MatNativeDateModule,
+  MatCommonModule,
+  MatRippleModule,
 } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
@@ -64,17 +69,23 @@ import {
   MatProgressSpinnerModule,
 } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import {
+  MatSelect,
+  MatSelectChange,
+  MatSelectModule,
+} from '@angular/material/select';
 import {
   MatSidenav,
   MatSidenavContainer,
   MatSidenavContent,
   MatSidenavModule,
 } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { MatTableModule } from '@angular/material/table';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import {
   MatTreeFlatDataSource,
@@ -93,6 +104,9 @@ export {
   MatAnchor,
   MatButton,
   MatButtonModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatCommonModule,
   MatNativeDateModule,
   MAT_LABEL_GLOBAL_OPTIONS,
   MAT_DIALOG_DATA,
@@ -104,6 +118,7 @@ export {
   MatDialogModule,
   MatDialogRef,
   MatDialogTitle,
+  MatExpansionModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldModule,
   MatGridAvatarCssMatStyler,
@@ -127,6 +142,7 @@ export {
   MatMenuPanel,
   MatMenuTrigger,
   MatProgressSpinner,
+  MatSelect,
   MatSelectChange,
   MatSidenav,
   MatSidenavContainer,
@@ -138,20 +154,37 @@ export {
   MatSortModule,
   MatStepper,
   MatStepperModule,
+  MatTable,
   MatToolbar,
   MatToolbarModule,
   MatTreeFlatDataSource,
   MatTreeFlattener,
   MatPaginator,
+  Sort,
+  MatSlideToggle,
+  MatInputModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatTableModule,
+  MatTabsModule,
+  MatTooltipModule,
 };
 
 export const CcrMaterialModules = [
+  MatCommonModule,
   MatAutocompleteModule,
   MatButtonModule,
   MatSlideToggleModule,
   MatCardModule,
   MatCheckboxModule,
   MatChipsModule,
+  MatCommonModule,
   MatDatepickerModule,
   MatDialogModule,
   MatDividerModule,
@@ -167,13 +200,16 @@ export const CcrMaterialModules = [
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
+  MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSliderModule,
   MatSnackBarModule,
   MatSortModule,
   MatStepperModule,
-  MatTableModule,
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
+  MatTableModule,
+  MatTabsModule,
 ];

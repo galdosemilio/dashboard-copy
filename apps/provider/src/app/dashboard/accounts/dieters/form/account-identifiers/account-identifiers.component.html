@@ -1,0 +1,20 @@
+<div *ngFor="let group of groupedIdentifiers; let i = index">
+    <span class="title">{{ 'SECTION.DEFAULT.ACCOUNT_IDENTIFIER.TITLE' | translate:{org:group.organization.name} }}</span>
+    <div class="identifier-group" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px" [formGroup]="groupedForms[i]">
+        <mat-form-field>
+            <mat-select formControlName="name" [placeholder]="'SECTION.DEFAULT.ACCOUNT_IDENTIFIER.IDENTIFIER' | translate">
+                <mat-option *ngFor="let identifier of group.identifiers" [value]="identifier.name">
+                {{ identifier.displayName | translate }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ccr-iconfix">
+            <input
+            formControlName="value"
+            matInput
+            [placeholder]="'SECTION.DEFAULT.ACCOUNT_IDENTIFIER.VALUE' | translate"
+            [required]="groupedFocusedIdentifiers[i] && groupedFocusedIdentifiers[i].required">
+        </mat-form-field>
+    </div>
+</div>

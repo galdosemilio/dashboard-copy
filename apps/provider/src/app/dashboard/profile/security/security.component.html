@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+    <account-mfa-setup></account-mfa-setup>
+
+    <div fxLayout="column" fxLayoutAlign="start start">
+        <h3>{{ 'PROFILE.PASSWORD_RESET.PASSWORD_RESET' | translate }}</h3>
+
+        <p>{{ 'PROFILE.PASSWORD_RESET.PASSWORD_RESET_ABOUT' | translate }}</p>
+
+        <button (click)="resetPassword()" class="ccr-icon-button" color="primary" mat-button>
+            <mat-icon>lock</mat-icon> {{ 'BOARD.SEND_PASSWORD_RESET' | translate }}
+        </button>
+    </div>
+</div>

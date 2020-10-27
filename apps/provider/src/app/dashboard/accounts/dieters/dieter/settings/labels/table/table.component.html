@@ -1,0 +1,123 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source">
+
+    <ng-container cdkColumnDef="id">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.CONTENT.ID' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'LIBRARY.CONTENT.ID' | translate }}</span>
+        {{ row.package.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="title">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.NAME' | translate }}</span>
+        {{ row.package.title }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="status">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.STATUS' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.STATUS' | translate }}</span>
+        {{ row.status | translate }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="organization">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CLINIC' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.CLINIC' | translate }}</span>
+        {{ row.package.organization.name | translate }} <i class="ccr-marker" *ngIf="row.inherited">&nbsp;*</i>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="action">
+      <mat-header-cell *cdkHeaderCellDef fxLayoutAlign="center center">{{ 'BOARD.ACTION' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxFlex="125px" fxFlex.xs="grow"
+      fxLayoutAlign="center center" fxLayoutAlign.xs="start center">
+        <span>{{ 'BOARD.ACTION' | translate }}</span>
+
+        <a mat-button color="primary" class="ccr-button"
+        (click)="enroll(row)" *ngIf="!row.enrolled">
+          {{ 'PHASE.ENROLL' | translate }}
+        </a>
+        <a mat-button color="warn" class="ccr-button"
+        (click)="unenroll(row)" *ngIf="row.enrolled">
+          {{ 'PHASE.UNENROLL' | translate }}
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="history">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.HISTORY' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
+        <span>{{ 'BOARD.HISTORY' | translate }}</span>
+
+        <div fxFlex fxLayout="column">
+          <div fxLayout="row" class="enroll-info" *ngIf="!row.enrolled">
+            <div fxFlex="70">&nbsp;</div>
+            <div fxFlex="30" fxLayoutAlign="center center" class="enroll-button">
+              <a mat-button color="primary" class="ccr-button" (click)="enroll(row.package)">
+                {{ 'PHASE.ENROLL' | translate }}
+              </a>
+            </div>
+          </div>
+
+          <div fxLayout="row" class="enroll-info">
+
+            <div fxFlex="35" class="history-subcol" fxLayout="column" *ngIf="row.history.start.length > 0">
+              <div fxLayoutAlign="center center">{{ 'PHASE.START' | translate }}</div>
+              <div fxLayoutAlign="center center" *ngFor="let start of row.history.start">
+                {{ start }}
+              </div>
+            </div>
+
+            <div fxFlex="35" class="history-subcol" fxLayout="column" *ngIf="row.history.end.length > 0">
+              <div fxLayoutAlign="center center">{{ 'PHASE.END' | translate }}</div>
+              <div fxLayoutAlign="center center" *ngFor="let end of row.history.end">
+                <i>{{ end | translate }}</i>
+              </div>
+            </div>
+
+            <div fxFlex="30" class="history-subcol" fxLayout="column" *ngIf="row.history.actions.length > 0">
+              <div fxLayoutAlign="center center">{{ 'BOARD.ACTIONS' | translate }}</div>
+              <!-- TODO rework these actions -->
+              <div fxLayoutAlign="center center" *ngFor="let action of row.history.actions; let i = index">
+                <ng-container [ngSwitch]="action">
+                  <ng-container *ngSwitchCase="true">
+                    <a mat-button color="warn" class="ccr-button"
+                    (click)="unenroll(row.history.enrollments[i])">
+                      {{ 'PHASE.UNENROLL' | translate }}
+                    </a>
+                  </ng-container>
+                  <span *ngSwitchCase="false">
+                    -
+                  </span>
+                </ng-container>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{
+        'row-even': even,
+        'row-odd': odd
+      }">
+    </mat-row>
+  </mat-table>
+
+  <p class="footnotes" *ngIf="source.showMarker">
+    <i class="ccr-marker">*</i> {{ 'PHASE.IS_INHERITED' | translate }}
+  </p>
+
+</ccr-datasource-overlay>

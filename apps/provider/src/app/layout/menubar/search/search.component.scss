@@ -1,0 +1,10 @@
+.mat-option-text {
+  flex: 1 1 100% !important;
+  box-sizing: border-box !important;
+  flex-direction: row !important;
+  display: flex !important;
+}
+
+mat-option.noAccess {
+  cursor: auto !important;
+}

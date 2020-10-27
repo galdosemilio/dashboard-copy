@@ -1,0 +1,22 @@
+
+<div class="ccr-heading" fxLayout="row" fxLayoutAlign="end" [formGroup]="form">
+    <mat-form-field floatLabel="always">
+        <input
+        matInput type="text" formControlName="query"
+        [placeholder]="'LIBRARY.FORMS.SEARCH_BY_PATIENT_NAME' | translate">
+    </mat-form-field>
+    <ccr-paginator fxFlex="nogrow" #paginator
+    [length]="source.total"
+    [pageIndex]="source.pageIndex"
+    [pageSize]="source.pageSize"
+    (page)="source.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+</div>
+
+<app-dieters-table
+[columns]="columns"
+[editable]="false"
+[source]="source"
+[defaultClickAction]="false"
+(onSelected)="onSelected($event)">
+</app-dieters-table>

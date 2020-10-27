@@ -1,0 +1,40 @@
+<div [formGroup]="form">
+  <div class="form-actions" fxLayout="row" fxLayout.xs="column"
+  fxLayoutAlign="end start" fxLayoutAlign.xs="stretch">
+  <ul class="ccr-breadcrumbs" fxFlex>
+      <li fxFlex>
+        <a class="clickable selected" fxLayoutAlign=" center">
+          <span>{{ 'LIBRARY.FORMS.ALL_FORMS' | translate }}</span>
+        </a>
+      </li>
+    </ul>
+    <a fxFlex="nogrow" fxFlex.xs="grow" [disabled]="!userIsAdmin"
+    mat-button color="primary" class="ccr-icon-button" (click)="addForm()">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'LIBRARY.FORMS.CREATE_FORM' | translate }}</span>
+    </a>
+  </div>
+
+  <div class="ccr-htools" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+    <mat-form-field fxFlex="nogrow" fxFlex.xs="grow" floatLabel="always">
+      <input matInput type="text"
+      formControlName="name"
+      [placeholder]="'LIBRARY.FORMS.SEARCH_BY_NAME' | translate">
+      <ccr-icon-search matSuffix fill="rgba(0, 0, 0, 0.42)" [size]="20" [stroke]="5"></ccr-icon-search>
+    </mat-form-field>
+
+    <ccr-paginator fxFlex="nogrow" #paginator
+    [length]="datasource.total"
+    [pageIndex]="datasource.pageIndex"
+    [pageSize]="datasource.pageSize"
+    (page)="datasource.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+  </div>
+</div>
+
+<app-library-forms-table
+[datasource]="datasource"
+(onSorted)="onSorted($event)"
+(onEdit)="onEdit($event)"
+(onDelete)="onDelete($event)"
+></app-library-forms-table>

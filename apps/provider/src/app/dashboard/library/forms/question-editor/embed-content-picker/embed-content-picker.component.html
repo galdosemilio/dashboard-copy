@@ -1,0 +1,38 @@
+<div [ngSwitch]="status">
+
+    <div *ngSwitchCase="'no_content'" fxLayout="column" fxLayoutAlign="center center">
+        <p>{{ 'LIBRARY.FORMS.NO_CONTENT_SELECTED' | translate }}</p>
+        <button
+        (click)="status = 'pick_content'"
+        class="ccr-button"
+        mat-button>{{ 'LIBRARY.FORMS.BROWSE_DIGITAL_LIBRARY' | translate }}</button>
+    </div>
+
+    <div *ngSwitchCase="'pick_content'" fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="59%">
+            <app-content-file-explorer-content-selector
+            (contentSelected)="contentSelected($event)"
+            [opts]="selectorOpts"></app-content-file-explorer-content-selector>
+        </div>
+
+        <div fxFlex="39%" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+            <iframe *ngIf="selectedContentURL" [src]="selectedContentURL" frameborder="0"></iframe>
+            <p *ngIf="!selectedContentURL">Preview</p>
+            <button
+            [disabled]="!selectedContent"
+            (click)="confirmContent()"
+            class="ccr-button"
+            mat-button>{{ 'LIBRARY.FORMS.SELECT_CONTENT' | translate }}</button>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'view_content'" fxLayout="column" fxLayoutAlign="stretch center" fxLayoutGap="15px">
+        <iframe *ngIf="selectedContentURL" [src]="selectedContentURL" frameborder="0"></iframe>
+        <button
+        (click)="status = 'pick_content'"
+        class="ccr-button"
+        mat-button>{{ 'LIBRARY.FORMS.CHANGE_CONTENT' | translate }}</button>
+    </div>
+
+
+</div>

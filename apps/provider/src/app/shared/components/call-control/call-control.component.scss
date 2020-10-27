@@ -1,0 +1,10 @@
+@import 'shared/directed-styles';
+
+div,
+div > button {
+  width: 100%;
+}
+
+.min {
+  @include horizontal-margin-right(0px !important);
+}

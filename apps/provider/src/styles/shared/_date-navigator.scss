@@ -1,0 +1,55 @@
+@import 'shared/directed-styles';
+
+date-navigator,
+date-range-navigator > div > .container {
+  background-color: mat-color($ccr-background, tools);
+  display: block;
+  margin-bottom: 15px;
+  padding: 4px 0;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  width: 100%;
+  @media #{$small-and-down} {
+    margin-bottom: 10px;
+  }
+
+  mat-grid-tile {
+    &:first-child,
+    &:last-child {
+      cursor: pointer;
+      &:not(.disabled):hover {
+        background-color: darken(mat-color($ccr-background, tools), 5%);
+      }
+    }
+    &.disabled {
+      cursor: default;
+      mat-icon {
+        opacity: 0.3;
+      }
+    }
+
+    div {
+      align-items: center;
+      display: flex;
+      font-size: 14px;
+      justify-content: center;
+      line-height: 18px;
+      text-transform: uppercase;
+      > span {
+        cursor: pointer;
+        @include horizontal-margin-right(5px);
+      }
+      > input {
+        visibility: hidden;
+        width: 1px;
+      }
+    }
+  }
+
+  .text-separator {
+    color: mat-color($ccr-foreground, text);
+    font-weight: bold;
+    padding: 0 10px;
+  }
+}

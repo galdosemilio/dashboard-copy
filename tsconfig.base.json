@@ -21,11 +21,17 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@app/*": [
+        "apps/provider/src/app/*"
+      ],
       "@board/*": [
         "apps/admin/src/app/*"
       ],
       "@coachcare/common": [
         "libs/common/src/index.ts"
+      ],
+      "@coachcare/common/module": [
+        "libs/common/src/lib/common.module.ts"
       ],
       "@coachcare/common/*": [
         "libs/common/src/lib/*"

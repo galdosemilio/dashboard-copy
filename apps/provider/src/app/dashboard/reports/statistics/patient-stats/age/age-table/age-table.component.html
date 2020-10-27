@@ -1,0 +1,36 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source">
+
+    <ng-container cdkColumnDef="age-class">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.AGE_GROUP' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.AGE_GROUP' | translate }}</span>
+        {{ row.bucket.name ? row.bucket.name : ('REPORTS.UNKNOWN' | translate) }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="count">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.COUNT' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.COUNT' | translate }}</span>
+        {{ row.count }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="percentage">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.PERCENTAGE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.PERCENTAGE' | translate }}</span>
+        {{ row.percentage }}%
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>

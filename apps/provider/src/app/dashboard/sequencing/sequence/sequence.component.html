@@ -1,0 +1,81 @@
+<div class="ccr-heading">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutWrap.xs fxLayoutGap="10px">
+    <button class="ccr-icon-button" color="primary" mat-button routerLink="/sequences">
+        <mat-icon>chevron_left</mat-icon>
+        <span>{{ 'BOARD.BACK_LIST' | translate }}</span>
+    </button>
+    </div>
+</div>
+
+<div
+*ngIf="section === 'edit'"
+class="ccr-heading edit-controls"
+fxLayout="row"
+fxLayoutAlign="space-between end"
+fxLayoutGap="10px"
+fxLayoutWrap.xs>
+    <button [disabled]="true" (click)="deleteSequence()" class="ccr-icon-button" color="secondary" mat-button>
+        <mat-icon>delete</mat-icon>
+        <span>{{ 'GLOBAL.DELETE' | translate }}</span>
+    </button>
+    <button
+    [disabled]="isLoading || !hasSteps || !isAdmin"
+    (click)="saveSequence()"
+    class="ccr-button"
+    color="primary"
+    mat-flat-button>
+        <span>{{ 'GLOBAL.SAVE' | translate }}</span>
+    </button>
+</div>
+
+<div
+class="ccr-tabs"
+fxFlex="nogrow"
+fxLayout="row"
+fxLayoutAlign=" stretch">
+  <a
+  [class.active]="section === 'edit'"
+  [routerLink]="['.', { s: 'edit' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center"
+  data-cy="sequence-button-edit">
+    {{ 'SEQUENCING.EDIT_SEQUENCE' | translate }}
+  </a>
+  <a
+  *ngIf="sequence"
+  [class.active]="section === 'enrollees'"
+  [routerLink]="['.', { s: 'enrollees' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center"
+  data-cy="sequence-button-enrollees">
+    {{ 'SEQUENCING.ENROLLEES' | translate }}
+  </a>
+</div>
+
+<ng-container [ngSwitch]="section">
+    <ng-container *ngSwitchCase="'edit'">
+        <div class="sequencing-section">
+            <small *ngIf="hasEnrollees && sequence.hasLoop">{{ 'SEQUENCING.EDITING_DISABLED_NOTICE' | translate }}</small>
+            <small *ngIf="hasEnrollees && !sequence.hasLoop">{{ 'SEQUENCING.EDITING_PARTIAL_DISABLED_NOTICE' | translate }}</small>
+            <small *ngIf="!isAdmin && !hasEnrollees">{{ 'SEQUENCING.EDITING_DISABLED_ADMIN_NOTICE' | translate }}</small>
+
+            <div [formGroup]="form">
+                <sequencing-form
+                [sequence]="sequence"
+                [blocked]="hasEnrollees || !isAdmin || hardBlocked"
+                [hardBlocked]="!isAdmin || hardBlocked"
+                (loadFinished)="onFormLoadFinish$.emit()"
+                [markAsTouched]="markAsTouched$"
+                formControlName="sequence"></sequencing-form>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'enrollees'">
+        <sequencing-enrollee-listing
+        [sequence]="sequence"
+        class="sequencing-section"></sequencing-enrollee-listing>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,42 @@
+
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+    <h2 fxFlex>{{'BOARD.CLINICS' | translate}}</h2>
+
+    <a *ngIf="showCreateClinic && clinic?.permissions.admin"
+    mat-button color="primary" class="ccr-icon-button"
+    fxFlex="nogrow" (click)="createDialog()">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'BOARD.CLINIC_NEW' | translate }}</span>
+    </a>
+  </div>
+
+  <div [formGroup]="filterForm" class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <mat-form-field fxFlex>
+      <input
+      [placeholder]="'BOARD.SEARCH_CLINIC' | translate"
+      formControlName="query"
+      matInput
+      type="text">
+    </mat-form-field>
+
+    <button mat-button fxFlex="nogrow" class="ccr-align-center"
+    [disabled]="!source.isLoaded || source.isEmpty || source.isLoading" (click)="downloadCSV()" fxHide.xs
+    data-cy="download-csv-button">
+      {{ 'REPORTS.EXPORT_CSV' | translate }}
+      <mat-icon>file_download</mat-icon>
+    </button>
+
+    <ccr-paginator fxFlex="nogrow" #paginator
+      [length]="source.total"
+      [pageIndex]="source.pageIndex"
+      [pageSize]="source.pageSize"
+      (page)="source.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+  </div>
+</div>
+
+<app-clinics-table
+  [source]="source"
+  (onSorted)="onSorted($event)">
+</app-clinics-table>

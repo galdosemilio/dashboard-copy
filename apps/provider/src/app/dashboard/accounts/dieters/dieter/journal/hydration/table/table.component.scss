@@ -1,0 +1,10 @@
+@import 'shared/directed-styles';
+
+.ccr-table small {
+  @include horizontal-margin-left(0.25em);
+  margin-top: 0.42em;
+
+  &.perc {
+    @include horizontal-margin-left(0.1em);
+  }
+}

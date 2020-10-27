@@ -1,0 +1,106 @@
+
+<div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="1em">
+  <ng-container [formGroup]="searchForm">
+    <mat-form-field>
+      <input matInput type="text" formControlName="query" [placeholder]="'BOARD.SEARCH_CLINIC' | translate">
+    </mat-form-field>
+
+    <!-- <mat-checkbox *ngIf="coachId" formControlName="pickedOnly">
+      {{ 'BOARD.PICKED_ONLY' | translate }}
+    </mat-checkbox> -->
+  </ng-container>
+
+  <ccr-paginator fxFlex="nogrow" #paginator
+    [length]="source.total"
+    [pageSize]="source.pageSize"
+    [pageIndex]="source.pageIndex"
+    (page)="source.pageIndex = $event.pageIndex"
+  ></ccr-paginator>
+</div>
+
+<mat-progress-bar color="primary" mode="indeterminate" [hidden]="!isLoading && !source.isLoading"></mat-progress-bar>
+
+<div class="ccr-table" [class.ccr-loading]="isLoading || source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
+
+  <mat-table #table matSort [dataSource]="clinics" [hidden]="isLoading">
+
+    <ng-container cdkColumnDef="actions">
+      <mat-header-cell *cdkHeaderCellDef> {{'BOARD.PICK' | translate}} </mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center">
+        <span>
+          <button mat-icon-button type="button" title="{{'BOARD.SELECT' | translate}}" (click)="onSelect(row.organization.id)">
+            <mat-icon [ngClass]="{'ccr-picked': data[row.organization.id] && data[row.organization.id].picked}">check_circle</mat-icon>
+          </button>
+        </span>
+        <button mat-icon-button type="button" title="{{'BOARD.SELECT' | translate}}" (click)="onSelect(row.organization.id)">
+          <mat-icon [ngClass]="{'ccr-picked': data[row.organization.id] && data[row.organization.id].picked}">check_circle</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="name">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header> {{'BOARD.CLINIC' | translate}} </mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center">
+        {{ row.organization.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="perm_viewall">
+      <mat-header-cell *cdkHeaderCellDef fxFlex="15%" class="ccr-help" (click)="toggleHelp('help-accessall')">
+        {{'PERM.ACCESSALL' | translate}} <mat-icon>help_outline</mat-icon>
+      </mat-header-cell>
+      <mat-cell *cdkCellDef="let row" class="ccr-help invisible"
+      fxLayoutAlign="center center" fxFlex="15%"
+      fxLayoutAlign.xs="start center" fxFlex.xs="grow"
+      fxFlexOffset.xs="12%" fxFlexOrder.xs="3"
+      [class.visible]="data[row.organization.id] && data[row.organization.id].picked">
+        <mat-checkbox
+          [(ngModel)]="data[row.organization.id] && data[row.organization.id].accessall"
+          name="accessall"
+          (change)="onChange()">
+          <span class="xs-label">{{'PERM.ACCESSALL' | translate}}</span>
+        </mat-checkbox>
+        <mat-icon fxHide fxShow.xs (click)="toggleHelp('help-accessall')">help_outline</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="perm_admin">
+      <mat-header-cell *cdkHeaderCellDef fxFlex="15%" class="ccr-help" (click)="toggleHelp('help-admin')">
+        {{'PERM.ADMIN' | translate}} <mat-icon>help_outline</mat-icon>
+      </mat-header-cell>
+      <mat-cell *cdkCellDef="let row" class="ccr-help invisible"
+      fxLayoutAlign="center center" fxFlex="15%"
+      fxLayoutAlign.xs="start center" fxFlex.xs="grow"
+      fxFlexOffset.xs="12%" fxFlexOrder.xs="4"
+      [class.visible]="data[row.organization.id] && data[row.organization.id].picked">
+        <mat-checkbox
+          [(ngModel)]="data[row.organization.id] && data[row.organization.id].admin"
+          name="admin"
+          (change)="onChange()">
+          <span class="xs-label">{{'PERM.ADMIN' | translate}}</span>
+        </mat-checkbox>
+        <mat-icon fxHide fxShow.xs (click)="toggleHelp('help-admin')">help_outline</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row fxLayoutAlign="stretch" *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+  <div class="ccr-table-help">
+    <button mat-icon-button type="button" (click)="toggleHelp()"><mat-icon>cancel</mat-icon></button>
+
+    <div class="help-accessall" [innerHTML]="'PERM.HELP_ACCESSALL' | translate"></div>
+    <div class="help-admin" [innerHTML]="'PERM.HELP_ADMIN' | translate"></div>
+  </div>
+
+  <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isDisabled || source.hasErrors()">
+    <div class="ccr-errors" *ngIf="source.hasErrors()">
+      <span *ngFor="let error of source.getErrors()">{{error | translate}}</span>
+    </div>
+  </div>
+
+</div>

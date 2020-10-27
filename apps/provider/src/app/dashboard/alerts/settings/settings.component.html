@@ -1,0 +1,9 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+    <h2 fxFlex>{{ 'ALERTS.ACTIVE_ALERTS' | translate: clinic }}</h2>
+  </div>
+</div>
+
+<app-alert-info></app-alert-info>
+
+<app-alert-types-table [source]="source"></app-alert-types-table>

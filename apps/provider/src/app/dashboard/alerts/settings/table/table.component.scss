@@ -1,0 +1,24 @@
+@import 'shared/directed-styles';
+
+.ccr-table {
+  .mat-table {
+    .mat-cell {
+      max-height: 32px;
+    }
+
+    .mat-column-enabled {
+      min-width: 75px;
+      max-width: 75px;
+
+      ccr-popup-description {
+        @include horizontal-margin-right(10px);
+      }
+    }
+    .mat-column-title {
+      flex: 2 !important;
+      .title-text {
+        margin: 0 10px;
+      }
+    }
+  }
+}

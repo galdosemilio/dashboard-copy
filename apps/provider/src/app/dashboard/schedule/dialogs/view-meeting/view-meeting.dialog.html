@@ -1,0 +1,355 @@
+<div matDialogTitle>
+    <div>
+        <span>{{ 'BOARD.SCHEDULE_VIEW_MEETING_TITLE' | translate }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div *ngIf="meeting" mat-dialog-content>
+<div [ngSwitch]="state">
+    <div *ngSwitchCase="'edit'" [formGroup]="form">
+        <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+            <div fxFlex="69%" fxLayout="column" fxLayoutAlign="center space-around" fxLayoutGap="15px">
+                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
+                    <mat-form-field>
+                        <input matInput formControlName="title" [placeholder]="'BOARD.SCHEDULE_SUBJECT' | translate">
+                        <mat-error *ngIf="form.get('title').getError('required')">{{'NOTIFY.ERROR.TITLE_EMPTY' | translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
+                    <mat-form-field *ngIf="meetingTypes && meetingTypes.length">
+                    <mat-select formControlName="meetingTypeId" [placeholder]="'RIGHT_PANEL.MEETING_TYPE' | translate">
+                        <mat-option *ngFor="let type of meetingTypes" [value]="type">{{ type.description }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('meetingTypeId').getError('required')">{{'NOTIFY.ERROR.MEETING_TYPE_EMPTY' | translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                <div fxFlex="49%">
+                    <mat-form-field fxFlex>
+                        <input matInput formControlName="date" readonly="true" (click)="picker.open()"
+                        [min]="now" [matDatepicker]="picker" [placeholder]="'GLOBAL.DATE' | translate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker type="date" #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="49%">
+                    <mat-form-field fxFlex hideRequiredMarker="true">
+                        <input matInput required formControlName="startTime" readonly="true" (click)="pickerStart.open()"
+                        [min]="now" [matDatepicker]="pickerStart" [placeholder]="'BOARD.START_TIME' | translate">
+                        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                        <mat-datepicker type="time" clockStep="5" #pickerStart [matDatepicker]="picker"></mat-datepicker>
+                        <mat-error *ngIf="form.get('startTime').getError('required') || form.get('duration').getError('required')">
+                            {{ 'NOTIFY.ERROR.TIMES_EMPTY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                    <div fxFlex="49%">
+                        <mat-form-field fxFlex>
+                            <mat-select formControlName="duration" [placeholder]="'BOARD.DURATION' | translate">
+                            <mat-option *ngFor="let d of durations" [value]="d.value">
+                                {{ d.viewValue | translate }}
+                            </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="49%" fxLayout="column" fxLayoutAlign="center stretch">
+                        <div *ngIf="editMode === 'recurring'" fxLayoutAlign="start center">
+                            <mat-form-field>
+                                <mat-select #repeat formControlName="repeat"
+                                [placeholder]="'RIGHT_PANEL.REPEAT' | translate"
+                                (selectionChange)="repeatChanged(repeat.value)">
+                                    <mat-option *ngFor="let option of repeatOptions" [value]="option.value">{{ option.viewValue | translate }}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('repeat').getError('required')">{{'NOTIFY.ERROR.REPEAT_EMPTY' | translate}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div
+                        *ngIf="editMode === 'recurring' && form.value?.repeat !== 'never'"
+                        fxLayoutAlign="start center"
+                        fxLayoutGap="7px">
+                            <mat-form-field>
+                                <mat-select #endRepeat formControlName="endRepeat"
+                                [placeholder]="'RIGHT_PANEL.END_REPEAT' | translate"
+                                (selectionChange)="endRepeatChanged(endRepeat.value)">
+                                <mat-option *ngFor="let option of endRepeatOptions" [value]="option.value">
+                                    {{ option.viewValue | translate }}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="ccr-align-right" *ngIf="form.get('endRepeat').value !== 'never'">
+                                <input matInput numberOnly formControlName="endAfter">
+                                <span matSuffix>{{'UNIT.TIMES' | translate}}</span>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div formGroupName="location" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                    <div fxFlex="49%">
+                        <mat-form-field fxFlex>
+                            <input matInput formControlName="streetAddress" [placeholder]="'BOARD.STREET' | translate">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="49%">
+                        <mat-form-field fxFlex>
+                            <input matInput formControlName="city" [placeholder]="'BOARD.CITY' | translate">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div formGroupName="location" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                    <div fxFlex="49%">
+                        <mat-form-field fxFlex>
+                            <input matInput formControlName="state" [placeholder]="'BOARD.STATE' | translate">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="49%">
+                        <mat-form-field fxFlex>
+                            <input matInput formControlName="postalCode" [placeholder]="'BOARD.POSTAL_CODE' | translate">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="29%" fxLayout="column" fxLayoutAlign="start stretch">
+                <div fxLayout="column" fxLayoutAlign="start stretch">
+                    <mat-form-field>
+                        <input matInput [placeholder]="'BOARD.SCHEDULE_ATTENDEES_NO_AMOUNT' | translate" [matAutocomplete]="auto"  [formControl]="searchCtrl">
+                    </mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let account of accounts" (onSelectionChange)="addParticipant(account)">
+                            <p>
+                                {{ account.firstName + ' ' + account.lastName }}
+                                <i>{{ formatAccountType(account.accountType.id) }}</i>
+                            </p>
+                            <small>{{ account.email }}</small>
+                        </mat-option>
+                    </mat-autocomplete>
+                    <ng-container>
+                        <mat-error *ngIf="attendees.length === 0">{{'NOTIFY.ERROR.PARTICIPANTS_EMPTY' | translate}}</mat-error>
+                    </ng-container>
+                </div>
+                <div class="scrollable-v" fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+                    <div
+                    *ngFor="let attendee of attendees"
+                    class="attendee"
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="10px">
+                        <ccr-avatar [account]="attendee.account"  size="messages"></ccr-avatar>
+                        <small fxFlex
+                        *ngIf="currentAccount && currentAccount.id === attendee.account; else defaultName">
+                            {{ 'GLOBAL.YOU' | translate }}
+                        </small>
+                        <ng-template #defaultName>
+                            <small fxFlex>{{ attendee.firstName }} {{ attendee.lastName }}</small>
+                        </ng-template>
+                        <mat-icon
+                        *ngIf="!currentAccount || currentAccount.id !== attendee.account"
+                        (click)="removeParticipant(attendee.account)" class="clickable float-right">close</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngSwitchCase="'edit_mode_select'" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <button
+        (click)="state = 'edit'; editMode = 'single'; disableRecurringControls();"
+        mat-button
+        class="ccr-button"
+        color="primary">
+            {{ 'GLOBAL.EDIT_THIS_MEETING_ONLY' | translate }}
+        </button>
+        <button
+        (click)="state = 'edit'; editMode = 'recurring'; enableRecurringControls();"
+        mat-button
+        class="ccr-button"
+        color="primary">
+            {{ 'GLOBAL.EDIT_ALL_MEETINGS' | translate }}
+        </button>
+    </div>
+    <div *ngSwitchCase="'edit_exit_confirm'">
+        <p [innerHTML]="'BOARD.SCHEDULE_EDIT_EXIT_CONFIRM' | translate" class="notice"></p>
+    </div>
+    <div *ngSwitchCase="'delete'">
+        <p [innerHTML]="'BOARD.SCHEDULE_DELETE_CONFIRM' | translate" class="notice"></p>
+    </div>
+    <div
+    *ngSwitchCase="'delete-recurring'"
+    [formGroup]="deleteRecurringForm"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxLayoutGap="20px">
+        <p [innerHTML]="'BOARD.SCHEDULE_DELETE_CONFIRM' | translate" class="notice"></p>
+        <mat-radio-group formControlName="deleteMode" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+            <mat-radio-button data-cy="schedule-delete-this-meeting" value="single">{{'BOARD.SCHEDULE_DELETE_THIS_MEETING' | translate}}</mat-radio-button>
+            <mat-radio-button data-cy="schedule-delete-this-and-future" value="recurring">{{'BOARD.SCHEDULE_DELETE_THIS_AND_FUTURE' | translate}}</mat-radio-button>
+            <mat-radio-button data-cy="schedule-delete-after" value="recurringAfter">
+                {{ 'BOARD.SCHEDULE_DELETE_AFTER' | translate }}
+            </mat-radio-button>
+        </mat-radio-group>
+        <ccr-date-input [min]="today" [placeholder]="'GLOBAL.DATE' | translate" formControlName="after"></ccr-date-input>
+    </div>
+    <div *ngSwitchDefault>
+        <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+            <div fxFlex="69%" fxLayout="column" fxLayoutAlign="start space-around" fxLayoutGap="25px">
+                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
+                    <h4>{{ 'BOARD.SCHEDULE_SUBJECT' | translate }}</h4>
+                    <p>{{ meeting.title }}</p>
+                </div>
+                <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
+                    <h4>{{ 'RIGHT_PANEL.MEETING_TYPE' | translate }}</h4>
+                    <p>{{ meeting.type.description | translate }}</p>
+                </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="35px">
+                    <div fxFlex="49%">
+                        <h4>{{ 'GLOBAL.HOUR' | translate }}</h4>
+                        <p>
+                            {{ meeting.date | amDateFormat:'ddd, MMM D' }}
+                            <span class="hour">{{ 'GLOBAL.AT_HOUR' | translate }}</span>
+                            {{ meeting.date | amDateFormat:'h:mm a' }}
+                        </p>
+                    </div>
+
+                    <div fxFlex="49%">
+                        <h4>{{ 'BOARD.DURATION' | translate }}</h4>
+                        <p>{{ meetingDuration }}</p>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="35px">
+                <div fxFlex="49%" *ngIf="meeting.location">
+                    <h4>{{ 'BOARD.ADDRESS' | translate }}</h4>
+                    <p>{{ meeting.location.streetAddress }}, {{ meeting.location.city }} ({{ meeting.location.country }})</p>
+                </div>
+                <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
+                    <h4>{{ 'BOARD.FREQUENCY' | translate }}</h4>
+                    <p *ngIf="meeting.recurring">{{'BOARD.RECURRING' | translate}}</p>
+                    <p *ngIf="!meeting.recurring">{{'BOARD.SINGLE_DAY' | translate}}</p>
+                </div>
+                </div>
+
+                <div *ngIf="meeting.creator" fxLayout="column" fxLayoutAlign="center start">
+                    <h4>{{ 'BOARD.SCHEDULE_MEETING_CREATOR' | translate }}</h4>
+                    <p>{{ meeting.creator.firstName }} {{ meeting.creator.lastName }}</p>
+                </div>
+            </div>
+            <div fxFlex="29%" fxLayout="column" fxLayoutAlign="start stretch">
+                <div>
+                    <h4>{{ 'BOARD.SCHEDULE_ATTENDEES_NO_AMOUNT' | translate }}</h4>
+                </div>
+                <div class="scrollable-v" fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+                    <div
+                    *ngFor="let attendee of attendees"
+                    class="attendee"
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="10px">
+                        <ccr-avatar [account]="attendee.account"  size="messages"></ccr-avatar>
+                        <div fxFlex fxLayout="column" fxLayoutGap="3px">
+                            <small
+                            *ngIf="currentAccount && currentAccount.id === attendee.account; else defaultName">
+                                {{ 'GLOBAL.YOU' | translate }}
+                            </small>
+                            <ng-template #defaultName>
+                                <small fxFlex>{{ attendee.firstName }} {{ attendee.lastName }}</small>
+                            </ng-template>
+                            <ccr-attendance-selector
+                                *ngIf="!isFuture"
+                                [meeting]="meeting"
+                                [attendanceStatus]="attendee.attendance.status"
+                                (change)="attendanceChange(attendee, $event)">
+                            </ccr-attendance-selector>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<mat-dialog-actions>
+<div [ngSwitch]="state">
+    <div *ngSwitchCase="'edit'">
+        <button
+        (click)="onSubmit()"
+        [disabled]="form.invalid || isLoading || !attendees || !attendees.length"
+        mat-button
+        class="ccr-button"
+        color="primary">
+            {{ 'GLOBAL.SAVE' | translate }}
+        </button>
+        <button (click)="state = 'edit_exit_confirm'" [disabled]="isLoading" mat-button class="ccr-button">
+            {{ 'GLOBAL.CANCEL' | translate }}
+        </button>
+    </div>
+    <div *ngSwitchCase="'edit_exit_confirm'">
+        <button [disabled]="isLoading" (click)="resetForm(meeting)" mat-button class="ccr-button">
+            {{ 'GLOBAL.YES' | translate }}
+        </button>
+        <button [disabled]="isLoading" (click)="state = 'edit'" mat-button class="ccr-button">
+            {{ 'GLOBAL.NO' | translate }}
+        </button>
+    </div>
+    <div *ngSwitchCase="'delete'">
+        <button (click)="deleteMeeting()" mat-button class="ccr-button">
+            {{ 'GLOBAL.YES' | translate }}
+        </button>
+        <button (click)="state = 'view'" mat-button class="ccr-button">
+            {{ 'GLOBAL.NO' | translate }}
+        </button>
+    </div>
+    <div *ngSwitchCase="'edit_mode_select'">
+        <button (click)="state = 'view'" mat-button class="ccr-button">
+            {{ 'GLOBAL.CANCEL' | translate }}
+        </button>
+    </div>
+    <div *ngSwitchCase="'delete-recurring'">
+        <button
+        (click)="deleteMeeting('recurring')"
+        [disabled]="deleteRecurringForm.invalid"
+        mat-button
+        class="ccr-button"
+        color="primary">
+            {{ 'GLOBAL.DELETE' | translate }}
+        </button>
+        <button (click)="state = 'view'" mat-button class="ccr-button">
+            {{ 'GLOBAL.CANCEL' | translate }}
+        </button>
+    </div>
+    <div *ngSwitchDefault>
+        <button
+        *ngIf="isFuture"
+        [disabled]="isLoading"
+        (click)="meeting.recurring ? state = 'edit_mode_select' : state = 'edit'; editMode = 'single'; disableRecurringControls();"
+        mat-button
+        class="ccr-button"
+        color="primary">
+            {{ 'GLOBAL.EDIT' | translate }}
+        </button>
+        <button
+        *ngIf="isFuture"
+        [disabled]="isLoading"
+        (click)="state = meeting && meeting.recurring ? 'delete-recurring' : 'delete'"
+        mat-button
+        class="ccr-button">
+            {{ 'GLOBAL.DELETE' | translate }}
+        </button>
+        <button mat-button class="ccr-button" matDialogClose>
+            {{ 'GLOBAL.CLOSE' | translate }}
+        </button>
+    </div>
+</div>
+</mat-dialog-actions>

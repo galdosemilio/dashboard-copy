@@ -1,0 +1,27 @@
+.ccr-snack-success {
+  background-color: mat-color($ccr-foreground, success) !important;
+  .mat-simple-snackbar {
+    color: mat-color($ccr-background, success);
+  }
+}
+
+.ccr-snack-info {
+  background-color: mat-color($ccr-foreground, info) !important;
+  .mat-simple-snackbar {
+    color: mat-color($ccr-background, info);
+  }
+}
+
+.ccr-snack-warning {
+  background-color: mat-color($ccr-foreground, warning) !important;
+  .mat-simple-snackbar {
+    color: mat-color($ccr-background, warning);
+  }
+}
+
+.ccr-snack-error {
+  background-color: mat-color($ccr-foreground, error) !important;
+  .mat-simple-snackbar {
+    color: mat-color($ccr-background, error);
+  }
+}

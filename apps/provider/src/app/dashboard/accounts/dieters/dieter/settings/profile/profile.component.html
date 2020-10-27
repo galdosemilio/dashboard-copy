@@ -1,0 +1,19 @@
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+  <app-dieter-form #dieter bindForm="dieter" [dieterId]="dieterId"></app-dieter-form>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-raised-button class="ccr-button" color="primary">
+      <mat-icon>check</mat-icon> {{'BOARD.USER_UPDATE' | translate}}
+    </button>
+
+    <button (click)="resetPassword()" class="ccr-icon-button" color="primary" mat-button type="button">
+      <mat-icon>lock</mat-icon> {{'BOARD.SEND_PASSWORD_RESET' | translate}}
+    </button>
+  </div>
+</form>
+
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading || dieter.isLoading">
+  <mat-spinner></mat-spinner>
+</div>

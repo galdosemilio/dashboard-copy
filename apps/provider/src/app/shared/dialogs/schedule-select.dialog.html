@@ -1,0 +1,30 @@
+<div matDialogTitle>
+  <div>
+    <span>{{ data.title | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content class="select-schedule">
+  <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign=" stretch">
+    <button mat-button color="primary" class="ccr-icon-button" (click)="selectDefault()">
+      {{ data.button | translate }}
+    </button>
+
+    <div class="search-wrapper">
+      <ccr-icon-search [fill]="fill" [size]="20" [stroke]="5"></ccr-icon-search>
+      <input type="text" class="search-box"
+        [matAutocomplete]="auto" [formControl]="searchCtrl"
+        [placeholder]="data.onlyProviders ? ('BOARD.SEARCH_COACH' | translate) : ('BOARD.SEARCH_COACH_OR_PATIENT' | translate)">
+    </div>
+  </div>
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let account of accounts" (onSelectionChange)="select(account)">
+      <span>{{ account.firstName + ' ' + account.lastName }}</span>
+      <small>{{ account.email }}</small>
+    </mat-option>
+  </mat-autocomplete>
+</mat-dialog-content>

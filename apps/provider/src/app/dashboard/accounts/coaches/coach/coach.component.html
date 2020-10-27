@@ -1,0 +1,66 @@
+<div class="ccr-heading" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
+    <h2>{{ 'GLOBAL.COACHES' | translate }}</h2>
+    <a mat-button color="primary" class="ccr-button" routerLink="/accounts/coaches">
+      {{ 'BOARD.BACK_LIST' | translate }}
+    </a>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
+    <div class="ccr-name" fxFlex="auto" fxLayout="row" fxLayoutAlign="start">
+      <ccr-avatar size="bigger" [account]="coach?.id"></ccr-avatar>
+      <h2>{{ coach?.firstName | capitalize }} {{ coach?.lastName | capitalize }}</h2>
+    </div>
+    <div fxFlex="nogrow" fxFlex.xs="grow"
+    fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+    fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
+      <ccr-call-control [targets]="[ coach ]"></ccr-call-control>
+    </div>
+  </div>
+</div>
+
+<div
+class="ccr-tabs"
+fxFlex="nogrow"
+fxLayout="row"
+fxLayoutAlign=" stretch"
+data-cy="coachProfileMenu">
+  <a
+  [class.active]="section === 'profile'"
+  [routerLink]="['.', { s: 'profile' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center">
+    {{ 'GLOBAL.PROFILE' | translate }}
+  </a>
+  <a
+  [class.active]="section === 'clinics'"
+  [routerLink]="['.', { s: 'clinics' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center">
+    {{ 'GLOBAL.CLINICS' | translate }}
+  </a>
+  <a
+  [class.active]="section === 'calls'"
+  [routerLink]="['.', { s: 'calls' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center">
+    {{ 'REPORTS.COMMS_CALLS' | translate }}
+  </a>
+</div>
+
+<div class="ccr-subcomponent" [ngSwitch]="section">
+    <div *ngSwitchCase="'profile'">
+      <app-coach-profile></app-coach-profile>
+    </div>
+
+    <div *ngSwitchCase="'clinics'">
+      <ccr-account-associations [showPermissions]="true"></ccr-account-associations>
+    </div>
+
+    <div *ngSwitchCase="'calls'">
+      <app-reports-calls [account]="coachId"></app-reports-calls>
+    </div>
+</div>

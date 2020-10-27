@@ -1,0 +1,60 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+    <h3>{{ 'GLOBAL.MFA' | translate }}</h3>
+
+    <p>{{ 'PROFILE.MFA.MFA_ABOUT' | translate }}</p>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-form-field fxFlex="40%">
+        <mat-select
+        [placeholder]="'PROFILE.MFA.MFA_OPTIONS' | translate"
+        formControlName="channel"
+        required>
+            <mat-option *ngFor="let channel of channels" [value]="channel.code">
+                {{ channel.displayName | translate }}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+
+        <ccr-popup-description
+        [description]="'PROFILE.MFA.MFA_OPTIONS_ABOUT' | translate"
+        [title]="'PROFILE.MFA.MFA_OPTIONS' | translate"></ccr-popup-description>
+    </div>
+
+    <div [ngSwitch]="mode">
+        <div *ngSwitchCase="'delete'" fxLayout="column" fxLayoutAlign="start stretch">
+            <p [innerHTML]="'PROFILE.MFA.DISABLE_INFO' | translate"></p>
+
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+                <button
+                [disabled]="isLoading"
+                (click)="disableChannel()"
+                class="ccr-button"
+                color="primary"
+                mat-button>{{ 'GLOBAL.CONTINUE' | translate }}</button>
+                <button
+                [disabled]="isLoading"
+                (click)="onCancel()"
+                class="ccr-button"
+                mat-button>{{ 'GLOBAL.CANCEL' | translate }}</button>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'intro'" fxLayout="column" fxLayoutAlign="start stretch">
+            <p [innerHTML]="'PROFILE.MFA.SET_UP_INFO' | translate"></p>
+
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+                <button
+                [disabled]="isLoading"
+                (click)="onAcceptIntro()"
+                class="ccr-button"
+                color="primary"
+                mat-button>{{ 'GLOBAL.CONTINUE' | translate }}</button>
+                <button
+                [disabled]="isLoading"
+                (click)="onCancel()"
+                class="ccr-button"
+                mat-button>{{ 'GLOBAL.CANCEL' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

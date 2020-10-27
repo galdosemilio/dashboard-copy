@@ -1,0 +1,110 @@
+<div *ngIf="!isLoading" (scroll)="onScroll($event)">
+  <h3>
+    <mat-icon>people</mat-icon>
+    <span>{{'RIGHT_PANEL.FOR_THIS_PATIENT' | translate}}</span>
+  </h3>
+
+  <div>
+    <h4 matSubheader>
+      <mat-icon class="font-icon" fontSet="fas" fontIcon="fa-tag"></mat-icon>
+      <span>{{ 'RIGHT_PANEL.PHASES' | translate }}</span>
+    </h4>
+
+    <div fxLayout="row" fxLayoutAlign="stretch stretch">
+      <app-rightpanel-phases fxFlex></app-rightpanel-phases>
+    </div>
+  </div>
+
+  <h4 matSubheader>
+    <mat-icon>notifications_active</mat-icon>
+    <span>{{ 'RIGHT_PANEL.RECENT_ALERTS' | translate }}</span>
+  </h4>
+
+  <div class="items-none" *ngIf="alerts.length === 0">
+    <span>{{'RIGHT_PANEL.NO_ALERTS' | translate}}</span>
+  </div>
+
+  <mat-list *ngIf="alerts.length">
+    <mat-list-item *ngFor="let alert of alerts; let i = index">
+      <app-rightpanel-alert [alert]="alert" (dismissed)="alerts.splice(i, 1)"></app-rightpanel-alert>
+    </mat-list-item>
+  </mat-list>
+
+  <ng-container *ngIf="isScheduleEnabled">
+    <h4 matSubheader>
+      <mat-icon>event</mat-icon>
+      <span>{{ 'BOARD.UPCOMING_SCHEDULE' | translate }}</span>
+    </h4>
+
+    <div class="items-none" *ngIf="dateSections.length === 0">
+      <span>{{'RIGHT_PANEL.NO_MEETINGS' | translate}}</span>
+    </div>
+
+    <mat-list *ngIf="dateSections.length">
+      <ng-container *ngFor="let section of dateSections; let lastDate = last;">
+        <mat-list-item *ngFor="let meeting of section.meetings; let lastMeet = last">
+          <div class="item reminder-item no-pointer" [class.last]="lastDate && lastMeet">
+            <div class="item-heading">
+              <mat-icon>stop</mat-icon>
+              <span>{{ meeting.title }}</span>
+            </div>
+            <div class="item-body">
+              <div>
+                <mat-icon>access_time</mat-icon>
+                <span>{{ section.date }}</span>
+              </div>
+              <div>
+                <div>
+                  {{ meeting.date | ccrUtc | amDateFormat:'h:mm a'}}
+                  &nbsp;-&nbsp;
+                  {{ meeting.endTime | ccrUtc | amDateFormat:'h:mm a'}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+  </ng-container>
+
+  <div *ngIf="shouldShowNotes">
+    <h4 matSubheader>
+      <mat-icon>event_note</mat-icon>
+      <span>{{ 'BOARD.NOTES' | translate }}</span>
+      <ccr-popup-description
+      class="sidebar-header-placement"
+      [title]="'BOARD.NOTES' | translate"
+      [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_NOTES_DESCRIPTION' | translate"
+      ></ccr-popup-description>
+    </h4>
+
+    <div class="items-create" fxLayout="column" fxLayoutGap="10px">
+      <button
+      *ngIf="shouldShowDaysheetButton"
+      (click)="showDaysheetDialog()"
+      class="ccr-icon-button"
+      color="primary"
+      mat-button
+      type="buttom">
+        <mat-icon>add</mat-icon>
+        {{ 'BOARD.ADD_NEW_DAYSHEET' | translate }}
+      </button>
+      <button
+      [disabled]="isSearchingNotes"
+      (click)="showNoteDialog()"
+      class="ccr-icon-button"
+      color="primary"
+      mat-button
+      type="button">
+        <mat-icon>add</mat-icon>
+        {{'BOARD.ADD_NEW_NOTE' | translate}}
+      </button>
+    </div>
+
+    <app-rightpanel-notes-container [refresh$]="notesRefresh$"></app-rightpanel-notes-container>
+  </div>
+</div>
+
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

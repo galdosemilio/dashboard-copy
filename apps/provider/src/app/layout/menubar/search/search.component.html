@@ -1,0 +1,17 @@
+<div>
+  <ccr-icon-search [fill]="fill" [size]="20" [stroke]="5"></ccr-icon-search>
+  <input type="text" class="search-box" [placeholder]="'MENU.SEARCH' | translate" [matAutocomplete]="search"
+    [formControl]="searchCtrl" data-cy="account-search-box">
+
+  <mat-autocomplete #search="matAutocomplete">
+    <mat-option *ngFor="let account of accounts" (onSelectionChange)="select(account)" [class.noAccess]="(!canAccessPhi && account.accountType.id === '3') || (!admin && account.accountType.id === '2')">
+      <app-search-result-item
+      xFlex
+      fxLayout="row"
+      fxFlexFill
+      [account]="account"
+      [canAccessPatient]="canAccessPhi && viewAll"
+      [canCall]="account.id !== currentAccount.id"></app-search-result-item>
+    </mat-option>
+  </mat-autocomplete>
+</div>

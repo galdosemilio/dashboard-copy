@@ -1,0 +1,34 @@
+
+<div class="call-control" xFlex fxLayout="column" fxLayoutAlign="center center">
+  <button mat-mini-fab (click)="toggleMicrophone$.next()"
+    [disabled]="callState.callId === '' || !callState.hasAudioDeviceAccess">
+    <mat-icon *ngIf="callState.isMicrophoneEnabled">mic</mat-icon>
+    <mat-icon *ngIf="!callState.isMicrophoneEnabled">mic_off</mat-icon>
+  </button>
+</div>
+<div class="call-control" xFlex fxLayout="column" fxLayoutAlign="center center">
+  <button mat-mini-fab (click)="toggleCamera$.next()"
+    [class.disabled]="callState.callId === '' || !callState.hasVideoDeviceAccess">
+    <mat-icon *ngIf="callState.isCameraEnabled">videocam</mat-icon>
+    <mat-icon *ngIf="!callState.isCameraEnabled">videocam_off</mat-icon>
+    <ccr-popup-description
+    *ngIf="!callState.hasVideoDeviceAccess"
+    [title]="'CALL.CAMERA_ACCESS_BLOCKED' | translate"
+    [description]="'CALL.CAMERA_ACCESS_BLOCKED_HELPTEXT' | translate"
+    [showIntro]="false"
+    [trigger]="videoPopupTrigger">
+    </ccr-popup-description>
+  </button>
+</div>
+<div class="call-control" xFlex fxLayout="column" fxLayoutAlign="center center">
+  <button mat-mini-fab (click)="onOpenCallSettings()"
+    [disabled]="callState.callId === ''">
+    <mat-icon>settings</mat-icon>
+  </button>
+</div>
+<div class="call-control" xFlex fxLayout="column" fxLayoutAlign="center center">
+  <button mat-mini-fab (click)="onHangUp()"
+  [disabled]="callState.callId === ''">
+    <mat-icon>call_end</mat-icon>
+  </button>
+</div>

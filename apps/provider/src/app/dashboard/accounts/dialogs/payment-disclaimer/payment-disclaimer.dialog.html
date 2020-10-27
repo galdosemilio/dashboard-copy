@@ -1,0 +1,19 @@
+
+<div matDialogTitle>
+  <div>
+    <span>
+      <span >{{'BOARD.PATIENT_PAYMENT' | translate}}</span>
+    </span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+    <p>{{ 'BOARD.PATIENT_PAYMENT_DESCRIPTION' | translate }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button class="ccr-icon-button" (click)="onSubmit()">
+    <mat-icon>check</mat-icon> {{ 'GLOBAL.OK' | translate }}
+  </button>
+</mat-dialog-actions>

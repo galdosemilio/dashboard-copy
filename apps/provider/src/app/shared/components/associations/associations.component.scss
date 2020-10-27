@@ -1,0 +1,6 @@
+@import 'variables';
+
+.disabled {
+  color: mat-color($ccr-background, tools) !important;
+  cursor: default !important;
+}

@@ -1,0 +1,74 @@
+@import 'variables';
+
+app-dialog-rpm-status {
+  mat-form-field {
+    width: 100%;
+  }
+
+  mat-checkbox {
+    .mat-checkbox-layout {
+      display: inline;
+      line-height: 150%;
+      .mat-checkbox-label {
+        white-space: normal;
+      }
+    }
+  }
+
+  .notice {
+    &.create {
+      font-weight: bold;
+      text-align: center;
+    }
+    &.entry {
+      font-weight: bold;
+    }
+
+    &.no-entry {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    &.performed-by {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    &.remove-entry {
+      text-align: center;
+    }
+
+    &.rpm-cta {
+      color: var(--primary, mat-color($ccr-primary));
+      cursor: pointer;
+      font-weight: normal !important;
+      text-align: center;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .rpm-help-icon {
+    cursor: pointer;
+    margin: 0 10px;
+  }
+
+  .separator {
+    border: 1px solid var(--bg-panel, mat-color($ccr-background, chart));
+    height: 0;
+    margin: 15px auto;
+    width: 90%;
+  }
+
+  .user {
+    &-container {
+      border: 1px solid var(--bg-panel, mat-color($ccr-background, chart));
+      margin: 0 auto;
+      max-width: 350px;
+      padding: 15px;
+      width: 100%;
+    }
+  }
+}

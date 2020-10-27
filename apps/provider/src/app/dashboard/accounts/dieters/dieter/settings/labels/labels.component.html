@@ -1,0 +1,20 @@
+
+<p class="ccr-hint">
+  {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.PHASES_LABELS' | translate }}
+
+  <ccr-popup-description
+    [title]="'GLOBAL.PHASES_LABELS' | translate"
+    [description]="'GLOBAL.PHASES_LABELS_DESCRIPTION' | translate"
+  ></ccr-popup-description>
+</p>
+
+<mat-form-field floatPlaceholder="never" *ngIf="clinics.length > 1">
+  <mat-select [(ngModel)]="clinic" (selectionChange)="selectClinic(clinic)" [placeholder]="'BOARD.CLINIC' | translate">
+    <mat-option *ngFor="let clinic of clinics" [value]="clinic.value">{{ clinic.viewValue }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<app-labels-table [source]="source"></app-labels-table>
+
+<!-- NOTE: packages have a fixed limit of 10 -->
+<ccr-paginator #paginator [length]="source.total" [pageIndex]="0" [pageSize]="10"></ccr-paginator>

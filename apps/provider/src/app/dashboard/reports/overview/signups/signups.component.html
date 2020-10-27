@@ -1,0 +1,20 @@
+<div class="report-heading">
+  <mat-icon>people</mat-icon>
+
+  <h3>
+    {{ 'REPORTS.SIGNUPS_TITLE' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.SIGNUPS_TITLE' | translate"
+    [description]="'REPORTS.SIGNUPS_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+
+  <button mat-button class="ccr-align-center"
+  [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()">
+    {{ 'REPORTS.EXPORT_CSV' | translate }}
+    <mat-icon>file_download</mat-icon>
+  </button>
+</div>
+
+<app-reports-signups-chart [source]="source"></app-reports-signups-chart>

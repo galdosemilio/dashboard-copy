@@ -1,0 +1,10 @@
+.mat-header-cell,
+.mat-cell {
+  justify-content: center !important;
+}
+
+.mat-header-cell {
+  &.mat-column-date {
+    justify-content: start !important;
+  }
+}

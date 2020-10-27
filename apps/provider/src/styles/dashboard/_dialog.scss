@@ -1,0 +1,241 @@
+@import 'shared/directed-styles';
+
+// dialogs on mobile
+.cdk-overlay-pane.mat-datepicker-dialog {
+  @media #{$small-and-down} {
+    max-width: 90vw;
+  }
+}
+.cdk-overlay-pane.ccr-walkthrough-dialog {
+  max-width: 100vw !important;
+
+  .mat-dialog-content {
+    max-height: 100% !important;
+    overflow: auto;
+  }
+
+  @media #{$small-and-down} {
+    height: 100vh !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+}
+.cdk-overlay-pane.ccr-full-dialog {
+  max-width: 850px !important;
+  @media #{$small-and-down} {
+    height: 100vh !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+}
+.cdk-overlay-pane:not(.mat-datepicker-dialog) {
+  @media #{$small-and-down} {
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.mat-dialog-container {
+  margin: 0 auto; // mat-dialog-separator requirement
+  overflow: visible !important;
+  max-width: 100vw !important;
+  @media #{$small-and-down} {
+    max-width: 100vw !important;
+  }
+  .mat-dialog-separator {
+    height: 25px;
+    background-color: var(--accent);
+    border-radius: 15px;
+    margin: 0 -35px;
+
+    &.extra-bottom-margin {
+      margin-bottom: 24px;
+    }
+  }
+  .mat-dialog-content {
+    padding-top: 20px;
+    margin-bottom: 5px;
+    @media #{$small-and-down} {
+      max-height: calc(100% - 140px);
+    }
+
+    .mat-tab-label {
+      height: 36px;
+      padding: 0 12px;
+    }
+
+    a,
+    a:visited {
+      color: mat-color($ccr-foreground, text);
+    }
+
+    .search-wrapper {
+      width: 100%;
+      position: relative;
+      > ccr-icon-search {
+        position: absolute;
+        right: 12px;
+        top: 5px;
+      }
+      .search-box {
+        border: 1px solid var(--base, mat-color($ccr-foreground, base));
+        width: calc(100% - 57px);
+      }
+    }
+
+    .mat-list-item {
+      .mat-icon {
+        color: mat-color($ccr-foreground, icon);
+      }
+    }
+  }
+}
+
+.ccr-confirm,
+.ccr-prompt {
+  h3.mat-dialog-title {
+    margin: 0;
+  }
+  .mat-dialog-content {
+    padding: 10px 24px 5px;
+  }
+  .mat-dialog-actions:last-child {
+    margin-bottom: -20px;
+  }
+}
+
+.ccr-dialog {
+  .mat-dialog-title {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: -8px 0 15px 0;
+    user-select: none;
+    > div:first-child {
+      display: flex;
+      align-items: center;
+      > span {
+        @include horizontal-padding-left(12px);
+      }
+    }
+    span {
+      text-transform: uppercase;
+    }
+    [matdialogclose] {
+      background: none;
+      border: 0;
+      cursor: pointer;
+      font-size: 12px;
+      outline: none;
+      mat-icon {
+        font-size: 35px;
+      }
+    }
+  }
+  .mat-dialog-content {
+    &.select-schedule {
+      @media #{$medium-and-up} {
+        .mat-form-field {
+          width: 275px;
+        }
+      }
+      @media #{$small-and-down} {
+        .mat-form-field {
+          width: 240px;
+        }
+      }
+    }
+  }
+  .ccr-category {
+    display: flex;
+    line-height: 2rem;
+    padding-bottom: 20px;
+    @media #{$small-and-down} {
+      font-size: 80%;
+    }
+    span {
+      flex-grow: 1;
+    }
+    mat-radio-group {
+      display: flex;
+      flex-grow: 2;
+      mat-radio-button {
+        flex: 1;
+      }
+    }
+  }
+  .mat-form-field {
+    margin-bottom: 0 !important;
+  }
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.ccr-plain {
+  .mat-dialog-content {
+    @media #{$small-and-down} {
+      max-height: calc(100% - 75px);
+    }
+    button {
+      text-align: left;
+    }
+  }
+}
+.ccr-lang-dialog {
+  min-width: 350px;
+  .mat-button {
+    img {
+      width: 30px;
+      height: 30px;
+      @include horizontal-margin-right(10px);
+    }
+  }
+  .lang-native-name {
+    @include horizontal-margin-right(5px);
+  }
+}
+
+.grid-dialog {
+  &-highlight {
+    background-color: #eee;
+    width: 100%;
+    height: 100%;
+    @media #{$medium-and-down} {
+      font-size: 0.75em;
+    }
+  }
+
+  &-tile-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-tile-padding-sm {
+    p {
+      padding: 10px;
+    }
+  }
+}
+
+.ccr-grid-dialog {
+  .mat-grid-list {
+    min-width: 500px;
+  }
+}
+
+.sz {
+  &-md-13 {
+    @media #{$medium-and-down} {
+      font-size: 13px;
+    }
+  }
+  &-md-14 {
+    @media #{$medium-and-down} {
+      font-size: 14px;
+    }
+  }
+}

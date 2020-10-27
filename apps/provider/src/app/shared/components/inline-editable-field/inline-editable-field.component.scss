@@ -1,0 +1,32 @@
+ccr-inline-editable-field {
+  p {
+    margin: 0;
+  }
+
+  .ccr-inline-edit-icon-container {
+    .ccr-inline-edit-icon {
+      display: none;
+    }
+
+    &:hover {
+      .ccr-inline-edit-icon {
+        display: block;
+      }
+    }
+  }
+
+  .ccr-input-container {
+    width: 100%;
+  }
+
+  div.mat-form-field-wrapper {
+    padding-top: 0.75em !important;
+    padding-bottom: 0.75em !important;
+    div.mat-form-field-flex {
+      div.mat-form-field-infix {
+        margin: 0 !important;
+        border-top: none !important;
+      }
+    }
+  }
+}

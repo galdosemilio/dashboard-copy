@@ -1,0 +1,57 @@
+<ccr-datasource-overlay class="ccr-table" [source]="datasource">
+  <div class="ccr-edit-table">
+    <mat-table [dataSource]="datasource">
+      <ng-container cdkColumnDef="name">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" class="clickable" (click)="onDisplayForm(row)">
+          <span>{{ 'BOARD.NAME' | translate }}</span>
+          <div class="edit-icon-container">
+            {{ row.name }}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="isActive">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.STATUS' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" class="clickable" (click)="onDisplayForm(row)">
+          <span>{{ 'BOARD.STATUS' | translate }}</span>
+          {{ row.isActive ? ('LIBRARY.FORMS.ACTIVE' | translate) : ('LIBRARY.FORMS.INACTIVE' | translate) }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="addendum">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.ADDENDUM_PERMITTED' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxFlex.xs="grow" class="clickable" (click)="onDisplayForm(row)">
+          <span>{{ 'LIBRARY.FORMS.ADDENDUM_PERMITTED' | translate }}</span>
+          {{ row.allowAddendum ? ('GLOBAL.YES' | translate ) : ('GLOBAL.NO' | translate) }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="maximumSubmissions">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.MAX_SUBMISSIONS' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxFlex.xs="grow" class="clickable" (click)="onDisplayForm(row)">
+          <span>{{ 'LIBRARY.FORMS.MAX_SUBMISSIONS' | translate }}</span>
+          {{ row.maximumSubmissions === 1 ? ('LIBRARY.FORMS.JUST_ONE' | translate) : ('LIBRARY.FORMS.UNLIMITED' | translate) }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="actions">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.ACTIONS' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
+          <mat-icon (click)="onViewFormSubmissions(row)" [matTooltip]="'LIBRARY.FORMS.VIEW_ANSWERS_TOOLTIP' | translate">view_list</mat-icon>
+          <mat-icon (click)="onFillForm(row)" [matTooltip]="'LIBRARY.FORMS.FILL_TOOLTIP' | translate">ballot</mat-icon>
+          <mat-icon (click)="onShowForm(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.FORMS.EDIT_TOOLTIP' | translate">launch</mat-icon>
+          <mat-icon (click)="onEditName(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.FORMS.EDIT_NAME' | translate">edit</mat-icon>
+          <mat-icon (click)="onDeleteForm(row)" [matTooltip]="'LIBRARY.FORMS.DELETE_FORM' | translate">delete</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+      <mat-row fxLayoutWrap
+        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+      ></mat-row>
+    </mat-table>
+  </div>
+
+</ccr-datasource-overlay>

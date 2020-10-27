@@ -1,0 +1,29 @@
+<div matDialogTitle>
+    <div>
+        <span>
+        <span >{{ 'ASSOCIATIONS.ADD_CLINIC_ASSOCIATION' | translate }}</span>
+        </span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <ccr-organization-search [permissions]="permissions" (select)="onSelectOrg($event)"></ccr-organization-search>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button
+    [disabled]="form.invalid"
+    (click)="onSubmit()"
+    class="ccr-icon-button"
+    color="primary"
+    mat-button>
+        <mat-icon>check</mat-icon> {{ 'ASSOCIATIONS.ASSOCIATE' | translate }}
+    </button>
+
+    <button mat-button class="ccr-icon-button" matDialogClose>
+        <mat-icon>close</mat-icon> {{ 'GLOBAL.CLOSE' | translate }}
+    </button>
+</mat-dialog-actions>

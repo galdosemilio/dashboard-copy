@@ -1,0 +1,17 @@
+<div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="space-evenly" class="file-explorer-content">
+    <strong class="file-explorer-content-title">{{ content.name | maxChars:60 }}</strong>
+    <div class="file-explorer-content-header" fxLayout="row" fxLayoutGap="1%" fxLayoutAlign="start">
+        <div fxLayout="column" fxLayoutAlign="center center" fxFlex="60px">
+            <mat-icon class="file-explorer-content-header-icon" [svgIcon]="content.icon.svgIcon" [fontSet]="content.icon.set" [fontIcon]="content.icon.name">
+                {{ content.icon.set ? '' : content.icon.name }}
+            </mat-icon>
+        </div>
+        <div class="file-explorer-content-header-metadata" fxLayout="column" fxLayoutAlign="center">
+            <strong>
+                <span class="type">{{ content.type.name | translate }}</span>
+                <span class="size" *ngIf="content.metadata && content.metadata.size"> - {{ content.metadata.size | ccrKilobytes }} {{ 'GLOBAL.KILOBYTES_SHORT' | translate }}</span>
+            </strong>
+            <span class="created-at">{{ 'LIBRARY.CONTENT.CREATED' | translate }}: {{ content.createdAt | amDateFormat:'ddd LL @ hh:mm A' }}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+  <div class="note-container" fxFlex fxLayout="column">
+    <div (click)="toggleCompleteNote()" [ngClass]="{'item-body': true, 'clickable': noteHasOverflow(note.internalNote)}">
+      {{ !note.internalNote ? ('BOARD.NO_MESSAGE' | translate) : (note.internalNote | maxChars: maxChars) }}
+    </div>
+    <div fxFlex fxLayout="row" dir="rtl" class="item-info">
+      <mat-icon  *ngIf="note?.isDeletable" (click)="onDeleteNote()" class="clickable">delete</mat-icon>
+      <div>
+        <span>{{ note.providerName }}</span>
+        <span>{{ note.consultationTime | amDateFormat:'ddd, MMM D, YYYY h:mm a' }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

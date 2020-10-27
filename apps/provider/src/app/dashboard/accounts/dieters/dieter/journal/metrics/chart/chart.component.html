@@ -1,0 +1,45 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayoutWrap fxLayoutGap="2%">
+    <mat-form-field fxFlex="49%" fxFlex.xs="grow"
+    class="ccr-align-center">
+        <mat-select [(ngModel)]="source.metric" (selectionChange)="refresh()"
+        [placeholder]="'BOARD.MEASURE' | translate">
+        <mat-option *ngFor="let type of metrics" [value]="type.value"
+        class="ccr-align-center">
+            {{ type.viewValue | translate | uppercase }}
+        </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field fxFlex="49%" fxFlex.xs="grow"
+    class="ccr-align-center">
+      <mat-select
+      [placeholder]="'BOARD.VIEW_BY' | translate"
+      [(ngModel)]="timeframe" (selectionChange)="refresh()">
+        <mat-option *ngFor="let view of viewby" [value]="view.value"
+        class="ccr-align-center">
+          {{ view.viewValue | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
+    <date-navigator
+    [timeframe]="timeframe"
+    [date]="dates.current"
+    (selectedDate)="updateDates($event)"
+    ></date-navigator>
+
+    <ccr-datasource-overlay class="ccr-container" [source]="source">
+    <canvas *ngIf="chart && !source.hasErrors()" baseChart
+        width="500" height="400"
+        [chartType]="chart.type"
+        [datasets]="chart.datasets"
+        [labels]="chart.labels"
+        [options]="chart.options"
+        [legend]="chart.legend"
+        [colors]="chart.colors"
+    ></canvas>
+    </ccr-datasource-overlay>
+</div>

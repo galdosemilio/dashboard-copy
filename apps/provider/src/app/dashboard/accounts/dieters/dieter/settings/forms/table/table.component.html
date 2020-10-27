@@ -1,0 +1,59 @@
+<div class="ccr-edit-table">
+    <mat-table [dataSource]="source">
+        <ng-container cdkColumnDef="formName">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.FORM_NAME' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'BOARD.NAME' | translate }}</span>
+                {{ row.form.name }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="organization">
+            <mat-header-cell *cdkHeaderCellDef>
+                {{ 'BOARD.CLINIC' | translate }}
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'BOARD.CLINIC' | translate }}</span>
+                <span *ngIf="row.organization">
+                    {{ row.organization.name }}
+                </span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="createdAt">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'GLOBAL.DATE' | translate }}</span>
+                {{ row.createdAt | amDateFormat:'ddd, MMM D YYYY' }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="createdAtHour">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.TIME' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'GLOBAL.TIME' | translate }}</span>
+                {{ row.createdAt | amDateFormat:'h:mm a' }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="actions">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
+                <mat-icon data-cy="form-submission-listing-open" [matTooltip]="'LIBRARY.FORMS.VIEW_ANSWER_TOOLTIP' | translate"
+                (click)="onViewForm(row)">launch</mat-icon>
+                <mat-icon
+                data-cy="form-submission-listing-delete"
+                *ngIf="row.form.removableSubmissions"
+                [class.disabled]="!row.canRemoveSubmission"
+                [matTooltip]="'LIBRARY.FORMS.REMOVE_SUBMISSION' | translate"
+                (click)="onRemoveSubmission(row)">delete</mat-icon>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayoutWrap
+            *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+            [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+        ></mat-row>
+    </mat-table>
+</div>

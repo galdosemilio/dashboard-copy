@@ -1,0 +1,19 @@
+<ng-container [formGroup]="form">
+  <div [ngSwitch]="question.questionType.name">
+    <div *ngSwitchCase="'text'">
+      <p>{{ question.title }}</p>
+    </div>
+    <div *ngSwitchCase="'content'">
+      <iframe [src]="question.url" frameborder="0"></iframe>
+    </div>
+    <div *ngSwitchDefault>
+      <h5>
+        {{ question.title }}
+        <span class="required" *ngIf="question.isRequired">&nbsp;*</span>
+      </h5>
+      <h4 *ngIf="question.description">{{ question.description }}</h4>
+
+      <ng-container *ngComponentOutlet="question.questionType.component; injector: questionInjector"></ng-container>
+    </div>
+  </div>
+</ng-container>

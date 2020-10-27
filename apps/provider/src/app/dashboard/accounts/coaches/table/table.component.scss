@@ -1,0 +1,26 @@
+.ccr-table {
+  mat-table {
+    .mat-column-email {
+      flex: 2 !important;
+    }
+    .mat-column-actions {
+      min-width: 60px;
+      max-width: 60px;
+    }
+    &.notClickable {
+      mat-row {
+        mat-cell {
+          &:hover {
+            cursor: auto !important;
+          }
+        }
+      }
+    }
+    button.disabled {
+      opacity: 0.5;
+      mat-icon {
+        cursor: auto !important;
+      }
+    }
+  }
+}

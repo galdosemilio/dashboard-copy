@@ -1,0 +1,16 @@
+ccr-paginator {
+  display: block;
+  text-align: right;
+  white-space: nowrap;
+  // width: 100%;
+
+  @media #{$small-and-down} {
+    button {
+      min-width: 40px !important;
+      padding: 0;
+      .mat-button-wrapper > span {
+        display: none;
+      }
+    }
+  }
+}

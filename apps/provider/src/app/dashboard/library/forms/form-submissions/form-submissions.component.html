@@ -1,0 +1,44 @@
+<div class="ccr-heading" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px">
+  <div class="ccr-reports" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <div fxFlex>
+    <date-range-navigator (selectedDate)="updateDates($event)" startView="years"></date-range-navigator>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap.xs="10px">
+      <ccr-popup-description
+      [title]="'BOARD.SEARCH_CLINIC' | translate"
+      [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_CLINIC_DESCRIPTION' | translate"
+      ></ccr-popup-description>
+    </div>
+    <div fxFlex>
+      <ccr-organization-search
+      [allowSearchbarReset]="true"
+      [initialOrg]="currentOrg"
+      (select)="onOrganizationSelect($event)"></ccr-organization-search>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap.xs="10px">
+      <button
+      [disabled]="source.isLoading || !hasSubmissions"
+      (click)="onGenerateCSV()"
+      class="ccr-button"
+      color="primary"
+      mat-button>{{ 'REPORTS.EXPORT_CSV' | translate }}</button>
+      <ccr-paginator fxFlex="nogrow" #paginator
+      [length]="source.total"
+      [pageIndex]="source.pageIndex"
+      [pageSize]="source.pageSize"
+      (page)="source.pageIndex = $event.pageIndex"
+      ></ccr-paginator>
+    </div>
+  </div>
+</div>
+
+<ccr-popup-description
+[title]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_FORMS' | translate"
+[description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_FORMS_DESCRIPTION' | translate"
+></ccr-popup-description>
+
+<app-library-form-submissions-table
+[source]="source"
+></app-library-form-submissions-table>

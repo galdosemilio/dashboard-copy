@@ -1,0 +1,23 @@
+@import 'shared/directed-styles';
+
+.ccr-table {
+  .mat-table {
+    .mat-cell {
+      max-height: 32px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .mat-column-type {
+      flex: 2 !important;
+    }
+    .mat-column-details {
+      flex: 2 !important;
+    }
+    .mat-column-actions {
+      min-width: 60px;
+      max-width: 75px;
+      text-align: center;
+    }
+  }
+}

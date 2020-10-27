@@ -1,0 +1,45 @@
+<div matDialogTitle>
+  <div>
+    <mat-icon>event_available</mat-icon>
+    <span>{{'BOARD.ADD_SINGLE_AVAILABILITY' | translate}}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+    <div fxLayoutGap="15px" fxLayoutGap.xs="0px" fxLayout="row" fxLayout.xs="column">
+      <mat-form-field>
+        <input matInput required formControlName="startTime"
+          [min]="now" (dateChange)="onChange($event)"
+          [matDatepicker]="pickerStart" [placeholder]="'BOARD.START_DATE' | translate">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker type="datetime" clockStep="5" #pickerStart></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput required formControlName="endTime" [min]="min"
+          [matDatepicker]="pickerEnd" [placeholder]="'BOARD.END_DATE' | translate">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker type="datetime" clockStep="5" #pickerEnd></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="form.errors">
+      <mat-error *ngIf="form.getError('timeError')">{{ form.getError('timeError') | translate }}</mat-error>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="primary" class="ccr-icon-button" (click)="onSubmit()">
+    <mat-icon>check</mat-icon> {{'GLOBAL.SAVE' | translate}}
+  </button>
+
+  <button mat-button class="ccr-icon-button" matDialogClose>
+    <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+  </button>
+</mat-dialog-actions>

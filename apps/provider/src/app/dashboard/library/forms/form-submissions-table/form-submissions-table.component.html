@@ -1,0 +1,79 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+    <div class="ccr-edit-table">
+        <mat-table [dataSource]="source">
+
+            <ng-container cdkColumnDef="name">
+                <mat-header-cell *cdkHeaderCellDef>
+                    {{ 'GLOBAL.PATIENT' | translate }}&nbsp;
+                    <ccr-popup-description
+                    [title]="'LIBRARY.FORMS.PATIENT_NOTICE_TITLE' | translate"
+                    [description]="'LIBRARY.FORMS.PATIENT_NOTICE' | translate"
+                    ></ccr-popup-description>
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow"
+                class="link-name clickable" (click)="onGoToPatientProfile(row)">
+                    <span>{{ 'GLOBAL.PATIENT' | translate }}</span>
+                    <span *ngIf="row.submittedBy.id !== row.account.id">
+                        {{ row.account.firstName }} {{ row.account.lastName }}
+                    </span>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="submittedBy">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.SUBMITTER' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow"
+                class="link-name clickable" (click)="onGoToProviderProfile(row)">
+                    <span>{{ 'LIBRARY.FORMS.SUBMITTER' | translate }}</span>
+                    {{ row.submittedBy.firstName }} {{ row.submittedBy.lastName }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="organization">
+                <mat-header-cell *cdkHeaderCellDef>
+                    {{ 'BOARD.CLINIC' | translate }}
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                    <span>{{ 'BOARD.CLINIC' | translate }}</span>
+                    <span *ngIf="row.organization">
+                        {{ row.organization.name }}
+                    </span>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="createdAt">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                    <span>{{ 'GLOBAL.DATE' | translate }}</span>
+                    {{ row.createdAt | amDateFormat:'ddd, MMM D YYYY' }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="createdAtHour">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.TIME' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                    <span>{{ 'GLOBAL.HOUR' | translate }}</span>
+                    {{ row.createdAt | amDateFormat:'h:mm a' }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.ACTIONS' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
+                    <mat-icon data-cy="form-submission-listing-open" (click)="onViewForm(row)" [matTooltip]="'LIBRARY.FORMS.VIEW_ANSWER_TOOLTIP' | translate">launch</mat-icon>
+                    <mat-icon
+                    data-cy="form-submission-listing-delete"
+                    *ngIf="row.form.removableSubmissions"
+                    [class.disabled]="!row.canRemoveSubmission"
+                    [matTooltip]="'LIBRARY.FORMS.REMOVE_SUBMISSION' | translate"
+                    (click)="onRemoveSubmission(row)">delete</mat-icon>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+            <mat-row fxLayoutWrap
+              *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+              [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+            ></mat-row>
+        </mat-table>
+    </div>
+</ccr-datasource-overlay>

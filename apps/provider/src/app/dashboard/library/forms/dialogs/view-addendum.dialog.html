@@ -1,0 +1,22 @@
+<div matDialogTitle>
+    <div>
+        <span>{{ 'LIBRARY.FORMS.ADDENDUM' | translate }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content fxLayout="column" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutAlign="start">
+        <h4 fxFlex>{{ 'LIBRARY.FORMS.BY' | translate }}: {{ data.account.firstName }} {{ data.account.lastName }}</h4>
+        <h4 fxFlex>{{ 'GLOBAL.DATE' | translate }}: {{ data.createdAt | amDateFormat:'ddd LL @ hh:mm A' }}</h4>
+    </div>
+    <p class="addendum-content">{{ data.content }}</p>
+</div>
+
+<mat-dialog-actions>
+    <button mat-button class="ccr-button" matDialogClose>
+    {{ 'LIBRARY.FORMS.CLOSE' | translate }}
+    </button>
+</mat-dialog-actions>

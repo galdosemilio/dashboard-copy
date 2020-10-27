@@ -1,0 +1,12 @@
+<div matDialogTitle>
+    <div>
+        <span *ngIf="title">{{ title }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+    <div class="image-container" fxLayout="column" fxLayoutAlign="center center">
+        <img [src]="imageUrl">
+    </div>
+</mat-dialog-content>

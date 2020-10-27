@@ -1,0 +1,60 @@
+<div
+[formGroup]="form"
+class="ccr-input-container"
+fxFlex
+fxLayout="row"
+fxLayoutAlign="start center"
+fxLayoutGap="2%">
+    <div
+    *ngIf="status === 'edit'"
+    [ngSwitch]="type"
+    fxFlex="80%"
+    fxLayout="row"
+    fxLayoutAlign="center start"
+    fxLayoutGap="3%">
+        <mat-form-field *ngSwitchCase="'text'">
+            <input
+            #textField
+            (blur)="confirmValue()"
+            formControlName="value"
+            matInput
+            type="text" />
+        </mat-form-field>
+
+
+        <mat-form-field *ngSwitchCase="'selector'">
+            <mat-select formControlName="value" (selectionChange)="confirmValue()">
+                <mat-option
+                *ngFor="let option of selectorOptions"
+                [value]="option.value || option.name"
+                (blur)="confirmValue()">
+                    {{ option.displayName | translate }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div
+    *ngIf="status === 'view' || status === 'readonly'"
+    class="ccr-inline-edit-icon-container"
+    fxFlex="89%"
+    fxLayout="row"
+    fxLayoutAlign="space-between center">
+        <p fxFlex *ngIf="type !== 'selector'">{{ form.value ? form.value.value : '' }}</p>
+        <p fxflex *ngIf="type === 'selector'">{{ (selectorDisplayValue || defaultDisplayValue) | translate }}</p>
+        <mat-icon
+        *ngIf="status === 'view' && !disabled"
+        (click)="setFieldMode('edit'); $event.stopPropagation();"
+        class="ccr-inline-edit-icon">
+            edit
+        </mat-icon>
+    </div>
+
+    <div *ngIf="status === 'edit'" fxFlex="9%" fxLayout="row">
+        <mat-icon
+        [matTooltip]="'LIBRARY.CONTENT.SAVE_CHANGES' | translate"
+        (click)="confirmValue()">
+            check_circle
+        </mat-icon>
+    </div>
+</div>

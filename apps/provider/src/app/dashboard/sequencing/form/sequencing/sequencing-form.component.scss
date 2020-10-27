@@ -1,0 +1,73 @@
+@import 'variables';
+
+h4 {
+  margin: 0;
+}
+
+hr {
+  border: 1px solid darken(mat-color($ccr-background, app-bar), 10%);
+  height: 0;
+  width: 100%;
+}
+
+.active {
+  border: 1px solid var(--primary);
+}
+
+.deleted {
+  background-color: red;
+}
+
+.disabled {
+  color: darken(mat-color($ccr-background, app-bar), 10%);
+  cursor: default;
+}
+
+.name-input {
+  font-size: 20px;
+}
+
+.red-bkg {
+  background-color: red !important;
+}
+
+.step {
+  &-list-container {
+    border: 1px solid darken(mat-color($ccr-background, app-bar), 10%);
+    border-radius: 5px;
+    padding: 20px 20px 0 20px;
+  }
+
+  &-list-inner-container {
+    border: 1px solid darken(mat-color($ccr-background, app-bar), 10%);
+    max-height: 250px;
+    overflow-y: scroll;
+
+    &.expanded {
+      max-height: 600px;
+    }
+  }
+
+  &-list-item {
+    cursor: pointer;
+    padding: 10px 0;
+
+    &:not(.deleted):nth-of-type(even) {
+      background: mat-color($ccr-background, even);
+    }
+
+    &:not(.deleted):nth-of-type(odd) {
+      background: mat-color($ccr-background, odd);
+    }
+  }
+
+  &-number {
+    font-size: 1.5em;
+    margin-top: 10px;
+
+    &.highlighted {
+      color: var(--primary, mat-color($ccr-primary));
+      margin: 0;
+    }
+  }
+}

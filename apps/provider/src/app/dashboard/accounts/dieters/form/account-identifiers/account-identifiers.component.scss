@@ -1,0 +1,15 @@
+@import 'variables';
+
+.identifier-group {
+  border: 1px solid var(--text, mat-color($ccr-foreground, table-actions));
+  margin: 10px 0;
+  padding: 20px 10px 5px 10px;
+}
+
+.title {
+  background-color: mat-color($ccr-contrast, A700);
+  bottom: -20px;
+  margin-left: 20px;
+  padding: 0 10px;
+  position: relative;
+}

@@ -1,0 +1,62 @@
+@import 'variables';
+
+$video-preview-height: 150px;
+$video-preview-width: 200px;
+
+.chrome-notice {
+  background-color: mat-color($ccr-background, background);
+  padding: 10px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 40vw;
+}
+
+.content {
+  padding: 0 25px;
+
+  .button-wrapper {
+    width: 100%;
+  }
+}
+
+.help-link {
+  color: var(--primary, mat-color($ccr-primary)) !important;
+  display: block;
+  font-size: 0.95em;
+  padding-top: 5px;
+}
+
+.mic-block {
+  border: 1px solid var(--toolbar, mat-color($ccr-background, tools));
+  height: 20px;
+  width: 10px;
+
+  &-warning-wrapper {
+    text-align: center;
+    width: $video-preview-width;
+  }
+
+  &-wrapper {
+    width: calc(#{$video-preview-width} - 24px);
+  }
+
+  &.active {
+    background-color: var(--primary, mat-color($ccr-primary));
+  }
+}
+
+.test-sound-wrapper {
+  max-width: $video-preview-width;
+  overflow-x: auto;
+  width: $video-preview-width;
+}
+
+.video-preview {
+  width: $video-preview-width;
+  height: $video-preview-height;
+
+  p {
+    text-align: center;
+  }
+}

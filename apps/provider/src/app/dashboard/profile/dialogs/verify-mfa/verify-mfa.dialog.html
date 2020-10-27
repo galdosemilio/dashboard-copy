@@ -1,0 +1,73 @@
+<mat-dialog-content>
+    <div [ngSwitch]="mode">
+    <div *ngSwitchCase="'auth'" [formGroup]="form" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+        <account-mfa-verificator
+        [isLoading]="isLoading"
+        [mode]="'auth'"
+        [qrData]="qrData"
+        [required]="true"
+        [secretKey]="secretKey"
+        (reset)="onAccept()"
+        (submit)="onSubmit()"
+        bindForm="code"></account-mfa-verificator>
+    </div>
+
+    <div *ngSwitchCase="'backup_codes'" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+        <p [innerHTML]="'PROFILE.MFA.BACKUP_CODES_INFO' | translate"></p>
+        <ul>
+            <li *ngFor="let code of backupCodes">{{ code }}</li>
+        </ul>
+    </div>
+
+    <div *ngSwitchCase="'intro'" fxLayout="column" fxLayoutAlign="center stretch">
+        <p [innerHTML]="'PROFILE.MFA.SET_UP_INFO' | translate"></p>
+    </div>
+
+    <div *ngSwitchCase="'sms'" [formGroup]="form" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+        <account-mfa-verificator
+        [isLoading]="isLoading"
+        [mode]="'sms'"
+        [required]="true"
+        (reset)="onAccept()"
+        (submit)="onSubmit()"
+        bindForm="code"></account-mfa-verificator>
+    </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div [ngSwitch]="mode">
+    <div *ngSwitchCase="'auth'">
+        <button
+        (click)="onSubmit()"
+        [disabled]="isLoading || form.invalid"
+        class="ccr-button"
+        color="primary"
+        mat-button>{{ 'GLOBAL.SUBMIT' | translate }}</button>
+        <button [disabled]="isLoading" class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CANCEL' | translate }}</button>
+    </div>
+
+    <div *ngSwitchCase="'backup_codes'">
+        <button
+        (click)="onDownloadBackupCodes()"
+        class="ccr-button"
+        color="primary"
+        mat-button>{{ 'PROFILE.MFA.DOWNLOAD_BACKUP_CODES' | translate }}</button>
+        <button [disabled]="isLoading" class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CLOSE' | translate }}</button>
+    </div>
+
+    <div *ngSwitchCase="'sms'">
+        <button
+        (click)="onSubmit()"
+        [disabled]="isLoading || form.invalid"
+        class="ccr-button"
+        color="primary"
+        mat-button>{{ 'GLOBAL.SUBMIT' | translate }}</button>
+        <button [disabled]="isLoading" class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CANCEL' | translate }}</button>
+    </div>
+
+    <div *ngSwitchCase="'loading'" fxLayout="row" fxLayoutAlign="center center">
+        <mat-spinner strokeWidth="3" [diameter]="35"></mat-spinner>
+    </div>
+    </div>
+</mat-dialog-actions>

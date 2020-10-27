@@ -1,0 +1,38 @@
+<ng-container [formGroup]="form" [ngSwitch]="preference">
+
+  <ng-container *ngSwitchCase="'metric'">
+    <mat-form-field class="ccr-align-right">
+      <input matInput type="number"
+      [attr.hidden]="isReadonly ? '' : null"
+      [placeholder]="'BOARD.HEIGHT' | translate"
+      [required]="isRequired"
+      [readonly]="isReadonly"
+      [attr.disabled]="isReadonly ? '' : null"
+      formControlName="cm"
+      (change)="$event.stopPropagation()">
+      <span matSuffix>{{ 'height' | unitLabel | translate }}</span>
+    </mat-form-field>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <div fxFlex class="ccr-subgrid" fxLayout="row" fxLayout.xs="column" fxLayoutGap="2%" fxLayoutGap.xs="0" fxLayoutWrap.xs>
+      <div fxLayout="row" fxLayoutAlign=" center" fxFlex.gt-xs="49%" fxFlex.xs="grow">
+        <mat-form-field class="ccr-align-right">
+          <mat-select required formControlName="ft" [placeholder]="'BOARD.HEIGHT' | translate">
+            <mat-option class="ccr-align-right" *ngFor="let feet of feets" [value]="feet">{{ feet }}</mat-option>
+          </mat-select>
+          <span matSuffix>{{ 'height' | unitLabel | translate }}</span>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign=" center" fxFlex.gt-xs="49%" fxFlex.xs="grow">
+        <mat-form-field class="ccr-align-right">
+          <mat-select required formControlName="in" floatLabel="never">
+            <mat-option class="ccr-align-right" *ngFor="let inch of inches" [value]="inch">{{ inch }}</mat-option>
+          </mat-select>
+          <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+        </mat-form-field>
+      </div>
+    </div>
+  </ng-container>
+
+</ng-container>

@@ -1,0 +1,38 @@
+<div *ngIf="!showSearchBar" fxFlex>
+    <mat-form-field class="ccr-filter" floatLabel="never" fxFlex="grow">
+        <mat-select
+        [placeholder]="'LIBRARY.FORMS.FILTER_BY_FORM' | translate"
+        [disableOptionCentering]="true" (selectionChange)="onFormSelect($event)">
+            <mat-option [value]="''">{{ 'LIBRARY.FORMS.ALL' | translate }}</mat-option>
+            <mat-option *ngFor="let form of forms" [value]="form.id">{{ form.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div
+*ngIf="showSearchBar" [formGroup]="form"
+fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="grow">
+        <mat-form-field fxFlex="grow">
+            <input
+            type="text" matInput
+            [formControl]="form.controls.query"
+            [matAutocomplete]="formAutoComp"
+            [placeholder]="'LIBRARY.FORMS.SEARCH_BY_NAME' | translate">
+        </mat-form-field>
+
+        <mat-autocomplete
+        #formAutoComp="matAutocomplete"
+        (optionSelected)="onFormAutocompleteSelect($event)"
+        [displayWith]="searchBarDisplayWith.bind(this)">
+            <mat-option [value]="form.id" *ngFor="let form of forms">
+                <p>{{ form.name }}</p>
+            </mat-option>
+        </mat-autocomplete>
+    </div>
+
+    <mat-icon *ngIf="formSelected"
+    class="remove"
+    [matTooltip]="'LIBRARY.FORMS.RESET_FORM_SEARCHBAR' | translate"
+    (click)="resetSearchBar()">cancel</mat-icon>
+</div>

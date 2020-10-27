@@ -1,0 +1,24 @@
+// use with fxLayoutAlign="center center"
+.ccr-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  background: mat-color($ccr-background, overlay);
+  z-index: 1;
+
+  > div {
+    color: var(--primary);
+    font-size: 17px;
+    margin: 0 auto;
+  }
+  .ccr-errors {
+    max-width: 70%;
+    text-align: center;
+    @media #{$small-and-down} {
+      font-size: 14px;
+    }
+  }
+}

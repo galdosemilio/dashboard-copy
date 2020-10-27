@@ -1,0 +1,136 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source">
+
+    <ng-container cdkColumnDef="enabled">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.ENABLE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <ccr-popup-description
+          [title]="row.texts.title | translate"
+          [description]="row.texts.description | translate"
+        ></ccr-popup-description>
+
+        <mat-checkbox [(ngModel)]="row.isActive" name="isActive" (change)="onActiveChange(row)" *ngIf="!row.hideCheckbox">
+          <span class="xs-label">
+            <ng-container *ngIf="row.isActive">{{ 'GLOBAL.ENABLED' | translate }}</ng-container>
+            <ng-container *ngIf="!row.isActive">{{ 'GLOBAL.DISABLED' | translate }}</ng-container>
+          </span>
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="title">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.TITLE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'GLOBAL.TITLE' | translate }}</span>
+        <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
+        <span class="title-text" data-cy="alert-title">{{ row.texts.title | translate }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="settings">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.SETTINGS' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <ng-container *ngIf="row.isActive">
+          <span>{{ 'GLOBAL.SETTINGS' | translate }}</span>
+
+          <ng-container *ngIf="row.typeCode === 'inactivity'" [ngSwitch]="row.option">
+
+            <mat-form-field *ngSwitchCase="'meal-logging'">
+              <mat-select #mealThreshold [(ngModel)]="row.value.period" (selectionChange)="updateInactivity(row)">
+                <mat-option *ngFor="let d of inactivityDays" [value]="d.value">
+                  {{ d.viewValue }} {{ 'UNIT.DAYS' | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngSwitchCase="'tracker-syncing'">
+              <mat-select #trackerThreshold [(ngModel)]="row.value.period" (selectionChange)="updateInactivity(row)">
+                <mat-option *ngFor="let d of inactivityDays" [value]="d.value">
+                  {{ d.viewValue }} {{ 'UNIT.DAYS' | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngSwitchCase="'weight-logging'">
+              <mat-select #weightThreshold [(ngModel)]="row.value.period" (selectionChange)="updateInactivity(row)">
+                <mat-option *ngFor="let d of inactivityDays" [value]="d.value">
+                  {{ d.viewValue }} {{ 'UNIT.DAYS' | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="row.typeCode === 'weight-regained'">
+            <mat-form-field>
+              <mat-select #weightRegainedThreshold [(ngModel)]="row.value" (selectionChange)="updateWeightRegained(row, weightRegainedThreshold.value)">
+                <mat-option *ngFor="let w of weightRegainedOptions" [value]="w.value">
+                  {{ w.value | unitConversion: 'composition' : true }} {{ 'composition' | unitLabel: w.value | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="row.typeCode === 'weight-threshold'" [ngSwitch]="row.option + (row.optionExt || '')">
+            <mat-form-field *ngSwitchCase="'threshold_gain'">
+                <mat-select
+                #WeightThresholdThresholdGain
+                [(ngModel)]="row.value.gain"
+                (selectionChange)="updateWeightThreshold(row, WeightThresholdThresholdGain.value)">
+                  <mat-option *ngFor="let w of WeightThresholdThresholdOptions" [value]="w.value">
+                    {{ w.value | unitConversion: 'composition' : true }} {{ 'composition' | unitLabel: w.value | translate }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngSwitchCase="'threshold_loss'">
+                <mat-select
+                #WeightThresholdThresholdLoss
+                [(ngModel)]="row.value.loss"
+                (selectionChange)="updateWeightThreshold(row, WeightThresholdThresholdLoss.value)">
+                  <mat-option *ngFor="let w of WeightThresholdThresholdOptions" [value]="w.value">
+                    {{ w.value | unitConversion: 'composition' : true }} {{ 'composition' | unitLabel: w.value | translate }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngSwitchCase="'daySpan'">
+              <mat-select [(ngModel)]="row.value" (selectionChange)="updateWeightThreshold(row)">
+                <mat-option *ngFor="let d of spanDays" [value]="d.value">
+                  {{ d.viewValue }} {{ 'UNIT.DAYS' | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngSwitchCase="'triggerPeriod'">
+              <mat-select [(ngModel)]="row.value" (selectionChange)="updateWeightThreshold(row)">
+                <mat-option *ngFor="let d of triggerPeriods" [value]="d.value">
+                  {{ d.viewValue | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-radio-group
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="10%"
+            *ngSwitchCase="'requireDailyMeasurement'"
+            [(ngModel)]="row.value"
+            (change)="updateWeightThreshold(row)">
+                <mat-radio-button [value]="true">{{ 'GLOBAL.YES' | translate }}</mat-radio-button>
+                <mat-radio-button [value]="false">{{ 'GLOBAL.NO' | translate }}</mat-radio-button>
+            </mat-radio-group>
+          </ng-container>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [hidden]="row.isVisible === false"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>

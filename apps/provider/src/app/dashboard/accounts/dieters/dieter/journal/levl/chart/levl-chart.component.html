@@ -1,0 +1,13 @@
+<ccr-datasource-overlay class="ccr-container" [source]="source">
+
+  <canvas *ngIf="chart" baseChart
+    width="500" height="400"
+    [chartType]="chart.type"
+    [datasets]="chart.datasets"
+    [labels]="chart.labels"
+    [options]="chart.options"
+    [legend]="chart.legend"
+    [colors]="chart.colors"
+  ></canvas>
+
+</ccr-datasource-overlay>

@@ -1,0 +1,15 @@
+<mat-form-field [class.readonly]="isReadonly" floatLabel="always">
+  <input matInput type="text"
+    [placeholder]="placeholder"
+    [required]="isRequired"
+    [readonly]="isReadonly"
+    [attr.disabled]="isReadonly ? '' : null"
+    [value]="value"
+    (input)="onChange($event.target.value)"
+    (blur)="propagateTouch()"
+    (change)="$event.stopPropagation()">
+
+  <span matSuffix>
+    <ng-content select="[matSuffix]"></ng-content>
+  </span>
+</mat-form-field>

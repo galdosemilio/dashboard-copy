@@ -1,0 +1,6 @@
+@import 'variables/colors';
+
+.no-admin-access {
+  color: var(--warn, mat-color($ccr-background, warning));
+  text-align: center;
+}

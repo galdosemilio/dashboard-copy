@@ -1,0 +1,65 @@
+<ng-container [formGroup]="form">
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="25px">
+      <div>
+        <mat-grid-list class="ccr-grid" [cols]="colSpan" rowHeight="70px">
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput required formControlName="firstName" [placeholder]="'BOARD.FIRST_NAME' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput required formControlName="lastName" [placeholder]="'BOARD.LAST_NAME' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput required email type="email"
+              formControlName="email"
+              pattern="^[^@]+@[^@]+\.[^@]{2,}$"
+              [placeholder]="'BOARD.EMAIL' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <ccr-phone-input formControlName="phone" fxFlex></ccr-phone-input>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-select formControlName="timezone" [placeholder]="'BOARD.TIME_ZONE' | translate">
+                <mat-option *ngFor="let timezone of timezones" [value]="timezone.code">
+                  {{ timezone.lang[lang] }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <ccr-form-field-lang fxLayout="column"
+            required formControlName="preferredLocales"
+            [placeholder]="'BOARD.LANGUAGE' | translate"
+            ></ccr-form-field-lang>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </div>
+
+      <!-- <div>
+        <h3>
+          <mat-icon>assignment</mat-icon> {{'GLOBAL.PERMISSIONS' | translate}}
+
+          <span matSubheader *ngIf="isOwnProfile">{{'BOARD.HINT_COACH_OWNPERMISSIONS' | translate}}</span>
+          <span matSubheader *ngIf="!isOwnProfile">{{'BOARD.HINT_COACH_PERMISSIONS' | translate}}</span>
+        </h3>
+      </div> -->
+
+      <app-clinics-table-picker *ngIf="!coachId" required formControlName="clinics" [disabled]="isOwnProfile"
+      [source]="source"
+      [coachId]="coachId"
+    ></app-clinics-table-picker>
+  </div>
+</ng-container>

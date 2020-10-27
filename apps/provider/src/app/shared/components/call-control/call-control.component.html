@@ -1,0 +1,28 @@
+
+<div
+*ngIf="callState?.subaccountId !== '' && callState.isSupported && callState.conferencingEnabled"
+[matTooltip]="toolTipMessage"
+fxLayout="row"
+fxLayoutAlign="center center"
+fxLayoutGap="5px"
+matTooltipPosition="above">
+  <button
+  mat-button type="button" color="primary"
+  class="ccr-icon-button"
+  [class.active]="true"
+  (click)="onClick()"
+  [disabled]="callState?.isCallStarted || !callState?.hasAudioDeviceAccess"
+  *ngIf="mode === 0">
+    <mat-icon>phone</mat-icon>
+    {{ 'BOARD.CALL_USER' | translate }}
+  </button>
+  <div *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess" (click)="onClick()">
+    <mat-icon class="min">phone</mat-icon>
+  </div>
+  <ccr-popup-description
+  *ngIf="mode === 0 && !callState?.hasAudioDeviceAccess"
+  [title]="'CALL.MICROPHONE_ACCESS_BLOCKED' | translate"
+  [description]="'CALL.MICROPHONE_ACCESS_BLOCKED_HELPTEXT' | translate"
+  [showIntro]="false">
+  </ccr-popup-description>
+</div>

@@ -1,0 +1,10 @@
+<div fxFlex="75%" fxLayout="column" fxLayoutAlign="center start">
+  <div fxFlex>
+    {{ account.firstName + ' ' + account.lastName }}
+    <i>{{ formatAccountType(account.accountType.id) | translate }}</i>
+  </div>
+  <small fxFlex>{{ account.email }}</small>
+</div>
+<div fxFlex="25%" fxLayout="row" fxLayoutAlign="end center" *ngIf="canCall && ((account.accountType.id === '3' && canAccessPatient) || account.accountType.id === '2')">
+  <ccr-call-control [mode]="1" [targets]="[account]"></ccr-call-control>
+</div>

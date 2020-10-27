@@ -1,0 +1,97 @@
+<div class="ccr-container-mini" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <ul class="ccr-tabs-center" fxLayout="row wrap"  fxLayoutAlign.gt-xs="center stretch">
+    <li *ngIf="components.indexOf('profile') > -1">
+      <a mat-button [routerLink]="['.', {s: 'profile'}]" [class.active]="section === 'profile'">
+        {{ 'GLOBAL.PROFILE' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('labels') > -1">
+      <a mat-button [routerLink]="['.', {s: 'labels'}]" [class.active]="section === 'labels'">
+        {{ 'GLOBAL.PHASES_LABELS' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('devices') > -1">
+      <a mat-button [routerLink]="['.', {s: 'devices'}]" [class.active]="section === 'devices'">
+        {{ 'BOARD.DEVICES' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('forms') > -1">
+      <a mat-button [routerLink]="['.', {s: 'forms'}]" [class.active]="section === 'forms'">
+        {{ 'BOARD.FORMS' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('sequences') > -1">
+      <a mat-button [routerLink]="['.', {s: 'sequences'}]" [class.active]="section === 'sequences'">
+        {{ 'SIDENAV.SEQUENCES' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('calls') > -1">
+      <a mat-button [routerLink]="['.', {s: 'calls'}]" [class.active]="section === 'calls'">
+        {{ 'REPORTS.COMMS_CALLS' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('associations') > -1">
+      <a mat-button [routerLink]="['.', {s: 'associations'}]" [class.active]="section === 'associations'">
+        {{ 'GLOBAL.CLINICS' | translate }}
+      </a>
+    </li>
+    <li *ngIf="components.indexOf('file-vault') > -1">
+      <a mat-button [routerLink]="['.', {s: 'file-vault'}]" [class.active]="section === 'file-vault'">
+        {{ 'GLOBAL.FILE_VAULT' | translate }}
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- <div *ngIf="section === 'forms'" class="ccr-container-mini" fxLayout="row" fxLayoutAlign="flex-end">
+  <button
+    (click)="assignForm()"
+    [disabled]="disableAssignForm"
+    class="ccr-icon-button"
+    color="primary"
+    fxFlex="0 0 auto"
+    mat-button>
+    <mat-icon>add</mat-icon>
+    <span>{{ 'BOARD.ASSIGN_FORM_PATIENT' | translate }}</span>
+  </button>
+</div> -->
+<div class="ccr-dashboard-pane" [ngSwitch]="component">
+  <ng-container *ngSwitchCase="'profile'">
+
+    <app-dieter-profile></app-dieter-profile>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'labels'">
+
+    <app-dieter-labels></app-dieter-labels>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'devices'">
+
+    <app-device-status></app-device-status>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'forms'">
+
+    <app-dieter-forms [fillForm]="fillForm" (formSelected)="disableAssignForm = !!$event"></app-dieter-forms>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'sequences'">
+
+    <app-dieter-sequences></app-dieter-sequences>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'calls'">
+    <app-reports-calls [account]="account"></app-reports-calls>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'associations'">
+    <ccr-account-associations></ccr-account-associations>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'file-vault'">
+    <app-dieter-file-vault></app-dieter-file-vault>
+  </ng-container>
+</div>

@@ -1,0 +1,21 @@
+
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+    <h2 fxFlex>{{'LIBRARY._TITLE' | translate}}</h2>
+  </div>
+</div>
+
+<div class="ccr-library" fxLayout="column" fxLayoutGap="5px">
+  <div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['content']">
+      {{ 'LIBRARY.CONTENT._TITLE' | translate }}
+    </a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['forms']">
+      {{ 'LIBRARY.FORMS._TITLE' | translate }}
+    </a>
+  </div>
+
+  <div class="ccr-subcomponent">
+    <router-outlet></router-outlet>
+  </div>
+</div>

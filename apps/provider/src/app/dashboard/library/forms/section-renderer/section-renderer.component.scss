@@ -1,0 +1,6 @@
+@import 'variables';
+
+h4 {
+  @include ccr-title-h;
+  font-size: 1.4em;
+}

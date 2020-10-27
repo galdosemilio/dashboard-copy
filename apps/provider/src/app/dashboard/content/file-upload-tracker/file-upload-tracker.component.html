@@ -1,0 +1,24 @@
+<div class="file-upload-tracker">
+    <div class="tracker-header" fxLayout="row" fxLayoutAlign="space-between center">
+        <strong>{{ 'LIBRARY.CONTENT.CONTENT_UPLOAD' | translate }} ({{ uploadAmount }})</strong>
+        <mat-icon class="action" (click)="status.minimized = !status.minimized">{{ status.minimized ? 'maximize' : 'minimize' }}</mat-icon>
+    </div>
+
+    <div class="tracker-body" *ngIf="!status.minimized">
+        <div class="tracker-body-item" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3%"
+            *ngFor="let upload of (contentUpload.uploads$ | async); let i = index;" [hidden]="upload.hidden && upload.mature">
+            <mat-icon
+            class="file-icon"
+            [fontSet]="upload.content.icon.set"
+            [fontIcon]="upload.content.icon.name"
+            [svgIcon]="upload.content.icon.svgIcon">
+                {{ upload.content.icon.set ? '' : upload.content.icon.name }}
+            </mat-icon>
+            <span class="name ccr-strong">{{ upload.content.name }}</span>
+            <span class="error ccr-strong" *ngIf="upload.error">{{ upload.error }}</span>
+            <mat-progress-bar mode="determinate" [value]="upload.progress" *ngIf="!upload.error"></mat-progress-bar>
+            <mat-icon class="action" [matTooltip]="'GLOBAL.DISMISS' | translate" *ngIf="upload.progress === 100 || upload.error"
+                (click)="contentUpload.removeContentUpload(i)">cancel</mat-icon>
+        </div>
+    </div>
+</div>

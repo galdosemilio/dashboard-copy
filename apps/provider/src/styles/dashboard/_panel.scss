@@ -1,0 +1,41 @@
+/**
+ * Home Panel
+ */
+.ccr-widget {
+  border: 1px solid mat-color($ccr-foreground, divider);
+  border-radius: 7px;
+  padding: 10px;
+
+  .ccr-title {
+    margin: 2px 2px 7px;
+    position: relative;
+
+    > .ccr-button {
+      border-radius: 12px;
+      color: var(--primary);
+      line-height: 24px;
+      padding: 0 12px;
+    }
+  }
+
+  .ccr-table {
+    border-radius: 5px;
+    display: block;
+    overflow: hidden;
+
+    // .mat-column-actions {
+    //   min-width: 30px !important;
+    //   max-width: 30px !important;
+    // }
+    mat-header-cell.mat-column-actions {
+      visibility: hidden;
+    }
+  }
+
+  > div:last-child {
+    background: mat-color($ccr-foreground, divider);
+    line-height: 2rem;
+    padding: 0 1rem;
+    text-align: right;
+  }
+}

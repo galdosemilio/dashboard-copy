@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-form-field>
+        <input
+        data-cy="user-search-input"
+        [formControl]="searchCtrl"
+        [matAutocomplete]="auto"
+        [placeholder]="label | translate"
+        matInput
+        >
+    </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let account of accounts" (onSelectionChange)="onSelectAccount(account)">
+            <p>
+                {{ account.firstName + ' ' + account.lastName }}
+                <i>{{ formatAccountType(account.accountType.id) }}</i>
+            </p>
+            <small>{{ account.email }}</small>
+        </mat-option>
+    </mat-autocomplete>
+</div>

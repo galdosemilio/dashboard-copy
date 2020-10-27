@@ -1,0 +1,46 @@
+@import 'variables';
+
+h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+small {
+  text-align: left;
+  word-break: break-word;
+}
+
+.attendee {
+  height: 48px;
+  min-height: 48px;
+}
+
+.float-right {
+  float: right;
+}
+
+.hour {
+  text-transform: lowercase;
+}
+
+.notice {
+  text-align: center;
+}
+
+.scrollable-v {
+  height: 200px;
+  max-height: 100%;
+  min-height: 200px;
+  overflow-y: scroll;
+}
+
+.separator {
+  border: 1px solid var(--bg-panel, mat-color($ccr-background, chart));
+  height: 0;
+  margin: 15px auto;
+  width: 90%;
+}
+
+.attendanceSelector {
+  font-size: 0.8em;
+}

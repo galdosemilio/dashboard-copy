@@ -1,0 +1,55 @@
+<div
+[formGroup]="form"
+(click)="onClick()"
+fxLayout="column"
+fxLayoutAlign="start stretch"
+fxLayoutGap="10px"
+class="step-input-container">
+    <h4>{{ 'SEQUENCING.ACTIONS' | translate }}</h4>
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div
+        *ngFor="let message of messages; let i = index;"
+        [formGroup]="form.controls.messages"
+        [hidden]="i >= maxPageIndex || i < minPageIndex"
+        class="message-input-container">
+            <div *ngIf="i < maxPageIndex && i >= minPageIndex" [formGroupName]="i">
+                <sequencing-message-input
+                [blocked]="blocked"
+                [hardBlocked]="hardBlocked"
+                [markAsTouched]="markAsTouched"
+                formControlName="message"></sequencing-message-input>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayoutAlign="row" fxLayoutAlign="start center">
+        <button
+        [disabled]="hardBlocked || form.invalid"
+        (click)="onAddMessage()"
+        class="ccr-icon-button"
+        color="secondary" mat-button>
+            <mat-icon>add</mat-icon>
+            {{ 'SEQUENCING.ADD_MESSAGE' | translate }}
+        </button>
+
+        <div *ngIf="messages.length > pageSize" fxFlex fxLayout="row" fxLayoutAlign="end center">
+            <button mat-button type="button"
+                class="mat-paginator-navigation-previous"
+                [disabled]="minPageIndex <= 0"
+                (click)="prevPage()">
+
+                <mat-icon>keyboard_arrow_left</mat-icon>
+                <span>{{'GLOBAL.PREVIOUS' | translate}}</span>
+            </button>
+
+            <button mat-button type="button"
+                [disabled]="maxPageIndex >= messages.length"
+                class="mat-paginator-navigation-next"
+                (click)="nextPage()">
+
+                <span>{{'GLOBAL.NEXT' | translate}}</span>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

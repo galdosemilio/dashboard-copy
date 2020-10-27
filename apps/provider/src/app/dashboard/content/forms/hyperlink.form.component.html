@@ -1,0 +1,11 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutGap="5%">
+    <mat-form-field>
+        <input type="text" matInput formControlName="url"
+        [placeholder]="'LIBRARY.CONTENT.HYPERLINK' | translate"
+        [readonly]="readonly" required>
+    </mat-form-field>
+
+    <mat-error *ngIf="form.controls.url.hasError('invalidUrl')">{{ 'LIBRARY.CONTENT.INVALID_LINK' | translate }}</mat-error>
+
+    <app-content-content-form bindForm="details" [details]="details" [mode]="mode"></app-content-content-form>
+</div>

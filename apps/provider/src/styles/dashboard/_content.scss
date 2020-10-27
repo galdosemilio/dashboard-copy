@@ -1,0 +1,63 @@
+.ccr-filter {
+  @include selector_filter(left);
+}
+
+.directory {
+  transition: background-color 1s;
+
+  &.highlighted {
+    background-color: mat-color($ccr-background, tools);
+  }
+
+  &.ccr-dragover {
+    background-color: mat-color($ccr-background, tools);
+  }
+
+  &.disabled {
+    color: mat-color($ccr-contrast, 800);
+  }
+}
+
+.file-upload-tracker {
+  background-color: mat-color($ccr-background, background);
+  border: 1px solid mat-color($ccr-contrast, 900);
+
+  .tracker-header {
+    background-color: mat-color($ccr-contrast, A100);
+    color: mat-color($ccr-contrast, A700);
+  }
+
+  .tracker-body {
+    &-item {
+      & > .error {
+        color: mat-color($ccr-base, 400);
+      }
+
+      &:nth-child(even) {
+        background-color: mat-color($ccr-contrast, 900);
+      }
+    }
+  }
+}
+
+app-content-file-explorer-list {
+  .load-more-button {
+    color: mat-color($ccr-base, 400);
+  }
+}
+
+app-content-create-dialog {
+  .queued-item-list {
+    & > div {
+      &:nth-child(even) {
+        background-color: mat-color($ccr-contrast, 900);
+      }
+    }
+  }
+}
+
+app-content-youtube-form {
+  .youtube-embed {
+    background-color: mat-color($ccr-background, box-shadow);
+  }
+}

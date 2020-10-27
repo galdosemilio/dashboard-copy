@@ -1,0 +1,19 @@
+<div
+*ngIf="childOrgs.length"
+[formGroup]="form"
+fxLayout="column"
+fxLayoutAlign="start stretch">
+    <h4>{{ 'GLOBAL.SELECT_CHILD_ORGS' | translate }}</h4>
+    <div
+    formGroupName="checkboxArray"
+    class="checkbox-container"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap="5px">
+        <mat-checkbox
+        *ngFor="let org of childOrgs; let i = index;"
+        [formControlName]="i">
+            {{ org.name }}
+        </mat-checkbox>
+    </div>
+</div>

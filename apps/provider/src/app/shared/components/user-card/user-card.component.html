@@ -1,0 +1,17 @@
+<div
+class="user"
+fxLayout="row"
+fxLayoutAlign="start center"
+fxLayoutGap="10px">
+    <ccr-avatar [account]="user.account"  size="messages"></ccr-avatar>
+    <small fxFlex
+    *ngIf="currentAccount && currentAccount.id === user.account; else defaultName">
+        {{ 'GLOBAL.YOU' | translate }}
+    </small>
+    <ng-template #defaultName>
+        <small fxFlex>{{ user.firstName }} {{ user.lastName }}</small>
+    </ng-template>
+    <mat-icon
+    *ngIf="showRemoveButton && (!currentAccount || currentAccount.id !== user.account)"
+    (click)="onRemove(user.account)" class="clickable float-right">close</mat-icon>
+</div>

@@ -1,0 +1,83 @@
+@import 'shared/directed-styles';
+@import 'variables';
+
+app-dieter-journal-food-table {
+  .ccr-table {
+    mat-table {
+      .mat-column-date {
+        flex: 3 !important;
+      }
+
+      .mat-column-carb {
+        flex: 1.5 !important;
+      }
+
+      .mat-row {
+        align-items: stretch;
+        padding-top: 15px;
+      }
+    }
+
+    small {
+      @include horizontal-margin-left(0.25em);
+      margin-top: 0.42em;
+    }
+
+    .day-summary {
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .meal-image-thumbnail {
+    margin: 0 5px;
+    &.clickable {
+      cursor: pointer;
+    }
+
+    img {
+      height: auto;
+      width: 50px;
+    }
+  }
+
+  .ingredient-item {
+    margin-left: 10px !important;
+  }
+
+  .level2 {
+    .mat-cell {
+      .expandable {
+        padding: 0 15px 5px 36px;
+      }
+    }
+  }
+
+  .lowercase-text {
+    text-transform: lowercase;
+  }
+
+  .meal-name {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .row-bottom-border {
+    border-bottom: 1px solid var(--bg-panel) !important;
+    padding-bottom: 10px;
+  }
+
+  .serving-amount {
+    font-style: oblique;
+    text-transform: lowercase;
+  }
+
+  .small-popup-description {
+    mat-icon {
+      font-size: 15px !important;
+      height: 18px !important;
+      width: 15px !important;
+    }
+  }
+}

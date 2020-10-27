@@ -1,0 +1,15 @@
+.file-explorer-wrapper {
+  ::ng-deep > ccr-datasource-overlay {
+    min-height: 250px;
+
+    > app-content-file-explorer-table + .ccr-overlay {
+      margin-top: 59px;
+    }
+    > app-content-file-explorer-grid + .ccr-overlay {
+      margin-top: 40px;
+      > .ccr-errors {
+        margin-top: 0px;
+      }
+    }
+  }
+}

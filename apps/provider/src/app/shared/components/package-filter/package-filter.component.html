@@ -1,0 +1,66 @@
+<div *ngIf="packages.length > 0" [formGroup]="form">
+    <button mat-button [matMenuTriggerFor]="menu">
+        <span>{{ 'BOARD.FILTER_BY_PACKAGE' | translate }}</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="true" xPosition="before">
+
+    <div class="hint-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-checkbox
+        (click)="$event.stopPropagation();"
+        formControlName="toggle"
+        labelPosition="after">
+            <span class="hint">{{ 'GLOBAL.PACKAGES' | translate }}</span>
+        </mat-checkbox>
+    </div>
+    <div
+    class="ccr-package-filter-checkbox-container"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="15px">
+        <div
+        formGroupName="packages"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        fxLayoutGap="10px">
+            <mat-checkbox
+            *ngFor="let package of packages; let i = index;"
+            (click)="$event.stopPropagation();"
+            [formControlName]="i"
+            labelPosition="after">
+                {{ package.title }}
+            </mat-checkbox>
+        </div>
+    </div>
+    <br>
+
+    <div (click)="onCloseMenu();" class="action-button-container" fxLayout="column" fxLayoutAlign="start stretch">
+        <button
+        *ngIf="selectedMoreThanOne"
+        [innerHTML]="'BOARD.ANY_PACKAGES' | translate"
+        (click)="onClickAny();"
+        class="quick-select-button"
+        color="primary"
+        mat-stroked-button></button>
+        <button
+        *ngIf="selectedMoreThanOne"
+        [innerHTML]="'BOARD.ALL_PACKAGES' | translate"
+        (click)="onClickAll();"
+        class="quick-select-button"
+        color="primary"
+        mat-stroked-button></button>
+        <button
+        *ngIf="!selectedMoreThanOne"
+        [innerHTML]="'MENU.SEARCH' | translate"
+        (click)="onClickAny();"
+        class="quick-select-button"
+        color="primary"
+        mat-stroked-button></button>
+        <button
+        [innerHTML]="'BOARD.CLEAR' | translate"
+        (click)="onDeselectAll();"
+        class="quick-select-button"
+        mat-stroked-button></button>
+    </div>
+    </mat-menu>
+</div>

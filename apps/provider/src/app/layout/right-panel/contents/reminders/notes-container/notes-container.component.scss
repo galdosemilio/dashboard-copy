@@ -1,0 +1,13 @@
+.notes-container {
+  max-height: 55vh;
+  overflow-y: auto;
+
+  mat-spinner {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.empty-container {
+  text-align: center;
+}

@@ -1,0 +1,48 @@
+<div *ngIf="hasChildren; then branch else leaf"></div>
+
+<ng-template #branch>
+
+  <mat-list-item class="nav-dropdown {{levelClass}}" [ngClass]="{'active': active }" (click)="clicked($event)">
+    <ccr-badge *ngIf="sidenavItem.badge">{{ sidenavItem.badge }}</ccr-badge>
+    <ccr-badge *ngIf="sidenavItem.unread">{{ sidenavItem.unread }}</ccr-badge>
+    <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>
+    <span>{{ sidenavItem.navName | translate }}</span>
+    <i class="material-icons"></i>
+  </mat-list-item>
+
+  <mat-nav-list class="nav-children {{levelClass}}"
+    [ngClass]="{'active': active }"
+    [disableRipple]="false"
+    [ngStyle]="{'height.px': height}">
+    <app-sidenav-item
+      *ngFor="let child of sidenavItem.children"
+      [sidenavItem]="child"
+      [level]="level + 1"
+      [parent]="_this">
+    </app-sidenav-item>
+  </mat-nav-list>
+
+</ng-template>
+
+<ng-template #leaf>
+
+  <mat-list-item *ngIf="sidenavItem.navRoute" class="mat-list-item {{levelClass}}"
+  [routerLink]="sidenavItem.navRoute" routerLinkActive="active">
+    <ccr-badge *ngIf="sidenavItem.badge">{{ sidenavItem.badge }}</ccr-badge>
+    <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>
+    <span>{{ sidenavItem.navName | translate }}</span>
+  </mat-list-item>
+
+  <mat-list-item *ngIf="sidenavItem.navLink" class="mat-list-item {{levelClass}}"
+  (click)="newWindow(sidenavItem.navLink)">
+    <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>
+    <span>{{ sidenavItem.navName | translate }}</span>
+  </mat-list-item>
+
+  <mat-list-item *ngIf="sidenavItem.navAction" class="mat-list-item {{levelClass}}"
+                 (click)="performAction(sidenavItem.navAction)">
+    <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>
+    <span>{{ sidenavItem.navName | translate }}</span>
+  </mat-list-item>
+
+</ng-template>

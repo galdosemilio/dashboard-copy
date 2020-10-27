@@ -1,0 +1,51 @@
+div.mat-menu-content {
+  padding: 0 0 15px 0 !important;
+}
+
+hr {
+  margin: 15px auto 10px auto;
+  width: 95%;
+}
+
+.action-button-container {
+  padding: 0 20px;
+}
+
+.ccr-package-filter-checkbox-container {
+  margin: 15px 0 0 0 !important;
+  max-height: 250px;
+  overflow-y: scroll;
+  padding: 0 20px;
+
+  .mat-checkbox-inner-container {
+    margin-top: 4px !important;
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    white-space: normal !important;
+  }
+}
+
+.hint {
+  font-weight: bold;
+
+  &-container {
+    background-color: var(--bg-panel);
+    padding: 10px 20px;
+  }
+}
+
+.mat-radio-label {
+  white-space: normal !important;
+}
+
+.quick-select-button {
+  margin-bottom: 10px;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.radio-group-container {
+  padding: 15px 20px 0 20px;
+}

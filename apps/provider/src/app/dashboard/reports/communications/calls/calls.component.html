@@ -1,0 +1,67 @@
+<p data-cy="callLogClinicNotice" [innerHTML]="'REPORTS.COMMS_CALLS_DESCRIPTION' | translate:{clinic: clinic}"></p>
+
+<div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button fxFlex="nogrow" class="ccr-align-center"
+    [disabled]="!source.isLoaded || source.isEmpty || isLoading" (click)="downloadCSV()">
+      {{ 'REPORTS.EXPORT_CSV' | translate }}
+      <mat-icon>file_download</mat-icon>
+    </button>
+
+    <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="source.total"
+        [pageIndex]="source.pageIndex"
+        [pageSize]="source.pageSize"
+        (page)="source.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+</div>
+
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+    <mat-table [dataSource]="source" data-cy="callLogTable">
+        <ng-container cdkColumnDef="participants">
+        <mat-header-cell *cdkHeaderCellDef>{{'RIGHT_PANEL.PARTICIPANTS' | translate}}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayout="column" fxLayoutAlign="start start" fxFlex.xs="grow">
+            <span>{{'RIGHT_PANEL.PARTICIPANTS' | translate}}</span>
+            <p *ngFor="let participant of row.participants" class="participant">
+                {{ participant.firstName }} {{ participant.lastName }} (ID: {{ participant.id }})<i class="ccr-marker" *ngIf="participant.isInitiator">&nbsp;*</i>
+            </p>
+        </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="clinic">
+            <mat-header-cell *cdkHeaderCellDef>{{'BOARD.CLINIC' | translate}}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{'BOARD.CLINIC' | translate}}</span>
+                {{ row.organization.name }} (ID: {{ row.organization.id }})
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="start">
+        <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.TIME' | translate}}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+            <span>{{'GLOBAL.TIME' | translate}}</span>
+            {{ row.time.start | amDateFormat:'ddd, MMM D YYYY h:mm a' }}
+        </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="duration">
+        <mat-header-cell *cdkHeaderCellDef>{{'REPORTS.DURATION' | translate}}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+            <span>{{'REPORTS.DURATION' | translate}}</span>
+            {{ row.time.duration }} {{ 'GLOBAL.MINUTES' | translate }}
+        </mat-cell>
+        </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayoutWrap
+        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        [ngClass]="{
+            'row-even': even,
+            'row-odd': odd
+        }">
+        </mat-row>
+    </mat-table>
+
+</ccr-datasource-overlay>
+
+<small class="table-hint"><i class="ccr-marker">&nbsp;*</i> {{ 'REPORTS.CALL_INITIATOR' | translate }}</small>

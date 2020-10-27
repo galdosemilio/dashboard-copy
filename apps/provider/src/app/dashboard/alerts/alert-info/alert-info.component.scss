@@ -1,0 +1,13 @@
+@import 'variables';
+@import 'shared/directed-styles';
+
+p {
+  margin-bottom: 0.5em;
+}
+
+mat-icon {
+  color: mat-color($ccr-foreground, icon);
+  cursor: pointer;
+  font-size: 24px;
+  @include horizontal-margin-right(3px);
+}

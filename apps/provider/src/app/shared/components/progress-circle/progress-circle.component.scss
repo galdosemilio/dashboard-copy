@@ -1,0 +1,44 @@
+@import 'variables';
+
+body.rtl {
+  :host {
+    svg {
+      transform: scale(-1, 1);
+
+      text.regular-text,
+      text.primary-text {
+        transform: scale(-1, 1) translateX(-94%);
+      }
+    }
+  }
+}
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+path.progress-circle-path,
+path.progress-circle-path-rest {
+  fill: transparent;
+  stroke-width: 4px;
+}
+path.progress-circle-path {
+  stroke: mat-color($ccr-foreground, stroke);
+}
+
+path.progress-circle-path-rest {
+  stroke: var(--primary);
+}
+
+text.regular-text {
+  fill: mat-color($ccr-foreground, progress-circle);
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+text.primary-text {
+  fill: var(--primary);
+  font-size: 24px;
+  text-anchor: middle;
+}

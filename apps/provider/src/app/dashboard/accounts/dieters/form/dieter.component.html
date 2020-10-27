@@ -1,0 +1,146 @@
+<ng-container [formGroup]="form">
+  <div class="package-grid" *ngIf="!dieterId">
+    <ccr-app-section
+      [args]="packageSelectorArgs"
+      bindForm="packages"
+      section="PATIENT_FORM.PACKAGE_ENROLL_GRID">
+    </ccr-app-section>
+  </div>
+
+  <div [hidden]="forcePackageSelection && !hasSelectedPackages">
+    <mat-grid-list class="ccr-grid" [cols]="colSpan" rowHeight="70px">
+      <mat-grid-tile [colspan]="colSpan" *ngIf="!dieterId">
+        <mat-form-field class="ccr-iconfix">
+          <input matInput text readonly type="text" formControlName="organization" [placeholder]="'BOARD.CLINIC' | translate">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="ccr-iconfix">
+          <input matInput required formControlName="firstName" [placeholder]="'BOARD.FIRST_NAME' | translate">
+          <mat-icon matSuffix *ngIf="dieterId">mode_edit</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="ccr-iconfix">
+          <input matInput required formControlName="lastName" [placeholder]="'BOARD.LAST_NAME' | translate">
+          <mat-icon matSuffix *ngIf="dieterId">mode_edit</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="ccr-iconfix">
+          <input matInput required email type="email"
+          formControlName="email"
+          pattern="^[^@]+@[^@]+\.[^@]{2,}$"
+          [placeholder]="'BOARD.EMAIL' | translate">
+          <mat-icon matSuffix *ngIf="dieterId">mode_edit</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <ccr-phone-input formControlName="phone" fxFlex></ccr-phone-input>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center stretch">
+          <ccr-date-input
+          [errorMessage]="'NOTIFY.ERROR.BIRTHDATE_REQUIRED' | translate"
+          [max]="maxBirthday"
+          formControlName="clientBirthday"
+          fxFlex></ccr-date-input>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select required formControlName="clientGender" [placeholder]="'BOARD.GENDER' | translate">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{ gender.viewValue | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [rowspan]="rowSpan && measurement !== 'metric' ? 2 : 1">
+        <ccr-form-field-height
+          [required]="true"
+          formControlName="clientHeight"
+        ></ccr-form-field-height>
+      </mat-grid-tile>
+
+      <!-- <mat-grid-tile>
+        <mat-form-field>
+          <input matInput formControlName="startDate" [placeholder]="'BOARD.START_DATE' | translate"
+            [matDatepicker]="pickerStart" readonly="true">
+          <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile> -->
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select required formControlName="timezone" [placeholder]="'BOARD.TIME_ZONE' | translate">
+            <mat-option *ngFor="let timezone of timezones" [value]="timezone.code">
+              {{ timezone.lang[lang] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <ccr-form-field-lang fxLayout="column"
+        required formControlName="preferredLocales"
+        [placeholder]="'BOARD.LANGUAGE' | translate"
+        ></ccr-form-field-lang>
+      </mat-grid-tile>
+
+      <!-- <mat-grid-tile>
+        <mat-form-field class="ccr-align-right">
+          <input matInput formControlName="weightInitial" type="number" placeholder="{{'BOARD.INITIAL_WEIGHT' | translate}} ({{'BOARD.OPTIONAL' | translate}})">
+          <span matSuffix>{{ 'composition' | unitLabel | translate }}</span>
+        </mat-form-field>
+      </mat-grid-tile> -->
+
+      <mat-grid-tile>
+        <mat-form-field class="ccr-align-right">
+          <input matInput formControlName="weightGoal" type="number" placeholder="{{'BOARD.WEIGHT_GOAL' | translate}} ({{'BOARD.OPTIONAL' | translate}})">
+          <span matSuffix>{{ 'composition' | unitLabel | translate }}</span>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <ccr-date-input
+        data-cy="clientStartedAtInput"
+        [placeholder]="'BOARD.START_DATE' | translate"
+        [required]="false"
+        formControlName="clientStartedAt"
+        fxFlex></ccr-date-input>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <div *ngIf="showUnderageNotice" class="section-grid notice-container">
+      <mat-checkbox formControlName="hasMinimumAgeConsent" required>
+        {{ 'BOARD.UNDERAGE_PATIENT_NOTICE' | translate }}
+      </mat-checkbox>
+    </div>
+
+    <div
+    [hidden]="!form.controls.hasMinimumAgeConsent.touched || !form.controls.hasMinimumAgeConsent.hasError('noUnderageConsent')"
+    class="section-grid notice-error-container">
+      <mat-error>{{ 'BOARD.NO_UNDERAGE_PATIENT_CONSENT' | translate }}</mat-error>
+    </div>
+
+    <div class="section-grid" *ngIf="showAccountIdentifiersInput">
+      <ccr-app-section [args]="accountIdentifiersArgs" bindForm="identifiers" section="PATIENT_FORM.ACCOUNT_IDENTIFIERS_INPUT"></ccr-app-section>
+    </div>
+
+    <div class="section-grid" *ngIf="!dieterId && hasPackages">
+      <ccr-app-section
+        bindForm="packages"
+        section="PATIENT_FORM.PACKAGE_ENROLL">
+      </ccr-app-section>
+    </div>
+  </div>
+</ng-container>

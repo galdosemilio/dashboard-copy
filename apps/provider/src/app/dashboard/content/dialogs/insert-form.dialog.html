@@ -1,0 +1,44 @@
+<div matDialogTitle>
+    <div>
+        <mat-icon>cloud_upload</mat-icon>
+        <span>{{ 'LIBRARY.CONTENT.INSERT_FORM' | translate }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content [formGroup]="form">
+    <div fxLayout="column">
+        <p>{{ 'LIBRARY.CONTENT.INSERT_FORM_NOTICE' | translate:{tab: ('LIBRARY.FORMS._TITLE' | translate)} }}</p>
+        <mat-form-field fxFlex="grow">
+            <input type="text" matInput [formControl]="form.controls.query"
+            [matAutocomplete]="formAutoComp" [placeholder]="'LIBRARY.FORMS.SEARCH_BY_NAME' | translate">
+        </mat-form-field>
+
+        <mat-autocomplete #formAutoComp="matAutocomplete" (optionSelected)="onFormSelect($event)">
+            <mat-option [value]="form.name" *ngFor="let form of forms">
+                <p>{{ form.name }}</p>
+            </mat-option>
+        </mat-autocomplete>
+
+        <h4>{{ 'LIBRARY.CONTENT.SELECTED_FORM' | translate }}</h4>
+
+        <app-content-content-form
+        [readonlyFields]="selectedFormContent ? ['name'] : readonlyFields"
+        [details]="selectedFormContent"
+        [mode]="mode"
+        bindForm="details" [overwriteControl]="true">
+        </app-content-content-form>
+    </div>
+</div>
+
+<mat-dialog-actions>
+    <button mat-button color="primary" class="ccr-icon-button" [disabled]="form.invalid" (click)="closeDialog()">
+        <mat-icon>check</mat-icon> {{'LIBRARY.CONTENT.INSERT' | translate}}
+    </button>
+
+    <button mat-button class="ccr-icon-button" matDialogClose>
+        <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+    </button>
+</mat-dialog-actions>

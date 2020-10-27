@@ -1,0 +1,9 @@
+<!-- WARNING have to be sure to have translated strings because after the extraction they are empty -->
+
+<h3 *ngIf="data.title" matDialogTitle [innerHTML]="data.title | translate: data.titleParams"></h3>
+
+<div mat-dialog-content [innerHTML]="data.content | translate: data.contentParams"></div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end stretch">
+  <button mat-raised-button [color]="data.color" matDialogClose>{{ data.accept | translate }}</button>
+</div>

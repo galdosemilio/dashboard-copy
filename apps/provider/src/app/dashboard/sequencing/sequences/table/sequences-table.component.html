@@ -1,0 +1,53 @@
+<ccr-datasource-overlay
+[emptyMsg]="'SEQUENCING.SEQUENCES_EMPTY_LIST' | translate"
+[source]="source"
+class="ccr-table">
+    <mat-table [dataSource]="source">
+        <ng-container cdkColumnDef="name">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" (click)="onShowSequence(row)" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+            {{ row.name }}
+        </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="createdAt">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.CREATED_AT' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" (click)="onShowSequence(row)" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+            {{ row.createdAt | amDateFormat:'ddd, MMM D YYYY' }}
+        </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="isActive">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.STATUS' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" (click)="onShowSequence(row)" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+            {{ row.isActive ? ('GLOBAL.ACTIVE' | translate) : ('GLOBAL.INACTIVE' | translate) }}
+        </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="organization">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CLINIC' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" (click)="onShowSequence(row)" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow" data-cy="sequenceClinicInfo">
+                {{ row.organization.name }} (id {{ row.organization.id }})
+            </mat-cell>
+            </ng-container>
+
+        <ng-container cdkColumnDef="actions">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+            <button [title]="'BOARD.DUPLICATE' | translate" (click)="onDuplicateSequence(row)" mat-icon-button>
+                <mat-icon>file_copy</mat-icon>
+            </button>
+            <button [title]="'BOARD.REMOVE' | translate" (click)="onRemoveSequence(row)" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-cell>
+        </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayoutWrap
+          *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+          [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+          class="clickable"
+        ></mat-row>
+    </mat-table>
+</ccr-datasource-overlay>

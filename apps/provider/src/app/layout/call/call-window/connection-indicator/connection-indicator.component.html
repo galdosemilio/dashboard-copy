@@ -1,0 +1,13 @@
+<div *ngIf="connectionStatus !== undefined" [ngSwitch]="connectionStatus" class="connection-status-container">
+    <div *ngSwitchCase="0">
+        <ccr-signal-icon [size]="24" fill="#00cc00"></ccr-signal-icon>
+    </div>
+
+    <div *ngSwitchCase="1">
+        <ccr-signal-icon [size]="24" fill="#ffaa00"></ccr-signal-icon>
+    </div>
+
+    <div *ngSwitchCase="2">
+        <ccr-poor-connection-icon [size]="24" fill="#ff0000"></ccr-poor-connection-icon>
+    </div>
+</div>

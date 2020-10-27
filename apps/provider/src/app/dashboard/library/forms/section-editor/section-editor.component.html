@@ -1,0 +1,133 @@
+<div
+  class="section"
+  fxLayout="column" fxLayoutAlign="start stretch"
+  fxLayoutGap="10px" [formGroup]="form">
+  <div
+    class="section-header" fxLayout="column" fxLayoutAlign="start stretch"
+    fxLayoutGap="15px" [hidden]="!showHeader">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3 fxFlex
+      *ngIf="activeSectionInput !== 'title'"
+      class="title clickable" fxLayout="row"
+      fxLayoutGap="1%" fxLayoutAlign="start center"
+      (click)="setActiveSectionInput('title')">
+        <span>{{ form.value.title }}</span>
+        <mat-icon>edit</mat-icon>
+      </h3>
+      <mat-form-field *ngIf="activeSectionInput === 'title'">
+        <input type="text" matInput
+        formControlName="title"
+        [placeholder]="'LIBRARY.FORMS.SECTION_TITLE' | translate"
+        (blur)="setActiveSectionInput()">
+      </mat-form-field>
+      <span
+      fxLayout="row" fxLayoutAlign="end center"
+      class="remove-button clickable" (click)="removeSection()">
+        <mat-icon>delete</mat-icon>
+        <span>{{ 'GLOBAL.DELETE' | translate }}</span>
+      </span>
+    </div>
+
+    <h4
+    *ngIf="activeSectionInput !== 'description'"
+    class="description clickable" fxLayout="row"
+    fxLayoutGap="1%" fxLayoutAlign="start center"
+    (click)="setActiveSectionInput('description')">
+      <span>{{ form.value.description || ('LIBRARY.FORMS.SECTION_DESCRIPTION_PLACEHOLDER' | translate) }}</span>
+      <mat-icon>edit</mat-icon>
+    </h4>
+    <mat-form-field *ngIf="activeSectionInput === 'description'">
+      <input type="text" matInput
+      formControlName="description"
+      [placeholder]="'LIBRARY.FORMS.SECTION_DESCRIPTION' | translate"
+      (blur)="setActiveSectionInput()">
+    </mat-form-field>
+  </div>
+
+  <div class="section-body">
+    <div
+    *ngFor="let question of section.questions; let i = index;" class="question active"
+    fxLayout="row" fxLayoutAlign=" stretch" fxLayoutGap="7px"
+    [hidden]="question.deleted" [formGroup]="form.controls.questions"
+    [ccrDraggable]="{ data: { question: question, index: i }, isDraggable: true }">
+      <div fxLayout="column" fxLayoutAlign="start space-around">
+        <h2 class="question-number">{{ question.index }}</h2>
+      </div>
+      <div class="question-body" fxFlex="grow" fxLayoutGap="7px">
+        <div fxLayout="column" fxLayoutAlign="center space-around" class="handle"
+        [ccrDropzone]="{ data: { question: question, index: i }, isDroppable: true }" (ccrDrop)="onDrop($event)">
+          <mat-icon class="clickable drag-icon">drag_indicator</mat-icon>
+          <mat-icon class="clickable dragover-icon">fullscreen</mat-icon>
+        </div>
+        <div fxFlex="grow">
+          <app-library-question-editor
+          [question]="question"
+          [events]="events"
+          [bindForm]="i"
+          [useParentForm]="false"
+          [overwriteControl]="true">
+          </app-library-question-editor>
+        </div>
+      </div>
+    </div>
+
+    <div
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    *ngIf="!hasQuestions">
+      <span
+      class="ccr-strong"
+      *ngIf="showHeader">
+        {{ 'LIBRARY.FORMS.EMPTY_SECTION' | translate }}
+      </span>
+      <span
+      class="ccr-strong"
+      *ngIf="!showHeader">
+        {{ 'LIBRARY.FORMS.EMPTY_ONLY_SECTION' | translate }}
+      </span>
+    </div>
+
+    <div
+    class="add-question-wrapper"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    fxLayoutAlign.xs="stretch"
+    fxLayoutGap="1%"
+    [ccrDropzone]="{ data: { section: section }, isDroppable: true }"
+    (ccrDrop)="onDropIntoNewQuestion($event)">
+      <mat-icon
+      class="clickable add-icon"
+      (click)="addFormQuestion()">
+        add_circle
+      </mat-icon>
+      <mat-icon
+      class="clickable dragover-icon">
+        fullscreen
+      </mat-icon>
+      <div
+      class="question-body"
+      fxFlex="grow">
+        <mat-form-field
+        class="ccr-form-field"
+        floatLabel="never"
+        fxFlex="grow">
+          <mat-select
+          #newQuestionType
+          [compareWith]="questionTypeCompare"
+          [disabled]="!form.valid"
+          [placeholder]="'LIBRARY.FORMS.ADD_QUESTION_BY_TYPE' | translate"
+          (selectionChange)="onSelectQuestionType($event)">
+            <ng-container *ngFor="let type of questionTypes">
+              <mat-option
+              *ngIf="type.isActive === true"
+              [value]="type">
+                {{ type.description | translate }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>

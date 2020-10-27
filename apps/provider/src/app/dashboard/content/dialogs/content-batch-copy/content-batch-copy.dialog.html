@@ -1,0 +1,109 @@
+<div matDialogTitle>
+    <div>
+        <mat-icon>content_copy</mat-icon>
+        <span>{{ 'LIBRARY.CONTENT.CLONE_CONTENT' | translate }}</span>
+    </div>
+    <button *ngIf="status === 'ready'" matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content [formGroup]="form">
+    <mat-horizontal-stepper #stepper [hidden]="status !== 'ready'" [linear]="true">
+        <mat-step [stepControl]="form.controls.selectedContents">
+            <ng-template matStepLabel>{{ 'LIBRARY.FORMS.SELECT_CONTENT' | translate }}</ng-template>
+            <div class="first-step-container" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+                <div fxFlex="49%">
+                    <ccr-datasource-overlay [source]="datasource" class="ccr-table">
+                    <app-content-file-explorer-table
+                        [allowBreadcrumbs]="false"
+                        [allowInlineEdit]="false"
+                        [initialRoutes]="initialRoutes"
+                        [checkedContents]="checkedContents"
+                        [events]="events"
+                        [hiddenColumns]="hiddenColumns"
+                        [source]="datasource"
+                        [organization]="organization"
+                    ></app-content-file-explorer-table>
+                    </ccr-datasource-overlay>
+                </div>
+                <div
+                class="selected-contents-container"
+                fxFlex="49%"
+                fxLayout="column"
+                fxLayoutAlign="start stretch"
+                fxLayoutGap="20px">
+                    <p>{{ 'LIBRARY.CONTENT.SELECTED_CONTENTS' | translate }}</p>
+                    <app-content-selected-table
+                    [contents]="checkedContents"
+                    [events]="events">
+                    </app-content-selected-table>
+                </div>
+            </div>
+        </mat-step>
+
+        <mat-step [stepControl]="form.controls.targetFolder">
+            <ng-template matStepLabel>{{ 'LIBRARY.CONTENT.SELECT_DESTINATION' | translate }}</ng-template>
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="15px">
+            <div class="step-container" fxFlex>
+                <app-content-file-explorer-content-selector
+                [opts]="selectorOpts"
+                [organization]="organization"
+                (contentSelected)="onSelectedContent($event)">
+                </app-content-file-explorer-content-selector>
+            </div>
+            <div class="selected-folder-container" fxFlex="49%" fxLayout="column" fxLayoutGap="3%" fxLayoutAlign="center center">
+                <strong class="copying-cta">
+                  <span>{{ 'LIBRARY.CONTENT.SELECTED_FOLDER' | translate }}</span>
+                </strong>
+                <app-content-file-explorer-content [content]="selectedContent" *ngIf="selectedContent"></app-content-file-explorer-content>
+            </div>
+            </div>
+        </mat-step>
+
+        <mat-step [stepControl]="form.controls.overrideDetails">
+            <ng-template matStepLabel>{{ 'LIBRARY.CONTENT.SET_AVAILABILITY' | translate }}</ng-template>
+            <div class="step-container">
+                <app-content-content-form
+                [hiddenFields]="hiddenFormFields"
+                [overwriteControl]="true"
+                (submit)="onSubmit()"
+                bindForm="overrideDetails">
+                </app-content-content-form>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+    <div [hidden]="status !== 'processing'" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px">
+        <p>{{ 'LIBRARY.CONTENT.CLONING_CONTENTS' | translate }}</p>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>
+
+<mat-dialog-actions>
+    <div *ngIf="status === 'ready'">
+        <button
+        *ngIf="!isOnLastStep()"
+        [disabled]="form.controls.targetFolder.invalid || form.controls.selectedContents.invalid"
+        mat-button
+        class="ccr-button"
+        color="primary"
+        (click)="goToNextStep()">
+        {{ 'GLOBAL.NEXT' | translate }}
+        </button>
+
+        <button
+        *ngIf="isOnLastStep()"
+        [disabled]="form.invalid"
+        (click)="onSubmit()"
+        class="ccr-button"
+        color="primary"
+        mat-button>
+        {{ 'LIBRARY.CONTENT.CLONE_CONTENT' | translate }}
+        </button>
+
+        <button mat-button class="ccr-button" (click)="closeDialog()">
+        {{ 'GLOBAL.CANCEL' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>

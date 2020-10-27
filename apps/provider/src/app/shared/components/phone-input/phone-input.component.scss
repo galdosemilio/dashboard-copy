@@ -1,0 +1,19 @@
+mat-form-field.has-flag {
+  & > div.mat-form-field-wrapper {
+    & > div.mat-form-field-flex {
+      & > div.mat-form-field-infix {
+        padding-bottom: 5px;
+        padding-top: 5px;
+      }
+    }
+  }
+}
+
+.flag {
+  height: 18px;
+  width: auto;
+}
+
+.phone-input-container {
+  width: 100%;
+}

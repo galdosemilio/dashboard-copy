@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+    <div [formGroup]="valueForm">
+        <mat-slider
+            [max]="sliderOpts.max"
+            [min]="sliderOpts.min"
+            [step]="sliderOpts.step"
+            [thumbLabel]="true"
+            [displayWith]="sliderOpts.displayWith"
+            formControlName="value">
+        </mat-slider>
+    </div>
+</div>

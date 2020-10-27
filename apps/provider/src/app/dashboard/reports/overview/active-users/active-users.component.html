@@ -1,0 +1,27 @@
+<div class="report-heading">
+  <mat-icon>person_outline</mat-icon>
+  <h3>
+    {{ 'REPORTS.ACTIVE_USERS' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.ACTIVE_USERS' | translate"
+    [description]="'REPORTS.ACTIVE_USERS_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+
+  <p class="ccr-hint">
+    {{ 'REPORTS.ACTIVE_USERS_HINT' | translate: hint }}
+  </p>
+</div>
+
+<ccr-datasource-overlay class="ccr-container" [source]="source">
+  <canvas *ngIf="chart" baseChart
+  width="500" height="400"
+  [chartType]="chart.type"
+  [datasets]="chart.datasets"
+  [labels]="chart.labels"
+  [options]="chart.options"
+  [legend]="chart.legend"
+  [colors]="chart.colors"
+  ></canvas>
+</ccr-datasource-overlay>

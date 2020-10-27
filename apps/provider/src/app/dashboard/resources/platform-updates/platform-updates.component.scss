@@ -1,0 +1,31 @@
+.article-list {
+  padding-inline-start: 20px;
+
+  li {
+    margin: 10px 0;
+
+    &.unread {
+      list-style-type: none;
+      position: relative;
+
+      &::before {
+        background-color: #f05d5c;
+        border-radius: 20px;
+        content: '';
+        height: 13px;
+        left: -21px;
+        position: absolute;
+        top: 2px;
+        width: 13px;
+      }
+    }
+  }
+}
+
+.ccr-link {
+  color: var(--primary);
+}
+
+.view-all-cta {
+  margin-left: 20px;
+}

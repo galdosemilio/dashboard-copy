@@ -1,0 +1,102 @@
+@import 'variables';
+
+.package-selector {
+  padding: 0 15px;
+  margin-bottom: 20px;
+  user-select: none;
+
+  .packages {
+    margin-bottom: 30px;
+
+    &-footer {
+      border: 1px solid mat-color($ccr-foreground, secondary-text);
+      padding: 5px;
+
+      .footer-button {
+        margin: 10px 0 !important;
+      }
+
+      .footer-image {
+        height: 30px;
+        padding: 0 10px;
+        width: 80px;
+      }
+
+      .footer-sub-text {
+        font-size: 13px;
+      }
+    }
+
+    &-header {
+      color: mat-color($ccr-foreground, secondary-text);
+      text-align: center;
+      width: 100%;
+    }
+
+    .package {
+      &-body {
+        height: 150px;
+        margin-bottom: 20px;
+      }
+
+      &-content {
+        padding: 20px;
+
+        &-item {
+          margin: 3px 0px;
+        }
+      }
+
+      &-image {
+        box-sizing: border-box;
+        height: 115px;
+        margin: 10px;
+      }
+
+      &-item {
+        border: 2px solid var(--accent, mat-color($ccr-primary));
+        cursor: pointer;
+        min-height: 100px;
+        margin-left: 0px !important;
+        margin-right: 20px;
+        position: relative;
+
+        &:last-child {
+          margin-right: 0px;
+        }
+
+        &.field-invalid {
+          border-color: var(--warn, mat-color($ccr-primary));
+
+          .selected-state {
+            border: 2px solid var(--warn, mat-color($ccr-primary));
+          }
+        }
+
+        &.selected {
+          border-color: var(--primary, mat-color($ccr-primary));
+
+          .selected-state {
+            border: 2px solid var(--primary, mat-color($ccr-primary));
+          }
+        }
+
+        .selected-state {
+          background-color: var(--accent, mat-color($ccr-primary));
+          border-radius: 15px;
+          bottom: -15px;
+          box-sizing: border-box;
+          height: 30px;
+          left: calc(50% - 75px);
+          position: absolute;
+          width: 150px;
+        }
+      }
+
+      &-header {
+        background-color: var(--accent, mat-color($ccr-primary));
+        height: 40px;
+      }
+    }
+  }
+}

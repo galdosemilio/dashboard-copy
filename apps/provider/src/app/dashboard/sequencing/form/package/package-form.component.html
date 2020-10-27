@@ -1,0 +1,10 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutAlign="center stretch">
+    <mat-form-field *ngIf="packages && packages.length" class="ccr-form-field" floatLabel="never" fxFlex>
+        <mat-select
+        [placeholder]="'SEQUENCING.CHOOSE_PACKAGE' | translate"
+        formControlName="package">
+            <mat-option *ngFor="let package of packages" [value]="package.id">{{ package.title }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <small *ngIf="!packages || !packages.length">{{ 'SEQUENCING.NO_PACKAGES' | translate }}</small>
+</div>

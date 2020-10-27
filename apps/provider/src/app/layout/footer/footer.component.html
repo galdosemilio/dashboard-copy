@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <strong>
+      {{ organization?.name | translate }}
+      <ng-container *ngIf="organization?.id">
+        (ID {{ organization.id }})
+      </ng-container>
+    </strong>
+
+    <ul>
+      <li>
+        <a href="{{ linkTerms || 'https://www.coachcare.com/terms/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TOS' | translate }}</a>
+      </li>
+      <li>
+        <a href="{{ linkPrivacy || 'https://www.coachcare.com/privacy/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
+      </li>
+      <li>
+        <a href="{{ linkHipaa || 'https://www.coachcare.com/hipaa/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>
+      </li>
+      <li>
+        <a href="{{ linkMsa || 'https://www.coachcare.com/agreement/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MSA' | translate }}</a>
+      </li>
+    </ul>
+
+    <span>
+      &#9400;&nbsp;{{ currentYear }}
+      <span translate [translateParams]="{company: 'Lexington Wellness Holdings, Inc.'}">LAYOUT.POWEREDBY</span>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>

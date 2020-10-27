@@ -1,0 +1,27 @@
+<div matDialogTitle>
+    <div>
+        <span>{{ 'BOARD.SELECT_FORM' | translate}}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <form-search (change)="onSearchChange($event)"></form-search>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button
+    (click)="onSubmit()"
+    [disabled]="form.invalid"
+    class="ccr-icon-button"
+    color="primary"
+    mat-button>
+        <mat-icon>check</mat-icon> {{'GLOBAL.SELECT' | translate}}
+    </button>
+
+    <button mat-button class="ccr-icon-button" matDialogClose>
+        <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+    </button>
+</mat-dialog-actions>

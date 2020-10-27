@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start">
+    <button mat-button color="primary"
+        class="ccr-button root-button"
+        *ngIf="opts.shouldShowRootFolderButton"
+        (click)="selectRootFolder()">
+        {{ 'LIBRARY.CONTENT.SELECT_ROOT_FOLDER' | translate }}
+    </button>
+
+    <div class="explorer-wrapper">
+        <ccr-datasource-overlay [source]="datasource" [showErrors]="false">
+            <app-content-file-explorer-list
+                [organization]="context.organization$ | async"
+                [source]="datasource"
+                [events]="events"
+                [options]="listOptions"
+            ></app-content-file-explorer-list>
+        </ccr-datasource-overlay>
+    </div>
+</div>

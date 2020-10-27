@@ -1,0 +1,29 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutWrap.xs fxLayoutGap="10px">
+    <h2>{{ 'GLOBAL.COACHES' | translate }}</h2>
+
+    <a *ngIf="clinic?.permissions.admin"
+    mat-button color="primary" class="ccr-icon-button"
+    fxFlex="nogrow" (click)="createDialog()">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'BOARD.COACH_NEW' | translate }}</span>
+    </a>
+  </div>
+
+  <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="space-between center">
+    <!-- Export CSV button here -->
+
+    <ccr-paginator fxFlex="nogrow" #paginator
+      [length]="source.total"
+      [pageIndex]="source.pageIndex"
+      [pageSize]="source.pageSize"
+      (page)="source.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+  </div>
+</div>
+
+<app-coaches-table
+  [source]="source"
+  (onSorted)="onSorted($event)"
+  [showActions]="admin">
+</app-coaches-table>

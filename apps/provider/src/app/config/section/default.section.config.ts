@@ -1,0 +1,69 @@
+import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component';
+import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models';
+import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component';
+import { _ } from '@app/shared/utils';
+import { CompositionColumns, JournalTabs } from './consts';
+import { SectionConfigDetails } from './models/section.details';
+
+export const DefaultTestSectionConfig: SectionConfigDetails = {
+  CLINIC_LISTING: {
+    SHOW_CLINIC_CREATE_BUTTON: false
+  },
+  JOURNAL: {
+    ALLOW_MEASUREMENT_LIST_VIEW: false,
+    HIDDEN_COMPOSITION_COLUMNS: [CompositionColumns.KETONES],
+    HIDDEN_MEASUREMENT_TABS: [],
+    HIDDEN_SETTINGS_TABS: [],
+    HIDDEN_TABS: [JournalTabs.METRICS],
+    PHYSICIAN_FORM: '15096',
+    SHOW_DOCTOR_PDF_BUTTON: false,
+    SHOW_PATIENT_PDF_BUTTON: false
+  },
+  PATIENT_FORM: {
+    ACCOUNT_IDENTIFIERS_INPUT: {
+      component: AccountIdentifiersComponent,
+      props: AccountIdentifiersProps,
+      values: {
+        identifiers: []
+      }
+    },
+    PACKAGE_ENROLL: {
+      component: PackageEnrollComponent
+    },
+    UNENROLL_THEN_ENROLL: false
+  },
+  RIGHT_PANEL: {
+    DAYSHEETS_FORM: '15121',
+    SHOW_DAYSHEET_BUTTON: false,
+    SHOW_REMINDERS: true,
+    REMINDERS_FORM: '15081'
+  }
+};
+
+export const DefaultProdSectionConfig: SectionConfigDetails = {
+  CLINIC_LISTING: {
+    SHOW_CLINIC_CREATE_BUTTON: false
+  },
+  JOURNAL: {
+    ALLOW_MEASUREMENT_LIST_VIEW: false,
+    HIDDEN_COMPOSITION_COLUMNS: [CompositionColumns.KETONES],
+    HIDDEN_MEASUREMENT_TABS: [],
+    HIDDEN_SETTINGS_TABS: [],
+    HIDDEN_TABS: [JournalTabs.METRICS],
+    PHYSICIAN_FORM: '293',
+    SHOW_DOCTOR_PDF_BUTTON: false,
+    SHOW_PATIENT_PDF_BUTTON: false
+  },
+  PATIENT_FORM: {
+    PACKAGE_ENROLL: {
+      component: PackageEnrollComponent
+    },
+    UNENROLL_THEN_ENROLL: false
+  },
+  RIGHT_PANEL: {
+    DAYSHEETS_FORM: '238',
+    SHOW_DAYSHEET_BUTTON: false,
+    SHOW_REMINDERS: true,
+    REMINDERS_FORM: '172'
+  }
+};

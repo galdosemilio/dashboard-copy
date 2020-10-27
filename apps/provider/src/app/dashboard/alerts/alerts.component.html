@@ -1,0 +1,27 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+    <h2 fxFlex>
+      {{ 'SIDENAV.ALERTS' | translate }}
+
+      <ccr-popup-description [title]="'SIDENAV.ALERTS' | translate" [description]="'REPORTS.ALERT_DESCRIPTION' | translate"></ccr-popup-description>
+    </h2>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap fxLayoutGap="2%" fxLayoutGap.xs="0" class="ccr-alerts">
+
+  <mat-form-field fxFlex="25%" fxFlex.xs="grow" floatLabel="never" class="ccr-filter">
+    <mat-select [disableOptionCentering]="true" [(ngModel)]="alert" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_ALERTS' | translate">
+      <mat-option *ngFor="let alert of alerts" [value]="alert.value">
+        {{ alert.viewValue | translate | uppercase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+
+<app-alert-info></app-alert-info>
+
+<app-alerts-table [source]="source"></app-alerts-table>
+
+<ccr-paginator #paginator [length]="source?.total" [pageIndex]="0" [pageSize]="12"></ccr-paginator>

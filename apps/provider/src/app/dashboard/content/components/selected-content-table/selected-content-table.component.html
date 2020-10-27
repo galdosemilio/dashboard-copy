@@ -1,0 +1,50 @@
+<div class="ccr-table">
+    <mat-table [dataSource]="contents">
+        <ng-container cdkColumnDef="selector">
+            <mat-header-cell *cdkHeaderCellDef fxFlex="36px">&nbsp;</mat-header-cell>
+            <mat-cell *cdkCellDef="let row; let i = index;" fxFlex="36px">
+                <mat-checkbox [checked]="true" (click)="onRemoveContent(row)"></mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="icon">
+            <mat-header-cell *cdkHeaderCellDef fxFlex="36px">&nbsp;</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxFlex="36px">
+                <mat-icon
+                class="row-icon"
+                [fontSet]="row.icon.set"
+                [fontIcon]="row.icon.name"
+                [svgIcon]="row.icon.svgIcon"
+                fxLayout="column"
+                fxLayoutAlign="center">
+                    {{ row.icon.set ? '' : row.icon.name }}
+                </mat-icon>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="name">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.CONTENT.FOLDER_NAME' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1%">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="4px">
+                            <span>
+                                {{ row.name }}
+                                <mat-icon class="private-icon" *ngIf="!row.isPublic && !row.hasPackageAssociations" [matTooltip]="'LIBRARY.CONTENT.LOCK_CONTENT_TOOLTIP' | translate">lock</mat-icon>
+                            </span>
+                            <small class="text-secondary" *ngIf="row.isForeign">
+                                {{ 'LIBRARY.CONTENT.FROM' | translate:{organization: row.organization.name} }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayoutWrap
+        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+        ></mat-row>
+    </mat-table>
+</div>

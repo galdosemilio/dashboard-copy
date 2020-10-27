@@ -1,0 +1,290 @@
+@import 'variables';
+@import 'shared/directed-styles';
+
+$rp-right-padding: 40px;
+$icon-dimensions: 21px;
+$subheader-height: 27px;
+
+/*
+* Dynamic component
+*/
+app-right-panel > :last-child {
+  h3 {
+    font-size: inherit;
+    font-weight: normal;
+    height: 80px;
+    line-height: 90px;
+    margin: 0;
+    @include horizontal-padding-left($rp-right-padding - 20px);
+    text-transform: uppercase;
+    user-select: none;
+    @media #{$medium-and-down} {
+      height: 2px;
+      opacity: 0;
+      visibility: hidden;
+    }
+    mat-icon {
+      font-size: 20px;
+      vertical-align: middle;
+    }
+  }
+
+  // empty component
+  .items-empty {
+    color: mat-color($ccr-foreground, icon);
+    text-align: center;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 30px;
+    @media #{$medium-and-down} {
+      top: 0;
+    }
+
+    .mat-icon {
+      font-size: 100px;
+      height: 100px;
+      opacity: 0.3;
+      width: 100px;
+    }
+    > span {
+      display: block;
+      padding-top: 10px;
+    }
+  }
+
+  h4.mat-subheader {
+    background-color: var(--accent);
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    color: var(--accent-contrast);
+    font-weight: normal;
+    height: 25px;
+    line-height: 26px;
+    // margin: 0 0 0 -15px;
+    margin: 0;
+    padding: 0 0 0 $rp-right-padding - 10px;
+    text-transform: uppercase;
+
+    mat-icon {
+      @include horizontal-margin-right(5px);
+      line-height: 25px;
+      font-size: 21px;
+    }
+    > span {
+      display: inline-block;
+      line-height: 25px;
+      vertical-align: top;
+    }
+  }
+
+  // item next to the subheader
+  h4 + div,
+  h4 + form {
+    padding-top: 25px !important;
+    padding-bottom: 15px;
+  }
+  // empty items message
+  .items-none {
+    padding: 0 25px 25px;
+  }
+  // add button
+  .items-create {
+    padding: 0 30px 20px 20px;
+    text-align: center;
+    .mat-button {
+      width: 100%;
+    }
+  }
+
+  .mat-list {
+    padding: 0 !important;
+
+    .mat-list-item {
+      height: 100%;
+      .mat-list-item-content {
+        height: auto;
+        padding: 0 26px 0 16px;
+      }
+      .item {
+        border-bottom: 2px solid mat-color($ccr-foreground, divider);
+        &.item-last {
+          border-bottom: none;
+        }
+      }
+      &:last-child {
+        .item {
+          border-bottom: 0px;
+        }
+        .reminder-item {
+          border-bottom: 2px solid mat-color($ccr-foreground, divider);
+          &.last {
+            border-bottom: 0px;
+          }
+        }
+      }
+    }
+
+    .item {
+      font-size: 15px;
+      padding: 15px 0;
+      width: 100%;
+
+      .mat-icon,
+      img {
+        font-size: $icon-dimensions;
+        height: $icon-dimensions;
+        width: $icon-dimensions;
+        vertical-align: top;
+        @include horizontal-margin-right(5px);
+      }
+      .item-heading {
+        margin-bottom: 5px;
+
+        mat-icon {
+          color: var(--primary);
+        }
+        > span {
+          display: inline;
+          line-height: 22px;
+        }
+      }
+      .item-body {
+        color: mat-color($ccr-foreground, secondary-text);
+        @include horizontal-padding-left(22px);
+
+        > div {
+          margin-bottom: 5px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          > span {
+            display: inline-block;
+            line-height: 22px;
+            vertical-align: bottom;
+            width: 85%;
+          }
+        }
+      }
+    }
+  }
+
+  form > mat-error,
+  div:not(.ng-trigger) > mat-error {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: -1.2em;
+    padding-bottom: 1em;
+  }
+  .action-buttons {
+    text-align: center;
+    .mat-button:not(:last-child) {
+      margin-bottom: 7px;
+      @include horizontal-margin-right(5px);
+    }
+  }
+
+  .mat-form-field-infix {
+    width: auto;
+  }
+}
+
+/*
+* Patient add measurement
+*/
+add-rightpanel-measurements {
+  form {
+    padding: 5px 30px 12px 20px;
+  }
+  .component-heading {
+    padding-top: 1.34375em;
+    position: relative;
+
+    .mat-form-field-label {
+      display: block;
+      -webkit-transform: translateY(-1.28125em) scale(0.75) perspective(100px)
+        translateZ(0.001px);
+      transform: translateY(-1.28125em) scale(0.75) perspective(100px) translateZ(0.001px);
+      -ms-transform: translateY(-1.28125em) scale(0.75);
+      width: 133.33333333%;
+    }
+  }
+  .mat-radio-group {
+    padding-bottom: 1.25em;
+  }
+  .mat-radio-button {
+    margin-bottom: 10px;
+  }
+}
+
+/*
+* Patient add measurement
+*/
+app-rightpanel-note,
+app-rightpanel-alert {
+  width: 100%;
+}
+
+add-note-dialog {
+  .mat-form-field-wrapper {
+    width: 100%;
+  }
+}
+
+/*
+* Consultation
+*/
+app-consultation {
+  .contents {
+    padding: 5px 30px 12px 20px;
+  }
+  mat-radio-group {
+    margin-bottom: 25px;
+  }
+}
+
+/*
+ * Availability app-consultation subforms
+ */
+app-add-consultation,
+app-set-unavailability {
+  form {
+    > div {
+      // padding: 5px 40px 12px 20px;
+
+      .mat-icon {
+        cursor: pointer;
+      }
+      .participants {
+        margin-bottom: 20px;
+        .participantType {
+          font-size: 13.5px;
+          @include horizontal-margin-left(5px);
+        }
+      }
+
+      > mat-form-field.ng-touched.ng-invalid .mat-form-field-wrapper {
+        margin-bottom: 1em;
+      }
+    }
+  }
+}
+
+/**
+ * Alerts
+ */
+app-rightpanel-alert {
+  .item {
+    padding: 10px 0;
+
+    > .ccr-icon {
+      color: mat-color($ccr-foreground, icon);
+      cursor: pointer;
+      float: right;
+      @include horizontal-margin-left(4px);
+      margin-top: 6px;
+    }
+  }
+}

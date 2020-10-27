@@ -25,8 +25,33 @@
               "apps/provider/src/favicon.ico",
               "apps/provider/src/assets"
             ],
-            "styles": ["apps/provider/src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "apps/provider/src/styles.scss",
+              "apps/provider/src/styles/app.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "apps/provider/src/styles",
+                "libs/common/src/lib/styles",
+                "libs/common/src/lib",
+                "libs/datepicker/src/lib"
+              ]
+            },
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "selvera-api",
+              "qrcode",
+              "axios",
+              "tinycolor2",
+              "url-parse",
+              "qs",
+              "moment-timezone",
+              "moment",
+              "linkifyjs",
+              "twilio-video",
+              "ngrx-store-freeze"
+            ]
           },
           "configurations": {
             "prod": {
@@ -47,8 +72,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -75,8 +100,36 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "standalone": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/provider/src/environments/environment.ts",
+                  "with": "apps/provider/src/environments/environment.standalone.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "8mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -95,6 +148,12 @@
           "configurations": {
             "production": {
               "browserTarget": "provider:build:production"
+            },
+            "test": {
+              "browserTarget": "provider:build:test"
+            },
+            "standalone": {
+              "browserTarget": "provider:build:standalone"
             }
           }
         },
@@ -457,7 +516,10 @@
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nrwl/angular",
+    "warnings": {
+      "typescriptMismatch": false
+    }
   },
   "schematics": {
     "@nrwl/angular:application": {

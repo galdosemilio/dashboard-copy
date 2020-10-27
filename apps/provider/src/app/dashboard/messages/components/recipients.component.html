@@ -1,0 +1,28 @@
+<div class="messages-recipients" fxLayout="column">
+
+  <mat-form-field appearance="none" floatLabel="never">
+    <input matInput name="search" [matAutocomplete]="auto" [formControl]="searchCtrl"
+      [placeholder]="selected.length ? ('BOARD.ADD_RECIPIENTS' | translate) : ('BOARD.SEARCH_RECIPIENTS' | translate)">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let account of accounts" (onSelectionChange)="selectAccount(account)">
+      <span>
+        {{ (account.firstName + ' ' + account.lastName) | capitalize }}
+      <i>{{ formatAccountType(account.accountType.id) | translate }}</i>
+      </span>
+      <small>{{ account.email }}</small>
+    </mat-option>
+  </mat-autocomplete>
+
+  <mat-list *ngIf="selected.length">
+    <mat-list-item *ngFor="let account of selected">
+      <mat-icon matListIcon>account_circle</mat-icon>
+      <span matLine>{{ account.name | capitalize }}</span>
+      <button mat-icon-button (click)="removeAccount(account)">
+        <mat-icon aria-label="remove">clear</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>

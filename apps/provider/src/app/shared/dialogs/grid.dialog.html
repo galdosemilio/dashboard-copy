@@ -1,0 +1,21 @@
+<div matDialogTitle *ngIf="data.title && data.title.text">
+    <div [class]="data.title.class || ''">
+        <span [innerHTML]="data.title.text | translate"></span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <mat-grid-list [cols]="data.cols" [rowHeight]="data.rowHeight + 'px'" [dir]="language.getDir()">
+        <mat-grid-tile
+            *ngFor="let tile of data.contents"
+            [colspan]="tile.cols"
+            [rowspan]="tile.rows">
+            <div [class]="tile.class || ''">
+                <p>{{ tile.text | translate }}</p>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-dialog-content>

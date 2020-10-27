@@ -1,0 +1,5 @@
+@import 'shared/directed-styles';
+
+ccr-alert-icon {
+  @include horizontal-margin-right(4px);
+}

@@ -1,0 +1,9 @@
+:host {
+  // question margins: 1em 0 1em
+  margin: 1em - 0.84375em; // .mat-form-field-infix border-top
+  margin-bottom: 1em - 1.25em; // .mat-form-field-wrapper padding bottom
+}
+
+.mat-form-field {
+  min-width: 30%;
+}

@@ -1,0 +1,25 @@
+<div id="remote-audio-media">
+
+</div>
+<div id="remote-video-media" class="main-video" [hidden]="!callState.hasVideoStarted">
+    <app-call-connection-indicator [connectionStatus]="remoteConnectionStatus"></app-call-connection-indicator>
+</div>
+<div id="local-audio-media"></div>
+<div id="local-video-media" class="sub-video" [ngClass]="{
+    'default-size': callState.windowState === 'DEFAULT',
+    'fullscreen-size': callState.windowState === 'FULLSCREEN'}">
+</div>
+<!-- <div id="remote-audio-media">
+</div>
+<div id="local-audio-media">
+</div>
+<div id="remote-video-media" class="main-video">
+</div>
+<div id="local-video-media" class="sub-video" [ngClass]="{
+    'default-size': callState.windowState === 'DEFAULT',
+    'fullscreen-size': callState.windowState === 'FULLSCREEN'}">
+</div>
+ -->
+
+
+

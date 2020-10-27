@@ -1,0 +1,13 @@
+:host {
+  // question margins: 1em 0 1em
+  margin: 1em 0 1em; // checkboxes doesn't have default margins
+}
+
+::ng-deep .mat-radio-label {
+  align-items: flex-start !important;
+  white-space: normal !important;
+}
+
+::ng-deep .mat-radio-container {
+  margin-top: 3px !important;
+}

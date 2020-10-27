@@ -1,0 +1,31 @@
+<div style="overflow-y: auto">
+  <div class="ccr-table">
+    <mat-table [dataSource]="shownElements" class="">
+      <ng-container cdkColumnDef="check">
+        <mat-header-cell *cdkHeaderCellDef fxFlex="48px"></mat-header-cell>
+        <mat-cell *cdkCellDef="let row" class="clickable" fxFlex="36px">
+          <mat-checkbox [checked]="row.checked" [disabled]="true"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="title">
+          <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.CONTENT.FOLDER_NAME' | translate }}</mat-header-cell>
+          <mat-cell *cdkCellDef="let row" class="clickable">
+            {{ row.lang }}
+          </mat-cell>
+      </ng-container>
+
+      <!-- Headers inside the table -->
+      <!-- <ng-container matColumnDef="groupHeader">
+        <mat-cell *matCellDef="let group">{{ group.language }}</mat-cell>
+      </ng-container> -->
+
+      <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+      <mat-row fxLayoutWrap (click)="onCheckClick(row)"
+        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        [ngClass]="{ 'row-even': even, 'row-odd': odd }" class="clickable"
+      ></mat-row>
+      <!-- <mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup"> </mat-row> -->
+    </mat-table>
+  </div>
+</div>

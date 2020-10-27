@@ -1,0 +1,58 @@
+<div class="package-selector">
+  <p class="packages-header">
+    {{ 'SECTION.DEFAULT.PACKAGE_SELECT.SELECT_PACKAGE' | translate }}
+  </p>
+  <div class="packages" fxLayout="row">
+    <div
+      class="package-item"
+      fxFlex
+      *ngFor="let package of packages"
+      (click)="onClickPackage(package.value)"
+      [class.selected]="value.indexOf(package.value) > -1"
+    >
+      <div class="package-header" fxLayout="row" fxLayoutAlign="center center">
+        {{ package.name | translate }}
+      </div>
+      <div class="package-body" fxLayout="row" fxLayoutAlign=" center">
+        <img class="package-image" fxFlex [attr.src]="package.image"/>
+        <div class="package-content" fxFlex fxLayout="column" fxLayoutAlign=" start">
+          <div
+          class="package-content-item"
+          *ngFor="let content of package.contents">
+            - {{ content | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="selected-state" fxLayout="row" fxLayoutAlign="center center">
+        {{
+          (value.indexOf(package.value) > -1) ?
+          ('BOARD.SELECTED' | translate) :
+          ('BOARD.SELECT' | translate)
+        }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="trackerPackage" class="packages-footer" fxLayout="row" fxLayoutAlign="center center">
+    <button
+    mat-button
+    class="ccr-button footer-button"
+    color="primary"
+    type="button"
+    (click)="addTrackerPackage()"
+    [disabled]="!hasSelectedPackages">
+      {{
+        (value.indexOf(trackerPackage.value) > -1) ?
+        ('SECTION.DEFAULT.PACKAGE_SELECT.REMOVE_FROM_PKG' | translate) :
+        ('SECTION.DEFAULT.PACKAGE_SELECT.ADD_TO_PKG' | translate)
+      }}
+    </button>
+    <img class="footer-image" [attr.src]="'./../../assets/tracker.png'" />
+    <div class="footer-sub-text">
+      <span>
+        {{ 'SECTION.DEFAULT.PACKAGE_SELECT.ADDITIONAL_COMPLEMENT' | translate }}
+      </span>
+      <span><b>{{ 'SECTION.DEFAULT.PACKAGE_SELECT.ACTIVITY_TRACKER' | translate }}</b></span>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,20 @@
+<div mat-dialog-content fxLayout="row" fxLayoutAlign="center space-around" fxLayoutGap="2%">
+    <div fxFlex>
+        <strong>{{ 'LIBRARY.CONTENT.ALL_PACKAGES' | translate }}</strong>
+        <app-content-package-table [array]="contentPackages" [source]="source" [events]="events"></app-content-package-table>
+    </div>
+    <div fxFlex fxLayout="column" fxLayoutAlign="start">
+        <strong>{{ 'LIBRARY.CONTENT.SELECTED_PACKAGES' | translate }}</strong>
+        <app-content-package-table [array]="contentPackages" [source]="source" [useSource]="false" [events]="events"
+            (packages)="onPackagesChange($event)"></app-content-package-table>
+    </div>
+</div>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
+    <button mat-button color="primary" class="ccr-icon-button" (click)="onSave()">
+        <mat-icon>check</mat-icon> {{'GLOBAL.SAVE' | translate}}
+    </button>
+    <button mat-button class="ccr-icon-button" matDialogClose>
+        <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,36 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutWrap.xs fxLayoutGap="10px">
+    <h2 fxLayout="column" fxLayoutAlign="start start">
+      <span>{{ 'GLOBAL.PATIENTS' | translate }}</span>
+      <small class="count" *ngIf="totalCount"><strong>{{ totalCount }}</strong> {{ 'GLOBAL.PATIENTS' | translate }}</small>
+    </h2>
+
+    <a *ngIf="clinic?.permissions.admin"
+    mat-button color="primary" class="ccr-icon-button"
+    fxFlex="nogrow" (click)="createDialog()"
+    data-cy="new-patient-button">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'BOARD.PATIENT_NEW' | translate }}</span>
+    </a>
+  </div>
+
+  <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="space-between center">
+    <ccr-package-filter (change)="onPackageFilter($event);" fxFlex></ccr-package-filter>
+
+    <button mat-button fxFlex="nogrow" class="ccr-align-center"
+    [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()" fxHide.xs
+    data-cy="download-csv-button">
+      {{ 'REPORTS.EXPORT_CSV' | translate }}
+      <mat-icon>file_download</mat-icon>
+    </button>
+
+    <ccr-paginator fxFlex="nogrow" #paginator
+      [length]="source.total"
+      [pageIndex]="source.pageIndex"
+      [pageSize]="source.pageSize"
+      (page)="source.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+  </div>
+</div>
+
+<app-dieters-expandable-table [source]="source" (sorted)="onSorted()"></app-dieters-expandable-table>

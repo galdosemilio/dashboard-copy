@@ -1,0 +1,10 @@
+@import 'variables';
+
+mat-icon.disabled {
+  color: mat-color($ccr-background, tools) !important;
+  cursor: default !important;
+}
+
+.link-name:hover {
+  text-decoration: underline;
+}

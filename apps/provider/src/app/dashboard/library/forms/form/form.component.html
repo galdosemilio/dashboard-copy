@@ -1,0 +1,59 @@
+<div *ngIf="hasError" fxLayout="row" fxLayoutAlign="center center">
+  {{ errorMessage | translate }}
+</div>
+
+
+<ccr-datasource-overlay [source]="source" [showErrors]="false" *ngIf="!hasError">
+  <div *ngIf="showIntro" class="form-intro" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+    <h4 *ngIf="!account">{{ 'LIBRARY.FORMS.PATIENT_SELECT_PROMPT' | translate }}</h4>
+    <h4 *ngIf="invalidAccount">{{ 'LIBRARY.FORMS.PATIENT_INVALID_ONE_SUBMISSION' | translate }}</h4>
+    <div fxLayout="row" fxLayoutGap="15px">
+      <button *ngIf="allowAccountChange && invalidAccount" mat-button color="primary" class="ccr-button" (click)="selectDieter()">
+        {{ 'LIBRARY.FORMS.CHOOSE_ANOTHER_PATIENT' | translate }}
+      </button>
+      <button cy-data="form-submission-patient-yes" *ngIf="!invalidAccount" (click)="selectDieter()" mat-button color="primary" class="ccr-button">
+          {{ 'GLOBAL.YES' | translate }}
+      </button>
+      <button cy-data="form-submission-patient-no" *ngIf="!invalidAccount" mat-button class="ccr-button" (click)="account = undefined">
+        {{ 'GLOBAL.NO' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!showIntro || invalidAccount">
+      <ng-container *ngIf="form && answers && !answers.length" [formGroup]="form">
+        <app-library-form-manager
+        [fill]="fill"
+        [bindForm]="fill ? 'values' : 'sections'"
+        [content]="data"
+        [answers]="answers"
+        [readonly]="readonly"
+        [preview]="formDisplay.togglePreview$ | async"
+        [selectedDieter]="account"
+        [selectedClinic]="selectedClinic"
+        [submission]="formSubmission"
+        (selectDieter)="selectDieter()"
+        ></app-library-form-manager>
+      </ng-container>
+
+      <ng-container *ngIf="form && answers && answers.length" [formGroup]="form">
+        <app-library-form-manager
+        [fill]="false"
+        [bindForm]="'sections'"
+        [content]="data"
+        [answers]="answers"
+        [readonly]="true"
+        [preview]="formDisplay.togglePreview$ | async"
+        [selectedDieter]="account"
+        [selectedClinic]="selectedClinic"
+        [submission]="formSubmission"
+        (selectDieter)="selectDieter()"
+        ></app-library-form-manager>
+      </ng-container>
+
+    <app-library-form-addendum-table
+    *ngIf="readonly && formSubmission && data && data.allowAddendum"
+    [submission]="formSubmission"
+    ></app-library-form-addendum-table>
+  </div>
+</ccr-datasource-overlay>

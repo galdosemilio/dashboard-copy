@@ -1,0 +1,23 @@
+<div>
+  <h3>
+    <mat-icon>event</mat-icon>
+    <span *ngIf="!editing">{{'RIGHT_PANEL.ADD_NEW_MEETING' | translate}}</span>
+    <span *ngIf="editing">{{'RIGHT_PANEL.EDIT_MEETING' | translate}}</span>
+  </h3>
+
+  <h4 matSubheader>
+    <mat-icon fxHide fxShow.xs>event</mat-icon>
+    <span *ngIf="!editing" fxHide fxShow.xs>{{'RIGHT_PANEL.ADD_NEW_MEETING' | translate}}</span>
+    <span *ngIf="editing" fxHide fxShow.xs>{{'RIGHT_PANEL.EDIT_MEETING' | translate}}</span>
+  </h4>
+
+  <div class="contents">
+    <mat-radio-group fxLayout='column' fxLayoutGap="10px" [(ngModel)]="formType" *ngIf="!editing">
+      <mat-radio-button value="addConsultation" >{{'RIGHT_PANEL.ADD_CONSULTATION' | translate}}</mat-radio-button>
+      <mat-radio-button value="addUnavailability" >{{'RIGHT_PANEL.SET_AS_UNAVAILABLE' | translate}}</mat-radio-button>
+    </mat-radio-group>
+
+    <app-add-consultation *ngIf="formType !== 'addUnavailability'"></app-add-consultation>
+    <app-set-unavailability *ngIf="formType === 'addUnavailability'"></app-set-unavailability>
+  </div>
+</div>

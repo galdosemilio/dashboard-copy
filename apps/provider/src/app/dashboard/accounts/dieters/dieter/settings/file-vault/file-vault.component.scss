@@ -1,0 +1,14 @@
+@import 'variables';
+
+mat-icon {
+  cursor: pointer;
+  color: mat-color($ccr-foreground, icon);
+}
+
+p {
+  margin: 0;
+}
+
+.help-container {
+  margin-bottom: 10px;
+}

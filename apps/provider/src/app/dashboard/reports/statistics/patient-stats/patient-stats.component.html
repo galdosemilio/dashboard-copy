@@ -1,0 +1,37 @@
+<div class="ccr-reports-subfilter" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <span fxFlex="0 0 auto">
+    {{ 'REPORTS.PATIENT_DEMOGRAPHICS' | translate }}
+
+    <ccr-popup-description *ngIf="demographicType == 'age'"
+      [title]="'REPORTS.AGE_GROUP' | translate"
+      [description]="'REPORTS.AGE_GROUP_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+    <ccr-popup-description *ngIf="demographicType == 'gender'"
+      [title]="'REPORTS.GENDER' | translate"
+      [description]="'REPORTS.GENDER_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </span>
+
+  <mat-form-field floatLabel="never" class="ccr-filter" fxFlex="20%">
+    <mat-select
+    [(ngModel)]="demographicType"
+    (select)="selectType(demographicType)"
+    [placeholder]="'REPORTS.FILTER_DEMOGRAGPHICS' | translate">
+      <mat-option *ngFor="let demographicType of demographics"
+      class="ccr-align-center"
+      [value]="demographicType.value">
+        {{ demographicType.viewValue | translate | uppercase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<ng-container [ngSwitch]="demographicType">
+  <app-statistics-patient-stats-age
+    *ngSwitchCase="'age'">
+  </app-statistics-patient-stats-age>
+
+  <app-statistics-patient-stats-gender
+    *ngSwitchCase="'gender'">
+  </app-statistics-patient-stats-gender>
+</ng-container>

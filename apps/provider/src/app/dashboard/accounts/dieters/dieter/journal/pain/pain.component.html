@@ -1,0 +1,12 @@
+<div class="ccr-container">
+    <app-dieter-journal-pain-table [source]="source"></app-dieter-journal-pain-table>
+
+    <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
+        <ccr-paginator fxFlex="initial" #paginator
+            [length]="source.total"
+            [pageIndex]="source.pageIndex"
+            [pageSize]="source.pageSize"
+            (page)="source.pageIndex = $event.pageIndex"
+        ></ccr-paginator>
+    </div>
+</div>

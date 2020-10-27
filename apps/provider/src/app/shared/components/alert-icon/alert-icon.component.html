@@ -1,0 +1,7 @@
+<ng-container [ngSwitch]="icon">
+  <ccr-icon-food *ngSwitchCase="'food'" [fill]="fill" [size]="size"></ccr-icon-food>
+  <ccr-icon-scale *ngSwitchCase="'scale'" [fill]="fill" [size]="size"></ccr-icon-scale>
+  <ccr-icon-tracker *ngSwitchCase="'tracker'" [fill]="fill" [size]="size"></ccr-icon-tracker>
+  <ccr-icon-trending-up *ngSwitchCase="'trending-up'" [fill]="fill" [size]="size"></ccr-icon-trending-up>
+  <ccr-icon-weight-thresh *ngSwitchCase="'weight-thresh'" [fill]="fill" [size]="size"></ccr-icon-weight-thresh>
+</ng-container>

@@ -1,0 +1,37 @@
+@import 'variables';
+@import 'shared/directed-styles';
+:host {
+  display: flex;
+  flex-direction: column !important;
+  height: 100%;
+  max-width: 100% !important;
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+@media #{$medium-and-down} {
+  ccr-select-user,
+  ccr-select-user + div {
+    padding-top: 7px;
+  }
+}
+
+date-navigator {
+  margin-top: 10px;
+}
+
+.calendar-wrapper {
+  flex: 1;
+  display: block !important;
+}
+.calendar {
+  height: 100%;
+}
+.calendar-body {
+  flex: 1 auto;
+  width: 100%;
+  overflow-x: hidden;
+}
+

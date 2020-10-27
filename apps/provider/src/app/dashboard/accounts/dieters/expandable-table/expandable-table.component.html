@@ -1,0 +1,278 @@
+<ccr-datasource-overlay
+[emptyMsg]="'BOARD.DIETERS_EMPTY_LIST' | translate"
+[source]="source"
+class="ccr-table ccr-expand-table ccr-table-stats">
+
+    <table mat-table [dataSource]="rows" matSort>
+
+      <ng-container cdkColumnDef="firstName">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="firstName">{{ 'BOARD.FIRST_NAME' | translate }}</span>
+        </mat-header-cell>
+        <mat-cell *cdkCellDef="let row; let i = index">
+          <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
+          <div fxLayout="row" fxLayoutAlign="start center" fxShow.xs fxHide>{{ row.firstName }}</div>
+          <div
+          [ngClass]="{ 'clickable': row.level === 0, 'non-clickable': row.level > 0, 'non-empty': !row.isEmpty && row.level < 2 }"
+          class="expandable"
+          fxLayoutAlign="start center"
+          fxHide.xs>
+            <i
+              *ngIf="row.level < 1"
+              [class.active]="row.isExpanded"
+              (click)="toggleRow(row)"
+              aria-hidden="true"
+              class="material-icons">
+            </i>
+            <span *ngIf="row.level === 0" (click)="showDieter(row)" fxFlex>{{ row.firstName }}</span>
+            <span *ngIf="row.level > 0">
+              <span *ngIf="row.name !== 'load-more-pkgs' && row.name !== 'load-more-orgs'" [class.subitem-name]="row.level === 2">
+                {{ row.name | translate }} {{ row.level === 2 ? '(' + row.id + ')' : '' }}
+              </span>
+              <span
+              *ngIf="row.name === 'load-more-pkgs' || row.name === 'load-more-orgs'"
+              (click)="onLoadMore(row.name, row, i)"
+              class="load-more-prompt">
+                {{ 'LIBRARY.CONTENT.LOAD_MORE' | translate }}
+              </span>
+            </span>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="lastName">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="lastName">{{ 'BOARD.LAST_NAME' | translate }}</span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxLayoutAlign="start center"
+        fxFlex.xs="grow">
+          <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
+          <div *ngIf="row.level === 0" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            {{ row.lastName }}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="startDate">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span fxLayout="row" fxLayoutAlign="start center" mat-sort-header="startedAt">
+            <span>{{ 'BOARD.START_DATE' | translate }}</span>
+            &nbsp;
+            <ccr-popup-description
+            [title]="'BOARD.START_DATE' | translate"
+            [description]="'BOARD.START_DATE_DESCRIPTION' | translate"
+            ></ccr-popup-description>
+          </span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxHide.xs>
+          <span>{{ 'BOARD.START_DATE' | translate }}</span>
+          <div data-cy="startDate">
+            <ng-container *ngIf="row.startedAt; then datereg else dateempty"></ng-container>
+            <ng-template #datereg>
+              {{ row.startedAt | amUtc | amDateFormat:'MMM D, YYYY' }}&nbsp;
+              ({{ row.totalDays }} {{ 'UNIT.DAYS' | translate }})
+            </ng-template>
+            <ng-template #dateempty>
+              <div>-</div>
+            </ng-template>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="startWeightDate">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="weight.first.recordedAt">
+            {{ 'BOARD.START_WEIGHT_DATE' | translate }}
+          </span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxHide.xs>
+          <span>{{ 'BOARD.START_WEIGHT_DATE' | translate }}</span>
+          <div>
+            <ng-container *ngIf="row.weight?.start?.date; then datereg else dateempty"></ng-container>
+            <ng-template #datereg>{{ row.weight.start.date | amDateFormat:'MMM D, YYYY' }}</ng-template>
+            <ng-template #dateempty>
+              <div>-</div>
+            </ng-template>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="startWeight">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="weight.first.value">{{ 'BOARD.START_WEIGHT' | translate }}</span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxHide.xs>
+          <span>{{ 'BOARD.START_WEIGHT' | translate }}</span>
+          <div>
+            <ng-container *ngIf="row.weight?.start?.value; then weightreg else weightempty"></ng-container>
+            <ng-template #weightreg>
+              {{ row.weight.start.value | unitConversion: 'composition' : 1 }}
+              <small>{{ 'composition' | unitLabel: row.weight | translate }}</small>
+            </ng-template>
+            <ng-template #weightempty>
+              <div>-</div>
+            </ng-template>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="endWeightDate">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="weight.last.recordedAt">
+            {{ 'BOARD.CURRENT_WEIGHT_DATE' | translate }}
+          </span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxHide.xs>
+          <span>{{ 'BOARD.CURRENT_WEIGHT_DATE' | translate }}</span>
+          <div>
+            <ng-container *ngIf="row.weight?.end?.date; then datereg else dateempty"></ng-container>
+            <ng-template #datereg>{{ row.weight.end.date | amDateFormat:'MMM D, YYYY' }}</ng-template>
+            <ng-template #dateempty>
+              <div>-</div>
+            </ng-template>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="endWeight">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="weight.last.value">{{ 'BOARD.CURRENT_WEIGHT' | translate }}</span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxHide.xs>
+          <span>{{ 'BOARD.CURRENT_WEIGHT' | translate }}</span>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <ng-container *ngIf="row.weight?.end?.value; then weightreg else weightempty"></ng-container>
+            <ng-template #weightreg>
+              {{ row.weight.end.value | unitConversion: 'composition' : 1 }}
+              <small>{{ 'composition' | unitLabel: row.weight | translate }}</small>
+            </ng-template>
+            <ng-template #weightempty>-</ng-template>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="weightChange">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="weight.change.value">
+            {{ 'STATS.WEIGHT_CHANGE' | translate }}
+          </span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxHide.xs>
+          <span>{{ 'STATS.WEIGHT_CHANGE' | translate }}</span>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <ng-container *ngIf="row.weight?.change?.value; then weightreg else weightempty"></ng-container>
+            <ng-template #weightreg>
+              {{ row.weight.change.value | unitConversion: 'composition' : 1 }}
+              <small>{{ 'composition' | unitLabel: row.weight | translate }}</small>
+            </ng-template>
+            <ng-template #weightempty>
+              <div>-</div>
+            </ng-template>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="weightChangePercent">
+        <mat-header-cell *cdkHeaderCellDef class="header-align-left">
+          <span mat-sort-header="weight.change.percentage">
+            {{ 'STATS.WEIGHT_CHANGE_PERCENT' | translate }}
+          </span>
+        </mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        (click)="showDieter(row)"
+        class="clickable"
+        fxHide.xs>
+          <span>{{ 'STATS.WEIGHT_CHANGE' | translate }}</span>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <ng-container *ngIf="row.weight?.change?.value; then weightreg else weightempty"></ng-container>
+            <ng-template #weightreg>
+              {{ row.weight.change.percent.toFixed(1) }}
+              <small>%</small>
+            </ng-template>
+            <ng-template #weightempty>
+              <div>-</div>
+            </ng-template>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="actions" [stickyEnd]="true">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</mat-header-cell>
+        <mat-cell
+        *cdkCellDef="let row"
+        [hidden]="row.level > 0"
+        fxHide.xs>
+          <span>{{ 'BOARD.ACTIONS' | translate }}</span>
+          <button
+          [title]="'BOARD.OPEN_IN_NEW' | translate"
+          (click)="showDieter(row, true)"
+          mat-icon-button>
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+          <button
+          [title]="'GLOBAL.EDIT' | translate"
+          (click)="onEdit(row)"
+          mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+          *ngIf="hasAdmin"
+          [title]="'BOARD.REMOVE' | translate"
+          (click)="onRemove(row)"
+          mat-icon-button><mat-icon>delete</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+      <mat-row fxLayoutWrap
+        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        class="level{{row.level}}" [ngClass]="{
+          'row-even': even,
+          'row-odd': odd,
+          'hidden': row.isHidden,
+          'row-expanded': row.isExpanded,
+          'row-nested': row.level > 0,
+          'row-bottom-border': row.level > 1,
+          'last-of-group': row.isLastOfGroup
+        }"
+      ></mat-row>
+    </table>
+
+  </ccr-datasource-overlay>

@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <small *ngIf="!sequence || !sequenceIsValid">{{ 'SEQUENCING.PICK_SEQ_TO_ADD' | translate }}</small>
+        <button
+        *ngIf="sequence && sequenceIsValid"
+        [disabled]="!sequence || !sequenceIsValid"
+        (click)="onAddEnrollment()"
+        class="ccr-button"
+        color="primary"
+        mat-button>{{ 'SEQUENCING.ADD_ENROLLMENT' | translate }}</button>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxFlex>
+            <ccr-sequence-search (select)="onSelectSequence($event)"></ccr-sequence-search>
+        </div>
+
+        <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="source.total"
+        [pageIndex]="source.pageIndex"
+        [pageSize]="source.pageSize"
+        (page)="source.pageIndex = $event.pageIndex"
+        ></ccr-paginator>
+    </div>
+
+    <app-dieter-sequences-table [paginator]="paginator" [source]="source"></app-dieter-sequences-table>
+</div>

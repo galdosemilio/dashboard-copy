@@ -1,0 +1,32 @@
+<ccr-datasource-overlay class="ccr-table ccr-table-stats" [source]="source">
+
+  <mat-table [dataSource]="source" matSort>
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'GLOBAL.DATE' | translate }}</span>
+        {{ row.date | amDateFormat:'dddd, MMM D' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="acetonePpm">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACETONEPPM' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.ACETONEPPM' | translate }}</span>
+        {{ (row.acetonePpm / 100).toFixed(2) }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>
+
+<ccr-paginator #paginator
+  [length]="source?.total" [pageIndex]="0" [pageSize]="20"
+></ccr-paginator>

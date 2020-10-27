@@ -1,0 +1,137 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-form-field class="name-input" floatLabel="never" fxFlex="35%">
+                <input
+                [placeholder]="'SEQUENCING.SEQUENCE_NAME' | translate"
+                formControlName="name"
+                matInput
+                required
+                type="text">
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <small data-cy="sequenceClinicInfo" [innerHTML]="'SEQUENCING.ASSOC_WITH' | translate:{org: sequence && sequence.organization ? sequence.organization.name : context.organization.name, orgId: sequence && sequence.organization ? sequence.organization.id : context.organization.id }"></small>
+    </div>
+    <div class="step-list-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <h4 fxFlex>{{ 'SEQUENCING.STEPS' | translate }}</h4>
+            <button *ngIf="state === 'list'" [disabled]="hardBlocked || blocked" (click)="onReorderSteps()" class="ccr-icon-button" mat-button>
+                {{ 'SEQUENCING.REORDER_STEPS' | translate }}
+            </button>
+            <button *ngIf="state === 'reorder'" (click)="onSaveStepOrder()" class="ccr-icon-button" mat-button>
+                {{ 'SEQUENCING.SAVE_STEP_ORDER' | translate }}
+            </button>
+        </div>
+        <div
+        [class.expanded]="state === 'reorder'"
+        class="step-list-inner-container"
+        fxLayout="column"
+        fxLayoutAlign="start stretch">
+            <div
+            *ngFor="let step of steps; let i = index"
+            [ccrDraggable]="{ data: i, isDraggable: state === 'reorder' }"
+            [ccrDropzone]="{ data: i, isDroppable: state === 'reorder' }"
+            [ngClass]="{'active': activeStep === i, 'deleted': form.value.steps[i].step?.syncState?.deleted}"
+            [hidden]="form.value.steps[i].step?.syncState?.deleted"
+            (ccrDrop)="onDropStep($event)"
+            class="step-list-item"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            fxLayoutGap="5px">
+                <div fxFlex="5%" fxLayout="column" fxLayoutAlign="center center">
+                    <mat-icon *ngIf="state === 'reorder'">drag_indicator</mat-icon>
+                </div>
+                <div (click)="onSetActiveStep(i)" fxFlex>
+                    <ccr-inline-editable-field
+                    [disabled]="(blocked && form.value.steps[i].step?.syncState?.inServer) || hardBlocked"
+                    type="text"
+                    [value]="form.value.steps[i].step?.name"
+                    (change)="onNameChanged($event, i)">
+                    </ccr-inline-editable-field>
+                </div>
+                <div (click)="onSetActiveStep(i)" fxFlex="25%">
+                    <ccr-inline-editable-field
+                    [defaultDisplayValue]="'SEQUENCING.DELAYS.NO_DELAY'"
+                    [disabled]="(blocked && form.value.steps[i].step?.syncState?.inServer) || hardBlocked"
+                    [selectorOptions]="availableStepDelays[i]"
+                    [value]="form.value.steps[i].step?.delay"
+                    (change)="onDelayChanged($event, i)"
+                    type="selector">
+                    </ccr-inline-editable-field>
+                </div>
+                <div (click)="onSetActiveStep(i)" fxFlex="25%">
+                    <ccr-inline-editable-field
+                    [defaultDisplayValue]="'SEQUENCING.HOURS.MIDNIGHT'"
+                    [disabled]="(blocked && form.value.steps[i].step?.syncState?.inServer) || hardBlocked"
+                    [selectorOptions]="stepHoursFilters[i]"
+                    [value]="form.value.steps[i].step && form.value.steps[i].step.delayHour"
+                    (change)="onDelayHourChanged($event, i)"
+                    type="selector">
+                    </ccr-inline-editable-field>
+                </div>
+                <div  fxFlex="10%" fxLayout="column" fxLayoutAlign="center center">
+                    <mat-icon
+                    [class.disabled]="(blocked && form.value.steps[i].step?.syncState?.inServer) || hardBlocked"
+                    (click)="onStepDeleted(i)">
+                        delete
+                    </mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <div fxFlex="75%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+                <mat-form-field floatLabel="always" fxFlex="95%">
+                    <mat-select formControlName="endingAction" [placeholder]="'SEQUENCING.ENDING_ACTION' | translate">
+                        <mat-option
+                        *ngFor="let endingAction of endingActions"
+                        [value]="endingAction.name">{{ endingAction.displayName | translate }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <ccr-popup-description
+                [title]="'SEQUENCING.ENDING_ACTION' | translate"
+                [description]="'SEQUENCING.ENDING_ACTION_ABOUT' | translate"
+                fxFlex="4%"
+                ></ccr-popup-description>
+            </div>
+
+            <div fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <button [disabled]="hardBlocked || (blocked && sequence?.hasLoop)" (click)="onAddStep()" class="ccr-icon-button" color="primary" mat-button>
+                    <mat-icon>add</mat-icon>
+                    {{ 'SEQUENCING.ADD_STEP' | translate }}
+                </button>
+
+                <ccr-popup-description
+                [title]="'SEQUENCING.ADD_STEP' | translate"
+                [description]="'SEQUENCING.ADD_STEP_ABOUT' | translate"
+                ></ccr-popup-description>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="state === 'list'" [formGroup]="form.controls.steps" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+        <div
+        *ngFor="let step of steps; let i = index;"
+        [formGroupName]="i"
+        [hidden]="activeStep !== i || form.value.steps[i].step?.syncState?.deleted"
+        fxLayout="row"
+        fxLayoutAlign="start stretch"
+        fxLayoutGap="10px">
+            <sequencing-step-input
+            *ngIf="activeStep === i"
+            [blocked]="(blocked && form.value.steps[i].step?.syncState?.inServer)"
+            [firstStep]="true"
+            [hardBlocked]="hardBlocked"
+            [index]="i"
+            [isSelected]="selectedStepIndex === i"
+            [markAsTouched]="markAsTouched"
+            [serverDelay]="stepServerDelays[i]"
+            [single]="highestStepIndex <= 2"
+            (selected)="onSelectStepInput(i)"
+            formControlName="step"
+            fxFlex></sequencing-step-input>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+.ccr-chart {
+  .ccr-container {
+    min-height: 400px;
+    margin-bottom: 30px !important;
+    @media #{$medium-and-up} {
+      margin: 10px 0 0;
+    }
+  }
+
+  @include selector_filter(center);
+}
+
+.scrollable {
+  overflow-x: auto;
+}
+
+.ccr-chart-embedded {
+  margin-top: -10px;
+}
+.mat-option.ccr-embedded {
+  line-height: 36px;
+  height: 36px;
+}
+
+#chartjs-tooltip {
+  background: var(--bg-bar);
+  border: 1px solid var(--text);
+  border-radius: 3px;
+  color: var(--text);
+  font-size: 80%;
+  padding: 4px;
+  text-align: left;
+
+  opacity: 1;
+  pointer-events: none;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 2000;
+
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+
+  &.center {
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  &.top {
+    margin-top: 7px;
+  }
+
+  thead {
+    line-height: 1.4em;
+  }
+  tbody {
+    line-height: 1em;
+  }
+}

@@ -1,0 +1,9 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+    <mat-slide-toggle
+    [checked]="mostRecentEntry?.isActive"
+    [disabled]="isLoading"
+    [labelPosition]="'before'"
+    (click)="openStatusDialog()">
+        {{ 'RPM.RPM_STATUS' | translate }}
+    </mat-slide-toggle>
+</div>

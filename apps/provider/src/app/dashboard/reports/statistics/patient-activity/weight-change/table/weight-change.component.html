@@ -1,0 +1,78 @@
+<div class="report-heading">
+  <mat-icon>show_chart</mat-icon>
+  <h3>
+    {{ 'REPORTS.WEIGHT_CHANGE_REPORT' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.WEIGHT_CHANGE_REPORT' | translate"
+    [description]="'REPORTS.WEIGHT_CHANGE_REPORT_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+
+  <button mat-button class="ccr-align-center"
+  [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()">
+    {{ 'REPORTS.EXPORT_CSV' | translate }}
+    <mat-icon>file_download</mat-icon>
+  </button>
+</div>
+
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source" matSort matSortActive="name" matSortDirection="asc">
+
+    <ng-container cdkColumnDef="name">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" class="patient-link"
+      [routerLink]="'/accounts/patients/' + row.account.id">
+        <span>{{ 'BOARD.NAME' | translate }}</span>
+        {{ row.account.lastName + ', ' + row.account.firstName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="startWeight">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.START_WEIGHT' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.START_WEIGHT' | translate }}</span>
+        {{ row.change.startWeight | unitConversion: 'composition' }} {{ 'composition' | unitLabel | translate }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="endWeight">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.END_WEIGHT' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.END_WEIGHT' | translate }}</span>
+        {{ row.change.endWeight | unitConversion: 'composition' }} {{ 'composition' | unitLabel | translate }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="change">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header="percentage">{{ 'REPORTS.PERCENTAGE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.PERCENTAGE' | translate }}</span>
+        {{ row.change.percentage }}%
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="value">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header="value">{{ 'REPORTS.WEIGHT_CHANGE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.WEIGHT_CHANGE' | translate }}</span>
+        {{ row.change.value | unitConversion: 'composition' }} {{ 'composition' | unitLabel: row.change.value | translate }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>
+
+<ccr-paginator #paginator
+[length]="source.total"
+[pageIndex]="source.pageIndex"
+[pageSize]="source.pageSize"
+(page)="source.pageIndex = $event.pageIndex"
+></ccr-paginator>

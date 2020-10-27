@@ -1,0 +1,19 @@
+<div class="item">
+  <ccr-icon-dismiss-one
+    [matTooltip]="'BOARD.MARK_AS_VIEWED_FOR_ME' | translate"
+    (click)="onDismiss(alert)" size="16"
+  ></ccr-icon-dismiss-one>
+  <ccr-icon-dismiss-all
+    *ngIf="alert.groupIds.length"
+    [matTooltip]="'BOARD.MARK_AS_VIEWED_FOR_ALL' | translate"
+    (click)="onDismissAll(alert)" size="16"
+  ></ccr-icon-dismiss-all>
+
+  <div class="item-heading">
+    <ccr-alert-icon [icon]="alert.icon" [size]="18"></ccr-alert-icon>
+    <span>{{ alert.detail | translate: alert.params }}</span>
+  </div>
+  <div class="item-body">
+    {{ alert.createdAt | ccrUtc | amTimeAgo }}
+  </div>
+</div>

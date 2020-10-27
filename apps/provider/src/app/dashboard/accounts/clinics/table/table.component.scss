@@ -1,0 +1,28 @@
+@import 'variables';
+@import 'shared/directed-styles';
+
+@media #{$medium-and-up} {
+  .mat-column-name {
+    flex: 1.75 !important;
+  }
+  .mat-column-address {
+    flex: 2 !important;
+  }
+  .mat-column-state,
+  .mat-column-zip {
+    flex: 0.7 !important;
+  }
+  .mat-column-contact {
+    flex: 2 !important;
+  }
+  .mat-column-actions {
+    max-width: 60px;
+  }
+}
+
+.mat-cell {
+  padding: 5px 5px 5px 0;
+  &:last-child {
+    @include horizontal-padding-right(0);
+  }
+}

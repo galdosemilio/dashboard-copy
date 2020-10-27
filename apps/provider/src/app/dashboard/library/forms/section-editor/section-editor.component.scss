@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'shared/directed-styles';
+
+.add-question-wrapper {
+  margin: 15px 10px;
+}
+
+.question {
+  margin: 0;
+  padding: 15px;
+  @include horizontal-padding-left(5px);
+
+  .handle {
+    .drag-icon {
+      visibility: hidden;
+    }
+
+    .dragover-icon {
+      display: none;
+    }
+
+    &.ccr-dragover {
+      .dragover-icon {
+        display: block;
+      }
+    }
+
+    border-right: 2px solid transparent;
+    @include horizontal-padding-right(5px);
+  }
+
+  &.active {
+    .handle {
+      .drag-icon {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.add-question-wrapper {
+  .add-icon {
+    display: block;
+  }
+
+  .dragover-icon {
+    display: none;
+  }
+
+  &.ccr-dragover {
+    .add-icon {
+      display: none;
+    }
+
+    .dragover-icon {
+      display: block;
+      margin-right: 8px;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+svg {
+  g {
+    stroke: var(--primary) !important;
+
+    text {
+      fill: var(--text) !important;
+      stroke: var(--text) !important;
+    }
+  }
+}

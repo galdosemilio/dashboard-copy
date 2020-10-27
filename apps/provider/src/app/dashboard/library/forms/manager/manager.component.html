@@ -1,0 +1,118 @@
+<div class="ccr-heading" *ngIf="!readonly" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end end" fxLayoutAlign.xs="stretch" fxLayoutGap="15px">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end stretch" fxLayoutGap.xs="10px">
+    <div fxFlex="nogrow" fxLayoutGap="5px" fxFlex.xs="grow" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutAlign.xs="center" fxLayoutAlign.sm="start">
+      <button *ngIf="!fill" type="button" mat-button class="ccr-icon-button" (click)="addFormSection()">
+        <mat-icon >playlist_add</mat-icon>
+        <span *ngIf="!hasMultipleSections">
+          {{ 'LIBRARY.FORMS.USE_SECTIONS' | translate }}
+        </span>
+        <span *ngIf="hasMultipleSections">
+          {{ 'LIBRARY.FORMS.ADD_SECTION' | translate }}
+        </span>
+      </button>
+      <ccr-popup-description *ngIf="preview || !fill"
+      [title]="'LIBRARY.FORMS.ADD_SECTION_NOTICE_TITLE' | translate"
+      [description]="'LIBRARY.FORMS.ADD_SECTION_NOTICE' | translate"
+      ></ccr-popup-description>
+      <button
+      [disabled]="!preview && !form.valid"
+      *ngIf="preview || !fill" mat-button class="ccr-button"
+      color="primary" (click)="formDisplay.togglePreview$.next(!preview)">
+          <span *ngIf="!preview">{{ 'LIBRARY.FORMS.PREVIEW' | translate }}</span>
+          <span *ngIf="preview">{{ 'GLOBAL.EDIT' | translate }}</span>
+      </button>
+      <button
+        mat-flat-button class="ccr-button"
+        [disabled]="!preview && !form.valid"
+        color="primary" (click)="formDisplay.save$.next()">
+          <span>{{ 'GLOBAL.SAVE' | translate }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-container class="form-edit">
+  <ng-container *ngIf="!fill && !readonly && !preview then editable; else render"></ng-container>
+
+  <ng-template #editable>
+    <div *ngFor="let section of content.sections; let i = index;"
+    class="form-edit-section editable" [hidden]="section.deleted">
+      <ng-container [formGroup]="form.controls.sections">
+        <app-library-section-editor
+        [section]="section"
+        [events]="events"
+        [bindForm]="i"
+        [useParentForm]="false"
+        [showHeader]="hasMultipleSections"
+        ></app-library-section-editor>
+      </ng-container>
+    </div>
+  </ng-template>
+
+  <ng-template #render>
+    <div fxLayout="column" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="7px">
+        <span *ngIf="readonly && submission">
+          <p>
+            <span [innerHTML]=" 'LIBRARY.FORMS.SUBMITTED_UNDER_CLINIC' | translate:{clinic: selectedClinic?.name} "></span>&nbsp;
+            <ccr-popup-description
+            [title]="'LIBRARY.FORMS.SUBMITTED_UNDER_CLINIC_HEADER' | translate"
+            [description]="'LIBRARY.FORMS.SUBMITTED_UNDER_CLINIC_DESCRIPTION' | translate"
+            ></ccr-popup-description>
+          </p>
+          <span *ngIf="selectedDieter && selectedDieter.id !== submission.submittedBy.id">
+            {{ 'LIBRARY.FORMS.ATTACHED_TO_PATIENT' | translate }}:
+            {{ selectedDieter.firstName }} {{ selectedDieter.lastName }}
+            <ccr-popup-description
+            [title]="'LIBRARY.FORMS.ATTACH_TO_PATIENT' | translate"
+            [description]="'LIBRARY.FORMS.ATTACH_TO_PATIENT_HELPTEXT' | translate"
+            ></ccr-popup-description>|&nbsp;
+          </span>
+
+          {{ 'LIBRARY.FORMS.SUBMITTED_BY' | translate }}
+          <span>
+            {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}&nbsp;|&nbsp;
+            {{ submission.createdAt | amDateFormat:'ddd, MMM D YYYY' }}
+            <span class="hour">{{ 'GLOBAL.AT_HOUR' | translate }}</span>
+            {{ submission.createdAt | amDateFormat:'h:mm a' }}
+          </span>
+        </span>
+
+        <div *ngIf="fill">
+            <p>
+              <span [innerHTML]=" 'LIBRARY.FORMS.SUBMITTED_UNDER_CLINIC' | translate:{clinic: selectedClinic?.name} "></span>&nbsp;
+              <ccr-popup-description
+              [title]="'LIBRARY.FORMS.SUBMITTED_UNDER_CLINIC_HEADER' | translate"
+              [description]="'LIBRARY.FORMS.SUBMITTED_UNDER_CLINIC_DESCRIPTION' | translate"
+              ></ccr-popup-description>
+            </p>
+            {{ 'LIBRARY.FORMS.ATTACHED_TO_PATIENT' | translate }}:
+            <button mat-button class="ccr-button" (click)="selectDieter.emit()">
+                <ng-container *ngIf="!selectedDieter">
+                  <span>{{ 'LIBRARY.FORMS.ATTACH_TO_NO_PATIENT' | translate }}</span>
+                </ng-container>
+                <ng-container *ngIf="selectedDieter">
+                  <strong>{{ selectedDieter.firstName }} {{ selectedDieter.lastName }}</strong>
+                </ng-container>
+            </button>&nbsp;
+            <ccr-popup-description
+            [title]="'LIBRARY.FORMS.ATTACH_TO_PATIENT' | translate"
+            [description]="'LIBRARY.FORMS.ATTACH_TO_PATIENT_HELPTEXT' | translate"
+            ></ccr-popup-description>
+        </div>
+      </div>
+
+      <ng-container [formGroup]="form.controls.values">
+        <div class="form-edit-section" *ngFor="let section of content.sections; let i = index;" [hidden]="section.deleted">
+          <app-library-section-renderer
+          [section]="section"
+          [bindForm]="i"
+          [readonly]="readonly"
+          [answers]="answers"
+          [showHeader]="hasMultipleSections"
+          ></app-library-section-renderer>
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+</ng-container>

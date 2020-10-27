@@ -1,0 +1,109 @@
+@import 'variables';
+
+button.mat-icon-button.mat-button-base {
+  width: 30px;
+}
+
+div.non-clickable {
+  cursor: default !important;
+}
+
+mat-cell,
+mat-header-cell {
+  &.mat-column-firstName,
+  &.mat-column-lastName {
+    min-width: 200px !important;
+  }
+
+  &.mat-column-startDate,
+  &.mat-column-startWeightDate,
+  &.mat-column-endWeightDate {
+    min-width: 175px !important;
+  }
+
+  &.mat-column-weightChangePercent {
+    min-width: 100px !important;
+  }
+}
+
+mat-header-cell.mat-header-cell {
+  width: 95px;
+}
+
+mat-cell.mat-cell {
+  justify-content: flex-start !important;
+  margin-left: 5px;
+  text-align: left;
+  width: 95px;
+}
+
+.ccr-table .mat-table mat-header-cell.mat-column-actions,
+.ccr-table .mat-table mat-cell.mat-column-actions {
+  justify-content: center !important;
+}
+
+.ccr-expand-table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.ccr-table-stats mat-header-cell.header-align-left {
+  margin-left: 5px;
+  justify-content: flex-start !important;
+}
+
+.clickable {
+  margin: 0 0 0 7px;
+
+  & > div {
+    text-align: left !important;
+    width: 100%;
+  }
+}
+
+.load-more-prompt {
+  font-weight: normal;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.mat-header-row mat-header-cell.mat-column-actions {
+  background: mat-color($ccr-background, header);
+}
+
+.row-even mat-cell.mat-column-actions {
+  background: mat-color($ccr-background, even);
+}
+
+.row-expanded.level0 {
+  border-left: 1px solid var(--primary);
+  border-top: 1px solid var(--primary);
+  border-right: 1px solid var(--primary);
+}
+
+.row-expanded.level1,
+.row-expanded.level2 {
+  border-left: 1px solid var(--primary);
+  border-right: 1px solid var(--primary);
+}
+
+.row-expanded.level2.last-of-group {
+  border-left: 1px solid var(--primary);
+  border-right: 1px solid var(--primary);
+  border-bottom: 1px solid var(--primary);
+}
+
+.row-odd mat-cell.mat-column-actions {
+  background: mat-color($ccr-background, odd);
+}
+
+.subitem-name {
+  font-weight: normal;
+
+  &::before {
+    content: '• ';
+  }
+}

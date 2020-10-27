@@ -1,0 +1,37 @@
+<div class="report-heading">
+  <mat-icon>how_to_reg</mat-icon>
+  <h3>
+    {{ 'REPORTS.ENROLLMENTS_TITLE' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.ENROLLMENTS_TITLE' | translate"
+    [description]="'REPORTS.ENROLLMENTS_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+
+  <div fxLayout="row" fxLayoutGap="7px">
+    <button mat-button class="ccr-align-center"
+    [disabled]="!simpleReport" (click)="downloadDetailedCSV()">
+      {{ 'REPORTS.EXPORT_DETAILED_CSV' | translate }}
+      <mat-icon>file_download</mat-icon>
+    </button>
+
+    <button mat-button class="ccr-align-center"
+    [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()">
+      {{ 'REPORTS.EXPORT_CSV' | translate }}
+      <mat-icon>file_download</mat-icon>
+    </button>
+  </div>
+</div>
+
+<ccr-datasource-overlay class="ccr-container" [source]="source">
+  <canvas *ngIf="chart" baseChart
+    width="500" height="400"
+    [chartType]="chart.type"
+    [datasets]="chart.datasets"
+    [labels]="chart.labels"
+    [options]="chart.options"
+    [legend]="chart.legend"
+    [colors]="chart.colors"
+  ></canvas>
+</ccr-datasource-overlay>

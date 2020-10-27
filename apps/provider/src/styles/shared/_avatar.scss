@@ -1,0 +1,67 @@
+ccr-avatar,
+ccr-avatar div {
+  height: 100%;
+  max-width: 100%;
+}
+
+ccr-avatar {
+  display: inline-block;
+  line-height: 0.5;
+  position: relative;
+
+  div {
+    align-items: center;
+    background: mat-color($ccr-foreground, divider);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+    &.ccr-size-bigger {
+      height: 70px;
+      width: 70px;
+    }
+
+    &.ccr-size-big {
+      height: 56px;
+      width: 56px;
+    }
+
+    &.ccr-size-messages {
+      height: 42px;
+      width: 42px;
+    }
+
+    img {
+      // max-height: 100%; // FIXME this fits the width
+      max-width: 100%;
+    }
+  }
+
+  .mat-icon {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+
+    text-shadow: -1px -1px 7px var(--contrast);
+  }
+
+  &.ccr-editable:hover {
+    cursor: pointer;
+    img {
+      opacity: 0.5;
+    }
+    .mat-icon {
+      display: inline-block;
+    }
+  }
+}
+
+app-profile ccr-avatar .mat-icon {
+  display: inline-block;
+}

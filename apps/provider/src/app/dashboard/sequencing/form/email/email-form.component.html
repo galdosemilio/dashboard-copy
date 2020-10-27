@@ -1,0 +1,17 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <mat-form-field class="ccr-form-field" floatLabel="never">
+        <input formControlName="subject" matInput type="text" [placeholder]="'SEQUENCING.SUBJECT_LINE' | translate">
+    </mat-form-field>
+    <mat-form-field class="ccr-form-field" floatLabel="never">
+        <input formControlName="header" matInput type="text" [placeholder]="'SEQUENCING.HEADER_TEXT' | translate">
+    </mat-form-field>
+    <mat-form-field class="ccr-form-field" floatLabel="never">
+        <textarea
+        [placeholder]="'SEQUENCING.MESSAGE' | translate"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="5"
+        formControlName="text"
+        matInput></textarea>
+    </mat-form-field>
+</div>

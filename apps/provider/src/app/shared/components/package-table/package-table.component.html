@@ -1,0 +1,42 @@
+<ccr-datasource-overlay [source]="source">
+    <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
+        <ccr-paginator fxFlex="initial" #paginator
+            [length]="useSource ? source.total : array.length"
+            [pageIndex]="useSource ? source.pageIndex : pageIndex"
+            [pageSize]="useSource ? source.pageSize : pageSize"
+            (page)="onPageChange($event)"
+        ></ccr-paginator>
+    </div>
+
+
+    <div class="ccr-table">
+        <mat-table [dataSource]="shownElements" class="ccr-edit-table">
+            <ng-container cdkColumnDef="check">
+                <mat-header-cell *cdkHeaderCellDef fxFlex="48px"></mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clickable" fxFlex="36px">
+                    <mat-checkbox [checked]="row.checked" [disabled]="true"></mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="title">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.CONTENT.FOLDER_NAME' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clickable">
+                    {{ row.title | maxChars:45 }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="clinic">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CLINIC' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clickable">
+                    {{ row.organization?.name | maxChars:45 }} ({{ row.organization?.id }})
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+            <mat-row fxLayoutWrap (click)="onCheckClick(row)"
+              *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+              [ngClass]="{ 'row-even': even, 'row-odd': odd }" class="clickable"
+            ></mat-row>
+        </mat-table>
+    </div>
+</ccr-datasource-overlay>

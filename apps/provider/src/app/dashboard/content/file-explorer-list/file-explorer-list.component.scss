@@ -1,0 +1,48 @@
+@import 'shared/directed-styles';
+
+app-content-file-explorer-list {
+  &.inner-directory {
+    .mat-list[dense] {
+      @include horizontal-margin-left(30px);
+      padding-top: 0;
+    }
+  }
+
+  .directory {
+    &-content-name {
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-dropdown {
+      transform: rotate(-90deg) translateZ(0);
+
+      &.active {
+        transform: rotate(90deg) translateZ(0);
+      }
+    }
+
+    &-private-icon {
+      font-size: 16px;
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  .mat-list[dense] .mat-list-item .mat-list-item-content {
+    cursor: pointer;
+    padding: 0 0 0 1%;
+  }
+
+  .load-more-button {
+    text-decoration: underline;
+  }
+
+  mat-icon {
+    font-size: 200%;
+    line-height: 175%;
+    text-align: center;
+  }
+}

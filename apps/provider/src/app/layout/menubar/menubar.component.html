@@ -1,0 +1,80 @@
+<div class="menu-bar">
+  <div class="hamburger" (click)="toggleMenu($event)">
+    <div class="slice"></div>
+    <div class="slice"></div>
+    <div class="slice"></div>
+  </div>
+
+  <app-search *ngIf="searchEnabled"></app-search>
+  <span data-cy="search-disabled" *ngIf="!searchEnabled"></span>
+
+  <button mat-button class="mobile-logo topnav-logo" [matMenuTriggerFor]="orgs">
+    <img [attr.src]="logoSrc">
+    <i class="material-icons"></i>
+  </button>
+
+  <mat-menu #orgs="matMenu" class="org-selector"
+  [overlapTrigger]="false" yPosition="below" xPosition="before">
+
+    <ccr-form-field-text
+    [formControl]="searchCtrl"
+    (click)="$event.stopPropagation()"
+    (keydown)="$event.stopPropagation()"
+    [placeholder]="'BOARD.SEARCH_CLINIC' | translate">
+      <ccr-icon-search matSuffix fill="rgba(0, 0, 0, 0.42)" [size]="20" [stroke]="5"></ccr-icon-search>
+    </ccr-form-field-text>
+
+    <button
+      *ngFor="let org of organizations"
+      [class.active]="org.id === organization?.id"
+      (click)="selectOrg(org)"
+      mat-menu-item>{{ org.name | translate }}</button>
+  </mat-menu>
+
+  <div class="right-controls">
+    <div class="perm-camera-mic-wrapper">
+      <div
+      *ngIf="callState && callState.conferencingEnabled && callState.subaccountId != ''"
+      class="perm-camera-mic"
+      (click)="onOpenCallSettings()">
+        <mat-icon class="camera-icon" color="primary">phone</mat-icon>
+        <span
+        *ngIf="callState?.hasAudioDeviceAccess && callState.audioInputDevices?.length; else disabled"
+        class="perm-icon perm-success">
+          •
+        </span>
+        <ng-template #disabled>
+          <mat-icon class="perm-icon perm-error">close</mat-icon>
+        </ng-template>
+      </div>
+    </div>
+    <button mat-button class="user-controls" [matMenuTriggerFor]="menu">
+      <span>{{ translations['MENU.HELLO'] | capitalize }}</span>
+      <span class="acc-icon">
+        <ccr-avatar [account]="context.user.id"></ccr-avatar>
+      </span>
+      <i class="material-icons"></i>
+    </button>
+    <mat-menu #menu="matMenu" class="user-controls" [overlapTrigger]="false" xPosition="before">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>account_circle</mat-icon>
+        <span>{{ 'GLOBAL.PROFILE' | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="selectLanguage()">
+        <mat-icon>language</mat-icon>
+        <span>{{ 'MENU.LANGUAGE' | translate }}</span>
+      </button>
+      <button *ngIf="showHelpButton" (click)="onOpenHelp()" mat-menu-item>
+        <mat-icon>help_outline</mat-icon>
+        <span>{{ 'MENU.HELP' | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{ 'MENU.LOGOUT' | translate }}</span>
+      </button>
+    </mat-menu>
+    <div class="notification-icon" (click)="togglePanel($event)" [class.invisible]="!panelEnabled">
+      <mat-icon>notifications_none</mat-icon>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+@import 'variables';
+
+.file-upload-tracker {
+  bottom: 24px;
+  position: fixed;
+  right: 2.8%;
+  width: 35%;
+  z-index: 10000;
+
+  .tracker-header {
+    height: 35px;
+    padding: 0 10px;
+
+    & > .action {
+      cursor: pointer;
+    }
+  }
+
+  .tracker-body {
+    height: 150px;
+    overflow-y: scroll;
+
+    &-item {
+      padding: 0 10px;
+
+      .file-icon {
+        fill: mat-color($ccr-foreground, text);
+        font-size: 24px;
+        height: 18px;
+        line-height: 24px;
+      }
+
+      > .name {
+        width: 55%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      > .action {
+        cursor: pointer;
+      }
+    }
+  }
+}
