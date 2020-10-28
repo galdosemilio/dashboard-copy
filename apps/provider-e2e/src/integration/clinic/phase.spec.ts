@@ -24,8 +24,8 @@ describe('Clinics -> Clinic -> Phases', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-noadmin'
-      }
+        fixture: 'fixture:/api/organization/getAll-noadmin',
+      },
     ]);
 
     cy.visit(`/accounts/clinics/${Cypress.env('clinicId')};s=phases`);
@@ -66,10 +66,12 @@ describe('Clinics -> Clinic -> Phases', function () {
 
     cy.tick(1000);
 
-    cy.get('mat-dialog-container').find('input[placeholder="Title"]').type('test title');
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="Title"]')
+      .type('test title');
 
     cy.get('mat-dialog-container')
-      .find('textarea[placeholder="Description"]')
+      .find('textarea[data-placeholder="Description"]')
       .type('test description');
 
     cy.tick(1000);
@@ -99,7 +101,10 @@ describe('Clinics -> Clinic -> Phases', function () {
 
     cy.tick(1000);
 
-    cy.get('mat-dialog-container').find('button').contains('Yes').click({ force: true });
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('Yes')
+      .click({ force: true });
 
     cy.wait('@packageOrganizationPatchRequest').should((xhr) => {
       expect(xhr.request.body.id).to.equal('1');
