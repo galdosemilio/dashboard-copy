@@ -1,18 +1,18 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { OrganizationPreference } from '@coachcare/backend/services';
-import { _ } from '@coachcare/backend/shared';
-import { NotifierService } from '@coachcare/common/services';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { OrganizationPreference } from '@coachcare/npm-api'
+import { _ } from '@coachcare/backend/shared'
+import { NotifierService } from '@coachcare/common/services'
 
 @Component({
   selector: 'ccr-organizations-app-ids',
   templateUrl: './app-ids.component.html'
 })
 export class AppIdsComponent implements OnDestroy, OnInit {
-  @Input() adminPrefs: any;
-  @Input() orgId: string;
+  @Input() adminPrefs: any
+  @Input() orgId: string
 
-  public form: FormGroup;
+  public form: FormGroup
 
   constructor(
     private fb: FormBuilder,
@@ -23,19 +23,19 @@ export class AppIdsComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   public async onSubmit(): Promise<void> {
     try {
-      const formValue = this.form.value;
+      const formValue = this.form.value
       await this.organizationPreference.updateAdminPreference({
         appIds: formValue,
         id: this.orgId
-      });
-      this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'));
+      })
+      this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
@@ -43,10 +43,10 @@ export class AppIdsComponent implements OnDestroy, OnInit {
     this.form = this.fb.group({
       android: [''],
       ios: ['']
-    });
+    })
 
     if (this.adminPrefs && this.adminPrefs.appIds) {
-      this.form.patchValue(this.adminPrefs.appIds);
+      this.form.patchValue(this.adminPrefs.appIds)
     }
   }
 }

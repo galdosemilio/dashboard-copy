@@ -291,8 +291,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "6mb"
+                  "maximumWarning": "9mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -319,8 +319,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "6mb"
+                  "maximumWarning": "9mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -510,6 +510,36 @@
       },
       "schematics": {
         "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "npm-api": {
+      "projectType": "library",
+      "root": "libs/npm-api",
+      "sourceRoot": "libs/npm-api/src",
+      "prefix": "dashboard",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/npm-api/tsconfig.lib.json",
+              "libs/npm-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/npm-api/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/npm-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
           "style": "scss"
         }
       }

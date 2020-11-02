@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { OrganizationSingle } from '@coachcare/backend/services';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { OrganizationSingle } from '@coachcare/npm-api'
 
-import { OrganizationParams, OrganizationRoutes } from '@board/services';
+import { OrganizationParams, OrganizationRoutes } from '@board/services'
 
 @Component({
   selector: 'ccr-organizations-display',
@@ -10,17 +10,20 @@ import { OrganizationParams, OrganizationRoutes } from '@board/services';
   styleUrls: ['./display.component.scss']
 })
 export class OrganizationsDisplayComponent implements OnInit {
-  id: string | undefined;
-  item: OrganizationSingle | undefined;
+  id: string | undefined
+  item: OrganizationSingle | undefined
 
-  constructor(private route: ActivatedRoute, public routes: OrganizationRoutes) {}
+  constructor(
+    private route: ActivatedRoute,
+    public routes: OrganizationRoutes
+  ) {}
 
   ngOnInit() {
     // route parameters
     this.route.data.subscribe((data: OrganizationParams) => {
-      this.item = data.org;
-      this.id = data.org ? data.org.id : undefined;
+      this.item = data.org
+      this.id = data.org ? data.org.id : undefined
       // TODO encapsulate the org info to resolve logo from preferences array
-    });
+    })
   }
 }

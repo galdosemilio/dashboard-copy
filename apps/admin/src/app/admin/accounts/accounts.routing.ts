@@ -1,14 +1,14 @@
-import { Routes } from '@angular/router';
-import { AccountTypeId } from '@coachcare/backend/services';
+import { Routes } from '@angular/router'
+import { AccountTypeId } from '@coachcare/npm-api'
 
-import { AccountResolver } from '@board/services';
+import { AccountResolver } from '@board/services'
 // import { LogsListComponent } from '../userlogs/userlogs.index';
 import {
   AccountComponent,
   AccountFormComponent,
   AccountsListComponent,
   AffiliationComponent
-} from './accounts.index';
+} from './accounts.index'
 
 export const routes: Routes = [
   {
@@ -18,17 +18,17 @@ export const routes: Routes = [
   },
   {
     path: 'admins',
-    children: getAccountChildren('1')
+    children: getAccountChildren(AccountTypeId.Admin)
   },
   {
     path: 'coaches',
-    children: getAccountChildren('2')
+    children: getAccountChildren(AccountTypeId.Provider)
   },
   {
     path: 'patients',
-    children: getAccountChildren('3')
+    children: getAccountChildren(AccountTypeId.Client)
   }
-];
+]
 
 export function getAccountChildren(accountType: AccountTypeId): Routes {
   return [
@@ -91,5 +91,5 @@ export function getAccountChildren(accountType: AccountTypeId): Routes {
         // }
       ]
     }
-  ];
+  ]
 }

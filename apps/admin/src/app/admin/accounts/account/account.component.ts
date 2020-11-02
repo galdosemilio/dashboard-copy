@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AccountSingle } from '@coachcare/backend/services';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { AccountSingle } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-accounts-account',
@@ -8,18 +8,18 @@ import { AccountSingle } from '@coachcare/backend/services';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-  accountType: string;
-  id: string;
-  item: AccountSingle;
+  accountType: string
+  id: string
+  item: AccountSingle
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     // route parameters
     this.route.data.subscribe((data: any) => {
-      this.accountType = data.accountType;
-      this.id = data.account.id;
-      this.item = data.account;
-    });
+      this.accountType = data.accountType
+      this.id = data.account.id
+      this.item = data.account
+    })
   }
 }

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { AppDatabase } from '@coachcare/backend/model';
+import { Injectable } from '@angular/core'
+import { AppDatabase } from '@coachcare/backend/model'
 import {
   Account,
   AccountSingle,
@@ -10,41 +10,41 @@ import {
   GetListAccountRequest,
   GetListAccountResponse,
   UpdateAccountRequest
-} from '@coachcare/backend/services';
-import { from, Observable } from 'rxjs';
+} from '@coachcare/npm-api'
+import { from, Observable } from 'rxjs'
 
 @Injectable()
 export class AccountsDatabase extends AppDatabase {
   constructor(private account: Account) {
-    super();
+    super()
   }
 
   getAll(args: GetAllAccountRequest): Observable<GetAllAccountResponse> {
-    return from(this.account.getAll(args));
+    return from(this.account.getAll(args))
   }
 
   getList(args: GetListAccountRequest): Observable<GetListAccountResponse> {
-    return from(this.account.getList(args));
+    return from(this.account.getList(args))
   }
 
   check(request: CheckAccountRequest): Promise<void> {
-    return this.account.check(request);
+    return this.account.check(request)
   }
 
   getSingle(id: string): Promise<AccountSingle> {
-    return this.account.getSingle({ id });
+    return this.account.getSingle(id)
   }
 
   create(request: CreateAccountRequest) {
-    return this.account.create(request);
+    return this.account.create(request)
   }
 
   update(request: UpdateAccountRequest) {
-    return this.account.update(request);
+    return this.account.update(request as any) // MERGETODO: CHECK THIS TYPE OUT!!!
   }
 
   delete(id: string): Promise<void> {
-    return this.account.setActive({ id, isActive: false });
+    return this.account.setActive({ id, isActive: false })
   }
 
   // TODO move this to an override service of common

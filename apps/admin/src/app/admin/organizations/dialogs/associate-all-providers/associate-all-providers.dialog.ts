@@ -1,28 +1,28 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { AccountTypeIds, ActiveCampaign } from '@coachcare/backend/services';
-import { ContextService, NotifierService } from '@coachcare/common/services';
-import { sleep } from '@coachcare/common/shared';
-import { Account } from 'selvera-api';
-import { AccountFullData } from 'selvera-api/dist/lib/selvera-api/providers/account/entities';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { AccountTypeIds, ActiveCampaign } from '@coachcare/npm-api'
+import { ContextService, NotifierService } from '@coachcare/common/services'
+import { sleep } from '@coachcare/common/shared'
+import { Account } from 'selvera-api'
+import { AccountFullData } from 'selvera-api/dist/lib/selvera-api/providers/account/entities'
 
 export interface AssociateAllProvidersDialogData {
-  organizationId: string;
+  organizationId: string
 }
 
 @Component({
   selector: 'ccr-organizations-associate-all-providers-dialog',
   templateUrl: './associate-all-providers.dialog.html',
   styleUrls: ['./associate-all-providers.dialog.scss'],
-  host: { class: 'ccr-dialog' },
+  host: { class: 'ccr-dialog' }
 })
 export class AssociateAllProvidersDialogComponent implements OnInit {
-  public currentProvider = '';
-  public failedProviders: AccountFullData[] = [];
-  public progress = 0;
-  public state: 'warning' | 'processing' | 'results' = 'warning';
+  public currentProvider = ''
+  public failedProviders: AccountFullData[] = []
+  public progress = 0
+  public state: 'warning' | 'processing' | 'results' = 'warning'
 
-  private organizationId: string;
+  private organizationId: string
 
   constructor(
     private account: Account,
@@ -36,22 +36,22 @@ export class AssociateAllProvidersDialogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.organizationId =
-      this.data.organizationId || this.context.organizationId || '';
+      this.data.organizationId || this.context.organizationId || ''
   }
 
   public async onAssociateAllProviders(
     initialProviders: AccountFullData[] = []
   ): Promise<void> {
     try {
-      this.dialogRef.disableClose = true;
-      this.state = 'processing';
+      this.dialogRef.disableClose = true
+      this.state = 'processing'
 
-      const cooldownTime = 750;
-      const batchSize = 25;
+      const cooldownTime = 750
+      const batchSize = 25
 
-      let batchIndex = 0;
-      let initialPromiseAmount = 0;
-      let currentPromiseAmount = 0;
+      let batchIndex = 0
+      let initialPromiseAmount = 0
+      let currentPromiseAmount = 0
 
       const providers = initialProviders.length
         ? initialProviders
@@ -60,57 +60,57 @@ export class AssociateAllProvidersDialogComponent implements OnInit {
               organization: this.organizationId,
               accountType: AccountTypeIds.Provider,
               offset: 0,
-              limit: 'all',
+              limit: 'all'
             })
-          ).data;
+          ).data
 
       const associationPromises = providers.map((provider) =>
         this.activeCampaign.createNewsletterSubscription({
           account: provider.id,
-          organization: this.organizationId,
+          organization: this.organizationId
         })
-      );
+      )
 
-      const failedRequests: number[] = [];
+      const failedRequests: number[] = []
 
-      initialPromiseAmount = associationPromises.length;
+      initialPromiseAmount = associationPromises.length
 
       while (associationPromises.length) {
-        const promiseBatch = associationPromises.splice(0, batchSize);
-        const actualBatchSize = promiseBatch.length;
+        const promiseBatch = associationPromises.splice(0, batchSize)
+        const actualBatchSize = promiseBatch.length
 
         while (promiseBatch.length) {
           try {
-            const currentProvider = providers[batchIndex];
-            this.currentProvider = `${currentProvider.firstName} ${currentProvider.lastName}`;
-            this.cdr.detectChanges();
-            await promiseBatch.shift();
-            ++batchIndex;
+            const currentProvider = providers[batchIndex]
+            this.currentProvider = `${currentProvider.firstName} ${currentProvider.lastName}`
+            this.cdr.detectChanges()
+            await promiseBatch.shift()
+            ++batchIndex
           } catch (error) {
-            failedRequests.push(batchIndex);
-            ++batchIndex;
+            failedRequests.push(batchIndex)
+            ++batchIndex
           }
         }
 
-        await sleep(cooldownTime);
-        currentPromiseAmount += actualBatchSize;
+        await sleep(cooldownTime)
+        currentPromiseAmount += actualBatchSize
 
         this.progress = Math.round(
           (currentPromiseAmount / initialPromiseAmount) * 100
-        );
-        this.cdr.detectChanges();
+        )
+        this.cdr.detectChanges()
       }
 
-      this.failedProviders = failedRequests.map((index) => providers[index]);
+      this.failedProviders = failedRequests.map((index) => providers[index])
 
-      this.state = 'results';
-      this.progress = 0;
-      this.cdr.detectChanges();
+      this.state = 'results'
+      this.progress = 0
+      this.cdr.detectChanges()
     } catch (error) {
-      this.notifier.error(error);
-      this.state = 'warning';
+      this.notifier.error(error)
+      this.state = 'warning'
     } finally {
-      this.dialogRef.disableClose = false;
+      this.dialogRef.disableClose = false
     }
   }
 }

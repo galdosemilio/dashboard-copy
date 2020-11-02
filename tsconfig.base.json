@@ -11,7 +11,8 @@
     "target": "es2015",
     "module": "es2020",
     "types": [
-      "cypress"
+      "cypress",
+      "node"
     ],
     "typeRoots": [
       "node_modules/@types"
@@ -53,6 +54,12 @@
       ],
       "@coachcare/datepicker": [
         "libs/datepicker/src/index.ts"
+      ],
+      "@coachcare/npm-api": [
+        "libs/npm-api/src/index.ts"
+      ],
+      "@coachcare/npm-api/*": [
+        "libs/npm-api/src/lib/*"
       ]
     }
   },

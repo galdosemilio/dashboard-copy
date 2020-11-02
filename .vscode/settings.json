@@ -1,15 +1,4 @@
 {
-  "circleci.apiKey": "60e67f6943b9c5ee973e54692c00b90f80b0b50b",
-  "beautify.language": {
-    "css": [],
-    "html": [
-      "htm"
-    ]
-  },
-  "beautify.ignore": [
-    "*.{js,json}",
-    "libs/datepicker/**/*"
-  ],
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
@@ -27,12 +16,6 @@
     "html",
     "jsonc"
   ],
-  "prettier.printWidth": 100,
-  "prettier.semi": true,
-  "prettier.singleQuote": true,
-  "prettier.tabWidth": 2,
-  "prettier.trailingComma": "none",
-  "prettier.useTabs": false,
   "tslint.autoFixOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "javascript.implicitProjectConfig.experimentalDecorators": true

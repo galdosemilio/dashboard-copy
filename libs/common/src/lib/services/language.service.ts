@@ -1,36 +1,36 @@
-import { Injectable } from '@angular/core';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { Injectable } from '@angular/core'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 
-import { AccountSingle, ApiService } from '@coachcare/backend/services';
-import { _ } from '@coachcare/backend/shared';
+import { AccountSingle, ApiService } from '@coachcare/npm-api'
+import { _ } from '@coachcare/backend/shared'
 import {
   AppSettings,
   loc2API,
   locales,
   locBase,
   locIsRtl
-} from '@coachcare/common/shared';
+} from '@coachcare/common/shared'
 
-import { ConfigService } from './config.service';
-import { COOKIE_LANG, CookieService } from './cookie.service';
-import { EventsService } from './events.service';
+import { ConfigService } from './config.service'
+import { COOKIE_LANG, CookieService } from './cookie.service'
+import { EventsService } from './events.service'
 
-import * as momentNs from 'moment-timezone';
-const moment = momentNs;
+import * as momentNs from 'moment-timezone'
+const moment = momentNs
 
-import 'moment/locale/ar';
-import 'moment/locale/da';
-import 'moment/locale/he';
-import './i18n/moment.en';
-import './i18n/moment.es';
+import 'moment/locale/ar'
+import 'moment/locale/da'
+import 'moment/locale/he'
+import './i18n/moment.en'
+import './i18n/moment.es'
 
 /**
  * Language Service
  */
 @Injectable()
 export class LanguageService {
-  private lang: string;
-  public localesBlacklist: Array<string> = [];
+  private lang: string
+  public localesBlacklist: Array<string> = []
 
   constructor(
     private api: ApiService,
@@ -44,31 +44,33 @@ export class LanguageService {
    * LOCALE_ID
    */
   toLowerCase() {
-    return this.lang;
+    return this.lang
   }
 
   init() {
-    const config: AppSettings = this.config.get('app');
+    const config: AppSettings = this.config.get('app')
 
-    this.translate.addLangs(locales.map(loc2API));
+    this.translate.addLangs(locales.map(loc2API))
 
     this.translate.onLangChange.subscribe((v: LangChangeEvent) => {
-      this.update(v.lang);
-    });
+      this.update(v.lang)
+    })
 
-    let lang;
+    let lang
     if (this.get() && this.translate.getLangs().indexOf(this.get()) > -1) {
-      lang = this.get();
-    } else if (this.translate.getLangs().indexOf(this.translate.getBrowserLang()) > -1) {
-      lang = this.translate.getBrowserLang();
+      lang = this.get()
+    } else if (
+      this.translate.getLangs().indexOf(this.translate.getBrowserLang()) > -1
+    ) {
+      lang = this.translate.getBrowserLang()
     } else {
-      lang = config.lang.default;
+      lang = config.lang.default
     }
-    this.use(lang || 'en');
+    this.use(lang || 'en')
 
-    this.setupMoment();
+    this.setupMoment()
 
-    this.bus.register('user.data', this.setupTimezone.bind(this));
+    this.bus.register('user.data', this.setupTimezone.bind(this))
   }
 
   setupMoment() {
@@ -78,51 +80,51 @@ export class LanguageService {
       h: 24,
       d: 28,
       M: 12
-    });
+    })
 
-    Object.keys(values).forEach(unit => {
-      moment.relativeTimeThreshold(unit, values[unit]);
-    });
+    Object.keys(values).forEach((unit) => {
+      moment.relativeTimeThreshold(unit, values[unit])
+    })
   }
 
   setupTimezone(user: AccountSingle) {
-    moment.tz.setDefault(user.timezone);
+    moment.tz.setDefault(user.timezone)
   }
 
   resolve(languages: Array<string>): string {
-    const exists = (lang: string) => languages.indexOf(lang) >= 0;
+    const exists = (lang: string) => languages.indexOf(lang) >= 0
 
     if (exists(this.lang)) {
-      return this.lang;
+      return this.lang
     }
     if (this.lang !== locBase(this.lang) && exists(locBase(this.lang))) {
-      return locBase(this.lang);
+      return locBase(this.lang)
     }
     // TODO consider preferredLocales?
-    return 'en';
+    return 'en'
   }
 
   get(): string {
     if (!this.lang) {
-      this.lang = this.cookie.get(COOKIE_LANG);
+      this.lang = this.cookie.get(COOKIE_LANG)
     }
-    return this.lang;
+    return this.lang
   }
 
   save(language: string) {
-    this.cookie.set(COOKIE_LANG, language, undefined, '/');
+    this.cookie.set(COOKIE_LANG, language, undefined, '/')
   }
 
   use(language: string) {
-    this.lang = language;
-    this.translate.use(this.lang);
-    this.api.setLocales([this.lang]);
-    moment.locale(locBase(this.lang));
+    this.lang = language
+    this.translate.use(this.lang)
+    this.api.setLocales([this.lang])
+    moment.locale(locBase(this.lang))
   }
 
   set(language: string) {
-    this.use(language);
-    this.save(language);
+    this.use(language)
+    this.save(language)
   }
 
   update(lang: string) {
@@ -133,7 +135,7 @@ export class LanguageService {
         _('MOMENTJS.TOMORROW'),
         _('MOMENTJS.LASWEEK')
       ])
-      .subscribe(translations => {
+      .subscribe((translations) => {
         moment.updateLocale(locBase(this.lang), {
           calendar: {
             lastDay: translations['MOMENTJS.YESTERDAY'],
@@ -144,15 +146,15 @@ export class LanguageService {
             nextWeek: 'dddd',
             sameElse: 'MMM D, YYYY'
           }
-        });
-      });
+        })
+      })
   }
 
   isRtl() {
-    return locIsRtl(this.lang);
+    return locIsRtl(this.lang)
   }
 
   getDir() {
-    return this.isRtl() ? 'rtl' : 'ltr';
+    return this.isRtl() ? 'rtl' : 'ltr'
   }
 }

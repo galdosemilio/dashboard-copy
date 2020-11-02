@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LabelDialogs, LabelRoutes } from '@board/services';
-import { LabelsDatabase } from '@coachcare/backend/data';
-import { UpdatePackageRequest } from '@coachcare/backend/services';
-import { _, FormUtils } from '@coachcare/backend/shared';
-import { NotifierService } from '@coachcare/common/services';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { LabelDialogs, LabelRoutes } from '@board/services'
+import { LabelsDatabase } from '@coachcare/backend/data'
+import { UpdatePackageRequest } from '@coachcare/npm-api'
+import { _, FormUtils } from '@coachcare/backend/shared'
+import { NotifierService } from '@coachcare/common/services'
 
 @Component({
   selector: 'ccr-package-form',
@@ -13,11 +13,11 @@ import { NotifierService } from '@coachcare/common/services';
   styleUrls: ['./form.component.scss']
 })
 export class LabelFormComponent implements OnInit {
-  form: FormGroup;
-  id: string | undefined;
-  item: any;
-  readonly = true;
-  colSpan = 2;
+  form: FormGroup
+  id: string | undefined
+  item: any
+  readonly = true
+  colSpan = 2
 
   constructor(
     private builder: FormBuilder,
@@ -31,19 +31,19 @@ export class LabelFormComponent implements OnInit {
 
   ngOnInit() {
     // setup the FormGroup
-    this.createForm();
+    this.createForm()
 
     // route parameters
     this.route.data.subscribe((data: any) => {
       if (data.lbl) {
-        this.id = data.lbl.id;
-        this.item = data.lbl;
+        this.id = data.lbl.id
+        this.item = data.lbl
         // fill the form
-        this.form.patchValue(this.item);
+        this.form.patchValue(this.item)
       }
 
-      this.readonly = data.readonly ? true : false;
-    });
+      this.readonly = data.readonly ? true : false
+    })
   }
 
   createForm() {
@@ -51,53 +51,53 @@ export class LabelFormComponent implements OnInit {
       title: [null, Validators.required],
       description: null,
       isActive: null
-    });
+    })
   }
 
   onSubmit() {
     if (this.form.valid) {
       this.database
         .create(this.form.value)
-        .then(res => {
-          this.notifier.success(_('NOTIFY.SUCCESS.LABEL_CREATED'));
-          this.router.navigate([this.routes.single(res.id)]);
+        .then((res) => {
+          this.notifier.success(_('NOTIFY.SUCCESS.LABEL_CREATED'))
+          this.router.navigate([this.routes.single(res.id)])
         })
-        .catch(err => this.notifier.error(err));
+        .catch((err) => this.notifier.error(err))
     } else {
-      FormUtils.markAsTouched(this.form);
+      FormUtils.markAsTouched(this.form)
     }
   }
 
   onUpdate() {
     if (this.form.valid) {
-      const formValue = this.form.value;
+      const formValue = this.form.value
       if (this.id) {
         const req: UpdatePackageRequest = {
           id: this.id,
           title: formValue.title,
           description: formValue.description,
           isActive: true
-        };
+        }
         this.database
           .update(req)
           .then(() => {
-            this.notifier.success(_('NOTIFY.SUCCESS.LABEL_UPDATED'));
-            this.router.navigate([this.routes.single(this.id as string)]);
+            this.notifier.success(_('NOTIFY.SUCCESS.LABEL_UPDATED'))
+            this.router.navigate([this.routes.single(this.id as string)])
           })
-          .catch(err => this.notifier.error(err));
+          .catch((err) => this.notifier.error(err))
       }
     } else {
-      FormUtils.markAsTouched(this.form);
+      FormUtils.markAsTouched(this.form)
     }
   }
 
   onCancel() {
     if (!this.id) {
       // create
-      this.router.navigate([this.routes.list()]);
+      this.router.navigate([this.routes.list()])
     } else {
       // update
-      this.router.navigate([this.routes.single(this.id as string)]);
+      this.router.navigate([this.routes.single(this.id as string)])
     }
   }
 
@@ -105,31 +105,31 @@ export class LabelFormComponent implements OnInit {
     this.dialogs
       .activatePrompt(this.item)
       .then(() => {
-        this.item.isActive = true;
-        this.form.patchValue({ isActive: true });
-        this.notifier.success(_('NOTIFY.SUCCESS.LABEL_ACTIVATED'));
+        this.item.isActive = true
+        this.form.patchValue({ isActive: true })
+        this.notifier.success(_('NOTIFY.SUCCESS.LABEL_ACTIVATED'))
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
-          this.notifier.error(err);
+          this.notifier.error(err)
         }
-      });
+      })
   }
 
   onDeactivate() {
     this.dialogs
       .deactivatePrompt(this.item)
       .then(() => {
-        this.item.isActive = false;
-        this.form.patchValue({ isActive: false });
-        this.notifier.success(_('NOTIFY.SUCCESS.LABEL_DEACTIVATED'));
+        this.item.isActive = false
+        this.form.patchValue({ isActive: false })
+        this.notifier.success(_('NOTIFY.SUCCESS.LABEL_DEACTIVATED'))
       })
-      .catch(err => {
+      .catch((err) => {
         if (err) {
           // non-discarded prompt
-          this.notifier.error(err);
+          this.notifier.error(err)
         }
-      });
+      })
   }
 }

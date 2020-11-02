@@ -1,17 +1,15 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
 import {
   ModuleWithProviders,
   NgModule,
   Optional,
-  SkipSelf,
-} from '@angular/core';
-import { API_ENVIRONMENT, ApiEnvironment } from '@coachcare/backend/shared';
-import { CCRStoreModule } from '@coachcare/backend/store';
-import { BackendProviders } from './backend.providers';
+  SkipSelf
+} from '@angular/core'
+import { API_ENVIRONMENT, ApiEnvironment } from '@coachcare/backend/shared'
+import { CCRStoreModule } from '@coachcare/backend/store'
 
 @NgModule({
-  imports: [CommonModule],
-  providers: BackendProviders,
+  imports: [CommonModule]
 })
 export class BackendModule {
   constructor(
@@ -20,7 +18,7 @@ export class BackendModule {
     parent: BackendModule
   ) {
     if (parent) {
-      throw new Error('BackendModule is already loaded.');
+      throw new Error('BackendModule is already loaded.')
     }
   }
 
@@ -28,9 +26,9 @@ export class BackendModule {
     return [
       {
         ngModule: BackendModule,
-        providers: [{ provide: API_ENVIRONMENT, useValue: environment }],
+        providers: [{ provide: API_ENVIRONMENT, useValue: environment }]
       },
-      ...CCRStoreModule.forParent(),
-    ];
+      ...CCRStoreModule.forParent()
+    ]
   }
 }

@@ -1,1 +1,1 @@
-export * from './selectors.interfaces';
+export * from './selectors.interfaces'

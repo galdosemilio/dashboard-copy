@@ -19,14 +19,16 @@
       "implicitDependencies": ["provider"]
     },
     "admin": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["common", "backend", "npm-api"]
     },
     "admin-e2e": {
       "tags": [],
       "implicitDependencies": ["admin"]
     },
     "common": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["backend"]
     },
     "layout": {
       "tags": []
@@ -35,6 +37,9 @@
       "tags": []
     },
     "datepicker": {
+      "tags": []
+    },
+    "npm-api": {
       "tags": []
     }
   },

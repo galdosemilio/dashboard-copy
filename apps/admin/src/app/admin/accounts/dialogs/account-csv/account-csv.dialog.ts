@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AccountFullData, AccountTypeIds } from '@coachcare/backend/services';
-import { OrganizationAutocompleterComponent } from '@coachcare/common/components';
-import { NotifierService } from '@coachcare/common/services';
-import * as moment from 'moment';
-import { Account, Organization } from 'selvera-api';
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { AccountFullData, AccountTypeIds } from '@coachcare/npm-api'
+import { OrganizationAutocompleterComponent } from '@coachcare/common/components'
+import { NotifierService } from '@coachcare/common/services'
+import * as moment from 'moment'
+import { Account, Organization } from 'selvera-api'
 
 @Component({
   selector: 'ccr-account-csv-dialog',
@@ -15,9 +15,9 @@ import { Account, Organization } from 'selvera-api';
 })
 export class AccountCSVDialogComponent implements OnInit {
   @ViewChild(OrganizationAutocompleterComponent, { static: false })
-  autocompleter: OrganizationAutocompleterComponent;
-  excludedOrgs: any[] = [];
-  isLoading = false;
+  autocompleter: OrganizationAutocompleterComponent
+  excludedOrgs: any[] = []
+  isLoading = false
 
   constructor(
     private account: Account,
@@ -29,75 +29,75 @@ export class AccountCSVDialogComponent implements OnInit {
 
   async downloadCSV() {
     try {
-      this.isLoading = true;
+      this.isLoading = true
       const response = await this.account.getAll({
-        exclude: this.excludedOrgs.map(org => org.id),
+        exclude: this.excludedOrgs.map((org) => org.id),
         accountType: AccountTypeIds.Provider,
         limit: 'all'
-      } as any);
+      } as any)
 
-      const csv = this.generateCSV(response.data as AccountFullData[]);
-      const date = moment().format('YYYY-MM-DD');
-      const filename = `Provider_List_${date}.csv`;
+      const csv = this.generateCSV(response.data as AccountFullData[])
+      const date = moment().format('YYYY-MM-DD')
+      const filename = `Provider_List_${date}.csv`
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.setAttribute('visibility', 'hidden');
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.setAttribute('visibility', 'hidden')
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     } finally {
-      this.isLoading = false;
+      this.isLoading = false
     }
   }
 
   async orgSelected(orgId: string) {
     try {
-      if (!orgId || this.excludedOrgs.find(org => org.id === orgId)) {
-        return;
+      if (!orgId || this.excludedOrgs.find((org) => org.id === orgId)) {
+        return
       }
-      this.isLoading = true;
-      const organization = await this.organization.getSingle(orgId);
-      this.excludedOrgs.push(organization);
+      this.isLoading = true
+      const organization = await this.organization.getSingle(orgId)
+      this.excludedOrgs.push(organization)
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     } finally {
-      this.isLoading = false;
-      this.autocompleter.reset();
+      this.isLoading = false
+      this.autocompleter.reset()
     }
   }
 
   removeOrganization(index: number): void {
-    this.excludedOrgs.splice(index, 1);
+    this.excludedOrgs.splice(index, 1)
   }
 
   private generateCSV(accounts: any[]): string {
-    let csv = '';
-    const separator = ',';
+    let csv = ''
+    const separator = ','
 
     if (!accounts || !accounts.length) {
-      return csv;
+      return csv
     }
 
-    csv += 'PROVIDER LIST\r\n';
-    csv += `"ID"${separator}`;
-    csv += `"FIRST NAME"${separator}`;
-    csv += `"LAST NAME"${separator}`;
-    csv += `"EMAIL"${separator}`;
-    csv += `"PHONE"\r\n`;
+    csv += 'PROVIDER LIST\r\n'
+    csv += `"ID"${separator}`
+    csv += `"FIRST NAME"${separator}`
+    csv += `"LAST NAME"${separator}`
+    csv += `"EMAIL"${separator}`
+    csv += `"PHONE"\r\n`
 
     accounts.forEach((account: any) => {
-      csv += `"${account.id || ''}"${separator}`;
-      csv += `"${account.firstName || ''}"${separator}`;
-      csv += `"${account.lastName || ''}"${separator}`;
-      csv += `"${account.email || ''}"${separator}`;
-      csv += `"${account.countryCode || ''}${account.phone || ''}"\r\n`;
-    });
+      csv += `"${account.id || ''}"${separator}`
+      csv += `"${account.firstName || ''}"${separator}`
+      csv += `"${account.lastName || ''}"${separator}`
+      csv += `"${account.email || ''}"${separator}`
+      csv += `"${account.countryCode || ''}${account.phone || ''}"\r\n`
+    })
 
-    return csv;
+    return csv
   }
 }

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 import {
   CommunicationPreference,
   CommunicationPreferenceSingle,
@@ -17,12 +17,13 @@ import {
   Organization,
   RPM,
   Sequence
-} from '@coachcare/backend/services';
-import { RPMPreferenceSingle } from 'selvera-api/dist/lib/selvera-api/providers/rpm/entities';
-import { OrganizationFeaturePrefs } from './organization.types';
+} from '@coachcare/npm-api'
+import { RPMPreferenceSingle } from 'selvera-api/dist/lib/selvera-api/providers/rpm/entities'
+import { OrganizationFeaturePrefs } from './organization.types'
 
 @Injectable()
-export class OrganizationFeaturePreferenceResolver implements Resolve<OrganizationFeaturePrefs> {
+export class OrganizationFeaturePreferenceResolver
+  implements Resolve<OrganizationFeaturePrefs> {
   constructor(
     private communicationPref: CommunicationPreference,
     private contentPref: ContentPreference,
@@ -33,9 +34,9 @@ export class OrganizationFeaturePreferenceResolver implements Resolve<Organizati
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<any> {
-    return new Promise<any>(async resolve => {
+    return new Promise<any>(async (resolve) => {
       try {
-        const id = route.paramMap.get('id') as string;
+        const id = route.paramMap.get('id') as string
         const featurePreferences = await Promise.all([
           this.resolveContentPreference({ organization: id }),
           this.resolveAssociationPreference({ id }),
@@ -44,7 +45,7 @@ export class OrganizationFeaturePreferenceResolver implements Resolve<Organizati
           this.resolveSequencesPreference({ organization: id }),
           this.resolveRPMPreference({ organization: id }),
           this.resolveFileVaultPreference({ organization: id })
-        ]);
+        ])
 
         const resolvedPrefs = {
           contentPrefs: featurePreferences[0],
@@ -54,100 +55,104 @@ export class OrganizationFeaturePreferenceResolver implements Resolve<Organizati
           sequencePrefs: featurePreferences[4],
           rpmPrefs: featurePreferences[5],
           fileVaultPrefs: featurePreferences[6]
-        };
-        resolve(resolvedPrefs);
+        }
+        resolve(resolvedPrefs)
       } catch (error) {
-        resolve({ contentPrefs: undefined });
+        resolve({ contentPrefs: undefined })
       }
-    });
+    })
   }
 
   private resolveAssociationPreference(request: Entity): Promise<any> {
-    return new Promise<any>(async resolve => {
+    return new Promise<any>(async (resolve) => {
       try {
-        const single = await this.organization.getSingle(request);
+        const single = await this.organization.getSingle(request.id)
         resolve({
-          openAddProvider: single.openAssociation ? single.openAssociation.provider : false,
-          openAddClient: single.openAssociation ? single.openAssociation.client : false,
+          openAddProvider: single.openAssociation
+            ? single.openAssociation.provider
+            : false,
+          openAddClient: single.openAssociation
+            ? single.openAssociation.client
+            : false,
           patientAutoUnenroll: single.automaticDisassociation
             ? single.automaticDisassociation.client
             : false
-        });
+        })
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveContentPreference(
     request: GetSingleContentPreferenceRequest
   ): Promise<ContentPreferenceSingle> {
-    return new Promise<ContentPreferenceSingle>(async resolve => {
+    return new Promise<ContentPreferenceSingle>(async (resolve) => {
       try {
-        resolve(await this.contentPref.getContentPreference(request));
+        resolve(await this.contentPref.getContentPreference(request))
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveCommunicationPreference(
     request: GetSingleCommunicationPreferenceRequest
   ): Promise<CommunicationPreferenceSingle> {
-    return new Promise<CommunicationPreferenceSingle>(async resolve => {
+    return new Promise<CommunicationPreferenceSingle>(async (resolve) => {
       try {
-        resolve(await this.communicationPref.getPreferenceByOrg(request));
+        resolve(await this.communicationPref.getPreferenceByOrg(request))
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveFileVaultPreference(
     request: GetSingleContentPreferenceRequest
   ): Promise<ContentPreferenceSingle> {
-    return new Promise<ContentPreferenceSingle>(async resolve => {
+    return new Promise<ContentPreferenceSingle>(async (resolve) => {
       try {
-        resolve(await this.contentPref.getContentVaultPreference(request));
+        resolve(await this.contentPref.getContentVaultPreference(request))
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveMessagingPreference(
     request: GetSingleMessagingPreferenceByOrgRequest
   ): Promise<MessagingPreferenceSingle> {
-    return new Promise<MessagingPreferenceSingle>(async resolve => {
+    return new Promise<MessagingPreferenceSingle>(async (resolve) => {
       try {
-        resolve(await this.messagingPref.getPreferenceByOrg(request));
+        resolve(await this.messagingPref.getPreferenceByOrg(request))
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveRPMPreference(
     request: GetRPMPreferenceByOrgRequest
   ): Promise<RPMPreferenceSingle> {
-    return new Promise<RPMPreferenceSingle>(async resolve => {
+    return new Promise<RPMPreferenceSingle>(async (resolve) => {
       try {
-        resolve(await this.rpm.getRPMPreferenceByOrg(request));
+        resolve(await this.rpm.getRPMPreferenceByOrg(request))
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveSequencesPreference(
     request: GetSeqOrgPreferenceByOrg
   ): Promise<GetSeqOrgPreferenceResponse> {
-    return new Promise<GetSeqOrgPreferenceResponse>(async resolve => {
+    return new Promise<GetSeqOrgPreferenceResponse>(async (resolve) => {
       try {
-        resolve(await this.sequence.getSeqOrgPreferenceByOrg(request));
+        resolve(await this.sequence.getSeqOrgPreferenceByOrg(request))
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 }

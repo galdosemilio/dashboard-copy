@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/common/material';
-import { AccountPassword } from '@coachcare/backend/services';
-import { _, FormUtils } from '@coachcare/backend/shared';
-import { ConfirmDialog } from '@coachcare/common/dialogs/core';
-import { ContextService } from '@coachcare/common/services';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { MatDialog } from '@coachcare/common/material'
+import { AccountPassword } from '@coachcare/npm-api'
+import { _, FormUtils } from '@coachcare/backend/shared'
+import { ConfirmDialog } from '@coachcare/common/dialogs/core'
+import { ContextService } from '@coachcare/common/services'
 
 @Component({
   selector: 'ccr-page-password-reset',
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss'],
   host: {
-    class: 'ccr-page-card',
-  },
+    class: 'ccr-page-card'
+  }
 })
 export class PasswordResetPageComponent implements OnInit {
-  form: FormGroup;
-  isProcessing = false;
+  form: FormGroup
+  isProcessing = false
 
   constructor(
     private builder: FormBuilder,
@@ -27,22 +27,22 @@ export class PasswordResetPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.builder.group({
-      email: '',
-    });
+      email: ''
+    })
   }
 
   onSubmit(): void {
     if (this.isProcessing) {
-      return;
+      return
     }
 
     if (this.form.valid) {
-      this.isProcessing = true;
+      this.isProcessing = true
 
       const request = {
         email: this.form.value.email,
-        organization: this.context.organizationId || undefined,
-      };
+        organization: this.context.organizationId || undefined
+      }
 
       this.password
         .reset(request)
@@ -50,22 +50,22 @@ export class PasswordResetPageComponent implements OnInit {
           this.dialog.open(ConfirmDialog, {
             data: {
               title: _('GLOBAL.DONE'),
-              content: _('NOTIFY.SUCCESS.CHECK_RESET_EMAIL'),
-            },
-          });
-          this.isProcessing = false;
+              content: _('NOTIFY.SUCCESS.CHECK_RESET_EMAIL')
+            }
+          })
+          this.isProcessing = false
         })
         .catch((err: string) => {
           this.dialog.open(ConfirmDialog, {
             data: {
               title: _('GLOBAL.ERROR'),
-              content: err,
-            },
-          });
-          this.isProcessing = false;
-        });
+              content: err
+            }
+          })
+          this.isProcessing = false
+        })
     } else {
-      FormUtils.markAsTouched(this.form);
+      FormUtils.markAsTouched(this.form)
     }
   }
 }

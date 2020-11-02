@@ -1,14 +1,8 @@
-import {
-  Component,
-  forwardRef,
-  Inject,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/common/material';
-import { ActivatedRoute } from '@angular/router';
-import { MFACodeInputMode } from '@board/shared/mfa-code-input';
+import { Component, forwardRef, Inject, OnDestroy, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { MatDialog } from '@coachcare/common/material'
+import { ActivatedRoute } from '@angular/router'
+import { MFACodeInputMode } from '@board/shared/mfa-code-input'
 import {
   Account,
   AccountTypeIds,
@@ -16,53 +10,53 @@ import {
   LoginSessionRequest,
   LoginSessionResponse,
   MobileApp,
-  Session,
-} from '@coachcare/backend/services';
-import { _, FormUtils } from '@coachcare/backend/shared';
-import { SessionActions } from '@coachcare/backend/store/session';
-import { ConfirmDialog } from '@coachcare/common/dialogs/core';
-import { BindForm, BINDFORM_TOKEN } from '@coachcare/common/directives';
+  Session
+} from '@coachcare/npm-api'
+import { _, FormUtils } from '@coachcare/backend/shared'
+import { SessionActions } from '@coachcare/backend/store/session'
+import { ConfirmDialog } from '@coachcare/common/dialogs/core'
+import { BindForm, BINDFORM_TOKEN } from '@coachcare/common/directives'
 import {
   ContextService,
   COOKIE_ROLE,
   CookieService,
   NotifierService,
-  STORAGE_HIDE_REGISTER_COMPANY,
-} from '@coachcare/common/services';
-import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared';
-import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store';
-import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+  STORAGE_HIDE_REGISTER_COMPANY
+} from '@coachcare/common/services'
+import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'
+import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
+import { select, Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
-type LoginPageMode = 'patient';
+type LoginPageMode = 'patient'
 
 @Component({
   selector: 'ccr-page-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   host: {
-    class: 'ccr-page-card',
+    class: 'ccr-page-card'
   },
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => LoginPageComponent),
-    },
-  ],
+      useExisting: forwardRef(() => LoginPageComponent)
+    }
+  ]
 })
 export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
-  androidLink: string;
-  androidButtonLink: string;
-  form: FormGroup;
-  iosLink: string;
-  iosButtonLink: string;
-  isLoggingIn: boolean;
-  logoUrl: string;
-  mfaForm: FormGroup;
-  mode: MFACodeInputMode | LoginPageMode = 'default';
-  orgName: string;
-  showRegisterCompany = false;
+  androidLink: string
+  androidButtonLink: string
+  form: FormGroup
+  iosLink: string
+  iosButtonLink: string
+  isLoggingIn: boolean
+  logoUrl: string
+  mfaForm: FormGroup
+  mode: MFACodeInputMode | LoginPageMode = 'default'
+  orgName: string
+  showRegisterCompany = false
 
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
@@ -82,24 +76,24 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       .pipe(select(OrgPrefSelectors.selectAssets))
       .subscribe((assets) => {
         this.logoUrl =
-          assets && assets.logoUrl ? assets.logoUrl : '/assets/logo.png';
-      });
+          assets && assets.logoUrl ? assets.logoUrl : '/assets/logo.png'
+      })
 
     this.store
       .pipe(select(OrgPrefSelectors.selectOrgPref))
       .subscribe((prefs) => {
-        this.orgName = prefs.displayName || '';
-      });
+        this.orgName = prefs.displayName || ''
+      })
 
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
-      const accountType = params.accountType;
+      const accountType = params.accountType
 
       if (accountType === AccountTypeIds.Client) {
-        this.setMode('patient');
+        this.setMode('patient')
       }
 
-      this.resolveRegisterNewCompanyLink(params);
-    });
+      this.resolveRegisterNewCompanyLink(params)
+    })
   }
 
   ngOnDestroy() {}
@@ -107,29 +101,29 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
   ngOnInit() {
     this.form = this.builder.group({
       email: '',
-      password: '',
-    });
-    this.mfaForm = this.builder.group({});
+      password: ''
+    })
+    this.mfaForm = this.builder.group({})
     this.resolveBadgeLinks(
       this.translate.currentLang.split('-')[0].toLowerCase()
-    );
-    this.resolveMobileAppRedirects();
+    )
+    this.resolveMobileAppRedirects()
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
       .subscribe((translation: any) =>
         this.resolveBadgeLinks(translation.lang.split('-')[0].toLowerCase())
-      );
-    this.checkExistingSession();
-    this.isLoggingIn = false;
+      )
+    this.checkExistingSession()
+    this.isLoggingIn = false
   }
 
   setMode(mode: MFACodeInputMode | LoginPageMode): void {
-    this.mode = mode;
+    this.mode = mode
   }
 
   onSubmit() {
     if (this.isLoggingIn) {
-      return;
+      return
     }
     if (this.form.valid) {
       const request: LoginSessionRequest = {
@@ -137,21 +131,22 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
         deviceType: DeviceTypeIds.Web,
         allowedAccountTypes: [AccountTypeIds.Admin, AccountTypeIds.Provider],
         organization:
-          this.context.organizationId || this.environment.defaultOrgId,
-      };
+          this.context.organizationId || this.environment.defaultOrgId
+      }
 
-      this.isLoggingIn = true;
+      this.isLoggingIn = true
       this.session
-        .login(request)
+        .login(request as any) // MERGETODO: CHECK THIS TYPE!!!
         .then((response) => {
+          console.log('this is happening', { response })
           if (response.mfa) {
-            this.detectMFA(response);
+            this.detectMFA(response as any) // MERGETODO: CHECK THIS TYPE!!!
           }
           // let the store effect take care
-          this.isLoggingIn = false;
+          this.isLoggingIn = false
         })
         .catch((err: any) => {
-          this.isLoggingIn = false;
+          this.isLoggingIn = false
           if (
             err &&
             err.data &&
@@ -160,30 +155,30 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
             this.dialog.open(ConfirmDialog, {
               data: {
                 title: _('GLOBAL.ERROR'),
-                content: _('NOTIFY.ERROR.MFA_NOT_VERIFIED'),
-              },
-            });
+                content: _('NOTIFY.ERROR.MFA_NOT_VERIFIED')
+              }
+            })
           } else {
             this.dialog.open(ConfirmDialog, {
               data: {
                 title: _('GLOBAL.ERROR'),
-                content: err.data ? err.data.message : err,
-              },
-            });
+                content: err.data ? err.data.message : err
+              }
+            })
           }
-        });
+        })
     } else {
-      FormUtils.markAsTouched(this.form);
+      FormUtils.markAsTouched(this.form)
     }
   }
 
   async onSubmitMFA() {
     try {
       if (this.isLoggingIn) {
-        return;
+        return
       }
 
-      this.isLoggingIn = true;
+      this.isLoggingIn = true
       await this.session.loginMFA({
         ...this.form.value,
         deviceType: DeviceTypeIds.Web,
@@ -194,23 +189,23 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
           type: this.mode === 'backup_code' ? 'backup' : 'totp',
           value: this.mfaForm.value.code.code
             ? this.mfaForm.value.code.code.replace(/\s/g, '')
-            : '',
-        },
-      });
+            : ''
+        }
+      })
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     } finally {
-      this.isLoggingIn = false;
+      this.isLoggingIn = false
     }
   }
 
   private async checkExistingSession() {
     try {
-      const sessionCookie = this.cookie.get(COOKIE_ROLE);
+      const sessionCookie = this.cookie.get(COOKIE_ROLE)
       if (sessionCookie) {
-        const entity = await this.session.check();
-        const account = await this.account.getSingle(entity);
-        this.store.dispatch(new SessionActions.Login(account));
+        const entity = await this.session.check()
+        const account = await this.account.getSingle(entity.id)
+        this.store.dispatch(new SessionActions.Login(account))
       }
     } catch (error) {
       // no action, the session was expired
@@ -221,17 +216,17 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     try {
       this.androidLink = (
         await this.mobileApp.getAndroidRedirect({
-          id: this.context.organizationId || '',
+          id: this.context.organizationId || ''
         })
-      ).redirect;
+      ).redirect
     } catch (error) {}
 
     try {
       this.iosLink = (
         await this.mobileApp.getiOsRedirect({
-          id: this.context.organizationId || '',
+          id: this.context.organizationId || ''
         })
-      ).redirect;
+      ).redirect
     } catch (error) {}
   }
 
@@ -239,41 +234,41 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     if (response.mfa) {
       switch (response.mfa.channel.id) {
         case '1':
-          this.mode = 'auth';
-          break;
+          this.mode = 'auth'
+          break
         case '2':
-          this.mode = 'mfa_sms';
-          break;
+          this.mode = 'mfa_sms'
+          break
         default:
-          break;
+          break
       }
     } else {
     }
   }
 
   private resolveBadgeLinks(lang: string) {
-    this.androidButtonLink = `/assets/badges/${lang}-play-store-badge.png`;
-    this.iosButtonLink = `/assets/badges/${lang}-app-store-badge.png`;
+    this.androidButtonLink = `/assets/badges/${lang}-play-store-badge.png`
+    this.iosButtonLink = `/assets/badges/${lang}-app-store-badge.png`
   }
 
   private resolveRegisterNewCompanyLink(params): void {
     const storageValue = window.localStorage.getItem(
       STORAGE_HIDE_REGISTER_COMPANY
-    );
+    )
 
     if (storageValue) {
-      this.showRegisterCompany = false;
-      return;
+      this.showRegisterCompany = false
+      return
     }
 
     this.showRegisterCompany =
       params.hideRegisterCompany === 'true' ||
       params.hideRegisterCompany === true
         ? false
-        : true;
+        : true
 
     if (!this.showRegisterCompany) {
-      window.localStorage.setItem(STORAGE_HIDE_REGISTER_COMPANY, 'true');
+      window.localStorage.setItem(STORAGE_HIDE_REGISTER_COMPANY, 'true')
     }
   }
 }

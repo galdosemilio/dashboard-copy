@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
 
-import { OrganizationPreference, OrganizationPreferenceSingle } from '@coachcare/backend/services';
-import { OrganizationRoutes } from './organization.routes';
+import {
+  OrganizationPreference,
+  OrganizationPreferenceSingle
+} from '@coachcare/npm-api'
+import { OrganizationRoutes } from './organization.routes'
 
 @Injectable()
 export class OrganizationPreferenceResolver
@@ -13,16 +16,18 @@ export class OrganizationPreferenceResolver
     private routes: OrganizationRoutes
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Promise<OrganizationPreferenceSingle | null> {
-    const id = route.paramMap.get('id') as string;
+  resolve(
+    route: ActivatedRouteSnapshot
+  ): Promise<OrganizationPreferenceSingle | null> {
+    const id = route.paramMap.get('id') as string
 
     return this.organizationPreference
       .getSingle({ id, mala: true })
-      .then(preferences => preferences)
+      .then((preferences) => preferences)
       .catch(() => {
         // TODO log error
-        this.router.navigate([this.routes.list()]);
-        return null;
-      });
+        this.router.navigate([this.routes.list()])
+        return null
+      })
   }
 }

@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OrganizationPreference, OrganizationPreferenceSingle } from '@coachcare/backend/services';
-import { _ } from '@coachcare/backend/shared';
-import { NotifierService } from '@coachcare/common/services';
+import { Component, Input, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import {
+  OrganizationPreference,
+  OrganizationPreferenceSingle
+} from '@coachcare/npm-api'
+import { _ } from '@coachcare/backend/shared'
+import { NotifierService } from '@coachcare/common/services'
 
 @Component({
   selector: 'ccr-organizations-basic-info',
@@ -10,10 +13,10 @@ import { NotifierService } from '@coachcare/common/services';
   styleUrls: ['./basic-info.component.scss']
 })
 export class BasicInfoComponent implements OnInit {
-  @Input() orgId: string;
-  @Input() prefs: OrganizationPreferenceSingle;
+  @Input() orgId: string
+  @Input() prefs: OrganizationPreferenceSingle
 
-  public form: FormGroup;
+  public form: FormGroup
 
   constructor(
     private fb: FormBuilder,
@@ -22,34 +25,34 @@ export class BasicInfoComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   public async onSubmit(): Promise<void> {
     try {
       if (this.form.invalid) {
-        this.form.patchValue(this.prefs);
-        return;
+        this.form.patchValue(this.prefs)
+        return
       }
 
-      const formValue = this.form.value;
+      const formValue = this.form.value
       await this.organizationPreference.update({
         id: this.orgId,
         displayName: formValue.displayName
-      });
-      this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'));
+      })
+      this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
   private createForm(): void {
     this.form = this.fb.group({
       displayName: ['', Validators.required]
-    });
+    })
 
     if (this.prefs) {
-      this.form.patchValue(this.prefs);
+      this.form.patchValue(this.prefs)
     }
   }
 }

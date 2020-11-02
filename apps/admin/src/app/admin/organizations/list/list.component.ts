@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { OrganizationsDataSource } from '@coachcare/backend/data';
-import { getterPaginator } from '@coachcare/backend/model';
-import { PaginatorComponent } from '@coachcare/common/components';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { OrganizationsDataSource } from '@coachcare/backend/data'
+import { getterPaginator } from '@coachcare/backend/model'
+import { PaginatorComponent } from '@coachcare/common/components'
 
 @Component({
   selector: 'ccr-organizations-list',
@@ -10,10 +10,10 @@ import { PaginatorComponent } from '@coachcare/common/components';
   providers: [OrganizationsDataSource]
 })
 export class OrganizationsListComponent implements OnInit, OnDestroy {
-  columns = ['id', 'name', 'actions'];
+  columns = ['id', 'name', 'actions']
 
   @ViewChild(PaginatorComponent, { static: true })
-  paginator: PaginatorComponent;
+  paginator: PaginatorComponent
 
   constructor(public source: OrganizationsDataSource) {}
 
@@ -21,12 +21,12 @@ export class OrganizationsListComponent implements OnInit, OnDestroy {
     // setup admin listing
     this.source.addDefault({
       isAdmin: true
-    });
+    })
 
-    this.source.setPaginator(this.paginator, getterPaginator(this.paginator));
+    this.source.setPaginator(this.paginator, getterPaginator(this.paginator))
   }
 
   ngOnDestroy() {
-    this.source.unsetPaginator();
+    this.source.unsetPaginator()
   }
 }

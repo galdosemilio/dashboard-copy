@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { RouterModule } from '@angular/router';
-import { LayoutModule } from '@coachcare/layout';
-import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { RouterModule } from '@angular/router'
+import { LayoutModule } from '@coachcare/layout'
+import { TranslateModule } from '@ngx-translate/core'
 
-import { SharedModule } from '@board/shared/shared.module';
-import { AdminProviders } from './admin.index';
-import { routes } from './admin.routing';
+import { SharedModule } from '@board/shared/shared.module'
+import { AdminProviders } from './admin.index'
+import { routes } from './admin.routing'
 
 @NgModule({
   imports: [

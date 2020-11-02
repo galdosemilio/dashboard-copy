@@ -4,10 +4,13 @@
     "types": [
       "node",
       "jest"
-    ]
+    ],
+    "module": "CommonJS"
   },
   "files": [],
-  "include": [],
+  "include": [
+    "../../libs/npm-api/src/lib/config/env"
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"

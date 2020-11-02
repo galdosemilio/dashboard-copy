@@ -1,11 +1,11 @@
-import { AccountAccessData } from '@coachcare/backend/services';
+import { AccountAccessData } from '@coachcare/npm-api'
 
 /**
  * ScheduleSelectDialog Data Interface
  */
 export interface ScheduleSelectData {
-  user: AccountAccessData;
-  title: string;
-  button: string;
-  onlyProviders?: boolean;
+  user: AccountAccessData
+  title: string
+  button: string
+  onlyProviders?: boolean
 }

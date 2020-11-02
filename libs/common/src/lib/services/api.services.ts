@@ -1,8 +1,8 @@
 // the same imports here are required by ng-packagr
 // tslint:disable-next-line:no-unused-variable
-import { InjectionToken } from '@angular/core';
-import { ApiService as NewApiService } from '@coachcare/backend/services';
-import { APP_ENVIRONMENT } from '@coachcare/common/shared';
+import { InjectionToken } from '@angular/core'
+import { ApiService as NewApiService } from '@coachcare/npm-api'
+import { APP_ENVIRONMENT } from '@coachcare/common/shared'
 import {
   Account,
   Affiliation,
@@ -31,16 +31,16 @@ import {
   Supplement,
   Timezone,
   User
-} from 'selvera-api';
+} from 'selvera-api'
 
 /**
  * Service Factories.
  */
 export function AccountFactory(apiService: ApiService) {
-  return new Account(apiService);
+  return new Account(apiService)
 }
 export function AffiliationFactory(apiService: ApiService) {
-  return new Affiliation(apiService);
+  return new Affiliation(apiService)
 }
 // export function ApiLogFactory(apiService: ApiService) {
 //   return new ApiLog(apiService);
@@ -49,70 +49,70 @@ export function AffiliationFactory(apiService: ApiService) {
 //   return new Assignment(apiService);
 // }
 export function CCRBlacklistFactory(apiService: ApiService) {
-  return new CCRBlacklist(apiService);
+  return new CCRBlacklist(apiService)
 }
 export function ConsultationFactory(apiService: ApiService) {
-  return new Consultation(apiService);
+  return new Consultation(apiService)
 }
 export function CountryFactory(apiService: ApiService) {
-  return new Country(apiService);
+  return new Country(apiService)
 }
 export function FoodFactory(apiService: ApiService) {
-  return new Food(apiService);
+  return new Food(apiService)
 }
 export function FoodKeyFactory(apiService: ApiService) {
-  return new FoodKey(apiService);
+  return new FoodKey(apiService)
 }
 export function GoalFactory(apiService: ApiService) {
-  return new Goal(apiService);
+  return new Goal(apiService)
 }
 export function HydrationFactory(apiService: ApiService) {
-  return new Hydration(apiService);
+  return new Hydration(apiService)
 }
 export function LoggingFactory(apiService: ApiService) {
-  return new Logging(apiService);
+  return new Logging(apiService)
 }
 export function MeasurementActivityFactory(apiService: ApiService) {
-  return new MeasurementActivity(apiService);
+  return new MeasurementActivity(apiService)
 }
 export function MeasurementBodyFactory(apiService: ApiService) {
-  return new MeasurementBody(apiService);
+  return new MeasurementBody(apiService)
 }
 export function MeasurementSleepFactory(apiService: ApiService) {
-  return new MeasurementSleep(apiService);
+  return new MeasurementSleep(apiService)
 }
 export function MFAFactory(apiService: ApiService) {
-  return new MFA(apiService);
+  return new MFA(apiService)
 }
 export function OrganizationFactory(apiService: ApiService) {
-  return new Organization(apiService);
+  return new Organization(apiService)
 }
 export function OrganizationAssociationFactory(apiService: ApiService) {
-  return new OrganizationAssociation(apiService);
+  return new OrganizationAssociation(apiService)
 }
 export function MessagingFactory(apiService: ApiService) {
-  return new Messaging(apiService);
+  return new Messaging(apiService)
 }
 export function MobileAppFactory(apiService: ApiService) {
-  return new MobileApp(apiService);
+  return new MobileApp(apiService)
 }
 export function PhaseFactory(apiService: ApiService) {
-  return new Phase(apiService);
+  return new Phase(apiService)
 }
 export function ReportsFactory(apiService: ApiService) {
-  return new Reports(apiService);
+  return new Reports(apiService)
 }
 export function ScheduleFactory(apiService: ApiService) {
-  return new Schedule(apiService);
+  return new Schedule(apiService)
 }
 export function SupplementFactory(apiService: ApiService) {
-  return new Supplement(apiService);
+  return new Supplement(apiService)
 }
 export function TimezoneFactory() {
-  return new Timezone();
+  return new Timezone()
 }
 export function UserFactory(apiService: ApiService) {
-  return new User(apiService);
+  return new User(apiService)
 }
 
 /**
@@ -253,4 +253,4 @@ export const APIServices = [
     useFactory: UserFactory,
     deps: [ApiService]
   }
-];
+]

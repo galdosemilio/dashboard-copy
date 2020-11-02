@@ -1,5 +1,5 @@
-import { AccountSingle } from '@coachcare/backend/services';
+import { AccountSingle } from '@coachcare/npm-api'
 
-export type State = AccountSingle;
+export type State = AccountSingle
 
-export const initialState: State = {} as State;
+export const initialState: State = {} as State

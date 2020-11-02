@@ -1,26 +1,27 @@
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { CookieService } from 'ngx-cookie-service';
-import { Account, ApiService } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core'
+import { CookieService } from 'ngx-cookie-service'
+import { Account, ApiService } from 'selvera-api'
 
-import { CCRApp } from '@app/config';
-import { Profile } from '@app/shared/selvera-api';
-import { _, locIsRtl } from '@app/shared/utils';
-import { ConfigService } from './config.service';
-import { EventsService } from './events.service';
+import { CCRApp } from '@app/config'
+import { Profile } from '@app/shared/selvera-api'
+import { _, locIsRtl } from '@app/shared/utils'
+import { ConfigService } from './config.service'
+import { EventsService } from './events.service'
 
-import * as momentTz from 'moment-timezone';
-import * as moment from 'moment';
-import 'moment/locale/ar';
-import 'moment/locale/da';
-import 'moment/locale/he';
-import '../../assets/i18n/moment.es';
+import * as momentTz from 'moment-timezone'
+const moment = momentTz
+import 'moment/locale/ar'
+import 'moment/locale/da'
+import 'moment/locale/he'
+import 'moment/locale/pt-br'
+import '../../assets/i18n/moment.es'
 
 @Injectable()
 export class LanguageService {
-  public uid: string;
-  private lang: string;
-  private langs: Array<string>;
+  public uid: string
+  private lang: string
+  private langs: Array<string>
 
   constructor(
     private api: ApiService,
@@ -35,33 +36,33 @@ export class LanguageService {
    * LOCALE_ID
    */
   toLowerCase() {
-    return this.lang;
+    return this.lang
   }
 
   initLanguage(): void {
-    const config: CCRApp = this.config.get('app');
+    const config: CCRApp = this.config.get('app')
 
-    this.langs = config.lang.supported;
-    this.translate.addLangs(config.lang.supported);
-    this.translate.setDefaultLang(config.lang.default);
+    this.langs = config.lang.supported
+    this.translate.addLangs(config.lang.supported)
+    this.translate.setDefaultLang(config.lang.default)
 
     this.translate.onLangChange.subscribe((v) => {
-      this.update(this.lang);
-    });
+      this.update(this.lang)
+    })
 
     if (this.get() && this.translate.getLangs().indexOf(this.get()) > -1) {
-      this.use(this.get());
+      this.use(this.get())
     } else if (
       this.translate.getLangs().indexOf(this.translate.getBrowserLang()) > -1
     ) {
-      this.set(this.translate.getBrowserLang());
+      this.set(this.translate.getBrowserLang())
     } else {
-      this.set(config.lang.default);
+      this.set(config.lang.default)
     }
 
-    this.setupMoment();
+    this.setupMoment()
 
-    this.bus.listen('user.data', this.setupTimezone.bind(this));
+    this.bus.listen('user.data', this.setupTimezone.bind(this))
   }
 
   setupMoment() {
@@ -70,51 +71,51 @@ export class LanguageService {
       m: 57,
       h: 24,
       d: 28,
-      M: 12,
-    });
+      M: 12
+    })
 
     Object.keys(values).forEach((unit) => {
-      moment.relativeTimeThreshold(unit, values[unit]);
-    });
+      moment.relativeTimeThreshold(unit, values[unit])
+    })
   }
 
   setupTimezone(user: Profile) {
-    momentTz.tz.setDefault(user.timezone);
+    momentTz.tz.setDefault(user.timezone)
   }
 
   get(): string {
     if (!this.lang) {
-      this.lang = this.cookie.get('ccrStaticLanguage');
+      this.lang = this.cookie.get('ccrStaticLanguage')
     }
-    return this.lang;
+    return this.lang
   }
 
   save(language: string): void {
-    this.cookie.set('ccrStaticLanguage', language, null, '/');
+    this.cookie.set('ccrStaticLanguage', language, null, '/')
     if (this.uid) {
       this.account
         .update({
           id: this.uid,
-          preferredLocales: [language],
+          preferredLocales: [language]
         })
-        .then(() => {});
+        .then(() => {})
     }
   }
 
   use(language: string): void {
     // validate the input language
     if (this.langs.indexOf(language) === -1) {
-      return;
+      return
     }
-    this.lang = language;
-    this.translate.use(this.lang);
-    this.api.setLocales([this.lang]);
-    moment.updateLocale(this.getLangCode(language), { postformat: null });
+    this.lang = language
+    this.translate.use(this.lang)
+    this.api.setLocales([this.lang])
+    moment.updateLocale(this.getLangCode(language), { postformat: null })
   }
 
   set(language: string): void {
-    this.use(language);
-    this.save(language);
+    this.use(language)
+    this.save(language)
   }
 
   update(lang) {
@@ -123,7 +124,7 @@ export class LanguageService {
         _('MOMENTJS.YESTERDAY'),
         _('MOMENTJS.TODAY'),
         _('MOMENTJS.TOMORROW'),
-        _('MOMENTJS.LASWEEK'),
+        _('MOMENTJS.LASWEEK')
       ])
       .subscribe((translations) => {
         moment.updateLocale(this.getLangCode(lang), {
@@ -133,21 +134,21 @@ export class LanguageService {
             nextDay: translations['MOMENTJS.TOMORROW'],
             lastWeek: translations['MOMENTJS.LASWEEK'],
             nextWeek: 'dddd',
-            sameElse: 'MMM D, YYYY',
-          },
-        });
-      });
+            sameElse: 'MMM D, YYYY'
+          }
+        })
+      })
   }
 
   getLangCode(lang: string): string {
-    return lang.split(/[-|_]/)[0];
+    return lang.split(/[-|_]/)[0]
   }
 
   getDir() {
-    return this.isRtl() ? 'rtl' : 'ltr';
+    return this.isRtl() ? 'rtl' : 'ltr'
   }
 
   isRtl() {
-    return locIsRtl(this.lang);
+    return locIsRtl(this.lang)
   }
 }

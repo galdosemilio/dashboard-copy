@@ -1,28 +1,28 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@coachcare/common/material';
-import { Router } from '@angular/router';
-import { getterSorter } from '@coachcare/backend/model';
-import { _ } from '@coachcare/backend/shared';
-import { NotifierService } from '@coachcare/common/services';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { MatSort } from '@coachcare/common/material'
+import { Router } from '@angular/router'
+import { getterSorter } from '@coachcare/backend/model'
+import { _ } from '@coachcare/backend/shared'
+import { NotifierService } from '@coachcare/common/services'
 
-import { OrganizationDialogs, OrganizationRoutes } from '@board/services';
+import { OrganizationDialogs, OrganizationRoutes } from '@board/services'
 import {
   OrganizationsDatabase,
-  OrganizationsDataSource,
-} from '@coachcare/backend/data';
-import { OrgEntityExtended } from '@coachcare/backend/services';
+  OrganizationsDataSource
+} from '@coachcare/backend/data'
+import { OrgEntityExtended } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-organizations-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  styleUrls: ['./table.component.scss']
 })
 export class OrganizationsTableComponent implements OnInit, OnDestroy {
-  @Input() columns = [];
-  @Input() source: OrganizationsDataSource;
+  @Input() columns = []
+  @Input() source: OrganizationsDataSource
 
   @ViewChild(MatSort, { static: false })
-  sort: MatSort;
+  sort: MatSort
 
   constructor(
     protected router: Router,
@@ -33,24 +33,24 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.source.setSorter(this.sort, getterSorter(this.sort));
+    this.source.setSorter(this.sort, getterSorter(this.sort))
   }
 
   ngOnDestroy() {
-    this.source.unsetSorter();
+    this.source.unsetSorter()
   }
 
   onDisplay(row: OrgEntityExtended) {
     // TODO change this when getSingle is available for Admins
     if (row.isActive) {
-      this.router.navigate([this.routes.single(row.id)]);
+      this.router.navigate([this.routes.single(row.id)])
     }
   }
 
   onEdit(row: OrgEntityExtended) {
     // TODO change this when getSingle is available for Admins
     if (row.isActive) {
-      this.router.navigate([this.routes.edit(row.id)]);
+      this.router.navigate([this.routes.edit(row.id)])
     }
   }
 
@@ -58,29 +58,29 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
     this.dialogs
       .activatePrompt(row)
       .then(() => {
-        row.isActive = true;
-        this.notifier.success(_('NOTIFY.SUCCESS.ORG_ACTIVATED'));
+        row.isActive = true
+        this.notifier.success(_('NOTIFY.SUCCESS.ORG_ACTIVATED'))
       })
       .catch((err) => {
         if (err) {
           // non-discarded prompt
-          this.notifier.error(err);
+          this.notifier.error(err)
         }
-      });
+      })
   }
 
   onDeactivate(row: OrgEntityExtended) {
     this.dialogs
       .deactivatePrompt(row)
       .then(() => {
-        row.isActive = false;
-        this.notifier.success(_('NOTIFY.SUCCESS.ORG_DEACTIVATED'));
+        row.isActive = false
+        this.notifier.success(_('NOTIFY.SUCCESS.ORG_DEACTIVATED'))
       })
       .catch((err) => {
         if (err) {
           // non-discarded prompt
-          this.notifier.error(err);
+          this.notifier.error(err)
         }
-      });
+      })
   }
 }
