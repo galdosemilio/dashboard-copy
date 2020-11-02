@@ -1,3 +1,4 @@
+import { Store } from '@ngrx/store'
 import {
   ApiService,
   Access,
@@ -230,9 +231,9 @@ export const SelveraApiProviders = [
   { provide: RPM, useClass: RPM, deps: [ApiService] },
   { provide: Schedule, useClass: Schedule, deps: [ApiService] },
   { provide: Sequence, useClass: Sequence, deps: [ApiService] },
-  { provide: Session, useClass: Session, deps: [ApiService] },
+  { provide: Session, useClass: Session, deps: [Store, ApiService, Account] },
   { provide: Supplement, useClass: Supplement, deps: [ApiService] },
   { provide: Timezone, useClass: Timezone, deps: [ApiService] },
-  { provide: User, useClass: User, deps: [ApiService] },
+  { provide: User, useClass: User, deps: [Store, ApiService, Account] },
   { provide: Zendesk, useClass: Zendesk, deps: [ApiService] }
 ]

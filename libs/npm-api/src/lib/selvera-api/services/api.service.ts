@@ -2,7 +2,8 @@
  * Service works with API
  */
 
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
+import { ApiEnvironment, API_ENVIRONMENT } from '@coachcare/backend/shared'
 import axios, { AxiosResponse } from 'axios'
 import { isEmpty, uniq } from 'lodash'
 import * as qs from 'qs'
@@ -10,6 +11,9 @@ import { Subject } from 'rxjs'
 import * as io from 'socket.io-client'
 
 import { Config, Environment, getConfig } from '../../config'
+import { AccountTypeId } from '../providers/account/entities'
+import { CcrRol, CcrRolesMap } from '../providers/common/types'
+import { LoginSessionResponse } from '../providers/session/responses'
 import { ApiOptions } from './apiOptions.interface'
 import { ApiOptionsModel } from './apiOptions.model'
 import { HeaderOptions } from './headerOptions.interface'
@@ -17,6 +21,8 @@ import { locBase } from './i18n.config'
 
 @Injectable({ providedIn: 'root' })
 class ApiService {
+  public apiUrl: string
+  private account: CcrRol | undefined
   public config: Config
   private environment: Environment = 'test' // default value
   private headers: HeaderOptions = {}
@@ -26,17 +32,28 @@ class ApiService {
 
   public onUnauthenticatedError = new Subject<boolean>()
 
-  public constructor() {
-    let environment: any
-    try {
-      environment =
-        window.localStorage.getItem('selvera-api[environment]') === null
-          ? 'test'
-          : window.localStorage.getItem('environment')
-    } catch (e) {
-      // console.log(e)
+  public constructor(@Inject(API_ENVIRONMENT) environment: ApiEnvironment) {
+    this.apiUrl = environment.apiUrl
+    this.headers = {
+      appName: environment.appName,
+      appVersion: environment.appVersion,
+      cookieDomain: environment.cookieDomain
     }
-    this.setEnvironment(environment ? environment : this.environment)
+    // this.setEnvironment(environment ? environment : this.environment)
+  }
+
+  public setAccount(type: AccountTypeId) {
+    this.account = CcrRolesMap(type)
+  }
+
+  public doLogin(res: LoginSessionResponse): Promise<void> {
+    if (res.accountType) {
+      this.account = CcrRolesMap(res.accountType)
+    }
+    if (res.token) {
+      this.setToken(res.token)
+    }
+    return Promise.resolve()
   }
 
   /**
@@ -48,6 +65,8 @@ class ApiService {
     this.environment = environment
     this.config = getConfig(this.environment)
     this.config.apiUrl = baseUrl ? baseUrl : this.config.apiUrl
+    this.apiUrl = (environment as any).apiUrl || baseUrl // MERGETODO: CHECK THIS TYPE!!!
+    console.log('set environment: ', environment, baseUrl)
     try {
       window.localStorage.setItem('selvera-api[environment]', environment)
     } catch (e) {
@@ -106,12 +125,6 @@ class ApiService {
 
   public setToken(token: string): void {
     this.token = token
-
-    try {
-      window.localStorage.setItem('token', token)
-    } catch (e) {
-      // console.log(e)
-    }
   }
 
   private getSocketClientConnection() {
@@ -169,14 +182,10 @@ class ApiService {
     })
   }
 
-  /**
-   * @param options Object with parameters. E.g `{endpoint: '/test', method: 'POST'}`
-   * @returns Promise<any>
-   */
-  public request(options: any): Promise<any> {
+  public request(options: ApiOptions): Promise<any> {
     return new Promise((resolve, reject) => {
       if (options.data) {
-        if (options.method === 'GET') {
+        if (options.method === 'GET' || options.method === 'DELETE') {
           options.params = options.data
           options.paramsSerializer = (params: any) => {
             return qs.stringify(params)
@@ -184,73 +193,27 @@ class ApiService {
           delete options.data
         }
       }
-      options.environment = this.environment
-      options.baseUrl = this.config.apiUrl
 
-      const apiOptions = new ApiOptionsModel(options)
+      const apiOptions = new ApiOptionsModel(
+        options,
+        this.apiUrl,
+        this.headers as any,
+        this.token,
+        this.account
+      )
 
       // Accept-Language
       if (this.langs) {
         apiOptions.headers['Accept-Language'] = this.langs
       }
 
-      // Add all custom headers to request - loop through all keys and convert camel case to dashes
-      Object.keys(this.headers).forEach((key) => {
-        apiOptions.headers[
-          `x-selvera-${key
-            .split(/(?=[A-Z])/g)
-            .join('-')
-            .toLowerCase()}`
-        ] = (this.headers as any)[key]
-      })
-
-      if (this.token) {
-        apiOptions.headers['Authorization'] = `SELVERA ${this.token}`
-      } else {
-        try {
-          const localToken = window.localStorage.getItem('token')
-
-          if (localToken !== undefined && localToken !== null) {
-            this.setToken(String(localToken))
-            apiOptions.headers['Authorization'] = `SELVERA ${localToken}`
-          }
-        } catch (e) {
-          // console.log(e)
-        }
-      }
-
-      if (isEmpty(apiOptions.data)) {
-        delete apiOptions.data
-      }
-
       axios
-        .request(apiOptions as any)
-        .then((response: AxiosResponse) => {
-          let defaultMsg
-          if (response.status === 401) {
-            if (!response.data) {
-              this.onUnauthenticatedError.next(true)
-              this.token = ''
-            } else {
-              this.handleErrorCode(response.data)
-            }
-            defaultMsg = 'You must be authenticated'
-            reject(this.getError(response, defaultMsg))
-          } else if (response.status === 403) {
-            defaultMsg =
-              'You do not have proper permission to access this endpoint'
-            reject(this.getError(response, defaultMsg))
-          } else if (response.status === 404) {
-            defaultMsg = 'Endpoint not found'
-            reject(this.getError(response, defaultMsg))
-          } else if (response.status === 409) {
-            defaultMsg = 'The submitted data already exists in the database'
-            reject(this.getError(response, defaultMsg))
-          } else if (response.status === 204) {
+        .request(apiOptions as any) // MERGETODO: CHECK THIS TYPE!!!
+        .then((response) => {
+          if (response.status === 204) {
             resolve(true)
           } else if (response.status !== 200 && response.status !== 201) {
-            defaultMsg = 'An error occurred'
-            reject(this.getError(response, defaultMsg))
+            reject(this.getError(response, 'An error occurred'))
           } else {
             try {
               if (typeof response.data === 'string') {
@@ -263,8 +226,48 @@ class ApiService {
             }
           }
         })
-        .catch((error: any) => {
-          reject(error ? error : 'An error occurred')
+        .catch((err) => {
+          // TODO research on axios.CancelToken executor + rxjs
+          try {
+            if (err.response) {
+              const response: AxiosResponse = err.response
+
+              let defaultMsg
+              switch (response.status) {
+                case 401:
+                  // this.onUnauthenticatedError.next(true);
+                  // this.doLogout();
+                  defaultMsg = 'You must be authenticated'
+                  break
+                case 403:
+                  defaultMsg =
+                    'You do not have proper permission to access this endpoint'
+                  break
+                case 404:
+                  defaultMsg = 'Endpoint not found'
+                  break
+                case 409:
+                  defaultMsg =
+                    'The submitted data already exists in the database'
+                  break
+                default:
+                  defaultMsg = 'An error occurred'
+              }
+              reject(
+                apiOptions.fullError
+                  ? response
+                  : this.getError(response, defaultMsg)
+              )
+            } else {
+              reject(
+                apiOptions.fullError
+                  ? err
+                  : (err && err.message) || 'An error occurred'
+              )
+            }
+          } catch {
+            reject('An error occurred')
+          }
         })
     })
   }

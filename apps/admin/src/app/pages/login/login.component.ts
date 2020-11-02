@@ -138,7 +138,6 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       this.session
         .login(request as any) // MERGETODO: CHECK THIS TYPE!!!
         .then((response) => {
-          console.log('this is happening', { response })
           if (response.mfa) {
             this.detectMFA(response as any) // MERGETODO: CHECK THIS TYPE!!!
           }
