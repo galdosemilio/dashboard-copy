@@ -1,116 +1,110 @@
-import { standardSetup } from '../../support';
+import { standardSetup } from '../../support'
 
-describe('Validate permissions on coaches listing page', function() {
-  it('No permissions for associated organization', function() {
-    cy.setTimezone('et');
+describe('Validate permissions on coaches listing page', function () {
+  it('No permissions for associated organization', function () {
+    cy.setTimezone('et')
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
         fixture: 'fixture:/api/organization/getAll-nopermissions'
       }
-    ]);
+    ])
 
-    verifyTable(false);
-  });
+    verifyTable(false)
+  })
 
-  it('Only "Admin" permission for associated organization', function() {
-    cy.setTimezone('et');
+  it('Only "Admin" permission for associated organization', function () {
+    cy.setTimezone('et')
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
         fixture: 'fixture:/api/organization/getAll-onlyadmin'
       }
-    ]);
+    ])
 
-    verifyTable(true);
-  });
+    verifyTable(true)
+  })
 
-  it('Only "Client PHI" permission for associated organization', function() {
-    cy.setTimezone('et');
+  it('Only "Client PHI" permission for associated organization', function () {
+    cy.setTimezone('et')
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
         fixture: 'fixture:/api/organization/getAll-onlyclientphi'
       }
-    ]);
+    ])
 
-    verifyTable(false);
-  });
+    verifyTable(false)
+  })
 
-  it('Only "View All" permission for associated organization', function() {
-    cy.setTimezone('et');
+  it('Only "View All" permission for associated organization', function () {
+    cy.setTimezone('et')
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
         fixture: 'fixture:/api/organization/getAll-onlyviewall'
       }
-    ]);
-    verifyTable(false);
-  });
+    ])
+    verifyTable(false)
+  })
 
-  it('"View All" and "Client PHI" permission for associated organization', function() {
-    cy.setTimezone('et');
+  it('"View All" and "Client PHI" permission for associated organization', function () {
+    cy.setTimezone('et')
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
         fixture: 'fixture:/api/organization/getAll-noadmin'
       }
-    ]);
+    ])
 
-    verifyTable(false);
-  });
-  it('Full permissions for associated organization', function() {
-    cy.setTimezone('et');
+    verifyTable(false)
+  })
+  it('Full permissions for associated organization', function () {
+    cy.setTimezone('et')
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
         fixture: 'fixture:/api/organization/getAll'
       }
-    ]);
+    ])
 
-    verifyTable(true);
-  });
-});
+    verifyTable(true)
+  })
+})
 
 function verifyTable(hasActions: boolean) {
-  cy.visit(`/accounts/coaches`);
+  cy.visit(`/accounts/coaches`)
 
   // These two lines are basically redundant, but cypress won't fully load the data otherwise
-  cy.get('[data-cy="coach-table"]');
-  cy.clock().tick(10000);
-
   cy.get('[data-cy="coach-table"]')
-    .find('mat-row')
-    .should('have.length', 2);
+  cy.clock().tick(10000)
+
+  cy.get('[data-cy="coach-table"]').find('mat-row').should('have.length', 2)
 
   cy.get('[data-cy="coach-table"]').should(
     hasActions ? 'not.have.class' : 'have.class',
     'notClickable'
-  );
+  )
 
   cy.get('[data-cy="coach-table-actions"]')
     .first()
     .find('button')
-    .should('have.length', hasActions ? 2 : 0);
+    .should('have.length', hasActions ? 2 : 0)
 
-  cy.visit(`/accounts/coaches/6`);
+  cy.visit(`/accounts/coaches/6`)
 
   cy.url().should(
     'eq',
     hasActions
-      ? 'http://localhost:4201/accounts/coaches/6'
-      : 'http://localhost:4201/accounts/coaches'
-  );
+      ? 'http://localhost:4200/accounts/coaches/6'
+      : 'http://localhost:4200/accounts/coaches'
+  )
 
-  cy.tick(10000);
+  cy.tick(10000)
 
   if (!hasActions) {
-    cy.get('app-coaches-table')
-      .find('mat-row')
-      .should('have.length', 2);
+    cy.get('app-coaches-table').find('mat-row').should('have.length', 2)
   } else {
-    cy.get('app-coach')
-      .find('h2')
-      .should('have.length', 2);
+    cy.get('app-coach').find('h2').should('have.length', 2)
   }
 }

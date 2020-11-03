@@ -16,7 +16,6 @@ import {
   OrganizationPreferenceSingle
 } from './responses'
 
-@Injectable()
 export class OrganizationPreference {
   public constructor(private readonly apiService: ApiService) {}
 

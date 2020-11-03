@@ -7,7 +7,6 @@ import {
 } from './requests'
 import { UpdateAccountPasswordResponse } from './responses'
 
-@Injectable()
 export class AccountPassword {
   public constructor(private readonly apiService: ApiService) {}
 

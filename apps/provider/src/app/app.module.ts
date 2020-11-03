@@ -15,7 +15,7 @@ import { environment } from '../environments/environment'
 import { AppComponent } from './app.component'
 import { AppRoutes } from './app.routing'
 import { LayoutModule } from './layout/layout.module'
-import { MissingStringsHandler } from './shared'
+import { MatMomentDateModule, MissingStringsHandler } from './shared'
 
 import { registerLocaleData } from '@angular/common'
 import { EffectsModule } from '@ngrx/effects'
@@ -56,7 +56,7 @@ registerLocaleData(localeEs, 'es')
     }),
     LayoutModule,
     AppRoutes,
-
+    MatMomentDateModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),

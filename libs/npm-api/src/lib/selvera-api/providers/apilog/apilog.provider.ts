@@ -8,7 +8,6 @@ import {
   UserLogUnfiltered
 } from './responses'
 
-@Injectable()
 class ApiLog {
   /**
    * Init Api Service

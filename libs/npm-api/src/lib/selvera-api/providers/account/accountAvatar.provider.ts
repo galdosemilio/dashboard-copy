@@ -3,7 +3,6 @@ import { ApiService } from '../../services/api.service'
 import { Entity } from '../common/entities'
 import { SubmitAccountAvatarRequest } from './requests'
 
-@Injectable()
 export class AccountAvatar {
   public constructor(private readonly apiService: ApiService) {}
 

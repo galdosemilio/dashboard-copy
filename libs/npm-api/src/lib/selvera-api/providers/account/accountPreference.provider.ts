@@ -7,7 +7,6 @@ import {
 } from './requests'
 import { AccountPreferenceSingle } from './responses'
 
-@Injectable()
 export class AccountPreference {
   public constructor(private readonly apiService: ApiService) {}
 
