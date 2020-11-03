@@ -226,9 +226,9 @@ workflows:
   setup_build_deploy:
     jobs:
       - setup
-      - affected_lint:
-          requires:
-            - setup
+      #- affected_lint:
+      #    requires:
+      #      - setup
       - affected_build:
           requires:
             - setup
