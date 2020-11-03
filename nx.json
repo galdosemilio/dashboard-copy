@@ -7,8 +7,6 @@
       "provider",
       "provider-e2e",
       "backend",
-      "common",
-      "layout",
       "npm-api"
     ],
     "package.json": {
@@ -18,8 +16,6 @@
         "provider",
         "provider-e2e",
         "backend",
-        "common",
-        "layout",
         "npm-api"
       ],
       "devDependencies": [
@@ -28,8 +24,6 @@
         "provider",
         "provider-e2e",
         "backend",
-        "common",
-        "layout",
         "npm-api"
       ]
     },
@@ -39,8 +33,6 @@
       "provider",
       "provider-e2e",
       "backend",
-      "common",
-      "layout",
       "npm-api"
     ],
     "nx.json": [
@@ -49,8 +41,6 @@
       "provider",
       "provider-e2e",
       "backend",
-      "common",
-      "layout",
       "npm-api"
     ],
     "tsconfig.base.json": [
@@ -59,8 +49,6 @@
       "provider",
       "provider-e2e",
       "backend",
-      "common",
-      "layout",
       "npm-api"
     ]
   },
