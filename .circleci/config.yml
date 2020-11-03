@@ -95,7 +95,7 @@ jobs:
           at: ~/repo
       - run:
           name: Execute Full Test Build
-          command: NODE_OPTIONS=--max_old_space_size=4096 yarn build admin -c test
+          command: NODE_OPTIONS=--max_old_space_size=6144 yarn build admin -c test
       - run:
           name: Copy deployment files
           command: cp appspec.yml ~/repo/dist/apps && cp -r scripts ~/repo/dist/apps
@@ -111,7 +111,7 @@ jobs:
           at: ~/repo
       - run:
           name: Execute Full Production Build
-          command: NODE_OPTIONS=--max_old_space_size=4096 yarn build admin -c prod
+          command: NODE_OPTIONS=--max_old_space_size=6144 yarn build admin -c prod
       - run:
           name: Copy deployment files
           command: cp appspec.yml ~/repo/dist/apps && cp -r scripts ~/repo/dist/apps
