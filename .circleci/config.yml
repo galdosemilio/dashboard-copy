@@ -22,7 +22,7 @@ npm_dependency_installation: &npm_dependency_installation
     attempts=0
     until [ $attempts -ge 5 ]
     do
-        yarn install --frozen-lockfile && break
+        yarn install --frozen-lockfile --verbose && break
         attempts=$[$attempts+1]
         echo "yarn install attempt $attempts failed, retrying"
     done
