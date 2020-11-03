@@ -15,7 +15,7 @@ yarn_auth: &yarn_auth
     sudo echo "registry=https://$NPM_REGISTRY" > ~/.npmrc
     sudo echo "//$NPM_REGISTRY:_authToken=\"$NPM_AUTH_TOKEN\"" >> ~/.npmrc
     sudo echo "//$NPM_REGISTRY:always-auth=true" >> ~/.npmrc
-    sudo echo "//npm.pkg.github.com/:_authToken=\"$NPM_AUTH_TOKEN\"" >> ~/.npmrc
+    sudo echo "//npm.pkg.github.com/:_authToken=\"$COACHCARE_AUTH_TOKEN\"" >> ~/.npmrc
     sudo echo "@coachcare:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
 npm_dependency_installation: &npm_dependency_installation
