@@ -226,7 +226,7 @@ workflows:
   setup_build_deploy:
     jobs:
       - setup
-      #- affected_lint:
+      # - affected_lint:
       #    requires:
       #      - setup
       - affected_build:
@@ -240,7 +240,7 @@ workflows:
       #       - affected_build
       - full_test_build:
           requires:
-            - affected_lint
+            # - affected_lint
             # - affected_test
             # - affected_e2e
       - approve_test_deployment:
