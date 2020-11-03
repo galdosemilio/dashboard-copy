@@ -1,78 +1,77 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import {
   AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators,
-} from '@angular/forms';
-import { MatAutocompleteTrigger, MatDialog } from '@coachcare/common/material';
-import { TranslateService } from '@ngx-translate/core';
-import { find } from 'lodash';
-import * as moment from 'moment-timezone';
-import { Subscription } from 'rxjs';
-import { Account } from 'selvera-api';
+  Validators
+} from '@angular/forms'
+import { MatAutocompleteTrigger, MatDialog } from '@coachcare/common/material'
+import { TranslateService } from '@ngx-translate/core'
+import { find } from 'lodash'
+import * as moment from 'moment-timezone'
+import { Subscription } from 'rxjs'
+import { Account } from 'selvera-api'
 
-import { Meeting } from '@app/dashboard/schedule/models';
-import { ScheduleDataService } from '@app/layout/right-panel/services';
-import { ContextService, EventsService, NotifierService } from '@app/service';
-import { _, FormUtils, PromptDialog, TranslationsObject } from '@app/shared';
+import { Meeting } from '@app/dashboard/schedule/models'
+import { ScheduleDataService } from '@app/layout/right-panel/services'
+import { ContextService, EventsService, NotifierService } from '@app/service'
+import { _, FormUtils, PromptDialog, TranslationsObject } from '@app/shared'
 import {
   AccountAccessData,
   AccSingleResponse,
   AddAttendeeRequest,
   AddMeetingRequest,
-  FetchMeetingResponse,
   FetchMeetingTypesResponse,
   MeetingAttendee,
-  OrganizationDetailed,
-} from '@app/shared/selvera-api';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ConsultationFormArgs } from '../consultationFormArgs.interface';
+  OrganizationDetailed
+} from '@app/shared/selvera-api'
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
+import { ConsultationFormArgs } from '../consultationFormArgs.interface'
 
 export type AddConsultationAttendee = MeetingAttendee & {
-  accountType?: string;
-};
+  accountType?: string
+}
 
 @Component({
   selector: 'app-add-consultation',
   templateUrl: './add-consultation.component.html',
-  styleUrls: ['./add-consultation.component.scss'],
+  styleUrls: ['./add-consultation.component.scss']
 })
-export class AddConsultationComponent implements OnInit {
-  form: FormGroup;
-  formSubmitted: boolean = false;
-  translations: TranslationsObject;
-  editing = 0;
-  clinicChangeSubscription: Subscription;
-  meetingTypeChangeSubscription: Subscription;
-  meetingTypesOk = true;
+export class AddConsultationComponent implements OnDestroy, OnInit {
+  form: FormGroup
+  formSubmitted = false
+  translations: TranslationsObject
+  editing = 0
+  clinicChangeSubscription: Subscription
+  meetingTypeChangeSubscription: Subscription
+  meetingTypesOk = true
   get now() {
-    return moment();
+    return moment()
   }
 
-  clinics = [];
-  durations = [];
+  clinics = []
+  durations = []
   repeatOptions = [
     { value: 'never', viewValue: _('RIGHT_PANEL.NEVER') },
     { value: '1w', viewValue: _('RIGHT_PANEL.EVERY_WEEK') },
     { value: '2w', viewValue: _('RIGHT_PANEL.EVERY_OTHER_WEEK') },
-    { value: '4w', viewValue: _('RIGHT_PANEL.EVERY_4_WEEKS') },
-  ];
+    { value: '4w', viewValue: _('RIGHT_PANEL.EVERY_4_WEEKS') }
+  ]
   endRepeatOptions = [
     { value: 'never', viewValue: _('RIGHT_PANEL.NEVER') },
-    { value: 'after', viewValue: _('RIGHT_PANEL.AFTER') },
-  ];
-  meetingTypes: FetchMeetingTypesResponse[];
-  searchCtrl: FormControl;
-  user: AccSingleResponse;
-  accounts: Array<AccountAccessData>;
-  attendees: Array<AddConsultationAttendee> = [];
-  addedAttendees: Array<AddConsultationAttendee> = [];
-  removedAttendees: Array<string> = [];
+    { value: 'after', viewValue: _('RIGHT_PANEL.AFTER') }
+  ]
+  meetingTypes: FetchMeetingTypesResponse[]
+  searchCtrl: FormControl
+  user: AccSingleResponse
+  accounts: Array<AccountAccessData>
+  attendees: Array<AddConsultationAttendee> = []
+  addedAttendees: Array<AddConsultationAttendee> = []
+  removedAttendees: Array<string> = []
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
-  trigger: MatAutocompleteTrigger;
+  trigger: MatAutocompleteTrigger
 
   constructor(
     private builder: FormBuilder,
@@ -87,47 +86,47 @@ export class AddConsultationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initForm();
-    this.initTranslations();
-    this.getClinics();
-    this.setupAutocomplete();
+    this.initForm()
+    this.initTranslations()
+    this.getClinics()
+    this.setupAutocomplete()
 
-    this.user = this.context.user;
+    this.user = this.context.user
     this.context.selected$.subscribe((user) => {
       if (user) {
-        this.resetParticipants();
+        this.resetParticipants()
       }
-    });
+    })
 
     this.bus.register(
       'right-panel.consultation.meeting',
       (args: ConsultationFormArgs) => {
         const exec = () => {
-          this.editing = args.id ? args.id : 0;
-          args.id ? this.editForm(args.id) : this.initForm();
+          this.editing = args.id ? args.id : 0
+          args.id ? this.editForm(args.id) : this.initForm()
           this.bus.trigger(
             'right-panel.consultation.editing',
             args.id ? true : false
-          );
-        };
-        this.form.dirty ? this.confirmDiscard(exec, args.form) : exec();
+          )
+        }
+        this.form.dirty ? this.confirmDiscard(exec, args.form) : exec()
       }
-    );
+    )
   }
 
   ngOnDestroy() {
-    this.bus.unregister('right-panel.consultation.meeting');
-    this.unlistenChanges();
+    this.bus.unregister('right-panel.consultation.meeting')
+    this.unlistenChanges()
   }
 
   initTranslations() {
     this.translator
       .get([_('GLOBAL.COACH'), _('GLOBAL.PATIENT')])
-      .subscribe((translations) => (this.translations = translations));
+      .subscribe((translations) => (this.translations = translations))
   }
 
   initForm(): void {
-    const initial = this.formUtils.getInitialDate();
+    const initial = this.formUtils.getInitialDate()
 
     this.form = this.builder.group(
       {
@@ -146,47 +145,47 @@ export class AddConsultationComponent implements OnInit {
             city: null,
             state: null,
             postalCode: null,
-            country: null,
+            country: null
           },
           {
-            validator: this.validateLocation,
+            validator: this.validateLocation
           }
-        ),
+        )
       },
       {
-        validator: this.validateForm,
+        validator: this.validateForm
       }
-    );
+    )
 
-    this.listenChanges();
+    this.listenChanges()
   }
 
   listenChanges() {
     this.clinicChangeSubscription = this.form
       .get('clinic')
-      .valueChanges.subscribe((c) => this.clinicChanged(c));
+      .valueChanges.subscribe((c) => this.clinicChanged(c))
 
     this.meetingTypeChangeSubscription = this.form
       .get('meetingTypeId')
       .valueChanges.subscribe((type: FetchMeetingTypesResponse) =>
         this.meetingTypeChanged(type)
-      );
+      )
   }
 
   unlistenChanges() {
     if (this.clinicChangeSubscription) {
-      this.clinicChangeSubscription.unsubscribe();
-      this.clinicChangeSubscription = null;
+      this.clinicChangeSubscription.unsubscribe()
+      this.clinicChangeSubscription = null
     }
     if (this.meetingTypeChangeSubscription) {
-      this.meetingTypeChangeSubscription.unsubscribe();
-      this.meetingTypeChangeSubscription = null;
+      this.meetingTypeChangeSubscription.unsubscribe()
+      this.meetingTypeChangeSubscription = null
     }
   }
 
   editForm(id) {
     // unsubscribe from events while setting the value
-    this.unlistenChanges();
+    this.unlistenChanges()
 
     // fetch the meeting and patch the form
     this.dataService
@@ -194,43 +193,43 @@ export class AddConsultationComponent implements OnInit {
       .then((meeting: Meeting) => {
         const clinic = this.clinics.find(
           (c) => c.value.shortcode === meeting.organization.shortCode
-        );
+        )
         if (!clinic) {
-          return this.notifier.error(_('NOTIFY.ERROR.CANNOT_EDIT_MEETING'));
+          return this.notifier.error(_('NOTIFY.ERROR.CANNOT_EDIT_MEETING'))
         }
-        const startTime = meeting.date;
-        const endTime = meeting.endDate;
-        const momentDuration = moment.duration(endTime.diff(startTime));
-        let duration;
+        const startTime = meeting.date
+        const endTime = meeting.endDate
+        const momentDuration = moment.duration(endTime.diff(startTime))
+        let duration
         this.dataService
           .fetchMeetingTypes(clinic.value.id)
           .then((meetingTypes) => {
-            this.meetingTypesOk = meetingTypes.length > 0;
+            this.meetingTypesOk = meetingTypes.length > 0
             // TODO include Google Calendar only for edition
             // (and hide date/duration? do not process them?)
             // TODO ML support i18n mapping the description
             this.meetingTypes = meetingTypes.filter(
               (t) => [4].indexOf(t.typeId) === -1
-            );
-            let meetingType;
+            )
+            let meetingType
             if (meetingTypes.length) {
               meetingType = this.meetingTypes.find(
                 (t) => +t.typeId === +meeting.type.id
-              );
+              )
               if (meetingType) {
-                this.durations.length = 0;
+                this.durations.length = 0
                 if (meetingType.durations.length) {
                   meetingType.durations.forEach((d) => {
                     this.durations.push({
                       value: d,
-                      viewValue: moment.duration(d).humanize(),
-                    });
-                  });
+                      viewValue: moment.duration(d).humanize()
+                    })
+                  })
                   duration = this.durations.find(
                     (d) =>
                       moment.duration(d.value).humanize() ===
                       momentDuration.humanize()
-                  );
+                  )
                 }
               }
             }
@@ -244,59 +243,59 @@ export class AddConsultationComponent implements OnInit {
               duration: duration ? duration.value : null,
               location: {
                 ...clinic.value.address,
-                streetAddress: clinic.value.address.street,
-              },
-            });
+                streetAddress: clinic.value.address.street
+              }
+            })
 
-            this.attendees = meeting.attendees;
+            this.attendees = meeting.attendees
 
             // subscribe to changes again
-            this.listenChanges();
+            this.listenChanges()
           })
           .catch(() =>
             this.notifier.error(_('NOTIFY.ERROR.RETRIEVING_MEETING_TYPES'))
-          );
+          )
       })
-      .catch((err) => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err))
   }
 
   resetForm(): void {
-    this.editing = 0;
-    this.formSubmitted = false;
+    this.editing = 0
+    this.formSubmitted = false
     // reset form
-    const values = this.form.value;
-    this.initForm();
+    const values = this.form.value
+    this.initForm()
     this.form.patchValue({
       clinic: values.clinic,
-      meetingTypeId: values.meetingTypeId,
-    });
-    this.resetParticipants();
+      meetingTypeId: values.meetingTypeId
+    })
+    this.resetParticipants()
     // deactivate edition mode
-    this.bus.trigger('schedule.table.selected', 0);
-    this.bus.trigger('right-panel.consultation.editing', false);
+    this.bus.trigger('schedule.table.selected', 0)
+    this.bus.trigger('right-panel.consultation.editing', false)
   }
 
   validateForm(control: AbstractControl) {
-    const startTime = control.get('startTime').value;
+    const startTime = control.get('startTime').value
     if (startTime) {
       if (startTime.isBefore(moment(), 'minutes')) {
-        return { validateMeetingTime: _('NOTIFY.ERROR.DATE_SHOULD_BE_FUTURE') };
+        return { validateMeetingTime: _('NOTIFY.ERROR.DATE_SHOULD_BE_FUTURE') }
       } else {
-        return null;
+        return null
       }
     }
   }
 
   validateLocation(control: AbstractControl) {
-    const street = control.get('streetAddress').value;
-    const city = control.get('city').value;
-    const state = control.get('state').value;
-    const postalCode = control.get('postalCode').value;
+    const street = control.get('streetAddress').value
+    const city = control.get('city').value
+    const state = control.get('state').value
+    const postalCode = control.get('postalCode').value
     if (street || city || state || postalCode) {
       if (street && city && state && postalCode) {
-        return null;
+        return null
       } else {
-        return { validateAddress: _('NOTIFY.ERROR.INCOMPLETE_ADDRESS') };
+        return { validateAddress: _('NOTIFY.ERROR.INCOMPLETE_ADDRESS') }
       }
     }
   }
@@ -306,61 +305,61 @@ export class AddConsultationComponent implements OnInit {
       .filter((c) => c.id)
       .map((c) => ({
         value: c,
-        viewValue: c.name,
-      }));
+        viewValue: c.name
+      }))
     if (this.clinics.length) {
       const clinic = this.context.organizationId
         ? find(this.clinics, ['value', { id: this.context.organizationId }])
-        : this.clinics[0];
+        : this.clinics[0]
 
-      this.form.get('clinic').setValue(clinic.value);
+      this.form.get('clinic').setValue(clinic.value)
     }
   }
 
   clinicChanged(org: OrganizationDetailed): void {
     this.form.get('location').patchValue({
       ...org.address,
-      streetAddress: org.address.street,
-    });
+      streetAddress: org.address.street
+    })
     this.dataService
       .fetchMeetingTypes(org.id)
       .then((res) => {
-        this.meetingTypesOk = res.length > 0;
+        this.meetingTypesOk = res.length > 0
         // TODO ML support i18n mapping the description
-        this.meetingTypes = res.filter((t) => [4, 5].indexOf(t.typeId) === -1);
+        this.meetingTypes = res.filter((t) => [4, 5].indexOf(t.typeId) === -1)
         if (res.length) {
-          this.form.get('meetingTypeId').setValue(res[0]);
+          this.form.get('meetingTypeId').setValue(res[0])
         }
       })
       .catch(() =>
         this.notifier.error(_('NOTIFY.ERROR.RETRIEVING_MEETING_TYPES'))
-      );
+      )
   }
 
   meetingTypeChanged(type): void {
-    this.durations.length = 0;
+    this.durations.length = 0
     if (type.durations.length) {
       type.durations.forEach((d) => {
         this.durations.push({
           value: d,
-          viewValue: moment.duration(d).humanize(),
-        });
-      });
-      this.form.get('duration').setValue(type.durations[0]);
+          viewValue: moment.duration(d).humanize()
+        })
+      })
+      this.form.get('duration').setValue(type.durations[0])
     }
   }
 
   setupAutocomplete(): void {
-    this.searchCtrl = new FormControl();
+    this.searchCtrl = new FormControl()
     this.searchCtrl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
         if (query) {
-          this.searchAccounts(query);
+          this.searchAccounts(query)
         } else {
-          this.trigger.closePanel();
+          this.trigger.closePanel()
         }
-      });
+      })
   }
 
   searchAccounts(query: string): void {
@@ -369,26 +368,26 @@ export class AddConsultationComponent implements OnInit {
       .then((res) => {
         this.accounts = res.data.filter(
           (a) => !this.attendees.some((sa) => sa.id === a.id)
-        );
+        )
         if (this.accounts.length > 0) {
-          this.trigger.openPanel();
+          this.trigger.openPanel()
         }
       })
-      .catch((err) => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err))
   }
 
   formatAccountType(accountType) {
-    let result;
+    let result
     if ([2, '2', 'provider'].indexOf(accountType) >= 0) {
-      result = this.translations['GLOBAL.COACH'];
+      result = this.translations['GLOBAL.COACH']
     } else if ([3, '3', 'client'].indexOf(accountType) >= 0) {
-      result = this.translations['GLOBAL.PATIENT'];
+      result = this.translations['GLOBAL.PATIENT']
     }
-    return result ? result : '';
+    return result ? result : ''
   }
 
   addParticipant(account): void {
-    const participantIds = this.attendees.map((a) => a.id);
+    const participantIds = this.attendees.map((a) => a.id)
     if (participantIds.indexOf(account.id) === -1) {
       const attendee: AddConsultationAttendee = {
         id: account.id,
@@ -396,50 +395,50 @@ export class AddConsultationComponent implements OnInit {
         firstName: account.firstName,
         lastName: account.lastName,
         email: account.email,
-        accountType: account.accountType,
-      };
-      this.attendees.push(attendee);
+        accountType: account.accountType
+      }
+      this.attendees.push(attendee)
 
       if (this.editing) {
         if (!this.removedAttendees.some((id) => id === attendee.id)) {
-          this.addedAttendees.push(attendee);
+          this.addedAttendees.push(attendee)
         } else {
           this.removedAttendees = this.removedAttendees.filter(
             (id) => id !== attendee.id
-          );
+          )
         }
       }
     }
-    this.accounts = [];
+    this.accounts = []
   }
 
   removeParticipant(id: string): void {
-    this.attendees = this.attendees.filter((a) => a.id !== id);
+    this.attendees = this.attendees.filter((a) => a.id !== id)
 
     if (this.editing) {
       if (!this.addedAttendees.some((a) => a.id === id)) {
-        this.removedAttendees.push(id);
+        this.removedAttendees.push(id)
       } else {
-        this.addedAttendees = this.addedAttendees.filter((a) => id !== a.id);
+        this.addedAttendees = this.addedAttendees.filter((a) => id !== a.id)
       }
     }
   }
 
   resetParticipants(): void {
-    this.attendees.length = 0;
-    this.addParticipant(this.context.selected);
+    this.attendees.length = 0
+    this.addParticipant(this.context.selected)
   }
 
   repeatChanged(option): void {
     if (option === 'never') {
-      this.form.get('endRepeat').reset('never');
-      this.form.get('endAfter').reset(null);
+      this.form.get('endRepeat').reset('never')
+      this.form.get('endAfter').reset(null)
     }
   }
 
   endRepeatChanged(option): void {
     if (option === 'never') {
-      this.form.get('endAfter').reset(null);
+      this.form.get('endAfter').reset(null)
     }
   }
 
@@ -450,27 +449,27 @@ export class AddConsultationComponent implements OnInit {
         .open(PromptDialog, {
           data: {
             title: _('RIGHT_PANEL.DISCARD_CHANGES'),
-            content: _('RIGHT_PANEL.CONFIRM_DISCARD_MEETING_CHANGES'),
-          },
+            content: _('RIGHT_PANEL.CONFIRM_DISCARD_MEETING_CHANGES')
+          }
         })
         .afterClosed()
         .subscribe((confirm) => {
           if (confirm) {
-            callback();
+            callback()
           } else if (formName === 'editConsultation') {
-            this.bus.trigger('schedule.table.selected', '');
+            this.bus.trigger('schedule.table.selected', '')
           }
-        });
+        })
     } else {
-      callback();
+      callback()
     }
   }
 
   async onSubmit() {
-    this.formSubmitted = true;
+    this.formSubmitted = true
     if (this.form.valid && this.attendees.length > 0) {
       try {
-        const data = this.form.value;
+        const data = this.form.value
 
         const addMeetingRequest: AddMeetingRequest = {
           title: data.title,
@@ -482,41 +481,41 @@ export class AddConsultationComponent implements OnInit {
           meetingTypeId: data.meetingTypeId.typeId,
           organizationShortcode: data.clinic.shortcode,
           attendees: this.attendees.map((a) => {
-            delete a.accountType;
-            return a;
-          }),
-        };
+            delete a.accountType
+            return a
+          })
+        }
 
         if (data.location.streetAddress) {
-          addMeetingRequest.location = data.location;
+          addMeetingRequest.location = data.location
         }
         if (data.repeat && data.repeat !== 'never') {
           if (data.endRepeat === 'never') {
             addMeetingRequest.recurring = {
               interval: data.repeat,
-              endDate: moment(data.startTime).add(3, 'years').format(),
-            };
+              endDate: moment(data.startTime).add(3, 'years').format()
+            }
           } else {
-            let endDate = moment(data.startTime);
-            let days;
+            let endDate = moment(data.startTime)
+            let days
             switch (data.repeat) {
               case '1w':
-                days = data.endAfter * 7;
-                endDate = endDate.add(days, 'days');
-                break;
+                days = data.endAfter * 7
+                endDate = endDate.add(days, 'days')
+                break
               case '2w':
-                days = data.endAfter * 14;
-                endDate = endDate.add(days, 'days');
-                break;
+                days = data.endAfter * 14
+                endDate = endDate.add(days, 'days')
+                break
               case '4w':
-                days = data.endAfter * 28;
-                endDate = endDate.add(days, 'days');
-                break;
+                days = data.endAfter * 28
+                endDate = endDate.add(days, 'days')
+                break
             }
             addMeetingRequest.recurring = {
               interval: data.repeat,
-              endDate: endDate.format(),
-            };
+              endDate: endDate.format()
+            }
           }
         }
 
@@ -526,23 +525,23 @@ export class AddConsultationComponent implements OnInit {
               try {
                 const addAttendeeRequest: AddAttendeeRequest = {
                   meetingId: this.editing.toString(),
-                  attendees: [attendee],
-                };
-                await this.dataService.addAttendee(addAttendeeRequest);
+                  attendees: [attendee]
+                }
+                await this.dataService.addAttendee(addAttendeeRequest)
               } catch (e) {
                 await this.translator
                   .get([_('NOTIFY.ERROR.SCHEDULE_CONFLICT')], {
-                    name: `${attendee.firstName} ${attendee.lastName}`,
+                    name: `${attendee.firstName} ${attendee.lastName}`
                   })
                   .subscribe((translations) => {
-                    throw translations['NOTIFY.ERROR.SCHEDULE_CONFLICT'];
-                  });
+                    throw translations['NOTIFY.ERROR.SCHEDULE_CONFLICT']
+                  })
               }
             }
           }
 
           for (const id of this.removedAttendees) {
-            await this.dataService.deleteAttendee(this.editing.toString(), id);
+            await this.dataService.deleteAttendee(this.editing.toString(), id)
           }
         }
 
@@ -553,26 +552,26 @@ export class AddConsultationComponent implements OnInit {
               this.editing
                 ? _('NOTIFY.SUCCESS.MEETING_UPDATED')
                 : _('NOTIFY.SUCCESS.MEETING_ADDED')
-            );
-            this.bus.trigger('schedule.table.refresh');
-            this.resetForm();
+            )
+            this.bus.trigger('schedule.table.refresh')
+            this.resetForm()
           })
           .catch((err) =>
             this.notifier.error(_('NOTIFY.ERROR.CANNOT_CREATE_MEETING'))
-          );
+          )
       } catch (err) {
-        this.notifier.error(err);
+        this.notifier.error(err)
       }
     } else {
-      this.formUtils.markAsTouched(this.form);
-      this.form.updateValueAndValidity();
+      this.formUtils.markAsTouched(this.form)
+      this.form.updateValueAndValidity()
     }
   }
 
   onCancel() {
     this.confirmDiscard(() => {
       // deactivate edit mode
-      this.resetForm();
-    });
+      this.resetForm()
+    })
   }
 }

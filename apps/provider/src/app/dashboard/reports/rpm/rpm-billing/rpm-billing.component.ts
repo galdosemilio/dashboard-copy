@@ -1,43 +1,43 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSort } from '@coachcare/common/material';
-import { Router } from '@angular/router';
-import { ClosePanel, OpenPanel } from '@app/layout/store';
-import { ContextService, NotifierService } from '@app/service';
-import { WalkthroughService } from '@app/service/walkthrough';
-import { CcrPaginator } from '@app/shared';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { MatSort } from '@coachcare/common/material'
+import { Router } from '@angular/router'
+import { ClosePanel, OpenPanel } from '@app/layout/store'
+import { ContextService, NotifierService } from '@app/service'
+import { WalkthroughService } from '@app/service/walkthrough'
+import { CcrPaginator } from '@app/shared'
 import {
   AccountTypeId,
   FetchRPMBillingSummaryRequest,
-  InactiveRPMItem,
-} from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils';
-import { select, Store } from '@ngrx/store';
-import { get, isEmpty } from 'lodash';
-import * as moment from 'moment';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+  InactiveRPMItem
+} from '@app/shared/selvera-api'
+import { _ } from '@app/shared/utils'
+import { select, Store } from '@ngrx/store'
+import { get, isEmpty } from 'lodash'
+import * as moment from 'moment'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
+import { debounceTime } from 'rxjs/operators'
 import {
   ReportsCriteria,
   ReportsDatabase,
-  RPMBillingDataSource,
-} from '../../services';
-import { criteriaSelector, ReportsState } from '../../store';
+  RPMBillingDataSource
+} from '../../services'
+import { criteriaSelector, ReportsState } from '../../store'
 import {
   RPM_CODE_COLUMNS,
   RPM_SINGLE_TIME_CODES,
-  RPMStateSummaryEntry,
-} from '../models';
+  RPMStateSummaryEntry
+} from '../models'
 
 @Component({
   selector: 'app-reports-rpm-billing',
   templateUrl: './rpm-billing.component.html',
-  styleUrls: ['./rpm-billing.component.scss'],
+  styleUrls: ['./rpm-billing.component.scss']
 })
 export class RPMBillingComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
+  @ViewChild(MatSort, { static: true }) sort: MatSort
 
   public columns: string[] = [
     'index',
@@ -46,16 +46,16 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     'dob',
     'status',
     'anyCodeLastEligibleAt',
-    'codes',
-  ];
+    'codes'
+  ]
   public criteria: Partial<FetchRPMBillingSummaryRequest> = {
-    asOf: moment().format('YYYY-MM-DD'),
-  };
-  public csvSeparator: string = ',';
-  public statusFilterForm: FormGroup;
-  public source: RPMBillingDataSource;
+    asOf: moment().format('YYYY-MM-DD')
+  }
+  public csvSeparator = ','
+  public statusFilterForm: FormGroup
+  public source: RPMBillingDataSource
 
-  private refresh$: Subject<void> = new Subject<void>();
+  private refresh$: Subject<void> = new Subject<void>()
 
   constructor(
     private context: ContextService,
@@ -68,99 +68,99 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   ) {}
 
   public ngOnDestroy(): void {
-    this.store.dispatch(new OpenPanel());
+    this.store.dispatch(new OpenPanel())
   }
 
   public ngOnInit(): void {
-    this.walkthrough.checkGuideState('rpm');
-    this.store.dispatch(new ClosePanel());
-    this.createStatusFilterForm();
+    this.walkthrough.checkGuideState('rpm')
+    this.store.dispatch(new ClosePanel())
+    this.createStatusFilterForm()
     this.source = new RPMBillingDataSource(
       this.database,
       this.notify,
       this.paginator,
       this.sort
-    );
-    this.source.addDefault({ status: 'active' } as any);
+    )
+    this.source.addDefault({ status: 'active' } as any)
     this.source.addOptional(
       this.statusFilterForm.controls.status.valueChanges.pipe(
         debounceTime(100)
       ),
       () => ({
-        status: this.statusFilterForm.value.status || 'all',
+        status: this.statusFilterForm.value.status || 'all'
       })
-    );
+    )
     this.source.addOptional(this.context.organization$, () => ({
-      organization: this.context.organizationId,
-    }));
+      organization: this.context.organizationId
+    }))
     this.source.addOptional(this.refresh$, () => {
-      const selectedDate = moment(this.criteria.asOf);
+      const selectedDate = moment(this.criteria.asOf)
 
       return {
         asOf: selectedDate.isSameOrAfter(moment(), 'day')
           ? undefined
-          : selectedDate.endOf('day').toISOString(),
-      };
-    });
+          : selectedDate.endOf('day').toISOString()
+      }
+    })
 
     this.store
       .pipe(untilDestroyed(this), select(criteriaSelector))
       .subscribe((reportsCriteria: ReportsCriteria) => {
         if (!isEmpty(reportsCriteria)) {
-          this.criteria.asOf = reportsCriteria.endDate;
-          this.paginator.firstPage();
-          this.refresh$.next();
+          this.criteria.asOf = reportsCriteria.endDate
+          this.paginator.firstPage()
+          this.refresh$.next()
         }
-      });
+      })
 
-    this.refresh$.next();
+    this.refresh$.next()
   }
 
   public async downloadCSV(): Promise<void> {
     try {
-      const criteria = this.source.args;
+      const criteria = this.source.args
       const rawResponse = await this.database.fetchRPMBillingReport({
         ...criteria,
         limit: 'all',
-        offset: 0,
-      });
+        offset: 0
+      })
 
       const allBillings = Object.keys(RPM_CODE_COLUMNS).map(
         (key) =>
           ({
             code: key,
-            eligibility: {},
+            eligibility: {}
           } as any)
-      );
+      )
 
       const res: RPMStateSummaryEntry[] = rawResponse.data.map(
         (element) =>
           new RPMStateSummaryEntry(element, allBillings, this.criteria.asOf)
-      );
+      )
 
       if (!res.length) {
-        return this.notify.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'));
+        return this.notify.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
       const filename = `RPM_Billing_${moment(criteria.asOf).format(
         'MMM_YYYY'
-      )}.csv`;
-      let csv = '';
+      )}.csv`
+      let csv = ''
 
       const currentAsOf = moment(this.criteria.asOf).isSameOrAfter(
         moment(),
         'day'
       )
         ? moment()
-        : moment(this.criteria.asOf).endOf('day');
+        : moment(this.criteria.asOf).endOf('day')
 
-      csv += `"As of: ${currentAsOf.format('MMM D, YYYY')}"\r\n`;
+      csv += `"As of: ${currentAsOf.format('MMM D, YYYY')}"\r\n`
 
       csv +=
-        ',,,,,,,,,"Eligibility","Eligibility","Eligibility","Eligibility","All Codes",';
+        ',,,,,,,,,"Eligibility","Eligibility","Eligibility","Eligibility","All Codes",'
 
       res[0].billing.forEach(
         (billingEntry, billingEntryIndex, billingEntries) => {
-          const columnMap = RPM_CODE_COLUMNS[billingEntry.code];
+          const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
 
           new Array(columnMap.length + 2)
             .fill(0)
@@ -169,15 +169,15 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
                 (csv +=
                   billingEntry.code +
                   (index < columnMap.length + 1 ? this.csvSeparator : ''))
-            );
+            )
 
           if (billingEntryIndex < billingEntries.length - 1) {
-            csv += this.csvSeparator;
+            csv += this.csvSeparator
           }
         }
-      );
+      )
 
-      csv += '\r\n';
+      csv += '\r\n'
 
       csv +=
         'ID' +
@@ -207,30 +207,30 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         'Patient Specific Goals Set' +
         this.csvSeparator +
         `"Latest Eligible Claim"` +
-        this.csvSeparator;
+        this.csvSeparator
 
       res[0].billing.forEach((billingEntry, billingEntryIndex) => {
-        const columnMap = RPM_CODE_COLUMNS[billingEntry.code];
+        const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
 
         if (!columnMap) {
-          return;
+          return
         }
 
-        csv += `"Latest Eligible Claim"` + this.csvSeparator;
-        csv += `"Next Claim"` + this.csvSeparator;
+        csv += `"Latest Eligible Claim"` + this.csvSeparator
+        csv += `"Next Claim"` + this.csvSeparator
 
         columnMap.forEach((columnInfo, index, columns) => {
           csv +=
             `"${columnInfo.column}"` +
-            (index + 1 === columns.length ? '' : this.csvSeparator);
-        });
+            (index + 1 === columns.length ? '' : this.csvSeparator)
+        })
 
         if (billingEntryIndex === res[0].billing.length - 1) {
-          csv += '\r\n';
+          csv += '\r\n'
         } else {
-          csv += this.csvSeparator;
+          csv += this.csvSeparator
         }
-      });
+      })
 
       res.forEach((entry) => {
         csv +=
@@ -294,13 +294,13 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
               ? moment(entry.anyCodeLastEligibleAt).format('MM/DD/YYYY')
               : 'N/A'
           }"` +
-          this.csvSeparator;
+          this.csvSeparator
 
         entry.billing.forEach((billingEntry, billingEntryIndex) => {
-          const columnMap = RPM_CODE_COLUMNS[billingEntry.code];
+          const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
 
           if (!columnMap) {
-            return;
+            return
           }
 
           csv +=
@@ -310,17 +310,17 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
                     'MM/DD/YYYY'
                   )
                 : 'N/A'
-            }"` + this.csvSeparator;
+            }"` + this.csvSeparator
 
           if (!billingEntry.eligibility.next || !entry.rpm.isActive) {
             csv +=
               billingEntry.hasClaims &&
               RPM_SINGLE_TIME_CODES.indexOf(billingEntry.code) !== -1
                 ? '"N/A - once per episode of care"'
-                : '"N/A"';
-            csv += this.csvSeparator;
+                : '"N/A"'
+            csv += this.csvSeparator
           } else {
-            csv += '"';
+            csv += '"'
 
             const nextObjectKeys = Object.keys(
               billingEntry.eligibility.next
@@ -328,32 +328,32 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
               (key) =>
                 key !== 'earliestEligibleAt' &&
                 billingEntry.eligibility.next[key].remaining
-            );
+            )
 
             if (billingEntry.hasCodeRequirements) {
               billingEntry.eligibility.next.relatedCodeRequirementsNotMet.forEach(
                 (code, index, array) => {
-                  csv += `${code} requirements not satisfied`;
+                  csv += `${code} requirements not satisfied`
 
                   if (index + 1 < array.length) {
-                    csv += '; ';
+                    csv += '; '
                   }
                 }
-              );
+              )
 
               if (billingEntry.remainingDays || nextObjectKeys.length) {
-                csv += '; ';
+                csv += '; '
               }
             }
 
             if (billingEntry.remainingDays) {
-              csv += `${billingEntry.remainingDays} days more need to elapse`;
+              csv += `${billingEntry.remainingDays} days more need to elapse`
             }
 
             if (!nextObjectKeys.length) {
-              csv += '"';
+              csv += '"'
             } else if (billingEntry.remainingDays) {
-              csv += '; ';
+              csv += '; '
             }
 
             nextObjectKeys.forEach((nextKey, nextKeyIndex, nextKeyArray) => {
@@ -361,71 +361,71 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
                 billingEntry.eligibility.next[nextKey].remainingRaw ||
                   billingEntry.eligibility.next[nextKey].remaining,
                 nextKey
-              );
+              )
 
               if (!remainingMetricString) {
                 if (nextKeyIndex === nextKeyArray.length - 1) {
-                  csv += '"';
+                  csv += '"'
                 }
-                return;
+                return
               }
 
-              csv += `${remainingMetricString}`;
+              csv += `${remainingMetricString}`
 
               if (nextKeyIndex === nextKeyArray.length - 1) {
-                csv += '"';
+                csv += '"'
               } else {
-                csv += '; ';
+                csv += '; '
               }
-            });
+            })
 
-            csv += this.csvSeparator;
+            csv += this.csvSeparator
           }
 
           columnMap.forEach((columnInfo, index, columns) => {
             const shownValue = columnInfo.inParent
               ? get(entry, columnInfo.route)
-              : get(billingEntry, columnInfo.route);
+              : get(billingEntry, columnInfo.route)
 
             csv +=
               `"${
                 shownValue !== null && shownValue !== undefined
                   ? shownValue
                   : columnInfo.default
-              }"` + (index + 1 === columns.length ? '' : this.csvSeparator);
-          });
+              }"` + (index + 1 === columns.length ? '' : this.csvSeparator)
+          })
 
           if (billingEntryIndex === entry.billing.length - 1) {
-            csv += '\r\n';
+            csv += '\r\n'
           } else {
-            csv += this.csvSeparator;
+            csv += this.csvSeparator
           }
-        });
-      });
+        })
+      })
 
       csv +=
         `\r\n"${currentAsOf.format('dddd, MMM D, YYYY HH:mm:ss A [GMT]Z')}"` +
-        this.csvSeparator;
+        this.csvSeparator
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.setAttribute('visibility', 'hidden');
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.setAttribute('visibility', 'hidden')
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
   }
 
   public onStatusFilterChange($event: Event): void {
     if ($event.type === 'change') {
-      this.paginator.firstPage();
+      this.paginator.firstPage()
       this.statusFilterForm.controls.status.setValue(
         ($event.target as HTMLSelectElement).value
-      );
+      )
     }
   }
 
@@ -433,27 +433,27 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     this.router.navigate([
       this.context.getProfileRoute({
         ...rpmStateEntry.account,
-        accountType: AccountTypeId.Client,
-      }),
-    ]);
+        accountType: AccountTypeId.Client
+      })
+    ])
   }
 
   private createStatusFilterForm(): void {
-    this.statusFilterForm = this.fb.group({ status: ['active'] });
+    this.statusFilterForm = this.fb.group({ status: ['active'] })
   }
 
   private getRemainingMetricString(value: number, type: string): string {
     switch (type) {
       case 'transmissions':
-        return `${value} more device transmissions needed`;
+        return `${value} more device transmissions needed`
 
       case 'liveInteraction':
-        return `${value} more live interactions (call/visit) needed`;
+        return `${value} more live interactions (call/visit) needed`
 
       case 'monitoring':
-        return `${value} minutes more of monitoring needed`;
+        return `${value} minutes more of monitoring needed`
     }
 
-    return '';
+    return ''
   }
 }

@@ -5,18 +5,18 @@ import {
   Input,
   OnDestroy,
   OnInit
-} from '@angular/core';
+} from '@angular/core'
 import {
   ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
-import { ContextService, NotifierService } from '@app/service';
-import { BindForm, BINDFORM_TOKEN } from '@app/shared';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
-import { PackageOrganization } from 'selvera-api';
+} from '@angular/forms'
+import { ContextService, NotifierService } from '@app/service'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
+import { PackageOrganization } from 'selvera-api'
 
 @Component({
   selector: 'sequencing-package-form',
@@ -35,31 +35,31 @@ import { PackageOrganization } from 'selvera-api';
 })
 export class PackageFormComponent
   implements BindForm, ControlValueAccessor, OnDestroy, OnInit {
-  @Input() markAsTouched: Subject<void>;
+  @Input() markAsTouched: Subject<void>
   @Input('isDisabled') set disabled(disabled: boolean) {
-    this._disabled = disabled || false;
+    this._disabled = disabled || false
 
     if (this.form && this._disabled) {
-      this.form.disable({ emitEvent: false });
+      this.form.disable({ emitEvent: false })
     } else if (this.form) {
-      this.form.enable({ emitEvent: false });
+      this.form.enable({ emitEvent: false })
     }
   }
 
   get disabled(): boolean {
-    return this._disabled;
+    return this._disabled
   }
 
-  isLoading: boolean = false;
-  form: FormGroup;
+  isLoading = false
+  form: FormGroup
   packages: any[] = [
     {
       id: '100',
       name: 'This is just a package name'
     }
-  ];
+  ]
 
-  private _disabled: boolean;
+  private _disabled: boolean
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -72,26 +72,26 @@ export class PackageFormComponent
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.createForm();
-    this.fetchPackages();
+    this.createForm()
+    this.fetchPackages()
 
     this.markAsTouched.pipe(untilDestroyed(this)).subscribe(() => {
-      this.form.markAsTouched();
+      this.form.markAsTouched()
       Object.keys(this.form.controls).forEach((key) => {
-        this.form.controls[key].markAsTouched();
-      });
-      this.cdr.detectChanges();
-    });
+        this.form.controls[key].markAsTouched()
+      })
+      this.cdr.detectChanges()
+    })
 
     if (this.disabled) {
-      this.form.controls.package.disable({ emitEvent: false });
+      this.form.controls.package.disable({ emitEvent: false })
     }
   }
 
-  propagateChange = (data: any) => {};
+  propagateChange = (data: any) => {}
 
   registerOnChange(fn): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(): void {}
@@ -100,37 +100,37 @@ export class PackageFormComponent
     if (value) {
       this.form.patchValue({
         package: value.package
-      });
+      })
     }
   }
 
   private async fetchPackages() {
     try {
-      this.isLoading = true;
-      this.form.disable();
+      this.isLoading = true
+      this.form.disable()
       this.packages = (
         await this.packageOrganization.getAll({
           organization: this.context.organizationId,
           isActive: true,
           limit: 'all'
         })
-      ).data.map((packageAssociation) => packageAssociation.package);
-      this.cdr.detectChanges();
+      ).data.map((packageAssociation) => packageAssociation.package)
+      this.cdr.detectChanges()
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     } finally {
-      this.form.enable();
-      this.isLoading = false;
+      this.form.enable()
+      this.isLoading = false
     }
   }
 
   private createForm(): void {
     this.form = this.fb.group({
       package: ['']
-    });
+    })
 
     this.form.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((controls) => this.propagateChange(controls));
+      .subscribe((controls) => this.propagateChange(controls))
   }
 }

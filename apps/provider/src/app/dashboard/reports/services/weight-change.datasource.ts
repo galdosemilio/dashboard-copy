@@ -1,26 +1,26 @@
-import { MatPaginator, MatSort } from '@coachcare/common/material';
-import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { from, Observable, of } from 'rxjs';
+import { MatPaginator, MatSort } from '@coachcare/common/material'
+import { TranslateService } from '@ngx-translate/core'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { from, Observable, of } from 'rxjs'
 
 import {
   SortDirection,
-  WeightChangeOrder,
-} from '@app/dashboard/reports/services';
-import { NotifierService } from '@app/service';
-import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared';
+  WeightChangeOrder
+} from '@app/dashboard/reports/services'
+import { NotifierService } from '@app/service'
+import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
 import {
   WeightChangeRequest,
   WeightChangeResponse,
-  WeightChangeSegment,
-} from '@app/shared/selvera-api';
-import { StatisticsDatabase } from './statistics.database';
+  WeightChangeSegment
+} from '@app/shared/selvera-api'
+import { StatisticsDatabase } from './statistics.database'
 
 export class WeightChangeDataSource extends ChartDataSource<
   WeightChangeSegment,
   WeightChangeRequest
 > {
-  i18n: TranslationsObject;
+  i18n: TranslationsObject
 
   constructor(
     protected notify: NotifierService,
@@ -29,13 +29,13 @@ export class WeightChangeDataSource extends ChartDataSource<
     private paginator?: MatPaginator,
     private sort?: MatSort
   ) {
-    super();
+    super()
 
     if (this.paginator) {
       this.addOptional(this.paginator.page, () => ({
         limit: this.paginator.pageSize,
-        offset: this.paginator.pageIndex * this.paginator.pageSize,
-      }));
+        offset: this.paginator.pageIndex * this.paginator.pageSize
+      }))
     }
 
     if (this.sort) {
@@ -45,19 +45,19 @@ export class WeightChangeDataSource extends ChartDataSource<
             property: this.sort.active
               ? (this.sort.active as WeightChangeOrder)
               : 'percentage',
-            dir: (this.sort.direction as SortDirection) || 'asc',
-          },
-        ],
-      }));
+            dir: (this.sort.direction as SortDirection) || 'asc'
+          }
+        ]
+      }))
     }
 
     // factors with translatable units
-    this.buildFormatter();
+    this.buildFormatter()
     this.translator.onLangChange
       .pipe(untilDestroyed(this, 'disconnect'))
       .subscribe(() => {
-        this.buildFormatter();
-      });
+        this.buildFormatter()
+      })
   }
 
   disconnect() {}
@@ -67,60 +67,60 @@ export class WeightChangeDataSource extends ChartDataSource<
     this.translator
       .get([_('UNIT.KG'), _('UNIT.LB'), _('UNIT.LBS')])
       .subscribe((translations) => {
-        this.i18n = translations;
+        this.i18n = translations
         // setup the label formatters
         this.formatters = {
-          weight: [() => translations['UNIT.LBS'], (v) => v, true],
-        };
-      });
+          weight: [() => translations['UNIT.LBS'], (v) => v, true]
+        }
+      })
   }
 
   defaultFetch(): WeightChangeResponse {
-    return { data: [], pagination: {} };
+    return { data: [], pagination: {} }
   }
 
   fetch(criteria: WeightChangeRequest): Observable<WeightChangeResponse> {
     return criteria.organization
       ? from(this.database.fetchWeightChange(criteria))
-      : of(this.defaultFetch());
+      : of(this.defaultFetch())
   }
 
   mapResult(result: WeightChangeResponse): Array<WeightChangeSegment> {
     if (!result || !result.data.length) {
-      return [];
+      return []
     }
 
     this.total = result.pagination.next
       ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length;
+      : this.criteria.offset + result.data.length
 
-    return result.data;
+    return result.data
   }
 
   // FIXME not working with unit preferences nor i18n
   mapChart(result: Array<WeightChangeSegment>): ChartData {
     if (!result || !result.length) {
-      return super.defaultChart();
+      return super.defaultChart()
     }
 
     // TODO select value or percentage
     // TODO need to put a control to select 'value' | 'percentage' in component
-    const metric: string = 'value';
+    const metric = 'value'
 
     const format = (measurement, value) => {
-      const c = this.formatters[measurement];
-      return c[1](value);
-    };
+      const c = this.formatters[measurement]
+      return c[1](value)
+    }
 
     const data =
       metric === 'value'
         ? result.map((v) => format('weight', v.change[metric]))
-        : result.map((v) => v.change.percentage);
+        : result.map((v) => v.change.percentage)
 
-    const labels = result.map((v) => v.account.lastName);
+    const labels = result.map((v) => v.account.lastName)
     const fullNames = result.map(
       (v) => v.account.lastName + ' ' + v.account.firstName
-    );
+    )
 
     const chart: ChartData = {
       type: 'bar',
@@ -128,8 +128,8 @@ export class WeightChangeDataSource extends ChartDataSource<
         {
           data: data,
           fullNames: fullNames,
-          chartWidth: data.length * 20,
-        },
+          chartWidth: data.length * 20
+        }
       ],
       labels: labels,
       options: {
@@ -138,17 +138,17 @@ export class WeightChangeDataSource extends ChartDataSource<
           displayColors: false,
           callbacks: {
             title: (tooltipItem, d) => {
-              const i = tooltipItem[0].index;
-              return 'Name: ' + d.datasets[0].fullNames[tooltipItem[0].index];
+              const i = tooltipItem[0].index
+              return 'Name: ' + d.datasets[0].fullNames[tooltipItem[0].index]
             },
             label: (tooltipItem, d) => {
               const unit =
                 metric === 'value'
                   ? this.formatters['weight'][0](tooltipItem.yLabel)
-                  : '%';
-              return 'Weight Change: ' + tooltipItem.yLabel + ' ' + unit;
-            },
-          },
+                  : '%'
+              return 'Weight Change: ' + tooltipItem.yLabel + ' ' + unit
+            }
+          }
         },
         scales: {
           yAxes: [
@@ -157,24 +157,24 @@ export class WeightChangeDataSource extends ChartDataSource<
                 beginAtZero: true,
                 callback: function (value, index, values) {
                   // display only when whole number
-                  return Math.floor(value) === value ? value : '';
-                },
-              },
-            },
+                  return Math.floor(value) === value ? value : ''
+                }
+              }
+            }
           ],
           xAxes: [
             {
               ticks: {
                 autoSkip: false,
                 maxRotation: 90,
-                minRotation: 90,
-              },
-            },
-          ],
-        },
-      },
-    };
+                minRotation: 90
+              }
+            }
+          ]
+        }
+      }
+    }
 
-    return chart;
+    return chart
   }
 }

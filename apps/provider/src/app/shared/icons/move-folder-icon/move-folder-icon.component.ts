@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'ccr-icon-move-folder',
@@ -9,9 +9,9 @@ import { Component, Input } from '@angular/core';
 })
 export class MoveFolderIconComponent {
   @Input()
-  fill: string;
+  fill = ''
   @Input()
-  size: number = 24;
+  size = 24
 
   constructor() {}
 }

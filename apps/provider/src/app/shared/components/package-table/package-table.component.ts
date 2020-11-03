@@ -7,15 +7,15 @@ import {
   OnInit,
   Output,
   ViewChild
-} from '@angular/core';
-import { ContextService } from '@app/service';
+} from '@angular/core'
+import { ContextService } from '@app/service'
 import {
   PackageDatabase,
   PackageDatasource
-} from '@app/shared/components/package-table/services';
-import { CcrPaginator } from '@app/shared/components/paginator';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Package, PackageSelectEvents } from './models';
+} from '@app/shared/components/package-table/services'
+import { CcrPaginator } from '@app/shared/components/paginator'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Package, PackageSelectEvents } from './models'
 
 @Component({
   selector: 'app-content-package-table',
@@ -23,38 +23,38 @@ import { Package, PackageSelectEvents } from './models';
 })
 export class PackageTableComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator;
+  paginator: CcrPaginator
 
   @Input()
   set array(a: Package[]) {
-    this._array = a;
+    this._array = a
     if (!this.useSource) {
-      this.shiftShownElements();
-      this.packages.emit(this.array);
+      this.shiftShownElements()
+      this.packages.emit(this.array)
     } else {
-      this.syncShownElements();
+      this.syncShownElements()
     }
   }
 
   get array(): Package[] {
-    return this._array.slice();
+    return this._array.slice()
   }
   @Input()
-  events?: PackageSelectEvents;
+  events?: PackageSelectEvents
   @Input()
-  source: PackageDatasource;
+  source: PackageDatasource
   @Input()
-  useSource: boolean = true;
+  useSource = true
 
   @Output()
-  packages: EventEmitter<Package[]> = new EventEmitter<Package[]>();
+  packages: EventEmitter<Package[]> = new EventEmitter<Package[]>()
 
-  public columns = ['check', 'title', 'clinic'];
-  public shownElements: Package[] = [];
-  public pageIndex: number = 0;
-  public pageSize: number = 10;
+  public columns = ['check', 'title', 'clinic']
+  public shownElements: Package[] = []
+  public pageIndex = 0
+  public pageSize = 10
 
-  private _array: Package[] = [];
+  private _array: Package[] = []
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -64,50 +64,54 @@ export class PackageTableComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     if (this.source) {
-      this.source.unsetPaginator();
+      this.source.unsetPaginator()
     }
   }
 
   ngOnInit(): void {
     if (this.useSource) {
       if (!this.source) {
-        this.source = new PackageDatasource(this.context, this.database);
+        this.source = new PackageDatasource(this.context, this.database)
       }
 
       this.source.setPaginator(this.paginator, () => ({
         limit: this.paginator.pageSize || this.source.pageSize,
         offset:
-          this.paginator.pageIndex * (this.paginator.pageSize || this.source.pageSize)
-      }));
+          this.paginator.pageIndex *
+          (this.paginator.pageSize || this.source.pageSize)
+      }))
       this.source
         .connect()
         .pipe(untilDestroyed(this))
         .subscribe((packages: Package[]) => {
-          this.shownElements = packages;
-          this.syncShownElements();
-        });
+          this.shownElements = packages
+          this.syncShownElements()
+        })
     } else if (this.array) {
-      this.shiftShownElements();
+      this.shiftShownElements()
     }
 
-    this.subscribeToEvents();
+    this.subscribeToEvents()
   }
 
   onCheckClick(pkg: Package): void {
-    const index: number = this.shownElements.findIndex((p: Package) => p.id === pkg.id);
+    const index: number = this.shownElements.findIndex(
+      (p: Package) => p.id === pkg.id
+    )
 
     if (!this.shownElements[index].checked) {
-      this.events.packageSelected.emit(this.shownElements[index]);
+      this.events.packageSelected.emit(this.shownElements[index])
     } else {
-      this.events.packageDeselected.emit(this.shownElements[index]);
+      this.events.packageDeselected.emit(this.shownElements[index])
     }
   }
 
   onPageChange($event?: any): void {
-    this.pageIndex = $event.pageIndex !== undefined ? $event.pageIndex : this.pageIndex;
+    this.pageIndex =
+      $event.pageIndex !== undefined ? $event.pageIndex : this.pageIndex
 
     if (!this.useSource) {
-      this.shiftShownElements();
+      this.shiftShownElements()
     }
   }
 
@@ -115,49 +119,59 @@ export class PackageTableComponent implements OnDestroy, OnInit {
     start: number = this.pageIndex * this.pageSize,
     end: number = (this.pageIndex + 1) * this.pageSize
   ): void {
-    const resultArr: Package[] = [];
+    const resultArr: Package[] = []
     for (let i = start; i < end && i < this.array.length; ++i) {
-      resultArr.push(this.array[i]);
+      resultArr.push(this.array[i])
     }
-    this.shownElements = resultArr;
-    this.cdr.detectChanges();
+    this.shownElements = resultArr
+    this.cdr.detectChanges()
   }
 
   private subscribeToEvents(): void {
-    this.events.packageSelected.pipe(untilDestroyed(this)).subscribe((pkg: Package) => {
-      if (!this.useSource) {
-        const newArray: Package[] = this.array;
-        newArray.push({ ...pkg, checked: true });
-        this.array = newArray;
-      }
-      const index: number = this.shownElements.findIndex((p: Package) => p.id === pkg.id);
-      if (index > -1) {
-        this.shownElements[index].checked = true;
-        this.shownElements = this.shownElements.slice();
-      }
-    });
+    this.events.packageSelected
+      .pipe(untilDestroyed(this))
+      .subscribe((pkg: Package) => {
+        if (!this.useSource) {
+          const newArray: Package[] = this.array
+          newArray.push({ ...pkg, checked: true })
+          this.array = newArray
+        }
+        const index: number = this.shownElements.findIndex(
+          (p: Package) => p.id === pkg.id
+        )
+        if (index > -1) {
+          this.shownElements[index].checked = true
+          this.shownElements = this.shownElements.slice()
+        }
+      })
 
-    this.events.packageDeselected.pipe(untilDestroyed(this)).subscribe((pkg: Package) => {
-      if (!this.useSource) {
-        const newArray: Package[] = this.array.filter((p: Package) => p.id !== pkg.id);
-        this.array = newArray;
-        this.pageIndex = 0;
-        this.onPageChange({});
-      }
-      const index: number = this.shownElements.findIndex((p: Package) => p.id === pkg.id);
-      if (index > -1) {
-        this.shownElements[index].checked = false;
-      }
-    });
+    this.events.packageDeselected
+      .pipe(untilDestroyed(this))
+      .subscribe((pkg: Package) => {
+        if (!this.useSource) {
+          const newArray: Package[] = this.array.filter(
+            (p: Package) => p.id !== pkg.id
+          )
+          this.array = newArray
+          this.pageIndex = 0
+          this.onPageChange({})
+        }
+        const index: number = this.shownElements.findIndex(
+          (p: Package) => p.id === pkg.id
+        )
+        if (index > -1) {
+          this.shownElements[index].checked = false
+        }
+      })
   }
 
   private syncShownElements(): void {
     if (this.array && this.array.length) {
       this.shownElements.forEach((sE: Package) => {
         if (this.array.find((el: Package) => el.id === sE.id)) {
-          sE.checked = true;
+          sE.checked = true
         }
-      });
+      })
     }
   }
 }

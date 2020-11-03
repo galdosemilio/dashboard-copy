@@ -3,14 +3,15 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges
-} from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { CcrDataSource } from '../../model';
-import { _ } from '../../utils';
+} from '@angular/core'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
+import { CcrDataSource } from '../../model'
+import { _ } from '../../utils'
 
 @Component({
   selector: 'ccr-datasource-overlay',
@@ -22,24 +23,25 @@ import { _ } from '../../utils';
   },
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CcrDatasourceOverlayComponent implements OnInit, OnDestroy {
+export class CcrDatasourceOverlayComponent
+  implements OnChanges, OnInit, OnDestroy {
   @Input()
-  source: CcrDataSource<any, any, any>;
+  source: CcrDataSource<any, any, any>
 
   @Input()
-  emptyMsg: string;
+  emptyMsg: string
   @Input()
-  waitMsg = _('NOTIFY.SOURCE.DEFAULT_WAIT');
+  waitMsg = _('NOTIFY.SOURCE.DEFAULT_WAIT')
   @Input()
-  delayMsg = _('NOTIFY.SOURCE.DEFAULT_DELAY');
+  delayMsg = _('NOTIFY.SOURCE.DEFAULT_DELAY')
   @Input()
-  timeoutMsg = _('NOTIFY.SOURCE.DEFAULT_TIMEOUT');
+  timeoutMsg = _('NOTIFY.SOURCE.DEFAULT_TIMEOUT')
   @Input()
-  showErrors: boolean = true;
+  showErrors = true
   @Input()
-  inaccessible: boolean = false;
+  inaccessible = false
 
-  private onDestroy$ = new Subject<void>();
+  private onDestroy$ = new Subject<void>()
 
   constructor(private readonly cdr: ChangeDetectorRef) {}
 
@@ -48,22 +50,22 @@ export class CcrDatasourceOverlayComponent implements OnInit, OnDestroy {
     if (this.source) {
       // setup source messages
       if (this.emptyMsg) {
-        this.source.showEmpty = this.emptyMsg;
+        this.source.showEmpty = this.emptyMsg
       }
       if (this.waitMsg) {
-        this.source.waitMsg = this.waitMsg;
+        this.source.waitMsg = this.waitMsg
       }
       if (this.delayMsg) {
-        this.source.delayMsg = this.delayMsg;
+        this.source.delayMsg = this.delayMsg
       }
       if (this.timeoutMsg) {
-        this.source.timeoutMsg = this.timeoutMsg;
+        this.source.timeoutMsg = this.timeoutMsg
       }
 
       // listen source changes
       this.source.change$.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-        this.cdr.markForCheck();
-      });
+        this.cdr.markForCheck()
+      })
     }
   }
 
@@ -72,12 +74,12 @@ export class CcrDatasourceOverlayComponent implements OnInit, OnDestroy {
       changes.emptyMsg &&
       changes.emptyMsg.previousValue !== changes.emptyMsg.currentValue
     ) {
-      this.source.showEmpty = changes.emptyMsg.currentValue;
+      this.source.showEmpty = changes.emptyMsg.currentValue
     }
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
+    this.onDestroy$.next()
+    this.onDestroy$.complete()
   }
 }

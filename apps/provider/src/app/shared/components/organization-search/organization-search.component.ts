@@ -1,71 +1,71 @@
-import { Component, Input, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core'
+import { FormControl } from '@angular/forms'
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
-  MatSelectChange,
-} from '@coachcare/common/material';
-import { AssociationsDatabase } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations';
-import { ContextService, NotifierService } from '@app/service';
+  MatSelectChange
+} from '@coachcare/common/material'
+import { AssociationsDatabase } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations'
+import { ContextService, NotifierService } from '@app/service'
 import {
   OrganizationAccess,
   OrganizationEntity,
-  OrganizationPermission,
-} from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+  OrganizationPermission
+} from '@app/shared/selvera-api'
+import { _ } from '@app/shared/utils'
+import { Subject } from 'rxjs'
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
-type OrganizationSearchComponentModes = 'searchbar' | 'select';
+type OrganizationSearchComponentModes = 'searchbar' | 'select'
 
 @Component({
   selector: 'ccr-organization-search',
-  templateUrl: './organization-search.component.html',
+  templateUrl: './organization-search.component.html'
 })
-export class OrganizationSearchComponent {
+export class OrganizationSearchComponent implements OnInit {
   @Input()
-  account: string;
-  @Input() initialOrg: any;
-  @Input() label: string = _('BOARD.SELECT_ORGANIZATION');
-  @Input() setOrgId: string;
+  account: string
+  @Input() initialOrg: any
+  @Input() label: string = _('BOARD.SELECT_ORGANIZATION')
+  @Input() setOrgId: string
   @Input()
-  permissions: Partial<OrganizationPermission>;
+  permissions: Partial<OrganizationPermission>
   @Input()
-  allowSearchbarReset: boolean = false;
+  allowSearchbarReset = false
   @Input()
-  ancestor: string;
+  ancestor: string
   @Input()
   set readonly(readonly: boolean) {
-    this._readonly = readonly;
+    this._readonly = readonly
     setTimeout(() => {
       if (readonly) {
-        this.searchCtrl.disable();
-        this.trigger.setDisabledState(true);
+        this.searchCtrl.disable()
+        this.trigger.setDisabledState(true)
       } else {
-        this.searchCtrl.enable();
-        this.trigger.setDisabledState(false);
+        this.searchCtrl.enable()
+        this.trigger.setDisabledState(false)
       }
-    }, 100);
+    }, 100)
   }
 
   get readonly(): boolean {
-    return this._readonly;
+    return this._readonly
   }
-  @Input() showEmptyOption: boolean = true;
+  @Input() showEmptyOption = true
 
   @Output()
-  select: Subject<OrganizationEntity> = new Subject<OrganizationEntity>();
+  select: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
-  trigger: MatAutocompleteTrigger;
+  trigger: MatAutocompleteTrigger
 
-  mode: OrganizationSearchComponentModes = 'select';
-  searchCtrl: FormControl;
-  orgSelected: boolean;
-  selectModeThreshold: number = 10;
-  organizations: OrganizationAccess[] = [];
+  mode: OrganizationSearchComponentModes = 'select'
+  searchCtrl: FormControl
+  orgSelected: boolean
+  selectModeThreshold = 10
+  organizations: OrganizationAccess[] = []
 
-  private _readonly: boolean;
+  private _readonly: boolean
 
   constructor(
     private context: ContextService,
@@ -74,59 +74,59 @@ export class OrganizationSearchComponent {
   ) {}
 
   ngOnInit(): void {
-    this.fetchOrganizations();
-    this.setupAutocomplete();
+    this.fetchOrganizations()
+    this.setupAutocomplete()
 
     if (this.initialOrg) {
-      this.searchCtrl.setValue(this.initialOrg.name, { emitEvent: false });
+      this.searchCtrl.setValue(this.initialOrg.name, { emitEvent: false })
 
       if (this.allowSearchbarReset) {
-        this.searchCtrl.disable();
+        this.searchCtrl.disable()
       }
 
-      this.orgSelected = true;
-      this.select.next(this.initialOrg);
+      this.orgSelected = true
+      this.select.next(this.initialOrg)
     }
   }
 
   onOrgAutocompleteSelect($event: MatAutocompleteSelectedEvent) {
-    const value = $event.option.value || undefined;
+    const value = $event.option.value || undefined
     const selectedAssoc = this.organizations.find(
       (assoc) => assoc.organization.id === value
-    );
-    this.orgSelected = true;
-    this.select.next(selectedAssoc ? selectedAssoc.organization : undefined);
+    )
+    this.orgSelected = true
+    this.select.next(selectedAssoc ? selectedAssoc.organization : undefined)
 
     if (this.allowSearchbarReset) {
-      this.searchCtrl.disable();
+      this.searchCtrl.disable()
     }
   }
 
   onOrgSelect($event: MatSelectChange): void {
     const association = this.organizations.find(
       (assoc) => assoc.organization.id === $event.value
-    );
-    this.orgSelected = true;
-    this.select.next(association ? association.organization : undefined);
+    )
+    this.orgSelected = true
+    this.select.next(association ? association.organization : undefined)
 
     if (this.allowSearchbarReset) {
-      this.searchCtrl.disable();
+      this.searchCtrl.disable()
     }
   }
 
   resetSearchBar() {
-    this.orgSelected = false;
-    this.searchCtrl.enable();
-    this.searchCtrl.reset();
-    this.select.next();
+    this.orgSelected = false
+    this.searchCtrl.enable()
+    this.searchCtrl.reset()
+    this.select.next()
   }
 
   searchBarDisplayWith(value: any): string {
     const selectedAssoc: OrganizationAccess =
       this.organizations && this.organizations.length
         ? this.organizations.find((assoc) => assoc.organization.id === value)
-        : undefined;
-    return selectedAssoc ? selectedAssoc.organization.name : value;
+        : undefined
+    return selectedAssoc ? selectedAssoc.organization.name : value
   }
 
   private async fetchOrganizations(query?: string) {
@@ -136,31 +136,31 @@ export class OrganizationSearchComponent {
         permissions: this.permissions || undefined,
         ancestor: this.ancestor || undefined,
         query: query,
-        status: 'active',
-      });
+        status: 'active'
+      })
 
       if (response.data && response.data.length) {
-        this.organizations = response.data;
+        this.organizations = response.data
       }
 
       if (this.organizations.length >= this.selectModeThreshold) {
-        this.mode = 'searchbar';
+        this.mode = 'searchbar'
       }
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
   }
 
   private setupAutocomplete(): void {
-    this.searchCtrl = new FormControl();
+    this.searchCtrl = new FormControl()
     this.searchCtrl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
         if (query) {
-          this.fetchOrganizations(query);
+          this.fetchOrganizations(query)
         } else {
-          this.trigger.closePanel();
+          this.trigger.closePanel()
         }
-      });
+      })
   }
 }

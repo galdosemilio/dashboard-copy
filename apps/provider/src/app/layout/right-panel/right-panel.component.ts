@@ -5,24 +5,24 @@ import {
   OnInit,
   ViewChild,
   ViewContainerRef
-} from '@angular/core';
-import { ContextService } from '@app/service';
-import { select, Store } from '@ngrx/store';
+} from '@angular/core'
+import { ContextService } from '@app/service'
+import { select, Store } from '@ngrx/store'
 
-import { panelCompSelector, UILayoutState } from '@app/layout/store';
+import { panelCompSelector, UILayoutState } from '@app/layout/store'
 import {
   AddMeasurementsComponent,
   ConsultationComponent,
   NotificationsComponent,
   RemindersComponent
-} from './contents';
+} from './contents'
 
 const Components = {
   addConsultation: ConsultationComponent,
   addMeasurements: AddMeasurementsComponent,
   notifications: NotificationsComponent,
   reminders: RemindersComponent
-};
+}
 
 @Component({
   selector: 'app-right-panel',
@@ -30,10 +30,10 @@ const Components = {
 })
 export class RightPanelComponent implements OnInit {
   @ViewChild('entry', { read: ViewContainerRef, static: true })
-  entry: ViewContainerRef;
+  entry: ViewContainerRef
 
-  private activeChild: string = '';
-  childComponent: ComponentRef<any>;
+  private activeChild = ''
+  childComponent: ComponentRef<any>
 
   constructor(
     public context: ContextService,
@@ -42,18 +42,25 @@ export class RightPanelComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.pipe(select(panelCompSelector)).subscribe((component: string) => {
-      this.createChildComponent(component);
-    });
+    this.store
+      .pipe(select(panelCompSelector))
+      .subscribe((component: string) => {
+        this.createChildComponent(component)
+      })
   }
 
   createChildComponent(c: string): void {
     if (c && this.activeChild !== c && Components[c]) {
-      this.childComponent && this.childComponent.destroy();
-      const componentFactory = this.resolver.resolveComponentFactory(Components[c]);
-      this.entry.clear();
-      this.childComponent = this.entry.createComponent(componentFactory);
+      if (this.childComponent) {
+        this.childComponent.destroy()
+      }
+
+      const componentFactory = this.resolver.resolveComponentFactory(
+        Components[c]
+      )
+      this.entry.clear()
+      this.childComponent = this.entry.createComponent(componentFactory)
     }
-    this.activeChild = c;
+    this.activeChild = c
   }
 }

@@ -7,14 +7,17 @@ import {
   Input,
   OnDestroy,
   OnInit
-} from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
-import { FormQuestion, ManagerEvents } from '@app/dashboard/library/forms/models';
-import { QuestionDetails } from '@app/dashboard/library/forms/questions';
-import { BindForm, BINDFORM_TOKEN } from '@app/shared';
-import { FormAnswer } from '@app/shared/selvera-api';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+} from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { DomSanitizer } from '@angular/platform-browser'
+import {
+  FormQuestion,
+  ManagerEvents
+} from '@app/dashboard/library/forms/models'
+import { QuestionDetails } from '@app/dashboard/library/forms/questions'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
+import { FormAnswer } from '@app/shared/selvera-api'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
 @Component({
   selector: 'app-library-question-renderer',
@@ -30,16 +33,16 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 })
 export class QuestionRendererComponent implements BindForm, OnDestroy, OnInit {
   @Input()
-  answer: FormAnswer;
+  answer: FormAnswer
   @Input()
-  events: ManagerEvents;
+  events: ManagerEvents
   @Input()
-  question: FormQuestion;
+  question: FormQuestion
   @Input()
-  readonly: boolean = false;
+  readonly = false
 
-  public form: FormGroup;
-  public questionInjector: Injector;
+  public form: FormGroup
+  public questionInjector: Injector
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -47,7 +50,7 @@ export class QuestionRendererComponent implements BindForm, OnDestroy, OnInit {
     private injector: Injector,
     private sanitizer: DomSanitizer
   ) {
-    this.createForm();
+    this.createForm()
   }
 
   ngOnDestroy(): void {}
@@ -56,7 +59,7 @@ export class QuestionRendererComponent implements BindForm, OnDestroy, OnInit {
     if (this.question.questionType.usesUrl) {
       this.question.url = this.sanitizer.bypassSecurityTrustResourceUrl(
         this.question.title
-      ) as string;
+      ) as string
     }
     this.questionInjector = Injector.create({
       providers: [
@@ -74,16 +77,16 @@ export class QuestionRendererComponent implements BindForm, OnDestroy, OnInit {
         }
       ],
       parent: this.injector
-    });
+    })
 
     if (this.events) {
       this.events.questionStaged
         .pipe(untilDestroyed(this))
-        .subscribe(() => this.cdr.detectChanges());
+        .subscribe(() => this.cdr.detectChanges())
     }
   }
 
   private createForm(): void {
-    this.form = this.formBuilder.group({});
+    this.form = this.formBuilder.group({})
   }
 }

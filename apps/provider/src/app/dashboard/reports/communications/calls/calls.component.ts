@@ -1,61 +1,61 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSelectChange } from '@coachcare/common/material';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { MatDialog, MatSelectChange } from '@coachcare/common/material'
 import {
   ContextService,
   NotifierService,
-  SelectedOrganization,
-} from '@app/service';
+  SelectedOrganization
+} from '@app/service'
 import {
   AddManualInteractionDialog,
   CcrPaginator,
-  PromptDialog,
-} from '@app/shared';
-import { _ } from '@app/shared/utils';
-import { TranslateService } from '@ngx-translate/core';
-import { get, unionBy } from 'lodash';
-import * as moment from 'moment';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { Interaction } from 'selvera-api';
-import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models';
-import { CallHistoryDatabase, CallHistoryDataSource } from '../services';
+  PromptDialog
+} from '@app/shared'
+import { _ } from '@app/shared/utils'
+import { TranslateService } from '@ngx-translate/core'
+import { get, unionBy } from 'lodash'
+import * as moment from 'moment'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
+import { first } from 'rxjs/operators'
+import { Interaction } from 'selvera-api'
+import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models'
+import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
 
 @Component({
   selector: 'app-reports-calls',
   templateUrl: './calls.component.html',
-  styleUrls: ['./calls.component.scss'],
+  styleUrls: ['./calls.component.scss']
 })
-export class CallsComponent implements OnInit {
+export class CallsComponent implements OnDestroy, OnInit {
   @Input() set account(value: string) {
-    this._account = value;
-    this.account$.next(value);
+    this._account = value
+    this.account$.next(value)
   }
 
   get account(): string {
-    return this._account;
+    return this._account
   }
 
-  @Input() allowCreation: boolean = false;
+  @Input() allowCreation = false
 
-  @ViewChild(CcrPaginator, { static: true }) paginator;
+  @ViewChild(CcrPaginator, { static: true }) paginator
 
-  billableServices: BillableService[] = [];
-  clinic: SelectedOrganization;
+  billableServices: BillableService[] = []
+  clinic: SelectedOrganization
   columns: string[] = [
     'type',
     'rpmBillable',
     'participants',
     'clinic',
     'start',
-    'actions',
-  ];
-  isLoading: boolean = false;
-  shownColumns: string[] = this.columns.slice();
-  source: CallHistoryDataSource;
+    'actions'
+  ]
+  isLoading = false
+  shownColumns: string[] = this.columns.slice()
+  source: CallHistoryDataSource
 
-  private _account: string;
-  private account$: Subject<string> = new Subject<string>();
+  private _account: string
+  private account$: Subject<string> = new Subject<string>()
 
   constructor(
     private context: ContextService,
@@ -70,47 +70,45 @@ export class CallsComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.source = new CallHistoryDataSource(this.database, this.paginator);
+      this.source = new CallHistoryDataSource(this.database, this.paginator)
       this.source.addDefault({
-        status: 'ended',
-      });
+        status: 'ended'
+      })
       this.source.addRequired(this.context.organization$, () => ({
-        organization: this.context.organizationId,
-      }));
-      this.source.addOptional(this.account$, () => ({ account: this.account }));
+        organization: this.context.organizationId
+      }))
+      this.source.addOptional(this.account$, () => ({ account: this.account }))
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
-      this.clinic = org;
-      this.refreshShownColumns();
-      this.resolveBillableServices();
-    });
+      this.clinic = org
+      this.refreshShownColumns()
+      this.resolveBillableServices()
+    })
   }
 
   async downloadCSV() {
     try {
-      const translations = await this.translate
-        .getTranslation('en')
-        .toPromise();
+      const translations = await this.translate.getTranslation('en').toPromise()
 
-      this.isLoading = true;
+      this.isLoading = true
 
-      const source = new CallHistoryDataSource(this.database);
+      const source = new CallHistoryDataSource(this.database)
       source.addDefault({
         organization: this.context.organizationId,
         account: this.account || undefined,
         limit: 'all',
-        offset: 0,
-      });
+        offset: 0
+      })
 
-      const calls = await source.connect().pipe(first()).toPromise();
+      const calls = await source.connect().pipe(first()).toPromise()
 
-      const separator = ',';
-      const orgName = this.context.organization.name.replace(/\s/g, '_');
-      const filename = `${orgName}_COMMS_REPORT.csv`;
-      let highestParticipantAmount = 0;
+      const separator = ','
+      const orgName = this.context.organization.name.replace(/\s/g, '_')
+      const filename = `${orgName}_COMMS_REPORT.csv`
+      let highestParticipantAmount = 0
 
       calls.forEach(
         (call) =>
@@ -118,60 +116,60 @@ export class CallsComponent implements OnInit {
             highestParticipantAmount > call.participants.length
               ? highestParticipantAmount
               : call.participants.length)
-      );
+      )
 
-      let csv = '';
-      csv += 'CALL HISTORY\r\n';
+      let csv = ''
+      csv += 'CALL HISTORY\r\n'
 
-      csv += `"INITIATOR"${separator}`;
-      csv += `"ORGANIZATION"${separator}`;
-      csv += `"TIMESTAMP"${separator}`;
-      csv += `"TYPE"${separator}`;
-      csv += `"DURATION"${separator}`;
+      csv += `"INITIATOR"${separator}`
+      csv += `"ORGANIZATION"${separator}`
+      csv += `"TIMESTAMP"${separator}`
+      csv += `"TYPE"${separator}`
+      csv += `"DURATION"${separator}`
 
       for (let i = 0; i < highestParticipantAmount; ++i) {
-        csv += `"PARTICIPANT [${i + 1}]"`;
+        csv += `"PARTICIPANT [${i + 1}]"`
         if (i < highestParticipantAmount - 1) {
-          csv += `${separator}`;
+          csv += `${separator}`
         }
       }
 
-      csv += '\r\n';
+      csv += '\r\n'
 
       calls.forEach((call) => {
-        csv += `"${call.initiator.firstName} ${call.initiator.lastName}, ${call.initiator.email}, ID: ${call.initiator.id}"${separator}`;
-        csv += `"${call.organization.name} (ID: ${call.organization.id})"${separator}`;
+        csv += `"${call.initiator.firstName} ${call.initiator.lastName}, ${call.initiator.email}, ID: ${call.initiator.id}"${separator}`
+        csv += `"${call.organization.name} (ID: ${call.organization.id})"${separator}`
 
-        csv += `"${moment(call.time.start).toISOString()}"${separator}`;
+        csv += `"${moment(call.time.start).toISOString()}"${separator}`
         csv += `"${get(
           translations,
           call.type.displayName,
           call.type.name
-        )}"${separator}`;
-        csv += `"${call.time.duration} minutes"${separator}`;
+        )}"${separator}`
+        csv += `"${call.time.duration} minutes"${separator}`
 
-        csv += `"`;
+        csv += `"`
         call.participants.forEach((participant, index) => {
-          csv += `${participant.firstName} ${participant.lastName} (ID: ${participant.id})`;
+          csv += `${participant.firstName} ${participant.lastName} (ID: ${participant.id})`
           if (index < call.participants.length - 1) {
-            csv += `"${separator}`;
+            csv += `"${separator}`
           }
-        });
-        csv += `\r\n`;
-      });
+        })
+        csv += `\r\n`
+      })
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.setAttribute('visibility', 'hidden');
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.setAttribute('visibility', 'hidden')
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     } finally {
-      this.isLoading = false;
+      this.isLoading = false
     }
   }
 
@@ -182,22 +180,22 @@ export class CallsComponent implements OnInit {
     try {
       const billServ = this.billableServices.find(
         (element) => element.id === $event.value
-      );
+      )
 
       if (!billServ) {
-        return;
+        return
       }
 
-      row.billableService = billServ;
+      row.billableService = billServ
 
       await this.interaction.update({
         id: row.id,
         billableService:
-          row.billableService.id !== '-1' ? row.billableService.id : null,
-      });
-      this.notify.success(_('NOTIFY.SUCCESS.INTERACTION_UPDATED'));
+          row.billableService.id !== '-1' ? row.billableService.id : null
+      })
+      this.notify.success(_('NOTIFY.SUCCESS.INTERACTION_UPDATED'))
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
   }
 
@@ -207,58 +205,58 @@ export class CallsComponent implements OnInit {
       .afterClosed()
       .subscribe((refresh) => {
         if (!refresh) {
-          return;
+          return
         }
 
-        this.source.refresh();
-      });
+        this.source.refresh()
+      })
   }
 
   showRemoveInteractionDialog(interaction: CallHistoryItem): void {
     if (!interaction.canBeDeleted) {
-      return;
+      return
     }
 
     this.dialog
       .open(PromptDialog, {
         data: {
           title: _('REPORTS.REMOVE_INTERACTION_TITLE'),
-          content: _('REPORTS.REMOVE_INTERACTION_DESCRIPTION'),
-        },
+          content: _('REPORTS.REMOVE_INTERACTION_DESCRIPTION')
+        }
       })
       .afterClosed()
       .subscribe((confirm) => {
         if (!confirm) {
-          return;
+          return
         }
 
-        this.removeInteraction(interaction);
-      });
+        this.removeInteraction(interaction)
+      })
   }
 
   private refreshShownColumns(): void {
-    this.shownColumns = this.columns.slice();
+    this.shownColumns = this.columns.slice()
 
-    const rpmEnabled = get(this.clinic, 'preferences.rpm.isActive', false);
+    const rpmEnabled = get(this.clinic, 'preferences.rpm.isActive', false)
 
     if (!rpmEnabled) {
       this.shownColumns = this.shownColumns.filter(
         (col) => col !== 'rpmBillable'
-      );
+      )
     }
 
     if (!this.allowCreation) {
-      this.shownColumns = this.shownColumns.filter((col) => col !== 'actions');
+      this.shownColumns = this.shownColumns.filter((col) => col !== 'actions')
     }
   }
 
   private async removeInteraction(interaction: CallHistoryItem): Promise<void> {
     try {
-      await this.interaction.delete({ id: interaction.id });
-      this.notify.success(_('NOTIFY.SUCCESS.INTERACTION_REMOVED'));
-      this.source.refresh();
+      await this.interaction.delete({ id: interaction.id })
+      this.notify.success(_('NOTIFY.SUCCESS.INTERACTION_REMOVED'))
+      this.source.refresh()
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
   }
 
@@ -267,17 +265,17 @@ export class CallsComponent implements OnInit {
       const billableServices = (
         await this.interaction.getBillableServices({
           limit: 'all',
-          status: 'active',
+          status: 'active'
         })
-      ).data.map((billServ) => ({ ...billServ, displayName: billServ.name }));
+      ).data.map((billServ) => ({ ...billServ, displayName: billServ.name }))
 
       this.billableServices = unionBy(
         Object.values(BILLABLE_SERVICES),
         billableServices,
         'id'
-      );
+      )
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
   }
 }

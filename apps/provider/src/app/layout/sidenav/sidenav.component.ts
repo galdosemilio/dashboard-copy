@@ -1,31 +1,37 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { NavigationStart, Router } from '@angular/router';
-import { CCRConfig, CCRPalette } from '@app/config';
-import { resolveConfig } from '@app/config/section';
-import { SidenavOptions } from '@app/config/section/consts';
-import { FetchSubaccount } from '@app/layout/store/call/call.action';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit
+} from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { NavigationStart, Router } from '@angular/router'
+import { CCRConfig, CCRPalette } from '@app/config'
+import { resolveConfig } from '@app/config/section'
+import { SidenavOptions } from '@app/config/section/consts'
+import { FetchSubaccount } from '@app/layout/store/call/call.action'
 import {
   ContextService,
   EventsService,
   NotifierService,
   PlatformUpdatesService,
   SelectedOrganization
-} from '@app/service';
-import { _ } from '@app/shared';
-import { configSelector } from '@app/store/config';
-import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { findIndex, get } from 'lodash';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { Messaging, Organization } from 'selvera-api';
-import { SidenavItem } from './sidenav-item/sidenav-item.component';
+} from '@app/service'
+import { _ } from '@app/shared'
+import { configSelector } from '@app/store/config'
+import { select, Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import { findIndex, get } from 'lodash'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { fromEvent, Subject } from 'rxjs'
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
+import { Messaging, Organization } from 'selvera-api'
+import { SidenavItem } from './sidenav-item/sidenav-item.component'
 
 export interface SidenavOrg {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 @Component({
@@ -34,26 +40,26 @@ export interface SidenavOrg {
 })
 export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input()
-  isOpened = false;
+  isOpened = false
 
-  _this: SidenavComponent = this;
-  sidenavItems: SidenavItem[] = [];
+  _this: SidenavComponent = this
+  sidenavItems: SidenavItem[] = []
 
-  logoSrc = './assets/logo.png';
-  palette: CCRPalette;
-  route: string;
+  logoSrc = './assets/logo.png'
+  palette: CCRPalette
+  route: string
 
-  searchCtrl: FormControl;
-  organization: SelectedOrganization;
-  organizations: Array<SidenavOrg> = [];
-  menuContainer: HTMLElement;
-  menuClosed$ = new Subject<Event>();
-  isSearchingClinics: boolean = false;
-  searchNext: number = 0;
-  searchQuery: string = undefined;
+  searchCtrl: FormControl
+  organization: SelectedOrganization
+  organizations: Array<SidenavOrg> = []
+  menuContainer: HTMLElement
+  menuClosed$ = new Subject<Event>()
+  isSearchingClinics = false
+  searchNext = 0
+  searchQuery: string = undefined
 
-  private currentLang: string;
-  private isOrphaned: boolean;
+  private currentLang: string
+  private isOrphaned: boolean
 
   constructor(
     router: Router,
@@ -68,109 +74,111 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   ) {
     this.store
       .pipe(select(configSelector))
-      .subscribe((conf) => (this.palette = conf.palette));
+      .subscribe((conf) => (this.palette = conf.palette))
 
     router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        this.route = event.url.split('/')[1];
-        this.updateNavigation();
+        this.route = event.url.split('/')[1]
+        this.updateNavigation()
       }
-    });
+    })
   }
 
   ngAfterViewInit() {
-    this.menuContainer = document.querySelector('.org-selector');
+    this.menuContainer = document.querySelector('.org-selector')
   }
 
   ngOnDestroy(): void {
-    this.menuClosed$.complete();
+    this.menuClosed$.complete()
   }
 
   ngOnInit() {
-    this.currentLang = this.translate.currentLang;
-    this.isOrphaned = this.context.isOrphaned;
+    this.currentLang = this.translate.currentLang
+    this.isOrphaned = this.context.isOrphaned
 
-    this.initSearch();
+    this.initSearch()
 
     this.context.orphanedAccount$.subscribe((isOrphaned) => {
-      this.isOrphaned = isOrphaned;
-      this.initNavigation(!this.isOrphaned);
-    });
+      this.isOrphaned = isOrphaned
+      this.initNavigation(!this.isOrphaned)
+    })
 
     this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
-      this.currentLang = this.translate.currentLang;
-      this.updateContactLinks();
-    });
+      this.currentLang = this.translate.currentLang
+      this.updateContactLinks()
+    })
 
     this.context.organization$.subscribe((org) => {
-      this.organization = org;
+      this.organization = org
       // update the video option
-      this.updateSections(org);
+      this.updateSections(org)
       // TODO consider logo-mark for md screens
       this.logoSrc =
         org && org.assets && org.assets.logoUrl
           ? org.assets.logoUrl
-          : './assets/logo.png';
+          : './assets/logo.png'
 
-      this.updateContactLinks();
-    });
+      this.updateContactLinks()
+    })
 
     // listen event to refresh unread
-    this.bus.listen('system.timer', this.updateUnread.bind(this));
-    this.bus.listen('system.unread.threads', this.updateUnread.bind(this));
+    this.bus.listen('system.timer', this.updateUnread.bind(this))
+    this.bus.listen('system.unread.threads', this.updateUnread.bind(this))
     this.platformUpdates.articles$
       .pipe(untilDestroyed(this))
-      .subscribe(this.updateUnread.bind(this));
+      .subscribe(this.updateUnread.bind(this))
 
-    this.store.dispatch(new FetchSubaccount(this.context.organizationId));
+    this.store.dispatch(new FetchSubaccount(this.context.organizationId))
   }
 
   menuOpened() {
-    this.menuContainer = document.querySelector('.org-selector');
+    this.menuContainer = document.querySelector('.org-selector')
     fromEvent(this.menuContainer, 'scroll')
       .pipe(takeUntil(this.menuClosed$))
       .subscribe(($event: Event) => {
-        const target = $event.target as HTMLElement;
+        const target = $event.target as HTMLElement
         if (
           !this.isSearchingClinics &&
           this.searchNext &&
           target.offsetHeight + target.scrollTop >= target.scrollHeight * 0.75
         ) {
-          this.searchClinics(this.searchQuery);
+          this.searchClinics(this.searchQuery)
         }
-      });
+      })
   }
 
   initSearch() {
-    this.searchCtrl = new FormControl();
+    this.searchCtrl = new FormControl()
     this.searchCtrl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
-        this.menuContainer.scrollTop = 0;
-        this.searchQuery = query.trim() || undefined;
-        this.searchNext = 0;
-        this.searchClinics(this.searchQuery);
-      });
+        this.menuContainer.scrollTop = 0
+        this.searchQuery = query.trim() || undefined
+        this.searchNext = 0
+        this.searchClinics(this.searchQuery)
+      })
 
-    this.searchClinics(this.searchQuery);
+    this.searchClinics(this.searchQuery)
   }
 
   async searchClinics(query: string) {
-    this.isSearchingClinics = true;
+    this.isSearchingClinics = true
     const orgs = await this.orgservice.getAccessibleList({
       query,
       status: 'active',
       offset: this.searchNext,
       limit: 24
-    });
+    })
     const sidenavOrgs = orgs.data.map((org) => ({
       id: org.organization.id,
       name: org.organization.name
-    }));
+    }))
     this.organizations =
-      this.searchNext === 0 ? sidenavOrgs : this.organizations.concat(sidenavOrgs);
-    this.searchNext = orgs.pagination.next || 0;
-    this.isSearchingClinics = false;
+      this.searchNext === 0
+        ? sidenavOrgs
+        : this.organizations.concat(sidenavOrgs)
+    this.searchNext = orgs.pagination.next || 0
+    this.isSearchingClinics = false
   }
 
   initNavigation(menuEnabled: boolean) {
@@ -340,36 +348,36 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
               // { navName: _('SIDENAV.FAQS'), navRoute: 'resources/faqs' }
             ]
           }
-        ];
+        ]
 
-    this.updateUnread();
-    this.updateSections(this.context.organization);
+    this.updateUnread()
+    this.updateSections(this.context.organization)
   }
 
   private updateContactLinks(): void {
-    const baseLang = this.currentLang.split('-')[0];
+    const baseLang = this.currentLang.split('-')[0]
 
-    let idxProviderContactChild;
-    let idxProviderFaqChild;
+    let idxProviderContactChild
+    let idxProviderFaqChild
     const providerContactLink = this.context.isOrphaned
       ? undefined
-      : get(this.context.organization.mala, 'custom.links.providerContact');
+      : get(this.context.organization.mala, 'custom.links.providerContact')
     const providerFaqLink = this.context.isOrphaned
       ? undefined
-      : get(this.context.organization.mala, 'custom.links.providerFaq');
+      : get(this.context.organization.mala, 'custom.links.providerFaq')
     const idxProviderContact = this.sidenavItems.findIndex(
       (item) =>
         item.children &&
         (idxProviderContactChild = item.children.findIndex(
           (child) => child.navName === _('SIDENAV.CONTACT_SUPPORT')
         )) > -1
-    );
+    )
     idxProviderFaqChild =
       idxProviderContact && this.sidenavItems.length > 0
         ? this.sidenavItems[idxProviderContact].children.findIndex(
             (child) => child.navName === _('SIDENAV.FAQ_SUPPORT')
           )
-        : -1;
+        : -1
 
     if (idxProviderContact > -1) {
       if (idxProviderContactChild > -1) {
@@ -377,7 +385,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
           idxProviderContactChild
         ].navLink = providerContactLink
           ? providerContactLink
-          : `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${baseLang}`;
+          : `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${baseLang}`
       }
 
       if (idxProviderFaqChild > -1) {
@@ -385,7 +393,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
           idxProviderFaqChild
         ].navLink = providerFaqLink
           ? providerFaqLink
-          : `https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard?lang=${baseLang}`;
+          : `https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard?lang=${baseLang}`
       }
     }
   }
@@ -393,82 +401,90 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   updateNavigation() {
     this.sidenavItems = this.sidenavItems.map((item) => {
       if (this.route === item.route && !item.expanded) {
-        item.expanded = true;
+        item.expanded = true
         // only changes the reference when the status changes
-        return { ...item };
+        return { ...item }
       }
-      return item;
-    });
+      return item
+    })
   }
 
   updateUnread() {
     if (!this.context.isOrphaned) {
       Promise.all([this.messaging.getUnread()]).then(([threads]) => {
         // update the unread threads
-        const m = findIndex(this.sidenavItems, { navRoute: 'messages' });
+        const m = findIndex(this.sidenavItems, { navRoute: 'messages' })
         if (this.sidenavItems[m].badge !== threads.unreadThreadsCount) {
-          this.sidenavItems[m].badge = threads.unreadThreadsCount;
-          this.sidenavItems[m] = Object.assign({}, this.sidenavItems[m]);
+          this.sidenavItems[m].badge = threads.unreadThreadsCount
+          this.sidenavItems[m] = Object.assign({}, this.sidenavItems[m])
         }
-      });
+      })
     }
 
-    const resourcesItemIndex = findIndex(this.sidenavItems, { route: 'resources' });
+    const resourcesItemIndex = findIndex(this.sidenavItems, {
+      route: 'resources'
+    })
 
     if (resourcesItemIndex <= -1) {
-      return;
+      return
     }
 
     this.sidenavItems[
       resourcesItemIndex
-    ].badge = this.platformUpdates.notSeenArticleAmount;
+    ].badge = this.platformUpdates.notSeenArticleAmount
 
     const updatesSubItemIndex = findIndex(
       this.sidenavItems[resourcesItemIndex].children,
       { navRoute: '/resources/platform-updates' }
-    );
+    )
 
     if (updatesSubItemIndex <= -1) {
-      return;
+      return
     }
 
     this.sidenavItems[resourcesItemIndex].children[
       updatesSubItemIndex
-    ].badge = this.platformUpdates.notSeenArticleAmount;
+    ].badge = this.platformUpdates.notSeenArticleAmount
   }
 
   updateSections(org: SelectedOrganization) {
-    let hiddenOptions = resolveConfig('SIDENAV.HIDDEN_OPTIONS', org);
-    const shownOptions = resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true) || [];
+    let hiddenOptions = resolveConfig('SIDENAV.HIDDEN_OPTIONS', org)
+    const shownOptions = resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true) || []
 
     if (Array.isArray(hiddenOptions) && Array.isArray(shownOptions)) {
       hiddenOptions = hiddenOptions.filter(
         (hidden) => !shownOptions.find((shown) => shown === hidden)
-      );
+      )
     }
 
-    const enabled = get(org, 'preferences.content.enabled', false);
-    const rpmEnabled = get(org, 'preferences.rpm.isActive', false);
+    const enabled = get(org, 'preferences.content.enabled', false)
+    const rpmEnabled = get(org, 'preferences.rpm.isActive', false)
     const rpmElementIndex = this.sidenavItems.findIndex(
       (item) =>
         item.children &&
         !!item.children.find((child) => child.navName === _('SIDENAV.RPM'))
-    );
-    const sequencesEnabled = get(org, 'preferences.sequences.isActive', false);
+    )
+    const sequencesEnabled = get(org, 'preferences.sequences.isActive', false)
     const sequencesElementIndex = this.sidenavItems.findIndex(
       (item) => item.navName === _('SIDENAV.SEQUENCES')
-    );
-    const messagingEnabled = get(org, 'preferences.messaging.isActive', false);
+    )
+    const messagingEnabled = get(org, 'preferences.messaging.isActive', false)
     const messagingElementIndex = this.sidenavItems.findIndex(
       (item) => item.navName === _('SIDENAV.MESSAGES')
-    );
-    const commsEnabled = get(org, 'preferences.comms.videoConferencing.isEnabled', false);
+    )
+    const commsEnabled = get(
+      org,
+      'preferences.comms.videoConferencing.isEnabled',
+      false
+    )
     const commsElementIndex = this.sidenavItems.findIndex(
       (item) =>
         item.children &&
-        !!item.children.find((child) => child.navName === _('SIDENAV.COMMUNICATIONS'))
-    );
-    const idx = findIndex(this.sidenavItems, { navName: _('SIDENAV.LIBRARY') });
+        !!item.children.find(
+          (child) => child.navName === _('SIDENAV.COMMUNICATIONS')
+        )
+    )
+    const idx = findIndex(this.sidenavItems, { navName: _('SIDENAV.LIBRARY') })
 
     this.sidenavItems = this.sidenavItems.map((item) => ({
       ...item,
@@ -477,50 +493,56 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
         item.children && item.children.length
           ? item.children.map((child) => ({ ...child, cssClass: '' }))
           : undefined
-    }));
+    }))
 
     this.sidenavItems[idx] = {
       ...this.sidenavItems[idx],
       cssClass: enabled ? '' : 'hidden'
-    };
+    }
 
     if (rpmElementIndex > -1 && !rpmEnabled) {
       const childIndex = this.sidenavItems[rpmElementIndex].children.findIndex(
         (item) => item.navName === _('SIDENAV.RPM')
-      );
+      )
       this.sidenavItems[rpmElementIndex].children[childIndex] = {
         ...this.sidenavItems[rpmElementIndex].children[childIndex],
         cssClass: 'hidden'
-      };
+      }
     }
 
     if (commsElementIndex > -1 && !commsEnabled) {
-      const childIndex = this.sidenavItems[commsElementIndex].children.findIndex(
+      const childIndex = this.sidenavItems[
+        commsElementIndex
+      ].children.findIndex(
         (item) => item.navName === _('SIDENAV.COMMUNICATIONS')
-      );
+      )
       this.sidenavItems[commsElementIndex].children[childIndex] = {
         ...this.sidenavItems[commsElementIndex].children[childIndex],
         cssClass: 'hidden'
-      };
+      }
     }
 
     if (sequencesElementIndex > -1 && !sequencesEnabled) {
       this.sidenavItems[sequencesElementIndex] = {
         ...this.sidenavItems[sequencesElementIndex],
         cssClass: 'hidden'
-      };
+      }
     }
 
     if (messagingElementIndex > -1 && !messagingEnabled) {
       this.sidenavItems[messagingElementIndex] = {
         ...this.sidenavItems[messagingElementIndex],
         cssClass: 'hidden'
-      };
+      }
     }
 
-    if (this.sidenavItems && this.sidenavItems.length && Array.isArray(hiddenOptions)) {
+    if (
+      this.sidenavItems &&
+      this.sidenavItems.length &&
+      Array.isArray(hiddenOptions)
+    ) {
       hiddenOptions.forEach((option) => {
-        let existingChildrenIndex = -1;
+        let existingChildrenIndex = -1
         const existingItem = this.sidenavItems.find(
           (item) =>
             (item.code === option && !item.cssClass) ||
@@ -529,24 +551,24 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                   (child) => child.code === option && !child.cssClass
                 )
               : -1) > -1
-        );
+        )
 
         if (existingItem && existingChildrenIndex === -1) {
-          existingItem.cssClass = 'hidden';
+          existingItem.cssClass = 'hidden'
         } else if (existingChildrenIndex > -1) {
-          existingItem.children[existingChildrenIndex].cssClass = 'hidden';
+          existingItem.children[existingChildrenIndex].cssClass = 'hidden'
           if (!existingItem.children.find((child) => !child.cssClass)) {
-            existingItem.cssClass = 'hidden';
+            existingItem.cssClass = 'hidden'
           }
         }
-      });
+      })
     }
   }
 
   selectOrg(org: SidenavOrg) {
     if (org.id !== this.organization.id) {
-      this.context.organizationId = org.id;
-      this.store.dispatch(new FetchSubaccount(org.id));
+      this.context.organizationId = org.id
+      this.store.dispatch(new FetchSubaccount(org.id))
     }
   }
 
@@ -560,6 +582,6 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
         organization: this.organization.id,
         message: 'Failed to load the clinic logo'
       }
-    });
+    })
   }
 }

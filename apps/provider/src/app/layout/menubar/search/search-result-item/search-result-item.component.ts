@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
-import { _ } from '@app/shared';
-import { AccountAccessData } from '@app/shared/selvera-api';
+import { _ } from '@app/shared'
+import { AccountAccessData } from '@app/shared/selvera-api'
 
 @Component({
   selector: 'app-search-result-item',
@@ -9,19 +9,19 @@ import { AccountAccessData } from '@app/shared/selvera-api';
 })
 export class SearchResultItemComponent {
   @Input()
-  public account: AccountAccessData;
+  public account: AccountAccessData
   @Input()
-  public canAccessPatient: boolean;
+  public canAccessPatient: boolean
   @Input()
-  public canCall: boolean = true;
+  public canCall = true
 
   public formatAccountType(accountType) {
-    let result;
+    let result
     if ([2, '2', 'provider'].indexOf(accountType) >= 0) {
-      result = _('GLOBAL.COACH');
+      result = _('GLOBAL.COACH')
     } else if ([3, '3', 'client'].indexOf(accountType) >= 0) {
-      result = _('GLOBAL.PATIENT');
+      result = _('GLOBAL.PATIENT')
     }
-    return result || '';
+    return result || ''
   }
 }

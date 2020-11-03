@@ -1,11 +1,11 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core'
 
 @Directive({
   selector: '[numberOnly]'
 })
 export class NumberOnlyDirective {
-  @Input() numberOnly; // pass false to disable it
-  @Input('wholeNumber') wholeNumber: boolean = false;
+  @Input() numberOnly // pass false to disable it
+  @Input() wholeNumber = false
 
   constructor() {}
 
@@ -26,11 +26,11 @@ export class NumberOnlyDirective {
         'ArrowLeft',
         'Right',
         'ArrowRight'
-      ];
-      const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+      ]
+      const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
       if (!this.wholeNumber) {
-        arr.push('n');
-        arr.push('.');
+        arr.push('n')
+        arr.push('.')
       }
 
       if (
@@ -45,12 +45,12 @@ export class NumberOnlyDirective {
         ['Home', 'End', 'PageDown', 'PageUp', 'Paste'].indexOf(e.key) > -1
       ) {
         // let it happen, don't do anything
-        return;
+        return
       }
 
       // If not a number, stop the keypress
       if (numbers.indexOf(e.key) < 0) {
-        e.preventDefault();
+        e.preventDefault()
       }
     }
   }

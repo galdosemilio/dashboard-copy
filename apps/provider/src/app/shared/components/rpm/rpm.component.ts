@@ -6,34 +6,34 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { MatDialog, MatSlideToggle } from '@coachcare/common/material';
-import { ContextService } from '@app/service';
-import { RPMStatusDialog } from '@app/shared/dialogs';
-import { AccSingleResponse, OrganizationAccess } from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils';
-import { sortBy, uniqBy } from 'lodash';
-import * as moment from 'moment';
-import { Account, Organization, RPM } from 'selvera-api';
-import { RPMStateEntry, RPMStateTypes } from './models';
+  ViewEncapsulation
+} from '@angular/core'
+import { MatDialog, MatSlideToggle } from '@coachcare/common/material'
+import { ContextService } from '@app/service'
+import { RPMStatusDialog } from '@app/shared/dialogs'
+import { AccSingleResponse, OrganizationAccess } from '@app/shared/selvera-api'
+import { _ } from '@app/shared/utils'
+import { sortBy, uniqBy } from 'lodash'
+import * as moment from 'moment'
+import { Account, Organization, RPM } from 'selvera-api'
+import { RPMStateEntry, RPMStateTypes } from './models'
 
 @Component({
   selector: 'app-rpm',
   templateUrl: './rpm.component.html',
   styleUrls: ['./rpm.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class RPMComponent implements AfterViewInit, OnInit {
-  @Output() rpmStatusChange: EventEmitter<void> = new EventEmitter<void>();
+  @Output() rpmStatusChange: EventEmitter<void> = new EventEmitter<void>()
 
-  @ViewChild(MatSlideToggle, { static: false }) toggle: MatSlideToggle;
+  @ViewChild(MatSlideToggle, { static: false }) toggle: MatSlideToggle
 
-  accessibleOrganizations: OrganizationAccess[] = [];
-  inaccessibleOrganizations: OrganizationAccess[] = [];
-  mostRecentEntry: RPMStateEntry;
-  isLoading: boolean = false;
-  rpmEntries: RPMStateEntry[] = [];
+  accessibleOrganizations: OrganizationAccess[] = []
+  inaccessibleOrganizations: OrganizationAccess[] = []
+  mostRecentEntry: RPMStateEntry
+  isLoading = false
+  rpmEntries: RPMStateEntry[] = []
 
   constructor(
     private account: Account,
@@ -46,12 +46,12 @@ export class RPMComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.toggle.defaults = {
-      disableToggleValue: true,
-    };
+      disableToggleValue: true
+    }
   }
 
   async ngOnInit() {
-    this.refresh();
+    this.refresh()
   }
 
   openStatusDialog() {
@@ -63,31 +63,31 @@ export class RPMComponent implements AfterViewInit, OnInit {
           mostRecentEntry:
             this.mostRecentEntry.rpmState.status !== RPMStateTypes.neverActive
               ? this.mostRecentEntry
-              : undefined,
+              : undefined
         },
-        width: '60vw',
+        width: '60vw'
       })
       .afterClosed()
       .subscribe((closingState) => {
         if (closingState === 'new_entry' || closingState === 'remove_entry') {
-          this.rpmStatusChange.emit();
-          this.refresh();
+          this.rpmStatusChange.emit()
+          this.refresh()
         }
-      });
+      })
   }
 
   private async refresh() {
     try {
-      this.isLoading = true;
+      this.isLoading = true
       const accessibleOrgs = (
         await this.organization.getAccessibleList({
           account: this.context.accountId,
           limit: 'all',
-          offset: 0,
+          offset: 0
         })
-      ).data;
+      ).data
 
-      const promises = [];
+      const promises = []
 
       accessibleOrgs.forEach((org) =>
         promises.push(
@@ -95,52 +95,52 @@ export class RPMComponent implements AfterViewInit, OnInit {
             account: this.context.accountId,
             organization: org.organization.id,
             limit: 'all',
-            offset: 0,
+            offset: 0
           })
         )
-      );
+      )
 
-      const responses = await Promise.all(promises);
-      let allEntries = [];
+      const responses = await Promise.all(promises)
+      let allEntries = []
 
       responses.forEach((response) => {
         response.data.forEach((entry) => {
-          allEntries.push(entry);
-        });
-      });
+          allEntries.push(entry)
+        })
+      })
 
-      allEntries = uniqBy(allEntries, 'id');
+      allEntries = uniqBy(allEntries, 'id')
       this.mostRecentEntry = new RPMStateEntry({
-        rpmState: sortBy(allEntries, (entry) => moment(entry.createdAt)).pop(),
-      });
+        rpmState: sortBy(allEntries, (entry) => moment(entry.createdAt)).pop()
+      })
 
       if (this.mostRecentEntry.rpmState.createdBy) {
         this.mostRecentEntry.rpmState.createdBy = await this.resolveCreatedByAccount(
           this.mostRecentEntry.rpmState.createdBy.id
-        );
+        )
       }
 
       const permissionPromises = accessibleOrgs.map((org) =>
         this.resolveOrgPermissions(org)
-      );
+      )
       const restrictionPromises = accessibleOrgs.map((org) =>
         this.resolveOrgPermissions(org, false)
-      );
+      )
 
       const permissions = (await Promise.all(permissionPromises)).filter(
         (org) => !!org
-      );
+      )
       const restrictions = (await Promise.all(restrictionPromises)).filter(
         (org) => !!org
-      );
+      )
 
-      this.accessibleOrganizations = permissions;
-      this.inaccessibleOrganizations = restrictions;
+      this.accessibleOrganizations = permissions
+      this.inaccessibleOrganizations = restrictions
 
-      this.isLoading = false;
-      this.cdr.detectChanges();
+      this.isLoading = false
+      this.cdr.detectChanges()
     } catch (error) {
-      this.isLoading = false;
+      this.isLoading = false
     }
   }
 
@@ -148,7 +148,7 @@ export class RPMComponent implements AfterViewInit, OnInit {
     id: string
   ): Promise<AccSingleResponse> {
     try {
-      return await this.account.getSingle(id);
+      return await this.account.getSingle(id)
     } catch (error) {
       return {
         id: '',
@@ -164,8 +164,8 @@ export class RPMComponent implements AfterViewInit, OnInit {
         timezone: '',
         phone: '',
         countryCode: '',
-        phoneType: 'ios',
-      };
+        phoneType: 'ios'
+      }
     }
   }
 
@@ -183,6 +183,6 @@ export class RPMComponent implements AfterViewInit, OnInit {
         : undefined
       : positivePermission
       ? undefined
-      : organization;
+      : organization
   }
 }

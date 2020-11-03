@@ -4,13 +4,13 @@ import {
   Component,
   OnDestroy,
   OnInit
-} from '@angular/core';
+} from '@angular/core'
 import {
   STORAGE_CALL_WINDOW_CORNER,
   STORAGE_VIDEOCONFERENCE_SETTINGS
-} from '@app/config';
-import { UIState } from '@app/layout/store';
-import { callSelector } from '@app/layout/store/call';
+} from '@app/config'
+import { UIState } from '@app/layout/store'
+import { callSelector } from '@app/layout/store/call'
 import {
   ABORT_CALL,
   AbortCall,
@@ -29,28 +29,28 @@ import {
   Source,
   UPDATE_CALL_STATUS_TO_ENDED,
   UpdateCallStatusToEnded
-} from '@app/layout/store/call/call.action';
-import { CallState } from '@app/layout/store/call/call.state';
-import { NotifierService } from '@app/service/notifier.service';
-import { sleep } from '@app/shared';
-import { ConnectionStats, ConnectionStatus } from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils/i18n.utils';
-import { Actions, ofType } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
-import { Subscription } from 'rxjs';
-import { auditTime, map, tap } from 'rxjs/operators';
-import * as CallActions from '../../store/call';
-import { TwilioBandwidthService } from '../services/twilio-bandwidth.service';
-import { TwilioService } from '../services/twilio.service';
+} from '@app/layout/store/call/call.action'
+import { CallState } from '@app/layout/store/call/call.state'
+import { NotifierService } from '@app/service/notifier.service'
+import { sleep } from '@app/shared'
+import { ConnectionStats, ConnectionStatus } from '@app/shared/selvera-api'
+import { _ } from '@app/shared/utils/i18n.utils'
+import { Actions, ofType } from '@ngrx/effects'
+import { select, Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import * as moment from 'moment'
+import { Subscription } from 'rxjs'
+import { auditTime, map, tap } from 'rxjs/operators'
+import * as CallActions from '../../store/call'
+import { TwilioBandwidthService } from '../services/twilio-bandwidth.service'
+import { TwilioService } from '../services/twilio.service'
 
 interface StickyArea {
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-  clampPosition: { x: number; y: number };
+  x: number
+  y: number
+  height: number
+  width: number
+  clampPosition: { x: number; y: number }
 }
 
 @Component({
@@ -59,12 +59,12 @@ interface StickyArea {
   styleUrls: ['./call-window.component.scss']
 })
 export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
-  public callState: CallState;
-  public remoteConnectionStatus: ConnectionStatus;
-  public dragHandleCoords = { x: 150, y: 10 };
-  public lastSticky: StickyArea;
-  public ringingCountdown: number;
-  public stickies: HTMLElement[] = [];
+  public callState: CallState
+  public remoteConnectionStatus: ConnectionStatus
+  public dragHandleCoords = { x: 150, y: 10 }
+  public lastSticky: StickyArea
+  public ringingCountdown: number
+  public stickies: HTMLElement[] = []
   public stickyAreas: StickyArea[] = [
     {
       x: 4,
@@ -94,16 +94,16 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
       height: 30,
       clampPosition: { x: -25, y: -25 }
     }
-  ];
-  private subscriptions: Subscription[] = [];
+  ]
+  private subscriptions: Subscription[] = []
 
-  private callAttemptDuration = 90000;
-  private callWindow: Element;
-  private currentRemoteVideoState: boolean;
-  private inactivityTimeout: number = 60000;
-  private inactivityTimeoutActive: boolean = false;
-  private dataTrackTimeout: number = 4;
-  private ringingCountdownInterval: any;
+  private callAttemptDuration = 90000
+  private callWindow: Element
+  private currentRemoteVideoState: boolean
+  private inactivityTimeout = 60000
+  private inactivityTimeoutActive = false
+  private dataTrackTimeout = 4
+  private ringingCountdownInterval: any
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -114,19 +114,21 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
     private twilioBandwidth: TwilioBandwidthService,
     private twilioService: TwilioService
   ) {
-    this.checkRemoteConnectivityStatus = this.checkRemoteConnectivityStatus.bind(this);
-    this.moveWindowToPointer = this.moveWindowToPointer.bind(this);
-    this.stopFollowingPointer = this.stopFollowingPointer.bind(this);
+    this.checkRemoteConnectivityStatus = this.checkRemoteConnectivityStatus.bind(
+      this
+    )
+    this.moveWindowToPointer = this.moveWindowToPointer.bind(this)
+    this.stopFollowingPointer = this.stopFollowingPointer.bind(this)
   }
 
   ngOnInit() {
     this.subscriptions = [
       this.store.pipe(select(callSelector)).subscribe((callState) => {
-        this.callState = callState;
+        this.callState = callState
         if (callState.isBeingDragged) {
-          this.startFollowingPointer();
+          this.startFollowingPointer()
         }
-        this.cdr.detectChanges();
+        this.cdr.detectChanges()
       }),
       this.actions$
         .pipe(
@@ -146,9 +148,9 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
                   ),
                   callEnded: true
                 })
-              );
-              this.store.dispatch(new PlayCallEndedAudio());
-              this.store.dispatch(new CancelCall());
+              )
+              this.store.dispatch(new PlayCallEndedAudio())
+              this.store.dispatch(new CancelCall())
             }
           })
         )
@@ -163,30 +165,35 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
             CANCEL_CALL
           ),
           tap(() => {
-            this.stopRingingInterval();
+            this.stopRingingInterval()
           })
         )
         .subscribe(),
       this.twilioBandwidth.connectionUpdate$
         .pipe(auditTime(300))
         .subscribe(this.checkRemoteConnectivityStatus)
-    ];
+    ]
 
-    if (this.callState.isCallStarted && this.callState.source === Source.OUTBOUND) {
-      this.startRingingTimer();
+    if (
+      this.callState.isCallStarted &&
+      this.callState.source === Source.OUTBOUND
+    ) {
+      this.startRingingTimer()
     }
 
-    this.store.dispatch(new CheckDevices());
+    this.store.dispatch(new CheckDevices())
   }
 
   ngOnDestroy() {
-    this.stopRingingInterval();
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.stopRingingInterval()
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 
   ngAfterViewInit() {
-    this.stickies = Array.from(document.body.querySelectorAll('.ccr-call-window-sticky'));
-    this.callWindow = document.body.querySelector('.ccr-call-window');
+    this.stickies = Array.from(
+      document.body.querySelectorAll('.ccr-call-window-sticky')
+    )
+    this.callWindow = document.body.querySelector('.ccr-call-window')
 
     if (!this.callState.hasEnteredRoom) {
       if (
@@ -195,7 +202,7 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
       ) {
         const storageSettings = JSON.parse(
           window.localStorage.getItem(STORAGE_VIDEOCONFERENCE_SETTINGS)
-        );
+        )
         this.store.dispatch(
           new CreateLocalTracks({
             enableAudio: this.callState.hasAudioDeviceAccess,
@@ -203,46 +210,51 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
             roomName: this.callState.room.name,
             authenticationToken: this.callState.twilioToken
           })
-        );
-        window.localStorage.removeItem(STORAGE_VIDEOCONFERENCE_SETTINGS);
+        )
+        window.localStorage.removeItem(STORAGE_VIDEOCONFERENCE_SETTINGS)
       }
     } else {
-      this.store.dispatch(new Reinitialize());
+      this.store.dispatch(new Reinitialize())
     }
 
-    const callWindowCorner = window.localStorage.getItem(STORAGE_CALL_WINDOW_CORNER);
-    if (this.callState.lastPosition && this.callState.windowState === 'DEFAULT') {
-      setTimeout(() => this.fixWindow(this.callState.lastPosition));
+    const callWindowCorner = window.localStorage.getItem(
+      STORAGE_CALL_WINDOW_CORNER
+    )
+    if (
+      this.callState.lastPosition &&
+      this.callState.windowState === 'DEFAULT'
+    ) {
+      setTimeout(() => this.fixWindow(this.callState.lastPosition))
     } else if (callWindowCorner && Number(callWindowCorner) > -1) {
-      setTimeout(() => this.fixWindow(this.stickyAreas[callWindowCorner]));
+      setTimeout(() => this.fixWindow(this.stickyAreas[callWindowCorner]))
     }
   }
 
   followPointer() {
-    this.store.dispatch(new CallActions.ToggleDrag(undefined));
+    this.store.dispatch(new CallActions.ToggleDrag(undefined))
   }
 
   removeTwilioId(participant): string {
-    const name = participant;
-    const idIndex = name.indexOf('(');
+    const name = participant
+    const idIndex = name.indexOf('(')
     if (idIndex !== -1) {
-      return name.substring(0, idIndex).trim();
+      return name.substring(0, idIndex).trim()
     } else {
-      return participant;
+      return participant
     }
   }
 
   startRingingTimer() {
-    this.stopRingingInterval();
+    this.stopRingingInterval()
 
-    this.ringingCountdown = this.callAttemptDuration / 1000;
+    this.ringingCountdown = this.callAttemptDuration / 1000
 
     this.ringingCountdownInterval = setInterval(() => {
-      --this.ringingCountdown;
+      --this.ringingCountdown
 
       if (this.ringingCountdown < 0) {
-        clearInterval(this.ringingCountdownInterval);
-        this.ringingCountdownInterval = null;
+        clearInterval(this.ringingCountdownInterval)
+        this.ringingCountdownInterval = null
 
         if (!this.callState.participantJoined) {
           // FIXME: timeout should be cleared upon hangup
@@ -250,15 +262,15 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
             const snack = (msg: string) => {
               const participantsText = this.callState.room.participants
                 .map((participant) => participant.name)
-                .join(', ');
-              this.notifier.info(`${participantsText} ${msg}`);
-            };
+                .join(', ')
+              this.notifier.info(`${participantsText} ${msg}`)
+            }
             // support translatable strings starting with NOTIFY.
             this.translator
               .get([_('NOTIFY.INFO.NO_ANSWER')])
               .subscribe((translations) => {
-                snack(translations['NOTIFY.INFO.NO_ANSWER']);
-              });
+                snack(translations['NOTIFY.INFO.NO_ANSWER'])
+              })
             this.store.dispatch(
               new UpdateCallStatusToEnded({
                 callId: this.callState.callId,
@@ -267,68 +279,78 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
                 ),
                 callEnded: true
               })
-            );
-            this.store.dispatch(new AbortCall(this.callState.callId));
-            this.store.dispatch(new HangUp());
+            )
+            this.store.dispatch(new AbortCall(this.callState.callId))
+            this.store.dispatch(new HangUp())
           }
         }
       }
-    }, 1000);
+    }, 1000)
   }
 
-  private checkRemoteConnectivityStatus(allConnectionStats: ConnectionStats[]): void {
+  private checkRemoteConnectivityStatus(
+    allConnectionStats: ConnectionStats[]
+  ): void {
     const remoteConnStats = allConnectionStats.find(
       (connectionStats) => !connectionStats.isLocal
-    );
+    )
 
     if (!remoteConnStats) {
-      return;
+      return
     }
 
-    this.checkRemoteConnectivityAge(remoteConnStats);
+    this.checkRemoteConnectivityAge(remoteConnStats)
 
-    this.remoteConnectionStatus = remoteConnStats.status;
+    this.remoteConnectionStatus = remoteConnStats.status
 
     switch (this.remoteConnectionStatus) {
       case ConnectionStatus.IDLE:
-        this.twilioService.hideVideoContainer(remoteConnStats.id);
-        break;
+        this.twilioService.hideVideoContainer(remoteConnStats.id)
+        break
 
       case ConnectionStatus.REFOCUS:
-        this.twilioService.showVideoContainer(remoteConnStats.id);
-        break;
+        this.twilioService.showVideoContainer(remoteConnStats.id)
+        break
     }
 
-    if (this.currentRemoteVideoState === remoteConnStats.hasMobileVideoEnabled) {
-      return;
+    if (
+      this.currentRemoteVideoState === remoteConnStats.hasMobileVideoEnabled
+    ) {
+      return
     }
 
-    this.currentRemoteVideoState = remoteConnStats.hasMobileVideoEnabled;
+    this.currentRemoteVideoState = remoteConnStats.hasMobileVideoEnabled
 
     if (!this.twilioBandwidth.listenToVideoDataTrack) {
-      return;
+      return
     }
 
     if (remoteConnStats.hasMobileVideoEnabled) {
-      this.twilioService.showVideoContainer(remoteConnStats.id);
+      this.twilioService.showVideoContainer(remoteConnStats.id)
     } else {
-      this.twilioService.hideVideoContainer(remoteConnStats.id);
+      this.twilioService.hideVideoContainer(remoteConnStats.id)
     }
   }
 
   private checkRemoteConnectivityAge(remoteConnStats: ConnectionStats) {
     if (this.twilioBandwidth.currentRemoteConnSkips > 0) {
-      --this.twilioBandwidth.currentRemoteConnSkips;
-      return;
+      --this.twilioBandwidth.currentRemoteConnSkips
+      return
     }
 
-    const age = moment().diff(moment(remoteConnStats.timestamp), 'seconds');
+    const age = moment().diff(moment(remoteConnStats.timestamp), 'seconds')
 
-    if (age >= this.dataTrackTimeout && !this.callState.isAttemptingToReconnect) {
-      this.store.dispatch(new SetAttemptingReconnect(true));
-      this.startInactivityTimeout();
-    } else if (age < this.dataTrackTimeout && this.callState.isAttemptingToReconnect) {
-      this.store.dispatch(new SetAttemptingReconnect(false));
+    if (
+      age >= this.dataTrackTimeout &&
+      !this.callState.isAttemptingToReconnect
+    ) {
+      this.store.dispatch(new SetAttemptingReconnect(true))
+      this.startInactivityTimeout()
+    } else if (
+      age < this.dataTrackTimeout &&
+      this.callState.isAttemptingToReconnect
+    ) {
+      this.store.dispatch(new SetAttemptingReconnect(false))
     }
   }
 
@@ -339,7 +361,7 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
       width: sticky.clientWidth,
       height: sticky.clientHeight,
       clampPosition: this.stickyAreas[index].clampPosition
-    }));
+    }))
 
     return stickyAreas.find(
       (sticky) =>
@@ -347,27 +369,27 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
         position.x <= sticky.x + sticky.width &&
         position.y >= sticky.y &&
         position.y <= sticky.y + sticky.height
-    );
+    )
   }
 
   private fixWindow(sticky: StickyArea) {
-    let styleString = `position: absolute;`;
+    let styleString = `position: absolute;`
     if (sticky.clampPosition.x > 0) {
-      styleString += `left: ${sticky.clampPosition.x}px;`;
+      styleString += `left: ${sticky.clampPosition.x}px;`
     } else {
-      styleString += `right: ${-sticky.clampPosition.x}px;`;
+      styleString += `right: ${-sticky.clampPosition.x}px;`
     }
 
     if (sticky.clampPosition.y > 0) {
-      styleString += `top: ${sticky.clampPosition.y}px;`;
+      styleString += `top: ${sticky.clampPosition.y}px;`
     } else {
-      styleString += `bottom: ${-sticky.clampPosition.y}px;`;
+      styleString += `bottom: ${-sticky.clampPosition.y}px;`
     }
 
-    styleString += `transition: all 0.1s ease-in-out;`;
+    styleString += `transition: all 0.1s ease-in-out;`
 
     if (this.callWindow) {
-      this.callWindow.setAttribute('style', styleString);
+      this.callWindow.setAttribute('style', styleString)
     }
 
     window.localStorage.setItem(
@@ -379,56 +401,56 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
             stickyArea.clampPosition.y === sticky.clampPosition.y
         )
         .toString()
-    );
+    )
   }
 
   private moveWindowToPointer($event: MouseEvent) {
     this.callWindow.setAttribute(
       'style',
-      `position: absolute; top: ${$event.clientY - this.dragHandleCoords.y}px; left: ${
-        $event.clientX - this.dragHandleCoords.x
-      }px;`
-    );
+      `position: absolute; top: ${
+        $event.clientY - this.dragHandleCoords.y
+      }px; left: ${$event.clientX - this.dragHandleCoords.x}px;`
+    )
   }
 
   private async startInactivityTimeout(): Promise<void> {
     if (this.inactivityTimeoutActive) {
-      return;
+      return
     }
 
-    this.inactivityTimeoutActive = true;
-    await sleep(this.inactivityTimeout);
+    this.inactivityTimeoutActive = true
+    await sleep(this.inactivityTimeout)
 
     if (this.callState.isAttemptingToReconnect) {
-      this.store.dispatch(new HangUp());
+      this.store.dispatch(new HangUp())
     }
 
-    this.inactivityTimeoutActive = false;
+    this.inactivityTimeoutActive = false
   }
 
   private startFollowingPointer() {
-    document.body.addEventListener('mousemove', this.moveWindowToPointer);
-    document.body.addEventListener('mouseup', this.stopFollowingPointer);
+    document.body.addEventListener('mousemove', this.moveWindowToPointer)
+    document.body.addEventListener('mouseup', this.stopFollowingPointer)
   }
 
   private stopFollowingPointer($event: MouseEvent) {
-    document.body.removeEventListener('mousemove', this.moveWindowToPointer);
-    document.body.removeEventListener('mouseup', this.stopFollowingPointer);
+    document.body.removeEventListener('mousemove', this.moveWindowToPointer)
+    document.body.removeEventListener('mouseup', this.stopFollowingPointer)
     const sticky =
       this.checkStickyAreas({ x: $event.clientX, y: $event.clientY }) ||
-      this.stickyAreas[2];
+      this.stickyAreas[2]
 
-    this.fixWindow(sticky);
+    this.fixWindow(sticky)
 
-    this.store.dispatch(new CallActions.ToggleDrag(sticky));
+    this.store.dispatch(new CallActions.ToggleDrag(sticky))
   }
 
   private stopRingingInterval() {
     if (!this.ringingCountdownInterval) {
-      return;
+      return
     }
 
-    clearInterval(this.ringingCountdownInterval);
-    this.ringingCountdownInterval = null;
+    clearInterval(this.ringingCountdownInterval)
+    this.ringingCountdownInterval = null
   }
 }

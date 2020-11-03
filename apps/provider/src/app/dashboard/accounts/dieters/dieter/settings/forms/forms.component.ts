@@ -3,87 +3,88 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
+  OnInit,
   Output,
-  ViewChild,
-} from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MatDialog } from '@coachcare/common/material';
-import { AssignFormDialog } from '@app/dashboard/accounts/dialogs';
-import { Form, FormSubmission } from '@app/dashboard/library/forms/models';
+  ViewChild
+} from '@angular/core'
+import { FormGroup } from '@angular/forms'
+import { MatDialog } from '@coachcare/common/material'
+import { AssignFormDialog } from '@app/dashboard/accounts/dialogs'
+import { Form, FormSubmission } from '@app/dashboard/library/forms/models'
 import {
   FormDisplayService,
   FormsDatabase,
   FormSubmissionsDatabase,
-  FormSubmissionsDatasource,
-} from '@app/dashboard/library/forms/services';
-import { ContextService, NotifierService } from '@app/service';
-import { CcrPaginator } from '@app/shared';
-import { FormAnswer, FormSingle } from '@app/shared/selvera-api';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+  FormSubmissionsDatasource
+} from '@app/dashboard/library/forms/services'
+import { ContextService, NotifierService } from '@app/service'
+import { CcrPaginator } from '@app/shared'
+import { FormAnswer, FormSingle } from '@app/shared/selvera-api'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-dieter-forms',
   templateUrl: './forms.component.html',
-  styleUrls: ['./forms.component.scss'],
+  styleUrls: ['./forms.component.scss']
 })
-export class DieterFormsComponent implements OnDestroy {
+export class DieterFormsComponent implements OnInit, OnDestroy {
   @Input()
   set fillForm(form: Form) {
     if (form) {
-      this.selectedForm = form;
-      this.answers = [];
-      this.selectedSubmission = undefined;
-      this.readonly = false;
-      this.fill = true;
-      this.account = this.context.account;
-      this.showcase = false;
+      this.selectedForm = form
+      this.answers = []
+      this.selectedSubmission = undefined
+      this.readonly = false
+      this.fill = true
+      this.account = this.context.account
+      this.showcase = false
     }
   }
 
-  public initialOrg: any;
-  public organization: any;
-  public organization$: EventEmitter<void> = new EventEmitter<void>();
-  showcase: boolean = true;
+  public initialOrg: any
+  public organization: any
+  public organization$: EventEmitter<void> = new EventEmitter<void>()
+  showcase = true
 
   @Output()
-  formSelected: EventEmitter<Form> = new EventEmitter<Form>();
+  formSelected: EventEmitter<Form> = new EventEmitter<Form>()
 
-  @ViewChild(CcrPaginator, { static: true }) paginator;
+  @ViewChild(CcrPaginator, { static: true }) paginator
 
-  public account: any;
-  public answers: FormAnswer[];
-  public defaultForm: Form;
-  public fill: boolean = false;
-  public form: FormGroup;
-  public forms: Form[] = [];
-  public readonly: boolean = true;
-  public source: FormSubmissionsDatasource;
-  public selectedSubmission: FormSubmission;
+  public account: any
+  public answers: FormAnswer[]
+  public defaultForm: Form
+  public fill = false
+  public form: FormGroup
+  public forms: Form[] = []
+  public readonly = true
+  public source: FormSubmissionsDatasource
+  public selectedSubmission: FormSubmission
   public set selectedForm(form: Form) {
-    this._selectedForm = form;
-    setTimeout(() => this.formSelected.emit(form));
+    this._selectedForm = form
+    setTimeout(() => this.formSelected.emit(form))
   }
 
   public get selectedForm(): Form {
-    return this._selectedForm;
+    return this._selectedForm
   }
 
-  private _formFilter: string;
+  private _formFilter: string
   set formFilter(filter: string) {
     if (typeof filter === 'string' || filter === undefined) {
-      this._formFilter = filter;
-      this.formFilterChange$.next();
-      this.paginator.firstPage();
+      this._formFilter = filter
+      this.formFilterChange$.next()
+      this.paginator.firstPage()
     }
   }
 
   get formFilter(): string {
-    return this._formFilter;
+    return this._formFilter
   }
-  private formFilterChange$: Subject<string> = new Subject<string>();
-  private _selectedForm: Form;
+  private formFilterChange$: Subject<string> = new Subject<string>()
+  private _selectedForm: Form
 
   constructor(
     private context: ContextService,
@@ -97,55 +98,55 @@ export class DieterFormsComponent implements OnDestroy {
   ngOnDestroy() {}
 
   ngOnInit() {
-    this.initialOrg = this.context.organization;
-    this.createDatasource();
+    this.initialOrg = this.context.organization
+    this.createDatasource()
     this.formDisplay.saved$
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.showSubmissions());
+      .subscribe(() => this.showSubmissions())
   }
 
   async onSelectSubmission(submission: FormSubmission) {
     try {
-      this.source.isLoading = true;
-      this.source.change$.next();
+      this.source.isLoading = true
+      this.source.change$.next()
 
       const opts: any = {
         organization: this.context.organization.id,
-        inServer: true,
-      };
+        inServer: true
+      }
 
       const responses = await Promise.all([
         this.formsDatabase
           .readForm({ id: submission.form.id, full: true })
           .pipe(map((form: FormSingle) => new Form(form, opts)))
           .toPromise(),
-        this.database.fetchAnswers({ id: submission.id }).toPromise(),
-      ]);
+        this.database.fetchAnswers({ id: submission.id }).toPromise()
+      ])
 
-      this.selectedSubmission = submission;
-      this.selectedForm = responses[0];
-      this.answers = responses[1].answers;
-      this.fill = false;
-      this.readonly = true;
-      this.account = undefined;
-      this.showcase = true;
+      this.selectedSubmission = submission
+      this.selectedForm = responses[0]
+      this.answers = responses[1].answers
+      this.fill = false
+      this.readonly = true
+      this.account = undefined
+      this.showcase = true
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     } finally {
-      this.source.isLoading = false;
-      this.source.change$.next();
+      this.source.isLoading = false
+      this.source.change$.next()
     }
   }
 
   public onOrganizationSelect($event: any): void {
     if ($event && $event.id) {
-      this.organization = $event;
-      this.organization$.next();
-      this.paginator.firstPage();
+      this.organization = $event
+      this.organization$.next()
+      this.paginator.firstPage()
     } else if ($event === undefined) {
-      this.organization = undefined;
-      this.organization$.next();
-      this.paginator.firstPage();
+      this.organization = undefined
+      this.organization$.next()
+      this.paginator.firstPage()
     }
   }
 
@@ -153,40 +154,40 @@ export class DieterFormsComponent implements OnDestroy {
     const selectedForm: Form =
       this.forms && this.forms.length
         ? this.forms.find((form: Form) => form.id === value)
-        : undefined;
-    return selectedForm ? selectedForm.name : value;
+        : undefined
+    return selectedForm ? selectedForm.name : value
   }
 
   showSubmissions() {
-    this.selectedForm = undefined;
-    delete this.answers;
-    this.source.refresh();
+    this.selectedForm = undefined
+    delete this.answers
+    this.source.refresh()
   }
 
   private createDatasource() {
-    this.source = new FormSubmissionsDatasource(this.database, this.paginator);
+    this.source = new FormSubmissionsDatasource(this.database, this.paginator)
     this.source.addRequired(this.context.account$, () => ({
       account: this.context.accountId,
-      organization: this.context.organization.id,
-    }));
+      organization: this.context.organization.id
+    }))
     this.source.addOptional(this.formFilterChange$, () => ({
-      form: this.formFilter,
-    }));
+      form: this.formFilter
+    }))
     this.source.addOptional(this.organization$, () => ({
       organization: this.organization
         ? this.organization.id
-        : this.context.organizationId,
-    }));
+        : this.context.organizationId
+    }))
   }
 
   assignForm() {
     if (this.defaultForm) {
-      this.fillForm = this.defaultForm;
+      this.fillForm = this.defaultForm
     } else {
       this.dialog
         .open(AssignFormDialog, {
           width: '80vw',
-          panelClass: 'ccr-full-dialog',
+          panelClass: 'ccr-full-dialog'
         })
         .afterClosed()
         .pipe(untilDestroyed(this))
@@ -196,10 +197,10 @@ export class DieterFormsComponent implements OnDestroy {
               .readForm({ id: $event.form, full: true })
               .pipe(untilDestroyed(this))
               .subscribe((response: FormSingle) => {
-                this.fillForm = new Form(response);
-              });
+                this.fillForm = new Form(response)
+              })
           }
-        });
+        })
     }
   }
 }

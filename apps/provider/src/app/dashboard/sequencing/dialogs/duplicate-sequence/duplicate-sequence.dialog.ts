@@ -1,37 +1,37 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { ContextService, NotifierService } from '@app/service';
+import { Component, Inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { ContextService, NotifierService } from '@app/service'
 import {
   OrganizationEntity,
-  OrganizationPermission,
-} from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils';
-import { Sequence as CcrSequenceService } from 'selvera-api';
-import { Sequence } from '../../models';
+  OrganizationPermission
+} from '@app/shared/selvera-api'
+import { _ } from '@app/shared/utils'
+import { Sequence as CcrSequenceService } from 'selvera-api'
+import { Sequence } from '../../models'
 
 export interface DuplicateSequenceDialogProps {
-  sequence: Sequence;
+  sequence: Sequence
 }
 
 interface DuplicateSequenceDialogFormProps {
-  organization: string;
-  sequence: Sequence;
+  organization: string
+  sequence: Sequence
 }
 
 @Component({
   selector: 'sequencing-duplicate-sequence-dialog',
   templateUrl: './duplicate-sequence.dialog.html',
   styleUrls: ['./duplicate-sequence.dialog.scss'],
-  host: { class: 'ccr-dialog' },
+  host: { class: 'ccr-dialog' }
 })
 export class DuplicateSequenceDialog implements OnInit {
-  public currentSequence: Sequence;
-  public form: FormGroup;
-  public initialOrg: OrganizationEntity;
-  public isLoading: boolean = false;
-  public noAdminOrg: boolean = false;
-  public requiredPermissions: Partial<OrganizationPermission> = { admin: true };
+  public currentSequence: Sequence
+  public form: FormGroup
+  public initialOrg: OrganizationEntity
+  public isLoading = false
+  public noAdminOrg = false
+  public requiredPermissions: Partial<OrganizationPermission> = { admin: true }
 
   constructor(
     private context: ContextService,
@@ -43,30 +43,30 @@ export class DuplicateSequenceDialog implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.createForm();
-    this.readData();
-    this.initialOrg = this.context.organization;
+    this.createForm()
+    this.readData()
+    this.initialOrg = this.context.organization
   }
 
   public async onDuplicate(): Promise<void> {
     try {
-      this.isLoading = true;
-      const formValue: DuplicateSequenceDialogFormProps = this.form.value;
-      this.form.disable();
+      this.isLoading = true
+      const formValue: DuplicateSequenceDialogFormProps = this.form.value
+      this.form.disable()
 
       this.sequence.createSequenceClone({
         id: formValue.sequence.id,
         organization: formValue.organization,
-        createdBy: this.context.user.id,
-      });
+        createdBy: this.context.user.id
+      })
 
-      this.dialogRef.close(true);
-      this.notifier.success(_('NOTIFY.SUCCESS.SEQUENCE_SAVED'));
+      this.dialogRef.close(true)
+      this.notifier.success(_('NOTIFY.SUCCESS.SEQUENCE_SAVED'))
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     } finally {
-      this.form.enable();
-      this.isLoading = false;
+      this.form.enable()
+      this.isLoading = false
     }
   }
 
@@ -77,41 +77,41 @@ export class DuplicateSequenceDialog implements OnInit {
           organization.id,
           'admin',
           false
-        ));
-        this.form.patchValue({ organization: organization.id });
+        ))
+        this.form.patchValue({ organization: organization.id })
       }
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
   private createForm(): void {
     this.form = this.fb.group({
       organization: ['', Validators.required],
-      sequence: ['', Validators.required],
-    });
+      sequence: ['', Validators.required]
+    })
   }
 
   private async readData(): Promise<void> {
     try {
-      this.currentSequence = this.data.sequence;
+      this.currentSequence = this.data.sequence
 
       const response = await this.sequence.getSequence({
         id: this.data.sequence.id,
         organization: this.data.sequence.organization.id,
         status: 'active',
-        full: true,
-      });
+        full: true
+      })
 
       const sequence = new Sequence(response, {
         inServer: false,
         new: true,
-        edited: true,
-      });
+        edited: true
+      })
 
-      this.form.patchValue({ name: sequence.name, sequence: sequence });
+      this.form.patchValue({ name: sequence.name, sequence: sequence })
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 }

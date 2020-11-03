@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { OrgSingleResponse } from '@app/shared/selvera-api';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { OrgSingleResponse } from '@app/shared/selvera-api'
 
 @Component({
   selector: 'app-clinic-form',
@@ -9,16 +9,16 @@ import { OrgSingleResponse } from '@app/shared/selvera-api';
   encapsulation: ViewEncapsulation.None
 })
 export class ClinicFormComponent implements OnInit {
-  @Input() clinic: OrgSingleResponse;
+  @Input() clinic: OrgSingleResponse
 
-  public colSpan: number = 2;
-  public form: FormGroup;
-  public readonly: boolean = true;
+  public colSpan = 2
+  public form: FormGroup
+  public readonly = true
 
   constructor(private fb: FormBuilder) {}
 
   public ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   private createForm(): void {
@@ -38,10 +38,12 @@ export class ClinicFormComponent implements OnInit {
         postalCode: [],
         country: []
       })
-    });
+    })
 
-    this.form.patchValue(this.clinic);
-    this.form.controls.contact.patchValue(this.clinic.contact);
-    this.form.controls.address.patchValue(this.clinic.address ? this.clinic.address : {});
+    this.form.patchValue(this.clinic)
+    this.form.controls.contact.patchValue(this.clinic.contact)
+    this.form.controls.address.patchValue(
+      this.clinic.address ? this.clinic.address : {}
+    )
   }
 }

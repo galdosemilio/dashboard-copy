@@ -1,6 +1,11 @@
-import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
-import { VaultDatasource } from '@app/dashboard/accounts';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpEventType,
+  HttpHeaders
+} from '@angular/common/http'
+import { EventEmitter, Injectable } from '@angular/core'
+import { VaultDatasource } from '@app/dashboard/accounts'
 import {
   CONTENT_TYPE_MAP,
   ContentFile,
@@ -9,35 +14,35 @@ import {
   FileExplorerContent,
   FileExplorerContentMetadata,
   QueuedContent
-} from '@app/dashboard/content/models';
-import { FileExplorerDatasource } from '@app/dashboard/content/services/file-explorer.datasource';
-import { ContextService } from '@app/service';
-import { BehaviorSubject, Observable } from 'rxjs';
+} from '@app/dashboard/content/models'
+import { FileExplorerDatasource } from '@app/dashboard/content/services/file-explorer.datasource'
+import { ContextService } from '@app/service'
+import { BehaviorSubject, Observable } from 'rxjs'
 
 @Injectable()
 export class ContentUploadService {
   public contentAdded$: EventEmitter<FileExplorerContent> = new EventEmitter<
     FileExplorerContent
-  >();
-  public organization: any;
-  public uploads: ContentUpload[] = [];
+  >()
+  public organization: any
+  public uploads: ContentUpload[] = []
   public uploads$: BehaviorSubject<ContentUpload[]> = new BehaviorSubject<
     ContentUpload[]
-  >([]);
-  public visibleUploads$: BehaviorSubject<ContentUpload[]> = new BehaviorSubject<
+  >([])
+  public visibleUploads$: BehaviorSubject<
     ContentUpload[]
-  >([]);
-  public source: FileExplorerDatasource | VaultDatasource;
+  > = new BehaviorSubject<ContentUpload[]>([])
+  public source: FileExplorerDatasource | VaultDatasource
 
-  private uploadProgressInterval: any;
-  private ticketMatureTime: number = 3000;
+  private uploadProgressInterval: any
+  private ticketMatureTime = 3000
 
   constructor(private context: ContextService, private http: HttpClient) {
     this.visibleUploads$.subscribe((uploads: ContentUpload[]) => {
       if (!uploads.length) {
-        this.uploads = [];
+        this.uploads = []
       }
-    });
+    })
   }
 
   cancelAllContentUploads(): void {
@@ -45,16 +50,16 @@ export class ContentUploadService {
       .filter((upload: ContentUpload) => upload.progress < 100 && !upload.error)
       .forEach((upload: ContentUpload) => {
         if (upload.subscription) {
-          upload.subscription.unsubscribe();
+          upload.subscription.unsubscribe()
         }
 
         if (upload.id) {
-          this.requestContentDeletion(upload.id);
+          this.requestContentDeletion(upload.id)
         }
-      });
+      })
 
-    this.uploads = [];
-    this.emitUploads();
+    this.uploads = []
+    this.emitUploads()
   }
 
   createContents(contents: QueuedContent[]): void {
@@ -63,20 +68,22 @@ export class ContentUploadService {
         number: this.uploads.length,
         contentUpload: this.getContentUploadInstance(content),
         queuedContent: content
-      };
-      this.uploads.push(ticket.contentUpload);
-      this.uploadContent(ticket);
-    });
-    this.startUploadProgressInterval();
+      }
+      this.uploads.push(ticket.contentUpload)
+      this.uploadContent(ticket)
+    })
+    this.startUploadProgressInterval()
   }
 
   hasPendingUploads(): boolean {
-    return !!this.uploads.find((up: ContentUpload) => up.progress < 100 && !up.error);
+    return !!this.uploads.find(
+      (up: ContentUpload) => up.progress < 100 && !up.error
+    )
   }
 
   removeContentUpload(index: number): void {
-    this.uploads[index].hidden = true;
-    this.emitUploads();
+    this.uploads[index].hidden = true
+    this.emitUploads()
   }
 
   requestContentCreation(
@@ -85,7 +92,7 @@ export class ContentUploadService {
   ): Promise<FileExplorerContent> {
     return new Promise<FileExplorerContent>(async (resolve, reject) => {
       try {
-        const ticketContent = ticket.contentUpload.content;
+        const ticketContent = ticket.contentUpload.content
         const content: FileExplorerContent = await this.source.createContent({
           account: this.context.accountId,
           createdBy: this.context.user.id,
@@ -99,40 +106,41 @@ export class ContentUploadService {
           metadata: ticketContent.metadata,
           parentId: ticketContent.parentId,
           parent: ticketContent.parentId || ticketContent.parent
-        });
+        })
 
         if (ticketContent.packages && ticketContent.packages.length) {
           while (ticketContent.packages.length) {
-            const p = ticketContent.packages.pop();
+            const p = ticketContent.packages.pop()
             await this.source.createContentPackage({
               id: content.id,
               package: p.id
-            });
+            })
           }
         }
 
         if (reportProgress) {
-          this.uploads[ticket.number].progress = 100;
+          this.uploads[ticket.number].progress = 100
         }
 
-        this.contentAdded$.emit(content);
-        resolve(content);
+        this.contentAdded$.emit(content)
+        resolve(content)
       } catch (error) {
         if (this.uploads[ticket.number]) {
-          this.uploads[ticket.number].error = error;
+          this.uploads[ticket.number].error = error
         }
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 
   private emitUploads(): void {
     this.visibleUploads$.next(
       this.uploads.filter(
-        (upload: ContentUpload) => !upload.hidden || (upload.hidden && !upload.mature)
+        (upload: ContentUpload) =>
+          !upload.hidden || (upload.hidden && !upload.mature)
       )
-    );
-    this.uploads$.next(this.uploads);
+    )
+    this.uploads$.next(this.uploads)
   }
 
   private getContentUploadInstance(content: QueuedContent): ContentUpload {
@@ -140,17 +148,21 @@ export class ContentUploadService {
       progress: 0,
       error: '',
       content: undefined
-    };
+    }
 
     switch (content.type.code) {
       case CONTENT_TYPE_MAP.file.code:
         contentUpload.content = new ContentFile(
           Object.assign(
             { ...content.details },
-            { file: content.file, type: content.type, parentId: content.destination.id }
+            {
+              file: content.file,
+              type: content.type,
+              parentId: content.destination.id
+            }
           )
-        );
-        break;
+        )
+        break
 
       case CONTENT_TYPE_MAP.hyperlink.code:
         contentUpload.content = new FileExplorerContent(
@@ -158,8 +170,8 @@ export class ContentUploadService {
             { ...content.details },
             { metadata: { url: content.url }, parentId: content.destination.id }
           )
-        );
-        break;
+        )
+        break
 
       case CONTENT_TYPE_MAP.youtube.code:
         contentUpload.content = new FileExplorerContent(
@@ -173,83 +185,88 @@ export class ContentUploadService {
               parentId: content.destination.id
             }
           )
-        );
-        break;
+        )
+        break
 
       default:
         contentUpload.content = new FileExplorerContent(
-          Object.assign({ ...content.details }, { parentId: content.destination.id })
-        );
-        break;
+          Object.assign(
+            { ...content.details },
+            { parentId: content.destination.id }
+          )
+        )
+        break
     }
 
-    return contentUpload;
+    return contentUpload
   }
 
   private startUploadProgressInterval(): void {
     if (this.uploadProgressInterval !== undefined) {
-      return;
+      return
     }
 
     this.uploadProgressInterval = setInterval(() => {
       const finishedUploads: ContentUpload[] = [],
-        maturableUploads: ContentUpload[] = [];
+        maturableUploads: ContentUpload[] = []
 
       this.uploads.forEach((upload: ContentUpload) => {
         if (upload.progress === 100 && !upload.error) {
-          upload.hidden = true;
-          finishedUploads.push(upload);
-          maturableUploads.push(upload);
+          upload.hidden = true
+          finishedUploads.push(upload)
+          maturableUploads.push(upload)
         } else if (upload.error) {
-          upload.mature = true;
+          upload.mature = true
         }
-      });
+      })
 
-      this.emitUploads();
+      this.emitUploads()
 
       if (maturableUploads.length) {
         setTimeout(() => {
-          maturableUploads.forEach((mU: ContentUpload) => (mU.mature = true));
-          this.emitUploads();
-        }, this.ticketMatureTime);
+          maturableUploads.forEach((mU: ContentUpload) => (mU.mature = true))
+          this.emitUploads()
+        }, this.ticketMatureTime)
       }
 
       if (finishedUploads.length >= this.uploads.length) {
-        this.stopUploadProgressInterval();
+        this.stopUploadProgressInterval()
       }
-    }, 800);
+    }, 800)
   }
 
   private stopUploadProgressInterval(): void {
     if (this.uploadProgressInterval === undefined) {
-      return;
+      return
     }
 
-    clearInterval(this.uploadProgressInterval);
-    this.uploadProgressInterval = undefined;
+    clearInterval(this.uploadProgressInterval)
+    this.uploadProgressInterval = undefined
   }
 
   private uploadContent(ticket: ContentUploadTicket): void {
     switch (ticket.queuedContent.type.code) {
       case CONTENT_TYPE_MAP.file.code:
-        this.createAsFile(ticket);
-        break;
+        this.createAsFile(ticket)
+        break
       case CONTENT_TYPE_MAP.hyperlink.code:
       case CONTENT_TYPE_MAP.youtube.code:
-        this.createAsHyperlink(ticket);
-        break;
+        this.createAsHyperlink(ticket)
+        break
       default:
-        this.createAsDefault(ticket);
-        break;
+        this.createAsDefault(ticket)
+        break
     }
   }
 
   private async createAsFile(ticket: ContentUploadTicket): Promise<void> {
     try {
-      const response: FileExplorerContentMetadata = await this.source.getUploadUrl({
-          filename: ticket.contentUpload.content.name
-        }),
-        paramIndex = response.url.indexOf('?');
+      const response: FileExplorerContentMetadata = await this.source.getUploadUrl(
+          {
+            filename: ticket.contentUpload.content.name
+          }
+        ),
+        paramIndex = response.url.indexOf('?')
 
       ticket.contentUpload.content.metadata = Object.assign({}, response, {
         url: response.url.substring(
@@ -257,9 +274,11 @@ export class ContentUploadService {
           paramIndex > -1 ? paramIndex : response.url.length
         ),
         size: ticket.queuedContent.file.size
-      });
+      })
 
-      ticket.contentUpload.id = (await this.requestContentCreation(ticket, false)).id;
+      ticket.contentUpload.id = (
+        await this.requestContentCreation(ticket, false)
+      ).id
       ticket.contentUpload.subscription = this.requestFileUpload({
         body: ticket.queuedContent.file,
         mimeType: response.mimeType,
@@ -267,52 +286,53 @@ export class ContentUploadService {
       }).subscribe((event: any) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
-            this.uploads[ticket.number].progress = (event.loaded * 100) / event.total;
-            break;
+            this.uploads[ticket.number].progress =
+              (event.loaded * 100) / event.total
+            break
           case HttpEventType.ResponseHeader:
             if (!event.ok) {
-              throw new Error('Upload failed');
+              throw new Error('Upload failed')
             }
-            break;
+            break
         }
-      });
+      })
     } catch (error) {
       if (ticket.contentUpload.id) {
-        this.requestContentDeletion(ticket.contentUpload.id);
+        this.requestContentDeletion(ticket.contentUpload.id)
       }
-      this.uploads[ticket.number].error = error;
+      this.uploads[ticket.number].error = error
     }
   }
 
   private createAsHyperlink(ticket: ContentUploadTicket): void {
-    const ticketContent = ticket.contentUpload.content;
-    ticketContent.type = CONTENT_TYPE_MAP.file;
+    const ticketContent = ticket.contentUpload.content
+    ticketContent.type = CONTENT_TYPE_MAP.file
     ticketContent.metadata = Object.assign(
       { ...ticketContent.metadata },
       { mimeType: 'text/html' }
-    );
-    ticket.contentUpload.content = ticketContent;
+    )
+    ticket.contentUpload.content = ticketContent
     this.requestContentCreation(ticket).catch(
       (error) => (this.uploads[ticket.number].error = error)
-    );
+    )
   }
 
   private createAsDefault(ticket: ContentUploadTicket): void {
-    this.requestContentCreation(ticket);
+    this.requestContentCreation(ticket)
   }
 
   private requestContentDeletion(id: string): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       try {
-        await this.source.deleteContent(id);
+        await this.source.deleteContent(id)
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 
   private requestFileUpload(args: any): Observable<HttpEvent<any>> {
-    const headers = new HttpHeaders().append('Content-Type', args.mimeType);
+    const headers = new HttpHeaders().append('Content-Type', args.mimeType)
 
     return this.http.request('PUT', args.uploadUrl, {
       body: args.body,
@@ -320,6 +340,6 @@ export class ContentUploadService {
       reportProgress: true,
       responseType: 'text',
       observe: 'events'
-    });
+    })
   }
 }

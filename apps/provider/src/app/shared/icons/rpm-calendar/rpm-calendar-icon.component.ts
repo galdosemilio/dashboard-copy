@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'ccr-rpm-calendar-icon',
@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class RPMCalendarIconComponent {
   @Input()
-  text: string = '';
+  text = ''
   @Input()
-  size: number = 24;
+  size = 24
 }

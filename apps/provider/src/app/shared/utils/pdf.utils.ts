@@ -1,59 +1,64 @@
-import { BodyMeasurement } from '@app/dashboard/accounts/dieters/models/measurement/bodyMeasurement';
-import * as moment from 'moment';
-import { groupBy } from './generic.utils';
+import { BodyMeasurement } from '@app/dashboard/accounts/dieters/models/measurement/bodyMeasurement'
+import * as moment from 'moment'
+import { groupBy } from './generic.utils'
 
 export interface DieterSummaryElement {
-  beginning: number;
-  begginingMeasurement?: BodyMeasurement;
-  beginningString?: string;
-  changeThisWeek: number;
-  changeThisWeekString?: string;
-  changeThisWeekCellColor?: string;
-  cumulativeChange: number;
-  cumulativeChangeString?: string;
-  cumulativeChangeCellColor?: string;
-  currentWeek: number;
-  currentWeekMeasurement?: BodyMeasurement;
-  currentWeekString?: string;
-  lastWeek: number;
-  lastWeekMeasurement?: BodyMeasurement;
-  lastWeekString?: string;
+  beginning: number
+  begginingMeasurement?: BodyMeasurement
+  beginningString?: string
+  changeThisWeek: number
+  changeThisWeekString?: string
+  changeThisWeekCellColor?: string
+  cumulativeChange: number
+  cumulativeChangeString?: string
+  cumulativeChangeCellColor?: string
+  currentWeek: number
+  currentWeekMeasurement?: BodyMeasurement
+  currentWeekString?: string
+  lastWeek: number
+  lastWeekMeasurement?: BodyMeasurement
+  lastWeekString?: string
 }
 
 export interface GenerateCSVArgs {
-  content: string;
-  filename: string;
+  content: string
+  filename: string
 }
 
 export function calculateAverageWeeklyLoss(values: any[]): number {
-  const valuesCopy = values.map((val) => ({ ...val }));
-  const groupedValues = groupBy(valuesCopy, (value: any) => moment(value.date).week());
+  const valuesCopy = values.map((val) => ({ ...val }))
+  const groupedValues = groupBy(valuesCopy, (value: any) =>
+    moment(value.date).week()
+  )
 
-  let average: number = 0;
+  let average = 0
 
-  const weekAmount = groupedValues.length;
+  const weekAmount = groupedValues.length
 
   groupedValues.forEach((week) => {
     const weight = calculateElementRow(
       { first: week[0], last: week[week.length - 1] },
       'weight'
-    );
-    average += weight.change;
-  });
+    )
+    average += weight.change
+  })
 
-  average = average / weekAmount;
+  average = average / weekAmount
 
-  return isNaN(+average) ? 0 : +average.toFixed(2);
+  return isNaN(+average) ? 0 : +average.toFixed(2)
 }
 
-export function calculateElementRow(meas: { first: any; last: any }, key: string) {
-  const elementChange = +meas.last[key] - +meas.first[key];
+export function calculateElementRow(
+  meas: { first: any; last: any },
+  key: string
+) {
+  const elementChange = +meas.last[key] - +meas.first[key]
 
   return {
     start: +(meas.first[key] ? meas.first[key] : 0).toFixed(2),
     current: +(meas.last[key] ? meas.last[key] : 0).toFixed(2),
     change: +(elementChange ? elementChange : 0).toFixed(2)
-  };
+  }
 }
 
 export function calculateProgressElementRow(
@@ -69,44 +74,54 @@ export function calculateProgressElementRow(
     cumulativeChange: 0,
     currentWeek: 0,
     lastWeek: 0
-  };
-  const lastWeekIndex = weekIndex - 1;
-  const firstMeasurement = measurements.find((meas) => meas[key]);
+  }
+  const lastWeekIndex = weekIndex - 1
+  const firstMeasurement = measurements.find((meas) => meas[key])
   const currentMeasurement = measurements
     .slice()
     .reverse()
     .find((meas) => {
-      const measDate = moment(meas.date);
-      return meas[key] && measDate.week() === weekIndex && measDate.year() === todayYear;
-    });
-  const groupedMeasurements = groupBy(measurements, (meas) => moment(meas.date).week());
+      const measDate = moment(meas.date)
+      return (
+        meas[key] &&
+        measDate.week() === weekIndex &&
+        measDate.year() === todayYear
+      )
+    })
+  const groupedMeasurements = groupBy(measurements, (meas) =>
+    moment(meas.date).week()
+  )
   const mostRecentMeasurement = measurements
     .slice()
     .reverse()
-    .find((meas) => meas[key]);
+    .find((meas) => meas[key])
   let lastWeekMeasurement = groupedMeasurements.find((group) => {
     const pertinentGroupElement = group.find(
       (el) => moment(el.date).year() === todayYear
-    );
+    )
     if (pertinentGroupElement) {
-      const groupDate = moment(pertinentGroupElement.date);
-      return groupDate.week() === lastWeekIndex && groupDate.year() === todayYear;
+      const groupDate = moment(pertinentGroupElement.date)
+      return (
+        groupDate.week() === lastWeekIndex && groupDate.year() === todayYear
+      )
     } else {
-      return false;
+      return false
     }
-  });
+  })
 
   if (lastWeekMeasurement && lastWeekMeasurement.length) {
-    lastWeekMeasurement = lastWeekMeasurement.reverse().find((meas) => meas[key]);
+    lastWeekMeasurement = lastWeekMeasurement
+      .reverse()
+      .find((meas) => meas[key])
   }
 
-  element.beginning = firstMeasurement ? firstMeasurement[key] || 0 : null;
-  element.lastWeek = lastWeekMeasurement ? lastWeekMeasurement[key] : null;
-  element.currentWeek = currentMeasurement ? currentMeasurement[key] || 0 : null;
+  element.beginning = firstMeasurement ? firstMeasurement[key] || 0 : null
+  element.lastWeek = lastWeekMeasurement ? lastWeekMeasurement[key] : null
+  element.currentWeek = currentMeasurement ? currentMeasurement[key] || 0 : null
   element.changeThisWeek =
     element.currentWeek && element.lastWeek
       ? element.currentWeek - element.lastWeek
-      : null;
+      : null
 
   element.cumulativeChange = element.beginning
     ? element.currentWeek
@@ -114,19 +129,24 @@ export function calculateProgressElementRow(
       : mostRecentMeasurement
       ? (mostRecentMeasurement[key] || 0) - element.beginning
       : null
-    : null;
+    : null
 
-  element.begginingMeasurement = firstMeasurement || null;
-  element.currentWeekMeasurement = currentMeasurement || null;
-  element.lastWeekMeasurement = lastWeekMeasurement || null;
+  element.begginingMeasurement = firstMeasurement || null
+  element.currentWeekMeasurement = currentMeasurement || null
+  element.lastWeekMeasurement = lastWeekMeasurement || null
 
   element = {
     ...element,
     beginningString:
       element.beginning !== null ? element.beginning.toFixed(decimals) : '-',
     changeThisWeekString:
-      element.changeThisWeek !== null ? element.changeThisWeek.toFixed(decimals) : '-',
-    changeThisWeekCellColor: getProgressPDFCellColor(element.changeThisWeek || 0, key),
+      element.changeThisWeek !== null
+        ? element.changeThisWeek.toFixed(decimals)
+        : '-',
+    changeThisWeekCellColor: getProgressPDFCellColor(
+      element.changeThisWeek || 0,
+      key
+    ),
     cumulativeChangeString:
       element.cumulativeChange !== null
         ? element.cumulativeChange.toFixed(decimals)
@@ -136,42 +156,45 @@ export function calculateProgressElementRow(
       key
     ),
     currentWeekString:
-      element.currentWeek !== null ? element.currentWeek.toFixed(decimals) : '-',
-    lastWeekString: element.lastWeek !== null ? element.lastWeek.toFixed(decimals) : '-'
-  };
+      element.currentWeek !== null
+        ? element.currentWeek.toFixed(decimals)
+        : '-',
+    lastWeekString:
+      element.lastWeek !== null ? element.lastWeek.toFixed(decimals) : '-'
+  }
 
-  return element;
+  return element
 }
 
 export function imageToDataURL(img: HTMLImageElement): string {
-  const canvas = document.createElement('canvas');
-  canvas.width = img.width;
-  canvas.height = img.height;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0);
-  const dataURL = canvas.toDataURL('image/png');
-  return dataURL;
+  const canvas = document.createElement('canvas')
+  canvas.width = img.width
+  canvas.height = img.height
+  const ctx = canvas.getContext('2d')
+  ctx.drawImage(img, 0, 0)
+  const dataURL = canvas.toDataURL('image/png')
+  return dataURL
 }
 
 export function generateCSV(args: GenerateCSVArgs): void {
-  const csv = args.content;
-  const filename = args.filename.replace(/\W/gi, '_');
+  const csv = args.content
+  const filename = args.filename.replace(/\W/gi, '_')
 
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.setAttribute('visibility', 'hidden');
-  link.download = `${filename}.csv`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+  const link = document.createElement('a')
+  link.href = URL.createObjectURL(blob)
+  link.setAttribute('visibility', 'hidden')
+  link.download = `${filename}.csv`
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
 }
 
 export function getProgressPDFCellColor(value: number, key: string): string {
-  let color: string = 'transparent';
+  let color = 'transparent'
 
   if (value === 0) {
-    return '#edd51c';
+    return '#edd51c'
   }
 
   switch (key) {
@@ -190,13 +213,13 @@ export function getProgressPDFCellColor(value: number, key: string): string {
     case 'visceralFatPercentage':
     case 'visceralAdiposeTissue':
     case 'visceralFatTanita':
-      color = value > 0 ? '#de123e' : '#0bde51';
-      break;
+      color = value > 0 ? '#de123e' : '#0bde51'
+      break
 
     case 'leanMass':
-      color = value > 0 ? '#0bde51' : '#de123e';
-      break;
+      color = value > 0 ? '#0bde51' : '#de123e'
+      break
   }
 
-  return color;
+  return color
 }
