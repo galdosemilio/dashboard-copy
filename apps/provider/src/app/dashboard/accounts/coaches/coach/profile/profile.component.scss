@@ -1,0 +1,9 @@
+// while there's no navigation, remove spacing:
+:host,
+form {
+  margin-top: 0 !important;
+}
+
+.button-container {
+  padding: 0 50px;
+}

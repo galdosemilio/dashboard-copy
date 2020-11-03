@@ -1,0 +1,49 @@
+@import 'variables';
+
+div.assoc-container {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  padding: 0 20px 0 24px;
+}
+
+mat-form-field {
+  margin-top: 0.9em;
+}
+
+mat-spinner {
+  margin: 20px 0;
+}
+
+.ccr-table {
+  mat-table {
+    .mat-column-actions {
+      min-width: 135px !important;
+    }
+
+    .mat-column-organization {
+      min-width: 150px !important;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.mat-button {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.mat-icon-button {
+  &.disabled {
+    mat-icon {
+      color: mat-color($ccr-background, selected-disabled-button) !important;
+      cursor: default;
+    }
+  }
+}

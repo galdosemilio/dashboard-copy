@@ -1,0 +1,89 @@
+@import '~@coachcare/ccr-datepicker/theming';
+@import 'shared/directed-styles';
+
+// material mixins to generate the styles
+// using the stuff made on variables/colors.scss
+
+@include mat-core();
+
+@include angular-material-theme($ccr-theme);
+
+.mat-row {
+  padding: 0 15px;
+}
+
+mat-cell:first-child {
+  @include horizontal-padding-left(0 !important);
+}
+mat-footer-cell:first-child,
+mat-header-cell:first-child {
+  @include horizontal-padding-left(15px !important);
+}
+
+mat-cell:last-child {
+  @include horizontal-padding-right(0 !important);
+}
+mat-footer-cell:last-child,
+mat-header-cell:last-child {
+  @include horizontal-padding-right(15px !important);
+}
+
+mat-footer-row::after,
+mat-header-row::after,
+mat-row::after {
+  min-height: 0px !important;
+}
+
+.mat-tab-body-wrapper {
+  padding: 15px 0 0;
+}
+.mat-tab-body-content > .ng-star-inserted {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+tr.mat-header-row {
+  height: 42px !important;
+  line-height: 16px;
+}
+tr.mat-footer-row,
+tr.mat-row {
+  height: 42px !important;
+}
+
+td.mat-cell {
+  white-space: nowrap;
+}
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  min-width: 55px;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top: 3px !important;
+}
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  @include horizontal-padding-left(15px !important);
+  min-width: 100px;
+  width: 100px;
+}
+
+mat-row,
+mat-header-row,
+mat-footer-row,
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  border-bottom-color: transparent;
+}
+
+.mat-calendar-body-disabled:not(.mat-calendar-body-active)
+  > .mat-calendar-body-cell-content {
+  color: mat-color($ccr-foreground, disabled-text);
+}
+
+@include mat-datepicker-theme($ccr-theme);

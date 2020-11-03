@@ -1,0 +1,38 @@
+<div>
+    <div [hidden]="mode !== 'select'">
+        <mat-form-field class="ccr-filter" floatLabel="never" fxFlex="grow">
+            <mat-select
+            [(ngModel)]="setOrgId"
+            [disabled]="readonly"
+            [placeholder]="label | translate"
+            (selectionChange)="onOrgSelect($event)">
+                <mat-option *ngIf="showEmptyOption" [value]="''">{{ 'BOARD.NO_ORGANIZATIONS' | translate }}</mat-option>
+                <mat-option *ngFor="let org of organizations" [value]="org.organization.id">{{ org.organization.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div [hidden]="mode !== 'searchbar'" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="grow">
+            <mat-form-field fxFlex="grow">
+                <input
+                [formControl]="searchCtrl"
+                [matAutocomplete]="orgAutocomp"
+                [placeholder]="label | translate"
+                matInput type="text">
+            </mat-form-field>
+
+            <mat-autocomplete
+            #orgAutocomp="matAutocomplete"
+            [displayWith]="searchBarDisplayWith.bind(this)"
+            (optionSelected)="onOrgAutocompleteSelect($event)">
+                <mat-option *ngFor="let org of organizations" [value]="org.organization.id">{{ org.organization.name }}</mat-option>
+            </mat-autocomplete>
+        </div>
+
+        <mat-icon *ngIf="allowSearchbarReset && orgSelected"
+        class="remove"
+        [matTooltip]="'LIBRARY.FORMS.RESET_FORM_SEARCHBAR' | translate"
+        (click)="resetSearchBar()">cancel</mat-icon>
+    </div>
+</div>

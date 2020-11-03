@@ -1,0 +1,30 @@
+@import 'variables';
+
+.note-container {
+  width: 100%;
+}
+
+.item {
+  padding: 15px 0 10px 0 !important;
+}
+
+.item-body {
+  color: mat-color($ccr-foreground, text) !important;
+  padding-left: 10px !important;
+}
+
+.item-info {
+  margin-top: 10px;
+  text-align: right;
+  span {
+    color: mat-color($ccr-foreground, table-actions);
+    display: block !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+  }
+}
+
+mat-icon {
+  margin-left: 4px !important;
+  margin-right: 0 !important;
+}

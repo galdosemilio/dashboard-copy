@@ -1,0 +1,36 @@
+@mixin ccr-section-profile-dashboard($theme, $config) {
+  $primary: map-get($theme, primary);
+
+  .ccr-dashboard {
+    margin: 5px 0 20px;
+    text-transform: uppercase;
+
+    .stats {
+      .metric-arrow > img {
+        height: 30px;
+      }
+      .metric-number {
+        color: var(--primary, mat-color($primary));
+        font-size: 40px;
+        line-height: 36px;
+      }
+      .metric-text {
+        padding-left: 10px;
+      }
+    }
+
+    .stats-big {
+      .metric-text {
+        width: 74px;
+      }
+      .metric-arrow > img {
+        height: 55px;
+      }
+      .metric-number {
+        color: var(--primary, mat-color($primary));
+        font-size: 74px;
+        line-height: 70px;
+      }
+    }
+  }
+}

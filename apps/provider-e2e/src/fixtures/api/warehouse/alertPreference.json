@@ -1,0 +1,108 @@
+{
+  "data": [
+    {
+      "id": "543",
+      "type": {
+        "id": "3",
+        "code": "weight-threshold",
+        "description": "Weight threshold alert"
+      },
+      "organization": {
+        "id": "30",
+        "preference": {
+          "options": {
+            "daySpan": 48,
+            "startDate": "2020-02-13T00:00:00.000Z",
+            "threshold": { "gain": 3175, "loss": 0 },
+            "triggerPeriod": "daily",
+            "requireDailyMeasurement": false
+          },
+          "isActive": true
+        }
+      },
+      "packages": []
+    },
+    {
+      "id": "559",
+      "type": {
+        "id": "1",
+        "code": "weight-regained",
+        "description": "Weight regained alert"
+      },
+      "organization": {
+        "id": "30",
+        "preference": { "options": { "threshold": 4536 }, "isActive": true }
+      },
+      "packages": []
+    },
+    {
+      "id": "603",
+      "type": {
+        "id": "1",
+        "code": "weight-regained",
+        "description": "Weight regained alert"
+      },
+      "organization": {
+        "id": "30",
+        "preference": {
+          "options": { "threshold": 1361, "regainBase": "all-time" },
+          "isActive": true
+        }
+      },
+      "packages": []
+    },
+    {
+      "id": "611",
+      "type": {
+        "id": "1",
+        "code": "weight-regained",
+        "description": "Weight regained alert"
+      },
+      "organization": {
+        "id": "30",
+        "preference": {
+          "options": { "threshold": 1361, "regainBase": "all-time" },
+          "isActive": true
+        }
+      },
+      "packages": []
+    },
+    {
+      "id": "612",
+      "type": { "id": "2", "code": "inactivity", "description": "Inactivity alert" },
+      "organization": {
+        "id": "30",
+        "preference": {
+          "options": { "meal-logging": { "period": "9 days" } },
+          "isActive": true
+        }
+      },
+      "packages": []
+    },
+    {
+      "id": "613",
+      "type": { "id": "2", "code": "inactivity", "description": "Inactivity alert" },
+      "organization": {
+        "id": "30",
+        "preference": {
+          "options": { "tracker-syncing": { "period": "10 days" } },
+          "isActive": true
+        }
+      },
+      "packages": []
+    },
+    {
+      "id": "614",
+      "type": { "id": "2", "code": "inactivity", "description": "Inactivity alert" },
+      "organization": {
+        "id": "30",
+        "preference": {
+          "options": { "weight-logging": { "period": "3 days" } },
+          "isActive": true
+        }
+      },
+      "packages": []
+    }
+  ],
+  "pagination": {}
+}

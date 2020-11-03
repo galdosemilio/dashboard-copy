@@ -1,0 +1,23 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutGap="2%">
+    <div>
+        <label>{{ 'LIBRARY.CONTENT.FILE' | translate }}</label><br>
+        <input #file type="file" (change)="updateFile()" [multiple]="false">
+    </div>
+
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                        {{ 'LIBRARY.CONTENT.ALLOWED_FILE_TYPES' | translate }}: &nbsp;
+                        <span *ngFor="let type of supportedFileTypes; let last = last;">{{ type.extension }}<span *ngIf="!last">,&nbsp;</span></span>
+                </mat-expansion-panel-header>
+                <p>{{ 'LIBRARY.CONTENT.FOLLOWING_FILE_TYPES' | translate }}:</p>
+                <p *ngFor="let types of groupedFileTypes | keyvalue">
+                    <span class="file-type-name">{{ fileTypes[types.value[0]].name | translate }}</span> (.{{ types.value.join(', .') }})
+                </p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <app-content-content-form bindForm="details" [details]="details" [mode]="mode"></app-content-content-form>
+</div>

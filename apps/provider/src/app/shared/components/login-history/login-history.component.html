@@ -1,0 +1,45 @@
+<p *ngIf="patientMode">
+    {{ 'GLOBAL.LOGIN_HISTORY_DESCRIPTION' | translate:{clinicName: organization.name, clinicId: organization.id} }}
+</p>
+
+<ccr-datasource-overlay [source]="source">
+    <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
+        <ccr-paginator fxFlex="initial" #paginator
+            [length]="source.total"
+            [pageIndex]="source.pageIndex"
+            [pageSize]="source.pageSize"
+        ></ccr-paginator>
+    </div>
+
+
+    <div class="ccr-table">
+        <mat-table [dataSource]="source" class="ccr-edit-table">
+            <ng-container cdkColumnDef="createdAt">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clickable">
+                    <span>{{ 'GLOBAL.DATE' | translate }}</span>
+                    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="3px">
+                        <span>{{ row.createdAt | amDateFormat:'dddd MMM D, YYYY' }}</span>
+                        <span>{{ row.createdAt | amDateFormat:'h:mma' }}</span>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="organization">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CLINIC' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" class="clickable">
+                    <span>{{ 'BOARD.CLINIC' | translate }}</span>
+                    <span *ngIf="row.organization; else empty">{{ row.organization.name }} (ID {{ row.organization.id }})</span>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="shownColumns"></mat-header-row>
+            <mat-row fxLayoutWrap
+              *cdkRowDef="let row; columns: shownColumns; let even = even; let odd = odd"
+              [ngClass]="{ 'row-even': even, 'row-odd': odd }" class="clickable"
+            ></mat-row>
+        </mat-table>
+    </div>
+</ccr-datasource-overlay>
+
+<ng-template #empty>-</ng-template>

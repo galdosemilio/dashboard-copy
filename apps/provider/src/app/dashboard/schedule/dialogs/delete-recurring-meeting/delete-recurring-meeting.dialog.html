@@ -1,0 +1,42 @@
+<div matDialogTitle>
+    <div>
+        <span>{{ 'BOARD.DELETE_MEETING' | translate }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div
+    [formGroup]="form"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxLayoutGap="20px">
+        <p [innerHTML]="'BOARD.SCHEDULE_DELETE_CONFIRM' | translate" class="notice"></p>
+        <mat-radio-group formControlName="deleteMode" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+            <mat-radio-button data-cy="schedule-delete-this-meeting" value="single">{{'BOARD.SCHEDULE_DELETE_THIS_MEETING' | translate}}</mat-radio-button>
+            <mat-radio-button data-cy="schedule-delete-this-and-future" value="recurring">{{'BOARD.SCHEDULE_DELETE_THIS_AND_FUTURE' | translate}}</mat-radio-button>
+            <mat-radio-button data-cy="schedule-delete-after" value="recurringAfter">
+                {{ 'BOARD.SCHEDULE_DELETE_AFTER' | translate }}
+            </mat-radio-button>
+        </mat-radio-group>
+        <ccr-date-input [min]="today" [placeholder]="'GLOBAL.DATE' | translate" formControlName="after"></ccr-date-input>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div>
+        <button
+        (click)="onSubmit()"
+        [disabled]="form.invalid"
+        mat-button
+        class="ccr-button"
+        color="primary">
+            {{ 'GLOBAL.DELETE' | translate }}
+        </button>
+        <button mat-button matDialogClose class="ccr-button">
+            {{ 'GLOBAL.CANCEL' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>

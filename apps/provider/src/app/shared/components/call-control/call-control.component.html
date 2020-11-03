@@ -1,0 +1,43 @@
+
+<div
+*ngIf="callState?.subaccountId !== '' && callState.isSupported && callState.conferencingEnabled"
+[matTooltip]="toolTipMessage"
+fxLayout="row"
+fxLayoutAlign="center center"
+fxLayoutGap="5px"
+matTooltipPosition="above">
+  <button
+  *ngIf="mode === 0"
+  [class.active]="true"
+  [disabled]="callState?.isCallStarted || !callState?.hasAudioDeviceAccess"
+  [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
+  (click)="billableServices.length ? undefined : onClick()"
+  class="ccr-icon-button"
+  color="primary"
+  mat-button
+  type="button">
+    <mat-icon>phone</mat-icon>
+    {{ 'BOARD.CALL_USER' | translate }}
+  </button>
+  <div
+  *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess"
+  [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
+  (click)="billableServices.length ? undefined : onClick()">
+    <mat-icon class="min">phone</mat-icon>
+  </div>
+  <ccr-popup-description
+  *ngIf="mode === 0 && !callState?.hasAudioDeviceAccess"
+  [title]="'CALL.MICROPHONE_ACCESS_BLOCKED' | translate"
+  [description]="'CALL.MICROPHONE_ACCESS_BLOCKED_HELPTEXT' | translate"
+  [showIntro]="false">
+  </ccr-popup-description>
+
+  <mat-menu #menu="matMenu" class="user-controls" [overlapTrigger]="false" xPosition="before">
+    <button mat-menu-item [disabled]="true">{{ 'CALL.BILLABLE_SERVICE_MENU_HEADER' | translate }}</button>
+    <button *ngFor="let billServ of billableServices" (click)="onClick(billServ)" mat-menu-item>
+      <span>{{ billServ.displayName | translate }}</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #emptyMenu="matMenu"></mat-menu>
+</div>

@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+  <app-coach-form #coach bindForm="coach"
+    [coachId]="coachId"
+    [styled]="true"
+  ></app-coach-form>
+
+  <div class="button-container" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <button class="ccr-icon-button" color="primary" mat-button>
+      <mat-icon>check</mat-icon> {{'BOARD.COACH_UPDATE' | translate}}
+    </button>
+
+    <button (click)="resetPassword()" class="ccr-icon-button" color="primary" mat-button type="button">
+      <mat-icon>lock</mat-icon> {{ 'BOARD.SEND_PASSWORD_RESET' | translate }}
+    </button>
+  </div>
+</form>
+
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading || coach.isLoading">
+  <mat-spinner></mat-spinner>
+</div>

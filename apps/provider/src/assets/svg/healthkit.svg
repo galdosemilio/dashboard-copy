@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512px" height="param(size) 512" x="0px" y="0px" enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+    <g>
+        <g>
+            <g>
+                <g>
+                    <g>
+                        <defs>
+                            <filter id="Adobe_OpacityMaskFilter" width="237" height="209" x="193" y="88" filterUnits="userSpaceOnUse">
+                                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                            </filter>
+                        </defs>
+                        <mask id="mask-2" width="237" height="209" x="193" y="88" maskUnits="userSpaceOnUse">
+                            <g filter="url(#Adobe_OpacityMaskFilter)">
+                                <path id="path-1" fill="#FFFFFF" d="M174,0C117.333,0,99.2,0,74,9C43.435,19.2,19.2,43.435,9,74c-9,25.2-9,43.333-9,100
+								c0,0,0,163.92,0,164c0,56.667,0,74.8,9,100c10.22,30.565,34.435,54.8,65,65c25.2,9,43.333,9,100,9h164c56.667,0,74.8,0,100-9
+								c30.565-10.2,54.8-34.435,65-65c9-25.2,9-43.333,9-100V174c0-56.667,0-74.8-9-100c-10.2-30.267-34.776-54.8-65-65
+								c-25.243-9-43.333-9-100-9C367.787,0,174,0,174,0z"/>
+                            </g>
+                        </mask>
+                        <linearGradient id="HeatShape_1_" x1="-277.3228" x2="-277.3228" y1="0.4737" y2="1.4737" gradientTransform="matrix(237 0 0 209 66037 -11)" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" style="stop-color:#FF58A7"/>
+                            <stop offset="1" style="stop-color:#FF2010"/>
+                        </linearGradient>
+                        <path id="HeatShape" fill="url(#HeatShape_1_)" d="M311,297c-10.072,0-118-57.152-118-142
+						c0-28.904,20.455-67,63-67c35.583,0,52.478,19.474,56,23c2.522-3.526,19.417-23,55-23c42.545,0,63,38.096,63,67
+						C430,239.848,321.072,297,311,297z" mask="url(#mask-2)"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+    <path fill="#D5D5D5" d="M412,8c24.464,0,47.536,9.6,64.968,27.032C494.4,52.464,504,75.536,504,100v312
+	c0,24.464-9.6,47.536-27.032,64.968C459.536,494.4,436.464,504,412,504H100c-24.464,0-47.536-9.6-64.968-27.032
+	C17.6,459.536,8,436.464,8,412V100c0-24.464,9.6-47.536,27.032-64.968C52.464,17.6,75.536,8,100,8H412 M412,0H100C45,0,0,45,0,100
+	v312c0,55,45,100,100,100h312c55,0,100-45,100-100V100C512,45,467,0,412,0L412,0z"/>
+</svg>

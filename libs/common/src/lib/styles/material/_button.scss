@@ -1,0 +1,93 @@
+// Applies a focus style to an mat-button element for each of the supported palettes.
+@mixin _ccr-button-focus-overlay-color($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  &.mat-primary .mat-button-focus-overlay {
+    background-color: var(--primary-a12, mat-color($primary, 0.12));
+  }
+
+  &.mat-accent .mat-button-focus-overlay {
+    background-color: var(--accent-a12, mat-color($accent, 0.12));
+  }
+
+  &.mat-warn .mat-button-focus-overlay {
+    background-color: var(--warn-a12, mat-color($warn, 0.12));
+  }
+
+  &[disabled] .mat-button-focus-overlay {
+    background-color: transparent;
+  }
+}
+
+@mixin _ccr-button-ripple-color($theme, $hue, $opacity: 0.1) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  &.mat-primary .mat-button-ripple {
+    @if $hue == 'default' {
+      background-color: var(--primary-a12, mat-color($primary, $hue, $opacity));
+    } @else {
+      background-color: var(--primary-contrast-a12, mat-color($primary, $hue, $opacity));
+    }
+  }
+
+  &.mat-accent .mat-button-ripple {
+    @if $hue == 'default' {
+      background-color: var(--accent-a12, mat-color($accent, $hue, $opacity));
+    } @else {
+      background-color: var(--accent-contrast-a12, mat-color($accent, $hue, $opacity));
+    }
+  }
+
+  &.mat-warn .mat-button-ripple {
+    @if $hue == 'default' {
+      background-color: var(--warn-a12, mat-color($warn, $hue, $opacity));
+    } @else {
+      background-color: var(--warn-contrast-a12, mat-color($warn, $hue, $opacity));
+    }
+  }
+}
+
+// Applies a property to an mat-button element for each of the supported palettes.
+@mixin _ccr-button-theme-property($theme, $property, $hue) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  &.mat-primary {
+    @if $hue == 'default' {
+      #{$property}: var(--primary, mat-color($primary, $hue));
+    } @else {
+      #{$property}: var(--primary-contrast, mat-color($primary, $hue));
+    }
+  }
+  &.mat-accent {
+    @if $hue == 'default' {
+      #{$property}: var(--accent, mat-color($accent, $hue));
+    } @else {
+      #{$property}: var(--accent-contrast, mat-color($accent, $hue));
+    }
+  }
+  &.mat-warn {
+    @if $hue == 'default' {
+      #{$property}: var(--warn, mat-color($warn, $hue));
+    } @else {
+      #{$property}: var(--warn-contrast, mat-color($warn, $hue));
+    }
+  }
+
+  &.mat-primary,
+  &.mat-accent,
+  &.mat-warn,
+  &[disabled] {
+    &[disabled] {
+      $palette: if($property == 'color', $foreground, $background);
+      #{$property}: mat-color($palette, disabled-button);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div [formGroup]="form" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2%">
+    <div fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="center start" [ngSwitch]="type" fxFlex>
+        <mat-form-field *ngSwitchCase="'default'">
+            <input matInput type="text" formControlName="value" (keydown)="keyDown($event)">
+        </mat-form-field>
+
+        <mat-form-field *ngSwitchCase="'availability'" class="availability-select">
+            <mat-select formControlName="value" (keydown)="keyDown($event)">
+                <mat-option [value]="true">{{ 'LIBRARY.CONTENT.PUBLIC' | translate }}</mat-option>
+                <mat-option [value]="false">{{ 'LIBRARY.CONTENT.PRIVATE' | translate }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxFlex>
+        <mat-icon (click)="save.emit()" [matTooltip]="'LIBRARY.CONTENT.SAVE_CHANGES' | translate">check_circle</mat-icon>
+        <mat-icon (click)="cancel.emit()" [matTooltip]="'LIBRARY.CONTENT.DISCARD_CHANGES' | translate">cancel</mat-icon>
+    </div>
+</div>

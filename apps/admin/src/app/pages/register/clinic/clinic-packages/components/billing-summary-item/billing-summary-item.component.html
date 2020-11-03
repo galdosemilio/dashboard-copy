@@ -1,0 +1,29 @@
+<div
+class="item"
+fxLayout="row"
+fxLayout.xs="column"
+fxLayoutAlign="space-between start"
+fxLayoutAlign.xs="center stretch"
+fxLayoutGap.xs="10px">
+  <div fxFlex="39%" fxLayout="column" fxLayoutAlign="start stretch">
+    <p class="item-name">
+      {{ item?.name | translate }}
+    </p>
+  </div>
+
+  <div fxFlex>
+    <div *ngIf="billingPeriod?.price">
+      <p class="item-price">{{ 'REGISTER.CLINIC.AMOUNT_PER_MONTH' | translate:{amount: billingPeriod?.price} }}</p>
+      <p *ngIf="billingPeriod?.billingPeriod === 'monthly'" class="item-next-billing">
+        {{ 'REGISTER.CLINIC.BILLED_MONTHLY' | translate:{amount: nextBillingAmount} }}
+      </p>
+      <p *ngIf="billingPeriod?.billingPeriod === 'annually'" class="item-next-billing">
+        {{ 'REGISTER.CLINIC.BILLED_ANNUALLY' | translate:{amount: nextBillingAmount} }}
+      </p>
+    </div>
+
+    <div *ngIf="!billingPeriod?.price">
+      <p class="item-no-price">{{ 'REGISTER.CLINIC.REQUEST_ORDER_FORM' | translate }}</p>
+    </div>
+  </div>
+</div>

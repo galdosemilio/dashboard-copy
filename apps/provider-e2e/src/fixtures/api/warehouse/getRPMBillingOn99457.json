@@ -1,0 +1,72 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6796",
+        "firstName": "John",
+        "lastName": "Doe",
+        "dateOfBirth": "1974-05-31"
+      },
+      "organization": {
+        "id": "6955",
+        "name": "Center for Medical Weight Loss",
+        "hierarchyPath": ["6955", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": { "timestamp": "2019-06-29T22:18:22.147Z", "count": 1 }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": { "timestamp": "2020-06-07T22:18:22.147Z", "count": 1 }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              },
+              "liveInteraction": { "count": 0, "required": 1 }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "automated": { "seconds": { "elapsed": 0 } },
+                "calls": { "seconds": { "elapsed": 0 } }
+              }
+            }
+          }
+        }
+      ],
+      "anyCodeLastEligibleAt": "2020-06-07T22:18:22.147Z",
+      "rpm": {
+        "isActive": true,
+        "changedAt": "2019-06-13T22:18:22.147+00:00",
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true
+        },
+        "consentedAt": "2019-06-13T22:18:22.147+00:00",
+        "educationProvidedAt": "2019-06-13T22:18:22.147+00:00",
+        "deviceProvidedAt": "2019-06-13T22:18:22.147+00:00"
+      }
+    }
+  ],
+  "pagination": {}
+}

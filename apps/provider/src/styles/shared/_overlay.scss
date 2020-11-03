@@ -1,0 +1,123 @@
+app-call-window,
+app-call-settings {
+  width: 100%;
+  height: 100%;
+}
+
+.ccr-call-window {
+  &-container {
+    background-color: white !important;
+    height: 100%;
+  }
+  &-drag-backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transition: opacity 0.8s ease-in-out;
+    width: 100vw;
+    z-index: -1;
+
+    &.hidden {
+      opacity: 0;
+    }
+  }
+  &-drag-hint {
+    align-items: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 15vh;
+    justify-content: center;
+    margin: 41vh auto;
+    padding: 15px;
+    text-align: center;
+    width: 40vw;
+  }
+  &-sticky {
+    border: 5px dashed whitesmoke;
+    position: fixed;
+  }
+}
+
+.ccr-overlay-panel {
+  background: mat-color($ccr-background, 'background');
+  border: 2px solid mat-color($ccr-foreground, divider);
+  .ccr-overlay-title {
+    cursor: pointer;
+    user-select: none;
+    margin: -8px 0 5px 0;
+    padding: 1em 1em 0em 1em;
+
+    &.fullscreen {
+      padding: 0.8em 0.8em 0em 0.8em;
+    }
+  }
+  .ccr-overlay-separator {
+    height: 25px;
+    background-color: var(--accent);
+    border-radius: 15px;
+    margin: 0 -15px;
+  }
+  .ccr-caller {
+    height: 80px;
+    width: 80px;
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+  .ccr-overlapping-panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    div {
+      div {
+        .call-notification {
+          padding-bottom: 20px;
+          width: 80px;
+          label {
+            font-size: 0.8em;
+            text-align: center;
+            color: mat-color($ccr-foreground, secondary-text);
+            margin-bottom: 4px;
+          }
+        }
+        .call-control {
+          padding-bottom: 20px;
+        }
+      }
+    }
+    .overlay-actions {
+      .notification {
+        .mat-mini-fab {
+          background: mat-color($ccr-primary);
+          color: mat-color($ccr-foreground, info);
+        }
+      }
+      .call-controls {
+        .mat-mini-fab {
+          background: mat-color($ccr-background, selected);
+          color: mat-color($ccr-foreground, base);
+        }
+        .mat-mini-fab[disabled] {
+          background: mat-color($ccr-background, disabled-button);
+          color: mat-color($ccr-foreground, disabled-button);
+        }
+      }
+    }
+  }
+}
+
+access-required-dialog {
+  .ccr-errors {
+    color: mat-color($ccr-foreground, error);
+  }
+}

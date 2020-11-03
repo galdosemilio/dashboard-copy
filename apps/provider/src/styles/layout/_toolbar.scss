@@ -1,0 +1,165 @@
+@import 'shared/directed-styles';
+
+.mat-toolbar {
+  height: $topnav-height;
+  min-height: $topnav-height !important;
+  outline: none;
+  padding: 0 !important;
+}
+
+.mat-menu-panel.user-controls {
+  .mat-menu-item {
+    min-width: 200px;
+    @media #{$medium-only} {
+      min-width: 180px;
+    }
+  }
+}
+
+app-topbar {
+  height: 100%;
+  width: 100%;
+  .menu-bar {
+    align-items: stretch;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    @media #{$small-and-down} {
+      padding: 0px 20px;
+    }
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 45px;
+    @media #{$small-and-down} {
+      display: flex;
+    }
+    .slice {
+      width: 25px;
+      height: 3px;
+      background-color: mat-color($ccr-foreground, text);
+      margin: 3px 0;
+    }
+  }
+  .mobile-logo {
+    display: none;
+    @media #{$small-and-down} {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  .right-controls {
+    display: flex;
+    flex-direction: row;
+    .mat-button {
+      color: currentColor;
+      font-weight: 400;
+    }
+    .user-controls {
+      min-width: 200px;
+      padding: 0 10px 0 20px;
+      @media #{$medium-only} {
+        min-width: 180px;
+        padding: 0 0 0 10px;
+      }
+      @media #{$small-and-down} {
+        display: none;
+      }
+      &:hover .mat-button-focus-overlay {
+        opacity: 0.5;
+      }
+      .acc-icon {
+        display: inline-block;
+        @include horizontal-margin-left(7px);
+        height: 40px;
+        width: 40px;
+      }
+      i.material-icons {
+        line-height: 40px;
+        transition: 0.4s transform cubic-bezier(0.25, 0.8, 0.25, 1);
+        &:before {
+          content: 'arrow_drop_down';
+        }
+      } // FIXME there's no class to detect menu opened
+      &.cdk-focused i.material-icons {
+        transform: rotate(180deg) translateZ(0);
+      }
+    }
+    .notification-icon {
+      display: inline-block;
+      height: 56px;
+      line-height: 56px;
+      cursor: pointer;
+      text-align: center;
+      mat-icon {
+        font-size: 40px;
+        height: 56px;
+        line-height: 56px;
+        width: 56px;
+      }
+      @media #{$large-and-down} {
+        @include horizontal-margin-right(-15px);
+      }
+      @media #{$medium-and-large} {
+        @include horizontal-margin-right(0);
+      }
+    }
+
+    .perm-camera-mic {
+      background-color: mat-color($ccr-background, background);
+      border-radius: 50%;
+      height: 36px;
+      line-height: 36px;
+      position: relative;
+      text-align: center;
+      width: 36px;
+
+      &-wrapper {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        height: 64px;
+        line-height: 64px;
+        width: 36px;
+      }
+
+      .camera-icon {
+        font-size: 24px;
+        height: 24px;
+        line-height: 36px;
+        width: 24px;
+      }
+
+      .perm {
+        &-icon {
+          align-items: center;
+          background-color: mat-color($ccr-background, background);
+          border-radius: 50%;
+          bottom: 15px;
+          display: flex;
+          font-size: 48px;
+          justify-content: center;
+          height: 20px;
+          position: absolute;
+          right: -5px;
+          width: 23px;
+        }
+        &-success {
+          color: lighten(mat-color($ccr-background, success), 20%);
+          padding-top: 3px;
+        }
+        &-error {
+          bottom: 15px;
+          color: lighten(mat-color($ccr-background, error), 10%);
+          font-size: 16px;
+          font-weight: bold;
+          height: 23px;
+        }
+      }
+    }
+  }
+}

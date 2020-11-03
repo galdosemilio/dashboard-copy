@@ -1,0 +1,11 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign="end center">
+    <a mat-button color="primary" class="ccr-icon-button"
+    fxFlex="initial" fxFlex.xs="100%" (click)="onCreateEmailTemplate()">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'GLOBAL.CREATE' | translate }}</span>
+    </a>
+  </div>
+</div>
+
+<ccr-organizations-email-template-table [orgId]="orgId" [source]="source"></ccr-organizations-email-template-table>

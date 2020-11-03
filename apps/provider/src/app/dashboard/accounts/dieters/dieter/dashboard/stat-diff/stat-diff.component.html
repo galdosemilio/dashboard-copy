@@ -1,0 +1,37 @@
+<div class="stats-big" [class.clickable]="isEditable" (click)="onClick()"
+fxLayout="column" fxLayoutAlign="space-between">
+
+  <mat-icon *ngIf="isEditable">mode_edit</mat-icon>
+
+  <div class="metric-heading" fxLayoutAlign="center center">
+    <span>{{ title }}</span>
+  </div>
+
+  <ng-container *ngIf="!starting || !current; else stat">
+    <div class="metric-number" fxFlexAlign="center">
+      ---
+    </div>
+    <div class="metric-text">
+      {{ 'STATS.NO_RECENT_DATA' | translate }}
+    </div>
+  </ng-container>
+
+  <ng-template #stat>
+    <div class="metric-number">
+      <img class="metric-arrow" src="./assets/arrow-down.png" *ngIf="startingLessThanCurrent === false" />
+      <img class="metric-arrow" src="./assets/arrow-up.png" *ngIf="startingLessThanCurrent === true" />
+      {{ (starting - current) | abs | number:'1.1-1' }}
+    </div>
+
+    <div class="metric-text">
+      <div *ngIf="starting">
+        {{ 'STATS.STARTING' | translate }}:
+        {{ starting | number:'1.1-1' }}
+      </div>
+      <div *ngIf="current">
+        {{ 'STATS.CURRENT' | translate }}:
+        {{ current | number:'1.1-1' }}
+      </div>
+    </div>
+  </ng-template>
+</div>

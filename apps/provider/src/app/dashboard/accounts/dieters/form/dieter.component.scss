@@ -1,0 +1,18 @@
+mat-checkbox {
+  .mat-checkbox-layout {
+    display: inline;
+    line-height: 150%;
+    .mat-checkbox-label {
+      white-space: normal;
+    }
+  }
+}
+
+.notice-container,
+.notice-error-container {
+  margin-bottom: 15px;
+}
+
+.section-grid {
+  padding: 0 15px;
+}

@@ -1,0 +1,61 @@
+<div class="report-heading">
+  <mat-icon>alarm</mat-icon>
+  <h3>
+    {{ 'REPORTS.SLEEP_REPORT' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.SLEEP_REPORT' | translate"
+    [description]="'REPORTS.SLEEP_REPORT_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+
+  <button mat-button class="ccr-align-center"
+  [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()">
+    {{ 'REPORTS.EXPORT_CSV' | translate }}
+    <mat-icon>file_download</mat-icon>
+  </button>
+</div>
+
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source" matSort>
+
+    <ng-container cdkColumnDef="name">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.NAME' | translate }}</span>
+        {{ row.account.lastName + ', ' + row.account.firstName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'GLOBAL.DATE' | translate }}</span>
+        {{ formatDate(row.date) }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="hoursSlept">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header="hourAvg">{{ 'REPORTS.HOURS_SLEPT' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'REPORTS.HOURS_SLEPT' | translate }}</span>
+        {{ row.hoursSlept.avg }} {{ 'UNIT.HOURS' | translate }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>
+
+<ccr-paginator #paginator
+[length]="source.total"
+[pageIndex]="source.pageIndex"
+[pageSize]="source.pageSize"
+(page)="source.pageIndex = $event.pageIndex"
+></ccr-paginator>

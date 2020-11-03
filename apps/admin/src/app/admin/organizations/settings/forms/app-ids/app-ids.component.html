@@ -1,0 +1,21 @@
+<mat-grid-list [cols]="2" [formGroup]="form" rowHeight="70px">
+    <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-appid-ios"
+      formControlName="ios"
+      (blur)="onSubmit()"
+      placeholder="iOS">
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput
+      data-cy="org-setting-appid-android"
+      formControlName="android"
+      (blur)="onSubmit()"
+      placeholder="Android">
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,35 @@
+@import 'shared/directed-styles';
+
+.file-inspector {
+  border: 1px solid black;
+  min-height: 200px;
+  @include horizontal-padding-left(5%);
+  @include horizontal-padding-right(5%);
+
+  &-move-buttons {
+    margin-top: 2%;
+  }
+
+  &-buttons {
+    margin-bottom: 5%;
+  }
+
+  &-form {
+    margin-top: 5%;
+
+    .radio-group {
+      h4 {
+        margin: 0 0 5% 0;
+      }
+    }
+  }
+
+  &-warning {
+    .no-edit {
+      display: block;
+      text-align: center;
+      font-size: 0.83em;
+      margin-block-end: 1.67em;
+    }
+  }
+}

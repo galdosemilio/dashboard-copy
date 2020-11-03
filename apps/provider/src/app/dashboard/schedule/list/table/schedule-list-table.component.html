@@ -1,0 +1,110 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source" [emptyMsg]="'BOARD.MEETINGS_EMPTY_LIST' | translate">
+    <mat-table [dataSource]="source" matSort>
+        <ng-container cdkColumnDef="date">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header="start">
+            <span>{{'GLOBAL.DATE' | translate}}</span>
+          </mat-header-cell>
+          <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center">
+            <span>{{'GLOBAL.DATE' | translate}}</span>
+            <div>{{ row.date | amDateFormat:'ddd, MMM D YYYY' }}</div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="time">
+            <mat-header-cell *cdkHeaderCellDef>
+                <span>{{'GLOBAL.TIME' | translate}}</span>
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center">
+                <span>{{'GLOBAL.TIME' | translate}}</span>
+                <div>{{ row.time | amDateFormat:'h:mm a' }}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="duration">
+            <mat-header-cell *cdkHeaderCellDef>
+                <span>{{'BOARD.DURATION' | translate}}</span>
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"  fxLayoutAlign=" center">
+                <span>{{'BOARD.DURATION' | translate}}</span>
+                <div>{{ row.duration }} {{ 'GLOBAL.MINUTES' | translate }}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="organization">
+            <mat-header-cell *cdkHeaderCellDef>
+                <span>{{'BOARD.CLINIC' | translate}}</span>
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center">
+                <span>{{'BOARD.CLINIC' | translate}}</span>
+                <div>{{ row.organization.name }}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="title">
+            <mat-header-cell *cdkHeaderCellDef>
+                <span>{{'BOARD.TITLE' | translate}}</span>
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center">
+                <span>{{'BOARD.TITLE' | translate}}</span>
+                <div>{{ row.title }}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="attendees">
+            <mat-header-cell *cdkHeaderCellDef>
+                <span>{{'BOARD.SCHEDULE_ATTENDEES_NO_AMOUNT' | translate}}</span>
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+                <span>{{'BOARD.SCHEDULE_ATTENDEES_NO_AMOUNT' | translate}}</span>
+                <div>
+                <ul *ngIf="row.isFuture">
+                    <li *ngFor="let attendee of row.attendees">
+                        {{ attendee.firstName }} {{ attendee.lastName }}
+                    </li>
+                </ul>
+                <div *ngIf="!row.isFuture" fxLayout="column" fxLayoutAlign="start stretch">
+                    <p *ngFor="let attendee of row.attendees" class="attendance-editor">
+                        <span>
+                            {{ attendee.firstName }} {{ attendee.lastName }}
+                        </span>
+                        <ccr-attendance-selector
+                        [meeting]="row"
+                        [attendanceStatus]="attendee.attendance.status"
+                        (change)="onChangeAttendance($event, attendee)">
+                        </ccr-attendance-selector>
+                    </p>
+                </div>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="actions">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</mat-header-cell>
+            <mat-cell
+            *cdkCellDef="let row"
+            [hidden]="row.level > 0"
+            fxHide.xs>
+            <span>{{ 'BOARD.ACTIONS' | translate }}</span>
+            <button
+            [title]="'GLOBAL.EDIT' | translate"
+            (click)="viewMeeting(row)"
+            mat-icon-button>
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button
+              data-cy="schedule-listing-meeting-delete"
+              [class.disabled]="!row.isFuture"
+              [disabled]="!row.isFuture"
+              [title]="'BOARD.REMOVE' | translate"
+              (click)="deleteMeeting(row)"
+              mat-icon-button><mat-icon>delete</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayoutWrap
+          *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+          [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+        ></mat-row>
+    </mat-table>
+</ccr-datasource-overlay>

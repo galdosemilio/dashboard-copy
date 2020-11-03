@@ -1,0 +1,37 @@
+<button mat-icon-button
+  *ngIf="callState.windowState === 'MINIMIZED'"
+  (click)="onToggleMicrophone(callState.isMicrophoneEnabled)"
+  [disabled]="callState.callId === '' || !callState.hasAudioDeviceAccess">
+  <mat-icon *ngIf="callState.isMicrophoneEnabled">mic</mat-icon>
+  <mat-icon *ngIf="!callState.isMicrophoneEnabled">mic_off</mat-icon>
+</button>
+<button mat-icon-button
+  *ngIf="callState.windowState === 'MINIMIZED'"
+  (click)="onToggleCamera(callState.isCameraEnabled)"
+  [disabled]="callState.callId === '' || !callState.hasVideoDeviceAccess">
+  <mat-icon *ngIf="callState.isCameraEnabled">videocam</mat-icon>
+  <mat-icon *ngIf="!callState.isCameraEnabled">videocam_off</mat-icon>
+</button>
+<button mat-icon-button (click)="onMinimizeWindow()" *ngIf="callState?.windowState !== 'MINIMIZED'">
+  <mat-icon>minimize</mat-icon>
+</button>
+<button mat-icon-button (click)="onNormalizeWindow()" *ngIf="callState?.windowState === 'MINIMIZED'">
+  <mat-icon>fullscreen_exit</mat-icon>
+</button>
+<button
+*ngIf="callState?.windowState !== 'MINIMIZED' && callState?.windowState !== 'FULLSCREEN'"
+(mousedown)="followPointer()"
+mat-icon-button>
+  <mat-icon>control_camera</mat-icon>
+</button>
+<button
+*ngIf="callState?.windowState !== 'MINIMIZED' && callState?.windowState !== 'FULLSCREEN'"
+(click)="onEnterFullscreen()"
+mat-icon-button>
+  <mat-icon>fullscreen</mat-icon>
+</button>
+<button mat-icon-button (click)="onNormalizeWindow()" *ngIf="callState?.windowState === 'FULLSCREEN'">
+  <mat-icon>
+      fullscreen_exit
+  </mat-icon>
+</button>

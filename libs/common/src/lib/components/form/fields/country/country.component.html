@@ -1,0 +1,19 @@
+<mat-form-field [class.readonly]="isReadonly">
+  <mat-select
+  [class.mat-select-invalid]="_control.invalid && _control.touched"
+  [placeholder]="placeholder"
+  [required]="isRequired"
+  [disabled]="isReadonly"
+  [(value)]="selected"
+  (selectionChange)="onChange()"
+  (blur)="propagateTouch()"
+  (change)="$event.stopPropagation()">
+    <mat-option *ngFor="let option of mainOptions" [value]="option.value">
+      {{ option.viewValue | translate }}
+    </mat-option>
+    <mat-divider></mat-divider>
+    <mat-option *ngFor="let option of options" [value]="option.value">
+      {{ option.viewValue | translate }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

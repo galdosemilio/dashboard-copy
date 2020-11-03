@@ -1,0 +1,25 @@
+<div class="file-inspector" fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="space-evenly">
+    <app-content-file-explorer-content [content]="content"></app-content-file-explorer-content>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%" class="file-inspector-move-buttons">
+        <button mat-button class="ccr-button" type="button" (click)="moveContent()" *ngIf="!content.isForeign || content.isAdmin">{{ 'LIBRARY.CONTENT.MOVE_CONTENT' | translate }}</button>
+        <button mat-button class="ccr-button" type="button" (click)="openContent()" *ngIf="content.metadata && (content.metadata.url || content.metadata.content)">{{ 'LIBRARY.CONTENT.VIEW_CONTENT' | translate }}</button>
+    </div>
+    <form class="file-inspector-form" *ngIf="!content.isForeign || content.isAdmin" fxLayout="column" fxLayoutGap="10%"
+        [formGroup]="form" (ngSubmit)="updateContent()" [ngSwitch]="content.type.code">
+        <app-content-hyperlink-form bindForm="details" [details]="content" *ngSwitchCase="'hyperlink'" [readonly]="true"></app-content-hyperlink-form>
+        <app-content-content-form bindForm="details" [details]="content" *ngSwitchDefault></app-content-content-form>
+        <div class="file-inspector-buttons" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="3%">
+            <div fxFlex="50%" fxLayoutAlign="center center">
+                <button mat-button class="ccr-button" type="button" (click)="deleteContent()">{{ 'GLOBAL.DELETE' | translate }}</button>
+            </div>
+            <div fxFlex="50%" fxLayoutAlign="center center">
+                <button mat-button class="ccr-button" color="primary" [disabled]="!form.valid">{{ 'GLOBAL.SAVE' | translate }}</button>
+            </div>
+        </div>
+    </form>
+    <div class="file-inspector-warning" *ngIf="content.isForeign && !content.isAdmin">
+        <strong>
+            <span class="no-edit">{{ 'LIBRARY.CONTENT.DIFF_OWNER_WARNING' | translate }}</span>
+        </strong>
+    </div>
+</div>

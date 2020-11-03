@@ -1,0 +1,5 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="7px" [formGroup]="valueForm">
+  <mat-checkbox
+  *ngFor="let allowedValue of question.allowedValues; let i = index;"
+  [formControlName]="i">{{ allowedValue }}</mat-checkbox>
+</div>

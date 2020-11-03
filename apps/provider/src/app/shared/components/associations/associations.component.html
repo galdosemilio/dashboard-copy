@@ -1,0 +1,76 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <div *ngIf="!readonly" fxFlex>
+            <button
+            [disabled]="!hasAdmins"
+            (click)="onAddAssociation()"
+            class="ccr-button"
+            color="primary"
+            mat-button
+            type="button">{{ 'ASSOCIATIONS.ADD_CLINIC_ASSOCIATION' | translate }}</button>
+        </div>
+
+        <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="source.total"
+        [pageIndex]="source.pageIndex"
+        [pageSize]="source.pageSize"
+        (page)="source.pageIndex = $event.pageIndex"
+        ></ccr-paginator>
+    </div>
+
+    <div>
+        <ccr-datasource-overlay
+        [emptyMsg]="'ASSOCIATIONS.ASSOCIATIONS_EMPTY_LIST' | translate"
+        [source]="source"
+        class="ccr-table">
+            <mat-table [dataSource]="results">
+                <ng-container cdkColumnDef="name">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
+                <mat-cell
+                *cdkCellDef="let row"
+                fxLayoutAlign="start center"
+                fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+                    {{ row.organization.name }}
+                </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="associatedAt">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ASSOCIATED_AT' | translate }}</mat-header-cell>
+                <mat-cell
+                *cdkCellDef="let row"
+                fxLayoutAlign="start center"
+                fxLayoutAlign.xs=" center"
+                fxFlex.xs="grow">
+                    {{ row.associatedAt | amDateFormat:'ddd, MMM D YYYY' }}
+                </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="permissions">
+                    <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.PERMISSIONS' | translate }}</mat-header-cell>
+                    <mat-cell *cdkCellDef="let row; let i = index" fxFlex.xs="grow">
+                        <div [formGroup]="formArray.controls[i]" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+                            <mat-checkbox formControlName="viewAll">{{ 'PERM.ACCESSALL' | translate }}</mat-checkbox>
+                            <mat-checkbox formControlName="admin">{{ 'PERM.ADMIN' | translate }}</mat-checkbox>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
+                    <mat-icon
+                    [class.disabled]="!row.canDelete"
+                    (click)="onDeleteAssociation(row)"
+                    class="clickable">delete</mat-icon>
+                </mat-cell>
+                </ng-container>
+
+                <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+                <mat-row fxLayoutWrap
+                    *cdkRowDef="let row; columns: columns; let even = even; let odd = odd; let i = index;"
+                    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+                ></mat-row>
+            </mat-table>
+        </ccr-datasource-overlay>
+    </div>
+</div>

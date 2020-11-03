@@ -1,0 +1,21 @@
+<div class="ccr-heading">
+  <a mat-button color="primary" class="ccr-button" routerLink="../">
+    {{ 'GLOBAL.BACK' | translate }}
+  </a>
+
+  <div class="ccr-name" fxLayout="row" fxLayoutAlign.xs="center">
+    <ccr-avatar size="bigger" [account]="item?.id"></ccr-avatar>
+    <h2>{{ item?.firstName | capitalize }} {{ item?.lastName | capitalize }}</h2>
+  </div>
+</div>
+
+<div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch" fxLayoutGap="5px">
+  <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['data']">{{ 'GLOBAL.PROFILE' | translate }}</a>
+  <!-- TODO routing restriction for Admins -->
+  <a *ngIf="accountType !== '1'" fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['orgs']">{{ 'ADMIN.ASSOCIATIONS' | translate }}</a>
+  <!-- <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['logs']">{{ 'ADMIN.LOGS._TITLE' | translate }}</a> -->
+</div>
+
+<div class="ccr-subcomponent">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,14 @@
+<div fxLayoutAlign="row" fxLayoutAlign="start stretch" fxLayoutGap="7px" [formGroup]="rangeForm">
+  <mat-form-field class="ccr-form-field" floatLabel="never">
+    <input type="number" matInput
+    formControlName="min"
+    [readonly]="readonly"
+    [placeholder]="'LIBRARY.FORMS.MIN' | translate">
+  </mat-form-field>
+  <mat-form-field class="ccr-form-field" floatLabel="never">
+    <input type="number" matInput
+    formControlName="max"
+    [readonly]="readonly"
+    [placeholder]="'LIBRARY.FORMS.MAX' | translate">
+  </mat-form-field>
+</div>

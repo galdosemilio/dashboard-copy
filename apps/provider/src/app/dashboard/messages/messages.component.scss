@@ -1,0 +1,12 @@
+:host {
+  height: 100%;
+}
+
+.messaging-disabled {
+  background-color: var(--primary-lighten);
+  padding: 10px 10px;
+
+  & > mat-icon {
+    color: var(--primary);
+  }
+}

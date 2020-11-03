@@ -1,0 +1,98 @@
+<div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="7px" [formGroup]="form" #questionEditor>
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="7px">
+        <mat-form-field [hidden]="!active" fxFlex="50%" class="ccr-form-field" floatLabel="never">
+            <mat-select formControlName="questionType"
+            [placeholder]="'LIBRARY.FORMS.QUESTION_TYPE' | translate"
+            [compareWith]="questionTypeCompare"
+            (openedChange)="matSelectIsOpen = $event">
+                <ng-container *ngFor="let type of questionTypes">
+                    <mat-option *ngIf="type.isActive === true" [value]="type">{{ type.description | translate }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+        <div fxFlex="nogrow" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="7px" [hidden]="!active">
+            <mat-slide-toggle
+            [hidden]="form.value.questionType && form.value.questionType.disregardRequired"
+            formControlName="isRequired">
+                {{ 'LIBRARY.FORMS.REQUIRED' | translate }}
+            </mat-slide-toggle>
+            <span
+            [class.disabled]="form.invalid"
+            fxLayout="row" fxLayoutAlign="start center" class="remove-button clickable"
+            (click)="duplicateQuestion()">
+                <mat-icon>file_copy</mat-icon>
+                {{ 'GLOBAL.DUPLICATE' | translate }}
+            </span>
+            <span
+            fxLayout="row" fxLayoutAlign="start center" class="remove-button clickable"
+            (click)="removeQuestion()">
+                <mat-icon>delete</mat-icon>
+                {{ 'GLOBAL.DELETE' | translate }}
+            </span>
+        </div>
+    </div>
+
+    <div *ngIf="form.value.questionType" [ngSwitch]="form.value.questionType.name">
+        <div *ngSwitchCase="'text'" fxLayout="column" fxLayoutAlign="center stretch">
+            <p>{{ 'LIBRARY.FORMS.TEXT_QUESTION_HELP' | translate }}</p>
+            <mat-form-field class="ccr-form-field" floatLabel="never">
+                <textarea
+                    autofocus
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+                    formControlName="title"
+                    matInput
+                    required
+                    [placeholder]="'LIBRARY.FORMS.TEXT' | translate"
+                    type="text">
+                </textarea>
+            </mat-form-field>
+        </div>
+        <div *ngSwitchCase="'content'" fxLayout="column" fxLayoutAlign="center stretch">
+            <app-library-embed-content-picker
+            [url]="form.value?.title"
+            (selectContent)="selectContent($event)">
+            </app-library-embed-content-picker>
+        </div>
+        <div *ngSwitchDefault fxLayout="column" fxLayoutAlign="center stretch">
+            <mat-form-field class="ccr-form-field" floatLabel="never">
+                <textarea
+                    autofocus
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="3"
+                    formControlName="title"
+                    matInput
+                    required
+                    [placeholder]="'LIBRARY.FORMS.QUESTION_TITLE' | translate"
+                    type="text">
+                </textarea>
+            </mat-form-field>
+            <mat-form-field class="ccr-form-field" floatLabel="never">
+                <textarea
+                    autofocus
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+                    formControlName="description"
+                    matInput
+                    [placeholder]="'LIBRARY.FORMS.DESCRIPTION' | translate"
+                    type="text">
+                </textarea>
+            </mat-form-field>
+            <div fxLayout="column" fxLayoutGap="7px">
+                <div *ngIf="form.value.questionType ? form.value.questionType.requiresValueList : question.questionType.requiresValueList"
+                    class="form" fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="5%">
+                    <span class="ccr-strong question-form-label" fxFlex="nogrow">{{ 'LIBRARY.FORMS.ALLOWED_VALUES' | translate | uppercase }}</span>
+                    <app-library-allowed-values-form fxFlex bindForm="allowedValues" [overwriteControl]="true" [content]="question.allowedValues"></app-library-allowed-values-form>
+                </div>
+                <div *ngIf="form.value.questionType ? form.value.questionType.requiresNumericRange : question.questionType.requiresNumericRange"
+                    class="form" fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="5%">
+                    <span class="ccr-strong question-form-label">{{ 'LIBRARY.FORMS.ALLOWED_VALUES' | translate }}</span>
+                    <app-library-numeric-range-form fxFlex bindForm="allowedValues" [overwriteControl]="true" [content]="question.allowedValues"></app-library-numeric-range-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

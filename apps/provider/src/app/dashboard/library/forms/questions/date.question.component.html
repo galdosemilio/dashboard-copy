@@ -1,0 +1,11 @@
+<ng-container [formGroup]="form">
+  <mat-form-field floatLabel="never" class="ccr-form-field">
+    <input matInput
+    formControlName="value"
+    [matDatepicker]="picker"
+    [readonly]="readonly">
+
+    <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="readonly"></mat-datepicker-toggle>
+    <mat-datepicker #picker type="date" [disabled]="readonly"></mat-datepicker>
+  </mat-form-field>
+</ng-container>

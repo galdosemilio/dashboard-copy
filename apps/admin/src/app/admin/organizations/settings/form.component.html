@@ -1,0 +1,88 @@
+<ul class="ccr-tabs-center">
+  <li data-cy="org-settings-menu-core" (click)="section = 'core'" [ngClass]="{'selected': section === 'core'}">Core</li>
+  <li data-cy="org-settings-menu-visual" (click)="section = 'visual'" [ngClass]="{'selected': section === 'visual'}">Visual</li>
+  <li data-cy="org-settings-menu-mala" (click)="section = 'mala'" [ngClass]="{'selected': section === 'mala'}">MALA</li>
+  <li data-cy="org-settings-menu-features" (click)="section = 'features'" [ngClass]="{'selected': section === 'features'}">Features</li>
+  <li data-cy="org-settings-menu-security" (click)="section = 'security'" [ngClass]="{'selected': section === 'security'}">Security</li>
+</ul>
+
+<form [formGroup]="form" novalidate>
+  <div class="ccr-content">
+    <div class="ccr-panel" [hidden]="section !== 'core'" data-cy="org-settings-section-basic">
+      <h3>{{ 'GLOBAL.BASIC_INFORMATION' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-organizations-basic-info [orgId]="id" [prefs]="initialPreference"></ccr-organizations-basic-info>
+      </div>
+    </div>
+
+    <div class="ccr-panel" [hidden]="section !== 'core'" data-cy="org-settings-section-bcc">
+      <h3>{{ 'GLOBAL.BCC_EMAILS' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-organizations-cco-addresses [orgId]="id" [prefs]="initialPreference"></ccr-organizations-cco-addresses>
+      </div>
+    </div>
+
+    <div class="ccr-panel" [hidden]="section !== 'visual'" data-cy="org-settings-section-colors">
+      <h3>{{ 'GLOBAL.COLORS' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-organizations-colors [colSpan]="colSpan" [orgId]="id" [prefs]="initialPreference"></ccr-organizations-colors>
+      </div>
+    </div>
+    <div class="ccr-panel" [hidden]="section !== 'visual'" data-cy="org-settings-section-images">
+      <h3>{{ 'ADMIN.ORGS.SETTINGS.IMAGES' | translate }}</h3>
+        <ccr-organizations-images
+          [colSpan]="colSpan"
+          [orgId]="id"
+          [prefs]="initialPreference">
+        </ccr-organizations-images>
+    </div>
+    <div class="ccr-panel" [hidden]="section !== 'mala'" data-cy="org-settings-section-appids">
+      <h3>{{ 'ADMIN.ORGS.SETTINGS.APPID' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-organizations-app-ids [adminPrefs]="initialAdminPreference" [orgId]="id"></ccr-organizations-app-ids>
+      </div>
+    </div>
+
+    <div class="ccr-panel" [hidden]="section !== 'mala'" data-cy="org-settings-section-mala">
+      <h3>{{ 'ADMIN.ORGS.SETTINGS.MALA' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+       <ccr-organizations-mala
+       [adminPrefs]="initialAdminPreference"
+       [orgId]="id"
+       (adminPrefsChange)="onAdminPrefsChange($event)"></ccr-organizations-mala>
+      </div>
+    </div>
+
+    <div class="ccr-panel" [hidden]="section !== 'mala'">
+      <h3>{{ 'ADMIN.ORGS.SETTINGS.CODE_ENTRY_HELP' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-form-field-translated-text
+        [initial]="initialPreference?.clinicCodeHelp"
+        [label]="'ADMIN.ORGS.SETTINGS.CODE_ENTRY_HELP' | translate"
+        (update)="onChangeCodeHelpText($event)"></ccr-form-field-translated-text>
+      </div>
+    </div>
+
+    <div class="json-editor-panel" [hidden]="section !== 'mala'" data-cy="org-settings-section-json">
+      <json-editor data-cy="org-setting-jsoneditor" [options]="editorOptions" [data]="initialJsonEditor" (change)="onChangeJsonEditor($event)"></json-editor>
+    </div>
+
+    <div class="ccr-panel" [hidden]="section !== 'features'" data-cy="org-settings-section-features">
+      <h3>{{ 'GLOBAL.FEATURES' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-organizations-features
+        [featurePrefs]="featurePrefs"
+        [prefs]="initialPreference"
+        [orgId]="id"></ccr-organizations-features>
+      </div>
+    </div>
+
+    <div class="ccr-panel" [hidden]="section !== 'security'" data-cy="org-settings-section-security">
+      <h3>{{ 'GLOBAL.SECURITY' | translate }}</h3>
+      <div>
+        <ccr-organizations-security [orgId]="id"></ccr-organizations-security>
+      </div>
+    </div>
+
+  </div>
+</form>

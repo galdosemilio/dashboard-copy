@@ -1,0 +1,39 @@
+<div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="5px">
+  <ccr-autocompleter-organization #autocompleter
+    (change)="orgSelected($event)"
+    [placeholder]="'ACCOUNT.ASSOCIATE' | translate"
+  ></ccr-autocompleter-organization>
+
+  <button mat-icon-button color="primary" [disabled]="!org" (click)="associate()">
+    <mat-icon [attr.aria-label]="'ACCOUNT.CREATE_ASSOCIATION' | translate">add_circle_outline</mat-icon>
+  </button>
+</div>
+
+<ccr-datasource-overlay [source]="source" [emptyMsg]="'NOTIFY.SOURCE.NO_ASSOCIATIONS' | translate">
+  <mat-accordion displayMode="flat">
+    <mat-expansion-panel *ngFor="let row of data">
+      <mat-expansion-panel-header>
+        <mat-panel-title fxLayoutAlign=" center">
+          {{ row.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          <button *ngIf="row.isDirect"
+            mat-button color="primary" type="button"
+            (click)="dissociate(row); $event.stopPropagation()">
+            {{ 'ACCOUNT.DISSOCIATE' | translate }}
+          </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <ng-template matExpansionPanelContent>
+        <ccr-related-org [org]="row"></ccr-related-org>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ccr-datasource-overlay>
+
+<ccr-paginator fxFlex #paginator
+  [length]="source.total"
+  [pageIndex]="0"
+  [pageSize]="10"
+></ccr-paginator>

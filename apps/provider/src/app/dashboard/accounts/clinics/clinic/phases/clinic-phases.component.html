@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <p>{{ 'BOARD.ADMIN_PHASE_MANAGEMENT_DESCRIPTION' | translate: {id: clinic?.id, name: clinic?.name} }}</p>
+
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxFlex>
+            <button [disabled]="!isAdmin" (click)="onCreatePhase()" class="ccr-icon-button" color="primary" mat-button>
+                <mat-icon>add</mat-icon>
+                {{ 'BOARD.ADD_PHASE' | translate }}
+            </button>
+
+            <span *ngIf="!isAdmin" class="error">
+                {{ 'BOARD.ADMIN_PHASE_MANAGEMENT' | translate }}
+            </span>
+        </div>
+
+        <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="source.total"
+        [pageIndex]="source.pageIndex"
+        [pageSize]="source.pageSize"
+        (page)="source.pageIndex = $event.pageIndex"
+        ></ccr-paginator>
+    </div>
+
+    <app-clinic-phases-table [isAdmin]="isAdmin" [source]="source"></app-clinic-phases-table>
+</div>

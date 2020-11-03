@@ -1,0 +1,9 @@
+@import './fields/color/color';
+@import './fields/consent/consent';
+@import './fields/text/text';
+
+@mixin ccr-form($theme, $config) {
+  @include ccr-form-field-color($theme, $config);
+  @include ccr-form-field-consent($theme, $config);
+  @include ccr-form-field-text($theme, $config);
+}

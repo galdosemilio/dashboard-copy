@@ -1,0 +1,29 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="10px">
+  <div
+  *ngFor="let option of options"
+  (click)="onOptionSelect(option)"
+  [class.active]="selectedOption?.value === option.value"
+  class="option-block"
+  fxFlex="49%"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="5px">
+    <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px">
+      <h4 [innerHTML]="option.displayValue | translate" fxFlex></h4>
+      <mat-checkbox [checked]="selectedOption?.value === option.value" [disabled]="true"></mat-checkbox>
+    </div>
+
+    <p [innerHTML]="option.description | translate"></p>
+
+    <div class="app-button-container" fxLayout="row" fxLayoutAlign="space-around center">
+      <a *ngIf="option.iosAppLink" [href]="option.iosAppLink" target="_blank">
+        <img class="badge-button" [src]="iosButtonLink">
+      </a>
+      <a *ngIf="option.androidAppLink" [href]="option.androidAppLink" target="_blank">
+        <img class="badge-button" [src]="androidButtonLink">
+      </a>
+    </div>
+
+    <small [innerHTML]="option.subtext | translate"></small>
+  </div>
+</div>

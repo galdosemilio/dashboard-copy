@@ -1,0 +1,12 @@
+@import 'variables';
+@import './base/base';
+@import './footer/footer';
+@import './menu/menu';
+@import './search/search';
+@import './topbar/topbar';
+
+@include ccr-layout($ccr-theme, $ccr-config);
+@include ccr-layout-menu($ccr-theme, $ccr-config);
+@include ccr-layout-search($ccr-theme, $ccr-config);
+@include ccr-layout-topbar($ccr-theme, $ccr-config);
+@include ccr-layout-footer($ccr-theme, $ccr-config);

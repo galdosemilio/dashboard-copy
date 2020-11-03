@@ -1,0 +1,30 @@
+@mixin ccr-form-field-text($theme, $config) {
+  $foreground: map-get($theme, foreground);
+
+  ccr-form-field-text {
+    .mat-form-field {
+      &.readonly {
+        .mat-form-field-infix {
+          flex: none;
+          width: auto;
+        }
+
+        .mat-form-field-label-wrapper {
+          overflow: visible;
+          .mat-form-field-label {
+            width: 1000%;
+            max-width: 300px;
+          }
+        }
+
+        [matprefix] {
+          padding-right: 0.3em;
+        }
+
+        [matsuffix] {
+          padding-left: 0.3em;
+        }
+      }
+    }
+  }
+}

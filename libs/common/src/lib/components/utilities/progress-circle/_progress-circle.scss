@@ -1,0 +1,34 @@
+@mixin ccr-component-progress-circle($theme, $config) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+
+  ccr-progress-circle {
+    display: block;
+    width: 100%;
+  }
+
+  path.progress-circle-path,
+  path.progress-circle-path-rest {
+    fill: transparent;
+    stroke-width: 4px;
+  }
+  path.progress-circle-path {
+    stroke: mat-color($foreground, stroke);
+  }
+
+  path.progress-circle-path-rest {
+    stroke: var(--primary, mat-color($primary));
+  }
+
+  text.regular-text {
+    fill: mat-color($foreground, progress-circle);
+    font-size: 9px;
+    text-anchor: middle;
+  }
+
+  text.primary-text {
+    fill: var(--primary, mat-color($primary));
+    font-size: 28px;
+    text-anchor: middle;
+  }
+}

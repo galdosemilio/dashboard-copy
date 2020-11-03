@@ -1,0 +1,10 @@
+{
+  "id": "14",
+  "organization": {
+    "id": "3378"
+  },
+  "isActive": true,
+  "videoConferencing": {
+    "isEnabled": true
+  }
+}

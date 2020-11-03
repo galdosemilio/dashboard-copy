@@ -1,0 +1,58 @@
+{
+  "npmScope": "dashboard",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tslint.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "provider": {
+      "tags": [],
+      "implicitDependencies": ["common", "npm-api"]
+    },
+    "provider-e2e": {
+      "tags": [],
+      "implicitDependencies": ["provider", "npm-api"]
+    },
+    "admin": {
+      "tags": [],
+      "implicitDependencies": ["common", "backend", "npm-api"]
+    },
+    "admin-e2e": {
+      "tags": [],
+      "implicitDependencies": ["admin"]
+    },
+    "common": {
+      "tags": [],
+      "implicitDependencies": ["backend"]
+    },
+    "layout": {
+      "tags": []
+    },
+    "backend": {
+      "tags": []
+    },
+    "datepicker": {
+      "tags": []
+    },
+    "npm-api": {
+      "tags": []
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "account": {
+                "id": "1"
+            },
+            "id": "1",
+            "enroll": {
+                "start": "2019-07-23 17:44:33.944+00"
+            },
+            "isActive": true,
+            "organization": {
+                "id": "1"
+            },
+            "package": {
+                "id": "1",
+                "title": "Package 1"
+            }
+        }
+    ],
+    "pagination": {}
+}

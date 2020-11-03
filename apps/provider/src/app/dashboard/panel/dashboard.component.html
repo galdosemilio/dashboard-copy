@@ -1,0 +1,44 @@
+<div fxLayout="column" fxLayoutGap="35px">
+  <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign=" stretch" fxLayoutGap="35px">
+
+    <div class="ccr-widget" fxFlex="auto">
+      <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+        <h2 fxFlex>
+          {{ 'SIDENAV.ALERTS' | translate }}
+        </h2>
+        <a mat-button class="ccr-button" [routerLink]="['/alerts/notifications']" *ngIf="canAccessPhi && canViewAll" data-cy="view-all-alert-button">{{ 'HOME.VIEW_ALL' | translate }}</a>
+      </div>
+
+      <app-alerts-table
+        data-cy="alert-listing"
+        [source]="alertsSource"
+        [columns]="['name', 'type', 'actions']"
+      ></app-alerts-table>
+    </div>
+
+    <div class="ccr-widget" fxFlex="42%">
+      <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+        <h2 fxFlex>{{ 'REPORTS.SIGNUPS_TITLE' | translate }}</h2>
+        <a mat-button class="ccr-button" [routerLink]="['/reports/overview/signups']" fxHide fxShow.gt-lg>{{ 'HOME.VIEW_COMPLETE_REPORT' | translate }}</a>
+      </div>
+
+      <app-reports-signups-chart
+        [source]="signupSource"
+      ></app-reports-signups-chart>
+    </div>
+  </div>
+
+  <div class="ccr-widget">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+      <h2 fxFlex>{{ 'BOARD.RECENT_REG' | translate }}</h2>
+      <a mat-button class="ccr-button" [routerLink]="['/accounts/patients']" *ngIf="canViewAll" data-cy="view-all-patients-button">{{ 'HOME.VIEW_ALL_PATIENTS' | translate }}</a>
+    </div>
+
+    <app-dieters-table
+      data-cy="view-lastest-signups"
+      [source]="recentsSource"
+      [withSorting]="false"
+    ></app-dieters-table>
+  </div>
+
+</div>

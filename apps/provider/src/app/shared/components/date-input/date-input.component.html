@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutAlign="center stretch">
+    <mat-form-field [formGroup]="form" fxFlex>
+        <input
+        #textInput
+        matInput
+        [required]="required"
+        formControlName="textDate"
+        type="text"
+        [hidden]="datepickerMode !== 'text'"
+        [placeholder]="(placeholder | translate) + (datepickerMode === 'text' ? ' ' + format : '')"
+        (blur)="onDatepickerBlur()">
+        <input
+        #datepickerInput
+        matInput
+        [required]="required"
+        formControlName="date"
+        [hidden]="datepickerMode !== 'datepicker'"
+        [max]="max"
+        [min]="min"
+        [placeholder]="(placeholder | translate) + (datepickerMode === 'text' ? ' ' + format : '')"
+        [matDatepicker]="pickerBirth"
+        (focus)="onDatepickerFocus($event)">
+        <mat-datepicker-toggle matSuffix [for]="pickerBirth"></mat-datepicker-toggle>
+        <mat-datepicker #pickerBirth startView="years"></mat-datepicker>
+        <mat-error *ngIf="errorMessage && form.touched && form.invalid">{{ errorMessage | translate }}</mat-error>
+    </mat-form-field>
+</div>

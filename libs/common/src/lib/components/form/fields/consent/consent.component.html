@@ -1,0 +1,26 @@
+<mat-checkbox
+(change)="onChange($event.checked)"
+[value]="value">{{ consentRequired === 'client' ? ('FIELD.CONSENT.TEXT_CLIENT' | translate) : ('FIELD.CONSENT.TEXT_PROVIDER' | translate) }}
+</mat-checkbox>
+
+<span *ngIf="consentRequired === 'client' then client; else provider"></span>
+
+<!-- TODO adjust the following texts to be RTL compliant -->
+
+<ng-template #client>
+  <a href="{{ linkTerms || ('LINK.TERMS_OF_SERVICE' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>
+  {{ 'GLOBAL.AND' | translate }}
+  <a href="{{ linkPrivacy || ('LINK.PRIVACY_POLICY' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>.
+</ng-template>
+
+<ng-template #provider>
+  <a href="{{ linkMsa || 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MASTER_SUBSCRIPTION_AGREEMENT' | translate }}</a>,
+  <a href="{{ linkTerms || ('LINK.TERMS_OF_SERVICE' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>,
+  <a href="{{ linkPrivacy || ('LINK.PRIVACY_POLICY' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
+  {{ 'GLOBAL.AND' | translate }}
+  <a href="{{ linkHipaa || 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>.
+  <!-- For clinic registration and password update -->
+  {{ 'FIELD.CONSENT.TEXT_GDPR' | translate }}
+  <a href="{{ linkDpa || 'LINK.DPA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.DPA' | translate }}</a>.
+</ng-template>
+

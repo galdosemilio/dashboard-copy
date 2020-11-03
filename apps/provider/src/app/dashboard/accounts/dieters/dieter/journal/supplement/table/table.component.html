@@ -1,0 +1,28 @@
+<ng-template #empty>-</ng-template>
+
+<table mat-table [dataSource]="source" class="supplement-table">
+
+  <ng-container matColumnDef="date" [sticky]="true">
+    <th mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.date | amDateFormat:'ddd, MMM D' }}
+    </td>
+  </ng-container>
+
+  <ng-container *ngFor="let supplement of source.supplements" matColumnDef="{{ supplement.supplement.fullName.split(' ').join('_') }}">
+    <th mat-header-cell *matHeaderCellDef>{{ supplement.supplement.fullName }}</th>
+    <td mat-cell *matCellDef="let row">
+      <mat-icon class="done" *ngIf="row.multiVitamin > row.dailyGoal; else partial">done</mat-icon>
+      <ng-template #partial>{{ row[supplement.supplement.fullName.split(' ').join('_')] || '0' }}/{{ supplement.dosage }}</ng-template>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="source.columns"></tr>
+  <tr mat-row
+    *matRowDef="let row; columns: source.columns; let even = even; let odd = odd"
+    [ngClass]="{
+      'row-even': even,
+      'row-odd': odd
+    }">
+  </tr>
+</table>

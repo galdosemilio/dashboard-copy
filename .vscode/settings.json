@@ -1,0 +1,22 @@
+{
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.minimap.renderCharacters": false,
+  "editor.tabSize": 2,
+  "editor.wordWrapColumn": 100,
+  "files.trimTrailingWhitespace": true,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "json.format.enable": true,
+  "html.format.enable": false,
+  "html.format.wrapLineLength": 100,
+  "prettier.disableLanguages": [
+    "html",
+    "jsonc"
+  ],
+  "tslint.autoFixOnSave": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "javascript.implicitProjectConfig.experimentalDecorators": true
+}

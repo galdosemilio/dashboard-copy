@@ -1,0 +1,53 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+  <date-navigator
+  [timeframe]="'week'"
+  [date]="dates.current"
+  (selectedDate)="updateDates($event)"
+  ></date-navigator>
+
+  <ccr-datasource-overlay class="ccr-table" [source]="source">
+
+    <mat-table [dataSource]="rows" matSort>
+
+      <ng-container cdkColumnDef="date">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayout="column" fxLayoutAlign="center start" fxFlex.xs="grow">
+          <span>{{ 'GLOBAL.DATE' | translate }}</span>
+          {{ row.date | amDateFormat:'dddd, MMM D' }}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container cdkColumnDef="red_foods">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.RED_FOODS' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="grow">
+          <span>{{ 'GLOBAL.RED_FOODS' | translate }}</span>
+          {{ row.foodKey }} {{ 'GLOBAL.FOOD_KEYS' | translate | lowercase }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="aerobic">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.AEROBIC' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="grow">
+          <span>{{ 'GLOBAL.AEROBIC' | translate }}</span>
+          {{ row.aerobic }} {{ 'GLOBAL.MINUTES' | translate | lowercase }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="strength">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.STRENGTH' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="grow">
+          <span>{{ 'GLOBAL.STRENGTH' | translate }}</span>
+          {{ row.strength }} {{ 'GLOBAL.MINUTES' | translate | lowercase }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+      <mat-row fxLayoutWrap
+        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+      ></mat-row>
+    </mat-table>
+
+  </ccr-datasource-overlay>
+</div>

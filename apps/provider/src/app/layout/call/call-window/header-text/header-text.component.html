@@ -1,0 +1,8 @@
+<mat-icon *ngIf="callState.participantJoined" color="primary">phone</mat-icon>
+<mat-icon *ngIf="!callState.participantJoined" >phone</mat-icon>
+<span [matTooltip]="getParticipantsText()" matTooltipPosition="above">
+  <ng-container *ngIf="!callState.participantJoined && callState.source === 'OUTBOUND' && !callState.isReconnect">{{ 'CALL.CALLING' | translate | uppercase }} </ng-container>
+  {{ getParticipantsText() | uppercase }}
+  <ng-container *ngIf="!callState.participantJoined && callState.source === 'OUTBOUND' && !callState.isReconnect">... </ng-container>
+  <ng-container *ngIf="!callState.participantJoined && callState.source === 'INBOUND' && callState?.controlsState === 'NOTIFYING'">{{ 'CALL.IS_CALLING' | translate | uppercase }}</ng-container>
+</span>

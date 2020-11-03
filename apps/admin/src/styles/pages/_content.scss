@@ -1,0 +1,46 @@
+.ccr-page-content {
+  line-height: 175%;
+
+  .page-header {
+    background-image: url('/assets/bg_page_content.jpg');
+
+    &.no-background {
+      background: none;
+    }
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+
+  ul,
+  ol {
+    li {
+      font-size: 1.2em;
+      margin: 8px 0;
+      li {
+        font-size: 0.9em;
+      }
+      p {
+        font-size: 0.9em;
+        margin: 10px;
+      }
+    }
+  }
+}
+.jsoneditor-tree-inner {
+  padding-bottom: 20px !important;
+}
+.jsoneditor-menu {
+  background-color: var(--primary, mat-color($ccr-primary)) !important;
+  border-bottom: 1px solid var(--primary, mat-color($ccr-primary)) !important;
+}
+.jsoneditor {
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+.mat-disabled.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--primary, mat-color($ccr-primary)) !important;
+}
+.mat-disabled.mat-checked .mat-slide-toggle-bar {
+  background-color: lighten(mat-color($ccr-primary), 10%) !important;
+}

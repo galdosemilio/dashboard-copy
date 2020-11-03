@@ -1,0 +1,47 @@
+@mixin horizontal-margin-left($margin) {
+  body.ltr & {
+    margin-left: $margin;
+  }
+
+  body.rtl & {
+    margin-left: 0px !important;
+    margin-right: $margin;
+  }
+}
+
+@mixin horizontal-padding-left($padding) {
+  body.ltr & {
+    padding-left: $padding;
+  }
+
+  body.rtl & {
+    padding-left: 0px !important;
+    padding-right: $padding;
+  }
+}
+
+@mixin horizontal-margin-right($margin) {
+  body.ltr & {
+    margin-right: $margin;
+  }
+
+  body.rtl & {
+    margin-right: 0px !important;
+    margin-left: $margin;
+  }
+}
+
+@mixin horizontal-padding-right($padding) {
+  body.ltr & {
+    padding-right: $padding;
+  }
+
+  body.rtl & {
+    padding-right: 0px !important;
+    padding-left: $padding;
+  }
+}
+
+[dir='rtl'] * {
+  direction: rtl;
+}

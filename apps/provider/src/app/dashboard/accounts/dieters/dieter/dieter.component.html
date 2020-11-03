@@ -1,0 +1,84 @@
+<div class="ccr-heading" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
+    <h2>{{ 'GLOBAL.PATIENTS' | translate }}</h2>
+    <a mat-button color="primary" class="ccr-button" routerLink="/accounts/patients">
+      {{ 'BOARD.BACK_LIST' | translate }}
+    </a>
+    <a *ngIf="showPatientPDFButton" color="primary" class="ccr-button" mat-button (click)="onShowProgressPDFModal()">
+      {{ 'BOARD.GENERATE_PDF' | translate }}
+    </a>
+    <div
+      *ngIf="hasRPMEnabled"
+      fxFlex
+      fxHide.xs
+      fxLayout="row"
+      fxLayoutAlign="end stretch">
+      <app-rpm-tracker></app-rpm-tracker>
+    </div>
+    <a
+    *ngIf="showDoctorPDFButton"
+    color="primary"
+    class="ccr-button"
+    mat-button
+    (click)="onShowDoctorPDFModal()">
+      {{ 'BOARD.GENERATE_DOCTOR_PDF' | translate }}
+    </a>
+  </div>
+
+  <div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-between stretch"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="10px">
+    <div class="ccr-name" fxFlex="auto" fxLayout="row" fxLayoutAlign="start">
+      <ccr-avatar size="bigger" [account]="dieter?.id"></ccr-avatar>
+      <h2>{{ dieter?.firstName | capitalize }} {{ dieter?.lastName | capitalize }}</h2>
+    </div>
+    <div fxFlex="nogrow" fxFlex.xs="grow"
+    fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+    fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
+      <ccr-call-control [targets]="[ dieter ]"></ccr-call-control>
+    </div>
+    <div fxFlex="nogrow" fxFlex.xs="grow"
+    fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+    fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
+      <button class="ccr-icon-button" color="primary" mat-button (click)="openPatientRpmReportDialog()">
+        <mat-icon
+        class="clickable">file_download</mat-icon>
+
+        {{ 'BOARD.DOWNLOAD_REPORT' | translate }}
+    </button>
+    </div>
+    <div *ngIf="showRPM" fxFlex="nogrow" fxFlex.xs="grow"
+    fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+    fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
+      <app-rpm (rpmStatusChange)="resolvePatientRPMStatus()"></app-rpm>
+    </div>
+  </div>
+
+  <div *ngIf="patientIsForeign" class="feature-disabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" data-cy="patientAssociationMessage">
+    <ccr-popup-description
+    [title]="'BOARD.FOREIGN_PATIENT_TITLE' | translate"
+    [description]="'BOARD.FOREIGN_PATIENT_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+    <p>{{ 'BOARD.FOREIGN_PATIENT_SHORT' | translate }}</p>
+  </div>
+</div>
+
+<div class="ccr-tabs" fxFlex="nogrow" fxLayout="row" fxLayoutAlign=" stretch">
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['dashboard']">{{'GLOBAL.DASHBOARD' | translate}}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['journal']">{{'GLOBAL.JOURNAL' | translate}}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['measurements']">{{'GLOBAL.MEASUREMENTS' | translate}}</a>
+  <a
+  *ngIf="showMessaging"
+  fxFlex
+  fxLayoutAlign="center center"
+  ccrLinkActive="active"
+  [routerLink]="['messages']">{{'GLOBAL.MESSAGES' | translate}}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['settings']">{{'GLOBAL.MORE' | translate}}</a>
+</div>
+
+<div class="ccr-subcomponent" fxFlex="grow">
+  <router-outlet></router-outlet>
+</div>

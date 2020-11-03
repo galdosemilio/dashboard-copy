@@ -1,0 +1,15 @@
+{
+  "accountType": {"id": "3", "title": "Client"},
+  "clientData": {"birthday": "2001-05-06", "height": 188, "gender": "male", "bmr": 2},
+  "countryCode": "+61",
+  "createdAt": "2019-05-24T08:18:57.859Z",
+  "email": "kajsnkasjdn@gmail.com",
+  "firstName": "00000000000000sdkjnaskjdn",
+  "id": "6784",
+  "isActive": true,
+  "lastName": "dnaskjnadkj",
+  "measurementPreference": "us",
+  "phone": "123123124",
+  "preferredLocales": ["en"],
+  "timezone": "America/New_York"
+}

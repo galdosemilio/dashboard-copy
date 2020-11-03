@@ -1,0 +1,80 @@
+
+<div class="ccr-heading">
+  <a mat-button color="primary" class="ccr-button" [routerLink]="[ routes.list() ]">
+    {{ 'BOARD.BACK' | translate }}
+  </a>
+
+  <div class="ccr-name" fxLayout="row" fxLayoutAlign.xs="center">
+    <h2 *ngIf="!id">{{ 'LABEL.CREATE_NEW' | translate }}</h2>
+    <h2 *ngIf="id">{{ item.title }}</h2>
+  </div>
+</div>
+
+<form [formGroup]="form" novalidate>
+  <div class="ccr-content">
+
+    <div class="ccr-panel">
+      <h3>{{ 'BOARD.BASIC_INFORMATION' | translate }}</h3>
+
+      <mat-form-field [class.readonly]="readonly">
+        <input matInput required [readonly]="readonly"
+        formControlName="title"
+        [placeholder]="'GLOBAL.TITLE' | translate">
+      </mat-form-field>
+
+      <mat-form-field [class.readonly]="readonly">
+        <textarea matInput required [readonly]="readonly"
+        formControlName="description"
+        mat-autosize
+        matAutosizeMinRows="2"
+        matAutosizeMaxRows="6"
+        [placeholder]="'LABEL.DESCRIPTION' | translate">
+        </textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="ccr-action-buttons" fxLayoutAlign="center center">
+    <button *ngIf="!id"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" (click)="onSubmit()">
+      <mat-icon>add</mat-icon>
+      {{ 'GLOBAL.SAVE' | translate }}
+    </button>
+
+    <button *ngIf="readonly && id"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" routerLink="edit">
+      <mat-icon>edit</mat-icon>
+      {{ 'GLOBAL.EDIT' | translate }}
+    </button>
+
+    <button *ngIf="!readonly && id"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" (click)="onUpdate()">
+      <mat-icon>save</mat-icon>
+      {{ 'GLOBAL.UPDATE' | translate }}
+    </button>
+
+    <button *ngIf="!readonly"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+      {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+
+    <button *ngIf="id && !form.value.isActive"
+    mat-button type="button" color="warn"
+    class="ccr-icon-button" (click)="onActivate()">
+      <mat-icon>power_settings_new</mat-icon>
+      {{ 'GLOBAL.ACTIVATE' | translate }}
+    </button>
+
+    <button *ngIf="id && form.value.isActive"
+    mat-button type="button" color="warn"
+    class="ccr-icon-button" (click)="onDeactivate()">
+      <mat-icon>power_settings_new</mat-icon>
+      {{ 'GLOBAL.DEACTIVATE' | translate }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,42 @@
+<div matDialogTitle>
+  <div>
+    <span matDialogTitle [innerHTML]="'ADMIN.ORGS.EDIT_ACTIVE_CAMPAIGN' | translate"></span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content [formGroup]="form">
+  <div
+  class="form-container"
+  fxLayout="column"
+  fxLayoutAlign="start stretch">
+    <mat-form-field floatLabel="always">
+      <input [placeholder]="'GLOBAL.NAME' | translate" formControlName="name" matInput readonly type="text">
+    </mat-form-field>
+
+    <!-- <mat-form-field floatLabel="always">
+      <input [placeholder]="'GLOBAL.DESCRIPTION' | translate" formControlName="description" matInput type="text">
+    </mat-form-field> -->
+
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <h5>{{ 'ADMIN.ORGS.ACTIVE_CAMPAIGN_ASSOC_STATUS' | translate }}</h5>
+
+      <mat-radio-group formControlName="isActive" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+        <mat-radio-button [value]="true">{{ 'GLOBAL.ACTIVE' | translate }}</mat-radio-button>
+        <mat-radio-button [value]="false">{{ 'GLOBAL.INACTIVE' | translate }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+  <button [disabled]="form.invalid" (click)="onSubmit()" class="ccr-button" color="warn" mat-raised-button>
+    <span>{{ 'GLOBAL.SAVE' | translate }}</span>
+  </button>
+
+  <button class="ccr-button" mat-button matDialogClose>
+    <span>{{ 'GLOBAL.CANCEL' | translate }}</span>
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,28 @@
+@import 'variables';
+@import 'shared/directed-styles';
+
+.mat-row {
+  @media #{$medium-and-up} {
+    padding-bottom: 7px;
+    padding-top: 7px;
+  }
+}
+
+.mat-cell {
+  img {
+    @include horizontal-margin-right(0.5em);
+  }
+
+  .material-icons {
+    cursor: default;
+    @include horizontal-margin-right(0.3em);
+
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+
+    &.active {
+      color: var(--primary);
+    }
+  }
+}

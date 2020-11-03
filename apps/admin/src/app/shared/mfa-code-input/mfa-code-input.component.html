@@ -1,0 +1,137 @@
+<div
+*ngIf="mode === 'mfa_sms'"
+[formGroup]="form"
+(keydown.enter)="onSubmit()"
+fxLayout="column"
+fxLayoutGap="12px">
+  <small [innerHTML]="'MFA.SMS_INFO' | translate"></small>
+
+  <mat-form-field>
+    <input
+    [placeholder]="'GLOBAL.VERIFICATION_CODE' | translate"
+    formControlName="code"
+    matInput
+    required
+    type="text">
+  </mat-form-field>
+
+  <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="12px">
+    <button
+    [disabled]="form.invalid"
+    [disableRipple]="loading"
+    (click)="onSubmit()"
+    mat-flat-button
+    color="primary"
+    type="button"
+    class="ccr-button">
+      <span>{{ 'MFA.SEND_VERIFICATION_CODE' | translate }}</span>
+    </button>
+    <button
+    *ngIf="cancellable"
+    [disabled]="loading"
+    (click)="reset.emit()"
+    mat-button
+    class="ccr-button"
+    color="primary"
+    type="button">{{ 'GLOBAL.CANCEL' | translate }}</button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="12px">
+    <span fxFlex class="text-center">
+      <a (click)="onResendSMS()" class="clickable">{{ 'MFA.RESEND_SMS' | translate }}</a>
+    </span>
+    <span fxFlex class="text-center" (click)="setMode('backup_code')">
+      <a class="clickable">{{ 'MFA.USE_BACKUP_CODE' | translate }}</a>
+    </span>
+  </div>
+  <div>
+    <small [innerHTML]="'MFA.MFA_LOGIN_HELP_PROMPT' | translate" fxFlex class="text-center"></small>
+  </div>
+</div>
+
+<div
+*ngIf="mode === 'auth'"
+[formGroup]="form"
+(keydown.enter)="onSubmit()"
+fxLayout="column"
+fxLayoutGap="12px">
+  <small [innerHTML]="'MFA.AUTH_INFO' | translate"></small>
+
+  <mat-form-field>
+    <input
+    [placeholder]="'GLOBAL.VERIFICATION_CODE' | translate"
+    formControlName="code"
+    matInput
+    required
+    type="text">
+  </mat-form-field>
+
+  <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="12px">
+    <button
+    [disabled]="form.invalid"
+    [disableRipple]="loading"
+    (click)="onSubmit()"
+    mat-flat-button
+    color="primary"
+    type="button"
+    class="ccr-button">
+      <span *ngIf="!loading">{{ 'MFA.SEND_VERIFICATION_CODE' | translate }}</span>
+      <span *ngIf="loading">
+          <mat-spinner strokeWidth="3" diameter="20"></mat-spinner>
+      </span>
+    </button>
+    <button
+    *ngIf="cancellable"
+    [disabled]="loading"
+    (click)="reset.emit()"
+    class="ccr-button"
+    color="primary"
+    mat-button
+    type="button">{{ 'GLOBAL.CANCEL' | translate }}</button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="12px">
+    <span fxFlex class="text-center" (click)="setMode('backup_code')"><a class="clickable">{{ 'MFA.USE_BACKUP_CODE' | translate }}</a></span>
+  </div>
+  <div>
+    <small [innerHTML]="'MFA.MFA_LOGIN_HELP_PROMPT' | translate" fxFlex class="text-center"></small>
+  </div>
+</div>
+
+<div
+*ngIf="mode === 'backup_code'"
+[formGroup]="form"
+(keydown.enter)="onSubmit()"
+fxLayout="column"
+fxLayoutGap="12px">
+  <small>{{ 'MFA.BACKUP_CODE_INFO' | translate }}</small>
+
+  <mat-form-field>
+    <input
+    [placeholder]="'MFA.BACKUP_CODE' | translate"
+    formControlName="code"
+    matInput
+    required
+    type="text">
+  </mat-form-field>
+
+  <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="12px">
+    <button
+    [disabled]="form.invalid"
+    (click)="onSubmit()"
+    mat-flat-button
+    class="ccr-button"
+    color="primary"
+    type="button">{{ 'MFA.SEND_BACKUP_CODE' | translate }}</button>
+    <button
+    *ngIf="cancellable"
+    [disabled]="loading"
+    (click)="reset.emit()"
+    class="ccr-button"
+    color="primary"
+    mat-button
+    type="button">{{ 'GLOBAL.CANCEL' | translate }}</button>
+  </div>
+
+  <div>
+    <small [innerHTML]="'MFA.MFA_LOGIN_HELP_PROMPT' | translate" fxFlex class="text-center"></small>
+  </div>
+</div>

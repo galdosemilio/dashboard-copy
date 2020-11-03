@@ -1,0 +1,65 @@
+{
+  "id": "3378",
+  "displayName": "testing",
+  "bccEmails": [],
+  "appIds": {
+    "ios": "ios-app",
+    "android": "android-app"
+  },
+  "assets": {
+    "logoUrl": "https://d3vngy9ttk2wws.cloudfront.net/3378_logo.jpg",
+    "iconUrl": "https://d3vngy9ttk2wws.cloudfront.net/3378_icon.png",
+    "splashUrl": "https://d3vngy9ttk2wws.cloudfront.net/3378_splash.png",
+    "faviconUrl": "https://d3vngy9ttk2wws.cloudfront.net/ccr_favicon.png",
+    "color": {
+      "primary": "#165bbf",
+      "toolbar": "accent",
+      "secondary": "#ff0000",
+      "accent": "#555555"
+    }
+  },
+  "openAssociation": { "client": true },
+  "mala": {
+    "appName": "CoachCare",
+    "iosBundleId": "com.coachcare.coachcareionic",
+    "androidBundleId": "com.coachcare.coachcareionic.android",
+    "firebaseProjectName": "production",
+    "appStoreConnectTeamId": "1239712973",
+    "developerPortalTeamId": "wfe9h023ry",
+    "other1": "other text",
+    "other2": "other text 2",
+    "otherempty": "",
+    "othernull": null
+  },
+  "onboarding": {
+    "client": {
+      "packages": [
+        "322",
+        "699",
+        "86"
+      ]
+    }
+  },
+  "food": {
+    "mode": []
+  },
+  "conference": {
+    "enabled": true
+  },
+  "content": {
+    "enabled": true
+  },
+  "messaging": {
+    "enabled": false
+  },
+  "sequence": {
+    "enabled": true
+  },
+  "clinicCodeHelp": [{
+    "locale": "en",
+    "content": "Test text english"
+  }, {
+    "locale": "es",
+    "content": "Test text spanish"
+  }]
+}

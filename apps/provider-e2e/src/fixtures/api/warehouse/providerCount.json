@@ -1,0 +1,324 @@
+{
+  "data": [
+    {
+      "date": "2019-11-29",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        },
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        },
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        }
+      ]
+    },
+    {
+      "date": "2019-11-30",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        },
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        }
+      ]
+    },
+    {
+      "date": "2019-12-01",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        },
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        }
+      ]
+    },
+    {
+      "date": "2019-12-02",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        },
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        }
+      ]
+    },
+    {
+      "date": "2019-12-03",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        },
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        },
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        }
+      ]
+    },
+    {
+      "date": "2019-12-04",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        },
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        },
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        }
+      ]
+    },
+    {
+      "date": "2019-12-05",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        },
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        }
+      ]
+    },
+    {
+      "date": "2019-12-06",
+      "aggregates": [
+        {
+          "organization": {
+            "id": "3305",
+            "name": "0130 - Pharmasave James Bay"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "2545",
+            "name": "Canar International Inc"
+          },
+          "count": 3
+        },
+        {
+          "organization": {
+            "id": "22",
+            "name": "0000 - Test - IP Corporate (USA)"
+          },
+          "count": 28
+        },
+        {
+          "organization": {
+            "id": "1244",
+            "name": "0027 - Pharmasave Health Centre #027 / Pharmasave"
+          },
+          "count": 2
+        },
+        {
+          "organization": {
+            "id": "268",
+            "name": "0029 Pharmasave - Pharmasave 029"
+          },
+          "count": 2
+        }
+      ]
+    }
+  ]
+}

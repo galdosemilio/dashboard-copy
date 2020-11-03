@@ -1,0 +1,73 @@
+<ccr-page-section [orgId]="this.context.organizationId" class="page-header" section="REGISTER.HEADER"></ccr-page-section>
+
+<div class="page-content">
+
+  <div *ngIf="showLogo" class="logo-wrapper">
+    <img [src]="logoUrl">
+  </div>
+
+  <ccr-page-section *ngIf="hideTitle" [orgId]="this.context.organizationId" section="REGISTER.HEADER_TITLE"></ccr-page-section>
+
+  <mat-horizontal-stepper linear #stepper [class]="hideSteps ? '' : 'hide-header'">
+    <mat-step *ngIf="mobAppTypes?.length" [stepControl]="step0" [editable]="false" data-name="mob_app_type">
+      <div>
+        <div class="section-header">{{ 'PAGE.REGISTER.STEP1.DEFAULT.MOBILE_APP_TYPE' | translate }}</div>
+
+        <p>{{ 'PAGE.REGISTER.STEP1.DEFAULT.WELCOME_PLATFORM_PAGE' | translate:{ clinic: orgName.displayName } }}</p>
+        <p>{{ 'PAGE.REGISTER.STEP1.DEFAULT.MOB_APP_TYPE_CHOOSE' | translate }}</p>
+
+        <ccr-form-field-block
+        [options]="mobAppTypes"
+        (selectionChange)="onBlockOptionSelect($event)"></ccr-form-field-block>
+
+        <div fxLayoutAlign="center" fxLayoutGap="1%">
+          <button class="nextStep" mat-button type="button" [disabled]="step0.invalid" (click)="nextStep(stepper)">
+            {{ 'GLOBAL.CONTINUE' | translate }}
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="step1" [editable]="false" data-name="clinic_info">
+      <ccr-page-register-clinic-info
+        [formGroup]="step1"
+        [orgName]="orgName"
+        (nextStep)="nextStep(stepper)"
+      ></ccr-page-register-clinic-info>
+    </mat-step>
+
+    <mat-step *ngIf="showClinicPackagesStep" [stepControl]="plan" [editable]="false" data-name="clinic_plan">
+      <ccr-register-clinic-default-clinic-packages
+        [formGroup]="plan"
+        (nextStep)="nextStep(stepper)"
+        (selected)="onSelectPackageItem($event)">
+      </ccr-register-clinic-default-clinic-packages>
+    </mat-step>
+
+    <mat-step
+    [stepControl]="step2"
+    [editable]="false"
+    *ngIf="paymentRequired !== undefined"
+    data-name="clinic_payment">
+      <ccr-page-register-clinic-payment
+        [formGroup]="step2"
+        [isLoading]="isLoading"
+        [required]="paymentRequired"
+        (nextStep)="nextStep(stepper)"
+      ></ccr-page-register-clinic-payment>
+    </mat-step>
+
+    <mat-step data-name="clinic_confirmation">
+      <ccr-page-section
+        [compData]="lastStepSetup"
+        [orgId]="this.context.organizationId"
+        section="REGISTER.LAST_STEP">
+      </ccr-page-section>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+  <mat-progress-bar *ngIf="isLoading"
+    color="primary" mode="indeterminate"
+  ></mat-progress-bar>
+</div>

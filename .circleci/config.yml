@@ -1,13 +1,281 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
+
 orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+  aws-code-deploy: circleci/aws-code-deploy@0.0.9
+  aws-cli: circleci/aws-cli@0.1.16
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.16.3
+
+yarn_auth: &yarn_auth
+  name: Set up .npmrc (auth)
+  command: |
+    sudo echo "registry=https://$NPM_REGISTRY" > ~/.npmrc
+    sudo echo "//$NPM_REGISTRY:_authToken=\"$NPM_AUTH_TOKEN\"" >> ~/.npmrc
+    sudo echo "//$NPM_REGISTRY:always-auth=true" >> ~/.npmrc
+    sudo echo "//npm.pkg.github.com/:_authToken=\"$COACHCARE_AUTH_TOKEN\"" >> ~/.npmrc
+    sudo echo "@coachcare:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+
+npm_dependency_installation: &npm_dependency_installation
+  name: Installing NPM dependencies
+  command: |
+    attempts=0
+    until [ $attempts -ge 5 ]
+    do
+        yarn install --frozen-lockfile && break
+        attempts=$[$attempts+1]
+        echo "yarn install attempt $attempts failed, retrying"
+    done
+    if [ $attempts -ge 5 ]; then
+        exit 5
+    fi
+
+dependency_cache_key: &dependency_cache_key dependency-cache-{{ checksum "yarn.lock" }}
+
+jobs:
+  setup:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *yarn_auth
+      - restore_cache:
+          key: *dependency_cache_key
+      - run: *npm_dependency_installation
+      - save_cache:
+          key: *dependency_cache_key
+          paths:
+            - ./node_modules
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  affected_lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Affected Lint
+          command: yarn affected:lint --parallel --base=origin/master
+
+  affected_build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Affected Build
+          command: yarn affected:build --parallel --base=origin/master
+
+  affected_test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Affected Test
+          command: yarn affected:test --base=origin/master --exclude=api,datepicker,layout
+
+  affected_e2e:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Affected E2E
+          command: yarn affected:e2e --base=origin/master
+  full_test_build:
+    <<: *defaults
+    resource_class: medium+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Execute Full Test Build
+          command: NODE_OPTIONS=--max_old_space_size=6144 yarn build admin -c test
+      - run:
+          name: Copy deployment files
+          command: cp appspec.yml ~/repo/dist/apps && cp -r scripts ~/repo/dist/apps
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+  full_production_build:
+    <<: *defaults
+    resource_class: medium+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Execute Full Production Build
+          command: NODE_OPTIONS=--max_old_space_size=6144 yarn build admin -c prod
+      - run:
+          name: Copy deployment files
+          command: cp appspec.yml ~/repo/dist/apps && cp -r scripts ~/repo/dist/apps
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+  deploy_to_test:
+    working_directory: ~/repo/dist/apps
+    executor: aws-cli/default
+    # aws-code-deploy/deploy is a _job_ and you cannot attach a workspace to it. We have to do that because the workspace contains compiled JS code, so we have to extract the steps here instead
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - aws-cli/setup
+      - aws-code-deploy/create-application:
+          application-name: $CIRCLE_PROJECT_REPONAME
+      # We cannot use aws-code-deploy/create-deployment group because of https://github.com/CircleCI-Public/circleci-orbs/issues/185
+      # Step was adapted from https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy#orb-source
+      - run:
+          name: ensure-deployment-created
+          command: |
+            set +e
+            aws deploy get-deployment-group \
+              --application-name $CIRCLE_PROJECT_REPONAME \
+              --deployment-group-name test
+            if [ $? -ne 0 ]; then
+              set -e
+              echo "No deployment group named test found. Trying to create a new one"
+              aws deploy create-deployment-group \
+                --application-name $CIRCLE_PROJECT_REPONAME \
+                --deployment-group-name test \
+                --deployment-config-name CodeDeployDefault.OneAtATime \
+                --service-role-arn $CODEDEPLOY_ROLE_ARN \
+                --ec2-tag-filters Key=web-deployment-target,Value=test-web,Type=KEY_AND_VALUE \
+                --auto-rollback-configuration enabled=true,events=DEPLOYMENT_FAILURE
+            else
+              set -e
+              echo "Deployment group named test already exists. Skipping creation."
+            fi
+      - aws-code-deploy/push-bundle:
+          application-name: $CIRCLE_PROJECT_REPONAME
+          bundle-bucket: coachcare-site-deployment
+          bundle-key: ${CIRCLE_PROJECT_REPONAME}-test-${CIRCLE_SHA1}
+          arguments: --ignore-hidden-files
+      - aws-code-deploy/deploy-bundle:
+          application-name: $CIRCLE_PROJECT_REPONAME
+          deployment-group: test
+          bundle-bucket: coachcare-site-deployment
+          bundle-key: ${CIRCLE_PROJECT_REPONAME}-test-${CIRCLE_SHA1}
+          # We don't have to overwrite target catalog, since we're going to use a temporary directory anyway
+          # This will prevent us from doing overlapping deployments, too, which is a good thing
+      - run:
+          name: Push SumoLogic deployment notification
+          command: |
+            echo "`date` | Site deployment completed for PROJECT: $CIRCLE_PROJECT_REPONAME BRANCH: $CIRCLE_BRANCH COMMIT: $CIRCLE_SHA1 ENV: test DEPLOYER: $CIRCLE_USERNAME" > sumologic-deployment.log
+            curl -s -X POST -T sumologic-deployment.log "$SUMOLOGIC_COLLECTOR_URL" || { echo 'SumoLogic deployment log upload failed'; exit 0; }
+
+  deploy_to_production:
+    working_directory: ~/repo/dist/apps
+    executor: aws-cli/default
+
+    # aws-code-deploy/deploy is a _job_ and you cannot attach a workspace to it. We have to do that because the workspace contains compiled JS code, so we have to extract the steps here instead
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - aws-cli/setup
+      - aws-code-deploy/create-application:
+          application-name: $CIRCLE_PROJECT_REPONAME
+      # We cannot use aws-code-deploy/create-deployment group because of https://github.com/CircleCI-Public/circleci-orbs/issues/185
+      # Step was adapted from https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy#orb-source
+      - run:
+          name: ensure-deployment-created
+          command: |
+            set +e
+            aws deploy get-deployment-group \
+              --application-name $CIRCLE_PROJECT_REPONAME \
+              --deployment-group-name production
+            if [ $? -ne 0 ]; then
+              set -e
+              echo "No deployment group named production found. Trying to create a new one"
+              aws deploy create-deployment-group \
+                --application-name $CIRCLE_PROJECT_REPONAME \
+                --deployment-group-name production \
+                --deployment-config-name CodeDeployDefault.OneAtATime \
+                --service-role-arn $CODEDEPLOY_ROLE_ARN \
+                --ec2-tag-filters Key=web-deployment-target,Value=production-web,Type=KEY_AND_VALUE \
+                --auto-rollback-configuration enabled=true,events=DEPLOYMENT_FAILURE
+            else
+              set -e
+              echo "Deployment group named production already exists. Skipping creation."
+            fi
+      - aws-code-deploy/push-bundle:
+          application-name: $CIRCLE_PROJECT_REPONAME
+          bundle-bucket: coachcare-site-deployment
+          bundle-key: ${CIRCLE_PROJECT_REPONAME}-production-${CIRCLE_SHA1}
+          arguments: --ignore-hidden-files
+      - aws-code-deploy/deploy-bundle:
+          application-name: $CIRCLE_PROJECT_REPONAME
+          deployment-group: production
+          bundle-bucket: coachcare-site-deployment
+          bundle-key: ${CIRCLE_PROJECT_REPONAME}-production-${CIRCLE_SHA1}
+          # We don't have to overwrite target catalog, since we're going to use a temporary directory anyway
+          # This will prevent us from doing overlapping deployments, too, which is a good thing
+      - run:
+          name: Push SumoLogic deployment notification
+          command: |
+            echo "`date` | Site deployment completed for PROJECT: $CIRCLE_PROJECT_REPONAME BRANCH: $CIRCLE_BRANCH COMMIT: $CIRCLE_SHA1 ENV: production DEPLOYER: $CIRCLE_USERNAME" > sumologic-deployment.log
+            curl -s -X POST -T sumologic-deployment.log "$SUMOLOGIC_COLLECTOR_URL" || { echo 'SumoLogic deployment log upload failed'; exit 0; }
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  setup_build_deploy:
     jobs:
-      - welcome/run
+      - setup
+      # - affected_lint:
+      #    requires:
+      #      - setup
+      - affected_build:
+          requires:
+            - setup
+      # - affected_test:
+      #     requires:
+      #       - affected_build
+      # - affected_e2e:
+      #     requires:
+      #       - affected_build
+      - full_test_build
+        # requires:
+        # - affected_lint
+        # - affected_test
+        # - affected_e2e
+      - approve_test_deployment:
+          type: approval
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - full_test_build
+      - deploy_to_test:
+          requires:
+            - approve_test_deployment
+            - full_test_build
+          context: site-deployment-test
+      - full_production_build:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - deploy_to_test
+      - approve_production_deployment:
+          filters:
+            branches:
+              only:
+                - master
+          type: approval
+          requires:
+            - full_production_build
+      # - deploy_to_production:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #     requires:
+      #       - approve_production_deployment
+      # context: site-deployment-prod

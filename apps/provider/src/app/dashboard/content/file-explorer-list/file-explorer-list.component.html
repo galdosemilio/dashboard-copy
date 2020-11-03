@@ -1,0 +1,40 @@
+<mat-list dense>
+    <ng-container *ngFor="let directory of contentDirectories;">
+        <mat-list-item (click)="toggleDirectory(directory)" class="directory"
+            [class.highlighted]="selectedContentId === directory.content.id" [hidden]="directory.disabled"
+            [ccrDraggable]="{ data: directory.draggableDirectory, isDraggable: directory.isDraggable }"
+            [ccrDropzone]="{ data: directory, isDroppable: directory.isDroppable }"
+            (ccrDrop)="dropDirectory($event)">
+            <ng-container *ngIf="directory.content.isFolder" mat-list-icon>
+                <mat-icon *ngIf="directory.isOpen">folder_open</mat-icon>
+                <mat-icon *ngIf="!directory.isOpen">folder</mat-icon>
+            </ng-container>
+            <mat-icon mat-list-icon *ngIf="!directory.content.isFolder" [fontSet]="directory.content.icon.set" [fontIcon]="directory.content.icon.name">
+                {{ directory.content.icon.set ? '' : directory.content.icon.name }}
+            </mat-icon>
+            <strong mat-line fxLayout="row" fxLayoutGap="1%" fxLayoutAlign="start center">
+                <div class="directory-content-name">{{ directory.content.name }}</div>
+                <div *ngIf="directory.content.isForeign">({{ 'LIBRARY.CONTENT.FROM' | translate:{organization: directory.content.organization.name} }})</div>
+                <div *ngIf="!directory.content.isPublic">
+                    <mat-icon class="directory-private-icon">lock</mat-icon>
+                </div>
+                <div *ngIf="directory.source && directory.source.isLoading">
+                    <mat-spinner strokeWidth="3" [diameter]="25"></mat-spinner>
+                </div>
+            </strong>
+            <span *ngIf="directory.content.isFolder">
+                <mat-icon mat-list-icon class="directory-dropdown" [class.active]="directory.isOpen">chevron_left</mat-icon>
+            </span>
+        </mat-list-item>
+        <app-content-file-explorer-list class="inner-directory"
+            *ngIf="directory.content.isFolder && directory.isOpen" [source]="directory.source" [events]="events"
+            [organization]="organization" [options]="options">
+        </app-content-file-explorer-list>
+    </ng-container>
+    <mat-list-item *ngIf="contentDirectories && contentDirectories.length && source.next" (click)="loadMore()">
+        <a class="load-more-button">{{ 'LIBRARY.CONTENT.LOAD_MORE' | translate }}</a>
+    </mat-list-item>
+    <mat-list-item *ngIf="contentDirectories && !contentDirectories.length">
+        ({{ 'LIBRARY.CONTENT.EMPTY' | translate }})
+    </mat-list-item>
+</mat-list>

@@ -1,0 +1,17 @@
+<mat-form-field floatLabel="always" [class.readonly]="isReadonly">
+  <mat-select
+  [class.mat-select-invalid]="_control?.invalid && _control?.touched"
+  [compareWith]="compareWith"
+  [disableOptionCentering]="false"
+  [placeholder]="placeholder"
+  [required]="isRequired"
+  [attr.disabled]="isReadonly ? '' : null"
+  [(value)]="selected"
+  (selectionChange)="onChange()"
+  (blur)="propagateTouch()"
+  (change)="$event.stopPropagation()">
+    <mat-option *ngFor="let option of options" [value]="getArray ? [option.value] : option.value">
+      {{ option.viewValue | translate }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

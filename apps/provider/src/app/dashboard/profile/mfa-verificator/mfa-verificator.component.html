@@ -1,0 +1,68 @@
+<div [ngSwitch]="mode">
+    <div *ngSwitchCase="'auth'" fxLayout="row" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+        <div fxFlex="69%" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+            <ul>
+                <li>{{ channel.steps[0] | translate }}</li>
+                <li>{{ channel.steps[1] | translate }}</li>
+                <li>{{ channel.steps[2] | translate }}</li>
+                <div class="qr-code-wrapper">
+                    <qrcode *ngIf="qrData" [qrdata]="qrData" [size]="128" [level]="'M'"></qrcode>
+                </div>
+                <button
+                [disabled]="isLoading"
+                (click)="onReset({ emitEvent: true })"
+                class="ccr-button regen"
+                color="primary"
+                mat-button>{{ 'PROFILE.MFA.REGEN_QR' | translate }}</button>
+                <br/>
+                <span *ngIf="secretKey" [innerHTML]="'PROFILE.MFA.SECRET_KEY_PROMPT' | translate:{ key: secretKey }"></span>
+                <li>{{ channel.steps[3] | translate }}</li>
+            </ul>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
+                <mat-form-field fxFlex>
+                    <input matInput required formControlName="code"
+                    [placeholder]="'PROFILE.MFA.VERIFICATION_CODE' | translate">
+                </mat-form-field>
+            </form>
+        </div>
+        <div *ngIf="authApps && authApps.length" fxFlex="29%" fxLayout="column" fxLayoutAlign="start stretch">
+            <p *ngFor="let authApp of authApps">
+                <strong>{{ authApp.displayName | translate }}</strong><br/>
+                <a [href]="authApp.playStore" target="_blank">{{ 'GLOBAL.PLAY_STORE' | translate }}</a><br/>
+                <a [href]="authApp.appStore" target="_blank">{{ 'GLOBAL.APP_STORE' | translate }}</a>
+            </p>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'sms'" fxLayout="row" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+        <div fxFlex="59%">
+            <p [innerHTML]="'PROFILE.MFA.SMS_INFO' | translate:{ minutes: channelTimeout / 60000 }"></p>
+            <button
+            [disabled]="isLoading"
+            (click)="onReset({ emitEvent: true })"
+            class="ccr-button regen"
+            color="primary"
+            mat-button>{{ 'PROFILE.MFA.RESEND_SMS' | translate }}</button>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
+                <mat-form-field fxFlex>
+                    <input matInput required formControlName="code"
+                    [placeholder]="'PROFILE.MFA.VERIFICATION_CODE' | translate">
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div fxFlex="39%">
+            <p [innerHTML]="'PROFILE.MFA.SMS_PHONE_CONFIRM' | translate"></p>
+            <form [formGroup]="phoneForm" (ngSubmit)="onSubmitPhone()" fxLayout="column" fxLayoutAlign="center stretch">
+                <ccr-phone-input formControlName="phone" fxFlex></ccr-phone-input>
+                <button
+                [disabled]="phoneForm.invalid || isLoading"
+                (click)="onSubmitPhone()"
+                class="ccr-button regen"
+                color="primary"
+                mat-button
+                type="button">{{ 'GLOBAL.UPDATE' | translate }}</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div fxLayout="row" fxLayoutAlign=" stretch" fxLayoutGap="5px">
+  <div fxFlex>
+    <date-range-navigator
+    *ngIf="range"
+    [fixedPeriod]="fixedPeriod"
+    [startView]="startView"
+    [start]="startPeriod?.startDate"
+    [end]="startPeriod?.endDate"
+    (selectedDate)="updateDates($event)"></date-range-navigator>
+    <date-navigator
+    *ngIf="!range"
+    [allowNavigation]="allowNavigation"
+    [dayDateFormat]="dayDateFormat"
+    [discrete]="discrete"
+    [timeframe]="timeframe"
+    (selectedDate)="updateDates($event)"></date-navigator>
+  </div>
+</div>

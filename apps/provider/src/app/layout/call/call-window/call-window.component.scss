@@ -1,0 +1,23 @@
+@import 'variables';
+
+.call-timeout-help {
+  color: mat-color($ccr-foreground, secondary-text);
+}
+
+.container-overlap {
+  position: relative;
+  height: 224px;
+  min-height: 224px;
+  height: 90%;
+  overflow-y: hidden;
+}
+
+.slow-conn-warning {
+  color: var(--primary);
+  margin-bottom: 10px;
+  text-align: center;
+
+  mat-icon {
+    color: var(--primary);
+  }
+}

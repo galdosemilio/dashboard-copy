@@ -1,0 +1,33 @@
+add-rightpanel-measurements {
+  .notes-container {
+    margin-bottom: 15px;
+    max-height: 35vh !important;
+  }
+
+  .action-button-container {
+    margin-bottom: 10px;
+  }
+
+  .mat-form-field.ng-invalid {
+    margin-bottom: 1em;
+  }
+
+  .notes-container {
+    max-height: 55vh;
+    overflow-y: auto;
+
+    mat-spinner {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .timezone-notice-container {
+    margin: 0 20px 15px 20px;
+
+    small {
+      max-width: 90%;
+      word-wrap: break-word;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import 'shared/directed-styles';
+app-alerts-table {
+  .ccr-table {
+    .mat-table {
+      .mat-column-type {
+        ccr-alert-icon {
+          @include horizontal-margin-right(10px);
+        }
+      }
+    }
+  }
+}

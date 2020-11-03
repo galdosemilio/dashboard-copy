@@ -1,0 +1,31 @@
+<div matDialogTitle>
+  <div>
+    <span *ngIf="data.title" matDialogTitle [innerHTML]="data.title | translate: data.titleParams"></span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <div class="ccr-grid">
+    <mat-grid-list [cols]="colSpan" rowHeight="36px">
+
+      <ng-container *ngFor="let locale of locales">
+        <mat-grid-tile [colspan]="colSpan">
+          <strong class="lang-native-name">
+            {{ locale.language.nativeName }}
+          </strong>
+        </mat-grid-tile>
+
+        <mat-grid-tile *ngFor="let country of locale.countries">
+          <button mat-button [class.active]="country.code === lang" (click)="setLocale(country.code)">
+            <img [src]="country.flag">
+            <span>{{ country.nativeCountry }}</span>
+          </button>
+        </mat-grid-tile>
+      </ng-container>
+
+    </mat-grid-list>
+  </div>
+</mat-dialog-content>

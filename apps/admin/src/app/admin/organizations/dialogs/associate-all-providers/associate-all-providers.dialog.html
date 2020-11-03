@@ -1,0 +1,66 @@
+<div matDialogTitle>
+  <div>
+    <span matDialogTitle [innerHTML]="'ADMIN.ORGS.ASSOC_ALL_PROVIDERS' | translate"></span>
+  </div>
+  <button *ngIf="state !== 'processing'" matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <div
+  [ngSwitch]="state"
+  class="form-container"
+  fxLayout="column"
+  fxLayoutAlign="start stretch">
+
+    <div *ngSwitchCase="'warning'">
+      {{ 'ADMIN.ORGS.ASSOC_ALL_PROVIDERS_WARNING' | translate }}
+    </div>
+
+    <div *ngSwitchCase="'processing'" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <p>{{ 'ADMIN.ORGS.ASSOC_ALL_PROVIDERS_CURRENT' | translate:{provider: currentProvider} }}</p>
+
+      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+    </div>
+
+    <div *ngSwitchCase="'results'" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <div *ngIf="failedProviders && failedProviders.length">
+        <p>{{ 'ADMIN.ORGS.ASSOC_ALL_PROVIDERS_RESULTS_ERRORS' | translate }}</p>
+
+        <ul>
+          <li *ngFor="let failedProvider of failedProviders">(ID {{ failedProvider.id }}) {{ failedProvider.firstName }} {{ failedProvider.lastName }}</li>
+        </ul>
+      </div>
+
+      <p *ngIf="!failedProviders || !failedProviders.length">
+        {{ 'ADMIN.ORGS.ASSOC_ALL_PROVIDERS_SUCCESSFULLY' | translate }}
+      </p>
+    </div>
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+  <div [ngSwitch]="state">
+    <div *ngSwitchCase="'warning'">
+      <button (click)="onAssociateAllProviders()" class="ccr-button" color="warn" mat-raised-button>
+        <span>{{ 'GLOBAL.YES' | translate }}</span>
+      </button>
+
+      <button class="ccr-button" mat-button matDialogClose>
+        <span>{{ 'GLOBAL.CANCEL' | translate }}</span>
+      </button>
+    </div>
+
+    <div *ngSwitchCase="'results'">
+      <button (click)="onAssociateAllProviders(failedProviders)" class="ccr-button" color="warn" mat-raised-button>
+        <span>{{ 'GLOBAL.RETRY' | translate }}</span>
+      </button>
+
+      <button class="ccr-button" mat-button matDialogClose>
+        <span>{{ 'GLOBAL.CLOSE' | translate }}</span>
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions>

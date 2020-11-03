@@ -1,0 +1,24 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <p [innerHTML]="'ADMIN.ORGS.MARKETING_DESCRIPTION' | translate"></p>
+
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <button (click)="onAssociateActiveCampaign()" class="ccr-icon-button" mat-button>
+      <mat-icon>add</mat-icon>
+      {{ 'ADMIN.ORGS.ASSOC_ACTIVE_CAMPAIGN' | translate }}
+    </button>
+
+    <button [disabled]="!source.result?.length" (click)="onEnrollProviderCampaign()" class="ccr-icon-button" mat-button>
+      <mat-icon>person</mat-icon>
+      {{ 'ADMIN.ORGS.ASSOC_PROVIDER_CAMPAIGN' | translate }}
+    </button>
+
+    <button [disabled]="!source.result?.length" (click)="onEnrollAllProviders()" class="ccr-icon-button" mat-button>
+      <mat-icon>supervisor_account</mat-icon>
+      {{ 'ADMIN.ORGS.ASSOC_ALL_PROVIDERS' | translate }}
+    </button>
+  </div>
+
+  <div>
+    <ccr-organizations-active-campaign-table [source]="source"></ccr-organizations-active-campaign-table>
+  </div>
+</div>

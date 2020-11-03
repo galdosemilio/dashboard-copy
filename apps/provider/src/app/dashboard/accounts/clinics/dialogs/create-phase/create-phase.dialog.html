@@ -1,0 +1,33 @@
+<div matDialogTitle>
+    <div>
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>{{ 'BOARD.ADD_PHASE' | translate }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <p>{{ 'BOARD.ADD_PHASE_DESCRIPTION' | translate:clinic }}</p>
+
+        <mat-form-field floatLabel="always">
+            <input [placeholder]="'GLOBAL.TITLE' | translate" formControlName="title" matInput type="text">
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always">
+            <textarea [placeholder]="'LIBRARY.CONTENT.DESCRIPTION' | translate" formControlName="description" matInput type="text"></textarea>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button [disabled]="form.invalid" (click)="onSubmit()" mat-button color="primary" class="ccr-icon-button">
+    <mat-icon>check</mat-icon> {{'GLOBAL.CREATE' | translate}}
+    </button>
+
+    <button mat-button class="ccr-icon-button" matDialogClose>
+    <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+    </button>
+</mat-dialog-actions>

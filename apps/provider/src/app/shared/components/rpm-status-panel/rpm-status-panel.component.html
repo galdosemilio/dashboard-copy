@@ -1,0 +1,62 @@
+<div [ngSwitch]="status" class="rpm-status-panel-container">
+    <div *ngSwitchCase="'loading'" fxLayout="column" fxLayoutAlign="center stretch">
+        <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+    </div>
+
+    <div *ngSwitchCase="'ready'">
+        <p class="code-title">{{ 'GLOBAL.RPM_STATUS' | translate }}</p>
+
+        <div *ngFor="let billingEntry of rpmStateSummary.billing" class="code-container" fxLayout="column" fxLayoutAlign="start start">
+            <p class="code">{{ billingEntry.code }}</p>
+
+            <div *ngIf="billingEntry.eligibility.next; else alreadyEligible" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <span *ngFor="let codeRequirement of billingEntry.eligibility.next?.relatedCodeRequirementsNotMet">
+                    <ccr-rpm-dependency-icon
+                    [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: codeRequirement}"
+                    [size]="40"
+                    [text]="codeRequirement">
+                    </ccr-rpm-dependency-icon>
+                </span>
+
+                <ccr-rpm-calendar-icon
+                *ngIf="billingEntry.remainingDays"
+                [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: billingEntry.remainingDays}"
+                [size]="40"
+                text="{{ billingEntry.remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
+                </ccr-rpm-calendar-icon>
+
+                <ccr-rpm-clock-icon
+                *ngIf="billingEntry.eligibility.next?.monitoring?.remaining"
+                [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: billingEntry.eligibility.next?.monitoring.remaining}"
+                [size]="40"
+                text="{{ billingEntry.eligibility.next?.monitoring.remaining }}{{ billingEntry.eligibility.next?.monitoring.units | translate }}">
+                </ccr-rpm-clock-icon>
+
+                <ccr-rpm-scale-icon
+                *ngIf="billingEntry.eligibility.next?.transmissions?.remaining"
+                [matTooltip]="'RPM.SCALE_ICON_DESCRIPTION' | translate:{amount: billingEntry.eligibility.next?.transmissions.remaining}"
+                [size]="40"
+                text="{{ billingEntry.eligibility.next?.transmissions.remaining }}">
+                </ccr-rpm-scale-icon>
+
+                <ccr-rpm-chat-icon
+                *ngIf="billingEntry.eligibility.next?.liveInteraction?.remaining"
+                [matTooltip]="'RPM.CHAT_ICON_DESCRIPTION' | translate:{amount: billingEntry.eligibility.next?.liveInteraction.remaining}"
+                [size]="40"
+                text="{{ billingEntry.eligibility.next?.liveInteraction.remaining }}">
+                </ccr-rpm-chat-icon>
+            </div>
+        </div>
+
+        <ng-template #alreadyEligible>
+            <div class="already-eligible-notice" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                <span>{{ 'RPM.ALREADY_ELIGIBLE' | translate }}</span>
+                <mat-icon>check_circle</mat-icon>
+            </div>
+        </ng-template>
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <span (click)="onRefresh()" class="refresh-cta">{{ 'GLOBAL.REFRESH' | translate }}</span>
+        </div>
+    </div>
+</div>

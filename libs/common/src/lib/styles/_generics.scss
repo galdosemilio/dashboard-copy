@@ -1,0 +1,25 @@
+@import 'generics/apploading';
+@import 'generics/button';
+@import 'generics/chart';
+@import 'generics/content';
+@import 'generics/dialog';
+@import 'generics/forms';
+@import 'generics/grid';
+@import 'generics/notification';
+@import 'generics/overlay';
+@import 'generics/table-picker';
+@import 'generics/table';
+
+@mixin ccr-styles-generic($theme, $config) {
+  @include ccr-generic-apploading($theme, $config);
+  @include ccr-generic-button($theme, $config);
+  @include ccr-generic-chart($theme, $config);
+  @include ccr-generic-content($theme, $config);
+  @include ccr-generic-dialog($theme, $config);
+  @include ccr-generic-forms($theme, $config);
+  @include ccr-generic-grid($theme, $config);
+  @include ccr-generic-notification($theme, $config);
+  @include ccr-generic-overlay($theme, $config);
+  @include ccr-generic-table-picker($theme, $config);
+  @include ccr-generic-table($theme, $config);
+}

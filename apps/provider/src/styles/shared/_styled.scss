@@ -1,0 +1,38 @@
+/**
+ * Styled Component Elements.
+ * Needs to wrap the content with .ccr-styled to enable the decoration,
+ * without it the Component may look generic. See CoachFormComponent.
+ */
+.ccr-styled {
+  h3 {
+    display: block !important;
+    line-height: 22px;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+
+    > .mat-icon {
+      vertical-align: bottom;
+    }
+
+    > .mat-subheader {
+      color: mat-color($ccr-foreground, hint-text);
+      font-size: 90%;
+      padding: 0;
+      text-transform: none;
+    }
+  }
+
+  .ccr-panel {
+    border: 1px solid mat-color($ccr-foreground, divider);
+    margin-bottom: 25px;
+    padding: 0 25px 5px;
+
+    > h3 {
+      background: var(--bg-bar);
+      margin: 0 -25px 25px;
+      padding: 3px;
+    }
+  }
+}

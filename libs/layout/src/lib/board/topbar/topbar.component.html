@@ -1,0 +1,37 @@
+<div class="menu-bar">
+  <mat-icon (click)="toggleMenu($event)">menu</mat-icon>
+
+  <ccr-search></ccr-search>
+
+  <div class="mobile-logo">
+    <img class="logo" src="./assets/logo.png">
+  </div>
+
+  <div class="right-controls">
+    <!-- TODO color this button the same as the toolbar -->
+    <button mat-flat-button color="primary" class="user-controls" [matMenuTriggerFor]="menu">
+      <span>{{ translations['MENU.HELLO'] | capitalize }}</span>
+      <span class="acc-icon">
+        <ccr-icon-user [fill]="palette.contrast" size="40"></ccr-icon-user>
+      </span>
+      <i class="material-icons"></i>
+    </button>
+    <mat-menu #menu="matMenu" class="user-controls" [overlapTrigger]="false" xPosition="before">
+      <!-- <button mat-menu-item routerLink="/profile">
+        <mat-icon>account_circle</mat-icon>
+        <span>{{ 'MENU.PROFILE' | translate }}</span>
+      </button> -->
+      <button mat-menu-item (click)="selectLanguage()">
+        <mat-icon>language</mat-icon>
+        <span>{{ 'MENU.LANGUAGE' | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{ 'MENU.LOGOUT' | translate }}</span>
+      </button>
+    </mat-menu>
+    <div class="notification-icon" (click)="togglePanel($event)" [class.invisible]="!panelEnabled">
+      <mat-icon>notifications_none</mat-icon>
+    </div>
+  </div>
+</div>

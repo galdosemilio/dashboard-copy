@@ -1,0 +1,209 @@
+<div class="report-heading">
+    <mat-icon>receipt</mat-icon>
+    <h3 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</span>
+        <ccr-walkthrough [autoClose]="false" guide="rpm"></ccr-walkthrough>
+    </h3>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <button
+        [disabled]="!source.isLoaded || source.isEmpty"
+        (click)="downloadCSV()"
+        mat-button class="ccr-align-center">
+            {{ 'REPORTS.EXPORT_CSV' | translate }}
+            <mat-icon>file_download</mat-icon>
+        </button>
+
+        <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="source.total"
+        [pageIndex]="source.pageIndex"
+        [pageSize]="source.pageSize"
+        (page)="source.pageIndex = $event.pageIndex"
+      ></ccr-paginator>
+    </div>
+</div>
+
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+    <mat-table
+    [dataSource]="source"
+    matSort
+    matSortActive="anyCodeLastEligibleAt">
+        <ng-container cdkColumnDef="index" [sticky]="true">
+            <mat-header-cell *cdkHeaderCellDef>&nbsp;&nbsp;&nbsp;#</mat-header-cell>
+            <mat-cell *cdkCellDef="let row; let i = index" fxFlex.xs="grow">
+                &nbsp;&nbsp;&nbsp;{{ i + source.criteria.offset + 1 }}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container cdkColumnDef="firstName" [sticky]="true">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'BOARD.FIRST_NAME' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
+                <span (click)="openPatientProfile(row)" class="patient-link">{{ row.account.firstName }}</span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="lastName" [sticky]="true">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'BOARD.LAST_NAME' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
+                <span (click)="openPatientProfile(row)" class="patient-link">{{ row.account.lastName }}</span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="dob">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.DOB' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'BOARD.DOB' | translate }}</span>
+                {{ row.account.dateOfBirth | amDateFormat:'MM/DD/YYYY' }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="status">
+            <mat-header-cell *cdkHeaderCellDef fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+                <span class="status-filter-label">{{ 'BOARD.STATUS' | translate }}</span>
+
+                <select (change)="onStatusFilterChange($event)">
+                    <option value="all">{{ 'LIBRARY.FORMS.ALL' | translate }}</option>
+                    <option selected value="active">{{ 'RPM.STATE.ACTIVE' | translate }}</option>
+                    <option value="inactive">{{ 'RPM.STATE.INACTIVE' | translate }}</option>
+                </select>
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxFlex.xs="grow">
+                <span>{{ 'BOARD.STATUS' | translate }}</span>
+                <mat-icon *ngIf="row.rpm.isActive" class="active">
+                    check_circle
+                </mat-icon>
+
+                <mat-icon *ngIf="!row.rpm.isActive">
+                    cancel
+                </mat-icon>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="anyCodeLastEligibleAt">
+            <mat-header-cell *cdkHeaderCellDef [class.dataset-empty]="!source.result?.length" class="first" fxLayoutAlign="center center">
+                <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+                    <small fxLayout="column" fxLayoutAlign="start center">
+                        <span class="all-codes-label">{{ 'RPM.ALL_CODES' | translate }}</span>
+                        <span class="small-mat-sort" mat-sort-header>{{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}</span>
+                    </small>
+                </div>
+            </mat-header-cell>
+            <mat-cell
+            *cdkCellDef="let row; let rowIndex = index"
+            [class.last]="rowIndex === source.result.length - 1"
+            class="date-highlighted"
+            fxLayoutAlign="center center"
+            fxFlex.xs="grow">
+                <span>
+                    {{ 'RPM.ALL_CODES' | translate }} <br>
+                    {{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}
+                </span>
+
+                {{ row.anyCodeLastEligibleAt | amDateFormat:'MM/DD/YYYY' }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="codes">
+            <mat-header-cell *cdkHeaderCellDef>
+            <div *ngIf="source.result && source.result.length">
+            <table class="code-header-table" *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index">
+                <tr [class.last]="billingIndex === source.result[0].billing.length - 1" class="code-header-item">
+                    <td colSpan="2">{{ billingEntry.code }}</td>
+                </tr>
+                <tr>
+                    <td class="latest-eligible">
+                        {{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}
+                    </td>
+
+                    <td [class.last]="billingIndex === source.result[0].billing.length - 1" class="next-claim next-claim-header">
+                        {{ 'RPM.NEXT_CLAIM' | translate }}
+                    </td>
+                </tr>
+            </table>
+            </div>
+            </mat-header-cell>
+            <mat-cell
+            *cdkCellDef="let row; let rowIndex = index"
+            fxLayoutAlign=" center"
+            fxFlex.xs="grow">
+            <span>{{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}</span>
+
+            <div *ngIf="source.result && source.result.length">
+            <table
+            *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index"
+            [class.last]="rowIndex === source.result.length - 1"
+            class="code-header-table">
+                <tr>
+                <td [class.last]="rowIndex === source.result.length - 1" class="latest-eligible date-highlighted">
+                    {{ row.billing[billingIndex].eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
+                </td>
+
+                <td *ngIf="!row.rpm.isActive"
+                [class.last]="billingIndex === source.result[0].billing.length - 1"
+                class="next-claim"
+                fxLayout="row"
+                fxLayoutAlign="center center"
+                fxLayoutGap="10px">&nbsp;</td>
+
+                <td
+                *ngIf="row.rpm.isActive"
+                [class.last]="billingIndex === source.result[0].billing.length - 1"
+                class="next-claim"
+                fxLayout="row"
+                fxLayoutAlign="center center"
+                fxLayoutGap="10px">
+                &nbsp;
+                <span *ngFor="let codeRequirement of row.billing[billingIndex].eligibility.next?.relatedCodeRequirementsNotMet">
+                    <ccr-rpm-dependency-icon
+                    [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: codeRequirement}"
+                    [size]="40"
+                    [text]="codeRequirement">
+                    </ccr-rpm-dependency-icon>
+                </span>
+
+                <ccr-rpm-calendar-icon
+                *ngIf="row.billing[billingIndex].remainingDays"
+                [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].remainingDays}"
+                [size]="40"
+                text="{{ row.billing[billingIndex].remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
+                </ccr-rpm-calendar-icon>
+
+                <ccr-rpm-clock-icon
+                *ngIf="row.billing[billingIndex].eligibility.next?.monitoring?.remaining"
+                [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.monitoring.remaining}"
+                [size]="40"
+                text="{{ row.billing[billingIndex].eligibility.next?.monitoring.remaining }}{{ row.billing[billingIndex].eligibility.next?.monitoring.units | translate }}">
+                </ccr-rpm-clock-icon>
+
+                <ccr-rpm-scale-icon
+                *ngIf="row.billing[billingIndex].eligibility.next?.transmissions?.remaining"
+                [matTooltip]="'RPM.SCALE_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.transmissions.remaining}"
+                [size]="40"
+                text="{{ row.billing[billingIndex].eligibility.next?.transmissions.remaining }}">
+                </ccr-rpm-scale-icon>
+
+                <ccr-rpm-chat-icon
+                *ngIf="row.billing[billingIndex].eligibility.next?.liveInteraction?.remaining"
+                [matTooltip]="'RPM.CHAT_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.liveInteraction.remaining}"
+                [size]="40"
+                text="{{ row.billing[billingIndex].eligibility.next?.liveInteraction.remaining }}">
+                </ccr-rpm-chat-icon>
+                </td>
+                </tr>
+            </table>
+            </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayoutWrap
+        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+        [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+        ></mat-row>
+    </mat-table>
+
+</ccr-datasource-overlay>

@@ -1,0 +1,11 @@
+@mixin ccr-title-h {
+  font-size: 1.5em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  margin: 0;
+  text-align: initial;
+  @media #{$small-and-down} {
+    word-wrap: break-word;
+  }
+}

@@ -1,0 +1,41 @@
+@import 'variables';
+
+:host {
+  flex-direction: column;
+}
+
+.form-edit {
+  overflow-y: auto;
+
+  &-section {
+    border: 1px solid mat-color($ccr-foreground, divider);
+    margin: 0 5px 20px;
+
+    &.active {
+      border-color: mat-color($ccr-contrast, 800);
+    }
+    &.editable:not(.active):hover {
+      border-color: var(--accent);
+      cursor: pointer;
+    }
+  }
+}
+
+.hour {
+  text-transform: lowercase;
+}
+
+.ccr-heading {
+  background-color: mat-color($ccr-background, status-bar);
+  bottom: 10px;
+  padding: 10px;
+  position: fixed;
+  z-index: 10000;
+}
+
+.mat-button {
+  &.ccr-button,
+  &.ccr-icon-button {
+    background-color: mat-color($ccr-background, background);
+  }
+}

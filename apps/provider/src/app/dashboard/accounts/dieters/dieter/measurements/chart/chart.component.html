@@ -1,0 +1,58 @@
+<!-- FIXME raise the breakpoint gt-md (1280px) to 1440px -->
+<div fxLayout="column" fxLayoutAlign="center space-around" [fxLayoutGap]="embedded ? '0' : '1%'">
+  <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="1%">
+    <div [fxFlex.gt-md]="!embedded && timeframe !== 'alltime' ? '49%' : '100%'">
+      <div fxLayout="row" fxLayoutWrap fxLayoutGap="2%">
+        <mat-form-field fxFlex="49%" fxFlex.xs="grow"
+        class="ccr-align-center" [floatLabel]="embedded ? 'never' : 'always'">
+          <mat-select
+          [placeholder]="'BOARD.MEASURE' | translate"
+          [(ngModel)]="source.measurement" (selectionChange)="refresh()">
+            <mat-option *ngFor="let type of measurements" [value]="type.value"
+            class="ccr-align-center" [class.ccr-embedded]="embedded">
+              {{ type.viewValue | translate | uppercase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="49%" fxFlex.xs="grow"
+        class="ccr-align-center" [floatLabel]="embedded ? 'never' : 'always'">
+          <mat-select
+          [placeholder]="'BOARD.VIEW_BY' | translate"
+          [(ngModel)]="timeframe" (selectionChange)="refresh()">
+            <mat-option *ngFor="let view of viewby" [value]="view.value"
+            class="ccr-align-center" [class.ccr-embedded]="embedded">
+              {{ view.viewValue | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <date-navigator fxFlex="grow" fxFlex.gt-md="50%" *ngIf="!embedded"
+      [timeframe]="timeframe"
+      [date]="dates.current"
+      (selectedDate)="updateDates($event)"
+    ></date-navigator>
+  </div>
+</div>
+
+<ccr-datasource-overlay class="ccr-container" [source]="source">
+  <canvas *ngIf="chart && !source.hasErrors()" baseChart
+    width="500" height="400"
+    [chartType]="chart.type"
+    [datasets]="chart.datasets"
+    [labels]="chart.labels"
+    [options]="chart.options"
+    [legend]="chart.legend"
+    [colors]="chart.colors"
+  ></canvas>
+</ccr-datasource-overlay>
+
+<p class="footnotes" *ngIf="source.distanceNote.includes(true)">
+  {{ 'MEASUREMENT.DISTANCE_NOTE' | translate }}
+</p>
+
+<p class="footnotes" *ngIf="source.hasMissingWeight">
+  {{ 'MEASUREMENT.MISSING_WEIGHT_NOTE' | translate }}
+</p>

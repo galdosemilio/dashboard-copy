@@ -1,0 +1,49 @@
+<div class="ccr-heading" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
+        <h2>{{ 'GLOBAL.CLINICS' | translate }}</h2>
+        <a mat-button color="primary" class="ccr-button" routerLink="/accounts/clinics">
+        {{ 'BOARD.BACK_LIST' | translate }}
+        </a>
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
+        <div class="ccr-name" fxFlex="auto" fxLayout="row" fxLayoutAlign="start">
+            <h2>{{ clinic?.name | capitalize }}</h2>
+        </div>
+    </div>
+
+    <div
+    class="ccr-tabs"
+    fxFlex="nogrow"
+    fxLayout="row"
+    fxLayoutAlign=" stretch"
+    data-cy="clinicMenu">
+        <a
+        [class.active]="section === 'info'"
+        [routerLink]="['.', { s: 'info' }]"
+        ccrLinkActive="active"
+        fxFlex
+        fxLayoutAlign="center center">
+        {{ 'BOARD.CLINIC_INFORMATION' | translate }}
+        </a>
+
+        <a
+        [class.active]="section === 'phases'"
+        [routerLink]="['.', { s: 'phases' }]"
+        ccrLinkActive="active"
+        fxFlex
+        fxLayoutAlign="center center">
+        {{ 'GLOBAL.PHASES_LABELS' | translate }}
+        </a>
+    </div>
+
+    <div class="ccr-subcomponent" [ngSwitch]="section">
+        <div *ngSwitchCase="'info'">
+            <app-clinic-info [clinic]="clinic"></app-clinic-info>
+        </div>
+
+        <div *ngSwitchCase="'phases'">
+            <app-clinic-phases></app-clinic-phases>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="form">
+    <mat-radio-group formControlName="value" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="7px">
+        <mat-radio-button *ngFor="let allowedValue of question.allowedValues" [value]="allowedValue">{{ allowedValue }}</mat-radio-button>
+    </mat-radio-group>
+</div>

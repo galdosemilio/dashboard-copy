@@ -1,0 +1,32 @@
+@mixin ccr-generic-notification($theme, $config) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .ccr-snack-success {
+    background-color: mat-color($foreground, success) !important;
+    .mat-simple-snackbar {
+      color: mat-color($background, success);
+    }
+  }
+
+  .ccr-snack-info {
+    background-color: mat-color($foreground, info) !important;
+    .mat-simple-snackbar {
+      color: mat-color($background, info);
+    }
+  }
+
+  .ccr-snack-warning {
+    background-color: mat-color($foreground, warning) !important;
+    .mat-simple-snackbar {
+      color: mat-color($background, warning);
+    }
+  }
+
+  .ccr-snack-error {
+    background-color: mat-color($foreground, error) !important;
+    .mat-simple-snackbar {
+      color: mat-color($background, error);
+    }
+  }
+}

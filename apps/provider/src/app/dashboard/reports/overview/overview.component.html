@@ -1,0 +1,27 @@
+
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+    <h2 fxFlex>{{'SIDENAV.REPORTS' | translate}}</h2>
+  </div>
+</div>
+
+<div class="ccr-reports" fxLayout="column" fxLayoutGap="5px">
+  <div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['signups']">
+      {{ 'REPORTS.SIGNUPS_TITLE' | translate }}
+    </a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['enrollments']">
+      {{ 'REPORTS.ENROLLMENTS_TITLE' | translate }}
+    </a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['active']">
+      {{ 'REPORTS.ACTIVE_USERS' | translate }}
+    </a>
+  </div>
+
+  <app-report-controls></app-report-controls>
+
+
+  <div class="ccr-subcomponent">
+    <router-outlet></router-outlet>
+  </div>
+</div>

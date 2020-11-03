@@ -1,0 +1,697 @@
+{
+  "ACCOUNT": {
+    "ASSIGN": "Tildel",
+    "ASSOCIATE": "Associer",
+    "CREATE_ADMIN": "Opret Admin",
+    "CREATE_ASSIGNMENT": "Opret Opgave",
+    "CREATE_ASSOCIATION": "Opret Association",
+    "CREATE_COACH": "Opret Træner",
+    "CREATE_PATIENT": "Opret Patient",
+    "DEASSIGN": "Fjern tildeling",
+    "DISSOCIATE": "Dissociation",
+    "_ADMINS": "Administratorer",
+    "_COACHES": "Trænere",
+    "_PATIENTS": "Patienter"
+  },
+  "ADMIN": {
+    "ASSOCIATIONS": "Foreninger",
+    "LOGS": {
+      "APP_NAME": "App",
+      "CREATED_AT": "Dato",
+      "_TITLE": "Logfiler"
+    },
+    "ORGS": {
+      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Aktiv kampagne Association status",
+      "ACTIVE_CAMPAIGN_IS_INHERITED": "Denne liste over aktive kampagner er tilgængelig for denne klinik fra en forældreklinik.",
+      "ACTIVE_CAMPAIGN_LISTS": "Aktive kampagnelisterne",
+      "ADD_CHILD_ORG": "Tilføj børneklinik",
+      "ADD_PARENT_ORG": "Tilføj forældreklinik",
+      "ASSOC_ACTIVE_CAMPAIGN": "Associate aktiv kampagne",
+      "ASSOC_ALL_PROVIDERS": "Med tilbagevirkende kraft tilmelde alle udbydere på eller under denne klinik",
+      "ASSOC_ALL_PROVIDERS_CURRENT": "Tilmelding udbyder {{provider}} ...",
+      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "Følgende udbydere præsenterede fejl, når du forsøger at tilmelde dem:",
+      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "Alle udbydere tilmeldt med succes",
+      "ASSOC_ALL_PROVIDERS_WARNING": "Du er ved at tilmelde ALLE udbydere fra denne klinik; denne operation kan tage et stykke tid at gennemføre, er du sikker på at du vil fortsætte?",
+      "ASSOC_PROVIDER_CAMPAIGN": "Tilbagevirkende kraft tilmelde én udbyder",
+      "CHILD_ORGS": "Børneklinik",
+      "CREATE_NEW": "Opret Klinik",
+      "DELETE_LIST_ASSOCIATION": "Slet aktiv kampagne List Association",
+      "DELETE_LIST_ASSOCIATION_CONTENT": "Er du sikker på at du vil slette foreningen til listen {{list}}?",
+      "EDIT_ACTIVE_CAMPAIGN": "Rediger aktiv kampagne liste Association",
+      "LOAD_MORE": "Indlæs Flere",
+      "MARKETING_DESCRIPTION": "Disse aktiv kampagne lister er forbundet på eller over denne organisation. Når der tilføjes en udbyder på eller under denne organisation, vil de automatisk blive tilmeldt på listerne er vist nedenfor.<br><br>udbydere, der allerede var forbundet til denne organisation aktiv kampagne listen blev tilføjet, vil ikke være automatisk tilmeldt. Du må tilbagevirkende kraft tilmelde en eller alle udbydere i nyligt tilføjede aktiv kampagne lister ved at bruge \"tilbagevirkende kraft på Tilmeld dig...\" knapperne.",
+      "NO_CHILD_CLINIC": "Denne klinik har ingen børneklinik",
+      "NO_PARENT_CLINIC": "Denne klinik har ingen forælder klinik",
+      "ORGANIZATION": "Klinik",
+      "PARENT_ORG": "Forælderklinik",
+      "SELECTED_PROVIDER": "Valgt Provider: {{provider}}",
+      "SELECT_PROVIDER": "Vælg Provider",
+      "SETTINGS": {
+        "ANDROID_BUNDLE_ID": "Android Bundle ID",
+        "APPID": "Applikation ID ‘er",
+        "APPSTORE_CONNECT_TEAM_ID": "AppStore Connect Team ID",
+        "APP_NAME": "App Name",
+        "BCC_EMAIL": "BCC-e-mails (adskilt af komma)",
+        "CODE_ENTRY_HELP": "Kode indtastning Hjælp Tekst",
+        "COLOR_ACCENT": "Accent",
+        "COLOR_PRIMARY": "Primær",
+        "COLOR_SECONDARY": "Sekundær",
+        "COLOR_TOOLBAR": "Værktøjslinjens Farve",
+        "DEVELOPER_PORTAL_TEAM_ID": "Developer Portal Team ID",
+        "DISPLAY_NAME": "Vis Navn",
+        "EDIT_INHERITED": "Rediger arvede indstillinger",
+        "EMPTY_BCC_EMAILS": "Der er ingen BCC-e-mails konfigureret til denne organisation.",
+        "FIREBASE_PROJECT_NAME": "Firebase Project Name",
+        "ICON_HINT": "Icon opdateringer vil være synlige efter 24 timer",
+        "IMAGES": "Images",
+        "INHERIT_MFA": "Arve indstillinger",
+        "IOS_BUNDLE_ID": "iOS Bundle ID",
+        "LOGO_HINT": "Logo opdateringer vil være synlige efter 24 timer",
+        "MALA": "MALA",
+        "MARKED_AS_INHERITED": "Præferencer markeret som arvet",
+        "MFA_ENABLED": "Multifaktorgodkendelse aktiveret",
+        "MFA_INHERITED": "Arvet fra {{ org }}",
+        "MFA_LOGIN": "Log på",
+        "MFA_PASSWORD_UPDATE": "Adgangskodeopdatering",
+        "NO_LABEL_ASSOCIATIONS": "Der er ingen faser forbundet med denne organisation",
+        "SPLASH_HINT": "Splash opdateringer vil være synlige efter 24 timer"
+      },
+      "TITLE": "Klinikker"
+    }
+  },
+  "BOARD": {
+    "BACK": "Gå tilbage",
+    "BASIC_INFORMATION": "Basis Information",
+    "DELETE_MFA_INSTANCE": "Deaktiver tofaktorautentiseringskanal",
+    "PERSONAL_INFORMATION": "Personlig information",
+    "SECURITY": "Sikkerhed"
+  },
+  "CLINIC_PLANS": {
+    "COACH_CARE": {
+      "H_SYSTEM": "Gesundheitssystem",
+      "H_SYSTEM_LAST_STEP": "Tak for tilmelding til CoachCare fjernovervågning plan! Venligst forvente at modtage en ordreseddel detaljering priser og øvrige vilkår via AdobeSign til din elektroniske underskrift <br><br><strong>Bemærk venligst:.. Du skal udføre denne Ordreformularen før vi kan begynde at opbygge din app</strong>",
+      "R_MONITORING": "Fernüberwachung",
+      "R_MONITORING_LAST_STEP": "Tak for tilmelding til CoachCare fjernovervågning plan! Venligst forvente at modtage en ordreseddel detaljering priser og øvrige vilkår via AdobeSign til din elektroniske underskrift <br><br><strong>Bemærk venligst:.. Du skal udføre denne Ordreformularen før vi kan begynde at opbygge din app</strong>",
+      "TRACK": "Spur",
+      "TRACK_LAST_STEP": "Vielen Dank für Ihre Registrierung für den CoachCare Gleisplan!",
+      "V_HEALTH": "virtuelle Gesundheit",
+      "V_HEALTH_LAST_STEP": "Vielen Dank für Ihre Registrierung für die CoachCare Virtuelle Health Plan!"
+    }
+  },
+  "EMAIL_TEMPLATE_CATS": {
+    "CLIENT": "Klient",
+    "OTHER": "Andet"
+  },
+  "EMAIL_TEMPLATE_OPS": {
+    "INTERNAL_REGISTRATION": "Intern registrering",
+    "INTERNAL_REGISTRATION_PLAN": "Intern registrering (med planer)",
+    "NEW_ACCOUNT": "Ny konto"
+  },
+  "FIELD": {
+    "CONSENT": {
+      "TEXT_CLIENT": "Ved at markere denne boks og at indsende denne formular accepterer jeg app'ens",
+      "TEXT_GDPR": "Hvis jeg er en borger i EU/UK, så accepterer jeg også the",
+      "TEXT_PROVIDER": "Ved at vælge denne boks og at vælge Fortsæt accepterer jeg the"
+    },
+    "NEWSLETTER": {
+      "CONSENT_TEXT": "Ved at markere dette felt og vælge Fortsæt, accepterer jeg at modtage CoachConnect digitale nyhedsbrev, der vil omfatte månedlige opdateringer om min platforms funktioner og funktionalitet."
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "Begge adgangskoder skal være ens",
+      "HAS_NO_SEQUENCES": "Indeholder ikke mere end 2 ens tegn i træk",
+      "MIN_LENGTH": "Indeholder mindst 8 tegn",
+      "ONE_LOWERCASE_LETTER": "Indeholder et lille bogstav",
+      "ONE_NUMBER": "Indeholder et nummer",
+      "ONE_SPECIAL_CHARACTER": "Indeholder et særligt tegn",
+      "ONE_UPPERCASE_LETTER": "Indeholder et stort bogstav",
+      "REQUIREMENTS": "Krav til Adgangskoden"
+    }
+  },
+  "GLOBAL": {
+    "ABOUT": "Om",
+    "ACTIONS": "Handlinger",
+    "ACTIVATE": "Aktiver",
+    "ACTIVE": "Aktiv",
+    "ADD_LANGUAGE": "Tilføj sprog",
+    "ADMIN": "Admin",
+    "ALL": "Alle",
+    "AND": "og",
+    "ANNUAL": "jährlich",
+    "APP_STORE": "App butik",
+    "ASSOCIATE": "Associate",
+    "AUTO_ENROLL_CLIENT": "Tilmeld klient automatisk ved associering",
+    "BACK": "Gå Tilbage",
+    "BASIC_INFORMATION": "Basis Information",
+    "BCC_EMAILS": "BCC-e-mails",
+    "BIRTHDAY": "Fødselsdato",
+    "CANCEL": "Annuller",
+    "CATEGORY": "Kategori",
+    "CITY": "By",
+    "CLIENT": "Klient",
+    "CLINICS": "Klinikker",
+    "CLINIC_NAME": "Klinik Navn",
+    "CLOSE": "Tæt",
+    "COACH": "Provider",
+    "COACHES": "Trænere",
+    "COLORS": "Farver",
+    "CONFIRM_PASSWORD": "Bekræft Adgangskode",
+    "CONTACT": "Kontakt",
+    "CONTINUE": "Fortsæt",
+    "COUNTRY": "Land",
+    "CREATE": "Opret",
+    "CREATE_EMAIL_TEMPLATE": "Opret e-mail-skabelon",
+    "DASHBOARD": "Kontrolpanel",
+    "DEACTIVATE": "Deaktivér",
+    "DELETE": "Slet",
+    "DESCRIPTION": "Beskrivelse",
+    "DIGITAL_LIBRARY": "Digital Library",
+    "DISABLED": "Handicappet",
+    "DONE": "Gennemført!",
+    "DOWNLOAD_CSV": "Download CSV",
+    "EDIT": "Rediger",
+    "EMAIL": "E-mail",
+    "EMAIL_ADDRESS": "E-mailadresse",
+    "EMAIL_TEMPLATES": "E-mail-skabeloner",
+    "ENABLED": "Aktiveret",
+    "ENROLL": "Indskrive",
+    "ERROR": "Fejl!",
+    "FEATURES": "Funktioner",
+    "FIELD_REQUIRED": "Felt Påkrævet",
+    "FILE_VAULT": "Filhvelv",
+    "FILTER_BY_ACCOUNT": "Filtrer efter Konto",
+    "FILTER_BY_NAME": "Filtrer efter Navn",
+    "FIRST_NAME": "Fornavn",
+    "FORGOT_PASSWORD": "Har du glemt din adgangskode?",
+    "GENDER": "Køn",
+    "HEIGHT": "Højde",
+    "HIERARCHY": "Hierarki",
+    "HTML": "HTML",
+    "INACTIVE": "Inaktive",
+    "INCLUDE_INACTIVE": "Inkluder Inaktiv",
+    "INFORMATION": "Information",
+    "INHERIT": "Arve",
+    "LABEL": "Fase",
+    "LANGUAGE": "Sprog",
+    "LAST_NAME": "Efternavn",
+    "LOCALE": "Landestandard",
+    "LOCATION": "Placering",
+    "MANAGER": "Manager",
+    "MEASUREMENT": "Måling",
+    "MESSAGING": "Beskeder",
+    "MONTHLY": "Monatlich",
+    "NAME": "Navn",
+    "NEXT": "Næste",
+    "NO": "Nej",
+    "NO_ENTRIES_FOR_FIELD": "Der er ingen poster for dette felt",
+    "OK": "OK",
+    "OPEN_PATIENT_ENROLLMENT": "Åbn patientregistrering",
+    "OPERATION": "Operation",
+    "ORGANIZATION": "Klinik",
+    "ORG_ID": "Organisation id",
+    "ORG_NAME": "Organisationens navn",
+    "ORG_TO_EXCLUDE": "Søg i organisationer, der skal udelukkes",
+    "PASSWORD": "Adgangskode",
+    "PATIENT": "Patient",
+    "PATIENTS": "Patienter",
+    "PATIENT_AUTOMATIC_DISASSOCIATION": "Patientens automatiske adskillelse",
+    "PHONE": "Telefon",
+    "PHONE_NUMBER": "Telefonnummer",
+    "PHONE_TYPE": "Telefon Type",
+    "PLAY_STORE": "Legetøjsbutik",
+    "POSTAL_CODE": "Postnummer",
+    "PREVIOUS": "Forrige",
+    "PROFILE": "Profil",
+    "PROVIDER": "Provider",
+    "REGISTER_NEW_CLINIC": "Registrer et nyt firma",
+    "REQUEST_RESET": "Nulstil Adgangskode",
+    "RESET_PASSWORD": "Nulstil Adgangskode",
+    "RETRY": "Prøve igen",
+    "RPM": "RPM",
+    "SAVE": "Gem",
+    "SAVE_PASSWORD": "Gem Adgangskode",
+    "SEARCH_COACH": "Søg Efter Træner",
+    "SEARCH_COACH_OR_PATIENT": "Søg Efter Træner eller Patient",
+    "SECURITY": "Sikkerhed",
+    "SELECT_LANGUAGE": "Vælg sprog",
+    "SEQUENCES": "Sekvenser",
+    "SETTINGS": "Indstillinger",
+    "SET_PASSWORD": "Opret Adgangskode",
+    "SHORT_CODE": "Forvalgskode",
+    "SIGN_FROM_APP": "Patienter, log venligst ind med jeres mobile app",
+    "SIGN_IN": "Log ind som Leverandør",
+    "STATE": "Region",
+    "STATUS": "Status",
+    "STREET_ADDRESS": "Gadenavn",
+    "SUBJECT": "Emne",
+    "SUBMIT": "Indsend",
+    "TEXT": "Tekst",
+    "TIMEZONE": "Tidszone",
+    "TITLE": "Titel",
+    "TO": "Til",
+    "UPDATE": "Opdater",
+    "UPDATE_EMAIL_TEMPLATE": "Opdater e-mail-skabelon",
+    "UPLOAD_IN_PROGRESS": "Upload i Gang",
+    "VERIFICATION_CODE": "Verifikationskode",
+    "VIDEOCONFERENCE": "Video konference",
+    "YES": "Ja"
+  },
+  "LABEL": {
+    "CREATE_NEW": "Opret fase",
+    "DESCRIPTION": "Beskrivelse"
+  },
+  "LAYOUT": {
+    "BACK_TO_MAINSITE": "Tilbage til coachcare.com",
+    "CONTACT_US": "Kontakt Os",
+    "DPA": "GDPR DPA",
+    "HIPAA": "HIPAA BAA",
+    "MASTER_SUBSCRIPTION_AGREEMENT": "Master Abonnementsaftale",
+    "MSA": "MSA",
+    "POWEREDBY": "{{company}}",
+    "PRIVACY_POLICY": "Fortrolighedspolitik",
+    "TERMS_OF_SERVICE": "Servicebetingelser"
+  },
+  "LINK": {
+    "DPA": "https://www.coachcare.com/dpa/",
+    "HIPAA": "https://www.coachcare.com/hipaa/",
+    "MSA": "https://www.coachcare.com/agreement/",
+    "PRIVACY_POLICY": "https://www.coachcare.com/privacy/",
+    "SUPPORT": "https://coachcare.zendesk.com/hc/en-us/requests/new",
+    "TERMS_OF_SERVICE": "https://www.coachcare.com/terms/"
+  },
+  "MENU": {
+    "HELLO": "Hej {{userName}}.",
+    "LANGUAGE": "Language",
+    "LOGOUT": "Log ud",
+    "PROFILE": "Profil",
+    "SEARCH": "Søg"
+  },
+  "MFA": {
+    "AUTHENTICATOR": "Autentificering",
+    "AUTHENTICATOR_STEP1": "Installer LastPass Authenticator, Google Authenticator, Microsoft Authenticator eller enhver anden Authenticator-app efter eget valg på din mobiltelefon.",
+    "AUTHENTICATOR_STEP2": "Åbn appen, og vælg \"Tilføj konto\".",
+    "AUTHENTICATOR_STEP3": "Scan QR-koden nedenfor.",
+    "AUTHENTICATOR_STEP4": "Indtast den 6-cifrede bekræftelseskode, der er genereret af din Authenticator-app.",
+    "AUTH_INFO": "Åbn din autentificeringsapp, og se koden, den viser til din konto. Skriv det derefter i tekstfeltet nedenfor for at bekræfte din identitet. <br/> <br/> Du kan også klikke på 'Brug sikkerhedskopieringskode' for at bruge en af ​​de sikkerhedskoder, du har modtaget, da du aktiverede multifaktorgodkendelse.",
+    "BACKUP_CODE": "Sikkerhedskopiekode",
+    "BACKUP_CODES_INFO": "Her er en liste over backup-verifikationskoder, hvis du mister adgang til den to-faktor-godkendelseskanal, du valgte. <br/> <br/> <strong> Opbevar disse på et sikkert sted, da dette vil være den eneste måde at gendanne adgangen til til din konto. Husk, at hver kode kun kan bruges én gang. </strong>",
+    "BACKUP_CODE_INFO": "Skriv en af ​​de sikkerhedskopier, du har modtaget, da du aktiverede multifaktorgodkendelse, og kasser den. Husk, at hver kode kun kan bruges én gang.",
+    "CONTINUE_TO_DASHBOARD": "Fortsæt til Dashboard",
+    "DOWNLOAD_BACKUP_CODES": "Download sikkerhedskopikoder",
+    "GOOGLE_AUTHENTICATOR": "Google Authenticator",
+    "LAST_PASS_AUTHENTICATOR": "LastPass Authenticator",
+    "MFA_LOGIN_HELP_PROMPT": "Hvis du har problemer med at logge ind, skal du <a href=\"mailto:support@coachcare.com?subject=MFA%20Login%20Assistance&body=I%20need%20support%20resetting%20my%20MFA%20login\">kontakte support</a> for hjælp.",
+    "MICROSOFT_AUTHENTICATOR": "Microsoft Authenticator",
+    "ORG_ENFORCEMENT_INFO": "Din organisation håndhæver brugen af ​​tofaktorautentisering. Vælg venligst en tofaktorautentiseringskanal for at starte installationsprocessen.",
+    "REGEN_QR": "Regenerere QR-kode",
+    "RESEND_SMS": "Send SMS igen",
+    "SECRET_KEY_PROMPT": "Eller du kan indtaste denne hemmelige nøgle i din Authenticator-app:<br/><strong>{{ key }}</strong>",
+    "SEND_BACKUP_CODE": "Send sikkerhedskopikode",
+    "SEND_VERIFICATION_CODE": "Indsend bekræftelseskode",
+    "SMS": "SMS",
+    "SMS_INFO": "Vi har sendt dig en SMS med en bekræftelseskode til dit registrerede telefonnummer. Når du modtager det, skal du skrive det i tekstfeltet nedenfor for at bekræfte din identitet. <br/> <br/> Du kan også klikke på 'Brug sikkerhedskopieringskode' for at bruge en af ​​de sikkerhedskoder, du har modtaget, da du aktiverede multifaktor Godkendelse.",
+    "SMS_PHONE_CONFIRM": "Tjek venligst dit telefonnummer i feltet nedenfor. Hvis det er forkert, skal du opdatere det. Husk, at telefonen skal kunne modtage SMS.",
+    "USE_BACKUP_CODE": "Brug sikkerhedskopikode",
+    "VERIFICATION_CODE": "Verifikationskode"
+  },
+  "MOMENTJS": {
+    "LASWEEK": "[Sidste] dddd",
+    "TODAY": "[I dag]",
+    "TOMORROW": "[I morgen]",
+    "YESTERDAY": "[I går]"
+  },
+  "NOTIFY": {
+    "EMAIL": {
+      "EMAIL_CASE_SENSITIVE": "E-mail-adressen er hovedtekstmæssig"
+    },
+    "ERROR": {
+      "AVATAR_UPLOAD_FAILED": "Upload mislykkedes, prøv venligst igen.",
+      "EMAIL_ALREADY_REGISTERED": "Denne E-mail Adresse er allerede registreret.",
+      "EMPTY_USER_LISTING": "Ingen resulterende brugere",
+      "FILL_THE_FORM": "Udfyld venligst alle felter, inden du fortsætter.",
+      "INVALID_EMAIL": "Indtast venligst en gyldig e-mailadresse.",
+      "MFA_NOT_VERIFIED": "Prøv at logge ind igen efter 5 minutter.",
+      "MIN_CHARS": "Skal være mindst {{min}} tegn",
+      "NO_ACTIVE_CAMPAIGNS": "Der er ingen aktiv kampagne List foreninger",
+      "NO_EMAIL_TEMPLATES": "Der er ingen e-mail-skabeloner til denne organisation.",
+      "NO_LOG_MESSAGES": "Der er ingen logfiler for denne bruger",
+      "NO_ORGANIZATIONS": "Ingen resulterende organisationer",
+      "NO_RESULTING_LABELS": "Ingen resulterende etiketter"
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "Sørg venligst for at dine adgangskoder er ens.",
+      "HAS_NO_SEQUENCES": "Gentag venligst ikke de samme tegn mere end to gange.",
+      "MIN_LENGTH": "Indtast venligst en adgangskode, som har mindst 8 tegn.",
+      "ONE_LOWERCASE_LETTER": "Indtast venligst en adgangskode, som har mindst et lille bogstav.",
+      "ONE_NUMBER": "Indtast venligst en adgangskode, som har mindst et tal.",
+      "ONE_SPECIAL_CHARACTER": "Indtast venligst en adgangskode, som har mindst et specialtegn.",
+      "ONE_UPPERCASE_LETTER": "Indtast venligst et adgangskode, som har mindst et lille bogstav."
+    },
+    "SOURCE": {
+      "DEFAULT_DELAY": "Dataene er stadigvæk ved at blive indlæst...",
+      "DEFAULT_TIMEOUT": "Indlæsningen er udløbet, prøv venligst igen.",
+      "DEFAULT_WAIT": "Vent venligst…",
+      "NO_ASSIGNED_CLIENTS": "Der er ingen tildelte klienter",
+      "NO_ASSIGNED_PROVIDERS": "Der er ingen tildelte leverandører",
+      "NO_ASSOCIATIONS": "Der er i øjeblikket ingen foreninger",
+      "NO_DATA_AVAILABLE": "Ingen tilgængelig data."
+    },
+    "SUCCESS": {
+      "ACC_ACTIVATED": "Konto aktiveret",
+      "ACC_CREATED": "Konto oprettet",
+      "ACC_DEACTIVATED": "Konto deaktiveret",
+      "ACC_UPDATED": "Konto opdateret",
+      "ACTIVE_CAMPAIGN_DELETED": "Aktiv Kampagne Liste forening slettet.",
+      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "Aktiv Kampagne Liste forening oprettet.",
+      "ACTIVE_CAMPAIGN_UPDATED": "Aktiv Kampagne Liste forening opdateret.",
+      "CHECK_RESET_EMAIL": "Hvis vi finder en konto tilknyttet den email-adresse, du har indtastet, sender vi dig en email til e-mail til adgangskode igen i løbet af de næste par minutter. Hvis du ikke modtager en e-mail, skal du kontrollere din spammappe eller prøve andre e-mailadresser, du muligvis har brugt til din konto.",
+      "CLINIC_REMOVED": "Klinik fjernet",
+      "EMAIL_TEMPLATE_SAVED": "E-mail-skabelon er gemt.",
+      "LABEL_ACTIVATED": "Fase aktiveret",
+      "LABEL_CREATED": "Fase oprettet",
+      "LABEL_DEACTIVATED": "Fase deaktiveret",
+      "LABEL_UPDATED": "Fase opdateret",
+      "MFA_VERIFIED": "To-faktor autentificeringskanal verificeret.",
+      "ORG_ACTIVATED": "Klinik Aktiveret",
+      "ORG_ADDED": "Klinik tilføjet",
+      "ORG_CREATED": "Klinik oprettet",
+      "ORG_DEACTIVATED": "Klinik deaktiveret",
+      "ORG_DISOCCIATED": "Klinik fjernet",
+      "ORG_UPDATED": "Klinik opdateret",
+      "PASSWORD_RESET": "Adgangskode nulstillet med succes!<br /> Du kan bruge den til at Logge ind.",
+      "PASSWORD_SETTED": "Adgangskoden blev oprettet med succes!<br /> Nu kan du Logge ind.",
+      "PERM_UPDATED": "Tilladelse opdateret",
+      "PHASE_UPDATED": "Fase blev opdateret.",
+      "PHONE_NUMBER_UPDATED": "Telefonnummer opdateret.",
+      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider held forbundet til aktiv kampagne List.",
+      "SETTINGS_UPDATED": "Indstillinger opdateret"
+    }
+  },
+  "PAGE": {
+    "APPLE": {
+      "ACCOUNT": "Apple Udvikler-konto"
+    },
+    "APP_NOT_FOUND": {
+      "REDIRECTING": "Viderestiller...",
+      "TITLE": "App ikke fundet"
+    },
+    "IMPLEMENTATION": {
+      "MOBILE": "Implementering af Mobil App"
+    },
+    "MEETING_CANCEL": {
+      "BUTTON_CANCEL": "Annullér mødet",
+      "BUTTON_KEEP": "Behold møde",
+      "CONFIRM_PROMPT": "Er du sikker på at du ønsker at aflyse dit møde den <b>{{day}}</b> kl. <b>{{time}}</b>?",
+      "MESSAGE_ERROR": "Der opstod en fejl i forbindelse med aflysningen af mødet, <br /> prøv venligst igen.",
+      "MESSAGE_KEPT": "Dit møde er ikke blevet ændret til <b>{{day}}</ b> kl. <b>{{time}}</ b>.",
+      "MESSAGE_SUCCESS": "Dit møde er blevet aflyst. Brug venligst din App til at planlægge et nyt møde.",
+      "TITLE": "Annullér mødet",
+      "TITLE_KEPT": "Møde Beholdt",
+      "TITLE_SUCCESS": "Møde Aflyst"
+    },
+    "NOT_FOUND": {
+      "CONTENT": "Kontakt venligst <a href=\"https://coachcare.zendesk.com/hc/en-us/requests/new\"> CoachCare Support</a> for mere hjælp.",
+      "TITLE": "Siden Blev Ikke Fundet"
+    },
+    "REGISTER": {
+      "HEADER": {
+        "APOLLO": {
+          "TITLE": "Lad os få dig tilmeldt Apollo Care-platformen"
+        },
+        "DEFAULT": {
+          "TITLE": "LAD OS BYGGE DIN {{displayName}} PLATFORM"
+        },
+        "INHEALTH": {
+          "TITLE": "Lad os få dig tilmeldt inHealth-platformen"
+        },
+        "SHAKEIT": {
+          "TITLE": "Lad os få dig registreret til Shake It platformen"
+        }
+      },
+      "HERO": {
+        "APOLLO": {
+          "POWERED_BY": "Drives af CoachCare",
+          "WELCOME_MESSAGE": "Apollo Care-platformen driver vægttabsklinikker med en mobilapp, trænerpanel og tilsluttede enheder kombineret i en integreret platform for at forbedre patientplejen og øge klinikens effektivitet.",
+          "WELCOME_TITLE": "Velkommen til Apollo Care!"
+        },
+        "BA": {
+          "WELCOME_MESSAGE": "{{ org }}-platformen driver vægttabsklinikker med en mobilapp, trænerpanel og tilsluttede enheder kombineret i en integreret platform for at forbedre patientplejen og øge klinikens effektivitet.",
+          "WELCOME_TITLE": "Velkommen til {{ org }}!"
+        },
+        "DEFAULT": {
+          "CLINIC_REGISTRATION": "Klinik Registrering"
+        },
+        "GWLP": {
+          "WELCOME_MESSAGE": "Global Weight Loss-platformen styrker vægttabsklinikker med en mobil app, coach-dashboard og tilsluttede enheder kombineret i en integreret platform for at forbedre patientpleje og øge klinikernes effektivitet.",
+          "WELCOME_TITLE": "Velkommen til Global Vægttab!"
+        },
+        "INHEALTH": {
+          "WELCOME_MESSAGE": "inHealth-platformen driver vægttabsklinikker med en mobilapp, trænerpanel og tilsluttede enheder kombineret i en integreret platform for at forbedre patientplejen og øge klinikens effektivitet.",
+          "WELCOME_TITLE": "Velkommen til inHealth!"
+        },
+        "NUTRIMOST": {
+          "WELCOME_MESSAGE": "NutriMost-platformen driver vægttabsklinikker med en mobilapp, trænerpanel og tilsluttede enheder kombineret i en integreret platform for at forbedre patientplejen og øge klinikens effektivitet.",
+          "WELCOME_TITLE": "Velkommen til NutriMost!"
+        },
+        "SHAKEIT": {
+          "POWERED_BY": "Drives af CoachCare",
+          "WELCOME_MESSAGE": "Shake It-platformen driver vægttabsklinikker med en mobilapp, trænerpanel og tilsluttede enheder kombineret i en integreret platform for at forbedre patientplejen og øge klinikens effektivitet.",
+          "WELCOME_TITLE": "Velkommen til Shake It!"
+        }
+      },
+      "STEP1": {
+        "APOLLO": {
+          "COMPLETE_SIGNUP": "Udfyld venligst denne hurtige og nem tilmeldingsformular for at få adgang til din Apollo Care-app, web- og enhedsplatform."
+        },
+        "DEFAULT": {
+          "ACCOUNT_INFORMATION": "Konto Information",
+          "CLINIC_INFORMATION": "Klinik Information",
+          "COMPLETE_SIGNUP": "Når du er færdig med tilmeldingen, begynder vi implementeringsprocessen.",
+          "MOBILE_APP_TYPE": "Mobilapptype",
+          "MOB_APP_TYPE_CHOOSE": "Vælg hvilken mobilapptype du vil tilbyde dine patienter ved at klikke på din foretrukne mulighed.",
+          "ORGANIZATION_DETAILS": "Skriv venligst først nogle linjer om din organisation og den person, som skal være vores primære kontaktperson.",
+          "WELCOME_PLATFORM_PAGE": "Velkommen til {{clinic}} Platformregistreringsside."
+        },
+        "INHEALTH": {
+          "COMPLETE_SIGNUP": "Udfyld venligst denne hurtige og nem tilmeldingsformular for at få adgang til din inHealth-app, web- og enhedsplatform."
+        },
+        "SHAKEIT": {
+          "COMPLETE_SIGNUP": "Udfyld denne hurtig og nem tilmeldingsformular for at få adgang til din Shake It-app, web- og enhedsplatform."
+        }
+      },
+      "STEP2": {
+        "BILLING_INFORMATION": "Faktureringsoplysninger",
+        "CONFIRMATION_BOX_MESSAGE": "Ved at markere dette felt og vælge Fortsæt, accepterer jeg at være juridisk bundet af denne bestillingsformular. Abonnementet i denne bestillingsformular er i et år og kan ikke annulleres inden udløbet af løbetidet. Denne ordreform er underlagt betingelserne i <a href=\"{{ msaLink }}\" target=\"_blank\">Master Subscription Agreement</a>.",
+        "PAYMENT_INFO": "Det eneste vi mangler nu er din betalingsinformation, og derefter vil du være på din vej mod din nye personaliserede platform.",
+        "SKIP": "Skip"
+      },
+      "STEP3": {
+        "APOLLO": {
+          "ALL_DONE": "<strong>Helt færdig!<strong>",
+          "CUSTOM_COACHCARE": "Velkommen til Apollo Care-platformen, der drives af CoachCare! Du vil snart modtage en e-mail med et link for at aktivere din administratorkonto, indstille dit kodeord og logge ind på instrumentbrættet. Derudover modtager du en separat e-mail-bekræftelse med dine kliniske oplysninger.",
+          "QUESTIONS": "Hvis du har spørgsmål, er du velkommen til at kontakte vores implementeringshold på <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> eller din salgskontakt.",
+          "WELCOME": "Vi er glade for at begynde at arbejde med dig og endnu en gang velkommen til Apollo Care-platformen!"
+        },
+        "DEFAULT": {
+          "ALL_DONE": "<strong>Alt er Klart!<strong>",
+          "CUSTOM_COACHCARE": "Din personaliserede {{ displayName }}-app, hjemmeside- og enhedsplatform vil være klar i løbet af få uger. Indtil da vil vi regelmæssigt opdatere dig om vores fremskridt i forbindelse med forberedelsen af din platform.",
+          "EMAIL_CONFIRMATION": "Du vil snart modtage en e-mail med et link for at aktivere din administratorkonto, indstille dit kodeord og logge ind på instrumentbrættet. Derudover modtager du en separat e-mail-bekræftelse med dine kliniske oplysninger. Din kontoadministrator vil også nå ud til at introducere sig selv og besvare eventuelle spørgsmål.",
+          "EXCITED_WORKING_AGAIN": "Endnu en gang er vi glade for at begynde at arbejde med dig og velkommen til {{displayName}} platformen!",
+          "IMPLEMENTATION_SPECIALIST": "Bemærk, at en implementeringsspecialist vil kontakte dig inden for kort tid. Din brugerdefinerede {{displayName}} app, web og enhedsplatform er klar om et par uger. Indtil da leverer vi regelmæssige opdateringer om vores fremskridt med at opbygge din platform.",
+          "NEAR_COMPLETION": "Når vi er tæt på færdiggørelse, kontakter vi dig for at give træningsinformation, opsætte dit teams konti og færdiggøre din enhedsbestilling.",
+          "REGISTER_NEW_CLINIC": "Registrér en Ny Klinik",
+          "WELCOME_PLATFORM": "Velkommen til {{displayName}} -platformen drevet af CoachCare! Du modtager en e-mail-bekræftelse inden for kort tid. Du vil også modtage en e-mail for at aktivere din dashboardadministratorkonto."
+        },
+        "ITG": {
+          "CONFIRMATION": "Tillykke! Din organisation er blevet registreret. En implementeringsspecialist vil snart være i kontakt med dig for at planlægge live træning, hvis det ønskes."
+        },
+        "SHAKEIT": {
+          "ALL_DONE": "<strong>Helt færdig!<strong>",
+          "CUSTOM_COACHCARE": "Velkommen til Shake it-platformen, der drives af CoachCare! Du vil snart modtage en e-mail med et link for at aktivere din administratorkonto, indstille dit kodeord og logge ind på instrumentbrættet. Derudover modtager du en separat e-mail-bekræftelse med dine kliniske oplysninger.",
+          "QUESTIONS": "Hvis du har spørgsmål, er du velkommen til at kontakte vores implementeringshold på <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> eller din salgskontakt.",
+          "WELCOME": "Vi er glade for at begynde at arbejde med dig og endnu en gang velkommen til Shake It-platformen!"
+        }
+      }
+    },
+    "UNSUPPORTED_BROWSER": {
+      "DESCRIPTION": "Vi anbefaler at ændre din foretrukne browser til nogen af ​​dem, der er angivet nedenfor.",
+      "TITLE": "Din nuværende browser understøttes ikke af denne applikation."
+    }
+  },
+  "PERMS": {
+    "ACCESSALL": "Vis Alle",
+    "ACCESSALL_HELP": "Tilladelsen 'VIS ALLE' giver en træner mulighed for at se alle klienter og al klientdata, der er knyttet til den valgte klinik. Dette er nyttigt hvis dine kunder typisk arbejder med forskellige trænere, når de besøger din klinik, eller hvis trænere ofte dækker hinanden med at sørge for patienterne. Dette er også hensigtsmæssigt for personale, der håndterer kundeserviceopgaver.",
+    "ADMIN": "Admin",
+    "ADMIN_HELP": "Tilladelsen 'ADMIN' giver en træner mulighed for at tilføje, slette og administrere kunde- og trænerkonti samt at redigere klinikindstillinger. Dette er nyttigt for det personale på din klinik, der administrerer trænere, håndterer opgaver med kundeservice eller registrerer nye kunder.",
+    "CLIENT_PHI": "Kunde PHI",
+    "_TITLE": "Tilladelser"
+  },
+  "PHASE": {
+    "DISABLED": "Disabled",
+    "DISASSOCIATE": "Tilknytningen",
+    "ENABLED": "Aktiveret",
+    "IS_INHERITED": "Denne pakke er tilgængelig til din klinik fra en forælder klinik"
+  },
+  "PROMPT": {
+    "ACCS": {
+      "CONFIRM_ACTIVATE": "Aktiver din Konto",
+      "CONFIRM_ACTIVATE_PROMPT": "Ønsker du virkelig at aktivere dette '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "Deaktiver denne Konto",
+      "CONFIRM_DEACTIVATE_PROMPT": "Ønsker du virkelig at deaktivere dette '{{item}}'?",
+      "DEACTIVATE_MFA": "Deaktiver tofaktorautentiseringskanal",
+      "DEACTIVATE_MFA_PROMPT": "Du skal til at deaktivere tofaktors godkendelseskanal for denne konto. Dette betyder, at brugeren ikke bliver bedt om at få en bekræftelseskode, når de prøver at logge ind eller nulstille sin adgangskode.<br/><br/><strong>Er du sikker på, at du vil fortsætte?</strong>"
+    },
+    "EMAIL_TEMPLATE": {
+      "DELETE": "Slet e-mail-skabelon",
+      "DELETE_PROMPT": "Er du sikker på, at du vil slette denne e-mail-skabelon?"
+    },
+    "LABEL": {
+      "CONFIRM_ACTIVATE": "Aktivér fase",
+      "CONFIRM_ACTIVATE_PROMPT": "Ønsker du virkelig at aktivere dette '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "Deaktiver fase",
+      "CONFIRM_DEACTIVATE_PROMPT": "Ønsker du virkelig at deaktivere dette '{{item}}'?"
+    },
+    "LABELS": {
+      "DISABLE": "Deaktiver fase",
+      "DISABLE_PROMPT": "Er du sikker på, at du vil deaktivere fasen '{{label}}'?",
+      "DISOCCIATE": "Dissociate fase",
+      "DISOCCIATE_PROMPT": "Er du sikker på, at du vil adskille fasen '{{label}}'?",
+      "ENABLE": "Aktivér fase",
+      "ENABLE_PROMPT": "Er du sikker på, at du vil aktivere fasen '{{label}}'?"
+    },
+    "ORGS": {
+      "CONFIRM_ACTIVATE": "Aktiver Klinik",
+      "CONFIRM_ACTIVATE_PROMPT": "Ønsker du virkelig at aktivere dette '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "Deaktiver Klinik",
+      "CONFIRM_DEACTIVATE_PROMPT": "Ønsker du virkelig at deaktivere dette '{{item}}'?",
+      "CONFIRM_REMOVE_CHILD": "Fjern Barn",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "Denne børneorganisationen vil ikke have en forælder efter at denne bliver fjernet",
+      "CONFIRM_REMOVE_ORG": "Deaktiver Klinik",
+      "CONFIRM_REMOVE_ORG_PROMPT": "Ønsker du virkelig at deaktivere dette '{{item}}'?",
+      "CONFIRM_REMOVE_PARENT": "Fjern Forælder",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "Denne organisation vil ikke have en forældreorganisation efter at denne bliver fjernet",
+      "DISOCCIATE": "Fjern Klinik",
+      "DISOCCIATE_PROMPT": "Ønsker du virkelig at adskille dette '{{item}}'?"
+    }
+  },
+  "REGISTER": {
+    "CLINIC": {
+      "AMOUNT_PER_MONTH": "${{amount}} om måneden",
+      "BILLED_ANNUALLY": "(Beregnet ${{amount}} årligt)",
+      "BILLED_MONTHLY": "(Beregnet ${{amount}} månedligt)",
+      "PRICING": "Preisgestaltung",
+      "REQUEST_ORDER_FORM": "Indhent Ordrer for priser og vilkår",
+      "VIEW_BENEFITS_PRICING": "Vollständige Vorteile und Preise",
+      "YOUR_PLAN_SELECTION": "Dit valg Plan"
+    },
+    "STEP1": {
+      "ROBARD": {
+        "MOB_APP_1_DESCRIPTION": "Patienter vil downloade MyHealthyJourney-appen og indtaste din kliniks unikke firecifrede kode for at få adgang til appens fulde funktioner. Din kliniks mobilapp og udbyderens dashboard vises direkte inden for 48 timer efter modtagelse af platformens implementeringsformular.",
+        "MOB_APP_1_TITLE": "MyHealthyJourney-app",
+        "MOB_APP_2_DESCRIPTION": "Patienter vil downloade din kliniks tilpassede brand-app for at få adgang til appens fulde funktioner. Denne proces kræver, at din klinik udfylder platformimplementeringsformularen og ansøger om et <a href=\"https://dashboard.coachcare.com/register/apple?baseOrg=4118\" target=\"_blank\">Apple Udviklerkonto</a>.",
+        "MOB_APP_2_SMALLTEXT": "Denne proces kan tage op til tre uger, før appen er tilgængelig for dine patienter at bruge.",
+        "MOB_APP_2_TITLE": "Brugerdefineret app"
+      }
+    }
+  },
+  "ROLE": {
+    "ADMIN": "Admin",
+    "COACH": "Trænere",
+    "MANAGER": "Manager",
+    "PATIENT": "Patient"
+  },
+  "SECTION": {
+    "APOLLOUS": {
+      "PACKAGE": {
+        "ACTIVITY_SLEEP": "Aktivitet & Sleep Tracker",
+        "APOLLO_COACHING_SERVICES": "Apollo Coaching Services",
+        "AVAILABLE_PATIENT_PACKAGES": "TILGÆNGELIGE PATIENTPAKNINGER",
+        "AVAILABLE_PATIENT_PACKAGES_DETAILS": "Du vil kunne vælge en pakke for hver patient inden for Apollo Care web dashboard",
+        "BODY_COMPOSITION_SCALE": "Krop sammensætning skala",
+        "COACH_PLUS": "Care Plus",
+        "COACH_PLUS_SERVICE": "Care Plus med Apollo Coaching Service",
+        "MOBILE_APP": "Mobil App",
+        "OPTIONAL_ADD": "Valgfri Tilføj til"
+      }
+    },
+    "APOLLO_INT": {
+      "PACKAGE": {
+        "ACTIVITY_BODY": "Aktivitetssporing og kropssammensætning Skala",
+        "APOLLO_CARE_BRONE": "Apollo Care BRONZE",
+        "APOLLO_CARE_GOLD": "Apollo Care GOLD",
+        "APOLLO_CARE_SILVER": "Apollo Care SILVER",
+        "AVAILABLE_PACKAGES": "TILGÆNGELIGE PAKKER",
+        "OPTIONAL_ADD_ON": "Valgfri Tilføj til:",
+        "UNLIMITED_PATIENTS": "ubegrænsede patienter",
+        "UP_TO_25": "op til 25 patienter",
+        "UP_TO_75": "op til 75 patienter"
+      }
+    }
+  },
+  "SELECTOR": {
+    "AUTOCOMPLETE": {
+      "NO_MATCHING_ACCOUNTS": "Ingen matchende konti",
+      "NO_MATCHING_ADMINS": "Ingen matchende administratorer",
+      "NO_MATCHING_CLIENTS": "Ingen matchende kunder",
+      "NO_MATCHING_PROVIDERS": "Ingen matchende leverandører"
+    },
+    "COUNTRIES": {
+      "AE": "Arabiske Emirater",
+      "AU": "Australien",
+      "BH": "Bahrain",
+      "CA": "Canada",
+      "CL": "Chile",
+      "CO": "Colombia",
+      "DK": "Danmark",
+      "ES": "Spanien",
+      "GB": "Storbritannien",
+      "IE": "Island",
+      "IL": "Israel",
+      "KW": "Kuwait",
+      "LB": "Libanon",
+      "MX": "Mexico",
+      "NZ": "New Zealand",
+      "OM": "Oman",
+      "SA": "Saudi Arabien",
+      "US": "United States"
+    },
+    "GENDER": {
+      "FEMALE": "Dame",
+      "MALE": "Mand"
+    },
+    "PHONE_TYPE": {
+      "ANDROID": "Android",
+      "IOS": "iOS"
+    },
+    "STATUS": {
+      "ACTIVE": "Aktiv",
+      "ALL": "Alle",
+      "INACTIVE": "Inaktiv"
+    },
+    "UNITSYS": {
+      "METRIC": "Metrisk",
+      "UK": "Storbritannien",
+      "US": "United States"
+    }
+  },
+  "SIDENAV": {
+    "ACCOUNTS": "Konti",
+    "ADMINS": "Administratorer",
+    "ALERTS": "Beskeder",
+    "COACHES": "Trænere",
+    "LABELS": "Faser",
+    "LIBRARY": "Digitalt Bibliotek",
+    "MARKETING": "Marketing",
+    "MESSAGES": "Beskeder",
+    "NOTIFICATIONS": "Notifikationer",
+    "ORGANIZATIONS": "Organisationer",
+    "OVERVIEW": "Oversigt",
+    "PATIENTS": "Patienter",
+    "REPORTS": "Rapporter",
+    "RESOURCES": "Ressourcer",
+    "SCHEDULE": "Skema",
+    "SCHEDULE_AVAILABLE": "Sæt Tilgængelighed",
+    "SCHEDULE_VIEW": "Vis Skema",
+    "SUPPORT": "Support",
+    "USER_STATISTICS": "Brugerstatistik"
+  }
+}

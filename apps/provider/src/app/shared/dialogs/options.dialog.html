@@ -1,0 +1,13 @@
+<!-- WARNING have to be sure to have translated strings because after the extraction they are empty -->
+
+<h3 matDialogTitle [innerHTML]="data.title | translate: data.titleParams"></h3>
+
+<div mat-dialog-content [innerHTML]="data.content | translate: data.contentParams"></div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end stretch">
+  <button mat-raised-button class="ccr-button"
+  *ngFor="let option of data.options" color="{{ option.color }}" [matDialogClose]="option.value">
+    {{ option.viewValue | translate }}
+  </button>
+  <button mat-raised-button class="ccr-button" [matDialogClose]="false">{{ data.cancel | translate }}</button>
+</div>

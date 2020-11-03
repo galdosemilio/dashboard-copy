@@ -1,0 +1,33 @@
+@import 'variables';
+
+:host {
+  background-color: mat-color($ccr-background, app-bar);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 10px 10px;
+  place-content: stretch flex-start;
+  align-items: stretch;
+}
+
+h5 {
+  text-align: start !important;
+  @include ccr-title-h;
+  font-size: 1.15em;
+}
+
+h4 {
+  color: mat-color($ccr-foreground, secondary-text);
+  font-weight: 200;
+  margin: 0;
+}
+
+iframe {
+  width: 100%;
+  height: 400px;
+}
+
+.required {
+  color: mat-color($ccr-base, 400);
+}

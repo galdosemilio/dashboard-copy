@@ -1,0 +1,23 @@
+@import 'variables';
+
+:host {
+  display: inline-block;
+  vertical-align: middle;
+
+  &.sidebar-header-placement {
+    color: #000 !important;
+    mat-icon {
+      color: var(--accent-contrast);
+      font-size: 17px;
+      margin-left: 3px;
+      margin-top: -3px;
+    }
+  }
+}
+
+mat-icon {
+  color: mat-color($ccr-foreground, icon);
+  cursor: pointer;
+  font-size: 20px;
+  vertical-align: middle;
+}

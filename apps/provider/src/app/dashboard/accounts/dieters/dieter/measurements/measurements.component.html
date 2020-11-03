@@ -1,0 +1,90 @@
+
+<div class="ccr-container-mini" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>
+  <ul class="ccr-tabs-center" fxLayout="row" fxLayoutAlign.gt-xs="start stretch">
+    <li *ngIf="hiddenMeasurementTabs.indexOf('composition') === -1">
+      <a mat-button [routerLink]="['.', {s: 'composition'}]" [class.active]="section === 'composition'">{{ 'GLOBAL.COMPOSITION' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenMeasurementTabs.indexOf('circumference') === -1">
+      <a mat-button [routerLink]="['.', {s: 'circumference'}]" [class.active]="section === 'circumference'">{{ 'GLOBAL.CIRCUMFERENCE' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenMeasurementTabs.indexOf('energy') === -1">
+      <a mat-button [routerLink]="['.', {s: 'energy'}]" [class.active]="section === 'energy'">{{ 'GLOBAL.ENERGY' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenMeasurementTabs.indexOf('food') === -1">
+      <a mat-button [routerLink]="['.', {s: 'food'}]" [class.active]="section === 'food'">{{ 'GLOBAL.FOOD' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenMeasurementTabs.indexOf('vitals') === -1">
+      <a mat-button [routerLink]="['.', {s: 'vitals'}]" [class.active]="section === 'vitals'">{{ 'GLOBAL.VITALS' | translate }}</a>
+    </li>
+  </ul>
+
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>
+    <a *ngIf="useNewEndpoint && allowListView && view !== 'list'" mat-button class="ccr-icon-button" fxFlex="0 0 150px" fxFlex.xs="grow" (click)="toggleView('list')">
+      <mat-icon>view_headline</mat-icon>
+      <span>{{ 'BOARD.VIEW_AS_LIST' | translate }}</span>
+    </a>
+
+    <a *ngIf="(!useNewEndpoint || !allowListView) && view !== 'table'" mat-button class="ccr-icon-button" fxFlex="0 0 150px" fxFlex.xs="grow" (click)="toggleView('table')">
+        <mat-icon>view_headline</mat-icon>
+        <span>{{ 'BOARD.VIEW_AS_TABLE' | translate }}</span>
+    </a>
+
+    <a *ngIf="view !== 'chart'" mat-button class="ccr-icon-button" fxFlex="0 0 150px" fxFlex.xs="grow" (click)="toggleView('chart')">
+      <mat-icon>show_chart</mat-icon>
+      <span>{{ 'BOARD.VIEW_AS_CHART' | translate }}</span>
+    </a>
+  </div>
+</div>
+
+<div
+[hidden]="view === 'list'"
+fxLayout="column"
+fxLayoutAlign="center space-around"
+fxLayoutGap="25px">
+  <date-navigator [timeframe]="timeframe" [date]="dates.current" (selectedDate)="updateDates($event)"></date-navigator>
+</div>
+
+<div [hidden]="view !== 'list'" fxLayout="column" fxLayoutAlign="center end">
+  <ccr-paginator fxFlex="nogrow" #paginator
+    [inverse]="true"
+    [length]="source.total"
+    [pageIndex]="source.pageIndex"
+    [pageSize]="source.pageSize"
+    (page)="source.pageIndex = $event.pageIndex"
+  ></ccr-paginator>
+</div>
+
+<div class="ccr-dashboard-pane" [ngSwitch]="view">
+  <ng-container *ngSwitchCase="'chart'">
+
+    <app-dieter-measurements-chart
+      [embedded]="true"
+      [source]="source"
+      [metrics]="chartColumns"
+      [timeframe]="timeframe"
+      [views]="['week', 'month', 'year', 'alltime']"
+      (change)="chartChanged($event)"
+    ></app-dieter-measurements-chart>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'list'">
+    <app-dieter-measurements-table
+      [source]="source"
+      [columns]="columns"
+      [sections]="sections"
+      [section]="section"
+    ></app-dieter-measurements-table>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'table'">
+
+    <app-dieter-measurements-table
+      [source]="source"
+      [columns]="columns"
+      [sections]="sections"
+      [section]="section"
+    ></app-dieter-measurements-table>
+
+  </ng-container>
+</div>

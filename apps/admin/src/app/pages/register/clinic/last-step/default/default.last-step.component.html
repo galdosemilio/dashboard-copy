@@ -1,0 +1,17 @@
+<p [innerHTML]="'PAGE.REGISTER.STEP3.DEFAULT.ALL_DONE' | translate"></p>
+<p [innerHTML]="'PAGE.REGISTER.STEP3.DEFAULT.EMAIL_CONFIRMATION' | translate"></p>
+<p
+*ngIf="!data?.onlyFirstParagraph"
+[innerHTML]="'PAGE.REGISTER.STEP3.DEFAULT.CUSTOM_COACHCARE' | translate: orgName">
+</p>
+<p
+*ngIf="!data?.onlyFirstParagraph"
+[innerHTML]="'PAGE.REGISTER.STEP3.DEFAULT.NEAR_COMPLETION' | translate">
+</p>
+<p *ngIf="data?.clinicPlanMessage" [innerHTML]="data.clinicPlanMessage | translate"></p>
+
+<div fxLayoutAlign="center">
+  <button class="nextStep" mat-button type="button" (click)="refresh()">
+    {{ 'PAGE.REGISTER.STEP3.DEFAULT.REGISTER_NEW_CLINIC' | translate }}
+  </button>
+</div>

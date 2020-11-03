@@ -1,0 +1,25 @@
+
+<div matDialogTitle>
+  <div>
+    <mat-icon>account_circle</mat-icon>
+    <span>{{ 'LIBRARY.FORMS.SELECT_PATIENT' | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content class="dialog-content">
+  <app-library-forms-dieters-table
+  (onSelect)="select($event)"
+  ></app-library-forms-dieters-table>
+</div>
+
+<mat-dialog-actions>
+  <button mat-button class="ccr-button" (click)="cancel()">
+    {{ 'GLOBAL.CANCEL' | translate }}
+  </button>
+    <button mat-button color="warn" class="ccr-button" (click)="remove()">
+    {{ 'LIBRARY.FORMS.UNSET_PATIENT' | translate }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,34 @@
+<div class="report-heading">
+  <mat-icon>show_chart</mat-icon>
+  <h3 fxFlex>
+    {{ 'REPORTS.WEIGHT_CHANGE_REPORT' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.WEIGHT_CHANGE_REPORT' | translate"
+    [description]="'REPORTS.WEIGHT_CHANGE_REPORT_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+</div>
+
+<div class="ccr-container">
+  <div class="scrollable">
+    <div class="canvas-wrap" [ngStyle]="{'min-width.px': chartWidth}">
+      <canvas *ngIf="chart" baseChart
+      width="500" height="400"
+      [chartType]="chart.type"
+      [datasets]="chart.datasets"
+      [labels]="chart.labels"
+      [options]="chart.options"
+      [legend]="chart.legend"
+      [colors]="chart.colors"
+      ></canvas>
+    </div>
+  </div>
+
+  <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="source.isLoading || source.hasErrors()">
+    <mat-spinner *ngIf="source.isLoading"></mat-spinner>
+    <div class="ccr-errors" *ngIf="!source.isLoading && source.hasErrors()">
+      <span *ngFor="let error of source.getErrors()">{{error | translate}}</span>
+    </div>
+  </div>
+</div>

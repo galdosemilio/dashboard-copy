@@ -1,0 +1,30 @@
+<mat-form-field [class.readonly]="isReadonly">
+  <input matInput type="text" #trigger
+    [formControl]="_input"
+    [matAutocomplete]="auto"
+    [readonly]="isReadonly"
+    [attr.disabled]="isReadonly ? '' : null"
+    [required]="isRequired"
+    [placeholder]="placeholder"
+    (blur)="propagateTouch()"
+    (focusout)="onFocusOut()"
+    (change)="$event.stopPropagation()">
+
+  <mat-autocomplete
+  #auto="matAutocomplete"
+  [displayWith]="displayFn.bind(this)"
+  (optionSelected)="select($event)">
+    <mat-option
+    *ngFor="let item of items"
+    [value]="item"
+    [disabled]="item.disabled">
+      <p matLine>{{ item.viewValue }}</p>
+    </mat-option>
+  </mat-autocomplete>
+
+  <mat-icon *ngIf="hasSelected"
+    class="ccr-remove"
+    [matTooltip]="tooltip"
+    (click)="remove()"
+    matSuffix>cancel</mat-icon>
+</mat-form-field>

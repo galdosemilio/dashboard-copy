@@ -1,0 +1,85 @@
+<div matDialogTitle>
+    <div>
+        <span>
+        <span >{{'SEQUENCING.TRIGGER_HISTORY' | translate}}</span>
+        </span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <ccr-paginator fxFlex="nogrow" #paginator
+            [length]="source.total"
+            [pageIndex]="source.pageIndex"
+            [pageSize]="source.pageSize"
+            (page)="source.pageIndex = $event.pageIndex"
+            ></ccr-paginator>
+        </div>
+
+        <div>
+            <ccr-datasource-overlay
+            [emptyMsg]="'SEQUENCING.TRIGGER_HISTORY_EMPTY_LIST' | translate"
+            [source]="source"
+            class="ccr-table">
+                <mat-table [dataSource]="source">
+                    <ng-container cdkColumnDef="type">
+                    <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.TYPE' | translate }}</mat-header-cell>
+                    <mat-cell
+                    *cdkCellDef="let row"
+                    fxLayoutAlign="start center"
+                    fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+                        {{ row.type.displayName | translate }}
+                    </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="createdAt">
+                    <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.SENT_AT' | translate }}</mat-header-cell>
+                    <mat-cell
+                    *cdkCellDef="let row"
+                    fxLayoutAlign="start center"
+                    fxLayoutAlign.xs=" center"
+                    fxFlex.xs="grow">
+                        {{ row.createdAt | amDateFormat:'ddd, MMM D YYYY' }}
+                    </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="createdAtHour">
+                    <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.HOUR' | translate }}</mat-header-cell>
+                    <mat-cell
+                    *cdkCellDef="let row"
+                    fxLayoutAlign="start center"
+                    fxLayoutAlign.xs=" center"
+                    fxFlex.xs="grow">
+                        {{ row.createdAt | amDateFormat:'h:mm a' }}
+                    </mat-cell>
+                    </ng-container>
+
+                    <ng-container cdkColumnDef="content">
+                    <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.CONTENT' | translate }}</mat-header-cell>
+                    <mat-cell
+                    *cdkCellDef="let row"
+                    fxLayoutAlign="start center"
+                    fxLayoutAlign.xs=" center"
+                    fxFlex.xs="grow">
+                        {{ row.payload.title || row.payload.subject || row.payload.message || row.payload.header || row.payload.content }}
+                    </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+                    <mat-row fxLayoutWrap
+                        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+                        [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+                        class="clickable"
+                    ></mat-row>
+                </mat-table>
+            </ccr-datasource-overlay>
+        </div>
+    </div>
+</mat-dialog-content>

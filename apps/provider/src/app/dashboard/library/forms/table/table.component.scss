@@ -1,0 +1,20 @@
+@import 'variables';
+
+mat-icon {
+  &.disabled {
+    color: mat-color($ccr-foreground, divider) !important;
+    fill: mat-color($ccr-foreground, divider);
+  }
+}
+
+.mat-header-row {
+  padding: 0 15px;
+
+  .mat-header-cell {
+    padding: 0 !important;
+  }
+}
+
+.mat-column-name {
+  flex: 0 0 30% !important;
+}

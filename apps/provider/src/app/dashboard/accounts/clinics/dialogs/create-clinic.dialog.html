@@ -1,0 +1,82 @@
+
+<div matDialogTitle>
+    <div>
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>{{ 'BOARD.CLINIC_NEW' | translate }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <p [innerHTML]="'BOARD.NEW_CLINIC_DISCLAIMER' | translate:{clinic: currentClinic.name, id: currentClinic.id}"></p>
+
+        <h5>{{ 'BOARD.CLINIC_INFORMATION' | translate }}</h5>
+
+        <div [formGroup]="form" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.NAME' | translate" formControlName="name" matInput required type="text">
+            </mat-form-field>
+        </div>
+
+        <h5>{{ 'BOARD.CONTACT_INFO' | translate }}</h5>
+
+        <div [formGroup]="form.controls.contact" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.FIRST_NAME' | translate" formControlName="firstName" matInput required type="text">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.LAST_NAME' | translate" formControlName="lastName" matInput required type="text">
+            </mat-form-field>
+        </div>
+
+        <div [formGroup]="form.controls.contact" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.EMAIL' | translate" formControlName="email" matInput required type="text">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.PHONE' | translate" formControlName="phone" matInput required type="text">
+            </mat-form-field>
+        </div>
+
+        <h5>{{ 'BOARD.ADDRESS' | translate }}</h5>
+
+        <div [formGroup]="form.controls.address" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.STREET' | translate" formControlName="street" matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.CITY' | translate" formControlName="city" matInput type="text">
+            </mat-form-field>
+        </div>
+
+        <div [formGroup]="form.controls.address" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.STATE' | translate" formControlName="state" matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <input [placeholder]="'BOARD.POSTAL_CODE' | translate" formControlName="postalCode" matInput type="text">
+            </mat-form-field>
+
+            <div fxFlex>
+                <ccr-country-selector [placeholder]="'BOARD.COUNTRY' | translate" fxFlex formControlName="country"></ccr-country-selector>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button [disabled]="form.invalid" (click)="onSubmit()" mat-button color="primary" class="ccr-icon-button">
+    <mat-icon>check</mat-icon> {{'BOARD.SAVE_CLINIC' | translate}}
+    </button>
+
+    <button mat-button class="ccr-icon-button" matDialogClose>
+    <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+    </button>
+</mat-dialog-actions>

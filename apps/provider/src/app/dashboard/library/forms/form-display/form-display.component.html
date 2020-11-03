@@ -1,0 +1,23 @@
+<div class="ccr-heading" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
+    <ul class="ccr-breadcrumbs" fxFlex>
+      <li fxFlex="nogrow" *ngFor="let route of routes; let i = index">
+        <mat-icon *ngIf="i > 0">chevron_right</mat-icon>
+        <a [class.selected]="i === routes.length - 1" class="clickable" fxLayoutAlign=" center" [ngSwitch]="route.type" (click)="goUp(route)">
+          <span *ngSwitchCase="'text'">{{ route.payload | translate }}</span>
+          <span *ngSwitchCase="'form'">{{ route.payload.name }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="ccr-tabs" fxFlex="nogrow" fxLayout="row" fxLayoutAlign=" stretch">
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['submissions']">{{ 'LIBRARY.FORMS.VIEW_ANSWERS_TOOLTIP' | translate }}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['fill']">{{ 'LIBRARY.FORMS.FILL_TOOLTIP' | translate }}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['edit']">{{ 'LIBRARY.FORMS.EDIT_TOOLTIP' | translate }}</a>
+</div>
+
+<div class="ccr-subcomponent" fxFlex="grow">
+  <router-outlet></router-outlet>
+</div>

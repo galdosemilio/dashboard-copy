@@ -1,0 +1,25 @@
+
+<div matDialogTitle>
+  <div>
+    <mat-icon>library_books</mat-icon>
+    <span>{{ 'LIBRARY.FORMS.EDIT_FORM' | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content class="dialog-content" [formGroup]="form">
+    <app-library-form-form bindForm="details" [content]="data" [edit]="true"></app-library-form-form>
+</div>
+
+<mat-dialog-actions>
+    <button mat-button class="ccr-button" (click)="cancel()">
+      {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+
+    <button mat-button color="primary" class="ccr-button"
+    [disabled]="form.invalid" (click)="closeDialog()">
+        {{ 'GLOBAL.SAVE' | translate }}
+    </button>
+</mat-dialog-actions>

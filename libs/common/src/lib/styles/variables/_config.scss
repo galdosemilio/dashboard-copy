@@ -1,0 +1,78 @@
+/* Layout Map */
+
+$ccr-vars: (font-family: map-get($ccr-typography, font-family));
+
+/* Layout Map */
+
+$ccr-layout: (
+  menu-width: 225px,
+  menu-padding: 16px,
+  menu-color-change: 2%,
+  topbar-height: 64px,
+  panel-width: 290px,
+  footer-height: 25px,
+  button-border-radius: 16px,
+  table-header-height: 40px,
+  table-row-height: 25px
+);
+
+/* Responsive Config */
+
+// Extra small screen
+$xs-max: 600px !default;
+// Small screen / tablet
+$sm-max: 768px !default;
+// Medium screen / desktop
+$md-max: 992px !default;
+// Large screen / wide desktop
+$lg-max: 1200px !default;
+
+$sm-min: ($xs-max + 1);
+$md-min: ($sm-max + 1);
+$lg-min: ($md-max + 1);
+$xl-min: ($lg-max + 1);
+
+$ccr-rwd: (
+  xs-max: $xs-max,
+  sm-max: $sm-max,
+  md-max: $md-max,
+  lg-max: $lg-max,
+  sm-min: ($xs-max + 1),
+  md-min: ($sm-max + 1),
+  lg-min: ($md-max + 1),
+  xl-min: ($lg-max + 1),
+  gte-sm: 'only screen and (min-width : #{$sm-min})',
+  gte-md: 'only screen and (min-width : #{$md-min})',
+  gte-lg: 'only screen and (min-width : #{$lg-min})',
+  gte-xl: 'only screen and (min-width : #{$xl-min})',
+  lte-xs: 'only screen and (max-width : #{$xs-max})',
+  lte-sm: 'only screen and (max-width : #{$sm-max})',
+  lte-md: 'only screen and (max-width : #{$md-max})',
+  lte-lg: 'only screen and (max-width : #{$lg-max})',
+  eq-sm: 'only screen and (min-width : #{$sm-min}) and (max-width : #{$sm-max})',
+  eq-md: 'only screen and (min-width : #{$md-min}) and (max-width : #{$md-max})',
+  eq-lg: 'only screen and (min-width : #{$lg-min}) and (max-width : #{$lg-max})',
+  sm-md: 'only screen and (min-width : #{$sm-min}) and (max-width : #{$md-max})',
+  sm-lg: 'only screen and (min-width : #{$sm-min}) and (max-width : #{$lg-max})',
+  md-lg: 'only screen and (min-width : #{$md-min}) and (max-width : #{$lg-max})'
+);
+
+@function ccr-media($key) {
+  @return map-get($ccr-rwd, $key);
+}
+
+/* Export Config */
+
+@function map-collect($maps...) {
+  $collection: ();
+
+  @each $map in $maps {
+    $collection: map-merge($collection, $map);
+  }
+
+  @return $collection;
+}
+
+$ccr-config: map-collect($ccr-layout, $ccr-rwd, $ccr-vars);
+
+// @debug $ccr-config;

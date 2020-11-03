@@ -1,0 +1,30 @@
+{
+  "baseUrl": "http://localhost:4200",
+  "defaultCommandTimeout": 60000,
+  "pageLoadTimeout": 120000,
+  "numTestsKeptInMemory": 3,
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
+  "env": {
+    "clientId": 3,
+    "clinicId": 1,
+    "formId": 1,
+    "formSubmissionId": 1,
+    "organizationId": 1,
+    "providerId": 1,
+    "providerIdOther": 2,
+    "sequenceId": 1,
+    "timezone": "et"
+  },
+  "projectId": "ktdwx5",
+  "fileServerFolder": ".",
+  "fixturesFolder": "./src/fixtures",
+  "integrationFolder": "./src/integration",
+  "modifyObstructiveCode": false,
+  "pluginsFile": "./src/plugins/index",
+  "supportFile": "./src/support/index.ts",
+  "video": false,
+  "videosFolder": "../../dist/cypress/apps/provider-e2e/videos",
+  "screenshotsFolder": "../../dist/cypress/apps/provider-e2e/screenshots",
+  "chromeWebSecurity": false
+}

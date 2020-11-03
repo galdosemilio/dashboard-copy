@@ -1,0 +1,697 @@
+{
+  "ACCOUNT": {
+    "ASSIGN": "שיוך",
+    "ASSOCIATE": "משוייך",
+    "CREATE_ADMIN": "יצירת מנהל",
+    "CREATE_ASSIGNMENT": "יצירת שיוך",
+    "CREATE_ASSOCIATION": "יצירת שייכות",
+    "CREATE_COACH": "יצירת מאמן",
+    "CREATE_PATIENT": "יצירת מטופל",
+    "DEASSIGN": "שיוך מחדש",
+    "DISSOCIATE": "לא משוייכים",
+    "_ADMINS": "מנהלים",
+    "_COACHES": "מאמנים",
+    "_PATIENTS": "מטופלים"
+  },
+  "ADMIN": {
+    "ASSOCIATIONS": "משוייכים",
+    "LOGS": {
+      "APP_NAME": "אפליקציה",
+      "CREATED_AT": "תאריך",
+      "_TITLE": "רישומי"
+    },
+    "ORGS": {
+      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "סטטוס קמפיין האגודה Active",
+      "ACTIVE_CAMPAIGN_IS_INHERITED": "רשימת קמפיינים פעילים זו זמינה למרפאה זו ממרפאת הורים.",
+      "ACTIVE_CAMPAIGN_LISTS": "רשימות קמפיין פעילות",
+      "ADD_CHILD_ORG": "הוספת מרפאת בת",
+      "ADD_PARENT_ORG": "הוספת מרפאת אב",
+      "ASSOC_ACTIVE_CAMPAIGN": "מבצע עמית פעיל",
+      "ASSOC_ALL_PROVIDERS": "למפרע לרשום כל ספקי או מתחת מרפאה זו",
+      "ASSOC_ALL_PROVIDERS_CURRENT": "ספק הרשמת {{provider}} ...",
+      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "ספקי הבאים מוצגים שגיאות כאשר מנסים לרשום אותם:",
+      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "כל ספקי נרשם בהצלחה",
+      "ASSOC_ALL_PROVIDERS_WARNING": "אתה עומד לרשום את כל ספקים ממרפאת זו; פעולה זו עשויה לארוך זמן מה להשלים, אתה בטוח שאתה רוצה להמשיך?",
+      "ASSOC_PROVIDER_CAMPAIGN": "למפרע להירשם ספק אחד",
+      "CHILD_ORGS": "מרפאת בת",
+      "CREATE_NEW": "יצירת מרפאה",
+      "DELETE_LIST_ASSOCIATION": "האגודה רשימת מסעות פרסום מחק פעיל",
+      "DELETE_LIST_ASSOCIATION_CONTENT": "האם אתה בטוח שאתה רוצה למחוק את השיוך לרשימת {{list}}?",
+      "EDIT_ACTIVE_CAMPAIGN": "האגודה רשימת ערוך קמפיין פעיל",
+      "LOAD_MORE": "טען עוד",
+      "MARKETING_DESCRIPTION": "רשימות קמפיין פעילות אלו קשור או מעל הארגון הזה. כאשר ספקית מתווספת או מתחת הארגון הזה, הם יירשמו אוטומטית ברשימות המוצג להלן.<br><br> ספקים שכבר היו קשור לארגון זה כאשר רשימת הקמפיין הפעיל נוספה לא תירשם באופן אוטומטי. ייתכן בדיעבד ורשם אחד או כל הספקים לתוך רשימות קמפיין פעילות חדש שנוספות על ידי שימוש \"למפרע הרשם ... \" כפתורים.",
+      "NO_CHILD_CLINIC": "למרפאה זו אין מרפאת בת",
+      "NO_PARENT_CLINIC": "למרפאה זו אין מרפאת אב",
+      "ORGANIZATION": "מרפאה",
+      "PARENT_ORG": "מרפאת אב",
+      "SELECTED_PROVIDER": "ספק נבחר: {{provider}}",
+      "SELECT_PROVIDER": "ספק בחר",
+      "SETTINGS": {
+        "ANDROID_BUNDLE_ID": "Android Bundle ID",
+        "APPID": "מזהה אפליקציה",
+        "APPSTORE_CONNECT_TEAM_ID": "AppStore Connect Team ID",
+        "APP_NAME": "App Name",
+        "BCC_EMAIL": "דוא\"ל BCC (מופרד בפסיק)",
+        "CODE_ENTRY_HELP": "טקסט קוד הכניסה עזרה",
+        "COLOR_ACCENT": "Accent",
+        "COLOR_PRIMARY": "ראשי",
+        "COLOR_SECONDARY": "משני",
+        "COLOR_TOOLBAR": "צבע סרגל כלים",
+        "DEVELOPER_PORTAL_TEAM_ID": "Developer Portal Team ID",
+        "DISPLAY_NAME": "שם תצוגה",
+        "EDIT_INHERITED": "ערוך העדפות בירושה",
+        "EMPTY_BCC_EMAILS": "לא מוגדרים דוא\"ל של BCC לארגון זה.",
+        "FIREBASE_PROJECT_NAME": "Firebase Project Name",
+        "ICON_HINT": "Icon updates will be visible after 24 hours",
+        "IMAGES": "Images",
+        "INHERIT_MFA": "העדפות בירושה",
+        "IOS_BUNDLE_ID": "iOS Bundle ID",
+        "LOGO_HINT": "עדכוני הלוגו יהיו זמינים לאחר 24 שעות",
+        "MALA": "MALA",
+        "MARKED_AS_INHERITED": "העדפות המסומנות כירושות",
+        "MFA_ENABLED": "אימות רב גורמים מופעל",
+        "MFA_INHERITED": "עבר בירושה מ- {{ org }}",
+        "MFA_LOGIN": "התחברות",
+        "MFA_PASSWORD_UPDATE": "עדכון סיסמא",
+        "NO_LABEL_ASSOCIATIONS": "אין שלבים הקשורים לארגון זה",
+        "SPLASH_HINT": "Splash updates will be visible after 24 hours"
+      },
+      "TITLE": "מרפאות"
+    }
+  },
+  "BOARD": {
+    "BACK": "חזרה",
+    "BASIC_INFORMATION": "מידע בסיסי",
+    "DELETE_MFA_INSTANCE": "בטל את ערוץ האימות הדו-גורמי",
+    "PERSONAL_INFORMATION": "מידע אישי",
+    "SECURITY": "אבטחה"
+  },
+  "CLINIC_PLANS": {
+    "COACH_CARE": {
+      "H_SYSTEM": "מערכת הבריאות",
+      "H_SYSTEM_LAST_STEP": "תודה על ההרשמה לתוכנית ניטור מרחוק CoachCare! אנא מצפים לקבל תמחור להזמין טופס המפרט ותנאים אחרים באמצעות AdobeSign עבור החתימה האלקטרונית שלך | <br><br><strong>שימו לב:.. אתה חייב לבצע טופס הזמנה זה כדי שנוכל להתחיל לבנות את האפליקציה שלך</strong>",
+      "R_MONITORING": "ניטור מרחוק",
+      "R_MONITORING_LAST_STEP": "תודה על ההרשמה לתוכנית ניטור מרחוק CoachCare! אנא מצפים לקבל תמחור להזמין טופס המפרט ותנאים אחרים באמצעות AdobeSign עבור החתימה האלקטרונית שלך | <br><br><strong>שימו לב:.. אתה חייב לבצע טופס הזמנה זה כדי שנוכל להתחיל לבנות את האפליקציה שלך</strong>",
+      "TRACK": "מַסלוּל",
+      "TRACK_LAST_STEP": "תודה על ההרשמה לתוכנית מסלול CoachCare!",
+      "V_HEALTH": "בריאות וירטואלי",
+      "V_HEALTH_LAST_STEP": "תודה על ההרשמה לתוכנית הבריאות וירטואלי CoachCare!"
+    }
+  },
+  "EMAIL_TEMPLATE_CATS": {
+    "CLIENT": "לקוח",
+    "OTHER": "אחר"
+  },
+  "EMAIL_TEMPLATE_OPS": {
+    "INTERNAL_REGISTRATION": "רישום פנימי",
+    "INTERNAL_REGISTRATION_PLAN": "רישום פנימי (עם תכניות)",
+    "NEW_ACCOUNT": "חשבון חדש"
+  },
+  "FIELD": {
+    "CONSENT": {
+      "TEXT_CLIENT": "על ידי סימון תיבה זו ושליחת הטופס, אני מסכים לאפליקציית",
+      "TEXT_GDPR": "אם אני תושב האיחוד האירופי / בריטניה, אני גם מסכים",
+      "TEXT_PROVIDER": "על ידי סימון תיבה זו ובחירה בהמשך, אני מסכים לתנאי להלן:"
+    },
+    "NEWSLETTER": {
+      "CONSENT_TEXT": "על ידי סימון תיבה זו ובחירת המשך, אני מסכים לקבל את הידיעון הדיגיטלי של CoachConnect שיכלול עדכונים חודשיים על תכונות ופונקציונליות הפלטפורמה שלי."
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "שתי הסיסמאות חייבות להיות תואמות",
+      "HAS_NO_SEQUENCES": "להכיל לא יותר מ-2 תווים עוקבים חוזרים",
+      "MIN_LENGTH": "להכיל לפחות 8 תווים",
+      "ONE_LOWERCASE_LETTER": "להכיל אות קטנה",
+      "ONE_NUMBER": "להכיל מספר",
+      "ONE_SPECIAL_CHARACTER": "להכיל תו מיוחד",
+      "ONE_UPPERCASE_LETTER": "להכיל אות גדולה",
+      "REQUIREMENTS": "דרישות הסיסמה"
+    }
+  },
+  "GLOBAL": {
+    "ABOUT": "אודות",
+    "ACTIONS": "פעולות",
+    "ACTIVATE": "פעיל",
+    "ACTIVE": "פָּעִיל",
+    "ADD_LANGUAGE": "הוספת שפה",
+    "ADMIN": "מנהל",
+    "ALL": "את כל",
+    "AND": "ו",
+    "ANNUAL": "שנתי",
+    "APP_STORE": "חנות אפליקציות",
+    "ASSOCIATE": "חָבֵר",
+    "AUTO_ENROLL_CLIENT": "הרשמה אוטומטית של לקוח לאיגוד",
+    "BACK": "חזרה",
+    "BASIC_INFORMATION": "מידע בסיסי",
+    "BCC_EMAILS": "דוא\"ל BCC",
+    "BIRTHDAY": "תאריך לידה",
+    "CANCEL": "ביטול",
+    "CATEGORY": "קטגוריה",
+    "CITY": "עיר",
+    "CLIENT": "לקוח",
+    "CLINICS": "מרפאות",
+    "CLINIC_NAME": "שם המרפאה",
+    "CLOSE": "קרוב",
+    "COACH": "ספק",
+    "COACHES": "מאמנים",
+    "COLORS": "צבעים",
+    "CONFIRM_PASSWORD": "אישור סיסמה",
+    "CONTACT": "יצירת קשר",
+    "CONTINUE": "המשך",
+    "COUNTRY": "מדינה",
+    "CREATE": "יצירה",
+    "CREATE_EMAIL_TEMPLATE": "צור תבנית דוא\"ל",
+    "DASHBOARD": "לוח בקרה",
+    "DEACTIVATE": "לא פעיל",
+    "DELETE": "מחק",
+    "DESCRIPTION": "תיאור",
+    "DIGITAL_LIBRARY": "ספרייה דיגיטלית",
+    "DISABLED": "נכים",
+    "DONE": "בוצע!",
+    "DOWNLOAD_CSV": "הורד CSV",
+    "EDIT": "עריכה",
+    "EMAIL": "אימייל",
+    "EMAIL_ADDRESS": "כתובת מייל",
+    "EMAIL_TEMPLATES": "תבניות אימייל",
+    "ENABLED": "מופעל",
+    "ENROLL": "לְהִרָשֵׁם",
+    "ERROR": "שגיאה",
+    "FEATURES": "מאפיינים",
+    "FIELD_REQUIRED": "שדה חובה",
+    "FILE_VAULT": "קמרון קבצים",
+    "FILTER_BY_ACCOUNT": "סינון לפי חשבון",
+    "FILTER_BY_NAME": "סינון לפי שם",
+    "FIRST_NAME": "שם פרטי",
+    "FORGOT_PASSWORD": "שכחת את הסיסמה?",
+    "GENDER": "מין",
+    "HEIGHT": "גובה",
+    "HIERARCHY": "סידרה",
+    "HTML": "HTML",
+    "INACTIVE": "לֹא פָּעִיל",
+    "INCLUDE_INACTIVE": "כולל לא פעיל",
+    "INFORMATION": "מידע",
+    "INHERIT": "ירושה",
+    "LABEL": "תווית",
+    "LANGUAGE": "שפה",
+    "LAST_NAME": "שם משפחה",
+    "LOCALE": "אזור",
+    "LOCATION": "מיקום",
+    "MANAGER": "מנהל",
+    "MEASUREMENT": "מדידה",
+    "MESSAGING": "העברת הודעות",
+    "MONTHLY": "יַרחוֹן",
+    "NAME": "שם",
+    "NEXT": "הבא",
+    "NO": "לא",
+    "NO_ENTRIES_FOR_FIELD": "אין רשומות עבור שדה זה",
+    "OK": "אישור",
+    "OPEN_PATIENT_ENROLLMENT": "פתח את הרשמת המטופל",
+    "OPERATION": "פעולה",
+    "ORGANIZATION": "מרפאה",
+    "ORG_ID": "מזהה הארגון",
+    "ORG_NAME": "שם ארגון",
+    "ORG_TO_EXCLUDE": "חפש בארגונים שלא לכלול",
+    "PASSWORD": "סיסמה",
+    "PATIENT": "סבלני",
+    "PATIENTS": "מטופלים",
+    "PATIENT_AUTOMATIC_DISASSOCIATION": "התנתקות אוטומטית של המטופל",
+    "PHONE": "טלפון",
+    "PHONE_NUMBER": "מספר טלפון",
+    "PHONE_TYPE": "סוג הטלפון",
+    "PLAY_STORE": "חנות משחקים",
+    "POSTAL_CODE": "מיקוד",
+    "PREVIOUS": "הקודם",
+    "PROFILE": "פרופיל",
+    "PROVIDER": "ספק",
+    "REGISTER_NEW_CLINIC": "רישום חברה חדשה",
+    "REQUEST_RESET": "איפוס סיסמה",
+    "RESET_PASSWORD": "איפוס סיסמה",
+    "RETRY": "נסה שוב",
+    "RPM": "סל\"ד",
+    "SAVE": "שמירה",
+    "SAVE_PASSWORD": "שמירת סיסמה",
+    "SEARCH_COACH": "חיפוש מאמן",
+    "SEARCH_COACH_OR_PATIENT": "חיפוש מאמן או מטופל",
+    "SECURITY": "ביטחון",
+    "SELECT_LANGUAGE": "בחר שפה",
+    "SEQUENCES": "רצפים",
+    "SETTINGS": "הגדרות",
+    "SET_PASSWORD": "יצירת סיסמה",
+    "SHORT_CODE": "קיצורים",
+    "SIGN_FROM_APP": "מטופלים, יש להירשם דרך האפליקציה",
+    "SIGN_IN": "הרשמה כספק",
+    "STATE": "מדינה",
+    "STATUS": "סטטוס",
+    "STREET_ADDRESS": "רחוב",
+    "SUBJECT": "נושא",
+    "SUBMIT": "שלח",
+    "TEXT": "טקסט",
+    "TIMEZONE": "איזור זמן",
+    "TITLE": "כותרת",
+    "TO": "ל",
+    "UPDATE": "עדכון",
+    "UPDATE_EMAIL_TEMPLATE": "עדכן תבנית דוא\"ל",
+    "UPLOAD_IN_PROGRESS": "ההעלאה מתבצעת",
+    "VERIFICATION_CODE": "קוד אימות",
+    "VIDEOCONFERENCE": "ועידת וידיאו",
+    "YES": "כן"
+  },
+  "LABEL": {
+    "CREATE_NEW": "יצירת תווית",
+    "DESCRIPTION": "תיאור"
+  },
+  "LAYOUT": {
+    "BACK_TO_MAINSITE": "חזרה אל coachcare.com",
+    "CONTACT_US": "יצירת קשר",
+    "DPA": "GDPR DPA",
+    "HIPAA": "HIPAA BAA",
+    "MASTER_SUBSCRIPTION_AGREEMENT": "הסכם מנוי ראשי",
+    "MSA": "MSA",
+    "POWEREDBY": "{{company}}",
+    "PRIVACY_POLICY": "מדיניות פרטיות",
+    "TERMS_OF_SERVICE": "תנאי השירות"
+  },
+  "LINK": {
+    "DPA": "https://www.coachcare.com/dpa/",
+    "HIPAA": "https://www.coachcare.com/hipaa/",
+    "MSA": "https://www.coachcare.com/agreement/",
+    "PRIVACY_POLICY": "https://www.coachcare.com/privacy/",
+    "SUPPORT": "https://coachcare.zendesk.com/hc/en-us/requests/new",
+    "TERMS_OF_SERVICE": "https://www.coachcare.com/terms/"
+  },
+  "MENU": {
+    "HELLO": "שלום {{userName}}.",
+    "LANGUAGE": "Language",
+    "LOGOUT": "התנתקות",
+    "PROFILE": "פרופיל",
+    "SEARCH": "חיפוש"
+  },
+  "MFA": {
+    "AUTHENTICATOR": "מאמת",
+    "AUTHENTICATOR_STEP1": "התקן את המאמת של LastPass, המאמת של גוגל, המאמת של מיקרוסופט או כל אפליקציית אימות אחרת לבחירתך בטלפון הנייד שלך.",
+    "AUTHENTICATOR_STEP2": "פתח את האפליקציה ובחר \"הוסף חשבון\".",
+    "AUTHENTICATOR_STEP3": "סרוק את קוד ה- QR למטה.",
+    "AUTHENTICATOR_STEP4": "הזן את קוד האימות בן 6 הספרות שנוצר על ידי אפליקציית המאמת שלך.",
+    "AUTH_INFO": "פתח את אפליקציית האמת שלך וראה את הקוד שהיא מציגה עבור חשבונך. לאחר מכן, כתוב אותו בשדה הטקסט שלמטה כדי לאמת את זהותך.<br/><br/>אתה יכול גם ללחוץ על 'השתמש בקוד גיבוי' כדי להשתמש באחד מקודי הגיבוי שקיבלת כאשר הפעלת אימות רב-פקטורי.",
+    "BACKUP_CODE": "קוד גיבוי",
+    "BACKUP_CODES_INFO": "להלן רשימה של קודי אימות גיבוי למקרה שתאבד את הגישה לערוץ האימות הדו-גורמי שבחרת.<br/><br/><strong>שמור אותם במקום בטוח מכיוון שזו הדרך היחידה לשחזר את הגישה לחשבון שלך. זכור כי ניתן להשתמש בכל קוד פעם אחת בלבד.</strong>",
+    "BACKUP_CODE_INFO": "כתוב את אחד מקודי הגיבוי שקיבלת כאשר הפעלת אימות רב-גורמי ושלך אותו. זכור כי ניתן להשתמש בכל קוד פעם אחת בלבד.",
+    "CONTINUE_TO_DASHBOARD": "המשך ללוח המחוונים",
+    "DOWNLOAD_BACKUP_CODES": "הורד קודי גיבוי",
+    "GOOGLE_AUTHENTICATOR": "המאמת של גוגל",
+    "LAST_PASS_AUTHENTICATOR": "מאמת LastPass",
+    "MFA_LOGIN_HELP_PROMPT": "אם אתה מתקשה להיכנס, אנא <a href=\"mailto:support@coachcare.com?subject=MFA%20Login%20Assistance&body=I%20need%20support%20resetting%20my%20MFA%20login\">צור קשר עם התמיכה</a> לעזרה.",
+    "MICROSOFT_AUTHENTICATOR": "המאמת של מיקרוסופט",
+    "ORG_ENFORCEMENT_INFO": "הארגון שלך אוכף את השימוש באימות דו-גורמי. אנא בחר ערוץ אימות דו-גורמי כדי להתחיל בתהליך ההתקנה.",
+    "REGEN_QR": "התחדש קוד QR",
+    "RESEND_SMS": "שלח שוב SMS",
+    "SECRET_KEY_PROMPT": "לחלופין, תוכל להזין מפתח סודי זה ליישום המאמת שלך:<br/><strong>{{ key }}</strong>",
+    "SEND_BACKUP_CODE": "שלח קוד גיבוי",
+    "SEND_VERIFICATION_CODE": "הגש קוד אימות",
+    "SMS": "סמס",
+    "SMS_INFO": "שלחנו לך SMS עם קוד אימות למספר הטלפון הרשום שלך. כשאתה מקבל אותו, כתוב אותו בשדה הטקסט שלמטה כדי לאמת את זהותך. <br/> <br/> אתה יכול גם ללחוץ על 'השתמש בקוד גיבוי' כדי להשתמש באחד מקודי הגיבוי שקיבלת כאשר הפעלת multifactor אימות.",
+    "SMS_PHONE_CONFIRM": "אנא, בדוק את מספר הטלפון שלך בשדה למטה. אם זה לא נכון, עדכן אותו. זכור כי הטלפון אמור להיות מסוגל לקבל SMS.",
+    "USE_BACKUP_CODE": "השתמש בקוד גיבוי",
+    "VERIFICATION_CODE": "קוד אימות"
+  },
+  "MOMENTJS": {
+    "LASWEEK": "[אחרון] dddd",
+    "TODAY": "[היום]",
+    "TOMORROW": "[מחר]",
+    "YESTERDAY": "[אתמול]"
+  },
+  "NOTIFY": {
+    "EMAIL": {
+      "EMAIL_CASE_SENSITIVE": "כתובת הדואר האלקטרוני היא תלויית רישיות"
+    },
+    "ERROR": {
+      "AVATAR_UPLOAD_FAILED": "ההעלאה נכשלה, יש לנסות שוב.",
+      "EMAIL_ALREADY_REGISTERED": "כתובת האימייל כבר רשומה במערכת.",
+      "EMPTY_USER_LISTING": "אין תוצאות משתמשים",
+      "FILL_THE_FORM": "יש למלא את כל השדות לפני שממשיכים.",
+      "INVALID_EMAIL": "יש להזין כתובת מייל חוקית.",
+      "MFA_NOT_VERIFIED": "אנא נסה להיכנס שוב לאחר 5 דקות.",
+      "MIN_CHARS": "חייבת להיות לפחות {{min}} תווים",
+      "NO_ACTIVE_CAMPAIGNS": "אין עמותות רשימת הקמפיין פעילות",
+      "NO_EMAIL_TEMPLATES": "אין תבניות דוא\"ל לארגון זה.",
+      "NO_LOG_MESSAGES": "אין רישומי logs עבור משתמש זה",
+      "NO_ORGANIZATIONS": "אין תוצאות מרפאות",
+      "NO_RESULTING_LABELS": "אין תוצאות תוויות"
+    },
+    "PASSWORD": {
+      "BOTH_MATCH": "נא לוודא כי הסיסמאות שלך תואמות.",
+      "HAS_NO_SEQUENCES": "אין לחזור על אותו התו יותר מפעמיים.",
+      "MIN_LENGTH": "יש להזין סיסמה בעלת 8 תווים לפחות.",
+      "ONE_LOWERCASE_LETTER": "הסיסמה חייבת להכיל לפחות אות קטנה אחת.",
+      "ONE_NUMBER": "הסיסמה חייבת להכיל לפחות מספר אחד.",
+      "ONE_SPECIAL_CHARACTER": "הסיסמה חייבת להכיל לפחות תו מיוחד אחד.",
+      "ONE_UPPERCASE_LETTER": "הסיסמה חייבת להכיל לפחות אות גדולה אחת."
+    },
+    "SOURCE": {
+      "DEFAULT_DELAY": "המידע בטעינה...",
+      "DEFAULT_TIMEOUT": "תם הזמן הקצוב לטעינה, יש לנסות שוב.",
+      "DEFAULT_WAIT": "יש להמתין...",
+      "NO_ASSIGNED_CLIENTS": "לא הוקצו מטופלים",
+      "NO_ASSIGNED_PROVIDERS": "לא הוקצו ספקים",
+      "NO_ASSOCIATIONS": "אין שיוכים כרגע",
+      "NO_DATA_AVAILABLE": "אין מידע זמין."
+    },
+    "SUCCESS": {
+      "ACC_ACTIVATED": "החשבון הופעל",
+      "ACC_CREATED": "החשבון נוצר",
+      "ACC_DEACTIVATED": "החשבון הושבת",
+      "ACC_UPDATED": "החשבון עודכן",
+      "ACTIVE_CAMPAIGN_DELETED": "העמותה המבצע רשימת Active נמחק בהצלחה.",
+      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "העמותה המבצע רשימת פעילים שנוצרה בהצלחה.",
+      "ACTIVE_CAMPAIGN_UPDATED": "העמותה המבצע רשימת Active עודכנה בהצלחה.",
+      "CHECK_RESET_EMAIL": "אם נמצא חשבון המשויך לכתובת האימייל שהזנת, נשלח אליך בדוא\"ל הודעת איפוס סיסמה בדקות הקרובות. אם אינך מקבל דוא\"ל, הקפד לבדוק את תיקיית דואר הזבל שלך, או נסה כתובות דוא\"ל אחרות שבהן השתמשת עבור החשבון שלך.",
+      "CLINIC_REMOVED": "המרפאה הוסרה",
+      "EMAIL_TEMPLATE_SAVED": "תבנית דוא\"ל נשמרה בהצלחה.",
+      "LABEL_ACTIVATED": "התווית הופעלה",
+      "LABEL_CREATED": "התווית נוצרה",
+      "LABEL_DEACTIVATED": "התווית בוטלה",
+      "LABEL_UPDATED": "התווית עודכנה",
+      "MFA_VERIFIED": "ערוץ אימות דו-גורמי אומת בהצלחה.",
+      "ORG_ACTIVATED": "המרפאה הופעלה",
+      "ORG_ADDED": "המרפאה נוספה",
+      "ORG_CREATED": "המרפאה נוצרה",
+      "ORG_DEACTIVATED": "המרפאה הושבתה",
+      "ORG_DISOCCIATED": "המרפאה נותקה",
+      "ORG_UPDATED": "המרפאה עודכנה",
+      "PASSWORD_RESET": "הסיסמה נוצרה בהצלחה!<br /> עכשיו אפשר להשתמש בה כדי להיכנס.",
+      "PASSWORD_SETTED": "הסיסמה נוצרה בהצלחה! <br /> עכשיו אפשר להיכנס.",
+      "PERM_UPDATED": "ההרשאה עודכנה",
+      "PHASE_UPDATED": "השלב עודכן בהצלחה.",
+      "PHONE_NUMBER_UPDATED": "מספר הטלפון עודכן בהצלחה.",
+      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "ספק קשור בהצלחה לרשימת קמפיין פעילה.",
+      "SETTINGS_UPDATED": "ההגדרות עודכנו"
+    }
+  },
+  "PAGE": {
+    "APPLE": {
+      "ACCOUNT": "חשבון Apple Developer"
+    },
+    "APP_NOT_FOUND": {
+      "REDIRECTING": "מנתב מחדש…",
+      "TITLE": "האפליקציה לא נמצאה"
+    },
+    "IMPLEMENTATION": {
+      "MOBILE": "הטמעת אפליקציה לנייד"
+    },
+    "MEETING_CANCEL": {
+      "BUTTON_CANCEL": "ביטול פגישה",
+      "BUTTON_KEEP": "שמירת הפגישה",
+      "CONFIRM_PROMPT": "האם ברצונך לבטל את הפגישה שלך ב- <b>{{day}}</b>-<b>{{time}}</b>?",
+      "MESSAGE_ERROR": "אירעה שגיאה בעת ביטול הפגישה, <br /> יש לנסות שנית.",
+      "MESSAGE_KEPT": "הפגישה שלך לא השתנה לתאריך <b>{{day}}</b> בשעה <b>{{time}}</b>.",
+      "MESSAGE_SUCCESS": "הפגישה בוטלה. יש להשתמש באפליקציה על מנת לקבוע פגישה חדשה.",
+      "TITLE": "ביטול פגישה",
+      "TITLE_KEPT": "שמירת פגישה",
+      "TITLE_SUCCESS": "הפגישה בוטלה"
+    },
+    "NOT_FOUND": {
+      "CONTENT": "יש לפנות ל-<a href=\"https://coachcare.zendesk.com/hc/en-us/requests/new\">CoachCare תמיכה</a> לקבלת סיוע נוסף.",
+      "TITLE": "העמוד לא נמצא"
+    },
+    "REGISTER": {
+      "HEADER": {
+        "APOLLO": {
+          "TITLE": "בואו לקבל נרשמת על פלטפורמת Apollo Care"
+        },
+        "DEFAULT": {
+          "TITLE": "בואו נבנה את פלטפורמת {{displayName}} שלכם"
+        },
+        "INHEALTH": {
+          "TITLE": "בואו לקבל נרשמת על פלטפורמת inHealth"
+        },
+        "SHAKEIT": {
+          "TITLE": "בואו לקבל נרשמת על פלטפורמת Shake It"
+        }
+      },
+      "HERO": {
+        "APOLLO": {
+          "POWERED_BY": "מופעל על ידי CoachCare",
+          "WELCOME_MESSAGE": "פלטפורמת אפולו מאמן כוח מרפאות ירידה במשקל עם אפליקציה לנייד, לוח המחוונים המאמן והתקנים מחוברים משולבים בפלטפורמה אחת משולבת כדי לשפר את הטיפול בחולה ולהגדיל את היעילות הקלינית.",
+          "WELCOME_TITLE": "ברוכים הבאים טיפול אפולו!"
+        },
+        "BA": {
+          "WELCOME_MESSAGE": "פלטפורמת {{ org }} מעניקה מרפאות לירידה במשקל באמצעות אפליקציה סלולרית, לוח מחוונים של המאמנים והמכשירים המחוברים בשילוב פלטפורמה משולבת אחת כדי לשפר את הטיפול בחולים ולהגדיל את יעילות המרפאה.",
+          "WELCOME_TITLE": "ברוך הבא ל- {{ org }}!"
+        },
+        "DEFAULT": {
+          "CLINIC_REGISTRATION": "רישום מרפאה"
+        },
+        "GWLP": {
+          "WELCOME_MESSAGE": "פלטפורמת הרזיה הגלובלית מעניקה כוח למרפאות הרזיה באמצעות אפליקציה סלולרית, לוח מחוונים של המאמנים והמכשירים המחוברים בשילוב פלטפורמה משולבת אחת כדי לשפר את הטיפול בחולים ולהגדיל את יעילות המרפאה.",
+          "WELCOME_TITLE": "ברוך הבא להרזיה גלובלית!"
+        },
+        "INHEALTH": {
+          "WELCOME_MESSAGE": "פלטפורמת inHealth מעניקה מרפאות לירידה במשקל באמצעות אפליקציה ניידת, לוח מחוונים של מאמנים ומכשירים מחוברים המשולבים בפלטפורמה משולבת אחת לשיפור הטיפול בחולים ולהגברת יעילות המרפאה.",
+          "WELCOME_TITLE": "ברוך הבא ל- inHealth!"
+        },
+        "NUTRIMOST": {
+          "WELCOME_MESSAGE": "פלטפורמת NutriMost מעניקה כוח למרפאות הרזיה באמצעות אפליקציה סלולרית, לוח מחוונים של המאמנים והמכשירים המחוברים בשילוב פלטפורמה משולבת אחת כדי לשפר את הטיפול בחולים ולהגדיל את יעילות המרפאה.",
+          "WELCOME_TITLE": "ברוך הבא ל- NutriMost!"
+        },
+        "SHAKEIT": {
+          "POWERED_BY": "מופעל על ידי CoachCare",
+          "WELCOME_MESSAGE": "פלטפורמת אפולו מאמן כוח מרפאות ירידה במשקל עם אפליקציה לנייד, לוח המחוונים המאמן והתקנים מחוברים משולבים בפלטפורמה אחת משולבת כדי לשפר את הטיפול בחולה ולהגדיל את היעילות הקלינית.",
+          "WELCOME_TITLE": "ברוכים הבאים אפולו המאמן!"
+        }
+      },
+      "STEP1": {
+        "APOLLO": {
+          "COMPLETE_SIGNUP": "אנא מלא את טופס ההרשמה המהיר והקל כדי לקבל גישה לאפליקציית Apollo Care, לפלטפורמת האינטרנט והמכשיר."
+        },
+        "DEFAULT": {
+          "ACCOUNT_INFORMATION": "פרטי חשבון",
+          "CLINIC_INFORMATION": "מידע על המרפאה",
+          "COMPLETE_SIGNUP": "לאחר שתשלים את ההרשמה, נתחיל בתהליך היישום.",
+          "MOBILE_APP_TYPE": "סוג אפליקציה לנייד",
+          "MOB_APP_TYPE_CHOOSE": "בחר איזה סוג אפליקציה לנייד תרצה להציע למטופלים שלך על ידי לחיצה על האפשרות המועדפת עליך.",
+          "ORGANIZATION_DETAILS": "ראשית, ספר לנו כמה פרטים על המרפאה שלך ופרטי איש הקשר הראשי.",
+          "WELCOME_PLATFORM_PAGE": "ברוך הבא לדף ההרשמה לפלטפורמה {{clinic}}."
+        },
+        "INHEALTH": {
+          "COMPLETE_SIGNUP": "אנא מלא את טופס ההרשמה המהיר והקל כדי לקבל גישה לאפליקציית inHealth, לפלטפורמת האינטרנט והמכשיר."
+        },
+        "SHAKEIT": {
+          "COMPLETE_SIGNUP": "מלא את טופס ההרשמה המהיר והקל כדי לקבל גישה לפלטפורמה של Shake It, אינטרנט ומכשיר."
+        }
+      },
+      "STEP2": {
+        "BILLING_INFORMATION": "פרטי תשלום",
+        "CONFIRMATION_BOX_MESSAGE": "על ידי סימון תיבה זו ובחירה באפשרות המשך, אני מסכים לציית לטופס הזמנה זה. המנוי בטופס הזמנה זה הינו לתקופה של שנה אחת, והוא אינו ניתן לביטול לפני תום התקופה. טופס הזמנה זה כפוף לתנאים של <a href=\"{{ msaLink }}\" target =\"_blank\">הסכם המנוי הראשי</a>.",
+        "PAYMENT_INFO": "כל מה שאנחנו צריכים עכשיו זה את פרטי התשלום שלך ולאחר מכן ניתן להתחיל להשתמש בפלטפורמה המותאמת אישית שלך.",
+        "SKIP": "Skip"
+      },
+      "STEP3": {
+        "APOLLO": {
+          "ALL_DONE": "<strong>הכל בוצע!<strong>",
+          "CUSTOM_COACHCARE": "ברוכים הבאים לפלטפורמה Apollo Care המופעלת על ידי CoachCare! בקרוב תקבל הודעת דואל עם קישור להפעלת חשבון מנהל המערכת, להגדיר את הסיסמה שלך ולהיכנס אל מרכז השליטה. בנוסף, תקבל הודעת דואר אלקטרוני נפרדת עם פרטי הקליניקה שלך.",
+          "QUESTIONS": "אם יש לך שאלות, אנא אל תהסס ליצור קשר עם צוות היישום שלנו בכתובת <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> או קשר המכירות שלך.",
+          "WELCOME": "אנו שמחים להתחיל לעבוד איתך ושוב, ברוכים הבאים לפלטפורמה Apollo Care!"
+        },
+        "DEFAULT": {
+          "ALL_DONE": "<strong>הכל מוכן!<strong>",
+          "CUSTOM_COACHCARE": "אפליקצית {{ displayName }}, אתר האינטרנט והפלטפורמה מותאמת אישית שלך יהיו מוכנים תוך מספר שבועות. עד אז, אנו נספק עדכונים שוטפים על ההתקדמות בניית הפלטפורמה שלך.",
+          "EMAIL_CONFIRMATION": "בקרוב תקבל הודעת דואל עם קישור להפעלת חשבון מנהל המערכת, להגדיר את הסיסמה שלך ולהיכנס אל מרכז השליטה. בנוסף, תקבל הודעת דואר אלקטרוני נפרדת עם פרטי הקליניקה שלך. מנהל החשבון שלך יגיע גם הוא כדי להציג את עצמו ולהשיב על כל שאלה.",
+          "EXCITED_WORKING_AGAIN": "שוב אנו שמחים להתחיל לעבוד אתכם וברוכים הבאים לפלטפורמת {{displayName}}!",
+          "IMPLEMENTATION_SPECIALIST": "שימו לב שמומחה ליישום יפנה אליכם תוך זמן קצר. אפליקציית {{displayName}} המותאמת אישית שלך, פלטפורמת האינטרנט והמכשירים שלך תהיה מוכנה בעוד מספר שבועות. עד אז, אנו נספק עדכונים שוטפים על ההתקדמות שלנו בבניית הפלטפורמה שלך.",
+          "NEAR_COMPLETION": "ככל שאנו מתקרבים לסיום, ניצור איתך קשר על מנת לספק מידע הדרכה, להגדיר את חשבונות הצוות שלך ולסיים את הזמנת המכשיר שלך.",
+          "REGISTER_NEW_CLINIC": "רישום מרפאה חדשה",
+          "WELCOME_PLATFORM": "ברוך הבא לפלטפורמת {{displayName}} המופעלת על ידי CoachCare! בקרוב תקבל אישור דואר אלקטרוני לרישום. תקבל גם דוא\"ל להפעלת חשבון מנהל המערכת של לוח המחוונים שלך."
+        },
+        "ITG": {
+          "CONFIRMATION": "מזל טוב! הארגון שלך נרשם בהצלחה. מומחה יישום יהיה איתך בקשר כדי לתזמן אימונים בשידור חי אם תרצה."
+        },
+        "SHAKEIT": {
+          "ALL_DONE": "<strong>הכל בוצע!<strong>",
+          "CUSTOM_COACHCARE": "ברוכים הבאים לפלטפורמה Shake It המופעלת על ידי CoachCare! בקרוב תקבל הודעת דואל עם קישור להפעלת חשבון מנהל המערכת, להגדיר את הסיסמה שלך ולהיכנס אל מרכז השליטה. בנוסף, תקבל הודעת דואר אלקטרוני נפרדת עם פרטי הקליניקה שלך.",
+          "QUESTIONS": "אם יש לך שאלות, אנא אל תהסס ליצור קשר עם צוות היישום שלנו בכתובת <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> או קשר המכירות שלך.",
+          "WELCOME": "אנו שמחים להתחיל לעבוד איתך ושוב, ברוכים הבאים לפלטפורמה Shake It!"
+        }
+      }
+    },
+    "UNSUPPORTED_BROWSER": {
+      "DESCRIPTION": "אנו ממליצים לשנות את הדפדפן המועדף עליך לכל אחד מאלה המפורטים בהמשך.",
+      "TITLE": "הדפדפן הנוכחי שלך אינו נתמך על ידי יישום זה."
+    }
+  },
+  "PERMS": {
+    "ACCESSALL": "הצג הכל",
+    "ACCESSALL_HELP": "<p>ההרשאה ' הצג הכל ' מאפשרת למאמן לראות את המטופלים ונתוני המטופלים הקשורים למרפאה שנבחרה. זה מתאים במידה והמטופלים שלך רואים מאמנים שונים כאשר הם מבקרים במרפאה או במידה והמאמנים מחליפים בניהם מטופלים לעיתים קרובות. זה מתאים גם לצוות שמתעסק עם שירות לקוחות.</p>",
+    "ADMIN": "מנהל",
+    "ADMIN_HELP": "<p>ההרשאה 'מנהל' מאפשרת למאמן להוסיף, למחוק, לנהל חשבונות מטופלים ומאמנים, וכן לערוך הגדרות מרפאה. זה מתאים לצוות במרפאה שמנהל מאמנים, מתעסק עם שירות לקוחות או קבלת פנים של לקוחות חדשים.</p>",
+    "CLIENT_PHI": "PHI של מטופל",
+    "_TITLE": "הרשאות"
+  },
+  "PHASE": {
+    "DISABLED": "נכים",
+    "DISASSOCIATE": "להתנתק",
+    "ENABLED": "מופעל",
+    "IS_INHERITED": "חבילה זו זמינה למרפאה שלך ממרפאת האב"
+  },
+  "PROMPT": {
+    "ACCS": {
+      "CONFIRM_ACTIVATE": "הפעלת החשבון",
+      "CONFIRM_ACTIVATE_PROMPT": "האם ברצונך להפעיל את הפריט? '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "החשבון בוטל",
+      "CONFIRM_DEACTIVATE_PROMPT": "האם ברצונך לבטל את הפריט? '{{item}}'?",
+      "DEACTIVATE_MFA": "בטל את ערוץ האימות הדו-גורמי",
+      "DEACTIVATE_MFA_PROMPT": "אתה עומד לבטל את ערוץ האימות הדו-גורמי עבור חשבון זה. המשמעות היא שהמשתמש לא יתבקש להזין קוד אימות כאשר הוא ינסה להתחבר או לאפס את הסיסמה שלו.<br/><br/><strong>האם אתה בטוח שברצונך להמשיך?</strong>"
+    },
+    "EMAIL_TEMPLATE": {
+      "DELETE": "מחק תבנית דוא\"ל",
+      "DELETE_PROMPT": "האם אתה בטוח שברצונך למחוק תבנית דוא\"ל זו?"
+    },
+    "LABEL": {
+      "CONFIRM_ACTIVATE": "הפעלת התווית",
+      "CONFIRM_ACTIVATE_PROMPT": "האם ברצונך להפעיל את הפריט? '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "התווית בוטלה",
+      "CONFIRM_DEACTIVATE_PROMPT": "האם ברצונך לבטל את הפריט? '{{item}}'?"
+    },
+    "LABELS": {
+      "DISABLE": "השבת שלב",
+      "DISABLE_PROMPT": "האם אתה בטוח שברצונך להשבית את השלב '{{label}}'?",
+      "DISOCCIATE": "לנתק שלב",
+      "DISOCCIATE_PROMPT": "האם אתה בטוח שברצונך לנתק את השלב '{{ label }}'?",
+      "ENABLE": "אפשר שלב",
+      "ENABLE_PROMPT": "האם אתה בטוח שברצונך להפעיל את השלב '{{label}}'?"
+    },
+    "ORGS": {
+      "CONFIRM_ACTIVATE": "הפעלת המרפאה",
+      "CONFIRM_ACTIVATE_PROMPT": "האם ברצונך להפעיל את הפריט? '{{item}}'?",
+      "CONFIRM_DEACTIVATE": "המרפאה בוטלה",
+      "CONFIRM_DEACTIVATE_PROMPT": "האם ברצונך לבטל את הפריט? '{{item}}'?",
+      "CONFIRM_REMOVE_CHILD": "להסיר את הבת",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "מרפאת הבת תהיה ללא מרפאת אב אחרי המחיקה",
+      "CONFIRM_REMOVE_ORG": "המרפאה לא פעילה",
+      "CONFIRM_REMOVE_ORG_PROMPT": "האם ברצונך לבטל את הפריט? '{{item}}'?",
+      "CONFIRM_REMOVE_PARENT": "הסרת אב",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "מרפאה זו תישאר ללא מרפאת אב אחרי ההסרה",
+      "DISOCCIATE": "ניתוק מרפאה",
+      "DISOCCIATE_PROMPT": "האם ברצונך לנתק את הפריט? '{{item}}'?"
+    }
+  },
+  "REGISTER": {
+    "CLINIC": {
+      "AMOUNT_PER_MONTH": "${{amount}} לחודש",
+      "BILLED_ANNUALLY": "(מחויב ${{amount}} בשנה)",
+      "BILLED_MONTHLY": "(מחויב ${{amount}} חודשי)",
+      "PRICING": "תמחור",
+      "REQUEST_ORDER_FORM": "בקש טופס הזמנה עבור תמחור ותנאים",
+      "VIEW_BENEFITS_PRICING": "מלוא יתרונות צפו ותמחור",
+      "YOUR_PLAN_SELECTION": "בחירת התוכנית"
+    },
+    "STEP1": {
+      "ROBARD": {
+        "MOB_APP_1_DESCRIPTION": "המטופלים יורידו את אפליקציית MyHealthyJourney ויכנסו לקוד 4 הספרות הייחודי של המרפאה שלכם כדי לגשת לתכונות המלאות של האפליקציה. לוח המחוונים של אפליקציית הטלפון הנייד שלך ושל ספק השירותים שלך יופעל תוך 48 שעות לאחר קבלת טופס יישום הפלטפורמה.",
+        "MOB_APP_1_TITLE": "אפליקציית MyHealthyJourney",
+        "MOB_APP_2_DESCRIPTION": "המטופלים יורידו את האפליקציה המותאמת אישית של המרפאה שלכם כדי לגשת לתכונות המלאות של האפליקציה. תהליך זה יחייב את המרפאה שלך למלא את טופס יישום הפלטפורמה ולהגיש בקשה ל <a href=\"https://dashboard.coachcare.com/register/apple?baseOrg=4118\" target=\"_blank\">אפל חשבון מפתחים</a>.",
+        "MOB_APP_2_SMALLTEXT": "תהליך זה יכול לארוך עד שלושה שבועות לפני שהאפליקציה זמינה למטופלים שלך לשימוש.",
+        "MOB_APP_2_TITLE": "אפליקציה ממותגת בהתאמה אישית"
+      }
+    }
+  },
+  "ROLE": {
+    "ADMIN": "מנהל מערכת",
+    "COACH": "מאמן",
+    "MANAGER": "מנהל",
+    "PATIENT": "מטופל"
+  },
+  "SECTION": {
+    "APOLLOUS": {
+      "PACKAGE": {
+        "ACTIVITY_SLEEP": "פעילות & לישון גשש",
+        "APOLLO_COACHING_SERVICES": "אפולו שירותי אימון",
+        "AVAILABLE_PATIENT_PACKAGES": "אריזות זמינות",
+        "AVAILABLE_PATIENT_PACKAGES_DETAILS": "תוכל לבחור את החבילה עבור כל חולה בתוך לוח המחוונים של אפולו מאמן אינטרנט",
+        "BODY_COMPOSITION_SCALE": "סולם הרכב הגוף",
+        "COACH_PLUS": "טיפול פלוס",
+        "COACH_PLUS_SERVICE": "טיפול פלוס עם אפולו אימון שירות",
+        "MOBILE_APP": "אפליקציה לנייד",
+        "OPTIONAL_ADD": "הוסף אופציונלי"
+      }
+    },
+    "APOLLO_INT": {
+      "PACKAGE": {
+        "ACTIVITY_BODY": "פעילות גופנית & הגוף הרכב סולם",
+        "APOLLO_CARE_BRONE": "אפולו טיפול ברונז",
+        "APOLLO_CARE_GOLD": "אפולו טיפול גולד",
+        "APOLLO_CARE_SILVER": "אפולו טיפול כסף",
+        "AVAILABLE_PACKAGES": "אריזות זמינות",
+        "OPTIONAL_ADD_ON": ":הוספה אופציונלית",
+        "UNLIMITED_PATIENTS": "חולים ללא הגבלה",
+        "UP_TO_25": "עד 25 חולים",
+        "UP_TO_75": "עד 75 חולים"
+      }
+    }
+  },
+  "SELECTOR": {
+    "AUTOCOMPLETE": {
+      "NO_MATCHING_ACCOUNTS": "אין חשבונות תואמים",
+      "NO_MATCHING_ADMINS": "אין מנהלים תואמים",
+      "NO_MATCHING_CLIENTS": "אין מטופלים תואמים",
+      "NO_MATCHING_PROVIDERS": "אין ספקים תואמים"
+    },
+    "COUNTRIES": {
+      "AE": "איחוד האמירויות",
+      "AU": "אוסטרליה",
+      "BH": "בחריין",
+      "CA": "קנדה",
+      "CL": "צ'ילה",
+      "CO": "קולומביה",
+      "DK": "דנמרק",
+      "ES": "ספרד",
+      "GB": "בריטניה",
+      "IE": "אירלנד",
+      "IL": "ישראל",
+      "KW": "כווית",
+      "LB": "לבנון",
+      "MX": "מקסיקו",
+      "NZ": "ניו זילנד",
+      "OM": "עומאן",
+      "SA": "ערב הסעודית",
+      "US": "ארצות הברית"
+    },
+    "GENDER": {
+      "FEMALE": "אישה",
+      "MALE": "גבר"
+    },
+    "PHONE_TYPE": {
+      "ANDROID": "Android",
+      "IOS": "iOS"
+    },
+    "STATUS": {
+      "ACTIVE": "פעיל",
+      "ALL": "הכל",
+      "INACTIVE": "לא פעיל"
+    },
+    "UNITSYS": {
+      "METRIC": "מטרי",
+      "UK": "בריטניה",
+      "US": "ארצות הברית"
+    }
+  },
+  "SIDENAV": {
+    "ACCOUNTS": "חשבונות",
+    "ADMINS": "מנהלים",
+    "ALERTS": "התראות",
+    "COACHES": "מאמנים",
+    "LABELS": "תווית",
+    "LIBRARY": "ספרייה דיגיטלית",
+    "MARKETING": "שיווק",
+    "MESSAGES": "הודעות",
+    "NOTIFICATIONS": "עדכונים",
+    "ORGANIZATIONS": "מרפאות",
+    "OVERVIEW": "סקירה",
+    "PATIENTS": "מטופלים",
+    "REPORTS": "דוחות",
+    "RESOURCES": "מקורות",
+    "SCHEDULE": "לוח זמנים",
+    "SCHEDULE_AVAILABLE": "הגדרת זמינות",
+    "SCHEDULE_VIEW": "צפייה בלוח זמנים",
+    "SUPPORT": "תמיכה",
+    "USER_STATISTICS": "סטטיסטיקות משתמש"
+  }
+}

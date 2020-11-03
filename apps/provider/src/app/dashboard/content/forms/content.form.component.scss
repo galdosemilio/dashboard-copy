@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+.ccr-strong {
+  margin-top: 0;
+}
+
+.content-form {
+  &-warning {
+    text-align: center;
+    margin: 0;
+    font-size: 0.83em;
+  }
+}

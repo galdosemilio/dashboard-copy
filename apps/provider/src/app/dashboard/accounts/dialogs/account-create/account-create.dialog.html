@@ -1,0 +1,48 @@
+
+<div matDialogTitle>
+  <div>
+    <mat-icon>add_circle_outline</mat-icon>
+    <span *ngIf="!data.accountType">{{'BOARD.USER_NEW' | translate}}</span>
+    <span *ngIf="data.accountType">
+      <span *ngIf="form.value.accountType == 'dieter'">{{'BOARD.PATIENT_NEW' | translate}}</span>
+      <span *ngIf="form.value.accountType == 'coach'">{{'BOARD.COACH_NEW' | translate}}</span>
+    </span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="ccr-category" *ngIf="!data.accountType">
+      <span>{{'BOARD.CATEGORY' | translate}}</span>
+      <mat-radio-group formControlName="accountType">
+        <mat-radio-button value="dieter">{{'GLOBAL.PATIENT' | translate}}</mat-radio-button>
+        <mat-radio-button value="coach">{{'GLOBAL.COACH' | translate}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <app-dieter-form bindForm="dieter"
+      [initial]="temp" (final)="onTypeChange($event)"
+      *ngIf="form.value.accountType == 'dieter'">
+    </app-dieter-form>
+
+    <app-coach-form bindForm="coach"
+      [initial]="temp" (final)="onTypeChange($event)"
+      *ngIf="form.value.accountType == 'coach'">
+    </app-coach-form>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="primary" class="ccr-icon-button" (click)="onSubmit()">
+    <mat-icon>check</mat-icon> {{'BOARD.USER_SAVE_NEW' | translate}}
+  </button>
+
+  <button mat-button class="ccr-icon-button" matDialogClose>
+    <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+  </button>
+</mat-dialog-actions>

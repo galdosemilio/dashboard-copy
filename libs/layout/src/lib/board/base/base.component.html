@@ -1,0 +1,31 @@
+<!-- CAUTION: any change in this layout needs CSS sync -->
+<mat-sidenav-container fxFlexFill>
+
+  <mat-sidenav opened="true" mode="side" disableClose="true"
+  (click)="menuOpen($event)" [class.open]="isMenuOpened">
+
+    <ccr-menu #sidenav [isOpened]="isMenuOpened"></ccr-menu>
+
+  </mat-sidenav>
+  <div fxLayout="column">
+
+    <mat-toolbar>
+      <ccr-topbar
+        [translations]="translations"
+        [selectedLanguage]="lang"
+        [panelEnabled]="isPanelEnabled"
+      ></ccr-topbar>
+    </mat-toolbar>
+
+    <div fxLayout="row">
+      <div fxFlex>
+        <router-outlet></router-outlet>
+      </div>
+
+      <!-- <ccr-panel *ngIf="rightPanel" [class.open]="isPanelOpened"></ccr-panel> -->
+    </div>
+
+  </div>
+</mat-sidenav-container>
+
+<ccr-footer></ccr-footer>

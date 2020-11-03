@@ -1,0 +1,330 @@
+@mixin ccr-generic-table($theme, $config) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .help-enabled .ccr-table .ccr-table-help {
+    display: block;
+  }
+
+  .ccr-table {
+    position: relative;
+
+    &.ccr-empty,
+    &.ccr-errors,
+    &.ccr-loading {
+      min-height: map-get($config, table-header-height) + 140px;
+    }
+
+    .ccr-overlay > * {
+      margin-top: map-get($config, table-header-height);
+      @media #{map-get($config, lte-xs)} {
+        margin-top: 0;
+      }
+    }
+
+    .ccr-table-help {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: map-get($config, table-header-height);
+
+      background: var(--primary-a12, mat-color($primary, 50));
+      display: none;
+      padding: 15px 20px;
+      z-index: 2;
+      @media #{map-get($config, lte-xs)} {
+        top: 0;
+      }
+      > button {
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        z-index: 3;
+      }
+      > div {
+        display: none;
+      }
+    }
+
+    mat-table {
+      mat-header-row,
+      mat-header-row .mat-sort-header-button {
+        background: mat-color($background, header);
+        border: 1px solid transparent;
+        height: auto;
+        min-height: map-get($config, table-header-height);
+        text-transform: uppercase;
+        user-select: none;
+
+        mat-header-cell {
+          align-items: center;
+          font-size: 14px;
+          @media #{map-get($config, sm-md)} {
+            font-size: 12px;
+          }
+        }
+      }
+
+      mat-row {
+        border: 1px solid transparent;
+        height: auto;
+        min-height: 40px;
+
+        @media #{map-get($config, lte-xs)} {
+          padding: 13px;
+        }
+
+        &.row-even {
+          background: mat-color($background, even);
+        }
+        &.row-odd {
+          background: mat-color($background, odd);
+        }
+
+        .edit-icon-container {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          .edit-icon {
+            display: none;
+            height: map-get($config, table-row-height);
+            line-height: map-get($config, table-row-height);
+            width: 25px;
+            mat-icon {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+
+      mat-cell {
+        min-height: 32px;
+        transition: all 0.25s cubic-bezier(0.35, 0, 0.25, 1);
+
+        > span:first-child,
+        .xs-label {
+          display: none !important;
+          text-align: left;
+          @media #{map-get($config, lte-xs)} {
+            display: inline-block !important;
+            text-transform: uppercase;
+            flex: 0 0 48%;
+          }
+        }
+
+        &.mat-column-actions {
+          > button {
+            color: mat-color($foreground, table-actions);
+            display: inline-block;
+            @media #{map-get($config, lte-xs)} {
+              display: none;
+            }
+          }
+          > span {
+            cursor: pointer;
+            display: none;
+            letter-spacing: 0.2em;
+            text-decoration: underline;
+            text-transform: none;
+            @media #{map-get($config, lte-xs)} {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      mat-header-cell,
+      mat-cell {
+        display: flex;
+        overflow: hidden;
+        margin-right: 5px;
+        text-overflow: ellipsis;
+
+        &:first-child,
+        &:last-child {
+          min-width: 100px;
+          margin-right: 0;
+        }
+        &.mat-column-actions {
+          flex: 0.5 0 auto !important;
+          overflow: visible;
+          justify-content: center;
+
+          mat-icon {
+            color: mat-color($foreground, icon);
+          }
+        }
+        &.ccr-help:not([hidden]),
+        .ccr-help:not([hidden]) {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          @media #{map-get($config, lte-xs)} {
+            display: flex !important;
+            justify-content: flex-start;
+          }
+
+          mat-icon {
+            cursor: help;
+            margin-left: 2px;
+          }
+        }
+
+        .material-icons {
+          cursor: pointer;
+        }
+        mat-icon.done {
+          color: var(--primary, mat-color($primary));
+          cursor: default;
+          font-size: 18px;
+          height: 18px;
+        }
+      }
+    }
+
+    /* customized columns */
+    .mat-column-id {
+      box-sizing: border-box;
+      max-width: 80px;
+    }
+    .mat-column-actions {
+      box-sizing: border-box;
+      min-width: 80px;
+      max-width: 80px;
+    }
+  }
+
+  .ccr-edit-table {
+    mat-table {
+      mat-row {
+        &:hover {
+          border: 1px solid var(--primary, mat-color($primary));
+          .edit-icon {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .ccr-expand-table {
+    mat-row {
+      @media #{map-get($config, sm-md)} {
+        padding: 0 10px;
+      }
+      @media #{map-get($config, lte-xs)} {
+        padding: 5px 10px !important;
+        mat-cell:first-child {
+          font-weight: bold;
+        }
+      }
+
+      &.row-expanded,
+      &.row-nested.level1 {
+        mat-cell:first-child {
+          font-weight: bold;
+        }
+      }
+
+      &.row-nested {
+        &.level1 {
+          background-color: var(
+            --contrast-darken,
+            darken(mat-color($primary, default-contrast), 8%)
+          ) !important;
+        }
+        &.level2 {
+          background-color: var(
+            --contrast-darkest,
+            darken(mat-color($primary, default-contrast), 16%)
+          ) !important;
+        }
+      }
+
+      /* hide details of the expanded row */
+      &.row-expanded {
+        mat-cell:not(:first-child) {
+          @media #{map-get($config, lte-xs)} {
+            display: none !important;
+          }
+        }
+      }
+
+      mat-cell .expandable {
+        overflow: visible;
+        user-select: none;
+
+        &.non-empty {
+          cursor: pointer;
+        }
+
+        .material-icons {
+          background-repeat: no-repeat;
+          fill: currentColor;
+          height: 24px;
+          width: 24px;
+          transition: 0.25s transform cubic-bezier(0.25, 0.8, 0.25, 1);
+
+          &.active {
+            transform: rotate(180deg) translateZ(0);
+          }
+        }
+      }
+      &.level0 {
+        mat-cell {
+          .expandable {
+            padding: 0 10px 0 24px;
+            .material-icons {
+              margin-left: -24px;
+              &:before {
+                content: 'keyboard_arrow_down';
+              }
+            }
+          }
+          > span {
+            padding-left: 24px;
+          }
+        }
+      }
+      &.level1 {
+        mat-cell {
+          .expandable {
+            padding: 0 10px 0 36px;
+            .material-icons {
+              margin-left: -24px;
+              &:before {
+                content: 'arrow_drop_down';
+              }
+            }
+          }
+          > span {
+            padding-left: 36px;
+          }
+        }
+      }
+      &.level2 {
+        mat-cell {
+          .expandable {
+            cursor: auto;
+            padding: 5px 15px 5px 36px;
+          }
+          > span {
+            padding-left: 61px;
+          }
+        }
+      }
+    }
+  }
+
+  .ccr-table-stats {
+    mat-header-cell:not(:first-child),
+    mat-cell:not(:first-child) {
+      text-align: right;
+      @media #{map-get($config, gte-sm)} {
+        justify-content: flex-end !important;
+      }
+    }
+  }
+}

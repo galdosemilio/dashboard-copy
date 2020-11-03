@@ -1,0 +1,53 @@
+<div class="section-header">{{ 'SECTION.APOLLOUS.PACKAGE.AVAILABLE_PATIENT_PACKAGES' | translate }}</div>
+
+<p>{{ 'SECTION.APOLLOUS.PACKAGE.AVAILABLE_PATIENT_PACKAGES_DETAILS' | translate }}</p>
+
+<div fxLayout="column" fxLayoutAlign="center">
+  <div
+  class="packages-selector"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutGap="20px"
+  fxLayoutGap.xs="20px">
+    <div
+    class="package-item"
+    fxLayout="column"
+    fxFlex="0 1"
+    *ngFor="let package of packages">
+      <div
+      class="package-header"
+      fxLayout="row"
+      fxLayoutAlign="center center">
+        {{ package.name | translate }}
+      </div>
+      <div class="package-body" fxLayout="row" fxFlex="0 1">
+        <div class="image-content" fxLayout="row" fxLayoutAlign="center center">
+            <img class="package-image" [attr.src]="package.image" />
+        </div>
+        <div
+        class="package-content"
+        fxLayout="column"
+        fxLayoutAlign="center start"
+        fxFlex="1 0 auto">
+          <div
+          class="package-content-item"
+          *ngFor="let content of package.contents">
+            - {{ content | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+  class="packages-footer"
+  fxLayout="row"
+  fxLayoutAlign="center center">
+    <img class="footer-image" [attr.src]="'/assets/tracker.png'" />
+    <div class="footer-sub-text">
+      <span>
+        {{ 'SECTION.APOLLOUS.PACKAGE.OPTIONAL_ADD' | translate }}
+      </span>
+      <span><b>{{ 'SECTION.APOLLOUS.PACKAGE.ACTIVITY_SLEEP' | translate }}</b></span>
+    </div>
+  </div>
+</div>

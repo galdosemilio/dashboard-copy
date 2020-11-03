@@ -1,0 +1,235 @@
+@import 'shared/directed-styles';
+
+app-root:empty::after {
+  background: transparent url('/assets/loading.gif') no-repeat center center;
+  content: '';
+
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.feature-disabled {
+  background-color: var(--primary-lighten);
+  padding: 10px 10px;
+
+  & > mat-icon {
+    color: var(--primary);
+  }
+
+  & > ccr-popup-description {
+    & > mat-icon.mat-icon {
+      color: var(--primary);
+      line-height: 22px;
+    }
+  }
+}
+
+.mat-drawer-content.ng-star-inserted {
+  @media #{$medium-only} {
+    @include horizontal-margin-left(80px !important);
+  }
+  @media #{$large-and-up} {
+    @include horizontal-margin-left(225px !important);
+  }
+  @media #{$small-and-down} {
+    @include horizontal-margin-left(0px !important);
+  }
+
+  > div {
+    // main column
+    height: 100%;
+
+    .mat-toolbar {
+      background: var(--toolbar);
+      box-shadow: 0 1px 0 mat-color($ccr-background, box-shadow);
+      transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+
+      @media #{$medium-only} {
+      }
+      @media #{$small-and-down} {
+        background: white;
+        border-bottom: 1px solid var(--primary);
+        color: var(--text, mat-color($ccr-foreground, text));
+      }
+    }
+
+    // row
+    > div {
+      height: calc(100% - #{$topnav-height} - #{$footer-height});
+      position: relative;
+
+      app-right-panel {
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        z-index: 3;
+
+        transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        width: 0;
+        &.open {
+          width: $right-panel-width;
+        }
+        @media #{$large-and-down} {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          top: 0;
+          width: 0;
+        }
+
+        > :last-child {
+          display: flex;
+          flex-direction: column !important;
+          align-self: stretch;
+          place-content: stretch flex-start;
+          align-items: stretch;
+          min-height: 100%;
+
+          background-color: var(--bg-panel);
+          box-shadow: -1px 0 0 mat-color($ccr-background, box-shadow);
+          color: var(--text, mat-color($ccr-foreground, text));
+          // @include horizontal-margin-left(15px);
+          position: relative;
+          width: $right-panel-width;
+        }
+        app-add-available {
+          display: flex !important;
+
+          .mat-select-placeholder {
+            white-space: nowrap;
+          }
+        }
+      }
+
+      > div {
+        // main container
+        display: block;
+        max-width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        // @media #{$xlarge-and-up} {
+        //   @include horizontal-margin-right(-15px);
+        // }
+
+        > :last-child {
+          // main component
+          box-sizing: border-box;
+          display: flex;
+          flex: 1;
+          flex-direction: column !important;
+          min-height: 100%;
+          overflow: hidden;
+          position: relative; // wrap absolute positioned children
+
+          @media #{$medium-and-down} {
+            // max-width: calc(100% - 40px);
+            padding: 15px 20px 25px + $footer-height;
+          }
+          // max-width: calc(100% - 80px);
+          padding: 35px 40px 20px + $footer-height;
+
+          .ccr-subcomponent {
+            box-sizing: border-box;
+            display: flex;
+            align-self: stretch;
+            flex-direction: column;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            position: relative;
+
+            > :last-child {
+              // sub component
+              box-sizing: border-box;
+              display: flex;
+              align-self: stretch;
+              flex-direction: column !important;
+              min-height: 100%;
+              margin-top: 10px;
+
+              @media #{$medium-and-down} {
+                margin-top: 5px;
+              }
+
+              // FIXME adjustments
+              > form:first-child {
+                margin-top: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mat-availability {
+  text-transform: uppercase;
+
+  .mat-availability-action {
+    align-self: center;
+    min-width: 150px;
+    width: auto;
+  }
+
+  .mat-availability-col {
+    height: 32px;
+    line-height: 32px;
+    &:last-child {
+      @include horizontal-margin-left(-5px);
+    }
+
+    button {
+      color: mat-color($ccr-foreground, icon);
+      margin-top: -4px;
+    }
+  }
+
+  .mat-availability-value {
+    background-color: var(--primary-lighten);
+    color: var(--primary-lighten-contrast);
+    line-height: 32px;
+    padding: 0 10px;
+  }
+
+  .mat-availability-empty {
+    // color: mat-color($ccr-foreground, base, 0.6);
+    text-transform: capitalize;
+  }
+
+  @media #{$small-and-down} {
+    text-transform: none;
+    font-size: 14px;
+    .mat-button-focus-overlay {
+      display: none !important;
+    }
+
+    .mat-availability-row {
+      position: relative;
+      border: 1px solid mat-color($ccr-foreground, divider);
+      padding: 13px;
+      &:nth-child(2n) {
+        background-color: mat-color($ccr-background, odd);
+      }
+    }
+
+    .mat-availability-col:last-child {
+      @include horizontal-margin-left(0px);
+    }
+
+    .mat-availability-title {
+      text-transform: uppercase;
+    }
+    .ccr-icon-button {
+      border: none !important;
+      padding: 0 !important;
+      font-weight: normal;
+      span {
+        text-decoration: underline;
+      }
+      mat-icon {
+        display: none;
+      }
+    }
+  }
+}

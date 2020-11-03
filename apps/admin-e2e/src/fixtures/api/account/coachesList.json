@@ -1,0 +1,42 @@
+{
+  "data": [{
+    "accountType": {"id": "2", "title": "Provider"},
+    "countryCode": "+1",
+    "createdAt": "2018-11-09T15:31:02.583Z",
+    "email": "232323_sss@grr.la",
+    "firstName": "1030",
+    "id": "5606",
+    "isActive": true,
+    "lastName": "232323",
+    "measurementPreference": "metric",
+    "phone": "232323232345",
+    "preferredLocales": ["en-gb", "en"],
+    "timezone": "America/New_York"
+  }, {
+    "accountType": {"id": "2", "title": "Provider"},
+    "countryCode": "+44",
+    "createdAt": "2018-11-09T15:48:56.101Z",
+    "email": "sdsds@grr.la",
+    "firstName": "1048",
+    "id": "5608",
+    "isActive": true,
+    "lastName": "dsdsd",
+    "measurementPreference": "metric",
+    "phone": "0321654987",
+    "preferredLocales": [],
+    "timezone": "America/New_York"
+  }, {
+    "accountType": {"id": "2", "title": "Provider"},
+    "createdAt": "2019-05-22T20:10:21.784Z",
+    "email": "dkansdkjasnd@gmail.com",
+    "firstName": "11111111111aaaaakajnsdkajnkjnd",
+    "id": "6777",
+    "isActive": true,
+    "lastName": "askdjnakjnajd",
+    "measurementPreference": "us",
+    "phone": "123132323123123",
+    "preferredLocales": ["en"],
+    "timezone": "America/New_York"
+  }],
+  "pagination": {}
+}

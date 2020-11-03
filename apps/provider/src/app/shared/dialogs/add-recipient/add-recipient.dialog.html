@@ -1,0 +1,165 @@
+<div matDialogTitle>
+    <div>
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>{{'SEQUENCING.ADD_RECIPIENTS' | translate}}</span>
+    </div>
+    <button matDialogClose *ngIf="state !== 'processing'"><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content [formGroup]="form">
+    <div [ngSwitch]="state">
+    <div *ngSwitchCase="'form'" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <mat-tab-group (selectedIndexChange)="onTabIndexChange($event)">
+        <mat-tab [label]="'SEQUENCING.SPECIFIC_USERS' | translate" class="tab-container">
+            <div [hidden]="preexistingSequence">
+                <ccr-sequence-search
+                [readonly]="readonly"
+                [sequence]="sequence"
+                (select)="onSelectSequence($event)"></ccr-sequence-search>
+            </div>
+
+            <div
+            *ngIf="!account"
+            fxLayout="row"
+            fxLayoutAlign="space-between stretch"
+            fxLayoutGap="25px">
+                <div fxFlex>
+                    <ccr-user-search
+                    data-cy="sequence-enroll-search-patients"
+                    [excludes]="recipients"
+                    [label]="'SEQUENCING.SELECT_USERS' | translate"
+                    [type]="'3'"
+                    [organization]="sequence.organization.id"
+                    (remove)="onRemoveRecipient($event)"
+                    (select)="onAddRecipient($event)"></ccr-user-search>
+                </div>
+                <div
+                fxFlex
+                fxLayout="column"
+                fxLayoutAlign="start stretch"
+                fxLayoutGap="10px">
+                    <small>{{ 'SEQUENCING.RECIPIENTS' | translate }}</small>
+                    <div class="scrollable-v" fxLayout="column" fxLayoutGap="10px">
+                        <ccr-user-card
+                        *ngFor="let recipient of recipients"
+                        [user]="recipient"
+                        (remove)="onRemoveRecipient(recipient.id)"></ccr-user-card>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="account" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px">
+                <p>{{ 'SEQUENCING.CURRENT_USER' | translate }}</p>
+                <ccr-user-card [user]="account" [showRemoveButton]="false"></ccr-user-card>
+            </div>
+        </mat-tab>
+
+        <mat-tab *ngIf="allowBulkEnrollment" [label]="'SEQUENCING.ALL_ORG_PATIENTS' | translate">
+            <ccr-organization-search
+            data-cy="sequence-enroll-search-orgs"
+            [showEmptyOption]="false"
+            [ancestor]="sequence.organization.id"
+            (select)="onOrgSelect($event)">
+            </ccr-organization-search>
+
+            <small *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
+        <mat-form-field>
+            <input
+            matInput
+            required
+            formControlName="startDate"
+            [min]="tomorrow"
+            [placeholder]="'SEQUENCING.START_DATE' | translate"
+            [matDatepicker]="startDatePicker" readonly="true">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select
+            formControlName="startStep"
+            [placeholder]="'SEQUENCING.STARTING_STEP' | translate">
+                <mat-option *ngFor="let step of stepOptions; let i = index;" [value]="i">{{ step.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="25px">
+        <h3>{{ 'SEQUENCING.SEQUENCE_PREVIEW' | translate }}</h3>
+        <div class="ccr-table scrollable-v" fxFlex>
+            <mat-table [dataSource]="steps">
+                <ng-container cdkColumnDef="step">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.STEP' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+                    {{ row.index }}
+                </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="title">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.TITLE' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+                    {{ row.name }}
+                </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="date">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.ACTIVE' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+                    {{ row.date | amDateFormat:'ddd, MMM D YYYY h:mm a' }}
+                </mat-cell>
+                </ng-container>
+
+                <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+                <mat-row fxLayoutWrap
+                    *cdkRowDef="let row; columns: columns; let even = even; let odd = odd;"
+                    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+                ></mat-row>
+            </mat-table>
+        </div>
+    </div>
+    </div>
+
+    <div
+    *ngSwitchCase="'processing'"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="10px">
+        <p>{{ 'SEQUENCING.PROCESSING_BULK_ENROLLMENT' | translate:{org: currentOrg?.name} }}</p>
+        <mat-progress-bar [value]="bulkEnrollProgress" color="primary"></mat-progress-bar>
+    </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div [ngSwitch]="state">
+        <div *ngSwitchCase="'form'">
+            <button
+            *ngIf="selectedTabIndex === 0"
+            (click)="onSubmit()"
+            [disabled]="!recipients.length || !sequence || isLoading"
+            mat-button
+            class="ccr-icon-button"
+            color="primary">
+            <mat-icon>add</mat-icon>
+                {{ 'SEQUENCING.SAVE_RECIPIENTS' | translate }}
+            </button>
+
+            <button
+            *ngIf="selectedTabIndex === 1"
+            (click)="onBulkSubmit()"
+            [disabled]="!selectedOrg || !sequence || isLoading"
+            mat-button
+            class="ccr-icon-button"
+            color="primary">
+            <mat-icon>add</mat-icon>
+                {{ 'SEQUENCING.BULK_ENROLL' | translate }}
+            </button>
+        </div>
+    </div>
+</mat-dialog-actions>

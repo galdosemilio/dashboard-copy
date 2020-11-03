@@ -1,0 +1,20 @@
+<div class="ccr-heading">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+        <h2 fxFlex>{{'SIDENAV.REPORTS' | translate}}</h2>
+    </div>
+</div>
+
+<div class="ccr-reports" fxLayout="column" fxLayoutGap="5px">
+    <div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
+        <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['communications']">
+        {{ 'REPORTS.COMMS_CALLS' | translate }}
+        </a>
+    </div>
+
+    <!-- <app-report-controls [discrete]="true" [range]="false" timeframe="month"></app-report-controls> -->
+
+
+    <div class="ccr-subcomponent">
+        <router-outlet></router-outlet>
+    </div>
+</div>

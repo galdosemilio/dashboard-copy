@@ -1,0 +1,138 @@
+@mixin ccr-layout($theme, $config) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  ccr-layout {
+    display: block;
+    height: 100%;
+
+    .mat-drawer-container {
+      height: 100%;
+    }
+
+    .mat-drawer-content.ng-star-inserted {
+      @media #{map-get($config, lte-xs)} {
+        margin-left: 0px !important;
+      }
+      @media #{map-get($config, sm-md)} {
+        margin-left: 80px !important;
+      }
+      @media #{map-get($config, gte-lg)} {
+        margin-left: 225px !important;
+      }
+
+      > div {
+        /* main column */
+        height: 100%;
+
+        .mat-toolbar {
+          background: var(--primary, mat-color($primary));
+          box-shadow: 0 1px 0 mat-color($background, box-shadow);
+          color: var(--primary-contrast, mat-color($primary, default-contrast));
+          transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+
+          @media #{map-get($config, lte-xs)} {
+            background: var(--primary-contrast, mat-color($primary, default-contrast));
+            border-bottom: 1px solid var(--primary, mat-color($primary));
+            color: mat-color($foreground, text);
+          }
+        }
+
+        /* row */
+        > div {
+          height: calc(
+            100% - #{map-get($config, topbar-height)} - #{map-get($config, footer-height)}
+          );
+          position: relative;
+
+          ccr-panel {
+            display: block;
+            overflow-x: hidden;
+            overflow-y: auto;
+            z-index: 3;
+
+            transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+            width: 0;
+            &.open {
+              width: map-get($config, panel-width);
+            }
+            @media #{map-get($config, lte-lg)} {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              top: 0;
+              width: 0;
+            }
+
+            > :last-child {
+              display: block;
+              background-color: var(--contrast-darken, mat-color($primary, darker-contrast));
+              box-shadow: -1px 0 0 mat-color($background, box-shadow);
+              color: mat-color($foreground, text);
+              min-height: 100%;
+              position: relative;
+              width: map-get($config, panel-width);
+            }
+
+            /* TODO migrate */
+            ccr-add-available {
+              display: flex !important;
+
+              .mat-select-placeholder {
+                white-space: nowrap;
+              }
+            }
+          }
+
+          > div {
+            /* main container */
+            display: block;
+            max-width: 100%;
+            height: 100%;
+            overflow-y: auto;
+
+            > :last-child {
+              /* main component */
+              display: block;
+              flex: 1;
+              overflow: hidden;
+              position: relative; /* wrap absolute positioned children */
+
+              max-width: calc(100% - 80px);
+              padding: 35px 40px 20px + map-get($config, footer-height);
+              @media #{map-get($config, lte-xs)} {
+                max-width: calc(100% - 40px);
+                padding: 15px 20px 25px + map-get($config, footer-height);
+              }
+
+              .ccr-subcomponent {
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                position: relative;
+
+                > :last-child {
+                  /* sub component */
+                  display: block;
+                  margin-top: 10px;
+
+                  @media #{map-get($config, lte-sm)} {
+                    margin-top: 5px;
+                  }
+
+                  /* FIXME adjustments */
+                  > *:first-child {
+                    margin-top: 10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

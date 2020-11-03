@@ -1,0 +1,48 @@
+<div *ngIf="!isLoading">
+  <h3>
+    <mat-icon>notifications_none</mat-icon>
+    <span>{{'RIGHT_PANEL.NOTIFICATION_FEED' | translate}}</span>
+  </h3>
+
+  <div class="items-empty" *ngIf="dateSections.length === 0"
+  fxLayout="column" fxLayoutAlign="center center">
+    <mat-icon>notifications_off</mat-icon>
+    <span>{{'RIGHT_PANEL.NO_NOTIFICATIONS' | translate}}</span>
+  </div>
+
+  <mat-list *ngIf="dateSections.length">
+    <ng-container *ngFor="let section of dateSections">
+      <h4 matSubheader>{{section.date}}</h4>
+
+      <mat-list-item *ngFor="let meeting of section.meetings; let last = last">
+        <div class="item" [class.item-last]="last">
+          <div class="item-heading">
+            <mat-icon>stop</mat-icon>
+            <span>{{ meeting.title }}</span>
+          </div>
+
+          <div class="item-body">
+            <div *ngIf="meeting.organizationName">
+              <mat-icon>people_outline</mat-icon>
+              <span>{{ meeting.organizationName }}</span>
+            </div>
+            <div>
+              <mat-icon>access_time</mat-icon>
+              <span *ngIf="meeting.date && meeting.endDate; else unknownTime">
+                {{ meeting.date | amDateFormat:'h:mma' }}&nbsp;-&nbsp;{{ meeting.endDate | amDateFormat:'h:mma' }}
+              </span>
+              <ng-template #unknownTime>
+                <span>{{'RIGHT_PANEL.MEETING_TIME_UNKNOWN' | translate}}</span>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+  <!-- TODO add a button to the complete listing -->
+</div>
+
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

@@ -1,0 +1,22 @@
+<div class="report-heading" fxLayoutAlign="center center">
+  <h3 fxFlex>
+    {{ 'REPORTS.SLEEP_REPORT' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.SLEEP_REPORT' | translate"
+    [description]="'REPORTS.SLEEP_REPORT_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+</div>
+
+<ccr-datasource-overlay class="ccr-container" [source]="source">
+  <canvas *ngIf="chart" baseChart
+  width="500" height="400"
+  [chartType]="chart.type"
+  [datasets]="chart.datasets"
+  [labels]="chart.labels"
+  [options]="chart.options"
+  [legend]="chart.legend"
+  [colors]="chart.colors"
+  ></canvas>
+</ccr-datasource-overlay>

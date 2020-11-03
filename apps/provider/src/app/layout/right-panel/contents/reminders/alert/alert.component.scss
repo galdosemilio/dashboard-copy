@@ -1,0 +1,15 @@
+@import 'shared/directed-styles';
+
+ccr-alert-icon {
+  @include horizontal-margin-right(4px);
+}
+
+.alert-type {
+  margin-bottom: 5px;
+  position: relative;
+  top: -5px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}

@@ -1,0 +1,28 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div class="ccr-heading">
+        <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+          <h2 fxFlex>
+            {{ 'SIDENAV.PLATFORM_UPDATES' | translate }}
+          </h2>
+        </div>
+    </div>
+
+    <p>{{ 'PLATFORM_UPDATES.PAGE_DESCRIPTION' | translate }}</p>
+
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <ul *ngIf="articles?.length" class="article-list">
+            <li *ngFor="let article of articles" [ngClass]="{'unread': readArticles.indexOf(article.id) === -1 && article.createdAt >= lastSeenTimestamp}">
+                <a (click)="markAsRead(article.id)" [href]="article.url + '?lang=' + currentLang" class="ccr-link" target="_blank">{{ article.title }}</a>
+                <br>
+                <small>{{ 'PLATFORM_UPDATES.RELEASED_AT' | translate:{date: article.createdAt | amDateFormat:'dddd, MMMM D, YYYY' } }}</small>
+            </li>
+        </ul>
+
+        <a
+        class="ccr-link view-all-cta"
+        href="https://coachcare.zendesk.com/hc/en-us/categories/360002579931-Platform-Updates"
+        target="_blank">
+            {{ 'HOME.VIEW_ALL' | translate }}
+        </a>
+    </div>
+</div>

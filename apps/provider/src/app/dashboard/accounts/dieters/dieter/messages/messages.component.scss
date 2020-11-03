@@ -1,0 +1,8 @@
+:host {
+  box-sizing: border-box;
+  display: flex !important;
+  max-height: 100%;
+  place-content: stretch flex-start;
+  align-items: stretch;
+  flex: 1 1 100%;
+}

@@ -1,0 +1,48 @@
+@import 'variables';
+
+$active-base-color: saturate(
+  lighten(adjust-hue(mat-color($ccr-background, success), -25%), 10%),
+  10%
+);
+
+.ccr-panel {
+  border: 1px solid var(--primary-darken);
+  margin-bottom: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 0 25px 5px;
+
+  &.inner {
+    padding-bottom: 25px;
+
+    &.active {
+      border: 1px solid darken($active-base-color, 20%);
+      & > h3 {
+        background-color: $active-base-color;
+      }
+    }
+  }
+
+  > h3 {
+    background: var(--primary);
+    color: var(--contrast);
+    font-weight: normal;
+    font-size: 1em;
+    line-height: 30px;
+    margin: 0 -25px 20px;
+    padding: 0 10px;
+  }
+
+  ul {
+    padding-inline-start: 20px;
+  }
+
+  li {
+    margin-bottom: 5px;
+    word-break: break-word;
+  }
+
+  .no-margin {
+    margin-bottom: 0;
+  }
+}

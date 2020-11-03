@@ -1,0 +1,273 @@
+@import 'variables';
+@import 'shared/directed-styles';
+
+// FIXME check why does not override material styles
+.mat-drawer {
+  background-color: var(--sidenav);
+  box-shadow: 1px 0 0 mat-color($ccr-background, box-shadow);
+  min-width: 0 !important;
+  overflow: hidden !important;
+  transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1) !important;
+  width: $sidenav-width;
+  &.open {
+    width: 225px !important;
+  }
+  @media #{$medium-only} {
+    width: 80px !important;
+  }
+  @media #{$small-and-down} {
+    margin-top: $topnav-height;
+    width: 0 !important;
+  }
+}
+
+$base-padding: 16px;
+$base-color-change: 2%;
+button.topnav-logo {
+  color: var(--base, mat-color($ccr-foreground, base));
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  .mat-button-ripple,
+  .mat-button-focus-overlay {
+    display: none;
+  }
+  i.material-icons {
+    line-height: $footer-height;
+    transition: 0.4s transform cubic-bezier(0.25, 0.8, 0.25, 1);
+    &:before {
+      content: 'arrow_drop_down';
+    }
+  } // FIXME there's no class to detect menu opened
+  &.cdk-focused i.material-icons {
+    transform: rotate(180deg) translateZ(0);
+  }
+  img {
+    margin: 0 auto;
+    max-height: 64px;
+    max-width: calc(100% - 28px);
+  }
+}
+
+.mat-menu-panel.org-selector {
+  max-height: calc(100vh - 64px);
+  max-width: 400px;
+  min-width: 225px;
+  @media #{$small-and-down} {
+    border: 1px solid var(--primary);
+    min-width: 70vw;
+    max-width: 94%;
+  }
+  .mat-menu-content {
+    padding: 0;
+  }
+  .mat-menu-item {
+    line-height: 36px;
+    height: 36px;
+    &.active {
+      background: var(--primary);
+      color: var(--contrast);
+    }
+  }
+
+  ccr-form-field-text {
+    box-sizing: border-box;
+    position: -webkit-sticky; /* Safari */
+    position: sticky; /* NonIE */
+    top: 0;
+
+    background-color: mat-color($ccr-background, search);
+    display: block;
+    overflow: hidden;
+    padding: 12px 15px 5px;
+    width: 100%;
+    z-index: 10000;
+
+    .mat-form-field {
+      width: 100%;
+    }
+    .mat-form-field-wrapper {
+      margin-bottom: -0.5em;
+    }
+  }
+}
+
+app-menu {
+  > .mat-toolbar {
+    background: var(--bg-bar);
+    box-shadow: none;
+    cursor: pointer;
+    @media #{$small-and-down} {
+      display: none !important;
+    }
+  }
+  // &.menu-opened mat-sidenav-content > mat-nav-list {
+  //   width: 225px;
+  // }
+  > mat-sidenav-content {
+    @include horizontal-margin-left(0 !important);
+  }
+  mat-sidenav-content > mat-nav-list {
+    // width: 0;
+    // position: fixed;
+    // bottom: $footer-height;
+    // left: 0;
+    // right: 0;
+    // top: $topnav-height;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 20px !important;
+    padding-bottom: 90px;
+    @media #{$medium-only} {
+      padding: 0 !important;
+    }
+    @media #{$small-and-down} {
+      bottom: $footer-height + $topnav-height;
+      padding-bottom: 20px;
+      top: 0;
+    }
+    body.rtl & {
+      .ccr-badge {
+        position: absolute; // left: 25px;
+        left: 19px;
+        right: auto;
+        top: 13px;
+      }
+    }
+    .mat-list-item {
+      position: relative;
+      transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+      &:focus {
+        background: var(--sidenav-darkest);
+      }
+      &:active,
+      &:focus {
+        outline: none;
+      }
+      .ccr-badge {
+        position: absolute; // left: 25px;
+        right: 19px;
+        top: 13px;
+      }
+      &.level1 {
+        // &.active > .mat-list-item-content {
+        //   color: var(--base);
+        //   font-weight: 600;
+        // }
+        text-transform: uppercase;
+        &:hover {
+          background: var(--sidenav-darkest);
+        }
+
+        ccr-badge {
+          z-index: 1000;
+        }
+      }
+      &.level2 {
+        height: 36px;
+        background-color: var(--sidenav-darken);
+        &:hover {
+          background-color: var(--sidenav-darkest);
+        }
+        &.active > {
+          background-color: var(--sidenav-darkest);
+          color: var(--base, mat-color($ccr-foreground, base));
+        }
+        &.active > .mat-list-item-content {
+          font-weight: 600;
+        }
+        > .mat-list-item-content {
+          @include horizontal-padding-left($base-padding * 1);
+        }
+        mat-icon.mat-icon.material-icons {
+          @include horizontal-padding-left(15px);
+          font-size: 15px;
+          display: flex;
+          align-items: center;
+        }
+      }
+      > .mat-list-item-content {
+        > span {
+          flex: 1;
+          @include horizontal-margin-left(10px);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: inherit;
+          white-space: nowrap;
+          @media #{$medium-only} {
+            display: none;
+          }
+        }
+        > i.material-icons {
+          @media #{$medium-only} {
+            display: none;
+          }
+        }
+        > mat-icon {
+          height: 18px;
+          font-size: 18px;
+          transition: inherit;
+          @media #{$medium-only} {
+            font-size: 26px;
+            line-height: 46px;
+            @include horizontal-padding-left(11px);
+            height: 100%;
+            width: 100%;
+          }
+        }
+        -webkit-font-smoothing: antialiased;
+        color: var(--text, mat-color($ccr-foreground, text));
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.14px;
+        line-height: 40px;
+        transition: all 0.4s cubic-bezier(0.35, 0, 0.25, 1);
+        padding: 0 16px;
+        @media #{$medium-only} {
+          padding-top: 10px;
+          height: auto;
+        }
+        > i.material-icons:last-child {
+          line-height: 40px;
+          transition: 0.4s transform cubic-bezier(0.25, 0.8, 0.25, 1);
+          &:before {
+            content: 'keyboard_arrow_down';
+          }
+        }
+      }
+    }
+    &.open mat-list-item {
+      > .mat-list-item-content {
+        > span,
+        > i.material-icons {
+          @media #{$medium-only} {
+            display: inline-block;
+          }
+        }
+        > mat-icon {
+          @media #{$medium-only} {
+            font-size: 18px;
+            line-height: 22px;
+            height: 18px;
+            width: 18px;
+          }
+        }
+      }
+    }
+    .active > .mat-list-item-content > i.material-icons:last-child {
+      transform: rotate(180deg) translateZ(0);
+    }
+    .active:not(.nav-dropdown) > .mat-list-item:not(:hover) {
+      background-color: var(--sidenav-darken) !important;
+    }
+    .nav-children {
+      padding-top: 0;
+      overflow: hidden;
+      transition: height 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+      &:not(.active) {
+        transition: height 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        height: 0 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<ng-container [formGroup]="form" novalidate *ngIf="!_isLoading">
+  <ccr-form-field-text
+    formControlName="name"
+    [placeholder]="'GLOBAL.FILTER_BY_NAME' | translate"
+  ></ccr-form-field-text>
+
+  <ccr-autocompleter-account *ngIf="!_isAdmin"
+    formControlName="account"
+    [placeholder]="'GLOBAL.FILTER_BY_ACCOUNT' | translate"
+  ></ccr-autocompleter-account>
+
+  <ccr-form-selector type="status"
+    formControlName="status"
+    [placeholder]="'GLOBAL.STATUS' | translate"
+  ></ccr-form-selector>
+</ng-container>

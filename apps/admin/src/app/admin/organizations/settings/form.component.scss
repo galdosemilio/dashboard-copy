@@ -1,0 +1,33 @@
+ccr-feature-toggle-input {
+  width: 100%;
+}
+
+.json-editor-panel {
+  margin-bottom: 25px;
+}
+
+.ccr-tabs-center {
+  margin: 18px 0;
+  padding: 0;
+  overflow-x: overlay;
+  max-width: 100%;
+  text-align: center;
+
+  li {
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    white-space: nowrap;
+
+    &.selected {
+      font-weight: bold;
+    }
+
+    &:not(:last-child):after {
+      content: '|';
+      font-size: 20px;
+      font-weight: 300;
+      margin: 0 9px;
+    }
+  }
+}

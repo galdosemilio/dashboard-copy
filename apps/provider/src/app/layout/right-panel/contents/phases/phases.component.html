@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+    <div *ngIf="enrollments?.length; else noEnrollments" (scroll)="onScroll$.next($event)" class="scrollable-v">
+        <ul [class.force-scroll]="source?.next">
+            <li *ngFor="let enrollment of enrollments">
+                <span>
+                    {{ enrollment.package.title }}
+                    <span class="id-container">({{ 'LIBRARY.CONTENT.ID' | translate }} {{ enrollment.package.id }})</span>
+                </span>
+            </li>
+        </ul>
+
+        <div *ngIf="source.isLoading" class="mat-spinner-container">
+            <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+        </div>
+    </div>
+
+    <button (click)="goToPhaseManagement()" class="ccr-icon-button" color="primary" mat-button>
+        <mat-icon>settings</mat-icon>
+        {{ 'RIGHT_PANEL.MANAGE_PHASES' | translate }}
+    </button>
+</div>
+
+<ng-template #noEnrollments>
+    <p>{{ 'NOTIFY.ERROR.NO_PHASE_ENROLLMENTS' | translate }}</p>
+</ng-template>

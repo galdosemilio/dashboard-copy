@@ -1,0 +1,41 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutGap="7px">
+  <mat-form-field fxFlex="grow" [style.fontSize.px]="18" *ngIf="!readonly">
+    <input type="text" matInput [placeholder]="'GLOBAL.TITLE' | translate" formControlName="name" [readonly]="readonly">
+  </mat-form-field>
+
+  <mat-radio-group class="radio-group" formControlName="allowAddendum">
+    <strong>
+      <span class="ccr-strong">{{ 'LIBRARY.FORMS.ADDENDUM_PERMITTED' | translate }}&nbsp;*</span>
+    </strong>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="7px">
+      <mat-radio-button [value]="true">{{ 'GLOBAL.YES' | translate }}</mat-radio-button>
+      <mat-radio-button [value]="false">{{ 'GLOBAL.NO' | translate }}</mat-radio-button>
+    </div>
+  </mat-radio-group>
+
+  <p *ngIf="!edit">{{ 'LIBRARY.FORMS.ADDENDUM_NOTICE' | translate }}</p>
+
+  <mat-radio-group class="radio-group" formControlName="maximumSubmissions">
+    <strong>
+      <span class="ccr-strong">{{ 'LIBRARY.FORMS.MAX_SUBMISSIONS' | translate }}&nbsp;*</span>
+    </strong>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="7px">
+      <mat-radio-button [value]="true">{{ 'LIBRARY.FORMS.JUST_ONE' | translate }}</mat-radio-button>
+      <mat-radio-button [value]="false">{{ 'LIBRARY.FORMS.UNLIMITED' | translate }}</mat-radio-button>
+    </div>
+  </mat-radio-group>
+
+  <p *ngIf="!edit">{{ 'LIBRARY.FORMS.MAX_SUBMISSIONS_NOTICE' | translate }}</p>
+
+  <mat-radio-group class="radio-group" formControlName="removableSubmissions">
+    <strong>
+      <span class="ccr-strong">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS' | translate }}&nbsp;*</span>
+    </strong>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="7px">
+      <mat-radio-button [value]="true">{{ 'GLOBAL.YES' | translate }}</mat-radio-button>
+      <mat-radio-button [value]="false">{{ 'GLOBAL.NO' | translate }}</mat-radio-button>
+    </div>
+  </mat-radio-group>
+
+  <p *ngIf="!edit">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS_NOTICE' | translate }}</p>
+</div>

@@ -1,0 +1,92 @@
+{
+  "id": "18069",
+  "createdBy": "1",
+  "title": "Test meeting 1",
+  "note": null,
+  "start": {
+    "utc": "2020-01-03T03:00:00.000Z"
+  },
+  "end": {
+    "utc": "2020-01-03T03:30:00.000Z"
+  },
+  "timezone": "UTC",
+  "organization": {
+    "shortcode": "ccr",
+    "name": "CoachCare",
+    "hierarchyPath": ["1"],
+    "assets": {
+      "logoUrl": "https://d3vngy9ttk2wws.cloudfront.net/30/logo.png"
+    }
+  },
+  "type": {
+    "id": 1,
+    "code": "1on1initial",
+    "description": "Initial 1 on 1 meeting"
+  },
+  "recurring": {
+    "template": {
+      "id": "72",
+      "title": "YAM with DST 4",
+      "interval": "7 days",
+      "range": { "start": "2019-10-07", "end": "2022-10-08" },
+      "type": { "id": "6" },
+      "startTime": "10:00:00",
+      "duration": "00:30:00",
+      "timezone": "America/New_York"
+    },
+    "edited": false
+  },
+  "location": {
+    "streetAddress": "122 Av",
+    "city": "New York",
+    "postalCode": "10001",
+    "state": "TX",
+    "country": "US",
+    "latitude": null,
+    "longitude": null
+  },
+  "attendees": [
+    {
+      "id": "2",
+      "account": "2",
+      "firstName": "fdaf",
+      "lastName": "adsfdaf",
+      "email": "jeffdrakos4@gmail.com",
+      "attendance": {
+        "id": "1",
+        "status": {
+          "id": "1",
+          "name": "Attended"
+        }
+      }
+    },
+    {
+      "id": "3",
+      "account": "3",
+      "firstName": "eric",
+      "lastName": "di bari",
+      "email": "eric.dibari+293uy293yu293uy32f@gmail.com",
+      "attendance": {
+        "id": "2",
+        "status": {
+          "id": "1",
+          "name": "Attended"
+        }
+      }
+    },
+    {
+      "id": "1",
+      "account": "1",
+      "firstName": "Eric",
+      "lastName": "Di Bari",
+      "email": "eric@websprout.org",
+      "attendance": {
+        "id": "3",
+        "status": {
+          "id": "1",
+          "name": "Attended"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <div *ngIf="!loadingLabels" [formGroup]="form" class="assoc-container" fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="5px">
+    <mat-form-field>
+      <input [matAutocomplete]="auto" formControlName="query" matInput type="text">
+      <button *ngIf="selectedLabelId" mat-button matSuffix mat-icon-button (click)="clearQueryField()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="autocompleteDisplayWith"
+    (optionSelected)="onSelectOption($event)">
+      <mat-option *ngFor="let label of shownLabels" [value]="label.id">{{ label.title }} ({{ label.id }})</mat-option>
+    </mat-autocomplete>
+
+    <button mat-icon-button color="primary" [disabled]="!selectedLabelId" (click)="associate()">
+      <mat-icon [attr.aria-label]="'ACCOUNT.CREATE_ASSOCIATION' | translate">add_circle_outline</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="loadingLabels" class="assoc-container" fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner diameter="40" strokeWidth="3"></mat-spinner>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <button mat-button class="ccr-button" color="primary" (click)="showLabelDialog()">
+        <mat-icon>add</mat-icon>
+        <span>{{ 'GLOBAL.CREATE' | translate }}</span>
+      </button>
+    </div>
+
+    <ccr-paginator fxFlex #paginator
+    [length]="source.total"
+    [pageIndex]="0"
+    [pageSize]="10"
+    ></ccr-paginator>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <ccr-datasource-overlay class="ccr-table" [source]="source">
+
+      <mat-table [dataSource]="source" matSort>
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+            <span>ID</span>
+            {{ row.package.id }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.NAME' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let row" (click)="onGoToPhasePage(row)" class="clickable" fxLayoutAlign=" center" fxFlex.xs="100%">
+            <span>{{ 'GLOBAL.NAME' | translate }}</span>
+            {{ row.package.title }}<i class="ccr-marker" *ngIf="row.inherited">&nbsp;*</i>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.DESCRIPTION' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let row" (click)="onGoToPhasePage(row)" class="clickable" fxLayoutAlign=" center" fxFlex.xs="100%">
+            <span>{{ 'GLOBAL.DESCRIPTION' | translate }}</span>
+            {{ row.package.description }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="organization">
+          <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ORGANIZATION' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+            <span>{{ 'GLOBAL.ORGANIZATION' | translate }}</span>
+            {{ row.organization.name }} ({{ row.organization.id }})
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef fxLayoutAlign="center center">{{ 'GLOBAL.STATUS' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex.xs="100%">
+            <span>{{ 'GLOBAL.STATUS' | translate }}</span>
+            <mat-select [ngModel]="row.selectorValue" (selectionChange)="onAssociationStatusChange(row, $event)" fxFlex="75%">
+              <mat-option value="disabled">
+                {{ 'PHASE.DISABLED' | translate }}
+              </mat-option>
+              <mat-option value="enabled">
+                {{ 'PHASE.ENABLED' | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ACTIONS' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="100%">
+            <span>{{ 'GLOBAL.ACTIONS' | translate }}</span>
+
+            <button
+            [class.disabled]="row.inherited"
+            (click)="dissociate(row)"
+            mat-icon-button
+            title="{{ 'PHASE.DISASSOCIATE' | translate }}">
+              <mat-icon>highlight_off</mat-icon>
+            </button>
+
+            <!-- <a *ngIf="row.isActive && !row.inherited" (click)="dissociate(row)" mat-button color="warn" class="ccr-button">
+              {{ 'PHASE.DISASSOCIATE' | translate }}
+            </a> -->
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayout="row wrap" *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+          [ngClass]="{
+            'row-even': odd,
+            'row-odd': even
+          }">
+        </mat-row>
+      </mat-table>
+
+      <p class="footnotes" *ngIf="source.showMarker">
+        <i class="ccr-marker">*</i> {{ 'PHASE.IS_INHERITED' | translate }}
+      </p>
+
+    </ccr-datasource-overlay>
+  </div>
+</div>

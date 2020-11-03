@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "status": "active",
+      "attendanceStatus": { "id": "3", "name": "Attended", "status": "active" },
+      "organization": { "id": "30" }
+    },
+    {
+      "id": "3",
+      "status": "active",
+      "attendanceStatus": { "id": "1", "name": "Attended", "status": "active" },
+      "organization": { "id": "30" }
+    },
+    {
+      "id": "2",
+      "status": "active",
+      "attendanceStatus": { "id": "4", "name": "Didn't Attend", "status": "active" },
+      "organization": { "id": "30" }
+    },
+    {
+      "id": "4",
+      "status": "active",
+      "attendanceStatus": { "id": "2", "name": "No-Show", "status": "active" },
+      "organization": { "id": "30" }
+    }
+  ],
+  "pagination": {}
+}

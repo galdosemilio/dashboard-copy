@@ -1,0 +1,52 @@
+{
+  "id": "6110",
+  "name": "Pepperoni Pizza",
+  "createdAt": "2019-12-10T18:41:43.476Z",
+  "account": { "id": "6154" },
+  "isActive": true,
+  "isPublic": false,
+  "servings": [
+    {
+      "id": "11265",
+      "quantity": 1,
+      "description": "1 slice",
+      "measurementDescription": "serving",
+      "unit": "g",
+      "amount": 93,
+      "calorie": 210,
+      "carbohydrate": 29000,
+      "cholesterol": 20,
+      "fiber": 1000,
+      "sugar": 1000,
+      "protein": 10000,
+      "saturatedFat": 2500,
+      "sodium": 580,
+      "totalFat": 6000,
+      "transFat": 100,
+      "ingredient": {
+        "id": "fatsecret_61851",
+        "name": "Pepperoni Pizza",
+        "type": "branded",
+        "brand": "Pizza Pizza",
+        "image": {
+          "thumbnail": "https://cdn.coachcare.com/food/robard/2335991-chocolate_mint_pudding_shake.jpg",
+          "highres": "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder.png"
+        }
+      }
+    }
+  ],
+  "summary": {
+    "calorie": 210,
+    "carbohydrate": 29000,
+    "cholesterol": 20,
+    "fiber": 1000,
+    "protein": 10000,
+    "saturatedFat": 2500,
+    "sodium": 580,
+    "sugar": 1000,
+    "totalFat": 6000,
+    "transFat": 100
+  },
+  "keys": [],
+  "mealPlans": []
+}

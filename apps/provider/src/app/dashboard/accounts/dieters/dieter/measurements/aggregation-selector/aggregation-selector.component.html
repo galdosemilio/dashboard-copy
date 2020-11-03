@@ -1,0 +1,8 @@
+<mat-form-field [formGroup]="form" class="ccr-align-center" [floatLabel]="embedded ? 'never' : 'always'" fxFlex="49%" fxFlex.xs="100%">
+  <mat-select formControlName="aggregation" [placeholder]="'BOARD.DATA_OPTIONS' | translate">
+    <mat-option *ngFor="let aggregation of aggregations" [value]="aggregation.value"
+    class="ccr-align-center" [class.ccr-embedded]="embedded">
+      {{ aggregation.viewValue | translate | uppercase }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

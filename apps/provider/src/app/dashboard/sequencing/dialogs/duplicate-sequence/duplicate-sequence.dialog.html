@@ -1,0 +1,40 @@
+<div matDialogTitle>
+    <div>
+        <span>{{ 'SEQUENCING.DUPLICATE_SEQUENCE' | translate:{ name: currentSequence.name } }}</span>
+    </div>
+    <button *ngIf="!isLoading" matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <ccr-organization-search
+        [label]="'SEQUENCING.CLINIC_TO_ASSOC' | translate"
+        [initialOrg]="initialOrg"
+        [permissions]="requiredPermissions"
+        [readonly]="isLoading"
+        (select)="onSelectOrg($event)"
+        fxFlex></ccr-organization-search>
+
+        <small *ngIf="noAdminOrg" class="error">{{ 'SEQUENCING.NO_ADMIN_ORG' | translate }}</small>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
+        <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+    </div>
+
+    <div *ngIf="!isLoading">
+        <button [disabled]="form.invalid || noAdminOrg || isLoading" (click)="onDuplicate()" class="ccr-icon-button" color="primary" mat-button>
+            <mat-icon>check</mat-icon>
+            {{ 'BOARD.DUPLICATE' | translate }}
+        </button>
+
+        <button [disabled]="isLoading" class="ccr-icon-button" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+            {{ 'GLOBAL.CANCEL' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>

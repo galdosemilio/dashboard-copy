@@ -1,0 +1,28 @@
+.report-heading {
+  mat-icon {
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+  }
+  h4 {
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
+}
+
+.ccr-alerts {
+  ccr-paginator {
+    padding-bottom: 20px;
+  }
+
+  @include selector_filter(left);
+}
+
+.ccr-reports,
+.ccr-statistics {
+  @include selector_filter(center);
+}
+
+.ccr-reports-subfilter {
+  padding-bottom: 20px;
+}

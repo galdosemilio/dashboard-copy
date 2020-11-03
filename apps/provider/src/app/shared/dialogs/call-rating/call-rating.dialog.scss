@@ -1,0 +1,112 @@
+@import 'variables';
+
+// adds breaks to the mat-checkboxes with long labels
+::ng-deep .mat-checkbox-label {
+  white-space: normal !important;
+}
+
+// rather than center the checkbox, put the checkbox in the first line
+::ng-deep .mat-checkbox-inner-container {
+  margin-top: 3px !important;
+}
+
+.call-end-survey {
+  border-radius: 5px;
+
+  h3 {
+    margin: 0 0 15px 0;
+    text-align: center;
+  }
+
+  h5 {
+    font-style: oblique;
+    margin: 0;
+  }
+
+  &-inner {
+    width: 100%;
+  }
+
+  .close-button {
+    cursor: pointer;
+    background-color: black;
+    border-radius: 25px;
+    height: 32px;
+    position: absolute;
+    right: -15px;
+    text-align: center;
+    top: -15px;
+    width: 32px;
+
+    mat-icon {
+      color: white;
+      font-size: 24px;
+      height: 32px;
+      line-height: 32px;
+      width: 32px;
+    }
+  }
+
+  .notice-container {
+    height: 15px;
+  }
+
+  .option-container {
+    width: 100%;
+
+    mat-icon {
+      cursor: pointer;
+      font-size: 64px;
+      height: 64px;
+      width: 64px;
+
+      &.happy {
+        &.active {
+          color: $ccr-success;
+
+          &:hover {
+            color: $ccr-success;
+          }
+        }
+
+        &:hover {
+          color: lighten($ccr-success, 20%);
+        }
+      }
+
+      &.sad {
+        &.active {
+          color: $ccr-danger;
+
+          &:hover {
+            color: $ccr-danger;
+          }
+        }
+
+        &:hover {
+          color: lighten($ccr-danger, 20%);
+        }
+      }
+    }
+  }
+}
+
+.ccr-form-field {
+  border: 1px solid darken(mat-color($ccr-background, app-bar), 10%);
+  border-radius: 5px;
+
+  textarea {
+    height: 75px;
+    line-height: 20px;
+    padding-top: 5px;
+    resize: none !important;
+  }
+}
+
+.hidden {
+  height: 0;
+}
+
+.textarea-container {
+  width: 100%;
+}

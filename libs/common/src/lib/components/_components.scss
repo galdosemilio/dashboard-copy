@@ -1,0 +1,7 @@
+@import './form/form';
+@import './utilities/utilities';
+
+@mixin ccr-components($theme, $config) {
+  @include ccr-form($theme, $config);
+  @include ccr-utilities($theme, $config);
+}

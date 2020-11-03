@@ -1,0 +1,15 @@
+<div matDialogTitle>
+    <div>
+      <mat-icon>warning</mat-icon>
+      <span>{{ 'CALL.WARNING' | translate }} </span>
+    </div>
+  </div>
+  <mat-dialog-content>
+    <p [innerHTML]="message"></p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button class="ccr-icon-button" matDialogClose>
+        <mat-icon>check</mat-icon> {{'GLOBAL.OK' | translate}}
+    </button>
+  </mat-dialog-actions>

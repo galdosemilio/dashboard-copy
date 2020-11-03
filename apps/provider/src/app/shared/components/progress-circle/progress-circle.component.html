@@ -1,0 +1,15 @@
+<svg class="ccr-progress-circle" viewBox="-2 -2 104 104" preserveAspectRatio="xMidYMid meet" focusable="false">
+
+  <text class="regular-text" [attr.y]="!footer ? '20%' :'15%'" alignment-baseline="baseline">
+    <tspan *ngFor="let text of sentences" x="47%" dy="1.2em">{{ text }}</tspan>
+  </text>
+  <text class="primary-text" x="47%" [attr.y]="!footer ? '70%' : '62%'" alignment-baseline="baseline">
+    {{ numberWithCommas(value) }}{{ measurementUnit }}
+  </text>
+  <text class="regular-text" *ngIf="footer" y="77%" x="47%" alignment-baseline="baseline">
+    {{ footer }}
+  </text>
+
+  <path class="progress-circle-path" #path></path>
+  <path class="progress-circle-path-rest" #restpath></path>
+</svg>

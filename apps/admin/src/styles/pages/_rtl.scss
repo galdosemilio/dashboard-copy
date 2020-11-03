@@ -1,0 +1,17 @@
+[dir='rtl'] {
+  ccr-page-register-clinic .mat-form-field-label-wrapper {
+    right: 10px;
+  }
+
+  .mat-form-field {
+    margin-right: 0px !important;
+    margin-left: 20px;
+    &:last-child {
+      margin-left: 0px;
+    }
+  }
+
+  ccr-page-register-clinic .mat-select-value-text > span {
+    padding-right: 10px;
+  }
+}

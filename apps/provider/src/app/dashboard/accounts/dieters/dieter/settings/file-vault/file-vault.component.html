@@ -1,0 +1,31 @@
+<div *ngIf="status === 'select-org'" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div class="help-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+        <p>{{ 'GLOBAL.FILE_VAULT_SELECT_CLINIC' | translate }}</p>
+        <a
+        href="https://coachcare.zendesk.com/hc/en-us/articles/360039544791-File-Vault-Select-Release-Wednesday-February-5-2020-#multiclinic"
+        target="_blank">
+            <mat-icon>help_outline</mat-icon>
+        </a>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutAlign="stretch center">
+        <ccr-organization-search
+            [account]="context.accountId"
+            [showEmptyOption]="false"
+            fxFlex
+            (select)="selectOrganization($event)">
+        </ccr-organization-search>
+    </div>
+</div>
+
+<div *ngIf="status === 'file-vault'">
+    <div class="help-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+        <p>{{ 'GLOBAL.FILE_VAULT_ABOUT' | translate }}</p>
+        <a
+        href="https://coachcare.zendesk.com/hc/en-us/articles/360039544791-File-Vault-Select-Release-Wednesday-February-5-2020-"
+        target="_blank">
+            <mat-icon>help_outline</mat-icon>
+        </a>
+    </div>
+
+    <app-content mode="vault" [organizationOverride]="singleOrg" [source]="source"></app-content>
+</div>

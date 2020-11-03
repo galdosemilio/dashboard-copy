@@ -1,0 +1,28 @@
+<div class="stats-big" [class.clickable]="isEditable" (click)="onClick()"
+fxLayout="column" fxLayoutAlign="space-between">
+
+  <mat-icon *ngIf="isEditable">mode_edit</mat-icon>
+
+  <div class="metric-heading" fxLayoutAlign="center center">
+    <span>{{ title }}</span>
+  </div>
+
+  <ng-container *ngIf="!isLoading && !value; else stat">
+    <div class="metric-number" fxFlexAlign="center">
+      ---
+    </div>
+  </ng-container>
+
+  <ng-template #stat>
+    <div class="metric-number">
+      <div *ngIf="!isLoading">{{ value | number }}</div>
+      <div fxLayoutAlign="center center" *ngIf="isLoading">
+        <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="metric-text">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+@import 'shared/directed-styles';
+
+.remove-button {
+  color: mat-color($ccr-foreground, text);
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.section {
+  background-color: mat-color($ccr-base, 50);
+
+  &-body {
+    background-color: mat-color($ccr-contrast, A700);
+    padding: 20px 20px 10px 20px;
+
+    .question {
+      &-body {
+        background-color: mat-color($ccr-background, app-bar);
+        border-radius: 10px;
+        padding: 10px 20px 10px 10px;
+      }
+      &-number {
+        color: mat-color($ccr-foreground, secondary-text);
+        margin: 0 10px 0 10px;
+      }
+    }
+  }
+
+  &-header {
+    padding: 25px 25px 10px 25px;
+
+    .description {
+      font-weight: normal;
+      margin: 0;
+
+      & > span {
+        color: mat-color($ccr-foreground, secondary-text);
+      }
+    }
+
+    .title {
+      margin: 0;
+    }
+  }
+}
+
+.ccr-form-field {
+  margin: 5px 0;
+
+  &.mat-form-field {
+    .mat-input-element {
+      width: 96%;
+    }
+
+    .mat-input-element,
+    .mat-select-value {
+      height: 38px;
+      line-height: 36px;
+      text-align: start;
+      padding: 0 0 0 15px;
+    }
+    .mat-form-field-infix {
+      background: mat-color($ccr-background, background);
+      border-top: none;
+      border-radius: 5px;
+      margin: 0;
+      padding: 0;
+      width: auto;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+    .mat-form-field-label {
+      line-height: 24px;
+      @include horizontal-padding-left(15px);
+      width: calc(100% - 15px - 18px); // - padding - arrow
+    }
+    .mat-form-field-underline,
+    .mat-form-field-subscript-wrapper {
+      display: none;
+    }
+    .mat-select-arrow {
+      @include horizontal-margin-right(12px);
+    }
+    .mat-select-underline {
+      background-color: transparent;
+    }
+  }
+
+  &.parsed-text {
+    background-color: mat-color($ccr-background, background);
+    border-radius: 5px;
+    line-height: 2;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    word-wrap: break-word;
+  }
+}

@@ -1,0 +1,14 @@
+<h2>
+  {{ 'PAGE.UNSUPPORTED_BROWSER.TITLE' | translate }}
+</h2>
+
+<p class="description">{{ 'PAGE.UNSUPPORTED_BROWSER.DESCRIPTION' | translate }}</p>
+
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10%">
+  <div *ngFor="let browser of supportedBrowsers" fxLayout="column" fxLayoutAlign="center center">
+    <a [href]="browser.url" target="_blank" fxLayout="column" fxLayoutAlign="center center">
+      <h3>{{ browser.name }}</h3>
+      <img [src]="browser.image" alt="Chrome Logo" width="100" height="100">
+    </a>
+  </div>
+</div>

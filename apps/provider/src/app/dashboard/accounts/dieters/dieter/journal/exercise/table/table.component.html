@@ -1,0 +1,52 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source">
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.DATE' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{'GLOBAL.DATE' | translate}}</span>
+        {{ row.date | amLocal | amDateFormat:'ddd, MMM D YYYY' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="activity_type">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.ACTIVITY_TYPE' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{'GLOBAL.ACTIVITY_TYPE' | translate}}</span>
+        {{ row.exerciseType.name | capitalize }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="intensity">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.INTENSITY' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{'GLOBAL.INTENSITY' | translate}}</span>
+        {{ row.intensity | exerciseIntensity | translate }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="duration">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.DURATION' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{'GLOBAL.DURATION' | translate}}</span>
+        {{ row.duration.amount }} {{ row.duration.unitString | translate | lowercase }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- <ng-container cdkColumnDef="notes">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.NOTES' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{'GLOBAL.NOTES' | translate}}</span>
+        <mat-icon>notes</mat-icon>
+      </mat-cell>
+    </ng-container> -->
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>

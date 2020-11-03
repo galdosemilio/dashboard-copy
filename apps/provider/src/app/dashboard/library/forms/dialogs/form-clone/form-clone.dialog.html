@@ -1,0 +1,39 @@
+
+<div matDialogTitle>
+    <div>
+    <mat-icon>content_copy</mat-icon>
+    <span>{{ 'LIBRARY.FORMS.CLONE_FORM' | translate }}</span>
+    </div>
+
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content class="dialog-content">
+    <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px">
+        <p [innerHTML]="'LIBRARY.FORMS.CLONE_FORM_DESCRIPTION' | translate:{ form: data.form.name }"></p>
+        <ccr-organization-search
+        [initialOrg]="selectedOrganization"
+        (select)="onOrganizationSelect($event)">
+        </ccr-organization-search>
+    </div>
+</div>
+
+<mat-dialog-actions>
+    <button
+    [disabled]="!selectedOrganization || isLoading"
+    (click)="onSubmit()"
+    mat-button
+    color="primary"
+    class="ccr-button">
+        {{ 'GLOBAL.CLONE' | translate }}
+    </button>
+
+    <button
+    matDialogClose
+    mat-button
+    class="ccr-button">
+    {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

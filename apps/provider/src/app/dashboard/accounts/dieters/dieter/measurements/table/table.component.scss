@@ -1,0 +1,68 @@
+@import 'shared/directed-styles';
+@import 'variables';
+
+td.mat-cell.cdk-column-actions,
+td.mat-footer-cell.cdk-column-actions,
+th.mat-header-cell.cdk-column-actions {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  @include horizontal-padding-left(15px !important);
+}
+
+.action-icon {
+  text-align: center;
+}
+
+.ccr-table small {
+  & + small {
+    @include horizontal-margin-left(0.25em);
+  }
+  margin-top: 0.42em;
+
+  &.cm,
+  &.perc {
+    @include horizontal-margin-left(0.1em);
+  }
+}
+
+.ccr-text-right {
+  text-align: right;
+}
+
+.disabled {
+  color: mat-color($ccr-background, header);
+}
+
+tr.bold {
+  td:first-of-type {
+    font-weight: bold;
+  }
+}
+
+tr.header {
+  font-weight: bold;
+  height: 30px !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.mat-column-bmi {
+  flex: 0.75 !important;
+}
+
+.mat-header-row th.cdk-column-actions {
+  background: mat-color($ccr-background, header);
+}
+
+.row-even td.cdk-column-actions {
+  background: mat-color($ccr-background, even);
+}
+
+.row-odd td.cdk-column-actions {
+  background: mat-color($ccr-background, odd);
+}
+
+.text-right {
+  float: right;
+}

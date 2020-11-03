@@ -1,0 +1,47 @@
+
+<div matDialogTitle>
+  <div>
+    <mat-icon>mode_edit</mat-icon>
+    <span>{{'BOARD.PATIENT_EDIT' | translate}}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate fxLayout="column">
+
+    <mat-form-field>
+      <input matInput required type="text" formControlName="firstName"
+        [placeholder]="'BOARD.FIRST_NAME' | translate">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput required type="text" formControlName="lastName"
+        [placeholder]="'BOARD.LAST_NAME' | translate">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput required email type="email" formControlName="email"
+        [placeholder]="'BOARD.EMAIL' | translate">
+    </mat-form-field>
+
+    <ccr-date-input
+    [placeholder]="'BOARD.START_DATE' | translate"
+    [required]="false"
+    formControlName="startedAt"
+    fxFlex></ccr-date-input>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="primary" class="ccr-icon-button" (click)="onSubmit()">
+    <mat-icon>check</mat-icon> {{'GLOBAL.SAVE' | translate}}
+  </button>
+
+  <button mat-button class="ccr-icon-button" matDialogClose>
+    <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+  </button>
+</mat-dialog-actions>

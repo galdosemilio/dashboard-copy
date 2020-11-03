@@ -1,0 +1,33 @@
+@import 'variables';
+
+button {
+  background-color: var(--primary) !important;
+}
+
+ccr-popup-description {
+  color: mat-color($ccr-foreground, secondary-text);
+  background-color: mat-color($ccr-background, status-bar);
+  border-radius: 50%;
+  position: absolute;
+  right: -8px;
+  top: -5px;
+}
+
+.call-notification {
+  label {
+    margin-top: 10px;
+  }
+}
+
+.mat-icon-button {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.mat-mini-fab {
+  &.disabled {
+    color: mat-color($ccr-foreground, secondary-text) !important;
+    background-color: mat-color($ccr-background, status-bar) !important;
+  }
+}

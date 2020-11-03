@@ -1,0 +1,55 @@
+@import 'shared/directed-styles';
+
+// Generates single property classes
+// -------------------------
+@mixin property-variants($base, $property, $variants: ()) {
+  @each $size, $value in $variants {
+    #{$base}-#{$size} {
+      #{$property}: $value;
+    }
+  }
+}
+
+$margin-vertical-variants: (
+  10: 10px,
+  20: 20px,
+  40: 40px,
+  60: 60px
+);
+@include property-variants('.mt', 'margin-top', $margin-vertical-variants);
+@include property-variants('.mb', 'margin-bottom', $margin-vertical-variants);
+
+/**
+ * Selectors
+ */
+@mixin selector_filter($align) {
+  .mat-select {
+    margin: 0;
+    padding: 0;
+
+    .mat-select-trigger {
+      background: mat-color($ccr-background, tools);
+      height: 38px;
+
+      .mat-select-arrow {
+        @include horizontal-margin-right(12px);
+      }
+      .mat-select-value {
+        line-height: 36px;
+        text-align: $align;
+        padding: 0 15px;
+      }
+      .mat-select-underline {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+.patient-link {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,30 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1%">
+  <mat-grid-list cols="1" rowHeight="30px" fxFlex="49%" fxFlex.xs="98%" *ngIf="hasTimeframeSelector()">
+    <mat-grid-tile>
+      <ccr-timeframe-selector (selectedTimeframe)="updateTimeframe($event)"></ccr-timeframe-selector>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="6" rowHeight="30px" [fxFlex]="hasTimeframeSelector() ? '49%' : '100%'" fxFlex.xs="grow">
+
+    <mat-grid-tile *ngIf="allowNavigation" [colspan]="1" (click)="changeDate(false)">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="allowNavigation ? 4 : 6">
+      <div>
+        <input [matDatepicker]="picker" [max]="_limit" (dateChange)="pickerDate($event.value)">
+        <span (click)="picker.open()">
+          {{ _range }}
+        </span>
+        <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker [startAt]="_start"></mat-datepicker>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="allowNavigation" [colspan]="1" (click)="changeDate(true)" [class.disabled]="_maxReached">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

@@ -1,0 +1,47 @@
+<div>
+  <div matDialogTitle>
+    <div>
+      <span>{{ title | translate }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+  </div>
+
+  <div class="mat-dialog-separator"></div>
+
+  <mat-dialog-content>
+    <div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+      <mat-form-field>
+        <input [placeholder]="'GLOBAL.LOCALE' | translate" formControlName="locale" matInput type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [placeholder]="'GLOBAL.OPERATION' | translate" formControlName="operation">
+          <mat-option *ngFor="let operation of operations" [value]="operation.value">{{ operation.displayValue | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [placeholder]="'GLOBAL.CATEGORY' | translate" formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category.value">{{ category.displayValue | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input [placeholder]="'GLOBAL.SUBJECT' | translate" formControlName="subject" matInput type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea [placeholder]="'GLOBAL.HTML' | translate" formControlName="html" matInput cols="15" rows="10"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea [placeholder]="'GLOBAL.TEXT' | translate" formControlName="text" matInput cols="15" rows="10"></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button [disabled]="form.invalid" (click)="onSubmit()" class="ccr-button" color="primary" mat-button>{{ 'GLOBAL.SAVE' | translate }}</button>
+    <button class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CLOSE' | translate }}</button>
+  </mat-dialog-actions>
+</div>

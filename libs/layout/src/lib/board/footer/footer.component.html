@@ -1,0 +1,28 @@
+<ul>
+  <li>
+    {{ clinicName }}
+  </li>
+  <li>
+    <a href="{{ 'LINK.TERMS_OF_SERVICE' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>
+
+    <span class="text-separator">|</span>
+
+    <a href="{{ 'LINK.PRIVACY_POLICY' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
+
+    <span class="text-separator">|</span>
+
+    <a href="{{ 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>
+
+    <span class="text-separator">|</span>
+
+    <a href="{{ 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MSA' | translate }}</a>
+
+    <span class="text-separator">|</span>
+
+    <a href="{{ 'LINK.DPA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.DPA' | translate }}</a>
+  </li>
+  <li>
+    &#9400;&nbsp;{{ currentYear }}
+    <span translate [translateParams]="{ company: company }">LAYOUT.POWEREDBY</span>
+  </li>
+</ul>

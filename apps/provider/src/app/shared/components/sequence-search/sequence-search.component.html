@@ -1,0 +1,32 @@
+<div>
+    <div [hidden]="mode !== 'select'">
+        <mat-form-field class="ccr-filter" floatLabel="never" fxFlex="grow">
+            <mat-select
+            [disabled]="readonly"
+            [placeholder]="'SEQUENCING.SELECT_SEQUENCE' | translate"
+            (selectionChange)="onSequenceSelect($event.value)">
+                <mat-option [value]="''">{{ 'SEQUENCING.NO_SEQUENCES' | translate }}</mat-option>
+                <mat-option *ngFor="let sequence of sequences" [value]="sequence.id">{{ sequence.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div [hidden]="mode !== 'searchbar'" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="grow">
+            <mat-form-field fxFlex="grow">
+                <input
+                [formControl]="searchCtrl"
+                [matAutocomplete]="seqAutocomp"
+                [placeholder]="'SEQUENCING.SEARCH_BY_NAME' | translate"
+                matInput type="text">
+            </mat-form-field>
+
+            <mat-autocomplete
+            #seqAutocomp="matAutocomplete"
+            [displayWith]="searchBarDisplayWith.bind(this)"
+            (optionSelected)="onSeqAutocompleteSelect($event)">
+                <mat-option *ngFor="let sequence of sequences" [value]="sequence.id">{{ sequence.name }}</mat-option>
+            </mat-autocomplete>
+        </div>
+    </div>
+</div>

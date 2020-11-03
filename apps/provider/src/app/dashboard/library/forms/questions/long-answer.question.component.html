@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-form-field *ngIf="!readonly" [formGroup]="form" class="ccr-form-field" floatLabel="never">
+        <textarea
+            [readonly]="readonly"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="5"
+            formControlName="value"
+            matInput
+            type="text">
+        </textarea>
+    </mat-form-field>
+    <p *ngIf="readonly" [innerHTML]="parsedValue" class="ccr-form-field parsed-text"></p>
+</div>

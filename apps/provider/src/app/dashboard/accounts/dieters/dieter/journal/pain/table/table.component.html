@@ -1,0 +1,53 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source">
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell fxFlex="175px" *cdkHeaderCellDef>{{'GLOBAL.DATE' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex="175px" fxFlex.xs="grow">
+        <span>{{'GLOBAL.DATE' | translate}}</span>
+        {{ row.date | amDateFormat:'ddd, MMM D YYYY' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="details">
+      <mat-header-cell fxLayout="row" *cdkHeaderCellDef>
+        <span fxFlex="35%">{{'GLOBAL.PAIN_LOCATION' | translate}}</span>
+        <span fxFlex="65%">{{'GLOBAL.DETAILS' | translate}}</span>
+      </mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{'GLOBAL.DETAILS' | translate}}</span>
+        <div fxFlex="auto" fxLayout="column">
+          <div fxLayoutAlign="start center" fxLayout="row" *ngFor="let detail of row.details">
+            <div class="pain-region" fxFlex="35%">
+              {{ detail.region | capitalize }}
+            </div>
+            <div class="pain-description" fxFlex="65%">
+              <img src="./assets/pain/{{ detail.region }}.png" />
+              {{ 'GLOBAL.PAIN_DESCRIPTION' | translate: detail }}<br />
+              {{ detail.reportedAt | amDateFormat:'HH:mm A' }}
+              <ng-container *ngIf="detail.duration">
+                - {{ detail.duration }}
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="notes">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.NOTES' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{'GLOBAL.NOTES' | translate}}</span>
+        <mat-icon>notes</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>

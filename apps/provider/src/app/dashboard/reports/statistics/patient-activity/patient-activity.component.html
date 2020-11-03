@@ -1,0 +1,15 @@
+<div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
+  <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['weight']">
+    {{ 'REPORTS.WEIGHT_CHANGE_REPORT' | translate }}
+  </a>
+  <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['sleep']">
+    {{ 'REPORTS.SLEEP_REPORT' | translate }}
+  </a>
+  <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['steps']">
+    {{ 'REPORTS.PATIENT_STEPS' | translate }}
+  </a>
+</div>
+
+<div class="ccr-subcomponent">
+  <router-outlet></router-outlet>
+</div>

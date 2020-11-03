@@ -1,0 +1,150 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate >
+  <div fxLayout="column">
+    <mat-form-field>
+      <input matInput formControlName="title" [placeholder]="'BOARD.TITLE' | translate">
+      <mat-error *ngIf="form.get('title').getError('required')">{{'NOTIFY.ERROR.TITLE_EMPTY' | translate}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select #clinic formControlName="clinic" [placeholder]="'BOARD.CLINIC' | translate">
+        <mat-option *ngFor="let clinic of clinics" [value]="clinic.value">{{ clinic.viewValue }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <ng-container *ngIf="formSubmitted">
+      <mat-error *ngIf="form.get('clinic').getError('required')">{{'NOTIFY.ERROR.CLINIC_EMPTY' | translate}}</mat-error>
+    </ng-container>
+
+    <mat-error *ngIf="!meetingTypesOk">{{'NOTIFY.ERROR.MEETING_TYPES_NOT_CONFIGURED' | translate}}</mat-error>
+
+    <ng-container *ngIf="meetingTypesOk">
+      <mat-form-field *ngIf="meetingTypes && meetingTypes.length">
+        <mat-select formControlName="meetingTypeId" [placeholder]="'RIGHT_PANEL.MEETING_TYPE' | translate">
+          <mat-option *ngFor="let type of meetingTypes" [value]="type">{{ type.description }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="formSubmitted">
+        <mat-error *ngIf="form.get('meetingTypeId').getError('required')">{{'NOTIFY.ERROR.MEETING_TYPE_EMPTY' | translate}}</mat-error>
+      </ng-container>
+
+      <mat-form-field>
+        <input matInput formControlName="date" readonly="true" (click)="picker.open()"
+        [min]="now" [matDatepicker]="picker" [placeholder]="'GLOBAL.DATE' | translate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker type="date" #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutGap="7px">
+        <mat-form-field hideRequiredMarker="true">
+          <input matInput required formControlName="startTime" readonly="true" (click)="pickerStart.open()"
+          [min]="now" [matDatepicker]="pickerStart" [placeholder]="'BOARD.START_TIME' | translate">
+          <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker type="time" clockStep="5" #pickerStart [matDatepicker]="picker"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="duration" [placeholder]="'BOARD.DURATION' | translate">
+            <mat-option *ngFor="let d of durations" [value]="d.value">
+              {{ d.viewValue | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-error *ngIf="form.getError('validateMeetingTime')">{{ form.getError('validateMeetingTime') | translate}}</mat-error>
+      <ng-container *ngIf="formSubmitted">
+        <mat-error *ngIf="form.get('startTime').getError('required') || form.get('duration').getError('required')">{{'NOTIFY.ERROR.TIMES_EMPTY' | translate}}</mat-error>
+      </ng-container>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'RIGHT_PANEL.PARTICIPANTS' | translate" [matAutocomplete]="auto"  [formControl]="searchCtrl">
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let account of accounts" (onSelectionChange)="addParticipant(account)">
+          <p>
+            {{ account.firstName + ' ' + account.lastName }}
+            <i>{{ formatAccountType(account.accountType.id) }}</i>
+            <!-- TODO implement accountType pipe -->
+          </p>
+          <small>{{ account.email }}</small>
+        </mat-option>
+      </mat-autocomplete>
+      <div class="participants" *ngIf="attendees.length">
+        <div *ngFor="let participant of attendees" fxLayoutAlign="start center" fxLayoutGap="5px">
+          <mat-icon (click)="removeParticipant(participant.account)">close</mat-icon>
+          <span *ngIf="participant.account === user?.id">{{'GLOBAL.ME' | translate}}</span>
+          <span *ngIf="participant.account !== user?.id">{{ participant.firstName + ' ' + participant.lastName }}</span>
+          <span class="participantType" *ngIf="participant.accountType">{{ formatAccountType(participant.accountType) | translate }}</span>
+        </div>
+      </div>
+      <ng-container *ngIf="formSubmitted">
+        <mat-error *ngIf="attendees.length === 0">{{'NOTIFY.ERROR.PARTICIPANTS_EMPTY' | translate}}</mat-error>
+      </ng-container>
+
+      <mat-form-field>
+        <mat-select #repeat formControlName="repeat"
+        [placeholder]="'RIGHT_PANEL.REPEAT' | translate"
+        (selectionChange)="repeatChanged(repeat.value)">
+          <mat-option *ngFor="let option of repeatOptions" [value]="option.value">{{ option.viewValue | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="formSubmitted">
+        <mat-error *ngIf="form.get('repeat').getError('required')">{{'NOTIFY.ERROR.REPEAT_EMPTY' | translate}}</mat-error>
+      </ng-container>
+
+      <ng-container *ngIf="repeat.value != 'never' && repeat.value != undefined">
+        <div fxLayoutAlign="start center" fxLayoutGap="7px">
+          <mat-form-field>
+            <mat-select #endRepeat formControlName="endRepeat"
+            [placeholder]="'RIGHT_PANEL.END_REPEAT' | translate"
+            (selectionChange)="endRepeatChanged(endRepeat.value)">
+              <mat-option *ngFor="let option of endRepeatOptions" [value]="option.value">
+                {{ option.viewValue | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ccr-align-right" *ngIf="form.get('endRepeat').value !== 'never'">
+            <input matInput numberOnly formControlName="endAfter">
+            <span matSuffix>{{'UNIT.TIMES' | translate}}</span>
+          </mat-form-field>
+        </div>
+      </ng-container>
+
+      <ng-container formGroupName="location">
+        <mat-form-field>
+          <input matInput formControlName="streetAddress" [placeholder]="'BOARD.STREET' | translate">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="city" [placeholder]="'BOARD.CITY' | translate">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="state" [placeholder]="'BOARD.STATE' | translate">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="postalCode" [placeholder]="'BOARD.POSTAL_CODE' | translate">
+        </mat-form-field>
+        <div *ngIf="formUtils.hasErrors(form)">
+          <mat-error *ngIf="formUtils.getError('validateAddress')">{{ formUtils.getError('validateAddress') | translate }}</mat-error>
+        </div>
+      </ng-container>
+
+      <div class="action-buttons" *ngIf="!editing">
+        <a mat-button color="primary" (click)="onSubmit()" class="ccr-icon-button">
+          <mat-icon>add</mat-icon>
+          {{'RIGHT_PANEL.SAVE_MEETING' | translate}}
+        </a>
+      </div>
+      <div class="action-buttons" *ngIf="editing">
+        <a mat-button color="primary" class="ccr-icon-button"
+        [title]="'GLOBAL.UPDATE' | translate" (click)="onSubmit()">
+          <mat-icon>check</mat-icon>
+          {{'GLOBAL.UPDATE' | translate}}
+        </a>
+        <a mat-button class="ccr-icon"
+        [title]="'GLOBAL.CANCEL' | translate" (click)="onCancel()">
+          <mat-icon>clear</mat-icon>
+        </a>
+      </div>
+    </ng-container>
+
+  </div>
+</form>

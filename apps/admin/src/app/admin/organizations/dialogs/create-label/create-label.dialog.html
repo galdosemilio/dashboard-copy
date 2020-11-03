@@ -1,0 +1,42 @@
+<div matDialogTitle>
+  <div>
+    <span matDialogTitle [innerHTML]="'GLOBAL.CREATE' | translate"></span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input
+    [placeholder]="'GLOBAL.TITLE' | translate"
+    [readonly]="isLoading"
+    formControlName="title"
+    matInput
+    required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea
+    [placeholder]="'LABEL.DESCRIPTION' | translate"
+    [readonly]="isLoading"
+    formControlName="description"
+    mat-autosize
+    matAutosizeMinRows="2"
+    matAutosizeMaxRows="6"
+    matInput
+    required>
+    </textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button [disabled]="isLoading" class="ccr-button" mat-button matDialogClose>
+    <span>{{ 'GLOBAL.CANCEL' | translate }}</span>
+  </button>
+
+  <button [disabled]="isLoading" (click)="onSubmit()" class="ccr-button" color="primary" mat-button>
+    <span>{{ 'GLOBAL.CREATE' | translate }}</span>
+  </button>
+</mat-dialog-actions>

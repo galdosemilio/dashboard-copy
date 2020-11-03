@@ -1,0 +1,20 @@
+@import 'variables';
+
+.disabled {
+  color: mat-color($ccr-foreground, secondary-text);
+}
+
+.form {
+  > div {
+    max-height: 36px;
+  }
+}
+
+.question-form-label {
+  color: mat-color($ccr-foreground, text);
+  margin: 15px 0;
+}
+
+.cdk-textarea-autosize {
+  width: calc(100% - 30px);
+}

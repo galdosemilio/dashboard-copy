@@ -1,0 +1,41 @@
+
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="end">
+    <h2 fxFlex>{{'SIDENAV.SCHEDULE_AVAILABLE' | translate}}</h2>
+  </div>
+</div>
+
+<div fxLayout="column" fxLayoutGap="10px">
+
+  <div fxFlex="0 1 100%" fxLayoutGap="10px" fxLayoutAlign.gt-md="space-between end" fxLayout="column" fxLayout.gt-xs="row">
+    <div fxLayoutWrap fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout="column" fxLayout.gt-xs="row">
+      <span>{{'BOARD.HAVE_VACATION' | translate}}</span>
+      <a mat-button class="ccr-icon-button" style="min-width: 172px;" (click)="addUnavailableForm()">
+        <mat-icon>do_not_disturb</mat-icon>
+        <span>{{'BOARD.ADD_UNAVAILABLE_TIME' | translate}}</span>
+      </a>
+    </div>
+
+    <div fxLayoutAlign.xs="center" fxLayoutAlign="end">
+      <ccr-select-user
+        [title]="'BOARD.SELECT_AVAILABILITY' | translate"
+        [default]="'BOARD.MY_AVAILABILITY' | translate"
+        [onlyProviders]="true"
+      ></ccr-select-user>
+    </div>
+  </div>
+
+  <div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['recurring']">
+      {{'BOARD.RECURRING_AVAILABILITY' | translate}}
+    </a>
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['single']">
+      {{'BOARD.SINGLE_DAY_AVAILABILITY' | translate}}
+    </a>
+  </div>
+
+  <div class="ccr-subcomponent">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

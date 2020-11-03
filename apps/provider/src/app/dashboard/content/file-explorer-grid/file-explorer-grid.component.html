@@ -1,0 +1,42 @@
+<div class="ccr-htools" fxLayout="row" fxLayoutAlign="space-between center">
+  <ul class="ccr-breadcrumbs">
+    <li fxFlex="nogrow">
+      <a [class.selected]="!route.length" (click)="goToRoute(-1)" fxLayoutAlign=" center">
+        <span>{{ 'LIBRARY.CONTENT.ROOT' | translate }}</span>
+      </a>
+    </li>
+    <ng-container *ngFor="let r of route; let i = index;">
+      <li fxFlex="nogrow" fxLayoutAlign=" stretch">
+        <mat-icon>chevron_right</mat-icon>
+        <a [class.selected]="i === route.length - 1" (click)="goToRoute(i)" fxLayoutAlign=" center"
+        [ccrDropzone]="{ data: r, isDroppable: true }" (ccrDrop)="dropContent($event)">
+          <span>{{ r.name }}</span>
+        </a>
+      </li>
+    </ng-container>
+  </ul>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="1%">
+    <div class="directory-wrapper">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="row wrap" fxLayoutGap="4%" fxFlex="0 0 100%">
+                <div class="ccr-align-center directory" [class.highlighted]="selectedContentId === content.id" fxLayout="column"
+                    fxLayoutAlign="center center" *ngFor="let content of contentDirectories;" fxFlex="90px"
+                    (dblclick)="openDirectory(content)" (click)="selectDirectory(content)" [ccrDraggable]="{ data: content, isDraggable: !content.isForeign }"
+                    [ccrDropzone]="{ data: content, isDroppable: content.isFolder }" (ccrDrop)="dropContent($event)">
+                    <mat-icon class="directory-icon" *ngIf="content.isFolder" [innerHTML]="content.isPublic ? 'folder_shared' : 'folder'"></mat-icon>
+                    <mat-icon class="directory-icon" *ngIf="!content.isFolder" [fontSet]="content.icon.set" [fontIcon]="content.icon.name">
+                        {{ content.icon.set ? '' : content.icon.name }}
+                    </mat-icon>
+                    <strong class="directory-name">{{ content.name }}</strong>
+                </div>
+                <div class="ccr-align-center directory" fxLayout="column" fxLayoutAlign="center center"
+                    (click)="loadMore()" *ngIf="contentDirectories && source.next">
+                    <mat-icon class="directory-icon">more_horiz</mat-icon>
+                    <strong class="directory-name">{{ 'LIBRARY.CONTENT.LOAD_MORE' | translate }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

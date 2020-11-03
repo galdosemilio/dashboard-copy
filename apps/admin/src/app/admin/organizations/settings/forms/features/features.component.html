@@ -1,0 +1,85 @@
+<mat-grid-list [cols]="1" [formGroup]="form" rowHeight="70px">
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-video"
+    [inheritable]="true"
+    [label]="'GLOBAL.VIDEOCONFERENCE' | translate"
+    formControlName="videoconference"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-library"
+    [inheritable]="false"
+    [label]="'GLOBAL.DIGITAL_LIBRARY' | translate"
+    formControlName="content"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-messaging"
+    [inheritable]="true"
+    [label]="'GLOBAL.MESSAGING' | translate"
+    formControlName="messaging"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-openClient"
+    [inheritable]="true"
+    [label]="'GLOBAL.OPEN_PATIENT_ENROLLMENT' | translate"
+    formControlName="openAddClient"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-patientAutoDisassociate"
+    [inheritable]="false"
+    [label]="'GLOBAL.PATIENT_AUTOMATIC_DISASSOCIATION' | translate"
+    formControlName="patientAutoUnenroll"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-sequences"
+    [inheritable]="false"
+    [label]="'GLOBAL.SEQUENCES' | translate"
+    formControlName="sequences"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-rpm"
+    [inheritable]="true"
+    [label]="'GLOBAL.RPM' | translate"
+    formControlName="rpm"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-filevault"
+    [inheritable]="true"
+    [label]="'GLOBAL.FILE_VAULT' | translate"
+    formControlName="fileVault"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-autoenroll"
+    [inheritable]="false"
+    [label]="'GLOBAL.AUTO_ENROLL_CLIENT' | translate"
+    formControlName="autoEnroll">
+    </ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="form?.value.autoEnroll">
+    <div fxFlex fxLayout="column" fxLayoutAlign="start start">
+      <ccr-organizations-label-selector
+        [orgId]="orgId"
+        [packages]="clientPackages"
+        (packagesChange)="form && form.updateValueAndValidity()"
+        ccrBindForm="autoEnrollClientLabelId">
+      </ccr-organizations-label-selector>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

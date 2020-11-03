@@ -1,0 +1,29 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center">
+    <h2 fxFlex>{{ 'ADMIN.ORGS.TITLE' | translate }}</h2>
+
+    <a mat-button color="primary" class="ccr-icon-button"
+    fxFlex="initial" fxFlex.xs="100%" routerLink="create">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'GLOBAL.CREATE' | translate }}</span>
+    </a>
+  </div>
+
+  <div class="ccr-filters" fxLayout="row" fxLayoutAlign=" center">
+    <ccr-filter-organizations
+      fxFlex="initial" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign=" center"
+      [source]="source"
+    ></ccr-filter-organizations>
+
+    <ccr-paginator fxFlex="initial" fxFlexFill #paginator
+      [length]="source.total"
+      [pageIndex]="0"
+      [pageSize]="10"
+    ></ccr-paginator>
+  </div>
+</div>
+
+<ccr-organizations-table
+  [source]="source"
+  [columns]="columns"
+></ccr-organizations-table>

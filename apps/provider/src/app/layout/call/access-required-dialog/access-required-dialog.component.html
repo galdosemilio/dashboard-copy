@@ -1,0 +1,18 @@
+<div matDialogTitle>
+  <div>
+    <span>
+      <span>{{ 'CALL.ALLOW_DEVICES' | translate }}</span>
+    </span>
+  </div>
+</div>
+
+<mat-dialog-content>
+  <p>{{ 'CALL.PERMISSION_INFO' | translate:{org: organization && organization.name} }}</p>
+  <p *ngIf="showAdditionalInfoNotice">{{ 'CALL.ADDITIONAL_PERMISSION_INFO' | translate }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions *ngIf="deviceAvailability">
+  <button mat-button color="primary" class="ccr-button" [matDialogClose]="deviceAvailability">
+    {{ 'GLOBAL.OK' | translate }}
+  </button>
+</mat-dialog-actions>

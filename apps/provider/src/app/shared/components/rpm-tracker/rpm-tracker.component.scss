@@ -1,0 +1,55 @@
+@import 'variables';
+
+:host {
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  color: var(--primary);
+}
+
+button {
+  padding: 10px 10px 10px 10px;
+}
+
+.iteration-count {
+  color: lighten(mat-color($ccr-background, success), 20%);
+  text-align: center;
+  width: 23px;
+
+  mat-icon {
+    line-height: 15px;
+    font-size: 12px;
+    height: 12px;
+    position: relative;
+    top: 0.1px;
+    width: 12px;
+  }
+}
+
+.no-tracking-notice {
+  margin-top: 10px !important;
+}
+
+.rpm-status-panel-container {
+  background-color: white;
+  margin-right: 64px;
+  position: absolute;
+  top: 96px;
+  right: -20px;
+  z-index: 9999;
+}
+
+.timer {
+  line-height: 24px;
+  position: relative;
+  top: -5px;
+}
+
+mat-icon {
+  left: 3px;
+  position: relative;
+  top: -5px;
+}
+
+span {
+  line-height: 5px;
+}

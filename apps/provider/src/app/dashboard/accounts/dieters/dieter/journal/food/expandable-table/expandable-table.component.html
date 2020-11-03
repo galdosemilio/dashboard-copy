@@ -1,0 +1,134 @@
+<ccr-datasource-overlay class="ccr-table ccr-expand-table ccr-table-stats" [source]="source">
+
+  <ng-template #empty>-</ng-template>
+
+  <mat-table [dataSource]="source">
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
+        <div (click)="toggleRow(row)" class="expandable" [ngClass]="{ 'non-empty': !row.isEmpty && row.level < 2 }" fxLayoutAlign=" start">
+          <i *ngIf="row.level < 2 && !row.isEmpty" aria-hidden="true"
+            class="material-icons" [class.active]="row.isExpanded">
+          </i>
+          <span *ngIf="row.level === 0">
+            {{ row.consumedDate | amDateFormat:'dddd, MMM D' }}
+          </span>
+          <div *ngIf="row.image?.thumbnail" (click)="onOpenThumbnail(row)" class="meal-image-thumbnail" [ngClass]="{'clickable' : row.image.thumbnail !== 'assets/image-placeholder.png'}">
+            <img [src]="row.image.thumbnail">
+          </div>
+          <span *ngIf="row.level !== 0">
+            <span [class.meal-name]="row.level > 1">{{ row.level === 1 ? (row.type | translate) : row.name }}</span>
+            <br *ngIf="row.serving">
+            <small *ngIf="row.serving" class="lowercase-text serving-amount">
+              {{ row.serving | fraction }} {{ 'GLOBAL.FOOD_KEYS' | translate }}
+            </small>
+            <br *ngIf="row.level !== 1 && !row.consumedAtMidnight">
+            <small *ngIf="row.level !== 1 && !row.consumedAtMidnight">{{ row.consumedDate | amDateFormat:'h:mm a' }}</small>
+            <div *ngIf="row.serving">
+              <small>
+                <p *ngFor="let ingredient of row.ingredients" class="ingredient-item">
+                  {{ ingredient.ingredient.name }}
+                  <span *ngIf="ingredient.ingredient.brand">({{ ingredient.ingredient.brand }})</span><br />
+                  <span class="lowercase-text">{{ ingredient.quantity }} x {{ ingredient.description }}</span>
+                </p>
+              </small>
+            </div>
+          </span>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="calories">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CALORIES' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
+        <span>{{ 'BOARD.CALORIES' | translate }}</span>
+        <ng-container *ngIf="row.calories; else empty">
+          {{ row.calories | number }}
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="protein">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.PROTEIN' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
+        <span>{{ 'BOARD.PROTEIN' | translate }}</span>
+        <ng-container *ngIf="row.protein; else empty">
+          {{ (row.protein / 1000).toFixed(0) | number }}
+          <small>{{ 'UNIT.G' | translate }}</small>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="carb">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CARB' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
+        <span>{{ 'BOARD.CARB' | translate }}</span>
+        <ng-container *ngIf="row.carbohydrate; else empty">
+          <div fxLayout="column" fxLayoutAlign="start end" fxLayoutAlign.xs="start start">
+            <div>
+              {{ (row.carbohydrate / 1000).toFixed(0) | number }}
+              <small>{{ 'UNIT.G' | translate }}</small>
+            </div>
+            <div fxLayout="column" class="day-summary" fxLayoutAlign="space-around end">
+              <span>
+                {{ 'BOARD.FIBER' | translate }} {{ row.fiber / 1000 | number:'1.0-1' }}
+                <small>{{ 'UNIT.G' | translate }}</small>
+              </span>
+              <span>
+                <ccr-popup-description
+                class="small-popup-description"
+                [title]="'BOARD.NET_CARBS' | translate"
+                [description]="'BOARD.NET_CARBS_DESCRIPTION' | translate"
+                ></ccr-popup-description>
+                {{ 'BOARD.NET_CARBS' | translate }} {{ row.netCarbs / 1000 | number:'1.0-1' }}
+                <small>{{ 'UNIT.G' | translate }}</small>
+              </span>
+              <span>
+                {{ 'BOARD.SUGAR' | translate }} {{ row.sugar / 1000 | number:'1.0-1' }}
+                <small>{{ 'UNIT.G' | translate }}</small>
+              </span>
+            </div>
+          </div>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="fat">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.FAT' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
+        <span>{{ 'BOARD.FAT' | translate }}</span>
+        <ng-container *ngIf="row.totalFat; else empty">
+          <div fxLayout="column" fxLayoutAlign="start end" fxLayoutAlign.xs="start start">
+            <div>
+              {{ (row.totalFat / 1000).toFixed(0) | number }}
+              <small>{{ 'UNIT.G' | translate }}</small>
+            </div>
+
+            <div fxLayout="column" class="day-summary" fxLayoutAlign="space-around end">
+              <span>
+                {{ 'BOARD.SAT_FAT' | translate }} {{ row.saturatedFat / 1000 | number:'1.0-1' }}
+                <small>{{ 'UNIT.G' | translate }}</small>
+              </span>
+            </div>
+
+          </div>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      class="level{{row.level}}" [ngClass]="{
+        'row-even': even,
+        'row-odd': odd,
+        'hidden': row.isHidden,
+        'row-expanded': row.isExpanded,
+        'row-nested': row.level > 0,
+        'row-bottom-border': row.level > 1
+      }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>

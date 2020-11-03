@@ -1,0 +1,143 @@
+/* register clinic */
+ccr-page-register-clinic {
+  mat-radio-button {
+    display: inline;
+    line-height: 150%;
+    .mat-radio-label-content {
+      white-space: normal;
+    }
+  }
+
+  .mat-step-header {
+    border-radius: 50%;
+    user-select: none;
+    width: 24px;
+    .mat-step-header-ripple {
+      border-radius: 50%;
+    }
+    .mat-step-icon,
+    .mat-step-icon-not-touched {
+      margin-left: -4px;
+      height: 32px;
+      width: 32px;
+    }
+  }
+
+  .section-header {
+    background-color: mat-color($ccr-background, 'header');
+    border-radius: 3px;
+    color: var(--primary, mat-color($ccr-primary));
+    font-size: 20px;
+    margin: 25px 0px;
+    padding: 7px 12px;
+    text-align: center;
+  }
+
+  a {
+    color: var(--primary, mat-color($ccr-primary)) !important;
+  }
+
+  p {
+    font-size: 18px;
+
+    &.by-continuing {
+      font-size: 90%;
+      margin-top: 1em;
+      text-align: center;
+    }
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+  .mat-form-field-underline {
+    display: none;
+  }
+  .mat-form-field-infix {
+    border-radius: 5px;
+    border: 1px solid mat-color($ccr-foreground, base);
+  }
+  .mat-form-field-invalid .mat-form-field-infix {
+    border: 1px solid var(--warn, mat-color($ccr-warn));
+  }
+  .mat-form-field-placeholder,
+  .mat-select-placeholder {
+    font-size: 16px;
+    letter-spacing: 0.02rem;
+    text-transform: none;
+    padding-left: 10px;
+    // top: 1.38125em;
+  }
+  .mat-select-value {
+    font-size: 15px;
+    padding-bottom: 1px;
+  }
+  .mat-select-value-text > span {
+    padding-left: 10px;
+  }
+  .mat-input-element {
+    font-size: 16px;
+    text-indent: 10px;
+  }
+  .mat-form-field-label-wrapper {
+    left: 10px;
+  }
+
+  .nextStep {
+    border-radius: 18px;
+    border: 2px solid mat-color($ccr-foreground, base);
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 35px;
+    padding: 0 42px;
+    text-transform: uppercase;
+
+    .mat-button-ripple {
+      border-radius: 18px;
+    }
+
+    &[disabled] {
+      background-color: mat-color($ccr-background, disabled-button);
+      border-color: mat-color($ccr-foreground, disabled);
+    }
+  }
+
+  .mat-horizontal-stepper-content:last-child {
+    p {
+      text-align: center;
+    }
+  }
+
+  .mat-option-text {
+    font-size: 15px;
+  }
+
+  .stripe-form {
+    .card-number,
+    .card-expiry,
+    .card-cvc {
+      border-radius: 5px;
+      border: 1px solid mat-color($ccr-foreground, base);
+      padding: 0.6375em 10px;
+      margin-bottom: 20px;
+    }
+    .error-message {
+      color: mat-color($ccr-warn);
+    }
+  }
+
+  mat-radio-group.mat-radio-group.ccr-radio-group {
+    .mat-radio-inner-circle {
+      height: 30px;
+      left: -5px;
+      top: -5px;
+      width: 30px;
+    }
+
+    mat-radio-button.mat-radio-checked {
+      .mat-radio-outer-circle {
+        border-width: unset;
+      }
+    }
+  }
+}

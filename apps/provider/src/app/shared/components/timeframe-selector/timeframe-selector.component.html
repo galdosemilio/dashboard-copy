@@ -1,0 +1,7 @@
+<mat-select
+    [(ngModel)]="timeframe" (selectionChange)="processAndEmit()">
+    <mat-option *ngFor="let view of viewby" [value]="view.value"
+    class="ccr-align-center" [class.ccr-embedded]="embedded">
+    {{ view.viewValue | translate }}
+    </mat-option>
+</mat-select>

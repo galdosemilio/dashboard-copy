@@ -1,0 +1,55 @@
+<p>
+  {{'BOARD.RECURRING_AVAILABILITY_NOTE' | translate}}
+</p>
+
+<div class="mat-availability" fxLayout="column" fxLayoutGap="10px">
+
+  <div class="mat-availability-row" fxLayout.xs="column" fxLayoutGap.xs="0px" fxLayoutGap="15px" *ngFor="let segment of segments">
+    <div class="mat-availability-col" fxLayout="row" fxLayoutAlign="start stretch" >
+      <span class="mat-availability-title" fxFlex.xs="0 0 45%" fxShow.xs fxHide>{{'GLOBAL.DAY' | translate}}</span>
+      <strong fxFlex.xs="0 0 45%" fxShow.xs fxHide>{{ days[segment.day] }}</strong>
+      <span fxFlex="1 1 115px" fxShow fxHide.xs>{{ isFirst(segment) ? days[segment.day] : '' }}</span>
+    </div>
+
+    <div class="mat-availability-col" fxLayout="row" *ngIf="segment.id">
+      <span class="mat-availability-title" fxFlex.xs="0 0 45%" fxShow.xs fxHide>{{'BOARD.START_TIME' | translate}}</span>
+      <span fxFlex.xs="0 0 45%" fxShow.xs fxHide>{{ showTimeInFormat(segment.start) }}</span>
+      <span class="mat-availability-value" fxFlex="1 0 130px" fxShow fxHide.xs>{{ showTimeInFormat(segment.start) }}</span>
+    </div>
+    <div class="mat-availability-col" fxLayout="row" *ngIf="!segment.id" fxShow fxHide.xs>
+      <span class="mat-availability-value mat-availability-empty" fxFlex="1 0 130px" fxShow fxHide.xs>{{'BOARD.START_TIME' | translate}}</span>
+    </div>
+
+    <div class="mat-availability-col" fxFlex="0 0 20px" fxShow fxHide.xs>
+      <span>{{'GLOBAL.TO' | translate}}</span>
+    </div>
+
+    <div class="mat-availability-col" fxLayout="row" *ngIf="segment.id">
+      <span class="mat-availability-title" fxFlex.xs="0 0 45%" fxShow.xs fxHide>{{'BOARD.END_TIME' | translate}}</span>
+      <span fxFlex.xs="0 0 45%" fxShow.xs fxHide>{{ showTimeInFormat(segment.end) }}</span>
+      <span class="mat-availability-value" fxFlex="1 0 130px" fxHide.xs>{{ showTimeInFormat(segment.end) }}</span>
+    </div>
+    <div class="mat-availability-col" fxLayout="row" *ngIf="!segment.id" fxShow fxHide.xs>
+      <span class="mat-availability-value mat-availability-empty" fxFlex="1 0 130px" fxShow fxHide.xs>{{'BOARD.END_TIME' | translate}}</span>
+    </div>
+
+    <div class="mat-availability-col" *ngIf="segment.id">
+      <button mat-icon-button class="ccr-icon-button" fxFlex.xs="0 0 30px"
+      [attr.aria-label]="'BOARD.DELETE_AVAILABILITY' | translate" (click)="deleteSegment(segment)">
+        <mat-icon>delete</mat-icon>
+        <span fxShow.xs fxHide>{{'GLOBAL.DELETE' | translate}}</span>
+      </button>
+    </div>
+    <div class="mat-availability-col" *ngIf="!segment.id">
+      <button mat-icon-button class="ccr-icon-button" fxFlex.xs="0 0 30px"
+      [attr.aria-label]="'BOARD.ADD_BLOCK_OF_TIME' | translate" (click)="openDialog(segment)">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span fxShow.xs fxHide>{{'BOARD.ADD_BLOCK_OF_TIME' | translate}}</span>
+      </button>
+    </div>
+  </div>
+
+  <button mat-button class="ccr-button mat-availability-action" (click)="deleteAll()">
+    <span>{{'GLOBAL.RESET_ALL' | translate}}</span>
+  </button>
+</div>

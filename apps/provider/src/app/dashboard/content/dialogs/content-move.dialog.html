@@ -1,0 +1,40 @@
+
+<div matDialogTitle>
+  <div>
+    <ccr-icon-move-folder></ccr-icon-move-folder>
+    <span>{{ 'LIBRARY.CONTENT.MOVE_CONTENT' | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content>
+    <div>
+        <app-content-file-explorer-content-selector
+        [opts]="selectorOpts"
+        [organization]="organization"
+        [mode]="mode"
+        (contentSelected)="selectedContent = $event">
+        </app-content-file-explorer-content-selector>
+    </div>
+    <strong>
+      <span class="moving-cta">{{ 'LIBRARY.CONTENT.MOVING' | translate }}</span>
+    </strong>
+    <div fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="center center">
+        <app-content-file-explorer-content [content]="data.content" *ngIf="data && data.content"></app-content-file-explorer-content>
+        <mat-icon class="moving-icon" *ngIf="selectedContent">chevron_right</mat-icon>
+        <app-content-file-explorer-content [content]="selectedContent" *ngIf="selectedContent"></app-content-file-explorer-content>
+    </div>
+</div>
+
+<mat-dialog-actions>
+    <button mat-button color="primary" class="ccr-button"
+    (click)="moveContent()" [disabled]="shouldDisableMoveButton()">
+      {{ 'LIBRARY.CONTENT.MOVE_CONTENT' | translate }}
+    </button>
+
+    <button mat-button class="ccr-button" (click)="closeDialog()">
+      {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

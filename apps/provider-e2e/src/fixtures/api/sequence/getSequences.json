@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "first sequence",
+      "createdAt": "2019-08-26 18:40:20.146+00",
+      "createdBy": {
+        "id": "1"
+      },
+      "isActive": true,
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      }
+    },
+    {
+      "id": "2",
+      "name": "second sequence",
+      "createdAt": "2019-08-27 18:40:20.146+00",
+      "createdBy": {
+        "id": "1"
+      },
+      "isActive": true,
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      }
+    },
+    {
+      "id": "3",
+      "name": "third sequence",
+      "createdAt": "2019-08-28 18:40:20.146+00",
+      "createdBy": {
+        "id": "1"
+      },
+      "isActive": true,
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      }
+    }
+  ],
+  "pagination": {}
+}

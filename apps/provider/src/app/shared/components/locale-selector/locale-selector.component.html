@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayoutGap="5px">
+  <mat-form-field [class.readonly]="isReadonly" floatLabel="always">
+    <input matInput type="text" readonly
+      [placeholder]="placeholder"
+      [required]="isRequired"
+      [attr.disabled]="isReadonly ? '' : null"
+      [value]="displayValue"
+      (input)="onChange($event.target.value)"
+      (blur)="propagateTouch()"
+      (change)="$event.stopPropagation()">
+  </mat-form-field>
+
+  <button type="button" mat-flat-button color="accent" (click)="openDialog()">{{ 'GLOBAL.SELECT' | translate }}</button>
+</div>

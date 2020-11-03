@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "firstName": "Eric ",
+      "lastName": "Di Bari",
+      "email": "eric@websprout.org",
+      "accountType": {
+        "id": "2",
+        "title": "Provider"
+      },
+      "organizations": [
+        {
+          "id": "6955",
+          "name": "Center for Medical Weight Loss",
+          "createdAt": "2019-01-01T16:47:03.785945+00:00",
+          "accessType": "association"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "firstName": "Eric ",
+      "lastName": "Di Bari",
+      "email": "eric.dibari@gmail.com",
+      "accountType": {
+        "id": "3",
+        "title": "Client"
+      },
+      "organizations": [
+        {
+          "id": "6955",
+          "name": "Center for Medical Weight Loss",
+          "createdAt": "2019-01-01T16:47:03.785945+00:00",
+          "accessType": "association"
+        }
+      ]
+    }
+  ],
+  "pagination": {}
+}

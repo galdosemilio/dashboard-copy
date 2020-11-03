@@ -1,0 +1,40 @@
+@import 'shared/directed-styles';
+
+$line-height: 21px;
+$padding: 7px;
+
+.mat-column-date {
+  &.mat-cell {
+    align-self: start;
+    line-height: $line-height * 2;
+    padding: $padding 0;
+  }
+}
+
+.mat-column-details {
+  &.mat-header-cell span {
+    text-align: left;
+  }
+
+  .pain-region {
+    line-height: $line-height * 2;
+    padding: $padding 0;
+    text-align: left;
+  }
+  .pain-description {
+    line-height: $line-height;
+    min-height: $line-height * 2;
+    padding: $padding 0;
+    text-align: left;
+  }
+
+  img {
+    float: left;
+    height: $line-height * 2;
+    @include horizontal-margin-right(12px);
+  }
+}
+
+.mat-column-notes {
+  justify-content: center !important;
+}

@@ -1,0 +1,54 @@
+<div class="ccr-htools">
+    <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <a mat-button color="primary" class="ccr-icon-button" fxFlex="0 0 auto" (click)="createFormAddendum()">
+            <mat-icon>add</mat-icon>
+            <span>{{ 'LIBRARY.FORMS.ADD_ADDENDUM' | translate }}</span>
+        </a>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutAlign="end center">
+        <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="source.total"
+        [pageIndex]="source.pageIndex"
+        [pageSize]="source.pageSize"
+        (page)="source.pageIndex = $event.pageIndex"
+        ></ccr-paginator>
+    </div>
+</div>
+
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+    <div class="ccr-edit-table">
+        <mat-table [dataSource]="source">
+            <ng-container cdkColumnDef="createdAt">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                    <span>{{ 'GLOBAL.DATE' | translate }}</span>
+                    {{ row.createdAt | amDateFormat:'ddd LL @ hh:mm A' }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="content">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.ADDENDUM_CONTENT' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                    <span>{{ 'LIBRARY.FORMS.ADDENDUM_CONTENT' | translate }}</span>
+                    {{ row.content | maxChars:25 }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.ACTIONS' | translate }}</mat-header-cell>
+                <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
+                    <mat-icon (click)="viewFormAddendum(row)" [matTooltip]="'LIBRARY.FORMS.VIEW_ADDENDUM_TOOLTIP' | translate">
+                        launch
+                    </mat-icon>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+            <mat-row fxLayoutWrap
+              *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+              [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+              class="clickable"
+            ></mat-row>
+        </mat-table>
+    </div>
+</ccr-datasource-overlay>

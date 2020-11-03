@@ -1,0 +1,21 @@
+@import 'variables';
+
+.preview-icon {
+  color: mat-color($ccr-foreground, icon);
+  margin-left: 10px;
+}
+
+.section {
+  background-color: mat-color($ccr-contrast, A700);
+  padding: 0;
+
+  .message {
+    background-color: mat-color($ccr-background, app-bar);
+    border-radius: 10px;
+    padding: 10px 20px 10px 10px;
+
+    &-remove {
+      margin-top: 10px;
+    }
+  }
+}

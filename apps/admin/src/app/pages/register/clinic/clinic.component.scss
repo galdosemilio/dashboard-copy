@@ -1,0 +1,25 @@
+@import 'variables';
+
+::ng-deep .hide-header .mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}
+
+.logo-wrapper {
+  margin: 0 auto;
+  width: 35%;
+
+  img {
+    height: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: $xs-max) {
+  .logo-wrapper {
+    width: 70%;
+  }
+}

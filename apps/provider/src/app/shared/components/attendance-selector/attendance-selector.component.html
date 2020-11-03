@@ -1,0 +1,10 @@
+<div [formGroup]="form">
+    <mat-select
+    placeholder="{{ 'BOARD.SCHEDULE_ATTENDANCE_UNTRACKED' | translate }}"
+    class="attendanceSelector"
+    formControlName="attendanceStatus">
+        <mat-option *ngFor="let option of attendanceStatusOptions" [value]="option.id">
+            {{ option.name | translate }}
+        </mat-option>
+    </mat-select>
+</div>

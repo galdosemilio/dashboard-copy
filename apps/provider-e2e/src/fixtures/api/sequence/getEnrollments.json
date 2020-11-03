@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": "11",
+      "account": {
+        "id": "292",
+        "firstName": "Eric",
+        "lastName": "Di Bari"
+      },
+      "isActive": true,
+      "createdAt": "2019-08-27T13:40:57.479Z",
+      "sequence": {
+        "id": "11063",
+        "organization": {
+          "id": "30",
+          "name": "CoachCare"
+        },
+        "name": "an eric test 1"
+      }
+    }
+  ],
+  "pagination": {}
+}

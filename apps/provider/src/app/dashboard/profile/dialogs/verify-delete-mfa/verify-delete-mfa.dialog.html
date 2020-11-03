@@ -1,0 +1,40 @@
+<mat-dialog-content>
+<div fxLayout="column" fxLayoutAlign="center stretch">
+    <div [ngSwitch]="mode">
+        <p *ngSwitchCase="'sms'" [innerHTML]="'PROFILE.MFA.SMS_DELETE_HINT' | translate:{ phone: maskedPhone }"></p>
+        <p *ngSwitchCase="'auth'" [innerHTML]="'PROFILE.MFA.AUTH_DELETE_HINT' | translate"></p>
+        <p *ngSwitchCase="'backup_code'" [innerHTML]="'PROFILE.MFA.BACKUP_CODE_DELETE_HINT' | translate"></p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
+        <mat-form-field fxFlex>
+            <input
+            [placeholder]="mode === 'backup_code' ? ('PROFILE.MFA.BACKUP_CODE' | translate) : ('PROFILE.MFA.VERIFICATION_CODE' | translate)"
+            formControlName="code"
+            matInput
+            required>
+        </mat-form-field>
+    </form>
+
+    <p
+    *ngIf="mode !== 'backup_code'"
+    (click)="onUseBackupCode()"
+    class="clickable link"
+    color="primary">{{ 'PROFILE.MFA.USE_BACKUP_CODE' | translate }}</p>
+    <p
+    *ngIf="mode === 'backup_code'"
+    (click)="onUseVerificationCode()"
+    class="clickable link"
+    color="primary">{{ 'PROFILE.MFA.USE_VERIFICATION_CODE' | translate }}</p>
+</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button
+    (click)="onSubmit()"
+    [disabled]="isLoading || form.invalid"
+    class="ccr-button"
+    color="primary"
+    mat-button>{{ 'GLOBAL.SUBMIT' | translate }}</button>
+    <button [disabled]="isLoading" class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CANCEL' | translate }}</button>
+</mat-dialog-actions>

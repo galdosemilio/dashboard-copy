@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "description": "Weight regained alert",
+      "code": "weight-regained"
+    },
+    {
+      "id": "2",
+      "description": "Inactivity alert",
+      "code": "inactivity"
+    },
+    {
+      "id": "3",
+      "description": "Weight threshold alert",
+      "code": "weight-threshold"
+    }
+  ],
+  "pagination": {}
+}

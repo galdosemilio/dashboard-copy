@@ -1,0 +1,57 @@
+{
+    "id": "12540",
+    "account": "292",
+    "type": "breakfast",
+    "note": null,
+    "consumed_date": "2018-12-12",
+    "created_at": "2018-12-12T20:03:38.607Z",
+    "serving": 2,
+    "meal_id": "4995",
+    "name": "oats",
+    "image_url": null,
+    "category": null,
+    "calories": 10360,
+    "carbohydrate": 1998000,
+    "available_carbohydrate": null,
+    "cholesterol": 0,
+    "protein": 222000,
+    "fiber": 222000,
+    "sugar": null,
+    "total_fat": 185000,
+    "saturated_fat": null,
+    "sodium": 14060,
+    "potassium": 10360,
+    "favorite": false,
+    "ingredients": [
+        {
+            "name": "Instant Oatmeal - Raisin, Date & Walnut",
+            "brand": null,
+            "fiber": 3000,
+            "sugar": null,
+            "sodium": 190,
+            "protein": 3000,
+            "serving": 37,
+            "calories": 140,
+            "metadata": null,
+            "potassium": 140,
+            "total_fat": 2500,
+            "cholesterol": 0,
+            "carbohydrate": 27000,
+            "display_unit": 0,
+            "measurements": [
+                {
+                    "serving_unit": "serving",
+                    "serving_weight": 37,
+                    "serving_quantity": 1
+                }
+            ],
+            "serving_unit": "serving",
+            "ingredient_id": "fatsecret_48163",
+            "saturated_fat": null,
+            "serving_weight": 37,
+            "thumbnail_image": null,
+            "serving_quantity": 1,
+            "available_carbohydrate": null
+        }
+    ]
+}

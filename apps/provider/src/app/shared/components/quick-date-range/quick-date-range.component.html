@@ -1,0 +1,7 @@
+<div [formGroup]="form" fxLayout="row" fxLayout="space-between center" fxLayoutGap="10px">
+  <mat-select formControlName="range" fxFlex>
+    <mat-option *ngFor="let option of options" [value]="option.value">{{
+      option.displayValue | translate
+    }}</mat-option>
+  </mat-select>
+</div>

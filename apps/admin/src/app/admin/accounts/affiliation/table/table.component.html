@@ -1,0 +1,38 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source" matSort>
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row.id)" class="clickable">
+        {{ row.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header="firstName">{{ 'GLOBAL.NAME' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row.id)" class="clickable">
+        {{ row.firstName }} {{ row.lastName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ACTIONS' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="100%">
+        <span (click)="onRemove(row)">{{ 'ACCOUNT.DEASSIGN' | translate }}</span>
+        <button mat-icon-button title="{{ 'ACCOUNT.DEASSIGN' | translate }}" (click)="onRemove(row)"><mat-icon>highlight_off</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns" [ngStyle]="{ 'display': header ? 'flex' : 'none' }"></mat-header-row>
+    <mat-row fxLayout="row wrap" *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{
+        'row-even': odd,
+        'row-odd': even
+      }">
+    </mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>

@@ -1,0 +1,14 @@
+:host {
+  // question margins: 1em 0 1em
+  margin: 1em 0 1em; // checkboxes doesn't have default margins
+}
+
+// adds breaks to the mat-checkboxes with long labels
+::ng-deep .mat-checkbox-label {
+  white-space: normal !important;
+}
+
+// rather than center the checkbox, put the checkbox in the first line
+::ng-deep .mat-checkbox-inner-container {
+  margin-top: 3px !important;
+}

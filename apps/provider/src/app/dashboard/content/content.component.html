@@ -1,0 +1,151 @@
+<div fxLayout="column" fxLayoutAlign="start" fxLayoutAlign.xs="stretch" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayout.xs="column"
+        fxLayoutAlign="start" fxLayoutAlign.xs="stretch"
+        fxLayoutWrap.xs fxLayoutGap="10px">
+        <div fxFlex fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="start">
+            <ccr-organization-search
+                *ngIf="mode === 'vault'"
+                [account]="context.accountId"
+                [setOrgId]="organizationOverride?.id"
+                [showEmptyOption]="false"
+                (select)="selectOrganization($event)">
+            </ccr-organization-search>
+
+            <mat-form-field class="ccr-filter" floatLabel="never" fxFlex="nogrow">
+                <mat-select
+                [placeholder]="'LIBRARY.CONTENT.TYPE_FILTER' | translate"
+                [disableOptionCentering]="true"
+                (selectionChange)="contentType$.next($event.value)">
+                    <mat-option *ngFor="let type of contentTypes; let i = index;" [value]="i">
+                        {{ type.name | translate }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="ccr-filter" floatLabel="never"
+                *ngIf="(contentType$ | async) && sourceOptionals.type.id === '2'">
+                <mat-select
+                [placeholder]="'LIBRARY.CONTENT.FILE_TYPE_FILTER' | translate"
+                [disableOptionCentering]="true"
+                (selectionChange)="fileType$.next($event.value)">
+                    <mat-option *ngFor="let type of fileTypes; let i = index;" [value]="i">{{ type.name | translate }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div
+        *ngIf="mode === 'digital-library'; else fileVaultControls"
+        fxFlex
+        fxFlex.xs="1 1 100%"
+        fxLayoutAlign="end center"
+        fxLayoutAlign.xs="center"
+        fxLayoutGap="7px">
+            <!-- this is temporally removed because of FRON-677 -->
+            <!-- <div class="ccr-button-group">
+                <a mat-button class="ccr-icon-button" (click)="setViewMode('list')" [class.active]="viewMode === 'list'"
+                [matTooltip]="'LIBRARY.CONTENT.LIST_VIEW' | translate" matTooltipPosition="above">
+                    <mat-icon>view_list</mat-icon>
+                </a>
+                <a mat-button class="ccr-icon-button" (click)="setViewMode('grid')" [class.active]="viewMode === 'grid'"
+                [matTooltip]="'LIBRARY.CONTENT.ICON_VIEW' | translate" matTooltipPosition="above">
+                    <mat-icon>view_module</mat-icon>
+                </a>
+            </div> -->
+            <button
+            (click)="createFolder()"
+            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            class="ccr-icon-button"
+            color="primary"
+            fxFlex="0 0 auto"
+            mat-button>
+                <mat-icon>add</mat-icon>
+                <span>{{ 'LIBRARY.CONTENT.NEW_FOLDER' | translate }}</span>
+            </button>
+            <button
+            (click)="createContent()"
+            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            class="ccr-icon-button"
+            color="primary"
+            fxFlex="0 0 auto"
+            mat-button>
+                <mat-icon>add</mat-icon>
+                <span>{{ 'LIBRARY.CONTENT.ADD_CONTENT' | translate }}</span>
+            </button>
+            <button
+            *ngIf="mode === 'digital-library'"
+            (click)="insertForm()"
+            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            class="ccr-icon-button"
+            color="primary"
+            fxFlex="0 0 auto"
+            mat-button>
+                <mat-icon>add</mat-icon>
+                <span>{{ 'LIBRARY.CONTENT.INSERT_FORM' | translate }}</span>
+            </button>
+            <button
+            *ngIf="mode === 'digital-library'"
+            (click)="openBatchCloneDialog()"
+            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            class="ccr-icon-button"
+            color="primary"
+            fxFlex="0 0 auto"
+            mat-button>
+                <mat-icon>content_copy</mat-icon>
+                <span>{{ 'LIBRARY.CONTENT.CLONE_CONTENT' | translate }}</span>
+            </button>
+
+            <ccr-popup-description
+            *ngIf="!organization || !(organization.permissions.admin && organization.isDirect)"
+            [title]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS_TITLE' | translate"
+            [description]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS' | translate:{organization: organization.name}"
+            [showIntro]="false"
+            ></ccr-popup-description>
+        </div>
+
+        <ng-template #fileVaultControls>
+            <div
+            fxFlex
+            fxFlex.xs="1 1 100%"
+            fxLayoutAlign="end center"
+            fxLayoutAlign.xs="center"
+            fxLayoutGap="7px">
+                <button
+                (click)="createFolder()"
+                [disabled]="!organization || !organization.permissions.allowClientPhi"
+                class="ccr-icon-button"
+                color="primary"
+                fxFlex="0 0 auto"
+                mat-button>
+                    <mat-icon>add</mat-icon>
+                    <span>{{ 'LIBRARY.CONTENT.NEW_FOLDER' | translate }}</span>
+                </button>
+                <button
+                (click)="createContent()"
+                [disabled]="!organization || !organization.permissions.allowClientPhi"
+                class="ccr-icon-button"
+                color="primary"
+                fxFlex="0 0 auto"
+                mat-button>
+                    <mat-icon>add</mat-icon>
+                    <span>{{ 'LIBRARY.CONTENT.ADD_CONTENT' | translate }}</span>
+                </button>
+                <button
+                *ngIf="mode === 'digital-library'"
+                (click)="insertForm()"
+                [disabled]="!organization || !organization.permissions.allowClientPhi"
+                class="ccr-icon-button"
+                color="primary"
+                fxFlex="0 0 auto"
+                mat-button>
+                    <mat-icon>add</mat-icon>
+                    <span>{{ 'LIBRARY.CONTENT.INSERT_FORM' | translate }}</span>
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<app-content-file-explorer
+[useMode]="mode"
+[mode]="viewMode"
+[datasource]="datasource"
+[organization]="context.organization$ | async"
+[events]="events"
+></app-content-file-explorer>

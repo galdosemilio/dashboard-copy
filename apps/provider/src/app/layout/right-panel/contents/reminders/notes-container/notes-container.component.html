@@ -1,0 +1,14 @@
+<div (scroll)="onScroll($event)" class="notes-container">
+    <div class="empty-container items-none" *ngIf="notes.length === 0">
+        <span>{{'RIGHT_PANEL.NO_NOTES' | translate}}</span>
+      </div>
+
+    <mat-list *ngIf="notes.length">
+        <mat-list-item *ngFor="let note of notes">
+        <app-rightpanel-note [note]="note" (delete)="onDeleteNote($event)"></app-rightpanel-note>
+        </mat-list-item>
+    </mat-list>
+    <div *ngIf="isSearchingNotes" fxLayout="column" fxLayoutAlign="center center">
+        <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+    </div>
+</div>

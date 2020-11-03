@@ -1,0 +1,102 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <div fxFlex="75%" fxLayout="row" fxLayoutAlign="end center">
+      <mat-form-field floatLabel="always" fxFlex="30%">
+        <mat-select [placeholder]="'GLOBAL.STATUS' | translate" formControlName="status">
+          <mat-option *ngFor="let option of statusOptions" [value]="option.value">
+            {{ option.viewValue | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <ccr-paginator #paginator
+      [length]="source.total"
+      [pageIndex]="0"
+      [pageSize]="10"
+      ></ccr-paginator>
+    </div>
+  </div>
+
+  <div
+  class="ccr-table"
+  [class.ccr-loading]="source.isLoading"
+  [class.ccr-empty]="source.isEmpty"
+  [class.ccr-errors]="source.hasErrors()">
+
+    <mat-table [dataSource]="source">
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          {{ row.id }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.NAME' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          {{ row.name }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="organizationId">
+        <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ORG_ID' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          {{ row.organization?.id }}<i class="ccr-marker" *ngIf="row.isInherited">&nbsp;*</i>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="organizationName">
+        <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ORG_NAME' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          {{ row.organization?.name }}<i class="ccr-marker" *ngIf="row.isInherited">&nbsp;*</i>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.STATUS' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          <span>{{ 'GLOBAL.STATUS' | translate }}</span>
+
+          <span *ngIf="row.isActive; else inactive">{{ 'GLOBAL.ACTIVE' | translate }}</span>
+          <ng-template #inactive>{{ 'GLOBAL.INACTIVE' | translate }}</ng-template>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ACTIONS' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="100%">
+          <!-- <span (click)="onEdit(row)">{{ 'GLOBAL.EDIT' | translate }}</span>
+          <button
+          [class.disabled]="row.isInherited"
+          [disabled]="row.isInherited"
+          [title]="'GLOBAL.EDIT' | translate"
+          (click)="onEdit(row)"
+          mat-icon-button><mat-icon>edit</mat-icon></button> -->
+
+          <span (click)="onDelete(row)">{{ 'GLOBAL.DELETE' | translate }}</span>
+          <button
+          [class.disabled]="row.isInherited"
+          [disabled]="row.isInherited"
+          [title]="'GLOBAL.DELETE' | translate"
+          (click)="onDelete(row)"
+          mat-icon-button><mat-icon>delete</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row fxLayout="row wrap"
+      *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+      ></mat-row>
+    </mat-table>
+
+    <ccr-table-overlay [source]="source" [emptyMsg]="'NOTIFY.ERROR.NO_ACTIVE_CAMPAIGNS' | translate"></ccr-table-overlay>
+
+    <p class="footnotes" *ngIf="source.showMarker">
+      <i class="ccr-marker">*</i> {{ 'ADMIN.ORGS.ACTIVE_CAMPAIGN_IS_INHERITED' | translate }}
+    </p>
+  </div>
+</div>

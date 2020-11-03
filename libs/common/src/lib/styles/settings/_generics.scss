@@ -1,0 +1,247 @@
+/**
+ * Generic Settings
+ */
+@mixin ccr-settings-generics($theme, $config) {
+  $foreground: map-get($theme, foreground);
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    font-family: map-get($config, font-family);
+  }
+
+  a,
+  a:visited {
+    color: var(--primary, mat-color($ccr-primary));
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    margin: 0 0 1em;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mat-form-field-flex {
+    align-items: stretch !important;
+  }
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    align-self: center;
+    border-top: 0.84375em solid transparent;
+  }
+
+  [matsuffix] {
+    color: mat-color($foreground, hint-text);
+  }
+  .ccr-remove[matsuffix] {
+    cursor: pointer;
+    margin: 0 5px;
+
+    &:hover {
+      color: var(--primary, mat-color($ccr-primary));
+    }
+  }
+
+  .hidden,
+  [hidden] {
+    display: none !important;
+  }
+
+  .invisible {
+    visibility: hidden !important;
+  }
+
+  .clickable {
+    cursor: pointer !important;
+  }
+
+  /**
+  * Material Overrides
+  */
+  .mat-toolbar {
+    justify-content: center;
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    white-space: nowrap;
+  }
+
+  .mat-form-field,
+  .mat-select {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .mat-form-field-placeholder,
+  .mat-select-placeholder {
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+  }
+
+  .mat-header-cell {
+    color: mat-color($foreground, text);
+  }
+
+  .mat-sort-header-container {
+    align-items: center;
+  }
+
+  .mat-autocomplete-panel {
+    .mat-option {
+      margin: 0 auto;
+      padding: 6px 16px;
+
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mat-option-text .mat-line:last-child {
+        color: mat-color($foreground, hint-text);
+        font-size: 80%;
+      }
+    }
+  }
+
+  .mat-datepicker-content-touch {
+    max-height: 100% !important;
+  }
+
+  .mat-list .mat-subheader:first-child,
+  .mat-nav-list .mat-subheader:first-child,
+  .mat-selection-list .mat-subheader:first-child {
+    margin-top: 0 !important;
+  }
+
+  /* customizations */
+  .mat-form-field {
+    &.readonly {
+      .mat-form-field-underline,
+      .mat-form-field-required-marker {
+        visibility: hidden;
+      }
+    }
+
+    &.ccr-mini {
+      .mat-form-field-placeholder-wrapper {
+        top: 0;
+        padding-top: 0;
+      }
+      .mat-form-field-placeholder {
+        top: 0;
+      }
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+        .mat-form-field-underline,
+        .mat-form-field-subscript-wrapper {
+          display: none;
+        }
+      }
+      .mat-form-field-infix {
+        border-top: none;
+      }
+    }
+
+    &.ccr-iconfix {
+      .mat-form-field-prefix,
+      .mat-form-field-suffix {
+        align-self: flex-end;
+        padding: 0 0.2em 0.15em 0;
+        .mat-icon {
+          font-size: 100%;
+          height: 18px;
+        }
+      }
+    }
+
+    &.ccr-filter,
+    &.ccr-align-center {
+      .mat-form-field-wrapper {
+        padding-bottom: 15px;
+        .mat-form-field-underline,
+        .mat-form-field-subscript-wrapper {
+          display: none;
+        }
+      }
+      .mat-form-field-infix {
+        border-top: none;
+        padding: 0;
+      }
+    }
+    &.ccr-align-center {
+      .mat-input-element,
+      .mat-select-value {
+        text-align: center;
+      }
+    }
+    &.ccr-filter {
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+      .mat-form-field-placeholder {
+        line-height: 24px;
+        padding-left: 15px;
+        width: calc(100% - 15px - 18px); // - padding - arrow
+      }
+    }
+
+    &.ccr-align-right {
+      .mat-input-element,
+      .mat-select-value {
+        text-align: right;
+      }
+      [matsuffix] {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .mat-option {
+    &.ccr-align-right {
+      text-align: right;
+    }
+    &.ccr-align-center {
+      text-align: center;
+    }
+  }
+
+  /* Utilities */
+  .text-separator {
+    opacity: 0.75;
+    padding: 0 10px;
+    @media #{map-get($config, lte-xs)} {
+      padding: 0 5px;
+    }
+  }
+  .text-left {
+    text-align: left;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-right {
+    text-align: right;
+  }
+  .text-lowercase {
+    text-transform: lowercase;
+  }
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+
+  .space-left {
+    margin-left: 0.3em;
+  }
+  .space-right {
+    margin-right: 0.3em;
+  }
+}

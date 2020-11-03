@@ -1,0 +1,59 @@
+<ccr-datasource-overlay class="ccr-table" [source]="source" [emptyMsg]="'BOARD.COACHES_EMPTY_LIST' | translate">
+
+  <mat-table [dataSource]="source" matSort (matSortChange)="onSort($event)" [class.notClickable]="!showActions" data-cy="coach-table">
+
+    <ng-container cdkColumnDef="firstName">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header="firstName">{{'BOARD.FIRST_NAME' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" (click)="showCoach(row)" class="clickable">
+        <span>{{'BOARD.FIRST_NAME' | translate}}</span>
+        {{row.firstName}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="lastName">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header="lastName">{{'BOARD.LAST_NAME' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" (click)="showCoach(row)" class="clickable">
+        <span>{{'BOARD.LAST_NAME' | translate}}</span>
+        {{row.lastName}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="email">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{'BOARD.EMAIL' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" (click)="showCoach(row)" class="clickable">
+        <span>{{'BOARD.EMAIL' | translate}}</span> {{row.email}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header="associationDate">{{'BOARD.DATE_ONBOARDING' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" (click)="showCoach(row)" class="clickable">
+        <span>{{'BOARD.DATE_ONBOARDING' | translate}}</span>
+        <ng-container *ngIf="row.association?.createdAt; then datereg else dateempty"></ng-container>
+        <ng-template #datereg>{{ row.association.createdAt | amDateFormat:'LL' }}</ng-template>
+        <ng-template #dateempty>-</ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="actions">
+      <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="grow" data-cy="coach-table-actions">
+        <span *ngIf="showActions" (click)="onRemove(row)">{{'BOARD.REMOVE' | translate}}</span>
+        <button
+        *ngIf="showActions"
+        (click)="showCoach(row, true)"
+        mat-icon-button title="{{ 'BOARD.OPEN_IN_NEW' | translate }}">
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+        <button *ngIf="showActions" [disabled]="authenticatedUserId === row.id" [class.disabled]="authenticatedUserId === row.id" mat-icon-button title="{{'BOARD.REMOVE' | translate}}" (click)="onRemove(row)"><mat-icon>delete</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>

@@ -1,0 +1,70 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "types": [
+      "cypress",
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": [
+        "apps/provider/src/app/*"
+      ],
+      "@board/*": [
+        "apps/admin/src/app/*"
+      ],
+      "@coachcare/common": [
+        "libs/common/src/index.ts"
+      ],
+      "@coachcare/common/module": [
+        "libs/common/src/lib/common.module.ts"
+      ],
+      "@coachcare/common/*": [
+        "libs/common/src/lib/*"
+      ],
+      "@coachcare/layout": [
+        "libs/layout/src/index.ts"
+      ],
+      "@coachcare/layout/*": [
+        "libs/layout/src/lib/*"
+      ],
+      "@coachcare/backend": [
+        "libs/backend/src/index.ts"
+      ],
+      "@coachcare/backend/*": [
+        "libs/backend/src/lib/*"
+      ],
+      "@coachcare/datepicker": [
+        "libs/datepicker/src/index.ts"
+      ],
+      "@coachcare/npm-api": [
+        "libs/npm-api/src/index.ts"
+      ],
+      "@coachcare/npm-api/*": [
+        "libs/npm-api/src/lib/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

@@ -1,0 +1,29 @@
+<div class="report-heading">
+  <mat-icon>directions_walk</mat-icon>
+  <h3>
+    {{ 'REPORTS.PATIENT_STEPS' | translate }}
+
+    <ccr-popup-description
+    [title]="'REPORTS.PATIENT_STEPS' | translate"
+    [description]="'REPORTS.PATIENT_STEPS_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h3>
+
+  <button mat-button class="ccr-align-center"
+  [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()">
+    {{ 'REPORTS.EXPORT_CSV' | translate }}
+    <mat-icon>file_download</mat-icon>
+  </button>
+</div>
+
+<ccr-datasource-overlay class="ccr-container" [source]="source">
+  <canvas *ngIf="chart" baseChart
+  width="500" height="400"
+  [chartType]="chart.type"
+  [datasets]="chart.datasets"
+  [labels]="chart.labels"
+  [options]="chart.options"
+  [legend]="chart.legend"
+  [colors]="chart.colors"
+  ></canvas>
+</ccr-datasource-overlay>

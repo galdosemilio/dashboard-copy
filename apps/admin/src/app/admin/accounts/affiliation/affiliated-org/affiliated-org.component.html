@@ -1,0 +1,74 @@
+<div class="related-accounts" fxFlex="100%" fxLayout="column">
+
+  <div class="org-permissions" fxLayout="row" fxLayout.fx="column" *ngIf="org.isDirect && org.permissions">
+    <span fxFlex fxLayout=" center">
+      {{ 'PERMS._TITLE' | translate }}:
+    </span>
+
+    <div fxFlex fxLayoutAlign=" center">
+      <mat-checkbox name="accessall"
+        [(ngModel)]="org.permissions.viewAll"
+        (change)="onViewAllChange()">
+        {{ 'PERMS.ACCESSALL' | translate }}
+      </mat-checkbox>
+      <ccr-help
+        [title]="'PERMS.ACCESSALL' | translate"
+        [description]="'PERMS.ACCESSALL_HELP' | translate"
+      ></ccr-help>
+    </div>
+
+    <div fxFlex fxLayoutAlign=" center">
+      <mat-checkbox name="admin"
+        [(ngModel)]="org.permissions.admin"
+        (change)="onAdminChange()">
+        {{ 'PERMS.ADMIN' | translate }}
+      </mat-checkbox>
+      <ccr-help
+        [title]="'PERMS.ADMIN' | translate"
+        [description]="'PERMS.ADMIN_HELP' | translate"
+      ></ccr-help>
+    </div>
+
+    <div fxFlex fxLayoutAlign=" center">
+      <mat-checkbox name="allowClientPhi"
+        [(ngModel)]="org.permissions.allowClientPhi"
+        (change)="onClientPhiChange()">
+        {{ 'PERMS.CLIENT_PHI' | translate }}
+      </mat-checkbox>
+      <!-- <ccr-help
+        [title]="'PERMS.CLIENT_PHI' | translate"
+        [description]="'PERMS.CLIENT_PHI' | translate"
+      ></ccr-help> -->
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign=" baseline">
+    <ccr-autocompleter-account
+      (change)="accSelected($event)"
+      [placeholder]="'ACCOUNT.ASSIGN' | translate"
+      [organization]="org.id"
+      [accountType]="autocompleterAccountType"
+      [strict]="true"
+    ></ccr-autocompleter-account>
+
+    <button mat-icon-button color="primary" [disabled]="!clientId" (click)="addAssignment()">
+      <mat-icon [attr.aria-label]="'ACCOUNT.CREATE_ASSIGNMENT' | translate">add_circle_outline</mat-icon>
+    </button>
+  </div>
+
+  <ccr-affiliated-accounts-table fxLayout="column"
+    (removeRecord)="removeRecord($event)"
+    [header]="false"
+    [source]="source"
+    [columns]="columns"
+    [accountType]="autocompleterAccountType"
+  ></ccr-affiliated-accounts-table>
+
+  <mat-action-row *ngIf="source.total > 5">
+    <ccr-paginator #paginator
+      [length]="source.total"
+      [pageIndex]="0"
+      [pageSize]="5"
+    ></ccr-paginator>
+  </mat-action-row>
+</div>

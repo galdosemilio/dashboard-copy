@@ -1,0 +1,14 @@
+<!-- WARNING have to be sure to have translated strings because after the extraction they are empty -->
+<div *ngIf="data.title" matDialogTitle>
+  <div [innerHTML]="data.title | translate: data.titleParams"></div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+  <p [innerHTML]="data.content | translate: data.contentParams"></p>
+</mat-dialog-content>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end stretch">
+  <button mat-raised-button class="ccr-button" color="{{ data.color }}" [matDialogClose]="true">{{ data.yes | translate }}</button>
+  <button mat-raised-button class="ccr-button" [matDialogClose]="false">{{ data.no | translate }}</button>
+</div>

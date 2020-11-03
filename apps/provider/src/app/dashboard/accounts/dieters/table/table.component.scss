@@ -1,0 +1,17 @@
+.ccr-table {
+  mat-table {
+    .mat-column-email {
+      flex: 2 !important;
+    }
+    .mat-column-created {
+      flex: 1.25 !important;
+    }
+    .mat-column-actions {
+      min-width: 60px;
+      max-width: 60px;
+    }
+    .mat-icon-button {
+      width: 25px;
+    }
+  }
+}

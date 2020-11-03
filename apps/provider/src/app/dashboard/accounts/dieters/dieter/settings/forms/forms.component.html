@@ -1,0 +1,61 @@
+<div [hidden]="selectedForm && answers">
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <ccr-popup-description
+            [title]="'BOARD.SEARCH_CLINIC' | translate"
+            [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_CLINIC_DESCRIPTION' | translate"
+            ></ccr-popup-description>
+            <ccr-organization-search
+            [allowSearchbarReset]="true"
+            [initialOrg]="initialOrg"
+            (select)="onOrganizationSelect($event)"
+            fxFlex></ccr-organization-search>
+            <ccr-popup-description
+            [title]="'LIBRARY.FORMS.SEARCH_BY_NAME' | translate"
+            [description]="'LIBRARY.FORMS.SEARCH_BY_NAME_DESCRIPTION' | translate"
+            ></ccr-popup-description>
+            <form-search (change)="formFilter = $event" fxFlex></form-search>
+            <button
+                (click)="assignForm()"
+                class="ccr-icon-button"
+                color="primary"
+                fxFlex="0 0 auto"
+                mat-button>
+                <mat-icon>add</mat-icon>
+                <span>{{ 'BOARD.ASSIGN_FORM_PATIENT' | translate }}</span>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="ccr-htools" fxLayout="row" fxLayoutAlign="space-between center">
+        <ccr-popup-description
+        [title]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_FORMS' | translate"
+        [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_FORMS_DESCRIPTION' | translate"
+        ></ccr-popup-description>
+
+        <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="source.total"
+        [pageIndex]="source.pageIndex"
+        [pageSize]="source.pageSize"
+        (page)="source.pageIndex = $event.pageIndex"
+        ></ccr-paginator>
+    </div>
+
+    <ccr-datasource-overlay class="ccr-table" [source]="source">
+        <app-dieter-forms-table [source]="source" (selectSubmission)="onSelectSubmission($event)"></app-dieter-forms-table>
+    </ccr-datasource-overlay>
+</div>
+
+<div *ngIf="selectedForm">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2%" *ngIf="answers">
+        <a mat-button color="primary" class="ccr-button" (click)="showSubmissions()">
+            {{ 'BOARD.BACK_LIST' | translate }}
+        </a>
+        <h3>{{ selectedForm.name }}</h3>
+    </div>
+    <app-library-forms-form
+    [readonly]="readonly" [data]="selectedForm" [fill]="fill" [account]="account" [allowAccountChange]="false"
+    [answers]="answers" [formSubmission]="selectedSubmission" [showcase]="showcase">
+    </app-library-forms-form>
+</div>

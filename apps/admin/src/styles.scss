@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import '~libs/common/src/lib/common';
+@import '~jsoneditor/dist/jsoneditor.min.css';
+
+// @import 'datepicker';
+
+@include ccr-settings($ccr-theme, $ccr-typography, $ccr-config);
+
+@include ccr-styles-generic($ccr-theme, $ccr-config);
+@include ccr-components($ccr-theme, $ccr-config);
+
+// @include mat-datepicker-theme($ccr-theme);
+
+// TODO encapsulate into a mixin
+@import 'styles/pages';

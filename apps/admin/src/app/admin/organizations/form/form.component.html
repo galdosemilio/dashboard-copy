@@ -1,0 +1,188 @@
+<form [formGroup]="form" novalidate>
+  <div class="ccr-content">
+
+    <div class="ccr-panel">
+      <h3>{{ 'GLOBAL.BASIC_INFORMATION' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <mat-grid-list [cols]="colSpan" rowHeight="70px">
+
+          <mat-grid-tile [colspan]="!id ? colSpan : 1">
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="name"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.NAME' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="shortcode"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.SHORT_CODE' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </div>
+    </div>
+
+    <div class="ccr-panel" formGroupName="contact">
+      <h3>{{ 'GLOBAL.CONTACT' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <mat-grid-list [cols]="colSpan" rowHeight="70px">
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="firstName"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.FIRST_NAME' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              required [readonly]="readonly"
+              formControlName="lastName"
+              [placeholder]="'GLOBAL.LAST_NAME' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+
+          <mat-grid-tile>
+            <ccr-form-field-email
+            formControlName="email"
+            required [readonly]="readonly"
+            [placeholder]="'GLOBAL.EMAIL' | translate"
+            ></ccr-form-field-email>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="phone"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.PHONE' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </div>
+    </div>
+
+    <div class="ccr-panel" formGroupName="address">
+      <h3>{{ 'GLOBAL.LOCATION' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <mat-grid-list [cols]="colSpan" rowHeight="70px">
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="street"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.STREET_ADDRESS' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="city"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.CITY' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="state"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.STATE' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="postalCode"
+              required [readonly]="readonly"
+              [placeholder]="'GLOBAL.POSTAL_CODE' | translate">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <ccr-form-field-country
+            formControlName="country"
+            required [readonly]="readonly"
+            [placeholder]="'GLOBAL.COUNTRY' | translate"
+            ></ccr-form-field-country>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </div>
+    </div>
+
+    <div class="ccr-panel" *ngIf="!id">
+      <h3>{{ 'GLOBAL.HIERARCHY' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <mat-grid-list [cols]="colSpan" rowHeight="70px">
+          <mat-grid-tile>
+            <ccr-autocompleter-organization
+            formControlName="parentOrganizationId"
+            required [readonly]="readonly"
+            [placeholder]="'ADMIN.ORGS.PARENT_ORG' | translate"
+            ></ccr-autocompleter-organization>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+  </div>
+
+  <div class="ccr-action-buttons" fxLayoutAlign="center center">
+    <button *ngIf="!id"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" (click)="onSubmit()">
+      <mat-icon>add</mat-icon>
+      {{ 'GLOBAL.SAVE' | translate }}
+    </button>
+
+    <button *ngIf="readonly && id"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" routerLink="edit">
+      <mat-icon>edit</mat-icon>
+      {{ 'GLOBAL.EDIT' | translate }}
+    </button>
+
+    <button *ngIf="!readonly && id"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" (click)="onUpdate()">
+      <mat-icon>save</mat-icon>
+      {{ 'GLOBAL.UPDATE' | translate }}
+    </button>
+
+    <button *ngIf="!readonly"
+    mat-button type="button" color="primary"
+    class="ccr-icon-button" (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+      {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+
+    <button *ngIf="id && !form.value.isActive"
+    mat-button type="button" color="warn"
+    class="ccr-icon-button" (click)="onActivate()">
+      <mat-icon>power_settings_new</mat-icon>
+      {{ 'GLOBAL.ACTIVATE' | translate }}
+    </button>
+
+    <button *ngIf="id && form.value.isActive"
+    mat-button type="button" color="warn"
+    class="ccr-icon-button" (click)="onDeactivate()">
+      <mat-icon>power_settings_new</mat-icon>
+      {{ 'GLOBAL.DEACTIVATE' | translate }}
+    </button>
+  </div>
+</form>

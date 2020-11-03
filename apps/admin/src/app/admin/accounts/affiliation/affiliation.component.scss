@@ -1,0 +1,61 @@
+ccr-affiliation {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column !important;
+  position: relative;
+
+  ccr-datasource-overlay,
+  ccr-related-org,
+  ccr-affiliated-accounts-table {
+    position: relative;
+  }
+
+  > div {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    padding: 0 20px 0 24px;
+  }
+
+  > ccr-datasource-overlay {
+    margin-top: 20px;
+  }
+
+  ccr-autocompleter-organization {
+    margin-top: 0.9em;
+  }
+
+  .org-permissions {
+    background: whitesmoke;
+    margin-bottom: 1.25em;
+    padding: 0.6em 24px;
+  }
+
+  > .ccr-overlay {
+    margin-top: 80px;
+  }
+  mat-accordion {
+    display: block;
+    min-height: 100px;
+  }
+
+  .ccr-table .ccr-overlay > * {
+    margin-top: 0;
+  }
+
+  > ccr-paginator {
+    margin-top: 7px;
+  }
+}
+
+.mat-expansion-panel-header {
+  .mat-content {
+    justify-content: space-between;
+    > * {
+      flex-grow: 0;
+    }
+  }
+
+  &.mat-expanded .mat-expansion-panel-header-title {
+    font-weight: bold;
+  }
+}

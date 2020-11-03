@@ -1,0 +1,193 @@
+@mixin ccr-generic-dialog($theme, $config) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+
+  /* maximize dialogs on mobile */
+  // TODO mark the full-xs-dialog with a css class
+  .cdk-overlay-pane:not(.mat-datepicker-dialog):not(.mat-datepicker-popup) {
+    @media #{map-get($config, lte-xs)} {
+      position: fixed !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  .mat-dialog-container {
+    margin: 0 auto;
+    max-width: 100vw !important;
+    /* mat-dialog-separator requirement */
+    overflow: visible !important;
+
+    .mat-dialog-separator {
+      height: 25px;
+      background-color: var(--primary, mat-color($primary));
+      border-radius: 15px;
+      margin: 0 -35px;
+    }
+
+    .mat-dialog-content {
+      padding-top: 20px;
+      margin-bottom: 15px;
+      @media #{map-get($config, lte-xs)} {
+        max-height: calc(100% - 140px);
+      }
+      .search-wrapper {
+        width: 100%;
+        position: relative;
+        > ccr-icon-search {
+          position: absolute;
+          right: 12px;
+          top: 5px;
+        }
+        .search-box {
+          border: 1px solid mat-color($foreground, base);
+          width: calc(100% - 57px);
+        }
+      }
+      .mat-list-item {
+        .mat-icon {
+          color: mat-color($foreground, icon);
+        }
+      }
+    }
+  }
+
+  .ccr-prompt {
+    h3.mat-dialog-title {
+      margin: 0;
+    }
+    .mat-dialog-content {
+      padding: 10px 24px 5px;
+    }
+    .mat-dialog-actions:last-child {
+      margin-bottom: -20px;
+    }
+  }
+
+  .ccr-dialog {
+    .mat-dialog-title {
+      align-items: center;
+      display: flex;
+      [dir='ltr'] & {
+        justify-content: space-between;
+      }
+      [dir='rtl'] & {
+        justify-content: flex-end;
+      }
+      margin: -5px 0 0 0;
+      user-select: none;
+
+      > div:first-child {
+        display: flex;
+        align-items: center;
+        > span {
+          padding-left: 12px;
+        }
+      }
+
+      span {
+        text-transform: uppercase;
+      }
+
+      [matdialogclose] {
+        background: none;
+        border: 0;
+        cursor: pointer;
+        font-size: 12px;
+        outline: none;
+        mat-icon {
+          font-size: 35px;
+        }
+      }
+    }
+
+    .mat-dialog-content {
+      &.select-schedule {
+        @media #{map-get($config, gte-sm)} {
+          .mat-form-field {
+            width: 275px;
+          }
+        }
+        @media #{map-get($config, lte-xs)} {
+          .mat-form-field {
+            width: 240px;
+          }
+        }
+      }
+      [dir='ltr'] & {
+        text-align: left;
+      }
+      [dir='rtl'] & {
+        text-align: right;
+      }
+    }
+
+    .ccr-category {
+      display: flex;
+      line-height: 2rem;
+      padding-bottom: 20px;
+      @media #{map-get($config, lte-xs)} {
+        font-size: 80%;
+      }
+
+      span {
+        flex-grow: 1;
+      }
+      mat-radio-group {
+        display: flex;
+        flex-grow: 2;
+        mat-radio-button {
+          flex: 1;
+        }
+      }
+    }
+
+    .mat-form-field {
+      margin-bottom: 0 !important;
+    }
+
+    .mat-dialog-actions {
+      display: flex;
+      [dir='ltr'] & {
+        place-content: stretch flex-end;
+      }
+      [dir='rtl'] & {
+        place-content: stretch flex-start;
+      }
+    }
+  }
+
+  .ccr-plain {
+    .mat-dialog-content {
+      @media #{map-get($config, lte-xs)} {
+        max-height: calc(100% - 75px);
+      }
+
+      .mat-figure {
+        padding: 0 !important;
+      }
+
+      button {
+        text-align: left;
+      }
+    }
+  }
+
+  .ccr-lang-dialog {
+    min-width: 350px;
+    .mat-button {
+      img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+    }
+    .lang-native-name {
+      margin-right: 5px;
+    }
+  }
+}

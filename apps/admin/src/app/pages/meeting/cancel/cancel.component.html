@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <h2 mat-card-title [ngSwitch]="status">
+      <ng-container *ngSwitchCase="STATUS.Succeed">{{ 'PAGE.MEETING_CANCEL.TITLE_SUCCESS' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="STATUS.Kept">{{ 'PAGE.MEETING_CANCEL.TITLE_KEPT' | translate }}</ng-container>
+      <ng-container *ngSwitchDefault>{{ 'PAGE.MEETING_CANCEL.TITLE' | translate }}</ng-container>
+    </h2>
+  </mat-card-header>
+
+  <mat-card-content fxLayout="column" fxLayoutGap="15px">
+    <p
+      [class.hidden]="status > STATUS.Error"
+      [innerHTML]="'PAGE.MEETING_CANCEL.CONFIRM_PROMPT' | translate: params"
+    ></p>
+
+    <div class="ccr-button-group" [class.hidden]="status > STATUS.Error" fxLayout="row">
+      <button fxFlex mat-button color="warn" class="ccr-button" (click)="cancelMeeting()">
+        {{ 'PAGE.MEETING_CANCEL.BUTTON_CANCEL' | translate }}
+      </button>
+
+      <button fxFlex mat-button color="primary" class="ccr-button" (click)="keepMeeting()">
+        {{ 'PAGE.MEETING_CANCEL.BUTTON_KEEP' | translate }}
+      </button>
+    </div>
+
+    <ng-container [ngSwitch]="status">
+      <p *ngSwitchCase="STATUS.Succeed"
+        [innerHTML]="'PAGE.MEETING_CANCEL.MESSAGE_SUCCESS' | translate: params"
+      ></p>
+      <p *ngSwitchCase="STATUS.Kept"
+        [innerHTML]="'PAGE.MEETING_CANCEL.MESSAGE_KEPT' | translate: params"
+      ></p>
+      <p *ngSwitchCase="STATUS.Error"
+        [innerHTML]="'PAGE.MEETING_CANCEL.MESSAGE_ERROR' | translate: params"
+      ></p>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

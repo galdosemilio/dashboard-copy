@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div fxLayout="column">
+    <p>{{ 'BOARD.ADD_UNAVAILABLE_TIME_FOR' | translate:{name: userName} }}</p>
+
+    <div fxLayout="row" fxLayoutGap="7px">
+      <mat-form-field>
+        <input matInput readonly="true" formControlName="date" [min]="now"
+        (click)="picker.open()" [matDatepicker]="picker" [placeholder]="'GLOBAL.DATE' | translate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker type="date" #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="ccr-form-row">
+      <mat-slide-toggle fxFlexAlign="center" formControlName="allDay">{{ 'BOARD.ALL_DAY' | translate }}</mat-slide-toggle>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="7px" *ngIf="!form.get('allDay').value">
+      <mat-form-field hideRequiredMarker="true" class="ccr-placeholder">
+        <input matInput required readonly="true" formControlName="start"
+        (click)="pickerStart.open()" (dateChange)="setDurations()"
+        [min]="now" [matDatepicker]="pickerStart" [placeholder]="'BOARD.START_TIME' | translate">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker type="time" clockStep="5" #pickerStart [matDatepicker]="picker"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="duration" [compareWith]="compareFn" [placeholder]="'BOARD.DURATION' | translate">
+          <mat-option *ngFor="let d of durations" [value]="d.value">
+            {{ d.viewValueH }} {{ d.viewValueM }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <ng-container *ngIf="formUtils.hasErrors(form)">
+      <mat-error *ngIf="formUtils.getError('validateMeetingTime')">{{ formUtils.getError('validateMeetingTime') | translate }}</mat-error>
+    </ng-container>
+    <div class="action-buttons">
+      <a mat-button color="primary" (click)="onSubmit()" class="ccr-icon-button">
+        <mat-icon>add</mat-icon>
+        {{ 'RIGHT_PANEL.SAVE_UNAVAILABILITY' | translate }}
+      </a>
+    </div>
+  </div>
+</form>

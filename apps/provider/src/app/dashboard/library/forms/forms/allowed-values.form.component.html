@@ -1,0 +1,22 @@
+<div class="form-wrapper">
+    <div class="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="7px">
+        <div fxLayout="row" fxLayoutAlign="space-evenly center" *ngFor="let allowedValue of allowedValues; let i = index;"
+            fxLayoutGap="7px"
+            [ccrDraggable]="{ data: i, isDraggable: !readonly }"
+            [ccrDropzone]="{ data: i, isDroppable: !readonly }" (ccrDrop)="onDrop($event)">
+            <p>{{ getDisplayIndex(i) }}&nbsp;</p>
+            <mat-form-field class="ccr-form-field" floatLabel="never" fxFlex>
+                <input type="text" matInput [value]="allowedValue" (change)="setAllowedValue($event, i)" [readonly]="readonly">
+            </mat-form-field>
+            <div fxLayout="column" fxLayoutAlign="center space-around" *ngIf="!readonly">
+                <mat-icon class="clickable">drag_indicator</mat-icon>
+            </div>
+            <mat-icon (click)="removeOption(i)" class="clickable" *ngIf="!readonly">cancel</mat-icon>
+        </div>
+        <div
+        fxLayout="row" fxLayoutAlign="start center" *ngIf="!readonly"
+        (click)="addOption()" class="clickable">
+            <mat-icon>add_circle</mat-icon>
+        </div>
+    </div>
+</div>

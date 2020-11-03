@@ -1,0 +1,77 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6154",
+        "firstName": "Lascario Client",
+        "lastName": "Pacheco"
+      },
+      "createdAt": "2019-12-28T16:20:02.104Z",
+      "form": {
+        "id": "15075",
+        "name": "Test Submission",
+        "organization": "30",
+        "removableSubmissions": true
+      },
+      "id": "563",
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "submittedBy": {
+        "id": "2852",
+        "firstName": "Lascario",
+        "lastName": "Pacheco Arrieta"
+      }
+    },
+    {
+      "account": {
+        "id": "6154",
+        "firstName": "Lascario Client",
+        "lastName": "Pacheco"
+      },
+      "createdAt": "2019-12-29T16:20:02.104Z",
+      "form": {
+        "id": "15075",
+        "name": "Test Submission",
+        "organization": "30",
+        "removableSubmissions": true
+      },
+      "id": "563",
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "submittedBy": {
+        "id": "2852",
+        "firstName": "Lascario",
+        "lastName": "Pacheco Arrieta"
+      }
+    },
+    {
+      "account": {
+        "id": "6154",
+        "firstName": "Lascario Client",
+        "lastName": "Pacheco"
+      },
+      "createdAt": "2019-12-30T16:20:02.104Z",
+      "form": {
+        "id": "15075",
+        "name": "Test Submission",
+        "organization": "30",
+        "removableSubmissions": true
+      },
+      "id": "563",
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "submittedBy": {
+        "id": "2852",
+        "firstName": "Lascario",
+        "lastName": "Pacheco Arrieta"
+      }
+    }
+  ],
+  "pagination": {}
+}

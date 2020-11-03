@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": "31",
+      "organization": { "id": "30", "name": "CoachCare", "hierarchyPath": [30] },
+      "list": { "id": "2", "name": "CoachCare Employees" },
+      "isActive": true,
+      "createdAt": "2020-08-31 19:47:10.889+00"
+    },
+    {
+      "id": "33",
+      "organization": {
+        "id": "7419",
+        "name": "00000000000 created under coachcare",
+        "hierarchyPath": [7419, 30]
+      },
+      "list": { "id": "43", "name": "Client list 6.26.20" },
+      "isActive": true,
+      "createdAt": "2020-09-01 09:07:00.25+00"
+    },
+    {
+      "id": "34",
+      "organization": {
+        "id": "3378",
+        "name": "0000 Test IP Clinic (SD)",
+        "hierarchyPath": [3378, 30]
+      },
+      "list": { "id": "45", "name": "Homepage View Demo SEM- Brand ad group" },
+      "isActive": true,
+      "createdAt": "2020-09-01 09:07:45.596+00"
+    },
+    {
+      "id": "32",
+      "organization": {
+        "id": "3378",
+        "name": "0000 Test IP Clinic (SD)",
+        "hierarchyPath": [3378, 30]
+      },
+      "list": { "id": "16", "name": "White Paper Landing Page" },
+      "isActive": false,
+      "createdAt": "2020-09-01 09:06:54.442+00"
+    }
+  ],
+  "pagination": {}
+}

@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <div>
+            <a *ngIf="view !== 'table'" mat-button class="ccr-icon-button" fxFlex="0 0 150px" fxFlex.xs="grow" (click)="toggleView('table')">
+                <mat-icon>view_headline</mat-icon>
+                <span>{{ 'BOARD.VIEW_AS_TABLE' | translate }}</span>
+            </a>
+
+            <a *ngIf="view !== 'chart'" mat-button class="ccr-icon-button" fxFlex="0 0 150px" fxFlex.xs="grow" (click)="toggleView('chart')">
+              <mat-icon>show_chart</mat-icon>
+              <span>{{ 'BOARD.VIEW_AS_CHART' | translate }}</span>
+            </a>
+        </div>
+    </div>
+
+    <div [ngSwitch]="view" class="ccr-dashboard-pane">
+        <app-dieter-journal-metrics-table
+        *ngSwitchCase="'table'"
+        [initialDates]="initialDates"
+        [source]="source"
+        (dateChange)="initialDates = $event"></app-dieter-journal-metrics-table>
+
+        <app-dieter-journal-metrics-chart
+        *ngSwitchCase="'chart'"
+        [initialDates]="initialDates"
+        [source]="chartSource"
+        (dateChange)="initialDates = $event"></app-dieter-journal-metrics-chart>
+    </div>
+</div>

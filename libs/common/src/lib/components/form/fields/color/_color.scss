@@ -1,0 +1,19 @@
+@mixin ccr-form-field-color($theme, $config) {
+  $foreground: map-get($theme, foreground);
+
+  ccr-form-field-color {
+    .mat-form-field-infix {
+      padding-bottom: 0 !important;
+    }
+
+    input.mat-input-element {
+      box-sizing: border-box;
+      border: 1px inset mat-color($foreground, divider);
+      padding: 0.21em;
+    }
+
+    .mat-form-field-underline {
+      background-color: transparent !important;
+    }
+  }
+}

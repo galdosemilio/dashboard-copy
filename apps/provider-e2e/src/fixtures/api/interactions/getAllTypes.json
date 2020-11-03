@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": "2",
+      "name": "External audio call",
+      "description": "An audio call using external tools or platform, or a phone call",
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "name": "External video call",
+      "description": "A video call using external tools or platform",
+      "status": "active"
+    },
+    {
+      "id": "1",
+      "name": "In person",
+      "description": "Face-to-face discussion",
+      "status": "active"
+    }
+  ],
+  "pagination": {}
+}

@@ -1,0 +1,107 @@
+@import 'variables';
+
+app-content-file-explorer-table {
+  mat-row > * {
+    pointer-events: none;
+  }
+
+  mat-row .edit-icon,
+  mat-row .file-icon,
+  mat-row > mat-cell > mat-checkbox,
+  mat-row > mat-cell > div > app-content-file-explorer-inline-editor,
+  mat-row ccr-icon-move-folder {
+    pointer-events: auto !important;
+  }
+
+  mat-row {
+    & > mat-cell {
+      transition: padding 0.3s ease-in-out;
+    }
+  }
+
+  .ccr-htools {
+    height: 60px;
+  }
+
+  mat-row.ccr-dragover {
+    background-color: mat-color($ccr-foreground, icon);
+  }
+
+  mat-row.ccr-dragged {
+    border: none !important;
+  }
+
+  mat-row.ccr-long-dragover {
+    & > .mat-cell {
+      margin-top: 50px !important;
+    }
+  }
+
+  .row-icon {
+    color: mat-color($ccr-foreground, text);
+    fill: mat-color($ccr-foreground, text);
+    font-size: 150%;
+    height: 18px;
+    line-height: 175%;
+    text-align: center;
+  }
+
+  .parent-folder-button {
+    margin-left: 10px;
+  }
+
+  .private-icon {
+    color: mat-color($ccr-foreground, secondary-text);
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+    vertical-align: middle;
+  }
+
+  .file-icon {
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+
+    &.disabled {
+      color: mat-color($ccr-foreground, divider) !important;
+      fill: mat-color($ccr-foreground, divider);
+    }
+
+    &.fas {
+      font-size: 20px;
+    }
+  }
+
+  .ccr-edit-table {
+    max-height: 58vh;
+    overflow-y: auto;
+
+    .mat-header-row {
+      padding: 0 15px;
+
+      .mat-header-cell {
+        padding: 0 !important;
+      }
+    }
+
+    ccr-icon-move-folder {
+      fill: mat-color($ccr-foreground, icon);
+      padding: 0 5px;
+    }
+  }
+
+  mat-row.last-inherited {
+    border: none;
+    border-bottom: 3px solid mat-color($ccr-foreground, icon) !important;
+  }
+
+  .mat-column-name {
+    flex: 0 0 30% !important;
+  }
+
+  .mat-column-actions {
+    width: 60px;
+  }
+}

@@ -1,0 +1,37 @@
+@import 'variables';
+
+h4 {
+  margin: 0;
+}
+
+small {
+  cursor: pointer;
+}
+
+.ccr-form-field {
+  border: 1px solid darken(mat-color($ccr-background, app-bar), 10%);
+  border-radius: 5px;
+}
+
+.delete-icon {
+  margin-top: 5px;
+}
+
+.hidden {
+  display: none;
+  margin-bottom: 0;
+}
+
+.message-input-container {
+  margin-bottom: 10px;
+}
+
+.step-input-container {
+  border: 1px solid darken(mat-color($ccr-background, app-bar), 10%);
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.step-input-container.active {
+  border: 1px solid var(--primary);
+}

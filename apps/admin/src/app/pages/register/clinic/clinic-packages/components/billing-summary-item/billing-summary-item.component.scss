@@ -1,0 +1,51 @@
+@import 'variables';
+
+.item {
+  padding: 0 25px 0 25px;
+
+  &-name {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 0;
+
+    @media (max-width: $xs-max) {
+      text-align: center;
+    }
+  }
+
+  &-next-billing {
+    font-size: 1.2em;
+    font-style: oblique;
+    font-weight: 300;
+    line-height: 0.8em;
+    text-align: right;
+
+    @media (max-width: $xs-max) {
+      text-align: center;
+    }
+  }
+
+  &-price {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: right;
+
+    @media (max-width: $xs-max) {
+      text-align: center;
+    }
+  }
+
+  &-no-price {
+    font-style: oblique;
+    margin-bottom: 5px;
+    text-align: right;
+
+    @media (max-width: $xs-max) {
+      text-align: center;
+    }
+  }
+
+  &-subtext {
+    font-weight: 400;
+  }
+}

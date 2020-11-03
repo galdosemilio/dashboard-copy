@@ -1,0 +1,69 @@
+{
+  "data": [
+    {
+      "threadId": "1",
+      "subject": "CoachCare Message 1",
+      "account": [
+        {
+          "id": "6",
+          "lastName": "Di Bari",
+          "firstName": "Eric"
+        }
+      ],
+      "lastMessage": {
+        "id": "6112",
+        "date": "2020-01-01T03:00:00.000+00:00",
+        "content": "this is a test",
+        "accountId": "6"
+      },
+      "viewed": true
+    },
+    {
+      "threadId": "2",
+      "subject": "CoachCare Message 2",
+      "account": [
+        {
+          "id": "6",
+          "lastName": "Di Bari",
+          "firstName": "Eric"
+        },
+        {
+          "id": "1061",
+          "lastName": "Client",
+          "firstName": "Patryk"
+        }
+      ],
+      "lastMessage": {
+        "id": "6105",
+        "date": "2019-12-31T23:00:00.000+00:00",
+        "content": "COACHING SESSION SUMMARY for 05/1/519\\n\\nHi USER,\\n\\nIt was great meeting and getting to know you yesterday! I know in the first meeting there are so many questions! As we move forward, we’ll start better customizing to your unique individual needs in the different areas of Nutrition, Exercise, Stress, and Sleep as they all effect weight and health. We’ll take baby steps in changing habits and avoid going to extremes in either direction, shooting for that happy medium and what that is for you. I encourage flexibility and openness as we dig deeper into why you do the things you do to help problem solve and set goals for change. Remember habits take time to change, especially behavioral around how we think and feel about food, diet, and health, so please keep that in mind as we work through various things during this 12 month journey. Next are the goals that we discussed in your coaching session yesterday, along with supporting educational info noted below in \\\"Helpful Links\\\" to which I will email to your personal email address.\\n\\nGOALS:\\n(1)\\tExercise: once your energy is up to a 7 out 10 then start walking 3x/week for 20 minutes on Mon/Wed/Thurs at 5:30 pm. Once you complete this goal for 2 weeks straight then add 1 more easily do-able goal and complete both over the next 2 weeks and so forth, gradually working up to new habits in a slow step-wise fashion. Completing goals increases your self-esteem and makes you feel accomplished. It helps propel you forward giving you positive momentum as you continue your journey of easing into healthy, long-term, sustainable habits. Please also review the Fitness Guide located in the ‘Digital Library’ in the app to help give you ideas on progression and routine. \\n\\n(2)\\tHunger Awareness Exercise: Before you eat anything ask yourself \\\"Why\\\" are you eating? Are you eating out of physical hunger or non-physical hunger (like out of an emotion, habit, or boredom)? \\n(2a) If out of physical hunger, choose a combination of foods that will stabilize your blood sugar and satisfy your hunger (combo of protein/fiber/small amount of healthy fat with a carb. Example snack: Apple and 1/4 cup almonds). Try not to attach any guilt or emotions to the need to eat out of genuine hunger, and satisfying your hunger. Use the Hunger-Fullness scale (see link) when you do notice that you are wanting to eat out of hunger to help you better identify how hungry or full you are, or to help you know when best to start or stop eating. Using this scale also serves as an exercise in awareness to help you better connect to your body. It can help you to avoid extremes in your hunger and fullness, help sustain your energy, and help you feel your best. Please review the directions explained in the document before using. \\n(2b) If out of non-physical hunger, identify what it is that is driving you to want to eat. If it’s an emotion, where is it coming from and why? Is it something you can do something about practically or not? Deal with the emotion, or habit/boredom eating, using healthy coping mechanisms other than eating. These are the coping strategies that you’ve picked to help redirect yourself when you feel this way: - Go for a walk, - Complete one item on your TO DO list, - Journal. \\n\\n(3)\\tNutrition: (a) avoid drinking fluids 30 minutes before meals, during meals, and wait 30 minutes after meals before drinking. This will help you to get more nutrition in during mealtimes without filling up on fluids, as well as decrease feeling too full after a meal and feeling sick. Also, (b) try new foods one at a time in small portions to make sure that you can tolerate them first. Chew foods really well, like 20 times, and try to take 20 minutes to eat. It takes 20 minutes for your stomach hormones to communicate to your brain that you are full. At meal times (c) eat your protein foods first, and (d) try to stop eating 3 hours before bed to reduce risk of gastric reflux.\\n\\n(1)\\tNutrition: Once you progress to a regular textured diet, shoot for 1,200 calories/day and 60-90 g Protein. Use the Mediterranean eating style (see email) as a guide for meal planning, and use the Healthy Plate Method of how to plate your food (see email) filling 1/2 your plate with non-starchy vegetables, 1/4 of your plate with a protein, and 1/4 of your plate with a whole grain or starchy vegetable.\\n\\nHELPFUL LINKS\\n\\nMore Food Ideas for Food Texture Transition:\\nPureed/Blenderized\\nhttps://sharesync.serverdata.net/us/s/dMaXAOM8lMoYr3oaXX4fll0033ff32\\nSoft Diet\\nhttps://sharesync.serverdata.net/us/s/XXC6Kfguh9RKbEewJ9zA7i0033ff32\\n\\nHunger-Fullness and Mindfulness:\\nhttp://www.uttyler.edu/wellness/files/hunger-fullness-scale.pdf\\nhttps://www.move.va.gov/docs/NewHandouts/BehavioralHealth/B11_MindfulEating.pdf\\n\\nMediterranean Eating Style:\\nhttps://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/mediterranean-diet/art-20047801\\n\\nHealthy Plate Method:\\nhttps://www.move.va.gov/docs/NewHandouts/Standard/S06_MakingHealthyFoodChoicesWithAHealthyPlate.pdf\\n\\nTypes of Carbohydrates:\\nhttp://www.diabetes.org/food-and-fitness/food/what-can-i-eat/understanding-carbohydrates/types-of-carbohydrates.html\\nhttp://www.diabetes.org/food-and-fitness/food/what-can-i-eat/making-healthy-food-choices/non-starchy-vegetables.html\\n\\nHealthy Snack List: \\n(Pick 1 food from the Protein list, and 1 food from the Fiber list, unless the food is already a prepared snack food that contains that combo)\\nhttps://sharesync.serverdata.net/us/s/SOrzG3ylq6nM6f6htN0foI0033ff32\\n\\nAudible Book Ideas\\nhttps://www.audible.com/author/Brene-Brown/B001JP45BA\\nhttps://tinyurl.com/y2hc88m4\\n\\nPlease remember to book your follow up coaching session within the next 3-4 weeks. If you need help booking your next coaching session please let me know as I’ll be happy to help.\\n\\nRemember, you can message me between appointments at any time for any questions or concerns.\\n\\nLooking forward to talking with you next month!\\n\\COACH, MS, RDN\\nRegistered Dietitian Nutritionist\\nApollo Health & Wellness Coach",
+        "accountId": "6"
+      },
+      "viewed": true
+    },
+    {
+      "threadId": "3",
+      "subject": "CoachCare Message 3",
+      "account": [
+        {
+          "id": "6",
+          "lastName": "Di Bari",
+          "firstName": "Eric"
+        },
+        {
+          "id": "2139",
+          "lastName": "ihqefihwefih",
+          "firstName": "eric"
+        }
+      ],
+      "lastMessage": {
+        "id": "6104",
+        "date": "2019-12-31T03:00:00.000+00:00",
+        "content": "Don't have much to say....",
+        "accountId": "6"
+      },
+      "viewed": true
+    }
+  ],
+  "pagination": {}
+}

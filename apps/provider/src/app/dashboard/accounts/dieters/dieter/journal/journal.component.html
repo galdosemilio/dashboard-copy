@@ -1,0 +1,94 @@
+
+<div class="ccr-container-mini">
+  <ul class="ccr-tabs-center" fxLayout="row" fxLayoutAlign.gt-xs="center stretch">
+    <li *ngIf="hiddenComponents.indexOf('food') === -1">
+      <a mat-button [routerLink]="['.', {s: 'food'}]" [class.active]="section === 'food'">{{ 'GLOBAL.FOOD' | translate }}</a>
+    </li>
+    <li *ngIf="hasLevl && hiddenComponents.indexOf('levl') === -1">
+      <a mat-button [routerLink]="['.', {s: 'levl'}]" [class.active]="section === 'levl'">{{ 'LEVL' }}</a>
+    </li>
+    <li *ngIf="hasFoodKeys && hiddenComponents.indexOf('keys') === -1">
+      <a mat-button [routerLink]="['.', {s: 'keys'}]" [class.active]="section === 'keys'">{{ 'GLOBAL.FOOD_KEYS' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenComponents.indexOf('supplements') === -1">
+      <a mat-button [routerLink]="['.', {s: 'supplements'}]" [class.active]="section === 'supplements'">{{'GLOBAL.SUPPLEMENTS' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenComponents.indexOf('water') === -1">
+      <a mat-button [routerLink]="['.', {s: 'water'}]" [class.active]="section === 'water'">{{ 'GLOBAL.WATER' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenComponents.indexOf('exercise') === -1">
+      <a mat-button [routerLink]="['.', {s: 'exercise'}]" [class.active]="section === 'exercise'">{{ 'GLOBAL.EXERCISE' | translate }}</a>
+    </li>
+    <li *ngIf="hiddenComponents.indexOf('metrics') === -1">
+      <a mat-button [routerLink]="['.', {s: 'metrics'}]" [class.active]="section === 'metrics'">{{ 'GLOBAL.METRICS' | translate }}</a>
+    </li>
+    <!-- <li><a mat-button [routerLink]="['.', {s: 'pain'}]" [class.active]="section === 'pain'">{{ 'GLOBAL.PAIN' | translate }}</a></li> -->
+  </ul>
+</div>
+
+<date-navigator
+  [hidden]="component === 'metrics'"
+  [showTimeframeSelector]="component === 'exercise'"
+  [timeframe]="timeframe"
+  [date]="dates.current"
+  (selectedDate)="selectedDate($event)"
+></date-navigator>
+
+<div class="ccr-dashboard-pane" [ngSwitch]="component">
+  <ng-container *ngSwitchCase="'food'">
+
+    <app-dieter-journal-food
+      [dates]="dates"
+    ></app-dieter-journal-food>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'levl'">
+
+    <app-dieter-journal-levl
+      [dates]="dates"
+    ></app-dieter-journal-levl>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'keys'">
+
+    <app-dieter-journal-keys
+      [dates]="dates"
+    ></app-dieter-journal-keys>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'supplements'">
+
+    <app-dieter-journal-supplements
+      [dates]="dates"
+    ></app-dieter-journal-supplements>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'water'">
+
+    <app-dieter-journal-hydration
+      [dates]="dates"
+      [dailyHydrationGoal]="goals.goal.dailyHydration"
+    ></app-dieter-journal-hydration>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'exercise'">
+
+    <app-dieter-journal-exercise [dates]="dates"
+    ></app-dieter-journal-exercise>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'metrics'">
+
+   <app-dieter-journal-metrics></app-dieter-journal-metrics>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'pain'">
+
+    <app-dieter-journal-pain [dates]="dates"
+    ></app-dieter-journal-pain>
+
+  </ng-container>
+</div>

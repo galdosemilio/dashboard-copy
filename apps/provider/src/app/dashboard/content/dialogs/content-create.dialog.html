@@ -1,0 +1,97 @@
+
+<div matDialogTitle>
+  <div>
+    <mat-icon>cloud_upload</mat-icon>
+    <span>{{ 'LIBRARY.CONTENT.CONTENT_UPLOAD' | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content [formGroup]="form">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5%" [hidden]="!showCloseConfirm">
+        <strong class="ccr-close-content-create-text">{{ 'LIBRARY.CONTENT.CLOSE_CONTENT_CREATE_WARNING' | translate }}</strong>
+        <div fxLayout="row" fxLayoutGap="10px">
+          <button mat-button class="ccr-button" (click)="dismissDialog()">{{ 'GLOBAL.YES' | translate }}</button>
+          <button mat-button color="primary" class="ccr-button" (click)="showCloseConfirm = false">{{ 'LIBRARY.CONTENT.RESUME_CREATION' | translate }}</button>
+        </div>
+    </div>
+
+    <mat-horizontal-stepper #stepper linear class="dialog-stepper" (selectionChange)="stepperChange($event)" [hidden]="showCloseConfirm">
+
+        <mat-step [label]="'LIBRARY.CONTENT.SELECT_CONTENT_TYPE' | translate" [stepControl]="form.controls.contentType">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="stretch" fxLayoutGap="3%" class="step-body">
+                <button fxFlex mat-button color="primary" class="ccr-icon-button" *ngFor="let contentType of contentTypes"
+                    (click)="setContentType(contentType.code)">
+                    <mat-icon
+                        [class.svg-based]="contentType.icon.svgIcon"
+                        [class.font-based]="contentType.icon.set"
+                        [fontSet]="contentType.icon.set"
+                        [fontIcon]="contentType.icon.name"
+                        [svgIcon]="contentType.icon.svgIcon">
+                        {{ contentType.icon.set ? '' : contentType.icon.name }}
+                    </mat-icon>
+                    {{ contentType.name | translate }}
+                </button>
+            </div>
+        </mat-step>
+
+        <mat-step [label]="'LIBRARY.CONTENT.UPLOAD_CONTENT_PROPERTIES' | translate" [completed]="form.controls.content ? form.controls.content.valid : false">
+            <ng-container [ngSwitch]="form.controls.contentType.value">
+                <div *ngSwitchCase="'file'">
+                    <app-content-file-form bindForm="content" [mode]="mode"></app-content-file-form>
+                </div>
+                <div *ngSwitchCase="'folder'">
+                    <app-content-content-form bindForm="content" [mode]="mode"></app-content-content-form>
+                </div>
+                <div *ngSwitchCase="'hyperlink'">
+                    <app-content-hyperlink-form bindForm="content" [mode]="mode"></app-content-hyperlink-form>
+                </div>
+                <div *ngSwitchCase="'youtube'">
+                    <app-content-youtube-form bindForm="content" [mode]="mode"></app-content-youtube-form>
+                </div>
+            </ng-container>
+        </mat-step>
+
+        <mat-step [label]="'LIBRARY.CONTENT.UPLOAD_MORE_CONTENTS' | translate" [completed]="false">
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5%">
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="3%" class="queued-item-list-wrapper">
+                    <strong class="queued-item-list-title">{{ 'LIBRARY.CONTENT.QUEUED_CONTENTS' | translate }}</strong>
+                    <div class="queued-item-list" fxLayout="column" fxLayoutAlign="start start">
+                        <div *ngFor="let queuedContent of queuedContents; let i = index;" fxLayout="row" fxLayoutAlign="space-evenly center">
+                            <mat-icon class="item-icon"
+                                [class.svg-based]="queuedContent.type.icon.svgIcon"
+                                [class.font-based]="queuedContent.type.icon.set"
+                                [fontSet]="queuedContent.type.icon.set"
+                                [fontIcon]="queuedContent.type.icon.name"
+                                [svgIcon]="queuedContent.type.icon.svgIcon">
+                                {{ queuedContent.type.icon.set ? '' : queuedContent.type.icon.name }}
+                            </mat-icon>
+                            <strong class="item-name">{{ queuedContent.details.fullName || queuedContent.details.name }}</strong>
+                            <mat-icon (click)="removeQueuedContent(i)" class="remove-item-icon">cancel</mat-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-evenly center" class="queued-buttons-wrapper">
+                    <button mat-button class="ccr-button" (click)="resetDialog()">{{ 'LIBRARY.CONTENT.DIFF_CONTENT' | translate }}</button>
+                    <button mat-button color="primary" class="ccr-button" (click)="closeDialog()" [disabled]="!queuedContents.length">{{ 'LIBRARY.CONTENT.START_UPLOAD' | translate }}</button>
+                </div>
+            </div>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</div>
+
+<mat-dialog-actions [class.hidden]="showCloseConfirm">
+    <button mat-button class="ccr-button"
+    (click)="prevStep()" *ngIf="shouldShowPrev()">
+      {{ 'GLOBAL.PREVIOUS' | translate }}
+    </button>
+
+    <button mat-button class="ccr-button"
+    (click)="nextStep()" *ngIf="shouldShowNext()" [disabled]="shouldDisableNext()">
+      {{ 'GLOBAL.NEXT' | translate }}
+    </button>
+</mat-dialog-actions>

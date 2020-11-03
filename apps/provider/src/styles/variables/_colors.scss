@@ -1,0 +1,133 @@
+/**
+ * Palettes Usage:
+ *
+ * mar-color($ccr-primary)
+ * mat-color($ccr-primary, default-contrast)
+ * mat-color($ccr-primary, lighter)
+ * mat-color($ccr-primary, darker)
+ * mat-color($ccr-accent, 'A400-contrast', 0.38)
+ * mat-color($ccr-foreground, text)
+ * mat-color($ccr-background, 'background')
+ */
+
+// base and contrast colors
+$ccr-base: (
+  50: #ffebee,
+  100: #ffcdd2,
+  200: #ef9a9a,
+  300: #e57373,
+  400: #ef5350,
+  500: #f05d5c,
+  600: #e53935,
+  700: #d32f2f,
+  800: #c62828,
+  900: #b71c1c,
+  A100: #f8b1b1,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+);
+
+$ccr-contrast: (
+  50: #504c4a,
+  100: #504c4a,
+  200: #504c4a,
+  300: #504c4a,
+  400: #ffffff,
+  500: #ffffff,
+  600: #ffffff,
+  700: #f5f5f5,
+  800: #dedede,
+  900: #dedede,
+  A100: #504c4a,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #ffffff,
+);
+
+// foreground and background colors
+$ccr-foreground: (
+  base: #504c4a,
+  divider: rgba(black, 0.12),
+  dividers: rgba(black, 0.12),
+  disabled: rgba(black, 0.38),
+  disabled-button: rgba(black, 0.38),
+  disabled-text: rgba(black, 0.38),
+  hint-text: rgba(black, 0.38),
+  secondary-text: #aba9a8,
+  icon: #aba9a8,
+  icons: #484848,
+  text: #484848,
+  slider-min: rgba(black, 0.87),
+  slider-off: rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+  success: #d0e9c6,
+  info: #d9edf7,
+  warning: #faf2cc,
+  error: #f2dede,
+  table-actions: #a6a6a6,
+  stroke: #ddddde,
+  progress-circle: #807d7c,
+);
+
+$ccr-background: (
+  status-bar: #e0e0e0,
+  app-bar: #f5f5f5,
+  background: #ffffff,
+  hover: rgba(136, 137, 135, 0.04),
+  card: white,
+  dialog: white,
+  disabled-button: rgba(black, 0.12),
+  raised-button: white,
+  focused-button: rgba(black, 0.07),
+  selected-button: #e0e0e0,
+  selected-disabled-button: #bdbdbd,
+  disabled-button-toggle: #eeeeee,
+  unselected-chip: #e0e0e0,
+  disabled-list-option: #eeeeee,
+  box-shadow: rgba(black, 0.12),
+  chart: rgba(248, 248, 248, 0.7),
+  overlay: rgba(black, 0.05),
+  success: #3c763d,
+  info: #31708f,
+  warning: #8a6d3b,
+  error: #a94442,
+  tools: #e4e3e3,
+  header: #dcdcdd,
+  even: #fff,
+  odd: #f5f5f5,
+  search: #ededed,
+  selected: #f5f5f5,
+);
+
+// material variables
+@import '../../theming';
+
+$ccr-palette: map-merge(
+  $ccr-base,
+  (
+    contrast: $ccr-contrast,
+  )
+);
+
+// general colors
+$ccr-primary: mat-palette($ccr-palette);
+$ccr-accent: mat-palette($ccr-palette, A200, A100, A400);
+$ccr-warn: mat-palette($ccr-palette);
+$ccr-success: saturate(
+  lighten(adjust-hue(mat-color($ccr-background, success), -25%), 10%),
+  10%
+);
+$ccr-danger: lighten(mat-color($ccr-background, error), 10%);
+
+$mat-light-theme-background: $ccr-background;
+$mat-light-theme-foreground: $ccr-foreground;
+
+$ccr-theme: mat-light-theme($ccr-primary, $ccr-accent, $ccr-warn);
+
+// custom components
+// $ccr-btn-primary: mat-palette($ccr-warn, 500, 500, 500);
+// $ccr-btn-accent: mat-palette($ccr-palette, A100, A100, A100);
+// $ccr-btn-warn: mat-palette($ccr-palette, A700, A700, A700);
+
+// $ccr-buttons: mat-light-theme($ccr-btn-primary, $ccr-btn-accent, $ccr-btn-warn);

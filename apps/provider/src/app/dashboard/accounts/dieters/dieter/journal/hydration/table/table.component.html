@@ -1,0 +1,42 @@
+<ng-template #empty>-</ng-template>
+
+<ccr-datasource-overlay class="ccr-table ccr-table-stats" [source]="source">
+  <ng-template #empty>-</ng-template>
+  <table mat-table [dataSource]="source">
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.date | amDateFormat:'ddd, MMM D' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>{{'BOARD.AMOUNT' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.total; else empty">
+          {{ row.total | unitConversion: 'volume' }}<small style="text-transform: uppercase">{{ 'volume' | unitLabel | translate }}</small>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dailygoal">
+      <th mat-header-cell *matHeaderCellDef>{{ 'BOARD.DAILY_GOAL_PERC' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.dailyGoal !== null; then withGoal else notGoal"></ng-container>
+        <ng-template #withGoal>
+          <mat-icon class="done" *ngIf="row.dailyGoal >= 100; else notDone">done</mat-icon>
+          <ng-template #notDone>{{ row.dailyGoal }}<small class="perc">%</small></ng-template>
+        </ng-template>
+        <ng-template #notGoal>-</ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row
+      *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }">
+    </tr>
+  </table>
+
+</ccr-datasource-overlay>

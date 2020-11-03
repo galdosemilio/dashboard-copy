@@ -1,0 +1,7 @@
+.help-overlay {
+  & > iframe {
+    height: 400px;
+    min-width: 370px;
+    max-width: 400px;
+  }
+}

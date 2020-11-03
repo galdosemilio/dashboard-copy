@@ -1,0 +1,63 @@
+<div [hidden]="messagingEnabled" class="messaging-disabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <mat-icon>error</mat-icon>
+  <p>{{ 'BOARD.MESSAGING_DISABLED' | translate }}</p>
+</div>
+
+<div [hidden]="!messagingEnabled" fxFlexFill fxLayout="column">
+
+  <div class="ccr-heading" fxFlex="nogrow">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+      <h2>{{ 'GLOBAL.MESSAGES' | translate }}</h2>
+    </div>
+  </div>
+
+  <div fxFlex="grow" fxLayout="row" fxLayoutAlign="stretch">
+    <div class="ccr-recipients" fxLayout="column">
+
+      <app-messages-recipients *ngIf="current"
+        [current]="current" [total]="source?.total"
+        (changed)="selectAccounts($event)"
+      ></app-messages-recipients>
+
+      <div class="ccr-recipients-scroll" #scroll>
+        <mat-nav-list>
+          <ng-container *ngFor="let thread of threads; let index = index">
+          <mat-list-item *ngIf="thread.recipients.length"
+          (click)="active = index"
+          [class.active]="active === index">
+            <ccr-badge *ngIf="thread.unread">&nbsp;&nbsp;</ccr-badge>
+            <ccr-avatar size="messages" [account]="thread.recipients[0].id" matListIcon></ccr-avatar>
+            <h3 matLine>
+              <ng-container *ngIf="thread.recipients.length === 1; else recipients">
+                {{thread.recipients[0].name}}
+
+              </ng-container>
+              <ng-template #recipients>
+                <ng-container *ngFor="let recipient of thread.recipients; let last = last">
+                  {{recipient.firstName}}<ng-container *ngIf="!last">, </ng-container>
+                </ng-container>
+              </ng-template>
+            </h3>
+            <p matLine class="message-lastsend">
+              {{thread.lastMessageSent}}
+            </p>
+          </mat-list-item>
+          </ng-container>
+        </mat-nav-list>
+      </div>
+
+      <mat-progress-bar *ngIf="source?.isLoading"
+        color="primary" mode="indeterminate"
+      ></mat-progress-bar>
+    </div>
+
+    <ccr-messages
+      [account]="current"
+      [thread]="threads[active] ? threads[active] : newThread"
+      (lastMessageSent)="threads[active] ?  threads[active].lastMessageSent = $event : null"
+      (viewed)="viewedThread($event)"
+      (refresh)="resetThreads()"
+      (gotoProfile)="gotoProfile($event)"
+    ></ccr-messages>
+  </div>
+</div>

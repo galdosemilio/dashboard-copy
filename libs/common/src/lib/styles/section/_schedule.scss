@@ -1,0 +1,151 @@
+@mixin ccr-section-schedule($theme, $config) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .calendar-options {
+    overflow: hidden;
+
+    > span {
+      font-size: 0.75em;
+      line-height: 28px;
+      margin-right: 3px;
+      min-width: 75px;
+      @media #{map-get($config, lte-md)} {
+        min-width: 70px;
+      }
+      padding: 0 10px;
+      &.meeting {
+        background-color: var(--primary-a26, mat-color($primary, 0.25));
+        border: 1px solid var(--primary-a26, mat-color($primary, 0.25));
+        border-left: 2px solid var(--primary, mat-color($primary));
+      }
+      &.available {
+        border: 1px solid mat-color($foreground, divider);
+      }
+      &.unavailable {
+        background-color: mat-color($background, odd);
+        border: 1px solid mat-color($background, odd);
+        border-left: 2px solid mat-color($background, tools);
+      }
+    }
+    > mat-icon {
+      color: mat-color($foreground, icon);
+      cursor: help;
+      font-size: 18px;
+      height: 18px;
+      margin-left: auto;
+      margin-right: 7px;
+    }
+  }
+
+  .calendar {
+    border-collapse: collapse;
+    color: mat-color($foreground, text);
+    font-size: 0.85em;
+    width: 100%;
+    &.week {
+      thead {
+        visibility: visible;
+        th {
+          width: 13.3%;
+        }
+      }
+    }
+    thead {
+      display: table;
+      width: calc(100% - 17px);
+      table-layout: fixed;
+      visibility: hidden;
+      th {
+        font-size: 0.9em;
+        font-weight: 400;
+        height: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        width: calc(14.2% - 11.2px);
+      }
+      th:first-of-type {
+        width: 80px;
+      }
+    }
+    tbody {
+      width: 100%;
+      height: 400px;
+      overflow-y: overlay;
+      overflow-x: hidden;
+      display: block;
+      table-layout: fixed;
+      tr {
+        overflow: visible;
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+        height: 25px;
+        td {
+          position: relative;
+          overflow: visible;
+          width: calc(14.2% - 11.2px);
+          border: 1px solid mat-color($foreground, divider);
+          border-width: 1px 1px 0px 1px;
+          background-color: mat-color($background, odd);
+          &.available {
+            background-color: var(
+              --primary-contrast,
+              mat-color($primary, default-contrast)
+            );
+          }
+
+          .meeting {
+            background-color: var(--primary-a26, mat-color($primary, 100));
+            border: 1px solid var(--primary-a26, mat-color($primary, 100));
+            border-left: 2px solid var(--primary, mat-color($primary));
+            font-size: 0.8em;
+            left: 0;
+            line-height: 20px;
+            overflow: hidden;
+            position: absolute;
+            width: calc(100% - 3px);
+            z-index: 1;
+
+            .meeting-content {
+              margin: 3px 10px;
+            }
+            .meeting-title {
+              font-weight: bold;
+              line-height: 12px;
+            }
+          }
+          .meeting-selectable {
+            cursor: pointer;
+          }
+          .meeting-selected {
+            border: 1px solid var(--primary, mat-color($primary));
+            border-left: 2px solid var(--primary, mat-color($primary));
+            box-shadow: 1px 0 0 mat-color($background, box-shadow);
+          }
+          .meeting-unavailable {
+            background-color: mat-color($background, odd);
+            border-left: 2px solid mat-color($background, tools);
+          }
+          &:first-of-type {
+            width: 65px;
+            border: none;
+            font-size: 0.9em;
+            font-weight: 400;
+            text-transform: uppercase;
+            background-color: var(
+              --primary-contrast,
+              mat-color($primary, default-contrast)
+            );
+          }
+        }
+        &:last-of-type {
+          td {
+            border-width: 1px;
+          }
+        }
+      }
+    }
+  }
+}

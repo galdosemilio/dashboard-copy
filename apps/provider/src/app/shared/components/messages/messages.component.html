@@ -1,0 +1,65 @@
+<div class="messages-header" *ngIf="thread?.recipients.length" fxFlex="nogrow" fxLayout="row"
+  fxLayoutAlign="start center">
+  <div fxFlex fxLayoutAlign="start center" fxLayoutGap="5px">
+    <ng-container *ngFor="let recipient of thread.recipients">
+      <ccr-avatar [account]="recipient.id" size="messages"></ccr-avatar>
+    </ng-container>
+
+    <span>
+      <ng-container *ngIf="thread.recipients.length === 1; else recipients">
+        <span (click)="showProfile(thread.recipients[0])" class="patient-link">{{thread.recipients[0].name}}</span>
+      </ng-container>
+      <ng-template #recipients>
+        <ng-container *ngFor="let recipient of thread.recipients; let last = last">
+          <span (click)="showProfile(recipient)" class="patient-link">{{recipient.firstName}}</span>
+          <ng-container *ngIf="!last">, </ng-container>
+        </ng-container>
+      </ng-template>
+    </span>
+  </div>
+  <div fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" >
+    <ccr-call-control [targets]="thread.recipients"></ccr-call-control>
+    <a *ngIf="thread?.recipients.length === 1" mat-button color="primary" class="ccr-icon-button"
+      (click)="showProfile(thread.recipients[0])">
+      <mat-icon>person_outline</mat-icon>
+      {{'BOARD.VIEW_PROFILE' | translate}}
+    </a>
+  </div>
+</div>
+
+<div class="messages-body" #messageBody fxFlex="grow">
+
+  <span class="message-heading message-first" *ngIf="messages && messages.length === 0">
+    {{'BOARD.MESSAGES_START' | translate}}
+  </span>
+  <div *ngIf="account && messages.length > 0">
+    <a mat-button class="ccr-button" (click)="loadPrevious()" *ngIf="offset !== 0 && offset !== null">
+      {{'BOARD.MESSAGES_LOAD' | translate}}
+    </a>
+    <ng-container *ngFor="let message of messages">
+      <span class="message-heading" *ngIf="message.timestamp">{{message.timestamp}}</span>
+      <div class="message-wrap" [class.message-input]="account.id !== message.author" [class.message-output]="account.id === message.author">
+        <ccr-avatar size="big" class="message-img" [account]="message.author" [matTooltip]="message.account.firstName + '' + message.account.lastName"></ccr-avatar>
+        <span class="message-text" [innerHTML]="message.content"></span>
+      </div>
+    </ng-container>
+  </div>
+
+</div>
+
+<div class="messages-footer" fxFlex="nogrow">
+  <textarea rows="2" [(ngModel)]="newMessage" [detectKey]="'Enter'" supressOnShiftKeyHold="true" (keyPressed)="sendMessage()"
+    [placeholder]="'BOARD.TYPE_YOUR_MESSAGES_HERE' | translate"></textarea>
+  <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
+    <mat-icon>send</mat-icon> {{'GLOBAL.SEND' | translate}}
+  </button>
+  <ccr-popup-description
+    [title]="'BOARD.MESSAGES_HELP_TITLE' | translate"
+    [description]="'BOARD.MESSAGES_HELP_DESCRIPTION' | translate"
+    [showIntro]="false"
+  ></ccr-popup-description>
+</div>
+
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="loading || disabled">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+</div>

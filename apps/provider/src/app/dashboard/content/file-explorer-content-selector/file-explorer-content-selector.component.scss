@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.explorer-wrapper {
+  // contain: size;
+  height: 27vh;
+  max-height: 27vh;
+  overflow-y: scroll;
+  // width: 50vw;
+}

@@ -1,0 +1,17 @@
+@import 'variables';
+
+.form-actions {
+  height: 38px;
+  @media #{$medium-and-down} {
+    height: 32px;
+    margin-bottom: 10px;
+  }
+}
+
+.ccr-htools {
+  height: 60px;
+}
+
+.mat-form-field ::ng-deep .mat-form-field-wrapper {
+  margin-bottom: -1.25em + 0.5;
+}

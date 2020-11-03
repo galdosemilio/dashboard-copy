@@ -1,0 +1,33 @@
+<div
+class="section" fxLayout="column" fxLayoutAlign="start stretch"
+fxLayoutGap="0.5em" [formGroup]="form">
+  <div class="section-header" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="7px" *ngIf="showHeader">
+    <h4 class="title">{{ section.title }}</h4>
+    <span class="description" *ngIf="section.description">{{ section.description }}</span>
+  </div>
+
+  <div class="section-body" fxLayout="column" fxLayoutGap="3%">
+      <div fxLayout="row" fxLayoutAlign="start start"
+      *ngFor="let question of renderableQuestions; let i = index">
+          <div *ngIf="renderableIndexes[i]" fxLayout="column" fxLayoutAlign="start space-around">
+            <h2 class="question-number">{{ renderableIndexes[i] }}</h2>
+          </div>
+          <app-library-question-renderer
+          fxFlex="grow"
+          class="question-body"
+          [question]="question"
+          [answer]="question.answer"
+          [bindForm]="question.id"
+          [useParentForm]="false"
+          [overwriteControl]="true"
+          [readonly]="readonly"
+          [hidden]="question.deleted"
+          ></app-library-question-renderer>
+      </div>
+  </div>
+
+  <div *ngIf="!hasQuestions" fxLayout="row" fxLayoutAlign="center center">
+    <span *ngIf="showHeader" class="ccr-strong">{{ 'LIBRARY.FORMS.EMPTY_SECTION' | translate }}</span>
+    <span *ngIf="!showHeader" class="ccr-strong">{{ 'LIBRARY.FORMS.EMPTY_ONLY_SECTION' | translate }}</span>
+  </div>
+</div>

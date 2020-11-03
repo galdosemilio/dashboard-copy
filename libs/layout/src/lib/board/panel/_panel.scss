@@ -1,0 +1,183 @@
+@import 'variables';
+
+$rp-right-padding: 40px;
+$icon-dimensions: 21px;
+$subheader-height: 27px;
+
+/*
+* Dynamic component
+*/
+ccr-panel > :last-child {
+  h3 {
+    font-size: inherit;
+    font-weight: normal;
+    height: 80px;
+    line-height: 90px;
+    margin: 0;
+    padding-left: $rp-right-padding - 20px;
+    text-transform: uppercase;
+    user-select: none;
+    @media #{$lte-md} {
+      height: 2px;
+      opacity: 0;
+      visibility: hidden;
+    }
+    mat-icon {
+      font-size: 20px;
+      vertical-align: middle;
+    }
+  }
+
+  /* empty component */
+  .items-empty {
+    color: mat-color($ccr-foreground, icon);
+    text-align: center;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 30px;
+    @media #{$lte-md} {
+      top: 0;
+    }
+
+    .mat-icon {
+      font-size: 100px;
+      height: 100px;
+      opacity: 0.3;
+      width: 100px;
+    }
+    > span {
+      display: block;
+      padding-top: 10px;
+    }
+  }
+
+  h4.mat-subheader {
+    background-color: var(--panel, mat-color($ccr-primary));
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    color: var(--panel-contrast, mat-color($ccr-primary, default-contrast));
+    font-weight: normal;
+    height: 25px;
+    line-height: 26px;
+    margin: 0;
+    padding: 0 0 0 $rp-right-padding - 10px;
+    text-transform: uppercase;
+
+    mat-icon {
+      margin-right: 5px;
+      line-height: 25px;
+      font-size: 21px;
+    }
+    > span {
+      display: inline-block;
+      line-height: 25px;
+      vertical-align: top;
+    }
+  }
+
+  /* item next to the subheader */
+  h4 + div,
+  h4 + form {
+    padding-top: 25px !important;
+    padding-bottom: 15px;
+  }
+  /* empty items message */
+  .items-none {
+    padding: 0 25px 25px;
+  }
+  /* add button */
+  .items-create {
+    padding: 0 30px 20px 20px;
+    text-align: center;
+    .mat-button {
+      width: 100%;
+    }
+  }
+
+  .mat-list {
+    padding: 0 !important;
+
+    .mat-list-item {
+      .mat-list-item-content {
+        height: auto;
+        padding: 0 26px 0 16px;
+      }
+      .item {
+        border-bottom: 2px solid mat-color($ccr-foreground, divider);
+        &.item-last {
+          border-bottom: none;
+        }
+      }
+      &:last-child {
+        .item {
+          border-bottom: 0px;
+        }
+        .reminder-item {
+          border-bottom: 2px solid mat-color($ccr-foreground, divider);
+          &.last {
+            border-bottom: 0px;
+          }
+        }
+      }
+    }
+
+    .item {
+      font-size: 15px;
+      padding: 15px 0;
+      width: 100%;
+
+      .mat-icon {
+        font-size: $icon-dimensions;
+        height: $icon-dimensions;
+        width: $icon-dimensions;
+        vertical-align: top;
+      }
+      .item-heading {
+        margin-bottom: 5px;
+
+        mat-icon {
+          color: var(--panel, mat-color($ccr-primary));
+        }
+        > span {
+          display: inline-block;
+          line-height: 22px;
+        }
+      }
+      .item-body {
+        color: mat-color($ccr-foreground, secondary-text);
+        padding-left: 22px;
+
+        > div {
+          margin-bottom: 5px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          > span {
+            display: inline-block;
+            line-height: 22px;
+            vertical-align: bottom;
+            width: 85%;
+          }
+        }
+      }
+    }
+  }
+
+  form > mat-error,
+  div:not(.ng-trigger) > mat-error {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: -1.2em;
+    padding-bottom: 1em;
+  }
+  .action-buttons {
+    text-align: center;
+    .mat-button:not(:last-child) {
+      margin-bottom: 7px;
+      margin-right: 5px;
+    }
+  }
+}

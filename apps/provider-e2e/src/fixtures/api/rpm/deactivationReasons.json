@@ -1,0 +1,9 @@
+{
+  "data": [
+    { "id": "2", "description": "Patient not compliant", "isActive": true },
+    { "id": "1", "description": "Patient reached the goal", "isActive": true },
+    { "id": "3", "description": "Provider discontinued", "isActive": true },
+    { "id": "4", "description": "User error", "isActive": true }
+  ],
+  "pagination": {}
+}

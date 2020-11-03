@@ -1,0 +1,17 @@
+@mixin ccr-component-help($theme, $config) {
+  $foreground: map-get($theme, foreground);
+
+  ccr-help {
+    display: inline-block;
+    vertical-align: middle;
+
+    mat-icon {
+      color: mat-color($foreground, icon);
+      cursor: pointer;
+      font-size: 20px;
+      height: 20px;
+      width: 20px;
+      vertical-align: middle;
+    }
+  }
+}

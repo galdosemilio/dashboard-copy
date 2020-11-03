@@ -1,0 +1,20 @@
+<div class="ccr-heading">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutWrap.xs fxLayoutGap="10px">
+      <h2>{{ 'GLOBAL.PATIENTS' | translate }}</h2>
+    </div>
+
+    <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="space-between center">
+      <ccr-paginator fxFlex="nogrow" #paginator
+        [length]="dietersSource.total"
+        [pageIndex]="dietersSource.pageIndex"
+        [pageSize]="dietersSource.pageSize"
+        (page)="dietersSource.pageIndex = $event.pageIndex"
+      ></ccr-paginator>
+    </div>
+  </div>
+
+  <app-dieters-table
+    [source]="dietersSource"
+    [editable]="true"
+    (onSorted)="onSorted($event)">
+  </app-dieters-table>

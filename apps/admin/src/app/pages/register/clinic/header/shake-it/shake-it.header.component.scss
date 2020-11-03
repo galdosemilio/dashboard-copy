@@ -1,0 +1,64 @@
+@import 'variables';
+
+.shake-it-page-header {
+  --header-size: 64px;
+  background: var(--bg-panel);
+  height: calc(100% + var(--header-size)) !important;
+  position: absolute !important;
+  top: calc(-1 * var(--header-size)) !important;
+  width: 100%;
+
+  & > div {
+    padding-top: calc(2 * var(--header-size));
+  }
+
+  .header-banner {
+    background: var(--bg-bar);
+    height: calc(1.5 * var(--header-size));
+    margin-top: calc(-2 * var(--header-size));
+    padding: 15px 0;
+
+    img {
+      bottom: initial;
+      display: block;
+      height: 90%;
+      left: initial;
+      margin: 0 auto;
+      position: relative;
+      right: initial;
+      width: auto;
+    }
+
+    p {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+}
+
+p.welcome-text {
+  color: var(--primary);
+  font-size: 1.5em;
+}
+
+p.description-text {
+  font-size: 1.15em;
+}
+
+.side-image {
+  background-image: url('/assets/headers/shakeit-header-form.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 300px;
+}
+
+@media (max-width: $sm-max) {
+  p.description-text {
+    display: none;
+  }
+
+  .side-image {
+    height: 100px;
+  }
+}

@@ -1,0 +1,12 @@
+<ng-container [formGroup]="form" novalidate *ngIf="!_isLoading">
+  <!-- <ccr-form-field-text
+    formControlName="name"
+    [placeholder]="'GLOBAL.FILTER_BY_NAME' | translate"
+  ></ccr-form-field-text> -->
+
+  <mat-checkbox
+    formControlName="includeInActive">
+    {{ 'GLOBAL.INCLUDE_INACTIVE' | translate }}
+  </mat-checkbox>
+
+</ng-container>

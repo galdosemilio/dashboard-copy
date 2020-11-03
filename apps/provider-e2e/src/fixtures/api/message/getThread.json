@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "threadId": "1",
+      "subject": "CoachCare Message",
+      "messageId": "1",
+      "createdAt": "2020-01-01T03:00:00.000+00:00",
+      "content": "this is a test http://www.google.com or https://www.google.com or http:/www.google.com or https//google.com or https://yahoo.com.",
+      "account": {
+        "id": "6",
+        "lastName": "Di Bari",
+        "firstName": "Eric"
+      }
+    },
+    {
+      "threadId": "1",
+      "subject": "CoachCare Message",
+      "messageId": "2",
+      "createdAt": "2019-12-20T03:00:00.000+00:00",
+      "content": "this is a previous message...",
+      "account": {
+        "id": "7",
+        "lastName": "Andrew",
+        "firstName": "Zengilowski"
+      }
+    }
+  ],
+  "pagination": {}
+}

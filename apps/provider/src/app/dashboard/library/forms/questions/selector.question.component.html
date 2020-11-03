@@ -1,0 +1,7 @@
+<ng-container [formGroup]="form">
+  <mat-form-field class="ccr-form-field" floatLabel="never" fxFlex="grow">
+    <mat-select formControlName="value">
+      <mat-option *ngFor="let allowedValue of question.allowedValues" [value]="allowedValue">{{ allowedValue }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
