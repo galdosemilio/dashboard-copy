@@ -1,12 +1,19 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { _ } from '@coachcare/backend/shared';
-import { BINDFORM_TOKEN } from '@coachcare/common/directives';
-import { NotifierService } from '@coachcare/common/services';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { debounceTime } from 'rxjs/operators';
-import { MFA } from 'selvera-api';
-import { MFAInputComponent } from '../../mfa-input';
+import {
+  Component,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { _ } from '@coachcare/backend/shared'
+import { BINDFORM_TOKEN } from '@coachcare/common/directives'
+import { NotifierService } from '@coachcare/common/services'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { debounceTime } from 'rxjs/operators'
+import { MFA } from '@coachcare/npm-api'
+import { MFAInputComponent } from '../../mfa-input'
 
 @Component({
   selector: 'ccr-organizations-security',
@@ -19,61 +26,73 @@ import { MFAInputComponent } from '../../mfa-input';
   ]
 })
 export class SecurityComponent implements OnDestroy, OnInit {
-  @Input() orgId: string;
+  @Input() orgId: string
   @ViewChild(MFAInputComponent, { static: false })
-  mfaInput: MFAInputComponent;
+  mfaInput: MFAInputComponent
 
-  public form: FormGroup;
+  public form: FormGroup
 
-  private firstLoad = false;
+  private firstLoad = false
 
-  constructor(private fb: FormBuilder, private mfa: MFA, private notifier: NotifierService) {}
+  constructor(
+    private fb: FormBuilder,
+    private mfa: MFA,
+    private notifier: NotifierService
+  ) {}
 
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   private async onSubmit(): Promise<void> {
     try {
-      let existingMfaPref;
-      let inServerOverride;
-      const formValue = this.form.value;
-      const mfaPref = formValue.mfaPref;
-      const promises: Promise<any>[] = [];
+      let existingMfaPref
+      let inServerOverride
+      const formValue = this.form.value
+      const mfaPref = formValue.mfaPref
+      const promises: Promise<any>[] = []
 
       if (mfaPref && mfaPref.mfaInherit) {
         if (mfaPref.mfaPref && mfaPref.mfaPref.organization.id === this.orgId) {
           promises.push(
             this.mfa.deleteOrganizationMFA({
-              id: (await this.mfa.getOrganizationMFA({
-                organization: this.orgId || '',
-                status: 'all'
-              })).id
+              id: (
+                await this.mfa.getOrganizationMFA({
+                  organization: this.orgId || '',
+                  status: 'all'
+                })
+              ).id
             })
-          );
+          )
         }
       } else {
-        if (mfaPref && mfaPref.mfaPref && mfaPref.mfaPref.organization.id === this.orgId) {
+        if (
+          mfaPref &&
+          mfaPref.mfaPref &&
+          mfaPref.mfaPref.organization.id === this.orgId
+        ) {
           existingMfaPref = await this.mfa.getOrganizationMFA({
             organization: this.orgId || '',
             status: 'all'
-          });
+          })
         } else {
           existingMfaPref = await this.mfa.createOrganizationMFA({
             organization: this.orgId || '',
             isActive: mfaPref.mfaEnabled || false
-          });
-          inServerOverride = false;
+          })
+          inServerOverride = false
         }
 
         if (mfaPref && mfaPref.value) {
-          mfaPref.value.forEach(value => {
+          mfaPref.value.forEach((value) => {
             promises.push(
-              (inServerOverride !== undefined
-              ? inServerOverride
-              : value.inServer)
+              (
+                inServerOverride !== undefined
+                  ? inServerOverride
+                  : value.inServer
+              )
                 ? this.mfa.updateMFASection({
                     id: value.id,
                     isRequired: value.isRequired || false,
@@ -85,8 +104,8 @@ export class SecurityComponent implements OnDestroy, OnInit {
                     isRequired: value.isRequired || false,
                     section: value.section.id
                   })
-            );
-          });
+            )
+          })
         }
 
         promises.push(
@@ -94,39 +113,36 @@ export class SecurityComponent implements OnDestroy, OnInit {
             id: existingMfaPref.id || '',
             isActive: mfaPref.mfaEnabled || false
           })
-        );
+        )
       }
 
-      await Promise.all(promises);
+      await Promise.all(promises)
 
-      this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'));
+      this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
       if (this.mfaInput) {
-        this.firstLoad = false;
-        this.mfaInput.reload();
+        this.firstLoad = false
+        this.mfaInput.reload()
       }
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
   private createForm(): void {
-    this.form = this.fb.group({});
+    this.form = this.fb.group({})
 
     setTimeout(
       () =>
         this.form.valueChanges
-          .pipe(
-            untilDestroyed(this),
-            debounceTime(500)
-          )
+          .pipe(untilDestroyed(this), debounceTime(500))
           .subscribe(() => {
             if (this.firstLoad) {
-              this.onSubmit();
+              this.onSubmit()
             } else {
-              this.firstLoad = true;
+              this.firstLoad = true
             }
           }),
       1000
-    );
+    )
   }
 }

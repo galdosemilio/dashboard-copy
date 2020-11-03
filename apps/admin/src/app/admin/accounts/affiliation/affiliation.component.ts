@@ -8,6 +8,7 @@ import {
 } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
 import {
+  Affiliation,
   AccountSingle,
   AccountTypeId,
   CreateOrganizationAssociationRequest,
@@ -21,7 +22,6 @@ import {
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
 import { Subject } from 'rxjs'
-import { Affiliation } from 'selvera-api'
 
 @Component({
   selector: 'ccr-affiliation',

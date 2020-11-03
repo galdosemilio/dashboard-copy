@@ -15,5 +15,9 @@
     "organizationId": "3378",
     "providerId": "5606",
     "timezone": "et"
+  },
+  "retries": {
+    "runMode": 2,
+    "openMode": 2
   }
 }

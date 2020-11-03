@@ -6,6 +6,7 @@ import {
 } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
 import {
+  Affiliation,
   AccountTypeIds,
   CreateOrganizationAssignmentRequest,
   OrganizationAssociation,
@@ -15,7 +16,6 @@ import { _ } from '@coachcare/backend/shared'
 import { PaginatorComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
 import { Subject } from 'rxjs'
-import { Affiliation } from 'selvera-api'
 
 @Component({
   selector: 'ccr-related-org',

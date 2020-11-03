@@ -11,7 +11,7 @@ import { PaginatorComponent } from '@coachcare/common/components'
 import { PromptDialog } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
 import { debounceTime } from 'rxjs/operators'
-import { ActiveCampaign } from 'selvera-api'
+import { ActiveCampaign } from '@coachcare/npm-api'
 import { EditActiveCampaignDialogComponent } from '../../dialogs'
 
 @Component({

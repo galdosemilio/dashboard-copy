@@ -1,58 +1,58 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { _ } from '@coachcare/backend/shared';
-import { NotifierService } from '@coachcare/common/services';
-import { Organization } from 'selvera-api';
-import { EmailTemplate } from 'selvera-api/dist/lib/selvera-api/providers/organization/entities';
+import { Component, Inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { _ } from '@coachcare/backend/shared'
+import { NotifierService } from '@coachcare/common/services'
+import { Organization } from '@coachcare/npm-api'
+import { EmailTemplate } from 'selvera-api/dist/lib/selvera-api/providers/organization/entities'
 
 interface EmailTemplateDialogProps {
-  title: string;
-  emailTemplate: EmailTemplate;
-  orgId: string;
+  title: string
+  emailTemplate: EmailTemplate
+  orgId: string
 }
 
 interface SelectorOption {
-  value: string;
-  displayValue: string;
+  value: string
+  displayValue: string
 }
 
 @Component({
   selector: 'ccr-organizations-email-template-dialog',
   templateUrl: './email-template.dialog.html',
   host: {
-    class: 'ccr-dialog',
-  },
+    class: 'ccr-dialog'
+  }
 })
 export class EmailTemplateDialogComponent implements OnInit {
   categories: SelectorOption[] = [
     {
       value: 'client',
-      displayValue: _('EMAIL_TEMPLATE_CATS.CLIENT'),
+      displayValue: _('EMAIL_TEMPLATE_CATS.CLIENT')
     },
     {
       value: 'other',
-      displayValue: _('EMAIL_TEMPLATE_CATS.OTHER'),
-    },
-  ];
-  form: FormGroup;
-  id: string;
+      displayValue: _('EMAIL_TEMPLATE_CATS.OTHER')
+    }
+  ]
+  form: FormGroup
+  id: string
   operations: SelectorOption[] = [
     {
       value: 'internal-registration',
-      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION'),
+      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION')
     },
     {
       value: 'internal-registration-plan',
-      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION_PLAN'),
+      displayValue: _('EMAIL_TEMPLATE_OPS.INTERNAL_REGISTRATION_PLAN')
     },
     {
       value: 'new-account',
-      displayValue: _('EMAIL_TEMPLATE_OPS.NEW_ACCOUNT'),
-    },
-  ];
-  orgId: string;
-  title: string;
+      displayValue: _('EMAIL_TEMPLATE_OPS.NEW_ACCOUNT')
+    }
+  ]
+  orgId: string
+  title: string
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: EmailTemplateDialogProps,
@@ -63,15 +63,15 @@ export class EmailTemplateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createForm();
-    this.title = _('GLOBAL.CREATE_EMAIL_TEMPLATE');
+    this.createForm()
+    this.title = _('GLOBAL.CREATE_EMAIL_TEMPLATE')
     if (this.data) {
-      this.id = this.data.emailTemplate ? this.data.emailTemplate.id : '';
+      this.id = this.data.emailTemplate ? this.data.emailTemplate.id : ''
       if (this.data.emailTemplate) {
-        this.form.patchValue(this.data.emailTemplate);
+        this.form.patchValue(this.data.emailTemplate)
       }
-      this.title = this.data.title ? this.data.title : this.title;
-      this.orgId = this.data.orgId;
+      this.title = this.data.title ? this.data.title : this.title
+      this.orgId = this.data.orgId
     }
   }
 
@@ -80,18 +80,18 @@ export class EmailTemplateDialogComponent implements OnInit {
       if (this.id) {
         await this.organization.updateEmailTemplate({
           id: this.id,
-          ...this.form.value,
-        });
+          ...this.form.value
+        })
       } else {
         await this.organization.createEmailTemplate({
           ...this.form.value,
-          organization: this.orgId,
-        });
+          organization: this.orgId
+        })
       }
-      this.notify.success(_('NOTIFY.SUCCESS.EMAIL_TEMPLATE_SAVED'));
-      this.dialog.close(true);
+      this.notify.success(_('NOTIFY.SUCCESS.EMAIL_TEMPLATE_SAVED'))
+      this.dialog.close(true)
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
   }
 
@@ -102,7 +102,7 @@ export class EmailTemplateDialogComponent implements OnInit {
       category: ['', Validators.required],
       subject: [''],
       html: [''],
-      text: [''],
-    });
+      text: ['']
+    })
   }
 }

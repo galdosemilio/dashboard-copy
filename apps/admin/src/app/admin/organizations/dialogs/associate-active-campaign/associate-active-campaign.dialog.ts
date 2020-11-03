@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
-import { NamedEntity } from '@coachcare/npm-api'
+import { ActiveCampaign, NamedEntity } from '@coachcare/npm-api'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-import { ActiveCampaign } from 'selvera-api'
 
 export interface AssociateActiveCampaignDialogData {
   organizationId: string

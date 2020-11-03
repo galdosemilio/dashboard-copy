@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import {
+  ActiveCampaign,
   ActiveCampaignListAssociationItem,
   GetActiveCampaignListAssociationRequest,
   PagedResponse
 } from '@coachcare/npm-api'
-import { ActiveCampaign } from 'selvera-api'
 
 @Injectable()
 export class ActiveCampaignDatabase {

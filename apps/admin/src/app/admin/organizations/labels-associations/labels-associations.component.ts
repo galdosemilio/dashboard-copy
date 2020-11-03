@@ -19,14 +19,13 @@ import {
   PackageAssociationElement
 } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
-import { PackageOrganization, PackageSingle } from '@coachcare/npm-api'
+import { Package, PackageOrganization, PackageSingle } from '@coachcare/npm-api'
 import { _ } from '@coachcare/backend/shared'
 import { PaginatorComponent } from '@coachcare/common/components'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { debounceTime } from 'rxjs/operators'
-import { Package } from 'selvera-api'
 import { CreateLabelDialogComponent } from '../dialogs'
 
 @Component({

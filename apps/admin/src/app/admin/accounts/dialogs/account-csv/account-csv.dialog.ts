@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { AccountFullData, AccountTypeIds } from '@coachcare/npm-api'
+import {
+  AccountFullData,
+  AccountTypeIds,
+  Account,
+  Organization
+} from '@coachcare/npm-api'
 import { OrganizationAutocompleterComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'
-import { Account, Organization } from 'selvera-api'
 
 @Component({
   selector: 'ccr-account-csv-dialog',

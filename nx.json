@@ -12,11 +12,12 @@
   },
   "projects": {
     "provider": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["common", "npm-api"]
     },
     "provider-e2e": {
       "tags": [],
-      "implicitDependencies": ["provider"]
+      "implicitDependencies": ["provider", "npm-api"]
     },
     "admin": {
       "tags": [],

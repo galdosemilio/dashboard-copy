@@ -1,23 +1,23 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { ActiveCampaignListItem } from '@coachcare/backend/data';
-import { _ } from '@coachcare/backend/shared';
-import { NotifierService } from '@coachcare/common/services';
-import { ActiveCampaign } from 'selvera-api';
+import { Component, Inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { ActiveCampaignListItem } from '@coachcare/backend/data'
+import { _ } from '@coachcare/backend/shared'
+import { NotifierService } from '@coachcare/common/services'
+import { ActiveCampaign } from '@coachcare/npm-api'
 
 export interface EditActiveCampaignDialogData {
-  activeCampaign: ActiveCampaignListItem;
+  activeCampaign: ActiveCampaignListItem
 }
 
 @Component({
   selector: 'ccr-organizations-edit-active-campaign-dialog',
   templateUrl: './edit-active-campaign.dialog.html',
   styleUrls: ['./edit-active-campaign.dialog.scss'],
-  host: { class: 'ccr-dialog' },
+  host: { class: 'ccr-dialog' }
 })
 export class EditActiveCampaignDialogComponent implements OnInit {
-  public form: FormGroup;
+  public form: FormGroup
 
   constructor(
     private activeCampaign: ActiveCampaign,
@@ -28,23 +28,23 @@ export class EditActiveCampaignDialogComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   public async onSubmit(): Promise<void> {
     try {
-      const formValue = this.form.value;
+      const formValue = this.form.value
       await this.activeCampaign.updateListAssociation({
         id: this.data.activeCampaign.id,
         isActive: formValue.isActive,
         list: {
-          name: formValue.name,
-        },
-      });
-      this.notifier.success(_('NOTIFY.SUCCESS.ACTIVE_CAMPAIGN_UPDATED'));
-      this.dialogRef.close(true);
+          name: formValue.name
+        }
+      })
+      this.notifier.success(_('NOTIFY.SUCCESS.ACTIVE_CAMPAIGN_UPDATED'))
+      this.dialogRef.close(true)
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
@@ -52,12 +52,12 @@ export class EditActiveCampaignDialogComponent implements OnInit {
     this.form = this.fb.group({
       description: [''],
       name: ['', Validators.required],
-      isActive: [false, Validators.required],
-    });
+      isActive: [false, Validators.required]
+    })
 
     this.form.patchValue({
       name: this.data.activeCampaign.name,
-      isActive: this.data.activeCampaign.isActive,
-    });
+      isActive: this.data.activeCampaign.isActive
+    })
   }
 }

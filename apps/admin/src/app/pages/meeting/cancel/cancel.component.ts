@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import * as moment from 'moment-timezone';
-import { Schedule } from 'selvera-api';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import * as moment from 'moment-timezone'
+import { Schedule } from '@coachcare/npm-api'
 
 export enum MeetingCancelStatus {
   Initial = 0,
@@ -19,38 +19,41 @@ export enum MeetingCancelStatus {
   }
 })
 export class MeetingCancelPageComponent implements OnInit {
-  token: string;
-  timestamp: moment.Moment;
+  token: string
+  timestamp: moment.Moment
   params: {
-    day: string;
-    time: string;
-  };
+    day: string
+    time: string
+  }
 
-  STATUS = MeetingCancelStatus;
-  status: MeetingCancelStatus = MeetingCancelStatus.Initial;
+  STATUS = MeetingCancelStatus
+  status: MeetingCancelStatus = MeetingCancelStatus.Initial
 
   constructor(private route: ActivatedRoute, private schedule: Schedule) {}
 
   ngOnInit() {
-    this.token = this.route.snapshot.params.token;
-    this.timestamp = moment.tz(this.route.snapshot.params.timestamp, moment.tz.guess());
+    this.token = this.route.snapshot.params.token
+    this.timestamp = moment.tz(
+      this.route.snapshot.params.timestamp,
+      moment.tz.guess()
+    )
     this.params = {
       day: this.timestamp.format('dddd, MMMM D, YYYY'),
       time: this.timestamp.format('h:mm a (z)')
-    };
+    }
   }
 
   keepMeeting() {
-    this.status = MeetingCancelStatus.Kept;
+    this.status = MeetingCancelStatus.Kept
   }
 
   async cancelMeeting(): Promise<void> {
-    this.status = MeetingCancelStatus.Initial;
+    this.status = MeetingCancelStatus.Initial
     try {
-      await this.schedule.quickCancelMeeting(this.token);
-      this.status = MeetingCancelStatus.Succeed;
+      await this.schedule.quickCancelMeeting(this.token)
+      this.status = MeetingCancelStatus.Succeed
     } catch (e) {
-      this.status = MeetingCancelStatus.Error;
+      this.status = MeetingCancelStatus.Error
     }
   }
 }
