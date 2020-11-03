@@ -238,8 +238,9 @@ workflows:
       # - affected_e2e:
       #     requires:
       #       - affected_build
-      - full_test_build
-        # requires:
+      - full_test_build:
+          requires:
+            - setup
         # - affected_lint
         # - affected_test
         # - affected_e2e
