@@ -31,7 +31,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn affected:lint"
+      "pre-push": "yarn affected:lint && yarn affected:build"
     }
   },
   "private": true,
