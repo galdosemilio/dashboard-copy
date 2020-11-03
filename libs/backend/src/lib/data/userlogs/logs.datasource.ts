@@ -33,7 +33,7 @@ export class LogsDataSource extends TableDataSource<
     // pagination handling
     this.total = result.pagination.next
       ? result.pagination.next + 1
-      : this.criteria.offset != undefined
+      : this.criteria.offset !== undefined
       ? this.criteria.offset + result.data.length
       : 0
 
