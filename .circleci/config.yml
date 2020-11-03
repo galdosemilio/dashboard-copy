@@ -235,15 +235,15 @@ workflows:
       # - affected_test:
       #     requires:
       #       - affected_build
-      # - affected_e2e:
-      #     requires:
-      #       - affected_build
+      - affected_e2e:
+          requires:
+            - affected_build
       - full_test_build:
           requires:
             - setup
-        # - affected_lint
-        # - affected_test
-        # - affected_e2e
+            # - affected_lint
+            # - affected_test
+            - affected_e2e
       - approve_test_deployment:
           type: approval
           filters:
