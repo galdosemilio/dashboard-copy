@@ -1,14 +1,68 @@
 {
   "npmScope": "dashboard",
   "implicitDependencies": {
-    "angular.json": "*",
+    "angular.json": [
+      "admin",
+      "admin-e2e",
+      "provider",
+      "provider-e2e",
+      "backend",
+      "common",
+      "layout",
+      "npm-api"
+    ],
     "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
+      "dependencies": [
+        "admin",
+        "admin-e2e",
+        "provider",
+        "provider-e2e",
+        "backend",
+        "common",
+        "layout",
+        "npm-api"
+      ],
+      "devDependencies": [
+        "admin",
+        "admin-e2e",
+        "provider",
+        "provider-e2e",
+        "backend",
+        "common",
+        "layout",
+        "npm-api"
+      ]
     },
-    "tslint.json": "*",
-    "nx.json": "*",
-    "tsconfig.base.json": "*"
+    "tslint.json": [
+      "admin",
+      "admin-e2e",
+      "provider",
+      "provider-e2e",
+      "backend",
+      "common",
+      "layout",
+      "npm-api"
+    ],
+    "nx.json": [
+      "admin",
+      "admin-e2e",
+      "provider",
+      "provider-e2e",
+      "backend",
+      "common",
+      "layout",
+      "npm-api"
+    ],
+    "tsconfig.base.json": [
+      "admin",
+      "admin-e2e",
+      "provider",
+      "provider-e2e",
+      "backend",
+      "common",
+      "layout",
+      "npm-api"
+    ]
   },
   "projects": {
     "provider": {
