@@ -1,0 +1,9 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /tmp/deployment/site
+hooks:
+  AfterInstall:
+    - location: scripts/move-deployment.sh
+      timeout: 15
