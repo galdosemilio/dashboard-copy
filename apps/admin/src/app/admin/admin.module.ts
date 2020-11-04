@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { SharedModule } from '@board/shared/shared.module'
 import { AdminProviders } from './admin.index'
 import { routes } from './admin.routing'
+import { NpmApiModule } from '@coachcare/npm-api'
 
 @NgModule({
   imports: [

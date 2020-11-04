@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-import { Organization } from '@coachcare/npm-api'
-import { EmailTemplate } from 'selvera-api/dist/lib/selvera-api/providers/organization/entities'
+import { EmailTemplate, Organization } from '@coachcare/npm-api'
 
 interface EmailTemplateDialogProps {
   title: string

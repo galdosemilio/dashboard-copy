@@ -5,8 +5,7 @@ import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Organization } from '@coachcare/npm-api'
-import { EmailTemplate } from 'selvera-api/dist/lib/selvera-api/providers/organization/entities'
+import { EmailTemplate, Organization } from '@coachcare/npm-api'
 import { EmailTemplateDialogComponent } from '../dialogs'
 
 @Component({

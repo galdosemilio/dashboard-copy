@@ -1,9 +1,13 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
-import { Account, AccountTypeIds, ActiveCampaign } from '@coachcare/npm-api'
+import {
+  Account,
+  AccountFullData,
+  AccountTypeIds,
+  ActiveCampaign
+} from '@coachcare/npm-api'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { sleep } from '@coachcare/common/shared'
-import { AccountFullData } from 'selvera-api/dist/lib/selvera-api/providers/account/entities'
 
 export interface AssociateAllProvidersDialogData {
   organizationId: string

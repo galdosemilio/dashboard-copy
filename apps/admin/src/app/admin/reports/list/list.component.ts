@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'
-import { Reports } from '@coachcare/npm-api'
-import { OrganizationActivityRequest } from 'selvera-api/dist/lib/selvera-api/providers/reports/requests'
-import { OrganizationActivityAggregate } from 'selvera-api/dist/lib/selvera-api/providers/reports/responses'
+import {
+  OrganizationActivityAggregate,
+  OrganizationActivityRequest,
+  Reports
+} from '@coachcare/npm-api'
 import { environment } from '../../../../environments/environment'
 
 @Component({

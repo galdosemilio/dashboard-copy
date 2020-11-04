@@ -17,8 +17,7 @@ import {
 import { NotifierService } from '@coachcare/common/services'
 import { TranslateService } from '@ngx-translate/core'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Country } from '@coachcare/npm-api'
-import { CountryCode } from 'selvera-api/dist/lib/selvera-api/providers/country/entities'
+import { Country, CountryCode } from '@coachcare/npm-api'
 
 export function ccrPhoneValidator(control: FormControl) {
   const value = control.value || {}
