@@ -9,7 +9,7 @@ import {
   NativeDateModule
 } from './index'
 
-const SUPPORTS_INTL = typeof Intl != 'undefined'
+const SUPPORTS_INTL = typeof Intl !== 'undefined'
 
 describe('NativeDateAdapter', () => {
   let platform: Platform
