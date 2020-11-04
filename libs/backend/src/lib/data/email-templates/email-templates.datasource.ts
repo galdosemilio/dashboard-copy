@@ -1,8 +1,10 @@
 import { TableDataSource } from '@coachcare/backend/model'
-import { PagedResponse } from '@coachcare/npm-api'
+import {
+  EmailTemplate,
+  GetAllEmailTemplatesRequest,
+  PagedResponse
+} from '@coachcare/npm-api'
 import { Observable } from 'rxjs'
-import { EmailTemplate } from 'selvera-api/dist/lib/selvera-api/providers/organization/entities'
-import { GetAllEmailTemplatesRequest } from 'selvera-api/dist/lib/selvera-api/providers/organization/requests'
 import { EmailTemplatesDatabase } from './email-templates.database'
 
 export class EmailTemplatesDataSource extends TableDataSource<

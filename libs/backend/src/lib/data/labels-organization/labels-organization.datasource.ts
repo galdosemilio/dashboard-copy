@@ -2,9 +2,9 @@ import { TableDataSource } from '@coachcare/backend/model'
 import { from, Observable } from 'rxjs'
 import {
   GetAllPackageOrganizationRequest,
-  GetAllPackageOrganizationResponse
-} from 'selvera-api/dist/lib/selvera-api/providers/package'
-import { PackageAssociation } from 'selvera-api/dist/lib/selvera-api/providers/package/entities'
+  GetAllPackageOrganizationResponse,
+  PackageAssociation
+} from '@coachcare/npm-api'
 import { LabelsOrganizationDatabase } from './labels-organization.database'
 
 export interface PackageAssociationElement extends PackageAssociation {

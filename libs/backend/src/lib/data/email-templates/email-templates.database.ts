@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core'
 import { AppDatabase } from '@coachcare/backend/model'
-import { PagedResponse } from '@coachcare/npm-api'
+import {
+  EmailTemplate,
+  GetAllEmailTemplatesRequest,
+  Organization,
+  PagedResponse
+} from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { Organization } from 'selvera-api'
-import { EmailTemplate } from 'selvera-api/dist/lib/selvera-api/providers/organization/entities'
-import { GetAllEmailTemplatesRequest } from 'selvera-api/dist/lib/selvera-api/providers/organization/requests'
 
 @Injectable()
 export class EmailTemplatesDatabase extends AppDatabase {

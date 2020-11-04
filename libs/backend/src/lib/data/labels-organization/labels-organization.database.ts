@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
-import { PackageOrganization } from 'selvera-api';
+import { Injectable } from '@angular/core'
 import {
   GetAllPackageOrganizationRequest,
-  GetAllPackageOrganizationResponse
-} from 'selvera-api/dist/lib/selvera-api/providers/package';
+  GetAllPackageOrganizationResponse,
+  PackageOrganization
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class LabelsOrganizationDatabase {
   constructor(private packageOrganization: PackageOrganization) {}
 
-  fetch(args: GetAllPackageOrganizationRequest): Promise<GetAllPackageOrganizationResponse> {
-    return this.packageOrganization.getAll(args);
+  fetch(
+    args: GetAllPackageOrganizationRequest
+  ): Promise<GetAllPackageOrganizationResponse> {
+    return this.packageOrganization.getAll(args)
   }
 }
