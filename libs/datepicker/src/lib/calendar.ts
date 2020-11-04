@@ -22,29 +22,29 @@ import {
   SimpleChanges,
   ViewChild,
   ViewEncapsulation
-} from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { MatClockView } from './clock-view';
-import { MAT_DATE_FORMATS, MatDateFormats } from './core/index';
-import { DateAdapter } from './core/index';
-import { matDatepickerAnimations } from './datepicker-animations';
-import { createMissingDateImplError } from './datepicker-errors';
-import { MatDatepickerIntl } from './datepicker-intl';
-import { MatMonthView } from './month-view';
-import { MatYearView } from './year-view';
-import { MatYearsView } from './years-view';
+} from '@angular/core'
+import { Subject, Subscription } from 'rxjs'
+import { MatClockView } from './clock-view'
+import { MAT_DATE_FORMATS, MatDateFormats } from './core/index'
+import { DateAdapter } from './core/index'
+import { matDatepickerAnimations } from './datepicker-animations'
+import { createMissingDateImplError } from './datepicker-errors'
+import { MatDatepickerIntl } from './datepicker-intl'
+import { MatMonthView } from './month-view'
+import { MatYearView } from './year-view'
+import { MatYearsView } from './years-view'
 
 /**
  * Possible views for the calendar.
  * @docs-private
  */
-export type MatCalendarView = 'clock' | 'month' | 'year' | 'years';
+export type MatCalendarView = 'clock' | 'month' | 'year' | 'years'
 
 /**
  * Possible return types.
  * @docs-private
  */
-export type MatCalendarType = 'date' | 'datetime' | 'time';
+export type MatCalendarType = 'date' | 'datetime' | 'time'
 
 /**
  * A calendar that is used as part of the datepicker.
@@ -57,207 +57,229 @@ export type MatCalendarType = 'date' | 'datetime' | 'time';
   host: {
     class: 'mat-calendar'
   },
-  animations: [matDatepickerAnimations.controlActive, matDatepickerAnimations.slideCalendar],
+  animations: [
+    matDatepickerAnimations.controlActive,
+    matDatepickerAnimations.slideCalendar
+  ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false
 })
-export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnChanges, OnDestroy {
-  private _intlChanges: Subscription;
+export class MatCalendar<D>
+  implements AfterContentInit, AfterViewChecked, OnChanges, OnDestroy {
+  private _intlChanges: Subscription
 
   /**
    * Used for scheduling that focus should be moved to the active cell on the next tick.
    * We need to schedule it, rather than do it immediately, because we have to wait
    * for Angular to re-evaluate the view children.
    */
-  private _moveFocusOnNextTick = false;
+  private _moveFocusOnNextTick = false
 
   /** A date representing the period (month or year) to start the calendar in. */
   @Input()
   get startAt(): D | null {
-    return this._startAt;
+    return this._startAt
   }
   set startAt(value: D | null) {
-    this._startAt = this._getValidDateOrNull(this._dateAdapter.deserialize(value));
+    this._startAt = this._getValidDateOrNull(
+      this._dateAdapter.deserialize(value)
+    )
   }
-  private _startAt: D | null;
+  private _startAt: D | null
 
   /** The type of value handled by the calendar. */
-  @Input() type: MatCalendarType = 'date';
+  @Input() type: MatCalendarType = 'date'
 
   /** Which view the calendar should be started in. */
-  @Input() startView: MatCalendarView = 'month';
+  @Input() startView: MatCalendarView = 'month'
 
   /** Current calendar view */
-  view: MatCalendarView;
+  view: MatCalendarView
 
   /** The currently selected date. */
   @Input()
   get selected(): D | null {
-    return this._selected;
+    return this._selected
   }
   set selected(value: D | null) {
-    this._selected = this._getValidDateOrNull(this._dateAdapter.deserialize(value));
+    this._selected = this._getValidDateOrNull(
+      this._dateAdapter.deserialize(value)
+    )
     if (this._selected) {
-      this.activeDate = this._selected;
+      this.activeDate = this._selected
     }
   }
-  private _selected: D | null;
+  private _selected: D | null
 
   /** The minimum selectable date. */
   @Input()
   get minDate(): D | null {
-    return this._minDate;
+    return this._minDate
   }
   set minDate(value: D | null) {
-    this._minDate = this._getValidDateOrNull(this._dateAdapter.deserialize(value));
+    this._minDate = this._getValidDateOrNull(
+      this._dateAdapter.deserialize(value)
+    )
   }
-  private _minDate: D | null;
+  private _minDate: D | null
 
   /** The maximum selectable date. */
   @Input()
   get maxDate(): D | null {
-    return this._maxDate;
+    return this._maxDate
   }
   set maxDate(value: D | null) {
-    this._maxDate = this._getValidDateOrNull(this._dateAdapter.deserialize(value));
+    this._maxDate = this._getValidDateOrNull(
+      this._dateAdapter.deserialize(value)
+    )
   }
-  private _maxDate: D | null;
+  private _maxDate: D | null
 
   /** A function used to filter which dates are selectable. */
-  @Input() dateFilter: (date: D, unit?: string) => boolean;
+  @Input() dateFilter: (date: D, unit?: string) => boolean
 
   /** Clock interval */
-  @Input() clockStep = 1;
+  @Input() clockStep = 1
 
   /** Clock hour format */
-  @Input() twelveHour = false;
+  @Input() twelveHour = false
 
   /** Emits when the currently selected date changes. */
-  @Output() selectedChange = new EventEmitter<D>();
+  @Output() selectedChange = new EventEmitter<D>()
 
   /** Emits when any date is selected. */
-  @Output() _userSelection = new EventEmitter<void>();
+  @Output() _userSelection = new EventEmitter<void>()
 
   /** Reference to the current clock view component. */
-  @ViewChild(MatClockView, { static: false }) clockView: MatClockView<D>;
+  @ViewChild(MatClockView, { static: false }) clockView: MatClockView<D>
 
   /** Reference to the current month view component. */
-  @ViewChild(MatMonthView, { static: false }) monthView: MatMonthView<D>;
+  @ViewChild(MatMonthView, { static: false }) monthView: MatMonthView<D>
 
   /** Reference to the current year view component. */
-  @ViewChild(MatYearView, { static: false }) yearView: MatYearView<D>;
+  @ViewChild(MatYearView, { static: false }) yearView: MatYearView<D>
 
   /** Reference to the current years view component. */
-  @ViewChild(MatYearsView, { static: false }) yearsView: MatYearsView<D>;
+  @ViewChild(MatYearsView, { static: false }) yearsView: MatYearsView<D>
 
   /** Date filter for the month and year views. */
   _dateFilterForViews = (date: D, unit = 'minute') => {
     return (
       !!date &&
       (!this.dateFilter || this.dateFilter(date)) &&
-      (!this.minDate || this._dateAdapter.compareDate(date, this.minDate, unit) >= 0) &&
-      (!this.maxDate || this._dateAdapter.compareDate(date, this.maxDate, unit) <= 0)
-    );
-  };
+      (!this.minDate ||
+        this._dateAdapter.compareDate(date, this.minDate, unit) >= 0) &&
+      (!this.maxDate ||
+        this._dateAdapter.compareDate(date, this.maxDate, unit) <= 0)
+    )
+  }
 
   /**
    * The current active date. This determines which time period is shown and which date is
    * highlighted when using keyboard navigation.
    */
   get activeDate(): D {
-    return this._clampedActiveDate;
+    return this._clampedActiveDate
   }
   set activeDate(value: D) {
-    const oldActiveDate = this._clampedActiveDate;
-    this._clampedActiveDate = this._dateAdapter.clampDate(value, this.minDate, this.maxDate);
-    this._isAm = this._dateAdapter.getHours(this._clampedActiveDate) < 12;
+    const oldActiveDate = this._clampedActiveDate
+    this._clampedActiveDate = this._dateAdapter.clampDate(
+      value,
+      this.minDate,
+      this.maxDate
+    )
+    this._isAm = this._dateAdapter.getHours(this._clampedActiveDate) < 12
 
-    const unit = this.view === 'year' ? 'year' : 'month';
-    const diff = this._dateAdapter.compareDate(oldActiveDate, this._clampedActiveDate, unit);
+    const unit = this.view === 'year' ? 'year' : 'month'
+    const diff = this._dateAdapter.compareDate(
+      oldActiveDate,
+      this._clampedActiveDate,
+      unit
+    )
     if (diff) {
-      this._animationDir = diff > 0 ? 'left' : 'right';
+      this._animationDir = diff > 0 ? 'left' : 'right'
     }
 
     // update the labels
-    const day = this._dateAdapter.getDayOfWeek(this.activeDate);
-    let hours = this._dateAdapter.getHours(this.activeDate);
+    const day = this._dateAdapter.getDayOfWeek(this.activeDate)
+    let hours = this._dateAdapter.getHours(this.activeDate)
     if (this.twelveHour) {
-      hours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+      hours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours
     }
-    const minutes = this._dateAdapter.getMinutes(this.activeDate);
+    const minutes = this._dateAdapter.getMinutes(this.activeDate)
 
     switch (this.view) {
       case 'year':
-        this._periodButtonText = this._dateAdapter.getYearName(this.activeDate);
-        break;
+        this._periodButtonText = this._dateAdapter.getYearName(this.activeDate)
+        break
       default:
         this._periodButtonText = this._dateAdapter.format(
           this.activeDate,
           this._dateFormats.display.monthYearLabel
-        );
+        )
     }
-    this._yearButtonText = this._dateAdapter.getYear(this.activeDate).toString();
+    this._yearButtonText = this._dateAdapter.getYear(this.activeDate).toString()
     this._monthdayButtonText = this._dateAdapter.format(
       this.activeDate,
       this._dateFormats.display.monthDayLabel
-    );
-    this._dayButtonText = this._dateAdapter.getDayOfWeekNames('short')[day];
-    this._hourButtonText = hours.toString();
-    this._minuteButtonText = ('00' + minutes).slice(-2);
+    )
+    this._dayButtonText = this._dateAdapter.getDayOfWeekNames('short')[day]
+    this._hourButtonText = hours.toString()
+    this._minuteButtonText = ('00' + minutes).slice(-2)
 
-    this.stateChanges.next();
+    this.stateChanges.next()
   }
-  private _clampedActiveDate: D;
+  private _clampedActiveDate: D
 
   /** Whether the calendar is in month view. */
   get currentView(): MatCalendarView {
-    return this._currentView;
+    return this._currentView
   }
   set currentView(value: MatCalendarView) {
-    this._currentView = value;
-    this._moveFocusOnNextTick = true;
+    this._currentView = value
+    this._moveFocusOnNextTick = true
   }
-  private _currentView: MatCalendarView;
+  private _currentView: MatCalendarView
 
   /**
    * Emits whenever there is a state change that the header may need to respond to.
    */
-  stateChanges = new Subject<void>();
+  stateChanges = new Subject<void>()
 
   /** Animations handler */
-  _animationDir: string;
+  _animationDir: string
 
   /** Whether the active date is AM or not */
-  _isAm: boolean;
+  _isAm: boolean
 
   /** Whether the calendar process the time. */
-  _hasTime: boolean;
+  _hasTime: boolean
 
   /** Whether the calendar is in hour view. */
-  _hourView: boolean = true;
+  _hourView = true
 
   /** The label for the calendar header buttons. */
-  _yearButtonText: string;
+  _yearButtonText: string
 
-  _dayButtonText: string;
+  _dayButtonText: string
 
-  _monthdayButtonText: string;
+  _monthdayButtonText: string
 
-  _hourButtonText: string;
+  _hourButtonText: string
 
-  _minuteButtonText: string;
+  _minuteButtonText: string
 
   /** The label for the current calendar view. */
-  _periodButtonText: string;
+  _periodButtonText: string
 
-  _periodButtonLabel: string;
+  _periodButtonLabel: string
 
   /** The label for the the previous button. */
-  _prevButtonLabel: string;
+  _prevButtonLabel: string
 
   /** The label for the the next button. */
-  _nextButtonLabel: string;
+  _nextButtonLabel: string
 
   constructor(
     public _intl: MatDatepickerIntl,
@@ -268,94 +290,98 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnCha
     private _changeDetectorRef: ChangeDetectorRef
   ) {
     if (!this._dateAdapter) {
-      throw createMissingDateImplError('DateAdapter');
+      throw createMissingDateImplError('DateAdapter')
     }
 
     if (!this._dateFormats) {
-      throw createMissingDateImplError('MAT_DATE_FORMATS');
+      throw createMissingDateImplError('MAT_DATE_FORMATS')
     }
 
     this._intlChanges = _intl.changes.subscribe(() => {
-      _changeDetectorRef.markForCheck();
-      this.stateChanges.next();
-    });
+      _changeDetectorRef.markForCheck()
+      this.stateChanges.next()
+    })
   }
 
   ngAfterContentInit() {
-    this.activeDate = this.startAt || this._dateAdapter.today();
+    this.activeDate = this.startAt || this._dateAdapter.today()
 
-    this.changeView(this.startView, false);
+    this.changeView(this.startView, false)
   }
 
   ngAfterViewChecked() {
     if (this._moveFocusOnNextTick) {
-      this._moveFocusOnNextTick = false;
-      this.focusActiveCell();
+      this._moveFocusOnNextTick = false
+      this.focusActiveCell()
     }
   }
 
   ngOnDestroy() {
-    this._intlChanges.unsubscribe();
-    this.stateChanges.complete();
+    this._intlChanges.unsubscribe()
+    this.stateChanges.complete()
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this._hasTime = this.type.indexOf('time') >= 0;
-    const change = changes.selected || changes.minDate || changes.maxDate || changes.dateFilter;
+    this._hasTime = this.type.indexOf('time') >= 0
+    const change =
+      changes.selected ||
+      changes.minDate ||
+      changes.maxDate ||
+      changes.dateFilter
 
     if (change && !change.firstChange) {
-      const view = this._getCurrentViewComponent();
+      const view = this._getCurrentViewComponent()
       if (view) {
         // We need to `detectChanges` manually here, because the `minDate`, `maxDate` etc. are
         // passed down to the view via data bindings which won't be up-to-date when we call `_init`.
-        this._changeDetectorRef.detectChanges();
-        view._init();
+        this._changeDetectorRef.detectChanges()
+        view._init()
       }
     }
 
-    this.stateChanges.next();
+    this.stateChanges.next()
   }
 
   changeView(view, focus = true) {
     switch (view) {
       case 'year':
-        this._periodButtonText = this._dateAdapter.getYearName(this.activeDate);
-        this._periodButtonLabel = this._intl.switchToYearsViewLabel;
-        this._nextButtonLabel = this._intl.nextYearLabel;
-        this._prevButtonLabel = this._intl.prevYearLabel;
-        break;
+        this._periodButtonText = this._dateAdapter.getYearName(this.activeDate)
+        this._periodButtonLabel = this._intl.switchToYearsViewLabel
+        this._nextButtonLabel = this._intl.nextYearLabel
+        this._prevButtonLabel = this._intl.prevYearLabel
+        break
       case 'month':
         this._periodButtonText = this._dateAdapter.format(
           this.activeDate,
           this._dateFormats.display.monthYearLabel
-        );
-        this._periodButtonLabel = this._intl.switchToYearViewLabel;
-        this._nextButtonLabel = this._intl.nextMonthLabel;
-        this._prevButtonLabel = this._intl.prevMonthLabel;
+        )
+        this._periodButtonLabel = this._intl.switchToYearViewLabel
+        this._nextButtonLabel = this._intl.nextMonthLabel
+        this._prevButtonLabel = this._intl.prevMonthLabel
     }
 
-    this.view = view;
+    this.view = view
     if (focus) {
-      this._moveFocusOnNextTick = true;
+      this._moveFocusOnNextTick = true
     }
   }
 
   focusActiveCell() {
-    this._getCurrentViewComponent()._focusActiveCell();
+    this._getCurrentViewComponent()._focusActiveCell()
   }
 
   _submitClicked(): void {
-    this.selectedChange.emit(this.activeDate);
-    this._userSelection.emit();
+    this.selectedChange.emit(this.activeDate)
+    this._userSelection.emit()
   }
 
   _cancelClicked(): void {
-    this._userSelection.emit();
+    this._userSelection.emit()
   }
 
   /** Handles date selection in the clock view. */
   _timeChanged(date: D): void {
-    this.selected = date;
+    this.selected = date
   }
 
   _timeSelected(date: D): void {
@@ -363,61 +389,64 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnCha
     //   this.selectedChange.emit(date);
     //   this._userSelection.emit();
     // }
-    this.selected = date;
+    this.selected = date
   }
 
   /** Handles date selection in the month view. */
   _dateSelected(date: D): void {
-    this.selected = date;
+    this.selected = date
     if (this._hasTime) {
-      this.changeView('clock');
+      this.changeView('clock')
     }
   }
 
   /** Handles month selection in the year view. */
   _monthSelected(month: D): void {
-    this.selected = month;
-    this.changeView('month');
+    this.selected = month
+    this.changeView('month')
   }
 
   _yearSelected(year: D): void {
-    this.selected = year;
-    this.changeView('year');
+    this.selected = year
+    this.changeView('year')
   }
 
   /** Handles user clicks on the period label. */
   _currentPeriodClicked(): void {
-    this.changeView(this.view === 'month' ? 'year' : 'years');
+    this.changeView(this.view === 'month' ? 'year' : 'years')
   }
 
   /** Handles user clicks on the previous button. */
   _previousClicked(): void {
-    this._navCalendar(-1);
+    this._navCalendar(-1)
   }
 
   /** Handles user clicks on the next button. */
   _nextClicked(): void {
-    this._navCalendar(1);
+    this._navCalendar(1)
   }
 
   /** Handles user clicks on the time labels. */
   _showHourView(): void {
     if (this._hasTime) {
-      this._hourView = true;
-      this.changeView('clock');
+      this._hourView = true
+      this.changeView('clock')
     }
   }
 
   _showMinuteView(): void {
-    this._hourView = false;
-    this.changeView('clock');
+    this._hourView = false
+    this.changeView('clock')
   }
 
   _toggleAmPm(am): void {
     if (this._isAm !== am) {
-      const date = this._dateAdapter.addCalendarHours(this.activeDate, this._isAm ? 12 : -12);
+      const date = this._dateAdapter.addCalendarHours(
+        this.activeDate,
+        this._isAm ? 12 : -12
+      )
       if (this._dateFilterForViews(date, 'minute')) {
-        this.selected = date;
+        this.selected = date
       }
     }
   }
@@ -425,30 +454,36 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnCha
   /** Whether the previous period button is enabled. */
   _previousEnabled(): boolean {
     if (!this.minDate) {
-      return true;
+      return true
     }
-    return !this.minDate || !this._isSameView(this.activeDate, this.minDate);
+    return !this.minDate || !this._isSameView(this.activeDate, this.minDate)
   }
 
   /** Whether the next period button is enabled. */
   _nextEnabled(): boolean {
-    return !this.maxDate || !this._isSameView(this.activeDate, this.maxDate);
+    return !this.maxDate || !this._isSameView(this.activeDate, this.maxDate)
   }
 
   /** Handles calendar diffs. */
   _navCalendar(diff): void {
     switch (this.view) {
       case 'year':
-        this.activeDate = this._dateAdapter.addCalendarYears(this.activeDate, diff);
-        break;
+        this.activeDate = this._dateAdapter.addCalendarYears(
+          this.activeDate,
+          diff
+        )
+        break
       case 'month':
-        this.activeDate = this._dateAdapter.addCalendarMonths(this.activeDate, diff);
-        break;
+        this.activeDate = this._dateAdapter.addCalendarMonths(
+          this.activeDate,
+          diff
+        )
+        break
       case 'clock':
         this.activeDate = this._hourView
           ? this._dateAdapter.addCalendarHours(this.activeDate, diff)
-          : this._dateAdapter.addCalendarMinutes(this.activeDate, diff);
-        break;
+          : this._dateAdapter.addCalendarMinutes(this.activeDate, diff)
+        break
     }
   }
 
@@ -456,19 +491,22 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnCha
   private _isSameView(date1: D, date2: D): boolean {
     switch (this.view) {
       case 'year':
-        return this._dateAdapter.getYear(date1) === this._dateAdapter.getYear(date2);
-      case 'month':
-        const monthYear = this._dateFormats.display.monthYearLabel;
         return (
-          this._dateAdapter.format(date1, monthYear) === this._dateAdapter.format(date2, monthYear)
-        );
+          this._dateAdapter.getYear(date1) === this._dateAdapter.getYear(date2)
+        )
+      case 'month':
+        const monthYear = this._dateFormats.display.monthYearLabel
+        return (
+          this._dateAdapter.format(date1, monthYear) ===
+          this._dateAdapter.format(date2, monthYear)
+        )
       case 'clock':
       default:
-        const hourMinute = this._dateFormats.display.timeLabel;
+        const hourMinute = this._dateFormats.display.timeLabel
         return (
           this._dateAdapter.format(date1, hourMinute) ===
           this._dateAdapter.format(date2, hourMinute)
-        );
+        )
     }
   }
 
@@ -477,11 +515,14 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnCha
    * @returns The given object if it is both a date instance and valid, otherwise null.
    */
   private _getValidDateOrNull(obj: any): D | null {
-    return this._dateAdapter.isDateInstance(obj) && this._dateAdapter.isValid(obj) ? obj : null;
+    return this._dateAdapter.isDateInstance(obj) &&
+      this._dateAdapter.isValid(obj)
+      ? obj
+      : null
   }
 
   /** Returns the component instance that corresponds to the current calendar view. */
   private _getCurrentViewComponent() {
-    return this.clockView || this.monthView || this.yearView || this.yearsView;
+    return this.clockView || this.monthView || this.yearView || this.yearsView
   }
 }
