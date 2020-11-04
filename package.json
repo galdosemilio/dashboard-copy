@@ -8,6 +8,8 @@
     "start": "node --max-old-space-size=6144 node_modules/.bin/ng serve",
     "start:admin": "node --max-old-space-size=6144 node_modules/.bin/ng serve admin --port 4200",
     "start:provider": "node --max-old-space-size=6144 node_modules/.bin/ng serve provider --port 4201 -c standalone",
+    "test:admin": "yarn e2e admin-e2e --watch",
+    "test:provider": "yarn e2e provider-e2e --watch",
     "build": "node --max-old-space-size=6144 node_modules/.bin/ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
