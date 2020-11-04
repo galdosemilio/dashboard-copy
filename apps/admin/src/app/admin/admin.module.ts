@@ -16,6 +16,7 @@ import { NpmApiModule } from '@coachcare/npm-api'
     FlexLayoutModule,
     SharedModule,
     LayoutModule,
+    NpmApiModule,
     TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
