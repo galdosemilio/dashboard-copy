@@ -721,7 +721,8 @@ describe('MatDatepicker', () => {
       })
 
       it('should mark input dirty after date selected', fakeAsync(() => {
-        let inputEl = fixture.debugElement.query(By.css('input')).nativeElement
+        const inputEl = fixture.debugElement.query(By.css('input'))
+          .nativeElement
 
         expect(inputEl.classList).toContain('ng-pristine')
 

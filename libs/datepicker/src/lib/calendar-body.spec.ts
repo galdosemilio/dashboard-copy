@@ -183,7 +183,7 @@ class CalendarBodyWithDisabledCells {
   rows = [[1, 2, 3, 4]].map((r) =>
     r.map((d) => {
       const cell = createCell(d)
-      cell.enabled = d % 2 == 0
+      cell.enabled = d % 2 === 0
       return cell
     })
   )
