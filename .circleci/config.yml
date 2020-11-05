@@ -34,51 +34,60 @@ dependency_cache_key: &dependency_cache_key dependency-cache-{{ checksum "yarn.l
 
 jobs:
   setup:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
 
   affected_lint:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
 
   affected_build:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
 
   affected_test:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
 
   affected_e2e:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
   full_test_build:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
   full_production_build:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
   deploy_to_test:
+    <<: *defaults
     steps:
       - run:
           name: Echo
           command: echo "Hello"
 
   deploy_to_production:
+    <<: *defaults
     steps:
       - run:
           name: Echo
