@@ -3,57 +3,59 @@ import {
   SequenceTransition,
   SequenceTrigger,
   TriggerLocalization as SelveraTriggerLocalization
-} from '@app/shared/selvera-api';
-import { SyncState } from './sync-state';
+} from '@coachcare/npm-api'
+import { SyncState } from './sync-state'
 
 interface Trigger extends SequenceTrigger {
-  syncState: SyncState;
+  syncState: SyncState
 }
 
 interface TriggerLocalization extends SelveraTriggerLocalization {
-  id?: string;
-  syncState: SyncState;
+  id?: string
+  syncState: SyncState
 }
 
 export class Transition implements SequenceTransition {
-  createdAt: string;
-  createdBy: Entity;
-  delay?: string;
-  delayHour?: string;
-  id: string;
-  from: Entity;
-  serverDelay?: string;
-  syncState: SyncState;
-  to: Entity;
-  triggers: Trigger[];
+  createdAt: string
+  createdBy: Entity
+  delay?: string
+  delayHour?: string
+  id: string
+  from: Entity
+  serverDelay?: string
+  syncState: SyncState
+  to: Entity
+  triggers: Trigger[]
 
   constructor(args: any, opts: SyncState = {}) {
-    this.createdAt = args.createdAt || '';
-    this.createdBy = args.createdBy ? { id: args.createdBy.id || '' } : undefined;
-    const splitDelay = args.delay ? args.delay.split(/\s/) : [];
+    this.createdAt = args.createdAt || ''
+    this.createdBy = args.createdBy
+      ? { id: args.createdBy.id || '' }
+      : undefined
+    const splitDelay = args.delay ? args.delay.split(/\s/) : []
     this.delay =
       splitDelay.length > 2
         ? `${splitDelay[0]} ${splitDelay[1]}`
         : splitDelay.length && splitDelay[0].indexOf(':') === -1
         ? args.delay
-        : 0;
+        : 0
     this.delayHour =
       splitDelay.length > 2
         ? `${splitDelay[2]}`
         : splitDelay.length && splitDelay[0].indexOf(':') === -1
         ? ''
-        : splitDelay[0];
-    this.serverDelay = args.delay || '';
-    this.id = args.id || '';
-    this.from = args.from ? { id: args.from.id || '' } : undefined;
+        : splitDelay[0]
+    this.serverDelay = args.delay || ''
+    this.id = args.id || ''
+    this.from = args.from ? { id: args.from.id || '' } : undefined
     this.syncState = {
       new: opts.new || false,
       edited: opts.edited || false,
       deleted: opts.deleted || false,
       inServer: opts.inServer || false
-    };
-    this.to = args.to ? { id: args.to.id || '' } : undefined;
-    this.triggers = this.resolveSequenceTriggers(args.triggers);
+    }
+    this.to = args.to ? { id: args.to.id || '' } : undefined
+    this.triggers = this.resolveSequenceTriggers(args.triggers)
   }
 
   private resolveSequenceTrigger(trigger: any, opts: SyncState = {}): Trigger {
@@ -71,9 +73,12 @@ export class Transition implements SequenceTransition {
       payload: trigger.payload
         ? {
             subject: trigger.payload.subject || undefined,
-            header: trigger.payload.header || trigger.payload.title || undefined,
-            message: trigger.payload.message || trigger.payload.content || undefined,
-            content: trigger.payload.message || trigger.payload.content || undefined,
+            header:
+              trigger.payload.header || trigger.payload.title || undefined,
+            message:
+              trigger.payload.message || trigger.payload.content || undefined,
+            content:
+              trigger.payload.message || trigger.payload.content || undefined,
             package: trigger.payload.package || undefined
           }
         : {},
@@ -83,13 +88,16 @@ export class Transition implements SequenceTransition {
         deleted: opts.deleted || false,
         inServer: opts.inServer || false
       }
-    };
+    }
   }
 
-  private resolveSequenceTriggers(triggers: any[] = [], opts: SyncState = {}): Trigger[] {
+  private resolveSequenceTriggers(
+    triggers: any[] = [],
+    opts: SyncState = {}
+  ): Trigger[] {
     return triggers && triggers.length
       ? triggers.map((t) => this.resolveSequenceTrigger(t, opts))
-      : [];
+      : []
   }
 
   private resolveTriggerLocalization(
@@ -104,9 +112,13 @@ export class Transition implements SequenceTransition {
         ? {
             subject: localization.payload.subject || undefined,
             header:
-              localization.payload.header || localization.payload.title || undefined,
+              localization.payload.header ||
+              localization.payload.title ||
+              undefined,
             message:
-              localization.payload.message || localization.payload.content || undefined
+              localization.payload.message ||
+              localization.payload.content ||
+              undefined
           }
         : {},
       updatedAt: localization.updatedAt || '',
@@ -116,6 +128,6 @@ export class Transition implements SequenceTransition {
         deleted: opts.deleted || false,
         inServer: opts.inServer || false
       }
-    };
+    }
   }
 }

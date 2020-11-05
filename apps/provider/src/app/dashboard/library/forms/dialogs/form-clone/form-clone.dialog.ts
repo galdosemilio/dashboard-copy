@@ -1,24 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { ContextService, NotifierService } from '@app/service';
-import { OrganizationEntity } from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils';
-import { Form as SelveraFormService } from 'selvera-api';
-import { Form } from '../../models';
+import { Component, Inject, OnInit } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { ContextService, NotifierService } from '@app/service'
+import { OrganizationEntity } from '@coachcare/npm-api'
+import { _ } from '@app/shared/utils'
+import { Form as SelveraFormService } from '@coachcare/npm-api'
+import { Form } from '../../models'
 
 export interface FormCloneDialogData {
-  form: Form;
+  form: Form
 }
 
 @Component({
   selector: 'app-library-form-clone-dialog',
   templateUrl: './form-clone.dialog.html',
   styleUrls: ['./form-clone.dialog.scss'],
-  host: { class: 'ccr-dialog' },
+  host: { class: 'ccr-dialog' }
 })
 export class FormCloneDialog implements OnInit {
-  public isLoading: boolean = false;
-  public selectedOrganization: OrganizationEntity;
+  public isLoading = false
+  public selectedOrganization: OrganizationEntity
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FormCloneDialogData,
@@ -29,27 +29,27 @@ export class FormCloneDialog implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.selectedOrganization = this.context.organization;
+    this.selectedOrganization = this.context.organization
   }
 
   public onOrganizationSelect(organization: OrganizationEntity): void {
-    this.selectedOrganization = organization;
+    this.selectedOrganization = organization
   }
 
   public async onSubmit(): Promise<void> {
     try {
-      this.isLoading = true;
+      this.isLoading = true
       await this.form.clone({
         form: this.data.form.id,
-        organization: this.selectedOrganization.id,
-      });
+        organization: this.selectedOrganization.id
+      })
 
-      this.notifier.success(_('NOTIFY.SUCCESS.FORM_CLONED'));
-      this.dialogRef.close(true);
+      this.notifier.success(_('NOTIFY.SUCCESS.FORM_CLONED'))
+      this.dialogRef.close(true)
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     } finally {
-      this.isLoading = false;
+      this.isLoading = false
     }
   }
 }

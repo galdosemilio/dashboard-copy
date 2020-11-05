@@ -14,11 +14,11 @@ import {
   GetSingleMessagingPreferenceByOrgRequest,
   MessagingPreference,
   MessagingPreferenceSingle,
-  Organization,
+  OrganizationProvider,
   RPM,
+  RPMPreferenceSingle,
   Sequence
 } from '@coachcare/npm-api'
-import { RPMPreferenceSingle } from 'selvera-api/dist/lib/selvera-api/providers/rpm/entities'
 import { OrganizationFeaturePrefs } from './organization.types'
 
 @Injectable()
@@ -28,7 +28,7 @@ export class OrganizationFeaturePreferenceResolver
     private communicationPref: CommunicationPreference,
     private contentPref: ContentPreference,
     private messagingPref: MessagingPreference,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private rpm: RPM,
     private sequence: Sequence
   ) {}

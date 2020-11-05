@@ -1,46 +1,46 @@
-import { CCRConfig, CCRPalette } from '@app/config';
-import { ContextService, NotifierService } from '@app/service';
+import { CCRConfig, CCRPalette } from '@app/config'
+import { ContextService, NotifierService } from '@app/service'
 import {
   _,
+  APISummaryResponse,
   ChartData,
   ChartDataSource,
   KILOMETER,
   Metric,
   unitConversion,
   unitLabel
-} from '@app/shared';
-import {
-  APISummaryResponse,
-  Entity,
-  FetchBodyMeasurementDataResponse
-} from '@app/shared/selvera-api';
-import { paletteSelector } from '@app/store/config';
-import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { isArray, merge } from 'lodash';
-import * as moment from 'moment-timezone';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { from, Observable, Subject } from 'rxjs';
-import { BodyMeasurement } from '../../models/measurement/bodyMeasurement';
+} from '@app/shared'
+import { Entity, FetchBodyMeasurementDataResponse } from '@coachcare/npm-api'
+import { paletteSelector } from '@app/store/config'
+import { select, Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import { isArray, merge } from 'lodash'
+import * as moment from 'moment-timezone'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { from, Observable, Subject } from 'rxjs'
+import { BodyMeasurement } from '../../models/measurement/bodyMeasurement'
 import {
   MeasurementAggregation,
   MeasurementCriteria,
   MeasurementSummaryData,
   MeasurementSummarySegment
-} from './measurement.criteria';
-import { MeasurementDatabase } from './measurement.database';
+} from './measurement.criteria'
+import { MeasurementDatabase } from './measurement.database'
 
-export class MeasurementDataSource extends ChartDataSource<any, MeasurementCriteria> {
-  hasMissingWeight: boolean = false;
-  measurement: MeasurementSummaryData;
-  palette: CCRPalette;
-  requiresWeight: MeasurementSummaryData[] = ['bodyFat', 'leanMass'];
+export class MeasurementDataSource extends ChartDataSource<
+  any,
+  MeasurementCriteria
+> {
+  hasMissingWeight = false
+  measurement: MeasurementSummaryData
+  palette: CCRPalette
+  requiresWeight: MeasurementSummaryData[] = ['bodyFat', 'leanMass']
 
-  distanceNote: Array<boolean> = [];
-  result$: Subject<any> = new Subject<any>();
+  distanceNote: Array<boolean> = []
+  result$: Subject<any> = new Subject<any>()
 
-  private min: number;
-  private max: number;
+  private min: number
+  private max: number
 
   constructor(
     protected notify: NotifierService,
@@ -49,19 +49,19 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
     private context: ContextService,
     private store: Store<CCRConfig>
   ) {
-    super();
+    super()
 
     this.store.pipe(select(paletteSelector)).subscribe((palette) => {
-      this.palette = palette;
-    });
+      this.palette = palette
+    })
 
     // factors with translatable units
-    this.buildFormatter();
+    this.buildFormatter()
     this.translator.onLangChange
       .pipe(untilDestroyed(this, 'disconnect'))
       .subscribe(() => {
-        this.buildFormatter();
-      });
+        this.buildFormatter()
+      })
   }
 
   disconnect() {}
@@ -91,14 +91,14 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
         _('UNIT.BREATHS_PER_MIN')
       ])
       .subscribe((texts) => {
-        const units = this.context.user.measurementPreference;
+        const units = this.context.user.measurementPreference
         // utilities
         const genLabel = (metric: Metric) => {
           return (val: number) => {
-            const label = unitLabel(units, metric, val);
-            return texts[label] || label;
-          };
-        };
+            const label = unitLabel(units, metric, val)
+            return texts[label] || label
+          }
+        }
         // setup the label formatters
         this.formatters = {
           weight: [genLabel('composition'), (v) => v.toFixed(1), true],
@@ -129,9 +129,21 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
             (v) => v,
             true
           ],
-          ldl: [() => `${texts['UNIT.MLT']}/${texts['UNIT.DLT']}`, (v) => v, true],
-          hdl: [() => `${texts['UNIT.MLT']}/${texts['UNIT.DLT']}`, (v) => v, true],
-          vldl: [() => `${texts['UNIT.MLT']}/${texts['UNIT.DLT']}`, (v) => v, true],
+          ldl: [
+            () => `${texts['UNIT.MLT']}/${texts['UNIT.DLT']}`,
+            (v) => v,
+            true
+          ],
+          hdl: [
+            () => `${texts['UNIT.MLT']}/${texts['UNIT.DLT']}`,
+            (v) => v,
+            true
+          ],
+          vldl: [
+            () => `${texts['UNIT.MLT']}/${texts['UNIT.DLT']}`,
+            (v) => v,
+            true
+          ],
           triglycerides: [
             () => `${texts['UNIT.MLT']}/${texts['UNIT.DLT']}`,
             (v) => v,
@@ -148,55 +160,73 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
             (v) => v,
             true
           ],
-          hsCrp: [() => `${texts['UNIT.MGR']}/${texts['UNIT.LT']}`, (v) => v, true],
+          hsCrp: [
+            () => `${texts['UNIT.MGR']}/${texts['UNIT.LT']}`,
+            (v) => v,
+            true
+          ],
           temperature: [
             () => (units === 'us' ? '&#8457;' : texts['UNIT.CELSIUS']),
             (v) => parseFloat(v.toString()).toFixed(2),
             true
           ],
           heartRate: [() => texts['UNIT.BEATS_PER_MIN'], (v) => v, true],
-          respirationRate: [() => texts['UNIT.BREATHS_PER_MIN'], (v) => v, true],
+          respirationRate: [
+            () => texts['UNIT.BREATHS_PER_MIN'],
+            (v) => v,
+            true
+          ],
           extracellularWaterToBodyWater: [() => `%`, (v) => v.toFixed(1), true],
           totalBodyWater: [() => texts['UNIT.MLT'], (v) => v.toFixed(1), true],
-          visceralAdiposeTissue: [() => texts['UNIT.LT'], (v) => v.toFixed(), true],
+          visceralAdiposeTissue: [
+            () => texts['UNIT.LT'],
+            (v) => v.toFixed(),
+            true
+          ],
           visceralFatMass: [() => texts['UNIT.G'], (v) => v.toFixed(1), true]
-        };
-      });
+        }
+      })
   }
 
   defaultFetch(): any {
-    return [{ data: [] }];
+    return [{ data: [] }]
   }
 
   deleteBodyMeasurement(args: Entity): Promise<void> {
-    return this.database.deleteBodyMeasurement(args);
+    return this.database.deleteBodyMeasurement(args)
   }
 
   fetch(criteria): Observable<Array<APISummaryResponse>> {
     return from(
       new Promise<APISummaryResponse[]>(async (resolve, reject) => {
         try {
-          let response;
+          let response
           if (!criteria.useNewEndpoint) {
             response = await this.database.fetchAllSummary({
               ...criteria,
-              startDate: moment(criteria.startDate).startOf('day').format('YYYY-MM-DD'),
-              endDate: moment(criteria.endDate).endOf('day').format('YYYY-MM-DD')
-            });
+              startDate: moment(criteria.startDate)
+                .startOf('day')
+                .format('YYYY-MM-DD'),
+              endDate: moment(criteria.endDate)
+                .endOf('day')
+                .format('YYYY-MM-DD')
+            })
 
-            const mergedData = [];
+            const mergedData = []
 
             response.forEach((element) => {
-              const array = element.data || element;
+              const array = element.data || element
               array.forEach((data, index) => {
-                data.date = moment(data.date, 'YYYY-MM-DD').toISOString();
-                mergedData[index] = { ...data, ...mergedData[index] };
-              });
-            });
+                data.date = moment(data.date, 'YYYY-MM-DD').toISOString()
+                mergedData[index] = { ...data, ...mergedData[index] }
+              })
+            })
 
             response.forEach((element) => {
-              element.data ? (element.data = mergedData) : (element = mergedData);
-            });
+              element.data
+                ? (element.data = mergedData)
+                : (element = mergedData)
+            })
 
             const cleanResponse = response.map((summary) => {
               if (summary.data) {
@@ -205,23 +235,25 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
                   data: summary.data.map(
                     (element) =>
                       new BodyMeasurement(element, {
-                        measurementPreference: this.context.user.measurementPreference,
+                        measurementPreference: this.context.user
+                          .measurementPreference,
                         timeframe: this.criteria.timeframe
                       })
                   )
-                };
+                }
               } else {
                 return summary.map(
                   (element) =>
                     new BodyMeasurement(element, {
-                      measurementPreference: this.context.user.measurementPreference,
+                      measurementPreference: this.context.user
+                        .measurementPreference,
                       timeframe: this.criteria.timeframe
                     })
-                );
+                )
               }
-            });
+            })
 
-            return resolve(cleanResponse);
+            return resolve(cleanResponse)
           }
 
           response = await this.database.fetchBodyMeasurement({
@@ -229,7 +261,9 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
             recordedAt:
               criteria.startDate && criteria.endDate
                 ? {
-                    start: moment(criteria.startDate).startOf('day').toISOString(),
+                    start: moment(criteria.startDate)
+                      .startOf('day')
+                      .toISOString(),
                     end: moment(criteria.endDate).endOf('day').toISOString()
                   }
                 : undefined,
@@ -239,23 +273,23 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
               property: data,
               positiveOnly: false
             }))
-          });
+          })
 
           this.total = response.pagination.next
             ? response.pagination.next + 1
-            : this.criteria.offset + response.data.length;
+            : this.criteria.offset + response.data.length
 
-          let result: BodyMeasurement[] = [];
+          let result: BodyMeasurement[] = []
           const cleanMeasurements = response.data.map(
             (element) =>
               new BodyMeasurement(element, {
                 measurementPreference: this.context.user.measurementPreference
               })
-          );
+          )
 
           const preprocessedMeasurements: BodyMeasurement[][] = this.preprocessMeasurements(
             cleanMeasurements
-          );
+          )
 
           result = this.criteria.aggregation
             ? this.criteria.aggregation.type === 'highest' ||
@@ -266,7 +300,7 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
                   this.criteria.aggregation.property
                 )
               : this.processAll(preprocessedMeasurements)
-            : this.processAll(preprocessedMeasurements);
+            : this.processAll(preprocessedMeasurements)
 
           if (
             criteria.inferLastEntry &&
@@ -276,15 +310,15 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
             result[result.length - 1] = this.inferLastMeasurement(
               response.data.slice(),
               response.data[0]
-            );
+            )
           }
 
-          resolve([{ data: result, summary: {} }]);
+          resolve([{ data: result, summary: {} }])
         } catch (error) {
-          reject(error);
+          reject(error)
         }
       })
-    );
+    )
   }
 
   mapResult(result) {
@@ -292,65 +326,67 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
       // Food Summary
       result[0] = {
         data: result[0]
-      };
+      }
     }
 
-    const res: APISummaryResponse = merge({}, ...result);
-    this.summary$.next(res.summary ? res.summary : {});
-    return res.data ? res.data : [];
+    const res: APISummaryResponse = merge({}, ...result)
+    this.summary$.next(res.summary ? res.summary : {})
+    return res.data ? res.data : []
   }
 
   postResult(result: Array<any>) {
     if (this.criteria.useNewEndpoint) {
-      this.result$.next(result);
-      return result;
+      this.result$.next(result)
+      return result
     }
 
     // MeasurementSummarySegment
-    this.distanceNote = [];
+    this.distanceNote = []
     // unit conversion according to the user
-    const units = this.context.user.measurementPreference;
+    const units = this.context.user.measurementPreference
     result.forEach((row, i) => {
-      row.id = i.toString();
-      this.distanceNote[i] = false;
+      row.id = i.toString()
+      this.distanceNote[i] = false
       // distance post processing
       if (row.hasOwnProperty('distanceTotal')) {
         if (row.stepTotal) {
-          this.distanceNote[i] = true;
+          this.distanceNote[i] = true
         }
         row.distanceTotal = Number(
-          row.stepTotal ? (row.stepTotal / KILOMETER) * 1000 : row.distanceTotal || 0
-        );
+          row.stepTotal
+            ? (row.stepTotal / KILOMETER) * 1000
+            : row.distanceTotal || 0
+        )
       }
-      row.stepTotal = Number(row.stepTotal || 0);
+      row.stepTotal = Number(row.stepTotal || 0)
       row.distanceTotal = unitConversion(
         units,
         'distance',
         Number(row.distanceTotal || 0),
         false
-      );
-      row.sleepMinutes = Number(row.sleepMinutes ? row.sleepMinutes / 3600 : 0);
-      row.sleepQuality = Number(row.sleepQuality || 0);
-      row.caloriesTotal = row.caloriesTotal || 0;
+      )
+      row.sleepMinutes = Number(row.sleepMinutes ? row.sleepMinutes / 3600 : 0)
+      row.sleepQuality = Number(row.sleepQuality || 0)
+      row.caloriesTotal = row.caloriesTotal || 0
       // TODO FoodSummary response typing changed
-      row.calories = row.calories || 0;
-      row.protein = row.protein || 0;
-      row.carbohydrates = row.carbohydrates || 0;
-      row.totalFat = row.totalFat || 0;
-    });
-    this.result$.next(result);
-    return result;
+      row.calories = row.calories || 0
+      row.protein = row.protein || 0
+      row.carbohydrates = row.carbohydrates || 0
+      row.totalFat = row.totalFat || 0
+    })
+    this.result$.next(result)
+    return result
   }
 
   mapChart(result: Array<MeasurementSummarySegment>): ChartData {
-    this.hasMissingWeight = false;
+    this.hasMissingWeight = false
 
     if (!result || !result.length) {
-      return this.defaultChart();
+      return this.defaultChart()
     }
 
     if (this.requiresWeight.indexOf(this.measurement) > -1) {
-      this.hasMissingWeight = result.some((element) => !element.weight);
+      this.hasMissingWeight = result.some((element) => !element.weight)
     }
 
     const linePoints =
@@ -364,9 +400,9 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
         : {
             borderColor: this.palette.accent,
             pointBackgroundColor: this.palette.primary
-          };
+          }
 
-    const headings = [];
+    const headings = []
     const chart = {
       type: 'line',
       datasets: [{ data: [], lineTension: 0 }],
@@ -379,111 +415,119 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
             title: (tooltipItem, d) => {
               // For now, all charts use the same X 'heading'
               // const i = tooltipItem[0].datasetIndex;
-              const j = tooltipItem[0].index; // - 1: spacer
-              return headings[0][j] ? headings[0][j] : '';
+              const j = tooltipItem[0].index // - 1: spacer
+              return headings[0][j] ? headings[0][j] : ''
             },
             label: (tooltipItem, d) => {
-              const m = this.args.data[0];
+              const m = this.args.data[0]
               // TODO add distance marker if it's estimated
-              return tooltipItem.yLabel + ' ' + this.formatters[m][0](tooltipItem.yLabel);
+              return (
+                tooltipItem.yLabel +
+                ' ' +
+                this.formatters[m][0](tooltipItem.yLabel)
+              )
             }
           }
         }
       },
       colors: [linePoints]
-    };
+    }
 
     // formats
-    let xlabelFormat;
-    let tooltipFormat;
-    let xMaxTicks;
+    let xlabelFormat
+    let tooltipFormat
+    let xMaxTicks
     switch (this.args.timeframe) {
       case 'week':
-        xMaxTicks = 11;
-        xlabelFormat = 'ddd D';
-        tooltipFormat = 'ddd, MMM D';
-        break;
+        xMaxTicks = 11
+        xlabelFormat = 'ddd D'
+        tooltipFormat = 'ddd, MMM D'
+        break
       case 'month':
-        xMaxTicks = 31;
-        xlabelFormat = 'MMM D';
-        tooltipFormat = 'MMM D';
-        break;
+        xMaxTicks = 31
+        xlabelFormat = 'MMM D'
+        tooltipFormat = 'MMM D'
+        break
       case 'year':
-        xMaxTicks = 12;
-        xlabelFormat = 'MMM YYYY';
-        tooltipFormat = 'MMM YYYY';
-        break;
+        xMaxTicks = 12
+        xlabelFormat = 'MMM YYYY'
+        tooltipFormat = 'MMM YYYY'
+        break
       case 'alltime':
-        xMaxTicks = 18;
-        xlabelFormat = 'MMM DD, YYYY';
-        tooltipFormat = 'MMM DD, YYYY';
-        break;
+        xMaxTicks = 18
+        xlabelFormat = 'MMM DD, YYYY'
+        tooltipFormat = 'MMM DD, YYYY'
+        break
       default:
-        xMaxTicks = 11;
-        xlabelFormat = 'MMM YYYY';
-        tooltipFormat = 'MMM DD, YYYY';
+        xMaxTicks = 11
+        xlabelFormat = 'MMM YYYY'
+        tooltipFormat = 'MMM DD, YYYY'
     }
-    tooltipFormat = 'ddd, MMM D'; // tmp
+    tooltipFormat = 'ddd, MMM D' // tmp
 
     // FIXME if we're charting multiple fields, multiple axis needs to be handled
 
     // filter empty values if the formatted is configured to do so
     // and we're charting only one field, to keep data integrity
     if (this.args.data.length > 1) {
-      this.args.data = [this.args.data[0]];
+      this.args.data = [this.args.data[0]]
     }
     if (this.args.data.length === 1) {
-      const f = this.database.resolveResult(this.args.data[0]);
-      result = result.filter((s) => Number(s[f]));
+      const f = this.database.resolveResult(this.args.data[0])
+      result = result.filter((s) => Number(s[f]))
     }
 
     if (!result.length) {
-      return chart;
+      return chart
     }
 
     // labels
-    chart.labels = ['', ...this.generatePlaceholderLabels(result, xlabelFormat), ''];
+    chart.labels = [
+      '',
+      ...this.generatePlaceholderLabels(result, xlabelFormat),
+      ''
+    ]
 
     // data points and headings
-    delete this.min;
-    delete this.max;
+    delete this.min
+    delete this.max
 
     if (this.args.data.length) {
-      chart.datasets.length = 0;
+      chart.datasets.length = 0
       this.args.data.map(() => {
-        const measurement = this.measurement;
+        const measurement = this.measurement
         // swap any measurement dependency here
-        const field = this.database.resolveResult(measurement);
+        const field = this.database.resolveResult(measurement)
 
-        const offsetData = this.generateOffsetData(result, xlabelFormat, field);
+        const offsetData = this.generateOffsetData(result, xlabelFormat, field)
 
         if (Array.isArray(offsetData[0])) {
           offsetData[0].forEach((dataset, index) => {
-            const cleanData = offsetData.map((oD) => oD[index]);
+            const cleanData = offsetData.map((oD) => oD[index])
             // fill the dataset
             chart.datasets.push({
               data: cleanData,
               lineTension: 0,
               fill: false
-            } as any);
-          });
+            } as any)
+          })
         } else {
           // fill the dataset
           chart.datasets.push({
             data: offsetData,
             lineTension: 0
-          });
+          })
         }
 
         // fill the headings
-        headings.push(result.map((s) => moment(s.date).format(tooltipFormat)));
-      });
+        headings.push(result.map((s) => moment(s.date).format(tooltipFormat)))
+      })
     }
 
     if (this.min && this.max) {
       // round to multiples of 10 for > 100
-      this.min = this.min > 100 ? Math.round(this.min / 10) * 10 : this.min;
-      this.max = this.max > 100 ? Math.round(this.max / 10) * 10 : this.max;
+      this.min = this.min > 100 ? Math.round(this.min / 10) * 10 : this.min
+      this.max = this.max > 100 ? Math.round(this.max / 10) * 10 : this.max
 
       chart.options['scales'] = {
         yAxes: [
@@ -493,7 +537,9 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
               min: Math.max(0, Math.round(this.min - this.min * 0.1)),
               max: Math.round(this.max * 1.1),
               callback: function (value, index, values) {
-                return !index || index === values.length - 1 ? '' : value.toFixed(1);
+                return !index || index === values.length - 1
+                  ? ''
+                  : value.toFixed(1)
               }
             }
           }
@@ -505,47 +551,51 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
             }
           }
         ]
-      };
+      }
     }
 
-    return chart;
+    return chart
   }
 
   getData(): Array<MeasurementSummaryData> {
     switch (this.measurement) {
       case 'bloodPressureString':
-        return ['bloodPressureSystolic', 'bloodPressureDiastolic'];
+        return ['bloodPressureSystolic', 'bloodPressureDiastolic']
       case 'distance':
-        return ['distance', 'steps'];
+        return ['distance', 'steps']
       case 'bodyFat':
       case 'leanMass':
-        return ['bodyFat', 'weight'];
+        return ['bodyFat', 'weight']
       default:
-        return [this.measurement];
+        return [this.measurement]
     }
   }
 
   getField(field: string): string | string[] {
     switch (field) {
       case 'bloodPressureString':
-        return ['bloodPressureSystolic', 'bloodPressureDiastolic'];
+        return ['bloodPressureSystolic', 'bloodPressureDiastolic']
       default:
-        return field;
+        return field
     }
   }
 
-  private preprocessMeasurements(measurements: BodyMeasurement[]): BodyMeasurement[][] {
+  private preprocessMeasurements(
+    measurements: BodyMeasurement[]
+  ): BodyMeasurement[][] {
     const preprocessedMeasurements: BodyMeasurement[][] = this.groupBy(
       measurements,
       (measurement) => moment(measurement.recordedAt).format('YYYY-MM-DD')
-    );
+    )
 
     if (!this.criteria.omitEmptyDays && this.criteria.timeframe !== 'alltime') {
-      this.addEmptyDays(preprocessedMeasurements);
+      this.addEmptyDays(preprocessedMeasurements)
     } else if (!this.criteria.startDate && !this.criteria.endDate) {
-      this.addHeaderDays(preprocessedMeasurements);
+      this.addHeaderDays(preprocessedMeasurements)
     }
-    preprocessedMeasurements.sort((a, b) => (a[0].recordedAt < b[0].recordedAt ? -1 : 1));
+    preprocessedMeasurements.sort((a, b) =>
+      a[0].recordedAt < b[0].recordedAt ? -1 : 1
+    )
 
     preprocessedMeasurements.forEach((preprocessed, index) => {
       if (preprocessed.length > 1) {
@@ -557,31 +607,33 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
             : a.id < b.id
             ? -1
             : 1
-        );
+        )
       }
 
-      preprocessed[0].even = index % 2 === 0;
-      preprocessed[0].odd = !preprocessed[0].even;
+      preprocessed[0].even = index % 2 === 0
+      preprocessed[0].odd = !preprocessed[0].even
 
       preprocessed.forEach((element) => {
-        element.usesNewAPI = true;
-        element.odd = preprocessed[0].odd;
-        element.even = preprocessed[0].even;
-      });
-    });
-    return preprocessedMeasurements;
+        element.usesNewAPI = true
+        element.odd = preprocessed[0].odd
+        element.even = preprocessed[0].even
+      })
+    })
+    return preprocessedMeasurements
   }
 
-  private processAll(preprocessedMeasurements: BodyMeasurement[][]): BodyMeasurement[] {
-    const mostRecentResults: BodyMeasurement[] = [];
+  private processAll(
+    preprocessedMeasurements: BodyMeasurement[][]
+  ): BodyMeasurement[] {
+    const mostRecentResults: BodyMeasurement[] = []
 
     preprocessedMeasurements.forEach((day: BodyMeasurement[]) => {
       day.forEach((measurement) => {
-        mostRecentResults.push(measurement);
-      });
-    });
+        mostRecentResults.push(measurement)
+      })
+    })
 
-    return mostRecentResults;
+    return mostRecentResults
   }
 
   private processAsHighestOrLowest(
@@ -589,35 +641,35 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
     dir: MeasurementAggregation,
     property: string
   ): BodyMeasurement[] {
-    const highestOrLowest: BodyMeasurement[] = [];
+    const highestOrLowest: BodyMeasurement[] = []
 
     preprocessedMeasurements.forEach((day: BodyMeasurement[]) => {
       const sortedByProperty = day.sort((prev, next) => {
         if (prev[property] > next[property]) {
-          return 1;
+          return 1
         } else if (prev[property] < next[property]) {
-          return -1;
+          return -1
         } else {
-          return 0;
+          return 0
         }
-      });
+      })
 
       if (dir === 'highest') {
-        highestOrLowest.push(sortedByProperty.pop());
+        highestOrLowest.push(sortedByProperty.pop())
       } else {
-        highestOrLowest.push(sortedByProperty.shift());
+        highestOrLowest.push(sortedByProperty.shift())
       }
-    });
+    })
 
-    return highestOrLowest;
+    return highestOrLowest
   }
 
   private addEmptyDays(groupedDays: BodyMeasurement[][]) {
-    let endDate = moment(this.args.endDate);
-    const emptyMeasurement = new BodyMeasurement({});
+    let endDate = moment(this.args.endDate)
+    const emptyMeasurement = new BodyMeasurement({})
 
     if (endDate.isAfter(moment(), 'day')) {
-      endDate = endDate.add(1, 'day');
+      endDate = endDate.add(1, 'day')
     }
 
     for (
@@ -625,128 +677,140 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
       currentDate <= endDate;
       currentDate = currentDate.add(1, 'day')
     ) {
-      const currentFormattedDate = currentDate.toISOString();
+      const currentFormattedDate = currentDate.toISOString()
       const groupIndex = groupedDays.findIndex(
-        (day) => day[0].recordedAt.split('T')[0] === currentFormattedDate.split('T')[0]
-      );
-      const emptyMeasurementItem = { ...emptyMeasurement };
-      emptyMeasurementItem.recordedAt = currentFormattedDate;
-      emptyMeasurementItem.date = emptyMeasurementItem.recordedAt;
-      emptyMeasurementItem.isEmpty = true;
+        (day) =>
+          day[0].recordedAt.split('T')[0] === currentFormattedDate.split('T')[0]
+      )
+      const emptyMeasurementItem = { ...emptyMeasurement }
+      emptyMeasurementItem.recordedAt = currentFormattedDate
+      emptyMeasurementItem.date = emptyMeasurementItem.recordedAt
+      emptyMeasurementItem.isEmpty = true
       if (groupIndex === -1) {
-        groupedDays.push([emptyMeasurementItem]);
+        groupedDays.push([emptyMeasurementItem])
       } else {
-        emptyMeasurementItem.isHeader = true;
-        groupedDays[groupIndex].splice(0, 0, emptyMeasurementItem);
+        emptyMeasurementItem.isHeader = true
+        groupedDays[groupIndex].splice(0, 0, emptyMeasurementItem)
       }
     }
   }
 
   private addHeaderDays(groupedDays: BodyMeasurement[][]) {
-    const emptyMeasurement = new BodyMeasurement({});
+    const emptyMeasurement = new BodyMeasurement({})
 
     groupedDays.forEach((dayGroup: BodyMeasurement[]) => {
-      const emptyMeasurementItem = { ...emptyMeasurement };
+      const emptyMeasurementItem = { ...emptyMeasurement }
       emptyMeasurementItem.recordedAt = moment(dayGroup[0].recordedAt)
         .startOf('day')
-        .toISOString();
-      emptyMeasurementItem.date = emptyMeasurementItem.recordedAt;
-      emptyMeasurementItem.isEmpty = true;
-      emptyMeasurementItem.isHeader = true;
-      dayGroup.splice(0, 0, emptyMeasurementItem);
-    });
+        .toISOString()
+      emptyMeasurementItem.date = emptyMeasurementItem.recordedAt
+      emptyMeasurementItem.isEmpty = true
+      emptyMeasurementItem.isHeader = true
+      dayGroup.splice(0, 0, emptyMeasurementItem)
+    })
   }
 
-  private generatePlaceholderLabels(results: any[], labelFormat: string): string[] {
-    const labels = [];
-    const startDate = moment(this.criteria.startDate);
-    const endDate = moment(this.criteria.endDate);
+  private generatePlaceholderLabels(
+    results: any[],
+    labelFormat: string
+  ): string[] {
+    const labels = []
+    const startDate = moment(this.criteria.startDate)
+    const endDate = moment(this.criteria.endDate)
     const currentDate =
       this.criteria.timeframe === 'alltime'
         ? moment(results[0].recordedAt).startOf('day')
-        : startDate;
+        : startDate
     while (currentDate.isSameOrBefore(endDate)) {
-      const formattedDate = currentDate.format(labelFormat);
-      labels.push(formattedDate);
-      currentDate.add(1, 'day');
+      const formattedDate = currentDate.format(labelFormat)
+      labels.push(formattedDate)
+      currentDate.add(1, 'day')
     }
 
-    return labels;
+    return labels
   }
 
-  private generateOffsetData(results: any[], labelFormat: string, field: string) {
-    const cleanField = this.getField(field);
-    const resultArray = [];
-    results = [...results];
+  private generateOffsetData(
+    results: any[],
+    labelFormat: string,
+    field: string
+  ) {
+    const cleanField = this.getField(field)
+    const resultArray = []
+    results = [...results]
 
     if (Array.isArray(cleanField)) {
       results.forEach((result) => {
-        const resultCache = [];
+        const resultCache = []
         cleanField.forEach((f) => {
           const value = this.formatters[this.measurement]
             ? this.formatters[this.measurement][1](result[f])
-            : result[f].toFixed(1);
+            : result[f].toFixed(1)
           this.min =
-            this.min === undefined || value < this.min ? Math.floor(value) : this.min;
-          this.max = !this.max || value > this.max ? Math.ceil(value) : this.max;
+            this.min === undefined || value < this.min
+              ? Math.floor(value)
+              : this.min
+          this.max = !this.max || value > this.max ? Math.ceil(value) : this.max
           resultCache.push({
             x: moment(result.date).format(labelFormat),
             y: value
-          });
-        });
+          })
+        })
 
-        resultArray.push(resultCache);
-      });
+        resultArray.push(resultCache)
+      })
     } else {
       results.forEach((result) => {
         const value = this.formatters[this.measurement]
           ? this.formatters[this.measurement][1](result[field])
-          : result[field].toFixed(1);
+          : result[field].toFixed(1)
         this.min =
-          this.min === undefined || value < this.min ? Math.floor(value) : this.min;
-        this.max = !this.max || value > this.max ? Math.ceil(value) : this.max;
+          this.min === undefined || value < this.min
+            ? Math.floor(value)
+            : this.min
+        this.max = !this.max || value > this.max ? Math.ceil(value) : this.max
         resultArray.push({
           x: moment(result.date).format(labelFormat),
           y: value
-        });
-      });
+        })
+      })
     }
 
-    return resultArray;
+    return resultArray
   }
 
   private groupBy(array, groupBy) {
-    const groups = {};
+    const groups = {}
     array.forEach((item) => {
-      const groupName = JSON.stringify(groupBy(item));
-      groups[groupName] = groups[groupName] || [];
-      groups[groupName].push(item);
-    });
+      const groupName = JSON.stringify(groupBy(item))
+      groups[groupName] = groups[groupName] || []
+      groups[groupName].push(item)
+    })
 
     return Object.keys(groups).map((group) => {
-      return groups[group];
-    });
+      return groups[group]
+    })
   }
 
   private inferLastMeasurement(
     result: BodyMeasurement[],
     originalResult: FetchBodyMeasurementDataResponse
   ): BodyMeasurement {
-    let props = this.getData();
-    const inferredProps = {};
+    let props = this.getData()
+    const inferredProps = {}
 
     while (result.length && props.length) {
-      const resultItem = result.shift();
+      const resultItem = result.shift()
 
-      const iterationProps = props.slice();
+      const iterationProps = props.slice()
 
       iterationProps.forEach((prop, index) => {
-        inferredProps[prop] = resultItem[prop] || undefined;
+        inferredProps[prop] = resultItem[prop] || undefined
 
         if (inferredProps[prop]) {
-          props = props.filter((propItem, propIndex) => propIndex !== index);
+          props = props.filter((propItem, propIndex) => propIndex !== index)
         }
-      });
+      })
     }
 
     return new BodyMeasurement(
@@ -754,6 +818,6 @@ export class MeasurementDataSource extends ChartDataSource<any, MeasurementCrite
       {
         measurementPreference: this.context.user.measurementPreference
       }
-    );
+    )
   }
 }

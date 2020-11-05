@@ -7,7 +7,7 @@ import {
   GetAllPackageResponse,
   GetListOrganizationRequest,
   GetListOrganizationResponse,
-  Organization,
+  OrganizationProvider,
   Package,
   UpdatePackageRequest
 } from '@coachcare/npm-api'
@@ -15,7 +15,10 @@ import { from, Observable } from 'rxjs'
 
 @Injectable()
 export class LabelsDatabase extends AppDatabase {
-  constructor(private pkg: Package, private organization: Organization) {
+  constructor(
+    private pkg: Package,
+    private organization: OrganizationProvider
+  ) {
     super()
   }
 

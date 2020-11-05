@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { CcrDatabase } from '@app/shared';
+import { Injectable } from '@angular/core'
+import { CcrDatabase } from '@app/shared'
 import {
   GetAllInteractionsRequest,
   InteractionSingle,
   PagedResponse
-} from '@app/shared/selvera-api';
-import { from, Observable } from 'rxjs';
-import { Interaction } from 'selvera-api';
+} from '@coachcare/npm-api'
+import { from, Observable } from 'rxjs'
+import { Interaction } from '@coachcare/npm-api'
 
 @Injectable()
 export class CallHistoryDatabase implements CcrDatabase {
@@ -15,6 +15,6 @@ export class CallHistoryDatabase implements CcrDatabase {
   public fetch(
     criteria: GetAllInteractionsRequest
   ): Observable<PagedResponse<InteractionSingle>> {
-    return from(this.interaction.getAll(criteria));
+    return from(this.interaction.getAll(criteria))
   }
 }

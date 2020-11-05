@@ -1,21 +1,21 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Alerts } from 'selvera-api';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Alerts } from '@coachcare/npm-api'
 
-import { ContextService, NotifierService } from '@app/service';
+import { ContextService, NotifierService } from '@app/service'
 import {
   NotificationToggleRequest,
   ToggleGroupAlertsRequest
-} from '@app/shared/selvera-api';
-import { first } from 'rxjs/operators';
-import { AlertNotification } from '../models';
+} from '@coachcare/npm-api'
+import { first } from 'rxjs/operators'
+import { AlertNotification } from '../models'
 import {
   AlertsDatabase,
   AlertsDataSource,
   AlertTypesDataSource,
   AlertTypesPreference
-} from '../services';
+} from '../services'
 
 @Component({
   selector: 'app-alerts-table',
@@ -24,13 +24,13 @@ import {
 })
 export class AlertsTableComponent implements OnDestroy, OnInit {
   @Input()
-  columns = ['name', 'type', 'notice', 'date', 'actions'];
+  columns = ['name', 'type', 'notice', 'date', 'actions']
   @Input()
-  source: AlertsDataSource;
+  source: AlertsDataSource
 
-  private alertTypes: AlertTypesPreference[] = [];
-  canAccessPhi: boolean = true;
-  canViewAll: boolean = true;
+  private alertTypes: AlertTypesPreference[] = []
+  canAccessPhi = true
+  canViewAll = true
 
   constructor(
     private router: Router,
@@ -42,10 +42,11 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
-      this.canAccessPhi = org && org.permissions ? org.permissions.allowClientPhi : false;
-      this.canViewAll = org && org.permissions ? org.permissions.viewAll : false;
-      this.fetchAlertTypes();
-    });
+      this.canAccessPhi =
+        org && org.permissions ? org.permissions.allowClientPhi : false
+      this.canViewAll = org && org.permissions ? org.permissions.viewAll : false
+      this.fetchAlertTypes()
+    })
   }
 
   ngOnDestroy() {}
@@ -53,16 +54,16 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
   public getAlertTypeName(alertNotification: AlertNotification): string {
     const foundAlertType = this.alertTypes.find(
       (alertType) => alertType.typeCode === alertNotification.alertCode
-    );
+    )
 
     return foundAlertType && foundAlertType.texts
       ? foundAlertType.texts.title
-      : alertNotification.alertDescription;
+      : alertNotification.alertDescription
   }
 
   showDieter(account: any): void {
-    account.accountType = '3';
-    this.router.navigate([this.context.getProfileRoute(account)]);
+    account.accountType = '3'
+    this.router.navigate([this.context.getProfileRoute(account)])
   }
 
   onDismiss(row) {
@@ -70,14 +71,14 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
       account: this.context.user.id,
       notificationId: row.id,
       isViewed: true
-    };
+    }
     this.alerts
       .toggleNotification(req)
       .then(() => {
         // this.notifier.success(_('NOTIFY.SUCCESS.NOTIFICATION_DISMISSED'));
-        this.source.refresh();
+        this.source.refresh()
       })
-      .catch((err) => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err))
   }
 
   onDismissForAll(row) {
@@ -85,14 +86,14 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
       organization: this.context.organizationId,
       groupId: row.groupId,
       isViewed: true
-    };
+    }
     this.alerts
       .toggleGroup(req)
       .then(() => {
         // this.notifier.success(_('NOTIFY.SUCCESS.NOTIFICATION_DISMISSED'));
-        this.source.refresh();
+        this.source.refresh()
       })
-      .catch((err) => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err))
   }
 
   private async fetchAlertTypes(): Promise<void> {
@@ -101,11 +102,14 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
         this.notifier,
         this.alertsDatabase,
         this.context
-      );
-      source.addDefault({ organization: this.context.organizationId, limit: 'all' });
-      this.alertTypes = await source.connect().pipe(first()).toPromise();
+      )
+      source.addDefault({
+        organization: this.context.organizationId,
+        limit: 'all'
+      })
+      this.alertTypes = await source.connect().pipe(first()).toPromise()
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 }

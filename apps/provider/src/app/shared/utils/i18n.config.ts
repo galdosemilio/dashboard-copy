@@ -1,8 +1,5 @@
-import {
-  AppLocaleCode,
-  appLocales as npmLocales
-} from 'selvera-api/dist/lib/selvera-api/services/i18n.config';
-export { AppLocaleCode } from 'selvera-api/dist/lib/selvera-api/services/i18n.config';
+import { AppLocaleCode, appLocales as npmLocales } from '@coachcare/npm-api'
+export { AppLocaleCode } from '@coachcare/npm-api'
 
 /**
  * Flag information
@@ -80,30 +77,30 @@ const localeMetadata = {
   ['he']: {
     flag: '/assets/flag/060-israel.png'
   }
-};
+}
 
 /**
  * Supported Locales
  */
 export interface AppLocaleDefinition {
-  name: string;
-  nativeName: string;
-  country: string;
-  nativeCountry: string;
-  flag: any;
-  rtl?: boolean;
+  name: string
+  nativeName: string
+  country: string
+  nativeCountry: string
+  flag: any
+  rtl?: boolean
 }
 
 export interface AppLocale extends AppLocaleDefinition {
-  code: string;
+  code: string
 }
 
 // keep up to date with tools/i18n/locales
-const localeCache: any = {};
+const localeCache: any = {}
 Object.keys(npmLocales).forEach((key: string) => {
-  const local = npmLocales[key];
-  const baseLang = key.split('-')[0].toLowerCase();
-  const metadata = localeMetadata[key.toLowerCase()] || {};
+  const local = npmLocales[key]
+  const baseLang = key.split('-')[0].toLowerCase()
+  const metadata = localeMetadata[key.toLowerCase()] || {}
   localeCache[key] = {
     name: local.name,
     nativeName: local.native,
@@ -111,13 +108,13 @@ Object.keys(npmLocales).forEach((key: string) => {
     nativeCountry: local.nativeCountry,
     flag: metadata.flag || localeMetadata[baseLang].flag,
     rtl: baseLang === 'ar' || baseLang === 'he'
-  };
-});
+  }
+})
 export const appLocales: { [key in AppLocaleCode]: AppLocaleDefinition } = {
   ...localeCache
-};
+}
 
-export const locales = Object.keys(appLocales);
+export const locales = Object.keys(appLocales)
 
 /**
  * Locales List
@@ -126,24 +123,24 @@ export const locales = Object.keys(appLocales);
 export const LOCALES: Array<AppLocale> = locales.map((code) => ({
   ...appLocales[code],
   code: loc2API(code)
-}));
+}))
 
 /**
  * Utilities
  */
 
 export function loc2RFC(code: string) {
-  return code.slice(0, 3) + code.slice(3, 5).toUpperCase();
+  return code.slice(0, 3) + code.slice(3, 5).toUpperCase()
 }
 
 export function loc2API(code: string) {
-  return code.toLowerCase();
+  return code.toLowerCase()
 }
 
 export function locBase(code: string) {
-  return code.slice(0, 2);
+  return code.slice(0, 2)
 }
 
 export function locIsRtl(code: string) {
-  return appLocales[loc2RFC(code)].rtl ? true : false;
+  return appLocales[loc2RFC(code)].rtl ? true : false
 }

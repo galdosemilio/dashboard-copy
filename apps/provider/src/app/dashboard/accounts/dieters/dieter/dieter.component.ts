@@ -1,34 +1,38 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
-import { ActivatedRoute } from '@angular/router';
-import { resolveConfig } from '@app/config/section';
-import { ContextService, NotifierService } from '@app/service';
-import { RPMPatientReportDialog } from '@app/shared';
-import { AccSingleResponse } from '@app/shared/selvera-api';
-import { get, intersectionBy } from 'lodash';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { DieterDashboardSummary, Organization, RPM } from 'selvera-api';
-import { DoctorPDFDialog, ProgressReportPDFDialog } from '../../dialogs';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@coachcare/common/material'
+import { ActivatedRoute } from '@angular/router'
+import { resolveConfig } from '@app/config/section'
+import { ContextService, NotifierService } from '@app/service'
+import { RPMPatientReportDialog } from '@app/shared'
+import {
+  AccSingleResponse,
+  DieterDashboardSummary,
+  OrganizationProvider,
+  RPM
+} from '@coachcare/npm-api'
+import { get, intersectionBy } from 'lodash'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { DoctorPDFDialog, ProgressReportPDFDialog } from '../../dialogs'
 
 @Component({
   selector: 'app-dieter',
-  templateUrl: './dieter.component.html',
+  templateUrl: './dieter.component.html'
 })
 export class DieterComponent implements OnDestroy, OnInit {
-  public dieter: AccSingleResponse;
-  public hasRPMEnabled: boolean;
-  public patientIsForeign: boolean;
-  public showDoctorPDFButton: boolean;
-  public showMessaging: boolean;
-  public showPatientPDFButton: boolean;
-  public showRPM: boolean;
+  public dieter: AccSingleResponse
+  public hasRPMEnabled: boolean
+  public patientIsForeign: boolean
+  public showDoctorPDFButton: boolean
+  public showMessaging: boolean
+  public showPatientPDFButton: boolean
+  public showRPM: boolean
 
   constructor(
     private context: ContextService,
     private data: DieterDashboardSummary,
     private dialog: MatDialog,
     private notifier: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private route: ActivatedRoute,
     private rpm: RPM
   ) {}
@@ -36,14 +40,14 @@ export class DieterComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.data.init(this.context.accountId);
+    this.data.init(this.context.accountId)
     this.route.data.forEach((data: any) => {
-      this.dieter = data.account;
-    });
+      this.dieter = data.account
+    })
 
     this.context.account$
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.resolvePatientRPMStatus());
+      .subscribe(() => this.resolvePatientRPMStatus())
 
     this.context.organization$
       .pipe(untilDestroyed(this))
@@ -51,33 +55,33 @@ export class DieterComponent implements OnDestroy, OnInit {
         this.showDoctorPDFButton = resolveConfig(
           'JOURNAL.SHOW_DOCTOR_PDF_BUTTON',
           organization
-        );
+        )
         this.showMessaging = get(
           organization,
           'preferences.messaging.isActive',
           false
-        );
-        this.showRPM = get(organization, 'preferences.rpm.isActive', false);
+        )
+        this.showRPM = get(organization, 'preferences.rpm.isActive', false)
         this.showPatientPDFButton = resolveConfig(
           'JOURNAL.SHOW_PATIENT_PDF_BUTTON',
           organization
-        );
+        )
 
-        this.resolvePatientForeigness();
-        this.resolvePatientRPMStatus();
-      });
+        this.resolvePatientForeigness()
+        this.resolvePatientRPMStatus()
+      })
   }
 
   public openPatientRpmReportDialog(): void {
-    this.dialog.open(RPMPatientReportDialog, { width: '50vw' });
+    this.dialog.open(RPMPatientReportDialog, { width: '50vw' })
   }
 
   public onShowDoctorPDFModal(): void {
-    this.dialog.open(DoctorPDFDialog);
+    this.dialog.open(DoctorPDFDialog)
   }
 
   public onShowProgressPDFModal(): void {
-    this.dialog.open(ProgressReportPDFDialog);
+    this.dialog.open(ProgressReportPDFDialog)
   }
 
   private async resolvePatientForeigness(): Promise<void> {
@@ -85,21 +89,21 @@ export class DieterComponent implements OnDestroy, OnInit {
       const descendants = (
         await this.organization.getDescendants({
           organization: this.context.organizationId,
-          limit: 'all',
+          limit: 'all'
         })
-      ).data;
+      ).data
 
-      const accountOrgs = this.context.account.organizations;
+      const accountOrgs = this.context.account.organizations
 
       const accountOrgsInHierarchy = intersectionBy(
         [this.context.organization, ...descendants],
         accountOrgs,
         'id'
-      );
+      )
 
-      this.patientIsForeign = accountOrgsInHierarchy.length <= 0;
+      this.patientIsForeign = accountOrgsInHierarchy.length <= 0
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
@@ -109,17 +113,17 @@ export class DieterComponent implements OnDestroy, OnInit {
         account: this.context.accountId,
         organization: this.context.organizationId,
         offset: 0,
-        limit: 1,
-      });
+        limit: 1
+      })
 
       if (!rpmEntries.data.length) {
-        this.hasRPMEnabled = false;
-        return;
+        this.hasRPMEnabled = false
+        return
       }
 
-      this.hasRPMEnabled = rpmEntries.data.shift().isActive || false;
+      this.hasRPMEnabled = rpmEntries.data.shift().isActive || false
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 }

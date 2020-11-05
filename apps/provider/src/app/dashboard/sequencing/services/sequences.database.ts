@@ -1,20 +1,22 @@
-import { Injectable } from '@angular/core';
-import { CcrDatabase } from '@app/shared/model';
+import { Injectable } from '@angular/core'
+import { CcrDatabase } from '@app/shared/model'
 import {
   GetAllSequencesRequest,
   GetSequenceResponse,
   PagedResponse
-} from '@app/shared/selvera-api';
-import { from, Observable } from 'rxjs';
-import { Sequence } from 'selvera-api';
+} from '@coachcare/npm-api'
+import { from, Observable } from 'rxjs'
+import { Sequence } from '@coachcare/npm-api'
 
 @Injectable()
 export class SequencesDatabase extends CcrDatabase {
   constructor(private sequence: Sequence) {
-    super();
+    super()
   }
 
-  fetch(request: GetAllSequencesRequest): Observable<PagedResponse<GetSequenceResponse>> {
-    return from(this.sequence.getAllSequences(request));
+  fetch(
+    request: GetAllSequencesRequest
+  ): Observable<PagedResponse<GetSequenceResponse>> {
+    return from(this.sequence.getAllSequences(request))
   }
 }

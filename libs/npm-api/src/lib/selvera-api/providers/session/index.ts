@@ -1,12 +1,10 @@
-import { Account, ApiService } from '../../services/index'
-import { SessionActions, SessionState } from '@coachcare/backend/store/session'
+import { ApiService } from '../../services/index'
 import { MFASessionRequest, SessionRequest } from './requests'
 import {
   EntityResponse,
   LoginSessionResponse,
   MFASessionResponse
 } from './responses'
-import { Store } from '@ngrx/store'
 
 /**
  * Session management
@@ -15,11 +13,7 @@ class Session {
   /**
    * Init Api Service
    */
-  public constructor(
-    private readonly store: Store<SessionState.State>,
-    private readonly apiService: ApiService,
-    private readonly account: Account
-  ) {}
+  public constructor(private readonly apiService: ApiService) {}
 
   /**
    * Login a user and either retreive token on success, or set cookie if requesting site is either admin, provider, or public site.
@@ -43,10 +37,6 @@ class Session {
         }
 
         await this.apiService.doLogin(response)
-        const checkResponse = await this.check()
-
-        const account = await this.account.getSingle(checkResponse.id) // MERGETODO: CHECK THIS TYPE!!!
-        this.store.dispatch(new SessionActions.Login(account))
         resolve(response)
       } catch (error) {
         reject(error)

@@ -1,6 +1,6 @@
-import { Icon } from '@app/dashboard/content/models/icon.interface';
-import { _ } from '@app/shared';
-import { ContentType } from '@app/shared/selvera-api';
+import { Icon } from '@app/dashboard/content/models/icon.interface'
+import { _ } from '@app/shared'
+import { ContentType } from '@coachcare/npm-api'
 
 /**
  * This maps known code names to Angular Material icons.
@@ -9,12 +9,12 @@ import { ContentType } from '@app/shared/selvera-api';
  * -- Zcyon
  */
 export interface ContentTypeMapItem extends Partial<ContentType> {
-  id: string;
-  code: string;
-  set?: string;
-  icon: Icon;
-  name: string;
-  fetchProperties?(): any;
+  id: string
+  code: string
+  set?: string
+  icon: Icon
+  name: string
+  fetchProperties?(): any
 }
 
 export const CONTENT_TYPE_MAP: { [name: string]: ContentTypeMapItem } = {
@@ -68,4 +68,4 @@ export const CONTENT_TYPE_MAP: { [name: string]: ContentTypeMapItem } = {
       mimeType: 'text/html'
     })
   }
-};
+}

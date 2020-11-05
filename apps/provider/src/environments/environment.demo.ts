@@ -1,7 +1,7 @@
-import { Environment } from './environment.interface';
+import { Environment } from './environment.interface'
 
 export const environment: Environment = {
-  apiUrl: 'https://api.coachcaredemo.com/',
+  apiUrl: 'https://api.coachcaredev.com/',
   appName: 'ccr-web',
   cookieDomain: 'api.coachcaredemo.com',
   loginSite: 'https://dashboard.coachcaredemo.com',
@@ -9,4 +9,4 @@ export const environment: Environment = {
   role: 'provider',
   selveraApiEnv: 'ccrDemo',
   url: 'https://dashboard.coachcaredemo.com/provider'
-};
+}

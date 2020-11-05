@@ -4,12 +4,12 @@ import {
   HostListener,
   Inject,
   OnDestroy,
-  OnInit,
+  OnInit
 } from '@angular/core'
 import {
   AppBreakpoints,
   STORAGE_COACHES_PAGINATION,
-  STORAGE_PATIENTS_PAGINATION,
+  STORAGE_PATIENTS_PAGINATION
 } from '@app/config'
 import { CloseMenuFor, ResizeLayout, UIState } from '@app/layout/store'
 import { ConfigService, TimeTrackerService } from '@app/service'
@@ -25,7 +25,7 @@ import { RecoverCall } from './layout/store/call'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy, OnInit {
   @HostListener('window:beforeunload', ['$event'])

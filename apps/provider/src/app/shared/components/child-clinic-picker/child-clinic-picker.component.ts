@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { NotifierService } from '@app/service';
-import { OrganizationEntity } from '@app/shared/selvera-api';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { debounceTime } from 'rxjs/operators';
-import { Organization } from 'selvera-api';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core'
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { NotifierService } from '@app/service'
+import { OrganizationEntity } from '@coachcare/npm-api'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { debounceTime } from 'rxjs/operators'
+import { OrganizationProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-child-clinic-picker',
@@ -13,61 +20,61 @@ import { Organization } from 'selvera-api';
 })
 export class CcrChildClinicPickerComponent implements OnDestroy, OnInit {
   @Input() set organization(org: string) {
-    this._organizaton = org;
+    this._organizaton = org
 
     if (this._organizaton) {
-      this.fetchChildOrgs();
+      this.fetchChildOrgs()
     } else {
-      this.childOrgs = [];
+      this.childOrgs = []
     }
   }
 
   get organization(): string {
-    return this._organizaton;
+    return this._organizaton
   }
 
   @Output() select: EventEmitter<OrganizationEntity[]> = new EventEmitter<
     OrganizationEntity[]
-  >();
+  >()
 
-  public childOrgs: OrganizationEntity[] = [];
-  public form: FormGroup;
+  public childOrgs: OrganizationEntity[] = []
+  public form: FormGroup
 
-  private _organizaton: string;
+  private _organizaton: string
 
   constructor(
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private organizationService: Organization
+    private organizationService: OrganizationProvider
   ) {}
 
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   private createForm(): void {
     this.form = this.fb.group({
       checkboxArray: this.fb.array([])
-    });
+    })
 
     this.form.controls.checkboxArray.valueChanges
       .pipe(debounceTime(100), untilDestroyed(this))
-      .subscribe(() => this.emitSelected());
+      .subscribe(() => this.emitSelected())
   }
 
   private emitSelected(): void {
-    const selectedClinics = [];
-    const checkboxArray = this.form.value.checkboxArray;
+    const selectedClinics = []
+    const checkboxArray = this.form.value.checkboxArray
 
     this.childOrgs.forEach((childOrg, index) => {
       if (checkboxArray[index]) {
-        selectedClinics.push(childOrg);
+        selectedClinics.push(childOrg)
       }
-    });
+    })
 
-    this.select.emit(selectedClinics);
+    this.select.emit(selectedClinics)
   }
 
   private async fetchChildOrgs(): Promise<void> {
@@ -76,14 +83,14 @@ export class CcrChildClinicPickerComponent implements OnDestroy, OnInit {
         organization: this.organization,
         limit: 'all',
         offset: 0
-      });
-      this.childOrgs = response.data;
-      this.form.controls.checkboxArray.reset();
+      })
+      this.childOrgs = response.data
+      this.form.controls.checkboxArray.reset()
       this.childOrgs.forEach(() =>
         (this.form.controls.checkboxArray as FormArray).push(new FormControl())
-      );
+      )
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 }

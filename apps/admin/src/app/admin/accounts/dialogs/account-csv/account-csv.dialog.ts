@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import {
   AccountFullData,
   AccountTypeIds,
-  Account,
-  Organization
+  AccountProvider,
+  OrganizationProvider
 } from '@coachcare/npm-api'
 import { OrganizationAutocompleterComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
@@ -24,9 +24,9 @@ export class AccountCSVDialogComponent implements OnInit {
   isLoading = false
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private notify: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   ngOnInit(): void {}

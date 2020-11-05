@@ -3,7 +3,7 @@ export {
   ApiService,
   Access,
   AccountIdentifier,
-  Account,
+  Account as AccountProvider,
   AccountAvatar,
   AccountPassword,
   AccountPreference,
@@ -19,7 +19,7 @@ export {
   ContentPackage,
   ContentPreference,
   Consultation,
-  Country,
+  Country as CountryProvider,
   Device,
   Exercise,
   ExerciseAssociation,
@@ -59,7 +59,7 @@ export {
   MobileApp,
   Notes,
   Notification,
-  Organization,
+  Organization as OrganizationProvider,
   OrganizationAssignment,
   OrganizationAssociation,
   OrganizationPreference,
@@ -109,6 +109,9 @@ export * from './selvera-api/providers/alerts/responses'
 
 export * from './selvera-api/providers/apilog/requests'
 export * from './selvera-api/providers/apilog/responses'
+
+export * from './selvera-api/providers/authentication/requests'
+export * from './selvera-api/providers/authentication/responses'
 
 export * from './selvera-api/providers/ccr/blacklist/responses'
 
@@ -258,3 +261,5 @@ export * from './selvera-api/providers/zendesk/entities'
 
 export * from './selvera-api/providers/common/entities'
 export * from './selvera-api/providers/common/types'
+
+export * from './selvera-api/processors'

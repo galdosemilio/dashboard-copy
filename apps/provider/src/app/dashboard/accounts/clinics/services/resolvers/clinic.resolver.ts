@@ -1,26 +1,27 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { ContextService, NotifierService } from '@app/service';
-import { OrgSingleResponse } from '@app/shared/selvera-api';
-import { Organization } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
+import { ContextService, NotifierService } from '@app/service'
+import { OrganizationProvider, OrgSingleResponse } from '@coachcare/npm-api'
 
 @Injectable()
 export class ClinicResolver implements Resolve<OrgSingleResponse> {
   constructor(
     private context: ContextService,
     private notifier: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
-  public async resolve(route: ActivatedRouteSnapshot): Promise<OrgSingleResponse> {
+  public async resolve(
+    route: ActivatedRouteSnapshot
+  ): Promise<OrgSingleResponse> {
     try {
-      const organization = await this.organization.getSingle(route.params['id']);
+      const organization = await this.organization.getSingle(route.params['id'])
 
-      this.context.clinic = organization;
+      this.context.clinic = organization
 
-      return organization;
+      return organization
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 }

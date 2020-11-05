@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 
-import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services';
-import { NotifierService } from '@app/service';
-import { _ } from '@app/shared';
-import { FormSubmissionSingle } from '@app/shared/selvera-api';
+import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services'
+import { NotifierService } from '@app/service'
+import { _ } from '@app/shared'
+import { FormSubmissionSingle } from '@coachcare/npm-api'
 
 @Injectable()
 export class FormAnswersResolver implements Resolve<FormSubmissionSingle> {
@@ -17,10 +17,10 @@ export class FormAnswersResolver implements Resolve<FormSubmissionSingle> {
     try {
       return await this.database
         .fetchAnswers({ id: route.params.submissionId })
-        .toPromise();
+        .toPromise()
     } catch (error) {
-      this.notifier.error(_('NOTIFY.ERROR.FORM_NO_ACCESS_VIEW_SUBMISSION'));
-      throw new Error(error);
+      this.notifier.error(_('NOTIFY.ERROR.FORM_NO_ACCESS_VIEW_SUBMISSION'))
+      throw new Error(error)
     }
   }
 }

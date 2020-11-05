@@ -5,63 +5,63 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatAutocompleteTrigger } from '@coachcare/common/material';
-import { Account, Messaging } from 'selvera-api';
+  ViewEncapsulation
+} from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { MatAutocompleteTrigger } from '@coachcare/common/material'
+import { AccountProvider, Messaging } from '@coachcare/npm-api'
 
-import { MessageRecipient } from '@app/shared';
-import { AccountAccessData, AccSingleResponse } from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MessageRecipient } from '@app/shared'
+import { AccountAccessData, AccSingleResponse } from '@coachcare/npm-api'
+import { _ } from '@app/shared/utils'
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
 @Component({
   selector: 'app-messages-recipients',
   templateUrl: 'recipients.component.html',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class MessagesRecipientsComponent implements OnInit {
   @Input()
-  current: AccSingleResponse;
+  current: AccSingleResponse
   @Input()
-  total: number;
+  total: number
 
   @Output()
-  changed = new EventEmitter<MessageRecipient[]>();
+  changed = new EventEmitter<MessageRecipient[]>()
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
-  trigger: MatAutocompleteTrigger;
+  trigger: MatAutocompleteTrigger
 
-  public searchCtrl: FormControl;
-  public accounts: Array<AccountAccessData>;
-  public selected: Array<MessageRecipient> = [];
+  public searchCtrl: FormControl
+  public accounts: Array<AccountAccessData>
+  public selected: Array<MessageRecipient> = []
 
-  constructor(private account: Account, private messaging: Messaging) {}
+  constructor(private account: AccountProvider, private messaging: Messaging) {}
 
   ngOnInit() {
-    this.searchCtrl = new FormControl();
+    this.searchCtrl = new FormControl()
     this.searchCtrl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
         if (query) {
-          this.searchAccounts(query);
+          this.searchAccounts(query)
         } else {
           if (this.trigger) {
-            this.trigger.closePanel();
+            this.trigger.closePanel()
           }
         }
-      });
+      })
   }
 
   formatAccountType(accountType) {
-    let result;
+    let result
     if ([2, '2', 'provider'].indexOf(accountType) >= 0) {
-      result = _('GLOBAL.COACH');
+      result = _('GLOBAL.COACH')
     } else if ([3, '3', 'client'].indexOf(accountType) >= 0) {
-      result = _('GLOBAL.PATIENT');
+      result = _('GLOBAL.PATIENT')
     }
-    return result || '';
+    return result || ''
   }
 
   selectAccount(account: AccountAccessData): void {
@@ -74,20 +74,20 @@ export class MessagesRecipientsComponent implements OnInit {
         name: `${account.firstName} ${account.lastName}`,
         firstName: account.firstName,
         lastName: account.lastName,
-        accountType: account.accountType.id,
-      });
-      this.emitChanged();
+        accountType: account.accountType.id
+      })
+      this.emitChanged()
     }
-    this.accounts = [];
+    this.accounts = []
   }
 
   removeAccount(account: AccountAccessData): void {
-    this.selected = this.selected.filter((a) => a.id !== account.id);
-    this.emitChanged();
+    this.selected = this.selected.filter((a) => a.id !== account.id)
+    this.emitChanged()
   }
 
   private emitChanged() {
-    this.changed.emit(this.selected);
+    this.changed.emit(this.selected)
   }
 
   private searchAccounts(query: string): void {
@@ -96,10 +96,10 @@ export class MessagesRecipientsComponent implements OnInit {
         (a) =>
           a.id !== this.current.id &&
           !this.selected.some((sa) => sa.id === a.id)
-      );
+      )
       if (this.accounts.length > 0) {
-        this.trigger.openPanel();
+        this.trigger.openPanel()
       }
-    });
+    })
   }
 }

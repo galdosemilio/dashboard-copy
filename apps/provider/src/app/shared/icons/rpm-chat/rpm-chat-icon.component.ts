@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'ccr-rpm-chat-icon',
@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class RPMChatIconComponent {
   @Input()
-  size: number = 24;
+  size = 24
 
   @Input()
-  text: string = '';
+  text = ''
 }

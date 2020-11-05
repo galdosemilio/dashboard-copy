@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
-import { CcrDatabase } from '@app/shared/model';
+import { Injectable } from '@angular/core'
+import { CcrDatabase } from '@app/shared/model'
 import {
+  AccountProvider,
   GetLoginHistoryRequest,
   LoginHistoryItem,
   PagedResponse
-} from '@app/shared/selvera-api';
-import { Account } from 'selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class LoginHistoryDatabase extends CcrDatabase {
-  constructor(private account: Account) {
-    super();
+  constructor(private account: AccountProvider) {
+    super()
   }
 
-  fetch(criteria: GetLoginHistoryRequest): Promise<PagedResponse<LoginHistoryItem>> {
-    return this.account.getLoginHistory(criteria);
+  fetch(
+    criteria: GetLoginHistoryRequest
+  ): Promise<PagedResponse<LoginHistoryItem>> {
+    return this.account.getLoginHistory(criteria)
   }
 }

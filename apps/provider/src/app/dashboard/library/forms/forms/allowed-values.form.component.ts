@@ -1,8 +1,8 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared';
-import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
+import { TranslateService } from '@ngx-translate/core'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
 @Component({
   selector: 'app-library-allowed-values-form',
@@ -19,41 +19,44 @@ export class AllowedValuesFormComponent implements BindForm, OnDestroy, OnInit {
   @Input()
   set content(allowedValues: string[]) {
     if (allowedValues && allowedValues.length) {
-      this._content = allowedValues;
-      this.allowedValues = allowedValues;
-      this.refreshForm();
+      this._content = allowedValues
+      this.allowedValues = allowedValues
+      this.refreshForm()
     }
   }
 
   get content(): string[] {
-    return this._content;
+    return this._content
   }
 
   @Input()
-  readonly: boolean = false;
+  readonly = false
 
-  public allowedValues: string[] = [];
-  public form: FormGroup;
+  public allowedValues: string[] = []
+  public form: FormGroup
 
-  private _content: string[];
-  private defaultOptionString: string;
+  private _content: string[]
+  private defaultOptionString: string
   // This could be fetched from a translation JSON in order provide multilanguage support
   // --Zcyon
-  private optionNameSource: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  private optionNameSource = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-  constructor(private formBuilder: FormBuilder, private translate: TranslateService) {
-    this.createForm();
-    this.updateDefaultOptionString();
+  constructor(
+    private formBuilder: FormBuilder,
+    private translate: TranslateService
+  ) {
+    this.createForm()
+    this.updateDefaultOptionString()
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.updateDefaultOptionString());
+      .subscribe(() => this.updateDefaultOptionString())
   }
 
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
     if (!this.allowedValues || !this.allowedValues.length) {
-      this.addOption();
+      this.addOption()
     }
   }
 
@@ -62,42 +65,44 @@ export class AllowedValuesFormComponent implements BindForm, OnDestroy, OnInit {
       this.defaultOptionString
         ? `${this.defaultOptionString} ${this.allowedValues.length + 1}`
         : ''
-    );
-    this.refreshForm();
+    )
+    this.refreshForm()
   }
 
   getDisplayIndex(index: number): string {
     return (
       (index >= this.optionNameSource.length
-        ? this.getDisplayIndex(((index / this.optionNameSource.length) >> 0) - 1)
+        ? this.getDisplayIndex(
+            ((index / this.optionNameSource.length) >> 0) - 1
+          )
         : '') + this.optionNameSource[index % this.optionNameSource.length >> 0]
-    );
+    )
   }
 
   onDrop($event: CcrDropEvent): void {
     if ($event.drag === $event.drop) {
-      return;
+      return
     }
-    const allowedValueCache: string = this.allowedValues[$event.drag];
+    const allowedValueCache: string = this.allowedValues[$event.drag]
 
-    this.allowedValues[$event.drag] = this.allowedValues[$event.drop];
-    this.allowedValues[$event.drop] = allowedValueCache;
+    this.allowedValues[$event.drag] = this.allowedValues[$event.drop]
+    this.allowedValues[$event.drop] = allowedValueCache
 
-    this.refreshForm();
+    this.refreshForm()
   }
 
   refreshForm(): void {
-    this.form.patchValue({ value: this.allowedValues });
+    this.form.patchValue({ value: this.allowedValues })
   }
 
   removeOption(index: number): void {
-    this.allowedValues.splice(index, 1);
-    this.refreshForm();
+    this.allowedValues.splice(index, 1)
+    this.refreshForm()
   }
 
   setAllowedValue($event: any, index: number): void {
-    this.allowedValues[index] = $event.target.value;
-    this.refreshForm();
+    this.allowedValues[index] = $event.target.value
+    this.refreshForm()
   }
 
   private createForm(): void {
@@ -108,10 +113,10 @@ export class AllowedValuesFormComponent implements BindForm, OnDestroy, OnInit {
           return control.value.length &&
             control.value.findIndex((option: string) => !option) > -1
             ? { emptyOption: true }
-            : null;
+            : null
         }
       ]
-    });
+    })
   }
 
   private updateDefaultOptionString(): void {
@@ -119,7 +124,8 @@ export class AllowedValuesFormComponent implements BindForm, OnDestroy, OnInit {
       .get('LIBRARY.FORMS.OPTION')
       .pipe(untilDestroyed(this))
       .subscribe(
-        (defaultOptionString: string) => (this.defaultOptionString = defaultOptionString)
-      );
+        (defaultOptionString: string) =>
+          (this.defaultOptionString = defaultOptionString)
+      )
   }
 }

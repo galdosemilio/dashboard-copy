@@ -1,10 +1,10 @@
 export class JournalTabs {
-  static EXERCISE: string = 'exercise';
-  static FOOD: string = 'food';
-  static KEYS: string = 'keys';
-  static LEVL: string = 'levl';
-  static PAIN: string = 'pain';
-  static SUPPLEMENTS: string = 'supplements';
-  static WATER: string = 'water';
-  static METRICS: string = 'metrics';
+  static EXERCISE = 'exercise'
+  static FOOD = 'food'
+  static KEYS = 'keys'
+  static LEVL = 'levl'
+  static PAIN = 'pain'
+  static SUPPLEMENTS = 'supplements'
+  static WATER = 'water'
+  static METRICS = 'metrics'
 }

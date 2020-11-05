@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ConnectionStatus } from '@app/shared/selvera-api';
+import { Component, Input } from '@angular/core'
+import { ConnectionStatus } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-call-connection-indicator',
@@ -7,5 +7,5 @@ import { ConnectionStatus } from '@app/shared/selvera-api';
   styleUrls: ['./connection-indicator.component.scss']
 })
 export class ConnectionIndicatorComponent {
-  @Input() connectionStatus: ConnectionStatus;
+  @Input() connectionStatus: ConnectionStatus
 }

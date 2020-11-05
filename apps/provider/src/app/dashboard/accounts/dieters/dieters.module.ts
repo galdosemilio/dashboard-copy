@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { DietersTableModule } from '@app/dashboard/accounts/dieters/table/dieters-table.module';
-import { LibraryFormsModule } from '@app/dashboard/library/forms/forms.module';
-import { ReportsModule } from '@app/dashboard/reports/reports.module';
-import { SharedModule } from '@app/shared/shared.module';
-import { DietersComponents, DietersEntryComponents, DietersProviders } from './';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { DietersTableModule } from '@app/dashboard/accounts/dieters/table/dieters-table.module'
+import { LibraryFormsModule } from '@app/dashboard/library/forms/forms.module'
+import { ReportsModule } from '@app/dashboard/reports/reports.module'
+import { SharedModule } from '@app/shared/shared.module'
+import { DietersComponents, DietersEntryComponents, DietersProviders } from './'
 
 @NgModule({
   imports: [

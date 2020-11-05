@@ -1,15 +1,21 @@
-import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  Directive,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output
+} from '@angular/core'
 
 @Directive({
   selector: '[detectKey]'
 })
 export class DetectKeyDirective {
-  private shiftKeysActive: number = 0;
+  private shiftKeysActive = 0
 
-  @Input() detectKey; // pass the key to detect
-  @Input() supressOnShiftKeyHold; // optional parameter to suppress event emit on shift key hold
+  @Input() detectKey // pass the key to detect
+  @Input() supressOnShiftKeyHold // optional parameter to suppress event emit on shift key hold
 
-  @Output() keyPressed = new EventEmitter();
+  @Output() keyPressed = new EventEmitter()
 
   constructor() {}
 
@@ -17,17 +23,17 @@ export class DetectKeyDirective {
   onKeyDown(e: KeyboardEvent) {
     if (this.detectKey) {
       if (e.key === 'Shift') {
-        this.shiftKeysActive++;
+        this.shiftKeysActive++
       }
 
       // Supress if shift key is being held, if input value is set to 'true'
       if (this.supressOnShiftKeyHold === 'true' && this.shiftKeysActive > 0) {
-        return;
+        return
       }
 
       if (e.key === this.detectKey) {
-        e.preventDefault();
-        this.keyPressed.emit();
+        e.preventDefault()
+        this.keyPressed.emit()
       }
     }
   }
@@ -36,7 +42,7 @@ export class DetectKeyDirective {
   @HostListener('keyup', ['$event'])
   onKeyUp(e: KeyboardEvent) {
     if (this.detectKey && e.key === 'Shift') {
-      this.shiftKeysActive--;
+      this.shiftKeysActive--
     }
   }
 }

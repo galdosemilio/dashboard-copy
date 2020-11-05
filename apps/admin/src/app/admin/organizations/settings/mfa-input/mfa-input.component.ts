@@ -8,12 +8,16 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { AccountTypeInfo, AccountTypes, MFA } from '@coachcare/npm-api'
+import {
+  AccountTypeInfo,
+  AccountTypes,
+  GetMFAOrganizationPreferenceResponse,
+  MFA
+} from '@coachcare/npm-api'
 import { BindForm, BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 import { intersectionBy } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { GetMFAOrganizationPreferenceResponse } from 'selvera-api/dist/lib/selvera-api/providers/mfa/responses'
 import { MFA_SECTIONS, MFASection } from '../models'
 
 @Component({

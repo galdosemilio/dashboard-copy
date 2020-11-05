@@ -7,8 +7,8 @@ import {
   OnDestroy,
   OnInit,
   Output
-} from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+} from '@angular/core'
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms'
 import {
   Form,
   FormQuestion,
@@ -16,13 +16,13 @@ import {
   FormSubmission,
   ManagerEvents,
   QUESTION_TYPE_MAP
-} from '@app/dashboard/library/forms/models';
-import { SelectedOrganization } from '@app/service';
-import { _, BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared';
-import { AccountAccessData, FormAnswer } from '@app/shared/selvera-api';
-import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { FormDisplayService } from '../services';
+} from '@app/dashboard/library/forms/models'
+import { SelectedOrganization } from '@app/service'
+import { _, BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
+import { AccountAccessData, FormAnswer } from '@coachcare/npm-api'
+import { TranslateService } from '@ngx-translate/core'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { FormDisplayService } from '../services'
 @Component({
   selector: 'app-library-form-manager',
   templateUrl: './manager.component.html',
@@ -36,43 +36,43 @@ import { FormDisplayService } from '../services';
 })
 export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
   @Input()
-  answers: FormAnswer[];
+  answers: FormAnswer[]
   @Input()
-  content: Form;
+  content: Form
   @Input()
-  fill: boolean = false;
+  fill = false
   @Input()
-  preview: boolean = false;
+  preview = false
   @Input()
-  readonly: boolean = false;
+  readonly = false
   @Input()
-  selectedClinic: SelectedOrganization;
+  selectedClinic: SelectedOrganization
   @Input()
   set selectedDieter(dieter: AccountAccessData) {
-    this._selectedDieter = dieter;
+    this._selectedDieter = dieter
     // Seems way more performant than detecting changes, although it looks hacky --Zcyon
-    setTimeout(() => this.form.patchValue({ selectedDieter: dieter }));
+    setTimeout(() => this.form.patchValue({ selectedDieter: dieter }))
   }
 
   get selectedDieter(): AccountAccessData {
-    return this._selectedDieter;
+    return this._selectedDieter
   }
 
   @Input()
-  submission: FormSubmission;
+  submission: FormSubmission
 
   @Output()
-  selectDieter: EventEmitter<void> = new EventEmitter<void>();
+  selectDieter: EventEmitter<void> = new EventEmitter<void>()
 
-  public events: ManagerEvents = new ManagerEvents();
-  public form: FormGroup;
-  public hasMultipleSections: boolean = false;
-  public selectedSection: FormSection;
+  public events: ManagerEvents = new ManagerEvents()
+  public form: FormGroup
+  public hasMultipleSections = false
+  public selectedSection: FormSection
 
-  private _selectedDieter: AccountAccessData;
-  private defaultSectionName: string;
-  private selectedQuestion: FormQuestion;
-  private updatedSections: FormSection[] = [];
+  private _selectedDieter: AccountAccessData
+  private defaultSectionName: string
+  private selectedQuestion: FormQuestion
+  private updatedSections: FormSection[] = []
 
   constructor(
     public formDisplay: FormDisplayService,
@@ -84,24 +84,24 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
   ngOnDestroy() {}
 
   ngOnInit() {
-    this.createForm();
+    this.createForm()
     if (!this.content.sections.length) {
-      this.addFormSection();
-      this.addFormQuestion(this.content.sections[0]);
+      this.addFormSection()
+      this.addFormQuestion(this.content.sections[0])
     }
-    this.subscribeToEvents();
-    this.updateDefaultSectionName();
-    this.checkForMultipleSections();
+    this.subscribeToEvents()
+    this.updateDefaultSectionName()
+    this.checkForMultipleSections()
   }
 
   addFormSection(title = this.defaultSectionName || '') {
     const index: number = this.content.sections
       .map((s) => s.sortOrder)
-      .reduce((highest, current) => (highest > current ? highest : current), 0);
+      .reduce((highest, current) => (highest > current ? highest : current), 0)
 
     const localIndex: number = this.content.sections.filter(
       (s: FormSection) => !s.deleted
-    ).length;
+    ).length
     const newSection: FormSection = new FormSection(
       {
         id: index.toString(),
@@ -112,18 +112,18 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
         edited: true
       },
       { form: { id: this.content.id } }
-    );
+    )
 
-    this.hasMultipleSections = true;
-    this.content.sections.push(newSection);
-    this.cdr.detectChanges();
+    this.hasMultipleSections = true
+    this.content.sections.push(newSection)
+    this.cdr.detectChanges()
   }
 
   private addFormQuestion(section: FormSection): void {
-    const type = QUESTION_TYPE_MAP[1];
+    const type = QUESTION_TYPE_MAP[1]
 
     if (!this.form.valid) {
-      return;
+      return
     }
 
     const newQuestion: FormQuestion = new FormQuestion({
@@ -131,21 +131,22 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
       edited: true,
       section: { id: section.id, name: section.title },
       questionType: type
-    });
+    })
 
-    this.events.questionAdded.emit(newQuestion);
+    this.events.questionAdded.emit(newQuestion)
   }
 
   private arrayify(obj: any): any[] {
-    const arrayified: any[] = [];
-    Object.keys(obj).forEach((key: string) => (arrayified[key] = obj[key]));
-    return arrayified;
+    const arrayified: any[] = []
+    Object.keys(obj).forEach((key: string) => (arrayified[key] = obj[key]))
+    return arrayified
   }
 
   private checkForMultipleSections() {
     this.hasMultipleSections =
       this.content.sections.length &&
-      this.content.sections.filter((section: FormSection) => !section.deleted).length > 1;
+      this.content.sections.filter((section: FormSection) => !section.deleted)
+        .length > 1
   }
 
   private createForm() {
@@ -159,32 +160,32 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
             control.value.length &&
             !control.value.find((section) => !section.deleted)
           ) {
-            return { noSections: true };
+            return { noSections: true }
           }
         }
       ],
       selectedDieter: [undefined],
       values: this.formBuilder.group({})
-    });
+    })
 
     this.form.controls.sections.valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((controls: any) => {
         if (controls && Object.keys(controls).length) {
-          this.updateSections(controls);
-          this.form.patchValue({ updatedSections: this.updatedSections });
-          this.checkForMultipleSections();
-          this.formDisplay.toggleSave$.next(this.form.valid);
-          setTimeout(() => this.events.refreshQuestionIndexes.emit());
+          this.updateSections(controls)
+          this.form.patchValue({ updatedSections: this.updatedSections })
+          this.checkForMultipleSections()
+          this.formDisplay.toggleSave$.next(this.form.valid)
+          setTimeout(() => this.events.refreshQuestionIndexes.emit())
         }
-      });
+      })
   }
 
   private stageQuestionChanges(question: FormQuestion = this.selectedQuestion) {
     const updatedQuestion: FormQuestion | any =
       this.updatedSections
         .find((s: FormSection) => s && s.id === question.section.id)
-        .questions.find((q: FormQuestion) => q && q.id === question.id) || {};
+        .questions.find((q: FormQuestion) => q && q.id === question.id) || {}
 
     Object.keys(updatedQuestion).forEach(
       (key: string) =>
@@ -192,41 +193,42 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
           updatedQuestion[key] !== undefined && updatedQuestion[key] !== null
             ? updatedQuestion[key].value || updatedQuestion[key]
             : undefined)
-    );
+    )
 
     const targetSectionIndex: number = this.content.sections.findIndex(
       (s: FormSection) => s.id === question.section.id
-    );
+    )
 
     const targetQuestionIndex = this.content.sections[
       targetSectionIndex
-    ].questions.findIndex((q: FormQuestion) => q.id === question.id);
+    ].questions.findIndex((q: FormQuestion) => q.id === question.id)
 
-    const targetQuestion: FormQuestion = this.content.sections[targetSectionIndex]
-      .questions[targetQuestionIndex];
+    const targetQuestion: FormQuestion = this.content.sections[
+      targetSectionIndex
+    ].questions[targetQuestionIndex]
 
     Object.keys(targetQuestion).forEach((key: string) => {
       if (updatedQuestion[key] !== undefined) {
-        targetQuestion[key] = updatedQuestion[key];
+        targetQuestion[key] = updatedQuestion[key]
       }
-    });
-    this.events.questionStaged.emit();
+    })
+    this.events.questionStaged.emit()
   }
 
   private stageSectionChanges(): void {
     this.updatedSections.forEach((updatedSection: FormSection) => {
       let section: FormSection = this.content.sections.find(
         (s: FormSection) => s.id === updatedSection.id
-      );
+      )
       if (section) {
         section = Object.assign(section, {
           title: updatedSection.title,
           edited: updatedSection.edited,
           deleted: updatedSection.deleted,
           description: updatedSection.description
-        });
+        })
       }
-    });
+    })
   }
 
   private subscribeToEvents() {
@@ -234,64 +236,75 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((question: FormQuestion) => {
         if (question) {
-          if (this.selectedQuestion && question.id !== this.selectedQuestion.id) {
-            this.stageQuestionChanges();
+          if (
+            this.selectedQuestion &&
+            question.id !== this.selectedQuestion.id
+          ) {
+            this.stageQuestionChanges()
           }
-          const updatedSection = this.updatedSections.find((uS: FormSection) => {
-            return uS && uS.id === question.section.id;
-          });
+          const updatedSection = this.updatedSections.find(
+            (uS: FormSection) => {
+              return uS && uS.id === question.section.id
+            }
+          )
 
           this.selectedQuestion = updatedSection
-            ? updatedSection.questions.find((q: FormQuestion) => q.id === question.id)
-            : undefined;
+            ? updatedSection.questions.find(
+                (q: FormQuestion) => q.id === question.id
+              )
+            : undefined
         } else if (this.selectedQuestion) {
-          this.stageQuestionChanges();
-          delete this.selectedQuestion;
+          this.stageQuestionChanges()
+          delete this.selectedQuestion
         }
-      });
+      })
 
     this.events.moveQuestion
       .pipe(untilDestroyed(this))
       .subscribe((moveEvent: CcrDropEvent) => {
         if (this.selectedQuestion) {
-          this.stageQuestionChanges();
+          this.stageQuestionChanges()
         }
 
         const draggedIndex: number = moveEvent.drag.index,
-          droppedIndex: number = moveEvent.drop.index;
+          droppedIndex: number = moveEvent.drop.index
 
         const draggedSectionIndex: number = this.content.sections.findIndex(
             (s: FormSection) => s.id === moveEvent.drag.question.section.id
           ),
           droppedSectionIndex: number = this.content.sections.findIndex(
             (s: FormSection) => s.id === moveEvent.drop.question.section.id
-          );
+          )
 
         const areDifferentSections: boolean =
           this.content.sections[draggedSectionIndex].id !==
-          this.content.sections[droppedSectionIndex].id;
+          this.content.sections[droppedSectionIndex].id
 
         if (!areDifferentSections && draggedIndex === droppedIndex) {
-          return;
+          return
         }
 
-        const draggedQuestion: FormQuestion = this.content.sections[draggedSectionIndex]
-            .questions[draggedIndex],
-          droppedQuestion: FormQuestion = this.content.sections[droppedSectionIndex]
-            .questions[droppedIndex];
+        const draggedQuestion: FormQuestion = this.content.sections[
+            draggedSectionIndex
+          ].questions[draggedIndex],
+          droppedQuestion: FormQuestion = this.content.sections[
+            droppedSectionIndex
+          ].questions[droppedIndex]
 
-        const cache: FormQuestion = droppedQuestion;
-        const indexCache: number = draggedQuestion.sortOrder;
+        const cache: FormQuestion = droppedQuestion
+        const indexCache: number = draggedQuestion.sortOrder
 
         this.content.sections[droppedSectionIndex].questions[droppedIndex] = {
           ...draggedQuestion,
-          id: draggedQuestion.inServer ? draggedQuestion.id : droppedQuestion.id,
+          id: draggedQuestion.inServer
+            ? draggedQuestion.id
+            : droppedQuestion.id,
           sortOrder: droppedQuestion.sortOrder,
           edited: true,
           isMoved: true,
           section: droppedQuestion.section,
           recreated: areDifferentSections
-        };
+        }
         this.content.sections[draggedSectionIndex].questions[draggedIndex] = {
           ...cache,
           id: cache.inServer ? cache.id : draggedQuestion.id,
@@ -300,35 +313,36 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
           isMoved: true,
           section: draggedQuestion.section,
           recreated: areDifferentSections
-        };
+        }
 
-        this.updateSections(this.content.sections);
-        this.form.patchValue({ updatedSections: this.updatedSections });
-        this.cdr.detectChanges();
-        this.events.questionSelected.emit();
-      });
+        this.updateSections(this.content.sections)
+        this.form.patchValue({ updatedSections: this.updatedSections })
+        this.cdr.detectChanges()
+        this.events.questionSelected.emit()
+      })
 
     this.events.moveQuestionIntoSection
       .pipe(untilDestroyed(this))
       .subscribe((moveEvent: CcrDropEvent) => {
         if (this.selectedQuestion) {
-          this.stageQuestionChanges();
+          this.stageQuestionChanges()
         }
 
         const section: FormSection = moveEvent.drop.section,
           question: FormQuestion = moveEvent.drag.question,
-          draggedIndex: number = moveEvent.drag.index;
+          draggedIndex: number = moveEvent.drag.index
 
         if (section.id === question.section.id) {
-          return;
+          return
         }
 
         const sourceIndex: number = this.content.sections.findIndex(
-            (sourceSection: FormSection) => question.section.id === sourceSection.id
+            (sourceSection: FormSection) =>
+              question.section.id === sourceSection.id
           ),
           targetIndex: number = this.content.sections.findIndex(
             (targetSection: FormSection) => targetSection.id === section.id
-          );
+          )
 
         const splicedQuestion: FormQuestion = {
             ...this.content.sections[sourceIndex].questions[draggedIndex]
@@ -337,72 +351,80 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
             ...this.content.sections[targetIndex].questions.map(
               (targetQuestion: FormQuestion) => targetQuestion.sortOrder
             )
-          );
+          )
 
-        splicedQuestion.section = { id: section.id };
+        splicedQuestion.section = { id: section.id }
         splicedQuestion.sortOrder =
-          sortOrder === Number.NEGATIVE_INFINITY ? 1 : sortOrder + 1;
-        this.content.sections[targetIndex].questions.push(splicedQuestion);
-        this.content.sections[sourceIndex].questions[draggedIndex].deleted = true;
+          sortOrder === Number.NEGATIVE_INFINITY ? 1 : sortOrder + 1
+        this.content.sections[targetIndex].questions.push(splicedQuestion)
+        this.content.sections[sourceIndex].questions[
+          draggedIndex
+        ].deleted = true
         this.events.removeQuestion.emit(
           this.content.sections[sourceIndex].questions[draggedIndex]
-        );
-        splicedQuestion.edited = true;
-        splicedQuestion.isMoved = true;
-        splicedQuestion.created = true;
-        splicedQuestion.inServer = false;
+        )
+        splicedQuestion.edited = true
+        splicedQuestion.isMoved = true
+        splicedQuestion.created = true
+        splicedQuestion.inServer = false
 
-        this.updateSections(this.content.sections);
-        this.form.patchValue({ updatedSections: this.updatedSections });
-        this.cdr.detectChanges();
-        this.events.questionSelected.emit();
-      });
+        this.updateSections(this.content.sections)
+        this.form.patchValue({ updatedSections: this.updatedSections })
+        this.cdr.detectChanges()
+        this.events.questionSelected.emit()
+      })
 
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.updateDefaultSectionName());
+      .subscribe(() => this.updateDefaultSectionName())
 
     this.formDisplay.togglePreview$
       .pipe(untilDestroyed(this))
       .subscribe((value: boolean) => {
-        this.preview = value;
+        this.preview = value
         if (value && this.selectedQuestion) {
-          this.stageQuestionChanges();
+          this.stageQuestionChanges()
         }
-        this.stageSectionChanges();
-      });
+        this.stageSectionChanges()
+      })
   }
 
   private updateDefaultSectionName() {
     this.translate
       .get([_('LIBRARY.FORMS.NEW_SECTION')])
       .pipe(untilDestroyed(this))
-      .subscribe((i18n) => (this.defaultSectionName = i18n['LIBRARY.FORMS.NEW_SECTION']));
+      .subscribe(
+        (i18n) => (this.defaultSectionName = i18n['LIBRARY.FORMS.NEW_SECTION'])
+      )
   }
 
   private updateSections(formSections: any) {
-    const sectionArray: FormSection[] = this.arrayify(formSections);
+    const sectionArray: FormSection[] = this.arrayify(formSections)
 
     sectionArray.forEach((section: FormSection, index: number) => {
-      const updatedSection: any = this.updatedSections[index] || {};
-      section.questions = this.arrayify(section.questions);
+      const updatedSection: any = this.updatedSections[index] || {}
+      section.questions = this.arrayify(section.questions)
 
       const updatedQuestions: FormQuestion[] = this.updatedSections[index]
         ? this.updatedSections[index].questions || []
-        : [];
+        : []
 
       section.questions.forEach((sQ: FormQuestion, uQIndex: number) => {
         Object.keys(sQ).forEach(
           (key: string) =>
-            (sQ[key] = sQ[key] !== undefined ? sQ[key].value || sQ[key] : undefined)
-        );
+            (sQ[key] =
+              sQ[key] !== undefined ? sQ[key].value || sQ[key] : undefined)
+        )
 
-        updatedQuestions[uQIndex] = Object.assign(updatedQuestions[uQIndex] || {}, sQ);
-      });
+        updatedQuestions[uQIndex] = Object.assign(
+          updatedQuestions[uQIndex] || {},
+          sQ
+        )
+      })
 
       this.updatedSections[index] = Object.assign(updatedSection, section, {
         questions: updatedQuestions
-      });
-    });
+      })
+    })
   }
 }

@@ -1,12 +1,12 @@
-import { FetchAllConsumedKeyResponse } from '@app/shared/selvera-api';
+import { FetchAllConsumedKeyResponse } from '@coachcare/npm-api'
 
 export interface FoodKeyData {
-  key: string;
-  name: string;
-  quantity: number;
+  key: string
+  name: string
+  quantity: number
 }
 
 export interface FoodKeySegment {
-  date: any;
-  [name: string]: FoodKeyData;
+  date: any
+  [name: string]: FoodKeyData
 }

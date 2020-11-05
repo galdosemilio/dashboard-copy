@@ -1,35 +1,37 @@
-import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { Alerts } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { from, Observable } from 'rxjs'
 
-import { CcrDatabase } from '@app/shared';
+import { CcrDatabase } from '@app/shared'
 import {
+  Alerts,
   AlertNotificationResponse,
   AlertPreferenceResponse,
   AlertTypesResponse,
   FetchAlertPreferenceRequest,
   FetchAlertTypesRequest,
   NotificationRequest
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class AlertsDatabase extends CcrDatabase {
   constructor(private alerts: Alerts) {
-    super();
+    super()
   }
 
-  fetchNotifications(args: NotificationRequest): Observable<AlertNotificationResponse> {
-    return from(this.alerts.fetchNotifications(args));
+  fetchNotifications(
+    args: NotificationRequest
+  ): Observable<AlertNotificationResponse> {
+    return from(this.alerts.fetchNotifications(args))
   }
 
   fetchAlertPreference(
     args: FetchAlertPreferenceRequest
   ): Promise<AlertPreferenceResponse> {
-    return this.alerts.fetchAlertPreference(args);
+    return this.alerts.fetchAlertPreference(args)
   }
 
   fetchAlertTypes(): Promise<AlertTypesResponse> {
-    const req: FetchAlertTypesRequest = { limit: 'all' };
-    return this.alerts.fetchAlertTypes(req);
+    const req: FetchAlertTypesRequest = { limit: 'all' }
+    return this.alerts.fetchAlertTypes(req)
   }
 }

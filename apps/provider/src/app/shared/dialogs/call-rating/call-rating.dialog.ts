@@ -1,35 +1,35 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@coachcare/common/material';
-import { callSelector, CallState } from '@app/layout/store/call';
-import { ContextService, LoggingService, NotifierService } from '@app/service';
-import { _, FormUtils, sleep } from '@app/shared/utils';
-import { select, Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { take } from 'rxjs/operators';
-import { Account } from 'selvera-api';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MatDialogRef } from '@coachcare/common/material'
+import { callSelector, CallState } from '@app/layout/store/call'
+import { ContextService, LoggingService, NotifierService } from '@app/service'
+import { _, FormUtils, sleep } from '@app/shared/utils'
+import { select, Store } from '@ngrx/store'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { take } from 'rxjs/operators'
+import { AccountProvider } from '@coachcare/npm-api'
 
-type CallRatingOption = 'ok' | 'bad';
+type CallRatingOption = 'ok' | 'bad'
 
 @Component({
   selector: 'ccr-call-rating',
   templateUrl: './call-rating.dialog.html',
   styleUrls: ['./call-rating.dialog.scss'],
-  host: { class: 'ccr-dialog' },
+  host: { class: 'ccr-dialog' }
 })
 export class CallRatingDialog implements OnDestroy, OnInit {
-  public currentUser: any;
-  public form: FormGroup;
-  public hoveredOption: string;
-  public isLoading: boolean;
-  public selectedOption: string;
-  public preventClosing: boolean;
-  public remotePeerLogData?: any;
+  public currentUser: any
+  public form: FormGroup
+  public hoveredOption: string
+  public isLoading: boolean
+  public selectedOption: string
+  public preventClosing: boolean
+  public remotePeerLogData?: any
 
-  private userLogData: any = {};
+  private userLogData: any = {}
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private dialogRef: MatDialogRef<CallRatingDialog>,
     private fb: FormBuilder,
@@ -42,9 +42,9 @@ export class CallRatingDialog implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.refreshCurrentUser();
-    this.createForm();
-    this.startWindowTimeout();
+    this.refreshCurrentUser()
+    this.createForm()
+    this.startWindowTimeout()
 
     this.store
       .pipe(select(callSelector), take(1), untilDestroyed(this))
@@ -52,33 +52,33 @@ export class CallRatingDialog implements OnDestroy, OnInit {
         try {
           const remotePeer = callState.room.participants.find(
             (participant) => participant.id !== this.context.user.id
-          );
+          )
 
           if (!remotePeer) {
-            throw new Error('no remote peer');
+            throw new Error('no remote peer')
           }
 
-          const remotePeerData = await this.account.getSingle(remotePeer.id);
+          const remotePeerData = await this.account.getSingle(remotePeer.id)
 
           this.remotePeerLogData = {
             targetUserId: remotePeer.id,
-            targetUserEmail: remotePeerData.email,
-          };
+            targetUserEmail: remotePeerData.email
+          }
         } catch (error) {
-          this.remotePeerLogData = {};
+          this.remotePeerLogData = {}
         }
-      });
+      })
 
     this.dialogRef
       .backdropClick()
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.close('backdrop'));
+      .subscribe(() => this.close('backdrop'))
   }
 
   public async close(reason?: string): Promise<void> {
     if (!reason) {
-      this.dialogRef.close();
-      return;
+      this.dialogRef.close()
+      return
     }
 
     switch (reason) {
@@ -90,10 +90,10 @@ export class CallRatingDialog implements OnDestroy, OnInit {
             functionType: 'videoconferencing-feedback',
             message: 'closed modal due to timeout',
             ...this.userLogData,
-            ...this.remotePeerLogData,
-          },
-        });
-        break;
+            ...this.remotePeerLogData
+          }
+        })
+        break
 
       case 'closeButton':
         await this.logging.log({
@@ -103,10 +103,10 @@ export class CallRatingDialog implements OnDestroy, OnInit {
             functionType: 'videoconferencing-feedback',
             message: 'client closed modal through button',
             ...this.userLogData,
-            ...this.remotePeerLogData,
-          },
-        });
-        break;
+            ...this.remotePeerLogData
+          }
+        })
+        break
 
       case 'backdrop':
         await this.logging.log({
@@ -116,24 +116,24 @@ export class CallRatingDialog implements OnDestroy, OnInit {
             functionType: 'videoconferencing-feedback',
             message: 'client closed modal through backdrop',
             ...this.userLogData,
-            ...this.remotePeerLogData,
-          },
-        });
-        break;
+            ...this.remotePeerLogData
+          }
+        })
+        break
     }
 
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   public markActiveOption(option: CallRatingOption): void {
-    this.selectedOption = option;
-    this.form.patchValue({ selectedOption: this.selectedOption });
+    this.selectedOption = option
+    this.form.patchValue({ selectedOption: this.selectedOption })
   }
 
   public async onSubmit(): Promise<void> {
     try {
-      this.isLoading = true;
-      const formValue = this.formUtils.pruneEmpty(this.form.value);
+      this.isLoading = true
+      const formValue = this.formUtils.pruneEmpty(this.form.value)
 
       if (this.selectedOption === 'ok') {
         await this.logging.log({
@@ -144,9 +144,9 @@ export class CallRatingDialog implements OnDestroy, OnInit {
             message: 'client had a good experience',
             ...formValue,
             ...this.userLogData,
-            ...this.remotePeerLogData,
-          },
-        });
+            ...this.remotePeerLogData
+          }
+        })
       } else {
         await this.logging.log({
           logLevel: 'info',
@@ -156,28 +156,28 @@ export class CallRatingDialog implements OnDestroy, OnInit {
             message: 'client had issues',
             ...formValue,
             ...this.userLogData,
-            ...this.remotePeerLogData,
-          },
-        });
+            ...this.remotePeerLogData
+          }
+        })
       }
 
-      this.notifier.success(_('NOTIFY.SUCCESS.THANK_YOU_FEEDBACK'));
-      this.close();
+      this.notifier.success(_('NOTIFY.SUCCESS.THANK_YOU_FEEDBACK'))
+      this.close()
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     } finally {
-      this.isLoading = false;
+      this.isLoading = false
     }
   }
 
   private refreshCurrentUser(): void {
-    this.currentUser = this.context.user;
+    this.currentUser = this.context.user
     this.userLogData = {
       userId: this.currentUser.id,
       userEmail: this.currentUser.email,
       organizationId: this.context.organizationId,
-      organizationName: this.context.organization.name,
-    };
+      organizationName: this.context.organization.name
+    }
   }
 
   private createForm(): void {
@@ -188,21 +188,21 @@ export class CallRatingDialog implements OnDestroy, OnInit {
       patientDeviceIssue: [''],
       couldNotConnect: [''],
       unexpectedCallDrop: [''],
-      other: [''],
-    });
+      other: ['']
+    })
 
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((formValue) => {
-      this.preventClosing = true;
-    });
+      this.preventClosing = true
+    })
   }
 
   private async startWindowTimeout(): Promise<void> {
-    await sleep(15000);
+    await sleep(15000)
 
     if (this.preventClosing) {
-      return;
+      return
     }
 
-    this.close('timeout');
+    this.close('timeout')
   }
 }

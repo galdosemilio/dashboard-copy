@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Conference } from 'selvera-api';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 
 @Component({
   selector: 'ccr-connection-status',
@@ -8,22 +7,11 @@ import { Conference } from 'selvera-api';
 })
 export class CcrConnectionStatusComponent {
   @Input()
-  userId: string;
+  userId: string
   @Input()
-  organizationId: string;
+  organizationId: string
 
-  availability: boolean;
+  availability: boolean
 
-  constructor(private conference: Conference) {}
-
-  ngOnInit() {
-    // debugger;
-    // const request: FetchUserAvailabilityRequest = {
-    //   account: this.userId,
-    //   organization: this.organizationId
-    // };
-    // this.conference.fetchUserAvailability(request).then(result => {
-    //   console.log(request);
-    // });
-  }
+  constructor() {}
 }

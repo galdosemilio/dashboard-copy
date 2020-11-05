@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
   Food,
   MeasurementActivity,
   MeasurementBody,
   MeasurementSleep
-} from 'selvera-api';
+} from '@coachcare/npm-api'
 
-import { CcrDatabase } from '@app/shared';
 import {
   ActivitySummaryValues,
   BodySummaryValues,
+  CcrDatabase,
+  FoodSummaryValues,
+  SleepSummaryValues
+} from '@app/shared'
+import {
   Entity,
   FetchActivityRequest,
   FetchActivityResponse,
@@ -18,16 +22,17 @@ import {
   FetchBodyMeasurementRequest,
   FetchBodyMeasurementResponse,
   FetchBodySummaryResponse,
-  FetchFoodSummaryRequest,
+  FetchSummaryRequest as FetchFoodSummaryRequest,
   FetchSleepMeasurementRequest,
   FetchSleepMeasurementResponse,
   FetchSleepMeasurementSummaryRequest,
   FetchSleepMeasurementSummaryResponse,
-  FoodSummaryDataResponseSegment,
-  FoodSummaryValues,
-  SleepSummaryValues
-} from '@app/shared/selvera-api';
-import { MeasurementCriteria, MeasurementSummaryData } from './measurement.criteria';
+  SummaryDataResponse as FoodSummaryDataResponseSegment
+} from '@coachcare/npm-api'
+import {
+  MeasurementCriteria,
+  MeasurementSummaryData
+} from './measurement.criteria'
 
 @Injectable()
 export class MeasurementDatabase extends CcrDatabase {
@@ -37,11 +42,11 @@ export class MeasurementDatabase extends CcrDatabase {
     private sleep: MeasurementSleep,
     private food: Food
   ) {
-    super();
+    super()
   }
 
   deleteBodyMeasurement(args: Entity): Promise<void> {
-    return this.body.deleteBodyMeasurement(args.id);
+    return this.body.deleteBodyMeasurement(args.id)
   }
 
   fetchActivity(args: FetchActivityRequest): Promise<FetchActivityResponse[]> {
@@ -52,9 +57,9 @@ export class MeasurementDatabase extends CcrDatabase {
       endDate: args.endDate,
       max: args.max ? args.max : undefined,
       direction: args.direction ? args.direction : undefined
-    };
+    }
 
-    return this.activity.fetchActivity(request);
+    return this.activity.fetchActivity(request)
   }
 
   fetchActivitySummary(
@@ -67,15 +72,15 @@ export class MeasurementDatabase extends CcrDatabase {
       startDate: args.startDate,
       endDate: args.endDate ? args.endDate : undefined,
       max: args.max ? args.max : undefined
-    };
+    }
 
-    return this.activity.fetchSummary(request);
+    return this.activity.fetchSummary(request)
   }
 
   fetchBodyMeasurement(
     args: FetchBodyMeasurementRequest
   ): Promise<FetchBodyMeasurementResponse> {
-    return this.body.fetchBodyMeasurement(args);
+    return this.body.fetchBodyMeasurement(args)
   }
 
   fetchBodySummary(args: any): Promise<FetchBodySummaryResponse> {
@@ -87,9 +92,9 @@ export class MeasurementDatabase extends CcrDatabase {
       endDate: args.endDate ? args.endDate : undefined,
       max: args.max ? args.max : undefined,
       aggregation: args.aggregation || 'mostRecent'
-    };
+    }
 
-    return this.body.fetchSummary(request);
+    return this.body.fetchSummary(request)
   }
 
   fetchFoodSummary(args): Promise<FoodSummaryDataResponseSegment[]> {
@@ -99,9 +104,9 @@ export class MeasurementDatabase extends CcrDatabase {
       unit: args.unit,
       startDate: args.startDate,
       endDate: args.endDate ? args.endDate : undefined
-    };
+    }
 
-    return this.food.fetchSummary(request);
+    return this.food.fetchSummary(request)
   }
 
   fetchSleep(
@@ -112,9 +117,9 @@ export class MeasurementDatabase extends CcrDatabase {
       account: args.account,
       startDate: args.startDate,
       endDate: args.endDate
-    };
+    }
 
-    return this.sleep.fetchSleep(request);
+    return this.sleep.fetchSleep(request)
   }
 
   fetchSleepSummary(
@@ -127,9 +132,9 @@ export class MeasurementDatabase extends CcrDatabase {
       startDate: args.startDate,
       endDate: args.endDate ? args.endDate : undefined,
       max: args.max ? args.max : undefined
-    };
+    }
 
-    return this.sleep.fetchSummary(request);
+    return this.sleep.fetchSummary(request)
   }
 
   fetchAllSummary(args: MeasurementCriteria): Promise<any> {
@@ -139,35 +144,37 @@ export class MeasurementDatabase extends CcrDatabase {
       fetchActivitySummary: [],
       fetchBodySummary: [],
       fetchSleepSummary: []
-    };
+    }
     args.data.forEach((data) => {
-      data = this.resolveQuery(data);
+      data = this.resolveQuery(data)
       if (FoodSummaryValues.includes(data)) {
-        apis.fetchFoodSummary.push(data);
+        apis.fetchFoodSummary.push(data)
       } else if (ActivitySummaryValues.includes(data)) {
-        apis.fetchActivitySummary.push(data);
+        apis.fetchActivitySummary.push(data)
       } else if (BodySummaryValues.includes(data)) {
-        apis.fetchBodySummary.push(data);
+        apis.fetchBodySummary.push(data)
       } else if (SleepSummaryValues.includes(data)) {
-        apis.fetchSleepSummary.push(data);
+        apis.fetchSleepSummary.push(data)
       }
-    });
+    })
 
     // fetch each data from the corresponding API
-    const promises = [];
+    const promises = []
     Object.keys(apis).forEach((api) => {
       if (apis[api].length) {
-        const request: MeasurementCriteria = Object.assign({}, args, { data: apis[api] });
-        promises.push(this[api](request));
+        const request: MeasurementCriteria = Object.assign({}, args, {
+          data: apis[api]
+        })
+        promises.push(this[api](request))
       }
-    });
-    return Promise.all(promises);
+    })
+    return Promise.all(promises)
   }
 
   resolveQuery(measurement): MeasurementSummaryData {
     // fields that depends of others
     // query a different field than the specified one
-    return measurement.toString() === 'leanMass' ? 'bodyFat' : measurement;
+    return measurement.toString() === 'leanMass' ? 'bodyFat' : measurement
   }
 
   resolveResult(measurement) {
@@ -175,15 +182,15 @@ export class MeasurementDatabase extends CcrDatabase {
     // display a different field than the specified one
     switch (measurement) {
       case 'average':
-        return 'averageMinutes';
+        return 'averageMinutes'
       case 'distance':
-        return 'distanceTotal';
+        return 'distanceTotal'
       case 'steps':
-        return 'stepTotal';
+        return 'stepTotal'
       case 'total':
-        return 'sleepMinutes';
+        return 'sleepMinutes'
       default:
-        return measurement;
+        return measurement
     }
   }
 }

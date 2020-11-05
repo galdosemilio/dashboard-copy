@@ -1,25 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
+import { Component, Input, OnInit } from '@angular/core'
+import { MatDialog } from '@coachcare/common/material'
 
-import { ContextService, SelectedAccount } from '@app/service';
-import { ScheduleSelectDialog } from '@app/shared/dialogs/schedule-select.dialog';
-import { AccountTypeId } from '@app/shared/selvera-api';
+import { ContextService, SelectedAccount } from '@app/service'
+import { ScheduleSelectDialog } from '@app/shared/dialogs/schedule-select.dialog'
+import { AccountTypeId } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-select-user',
   templateUrl: './select-user.component.html',
-  styleUrls: ['./select-user.component.scss'],
+  styleUrls: ['./select-user.component.scss']
 })
 export class CcrSelectUserComponent implements OnInit {
   @Input()
-  title = '';
+  title = ''
   @Input()
-  default = '';
+  default = ''
   @Input()
-  onlyProviders = false;
+  onlyProviders = false
 
-  text = '';
-  user: SelectedAccount;
+  text = ''
+  user: SelectedAccount
 
   constructor(private dialog: MatDialog, private context: ContextService) {}
 
@@ -30,13 +30,13 @@ export class CcrSelectUserComponent implements OnInit {
         (!this.onlyProviders ||
           user.accountType.id.toString() === AccountTypeId.Provider)
       ) {
-        this.user = user;
-        this.resolveText(user);
+        this.user = user
+        this.resolveText(user)
       } else {
-        this.user = this.context.user;
-        this.resolveText(this.user);
+        this.user = this.context.user
+        this.resolveText(this.user)
       }
-    });
+    })
   }
 
   openDialog(): void {
@@ -48,22 +48,22 @@ export class CcrSelectUserComponent implements OnInit {
           organization: this.context.organizationId,
           title: this.title,
           button: this.default,
-          onlyProviders: this.onlyProviders,
-        },
+          onlyProviders: this.onlyProviders
+        }
       })
       .afterClosed()
       .subscribe((user) => {
         if (user && this.user.id !== user.id) {
-          this.context.selected = user;
-          this.resolveText(user);
+          this.context.selected = user
+          this.resolveText(user)
         }
-      });
+      })
   }
 
   private resolveText(user) {
     this.text =
       this.context.user.id === user.id
         ? this.default
-        : `${user.firstName} ${user.lastName}`;
+        : `${user.firstName} ${user.lastName}`
   }
 }

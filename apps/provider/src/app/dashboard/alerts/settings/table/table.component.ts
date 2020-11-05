@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'
 
 import {
   AlertTypesDataSource,
   AlertTypesPreference
-} from '@app/dashboard/alerts/services';
-import { ContextService, NotifierService } from '@app/service';
-import { _, SelectOptions, uxPoundsToGrams } from '@app/shared';
+} from '@app/dashboard/alerts/services'
+import { ContextService, NotifierService } from '@app/service'
+import { _, SelectOptions, uxPoundsToGrams } from '@app/shared'
 import {
   AlertOrgPreference,
   CreateOrgAlertPreferenceRequest,
   UpdateOrgAlertPreferenceRequest
-} from '@app/shared/selvera-api';
-import { Alerts } from 'selvera-api';
+} from '@coachcare/npm-api'
+import { Alerts } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-alert-types-table',
@@ -20,9 +20,9 @@ import { Alerts } from 'selvera-api';
 })
 export class AlertTypesTableComponent implements OnInit {
   @Input()
-  source: AlertTypesDataSource;
+  source: AlertTypesDataSource
   @Input()
-  columns = ['enabled', 'title', 'settings'];
+  columns = ['enabled', 'title', 'settings']
 
   inactivityDays = [
     { value: '1 day', viewValue: 1 },
@@ -45,7 +45,7 @@ export class AlertTypesTableComponent implements OnInit {
     { value: '18 days', viewValue: 18 },
     { value: '19 days', viewValue: 19 },
     { value: '20 days', viewValue: 20 }
-  ];
+  ]
 
   spanDays = [
     { value: 1, viewValue: 1 },
@@ -98,15 +98,15 @@ export class AlertTypesTableComponent implements OnInit {
     { value: 48, viewValue: 48 },
     { value: 49, viewValue: 49 },
     { value: 50, viewValue: 50 }
-  ];
+  ]
 
   triggerPeriods = [
     { value: 'daily', viewValue: _('ALERTS.DAILY') },
     { value: 'spanEnd', viewValue: _('ALERTS.SPAN_END') }
-  ];
+  ]
 
-  weightRegainedOptions: SelectOptions<number> = [];
-  WeightThresholdThresholdOptions: SelectOptions<number> = [];
+  weightRegainedOptions: SelectOptions<number> = []
+  WeightThresholdThresholdOptions: SelectOptions<number> = []
 
   constructor(
     private alerts: Alerts,
@@ -115,45 +115,45 @@ export class AlertTypesTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const pref = this.context.user.measurementPreference;
+    const pref = this.context.user.measurementPreference
 
     for (let i = 1; i <= 20; i++) {
-      const value = uxPoundsToGrams(pref, i);
+      const value = uxPoundsToGrams(pref, i)
       this.weightRegainedOptions.push({
         value,
         viewValue: ''
-      });
+      })
     }
 
     for (let i = 0; i <= 20; i++) {
-      const value = uxPoundsToGrams(pref, i);
+      const value = uxPoundsToGrams(pref, i)
       this.WeightThresholdThresholdOptions.push({
         value,
         viewValue: ''
-      });
+      })
     }
   }
 
   onActiveChange(row): void {
     switch (row.typeCode) {
       case 'inactivity':
-        return this.updateInactivity(row);
+        return this.updateInactivity(row)
       case 'weight-regained':
-        return this.updateWeightRegained(row);
+        return this.updateWeightRegained(row)
       case 'weight-threshold':
         this.source.result.forEach((preference: AlertTypesPreference) => {
           if (
             preference.typeCode === 'weight-threshold' &&
             preference.option !== 'header'
           ) {
-            preference.isActive = row.isActive;
+            preference.isActive = row.isActive
             preference.isVisible =
               preference.overrideVisibility !== undefined
                 ? preference.overrideVisibility
-                : row.isActive;
+                : row.isActive
           }
-        });
-        return this.updateWeightThreshold(row);
+        })
+        return this.updateWeightThreshold(row)
     }
   }
 
@@ -161,53 +161,56 @@ export class AlertTypesTableComponent implements OnInit {
     const preference: AlertOrgPreference = {
       isActive: false,
       options: {}
-    };
+    }
 
     this.source.result.map((row) => {
       if (current.typeCode === row.typeCode) {
         if (row.isActive) {
-          preference.isActive = true;
-          preference.options[row.option] = row.value;
+          preference.isActive = true
+          preference.options[row.option] = row.value
         } else if (this.source.prefIds[row.typeCode]) {
-          preference.options[row.option] = null;
+          preference.options[row.option] = null
         }
       }
-    });
+    })
 
     // Workaround for the following weeks to support deactivating all inactivity alerts -- Zcyon
     if (!preference.isActive) {
       this.source.result.map((row) => {
         if (current.typeCode === row.typeCode) {
-          preference.options[row.option] = row.value;
+          preference.options[row.option] = row.value
         }
-      });
+      })
     }
 
-    this.saveAlertPreference(current, preference);
+    this.saveAlertPreference(current, preference)
   }
 
   updateWeightThreshold(current: AlertTypesPreference): void {
     const preference: AlertOrgPreference = {
       isActive: false,
       options: {}
-    };
+    }
 
     this.source.result.map((row) => {
       if (current.typeCode === row.typeCode) {
-        preference.isActive = current.isActive;
+        preference.isActive = current.isActive
 
         if (row.optionExt) {
-          const innerProp = row.optionExt.substring(1, row.optionExt.length);
+          const innerProp = row.optionExt.substring(1, row.optionExt.length)
           preference.options[row.option] = preference.options[row.option]
-            ? { ...preference.options[row.option], [innerProp]: row.value[innerProp] }
-            : row.value;
+            ? {
+                ...preference.options[row.option],
+                [innerProp]: row.value[innerProp]
+              }
+            : row.value
         } else {
-          preference.options[row.option] = row.value;
+          preference.options[row.option] = row.value
         }
       }
-    });
+    })
 
-    this.saveAlertPreference(current, preference);
+    this.saveAlertPreference(current, preference)
   }
 
   updateWeightRegained(row: AlertTypesPreference): void {
@@ -216,36 +219,39 @@ export class AlertTypesTableComponent implements OnInit {
       options: {
         threshold: Math.round(row.value)
       }
-    };
+    }
 
-    this.saveAlertPreference(row, preference);
+    this.saveAlertPreference(row, preference)
   }
 
-  saveAlertPreference(row: AlertTypesPreference, preference: AlertOrgPreference): void {
+  saveAlertPreference(
+    row: AlertTypesPreference,
+    preference: AlertOrgPreference
+  ): void {
     if (this.source.prefIds[row.typeCode]) {
       const req: UpdateOrgAlertPreferenceRequest = {
         id: this.source.prefIds[row.typeCode],
         preference
-      };
+      }
       this.alerts
         .updateOrgAlertPreference(req)
         .then(() => {
           // this.notifier.success(_('NOTIFY.SUCCESS.ALERT_PREFERENCE'));
         })
-        .catch((err) => this.notifier.error(err));
+        .catch((err) => this.notifier.error(err))
     } else {
       const req: CreateOrgAlertPreferenceRequest = {
         organization: this.source.args.organization,
         alertType: row.typeId,
         preference
-      };
+      }
       this.alerts
         .createOrgAlertPreference(req)
         .then((id) => {
-          this.source.prefIds[row.typeCode] = id;
+          this.source.prefIds[row.typeCode] = id
           // this.notifier.success(_('NOTIFY.SUCCESS.ALERT_PREFERENCE'));
         })
-        .catch((err) => this.notifier.error(err));
+        .catch((err) => this.notifier.error(err))
     }
   }
 }

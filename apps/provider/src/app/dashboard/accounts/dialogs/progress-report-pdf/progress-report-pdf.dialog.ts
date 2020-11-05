@@ -1,119 +1,123 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@coachcare/common/material';
-import { CCRConfig } from '@app/config';
-import { ContextService, NotifierService } from '@app/service';
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { MatDialogRef } from '@coachcare/common/material'
+import { CCRConfig } from '@app/config'
+import { ContextService, NotifierService } from '@app/service'
 import {
   calculateProgressElementRow,
   ChartData,
   DieterSummaryElement,
   getProgressPDFCellColor,
-  imageToDataURL,
-} from '@app/shared';
-import { paletteSelector } from '@app/store/config';
-import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
-import pdfMake from 'pdfmake';
-import { first } from 'rxjs/operators';
-import { Account, DieterDashboardSummary, Organization } from 'selvera-api';
-import { AccSingleResponse } from 'selvera-api/dist/lib/selvera-api/providers/account/responses';
-import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement';
+  imageToDataURL
+} from '@app/shared'
+import { paletteSelector } from '@app/store/config'
+import { select, Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import * as moment from 'moment'
+import pdfMake from 'pdfmake'
+import { first } from 'rxjs/operators'
+import {
+  AccountProvider,
+  AccSingleResponse,
+  DieterDashboardSummary,
+  OrganizationProvider
+} from '@coachcare/npm-api'
+import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
 import {
   MeasurementDatabase,
-  MeasurementDataSource,
-} from '../../dieters/services';
+  MeasurementDataSource
+} from '../../dieters/services'
 
 interface DieterSummaryPDFData {
   dateRange: {
-    start: string;
-    end: string;
-  };
-  date?: DieterSummaryElement;
+    start: string
+    end: string
+  }
+  date?: DieterSummaryElement
   composition?: {
-    bmi: DieterSummaryElement;
-    bodyFat: DieterSummaryElement;
-    bodyFatPercentage: DieterSummaryElement;
-    leanMass: DieterSummaryElement;
-    visceralAdiposeTissue: DieterSummaryElement;
-    visceralFatRating: DieterSummaryElement;
-    waterPercentage: DieterSummaryElement;
-    weight: DieterSummaryElement;
-  };
-  weeksOnProtocol: number;
+    bmi: DieterSummaryElement
+    bodyFat: DieterSummaryElement
+    bodyFatPercentage: DieterSummaryElement
+    leanMass: DieterSummaryElement
+    visceralAdiposeTissue: DieterSummaryElement
+    visceralFatRating: DieterSummaryElement
+    waterPercentage: DieterSummaryElement
+    weight: DieterSummaryElement
+  }
+  weeksOnProtocol: number
   measurements?: {
-    chest: DieterSummaryElement;
-    arm: DieterSummaryElement;
-    waist: DieterSummaryElement;
-    hips: DieterSummaryElement;
-    thigh: DieterSummaryElement;
-  };
-  totalInches?: number;
-  totalInchesCellColor?: string;
+    chest: DieterSummaryElement
+    arm: DieterSummaryElement
+    waist: DieterSummaryElement
+    hips: DieterSummaryElement
+    thigh: DieterSummaryElement
+  }
+  totalInches?: number
+  totalInchesCellColor?: string
 }
 
 interface YearWeekOption {
-  value: number;
-  viewValue: string;
+  value: number
+  viewValue: string
 }
 
 @Component({
   selector: 'app-progress-report-pdf-dialog',
   templateUrl: './progress-report-pdf.dialog.html',
   styleUrls: ['./progress-report-pdf.dialog.scss'],
-  host: { class: 'ccr-dialog' },
+  host: { class: 'ccr-dialog' }
 })
 export class ProgressReportPDFDialog implements OnInit {
-  @ViewChild('chartCanvas', { static: false }) canvas;
+  @ViewChild('chartCanvas', { static: false }) canvas
 
-  acc: AccSingleResponse;
-  chart: ChartData;
-  form: FormGroup;
-  isLoading: boolean = true;
-  today: moment.Moment = moment();
-  yearWeeks: YearWeekOption[] = [];
+  acc: AccSingleResponse
+  chart: ChartData
+  form: FormGroup
+  isLoading = true
+  today: moment.Moment = moment()
+  yearWeeks: YearWeekOption[] = []
 
-  private pdfColor: string = '#3aa2cf';
+  private pdfColor = '#3aa2cf'
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private data: DieterDashboardSummary,
     private dialog: MatDialogRef<ProgressReportPDFDialog>,
     private fb: FormBuilder,
     private measurementDatabase: MeasurementDatabase,
     private notify: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private store: Store<CCRConfig>,
     private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
-    this.createForm();
-    this.fetchAccount();
-    this.fetchColors();
-    this.yearWeeks = this.calculateYearWeeks();
+    this.createForm()
+    this.fetchAccount()
+    this.fetchColors()
+    this.yearWeeks = this.calculateYearWeeks()
 
-    this.form.patchValue({ week: this.yearWeeks.length - 1 });
+    this.form.patchValue({ week: this.yearWeeks.length - 1 })
   }
 
   async onGeneratePDF() {
-    await this.data.init(this.context.accountId);
-    const org = await this.organization.getSingle(this.context.organizationId);
+    await this.data.init(this.context.accountId)
+    const org = await this.organization.getSingle(this.context.organizationId)
 
     const weightUnit =
       this.context.user.measurementPreference === 'us' ||
       this.context.user.measurementPreference === 'uk'
         ? 'lbs'
-        : 'kg';
+        : 'kg'
     const distanceUnit =
       this.context.user.measurementPreference === 'us' ||
       this.context.user.measurementPreference === 'uk'
         ? 'in'
-        : 'cm';
+        : 'cm'
 
-    const footerImage = new Image();
-    footerImage.src = 'assets/img/shiftsetgo/footerimg.png';
+    const footerImage = new Image()
+    footerImage.src = 'assets/img/shiftsetgo/footerimg.png'
 
     const measurementSource = new MeasurementDataSource(
       this.notify,
@@ -121,15 +125,15 @@ export class ProgressReportPDFDialog implements OnInit {
       this.translateService,
       this.context,
       this.store
-    );
+    )
 
-    const account = await this.account.getSingle(this.context.accountId);
+    const account = await this.account.getSingle(this.context.accountId)
     const weekDate = moment(account.clientData.startedAt || account.createdAt)
       .startOf('week')
-      .add(this.form.value.week, 'weeks');
+      .add(this.form.value.week, 'weeks')
 
-    const startDate = weekDate.clone().startOf('week');
-    const endDate = weekDate.clone().endOf('week');
+    const startDate = weekDate.clone().startOf('week')
+    const endDate = weekDate.clone().endOf('week')
 
     measurementSource.addDefault({
       account: this.context.accountId,
@@ -142,7 +146,7 @@ export class ProgressReportPDFDialog implements OnInit {
         'chest',
         'hip',
         'thigh',
-        'weight',
+        'weight'
       ],
       startDate: moment(
         account.clientData.startedAt || account.createdAt
@@ -151,27 +155,27 @@ export class ProgressReportPDFDialog implements OnInit {
       unit: 'day',
       useNewEndpoint: true,
       max: 'all',
-      omitEmptyDays: true,
-    });
+      omitEmptyDays: true
+    })
 
-    const values = await measurementSource.connect().pipe(first()).toPromise();
+    const values = await measurementSource.connect().pipe(first()).toPromise()
 
-    const weekDiff = Math.abs(startDate.diff(endDate, 'week')) || 1;
+    const weekDiff = Math.abs(startDate.diff(endDate, 'week')) || 1
 
     let pdfData: DieterSummaryPDFData = {
       dateRange: {
         start: startDate.format('MM/DD/YYYY'),
-        end: endDate.format('MM/DD/YYYY'),
+        end: endDate.format('MM/DD/YYYY')
       },
-      weeksOnProtocol: weekDiff,
-    };
+      weeksOnProtocol: weekDiff
+    }
 
     pdfData = this.calculatePatientPDFData(
       values,
       pdfData,
       startDate.week(),
       startDate.year()
-    );
+    )
 
     const definition = {
       pageSize: 'Letter',
@@ -181,7 +185,7 @@ export class ProgressReportPDFDialog implements OnInit {
         text: 'Weight Loss Progress Report',
         color: this.pdfColor,
         style: 'header',
-        margin: [30, 10, 30, 10],
+        margin: [30, 10, 30, 10]
       },
       content: [
         {
@@ -193,19 +197,19 @@ export class ProgressReportPDFDialog implements OnInit {
               x2: 595,
               y2: 10,
               lineWidth: 2,
-              lineColor: this.pdfColor,
-            },
-          ],
+              lineColor: this.pdfColor
+            }
+          ]
         },
         { text: ' ', lineHeight: 1 },
         {
           text: `${account.firstName} ${account.lastName}`,
-          style: 'subheader',
+          style: 'subheader'
         },
         {
           lineHeight: 2,
           text: `Program Dates (${pdfData.dateRange.start} - ${pdfData.dateRange.end})`,
-          style: 'subheader',
+          style: 'subheader'
         },
         {
           table: {
@@ -216,13 +220,13 @@ export class ProgressReportPDFDialog implements OnInit {
                 {
                   text: 'Body Composition',
                   colSpan: 6,
-                  alignment: 'center',
+                  alignment: 'center'
                 },
                 { text: '' },
                 { text: '' },
                 { text: '' },
                 { text: '' },
-                { text: '' },
+                { text: '' }
               ],
               [
                 ' ',
@@ -230,7 +234,7 @@ export class ProgressReportPDFDialog implements OnInit {
                 'Last Week',
                 'Current Week',
                 'Change this Week',
-                'Cumulative Change',
+                'Cumulative Change'
               ],
               [
                 'Date',
@@ -256,7 +260,7 @@ export class ProgressReportPDFDialog implements OnInit {
                     : '-'
                 }`,
                 ``,
-                ``,
+                ``
               ],
               [
                 'Weight',
@@ -279,7 +283,7 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? weightUnit
                       : ''
                   }`,
-                  fillColor: pdfData.composition.weight.changeThisWeekCellColor,
+                  fillColor: pdfData.composition.weight.changeThisWeekCellColor
                 },
                 {
                   text: `${pdfData.composition.weight.cumulativeChangeString} ${
@@ -288,8 +292,8 @@ export class ProgressReportPDFDialog implements OnInit {
                       : ''
                   }`,
                   fillColor:
-                    pdfData.composition.weight.cumulativeChangeCellColor,
-                },
+                    pdfData.composition.weight.cumulativeChangeCellColor
+                }
               ],
               [
                 'Body Fat %',
@@ -319,7 +323,7 @@ export class ProgressReportPDFDialog implements OnInit {
                   }`,
                   fillColor:
                     pdfData.composition.bodyFatPercentage
-                      .changeThisWeekCellColor,
+                      .changeThisWeekCellColor
                 },
                 {
                   text: `${
@@ -332,8 +336,8 @@ export class ProgressReportPDFDialog implements OnInit {
                   }`,
                   fillColor:
                     pdfData.composition.bodyFatPercentage
-                      .cumulativeChangeCellColor,
-                },
+                      .cumulativeChangeCellColor
+                }
               ],
               [
                 'BMI',
@@ -342,12 +346,12 @@ export class ProgressReportPDFDialog implements OnInit {
                 pdfData.composition.bmi.currentWeekString,
                 {
                   text: pdfData.composition.bmi.changeThisWeekString,
-                  fillColor: pdfData.composition.bmi.changeThisWeekCellColor,
+                  fillColor: pdfData.composition.bmi.changeThisWeekCellColor
                 },
                 {
                   text: pdfData.composition.bmi.cumulativeChangeString,
-                  fillColor: pdfData.composition.bmi.cumulativeChangeCellColor,
-                },
+                  fillColor: pdfData.composition.bmi.cumulativeChangeCellColor
+                }
               ],
               [
                 'Lean Mass',
@@ -375,7 +379,7 @@ export class ProgressReportPDFDialog implements OnInit {
                   pdfData.composition.leanMass.cumulativeChange !== null
                     ? weightUnit
                     : ''
-                }`,
+                }`
               ],
               [
                 'Fat Mass',
@@ -400,8 +404,7 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? weightUnit
                       : ''
                   }`,
-                  fillColor:
-                    pdfData.composition.bodyFat.changeThisWeekCellColor,
+                  fillColor: pdfData.composition.bodyFat.changeThisWeekCellColor
                 },
                 {
                   text: `${
@@ -412,8 +415,8 @@ export class ProgressReportPDFDialog implements OnInit {
                       : ''
                   }`,
                   fillColor:
-                    pdfData.composition.bodyFat.cumulativeChangeCellColor,
-                },
+                    pdfData.composition.bodyFat.cumulativeChangeCellColor
+                }
               ],
               [
                 'Visceral Fat Rating',
@@ -424,14 +427,14 @@ export class ProgressReportPDFDialog implements OnInit {
                   text: `${pdfData.composition.visceralFatRating.changeThisWeekString}`,
                   fillColor:
                     pdfData.composition.visceralFatRating
-                      .changeThisWeekCellColor,
+                      .changeThisWeekCellColor
                 },
                 {
                   text: `${pdfData.composition.visceralFatRating.cumulativeChangeString}`,
                   fillColor:
                     pdfData.composition.visceralFatRating
-                      .cumulativeChangeCellColor,
-                },
+                      .cumulativeChangeCellColor
+                }
               ],
               [
                 'Visceral Adipose Tissue',
@@ -464,7 +467,7 @@ export class ProgressReportPDFDialog implements OnInit {
                   }`,
                   fillColor:
                     pdfData.composition.visceralAdiposeTissue
-                      .changeThisWeekCellColor,
+                      .changeThisWeekCellColor
                 },
                 {
                   text: `${
@@ -478,8 +481,8 @@ export class ProgressReportPDFDialog implements OnInit {
                   }`,
                   fillColor:
                     pdfData.composition.visceralAdiposeTissue
-                      .cumulativeChangeCellColor,
-                },
+                      .cumulativeChangeCellColor
+                }
               ],
               [
                 'Hydration',
@@ -509,10 +512,10 @@ export class ProgressReportPDFDialog implements OnInit {
                   pdfData.composition.waterPercentage.cumulativeChange !== null
                     ? '%'
                     : ''
-                }`,
-              ],
-            ],
-          },
+                }`
+              ]
+            ]
+          }
         },
         { text: ' ', lineHeight: 1 },
         {
@@ -526,7 +529,7 @@ export class ProgressReportPDFDialog implements OnInit {
                 { text: '' },
                 { text: '' },
                 { text: '' },
-                { text: '' },
+                { text: '' }
               ],
               [
                 ' ',
@@ -534,7 +537,7 @@ export class ProgressReportPDFDialog implements OnInit {
                 'Last Week',
                 'Current Week',
                 'Change this Week',
-                'Cumulative Change',
+                'Cumulative Change'
               ],
               [
                 'Chest',
@@ -559,7 +562,7 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? distanceUnit
                       : ''
                   }`,
-                  fillColor: pdfData.measurements.chest.changeThisWeekCellColor,
+                  fillColor: pdfData.measurements.chest.changeThisWeekCellColor
                 },
                 {
                   text: `${pdfData.measurements.chest.cumulativeChangeString} ${
@@ -568,8 +571,8 @@ export class ProgressReportPDFDialog implements OnInit {
                       : ''
                   }`,
                   fillColor:
-                    pdfData.measurements.chest.cumulativeChangeCellColor,
-                },
+                    pdfData.measurements.chest.cumulativeChangeCellColor
+                }
               ],
               [
                 'Arm',
@@ -592,7 +595,7 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? distanceUnit
                       : ''
                   }`,
-                  fillColor: pdfData.measurements.arm.changeThisWeekCellColor,
+                  fillColor: pdfData.measurements.arm.changeThisWeekCellColor
                 },
                 {
                   text: `${pdfData.measurements.arm.cumulativeChangeString} ${
@@ -600,8 +603,8 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? distanceUnit
                       : ''
                   }`,
-                  fillColor: pdfData.measurements.arm.cumulativeChangeCellColor,
-                },
+                  fillColor: pdfData.measurements.arm.cumulativeChangeCellColor
+                }
               ],
               [
                 'Waist',
@@ -626,7 +629,7 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? distanceUnit
                       : ''
                   }`,
-                  fillColor: pdfData.measurements.waist.changeThisWeekCellColor,
+                  fillColor: pdfData.measurements.waist.changeThisWeekCellColor
                 },
                 {
                   text: `${pdfData.measurements.waist.cumulativeChangeString} ${
@@ -635,8 +638,8 @@ export class ProgressReportPDFDialog implements OnInit {
                       : ''
                   }`,
                   fillColor:
-                    pdfData.measurements.waist.cumulativeChangeCellColor,
-                },
+                    pdfData.measurements.waist.cumulativeChangeCellColor
+                }
               ],
               [
                 'Hips',
@@ -661,7 +664,7 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? distanceUnit
                       : ''
                   }`,
-                  fillColor: pdfData.measurements.hips.changeThisWeekCellColor,
+                  fillColor: pdfData.measurements.hips.changeThisWeekCellColor
                 },
                 {
                   text: `${pdfData.measurements.hips.cumulativeChangeString} ${
@@ -669,9 +672,8 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? distanceUnit
                       : ''
                   }`,
-                  fillColor:
-                    pdfData.measurements.hips.cumulativeChangeCellColor,
-                },
+                  fillColor: pdfData.measurements.hips.cumulativeChangeCellColor
+                }
               ],
               [
                 'Thigh',
@@ -696,7 +698,7 @@ export class ProgressReportPDFDialog implements OnInit {
                       ? distanceUnit
                       : ''
                   }`,
-                  fillColor: pdfData.measurements.thigh.changeThisWeekCellColor,
+                  fillColor: pdfData.measurements.thigh.changeThisWeekCellColor
                 },
                 {
                   text: `${pdfData.measurements.thigh.cumulativeChangeString} ${
@@ -705,15 +707,15 @@ export class ProgressReportPDFDialog implements OnInit {
                       : ''
                   }`,
                   fillColor:
-                    pdfData.measurements.thigh.cumulativeChangeCellColor,
-                },
+                    pdfData.measurements.thigh.cumulativeChangeCellColor
+                }
               ],
               [
                 {
                   text: `Total ${
                     distanceUnit === 'in' ? 'Inches' : 'Centimeters'
                   } Lost`,
-                  colSpan: 4,
+                  colSpan: 4
                 },
                 { text: '' },
                 { text: '' },
@@ -721,27 +723,27 @@ export class ProgressReportPDFDialog implements OnInit {
                 {
                   text: `${pdfData.totalInches.toFixed(2)} ${distanceUnit}`,
                   colSpan: 2,
-                  fillColor: pdfData.totalInchesCellColor,
+                  fillColor: pdfData.totalInchesCellColor
                 },
-                { text: '' },
-              ],
-            ],
-          },
+                { text: '' }
+              ]
+            ]
+          }
         },
         { text: ' ', lineHeight: 2 },
         {
           stack: [
             {
-              text: `Progress Report Generated by: ${org.name}`,
+              text: `Progress Report Generated by: ${org.name}`
             },
             {
-              text: `${org.name} - ${org.address.city},`,
+              text: `${org.name} - ${org.address.city},`
             },
             { text: `${org.address.street},` },
             { text: `${org.address.postalCode} ${org.contact.phone}` },
             { text: ' ', lineHeight: 2 },
-            { text: `${org.contact.email}` },
-          ],
+            { text: `${org.contact.email}` }
+          ]
         },
         { text: ' ', lineHeight: 2 },
         {
@@ -753,44 +755,44 @@ export class ProgressReportPDFDialog implements OnInit {
               x2: 595,
               y2: 20,
               lineWidth: 2,
-              lineColor: this.pdfColor,
-            },
-          ],
-        },
+              lineColor: this.pdfColor
+            }
+          ]
+        }
       ],
       footer: {
         stack: [
           {
             image: imageToDataURL(footerImage),
             fit: [100, 100],
-            absolutePosition: { x: 0, y: -40 },
+            absolutePosition: { x: 0, y: -40 }
           },
           {
             text: 'A SHIFTED APPROACH TO WEIGHT LOSS™ | shiftsetgo.com',
             alignment: 'right',
-            color: this.pdfColor,
-          },
+            color: this.pdfColor
+          }
         ],
         lineHeight: 1.5,
-        margin: [30, 10, 30, 0],
+        margin: [30, 10, 30, 0]
       },
       styles: {
         header: {
           fontSize: 22,
-          bold: true,
+          bold: true
         },
         footer: {
-          fontSize: 9,
+          fontSize: 9
         },
         subheader: {
           fontSize: 16,
           bold: true,
-          alignment: 'center',
-        },
-      },
-    };
-    pdfMake.createPdf(definition).open();
-    this.dialog.close();
+          alignment: 'center'
+        }
+      }
+    }
+    pdfMake.createPdf(definition).open()
+    this.dialog.close()
   }
 
   private calculatePatientPDFData(
@@ -799,7 +801,7 @@ export class ProgressReportPDFDialog implements OnInit {
     weekIndex: number = 0,
     year: number
   ): DieterSummaryPDFData {
-    const partialResults: DieterSummaryPDFData = currentObj;
+    const partialResults: DieterSummaryPDFData = currentObj
 
     // Calculate composition elements
     partialResults.composition = {
@@ -837,8 +839,8 @@ export class ProgressReportPDFDialog implements OnInit {
         values,
         'waterPercentage'
       ),
-      weight: calculateProgressElementRow(weekIndex, year, values, 'weight'),
-    };
+      weight: calculateProgressElementRow(weekIndex, year, values, 'weight')
+    }
 
     // Calculate measurements elements
     partialResults.measurements = {
@@ -846,8 +848,8 @@ export class ProgressReportPDFDialog implements OnInit {
       arm: calculateProgressElementRow(weekIndex, year, values, 'arm'),
       waist: calculateProgressElementRow(weekIndex, year, values, 'waist'),
       hips: calculateProgressElementRow(weekIndex, year, values, 'hip'),
-      thigh: calculateProgressElementRow(weekIndex, year, values, 'thigh'),
-    };
+      thigh: calculateProgressElementRow(weekIndex, year, values, 'thigh')
+    }
 
     partialResults.totalInches = +(
       (partialResults.measurements.chest.cumulativeChange || 0) +
@@ -855,25 +857,25 @@ export class ProgressReportPDFDialog implements OnInit {
       (partialResults.measurements.waist.cumulativeChange || 0) +
       (partialResults.measurements.hips.cumulativeChange || 0) +
       (partialResults.measurements.thigh.cumulativeChange || 0)
-    ).toFixed(2);
+    ).toFixed(2)
     partialResults.totalInchesCellColor = getProgressPDFCellColor(
       partialResults.totalInches,
       'totalInchesChange'
-    );
+    )
 
-    return partialResults;
+    return partialResults
   }
 
   private calculateYearWeeks(
     start: moment.Moment = moment().startOf('year').startOf('week')
   ): YearWeekOption[] {
-    const options: YearWeekOption[] = [];
+    const options: YearWeekOption[] = []
 
-    const beginning = start;
-    const today = moment();
-    const currentWeek = beginning;
+    const beginning = start
+    const today = moment()
+    const currentWeek = beginning
 
-    let weekCount = 0;
+    let weekCount = 0
 
     while (currentWeek.isSameOrBefore(today, 'week')) {
       options.push({
@@ -882,38 +884,38 @@ export class ProgressReportPDFDialog implements OnInit {
           .startOf('week')
           .format('MM/DD/YYYY')} - ${currentWeek
           .endOf('week')
-          .format('MM/DD/YYYY')}`,
-      });
-      currentWeek.add(1, 'week');
+          .format('MM/DD/YYYY')}`
+      })
+      currentWeek.add(1, 'week')
     }
 
-    return options;
+    return options
   }
 
   private createForm(): void {
     this.form = this.fb.group({
-      week: [0],
-    });
+      week: [0]
+    })
   }
 
   private async fetchAccount() {
     try {
-      this.isLoading = true;
-      const account = await this.account.getSingle(this.context.accountId);
-      let startDate = moment(account.clientData.startedAt || account.createdAt);
-      this.acc = account;
+      this.isLoading = true
+      const account = await this.account.getSingle(this.context.accountId)
+      let startDate = moment(account.clientData.startedAt || account.createdAt)
+      this.acc = account
       if (startDate.isAfter(moment(), 'day')) {
-        startDate = this.today;
+        startDate = this.today
       }
       this.yearWeeks = this.calculateYearWeeks(
         startDate.clone().startOf('week')
-      );
-      this.form.patchValue({ week: this.yearWeeks.length - 1 });
+      )
+      this.form.patchValue({ week: this.yearWeeks.length - 1 })
     } catch (error) {
-      this.notify.error(error);
-      this.dialog.close();
+      this.notify.error(error)
+      this.dialog.close()
     } finally {
-      this.isLoading = false;
+      this.isLoading = false
     }
   }
 
@@ -921,7 +923,7 @@ export class ProgressReportPDFDialog implements OnInit {
     this.store.pipe(select(paletteSelector)).subscribe((palette) => {
       this.pdfColor =
         (palette.theme === 'accent' ? palette.accent : palette.primary) ||
-        this.pdfColor;
-    });
+        this.pdfColor
+    })
   }
 }

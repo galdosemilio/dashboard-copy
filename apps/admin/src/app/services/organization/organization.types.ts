@@ -4,9 +4,9 @@ import {
   GetSeqOrgPreferenceResponse,
   MessagingPreferenceSingle,
   OrganizationPreferenceSingle,
-  OrganizationSingle
+  OrganizationSingle,
+  RPMPreferenceSingle
 } from '@coachcare/npm-api'
-import { RPMPreferenceSingle } from 'selvera-api/dist/lib/selvera-api/providers/rpm/entities'
 
 export interface OrganizationFeaturePrefs {
   associationPrefs: {

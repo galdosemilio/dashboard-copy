@@ -1,5 +1,5 @@
-import { AccListRequest } from '@app/shared/selvera-api';
+import { AccListRequest } from '@coachcare/npm-api'
 
 export interface DietersCriteria extends AccListRequest {
-  pageSize: any; // number | 'all';
+  pageSize: any // number | 'all';
 }

@@ -12,10 +12,10 @@ import {
   MatDialogRef
 } from '@coachcare/common/material'
 import {
-  Account,
+  AccountProvider,
   AccountAccessData,
   AccountTypeIds,
-  Organization,
+  OrganizationProvider,
   OrgListSegment
 } from '@coachcare/npm-api'
 import { ConfigService, NotifierService } from '@coachcare/common/services'
@@ -43,9 +43,9 @@ export class ScheduleSelectDialog implements OnInit {
   fill: string
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private dialogRef: MatDialogRef<ScheduleSelectDialog>,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private config: ConfigService,
     private notifier: NotifierService,
     @Inject(MAT_DIALOG_DATA) public data: ScheduleSelectData
@@ -70,11 +70,11 @@ export class ScheduleSelectDialog implements OnInit {
       })
 
     this.organization
-      .getList({ account: this.data.user.id })
+      .getList({ account: this.data.user.id } as any) // MERGETODO: CHECK THIS TYPE!!!
       .then((res) => {
         this.clinics = res.data.filter(
-          (c) => c.permissions && c.permissions.admin
-        )
+          (c: any) => c.permissions && c.permissions.admin
+        ) as any // MERGETODO: CHECK THIS TYPE!!!
         if (this.clinics.length > 0) {
           this.selectedClinic = this.clinics[0]
         }

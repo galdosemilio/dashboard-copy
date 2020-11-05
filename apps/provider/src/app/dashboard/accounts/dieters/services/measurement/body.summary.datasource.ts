@@ -1,13 +1,13 @@
-import { from, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs'
 
-import { NotifierService } from '@app/service';
-import { CcrDataSource } from '@app/shared';
+import { NotifierService } from '@app/service'
+import { CcrDataSource } from '@app/shared'
 import {
   BodySummaryDataResponseSegment,
   FetchBodySummaryRequest,
   FetchBodySummaryResponse
-} from '@app/shared/selvera-api';
-import { MeasurementDatabase } from './measurement.database';
+} from '@coachcare/npm-api'
+import { MeasurementDatabase } from './measurement.database'
 
 export class BodySummaryDataSource extends CcrDataSource<
   BodySummaryDataResponseSegment,
@@ -18,21 +18,23 @@ export class BodySummaryDataSource extends CcrDataSource<
     protected notify: NotifierService,
     protected database: MeasurementDatabase
   ) {
-    super();
+    super()
   }
 
   defaultFetch(): FetchBodySummaryResponse {
     return {
       data: [],
       summary: {}
-    };
+    }
   }
 
   fetch(): Observable<FetchBodySummaryResponse> {
-    return from(this.database.fetchBodySummary(this.criteria));
+    return from(this.database.fetchBodySummary(this.criteria))
   }
 
-  mapResult(result: FetchBodySummaryResponse): BodySummaryDataResponseSegment[] {
-    return result.data;
+  mapResult(
+    result: FetchBodySummaryResponse
+  ): BodySummaryDataResponseSegment[] {
+    return result.data
   }
 }

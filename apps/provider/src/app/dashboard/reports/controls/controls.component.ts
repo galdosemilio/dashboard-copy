@@ -1,18 +1,24 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { RouterState } from '@angular/router';
-import { ReportsCriteria } from '@app/dashboard/reports/services';
-import { ReportsState, UpdateControls } from '@app/dashboard/reports/store';
-import { ContextService } from '@app/service';
-import { _, DateNavigatorOutput } from '@app/shared';
-import { FixedPeriod } from '@app/shared/components/date-range/date-range.component';
-import { routerSelector } from '@app/store/router';
-import { select, Store } from '@ngrx/store';
-import * as moment from 'moment-timezone';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit
+} from '@angular/core'
+import { RouterState } from '@angular/router'
+import { ReportsCriteria } from '@app/dashboard/reports/services'
+import { ReportsState, UpdateControls } from '@app/dashboard/reports/store'
+import { ContextService } from '@app/service'
+import { _, DateNavigatorOutput } from '@app/shared'
+import { FixedPeriod } from '@app/shared/components/date-range/date-range.component'
+import { routerSelector } from '@app/store/router'
+import { select, Store } from '@ngrx/store'
+import * as moment from 'moment-timezone'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
 interface StartPeriod {
-  endDate?: string;
-  startDate?: string;
+  endDate?: string
+  startDate?: string
 }
 
 @Component({
@@ -22,20 +28,20 @@ interface StartPeriod {
 })
 export class ReportsControlsComponent implements OnInit, OnDestroy {
   @Input()
-  allowNavigation: boolean = true;
+  allowNavigation = true
   @Input()
-  dayDateFormat: string = '';
+  dayDateFormat = ''
   @Input()
-  discrete: boolean = false;
+  discrete = false
   @Input()
-  range: boolean = true;
+  range = true
   @Input()
-  timeframe = 'week';
-  clinic: string;
-  dates: DateNavigatorOutput = {};
-  fixedPeriod: FixedPeriod;
-  startPeriod: StartPeriod = {};
-  startView: 'week' | 'month' | 'year' | 'years' = 'month';
+  timeframe = 'week'
+  clinic: string
+  dates: DateNavigatorOutput = {}
+  fixedPeriod: FixedPeriod
+  startPeriod: StartPeriod = {}
+  startView: 'week' | 'month' | 'year' | 'years' = 'month'
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -47,38 +53,43 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       if (org && org.id && org.id !== this.clinic) {
-        this.selectClinic(org.id);
+        this.selectClinic(org.id)
       }
-    });
+    })
 
-    this.route.pipe(untilDestroyed(this), select(routerSelector)).subscribe((route) => {
-      switch (route.state.url) {
-        case '/reports/overview/active':
-          this.startView = 'year';
-          this.startPeriod = {
-            endDate: moment().format(),
-            startDate: moment().subtract(12, 'months').startOf('month').format()
-          };
-          break;
-        default:
-          this.startView = 'week';
-          delete this.fixedPeriod;
-      }
-    });
+    this.route
+      .pipe(untilDestroyed(this), select(routerSelector))
+      .subscribe((route) => {
+        switch (route.state.url) {
+          case '/reports/overview/active':
+            this.startView = 'year'
+            this.startPeriod = {
+              endDate: moment().format(),
+              startDate: moment()
+                .subtract(12, 'months')
+                .startOf('month')
+                .format()
+            }
+            break
+          default:
+            this.startView = 'week'
+            delete this.fixedPeriod
+        }
+      })
 
-    this.cdr.detectChanges();
+    this.cdr.detectChanges()
   }
 
   ngOnDestroy() {}
 
   updateDates(dates: DateNavigatorOutput) {
-    this.dates = dates;
-    this.updateSelector();
+    this.dates = dates
+    this.updateSelector()
   }
 
   selectClinic(value) {
-    this.clinic = value;
-    this.updateSelector();
+    this.clinic = value
+    this.updateSelector()
   }
 
   updateSelector() {
@@ -88,8 +99,8 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
         startDate: this.dates.startDate,
         endDate: this.dates.endDate,
         diff: moment(this.dates.endDate).diff(this.dates.startDate, 'days') + 1
-      };
-      this.reports.dispatch(new UpdateControls({ criteria }));
+      }
+      this.reports.dispatch(new UpdateControls({ criteria }))
     }
   }
 }

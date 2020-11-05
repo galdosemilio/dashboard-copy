@@ -1,24 +1,23 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { MatDialog, MatPaginator } from '@coachcare/common/material';
-import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs';
-import { ContextService } from '@app/service';
-import { _, PromptDialog } from '@app/shared';
-import { GetAllSeqEnrollmentsResponse } from '@app/shared/selvera-api';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Sequence } from 'selvera-api';
-import { SequenceEnrollmentDataSource } from '../../services';
+import { Component, Input, OnDestroy } from '@angular/core'
+import { MatDialog, MatPaginator } from '@coachcare/common/material'
+import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs'
+import { ContextService } from '@app/service'
+import { _, PromptDialog } from '@app/shared'
+import { GetAllSeqEnrollmentsResponse, Sequence } from '@coachcare/npm-api'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { SequenceEnrollmentDataSource } from '../../services'
 
 @Component({
   selector: 'app-dieter-sequences-table',
-  templateUrl: './table.component.html',
+  templateUrl: './table.component.html'
 })
 export class DieterSequencesTableComponent implements OnDestroy {
   @Input()
-  paginator: MatPaginator;
+  paginator: MatPaginator
   @Input()
-  source: SequenceEnrollmentDataSource;
+  source: SequenceEnrollmentDataSource
 
-  columns: string[] = ['name', 'startDate', 'status', 'actions'];
+  columns: string[] = ['name', 'startDate', 'status', 'actions']
 
   constructor(
     private context: ContextService,
@@ -33,8 +32,8 @@ export class DieterSequencesTableComponent implements OnDestroy {
       .open(PromptDialog, {
         data: {
           title: _('SEQUENCING.DELETE_ENROLLMENT_TITLE'),
-          content: _('SEQUENCING.DELETE_ENROLLMENT_CONTENT'),
-        },
+          content: _('SEQUENCING.DELETE_ENROLLMENT_CONTENT')
+        }
       })
       .afterClosed()
       .pipe(untilDestroyed(this))
@@ -43,23 +42,23 @@ export class DieterSequencesTableComponent implements OnDestroy {
           await this.sequence.createInactiveSeqEnrollment({
             account: this.context.accountId,
             createdBy: this.context.user.id,
-            sequence: enrollment.sequence.id,
-          });
-          this.paginator.firstPage();
-          this.source.refresh();
+            sequence: enrollment.sequence.id
+          })
+          this.paginator.firstPage()
+          this.source.refresh()
         }
-      });
+      })
   }
 
   onSelectEnrollment(enrollment): void {
-    console.log({ enrollment });
+    console.log({ enrollment })
   }
 
   onViewEnrollmentTriggers(enrollment: GetAllSeqEnrollmentsResponse): void {
     this.dialog.open(TriggerDetailDialog, {
       data: { sequence: enrollment.sequence },
       panelClass: 'ccr-full-dialog',
-      width: '80vw',
-    });
+      width: '80vw'
+    })
   }
 }

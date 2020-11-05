@@ -5,51 +5,51 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation
-} from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { CCRConfig } from '@app/config';
-import { resolveConfig } from '@app/config/section';
+} from '@angular/core'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
+import { CCRConfig } from '@app/config'
+import { resolveConfig } from '@app/config/section'
 import {
   MeasurementAggregation,
   MeasurementDatabase,
   MeasurementDataSource,
   MeasurementSummaryData,
   MeasurementTimeframe
-} from '@app/dashboard/accounts/dieters/services';
+} from '@app/dashboard/accounts/dieters/services'
 import {
   ContextService,
   EventsService,
   NotifierService,
   SelectedOrganization
-} from '@app/service';
-import { _, CcrPaginator, DateNavigatorOutput } from '@app/shared';
-import { Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { filter } from 'lodash';
-import * as moment from 'moment-timezone';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
-import { MeasurementChartOutput } from './chart/chart.component';
+} from '@app/service'
+import { _, CcrPaginator, DateNavigatorOutput } from '@app/shared'
+import { Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import { filter } from 'lodash'
+import * as moment from 'moment-timezone'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
+import { MeasurementChartOutput } from './chart/chart.component'
 
 export type MeasurementSections =
   | 'composition'
   | 'circumference'
   | 'energy'
   | 'food'
-  | 'vitals';
+  | 'vitals'
 export type MeasurementDataElement = {
-  code: MeasurementSummaryData;
-  displayName: string;
-  dynamic?: boolean;
-};
+  code: MeasurementSummaryData
+  displayName: string
+  dynamic?: boolean
+}
 export type MeasurementConfig = {
   [S in MeasurementSections]: {
-    data: MeasurementDataElement[];
-    columns: string[];
-    allowDetail?: boolean;
-    useNewEndpoint?: boolean;
-  };
-};
+    data: MeasurementDataElement[]
+    columns: string[]
+    allowDetail?: boolean
+    useNewEndpoint?: boolean
+  }
+}
 
 @Component({
   selector: 'app-dieter-measurements',
@@ -58,12 +58,12 @@ export type MeasurementConfig = {
   encapsulation: ViewEncapsulation.None
 })
 export class DieterMeasurementsComponent implements OnInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator;
+  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
   // controls with their config
-  aggregation: MeasurementAggregation;
-  allowListView: boolean = false;
-  components = ['composition', 'circumference', 'energy', 'food', 'vitals'];
-  component: MeasurementSections = 'composition';
+  aggregation: MeasurementAggregation
+  allowListView = false
+  components = ['composition', 'circumference', 'energy', 'food', 'vitals']
+  component: MeasurementSections = 'composition'
   sections: MeasurementConfig = {
     composition: {
       data: [
@@ -178,17 +178,26 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     },
     vitals: {
       data: [
-        { code: 'totalCholesterol', displayName: _('MEASUREMENT.TOTAL_CHOLESTEROL') },
+        {
+          code: 'totalCholesterol',
+          displayName: _('MEASUREMENT.TOTAL_CHOLESTEROL')
+        },
         { code: 'ldl', displayName: _('MEASUREMENT.LDL') },
         { code: 'hdl', displayName: _('MEASUREMENT.HDL') },
         { code: 'vldl', displayName: _('MEASUREMENT.VLDL') },
         { code: 'triglycerides', displayName: _('MEASUREMENT.TRIGLYCERIDES') },
-        { code: 'fastingGlucose', displayName: _('MEASUREMENT.FASTING_GLUCOSE') },
+        {
+          code: 'fastingGlucose',
+          displayName: _('MEASUREMENT.FASTING_GLUCOSE')
+        },
         { code: 'hba1c', displayName: _('MEASUREMENT.HBA1C') },
         { code: 'insulin', displayName: '' },
         { code: 'hsCrp', displayName: _('MEASUREMENT.HSCRP') },
         { code: 'temperature', displayName: _('MEASUREMENT.TEMPERATURE') },
-        { code: 'respirationRate', displayName: _('MEASUREMENT.RESPIRATION_RATE') },
+        {
+          code: 'respirationRate',
+          displayName: _('MEASUREMENT.RESPIRATION_RATE')
+        },
         { code: 'heartRate', displayName: _('MEASUREMENT.HEART_RATE') },
         {
           code: 'bloodPressureSystolic',
@@ -220,23 +229,23 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       allowDetail: true,
       useNewEndpoint: true
     }
-  };
+  }
 
-  timeframe = 'week';
-  view = 'table';
-  dates: DateNavigatorOutput = {};
-  data: MeasurementSummaryData[];
-  chartColumns: string[];
-  columns: string[];
-  filteredColumns: string[] = [];
-  useNewEndpoint: boolean;
+  timeframe = 'week'
+  view = 'table'
+  dates: DateNavigatorOutput = {}
+  data: MeasurementSummaryData[]
+  chartColumns: string[]
+  columns: string[]
+  filteredColumns: string[] = []
+  useNewEndpoint: boolean
 
   // datasource refresh trigger
-  refresh$ = new Subject<any>();
+  refresh$ = new Subject<any>()
 
-  source: MeasurementDataSource | null;
+  source: MeasurementDataSource | null
 
-  hiddenMeasurementTabs: string[] = [];
+  hiddenMeasurementTabs: string[] = []
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -251,41 +260,43 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.bus.trigger('right-panel.component.set', 'addMeasurements');
+    this.bus.trigger('right-panel.component.set', 'addMeasurements')
     this.source = new MeasurementDataSource(
       this.notifier,
       this.database,
       this.translator,
       this.context,
       this.store
-    );
+    )
     this.source.result$.pipe(untilDestroyed(this)).subscribe((values) => {
-      const allColumns = this.sections[this.section].columns.slice();
+      const allColumns = this.sections[this.section].columns.slice()
       const dynamicColumns = this.sections[this.section].data
         .filter((element) => element.dynamic)
-        .map((element) => element.code);
-      let filteredColumns = [];
+        .map((element) => element.code)
+      let filteredColumns = []
 
       filteredColumns = allColumns.filter(
         (column) =>
-          !this.filteredColumns.find((filteredColumn) => column === filteredColumn)
-      );
+          !this.filteredColumns.find(
+            (filteredColumn) => column === filteredColumn
+          )
+      )
 
       if (dynamicColumns.length) {
         filteredColumns = filteredColumns.filter(
           (column) =>
             !dynamicColumns.find((dynamicColumn) => dynamicColumn === column) ||
             !!values.find((val) => val[column] !== 0)
-        );
+        )
       } else {
-        filteredColumns = allColumns;
+        filteredColumns = allColumns
       }
 
-      this.columns = filteredColumns;
-    });
+      this.columns = filteredColumns
+    })
     this.source.addDefault({
       account: this.context.accountId
-    });
+    })
 
     this.source.addOptional(this.refresh$, () => {
       return {
@@ -299,15 +310,20 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
             : undefined,
         // aggregation: this.aggregation,
         startDate:
-          this.view !== 'list' ? moment(this.dates.startDate).toISOString() : undefined,
+          this.view !== 'list'
+            ? moment(this.dates.startDate).toISOString()
+            : undefined,
         endDate:
-          this.view !== 'list' ? moment(this.dates.endDate).toISOString() : undefined,
+          this.view !== 'list'
+            ? moment(this.dates.endDate).toISOString()
+            : undefined,
         unit: 'day',
         useNewEndpoint: this.useNewEndpoint,
         max: 'all',
-        omitEmptyDays: this.view === 'chart' || this.view === 'list' ? true : false
-      };
-    });
+        omitEmptyDays:
+          this.view === 'chart' || this.view === 'list' ? true : false
+      }
+    })
 
     this.source.addOptional(this.paginator.page, () =>
       this.view === 'list'
@@ -316,30 +332,34 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
             limit: this.source.pageSize
           }
         : {}
-    );
+    )
 
     // component initialization
     this.route.paramMap.subscribe((params: ParamMap) => {
       // TODO add timeframe, date
-      const s = params.get('s') as MeasurementSections;
-      this.section = this.components.indexOf(s) >= 0 ? s : this.component;
+      const s = params.get('s') as MeasurementSections
+      this.section = this.components.indexOf(s) >= 0 ? s : this.component
 
-      const v = params.get('v');
-      this.view = ['table', 'chart', 'list'].indexOf(v) >= 0 ? v : this.view;
+      const v = params.get('v')
+      this.view = ['table', 'chart', 'list'].indexOf(v) >= 0 ? v : this.view
 
       if (this.view === 'list' && !this.sections[this.section].useNewEndpoint) {
-        this.view = 'table';
+        this.view = 'table'
       }
 
       if (!this.allowListView && this.view === 'list') {
-        this.view = 'table';
-      } else if (this.view === 'table' && this.useNewEndpoint && this.allowListView) {
-        this.view = 'list';
+        this.view = 'table'
+      } else if (
+        this.view === 'table' &&
+        this.useNewEndpoint &&
+        this.allowListView
+      ) {
+        this.view = 'list'
       }
-    });
+    })
 
-    this.cdr.detectChanges();
-    this.bus.register('dieter.measurement.refresh', this.refreshData.bind(this));
+    this.cdr.detectChanges()
+    this.bus.register('dieter.measurement.refresh', this.refreshData.bind(this))
 
     this.context.organization$
       .pipe(untilDestroyed(this))
@@ -347,95 +367,104 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
         this.allowListView = resolveConfig(
           'JOURNAL.ALLOW_MEASUREMENT_LIST_VIEW',
           this.context.organization
-        );
+        )
 
         this.filteredColumns = resolveConfig(
           'JOURNAL.HIDDEN_COMPOSITION_COLUMNS',
           this.context.organization
-        );
+        )
 
         if (!this.allowListView && this.view === 'list') {
-          this.view = 'table';
-        } else if (this.view === 'table' && this.useNewEndpoint && this.allowListView) {
-          this.view = 'list';
+          this.view = 'table'
+        } else if (
+          this.view === 'table' &&
+          this.useNewEndpoint &&
+          this.allowListView
+        ) {
+          this.view = 'list'
         }
-        this.resolveHiddenMeasurementTabs(organization);
-      });
-    this.resolveHiddenMeasurementTabs(this.context.organization);
+        this.resolveHiddenMeasurementTabs(organization)
+      })
+    this.resolveHiddenMeasurementTabs(this.context.organization)
   }
 
   ngOnDestroy() {
-    this.source.disconnect();
+    this.source.disconnect()
 
-    this.bus.unregister('dieter.measurement.refresh');
+    this.bus.unregister('dieter.measurement.refresh')
   }
 
   onAggChange(aggregation: MeasurementAggregation) {
-    this.aggregation = aggregation;
-    this.refreshData();
+    this.aggregation = aggregation
+    this.refreshData()
   }
 
   get section(): MeasurementSections {
-    return this.component;
+    return this.component
   }
   set section(target: MeasurementSections) {
-    this.component = target;
-    this.data = this.sections[target].data.map((data) => data.code);
-    this.useNewEndpoint = this.sections[target].useNewEndpoint;
-    this.columns = this.sections[target].columns;
-    this.chartColumns = this.sections[target].columns;
+    this.component = target
+    this.data = this.sections[target].data.map((data) => data.code)
+    this.useNewEndpoint = this.sections[target].useNewEndpoint
+    this.columns = this.sections[target].columns
+    this.chartColumns = this.sections[target].columns
 
     if (this.filteredColumns && this.filteredColumns.length) {
       this.chartColumns = this.chartColumns.filter(
         (column) =>
-          !this.filteredColumns.find((filteredColumn) => filteredColumn === column)
-      );
+          !this.filteredColumns.find(
+            (filteredColumn) => filteredColumn === column
+          )
+      )
     }
 
-    if (!this.source.measurement || !filter(this.data, this.source.measurement).length) {
-      this.source.measurement = this.data[0];
+    if (
+      !this.source.measurement ||
+      !filter(this.data, this.source.measurement).length
+    ) {
+      this.source.measurement = this.data[0]
     }
-    this.refresh$.next('measurements.section');
-    this.bus.trigger('add-measurement.section.change', { value: target });
+    this.refresh$.next('measurements.section')
+    this.bus.trigger('add-measurement.section.change', { value: target })
   }
 
   toggleView(mode?: string) {
     if (this.view === 'chart') {
-      this.timeframe = 'week';
+      this.timeframe = 'week'
     }
     const params = {
       s: this.component,
       v: mode ? mode : this.view === 'table' ? 'chart' : 'table'
-    };
+    }
     this.router.navigate(['.', params], {
       relativeTo: this.route
-    });
+    })
   }
 
   updateDates(dates: DateNavigatorOutput) {
-    this.dates = dates;
-    this.refresh$.next('measurements.updateDates');
+    this.dates = dates
+    this.refresh$.next('measurements.updateDates')
     // prevents exception when changing timeframe from child component
-    this.cdr.detectChanges();
+    this.cdr.detectChanges()
   }
 
   chartChanged(data: MeasurementChartOutput) {
-    this.aggregation = data.aggregation;
-    this.source.measurement = data.measurement;
+    this.aggregation = data.aggregation
+    this.source.measurement = data.measurement
     if (this.timeframe !== data.timeframe) {
-      this.timeframe = data.timeframe;
+      this.timeframe = data.timeframe
       // and the date-navigator will trigger the update
     } else {
-      this.refresh$.next('measurements.chartChanged');
+      this.refresh$.next('measurements.chartChanged')
     }
   }
 
   refreshData(): void {
-    this.source.refresh();
+    this.source.refresh()
   }
 
   private resolveHiddenMeasurementTabs(organization: SelectedOrganization) {
     this.hiddenMeasurementTabs =
-      resolveConfig('JOURNAL.HIDDEN_MEASUREMENT_TABS', organization) || [];
+      resolveConfig('JOURNAL.HIDDEN_MEASUREMENT_TABS', organization) || []
   }
 }

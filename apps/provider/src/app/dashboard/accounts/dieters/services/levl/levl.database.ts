@@ -1,20 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { MeasurementBody, Reports } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+import { MeasurementBody, Reports } from '@coachcare/npm-api'
 
-import { CcrDatabase } from '@app/shared';
+import { CcrDatabase } from '@app/shared'
 import {
   FetchBodySummaryRequest,
   FetchBodySummaryResponse
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class LevlDatabase extends CcrDatabase {
   constructor(private body: MeasurementBody) {
-    super();
+    super()
   }
 
-  fetchAcetonePpm(req: FetchBodySummaryRequest): Promise<FetchBodySummaryResponse> {
-    return this.body.fetchSummary(req);
+  fetchAcetonePpm(
+    req: FetchBodySummaryRequest
+  ): Promise<FetchBodySummaryResponse> {
+    return this.body.fetchSummary(req)
   }
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { CookieService } from 'ngx-cookie-service'
-import { Account, ApiService } from 'selvera-api'
+import { AccountProvider, ApiService } from '@coachcare/npm-api'
 
 import { CCRApp } from '@app/config'
-import { Profile } from '@app/shared/selvera-api'
+import { Profile } from '@coachcare/npm-api'
 import { _, locIsRtl } from '@app/shared/utils'
 import { ConfigService } from './config.service'
 import { EventsService } from './events.service'
@@ -25,7 +25,7 @@ export class LanguageService {
 
   constructor(
     private api: ApiService,
-    private account: Account,
+    private account: AccountProvider,
     private config: ConfigService,
     private bus: EventsService,
     private translate: TranslateService,

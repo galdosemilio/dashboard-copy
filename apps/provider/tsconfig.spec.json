@@ -8,11 +8,9 @@
       "node"
     ]
   },
-  "files": [
-    "src/test-setup.ts"
-  ],
   "include": [
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "../../libs/npm-api/src/lib/config/env"
   ]
 }

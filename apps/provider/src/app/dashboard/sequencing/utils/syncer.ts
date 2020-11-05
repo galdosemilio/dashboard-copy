@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ContextService } from '@app/service';
-import { bufferedRequests } from '@app/shared';
-import { Sequence } from 'selvera-api';
-import { SyncState } from '../models';
-import { Transition } from '../models/sequence-transition';
+import { Injectable } from '@angular/core'
+import { ContextService } from '@app/service'
+import { bufferedRequests } from '@app/shared'
+import { Sequence } from '@coachcare/npm-api'
+import { SyncState } from '../models'
+import { Transition } from '../models/sequence-transition'
 
 /**
  * The logic needs a big rework.
@@ -57,66 +57,71 @@ import { Transition } from '../models/sequence-transition';
  *    do nothing).
  */
 
-type TicketAction = 'create' | 'update' | 'delete' | 'recreate' | 'no-action';
-type TicketType = 'sequence' | 'step' | 'transition' | 'message' | 'localization';
+type TicketAction = 'create' | 'update' | 'delete' | 'recreate' | 'no-action'
+type TicketType =
+  | 'sequence'
+  | 'step'
+  | 'transition'
+  | 'message'
+  | 'localization'
 
 interface MessagePayloadItem {
-  id?: string;
+  id?: string
   content: {
-    content: string;
-    header: string;
-    message: string;
-    package: string;
-    subject: string;
-    text: string;
-  };
-  language?: string;
-  stepId?: string;
-  syncState: SyncState;
-  type: string;
+    content: string
+    header: string
+    message: string
+    package: string
+    subject: string
+    text: string
+  }
+  language?: string
+  stepId?: string
+  syncState: SyncState
+  type: string
 }
 
 interface MessagePayload {
-  message: MessagePayloadItem | MessagePayloadItem[];
+  message: MessagePayloadItem | MessagePayloadItem[]
 }
 
 interface StepPayloadItem {
-  id?: string;
-  delay: string;
-  messages: MessagePayload[];
-  name: string;
-  sequenceId?: string;
-  syncState: SyncState;
+  id?: string
+  delay: string
+  messages: MessagePayload[]
+  name: string
+  sequenceId?: string
+  syncState: SyncState
 }
 
 interface StepPayload {
-  step: StepPayloadItem;
+  step: StepPayloadItem
 }
 
 interface SyncPayload {
-  message?: MessagePayloadItem;
+  message?: MessagePayloadItem
   sequence?: {
-    id: string;
-    endingAction: 'loop' | 'no-action';
-    name: string;
-    steps: StepPayload[];
-    syncState: SyncState;
-    transitions?: Transition[];
-  };
-  step?: StepPayloadItem;
-  transition?: any;
+    id: string
+    endingAction: 'loop' | 'no-action'
+    name: string
+    steps: StepPayload[]
+    syncState: SyncState
+    transitions?: Transition[]
+  }
+  step?: StepPayloadItem
+  transition?: any
 }
 
 interface SyncerTicket {
-  action: TicketAction;
-  children?: SyncerTicket[];
-  payload: SyncPayload;
-  type: TicketType;
+  action: TicketAction
+  children?: SyncerTicket[]
+  payload: SyncPayload
+  type: TicketType
 }
 
 @Injectable()
 export class SequenceSyncer {
-  public selectedStepCache: number;
+  public selectedStepCache: number
 
   constructor(private context: ContextService, private sequence: Sequence) {}
 
@@ -126,22 +131,29 @@ export class SequenceSyncer {
         formValue.sequence.steps = formValue.sequence.steps.filter(
           (stepObject) =>
             stepObject.step &&
-            (stepObject.step.syncState.inServer || !stepObject.step.syncState.deleted)
-        );
+            (stepObject.step.syncState.inServer ||
+              !stepObject.step.syncState.deleted)
+        )
 
-        let messageTickets = [];
-        let sequenceStepResponse;
-        const sequenceStepTickets: SyncerTicket[] = this.resolveTickets(formValue);
-        let transitionTickets: SyncerTicket[] = [];
+        let messageTickets = []
+        let sequenceStepResponse
+        const sequenceStepTickets: SyncerTicket[] = this.resolveTickets(
+          formValue
+        )
+        let transitionTickets: SyncerTicket[] = []
 
-        sequenceStepResponse = await this.processTicket(sequenceStepTickets.shift());
+        sequenceStepResponse = await this.processTicket(
+          sequenceStepTickets.shift()
+        )
 
-        let structureResponses = [];
-        const structureTickets = this.resolveStructureTickets(sequenceStepResponse);
+        let structureResponses = []
+        const structureTickets = this.resolveStructureTickets(
+          sequenceStepResponse
+        )
 
         structureResponses = await bufferedRequests(
           structureTickets.map((ticket) => this.processTicket(ticket))
-        );
+        )
 
         // update sequenceStepResponse tickets and transitions arrays, they no longer matter
         // after this point. Do it based on the structure responses
@@ -150,48 +162,56 @@ export class SequenceSyncer {
           response: {
             transitions: [...(sequenceStepResponse.response.transitions || [])],
             steps: [
-              ...(sequenceStepResponse.children.map((child) => child.response) || [])
+              ...(sequenceStepResponse.children.map(
+                (child) => child.response
+              ) || [])
             ]
           }
-        };
+        }
         const updatedFormValue = {
           sequence: {
             ...formValue.sequence,
             steps: [
-              ...(sequenceStepResponse.children.map((child) => child.response) || [])
+              ...(sequenceStepResponse.children.map(
+                (child) => child.response
+              ) || [])
             ],
             transitions: [...(formValue.sequence.transitions || [])]
           }
-        };
+        }
 
         structureResponses.forEach((structureResponse) => {
           if (structureResponse.action === 'no-action') {
             updatedStructureResponse.response.transitions = updatedStructureResponse.response.transitions.filter(
               (t) => t.id !== structureResponse.response.id
-            );
+            )
             updatedStructureResponse.response.steps = updatedStructureResponse.response.steps.filter(
               (s) =>
-                s.step.name === 'root' || s.step.id !== structureResponse.response.to.id
-            );
+                s.step.name === 'root' ||
+                s.step.id !== structureResponse.response.to.id
+            )
             updatedStructureResponse.children = updatedStructureResponse.children.filter(
               (c) => c.response.id !== structureResponse.response.to.id
-            );
+            )
 
             updatedFormValue.sequence.steps = updatedFormValue.sequence.steps.filter(
               (s) =>
-                s.step.name === 'root' || s.step.id !== structureResponse.response.to.id
-            );
+                s.step.name === 'root' ||
+                s.step.id !== structureResponse.response.to.id
+            )
 
             updatedFormValue.sequence.transitions = updatedFormValue.sequence.transitions.filter(
               (t) => t.id !== structureResponse.response.id
-            );
+            )
           } else if (structureResponse.action === 'create') {
             const affectedTransitionIndex = updatedStructureResponse.response.transitions.findIndex(
               (t) => t.from.id === structureResponse.response.transition.from
-            );
+            )
 
             if (affectedTransitionIndex > -1) {
-              updatedStructureResponse.response.transitions[affectedTransitionIndex] = {
+              updatedStructureResponse.response.transitions[
+                affectedTransitionIndex
+              ] = {
                 ...structureResponse.response.transition,
                 from: { id: structureResponse.response.transition.from },
                 to: { id: structureResponse.response.transition.to },
@@ -200,7 +220,7 @@ export class SequenceSyncer {
                   edited: false,
                   inServer: true
                 }
-              };
+              }
 
               updatedFormValue.sequence.transitions[affectedTransitionIndex] = {
                 ...structureResponse.response.transition,
@@ -211,38 +231,43 @@ export class SequenceSyncer {
                   edited: false,
                   inServer: true
                 }
-              };
+              }
             }
           }
-        });
+        })
 
         if (structureResponses.length) {
-          sequenceStepResponse = { ...sequenceStepResponse, ...updatedStructureResponse };
-          formValue = { ...formValue, ...updatedFormValue };
+          sequenceStepResponse = {
+            ...sequenceStepResponse,
+            ...updatedStructureResponse
+          }
+          formValue = { ...formValue, ...updatedFormValue }
         } else {
           formValue.sequence.steps = sequenceStepResponse.children.map(
             (child) => child.response
-          );
+          )
         }
 
         transitionTickets = this.resolveTransitionTickets(
           formValue,
           sequenceStepResponse
-        );
+        )
 
-        let transitionResponses = [];
+        let transitionResponses = []
 
         const rootStateTicket = sequenceStepResponse.children.find(
           (children) => children.response.step.name === 'root'
-        );
+        )
 
         const lastStateTicket =
-          sequenceStepResponse.children[sequenceStepResponse.children.length - 1];
+          sequenceStepResponse.children[
+            sequenceStepResponse.children.length - 1
+          ]
         const existingLoopTransition = rootStateTicket
           ? transitionTickets.find(
               (t) => t.payload.transition.to.id === rootStateTicket.response.id
             )
-          : undefined;
+          : undefined
 
         if (existingLoopTransition) {
           try {
@@ -252,18 +277,16 @@ export class SequenceSyncer {
                 transition: { id: existingLoopTransition.payload.transition.id }
               },
               type: 'transition'
-            });
+            })
           } catch (error) {}
         }
 
-        transitionResponses = await this.processTicketsByAction(transitionTickets, [
-          'delete',
-          'update',
-          'create',
-          'no-action'
-        ]);
+        transitionResponses = await this.processTicketsByAction(
+          transitionTickets,
+          ['delete', 'update', 'create', 'no-action']
+        )
 
-        const messageResponses = [];
+        const messageResponses = []
 
         messageTickets = [
           ...formValue.sequence.steps.map((stepObject, index) => {
@@ -271,7 +294,7 @@ export class SequenceSyncer {
               (t) =>
                 t.response.transition.to.id === stepObject.step.id ||
                 t.response.transition.to === stepObject.step.id
-            );
+            )
 
             return (
               transitionIndex > -1 &&
@@ -285,9 +308,9 @@ export class SequenceSyncer {
                     : undefined,
                 transitionId: transitionResponses[transitionIndex].response.id
               })
-            );
+            )
           })
-        ].filter((messageTicket) => messageTicket);
+        ].filter((messageTicket) => messageTicket)
 
         const transitionResponsesCopy = transitionResponses
           .slice()
@@ -296,15 +319,15 @@ export class SequenceSyncer {
               !rootStateTicket ||
               t.response.transition.to.id !== rootStateTicket.response.id ||
               t.response.transition.to !== rootStateTicket.response.id
-          );
+          )
 
         while (messageTickets.length) {
-          const messageTicket = messageTickets.shift();
+          const messageTicket = messageTickets.shift()
           const transitionResponse = messageTicket.length
             ? transitionResponsesCopy.find(
                 (tR) => tR.response.id === messageTicket[0].payload.transitionId
               )
-            : undefined;
+            : undefined
 
           messageResponses.push(
             ...(await bufferedRequests(
@@ -314,7 +337,7 @@ export class SequenceSyncer {
                 })
               )
             ))
-          );
+          )
         }
 
         // detect and act on ending action
@@ -331,21 +354,21 @@ export class SequenceSyncer {
                 }
               },
               type: 'transition'
-            });
+            })
           } catch (error) {}
         } else {
           // no action
         }
 
-        resolve(sequenceStepResponse);
+        resolve(sequenceStepResponse)
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 
   private calculateLoopingDelay(formValue: any): string {
-    let delay: string = '';
+    let delay = ''
 
     let closestStep = formValue.sequence.steps
       .slice()
@@ -353,76 +376,82 @@ export class SequenceSyncer {
       .find((step) => {
         return step.step
           ? step.step.syncState && !step.step.syncState.deleted
-          : step.syncState && !step.syncState.deleted;
-      });
+          : step.syncState && !step.syncState.deleted
+      })
 
-    closestStep = closestStep && closestStep.step ? closestStep.step : closestStep;
+    closestStep =
+      closestStep && closestStep.step ? closestStep.step : closestStep
 
     if (closestStep) {
       if (closestStep.delayHour && closestStep.delayHour !== '00:00:00') {
-        const hourAmount = Number(closestStep.delayHour.split(':')[0]);
-        delay = `${24 - hourAmount}:00:00`;
+        const hourAmount = Number(closestStep.delayHour.split(':')[0])
+        delay = `${24 - hourAmount}:00:00`
       } else {
-        delay = '24:00:00';
+        delay = '24:00:00'
       }
     }
 
-    return delay;
+    return delay
   }
 
   private detectDominantAction(state: SyncState): TicketAction {
     if (state.inServer) {
       if (state.deleted) {
-        return 'delete';
+        return 'delete'
       }
 
       if (state.edited) {
-        return 'update';
+        return 'update'
       }
     } else {
       if (state.deleted) {
-        return 'no-action';
+        return 'no-action'
       }
 
       if (state.new) {
-        return 'create';
+        return 'create'
       }
     }
 
-    return 'no-action';
+    return 'no-action'
   }
 
-  private processTicket(ticket: SyncerTicket, parentResponse?: any): Promise<any> {
+  private processTicket(
+    ticket: SyncerTicket,
+    parentResponse?: any
+  ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        let response;
+        let response
         switch (ticket.type) {
           case 'localization':
-            response = await this.runMessageLocAction(ticket, parentResponse);
-            break;
+            response = await this.runMessageLocAction(ticket, parentResponse)
+            break
 
           case 'message':
-            response = await this.runMessageAction(ticket, parentResponse);
-            break;
+            response = await this.runMessageAction(ticket, parentResponse)
+            break
 
           case 'sequence':
-            response = await this.runSequenceAction(ticket);
-            break;
+            response = await this.runSequenceAction(ticket)
+            break
 
           case 'step':
-            response = await this.runStepAction(ticket, parentResponse);
-            break;
+            response = await this.runStepAction(ticket, parentResponse)
+            break
 
           case 'transition':
-            response = await this.runTransitionAction(ticket, parentResponse);
-            break;
+            response = await this.runTransitionAction(ticket, parentResponse)
+            break
         }
 
-        const childrenResponses = [];
+        const childrenResponses = []
         if (ticket.children && ticket.children.length) {
           while (ticket.children.length) {
-            const childTicket = ticket.children.shift();
-            childrenResponses.push(await this.processTicket(childTicket, response));
+            const childTicket = ticket.children.shift()
+            childrenResponses.push(
+              await this.processTicket(childTicket, response)
+            )
           }
         }
 
@@ -435,39 +464,43 @@ export class SequenceSyncer {
             [ticket.type]: { ...ticket.payload[ticket.type], ...response }
           },
           children: childrenResponses || []
-        });
+        })
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 
-  private processTicketsByAction(tickets: SyncerTicket[], actions: string[] = []) {
+  private processTicketsByAction(
+    tickets: SyncerTicket[],
+    actions: string[] = []
+  ) {
     return new Promise<any>(async (resolve, reject) => {
-      const responses = [];
+      const responses = []
       for (const action of actions) {
-        const actionTicketsIndexes = [];
+        const actionTicketsIndexes = []
 
         tickets.forEach((t, index) => {
           if (t.action === action) {
-            actionTicketsIndexes.push(index);
+            actionTicketsIndexes.push(index)
           }
-        });
+        })
 
         const actionTickets = tickets.filter(
-          (t, index) => index === actionTicketsIndexes.find((aTI) => aTI === index)
-        );
+          (t, index) =>
+            index === actionTicketsIndexes.find((aTI) => aTI === index)
+        )
 
         const partialResponses = await bufferedRequests(
           actionTickets.map((aT) => this.processTicket(aT))
-        );
+        )
 
         partialResponses.forEach((response, index) => {
-          responses[actionTicketsIndexes[index]] = response;
-        });
+          responses[actionTicketsIndexes[index]] = response
+        })
       }
-      resolve(responses);
-    });
+      resolve(responses)
+    })
   }
 
   private resolveMessageTickets(
@@ -475,11 +508,11 @@ export class SequenceSyncer {
     opts: { forceAction?: TicketAction; transitionId?: string } = {}
   ): SyncerTicket[] {
     const tickets: SyncerTicket[] = payload.map((message) => {
-      const messageObject: any = message;
+      const messageObject: any = message
       if (Array.isArray(message.message)) {
         const firstMessage =
-          message.message[0] || ((message.message as any) as MessagePayloadItem);
-        const dominantAction = this.detectDominantAction(firstMessage.syncState);
+          message.message[0] || ((message.message as any) as MessagePayloadItem)
+        const dominantAction = this.detectDominantAction(firstMessage.syncState)
         return {
           action:
             opts.forceAction &&
@@ -489,10 +522,12 @@ export class SequenceSyncer {
           children: this.resolveMessageLocTickets(message.message),
           payload: { message: firstMessage, transitionId: opts.transitionId },
           type: 'message' as TicketType
-        };
+        }
       } else {
-        messageObject.message = message.message || message;
-        const dominantAction = this.detectDominantAction(messageObject.message.syncState);
+        messageObject.message = message.message || message
+        const dominantAction = this.detectDominantAction(
+          messageObject.message.syncState
+        )
         return {
           action:
             opts.forceAction &&
@@ -500,47 +535,52 @@ export class SequenceSyncer {
               ? opts.forceAction
               : dominantAction,
           children: [],
-          payload: { message: messageObject.message, transitionId: opts.transitionId },
+          payload: {
+            message: messageObject.message,
+            transitionId: opts.transitionId
+          },
           type: 'message' as TicketType
-        };
+        }
       }
-    });
+    })
 
-    return tickets;
+    return tickets
   }
 
-  private resolveMessageLocTickets(payload: MessagePayloadItem[] = []): SyncerTicket[] {
+  private resolveMessageLocTickets(
+    payload: MessagePayloadItem[] = []
+  ): SyncerTicket[] {
     const tickets = payload.map((message) => {
       return {
         type: 'localization' as TicketType,
         action: this.detectDominantAction(message.syncState),
         payload: { message: message }
-      };
-    });
+      }
+    })
 
-    return tickets;
+    return tickets
   }
 
   private resolveStructureTickets(sequenceStepResponse): SyncerTicket[] {
-    const tickets: SyncerTicket[] = [];
-    const children = sequenceStepResponse.children.map((c) => c);
-    const childrenCopy = children.slice();
-    const sequenceResponse = sequenceStepResponse.response;
+    const tickets: SyncerTicket[] = []
+    const children = sequenceStepResponse.children.map((c) => c)
+    const childrenCopy = children.slice()
+    const sequenceResponse = sequenceStepResponse.response
 
     this.resolveStructureTicketItem(
       childrenCopy.slice(),
       childrenCopy,
       sequenceResponse.transitions,
       tickets
-    );
+    )
 
     return tickets.sort((t) => {
       if (t.action === 'create') {
-        return -1;
+        return -1
       } else {
-        return 1;
+        return 1
       }
-    });
+    })
   }
 
   private resolveStructureTicketItem(
@@ -549,30 +589,31 @@ export class SequenceSyncer {
     transitions: Transition[],
     accumulator: SyncerTicket[] = []
   ): void {
-    const currentChildren = children.length > 1 ? children.pop() : undefined;
+    const currentChildren = children.length > 1 ? children.pop() : undefined
     if (currentChildren) {
       if (currentChildren.action === 'delete') {
         const deletedTransition = transitions.find(
           (t) => t.to.id === currentChildren.response.id
-        );
+        )
 
         const affectedTransition = transitions.find(
           (t) => t.from.id === currentChildren.response.id
-        );
+        )
 
         const affectedChild = affectedTransition
           ? allChildren.find((c) => c.response.id === affectedTransition.to.id)
-          : undefined;
+          : undefined
 
         const affectedTransitionTicket = accumulator.find(
-          (ticket) => ticket.payload.transition.from === currentChildren.response.id
-        );
+          (ticket) =>
+            ticket.payload.transition.from === currentChildren.response.id
+        )
 
         accumulator.push({
           action: 'no-action',
           payload: { transition: deletedTransition },
           type: 'transition'
-        });
+        })
 
         if (affectedTransition && !affectedTransitionTicket) {
           accumulator.push({
@@ -581,7 +622,8 @@ export class SequenceSyncer {
               transition: {
                 ...affectedTransition,
                 delay: affectedChild
-                  ? affectedChild.response.serverDelay || affectedChild.response.delay
+                  ? affectedChild.response.serverDelay ||
+                    affectedChild.response.delay
                   : affectedTransition.serverDelay ||
                     affectedTransition.delay ||
                     undefined,
@@ -590,16 +632,16 @@ export class SequenceSyncer {
               }
             },
             type: 'transition'
-          });
+          })
         } else if (affectedTransitionTicket) {
           const affectedTransitionTicketIndex = accumulator.findIndex(
             (ticket) =>
               ticket.payload.transition.id ===
               affectedTransitionTicket.payload.transition.id
-          );
+          )
 
           if (affectedTransitionTicketIndex > -1) {
-            accumulator.splice(affectedTransitionTicketIndex, 1);
+            accumulator.splice(affectedTransitionTicketIndex, 1)
           }
 
           accumulator.push({
@@ -612,33 +654,33 @@ export class SequenceSyncer {
               }
             },
             type: 'transition'
-          });
+          })
         }
       }
 
       const filteredChildren = children.filter(
         (c) => c.response.id !== currentChildren.response.id
-      );
+      )
       if (filteredChildren.length > 1) {
         this.resolveStructureTicketItem(
           allChildren,
           filteredChildren,
           transitions,
           accumulator
-        );
+        )
       }
     }
   }
 
   private resolveTickets(formValue: any): SyncerTicket[] {
-    const tickets: SyncerTicket[] = [];
-    const sequence: SyncPayload['sequence'] = formValue.sequence;
+    const tickets: SyncerTicket[] = []
+    const sequence: SyncPayload['sequence'] = formValue.sequence
     const sequenceTicket: SyncerTicket = {
       action: this.detectDominantAction(sequence.syncState),
       children: [],
       payload: { sequence },
       type: 'sequence'
-    };
+    }
 
     if (!formValue.sequence.id) {
       sequenceTicket.children.push({
@@ -652,7 +694,7 @@ export class SequenceSyncer {
           }
         },
         type: 'step'
-      });
+      })
     }
 
     sequenceTicket.children.push(
@@ -664,36 +706,40 @@ export class SequenceSyncer {
               : this.detectDominantAction(stepObject.step.syncState),
           payload: stepObject,
           type: 'step'
-        };
+        }
 
-        return stepTicket;
+        return stepTicket
       })
-    );
+    )
 
-    tickets.push(sequenceTicket);
+    tickets.push(sequenceTicket)
 
-    return tickets;
+    return tickets
   }
 
-  private resolveTransitionTickets(formValue: any, response: any): SyncerTicket[] {
-    const tickets: SyncerTicket[] = [];
-    const sequence: SyncPayload['sequence'] = formValue.sequence;
+  private resolveTransitionTickets(
+    formValue: any,
+    response: any
+  ): SyncerTicket[] {
+    const tickets: SyncerTicket[] = []
+    const sequence: SyncPayload['sequence'] = formValue.sequence
     const existingTransitions =
       sequence.transitions && sequence.transitions.length
         ? sequence.transitions.map((t) => t)
-        : [];
-    const states = response.children && response.children.length ? response.children : [];
+        : []
+    const states =
+      response.children && response.children.length ? response.children : []
 
     existingTransitions.forEach((eT) => {
       const state = states.find((s) =>
         s.response ? s.response.id === eT.to.id : s.id === eT.to.id
-      );
+      )
       eT.syncState.edited = state
         ? state.response
           ? state.response.syncState.edited
           : state.syncState.edited
-        : eT.syncState.edited;
-    });
+        : eT.syncState.edited
+    })
 
     const statesWithoutTransitions =
       states.filter(
@@ -701,16 +747,20 @@ export class SequenceSyncer {
           s.response.name !== 'root' &&
           !s.response.step.syncState.deleted &&
           !existingTransitions.find((t) => t.to.id === s.response.id)
-      ) || [];
+      ) || []
 
-    const updatedTransitions = existingTransitions.filter((t) => t.syncState.edited);
+    const updatedTransitions = existingTransitions.filter(
+      (t) => t.syncState.edited
+    )
 
-    const allTransitions = existingTransitions.filter((t) => !t.syncState.edited);
+    const allTransitions = existingTransitions.filter(
+      (t) => !t.syncState.edited
+    )
 
     if (!formValue.sequence.id) {
       states.forEach((state, index) => {
         if (index + 1 >= states.length) {
-          return;
+          return
         }
 
         tickets.push({
@@ -723,43 +773,49 @@ export class SequenceSyncer {
               delay: `${states[index + 1].response.step.serverDelay}`
             }
           }
-        });
-      });
+        })
+      })
 
-      return tickets;
+      return tickets
     } else {
       statesWithoutTransitions.forEach((state, index) => {
         const stateIndex = states.findIndex((s) =>
-          s.response ? s.response.id === state.response.id : s.id === state.response.id
-        );
+          s.response
+            ? s.response.id === state.response.id
+            : s.id === state.response.id
+        )
 
-        const previousState = states[stateIndex - 1];
+        const previousState = states[stateIndex - 1]
 
         tickets.push({
           action: 'create',
           payload: {
             transition: {
-              from: previousState.response ? previousState.response.id : previousState.id,
+              from: previousState.response
+                ? previousState.response.id
+                : previousState.id,
               to: state.response ? state.response.id : state.id,
               delay: `${state.response.step.serverDelay}`
             }
           },
           type: 'transition'
-        });
-      });
+        })
+      })
 
       updatedTransitions.forEach((transition) => {
         const transitionStepIndex = states.findIndex((s) =>
-          s.response ? s.response.id === transition.to.id : s.id === transition.to.id
-        );
+          s.response
+            ? s.response.id === transition.to.id
+            : s.id === transition.to.id
+        )
 
-        let transitionStep = states[transitionStepIndex];
+        let transitionStep = states[transitionStepIndex]
 
         transitionStep = transitionStep
           ? transitionStep.response || transitionStep
-          : null;
+          : null
 
-        const previousStep = states[transitionStepIndex - 1];
+        const previousStep = states[transitionStepIndex - 1]
 
         tickets.push({
           action: 'update',
@@ -779,61 +835,67 @@ export class SequenceSyncer {
             }
           },
           type: 'transition'
-        });
-      });
+        })
+      })
 
       allTransitions.forEach((transition) => {
         const transitionStepIndex = states.findIndex((s) =>
           s.response
             ? (s.response.step
                 ? !s.response.step.syncState.deleted
-                : !s.response.syncState.deleted) && s.response.id === transition.to.id
+                : !s.response.syncState.deleted) &&
+              s.response.id === transition.to.id
             : !s.step.syncState.deleted && s.id === transition.to.id
-        );
+        )
 
-        let transitionStep = states[transitionStepIndex];
+        let transitionStep = states[transitionStepIndex]
 
         transitionStep = transitionStep
           ? transitionStep.response || transitionStep
-          : null;
+          : null
 
         tickets.push({
           action: 'no-action',
           payload: {
             transition: {
               ...transition,
-              delay: transitionStep ? transitionStep.serverDelay : transition.delay
+              delay: transitionStep
+                ? transitionStep.serverDelay
+                : transition.delay
             }
           },
           type: 'transition'
-        });
-      });
+        })
+      })
 
-      const sortedTickets = [];
+      const sortedTickets = []
 
       states.forEach((state) => {
         const ticketIndex = tickets.findIndex(
           (t) =>
             (t.payload.transition.from.id || t.payload.transition.from) ===
             state.response.step.id
-        );
+        )
         if (ticketIndex > -1) {
-          sortedTickets.push(tickets.splice(ticketIndex, 1)[0]);
+          sortedTickets.push(tickets.splice(ticketIndex, 1)[0])
         }
-      });
+      })
 
       if (tickets.length) {
-        sortedTickets.push(...tickets);
+        sortedTickets.push(...tickets)
       }
 
-      return sortedTickets;
+      return sortedTickets
     }
   }
 
-  private runMessageAction(ticket: SyncerTicket, parentResponse: any = {}): Promise<any> {
+  private runMessageAction(
+    ticket: SyncerTicket,
+    parentResponse: any = {}
+  ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      let response;
-      const message = ticket.payload.message;
+      let response
+      const message = ticket.payload.message
       try {
         switch (ticket.action) {
           case 'update':
@@ -841,7 +903,7 @@ export class SequenceSyncer {
               await this.sequence.updateSequenceTriggerMetadata({
                 id: ticket.payload.message.id,
                 isActive: false
-              });
+              })
             } catch (error) {}
           case 'create':
             response = await this.sequence.createSequenceTrigger({
@@ -862,23 +924,24 @@ export class SequenceSyncer {
                 package: message.content.package || undefined,
                 header: message.content.header || undefined,
                 subject: message.content.subject || undefined,
-                title: message.content.subject || message.content.header || undefined
+                title:
+                  message.content.subject || message.content.header || undefined
               } as any
-            });
-            break;
+            })
+            break
 
           case 'delete':
             await this.sequence.updateSequenceTriggerMetadata({
               id: ticket.payload.message.id,
               isActive: false
-            });
-            break;
+            })
+            break
 
           case 'recreate':
             await this.sequence.updateSequenceTriggerMetadata({
               id: ticket.payload.message.id,
               isActive: false
-            });
+            })
 
             response = await this.sequence.createSequenceTrigger({
               organization: this.context.organizationId,
@@ -897,16 +960,17 @@ export class SequenceSyncer {
                   undefined,
                 header: message.content.header || undefined,
                 subject: message.content.subject || undefined,
-                title: message.content.subject || message.content.header || undefined
+                title:
+                  message.content.subject || message.content.header || undefined
               } as any
-            });
-            break;
+            })
+            break
         }
-        resolve(response || message);
+        resolve(response || message)
       } catch (error) {
-        resolve(response || message);
+        resolve(response || message)
       }
-    });
+    })
   }
 
   private runMessageLocAction(
@@ -915,9 +979,9 @@ export class SequenceSyncer {
   ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        let response;
-        const payload = ticket.payload;
-        const message = payload.message;
+        let response
+        const payload = ticket.payload
+        const message = payload.message
         switch (ticket.action) {
           case 'create':
           case 'update':
@@ -938,30 +1002,31 @@ export class SequenceSyncer {
                   undefined,
                 header: message.content.header || undefined,
                 subject: message.content.subject || undefined,
-                title: message.content.subject || message.content.header || undefined
+                title:
+                  message.content.subject || message.content.header || undefined
               }
-            });
-            break;
+            })
+            break
 
           case 'delete':
             await this.sequence.deleteSequenceTriggerLocale({
               id: message.id,
               locale: message.language,
               organization: this.context.organizationId
-            });
-            break;
+            })
+            break
         }
-        resolve(response || payload);
+        resolve(response || payload)
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 
   private runSequenceAction(ticket: SyncerTicket): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        let response;
+        let response
         switch (ticket.action) {
           case 'create':
             response = await this.sequence.createSequence({
@@ -970,29 +1035,32 @@ export class SequenceSyncer {
               createdBy: this.context.user.id,
               isActive: true,
               organization: this.context.organizationId
-            });
-            break;
+            })
+            break
 
           case 'update':
             await this.sequence.updateSequence({
               id: ticket.payload.sequence.id,
               name: ticket.payload.sequence.name,
               organization: this.context.organizationId
-            });
-            break;
+            })
+            break
         }
 
-        resolve(response || ticket.payload.sequence);
+        resolve(response || ticket.payload.sequence)
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 
-  private runStepAction(ticket: SyncerTicket, parentResponse: any = {}): Promise<any> {
+  private runStepAction(
+    ticket: SyncerTicket,
+    parentResponse: any = {}
+  ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        let response;
+        let response
         switch (ticket.action) {
           case 'create':
             response = await this.sequence.createSequenceState({
@@ -1000,26 +1068,28 @@ export class SequenceSyncer {
               name: ticket.payload.step.name,
               sequence: parentResponse.id,
               organization: this.context.organizationId
-            });
-            break;
+            })
+            break
 
           case 'delete':
-            await this.sequence.deleteSequenceState({ id: ticket.payload.step.id });
-            break;
+            await this.sequence.deleteSequenceState({
+              id: ticket.payload.step.id
+            })
+            break
 
           case 'update':
             await this.sequence.updateSequenceState({
               id: ticket.payload.step.id,
               name: ticket.payload.step.name,
               organization: this.context.organizationId
-            } as any);
-            break;
+            } as any)
+            break
         }
-        resolve(response || { ...ticket.payload.step, ...response });
+        resolve(response || { ...ticket.payload.step, ...response })
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 
   private runTransitionAction(
@@ -1027,15 +1097,15 @@ export class SequenceSyncer {
     params: { from: string; to: string }
   ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      let response;
+      let response
       try {
         switch (ticket.action) {
           case 'delete':
             await this.sequence.deleteSeqTransition({
               id: ticket.payload.transition.id,
               organization: this.context.organizationId
-            });
-            break;
+            })
+            break
           case 'create':
             response = await this.sequence.createSeqTransition({
               createdBy: this.context.user.id,
@@ -1043,33 +1113,33 @@ export class SequenceSyncer {
               organization: this.context.organizationId,
               from: ticket.payload.transition.from || undefined,
               to: ticket.payload.transition.to || undefined
-            });
-            break;
+            })
+            break
 
           case 'update':
             await this.sequence.deleteSeqTransition({
               id: ticket.payload.transition.id,
               organization: this.context.organizationId
-            });
+            })
             response = await this.sequence.createSeqTransition({
               createdBy: this.context.user.id,
               delay: ticket.payload.transition.delay || undefined,
               organization: this.context.organizationId,
               from: ticket.payload.transition.from.id || undefined,
               to: ticket.payload.transition.to.id || undefined
-            });
-            break;
+            })
+            break
         }
-        resolve(response || ticket.payload.transition);
+        resolve(response || ticket.payload.transition)
       } catch (error) {
         resolve(
           response || {
             ...ticket.payload.transition,
             action: ticket.action === 'delete' ? ticket.action : 'failed-update'
           }
-        );
-        reject(error);
+        )
+        reject(error)
       }
-    });
+    })
   }
 }

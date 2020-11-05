@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { ContextService, CurrentAccount } from '@app/service';
-import { Subject } from 'rxjs';
+import { Component, Input, OnInit, Output } from '@angular/core'
+import { ContextService, CurrentAccount } from '@app/service'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'ccr-user-card',
@@ -8,22 +8,22 @@ import { Subject } from 'rxjs';
 })
 export class UserCardComponent implements OnInit {
   @Input()
-  user: any;
+  user: any
   @Input()
-  showRemoveButton: boolean = true;
+  showRemoveButton = true
 
   @Output()
-  remove: Subject<string> = new Subject<string>();
+  remove: Subject<string> = new Subject<string>()
 
-  currentAccount: CurrentAccount;
+  currentAccount: CurrentAccount
 
   constructor(private context: ContextService) {}
 
   ngOnInit(): void {
-    this.currentAccount = this.context.user;
+    this.currentAccount = this.context.user
   }
 
   onRemove(id: string): void {
-    this.remove.next(id);
+    this.remove.next(id)
   }
 }

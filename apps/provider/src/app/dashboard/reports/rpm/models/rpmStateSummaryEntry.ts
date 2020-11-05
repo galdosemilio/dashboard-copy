@@ -5,46 +5,50 @@ import {
   OrganizationWithoutShortcode,
   RPMStateSummaryBillingItem,
   RPMStateSummaryItem
-} from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils';
-import * as moment from 'moment';
+} from '@coachcare/npm-api'
+import { _ } from '@app/shared/utils'
+import * as moment from 'moment'
 
-const MONITORING_PERIOD_SECONDS = 1200;
-const MAX_99458_MINUTES = 40;
+const MONITORING_PERIOD_SECONDS = 1200
+const MAX_99458_MINUTES = 40
 
 export type RPMMetricType =
   | 'transmissions'
   | 'monitoring'
   | 'liveInteraction'
-  | 'relatedCodeRequirementsNotMet';
+  | 'relatedCodeRequirementsNotMet'
 
 interface RPMStateSummaryBilling extends RPMStateSummaryBillingItem {
-  hasClaims: boolean;
-  hasCodeRequirements: boolean;
-  remainingDays: number;
+  hasClaims: boolean
+  hasCodeRequirements: boolean
+  remainingDays: number
 }
 
 export class RPMStateSummaryEntry implements RPMStateSummaryItem {
-  account: AccountData;
-  anyCodeLastEligibleAt: string;
-  billing: RPMStateSummaryBilling[];
-  changedAt: string;
-  id: string;
-  organization: OrganizationWithoutShortcode;
-  remainingDays: number;
-  rpm: ActiveRPMItem | InactiveRPMItem;
+  account: AccountData
+  anyCodeLastEligibleAt: string
+  billing: RPMStateSummaryBilling[]
+  changedAt: string
+  id: string
+  organization: OrganizationWithoutShortcode
+  remainingDays: number
+  rpm: ActiveRPMItem | InactiveRPMItem
 
-  constructor(args: any, allBillings: RPMStateSummaryBillingItem[], asOf?: string) {
-    this.account = args.account;
-    this.anyCodeLastEligibleAt = args.anyCodeLastEligibleAt;
+  constructor(
+    args: any,
+    allBillings: RPMStateSummaryBillingItem[],
+    asOf?: string
+  ) {
+    this.account = args.account
+    this.anyCodeLastEligibleAt = args.anyCodeLastEligibleAt
     this.billing = allBillings.map(
       (bill) => ({ code: bill.code, eligibility: {} } as any)
-    );
+    )
 
     args.billing.forEach((billing) => {
       const allBillingsIndex = allBillings.findIndex(
         (bill) => bill.code === billing.code
-      );
+      )
 
       this.billing[allBillingsIndex] = {
         ...billing,
@@ -53,7 +57,8 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
           next: this.calculateNextObject(billing.eligibility.next)
         },
         remainingDays:
-          billing.eligibility.next && billing.eligibility.next.earliestEligibleAt
+          billing.eligibility.next &&
+          billing.eligibility.next.earliestEligibleAt
             ? Math.abs(
                 moment(billing.eligibility.next.earliestEligibleAt).diff(
                   moment(asOf).startOf('day'),
@@ -61,22 +66,23 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
                 )
               )
             : 0
-      };
+      }
 
       this.billing.forEach((billingEntry) => {
         billingEntry.hasCodeRequirements =
           billingEntry.eligibility.next &&
           billingEntry.eligibility.next.relatedCodeRequirementsNotMet &&
-          billingEntry.eligibility.next.relatedCodeRequirementsNotMet.length > 0;
+          billingEntry.eligibility.next.relatedCodeRequirementsNotMet.length > 0
 
         billingEntry.hasClaims =
-          billingEntry.eligibility.last && billingEntry.eligibility.last.count > 0;
-      });
-    });
+          billingEntry.eligibility.last &&
+          billingEntry.eligibility.last.count > 0
+      })
+    })
 
-    this.changedAt = args.changedAt;
-    this.id = args.account.id;
-    this.organization = args.organization;
+    this.changedAt = args.changedAt
+    this.id = args.account.id
+    this.organization = args.organization
     this.rpm = {
       ...args.rpm,
       deviceProvidedAtFormatted: args.rpm.deviceProvidedAt
@@ -85,27 +91,30 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
       educationProvidedAtFormatted: args.rpm.educationProvidedAt
         ? moment(args.rpm.educationProvidedAt).format('MM/DD/YYYY')
         : 'No'
-    };
+    }
   }
 
   private calculateNextObject(
     currentNext: RPMStateSummaryBillingItem['eligibility']['next']
   ): any {
-    const parsedNext = {};
+    const parsedNext = {}
 
     if (!currentNext) {
-      return;
+      return
     }
 
     Object.keys(currentNext).forEach((key) => {
       if (typeof currentNext[key] !== 'object') {
-        parsedNext[key] = currentNext[key];
+        parsedNext[key] = currentNext[key]
       }
 
-      parsedNext[key] = this.getRemainingMetric(currentNext[key], key as RPMMetricType);
-    });
+      parsedNext[key] = this.getRemainingMetric(
+        currentNext[key],
+        key as RPMMetricType
+      )
+    })
 
-    return { ...parsedNext };
+    return { ...parsedNext }
   }
 
   private getRemainingMetric(raw: any, type: RPMMetricType) {
@@ -116,7 +125,7 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
       units: '',
       remainingRaw: 0,
       ...raw
-    };
+    }
 
     switch (type) {
       case 'transmissions':
@@ -127,7 +136,7 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
               ? raw.distinctDates.required - raw.distinctDates.count
               : 0,
           transmissionsOf16: raw.distinctDates.count >= 16 ? 'Yes' : 'No'
-        };
+        }
 
       case 'monitoring':
         if (
@@ -138,42 +147,47 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
             remaining: 0,
             before20: 0,
             after20: raw.total.seconds.elapsed
-              ? Math.min(Math.floor(raw.total.seconds.elapsed / 60), MAX_99458_MINUTES)
+              ? Math.min(
+                  Math.floor(raw.total.seconds.elapsed / 60),
+                  MAX_99458_MINUTES
+                )
               : 0
-          };
+          }
         }
 
         returnValue.remaining =
           raw.total.seconds.tracked <= raw.total.seconds.required
-            ? Math.ceil((raw.total.seconds.required - raw.total.seconds.tracked) / 60)
-            : 0;
+            ? Math.ceil(
+                (raw.total.seconds.required - raw.total.seconds.tracked) / 60
+              )
+            : 0
 
         returnValue.before20 = Math.floor(
           Math.min(raw.total.seconds.tracked, MONITORING_PERIOD_SECONDS) / 60
-        );
+        )
 
         returnValue.after20 = Math.min(
           Math.floor(raw.total.seconds.elapsed / 60),
           MAX_99458_MINUTES
-        );
+        )
 
-        returnValue.units = _('UNIT.MINUTE_CONDENSED');
-        break;
+        returnValue.units = _('UNIT.MINUTE_CONDENSED')
+        break
 
       case 'liveInteraction':
         return {
           ...raw,
           remaining: raw.count <= raw.required ? raw.required - raw.count : 0,
           hasInteraction: raw.count >= 1 ? 'Yes' : 'No'
-        };
+        }
 
       case 'relatedCodeRequirementsNotMet':
-        return [...raw];
+        return [...raw]
 
       default:
-        return raw;
+        return raw
     }
 
-    return returnValue;
+    return returnValue
   }
 }

@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core'
 
-import { AlertsDatabase, AlertTypesDataSource } from '@app/dashboard/alerts/services';
-import { ContextService, EventsService, NotifierService } from '@app/service';
-import { OrganizationWithAddress } from '@app/shared/selvera-api';
+import {
+  AlertsDatabase,
+  AlertTypesDataSource
+} from '@app/dashboard/alerts/services'
+import { ContextService, EventsService, NotifierService } from '@app/service'
+import { OrganizationWithAddress } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-alerts-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class AlertsSettingsComponent implements OnInit {
-  source: AlertTypesDataSource;
+export class AlertsSettingsComponent implements OnDestroy, OnInit {
+  source: AlertTypesDataSource
 
-  clinic: Partial<OrganizationWithAddress> = {};
+  clinic: Partial<OrganizationWithAddress> = {}
 
   constructor(
     private context: ContextService,
@@ -23,20 +26,24 @@ export class AlertsSettingsComponent implements OnInit {
 
   ngOnInit() {
     // this.bus.trigger('organizations.disable-all');
-    this.bus.trigger('right-panel.deactivate');
+    this.bus.trigger('right-panel.deactivate')
 
     this.context.organization$.subscribe(() => {
-      this.clinic = { name: this.context.organization.name };
-    });
+      this.clinic = { name: this.context.organization.name }
+    })
 
-    this.source = new AlertTypesDataSource(this.notifier, this.database, this.context);
+    this.source = new AlertTypesDataSource(
+      this.notifier,
+      this.database,
+      this.context
+    )
 
     this.source.addRequired(this.context.organization$, () => ({
       organization: this.context.organizationId
-    }));
+    }))
   }
 
   ngOnDestroy() {
-    this.source.disconnect();
+    this.source.disconnect()
   }
 }

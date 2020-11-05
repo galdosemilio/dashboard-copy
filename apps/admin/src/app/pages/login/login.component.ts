@@ -4,7 +4,7 @@ import { MatDialog } from '@coachcare/common/material'
 import { ActivatedRoute } from '@angular/router'
 import { MFACodeInputMode } from '@board/shared/mfa-code-input'
 import {
-  Account,
+  AccountProvider,
   AccountTypeIds,
   DeviceTypeIds,
   LoginSessionRequest,
@@ -60,7 +60,7 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
 
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
-    private account: Account,
+    private account: AccountProvider,
     private builder: FormBuilder,
     private context: ContextService,
     private cookie: CookieService,
@@ -137,10 +137,15 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       this.isLoggingIn = true
       this.session
         .login(request as any) // MERGETODO: CHECK THIS TYPE!!!
-        .then((response) => {
+        .then(async (response) => {
           if (response.mfa) {
             this.detectMFA(response as any) // MERGETODO: CHECK THIS TYPE!!!
+          } else {
+            const checkResponse = await this.session.check()
+            const account = await this.account.getSingle(checkResponse.id)
+            this.store.dispatch(new SessionActions.Login(account))
           }
+
           // let the store effect take care
           this.isLoggingIn = false
         })

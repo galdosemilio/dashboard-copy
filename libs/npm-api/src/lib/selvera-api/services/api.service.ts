@@ -3,7 +3,6 @@
  */
 
 import { Inject, Injectable } from '@angular/core'
-import { ApiEnvironment, API_ENVIRONMENT } from '@coachcare/backend/shared'
 import axios, { AxiosResponse } from 'axios'
 import { isEmpty, uniq } from 'lodash'
 import * as qs from 'qs'
@@ -11,6 +10,7 @@ import { Subject } from 'rxjs'
 import * as io from 'socket.io-client'
 
 import { Config, Environment, getConfig } from '../../config'
+import { ApiEnvironment, API_ENVIRONMENT } from '../model'
 import { AccountTypeId } from '../providers/account/entities'
 import { CcrRol, CcrRolesMap } from '../providers/common/types'
 import { LoginSessionResponse } from '../providers/session/responses'
@@ -89,7 +89,7 @@ class ApiService {
    * @returns string
    */
   public getUrl(path = '/', version = '1.0') {
-    return `${this.config.apiUrl}${version}${path}`
+    return `${this.apiUrl}${version}${path}`
   }
 
   /**
@@ -143,7 +143,7 @@ class ApiService {
       }
     }
     if (tokenString !== '') {
-      return io(`${this.config.apiUrl}websocket`, {
+      return io(`${this.apiUrl}websocket`, {
         transportOptions: {
           polling: {
             extraHeaders: { authorization: tokenString }
@@ -151,7 +151,7 @@ class ApiService {
         }
       })
     } else {
-      return io(`${this.config.apiUrl}websocket`)
+      return io(`${this.apiUrl}websocket`)
     }
   }
 
@@ -208,7 +208,7 @@ class ApiService {
       }
 
       axios
-        .request(apiOptions as any) // MERGETODO: CHECK THIS TYPE!!!
+        .request(apiOptions) // MERGETODO: CHECK THIS TYPE!!!
         .then((response) => {
           if (response.status === 204) {
             resolve(true)

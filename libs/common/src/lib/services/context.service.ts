@@ -8,7 +8,7 @@ import {
   AccountSingle,
   AccountTypeIds,
   AllOrgPermissions,
-  Organization,
+  OrganizationProvider,
   OrganizationPreference,
   OrganizationPreferenceSingle,
   OrgEntity
@@ -52,7 +52,7 @@ export class ContextService {
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
     private accpref: AccountPreference,
-    private org: Organization,
+    private org: OrganizationProvider,
     private orgpref: OrganizationPreference,
     private cookie: CookieService,
     private lang: LanguageService,
@@ -323,7 +323,7 @@ export class ContextService {
   organizations: Array<SelectedOrganization> = []
 
   /**
-   * Current Organization
+   * Current OrganizationProvider
    */
   organization$ = new BehaviorSubject<SelectedOrganization>(
     {} as SelectedOrganization

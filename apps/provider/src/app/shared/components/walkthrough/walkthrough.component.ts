@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { WalkthroughService } from '@app/service';
+import { Component, Input } from '@angular/core'
+import { WalkthroughService } from '@app/service'
 
 @Component({
   selector: 'ccr-walkthrough',
@@ -7,12 +7,14 @@ import { WalkthroughService } from '@app/service';
   styleUrls: ['./walkthrough.component.scss']
 })
 export class WalkthroughComponent {
-  @Input() guide: string;
-  @Input() autoClose: boolean = true;
+  @Input() guide: string
+  @Input() autoClose = true
 
   constructor(private walkthrough: WalkthroughService) {}
 
   public openDialog(): void {
-    this.walkthrough.openWalkthrough(this.guide, { shouldAutoClose: this.autoClose });
+    this.walkthrough.openWalkthrough(this.guide, {
+      shouldAutoClose: this.autoClose
+    })
   }
 }

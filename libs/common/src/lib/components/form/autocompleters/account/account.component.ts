@@ -23,7 +23,7 @@ import {
   MatAutocompleteTrigger
 } from '@coachcare/common/material'
 import {
-  Account,
+  AccountProvider,
   AccountAccessData,
   AccountTypeId,
   AccountFullData,
@@ -106,7 +106,7 @@ export class AccountAutocompleterComponent
     @SkipSelf()
     private parent: ControlContainer,
     private translator: TranslateService,
-    private accounts: Account
+    private accounts: AccountProvider
   ) {}
 
   ngOnInit() {

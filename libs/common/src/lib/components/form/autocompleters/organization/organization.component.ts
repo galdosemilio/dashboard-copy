@@ -22,7 +22,7 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger
 } from '@coachcare/common/material'
-import { OrgAccessRequest, Organization } from '@coachcare/npm-api'
+import { OrgAccessRequest, OrganizationProvider } from '@coachcare/npm-api'
 import { AutocompleterOption } from '@coachcare/common/shared'
 import { find, result } from 'lodash'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -86,7 +86,7 @@ export class OrganizationAutocompleterComponent
     @Host()
     @SkipSelf()
     private parent: ControlContainer,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   ngOnInit() {

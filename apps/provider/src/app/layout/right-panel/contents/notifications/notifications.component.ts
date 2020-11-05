@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment-timezone';
+import { Component, OnInit } from '@angular/core'
+import * as moment from 'moment-timezone'
 
-import { NotificationsDataService } from '@app/layout/right-panel/services';
-import { ConfigService, ContextService, NotifierService } from '@app/service';
-import { FetchAllMeetingRequest } from '@app/shared/selvera-api';
+import { NotificationsDataService } from '@app/layout/right-panel/services'
+import { ConfigService, ContextService, NotifierService } from '@app/service'
+import { FetchAllMeetingRequest } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-rightpanel-notifications',
@@ -11,8 +11,8 @@ import { FetchAllMeetingRequest } from '@app/shared/selvera-api';
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent implements OnInit {
-  dateSections: Array<any> = [];
-  isLoading = true;
+  dateSections: Array<any> = []
+  isLoading = true
 
   constructor(
     private config: ConfigService,
@@ -22,7 +22,7 @@ export class NotificationsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getMeetings();
+    this.getMeetings()
   }
 
   private getMeetings(): void {
@@ -33,7 +33,7 @@ export class NotificationsComponent implements OnInit {
         start: moment().toISOString(),
         end: moment().endOf('year').toISOString()
       }
-    };
+    }
     this.dataService
       .getMeetings(request)
       .then((res) => {
@@ -41,9 +41,9 @@ export class NotificationsComponent implements OnInit {
           res,
           null,
           this.config.get('app.limit.notifications', 12)
-        );
-        this.isLoading = false;
+        )
+        this.isLoading = false
       })
-      .catch((err) => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err))
   }
 }

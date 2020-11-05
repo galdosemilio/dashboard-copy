@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
-import { ContextService, EventsService, NotifierService } from '@app/service';
-import { AccSingleResponse } from '@app/shared/selvera-api';
+import { ContextService, EventsService } from '@app/service'
+import { AccSingleResponse } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-dieter-messages',
@@ -9,13 +9,13 @@ import { AccSingleResponse } from '@app/shared/selvera-api';
   styleUrls: ['./messages.component.scss']
 })
 export class DieterMessagesComponent implements OnInit {
-  account: AccSingleResponse;
+  account: AccSingleResponse
 
   constructor(public context: ContextService, private bus: EventsService) {}
 
   ngOnInit() {
-    this.account = this.context.user;
+    this.account = this.context.user
 
-    this.bus.trigger('right-panel.component.set', 'reminders');
+    this.bus.trigger('right-panel.component.set', 'reminders')
   }
 }

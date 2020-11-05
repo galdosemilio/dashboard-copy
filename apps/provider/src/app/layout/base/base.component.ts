@@ -1,33 +1,40 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core'
 
-import { CCRPalette } from '@app/config';
-import { UILayoutState, UIState } from '@app/layout/store';
-import { FetchInitiatedCalls } from '@app/layout/store/call/call.action';
-import { EventsService } from '@app/service';
-import { ContextService } from '@app/service/context.service';
-import { TranslationsObject } from '@app/shared';
-import { Store } from '@ngrx/store';
-import { Conference } from 'selvera-api';
+import { CCRPalette } from '@app/config'
+import { UILayoutState, UIState } from '@app/layout/store'
+import { FetchInitiatedCalls } from '@app/layout/store/call/call.action'
+import { EventsService } from '@app/service'
+import { ContextService } from '@app/service/context.service'
+import { TranslationsObject } from '@app/shared'
+import { Store } from '@ngrx/store'
+import { Conference } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-layout-base',
   templateUrl: './base.component.html'
 })
-export class LayoutBaseComponent {
+export class LayoutBaseComponent implements AfterViewInit, OnInit {
   @Input()
-  layout: UILayoutState;
+  layout: UILayoutState
   @Input()
-  lang: string;
+  lang: string
   @Input()
-  palette: CCRPalette;
+  palette: CCRPalette
   @Input()
-  translations: TranslationsObject = {};
+  translations: TranslationsObject = {}
 
   @Output()
-  openMenu = new EventEmitter<void>();
+  openMenu = new EventEmitter<void>()
 
-  panelEnabled: boolean = true;
-  showVideoRating: boolean = false;
+  panelEnabled = true
+  showVideoRating = false
 
   constructor(
     private context: ContextService,
@@ -44,27 +51,27 @@ export class LayoutBaseComponent {
         organization: this.context.organizationId,
         status: 'in-progress'
       })
-    );
-    this.callNotificationService.listenForCallNotifications();
+    )
+    this.callNotificationService.listenForCallNotifications()
 
     this.context.orphanedAccount$.subscribe((isOrphaned) => {
-      this.panelEnabled = !isOrphaned;
-    });
+      this.panelEnabled = !isOrphaned
+    })
 
     this.events.listen(
       'videoconferencing.ratingWindow.setState',
       this.setRatingWindowState.bind(this)
-    );
+    )
   }
 
   ngAfterViewInit() {}
 
   menuOpen(e: Event) {
-    this.openMenu.next();
-    e.stopPropagation();
+    this.openMenu.next()
+    e.stopPropagation()
   }
 
   private setRatingWindowState(openState: boolean = false): void {
-    this.showVideoRating = openState;
+    this.showVideoRating = openState
   }
 }

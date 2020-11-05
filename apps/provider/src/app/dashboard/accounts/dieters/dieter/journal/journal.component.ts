@@ -4,31 +4,30 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { resolveConfig } from '@app/config/section/utils';
+  ViewEncapsulation
+} from '@angular/core'
+import { ActivatedRoute, ParamMap } from '@angular/router'
+import { resolveConfig } from '@app/config/section/utils'
 import {
   ContextService,
   EventsService,
-  SelectedOrganization,
-} from '@app/service';
-import { DateNavigator, DateNavigatorOutput } from '@app/shared';
-import { FetchGoalResponse } from '@app/shared/selvera-api';
-import { unitOfTime } from 'moment';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Authentication } from 'selvera-api';
+  SelectedOrganization
+} from '@app/service'
+import { DateNavigator, DateNavigatorOutput } from '@app/shared'
+import { Authentication, FetchGoalResponse } from '@coachcare/npm-api'
+import { unitOfTime } from 'moment'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
 @Component({
   selector: 'app-dieter-journal',
   templateUrl: './journal.component.html',
   styleUrls: ['./journal.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class DieterJournalComponent implements OnInit, OnDestroy {
-  private DEFAULT_TIMEFRAME: unitOfTime.DurationConstructor = 'week';
+  private DEFAULT_TIMEFRAME: unitOfTime.DurationConstructor = 'week'
   // controls with their config
-  hiddenComponents = [];
+  hiddenComponents = []
   components = [
     'food',
     'levl',
@@ -37,19 +36,19 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
     'water',
     'exercise',
     'metrics',
-    'pain',
-  ];
-  componentsWithTimeframe = ['exercise'];
-  component = 'food';
-  timeframe: unitOfTime.DurationConstructor = this.DEFAULT_TIMEFRAME;
-  goals: FetchGoalResponse;
-  dates: DateNavigatorOutput = {};
+    'pain'
+  ]
+  componentsWithTimeframe = ['exercise']
+  component = 'food'
+  timeframe: unitOfTime.DurationConstructor = this.DEFAULT_TIMEFRAME
+  goals: FetchGoalResponse
+  dates: DateNavigatorOutput = {}
 
-  hasFoodKeys: number;
-  hasLevl = false;
+  hasFoodKeys: number
+  hasLevl = false
 
   @ViewChild(DateNavigator, { static: true })
-  dateNavigator: DateNavigator;
+  dateNavigator: DateNavigator
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -63,12 +62,10 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
     this.context.organization$
       .pipe(untilDestroyed(this))
       .subscribe((organization: SelectedOrganization) => {
-        const config = resolveConfig('JOURNAL.HIDDEN_TABS', organization);
-        this.hiddenComponents = Object.keys(config).length
-          ? config.slice()
-          : [];
-      });
-    this.hasFoodKeys = await this.context.orgHasFoodMode('Key-based');
+        const config = resolveConfig('JOURNAL.HIDDEN_TABS', organization)
+        this.hiddenComponents = Object.keys(config).length ? config.slice() : []
+      })
+    this.hasFoodKeys = await this.context.orgHasFoodMode('Key-based')
 
     // TODO move to resolver and manage the component access
     this.authentication.available(this.context.accountId).then((res) => {
@@ -76,40 +73,40 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
         (v) => v.service === 'levl' && typeof v.token !== 'undefined'
       ).length
         ? true
-        : false;
-    });
+        : false
+    })
 
     this.route.parent.data.forEach((data: any) => {
-      this.goals = data.goals;
-    });
+      this.goals = data.goals
+    })
 
     // component initialization
     this.route.paramMap.subscribe((params: ParamMap) => {
-      const s = params.get('s');
-      this.section = this.components.indexOf(s) >= 0 ? s : this.component;
-    });
+      const s = params.get('s')
+      this.section = this.components.indexOf(s) >= 0 ? s : this.component
+    })
 
-    this.bus.trigger('right-panel.component.set', 'reminders');
+    this.bus.trigger('right-panel.component.set', 'reminders')
   }
 
   ngOnDestroy() {}
 
   get section(): string {
-    return this.component;
+    return this.component
   }
   set section(target: string) {
-    this.timeframe = this.DEFAULT_TIMEFRAME;
-    this.dateNavigator.updateTimeframe(this.timeframe);
-    this.component = target;
+    this.timeframe = this.DEFAULT_TIMEFRAME
+    this.dateNavigator.updateTimeframe(this.timeframe)
+    this.component = target
   }
 
   public selectedDate(dates: DateNavigatorOutput): void {
-    this.dates = dates;
+    this.dates = dates
     // prevents exception when changing timeframe from child component
-    this.cdr.detectChanges();
+    this.cdr.detectChanges()
   }
 
   public shouldShowTimeframe(component: string) {
-    return this.componentsWithTimeframe.indexOf(component) !== -1;
+    return this.componentsWithTimeframe.indexOf(component) !== -1
   }
 }

@@ -7,9 +7,9 @@ import {
   Input,
   OnInit,
   Output
-} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BindForm, BINDFORM_TOKEN } from '@app/shared';
+} from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 
 @Component({
   selector: 'app-content-file-explorer-inline-editor',
@@ -29,61 +29,64 @@ export class FileExplorerInlineEditorComponent implements BindForm, OnInit {
       this.type === 'default' &&
       !this.elementRef.nativeElement.contains($event.target)
     ) {
-      this.cancel.emit();
+      this.cancel.emit()
     }
   }
 
   @Input()
   set content(c: any) {
     if (c !== undefined) {
-      this._content = c;
-      this.form.patchValue({ value: c });
+      this._content = c
+      this.form.patchValue({ value: c })
     }
   }
 
   get content(): any {
-    return this._content;
+    return this._content
   }
   @Input()
-  type: string = 'default';
+  type = 'default'
   @Input()
-  required: boolean = false;
+  required = false
 
   @Output()
-  save: EventEmitter<void> = new EventEmitter<void>();
+  save: EventEmitter<void> = new EventEmitter<void>()
   @Output()
-  cancel: EventEmitter<void> = new EventEmitter<void>();
+  cancel: EventEmitter<void> = new EventEmitter<void>()
 
-  public form: FormGroup;
+  public form: FormGroup
 
-  private _content: any;
+  private _content: any
 
-  constructor(private elementRef: ElementRef, private formBuilder: FormBuilder) {
-    this.createForm();
+  constructor(
+    private elementRef: ElementRef,
+    private formBuilder: FormBuilder
+  ) {
+    this.createForm()
   }
 
   ngOnInit(): void {
     if (this.required) {
-      this.form.controls.value.setValidators([Validators.required]);
+      this.form.controls.value.setValidators([Validators.required])
     }
   }
 
   keyDown($event: any) {
     switch ($event.key) {
       case 'Escape':
-        this.cancel.emit();
-        break;
+        this.cancel.emit()
+        break
       case 'Enter':
-        this.save.emit();
-        break;
+        this.save.emit()
+        break
     }
 
-    $event.stopPropagation();
+    $event.stopPropagation()
   }
 
   private createForm(): void {
     this.form = this.formBuilder.group({
       value: ['']
-    });
+    })
   }
 }

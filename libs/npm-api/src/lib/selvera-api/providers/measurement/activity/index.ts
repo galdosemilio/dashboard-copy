@@ -1,7 +1,5 @@
-import { SessionState } from '@coachcare/backend/store/session'
-import { Store } from '@ngrx/store'
 import * as moment from 'moment-timezone'
-import { Account, ApiService } from '../../../services/index'
+import { ApiService } from '../../../services/api.service'
 import { AccSingleResponse } from '../../account/responses/index'
 import { User } from '../../user/index'
 
@@ -34,12 +32,8 @@ class MeasurementActivity {
   /**
    * Init Api Service
    */
-  public constructor(
-    private readonly store: Store<SessionState.State>,
-    private readonly apiService: ApiService,
-    private readonly account: Account
-  ) {
-    this.user = new User(store, apiService, account)
+  public constructor(private readonly apiService: ApiService) {
+    this.user = new User(apiService)
   }
 
   /**

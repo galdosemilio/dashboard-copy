@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core';
-import { MeasurementActivity, MeasurementBody, MeasurementSleep } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import {
+  MeasurementActivity,
+  MeasurementBody,
+  MeasurementSleep
+} from '@coachcare/npm-api'
 
 import {
   FetchActivitySummaryRequest,
@@ -11,7 +15,7 @@ import {
   FetchBodySummaryResponse,
   FetchSleepMeasurementSummaryRequest,
   FetchSleepMeasurementSummaryResponse
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class DieterDataService {
@@ -27,7 +31,7 @@ export class DieterDataService {
   public getDashChartData(
     request: FetchBodySummaryRequest
   ): Promise<FetchBodySummaryResponse> {
-    return this.measurementBody.fetchSummary(request);
+    return this.measurementBody.fetchSummary(request)
   }
 
   //
@@ -36,7 +40,7 @@ export class DieterDataService {
   public getActivitySummary(
     request: FetchActivitySummaryRequest
   ): Promise<FetchActivitySummaryResponse> {
-    return this.measurementActivity.fetchSummary(request);
+    return this.measurementActivity.fetchSummary(request)
   }
 
   //
@@ -45,6 +49,6 @@ export class DieterDataService {
   public getSleepSummary(
     request: FetchSleepMeasurementSummaryRequest
   ): Promise<FetchSleepMeasurementSummaryResponse> {
-    return this.measurementSleep.fetchSummary(request);
+    return this.measurementSleep.fetchSummary(request)
   }
 }

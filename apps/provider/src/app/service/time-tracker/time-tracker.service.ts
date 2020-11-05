@@ -1,50 +1,54 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { NavigationStart, Router, RouterEvent } from '@angular/router';
-import { STORAGE_TIME_TRACKER_STASH } from '@app/config';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { BehaviorSubject } from 'rxjs';
-import { Account } from 'selvera-api';
-import { ContextService, SelectedOrganization } from '../context.service';
-import { NotifierService } from '../notifier.service';
-import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts';
+import { Injectable, OnDestroy } from '@angular/core'
+import { NavigationStart, Router, RouterEvent } from '@angular/router'
+import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { BehaviorSubject } from 'rxjs'
+import { AccountProvider } from '@coachcare/npm-api'
+import { ContextService, SelectedOrganization } from '../context.service'
+import { NotifierService } from '../notifier.service'
+import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
 
 @Injectable()
 export class TimeTrackerService implements OnDestroy {
   public currentRoute$: BehaviorSubject<TimeTrackerRoute> = new BehaviorSubject<
     TimeTrackerRoute
-  >(undefined);
+  >(undefined)
 
   set currentRoute(route: TimeTrackerRoute) {
-    this.currentRoute$.next(route);
+    this.currentRoute$.next(route)
   }
 
   get currentRoute(): TimeTrackerRoute {
-    return this.currentRoute$.getValue();
+    return this.currentRoute$.getValue()
   }
 
-  private currentOrganization: SelectedOrganization;
-  private trackingTimeStart: Date;
+  private currentOrganization: SelectedOrganization
+  private trackingTimeStart: Date
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private notifier: NotifierService,
     private router: Router
   ) {
-    this.routeEventHandler = this.routeEventHandler.bind(this);
-    this.forceCommit = this.forceCommit.bind(this);
-    this.currentOrganization = this.context.organization;
-    this.router.events.pipe(untilDestroyed(this)).subscribe(this.routeEventHandler);
-    this.commitStashedTime();
-    this.context.organization$.pipe(untilDestroyed(this)).subscribe(async () => {
-      try {
-        await this.forceCommit();
-      } catch (error) {
-        this.notifier.error(error);
-      } finally {
-        this.currentOrganization = this.context.organization;
-      }
-    });
+    this.routeEventHandler = this.routeEventHandler.bind(this)
+    this.forceCommit = this.forceCommit.bind(this)
+    this.currentOrganization = this.context.organization
+    this.router.events
+      .pipe(untilDestroyed(this))
+      .subscribe(this.routeEventHandler)
+    this.commitStashedTime()
+    this.context.organization$
+      .pipe(untilDestroyed(this))
+      .subscribe(async () => {
+        try {
+          await this.forceCommit()
+        } catch (error) {
+          this.notifier.error(error)
+        } finally {
+          this.currentOrganization = this.context.organization
+        }
+      })
   }
 
   public ngOnDestroy(): void {}
@@ -52,30 +56,30 @@ export class TimeTrackerService implements OnDestroy {
   public async forceCommit(): Promise<void> {
     try {
       if (!this.currentRoute || !this.trackingTimeStart) {
-        return;
+        return
       }
-      const currentRouteCache = this.currentRoute;
+      const currentRouteCache = this.currentRoute
 
-      await this.commitTime(this.currentRoute);
+      await this.commitTime(this.currentRoute)
 
-      this.trackingTimeStart = new Date();
-      this.currentRoute = currentRouteCache;
+      this.trackingTimeStart = new Date()
+      this.currentRoute = currentRouteCache
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
   public getCurrentRounte(): TimeTrackerRoute {
-    return this.currentRoute;
+    return this.currentRoute
   }
 
   public stashTime(): void {
     if (!this.currentRoute || !this.trackingTimeStart) {
-      return;
+      return
     }
 
-    const route = this.currentRoute;
-    const params = this.calculateParams(route);
+    const route = this.currentRoute
+    const params = this.calculateParams(route)
 
     const payload = {
       account: route.useAccount ? this.context.accountId : undefined,
@@ -88,14 +92,17 @@ export class TimeTrackerService implements OnDestroy {
       organization: this.currentOrganization.id,
       source: 'dashboard',
       tags: [...route.tags, ...params]
-    };
+    }
 
-    window.localStorage.setItem(STORAGE_TIME_TRACKER_STASH, JSON.stringify(payload));
+    window.localStorage.setItem(
+      STORAGE_TIME_TRACKER_STASH,
+      JSON.stringify(payload)
+    )
   }
 
   private async commitTime(route: TimeTrackerRoute): Promise<void> {
     try {
-      const params: string[] = this.calculateParams(route);
+      const params: string[] = this.calculateParams(route)
 
       await this.account.addActivityEvent({
         account: route.useAccount ? this.context.accountId : undefined,
@@ -108,11 +115,11 @@ export class TimeTrackerService implements OnDestroy {
         organization: this.currentOrganization.id,
         source: 'dashboard',
         tags: [...route.tags, ...params]
-      });
+      })
 
-      this.trackingTimeStart = undefined;
+      this.trackingTimeStart = undefined
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
@@ -120,113 +127,114 @@ export class TimeTrackerService implements OnDestroy {
     try {
       const stash = window.localStorage.getItem(STORAGE_TIME_TRACKER_STASH)
         ? JSON.parse(window.localStorage.getItem(STORAGE_TIME_TRACKER_STASH))
-        : null;
+        : null
 
       if (!stash) {
-        return;
+        return
       }
 
-      await this.account.addActivityEvent(stash);
+      await this.account.addActivityEvent(stash)
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
   private calculateParams(route: TimeTrackerRoute): string[] {
-    let params = [];
+    let params = []
     if (route.useParamMap) {
-      const rawParams = this.router.url.split(';');
+      const rawParams = this.router.url.split(';')
 
-      rawParams.shift();
+      rawParams.shift()
 
-      params = rawParams.length ? rawParams.map((raw) => raw.split('=')[1]) : [];
+      params = rawParams.length ? rawParams.map((raw) => raw.split('=')[1]) : []
 
       params = route.ignoredParams
         ? params.filter(
             (param) => !route.ignoredParams.find((ignored) => ignored === param)
           )
-        : params;
+        : params
 
       if (route.defaultParams) {
         route.defaultParams.forEach((defaultParam, index) => {
-          params[index] = params[index] || defaultParam;
-        });
+          params[index] = params[index] || defaultParam
+        })
       }
     }
 
-    return params;
+    return params
   }
 
   private resolveTimeTrackerRoute($event: RouterEvent): TimeTrackerRoute {
-    let currentRoute: TimeTrackerRoute;
-    let foundRoute: TimeTrackerRoute;
+    let currentRoute: TimeTrackerRoute
+    let foundRoute: TimeTrackerRoute
 
-    const timeTrackerRoutes = Object.values(TIME_TRACKER_ROUTES);
+    const timeTrackerRoutes = Object.values(TIME_TRACKER_ROUTES)
 
     while (timeTrackerRoutes.length && !foundRoute) {
-      const urlSegments = $event.url.split('/').filter((segment) => !!segment);
-      currentRoute = timeTrackerRoutes.pop();
+      const urlSegments = $event.url.split('/').filter((segment) => !!segment)
+      currentRoute = timeTrackerRoutes.pop()
 
       if (urlSegments.length !== currentRoute.routeSegments.length) {
-        continue;
+        continue
       }
 
-      let urlSegment = urlSegments.shift();
-      let searching = true;
+      let urlSegment = urlSegments.shift()
+      let searching = true
 
-      const routeSegments = currentRoute.routeSegments.slice();
+      const routeSegments = currentRoute.routeSegments.slice()
 
       while (routeSegments.length && searching) {
-        const currentSegment = routeSegments.shift();
-        const segmentIndex = urlSegment.indexOf(currentSegment);
+        const currentSegment = routeSegments.shift()
+        const segmentIndex = urlSegment.indexOf(currentSegment)
 
-        urlSegment = urlSegments.shift();
+        urlSegment = urlSegments.shift()
 
         if (segmentIndex === -1 && currentSegment !== '*') {
-          searching = false;
-          continue;
+          searching = false
+          continue
         }
 
         if (!routeSegments.length) {
-          foundRoute = currentRoute;
+          foundRoute = currentRoute
         }
       }
     }
 
-    return foundRoute;
+    return foundRoute
   }
 
   private async routeEventHandler($event: RouterEvent): Promise<void> {
     try {
       if (!($event instanceof NavigationStart)) {
-        return;
+        return
       }
 
-      const timeTrackerRoute = this.resolveTimeTrackerRoute($event);
+      const timeTrackerRoute = this.resolveTimeTrackerRoute($event)
 
       if (!timeTrackerRoute) {
         if (this.currentRoute) {
-          await this.commitTime(this.currentRoute);
-          this.currentRoute = undefined;
+          await this.commitTime(this.currentRoute)
+          this.currentRoute = undefined
         }
-        return;
+        return
       }
 
       if (!this.trackingTimeStart) {
-        this.trackingTimeStart = new Date();
+        this.trackingTimeStart = new Date()
       }
 
       if (
         this.currentRoute &&
-        (this.currentRoute.id !== timeTrackerRoute.id || this.currentRoute.useParamMap)
+        (this.currentRoute.id !== timeTrackerRoute.id ||
+          this.currentRoute.useParamMap)
       ) {
-        await this.commitTime(this.currentRoute);
-        this.trackingTimeStart = new Date();
+        await this.commitTime(this.currentRoute)
+        this.trackingTimeStart = new Date()
       }
 
-      this.currentRoute = timeTrackerRoute;
+      this.currentRoute = timeTrackerRoute
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 }

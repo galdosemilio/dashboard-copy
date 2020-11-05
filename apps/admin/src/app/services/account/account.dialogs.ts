@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core'
 import { MatDialog } from '@coachcare/common/material'
 import { AccountsDatabase } from '@coachcare/backend/data'
 import {
-  Account,
+  AccountProvider,
   AccountRef,
   GetUserMFAResponse,
   MFA
@@ -17,7 +17,7 @@ export class AccountDialogs {
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
     protected dialog: MatDialog,
     protected database: AccountsDatabase,
-    protected account: Account,
+    protected account: AccountProvider,
     protected mfa: MFA
   ) {}
 
