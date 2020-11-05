@@ -89,7 +89,7 @@ class ApiService {
    * @returns string
    */
   public getUrl(path = '/', version = '1.0') {
-    return `${this.config.apiUrl}${version}${path}`
+    return `${this.apiUrl}${version}${path}`
   }
 
   /**
@@ -143,7 +143,7 @@ class ApiService {
       }
     }
     if (tokenString !== '') {
-      return io(`${this.config.apiUrl}websocket`, {
+      return io(`${this.apiUrl}websocket`, {
         transportOptions: {
           polling: {
             extraHeaders: { authorization: tokenString }
@@ -151,7 +151,7 @@ class ApiService {
         }
       })
     } else {
-      return io(`${this.config.apiUrl}websocket`)
+      return io(`${this.apiUrl}websocket`)
     }
   }
 
@@ -208,7 +208,7 @@ class ApiService {
       }
 
       axios
-        .request(apiOptions as any) // MERGETODO: CHECK THIS TYPE!!!
+        .request(apiOptions) // MERGETODO: CHECK THIS TYPE!!!
         .then((response) => {
           if (response.status === 204) {
             resolve(true)
