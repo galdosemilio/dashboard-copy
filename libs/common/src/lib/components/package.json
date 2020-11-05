@@ -17,8 +17,7 @@
         "ngx-moment": "ngx-moment",
         "lodash": "_",
         "moment": "moment",
-        "moment-timezone": "moment",
-        "selvera-api": "selvera-api"
+        "moment-timezone": "moment"
       }
     }
   }

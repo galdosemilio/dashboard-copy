@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../../../../node_modules/ng-packagr/package.schema.json",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts",
+      "umdModuleIds": {
+        "@ngrx/effects": "ngrx.effects",
+        "@ngrx/router-store": "ngrx.routerStore",
+        "@ngrx/store": "ngrx.store",
+        "@ngrx/store-devtools": "ngrx.storeDevtools",
+        "ngrx-store-freeze": "ngrxStoreFreeze"
+      }
+    }
+  }
+}

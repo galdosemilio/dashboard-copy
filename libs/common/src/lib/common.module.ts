@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { ModuleWithProviders, NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { RouterModule } from '@angular/router'
-import { BackendModule } from '@coachcare/backend'
 import {
   CcrFormFieldsModule,
   CcrUtilityComponentsModule
@@ -14,9 +13,9 @@ import { CcrPipesModule } from '@coachcare/common/pipes'
 import { AppProviders, TranslateCatalogs } from '@coachcare/common/services'
 import { AppConfig, AppEnvironment } from '@coachcare/common/shared'
 import { AppStoreModule } from '@coachcare/common/store'
-import { NpmApiModule } from '@coachcare/npm-api'
 import { AppI18nModule } from './i18n.module'
 import { CcrMaterialModule } from './material/material.module'
+import { CCRStoreModule } from './store/ccr'
 
 @NgModule({
   imports: [
@@ -29,8 +28,7 @@ import { CcrMaterialModule } from './material/material.module'
     CcrCoreDialogsModule,
     CcrDirectivesModule,
     CcrPipesModule,
-    CcrUtilityComponentsModule,
-    NpmApiModule
+    CcrUtilityComponentsModule
   ],
   declarations: [],
   exports: [
@@ -53,9 +51,9 @@ export class AppCommonModule {
         ngModule: AppCommonModule,
         providers: AppProviders(environment, config, catalogs)
       },
+      ...CCRStoreModule.forParent(),
       AppI18nModule.forRoot(),
-      ...AppStoreModule.forRoot(environment),
-      ...BackendModule.forRoot(environment)
+      ...AppStoreModule.forRoot(environment)
     ]
   }
 

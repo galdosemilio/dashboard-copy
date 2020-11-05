@@ -7,7 +7,8 @@ import {
   APP_CONFIG,
   APP_ENVIRONMENT,
   AppConfig,
-  AppEnvironment
+  AppEnvironment,
+  API_ENVIRONMENT
 } from '@coachcare/common/shared'
 // tslint:disable-next-line:no-unused-variable
 import {
