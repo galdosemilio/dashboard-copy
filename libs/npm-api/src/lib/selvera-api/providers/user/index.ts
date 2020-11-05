@@ -6,7 +6,6 @@ import { LoginResponse } from '../../providers/user/responses'
 import { AccSingleResponse } from '../account/responses'
 import { Session } from '../session/index'
 import { LoginModel, LoginRequest } from './requests'
-import { SessionState } from '@coachcare/backend/store/session'
 import { Store } from '@ngrx/store'
 
 /**
@@ -23,7 +22,7 @@ class User {
    * Init Api Service
    */
   public constructor(
-    private readonly store: Store<SessionState.State>,
+    private readonly store: Store<any>,
     private readonly apiService: ApiService,
     private readonly account: Account
   ) {

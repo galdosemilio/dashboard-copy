@@ -3,7 +3,6 @@
  */
 
 import { Inject, Injectable } from '@angular/core'
-import { ApiEnvironment, API_ENVIRONMENT } from '@coachcare/backend/shared'
 import axios, { AxiosResponse } from 'axios'
 import { isEmpty, uniq } from 'lodash'
 import * as qs from 'qs'
@@ -11,6 +10,7 @@ import { Subject } from 'rxjs'
 import * as io from 'socket.io-client'
 
 import { Config, Environment, getConfig } from '../../config'
+import { ApiEnvironment, API_ENVIRONMENT } from '../model'
 import { AccountTypeId } from '../providers/account/entities'
 import { CcrRol, CcrRolesMap } from '../providers/common/types'
 import { LoginSessionResponse } from '../providers/session/responses'

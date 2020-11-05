@@ -2,8 +2,8 @@
  * Model for API Options
  */
 
-import { CcrRol } from '@coachcare/backend/shared'
 import { upperFirst } from 'lodash'
+import { CcrRol } from '../model'
 import { ApiHeaders } from './headers.interface'
 import { ApiOptions } from './options.interface'
 

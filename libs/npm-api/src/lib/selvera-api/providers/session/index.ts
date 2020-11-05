@@ -1,5 +1,4 @@
 import { Account, ApiService } from '../../services/index'
-import { SessionActions, SessionState } from '@coachcare/backend/store/session'
 import { MFASessionRequest, SessionRequest } from './requests'
 import {
   EntityResponse,
@@ -16,7 +15,7 @@ class Session {
    * Init Api Service
    */
   public constructor(
-    private readonly store: Store<SessionState.State>,
+    private readonly store: Store<any>,
     private readonly apiService: ApiService,
     private readonly account: Account
   ) {}
@@ -43,10 +42,6 @@ class Session {
         }
 
         await this.apiService.doLogin(response)
-        const checkResponse = await this.check()
-
-        const account = await this.account.getSingle(checkResponse.id) // MERGETODO: CHECK THIS TYPE!!!
-        this.store.dispatch(new SessionActions.Login(account))
         resolve(response)
       } catch (error) {
         reject(error)
