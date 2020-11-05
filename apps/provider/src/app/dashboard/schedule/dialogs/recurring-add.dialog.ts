@@ -13,7 +13,7 @@ import {
 } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import * as moment from 'moment-timezone'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 
 import { ConfigService } from '@app/service'
 import { _, FormUtils } from '@app/shared'

@@ -4,7 +4,7 @@ import { NotifierService } from '@app/service/notifier.service'
 import { ZendeskArticle } from '@coachcare/npm-api'
 import * as moment from 'moment'
 import { BehaviorSubject } from 'rxjs'
-import { Zendesk } from 'selvera-api'
+import { Zendesk } from '@coachcare/npm-api'
 
 @Injectable()
 export class PlatformUpdatesService {

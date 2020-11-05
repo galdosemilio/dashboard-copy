@@ -26,7 +26,7 @@ import { findIndex, get } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { fromEvent, Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
-import { Messaging, Organization } from 'selvera-api'
+import { Messaging, Organization } from '@coachcare/npm-api'
 import { SidenavItem } from './sidenav-item/sidenav-item.component'
 
 export interface SidenavOrg {

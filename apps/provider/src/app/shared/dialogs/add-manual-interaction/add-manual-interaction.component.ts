@@ -14,7 +14,7 @@ import {
 import { _ } from '@app/shared/utils'
 import { unionBy } from 'lodash'
 import * as moment from 'moment'
-import { Interaction } from 'selvera-api'
+import { Interaction } from '@coachcare/npm-api'
 
 @Component({
   selector: 'add-manual-interaction-dialog',

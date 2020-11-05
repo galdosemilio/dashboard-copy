@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { TwilioBandwidthService } from '@app/layout/call/services/twilio-bandwidth.service'
 import { BehaviorSubject, from, Observable } from 'rxjs'
-import { Interaction } from 'selvera-api'
+import { Interaction } from '@coachcare/npm-api'
 
 import {
   connect,

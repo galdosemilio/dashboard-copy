@@ -28,7 +28,7 @@ import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { from, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { Messaging } from 'selvera-api'
+import { Messaging } from '@coachcare/npm-api'
 import { MessageRecipient, MessageThread } from './messages.interfaces'
 
 @Component({

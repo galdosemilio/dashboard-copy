@@ -12,7 +12,7 @@ import { MatDialog } from '@coachcare/common/material'
 import { Store } from '@ngrx/store'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 
 import { CCRConfig } from '@app/config'
 import { OpenPanel } from '@app/layout/store'

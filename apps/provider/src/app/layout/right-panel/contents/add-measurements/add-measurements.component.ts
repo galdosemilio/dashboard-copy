@@ -26,7 +26,7 @@ import { Moment } from '@coachcare/ccr-datepicker'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 import { AddDaysheetDialog, AddNoteDialog } from '../../dialogs'
 
 @Component({

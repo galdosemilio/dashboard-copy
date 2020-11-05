@@ -11,7 +11,7 @@ import { NotifierService } from '@app/service'
 import { OrganizationEntity } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { debounceTime } from 'rxjs/operators'
-import { Organization } from 'selvera-api'
+import { Organization } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-child-clinic-picker',

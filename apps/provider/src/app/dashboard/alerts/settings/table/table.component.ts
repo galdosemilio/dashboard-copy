@@ -11,7 +11,7 @@ import {
   CreateOrgAlertPreferenceRequest,
   UpdateOrgAlertPreferenceRequest
 } from '@coachcare/npm-api'
-import { Alerts } from 'selvera-api'
+import { Alerts } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-alert-types-table',

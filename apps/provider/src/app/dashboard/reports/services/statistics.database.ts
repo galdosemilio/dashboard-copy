@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Reports } from 'selvera-api'
+import { Reports } from '@coachcare/npm-api'
 
 import { CcrDatabase } from '@app/shared'
 import {

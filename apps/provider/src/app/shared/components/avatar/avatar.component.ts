@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 
 import { EventsService, NotifierService } from '@app/service'
 import { AvatarSubmitRequest } from '@coachcare/npm-api'

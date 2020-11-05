@@ -9,7 +9,7 @@ import {
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 import { DeleteRecurringMeetingDialog, ViewMeetingDialog } from '../../dialogs'
 import { Meeting } from '../../models'
 import { MeetingsDataSource } from '../../services'

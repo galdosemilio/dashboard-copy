@@ -12,7 +12,7 @@ import {
 } from '@coachcare/npm-api'
 import { get } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { RPM } from 'selvera-api'
+import { RPM } from '@coachcare/npm-api'
 import { TRACKABLE_RPM_CODES, TrackableRPMCodeEntry } from './model'
 
 interface CodeAndTracking {

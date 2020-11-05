@@ -5,7 +5,7 @@ import {
   GetAllPackageOrganizationResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { PackageOrganization } from 'selvera-api'
+import { PackageOrganization } from '@coachcare/npm-api'
 
 @Injectable()
 export class PackageDatabase extends CcrDatabase {

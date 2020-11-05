@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import { ContextService, NotifierService } from '@app/service'
 import { OrganizationEntity, OrganizationPermission } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-import { Sequence as CcrSequenceService } from 'selvera-api'
+import { Sequence as CcrSequenceService } from '@coachcare/npm-api'
 import { Sequence } from '../../models'
 
 export interface DuplicateSequenceDialogProps {

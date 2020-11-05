@@ -23,7 +23,7 @@ import { findIndex, get, uniqBy } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'
 import { mergeMap, sampleTime } from 'rxjs/operators'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 import { ThreadsDatabase, ThreadsDataSource } from './services'
 
 @Component({

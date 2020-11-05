@@ -1,18 +1,18 @@
-import { Component, OnDestroy } from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
-import { ContextService, NotifierService } from '@app/service';
-import { PromptDialog } from '@app/shared';
-import { _ } from '@app/shared/utils';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Access } from 'selvera-api';
+import { Component, OnDestroy } from '@angular/core'
+import { MatDialog } from '@coachcare/common/material'
+import { ContextService, NotifierService } from '@app/service'
+import { PromptDialog } from '@app/shared'
+import { _ } from '@app/shared/utils'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Access } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-profile-security',
   templateUrl: './security.component.html',
-  styleUrls: ['./security.component.scss'],
+  styleUrls: ['./security.component.scss']
 })
 export class SecurityComponent implements OnDestroy {
-  public isLoading: boolean;
+  public isLoading: boolean
 
   constructor(
     private access: Access,
@@ -24,7 +24,7 @@ export class SecurityComponent implements OnDestroy {
   ngOnDestroy(): void {}
 
   resetPassword() {
-    const account = this.context.user;
+    const account = this.context.user
 
     this.dialog
       .open(PromptDialog, {
@@ -32,26 +32,26 @@ export class SecurityComponent implements OnDestroy {
           title: _('BOARD.SEND_PASSWORD_RESET'),
           content: _('BOARD.SEND_PASSWORD_RESET_CONTENT'),
           contentParams: {
-            email: account.email,
-          },
-        },
+            email: account.email
+          }
+        }
       })
       .afterClosed()
       .pipe(untilDestroyed(this))
       .subscribe(async (confirm: boolean) => {
         try {
           if (confirm) {
-            this.isLoading = true;
+            this.isLoading = true
             await this.access.resetPassword({
               organization: this.context.organizationId,
-              email: account.email || '',
-            });
+              email: account.email || ''
+            })
           }
         } catch (error) {
-          this.notifier.error(error);
+          this.notifier.error(error)
         } finally {
-          this.isLoading = false;
+          this.isLoading = false
         }
-      });
+      })
   }
 }

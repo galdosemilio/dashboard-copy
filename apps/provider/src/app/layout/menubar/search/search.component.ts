@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/common/material'
 import { Router } from '@angular/router'
 import { select, Store } from '@ngrx/store'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 
 import { CCRConfig } from '@app/config'
 import { ContextService, CurrentAccount, NotifierService } from '@app/service'

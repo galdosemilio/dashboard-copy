@@ -5,7 +5,7 @@ import {
   GetAllFoodConsumedResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { FoodConsumed } from 'selvera-api'
+import { FoodConsumed } from '@coachcare/npm-api'
 
 @Injectable()
 export class FoodDatabase extends CcrDatabase {

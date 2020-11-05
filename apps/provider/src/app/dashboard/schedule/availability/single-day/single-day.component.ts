@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@coachcare/common/material'
 import * as moment from 'moment-timezone'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 
 import { SingleAddDialog } from '@app/dashboard/schedule/dialogs/single-add.dialog'
 import { ContextService, NotifierService, SelectedAccount } from '@app/service'

@@ -35,7 +35,7 @@ import { clone } from 'lodash'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'
-import { Account, Goal, Timezone } from 'selvera-api'
+import { Account, Goal, Timezone } from '@coachcare/npm-api'
 import { AccountIdentifiersProps } from './account-identifiers/models'
 
 @Component({

@@ -9,7 +9,7 @@ import {
   RPMDeactivationReason
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-import { RPM } from 'selvera-api'
+import { RPM } from '@coachcare/npm-api'
 
 export interface RPMStatusDialogData {
   accessibleOrganizations: OrganizationAccess[]

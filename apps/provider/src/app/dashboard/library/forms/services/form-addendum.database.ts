@@ -9,7 +9,7 @@ import {
   GetAllFormAddendumResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { Account, FormAddendum } from 'selvera-api'
+import { Account, FormAddendum } from '@coachcare/npm-api'
 
 @Injectable()
 export class FormAddendumDatabase extends CcrDatabase {

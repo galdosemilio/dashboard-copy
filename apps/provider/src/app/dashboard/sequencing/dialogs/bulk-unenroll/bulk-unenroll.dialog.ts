@@ -4,7 +4,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import { NotifierService } from '@app/service'
 import { OrganizationEntity } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-import { Organization, Sequence as SelveraSequenceService } from 'selvera-api'
+import {
+  Organization,
+  Sequence as SelveraSequenceService
+} from '@coachcare/npm-api'
 import { Sequence } from '../../models'
 
 type BulkUnenrollDialogState = 'form' | 'processing'

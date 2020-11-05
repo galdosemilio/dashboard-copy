@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { Alerts } from 'selvera-api'
+import { Alerts } from '@coachcare/npm-api'
 
 import { ContextService, NotifierService } from '@app/service'
 import {

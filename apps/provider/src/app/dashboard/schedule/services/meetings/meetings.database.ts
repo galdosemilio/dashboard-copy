@@ -5,7 +5,7 @@ import {
   FetchAllMeetingResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 
 @Injectable()
 export class MeetingsDatabase extends CcrDatabase {

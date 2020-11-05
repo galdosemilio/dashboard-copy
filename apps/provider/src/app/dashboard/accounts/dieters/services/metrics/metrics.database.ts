@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import * as moment from 'moment';
-import { Exercise, FoodKey } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import * as moment from 'moment'
+import { Exercise, FoodKey } from '@coachcare/npm-api'
 import {
   MetricsDataSourceCriteria,
   MetricsDataSourceResponse
-} from './metrics.datasource';
+} from './metrics.datasource'
 
 @Injectable()
 export class MetricsDatabase {
@@ -16,9 +16,9 @@ export class MetricsDatabase {
     try {
       const orgKeys = await this.foodKey.fetchAllOrganizationKeys({
         organization: args.organization
-      });
+      })
 
-      let keys;
+      let keys
 
       keys = orgKeys.length
         ? await this.foodKey.fetchAllConsumed({
@@ -29,18 +29,18 @@ export class MetricsDatabase {
             endDate: args.endDate,
             key: orgKeys[0].key.id
           })
-        : { data: [], pagination: {} };
+        : { data: [], pagination: {} }
 
       const exercise = await this.exercise.getAll({
         account: args.account,
         start: moment(args.startDate).startOf('day').toISOString(),
         end: moment(args.endDate).endOf('day').toISOString(),
         limit: 'all'
-      });
+      })
 
-      return { keys, exercise };
+      return { keys, exercise }
     } catch (error) {
-      return Promise.reject('Error while fetching keys and exercises');
+      return Promise.reject('Error while fetching keys and exercises')
     }
   }
 }

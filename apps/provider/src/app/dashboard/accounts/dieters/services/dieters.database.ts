@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 
 import { CcrDatabase } from '@app/shared'
 import { AccListResponse } from '@coachcare/npm-api'

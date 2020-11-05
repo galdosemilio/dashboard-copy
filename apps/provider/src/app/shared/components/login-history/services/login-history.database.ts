@@ -5,7 +5,7 @@ import {
   LoginHistoryItem,
   PagedResponse
 } from '@coachcare/npm-api'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api/selvera-api/providers/account'
 
 @Injectable()
 export class LoginHistoryDatabase extends CcrDatabase {

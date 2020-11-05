@@ -11,7 +11,7 @@ import {
   RPM,
   Sequence,
   User
-} from 'selvera-api'
+} from '@coachcare/npm-api'
 
 import { CCRConfig, CCRPalette, Palette } from '@app/config'
 import { InitLayout } from '@app/layout/store/layout'

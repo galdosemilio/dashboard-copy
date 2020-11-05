@@ -7,7 +7,7 @@ import {
   UpdateAttendanceRequest,
   UpdateMeetingRequest
 } from '@coachcare/npm-api'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 
 @Injectable()
 export class ScheduleDataService {

@@ -9,7 +9,7 @@ import {
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/common/material'
-import { Account, Messaging } from 'selvera-api'
+import { Account, Messaging } from '@coachcare/npm-api'
 
 import { MessageRecipient } from '@app/shared'
 import { AccountAccessData, AccSingleResponse } from '@coachcare/npm-api'

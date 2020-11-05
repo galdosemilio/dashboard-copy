@@ -11,7 +11,7 @@ import { _ } from '@app/shared/utils'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
-import { FormSubmission as FormSubmissionService } from 'selvera-api'
+import { FormSubmission as FormSubmissionService } from '@coachcare/npm-api'
 
 export interface LayoutNote extends ConsultationListingResponse {
   isDeletable?: boolean

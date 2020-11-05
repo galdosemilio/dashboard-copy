@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
-import { Goal } from 'selvera-api'
+import { Goal } from '@coachcare/npm-api'
 
 import { FetchGoalResponse } from '@coachcare/npm-api'
 

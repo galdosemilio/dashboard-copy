@@ -24,7 +24,7 @@ import {
   FormQuestion as FormQuestionService,
   FormSection as FormSectionService,
   FormSubmission as FormSubmissionService
-} from 'selvera-api'
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class FormsDatabase extends CcrDatabase {

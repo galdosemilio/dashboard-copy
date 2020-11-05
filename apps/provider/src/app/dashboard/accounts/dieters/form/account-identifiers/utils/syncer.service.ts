@@ -1,12 +1,15 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { ContextService, NotifierService } from '@app/service';
-import { differenceBy, intersectionBy } from 'lodash';
-import { AccountIdentifier as SelveraAccountIdentifier, Organization } from 'selvera-api';
-import { AccountIdentifier } from '../models';
+import { Injectable, OnDestroy, OnInit } from '@angular/core'
+import { ContextService, NotifierService } from '@app/service'
+import { differenceBy, intersectionBy } from 'lodash'
+import {
+  AccountIdentifier as SelveraAccountIdentifier,
+  Organization
+} from '@coachcare/npm-api'
+import { AccountIdentifier } from '../models'
 
 @Injectable()
 export class AccountIdentifierSyncer implements OnDestroy, OnInit {
-  identifiers: AccountIdentifier[] = [];
+  identifiers: AccountIdentifier[] = []
 
   constructor(
     private accountIdentifier: SelveraAccountIdentifier,
@@ -35,86 +38,95 @@ export class AccountIdentifierSyncer implements OnDestroy, OnInit {
                 viewAll: true
               }
             })
-          ];
+          ]
 
-          const accesibleOrgsResponse = await Promise.all(accesibleOrgsPromises);
+          const accesibleOrgsResponse = await Promise.all(accesibleOrgsPromises)
           const clientAccessibleOrgs = accesibleOrgsResponse[0].data.map(
             (org) => org.organization.id
-          );
+          )
           let providerAccessibleOrgs = accesibleOrgsResponse[1].data.map(
             (org) => org.organization.id
-          );
+          )
 
-          const providerHierarchy = this.context.organization.hierarchyPath;
+          const providerHierarchy = this.context.organization.hierarchyPath
 
           providerAccessibleOrgs = differenceBy(
             intersectionBy(providerHierarchy, providerAccessibleOrgs, Number),
             clientAccessibleOrgs,
             Number
-          );
+          )
 
-          const promises = [];
+          const promises = []
           clientAccessibleOrgs.forEach((org) => {
             promises.push(
               this.accountIdentifier.fetchAll({
                 account: id,
                 organization: org
               })
-            );
-          });
+            )
+          })
           providerAccessibleOrgs.forEach((org) => {
             promises.push(
               this.accountIdentifier.fetchAll({
                 account: id,
                 organization: org
               })
-            );
-          });
+            )
+          })
 
-          const responses = await Promise.all(promises);
+          const responses = await Promise.all(promises)
 
-          let remoteIdentifiers = [];
+          let remoteIdentifiers = []
           responses.forEach(
             (res) => (remoteIdentifiers = [...remoteIdentifiers, ...res.data])
-          );
+          )
 
           const resolvedIdentifiers =
-            this.identifiers.map((identifier) => new AccountIdentifier(identifier)) || [];
+            this.identifiers.map(
+              (identifier) => new AccountIdentifier(identifier)
+            ) || []
           remoteIdentifiers.forEach((remoteIdentifier) => {
             const index = this.identifiers.findIndex(
               (identifier) => identifier.name === remoteIdentifier.name
-            );
+            )
             if (index > -1) {
               resolvedIdentifiers[index] = new AccountIdentifier({
                 ...resolvedIdentifiers[index],
                 ...remoteIdentifier
-              });
+              })
             } else {
-              resolvedIdentifiers.push(new AccountIdentifier({ ...remoteIdentifier }));
+              resolvedIdentifiers.push(
+                new AccountIdentifier({ ...remoteIdentifier })
+              )
             }
-          });
-          resolve(resolvedIdentifiers);
+          })
+          resolve(resolvedIdentifiers)
         } else {
-          resolve(this.identifiers.map((identifier: AccountIdentifier) => identifier));
+          resolve(
+            this.identifiers.map((identifier: AccountIdentifier) => identifier)
+          )
         }
       } catch (error) {
-        this.notifier.error(error);
-        reject(error);
+        this.notifier.error(error)
+        reject(error)
       }
-    });
+    })
   }
 
   sync(identifiers: AccountIdentifier[] = [], account: string): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       try {
         if (identifiers && identifiers.length) {
-          const promises = [];
+          const promises = []
           identifiers.forEach((identifier) => {
             if (identifier.dirty) {
               if (identifier.id) {
                 promises.push(
-                  this.accountIdentifier.delete({ id: identifier.id, account: account })
-                );
+                  this.accountIdentifier.delete({
+                    id: identifier.id,
+                    account: account
+                  })
+                )
               }
 
               if (identifier.value) {
@@ -128,18 +140,18 @@ export class AccountIdentifierSyncer implements OnDestroy, OnInit {
                     name: identifier.name,
                     value: identifier.value
                   })
-                );
+                )
               }
             }
-          });
+          })
 
-          await Promise.all(promises);
+          await Promise.all(promises)
         }
-        resolve();
+        resolve()
       } catch (error) {
-        this.notifier.error(error);
-        reject(error);
+        this.notifier.error(error)
+        reject(error)
       }
-    });
+    })
   }
 }

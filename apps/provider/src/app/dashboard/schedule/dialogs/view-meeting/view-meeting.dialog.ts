@@ -34,7 +34,7 @@ import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Account, Organization, Schedule } from 'selvera-api'
+import { Account, Organization, Schedule } from '@coachcare/npm-api'
 import { Meeting } from '../../models'
 
 type ViewMeetingDialogEditMode = 'single' | 'recurring'

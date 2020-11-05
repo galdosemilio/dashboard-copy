@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { Supplement } from 'selvera-api'
+import { Supplement } from '@coachcare/npm-api'
 
 import { CcrDatabase } from '@app/shared'
 import {

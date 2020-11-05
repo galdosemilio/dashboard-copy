@@ -36,7 +36,7 @@ import {
   switchMap,
   tap
 } from 'rxjs/operators'
-import { Conference, Interaction } from 'selvera-api'
+import { Conference, Interaction } from '@coachcare/npm-api'
 import * as callAction from './call.action'
 import {
   AbortCall,

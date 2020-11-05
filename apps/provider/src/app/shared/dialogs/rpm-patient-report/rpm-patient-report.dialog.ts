@@ -6,7 +6,7 @@ import { AccSingleResponse } from '@coachcare/npm-api'
 import 'moment'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Account, RPM } from 'selvera-api'
+import { Account, RPM } from '@coachcare/npm-api'
 
 interface RPMSession {
   end?: string

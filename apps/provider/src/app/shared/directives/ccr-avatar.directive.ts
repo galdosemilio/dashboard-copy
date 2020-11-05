@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Directive, HostBinding, Input } from '@angular/core';
-import { ApiService } from 'selvera-api';
+import { ChangeDetectorRef, Directive, HostBinding, Input } from '@angular/core'
+import { ApiService } from '@coachcare/npm-api'
 
-import { EventsService } from '@app/service';
+import { EventsService } from '@app/service'
 
 @Directive({
   selector: 'img[ccrAvatar]',
@@ -11,13 +11,13 @@ import { EventsService } from '@app/service';
   }
 })
 export class CcrAvatarDirective {
-  account: string;
+  account: string
 
   @HostBinding('src')
-  src: string;
+  src: string
 
   @Input()
-  default = './assets/avatar.png';
+  default = './assets/avatar.png'
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -26,20 +26,20 @@ export class CcrAvatarDirective {
   ) {
     this.bus.listen('user.avatar', (id: string) => {
       if (id === this.account) {
-        this.refresh(true);
-        this.cdr.detectChanges();
+        this.refresh(true)
+        this.cdr.detectChanges()
       }
-    });
+    })
   }
 
   @Input()
   set ccrAvatar(account) {
-    this.account = account;
-    this.refresh();
+    this.account = account
+    this.refresh()
   }
 
   onError() {
-    this.src = this.default;
+    this.src = this.default
   }
 
   refresh(force = false) {
@@ -48,6 +48,6 @@ export class CcrAvatarDirective {
           `/account/${this.account}/avatar` + (force ? `?${+new Date()}` : ''),
           '2.0'
         )
-      : this.default;
+      : this.default
   }
 }

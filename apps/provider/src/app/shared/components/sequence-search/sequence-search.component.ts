@@ -9,7 +9,7 @@ import { SequencesDatabase } from '@app/dashboard/sequencing/services'
 import { ContextService, NotifierService } from '@app/service'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Sequence as SelveraSequenceService } from 'selvera-api'
+import { Sequence as SelveraSequenceService } from '@coachcare/npm-api'
 
 type SequenceSearchComponentModes = 'searchbar' | 'select'
 

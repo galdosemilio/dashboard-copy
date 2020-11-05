@@ -9,15 +9,14 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { CurrentAccount } from '@app/service'
-import { FormUtils } from '@app/shared'
+import { FormUtils, MEASUREMENT_UNITS } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
 import { AccUpdateRequest, TimezoneResponse } from '@coachcare/npm-api'
-import { MEASUREMENT_UNITS } from '@app/shared/selvera-api/units'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { BehaviorSubject } from 'rxjs'
-import { Timezone } from 'selvera-api'
+import { Timezone } from '@coachcare/npm-api'
 
 @Component({
   selector: 'account-form',

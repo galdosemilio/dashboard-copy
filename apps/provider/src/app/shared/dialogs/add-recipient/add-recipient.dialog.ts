@@ -14,11 +14,15 @@ import {
 } from '@app/dashboard/sequencing/models/sequence'
 import { Transition } from '@app/dashboard/sequencing/models/sequence-transition'
 import { ContextService, NotifierService } from '@app/service'
-import { AccountAccessData, OrganizationEntity } from '@coachcare/npm-api'
+import {
+  AccountAccessData,
+  OrganizationEntity,
+  Sequence as SelveraSequenceService
+} from '@coachcare/npm-api'
+import { Organization } from '@coachcare/npm-api/selvera-api/providers/organization'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Organization, Sequence as SelveraSequenceService } from 'selvera-api'
 
 interface AddRecipientDialogProps {
   account?: AccountAccessData

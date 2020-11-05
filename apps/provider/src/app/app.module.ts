@@ -34,6 +34,7 @@ import {
 
 import localeEs from '@angular/common/locales/es'
 import { SharedModule } from './shared/shared.module'
+import { NpmApiModule } from '@coachcare/npm-api'
 
 registerLocaleData(localeEs, 'es')
 
@@ -57,6 +58,7 @@ registerLocaleData(localeEs, 'es')
     LayoutModule,
     AppRoutes,
     MatMomentDateModule,
+    NpmApiModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),

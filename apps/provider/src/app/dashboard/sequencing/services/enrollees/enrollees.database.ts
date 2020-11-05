@@ -5,7 +5,7 @@ import {
   PagedResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { Sequence } from 'selvera-api'
+import { Sequence } from '@coachcare/npm-api'
 
 @Injectable()
 export class EnrolleesDatabase {

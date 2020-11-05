@@ -3,7 +3,7 @@ import {
   GetAllPackageEnrollmentRequest,
   GetAllPackageEnrollmentResponse
 } from '@coachcare/npm-api'
-import { PackageEnrollment } from 'selvera-api'
+import { PackageEnrollment } from '@coachcare/npm-api'
 
 @Injectable()
 export class PhaseEnrollmentDatabase {

@@ -24,7 +24,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { unionBy } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Account, Interaction } from 'selvera-api'
+import { Account, Interaction } from '@coachcare/npm-api'
 
 enum AccountAvailabilityStatus {
   AVAILABLE,

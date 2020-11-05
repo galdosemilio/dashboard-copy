@@ -7,7 +7,7 @@ import {
   GetUserMFAResponse,
   VerifyDeleteUserMFARequest
 } from '@coachcare/npm-api'
-import { MFA } from 'selvera-api'
+import { MFA } from '@coachcare/npm-api'
 import { MFAVerificatorMode } from '../../mfa-verificator'
 import { MFAChannels } from '../../models'
 

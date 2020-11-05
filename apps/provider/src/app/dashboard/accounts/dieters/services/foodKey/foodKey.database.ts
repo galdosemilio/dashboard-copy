@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { FoodKey } from 'selvera-api'
+import { FoodKey } from '@coachcare/npm-api'
 
 import { CcrDatabase } from '@app/shared'
 import {

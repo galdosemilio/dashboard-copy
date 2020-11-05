@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { CookieService } from 'ngx-cookie-service'
-import { Account, ApiService } from 'selvera-api'
+import { Account, ApiService } from '@coachcare/npm-api'
 
 import { CCRApp } from '@app/config'
 import { Profile } from '@coachcare/npm-api'

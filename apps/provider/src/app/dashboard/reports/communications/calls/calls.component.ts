@@ -17,7 +17,7 @@ import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
-import { Interaction } from 'selvera-api'
+import { Interaction } from '@coachcare/npm-api'
 import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models'
 import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
 

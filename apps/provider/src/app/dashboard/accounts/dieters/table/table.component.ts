@@ -12,7 +12,7 @@ import {
 import { MatDialog, MatSort, Sort } from '@coachcare/common/material'
 import { Router } from '@angular/router'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Affiliation, Organization } from 'selvera-api'
+import { Affiliation, Organization } from '@coachcare/npm-api'
 
 import {
   AccountEditDialog,

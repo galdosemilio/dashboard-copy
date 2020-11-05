@@ -14,7 +14,7 @@ import {
   AttendanceStatusEntry
 } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-attendance-selector',

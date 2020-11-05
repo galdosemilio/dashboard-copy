@@ -12,7 +12,7 @@ import { MatMenu } from '@coachcare/common/material'
 import { ContextService, NotifierService } from '@app/service'
 import { PackageData } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { PackageOrganization } from 'selvera-api'
+import { PackageOrganization } from '@coachcare/npm-api'
 
 interface PackageFilter {
   pkg: string[]

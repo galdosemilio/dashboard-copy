@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { from, Observable, of } from 'rxjs'
-import { Messaging } from 'selvera-api'
+import { Messaging } from '@coachcare/npm-api'
 
 import { CcrDatabase } from '@app/shared'
 import { GetAllMessagingResponse } from '@coachcare/npm-api'

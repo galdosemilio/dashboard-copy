@@ -3,7 +3,7 @@ import {
   MeasurementActivity,
   MeasurementBody,
   MeasurementSleep
-} from 'selvera-api'
+} from '@coachcare/npm-api'
 
 import {
   FetchActivitySummaryRequest,

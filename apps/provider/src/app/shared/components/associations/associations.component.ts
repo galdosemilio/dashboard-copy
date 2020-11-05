@@ -10,7 +10,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared/dialogs'
 import { OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-import { OrganizationAssociation } from 'selvera-api'
+import { OrganizationAssociation } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-account-associations',

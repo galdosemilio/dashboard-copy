@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Consultation } from 'selvera-api'
+import { Consultation } from '@coachcare/npm-api'
 
 import {
   ConsultationListingRequest,

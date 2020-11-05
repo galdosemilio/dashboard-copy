@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ContextService } from '@app/service'
 import { bufferedRequests } from '@app/shared'
-import { Sequence } from 'selvera-api'
+import { Sequence } from '@coachcare/npm-api'
 import { SyncState } from '../models'
 import { Transition } from '../models/sequence-transition'
 

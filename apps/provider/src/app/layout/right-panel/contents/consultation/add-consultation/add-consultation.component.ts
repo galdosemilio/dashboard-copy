@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { find } from 'lodash'
 import * as moment from 'moment-timezone'
 import { Subscription } from 'rxjs'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 
 import { Meeting } from '@app/dashboard/schedule/models'
 import { ScheduleDataService } from '@app/layout/right-panel/services'

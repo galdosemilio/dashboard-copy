@@ -12,7 +12,7 @@ import {
   MatDialogRef
 } from '@coachcare/common/material'
 import { select, Store } from '@ngrx/store'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 
 import { CCRConfig } from '@app/config'
 import { ConfigService, NotifierService } from '@app/service'

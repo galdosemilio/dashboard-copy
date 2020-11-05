@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import * as moment from 'moment'
 import 'moment-timezone'
-import { Schedule } from 'selvera-api'
+import { Schedule } from '@coachcare/npm-api'
 
 import { Meeting } from '@app/dashboard/schedule/models'
 import { FetchAllMeetingRequest } from '@coachcare/npm-api'

@@ -9,7 +9,7 @@ import {
   GetAllFormSubmissionResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { FormSubmission as SelveraFormSubmissionService } from 'selvera-api'
+import { FormSubmission as SelveraFormSubmissionService } from '@coachcare/npm-api'
 import { FormSubmission } from '../models'
 
 @Injectable()

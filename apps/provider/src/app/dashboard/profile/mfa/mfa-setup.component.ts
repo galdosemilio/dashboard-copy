@@ -5,7 +5,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { GetUserMFAResponse } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { MFA } from 'selvera-api'
+import { MFA } from '@coachcare/npm-api'
 import { VerifyDeleteMFADialog, VerifyMFADialog } from '../dialogs'
 import { MFAChannel, MFAChannels } from '../models'
 

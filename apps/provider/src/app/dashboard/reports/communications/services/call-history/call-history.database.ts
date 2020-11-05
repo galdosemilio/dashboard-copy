@@ -6,7 +6,7 @@ import {
   PagedResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { Interaction } from 'selvera-api'
+import { Interaction } from '@coachcare/npm-api'
 
 @Injectable()
 export class CallHistoryDatabase implements CcrDatabase {

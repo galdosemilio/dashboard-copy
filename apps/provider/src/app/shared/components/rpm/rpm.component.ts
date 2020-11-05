@@ -15,7 +15,9 @@ import { AccSingleResponse, OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { sortBy, uniqBy } from 'lodash'
 import * as moment from 'moment'
-import { Account, Organization, RPM } from 'selvera-api'
+import { RPM } from '@coachcare/npm-api'
+import { Account } from '@coachcare/npm-api/selvera-api/providers/account'
+import { Organization } from '@coachcare/npm-api/selvera-api/providers/organization'
 import { RPMStateEntry, RPMStateTypes } from './models'
 
 @Component({

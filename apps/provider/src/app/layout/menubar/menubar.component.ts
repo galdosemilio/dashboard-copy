@@ -28,7 +28,7 @@ import { get } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Organization, User } from 'selvera-api'
+import { Organization, User } from '@coachcare/npm-api'
 import { HelpComponent } from './help'
 
 @Component({

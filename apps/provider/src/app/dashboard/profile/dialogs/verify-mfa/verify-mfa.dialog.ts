@@ -14,7 +14,7 @@ import {
   CreateUserMFAResponse,
   VerifyUserMFARequest
 } from '@coachcare/npm-api'
-import { MFA } from 'selvera-api'
+import { MFA } from '@coachcare/npm-api'
 import { MFAChannel } from '../../models'
 
 export interface VerifyMFADialogProps {

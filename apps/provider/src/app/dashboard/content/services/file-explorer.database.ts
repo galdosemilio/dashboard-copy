@@ -17,7 +17,7 @@ import {
   UpdateContentRequest
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { Content, ContentPackage } from 'selvera-api'
+import { Content, ContentPackage } from '@coachcare/npm-api'
 
 @Injectable()
 export class FileExplorerDatabase extends CcrDatabase {

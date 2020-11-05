@@ -3,17 +3,13 @@ import { CcrDatabase } from '@app/shared'
 import {
   CountedPaginatedResponse,
   FetchPatientListingRequest,
-  PatientListingItem
-} from '@coachcare/npm-api'
-import { Reports } from 'selvera-api'
-import {
+  PatientListingItem,
   PatientListingAssociationItem,
-  PatientListingPackageEnrollmentItem
-} from 'selvera-api/dist/lib/selvera-api/providers/reports/entities'
-import {
+  PatientListingPackageEnrollmentItem,
   FetchPatientListingAssociationRequest,
   FetchPatientListingPackageEnrollmentsRequest
-} from 'selvera-api/dist/lib/selvera-api/providers/reports/requests'
+} from '@coachcare/npm-api'
+import { Reports } from '@coachcare/npm-api'
 
 @Injectable()
 export class DieterListingDatabase extends CcrDatabase {

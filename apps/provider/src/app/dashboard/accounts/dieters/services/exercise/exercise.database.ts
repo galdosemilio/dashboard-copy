@@ -5,7 +5,7 @@ import {
   GetAllExerciseResponse
 } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
-import { Exercise } from 'selvera-api'
+import { Exercise } from '@coachcare/npm-api'
 
 @Injectable()
 export class ExerciseDatabase extends CcrDatabase {

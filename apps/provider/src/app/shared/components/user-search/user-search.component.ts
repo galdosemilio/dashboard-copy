@@ -7,7 +7,7 @@ import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-user-search',

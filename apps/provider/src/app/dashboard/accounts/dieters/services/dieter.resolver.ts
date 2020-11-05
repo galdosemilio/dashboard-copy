@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
-import { Account } from 'selvera-api'
+import { Account } from '@coachcare/npm-api'
 
 import { ContextService, NotifierService } from '@app/service'
 import { AccSingleResponse } from '@coachcare/npm-api'
