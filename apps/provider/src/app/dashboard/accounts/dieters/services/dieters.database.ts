@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 import { CcrDatabase } from '@app/shared'
 import { AccListResponse } from '@coachcare/npm-api'
@@ -7,7 +7,7 @@ import { DietersCriteria } from './dieters.criteria'
 
 @Injectable()
 export class DietersDatabase extends CcrDatabase {
-  constructor(private account: Account) {
+  constructor(private account: AccountProvider) {
     super()
   }
 

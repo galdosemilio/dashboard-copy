@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core'
 import { CcrDatabase } from '@app/shared/model'
 import {
+  AccountProvider,
   GetLoginHistoryRequest,
   LoginHistoryItem,
   PagedResponse
 } from '@coachcare/npm-api'
-import { Account } from '@coachcare/npm-api/selvera-api/providers/account'
 
 @Injectable()
 export class LoginHistoryDatabase extends CcrDatabase {
-  constructor(private account: Account) {
+  constructor(private account: AccountProvider) {
     super()
   }
 

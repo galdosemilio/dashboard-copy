@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ccrPhoneValidator } from '@board/shared/phone-input'
 import {
-  Account,
+  AccountProvider,
   AccountTypeIds,
   CreateUserMFARequest,
   CreateUserMFAResponse,
@@ -51,7 +51,7 @@ export class MFASetupPageComponent implements OnInit {
   secretKey: string
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private auth: AuthService,
     private context: ContextService,
     private fb: FormBuilder,

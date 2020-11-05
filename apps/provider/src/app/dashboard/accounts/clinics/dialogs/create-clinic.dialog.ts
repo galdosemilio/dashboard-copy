@@ -7,7 +7,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _ } from '@app/shared/utils'
-import { Organization } from '@coachcare/npm-api'
+import { OrganizationProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-clinics-create-dialog',
@@ -24,7 +24,7 @@ export class CreateClinicDialog implements OnInit {
     private dialogRef: MatDialogRef<CreateClinicDialog>,
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   public ngOnInit(): void {

@@ -18,7 +18,7 @@ import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
-import { Account, Timezone, TimezoneResponse } from '@coachcare/npm-api'
+import { AccountProvider, Timezone, TimezoneResponse } from '@coachcare/npm-api'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'
@@ -59,7 +59,7 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
     private builder: FormBuilder,
     private responsive: Store<UIResponsiveState>,
     private translator: TranslateService,
-    private account: Account,
+    private account: AccountProvider,
     private timezone: Timezone,
     private context: ContextService,
     private notifier: NotifierService,

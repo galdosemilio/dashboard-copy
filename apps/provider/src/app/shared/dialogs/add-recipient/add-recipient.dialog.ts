@@ -17,9 +17,9 @@ import { ContextService, NotifierService } from '@app/service'
 import {
   AccountAccessData,
   OrganizationEntity,
+  OrganizationProvider,
   Sequence as SelveraSequenceService
 } from '@coachcare/npm-api'
-import { Organization } from '@coachcare/npm-api/selvera-api/providers/organization'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'
@@ -86,7 +86,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     private context: ContextService,
     private fb: FormBuilder,
     private notify: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private seq: SelveraSequenceService
   ) {}
 

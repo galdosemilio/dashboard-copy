@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
-import { Organization, OrganizationSingle } from '@coachcare/npm-api'
+import { OrganizationProvider, OrganizationSingle } from '@coachcare/npm-api'
 import { _ } from '@coachcare/backend/shared'
 import { ClinicFlatNode, ClinicNode, NodeType } from './organization.types'
 
@@ -16,7 +16,7 @@ export class OrganizationsTreeDatabase {
   dataChange = new BehaviorSubject<any[]>([])
   nodeMap = new Map<string, ClinicNode>()
 
-  constructor(private organization: Organization) {}
+  constructor(private organization: OrganizationProvider) {}
 
   rootLevelNodes = [
     {

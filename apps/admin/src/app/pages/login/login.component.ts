@@ -4,7 +4,7 @@ import { MatDialog } from '@coachcare/common/material'
 import { ActivatedRoute } from '@angular/router'
 import { MFACodeInputMode } from '@board/shared/mfa-code-input'
 import {
-  Account,
+  AccountProvider,
   AccountTypeIds,
   DeviceTypeIds,
   LoginSessionRequest,
@@ -60,7 +60,7 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
 
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
-    private account: Account,
+    private account: AccountProvider,
     private builder: FormBuilder,
     private context: ContextService,
     private cookie: CookieService,

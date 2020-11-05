@@ -9,7 +9,8 @@
     "src/polyfills.ts",
   ],
   "include": [
-    "**/*"
+    "**/*",
+    "../../libs/npm-api/src/lib/config/env"
   ],
   "exclude": [
     "**/*.spec.ts"

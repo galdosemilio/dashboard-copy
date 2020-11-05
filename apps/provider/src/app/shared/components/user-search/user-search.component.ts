@@ -7,7 +7,7 @@ import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-user-search',
@@ -37,7 +37,7 @@ export class UserSearchComponent implements OnInit {
   translations: any
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private notify: NotifierService,
     private translate: TranslateService

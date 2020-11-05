@@ -22,7 +22,7 @@ import {
 import { LOCALES } from '@coachcare/common/shared'
 import { TranslateService } from '@ngx-translate/core'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-page-register-clinic-info',
@@ -42,7 +42,7 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
   showNewsletterCheckbox = false
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private cookie: CookieService,
     private dialog: MatDialog,
     private language: LanguageService,

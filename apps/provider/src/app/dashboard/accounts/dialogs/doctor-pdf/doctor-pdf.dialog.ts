@@ -17,9 +17,9 @@ import { untilDestroyed } from 'ngx-take-until-destroy'
 import pdfMake from 'pdfmake'
 import { first } from 'rxjs/operators'
 import {
-  Account,
+  AccountProvider,
   DieterDashboardSummary,
-  Organization
+  OrganizationProvider
 } from '@coachcare/npm-api'
 import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
 import {
@@ -106,7 +106,7 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
   private selectedProvider: PDFProvider
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private data: DieterDashboardSummary,
     private database: FormSubmissionsDatabase,
@@ -114,7 +114,7 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
     private fb: FormBuilder,
     private measurementDatabase: MeasurementDatabase,
     private notify: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private store: Store<CCRConfig>,
     private translate: TranslateService
   ) {}

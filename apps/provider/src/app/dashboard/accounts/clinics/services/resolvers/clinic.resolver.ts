@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 import { ContextService, NotifierService } from '@app/service'
-import { Organization, OrgSingleResponse } from '@coachcare/npm-api'
+import { OrganizationProvider, OrgSingleResponse } from '@coachcare/npm-api'
 
 @Injectable()
 export class ClinicResolver implements Resolve<OrgSingleResponse> {
   constructor(
     private context: ContextService,
     private notifier: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   public async resolve(

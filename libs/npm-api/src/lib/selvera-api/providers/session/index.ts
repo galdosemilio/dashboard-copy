@@ -1,11 +1,10 @@
-import { Account, ApiService } from '../../services/index'
+import { ApiService } from '../../services/index'
 import { MFASessionRequest, SessionRequest } from './requests'
 import {
   EntityResponse,
   LoginSessionResponse,
   MFASessionResponse
 } from './responses'
-import { Store } from '@ngrx/store'
 
 /**
  * Session management
@@ -14,11 +13,7 @@ class Session {
   /**
    * Init Api Service
    */
-  public constructor(
-    private readonly store: Store<any>,
-    private readonly apiService: ApiService,
-    private readonly account: Account
-  ) {}
+  public constructor(private readonly apiService: ApiService) {}
 
   /**
    * Login a user and either retreive token on success, or set cookie if requesting site is either admin, provider, or public site.

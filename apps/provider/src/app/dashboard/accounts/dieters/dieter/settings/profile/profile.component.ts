@@ -6,7 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { Access, Account, Goal } from '@coachcare/npm-api'
+import { Access, AccountProvider, Goal } from '@coachcare/npm-api'
 
 import { MatDialog } from '@coachcare/common/material'
 import { DieterFormComponent } from '@app/dashboard/accounts/dieters/form'
@@ -41,7 +41,7 @@ export class DieterProfileComponent implements BindForm, OnDestroy, OnInit {
   constructor(
     private access: Access,
     private accIdentifierSyncer: AccountIdentifierSyncer,
-    private account: Account,
+    private account: AccountProvider,
     private builder: FormBuilder,
     private bus: EventsService,
     private context: ContextService,

@@ -17,10 +17,10 @@ import * as moment from 'moment'
 import pdfMake from 'pdfmake'
 import { first } from 'rxjs/operators'
 import {
-  Account,
+  AccountProvider,
   AccSingleResponse,
   DieterDashboardSummary,
-  Organization
+  OrganizationProvider
 } from '@coachcare/npm-api'
 import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
 import {
@@ -80,14 +80,14 @@ export class ProgressReportPDFDialog implements OnInit {
   private pdfColor = '#3aa2cf'
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private data: DieterDashboardSummary,
     private dialog: MatDialogRef<ProgressReportPDFDialog>,
     private fb: FormBuilder,
     private measurementDatabase: MeasurementDatabase,
     private notify: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private store: Store<CCRConfig>,
     private translateService: TranslateService
   ) {}

@@ -2,11 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@coachcare/common/material'
 import { ContextService, NotifierService } from '@app/service'
-import { AccSingleResponse } from '@coachcare/npm-api'
+import { AccountProvider, AccSingleResponse, RPM } from '@coachcare/npm-api'
 import 'moment'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Account, RPM } from '@coachcare/npm-api'
 
 interface RPMSession {
   end?: string
@@ -33,7 +32,7 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
   public status: 'downloading' | 'loading' | 'ready' = 'loading'
 
   constructor(
-    private accountService: Account,
+    private accountService: AccountProvider,
     private context: ContextService,
     private dialogRef: MatDialogRef<RPMPatientReportDialog>,
     private fb: FormBuilder,

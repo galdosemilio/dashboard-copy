@@ -1,9 +1,8 @@
-import { Store } from '@ngrx/store'
 import {
   ApiService,
   Access,
   AccountIdentifier,
-  Account,
+  Account as AccountProvider,
   AccountPreference,
   ActiveCampaign,
   Authentication,
@@ -17,7 +16,7 @@ import {
   ContentPackage,
   ContentPreference,
   Consultation,
-  Country,
+  Country as CountryProvider,
   Device,
   Exercise,
   ExerciseAssociation,
@@ -57,7 +56,7 @@ import {
   MobileApp,
   Notes,
   Notification,
-  Organization,
+  Organization as OrganizationProvider,
   OrganizationAssignment,
   OrganizationAssociation,
   Package,
@@ -83,8 +82,8 @@ import {
 
 export const SelveraApiProviders = [
   {
-    provide: Account,
-    useClass: Account,
+    provide: AccountProvider,
+    useClass: AccountProvider,
     deps: [ApiService]
   },
   {
@@ -129,7 +128,7 @@ export const SelveraApiProviders = [
     deps: [ApiService]
   },
   { provide: Consultation, useClass: Consultation, deps: [ApiService] },
-  { provide: Country, useClass: Country, deps: [ApiService] },
+  { provide: CountryProvider, useClass: CountryProvider, deps: [ApiService] },
   { provide: Device, useClass: Device, deps: [ApiService] },
   { provide: Exercise, useClass: Exercise, deps: [ApiService] },
   {
@@ -194,8 +193,8 @@ export const SelveraApiProviders = [
   { provide: Notes, useClass: Notes, deps: [ApiService] },
   { provide: Notification, useClass: Notification, deps: [ApiService] },
   {
-    provide: Organization,
-    useClass: Organization,
+    provide: OrganizationProvider,
+    useClass: OrganizationProvider,
     deps: [ApiService]
   },
   {
@@ -231,9 +230,9 @@ export const SelveraApiProviders = [
   { provide: RPM, useClass: RPM, deps: [ApiService] },
   { provide: Schedule, useClass: Schedule, deps: [ApiService] },
   { provide: Sequence, useClass: Sequence, deps: [ApiService] },
-  { provide: Session, useClass: Session, deps: [Store, ApiService, Account] },
+  { provide: Session, useClass: Session, deps: [ApiService] },
   { provide: Supplement, useClass: Supplement, deps: [ApiService] },
   { provide: Timezone, useClass: Timezone, deps: [ApiService] },
-  { provide: User, useClass: User, deps: [Store, ApiService, Account] },
+  { provide: User, useClass: User, deps: [ApiService] },
   { provide: Zendesk, useClass: Zendesk, deps: [ApiService] }
 ]

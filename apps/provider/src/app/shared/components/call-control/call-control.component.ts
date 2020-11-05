@@ -24,7 +24,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { unionBy } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Account, Interaction } from '@coachcare/npm-api'
+import { AccountProvider, Interaction } from '@coachcare/npm-api'
 
 enum AccountAvailabilityStatus {
   AVAILABLE,
@@ -50,7 +50,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   public toolTipMessage: string
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private dialog: MatDialog,
     private interaction: Interaction,

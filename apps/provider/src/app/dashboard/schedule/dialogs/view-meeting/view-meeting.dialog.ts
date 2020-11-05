@@ -34,7 +34,11 @@ import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Account, Organization, Schedule } from '@coachcare/npm-api'
+import {
+  AccountProvider,
+  OrganizationProvider,
+  Schedule
+} from '@coachcare/npm-api'
 import { Meeting } from '../../models'
 
 type ViewMeetingDialogEditMode = 'single' | 'recurring'
@@ -89,7 +93,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
   translations: any
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private bus: EventsService,
     private context: ContextService,
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -98,7 +102,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     private fb: FormBuilder,
     private formUtils: FormUtils,
     private notify: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private router: Router,
     private schedule: Schedule,
     private translate: TranslateService

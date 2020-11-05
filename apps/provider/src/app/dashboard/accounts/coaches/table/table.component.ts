@@ -13,7 +13,7 @@ import {
   AccountAccessData,
   AccountTypeId,
   Affiliation,
-  Organization
+  OrganizationProvider
 } from '@coachcare/npm-api'
 
 import { ContextService, NotifierService } from '@app/service'
@@ -53,7 +53,7 @@ export class CoachesTableComponent implements OnInit {
     private router: Router,
     private context: ContextService,
     private notifier: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   ngOnInit() {

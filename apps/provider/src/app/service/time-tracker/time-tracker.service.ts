@@ -3,7 +3,7 @@ import { NavigationStart, Router, RouterEvent } from '@angular/router'
 import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { BehaviorSubject } from 'rxjs'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
@@ -26,7 +26,7 @@ export class TimeTrackerService implements OnDestroy {
   private trackingTimeStart: Date
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private notifier: NotifierService,
     private router: Router

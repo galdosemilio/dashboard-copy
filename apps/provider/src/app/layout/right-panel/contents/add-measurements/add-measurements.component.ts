@@ -26,7 +26,7 @@ import { Moment } from '@coachcare/ccr-datepicker'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 import { AddDaysheetDialog, AddNoteDialog } from '../../dialogs'
 
 @Component({
@@ -67,7 +67,7 @@ export class AddMeasurementsComponent implements OnInit, OnDestroy {
 
   constructor(
     public formUtils: FormUtils,
-    private account: Account,
+    private account: AccountProvider,
     private builder: FormBuilder,
     private bus: EventsService,
     private context: ContextService,

@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import { NotifierService } from '@app/service'
 import { FormUtils } from '@app/shared'
 import * as moment from 'moment'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 export interface AccountEditDialogData {
   id: string
@@ -27,7 +27,7 @@ export class AccountEditDialog implements OnInit {
     private builder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: AccountEditDialogData,
     private dialogRef: MatDialogRef<AccountEditDialog>,
-    private account: Account,
+    private account: AccountProvider,
     private notifier: NotifierService,
     private formUtils: FormUtils
   ) {}

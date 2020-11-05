@@ -11,13 +11,16 @@ import {
 import { MatDialog, MatSlideToggle } from '@coachcare/common/material'
 import { ContextService } from '@app/service'
 import { RPMStatusDialog } from '@app/shared/dialogs'
-import { AccSingleResponse, OrganizationAccess } from '@coachcare/npm-api'
+import {
+  AccountProvider,
+  AccSingleResponse,
+  OrganizationProvider,
+  OrganizationAccess,
+  RPM
+} from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { sortBy, uniqBy } from 'lodash'
 import * as moment from 'moment'
-import { RPM } from '@coachcare/npm-api'
-import { Account } from '@coachcare/npm-api/selvera-api/providers/account'
-import { Organization } from '@coachcare/npm-api/selvera-api/providers/organization'
 import { RPMStateEntry, RPMStateTypes } from './models'
 
 @Component({
@@ -38,11 +41,11 @@ export class RPMComponent implements AfterViewInit, OnInit {
   rpmEntries: RPMStateEntry[] = []
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private dialog: MatDialog,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private rpm: RPM
   ) {}
 

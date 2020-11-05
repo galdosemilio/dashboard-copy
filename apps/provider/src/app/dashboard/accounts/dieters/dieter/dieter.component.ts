@@ -7,7 +7,7 @@ import { RPMPatientReportDialog } from '@app/shared'
 import {
   AccSingleResponse,
   DieterDashboardSummary,
-  Organization,
+  OrganizationProvider,
   RPM
 } from '@coachcare/npm-api'
 import { get, intersectionBy } from 'lodash'
@@ -32,7 +32,7 @@ export class DieterComponent implements OnDestroy, OnInit {
     private data: DieterDashboardSummary,
     private dialog: MatDialog,
     private notifier: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private route: ActivatedRoute,
     private rpm: RPM
   ) {}

@@ -14,7 +14,7 @@ import { BindForm, BINDFORM_TOKEN, FormUtils } from '@app/shared'
 import { Package } from '@app/shared/components/package-table'
 import * as moment from 'moment'
 import {
-  Account,
+  AccountProvider,
   Affiliation,
   Goal,
   PackageEnrollment
@@ -49,7 +49,7 @@ export class AccountCreateDialog implements BindForm, OnInit {
     private context: ContextService,
     @Inject(MAT_DIALOG_DATA) public data: AccountCreateDialogData,
     private dialogRef: MatDialogRef<AccountCreateDialog>,
-    private account: Account,
+    private account: AccountProvider,
     private goal: Goal,
     private affiliation: Affiliation,
     private notifier: NotifierService,

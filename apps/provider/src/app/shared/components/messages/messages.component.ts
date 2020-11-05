@@ -20,7 +20,7 @@ import {
   GetThreadMessagingRequest,
   GetThreadMessagingResponse
 } from '@coachcare/npm-api'
-import { MessageContainer } from '@app/shared'
+import { MessageContainer } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
 import { first, last, uniqBy } from 'lodash'

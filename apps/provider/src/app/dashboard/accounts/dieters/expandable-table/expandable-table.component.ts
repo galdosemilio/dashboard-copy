@@ -21,9 +21,9 @@ import { _ } from '@app/shared/utils'
 import { Store } from '@ngrx/store'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import {
-  Account,
+  AccountProvider,
   Affiliation,
-  Organization,
+  OrganizationProvider,
   AccountTypeId
 } from '@coachcare/npm-api'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
@@ -64,14 +64,14 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   hasAdmin = false
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private affiliation: Affiliation,
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private database: DieterListingDatabase,
     private dialog: MatDialog,
     private notify: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private router: Router,
     private store: Store<UILayoutState>
   ) {}

@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 import {
   AuthenticatorApp,
   AuthenticatorApps,
@@ -53,7 +53,7 @@ export class MFAVerificatorComponent implements BindForm, OnInit {
   phoneForm: FormGroup
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private fb: FormBuilder,
     private notify: NotifierService

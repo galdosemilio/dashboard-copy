@@ -6,7 +6,6 @@ import { LoginResponse } from '../../providers/user/responses'
 import { AccSingleResponse } from '../account/responses'
 import { Session } from '../session/index'
 import { LoginModel, LoginRequest } from './requests'
-import { Store } from '@ngrx/store'
 
 /**
  * User authentication and fetching/updating info of authenticated user
@@ -17,17 +16,14 @@ class User {
 
   private profile: AccSingleResponse | undefined = undefined
   private session: Session
+  private account: Account
 
   /**
    * Init Api Service
    */
-  public constructor(
-    private readonly store: Store<any>,
-    private readonly apiService: ApiService,
-    private readonly account: Account
-  ) {
+  public constructor(private readonly apiService: ApiService) {
     this.account = new Account(apiService)
-    this.session = new Session(store, apiService, account)
+    this.session = new Session(apiService)
   }
 
   /**

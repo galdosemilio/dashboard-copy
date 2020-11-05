@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/common/material'
-import { Account, AccountAccessData } from '@coachcare/npm-api'
+import { AccountProvider, AccountAccessData } from '@coachcare/npm-api'
 import { _ } from '@coachcare/backend/shared'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { TranslateService } from '@ngx-translate/core'
@@ -30,7 +30,7 @@ export class UserSearchComponent implements OnInit {
   translations: any
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private notify: NotifierService,
     private translate: TranslateService

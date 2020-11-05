@@ -4,7 +4,7 @@ import { ContextService, EventsService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { AccSingleResponse, AccUpdateRequest } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 type ProviderProfileSection =
   | 'communications'
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
   section: ProviderProfileSection = 'security'
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private bus: EventsService,
     private context: ContextService,
     private notifier: NotifierService,

@@ -5,7 +5,7 @@ import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { EmailTemplate, Organization } from '@coachcare/npm-api'
+import { EmailTemplate, OrganizationProvider } from '@coachcare/npm-api'
 import { EmailTemplateDialogComponent } from '../dialogs'
 
 @Component({
@@ -21,7 +21,7 @@ export class EmailTemplateTableComponent implements OnDestroy {
   constructor(
     private dialog: MatDialog,
     private notify: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   ngOnDestroy(): void {}

@@ -3,7 +3,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { differenceBy, intersectionBy } from 'lodash'
 import {
   AccountIdentifier as SelveraAccountIdentifier,
-  Organization
+  OrganizationProvider
 } from '@coachcare/npm-api'
 import { AccountIdentifier } from '../models'
 
@@ -15,7 +15,7 @@ export class AccountIdentifierSyncer implements OnDestroy, OnInit {
     private accountIdentifier: SelveraAccountIdentifier,
     private context: ContextService,
     private notifier: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   ngOnDestroy(): void {}

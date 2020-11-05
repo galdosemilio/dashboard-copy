@@ -14,7 +14,7 @@ import {
   GetSingleMessagingPreferenceByOrgRequest,
   MessagingPreference,
   MessagingPreferenceSingle,
-  Organization,
+  OrganizationProvider,
   RPM,
   RPMPreferenceSingle,
   Sequence
@@ -28,7 +28,7 @@ export class OrganizationFeaturePreferenceResolver
     private communicationPref: CommunicationPreference,
     private contentPref: ContentPreference,
     private messagingPref: MessagingPreference,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private rpm: RPM,
     private sequence: Sequence
   ) {}

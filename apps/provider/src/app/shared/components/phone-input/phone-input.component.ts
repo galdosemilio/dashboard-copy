@@ -17,7 +17,7 @@ import { NotifierService } from '@app/service'
 import { CountryCode } from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Country } from '@coachcare/npm-api'
+import { CountryProvider } from '@coachcare/npm-api'
 
 export function ccrPhoneValidator(control: FormControl) {
   const value = control.value || {}
@@ -51,7 +51,7 @@ export class PhoneInputComponent
   private firstCountries: string[] = ['US/CA', 'GB', 'AU', 'NZ', 'IE', 'IL']
 
   constructor(
-    private country: Country,
+    private country: CountryProvider,
     private fb: FormBuilder,
     private notify: NotifierService,
     private translate: TranslateService

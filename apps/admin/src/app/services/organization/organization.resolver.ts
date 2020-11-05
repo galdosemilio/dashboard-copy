@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
 
-import { Organization, OrganizationSingle } from '@coachcare/npm-api'
+import { OrganizationProvider, OrganizationSingle } from '@coachcare/npm-api'
 import { OrganizationRoutes } from './organization.routes'
 
 @Injectable()
@@ -9,7 +9,7 @@ export class OrganizationResolver
   implements Resolve<OrganizationSingle | null> {
   constructor(
     private router: Router,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private routes: OrganizationRoutes
   ) {}
 

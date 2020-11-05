@@ -26,7 +26,7 @@ import { findIndex, get } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { fromEvent, Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
-import { Messaging, Organization } from '@coachcare/npm-api'
+import { Messaging, OrganizationProvider } from '@coachcare/npm-api'
 import { SidenavItem } from './sidenav-item/sidenav-item.component'
 
 export interface SidenavOrg {
@@ -67,7 +67,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     private context: ContextService,
     private messaging: Messaging,
     private notifier: NotifierService,
-    private orgservice: Organization,
+    private orgservice: OrganizationProvider,
     private platformUpdates: PlatformUpdatesService,
     private store: Store<CCRConfig>,
     private translate: TranslateService

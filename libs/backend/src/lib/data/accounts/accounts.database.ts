@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { AppDatabase } from '@coachcare/backend/model'
 import {
-  Account,
+  AccountProvider,
   AccountSingle,
   CheckAccountRequest,
   CreateAccountRequest,
@@ -15,7 +15,7 @@ import { from, Observable } from 'rxjs'
 
 @Injectable()
 export class AccountsDatabase extends AppDatabase {
-  constructor(private account: Account) {
+  constructor(private account: AccountProvider) {
     super()
   }
 

@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store'
 import { findIndex, isEmpty, merge, pickBy } from 'lodash'
 import { BehaviorSubject } from 'rxjs'
 import {
-  Account,
+  AccountProvider,
   CommunicationPreference,
   ContentPreference,
   MessagingPreference,
-  Organization,
+  OrganizationProvider,
   RPM,
   Sequence,
   User
@@ -65,11 +65,11 @@ export class ContextService {
   constructor(
     private store: Store<CCRConfig>,
     private ui: Store<UIState>,
-    private accservice: Account,
+    private accservice: AccountProvider,
     private communicationPrefs: CommunicationPreference,
     private contentPrefs: ContentPreference,
     private messagingPrefs: MessagingPreference,
-    private orgservice: Organization,
+    private orgservice: OrganizationProvider,
     private profile: User,
     private auth: AuthService,
     private config: ConfigService,
@@ -305,7 +305,7 @@ export class ContextService {
   }
 
   /**
-   * Orphaned Account - if this account has no orgs associated with it
+   * Orphaned AccountProvider - if this account has no orgs associated with it
    */
   orphanedAccount$ = new BehaviorSubject<boolean>(false)
 
@@ -340,7 +340,7 @@ export class ContextService {
   organizations: Array<SelectedOrganization>
 
   /**
-   * Current Organization
+   * Current OrganizationProvider
    */
   organization$ = new BehaviorSubject<SelectedOrganization>(null)
 
@@ -469,7 +469,7 @@ export class ContextService {
   }
 
   /**
-   * Displayed Account
+   * Displayed AccountProvider
    */
   account$ = new BehaviorSubject<AccountAccessData>(null)
 

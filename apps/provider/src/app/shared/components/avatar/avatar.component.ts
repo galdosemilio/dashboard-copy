@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 import { EventsService, NotifierService } from '@app/service'
 import { AvatarSubmitRequest } from '@coachcare/npm-api'
@@ -18,7 +18,7 @@ export class CcrAvatarComponent {
   editable = false
 
   constructor(
-    private api: Account,
+    private api: AccountProvider,
     private bus: EventsService,
     private notifier: NotifierService
   ) {}

@@ -12,7 +12,7 @@ import {
 import { MatDialog, MatSort, Sort } from '@coachcare/common/material'
 import { Router } from '@angular/router'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Affiliation, Organization } from '@coachcare/npm-api'
+import { Affiliation, OrganizationProvider } from '@coachcare/npm-api'
 
 import {
   AccountEditDialog,
@@ -62,7 +62,7 @@ export class DietersTableComponent implements OnInit, OnDestroy {
   constructor(
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private affiliation: Affiliation,
     private context: ContextService,
     private notifier: NotifierService,

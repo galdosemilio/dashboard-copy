@@ -35,12 +35,14 @@ import {
 import localeEs from '@angular/common/locales/es'
 import { SharedModule } from './shared/shared.module'
 import { NpmApiModule } from '@coachcare/npm-api'
+import { API_ENVIRONMENT } from '@coachcare/npm-api/selvera-api/model'
 
 registerLocaleData(localeEs, 'es')
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    NpmApiModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -58,7 +60,6 @@ registerLocaleData(localeEs, 'es')
     LayoutModule,
     AppRoutes,
     MatMomentDateModule,
-    NpmApiModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),
@@ -68,6 +69,10 @@ registerLocaleData(localeEs, 'es')
     SharedModule
   ],
   providers: [
+    {
+      provide: API_ENVIRONMENT,
+      useValue: environment
+    },
     AppProviders(),
     {
       provide: RouterStateSerializer,

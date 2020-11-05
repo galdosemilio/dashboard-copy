@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { find } from 'lodash'
 import * as moment from 'moment-timezone'
 import { Subscription } from 'rxjs'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 import { Meeting } from '@app/dashboard/schedule/models'
 import { ScheduleDataService } from '@app/layout/right-panel/services'
@@ -77,7 +77,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     private builder: FormBuilder,
     private dialog: MatDialog,
     private translator: TranslateService,
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private bus: EventsService,
     private notifier: NotifierService,

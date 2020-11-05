@@ -22,7 +22,7 @@ import { ContextService } from '@app/service'
 import { MAIN_REG_COUNTRIES, REG_COUNTRIES } from '@app/shared/model'
 import { TranslateService } from '@ngx-translate/core'
 import { differenceWith, intersectionWith, map, sortBy } from 'lodash'
-import { Country } from '@coachcare/npm-api'
+import { CountryProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-country-selector',
@@ -74,7 +74,7 @@ export class CountrySelectorComponent implements ControlValueAccessor, OnInit {
 
   constructor(
     private context: ContextService,
-    private country: Country,
+    private country: CountryProvider,
     @Optional()
     @Host()
     @SkipSelf()

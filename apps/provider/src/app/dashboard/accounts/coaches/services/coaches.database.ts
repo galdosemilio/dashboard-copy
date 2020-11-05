@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core'
 import { from, Observable } from 'rxjs'
-import { AccListResponse, Account } from '@coachcare/npm-api'
+import { AccListResponse, AccountProvider } from '@coachcare/npm-api'
 
 import { CcrDatabase } from '@app/shared'
 import { CoachesCriteria } from './coaches.criteria'
 
 @Injectable()
 export class CoachesDatabase extends CcrDatabase {
-  constructor(private account: Account) {
+  constructor(private account: AccountProvider) {
     super()
   }
 

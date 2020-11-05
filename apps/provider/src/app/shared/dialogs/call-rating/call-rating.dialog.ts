@@ -7,7 +7,7 @@ import { _, FormUtils, sleep } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { take } from 'rxjs/operators'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 type CallRatingOption = 'ok' | 'bad'
 
@@ -29,7 +29,7 @@ export class CallRatingDialog implements OnDestroy, OnInit {
   private userLogData: any = {}
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private dialogRef: MatDialogRef<CallRatingDialog>,
     private fb: FormBuilder,

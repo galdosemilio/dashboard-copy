@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Account, Session } from '@coachcare/npm-api'
+import { AccountProvider, Session } from '@coachcare/npm-api'
 import { CcrRolesMap } from '@coachcare/backend/shared'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Action } from '@ngrx/store'
@@ -13,7 +13,7 @@ import * as actions from './actions'
 export class UserEffects {
   constructor(
     private actions$: Actions,
-    private account: Account,
+    private account: AccountProvider,
     private session: Session
   ) {}
 

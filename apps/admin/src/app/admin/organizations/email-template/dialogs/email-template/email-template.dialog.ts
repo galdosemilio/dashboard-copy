@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-import { EmailTemplate, Organization } from '@coachcare/npm-api'
+import { EmailTemplate, OrganizationProvider } from '@coachcare/npm-api'
 
 interface EmailTemplateDialogProps {
   title: string
@@ -58,7 +58,7 @@ export class EmailTemplateDialogComponent implements OnInit {
     private dialog: MatDialogRef<EmailTemplateDialogComponent>,
     private fb: FormBuilder,
     private notify: NotifierService,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
-import { Account, AccSingleResponse } from '@coachcare/npm-api'
+import { AccountProvider, AccSingleResponse } from '@coachcare/npm-api'
 
 import { ContextService, NotifierService } from '@app/service'
 
@@ -8,7 +8,7 @@ import { ContextService, NotifierService } from '@app/service'
 export class CoachResolver implements Resolve<AccSingleResponse> {
   constructor(
     private router: Router,
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private notifier: NotifierService
   ) {}

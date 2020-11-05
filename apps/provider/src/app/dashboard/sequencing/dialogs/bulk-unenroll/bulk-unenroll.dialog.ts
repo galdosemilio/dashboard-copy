@@ -5,7 +5,7 @@ import { NotifierService } from '@app/service'
 import { OrganizationEntity } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import {
-  Organization,
+  OrganizationProvider,
   Sequence as SelveraSequenceService
 } from '@coachcare/npm-api'
 import { Sequence } from '../../models'
@@ -36,7 +36,7 @@ export class BulkUnenrollDialog implements OnInit {
     private dialog: MatDialogRef<BulkUnenrollDialog>,
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private sequence: SelveraSequenceService
   ) {}
 

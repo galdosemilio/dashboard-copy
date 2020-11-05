@@ -3,7 +3,7 @@ import { APP_INITIALIZER, LOCALE_ID } from '@angular/core'
 import { RouteReuseStrategy } from '@angular/router'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { CookieService } from 'ngx-cookie-service'
-import { Account, Goal, MeasurementBody } from '@coachcare/npm-api'
+import { AccountProvider, Goal, MeasurementBody } from '@coachcare/npm-api'
 import { DieterDashboardSummary } from '@coachcare/npm-api'
 
 import { CCR_CONFIG, Config } from '@app/config'
@@ -54,7 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 //   return new AccountIdentifier(ccrApiService);
 // }
 // export function ccrAccountFactory(ccrApiService: ApiService) {
-//   return new Account(ccrApiService);
+//   return new AccountProvider(ccrApiService);
 // }
 // export function ccrAffiliationFactory(ccrApiService: ApiService) {
 //   return new Affiliation(ccrApiService);
@@ -81,7 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 //   return new ContentPreference(ccrApiService);
 // }
 // export function ccrCountryFactory(ccrApiService: ApiService) {
-//   return new Country(ccrApiService);
+//   return new CountryProvider(ccrApiService);
 // }
 // export function ccrExerciseFactory(ccrApiService: ApiService) {
 //   return new Exercise(ccrApiService);
@@ -150,7 +150,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 //   return new OrganizationAssociation(ccrApiService);
 // }
 // export function ccrOrganizationFactory(ccrApiService: ApiService) {
-//   return new Organization(ccrApiService);
+//   return new OrganizationProvider(ccrApiService);
 // }
 // export function ccrMessagingFactory(ccrApiService: ApiService) {
 //   return new Messaging(ccrApiService);
@@ -198,7 +198,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 //  * Processors Factories
 //  */
 export function ccrDieterDashboardSummaryFactory(
-  account: Account,
+  account: AccountProvider,
   measurementBody: MeasurementBody,
   goal: Goal
 ) {
@@ -226,7 +226,7 @@ export function AppProviders() {
     //       deps: [ApiService]
     //     },
     //     {
-    //       provide: Account,
+    //       provide: AccountProvider,
     //       useFactory: ccrAccountFactory,
     //       deps: [ApiService]
     //     },
@@ -276,7 +276,7 @@ export function AppProviders() {
     //       deps: [ApiService]
     //     },
     //     {
-    //       provide: Country,
+    //       provide: CountryProvider,
     //       useFactory: ccrCountryFactory,
     //       deps: [ApiService]
     //     },
@@ -387,7 +387,7 @@ export function AppProviders() {
     //       deps: [ApiService]
     //     },
     //     {
-    //       provide: Organization,
+    //       provide: OrganizationProvider,
     //       useFactory: ccrOrganizationFactory,
     //       deps: [ApiService]
     //     },
@@ -455,7 +455,7 @@ export function AppProviders() {
     {
       provide: DieterDashboardSummary,
       useFactory: ccrDieterDashboardSummaryFactory,
-      deps: [Account, MeasurementBody, Goal]
+      deps: [AccountProvider, MeasurementBody, Goal]
     },
     // angular providers
     {

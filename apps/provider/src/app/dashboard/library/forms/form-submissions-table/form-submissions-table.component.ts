@@ -5,7 +5,7 @@ import { FormSubmission } from '@app/dashboard/library/forms/models'
 import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-library-form-submissions-table',
@@ -26,7 +26,7 @@ export class FormSubmissionsTableComponent {
   ]
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private dialog: MatDialog,
     private context: ContextService,
     private notifier: NotifierService,

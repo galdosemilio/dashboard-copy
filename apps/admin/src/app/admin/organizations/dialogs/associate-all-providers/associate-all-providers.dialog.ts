@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import {
-  Account,
+  AccountProvider,
   AccountFullData,
   AccountTypeIds,
   ActiveCampaign
@@ -28,7 +28,7 @@ export class AssociateAllProvidersDialogComponent implements OnInit {
   private organizationId: string
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private activeCampaign: ActiveCampaign,
     private cdr: ChangeDetectorRef,
     private context: ContextService,

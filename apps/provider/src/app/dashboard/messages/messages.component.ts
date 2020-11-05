@@ -23,7 +23,7 @@ import { findIndex, get, uniqBy } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'
 import { mergeMap, sampleTime } from 'rxjs/operators'
-import { Account } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/npm-api'
 import { ThreadsDatabase, ThreadsDataSource } from './services'
 
 @Component({
@@ -49,7 +49,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private account: Account,
+    private account: AccountProvider,
     private database: ThreadsDatabase,
     private config: ConfigService,
     private context: ContextService,

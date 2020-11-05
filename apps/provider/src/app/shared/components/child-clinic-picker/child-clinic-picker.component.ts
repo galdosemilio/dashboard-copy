@@ -11,7 +11,7 @@ import { NotifierService } from '@app/service'
 import { OrganizationEntity } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { debounceTime } from 'rxjs/operators'
-import { Organization } from '@coachcare/npm-api'
+import { OrganizationProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-child-clinic-picker',
@@ -45,7 +45,7 @@ export class CcrChildClinicPickerComponent implements OnDestroy, OnInit {
   constructor(
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private organizationService: Organization
+    private organizationService: OrganizationProvider
   ) {}
 
   public ngOnDestroy(): void {}

@@ -22,7 +22,7 @@ import { ContextService } from '@coachcare/common/services'
 import { MAIN_REG_COUNTRIES, REG_COUNTRIES } from '@coachcare/common/shared'
 import { TranslateService } from '@ngx-translate/core'
 import { differenceWith, intersectionWith, map, sortBy } from 'lodash'
-import { Country } from '@coachcare/npm-api'
+import { CountryProvider } from '@coachcare/npm-api'
 
 @Component({
   selector: 'ccr-form-field-country',
@@ -75,7 +75,7 @@ export class CountryFormFieldComponent implements ControlValueAccessor, OnInit {
 
   constructor(
     private context: ContextService,
-    private country: Country,
+    private country: CountryProvider,
     @Optional()
     @Host()
     @SkipSelf()

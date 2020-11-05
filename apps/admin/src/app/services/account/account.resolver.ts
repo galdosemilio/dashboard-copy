@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
 
-import { Account, AccountSingle } from '@coachcare/npm-api'
+import { AccountProvider, AccountSingle } from '@coachcare/npm-api'
 
 @Injectable()
 export class AccountResolver implements Resolve<AccountSingle | null> {
-  constructor(private router: Router, private account: Account) {}
+  constructor(private router: Router, private account: AccountProvider) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<AccountSingle | null> {
     const id = route.paramMap.get('id') as string

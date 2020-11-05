@@ -3,12 +3,12 @@ import { CcrDatabase } from '@app/shared'
 import {
   OrgAccessRequest,
   OrgAccessResponse,
-  Organization
+  OrganizationProvider
 } from '@coachcare/npm-api'
 
 @Injectable()
 export class AssociationsDatabase implements CcrDatabase {
-  constructor(private organization: Organization) {}
+  constructor(private organization: OrganizationProvider) {}
 
   fetch(request: OrgAccessRequest): Promise<OrgAccessResponse> {
     return this.organization.getAccessibleList(request)

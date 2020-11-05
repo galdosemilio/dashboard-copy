@@ -8,14 +8,14 @@ import {
   GetListOrganizationResponse,
   UpdateOrganizationRequest
 } from '@coachcare/npm-api'
-import { Organization } from '@coachcare/npm-api'
+import { OrganizationProvider } from '@coachcare/npm-api'
 import { from, Observable } from 'rxjs'
 
 import { OrganizationsCriteria } from './organization.types'
 
 @Injectable()
 export class OrganizationsDatabase extends AppDatabase {
-  constructor(private organization: Organization) {
+  constructor(private organization: OrganizationProvider) {
     super()
   }
 

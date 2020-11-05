@@ -54,7 +54,7 @@
     "unified-signatures": true,
     "variable-name": false,
     "nx-enforce-module-boundaries": [
-      false,
+      true,
       {
         "enforceBuildableLibDependency": true,
         "allow": [],

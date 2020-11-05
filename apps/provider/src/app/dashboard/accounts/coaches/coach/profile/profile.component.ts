@@ -18,7 +18,7 @@ import {
   PromptDialog
 } from '@app/shared'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Access, Account, Affiliation } from '@coachcare/npm-api'
+import { Access, AccountProvider, Affiliation } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-coach-profile',
@@ -41,7 +41,7 @@ export class CoachProfileComponent implements BindForm, OnDestroy, OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private account: Account,
+    private account: AccountProvider,
     private access: Access,
     private affiliation: Affiliation,
     private context: ContextService,

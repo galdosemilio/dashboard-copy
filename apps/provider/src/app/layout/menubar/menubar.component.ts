@@ -28,7 +28,7 @@ import { get } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Organization, User } from '@coachcare/npm-api'
+import { OrganizationProvider, User } from '@coachcare/npm-api'
 import { HelpComponent } from './help'
 
 @Component({
@@ -64,7 +64,7 @@ export class MenubarComponent implements OnDestroy, OnInit {
     protected dialog: MatDialog,
     private auth: AuthService,
     private cdr: ChangeDetectorRef,
-    private orgservice: Organization,
+    private orgservice: OrganizationProvider,
     private overlay: Overlay,
     private store: Store<CCRConfig>,
     private user: User

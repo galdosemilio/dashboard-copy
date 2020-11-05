@@ -12,11 +12,15 @@ import {
   MatDialogRef
 } from '@coachcare/common/material'
 import { select, Store } from '@ngrx/store'
-import { Account } from '@coachcare/npm-api'
 
 import { CCRConfig } from '@app/config'
-import { ConfigService, NotifierService } from '@app/service'
-import { AccListRequest, AccountAccessData, Profile } from '@coachcare/npm-api'
+import { NotifierService } from '@app/service'
+import {
+  AccountProvider,
+  AccListRequest,
+  AccountAccessData,
+  Profile
+} from '@coachcare/npm-api'
 import { paletteSelector } from '@app/store/config'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
@@ -36,9 +40,8 @@ export class ScheduleSelectDialog implements OnInit {
 
   constructor(
     private store: Store<CCRConfig>,
-    private account: Account,
+    private account: AccountProvider,
     private dialogRef: MatDialogRef<ScheduleSelectDialog>,
-    private config: ConfigService,
     private notifier: NotifierService,
     @Inject(MAT_DIALOG_DATA)
     public data: {

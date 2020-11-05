@@ -50,7 +50,10 @@
               "moment",
               "linkifyjs",
               "twilio-video",
-              "ngrx-store-freeze"
+              "ngrx-store-freeze",
+              "hammerjs",
+              "chart.js",
+              "socket.io-client"
             ]
           },
           "configurations": {

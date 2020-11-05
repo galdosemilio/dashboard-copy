@@ -9,7 +9,7 @@ import {
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/common/material'
-import { Account, Messaging } from '@coachcare/npm-api'
+import { AccountProvider, Messaging } from '@coachcare/npm-api'
 
 import { MessageRecipient } from '@app/shared'
 import { AccountAccessData, AccSingleResponse } from '@coachcare/npm-api'
@@ -37,7 +37,7 @@ export class MessagesRecipientsComponent implements OnInit {
   public accounts: Array<AccountAccessData>
   public selected: Array<MessageRecipient> = []
 
-  constructor(private account: Account, private messaging: Messaging) {}
+  constructor(private account: AccountProvider, private messaging: Messaging) {}
 
   ngOnInit() {
     this.searchCtrl = new FormControl()

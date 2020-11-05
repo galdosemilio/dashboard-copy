@@ -4,7 +4,7 @@ import {
   CommunicationPreference,
   ContentPreference,
   MessagingPreference,
-  Organization,
+  OrganizationProvider,
   OrganizationPreference,
   RPM,
   Sequence
@@ -39,7 +39,7 @@ export class FeaturesComponent implements OnDestroy, OnInit {
     private fb: FormBuilder,
     private messagingPref: MessagingPreference,
     private notifier: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private organizationPreference: OrganizationPreference,
     private rpm: RPM,
     private sequence: Sequence

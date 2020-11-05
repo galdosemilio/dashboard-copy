@@ -35,7 +35,7 @@ import { clone } from 'lodash'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'
-import { Account, Goal, Timezone } from '@coachcare/npm-api'
+import { AccountProvider, Goal, Timezone } from '@coachcare/npm-api'
 import { AccountIdentifiersProps } from './account-identifiers/models'
 
 @Component({
@@ -90,7 +90,7 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
     private database: PackageDatabase,
     private responsive: Store<UIResponsiveState>,
     private translator: TranslateService,
-    private account: Account,
+    private account: AccountProvider,
     private goal: Goal,
     private timezone: Timezone,
     private notifier: NotifierService
