@@ -5,42 +5,46 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild,
-} from '@angular/core';
-import { MatDialog, MatSort, Sort } from '@coachcare/common/material';
-import { Router } from '@angular/router';
-import { Affiliation, Organization } from 'selvera-api';
+  ViewChild
+} from '@angular/core'
+import { MatDialog, MatSort, Sort } from '@coachcare/common/material'
+import { Router } from '@angular/router'
+import {
+  AccountAccessData,
+  AccountTypeId,
+  Affiliation,
+  Organization
+} from '@coachcare/npm-api'
 
-import { ContextService, NotifierService } from '@app/service';
+import { ContextService, NotifierService } from '@app/service'
 import {
   _,
   AccountRedirectDialog,
   PromptDialog,
-  PromptDialogData,
-} from '@app/shared';
-import { AccountAccessData, AccountTypeId } from '@app/shared/selvera-api';
-import { CoachesDataSource } from '../services';
+  PromptDialogData
+} from '@app/shared'
+import { CoachesDataSource } from '../services'
 
 @Component({
   selector: 'app-coaches-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  styleUrls: ['./table.component.scss']
 })
 export class CoachesTableComponent implements OnInit {
   @Input()
-  columns = ['firstName', 'lastName', 'email', 'date', 'actions'];
+  columns = ['firstName', 'lastName', 'email', 'date', 'actions']
   @Input()
-  source: CoachesDataSource | null;
+  source: CoachesDataSource | null
   @Input()
-  showActions: boolean;
+  showActions: boolean
 
   @Output()
-  onSorted = new EventEmitter<Sort>();
+  onSorted = new EventEmitter<Sort>()
 
   @ViewChild(MatSort, { static: false })
-  sort: MatSort;
+  sort: MatSort
 
-  public authenticatedUserId: string;
+  public authenticatedUserId: string
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -53,12 +57,12 @@ export class CoachesTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cdr.detectChanges();
-    this.authenticatedUserId = this.context.user.id;
+    this.cdr.detectChanges()
+    this.authenticatedUserId = this.context.user.id
   }
 
   onSort(sort: Sort) {
-    this.onSorted.emit(sort);
+    this.onSorted.emit(sort)
   }
 
   async onRemove(coach) {
@@ -67,27 +71,27 @@ export class CoachesTableComponent implements OnInit {
         account: coach.id,
         status: 'active',
         strict: true,
-        limit: 2,
-      });
+        limit: 2
+      })
 
       const hasDiffClinic = response.data.find(
         (access) => access.organization.id !== this.context.organizationId
-      );
+      )
 
       if (hasDiffClinic) {
         this.dialog.open(AccountRedirectDialog, {
           data: {
             account: coach,
-            accountType: AccountTypeId.Provider,
+            accountType: AccountTypeId.Provider
           },
-          width: '60vw',
-        });
+          width: '60vw'
+        })
       } else {
         const data: PromptDialogData = {
           title: _('BOARD.COACH_REMOVE'),
           content: _('BOARD.COACH_REMOVE_PROMPT'),
-          contentParams: { coach: `${coach.firstName} ${coach.lastName}` },
-        };
+          contentParams: { coach: `${coach.firstName} ${coach.lastName}` }
+        }
         this.dialog
           .open(PromptDialog, { data: data })
           .afterClosed()
@@ -96,32 +100,32 @@ export class CoachesTableComponent implements OnInit {
               this.affiliation
                 .disassociate({
                   account: coach.id,
-                  organization: this.source.args.organization,
+                  organization: this.source.args.organization
                 })
                 .then(() => {
-                  this.notifier.success(_('NOTIFY.SUCCESS.COACH_REMOVED'));
+                  this.notifier.success(_('NOTIFY.SUCCESS.COACH_REMOVED'))
                   // trigger a table refresh
-                  this.source.refresh();
+                  this.source.refresh()
                 })
-                .catch((err) => this.notifier.error(err));
+                .catch((err) => this.notifier.error(err))
             }
-          });
+          })
       }
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
   showCoach(coach: AccountAccessData, newTab?: boolean): void {
     if (this.showActions) {
-      this.context.account = coach;
+      this.context.account = coach
       if (newTab) {
         window.open(
           `${window.location.href.split('?')[0]}/${coach.id}`,
           '_blank'
-        );
+        )
       } else {
-        this.router.navigate(['/accounts/coaches', coach.id]);
+        this.router.navigate(['/accounts/coaches', coach.id])
       }
     }
   }

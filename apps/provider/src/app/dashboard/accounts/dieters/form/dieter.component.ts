@@ -28,7 +28,7 @@ import {
   AccSingleResponse,
   FetchGoalResponse,
   TimezoneResponse
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'

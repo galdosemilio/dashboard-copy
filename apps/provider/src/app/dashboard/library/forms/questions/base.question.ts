@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { FormQuestion } from '@app/dashboard/library/forms/models'
 import { BindForm, BindFormDirective } from '@app/shared/directives'
-import { FormAnswer } from '@app/shared/selvera-api'
+import { FormAnswer } from '@coachcare/npm-api'
 import * as linkifyHtml from 'linkifyjs/html'
 
 @Injectable()

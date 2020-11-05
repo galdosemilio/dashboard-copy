@@ -1,15 +1,15 @@
-import { MatPaginator, MatSort } from '@coachcare/common/material';
-import { Observable } from 'rxjs';
+import { MatPaginator, MatSort } from '@coachcare/common/material'
+import { Observable } from 'rxjs'
 
-import { NotifierService } from '@app/service';
-import { TableDataSource } from '@app/shared';
+import { NotifierService } from '@app/service'
+import { TableDataSource } from '@app/shared'
 import {
   OrgAccesibleSort,
   OrgAccessResponse,
-  OrganizationAccess,
-} from '@app/shared/selvera-api';
-import { ClinicCriteria } from './clinics.criteria';
-import { ClinicsDatabase } from './clinics.database';
+  OrganizationAccess
+} from '@coachcare/npm-api'
+import { ClinicCriteria } from './clinics.criteria'
+import { ClinicsDatabase } from './clinics.database'
 
 export class ClinicsDataSource extends TableDataSource<
   OrganizationAccess,
@@ -22,14 +22,14 @@ export class ClinicsDataSource extends TableDataSource<
     private paginator?: MatPaginator,
     private sort?: MatSort
   ) {
-    super();
+    super()
 
     // listen the paginator events
     if (this.paginator) {
       this.addOptional(this.paginator.page, () => ({
         offset: this.pageIndex * this.pageSize,
-        limit: this.pageSize,
-      }));
+        limit: this.pageSize
+      }))
     }
 
     // listen the sorter events
@@ -39,27 +39,27 @@ export class ClinicsDataSource extends TableDataSource<
           {
             property:
               (this.sort.active as OrgAccesibleSort['property']) || 'name',
-            dir: (this.sort.direction as OrgAccesibleSort['dir']) || 'asc',
-          },
-        ],
-      }));
+            dir: (this.sort.direction as OrgAccesibleSort['dir']) || 'asc'
+          }
+        ]
+      }))
     }
   }
 
   defaultFetch(): OrgAccessResponse {
-    return { data: [], pagination: {} };
+    return { data: [], pagination: {} }
   }
 
   fetch(criteria: ClinicCriteria): Observable<OrgAccessResponse> {
-    return this.database.fetch(criteria);
+    return this.database.fetch(criteria)
   }
 
   mapResult(result: OrgAccessResponse): Array<OrganizationAccess> {
     // pagination handling
     this.total = result.pagination.next
       ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length;
+      : this.criteria.offset + result.data.length
 
-    return result.data;
+    return result.data
   }
 }

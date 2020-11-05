@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { Organization } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { from, Observable } from 'rxjs'
+import { OrgAccessResponse, Organization } from '@coachcare/npm-api'
 
-import { CcrDatabase } from '@app/shared';
-import { OrgAccessResponse } from '@app/shared/selvera-api';
-import { ClinicCriteria } from './clinics.criteria';
+import { CcrDatabase } from '@app/shared'
+import { ClinicCriteria } from './clinics.criteria'
 
 @Injectable()
 export class ClinicsDatabase extends CcrDatabase {
   constructor(private organization: Organization) {
-    super();
+    super()
   }
 
   fetch(args: ClinicCriteria): Observable<OrgAccessResponse> {
@@ -28,6 +27,6 @@ export class ClinicsDatabase extends CcrDatabase {
         offset: args.offset,
         sort: args.sort
       })
-    );
+    )
   }
 }

@@ -10,7 +10,7 @@ import { ContextService, NotifierService } from '@app/service'
 import {
   CreateManualInteractionRequest,
   InteractionType
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { unionBy } from 'lodash'
 import * as moment from 'moment'

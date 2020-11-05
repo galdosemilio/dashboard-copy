@@ -14,7 +14,7 @@ import {
 } from '@app/dashboard/sequencing/models/sequence'
 import { Transition } from '@app/dashboard/sequencing/models/sequence-transition'
 import { ContextService, NotifierService } from '@app/service'
-import { AccountAccessData, OrganizationEntity } from '@app/shared/selvera-api'
+import { AccountAccessData, OrganizationEntity } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'

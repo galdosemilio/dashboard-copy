@@ -7,7 +7,7 @@ import { ContextService, NotifierService } from '@app/service'
 import {
   NotificationToggleRequest,
   ToggleGroupAlertsRequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { first } from 'rxjs/operators'
 import { AlertNotification } from '../models'
 import {

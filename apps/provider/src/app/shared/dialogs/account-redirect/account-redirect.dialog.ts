@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { Router } from '@angular/router';
-import { AccountTypeId } from '@app/shared/selvera-api';
+import { Component, Inject, OnInit } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { Router } from '@angular/router'
+import { AccountTypeId } from '@coachcare/npm-api'
 
 interface AccountRedirectDialogProps {
-  account: any;
-  accountType: string;
+  account: any
+  accountType: string
 }
 
 @Component({
@@ -13,12 +13,12 @@ interface AccountRedirectDialogProps {
   templateUrl: './account-redirect.dialog.html',
   styleUrls: ['./account-redirect.dialog.scss'],
   host: {
-    class: 'ccr-dialog',
-  },
+    class: 'ccr-dialog'
+  }
 })
 export class AccountRedirectDialog implements OnInit {
-  accountType: string;
-  accountId: string;
+  accountType: string
+  accountId: string
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: AccountRedirectDialogProps,
@@ -28,8 +28,8 @@ export class AccountRedirectDialog implements OnInit {
 
   ngOnInit(): void {
     if (this.data) {
-      this.accountId = this.data.account.id;
-      this.accountType = this.data.accountType;
+      this.accountId = this.data.account.id
+      this.accountType = this.data.accountType
     }
   }
 
@@ -39,12 +39,12 @@ export class AccountRedirectDialog implements OnInit {
         '/accounts/patients',
         this.accountId,
         'settings',
-        { s: 'associations' },
-      ]);
+        { s: 'associations' }
+      ])
     } else if (this.accountType === AccountTypeId.Provider) {
-      this.router.navigate(['/accounts/coaches', this.accountId, 'profile']);
+      this.router.navigate(['/accounts/coaches', this.accountId, 'profile'])
     }
 
-    this.dialog.close();
+    this.dialog.close()
   }
 }

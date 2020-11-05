@@ -11,7 +11,7 @@ import * as moment from 'moment-timezone'
 import { ScheduleDataService } from '@app/layout/right-panel/services'
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import { _, FormUtils, TranslationsObject } from '@app/shared'
-import { AddMeetingRequest, MeetingAttendee } from '@app/shared/selvera-api'
+import { AddMeetingRequest, MeetingAttendee } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-set-unavailability',

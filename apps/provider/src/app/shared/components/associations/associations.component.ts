@@ -8,7 +8,7 @@ import {
 } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations'
 import { ContextService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared/dialogs'
-import { OrganizationAccess } from '@app/shared/selvera-api'
+import { OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { OrganizationAssociation } from 'selvera-api'
 

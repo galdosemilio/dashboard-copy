@@ -7,7 +7,7 @@ import {
   CountedPaginatedResponse,
   FetchPatientListingRequest,
   PatientListingItem
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { from, Observable } from 'rxjs'
 import {

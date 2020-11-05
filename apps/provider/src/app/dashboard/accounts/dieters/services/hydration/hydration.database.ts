@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
-import { from, Observable } from 'rxjs';
-import { Hydration } from 'selvera-api';
+import { from, Observable } from 'rxjs'
+import { Hydration } from 'selvera-api'
 
-import { CcrDatabase } from '@app/shared';
-import { GetHydrationSummaryRequest } from '@app/shared/selvera-api';
+import { CcrDatabase } from '@app/shared'
+import { GetHydrationSummaryRequest } from '@coachcare/npm-api'
 
 @Injectable()
 export class HydrationDatabase extends CcrDatabase {
   constructor(private hydration: Hydration) {
-    super();
+    super()
   }
 
   fetchSummary(args: GetHydrationSummaryRequest): Observable<any> {
@@ -22,6 +22,6 @@ export class HydrationDatabase extends CcrDatabase {
           account: args.account
         })
         .then((summaryEntries) => summaryEntries.reverse())
-    );
+    )
   }
 }

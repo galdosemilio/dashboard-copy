@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Reports } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { Reports } from 'selvera-api'
 
-import { CcrDatabase } from '@app/shared/model';
+import { CcrDatabase } from '@app/shared/model'
 import {
   EnrollmentSimpleReportRequest,
   EnrollmentSimpleReportResponse,
@@ -14,12 +14,12 @@ import {
   RPMStateSummaryItem,
   SignupsTimelineRequest,
   SignupsTimelineSegment
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class ReportsDatabase extends CcrDatabase {
   constructor(private reports: Reports) {
-    super();
+    super()
   }
 
   // fetchEnrollmentReport(
@@ -44,9 +44,9 @@ export class ReportsDatabase extends CcrDatabase {
       endDate: args.endDate,
       detailed: args.detailed ? args.detailed : true,
       unit: args.unit ? args.unit : undefined
-    };
+    }
 
-    return this.reports.fetchEnrollmentTimeline(request);
+    return this.reports.fetchEnrollmentTimeline(request)
   }
 
   fetchSignupsTimelineReport(
@@ -58,12 +58,14 @@ export class ReportsDatabase extends CcrDatabase {
       endDate: args.endDate,
       detailed: args.detailed ? args.detailed : true,
       unit: args.unit ? args.unit : undefined
-    };
+    }
 
-    return this.reports.fetchSignupsTimeline(request);
+    return this.reports.fetchSignupsTimeline(request)
   }
 
-  fetchPatientCount(args: PatientCountRequest): Promise<Array<PatientCountSegment>> {
+  fetchPatientCount(
+    args: PatientCountRequest
+  ): Promise<Array<PatientCountSegment>> {
     const request: PatientCountRequest = {
       organization: args.organization,
       startDate: args.startDate,
@@ -71,9 +73,9 @@ export class ReportsDatabase extends CcrDatabase {
       package: args.package ? args.package : undefined,
       unit: args.unit ? args.unit : undefined,
       mode: args.mode ? args.mode : undefined
-    };
+    }
 
-    return this.reports.fetchPatientCount(request);
+    return this.reports.fetchPatientCount(request)
   }
 
   public fetchSimpleEnrollmentReport(
@@ -86,13 +88,13 @@ export class ReportsDatabase extends CcrDatabase {
       enrollmentLimit: args.enrollmentLimit ? args.enrollmentLimit : undefined,
       limit: args.limit ? args.limit : undefined,
       offset: args.offset ? args.offset : undefined
-    };
-    return this.reports.fetchSimpleEnrollmentReport(request);
+    }
+    return this.reports.fetchSimpleEnrollmentReport(request)
   }
 
   fetchRPMBillingReport(
     args: FetchRPMBillingSummaryRequest
   ): Promise<PagedResponse<RPMStateSummaryItem>> {
-    return this.reports.fetchRPMBillingSummary(args);
+    return this.reports.fetchRPMBillingSummary(args)
   }
 }

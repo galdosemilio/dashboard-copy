@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { STORAGE_NEWS_LAST_SEEN_TIMESTAMP } from '@app/config'
 import { NotifierService } from '@app/service/notifier.service'
-import { ZendeskArticle } from '@app/shared/selvera-api'
+import { ZendeskArticle } from '@coachcare/npm-api'
 import * as moment from 'moment'
 import { BehaviorSubject } from 'rxjs'
 import { Zendesk } from 'selvera-api'

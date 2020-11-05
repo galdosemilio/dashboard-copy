@@ -15,7 +15,7 @@ import {
 import {
   SignupsTimelineRequest,
   SignupsTimelineSegment
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { ReportsDatabase } from './reports.database'
 
 export class SignupsReportsDataSource extends ChartDataSource<

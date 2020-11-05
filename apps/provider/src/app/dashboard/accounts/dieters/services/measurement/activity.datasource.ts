@@ -1,9 +1,9 @@
-import { from, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs'
 
-import { NotifierService } from '@app/service';
-import { CcrDataSource } from '@app/shared';
-import { FetchActivityRequest, FetchActivityResponse } from '@app/shared/selvera-api';
-import { MeasurementDatabase } from './measurement.database';
+import { NotifierService } from '@app/service'
+import { CcrDataSource } from '@app/shared'
+import { FetchActivityRequest, FetchActivityResponse } from '@coachcare/npm-api'
+import { MeasurementDatabase } from './measurement.database'
 
 export class ActivityDataSource extends CcrDataSource<
   FetchActivityResponse,
@@ -14,18 +14,22 @@ export class ActivityDataSource extends CcrDataSource<
     protected notify: NotifierService,
     protected database: MeasurementDatabase
   ) {
-    super();
+    super()
   }
 
   defaultFetch(): Array<FetchActivityResponse> {
-    return [];
+    return []
   }
 
-  fetch(criteria: FetchActivityRequest): Observable<Array<FetchActivityResponse>> {
-    return from(this.database.fetchActivity(criteria));
+  fetch(
+    criteria: FetchActivityRequest
+  ): Observable<Array<FetchActivityResponse>> {
+    return from(this.database.fetchActivity(criteria))
   }
 
-  mapResult(result: Array<FetchActivityResponse>): Array<FetchActivityResponse> {
-    return result;
+  mapResult(
+    result: Array<FetchActivityResponse>
+  ): Array<FetchActivityResponse> {
+    return result
   }
 }

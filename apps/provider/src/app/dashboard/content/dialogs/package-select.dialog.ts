@@ -1,25 +1,25 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { ContextService } from '@app/service';
+import { Component, Inject, OnInit } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { ContextService } from '@app/service'
 import {
   Package,
-  PackageSelectEvents,
-} from '@app/shared/components/package-table/models';
+  PackageSelectEvents
+} from '@app/shared/components/package-table/models'
 import {
   PackageDatabase,
-  PackageDatasource,
-} from '@app/shared/components/package-table/services';
-import { FetchPackagesSegment } from '@app/shared/selvera-api';
+  PackageDatasource
+} from '@app/shared/components/package-table/services'
+import { FetchPackagesSegment } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-content-package-select-dialog',
-  templateUrl: './package-select.dialog.html',
+  templateUrl: './package-select.dialog.html'
 })
 export class PackageSelectDialog implements OnInit {
-  public columns = ['title', 'check'];
-  public contentPackages: Package[] = [];
-  public events: PackageSelectEvents = new PackageSelectEvents();
-  public source: PackageDatasource;
+  public columns = ['title', 'check']
+  public contentPackages: Package[] = []
+  public events: PackageSelectEvents = new PackageSelectEvents()
+  public source: PackageDatasource
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -27,8 +27,8 @@ export class PackageSelectDialog implements OnInit {
     private database: PackageDatabase,
     private dialogRef: MatDialogRef<PackageSelectDialog>
   ) {
-    this.source = new PackageDatasource(this.context, this.database);
-    this.subscribeToEvents();
+    this.source = new PackageDatasource(this.context, this.database)
+    this.subscribeToEvents()
   }
 
   async ngOnInit() {
@@ -36,37 +36,37 @@ export class PackageSelectDialog implements OnInit {
       const allPackages = await this.database
         .fetch({
           organization: this.data.content.organization.id,
-          isActive: true,
+          isActive: true
         })
-        .toPromise();
-      const packages: Package[] = [];
+        .toPromise()
+      const packages: Package[] = []
       while (this.data.packages.length) {
-        const p: FetchPackagesSegment = this.data.packages.shift();
+        const p: FetchPackagesSegment = this.data.packages.shift()
         const existingPackageAssociation = allPackages.data.find(
           (pkg) => pkg.package.id === p.id
-        );
+        )
         packages.push(
           new Package({
             ...(existingPackageAssociation
               ? {
                   ...existingPackageAssociation,
-                  ...existingPackageAssociation.package,
+                  ...existingPackageAssociation.package
                 }
               : {}),
-            checked: true,
+            checked: true
           })
-        );
+        )
       }
-      this.contentPackages = packages;
+      this.contentPackages = packages
     }
   }
 
   onPackagesChange(packages: Package[]): void {
-    this.contentPackages = packages;
+    this.contentPackages = packages
   }
 
   onSave(): void {
-    this.dialogRef.close(this.contentPackages);
+    this.dialogRef.close(this.contentPackages)
   }
 
   private subscribeToEvents(): void {}

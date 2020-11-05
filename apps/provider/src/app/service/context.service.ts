@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { findIndex, isEmpty, merge, pickBy } from 'lodash';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { findIndex, isEmpty, merge, pickBy } from 'lodash'
+import { BehaviorSubject } from 'rxjs'
 import {
   Account,
   CommunicationPreference,
@@ -11,11 +11,11 @@ import {
   RPM,
   Sequence,
   User
-} from 'selvera-api';
+} from 'selvera-api'
 
-import { CCRConfig, CCRPalette, Palette } from '@app/config';
-import { InitLayout } from '@app/layout/store/layout';
-import { UIState } from '@app/layout/store/state';
+import { CCRConfig, CCRPalette, Palette } from '@app/config'
+import { InitLayout } from '@app/layout/store/layout'
+import { UIState } from '@app/layout/store/state'
 import {
   AccountAccessData,
   AccountAccessOrganization,
@@ -32,31 +32,33 @@ import {
   OrgPreferencesResponse,
   OrgSingleResponse,
   RPMPreferenceSingle
-} from '@app/shared/selvera-api';
-import { UpdatePalette } from '@app/store/config';
-import { AuthService } from './auth.service';
-import { ConfigService } from './config.service';
-import { EventsService } from './events.service';
-import { LanguageService } from './language.service';
+} from '@coachcare/npm-api'
+import { UpdatePalette } from '@app/store/config'
+import { AuthService } from './auth.service'
+import { ConfigService } from './config.service'
+import { EventsService } from './events.service'
+import { LanguageService } from './language.service'
 
 interface CcrOrgPreferencesResponse extends OrgPreferencesResponse {
-  comms: CommunicationPreferenceSingle;
-  fileVault: ContentPreferenceSingle;
-  messaging: MessagingOrgPreference;
-  rpm: RPMPreferenceSingle;
-  sequences: GetSeqOrgPreferenceResponse;
+  comms: CommunicationPreferenceSingle
+  fileVault: ContentPreferenceSingle
+  messaging: MessagingOrgPreference
+  rpm: RPMPreferenceSingle
+  sequences: GetSeqOrgPreferenceResponse
 }
 
-export type CurrentAccount = AccSingleResponse & { preferences?: AccPreferencesResponse };
-export type SelectedAccount = AccSingleResponse;
+export type CurrentAccount = AccSingleResponse & {
+  preferences?: AccPreferencesResponse
+}
+export type SelectedAccount = AccSingleResponse
 export type SelectedOrganization = OrganizationWithAddress & {
-  permissions: Partial<OrganizationPermission>;
-  assets?: Partial<OrganizationPreferences>;
-  preferences?: Partial<CcrOrgPreferencesResponse>;
-  isDirect: boolean;
-  mala?: any;
+  permissions: Partial<OrganizationPermission>
+  assets?: Partial<OrganizationPreferences>
+  preferences?: Partial<CcrOrgPreferencesResponse>
+  isDirect: boolean
+  mala?: any
   // disabled?: boolean;
-};
+}
 
 @Injectable()
 export class ContextService {
@@ -83,28 +85,28 @@ export class ContextService {
   init() {
     return (): Promise<any> => {
       return new Promise((resolve, reject) => {
-        this.lang.initLanguage();
+        this.lang.initLanguage()
         if (!this.auth.check()) {
-          this.auth.redirect();
-          reject();
+          this.auth.redirect()
+          reject()
         }
-        this.ui.dispatch(new InitLayout());
-        this.loadData().then(resolve);
-      });
-    };
+        this.ui.dispatch(new InitLayout())
+        this.loadData().then(resolve)
+      })
+    }
   }
 
   /**
    * Logged User
    */
   async loadData(): Promise<boolean> {
-    this.isOrphaned = false;
+    this.isOrphaned = false
 
     try {
-      await this.updateUser();
+      await this.updateUser()
 
       try {
-        this.selected = this.user;
+        this.selected = this.user
 
         // check if associated to organizations
         try {
@@ -112,32 +114,32 @@ export class ContextService {
             status: 'active',
             strict: false,
             limit: 'all'
-          });
+          })
           this.organizations = orgs.data.map((o) => ({
             ...o.organization,
             permissions: o.permissions,
             isDirect: o.isDirect
-          }));
+          }))
         } catch (e) {
-          console.error('No organizations associated!');
+          console.error('No organizations associated!')
           this.updateColors({
             primary: '#f16862',
             accent: '#676a6c',
             toolbar: '#676a6c'
-          });
-          this.isOrphaned = true;
-          return false;
+          })
+          this.isOrphaned = true
+          return false
         }
 
         if (!this.organizations.length) {
-          console.error('No organizations associated!');
+          console.error('No organizations associated!')
           this.updateColors({
             primary: '#f16862',
             accent: '#676a6c',
             toolbar: '#676a6c'
-          });
-          this.isOrphaned = true;
-          return false;
+          })
+          this.isOrphaned = true
+          return false
         }
 
         // if (this.organizations.length > 1) {
@@ -151,94 +153,97 @@ export class ContextService {
         // }
 
         // check the user preferences
-        let preferences: AccPreferencesResponse;
-        let defaultOrganization: string;
-        let org: SelectedOrganization;
+        let preferences: AccPreferencesResponse
+        let defaultOrganization: string
+        let org: SelectedOrganization
 
         if (this.user.preference && this.user.preference.defaultOrganization) {
-          defaultOrganization = this.user.preference.defaultOrganization.toString();
-          org = await this.getOrg(defaultOrganization);
+          defaultOrganization = this.user.preference.defaultOrganization.toString()
+          org = await this.getOrg(defaultOrganization)
         }
         if (!org) {
-          org = this.getAccessibleOrg();
-          defaultOrganization = org.id;
+          org = this.getAccessibleOrg()
+          defaultOrganization = org.id
         }
-        preferences = merge({}, this.user.preference, { defaultOrganization });
+        preferences = merge({}, this.user.preference, { defaultOrganization })
 
         if (!this.user.preference && org.permissions.viewAll) {
           await this.accservice.savePreferences({
             account: this.user.id,
             ...preferences
-          });
+          })
         }
 
-        await this.updateOrganization(org);
+        await this.updateOrganization(org)
 
-        return true;
+        return true
       } catch (err) {
         // coudn't retrieve the account data
-        console.error(err);
-        return false;
+        console.error(err)
+        return false
       }
     } catch (e) {
       // couldn't retrieve the current session
-      this.auth.redirect();
-      return false;
+      this.auth.redirect()
+      return false
     }
   }
 
   async updateUser() {
     // TODO remove profile call
-    const profile = await this.profile.get(true);
-    this.user = await this.accservice.getSingle(profile.id);
-    this.lang.uid = profile.id;
+    const profile = await this.profile.get(true)
+    this.user = await this.accservice.getSingle(profile.id)
+    this.lang.uid = profile.id
     if (this.user.preferredLocales.length) {
-      this.lang.use(this.user.preferredLocales[0]);
+      this.lang.use(this.user.preferredLocales[0])
     }
-    this.bus.trigger('user.data', this.user);
+    this.bus.trigger('user.data', this.user)
   }
 
-  async updateOrganization(organization: SelectedOrganization) {
+  async updateOrganization(organization: any) {
+    // MERGETODO: CHECK THIS TYPE!!!
     try {
       // fetch assets if they are not present
       if (!organization.preferences) {
-        let prefs = await this.orgservice.getPreferences(organization.id, true);
+        let prefs = await this.orgservice.getPreferences(organization.id, true)
         // handle default empty assets here
-        const defprefs = { assets: { color: { primary: '#f05d5c', accent: '#f8b1b1' } } };
-        prefs = merge({}, defprefs, prefs);
-        organization.assets = prefs.assets;
-        organization.mala = prefs.mala || {};
-        delete prefs.assets;
-        organization.preferences = prefs;
+        const defprefs = {
+          assets: { color: { primary: '#f05d5c', accent: '#f8b1b1' } }
+        }
+        prefs = merge({}, defprefs, prefs)
+        organization.assets = prefs.assets
+        organization.mala = prefs.mala || {}
+        delete prefs.assets
+        organization.preferences = prefs
       }
 
-      const seqOrgPrefs = await this.resolveSeqOrgPreference(organization);
-      const commsPrefs = await this.resolveCommsPreference(organization);
-      const messagingPrefs = await this.resolveMessagingPreference(organization);
-      const fileVaultPrefs = await this.resolveFileVaultPreference(organization);
+      const seqOrgPrefs = await this.resolveSeqOrgPreference(organization)
+      const commsPrefs = await this.resolveCommsPreference(organization)
+      const messagingPrefs = await this.resolveMessagingPreference(organization)
+      const fileVaultPrefs = await this.resolveFileVaultPreference(organization)
 
-      const rpmPrefs = await this.resolveRPMOrgPreference(organization);
+      const rpmPrefs = await this.resolveRPMOrgPreference(organization)
 
-      organization.preferences.rpm = rpmPrefs;
-      organization.preferences.sequences = seqOrgPrefs;
-      organization.preferences.comms = commsPrefs;
-      organization.preferences.messaging = messagingPrefs;
-      organization.preferences.fileVault = fileVaultPrefs;
+      organization.preferences.rpm = rpmPrefs
+      organization.preferences.sequences = seqOrgPrefs
+      organization.preferences.comms = commsPrefs
+      organization.preferences.messaging = messagingPrefs
+      organization.preferences.fileVault = fileVaultPrefs
       // organization.preferences.sequences = { enabled: true };
 
-      this.updateColors(organization.assets.color || {});
+      this.updateColors(organization.assets.color || {})
 
       if (organization.id && organization.permissions.viewAll) {
         // stores this org as default
         await this.accservice.updatePreferences({
           account: this.user.id,
           defaultOrganization: organization.id
-        });
+        })
       }
     } catch (e) {}
 
-    this.organization$.next(organization);
-    this.accountOrg = this._updateAccountOrg();
+    this.organization$.next(organization)
+    this.accountOrg = this._updateAccountOrg()
   }
 
   updateColors(colors: any) {
@@ -246,7 +251,7 @@ export class ContextService {
       primary: colors.primary,
       accent: colors.accent,
       toolbar: colors.toolbar ? colors.toolbar : Palette.toolbar
-    };
+    }
 
     this.store.dispatch(
       new UpdatePalette(
@@ -256,7 +261,7 @@ export class ContextService {
           pickBy(palette, (v) => !isEmpty(v))
         )
       )
-    );
+    )
   }
 
   // enableAll() {
@@ -282,97 +287,103 @@ export class ContextService {
 
   getProfileRoute(account: { id: any; accountType: any }) {
     if (account.id === this.user.id) {
-      return '/profile';
+      return '/profile'
     }
 
-    const profileRoute = this.config.get('app.accountType.profileRoute')(account);
-    return profileRoute;
+    const profileRoute = this.config.get('app.accountType.profileRoute')(
+      account
+    )
+    return profileRoute
   }
 
   private getAccessibleOrg() {
-    const allowed = this.organizations.find((o) => o.permissions.viewAll === true);
+    const allowed = this.organizations.find(
+      (o) => o.permissions.viewAll === true
+    )
 
-    return allowed ? allowed : this.organizations[0];
+    return allowed ? allowed : this.organizations[0]
   }
 
   /**
    * Orphaned Account - if this account has no orgs associated with it
    */
-  orphanedAccount$ = new BehaviorSubject<boolean>(false);
+  orphanedAccount$ = new BehaviorSubject<boolean>(false)
 
   set isOrphaned(orphaned: boolean) {
-    this.orphanedAccount$.next(orphaned);
+    this.orphanedAccount$.next(orphaned)
   }
 
   get isOrphaned(): boolean {
-    return this.orphanedAccount$.getValue();
+    return this.orphanedAccount$.getValue()
   }
 
   /**
    * Current User
    */
-  user: CurrentAccount;
+  user: CurrentAccount
 
   /**
    * Selected User
    */
-  selected$ = new BehaviorSubject<SelectedAccount>(null);
+  selected$ = new BehaviorSubject<SelectedAccount>(null)
 
   set selected(user: SelectedAccount) {
-    this.selected$.next(user);
+    this.selected$.next(user)
   }
   get selected(): SelectedAccount {
-    return this.selected$.getValue();
+    return this.selected$.getValue()
   }
 
   /**
    * Associated Organizations
    */
-  organizations: Array<SelectedOrganization>;
+  organizations: Array<SelectedOrganization>
 
   /**
    * Current Organization
    */
-  organization$ = new BehaviorSubject<SelectedOrganization>(null);
+  organization$ = new BehaviorSubject<SelectedOrganization>(null)
 
   set organization(organization: SelectedOrganization) {
-    this.updateOrganization(organization);
+    this.updateOrganization(organization)
   }
   get organization(): SelectedOrganization {
-    return this.organization$.getValue();
+    return this.organization$.getValue()
   }
 
   set organizationId(id: string | undefined) {
     this.getOrg(id)
       .then((organization) => this.updateOrganization(organization))
-      .catch(console.error);
+      .catch(console.error)
   }
   get organizationId(): string | undefined {
-    const org = this.organization$.getValue();
-    return org ? org.id : undefined;
+    const org = this.organization$.getValue()
+    return org ? org.id : undefined
   }
 
   async getOrg(id: string): Promise<SelectedOrganization | null> {
-    const organization = this.organizations.find((o) => o.id === id);
+    const organization = this.organizations.find((o) => o.id === id)
     if (organization) {
-      return Promise.resolve(organization);
+      return Promise.resolve(organization)
     }
     return this.orgservice
       .getSingle(id)
       .then((res) => {
-        const assets = res.preferences.length ? res.preferences[0] : {};
+        const assets = res.preferences.length ? res.preferences[0] : {}
         // handle default empty assets here
-        const defprefs = { assets: { color: { primary: '#f05d5c', accent: '#f8b1b1' } } };
-        merge(defprefs, { assets });
+        const defprefs = {
+          assets: { color: { primary: '#f05d5c', accent: '#f8b1b1' } }
+        }
+        merge(defprefs, { assets })
         // search for a parent permissions
-        let perms;
+        let perms
         res.hierarchyPath.some((hid) => {
-          const horg = this.organizations.find((o) => o.id === hid);
+          const horg = this.organizations.find((o) => o.id === hid)
           if (horg) {
-            perms = horg.permissions;
-            return true;
+            perms = horg.permissions
+            return true
           }
-        });
+        })
         // build resulting org
         const org: SelectedOrganization = {
           id: res.id,
@@ -383,9 +394,9 @@ export class ContextService {
           permissions: perms || {},
           assets: defprefs.assets,
           isDirect: false
-        };
-        this.organizations.push(org);
-        return org;
+        }
+        this.organizations.push(org)
+        return org
       })
       .catch(() => {
         const org: SelectedOrganization = {
@@ -397,108 +408,114 @@ export class ContextService {
           permissions: {},
           assets: {},
           isDirect: false
-        };
-        this.organizations.push(org);
-        return null;
-      });
+        }
+        this.organizations.push(org)
+        return null
+      })
   }
   async getPreferences() {
-    const current = this.organization$.getValue();
-    const organization = this.organizations.find((o) => o.id === current.id);
+    const current = this.organization$.getValue()
+    const organization: any = this.organizations.find(
+      (o) => o.id === current.id
+    ) //MERGETODO: CHECK THIS TYPE!!!
     if (organization.preferences) {
-      return organization.preferences;
+      return organization.preferences
     }
-    let prefs = await this.orgservice.getPreferences(current.id);
+    let prefs = await this.orgservice.getPreferences(current.id)
     // handle default empty assets here
-    const defprefs = { assets: { color: { primary: '#f05d5c', accent: '#f8b1b1' } } };
-    prefs = merge({}, defprefs, prefs);
-    organization.assets = prefs.assets;
-    delete prefs.assets;
-    organization.preferences = prefs;
-    return organization.preferences;
+    const defprefs = {
+      assets: { color: { primary: '#f05d5c', accent: '#f8b1b1' } }
+    }
+    prefs = merge({}, defprefs, prefs)
+    organization.assets = prefs.assets
+    delete prefs.assets
+    organization.preferences = prefs
+    return organization.preferences
   }
   async orgHasConference() {
-    const prefs = await this.getPreferences();
-    return prefs ? prefs.conference : false;
+    const prefs = await this.getPreferences()
+    return prefs ? prefs.conference : false
   }
   async orgHasFoodMode(description: 'Meal' | 'Key-based'): Promise<number> {
-    const prefs = await this.getPreferences();
-    return prefs ? findIndex(prefs.food.mode, { description, isActive: true }) + 1 : 0;
+    const prefs = await this.getPreferences()
+    return prefs
+      ? findIndex(prefs.food.mode, { description, isActive: true }) + 1
+      : 0
   }
   async orgHasScheduleEnabled(accountType: AccountTypeIds) {
-    const prefs = await this.getPreferences();
+    const prefs = await this.getPreferences()
     return prefs
       ? !prefs.scheduling ||
           !prefs.scheduling.disabledFor ||
           !prefs.scheduling.disabledFor.length ||
           prefs.scheduling.disabledFor.indexOf(accountType) === -1
-      : false;
+      : false
   }
   async orgHasContent() {
-    const prefs = await this.getPreferences();
-    return prefs ? prefs.content && prefs.content.enabled : false;
+    const prefs = await this.getPreferences()
+    return prefs ? prefs.content && prefs.content.enabled : false
   }
   async orgHasPerm(
     id: string,
     perm: keyof OrganizationPermission,
     direct: boolean = false
   ) {
-    const org = await this.getOrg(id);
+    const org = await this.getOrg(id)
     return org && org.id
       ? direct
         ? org.isDirect && org.permissions[perm]
         : org.permissions[perm]
-      : false;
+      : false
   }
 
   /**
    * Displayed Account
    */
-  account$ = new BehaviorSubject<AccountAccessData>(null);
+  account$ = new BehaviorSubject<AccountAccessData>(null)
 
-  accountOrg$ = merge(this.organization$, this.account$);
-  accountOrg: string;
+  accountOrg$ = merge(this.organization$, this.account$)
+  accountOrg: string
 
   set account(user: AccountAccessData) {
-    this.account$.next(user);
-    this.accountOrg = this._updateAccountOrg();
+    this.account$.next(user)
+    this.accountOrg = this._updateAccountOrg()
   }
   get account(): AccountAccessData {
-    return this.account$.getValue();
+    return this.account$.getValue()
   }
 
   get accountId(): string | undefined {
-    const account = this.account$.getValue();
-    return account ? account.id : undefined;
+    const account = this.account$.getValue()
+    return account ? account.id : undefined
   }
   get accountOrgs(): Array<AccountAccessOrganization> {
-    const account = this.account$.getValue();
-    return account ? account.organizations : [];
+    const account = this.account$.getValue()
+    return account ? account.organizations : []
   }
 
   _updateAccountOrg() {
-    const account = this.account$.getValue();
+    const account = this.account$.getValue()
     if (!account) {
-      return null;
+      return null
     }
     if (!this.organizationId) {
-      return account.organizations.length ? account.organizations[0].id : null;
+      return account.organizations.length ? account.organizations[0].id : null
     }
     // search the direct organization
-    const i = findIndex(account.organizations, { id: this.organizationId });
+    const i = findIndex(account.organizations, { id: this.organizationId })
     if (i >= 0) {
-      return account.organizations[i].id;
+      return account.organizations[i].id
     } else {
       // search inside the hierarchy
       this.organizations.forEach((org) => {
         account.organizations.forEach((aorg) => {
           if (org.hierarchyPath && org.hierarchyPath.indexOf(aorg.id) >= 0) {
-            return aorg.id;
+            return aorg.id
           }
-        });
-      });
+        })
+      })
     }
-    return account.organizations[0].id;
+    return account.organizations[0].id
   }
 
   /**
@@ -507,14 +524,14 @@ export class ContextService {
 
   public clinic$: BehaviorSubject<OrgSingleResponse> = new BehaviorSubject<
     OrgSingleResponse
-  >(null);
+  >(null)
 
   set clinic(clinic: any) {
-    this.clinic$.next(clinic);
+    this.clinic$.next(clinic)
   }
 
   get clinic(): any {
-    return this.clinic$.getValue();
+    return this.clinic$.getValue()
   }
 
   private resolveCommsPreference(
@@ -522,14 +539,16 @@ export class ContextService {
   ): Promise<CommunicationPreferenceSingle> {
     return new Promise<CommunicationPreferenceSingle>(async (resolve) => {
       try {
-        const communicationPrefs = await this.communicationPrefs.getPreferenceByOrg({
-          organization: organization.id
-        });
-        resolve(communicationPrefs);
+        const communicationPrefs = await this.communicationPrefs.getPreferenceByOrg(
+          {
+            organization: organization.id
+          }
+        )
+        resolve(communicationPrefs)
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveFileVaultPreference(
@@ -537,14 +556,16 @@ export class ContextService {
   ): Promise<ContentPreferenceSingle> {
     return new Promise<ContentPreferenceSingle>(async (resolve) => {
       try {
-        const fileVaultPrefs = await this.contentPrefs.getContentVaultPreference({
-          organization: organization.id
-        });
-        resolve(fileVaultPrefs);
+        const fileVaultPrefs = await this.contentPrefs.getContentVaultPreference(
+          {
+            organization: organization.id
+          }
+        )
+        resolve(fileVaultPrefs)
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveMessagingPreference(
@@ -554,12 +575,12 @@ export class ContextService {
       try {
         const messagingPrefs = await this.messagingPrefs.getOrgPreference({
           organization: organization.id
-        });
-        resolve(messagingPrefs);
+        })
+        resolve(messagingPrefs)
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveRPMOrgPreference(
@@ -569,12 +590,12 @@ export class ContextService {
       try {
         const rpmPrefs = await this.rpm.getRPMPreferenceByOrg({
           organization: organization.id
-        });
-        resolve(rpmPrefs);
+        })
+        resolve(rpmPrefs)
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 
   private resolveSeqOrgPreference(
@@ -584,11 +605,11 @@ export class ContextService {
       try {
         const sequencePrefs = await this.sequence.getSeqOrgPreferenceByOrg({
           organization: organization.id
-        });
-        resolve(sequencePrefs);
+        })
+        resolve(sequencePrefs)
       } catch (error) {
-        resolve(undefined);
+        resolve(undefined)
       }
-    });
+    })
   }
 }

@@ -10,7 +10,7 @@ import {
   AlertOrgPreference,
   CreateOrgAlertPreferenceRequest,
   UpdateOrgAlertPreferenceRequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { Alerts } from 'selvera-api'
 
 @Component({

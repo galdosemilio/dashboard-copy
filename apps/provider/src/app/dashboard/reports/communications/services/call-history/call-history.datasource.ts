@@ -3,7 +3,7 @@ import {
   GetAllInteractionsRequest,
   InteractionSingle,
   PagedResponse
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { Observable } from 'rxjs'
 import { CallHistoryItem } from '../../models'
 import { CallHistoryDatabase } from './call-history.database'

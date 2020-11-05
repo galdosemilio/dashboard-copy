@@ -1,11 +1,8 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@coachcare/common/material'
 import { ContextService, NotifierService } from '@app/service'
 import * as moment from 'moment'
-import {
-  IncludeRecord,
-  SummaryProperty
-} from 'selvera-api/dist/lib/selvera-api/providers/measurement/body/entities'
+import { IncludeRecord, SummaryProperty } from '@coachcare/npm-api'
 import { MeasurementConfig } from '../../dieters'
 import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
 import {

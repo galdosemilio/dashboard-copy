@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
   GetAllPackageEnrollmentRequest,
   GetAllPackageEnrollmentResponse
-} from '@app/shared/selvera-api';
-import { PackageEnrollment } from 'selvera-api';
+} from '@coachcare/npm-api'
+import { PackageEnrollment } from 'selvera-api'
 
 @Injectable()
 export class PhaseEnrollmentDatabase {
@@ -12,6 +12,6 @@ export class PhaseEnrollmentDatabase {
   public fetch(
     criteria: GetAllPackageEnrollmentRequest
   ): Promise<GetAllPackageEnrollmentResponse> {
-    return this.packageEnrollment.getAll(criteria);
+    return this.packageEnrollment.getAll(criteria)
   }
 }

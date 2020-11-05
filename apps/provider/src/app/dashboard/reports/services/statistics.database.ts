@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Reports } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { Reports } from 'selvera-api'
 
-import { CcrDatabase } from '@app/shared';
+import { CcrDatabase } from '@app/shared'
 import {
   ActivityLevelRequest,
   ActivityLevelSegment,
@@ -17,45 +17,49 @@ import {
   SleepReportResponse,
   WeightChangeRequest,
   WeightChangeResponse
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class StatisticsDatabase extends CcrDatabase {
   constructor(private reports: Reports) {
-    super();
+    super()
   }
 
   fetchGenderDemographics(
     args: GenderDemographicsRequest
   ): Promise<Array<GenderDemographicsSegment>> {
-    return this.reports.fetchGenderDemographics(args);
+    return this.reports.fetchGenderDemographics(args)
   }
 
   fetchAgeDemographics(
     args: AgeDemographicsRequest
   ): Promise<Array<AgeDemographicsSegment>> {
-    return this.reports.fetchAgeDemographics(args);
+    return this.reports.fetchAgeDemographics(args)
   }
 
-  fetchActivityLevel(args: ActivityLevelRequest): Promise<Array<ActivityLevelSegment>> {
-    return this.reports.fetchActivityLevel(args);
+  fetchActivityLevel(
+    args: ActivityLevelRequest
+  ): Promise<Array<ActivityLevelSegment>> {
+    return this.reports.fetchActivityLevel(args)
   }
 
   fetchOrganizationActivity(
     args: OrganizationActivityRequest
   ): Promise<Array<OrganizationActivityAggregate>> {
-    return this.reports.fetchOrganizationActivity(args);
+    return this.reports.fetchOrganizationActivity(args)
   }
 
   fetchWeightChange(args: WeightChangeRequest): Promise<WeightChangeResponse> {
-    return this.reports.fetchWeightChange(args);
+    return this.reports.fetchWeightChange(args)
   }
 
   fetchSleep(args: SleepReportRequest): Promise<SleepReportResponse> {
-    return this.reports.fetchSleep(args);
+    return this.reports.fetchSleep(args)
   }
 
-  fetchProviderCount(args: ProviderCountRequest): Promise<Array<ProviderCountSegment>> {
-    return this.reports.fetchProviderCount(args);
+  fetchProviderCount(
+    args: ProviderCountRequest
+  ): Promise<Array<ProviderCountSegment>> {
+    return this.reports.fetchProviderCount(args)
   }
 }

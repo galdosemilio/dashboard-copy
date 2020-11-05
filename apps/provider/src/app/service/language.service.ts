@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service'
 import { Account, ApiService } from 'selvera-api'
 
 import { CCRApp } from '@app/config'
-import { Profile } from '@app/shared/selvera-api'
+import { Profile } from '@coachcare/npm-api'
 import { _, locIsRtl } from '@app/shared/utils'
 import { ConfigService } from './config.service'
 import { EventsService } from './events.service'

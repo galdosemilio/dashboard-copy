@@ -5,7 +5,7 @@ import { PromptDialog } from '@app/shared'
 import { Package } from '@app/shared/components/package-table'
 import { PackageDatasource } from '@app/shared/components/package-table/services'
 import { _ } from '@app/shared/utils'
-import { PackageOrganization } from 'selvera-api'
+import { PackageOrganization } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-clinic-phases-table',

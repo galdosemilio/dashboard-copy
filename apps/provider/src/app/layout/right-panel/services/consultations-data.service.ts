@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Consultation } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { Consultation } from 'selvera-api'
 
 import {
   ConsultationListingRequest,
   ConsultationListingResponse
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class ConsultationsDataService {
@@ -13,6 +13,6 @@ export class ConsultationsDataService {
   public getNotes(
     req: ConsultationListingRequest
   ): Promise<ConsultationListingResponse[]> {
-    return this.consultation.fetchAll(req);
+    return this.consultation.fetchAll(req)
   }
 }

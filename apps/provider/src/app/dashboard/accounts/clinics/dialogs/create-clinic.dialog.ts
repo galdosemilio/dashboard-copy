@@ -7,7 +7,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _ } from '@app/shared/utils'
-import { Organization } from 'selvera-api'
+import { Organization } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-clinics-create-dialog',

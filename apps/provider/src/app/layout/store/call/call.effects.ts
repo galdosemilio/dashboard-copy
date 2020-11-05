@@ -1,25 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
   COOKIE_CALL_BROWSERS_MODAL,
   COOKIE_CALL_DEVICES_MODAL,
   STORAGE_VIDEOCONFERENCE_SETTINGS
-} from '@app/config';
-import { CallLayoutService } from '@app/layout/call/services/call-layout.service';
-import { BROWSER_TYPES, TwilioService } from '@app/layout/call/services/twilio.service';
-import { callSelector } from '@app/layout/store/call/call.selector';
-import { CallState } from '@app/layout/store/call/call.state';
-import { UIState } from '@app/layout/store/state';
-import { ContextService } from '@app/service/context.service';
-import { LoggingService } from '@app/service/logging.service';
-import { NotifierService } from '@app/service/notifier.service';
-import { FetchCallsResponse, GetCallAvailabilityResponse } from '@app/shared/selvera-api';
-import { _ } from '@app/shared/utils/i18n.utils';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action, select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { get } from 'lodash';
-import { CookieService } from 'ngx-cookie-service';
-import { from, Observable, of } from 'rxjs';
+} from '@app/config'
+import { CallLayoutService } from '@app/layout/call/services/call-layout.service'
+import {
+  BROWSER_TYPES,
+  TwilioService
+} from '@app/layout/call/services/twilio.service'
+import { callSelector } from '@app/layout/store/call/call.selector'
+import { CallState } from '@app/layout/store/call/call.state'
+import { UIState } from '@app/layout/store/state'
+import { ContextService } from '@app/service/context.service'
+import { LoggingService } from '@app/service/logging.service'
+import { NotifierService } from '@app/service/notifier.service'
+import {
+  FetchCallsResponse,
+  GetCallAvailabilityResponse
+} from '@coachcare/npm-api'
+import { _ } from '@app/shared/utils/i18n.utils'
+import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Action, select, Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import { get } from 'lodash'
+import { CookieService } from 'ngx-cookie-service'
+import { from, Observable, of } from 'rxjs'
 import {
   catchError,
   concatMap,
@@ -29,20 +35,20 @@ import {
   skip,
   switchMap,
   tap
-} from 'rxjs/operators';
-import { Conference, Interaction } from 'selvera-api';
-import * as callAction from './call.action';
+} from 'rxjs/operators'
+import { Conference, Interaction } from 'selvera-api'
+import * as callAction from './call.action'
 import {
   AbortCall,
   CancelCall,
   DeviceAvailability,
   InitiatedCallsDetail,
   Source
-} from './call.action';
+} from './call.action'
 
 @Injectable()
 export class CallEffects {
-  callState: CallState;
+  callState: CallState
 
   constructor(
     private actions$: Actions,
@@ -59,10 +65,10 @@ export class CallEffects {
   ) {
     this.store
       .pipe(select(callSelector))
-      .subscribe((callState) => (this.callState = callState));
+      .subscribe((callState) => (this.callState = callState))
 
     this.context.organization$.subscribe((organization) => {
-      const deviceInfo = this.twilioService.getDeviceInfo();
+      const deviceInfo = this.twilioService.getDeviceInfo()
       const deviceSupported: boolean =
         deviceInfo.browser &&
         (deviceInfo.browser.toLowerCase() === BROWSER_TYPES.CHROME ||
@@ -70,21 +76,23 @@ export class CallEffects {
           deviceInfo.browser.toLowerCase() === BROWSER_TYPES.SAFARI ||
           deviceInfo.browser.toLowerCase() === BROWSER_TYPES.EDGE_CHROMIUM)
           ? true
-          : false;
+          : false
 
       const conferencingEnabled = get(
         organization,
         'preferences.comms.videoConferencing.isEnabled',
         false
-      );
+      )
 
-      this.store.dispatch(new callAction.SetCallIsSupported(deviceSupported));
-      this.store.dispatch(new callAction.SetConferencingEnabled(conferencingEnabled));
+      this.store.dispatch(new callAction.SetCallIsSupported(deviceSupported))
+      this.store.dispatch(
+        new callAction.SetConferencingEnabled(conferencingEnabled)
+      )
 
       if (organization) {
-        this.store.dispatch(new callAction.FetchSubaccount(organization.id));
+        this.store.dispatch(new callAction.FetchSubaccount(organization.id))
       }
-    });
+    })
   }
 
   @Effect()
@@ -93,7 +101,7 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as callAction.InitiateCall).payload),
     flatMap((payload) => {
-      const actionGroup = [];
+      const actionGroup = []
       this.logging.log({
         logLevel: 'info',
         data: {
@@ -102,14 +110,14 @@ export class CallEffects {
           message: 'initiated call',
           room: payload.room
         }
-      });
+      })
 
       payload.room.participants.forEach((participant) => {
         if (
           this.callState.callUserId === participant.id &&
           this.callState.room.initiatorId === participant.id
         ) {
-          actionGroup.push(new callAction.FlagUserAsAvailable(participant.id));
+          actionGroup.push(new callAction.FlagUserAsAvailable(participant.id))
         } else {
           actionGroup.push(
             new callAction.CheckUserAvailability({
@@ -117,20 +125,23 @@ export class CallEffects {
               organization: this.callState.room.organizationId,
               status: 'in-progress'
             })
-          );
+          )
         }
-      });
-      return actionGroup;
+      })
+      return actionGroup
     })
-  );
+  )
 
   @Effect()
   room$: Observable<Action> = this.conference.room$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((room) => {
-      if (this.callState.isCallStarted || room.initiator.id === this.context.user.id) {
-        return of(new callAction.NoAction());
+      if (
+        this.callState.isCallStarted ||
+        room.initiator.id === this.context.user.id
+      ) {
+        return of(new callAction.NoAction())
       } else {
         return of(
           new callAction.ReceiveCall({
@@ -170,10 +181,10 @@ export class CallEffects {
               ]
             }
           })
-        );
+        )
       }
     })
-  );
+  )
 
   @Effect()
   receiveCall$: Observable<Action> = this.actions$.pipe(
@@ -189,16 +200,16 @@ export class CallEffects {
           message: 'received call',
           callId: payload.callId
         }
-      });
+      })
       return [
         new callAction.FetchTwilioToken({
           id: payload.callId,
           account: this.context.accountId
         }),
         new callAction.FetchCallDetails({ callId: payload.callId })
-      ];
+      ]
     })
-  );
+  )
 
   @Effect()
   fetchToken$: Observable<Action> = this.actions$.pipe(
@@ -208,26 +219,26 @@ export class CallEffects {
     switchMap((payload) => {
       return this.twilioService.initialize(payload).pipe(
         flatMap((authentication) => {
-          const actions = [];
-          actions.push(new callAction.FetchTwilioTokenComplete(authentication));
-          return actions;
+          const actions = []
+          actions.push(new callAction.FetchTwilioTokenComplete(authentication))
+          return actions
         }),
         catchError(() => of(new callAction.FetchTwilioTokenFailed()))
-      );
+      )
     })
-  );
+  )
 
   @Effect()
   fetchTwilioTokenComplete$: Observable<Action> = this.actions$.pipe(
     ofType(callAction.FETCH_TWILIO_TOKEN_COMPLETE),
     debounceTime(300),
     flatMap(() => {
-      const actions = [];
+      const actions = []
       if (!this.callState.isReconnect) {
         if (this.callState.source === Source.INBOUND) {
-          actions.push(new callAction.ShowIncomingCall(this.callState.room));
+          actions.push(new callAction.ShowIncomingCall(this.callState.room))
         } else if (this.callState.source === Source.OUTBOUND) {
-          actions.push(new callAction.ShowWaitingCall(this.callState.room));
+          actions.push(new callAction.ShowWaitingCall(this.callState.room))
         }
       } else {
         actions.push(
@@ -235,11 +246,11 @@ export class CallEffects {
             source: this.callState.source,
             room: this.callState.room
           })
-        );
+        )
       }
-      return actions;
+      return actions
     })
-  );
+  )
 
   @Effect()
   createLocalTracks$: Observable<Action> = this.actions$.pipe(
@@ -250,37 +261,37 @@ export class CallEffects {
       return this.twilioService.generateLocalTracks(query).pipe(
         map(() => new callAction.CreateLocalTracksComplete()),
         catchError(() => of(new callAction.CreateLocalTracksFailed()))
-      );
+      )
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   playRingingAudio$ = this.actions$.pipe(
     ofType(callAction.PLAY_RINGING_AUDIO),
     debounceTime(300),
     tap(() => this.twilioService.playRinging())
-  );
+  )
 
   @Effect({ dispatch: false })
   stopRingingAudio$ = this.actions$.pipe(
     ofType(callAction.STOP_RINGING_AUDIO),
     debounceTime(300),
     tap(() => this.twilioService.stopRinging())
-  );
+  )
 
   @Effect({ dispatch: false })
   playCallEndedAudio$ = this.actions$.pipe(
     ofType(callAction.PLAY_CALL_ENDED_AUDIO),
     debounceTime(300),
     tap(() => this.twilioService.playCallEnding())
-  );
+  )
 
   @Effect({ dispatch: false })
   stopCallEndedAudio$ = this.actions$.pipe(
     ofType(callAction.STOP_CALL_ENDED_AUDIO),
     debounceTime(300),
     tap(() => this.twilioService.stopCallEnding())
-  );
+  )
 
   @Effect()
   createRoom$: Observable<Action> = this.actions$.pipe(
@@ -293,12 +304,12 @@ export class CallEffects {
           return [
             new callAction.CreateRoomSuccessful(),
             new callAction.FetchCallDetails({ callId: this.callState.callId })
-          ];
+          ]
         }),
         catchError((error) => of(new callAction.CreateRoomFailed(error)))
-      );
+      )
     })
-  );
+  )
 
   @Effect()
   fetchSubaccount$: Observable<Action> = this.actions$.pipe(
@@ -307,24 +318,24 @@ export class CallEffects {
     switchMap((organizationId) => {
       return from(this.conference.fetchSubaccount(organizationId)).pipe(
         flatMap((subaccounts: any) => {
-          const actionGroup = [];
+          const actionGroup = []
           if (subaccounts.data.length > 0) {
             if (subaccounts.data[0].hasKeys) {
               actionGroup.push(
                 new callAction.FetchSubaccountComplete(subaccounts.data[0].id)
-              );
-              actionGroup.push(new callAction.FetchDevices(true));
+              )
+              actionGroup.push(new callAction.FetchDevices(true))
             } else {
-              actionGroup.push(new callAction.FetchSubaccountFailed());
+              actionGroup.push(new callAction.FetchSubaccountFailed())
             }
           } else {
-            actionGroup.push(new callAction.FetchSubaccountFailed());
+            actionGroup.push(new callAction.FetchSubaccountFailed())
           }
-          return actionGroup;
+          return actionGroup
         })
-      );
+      )
     })
-  );
+  )
 
   @Effect()
   saveCall$: Observable<Action> = this.actions$.pipe(
@@ -342,11 +353,11 @@ export class CallEffects {
         })
       ).pipe(
         map((call: any) => {
-          return new callAction.SaveCallComplete(call.id);
+          return new callAction.SaveCallComplete(call.id)
         })
-      );
+      )
     })
-  );
+  )
 
   @Effect()
   saveCallComplete$: Observable<Action> = this.actions$.pipe(
@@ -359,9 +370,9 @@ export class CallEffects {
           id: payload,
           account: this.context.accountId
         })
-      ];
+      ]
     })
-  );
+  )
 
   @Effect()
   fetchCallDetails$: Observable<Action> = this.actions$.pipe(
@@ -371,11 +382,11 @@ export class CallEffects {
     switchMap((payload) => {
       return from(this.conference.fetchCallDetail(payload)).pipe(
         map((response: any) => {
-          return new callAction.FetchCallDetailsComplete(response);
+          return new callAction.FetchCallDetailsComplete(response)
         })
-      );
+      )
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   updateCallStatusToEnded$: Observable<Action> = this.actions$.pipe(
@@ -391,129 +402,129 @@ export class CallEffects {
           message: 'call has ended',
           params: updateCallRequest
         }
-      });
+      })
 
-      this.callLayoutService.showCallRatingModal();
+      this.callLayoutService.showCallRatingModal()
       return this.interaction
         .attemptCallEnd({ id: updateCallRequest.callId })
-        .catch((error) => {});
+        .catch((error) => {})
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   enterFullscreen$ = this.actions$.pipe(
     ofType(callAction.ENTER_FULLSCREEN),
     debounceTime(300),
     tap(() => this.callLayoutService.enterFullscreen())
-  );
+  )
 
   @Effect({ dispatch: false })
   minimizeWindow$ = this.actions$.pipe(
     ofType(callAction.MINIMIZE_WINDOW),
     debounceTime(300),
     tap(() => this.callLayoutService.minimizeWindow())
-  );
+  )
 
   @Effect({ dispatch: false })
   normalizeWindow$ = this.actions$.pipe(
     ofType(callAction.NORMALIZE_WINDOW),
     debounceTime(300),
     tap(() => this.callLayoutService.normalizeWindow())
-  );
+  )
 
   @Effect({ dispatch: false })
   showIncomingCall$ = this.actions$.pipe(
     ofType(callAction.SHOW_INCOMING_CALL),
     debounceTime(300),
     tap(() => {
-      this.twilioService.playRinging();
-      this.callLayoutService.showCall();
+      this.twilioService.playRinging()
+      this.callLayoutService.showCall()
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   showWaitingCall$ = this.actions$.pipe(
     ofType(callAction.SHOW_WAITING_CALL),
     debounceTime(300),
     tap(() => this.callLayoutService.showCall())
-  );
+  )
 
   @Effect({ dispatch: false })
   showReconnectingCall$ = this.actions$.pipe(
     ofType(callAction.SHOW_RECONNECTING_CALL),
     debounceTime(300),
     tap(() => this.callLayoutService.showCall())
-  );
+  )
 
   @Effect({ dispatch: false })
   participantJoined$ = this.actions$.pipe(
     ofType(callAction.PARTICIPANT_CONNECTED),
     debounceTime(300),
     tap(() => this.twilioService.stopRinging())
-  );
+  )
 
   @Effect({ dispatch: false })
   enableCurrentUserCamera$ = this.actions$.pipe(
     ofType(callAction.ENABLE_CURRENT_USER_CAMERA),
     debounceTime(300),
     tap(() => this.twilioService.enableCamera())
-  );
+  )
 
   @Effect({ dispatch: false })
   disableCurrentUserCamera$ = this.actions$.pipe(
     ofType(callAction.DISABLE_CURRENT_USER_CAMERA),
     debounceTime(300),
     tap(() => this.twilioService.disableCamera())
-  );
+  )
 
   @Effect({ dispatch: false })
   enableCurrentUserMicrophone$ = this.actions$.pipe(
     ofType(callAction.ENABLE_CURRENT_USER_MICROPHONE),
     debounceTime(300),
     tap(() => this.twilioService.enableMicrophone())
-  );
+  )
 
   @Effect({ dispatch: false })
   disableCurrentUserMicrophone$ = this.actions$.pipe(
     ofType(callAction.DISABLE_CURRENT_USER_MICROPHONE),
     debounceTime(300),
     tap(() => this.twilioService.disableMicrophone())
-  );
+  )
 
   @Effect({ dispatch: false })
   hangUp$ = this.actions$.pipe(
     ofType(callAction.HANG_UP),
     debounceTime(300),
     tap(() => {
-      this.twilioService.stopRinging();
-      this.twilioService.disconnect();
-      this.callLayoutService.closeCall();
-      this.callLayoutService.showCallRatingModal();
+      this.twilioService.stopRinging()
+      this.twilioService.disconnect()
+      this.callLayoutService.closeCall()
+      this.callLayoutService.showCallRatingModal()
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   reinitializeRoom$ = this.actions$.pipe(
     ofType(callAction.REINITIALIZE_ROOM),
     debounceTime(300),
     tap(() => this.twilioService.reinitialize())
-  );
+  )
 
   @Effect({ dispatch: false })
   openCallSettings$ = this.actions$.pipe(
     ofType(callAction.OPEN_CALL_SETTINGS),
     debounceTime(300),
     tap(() => {
-      this.callLayoutService.showSettings();
+      this.callLayoutService.showSettings()
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   closeCallSettings$ = this.actions$.pipe(
     ofType(callAction.CLOSE_CALL_SETTINGS),
     debounceTime(300),
     tap(() => this.callLayoutService.closeSettings())
-  );
+  )
 
   @Effect({ dispatch: false })
   checkDevices$ = this.actions$.pipe(
@@ -523,18 +534,18 @@ export class CallEffects {
       const deviceAvailability: DeviceAvailability = {
         audio: false,
         video: false
-      };
+      }
 
       const onGetUserMedia = (params, successCallback, failedCallback) => {
         if (navigator.getUserMedia) {
-          navigator.getUserMedia(params, successCallback, failedCallback);
+          navigator.getUserMedia(params, successCallback, failedCallback)
         } else {
           navigator.mediaDevices
             .getUserMedia(params)
             .then(successCallback)
-            .catch(failedCallback);
+            .catch(failedCallback)
         }
-      };
+      }
 
       const onCheckCamera = () => {
         onGetUserMedia(
@@ -544,16 +555,16 @@ export class CallEffects {
           },
           (localMediaStream) => {
             localMediaStream.getTracks().forEach((track) => {
-              track.stop();
-            });
-            deviceAvailability.video = true;
-            onCheckMicrophone();
+              track.stop()
+            })
+            deviceAvailability.video = true
+            onCheckMicrophone()
           },
           () => {
-            onCheckMicrophone();
+            onCheckMicrophone()
           }
-        );
-      };
+        )
+      }
 
       const onCheckMicrophone = () => {
         onGetUserMedia(
@@ -563,20 +574,24 @@ export class CallEffects {
           },
           (localMediaStream) => {
             localMediaStream.getTracks().forEach((track) => {
-              track.stop();
-            });
-            deviceAvailability.audio = true;
-            this.store.dispatch(new callAction.CheckDevicesComplete(deviceAvailability));
+              track.stop()
+            })
+            deviceAvailability.audio = true
+            this.store.dispatch(
+              new callAction.CheckDevicesComplete(deviceAvailability)
+            )
           },
           () => {
-            this.store.dispatch(new callAction.CheckDevicesComplete(deviceAvailability));
+            this.store.dispatch(
+              new callAction.CheckDevicesComplete(deviceAvailability)
+            )
           }
-        );
-      };
+        )
+      }
 
-      onCheckCamera();
+      onCheckCamera()
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   checkDevicesComplete$ = this.actions$.pipe(
@@ -585,10 +600,10 @@ export class CallEffects {
     map((action) => (action as callAction.CheckDevicesComplete).payload),
     tap((deviceAvailability) => {
       if (deviceAvailability.audio || deviceAvailability.video) {
-        this.store.dispatch(new callAction.FetchDevices(false));
+        this.store.dispatch(new callAction.FetchDevices(false))
       }
     })
-  );
+  )
 
   @Effect()
   fetchDevices$: Observable<Action> = this.actions$.pipe(
@@ -598,8 +613,10 @@ export class CallEffects {
     switchMap((payload) => {
       return this.twilioService.getDeviceSelectionOptions().pipe(
         flatMap((mediaDeviceInfoList) => {
-          const browser = this.twilioService.getDeviceInfo().browser.toLowerCase();
-          let fetchDeviceSuccess = false;
+          const browser = this.twilioService
+            .getDeviceInfo()
+            .browser.toLowerCase()
+          let fetchDeviceSuccess = false
           if (browser === BROWSER_TYPES.FIREFOX) {
             mediaDeviceInfoList = mediaDeviceInfoList.map((mediaDevice) => ({
               deviceId: mediaDevice.deviceId,
@@ -614,7 +631,7 @@ export class CallEffects {
                   : mediaDevice.kind === 'audiooutput'
                   ? _('VIDEO.AUDIO_OUTPUT')
                   : undefined)
-            })) as any;
+            })) as any
 
             fetchDeviceSuccess = !!mediaDeviceInfoList.find(
               (mediaDevice) =>
@@ -624,51 +641,56 @@ export class CallEffects {
                   mediaDevice.label !== _('VIDEO.VIDEO_INPUT')) ||
                 (mediaDevice.kind === 'audiooutput' &&
                   mediaDevice.label !== _('VIDEO.AUDIO_OUTPUT'))
-            );
+            )
           }
 
           const audioDevices = mediaDeviceInfoList.filter(
             (deviceInfo) => deviceInfo.kind === 'audioinput' && deviceInfo.label
-          );
+          )
           const videoDevices = mediaDeviceInfoList.filter(
             (deviceInfo) => deviceInfo.kind === 'videoinput' && deviceInfo.label
-          );
+          )
           const audioOutputDevices = mediaDeviceInfoList.filter(
-            (deviceInfo) => deviceInfo.kind === 'audiooutput' && deviceInfo.label
-          );
-          const actionGroup = [];
+            (deviceInfo) =>
+              deviceInfo.kind === 'audiooutput' && deviceInfo.label
+          )
+          const actionGroup = []
 
           if (audioDevices.length > 0) {
-            actionGroup.push(new callAction.FetchAudioDevicesComplete(audioDevices));
+            actionGroup.push(
+              new callAction.FetchAudioDevicesComplete(audioDevices)
+            )
           }
 
           if (audioOutputDevices.length > 0) {
             actionGroup.push(
               new callAction.FetchAudioOutputDevicesComplete(audioOutputDevices)
-            );
+            )
           }
 
           if (videoDevices.length > 0) {
-            actionGroup.push(new callAction.FetchVideoDevicesComplete(videoDevices));
+            actionGroup.push(
+              new callAction.FetchVideoDevicesComplete(videoDevices)
+            )
           }
 
           fetchDeviceSuccess =
             browser !== BROWSER_TYPES.FIREFOX
               ? audioDevices.length > 0
-              : fetchDeviceSuccess;
+              : fetchDeviceSuccess
 
           if (!fetchDeviceSuccess) {
             if (payload) {
-              actionGroup.push(new callAction.FetchDevicesFailed());
+              actionGroup.push(new callAction.FetchDevicesFailed())
             }
           } else {
-            actionGroup.push(new callAction.FetchDevicesSuccess());
+            actionGroup.push(new callAction.FetchDevicesSuccess())
           }
-          return actionGroup;
+          return actionGroup
         })
-      );
+      )
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   fetchDevicesFailed$ = this.actions$.pipe(
@@ -682,19 +704,22 @@ export class CallEffects {
           this.callState.isSupported &&
           !(this.cookie.get(COOKIE_CALL_DEVICES_MODAL) === 'true')
         ) {
-          this.callLayoutService.openAccessRequiredDialog();
+          this.callLayoutService.openAccessRequiredDialog()
         } else if (
           this.callState.conferencingEnabled &&
           !this.callState.isSupported &&
           !(this.cookie.get(COOKIE_CALL_BROWSERS_MODAL) === 'true')
         ) {
-          this.callLayoutService.openBrowserUnsupported();
-        } else if (this.callState.conferencingEnabled && this.callState.isSupported) {
-          this.store.dispatch(new callAction.CheckDevices());
+          this.callLayoutService.openBrowserUnsupported()
+        } else if (
+          this.callState.conferencingEnabled &&
+          this.callState.isSupported
+        ) {
+          this.store.dispatch(new callAction.CheckDevices())
         }
       }
     })
-  );
+  )
 
   @Effect()
   fetchInitiatedCalls$ = this.actions$.pipe(
@@ -707,11 +732,11 @@ export class CallEffects {
           return new callAction.FetchInitiatedCallsComplete({
             calls: response.data,
             initiator: payload.account
-          });
+          })
         })
-      );
+      )
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   updateInitiatedCallStatusToEnded$ = this.actions$.pipe(
@@ -719,7 +744,7 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap((updateCallRequest) => this.conference.updateCall(updateCallRequest))
-  );
+  )
 
   @Effect()
   fetchActiveCalls$ = this.actions$.pipe(
@@ -742,7 +767,7 @@ export class CallEffects {
                 (participant) => participant.id
               ),
               callEnded: true
-            });
+            })
           } else {
             return new callAction.SaveCall({
               room: this.callState.room.name,
@@ -750,12 +775,12 @@ export class CallEffects {
                 (participant) => participant.id
               ),
               organization: this.context.organizationId
-            });
+            })
           }
         })
-      );
+      )
     })
-  );
+  )
 
   @Effect()
   updateActiveCallStatusToEnded$ = this.actions$.pipe(
@@ -771,11 +796,11 @@ export class CallEffects {
               (participant) => participant.id
             ),
             organization: this.context.organizationId
-          });
+          })
         })
-      );
+      )
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   applySelectedAudioDevice$ = this.actions$.pipe(
@@ -783,11 +808,11 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap((payload) => {
-      this.notifierService.success(_('NOTIFY.SUCCESS.MICROPHONE_CHANGED'));
-      this.twilioService.applyMicrophone(payload);
-      this.callLayoutService.closeSettings();
+      this.notifierService.success(_('NOTIFY.SUCCESS.MICROPHONE_CHANGED'))
+      this.twilioService.applyMicrophone(payload)
+      this.callLayoutService.closeSettings()
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   applySelectedAudioOutputDevice$ = this.actions$.pipe(
@@ -795,10 +820,10 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap((payload) => {
-      this.notifierService.success(_('NOTIFY.SUCCESS.SPEAKER_CHANGES'));
-      this.twilioService.applySpeakers(payload);
+      this.notifierService.success(_('NOTIFY.SUCCESS.SPEAKER_CHANGES'))
+      this.twilioService.applySpeakers(payload)
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   applySelectedVideoDevice$ = this.actions$.pipe(
@@ -806,10 +831,10 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap((payload) => {
-      this.notifierService.success(_('NOTIFY.SUCCESS.CAMERA_CHANGED'));
-      this.twilioService.applyCamera(payload);
+      this.notifierService.success(_('NOTIFY.SUCCESS.CAMERA_CHANGED'))
+      this.twilioService.applyCamera(payload)
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   closeSettings$ = this.actions$.pipe(
@@ -817,7 +842,7 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap(() => this.callLayoutService.closeSettings())
-  );
+  )
 
   @Effect({ dispatch: false })
   abortCall$ = this.actions$.pipe(
@@ -828,9 +853,9 @@ export class CallEffects {
       this.interaction.createCallEvent({
         id: payload,
         event: 'aborted'
-      });
+      })
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   declineCall$ = this.actions$.pipe(
@@ -846,16 +871,16 @@ export class CallEffects {
           message: 'call has been declined',
           params: payload
         }
-      });
+      })
 
       this.interaction.createCallEvent({
         id: payload,
         event: 'declined'
-      });
-      this.twilioService.stopRinging();
-      this.callLayoutService.closeCall();
+      })
+      this.twilioService.stopRinging()
+      this.callLayoutService.closeCall()
     })
-  );
+  )
 
   @Effect()
   callDeclined$: Observable<Action> = this.conference.callDeclined$.pipe(
@@ -870,12 +895,12 @@ export class CallEffects {
           message: 'recipient has declined a call',
           id: decline.declinedBy.id
         }
-      });
+      })
 
-      this.showContactsNotAvailable();
-      return of(new callAction.ParticipantDeclined(decline.declinedBy.id));
+      this.showContactsNotAvailable()
+      return of(new callAction.ParticipantDeclined(decline.declinedBy.id))
     })
-  );
+  )
 
   @Effect()
   callAborted$ = this.conference.callAborted$.pipe(
@@ -889,26 +914,26 @@ export class CallEffects {
           functionType: 'twilio-call-aborted',
           message: 'call has been aborted'
         }
-      });
+      })
       return [
         new callAction.UpdateCallStatusToEnded({
           callId: data.callId
         }),
         new CancelCall()
-      ];
+      ]
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   cancelCall$ = this.actions$.pipe(
     ofType(callAction.CANCEL_CALL),
     debounceTime(300),
     tap(() => {
-      this.twilioService.disconnect();
-      this.twilioService.stopRinging();
-      this.callLayoutService.closeCall();
+      this.twilioService.disconnect()
+      this.twilioService.stopRinging()
+      this.callLayoutService.closeCall()
     })
-  );
+  )
 
   @Effect()
   participantConnected$: Observable<
@@ -917,7 +942,7 @@ export class CallEffects {
     skip(1),
     debounceTime(300),
     flatMap((participant) => {
-      const actions = [];
+      const actions = []
       this.logging.log({
         logLevel: 'info',
         data: {
@@ -926,13 +951,13 @@ export class CallEffects {
           message: 'twilio reports that a participant has joined the call',
           participant: participant
         }
-      });
-      actions.push(new callAction.ParticipantConnected(participant));
-      actions.push(new callAction.SetAttemptingReconnect(false));
+      })
+      actions.push(new callAction.ParticipantConnected(participant))
+      actions.push(new callAction.SetAttemptingReconnect(false))
 
-      return actions;
+      return actions
     })
-  );
+  )
 
   @Effect()
   twilioParticipantDisconnected$: Observable<
@@ -943,7 +968,7 @@ export class CallEffects {
     switchMap((participant) => {
       const persons = this.callState.room.participants.filter(
         (tParticipant) => tParticipant.callIdentity === participant
-      );
+      )
       if (persons.length > 0) {
         const snack = (msg: string) => {
           this.notifierService.info(`${persons[0].name} ${msg}`, {
@@ -954,41 +979,49 @@ export class CallEffects {
               message: 'twilio reports that a participant has disconnected',
               participants: persons
             }
-          });
-        };
+          })
+        }
 
         if (!this.callState.reconnectionBumper) {
           // support translatable strings starting with NOTIFY.
-          this.translator.get([_('NOTIFY.INFO.HUNG_UP')]).subscribe((translations) => {
-            snack(translations['NOTIFY.INFO.HUNG_UP']);
-          });
+          this.translator
+            .get([_('NOTIFY.INFO.HUNG_UP')])
+            .subscribe((translations) => {
+              snack(translations['NOTIFY.INFO.HUNG_UP'])
+            })
         }
       }
 
-      return of(new callAction.ParticipantDisconnected(participant));
+      return of(new callAction.ParticipantDisconnected(participant))
     })
-  );
+  )
 
   @Effect()
-  participantEnabledCamera$: Observable<Action> = this.twilioService.trackEnabled$.pipe(
+  participantEnabledCamera$: Observable<
+    Action
+  > = this.twilioService.trackEnabled$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
-      return of(new callAction.ParticipantEnabledCamera(participant));
+      return of(new callAction.ParticipantEnabledCamera(participant))
     })
-  );
+  )
 
   @Effect()
-  participantDisabledCamera$: Observable<Action> = this.twilioService.trackDisabled$.pipe(
+  participantDisabledCamera$: Observable<
+    Action
+  > = this.twilioService.trackDisabled$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
-      return of(new callAction.ParticipantDisabledCamera(participant));
+      return of(new callAction.ParticipantDisabledCamera(participant))
     })
-  );
+  )
 
   @Effect()
-  participantStartedVideo$: Observable<Action> = this.twilioService.videoStarted$.pipe(
+  participantStartedVideo$: Observable<
+    Action
+  > = this.twilioService.videoStarted$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
@@ -1000,13 +1033,15 @@ export class CallEffects {
           message: 'participant started video',
           participants: participant
         }
-      });
-      return of(new callAction.SetVideoAsStarted(participant));
+      })
+      return of(new callAction.SetVideoAsStarted(participant))
     })
-  );
+  )
 
   @Effect()
-  participantStoppedVideo$: Observable<Action> = this.twilioService.videoStopped$.pipe(
+  participantStoppedVideo$: Observable<
+    Action
+  > = this.twilioService.videoStopped$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
@@ -1018,10 +1053,10 @@ export class CallEffects {
           message: 'participant stopped video',
           participants: participant
         }
-      });
-      return of(new callAction.SetVideoAsStopped(participant));
+      })
+      return of(new callAction.SetVideoAsStopped(participant))
     })
-  );
+  )
 
   @Effect()
   participantDisconnected$ = this.actions$.pipe(
@@ -1029,12 +1064,13 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as callAction.ParticipantDisconnected).payload),
     flatMap((payload: string) => {
-      const actionGroup = [];
+      const actionGroup = []
       if (
         !this.callState.reconnectionBumper &&
         this.callState.room.participants.filter(
           (participant) =>
-            participant.isParticipating && participant.id !== this.callState.callUserId
+            participant.isParticipating &&
+            participant.id !== this.callState.callUserId
         ).length <= 1
       ) {
         if (this.callState.callId) {
@@ -1042,29 +1078,29 @@ export class CallEffects {
             new callAction.UpdateCallStatusToEnded({
               callId: this.callState.callId
             })
-          );
+          )
         }
 
-        actionGroup.push(new callAction.PlayCallEndedAudio());
-        actionGroup.push(new callAction.CallEmpty());
+        actionGroup.push(new callAction.PlayCallEndedAudio())
+        actionGroup.push(new callAction.CallEmpty())
       } else if (this.callState.reconnectionBumper) {
-        this.twilioService.setRemoteConnSkips();
-        actionGroup.push(new callAction.SetAttemptingReconnect(false));
-        actionGroup.push(new callAction.SetReconnectionBumper(false));
+        this.twilioService.setRemoteConnSkips()
+        actionGroup.push(new callAction.SetAttemptingReconnect(false))
+        actionGroup.push(new callAction.SetReconnectionBumper(false))
       }
-      return actionGroup;
+      return actionGroup
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   callEmpty$: Observable<Action> = this.actions$.pipe(
     ofType(callAction.CALL_EMPTY),
     debounceTime(300),
     tap(() => {
-      this.twilioService.disconnect();
-      this.callLayoutService.closeCall();
+      this.twilioService.disconnect()
+      this.callLayoutService.closeCall()
     })
-  );
+  )
 
   @Effect()
   checkUserAvailability$: Observable<Action> = this.actions$.pipe(
@@ -1074,27 +1110,29 @@ export class CallEffects {
       return from(this.interaction.getCallAvailability(payload)).pipe(
         map((response: GetCallAvailabilityResponse) => {
           if (response.isAvailable) {
-            return new callAction.FlagUserAsAvailable(payload.account);
+            return new callAction.FlagUserAsAvailable(payload.account)
           } else {
-            return new callAction.FlagUserAsUnavailable(payload.account);
+            return new callAction.FlagUserAsUnavailable(payload.account)
           }
         }),
-        catchError(() => of(new callAction.FlagUserAsUnavailable(payload.account)))
-      );
+        catchError(() =>
+          of(new callAction.FlagUserAsUnavailable(payload.account))
+        )
+      )
     })
-  );
+  )
 
   @Effect()
   flagUserAsUnavailable$: Observable<Action> = this.actions$.pipe(
     ofType(callAction.FLAG_USER_AS_UNAVAILABLE),
     switchMap(() => of(this.determineUserAvailabilityAction(false)))
-  );
+  )
 
   @Effect()
   flagUserAsAvailable$: Observable<Action> = this.actions$.pipe(
     ofType(callAction.FLAG_USER_AS_AVAILABLE),
     switchMap(() => of(this.determineUserAvailabilityAction(true)))
-  );
+  )
 
   determineUserAvailabilityAction(recentAvailability: boolean) {
     if (
@@ -1105,30 +1143,31 @@ export class CallEffects {
       if (
         this.callState.room.participants.filter(
           (participant) =>
-            participant.isAvailable && participant.id !== this.callState.callUserId
+            participant.isAvailable &&
+            participant.id !== this.callState.callUserId
         ).length === 0
       ) {
-        this.showContactsNotAvailable();
-        return new callAction.CancelCall();
+        this.showContactsNotAvailable()
+        return new callAction.CancelCall()
       } else {
-        return new callAction.FetchActiveCalls();
+        return new callAction.FetchActiveCalls()
       }
     } else {
-      return new callAction.NoAction();
+      return new callAction.NoAction()
     }
   }
 
   showContactsNotAvailable() {
     const participants = this.callState.room.participants.filter(
       (participant) => participant.id !== this.callState.callUserId
-    );
+    )
     const snack = (msg: string) => {
       const names = participants
         .filter((participant) => participant.id !== this.callState.callUserId)
         .map((p) => p.name)
-        .join(',');
-      this.notifierService.info(`${names} ${msg}`);
-    };
+        .join(',')
+      this.notifierService.info(`${names} ${msg}`)
+    }
     this.translator
       .get([
         participants.length > 1
@@ -1140,8 +1179,8 @@ export class CallEffects {
           participants.length > 1
             ? translations['NOTIFY.INFO.CONTACTS_NOT_AVAILABLE']
             : translations['NOTIFY.INFO.CONTACT_NOT_AVAILABLE']
-        );
-      });
+        )
+      })
   }
 
   @Effect()
@@ -1159,23 +1198,28 @@ export class CallEffects {
       ).pipe(
         flatMap((response: FetchCallsResponse) => {
           if (response.data.length > 0) {
-            let actionGroup = [];
+            let actionGroup = []
             actionGroup.push(
-              new callAction.SetCallEnd({ opened: response.data.length, ended: 0 })
-            );
+              new callAction.SetCallEnd({
+                opened: response.data.length,
+                ended: 0
+              })
+            )
             actionGroup = actionGroup.concat(
-              response.data.map((call) => new callAction.AttemptCloseCall(call.id))
-            );
-            actionGroup.push(new callAction.SetAttemptingReconnect(false));
-            return actionGroup;
+              response.data.map(
+                (call) => new callAction.AttemptCloseCall(call.id)
+              )
+            )
+            actionGroup.push(new callAction.SetAttemptingReconnect(false))
+            return actionGroup
           } else {
-            return of(this.initiatePendingCall());
+            return of(this.initiatePendingCall())
           }
         }),
         catchError(() => of(this.initiatePendingCall()))
-      );
+      )
     })
-  );
+  )
 
   @Effect()
   attemptCloseCall$: Observable<Action> = this.actions$.pipe(
@@ -1184,14 +1228,15 @@ export class CallEffects {
     concatMap((payload) => {
       return from(this.conference.attemptCloseCall(payload)).pipe(
         map(() =>
-          this.callState.callEndState.ended >= this.callState.callEndState.opened
+          this.callState.callEndState.ended >=
+          this.callState.callEndState.opened
             ? this.initiatePendingCall()
             : new callAction.NoAction()
         ),
         catchError(() => of(new callAction.NoAction()))
-      );
+      )
     })
-  );
+  )
 
   initiatePendingCall() {
     return new callAction.InitiateCall({
@@ -1200,7 +1245,7 @@ export class CallEffects {
       isReconnect: this.callState.isReconnect,
       source: this.callState.source,
       room: this.callState.room
-    });
+    })
   }
 
   @Effect({ dispatch: false })
@@ -1208,31 +1253,31 @@ export class CallEffects {
     ofType(callAction.OPEN_CALL_BROWSER_SUPPORT),
     debounceTime(300),
     tap(() => this.callLayoutService.openBrowserUnsupported())
-  );
+  )
 
   @Effect({ dispatch: false })
   recoverCall$: Observable<Action> = this.actions$.pipe(
     ofType(callAction.RECOVER_CALL),
     tap(() => {
-      this.callLayoutService.recoverCall();
+      this.callLayoutService.recoverCall()
     })
-  );
+  )
 
   @Effect()
   setAttemptingToReconnect$: Observable<Action> = this.actions$.pipe(
     ofType(callAction.SET_ATTEMPTING_RECONNECT),
     flatMap(() => {
-      const actions = [];
+      const actions = []
 
       if (this.callState.isAttemptingToReconnect) {
-        actions.push(new callAction.SetReconnectionBumper(true));
-        this.twilioService.hideVideoContainer('');
+        actions.push(new callAction.SetReconnectionBumper(true))
+        this.twilioService.hideVideoContainer('')
       } else {
-        this.twilioService.showVideoContainer('');
+        this.twilioService.showVideoContainer('')
       }
-      return actions;
+      return actions
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   storeCallSettings$: Observable<Action> = this.actions$.pipe(
@@ -1245,7 +1290,7 @@ export class CallEffects {
           audio: this.callState.isMicrophoneEnabled,
           participantJoined: this.callState.participantJoined
         })
-      );
+      )
     })
-  );
+  )
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { OrgSingleResponse } from '@app/shared/selvera-api'
+import { OrgSingleResponse } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-clinic-form',

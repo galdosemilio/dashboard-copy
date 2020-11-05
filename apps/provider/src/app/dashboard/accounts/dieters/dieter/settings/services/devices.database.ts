@@ -1,25 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Authentication } from 'selvera-api';
-
-import { ContextService } from '@app/service';
-import { CcrDatabase } from '@app/shared';
+import { Injectable } from '@angular/core'
+import { CcrDatabase } from '@app/shared'
 import {
   AuthAvailableResponse,
-  AuthenticationService,
+  Authentication,
   DeviceSyncResponse
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Injectable()
 export class DevicesDatabase extends CcrDatabase {
-  constructor(private authentication: Authentication, private context: ContextService) {
-    super();
+  constructor(private authentication: Authentication) {
+    super()
   }
 
   available(dieterId: string): Promise<AuthAvailableResponse> {
-    return this.authentication.available(dieterId);
+    return this.authentication.available(dieterId)
   }
 
   lastActivity(dieterId: string): Promise<DeviceSyncResponse> {
-    return this.authentication.lastActivity(dieterId);
+    return this.authentication.lastActivity(dieterId)
   }
 }

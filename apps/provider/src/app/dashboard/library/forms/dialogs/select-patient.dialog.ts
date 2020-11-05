@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 import {
   MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef,
-} from '@coachcare/common/material';
-import { AccountAccessData } from '@app/shared/selvera-api';
+  MatDialogRef
+} from '@coachcare/common/material'
+import { AccountAccessData } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-library-patient-select-dialog',
@@ -11,21 +11,21 @@ import { AccountAccessData } from '@app/shared/selvera-api';
   styleUrls: ['./select-patient.dialog.scss'],
   host: { class: 'ccr-dialog' },
   providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
-  ],
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+  ]
 })
 export class PatientSelectDialog {
   constructor(private dialogRef: MatDialogRef<PatientSelectDialog>) {}
 
   cancel() {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   remove() {
-    this.dialogRef.close(undefined);
+    this.dialogRef.close(undefined)
   }
 
   select(dieter: AccountAccessData) {
-    this.dialogRef.close(dieter);
+    this.dialogRef.close(dieter)
   }
 }

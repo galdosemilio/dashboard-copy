@@ -25,7 +25,7 @@ import {
   FetchMeetingTypesResponse,
   MeetingAttendee,
   OrganizationDetailed
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { ConsultationFormArgs } from '../consultationFormArgs.interface'
 

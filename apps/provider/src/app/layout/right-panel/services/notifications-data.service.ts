@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import * as moment from 'moment';
-import 'moment-timezone';
-import { Schedule } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import * as moment from 'moment'
+import 'moment-timezone'
+import { Schedule } from 'selvera-api'
 
-import { Meeting } from '@app/dashboard/schedule/models';
-import { FetchAllMeetingRequest } from '@app/shared/selvera-api';
+import { Meeting } from '@app/dashboard/schedule/models'
+import { FetchAllMeetingRequest } from '@coachcare/npm-api'
 
 @Injectable()
 export class NotificationsDataService {
@@ -17,7 +17,7 @@ export class NotificationsDataService {
     return this.schedule
       .fetchAllMeeting(req)
       .then((response) => response.data.map((r) => new Meeting(r)))
-      .catch((err) => Promise.reject(err));
+      .catch((err) => Promise.reject(err))
   }
 
   public groupByDate(
@@ -25,29 +25,29 @@ export class NotificationsDataService {
     dateFormat?: string,
     limit?: number
   ): Array<any> {
-    const dateSections = [];
+    const dateSections = []
 
     for (const k of Array.from(meetings.keys())) {
       if (limit && k === limit) {
-        return dateSections;
+        return dateSections
       }
 
-      const meeting = meetings[k];
+      const meeting = meetings[k]
       const meetingDate = dateFormat
         ? moment(meeting.date).format(dateFormat)
-        : moment(meeting.date).format('dddd, LL');
+        : moment(meeting.date).format('dddd, LL')
 
       const targetSection = dateSections.find(
         (section) => section.date === meetingDate
-      );
+      )
 
       if (targetSection) {
-        targetSection.meetings.push(meeting);
+        targetSection.meetings.push(meeting)
       } else {
-        dateSections.push({ date: meetingDate, meetings: [meeting] });
+        dateSections.push({ date: meetingDate, meetings: [meeting] })
       }
     }
 
-    return dateSections;
+    return dateSections
   }
 }

@@ -6,7 +6,7 @@ import { _ } from '@app/shared'
 import {
   GetUserMFAResponse,
   VerifyDeleteUserMFARequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { MFA } from 'selvera-api'
 import { MFAVerificatorMode } from '../../mfa-verificator'
 import { MFAChannels } from '../../models'

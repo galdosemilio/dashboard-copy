@@ -5,7 +5,7 @@ import { MeasurementDataSource } from '@app/dashboard/accounts/dieters/services'
 import { ContextService, NotifierService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { AccountMeasurementPreferenceType } from 'selvera-api/dist/lib/selvera-api/providers/account/entities'
+import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
 import { MeasurementConfig } from '../measurements.component'
 
 @Component({

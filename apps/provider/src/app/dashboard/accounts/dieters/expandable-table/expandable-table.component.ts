@@ -20,8 +20,12 @@ import {
 import { _ } from '@app/shared/utils'
 import { Store } from '@ngrx/store'
 import { untilDestroyed } from 'ngx-take-until-destroy'
-import { Account, Affiliation, Organization } from 'selvera-api'
-import { AccountTypeId } from 'selvera-api/dist/lib/selvera-api/providers/account/entities'
+import {
+  Account,
+  Affiliation,
+  Organization,
+  AccountTypeId
+} from '@coachcare/npm-api'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
 import {
   DieterListingItem,

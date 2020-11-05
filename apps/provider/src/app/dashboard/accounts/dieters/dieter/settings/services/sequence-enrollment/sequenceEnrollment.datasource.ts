@@ -1,12 +1,12 @@
-import { MatPaginator } from '@coachcare/common/material';
-import { TableDataSource } from '@app/shared';
+import { MatPaginator } from '@coachcare/common/material'
+import { TableDataSource } from '@app/shared'
 import {
   GetAllSeqEnrollmentsResponse,
   GetTimeframedSeqEnrollmentsRequest,
-  PagedResponse,
-} from '@app/shared/selvera-api';
-import { from, Observable } from 'rxjs';
-import { SequenceEnrollmentDatabase } from './sequenceEnrollment.database';
+  PagedResponse
+} from '@coachcare/npm-api'
+import { from, Observable } from 'rxjs'
+import { SequenceEnrollmentDatabase } from './sequenceEnrollment.database'
 
 export class SequenceEnrollmentDataSource extends TableDataSource<
   GetAllSeqEnrollmentsResponse,
@@ -17,23 +17,23 @@ export class SequenceEnrollmentDataSource extends TableDataSource<
     protected database: SequenceEnrollmentDatabase,
     private paginator?: MatPaginator
   ) {
-    super();
+    super()
     if (this.paginator) {
       this.addOptional(this.paginator.page, () => ({
         limit: this.paginator.pageSize,
-        offset: this.paginator.pageIndex * this.paginator.pageSize,
-      }));
+        offset: this.paginator.pageIndex * this.paginator.pageSize
+      }))
     }
   }
 
   defaultFetch(): PagedResponse<GetAllSeqEnrollmentsResponse> {
-    return { data: [], pagination: {} };
+    return { data: [], pagination: {} }
   }
 
   fetch(
     request: GetTimeframedSeqEnrollmentsRequest
   ): Observable<PagedResponse<GetAllSeqEnrollmentsResponse>> {
-    return from(this.database.fetch(request));
+    return from(this.database.fetch(request))
   }
 
   mapResult(
@@ -41,7 +41,7 @@ export class SequenceEnrollmentDataSource extends TableDataSource<
   ): GetAllSeqEnrollmentsResponse[] {
     this.total = result.pagination.next
       ? result.pagination.next + 1
-      : (this.criteria.offset as number) + result.data.length;
-    return result.data;
+      : (this.criteria.offset as number) + result.data.length
+    return result.data
   }
 }

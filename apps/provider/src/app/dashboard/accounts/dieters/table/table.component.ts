@@ -25,7 +25,7 @@ import {
   PromptDialog,
   PromptDialogData
 } from '@app/shared'
-import { AccountAccessData, AccountTypeId } from '@app/shared/selvera-api'
+import { AccountAccessData, AccountTypeId } from '@coachcare/npm-api'
 import { DietersDataSource } from '../services'
 
 @Component({

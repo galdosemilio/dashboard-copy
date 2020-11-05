@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ContextService, LoggingService } from '@app/service'
-import { ConnectionStats } from '@app/shared/selvera-api'
+import { ConnectionStats } from '@coachcare/npm-api'
 import { Subject } from 'rxjs'
 import { TwilioRoomMonitor } from 'selvera-api'
 import { LocalDataTrack, Room } from 'twilio-video'

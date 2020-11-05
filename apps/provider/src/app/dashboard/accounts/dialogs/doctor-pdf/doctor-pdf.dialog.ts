@@ -16,7 +16,11 @@ import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import pdfMake from 'pdfmake'
 import { first } from 'rxjs/operators'
-import { Account, DieterDashboardSummary, Organization } from 'selvera-api'
+import {
+  Account,
+  DieterDashboardSummary,
+  Organization
+} from '@coachcare/npm-api'
 import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
 import {
   MeasurementDatabase,

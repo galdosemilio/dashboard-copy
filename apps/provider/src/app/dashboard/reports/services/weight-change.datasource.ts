@@ -13,7 +13,7 @@ import {
   WeightChangeRequest,
   WeightChangeResponse,
   WeightChangeSegment
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { StatisticsDatabase } from './statistics.database'
 
 export class WeightChangeDataSource extends ChartDataSource<

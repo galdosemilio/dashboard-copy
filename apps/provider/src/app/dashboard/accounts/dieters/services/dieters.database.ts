@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Account } from 'selvera-api';
+import { Injectable } from '@angular/core'
+import { Account } from 'selvera-api'
 
-import { CcrDatabase } from '@app/shared';
-import { AccListResponse } from '@app/shared/selvera-api';
-import { DietersCriteria } from './dieters.criteria';
+import { CcrDatabase } from '@app/shared'
+import { AccListResponse } from '@coachcare/npm-api'
+import { DietersCriteria } from './dieters.criteria'
 
 @Injectable()
 export class DietersDatabase extends CcrDatabase {
   constructor(private account: Account) {
-    super();
+    super()
   }
 
   fetchAll(args: DietersCriteria): Promise<AccListResponse> {
@@ -19,6 +19,6 @@ export class DietersDatabase extends CcrDatabase {
       offset: args.offset,
       limit: args.pageSize,
       sort: args.sort
-    });
+    })
   }
 }

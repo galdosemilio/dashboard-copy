@@ -13,7 +13,7 @@ import {
   CreateUserMFARequest,
   CreateUserMFAResponse,
   VerifyUserMFARequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { MFA } from 'selvera-api'
 import { MFAChannel } from '../../models'
 

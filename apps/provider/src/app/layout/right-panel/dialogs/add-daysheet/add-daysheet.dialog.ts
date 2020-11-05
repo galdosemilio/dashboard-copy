@@ -9,7 +9,7 @@ import {
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
-import { AccountAccessData } from '@app/shared/selvera-api'
+import { AccountAccessData } from '@coachcare/npm-api'
 
 @Component({
   selector: 'add-daysheet-dialog',

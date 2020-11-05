@@ -18,10 +18,7 @@ import { Actions, ofType } from '@ngrx/effects'
 import { select, Store } from '@ngrx/store'
 import { Subscription } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import {
-  ConnectionStats,
-  ConnectionStatus
-} from 'selvera-api/dist/lib/selvera-api/processors/twilio/model'
+import { ConnectionStats, ConnectionStatus } from '@coachcare/npm-api'
 import { TwilioBandwidthService } from '../../services/twilio-bandwidth.service'
 
 @Component({

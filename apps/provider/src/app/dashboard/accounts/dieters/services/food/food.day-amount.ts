@@ -1,7 +1,7 @@
 import {
   FetchAllConsumedMealIngredients,
   FetchAllSingleConsumedMealResponse
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 
 export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
   mealId: string

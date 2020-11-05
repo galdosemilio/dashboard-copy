@@ -10,7 +10,7 @@ import {
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatMenu } from '@coachcare/common/material'
 import { ContextService, NotifierService } from '@app/service'
-import { PackageData } from '@app/shared/selvera-api'
+import { PackageData } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { PackageOrganization } from 'selvera-api'
 

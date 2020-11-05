@@ -18,7 +18,7 @@ import {
   AccSingleResponse,
   GetAllMessagingResponse,
   MessagingThreadSegment
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { findIndex, get, uniqBy } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'

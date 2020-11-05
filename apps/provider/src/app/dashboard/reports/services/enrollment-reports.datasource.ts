@@ -10,10 +10,7 @@ import {
   TranslationsObject,
   ViewUtils
 } from '@app/shared'
-import {
-  PatientCountRequest,
-  PatientCountSegment
-} from '@app/shared/selvera-api'
+import { PatientCountRequest, PatientCountSegment } from '@coachcare/npm-api'
 import { ReportsDatabase } from './reports.database'
 
 export class EnrollmentReportsDataSource extends ChartDataSource<

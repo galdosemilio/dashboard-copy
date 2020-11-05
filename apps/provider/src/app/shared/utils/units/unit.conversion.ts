@@ -1,6 +1,6 @@
-import { AccountMeasurementPreferenceType } from '@app/shared/selvera-api';
+import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
 
-import { INCHES, Metric, MILES, OUNCES, POUND } from './conversion.types';
+import { INCHES, Metric, MILES, OUNCES, POUND } from './conversion.types'
 
 export function unitConversion(
   pref: AccountMeasurementPreferenceType,
@@ -8,7 +8,7 @@ export function unitConversion(
   value: number,
   toFixed: number | boolean = 1
 ) {
-  let res;
+  let res
 
   switch (metric) {
     // composition
@@ -17,30 +17,30 @@ export function unitConversion(
       switch (pref) {
         case 'metric':
           // to Kg
-          res = value / 1000;
-          break;
+          res = value / 1000
+          break
         case 'uk':
         case 'us':
           // to Pounds
-          res = value / POUND;
-          break;
+          res = value / POUND
+          break
       }
-      break;
+      break
     // circumference
     case 'circumference':
       // value: milimeters
       switch (pref) {
         case 'metric':
           // to Centimeters
-          res = value / 10;
-          break;
+          res = value / 10
+          break
         case 'uk':
         case 'us':
           // to Inches
-          res = value * INCHES;
-          break;
+          res = value * INCHES
+          break
       }
-      break;
+      break
     // distance
     case 'distance':
       // value: meters
@@ -48,22 +48,22 @@ export function unitConversion(
         case 'metric':
         case 'uk':
           // to Km
-          res = value / 1000;
-          break;
+          res = value / 1000
+          break
         case 'us':
           // to Miles
-          res = value * MILES;
-          break;
+          res = value * MILES
+          break
       }
-      break;
+      break
     // height
     case 'height':
-      res = value;
-      break;
+      res = value
+      break
     // speed
     case 'speed':
-      res = value;
-      break;
+      res = value
+      break
     // volume
     case 'volume':
       // value: mililiters
@@ -71,51 +71,51 @@ export function unitConversion(
         case 'metric':
         case 'uk':
           // to Liters
-          res = value * 0.001;
-          break;
+          res = value * 0.001
+          break
         case 'us':
           // to Ounces
-          res = value * OUNCES;
-          break;
+          res = value * OUNCES
+          break
       }
-      break;
+      break
     case 'temperature-push':
       switch (pref) {
         case 'us':
-          res = (value - 32) * (5 / 9);
-          break;
+          res = (value - 32) * (5 / 9)
+          break
         case 'metric':
         case 'uk':
         default:
-          res = +value;
-          break;
+          res = +value
+          break
       }
-      break;
+      break
     case 'temperature-fetch':
       switch (pref) {
         case 'us':
-          res = value * (9 / 5) + 32;
-          break;
+          res = value * (9 / 5) + 32
+          break
         case 'metric':
         case 'uk':
         default:
-          res = +value;
-          break;
+          res = +value
+          break
       }
-      break;
+      break
     // unknown
     default:
-      console.error(`unitConversion: unrecognized metric ${metric}`);
-      res = value;
+      console.error(`unitConversion: unrecognized metric ${metric}`)
+      res = value
   }
 
   if (toFixed === false) {
     // return number
-    return res;
+    return res
   } else if (toFixed === true) {
     // fancy formatting
-    return res.toFixed(1).replace('.0', '');
+    return res.toFixed(1).replace('.0', '')
   }
   // return specific decimals
-  return res.toFixed(toFixed);
+  return res.toFixed(toFixed)
 }

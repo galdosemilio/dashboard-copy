@@ -22,7 +22,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
-import { FormAnswer } from '@app/shared/selvera-api'
+import { FormAnswer } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { from, Observable } from 'rxjs'
 

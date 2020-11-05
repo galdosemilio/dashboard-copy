@@ -6,7 +6,7 @@ import {
   FormSubmissionSegment,
   GetAllFormSubmissionRequest,
   GetAllFormSubmissionResponse
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { Observable } from 'rxjs'
 
 export class FormSubmissionsDatasource extends TableDataSource<

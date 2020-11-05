@@ -20,7 +20,7 @@ import {
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
   UpdateContentRequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { FileExplorerDatabase } from './file-explorer.database'
 
 export class FileExplorerDatasource extends TableDataSource<

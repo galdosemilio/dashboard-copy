@@ -1,5 +1,5 @@
-import { AccListRequest } from '@app/shared/selvera-api/';
+import { AccListRequest } from '@coachcare/npm-api'
 
 export interface CoachesCriteria extends AccListRequest {
-  offset: number;
+  offset: number
 }

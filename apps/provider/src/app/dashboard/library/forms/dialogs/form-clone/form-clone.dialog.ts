@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
 import { ContextService, NotifierService } from '@app/service'
-import { OrganizationEntity } from '@app/shared/selvera-api'
+import { OrganizationEntity } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { Form as SelveraFormService } from 'selvera-api'
 import { Form } from '../../models'

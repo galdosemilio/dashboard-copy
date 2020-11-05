@@ -9,7 +9,7 @@ import {
   AccountAccessData,
   RPMStateSummaryBillingItem,
   RPMStateSummaryItem
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { get } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { RPM } from 'selvera-api'

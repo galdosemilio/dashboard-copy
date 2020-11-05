@@ -5,7 +5,7 @@ import {
   AlertTypesDataSource
 } from '@app/dashboard/alerts/services'
 import { ContextService, EventsService, NotifierService } from '@app/service'
-import { OrganizationWithAddress } from '@app/shared/selvera-api'
+import { OrganizationWithAddress } from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-alerts-settings',

@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
   ViewEncapsulation
-} from '@angular/core';
+} from '@angular/core'
 import {
   ControlValueAccessor,
   FormBuilder,
@@ -12,18 +12,18 @@ import {
   FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
-import { NotifierService } from '@app/service';
-import { CountryCode } from '@app/shared/selvera-api';
-import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Country } from 'selvera-api';
+} from '@angular/forms'
+import { NotifierService } from '@app/service'
+import { CountryCode } from '@coachcare/npm-api'
+import { TranslateService } from '@ngx-translate/core'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Country } from 'selvera-api'
 
 export function ccrPhoneValidator(control: FormControl) {
-  const value = control.value || {};
+  const value = control.value || {}
   return !value.countryCode || !value.phone || value.phone.length < 6
     ? { invalidPhone: true }
-    : null;
+    : null
 }
 
 @Component({
@@ -40,14 +40,15 @@ export function ccrPhoneValidator(control: FormControl) {
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class PhoneInputComponent implements ControlValueAccessor, OnDestroy, OnInit {
-  countryCodes: CountryCode[] = [];
-  currentCodeDisplay: { label: string; flagIcon: string };
-  currentLang: string;
-  form: FormGroup;
-  propagateChange = (_: any) => {};
+export class PhoneInputComponent
+  implements ControlValueAccessor, OnDestroy, OnInit {
+  countryCodes: CountryCode[] = []
+  currentCodeDisplay: { label: string; flagIcon: string }
+  currentLang: string
+  form: FormGroup
+  propagateChange = (_: any) => {}
 
-  private firstCountries: string[] = ['US/CA', 'GB', 'AU', 'NZ', 'IE', 'IL'];
+  private firstCountries: string[] = ['US/CA', 'GB', 'AU', 'NZ', 'IE', 'IL']
 
   constructor(
     private country: Country,
@@ -59,20 +60,20 @@ export class PhoneInputComponent implements ControlValueAccessor, OnDestroy, OnI
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.resolveCountryCodes();
-    this.createForm();
-    this.listenToLangChanges();
+    this.resolveCountryCodes()
+    this.createForm()
+    this.listenToLangChanges()
   }
 
   registerOnChange(fn): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(): void {}
 
   writeValue(value: any): void {
     if (value) {
-      this.form.patchValue(value);
+      this.form.patchValue(value)
     }
   }
 
@@ -80,49 +81,49 @@ export class PhoneInputComponent implements ControlValueAccessor, OnDestroy, OnI
     this.form = this.fb.group({
       countryCode: [''],
       phone: ['']
-    });
+    })
 
     this.form.controls.countryCode.valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((code) => {
         const currentCode = this.countryCodes.find(
           (countryCode) => countryCode.code === code
-        );
+        )
 
         if (currentCode) {
           this.currentCodeDisplay = {
             label: `${currentCode.locale} (${currentCode.code})`,
             flagIcon: currentCode.flagIcon
-          };
+          }
         } else {
-          this.form.controls.countryCode.patchValue('+1');
+          this.form.controls.countryCode.patchValue('+1')
         }
-      });
+      })
 
     this.form.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((controls) => this.propagateChange(controls));
+      .subscribe((controls) => this.propagateChange(controls))
 
-    this.form.patchValue({ countryCode: '+1' });
+    this.form.patchValue({ countryCode: '+1' })
   }
 
   private listenToLangChanges(): void {
-    this.currentLang = this.translate.currentLang.split('-')[0].toLowerCase();
+    this.currentLang = this.translate.currentLang.split('-')[0].toLowerCase()
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
       .subscribe((langChangeEvent) => {
-        this.currentLang = langChangeEvent.lang.split('-')[0].toLowerCase();
-      });
+        this.currentLang = langChangeEvent.lang.split('-')[0].toLowerCase()
+      })
   }
 
   private async resolveCountryCodes() {
     try {
       const localCountries = this.country.getAllCountryPhoneCodes({
         firstCountries: this.firstCountries
-      });
-      this.countryCodes = localCountries;
+      })
+      this.countryCodes = localCountries
     } catch (error) {
-      this.notify.error(error);
+      this.notify.error(error)
     }
   }
 }

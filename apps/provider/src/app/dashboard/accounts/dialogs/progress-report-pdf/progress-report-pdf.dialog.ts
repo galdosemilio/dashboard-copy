@@ -16,8 +16,12 @@ import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import pdfMake from 'pdfmake'
 import { first } from 'rxjs/operators'
-import { Account, DieterDashboardSummary, Organization } from 'selvera-api'
-import { AccSingleResponse } from 'selvera-api/dist/lib/selvera-api/providers/account/responses'
+import {
+  Account,
+  AccSingleResponse,
+  DieterDashboardSummary,
+  Organization
+} from '@coachcare/npm-api'
 import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
 import {
   MeasurementDatabase,

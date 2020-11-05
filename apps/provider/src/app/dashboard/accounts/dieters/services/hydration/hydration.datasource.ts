@@ -1,16 +1,16 @@
-import * as moment from 'moment-timezone';
-import { Observable } from 'rxjs';
+import * as moment from 'moment-timezone'
+import { Observable } from 'rxjs'
 
-import { NotifierService } from '@app/service';
-import { CcrDataSource } from '@app/shared';
+import { NotifierService } from '@app/service'
+import { CcrDataSource } from '@app/shared'
 import {
   GetHydrationSummaryRequest,
   HydrationSummaryResponse
-} from '@app/shared/selvera-api';
-import { HydrationDatabase } from './hydration.database';
+} from '@coachcare/npm-api'
+import { HydrationDatabase } from './hydration.database'
 
 export interface HydrationSummary extends HydrationSummaryResponse {
-  dailyGoal: number;
+  dailyGoal: number
 }
 
 export class HydrationDataSource extends CcrDataSource<
@@ -23,15 +23,15 @@ export class HydrationDataSource extends CcrDataSource<
     protected database: HydrationDatabase,
     private dailyGoal: number
   ) {
-    super();
+    super()
   }
 
   defaultFetch(): Array<HydrationSummaryResponse> {
-    return [];
+    return []
   }
 
   fetch(criteria): Observable<Array<HydrationSummaryResponse>> {
-    return this.database.fetchSummary(criteria);
+    return this.database.fetchSummary(criteria)
   }
 
   mapResult(result: Array<HydrationSummaryResponse>): Array<HydrationSummary> {
@@ -42,6 +42,6 @@ export class HydrationDataSource extends CcrDataSource<
         dailyGoal: this.dailyGoal
           ? Math.round((segment.total * 100) / this.dailyGoal)
           : null
-      }));
+      }))
   }
 }

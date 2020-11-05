@@ -21,7 +21,7 @@ import {
   AddActivityRequest,
   AddBodyMeasurementRequest,
   AddManualSleepMeasurementRequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { Moment } from '@coachcare/ccr-datepicker'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'

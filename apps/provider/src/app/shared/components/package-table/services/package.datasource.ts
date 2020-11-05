@@ -6,7 +6,7 @@ import {
   GetAllPackageOrganizationResponse,
   PackageAssociation,
   PackageOrganizationSingle
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { Observable } from 'rxjs'
 import { Package } from '../models'
 import { PackageDatabase } from './package.database'

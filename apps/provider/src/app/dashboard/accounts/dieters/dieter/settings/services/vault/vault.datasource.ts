@@ -19,7 +19,7 @@ import {
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
   UpdateContentRequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { VaultDatabase } from './vault.database'
 
 export class VaultDatasource extends TableDataSource<

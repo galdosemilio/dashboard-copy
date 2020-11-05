@@ -10,7 +10,7 @@ import {
   AccountTypeId,
   FetchRPMBillingSummaryRequest,
   InactiveRPMItem
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
 import { get, isEmpty } from 'lodash'

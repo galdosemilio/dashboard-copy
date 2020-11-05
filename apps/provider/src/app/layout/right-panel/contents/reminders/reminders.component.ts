@@ -15,11 +15,11 @@ import { NotificationsDataService } from '@app/layout/right-panel/services'
 import { ConfigService, ContextService, NotifierService } from '@app/service'
 import { _, TranslationsObject, unitConversion, unitLabel } from '@app/shared'
 import {
-  AccountTypeId,
+  AccountTypeIds,
   AlertNotification,
   FetchAllMeetingRequest,
   NotificationRequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import { find } from 'lodash'
 import * as moment from 'moment-timezone'
@@ -72,7 +72,7 @@ export class RemindersComponent implements OnInit, OnDestroy {
         this.formId = resolveConfig('RIGHT_PANEL.REMINDERS_FORM', organization)
 
         this.context
-          .orgHasScheduleEnabled(AccountTypeId.Provider)
+          .orgHasScheduleEnabled(AccountTypeIds.Provider)
           .then((enabled) => {
             if (enabled) {
               this.getMeetings()

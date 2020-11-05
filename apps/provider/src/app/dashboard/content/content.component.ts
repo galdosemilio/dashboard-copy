@@ -33,7 +33,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
-import { Entity, FetchPackagesSegment } from '@app/shared/selvera-api'
+import { Entity, FetchPackagesSegment } from '@coachcare/npm-api'
 import { uniqBy, values } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { BehaviorSubject, Subject, Subscription } from 'rxjs'

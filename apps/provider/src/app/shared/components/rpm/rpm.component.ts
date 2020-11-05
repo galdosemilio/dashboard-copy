@@ -11,7 +11,7 @@ import {
 import { MatDialog, MatSlideToggle } from '@coachcare/common/material'
 import { ContextService } from '@app/service'
 import { RPMStatusDialog } from '@app/shared/dialogs'
-import { AccSingleResponse, OrganizationAccess } from '@app/shared/selvera-api'
+import { AccSingleResponse, OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { sortBy, uniqBy } from 'lodash'
 import * as moment from 'moment'

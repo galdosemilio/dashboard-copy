@@ -6,7 +6,7 @@ import {
   FormSubmissionsDatasource
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
-import { ConsultationListingResponse } from '@app/shared/selvera-api'
+import { ConsultationListingResponse } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { merge, Subject } from 'rxjs'

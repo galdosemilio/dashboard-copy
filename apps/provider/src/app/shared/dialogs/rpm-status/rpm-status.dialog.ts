@@ -7,7 +7,7 @@ import {
   AccountAccessData,
   OrganizationAccess,
   RPMDeactivationReason
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { RPM } from 'selvera-api'
 

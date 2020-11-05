@@ -19,7 +19,7 @@ import {
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
 import { CcrPaginator } from '@app/shared'
-import { FormAnswer, FormSingle } from '@app/shared/selvera-api'
+import { FormAnswer, FormSingle } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'
 import { map } from 'rxjs/operators'

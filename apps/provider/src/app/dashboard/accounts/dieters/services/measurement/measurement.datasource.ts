@@ -2,6 +2,7 @@ import { CCRConfig, CCRPalette } from '@app/config'
 import { ContextService, NotifierService } from '@app/service'
 import {
   _,
+  APISummaryResponse,
   ChartData,
   ChartDataSource,
   KILOMETER,
@@ -9,11 +10,7 @@ import {
   unitConversion,
   unitLabel
 } from '@app/shared'
-import {
-  APISummaryResponse,
-  Entity,
-  FetchBodyMeasurementDataResponse
-} from '@app/shared/selvera-api'
+import { Entity, FetchBodyMeasurementDataResponse } from '@coachcare/npm-api'
 import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'

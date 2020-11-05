@@ -1,22 +1,24 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
-import { resolveConfig } from '@app/config/section/utils';
-import { LabelsDataSegment } from '@app/dashboard/accounts/dieters/dieter/settings';
-import { ContextService } from '@app/service';
-import { _, CcrDatabase, PromptDialog, PromptDialogData } from '@app/shared';
+import { Injectable } from '@angular/core'
+import { MatDialog } from '@coachcare/common/material'
+import { resolveConfig } from '@app/config/section/utils'
+import { LabelsDataSegment } from '@app/dashboard/accounts/dieters/dieter/settings'
+import { ContextService } from '@app/service'
+import { _, CcrDatabase, PromptDialog, PromptDialogData } from '@app/shared'
 import {
   FetchEnrollmentsResponse,
   FetchPackagesResponse,
   GetAllPackageOrganizationRequest,
-} from '@app/shared/selvera-api';
-import { merge } from 'lodash';
-import * as moment from 'moment';
-import { from, Observable } from 'rxjs';
-import { PackageEnrollment, PackageOrganization, Phase } from 'selvera-api';
+  PackageEnrollment,
+  PackageOrganization,
+  Phase
+} from '@coachcare/npm-api'
+import { merge } from 'lodash'
+import * as moment from 'moment'
+import { from, Observable } from 'rxjs'
 
 export type PackagesAndEnrollments = FetchPackagesResponse & {
-  enrollments: FetchEnrollmentsResponse;
-};
+  enrollments: FetchEnrollmentsResponse
+}
 
 @Injectable()
 export class LabelsDatabase extends CcrDatabase {
@@ -27,7 +29,7 @@ export class LabelsDatabase extends CcrDatabase {
     private enrollment: PackageEnrollment,
     private packageOrganization: PackageOrganization
   ) {
-    super();
+    super()
   }
 
   fetch(
@@ -40,9 +42,9 @@ export class LabelsDatabase extends CcrDatabase {
             organization: args.organization,
             isActive: true,
             limit: args.limit,
-            offset: args.offset,
-          });
-          const associations = associationResponse.data;
+            offset: args.offset
+          })
+          const associations = associationResponse.data
 
           const enrollmentsPromise = this.enrollment.getAll({
             account: this.context.accountId,
@@ -50,17 +52,17 @@ export class LabelsDatabase extends CcrDatabase {
             isActive: true,
             offset: 0,
             limit: 'all',
-            sort: [{ property: 'enrollStart', dir: 'desc' }],
-          });
+            sort: [{ property: 'enrollStart', dir: 'desc' }]
+          })
 
           const phasePackages = await Promise.all(
             associations.map(async (association) => ({
               ...association.package,
               organization: await this.context.getOrg(
                 association.organization.id
-              ),
+              )
             }))
-          );
+          )
 
           const enrollments = (await enrollmentsPromise).data.map((data) =>
             data
@@ -70,11 +72,11 @@ export class LabelsDatabase extends CcrDatabase {
                   isActive: false,
                   package: phasePackages.find(
                     (pkg) => pkg.id === data.package.id
-                  ),
+                  )
                 }
-          );
+          )
 
-          const phaseHistory = { data: enrollments };
+          const phaseHistory = { data: enrollments }
 
           resolve(
             merge(
@@ -82,34 +84,34 @@ export class LabelsDatabase extends CcrDatabase {
               {
                 data: [...phasePackages],
                 enrollments: phaseHistory,
-                pagination: associationResponse.pagination,
+                pagination: associationResponse.pagination
               }
             )
-          );
+          )
         } catch (error) {
-          reject(error);
+          reject(error)
         }
       })
-    );
+    )
   }
 
   async enroll(item: LabelsDataSegment, old: LabelsDataSegment): Promise<any> {
     const unenrollThenEnroll = resolveConfig(
       'PATIENT_FORM.UNENROLL_THEN_ENROLL',
       this.context.organization
-    );
+    )
 
     if (unenrollThenEnroll && old) {
-      await this.enrollment.delete({ id: old.id });
+      await this.enrollment.delete({ id: old.id })
     }
 
     return this.enrollment.create({
       account: this.context.accountId,
       enroll: {
-        start: moment().toISOString(),
+        start: moment().toISOString()
       },
-      package: item.package.id,
-    });
+      package: item.package.id
+    })
   }
 
   unenrollPrompt(item: LabelsDataSegment): Promise<void | string> {
@@ -119,23 +121,23 @@ export class LabelsDatabase extends CcrDatabase {
         content: _('PHASE.CONFIRM_UNENROLL_PROMPT'),
         contentParams: { item: `${item.package.title}` },
         no: _('GLOBAL.CANCEL'),
-        yes: _('PHASE.UNENROLL'),
-      };
+        yes: _('PHASE.UNENROLL')
+      }
 
       this.dialog
         .open(PromptDialog, { data: data })
         .afterClosed()
         .subscribe((confirm) => {
           if (confirm) {
-            this.unenroll(item.enrolled).then(resolve).catch(reject);
+            this.unenroll(item.enrolled).then(resolve).catch(reject)
           } else {
-            reject();
+            reject()
           }
-        });
-    });
+        })
+    })
   }
 
   unenroll(id: string | number): Promise<void | string> {
-    return this.enrollment.delete({ id: id.toString() });
+    return this.enrollment.delete({ id: id.toString() })
   }
 }

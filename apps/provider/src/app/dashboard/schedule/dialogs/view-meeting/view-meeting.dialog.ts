@@ -29,7 +29,7 @@ import {
   AttendanceStatusEntry,
   FetchMeetingTypesResponse,
   UpdateAttendanceRequest
-} from '@app/shared/selvera-api'
+} from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import { untilDestroyed } from 'ngx-take-until-destroy'

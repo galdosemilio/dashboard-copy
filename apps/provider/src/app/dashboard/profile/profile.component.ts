@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
-import { AccSingleResponse, AccUpdateRequest } from '@app/shared/selvera-api'
+import { AccSingleResponse, AccUpdateRequest } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Account } from 'selvera-api'
 

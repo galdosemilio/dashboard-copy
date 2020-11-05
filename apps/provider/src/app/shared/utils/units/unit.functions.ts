@@ -1,24 +1,30 @@
-import { AccountMeasurementPreferenceType } from '@app/shared/selvera-api';
+import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
 
-import { INCH, Metric, POUND } from './conversion.types';
+import { INCH, Metric, POUND } from './conversion.types'
 
-export function uxPoundsToGrams(pref: AccountMeasurementPreferenceType, x: number) {
+export function uxPoundsToGrams(
+  pref: AccountMeasurementPreferenceType,
+  x: number
+) {
   switch (pref) {
     case 'metric':
-      return x * 500; // aprox to 0.5 KG
+      return x * 500 // aprox to 0.5 KG
     default:
-      return x * POUND; // exact LB
+      return x * POUND // exact LB
   }
 }
 
-export function uxAproximateGrams(pref: AccountMeasurementPreferenceType, grams: number) {
-  const lbs = grams % 500 === 0 ? grams / 500 : Math.round(grams / POUND);
+export function uxAproximateGrams(
+  pref: AccountMeasurementPreferenceType,
+  grams: number
+) {
+  const lbs = grams % 500 === 0 ? grams / 500 : Math.round(grams / POUND)
 
   switch (pref) {
     case 'metric':
-      return lbs * 500; // aprox to 0.5 KG
+      return lbs * 500 // aprox to 0.5 KG
     default:
-      return lbs * POUND; // exact LB
+      return lbs * POUND // exact LB
   }
 }
 
@@ -35,21 +41,21 @@ export function getInputFactor(
       switch (pref) {
         case 'metric':
           // cm
-          return 10;
+          return 10
         default:
           // inches
-          return INCH;
+          return INCH
       }
     case 'composition':
       // to grams
       switch (pref) {
         case 'metric':
           // from kg
-          return 1000;
+          return 1000
         default:
           // from pounds
-          return POUND;
+          return POUND
       }
   }
-  return 1;
+  return 1
 }

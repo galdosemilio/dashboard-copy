@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Alerts } from 'selvera-api';
+import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Alerts } from 'selvera-api'
 
-import { ContextService, NotifierService } from '@app/service';
+import { ContextService, NotifierService } from '@app/service'
 import {
   NotificationToggleRequest,
   ToggleGroupAlertsRequest
-} from '@app/shared/selvera-api';
+} from '@coachcare/npm-api'
 
 @Component({
   selector: 'app-rightpanel-alert',
@@ -14,10 +14,10 @@ import {
 })
 export class SideAlertsComponent {
   @Input()
-  alert;
+  alert
 
   @Output()
-  dismissed = new EventEmitter<void>();
+  dismissed = new EventEmitter<void>()
 
   constructor(
     private alerts: Alerts,
@@ -31,16 +31,16 @@ export class SideAlertsComponent {
         account: this.context.user.id,
         notificationId: id,
         isViewed: true
-      };
+      }
 
-      return this.alerts.toggleNotification(req);
-    });
+      return this.alerts.toggleNotification(req)
+    })
 
     Promise.all(requests)
       .then(() => {
-        this.dismissed.next();
+        this.dismissed.next()
       })
-      .catch((err) => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err))
   }
 
   onDismissAll(alert): void {
@@ -49,15 +49,15 @@ export class SideAlertsComponent {
         organization: this.context.organizationId,
         groupId: id,
         isViewed: true
-      };
+      }
 
-      return this.alerts.toggleGroup(req);
-    });
+      return this.alerts.toggleGroup(req)
+    })
 
     Promise.all(requests)
       .then(() => {
-        this.dismissed.next();
+        this.dismissed.next()
       })
-      .catch((err) => this.notifier.error(err));
+      .catch((err) => this.notifier.error(err))
   }
 }

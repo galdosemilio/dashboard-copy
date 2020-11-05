@@ -19,7 +19,7 @@ import {
 } from '@app/dashboard/library/forms/models'
 import { SelectedOrganization } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
-import { AccountAccessData, FormAnswer } from '@app/shared/selvera-api'
+import { AccountAccessData, FormAnswer } from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { FormDisplayService } from '../services'
