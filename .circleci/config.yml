@@ -93,6 +93,13 @@ jobs:
           name: Echo
           command: echo "Hello"
 
+  format_check:
+    <<: *defaults
+    steps:
+      - run:
+          name: Echo
+          command: echo "Hello"
+
 workflows:
   setup_build_deploy:
     jobs:
