@@ -110,6 +110,9 @@ export * from './selvera-api/providers/alerts/responses'
 export * from './selvera-api/providers/apilog/requests'
 export * from './selvera-api/providers/apilog/responses'
 
+export * from './selvera-api/providers/authentication/requests'
+export * from './selvera-api/providers/authentication/responses'
+
 export * from './selvera-api/providers/ccr/blacklist/responses'
 
 export * from './selvera-api/providers/ccr/register/requests'
@@ -258,3 +261,5 @@ export * from './selvera-api/providers/zendesk/entities'
 
 export * from './selvera-api/providers/common/entities'
 export * from './selvera-api/providers/common/types'
+
+export * from './selvera-api/processors'

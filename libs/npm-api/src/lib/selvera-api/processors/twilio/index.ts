@@ -1,1 +1,2 @@
-export * from './roomMonitor.service';
+export * from './model'
+export * from './roomMonitor.service'
