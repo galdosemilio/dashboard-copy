@@ -53,7 +53,8 @@
               "ngrx-store-freeze",
               "hammerjs",
               "chart.js",
-              "socket.io-client"
+              "socket.io-client",
+              "pdfmake"
             ]
           },
           "configurations": {

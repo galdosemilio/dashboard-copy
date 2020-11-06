@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
-    "nx": "nx",
+    "nx": "node --max-old-space-size=6144 node_modules/.bin/nx",
     "start": "node --max-old-space-size=6144 node_modules/.bin/ng serve",
     "start:admin": "node --max-old-space-size=6144 node_modules/.bin/ng serve admin --port 4200",
     "start:provider": "node --max-old-space-size=6144 node_modules/.bin/ng serve provider --port 4201 -c standalone",
@@ -16,9 +16,9 @@
     "e2e": "node --max-old-space-size=6144 node_modules/.bin/nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
-    "affected:build": "nx affected:build",
-    "affected:e2e": "nx affected:e2e",
-    "affected:test": "nx affected:test",
+    "affected:build": "node --max-old-space-size=6144 node_modules/.bin/nx affected:build",
+    "affected:e2e": "node --max-old-space-size=6144 node_modules/.bin/nx affected:e2e",
+    "affected:test": "node --max-old-space-size=6144 node_modules/.bin/nx affected:test",
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
@@ -30,11 +30,6 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn affected:lint && yarn affected:build"
-    }
   },
   "private": true,
   "dependencies": {
@@ -104,6 +99,7 @@
     "jest-preset-angular": "8.3.1",
     "ng-packagr": "^10.1.2",
     "prettier": "2.1.2",
+    "terser": "^5.3.8",
     "ts-jest": "26.4.0",
     "ts-node": "~9.0.0",
     "tslint": "~6.1.0",

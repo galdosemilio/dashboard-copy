@@ -1,13 +1,13 @@
 version: 2.1
 
 orbs:
-  aws-code-deploy: circleci/aws-code-deploy@0.0.9
-  aws-cli: circleci/aws-cli@0.1.16
+  aws-s3: circleci/aws-s3@2.0.0
 
 defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/node:10.16.3
+  resource_class: large
 
 yarn_auth: &yarn_auth
   name: Set up .npmrc (auth)
@@ -17,6 +17,7 @@ yarn_auth: &yarn_auth
     sudo echo "//$NPM_REGISTRY:always-auth=true" >> ~/.npmrc
     sudo echo "//npm.pkg.github.com/:_authToken=\"$COACHCARE_AUTH_TOKEN\"" >> ~/.npmrc
     sudo echo "@coachcare:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+
 npm_dependency_installation: &npm_dependency_installation
   name: Installing NPM dependencies
   command: |
@@ -36,127 +37,197 @@ jobs:
   setup:
     <<: *defaults
     steps:
-      - run:
-          name: Echo
-          command: echo "Hello"
+      - checkout
+      - run: *yarn_auth
+      - restore_cache:
+          key: *dependency_cache_key
+      - run: *npm_dependency_installation
+      - save_cache:
+          key: *dependency_cache_key
+          paths:
+            - ./node_modules
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
 
-  affected_lint:
+  execute_affected:
     <<: *defaults
+    parameters:
+      command:
+        type: enum
+        enum:
+          - lint
+          - build
+          - test
+          - e2e
+      base:
+        type: string
+        default: origin/master
+      exclude:
+        type: string
+        default: ''
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
-          name: Echo
-          command: echo "Hello"
+          name: Execute affected - << parameters.command >>
+          command: yarn affected:<<parameters.command>> --base=<< parameters.base >> <<# parameters.exclude >> --exclude=<< parameters.exclude >> <</ parameters.exclude >>
 
-  affected_build:
+  full_build:
     <<: *defaults
+    parameters:
+      mode:
+        description: Bundle build mode
+        type: enum
+        enum:
+          - test
+          - prod
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
-          name: Echo
-          command: echo "Hello"
+          name: Execute full build for ADMIN
+          command: NODE_OPTIONS=--max_old_space_size=6144 yarn build admin -c << parameters.mode >>
+      - run:
+          name: Execute full build for PROVIDER
+          command: NODE_OPTIONS=--max_old_space_size=6144 yarn build provider -c << parameters.mode >>
+      - run:
+          name: Copy deployment files
+          command: cp appspec.yml ~/repo/dist/apps && cp -r scripts ~/repo/dist/apps
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
 
-  affected_test:
-    <<: *defaults
+  deploy:
+    docker:
+      - image: cimg/python:3.8
+    working_directory: ~/repo/dist/apps
+    parameters:
+      env:
+        type: enum
+        enum:
+          - test
+          - production
+    environment:
+      AWS_REGION: us-east-1
     steps:
+      - attach_workspace:
+          at: ~/repo
+      - aws-s3/sync:
+          arguments: --acl public-read --delete
+          from: ./admin
+          to: s3://$DEPLOYMENT_BUCKET/
+      - aws-s3/sync:
+          arguments: --acl public-read --delete
+          from: ./provider
+          to: s3://$DEPLOYMENT_BUCKET/provider
       - run:
-          name: Echo
-          command: echo "Hello"
-
-  affected_e2e:
-    <<: *defaults
-    steps:
-      - run:
-          name: Echo
-          command: echo "Hello"
-  full_test_build:
-    <<: *defaults
-    steps:
-      - run:
-          name: Echo
-          command: echo "Hello"
-  full_production_build:
-    <<: *defaults
-    steps:
-      - run:
-          name: Echo
-          command: echo "Hello"
-  deploy_to_test:
-    <<: *defaults
-    steps:
-      - run:
-          name: Echo
-          command: echo "Hello"
-
-  deploy_to_production:
-    <<: *defaults
-    steps:
-      - run:
-          name: Echo
-          command: echo "Hello"
+          name: Push SumoLogic deployment notification
+          command: |
+            echo "`date` | Site deployment completed for PROJECT: $CIRCLE_PROJECT_REPONAME BRANCH: $CIRCLE_BRANCH COMMIT: $CIRCLE_SHA1 ENV: << parameters.env >> DEPLOYER: $CIRCLE_USERNAME" > sumologic-deployment.log
+            curl -s -X POST -T sumologic-deployment.log "$SUMOLOGIC_COLLECTOR_URL" || { echo 'SumoLogic deployment log upload failed'; exit 0; }
 
   format_check:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
-          name: Echo
-          command: echo "Hello"
+          name: Format Check
+          command: yarn format:check
 
 workflows:
   setup_build_deploy:
     jobs:
       - setup
-      - affected_lint
-      #    requires:
-      #      - setup
-      - affected_build
-      #     requires:
-      #       - setup
-      - affected_test
-      #     requires:
-      #       - affected_build
-      # - affected_e2e:
-      # requires:
-      # - affected_build
-      - affected_test
-      - format_check
-      - full_test_build
-      #     requires:
-      # - setup
-      # - affected_lint
-      # - affected_test
-      # - affected_e2e
-      # - approve_test_deployment:
-      #     type: approval
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - master
-      #     requires:
-      #       - full_test_build
-      # - deploy_to_test:
-      #     requires:
-      #       - approve_test_deployment
-      #       - full_test_build
-      #     context: site-deployment-test
-      # - full_production_build:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #     requires:
-      #       - deploy_to_test
-      # - approve_production_deployment:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #     type: approval
-      #     requires:
-      #       - full_production_build
-      # - deploy_to_production:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #     requires:
-      #       - approve_production_deployment
-      # context: site-deployment-prod
+      - format_check:
+          requires:
+            - setup
+      - execute_affected:
+          name: affected_lint
+          command: lint
+          requires:
+            - setup
+      - execute_affected:
+          name: affected_build
+          command: build
+          requires:
+            - affected_lint
+            - format_check
+      - execute_affected:
+          name: affected_test
+          command: test
+          exclude: api,datepicker,layout,common,backend,provider,admin
+          requires:
+            - affected_build
+      - approve_affected_e2e:
+          type: approval
+          filters:
+            branches:
+              ignore:
+                - /dependabot.*/
+                - master
+          requires:
+            - affected_build
+      - execute_affected:
+          name: affected_e2e
+          command: e2e
+          filters:
+            branches:
+              ignore:
+                - /dependabot.*/
+                - master
+          requires:
+            - approve_affected_e2e
+      - full_build:
+          mode: test
+          name: full_test_build
+          filters:
+            branches:
+              ignore:
+                - /dependabot.*/
+          requires:
+            - affected_test
+      - approve_test_deployment:
+          type: approval
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - full_test_build
+      - deploy:
+          name: deploy_test
+          env: test
+          requires:
+            - approve_test_deployment
+          context: dashboard-deployment-test
+      - full_build:
+          mode: prod
+          name: full_production_build
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - deploy_test
+      - approve_production_deployment:
+          filters:
+            branches:
+              only:
+                - master
+          type: approval
+          requires:
+            - full_production_build
+      - deploy:
+          name: deploy_production
+          env: production
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - approve_production_deployment
+          context: dashboard-deployment-production
