@@ -28,7 +28,7 @@ class ApiService {
   private headers: HeaderOptions = {}
   private token: string
   private langs: string
-  private socketClient: SocketIOClient.Socket
+  private socketClient: io.SocketIOClient.Socket
 
   public onUnauthenticatedError = new Subject<boolean>()
 
@@ -155,7 +155,7 @@ class ApiService {
     }
   }
 
-  public getSocketClient(): SocketIOClient.Socket {
+  public getSocketClient(): io.SocketIOClient.Socket {
     return this.socketClient
       ? this.socketClient
       : this.getSocketClientConnection()

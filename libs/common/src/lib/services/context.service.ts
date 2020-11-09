@@ -29,7 +29,7 @@ import {
 import { LanguageService } from './language.service'
 
 export type CurrentAccount = AccountSingle & {
-  preferences?: AccountPreferenceSingle
+  preference?: AccountPreferenceSingle
 }
 
 export type SelectedAccount = AccountSingle
@@ -174,7 +174,11 @@ export class ContextService {
 
                   // fetch associated organizations
                   try {
-                    const orgs = await this.org.getList({ limit: 'all' })
+                    const orgs = await this.org.getAccessibleList({
+                      status: 'active',
+                      strict: false,
+                      limit: 'all'
+                    })
                     this.organizations = orgs.data.map((o: any) => ({
                       // MERGETODO: CHECK THIS TYPE OUT!!!
                       ...o.organization,
@@ -205,10 +209,10 @@ export class ContextService {
                   let defaultOrganization: string
 
                   if (
-                    this.user.preferences &&
-                    this.user.preferences.defaultOrganization
+                    this.user.preference &&
+                    this.user.preference.defaultOrganization
                   ) {
-                    defaultOrganization = this.user.preferences.defaultOrganization.toString()
+                    defaultOrganization = this.user.preference.defaultOrganization.toString()
                     org = this.resolveDefaultOrg(defaultOrganization)
                   } else {
                     org = this.resolveDefaultOrg()
@@ -216,10 +220,10 @@ export class ContextService {
 
                   // save the default organization if no preference exists
                   if (
-                    !this.user.preferences &&
+                    !this.user.preference &&
                     (!org.permissions || org.permissions.viewAll)
                   ) {
-                    preferences = merge({}, this.user.preferences, {
+                    preferences = merge({}, this.user.preference, {
                       defaultOrganization: org.id
                     })
 

@@ -62,6 +62,10 @@
           &.mat-calendar-control-active {
             font-weight: bold;
           }
+
+          & > mat-icon {
+            font-size: 16px;
+          }
         }
         .mat-calendar-header-date-month {
           font-weight: 500;

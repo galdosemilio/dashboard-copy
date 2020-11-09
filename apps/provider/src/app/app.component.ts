@@ -13,7 +13,7 @@ import {
 } from '@app/config'
 import { CloseMenuFor, ResizeLayout, UIState } from '@app/layout/store'
 import { ConfigService, TimeTrackerService } from '@app/service'
-import { MatDatepickerIntl } from '@coachcare/ccr-datepicker'
+import { MatDatepickerIntl } from '@coachcare/datepicker'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { untilDestroyed } from 'ngx-take-until-destroy'

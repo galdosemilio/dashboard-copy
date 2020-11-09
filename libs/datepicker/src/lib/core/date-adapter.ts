@@ -6,18 +6,18 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { inject, InjectionToken, LOCALE_ID } from '@angular/core'
-import { Observable, Subject } from 'rxjs'
+import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 /** InjectionToken for datepicker that can be used to override default locale code. */
 export const MAT_DATE_LOCALE = new InjectionToken<string>('MAT_DATE_LOCALE', {
   providedIn: 'root',
   factory: MAT_DATE_LOCALE_FACTORY
-})
+});
 
 /** @docs-private */
 export function MAT_DATE_LOCALE_FACTORY(): string {
-  return inject(LOCALE_ID)
+  return inject(LOCALE_ID);
 }
 
 /**
@@ -26,110 +26,107 @@ export function MAT_DATE_LOCALE_FACTORY(): string {
  * @deprecated
  * @deletion-target 7.0.0
  */
-export const MAT_DATE_LOCALE_PROVIDER = {
-  provide: MAT_DATE_LOCALE,
-  useExisting: LOCALE_ID
-}
+export const MAT_DATE_LOCALE_PROVIDER = { provide: MAT_DATE_LOCALE, useExisting: LOCALE_ID };
 
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */
 export abstract class DateAdapter<D> {
   /** The locale to use for all dates. */
-  protected locale: any
+  protected locale: any;
 
   /** A stream that emits when the locale changes. */
   get localeChanges(): Observable<void> {
-    return this._localeChanges
+    return this._localeChanges;
   }
-  protected _localeChanges = new Subject<void>()
+  protected _localeChanges = new Subject<void>();
 
   /**
    * Gets the year component of the given date.
    * @param date The date to extract the year from.
    * @returns The year component.
    */
-  abstract getYear(date: D): number
+  abstract getYear(date: D): number;
 
   /**
    * Gets the month component of the given date.
    * @param date The date to extract the month from.
    * @returns The month component (0-indexed, 0 = January).
    */
-  abstract getMonth(date: D): number
+  abstract getMonth(date: D): number;
 
-  abstract getHours(date: D): number
+  abstract getHours(date: D): number;
 
-  abstract setHours(date: D, value: number): void
+  abstract setHours(date: D, value: number): void;
 
-  abstract getMinutes(date: D): number
+  abstract getMinutes(date: D): number;
 
-  abstract setMinutes(date: D, value: number): void
+  abstract setMinutes(date: D, value: number): void;
 
-  abstract setSeconds(date: D, value: number, ms?: number): void
+  abstract setSeconds(date: D, value: number, ms?: number): void;
 
   /**
    * Gets the date of the month component of the given date.
    * @param date The date to extract the date of the month from.
    * @returns The month component (1-indexed, 1 = first of month).
    */
-  abstract getDate(date: D): number
+  abstract getDate(date: D): number;
 
   /**
    * Gets the day of the week component of the given date.
    * @param date The date to extract the day of the week from.
    * @returns The month component (0-indexed, 0 = Sunday).
    */
-  abstract getDayOfWeek(date: D): number
+  abstract getDayOfWeek(date: D): number;
 
   /**
    * Gets a list of names for the months.
    * @param style The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').
    * @returns An ordered list of all month names, starting with January.
    */
-  abstract getMonthNames(style: 'long' | 'short' | 'narrow'): string[]
+  abstract getMonthNames(style: 'long' | 'short' | 'narrow'): string[];
 
   /**
    * Gets a list of names for the dates of the month.
    * @returns An ordered list of all date of the month names, starting with '1'.
    */
-  abstract getDateNames(): string[]
+  abstract getDateNames(): string[];
 
-  abstract getHourNames(): string[]
+  abstract getHourNames(): string[];
 
-  abstract getMinuteNames(): string[]
+  abstract getMinuteNames(): string[];
 
   /**
    * Gets a list of names for the days of the week.
    * @param style The naming style (e.g. long = 'Sunday', short = 'Sun', narrow = 'S').
    * @returns An ordered list of all weekday names, starting with Sunday.
    */
-  abstract getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[]
+  abstract getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[];
 
   /**
    * Gets the name for the year of the given date.
    * @param date The date to get the year name for.
    * @returns The name of the given year (e.g. '2017').
    */
-  abstract getYearName(date: D): string
+  abstract getYearName(date: D): string;
 
   /**
    * Gets the first day of the week.
    * @returns The first day of the week (0-indexed, 0 = Sunday).
    */
-  abstract getFirstDayOfWeek(): number
+  abstract getFirstDayOfWeek(): number;
 
   /**
    * Gets the number of days in the month of the given date.
    * @param date The date whose month should be checked.
    * @returns The number of days in the month of the given date.
    */
-  abstract getNumDaysInMonth(date: D): number
+  abstract getNumDaysInMonth(date: D): number;
 
   /**
    * Clones the given date.
    * @param date The date to clone
    * @returns A new date equal to the given date.
    */
-  abstract clone(date: D): D
+  abstract clone(date: D): D;
 
   /**
    * Creates a date with the given year, month, and date. Does not allow over/under-flow of the
@@ -139,19 +136,13 @@ export abstract class DateAdapter<D> {
    * @param date The date of month of the date. Must be an integer 1 - length of the given month.
    * @returns The new date, or null if invalid.
    */
-  abstract createDate(
-    year: number,
-    month: number,
-    date: number,
-    hours?: number,
-    minutes?: number
-  ): D
+  abstract createDate(year: number, month: number, date: number, hours?: number, minutes?: number): D;
 
   /**
    * Gets today's date.
    * @returns Today's date.
    */
-  abstract today(): D
+  abstract today(): D;
 
   /**
    * Parses a date from a user-provided value.
@@ -160,7 +151,7 @@ export abstract class DateAdapter<D> {
    *     (type is implementation-dependent).
    * @returns The parsed date.
    */
-  abstract parse(value: any, parseFormat: any): D | null
+  abstract parse(value: any, parseFormat: any): D | null;
 
   /**
    * Formats a date as a string according to the given format.
@@ -168,7 +159,7 @@ export abstract class DateAdapter<D> {
    * @param displayFormat The format to use to display the date as a string.
    * @returns The formatted date string.
    */
-  abstract format(date: D, displayFormat: any): string
+  abstract format(date: D, displayFormat: any): string;
 
   /**
    * Adds the given number of years to the date. Years are counted as if flipping 12 pages on the
@@ -178,7 +169,7 @@ export abstract class DateAdapter<D> {
    * @param years The number of years to add (may be negative).
    * @returns A new date equal to the given one with the specified number of years added.
    */
-  abstract addCalendarYears(date: D, years: number): D
+  abstract addCalendarYears(date: D, years: number): D;
 
   /**
    * Adds the given number of months to the date. Months are counted as if flipping a page on the
@@ -188,7 +179,7 @@ export abstract class DateAdapter<D> {
    * @param months The number of months to add (may be negative).
    * @returns A new date equal to the given one with the specified number of months added.
    */
-  abstract addCalendarMonths(date: D, months: number): D
+  abstract addCalendarMonths(date: D, months: number): D;
 
   /**
    * Adds the given number of days to the date. Days are counted as if moving one cell on the
@@ -197,11 +188,11 @@ export abstract class DateAdapter<D> {
    * @param days The number of days to add (may be negative).
    * @returns A new date equal to the given one with the specified number of days added.
    */
-  abstract addCalendarDays(date: D, days: number): D
+  abstract addCalendarDays(date: D, days: number): D;
 
-  abstract addCalendarHours(date: D, hours: number): D
+  abstract addCalendarHours(date: D, hours: number): D;
 
-  abstract addCalendarMinutes(date: D, minutes: number): D
+  abstract addCalendarMinutes(date: D, minutes: number): D;
 
   /**
    * Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.
@@ -210,27 +201,27 @@ export abstract class DateAdapter<D> {
    * @param date The date to get the ISO date string for.
    * @returns The ISO date string date string.
    */
-  abstract toIso8601(date: D): string
+  abstract toIso8601(date: D): string;
 
   /**
    * Checks whether the given object is considered a date instance by this DateAdapter.
    * @param obj The object to check
    * @returns Whether the object is a date instance.
    */
-  abstract isDateInstance(obj: any): boolean
+  abstract isDateInstance(obj: any): boolean;
 
   /**
    * Checks whether the given date is valid.
    * @param date The date to check.
    * @returns Whether the date is valid.
    */
-  abstract isValid(date: any): boolean
+  abstract isValid(date: D): boolean;
 
   /**
    * Gets date instance that is not valid.
    * @returns An invalid date.
    */
-  abstract invalid(): D
+  abstract invalid(): D;
 
   /**
    * Attempts to deserialize a value to a valid date object. This is different from parsing in that
@@ -246,9 +237,9 @@ export abstract class DateAdapter<D> {
    */
   deserialize(value: any): D | null {
     if (value == null || (this.isDateInstance(value) && this.isValid(value))) {
-      return value
+      return value;
     }
-    return this.invalid()
+    return this.invalid();
   }
 
   /**
@@ -256,8 +247,8 @@ export abstract class DateAdapter<D> {
    * @param locale The new locale.
    */
   setLocale(locale: any) {
-    this.locale = locale
-    this._localeChanges.next()
+    this.locale = locale;
+    this._localeChanges.next();
   }
 
   /**
@@ -269,38 +260,38 @@ export abstract class DateAdapter<D> {
    *     a number greater than 0 if the first date is later.
    */
   compareDate(first: D, second: D, unit = 'minute'): number {
-    let f = this.getYear(first).toString()
-    let s = this.getYear(second).toString()
+    let f = this.getYear(first).toString();
+    let s = this.getYear(second).toString();
 
     if (['y', 'year', 'years'].indexOf(unit) >= 0) {
-      return Number(f) - Number(s)
+      return Number(f) - Number(s);
     } else {
-      f = f.concat(('00' + this.getMonth(first)).slice(-2))
-      s = s.concat(('00' + this.getMonth(second)).slice(-2))
+      f = f.concat(('00' + this.getMonth(first)).slice(-2));
+      s = s.concat(('00' + this.getMonth(second)).slice(-2));
     }
 
     if (['M', 'month', 'months'].indexOf(unit) >= 0) {
-      return Number(f) - Number(s)
+      return Number(f) - Number(s);
     } else {
-      f = f.concat(('00' + this.getDate(first)).slice(-2))
-      s = s.concat(('00' + this.getDate(second)).slice(-2))
+      f = f.concat(('00' + this.getDate(first)).slice(-2));
+      s = s.concat(('00' + this.getDate(second)).slice(-2));
     }
 
     if (['d', 'day', 'days'].indexOf(unit) >= 0) {
-      return Number(f) - Number(s)
+      return Number(f) - Number(s);
     } else {
-      f = f.concat(('00' + this.getHours(first)).slice(-2))
-      s = s.concat(('00' + this.getHours(second)).slice(-2))
+      f = f.concat(('00' + this.getHours(first)).slice(-2));
+      s = s.concat(('00' + this.getHours(second)).slice(-2));
     }
 
     if (['h', 'hour', 'hours'].indexOf(unit) >= 0) {
-      return Number(f) - Number(s)
+      return Number(f) - Number(s);
     } else {
-      f = f.concat(('00' + this.getMinutes(first)).slice(-2))
-      s = s.concat(('00' + this.getMinutes(second)).slice(-2))
+      f = f.concat(('00' + this.getMinutes(first)).slice(-2));
+      s = s.concat(('00' + this.getMinutes(second)).slice(-2));
     }
 
-    return Number(f) - Number(s)
+    return Number(f) - Number(s);
   }
 
   /**
@@ -312,9 +303,7 @@ export abstract class DateAdapter<D> {
    *     Null dates are considered equal to other null dates.
    */
   sameDate(first: D | null, second: D | null, unit = 'minute'): boolean {
-    return first && second
-      ? !this.compareDate(first, second, unit)
-      : first === second
+    return first && second ? !this.compareDate(first, second, unit) : first === second;
   }
 
   /**
@@ -326,13 +315,16 @@ export abstract class DateAdapter<D> {
    * @returns `min` if `date` is less than `min`, `max` if date is greater than `max`,
    *     otherwise `date`.
    */
-  clampDate(date: D, min?: D | null, max?: D | null, unit = 'minute'): D {
+  clampDate(date: D | null, min?: D | null, max?: D | null, unit = 'minute'): D | null {
+    if (!date) {
+      return null;
+    }
     if (min && this.compareDate(date, min, unit) < 0) {
-      return min
+      return min;
     }
     if (max && this.compareDate(date, max, unit) > 0) {
-      return max
+      return max;
     }
-    return date
+    return date;
   }
 }

@@ -105,22 +105,28 @@ export class MatMonthView<D> implements AfterContentInit {
   private _maxDate: D | null;
 
   /** A function used to filter which dates are selectable. */
-  @Input() dateFilter: (date: D, unit?: string) => boolean;
+  @Input()
+  dateFilter: (date: D, unit?: string) => boolean;
 
   /** Animations handler */
-  @Input() animationDir: string;
+  @Input()
+  animationDir: string;
 
   /** Emits when a new date is selected. */
-  @Output() readonly selectedChange = new EventEmitter<D | null>();
+  @Output()
+  readonly selectedChange = new EventEmitter<D | null>();
 
   /** Emits when any date is selected. */
-  @Output() readonly _userSelection = new EventEmitter<void>();
+  @Output()
+  readonly _userSelection = new EventEmitter<void>();
 
   /** Emits when any date is activated. */
-  @Output() readonly activeDateChange = new EventEmitter<D>();
+  @Output()
+  readonly activeDateChange = new EventEmitter<D>();
 
   /** The body of calendar table */
-  @ViewChild(MatCalendarBody, { static: false }) _matCalendarBody: MatCalendarBody;
+  @ViewChild(MatCalendarBody)
+  _matCalendarBody: MatCalendarBody;
 
   /** The label for this month (e.g. "January 2017"). */
   _monthLabel: string;

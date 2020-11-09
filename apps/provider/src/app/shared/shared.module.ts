@@ -56,7 +56,7 @@ import {
   MatTooltipModule
 } from '@coachcare/common/material'
 import { RouterModule } from '@angular/router'
-import { MatDatepickerModule } from '@coachcare/ccr-datepicker'
+import { MatDatepickerModule } from '@coachcare/datepicker'
 import { TranslateModule } from '@ngx-translate/core'
 import { QRCodeModule } from 'angularx-qrcode'
 import { ChartsModule } from 'ng2-charts'

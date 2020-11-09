@@ -10,6 +10,10 @@
     [maxDate]="datepicker._maxDate"
     [dateFilter]="datepicker._dateFilter"
     [selected]="datepicker._selected"
+    [showCalendarControls]="datepicker.showCalendarControls"
+    [@fadeInCalendar]="'enter'"
+    (monthSelected)="datepicker.monthSelected.emit($event)"
     (selectedChange)="datepicker.select($event)"
+    (yearSelected)="datepicker.yearSelected.emit($event)"
     (_userSelection)="datepicker.close()">
 </mat-calendar>

@@ -1840,13 +1840,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@coachcare/ccr-datepicker@^1.6.7":
-  version "1.6.7"
-  resolved "https://npm.pkg.github.com/download/@coachcare/ccr-datepicker/1.6.7/c456bbba261464595217558c1330eb8ca81f2b8ce1a83b4019905d800a309fcf#51d407a60e4ad7a100364957facc3274871824bc"
-  integrity sha512-HiLzvHolBgzpgdFH0aR2Oaq1rYkK3y/Jmpso599Qn8WDGPhIP0GAHS+CnwI5Dp6jsbMlxysjkgd0XHgdx6g4hw==
-  dependencies:
-    tslib "^1.9.0"
-
 "@cypress/listr-verbose-renderer@^0.4.1":
   version "0.4.1"
   resolved "https://npm.coachcare.io/@cypress%2flistr-verbose-renderer/-/listr-verbose-renderer-0.4.1.tgz#a77492f4b11dcc7c446a34b3e28721afd33c642a"
@@ -2589,11 +2582,6 @@
   resolved "https://npm.coachcare.io/@types%2fsizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
   integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
 
-"@types/socket.io-client@^1.4.32":
-  version "1.4.34"
-  resolved "https://npm.coachcare.io/@types%2fsocket.io-client/-/socket.io-client-1.4.34.tgz#8ca5f5732a9ad92b79aba71083cda5e5821e3ed9"
-  integrity sha512-Lzia5OTQFJZJ5R4HsEEldywiiqT9+W2rDbyHJiiTGqOcju89sCsQ8aUXDljY6Ls33wKZZGC0bfMhr/VpOyjtXg==
-
 "@types/source-list-map@*":
   version "0.1.2"
   resolved "https://npm.coachcare.io/@types%2fsource-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
@@ -2603,11 +2591,6 @@
   version "1.0.1"
   resolved "https://npm.coachcare.io/@types%2fstack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
-
-"@types/twilio-video@^2.0.12":
-  version "2.7.1"
-  resolved "https://npm.coachcare.io/@types%2ftwilio-video/-/twilio-video-2.7.1.tgz#7baf7b23b5b5b838e4c94eeb72e57761096f4ad0"
-  integrity sha512-Yt8x+xyvGKydtMNosrLP7sX/VswQsVZZoAXbBjPdCqV6T5PVFKWjwPGmgJqpsNzX9A93CAuCa22V3FfH6hNcKg==
 
 "@types/webpack-sources@^0.1.5":
   version "0.1.7"
@@ -3312,14 +3295,6 @@ axios@0.19.2:
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   dependencies:
     follow-redirects "1.5.10"
-
-axios@^0.16.2:
-  version "0.16.2"
-  resolved "https://npm.coachcare.io/axios/-/axios-0.16.2.tgz#ba4f92f17167dfbab40983785454b9ac149c3c6d"
-  integrity sha1-uk+S8XFn37q0CYN4VFS5rBScPG0=
-  dependencies:
-    follow-redirects "^1.2.3"
-    is-buffer "^1.1.5"
 
 axobject-query@2.0.2:
   version "2.0.2"
@@ -6187,11 +6162,6 @@ follow-redirects@^1.0.0:
   integrity sha512-4eyLK6s6lH32nOvLLwlIOnr9zrL8Sm+OvW4pVTJNoXeGzYIkHVf+pADQi+OJ0E67hiuSLezPVPyBcIZO50TmmQ==
   dependencies:
     debug "^3.0.0"
-
-follow-redirects@^1.2.3:
-  version "1.13.0"
-  resolved "https://npm.coachcare.io/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
-  integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
 
 fontkit@^1.8.0:
   version "1.8.1"
@@ -10444,11 +10414,6 @@ qs@6.7.0:
   resolved "https://npm.coachcare.io/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-qs@^6.5.1:
-  version "6.9.4"
-  resolved "https://npm.coachcare.io/qs/-/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
-  integrity sha512-A1kFqHekCTM7cz0udomYUoYNWjBebHm/5wzU/XqrBRBNWectVH0QIiN+NEcZ0Dte5hvzHwbr8+XQmguPhJ6WdQ==
-
 qs@~6.5.2:
   version "6.5.2"
   resolved "https://npm.coachcare.io/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
@@ -11205,17 +11170,6 @@ selfsigned@^1.10.7:
   dependencies:
     node-forge "0.9.0"
 
-selvera-api@^11.20.1:
-  version "11.20.1"
-  resolved "https://npm.coachcare.io/selvera-api/-/selvera-api-11.20.1.tgz#ea401b69d09ca8220c4a84742ea1ad948634b67a"
-  integrity sha512-itQfLuv1aMC/Y7j4MwODmKDRZ7Mxf1criAjC/6mdWsZ/s3WIvGZPiowzNGxUHtd/Wga8i0IgodQqupqp5bAzog==
-  dependencies:
-    "@types/socket.io-client" "^1.4.32"
-    "@types/twilio-video" "^2.0.12"
-    axios "^0.16.2"
-    qs "^6.5.1"
-    socket.io "^2.2.0"
-
 semver-compare@^1.0.0:
   version "1.0.0"
   resolved "https://npm.coachcare.io/semver-compare/-/semver-compare-1.0.0.tgz#0dee216a1c941ab37e9efb1788f6afc5ff5537fc"
@@ -11505,7 +11459,7 @@ socket.io-parser@~3.4.0:
     debug "~4.1.0"
     isarray "2.0.1"
 
-socket.io@^2.2.0, socket.io@^2.3.0:
+socket.io@^2.3.0:
   version "2.3.0"
   resolved "https://npm.coachcare.io/socket.io/-/socket.io-2.3.0.tgz#cd762ed6a4faeca59bc1f3e243c0969311eb73fb"
   integrity sha512-2A892lrj0GcgR/9Qk81EaY2gYhCBxurV0PfmmESO6p27QPrUK1J3zdns+5QPqvUYK2q657nSj0guoIil9+7eFg==

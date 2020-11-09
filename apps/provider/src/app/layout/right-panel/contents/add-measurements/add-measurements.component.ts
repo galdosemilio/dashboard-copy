@@ -22,7 +22,7 @@ import {
   AddBodyMeasurementRequest,
   AddManualSleepMeasurementRequest
 } from '@coachcare/npm-api'
-import { Moment } from '@coachcare/ccr-datepicker'
+import { Moment } from '@coachcare/datepicker'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'

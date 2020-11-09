@@ -106,9 +106,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
   getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
     // Moment.js doesn't support narrow month names, so we just use short if narrow is requested.
-    return style === 'long'
-      ? this._localeData.longMonths
-      : this._localeData.shortMonths;
+    return style === 'long' ? this._localeData.longMonths : this._localeData.shortMonths;
   }
 
   getDateNames(): string[] {
@@ -147,24 +145,16 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     return this.clone(date).daysInMonth();
   }
 
-  clone(date: Moment | null): Moment {
+  clone(date: Moment): Moment {
     const obj = date ? moment(date) : moment();
     return obj.locale(this.locale);
   }
 
-  createDate(
-    year: number,
-    month: number,
-    date: number,
-    hours?: number,
-    minutes?: number
-  ): Moment {
+  createDate(year: number, month: number, date: number, hours?: number, minutes?: number): Moment {
     // Moment.js will create an invalid date if any of the components are out of bounds, but we
     // explicitly check each case so we can throw more descriptive errors.
     if (month < 0 || month > 11) {
-      throw Error(
-        `Invalid month index "${month}". Month index has to be between 0 and 11.`
-      );
+      throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
     }
 
     if (date < 1) {
@@ -247,11 +237,11 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
   }
 
   isDateInstance(obj: any): boolean {
-    return moment.isMoment(obj) ? obj.isValid() : moment(obj).isValid();
+    return moment.isMoment(obj) ? this.clone(obj).isValid() : moment(obj).isValid();
   }
 
-  isValid(date: any): boolean {
-    return date ? this.clone(date).isValid() : false;
+  isValid(date: Moment): boolean {
+    return this.clone(date).isValid();
   }
 
   invalid(): Moment {
