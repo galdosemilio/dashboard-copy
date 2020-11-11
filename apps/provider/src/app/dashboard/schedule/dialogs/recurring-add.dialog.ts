@@ -11,7 +11,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import * as moment from 'moment-timezone'
 import { Schedule } from '@coachcare/npm-api'
 

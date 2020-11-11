@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatDialogRef } from '@coachcare/common/material'
+import { MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { AccountProvider, AccSingleResponse, RPM } from '@coachcare/npm-api'
-import 'moment'
 import * as moment from 'moment-timezone'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 
@@ -97,6 +96,7 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
       link.click()
       this.dialogRef.close()
     } catch (error) {
+      console.error(error)
       this.notifier.error(error)
     } finally {
       this.status = 'ready'

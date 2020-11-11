@@ -4,7 +4,7 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
   MatSelectChange
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import { AssociationsDatabase } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations'
 import { ContextService, NotifierService } from '@app/service'
 import {

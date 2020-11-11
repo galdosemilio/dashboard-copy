@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared'
 import { Package } from '@app/shared/components/package-table'

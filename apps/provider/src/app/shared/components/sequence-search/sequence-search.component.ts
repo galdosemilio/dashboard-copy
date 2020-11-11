@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms'
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import { Sequence } from '@app/dashboard/sequencing/models'
 import { SequencesDatabase } from '@app/dashboard/sequencing/services'
 import { ContextService, NotifierService } from '@app/service'

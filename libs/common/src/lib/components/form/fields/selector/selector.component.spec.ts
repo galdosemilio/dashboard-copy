@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@coachcare/common/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
-import { SelectorFormFieldComponent } from './selector.component';
+import { Component, OnInit } from '@angular/core'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { MatSelectModule } from '@coachcare/material'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { TranslateModule } from '@ngx-translate/core'
+import { SelectorFormFieldComponent } from './selector.component'
 
 describe('Form.SelectorFormFieldComponent', () => {
   // testing input parameters with a host component
@@ -17,23 +17,23 @@ describe('Form.SelectorFormFieldComponent', () => {
           [type]="type"
         ></ccr-form-selector>
       </form>
-    `,
+    `
   })
   class TestHostComponent implements OnInit {
-    form: FormGroup;
-    type: string;
+    form: FormGroup
+    type: string
 
     constructor(private builder: FormBuilder) {}
 
     ngOnInit() {
       this.form = this.builder.group({
-        test: null,
-      });
+        test: null
+      })
     }
   }
 
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+  let component: TestHostComponent
+  let fixture: ComponentFixture<TestHostComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,20 +41,20 @@ describe('Form.SelectorFormFieldComponent', () => {
         NoopAnimationsModule,
         ReactiveFormsModule,
         MatSelectModule,
-        TranslateModule.forRoot(),
+        TranslateModule.forRoot()
       ],
-      declarations: [TestHostComponent, SelectorFormFieldComponent],
-    }).compileComponents();
-  }));
+      declarations: [TestHostComponent, SelectorFormFieldComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
-    component = fixture.componentInstance;
-    component.type = 'gender';
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(TestHostComponent)
+    component = fixture.componentInstance
+    component.type = 'gender'
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

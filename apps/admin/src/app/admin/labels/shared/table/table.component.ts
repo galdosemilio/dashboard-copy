@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatSort } from '@coachcare/common/material'
+import { MatSort } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LabelDialogs } from '@board/services'
 import { LabelsDatabase, LabelsDataSource } from '@coachcare/backend/data'

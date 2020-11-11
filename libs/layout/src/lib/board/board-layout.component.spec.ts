@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MatSnackBarModule } from '@coachcare/common/material';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Component, Input } from '@angular/core'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatDialogModule, MatSnackBarModule } from '@coachcare/material'
+import { RouterTestingModule } from '@angular/router/testing'
 import {
   AuthService,
   ConfigService,
@@ -10,39 +10,39 @@ import {
   EventsService,
   LanguageService,
   LayoutService,
-  NotifierService,
-} from '@coachcare/common/services';
-import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared';
-import { TranslateModule } from '@ngx-translate/core';
-import { Account, ApiService, User } from 'selvera-api';
+  NotifierService
+} from '@coachcare/common/services'
+import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared'
+import { TranslateModule } from '@ngx-translate/core'
+import { Account, ApiService, User } from 'selvera-api'
 import {
   AccountFactory,
   ApiFactory,
-  UserFactory,
-} from '../../services/api.services';
-import { environment, projectConfig } from '../../tests/index';
-import { LayoutComponent } from './layout.component';
+  UserFactory
+} from '../../services/api.services'
+import { environment, projectConfig } from '../../tests/index'
+import { LayoutComponent } from './layout.component'
 
 class MockAuthService {
   check() {
-    return true;
+    return true
   }
 }
 
 describe('LayoutComponent', () => {
-  let component: LayoutComponent;
-  let fixture: ComponentFixture<LayoutComponent>;
+  let component: LayoutComponent
+  let fixture: ComponentFixture<LayoutComponent>
 
   @Component({
     selector: 'ccr-layout-base',
-    template: '',
+    template: ''
   })
   class MockLayoutBaseComponent {
-    @Input() isMenuOpened: boolean;
-    @Input() isPanelOpened: boolean;
-    @Input() isPanelEnabled: boolean;
-    @Input() lang: string;
-    @Input() translations: any;
+    @Input() isMenuOpened: boolean
+    @Input() isPanelOpened: boolean
+    @Input() isPanelEnabled: boolean
+    @Input() lang: string
+    @Input() translations: any
   }
 
   beforeEach(async(() => {
@@ -51,36 +51,36 @@ describe('LayoutComponent', () => {
         MatDialogModule,
         MatSnackBarModule,
         TranslateModule.forRoot(),
-        RouterTestingModule,
+        RouterTestingModule
       ],
       declarations: [LayoutComponent, MockLayoutBaseComponent],
       providers: [
         {
           provide: APP_ENVIRONMENT,
-          useValue: environment,
+          useValue: environment
         },
         {
           provide: APP_CONFIG,
-          useValue: projectConfig,
+          useValue: projectConfig
         },
         {
           provide: ApiService,
           useFactory: ApiFactory,
-          deps: [APP_ENVIRONMENT],
+          deps: [APP_ENVIRONMENT]
         },
         {
           provide: Account,
           useFactory: AccountFactory,
-          deps: [ApiService],
+          deps: [ApiService]
         },
         {
           provide: User,
           useFactory: UserFactory,
-          deps: [ApiService],
+          deps: [ApiService]
         },
         {
           provide: AuthService,
-          useClass: MockAuthService,
+          useClass: MockAuthService
         },
         ConfigService,
         ContextService,
@@ -88,18 +88,18 @@ describe('LayoutComponent', () => {
         EventsService,
         LanguageService,
         LayoutService,
-        NotifierService,
-      ],
-    }).compileComponents();
-  }));
+        NotifierService
+      ]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LayoutComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(LayoutComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

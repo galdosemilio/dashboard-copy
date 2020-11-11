@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { ReactiveFormsModule } from '@angular/forms'
 import {
   MatAutocompleteModule,
   MatButtonModule,
   MatDialogModule,
-  MatProgressSpinnerModule,
-} from '@coachcare/common/material';
-import { CcrScheduleSelectModule } from './schedule-select/schedule-select.module';
+  MatProgressSpinnerModule
+} from '@coachcare/material'
+import { CcrScheduleSelectModule } from './schedule-select/schedule-select.module'
 
 @NgModule({
   imports: [
@@ -19,8 +19,8 @@ import { CcrScheduleSelectModule } from './schedule-select/schedule-select.modul
     MatButtonModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    CcrScheduleSelectModule,
+    CcrScheduleSelectModule
   ],
-  exports: [CcrScheduleSelectModule],
+  exports: [CcrScheduleSelectModule]
 })
 export class CcrUsersDialogsModule {}

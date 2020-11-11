@@ -8,7 +8,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { Store } from '@ngrx/store'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'

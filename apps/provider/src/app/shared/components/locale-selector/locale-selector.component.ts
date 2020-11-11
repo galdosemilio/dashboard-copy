@@ -8,21 +8,21 @@ import {
   Optional,
   Output,
   SkipSelf,
-  ViewChild,
-} from '@angular/core';
+  ViewChild
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
   ControlValueAccessor,
   FormControl,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-import { MatDialog, MatInput } from '@coachcare/common/material';
-import { find, get } from 'lodash';
+  NG_VALUE_ACCESSOR
+} from '@angular/forms'
+import { MatDialog, MatInput } from '@coachcare/material'
+import { find, get } from 'lodash'
 
-import { LOCALES } from '@app/shared/utils';
-import { LocaleSelectDialog } from './dialog';
+import { LOCALES } from '@app/shared/utils'
+import { LocaleSelectDialog } from './dialog'
 
 @Component({
   selector: 'ccr-form-field-locale',
@@ -32,13 +32,13 @@ import { LocaleSelectDialog } from './dialog';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => LocaleFormFieldComponent),
-      multi: true,
+      multi: true
     },
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => LocaleFormFieldComponent),
-      multi: true,
-    },
+      multi: true
+    }
   ],
   // tslint:disable-next-line:use-host-property-decorator
   host: {
@@ -46,37 +46,37 @@ import { LocaleSelectDialog } from './dialog';
     '[class.mat-input-invalid]': '_control?.invalid && _control?.touched',
     '[class.mat-form-field-invalid]': '_control?.invalid && _control?.touched',
     '[class.mat-form-field-disabled]': '_control?.disabled',
-    '[class.mat-form-field-autofilled]': '_control?.autofilled',
-  },
+    '[class.mat-form-field-autofilled]': '_control?.autofilled'
+  }
 })
 export class LocaleFormFieldComponent implements ControlValueAccessor, OnInit {
-  @Input() formControlName: string;
-  @Input() focus: any;
+  @Input() formControlName: string
+  @Input() focus: any
 
-  @Input() disabled: any;
-  @Input() placeholder: string;
-  @Input() readonly: any;
-  @Input() required: any;
+  @Input() disabled: any
+  @Input() placeholder: string
+  @Input() readonly: any
+  @Input() required: any
 
-  @Output() change = new EventEmitter<Array<string>>();
+  @Output() change = new EventEmitter<Array<string>>()
 
-  @ViewChild(MatInput, { static: false }) _input: MatInput;
+  @ViewChild(MatInput, { static: false }) _input: MatInput
 
-  _control: AbstractControl | undefined;
-  value: Array<string> = [];
-  displayValue = '';
+  _control: AbstractControl | undefined
+  value: Array<string> = []
+  displayValue = ''
 
   get isDisabled() {
-    return this.disabled === '' || this.disabled === true;
+    return this.disabled === '' || this.disabled === true
   }
   get isReadonly() {
-    return this.readonly === '' || this.readonly === true;
+    return this.readonly === '' || this.readonly === true
   }
   get isRequired() {
-    return this.required === '' || this.required === true;
+    return this.required === '' || this.required === true
   }
   get hasAutofocus() {
-    return this.focus === '' || this.focus === true;
+    return this.focus === '' || this.focus === true
   }
 
   constructor(
@@ -89,26 +89,26 @@ export class LocaleFormFieldComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     if (this.formControlName) {
-      const parent = this.parent.control as AbstractControl;
-      this._control = parent.get(this.formControlName) as AbstractControl;
+      const parent = this.parent.control as AbstractControl
+      this._control = parent.get(this.formControlName) as AbstractControl
     }
 
     if (this.hasAutofocus) {
-      this._input.focus();
+      this._input.focus()
     }
   }
 
-  propagateChange = (data: any) => {};
-  propagateTouch = () => {};
+  propagateChange = (data: any) => {}
+  propagateTouch = () => {}
 
   onChange(value: Array<string>) {
-    this.value = value;
+    this.value = value
     this.displayValue = value
       .map((code) => get(find(LOCALES, { code }), 'lang', 'Error'))
-      .join(', ');
+      .join(', ')
 
-    this.propagateChange(this.value);
-    this.change.emit(this.value);
+    this.propagateChange(this.value)
+    this.change.emit(this.value)
   }
 
   /**
@@ -116,40 +116,40 @@ export class LocaleFormFieldComponent implements ControlValueAccessor, OnInit {
    */
   writeValue(value: Array<string>): void {
     if (value) {
-      this.value = value;
-      this.onChange(value);
+      this.value = value
+      this.onChange(value)
     }
   }
 
   registerOnChange(fn: any): void {
     this.propagateChange = (data: any) => {
-      fn(data);
-      this.updateErrorState();
-    };
+      fn(data)
+      this.updateErrorState()
+    }
   }
 
   registerOnTouched(fn: any): void {
     this.propagateTouch = () => {
-      fn();
-      this.updateErrorState();
-    };
+      fn()
+      this.updateErrorState()
+    }
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   validate(c: FormControl) {
     if (this.isRequired && !c.value) {
-      return { ccrFieldLocale: 'required' };
+      return { ccrFieldLocale: 'required' }
     }
-    return null;
+    return null
   }
 
   private updateErrorState() {
     if (this._control) {
-      this._input.errorState = this._control.invalid;
-      this._input.stateChanges.next();
+      this._input.errorState = this._control.invalid
+      this._input.stateChanges.next()
     }
   }
 
@@ -161,20 +161,20 @@ export class LocaleFormFieldComponent implements ControlValueAccessor, OnInit {
       .open(LocaleSelectDialog, {
         disableClose: true,
         data: {
-          locales: this.value ? this.value.slice() : [],
+          locales: this.value ? this.value.slice() : []
         },
         width: '80vw',
-        panelClass: 'ccr-full-dialog',
+        panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
       .subscribe((preferredLocales: Array<string>) => {
         if (preferredLocales) {
           if (preferredLocales.length) {
-            this.onChange(preferredLocales);
+            this.onChange(preferredLocales)
           } else {
-            this.onChange([]);
+            this.onChange([])
           }
         }
-      });
+      })
   }
 }

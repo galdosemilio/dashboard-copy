@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatDialogRef } from '@coachcare/common/material'
+import { MatDialogRef } from '@coachcare/material'
 import { resolveConfig } from '@app/config/section'
 import { Form } from '@app/dashboard/library/forms/models'
 import {

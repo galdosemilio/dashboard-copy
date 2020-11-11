@@ -1,4 +1,4 @@
-import { MatPaginator, MatSort } from '@coachcare/common/material';
+import { MatPaginator, MatSort } from '@coachcare/material'
 
 /**
  * Data Utilities
@@ -10,16 +10,16 @@ export function getterPaginator(paginator: MatPaginator, limit = 10) {
       paginator && paginator.pageSize
         ? paginator.pageIndex * paginator.pageSize
         : 0,
-    limit: paginator ? paginator.pageSize : limit,
-  });
+    limit: paginator ? paginator.pageSize : limit
+  })
 }
 
 export function getterSorter(sorter: MatSort) {
   return () => {
     return sorter && sorter.active
       ? {
-          sort: [{ property: sorter.active, dir: sorter.direction }],
+          sort: [{ property: sorter.active, dir: sorter.direction }]
         }
-      : {};
-  };
+      : {}
+  }
 }

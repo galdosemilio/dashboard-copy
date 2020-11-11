@@ -1,12 +1,12 @@
-import { Component, forwardRef, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, forwardRef, Inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import {
   MAT_DIALOG_DATA,
   MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef,
-} from '@coachcare/common/material';
-import { Form } from '@app/dashboard/library/forms/models';
-import { BindForm, BINDFORM_TOKEN } from '@app/shared';
+  MatDialogRef
+} from '@coachcare/material'
+import { Form } from '@app/dashboard/library/forms/models'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 
 @Component({
   selector: 'app-library-form-edit-dialog',
@@ -16,13 +16,13 @@ import { BindForm, BINDFORM_TOKEN } from '@app/shared';
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => FormEditDialog),
+      useExisting: forwardRef(() => FormEditDialog)
     },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
-  ],
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+  ]
 })
 export class FormEditDialog implements BindForm, OnInit {
-  public form: FormGroup;
+  public form: FormGroup
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Form,
@@ -31,18 +31,18 @@ export class FormEditDialog implements BindForm, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   cancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   closeDialog(): void {
-    this.dialogRef.close(this.form.value.details);
+    this.dialogRef.close(this.form.value.details)
   }
 
   private createForm(): void {
-    this.form = this.formBuilder.group({});
+    this.form = this.formBuilder.group({})
   }
 }

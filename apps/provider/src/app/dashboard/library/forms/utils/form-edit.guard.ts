@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
-import { CanDeactivate } from '@angular/router';
-import { LibraryFormComponent } from '@app/dashboard/library/forms/form/form.component';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { MatDialog } from '@coachcare/material'
+import { CanDeactivate } from '@angular/router'
+import { LibraryFormComponent } from '@app/dashboard/library/forms/form/form.component'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class FormEditGuard implements CanDeactivate<LibraryFormComponent> {
   canDeactivate(component: LibraryFormComponent): Observable<boolean> {
-    return component.canDeactivate();
+    return component.canDeactivate()
   }
 }

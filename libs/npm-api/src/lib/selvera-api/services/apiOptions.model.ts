@@ -4,9 +4,9 @@
 
 import { upperFirst } from 'lodash'
 import { CcrRol } from '../model'
-import { ApiHeaders } from './headers.interface'
-import { ApiOptions } from './options.interface'
-import { Method } from 'axios'
+import { ApiOptions } from './apiOptions.interface'
+import { Method, ResponseType } from 'axios'
+import { HeaderOptions } from './headerOptions.interface'
 
 export class ApiOptionsModel implements ApiOptions {
   public readonly endpoint: string
@@ -19,6 +19,7 @@ export class ApiOptionsModel implements ApiOptions {
   public headers: { [header: string]: string } = {}
   public readonly withCredentials: boolean | undefined = true
   public fullError = false
+  public responseType?: ResponseType
 
   /**
    * @param apiOptions {}
@@ -27,7 +28,7 @@ export class ApiOptionsModel implements ApiOptions {
   public constructor(
     apiOptions: ApiOptions,
     apiUrl: string,
-    headers: Partial<ApiHeaders>,
+    headers: Partial<HeaderOptions>,
     token: string,
     account?: CcrRol
   ) {
@@ -42,6 +43,7 @@ export class ApiOptionsModel implements ApiOptions {
 
     // TODO ensure the format with trim and join
     this.url = `${apiUrl}${this.version}${this.endpoint}`
+    this.responseType = apiOptions.responseType || undefined
 
     if (token) {
       this.headers['Authorization'] = `SELVERA ${token}`
@@ -51,6 +53,13 @@ export class ApiOptionsModel implements ApiOptions {
       const header = upperFirst(key.split(/(?=[A-Z])/g).join('-'))
       this.headers[`X-Selvera-${header}`] = headers[key] as string
     })
+
+    if (apiOptions.headers) {
+      Object.keys(apiOptions.headers).forEach((key) => {
+        const header = upperFirst(key.split(/(?=[A-Z])/g).join('-'))
+        this.headers[`${header}`] = apiOptions.headers[key] as string
+      })
+    }
 
     if (account) {
       this.headers[`X-Selvera-Account`] = account

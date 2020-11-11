@@ -9,7 +9,7 @@ import {
   OnInit
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { CCRConfig, CCRPalette } from '@app/config'
 import { SidenavOrg } from '@app/layout/sidenav/sidenav.component'
 import { ToggleMenu, TogglePanel } from '@app/layout/store'

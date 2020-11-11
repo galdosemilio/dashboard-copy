@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core'
-import { MatSort } from '@coachcare/common/material'
+import { MatSort } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AccountDialogs, AccountRoutes } from '@board/services'
 import { AccountsDatabase, AccountsDataSource } from '@coachcare/backend/data'

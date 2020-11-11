@@ -1,7 +1,7 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay'
 import { ComponentPortal } from '@angular/cdk/portal'
 import { Injectable, OnDestroy } from '@angular/core'
-import { MatDialog, MatDialogRef } from '@coachcare/common/material'
+import { MatDialog, MatDialogRef } from '@coachcare/material'
 import {
   COOKIE_CALL_BROWSERS_MODAL,
   COOKIE_CALL_DEVICES_MODAL,

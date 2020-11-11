@@ -2,7 +2,7 @@
  * Interface for api options
  */
 import { Environment } from '../../config/environment.interface'
-import { Method } from 'axios'
+import { Method, ResponseType } from 'axios'
 
 export interface ApiOptions {
   baseUrl?: string
@@ -13,8 +13,9 @@ export interface ApiOptions {
   data?: Object
   params?: Object
   paramsSerializer?(params: any): string
-  responseType?: string
+  responseType?: ResponseType
   readonly headers?: { [s: string]: string }
   readonly withCredentials?: boolean
   environment?: Environment
+  fullError?: boolean
 }

@@ -6,7 +6,7 @@ import {
   ViewChild
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ClinicsPickerValue } from '@app/dashboard/accounts/clinics'
 import { CoachFormComponent } from '@app/dashboard/accounts/coaches/form'
 import { ContextService, NotifierService } from '@app/service'

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatDialogRef } from '@coachcare/common/material'
+import { MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { Package } from '@app/shared/components/package-table'
 import {

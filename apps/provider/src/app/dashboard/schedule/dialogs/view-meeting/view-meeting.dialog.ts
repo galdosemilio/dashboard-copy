@@ -10,7 +10,7 @@ import {
   MAT_DIALOG_DATA,
   MatAutocompleteTrigger,
   MatDialogRef
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import { Router } from '@angular/router'
 import { AddConsultationAttendee } from '@app/layout/right-panel/contents/consultation/add-consultation/add-consultation.component'
 import { ScheduleDataService } from '@app/layout/right-panel/services'

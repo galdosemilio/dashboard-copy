@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { AccountParams } from '@board/services'
 import {

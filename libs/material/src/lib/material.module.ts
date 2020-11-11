@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CcrMaterialModules } from '.';
+import { NgModule } from '@angular/core'
+import { CcrMaterialModules } from '.'
 
 @NgModule({
   imports: [...CcrMaterialModules],

@@ -6,13 +6,6 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts",
-  ],
-  "include": [
-    "**/*",
-    "../../libs/npm-api/src/lib/config/env"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
+    "src/polyfills.ts"
   ]
 }

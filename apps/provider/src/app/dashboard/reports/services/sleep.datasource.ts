@@ -1,4 +1,4 @@
-import { MatPaginator, MatSort } from '@coachcare/common/material'
+import { MatPaginator, MatSort } from '@coachcare/material'
 import * as moment from 'moment-timezone'
 
 import { from, Observable, of } from 'rxjs'

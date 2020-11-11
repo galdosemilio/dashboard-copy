@@ -1,25 +1,25 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Component, Inject, OnDestroy } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
-import { CCRFacade } from '@coachcare/backend/store';
-import { LanguageService } from '@coachcare/common/services/language.service';
-import { differenceWith } from 'lodash';
-import { localeList } from './languages.locales';
+import { CCRFacade } from '@coachcare/backend/store'
+import { LanguageService } from '@coachcare/common/services/language.service'
+import { differenceWith } from 'lodash'
+import { localeList } from './languages.locales'
 
 @Component({
   selector: 'ccr-dialog-language',
   templateUrl: 'languages.dialog.html',
   styleUrls: ['languages.dialog.scss'],
   host: {
-    class: 'ccr-dialog ccr-plain',
-  },
+    class: 'ccr-dialog ccr-plain'
+  }
 })
 export class LanguagesDialog implements OnDestroy {
-  locales: any;
-  lang: string;
+  locales: any
+  lang: string
 
-  colSpan = 1;
+  colSpan = 1
 
   constructor(
     private store: CCRFacade,
@@ -31,18 +31,18 @@ export class LanguagesDialog implements OnDestroy {
       localeList,
       this.language.localesBlacklist,
       (viewValue, value) => viewValue.language.code === value
-    );
+    )
 
-    this.lang = this.language.get();
+    this.lang = this.language.get()
     this.store.lang$
       .pipe(untilDestroyed(this))
-      .subscribe((lang) => (this.lang = lang || this.lang));
+      .subscribe((lang) => (this.lang = lang || this.lang))
   }
 
   ngOnDestroy() {}
 
   setLocale(locale: string) {
-    this.store.changeLang(locale);
-    this.dialogRef.close();
+    this.store.changeLang(locale)
+    this.dialogRef.close()
   }
 }

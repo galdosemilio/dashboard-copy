@@ -10,7 +10,7 @@ import {
   MatAutocompleteSelectedEvent,
   MatDialog,
   MatSelectChange
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OrganizationParams } from '@board/services'
 import {

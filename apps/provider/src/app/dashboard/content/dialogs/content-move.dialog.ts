@@ -1,15 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core'
 import {
   MAT_DIALOG_DATA,
   MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef,
-} from '@coachcare/common/material';
-import { FileExplorerContent } from '@app/dashboard/content/models';
+  MatDialogRef
+} from '@coachcare/material'
+import { FileExplorerContent } from '@app/dashboard/content/models'
 
 interface ContentMoveDialogData {
-  content: FileExplorerContent;
-  mode: 'digital-library' | 'vault';
-  organization: any;
+  content: FileExplorerContent
+  mode: 'digital-library' | 'vault'
+  organization: any
 }
 
 @Component({
@@ -18,16 +18,16 @@ interface ContentMoveDialogData {
   styleUrls: ['./content-move.dialog.scss'],
   host: { class: 'ccr-dialog' },
   providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
-  ],
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+  ]
 })
 export class ContentMoveDialog implements OnInit {
-  mode: 'digital-library' | 'vault';
-  organization: any;
-  public selectedContent: FileExplorerContent;
+  mode: 'digital-library' | 'vault'
+  organization: any
+  public selectedContent: FileExplorerContent
   public selectorOpts: any = {
-    shouldShowRootFolderButton: true,
-  };
+    shouldShowRootFolderButton: true
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ContentMoveDialogData,
@@ -35,23 +35,23 @@ export class ContentMoveDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mode = this.data.mode || 'digital-library';
-    this.organization = this.data.organization || undefined;
+    this.mode = this.data.mode || 'digital-library'
+    this.organization = this.data.organization || undefined
   }
 
   closeDialog(): void {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   moveContent(): void {
     this.dialogRef.close({
       from: this.data.content.parentId,
       to: this.selectedContent.id,
-      content: this.data.content,
-    });
+      content: this.data.content
+    })
   }
 
   shouldDisableMoveButton(): boolean {
-    return this.selectedContent ? !this.selectedContent.isFolder : true;
+    return this.selectedContent ? !this.selectedContent.isFolder : true
   }
 }

@@ -7,7 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { MatAutocompleteTrigger } from '@coachcare/common/material'
+import { MatAutocompleteTrigger } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { select, Store } from '@ngrx/store'
 import { AccountProvider } from '@coachcare/npm-api'

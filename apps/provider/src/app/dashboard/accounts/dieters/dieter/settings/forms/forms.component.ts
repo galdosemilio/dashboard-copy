@@ -8,7 +8,7 @@ import {
   ViewChild
 } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { AssignFormDialog } from '@app/dashboard/accounts/dialogs'
 import { Form, FormSubmission } from '@app/dashboard/library/forms/models'
 import {

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { EmailTemplatesDataSource } from '@coachcare/backend/data'
 import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'

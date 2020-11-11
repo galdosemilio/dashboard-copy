@@ -6,7 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MAT_DIALOG_DATA } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN } from '@app/shared'
 import {

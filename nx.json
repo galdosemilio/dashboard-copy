@@ -13,15 +13,15 @@
   "projects": {
     "provider": {
       "tags": [],
-      "implicitDependencies": ["common", "npm-api"]
+      "implicitDependencies": ["npm-api", "material"]
     },
     "provider-e2e": {
       "tags": [],
-      "implicitDependencies": ["provider", "npm-api"]
+      "implicitDependencies": ["provider"]
     },
     "admin": {
       "tags": [],
-      "implicitDependencies": ["common", "backend", "npm-api"]
+      "implicitDependencies": ["common", "backend", "npm-api", "material"]
     },
     "admin-e2e": {
       "tags": [],
@@ -29,10 +29,11 @@
     },
     "common": {
       "tags": [],
-      "implicitDependencies": ["backend"]
+      "implicitDependencies": ["backend", "material"]
     },
     "layout": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["material"]
     },
     "backend": {
       "tags": []
@@ -41,6 +42,9 @@
       "tags": []
     },
     "npm-api": {
+      "tags": []
+    },
+    "material": {
       "tags": []
     }
   },

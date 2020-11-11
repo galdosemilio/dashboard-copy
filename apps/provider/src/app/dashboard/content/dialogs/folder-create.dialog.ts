@@ -1,17 +1,17 @@
-import { Component, forwardRef, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, forwardRef, Inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import {
   MAT_DIALOG_DATA,
   MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef,
-} from '@coachcare/common/material';
+  MatDialogRef
+} from '@coachcare/material'
 import {
   CONTENT_TYPE_MAP,
   ContentUploadTicket,
-  FileExplorerContent,
-} from '@app/dashboard/content/models';
-import { ContextService } from '@app/service';
-import { BindForm, BINDFORM_TOKEN } from '@app/shared';
+  FileExplorerContent
+} from '@app/dashboard/content/models'
+import { ContextService } from '@app/service'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 
 @Component({
   selector: 'app-content-folder-create-dialog',
@@ -21,15 +21,15 @@ import { BindForm, BINDFORM_TOKEN } from '@app/shared';
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => FolderCreateDialog),
+      useExisting: forwardRef(() => FolderCreateDialog)
     },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
-  ],
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+  ]
 })
 export class FolderCreateDialog implements BindForm, OnInit {
-  public form: FormGroup;
-  mode: 'digital-library' | 'vault' = 'digital-library';
-  organization: any;
+  public form: FormGroup
+  mode: 'digital-library' | 'vault' = 'digital-library'
+  organization: any
 
   constructor(
     private context: ContextService,
@@ -39,17 +39,17 @@ export class FolderCreateDialog implements BindForm, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mode = this.data.mode || this.mode;
-    this.organization = this.data.organization || undefined;
-    this.createForm();
+    this.mode = this.data.mode || this.mode
+    this.organization = this.data.organization || undefined
+    this.createForm()
   }
 
   createFolder(): void {
     if (this.form.invalid) {
-      return;
+      return
     }
 
-    const details = this.form.value.details;
+    const details = this.form.value.details
     this.dialogRef.close({
       contentUpload: {
         content: new FileExplorerContent({
@@ -57,7 +57,7 @@ export class FolderCreateDialog implements BindForm, OnInit {
             id: this.organization
               ? this.organization.id
               : this.context.organization.id,
-            name: '',
+            name: ''
           },
           name: details.name,
           type: CONTENT_TYPE_MAP.folder,
@@ -65,15 +65,15 @@ export class FolderCreateDialog implements BindForm, OnInit {
           description: details.description,
           isPublic: details.isPublic,
           packages: details.packages,
-          metadata: {},
-        }),
-      },
-    } as Partial<ContentUploadTicket>);
+          metadata: {}
+        })
+      }
+    } as Partial<ContentUploadTicket>)
   }
 
   private createForm(): void {
     this.form = this.formBuilder.group({
-      destination: [this.data.parent],
-    });
+      destination: [this.data.parent]
+    })
   }
 }

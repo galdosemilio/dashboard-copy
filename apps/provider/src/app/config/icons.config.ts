@@ -1,37 +1,37 @@
-import { MatIconRegistry } from '@coachcare/common/material';
-import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@coachcare/material'
+import { DomSanitizer } from '@angular/platform-browser'
 
 interface IconConfigItem {
-  name: string;
-  url: string;
+  name: string
+  url: string
 }
 
 export const SVG_ICONS: IconConfigItem[] = [
   {
     name: 'svg-document',
-    url: './assets/svg/document.svg',
+    url: './assets/svg/document.svg'
   },
   {
     name: 'svg-folder',
-    url: './assets/svg/folder.svg',
+    url: './assets/svg/folder.svg'
   },
   {
     name: 'svg-form',
-    url: './assets/svg/form.svg',
+    url: './assets/svg/form.svg'
   },
   {
     name: 'svg-photo',
-    url: './assets/svg/photo.svg',
+    url: './assets/svg/photo.svg'
   },
   {
     name: 'svg-url',
-    url: './assets/svg/URLlink.svg',
+    url: './assets/svg/URLlink.svg'
   },
   {
     name: 'svg-video',
-    url: './assets/svg/video.svg',
-  },
-];
+    url: './assets/svg/video.svg'
+  }
+]
 
 export const IconsConfig = {
   registerIcons(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer): void {
@@ -40,6 +40,6 @@ export const IconsConfig = {
         icon.name,
         sanitizer.bypassSecurityTrustResourceUrl(icon.url)
       )
-    );
-  },
-};
+    )
+  }
+}

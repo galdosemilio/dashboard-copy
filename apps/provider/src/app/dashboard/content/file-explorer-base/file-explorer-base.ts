@@ -1,4 +1,10 @@
-import { EventEmitter, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Directive,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit
+} from '@angular/core'
 import {
   FileExplorerBaseOptions,
   FileExplorerEvents
@@ -6,6 +12,7 @@ import {
 import { FileExplorerDatasource } from '@app/dashboard/content/services'
 import { Subscription } from 'rxjs'
 
+@Directive()
 export class FileExplorerBase implements OnDestroy, OnInit {
   @Input()
   events: FileExplorerEvents

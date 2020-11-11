@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ContextService, NotifierService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'

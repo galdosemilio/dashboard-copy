@@ -10,7 +10,7 @@ import {
   ViewChild
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { FileExplorerContent } from '@app/dashboard/content/models'
 import {
   FormQuestion,

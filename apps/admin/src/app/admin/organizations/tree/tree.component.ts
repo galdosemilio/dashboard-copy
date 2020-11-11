@@ -4,7 +4,7 @@ import {
   MatDialog,
   MatTreeFlatDataSource,
   MatTreeFlattener
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 

@@ -20,7 +20,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/common/material'
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
 import { ContextService } from '@app/service'
 import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
 import { FEETS } from '@app/shared/utils/units'

@@ -1,0 +1,8 @@
+{
+  "ConferenceParticipantAttended": "ConferenceParticipant",
+  "OrgRefOpt": "OrgRef",
+  "FormRefNamed": "FormRef",
+  "FoodMealServingItemSummarized": "FoodMealServingItem",
+  "OrgEntityExtended": "OrgEntity",
+  "MeetingAttendeeDataExtended": "MeetingAttendeeData"
+}

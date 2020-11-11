@@ -5,27 +5,23 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatStepper,
-} from '@coachcare/common/material';
-import { ContextService, NotifierService } from '@app/service';
-import { BINDFORM_TOKEN, bufferedRequests } from '@app/shared';
-import { _ } from '@app/shared/utils';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { FileExplorerRoute } from '../../file-explorer-table';
-import { FileExplorerContent, FileExplorerEvents } from '../../models';
-import { FileExplorerDatabase, FileExplorerDatasource } from '../../services';
+  ViewEncapsulation
+} from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef, MatStepper } from '@coachcare/material'
+import { ContextService, NotifierService } from '@app/service'
+import { BINDFORM_TOKEN, bufferedRequests } from '@app/shared'
+import { _ } from '@app/shared/utils'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { FileExplorerRoute } from '../../file-explorer-table'
+import { FileExplorerContent, FileExplorerEvents } from '../../models'
+import { FileExplorerDatabase, FileExplorerDatasource } from '../../services'
 
 interface ContentBatchCopyDialogProps {
-  datasource: any;
-  initialRoutes?: FileExplorerRoute[];
-  organization: any;
-  selectedContents?: FileExplorerContent[];
+  datasource: any
+  initialRoutes?: FileExplorerRoute[]
+  organization: any
+  selectedContents?: FileExplorerContent[]
 }
 
 @Component({
@@ -37,43 +33,43 @@ interface ContentBatchCopyDialogProps {
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => ContentBatchCopyDialog),
-    },
-  ],
+      useExisting: forwardRef(() => ContentBatchCopyDialog)
+    }
+  ]
 })
 export class ContentBatchCopyDialog implements OnDestroy, OnInit {
-  @ViewChild('stepper', { static: true }) stepper: MatStepper;
+  @ViewChild('stepper', { static: true }) stepper: MatStepper
 
   public set checkedContents(contents: FileExplorerContent[]) {
-    this._checkedContents = contents;
-    this.form.patchValue({ selectedContents: this._checkedContents });
+    this._checkedContents = contents
+    this.form.patchValue({ selectedContents: this._checkedContents })
   }
 
   public get checkedContents(): FileExplorerContent[] {
-    return this._checkedContents;
+    return this._checkedContents
   }
 
-  public datasource: FileExplorerDatasource;
-  public events: FileExplorerEvents;
-  public form: FormGroup;
+  public datasource: FileExplorerDatasource
+  public events: FileExplorerEvents
+  public form: FormGroup
   public hiddenColumns: string[] = [
     'index',
     'actions',
     'availability',
     'createdAt',
-    'description',
-  ];
-  public hiddenFormFields: string[] = ['name', 'description'];
-  public initialRoutes: FileExplorerRoute[] = [];
-  public organization: any;
-  public selectedContent: FileExplorerContent;
+    'description'
+  ]
+  public hiddenFormFields: string[] = ['name', 'description']
+  public initialRoutes: FileExplorerRoute[] = []
+  public organization: any
+  public selectedContent: FileExplorerContent
   public selectorOpts: any = {
     disableForeignContent: true,
-    shouldShowRootFolderButton: true,
-  };
-  public status: 'ready' | 'processing' = 'ready';
+    shouldShowRootFolderButton: true
+  }
+  public status: 'ready' | 'processing' = 'ready'
 
-  private _checkedContents: FileExplorerContent[] = [];
+  private _checkedContents: FileExplorerContent[] = []
 
   constructor(
     private context: ContextService,
@@ -83,82 +79,82 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
     private fb: FormBuilder,
     private notifier: NotifierService
   ) {
-    this.createForm();
+    this.createForm()
   }
 
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.organization = this.data.organization;
-    this.initialRoutes = this.data.initialRoutes || [];
+    this.organization = this.data.organization
+    this.initialRoutes = this.data.initialRoutes || []
 
-    this.events = new FileExplorerEvents();
+    this.events = new FileExplorerEvents()
     this.datasource = new FileExplorerDatasource(
       this.context,
       this.notifier,
       this.database
-    );
+    )
 
-    this.datasource.addDefault(this.data.datasource.criteria);
+    this.datasource.addDefault(this.data.datasource.criteria)
 
-    this.subscribeToEvents();
+    this.subscribeToEvents()
 
     if (this.data.selectedContents && this.data.selectedContents.length) {
       this.data.selectedContents.forEach((content) => {
-        this.events.contentChecked.emit(content);
-      });
+        this.events.contentChecked.emit(content)
+      })
     }
   }
 
   public closeDialog(): void {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   public goToNextStep(): void {
-    this.stepper.next();
+    this.stepper.next()
   }
 
   public isOnLastStep(): boolean {
     return this.stepper && this.stepper.steps
       ? this.stepper.selectedIndex >= this.stepper.steps.length - 1
-      : false;
+      : false
   }
 
   public onSelectedContent(content: FileExplorerContent): void {
     if (!content) {
-      return;
+      return
     }
-    this.selectedContent = content;
-    this.form.patchValue({ targetFolder: content.id });
+    this.selectedContent = content
+    this.form.patchValue({ targetFolder: content.id })
   }
 
   public async onSubmit(): Promise<void> {
     try {
       if (this.form.invalid) {
-        return;
+        return
       }
 
-      this.status = 'processing';
+      this.status = 'processing'
 
-      const formValue = this.form.value;
+      const formValue = this.form.value
 
       const promises = this.checkedContents.map((content) =>
         this.datasource.copyContent({
           to: formValue.targetFolder,
           content: content,
-          overrideDetails: formValue.overrideDetails,
+          overrideDetails: formValue.overrideDetails
         })
-      );
+      )
 
-      await bufferedRequests(promises);
+      await bufferedRequests(promises)
 
-      this.notifier.success(_('NOTIFY.SUCCESS.CONTENT_CLONED'));
+      this.notifier.success(_('NOTIFY.SUCCESS.CONTENT_CLONED'))
 
-      this.dialogRef.close(true);
+      this.dialogRef.close(true)
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     } finally {
-      this.status = 'ready';
+      this.status = 'ready'
     }
   }
 
@@ -166,8 +162,8 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
     this.form = this.fb.group({
       selectedContents: ['', Validators.required],
       targetFolder: [''],
-      overrideDetails: ['', Validators.required],
-    });
+      overrideDetails: ['', Validators.required]
+    })
   }
 
   private subscribeToEvents(): void {
@@ -175,7 +171,7 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(
         (content) => (this.checkedContents = [...this.checkedContents, content])
-      );
+      )
 
     this.events.contentUnchecked
       .pipe(untilDestroyed(this))
@@ -184,6 +180,6 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
           (this.checkedContents = this.checkedContents.filter(
             (con) => con.id !== content.id
           ))
-      );
+      )
   }
 }

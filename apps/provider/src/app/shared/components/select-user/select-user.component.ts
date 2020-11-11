@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 
 import { ContextService, SelectedAccount } from '@app/service'
 import { ScheduleSelectDialog } from '@app/shared/dialogs/schedule-select.dialog'

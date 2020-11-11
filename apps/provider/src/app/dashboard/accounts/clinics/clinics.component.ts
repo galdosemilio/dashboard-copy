@@ -6,7 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatDialog, MatSort, Sort } from '@coachcare/common/material'
+import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { resolveConfig } from '@app/config/section'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import {

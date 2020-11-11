@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { ContextService } from '@app/service'

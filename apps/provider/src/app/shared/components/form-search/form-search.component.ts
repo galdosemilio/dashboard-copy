@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatAutocompleteSelectedEvent } from '@coachcare/common/material'
+import { MatAutocompleteSelectedEvent } from '@coachcare/material'
 import { Form } from '@app/dashboard/library/forms/models/form.model'
 import { FormsDatabase } from '@app/dashboard/library/forms/services/forms.database'
 import { ContextService } from '@app/service/context.service'

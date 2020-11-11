@@ -17,7 +17,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
-import { MatSort, MatTable } from '@coachcare/common/material'
+import { MatSort, MatTable } from '@coachcare/material'
 
 import {
   ClinicsDatabase,

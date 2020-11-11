@@ -1,0 +1,616 @@
+{
+  "Account": {
+    "Account-Avatar": {
+      "Get": "GET 2.0 /account/:id/avatar",
+      "Submit": "PUT 2.0 /account/:id/avatar",
+      "Delete": "DELETE 2.0 /account/:id/avatar"
+    },
+    "Account-Password": {
+      "Reset": "POST 2.0 /account/password-reset",
+      "Update": "POST 2.0 /account/password-reset/update"
+    },
+    "Account-Preference": {
+      "GetSingle": "GET 2.0 /account/:id/preference",
+      "Create": "POST 2.0 /account/:id/preference",
+      "Update": "PATCH 2.0 /account/:id/preference"
+    },
+    "Account": {
+      "Check": "HEAD 2.0 /account",
+      "SetActive": "PATCH 2.0 /account/:id/activity",
+      "Create": "POST 2.0 /account",
+      "Update": "PATCH 2.0 /account/:id",
+      "GetAll": "GET 2.0 /account",
+      "GetSingle": "GET 2.0 /account/:id",
+      "GetTypes": "GET 2.0 /account-type",
+      "GetTitles": "GET 2.0 /account-title",
+      "GetList": "GET 2.0 /access/account"
+    }
+  },
+  "Register": {
+    "Register": {
+      "Client": "POST 2.0 /client/register",
+      "Clinic": "POST 2.0 /ccr/register"
+    }
+  },
+  "Session": {
+    "Session": {
+      "Login": "POST 2.0 /login",
+      "LogoutAll": "POST 2.0 /logout/all",
+      "Logout": "POST 2.0 /logout",
+      "Check": "GET 2.0 /session"
+    }
+  },
+  "Mobile": {
+    "Mobile-App": {
+      "GetiOSRedirect": "GET 1.0 /app/ios/:id",
+      "GetAndroidRedirect": "GET 1.0 /app/android/:id"
+    },
+    "Mobile-Push-Client": {
+      "Upsert": "PUT 2.0 /notification/mobile-push/client",
+      "GetAll": "GET 2.0 /notification/mobile-push/client",
+      "GetSingle": "GET 2.0 /notification/mobile-push/client/:id",
+      "Delete": "DELETE 2.0 /notification/mobile-push/client/:id"
+    }
+  },
+  "External": {
+    "External-Auth": {
+      "AuthFitbit": "GET 1.0 /authentication/fitbit",
+      "AuthGoogle": "GET 1.0 /authentication/google",
+      "AuthLevl": "POST 1.0 /authentication/levl",
+      "AuthHealthkit": "POST 1.0 /authentication/healthkit",
+      "GetAvailableTokens": "GET 1.0 /authentication/:account",
+      "Revoke": "DELETE 1.0 /authentication/:account/:service",
+      "RevokeAll": "DELETE 1.0 /authentication/:account"
+    },
+    "External-Device": {
+      "GetAll": "GET 2.0 /measurement/device",
+      "GetLastActivity": "GET 2.0 /measurement/device/sync",
+      "SyncHealthKit": "PUT 2.0 /measurement/device/sync/healthkit",
+      "Sync": "PUT 2.0 /measurement/device/sync"
+    },
+    "External-GoogleAuth": {
+      "GetAuthUrl": "GET 2.0 /schedule/google/:id/auth",
+      "GetAuthStatus": "GET 2.0 /schedule/google/:id/authStatus"
+    }
+  },
+  "Blacklist": {
+    "Blacklist": {
+      "GetAll": "GET 2.0 /ccr/blacklist"
+    }
+  },
+  "Conference": {
+    "Conference-Billing": {
+      "GetSummary": "POST 1.0 /conference/billing"
+    },
+    "Conference-Subaccount": {
+      "CreateKey": "POST 1.0 /conference/subaccount/:id/key",
+      "Create": "POST 1.0 /conference/subaccount/",
+      "GetAll": "GET 1.0 /conference/subaccount",
+      "GetSingle": "GET 1.0 /conference/subaccount/:id",
+      "Delete": "DELETE 1.0 /conference/subaccount/:id"
+    },
+    "Conference-Call": {
+      "CreateToken": "POST 2.0 /conference/video/token",
+      "EmitEvent": "POST 2.0 /conference/video/call/event",
+      "Create": "POST 2.0 /conference/video/call",
+      "Update": "PATCH 2.0 /conference/video/call/:id",
+      "GetAvailability": "GET 2.0 /conference/video/call/availability",
+      "GetSingle": "GET 2.0 /conference/video/call/:id",
+      "GetAll": "GET 2.0 /conference/video/call"
+    }
+  },
+  "Consent": {
+    "Consent": {
+      "GetAll": "GET 1.0 /consent",
+      "GetSingle": "GET 1.0 /consent/:id",
+      "Create": "POST 1.0 /consent"
+    },
+    "Consent-Tos": {
+      "GetAll": "GET 1.0 /consent/tos",
+      "GetSingle": "GET 1.0 /consent/tos/:id",
+      "Create": "POST 1.0 /consent/tos"
+    }
+  },
+  "Content": {
+    "Content": {
+      "GetList": "GET 1.0 /content/view",
+      "GetAll": "GET 1.0 /content",
+      "GetSingle": "GET 1.0 /content/:id",
+      "Delete": "DELETE 1.0 /content/:id",
+      "Create": "POST 1.0 /content/",
+      "Update": "PATCH 1.0 /content/:id",
+      "GetUploadUrl": "POST 1.0 /content/upload",
+      "GetTypes": "GET 1.0 /content/type"
+    },
+    "Content-Package": {
+      "GetAll": "GET 1.0 /content/:id/package",
+      "Delete": "DELETE 1.0 /content/:id/package/:package",
+      "Create": "PUT 1.0 /content/:id/package/:package"
+    },
+    "Content-Preference": {
+      "GetSingle": "GET 1.0 /content/preference",
+      "Upsert": "PUT 1.0 /content/preference/:organization",
+      "Delete": "DELETE 1.0 /content/preference/:id"
+    }
+  },
+  "Form": {
+    "Form-Addendum": {
+      "Create": "POST 1.0 /content/form/addendum",
+      "GetSingle": "GET 1.0 /content/form/addendum/:id",
+      "GetAll": "GET 1.0 /content/form/addendum"
+    },
+    "Form": {
+      "Create": "POST 1.0 /content/form",
+      "GetAll": "GET 1.0 /content/form",
+      "GetSingle": "GET 1.0 /content/form/:id",
+      "Update": "PATCH 1.0 /content/form/:id",
+      "Delete": "DELETE 1.0 /content/form/:id"
+    },
+    "Form-QuestionType": {
+      "Create": "POST 1.0 /content/form/question-type",
+      "Update": "PATCH 1.0 /content/form/question-type/:id",
+      "GetAll": "GET 1.0 /content/form/question-type",
+      "GetSingle": "GET 1.0 /content/form/question-type/:id"
+    },
+    "Form-Question": {
+      "Create": "POST 1.0 /content/form/question",
+      "GetAll": "GET 1.0 /content/form/question",
+      "GetSingle": "GET 1.0 /content/form/question/:id",
+      "Update": "PATCH 1.0 /content/form/question/:id",
+      "Delete": "DELETE 1.0 /content/form/question/:id"
+    },
+    "Form-Section": {
+      "GetAll": "GET 1.0 /content/form/section",
+      "GetSingle": "GET 1.0 /content/form/section/:id",
+      "Create": "POST 1.0 /content/form/section",
+      "Update": "PATCH 1.0 /content/form/section/:id",
+      "Delete": "DELETE 1.0 /content/form/section/:id"
+    },
+    "Form-Submission": {
+      "GetAll": "GET 1.0 /content/form/submission",
+      "GetSingle": "GET 1.0 /content/form/submission/:id",
+      "Create": "POST 1.0 /content/form/submission"
+    }
+  },
+  "Countries": {
+    "Countries": {
+      "GetAll": "GET 2.0 /country"
+    }
+  },
+  "Feedback": {
+    "Feedback": {
+      "Send": "POST 1.0 /feedback"
+    }
+  },
+  "Food": {
+    "Food-Consumed": {
+      "GetAll": "GET 2.0 /food/consumed",
+      "GetFrequent": "GET 2.0 /food/consumed/frequent",
+      "GetSingle": "GET 2.0 /food/consumed/:id",
+      "Create": "POST 2.0 /food/consumed",
+      "Add": "POST 2.0 /food/consumed/new",
+      "Delete": "DELETE 2.0 /food/consumed/:id",
+      "GetTypes": "GET 1.0 /food/consumed/type"
+    },
+    "Food": {
+      "GetAll": "GET 2.0 /food",
+      "GetRegions": "GET 2.0 /food/region"
+    },
+    "Food-Favorite": {
+      "GetAll": "GET 2.0 /food/favorite",
+      "GetSingle": "GET 2.0 /food/favorite/:id",
+      "Create": "POST 2.0 /food/favorite",
+      "Delete": "DELETE 2.0 /food/favorite/:id"
+    },
+    "Food-Ingredient-Locale": {
+      "Get": "GET 2.0 /food/ingredient/local/:id/locale/:locale",
+      "Update": "PUT 2.0 /food/ingredient/local/:id/locale/:locale",
+      "Delete": "DELETE 2.0 /food/ingredient/local/:id/locale/:locale"
+    },
+    "Food-Ingredient": {
+      "GetLocal": "GET 2.0 /food/ingredient/local/:id",
+      "GetUPC": "GET 2.0 /food/ingredient/upc/:id",
+      "Copy": "PUT 2.0 /food/ingredient/copy/:id",
+      "CreateLocal": "POST 2.0 /food/ingredient/local",
+      "UpdateLocal": "PATCH 2.0 /food/ingredient/local/:id",
+      "DeleteLocal": "DELETE 2.0 /food/ingredient/local/:id",
+      "GetRemote": "GET 2.0 /food/ingredient/:id"
+    },
+    "Food-Key-Locale": {
+      "Get": "GET 1.0 /food/key/:id/locale/:locale",
+      "Update": "PUT 1.0 /food/key/:id/locale/:locale",
+      "Delete": "DELETE 1.0 /food/key/:id/locale/:locale"
+    },
+    "Food-Meal-Locale": {
+      "Get": "GET 2.0 /food/meal/:id/locale/:locale",
+      "Update": "PUT 2.0 /food/meal/:id/locale/:locale",
+      "Delete": "DELETE 2.0 /food/meal/:id/locale/:locale"
+    },
+    "Food-Meal": {
+      "GetAll": "GET 2.0 /food/meal",
+      "GetSingle": "GET 2.0 /food/meal/:id",
+      "Create": "POST 2.0 /food/meal",
+      "Update": "PATCH 2.0 /food/meal/:id",
+      "Delete": "DELETE 2.0 /food/meal/:id",
+      "GetPlans": "GET 2.0 /food/meal-plan"
+    },
+    "Food-Meal-Organization": {
+      "Create": "POST 1.0 /food/meal/organization",
+      "GetSingle": "GET 1.0 /food/meal/organization/:id",
+      "Update": "PATCH 1.0 /food/meal/organization",
+      "Delete": "DELETE 1.0 /food/meal/organization"
+    },
+    "Food-MealPlan-Locale": {
+      "Get": "GET 1.0 /food/meal-plan/:id/locale/:locale",
+      "Update": "PUT 1.0 /food/meal-plan/:id/locale/:locale",
+      "Delete": "DELETE 1.0 /food/meal-plan/:id/locale/:locale"
+    },
+    "Food-MealPlan-Type-Locale": {
+      "Get": "GET 1.0 /food/meal-plan/type/:id/locale/:locale",
+      "Update": "PUT 1.0 /food/meal-plan/type/:id/locale/:locale",
+      "Delete": "DELETE 1.0 /food/meal-plan/type/:id/locale/:locale"
+    },
+    "Food-Meal-Serving": {
+      "Upsert": "PUT 2.0 /food/meal/:meal/serving/:serving",
+      "GetSingle": "GET 2.0 /food/meal/:meal/serving/:serving",
+      "Delete": "DELETE 2.0 /food/meal/:meal/serving/:serving"
+    },
+    "Food-Preference": {
+      "GetAll": "GET 1.0 /food/preference",
+      "Create": "POST 1.0 /food/preference",
+      "Update": "PATCH 1.0 /food/preference",
+      "Delete": "DELETE 1.0 /food/preference"
+    },
+    "Food-Serving-Locale": {
+      "Get": "GET 1.0 /food/serving/:id/locale/:locale",
+      "Update": "PUT 1.0 /food/serving/:id/locale/:locale",
+      "Delete": "DELETE 1.0 /food/serving/:id/locale/:locale"
+    },
+    "Food-Serving": {
+      "GetSingle": "GET 1.0 /food/serving/:id",
+      "Create": "POST 1.0 /food/serving",
+      "Update": "PATCH 1.0 /food/serving/:id",
+      "Delete": "DELETE 1.0 /food/serving/:id"
+    }
+  },
+  "Key": {
+    "Key-Account": {
+      "Create": "POST 2.0 /key/account",
+      "Update": "PATCH 2.0 /key/account/:id",
+      "GetSingle": "GET 2.0 /key/account/:id",
+      "GetAll": "GET 2.0 /key/account",
+      "Delete": "DELETE 2.0 /key/account/:id"
+    },
+    "Key-Consumed": {
+      "GetAll": "GET 2.0 /key/consumed",
+      "GetSingle": "GET 2.0 /key/consumed/:id",
+      "Create": "POST 2.0 /key/consumed",
+      "Update": "PATCH 2.0 /key/consumed/:id",
+      "Delete": "DELETE 2.0 /key/consumed/:id"
+    },
+    "Key": {
+      "GetAll": "GET 2.0 /key",
+      "Create": "POST 2.0 /key",
+      "Update": "PATCH 2.0 /key"
+    },
+    "Key-Organization": {
+      "Create": "POST 2.0 /key/organization",
+      "Update": "PATCH 2.0 /key/organization/:id",
+      "GetSingle": "GET 2.0 /key/organization/:id",
+      "GetAll": "GET 2.0 /key/organization",
+      "Delete": "DELETE 2.0 /key/organization/:id"
+    }
+  },
+  "Nutrition": {
+    "Nutrition": {
+      "GetSummary": "GET 2.0 /nutrition/summary"
+    }
+  },
+  "Goal": {
+    "Goal": {
+      "GetSingle": "GET 2.0 /goal",
+      "Upsert": "PUT 2.0 /goal",
+      "Update": "PUT 2.0 /goal/:id",
+      "Delete": "DELETE 2.0 /goal/:id"
+    }
+  },
+  "Hydration": {
+    "Hydration": {
+      "Create": "POST 1.0 /hydration",
+      "Update": "PUT 1.0 /hydration",
+      "Delete": "DELETE 1.0 /hydration",
+      "GetAll": "GET 1.0 /hydration",
+      "GetSummary": "GET 1.0 /hydration/summary"
+    }
+  },
+  "Logging": {
+    "Logging": {
+      "Create": "POST 2.0 /logging"
+    }
+  },
+  "Measurement": {
+    "Measurement-Activity": {
+      "GetSummary": "GET 2.0 /measurement/activity/summary",
+      "GetHistory": "GET 1.0 /measurement/activity/history",
+      "GetAll": "GET 1.0 /measurement/activity",
+      "GetDetailed": "GET 1.0 /measurement/activity/detailed",
+      "Add": "POST 1.0 /measurement/activity",
+      "Delete": "DELETE 1.0 /measurement/activity",
+      "AddDetailed": "POST 1.0 /measurement/activity/detailed"
+    },
+    "Measurement-Body": {
+      "Create": "POST 2.0 /measurement/body/",
+      "GetAll": "GET 2.0 /measurement/body",
+      "GetSampled": "GET 2.0 /measurement/body/sampled",
+      "GetSummary": "GET 2.0 /measurement/body/summary",
+      "Update": "PATCH 2.0 /measurement/body/:id",
+      "Delete": "DELETE 2.0 /measurement/body/:id"
+    },
+    "Measurement-Sleep": {
+      "GetAllWithSummary": "GET 1.0 /measurement/sleep/summary",
+      "GetAll": "GET 1.0 /measurement/sleep",
+      "GetAllDetailed": "GET 1.0 /measurement/sleep/detailed",
+      "Create": "POST 1.0 /measurement/sleep"
+    }
+  },
+  "Exercise": {
+    "Exercise-Association": {
+      "Create": "POST 2.0 /measurement/exercise/association",
+      "GetAll": "GET 2.0 /measurement/exercise/association",
+      "GetSingle": "GET 2.0 /measurement/exercise/association/:id",
+      "Update": "PATCH 2.0 /measurement/exercise/association/:id",
+      "Delete": "DELETE 2.0 /measurement/exercise/association/:id"
+    },
+    "Exercise": {
+      "Create": "POST 2.0 /measurement/exercise",
+      "Update": "PATCH 2.0 /measurement/exercise/:id",
+      "GetAll": "GET 2.0 /measurement/exercise",
+      "GetSingle": "GET 2.0 /measurement/exercise/:id",
+      "Delete": "DELETE 2.0 /measurement/exercise/:id"
+    },
+    "Exercise-Type": {
+      "Create": "POST 2.0 /measurement/exercise/type",
+      "Update": "PATCH 2.0 /measurement/exercise/type/:id",
+      "GetSingle": "GET 2.0 /measurement/exercise/type/:id",
+      "GetAll": "GET 2.0 /measurement/exercise/type"
+    }
+  },
+  "Idealshape": {
+    "Idealshape": {
+      "GetLeaderboard": "GET 2.0 /measurement/idealshape/leaderboard"
+    }
+  },
+  "Messaging": {
+    "Messaging": {
+      "AddMessage": "POST 2.0 /message",
+      "GetAll": "GET 2.0 /message/thread",
+      "GetThread": "GET 2.0 /message/thread/:threadId",
+      "GetUnread": "GET 2.0 /message/unread",
+      "CreateThread": "POST 2.0 /message/thread",
+      "UpdateThread": "PATCH 2.0 /message/thread/:threadId/:account"
+    },
+    "Messaging-Permission": {
+      "GetSingle": "GET 2.0 /message/permission",
+      "Create": "POST 2.0 /message/permission",
+      "Delete": "DELETE 2.0 /message/permission/:threadId/:account"
+    }
+  },
+  "Note": {
+    "Note-Consultation": {
+      "Create": "POST 2.0 /note/consultation",
+      "GetAll": "GET 2.0 /note/consultation",
+      "GetSingle": "GET 2.0 /note/consultation/:id",
+      "Update": "PATCH 2.0 /note/consultation/:id",
+      "Delete": "DELETE 2.0 /note/consultation/:id"
+    },
+    "Note-General": {
+      "Create": "POST 2.0 /note/general",
+      "GetAll": "GET 2.0 /note/general",
+      "GetSingle": "GET 2.0 /note/general/:id",
+      "Update": "PATCH 2.0 /note/general/:id",
+      "Delete": "DELETE 2.0 /note/general/:id"
+    }
+  },
+  "Alerts": {
+    "Alerts": {
+      "GetAll": "GET 1.0 /notification",
+      "ToggleGroup": "PATCH 1.0 /notification/viewed/group/:groupId",
+      "ToggleOne": "PATCH 1.0 /notification/viewed/:notificationId/:account",
+      "GetTypes": "GET 2.0 /warehouse/alert/type"
+    },
+    "Alerts-Preference": {
+      "GetAll": "GET 2.0 /warehouse/alert/preference",
+      "Create": "POST 2.0 /warehouse/alert/preference",
+      "Update": "PATCH 2.0 /warehouse/alert/preference/:id",
+      "Delete": "DELETE 2.0 /warehouse/alert/preference/:id"
+    },
+    "Alerts-Preference-Account": {
+      "Upsert": "PUT 2.0 /warehouse/alert/preference/:id/account",
+      "Delete": "DELETE 2.0 /warehouse/alert/preference/:id/account/:account"
+    }
+  },
+  "Organization": {
+    "Organization": {
+      "GetList": "GET 2.0 /access/organization",
+      "Create": "POST 2.0 /organization",
+      "Update": "PUT 2.0 /organization/:id",
+      "Delete": "DELETE 2.0 /organization/:id",
+      "GetAll": "GET 2.0 /organization/",
+      "GetSingle": "GET 2.0 /organization/:id",
+      "GetDescendants": "GET 2.0 /organization/:id/descendants"
+    },
+    "Organization-Assignment": {
+      "Create": "POST 2.0 /assignment",
+      "Delete": "DELETE 2.0 /assignment/:client/:provider/:organization"
+    },
+    "Organization-Association": {
+      "Create": "POST 2.0 /association",
+      "Update": "PATCH 2.0 /association/:account/:organization",
+      "Delete": "DELETE 2.0 /association/:account/:organization"
+    },
+    "Organization-Preference": {
+      "CreateAssets": "POST 2.0 /organization/:id/preference/asset",
+      "GetSingle": "GET 3.0 /organization/:id/preference",
+      "GetAssets": "GET 3.0 /organization/:id/preference/assets",
+      "Create": "POST 3.0 /organization/:id/preference",
+      "Update": "PATCH 3.0 /organization/:id/preference"
+    }
+  },
+  "Package": {
+    "Package": {
+      "GetAll": "GET 2.0 /package",
+      "GetSingle": "GET 2.0 /package/:id",
+      "Create": "POST 2.0 /package",
+      "Update": "PATCH 2.0 /package/:id"
+    },
+    "Package-Enrollment": {
+      "GetAll": "GET 2.0 /package/enrollment",
+      "GetSingle": "GET 2.0 /package/enrollment/:id",
+      "Create": "POST 2.0 /package/enrollment",
+      "Update": "PATCH 2.0 /package/enrollment/:id",
+      "Delete": "DELETE 1.0 /package/enrollment/:id"
+    },
+    "Package-Organization": {
+      "GetAll": "GET 2.0 /package/organization",
+      "GetSingle": "GET 2.0 /package/organization/:id",
+      "Create": "POST 2.0 /package/organization",
+      "Update": "PATCH 2.0 /package/organization/:id",
+      "Delete": "DELETE 2.0 /package/organization/:id"
+    }
+  },
+  "Locale": {
+    "Locale-Package": {
+      "Get": "GET 2.0 /package/:id/locale/:locale",
+      "Update": "PUT 2.0 /package/:id/locale/:locale",
+      "Delete": "DELETE 2.0 /package/:id/locale/:locale"
+    },
+    "Locale-Supplement": {
+      "Get": "GET 2.0 /supplement/:id/locale/:locale",
+      "Update": "PUT 2.0 /supplement/:id/locale/:locale",
+      "Delete": "DELETE 2.0 /supplement/:id/locale/:locale"
+    }
+  },
+  "Pain": {
+    "Pain-Tracking": {
+      "Create": "POST 1.0 /pain-tracking/history",
+      "GetAll": "GET 1.0 /pain-tracking/history",
+      "GetSingle": "GET 1.0 /pain-tracking/history/:id",
+      "Delete": "DELETE 1.0 /pain-tracking/history/:id",
+      "Update": "PATCH 1.0 /pain-tracking/history",
+      "GetTypes": "GET 1.0 /pain-tracking/type"
+    }
+  },
+  "Meeting": {
+    "Meeting-Attendee": {
+      "Add": "POST 2.0 /meeting/attendee",
+      "Update": "PUT 2.0 /attendance",
+      "DeleteSingle": "DELETE 2.0 /meeting/:meetingId/attendee/:account",
+      "DeleteRecurring": "DELETE 2.0 /meeting/:meetingId/attendee/:account/recurring"
+    },
+    "Meeting": {
+      "GetAll": "GET 2.0 /meeting",
+      "GetSingle": "GET 2.0 /meeting/:id",
+      "Create": "POST 2.0 /meeting",
+      "Update": "PUT 2.0 /meeting/:id",
+      "DeleteSingle": "DELETE 2.0 /meeting/single/:id",
+      "DeleteQuick": "DELETE 2.0 /meeting/quick/:token",
+      "DeleteRecurring": "DELETE 2.0 /meeting/recurring/:id"
+    },
+    "Meeting-Type-Organization": {
+      "GetAll": "GET 2.0 /meeting/type/organization/:organization",
+      "Create": "POST 2.0 /meeting/type/organization",
+      "Update": "PUT 2.0 /meeting/type/organization",
+      "Delete": "DELETE 2.0 /meeting/type/:typeId/organization/:organization"
+    },
+    "Meeting-Type": {
+      "Create": "POST 2.0 /meeting/type",
+      "Update": "PATCH 2.0 /meeting/type/:typeId",
+      "Put": "PUT 2.0 /meeting/type/:typeId",
+      "GetAll": "GET 2.0 /meeting/type",
+      "GetSingle": "GET 2.0 /meeting/type/:typeId"
+    }
+  },
+  "Schedule": {
+    "Schedule-Available": {
+      "GetAll": "GET 2.0 /available",
+      "GetProviders": "GET 2.0 /available/match",
+      "GetCalendar": "GET 2.0 /available/calendar",
+      "GetSingle": "GET 2.0 /available/:id",
+      "CreateRecurrent": "POST 2.0 /available",
+      "CreateSingle": "POST 2.0 /available/single",
+      "SetTimezone": "POST 2.0 /available/timezone",
+      "DeleteSingle": "DELETE 2.0 /available/single/:id",
+      "DeleteAll": "DELETE 2.0 /available/account/:id",
+      "DeleteRecurrent": "DELETE 2.0 /available/:id"
+    },
+    "Schedule-Preferences": {
+      "GetSingle": "GET 3.0 /schedule/preferences/:id",
+      "Update": "PUT 3.0 /schedule/preferences/:id",
+      "Delete": "DELETE 3.0 /schedule/preferences/:id"
+    },
+    "Schedule-Reports": {
+      "GetAllMeetings": "GET 2.0 /schedule/reporting"
+    },
+    "Scheduler": {
+      "GetOpenTimeslots": "GET 2.0 /scheduler",
+      "GetOpenTimeslotsQuick": "GET 2.0 /scheduler/quick",
+      "GetSummary": "GET 2.0 /schedule/summary"
+    }
+  },
+  "Stripe": {
+    "Stripe": {
+      "Charge": "POST 2.0 /stripe/charge",
+      "Customer": "POST 2.0 /stripe/customer"
+    }
+  },
+  "Supplement": {
+    "Supplement-Account-Organization": {
+      "GetAll": "GET 2.0 /supplement/account/organization/",
+      "Create": "POST 2.0 /supplement/account/organization/",
+      "Update": "PUT 2.0 /supplement/account/organization/:id",
+      "Delete": "DELETE 2.0 /supplement/account/organization/:id"
+    },
+    "Supplement-Consumption": {
+      "GetAll": "GET 2.0 /supplement/consumption",
+      "Create": "POST 2.0 /supplement/consumption",
+      "Update": "PUT 2.0 /supplement/consumption/:id",
+      "Delete": "DELETE 2.0 /supplement/consumption/:id"
+    },
+    "Supplement": {
+      "GetAll": "GET 3.0 /supplement",
+      "Create": "POST 2.0 /supplement",
+      "Update": "PUT 2.0 /supplement/:id",
+      "GetSummary": "GET 2.0 /supplement/summary"
+    },
+    "Supplement-Organization": {
+      "GetAll": "GET 3.0 /supplement/organization",
+      "GetSingle": "GET 2.0 /supplement/organization/:id",
+      "Create": "POST 2.0 /supplement/organization",
+      "Update": "PUT 2.0 /supplement/organization/:id",
+      "Delete": "DELETE 2.0 /supplement/organization/:id"
+    }
+  },
+  "System": {
+    "System": {
+      "Status": "GET 1.0 /system"
+    }
+  },
+  "Reports": {
+    "Reports": {
+      "GetLoginInactivity": "GET 2.0 /warehouse/login/inactivity",
+      "GetAgeDemographics": "GET 2.0 /warehouse/demographics/age",
+      "GetGenderDemographics": "GET 2.0 /warehouse/demographics/gender",
+      "GetEnrollmentPatientCount": "GET 2.0 /warehouse/enrollment/patient-count",
+      "GetWeightChange": "GET 2.0 /warehouse/weight/change",
+      "GetActivityLevel": "GET 2.0 /warehouse/step/activity/level",
+      "GetBasicSleep": "GET 2.0 /warehouse/sleep/basic",
+      "GetBodyComposition": "GET 2.0 /warehouse/measurement/body-composition",
+      "GetOrganizationActivity": "GET 2.0 /warehouse/organization/activity",
+      "GetUserActivity": "GET 2.0 /warehouse/organization/activity/feature",
+      "GetSignUpsTimeline": "GET 2.0 /warehouse/organization/sign-ups/timeline",
+      "GetSignUpsList": "GET 2.0 /warehouse/organization/sign-ups/list",
+      "GetSignUps": "GET 2.0 /warehouse/organization/sign-ups",
+      "GetProviderCount": "GET 2.0 /warehouse/provider/count"
+    }
+  }
+}

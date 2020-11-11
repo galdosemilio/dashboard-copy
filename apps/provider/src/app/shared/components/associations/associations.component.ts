@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl } from '@angular/forms'
-import { MatDialog, MatPaginator } from '@coachcare/common/material'
+import { MatDialog, MatPaginator } from '@coachcare/material'
 import { AddAssociationDialog } from '@app/dashboard/accounts/dialogs/add-association'
 import {
   AssociationsDatabase,

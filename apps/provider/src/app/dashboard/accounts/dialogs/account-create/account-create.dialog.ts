@@ -6,7 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { CoachFormComponent } from '@app/dashboard/accounts/coaches/form'
 import { DieterFormComponent } from '@app/dashboard/accounts/dieters/form'
 import { ContextService, NotifierService } from '@app/service'

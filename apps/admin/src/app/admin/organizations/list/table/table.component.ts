@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatSort } from '@coachcare/common/material'
+import { MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { getterSorter } from '@coachcare/backend/model'
 import { _ } from '@coachcare/backend/shared'

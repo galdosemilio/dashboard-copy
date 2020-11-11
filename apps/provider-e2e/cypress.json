@@ -26,5 +26,9 @@
   "video": false,
   "videosFolder": "../../dist/cypress/apps/provider-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/provider-e2e/screenshots",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "retries": {
+    "runMode": 2,
+    "openMode": 2
+  }
 }

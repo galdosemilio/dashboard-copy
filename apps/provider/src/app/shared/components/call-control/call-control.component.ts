@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatDialog, MatMenuTrigger } from '@coachcare/common/material'
+import { MatDialog, MatMenuTrigger } from '@coachcare/material'
 import {
   BILLABLE_SERVICES,
   BillableService

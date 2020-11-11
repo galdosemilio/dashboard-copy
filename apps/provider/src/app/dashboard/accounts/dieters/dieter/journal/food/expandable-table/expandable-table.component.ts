@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ConsumedFood } from '@app/dashboard/accounts/dieters/models/consumedFood/consumedFood'
 import {
   FoodDataSource,

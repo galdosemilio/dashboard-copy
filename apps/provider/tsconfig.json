@@ -4,7 +4,8 @@
     "types": [
       "node",
       "jest"
-    ]
+    ],
+    "module": "CommonJS"
   },
   "files": [],
   "include": [
@@ -17,8 +18,5 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ],
-  "angularCompilerOptions": {
-    "enableIvy": false
-  }
+  ]
 }

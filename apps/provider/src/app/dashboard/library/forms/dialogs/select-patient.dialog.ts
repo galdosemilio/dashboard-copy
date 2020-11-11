@@ -1,8 +1,5 @@
 import { Component } from '@angular/core'
-import {
-  MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef
-} from '@coachcare/common/material'
+import { MAT_LABEL_GLOBAL_OPTIONS, MatDialogRef } from '@coachcare/material'
 import { AccountAccessData } from '@coachcare/npm-api'
 
 @Component({

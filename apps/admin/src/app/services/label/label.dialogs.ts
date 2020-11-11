@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 
 import { LabelsDatabase } from '@coachcare/backend/data'
 import { TitledEntity } from '@coachcare/npm-api'

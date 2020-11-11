@@ -21,7 +21,7 @@ import {
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import {
   AccountProvider,
   AccountAccessData,

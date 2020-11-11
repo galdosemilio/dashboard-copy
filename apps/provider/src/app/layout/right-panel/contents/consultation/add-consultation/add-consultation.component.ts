@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms'
-import { MatAutocompleteTrigger, MatDialog } from '@coachcare/common/material'
+import { MatAutocompleteTrigger, MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
 import { find } from 'lodash'
 import * as moment from 'moment-timezone'

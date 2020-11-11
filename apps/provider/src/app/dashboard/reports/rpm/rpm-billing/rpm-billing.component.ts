@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatSort } from '@coachcare/common/material'
+import { MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { ClosePanel, OpenPanel } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'

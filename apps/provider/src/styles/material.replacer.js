@@ -1,9 +1,9 @@
-var fs = require('fs');
-var filepath = 'node_modules/@coachcare/common/material/_theming.scss';
+var fs = require('fs')
+var filepath = 'node_modules/@coachcare/material/_theming.scss'
 
 fs.readFile(filepath, 'utf8', function (err, data) {
   if (err) {
-    return console.log(err);
+    return console.log(err)
   }
 
   // TODO replace these:
@@ -22,15 +22,15 @@ fs.readFile(filepath, 'utf8', function (err, data) {
       ' var(--primary-contrast, mat-color($primary, default-contrast))',
     ' mat-color($accent)': ' var(--accent, mat-color($accent))',
     ' mat-color($foreground, text)':
-      ' var(--text, mat-color($foreground, text))',
-  };
+      ' var(--text, mat-color($foreground, text))'
+  }
 
-  var re = new RegExp(Object.keys(searchMap).join('|'), 'g');
+  var re = new RegExp(Object.keys(searchMap).join('|'), 'g')
   var result = data.replace(re, function (matched) {
-    return mapObj[matched];
-  });
+    return mapObj[matched]
+  })
 
   fs.writeFile('_theming.scss', result, 'utf8', function (err) {
-    if (err) return console.log(err);
-  });
-});
+    if (err) return console.log(err)
+  })
+})

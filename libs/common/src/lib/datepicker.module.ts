@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { MatFormFieldModule, MatInputModule } from '@coachcare/common/material';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { MatFormFieldModule, MatInputModule } from '@coachcare/material'
 import {
   MatDatepickerIntl,
   MatDatepickerModule,
-  MatMomentDateModule,
-} from '@coachcare/datepicker';
-import { DatepickerIntl } from './services/i18n/datepicker/datepicker-intl';
+  MatMomentDateModule
+} from '@coachcare/datepicker'
+import { DatepickerIntl } from './services/i18n/datepicker/datepicker-intl'
 
 @NgModule({
   imports: [
@@ -14,14 +14,14 @@ import { DatepickerIntl } from './services/i18n/datepicker/datepicker-intl';
     MatFormFieldModule,
     MatInputModule,
     MatMomentDateModule,
-    MatDatepickerModule,
+    MatDatepickerModule
   ],
   exports: [
     MatFormFieldModule,
     MatInputModule,
     MatMomentDateModule,
-    MatDatepickerModule,
+    MatDatepickerModule
   ],
-  providers: [{ provide: MatDatepickerIntl, useClass: DatepickerIntl }],
+  providers: [{ provide: MatDatepickerIntl, useClass: DatepickerIntl }]
 })
 export class AppDatepickerModule {}

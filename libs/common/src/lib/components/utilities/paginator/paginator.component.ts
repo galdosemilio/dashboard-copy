@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { MatPaginator } from '@coachcare/common/material';
+import { Component } from '@angular/core'
+import { MatPaginator } from '@coachcare/material'
 
 @Component({
   selector: 'ccr-paginator',
-  templateUrl: './paginator.component.html',
+  templateUrl: './paginator.component.html'
 })
 export class PaginatorComponent extends MatPaginator {}

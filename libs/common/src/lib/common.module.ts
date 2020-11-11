@@ -14,14 +14,12 @@ import { AppProviders, TranslateCatalogs } from '@coachcare/common/services'
 import { AppConfig, AppEnvironment } from '@coachcare/common/shared'
 import { AppStoreModule } from '@coachcare/common/store'
 import { AppI18nModule } from './i18n.module'
-import { CcrMaterialModule } from './material/material.module'
 import { CCRStoreModule } from './store/ccr'
 
 @NgModule({
   imports: [
     CommonModule,
     CcrFormFieldsModule,
-    CcrMaterialModule,
     HttpClientModule,
     FlexLayoutModule,
     RouterModule,
@@ -34,7 +32,6 @@ import { CCRStoreModule } from './store/ccr'
   exports: [
     CcrCoreDialogsModule,
     CcrDirectivesModule,
-    CcrMaterialModule,
     CcrPipesModule,
     CcrFormFieldsModule,
     CcrUtilityComponentsModule

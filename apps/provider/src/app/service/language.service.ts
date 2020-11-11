@@ -9,13 +9,8 @@ import { _, locIsRtl } from '@app/shared/utils'
 import { ConfigService } from './config.service'
 import { EventsService } from './events.service'
 
-import * as momentTz from 'moment-timezone'
-const moment = momentTz
-import 'moment/locale/ar'
-import 'moment/locale/da'
-import 'moment/locale/he'
-import 'moment/locale/pt-br'
-import '../../assets/i18n/moment.es'
+import * as moment from 'moment-timezone'
+import 'moment'
 
 @Injectable()
 export class LanguageService {
@@ -80,7 +75,7 @@ export class LanguageService {
   }
 
   setupTimezone(user: Profile) {
-    momentTz.tz.setDefault(user.timezone)
+    moment.tz.setDefault(user.timezone)
   }
 
   get(): string {

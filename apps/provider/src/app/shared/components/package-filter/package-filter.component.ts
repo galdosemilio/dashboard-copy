@@ -8,7 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { MatMenu } from '@coachcare/common/material'
+import { MatMenu } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { PackageData } from '@coachcare/npm-api'
 import { untilDestroyed } from 'ngx-take-until-destroy'

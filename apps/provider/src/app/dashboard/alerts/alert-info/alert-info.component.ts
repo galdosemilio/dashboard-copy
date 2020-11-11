@@ -1,20 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
-import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@coachcare/material'
+import { TranslateService } from '@ngx-translate/core'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
-import { ContextService } from '@app/service';
-import { ConfirmDialog } from '@app/shared';
-import { _, TranslationsObject } from '@app/shared/utils';
+import { ContextService } from '@app/service'
+import { ConfirmDialog } from '@app/shared'
+import { _, TranslationsObject } from '@app/shared/utils'
 
 @Component({
   selector: 'app-alert-info',
   templateUrl: './alert-info.component.html',
-  styleUrls: ['./alert-info.component.scss'],
+  styleUrls: ['./alert-info.component.scss']
 })
 export class AlertInfoComponent implements OnInit, OnDestroy {
-  indirectOrganization = false;
-  text: TranslationsObject;
+  indirectOrganization = false
+  text: TranslationsObject
 
   constructor(
     public dialog: MatDialog,
@@ -24,13 +24,13 @@ export class AlertInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.context.organization$.subscribe((org) => {
-      this.indirectOrganization = !org.isDirect;
-    });
+      this.indirectOrganization = !org.isDirect
+    })
 
-    this.loadTranslations();
+    this.loadTranslations()
     this.translator.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
-      this.loadTranslations();
-    });
+      this.loadTranslations()
+    })
   }
 
   ngOnDestroy() {}
@@ -44,9 +44,9 @@ export class AlertInfoComponent implements OnInit, OnDestroy {
           this.text['ALERTS.ALERT_NOTIFICATIONS'],
         content:
           this.text['ALERTS.ASSOCIATION_WARNING_EXPLANATION'] +
-          this.renderTable(),
-      },
-    });
+          this.renderTable()
+      }
+    })
   }
 
   private renderTable() {
@@ -80,14 +80,14 @@ export class AlertInfoComponent implements OnInit, OnDestroy {
                     : this.text['GLOBAL.NO']
                 }</td>
             </tr>
-        `;
+        `
         })
         .join('') +
       `
       </tbody>
       </table>
     `
-    );
+    )
   }
 
   private loadTranslations() {
@@ -102,10 +102,10 @@ export class AlertInfoComponent implements OnInit, OnDestroy {
         _('GLOBAL.NO'),
         _('GLOBAL.YES'),
         _('ALERTS.ALERT_NOTIFICATIONS'),
-        _('ALERTS.ASSOCIATION_WARNING_EXPLANATION'),
+        _('ALERTS.ASSOCIATION_WARNING_EXPLANATION')
       ])
       .subscribe((translations) => {
-        this.text = translations;
-      });
+        this.text = translations
+      })
   }
 }

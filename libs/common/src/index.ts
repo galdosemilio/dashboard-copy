@@ -1,2 +1,1 @@
-export * from './lib/common.module';
-export * from './lib/material';
+export * from './lib/common.module'

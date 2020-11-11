@@ -197,7 +197,7 @@ class ApiService {
       const apiOptions = new ApiOptionsModel(
         options,
         this.apiUrl,
-        this.headers as any,
+        this.headers,
         this.token,
         this.account
       )
@@ -208,7 +208,7 @@ class ApiService {
       }
 
       axios
-        .request(apiOptions) // MERGETODO: CHECK THIS TYPE!!!
+        .request(apiOptions)
         .then((response) => {
           if (response.status === 204) {
             resolve(true)

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { MatAutocompleteTrigger } from '@coachcare/common/material'
+import { MatAutocompleteTrigger } from '@coachcare/material'
 import { AccountProvider, AccountAccessData } from '@coachcare/npm-api'
 import { _ } from '@coachcare/backend/shared'
 import { ContextService, NotifierService } from '@coachcare/common/services'

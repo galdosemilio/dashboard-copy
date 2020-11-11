@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@coachcare/common/material';
-import { MatListModule } from '@coachcare/common/material';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { MenuItemComponent } from './menuitem.component';
+import { Component } from '@angular/core'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatIconModule } from '@coachcare/material'
+import { MatListModule } from '@coachcare/material'
+import { RouterTestingModule } from '@angular/router/testing'
+import { TranslateModule } from '@ngx-translate/core'
+import { MenuItemComponent } from './menuitem.component'
 
 describe('Layout.MenuItemComponent', () => {
-  let component: MenuItemComponent;
-  let fixture: ComponentFixture<MenuItemComponent>;
+  let component: MenuItemComponent
+  let fixture: ComponentFixture<MenuItemComponent>
 
   @Component({
     selector: 'ccr-badge',
-    template: '',
+    template: ''
   })
   class MockBadgeComponent {}
 
@@ -22,20 +22,20 @@ describe('Layout.MenuItemComponent', () => {
         MatIconModule,
         MatListModule,
         TranslateModule,
-        RouterTestingModule,
+        RouterTestingModule
       ],
-      declarations: [MenuItemComponent, MockBadgeComponent],
-    }).compileComponents();
-  }));
+      declarations: [MenuItemComponent, MockBadgeComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuItemComponent);
-    component = fixture.componentInstance;
-    component.menuItem = { navName: '', navRoute: '' };
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(MenuItemComponent)
+    component = fixture.componentInstance
+    component.menuItem = { navName: '', navRoute: '' }
+    fixture.detectChanges()
+  })
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

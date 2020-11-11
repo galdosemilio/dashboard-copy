@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@coachcare/common/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { CommonTestingModule } from '@coachcare/common';
-import { RegisterClinicPaymentPageComponent } from './payment.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatDialogModule } from '@coachcare/material'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing'
+import { CommonTestingModule } from '@coachcare/common'
+import { RegisterClinicPaymentPageComponent } from './payment.component'
 
 describe('RegisterClinicPaymentPageComponent', () => {
-  let component: RegisterClinicPaymentPageComponent;
-  let fixture: ComponentFixture<RegisterClinicPaymentPageComponent>;
+  let component: RegisterClinicPaymentPageComponent
+  let fixture: ComponentFixture<RegisterClinicPaymentPageComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,19 +18,19 @@ describe('RegisterClinicPaymentPageComponent', () => {
         FormsModule,
         MatDialogModule,
         RouterTestingModule,
-        CommonTestingModule.forRoot(),
+        CommonTestingModule.forRoot()
       ],
-      declarations: [RegisterClinicPaymentPageComponent],
-    }).compileComponents();
-  }));
+      declarations: [RegisterClinicPaymentPageComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterClinicPaymentPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RegisterClinicPaymentPageComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

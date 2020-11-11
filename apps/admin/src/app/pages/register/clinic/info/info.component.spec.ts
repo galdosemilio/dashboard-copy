@@ -1,16 +1,16 @@
-import { async, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { async, TestBed } from '@angular/core/testing'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule,
-} from '@coachcare/common/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { CommonTestingModule } from '@coachcare/common';
-import { CcrFormFieldsModule } from '@coachcare/common/components';
-import { RegisterClinicInfoPageComponent } from './info.component';
+  MatSelectModule
+} from '@coachcare/material'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing'
+import { CommonTestingModule } from '@coachcare/common'
+import { CcrFormFieldsModule } from '@coachcare/common/components'
+import { RegisterClinicInfoPageComponent } from './info.component'
 
 describe('RegisterClinicInfoPageComponent', () => {
   // let component: RegisterClinicInfoPageComponent;
@@ -28,20 +28,20 @@ describe('RegisterClinicInfoPageComponent', () => {
         MatInputModule,
         MatSelectModule,
         RouterTestingModule,
-        CommonTestingModule.forRoot(),
+        CommonTestingModule.forRoot()
       ],
-      declarations: [RegisterClinicInfoPageComponent],
-    }).compileComponents();
-  }));
+      declarations: [RegisterClinicInfoPageComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     // fixture = TestBed.createComponent(RegisterClinicInfoPageComponent);
     // component = fixture.componentInstance;
     // fixture.detectChanges();
-  });
+  })
 
   it('should create', () => {
     // TODO create a tester component
     // expect(component).toBeTruthy();
-  });
-});
+  })
+})

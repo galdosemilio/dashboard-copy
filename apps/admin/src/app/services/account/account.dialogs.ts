@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { AccountsDatabase } from '@coachcare/backend/data'
 import {
   AccountProvider,

@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconModule } from '@coachcare/common/material';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { MatIconModule } from '@coachcare/material'
+import { RouterModule } from '@angular/router'
+import { TranslateModule } from '@ngx-translate/core'
 
-import { BaseComponent } from './base/base.component';
-import { PlainLayout } from './plain-layout.component';
+import { BaseComponent } from './base/base.component'
+import { PlainLayout } from './plain-layout.component'
 
 @NgModule({
   imports: [
@@ -14,9 +14,9 @@ import { PlainLayout } from './plain-layout.component';
     MatIconModule,
     RouterModule,
     TranslateModule.forChild(),
-    FlexLayoutModule,
+    FlexLayoutModule
   ],
   declarations: [BaseComponent, PlainLayout],
-  exports: [PlainLayout],
+  exports: [PlainLayout]
 })
 export class PlainLayoutModule {}

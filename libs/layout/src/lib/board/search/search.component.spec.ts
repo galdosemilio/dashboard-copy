@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@coachcare/common/material';
-import { MatDialogModule } from '@coachcare/common/material';
-import { MatSnackBarModule } from '@coachcare/common/material';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Component, Input } from '@angular/core'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatAutocompleteModule } from '@coachcare/material'
+import { MatDialogModule } from '@coachcare/material'
+import { MatSnackBarModule } from '@coachcare/material'
+import { RouterTestingModule } from '@angular/router/testing'
 import {
   AuthService,
   ConfigService,
@@ -12,36 +12,36 @@ import {
   CookieService,
   EventsService,
   LanguageService,
-  NotifierService,
-} from '@coachcare/common/services';
-import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared';
-import { TranslateModule } from '@ngx-translate/core';
-import { Account, ApiService, User } from 'selvera-api';
+  NotifierService
+} from '@coachcare/common/services'
+import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared'
+import { TranslateModule } from '@ngx-translate/core'
+import { Account, ApiService, User } from 'selvera-api'
 import {
   AccountFactory,
   ApiFactory,
-  UserFactory,
-} from '../../../services/api.services';
-import { environment, projectConfig } from '../../../tests/index';
-import { SearchComponent } from './search.component';
+  UserFactory
+} from '../../../services/api.services'
+import { environment, projectConfig } from '../../../tests/index'
+import { SearchComponent } from './search.component'
 
 class MockAuthService {
   check() {
-    return true;
+    return true
   }
 }
 @Component({
   selector: 'ccr-icon-search',
-  template: '',
+  template: ''
 })
 class MockIconSearchComponent {
-  @Input() fill: string;
-  @Input() size: any;
-  @Input() stroke: any;
+  @Input() fill: string
+  @Input() size: any
+  @Input() stroke: any
 }
 describe('Layout.SearchComponent', () => {
-  let component: SearchComponent;
-  let fixture: ComponentFixture<SearchComponent>;
+  let component: SearchComponent
+  let fixture: ComponentFixture<SearchComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -51,54 +51,54 @@ describe('Layout.SearchComponent', () => {
         MatSnackBarModule,
         ReactiveFormsModule,
         TranslateModule.forRoot(),
-        RouterTestingModule,
+        RouterTestingModule
       ],
       declarations: [SearchComponent, MockIconSearchComponent],
       providers: [
         {
           provide: APP_ENVIRONMENT,
-          useValue: environment,
+          useValue: environment
         },
         {
           provide: APP_CONFIG,
-          useValue: projectConfig,
+          useValue: projectConfig
         },
         {
           provide: ApiService,
           useFactory: ApiFactory,
-          deps: [APP_ENVIRONMENT],
+          deps: [APP_ENVIRONMENT]
         },
         {
           provide: Account,
           useFactory: AccountFactory,
-          deps: [ApiService],
+          deps: [ApiService]
         },
         {
           provide: User,
           useFactory: UserFactory,
-          deps: [ApiService],
+          deps: [ApiService]
         },
         {
           provide: AuthService,
-          useClass: MockAuthService,
+          useClass: MockAuthService
         },
         CookieService,
         ConfigService,
         ContextService,
         EventsService,
         LanguageService,
-        NotifierService,
-      ],
-    }).compileComponents();
-  }));
+        NotifierService
+      ]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(SearchComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

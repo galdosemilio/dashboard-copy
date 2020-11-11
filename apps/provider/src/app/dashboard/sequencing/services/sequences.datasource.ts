@@ -1,4 +1,4 @@
-import { MatPaginator } from '@coachcare/common/material'
+import { MatPaginator } from '@coachcare/material'
 import { TableDataSource } from '@app/shared/model'
 import {
   GetAllSequencesRequest,

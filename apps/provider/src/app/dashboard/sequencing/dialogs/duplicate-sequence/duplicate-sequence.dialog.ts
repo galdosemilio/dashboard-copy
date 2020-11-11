@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { OrganizationEntity, OrganizationPermission } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'

@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { ReactiveFormsModule } from '@angular/forms'
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -9,23 +9,23 @@ import {
   MatListModule,
   MatMenuModule,
   MatSidenavModule,
-  MatToolbarModule,
-} from '@coachcare/common/material';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+  MatToolbarModule
+} from '@coachcare/material'
+import { RouterModule } from '@angular/router'
+import { TranslateModule } from '@ngx-translate/core'
 
-import { CcrUtilityComponentsModule } from '@coachcare/common/components';
-import { CcrIconsComponentsModule } from '@coachcare/common/components/icons';
-import { CcrPipesModule } from '@coachcare/common/pipes';
+import { CcrUtilityComponentsModule } from '@coachcare/common/components'
+import { CcrIconsComponentsModule } from '@coachcare/common/components/icons'
+import { CcrPipesModule } from '@coachcare/common/pipes'
 
-import { BaseComponent } from './base/base.component';
-import { FooterComponent } from './footer/footer.component';
-import { MenuComponent } from './menu/menu.component';
-import { MenuItemComponent } from './menu/menuitem/menuitem.component';
-import { SearchComponent } from './search/search.component';
-import { TopbarComponent } from './topbar/topbar.component';
+import { BaseComponent } from './base/base.component'
+import { FooterComponent } from './footer/footer.component'
+import { MenuComponent } from './menu/menu.component'
+import { MenuItemComponent } from './menu/menuitem/menuitem.component'
+import { SearchComponent } from './search/search.component'
+import { TopbarComponent } from './topbar/topbar.component'
 
-import { BoardLayout } from './board-layout.component';
+import { BoardLayout } from './board-layout.component'
 
 @NgModule({
   imports: [
@@ -43,7 +43,7 @@ import { BoardLayout } from './board-layout.component';
     TranslateModule.forChild(),
     CcrPipesModule,
     CcrIconsComponentsModule,
-    CcrUtilityComponentsModule,
+    CcrUtilityComponentsModule
   ],
   declarations: [
     BaseComponent,
@@ -52,8 +52,8 @@ import { BoardLayout } from './board-layout.component';
     MenuItemComponent,
     SearchComponent,
     TopbarComponent,
-    BoardLayout,
+    BoardLayout
   ],
-  exports: [BoardLayout],
+  exports: [BoardLayout]
 })
 export class BoardLayoutModule {}

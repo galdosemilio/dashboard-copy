@@ -8,7 +8,7 @@ import {
   Output
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { PackageSelectDialog } from '@app/dashboard/content/dialogs'
 import {
   FILE_TYPE_MAP,

@@ -7,7 +7,7 @@ import {
   Output
 } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { resolveConfig } from '@board/pages/config/section.config'
 import { _, FormUtils } from '@coachcare/backend/shared'

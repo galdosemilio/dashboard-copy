@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatDialogRef } from '@coachcare/common/material'
+import { MatDialogRef } from '@coachcare/material'
 import { CCRConfig } from '@app/config'
 import { resolveConfig } from '@app/config/section'
 import {

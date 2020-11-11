@@ -1,4 +1,4 @@
-import { MatPaginator, MatSort } from '@coachcare/common/material'
+import { MatPaginator, MatSort } from '@coachcare/material'
 import { find } from 'lodash'
 import { from, Observable } from 'rxjs'
 

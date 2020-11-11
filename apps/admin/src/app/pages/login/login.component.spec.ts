@@ -1,19 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ReactiveFormsModule } from '@angular/forms'
 import {
   MatCardModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule,
-} from '@coachcare/common/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { CommonTestingModule } from '@coachcare/common';
-import { LoginPageComponent } from './login.component';
+  MatInputModule
+} from '@coachcare/material'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing'
+import { CommonTestingModule } from '@coachcare/common'
+import { LoginPageComponent } from './login.component'
 
 describe('LoginPageComponent', () => {
-  let component: LoginPageComponent;
-  let fixture: ComponentFixture<LoginPageComponent>;
+  let component: LoginPageComponent
+  let fixture: ComponentFixture<LoginPageComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,19 +25,19 @@ describe('LoginPageComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         RouterTestingModule,
-        CommonTestingModule.forRoot(),
+        CommonTestingModule.forRoot()
       ],
-      declarations: [LoginPageComponent],
-    }).compileComponents();
-  }));
+      declarations: [LoginPageComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(LoginPageComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

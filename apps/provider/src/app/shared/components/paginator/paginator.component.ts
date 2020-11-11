@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { MatPaginator } from '@coachcare/common/material'
+import { MatPaginator } from '@coachcare/material'
 
 @Component({
   selector: 'ccr-paginator',

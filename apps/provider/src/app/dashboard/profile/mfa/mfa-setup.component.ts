@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { GetUserMFAResponse } from '@coachcare/npm-api'

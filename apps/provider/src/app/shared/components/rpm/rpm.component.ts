@@ -8,7 +8,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core'
-import { MatDialog, MatSlideToggle } from '@coachcare/common/material'
+import { MatDialog, MatSlideToggle } from '@coachcare/material'
 import { ContextService } from '@app/service'
 import { RPMStatusDialog } from '@app/shared/dialogs'
 import {

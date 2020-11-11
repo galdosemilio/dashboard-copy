@@ -1,19 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { CcrDirectivesModule } from '@coachcare/common/directives';
-import { CcrMaterialModule } from '@coachcare/common/material/material.module';
-import { TranslateModule } from '@ngx-translate/core';
-import { AvatarComponent } from './avatar/avatar.component';
-import { BadgeComponent } from './badge/badge.component';
-import { DatasourceOverlayComponent } from './datasource-overlay/datasource-overlay.component';
-import { DateNavigatorComponent } from './date-navigator/date-navigator.component';
-import { DateRangeNavigatorComponent } from './date-range-navigator/date-range.component';
-import { HelpComponent } from './help/help.component';
-import { LogoComponent } from './logo/logo.component';
-import { PaginatorComponent } from './paginator/paginator.component';
-import { ProgressCircleComponent } from './progress-circle/progress-circle.component';
-import { TableOverlayComponent } from './table-overlay/table-overlay.component';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { CcrDirectivesModule } from '@coachcare/common/directives'
+import { CcrMaterialModule } from '@coachcare/material'
+import { TranslateModule } from '@ngx-translate/core'
+import { AvatarComponent } from './avatar/avatar.component'
+import { BadgeComponent } from './badge/badge.component'
+import { DatasourceOverlayComponent } from './datasource-overlay/datasource-overlay.component'
+import { DateNavigatorComponent } from './date-navigator/date-navigator.component'
+import { DateRangeNavigatorComponent } from './date-range-navigator/date-range.component'
+import { HelpComponent } from './help/help.component'
+import { LogoComponent } from './logo/logo.component'
+import { PaginatorComponent } from './paginator/paginator.component'
+import { ProgressCircleComponent } from './progress-circle/progress-circle.component'
+import { TableOverlayComponent } from './table-overlay/table-overlay.component'
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
     FlexLayoutModule,
     CcrDirectivesModule,
     CcrMaterialModule,
-    TranslateModule.forChild(),
+    TranslateModule.forChild()
   ],
   declarations: [
     AvatarComponent,
@@ -33,7 +33,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
     LogoComponent,
     PaginatorComponent,
     ProgressCircleComponent,
-    TableOverlayComponent,
+    TableOverlayComponent
   ],
   exports: [
     AvatarComponent,
@@ -45,7 +45,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component';
     LogoComponent,
     PaginatorComponent,
     ProgressCircleComponent,
-    TableOverlayComponent,
-  ],
+    TableOverlayComponent
+  ]
 })
 export class CcrUtilityComponentsModule {}

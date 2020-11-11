@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { OrganizationEntity } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'

@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { _ } from '@coachcare/backend/shared';
-import { ConfirmDialogData } from './confirm-data.interface';
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
+import { _ } from '@coachcare/backend/shared'
+import { ConfirmDialogData } from './confirm-data.interface'
 
 /**
  * Core Confirm Dialog
@@ -10,12 +10,12 @@ import { ConfirmDialogData } from './confirm-data.interface';
   selector: 'ccr-dialog-confirm',
   templateUrl: 'confirm.dialog.html',
   host: {
-    class: 'ccr-dialog ccr-confirm',
-  },
+    class: 'ccr-dialog ccr-confirm'
+  }
 })
 export class ConfirmDialog {
-  title = '';
-  content = '';
+  title = ''
+  content = ''
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialog>,
@@ -28,7 +28,7 @@ export class ConfirmDialog {
       contentParams: {},
       accept: _('GLOBAL.OK'),
       color: '',
-      ...data,
-    };
+      ...data
+    }
   }
 }

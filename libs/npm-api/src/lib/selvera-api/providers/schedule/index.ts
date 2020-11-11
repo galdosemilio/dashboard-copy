@@ -292,7 +292,6 @@ class Schedule {
     request: DeleteRecurringMeetingRequest
   ): Promise<void> {
     return this.apiService.request({
-      data: request,
       endpoint: `/meeting/recurring/${request.id}${
         request.after ? '?after=' + encodeURIComponent(request.after) : ''
       }`,

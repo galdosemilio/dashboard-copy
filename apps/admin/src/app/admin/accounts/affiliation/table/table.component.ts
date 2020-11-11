@@ -8,7 +8,7 @@ import {
   ViewChild
 } from '@angular/core'
 import { EventEmitter } from '@angular/core'
-import { MatSort } from '@coachcare/common/material'
+import { MatSort } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AppDataSource, getterSorter } from '@coachcare/backend/model'
 import {

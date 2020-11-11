@@ -1,46 +1,46 @@
-import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSidenavModule } from '@coachcare/common/material';
-import { MatToolbarModule } from '@coachcare/common/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Component, Input } from '@angular/core'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatSidenavModule } from '@coachcare/material'
+import { MatToolbarModule } from '@coachcare/material'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing'
 import {
   ConfigService,
   EventsService,
-  LayoutService,
-} from '@coachcare/common/services';
-import { APP_CONFIG } from '@coachcare/common/shared';
-import { projectConfig } from '@coachcare/common/tests';
-import { TranslateModule } from '@ngx-translate/core';
-import { BaseComponent } from './base.component';
+  LayoutService
+} from '@coachcare/common/services'
+import { APP_CONFIG } from '@coachcare/common/shared'
+import { projectConfig } from '@coachcare/common/tests'
+import { TranslateModule } from '@ngx-translate/core'
+import { BaseComponent } from './base.component'
 
 @Component({
   selector: 'ccr-menu',
-  template: '',
+  template: ''
 })
 class MockMenuComponent {
-  @Input() isOpened = false;
+  @Input() isOpened = false
 }
 
 @Component({
   selector: 'ccr-topbar',
-  template: '',
+  template: ''
 })
 class MockTopbarComponent {
-  @Input() translations: any = {};
-  @Input() selectedLanguage: string;
-  @Input() panelEnabled: boolean;
+  @Input() translations: any = {}
+  @Input() selectedLanguage: string
+  @Input() panelEnabled: boolean
 }
 
 @Component({
   selector: 'ccr-footer',
-  template: '',
+  template: ''
 })
 class MockFooterComponent {}
 
 describe('Layout.BaseComponent', () => {
-  let component: BaseComponent;
-  let fixture: ComponentFixture<BaseComponent>;
+  let component: BaseComponent
+  let fixture: ComponentFixture<BaseComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -49,33 +49,33 @@ describe('Layout.BaseComponent', () => {
         MatSidenavModule,
         MatToolbarModule,
         RouterTestingModule,
-        TranslateModule.forChild(),
+        TranslateModule.forChild()
       ],
       declarations: [
         MockFooterComponent,
         MockMenuComponent,
         MockTopbarComponent,
-        BaseComponent,
+        BaseComponent
       ],
       providers: [
         {
           provide: APP_CONFIG,
-          useValue: projectConfig,
+          useValue: projectConfig
         },
         ConfigService,
         EventsService,
-        LayoutService,
-      ],
-    }).compileComponents();
-  }));
+        LayoutService
+      ]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BaseComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(BaseComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

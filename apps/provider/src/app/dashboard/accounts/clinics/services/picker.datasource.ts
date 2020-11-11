@@ -1,4 +1,4 @@
-import { MatPaginator, MatSort } from '@coachcare/common/material'
+import { MatPaginator, MatSort } from '@coachcare/material'
 import { combineLatest, Observable } from 'rxjs'
 
 import { NotifierService } from '@app/service'

@@ -1,36 +1,36 @@
-import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatListModule } from '@coachcare/common/material';
-import { MatToolbarModule } from '@coachcare/common/material';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ConfigService, EventsService } from '@coachcare/common/services';
-import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared';
-import { ApiService, Message } from 'selvera-api';
-import { ApiFactory, MessageFactory } from '../../../services/api.services';
-import { environment, projectConfig } from '../../../tests/index';
-import { MenuComponent } from './menu.component';
+import { Component, Input } from '@angular/core'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatListModule } from '@coachcare/material'
+import { MatToolbarModule } from '@coachcare/material'
+import { RouterTestingModule } from '@angular/router/testing'
+import { ConfigService, EventsService } from '@coachcare/common/services'
+import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared'
+import { ApiService, Message } from 'selvera-api'
+import { ApiFactory, MessageFactory } from '../../../services/api.services'
+import { environment, projectConfig } from '../../../tests/index'
+import { MenuComponent } from './menu.component'
 
 describe('Layout.MenuComponent', () => {
-  let component: MenuComponent;
-  let fixture: ComponentFixture<MenuComponent>;
+  let component: MenuComponent
+  let fixture: ComponentFixture<MenuComponent>
 
   @Component({
     selector: 'ccr-search',
-    template: '',
+    template: ''
   })
   class MockSearchComponent {
-    @Input() fill: string;
+    @Input() fill: string
   }
 
   @Component({
     selector: 'ccr-menuitem',
-    template: '',
+    template: ''
   })
   class MockMenuItemComponent {
-    @Input() menuItem: any;
-    @Input() level = 1;
-    @Input() parent: any;
-    @Input() isMenuOpened = false;
+    @Input() menuItem: any
+    @Input() level = 1
+    @Input() parent: any
+    @Input() isMenuOpened = false
   }
 
   beforeEach(async(() => {
@@ -40,35 +40,35 @@ describe('Layout.MenuComponent', () => {
       providers: [
         {
           provide: APP_ENVIRONMENT,
-          useValue: environment,
+          useValue: environment
         },
         {
           provide: APP_CONFIG,
-          useValue: projectConfig,
+          useValue: projectConfig
         },
         {
           provide: ApiService,
           useFactory: ApiFactory,
-          deps: [APP_ENVIRONMENT],
+          deps: [APP_ENVIRONMENT]
         },
         {
           provide: Message,
           useFactory: MessageFactory,
-          deps: [ApiService],
+          deps: [ApiService]
         },
         ConfigService,
-        EventsService,
-      ],
-    }).compileComponents();
-  }));
+        EventsService
+      ]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(MenuComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

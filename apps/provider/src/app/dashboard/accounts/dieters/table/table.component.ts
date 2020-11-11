@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core'
-import { MatDialog, MatSort, Sort } from '@coachcare/common/material'
+import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Affiliation, OrganizationProvider } from '@coachcare/npm-api'

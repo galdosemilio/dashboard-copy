@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatDialogRef } from '@coachcare/common/material'
+import { MatDialogRef } from '@coachcare/material'
 import { CCRConfig } from '@app/config'
 import { ContextService, NotifierService } from '@app/service'
 import {

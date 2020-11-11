@@ -1,18 +1,18 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppCommonModule } from '@coachcare/common';
-import { CcrFormFieldsModule } from '@coachcare/common/components';
-import { LayoutModule } from '@coachcare/layout';
-import { TranslateModule } from '@ngx-translate/core';
-import { ColorPickerModule } from 'ngx-color-picker';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { AppCommonModule } from '@coachcare/common'
+import { CcrFormFieldsModule } from '@coachcare/common/components'
+import { LayoutModule } from '@coachcare/layout'
+import { TranslateModule } from '@ngx-translate/core'
+import { ColorPickerModule } from 'ngx-color-picker'
 
 import {
   SharedComponents,
-  SharedEntryComponents,
-} from '@board/shared/shared.barrel';
-import { CcrMaterialModule } from '@coachcare/common/material/material.module';
+  SharedEntryComponents
+} from '@board/shared/shared.barrel'
+import { CcrMaterialModule } from '@coachcare/material'
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { CcrMaterialModule } from '@coachcare/common/material/material.module';
     TranslateModule.forChild(),
     AppCommonModule.forChild(),
     CcrFormFieldsModule,
-    CcrMaterialModule,
+    CcrMaterialModule
   ],
   exports: [
     FlexLayoutModule,
@@ -36,9 +36,10 @@ import { CcrMaterialModule } from '@coachcare/common/material/material.module';
     AppCommonModule,
     CcrFormFieldsModule,
     ColorPickerModule,
-    SharedComponents,
+    CcrMaterialModule,
+    SharedComponents
   ],
   declarations: SharedComponents,
-  entryComponents: SharedEntryComponents,
+  entryComponents: SharedEntryComponents
 })
 export class SharedModule {}

@@ -8,7 +8,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Access, AccountProvider, Goal } from '@coachcare/npm-api'
 
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { DieterFormComponent } from '@app/dashboard/accounts/dieters/form'
 import { AccountIdentifierSyncer } from '@app/dashboard/accounts/dieters/form/account-identifiers/utils'
 import { ContextService, EventsService, NotifierService } from '@app/service'

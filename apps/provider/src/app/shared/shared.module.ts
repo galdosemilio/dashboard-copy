@@ -54,7 +54,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import { RouterModule } from '@angular/router'
 import { MatDatepickerModule } from '@coachcare/datepicker'
 import { TranslateModule } from '@ngx-translate/core'
@@ -70,7 +70,8 @@ locales.forEach(async (code: AppLocaleCode) => {
     const locale = await import(`@angular/common/locales/${code}.js`)
     registerLocaleData(locale.default)
   } catch (e) {
-    console.error(e)
+    // fail silently
+    // console.warn(e)
   }
 })
 

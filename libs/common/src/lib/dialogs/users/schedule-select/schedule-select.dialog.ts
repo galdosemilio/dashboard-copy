@@ -10,7 +10,7 @@ import {
   MAT_DIALOG_DATA,
   MatAutocompleteTrigger,
   MatDialogRef
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import {
   AccountProvider,
   AccountAccessData,

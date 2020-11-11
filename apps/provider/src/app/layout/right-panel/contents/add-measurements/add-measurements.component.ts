@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { resolveConfig } from '@app/config/section'
 import { MeasurementsDataService } from '@app/layout/right-panel/services'
 import {

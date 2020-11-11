@@ -1,4 +1,4 @@
-import { MatPaginator } from '@coachcare/common/material'
+import { MatPaginator } from '@coachcare/material'
 import { Observable } from 'rxjs'
 
 import { NotifierService } from '@app/service/notifier.service'

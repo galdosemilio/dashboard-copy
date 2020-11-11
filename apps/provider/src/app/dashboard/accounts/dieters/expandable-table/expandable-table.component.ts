@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core'
-import { MatDialog, MatSort } from '@coachcare/common/material'
+import { MatDialog, MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'

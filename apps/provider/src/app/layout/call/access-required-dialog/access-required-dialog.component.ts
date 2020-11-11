@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core'
-import { MatDialogRef } from '@coachcare/common/material'
+import { MatDialogRef } from '@coachcare/material'
 import { callSelector, CallState } from '@app/layout/store/call'
 import {
   CHECK_DEVICES_COMPLETE,

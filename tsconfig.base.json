@@ -60,6 +60,9 @@
       ],
       "@coachcare/npm-api/*": [
         "libs/npm-api/src/lib/*"
+      ],
+      "@coachcare/material": [
+        "libs/material/src/index.ts"
       ]
     }
   },

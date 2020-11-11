@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { MatDialog, MatSnackBar } from '@coachcare/common/material'
+import { MatDialog, MatSnackBar } from '@coachcare/material'
 import { ConfirmDialog } from '@app/shared/dialogs/confirm.dialog'
 import { AddLogRequest } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'

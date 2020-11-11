@@ -1,32 +1,32 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
-import { Router } from '@angular/router';
-import { FormSubmission } from '@app/dashboard/library/forms/models';
-import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services';
-import { NotifierService } from '@app/service';
-import { PromptDialog } from '@app/shared';
-import { _ } from '@app/shared/utils';
+import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { MatDialog } from '@coachcare/material'
+import { Router } from '@angular/router'
+import { FormSubmission } from '@app/dashboard/library/forms/models'
+import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services'
+import { NotifierService } from '@app/service'
+import { PromptDialog } from '@app/shared'
+import { _ } from '@app/shared/utils'
 
 @Component({
   selector: 'app-dieter-forms-table',
-  templateUrl: './table.component.html',
+  templateUrl: './table.component.html'
 })
 export class DieterFormsTableComponent {
   @Input()
-  source: FormSubmissionsDatasource;
+  source: FormSubmissionsDatasource
 
   @Output()
   selectSubmission: EventEmitter<FormSubmission> = new EventEmitter<
     FormSubmission
-  >();
+  >()
 
   public columns: string[] = [
     'formName',
     'organization',
     'createdAt',
     'createdAtHour',
-    'actions',
-  ];
+    'actions'
+  ]
 
   constructor(
     private dialog: MatDialog,
@@ -38,36 +38,36 @@ export class DieterFormsTableComponent {
     this.router.navigate([
       '/accounts/coaches/',
       formSubmission.submittedBy.id,
-      'profile',
-    ]);
+      'profile'
+    ])
   }
 
   onRemoveSubmission(formSubmission: FormSubmission): void {
     if (!formSubmission.canRemoveSubmission) {
-      return;
+      return
     }
 
     this.dialog
       .open(PromptDialog, {
         data: {
           title: _('LIBRARY.FORMS.REMOVE_SUBMISSION'),
-          content: _('LIBRARY.FORMS.REMOVE_SUBMISSION_DESCRIPTION'),
-        },
+          content: _('LIBRARY.FORMS.REMOVE_SUBMISSION_DESCRIPTION')
+        }
       })
       .afterClosed()
       .subscribe(async (confirm) => {
         try {
           if (confirm) {
-            await this.source.removeSubmission({ id: formSubmission.id });
-            this.source.refresh();
+            await this.source.removeSubmission({ id: formSubmission.id })
+            this.source.refresh()
           }
         } catch (error) {
-          this.notifier.error(error);
+          this.notifier.error(error)
         }
-      });
+      })
   }
 
   onViewForm(submission: FormSubmission): void {
-    this.selectSubmission.emit(submission);
+    this.selectSubmission.emit(submission)
   }
 }

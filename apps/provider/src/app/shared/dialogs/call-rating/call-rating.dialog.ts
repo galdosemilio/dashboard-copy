@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatDialogRef } from '@coachcare/common/material'
+import { MatDialogRef } from '@coachcare/material'
 import { callSelector, CallState } from '@app/layout/store/call'
 import { ContextService, LoggingService, NotifierService } from '@app/service'
 import { _, FormUtils, sleep } from '@app/shared/utils'

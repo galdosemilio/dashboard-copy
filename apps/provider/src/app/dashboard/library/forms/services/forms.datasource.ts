@@ -1,5 +1,5 @@
-import { OnDestroy } from '@angular/core'
-import { MatPaginator } from '@coachcare/common/material'
+import { Directive, OnDestroy } from '@angular/core'
+import { MatPaginator } from '@coachcare/material'
 import { resolveConfig } from '@app/config/section'
 import {
   Form,
@@ -25,6 +25,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
+@Directive()
 export class FormsDatasource
   extends TableDataSource<Form, GetAllFormResponse, GetAllFormRequest>
   implements OnDestroy {

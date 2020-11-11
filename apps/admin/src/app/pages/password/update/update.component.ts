@@ -1,6 +1,6 @@
 import { Component, forwardRef, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MFACodeInputMode } from '@board/shared/mfa-code-input'
 import {

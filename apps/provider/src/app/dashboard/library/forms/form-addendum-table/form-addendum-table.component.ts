@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ViewAddendumDialog } from '@app/dashboard/library/forms/dialogs'
 import { FormSubmission } from '@app/dashboard/library/forms/models'
 import {

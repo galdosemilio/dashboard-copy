@@ -1,14 +1,14 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@coachcare/common/material';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA } from '@coachcare/material'
+import { DomSanitizer } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-content-embedded-content-viewer',
   templateUrl: './embedded-content-viewer.component.html',
-  styleUrls: ['./embedded-content-viewer.component.scss'],
+  styleUrls: ['./embedded-content-viewer.component.scss']
 })
 export class EmbeddedContentViewerComponent {
-  public innerHTML: any;
+  public innerHTML: any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -16,6 +16,6 @@ export class EmbeddedContentViewerComponent {
   ) {
     this.innerHTML = this.domSanitizer.bypassSecurityTrustHtml(
       this.data.content
-    );
+    )
   }
 }

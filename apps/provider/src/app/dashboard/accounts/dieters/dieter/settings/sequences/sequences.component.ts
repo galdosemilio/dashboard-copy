@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatDialog, MatPaginator } from '@coachcare/common/material'
+import { MatDialog, MatPaginator } from '@coachcare/material'
 import { Sequence } from '@app/dashboard/sequencing/models'
 import { ContextService } from '@app/service'
 import { AddRecipientDialog } from '@app/shared'

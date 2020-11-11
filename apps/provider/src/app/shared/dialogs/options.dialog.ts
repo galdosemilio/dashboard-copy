@@ -1,29 +1,29 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export interface OptionsDialogData {
-  title: string;
-  titleParams?: any;
-  content: string;
-  contentParams?: any;
+  title: string
+  titleParams?: any
+  content: string
+  contentParams?: any
   options: Array<{
-    viewValue: string;
-    value: any;
-    color?: string;
-  }>;
-  cancel?: string;
+    viewValue: string
+    value: any
+    color?: string
+  }>
+  cancel?: string
 }
 
 @Component({
   selector: 'app-dialog-options',
   templateUrl: 'options.dialog.html',
-  host: { class: 'ccr-prompt' },
+  host: { class: 'ccr-prompt' }
 })
 export class OptionsDialog {
-  title = '';
-  content = '';
+  title = ''
+  content = ''
 
   constructor(
     public dialogRef: MatDialogRef<OptionsDialog>,
@@ -36,9 +36,9 @@ export class OptionsDialog {
         titleParams: {},
         contentParams: {},
         options: [],
-        cancel: _('GLOBAL.CANCEL'),
+        cancel: _('GLOBAL.CANCEL')
       },
       data
-    );
+    )
   }
 }

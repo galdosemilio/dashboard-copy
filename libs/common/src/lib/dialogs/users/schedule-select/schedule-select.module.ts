@@ -1,16 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   MatAutocompleteModule,
   MatDialogModule,
   MatIconModule,
   MatProgressSpinnerModule,
-  MatSelectModule,
-} from '@coachcare/common/material';
-import { CcrIconsComponentsModule } from '@coachcare/common/components/icons';
-import { TranslateModule } from '@ngx-translate/core';
-import { ScheduleSelectDialog } from './schedule-select.dialog';
+  MatSelectModule
+} from '@coachcare/material'
+import { CcrIconsComponentsModule } from '@coachcare/common/components/icons'
+import { TranslateModule } from '@ngx-translate/core'
+import { ScheduleSelectDialog } from './schedule-select.dialog'
 
 @NgModule({
   imports: [
@@ -23,10 +23,10 @@ import { ScheduleSelectDialog } from './schedule-select.dialog';
     MatProgressSpinnerModule,
     MatSelectModule,
     TranslateModule,
-    CcrIconsComponentsModule,
+    CcrIconsComponentsModule
   ],
   declarations: [ScheduleSelectDialog],
   entryComponents: [ScheduleSelectDialog],
-  exports: [ScheduleSelectDialog],
+  exports: [ScheduleSelectDialog]
 })
 export class CcrScheduleSelectModule {}

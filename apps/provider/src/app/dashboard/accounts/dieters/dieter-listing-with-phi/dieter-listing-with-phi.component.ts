@@ -5,53 +5,53 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { MatDialog, MatSort } from '@coachcare/common/material';
-import { STORAGE_PATIENTS_PAGINATION } from '@app/config';
-import { resolveConfig } from '@app/config/section';
+  ViewEncapsulation
+} from '@angular/core'
+import { MatDialog, MatSort } from '@coachcare/material'
+import { STORAGE_PATIENTS_PAGINATION } from '@app/config'
+import { resolveConfig } from '@app/config/section'
 import {
   ContextService,
   EventsService,
   NotifierService,
-  SelectedOrganization,
-} from '@app/service';
+  SelectedOrganization
+} from '@app/service'
 import {
   _,
   CcrPaginator,
   PackageFilterComponent,
-  unitConversion,
-} from '@app/shared';
-import * as moment from 'moment';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { AccountCreateDialog } from '../../dialogs';
-import { DieterListingDatabase, DieterListingDataSource } from '../services';
-import { DieterListingItem } from './../models';
+  unitConversion
+} from '@app/shared'
+import * as moment from 'moment'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
+import { delay } from 'rxjs/operators'
+import { AccountCreateDialog } from '../../dialogs'
+import { DieterListingDatabase, DieterListingDataSource } from '../services'
+import { DieterListingItem } from './../models'
 
 @Component({
   selector: 'dieter-listing-with-phi',
   templateUrl: './dieter-listing-with-phi.component.html',
   styleUrls: ['./dieter-listing-with-phi.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class DieterListingWithPhiComponent
   implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild(PackageFilterComponent, { static: true })
-  packageFilterComp: PackageFilterComponent;
+  packageFilterComp: PackageFilterComponent
 
   @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator;
+  paginator: CcrPaginator
 
-  clinic: SelectedOrganization;
-  csvSeparator = ',';
-  packageFilter: any;
-  refresh$: Subject<void> = new Subject<void>();
-  packages$: Subject<string[]> = new Subject<string[]>();
-  sort: MatSort = new MatSort();
-  source: DieterListingDataSource;
-  totalCount: number;
+  clinic: SelectedOrganization
+  csvSeparator = ','
+  packageFilter: any
+  refresh$: Subject<void> = new Subject<void>()
+  packages$: Subject<string[]> = new Subject<string[]>()
+  sort: MatSort = new MatSort()
+  source: DieterListingDataSource
+  totalCount: number
 
   constructor(
     private dialog: MatDialog,
@@ -63,99 +63,99 @@ export class DieterListingWithPhiComponent
   ) {}
 
   ngAfterViewInit(): void {
-    this.recoverPagination();
+    this.recoverPagination()
   }
 
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
     // this.bus.trigger('organizations.enable-all');
-    this.bus.trigger('right-panel.component.set', 'notifications');
+    this.bus.trigger('right-panel.component.set', 'notifications')
 
     const errorHandler = function (err) {
       switch (err) {
         case 'You do not have proper permission to access this endpoint':
-          this.addError(_('NOTIFY.ERROR.NO_PATIENT_LISTING_PERMISSION'));
-          break;
+          this.addError(_('NOTIFY.ERROR.NO_PATIENT_LISTING_PERMISSION'))
+          break
         default:
-          this.addError(err);
+          this.addError(err)
       }
-    };
+    }
 
-    this.source = new DieterListingDataSource(this.database, this.paginator);
+    this.source = new DieterListingDataSource(this.database, this.paginator)
     this.source.addRequired(
       this.context.organization$.pipe(delay(100)),
       () => ({
-        organization: this.context.organizationId,
+        organization: this.context.organizationId
       })
-    );
+    )
 
-    this.source.errorHandler = errorHandler;
-    this.source.addOptional(this.refresh$, () => ({ ...this.packageFilter }));
-    this.source.addOptional(this.packages$, () => ({}));
+    this.source.errorHandler = errorHandler
+    this.source.addOptional(this.refresh$, () => ({ ...this.packageFilter }))
+    this.source.addOptional(this.packages$, () => ({}))
     this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.totalCount = this.source.totalCount || 0;
-      this.cdr.detectChanges();
+      this.totalCount = this.source.totalCount || 0
+      this.cdr.detectChanges()
       if (
         this.source.result &&
         !this.source.result.length &&
         this.paginator.pageIndex
       ) {
-        this.paginator.firstPage();
+        this.paginator.firstPage()
       }
-    });
+    })
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
-      this.clinic = org;
-      this.source.resetPaginator();
-    });
+      this.clinic = org
+      this.source.resetPaginator()
+    })
 
     this.paginator.page.pipe(untilDestroyed(this)).subscribe((page) => {
       window.localStorage.setItem(
         STORAGE_PATIENTS_PAGINATION,
         JSON.stringify({
           page: page.pageIndex,
-          organization: this.context.organizationId,
+          organization: this.context.organizationId
         })
-      );
-    });
+      )
+    })
   }
 
   onPackageFilter(filter): void {
-    this.packageFilter = filter;
-    this.packages$.next();
+    this.packageFilter = filter
+    this.packages$.next()
   }
 
   onSorted(): void {
-    this.packageFilterComp.resetFilters();
+    this.packageFilterComp.resetFilters()
   }
 
   createDialog(): void {
     if (!this.clinic.permissions.admin) {
-      this.notifier.error(_('NOTIFY.ERROR.CANNOT_CREATE_ACCOUNTS'));
-      return;
+      this.notifier.error(_('NOTIFY.ERROR.CANNOT_CREATE_ACCOUNTS'))
+      return
     }
 
     const dialog = resolveConfig(
       'PATIENT_LISTING.PAYMENT_DISCLAIMER',
       this.context.organization
-    );
+    )
 
     if (dialog && dialog.component) {
       this.dialog
         .open(dialog.component, {
           disableClose: true,
           width: '80vw',
-          panelClass: 'ccr-full-dialog',
+          panelClass: 'ccr-full-dialog'
         })
         .afterClosed()
         .subscribe((agree) => {
           if (agree) {
-            this.onOpenAccountCreateDialog();
+            this.onOpenAccountCreateDialog()
           }
-        });
+        })
     } else {
-      this.onOpenAccountCreateDialog();
+      this.onOpenAccountCreateDialog()
     }
   }
 
@@ -164,39 +164,39 @@ export class DieterListingWithPhiComponent
       .open(AccountCreateDialog, {
         disableClose: true,
         data: {
-          accountType: 'dieter',
+          accountType: 'dieter'
         },
         width: '80vw',
-        panelClass: 'ccr-full-dialog',
+        panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
       .subscribe((user) => {
         if (user) {
-          this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_CREATED'));
-          this.source.refresh();
+          this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_CREATED'))
+          this.source.refresh()
         }
-      });
+      })
   }
 
   async downloadCSV() {
     try {
-      this.source.isLoading = true;
-      this.source.change$.next();
-      const maxPerCSV = 5000;
-      const csvAmount = Math.ceil(this.totalCount / maxPerCSV);
+      this.source.isLoading = true
+      this.source.change$.next()
+      const maxPerCSV = 5000
+      const csvAmount = Math.ceil(this.totalCount / maxPerCSV)
 
       if (csvAmount > 1) {
-        this.notifier.info(_('NOTIFY.INFO.MULTIPLE_CSV_FILES'));
+        this.notifier.info(_('NOTIFY.INFO.MULTIPLE_CSV_FILES'))
       }
 
       for (let i = 0; i < csvAmount; ++i) {
-        await this.generateSingleCSV(maxPerCSV, maxPerCSV * i);
+        await this.generateSingleCSV(maxPerCSV, maxPerCSV * i)
       }
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     } finally {
-      this.source.isLoading = false;
-      this.source.change$.next();
+      this.source.isLoading = false
+      this.source.change$.next()
     }
   }
 
@@ -209,21 +209,21 @@ export class DieterListingWithPhiComponent
         ...this.source.args,
         limit: limit,
         offset: offset,
-        organization: this.context.organizationId,
-      };
-
-      const rawPreference = this.context.user.measurementPreference;
-      const weightUnit = rawPreference === 'metric' ? 'kg' : 'lbs';
-      const res = await this.database.fetch(criteria);
-
-      if (!res.data.length) {
-        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'));
+        organization: this.context.organizationId
       }
 
-      const orgName = this.context.organization.name.replace(/\s/g, '_');
-      const filename = `${orgName}_Patient_List.csv`;
-      let csv = '';
-      csv += 'PATIENT LIST\r\n';
+      const rawPreference = this.context.user.measurementPreference
+      const weightUnit = rawPreference === 'metric' ? 'kg' : 'lbs'
+      const res = await this.database.fetch(criteria)
+
+      if (!res.data.length) {
+        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+      }
+
+      const orgName = this.context.organization.name.replace(/\s/g, '_')
+      const filename = `${orgName}_Patient_List.csv`
+      let csv = ''
+      csv += 'PATIENT LIST\r\n'
       csv +=
         'ID' +
         this.csvSeparator +
@@ -274,7 +274,7 @@ export class DieterListingWithPhiComponent
         'Phase Name (3)' +
         this.csvSeparator +
         'More Phase Enrollments?' +
-        '\r\n';
+        '\r\n'
 
       res.data
         .map(
@@ -285,7 +285,7 @@ export class DieterListingWithPhiComponent
               organizations: element.organizations.data,
               orgCount: element.organizations.count,
               packages: element.packages.data,
-              packageCount: element.packages.count,
+              packageCount: element.packages.count
             })
         )
         .forEach((d) => {
@@ -380,36 +380,36 @@ export class DieterListingWithPhiComponent
             `"${d.packages[2] ? d.packages[2].name : ''}"` +
             this.csvSeparator +
             `"${d.packageCount > 3 ? 'Yes' : 'No'}"` +
-            '\r\n';
-        });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.setAttribute('visibility', 'hidden');
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      return Promise.resolve();
+            '\r\n'
+        })
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.setAttribute('visibility', 'hidden')
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      return Promise.resolve()
     } catch (error) {
-      this.notifier.error(error);
+      this.notifier.error(error)
     }
   }
 
   private recoverPagination(): void {
     const rawPagination = window.localStorage.getItem(
       STORAGE_PATIENTS_PAGINATION
-    );
+    )
     if (rawPagination) {
-      const pagination = JSON.parse(rawPagination);
+      const pagination = JSON.parse(rawPagination)
 
       if (pagination.organization === this.context.organizationId) {
-        this.paginator.pageIndex = pagination.page;
-        this.source.pageIndex = pagination.page;
-        this.cdr.detectChanges();
-        this.refresh$.next();
+        this.paginator.pageIndex = pagination.page
+        this.source.pageIndex = pagination.page
+        this.cdr.detectChanges()
+        this.refresh$.next()
       } else {
-        window.localStorage.removeItem(STORAGE_PATIENTS_PAGINATION);
+        window.localStorage.removeItem(STORAGE_PATIENTS_PAGINATION)
       }
     }
   }

@@ -1,27 +1,27 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 
-import { LanguageService } from '@app/service';
-import { _ } from '@app/shared/utils/i18n.utils';
+import { LanguageService } from '@app/service'
+import { _ } from '@app/shared/utils/i18n.utils'
 
 export interface GridDialogContent {
-  rows?: number;
-  class?: string;
-  cols?: number;
-  text: string;
+  rows?: number
+  class?: string
+  cols?: number
+  text: string
 }
 
 export interface GridDialogData {
-  title: GridDialogContent;
-  rowHeight?: number;
-  cols: number;
-  contents: Array<GridDialogContent>;
+  title: GridDialogContent
+  rowHeight?: number
+  cols: number
+  contents: Array<GridDialogContent>
 }
 
 @Component({
   selector: 'app-dialog-grid',
   templateUrl: 'grid.dialog.html',
-  host: { class: 'ccr-dialog ccr-grid-dialog' },
+  host: { class: 'ccr-dialog ccr-grid-dialog' }
 })
 export class GridDialog {
   constructor(
@@ -36,9 +36,9 @@ export class GridDialog {
         title: {},
         rowHeight: 0,
         cols: 0,
-        contents: [],
+        contents: []
       },
       data
-    );
+    )
   }
 }

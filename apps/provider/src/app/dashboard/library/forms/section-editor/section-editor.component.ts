@@ -9,11 +9,7 @@ import {
   ViewChild
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import {
-  MatDialog,
-  MatSelect,
-  MatSelectChange
-} from '@coachcare/common/material'
+import { MatDialog, MatSelect, MatSelectChange } from '@coachcare/material'
 import {
   FormQuestion,
   FormQuestionType,

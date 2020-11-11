@@ -8,7 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { MatAutocompleteTrigger } from '@coachcare/common/material'
+import { MatAutocompleteTrigger } from '@coachcare/material'
 import { AccountProvider, Messaging } from '@coachcare/npm-api'
 
 import { MessageRecipient } from '@app/shared'

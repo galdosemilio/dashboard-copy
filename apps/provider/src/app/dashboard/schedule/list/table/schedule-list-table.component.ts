@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatDialog, MatSort } from '@coachcare/common/material'
+import { MatDialog, MatSort } from '@coachcare/material'
 import { ScheduleDataService } from '@app/layout/right-panel/services'
 import { EventsService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared'

@@ -25,7 +25,7 @@ import {
   MAT_LABEL_GLOBAL_OPTIONS,
   MatDialog,
   MatStepper
-} from '@coachcare/common/material'
+} from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { resolveConfig } from '@board/pages/config/section.config'
 import { Register } from '@coachcare/npm-api'

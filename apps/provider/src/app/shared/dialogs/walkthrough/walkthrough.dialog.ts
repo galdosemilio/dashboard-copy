@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { sleep } from '@app/shared/utils'
 

@@ -1,5 +1,5 @@
-import { OnInit } from '@angular/core'
-import { MatPaginator } from '@coachcare/common/material'
+import { Directive, OnInit } from '@angular/core'
+import { MatPaginator } from '@coachcare/material'
 import { MessageType, MessageTypes } from '@app/dashboard/sequencing/models'
 import { TableDataSource } from '@app/shared'
 import {
@@ -11,6 +11,7 @@ import {
 import { from, Observable } from 'rxjs'
 import { TriggerHistoryDatabase } from './trigger-history.database'
 
+@Directive()
 export class TriggerHistoryDataSource
   extends TableDataSource<
     TriggerHistoryItem,

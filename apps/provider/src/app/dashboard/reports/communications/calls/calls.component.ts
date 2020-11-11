@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatDialog, MatSelectChange } from '@coachcare/common/material'
+import { MatDialog, MatSelectChange } from '@coachcare/material'
 import {
   ContextService,
   NotifierService,

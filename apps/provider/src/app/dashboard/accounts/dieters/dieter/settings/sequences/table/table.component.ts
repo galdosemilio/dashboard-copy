@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core'
-import { MatDialog, MatPaginator } from '@coachcare/common/material'
+import { MatDialog, MatPaginator } from '@coachcare/material'
 import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { ContextService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'

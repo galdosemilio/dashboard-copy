@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { MeasurementDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { MeasurementDataSource } from '@app/dashboard/accounts/dieters/services'
 import { ContextService, NotifierService } from '@app/service'

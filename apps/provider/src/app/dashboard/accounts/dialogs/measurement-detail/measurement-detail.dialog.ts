@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { MAT_DIALOG_DATA } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import * as moment from 'moment'
 import { IncludeRecord, SummaryProperty } from '@coachcare/npm-api'

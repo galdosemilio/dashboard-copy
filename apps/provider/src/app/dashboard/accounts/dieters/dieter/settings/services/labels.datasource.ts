@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { MatPaginator, MatSort } from '@coachcare/common/material'
+import { MatPaginator, MatSort } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { _, TableDataSource } from '@app/shared'
 import {

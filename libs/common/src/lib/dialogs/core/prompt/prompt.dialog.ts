@@ -1,18 +1,18 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material';
-import { _ } from '@coachcare/backend/shared';
-import { PromptDialogData } from './prompt-data.interface';
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
+import { _ } from '@coachcare/backend/shared'
+import { PromptDialogData } from './prompt-data.interface'
 
 @Component({
   selector: 'ccr-dialog-prompt',
   templateUrl: 'prompt.dialog.html',
   host: {
-    class: 'ccr-dialog ccr-prompt',
-  },
+    class: 'ccr-dialog ccr-prompt'
+  }
 })
 export class PromptDialog {
-  title = '';
-  content = '';
+  title = ''
+  content = ''
 
   constructor(
     public dialogRef: MatDialogRef<PromptDialog>,
@@ -26,7 +26,7 @@ export class PromptDialog {
       no: _('GLOBAL.NO'),
       yes: _('GLOBAL.YES'),
       color: 'warn',
-      ...data,
-    };
+      ...data
+    }
   }
 }

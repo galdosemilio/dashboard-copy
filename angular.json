@@ -76,8 +76,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "10mb"
+                  "maximumWarning": "13mb",
+                  "maximumError": "14mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -104,8 +104,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "10mb"
+                  "maximumWarning": "13mb",
+                  "maximumError": "14mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -157,7 +157,7 @@
               "browserTarget": "provider:build:test"
             },
             "standalone": {
-              "browserTarget": "provider:build:standalone"
+              "browserTarget": "provider:build"
             }
           }
         },
@@ -538,6 +538,36 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/npm-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "libs/material",
+      "sourceRoot": "libs/material/src",
+      "prefix": "dashboard",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/material/tsconfig.lib.json",
+              "libs/material/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/material/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/material/jest.config.js",
             "passWithNoTests": true
           }
         }

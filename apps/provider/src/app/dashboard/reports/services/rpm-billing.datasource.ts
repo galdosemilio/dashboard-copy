@@ -1,4 +1,4 @@
-import { MatSort } from '@coachcare/common/material'
+import { MatSort } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { CcrPaginator } from '@app/shared/components/paginator'
 import { TableDataSource } from '@app/shared/model'

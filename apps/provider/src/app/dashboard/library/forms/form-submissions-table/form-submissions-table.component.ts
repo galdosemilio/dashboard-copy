@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { FormSubmission } from '@app/dashboard/library/forms/models'
 import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services'

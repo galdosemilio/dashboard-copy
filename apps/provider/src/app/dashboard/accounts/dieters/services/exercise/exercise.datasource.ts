@@ -1,4 +1,4 @@
-import { MatPaginator } from '@coachcare/common/material'
+import { MatPaginator } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { TableDataSource } from '@app/shared'
 import {

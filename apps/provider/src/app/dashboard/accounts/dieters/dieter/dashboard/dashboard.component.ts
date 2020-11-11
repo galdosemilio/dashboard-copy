@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatSelect, MatSelectChange } from '@coachcare/common/material'
+import { MatSelect, MatSelectChange } from '@coachcare/material'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { DieterDashboardSummary } from '@coachcare/npm-api'

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { TranslationsObject } from '@coachcare/backend/shared'
 import { _ } from '@coachcare/backend/shared'
 import { LanguagesDialog } from '@coachcare/common/dialogs/core'

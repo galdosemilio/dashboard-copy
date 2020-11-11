@@ -1,10 +1,7 @@
-import { Component, forwardRef } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import {
-  MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef,
-} from '@coachcare/common/material';
-import { BindForm, BINDFORM_TOKEN } from '@app/shared';
+import { Component, forwardRef } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { MAT_LABEL_GLOBAL_OPTIONS, MatDialogRef } from '@coachcare/material'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 
 @Component({
   selector: 'app-library-form-create-dialog',
@@ -14,30 +11,30 @@ import { BindForm, BINDFORM_TOKEN } from '@app/shared';
   providers: [
     {
       provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => FormCreateDialog),
+      useExisting: forwardRef(() => FormCreateDialog)
     },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
-  ],
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+  ]
 })
 export class FormCreateDialog implements BindForm {
-  public form: FormGroup;
+  public form: FormGroup
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<FormCreateDialog>
   ) {
-    this.createForm();
+    this.createForm()
   }
 
   cancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   closeDialog(): void {
-    this.dialogRef.close(this.form.value.details);
+    this.dialogRef.close(this.form.value.details)
   }
 
   private createForm(): void {
-    this.form = this.formBuilder.group({});
+    this.form = this.formBuilder.group({})
   }
 }

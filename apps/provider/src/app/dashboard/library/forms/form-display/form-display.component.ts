@@ -1,6 +1,6 @@
 import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/common/material'
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Form, FormSubmission } from '@app/dashboard/library/forms/models'
 import { FormDisplayService } from '@app/dashboard/library/forms/services'

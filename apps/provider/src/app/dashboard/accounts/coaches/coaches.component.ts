@@ -7,7 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core'
-import { MatDialog, MatSort, Sort } from '@coachcare/common/material'
+import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 
 import { STORAGE_COACHES_PAGINATION } from '@app/config'

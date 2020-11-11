@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
   MatProgressBarModule,
   MatSelectModule,
-  MatStepperModule,
-} from '@coachcare/common/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { CommonTestingModule } from '@coachcare/common';
-import { CcrFormFieldsModule } from '@coachcare/common/components';
-import { RegisterClinicPageComponent } from './clinic.component';
-import { RegisterClinicInfoPageComponent } from './info/info.component';
-import { RegisterClinicPaymentPageComponent } from './payment/payment.component';
+  MatStepperModule
+} from '@coachcare/material'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing'
+import { CommonTestingModule } from '@coachcare/common'
+import { CcrFormFieldsModule } from '@coachcare/common/components'
+import { RegisterClinicPageComponent } from './clinic.component'
+import { RegisterClinicInfoPageComponent } from './info/info.component'
+import { RegisterClinicPaymentPageComponent } from './payment/payment.component'
 
 describe('RegisterClinicPageComponent', () => {
-  let component: RegisterClinicPageComponent;
-  let fixture: ComponentFixture<RegisterClinicPageComponent>;
+  let component: RegisterClinicPageComponent
+  let fixture: ComponentFixture<RegisterClinicPageComponent>
 
   // global object mock
   window['Stripe'] = (key: string) => ({
@@ -26,10 +26,10 @@ describe('RegisterClinicPageComponent', () => {
     elements: () => ({
       create: () => ({
         mount: (id: string) => {},
-        addEventListener: () => {},
-      }),
-    }),
-  });
+        addEventListener: () => {}
+      })
+    })
+  })
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,24 +45,24 @@ describe('RegisterClinicPageComponent', () => {
         MatSelectModule,
         MatStepperModule,
         RouterTestingModule,
-        CommonTestingModule.forRoot(),
+        CommonTestingModule.forRoot()
       ],
       declarations: [
         RegisterClinicPageComponent,
         // TODO mock these
         RegisterClinicInfoPageComponent,
-        RegisterClinicPaymentPageComponent,
-      ],
-    }).compileComponents();
-  }));
+        RegisterClinicPaymentPageComponent
+      ]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterClinicPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RegisterClinicPageComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

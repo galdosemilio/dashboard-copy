@@ -10,7 +10,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatSort, MatTable } from '@coachcare/common/material'
+import { MatSort, MatTable } from '@coachcare/material'
 import { FileExplorerBase } from '@app/dashboard/content/file-explorer-base/file-explorer-base'
 import {
   CONTENT_TYPE_MAP,

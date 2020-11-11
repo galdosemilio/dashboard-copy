@@ -1,49 +1,49 @@
-import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule } from '@coachcare/common/material';
-import { MatIconModule } from '@coachcare/common/material';
-import { MatMenuModule } from '@coachcare/common/material';
-import { CcrPipesModule } from '@coachcare/common/pipes';
+import { Component, Input } from '@angular/core'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatButtonModule } from '@coachcare/material'
+import { MatIconModule } from '@coachcare/material'
+import { MatMenuModule } from '@coachcare/material'
+import { CcrPipesModule } from '@coachcare/common/pipes'
 import {
   AuthService,
   ConfigService,
   CookieService,
   EventsService,
   LanguageService,
-  LayoutService,
-} from '@coachcare/common/services';
-import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared';
-import { TranslateModule } from '@ngx-translate/core';
-import { ApiService, User } from 'selvera-api';
-import { ApiFactory, UserFactory } from '../../../services/api.services';
-import { environment, projectConfig } from '../../../tests/index';
-import { TopbarComponent } from './topbar.component';
+  LayoutService
+} from '@coachcare/common/services'
+import { APP_CONFIG, APP_ENVIRONMENT } from '@coachcare/common/shared'
+import { TranslateModule } from '@ngx-translate/core'
+import { ApiService, User } from 'selvera-api'
+import { ApiFactory, UserFactory } from '../../../services/api.services'
+import { environment, projectConfig } from '../../../tests/index'
+import { TopbarComponent } from './topbar.component'
 
 class MockAuthService {
   check() {
-    return true;
+    return true
   }
 }
 
 @Component({
   selector: 'ccr-search',
-  template: '',
+  template: ''
 })
 class MockSearchComponent {
-  @Input() fill: string;
+  @Input() fill: string
 }
 
 @Component({
   selector: 'ccr-icon-user',
-  template: '',
+  template: ''
 })
 class MockIconUserComponent {
-  @Input() fill: string;
+  @Input() fill: string
 }
 
 describe('Layout.TopbarComponent', () => {
-  let component: TopbarComponent;
-  let fixture: ComponentFixture<TopbarComponent>;
+  let component: TopbarComponent
+  let fixture: ComponentFixture<TopbarComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -52,52 +52,52 @@ describe('Layout.TopbarComponent', () => {
         MatIconModule,
         MatMenuModule,
         TranslateModule.forRoot(),
-        CcrPipesModule,
+        CcrPipesModule
       ],
       declarations: [
         TopbarComponent,
         MockSearchComponent,
-        MockIconUserComponent,
+        MockIconUserComponent
       ],
       providers: [
         {
           provide: APP_ENVIRONMENT,
-          useValue: environment,
+          useValue: environment
         },
         {
           provide: APP_CONFIG,
-          useValue: projectConfig,
+          useValue: projectConfig
         },
         {
           provide: ApiService,
           useFactory: ApiFactory,
-          deps: [APP_ENVIRONMENT],
+          deps: [APP_ENVIRONMENT]
         },
         {
           provide: User,
           useFactory: UserFactory,
-          deps: [ApiService],
+          deps: [ApiService]
         },
         {
           provide: AuthService,
-          useClass: MockAuthService,
+          useClass: MockAuthService
         },
         CookieService,
         ConfigService,
         EventsService,
         LanguageService,
-        LayoutService,
-      ],
-    }).compileComponents();
-  }));
+        LayoutService
+      ]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopbarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(TopbarComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

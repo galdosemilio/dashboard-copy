@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'

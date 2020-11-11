@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatDialog } from '@coachcare/common/material'
+import { MatDialog } from '@coachcare/material'
 import { AccountPassword } from '@coachcare/npm-api'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { ConfirmDialog } from '@coachcare/common/dialogs/core'

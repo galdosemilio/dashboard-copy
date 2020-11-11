@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/common/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { FormUtils } from '@app/shared'
 import * as moment from 'moment'

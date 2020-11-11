@@ -3,47 +3,47 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
-import { MatDialog } from '@coachcare/common/material';
+  ViewEncapsulation
+} from '@angular/core'
+import { MatDialog } from '@coachcare/material'
 import {
   ActivatedRoute,
   ActivatedRouteSnapshot,
   NavigationEnd,
-  Router,
-} from '@angular/router';
-import { _ } from '@coachcare/backend/shared';
-import { ContextService } from '@coachcare/common/services';
-import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+  Router
+} from '@angular/router'
+import { _ } from '@coachcare/backend/shared'
+import { ContextService } from '@coachcare/common/services'
+import { Subscription } from 'rxjs'
+import { filter, map } from 'rxjs/operators'
 
-import { LanguagesDialog } from '@coachcare/common/dialogs/core';
-import { get } from 'lodash';
-import { PlainLayoutConfig } from '../plain-layout.config';
+import { LanguagesDialog } from '@coachcare/common/dialogs/core'
+import { get } from 'lodash'
+import { PlainLayoutConfig } from '../plain-layout.config'
 
 @Component({
   selector: 'ccr-plain-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class BaseComponent implements OnInit, OnDestroy {
-  headerLink = false;
-  logoOverrideClass = '';
-  subs: Array<Subscription> = [];
-  orgId: string;
+  headerLink = false
+  logoOverrideClass = ''
+  subs: Array<Subscription> = []
+  orgId: string
 
-  linkSupport: string;
-  linkTerms: string;
-  linkPrivacy: string;
-  linkDpa: string;
-  linkMsa: string;
-  linkHipaa: string;
+  linkSupport: string
+  linkTerms: string
+  linkPrivacy: string
+  linkDpa: string
+  linkMsa: string
+  linkHipaa: string
 
-  @Input() lang: string;
-  @Input() logoUrl: string;
-  @Input() displayName: string;
-  @Input() mala: any;
+  @Input() lang: string
+  @Input() logoUrl: string
+  @Input() displayName: string
+  @Input() mala: any
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -58,40 +58,40 @@ export class BaseComponent implements OnInit, OnDestroy {
         map(() => this.activatedRoute.snapshot),
         map((route) => {
           while (route.firstChild) {
-            route = route.firstChild;
+            route = route.firstChild
           }
-          return route;
+          return route
         })
       )
       .subscribe((route: ActivatedRouteSnapshot) => {
-        const config: PlainLayoutConfig = route.data.layout || {};
-        this.headerLink = config.headerLink ? true : false;
-      });
+        const config: PlainLayoutConfig = route.data.layout || {}
+        this.headerLink = config.headerLink ? true : false
+      })
   }
 
   ngOnInit() {
-    this.orgId = this.context.organizationId || '';
+    this.orgId = this.context.organizationId || ''
 
     if (this.mala) {
-      this.linkTerms = get(this.mala, 'custom.links.terms');
-      this.linkPrivacy = get(this.mala, 'custom.links.privacy');
-      this.linkSupport = get(this.mala, 'custom.links.providerContact');
-      this.linkHipaa = get(this.mala, 'custom.links.hipaa');
-      this.linkMsa = get(this.mala, 'custom.links.msa');
-      this.linkDpa = get(this.mala, 'custom.links.dpa');
+      this.linkTerms = get(this.mala, 'custom.links.terms')
+      this.linkPrivacy = get(this.mala, 'custom.links.privacy')
+      this.linkSupport = get(this.mala, 'custom.links.providerContact')
+      this.linkHipaa = get(this.mala, 'custom.links.hipaa')
+      this.linkMsa = get(this.mala, 'custom.links.msa')
+      this.linkDpa = get(this.mala, 'custom.links.dpa')
     }
   }
 
   ngOnDestroy() {
-    this.subs.forEach((s) => s.unsubscribe());
+    this.subs.forEach((s) => s.unsubscribe())
   }
 
   selectLanguage() {
     this.dialog.open(LanguagesDialog, {
       data: {
-        title: _('GLOBAL.SELECT_LANGUAGE'),
+        title: _('GLOBAL.SELECT_LANGUAGE')
       },
-      panelClass: 'ccr-lang-dialog',
-    });
+      panelClass: 'ccr-lang-dialog'
+    })
   }
 }
