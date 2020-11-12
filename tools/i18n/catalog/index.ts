@@ -32,10 +32,7 @@ export class Catalog {
   }
 
   public union(base: Catalog) {
-    this.collection = base.collection
-      .union(this.collection)
-      .intersect(base.collection)
-      .sort()
+    this.collection = base.collection.sort()
   }
 
   public compile(): string {

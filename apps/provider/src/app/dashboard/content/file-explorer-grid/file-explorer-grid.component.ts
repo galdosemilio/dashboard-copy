@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit
+} from '@angular/core'
 import {
   ContentMovedEvent,
   FileExplorerContent
@@ -11,8 +17,12 @@ import { FileExplorerBase } from '../file-explorer-base/file-explorer-base'
   templateUrl: './file-explorer-grid.component.html',
   styleUrls: ['./file-explorer-grid.component.scss']
 })
-export class FileExplorerGridComponent extends FileExplorerBase
+export class FileExplorerGridComponent
+  extends FileExplorerBase
   implements OnDestroy, OnInit {
+
+  @Input() inaccessible?: boolean
+
   public contentDirectories: FileExplorerContent[]
   public route: FileExplorerContent[] = []
   public selectedContentId: string

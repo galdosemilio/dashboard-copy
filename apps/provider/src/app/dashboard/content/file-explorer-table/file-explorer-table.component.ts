@@ -58,6 +58,8 @@ export class FileExplorerTableComponent extends FileExplorerBase
   @Input()
   hiddenColumns: string[] = ['selector']
   @Input()
+  inaccessible?: boolean
+  @Input()
   initialRoutes: FileExplorerRoute[] = []
   @Input()
   mode: 'digital-library' | 'vault'

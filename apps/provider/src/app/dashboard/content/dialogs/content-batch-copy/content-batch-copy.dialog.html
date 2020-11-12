@@ -14,7 +14,6 @@
             <ng-template matStepLabel>{{ 'LIBRARY.FORMS.SELECT_CONTENT' | translate }}</ng-template>
             <div class="first-step-container" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="10px">
                 <div fxFlex="49%">
-                    <ccr-datasource-overlay [source]="datasource" class="ccr-table">
                     <app-content-file-explorer-table
                         [allowBreadcrumbs]="false"
                         [allowInlineEdit]="false"
@@ -25,7 +24,6 @@
                         [source]="datasource"
                         [organization]="organization"
                     ></app-content-file-explorer-table>
-                    </ccr-datasource-overlay>
                 </div>
                 <div
                 class="selected-contents-container"

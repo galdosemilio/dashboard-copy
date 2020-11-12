@@ -853,7 +853,7 @@
       "DEFAULT_TIMEOUT": "Loading has timed out, please try again.",
       "DEFAULT_WAIT": "Please wait...",
       "NO_CONTENT_AVAILABLE": "No content available.",
-      "NO_CONTENT_SUBFOLDER": "There are no contents on this subfolder.",
+      "NO_CONTENT_SUBFOLDER": "There is no content in this subfolder.",
       "NO_DATA_AVAILABLE": "No data available.",
       "NO_FORMS_AVAILABLE": "No forms available.",
       "NO_FORM_SUBMISSIONS_YET": "No form submissions yet.",

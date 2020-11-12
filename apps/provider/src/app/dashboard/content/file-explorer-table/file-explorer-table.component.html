@@ -48,6 +48,7 @@
 
 </div>
 
+<ccr-datasource-overlay [inaccessible]="inaccessible" [source]="source" class="ccr-table">
 <div class="ccr-edit-table">
     <mat-table [dataSource]="source" class="ccr-edit-table" matSort>
         <ng-container cdkColumnDef="selector">
@@ -168,3 +169,4 @@
         ></mat-row>
     </mat-table>
 </div>
+</ccr-datasource-overlay>

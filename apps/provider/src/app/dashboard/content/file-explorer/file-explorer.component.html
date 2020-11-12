@@ -1,12 +1,9 @@
 <div fxLayout="row" fxLayoutGap="1%">
     <div [fxFlex]="selectedContent ? '70%' : '100%'" class="file-explorer-wrapper" [class.scrollable]="mode === 'list'">
-        <ccr-datasource-overlay
-        [inaccessible]="useMode === 'vault' && (!organization || !organization.permissions.allowClientPhi)"
-        [ngSwitch]="mode"
-        [source]="datasource"
-        class="ccr-table">
+        <div [ngSwitch]="mode">
             <app-content-file-explorer-table
                 *ngSwitchCase="'list'"
+                [inaccessible]="useMode === 'vault' && (!organization || !organization.permissions.allowClientPhi)"
                 [mode]="useMode"
                 [source]="datasource"
                 [events]="events"
@@ -15,10 +12,11 @@
 
             <app-content-file-explorer-grid
                 *ngSwitchCase="'grid'"
+                [inaccessible]="useMode === 'vault' && (!organization || !organization.permissions.allowClientPhi)"
                 [source]="datasource"
                 [events]="events"
             ></app-content-file-explorer-grid>
-        </ccr-datasource-overlay>
+        </div>
     </div>
 
     <div *ngIf="selectedContent" fxFlex="30%">
