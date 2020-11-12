@@ -10,8 +10,7 @@
   </h3>
 
   <div fxLayout="row" fxLayoutGap="7px">
-    <button mat-button class="ccr-align-center"
-    [disabled]="!simpleReport" (click)="downloadDetailedCSV()">
+    <button mat-button class="ccr-align-center" (click)="downloadDetailedCSV()">
       {{ 'REPORTS.EXPORT_DETAILED_CSV' | translate }}
       <mat-icon>file_download</mat-icon>
     </button>

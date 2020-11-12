@@ -92,26 +92,7 @@ export class EnrollmentChartComponent implements OnInit, OnDestroy {
         this.refresh(chart)
       })
 
-    this.refresh$.subscribe(async () => {
-      this.simpleReport = null
-      try {
-        this.resolveIdentifierNames()
-        this.simpleReport = await this.database.fetchSimpleEnrollmentReport({
-          organization: this.data ? this.data.organization : null,
-          range: {
-            start: this.data ? moment(this.data.startDate).toISOString() : null,
-            end: this.data
-              ? moment(this.data.endDate).add(1, 'day').toISOString()
-              : null
-          },
-          enrollmentLimit: 'all',
-          limit: 'all'
-        })
-      } catch (error) {
-        this.simpleReport = null
-        this.notifier.error(error)
-      }
-    })
+    this.refresh$.subscribe(() => this.resolveIdentifierNames())
 
     this.store
       .pipe(untilDestroyed(this), select(criteriaSelector))
@@ -153,40 +134,56 @@ export class EnrollmentChartComponent implements OnInit, OnDestroy {
     }, 500)
   }
 
-  downloadDetailedCSV() {
-    const startDate = moment(this.data.startDate).format('YYYY-MM-DD')
-    const endDate = moment(this.data.endDate).format('YYYY-MM-DD')
-    const headers = [
-      'Account ID',
-      'Account First Name',
-      'Account Last Name',
-      'Account Email',
-      'Account External Identifiers',
-      'Organization ID',
-      'Organization Name',
-      'Organization External Identifiers',
-      'Package ID',
-      'Package Name',
-      'Package Enrollment Start',
-      'Package Enrollment End'
-    ]
-    const filename = `enrollment_details_${startDate}_${endDate}.csv`
+  async downloadDetailedCSV(): Promise<void> {
+    try {
+      this.simpleReport = await this.database.fetchSimpleEnrollmentReport({
+        organization: this.data ? this.data.organization : null,
+        range: {
+          start: this.data ? moment(this.data.startDate).toISOString() : null,
+          end: this.data
+            ? moment(this.data.endDate).add(1, 'day').toISOString()
+            : null
+        },
+        enrollmentLimit: 'all',
+        limit: 'all'
+      })
 
-    let csv = ''
-    csv += `DIETER PHASE ENROLLMENT: ${startDate} - ${endDate}` + '\r\n'
-    csv += headers.join(this.csvSeparator) + '\r\n'
-    const items = this.preprocessSimpleReportElements(this.simpleReport.data)
+      const startDate = moment(this.data.startDate).format('YYYY-MM-DD')
+      const endDate = moment(this.data.endDate).format('YYYY-MM-DD')
+      const headers = [
+        'Account ID',
+        'Account First Name',
+        'Account Last Name',
+        'Account Email',
+        'Account External Identifiers',
+        'Organization ID',
+        'Organization Name',
+        'Organization External Identifiers',
+        'Package ID',
+        'Package Name',
+        'Package Enrollment Start',
+        'Package Enrollment End'
+      ]
+      const filename = `enrollment_details_${startDate}_${endDate}.csv`
 
-    csv += this.renderDetailedCSV(items)
+      let csv = ''
+      csv += `DIETER PHASE ENROLLMENT: ${startDate} - ${endDate}` + '\r\n'
+      csv += headers.join(this.csvSeparator) + '\r\n'
+      const items = this.preprocessSimpleReportElements(this.simpleReport.data)
 
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-    const link = document.createElement('a')
-    link.href = URL.createObjectURL(blob)
-    link.setAttribute('visibility', 'hidden')
-    link.download = filename
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+      csv += this.renderDetailedCSV(items)
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.setAttribute('visibility', 'hidden')
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
   downloadCSV() {
