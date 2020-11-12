@@ -13,6 +13,8 @@ import {
 import { get, intersectionBy } from 'lodash'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { DoctorPDFDialog, ProgressReportPDFDialog } from '../../dialogs'
+import { Account } from '@coachcare/npm-api/selvera-api/services'
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-dieter',
@@ -28,6 +30,7 @@ export class DieterComponent implements OnDestroy, OnInit {
   public showRPM: boolean
 
   constructor(
+    private account: Account,
     private context: ContextService,
     private data: DieterDashboardSummary,
     private dialog: MatDialog,
@@ -40,6 +43,7 @@ export class DieterComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
+    this.sendWarmupNotification()
     this.data.init(this.context.accountId)
     this.route.data.forEach((data: any) => {
       this.dieter = data.account
@@ -122,6 +126,22 @@ export class DieterComponent implements OnDestroy, OnInit {
       }
 
       this.hasRPMEnabled = rpmEntries.data.shift().isActive || false
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async sendWarmupNotification(): Promise<void> {
+    try {
+      await this.account.addActivityEvent({
+        account: this.context.accountId,
+        interaction: {
+          time: { instant: moment().toISOString() }
+        },
+        organization: this.context.organizationId,
+        source: 'dashboard',
+        tags: ['mobile-app-warmup']
+      })
     } catch (error) {
       this.notifier.error(error)
     }
