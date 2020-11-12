@@ -55,6 +55,11 @@ describe('Platform Updates', function () {
   })
 
   it('Properly show unread badges of the Zendesk articles', function () {
+    window.localStorage.setItem(
+      'ccrNewsLastSeenTimestamp',
+      '2020-09-01T00:00:00.000Z'
+    )
+
     cy.get('app-platform-updates').find('li').as('articleListItems')
 
     cy.get('@articleListItems').eq(0).should('have.class', 'unread')

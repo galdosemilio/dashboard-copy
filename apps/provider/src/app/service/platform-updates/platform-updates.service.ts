@@ -80,6 +80,6 @@ export class PlatformUpdatesService {
     // Set min to 2020-09-01, to ensure that new users or existing users aren't immediately met with 10 unread articles
     this.lastSeenTimestamp =
       window.localStorage.getItem(STORAGE_NEWS_LAST_SEEN_TIMESTAMP) ||
-      '2020-09-01T00:00:00.000Z'
+      moment().subtract(10, 'weeks').toISOString()
   }
 }
