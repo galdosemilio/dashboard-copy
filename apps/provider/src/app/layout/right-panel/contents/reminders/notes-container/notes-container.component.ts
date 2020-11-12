@@ -6,7 +6,7 @@ import {
   FormSubmissionsDatasource
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
-import { ConsultationListingResponse } from '@coachcare/npm-api'
+import { ConsultationListingResponse, NamedEntity } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { merge, Subject } from 'rxjs'
@@ -15,11 +15,7 @@ import { FormSubmission as FormSubmissionService } from '@coachcare/npm-api'
 
 export interface LayoutNote extends ConsultationListingResponse {
   isDeletable?: boolean
-  submissionId?: string
-}
-
-export interface LayoutNote extends ConsultationListingResponse {
-  isDeletable?: boolean
+  organization?: NamedEntity
   submissionId?: string
 }
 
@@ -154,7 +150,8 @@ export class NotesContainerComponent implements OnDestroy, OnInit {
           isDeletable: true,
           provider: submission.submittedBy.id,
           providerName: `${submission.submittedBy.firstName} ${submission.submittedBy.lastName}`,
-          submissionId: submission.id
+          submissionId: submission.id,
+          organization: submission.organization
         }))
       ]
     } else {

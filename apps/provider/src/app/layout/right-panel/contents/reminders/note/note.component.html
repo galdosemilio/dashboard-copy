@@ -7,6 +7,7 @@
       <mat-icon  *ngIf="note?.isDeletable" (click)="onDeleteNote()" class="clickable">delete</mat-icon>
       <div>
         <span>{{ note.providerName }}</span>
+        <span *ngIf="note.organization">{{ note.organization.name }} ({{ 'LIBRARY.CONTENT.ID' | translate }} {{ note.organization.id }})</span>
         <span>{{ note.consultationTime | amDateFormat:'ddd, MMM D, YYYY h:mm a' }}</span>
       </div>
     </div>

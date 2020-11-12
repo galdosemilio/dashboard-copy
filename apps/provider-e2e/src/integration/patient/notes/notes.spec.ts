@@ -19,8 +19,11 @@ describe('Patient profile -> notes', function () {
     cy.get('@noteEntries').should('have.length', 3)
 
     cy.get('@noteEntries').eq(0).should('contain', 'Tue, Dec 31, 2019')
+    cy.get('@noteEntries').eq(0).should('contain', 'CoachCare (ID 1)')
     cy.get('@noteEntries').eq(1).should('contain', 'Tue, Dec 31, 2019')
+    cy.get('@noteEntries').eq(1).should('contain', 'CoachCare (ID 1)')
     cy.get('@noteEntries').eq(2).should('contain', 'Wed, Jan 1, 2020')
+    cy.get('@noteEntries').eq(2).should('contain', 'CoachCare (ID 1)')
   })
 
   it('Notes section shows in side bar with three notes in Australia AET', function () {
@@ -40,8 +43,11 @@ describe('Patient profile -> notes', function () {
     cy.get('@noteEntries').should('have.length', 3)
 
     cy.get('@noteEntries').eq(0).should('contain', 'Wed, Jan 1, 2020')
+    cy.get('@noteEntries').eq(0).should('contain', 'CoachCare (ID 1)')
     cy.get('@noteEntries').eq(1).should('contain', 'Wed, Jan 1, 2020')
+    cy.get('@noteEntries').eq(1).should('contain', 'CoachCare (ID 1)')
     cy.get('@noteEntries').eq(2).should('contain', 'Thu, Jan 2, 2020')
+    cy.get('@noteEntries').eq(2).should('contain', 'CoachCare (ID 1)')
   })
 
   it('Notes section modal submits for proper form id', function () {
