@@ -973,6 +973,7 @@
     }
   },
   "QUICK_RANGES": {
+    "ALL_TIME": "Hele tiden",
     "LAST_MONTH": "Sidste Måned",
     "LAST_SEVEN_DAYS": "Sidste 7 Dage",
     "LAST_THREE_MONTHS": "Sidste 3 Måneder",

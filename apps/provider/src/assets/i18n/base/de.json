@@ -973,6 +973,7 @@
     }
   },
   "QUICK_RANGES": {
+    "ALL_TIME": "Allzeit",
     "LAST_MONTH": "Im Vergangenen Monat",
     "LAST_SEVEN_DAYS": "Letzten 7 Tage",
     "LAST_THREE_MONTHS": "Die Letzten 3 Monate",

@@ -973,6 +973,7 @@
     }
   },
   "QUICK_RANGES": {
+    "ALL_TIME": "All Time",
     "LAST_MONTH": "Last Month",
     "LAST_SEVEN_DAYS": "Last 7 Days",
     "LAST_THREE_MONTHS": "Last Three Months",
@@ -1200,7 +1201,7 @@
       "US": "US (mi - ft - in - lb - oz - mph)"
     },
     "VIEWBY": {
-      "ALL_TIME": "All Time",
+      "ALL_TIME": "ALL TIME",
       "DAY": "DAY",
       "DAY_L": "VIEW BY DAY",
       "MONTH": "MONTH",
