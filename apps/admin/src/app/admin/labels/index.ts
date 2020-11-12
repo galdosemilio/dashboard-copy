@@ -1,1 +1,1 @@
-export { LabelsModule } from './labels.module';
+export { LabelsModule } from './labels.module'

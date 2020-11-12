@@ -1,2 +1,2 @@
-export * from './package.model';
-export * from './package-select-events.model';
+export * from './package.model'
+export * from './package-select-events.model'

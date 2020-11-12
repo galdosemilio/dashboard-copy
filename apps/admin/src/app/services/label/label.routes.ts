@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { CcrRol } from '@coachcare/backend/shared';
-import { ContextService } from '@coachcare/common/services';
+import { Injectable } from '@angular/core'
+import { CcrRol } from '@coachcare/backend/shared'
+import { ContextService } from '@coachcare/common/services'
 
 @Injectable()
 export class LabelRoutes {
   /**
    * Constants
    */
-  static ADMIN = 'labels';
+  static ADMIN = 'labels'
 
   // FIXME fetch current site from ngrx
-  site = 'admin';
+  site = 'admin'
 
   /**
    * Label route handler
@@ -18,30 +18,30 @@ export class LabelRoutes {
   constructor(private context: ContextService) {}
 
   list(force?: CcrRol) {
-    const site = force || this.context.site || 'admin';
+    const site = force || this.context.site || 'admin'
 
     switch (site) {
       case 'admin':
-        return `/${site}/${LabelRoutes.ADMIN}`;
+        return `/${site}/${LabelRoutes.ADMIN}`
       default:
-        console.error('List route not implemented', site);
-        return ``;
+        console.error('List route not implemented', site)
+        return ``
     }
   }
 
   single(id: string) {
-    const site = this.context.site || 'admin';
+    const site = this.context.site || 'admin'
 
     switch (site) {
       case 'admin':
-        return `/${site}/${LabelRoutes.ADMIN}/${id}`;
+        return `/${site}/${LabelRoutes.ADMIN}/${id}`
       default:
-        console.error('Single route not implemented', site);
-        return ``;
+        console.error('Single route not implemented', site)
+        return ``
     }
   }
 
   edit(id: string) {
-    return `/${this.site}/${LabelRoutes.ADMIN}/${id}/data/edit`;
+    return `/${this.site}/${LabelRoutes.ADMIN}/${id}/data/edit`
   }
 }

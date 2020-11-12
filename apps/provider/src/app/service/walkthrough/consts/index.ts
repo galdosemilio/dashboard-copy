@@ -1,1 +1,1 @@
-export * from './walkthrough.settings';
+export * from './walkthrough.settings'

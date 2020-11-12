@@ -1,1 +1,1 @@
-export * from './add-organization.dialog';
+export * from './add-organization.dialog'

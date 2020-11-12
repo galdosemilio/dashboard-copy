@@ -1,4 +1,4 @@
 export interface LastStepComponentProps {
-  onlyFirstParagraph: boolean;
-  clinicPlanMessage?: string;
+  onlyFirstParagraph: boolean
+  clinicPlanMessage?: string
 }

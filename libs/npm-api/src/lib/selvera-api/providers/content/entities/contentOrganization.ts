@@ -3,6 +3,6 @@
  */
 
 export interface ContentOrganization {
-    id: string;
-    name?: string;
+  id: string
+  name?: string
 }

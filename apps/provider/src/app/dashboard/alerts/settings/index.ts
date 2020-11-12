@@ -1,2 +1,2 @@
-export { AlertsSettingsComponent } from './settings.component';
-export { AlertTypesTableComponent } from './table/table.component';
+export { AlertsSettingsComponent } from './settings.component'
+export { AlertTypesTableComponent } from './table/table.component'

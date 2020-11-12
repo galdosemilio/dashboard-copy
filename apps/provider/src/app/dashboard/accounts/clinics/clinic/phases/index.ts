@@ -1,2 +1,2 @@
-export * from './clinic-phases.component';
-export * from './table';
+export * from './clinic-phases.component'
+export * from './table'

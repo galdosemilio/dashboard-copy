@@ -1,11 +1,11 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 import {
   ScheduleAvailabilityComponent,
   ScheduleAvailabilityRecurringComponent,
   ScheduleAvailabilitySingleDayComponent,
   ScheduleCalendarComponent,
   ScheduleListComponent
-} from './';
+} from './'
 
 export const ScheduleRoutes: Routes = [
   {
@@ -25,4 +25,4 @@ export const ScheduleRoutes: Routes = [
     path: 'list',
     component: ScheduleListComponent
   }
-];
+]

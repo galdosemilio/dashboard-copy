@@ -2,12 +2,12 @@
  * SummaryElement
  */
 
-import { SummaryChange } from './summaryChange';
-import { SummaryRecord } from './summaryRecord';
+import { SummaryChange } from './summaryChange'
+import { SummaryRecord } from './summaryRecord'
 
 export interface SummaryElement {
-    /** Key property record data. */
-    record: SummaryRecord;
-    /** Change value. */
-    change: SummaryChange;
+  /** Key property record data. */
+  record: SummaryRecord
+  /** Change value. */
+  change: SummaryChange
 }

@@ -3,10 +3,10 @@
  */
 
 export interface DeleteSequenceTriggerLocaleRequest {
-    /** Trigger ID */
-    id: string;
-    /** Locale identifier */
-    locale: string;
-    /** Organization ID */
-    organization: string;
+  /** Trigger ID */
+  id: string
+  /** Locale identifier */
+  locale: string
+  /** Organization ID */
+  organization: string
 }

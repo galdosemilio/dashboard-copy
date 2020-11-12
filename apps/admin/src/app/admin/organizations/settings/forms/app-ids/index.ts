@@ -1,1 +1,1 @@
-export * from './app-ids.component';
+export * from './app-ids.component'

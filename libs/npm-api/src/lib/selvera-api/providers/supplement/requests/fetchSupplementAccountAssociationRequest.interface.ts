@@ -3,6 +3,6 @@
  */
 
 export interface FetchSupplementAccountAssociationRequest {
-    supplementOrganization: string;
-    account: string;
+  supplementOrganization: string
+  account: string
 }

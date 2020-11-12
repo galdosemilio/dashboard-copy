@@ -1,1 +1,1 @@
-export * from './enroll-provider-campaign.dialog';
+export * from './enroll-provider-campaign.dialog'

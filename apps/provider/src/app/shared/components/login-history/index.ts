@@ -1,2 +1,2 @@
-export * from './login-history.component';
-export * from './services';
+export * from './login-history.component'
+export * from './services'

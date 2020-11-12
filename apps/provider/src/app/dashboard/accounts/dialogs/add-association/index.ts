@@ -1,1 +1,1 @@
-export * from './add-association.dialog';
+export * from './add-association.dialog'

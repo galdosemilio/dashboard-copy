@@ -3,5 +3,5 @@
  */
 
 export interface AddResponse {
-    id: string;
+  id: string
 }

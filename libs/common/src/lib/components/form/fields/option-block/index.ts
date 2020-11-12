@@ -1,1 +1,1 @@
-export * from './option-block.component';
+export * from './option-block.component'

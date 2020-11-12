@@ -1,3 +1,3 @@
 export interface GetDownloadUrlResponse {
-    url: string;
+  url: string
 }

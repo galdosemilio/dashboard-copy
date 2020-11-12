@@ -1,1 +1,1 @@
-export * from './associate-active-campaign.dialog';
+export * from './associate-active-campaign.dialog'

@@ -1,1 +1,1 @@
-export * from './alertNotification';
+export * from './alertNotification'

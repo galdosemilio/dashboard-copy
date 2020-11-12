@@ -1,8 +1,8 @@
 export interface State {
-  screen: string;
-  columns: number;
-  colspan: number;
-  rowspan: boolean;
+  screen: string
+  columns: number
+  colspan: number
+  rowspan: boolean
 }
 
 export const initialState: State = {
@@ -10,4 +10,4 @@ export const initialState: State = {
   columns: 4,
   colspan: 2,
   rowspan: false
-};
+}

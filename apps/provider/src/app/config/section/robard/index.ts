@@ -1,1 +1,1 @@
-export * from './robard.section.config';
+export * from './robard.section.config'

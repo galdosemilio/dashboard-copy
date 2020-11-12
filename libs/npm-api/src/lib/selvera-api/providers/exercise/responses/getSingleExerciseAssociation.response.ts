@@ -3,9 +3,9 @@
  */
 
 export interface GetSingleExerciseAssociationResponse {
-    id: string;
-    organization: string;
-    exerciseType: string;
-    isActive: boolean;
-    icon: string;
+  id: string
+  organization: string
+  exerciseType: string
+  isActive: boolean
+  icon: string
 }

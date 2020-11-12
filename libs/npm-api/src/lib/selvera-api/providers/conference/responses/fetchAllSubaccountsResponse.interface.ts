@@ -3,13 +3,13 @@
  */
 
 export interface FetchAllSubaccountsResponse {
-    data: Subaccount;
+  data: Subaccount
 }
 
 export interface Subaccount {
-    id: string;
-    createdAt: string;
-    updatedAt?: string;
-    isActive: boolean;
-    hasKeys: boolean;
+  id: string
+  createdAt: string
+  updatedAt?: string
+  isActive: boolean
+  hasKeys: boolean
 }

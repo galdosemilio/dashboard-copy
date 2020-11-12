@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   SkipSelf
-} from '@angular/core';
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
@@ -16,7 +16,7 @@ import {
   FormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
+} from '@angular/forms'
 
 @Component({
   selector: 'ccr-form-field-text',
@@ -42,30 +42,30 @@ import {
   }
 })
 export class TextFormFieldComponent implements ControlValueAccessor, OnInit {
-  @Input() formControlName: string;
+  @Input() formControlName: string
 
-  @Input() type = 'text';
-  @Input() prefix: string;
-  @Input() suffix: string;
+  @Input() type = 'text'
+  @Input() prefix: string
+  @Input() suffix: string
 
-  @Input() disabled: any;
-  @Input() placeholder: string;
-  @Input() readonly: any;
-  @Input() required: any;
+  @Input() disabled: any
+  @Input() placeholder: string
+  @Input() readonly: any
+  @Input() required: any
 
-  @Output() change = new EventEmitter<string>();
+  @Output() change = new EventEmitter<string>()
 
-  _control: AbstractControl | undefined;
-  value = '';
+  _control: AbstractControl | undefined
+  value = ''
 
   get isDisabled() {
-    return this.disabled === '' || this.disabled === true;
+    return this.disabled === '' || this.disabled === true
   }
   get isReadonly() {
-    return this.readonly === '' || this.readonly === true;
+    return this.readonly === '' || this.readonly === true
   }
   get isRequired() {
-    return this.required === '' || this.required === true;
+    return this.required === '' || this.required === true
   }
 
   constructor(
@@ -77,18 +77,18 @@ export class TextFormFieldComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     if (this.formControlName) {
-      const parent = this.parent.control as AbstractControl;
-      this._control = parent.get(this.formControlName) as AbstractControl;
+      const parent = this.parent.control as AbstractControl
+      this._control = parent.get(this.formControlName) as AbstractControl
     }
   }
 
-  propagateChange = (data: any) => {};
-  propagateTouch = () => {};
+  propagateChange = (data: any) => {}
+  propagateTouch = () => {}
 
   onChange(value: string) {
-    this.value = value;
-    this.propagateChange(this.value);
-    this.change.emit(this.value);
+    this.value = value
+    this.propagateChange(this.value)
+    this.change.emit(this.value)
   }
 
   /**
@@ -96,29 +96,29 @@ export class TextFormFieldComponent implements ControlValueAccessor, OnInit {
    */
   writeValue(value: string): void {
     if (value) {
-      this.value = value;
-      this.onChange(value);
+      this.value = value
+      this.onChange(value)
     }
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
+    this.propagateTouch = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   validate(c: FormControl) {
     if (this.isRequired && !this.isDisabled) {
       if (!c.value) {
-        return { ccrFieldText: 'required' };
+        return { ccrFieldText: 'required' }
       }
     }
-    return null;
+    return null
   }
 }

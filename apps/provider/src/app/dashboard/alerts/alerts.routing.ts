@@ -1,5 +1,5 @@
-import { Routes } from '@angular/router';
-import { AlertsComponent, AlertsSettingsComponent } from './index';
+import { Routes } from '@angular/router'
+import { AlertsComponent, AlertsSettingsComponent } from './index'
 
 export const AlertsRoutes: Routes = [
   {
@@ -15,4 +15,4 @@ export const AlertsRoutes: Routes = [
       }
     ]
   }
-];
+]

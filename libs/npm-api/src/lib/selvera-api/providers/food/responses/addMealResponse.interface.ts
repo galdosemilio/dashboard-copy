@@ -3,5 +3,5 @@
  */
 
 export interface AddMealResponse {
-    mealId: number;
+  mealId: number
 }

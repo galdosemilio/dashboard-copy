@@ -1,1 +1,1 @@
-export * from './trackable-rpm-codes.map';
+export * from './trackable-rpm-codes.map'

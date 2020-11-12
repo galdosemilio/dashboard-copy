@@ -1,3 +1,3 @@
 export interface GetSingleMessagingPreferenceByOrgRequest {
-  organization: string;
+  organization: string
 }

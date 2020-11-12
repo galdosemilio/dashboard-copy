@@ -3,6 +3,6 @@
  */
 
 export interface GetFoodIngredientLocaleResponse {
-    /** Translated name of the ingredient. */
-    name?: string;
+  /** Translated name of the ingredient. */
+  name?: string
 }

@@ -3,8 +3,8 @@
  */
 
 export interface OrgContact {
-    email: string;
-    firstName: string;
-    lastName: string;
-    phone?: string;
+  email: string
+  firstName: string
+  lastName: string
+  phone?: string
 }

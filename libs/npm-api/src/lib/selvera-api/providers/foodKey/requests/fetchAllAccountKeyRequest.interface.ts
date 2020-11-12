@@ -3,7 +3,7 @@
  */
 
 export interface FetchAllAccountKeyRequest {
-    account: string;
-    organization: string;
-    name?: string;
+  account: string
+  organization: string
+  name?: string
 }

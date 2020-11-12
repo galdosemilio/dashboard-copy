@@ -1,7 +1,7 @@
-import { Routes } from '@angular/router';
-import { BoardLayout } from '@coachcare/layout';
+import { Routes } from '@angular/router'
+import { BoardLayout } from '@coachcare/layout'
 
-import { NotFoundPageComponent } from '@board/shared/shared.barrel';
+import { NotFoundPageComponent } from '@board/shared/shared.barrel'
 
 export const routes: Routes = [
   {
@@ -22,4 +22,4 @@ export const routes: Routes = [
       }
     ]
   }
-];
+]

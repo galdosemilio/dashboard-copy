@@ -1,2 +1,2 @@
-export * from './listingPagination.guard';
-export * from './orphanedAccount.guard';
+export * from './listingPagination.guard'
+export * from './orphanedAccount.guard'

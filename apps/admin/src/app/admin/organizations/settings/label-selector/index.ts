@@ -1,1 +1,1 @@
-export * from './label-selector.component';
+export * from './label-selector.component'

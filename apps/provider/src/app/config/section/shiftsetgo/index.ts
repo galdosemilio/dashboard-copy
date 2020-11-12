@@ -1,1 +1,1 @@
-export * from './shiftsetgo.section.config';
+export * from './shiftsetgo.section.config'

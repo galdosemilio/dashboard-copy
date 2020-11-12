@@ -1,5 +1,5 @@
-import { ExpandableTableItem } from './expandableTableItem';
+import { ExpandableTableItem } from './expandableTableItem'
 
 export interface ExpandatableTableHeader extends ExpandableTableItem {
-  name: string;
+  name: string
 }

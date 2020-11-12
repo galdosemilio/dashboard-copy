@@ -41,8 +41,7 @@ export interface FileExplorerRoute {
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class FileExplorerTableComponent
-  extends FileExplorerBase
+export class FileExplorerTableComponent extends FileExplorerBase
   implements BindForm, OnDestroy, OnInit {
   @Input()
   allowInlineEdit = true

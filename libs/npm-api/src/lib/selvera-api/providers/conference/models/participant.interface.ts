@@ -1,7 +1,7 @@
 export interface Participant {
-    id: string;
-    lastName: string;
-    firstName: string;
+  id: string
+  lastName: string
+  firstName: string
 }
 
-export const initialParticipant = { id: '', lastName: '', firstName: '' };
+export const initialParticipant = { id: '', lastName: '', firstName: '' }

@@ -1,8 +1,8 @@
-import { ContentUpload } from './content-upload.interface';
-import { QueuedContent } from './queued-content.interface';
+import { ContentUpload } from './content-upload.interface'
+import { QueuedContent } from './queued-content.interface'
 
 export interface ContentUploadTicket {
-  number: number;
-  contentUpload: ContentUpload;
-  queuedContent: QueuedContent;
+  number: number
+  contentUpload: ContentUpload
+  queuedContent: QueuedContent
 }

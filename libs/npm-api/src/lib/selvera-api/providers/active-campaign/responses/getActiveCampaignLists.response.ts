@@ -1,5 +1,5 @@
-import { ActiveCampaignListItem } from '../entities';
+import { ActiveCampaignListItem } from '../entities'
 
 export interface GetActiveCampaignListsResponse {
-    data: ActiveCampaignListItem[];
+  data: ActiveCampaignListItem[]
 }

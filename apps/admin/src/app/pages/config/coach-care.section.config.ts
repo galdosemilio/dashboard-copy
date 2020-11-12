@@ -1,5 +1,5 @@
-import { _ } from '@coachcare/backend/shared';
-import { SectionConfigDetails } from './section.config';
+import { _ } from '@coachcare/backend/shared'
+import { SectionConfigDetails } from './section.config'
 
 export const CoachCareTestSectionConfig: SectionConfigDetails = {
   REGISTER: {
@@ -87,7 +87,7 @@ export const CoachCareTestSectionConfig: SectionConfigDetails = {
     ],
     NEWSLETTER_CHECKBOX: true
   }
-};
+}
 
 export const CoachCareProdSectionConfig: SectionConfigDetails = {
   REGISTER: {
@@ -175,4 +175,4 @@ export const CoachCareProdSectionConfig: SectionConfigDetails = {
     ],
     NEWSLETTER_CHECKBOX: true
   }
-};
+}

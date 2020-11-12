@@ -1,1 +1,1 @@
-export * from './center.section.config';
+export * from './center.section.config'

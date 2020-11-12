@@ -1,7 +1,7 @@
 export interface Config {
-    apiUrl: string;
+  apiUrl: string
 }
 
-export type CascadingPartial<T> = { [P in keyof T]?: Partial<T[P]> };
+export type CascadingPartial<T> = { [P in keyof T]?: Partial<T[P]> }
 
-export type PartialConfig = CascadingPartial<Config>;
+export type PartialConfig = CascadingPartial<Config>

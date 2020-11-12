@@ -1,7 +1,7 @@
-import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component';
-import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models';
-import { SidenavOptions } from '../consts';
-import { SectionConfigDetails } from '../models/section.details';
+import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component'
+import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
+import { SidenavOptions } from '../consts'
+import { SectionConfigDetails } from '../models/section.details'
 
 export const CenterForMedicalWeightLossProdSectionConfig: SectionConfigDetails = {
   PATIENT_FORM: {
@@ -31,7 +31,7 @@ export const CenterForMedicalWeightLossProdSectionConfig: SectionConfigDetails =
     ],
     SHOWN_OPTIONS: [SidenavOptions.ACCOUNTS_COACHES]
   }
-};
+}
 
 export const CenterForMedicalWeightLossTestSectionConfig: SectionConfigDetails = {
   PATIENT_FORM: {
@@ -61,4 +61,4 @@ export const CenterForMedicalWeightLossTestSectionConfig: SectionConfigDetails =
     ],
     SHOWN_OPTIONS: [SidenavOptions.ACCOUNTS_COACHES]
   }
-};
+}

@@ -1,1 +1,1 @@
-export * from './dr-v.section.config';
+export * from './dr-v.section.config'

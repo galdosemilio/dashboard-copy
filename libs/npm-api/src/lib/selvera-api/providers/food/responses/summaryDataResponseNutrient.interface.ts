@@ -3,6 +3,6 @@
  */
 
 export interface SummaryDataResponseNutrient {
-    dailyAverage: number;
-    total: number;
+  dailyAverage: number
+  total: number
 }

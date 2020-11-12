@@ -1,1 +1,1 @@
-export * from './selected-content-table.component';
+export * from './selected-content-table.component'

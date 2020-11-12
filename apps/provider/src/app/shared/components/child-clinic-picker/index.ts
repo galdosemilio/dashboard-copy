@@ -1,1 +1,1 @@
-export * from './child-clinic-picker.component';
+export * from './child-clinic-picker.component'

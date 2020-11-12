@@ -1,1 +1,1 @@
-export * from './file-explorer-table.component';
+export * from './file-explorer-table.component'

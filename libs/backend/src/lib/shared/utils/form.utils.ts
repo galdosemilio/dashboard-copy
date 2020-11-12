@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { get, isEmpty } from 'lodash';
-import * as lodash from 'lodash';
+import { Injectable } from '@angular/core'
+import { FormArray, FormControl, FormGroup } from '@angular/forms'
+import { get, isEmpty } from 'lodash'
+import * as lodash from 'lodash'
 
-import * as momentNs from 'moment-timezone';
-const moment = momentNs;
+import * as momentNs from 'moment-timezone'
+const moment = momentNs
 
 @Injectable()
 export class FormUtils {
-  private _errors = {};
+  private _errors = {}
 
   constructor() {}
 
@@ -17,9 +17,9 @@ export class FormUtils {
    */
   static pruneEmpty(obj: any, skipKeys: string[] = []) {
     return (function prune(current) {
-      lodash.forOwn(current, function(value, key) {
+      lodash.forOwn(current, function (value, key) {
         if (skipKeys.indexOf(key) > -1) {
-          return;
+          return
         }
 
         if (
@@ -29,17 +29,17 @@ export class FormUtils {
           (lodash.isString(value) && lodash.isEmpty(value)) ||
           (lodash.isObject(value) && lodash.isEmpty(prune(value)))
         ) {
-          delete current[key];
+          delete current[key]
         }
-      });
+      })
       // remove any leftover undefined values from the delete
       // operation on an array
       if (lodash.isArray(current)) {
-        lodash.pull(current, undefined);
+        lodash.pull(current, undefined)
       }
 
-      return current;
-    })(lodash.cloneDeep(obj)); // do not modify the original object, create a clone instead
+      return current
+    })(lodash.cloneDeep(obj)) // do not modify the original object, create a clone instead
   }
 
   /**
@@ -47,14 +47,14 @@ export class FormUtils {
    * @param group Form to mark as touched
    */
   static markAsTouched(group: FormGroup | FormArray): void {
-    Object.keys(group.controls).map(field => {
-      const control = group.get(field);
+    Object.keys(group.controls).map((field) => {
+      const control = group.get(field)
       if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
+        control.markAsTouched({ onlySelf: true })
       } else if (control instanceof FormGroup || control instanceof FormArray) {
-        FormUtils.markAsTouched(control);
+        FormUtils.markAsTouched(control)
       }
-    });
+    })
   }
 
   /**
@@ -62,16 +62,16 @@ export class FormUtils {
    * @param group Form to mark as touched
    */
   static getErrors(group: FormGroup | FormArray, errors = {}): any {
-    Object.assign(errors, group.errors ? group.errors : {});
-    Object.keys(group.controls).map(field => {
-      const control = group.get(field) as FormControl;
-      Object.assign(errors, control.errors ? control.errors : {});
+    Object.assign(errors, group.errors ? group.errors : {})
+    Object.keys(group.controls).map((field) => {
+      const control = group.get(field) as FormControl
+      Object.assign(errors, control.errors ? control.errors : {})
       if (control instanceof FormGroup || control instanceof FormArray) {
-        FormUtils.getErrors(control, errors);
+        FormUtils.getErrors(control, errors)
       }
-    });
+    })
 
-    return errors;
+    return errors
   }
 
   /**
@@ -82,31 +82,31 @@ export class FormUtils {
       hours: 8,
       minutes: 0,
       seconds: 0
-    });
+    })
 
     if (initial.isBefore(moment(), 'minutes')) {
-      const day = initial.day();
-      const add = day > 0 && day < 5 ? 1 : 6 - day + 2;
-      initial.add(add, 'day');
+      const day = initial.day()
+      const add = day > 0 && day < 5 ? 1 : 6 - day + 2
+      initial.add(add, 'day')
     }
 
-    const diff = initial.minutes() % 15;
+    const diff = initial.minutes() % 15
 
     return initial
       .subtract(diff, 'minutes')
       .add(15, 'minutes')
-      .set('seconds', 0);
+      .set('seconds', 0)
   }
 
   /**
    * View utils
    */
   hasErrors(group: FormGroup | FormArray) {
-    this._errors = FormUtils.getErrors(group);
-    return !isEmpty(this._errors);
+    this._errors = FormUtils.getErrors(group)
+    return !isEmpty(this._errors)
   }
 
   getError(errorCode: string) {
-    return get(this._errors, errorCode, null);
+    return get(this._errors, errorCode, null)
   }
 }

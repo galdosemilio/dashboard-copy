@@ -3,6 +3,6 @@
  */
 
 export interface BmiDataSegment {
-    date: string;
-    bmi: number;
+  date: string
+  bmi: number
 }

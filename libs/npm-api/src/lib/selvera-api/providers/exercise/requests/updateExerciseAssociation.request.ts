@@ -3,7 +3,7 @@
  */
 
 export interface UpdateExerciseAssociationRequest {
-    id: number;
-    isActive: boolean;
-    icon: string;
+  id: number
+  isActive: boolean
+  icon: string
 }

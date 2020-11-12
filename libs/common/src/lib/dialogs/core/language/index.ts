@@ -1,1 +1,1 @@
-export * from './languages.dialog';
+export * from './languages.dialog'

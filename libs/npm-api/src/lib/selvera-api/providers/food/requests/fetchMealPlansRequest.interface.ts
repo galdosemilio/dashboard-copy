@@ -3,9 +3,9 @@
  */
 
 export interface FetchMealPlansRequest {
-    organization: string;
-    recipesOnly?: boolean;
-    package: number | 'none';
-    limit?: number;
-    offset?: number;
+  organization: string
+  recipesOnly?: boolean
+  package: number | 'none'
+  limit?: number
+  offset?: number
 }

@@ -1,1 +1,1 @@
-export * from './rpm-status-panel.component';
+export * from './rpm-status-panel.component'

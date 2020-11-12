@@ -555,7 +555,6 @@ export class SequencingFormComponent
               ? true
               : previousDelay !== stepValue.step.delay
           }
-
           ;(this.form.controls.steps as FormGroup).controls[index].patchValue(
             stepValue
           )

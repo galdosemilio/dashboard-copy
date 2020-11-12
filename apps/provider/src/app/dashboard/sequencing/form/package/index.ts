@@ -1,1 +1,1 @@
-export * from './package-form.component';
+export * from './package-form.component'

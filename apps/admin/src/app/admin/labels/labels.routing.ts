@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
-import { LabelResolver } from '@board/services';
-import { LabelFormComponent, LabelsListComponent } from './labels.index';
+import { Routes } from '@angular/router'
+import { LabelResolver } from '@board/services'
+import { LabelFormComponent, LabelsListComponent } from './labels.index'
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: LabelsListComponent },
@@ -44,4 +44,4 @@ export const routes: Routes = [
       }
     ]
   }
-];
+]

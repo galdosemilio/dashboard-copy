@@ -2,15 +2,15 @@
  * LeaderboardItem
  */
 
-import { ChallengeLoss } from './challengeLoss';
+import { ChallengeLoss } from './challengeLoss'
 
 export interface LeaderboardItem {
   /** Account ID. */
-  id: string;
+  id: string
   /** Participant's first name. */
-  firstName: string;
+  firstName: string
   /** Participant's last name. */
-  lastName: string;
+  lastName: string
   /** Weight loss data. */
-  loss: ChallengeLoss;
+  loss: ChallengeLoss
 }

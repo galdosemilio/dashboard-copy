@@ -1,1 +1,1 @@
-export * from './activeCampaignListItem';
+export * from './activeCampaignListItem'

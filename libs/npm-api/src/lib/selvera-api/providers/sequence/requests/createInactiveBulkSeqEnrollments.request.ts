@@ -3,10 +3,10 @@
  */
 
 export interface CreateInactiveBulkSeqEnrollmentsRequest {
-    /** Account IDs */
-    accounts: string[];
-    /** Creator account ID */
-    createdBy: string;
-    /** Sequence ID */
-    sequence: string;
+  /** Account IDs */
+  accounts: string[]
+  /** Creator account ID */
+  createdBy: string
+  /** Sequence ID */
+  sequence: string
 }

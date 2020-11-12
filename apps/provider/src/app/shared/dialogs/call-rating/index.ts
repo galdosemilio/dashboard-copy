@@ -1,1 +1,1 @@
-export * from './call-rating.dialog';
+export * from './call-rating.dialog'

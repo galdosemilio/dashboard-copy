@@ -3,6 +3,6 @@
  */
 
 export interface AggregateLevel {
-    name: string;
-    threshold: number;
+  name: string
+  threshold: number
 }

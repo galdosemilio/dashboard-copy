@@ -1,11 +1,11 @@
 interface SortingOption {
-    property: 'firstName' | 'lastName' | 'email' | 'startedAt';
-    dir: 'asc' | 'desc';
+  property: 'firstName' | 'lastName' | 'email' | 'startedAt'
+  dir: 'asc' | 'desc'
 }
 
 interface PackageSort {
-    property: 'name' | 'startedAt';
-    dir: 'asc' | 'desc';
+  property: 'name' | 'startedAt'
+  dir: 'asc' | 'desc'
 }
 
 /**
@@ -13,11 +13,11 @@ interface PackageSort {
  */
 
 export interface FetchPatientListingRequest {
-    limit?: number | 'all';
-    offset?: number;
-    organization: string;
-    pkg?: string[];
-    ['pkg-filter']?: 'all' | 'any';
-    ['pkg-sort']?: PackageSort[];
-    sort?: SortingOption[];
+  limit?: number | 'all'
+  offset?: number
+  organization: string
+  pkg?: string[]
+  ['pkg-filter']?: 'all' | 'any'
+  ['pkg-sort']?: PackageSort[]
+  sort?: SortingOption[]
 }

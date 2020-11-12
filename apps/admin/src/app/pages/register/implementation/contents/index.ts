@@ -1,12 +1,12 @@
-import { ARComponent } from './ar/ar.component';
-import { DAComponent } from './da/da.component';
-import { DEComponent } from './de/de.component';
-import { ENComponent } from './en/en.component';
-import { ESComponent } from './es/es.component';
-import { FRComponent } from './fr/fr.component';
-import { HEComponent } from './he/he.component';
-import { ITComponent } from './it/it.component';
-import { PTComponent } from './pt/pt.component';
+import { ARComponent } from './ar/ar.component'
+import { DAComponent } from './da/da.component'
+import { DEComponent } from './de/de.component'
+import { ENComponent } from './en/en.component'
+import { ESComponent } from './es/es.component'
+import { FRComponent } from './fr/fr.component'
+import { HEComponent } from './he/he.component'
+import { ITComponent } from './it/it.component'
+import { PTComponent } from './pt/pt.component'
 
 export const TranslationsComponents = [
   ARComponent,
@@ -18,7 +18,7 @@ export const TranslationsComponents = [
   HEComponent,
   ITComponent,
   PTComponent
-];
+]
 
 export const Translations = {
   ar: ARComponent,
@@ -30,4 +30,4 @@ export const Translations = {
   he: HEComponent,
   it: ITComponent,
   pt: PTComponent
-};
+}

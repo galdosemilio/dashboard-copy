@@ -3,7 +3,7 @@
  */
 
 export interface FetchUnfilteredSleepMeasurementRequest {
-  client_id?: number | null;
-  start_date?: string | null;
-  end_date?: string | null;
+  client_id?: number | null
+  start_date?: string | null
+  end_date?: string | null
 }

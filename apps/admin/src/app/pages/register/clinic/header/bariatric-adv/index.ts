@@ -1,1 +1,1 @@
-export * from './bariatric-adv.header.component';
+export * from './bariatric-adv.header.component'

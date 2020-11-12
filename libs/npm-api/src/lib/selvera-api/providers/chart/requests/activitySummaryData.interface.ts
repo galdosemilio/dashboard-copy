@@ -2,4 +2,4 @@
  * Interface for activity summary data
  */
 
-export type SummaryData = 'steps' | 'distance';
+export type SummaryData = 'steps' | 'distance'

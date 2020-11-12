@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { PainDataSource } from '@app/dashboard/accounts/dieters/services';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
+import { PainDataSource } from '@app/dashboard/accounts/dieters/services'
 
 @Component({
   selector: 'app-dieter-journal-pain-table',
@@ -8,13 +8,13 @@ import { PainDataSource } from '@app/dashboard/accounts/dieters/services';
 })
 export class PainTableComponent implements OnInit {
   @Input()
-  columns = ['date', 'details'];
+  columns = ['date', 'details']
   @Input()
-  source: PainDataSource | null;
+  source: PainDataSource | null
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.cdr.detectChanges();
+    this.cdr.detectChanges()
   }
 }

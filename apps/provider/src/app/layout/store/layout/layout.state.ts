@@ -4,13 +4,13 @@
 
 export interface UILayoutState {
   menu: {
-    opened: boolean;
-  };
+    opened: boolean
+  }
   panel: {
-    opened: boolean;
-    enabled: boolean;
-    component: string;
-  };
+    opened: boolean
+    enabled: boolean
+    component: string
+  }
 }
 
 export const initialLayoutState: UILayoutState = {
@@ -22,4 +22,4 @@ export const initialLayoutState: UILayoutState = {
     enabled: false,
     component: ''
   }
-};
+}

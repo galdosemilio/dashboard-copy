@@ -3,8 +3,8 @@
  */
 
 export interface FetchSupplementAccountAssociationResponse {
-    id: string;
-    supplementOrganizationId: string;
-    accountId: string;
-    dosage?: number;
+  id: string
+  supplementOrganizationId: string
+  accountId: string
+  dosage?: number
 }

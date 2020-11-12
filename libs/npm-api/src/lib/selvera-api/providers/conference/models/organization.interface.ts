@@ -1,5 +1,5 @@
 export interface Organization {
-    id: string;
+  id: string
 }
 
-export const initialOrganization: Organization = { id: '' };
+export const initialOrganization: Organization = { id: '' }

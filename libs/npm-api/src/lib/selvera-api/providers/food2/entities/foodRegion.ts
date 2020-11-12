@@ -2,4 +2,4 @@
  * FoodRegion
  */
 
-export type FoodRegion = 'US' | 'CA' | 'IL' | 'AU' | 'SA';
+export type FoodRegion = 'US' | 'CA' | 'IL' | 'AU' | 'SA'

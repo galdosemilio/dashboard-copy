@@ -1,2 +1,2 @@
-export * from './section.config';
-export * from './utils';
+export * from './section.config'
+export * from './utils'

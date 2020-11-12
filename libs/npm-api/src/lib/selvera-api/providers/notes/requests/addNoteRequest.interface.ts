@@ -3,8 +3,8 @@
  */
 
 export interface AddNoteRequest {
-    content: string;
-    providerOnly?: boolean;
-    date?: string;
-    relatedAccounts?: Array<string>;
+  content: string
+  providerOnly?: boolean
+  date?: string
+  relatedAccounts?: Array<string>
 }

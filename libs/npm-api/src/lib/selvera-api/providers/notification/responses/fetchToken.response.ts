@@ -1,6 +1,6 @@
 export interface FetchTokenResponse {
-    id: string;
-    organization: string;
-    account: string;
-    token: string;
+  id: string
+  organization: string
+  account: string
+  token: string
 }

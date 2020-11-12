@@ -3,6 +3,6 @@
  */
 
 export interface DeleteHydrationRequest {
-    account?: string;
-    date: string;
+  account?: string
+  date: string
 }

@@ -1,2 +1,2 @@
-export * from './entities';
-export * from './zendesk.provider';
+export * from './entities'
+export * from './zendesk.provider'

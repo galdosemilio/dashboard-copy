@@ -3,6 +3,6 @@
  */
 
 export interface Registrations {
-    new: number;
-    total: number;
+  new: number
+  total: number
 }

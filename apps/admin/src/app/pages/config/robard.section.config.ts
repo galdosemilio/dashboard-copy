@@ -1,6 +1,6 @@
-import { RobardHeaderComponent } from '@board/pages/register/clinic/header/robard/robard.header.component';
-import { _ } from '@coachcare/backend/shared';
-import { SectionConfigDetails } from './section.config';
+import { RobardHeaderComponent } from '@board/pages/register/clinic/header/robard/robard.header.component'
+import { _ } from '@coachcare/backend/shared'
+import { SectionConfigDetails } from './section.config'
 
 export const RobardTestSectionConfig: SectionConfigDetails = {
   REGISTER: {
@@ -10,7 +10,8 @@ export const RobardTestSectionConfig: SectionConfigDetails = {
         description: _('REGISTER.STEP1.ROBARD.MOB_APP_1_DESCRIPTION'),
         displayValue: _('REGISTER.STEP1.ROBARD.MOB_APP_1_TITLE'),
         iosAppLink: 'https://itunes.apple.com/us/app/coachcare/id1421821437',
-        androidAppLink: 'https://play.google.com/store/apps/details?id=com.coachcare.robardionic',
+        androidAppLink:
+          'https://play.google.com/store/apps/details?id=com.coachcare.robardionic',
         value: '7387'
       },
       {
@@ -22,7 +23,7 @@ export const RobardTestSectionConfig: SectionConfigDetails = {
     ],
     SHOW_REGISTER_ICON: true
   }
-};
+}
 
 export const RobardProdSectionConfig: SectionConfigDetails = {
   REGISTER: {
@@ -32,7 +33,8 @@ export const RobardProdSectionConfig: SectionConfigDetails = {
         description: _('REGISTER.STEP1.ROBARD.MOB_APP_1_DESCRIPTION'),
         displayValue: _('REGISTER.STEP1.ROBARD.MOB_APP_1_TITLE'),
         iosAppLink: 'https://itunes.apple.com/us/app/coachcare/id1421821437',
-        androidAppLink: 'https://play.google.com/store/apps/details?id=com.coachcare.robardionic',
+        androidAppLink:
+          'https://play.google.com/store/apps/details?id=com.coachcare.robardionic',
         value: '6508'
       },
       {
@@ -44,4 +46,4 @@ export const RobardProdSectionConfig: SectionConfigDetails = {
     ],
     SHOW_REGISTER_ICON: true
   }
-};
+}

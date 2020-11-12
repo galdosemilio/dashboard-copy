@@ -1,1 +1,1 @@
-export * from './gwlp.header.component';
+export * from './gwlp.header.component'

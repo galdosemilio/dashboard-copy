@@ -3,6 +3,6 @@
  */
 
 export interface AddConsumedMealResponse {
-    mealId: number;
-    consumedId: number;
+  mealId: number
+  consumedId: number
 }

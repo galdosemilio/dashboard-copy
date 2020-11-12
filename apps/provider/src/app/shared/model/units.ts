@@ -1,4 +1,4 @@
-import { _ } from '@app/shared/utils/i18n.utils';
+import { _ } from '@app/shared/utils/i18n.utils'
 
 export const MEASUREMENT_UNITS = [
   {
@@ -13,4 +13,4 @@ export const MEASUREMENT_UNITS = [
     value: 'uk',
     viewValue: _('SELECTOR.UNITSYS.UK')
   }
-];
+]

@@ -3,5 +3,5 @@
  */
 
 export interface FetchCallAvailabilityRequest {
-    account: string;
+  account: string
 }

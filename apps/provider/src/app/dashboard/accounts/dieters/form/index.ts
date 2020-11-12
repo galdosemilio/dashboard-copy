@@ -1,2 +1,2 @@
-export * from './dieter.component';
-export * from './account-identifiers/account-identifiers.component';
+export * from './dieter.component'
+export * from './account-identifiers/account-identifiers.component'

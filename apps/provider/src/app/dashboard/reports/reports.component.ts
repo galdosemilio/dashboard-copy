@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
-import { EventsService } from '@app/service';
+import { EventsService } from '@app/service'
 
 @Component({
   selector: 'app-reports',
@@ -12,6 +12,6 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     // this.bus.trigger('organizations.disable-all');
-    this.bus.trigger('right-panel.deactivate');
+    this.bus.trigger('right-panel.deactivate')
   }
 }

@@ -1,1 +1,1 @@
-export type UserMeasurementPreferenceType = 'metric' | 'us' | 'uk';
+export type UserMeasurementPreferenceType = 'metric' | 'us' | 'uk'

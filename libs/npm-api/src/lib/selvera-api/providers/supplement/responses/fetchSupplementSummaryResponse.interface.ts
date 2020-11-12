@@ -2,8 +2,8 @@
  * Interface for GET /summary (Response)
  */
 
-import { SupplementDataResponseSegment } from './supplementDataResponseSegment.interface';
+import { SupplementDataResponseSegment } from './supplementDataResponseSegment.interface'
 
 export interface FetchSupplementSummaryResponse {
-    summary: Array<SupplementDataResponseSegment>;
+  summary: Array<SupplementDataResponseSegment>
 }

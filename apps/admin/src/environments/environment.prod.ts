@@ -1,4 +1,4 @@
-import { AppEnvironment } from '@coachcare/common/shared';
+import { AppEnvironment } from '@coachcare/common/shared'
 
 export const environment: AppEnvironment = {
   apiUrl: 'https://api.coachcare.com/',
@@ -11,4 +11,4 @@ export const environment: AppEnvironment = {
   cdn: 'https://cdn.coachcare.com',
   url: 'https://dashboard.coachcare.com',
   defaultOrgId: '3637'
-};
+}

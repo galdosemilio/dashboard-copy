@@ -1,11 +1,11 @@
 export interface TimeTrackerRoute {
-  defaultParams?: string[];
-  id: string;
-  ignoredParams?: string[];
-  routeSegments: string[];
-  tags: string[];
-  useAccount?: boolean;
-  useParamMap?: boolean;
+  defaultParams?: string[]
+  id: string
+  ignoredParams?: string[]
+  routeSegments: string[]
+  tags: string[]
+  useAccount?: boolean
+  useParamMap?: boolean
 }
 
 export const TIME_TRACKER_ROUTES: { [key: string]: TimeTrackerRoute } = {
@@ -225,4 +225,4 @@ export const TIME_TRACKER_ROUTES: { [key: string]: TimeTrackerRoute } = {
     routeSegments: ['sequences', 'sequence', '*'],
     tags: ['sequences', 'single']
   }
-};
+}

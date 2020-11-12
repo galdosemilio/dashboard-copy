@@ -1,2 +1,2 @@
-export * from './rpmCodeColumn.map';
-export * from './rpmStateSummaryEntry';
+export * from './rpmCodeColumn.map'
+export * from './rpmStateSummaryEntry'

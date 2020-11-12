@@ -1,11 +1,11 @@
-import { TranslatedOption } from '@coachcare/backend/shared';
+import { TranslatedOption } from '@coachcare/backend/shared'
 
 export interface StateSegment extends TranslatedOption {
   viewValue: {
-    [lang: string]: string;
-  };
-  value: string;
-  country?: string; // default: US
+    [lang: string]: string
+  }
+  value: string
+  country?: string // default: US
 }
 
 export const STATES: Array<StateSegment> = [
@@ -209,7 +209,10 @@ export const STATES: Array<StateSegment> = [
     country: 'US'
   },
   {
-    viewValue: { en: 'Northern Mariana Islands', es: 'Islas Marianas del Norte' },
+    viewValue: {
+      en: 'Northern Mariana Islands',
+      es: 'Islas Marianas del Norte'
+    },
     value: 'MP',
     country: 'US'
   },
@@ -321,7 +324,10 @@ export const STATES: Array<StateSegment> = [
     country: 'CA'
   },
   {
-    viewValue: { en: 'Newfoundland and Labrador', es: 'Newfoundland y Labrador' },
+    viewValue: {
+      en: 'Newfoundland and Labrador',
+      es: 'Newfoundland y Labrador'
+    },
     value: 'NL',
     country: 'CA'
   },
@@ -375,4 +381,4 @@ export const STATES: Array<StateSegment> = [
     value: 'YT',
     country: 'CA'
   }
-];
+]

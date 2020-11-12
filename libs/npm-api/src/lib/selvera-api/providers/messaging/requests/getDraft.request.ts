@@ -3,5 +3,5 @@
  */
 
 export interface GetMessageDraftRequest {
-    threadId?: string;
+  threadId?: string
 }

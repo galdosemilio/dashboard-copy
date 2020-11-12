@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { Subject } from 'rxjs'
 
 @Injectable()
 export class SectionProps {
-  events: { [key: string]: Subject<any> };
+  events: { [key: string]: Subject<any> }
 }

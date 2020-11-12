@@ -1,4 +1,4 @@
-import { _, SelectorOption } from '@coachcare/backend/shared';
+import { _, SelectorOption } from '@coachcare/backend/shared'
 
 export const MEASUREMENT_UNITS: Array<SelectorOption> = [
   {
@@ -13,4 +13,4 @@ export const MEASUREMENT_UNITS: Array<SelectorOption> = [
     value: 'uk',
     viewValue: _('SELECTOR.UNITSYS.UK')
   }
-];
+]

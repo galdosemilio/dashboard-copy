@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { PlainLayout } from '@coachcare/layout';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { PlainLayout } from '@coachcare/layout'
 
 import {
   DownloadPageComponent,
@@ -12,19 +12,19 @@ import {
   RegisterApplePageComponent,
   RegisterClinicPageComponent,
   RegisterImplementationPageComponent
-} from '@board/pages/pages.barrel';
+} from '@board/pages/pages.barrel'
 import {
   AppDownloadGuard,
   PagesRoutings,
   PasswordUpdateGuard,
   RouteWildcardGuard,
   SessionGuard
-} from '@board/pages/pages.providers';
+} from '@board/pages/pages.providers'
 import {
   NotFoundPageComponent,
   UnsupportedBrowserPageComponent
-} from '@board/shared/shared.barrel';
-import { MFASetupPageComponent } from './mfa-setup';
+} from '@board/shared/shared.barrel'
+import { MFASetupPageComponent } from './mfa-setup'
 
 const routes: Routes = [
   {
@@ -122,7 +122,7 @@ const routes: Routes = [
       }
     ]
   }
-];
+]
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes)],

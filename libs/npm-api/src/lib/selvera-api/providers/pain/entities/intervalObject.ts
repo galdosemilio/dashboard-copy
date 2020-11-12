@@ -4,9 +4,9 @@
 
 export interface IntervalObject {
   /** pain duration - hours. */
-  hours?: number;
+  hours?: number
   /** pain duration - minutes. */
-  minutes?: number;
+  minutes?: number
   /** pain duration - seconds. */
-  seconds?: number;
+  seconds?: number
 }

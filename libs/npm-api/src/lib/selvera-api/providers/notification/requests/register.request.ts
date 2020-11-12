@@ -1,5 +1,5 @@
 export interface RegisterRequest {
-    token: string | null;
-    organization: string;
-    projectId?: string;
+  token: string | null
+  organization: string
+  projectId?: string
 }

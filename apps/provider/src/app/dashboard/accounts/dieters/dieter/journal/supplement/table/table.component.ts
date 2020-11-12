@@ -4,10 +4,10 @@ import {
   Input,
   OnDestroy,
   OnInit
-} from '@angular/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+} from '@angular/core'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
-import { SupplementDataSource } from '@app/dashboard/accounts/dieters/services';
+import { SupplementDataSource } from '@app/dashboard/accounts/dieters/services'
 
 @Component({
   selector: 'app-dieter-journal-supplements-table',
@@ -17,14 +17,16 @@ import { SupplementDataSource } from '@app/dashboard/accounts/dieters/services';
 })
 export class SupplementsTableComponent implements OnInit, OnDestroy {
   @Input()
-  source: SupplementDataSource;
+  source: SupplementDataSource
 
-  supplements: Array<string>;
+  supplements: Array<string>
 
   ngOnInit() {
     this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.supplements = this.source.columns.length ? this.source.columns.slice(1) : [];
-    });
+      this.supplements = this.source.columns.length
+        ? this.source.columns.slice(1)
+        : []
+    })
   }
 
   ngOnDestroy() {

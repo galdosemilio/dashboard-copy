@@ -1,1 +1,1 @@
-export * from './walkthrough.component';
+export * from './walkthrough.component'

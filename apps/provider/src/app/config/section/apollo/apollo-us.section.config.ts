@@ -1,9 +1,9 @@
-import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component';
-import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models';
-import { PackageSelectorProps } from '@app/shared/components/package-selector/models';
-import { PackageSelectorComponent } from '@app/shared/components/package-selector/package-selector.component';
-import { _ } from '@app/shared/utils';
-import { SectionConfigDetails } from '../models/section.details';
+import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component'
+import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
+import { PackageSelectorProps } from '@app/shared/components/package-selector/models'
+import { PackageSelectorComponent } from '@app/shared/components/package-selector/package-selector.component'
+import { _ } from '@app/shared/utils'
+import { SectionConfigDetails } from '../models/section.details'
 
 export const ApolloUSProdSectionConfig: SectionConfigDetails = {
   PATIENT_FORM: {
@@ -54,7 +54,7 @@ export const ApolloUSProdSectionConfig: SectionConfigDetails = {
     },
     SHOW_ACC_IDN_INPUT_CREATE: true
   }
-};
+}
 
 export const ApolloUSTestSectionConfig: SectionConfigDetails = {
   PATIENT_FORM: {
@@ -110,4 +110,4 @@ export const ApolloUSTestSectionConfig: SectionConfigDetails = {
     },
     SHOW_ACC_IDN_INPUT_CREATE: true
   }
-};
+}

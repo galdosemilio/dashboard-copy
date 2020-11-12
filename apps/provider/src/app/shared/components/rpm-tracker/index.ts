@@ -1,1 +1,1 @@
-export * from './rpm-tracker.component';
+export * from './rpm-tracker.component'

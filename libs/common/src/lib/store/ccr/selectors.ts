@@ -1,6 +1,9 @@
-import { createFeatureSelector, MemoizedSelector } from '@ngrx/store';
-import { State } from './state';
+import { createFeatureSelector, MemoizedSelector } from '@ngrx/store'
+import { State } from './state'
 
-export const NAME = 'ccr';
+export const NAME = 'ccr'
 
-export const selectData: MemoizedSelector<object, State> = createFeatureSelector<State>(NAME);
+export const selectData: MemoizedSelector<
+  object,
+  State
+> = createFeatureSelector<State>(NAME)

@@ -1,3 +1,3 @@
-export * from './threads.criteria';
-export * from './threads.database';
-export * from './threads.datasource';
+export * from './threads.criteria'
+export * from './threads.database'
+export * from './threads.datasource'

@@ -1,1 +1,1 @@
-export * from './trigger-detail.dialog';
+export * from './trigger-detail.dialog'

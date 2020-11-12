@@ -1,1 +1,1 @@
-export * from './inhealth.header.component';
+export * from './inhealth.header.component'

@@ -1,9 +1,9 @@
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export interface EndingAction {
-  displayName: string;
-  id: string;
-  name: string;
+  displayName: string
+  id: string
+  name: string
 }
 
 export const EndingActions: { [key: string]: EndingAction } = {
@@ -17,4 +17,4 @@ export const EndingActions: { [key: string]: EndingAction } = {
     id: '2',
     name: 'repeat'
   }
-};
+}

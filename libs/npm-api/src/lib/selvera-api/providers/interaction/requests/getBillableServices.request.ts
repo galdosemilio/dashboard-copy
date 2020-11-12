@@ -3,7 +3,7 @@
  */
 
 export interface GetBillableServicesRequest {
-    offset?: number;
-    limit?: number | 'all';
-    status?: 'active' | 'inactive' | 'all';
+  offset?: number
+  limit?: number | 'all'
+  status?: 'active' | 'inactive' | 'all'
 }

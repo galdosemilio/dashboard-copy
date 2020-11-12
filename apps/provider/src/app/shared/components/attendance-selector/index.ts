@@ -1,1 +1,1 @@
-export * from './attendance-selector.component';
+export * from './attendance-selector.component'

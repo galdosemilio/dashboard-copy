@@ -2,4 +2,4 @@
  * Export all interfaces
  */
 
-export { FetchGoalResponse } from './fetchGoalResponse.interface';
+export { FetchGoalResponse } from './fetchGoalResponse.interface'

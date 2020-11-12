@@ -1,9 +1,9 @@
-export * from './display';
-export * from './email-template';
-export * from './form';
-export * from './list';
-export * from './settings';
-export * from './tree';
+export * from './display'
+export * from './email-template'
+export * from './form'
+export * from './list'
+export * from './settings'
+export * from './tree'
 
 import {
   AddOrganizationDialog,
@@ -12,33 +12,33 @@ import {
   OrganizationPreferenceResolver,
   OrganizationResolver,
   OrganizationRoutes
-} from '@board/services';
+} from '@board/services'
 import {
   ActiveCampaignDatabase,
   LabelsOrganizationDatabase,
   OrganizationsDatabase,
   OrganizationsTreeDatabase
-} from '@coachcare/backend/data';
+} from '@coachcare/backend/data'
 import {
   OrganizationActiveCampaignComponent,
   OrganizationActiveCampaignTableComponent
-} from './active-campaign';
+} from './active-campaign'
 import {
   AssociateActiveCampaignDialogComponent,
   AssociateAllProvidersDialogComponent,
   CreateLabelDialogComponent,
   EditActiveCampaignDialogComponent,
   EnrollProviderCampaignDialogComponent
-} from './dialogs';
-import { OrganizationsDisplayComponent } from './display';
+} from './dialogs'
+import { OrganizationsDisplayComponent } from './display'
 import {
   EmailTemplateComponent,
   EmailTemplateDialogComponent,
   EmailTemplateTableComponent
-} from './email-template';
-import { OrganizationsFormComponent } from './form';
-import { LabelsAssociationsComponent } from './labels-associations';
-import { OrganizationsListComponent, OrganizationsTableComponent } from './list';
+} from './email-template'
+import { OrganizationsFormComponent } from './form'
+import { LabelsAssociationsComponent } from './labels-associations'
+import { OrganizationsListComponent, OrganizationsTableComponent } from './list'
 import {
   AppIdsComponent,
   BasicInfoComponent,
@@ -52,8 +52,8 @@ import {
   MFAInputComponent,
   OrganizationsSettingsComponent,
   SecurityComponent
-} from './settings';
-import { OrganizationsTreeComponent } from './tree';
+} from './settings'
+import { OrganizationsTreeComponent } from './tree'
 
 // Module Collections
 
@@ -87,7 +87,7 @@ export const OrganizationComponents = [
   OrganizationsSettingsComponent,
   MFAInputComponent,
   SecurityComponent
-];
+]
 
 export const OrganizationEntryComponents = [
   AddOrganizationDialog,
@@ -97,7 +97,7 @@ export const OrganizationEntryComponents = [
   EditActiveCampaignDialogComponent,
   EmailTemplateDialogComponent,
   EnrollProviderCampaignDialogComponent
-];
+]
 
 export const OrganizationProviders = [
   ActiveCampaignDatabase,
@@ -109,4 +109,4 @@ export const OrganizationProviders = [
   OrganizationResolver,
   OrganizationPreferenceResolver,
   OrganizationRoutes
-];
+]

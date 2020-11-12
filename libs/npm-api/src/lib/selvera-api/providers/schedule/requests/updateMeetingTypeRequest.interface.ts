@@ -3,8 +3,8 @@
  */
 
 export interface UpdateMeetingTypeRequest {
-    typeId: string;
-    code?: string;
-    description?: string;
-    isActive?: boolean;
+  typeId: string
+  code?: string
+  description?: string
+  isActive?: boolean
 }

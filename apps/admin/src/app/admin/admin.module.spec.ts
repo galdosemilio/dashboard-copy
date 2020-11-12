@@ -1,13 +1,13 @@
-import { AppAdminModule } from './admin.module';
+import { AppAdminModule } from './admin.module'
 
 describe('AppAdminModule', () => {
-  let adminModule: AppAdminModule;
+  let adminModule: AppAdminModule
 
   beforeEach(() => {
-    adminModule = new AppAdminModule();
-  });
+    adminModule = new AppAdminModule()
+  })
 
   it('should create an instance', () => {
-    expect(adminModule).toBeTruthy();
-  });
-});
+    expect(adminModule).toBeTruthy()
+  })
+})

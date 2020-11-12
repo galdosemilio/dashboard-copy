@@ -1,2 +1,2 @@
-declare module 'moment-timezone';
-declare module 'qs';
+declare module 'moment-timezone'
+declare module 'qs'

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
-import { EventsService } from '@app/service';
+import { EventsService } from '@app/service'
 
 @Component({
   selector: 'app-faqs',
@@ -11,6 +11,6 @@ export class FaqsComponent implements OnInit {
   constructor(private bus: EventsService) {}
 
   ngOnInit() {
-    this.bus.trigger('right-panel.deactivate');
+    this.bus.trigger('right-panel.deactivate')
   }
 }

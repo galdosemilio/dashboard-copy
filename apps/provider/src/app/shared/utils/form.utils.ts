@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Injectable } from '@angular/core'
+import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import {
   cloneDeep,
   forOwn,
@@ -12,10 +12,10 @@ import {
   isString,
   isUndefined,
   pull
-} from 'lodash';
-import * as moment from 'moment-timezone';
+} from 'lodash'
+import * as moment from 'moment-timezone'
 
-import { ConfigService } from '@app/service/config.service';
+import { ConfigService } from '@app/service/config.service'
 
 @Injectable()
 export class FormUtils {
@@ -34,17 +34,17 @@ export class FormUtils {
           (isString(value) && isEmpty(value)) ||
           (isObject(value) && isEmpty(prune(value)))
         ) {
-          delete current[key];
+          delete current[key]
         }
-      });
+      })
       // remove any leftover undefined values from the delete
       // operation on an array
       if (isArray(current)) {
-        pull(current, undefined);
+        pull(current, undefined)
       }
 
-      return current;
-    })(cloneDeep(obj)); // do not modify the original object, create a clone instead
+      return current
+    })(cloneDeep(obj)) // do not modify the original object, create a clone instead
   }
 
   /**
@@ -53,13 +53,13 @@ export class FormUtils {
    */
   markAsTouched(group: FormGroup | FormArray): void {
     Object.keys(group.controls).map((field) => {
-      const control = group.get(field);
+      const control = group.get(field)
       if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
+        control.markAsTouched({ onlySelf: true })
       } else if (control instanceof FormGroup || control instanceof FormArray) {
-        this.markAsTouched(control);
+        this.markAsTouched(control)
       }
-    });
+    })
   }
 
   /**
@@ -67,46 +67,49 @@ export class FormUtils {
    * @param group Form to mark as touched
    */
   getErrors(group: FormGroup | FormArray, errors = {}): any {
-    Object.assign(errors, group.errors ? group.errors : {});
+    Object.assign(errors, group.errors ? group.errors : {})
     Object.keys(group.controls).map((field) => {
-      const control = group.get(field);
-      Object.assign(errors, control.errors ? control.errors : {});
+      const control = group.get(field)
+      Object.assign(errors, control.errors ? control.errors : {})
       if (control instanceof FormGroup || control instanceof FormArray) {
-        this.getErrors(control, errors);
+        this.getErrors(control, errors)
       }
-    });
+    })
 
-    return errors;
+    return errors
   }
 
   /**
    * Resolve the initial date for a form.
    */
   getInitialDate() {
-    const initial = moment().set(this.config.get('default.startTime'));
+    const initial = moment().set(this.config.get('default.startTime'))
 
     if (initial.isBefore(moment(), 'minutes')) {
-      const day = initial.day();
-      const add = day > 0 && day < 5 ? 1 : 6 - day + 2;
-      initial.add(add, 'day');
+      const day = initial.day()
+      const add = day > 0 && day < 5 ? 1 : 6 - day + 2
+      initial.add(add, 'day')
     }
 
-    const diff = initial.minutes() % 15;
+    const diff = initial.minutes() % 15
 
-    return initial.subtract(diff, 'minutes').add(15, 'minutes').set('seconds', 0);
+    return initial
+      .subtract(diff, 'minutes')
+      .add(15, 'minutes')
+      .set('seconds', 0)
   }
 
   /**
    * View utils.
    */
-  private _errors = {};
+  private _errors = {}
 
   hasErrors(group: FormGroup | FormArray) {
-    this._errors = this.getErrors(group);
-    return !isEmpty(this._errors);
+    this._errors = this.getErrors(group)
+    return !isEmpty(this._errors)
   }
 
   getError(errorCode: string) {
-    return get(this._errors, errorCode, null);
+    return get(this._errors, errorCode, null)
   }
 }

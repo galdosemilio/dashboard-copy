@@ -1,1 +1,1 @@
-export type IngredientMetadata = null | { [key: string]: any };
+export type IngredientMetadata = null | { [key: string]: any }

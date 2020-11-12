@@ -3,6 +3,6 @@
  */
 
 export interface SignupsListSort {
-    property: 'percentage' | 'value' | 'provider' | 'name' | 'startDate';
-    dir?: 'asc' | 'desc';
+  property: 'percentage' | 'value' | 'provider' | 'name' | 'startDate'
+  dir?: 'asc' | 'desc'
 }

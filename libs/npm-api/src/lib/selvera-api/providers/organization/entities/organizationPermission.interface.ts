@@ -3,7 +3,7 @@
  */
 
 export interface OrganizationPermission {
-    viewAll: boolean;
-    admin: boolean;
-    allowClientPhi: boolean;
+  viewAll: boolean
+  admin: boolean
+  allowClientPhi: boolean
 }

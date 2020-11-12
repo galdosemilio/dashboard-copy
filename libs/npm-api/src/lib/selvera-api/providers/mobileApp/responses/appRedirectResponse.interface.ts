@@ -3,5 +3,5 @@
  */
 
 export interface AppRedirectResponse {
-    redirect: string;
+  redirect: string
 }

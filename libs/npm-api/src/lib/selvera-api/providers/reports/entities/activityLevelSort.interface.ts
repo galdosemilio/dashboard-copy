@@ -3,6 +3,6 @@
  */
 
 export interface ActivityLevelSort {
-    property: 'activityLevel' | 'provider' | 'name';
-    dir?: 'asc' | 'desc';
+  property: 'activityLevel' | 'provider' | 'name'
+  dir?: 'asc' | 'desc'
 }

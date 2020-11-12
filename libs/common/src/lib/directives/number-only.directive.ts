@@ -1,21 +1,21 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core'
 
 @Directive({
   selector: '[ccrNumberOnly]'
 })
 export class NumberOnlyDirective {
-  @Input() ccrNumberOnly: any; // pass false to disable it
-  @Input() wholeNumber = false;
+  @Input() ccrNumberOnly: any // pass false to disable it
+  @Input() wholeNumber = false
 
   constructor() {}
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event: any) {
     if (this.ccrNumberOnly !== false) {
-      const e = event as KeyboardEvent;
-      let arr = [46, 8, 9, 27, 13, 110, 190];
+      const e = event as KeyboardEvent
+      let arr = [46, 8, 9, 27, 13, 110, 190]
       if (this.wholeNumber) {
-        arr = [46, 8, 9, 27, 13];
+        arr = [46, 8, 9, 27, 13]
       }
       if (
         arr.indexOf(e.keyCode) !== -1 ||
@@ -29,15 +29,15 @@ export class NumberOnlyDirective {
         (e.keyCode >= 35 && e.keyCode <= 39)
       ) {
         // let it happen, don't do anything
-        return;
+        return
       }
 
       // Ensure that it is a number and stop the keypress
       if (
-        (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
+        (e.shiftKey || e.keyCode < 48 || e.keyCode > 57) &&
         (e.keyCode < 96 || e.keyCode > 105)
       ) {
-        e.preventDefault();
+        e.preventDefault()
       }
     }
   }

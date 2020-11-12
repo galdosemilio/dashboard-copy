@@ -1,72 +1,63 @@
-import { standardSetup } from '../../support';
+import { standardSetup } from '../../support'
 
-describe('Schedule -> manage attendance', function() {
-  it('Modal allows attendance to be viewed and udpated', function() {
-    standardSetup(Date.UTC(2020, 0, 2));
+describe('Schedule -> manage attendance', function () {
+  it('Modal allows attendance to be viewed and udpated', function () {
+    standardSetup(Date.UTC(2020, 0, 2))
 
-    cy.visit(`/schedule/view`);
+    cy.visit(`/schedule/view`)
 
     cy.get('div.meeting.meeting-selectable')
       .contains('Test meeting 1')
-      .as('calendarBody');
+      .as('calendarBody')
 
-    cy.get('@calendarBody').click();
+    cy.get('@calendarBody').click()
 
-    cy.wait(5000);
+    cy.wait(5000)
 
-    cy.get('.attendanceSelector').as('attendanceSelectors');
+    cy.get('.attendanceSelector').as('attendanceSelectors')
 
-    cy.get('@attendanceSelectors').should('have.length', 3);
+    cy.get('@attendanceSelectors').should('have.length', 3)
 
-    cy.get('@attendanceSelectors')
-      .eq(0)
-      .contains('Attended');
+    cy.get('@attendanceSelectors').eq(0).contains('Attended')
 
-    cy.get('@attendanceSelectors')
-      .eq(0)
-      .trigger('click');
+    cy.get('@attendanceSelectors').eq(0).trigger('click')
 
-    cy.get('.mat-option').as('attendanceOptions');
+    cy.get('.mat-option').as('attendanceOptions')
 
-    cy.get('@attendanceOptions').should('have.length', 4);
+    cy.get('@attendanceOptions').should('have.length', 4)
 
     // // Mark as attended
     cy.route({
       method: 'PATCH',
       url: `/3.0/meeting/attendance`,
-      onRequest: xhr => {
-        expect(xhr.request.body.id).to.contain('2');
-        expect(xhr.request.body.status).to.equal('3');
+      onRequest: (xhr) => {
+        expect(xhr.request.body.id).to.contain('2')
+        expect(xhr.request.body.status).to.equal('3')
       },
       status: 200,
       response: {}
-    });
+    })
 
-    cy.get('@attendanceOptions')
-      .eq(0)
-      .trigger('click')
-      .wait(1200);
+    cy.get('@attendanceOptions').eq(0).trigger('click').wait(1200)
 
     // // Mark as not attended
     cy.route({
       method: 'PATCH',
       url: `/3.0/meeting/attendance`,
-      onRequest: xhr => {
-        expect(xhr.request.body.id).to.contain('2');
-        expect(xhr.request.body.status).to.equal('2');
+      onRequest: (xhr) => {
+        expect(xhr.request.body.id).to.contain('2')
+        expect(xhr.request.body.status).to.equal('2')
       },
       status: 200,
       response: {}
-    });
-    cy.get('@attendanceSelectors')
-      .eq(1)
-      .trigger('click');
+    })
+    cy.get('@attendanceSelectors').eq(1).trigger('click')
     cy.get('.mat-select-panel')
       .find('mat-option')
       .eq(1)
-      .trigger('click', { force: true });
+      .trigger('click', { force: true })
 
     // // Wait for the modal to close, so it doesn't overlap to next test...
-    cy.wait(5000);
-  });
-});
+    cy.wait(5000)
+  })
+})

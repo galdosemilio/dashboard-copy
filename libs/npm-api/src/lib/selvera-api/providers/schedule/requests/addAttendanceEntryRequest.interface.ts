@@ -3,6 +3,6 @@
  */
 
 export interface AddAttendanceEntryRequest {
-    /** Status name */
-    name: string;
+  /** Status name */
+  name: string
 }

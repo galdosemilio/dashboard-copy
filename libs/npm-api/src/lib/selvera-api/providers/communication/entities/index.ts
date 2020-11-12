@@ -1,1 +1,1 @@
-export * from './communicationPreference.single';
+export * from './communicationPreference.single'

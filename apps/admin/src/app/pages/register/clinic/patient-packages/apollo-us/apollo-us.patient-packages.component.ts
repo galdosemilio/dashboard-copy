@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { _ } from '@coachcare/backend/shared';
+import { Component, OnInit } from '@angular/core'
+import { _ } from '@coachcare/backend/shared'
 
 @Component({
   selector: 'ccr-page-register-clinic-apollous-patient-packages',
@@ -7,7 +7,7 @@ import { _ } from '@coachcare/backend/shared';
   templateUrl: './apollo-us.patient-packages.component.html'
 })
 export class ApolloUSPatientPackagesComponent implements OnInit {
-  packages: any[];
+  packages: any[]
 
   ngOnInit() {
     this.packages = [
@@ -30,6 +30,6 @@ export class ApolloUSPatientPackagesComponent implements OnInit {
           _('SECTION.APOLLOUS.PACKAGE.APOLLO_COACHING_SERVICES')
         ]
       }
-    ];
+    ]
   }
 }

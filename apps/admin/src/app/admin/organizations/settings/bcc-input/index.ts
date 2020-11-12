@@ -1,1 +1,1 @@
-export * from './bcc-input.component';
+export * from './bcc-input.component'

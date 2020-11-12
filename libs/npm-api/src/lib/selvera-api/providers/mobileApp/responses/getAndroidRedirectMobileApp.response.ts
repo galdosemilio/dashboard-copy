@@ -4,5 +4,5 @@
 
 export interface GetAndroidRedirectMobileAppResponse {
   /** Redirect URL. */
-  redirect: string;
+  redirect: string
 }

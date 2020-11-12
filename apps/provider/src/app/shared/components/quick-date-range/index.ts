@@ -1,1 +1,1 @@
-export * from './quick-date-range.component';
+export * from './quick-date-range.component'

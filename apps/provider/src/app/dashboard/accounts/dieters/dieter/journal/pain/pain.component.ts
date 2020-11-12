@@ -1,9 +1,12 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { PainDatabase, PainDataSource } from '@app/dashboard/accounts/dieters/services';
-import { ContextService, NotifierService } from '@app/service';
-import { CcrPaginator, DateNavigatorOutput } from '@app/shared';
-import * as moment from 'moment';
-import { BehaviorSubject } from 'rxjs';
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
+import {
+  PainDatabase,
+  PainDataSource
+} from '@app/dashboard/accounts/dieters/services'
+import { ContextService, NotifierService } from '@app/service'
+import { CcrPaginator, DateNavigatorOutput } from '@app/shared'
+import * as moment from 'moment'
+import { BehaviorSubject } from 'rxjs'
 
 @Component({
   selector: 'app-dieter-journal-pain',
@@ -13,14 +16,14 @@ import { BehaviorSubject } from 'rxjs';
 export class PainComponent implements OnInit {
   @Input()
   set dates(dates: DateNavigatorOutput) {
-    this.date$.next(dates);
+    this.date$.next(dates)
   }
 
   @ViewChild('paginator', { static: false })
-  paginator: CcrPaginator;
+  paginator: CcrPaginator
 
-  date$ = new BehaviorSubject<DateNavigatorOutput>({});
-  source: PainDataSource | null;
+  date$ = new BehaviorSubject<DateNavigatorOutput>({})
+  source: PainDataSource | null
 
   constructor(
     private context: ContextService,
@@ -29,16 +32,20 @@ export class PainComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.source = new PainDataSource(this.notifier, this.database, this.paginator);
+    this.source = new PainDataSource(
+      this.notifier,
+      this.database,
+      this.paginator
+    )
     this.source.addDefault({
       account: this.context.accountId
-    });
+    })
     this.source.addRequired(this.date$, () => {
-      const dates = this.date$.getValue();
+      const dates = this.date$.getValue()
       return {
         startDate: moment(dates.startDate).format(),
         endDate: moment(dates.endDate).format()
-      };
-    });
+      }
+    })
   }
 }

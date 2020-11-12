@@ -8,8 +8,8 @@ import {
   SelectorQuestionComponent,
   ShortAnswerQuestionComponent,
   TimeQuestionComponent
-} from '@app/dashboard/library/forms/questions';
-import { FormQuestionType } from './question-type.interface';
+} from '@app/dashboard/library/forms/questions'
+import { FormQuestionType } from './question-type.interface'
 
 export const QUESTION_TYPE_MAP: { [id: string]: FormQuestionType } = {
   1: {
@@ -106,4 +106,4 @@ export const QUESTION_TYPE_MAP: { [id: string]: FormQuestionType } = {
     shouldHideIndex: true,
     usesUrl: true
   }
-};
+}

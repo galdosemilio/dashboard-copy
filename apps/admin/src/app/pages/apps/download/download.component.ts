@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
-const PAGE_CONF_TIMEOUT = 300;
+const PAGE_CONF_TIMEOUT = 300
 
 @Component({
   selector: 'ccr-page-download',
@@ -11,13 +11,13 @@ const PAGE_CONF_TIMEOUT = 300;
   }
 })
 export class DownloadPageComponent implements OnInit {
-  timeout = false;
+  timeout = false
 
   constructor() {}
 
   ngOnInit() {
     setTimeout(() => {
-      this.timeout = true;
-    }, PAGE_CONF_TIMEOUT);
+      this.timeout = true
+    }, PAGE_CONF_TIMEOUT)
   }
 }

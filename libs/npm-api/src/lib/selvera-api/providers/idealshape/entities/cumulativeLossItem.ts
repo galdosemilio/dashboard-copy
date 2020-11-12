@@ -4,7 +4,7 @@
 
 export interface CumulativeLossItem {
   /** Entry date. */
-  date: string;
+  date: string
   /** Cumulative loss value for the date. */
-  value: number;
+  value: number
 }

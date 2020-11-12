@@ -1,1 +1,1 @@
-export * from './email-template.dialog';
+export * from './email-template.dialog'

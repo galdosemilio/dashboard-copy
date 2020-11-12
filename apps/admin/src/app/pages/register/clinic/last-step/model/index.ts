@@ -1,1 +1,1 @@
-export * from './last-step-props';
+export * from './last-step-props'

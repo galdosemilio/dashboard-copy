@@ -3,8 +3,8 @@
  */
 
 export interface AddIdentifierRequest {
-  account: string;
-  organization: string;
-  name: string;
-  value: string;
+  account: string
+  organization: string
+  name: string
+  value: string
 }

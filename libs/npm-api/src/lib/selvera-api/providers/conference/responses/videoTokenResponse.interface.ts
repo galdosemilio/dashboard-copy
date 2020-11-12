@@ -3,5 +3,5 @@
  */
 
 export interface VideoTokenResponse {
-    jwt: string;
+  jwt: string
 }

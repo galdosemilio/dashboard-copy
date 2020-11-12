@@ -3,8 +3,8 @@
  */
 
 export interface GetAllExerciseAssociationRequest {
-    organization: string;
-    exerciseType?: string;
-    title?: string;
-    includeInactive?: boolean;
+  organization: string
+  exerciseType?: string
+  title?: string
+  includeInactive?: boolean
 }

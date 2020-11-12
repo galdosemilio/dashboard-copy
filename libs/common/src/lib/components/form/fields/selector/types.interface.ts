@@ -1,1 +1,5 @@
-export type SelectorFormFieldTypes = 'gender' | 'measurement' | 'phoneType' | 'status';
+export type SelectorFormFieldTypes =
+  | 'gender'
+  | 'measurement'
+  | 'phoneType'
+  | 'status'

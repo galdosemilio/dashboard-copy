@@ -1,21 +1,21 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
 import {
   ModuleWithProviders,
   NgModule,
   Optional,
-  SkipSelf,
-} from '@angular/core';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+  SkipSelf
+} from '@angular/core'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreModule } from '@ngrx/store'
 
-import { effects } from './effects';
-import { reducers } from './reducers';
-import { NAME } from './selectors';
-import { initialState } from './state';
-import { CCRFacade } from './store.facade';
+import { effects } from './effects'
+import { reducers } from './reducers'
+import { NAME } from './selectors'
+import { initialState } from './state'
+import { CCRFacade } from './store.facade'
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule]
 })
 export class CCRStoreModule {
   constructor(
@@ -24,7 +24,7 @@ export class CCRStoreModule {
     parent: CCRStoreModule
   ) {
     if (parent) {
-      throw new Error('CCRStoreModule is already loaded.');
+      throw new Error('CCRStoreModule is already loaded.')
     }
   }
 
@@ -32,10 +32,10 @@ export class CCRStoreModule {
     return [
       {
         ngModule: CCRStoreModule,
-        providers: [CCRFacade],
+        providers: [CCRFacade]
       },
       StoreModule.forFeature(NAME, reducers, { initialState }),
-      EffectsModule.forFeature(effects),
-    ];
+      EffectsModule.forFeature(effects)
+    ]
   }
 }

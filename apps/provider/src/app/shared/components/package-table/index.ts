@@ -1,2 +1,2 @@
-export * from './package-table.component';
-export * from './models';
+export * from './package-table.component'
+export * from './models'

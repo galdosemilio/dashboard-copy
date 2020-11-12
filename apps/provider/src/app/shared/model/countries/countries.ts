@@ -1,4 +1,4 @@
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export const REG_COUNTRIES: Array<any> = [
   {
@@ -25,7 +25,7 @@ export const REG_COUNTRIES: Array<any> = [
     viewValue: _('SELECTOR.COUNTRIES.IL'),
     value: 'IL'
   }
-];
+]
 
 export const MAIN_REG_COUNTRIES: Array<any> = [
   {
@@ -96,4 +96,4 @@ export const MAIN_REG_COUNTRIES: Array<any> = [
     viewValue: _('SELECTOR.COUNTRIES.IL'),
     value: 'IL'
   }
-];
+]

@@ -3,5 +3,5 @@
  */
 
 export interface AddSupplementResponse {
-    supplementId: string;
+  supplementId: string
 }

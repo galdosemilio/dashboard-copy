@@ -3,8 +3,8 @@
  */
 
 export interface CreateContentPackageRequest {
-    /** Content item ID. */
-    id: string;
-    /** ID of the package. */
-    package: string;
+  /** Content item ID. */
+  id: string
+  /** ID of the package. */
+  package: string
 }

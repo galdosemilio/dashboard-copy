@@ -1,1 +1,1 @@
-export * from './progress-report-pdf.dialog';
+export * from './progress-report-pdf.dialog'

@@ -2,8 +2,8 @@
  * Interface for SummaryDataResponseUnfiltered
  */
 
-import { SummaryDataResponse } from './summaryDataResponse.interface';
+import { SummaryDataResponse } from './summaryDataResponse.interface'
 
 export interface SummaryDataResponseUnfiltered {
-    data: Array<SummaryDataResponse>;
+  data: Array<SummaryDataResponse>
 }

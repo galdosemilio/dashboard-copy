@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ContentUpload } from '@app/dashboard/content/models';
-import { ContentUploadService } from '@app/dashboard/content/services';
+import { Component } from '@angular/core'
+import { ContentUpload } from '@app/dashboard/content/models'
+import { ContentUploadService } from '@app/dashboard/content/services'
 
 @Component({
   selector: 'app-content-file-upload-tracker',
@@ -10,12 +10,12 @@ import { ContentUploadService } from '@app/dashboard/content/services';
 export class FileUploadTrackerComponent {
   public status: any = {
     minimized: false
-  };
-  public uploadAmount: number;
+  }
+  public uploadAmount: number
 
   constructor(public contentUpload: ContentUploadService) {
     this.contentUpload.visibleUploads$.subscribe(
       (uploads: ContentUpload[]) => (this.uploadAmount = uploads.length)
-    );
+    )
   }
 }

@@ -3,5 +3,5 @@
  */
 
 export interface FetchErrorLogRequest {
-  date?: string; // YYYY-MM-DD default: today
+  date?: string // YYYY-MM-DD default: today
 }

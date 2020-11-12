@@ -1,10 +1,10 @@
-import { Icon } from '@app/dashboard/content/models/icon.interface';
-import { _ } from '@app/shared';
+import { Icon } from '@app/dashboard/content/models/icon.interface'
+import { _ } from '@app/shared'
 
 export interface FileTypeMapItem {
-  icon: Icon;
-  name: string;
-  mimeType: string | string[];
+  icon: Icon
+  name: string
+  mimeType: string | string[]
 }
 
 export const FILE_TYPE_MAP: { [name: string]: FileTypeMapItem } = {
@@ -36,7 +36,8 @@ export const FILE_TYPE_MAP: { [name: string]: FileTypeMapItem } = {
   ['docx']: {
     icon: { svgIcon: 'svg-document' },
     name: _('LIBRARY.CONTENT.TYPE.DOC'),
-    mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    mimeType:
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   },
   ['xls']: {
     icon: { name: 'fa-file-excel', set: 'fas' },
@@ -46,7 +47,8 @@ export const FILE_TYPE_MAP: { [name: string]: FileTypeMapItem } = {
   ['xlsx']: {
     icon: { name: 'fa-file-excel', set: 'fas' },
     name: _('LIBRARY.CONTENT.TYPE.XLS'),
-    mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    mimeType:
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   },
   ['ppt']: {
     icon: { name: 'fa-file-powerpoint', set: 'fas' },
@@ -56,7 +58,8 @@ export const FILE_TYPE_MAP: { [name: string]: FileTypeMapItem } = {
   ['pptx']: {
     icon: { name: 'fa-file-powerpoint', set: 'fas' },
     name: _('LIBRARY.CONTENT.TYPE.PPT'),
-    mimeType: 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+    mimeType:
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation'
   },
   ['txt']: {
     icon: { name: 'fa-file-alt', set: 'fas' },
@@ -68,4 +71,4 @@ export const FILE_TYPE_MAP: { [name: string]: FileTypeMapItem } = {
     name: _('LIBRARY.CONTENT.TYPE.RTF'),
     mimeType: 'application/rtf'
   }
-};
+}

@@ -1,7 +1,7 @@
 export interface PatientRPMReportActivityItem {
-    key: string;
-    value: {
-        count: number;
-        minutes: number;
-    };
+  key: string
+  value: {
+    count: number
+    minutes: number
+  }
 }

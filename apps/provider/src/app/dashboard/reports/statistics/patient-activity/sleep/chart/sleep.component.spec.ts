@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SleepChartComponent } from './sleep.component';
+import { SleepChartComponent } from './sleep.component'
 
 describe('SleepChartComponent', () => {
-  let component: SleepChartComponent;
-  let fixture: ComponentFixture<SleepChartComponent>;
+  let component: SleepChartComponent
+  let fixture: ComponentFixture<SleepChartComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SleepChartComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SleepChartComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(SleepChartComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

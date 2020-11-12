@@ -1,11 +1,11 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router'
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
-  },
-];
+      import('../dashboard/dashboard.module').then((m) => m.DashboardModule)
+  }
+]
 
-export const LayoutRoutes = RouterModule.forChild(routes);
+export const LayoutRoutes = RouterModule.forChild(routes)

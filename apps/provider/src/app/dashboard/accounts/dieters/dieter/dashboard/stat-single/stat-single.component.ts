@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 @Component({
   selector: 'ccr-stat-single',
@@ -6,13 +6,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./stat-single.component.scss']
 })
 export class StatSingleComponent implements OnInit {
-  @Input() isLoading: boolean;
-  @Input() isEditable: boolean;
+  @Input() isLoading: boolean
+  @Input() isEditable: boolean
 
-  @Input() title: string;
-  @Input() value: number;
+  @Input() title: string
+  @Input() value: number
 
-  @Output() edit = new EventEmitter<void>();
+  @Output() edit = new EventEmitter<void>()
 
   constructor() {}
 
@@ -20,7 +20,7 @@ export class StatSingleComponent implements OnInit {
 
   onClick() {
     if (this.isEditable) {
-      this.edit.emit();
+      this.edit.emit()
     }
   }
 }

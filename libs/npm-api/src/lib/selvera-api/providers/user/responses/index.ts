@@ -2,4 +2,4 @@
  * Export all interfaces
  */
 
-export { LoginResponse } from './login.interface';
+export { LoginResponse } from './login.interface'

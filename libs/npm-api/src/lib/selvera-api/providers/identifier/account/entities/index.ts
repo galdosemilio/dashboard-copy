@@ -1,1 +1,1 @@
-export * from './identifier.interface';
+export * from './identifier.interface'

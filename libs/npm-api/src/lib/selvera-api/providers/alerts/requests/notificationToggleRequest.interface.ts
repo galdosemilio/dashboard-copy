@@ -3,7 +3,7 @@
  */
 
 export interface NotificationToggleRequest {
-    account: string;
-    notificationId: string;
-    isViewed: boolean;
+  account: string
+  notificationId: string
+  isViewed: boolean
 }

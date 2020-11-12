@@ -1,6 +1,6 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { FileExplorerContent, FileExplorerEvents } from '../../models';
-import { FileExplorerDatasource } from '../../services';
+import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { FileExplorerContent, FileExplorerEvents } from '../../models'
+import { FileExplorerDatasource } from '../../services'
 
 @Component({
   selector: 'app-content-selected-table',
@@ -9,12 +9,12 @@ import { FileExplorerDatasource } from '../../services';
   encapsulation: ViewEncapsulation.None
 })
 export class SelectedContentTableComponent {
-  @Input() contents: FileExplorerContent[] = [];
-  @Input() events: FileExplorerEvents;
+  @Input() contents: FileExplorerContent[] = []
+  @Input() events: FileExplorerEvents
 
-  public columns: string[] = ['selector', 'icon', 'name'];
+  public columns: string[] = ['selector', 'icon', 'name']
 
   public onRemoveContent(content: FileExplorerContent): void {
-    this.events.contentUnchecked.emit(content);
+    this.events.contentUnchecked.emit(content)
   }
 }

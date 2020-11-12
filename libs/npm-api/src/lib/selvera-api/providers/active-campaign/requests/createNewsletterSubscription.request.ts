@@ -1,4 +1,4 @@
 export interface CreateNewsletterSubscriptionRequest {
-    account: string;
-    organization: string;
+  account: string
+  organization: string
 }

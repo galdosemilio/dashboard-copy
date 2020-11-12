@@ -3,6 +3,6 @@
  */
 
 export interface DeletePreferenceRequest {
-    /** Preference id */
-    id: string;
+  /** Preference id */
+  id: string
 }

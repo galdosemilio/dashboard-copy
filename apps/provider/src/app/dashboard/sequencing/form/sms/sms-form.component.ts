@@ -5,15 +5,15 @@ import {
   Input,
   OnDestroy,
   OnInit
-} from '@angular/core';
+} from '@angular/core'
 import {
   ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators
-} from '@angular/forms';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+} from '@angular/forms'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
 @Component({
   selector: 'sequencing-sms-form',
@@ -27,68 +27,73 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
     }
   ]
 })
-export class SMSFormComponent implements ControlValueAccessor, OnDestroy, OnInit {
-  @Input() markAsTouched;
+export class SMSFormComponent
+  implements ControlValueAccessor, OnDestroy, OnInit {
+  @Input() markAsTouched
 
   @Input('isDisabled') set disabled(disabled: boolean) {
-    this._disabled = disabled || false;
+    this._disabled = disabled || false
 
     if (this.form && this._disabled) {
-      this.form.disable({ emitEvent: false });
+      this.form.disable({ emitEvent: false })
     } else if (this.form) {
-      this.form.enable({ emitEvent: false });
+      this.form.enable({ emitEvent: false })
     }
   }
 
   get disabled(): boolean {
-    return this._disabled;
+    return this._disabled
   }
 
-  form: FormGroup;
+  form: FormGroup
 
-  private _disabled: boolean;
+  private _disabled: boolean
 
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder) {}
 
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.createForm();
+    this.createForm()
 
     this.markAsTouched.pipe(untilDestroyed(this)).subscribe(() => {
-      this.form.markAsTouched();
+      this.form.markAsTouched()
       Object.keys(this.form.controls).forEach((key) => {
-        this.form.controls[key].markAsTouched();
-      });
-      this.cdr.detectChanges();
-    });
+        this.form.controls[key].markAsTouched()
+      })
+      this.cdr.detectChanges()
+    })
 
     if (this.disabled) {
-      this.form.disable({ emitEvent: false });
+      this.form.disable({ emitEvent: false })
     }
   }
 
-  propagateChange = (data: any) => {};
+  propagateChange = (data: any) => {}
 
   registerOnTouched() {}
 
   registerOnChange(fn): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   writeValue(value: any): void {
     if (value) {
-      this.form.patchValue({ text: value.content || value.message || value.text });
+      this.form.patchValue({
+        text: value.content || value.message || value.text
+      })
     }
   }
 
   private createForm(): void {
     this.form = this.fb.group({
       text: ['', Validators.required]
-    });
+    })
 
     this.form.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((controls) => this.propagateChange(this.form.valid ? controls : null));
+      .subscribe((controls) =>
+        this.propagateChange(this.form.valid ? controls : null)
+      )
   }
 }

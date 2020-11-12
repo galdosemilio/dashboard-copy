@@ -1,1 +1,1 @@
-export * from './selected-content-table';
+export * from './selected-content-table'

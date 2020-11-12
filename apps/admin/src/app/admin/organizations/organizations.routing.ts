@@ -1,18 +1,18 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 import {
   OrganizationFeaturePreferenceResolver,
   OrganizationPreferenceResolver,
   OrganizationResolver
-} from '@board/services';
+} from '@board/services'
 
-import { OrganizationActiveCampaignComponent } from './active-campaign';
-import { OrganizationsDisplayComponent } from './display';
-import { EmailTemplateComponent } from './email-template';
-import { OrganizationsFormComponent } from './form';
-import { LabelsAssociationsComponent } from './labels-associations';
-import { OrganizationsListComponent } from './list';
-import { OrganizationsSettingsComponent } from './settings';
-import { OrganizationsTreeComponent } from './tree';
+import { OrganizationActiveCampaignComponent } from './active-campaign'
+import { OrganizationsDisplayComponent } from './display'
+import { EmailTemplateComponent } from './email-template'
+import { OrganizationsFormComponent } from './form'
+import { LabelsAssociationsComponent } from './labels-associations'
+import { OrganizationsListComponent } from './list'
+import { OrganizationsSettingsComponent } from './settings'
+import { OrganizationsTreeComponent } from './tree'
 
 export const routes: Routes = [
   {
@@ -98,4 +98,4 @@ export const routes: Routes = [
       }
     ]
   }
-];
+]

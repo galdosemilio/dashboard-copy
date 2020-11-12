@@ -1,1 +1,1 @@
-export * from './platform-updates.component';
+export * from './platform-updates.component'

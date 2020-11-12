@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   name: 'toOunces'
@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ToOuncesPipe implements PipeTransform {
   // Convert milliliters to ounces
   transform(value: number): any {
-    const converted = value * 0.033814;
-    return converted.toFixed(0);
+    const converted = value * 0.033814
+    return converted.toFixed(0)
   }
 }

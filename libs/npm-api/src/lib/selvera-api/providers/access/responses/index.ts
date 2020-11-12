@@ -1,1 +1,1 @@
-export * from './updatePassword.response';
+export * from './updatePassword.response'

@@ -3,6 +3,6 @@
  */
 
 export interface FetchSingleIngredientRequest {
-    id: string;
-    type: 'natural' | 'local' | 'branded' | 'common' | 'upc';
+  id: string
+  type: 'natural' | 'local' | 'branded' | 'common' | 'upc'
 }

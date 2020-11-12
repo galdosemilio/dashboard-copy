@@ -1,1 +1,1 @@
-export * from './mdteam.section.config';
+export * from './mdteam.section.config'

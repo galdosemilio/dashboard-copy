@@ -1,1 +1,1 @@
-export * from './nutrimost.header.component';
+export * from './nutrimost.header.component'

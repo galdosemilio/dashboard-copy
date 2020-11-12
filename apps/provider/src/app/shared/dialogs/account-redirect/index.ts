@@ -1,1 +1,1 @@
-export * from './account-redirect.dialog';
+export * from './account-redirect.dialog'

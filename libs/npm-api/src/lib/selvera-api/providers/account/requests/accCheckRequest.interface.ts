@@ -3,5 +3,5 @@
  */
 
 export interface AccCheckRequest {
-    email: string;
+  email: string
 }

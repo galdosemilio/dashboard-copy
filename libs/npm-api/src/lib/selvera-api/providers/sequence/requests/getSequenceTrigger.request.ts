@@ -3,8 +3,8 @@
  */
 
 export interface GetSequenceTriggerRequest {
-    /** Trigger ID */
-    id: string;
-    /** Organization ID */
-    organization: string;
+  /** Trigger ID */
+  id: string
+  /** Organization ID */
+  organization: string
 }

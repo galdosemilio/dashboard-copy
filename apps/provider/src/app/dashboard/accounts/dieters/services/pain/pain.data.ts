@@ -1,33 +1,33 @@
-import { _ } from '@app/shared';
-import * as moment from 'moment';
+import { _ } from '@app/shared'
+import * as moment from 'moment'
 
 // TODO move to npm-api
 export interface PainSingle {
-  reportedAt: string;
-  region: string;
-  duration?: any;
-  intensity: number;
-  description: string;
+  reportedAt: string
+  region: string
+  duration?: any
+  intensity: number
+  description: string
 }
 
 export interface PainRow extends PainSingle {
-  duration: string;
-  intensityText: string;
-  typeText: string;
+  duration: string
+  intensityText: string
+  typeText: string
 }
 
 export interface PainType {
-  id: number;
-  description: string;
+  id: number
+  description: string
 }
 
 export class PainData {
-  date: string;
-  details: Array<PainRow> = [];
+  date: string
+  details: Array<PainRow> = []
 
   constructor(row: PainSingle) {
-    this.date = moment(row.reportedAt).format('YYYY-MM-DD');
-    this.addRow(row);
+    this.date = moment(row.reportedAt).format('YYYY-MM-DD')
+    this.addRow(row)
   }
 
   addRow(row: PainSingle) {
@@ -35,13 +35,15 @@ export class PainData {
     const data: PainRow = {
       ...row,
       // duration to moment
-      duration: row.duration ? moment.duration(row.duration).humanize() : undefined,
+      duration: row.duration
+        ? moment.duration(row.duration).humanize()
+        : undefined,
       // translate intensity text
       intensityText: this.txtIntensity(row.intensity),
       // resolve pain type text
       typeText: row.description
-    };
-    this.details.push(data);
+    }
+    this.details.push(data)
   }
 
   private txtIntensity(level: number) {
@@ -51,8 +53,8 @@ export class PainData {
       3: 'Moderate',
       4: 'Hard',
       5: 'Severe'
-    };
-    return intensities[level];
+    }
+    return intensities[level]
   }
 
   private calculateDuration(
@@ -61,7 +63,7 @@ export class PainData {
     unit: moment.unitOfTime.DurationConstructor
   ): number {
     const start = moment(startTime),
-      end = moment(endTime);
-    return end.diff(start, unit);
+      end = moment(endTime)
+    return end.diff(start, unit)
   }
 }

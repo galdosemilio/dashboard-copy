@@ -1,5 +1,5 @@
-import { CompositionColumns } from '../consts';
-import { SectionConfigDetails } from '../models/section.details';
+import { CompositionColumns } from '../consts'
+import { SectionConfigDetails } from '../models/section.details'
 
 export const ShiftSetGoSectionConfig: SectionConfigDetails = {
   JOURNAL: {
@@ -16,4 +16,4 @@ export const ShiftSetGoSectionConfig: SectionConfigDetails = {
   RIGHT_PANEL: {
     SHOW_DAYSHEET_BUTTON: true
   }
-};
+}

@@ -3,8 +3,8 @@
  */
 
 export interface DeleteFoodMealPlanLocaleRequest {
-    /** ID of the meal-plan. */
-    id: string;
-    /** Name of the locale. */
-    locale: string;
+  /** ID of the meal-plan. */
+  id: string
+  /** Name of the locale. */
+  locale: string
 }

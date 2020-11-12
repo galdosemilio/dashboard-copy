@@ -3,8 +3,8 @@
  */
 
 export interface EnrollmentDateRange {
-    /** The start datetime */
-    start?: string;
-    /** The end datetime */
-    end?: string;
+  /** The start datetime */
+  start?: string
+  /** The end datetime */
+  end?: string
 }

@@ -3,10 +3,10 @@
  */
 
 export interface UpdateEmailTemplateRequest {
-    id: string;
-    category?: 'client' | 'other';
-    locale?: string;
-    subject?: string;
-    html?: string;
-    text?: string;
+  id: string
+  category?: 'client' | 'other'
+  locale?: string
+  subject?: string
+  html?: string
+  text?: string
 }

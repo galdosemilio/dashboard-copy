@@ -29,8 +29,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router'
 import { resolveConfig } from '@board/pages/config/section.config'
 import { Register } from '@coachcare/npm-api'
-import { _, FormUtils } from '@coachcare/backend/shared'
-import { CCRFacade } from '@coachcare/backend/store'
+import { _, FormUtils } from '@coachcare/common/shared'
+import { CCRFacade } from '@coachcare/common/store/ccr'
 import { BlockOption } from '@coachcare/common/components'
 import { ConfirmDialog, LanguagesDialog } from '@coachcare/common/dialogs/core'
 import {

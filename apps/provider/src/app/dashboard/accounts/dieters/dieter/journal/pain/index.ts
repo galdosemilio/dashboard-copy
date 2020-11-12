@@ -1,2 +1,2 @@
-export { PainComponent } from './pain.component';
-export { PainTableComponent } from './table/table.component';
+export { PainComponent } from './pain.component'
+export { PainTableComponent } from './table/table.component'

@@ -1,1 +1,1 @@
-export * from './view-image.dialog';
+export * from './view-image.dialog'

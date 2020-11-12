@@ -3,5 +3,5 @@
  */
 
 export interface CreateSubaccountRequest {
-    organization: string;
+  organization: string
 }

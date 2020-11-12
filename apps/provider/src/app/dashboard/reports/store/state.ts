@@ -1,5 +1,5 @@
-import { ReportsControlsState } from './controls/controls.state';
+import { ReportsControlsState } from './controls/controls.state'
 
 export interface ReportsState {
-  controls: ReportsControlsState;
+  controls: ReportsControlsState
 }

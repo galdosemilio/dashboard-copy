@@ -4,7 +4,7 @@
 
 export interface GetAssetsOrganizationPreferenceRequest {
   /** The id of the organization. */
-  id: string;
+  id: string
   /** Indicates whether to include MALA settings in the response. */
-  mala?: boolean;
+  mala?: boolean
 }

@@ -1,5 +1,5 @@
 export interface PatientListingPackageEnrollmentItem {
-    id: string;
-    name: string;
-    startedAt: string;
+  id: string
+  name: string
+  startedAt: string
 }

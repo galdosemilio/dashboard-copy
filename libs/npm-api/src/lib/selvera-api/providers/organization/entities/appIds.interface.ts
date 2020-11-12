@@ -3,8 +3,8 @@
  */
 
 export interface AppIds {
-    /** iOS App ID */
-    ios?: string;
-    /** Android App ID */
-    android?: string;
+  /** iOS App ID */
+  ios?: string
+  /** Android App ID */
+  android?: string
 }

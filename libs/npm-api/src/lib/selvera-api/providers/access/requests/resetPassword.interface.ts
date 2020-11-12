@@ -3,6 +3,6 @@
  */
 
 export interface ResetPasswordRequest {
-    email: string;
-    organization?: string;
+  email: string
+  organization?: string
 }

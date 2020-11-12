@@ -1,1 +1,1 @@
-export * from './mfa-sections.map';
+export * from './mfa-sections.map'

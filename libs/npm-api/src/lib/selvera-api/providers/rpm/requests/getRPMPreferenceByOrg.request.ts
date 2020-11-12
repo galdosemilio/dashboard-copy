@@ -3,6 +3,6 @@
  */
 
 export interface GetRPMPreferenceByOrgRequest {
-    /** Organization ID */
-    organization: string;
+  /** Organization ID */
+  organization: string
 }

@@ -2,4 +2,4 @@
  * Export all interfaces
  */
 
-export { FeedbackRequest } from './feedbackRequest.interface';
+export { FeedbackRequest } from './feedbackRequest.interface'

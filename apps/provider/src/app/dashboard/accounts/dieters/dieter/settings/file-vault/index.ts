@@ -1,1 +1,1 @@
-export * from './file-vault.component';
+export * from './file-vault.component'

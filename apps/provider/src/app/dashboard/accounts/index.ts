@@ -1,11 +1,11 @@
-export * from './clinics';
-export * from './coaches';
-export * from './dieters';
+export * from './clinics'
+export * from './coaches'
+export * from './dieters'
 
-import { DialogsComponents, DialogsEntryComponents } from './dialogs';
+import { DialogsComponents, DialogsEntryComponents } from './dialogs'
 
-export const AccountComponents = DialogsComponents;
+export const AccountComponents = DialogsComponents
 
-export const AccountEntryComponents = DialogsEntryComponents;
+export const AccountEntryComponents = DialogsEntryComponents
 
-export const AccountProviders = [];
+export const AccountProviders = []

@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { StatDiffComponent } from './stat-diff.component';
+import { StatDiffComponent } from './stat-diff.component'
 
 describe('StatDiffComponent', () => {
-  let component: StatDiffComponent;
-  let fixture: ComponentFixture<StatDiffComponent>;
+  let component: StatDiffComponent
+  let fixture: ComponentFixture<StatDiffComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [StatDiffComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatDiffComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(StatDiffComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

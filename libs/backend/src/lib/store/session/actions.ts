@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { State } from './state';
+import { Action } from '@ngrx/store'
+import { State } from './state'
 
 /**
  * Action Types
@@ -16,25 +16,25 @@ export enum ActionTypes {
  * Actions
  */
 export class SessionLoaded implements Action {
-  readonly type = ActionTypes.INIT;
+  readonly type = ActionTypes.INIT
 
   constructor(public payload: Partial<State>) {}
 }
 
 export class SessionUpdated implements Action {
-  readonly type = ActionTypes.UPDATE;
+  readonly type = ActionTypes.UPDATE
 
   constructor(public payload: Partial<State>) {}
 }
 
 export class ChangeLang implements Action {
-  readonly type = ActionTypes.LANG;
+  readonly type = ActionTypes.LANG
 
   constructor(public payload: string) {}
 }
 
 export class Login implements Action {
-  readonly type = ActionTypes.LOGIN;
+  readonly type = ActionTypes.LOGIN
 
   constructor(public payload: any) {
     // this receives an AccountSingle response
@@ -42,8 +42,13 @@ export class Login implements Action {
 }
 
 export class Logout implements Action {
-  readonly type = ActionTypes.LOGOUT;
+  readonly type = ActionTypes.LOGOUT
 }
 
 // Actions data type
-export type Actions = SessionLoaded | SessionUpdated | ChangeLang | Login | Logout;
+export type Actions =
+  | SessionLoaded
+  | SessionUpdated
+  | ChangeLang
+  | Login
+  | Logout

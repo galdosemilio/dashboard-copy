@@ -1,1 +1,1 @@
-export * from './rpm-scale-icon.component';
+export * from './rpm-scale-icon.component'

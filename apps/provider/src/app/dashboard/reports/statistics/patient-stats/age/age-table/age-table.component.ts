@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import * as moment from 'moment-timezone';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
+import * as moment from 'moment-timezone'
 
-import { AgeDataSource } from '@app/dashboard/reports/services';
+import { AgeDataSource } from '@app/dashboard/reports/services'
 
 @Component({
   selector: 'app-statistics-age-table',
@@ -9,13 +9,13 @@ import { AgeDataSource } from '@app/dashboard/reports/services';
   styleUrls: ['./age-table.component.scss']
 })
 export class AgeTableComponent implements OnInit {
-  @Input() source: AgeDataSource;
+  @Input() source: AgeDataSource
 
-  columns = ['age-class', 'count', 'percentage'];
+  columns = ['age-class', 'count', 'percentage']
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.cdr.detectChanges();
+    this.cdr.detectChanges()
   }
 }

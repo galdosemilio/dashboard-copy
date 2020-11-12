@@ -1,4 +1,4 @@
 export interface ContentSort {
-    property: 'name' | 'createdAt';
-    dir?: 'asc' | 'desc';
+  property: 'name' | 'createdAt'
+  dir?: 'asc' | 'desc'
 }

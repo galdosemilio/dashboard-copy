@@ -1,10 +1,10 @@
 import {
   ShakeItHeaderComponent,
   ShakeItHeaderTitleComponent
-} from '@board/pages/register/clinic/header';
-import { ShakeItInfoDescriptionComponent } from '@board/pages/register/clinic/info-description';
-import { ShakeItLastStepComponent } from '@board/pages/register/clinic/last-step/shake-it/shake-it.last-step.component';
-import { SectionConfigDetails } from './section.config';
+} from '@board/pages/register/clinic/header'
+import { ShakeItInfoDescriptionComponent } from '@board/pages/register/clinic/info-description'
+import { ShakeItLastStepComponent } from '@board/pages/register/clinic/last-step/shake-it/shake-it.last-step.component'
+import { SectionConfigDetails } from './section.config'
 
 export const ShakeItSectionConfig: SectionConfigDetails = {
   REGISTER: {
@@ -16,4 +16,4 @@ export const ShakeItSectionConfig: SectionConfigDetails = {
     },
     LAST_STEP: ShakeItLastStepComponent
   }
-};
+}

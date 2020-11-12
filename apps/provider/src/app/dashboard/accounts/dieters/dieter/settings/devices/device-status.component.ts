@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import {
   DevicesDatabase,
   DevicesDataSource
-} from '@app/dashboard/accounts/dieters/dieter/settings/services';
-import { ContextService, NotifierService } from '@app/service';
+} from '@app/dashboard/accounts/dieters/dieter/settings/services'
+import { ContextService, NotifierService } from '@app/service'
 
 @Component({
   selector: 'app-device-status',
@@ -11,7 +11,7 @@ import { ContextService, NotifierService } from '@app/service';
   styleUrls: ['./device-status.component.scss']
 })
 export class DeviceStatusComponent implements OnInit {
-  source: DevicesDataSource;
+  source: DevicesDataSource
 
   constructor(
     private notifier: NotifierService,
@@ -20,7 +20,7 @@ export class DeviceStatusComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.source = new DevicesDataSource(this.notifier, this.database);
-    this.source.addDefault({ dieterId: this.context.accountId });
+    this.source = new DevicesDataSource(this.notifier, this.database)
+    this.source.addDefault({ dieterId: this.context.accountId })
   }
 }

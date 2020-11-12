@@ -3,8 +3,8 @@
  */
 
 export interface HydrationSummaryResponse {
-    date: string;
-    total: number;
-    max: number;
-    average: number;
+  date: string
+  total: number
+  max: number
+  average: number
 }

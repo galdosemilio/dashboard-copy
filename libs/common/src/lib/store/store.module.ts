@@ -1,23 +1,23 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
 import {
   ModuleWithProviders,
   NgModule,
   Optional,
-  SkipSelf,
-} from '@angular/core';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+  SkipSelf
+} from '@angular/core'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreRouterConnectingModule } from '@ngrx/router-store'
+import { StoreModule } from '@ngrx/store'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
-import { AppEnvironment } from '@coachcare/common/shared';
-import { effects } from './effects';
-import { devMetaReducers, reducers } from './reducers';
-import { AppRouterStateSerializer } from './router/serializer';
-import { AppStoreFacade } from './store.facade';
+import { AppEnvironment } from '@coachcare/common/shared'
+import { effects } from './effects'
+import { devMetaReducers, reducers } from './reducers'
+import { AppRouterStateSerializer } from './router/serializer'
+import { AppStoreFacade } from './store.facade'
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule]
 })
 export class AppStoreModule {
   constructor(
@@ -26,7 +26,7 @@ export class AppStoreModule {
     parent: AppStoreModule
   ) {
     if (parent) {
-      throw new Error('AppStoreModule is already loaded.');
+      throw new Error('AppStoreModule is already loaded.')
     }
   }
 
@@ -34,14 +34,14 @@ export class AppStoreModule {
     return [
       {
         ngModule: AppStoreModule,
-        providers: [AppStoreFacade],
+        providers: [AppStoreFacade]
       },
       StoreModule.forRoot(reducers, {
-        metaReducers: !environment.production ? devMetaReducers : [],
+        metaReducers: !environment.production ? devMetaReducers : []
       }),
       EffectsModule.forRoot(effects),
       StoreRouterConnectingModule.forRoot({
-        serializer: AppRouterStateSerializer,
+        serializer: AppRouterStateSerializer
       }),
       // {
       //   ngModule: ,
@@ -54,7 +54,7 @@ export class AppStoreModule {
       // },
       !environment.production
         ? StoreDevtoolsModule.instrument({ maxAge: 50 })
-        : { ngModule: AppStoreModule },
-    ];
+        : { ngModule: AppStoreModule }
+    ]
   }
 }

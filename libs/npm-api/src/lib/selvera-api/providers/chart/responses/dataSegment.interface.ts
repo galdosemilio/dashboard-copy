@@ -3,7 +3,7 @@
  */
 
 export interface DataSegment {
-    date: string;
-    percentage: number;
-    mass: number;
+  date: string
+  percentage: number
+  mass: number
 }

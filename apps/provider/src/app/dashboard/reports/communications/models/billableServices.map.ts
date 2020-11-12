@@ -1,9 +1,9 @@
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export interface BillableService {
-  id: string;
-  displayName: string;
-  name: string;
+  id: string
+  displayName: string
+  name: string
 }
 
 export const BILLABLE_SERVICES: { [key: string]: BillableService } = {
@@ -22,4 +22,4 @@ export const BILLABLE_SERVICES: { [key: string]: BillableService } = {
     displayName: _('CALL.BILLABLE_SERVICES.TELEHEALTH'),
     name: 'Telehealth'
   }
-};
+}

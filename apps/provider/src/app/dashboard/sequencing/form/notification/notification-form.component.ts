@@ -6,16 +6,16 @@ import {
   Input,
   OnDestroy,
   OnInit
-} from '@angular/core';
+} from '@angular/core'
 import {
   ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators
-} from '@angular/forms';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
+} from '@angular/forms'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'sequencing-notification-form',
@@ -32,49 +32,49 @@ import { Subject } from 'rxjs';
 })
 export class NotificationFormComponent
   implements ControlValueAccessor, OnDestroy, OnInit {
-  @Input() markAsTouched: Subject<void>;
+  @Input() markAsTouched: Subject<void>
 
   @Input('isDisabled') set disabled(disabled: boolean) {
-    this._disabled = disabled || false;
+    this._disabled = disabled || false
 
     if (this.form && this._disabled) {
-      this.form.disable({ emitEvent: false });
+      this.form.disable({ emitEvent: false })
     } else if (this.form) {
-      this.form.enable({ emitEvent: false });
+      this.form.enable({ emitEvent: false })
     }
   }
 
   get disabled(): boolean {
-    return this._disabled;
+    return this._disabled
   }
 
-  form: FormGroup;
+  form: FormGroup
 
-  private _disabled: boolean;
+  private _disabled: boolean
 
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder) {}
 
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.createForm();
+    this.createForm()
     this.markAsTouched.pipe(untilDestroyed(this)).subscribe(() => {
-      this.form.markAsTouched();
+      this.form.markAsTouched()
       Object.keys(this.form.controls).forEach((key) => {
-        this.form.controls[key].markAsTouched();
-      });
-      this.cdr.detectChanges();
-    });
+        this.form.controls[key].markAsTouched()
+      })
+      this.cdr.detectChanges()
+    })
 
     if (this.disabled) {
-      this.form.disable({ emitEvent: false });
+      this.form.disable({ emitEvent: false })
     }
   }
 
-  propagateChange = (data: any) => {};
+  propagateChange = (data: any) => {}
 
   registerOnChange(fn): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(): void {}
@@ -84,7 +84,7 @@ export class NotificationFormComponent
       this.form.patchValue({
         header: value.header,
         text: value.content || value.message || value.text
-      });
+      })
     }
   }
 
@@ -92,10 +92,12 @@ export class NotificationFormComponent
     this.form = this.fb.group({
       header: ['', Validators.required],
       text: ['', Validators.required]
-    });
+    })
 
     this.form.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((controls) => this.propagateChange(this.form.valid ? controls : null));
+      .subscribe((controls) =>
+        this.propagateChange(this.form.valid ? controls : null)
+      )
   }
 }

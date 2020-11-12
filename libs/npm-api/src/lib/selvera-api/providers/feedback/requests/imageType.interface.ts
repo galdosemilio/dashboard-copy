@@ -3,6 +3,6 @@
  */
 
 export interface ImageTypeInterface {
-    name: string;
-    base64: string;
+  name: string
+  base64: string
 }

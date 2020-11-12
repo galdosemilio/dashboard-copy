@@ -1,1 +1,1 @@
-export * from './zendesk-article';
+export * from './zendesk-article'

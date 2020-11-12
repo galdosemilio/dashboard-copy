@@ -1,11 +1,11 @@
-export type SupportedRPMBillingCode = '99453' | '99454' | '99457' | '99458';
+export type SupportedRPMBillingCode = '99453' | '99454' | '99457' | '99458'
 
 export interface TrackableRPMCodeEntry {
-  code: SupportedRPMBillingCode;
-  deps?: string[];
-  displayedCode?: string;
-  maxEligibleAmount?: number;
-  requiresTimeTracking?: boolean;
+  code: SupportedRPMBillingCode
+  deps?: string[]
+  displayedCode?: string
+  maxEligibleAmount?: number
+  requiresTimeTracking?: boolean
 }
 
 export const TRACKABLE_RPM_CODES: { [key: string]: TrackableRPMCodeEntry } = {
@@ -16,19 +16,19 @@ export const TRACKABLE_RPM_CODES: { [key: string]: TrackableRPMCodeEntry } = {
     requiresTimeTracking: true,
     deps: ['99457']
   }
-};
+}
 
 export function getNextTrackableRPMCode(
   currentCode: SupportedRPMBillingCode
 ): TrackableRPMCodeEntry {
-  const trackableRPMCodes = Object.values(TRACKABLE_RPM_CODES);
+  const trackableRPMCodes = Object.values(TRACKABLE_RPM_CODES)
   const currentIndex = trackableRPMCodes.findIndex(
     (trackableCode) => trackableCode.code === currentCode
-  );
+  )
 
   if (currentIndex === -1 || currentIndex >= trackableRPMCodes.length) {
-    return null;
+    return null
   }
 
-  return trackableRPMCodes[currentIndex + 1];
+  return trackableRPMCodes[currentIndex + 1]
 }

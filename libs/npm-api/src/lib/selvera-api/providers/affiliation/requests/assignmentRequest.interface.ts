@@ -3,7 +3,7 @@
  */
 
 export interface AssignmentRequest {
-    client: string;
-    provider: string;
-    organization: string;
+  client: string
+  provider: string
+  organization: string
 }

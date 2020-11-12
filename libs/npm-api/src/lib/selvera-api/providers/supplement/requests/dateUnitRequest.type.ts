@@ -2,4 +2,4 @@
  * Interface for GET /supplement/summary
  */
 
-export type DateUnitRequest = 'day' | 'week' | 'month';
+export type DateUnitRequest = 'day' | 'week' | 'month'

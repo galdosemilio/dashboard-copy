@@ -1,6 +1,6 @@
 interface SortingOption {
-    property: 'name' | 'startedAt';
-    dir: 'asc' | 'desc';
+  property: 'name' | 'startedAt'
+  dir: 'asc' | 'desc'
 }
 
 /**
@@ -8,9 +8,9 @@ interface SortingOption {
  */
 
 export interface FetchPatientListingPackageEnrollmentsRequest {
-    account: string;
-    limit?: number | 'all';
-    offset?: number;
-    organization: string;
-    sort?: SortingOption[];
+  account: string
+  limit?: number | 'all'
+  offset?: number
+  organization: string
+  sort?: SortingOption[]
 }

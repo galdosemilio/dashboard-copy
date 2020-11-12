@@ -3,6 +3,6 @@
  */
 
 export interface AddConsumptionSupplement {
-    id: string;
-    quantity: number;
+  id: string
+  quantity: number
 }

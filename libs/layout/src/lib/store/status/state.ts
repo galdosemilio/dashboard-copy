@@ -1,12 +1,12 @@
 export interface State {
   menu: {
-    opened: boolean;
-  };
+    opened: boolean
+  }
   panel: {
-    opened: boolean;
-    enabled: boolean;
-    component: string;
-  };
+    opened: boolean
+    enabled: boolean
+    component: string
+  }
 }
 
 export const initialState: State = {
@@ -18,4 +18,4 @@ export const initialState: State = {
     enabled: false,
     component: ''
   }
-};
+}

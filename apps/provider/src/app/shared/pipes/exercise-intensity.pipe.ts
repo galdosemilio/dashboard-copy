@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { _ } from '@app/shared/utils';
+import { Pipe, PipeTransform } from '@angular/core'
+import { _ } from '@app/shared/utils'
 
 /**
  * For theses values, keep in mind that 'min' is inclusive while
@@ -16,9 +16,9 @@ import { _ } from '@app/shared/utils';
  * -- Zcyon
  */
 interface IntensityThreshold {
-  min: number;
-  max: number;
-  name: string;
+  min: number
+  max: number
+  name: string
 }
 
 @Pipe({ name: 'exerciseIntensity' })
@@ -49,14 +49,14 @@ export class ExerciseIntensityPipe implements PipeTransform {
       max: 1000,
       name: _('GLOBAL.MAXIMUM')
     }
-  ];
+  ]
 
   constructor() {}
 
   transform(value: number): string {
     const matchingThreshold = this.intensityThresholds.find(
       (iT: IntensityThreshold) => value >= iT.min && value < iT.max
-    );
-    return matchingThreshold.name;
+    )
+    return matchingThreshold.name
   }
 }

@@ -1,4 +1,4 @@
-import { _, SelectorOption } from '@coachcare/backend/shared';
+import { _, SelectorOption } from '@coachcare/backend/shared'
 
 export const REG_COUNTRIES: Array<SelectorOption> = [
   {
@@ -25,7 +25,7 @@ export const REG_COUNTRIES: Array<SelectorOption> = [
     viewValue: _('SELECTOR.COUNTRIES.IL'),
     value: 'IL'
   }
-];
+]
 
 export const MAIN_REG_COUNTRIES: Array<SelectorOption> = [
   {
@@ -96,4 +96,4 @@ export const MAIN_REG_COUNTRIES: Array<SelectorOption> = [
     viewValue: _('SELECTOR.COUNTRIES.IL'),
     value: 'IL'
   }
-];
+]

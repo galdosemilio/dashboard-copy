@@ -3,8 +3,8 @@
  */
 
 export interface SignupsSnapshotRequest {
-    organization: string;
-    startDate?: string;
-    endDate?: string;
-    includeInactiveOrganizations?: boolean;
+  organization: string
+  startDate?: string
+  endDate?: string
+  includeInactiveOrganizations?: boolean
 }

@@ -3,8 +3,8 @@
  */
 
 export interface FetchAllConsumptionRequest {
-    account: string;
-    offset?: number;
-    startDate?: string;
-    endDate?: string;
+  account: string
+  offset?: number
+  startDate?: string
+  endDate?: string
 }

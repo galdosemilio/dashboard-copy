@@ -3,6 +3,6 @@
  */
 
 export interface UpsertMessageDraftRequest {
-    data: any;
-    threadId?: string;
+  data: any
+  threadId?: string
 }

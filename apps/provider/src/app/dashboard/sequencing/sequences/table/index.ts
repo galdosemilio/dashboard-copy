@@ -1,1 +1,1 @@
-export * from './sequences-table.component';
+export * from './sequences-table.component'

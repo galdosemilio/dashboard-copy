@@ -1,1 +1,1 @@
-export * from './colors.component';
+export * from './colors.component'

@@ -1,8 +1,8 @@
-import { Action } from '@ngrx/store';
-import { merge } from 'lodash';
+import { Action } from '@ngrx/store'
+import { merge } from 'lodash'
 
-import * as Actions from './responsive.action';
-import { initialResponsiveState, UIResponsiveState } from './responsive.state';
+import * as Actions from './responsive.action'
+import { initialResponsiveState, UIResponsiveState } from './responsive.state'
 
 export function responsiveReducer(
   state = initialResponsiveState,
@@ -11,12 +11,12 @@ export function responsiveReducer(
   switch (action.type) {
     // responsive values update
     case Actions.RES_UPDATE: {
-      const responsive = (action as Actions.UpdateResponsive).payload;
-      return merge({}, state, responsive);
+      const responsive = (action as Actions.UpdateResponsive).payload
+      return merge({}, state, responsive)
     }
 
     default: {
-      return state;
+      return state
     }
   }
 }

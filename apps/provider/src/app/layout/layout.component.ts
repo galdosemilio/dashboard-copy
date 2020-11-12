@@ -1,26 +1,32 @@
-import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Inject, OnInit, Renderer2 } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import * as tinycolor from 'tinycolor2';
+import { DOCUMENT } from '@angular/common'
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  Renderer2
+} from '@angular/core'
+import { select, Store } from '@ngrx/store'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
+import { Observable } from 'rxjs'
+import * as tinycolor from 'tinycolor2'
 
-import { CCRConfig, CCRPalette } from '@app/config';
-import { layoutSelector, OpenMenu, UILayoutState } from '@app/layout/store';
-import { ContextService, EventsService, LanguageService } from '@app/service';
-import { _, TranslationsObject } from '@app/shared';
-import { paletteSelector } from '@app/store/config';
+import { CCRConfig, CCRPalette } from '@app/config'
+import { layoutSelector, OpenMenu, UILayoutState } from '@app/layout/store'
+import { ContextService, EventsService, LanguageService } from '@app/service'
+import { _, TranslationsObject } from '@app/shared'
+import { paletteSelector } from '@app/store/config'
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html'
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
-  palette: CCRPalette;
+  palette: CCRPalette
 
-  lang: string;
-  layout$: Observable<UILayoutState>;
-  translations: TranslationsObject = {};
+  lang: string
+  layout$: Observable<UILayoutState>
+  translations: TranslationsObject = {}
 
   constructor(
     private renderer: Renderer2,
@@ -33,9 +39,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: any
   ) {
     this.store.pipe(select(paletteSelector)).subscribe((palette) => {
-      this.palette = palette;
-      const primary = palette.theme === 'accent' ? palette.accent : palette.primary;
-      const accent = palette.theme === 'accent' ? palette.primary : palette.accent;
+      this.palette = palette
+      const primary =
+        palette.theme === 'accent' ? palette.accent : palette.primary
+      const accent =
+        palette.theme === 'accent' ? palette.primary : palette.accent
 
       this.renderer.setAttribute(
         this.document.body,
@@ -47,9 +55,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         --primary-lighten-contrast: ${this.getLightContrast(
           tinycolor(primary).lighten(26)
         )};
-        --primary-contrast-light: ${this.getLightContrast(tinycolor(primary)).lighten(
-          52
-        )};
+        --primary-contrast-light: ${this.getLightContrast(
+          tinycolor(primary)
+        ).lighten(52)};
         --primary-darken: ${tinycolor(primary).darken(26)};
         --primary-a12: ${tinycolor(primary).setAlpha(0.12)};
         --primary-a26: ${tinycolor(primary).setAlpha(0.26)};
@@ -80,61 +88,67 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         --text: ${palette.text};
         --disabled: ${palette.disabled};
         `
-      );
-    });
+      )
+    })
   }
 
   ngOnInit() {
-    this.layout$ = this.store.pipe(select(layoutSelector));
+    this.layout$ = this.store.pipe(select(layoutSelector))
     this.translator.onLangChange.subscribe((change: LangChangeEvent) => {
-      this.update(change.lang);
-    });
-    this.update(this.translator.currentLang);
-    this.bus.register('user.data', this.translateTexts.bind(this));
+      this.update(change.lang)
+    })
+    this.update(this.translator.currentLang)
+    this.bus.register('user.data', this.translateTexts.bind(this))
   }
 
   ngAfterViewInit() {
-    this.update(this.language.get());
+    this.update(this.language.get())
   }
 
   translateTexts() {
-    const user = this.context.user;
-    const userName = user.firstName + ' ' + user.lastName.charAt(0);
+    const user = this.context.user
+    const userName = user.firstName + ' ' + user.lastName.charAt(0)
 
     this.translator
       .get([_('MENU.HELLO')], {
         userName: userName
       })
       .subscribe((translations: TranslationsObject) => {
-        this.translations = translations;
-      });
+        this.translations = translations
+      })
   }
 
   openMenu() {
-    this.layout.dispatch(new OpenMenu());
+    this.layout.dispatch(new OpenMenu())
   }
 
   private update(lang: string) {
-    this.lang = lang;
-    this.translateTexts();
-    this.configViewLangAttrs();
+    this.lang = lang
+    this.translateTexts()
+    this.configViewLangAttrs()
   }
 
   private configViewLangAttrs() {
     if (document) {
-      document.body.classList.remove('ltr', 'rtl');
-      document.body.classList.add(this.language.getDir());
-      document.documentElement.setAttribute('lang', this.lang);
-      document.body.setAttribute('dir', this.language.getDir());
+      document.body.classList.remove('ltr', 'rtl')
+      document.body.classList.add(this.language.getDir())
+      document.documentElement.setAttribute('lang', this.lang)
+      document.body.setAttribute('dir', this.language.getDir())
     }
   }
 
   private getContrast(color: string) {
     // darken the color to raise the readability umbral
-    return tinycolor.mostReadable(tinycolor(color).darken(10), ['#ffffff', '#504c4a']);
+    return tinycolor.mostReadable(tinycolor(color).darken(10), [
+      '#ffffff',
+      '#504c4a'
+    ])
   }
   private getLightContrast(color: string) {
     // lighten the color to raise the readability umbral
-    return tinycolor.mostReadable(tinycolor(color).lighten(10), ['#ffffff', '#504c4a']);
+    return tinycolor.mostReadable(tinycolor(color).lighten(10), [
+      '#ffffff',
+      '#504c4a'
+    ])
   }
 }

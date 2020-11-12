@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TranslationsObject } from '@coachcare/backend/shared';
-import { LayoutService } from '@coachcare/common/services';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { TranslationsObject } from '@coachcare/backend/shared'
+import { LayoutService } from '@coachcare/common/services'
 
 @Component({
   selector: 'ccr-layout-base',
@@ -8,16 +8,16 @@ import { LayoutService } from '@coachcare/common/services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseComponent {
-  @Input() isMenuOpened: boolean;
-  @Input() isPanelOpened: boolean;
-  @Input() isPanelEnabled: boolean;
-  @Input() lang: string;
-  @Input() translations: TranslationsObject = {};
+  @Input() isMenuOpened: boolean
+  @Input() isPanelOpened: boolean
+  @Input() isPanelEnabled: boolean
+  @Input() lang: string
+  @Input() translations: TranslationsObject = {}
 
   constructor(private layout: LayoutService) {}
 
   menuOpen(e: Event) {
-    this.layout.IsMenuOpen = true;
-    e.stopPropagation();
+    this.layout.IsMenuOpen = true
+    e.stopPropagation()
   }
 }

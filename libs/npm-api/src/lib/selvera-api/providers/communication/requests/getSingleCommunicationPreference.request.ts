@@ -3,6 +3,6 @@
  */
 
 export interface GetSingleCommunicationPreferenceRequest {
-    /** Organization ID */
-    organization: string;
+  /** Organization ID */
+  organization: string
 }

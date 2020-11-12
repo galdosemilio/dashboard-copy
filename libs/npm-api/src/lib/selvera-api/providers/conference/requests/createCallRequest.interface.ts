@@ -3,7 +3,7 @@
  */
 
 export interface CreateCallRequest {
-    room: string;
-    participants: string[];
-    subaccountId: string;
+  room: string
+  participants: string[]
+  subaccountId: string
 }

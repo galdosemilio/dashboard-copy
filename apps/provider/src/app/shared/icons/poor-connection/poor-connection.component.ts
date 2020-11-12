@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'ccr-poor-connection-icon',
@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
 })
 export class PoorConnectionIconComponent {
   @Input()
-  fill = '#aba9a8';
+  fill = '#aba9a8'
   @Input()
-  size = 24;
+  size = 24
 }

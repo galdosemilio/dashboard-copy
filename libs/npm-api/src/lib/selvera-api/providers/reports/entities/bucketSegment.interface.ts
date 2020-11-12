@@ -2,10 +2,10 @@
  * Bucket Segment
  */
 
-import { Bucket } from './bucket.interface';
+import { Bucket } from './bucket.interface'
 
 export interface BucketSegment {
-    count: number;
-    bucket: Bucket;
-    percentage: number;
+  count: number
+  bucket: Bucket
+  percentage: number
 }

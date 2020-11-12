@@ -2,4 +2,4 @@
  * Export all interfaces
  */
 
-export * from './timezone.interface';
+export * from './timezone.interface'

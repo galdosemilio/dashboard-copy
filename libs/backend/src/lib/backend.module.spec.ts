@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { environment } from '@coachcare/backend/tests';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { BackendModule } from './backend.module';
+import { environment } from '@coachcare/backend/tests'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreModule } from '@ngrx/store'
+import { BackendModule } from './backend.module'
 
 describe('BackendModule', () => {
   beforeAll(() => {
@@ -13,10 +13,10 @@ describe('BackendModule', () => {
         EffectsModule.forRoot([]),
         BackendModule.forRoot(environment)
       ]
-    }).compileComponents();
-  });
+    }).compileComponents()
+  })
 
   it('defined', () => {
-    expect(BackendModule).toBeDefined();
-  });
-});
+    expect(BackendModule).toBeDefined()
+  })
+})

@@ -1,3 +1,3 @@
-export * from './alerts.database';
-export * from './alerts.datasource';
-export * from './alertTypes.datasource';
+export * from './alerts.database'
+export * from './alerts.datasource'
+export * from './alertTypes.datasource'

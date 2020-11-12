@@ -1,6 +1,10 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core'
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  RouterStateSnapshot
+} from '@angular/router'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +15,6 @@ export class RouteWildcardGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     // TODO log NotFound queries?
-    return true;
+    return true
   }
 }

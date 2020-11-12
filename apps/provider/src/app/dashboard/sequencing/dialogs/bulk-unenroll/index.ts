@@ -1,1 +1,1 @@
-export * from './bulk-unenroll.dialog';
+export * from './bulk-unenroll.dialog'

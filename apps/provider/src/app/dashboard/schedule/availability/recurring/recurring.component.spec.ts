@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ScheduleAvailabilityRecurringComponent } from './recurring.component';
+import { ScheduleAvailabilityRecurringComponent } from './recurring.component'
 
 describe('ScheduleAvailabilityRecurringComponent', () => {
-  let component: ScheduleAvailabilityRecurringComponent;
-  let fixture: ComponentFixture<ScheduleAvailabilityRecurringComponent>;
+  let component: ScheduleAvailabilityRecurringComponent
+  let fixture: ComponentFixture<ScheduleAvailabilityRecurringComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ScheduleAvailabilityRecurringComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScheduleAvailabilityRecurringComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ScheduleAvailabilityRecurringComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

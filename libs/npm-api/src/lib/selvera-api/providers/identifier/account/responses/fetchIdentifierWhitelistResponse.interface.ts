@@ -1,9 +1,9 @@
-import { OrganizationWithoutShortcode } from '../../../organization/entities';
+import { OrganizationWithoutShortcode } from '../../../organization/entities'
 
 export interface FetchIdentifierWhitelistResponse {
-    allowedNames: string[];
-    createdAt: string;
-    isActive: boolean;
-    organization: OrganizationWithoutShortcode;
-    updatedAt?: string;
+  allowedNames: string[]
+  createdAt: string
+  isActive: boolean
+  organization: OrganizationWithoutShortcode
+  updatedAt?: string
 }

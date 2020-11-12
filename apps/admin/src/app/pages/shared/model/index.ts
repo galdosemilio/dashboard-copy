@@ -1,1 +1,1 @@
-export * from './page-section-props';
+export * from './page-section-props'

@@ -3,44 +3,50 @@ import {
   ApolloEndosurgeryTestSectionConfig,
   ApolloUSProdSectionConfig,
   ApolloUSTestSectionConfig
-} from './apollo';
+} from './apollo'
 import {
   CenterForMedicalWeightLossProdSectionConfig,
   CenterForMedicalWeightLossTestSectionConfig
-} from './center';
+} from './center'
 import {
   CoachCareClinicProdSectionConfig,
   CoachCareClinicTestSectionConfig
-} from './coach-care';
+} from './coach-care'
 import {
   DefaultProdSectionConfig,
   DefaultTestSectionConfig
-} from './default.section.config';
-import { DrVProdSectionConfig } from './dr-v';
-import { FullyAliveProdSectionConfig, FullyAliveTestSectionConfig } from './fully-alive';
-import { InhealthSectionConfig } from './inhealth';
-import { LeanMDSectionConfig } from './leanmd/leanmd.section.config';
-import { MDTeamSectionConfig } from './mdteam';
-import { ShakeItProdSectionConfig, ShakeItTestSectionConfig } from './metagenics';
-import { SectionConfigDetails } from './models/section.details';
-import { RobardSectionConfig } from './robard';
-import { ShiftSetGoSectionConfig } from './shiftsetgo/shiftsetgo.section.config';
-import { TrueWeightSectionConfig } from './true-weight/true-weight.section.config';
+} from './default.section.config'
+import { DrVProdSectionConfig } from './dr-v'
+import {
+  FullyAliveProdSectionConfig,
+  FullyAliveTestSectionConfig
+} from './fully-alive'
+import { InhealthSectionConfig } from './inhealth'
+import { LeanMDSectionConfig } from './leanmd/leanmd.section.config'
+import { MDTeamSectionConfig } from './mdteam'
+import {
+  ShakeItProdSectionConfig,
+  ShakeItTestSectionConfig
+} from './metagenics'
+import { SectionConfigDetails } from './models/section.details'
+import { RobardSectionConfig } from './robard'
+import { ShiftSetGoSectionConfig } from './shiftsetgo/shiftsetgo.section.config'
+import { TrueWeightSectionConfig } from './true-weight/true-weight.section.config'
 
 export interface SectionConfigObject {
-  component: any;
-  props?: any;
-  values?: any;
+  component: any
+  props?: any
+  values?: any
 }
 
 export interface SectionConfigItem {
-  [key: string]: SectionConfigDetails;
+  [key: string]: SectionConfigDetails
 }
 
 export interface SectionConfig {
-  default: SectionConfigItem;
-  test?: SectionConfigItem;
-  prod?: SectionConfigItem;
+  default: SectionConfigItem
+  test?: SectionConfigItem
+  prod?: SectionConfigItem
 }
 
 export const SECTION_CONFIG: SectionConfig = {
@@ -77,4 +83,4 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6438']: MDTeamSectionConfig,
     ['6439']: DrVProdSectionConfig
   }
-};
+}

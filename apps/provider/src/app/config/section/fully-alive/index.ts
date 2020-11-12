@@ -1,1 +1,1 @@
-export * from './fully-alive.section.config';
+export * from './fully-alive.section.config'

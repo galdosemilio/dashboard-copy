@@ -3,5 +3,5 @@
  */
 
 export interface InsertResponse {
-    id: string;
+  id: string
 }

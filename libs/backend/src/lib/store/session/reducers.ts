@@ -1,6 +1,6 @@
-import { CcrRolesMap } from '@coachcare/backend/shared';
-import { Actions, ActionTypes } from './actions';
-import { initialState, State } from './state';
+import { CcrRolesMap } from '@coachcare/backend/shared'
+import { Actions, ActionTypes } from './actions'
+import { initialState, State } from './state'
 
 export function sessionReducer(state = initialState, action: Actions): State {
   switch (action.type) {
@@ -9,13 +9,13 @@ export function sessionReducer(state = initialState, action: Actions): State {
       return {
         ...state,
         ...action.payload
-      };
+      }
 
     case ActionTypes.LANG: {
       return {
         ...state,
         language: action.payload
-      };
+      }
     }
 
     case ActionTypes.LOGIN: {
@@ -23,7 +23,7 @@ export function sessionReducer(state = initialState, action: Actions): State {
         ...state,
         loggedIn: true,
         account: CcrRolesMap(action.payload.accountType.id)
-      };
+      }
     }
 
     case ActionTypes.LOGOUT: {
@@ -31,11 +31,11 @@ export function sessionReducer(state = initialState, action: Actions): State {
         ...state,
         loggedIn: false,
         account: ''
-      };
+      }
     }
 
     default: {
-      return state;
+      return state
     }
   }
 }

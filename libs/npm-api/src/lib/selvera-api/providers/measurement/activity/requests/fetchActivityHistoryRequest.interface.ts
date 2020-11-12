@@ -3,8 +3,8 @@
  */
 
 export interface FetchActivityHistoryRequest {
-    account?: string;
-    startDate: string;
-    endDate?: string;
-    device?: string;
+  account?: string
+  startDate: string
+  endDate?: string
+  device?: string
 }

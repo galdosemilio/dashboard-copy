@@ -1,13 +1,13 @@
-import { AppPagesModule } from './pages.module';
+import { AppPagesModule } from './pages.module'
 
 describe('AppPagesModule', () => {
-  let pagesModule: AppPagesModule;
+  let pagesModule: AppPagesModule
 
   beforeEach(() => {
-    pagesModule = new AppPagesModule();
-  });
+    pagesModule = new AppPagesModule()
+  })
 
   it('should create an instance', () => {
-    expect(pagesModule).toBeTruthy();
-  });
-});
+    expect(pagesModule).toBeTruthy()
+  })
+})

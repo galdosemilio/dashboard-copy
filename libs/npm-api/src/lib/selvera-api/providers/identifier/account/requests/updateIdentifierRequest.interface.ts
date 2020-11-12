@@ -3,8 +3,8 @@
  */
 
 export interface UpdateIdentifierRequest {
-  account: string;
-  id: string;
-  name: string;
-  isActive: boolean;
+  account: string
+  id: string
+  name: string
+  isActive: boolean
 }

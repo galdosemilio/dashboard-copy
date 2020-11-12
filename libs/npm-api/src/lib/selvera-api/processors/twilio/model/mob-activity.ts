@@ -1,3 +1,3 @@
 export interface TwilioMobileActivity {
-    id: string;
+  id: string
 }

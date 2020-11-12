@@ -3,5 +3,5 @@
  */
 
 export interface FetchGoalRequest {
-    account?: string;
+  account?: string
 }

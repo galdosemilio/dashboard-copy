@@ -1,1 +1,1 @@
-export * from './painTracking.provider';
+export * from './painTracking.provider'

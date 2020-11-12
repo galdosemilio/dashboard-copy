@@ -3,7 +3,7 @@
  */
 
 export interface AddAccountKeyRequest {
-    keyOrganizationId: string;
-    account: string;
-    targetQuantity: number;
+  keyOrganizationId: string
+  account: string
+  targetQuantity: number
 }

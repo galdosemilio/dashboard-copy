@@ -3,6 +3,6 @@
  */
 
 export interface GetSingleAccountPreferenceRequest {
-    /** Preference id */
-    id: string;
+  /** Preference id */
+  id: string
 }

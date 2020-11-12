@@ -1,7 +1,7 @@
-export * from './clinic';
-export * from './clinics.component';
-export * from './services';
-export * from './table/picker/picker.component';
+export * from './clinic'
+export * from './clinics.component'
+export * from './services'
+export * from './table/picker/picker.component'
 
 import {
   ClinicComponent,
@@ -9,12 +9,12 @@ import {
   ClinicInfoComponent,
   ClinicPhasesComponent,
   ClinicPhasesTableComponent
-} from './clinic';
-import { ClinicsComponent } from './clinics.component';
-import { CreateClinicDialog, CreatePhaseDialog } from './dialogs';
-import { ClinicResolver, ClinicsDatabase } from './services';
-import { ClinicsPickerComponent } from './table/picker/picker.component';
-import { ClinicsTableComponent } from './table/table.component';
+} from './clinic'
+import { ClinicsComponent } from './clinics.component'
+import { CreateClinicDialog, CreatePhaseDialog } from './dialogs'
+import { ClinicResolver, ClinicsDatabase } from './services'
+import { ClinicsPickerComponent } from './table/picker/picker.component'
+import { ClinicsTableComponent } from './table/table.component'
 
 export const ClinicsComponents = [
   ClinicComponent,
@@ -27,8 +27,8 @@ export const ClinicsComponents = [
   ClinicsTableComponent,
   CreateClinicDialog,
   CreatePhaseDialog
-];
+]
 
-export const ClinicsEntryComponents = [CreateClinicDialog, CreatePhaseDialog];
+export const ClinicsEntryComponents = [CreateClinicDialog, CreatePhaseDialog]
 
-export const ClinicsProviders = [ClinicResolver, ClinicsDatabase];
+export const ClinicsProviders = [ClinicResolver, ClinicsDatabase]

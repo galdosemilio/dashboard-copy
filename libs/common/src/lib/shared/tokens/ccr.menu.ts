@@ -9,14 +9,14 @@
  * Interface for Menu Items
  */
 export interface MenuItem {
-  route?: string;
-  navName: string;
-  navRoute?: string;
-  navLink?: string;
-  icon?: string;
-  children?: Array<MenuItem>;
-  expanded?: boolean;
-  cssClass?: string;
-  badge?: number | string;
-  unread?: number;
+  route?: string
+  navName: string
+  navRoute?: string
+  navLink?: string
+  icon?: string
+  children?: Array<MenuItem>
+  expanded?: boolean
+  cssClass?: string
+  badge?: number | string
+  unread?: number
 }

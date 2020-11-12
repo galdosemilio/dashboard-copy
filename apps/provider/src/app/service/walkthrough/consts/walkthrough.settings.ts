@@ -1,10 +1,10 @@
-import { STORAGE_FIRST_TIME_GUIDE, STORAGE_RPM_GUIDE } from '@app/config';
-import { _ } from '@app/shared/utils';
+import { STORAGE_FIRST_TIME_GUIDE, STORAGE_RPM_GUIDE } from '@app/config'
+import { _ } from '@app/shared/utils'
 
 interface WalkthroughGuideItem {
-  title: string;
-  urls: { [key: string]: string };
-  storageItem?: string;
+  title: string
+  urls: { [key: string]: string }
+  storageItem?: string
 }
 
 export const WALKTHROUGHS: { [key: string]: WalkthroughGuideItem } = {
@@ -22,4 +22,4 @@ export const WALKTHROUGHS: { [key: string]: WalkthroughGuideItem } = {
     },
     storageItem: STORAGE_RPM_GUIDE
   }
-};
+}

@@ -1,7 +1,7 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FileExplorerContent } from '@app/dashboard/content/models';
-import { BindForm, BINDFORM_TOKEN } from '@app/shared';
+import { Component, forwardRef, Input } from '@angular/core'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FileExplorerContent } from '@app/dashboard/content/models'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 
 @Component({
   selector: 'app-content-hyperlink-form',
@@ -17,28 +17,28 @@ export class HyperlinkFormComponent implements BindForm {
   @Input()
   set details(d: FileExplorerContent) {
     if (d) {
-      this._details = d;
-      this.form.patchValue({ url: d.metadata.url });
+      this._details = d
+      this.form.patchValue({ url: d.metadata.url })
     }
   }
 
   get details(): FileExplorerContent {
-    return this._details;
+    return this._details
   }
 
-  @Input() mode: 'digital-library' | 'vault' = 'digital-library';
+  @Input() mode: 'digital-library' | 'vault' = 'digital-library'
 
   @Input()
-  readonly: boolean;
+  readonly: boolean
 
-  public form: FormGroup;
+  public form: FormGroup
 
-  private _details: FileExplorerContent;
-  private currentURL: string;
-  private urlPattern = /^(?:http(?:s)?):\/\/[^\.]+\..+$/;
+  private _details: FileExplorerContent
+  private currentURL: string
+  private urlPattern = /^(?:http(?:s)?):\/\/[^\.]+\..+$/
 
   constructor(private formBuilder: FormBuilder) {
-    this.createForm();
+    this.createForm()
   }
 
   private createForm(): void {
@@ -48,17 +48,21 @@ export class HyperlinkFormComponent implements BindForm {
         [
           Validators.required,
           (c: FormControl) =>
-            c.value ? (this.urlPattern.test(c.value) ? null : { invalidUrl: true }) : null
+            c.value
+              ? this.urlPattern.test(c.value)
+                ? null
+                : { invalidUrl: true }
+              : null
         ]
       ],
       metadata: [{}, []]
-    });
+    })
 
     this.form.valueChanges.subscribe((controls) => {
       if (this.currentURL !== controls.url) {
-        this.currentURL = controls.url;
-        this.form.patchValue({ metadata: { url: controls.url } });
+        this.currentURL = controls.url
+        this.form.patchValue({ metadata: { url: controls.url } })
       }
-    });
+    })
   }
 }

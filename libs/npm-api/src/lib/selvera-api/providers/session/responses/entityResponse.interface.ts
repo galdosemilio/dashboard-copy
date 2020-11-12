@@ -3,5 +3,5 @@
  */
 
 export interface EntityResponse {
-    id: string;
+  id: string
 }

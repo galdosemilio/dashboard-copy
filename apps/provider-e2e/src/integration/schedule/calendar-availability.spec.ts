@@ -1,16 +1,16 @@
-import { standardSetup } from '../../support';
-import { Availability, verifyDayAvailability, WeekDays } from './utils';
+import { standardSetup } from '../../support'
+import { Availability, verifyDayAvailability, WeekDays } from './utils'
 
-describe('Schedule -> availability', function() {
-  it('Schedule shows proper availability white/gray blocks in ET (New York)', function() {
-    cy.setTimezone('et');
-    standardSetup();
+describe('Schedule -> availability', function () {
+  it('Schedule shows proper availability white/gray blocks in ET (New York)', function () {
+    cy.setTimezone('et')
+    standardSetup()
 
-    cy.visit(`/schedule/view`);
+    cy.visit(`/schedule/view`)
 
-    cy.get('.calendar-wrapper');
-    cy.wait(1000);
-    cy.tick(100000);
+    cy.get('.calendar-wrapper')
+    cy.wait(1000)
+    cy.tick(100000)
 
     verifyDayAvailability(
       'unavailable',
@@ -24,7 +24,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -37,7 +37,7 @@ describe('Schedule -> availability', function() {
         hour: 18,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -50,7 +50,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -63,7 +63,7 @@ describe('Schedule -> availability', function() {
         hour: 17,
         minute: 0
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -76,7 +76,7 @@ describe('Schedule -> availability', function() {
         hour: 18,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -89,7 +89,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -102,7 +102,7 @@ describe('Schedule -> availability', function() {
         hour: 17,
         minute: 0
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -115,7 +115,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -128,7 +128,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -141,7 +141,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -154,20 +154,20 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
 
-    cy.wait(3000);
-  });
+    cy.wait(3000)
+  })
 
-  it('Schedule shows proper availability white/gray blocks in AET (Australia Eastern)', function() {
-    cy.setTimezone('aet');
-    standardSetup();
+  it('Schedule shows proper availability white/gray blocks in AET (Australia Eastern)', function () {
+    cy.setTimezone('aet')
+    standardSetup()
 
-    cy.visit(`/schedule/view`);
+    cy.visit(`/schedule/view`)
 
-    cy.get('.calendar-wrapper');
-    cy.wait(1000);
-    cy.tick(100000);
+    cy.get('.calendar-wrapper')
+    cy.wait(1000)
+    cy.tick(100000)
 
     // To add equivalent tests for this timezone...
     verifyDayAvailability(
@@ -182,7 +182,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -195,7 +195,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -208,7 +208,7 @@ describe('Schedule -> availability', function() {
         hour: 10,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -221,7 +221,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -234,7 +234,7 @@ describe('Schedule -> availability', function() {
         hour: 9,
         minute: 0
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -247,7 +247,7 @@ describe('Schedule -> availability', function() {
         hour: 10,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -260,7 +260,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'available',
       {
@@ -273,7 +273,7 @@ describe('Schedule -> availability', function() {
         hour: 9,
         minute: 0
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -286,7 +286,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -299,7 +299,7 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
+    )
     verifyDayAvailability(
       'unavailable',
       {
@@ -312,6 +312,6 @@ describe('Schedule -> availability', function() {
         hour: 23,
         minute: 45
       }
-    );
-  });
-});
+    )
+  })
+})

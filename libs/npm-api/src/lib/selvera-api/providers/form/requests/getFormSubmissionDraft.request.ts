@@ -3,8 +3,8 @@
  */
 
 export interface GetFormSubmissionDraftRequest {
-    /** Account the submission is intended for */
-    account?: string;
-    /** Form the submission is intended for. */
-    form: string;
+  /** Account the submission is intended for */
+  account?: string
+  /** Form the submission is intended for. */
+  form: string
 }

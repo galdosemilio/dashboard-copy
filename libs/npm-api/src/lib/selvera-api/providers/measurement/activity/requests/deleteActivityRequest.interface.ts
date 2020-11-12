@@ -3,6 +3,6 @@
  */
 
 export interface DeleteActivityRequest {
-    date: string;
-    client?: number;
+  date: string
+  client?: number
 }

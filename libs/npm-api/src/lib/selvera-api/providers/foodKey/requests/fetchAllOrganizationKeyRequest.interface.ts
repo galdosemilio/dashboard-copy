@@ -3,10 +3,10 @@
  */
 
 export interface FetchAllOrganizationKeyRequest {
-    account?: string; // only optional if requester is a Client
-    organization: string;
-    keyOrganizationId?: string;
-    name?: string;
-    isActive?: boolean;
-    directAssociation?: boolean;
+  account?: string // only optional if requester is a Client
+  organization: string
+  keyOrganizationId?: string
+  name?: string
+  isActive?: boolean
+  directAssociation?: boolean
 }

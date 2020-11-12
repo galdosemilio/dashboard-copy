@@ -1,8 +1,8 @@
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export interface SequenceHour {
-  displayName: string;
-  value: string;
+  displayName: string
+  value: string
 }
 
 export const SEQUENCE_HOURS = [
@@ -102,4 +102,4 @@ export const SEQUENCE_HOURS = [
     displayName: _('SEQUENCING.HOURS.11_PM'),
     value: '23:00:00'
   }
-];
+]

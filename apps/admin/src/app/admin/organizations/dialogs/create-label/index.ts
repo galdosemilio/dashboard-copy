@@ -1,1 +1,1 @@
-export * from './create-label.dialog';
+export * from './create-label.dialog'

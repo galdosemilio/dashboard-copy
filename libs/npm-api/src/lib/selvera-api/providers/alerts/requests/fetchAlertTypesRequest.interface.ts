@@ -3,6 +3,6 @@
  */
 
 export interface FetchAlertTypesRequest {
-    limit?: 'all' | number;
-    offset?: number;
+  limit?: 'all' | number
+  offset?: number
 }

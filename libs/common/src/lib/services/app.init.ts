@@ -1,4 +1,4 @@
-import { ContextService } from './context.service';
+import { ContextService } from './context.service'
 
 /**
  * App Initializer
@@ -6,5 +6,5 @@ import { ContextService } from './context.service';
  * @param context ContextService
  */
 export function onAppInit(context: ContextService) {
-  return context.init();
+  return context.init()
 }

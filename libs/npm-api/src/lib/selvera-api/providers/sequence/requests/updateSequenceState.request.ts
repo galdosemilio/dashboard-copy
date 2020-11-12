@@ -3,8 +3,8 @@
  */
 
 export interface UpdateSequenceStateRequest {
-    /** State ID */
-    id: string;
-    /** State name */
-    name?: string;
+  /** State ID */
+  id: string
+  /** State name */
+  name?: string
 }

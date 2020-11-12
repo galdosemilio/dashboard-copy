@@ -5,14 +5,22 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { animate, state, style, transition, trigger, AnimationTriggerMetadata, keyframes } from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+  AnimationTriggerMetadata,
+  keyframes
+} from '@angular/animations'
 
 /** Animations used by the Material datepicker. */
 export const matDatepickerAnimations: {
-  readonly slideCalendar: AnimationTriggerMetadata;
-  readonly controlActive: AnimationTriggerMetadata;
-  readonly transformPanel: AnimationTriggerMetadata;
-  readonly fadeInCalendar: AnimationTriggerMetadata;
+  readonly slideCalendar: AnimationTriggerMetadata
+  readonly controlActive: AnimationTriggerMetadata
+  readonly transformPanel: AnimationTriggerMetadata
+  readonly fadeInCalendar: AnimationTriggerMetadata
 } = {
   /* Month view slide */
   slideCalendar: trigger('slideCalendar', [
@@ -81,6 +89,9 @@ export const matDatepickerAnimations: {
 
     // TODO(crisbeto): this animation should be removed since it isn't quite on spec, but we
     // need to keep it until #12440 gets in, otherwise the exit animation will look glitchy.
-    transition('void => *', animate('120ms 100ms cubic-bezier(0.55, 0, 0.55, 0.2)'))
+    transition(
+      'void => *',
+      animate('120ms 100ms cubic-bezier(0.55, 0, 0.55, 0.2)')
+    )
   ])
-};
+}

@@ -1,8 +1,8 @@
 export interface State {
-  language: string;
-  loaded: boolean;
-  loggedIn: boolean;
-  account: string; // CcrRol
+  language: string
+  loaded: boolean
+  loggedIn: boolean
+  account: string // CcrRol
 }
 
 export const initialState: State = {
@@ -10,4 +10,4 @@ export const initialState: State = {
   loaded: false,
   loggedIn: false,
   account: ''
-};
+}

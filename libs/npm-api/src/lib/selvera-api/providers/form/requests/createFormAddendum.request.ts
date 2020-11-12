@@ -3,8 +3,8 @@
  */
 
 export interface CreateFormAddendumRequest {
-    /** submission id. */
-    submission: string;
-    /** Addendum text content. */
-    content: string;
+  /** submission id. */
+  submission: string
+  /** Addendum text content. */
+  content: string
 }

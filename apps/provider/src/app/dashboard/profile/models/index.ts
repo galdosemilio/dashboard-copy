@@ -1,2 +1,2 @@
-export * from './auth-apps.map';
-export * from './mfa-channel.map';
+export * from './auth-apps.map'
+export * from './mfa-channel.map'

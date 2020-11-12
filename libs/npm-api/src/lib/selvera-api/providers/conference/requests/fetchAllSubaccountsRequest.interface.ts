@@ -3,6 +3,6 @@
  */
 
 export interface FetchAllSubaccountsRequest {
-    organization: string;
-    activeOnly?: boolean;
+  organization: string
+  activeOnly?: boolean
 }

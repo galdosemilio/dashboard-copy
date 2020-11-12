@@ -1,1 +1,1 @@
-export type SleepData = 'total' | 'average' | 'sleepQuality';
+export type SleepData = 'total' | 'average' | 'sleepQuality'

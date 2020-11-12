@@ -1,1 +1,1 @@
-export * from './default-clinic-packages.component';
+export * from './default-clinic-packages.component'

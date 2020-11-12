@@ -1,1 +1,1 @@
-export * from './create-phase.dialog';
+export * from './create-phase.dialog'

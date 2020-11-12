@@ -3,8 +3,8 @@
  */
 
 export interface FetchCalendarAvailabilityRequest {
-    providers?: Array<string>;
-    calendarIds?: Array<string>;
-    startTime?: string; // datetimes with timezone
-    endTime?: string;
+  providers?: Array<string>
+  calendarIds?: Array<string>
+  startTime?: string // datetimes with timezone
+  endTime?: string
 }

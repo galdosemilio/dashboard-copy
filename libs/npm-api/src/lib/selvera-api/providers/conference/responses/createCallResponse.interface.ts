@@ -3,5 +3,5 @@
  */
 
 export interface CreateCallResponse {
-    callId: string;
+  callId: string
 }

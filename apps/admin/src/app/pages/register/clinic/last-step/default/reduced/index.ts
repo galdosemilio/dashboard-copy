@@ -1,1 +1,1 @@
-export * from './default-reduced.last-step.component';
+export * from './default-reduced.last-step.component'

@@ -1,5 +1,5 @@
 export interface BillableService {
-    id: string;
-    name: string;
-    status: string;
+  id: string
+  name: string
+  status: string
 }

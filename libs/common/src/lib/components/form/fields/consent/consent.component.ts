@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   SkipSelf
-} from '@angular/core';
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
@@ -16,12 +16,12 @@ import {
   FormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+} from '@angular/forms'
+import { select, Store } from '@ngrx/store'
 
-import { ContextService } from '@coachcare/common/services';
-import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store';
-import { get } from 'lodash';
+import { ContextService } from '@coachcare/common/services'
+import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
+import { get } from 'lodash'
 
 @Component({
   selector: 'ccr-form-field-consent',
@@ -47,33 +47,33 @@ import { get } from 'lodash';
   }
 })
 export class ConsentFormFieldComponent implements ControlValueAccessor, OnInit {
-  @Input() formControlName: string;
-  @Input() consentRequired: string | undefined;
+  @Input() formControlName: string
+  @Input() consentRequired: string | undefined
 
-  @Input() disabled: any;
-  @Input() placeholder: string;
-  @Input() readonly: any;
-  @Input() required: any;
+  @Input() disabled: any
+  @Input() placeholder: string
+  @Input() readonly: any
+  @Input() required: any
 
-  @Output() change = new EventEmitter<boolean>();
+  @Output() change = new EventEmitter<boolean>()
 
-  _control: AbstractControl | undefined;
-  value = false;
+  _control: AbstractControl | undefined
+  value = false
 
-  linkTerms: string;
-  linkPrivacy: string;
-  linkDpa: string;
-  linkMsa: string;
-  linkHipaa: string;
+  linkTerms: string
+  linkPrivacy: string
+  linkDpa: string
+  linkMsa: string
+  linkHipaa: string
 
   get isDisabled() {
-    return this.disabled === '' || this.disabled === true;
+    return this.disabled === '' || this.disabled === true
   }
   get isReadonly() {
-    return this.readonly === '' || this.readonly === true;
+    return this.readonly === '' || this.readonly === true
   }
   get isRequired() {
-    return this.required === '' || this.required === true;
+    return this.required === '' || this.required === true
   }
 
   constructor(
@@ -87,29 +87,31 @@ export class ConsentFormFieldComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     if (this.formControlName) {
-      const parent = this.parent.control as AbstractControl;
-      this._control = parent.get(this.formControlName) as AbstractControl;
+      const parent = this.parent.control as AbstractControl
+      this._control = parent.get(this.formControlName) as AbstractControl
     }
 
     if (this.context.organizationId) {
-      this.store.pipe(select(OrgPrefSelectors.selectOrgPref)).subscribe(pref => {
-        const links: any = get(pref, 'mala.custom.links') || {};
-        this.linkTerms = links.terms;
-        this.linkPrivacy = links.privacy;
-        this.linkHipaa = links.hipaa;
-        this.linkMsa = links.msa;
-        this.linkDpa = links.dpa;
-      });
+      this.store
+        .pipe(select(OrgPrefSelectors.selectOrgPref))
+        .subscribe((pref) => {
+          const links: any = get(pref, 'mala.custom.links') || {}
+          this.linkTerms = links.terms
+          this.linkPrivacy = links.privacy
+          this.linkHipaa = links.hipaa
+          this.linkMsa = links.msa
+          this.linkDpa = links.dpa
+        })
     }
   }
 
-  propagateChange = (data: any) => {};
-  propagateTouch = () => {};
+  propagateChange = (data: any) => {}
+  propagateTouch = () => {}
 
   onChange(value: boolean) {
-    this.value = value;
-    this.propagateChange(this.value);
-    this.change.emit(this.value);
+    this.value = value
+    this.propagateChange(this.value)
+    this.change.emit(this.value)
   }
 
   /**
@@ -117,29 +119,29 @@ export class ConsentFormFieldComponent implements ControlValueAccessor, OnInit {
    */
   writeValue(value: boolean): void {
     if (value) {
-      this.value = value;
-      this.onChange(value);
+      this.value = value
+      this.onChange(value)
     }
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
+    this.propagateTouch = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   validate(c: FormControl) {
     if (this.isRequired && !this.isDisabled) {
       if (!c.value) {
-        return { ccrFieldConsent: 'required' };
+        return { ccrFieldConsent: 'required' }
       }
     }
-    return null;
+    return null
   }
 }

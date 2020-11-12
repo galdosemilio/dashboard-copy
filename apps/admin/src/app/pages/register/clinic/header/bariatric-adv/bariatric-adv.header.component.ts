@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AppStoreFacade } from '@coachcare/common/store';
+import { Component } from '@angular/core'
+import { AppStoreFacade } from '@coachcare/common/store'
 
 @Component({
   selector: 'ccr-register-clinic-bariatric-adv-header',
@@ -7,14 +7,17 @@ import { AppStoreFacade } from '@coachcare/common/store';
   styleUrls: ['./bariatric-adv.header.component.scss']
 })
 export class BariatricAdvantageHeaderComponent {
-  public displayName: string;
-  public logoUrl: string;
+  public displayName: string
+  public logoUrl: string
 
   constructor(private org: AppStoreFacade) {
-    this.org.pref$.subscribe(pref => {
-      console.log({ pref });
-      this.displayName = pref.displayName || '';
-      this.logoUrl = pref.assets && pref.assets.logoUrl ? pref.assets.logoUrl : '/assets/logo.png';
-    });
+    this.org.pref$.subscribe((pref) => {
+      console.log({ pref })
+      this.displayName = pref.displayName || ''
+      this.logoUrl =
+        pref.assets && pref.assets.logoUrl
+          ? pref.assets.logoUrl
+          : '/assets/logo.png'
+    })
   }
 }

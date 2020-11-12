@@ -1,1 +1,1 @@
-export * from './sequencing-form.component';
+export * from './sequencing-form.component'

@@ -3,5 +3,5 @@
  */
 
 export interface AddSupplementAccountAssociationResponse {
-    supplementOrganizationAccountId: string;
+  supplementOrganizationAccountId: string
 }

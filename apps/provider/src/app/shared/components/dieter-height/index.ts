@@ -1,1 +1,1 @@
-export * from './dieter-height.component';
+export * from './dieter-height.component'

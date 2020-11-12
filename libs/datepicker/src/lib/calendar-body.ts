@@ -15,15 +15,20 @@ import {
   NgZone,
   Output,
   ViewEncapsulation
-} from '@angular/core';
-import { take } from 'rxjs/operators';
+} from '@angular/core'
+import { take } from 'rxjs/operators'
 
 /**
  * An internal class that represents the data corresponding to a single calendar cell.
  * @docs-private
  */
 export class MatCalendarCell {
-  constructor(public value: number, public displayValue: string, public ariaLabel: string, public enabled: boolean) {}
+  constructor(
+    public value: number,
+    public displayValue: string,
+    public ariaLabel: string,
+    public enabled: boolean
+  ) {}
 }
 
 /**
@@ -47,74 +52,79 @@ export class MatCalendarCell {
 export class MatCalendarBody {
   /** The label for the table. (e.g. "Jan 2017"). */
   @Input()
-  label: string;
+  label: string
 
   /** The cells to display in the table. */
   @Input()
-  rows: MatCalendarCell[][];
+  rows: MatCalendarCell[][]
 
   /** The value in the table that corresponds to today. */
   @Input()
-  todayValue: number;
+  todayValue: number
 
   /** The value in the table that is active. */
   @Input()
-  activeValue: number;
+  activeValue: number
 
   /** The value in the table that is currently selected. */
   @Input()
-  selectedValue: number;
+  selectedValue: number
 
   /** The minimum number of free cells needed to fit the label in the first row. */
   @Input()
-  labelMinRequiredCells: number;
+  labelMinRequiredCells: number
 
   /** The number of columns in the table. */
   @Input()
-  numCols = 7;
+  numCols = 7
 
   /** Whether to allow selection of disabled cells. */
   @Input()
-  allowDisabledSelection = false;
+  allowDisabledSelection = false
 
   /** The cell number of the active cell in the table. */
   @Input()
-  activeCell = 0;
+  activeCell = 0
 
   /**
    * The aspect ratio (width / height) to use for the cells in the table. This aspect ratio will be
    * maintained even as the table resizes.
    */
   @Input()
-  cellAspectRatio = 0.55;
+  cellAspectRatio = 0.55
 
   /** Emits when a new value is selected. */
   @Output()
-  readonly selectedValueChange = new EventEmitter<number>();
+  readonly selectedValueChange = new EventEmitter<number>()
 
-  constructor(private _elementRef: ElementRef<HTMLElement>, private _ngZone: NgZone) {}
+  constructor(
+    private _elementRef: ElementRef<HTMLElement>,
+    private _ngZone: NgZone
+  ) {}
 
   _cellClicked(cell: MatCalendarCell): void {
     if (!this.allowDisabledSelection && !cell.enabled) {
-      return;
+      return
     }
-    this.selectedValueChange.emit(cell.value);
+    this.selectedValueChange.emit(cell.value)
   }
 
   /** The number of blank cells to put at the beginning for the first row. */
   get _firstRowOffset(): number {
-    return this.rows && this.rows.length && this.rows[0].length ? this.numCols - this.rows[0].length : 0;
+    return this.rows && this.rows.length && this.rows[0].length
+      ? this.numCols - this.rows[0].length
+      : 0
   }
 
   _isActiveCell(rowIndex: number, colIndex: number): boolean {
-    let cellNumber = rowIndex * this.numCols + colIndex;
+    let cellNumber = rowIndex * this.numCols + colIndex
 
     // Account for the fact that the first row may not have as many cells.
     if (rowIndex) {
-      cellNumber -= this._firstRowOffset;
+      cellNumber -= this._firstRowOffset
     }
 
-    return cellNumber === this.activeCell;
+    return cellNumber === this.activeCell
   }
 
   /** Focuses the active cell after the microtask queue is empty. */
@@ -126,12 +136,12 @@ export class MatCalendarBody {
         .subscribe(() => {
           const activeCell: HTMLElement | null = this._elementRef.nativeElement.querySelector(
             '.mat-calendar-body-active'
-          );
+          )
 
           if (activeCell) {
-            activeCell.focus();
+            activeCell.focus()
           }
-        });
-    });
+        })
+    })
   }
 }

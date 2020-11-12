@@ -1,5 +1,5 @@
-import { _ } from '@coachcare/backend/shared';
-import { MenuItem } from '@coachcare/common/shared';
+import { _ } from '@coachcare/backend/shared'
+import { MenuItem } from '@coachcare/common/shared'
 
 /**
  * App Menu
@@ -25,7 +25,11 @@ const provider: Array<MenuItem> = [
         navRoute: 'accounts/coaches',
         icon: 'assignment_ind'
       },
-      { navName: _('GLOBAL.CLINICS'), navRoute: 'accounts/clinics', icon: 'domain' }
+      {
+        navName: _('GLOBAL.CLINICS'),
+        navRoute: 'accounts/clinics',
+        icon: 'domain'
+      }
     ]
   },
   {
@@ -106,7 +110,7 @@ const provider: Array<MenuItem> = [
       }
     ]
   }
-];
+]
 
 const admin: Array<MenuItem> = [
   {
@@ -150,9 +154,9 @@ const admin: Array<MenuItem> = [
     navRoute: '/admin/reports',
     icon: 'bar_chart'
   }
-];
+]
 
 export const appMenu = {
   admin,
   provider
-};
+}

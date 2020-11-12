@@ -3,6 +3,6 @@
  */
 
 export interface AddMeetingTypeRequest {
-    code: string;
-    description: string;
+  code: string
+  description: string
 }

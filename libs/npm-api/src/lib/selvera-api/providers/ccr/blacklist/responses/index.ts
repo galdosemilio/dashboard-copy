@@ -2,4 +2,4 @@
  * Export all interfaces
  */
 
-export { BlacklistSegment } from './blacklistResponseSegment.interface';
+export { BlacklistSegment } from './blacklistResponseSegment.interface'

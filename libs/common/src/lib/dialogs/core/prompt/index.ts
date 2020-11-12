@@ -1,2 +1,2 @@
-export * from './prompt.dialog';
-export * from './prompt-data.interface';
+export * from './prompt.dialog'
+export * from './prompt-data.interface'

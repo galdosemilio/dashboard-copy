@@ -3,8 +3,8 @@
  */
 
 export interface EnrollmentSnapshotRequest {
-    organization: string;
-    date: string;
-    includeInactiveEnrollments?: boolean;
-    includeInactivePackages?: boolean;
+  organization: string
+  date: string
+  includeInactiveEnrollments?: boolean
+  includeInactivePackages?: boolean
 }

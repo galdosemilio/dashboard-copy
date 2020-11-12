@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NotificationsComponent } from './notifications.component';
+import { NotificationsComponent } from './notifications.component'
 
 describe('NotificationsComponent', () => {
-  let component: NotificationsComponent;
-  let fixture: ComponentFixture<NotificationsComponent>;
+  let component: NotificationsComponent
+  let fixture: ComponentFixture<NotificationsComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NotificationsComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotificationsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(NotificationsComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

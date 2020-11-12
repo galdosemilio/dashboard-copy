@@ -1,4 +1,4 @@
-import { _, SelectorOption } from '@coachcare/backend/shared';
+import { _, SelectorOption } from '@coachcare/backend/shared'
 
 export const GENDERS: Array<SelectorOption> = [
   {
@@ -9,4 +9,4 @@ export const GENDERS: Array<SelectorOption> = [
     value: 'female',
     viewValue: _('SELECTOR.GENDER.FEMALE')
   }
-];
+]

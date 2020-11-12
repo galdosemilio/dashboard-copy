@@ -3,6 +3,6 @@
  */
 
 export interface GetMFAPreferenceAggregate {
-    /** ID of the account to fetch preferences for */
-    account: string;
+  /** ID of the account to fetch preferences for */
+  account: string
 }

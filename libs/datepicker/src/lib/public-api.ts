@@ -6,17 +6,17 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-export * from './core/index';
-export * from './moment-adapter/index';
-export * from './datepicker-module';
-export * from './calendar';
-export * from './calendar-body';
-export * from './clock-view';
-export * from './datepicker';
-export * from './datepicker-animations';
-export * from './datepicker-input';
-export * from './datepicker-intl';
-export * from './datepicker-toggle';
-export * from './month-view';
-export * from './year-view';
-export * from './years-view';
+export * from './core/index'
+export * from './moment-adapter/index'
+export * from './datepicker-module'
+export * from './calendar'
+export * from './calendar-body'
+export * from './clock-view'
+export * from './datepicker'
+export * from './datepicker-animations'
+export * from './datepicker-input'
+export * from './datepicker-intl'
+export * from './datepicker-toggle'
+export * from './month-view'
+export * from './year-view'
+export * from './years-view'

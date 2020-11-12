@@ -1,1 +1,1 @@
-export * from './rpm-status.dialog';
+export * from './rpm-status.dialog'

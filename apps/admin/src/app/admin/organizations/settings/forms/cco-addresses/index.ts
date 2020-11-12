@@ -1,1 +1,1 @@
-export * from './cco-addresses.component';
+export * from './cco-addresses.component'

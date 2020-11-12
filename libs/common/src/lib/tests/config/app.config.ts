@@ -1,31 +1,31 @@
 /**
  * App Settings
  */
-import { AppSettings } from '@coachcare/common/shared';
+import { AppSettings } from '@coachcare/common/shared'
 
 export function getRole(accountType: any): string {
-  let role = '';
+  let role = ''
   switch (accountType.toString()) {
     case '1':
     case 'admin':
-      role = 'admin';
-      break;
+      role = 'admin'
+      break
     case '2':
     case 'provider':
-      role = 'coaches';
-      break;
+      role = 'coaches'
+      break
     case '3':
     case 'client':
-      role = 'patients';
-      break;
+      role = 'patients'
+      break
     default:
   }
-  return role;
+  return role
 }
 
 export function getRoute(account: { id: any; accountType: any }): string {
-  const role = getRole(account.accountType);
-  return `/accounts/${role}/${account.id}`;
+  const role = getRole(account.accountType)
+  return `/accounts/${role}/${account.id}`
 }
 
 export const appSettings: AppSettings = {
@@ -52,4 +52,4 @@ export const appSettings: AppSettings = {
     md: 992,
     lg: 1200
   }
-};
+}

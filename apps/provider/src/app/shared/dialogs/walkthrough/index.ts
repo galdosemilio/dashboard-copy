@@ -1,1 +1,1 @@
-export * from './walkthrough.dialog';
+export * from './walkthrough.dialog'

@@ -3,8 +3,8 @@
  */
 
 export interface SignedUrl {
-    /** Asset name. */
-    name: string;
-    /** Upload URL. */
-    url: string;
+  /** Asset name. */
+  name: string
+  /** Upload URL. */
+  url: string
 }

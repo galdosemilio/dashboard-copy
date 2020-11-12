@@ -3,7 +3,7 @@
  */
 
 export interface ErrorLogEntry {
-  type: string;
-  error: string;
-  time: string;
+  type: string
+  error: string
+  time: string
 }

@@ -1,1 +1,1 @@
-export * from './rpm-clock-icon.component';
+export * from './rpm-clock-icon.component'

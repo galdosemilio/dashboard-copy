@@ -3,6 +3,6 @@
  */
 
 export interface GetFoodMealPlanLocaleResponse {
-    /** Localized description of a meal-plan. */
-    description?: string;
+  /** Localized description of a meal-plan. */
+  description?: string
 }

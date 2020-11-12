@@ -2,4 +2,4 @@
  * Interface for DateUnitRequest
  */
 
-export type DateUnitRequest = 'day' | 'week' | 'month';
+export type DateUnitRequest = 'day' | 'week' | 'month'

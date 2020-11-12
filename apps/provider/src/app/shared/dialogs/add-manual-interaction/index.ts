@@ -1,1 +1,1 @@
-export * from './add-manual-interaction.component';
+export * from './add-manual-interaction.component'

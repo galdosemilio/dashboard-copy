@@ -3,7 +3,7 @@
  */
 
 export interface FetchAccountPreference {
-    calendarView?: 'list' | 'calendar:month' | 'calendar:day';
-    defaultOrganization?: string;
-    healthyBadgeStation?: string;
+  calendarView?: 'list' | 'calendar:month' | 'calendar:day'
+  defaultOrganization?: string
+  healthyBadgeStation?: string
 }

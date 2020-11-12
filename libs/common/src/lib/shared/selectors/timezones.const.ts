@@ -1,10 +1,10 @@
-import { TranslatedOption } from '@coachcare/backend/shared';
+import { TranslatedOption } from '@coachcare/backend/shared'
 
 export interface TimezoneItem extends TranslatedOption {
   viewValue: {
-    [viewValue: string]: string;
-  };
-  value: string;
+    [viewValue: string]: string
+  }
+  value: string
 }
 
 export const TIMEZONES: Array<TimezoneItem> = [
@@ -1058,4 +1058,4 @@ export const TIMEZONES: Array<TimezoneItem> = [
       es: '+13:00 Islas Tokelau'
     }
   }
-];
+]

@@ -3,7 +3,7 @@
  */
 
 export interface ActivitySummary {
-    current: number;
-    average: number;
-    goal: number;
+  current: number
+  average: number
+  goal: number
 }

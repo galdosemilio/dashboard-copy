@@ -1,11 +1,11 @@
 // moment.js locale configuration
 // locale : Spanish [es]
 
-import * as momentNs from 'moment-timezone';
-const moment = momentNs;
+import * as momentNs from 'moment-timezone'
+const moment = momentNs
 
-const monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i;
-const monthsShortRegex = /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+const monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i
+const monthsShortRegex = /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i
 const monthsParse = [
   /^ene/i,
   /^feb/i,
@@ -19,7 +19,7 @@ const monthsParse = [
   /^oct/i,
   /^nov/i,
   /^dic/i
-];
+]
 
 const es = {
   months: 'Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre'.split(
@@ -48,23 +48,27 @@ const es = {
   calendar: {
     sameDay: function (): string {
       // tslint:disable-next-line:no-invalid-this
-      return '[hoy a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT';
+      return '[hoy a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     nextDay: function (): string {
       // tslint:disable-next-line:no-invalid-this
-      return '[mañana a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT';
+      return '[mañana a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     nextWeek: function (): string {
       // tslint:disable-next-line:no-invalid-this
-      return 'dddd [a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT';
+      return 'dddd [a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     lastDay: function (): string {
       // tslint:disable-next-line:no-invalid-this
-      return '[ayer a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT';
+      return '[ayer a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     lastWeek: function (): string {
       // tslint:disable-next-line:no-invalid-this
-      return '[el] dddd [pasado a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT';
+      return (
+        '[el] dddd [pasado a la' +
+        (Number(this.hours()) !== 1 ? 's' : '') +
+        '] LT'
+      )
     },
     sameElse: 'L',
     hours: () => '' // lint workaround
@@ -87,12 +91,12 @@ const es = {
   },
   dayOfMonthOrdinalParse: /\d{1,2}º/,
   ordinal: function (n: number): string {
-    return `${n}º`;
+    return `${n}º`
   },
   week: {
     dow: 0, // CCR: Sunday as first day of the week.
     doy: 4 // The week that contains Jan 4th is the first week of the year.
   }
-};
+}
 
-moment.defineLocale('es', es);
+moment.defineLocale('es', es)

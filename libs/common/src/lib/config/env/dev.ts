@@ -1,5 +1,5 @@
-import { PartialConfig } from '../interfaces';
+import { PartialConfig } from '../interfaces'
 
 export const config: PartialConfig = {
-    apiUrl: 'https://api.coachcare.loc/'
-};
+  apiUrl: 'https://api.coachcare.loc/'
+}

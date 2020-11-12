@@ -1,1 +1,1 @@
-export * from './mala.component';
+export * from './mala.component'

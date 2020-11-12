@@ -1,4 +1,4 @@
 export interface FetchTokenRequest {
-    token: string;
-    account: number;
+  token: string
+  account: number
 }

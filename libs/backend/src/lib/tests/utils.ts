@@ -2,7 +2,7 @@
  * Jasmine Utils
  */
 
-import { DoneFn } from 'jasmine-core';
+import { DoneFn } from 'jasmine-core'
 
 /**
  * Handle generic errors
@@ -15,22 +15,22 @@ export function handleError(done: DoneFn, expValue?: string | Array<string>) {
       switch (typeof expValue) {
         case 'string':
           if (err !== expValue) {
-            done.fail(err);
+            done.fail(err)
           }
-          break;
+          break
         case 'object':
           if (expValue.indexOf(err) === -1) {
-            done.fail(err);
+            done.fail(err)
           }
-          break;
+          break
         default:
-          done.fail(err);
+          done.fail(err)
       }
-      done();
+      done()
     } else {
-      done.fail(err);
+      done.fail(err)
     }
-  };
+  }
 }
 
 /**
@@ -40,8 +40,8 @@ export function handleError(done: DoneFn, expValue?: string | Array<string>) {
  */
 export function mustFail(done: DoneFn, message?: string) {
   return () => {
-    done.fail(message || 'This request must fail');
-  };
+    done.fail(message || 'This request must fail')
+  }
 }
 
 /**
@@ -51,9 +51,9 @@ export function mustFail(done: DoneFn, message?: string) {
 export function mustBeTrue(done: DoneFn) {
   return (value: boolean) => {
     if (value === true) {
-      done();
+      done()
     } else {
-      done.fail();
+      done.fail()
     }
-  };
+  }
 }

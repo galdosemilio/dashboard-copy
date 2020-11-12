@@ -3,8 +3,8 @@
  */
 
 export interface GetAllExerciseTypeRequest {
-    query?: string;
-    includeInactive?: boolean;
-    limit?: any;
-    offset?: number;
+  query?: string
+  includeInactive?: boolean
+  limit?: any
+  offset?: number
 }

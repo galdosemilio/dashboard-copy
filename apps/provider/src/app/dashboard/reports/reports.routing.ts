@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 import {
   ActiveUsersComponent,
   CoachStatsComponent,
@@ -12,11 +12,11 @@ import {
   StatisticsComponent,
   StepsChartComponent,
   WeightChangeTableComponent
-} from './';
-import { CommunicationsReportComponent } from './communications';
-import { CallsComponent } from './communications/calls';
-import { RPMReportComponent } from './rpm';
-import { RPMBillingComponent } from './rpm/rpm-billing';
+} from './'
+import { CommunicationsReportComponent } from './communications'
+import { CallsComponent } from './communications/calls'
+import { RPMReportComponent } from './rpm'
+import { RPMBillingComponent } from './rpm/rpm-billing'
 
 export const ReportsRoutes: Routes = [
   {
@@ -75,4 +75,4 @@ export const ReportsRoutes: Routes = [
       { path: 'billing', component: RPMBillingComponent }
     ]
   }
-];
+]

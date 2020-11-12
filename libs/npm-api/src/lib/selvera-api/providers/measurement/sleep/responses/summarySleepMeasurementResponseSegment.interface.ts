@@ -3,8 +3,8 @@
  */
 
 export interface SummarySleepMeasurementResponseSegment {
-    date: string;
-    sleepMinutes?: number;
-    sleepQuality?: number;
-    averageMinutes?: number;
+  date: string
+  sleepMinutes?: number
+  sleepQuality?: number
+  averageMinutes?: number
 }

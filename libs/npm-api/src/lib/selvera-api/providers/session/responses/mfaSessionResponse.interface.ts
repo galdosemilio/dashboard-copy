@@ -1,3 +1,3 @@
 export interface MFASessionResponse {
-    token?: string;
+  token?: string
 }

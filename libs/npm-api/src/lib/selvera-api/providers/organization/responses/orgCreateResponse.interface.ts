@@ -3,5 +3,5 @@
  */
 
 export interface OrgCreateResponse {
-    id: string;
+  id: string
 }

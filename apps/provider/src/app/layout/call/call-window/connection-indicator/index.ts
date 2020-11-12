@@ -1,1 +1,1 @@
-export * from './connection-indicator.component';
+export * from './connection-indicator.component'

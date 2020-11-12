@@ -4,5 +4,5 @@
  */
 
 export interface FetchAvailabilityRequest {
-    account: string;
+  account: string
 }

@@ -204,6 +204,16 @@ workflows:
           requires:
             - approve_test_deployment
           context: dashboard-deployment-test
+      - deploy:
+          name: deploy_test_master
+          env: test
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - full_test_build
+          context: dashboard-deployment-test
       - full_build:
           mode: prod
           name: full_production_build
@@ -212,7 +222,7 @@ workflows:
               only:
                 - master
           requires:
-            - deploy_test
+            - deploy_test_master
       - approve_production_deployment:
           filters:
             branches:

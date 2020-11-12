@@ -9,7 +9,7 @@ import {
   Optional,
   Output,
   SkipSelf
-} from '@angular/core';
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
@@ -17,11 +17,11 @@ import {
   FormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
-import { TimezoneItem, TIMEZONES } from '@coachcare/common/shared';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { find } from 'lodash';
-import { Subscription } from 'rxjs';
+} from '@angular/forms'
+import { TimezoneItem, TIMEZONES } from '@coachcare/common/shared'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
+import { find } from 'lodash'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'ccr-form-field-timezone',
@@ -48,29 +48,29 @@ import { Subscription } from 'rxjs';
 })
 export class TimezoneFormFieldComponent
   implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input() formControlName: string;
+  @Input() formControlName: string
 
-  @Input() disabled: any;
-  @Input() placeholder: string;
-  @Input() readonly: any;
-  @Input() required: any;
+  @Input() disabled: any
+  @Input() placeholder: string
+  @Input() readonly: any
+  @Input() required: any
 
-  @Output() change = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>()
 
-  _control: AbstractControl | undefined;
-  selected: string;
-  timezones: Array<TimezoneItem>;
-  language: string;
-  langSub: Subscription;
+  _control: AbstractControl | undefined
+  selected: string
+  timezones: Array<TimezoneItem>
+  language: string
+  langSub: Subscription
 
   get isDisabled() {
-    return this.disabled === '' || this.disabled === true;
+    return this.disabled === '' || this.disabled === true
   }
   get isReadonly() {
-    return this.readonly === '' || this.readonly === true;
+    return this.readonly === '' || this.readonly === true
   }
   get isRequired() {
-    return this.required === '' || this.required === true;
+    return this.required === '' || this.required === true
   }
 
   constructor(
@@ -80,31 +80,31 @@ export class TimezoneFormFieldComponent
     @SkipSelf()
     private parent: ControlContainer
   ) {
-    this.timezones = TIMEZONES;
+    this.timezones = TIMEZONES
 
-    this.language = translate.currentLang;
+    this.language = translate.currentLang
     this.langSub = translate.onLangChange.subscribe(
       (event: LangChangeEvent) => (this.language = event.lang)
-    );
+    )
   }
 
   ngOnInit() {
     if (this.formControlName) {
-      const parent = this.parent.control as AbstractControl;
-      this._control = parent.get(this.formControlName) as AbstractControl;
+      const parent = this.parent.control as AbstractControl
+      this._control = parent.get(this.formControlName) as AbstractControl
     }
   }
 
   ngOnDestroy() {
-    this.langSub.unsubscribe();
+    this.langSub.unsubscribe()
   }
 
-  propagateChange = (data: any) => {};
-  propagateTouch = () => {};
+  propagateChange = (data: any) => {}
+  propagateTouch = () => {}
 
   onChange() {
-    this.propagateChange(this.selected);
-    this.change.emit(this.selected);
+    this.propagateChange(this.selected)
+    this.change.emit(this.selected)
   }
 
   /**
@@ -112,7 +112,7 @@ export class TimezoneFormFieldComponent
    */
   writeValue(value: string): void {
     if (value) {
-      let item = find(this.timezones, { value });
+      let item = find(this.timezones, { value })
       if (!item) {
         // add the existing value to the end of the list
         item = {
@@ -121,32 +121,32 @@ export class TimezoneFormFieldComponent
             en: value,
             es: value
           }
-        };
-        this.timezones.push(item);
+        }
+        this.timezones.push(item)
       }
-      this.selected = value;
-      this.onChange();
+      this.selected = value
+      this.onChange()
     }
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
+    this.propagateTouch = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   validate(c: FormControl) {
     if (!this.isDisabled && this.isRequired) {
       if (!c.value) {
-        return { ccrFieldTimezone: 'required' };
+        return { ccrFieldTimezone: 'required' }
       }
     }
-    return null;
+    return null
   }
 }

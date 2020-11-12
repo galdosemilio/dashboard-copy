@@ -3,5 +3,5 @@
  */
 
 export interface VideoTokenRequest {
-    callId: string;
+  callId: string
 }

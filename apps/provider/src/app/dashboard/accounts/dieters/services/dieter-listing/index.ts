@@ -1,2 +1,2 @@
-export * from './dieter-listing.database';
-export * from './dieter-listing.datasource';
+export * from './dieter-listing.database'
+export * from './dieter-listing.datasource'

@@ -3,6 +3,6 @@
  */
 
 export interface LoginResponse {
-    accountType: number;
-    token: string;
+  accountType: number
+  token: string
 }

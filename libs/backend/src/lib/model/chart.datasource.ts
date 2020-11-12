@@ -1,23 +1,23 @@
-import { UnitFormatters } from '@coachcare/backend/shared';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { TableDataSource } from './table.datasource';
+import { UnitFormatters } from '@coachcare/backend/shared'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { TableDataSource } from './table.datasource'
 
 export interface ChartData {
-  type?: string;
-  data?: number[] | any[];
-  datasets?: any[];
-  labels?: Array<any>;
-  options?: object;
-  colors?: Array<any>;
-  legend?: boolean;
+  type?: string
+  data?: number[] | any[]
+  datasets?: any[]
+  labels?: Array<any>
+  options?: object
+  colors?: Array<any>
+  legend?: boolean
 }
 
 export abstract class ChartDataSource<T, C> extends TableDataSource<T, any, C> {
   /**
    * Observable of data summary of the resulting query.
    */
-  summary$ = new BehaviorSubject<any>({});
+  summary$ = new BehaviorSubject<any>({})
 
   /**
    * Config defaults manipulable from outside.
@@ -26,12 +26,12 @@ export abstract class ChartDataSource<T, C> extends TableDataSource<T, any, C> {
     type: 'line',
     legend: true,
     colors: undefined
-  };
+  }
 
   /**
    * Labels unit processors.
    */
-  formatters: UnitFormatters = {};
+  formatters: UnitFormatters = {}
 
   /**
    * Connects a charting component to this data source. Note that
@@ -40,7 +40,7 @@ export abstract class ChartDataSource<T, C> extends TableDataSource<T, any, C> {
    * @returns Observable that emits a new value when the data changes.
    */
   chart(): Observable<ChartData> {
-    return this.connect().pipe(map(this.mapChart.bind(this)));
+    return this.connect().pipe(map(this.mapChart.bind(this)))
   }
 
   defaultData(): ChartData {
@@ -48,8 +48,8 @@ export abstract class ChartDataSource<T, C> extends TableDataSource<T, any, C> {
       datasets: [{ data: [] }],
       labels: [],
       ...this.config
-    };
+    }
   }
 
-  abstract mapChart(result: T[]): ChartData;
+  abstract mapChart(result: T[]): ChartData
 }

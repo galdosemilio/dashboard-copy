@@ -1,1 +1,1 @@
-export * from './timezone.component';
+export * from './timezone.component'

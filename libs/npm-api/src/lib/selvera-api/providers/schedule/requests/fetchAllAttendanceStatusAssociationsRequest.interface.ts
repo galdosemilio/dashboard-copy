@@ -3,5 +3,5 @@
  */
 
 export interface FetchAllAttendanceStatusAssociationsRequest {
-    organization: string;
+  organization: string
 }

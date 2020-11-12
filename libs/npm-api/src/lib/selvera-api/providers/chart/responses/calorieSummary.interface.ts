@@ -3,6 +3,6 @@
  */
 
 export interface CalorieSummary {
-    current: number;
-    average: number;
+  current: number
+  average: number
 }

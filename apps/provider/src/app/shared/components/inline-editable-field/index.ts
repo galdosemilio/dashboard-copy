@@ -1,1 +1,1 @@
-export * from './inline-editable-field.component';
+export * from './inline-editable-field.component'

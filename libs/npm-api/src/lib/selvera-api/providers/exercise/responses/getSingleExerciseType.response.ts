@@ -3,8 +3,8 @@
  */
 
 export interface GetSingleExerciseTypeResponse {
-    id: string;
-    name: string;
-    description?: string;
-    isActive: boolean;
+  id: string
+  name: string
+  description?: string
+  isActive: boolean
 }

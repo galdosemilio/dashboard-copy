@@ -3,8 +3,8 @@
  */
 
 export interface SleepDataSegment {
-    date: string;
-    duration: number;
-    average: number;
-    quality: number;
+  date: string
+  duration: number
+  average: number
+  quality: number
 }

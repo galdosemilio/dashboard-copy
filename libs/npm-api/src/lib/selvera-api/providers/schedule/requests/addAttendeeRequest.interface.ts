@@ -2,15 +2,15 @@
  * Interface for POST /meeting/attendee
  */
 
-import { MeetingAttendee } from '../entities/attendee.interface';
+import { MeetingAttendee } from '../entities/attendee.interface'
 
 type AddMeetingAttendeeElement = Pick<
-    MeetingAttendee,
-    'account' | 'firstName' | 'lastName' | 'email'
->;
+  MeetingAttendee,
+  'account' | 'firstName' | 'lastName' | 'email'
+>
 
 export interface AddAttendeeRequest {
-    meetingId: string;
-    attendees: Array<Partial<AddMeetingAttendeeElement>>;
-    recurring?: boolean;
+  meetingId: string
+  attendees: Array<Partial<AddMeetingAttendeeElement>>
+  recurring?: boolean
 }

@@ -3,6 +3,6 @@
  */
 
 export interface FetchProviderAvailabilitySegment {
-    account: string;
-    startTime: string; // ISO8601 format
+  account: string
+  startTime: string // ISO8601 format
 }

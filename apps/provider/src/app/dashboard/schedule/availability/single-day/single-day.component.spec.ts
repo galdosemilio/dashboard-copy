@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ScheduleAvailabilitySingleDayComponent } from './single-day.component';
+import { ScheduleAvailabilitySingleDayComponent } from './single-day.component'
 
 describe('ScheduleAvailabilitySingleDayComponent', () => {
-  let component: ScheduleAvailabilitySingleDayComponent;
-  let fixture: ComponentFixture<ScheduleAvailabilitySingleDayComponent>;
+  let component: ScheduleAvailabilitySingleDayComponent
+  let fixture: ComponentFixture<ScheduleAvailabilitySingleDayComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ScheduleAvailabilitySingleDayComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScheduleAvailabilitySingleDayComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ScheduleAvailabilitySingleDayComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

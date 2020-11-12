@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
 
-import { HydrationDataSource } from '@app/dashboard/accounts/dieters/services';
+import { HydrationDataSource } from '@app/dashboard/accounts/dieters/services'
 
 @Component({
   selector: 'app-dieter-journal-hydration-table',
@@ -8,12 +8,12 @@ import { HydrationDataSource } from '@app/dashboard/accounts/dieters/services';
   styleUrls: ['./table.component.scss']
 })
 export class HydrationTableComponent implements OnInit {
-  @Input() columns = ['date', 'amount', 'dailygoal'];
-  @Input() source: HydrationDataSource | null;
+  @Input() columns = ['date', 'amount', 'dailygoal']
+  @Input() source: HydrationDataSource | null
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.cdr.detectChanges();
+    this.cdr.detectChanges()
   }
 }

@@ -3,8 +3,8 @@
  */
 
 export interface GetSequenceStateRequest {
-    /** Sequence State ID */
-    id: string;
-    /** Organization ID */
-    organization: string;
+  /** Sequence State ID */
+  id: string
+  /** Organization ID */
+  organization: string
 }

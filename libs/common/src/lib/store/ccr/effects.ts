@@ -1,4 +1,4 @@
-import { Type } from '@angular/core';
-import { UserEffects } from './user/effects';
+import { Type } from '@angular/core'
+import { UserEffects } from './user/effects'
 
-export const effects: Type<any>[] = [UserEffects];
+export const effects: Type<any>[] = [UserEffects]

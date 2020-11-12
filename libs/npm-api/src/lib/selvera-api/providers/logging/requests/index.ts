@@ -2,4 +2,4 @@
  * Export all interfaces
  */
 
-export { AddLogRequest } from './addLogRequest.interface';
+export { AddLogRequest } from './addLogRequest.interface'

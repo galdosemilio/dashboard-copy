@@ -1,7 +1,10 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FileExplorerContent, FileExplorerEvents } from '@app/dashboard/content/models';
-import { BINDFORM_TOKEN } from '@app/shared';
+import { Component, forwardRef, Input } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import {
+  FileExplorerContent,
+  FileExplorerEvents
+} from '@app/dashboard/content/models'
+import { BINDFORM_TOKEN } from '@app/shared'
 
 @Component({
   selector: 'app-content-file-explorer-details',
@@ -16,40 +19,44 @@ import { BINDFORM_TOKEN } from '@app/shared';
 })
 export class FileExplorerDetailsComponent {
   @Input()
-  content: FileExplorerContent;
+  content: FileExplorerContent
   @Input()
-  events: FileExplorerEvents;
+  events: FileExplorerEvents
 
-  public form: FormGroup;
+  public form: FormGroup
 
   constructor(private formBuilder: FormBuilder) {
-    this.createForm();
+    this.createForm()
   }
 
   deleteContent(): void {
-    this.events.deleteContent.emit(this.content);
+    this.events.deleteContent.emit(this.content)
   }
 
   moveContent(): void {
-    this.events.moveContentPrompt.emit(this.content);
+    this.events.moveContentPrompt.emit(this.content)
   }
 
   openContent(): void {
-    this.events.openContent.emit(this.content);
+    this.events.openContent.emit(this.content)
   }
 
   updateContent(): void {
     this.events.updateContent.emit(
-      Object.assign({}, this.content, this.getFormContent()) as FileExplorerContent
-    );
+      Object.assign(
+        {},
+        this.content,
+        this.getFormContent()
+      ) as FileExplorerContent
+    )
   }
 
   shouldShowAlert(): boolean {
-    return this.content.type.code === 'folder';
+    return this.content.type.code === 'folder'
   }
 
   private createForm(): void {
-    this.form = this.formBuilder.group({});
+    this.form = this.formBuilder.group({})
   }
 
   private getFormContent(): void {
@@ -57,12 +64,12 @@ export class FileExplorerDetailsComponent {
       returnedValue = Object.assign(
         { ...(details.details ? details.details : details) },
         { ...details }
-      );
+      )
 
     returnedValue.name = returnedValue.fullName
       ? returnedValue.fullName
-      : returnedValue.name;
+      : returnedValue.name
 
-    return returnedValue;
+    return returnedValue
   }
 }

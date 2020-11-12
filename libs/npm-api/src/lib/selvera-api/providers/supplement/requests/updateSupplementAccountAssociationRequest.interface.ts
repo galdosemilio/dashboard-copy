@@ -3,6 +3,6 @@
  */
 
 export interface UpdateSupplementAccountAssociationRequest {
-    id: string;
-    dosage?: number;
+  id: string
+  dosage?: number
 }

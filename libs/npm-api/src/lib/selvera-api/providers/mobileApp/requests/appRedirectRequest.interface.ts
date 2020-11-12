@@ -3,6 +3,6 @@
  */
 
 export interface AppRedirectRequest {
-    platform: 'ios' | 'android';
-    organization: string;
+  platform: 'ios' | 'android'
+  organization: string
 }

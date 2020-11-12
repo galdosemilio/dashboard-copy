@@ -1,6 +1,6 @@
-import { createFeatureSelector } from '@ngrx/store';
-import { UIState } from './state';
+import { createFeatureSelector } from '@ngrx/store'
+import { UIState } from './state'
 
-export const name = 'ui';
+export const name = 'ui'
 
-export const uiSelector = createFeatureSelector<UIState>(name);
+export const uiSelector = createFeatureSelector<UIState>(name)

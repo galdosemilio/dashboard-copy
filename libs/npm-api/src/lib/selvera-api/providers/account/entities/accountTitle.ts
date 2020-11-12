@@ -2,11 +2,11 @@
  * AccountTitle
  */
 
-export type AccountTitleId = string;
+export type AccountTitleId = string
 
 export interface AccountTitle {
-    /** Account title ID. */
-    id: AccountTitleId;
-    /** Account title name. */
-    name: string;
+  /** Account title ID. */
+  id: AccountTitleId
+  /** Account title name. */
+  name: string
 }

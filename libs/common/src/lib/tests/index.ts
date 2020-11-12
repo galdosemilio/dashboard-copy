@@ -1,2 +1,2 @@
-export * from './config/index';
-export * from './environment';
+export * from './config/index'
+export * from './environment'

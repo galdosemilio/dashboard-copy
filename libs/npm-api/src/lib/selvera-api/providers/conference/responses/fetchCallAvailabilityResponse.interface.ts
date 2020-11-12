@@ -3,5 +3,5 @@
  */
 
 export interface FetchCallAvailabilityResponse {
-    isAvailable: boolean;
+  isAvailable: boolean
 }

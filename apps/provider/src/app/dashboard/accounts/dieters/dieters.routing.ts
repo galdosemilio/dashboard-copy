@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 import {
   DieterComponent,
   DieterDashboardComponent,
@@ -10,10 +10,10 @@ import {
   DietersGuard,
   DietersNoPhiGuard,
   GoalsResolver
-} from './index';
+} from './index'
 
-import { DieterListingNoPhiComponent } from './dieter-listing-no-phi/dieter-listing-no-phi.component';
-import { DieterListingWithPhiComponent } from './dieter-listing-with-phi/dieter-listing-with-phi.component';
+import { DieterListingNoPhiComponent } from './dieter-listing-no-phi/dieter-listing-no-phi.component'
+import { DieterListingWithPhiComponent } from './dieter-listing-with-phi/dieter-listing-with-phi.component'
 
 export const DietersRoutes: Routes = [
   {
@@ -42,4 +42,4 @@ export const DietersRoutes: Routes = [
       { path: 'messages', component: DieterMessagesComponent }
     ]
   }
-];
+]

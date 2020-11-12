@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services';
-import { ContextService, NotifierService } from '@app/service';
-import { _ } from '@app/shared';
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
+import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services'
+import { ContextService, NotifierService } from '@app/service'
+import { _ } from '@app/shared'
 
 @Injectable()
 export class FormSubmissionsResolver implements Resolve<boolean> {
@@ -21,13 +21,13 @@ export class FormSubmissionsResolver implements Resolve<boolean> {
             organization: this.context.organizationId,
             account: undefined
           })
-          .toPromise();
+          .toPromise()
 
-        resolve(response.data.length > 0);
+        resolve(response.data.length > 0)
       } catch (error) {
-        this.notifier.error(_('NOTIFY.ERROR.FORM_NO_ACCESS_VIEW_SUBMISSION'));
-        throw new Error(error);
+        this.notifier.error(_('NOTIFY.ERROR.FORM_NO_ACCESS_VIEW_SUBMISSION'))
+        throw new Error(error)
       }
-    });
+    })
   }
 }

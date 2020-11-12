@@ -1,1 +1,1 @@
-export * from './clinic-info.component';
+export * from './clinic-info.component'

@@ -3,5 +3,5 @@
  */
 
 export interface SearchProviderAvailabilityResponse {
-    providers: Array<string>;
+  providers: Array<string>
 }

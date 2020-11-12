@@ -1,1 +1,1 @@
-export * from './associations.component';
+export * from './associations.component'

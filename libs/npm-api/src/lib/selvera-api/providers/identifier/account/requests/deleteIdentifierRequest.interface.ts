@@ -3,6 +3,6 @@
  */
 
 export interface DeleteIdentifierRequest {
-  account: string;
-  id: string;
+  account: string
+  id: string
 }

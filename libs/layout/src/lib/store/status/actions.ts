@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { State } from './state';
+import { Action } from '@ngrx/store'
+import { State } from './state'
 
 /**
  * Action Types
@@ -20,53 +20,53 @@ export enum ActionTypes {
  * Actions
  */
 export class ResizeLayout implements Action {
-  readonly type = ActionTypes.LAYOUT_RESIZE;
+  readonly type = ActionTypes.LAYOUT_RESIZE
 }
 export class UpdateLayout implements Action {
-  readonly type = ActionTypes.LAYOUT_UPDATE;
+  readonly type = ActionTypes.LAYOUT_UPDATE
 
   constructor(public payload: Partial<State>) {}
 }
 
 export class OpenMenu implements Action {
-  readonly type = ActionTypes.MENU_STATE;
-  readonly payload = { opened: true };
+  readonly type = ActionTypes.MENU_STATE
+  readonly payload = { opened: true }
 }
 export class CloseMenu implements Action {
-  readonly type = ActionTypes.MENU_STATE;
-  readonly payload = { opened: false };
+  readonly type = ActionTypes.MENU_STATE
+  readonly payload = { opened: false }
 }
 export class CloseMenuFor implements Action {
-  readonly type = ActionTypes.MENU_CLOSE;
+  readonly type = ActionTypes.MENU_CLOSE
 
   constructor(public payload: string) {}
 }
 export class ToggleMenu implements Action {
-  readonly type = ActionTypes.MENU_TOGGLE;
+  readonly type = ActionTypes.MENU_TOGGLE
 }
 
 export class OpenPanel implements Action {
-  readonly type = ActionTypes.PANEL_STATE;
-  readonly payload = { opened: true };
+  readonly type = ActionTypes.PANEL_STATE
+  readonly payload = { opened: true }
 }
 export class ClosePanel implements Action {
-  readonly type = ActionTypes.PANEL_STATE;
-  readonly payload = { opened: false };
+  readonly type = ActionTypes.PANEL_STATE
+  readonly payload = { opened: false }
 }
 export class ActivatePanel implements Action {
-  readonly type = ActionTypes.PANEL_ACTIVATION;
-  readonly payload = { enabled: true };
+  readonly type = ActionTypes.PANEL_ACTIVATION
+  readonly payload = { enabled: true }
 }
 export class DeactivatePanel implements Action {
-  readonly type = ActionTypes.PANEL_ACTIVATION;
-  readonly payload = { enabled: false };
+  readonly type = ActionTypes.PANEL_ACTIVATION
+  readonly payload = { enabled: false }
 }
 export class TogglePanel implements Action {
-  readonly type = ActionTypes.PANEL_TOGGLE;
+  readonly type = ActionTypes.PANEL_TOGGLE
 }
 
 export class SetPanelComponent implements Action {
-  readonly type = ActionTypes.PANEL_COMPONENT;
+  readonly type = ActionTypes.PANEL_COMPONENT
 
   constructor(public payload: { component: string }) {}
 }
@@ -84,4 +84,4 @@ export type Actions =
   | ActivatePanel
   | DeactivatePanel
   | TogglePanel
-  | SetPanelComponent;
+  | SetPanelComponent

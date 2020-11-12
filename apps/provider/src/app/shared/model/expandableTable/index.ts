@@ -1,2 +1,2 @@
-export * from './expandableTableHeader';
-export * from './expandableTableItem';
+export * from './expandableTableHeader'
+export * from './expandableTableItem'

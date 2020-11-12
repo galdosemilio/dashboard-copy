@@ -1,1 +1,1 @@
-export * from './labels-associations.component';
+export * from './labels-associations.component'

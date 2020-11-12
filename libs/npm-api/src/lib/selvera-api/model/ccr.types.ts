@@ -1,12 +1,12 @@
 /**
  * CCR API Environments
  */
-export type CcrEnv = 'demo' | 'dev' | 'prod' | 'test';
+export type CcrEnv = 'demo' | 'dev' | 'prod' | 'test'
 
 /**
  * CCR User Roles
  */
-export type CcrRol = 'admin' | 'provider' | 'client';
+export type CcrRol = 'admin' | 'provider' | 'client'
 
 /**
  * CCR Roles Map
@@ -14,12 +14,12 @@ export type CcrRol = 'admin' | 'provider' | 'client';
 export function CcrRolesMap(id: number | string): CcrRol {
   switch (Number(id)) {
     case 1:
-      return 'admin';
+      return 'admin'
     case 2:
-      return 'provider';
+      return 'provider'
     case 3:
-      return 'client';
+      return 'client'
     default:
-      throw new Error(`Unknown CcrRolesMap ${id}`);
+      throw new Error(`Unknown CcrRolesMap ${id}`)
   }
 }

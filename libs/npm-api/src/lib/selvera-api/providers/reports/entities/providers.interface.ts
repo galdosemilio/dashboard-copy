@@ -3,6 +3,6 @@
  */
 
 export interface ReportProviders {
-    total: number;
-    active: number;
+  total: number
+  active: number
 }

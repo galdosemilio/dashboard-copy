@@ -3,7 +3,7 @@
  */
 
 export interface AddMeetingTypeAssociationRequest {
-    typeId: string;
-    organization: string;
-    durations: Array<string>; // postgres interval collection
+  typeId: string
+  organization: string
+  durations: Array<string> // postgres interval collection
 }

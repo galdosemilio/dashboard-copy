@@ -3,5 +3,5 @@
  */
 
 export interface AddSingleAvailabilityResponse {
-    id: string;
+  id: string
 }

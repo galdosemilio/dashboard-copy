@@ -1,2 +1,2 @@
-export * from './app-section.props';
-export * from './app-section.component';
+export * from './app-section.props'
+export * from './app-section.component'

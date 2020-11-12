@@ -3,5 +3,5 @@
  */
 
 export interface AddMeetingResponse {
-    meetingId: string;
+  meetingId: string
 }

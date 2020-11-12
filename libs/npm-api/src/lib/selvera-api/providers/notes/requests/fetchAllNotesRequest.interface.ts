@@ -3,10 +3,10 @@
  */
 
 export interface FetchAllNotesRequest {
-    account?: string;
-    search?: string;
-    startDate?: string;
-    endDate?: string;
-    limit?: number | 'all';
-    offset?: number;
+  account?: string
+  search?: string
+  startDate?: string
+  endDate?: string
+  limit?: number | 'all'
+  offset?: number
 }

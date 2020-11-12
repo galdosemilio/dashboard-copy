@@ -1,11 +1,11 @@
-import { AccountIdentifier } from './account-identifier';
+import { AccountIdentifier } from './account-identifier'
 
 export class AccountIdentifiersProps {
-  account?: string;
-  identifiers?: AccountIdentifier[];
+  account?: string
+  identifiers?: AccountIdentifier[]
 
   constructor(args: AccountIdentifiersProps) {
-    this.account = args.account || '';
-    this.identifiers = args.identifiers || [];
+    this.account = args.account || ''
+    this.identifiers = args.identifiers || []
   }
 }

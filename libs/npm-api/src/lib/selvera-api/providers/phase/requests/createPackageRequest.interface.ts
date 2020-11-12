@@ -3,9 +3,9 @@
  */
 
 export interface CreatePackageRequest {
-    title: string;
-    shortcode: string;
-    organization: string;
-    descriptionPublic?: string;
-    currency?: string;
+  title: string
+  shortcode: string
+  organization: string
+  descriptionPublic?: string
+  currency?: string
 }

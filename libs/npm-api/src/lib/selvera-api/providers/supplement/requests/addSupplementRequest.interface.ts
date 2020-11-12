@@ -3,7 +3,7 @@
  */
 
 export interface AddSupplementRequest {
-    fullName: string;
-    shortName: string;
-    isActive?: boolean;
+  fullName: string
+  shortName: string
+  isActive?: boolean
 }

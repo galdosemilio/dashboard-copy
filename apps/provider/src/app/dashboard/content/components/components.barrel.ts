@@ -1,3 +1,3 @@
-import { SelectedContentTableComponent } from './selected-content-table';
+import { SelectedContentTableComponent } from './selected-content-table'
 
-export const ContentSharedComponents = [SelectedContentTableComponent];
+export const ContentSharedComponents = [SelectedContentTableComponent]

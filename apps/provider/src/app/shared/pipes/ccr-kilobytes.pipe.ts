@@ -1,8 +1,8 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({ name: 'ccrKilobytes' })
 export class CcrKilobytesPipe implements PipeTransform {
   transform(value: number): number {
-    return Math.ceil(value / 1024);
+    return Math.ceil(value / 1024)
   }
 }

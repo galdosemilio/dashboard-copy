@@ -3,6 +3,6 @@
  */
 
 export interface ActivityHistoryResponseSegment {
-    date: string;
-    recordedAt: string;
+  date: string
+  recordedAt: string
 }

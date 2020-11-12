@@ -1,1 +1,1 @@
-export * from './schedule-list-table.component';
+export * from './schedule-list-table.component'

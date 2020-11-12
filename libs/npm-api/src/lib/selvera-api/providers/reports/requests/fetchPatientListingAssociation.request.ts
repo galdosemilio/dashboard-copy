@@ -1,6 +1,6 @@
 interface SortingOption {
-    property: 'name' | 'changedAt';
-    dir: 'asc' | 'desc';
+  property: 'name' | 'changedAt'
+  dir: 'asc' | 'desc'
 }
 
 /**
@@ -8,9 +8,9 @@ interface SortingOption {
  */
 
 export interface FetchPatientListingAssociationRequest {
-    account: string;
-    limit?: number | 'all';
-    offset?: number;
-    organization: string;
-    sort?: SortingOption[];
+  account: string
+  limit?: number | 'all'
+  offset?: number
+  organization: string
+  sort?: SortingOption[]
 }

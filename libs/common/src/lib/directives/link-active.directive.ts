@@ -10,9 +10,14 @@ import {
   QueryList,
   Renderer2,
   SimpleChanges
-} from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
-import { Subscription } from 'rxjs';
+} from '@angular/core'
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkWithHref
+} from '@angular/router'
+import { Subscription } from 'rxjs'
 
 @Directive({
   selector: '[ccrLinkActive]',
@@ -21,22 +26,22 @@ import { Subscription } from 'rxjs';
 export class LinkActiveDirective
   implements AfterContentInit, DoCheck, OnChanges, OnDestroy {
   @ContentChildren(RouterLink, { descendants: true })
-  links: QueryList<RouterLink>;
+  links: QueryList<RouterLink>
 
   @ContentChildren(RouterLinkWithHref, { descendants: true })
-  linksWithHrefs: QueryList<RouterLinkWithHref>;
+  linksWithHrefs: QueryList<RouterLinkWithHref>
 
-  private active = false;
-  private classes: string[] = [];
-  private initialized = false;
-  private subscription: Subscription;
+  private active = false
+  private classes: string[] = []
+  private initialized = false
+  private subscription: Subscription
 
-  @Input() ccrLinkActiveOptions: { exact: boolean } = { exact: false };
+  @Input() ccrLinkActiveOptions: { exact: boolean } = { exact: false }
 
   @Input()
   set ccrLinkActive(data: string[] | string) {
-    const classes = Array.isArray(data) ? data : data.split(' ');
-    this.classes = classes.filter(c => !!c);
+    const classes = Array.isArray(data) ? data : data.split(' ')
+    this.classes = classes.filter((c) => !!c)
   }
 
   constructor(
@@ -44,53 +49,53 @@ export class LinkActiveDirective
     private element: ElementRef,
     private renderer: Renderer2
   ) {
-    this.subscription = this.router.events.subscribe(s => {
+    this.subscription = this.router.events.subscribe((s) => {
       if (s instanceof NavigationEnd) {
-        this.update();
+        this.update()
       }
-    });
+    })
   }
 
   ngAfterContentInit(): void {
     if (this.initialized) {
-      return;
+      return
     }
-    this.initialized = true;
-    this.links.changes.subscribe(_ => this.update());
-    this.linksWithHrefs.changes.subscribe(_ => this.update());
-    this.update();
+    this.initialized = true
+    this.links.changes.subscribe((_) => this.update())
+    this.linksWithHrefs.changes.subscribe((_) => this.update())
+    this.update()
   }
 
   ngDoCheck() {
     if (!this.initialized && this.links) {
-      this.ngAfterContentInit();
+      this.ngAfterContentInit()
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.update();
+    this.update()
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscription.unsubscribe()
   }
 
   private update(): void {
     if (!this.links || !this.linksWithHrefs || !this.router.navigated) {
-      return;
+      return
     }
-    const hasActiveLinks = this.hasActiveLinks();
+    const hasActiveLinks = this.hasActiveLinks()
 
     // react only when status has changed to prevent unnecessary dom updates
     if (this.active !== hasActiveLinks) {
-      this.classes.forEach(c => {
+      this.classes.forEach((c) => {
         if (hasActiveLinks) {
-          this.renderer.addClass(this.element.nativeElement, c);
+          this.renderer.addClass(this.element.nativeElement, c)
         } else {
-          this.renderer.removeClass(this.element.nativeElement, c);
+          this.renderer.removeClass(this.element.nativeElement, c)
         }
-      });
-      Promise.resolve(hasActiveLinks).then(active => (this.active = active));
+      })
+      Promise.resolve(hasActiveLinks).then((active) => (this.active = active))
     }
   }
 
@@ -98,17 +103,17 @@ export class LinkActiveDirective
     router: Router
   ): (link: RouterLink | RouterLinkWithHref) => boolean {
     return (link: RouterLink | RouterLinkWithHref) =>
-      router.isActive(link.urlTree, this.ccrLinkActiveOptions.exact);
+      router.isActive(link.urlTree, this.ccrLinkActiveOptions.exact)
   }
 
   private hasActiveLinks(): boolean {
     return (
       this.links.some(this.isLinkActive(this.router)) ||
       this.linksWithHrefs.some(this.isLinkActive(this.router))
-    );
+    )
   }
 
   get isActive(): boolean {
-    return this.active;
+    return this.active
   }
 }

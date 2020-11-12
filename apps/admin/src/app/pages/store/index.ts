@@ -1,1 +1,1 @@
-export { PagesStoreModule } from './store.module';
+export { PagesStoreModule } from './store.module'

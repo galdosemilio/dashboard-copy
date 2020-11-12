@@ -1,19 +1,22 @@
-import { Routes } from '@angular/router';
-import { SessionGuard } from '@board/pages/pages.providers';
+import { Routes } from '@angular/router'
+import { SessionGuard } from '@board/pages/pages.providers'
 
 export const routes: Routes = [
   {
     path: 'provider',
-    loadChildren: () => import('./provider/provider.module').then(m => m.AppProviderModule),
+    loadChildren: () =>
+      import('./provider/provider.module').then((m) => m.AppProviderModule),
     canLoad: [SessionGuard]
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AppAdminModule),
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AppAdminModule),
     canLoad: [SessionGuard]
   },
   {
     path: '',
-    loadChildren: () => import('./pages/pages.module').then(m => m.AppPagesModule)
+    loadChildren: () =>
+      import('./pages/pages.module').then((m) => m.AppPagesModule)
   }
-];
+]

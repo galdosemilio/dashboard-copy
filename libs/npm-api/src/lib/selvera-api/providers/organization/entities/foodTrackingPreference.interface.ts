@@ -3,7 +3,7 @@
  */
 
 export interface FoodTrackingPreference {
-    organization: string;
-    modeId: string;
-    modeActive: boolean;
+  organization: string
+  modeId: string
+  modeActive: boolean
 }

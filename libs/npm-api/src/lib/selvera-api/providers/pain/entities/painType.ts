@@ -4,7 +4,7 @@
 
 export interface PainType {
   /** Pain type id. */
-  id: number;
+  id: number
   /** Pain type description. */
-  description: string;
+  description: string
 }

@@ -1,1 +1,1 @@
-export * from './recipients.component';
+export * from './recipients.component'

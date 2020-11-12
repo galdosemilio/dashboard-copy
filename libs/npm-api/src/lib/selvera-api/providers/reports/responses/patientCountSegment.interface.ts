@@ -2,9 +2,9 @@
  * Interface for PatientCountSegment
  */
 
-import { PatientCountAggregate } from '../entities';
+import { PatientCountAggregate } from '../entities'
 
 export interface PatientCountSegment {
-    date: string;
-    aggregates: Array<PatientCountAggregate>;
+  date: string
+  aggregates: Array<PatientCountAggregate>
 }

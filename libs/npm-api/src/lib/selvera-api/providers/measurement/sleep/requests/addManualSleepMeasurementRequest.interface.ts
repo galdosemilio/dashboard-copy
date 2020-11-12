@@ -3,9 +3,9 @@
  */
 
 export interface AddManualSleepMeasurementRequest {
-    clientId?: string;
-    deviceId: number;
-    quality?: number;
-    startTime: string;
-    endTime: string;
+  clientId?: string
+  deviceId: number
+  quality?: number
+  startTime: string
+  endTime: string
 }

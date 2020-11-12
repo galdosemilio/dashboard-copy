@@ -1,9 +1,12 @@
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { _, SelectOptions } from '@app/shared';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
-import { MeasurementAggregation, MeasurementDataSource } from '../../../services';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { _, SelectOptions } from '@app/shared'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
+import {
+  MeasurementAggregation,
+  MeasurementDataSource
+} from '../../../services'
 
 @Component({
   selector: 'app-dieter-measurements-aggregation-selector',
@@ -11,38 +14,43 @@ import { MeasurementAggregation, MeasurementDataSource } from '../../../services
 })
 export class AggregationSelectorComponent implements OnDestroy, OnInit {
   @Input()
-  embedded: boolean;
+  embedded: boolean
   @Input()
-  source: MeasurementDataSource | null;
+  source: MeasurementDataSource | null
 
   @Output()
-  change: Subject<MeasurementAggregation> = new Subject<MeasurementAggregation>();
+  change: Subject<MeasurementAggregation> = new Subject<
+    MeasurementAggregation
+  >()
 
-  form: FormGroup;
+  form: FormGroup
 
   aggregations: SelectOptions<MeasurementAggregation> = [
-    { value: 'mostRecent', viewValue: _('MEASUREMENT.AGGREGATIONS.MOST_RECENT') },
+    {
+      value: 'mostRecent',
+      viewValue: _('MEASUREMENT.AGGREGATIONS.MOST_RECENT')
+    },
     { value: 'average', viewValue: _('MEASUREMENT.AGGREGATIONS.AVERAGE') },
     { value: 'oldest', viewValue: _('MEASUREMENT.AGGREGATIONS.OLDEST') }
-  ];
+  ]
 
   constructor(private fb: FormBuilder) {}
 
   ngOnDestroy() {}
 
   ngOnInit() {
-    this.createForm();
+    this.createForm()
   }
 
   private createForm() {
     this.form = this.fb.group({
       aggregation: ['', []]
-    });
+    })
 
     this.form.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((controls) => this.change.next(controls.aggregation));
+      .subscribe((controls) => this.change.next(controls.aggregation))
 
-    this.form.controls['aggregation'].patchValue(this.aggregations[0].value);
+    this.form.controls['aggregation'].patchValue(this.aggregations[0].value)
   }
 }

@@ -3,6 +3,6 @@
  */
 
 export interface NotifyCallEventRequest {
-    callId: number;
-    event: 'aborted' | 'declined';
+  callId: number
+  event: 'aborted' | 'declined'
 }

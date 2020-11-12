@@ -3,12 +3,12 @@
  */
 
 export interface BulkOrganizationSeqEnrollmentsRequest {
-    /** Initial Transition execution date */
-    executeAt?: string | { local: string } | { utc: string };
-    /** Organization ID */
-    organization: string;
-    /** Sequence ID */
-    sequence: string;
-    /** Transition ID */
-    transition: string;
+  /** Initial Transition execution date */
+  executeAt?: string | { local: string } | { utc: string }
+  /** Organization ID */
+  organization: string
+  /** Sequence ID */
+  sequence: string
+  /** Transition ID */
+  transition: string
 }

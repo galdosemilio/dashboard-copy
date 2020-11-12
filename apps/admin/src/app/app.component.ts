@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ccr-root',
@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (window.navigator.userAgent.match(/(MSIE|Trident)/)) {
-      this.router.navigate(['/unsupported-browser']);
+      this.router.navigate(['/unsupported-browser'])
     }
   }
 }

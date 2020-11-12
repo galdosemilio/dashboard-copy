@@ -1,5 +1,5 @@
-import { JournalTabs, SidenavOptions } from '../consts';
-import { SectionConfigDetails } from '../models/section.details';
+import { JournalTabs, SidenavOptions } from '../consts'
+import { SectionConfigDetails } from '../models/section.details'
 
 export const LeanMDSectionConfig: SectionConfigDetails = {
   JOURNAL: {
@@ -11,4 +11,4 @@ export const LeanMDSectionConfig: SectionConfigDetails = {
   SIDENAV: {
     HIDDEN_OPTIONS: [SidenavOptions.STORE]
   }
-};
+}

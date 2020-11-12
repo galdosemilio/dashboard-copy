@@ -3,12 +3,12 @@
  */
 
 export interface AddSleepMeasurementRequest {
-    clientId?: string;
-    deviceId: number;
-    sleep: Array<
-        Array<{
-            time: string;
-            quality: number;
-        }>
-    >;
+  clientId?: string
+  deviceId: number
+  sleep: Array<
+    Array<{
+      time: string
+      quality: number
+    }>
+  >
 }

@@ -2,9 +2,9 @@
  * Interface for TimelineEnrollments
  */
 
-import { ReportPackage } from '../entities';
+import { ReportPackage } from '../entities'
 
 export interface TimelineEnrollments {
-    count: number;
-    package: ReportPackage;
+  count: number
+  package: ReportPackage
 }

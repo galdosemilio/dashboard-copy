@@ -3,9 +3,9 @@
  */
 
 export interface AccUpdatePasswordRequest {
-    password: {
-        old: string;
-        new: string;
-    };
-    organization: string;
+  password: {
+    old: string
+    new: string
+  }
+  organization: string
 }

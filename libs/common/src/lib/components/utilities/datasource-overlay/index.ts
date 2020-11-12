@@ -1,1 +1,1 @@
-export * from './datasource-overlay.component';
+export * from './datasource-overlay.component'

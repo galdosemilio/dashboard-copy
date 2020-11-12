@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'ccr-signal-icon',
@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
 })
 export class SignalIconComponent {
   @Input()
-  fill = '#aba9a8';
+  fill = '#aba9a8'
   @Input()
-  size = 24;
+  size = 24
 }

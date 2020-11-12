@@ -3,7 +3,7 @@
  */
 
 export interface AddSupplementAccountAssociationRequest {
-    supplementOrganization: string;
-    account: string;
-    dosage?: number;
+  supplementOrganization: string
+  account: string
+  dosage?: number
 }

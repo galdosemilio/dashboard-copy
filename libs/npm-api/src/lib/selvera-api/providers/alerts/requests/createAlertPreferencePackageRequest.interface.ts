@@ -3,8 +3,8 @@
  */
 
 export interface CreateAlertPreferencePackageRequest {
-    /** Preference ID */
-    preference: string;
-    /** Package ID */
-    package: string;
+  /** Preference ID */
+  preference: string
+  /** Package ID */
+  package: string
 }

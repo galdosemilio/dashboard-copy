@@ -1,1 +1,1 @@
-export * from './time-tracker-routes';
+export * from './time-tracker-routes'

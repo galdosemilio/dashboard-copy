@@ -3,6 +3,6 @@
  */
 
 export interface PaginationRecord {
-    next?: number;
-    prev?: number;
+  next?: number
+  prev?: number
 }

@@ -1,40 +1,40 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({ name: 'fraction' })
 export class FractionPipe implements PipeTransform {
   public transform(value: number): string {
     if (!value) {
-      return '';
+      return ''
     }
 
-    const rawNumber = value.toString().split('.');
+    const rawNumber = value.toString().split('.')
 
     if (rawNumber.length === 1) {
-      return value.toString();
+      return value.toString()
     }
 
-    const fraction = Number(`0.${rawNumber[1]}`);
-    const len = fraction.toString().length - 2;
+    const fraction = Number(`0.${rawNumber[1]}`)
+    const len = fraction.toString().length - 2
 
-    let denominator = Math.pow(10, len);
-    let numerator = fraction * denominator;
+    let denominator = Math.pow(10, len)
+    let numerator = fraction * denominator
 
-    const divisor = this.greatestCommonDenom(numerator, denominator);
+    const divisor = this.greatestCommonDenom(numerator, denominator)
 
-    numerator /= divisor;
-    denominator /= divisor;
+    numerator /= divisor
+    denominator /= divisor
 
-    return `${rawNumber[0]} ${numerator.toFixed()}/${denominator.toFixed()}`;
+    return `${rawNumber[0]} ${numerator.toFixed()}/${denominator.toFixed()}`
   }
 
   private greatestCommonDenom(a, b): number {
     if (!b) {
-      return a;
+      return a
     }
 
-    a = parseInt(a, 10);
-    b = parseInt(b, 10);
+    a = parseInt(a, 10)
+    b = parseInt(b, 10)
 
-    return this.greatestCommonDenom(b, a % b);
+    return this.greatestCommonDenom(b, a % b)
   }
 }

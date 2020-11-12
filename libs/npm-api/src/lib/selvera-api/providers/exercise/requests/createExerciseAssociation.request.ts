@@ -3,7 +3,7 @@
  */
 
 export interface CreateExerciseAssociationRequest {
-    exerciseType: string;
-    organization: string;
-    icon: string;
+  exerciseType: string
+  organization: string
+  icon: string
 }

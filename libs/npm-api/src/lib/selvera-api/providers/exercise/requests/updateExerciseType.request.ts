@@ -3,8 +3,8 @@
  */
 
 export interface UpdateExerciseTypeRequest {
-    id: number;
-    name?: string;
-    description?: string;
-    isActive?: string;
+  id: number
+  name?: string
+  description?: string
+  isActive?: string
 }

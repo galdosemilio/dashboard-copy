@@ -3,5 +3,5 @@
  */
 
 export interface OrgDeleteResponse {
-    id: string;
+  id: string
 }

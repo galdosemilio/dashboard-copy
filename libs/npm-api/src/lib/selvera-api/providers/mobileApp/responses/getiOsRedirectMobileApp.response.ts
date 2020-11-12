@@ -4,5 +4,5 @@
 
 export interface GetiOSRedirectMobileAppResponse {
   /** Redirect URL. */
-  redirect: string;
+  redirect: string
 }

@@ -3,5 +3,5 @@
  */
 
 export interface FetchAppleIdRequest {
-    bundleId: string;
+  bundleId: string
 }

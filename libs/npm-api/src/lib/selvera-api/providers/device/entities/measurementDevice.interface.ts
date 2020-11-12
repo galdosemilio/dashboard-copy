@@ -3,8 +3,8 @@
  */
 
 export interface MeasurementDevice {
-    id: number;
-    title: string;
-    description: string;
-    addedAt: string;
+  id: number
+  title: string
+  description: string
+  addedAt: string
 }

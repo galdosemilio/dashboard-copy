@@ -2,8 +2,8 @@
  * Interface for GET /authentication/:account
  */
 
-import { AuthenticationSegment } from '../entities';
+import { AuthenticationSegment } from '../entities'
 
 export interface AuthAvailableResponse {
-    data: Array<AuthenticationSegment>;
+  data: Array<AuthenticationSegment>
 }

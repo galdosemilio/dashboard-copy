@@ -3,8 +3,8 @@
  */
 
 export interface FetchAllIdentifiersRequest {
-  account: string;
-  organization: string;
-  strict?: boolean;
-  status?: string;
+  account: string
+  organization: string
+  strict?: boolean
+  status?: string
 }

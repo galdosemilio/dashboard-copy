@@ -1,6 +1,6 @@
-import { BariatricAdvantageHeaderComponent } from '../register/clinic/header';
-import { DefaultReducedLastStepComponent } from '../register/clinic/last-step';
-import { SectionConfigDetails } from './section.config';
+import { BariatricAdvantageHeaderComponent } from '../register/clinic/header'
+import { DefaultReducedLastStepComponent } from '../register/clinic/last-step'
+import { SectionConfigDetails } from './section.config'
 
 export const HealthyTransformationSectionConfig: SectionConfigDetails = {
   REGISTER: {
@@ -8,4 +8,4 @@ export const HealthyTransformationSectionConfig: SectionConfigDetails = {
     LAST_STEP: DefaultReducedLastStepComponent,
     NEWSLETTER_CHECKBOX: true
   }
-};
+}

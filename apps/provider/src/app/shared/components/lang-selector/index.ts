@@ -1,1 +1,1 @@
-export * from './lang-selector.component';
+export * from './lang-selector.component'

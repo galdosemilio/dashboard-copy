@@ -2,4 +2,4 @@
  * Interface for DateOrderRequest
  */
 
-export type DateOrderRequest = 'dateAsc' | 'dateDesc';
+export type DateOrderRequest = 'dateAsc' | 'dateDesc'

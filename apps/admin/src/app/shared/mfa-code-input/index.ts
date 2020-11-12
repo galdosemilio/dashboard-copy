@@ -1,1 +1,1 @@
-export * from './mfa-code-input.component';
+export * from './mfa-code-input.component'

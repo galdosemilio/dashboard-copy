@@ -1,1 +1,1 @@
-export * from './signal-icon.component';
+export * from './signal-icon.component'

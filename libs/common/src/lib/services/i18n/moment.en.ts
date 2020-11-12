@@ -1,11 +1,11 @@
 // moment.js locale configuration
 // locale : English [en]
 
-import * as momentNs from 'moment-timezone';
-const moment = momentNs;
+import * as momentNs from 'moment-timezone'
+const moment = momentNs
 
-const monthsRegex = /^(january|february|march|april|may|june|july|august|september|october|november|december)/i;
-const monthsShortRegex = /^(jan\.?|feb\.?|mar\.?|apr\.?|may\.?|jun\.?|jul\.?|aug\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+const monthsRegex = /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
+const monthsShortRegex = /^(jan\.?|feb\.?|mar\.?|apr\.?|may\.?|jun\.?|jul\.?|aug\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i
 const monthsParse = [
   /^jan/i,
   /^feb/i,
@@ -19,7 +19,7 @@ const monthsParse = [
   /^oct/i,
   /^nov/i,
   /^dec/i
-];
+]
 
 const en = {
   months: 'January February March April May June July August September October November December'.split(
@@ -33,7 +33,9 @@ const en = {
   monthsParse: monthsParse,
   longMonthsParse: monthsParse,
   shortMonthsParse: monthsParse,
-  weekdays: 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' '),
+  weekdays: 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(
+    ' '
+  ),
   weekdaysShort: 'Sun Mon Tue Wed Thu Fri Sat'.split(' '),
   weekdaysMin: 'Su Mo Tu We Th Fr Sa'.split(' '),
   weekdaysParseExact: true,
@@ -74,18 +76,24 @@ const en = {
     yy: '%d years'
   },
   dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
-  ordinal: function(n: number): string {
-    const b = n % 10;
+  ordinal: function (n: number): string {
+    const b = n % 10
     const output =
       ~~((n % 100) / 10) === 1
         ? 'th'
-        : b === 1 ? 'st' : b === 2 ? 'nd' : b === 3 ? 'rd' : 'th';
-    return n + output;
+        : b === 1
+        ? 'st'
+        : b === 2
+        ? 'nd'
+        : b === 3
+        ? 'rd'
+        : 'th'
+    return n + output
   },
   week: {
     dow: 0, // CCR: Sunday as first day of the week.
     doy: 4 // The week that contains Jan 4th is the first week of the year.
   }
-};
+}
 
-moment.updateLocale('en', en);
+moment.updateLocale('en', en)

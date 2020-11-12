@@ -1,5 +1,5 @@
-export * from './controls.component';
+export * from './controls.component'
 
-import { ReportsControlsComponent } from './controls.component';
+import { ReportsControlsComponent } from './controls.component'
 
-export const ControlsComponents = [ReportsControlsComponent];
+export const ControlsComponents = [ReportsControlsComponent]

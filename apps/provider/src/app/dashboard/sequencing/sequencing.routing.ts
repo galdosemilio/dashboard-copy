@@ -1,7 +1,7 @@
-import { Routes } from '@angular/router';
-import { SequenceComponent } from './sequence';
-import { SequencesComponent } from './sequences';
-import { SequenceResolver } from './services';
+import { Routes } from '@angular/router'
+import { SequenceComponent } from './sequence'
+import { SequencesComponent } from './sequences'
+import { SequenceResolver } from './services'
 
 export const SequencingRoutes: Routes = [
   {
@@ -16,4 +16,4 @@ export const SequencingRoutes: Routes = [
     },
     component: SequenceComponent
   }
-];
+]

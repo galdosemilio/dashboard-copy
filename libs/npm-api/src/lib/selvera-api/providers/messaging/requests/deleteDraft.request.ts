@@ -3,5 +3,5 @@
  */
 
 export interface DeleteMessageDraftRequest {
-    threadId?: string;
+  threadId?: string
 }

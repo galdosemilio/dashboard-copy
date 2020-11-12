@@ -1,2 +1,2 @@
-export * from './components';
-export * from './default';
+export * from './components'
+export * from './default'

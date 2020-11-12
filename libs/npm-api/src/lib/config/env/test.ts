@@ -1,3 +1,3 @@
-import { PartialConfig } from '../interfaces';
+import { PartialConfig } from '../interfaces'
 
-export const config: PartialConfig = {};
+export const config: PartialConfig = {}

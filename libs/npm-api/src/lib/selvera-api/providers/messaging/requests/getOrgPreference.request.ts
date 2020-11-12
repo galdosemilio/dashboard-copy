@@ -3,6 +3,6 @@
  */
 
 export interface GetOrgPreferenceRequest {
-    /** Organization ID */
-    organization: string;
+  /** Organization ID */
+  organization: string
 }

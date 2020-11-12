@@ -3,7 +3,7 @@
  */
 
 export interface DemographicsRequest {
-    organization: string;
-    date: string;
-    mode?: 'simple' | 'detailed';
+  organization: string
+  date: string
+  mode?: 'simple' | 'detailed'
 }

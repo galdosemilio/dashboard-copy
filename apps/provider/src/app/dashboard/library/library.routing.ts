@@ -1,5 +1,5 @@
-import { RunGuardsAndResolvers } from '@angular/router';
-import { ContentComponent } from '@app/dashboard/content';
+import { RunGuardsAndResolvers } from '@angular/router'
+import { ContentComponent } from '@app/dashboard/content'
 import {
   FormAnswersResolver,
   FormDisplayComponent,
@@ -9,7 +9,7 @@ import {
   FormSubmissionsComponent,
   FormSubmissionsResolver,
   LibraryFormComponent
-} from '@app/dashboard/library/forms';
+} from '@app/dashboard/library/forms'
 
 export const LibraryRoutes = [
   {
@@ -84,4 +84,4 @@ export const LibraryRoutes = [
       }
     ]
   }
-];
+]

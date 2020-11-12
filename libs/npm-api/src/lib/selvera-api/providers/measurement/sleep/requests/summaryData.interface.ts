@@ -2,4 +2,4 @@
  * Interface for summary data
  */
 
-export type SummaryData = 'total' | 'average' | 'sleepQuality';
+export type SummaryData = 'total' | 'average' | 'sleepQuality'

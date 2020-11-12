@@ -1,1 +1,1 @@
-export * from './content-batch-copy.dialog';
+export * from './content-batch-copy.dialog'

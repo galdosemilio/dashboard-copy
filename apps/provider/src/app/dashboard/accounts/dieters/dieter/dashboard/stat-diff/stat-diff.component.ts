@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
   SimpleChanges
-} from '@angular/core';
+} from '@angular/core'
 
 @Component({
   selector: 'ccr-stat-diff',
@@ -15,35 +15,35 @@ import {
 })
 export class StatDiffComponent implements OnChanges, OnInit {
   @Input()
-  isEditable: boolean;
+  isEditable: boolean
 
   @Input()
-  title: string;
+  title: string
 
   // TODO convert to numeric on set
   @Input()
-  starting: string;
+  starting: string
   @Input()
-  current: string;
+  current: string
 
   @Output()
-  edit = new EventEmitter<void>();
+  edit = new EventEmitter<void>()
 
-  public startingLessThanCurrent: boolean;
+  public startingLessThanCurrent: boolean
   constructor() {}
 
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const starting = parseFloat(this.starting);
-    const current = parseFloat(this.current);
+    const starting = parseFloat(this.starting)
+    const current = parseFloat(this.current)
     this.startingLessThanCurrent =
-      starting < current ? true : starting > current ? false : null;
+      starting < current ? true : starting > current ? false : null
   }
 
   onClick() {
     if (this.isEditable) {
-      this.edit.emit();
+      this.edit.emit()
     }
   }
 }

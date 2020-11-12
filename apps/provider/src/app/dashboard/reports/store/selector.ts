@@ -1,6 +1,6 @@
-import { createFeatureSelector } from '@ngrx/store';
-import { ReportsState } from './state';
+import { createFeatureSelector } from '@ngrx/store'
+import { ReportsState } from './state'
 
-export const name = 'reports';
+export const name = 'reports'
 
-export const reportsSelector = createFeatureSelector<ReportsState>(name);
+export const reportsSelector = createFeatureSelector<ReportsState>(name)

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FileExplorerContent } from '@app/dashboard/content/models';
+import { Component, Input } from '@angular/core'
+import { FileExplorerContent } from '@app/dashboard/content/models'
 
 @Component({
   selector: 'app-content-file-explorer-content',
@@ -8,5 +8,5 @@ import { FileExplorerContent } from '@app/dashboard/content/models';
 })
 export class FileExplorerContentComponent {
   @Input()
-  content: FileExplorerContent;
+  content: FileExplorerContent
 }

@@ -1,2 +1,2 @@
-export * from './sequenceEnrollment.database';
-export * from './sequenceEnrollment.datasource';
+export * from './sequenceEnrollment.database'
+export * from './sequenceEnrollment.datasource'

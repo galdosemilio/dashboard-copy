@@ -11,7 +11,7 @@ import {
   RobardHeaderComponent,
   ShakeItHeaderComponent,
   ShakeItHeaderTitleComponent
-} from './';
+} from './'
 
 export const HeaderComponents = [
   ApolloHeaderComponent,
@@ -26,7 +26,7 @@ export const HeaderComponents = [
   RobardHeaderComponent,
   ShakeItHeaderComponent,
   ShakeItHeaderTitleComponent
-];
+]
 export const HeaderEntryComponents = [
   ApolloHeaderComponent,
   ApolloHeaderTitleComponent,
@@ -40,4 +40,4 @@ export const HeaderEntryComponents = [
   RobardHeaderComponent,
   ShakeItHeaderComponent,
   ShakeItHeaderTitleComponent
-];
+]

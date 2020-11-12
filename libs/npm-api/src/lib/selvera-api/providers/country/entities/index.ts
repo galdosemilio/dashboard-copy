@@ -1,6 +1,6 @@
-export * from './countryCodes';
+export * from './countryCodes'
 
 export interface Country {
-    id: string;
-    name: string;
+  id: string
+  name: string
 }

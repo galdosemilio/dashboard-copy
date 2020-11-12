@@ -3,9 +3,9 @@
  */
 
 export interface WeightChange {
-    value: number;
-    percentage: number;
-    weighInCount: number;
-    startWeight: number;
-    endWeight: number;
+  value: number
+  percentage: number
+  weighInCount: number
+  startWeight: number
+  endWeight: number
 }

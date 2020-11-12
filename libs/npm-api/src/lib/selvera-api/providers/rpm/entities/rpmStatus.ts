@@ -1,1 +1,1 @@
-export type RPMStatus = 'active' | 'inactive' | 'all';
+export type RPMStatus = 'active' | 'inactive' | 'all'

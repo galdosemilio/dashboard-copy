@@ -3,5 +3,5 @@
  */
 
 export interface AuthenticationToken {
-    createdAt: string;
+  createdAt: string
 }

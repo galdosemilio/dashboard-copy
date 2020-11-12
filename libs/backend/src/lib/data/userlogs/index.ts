@@ -1,2 +1,2 @@
-export * from './logs.database';
-export * from './logs.datasource';
+export * from './logs.database'
+export * from './logs.datasource'

@@ -1,41 +1,41 @@
-import { standardSetup } from './../../support';
+import { standardSetup } from './../../support'
 
-describe('Organization Messaging Preference', function() {
-  it('Messaging is shown in menu', function() {
-    cy.setOrganization('ccr');
-    standardSetup();
+describe('Organization Messaging Preference', function () {
+  it('Messaging is shown in menu', function () {
+    cy.setOrganization('ccr')
+    standardSetup()
 
-    cy.visit('/');
+    cy.visit('/')
 
     cy.get('app-menu')
       .find('app-sidenav-item')
       .not('.hidden')
       .contains('Messages')
-      .should('have.length', 1);
+      .should('have.length', 1)
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('app-dieters-table');
-  });
+    cy.get('app-dieters-table')
+  })
 
-  it('Messaging is hidden in menu', function() {
-    cy.setOrganization('ccr');
-    standardSetup();
+  it('Messaging is hidden in menu', function () {
+    cy.setOrganization('ccr')
+    standardSetup()
 
-    cy.visit('/');
+    cy.visit('/')
 
     cy.route(
       'GET',
       '/1.0/message/preference/organization?organization=**',
       'fixture:/api/message/getOrgPreference-disabled'
-    );
+    )
 
     cy.get('app-menu')
       .find('app-sidenav-item')
       .not('.hidden')
       .contains('Messages')
-      .should('have.length', 0);
+      .should('have.length', 0)
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('app-dieters-table');
-  });
-});
+    cy.get('app-dieters-table')
+  })
+})

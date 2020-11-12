@@ -1,2 +1,2 @@
-export * from './active-campaign.component';
-export * from './table';
+export * from './active-campaign.component'
+export * from './table'

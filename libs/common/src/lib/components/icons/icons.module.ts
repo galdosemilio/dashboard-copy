@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { SearchIconComponent } from './search-icon/search-icon.component';
-import { UserIconComponent } from './user-icon/user-icon.component';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { SearchIconComponent } from './search-icon/search-icon.component'
+import { UserIconComponent } from './user-icon/user-icon.component'
 
 @NgModule({
   imports: [CommonModule],

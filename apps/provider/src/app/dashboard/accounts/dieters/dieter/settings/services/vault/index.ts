@@ -1,2 +1,2 @@
-export * from './vault.database';
-export * from './vault.datasource';
+export * from './vault.database'
+export * from './vault.datasource'

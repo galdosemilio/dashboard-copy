@@ -1,2 +1,2 @@
-export * from './activeCampaignListAssociationItem';
-export * from './activeCampaignListItem';
+export * from './activeCampaignListAssociationItem'
+export * from './activeCampaignListItem'

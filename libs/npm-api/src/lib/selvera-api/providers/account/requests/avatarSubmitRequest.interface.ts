@@ -3,6 +3,6 @@
  */
 
 export interface AvatarSubmitRequest {
-    client: string;
-    avatar: string;
+  client: string
+  avatar: string
 }

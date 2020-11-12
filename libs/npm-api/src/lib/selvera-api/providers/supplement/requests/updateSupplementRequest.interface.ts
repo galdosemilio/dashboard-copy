@@ -3,8 +3,8 @@
  */
 
 export interface UpdateSupplementRequest {
-    id: string;
-    fullName?: string;
-    shortName?: string;
-    isActive?: boolean;
+  id: string
+  fullName?: string
+  shortName?: string
+  isActive?: boolean
 }

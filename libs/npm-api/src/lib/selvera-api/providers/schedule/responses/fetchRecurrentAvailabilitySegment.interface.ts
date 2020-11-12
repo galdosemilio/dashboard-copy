@@ -3,10 +3,10 @@
  */
 
 export interface FetchRecurrentAvailabilitySegment {
-    id: string;
-    day: number;
-    account: string;
-    startTime: string;
-    endTime: string;
-    timezone: string;
+  id: string
+  day: number
+  account: string
+  startTime: string
+  endTime: string
+  timezone: string
 }

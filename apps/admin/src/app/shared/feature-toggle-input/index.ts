@@ -1,1 +1,1 @@
-export * from './feature-toggle-input.component';
+export * from './feature-toggle-input.component'

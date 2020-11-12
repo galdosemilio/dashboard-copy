@@ -3,8 +3,8 @@
  */
 
 export interface UpdateKeyRequest {
-    id: string;
-    isActive?: boolean;
-    name?: string;
-    description?: string;
+  id: string
+  isActive?: boolean
+  name?: string
+  description?: string
 }

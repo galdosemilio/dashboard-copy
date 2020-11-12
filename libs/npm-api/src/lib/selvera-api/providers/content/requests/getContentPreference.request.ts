@@ -3,6 +3,6 @@
  */
 
 export interface GetContentPreferenceRequest {
-    /** Organization ID */
-    organization: string;
+  /** Organization ID */
+  organization: string
 }

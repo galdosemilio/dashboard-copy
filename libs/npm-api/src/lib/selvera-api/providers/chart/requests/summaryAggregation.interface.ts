@@ -1,1 +1,6 @@
-export type SummaryAggregation = 'average' | 'min' | 'max' | 'mostRecent' | 'oldest';
+export type SummaryAggregation =
+  | 'average'
+  | 'min'
+  | 'max'
+  | 'mostRecent'
+  | 'oldest'

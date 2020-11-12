@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { DateNavigatorOutput } from '@app/shared';
-import { BehaviorSubject } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
+import { DateNavigatorOutput } from '@app/shared'
+import { BehaviorSubject } from 'rxjs'
 
 @Component({
   selector: 'app-dieter-journal-levl',
@@ -10,33 +10,33 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LevlComponent implements OnInit {
   @Input()
-  dates;
+  dates
 
-  view = 'table';
-  timeframe = 'week';
-  component = 'levl';
+  view = 'table'
+  timeframe = 'week'
+  component = 'levl'
 
-  date$ = new BehaviorSubject<DateNavigatorOutput>({});
+  date$ = new BehaviorSubject<DateNavigatorOutput>({})
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      const v = params.get('v');
-      this.view = ['table', 'chart'].indexOf(v) >= 0 ? v : this.view;
-    });
+      const v = params.get('v')
+      this.view = ['table', 'chart'].indexOf(v) >= 0 ? v : this.view
+    })
   }
 
   toggleView() {
     if (this.view === 'chart') {
-      this.timeframe = 'week';
+      this.timeframe = 'week'
     }
     const params = {
       s: this.component,
       v: this.view === 'table' ? 'chart' : 'table'
-    };
+    }
     this.router.navigate(['.', params], {
       relativeTo: this.route
-    });
+    })
   }
 }

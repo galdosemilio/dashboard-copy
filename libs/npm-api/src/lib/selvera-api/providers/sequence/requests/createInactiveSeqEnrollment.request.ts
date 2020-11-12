@@ -3,10 +3,10 @@
  */
 
 export interface CreateInactiveSeqEnrollmentRequest {
-    /** Account ID */
-    account: string;
-    /** Creator account ID */
-    createdBy: string;
-    /** Sequence ID */
-    sequence: string;
+  /** Account ID */
+  account: string
+  /** Creator account ID */
+  createdBy: string
+  /** Sequence ID */
+  sequence: string
 }

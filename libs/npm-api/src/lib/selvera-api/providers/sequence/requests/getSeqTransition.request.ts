@@ -3,8 +3,8 @@
  */
 
 export interface GetSeqTransitionRequest {
-    /** Transition ID */
-    id: string;
-    /** Organization ID */
-    organization: string;
+  /** Transition ID */
+  id: string
+  /** Organization ID */
+  organization: string
 }

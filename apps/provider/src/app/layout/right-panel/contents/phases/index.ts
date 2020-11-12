@@ -1,1 +1,1 @@
-export * from './phases.component';
+export * from './phases.component'

@@ -10,8 +10,8 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { resolveConfig } from '@board/pages/config/section.config'
-import { _, FormUtils } from '@coachcare/backend/shared'
-import { CCRFacade } from '@coachcare/backend/store'
+import { _, FormUtils } from '@coachcare/common/shared'
+import { CCRFacade } from '@coachcare/common/store/ccr'
 import { ConfirmDialog } from '@coachcare/common/dialogs/core'
 import {
   ContextService,

@@ -10,7 +10,7 @@ import {
   Optional,
   Output,
   SkipSelf
-} from '@angular/core';
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
@@ -18,10 +18,10 @@ import {
   FormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
-import { STATES, StateSegment } from '@coachcare/common/shared';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+} from '@angular/forms'
+import { STATES, StateSegment } from '@coachcare/common/shared'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'ccr-form-field-state',
@@ -46,35 +46,36 @@ import { Subscription } from 'rxjs';
     '[class.mat-form-field-disabled]': '_control?.disabled'
   }
 })
-export class StateFormFieldComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input() formControlName: string;
+export class StateFormFieldComponent
+  implements ControlValueAccessor, OnInit, OnDestroy {
+  @Input() formControlName: string
 
-  @Input() disabled: any;
-  @Input() placeholder: string;
-  @Input() readonly: any;
-  @Input() required: any;
+  @Input() disabled: any
+  @Input() placeholder: string
+  @Input() readonly: any
+  @Input() required: any
 
   @Input()
   set country(country: string) {
-    this.updateByCountry(country);
+    this.updateByCountry(country)
   }
 
-  @Output() change = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>()
 
-  _control: AbstractControl | undefined;
-  selected: string;
-  states: Array<StateSegment>;
-  language: string;
-  langSub: Subscription;
+  _control: AbstractControl | undefined
+  selected: string
+  states: Array<StateSegment>
+  language: string
+  langSub: Subscription
 
   get isDisabled() {
-    return this.disabled === '' || this.disabled === true;
+    return this.disabled === '' || this.disabled === true
   }
   get isReadonly() {
-    return this.readonly === '' || this.readonly === true;
+    return this.readonly === '' || this.readonly === true
   }
   get isRequired() {
-    return this.required === '' || this.required === true;
+    return this.required === '' || this.required === true
   }
 
   constructor(
@@ -84,31 +85,31 @@ export class StateFormFieldComponent implements ControlValueAccessor, OnInit, On
     @SkipSelf()
     private parent: ControlContainer
   ) {
-    this.states = STATES;
+    this.states = STATES
 
-    this.language = translate.currentLang;
+    this.language = translate.currentLang
     this.langSub = translate.onLangChange.subscribe(
       (event: LangChangeEvent) => (this.language = event.lang)
-    );
+    )
   }
 
   ngOnInit() {
     if (this.formControlName) {
-      const parent = this.parent.control as AbstractControl;
-      this._control = parent.get(this.formControlName) as AbstractControl;
+      const parent = this.parent.control as AbstractControl
+      this._control = parent.get(this.formControlName) as AbstractControl
     }
   }
 
   ngOnDestroy() {
-    this.langSub.unsubscribe();
+    this.langSub.unsubscribe()
   }
 
-  propagateChange = (data: any) => {};
-  propagateTouch = () => {};
+  propagateChange = (data: any) => {}
+  propagateTouch = () => {}
 
   onChange() {
-    this.propagateChange(this.selected);
-    this.change.emit(this.selected);
+    this.propagateChange(this.selected)
+    this.change.emit(this.selected)
   }
 
   /**
@@ -116,33 +117,35 @@ export class StateFormFieldComponent implements ControlValueAccessor, OnInit, On
    */
   writeValue(value: string): void {
     if (value) {
-      this.selected = value;
-      this.onChange();
+      this.selected = value
+      this.onChange()
     }
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
+    this.propagateTouch = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   validate(c: FormControl) {
     if (!this.isDisabled && this.isRequired) {
       if (!c.value) {
-        return { ccrFieldState: 'required' };
+        return { ccrFieldState: 'required' }
       }
     }
-    return null;
+    return null
   }
 
   private updateByCountry(country: string) {
-    this.states = country ? STATES.filter(state => state.country === country) : STATES;
+    this.states = country
+      ? STATES.filter((state) => state.country === country)
+      : STATES
   }
 }

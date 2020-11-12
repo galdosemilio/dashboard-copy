@@ -1,1 +1,1 @@
-export * from './table-overlay.component';
+export * from './table-overlay.component'

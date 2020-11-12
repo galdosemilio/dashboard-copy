@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'ccr-page-unsupported-browser',
@@ -22,5 +22,5 @@ export class UnsupportedBrowserPageComponent {
       url: 'https://www.microsoft.com/windows/microsoft-edge',
       image: './assets/browsers/edge.png'
     }
-  ];
+  ]
 }

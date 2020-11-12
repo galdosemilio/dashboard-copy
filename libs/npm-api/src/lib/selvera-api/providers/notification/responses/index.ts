@@ -1,1 +1,1 @@
-export * from './fetchToken.response';
+export * from './fetchToken.response'

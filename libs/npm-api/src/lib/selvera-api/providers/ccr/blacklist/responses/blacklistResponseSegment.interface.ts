@@ -3,6 +3,6 @@
  */
 
 export interface BlacklistSegment {
-    id: string;
-    email: string;
+  id: string
+  email: string
 }

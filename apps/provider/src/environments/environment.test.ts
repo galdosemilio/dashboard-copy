@@ -1,4 +1,4 @@
-import { Environment } from './environment.interface';
+import { Environment } from './environment.interface'
 
 export const environment: Environment = {
   apiUrl: 'https://api.coachcaredev.com/',
@@ -9,4 +9,4 @@ export const environment: Environment = {
   role: 'provider',
   selveraApiEnv: 'test',
   url: 'https://dashboard.coachcaredev.com/provider'
-};
+}

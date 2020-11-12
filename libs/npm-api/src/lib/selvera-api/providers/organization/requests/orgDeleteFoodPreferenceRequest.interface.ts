@@ -3,6 +3,6 @@
  */
 
 export interface OrgDeleteFoodPreferenceRequest {
-    organization: string;
-    modeId: string;
+  organization: string
+  modeId: string
 }

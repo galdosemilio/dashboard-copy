@@ -1,1 +1,1 @@
-export * from './platform-updates.service';
+export * from './platform-updates.service'

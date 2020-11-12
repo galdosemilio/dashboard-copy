@@ -5,8 +5,8 @@
  */
 
 export interface GetIngredientRequest {
-    /** The id of the record. */
-    id: string;
-    /** Language to search food database in.  accept-language header will take priority */
-    lng?: string;
+  /** The id of the record. */
+  id: string
+  /** Language to search food database in.  accept-language header will take priority */
+  lng?: string
 }

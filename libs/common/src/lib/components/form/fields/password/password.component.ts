@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   SkipSelf
-} from '@angular/core';
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
@@ -18,8 +18,8 @@ import {
   FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
-import { _ } from '@coachcare/common/shared';
+} from '@angular/forms'
+import { _ } from '@coachcare/common/shared'
 
 @Component({
   selector: 'ccr-form-field-password',
@@ -47,37 +47,37 @@ import { _ } from '@coachcare/common/shared';
 })
 export class PasswordFormFieldComponent
   implements ControlValueAccessor, OnInit {
-  form: FormGroup;
+  form: FormGroup
 
-  @Input() formControlName: string;
-  @Input() layout: string;
-  @Input() minLength = 8;
+  @Input() formControlName: string
+  @Input() layout: string
+  @Input() minLength = 8
 
-  @Input() disabled: any;
-  @Input() placeholder: string;
-  @Input() readonly: any;
-  @Input() required: any;
+  @Input() disabled: any
+  @Input() placeholder: string
+  @Input() readonly: any
+  @Input() required: any
 
-  @Output() change = new EventEmitter<string>();
+  @Output() change = new EventEmitter<string>()
 
-  _control: AbstractControl;
+  _control: AbstractControl
 
-  hasMinLength = false;
-  hasNoSequences = false;
-  oneUppercaseLetter = false;
-  oneLowercaseLetter = false;
-  oneNumber = false;
-  oneSpecialChar = false;
-  passwordMatch = false;
+  hasMinLength = false
+  hasNoSequences = false
+  oneUppercaseLetter = false
+  oneLowercaseLetter = false
+  oneNumber = false
+  oneSpecialChar = false
+  passwordMatch = false
 
   get isDisabled() {
-    return this.disabled === '' || this.disabled === true;
+    return this.disabled === '' || this.disabled === true
   }
   get isReadonly() {
-    return this.readonly === '' || this.readonly === true;
+    return this.readonly === '' || this.readonly === true
   }
   get isRequired() {
-    return this.required === '' || this.required === true;
+    return this.required === '' || this.required === true
   }
 
   constructor(
@@ -89,22 +89,22 @@ export class PasswordFormFieldComponent
   ) {}
 
   ngOnInit() {
-    const parent = this.parent.control as AbstractControl;
-    this._control = parent.get(this.formControlName) as AbstractControl;
+    const parent = this.parent.control as AbstractControl
+    this._control = parent.get(this.formControlName) as AbstractControl
 
     this.form = this.builder.group({
       password: '',
       confirm: ''
-    });
+    })
   }
 
-  propagateChange = (data: any) => {};
-  propagateTouch = () => {};
+  propagateChange = (data: any) => {}
+  propagateTouch = () => {}
 
   onChange() {
-    const value = (this.form.get('password') as FormControl).value;
-    this.propagateChange(value);
-    this.change.emit(value);
+    const value = (this.form.get('password') as FormControl).value
+    this.propagateChange(value)
+    this.change.emit(value)
   }
 
   /**
@@ -115,47 +115,47 @@ export class PasswordFormFieldComponent
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
+    this.propagateTouch = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   validate() {
-    const password = (this.form.get('password') as FormControl).value;
-    const confirm = (this.form.get('confirm') as FormControl).value;
+    const password = (this.form.get('password') as FormControl).value
+    const confirm = (this.form.get('confirm') as FormControl).value
 
-    this.oneLowercaseLetter = password.match('(?=.*[a-z])');
-    this.oneUppercaseLetter = password.match('(?=.*[A-Z])');
-    this.oneNumber = password.match('(?=.*[0-9])');
-    this.oneSpecialChar = password.match('(?=.*[^a-zA-Z0-9])');
-    this.hasNoSequences = password.length > 2 && !password.match(/(.)\1{2,}/);
+    this.oneLowercaseLetter = password.match('(?=.*[a-z])')
+    this.oneUppercaseLetter = password.match('(?=.*[A-Z])')
+    this.oneNumber = password.match('(?=.*[0-9])')
+    this.oneSpecialChar = password.match('(?=.*[^a-zA-Z0-9])')
+    this.hasNoSequences = password.length > 2 && !password.match(/(.)\1{2,}/)
     this.hasMinLength = this.minLength
       ? password.length >= this.minLength
-      : true;
-    this.passwordMatch = password ? password === confirm : false;
+      : true
+    this.passwordMatch = password ? password === confirm : false
 
     if (!this.oneLowercaseLetter) {
-      return { message: _('NOTIFY.PASSWORD.ONE_LOWERCASE_LETTER') };
+      return { message: _('NOTIFY.PASSWORD.ONE_LOWERCASE_LETTER') }
     } else if (!this.oneUppercaseLetter) {
-      return { message: _('NOTIFY.PASSWORD.ONE_UPPERCASE_LETTER') };
+      return { message: _('NOTIFY.PASSWORD.ONE_UPPERCASE_LETTER') }
     } else if (!this.oneNumber) {
-      return { message: _('NOTIFY.PASSWORD.ONE_NUMBER') };
+      return { message: _('NOTIFY.PASSWORD.ONE_NUMBER') }
     } else if (!this.oneSpecialChar) {
-      return { message: _('NOTIFY.PASSWORD.ONE_SPECIAL_CHARACTER') };
+      return { message: _('NOTIFY.PASSWORD.ONE_SPECIAL_CHARACTER') }
     } else if (!this.hasNoSequences) {
-      return { message: _('NOTIFY.PASSWORD.HAS_NO_SEQUENCES') };
+      return { message: _('NOTIFY.PASSWORD.HAS_NO_SEQUENCES') }
     } else if (!this.hasMinLength) {
-      return { message: _('NOTIFY.PASSWORD.MIN_LENGTH') };
+      return { message: _('NOTIFY.PASSWORD.MIN_LENGTH') }
     } else if (!this.passwordMatch) {
-      return { message: _('NOTIFY.PASSWORD.BOTH_MATCH') };
+      return { message: _('NOTIFY.PASSWORD.BOTH_MATCH') }
     }
 
-    return null;
+    return null
   }
 }

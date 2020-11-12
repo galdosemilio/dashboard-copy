@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core'
 
-import { _ } from '@app/shared';
+import { _ } from '@app/shared'
 
 @Component({
   selector: 'app-patient-stats',
@@ -8,20 +8,20 @@ import { _ } from '@app/shared';
   styleUrls: ['./patient-stats.component.scss']
 })
 export class PatientStatsComponent implements AfterViewInit {
-  demographicType;
+  demographicType
   demographics = [
     { value: 'age', viewValue: _('REPORTS.AGE') },
     { value: 'gender', viewValue: _('REPORTS.GENDER') }
-  ];
+  ]
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    this.selectType(this.demographics[0].value);
-    this.cdr.detectChanges();
+    this.selectType(this.demographics[0].value)
+    this.cdr.detectChanges()
   }
 
   selectType(demographicType) {
-    this.demographicType = demographicType;
+    this.demographicType = demographicType
   }
 }

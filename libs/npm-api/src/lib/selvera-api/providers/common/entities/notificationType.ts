@@ -3,6 +3,6 @@
  */
 
 export interface NotificationType {
-    id: string;
-    code: string;
+  id: string
+  code: string
 }

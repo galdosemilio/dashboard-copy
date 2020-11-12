@@ -3,8 +3,8 @@
  */
 
 export interface FetchPackagesRequest {
-    organization?: string;
-    shortcode?: string;
-    offset?: number;
-    active?: boolean;
+  organization?: string
+  shortcode?: string
+  offset?: number
+  active?: boolean
 }

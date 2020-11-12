@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
+import { Subject } from 'rxjs'
 
-import { MeasurementTimeframe } from '@app/dashboard/accounts/dieters/services';
-import { EventsService } from '@app/service';
+import { MeasurementTimeframe } from '@app/dashboard/accounts/dieters/services'
+import { EventsService } from '@app/service'
 
 @Component({
   selector: 'app-reports-statistics',
@@ -14,6 +14,6 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
     // this.bus.trigger('organizations.disable-all');
-    this.bus.trigger('right-panel.deactivate');
+    this.bus.trigger('right-panel.deactivate')
   }
 }

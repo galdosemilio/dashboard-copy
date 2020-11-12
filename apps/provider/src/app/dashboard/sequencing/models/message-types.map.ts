@@ -1,10 +1,10 @@
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export interface MessageType {
-  displayName: string;
-  id: string;
-  name: string;
-  preview?: string;
+  displayName: string
+  id: string
+  name: string
+  preview?: string
 }
 
 export const MessageTypes: { [key: string]: MessageType } = {
@@ -36,4 +36,4 @@ export const MessageTypes: { [key: string]: MessageType } = {
   //   id: '5',
   //   name: 'pkgunenrollment'
   // }
-};
+}

@@ -5,7 +5,7 @@ import {
   InHealthLastStepComponent,
   ITGLastStepComponent,
   ShakeItLastStepComponent
-} from './';
+} from './'
 
 export const LastStepComponents = [
   ApolloLastStepComponent,
@@ -14,7 +14,7 @@ export const LastStepComponents = [
   InHealthLastStepComponent,
   ITGLastStepComponent,
   ShakeItLastStepComponent
-];
+]
 export const LastStepEntryComponents = [
   ApolloLastStepComponent,
   DefaultLastStepComponent,
@@ -22,4 +22,4 @@ export const LastStepEntryComponents = [
   InHealthLastStepComponent,
   ITGLastStepComponent,
   ShakeItLastStepComponent
-];
+]

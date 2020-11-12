@@ -1,1 +1,1 @@
-export * from './rpmStateEntry';
+export * from './rpmStateEntry'

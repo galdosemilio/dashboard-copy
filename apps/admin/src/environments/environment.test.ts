@@ -1,4 +1,4 @@
-import { AppEnvironment } from '@coachcare/common/shared';
+import { AppEnvironment } from '@coachcare/common/shared'
 
 export const environment: AppEnvironment = {
   apiUrl: 'https://api.coachcaredev.com/',
@@ -10,5 +10,5 @@ export const environment: AppEnvironment = {
   stripeKey: 'pk_test_q5X8FrXn7vv7p3E5STRXFvtv',
   cdn: 'https://d3vngy9ttk2wws.cloudfront.net',
   url: 'https://dashboard.coachcaredev.com',
-  defaultOrgId: '30',
-};
+  defaultOrgId: '30'
+}

@@ -1,1 +1,1 @@
-export * from './shake-it.section.config';
+export * from './shake-it.section.config'

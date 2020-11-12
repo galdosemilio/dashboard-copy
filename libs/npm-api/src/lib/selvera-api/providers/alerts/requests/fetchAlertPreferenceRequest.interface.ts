@@ -3,9 +3,9 @@
  */
 
 export interface FetchAlertPreferenceRequest {
-    organization: string;
-    account?: string | number;
-    alertType?: string | number;
-    limit?: 'all' | number;
-    offset?: number;
+  organization: string
+  account?: string | number
+  alertType?: string | number
+  limit?: 'all' | number
+  offset?: number
 }

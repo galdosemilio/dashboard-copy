@@ -1,1 +1,1 @@
-export * from './translated-text.component';
+export * from './translated-text.component'

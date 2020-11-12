@@ -1,13 +1,13 @@
-import { AppProviderModule } from './provider.module';
+import { AppProviderModule } from './provider.module'
 
 describe('AppProviderModule', () => {
-  let providerModule: AppProviderModule;
+  let providerModule: AppProviderModule
 
   beforeEach(() => {
-    providerModule = new AppProviderModule();
-  });
+    providerModule = new AppProviderModule()
+  })
 
   it('should create an instance', () => {
-    expect(providerModule).toBeTruthy();
-  });
-});
+    expect(providerModule).toBeTruthy()
+  })
+})

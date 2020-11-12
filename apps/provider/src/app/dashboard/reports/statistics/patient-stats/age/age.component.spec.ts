@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AgeComponent } from './age.component';
+import { AgeComponent } from './age.component'
 
 describe('AgeComponent', () => {
-  let component: AgeComponent;
-  let fixture: ComponentFixture<AgeComponent>;
+  let component: AgeComponent
+  let fixture: ComponentFixture<AgeComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AgeComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AgeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(AgeComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

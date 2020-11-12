@@ -1,4 +1,4 @@
-import { _, SelectorOption } from '@coachcare/backend/shared';
+import { _, SelectorOption } from '@coachcare/backend/shared'
 
 export const STATUSES: Array<SelectorOption> = [
   {
@@ -13,4 +13,4 @@ export const STATUSES: Array<SelectorOption> = [
     value: 'inactive',
     viewValue: _('SELECTOR.STATUS.INACTIVE')
   }
-];
+]

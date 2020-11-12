@@ -1,1 +1,1 @@
-export type PhoneType = 'ios' | 'android';
+export type PhoneType = 'ios' | 'android'

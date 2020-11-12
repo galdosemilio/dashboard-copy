@@ -1,9 +1,9 @@
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export interface InteractionType {
-  id: string;
-  displayName: string;
-  name: string;
+  id: string
+  displayName: string
+  name: string
 }
 
 export const INTERACTION_SOURCES: { [key: string]: InteractionType } = {
@@ -17,7 +17,7 @@ export const INTERACTION_SOURCES: { [key: string]: InteractionType } = {
     displayName: _('CALL.INTERACTION_TYPES.MANUAL'),
     name: 'manual'
   }
-};
+}
 
 export const INTERACTION_TYPES: { [key: string]: InteractionType } = {
   inPerson: {
@@ -35,4 +35,4 @@ export const INTERACTION_TYPES: { [key: string]: InteractionType } = {
     displayName: _('CALL.INTERACTION_TYPES.EXTERNAL_VIDEO_CALL'),
     name: 'External video call'
   }
-};
+}

@@ -3,6 +3,6 @@
  */
 
 export interface SearchSupplementsRequest {
-    query: string;
-    includeInactive?: boolean;
+  query: string
+  includeInactive?: boolean
 }

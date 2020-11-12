@@ -1,1 +1,1 @@
-export * from './mfa-verificator.component';
+export * from './mfa-verificator.component'

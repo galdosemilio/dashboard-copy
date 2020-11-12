@@ -3,5 +3,5 @@
  */
 
 export interface FetchCallDetailsRequest {
-    callId: string;
+  callId: string
 }

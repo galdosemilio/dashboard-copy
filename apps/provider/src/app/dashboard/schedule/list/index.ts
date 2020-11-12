@@ -1,2 +1,2 @@
-export * from './schedule-list.component';
-export * from './table';
+export * from './schedule-list.component'
+export * from './table'

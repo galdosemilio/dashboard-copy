@@ -1,5 +1,5 @@
-import { SectionConfigDetails } from '../models/section.details';
+import { SectionConfigDetails } from '../models/section.details'
 
-export const CoachCareClinicTestSectionConfig: SectionConfigDetails = {};
+export const CoachCareClinicTestSectionConfig: SectionConfigDetails = {}
 
-export const CoachCareClinicProdSectionConfig: SectionConfigDetails = {};
+export const CoachCareClinicProdSectionConfig: SectionConfigDetails = {}

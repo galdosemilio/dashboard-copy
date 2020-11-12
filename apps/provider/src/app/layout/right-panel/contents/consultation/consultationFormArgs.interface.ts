@@ -1,4 +1,4 @@
 export interface ConsultationFormArgs {
-  form: 'addConsultation' | 'editConsultation' | 'addUnavailability';
-  id: number;
+  form: 'addConsultation' | 'editConsultation' | 'addUnavailability'
+  id: number
 }

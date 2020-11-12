@@ -1,36 +1,34 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { OrganizationsListComponent } from './list.component';
+import { OrganizationsListComponent } from './list.component'
 
 describe('OrganizationsListComponent', () => {
-  let component: OrganizationsListComponent;
-  let fixture: ComponentFixture<OrganizationsListComponent>;
+  let component: OrganizationsListComponent
+  let fixture: ComponentFixture<OrganizationsListComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [OrganizationsListComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [OrganizationsListComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrganizationsListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(OrganizationsListComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
 
-  it('should fetch a list of organizations', done => {
+  it('should fetch a list of organizations', (done) => {
     // TODO implement test
-    done();
-  });
+    done()
+  })
 
-  it('should fetch a list of organizations on search', done => {
+  it('should fetch a list of organizations on search', (done) => {
     // TODO implement test
-    done();
-  });
-});
+    done()
+  })
+})

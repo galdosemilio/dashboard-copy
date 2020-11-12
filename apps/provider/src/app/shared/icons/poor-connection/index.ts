@@ -1,1 +1,1 @@
-export * from './poor-connection.component';
+export * from './poor-connection.component'

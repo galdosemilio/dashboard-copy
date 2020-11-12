@@ -1,1 +1,1 @@
-export * from './inhealth.last-step.component';
+export * from './inhealth.last-step.component'

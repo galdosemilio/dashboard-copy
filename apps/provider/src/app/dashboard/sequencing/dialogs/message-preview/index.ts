@@ -1,1 +1,1 @@
-export * from './message-preview.dialog';
+export * from './message-preview.dialog'

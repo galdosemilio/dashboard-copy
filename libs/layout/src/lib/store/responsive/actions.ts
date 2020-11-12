@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { State } from './state';
+import { Action } from '@ngrx/store'
+import { State } from './state'
 
 /**
  * Action Types
@@ -12,10 +12,10 @@ export enum ActionTypes {
  * Actions
  */
 export class UpdateResponsive implements Action {
-  readonly type = ActionTypes.RES_UPDATE;
+  readonly type = ActionTypes.RES_UPDATE
 
   constructor(public payload: Partial<State>) {}
 }
 
 // Actions data type
-export type Actions = UpdateResponsive;
+export type Actions = UpdateResponsive

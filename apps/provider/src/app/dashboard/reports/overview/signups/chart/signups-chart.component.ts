@@ -1,13 +1,13 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { merge } from 'lodash';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { merge } from 'lodash'
+import { untilDestroyed } from 'ngx-take-until-destroy'
 
 import {
   ReportsCriteria,
   SignupsReportsDataSource
-} from '@app/dashboard/reports/services';
-import { ConfigService } from '@app/service';
-import { ChartData } from '@app/shared';
+} from '@app/dashboard/reports/services'
+import { ConfigService } from '@app/service'
+import { ChartData } from '@app/shared'
 
 @Component({
   selector: 'app-reports-signups-chart',
@@ -17,13 +17,13 @@ import { ChartData } from '@app/shared';
 })
 export class SignupsChartComponent implements OnInit, OnDestroy {
   @Input()
-  source: SignupsReportsDataSource;
+  source: SignupsReportsDataSource
 
-  chart: ChartData;
+  chart: ChartData
 
   // subscription for selector changes
-  data: ReportsCriteria;
-  timeout: any;
+  data: ReportsCriteria
+  timeout: any
 
   constructor(private config: ConfigService) {}
 
@@ -32,22 +32,22 @@ export class SignupsChartComponent implements OnInit, OnDestroy {
       .chart()
       .pipe(untilDestroyed(this))
       .subscribe((chart) => {
-        this.refresh(chart);
-      });
+        this.refresh(chart)
+      })
   }
 
   ngOnDestroy() {
-    this.source.disconnect();
+    this.source.disconnect()
   }
 
   refresh(data: ChartData) {
     if (this.timeout) {
-      clearTimeout(this.timeout);
+      clearTimeout(this.timeout)
     }
-    this.chart = undefined; // force refresh on change
+    this.chart = undefined // force refresh on change
     this.timeout = setTimeout(() => {
-      this.chart = {};
-      merge(this.chart, this.config.get('chart').factory('bar'), data);
-    }, 500);
+      this.chart = {}
+      merge(this.chart, this.config.get('chart').factory('bar'), data)
+    }, 500)
   }
 }

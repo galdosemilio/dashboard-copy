@@ -1,9 +1,9 @@
-import { _ } from '@coachcare/backend/shared';
+import { _ } from '@coachcare/backend/shared'
 
 export interface MFASection {
-  displayName: string;
-  id: string;
-  name: string;
+  displayName: string
+  id: string
+  name: string
 }
 
 export const MFA_SECTIONS: { [key: string]: MFASection } = {
@@ -17,4 +17,4 @@ export const MFA_SECTIONS: { [key: string]: MFASection } = {
     name: 'Password update',
     displayName: _('ADMIN.ORGS.SETTINGS.MFA_PASSWORD_UPDATE')
   }
-};
+}

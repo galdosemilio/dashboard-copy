@@ -1,1 +1,1 @@
-export * from './measurementDevice.interface';
+export * from './measurementDevice.interface'

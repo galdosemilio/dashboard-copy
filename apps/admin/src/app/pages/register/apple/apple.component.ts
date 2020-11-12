@@ -4,11 +4,11 @@ import {
   OnInit,
   ViewChild,
   ViewContainerRef
-} from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+} from '@angular/core'
+import { TranslateService } from '@ngx-translate/core'
 
-import { LanguageService } from '@coachcare/common/services';
-import { Translations } from './contents';
+import { LanguageService } from '@coachcare/common/services'
+import { Translations } from './contents'
 
 @Component({
   selector: 'ccr-page-register-apple',
@@ -20,7 +20,7 @@ import { Translations } from './contents';
 })
 export class RegisterApplePageComponent implements OnInit {
   @ViewChild('langTemplate', { read: ViewContainerRef, static: true })
-  langTemplate: ViewContainerRef;
+  langTemplate: ViewContainerRef
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -29,17 +29,17 @@ export class RegisterApplePageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.createContent();
-    this.translator.onLangChange.subscribe(() => this.createContent());
+    this.createContent()
+    this.translator.onLangChange.subscribe(() => this.createContent())
   }
 
   createContent() {
-    const locale = this.language.resolve(Object.keys(Translations));
-    const component = Translations[locale];
+    const locale = this.language.resolve(Object.keys(Translations))
+    const component = Translations[locale]
 
-    const componentFactory = this.resolver.resolveComponentFactory(component);
+    const componentFactory = this.resolver.resolveComponentFactory(component)
 
-    this.langTemplate.clear();
-    this.langTemplate.createComponent(componentFactory);
+    this.langTemplate.clear()
+    this.langTemplate.createComponent(componentFactory)
   }
 }

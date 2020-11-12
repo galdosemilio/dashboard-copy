@@ -3,6 +3,6 @@
  */
 
 export interface AccActivityRequest {
-    account: string;
-    isActive: boolean;
+  account: string
+  isActive: boolean
 }

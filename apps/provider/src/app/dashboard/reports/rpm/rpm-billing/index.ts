@@ -1,1 +1,1 @@
-export * from './rpm-billing.component';
+export * from './rpm-billing.component'

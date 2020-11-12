@@ -3,8 +3,8 @@
  */
 
 export interface GetFoodKeyLocaleRequest {
-    /** ID of the key. */
-    id: string;
-    /** Name of the locale. */
-    locale: string;
+  /** ID of the key. */
+  id: string
+  /** Name of the locale. */
+  locale: string
 }

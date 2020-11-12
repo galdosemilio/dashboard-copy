@@ -1,4 +1,4 @@
-import { APP_SEARCH_SOURCE } from '@coachcare/common/shared';
+import { APP_SEARCH_SOURCE } from '@coachcare/common/shared'
 
 import {
   AccountsDatabase,
@@ -8,34 +8,34 @@ import {
   LabelsDataSource,
   OrganizationsDatabase,
   OrganizationsDataSource
-} from '@coachcare/backend/data';
+} from '@coachcare/backend/data'
 
 // Search Database Factories
 
 export function AccountsSearchFactory(database: AccountsDatabase) {
-  const source = new AccountsDataSource(database);
-  source.startWithNull = false;
-  source.addDefault({ includeInactive: true });
-  return source;
+  const source = new AccountsDataSource(database)
+  source.startWithNull = false
+  source.addDefault({ includeInactive: true })
+  return source
 }
 
 export function OrganizationsSearchFactory(database: OrganizationsDatabase) {
-  const source = new OrganizationsDataSource(database);
-  source.startWithNull = false;
+  const source = new OrganizationsDataSource(database)
+  source.startWithNull = false
   source.addDefault({
     isAdmin: true,
     status: 'active' // TODO fix after inactive orgs are available
-  });
-  return source;
+  })
+  return source
 }
 
 export function LabelsSearchFactory(database: LabelsDatabase) {
-  const source = new LabelsDataSource(database);
-  source.startWithNull = false;
+  const source = new LabelsDataSource(database)
+  source.startWithNull = false
   // source.addDefault({
   //   isActive: true
   // });
-  return source;
+  return source
 }
 
 // Module Collections
@@ -67,4 +67,4 @@ export const AdminProviders = [
   },
   // emails search
   EmailTemplatesDatabase
-];
+]

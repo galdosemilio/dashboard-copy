@@ -1,1 +1,1 @@
-export * from './delete-recurring-meeting.dialog';
+export * from './delete-recurring-meeting.dialog'

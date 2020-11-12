@@ -1,1 +1,1 @@
-export * from './getActiveCampaignLists.response';
+export * from './getActiveCampaignLists.response'

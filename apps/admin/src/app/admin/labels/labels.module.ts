@@ -1,16 +1,20 @@
-import { CdkTableModule } from '@angular/cdk/table';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { CcrUtilityComponentsModule } from '@coachcare/common/components';
-import { CcrPipesModule } from '@coachcare/common/pipes';
-import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '../../shared/shared.module';
-import { LabelsComponents, LabelsEntryComponents, LabelsProviders } from './labels.index';
+import { CdkTableModule } from '@angular/cdk/table'
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { ReactiveFormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
+import { CcrUtilityComponentsModule } from '@coachcare/common/components'
+import { CcrPipesModule } from '@coachcare/common/pipes'
+import { TranslateModule } from '@ngx-translate/core'
+import { SharedModule } from '../../shared/shared.module'
+import {
+  LabelsComponents,
+  LabelsEntryComponents,
+  LabelsProviders
+} from './labels.index'
 
-import { routes } from './labels.routing';
+import { routes } from './labels.routing'
 
 @NgModule({
   imports: [
@@ -31,5 +35,5 @@ import { routes } from './labels.routing';
 export class LabelsModule {}
 
 export function LabelsEntrypoint() {
-  return LabelsModule;
+  return LabelsModule
 }

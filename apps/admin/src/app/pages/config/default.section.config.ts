@@ -1,7 +1,10 @@
-import { DefaultHeaderComponent, DefaultHeaderTitleComponent } from '@board/pages/register/clinic/header';
-import { DefaultInfoDescriptionComponent } from '@board/pages/register/clinic/info-description';
-import { DefaultLastStepComponent } from '@board/pages/register/clinic/last-step/default/default.last-step.component';
-import { SectionConfigDetails } from './section.config';
+import {
+  DefaultHeaderComponent,
+  DefaultHeaderTitleComponent
+} from '@board/pages/register/clinic/header'
+import { DefaultInfoDescriptionComponent } from '@board/pages/register/clinic/info-description'
+import { DefaultLastStepComponent } from '@board/pages/register/clinic/last-step/default/default.last-step.component'
+import { SectionConfigDetails } from './section.config'
 
 export const DefaultSectionConfig: SectionConfigDetails = {
   REGISTER: {
@@ -12,4 +15,4 @@ export const DefaultSectionConfig: SectionConfigDetails = {
     },
     LAST_STEP: DefaultLastStepComponent
   }
-};
+}

@@ -2,4 +2,4 @@
  * Export all interfaces
  */
 
-export { FetchAllDevicesResponse } from './fetchAllDevicesResponse.interface';
+export { FetchAllDevicesResponse } from './fetchAllDevicesResponse.interface'

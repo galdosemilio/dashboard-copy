@@ -3,6 +3,6 @@
  */
 
 export interface AuthLevlRequest {
-    email: string;
-    password: string;
+  email: string
+  password: string
 }

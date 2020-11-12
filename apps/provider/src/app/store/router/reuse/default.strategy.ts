@@ -2,27 +2,30 @@ import {
   ActivatedRouteSnapshot,
   DetachedRouteHandle,
   RouteReuseStrategy
-} from '@angular/router';
+} from '@angular/router'
 
 export class DefaultRouteReuseStrategy implements RouteReuseStrategy {
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return false;
+    return false
   }
 
-  store(route: ActivatedRouteSnapshot, detachedTree: DetachedRouteHandle): void {}
+  store(
+    route: ActivatedRouteSnapshot,
+    detachedTree: DetachedRouteHandle
+  ): void {}
 
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    return false;
+    return false
   }
 
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
-    return null;
+    return null
   }
 
   shouldReuseRoute(
     future: ActivatedRouteSnapshot,
     curr: ActivatedRouteSnapshot
   ): boolean {
-    return future.routeConfig === curr.routeConfig;
+    return future.routeConfig === curr.routeConfig
   }
 }

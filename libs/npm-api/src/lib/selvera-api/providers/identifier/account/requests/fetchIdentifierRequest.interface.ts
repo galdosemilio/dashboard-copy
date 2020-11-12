@@ -3,6 +3,6 @@
  */
 
 export interface FetchIdentifierRequest {
-  account: string;
-  id: string;
+  account: string
+  id: string
 }

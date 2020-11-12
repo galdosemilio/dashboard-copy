@@ -1,7 +1,10 @@
-import { PatientActivityComponent } from './patient-activity.component';
-import { SleepChartComponent, SleepTableComponent } from './sleep';
-import { StepsChartComponent } from './steps';
-import { WeightChangeChartComponent, WeightChangeTableComponent } from './weight-change';
+import { PatientActivityComponent } from './patient-activity.component'
+import { SleepChartComponent, SleepTableComponent } from './sleep'
+import { StepsChartComponent } from './steps'
+import {
+  WeightChangeChartComponent,
+  WeightChangeTableComponent
+} from './weight-change'
 
 export {
   PatientActivityComponent,
@@ -10,7 +13,7 @@ export {
   StepsChartComponent,
   WeightChangeChartComponent,
   WeightChangeTableComponent
-};
+}
 
 export const PatientActvityComponents = [
   PatientActivityComponent,
@@ -19,4 +22,4 @@ export const PatientActvityComponents = [
   StepsChartComponent,
   WeightChangeChartComponent,
   WeightChangeTableComponent
-];
+]

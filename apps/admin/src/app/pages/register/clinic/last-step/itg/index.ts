@@ -1,1 +1,1 @@
-export * from './itg.last-step.component';
+export * from './itg.last-step.component'

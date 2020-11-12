@@ -1,1 +1,1 @@
-export * from './expandable-table.component';
+export * from './expandable-table.component'

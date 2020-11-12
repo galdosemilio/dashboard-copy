@@ -1,1 +1,1 @@
-export * from './calls.component';
+export * from './calls.component'

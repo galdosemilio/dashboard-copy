@@ -1,25 +1,25 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common'
+import { Inject, Injectable } from '@angular/core'
 
-export const COOKIE_ROLE = 'ccrStatic';
-export const COOKIE_LANG = 'ccrStaticLanguage';
-export const COOKIE_ORG = 'ccrOrg';
-export const COOKIE_CALL_BROWSERS_MODAL = 'ccrCallBrowsersModal';
-export const COOKIE_CALL_DEVICES_MODAL = 'ccrCallDevicesModal';
-export const COOKIE_ORG_EXP = 30;
-export const COOKIE_SELVERA_PROVIDER = 'SELVERAprovider';
-export const COOKIE_SELVERA_ADMIN = 'SELVERAadmin';
-export const STORAGE_HIDE_REGISTER_COMPANY = 'ccrHideRegisterNewCompanyLink';
-export const STORAGE_PROVIDER_URL = 'ccrProviderRoute';
-export const STORAGE_ADMIN_URL = 'ccrAdminRoute';
+export const COOKIE_ROLE = 'ccrStatic'
+export const COOKIE_LANG = 'ccrStaticLanguage'
+export const COOKIE_ORG = 'ccrOrg'
+export const COOKIE_CALL_BROWSERS_MODAL = 'ccrCallBrowsersModal'
+export const COOKIE_CALL_DEVICES_MODAL = 'ccrCallDevicesModal'
+export const COOKIE_ORG_EXP = 30
+export const COOKIE_SELVERA_PROVIDER = 'SELVERAprovider'
+export const COOKIE_SELVERA_ADMIN = 'SELVERAadmin'
+export const STORAGE_HIDE_REGISTER_COMPANY = 'ccrHideRegisterNewCompanyLink'
+export const STORAGE_PROVIDER_URL = 'ccrProviderRoute'
+export const STORAGE_ADMIN_URL = 'ccrAdminRoute'
 
 /**
  * Cookie Service
  */
 @Injectable()
 export class CookieService {
-  private documentIsAccessible: boolean;
-  private devRegex: RegExp = new RegExp('^http://localhost:4200');
+  private documentIsAccessible: boolean
+  private devRegex: RegExp = new RegExp('^http://localhost:4200')
 
   constructor(
     // The type `Document` may not be used here. Although a fix is on its way,
@@ -29,7 +29,7 @@ export class CookieService {
     @Inject(DOCUMENT) private document: any
   ) {
     // To avoid issues with server side prerendering, check if `document` is defined.
-    this.documentIsAccessible = document !== undefined;
+    this.documentIsAccessible = document !== undefined
   }
 
   /**
@@ -38,15 +38,15 @@ export class CookieService {
    */
   check(name: string): boolean {
     if (!this.documentIsAccessible) {
-      return false;
+      return false
     }
 
-    name = encodeURIComponent(name);
+    name = encodeURIComponent(name)
 
-    const regExp: RegExp = this.getCookieRegExp(name);
-    const exists: boolean = regExp.test(this.document.cookie);
+    const regExp: RegExp = this.getCookieRegExp(name)
+    const exists: boolean = regExp.test(this.document.cookie)
 
-    return exists;
+    return exists
   }
 
   /**
@@ -55,14 +55,14 @@ export class CookieService {
    */
   get(name: string): string {
     if (this.documentIsAccessible && this.check(name)) {
-      name = encodeURIComponent(name);
+      name = encodeURIComponent(name)
 
-      const regExp: RegExp = this.getCookieRegExp(name);
-      const result = regExp.exec(this.document.cookie) as RegExpExecArray;
+      const regExp: RegExp = this.getCookieRegExp(name)
+      const result = regExp.exec(this.document.cookie) as RegExpExecArray
 
-      return decodeURIComponent(result[1]);
+      return decodeURIComponent(result[1])
     } else {
-      return '';
+      return ''
     }
   }
 
@@ -71,27 +71,27 @@ export class CookieService {
    */
   getAll(): {} {
     if (!this.documentIsAccessible) {
-      return {};
+      return {}
     }
 
-    const cookies: any = {};
-    const document: any = this.document;
+    const cookies: any = {}
+    const document: any = this.document
 
     if (document.cookie && document.cookie !== '') {
-      const split: Array<string> = document.cookie.split(';');
+      const split: Array<string> = document.cookie.split(';')
 
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < split.length; i += 1) {
-        const currentCookie: Array<string> = split[i].split('=');
+        const currentCookie: Array<string> = split[i].split('=')
 
-        currentCookie[0] = currentCookie[0].replace(/^ /, '');
+        currentCookie[0] = currentCookie[0].replace(/^ /, '')
         cookies[decodeURIComponent(currentCookie[0])] = decodeURIComponent(
           currentCookie[1]
-        );
+        )
       }
     }
 
-    return cookies;
+    return cookies
   }
 
   /**
@@ -111,38 +111,38 @@ export class CookieService {
     secure?: boolean
   ): void {
     if (!this.documentIsAccessible) {
-      return;
+      return
     }
 
     let cookieString: string =
-      encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';';
+      encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';'
 
     if (expires) {
       if (typeof expires === 'number') {
         const dateExpires: Date = new Date(
           new Date().getTime() + expires * 1000 * 60 * 60 * 24
-        );
+        )
 
-        cookieString += 'expires=' + dateExpires.toUTCString() + ';';
+        cookieString += 'expires=' + dateExpires.toUTCString() + ';'
       } else {
-        cookieString += 'expires=' + expires.toUTCString() + ';';
+        cookieString += 'expires=' + expires.toUTCString() + ';'
       }
     }
 
     if (path) {
-      cookieString += 'path=' + path + ';';
+      cookieString += 'path=' + path + ';'
     }
 
     if (domain) {
-      cookieString += 'domain=' + domain + ';';
+      cookieString += 'domain=' + domain + ';'
     }
 
     if (!this.devRegex.test(window.location.href)) {
-      cookieString += 'secure;';
-      cookieString += 'SameSite=None;';
+      cookieString += 'secure;'
+      cookieString += 'SameSite=None;'
     }
 
-    this.document.cookie = cookieString;
+    this.document.cookie = cookieString
   }
 
   /**
@@ -152,10 +152,10 @@ export class CookieService {
    */
   delete(name: string, path?: string, domain?: string): void {
     if (!this.documentIsAccessible) {
-      return;
+      return
     }
 
-    this.set(name, '', -1, path, domain);
+    this.set(name, '', -1, path, domain)
   }
 
   /**
@@ -164,14 +164,14 @@ export class CookieService {
    */
   deleteAll(path?: string, domain?: string): void {
     if (!this.documentIsAccessible) {
-      return;
+      return
     }
 
-    const cookies: any = this.getAll();
+    const cookies: any = this.getAll()
 
     for (const cookieName in cookies) {
       if (cookies.hasOwnProperty(cookieName)) {
-        this.delete(cookieName, path, domain);
+        this.delete(cookieName, path, domain)
       }
     }
   }
@@ -184,11 +184,11 @@ export class CookieService {
     const escapedName: string = name.replace(
       /([\[\]\{\}\(\)\|\=\;\+\?\,\.\*\^\$])/gi,
       '\\$1'
-    );
+    )
 
     return new RegExp(
       '(?:^' + escapedName + '|;\\s*' + escapedName + ')=(.*?)(?:;|$)',
       'g'
-    );
+    )
   }
 }

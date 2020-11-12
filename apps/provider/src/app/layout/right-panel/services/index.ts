@@ -1,9 +1,12 @@
-import { AlertsDatabase } from '@app/dashboard';
-import { ConsultationsDataService } from './consultations-data.service';
-import { MeasurementsDataService } from './measurements-data.service';
-import { NotificationsDataService } from './notifications-data.service';
-import { PhaseEnrollmentDatabase, PhaseEnrollmentDataSource } from './phase-enrollment';
-import { ScheduleDataService } from './schedule-data.service';
+import { AlertsDatabase } from '@app/dashboard'
+import { ConsultationsDataService } from './consultations-data.service'
+import { MeasurementsDataService } from './measurements-data.service'
+import { NotificationsDataService } from './notifications-data.service'
+import {
+  PhaseEnrollmentDatabase,
+  PhaseEnrollmentDataSource
+} from './phase-enrollment'
+import { ScheduleDataService } from './schedule-data.service'
 
 export {
   ConsultationsDataService,
@@ -12,7 +15,7 @@ export {
   PhaseEnrollmentDatabase,
   PhaseEnrollmentDataSource,
   ScheduleDataService
-};
+}
 
 export const RightPanelServices = [
   AlertsDatabase,
@@ -21,4 +24,4 @@ export const RightPanelServices = [
   NotificationsDataService,
   PhaseEnrollmentDatabase,
   ScheduleDataService
-];
+]

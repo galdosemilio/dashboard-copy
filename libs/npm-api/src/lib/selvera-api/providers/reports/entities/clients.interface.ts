@@ -3,6 +3,6 @@
  */
 
 export interface ReportClients {
-    total: number;
-    active: number;
+  total: number
+  active: number
 }

@@ -3,11 +3,11 @@
  */
 
 export interface SummaryActivityResponseSegment {
-    date: string;
-    caloriesAverage?: number;
-    caloriesTotal?: number;
-    distanceAverage?: number;
-    distanceTotal?: number;
-    stepAverage?: number;
-    stepTotal?: number;
+  date: string
+  caloriesAverage?: number
+  caloriesTotal?: number
+  distanceAverage?: number
+  distanceTotal?: number
+  stepAverage?: number
+  stepTotal?: number
 }

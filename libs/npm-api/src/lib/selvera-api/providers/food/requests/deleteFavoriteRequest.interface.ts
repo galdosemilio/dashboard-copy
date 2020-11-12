@@ -3,6 +3,6 @@
  */
 
 export interface DeleteFavoriteMealRequest {
-    mealId: number | string;
-    account?: number;
+  mealId: number | string
+  account?: number
 }

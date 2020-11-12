@@ -3,8 +3,8 @@
  */
 
 export interface DeleteMessagingPermissionRequest {
-    /** The id of the thread. */
-    threadId: string;
-    /** The account of the user. */
-    account: string;
+  /** The id of the thread. */
+  threadId: string
+  /** The account of the user. */
+  account: string
 }

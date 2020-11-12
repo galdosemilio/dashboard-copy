@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'ccr-icon-search',
@@ -9,11 +9,11 @@ import { Component, Input } from '@angular/core';
 })
 export class SearchIconComponent {
   @Input()
-  fill: string;
+  fill: string
   @Input()
-  size = 24;
+  size = 24
   @Input()
-  stroke = 5;
+  stroke = 5
 
   constructor() {}
 }

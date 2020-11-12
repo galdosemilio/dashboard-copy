@@ -1,13 +1,13 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { LanguageService } from '@coachcare/common/services';
-import { select, Store } from '@ngrx/store';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
-import * as tinycolor from 'tinycolor2';
+import { DOCUMENT } from '@angular/common'
+import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core'
+import { LanguageService } from '@coachcare/common/services'
+import { select, Store } from '@ngrx/store'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
+import { Subscription } from 'rxjs'
+import * as tinycolor from 'tinycolor2'
 
-import { AppPalette } from '@coachcare/common/shared';
-import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store';
+import { AppPalette } from '@coachcare/common/shared'
+import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
 
 @Component({
   selector: 'ccr-plain-layout',
@@ -16,12 +16,12 @@ import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store';
 })
 // tslint:disable-next-line:component-class-suffix
 export class PlainLayout implements OnInit, OnDestroy {
-  lang: string;
-  logoUrl: string;
-  displayName: string | undefined;
-  palette: AppPalette;
-  subs: Array<Subscription> = [];
-  mala: any;
+  lang: string
+  logoUrl: string
+  displayName: string | undefined
+  palette: AppPalette
+  subs: Array<Subscription> = []
+  mala: any
 
   constructor(
     @Inject(DOCUMENT) private document: any,
@@ -30,18 +30,22 @@ export class PlainLayout implements OnInit, OnDestroy {
     private language: LanguageService,
     private store: Store<OrgPrefState.State>
   ) {
-    this.store.pipe(select(OrgPrefSelectors.selectOrgPref)).subscribe(pref => {
-      this.displayName = pref.displayName;
-      this.logoUrl = pref.assets.logoUrl;
-      this.mala = pref.mala;
-      const palette = (this.palette = pref.assets.color);
-      const primary = palette.theme === 'accent' ? palette.accent : palette.primary;
-      const accent = palette.theme === 'accent' ? palette.primary : palette.accent;
+    this.store
+      .pipe(select(OrgPrefSelectors.selectOrgPref))
+      .subscribe((pref) => {
+        this.displayName = pref.displayName
+        this.logoUrl = pref.assets.logoUrl
+        this.mala = pref.mala
+        const palette = (this.palette = pref.assets.color)
+        const primary =
+          palette.theme === 'accent' ? palette.accent : palette.primary
+        const accent =
+          palette.theme === 'accent' ? palette.primary : palette.accent
 
-      this.renderer.setAttribute(
-        this.document.body,
-        'style',
-        `
+        this.renderer.setAttribute(
+          this.document.body,
+          'style',
+          `
         --primary: ${primary};
         --primary-contrast: ${this.getContrast(primary)};
         --primary-lighten: ${tinycolor(primary).lighten(26)};
@@ -67,9 +71,13 @@ export class PlainLayout implements OnInit, OnDestroy {
         --sidenav-darken: ${tinycolor(palette.sidenav).darken(5)};
         --sidenav-darkest: ${tinycolor(palette.sidenav).darken(8)};
 
-        --toolbar: ${palette.toolbar === 'accent' ? palette.accent : palette.primary};
+        --toolbar: ${
+          palette.toolbar === 'accent' ? palette.accent : palette.primary
+        };
         --toolbar-contrast: ${palette.contrast};
-        --panel: ${palette.toolbar === 'accent' ? palette.accent : palette.primary};
+        --panel: ${
+          palette.toolbar === 'accent' ? palette.accent : palette.primary
+        };
         --panel-contrast: ${palette.contrast};
 
         --bg-bar: ${palette.bg_bar};
@@ -78,35 +86,40 @@ export class PlainLayout implements OnInit, OnDestroy {
         --text: ${palette.text};
         --disabled: ${palette.disabled};
         `
-      );
-      // FIXME base text disabled uniform or not?
-    });
+        )
+        // FIXME base text disabled uniform or not?
+      })
   }
 
   ngOnInit() {
-    this.update(this.language.get());
+    this.update(this.language.get())
 
-    this.subs[0] = this.translator.onLangChange.subscribe((change: LangChangeEvent) => {
-      this.update(change.lang);
-    });
+    this.subs[0] = this.translator.onLangChange.subscribe(
+      (change: LangChangeEvent) => {
+        this.update(change.lang)
+      }
+    )
   }
 
   ngOnDestroy() {
-    this.subs.forEach(s => s.unsubscribe());
+    this.subs.forEach((s) => s.unsubscribe())
   }
 
   private update(lang: string) {
-    this.lang = lang;
+    this.lang = lang
     if (document) {
       try {
-        document.body.setAttribute('dir', this.language.getDir());
-        document.documentElement.setAttribute('lang', lang);
+        document.body.setAttribute('dir', this.language.getDir())
+        document.documentElement.setAttribute('lang', lang)
       } catch (e) {}
     }
   }
 
   private getContrast(color: string) {
     // darken the color to raise the readability umbral
-    return tinycolor.mostReadable(tinycolor(color).darken(25), ['#ffffff', '#504c4a']);
+    return tinycolor.mostReadable(tinycolor(color).darken(25), [
+      '#ffffff',
+      '#504c4a'
+    ])
   }
 }

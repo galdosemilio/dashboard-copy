@@ -3,6 +3,6 @@
  */
 
 export interface GetAllFoodPreferenceRequest {
-    /** Organization Id to fetch preferences. */
-    organization: string;
+  /** Organization Id to fetch preferences. */
+  organization: string
 }

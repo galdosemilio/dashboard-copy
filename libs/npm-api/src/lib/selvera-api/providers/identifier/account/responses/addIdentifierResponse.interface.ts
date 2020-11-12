@@ -3,5 +3,5 @@
  */
 
 export interface AddIdentifierResponse {
-  id: string;
+  id: string
 }

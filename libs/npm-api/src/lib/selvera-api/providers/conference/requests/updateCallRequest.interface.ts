@@ -3,7 +3,7 @@
  */
 
 export interface UpdateCallRequest {
-    callId: string;
-    participants?: string[];
-    callEnded?: boolean;
+  callId: string
+  participants?: string[]
+  callEnded?: boolean
 }

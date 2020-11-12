@@ -3,5 +3,5 @@
  */
 
 export interface Bucket {
-    name: string;
+  name: string
 }

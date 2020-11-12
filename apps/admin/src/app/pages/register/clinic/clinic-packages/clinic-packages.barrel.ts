@@ -1,9 +1,9 @@
-import { DefaultClinicPackageComponent } from './';
-import { ClinicPackagesSharedComponents } from './components/components.barrel';
+import { DefaultClinicPackageComponent } from './'
+import { ClinicPackagesSharedComponents } from './components/components.barrel'
 
 export const ClinicPackagesComponents = [
   ClinicPackagesSharedComponents,
   DefaultClinicPackageComponent
-];
+]
 
-export const ClinicPackagesEntryComponents = [DefaultClinicPackageComponent];
+export const ClinicPackagesEntryComponents = [DefaultClinicPackageComponent]

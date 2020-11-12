@@ -3,12 +3,12 @@
  */
 
 export interface UpdateFormQuestionTypeRequest {
-    /** ID of the question type to retrieve. */
-    id: string;
-    /** Question type name. */
-    name?: string;
-    /** Question type description. */
-    description?: string;
-    /** A flag indicating if the question type is active. */
-    isActive?: boolean;
+  /** ID of the question type to retrieve. */
+  id: string
+  /** Question type name. */
+  name?: string
+  /** Question type description. */
+  description?: string
+  /** A flag indicating if the question type is active. */
+  isActive?: boolean
 }

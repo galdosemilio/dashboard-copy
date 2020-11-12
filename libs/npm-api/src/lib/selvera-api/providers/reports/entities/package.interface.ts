@@ -3,6 +3,6 @@
  */
 
 export interface ReportPackage {
-    id: string | null;
-    title: string;
+  id: string | null
+  title: string
 }

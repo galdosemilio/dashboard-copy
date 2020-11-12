@@ -7,7 +7,7 @@ export type AccAccessSortProperty =
   | 'email'
   | 'firstName'
   | 'lastName'
-  | 'associationDate';
+  | 'associationDate'
 
 export const accAccessSortPropertys: Array<AccAccessSortProperty> = [
   'createdAt',
@@ -15,4 +15,4 @@ export const accAccessSortPropertys: Array<AccAccessSortProperty> = [
   'firstName',
   'lastName',
   'associationDate'
-];
+]

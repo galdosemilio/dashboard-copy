@@ -3,7 +3,7 @@
  */
 
 export interface AlertType {
-    id: number;
-    description: string;
-    code: string;
+  id: number
+  description: string
+  code: string
 }

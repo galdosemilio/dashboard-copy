@@ -1,5 +1,5 @@
-import { AppConfig } from './app.config';
-import { ChartConfig } from './chart.config';
+import { AppConfig } from './app.config'
+import { ChartConfig } from './chart.config'
 import {
   AppBreakpoints,
   CCR_CONFIG,
@@ -7,9 +7,9 @@ import {
   CCRConfig,
   CCRPalette,
   OrgColors
-} from './config.interface';
-import { IconsConfig } from './icons.config';
-import { Colors, Palette } from './palette.config';
+} from './config.interface'
+import { IconsConfig } from './icons.config'
+import { Colors, Palette } from './palette.config'
 
 export {
   AppBreakpoints,
@@ -21,9 +21,9 @@ export {
   IconsConfig,
   OrgColors,
   Palette
-};
+}
 
-export * from './cookies.config';
+export * from './cookies.config'
 
 export const Config: CCRConfig = {
   app: AppConfig,
@@ -34,4 +34,4 @@ export const Config: CCRConfig = {
     bg_bar: '#ffffff',
     sidenav: '#dedede'
   }
-};
+}

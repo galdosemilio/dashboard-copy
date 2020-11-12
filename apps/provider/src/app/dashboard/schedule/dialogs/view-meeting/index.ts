@@ -1,1 +1,1 @@
-export * from './view-meeting.dialog';
+export * from './view-meeting.dialog'

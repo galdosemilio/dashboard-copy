@@ -1,1 +1,1 @@
-export * from './package-enroll.component';
+export * from './package-enroll.component'

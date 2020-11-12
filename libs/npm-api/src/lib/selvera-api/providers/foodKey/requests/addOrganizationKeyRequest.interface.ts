@@ -3,8 +3,8 @@
  */
 
 export interface AddOrganizationKeyRequest {
-    key: string;
-    organization: string;
-    icon?: string;
-    targetQuantity?: number | string;
+  key: string
+  organization: string
+  icon?: string
+  targetQuantity?: number | string
 }

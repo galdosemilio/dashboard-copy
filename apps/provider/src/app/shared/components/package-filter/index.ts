@@ -1,1 +1,1 @@
-export * from './package-filter.component';
+export * from './package-filter.component'

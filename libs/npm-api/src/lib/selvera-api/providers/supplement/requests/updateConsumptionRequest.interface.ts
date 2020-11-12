@@ -3,6 +3,6 @@
  */
 
 export interface UpdateConsumptionRequest {
-    id: string;
-    quantity: number;
+  id: string
+  quantity: number
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
 
-import { CCRConfig } from '@app/config';
-import { OpenPanel } from '@app/layout/store';
-import { EventsService } from '@app/service';
+import { CCRConfig } from '@app/config'
+import { OpenPanel } from '@app/layout/store'
+import { EventsService } from '@app/service'
 
 @Component({
   selector: 'app-schedule-availability',
@@ -15,13 +15,13 @@ export class ScheduleAvailabilityComponent implements OnInit {
 
   ngOnInit() {
     // this.bus.trigger('organizations.disable-all');
-    this.bus.trigger('right-panel.component.set', 'addConsultation');
+    this.bus.trigger('right-panel.component.set', 'addConsultation')
   }
 
   addUnavailableForm(): void {
-    this.store.dispatch(new OpenPanel());
+    this.store.dispatch(new OpenPanel())
     this.bus.trigger('right-panel.consultation.form', {
       form: 'addUnavailability'
-    });
+    })
   }
 }

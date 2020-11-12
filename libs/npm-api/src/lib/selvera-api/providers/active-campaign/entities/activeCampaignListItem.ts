@@ -1,4 +1,4 @@
 export interface ActiveCampaignListItem {
-    id: string;
-    name: string;
+  id: string
+  name: string
 }

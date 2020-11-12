@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   SkipSelf
-} from '@angular/core';
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
@@ -16,15 +16,15 @@ import {
   FormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from '@angular/forms';
+} from '@angular/forms'
 import {
   GENDERS,
   MEASUREMENT_UNITS,
   PHONE_TYPES,
   SelectorOption,
   STATUSES
-} from '@coachcare/common/shared';
-import { SelectorFormFieldTypes } from './types.interface';
+} from '@coachcare/common/shared'
+import { SelectorFormFieldTypes } from './types.interface'
 
 @Component({
   selector: 'ccr-form-selector',
@@ -51,28 +51,28 @@ import { SelectorFormFieldTypes } from './types.interface';
 })
 export class SelectorFormFieldComponent
   implements ControlValueAccessor, OnInit {
-  @Input() formControlName: string;
-  @Input() type: SelectorFormFieldTypes;
+  @Input() formControlName: string
+  @Input() type: SelectorFormFieldTypes
 
-  @Input() disabled: any;
-  @Input() placeholder: string;
-  @Input() readonly: any;
-  @Input() required: any;
+  @Input() disabled: any
+  @Input() placeholder: string
+  @Input() readonly: any
+  @Input() required: any
 
-  @Output() change = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>()
 
-  _control: AbstractControl | undefined;
-  selected: any;
-  options: Array<SelectorOption>;
+  _control: AbstractControl | undefined
+  selected: any
+  options: Array<SelectorOption>
 
   get isDisabled() {
-    return this.disabled === '' || this.disabled === true;
+    return this.disabled === '' || this.disabled === true
   }
   get isReadonly() {
-    return this.readonly === '' || this.readonly === true;
+    return this.readonly === '' || this.readonly === true
   }
   get isRequired() {
-    return this.required === '' || this.required === true;
+    return this.required === '' || this.required === true
   }
 
   constructor(
@@ -84,35 +84,35 @@ export class SelectorFormFieldComponent
 
   ngOnInit() {
     if (this.formControlName) {
-      const parent = this.parent.control as AbstractControl;
-      this._control = parent.get(this.formControlName) as AbstractControl;
+      const parent = this.parent.control as AbstractControl
+      this._control = parent.get(this.formControlName) as AbstractControl
     }
 
     switch (this.type) {
       case 'gender':
-        this.options = GENDERS;
-        break;
+        this.options = GENDERS
+        break
       case 'measurement':
-        this.options = MEASUREMENT_UNITS;
-        break;
+        this.options = MEASUREMENT_UNITS
+        break
       case 'phoneType':
-        this.options = PHONE_TYPES;
-        break;
+        this.options = PHONE_TYPES
+        break
       case 'status':
-        this.options = STATUSES;
-        break;
+        this.options = STATUSES
+        break
 
       default:
-        throw new Error('A valid "type" must be provided to ccr-form-selector');
+        throw new Error('A valid "type" must be provided to ccr-form-selector')
     }
   }
 
-  propagateChange = (data: any) => {};
-  propagateTouch = () => {};
+  propagateChange = (data: any) => {}
+  propagateTouch = () => {}
 
   onChange() {
-    this.propagateChange(this.selected);
-    this.change.emit(this.selected);
+    this.propagateChange(this.selected)
+    this.change.emit(this.selected)
   }
 
   /**
@@ -120,29 +120,29 @@ export class SelectorFormFieldComponent
    */
   writeValue(value: any): void {
     if (value) {
-      this.selected = value;
-      this.onChange();
+      this.selected = value
+      this.onChange()
     }
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.propagateChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
+    this.propagateTouch = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   validate(c: FormControl) {
     if (!this.isDisabled && this.isRequired) {
       if (!c.value) {
-        return { ccrFieldGeneric: this.type };
+        return { ccrFieldGeneric: this.type }
       }
     }
-    return null;
+    return null
   }
 }

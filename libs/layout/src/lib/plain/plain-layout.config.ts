@@ -3,5 +3,5 @@
  */
 
 export interface PlainLayoutConfig {
-  headerLink?: boolean;
+  headerLink?: boolean
 }

@@ -1,8 +1,8 @@
 interface Batch {
-    total: number;
-    failed: number;
+  total: number
+  failed: number
 }
 
 export interface BulkOrganizationSeqEnrollmentsResponse {
-    batches: Batch;
+  batches: Batch
 }

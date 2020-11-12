@@ -3,7 +3,7 @@
  */
 
 export interface SearchProviderAvailabilityRequest {
-    providers: Array<string>;
-    preferredTime: 'morning' | 'afternoon' | 'evening';
-    offset: number; // -12 through 14
+  providers: Array<string>
+  preferredTime: 'morning' | 'afternoon' | 'evening'
+  offset: number // -12 through 14
 }

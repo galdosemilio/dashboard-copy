@@ -1,11 +1,11 @@
-import * as t from 'io-ts';
-import { reporter } from 'io-ts-reporters';
+import * as t from 'io-ts'
+import { reporter } from 'io-ts-reporters'
 
 /**
  * io-ts extension
  */
 export function optional<T>(type: t.Type<T>) {
-  return t.union([type, t.null, t.undefined]);
+  return t.union([type, t.null, t.undefined])
 }
 
 /**
@@ -13,7 +13,7 @@ export function optional<T>(type: t.Type<T>) {
  * @param obj Interface fields definitions
  */
 export function createType<T>(obj: { [K in keyof T]: t.Mixed }) {
-  return t.type(obj);
+  return t.type(obj)
 }
 
 /**
@@ -21,7 +21,7 @@ export function createType<T>(obj: { [K in keyof T]: t.Mixed }) {
  * @param obj Interface fields definitions
  */
 export function createValidator<T>(obj: { [K in keyof T]: t.Mixed }) {
-  return t.exact(t.type(obj));
+  return t.exact(t.type(obj))
 }
 
 /**
@@ -33,14 +33,14 @@ export function createValidator<T>(obj: { [K in keyof T]: t.Mixed }) {
 export function createTest<T>(name: string, obj: { [K in keyof T]: t.Mixed }) {
   return (value: T) =>
     new Promise<T>((resolve, reject) => {
-      const validator = createValidator(obj);
-      const result = reporter(validator.decode(value) as any); // FIXME workaround
+      const validator = createValidator(obj)
+      const result = reporter(validator.decode(value) as any) // FIXME workaround
       if (result.length === 0) {
-        resolve(value);
+        resolve(value)
       } else {
-        reject(`${name}:\n${result.join('\n')}`);
+        reject(`${name}:\n${result.join('\n')}`)
       }
-    });
+    })
 }
 
 /**
@@ -52,13 +52,13 @@ export function createTest<T>(name: string, obj: { [K in keyof T]: t.Mixed }) {
 export function createTestFromValidator<T>(name: string, validator: t.Type<T>) {
   return (value: T) =>
     new Promise<T>((resolve, reject) => {
-      const result = reporter(validator.decode(value) as any); // FIXME workaround
+      const result = reporter(validator.decode(value) as any) // FIXME workaround
       if (result.length === 0) {
-        resolve(value);
+        resolve(value)
       } else {
-        reject(`${name}:\n${result.join('\n')}`);
+        reject(`${name}:\n${result.join('\n')}`)
       }
-    });
+    })
 }
 
 /**
@@ -68,12 +68,12 @@ export function createTestFromValidator<T>(name: string, validator: t.Type<T>) {
  */
 export function voidTest<T>(value: T) {
   return new Promise<T>((resolve, reject) => {
-    const validator = t.union([createValidator({}), t.boolean]);
-    const result = reporter(validator.decode(value) as any); // FIXME workaround
+    const validator = t.union([createValidator({}), t.boolean])
+    const result = reporter(validator.decode(value) as any) // FIXME workaround
     if (result.length === 0) {
-      resolve(value);
+      resolve(value)
     } else {
-      reject(`${name}:\n${result.join('\n')}`);
+      reject(`${name}:\n${result.join('\n')}`)
     }
-  });
+  })
 }

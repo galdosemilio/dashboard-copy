@@ -3,5 +3,5 @@
  */
 
 export interface AddRecurrentAvailabilityResponse {
-    availableId: string;
+  availableId: string
 }

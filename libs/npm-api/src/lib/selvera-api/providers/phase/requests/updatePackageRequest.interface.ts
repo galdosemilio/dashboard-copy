@@ -3,9 +3,9 @@
  */
 
 export interface UpdatePackageRequest {
-    id: string;
-    title: string;
-    shortcode: string;
-    descriptionPublic: string;
-    active: boolean;
+  id: string
+  title: string
+  shortcode: string
+  descriptionPublic: string
+  active: boolean
 }

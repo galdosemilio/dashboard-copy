@@ -4,10 +4,10 @@
 
 export class TestState {
   // Account
-  accountId: string;
+  accountId: string
   // Meeting
-  meetingId: string;
+  meetingId: string
   // Organization
-  organizationId: string;
-  orgPreferenceId: string;
+  organizationId: string
+  orgPreferenceId: string
 }

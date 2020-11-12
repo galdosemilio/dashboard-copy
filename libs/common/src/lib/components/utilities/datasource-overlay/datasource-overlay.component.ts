@@ -5,11 +5,11 @@ import {
   Input,
   OnDestroy,
   OnInit
-} from '@angular/core';
-import { AppDataSource } from '@coachcare/backend/model';
-import { _ } from '@coachcare/backend/shared';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+} from '@angular/core'
+import { AppDataSource } from '@coachcare/backend/model'
+import { _ } from '@coachcare/backend/shared'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-datasource-overlay',
@@ -22,15 +22,15 @@ import { takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatasourceOverlayComponent implements OnInit, OnDestroy {
-  @Input() source: AppDataSource<any, any, any>;
+  @Input() source: AppDataSource<any, any, any>
 
-  @Input() emptyMsg: string;
-  @Input() waitMsg = _('NOTIFY.SOURCE.DEFAULT_WAIT');
-  @Input() delayMsg = _('NOTIFY.SOURCE.DEFAULT_DELAY');
-  @Input() timeoutMsg = _('NOTIFY.SOURCE.DEFAULT_TIMEOUT');
-  @Input() showErrors = true;
+  @Input() emptyMsg: string
+  @Input() waitMsg = _('NOTIFY.SOURCE.DEFAULT_WAIT')
+  @Input() delayMsg = _('NOTIFY.SOURCE.DEFAULT_DELAY')
+  @Input() timeoutMsg = _('NOTIFY.SOURCE.DEFAULT_TIMEOUT')
+  @Input() showErrors = true
 
-  private onDestroy$ = new Subject<void>();
+  private onDestroy$ = new Subject<void>()
 
   constructor(private readonly cdr: ChangeDetectorRef) {}
 
@@ -39,27 +39,27 @@ export class DatasourceOverlayComponent implements OnInit, OnDestroy {
     if (this.source) {
       // setup source messages
       if (this.emptyMsg) {
-        this.source.showEmpty = this.emptyMsg;
+        this.source.showEmpty = this.emptyMsg
       }
       if (this.waitMsg) {
-        this.source.waitMsg = this.waitMsg;
+        this.source.waitMsg = this.waitMsg
       }
       if (this.delayMsg) {
-        this.source.delayMsg = this.delayMsg;
+        this.source.delayMsg = this.delayMsg
       }
       if (this.timeoutMsg) {
-        this.source.timeoutMsg = this.timeoutMsg;
+        this.source.timeoutMsg = this.timeoutMsg
       }
 
       // listen source changes
       this.source.change$.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-        this.cdr.markForCheck();
-      });
+        this.cdr.markForCheck()
+      })
     }
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
+    this.onDestroy$.next()
+    this.onDestroy$.complete()
   }
 }

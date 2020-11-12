@@ -1,4 +1,4 @@
-import { ApiEnvironment } from '@coachcare/backend/shared';
+import { ApiEnvironment } from '@coachcare/backend/shared'
 
 export const environment: ApiEnvironment = {
   apiUrl: 'https://api.coachcaredev.com/',
@@ -6,4 +6,4 @@ export const environment: ApiEnvironment = {
   appVersion: '1.0',
   ccrApiEnv: 'test',
   cookieDomain: 'api.coachcaredev.com'
-};
+}

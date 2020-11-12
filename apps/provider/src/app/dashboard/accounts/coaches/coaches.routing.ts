@@ -1,11 +1,11 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 import {
   CoachComponent,
   CoachesComponent,
   CoachProfileComponent,
   CoachResolver,
   CoachScheduleComponent
-} from './';
+} from './'
 
 export const CoachesRoutes: Routes = [
   { path: '', pathMatch: 'full', component: CoachesComponent },
@@ -16,4 +16,4 @@ export const CoachesRoutes: Routes = [
       account: CoachResolver
     }
   }
-];
+]

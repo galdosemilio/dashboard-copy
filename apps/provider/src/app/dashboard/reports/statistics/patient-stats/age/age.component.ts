@@ -4,22 +4,22 @@ import {
   Component,
   OnDestroy,
   OnInit
-} from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { isEmpty } from 'lodash';
-import * as moment from 'moment-timezone';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Subject } from 'rxjs';
+} from '@angular/core'
+import { select, Store } from '@ngrx/store'
+import { TranslateService } from '@ngx-translate/core'
+import { isEmpty } from 'lodash'
+import * as moment from 'moment-timezone'
+import { untilDestroyed } from 'ngx-take-until-destroy'
+import { Subject } from 'rxjs'
 
 import {
   AgeDataSource,
   ReportsCriteria,
   StatisticsDatabase
-} from '@app/dashboard/reports/services';
-import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store';
-import { NotifierService } from '@app/service';
-import { _, TranslationsObject } from '@app/shared';
+} from '@app/dashboard/reports/services'
+import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
+import { NotifierService } from '@app/service'
+import { _, TranslationsObject } from '@app/shared'
 
 @Component({
   selector: 'app-statistics-patient-stats-age',
@@ -28,14 +28,14 @@ import { _, TranslationsObject } from '@app/shared';
 })
 export class AgeComponent implements OnInit, AfterViewInit, OnDestroy {
   // FIXME receive observable of the connect
-  source: AgeDataSource;
-  translations: TranslationsObject;
+  source: AgeDataSource
+  translations: TranslationsObject
 
   // subscription for selector changes
-  data: ReportsCriteria;
+  data: ReportsCriteria
 
   // refresh trigger
-  refresh$ = new Subject<void>();
+  refresh$ = new Subject<void>()
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -48,10 +48,14 @@ export class AgeComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     // factors with translatable units
     this.translator.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
-      this.buildTranslations();
-    });
+      this.buildTranslations()
+    })
 
-    this.source = new AgeDataSource(this.notifier, this.database, this.translator);
+    this.source = new AgeDataSource(
+      this.notifier,
+      this.database,
+      this.translator
+    )
 
     this.source.addRequired(this.refresh$, () => ({
       organization: this.data ? this.data.organization : null,
@@ -65,27 +69,27 @@ export class AgeComponent implements OnInit, AfterViewInit, OnDestroy {
         { name: this.translations['REPORTS.AGE_THRESHOLD_55'], threshold: 55 },
         { name: this.translations['REPORTS.AGE_THRESHOLD_65'], threshold: 65 }
       ]
-    }));
+    }))
 
     this.store
       .pipe(untilDestroyed(this), select(criteriaSelector))
       .subscribe((reportsCriteria: ReportsCriteria) => {
         if (!isEmpty(reportsCriteria)) {
-          this.data = reportsCriteria;
-          this.buildTranslations();
+          this.data = reportsCriteria
+          this.buildTranslations()
         }
-      });
+      })
   }
 
   ngAfterViewInit() {
     if (!this.source.isLoaded && this.data && this.translations) {
-      this.refresh$.next();
-      this.cdr.detectChanges();
+      this.refresh$.next()
+      this.cdr.detectChanges()
     }
   }
 
   ngOnDestroy() {
-    this.source.disconnect();
+    this.source.disconnect()
   }
 
   private buildTranslations() {
@@ -100,8 +104,8 @@ export class AgeComponent implements OnInit, AfterViewInit, OnDestroy {
         _('REPORTS.AGE_THRESHOLD_65')
       ])
       .subscribe((translations) => {
-        this.translations = translations;
-        this.refresh$.next();
-      });
+        this.translations = translations
+        this.refresh$.next()
+      })
   }
 }

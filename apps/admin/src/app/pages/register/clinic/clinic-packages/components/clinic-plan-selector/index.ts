@@ -1,1 +1,1 @@
-export * from './clinic-plan-selector.component';
+export * from './clinic-plan-selector.component'

@@ -31,7 +31,8 @@ export const RPM_CODE_COLUMNS: { [key: string]: any } = {
       default: '0'
     },
     {
-      column: '# of Automated Device Transmissions in past 30 days (Next Claim)',
+      column:
+        '# of Automated Device Transmissions in past 30 days (Next Claim)',
       route: 'eligibility.next.transmissions.measurements.automated.count',
       default: '0'
     }
@@ -55,6 +56,6 @@ export const RPM_CODE_COLUMNS: { [key: string]: any } = {
       default: '0'
     }
   ]
-};
+}
 
-export const RPM_SINGLE_TIME_CODES: string[] = ['99453'];
+export const RPM_SINGLE_TIME_CODES: string[] = ['99453']

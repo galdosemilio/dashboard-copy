@@ -1,1 +1,1 @@
-export * from './add-recipient.dialog';
+export * from './add-recipient.dialog'

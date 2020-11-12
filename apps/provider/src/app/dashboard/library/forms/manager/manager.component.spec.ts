@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FormManagerComponent } from './manager.component';
+import { FormManagerComponent } from './manager.component'
 
 describe('FormManagerComponent', () => {
-  let component: FormManagerComponent;
-  let fixture: ComponentFixture<FormManagerComponent>;
+  let component: FormManagerComponent
+  let fixture: ComponentFixture<FormManagerComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FormManagerComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormManagerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(FormManagerComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

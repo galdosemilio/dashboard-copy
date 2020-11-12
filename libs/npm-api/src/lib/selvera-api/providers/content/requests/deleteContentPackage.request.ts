@@ -3,8 +3,8 @@
  */
 
 export interface DeleteContentPackageRequest {
-    /** ID of the item. */
-    id: string;
-    /** ID of the package. */
-    package: string;
+  /** ID of the item. */
+  id: string
+  /** ID of the package. */
+  package: string
 }

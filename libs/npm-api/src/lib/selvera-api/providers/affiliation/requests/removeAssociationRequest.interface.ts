@@ -3,6 +3,6 @@
  */
 
 export interface RemoveAssociationRequest {
-    account: string;
-    organization: string;
+  account: string
+  organization: string
 }

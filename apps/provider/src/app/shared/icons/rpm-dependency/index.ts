@@ -1,1 +1,1 @@
-export * from './rpm-dependency-icon.component';
+export * from './rpm-dependency-icon.component'

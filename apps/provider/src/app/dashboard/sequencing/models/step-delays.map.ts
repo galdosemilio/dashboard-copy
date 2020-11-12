@@ -1,9 +1,9 @@
-import { _ } from '@app/shared/utils';
+import { _ } from '@app/shared/utils'
 
 export interface StepDelay {
-  displayName: string;
-  id: string;
-  name: string;
+  displayName: string
+  id: string
+  name: string
 }
 
 export const StepDelays: { [key: string]: StepDelay } = {
@@ -87,4 +87,4 @@ export const StepDelays: { [key: string]: StepDelay } = {
     name: '15 days',
     displayName: _('SEQUENCING.DELAYS.15_DAYS')
   }
-};
+}

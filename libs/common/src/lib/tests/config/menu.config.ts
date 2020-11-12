@@ -1,4 +1,4 @@
-import { MenuItem } from '@coachcare/common/shared';
+import { MenuItem } from '@coachcare/common/shared'
 
 /**
  * App Menu
@@ -16,4 +16,4 @@ export const appMenu: Array<MenuItem> = [
     navRoute: '/forms',
     icon: 'view_module'
   }
-];
+]

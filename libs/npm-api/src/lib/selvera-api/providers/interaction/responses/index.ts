@@ -1,2 +1,2 @@
-export * from './createCallToken.response';
-export * from './getCallAvailability.response';
+export * from './createCallToken.response'
+export * from './getCallAvailability.response'

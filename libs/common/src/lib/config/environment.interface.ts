@@ -2,4 +2,4 @@
  * Type Interface for api environment
  */
 
-export type Environment = 'ccrDemo' | 'dev' | 'prod' | 'test';
+export type Environment = 'ccrDemo' | 'dev' | 'prod' | 'test'

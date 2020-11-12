@@ -1,1 +1,1 @@
-export * from './message-input.component';
+export * from './message-input.component'

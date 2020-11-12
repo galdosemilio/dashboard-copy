@@ -1,1 +1,1 @@
-export * from './plusSign.serializer';
+export * from './plusSign.serializer'

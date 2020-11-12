@@ -1,4 +1,4 @@
-import { _, SelectorOption } from '@coachcare/backend/shared';
+import { _, SelectorOption } from '@coachcare/backend/shared'
 
 export const PHONE_TYPES: Array<SelectorOption> = [
   {
@@ -9,4 +9,4 @@ export const PHONE_TYPES: Array<SelectorOption> = [
     value: 'ios',
     viewValue: _('SELECTOR.PHONE_TYPE.IOS')
   }
-];
+]

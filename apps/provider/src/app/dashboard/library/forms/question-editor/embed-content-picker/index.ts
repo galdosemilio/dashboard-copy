@@ -1,1 +1,1 @@
-export * from './embed-content-picker.component';
+export * from './embed-content-picker.component'

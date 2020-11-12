@@ -1,7 +1,7 @@
-import { Country } from '../entities';
-import { PaginationResponse } from './paginationResponse.interface';
+import { Country } from '../entities'
+import { PaginationResponse } from './paginationResponse.interface'
 
 export interface GetAllCountriesResponse {
-    data: Country[];
-    pagination: PaginationResponse;
+  data: Country[]
+  pagination: PaginationResponse
 }

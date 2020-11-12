@@ -3,8 +3,8 @@
  */
 
 export interface UpdateOrganizationMFARequest {
-    /** ID of the preference instance */
-    id: string;
-    /** Whether MFA is set up or not */
-    isActive: boolean;
+  /** ID of the preference instance */
+  id: string
+  /** Whether MFA is set up or not */
+  isActive: boolean
 }

@@ -2,8 +2,8 @@
  * GET /measurement/exercise/type
  */
 
-import { ExerciseType } from '../entities';
+import { ExerciseType } from '../entities'
 
 export interface GetAllExerciseTypeResponse {
-    data: Array<ExerciseType>;
+  data: Array<ExerciseType>
 }

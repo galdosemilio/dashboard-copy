@@ -1,1 +1,1 @@
-export * from './clinic.resolver';
+export * from './clinic.resolver'

@@ -3,5 +3,5 @@
  */
 
 export interface OAuthResponse {
-    url: string;
+  url: string
 }

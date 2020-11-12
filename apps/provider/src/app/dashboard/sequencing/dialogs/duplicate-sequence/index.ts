@@ -1,1 +1,1 @@
-export * from './duplicate-sequence.dialog';
+export * from './duplicate-sequence.dialog'

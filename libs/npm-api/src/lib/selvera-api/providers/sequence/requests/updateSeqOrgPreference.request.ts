@@ -3,8 +3,8 @@
  */
 
 export interface UpdateSeqOrgPreferenceRequest {
-    /** Preference entry ID */
-    id: string;
-    /** A flag indicating if the entry is active */
-    isActive?: boolean;
+  /** Preference entry ID */
+  id: string
+  /** A flag indicating if the entry is active */
+  isActive?: boolean
 }

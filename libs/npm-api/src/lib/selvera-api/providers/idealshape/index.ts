@@ -1,3 +1,3 @@
-export * from './responses';
+export * from './responses'
 
-export * from './idealshape.provider';
+export * from './idealshape.provider'

@@ -1,3 +1,1 @@
-export {
-    FetchSingleStatusReponse
-} from './fetchSingleStatusResponse.interface';
+export { FetchSingleStatusReponse } from './fetchSingleStatusResponse.interface'

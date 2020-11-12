@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { State } from './state';
+import { Action } from '@ngrx/store'
+import { State } from './state'
 
 /**
  * Action Types
@@ -13,16 +13,16 @@ export enum ActionTypes {
  * Actions
  */
 export class LoadUser implements Action {
-  readonly type = ActionTypes.LOAD;
+  readonly type = ActionTypes.LOAD
 
   constructor(public payload: State) {}
 }
 
 export class UpdateUser implements Action {
-  readonly type = ActionTypes.UPDATE;
+  readonly type = ActionTypes.UPDATE
 
   constructor(public payload: State) {}
 }
 
 // Actions data type
-export type Actions = LoadUser | UpdateUser;
+export type Actions = LoadUser | UpdateUser

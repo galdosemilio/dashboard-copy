@@ -2,32 +2,32 @@
  * App Configuration.
  */
 
-import { appLocales } from '@app/shared/utils/i18n.config';
-import { CCRApp } from './config.interface';
+import { appLocales } from '@app/shared/utils/i18n.config'
+import { CCRApp } from './config.interface'
 
 function getProfileRoute(account: { id: any; accountType: any }): string {
   const accountType =
     typeof account.accountType === 'object'
       ? account.accountType.id
-      : account.accountType;
+      : account.accountType
 
-  let role = '';
+  let role = ''
   switch (accountType.toString()) {
     case '1':
     case 'admin':
-      role = 'admin';
-      break;
+      role = 'admin'
+      break
     case '2':
     case 'provider':
-      role = 'coaches';
-      break;
+      role = 'coaches'
+      break
     case '3':
     case 'client':
-      role = 'patients';
-      break;
+      role = 'patients'
+      break
   }
 
-  return `/accounts/${role}/${account.id}`;
+  return `/accounts/${role}/${account.id}`
 }
 
 export const AppConfig: CCRApp = {
@@ -48,7 +48,9 @@ export const AppConfig: CCRApp = {
   },
   lang: {
     default: 'en',
-    supported: Object.keys(appLocales).map((locale: string) => locale.toLowerCase())
+    supported: Object.keys(appLocales).map((locale: string) =>
+      locale.toLowerCase()
+    )
   },
   limit: {
     notifications: 12,
@@ -76,4 +78,4 @@ export const AppConfig: CCRApp = {
     md: 992,
     lg: 1200
   }
-};
+}

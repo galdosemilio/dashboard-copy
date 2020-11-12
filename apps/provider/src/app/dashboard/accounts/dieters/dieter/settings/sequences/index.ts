@@ -1,2 +1,2 @@
-export * from './table';
-export * from './sequences.component';
+export * from './table'
+export * from './sequences.component'

@@ -1,22 +1,22 @@
 const setProviderSiteCookie = (): void => {
-  cy.log('Setting cookie for provider site');
+  cy.log('Setting cookie for provider site')
 
-  cy.setCookie('ccrStatic', 'provider');
-};
+  cy.setCookie('ccrStatic', 'provider')
+}
 
 const setGuideStorage = (seen: boolean = true): void => {
   if (!seen) {
-    return;
+    return
   }
 
-  window.localStorage.setItem('ccrRPMGuide', seen.toString());
-  window.localStorage.setItem('ccrFirstTimeGuide', seen.toString());
-};
+  window.localStorage.setItem('ccrRPMGuide', seen.toString())
+  window.localStorage.setItem('ccrFirstTimeGuide', seen.toString())
+}
 
 const setSiteLanguageToEnglish = (): void => {
-  cy.log('Setting cookie for en language');
+  cy.log('Setting cookie for en language')
 
-  cy.setCookie('ccrStaticLanguage', 'en');
-};
+  cy.setCookie('ccrStaticLanguage', 'en')
+}
 
-export { setGuideStorage, setProviderSiteCookie, setSiteLanguageToEnglish };
+export { setGuideStorage, setProviderSiteCookie, setSiteLanguageToEnglish }

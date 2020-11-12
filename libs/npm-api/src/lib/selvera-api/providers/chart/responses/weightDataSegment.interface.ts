@@ -3,8 +3,8 @@
  */
 
 export interface WeightDataSegment {
-    date: string;
-    weight: number;
-    bodyFat: number;
-    leanMass: number;
+  date: string
+  weight: number
+  bodyFat: number
+  leanMass: number
 }

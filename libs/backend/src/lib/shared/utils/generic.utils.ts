@@ -4,16 +4,16 @@
 
 // FIXME replace these for a generic object
 export interface DataObject {
-  [s: string]: any;
+  [s: string]: any
 }
 export interface TranslationsObject {
-  [key: string]: string;
+  [key: string]: string
 }
 
-export type UnitFormatter = (v: number) => number | string;
+export type UnitFormatter = (v: number) => number | string
 export interface UnitFormatters {
   // [ string: label, UnitFormatter: v => format(v), FilterEmpty ]
-  [data: string]: [string, UnitFormatter, boolean];
+  [data: string]: [string, UnitFormatter, boolean]
 }
 
 // remember the included ones in lib.es5.d.ts
@@ -23,4 +23,4 @@ export interface UnitFormatters {
 // export type Pick<T, K extends keyof T> = { [P in K]: T[P] };
 // export type Record<K extends string, T> = { [P in K]: T };
 
-export type DeepPartial<T> = { [P in keyof T]?: Partial<T[P]> };
+export type DeepPartial<T> = { [P in keyof T]?: Partial<T[P]> }

@@ -3,5 +3,5 @@
  */
 
 export interface AlertOption {
-    threshold: number;
+  threshold: number
 }

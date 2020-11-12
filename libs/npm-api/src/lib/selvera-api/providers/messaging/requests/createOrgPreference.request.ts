@@ -3,9 +3,9 @@
  */
 
 export interface CreateOrgPreferenceRequest {
-    /** A flag indicating if the message service is active for the Organization */
-    isActive: boolean;
-    /** Organization ID */
-    organization: string;
-    useAutoThreadParticipation?: boolean;
+  /** A flag indicating if the message service is active for the Organization */
+  isActive: boolean
+  /** Organization ID */
+  organization: string
+  useAutoThreadParticipation?: boolean
 }

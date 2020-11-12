@@ -1,1 +1,1 @@
-export * from './rpm-chat-icon.component';
+export * from './rpm-chat-icon.component'

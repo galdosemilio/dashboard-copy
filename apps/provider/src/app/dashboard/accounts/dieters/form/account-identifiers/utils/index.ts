@@ -1,1 +1,1 @@
-export * from './syncer.service';
+export * from './syncer.service'

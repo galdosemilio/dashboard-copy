@@ -1,2 +1,2 @@
-export * from './consts';
-export * from './walkthrough.service';
+export * from './consts'
+export * from './walkthrough.service'

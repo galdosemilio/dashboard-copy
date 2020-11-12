@@ -3,8 +3,8 @@
  */
 
 export interface DeleteSequenceTriggerRequest {
-    /** Sequence ID */
-    id: string;
-    /** Organization ID */
-    organization: string;
+  /** Sequence ID */
+  id: string
+  /** Organization ID */
+  organization: string
 }

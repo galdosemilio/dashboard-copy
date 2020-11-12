@@ -2,10 +2,10 @@
  * Interface for POST /supplement/consumption
  */
 
-import { AddConsumptionSupplement } from './addConsumptionSupplement.interface';
+import { AddConsumptionSupplement } from './addConsumptionSupplement.interface'
 
 export interface AddConsumptionRequest {
-    account: string;
-    date: string;
-    supplements: Array<AddConsumptionSupplement>;
+  account: string
+  date: string
+  supplements: Array<AddConsumptionSupplement>
 }

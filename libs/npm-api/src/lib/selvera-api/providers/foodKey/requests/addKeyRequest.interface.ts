@@ -3,6 +3,6 @@
  */
 
 export interface AddKeyRequest {
-    name: string;
-    description: string;
+  name: string
+  description: string
 }

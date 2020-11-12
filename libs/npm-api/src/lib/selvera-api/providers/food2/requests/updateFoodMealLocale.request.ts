@@ -3,10 +3,10 @@
  */
 
 export interface UpdateFoodMealLocaleRequest {
-    /** ID of the meal item. */
-    id: string;
-    /** Name of the locale. */
-    locale: string;
-    /** Desired name of a meal. */
-    name?: string;
+  /** ID of the meal item. */
+  id: string
+  /** Name of the locale. */
+  locale: string
+  /** Desired name of a meal. */
+  name?: string
 }

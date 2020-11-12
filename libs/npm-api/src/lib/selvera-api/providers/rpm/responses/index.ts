@@ -1,1 +1,1 @@
-export * from './getPatientRpmReport.response';
+export * from './getPatientRpmReport.response'

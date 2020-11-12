@@ -4,9 +4,9 @@
 
 export interface PainLocation {
   /** X coordinate of pain location. */
-  x: number;
+  x: number
   /** Y coordinate of pain location. */
-  y: number;
+  y: number
   /** Z coordinate of pain location. */
-  z: number;
+  z: number
 }

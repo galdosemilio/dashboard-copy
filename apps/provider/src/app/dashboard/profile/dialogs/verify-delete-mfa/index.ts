@@ -1,1 +1,1 @@
-export * from './verify-delete-mfa.dialog';
+export * from './verify-delete-mfa.dialog'

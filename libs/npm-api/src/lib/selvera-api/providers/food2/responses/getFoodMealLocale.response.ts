@@ -3,6 +3,6 @@
  */
 
 export interface GetFoodMealLocaleResponse {
-    /** Localized name of a meal. */
-    name?: string;
+  /** Localized name of a meal. */
+  name?: string
 }

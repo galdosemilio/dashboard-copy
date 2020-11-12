@@ -4,10 +4,10 @@
 
 export interface CreateAssetsOrganizationPreferenceRequest {
   /** The id of the organization. */
-  id: string;
+  id: string
   /** Asset collection. */
   assets: Array<{
     /** Asset name. Has to be unique in the collection. */
-    name: string;
-  }>;
+    name: string
+  }>
 }

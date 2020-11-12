@@ -1,1 +1,1 @@
-export * from './doctor-pdf.dialog';
+export * from './doctor-pdf.dialog'

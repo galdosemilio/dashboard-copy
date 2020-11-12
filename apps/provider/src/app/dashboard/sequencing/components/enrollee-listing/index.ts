@@ -1,1 +1,1 @@
-export * from './enrollee-listing.component';
+export * from './enrollee-listing.component'

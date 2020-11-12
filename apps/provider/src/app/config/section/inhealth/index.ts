@@ -1,1 +1,1 @@
-export * from './inhealth.section.config';
+export * from './inhealth.section.config'

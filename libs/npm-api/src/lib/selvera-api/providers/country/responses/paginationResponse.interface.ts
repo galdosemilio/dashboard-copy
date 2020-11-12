@@ -1,4 +1,4 @@
 export interface PaginationResponse {
-    next?: number;
-    prev?: number;
+  next?: number
+  prev?: number
 }

@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { CallWindowComponent } from './call-window.component';
+import { CallWindowComponent } from './call-window.component'
 
 describe('CallWindowComponent', () => {
-  let component: CallWindowComponent;
-  let fixture: ComponentFixture<CallWindowComponent>;
+  let component: CallWindowComponent
+  let fixture: ComponentFixture<CallWindowComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CallWindowComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CallWindowComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(CallWindowComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

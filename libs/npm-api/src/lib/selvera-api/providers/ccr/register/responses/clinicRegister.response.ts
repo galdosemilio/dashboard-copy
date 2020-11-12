@@ -4,12 +4,12 @@
 
 export interface ClinicRegisterResponse {
   /** Id of created provider account. */
-  accountId: string;
+  accountId: string
   /** Id of created organization. */
-  organizationId: string;
+  organizationId: string
   /**
    * Has value 'true' if passed payment data was successfully processed by web-stripe service and customer was created,
    * otherwise 'false'.
    */
-  isPaymentDataProcessed: boolean;
+  isPaymentDataProcessed: boolean
 }

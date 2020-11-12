@@ -2,9 +2,9 @@
  * MeasurementActivityAggregates
  */
 
-import { MeasurementSteps } from './measurementSteps';
+import { MeasurementSteps } from './measurementSteps'
 
 export interface MeasurementActivityAggregates {
-    /** Steps aggregates. */
-    steps: MeasurementSteps;
+  /** Steps aggregates. */
+  steps: MeasurementSteps
 }
