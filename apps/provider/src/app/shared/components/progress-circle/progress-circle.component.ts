@@ -18,8 +18,8 @@ const CIRCLE_RADIUS = 50
   styleUrls: ['progress-circle.component.scss']
 })
 export class ProgressCircle implements OnChanges, OnInit {
-  @ViewChild('path', { static: false }) private path: ElementRef
-  @ViewChild('restpath', { static: false }) private restpath: ElementRef
+  @ViewChild('path', { static: true }) private path: ElementRef
+  @ViewChild('restpath', { static: true }) private restpath: ElementRef
 
   // tslint:disable-next-line:no-input-rename
   @Input('headertext') primarytext: string
