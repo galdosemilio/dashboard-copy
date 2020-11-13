@@ -30,7 +30,7 @@ export class OrganizationsDatabase extends AppDatabase {
   }
 
   list(request: GetListOrganizationRequest) {
-    return this.organization.getList(request as any) // MERGETODO: CHECK THIS TYPE!!!
+    return this.organization.getAccessibleList(request)
   }
 
   single(id: string) {

@@ -187,15 +187,15 @@ export class OrganizationAutocompleterComponent
   // TODO support admin and non-admin queries
   fetch(args: Partial<OrgAccessRequest>): void {
     this.organization
-      .getAccessibleList({
-        query: args.query,
+      .getAll({
+        name: args.query,
         limit: 5,
         status: 'active'
       })
       .then((res) => {
         this.items = res.data.map((c) => ({
-          value: c.organization.id,
-          viewValue: `${c.organization.name}`
+          value: c.id,
+          viewValue: `${c.name}`
         }))
         if (this.items.length) {
           this.trigger.openPanel()
