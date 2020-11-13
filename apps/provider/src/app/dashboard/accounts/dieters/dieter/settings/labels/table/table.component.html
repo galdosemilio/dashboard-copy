@@ -44,10 +44,14 @@
         (click)="enroll(row)" *ngIf="!row.enrolled">
           {{ 'PHASE.ENROLL' | translate }}
         </a>
-        <a mat-button color="warn" class="ccr-button"
+        <button
+        [disabled]="!row.package.organization?.isDirect || !row.package.organization?.permissions.admin"
+        mat-button
+        color="warn"
+        class="ccr-button"
         (click)="unenroll(row)" *ngIf="row.enrolled">
           {{ 'PHASE.UNENROLL' | translate }}
-        </a>
+      </button>
       </mat-cell>
     </ng-container>
 

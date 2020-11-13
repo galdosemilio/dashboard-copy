@@ -9,8 +9,7 @@ import {
   FetchPackagesResponse,
   GetAllPackageOrganizationRequest,
   PackageEnrollment,
-  PackageOrganization,
-  Phase
+  PackageOrganization
 } from '@coachcare/npm-api'
 import { merge } from 'lodash'
 import * as moment from 'moment'
@@ -25,7 +24,6 @@ export class LabelsDatabase extends CcrDatabase {
   constructor(
     private context: ContextService,
     private dialog: MatDialog,
-    private phase: Phase,
     private enrollment: PackageEnrollment,
     private packageOrganization: PackageOrganization
   ) {
@@ -138,6 +136,6 @@ export class LabelsDatabase extends CcrDatabase {
   }
 
   unenroll(id: string | number): Promise<void | string> {
-    return this.enrollment.delete({ id: id.toString() })
+    return this.enrollment.update({ id: id.toString(), isActive: false })
   }
 }
