@@ -48,7 +48,7 @@ export class ContentEditDialog implements OnInit {
       returnedValue = Object.assign(
         {},
         this.content,
-        ...(value.details.details ? value.details.details : value.details)
+        value.details.details ? value.details.details : value.details
       )
 
     returnedValue.name = returnedValue.fullName

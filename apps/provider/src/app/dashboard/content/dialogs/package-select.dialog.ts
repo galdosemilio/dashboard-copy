@@ -35,7 +35,9 @@ export class PackageSelectDialog implements OnInit {
     if (this.data.packages && this.data.packages.length) {
       const allPackages = await this.database
         .fetch({
-          organization: this.data.content.organization.id,
+          organization: this.data.content.organization
+            ? this.data.content.organization.id
+            : this.context.organizationId,
           isActive: true
         })
         .toPromise()

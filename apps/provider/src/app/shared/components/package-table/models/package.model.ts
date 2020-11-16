@@ -25,7 +25,7 @@ export class Package implements FetchPackagesSegment {
     raw?: PackageOrganizationSingle,
     opts: PackageOptions = { organizationId: '' }
   ) {
-    this.associationId = raw.id
+    this.associationId = raw ? raw.id : args.id
     this.description = args.description || ''
     this.id = args.id.toString()
     this.title = args.title
@@ -34,6 +34,8 @@ export class Package implements FetchPackagesSegment {
     this.createdAt = args.createdAt
     this.isActive = args.isActive
     this.checked = args.checked
-    this.isInherited = opts.organizationId !== raw.organization.id
+    this.isInherited = raw
+      ? opts.organizationId !== raw.organization.id
+      : opts.organizationId !== args.organization.id
   }
 }
