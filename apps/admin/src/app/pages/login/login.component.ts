@@ -121,10 +121,11 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     this.mode = mode
   }
 
-  onSubmit() {
+  public async onSubmit(): Promise<void> {
     if (this.isLoggingIn) {
       return
     }
+
     if (this.form.valid) {
       const request: LoginSessionRequest = {
         ...this.form.value,
@@ -133,6 +134,8 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
         organization:
           this.context.organizationId || this.environment.defaultOrgId
       }
+
+      await this.attemptLogout()
 
       this.isLoggingIn = true
       this.session
@@ -201,6 +204,16 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     } finally {
       this.isLoggingIn = false
     }
+  }
+
+  private attemptLogout(): Promise<void> {
+    return new Promise<void>(async (resolve) => {
+      try {
+        await this.session.logout()
+      } finally {
+        resolve()
+      }
+    })
   }
 
   private async checkExistingSession() {
