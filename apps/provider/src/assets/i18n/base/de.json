@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Klinikverbindung hinzufügen",
     "ASSOCIATE": "Assoziieren",
     "ASSOCIATIONS_EMPTY_LIST": "Es gibt keine Verbindungen, die mit den Suchkriterien übereinstimmen.",
-    "REMOVE_ASSOCIATION_HELP": "Sie sind dabei, eine Verbindung für diesen Nutzer zu entfernen. Das bedeutet, dass Coaches eventuell nicht mehr auf die Daten oder Profile zugreifen können.<br/><br/><strong>Möchten Sie wirklich fortfahren?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Sie sind dabei, eine Vereinigung von diesem Benutzer zu entfernen. Dies bedeutet, dass Trainer nicht in der Lage sein, ihre Daten zugreifen, noch ihre Profile nicht mehr. Alle bestehenden RPM Einschreibung zwischen diesen Patienten und der ausgewählten Klinik wird auch deaktiviert werden.<br/><br/><strong>Sind Sie sicher, dass Sie fortfahren möchten?</strong>",
     "REMOVE_CLINIC_ASSOCIATION": "Klinikverbindung entfernen"
   },
   "BOARD": {

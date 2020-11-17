@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Aggiungi Associazione Clinica",
     "ASSOCIATE": "Associa",
     "ASSOCIATIONS_EMPTY_LIST": "Non ci sono associazioni che corrispondono ai criteri di ricerca.",
-    "REMOVE_ASSOCIATION_HELP": "Stai per eliminare un'associazione da questo utente. Questo significa che quei coach potrebbero non riuscire più ad accedere ai propri dati né ai propri profili.<br/><br/><strong>Sei sicuro di voler continuare?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Stai per rimuovere un associazione di questo utente. Questo significa che gli allenatori potrebbero non essere in grado di accedere ai propri dati, né i loro profili più. Qualsiasi iscrizione RPM esistente tra questo paziente e la clinica selezionato sarà anche disattivata.<br/><br/><strong>Sei sicuro di voler continuare?</strong>",
     "REMOVE_CLINIC_ASSOCIATION": "Elimina Associazione Clinica"
   },
   "BOARD": {

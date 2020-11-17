@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Ajouter Clinique Association",
     "ASSOCIATE": "Associer",
     "ASSOCIATIONS_EMPTY_LIST": "Il n'y a pas d'associations qui correspondent aux critères de recherche.",
-    "REMOVE_ASSOCIATION_HELP": "Vous êtes sur le point de supprimer une association de cet utilisateur. Cela signifie que les entraîneurs peuvent ne pas être en mesure d'accéder à leurs données ni leurs profils plus. <br/> <strong> Êtes-vous sûr de vouloir continuer? </ Strong>",
+    "REMOVE_ASSOCIATION_HELP": "Vous êtes sur le point de supprimer une association de cet utilisateur. Cela signifie que les entraîneurs peuvent ne pas être en mesure d'accéder à leurs données ni leurs profils plus. Toute inscription RPM existant entre ce patient et la clinique sélectionnée sera également désactivé.<br/><br/><strong>Êtes-vous sûr de vouloir continuer?</strong>",
     "REMOVE_CLINIC_ASSOCIATION": "Retirer Clinique Association"
   },
   "BOARD": {

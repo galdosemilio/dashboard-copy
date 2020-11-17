@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Add Clinic Association",
     "ASSOCIATE": "Associate",
     "ASSOCIATIONS_EMPTY_LIST": "There are no associations that match the search criteria.",
-    "REMOVE_ASSOCIATION_HELP": "You're about to remove an association from this user. This means that coaches may not be able to access their data nor their profiles any more.<br/><br/><strong>Are you sure you want to continue?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "You're about to remove an association from this user. This means that coaches may not be able to access their data nor their profiles any more.  Any existing RPM enrollment between this patient and the selected clinic will also be deactivated.<br/><br/><strong>Are you sure you want to continue?</strong>",
     "REMOVE_CLINIC_ASSOCIATION": "Remove Clinic Association"
   },
   "BOARD": {

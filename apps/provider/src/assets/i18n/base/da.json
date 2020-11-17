@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Tilføj klinik association",
     "ASSOCIATE": "Associer",
     "ASSOCIATIONS_EMPTY_LIST": "Der er ingen associationer, der matcher søgekriterierne.",
-    "REMOVE_ASSOCIATION_HELP": "Du er ved at fjerne en tilknytning fra denne bruger. Dette betyder, at coaches muligvis ikke længere har adgang til deres data eller deres profiler. <br/> <br/><strong>Er du sikker på, at du vil fortsætte?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Du er ved at fjerne en forening fra denne bruger. Det betyder, at busser ikke kan være i stand til at få adgang til deres data eller deres profiler mere. Enhver eksisterende RPM indskrivning mellem denne patient og den valgte klinik vil også blive deaktiveret.<br/><br/><strong>Er du sikker på du ønsker at fortsætte?</strong>",
     "REMOVE_CLINIC_ASSOCIATION": "Fjern klinik association"
   },
   "BOARD": {

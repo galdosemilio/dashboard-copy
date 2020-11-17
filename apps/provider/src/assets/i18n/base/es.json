@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Añadir Asociación de Clínica",
     "ASSOCIATE": "Asociar",
     "ASSOCIATIONS_EMPTY_LIST": "No hay asociaciones que coincidan con el criterio de búsqueda.",
-    "REMOVE_ASSOCIATION_HELP": "Está a punto de remover la asociación de este usuario. Esto significa que los asesores podrían no ser capaces de acceder a los datos ni al perfil de este paciente.<br/><br/><strong>¿Está seguro de querer continuar?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Está a punto de remover la asociación de este usuario. Esto significa que los asesores podrían no ser capaces de acceder a los datos ni al perfil de este paciente. Cualquier enrolamiento de RPM entre este paciente y la clínica seleccionada será desactivado.<br/><br/><strong>¿Está seguro de querer continuar?</strong>",
     "REMOVE_CLINIC_ASSOCIATION": "Remover Asociación de Clínica"
   },
   "BOARD": {
