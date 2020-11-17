@@ -6,11 +6,11 @@ mat-table {
     line-height: 20px;
   }
 
-  .mat-column-action {
+  .cdk-column-action {
     flex: 0 0 125px;
   }
 
-  .mat-column-history {
+  .cdk-column-history {
     flex: 4 !important;
     justify-content: space-around !important;
 

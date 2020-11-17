@@ -11,6 +11,10 @@
       background-color: transparent !important;
     }
 
+    button:not(.mat-button-disabled) {
+      color: mat-color($foreground, text) !important;
+    }
+
     @media #{map-get($config, lte-xs)} {
       button {
         min-width: 40px !important;

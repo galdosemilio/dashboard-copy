@@ -4,11 +4,11 @@
 app-dieter-journal-food-table {
   .ccr-table {
     mat-table {
-      .mat-column-date {
+      .cdk-column-date {
         flex: 3 !important;
       }
 
-      .mat-column-carb {
+      .cdk-column-carb {
         flex: 1.5 !important;
       }
 

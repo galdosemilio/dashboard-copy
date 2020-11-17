@@ -10,18 +10,18 @@ div.non-clickable {
 
 mat-cell,
 mat-header-cell {
-  &.mat-column-firstName,
-  &.mat-column-lastName {
+  &.cdk-column-firstName,
+  &.cdk-column-lastName {
     min-width: 200px !important;
   }
 
-  &.mat-column-startDate,
-  &.mat-column-startWeightDate,
-  &.mat-column-endWeightDate {
+  &.cdk-column-startDate,
+  &.cdk-column-startWeightDate,
+  &.cdk-column-endWeightDate {
     min-width: 175px !important;
   }
 
-  &.mat-column-weightChangePercent {
+  &.cdk-column-weightChangePercent {
     min-width: 100px !important;
   }
 }
@@ -37,8 +37,8 @@ mat-cell.mat-cell {
   width: 95px;
 }
 
-.ccr-table .mat-table mat-header-cell.mat-column-actions,
-.ccr-table .mat-table mat-cell.mat-column-actions {
+.ccr-table .mat-table mat-header-cell.cdk-column-actions,
+.ccr-table .mat-table mat-cell.cdk-column-actions {
   justify-content: center !important;
 }
 
@@ -70,11 +70,11 @@ mat-cell.mat-cell {
   }
 }
 
-.mat-header-row mat-header-cell.mat-column-actions {
+.mat-header-row mat-header-cell.cdk-column-actions {
   background: mat-color($ccr-background, header);
 }
 
-.row-even mat-cell.mat-column-actions {
+.row-even mat-cell.cdk-column-actions {
   background: mat-color($ccr-background, even);
 }
 
@@ -96,7 +96,7 @@ mat-cell.mat-cell {
   border-bottom: 1px solid var(--primary);
 }
 
-.row-odd mat-cell.mat-column-actions {
+.row-odd mat-cell.cdk-column-actions {
   background: mat-color($ccr-background, odd);
 }
 

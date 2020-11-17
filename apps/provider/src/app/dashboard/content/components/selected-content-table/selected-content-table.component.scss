@@ -93,11 +93,11 @@ app-content-selected-table {
     border-bottom: 3px solid mat-color($ccr-foreground, icon) !important;
   }
 
-  .mat-column-name {
+  .cdk-column-name {
     flex: 0 0 70% !important;
   }
 
-  .mat-column-actions {
+  .cdk-column-actions {
     width: 60px;
   }
 }

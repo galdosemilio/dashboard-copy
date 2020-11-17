@@ -23,11 +23,7 @@
     display: block;
     overflow: hidden;
 
-    // .mat-column-actions {
-    //   min-width: 30px !important;
-    //   max-width: 30px !important;
-    // }
-    mat-header-cell.mat-column-actions {
+    mat-header-cell.cdk-column-actions {
       visibility: hidden;
     }
   }

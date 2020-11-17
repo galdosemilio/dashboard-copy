@@ -1,9 +1,9 @@
 .ccr-table {
   mat-table {
-    .mat-column-id {
+    .cdk-column-id {
       flex: 0.1 !important;
     }
-    .mat-column-actions {
+    .cdk-column-actions {
       min-width: 80px;
       max-width: 80px;
     }

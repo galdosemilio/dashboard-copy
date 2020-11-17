@@ -1,27 +1,27 @@
 @import 'variables';
 
-.ccr-table .mat-table mat-cell.mat-column-actions button.disabled .mat-icon {
+.ccr-table .mat-table mat-cell.cdk-column-actions button.disabled .mat-icon {
   color: mat-color($ccr-foreground, divider) !important;
   cursor: default;
   fill: mat-color($ccr-foreground, divider);
 }
 
 mat-header-cell {
-  &.mat-column-attendees {
+  &.cdk-column-attendees {
     min-width: 175px !important;
   }
 
-  &.mat-column-date {
+  &.cdk-column-date {
     min-width: 125px !important;
   }
 }
 
 mat-cell {
-  &.mat-column-attendees {
+  &.cdk-column-attendees {
     min-width: 200px !important;
   }
 
-  &.mat-column-date {
+  &.cdk-column-date {
     min-width: 125px !important;
   }
 }

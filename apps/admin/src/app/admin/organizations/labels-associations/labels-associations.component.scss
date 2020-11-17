@@ -16,11 +16,11 @@ mat-spinner {
 
 .ccr-table {
   mat-table {
-    .mat-column-actions {
+    .cdk-column-actions {
       min-width: 135px !important;
     }
 
-    .mat-column-organization {
+    .cdk-column-organization {
       min-width: 150px !important;
     }
   }

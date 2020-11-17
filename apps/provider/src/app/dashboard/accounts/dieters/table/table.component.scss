@@ -1,12 +1,12 @@
 .ccr-table {
   mat-table {
-    .mat-column-email {
+    .cdk-column-email {
       flex: 2 !important;
     }
-    .mat-column-created {
+    .cdk-column-created {
       flex: 1.25 !important;
     }
-    .mat-column-actions {
+    .cdk-column-actions {
       min-width: 60px;
       max-width: 60px;
     }

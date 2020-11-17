@@ -56,19 +56,19 @@ small {
     padding-left: 0 !important;
   }
 
-  .mat-column-firstName {
+  .cdk-column-firstName {
     max-width: 150px;
     min-width: 150px;
     z-index: 999;
   }
 
-  .mat-column-lastName {
+  .cdk-column-lastName {
     max-width: 150px;
     min-width: 150px;
     z-index: 999;
   }
 
-  .mat-column-codes {
+  .cdk-column-codes {
     max-width: 1580px;
     min-width: 1580px;
 
@@ -78,17 +78,17 @@ small {
     }
   }
 
-  .mat-column-dob {
+  .cdk-column-dob {
     max-width: 80px;
     min-width: 80px;
   }
 
-  .mat-column-index {
+  .cdk-column-index {
     max-width: 40px;
     min-width: 40px;
   }
 
-  .mat-column-status {
+  .cdk-column-status {
     max-width: 100px;
     min-width: 100px;
 
@@ -97,7 +97,7 @@ small {
     }
   }
 
-  .mat-column-anyCodeLastEligibleAt {
+  .cdk-column-anyCodeLastEligibleAt {
     border-left: 1px solid mat-color($ccr-foreground, secondary-text);
     margin-right: 0;
     max-width: 175px;
@@ -198,34 +198,34 @@ th {
   min-height: 20px !important;
 }
 
-mat-header-cell.mat-column-firstName,
-mat-header-cell.mat-column-lastName,
-mat-header-cell.mat-column-index {
+mat-header-cell.cdk-column-firstName,
+mat-header-cell.cdk-column-lastName,
+mat-header-cell.cdk-column-index {
   background: mat-color($ccr-background, header);
   background-blend-mode: color;
 }
 
-.row-odd mat-cell.mat-column-firstName,
-.row-odd mat-cell.mat-column-lastName,
-.row-odd mat-cell.mat-column-index {
+.row-odd mat-cell.cdk-column-firstName,
+.row-odd mat-cell.cdk-column-lastName,
+.row-odd mat-cell.cdk-column-index {
   background: mat-color($ccr-background, odd);
   background-blend-mode: color;
 }
 
-.row-even mat-cell.mat-column-firstName,
-.row-even mat-cell.mat-column-lastName,
-.row-even mat-cell.mat-column-index {
+.row-even mat-cell.cdk-column-firstName,
+.row-even mat-cell.cdk-column-lastName,
+.row-even mat-cell.cdk-column-index {
   background: mat-color($ccr-background, even);
   background-blend-mode: color;
 }
 
-.row-odd mat-cell.mat-column-anyCodeLastEligibleAt,
-.row-odd mat-cell.mat-column-anyCodeLastEligibleAt {
+.row-odd mat-cell.cdk-column-anyCodeLastEligibleAt,
+.row-odd mat-cell.cdk-column-anyCodeLastEligibleAt {
   background: mix(mat-color($ccr-background, odd), mat-color($ccr-base, 50));
 }
 
-.row-even mat-cell.mat-column-anyCodeLastEligibleAt,
-.row-even mat-cell.mat-column-anyCodeLastEligibleAt {
+.row-even mat-cell.cdk-column-anyCodeLastEligibleAt,
+.row-even mat-cell.cdk-column-anyCodeLastEligibleAt {
   background: mix(mat-color($ccr-background, even), mat-color($ccr-base, 50));
 }
 

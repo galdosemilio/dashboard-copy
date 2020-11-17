@@ -3,7 +3,7 @@
 $line-height: 21px;
 $padding: 7px;
 
-.mat-column-date {
+.cdk-column-date {
   &.mat-cell {
     align-self: start;
     line-height: $line-height * 2;
@@ -11,7 +11,7 @@ $padding: 7px;
   }
 }
 
-.mat-column-details {
+.cdk-column-details {
   &.mat-header-cell span {
     text-align: left;
   }
@@ -35,6 +35,6 @@ $padding: 7px;
   }
 }
 
-.mat-column-notes {
+.cdk-column-notes {
   justify-content: center !important;
 }

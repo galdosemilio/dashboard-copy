@@ -6,7 +6,7 @@
       max-height: 32px;
     }
 
-    .mat-column-enabled {
+    .cdk-column-enabled {
       min-width: 75px;
       max-width: 75px;
 
@@ -14,7 +14,7 @@
         @include horizontal-margin-right(10px);
       }
     }
-    .mat-column-title {
+    .cdk-column-title {
       flex: 2 !important;
       .title-text {
         margin: 0 10px;

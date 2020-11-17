@@ -163,7 +163,7 @@ mat-header-row {
         }
       }
 
-      &.mat-column-actions {
+      &.cdk-column-actions {
         > button {
           color: mat-color($ccr-foreground, table-actions);
           display: inline-block;
@@ -196,7 +196,7 @@ mat-header-row {
         min-width: 50px;
         @include horizontal-margin-right(0);
       }
-      &.mat-column-actions {
+      &.cdk-column-actions {
         // flex: 0.25 0 auto !important;
         overflow: visible;
         justify-content: center;

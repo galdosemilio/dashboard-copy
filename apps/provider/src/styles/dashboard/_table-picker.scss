@@ -23,7 +23,7 @@
         }
       }
 
-      .mat-column-actions {
+      .cdk-column-actions {
         flex: 0 0 15%;
         @media #{$small-and-down} {
           min-width: 50px;
@@ -31,7 +31,7 @@
       }
 
       .mat-cell {
-        &.mat-column-actions {
+        &.cdk-column-actions {
           span.ccr-picked,
           mat-icon.ccr-picked {
             color: var(--accent);
@@ -44,13 +44,7 @@
   &.ng-invalid.ng-touched[required] {
     border-color: var(--warn);
 
-    // mat-header-cell {
-    //   &.mat-column-actions {
-    //     border-bottom: 1px solid var(--warn);
-    //   }
-    // }
-
-    .mat-column-actions {
+    .cdk-column-actions {
       button .mat-icon {
         border: 1px solid var(--warn);
         border-radius: 14px;
