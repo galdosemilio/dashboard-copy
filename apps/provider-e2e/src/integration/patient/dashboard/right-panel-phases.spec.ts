@@ -28,7 +28,6 @@ describe('Patient Dashboard Right Panel Phases', function () {
     cy.get('@phaseEnrollmentItem').should('have.length', 1)
 
     cy.get('@phaseEnrollmentItem').eq(0).should('contain', 'Package 1')
-    cy.get('@phaseEnrollmentItem').eq(0).should('contain', 'ID 1')
 
     cy.wait(3000)
   })
@@ -90,7 +89,7 @@ describe('Patient Dashboard Right Panel Phases', function () {
 
     cy.tick(10000)
 
-    cy.get('@phaseRows').eq(0).find('a.ccr-button').click({ force: true })
+    cy.get('@phaseRows').eq(0).find('button').click({ force: true })
     cy.tick(1000)
 
     cy.get('mat-dialog-container')

@@ -302,6 +302,11 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     'fixture:/api/package/getPackages'
   )
   cy.route('POST', '2.0/package/enrollment', 'fixture:/api/general/emptyObject')
+  cy.route(
+    'PATCH',
+    '2.0/package/enrollment/**',
+    'fixture:/api/general/emptyObject'
+  )
   cy.route('GET', '/1.0/goal?account=**', 'fixture:/api/goal/getGoal')
   cy.route({
     method: 'PUT',
