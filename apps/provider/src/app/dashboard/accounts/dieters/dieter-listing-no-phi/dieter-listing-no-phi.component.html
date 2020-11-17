@@ -4,6 +4,13 @@
     </div>
 
     <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="space-between center">
+      <button mat-button fxFlex="nogrow" class="ccr-align-center"
+      [disabled]="!dietersSource.isLoaded || dietersSource.isEmpty" (click)="downloadCSV()" fxHide.xs
+      data-cy="download-csv-button">
+        {{ 'REPORTS.EXPORT_CSV' | translate }}
+        <mat-icon>file_download</mat-icon>
+      </button>
+
       <ccr-paginator fxFlex="nogrow" #paginator
         [length]="dietersSource.total"
         [pageIndex]="dietersSource.pageIndex"

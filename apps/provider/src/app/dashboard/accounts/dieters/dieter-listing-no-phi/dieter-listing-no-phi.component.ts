@@ -7,7 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core'
-import { MatDialog, MatSort, Sort } from '@coachcare/material'
+import { MatSort, Sort } from '@coachcare/material'
 import { STORAGE_PATIENTS_PAGINATION } from '@app/config'
 import {
   ContextService,
@@ -16,10 +16,12 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _, CcrPaginator } from '@app/shared'
+import { DieterListingItem } from '../models'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 import { Subject } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import { DietersDatabase, DietersDataSource } from '../services'
+import { DietersCriteria } from '../services/dieters.criteria'
 
 @Component({
   selector: 'dieter-listing-no-phi',
@@ -39,7 +41,6 @@ export class DieterListingNoPhiComponent
   sort: MatSort = new MatSort()
 
   constructor(
-    private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private bus: EventsService,
@@ -108,6 +109,113 @@ export class DieterListingNoPhiComponent
 
   ngOnDestroy() {
     this.dietersSource.disconnect()
+  }
+
+  async downloadCSV() {
+    try {
+      this.dietersSource.isLoading = true
+      this.dietersSource.change$.next()
+
+      await this.generateSingleCSV()
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.dietersSource.isLoading = false
+      this.dietersSource.change$.next()
+    }
+  }
+
+  private async generateSingleCSV(): Promise<void> {
+    try {
+      const criteria: DietersCriteria = {
+        ...this.dietersSource.args,
+        limit: 'all',
+        offset: 0,
+        organization: this.context.organizationId
+      }
+
+      const res = await this.database.fetchAll(criteria)
+
+      if (!res.data.length) {
+        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+      }
+
+      const orgName = this.context.organization.name.replace(/\s/g, '_')
+      const filename = `${orgName}_Patient_List.csv`
+      let csv = ''
+      csv += 'PATIENT LIST\r\n'
+      csv +=
+        'ID' +
+        this.csvSeparator +
+        'First Name' +
+        this.csvSeparator +
+        'Last Name' +
+        this.csvSeparator +
+        'Email' +
+        this.csvSeparator +
+        'Organization ID (1)' +
+        this.csvSeparator +
+        'Organization Name (1)' +
+        this.csvSeparator +
+        'Organization ID (2)' +
+        this.csvSeparator +
+        'Organization Name (2)' +
+        this.csvSeparator +
+        'Organization ID (3)' +
+        this.csvSeparator +
+        'Organization Name (3)' +
+        this.csvSeparator +
+        'More Organization Associations?' +
+        '\r\n'
+
+      res.data
+        .map(
+          (element: any) =>
+            new DieterListingItem({
+              ...element,
+              ...element.account,
+              organizations: element.organizations,
+              orgCount: element.organizations.length
+            })
+        )
+        .forEach((d) => {
+          csv +=
+            `"${d.id}"` +
+            this.csvSeparator +
+            `"${d.firstName}"` +
+            this.csvSeparator +
+            `"${d.lastName}"` +
+            this.csvSeparator +
+            `"${d.email}"` +
+            this.csvSeparator +
+            `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
+            this.csvSeparator +
+            `"${d.organizations[0] ? d.organizations[0].name : ''}"` +
+            this.csvSeparator +
+            `"${d.organizations[1] ? d.organizations[1].id : ''}"` +
+            this.csvSeparator +
+            `"${d.organizations[1] ? d.organizations[1].name : ''}"` +
+            this.csvSeparator +
+            `"${d.organizations[2] ? d.organizations[2].id : ''}"` +
+            this.csvSeparator +
+            `"${d.organizations[2] ? d.organizations[2].name : ''}"` +
+            this.csvSeparator +
+            `"${d.orgCount > 3 ? 'Yes' : 'No'}"` +
+            '\r\n'
+        })
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.setAttribute('visibility', 'hidden')
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      return Promise.resolve()
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
   onSorted(sort: Sort): void {
