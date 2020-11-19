@@ -16,6 +16,10 @@ import { untilDestroyed } from 'ngx-take-until-destroy'
 import { FileExplorerRoute } from '../../file-explorer-table'
 import { FileExplorerContent, FileExplorerEvents } from '../../models'
 import { FileExplorerDatabase, FileExplorerDatasource } from '../../services'
+import {
+  OrganizationPermission,
+  OrganizationWithAddress
+} from '@coachcare/npm-api'
 
 interface ContentBatchCopyDialogProps {
   datasource: any
@@ -62,6 +66,9 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
   public hiddenFormFields: string[] = ['name', 'description']
   public initialRoutes: FileExplorerRoute[] = []
   public organization: any
+  public targetOrganizationPerms: Partial<OrganizationPermission> = {
+    admin: true
+  }
   public selectedContent: FileExplorerContent
   public selectorOpts: any = {
     disableForeignContent: true,
@@ -120,6 +127,15 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
       : false
   }
 
+  public nextButtonIsDisabled(): boolean {
+    return (
+      this.form.controls.targetFolder.invalid ||
+      this.form.controls.selectedContents.invalid ||
+      (this.stepper.selectedIndex === 2 &&
+        this.form.controls.overrideDetails.invalid)
+    )
+  }
+
   public onSelectedContent(content: FileExplorerContent): void {
     if (!content) {
       return
@@ -142,7 +158,8 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
         this.datasource.copyContent({
           to: formValue.targetFolder,
           content: content,
-          overrideDetails: formValue.overrideDetails
+          overrideDetails: formValue.overrideDetails,
+          organizationId: formValue.targetOrganization
         })
       )
 
@@ -158,11 +175,20 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
     }
   }
 
+  public selectOrganization(organization: OrganizationWithAddress): void {
+    console.log({ organization })
+    if (!organization || !organization.id) {
+      return
+    }
+    this.form.controls.targetOrganization.patchValue(organization.id)
+  }
+
   private createForm(): void {
     this.form = this.fb.group({
       selectedContents: ['', Validators.required],
       targetFolder: [''],
-      overrideDetails: ['', Validators.required]
+      overrideDetails: ['', Validators.required],
+      targetOrganization: ['', Validators.required]
     })
   }
 

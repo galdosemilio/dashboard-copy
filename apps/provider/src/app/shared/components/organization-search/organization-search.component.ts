@@ -51,6 +51,7 @@ export class OrganizationSearchComponent implements OnInit {
   get readonly(): boolean {
     return this._readonly
   }
+  @Input() strict = false
   @Input() showEmptyOption = true
 
   @Output()
@@ -136,6 +137,7 @@ export class OrganizationSearchComponent implements OnInit {
         permissions: this.permissions || undefined,
         ancestor: this.ancestor || undefined,
         query: query,
+        strict: this.strict,
         status: 'active'
       })
 
@@ -145,6 +147,16 @@ export class OrganizationSearchComponent implements OnInit {
 
       if (this.organizations.length >= this.selectModeThreshold) {
         this.mode = 'searchbar'
+      }
+
+      if (this.organizations.length === 1) {
+        const orgId = this.organizations[0].organization.id
+        this.onOrgSelect({
+          value: orgId,
+          source: null
+        })
+        this.setOrgId = orgId
+        this.readonly = true
       }
     } catch (error) {
       this.notify.error(error)

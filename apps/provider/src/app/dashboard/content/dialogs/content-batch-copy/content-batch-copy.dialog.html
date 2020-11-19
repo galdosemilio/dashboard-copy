@@ -70,6 +70,19 @@
                 </app-content-content-form>
             </div>
         </mat-step>
+
+        <mat-step [stepControl]="form.controls.targetOrganization">
+            <ng-template matStepLabel>{{ 'BOARD.SELECT_ORGANIZATION' | translate }}</ng-template>
+            <div class="step-container">
+                <ccr-organization-search
+                [permissions]="targetOrganizationPerms"
+                [showEmptyOption]="false"
+                [strict]="true"
+                fxFlex
+                (select)="selectOrganization($event)">
+                </ccr-organization-search>
+            </div>
+        </mat-step>
     </mat-horizontal-stepper>
 
     <div [hidden]="status !== 'processing'" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px">
@@ -82,7 +95,7 @@
     <div *ngIf="status === 'ready'">
         <button
         *ngIf="!isOnLastStep()"
-        [disabled]="form.controls.targetFolder.invalid || form.controls.selectedContents.invalid"
+        [disabled]="nextButtonIsDisabled()"
         mat-button
         class="ccr-button"
         color="primary"

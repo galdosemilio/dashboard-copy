@@ -4,4 +4,5 @@ export interface ContentCopiedEvent {
   to: string
   content: FileExplorerContent
   overrideDetails: FileExplorerContent
+  organizationId: string
 }

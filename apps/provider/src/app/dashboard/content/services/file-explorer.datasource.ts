@@ -137,7 +137,7 @@ export class FileExplorerDatasource extends TableDataSource<
       const copiedSingle = await this.database
         .copyContent({
           id: args.content.id,
-          organization: this.context.organizationId,
+          organization: args.organizationId || this.context.organizationId,
           parentId: args.to || undefined,
           mode: args.overrideDetails.isPublic ? 'public' : 'private'
         })
