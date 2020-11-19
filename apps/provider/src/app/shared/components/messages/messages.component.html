@@ -48,7 +48,7 @@
 </div>
 
 <div class="messages-footer" fxFlex="nogrow">
-  <textarea rows="2" [(ngModel)]="newMessage" [detectKey]="'Enter'" supressOnShiftKeyHold="true" (keyPressed)="sendMessage()"
+  <textarea rows="3" [(ngModel)]="newMessage" [detectKey]="'Enter'" supressOnShiftKeyHold="true" (keyPressed)="sendMessage()"
     [placeholder]="'BOARD.TYPE_YOUR_MESSAGES_HERE' | translate"></textarea>
   <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
     <mat-icon>send</mat-icon> {{'GLOBAL.SEND' | translate}}

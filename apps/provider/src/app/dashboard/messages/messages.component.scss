@@ -2,6 +2,11 @@
   height: 100%;
 }
 
+ccr-messages,
+.ccr-recipients {
+  max-height: 75vh;
+}
+
 .messaging-disabled {
   background-color: var(--primary-lighten);
   padding: 10px 10px;
