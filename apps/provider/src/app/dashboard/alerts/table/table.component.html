@@ -4,9 +4,14 @@
 
     <ng-container cdkColumnDef="name">
       <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" (click)="showDieter(row.triggeredBy)" class="patient-link">
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'BOARD.NAME' | translate }}</span>
-        {{ row.triggeredBy.firstName }} {{ row.triggeredBy.lastName }}
+        <span
+          class="patient-link"
+          (click)="showDieter(row.triggeredBy)">
+          {{ row.triggeredBy.firstName }} {{ row.triggeredBy.lastName }}
+        </span>
+        <mat-icon class="new-tab-link" (click)="showDieter(row.triggeredBy, true)">open_in_new</mat-icon>
       </mat-cell>
     </ng-container>
 

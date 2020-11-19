@@ -61,9 +61,19 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
       : alertNotification.alertDescription
   }
 
-  showDieter(account: any): void {
-    account.accountType = '3'
-    this.router.navigate([this.context.getProfileRoute(account)])
+  showDieter(account: any, openInNew: boolean = false): void {
+    if (openInNew) {
+      const routeQuery = window.location.href.split('?')[1]
+      window.open(
+        `./accounts/patients/${account.id}${
+          routeQuery ? '?' + routeQuery : ''
+        }`,
+        '_blank'
+      )
+    } else {
+      account.accountType = '3'
+      this.router.navigate([this.context.getProfileRoute(account)])
+    }
   }
 
   onDismiss(row) {
