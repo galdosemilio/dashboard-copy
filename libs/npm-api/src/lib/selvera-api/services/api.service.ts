@@ -4,7 +4,7 @@
 
 import { Inject, Injectable } from '@angular/core'
 import axios, { AxiosResponse } from 'axios'
-import { isEmpty, uniq } from 'lodash'
+import { uniq } from 'lodash'
 import * as qs from 'qs'
 import { Subject } from 'rxjs'
 import * as io from 'socket.io-client'
@@ -40,6 +40,10 @@ class ApiService {
       cookieDomain: environment.cookieDomain
     }
     // this.setEnvironment(environment ? environment : this.environment)
+  }
+
+  public appendHeaders(headers: HeaderOptions): void {
+    this.headers = { ...this.headers, ...headers }
   }
 
   public setAccount(type: AccountTypeId) {

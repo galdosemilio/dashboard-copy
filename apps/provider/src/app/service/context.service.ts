@@ -38,6 +38,7 @@ import { AuthService } from './auth.service'
 import { ConfigService } from './config.service'
 import { EventsService } from './events.service'
 import { LanguageService } from './language.service'
+import { ApiService } from '@coachcare/npm-api/selvera-api/services'
 
 interface CcrOrgPreferencesResponse extends OrgPreferencesResponse {
   comms: CommunicationPreferenceSingle
@@ -63,6 +64,7 @@ export type SelectedOrganization = OrganizationWithAddress & {
 @Injectable()
 export class ContextService {
   constructor(
+    private api: ApiService,
     private store: Store<CCRConfig>,
     private ui: Store<UIState>,
     private accservice: AccountProvider,
@@ -240,6 +242,8 @@ export class ContextService {
           defaultOrganization: organization.id
         })
       }
+
+      this.api.appendHeaders({ organization: organization.id })
     } catch (e) {}
 
     this.organization$.next(organization)

@@ -51,7 +51,14 @@ export class ApiOptionsModel implements ApiOptions {
 
     Object.keys(headers).forEach((key) => {
       const header = upperFirst(key.split(/(?=[A-Z])/g).join('-'))
-      this.headers[`X-Selvera-${header}`] = headers[key] as string
+
+      switch (key) {
+        case 'organization':
+          this.headers[`X-CoachCare-${header}`] = headers[key] as string
+          break
+        default:
+          this.headers[`X-Selvera-${header}`] = headers[key] as string
+      }
     })
 
     if (apiOptions.headers) {

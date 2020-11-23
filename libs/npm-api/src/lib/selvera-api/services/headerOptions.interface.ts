@@ -17,4 +17,5 @@ export interface HeaderOptions {
   readonly timezone?: string
   readonly systemVersion?: string
   readonly platformVersion?: string
+  readonly organization?: string
 }
