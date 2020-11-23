@@ -96,8 +96,8 @@ function verifyTable(hasActions: boolean) {
   cy.url().should(
     'eq',
     hasActions
-      ? 'http://localhost:4200/accounts/coaches/6'
-      : 'http://localhost:4200/accounts/coaches'
+      ? `${Cypress.env('baseUrl')}/accounts/coaches/6`
+      : `${Cypress.env('baseUrl')}/accounts/coaches`
   )
 
   cy.tick(10000)

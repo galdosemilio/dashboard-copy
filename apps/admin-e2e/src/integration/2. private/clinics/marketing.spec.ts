@@ -218,7 +218,7 @@ describe('Clinic Marketing List Management', function () {
     cy.wait(2000)
   })
 
-  it('Allows admins to retroactively enroll one provider', function () {
+  it.only('Allows admins to retroactively enroll one provider', function () {
     standardSetup(true)
 
     cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`)

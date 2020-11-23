@@ -35,7 +35,11 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js"
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
+    "cy-serve:provider": "concurrently \"yarn start:provider --live-reload=false --watch=false\" \"sleep 240s && yarn cy:provider\" --kill-others --success=first",
+    "cy-serve:admin": "concurrently \"yarn start:admin --live-reload=false --watch=false\" \"sleep 240s && yarn cy:admin\" --kill-others --success=first",
+    "cy:provider": "node --max-old-space-size=6144 ./node_modules/.bin/cypress run --project './apps/provider-e2e' --config-file './cypress.ci.json' --headless --record --parallel --key $CYPRESS_PROVIDER_RECORD_KEY",
+    "cy:admin": "node --max-old-space-size=6144 ./node_modules/.bin/cypress run --project './apps/admin-e2e' --config-file './cypress.json' --headless --record --parallel --key $CYPRESS_ADMIN_RECORD_KEY"
   },
   "private": true,
   "dependencies": {
@@ -95,6 +99,7 @@
     "@types/jest": "26.0.14",
     "@types/node": "^14.14.6",
     "codelyzer": "~6.0.0",
+    "concurrently": "^5.3.0",
     "cypress": "^5.2.0",
     "dotenv": "8.2.0",
     "eslint": "7.9.0",

@@ -65,7 +65,7 @@ describe('Dashboard -> Clinics', function () {
 
     cy.location().should((loc) => {
       expect(loc.href).to.equal(
-        `http://localhost:4201/accounts/clinics/${Cypress.env('clinicId')}`
+        `${Cypress.env('baseUrl')}/accounts/clinics/${Cypress.env('clinicId')}`
       )
     })
   })

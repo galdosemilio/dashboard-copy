@@ -6,17 +6,19 @@ orbs:
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:10.16.3
+    - image: cypress/browsers:node14.15.0-chrome86-ff82
+      environment:
+        TZ: 'America/New_York'
   resource_class: large
 
 yarn_auth: &yarn_auth
   name: Set up .npmrc (auth)
   command: |
-    sudo echo "registry=https://$NPM_REGISTRY" > ~/.npmrc
-    sudo echo "//$NPM_REGISTRY:_authToken=\"$NPM_AUTH_TOKEN\"" >> ~/.npmrc
-    sudo echo "//$NPM_REGISTRY:always-auth=true" >> ~/.npmrc
-    sudo echo "//npm.pkg.github.com/:_authToken=\"$COACHCARE_AUTH_TOKEN\"" >> ~/.npmrc
-    sudo echo "@coachcare:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+    echo "registry=https://$NPM_REGISTRY" > ~/.npmrc
+    echo "//$NPM_REGISTRY:_authToken=\"$NPM_AUTH_TOKEN\"" >> ~/.npmrc
+    echo "//$NPM_REGISTRY:always-auth=true" >> ~/.npmrc
+    echo "//npm.pkg.github.com/:_authToken=\"$COACHCARE_AUTH_TOKEN\"" >> ~/.npmrc
+    echo "@coachcare:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
 npm_dependency_installation: &npm_dependency_installation
   name: Installing NPM dependencies
@@ -138,6 +140,32 @@ jobs:
           name: Format Check
           command: yarn format:check
 
+  provider_e2e_parallel:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Installing Cypress ad-hoc
+          command: ./node_modules/.bin/cypress install
+      - run:
+          name: Running affected e2e
+          command: yarn run cy-serve:provider
+    parallelism: 5
+
+  admin_e2e_parallel:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Installing Cypress ad-hoc
+          command: ./node_modules/.bin/cypress install
+      - run:
+          name: Running affected e2e
+          command: yarn run cy-serve:admin
+    parallelism: 3
+
 workflows:
   setup_build_deploy:
     jobs:
@@ -181,6 +209,20 @@ workflows:
                 - master
           requires:
             - approve_affected_e2e
+      - approve_e2e_parallel:
+          type: approval
+          requires:
+            - affected_build
+          filters:
+            branches:
+              only:
+                - master
+      - admin_e2e_parallel:
+          requires:
+            - approve_e2e_parallel
+      - provider_e2e_parallel:
+          requires:
+            - approve_e2e_parallel
       - full_build:
           mode: test
           name: full_test_build

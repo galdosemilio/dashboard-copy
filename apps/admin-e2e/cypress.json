@@ -1,4 +1,6 @@
 {
+  "baseUrl": "http://localhost:4200",
+  "projectId": "uxcakh",
   "fileServerFolder": ".",
   "fixturesFolder": "./src/fixtures",
   "integrationFolder": "./src/integration",

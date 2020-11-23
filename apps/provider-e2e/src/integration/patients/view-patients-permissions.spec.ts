@@ -10,7 +10,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
     cy.get('dieter-listing-no-phi').should(
       'contain',
       'Your account does not have permission to access this feature'
@@ -25,7 +25,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients/nophi`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
 
     cy.get('dieter-listing-no-phi').should('exist')
   })
@@ -39,7 +39,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
 
     cy.get('dieter-listing-no-phi').should(
       'contain',
@@ -55,7 +55,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients/nophi`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
 
     cy.get('dieter-listing-no-phi').should('exist')
   })
@@ -69,7 +69,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
 
     cy.get('dieter-listing-no-phi').should(
       'contain',
@@ -86,7 +86,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients/nophi`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
 
     cy.get('dieter-listing-no-phi').should('exist')
   })
@@ -100,7 +100,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
 
     cy.clock().tick(10000)
 
@@ -125,7 +125,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients/nophi`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients/nophi')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients/nophi`)
 
     cy.get('dieter-listing-no-phi').should('exist')
   })
@@ -139,7 +139,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients`)
 
     cy.get('[data-cy="new-patient-button"]').should('not.be.visible')
 
@@ -167,7 +167,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients/nophi`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients`)
 
     cy.clock().tick(10000)
 
@@ -182,7 +182,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients`)
 
     cy.clock().tick(10000)
 
@@ -208,7 +208,7 @@ describe('Validate permissions on patient listing page', function () {
       }
     ])
     cy.visit(`/accounts/patients/nophi`)
-    cy.url().should('eq', 'http://localhost:4200/accounts/patients')
+    cy.url().should('eq', `${Cypress.env('baseUrl')}/accounts/patients`)
 
     cy.clock().tick(10000)
 

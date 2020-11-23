@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:4200",
+  "baseUrl": "http://localhost:4201",
   "defaultCommandTimeout": 60000,
   "pageLoadTimeout": 120000,
   "numTestsKeptInMemory": 3,
@@ -15,7 +15,7 @@
     "providerIdOther": 2,
     "sequenceId": 1,
     "timezone": "et",
-    "baseUrl": "http://localhost:4200"
+    "baseUrl": "http://localhost:4201"
   },
   "projectId": "ktdwx5",
   "fileServerFolder": ".",
