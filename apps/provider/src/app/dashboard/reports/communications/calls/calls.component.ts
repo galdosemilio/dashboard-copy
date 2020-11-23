@@ -148,11 +148,11 @@ export class CallsComponent implements OnDestroy, OnInit {
         )}"${separator}`
         csv += `"${call.time.duration} minutes"${separator}`
 
-        csv += `"`
         call.participants.forEach((participant, index) => {
-          csv += `${participant.firstName} ${participant.lastName} (ID: ${participant.id})`
+          csv += `"`
+          csv += `${participant.firstName} ${participant.lastName} (ID: ${participant.id})"`
           if (index < call.participants.length - 1) {
-            csv += `"${separator}`
+            csv += `${separator}`
           }
         })
         csv += `\r\n`
