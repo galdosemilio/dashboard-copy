@@ -72,11 +72,19 @@ export interface ActiveRPMItem {
   deviceProvidedAt: string
   educationProvidedAt: string
   isActive: boolean
+  reason?: {
+    description: string
+    id: string
+  }
 }
 
 export interface InactiveRPMItem {
   changedAt: string
   deactivationReason?: {
+    description: string
+    id: string
+  }
+  reason?: {
     description: string
     id: string
   }

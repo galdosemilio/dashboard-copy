@@ -156,7 +156,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       csv += `"As of: ${currentAsOf.format('MMM D, YYYY')}"\r\n`
 
       csv +=
-        ',,,,,,,,,"Eligibility","Eligibility","Eligibility","Eligibility","All Codes",'
+        ',,,,,,,,,,"Eligibility","Eligibility","Eligibility","Eligibility","All Codes",'
 
       res[0].billing.forEach(
         (billingEntry, billingEntryIndex, billingEntries) => {
@@ -193,6 +193,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         'Organization Name' +
         this.csvSeparator +
         'Status' +
+        this.csvSeparator +
+        'State Change Reason' +
         this.csvSeparator +
         'Deactivation Date' +
         this.csvSeparator +
@@ -247,6 +249,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           `"${entry.organization.name}"` +
           this.csvSeparator +
           `"${entry.rpm.isActive ? 'Active' : 'Inactive'}"` +
+          this.csvSeparator +
+          `"${entry.rpm.reason ? entry.rpm.reason.description : 'N/A'}"` +
           this.csvSeparator +
           `"${
             entry.rpm.isActive
