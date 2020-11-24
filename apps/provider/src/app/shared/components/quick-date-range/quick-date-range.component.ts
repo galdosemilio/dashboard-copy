@@ -114,20 +114,20 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
         this.format
           ? {
               start: moment()
-                .startOf('month')
                 .subtract(1, 'month')
+                .startOf('month')
                 .format(this.format),
               end: moment()
-                .endOf('month')
                 .subtract(1, 'month')
+                .endOf('month')
                 .format(this.format)
             }
           : {
               start: moment()
-                .startOf('month')
                 .subtract(1, 'month')
+                .startOf('month')
                 .toISOString(),
-              end: moment().endOf('month').subtract(1, 'month').toISOString()
+              end: moment().subtract(1, 'month').endOf('month').toISOString()
             }
     },
     {
@@ -143,7 +143,10 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
               end: moment().endOf('month').format(this.format)
             }
           : {
-              start: moment().subtract(2, 'month').toISOString(),
+              start: moment()
+                .startOf('month')
+                .subtract(2, 'month')
+                .toISOString(),
               end: moment().endOf('month').toISOString()
             }
     },
@@ -160,7 +163,10 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
               end: moment().endOf('day').format(this.format)
             }
           : {
-              start: moment().subtract(12, 'month').toISOString(),
+              start: moment()
+                .startOf('month')
+                .subtract(12, 'month')
+                .toISOString(),
               end: moment().endOf('day').toISOString()
             }
     },

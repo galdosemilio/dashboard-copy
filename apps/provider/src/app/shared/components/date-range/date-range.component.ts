@@ -124,7 +124,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
 
   get interval(): [number, unitOfTime.DurationConstructor] {
     const diff = moment(this._end).diff(this._start, 'days')
-    return diff >= 28 && diff <= 31 ? [1, 'month'] : [diff, 'days']
+    return diff >= 28 ? [1, 'month'] : [diff, 'days']
   }
 
   onQuickSelect(dateRange): void {
@@ -152,14 +152,14 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
       return
     }
 
-    const diff = this.interval
+    const [count, timeUnit] = this.interval
 
     if (next) {
-      this._start.add(diff[0], diff[1])
-      this._end.add(diff[0], diff[1])
+      this._start.add(count, timeUnit).startOf(timeUnit)
+      this._end.add(count, timeUnit).endOf(timeUnit)
     } else {
-      this._start.subtract(diff[0], diff[1])
-      this._end.subtract(diff[0], diff[1])
+      this._start.subtract(count, timeUnit).startOf(timeUnit)
+      this._end.subtract(count, timeUnit).endOf(timeUnit)
     }
 
     this.processAndEmit()
