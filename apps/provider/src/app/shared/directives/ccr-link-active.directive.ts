@@ -25,6 +25,8 @@ import { untilDestroyed } from 'ngx-take-until-destroy'
 })
 export class CcrLinkActiveDirective
   implements AfterContentInit, DoCheck, OnChanges, OnDestroy {
+  @Input() urlLinks: string[] = []
+
   @ContentChildren(RouterLink, { descendants: true })
   links: QueryList<RouterLink>
 
@@ -82,6 +84,7 @@ export class CcrLinkActiveDirective
     if (!this.links || !this.linksWithHrefs || !this.router.navigated) {
       return
     }
+
     const hasActiveLinks = this.hasActiveLinks()
 
     // react only when status has changed to prevent unnecessary dom updates
@@ -107,7 +110,8 @@ export class CcrLinkActiveDirective
   private hasActiveLinks(): boolean {
     return (
       this.links.some(this.isLinkActive(this.router)) ||
-      this.linksWithHrefs.some(this.isLinkActive(this.router))
+      this.linksWithHrefs.some(this.isLinkActive(this.router)) ||
+      this.urlLinks.some((urlLink) => this.router.url.indexOf(urlLink) > -1)
     )
   }
 

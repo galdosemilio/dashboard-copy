@@ -67,16 +67,17 @@
 </div>
 
 <div class="ccr-tabs" fxFlex="nogrow" fxLayout="row" fxLayoutAlign=" stretch">
-  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['dashboard']">{{'GLOBAL.DASHBOARD' | translate}}</a>
-  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['journal']">{{'GLOBAL.JOURNAL' | translate}}</a>
-  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['measurements']">{{'GLOBAL.MEASUREMENTS' | translate}}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['dashboard']" [routerLink]="['dashboard']">{{'GLOBAL.DASHBOARD' | translate}}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['journal']" [routerLink]="['journal']">{{'GLOBAL.JOURNAL' | translate}}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['measurements']" [routerLink]="['measurements']">{{'GLOBAL.MEASUREMENTS' | translate}}</a>
   <a
   *ngIf="showMessaging"
   fxFlex
   fxLayoutAlign="center center"
   ccrLinkActive="active"
+  [urlLinks]="['messages']"
   [routerLink]="['messages']">{{'GLOBAL.MESSAGES' | translate}}</a>
-  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [routerLink]="['settings']">{{'GLOBAL.MORE' | translate}}</a>
+  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['settings']" [routerLink]="['settings']">{{'GLOBAL.MORE' | translate}}</a>
 </div>
 
 <div class="ccr-subcomponent" fxFlex="grow">
