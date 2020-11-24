@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, ViewChild } from '@angular/core'
 import { AccountAvatar, SubmitAccountAvatarRequest } from '@coachcare/npm-api'
-import { _ } from '@coachcare/backend/shared'
+import { _ } from '@coachcare/common/shared'
 import { AvatarDirective } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 

@@ -1,4 +1,5 @@
-import { _, SelectorOption } from '@coachcare/backend/shared'
+import { _ } from '@coachcare/common/shared/utils'
+import { SelectorOption } from '@coachcare/common/shared/interfaces'
 
 export const PHONE_TYPES: Array<SelectorOption> = [
   {

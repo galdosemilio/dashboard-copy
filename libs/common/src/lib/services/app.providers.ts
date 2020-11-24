@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http'
 // tslint:disable-next-line:no-unused-variable
 import { APP_INITIALIZER, InjectionToken, LOCALE_ID } from '@angular/core'
 import { RouteReuseStrategy } from '@angular/router'
-import { FormUtils, ViewUtils } from '@coachcare/backend/shared'
 import {
   APP_CONFIG,
   APP_ENVIRONMENT,
   AppConfig,
   AppEnvironment,
-  API_ENVIRONMENT
+  API_ENVIRONMENT,
+  FormUtils,
+  ViewUtils
 } from '@coachcare/common/shared'
 // tslint:disable-next-line:no-unused-variable
 import {

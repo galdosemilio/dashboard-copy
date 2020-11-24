@@ -2,7 +2,7 @@
  * Angular Environment
  */
 import { InjectionToken } from '@angular/core'
-import { ApiEnvironment } from '@coachcare/backend/shared'
+import { ApiEnvironment } from '@coachcare/common/shared/api.environment'
 
 /**
  * Environment Injection Token

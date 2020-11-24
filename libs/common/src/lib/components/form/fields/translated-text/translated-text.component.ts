@@ -9,7 +9,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSelectChange } from '@coachcare/material'
-import { SelectorOption } from '@coachcare/backend/shared'
+import { SelectorOption } from '@coachcare/common/shared'
 import { LanguageService } from '@coachcare/common/services'
 import { LOCALES } from '@coachcare/common/shared'
 import { differenceWith } from 'lodash'

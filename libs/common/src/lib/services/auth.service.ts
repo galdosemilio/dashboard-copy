@@ -1,8 +1,11 @@
 import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { ApiService } from '@coachcare/npm-api'
-import { CcrRol } from '@coachcare/backend/shared'
-import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'
+import {
+  APP_ENVIRONMENT,
+  AppEnvironment,
+  CcrRol
+} from '@coachcare/common/shared'
 import { STORAGE_ADMIN_URL, STORAGE_PROVIDER_URL } from './cookie.service'
 
 /**

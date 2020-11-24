@@ -3,7 +3,7 @@ import { MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
 import { untilDestroyed } from 'ngx-take-until-destroy'
 
-import { _, TranslationsObject } from '@coachcare/backend/shared'
+import { _, TranslationsObject } from '@coachcare/common/shared'
 import { ConfirmDialog } from '@coachcare/common/dialogs/core'
 
 @Component({

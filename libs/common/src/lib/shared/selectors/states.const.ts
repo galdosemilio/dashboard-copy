@@ -1,4 +1,4 @@
-import { TranslatedOption } from '@coachcare/backend/shared'
+import { TranslatedOption } from '@coachcare/common/shared/interfaces'
 
 export interface StateSegment extends TranslatedOption {
   viewValue: {

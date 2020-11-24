@@ -1,4 +1,4 @@
-import { CcrRolesMap } from '@coachcare/backend/shared'
+import { CcrRolesMap } from '@coachcare/common/shared'
 import { Actions, ActionTypes } from './actions'
 import { initialState, State } from './state'
 

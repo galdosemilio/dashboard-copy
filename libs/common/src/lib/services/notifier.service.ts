@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@coachcare/material'
-import { _ } from '@coachcare/backend/shared'
+import { _ } from '@coachcare/common/shared'
 import { ConfirmDialog } from '@coachcare/common/dialogs/core'
 import { TranslateService } from '@ngx-translate/core'
 import { ConfigService } from './config.service'

@@ -7,7 +7,7 @@ import {
   OnInit
 } from '@angular/core'
 import { AppDataSource } from '@coachcare/backend/model'
-import { _ } from '@coachcare/backend/shared'
+import { _ } from '@coachcare/common/shared'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 

@@ -6,13 +6,15 @@ import {
   TranslateLoader,
   TranslateModule
 } from '@ngx-translate/core'
-
-import { MissingStringsHandler } from '@coachcare/backend/shared'
 import {
   I18N_CATALOGS,
   TranslateLoaderFactory
 } from '@coachcare/common/services'
-import { AppLocaleCode, locales } from '@coachcare/common/shared'
+import {
+  AppLocaleCode,
+  locales,
+  MissingStringsHandler
+} from '@coachcare/common/shared'
 
 // register supported locales
 locales.forEach(async (code: AppLocaleCode) => {

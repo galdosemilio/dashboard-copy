@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-import { _ } from '@coachcare/backend/shared'
+import { _ } from '@coachcare/common/shared'
 import { PromptDialogData } from './prompt-data.interface'
 
 @Component({

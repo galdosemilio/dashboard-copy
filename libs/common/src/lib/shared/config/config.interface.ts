@@ -2,7 +2,7 @@
  * Application Configuration
  */
 import { InjectionToken } from '@angular/core'
-import { DataObject } from '@coachcare/backend/shared'
+import { DataObject } from '@coachcare/common/shared'
 import { MenuItem } from '../tokens/ccr.menu'
 import { AppLocaleCode } from './i18n.config'
 

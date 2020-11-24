@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 
 import { AccountSingle, ApiService } from '@coachcare/npm-api'
-import { _ } from '@coachcare/backend/shared'
+import { _ } from '@coachcare/common/shared'
 import {
   AppSettings,
   loc2API,
