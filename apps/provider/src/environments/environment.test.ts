@@ -1,9 +1,9 @@
 import { Environment } from './environment.interface'
 
 export const environment: Environment = {
-  apiUrl: 'https://api.coachcaredev.com/',
+  apiUrl: 'https://test.api.coachcare.com/',
   appName: 'ccr-web',
-  cookieDomain: 'api.coachcaredev.com',
+  cookieDomain: 'test.api.coachcare.com',
   loginSite: 'https://test.dashboard.coachcare.com',
   production: true,
   role: 'provider',

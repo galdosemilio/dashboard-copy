@@ -1,5 +1,5 @@
 import { Config } from '../interfaces'
 
 export const config: Config = {
-  apiUrl: 'https://api.coachcaredev.com/'
+  apiUrl: 'https://test.api.coachcare.com/'
 }

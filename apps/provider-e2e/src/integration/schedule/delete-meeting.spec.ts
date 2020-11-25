@@ -33,7 +33,10 @@ describe('Schedule -> delete meeting', function () {
     // check that delete call was made for single meeting with meeting id meetingId (id is last meeting id from meeting/getListing.json fixture)
     cy.wait('@deleteMeeting')
       .its('url')
-      .should('equal', 'https://api.coachcaredev.com/2.0/meeting/single/18073')
+      .should(
+        'equal',
+        'https://test.api.coachcare.com/2.0/meeting/single/18073'
+      )
 
     // The modal should be closed. The table behind is not updated since the listing is mocked.
     cy.get('.mat-dialog-content').should('not.exist')
@@ -200,13 +203,13 @@ function verifyDeleteApiCall(option: Option): void {
   switch (option) {
     case 'schedule-delete-after':
       url =
-        'https://api.coachcaredev.com/2.0/meeting/recurring/18073?after=2019-12-31T05:00:00.000Z'
+        'https://test.api.coachcare.com/2.0/meeting/recurring/18073?after=2019-12-31T05:00:00.000Z'
       break
     case 'schedule-delete-this-and-future':
-      url = 'https://api.coachcaredev.com/2.0/meeting/recurring/18073'
+      url = 'https://test.api.coachcare.com/2.0/meeting/recurring/18073'
       break
     case 'schedule-delete-this-meeting':
-      url = 'https://api.coachcaredev.com/2.0/meeting/single/18073'
+      url = 'https://test.api.coachcare.com/2.0/meeting/single/18073'
       break
   }
 
