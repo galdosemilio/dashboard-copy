@@ -14,7 +14,7 @@ import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
-import pdfMake from 'pdfmake'
+import * as pdfMake from 'pdfmake'
 import { first } from 'rxjs/operators'
 import {
   AccountProvider,
