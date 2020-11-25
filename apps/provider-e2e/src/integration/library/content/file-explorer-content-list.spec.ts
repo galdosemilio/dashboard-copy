@@ -149,6 +149,16 @@ describe('Dashboard -> Digital Library', function () {
     goToNextStep()
     goToNextStep()
     selectAvailability('Public')
+
+    cy.get('mat-dialog-container')
+      .find('.mat-select-trigger')
+      .trigger('click', { force: true })
+      .wait(500)
+
+    cy.get('.mat-option').eq(0).trigger('click')
+    cy.tick(1000)
+
+    goToNextStep()
     cloneContent()
 
     cy.wait('@contentCopyRequest').should((xhr) => {
@@ -174,6 +184,16 @@ describe('Dashboard -> Digital Library', function () {
     goToNextStep()
     goToNextStep()
     selectAvailability('Public')
+
+    cy.get('mat-dialog-container')
+      .find('.mat-select-trigger')
+      .trigger('click', { force: true })
+      .wait(500)
+
+    cy.get('.mat-option').eq(0).trigger('click')
+    cy.tick(1000)
+
+    goToNextStep()
 
     cloneContent()
 
