@@ -18,4 +18,5 @@ export interface ApiOptions {
   readonly withCredentials?: boolean
   environment?: Environment
   fullError?: boolean
+  omitHeaders?: string[]
 }

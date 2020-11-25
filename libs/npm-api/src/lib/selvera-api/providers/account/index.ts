@@ -218,7 +218,8 @@ class Account {
       endpoint: '/access/account',
       method: 'GET',
       data: accListRequest,
-      version: '2.0'
+      version: '2.0',
+      omitHeaders: ['organization']
     })
   }
 

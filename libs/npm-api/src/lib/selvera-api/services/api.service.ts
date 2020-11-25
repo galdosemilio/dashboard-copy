@@ -198,10 +198,23 @@ class ApiService {
         }
       }
 
+      let filteredHeaders
+
+      if (options.omitHeaders) {
+        filteredHeaders = Object.keys(this.headers)
+          .filter((key) => !options.omitHeaders.includes(key))
+          .reduce((obj, key) => {
+            obj[key] = this.headers[key]
+            return obj
+          }, {})
+      } else {
+        filteredHeaders = this.headers
+      }
+
       const apiOptions = new ApiOptionsModel(
         options,
         this.apiUrl,
-        this.headers,
+        filteredHeaders,
         this.token,
         this.account
       )
