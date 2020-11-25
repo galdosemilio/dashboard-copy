@@ -129,6 +129,7 @@
     "FIBER": "Ballaststoffe",
     "FILL_PHYSICIAN_FORM": "Bitte füllen Sie ein Formular für einen Hausarzt aus.",
     "FILTER_BY_PACKAGE": "",
+    "FILTER_BY_PATIENT_NAME": "Name Filtern oder Nachname",
     "FIRST_NAME": "Vorname",
     "FOREIGN_PATIENT_DESCRIPTION": "Die in der oberen linken Ecke des Dashboards ausgewählte Klinik wirkt sich auf das angezeigte Design und die Funktionen aus. Der Patient, den Sie anzeigen, ist nicht in oder unter der ausgewählten Klinik zugeordnet. Daher können bestimmte Funktionen oder Daten aufgrund der Einstellungen der ausgewählten Klinik unerwartet ausgeblendet oder angezeigt werden. Sie können die Kliniken, denen dieser Patient zugeordnet ist, auf der Registerkarte Mehr -> Kliniken anzeigen.",
     "FOREIGN_PATIENT_SHORT": "Dieser Patient ist nicht mit der ausgewählten Klinik verbunden. Einige Funktionen oder Einstellungen werden möglicherweise nicht richtig angezeigt.",

@@ -9,6 +9,7 @@ export interface FetchRPMBillingSummaryRequest {
   organization: string
   limit?: number | 'all'
   offset?: number
+  query?: string
   sort?: RPMBillingSummarySort[]
   status?: 'active' | 'inactive' | 'all'
 }

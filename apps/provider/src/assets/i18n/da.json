@@ -129,6 +129,7 @@
     "FIBER": "Fiber",
     "FILL_PHYSICIAN_FORM": "Udfyld venligst en formular til primærpleje.",
     "FILTER_BY_PACKAGE": "Filtrer efter fase",
+    "FILTER_BY_PATIENT_NAME": "Filtrer efter Navn eller efternavn",
     "FIRST_NAME": "Fornavn",
     "FOREIGN_PATIENT_DESCRIPTION": "Den klinik, der er valgt i øverste venstre hjørne af instrumentbrættet, påvirker det viste design og funktioner. Patienten, du ser, er ikke tilknyttet eller under den valgte klinik; som sådan kan visse funktioner eller data blive uventet skjult eller vist på baggrund af den valgte kliniks indstillinger. Du kan se de klinikker, som denne patient er knyttet til under fanen Mere -> Klinikker.",
     "FOREIGN_PATIENT_SHORT": "Denne patient er ikke tilknyttet den valgte klinik. Nogle funktioner eller indstillinger vises muligvis ikke korrekt.",

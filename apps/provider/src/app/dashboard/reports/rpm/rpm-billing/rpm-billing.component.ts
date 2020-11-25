@@ -52,6 +52,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     asOf: moment().format('YYYY-MM-DD')
   }
   public csvSeparator = ','
+  public searchForm: FormGroup
   public statusFilterForm: FormGroup
   public source: RPMBillingDataSource
 
@@ -90,6 +91,10 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         status: this.statusFilterForm.value.status || 'all'
       })
     )
+    this.source.addOptional(
+      this.searchForm.controls.query.valueChanges.pipe(debounceTime(500)),
+      () => ({ query: this.searchForm.value.query || undefined })
+    )
     this.source.addOptional(this.context.organization$, () => ({
       organization: this.context.organizationId
     }))
@@ -114,6 +119,10 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       })
 
     this.refresh$.next()
+  }
+
+  public clearSearchForm(): void {
+    this.searchForm.reset()
   }
 
   public async downloadCSV(): Promise<void> {
@@ -444,6 +453,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
 
   private createStatusFilterForm(): void {
     this.statusFilterForm = this.fb.group({ status: ['active'] })
+    this.searchForm = this.fb.group({ query: [''] })
   }
 
   private getRemainingMetricString(value: number, type: string): string {

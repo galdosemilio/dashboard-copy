@@ -129,6 +129,7 @@
     "FIBER": "Fibre",
     "FILL_PHYSICIAN_FORM": "Veuillez remplir un formulaire de médecin de premier recours.",
     "FILTER_BY_PACKAGE": "",
+    "FILTER_BY_PATIENT_NAME": "Filtrer par Nom ou Nom",
     "FIRST_NAME": "Prénom",
     "FOREIGN_PATIENT_DESCRIPTION": "La clinique sélectionnée dans le coin supérieur gauche du tableau de bord a un impact sur la conception et les fonctionnalités affichées. Le patient que vous consultez n'est pas associé à ou en dessous de la clinique sélectionnée; en tant que tel, certaines fonctionnalités ou données peuvent être masquées ou affichées de manière inattendue en fonction des paramètres de la clinique sélectionnée. Vous pouvez afficher les cliniques auxquelles ce patient est associé dans l'onglet Plus -> Cliniques.",
     "FOREIGN_PATIENT_SHORT": "Ce patient n'est pas associé à la clinique sélectionnée. Certaines fonctionnalités ou certains paramètres peuvent ne pas s'afficher correctement.",

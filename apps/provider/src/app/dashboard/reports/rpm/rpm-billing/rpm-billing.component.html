@@ -1,25 +1,45 @@
 <div class="report-heading">
-    <mat-icon>receipt</mat-icon>
-    <h3 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-        <span>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</span>
-        <ccr-walkthrough [autoClose]="false" guide="rpm"></ccr-walkthrough>
-    </h3>
+    <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayout="start center">
+            <mat-icon class="title-icon">receipt</mat-icon>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-        <button
-        [disabled]="!source.isLoaded || source.isEmpty"
-        (click)="downloadCSV()"
-        mat-button class="ccr-align-center">
-            {{ 'REPORTS.EXPORT_CSV' | translate }}
-            <mat-icon>file_download</mat-icon>
-        </button>
+            <h3 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <span>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</span>
+                <ccr-walkthrough [autoClose]="false" guide="rpm"></ccr-walkthrough>
+            </h3>
+        </div>
 
-        <ccr-paginator fxFlex="nogrow" #paginator
-        [length]="source.total"
-        [pageIndex]="source.pageIndex"
-        [pageSize]="source.pageSize"
-        (page)="source.pageIndex = $event.pageIndex"
-      ></ccr-paginator>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field
+            [formGroup]="searchForm"
+            fxFlex>
+                <input
+                [placeholder]="'BOARD.FILTER_BY_PATIENT_NAME' | translate"
+                formControlName="query"
+                matInput
+                type="text">
+                <mat-icon
+                *ngIf="searchForm?.value.query"
+                (click)="clearSearchForm()"
+                class="clickable"
+                matSuffix>cancel</mat-icon>
+            </mat-form-field>
+
+            <button
+            [disabled]="!source.isLoaded || source.isEmpty"
+            (click)="downloadCSV()"
+            mat-button class="ccr-align-center">
+                {{ 'REPORTS.EXPORT_CSV' | translate }}
+                <mat-icon>file_download</mat-icon>
+            </button>
+
+            <ccr-paginator fxFlex="nogrow" #paginator
+            [length]="source.total"
+            [pageIndex]="source.pageIndex"
+            [pageSize]="source.pageSize"
+            (page)="source.pageIndex = $event.pageIndex"
+          ></ccr-paginator>
+        </div>
     </div>
 </div>
 

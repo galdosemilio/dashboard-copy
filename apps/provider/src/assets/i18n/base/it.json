@@ -129,6 +129,7 @@
     "FIBER": "Fibre",
     "FILL_PHYSICIAN_FORM": "Si prega di compilare un modulo medico di assistenza primaria.",
     "FILTER_BY_PACKAGE": "",
+    "FILTER_BY_PATIENT_NAME": "Filtrare per nome o cognome",
     "FIRST_NAME": "Nome",
     "FOREIGN_PATIENT_DESCRIPTION": "La clinica selezionata nell'angolo in alto a sinistra del cruscotto influisce sul design e sulle funzionalità visualizzate. Il paziente che sta visualizzando non è associato o al di sotto della clinica selezionata; come tale, alcune caratteristiche o dati potrebbero essere nascosti o mostrati inaspettatamente in base alle impostazioni della clinica selezionata. È possibile visualizzare le cliniche a cui questo paziente è associato nella scheda Altro -> Cliniche.",
     "FOREIGN_PATIENT_SHORT": "Questo paziente non è associato alla clinica selezionata. Alcune funzioni o impostazioni potrebbero non essere visualizzate correttamente.",

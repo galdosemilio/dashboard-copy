@@ -664,7 +664,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
 const seti18n = (): void => {
   cy.log('Loading i18n en file')
 
-  cy.fixture('assets/i18n/en.json').as('i18n-en')
+  cy.fixture('../../../provider/src/assets/i18n/en.json').as('i18n-en')
   cy.route('GET', '/assets/i18n/en.json', '@i18n-en')
 }
 
