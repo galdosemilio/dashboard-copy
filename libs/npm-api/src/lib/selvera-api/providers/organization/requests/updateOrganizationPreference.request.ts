@@ -25,4 +25,10 @@ export interface UpdateOrganizationPreferenceRequest {
   clinicCodeHelp?: { locale: string; content: string }[]
   iconFilename?: string
   splashFilename?: string
+  /** Onboarding 'phase 0' flow information */
+  onboarding?: { client: { packages: [] } }
+  /** Open association information */
+  openAssociation?: { client: boolean }
+  /** Indicates whether the active campaign is enabled or not */
+  useActiveCampaign?: boolean
 }

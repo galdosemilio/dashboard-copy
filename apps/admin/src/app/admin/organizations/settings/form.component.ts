@@ -100,10 +100,10 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
           : ''
         // reformat the preferences to fill the form
         const { mala, appIds, ...rset } = prefs
-        onboarding = (rset as any).onboarding
+        onboarding = rset.onboarding
         this.clientPackages =
           onboarding && onboarding.client ? [...onboarding.client.packages] : []
-        const { displayName, id, bccEmails } = rset as any
+        const { displayName, id, bccEmails } = rset
 
         if (this.id !== id) {
           this.organizationPreference.create({
@@ -124,8 +124,9 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
             color: prefs.assets ? prefs.assets.color : {},
             bccEmails,
             autoEnrollClientLabelId: this.clientPackages.slice(),
-            openAssociation: (rset as any).openAssociation,
-            clinicCodeHelp: (rset as any).clinicCodeHelp
+            openAssociation: rset.openAssociation,
+            clinicCodeHelp: rset.clinicCodeHelp,
+            useActiveCampaign: rset.useActiveCampaign
           },
           ['bccEmails']
         )

@@ -33,11 +33,7 @@
   },
   "onboarding": {
     "client": {
-      "packages": [
-        "322",
-        "699",
-        "86"
-      ]
+      "packages": ["322", "699", "86"]
     }
   },
   "food": {
@@ -55,11 +51,15 @@
   "sequence": {
     "enabled": true
   },
-  "clinicCodeHelp": [{
-    "locale": "en",
-    "content": "Test text english"
-  }, {
-    "locale": "es",
-    "content": "Test text spanish"
-  }]
+  "clinicCodeHelp": [
+    {
+      "locale": "en",
+      "content": "Test text english"
+    },
+    {
+      "locale": "es",
+      "content": "Test text spanish"
+    }
+  ],
+  "useActiveCampaign": true
 }

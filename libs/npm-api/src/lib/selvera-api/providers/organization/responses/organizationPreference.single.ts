@@ -34,4 +34,14 @@ export interface OrganizationPreferenceSingle {
   appIds: Partial<AppIds>
   /** MALA settings. */
   mala?: any
+  /** Onboarding 'phase 0' flow information */
+  onboarding?: { client: { packages: [] } }
+  /** Array of email addresses to BCC emails */
+  bccEmails?: string[]
+  /** Open association information */
+  openAssociation?: { client: boolean }
+  /** Array of helper texts for organization, returns array of one element matching request language or all (see _locale_ param) */
+  clinicCodeHelp?: { locale: string; content: string }[]
+  /** Indicates whether the active campaign is enabled or not */
+  useActiveCampaign?: boolean
 }

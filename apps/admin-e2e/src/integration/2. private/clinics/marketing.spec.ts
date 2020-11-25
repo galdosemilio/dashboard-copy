@@ -297,4 +297,58 @@ describe('Clinic Marketing List Management', function () {
 
     cy.wait(2000)
   })
+
+  it('Allows enabling Active Campaign for the current clinic and its subclinics', function () {
+    standardSetup(true)
+
+    cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`)
+
+    cy.tick(10000)
+
+    cy.get('ccr-organizations-active-campaign')
+      .find('mat-table')
+      .find('mat-row')
+
+    cy.get('[data-cy="org-marketing-activeCampaign"]')
+      .find('.mat-slide-toggle-input')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('[data-cy="org-marketing-activeCampaign"]')
+      .find('.mat-slide-toggle-input')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.wait('@updateOrgCall').should((xhr) => {
+      expect((xhr.request.body as any).useActiveCampaign).to.equal(false)
+    })
+
+    cy.wait('@updateOrgCall').should((xhr) => {
+      expect((xhr.request.body as any).useActiveCampaign).to.equal(true)
+    })
+  })
+
+  it('Allows disabling Active Campaign for the current clinic and its subclinics', function () {
+    standardSetup(true)
+
+    cy.visit(`/admin/organizations/${Cypress.env('organizationId')}/marketing`)
+
+    cy.tick(10000)
+
+    cy.get('ccr-organizations-active-campaign')
+      .find('mat-table')
+      .find('mat-row')
+
+    cy.get('[data-cy="org-marketing-activeCampaign"]')
+      .find('.mat-slide-toggle-input')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.wait('@updateOrgCall').should((xhr) => {
+      expect((xhr.request.body as any).useActiveCampaign).to.equal(false)
+    })
+  })
 })

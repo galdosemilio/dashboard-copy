@@ -60,19 +60,19 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         this.organizationPreference.update({
           id: this.orgId,
           onboarding: formValue.autoEnroll
-            ? ({
+            ? {
                 client: {
                   packages: formValue.autoEnrollClientLabelId.value
                     ? formValue.autoEnrollClientLabelId.value
                     : []
                 }
-              } as any)
-            : ({ client: { packages: [] } } as any),
+              }
+            : { client: { packages: [] } },
           openAssociation:
             formValue.openAddClient !== null
               ? { client: formValue.openAddClient }
               : { client: null }
-        } as any)
+        })
       )
 
       promises.push(

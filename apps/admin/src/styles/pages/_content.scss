@@ -44,3 +44,17 @@
 .mat-disabled.mat-checked .mat-slide-toggle-bar {
   background-color: lighten(mat-color($ccr-primary), 10%) !important;
 }
+.ccr-marker {
+  color: var(--primary);
+}
+
+.footnotes {
+  color: mat-color($ccr-foreground, secondary-text);
+  font-size: 80%;
+  line-height: 142%;
+  padding: 0 0 0 15px;
+}
+
+p.footnotes {
+  margin: 1em 0;
+}
