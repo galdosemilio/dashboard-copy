@@ -199,6 +199,11 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
             : ''
         }
       })
+
+      const checkResponse = await this.session.check()
+
+      const account = await this.account.getSingle(checkResponse.id)
+      this.store.dispatch(new SessionActions.Login(account))
     } catch (error) {
       this.notify.error(error)
     } finally {
