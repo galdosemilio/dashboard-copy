@@ -9,9 +9,10 @@ import {
   ContentMovedEvent,
   FileExplorerContent
 } from '@app/dashboard/content/models'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FileExplorerBase } from '../file-explorer-base/file-explorer-base'
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-file-explorer-grid',
   templateUrl: './file-explorer-grid.component.html',
@@ -20,7 +21,6 @@ import { FileExplorerBase } from '../file-explorer-base/file-explorer-base'
 export class FileExplorerGridComponent
   extends FileExplorerBase
   implements OnDestroy, OnInit {
-
   @Input() inaccessible?: boolean
 
   public contentDirectories: FileExplorerContent[]

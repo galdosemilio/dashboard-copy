@@ -21,9 +21,10 @@ import {
 } from '@coachcare/common/services'
 import { LOCALES } from '@coachcare/common/shared'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-page-register-clinic-info',
   templateUrl: './info.component.html',

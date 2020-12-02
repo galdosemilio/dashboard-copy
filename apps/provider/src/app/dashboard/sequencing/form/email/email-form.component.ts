@@ -16,9 +16,10 @@ import {
   NG_VALUE_ACCESSOR,
   Validators
 } from '@angular/forms'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'sequencing-email-form',
   templateUrl: './email-form.component.html',

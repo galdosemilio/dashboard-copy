@@ -24,10 +24,11 @@ import { _ } from '@coachcare/backend/shared'
 import { PaginatorComponent } from '@coachcare/common/components'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { ContextService, NotifierService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { CreateLabelDialogComponent } from '../dialogs'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-labels-associations',
   templateUrl: './labels-associations.component.html',

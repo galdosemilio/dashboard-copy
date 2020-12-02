@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { OrganizationPreference } from '@coachcare/npm-api'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-images',
   templateUrl: './images.component.html',

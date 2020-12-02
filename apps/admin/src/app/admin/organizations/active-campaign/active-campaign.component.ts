@@ -7,7 +7,7 @@ import {
 } from '@coachcare/backend/data'
 import { _ } from '@coachcare/backend/shared'
 import { ContextService, NotifierService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import {
   AssociateActiveCampaignDialogComponent,
   EnrollProviderCampaignDialogComponent
@@ -17,6 +17,7 @@ import { OrganizationPreference } from '@coachcare/npm-api'
 import { PromptDialog } from '@coachcare/common/dialogs/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-active-campaign',
   templateUrl: './active-campaign.component.html',

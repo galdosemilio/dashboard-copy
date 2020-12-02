@@ -7,9 +7,10 @@ import {
   PackageDatasource
 } from '@app/shared/components/package-table/services'
 import { OrgSingleResponse } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { CreatePhaseDialog } from '../../dialogs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-clinic-phases',
   templateUrl: './clinic-phases.component.html',

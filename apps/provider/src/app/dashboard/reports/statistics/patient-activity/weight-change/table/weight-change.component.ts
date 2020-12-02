@@ -19,9 +19,10 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-statistics-weight-change-table',
   templateUrl: './weight-change.component.html',

@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 import { StatisticsDatabase } from './statistics.database'
 
@@ -10,6 +10,7 @@ import {
   GenderDemographicsSegment
 } from '@coachcare/npm-api'
 
+@UntilDestroy()
 export class GenderDataSource extends ChartDataSource<
   GenderDemographicsSegment,
   GenderDemographicsRequest

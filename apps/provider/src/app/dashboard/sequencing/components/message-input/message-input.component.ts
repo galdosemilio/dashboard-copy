@@ -21,12 +21,13 @@ import {
   SupportedLocale
 } from '@app/shared/dialogs/languages.locales'
 import { differenceWith, get } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { MessagePreviewDialog } from '../../dialogs/message-preview'
 import { MessageType, MessageTypes } from '../../models'
 
+@UntilDestroy()
 @Component({
   selector: 'sequencing-message-input',
   templateUrl: './message-input.component.html',

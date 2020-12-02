@@ -14,10 +14,11 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import { _, CcrPaginator, PromptDialog } from '@app/shared'
 import { CreateFormRequest, UpdateFormRequest } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 
+@UntilDestroy()
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',

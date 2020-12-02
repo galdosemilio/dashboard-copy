@@ -17,9 +17,10 @@ import {
   FormUtils,
   PromptDialog
 } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Access, AccountProvider, Affiliation } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'app-coach-profile',
   templateUrl: './profile.component.html',

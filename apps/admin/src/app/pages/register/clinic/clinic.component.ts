@@ -42,10 +42,11 @@ import {
 import { AppStoreFacade, OrgPrefState } from '@coachcare/common/store'
 import { get } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { PlanSelectorSelectionEvent } from './clinic-packages'
 import { LastStepComponentProps } from './last-step'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-page-register-clinic',
   templateUrl: './clinic.component.html',

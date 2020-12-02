@@ -16,7 +16,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isArray, merge } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, Subject } from 'rxjs'
 import { BodyMeasurement } from '../../models/measurement/bodyMeasurement'
 import {
@@ -27,6 +27,7 @@ import {
 } from './measurement.criteria'
 import { MeasurementDatabase } from './measurement.database'
 
+@UntilDestroy()
 export class MeasurementDataSource extends ChartDataSource<
   any,
   MeasurementCriteria

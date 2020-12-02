@@ -21,7 +21,7 @@ import { ConfigService } from '@app/service'
 import { _, ChartData, DateNavigatorOutput, SelectOptions } from '@app/shared'
 import { filter, merge } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
 export interface MeasurementChartOutput {
@@ -30,6 +30,7 @@ export interface MeasurementChartOutput {
   timeframe: MeasurementTimeframe
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-measurements-chart',
   templateUrl: './chart.component.html',

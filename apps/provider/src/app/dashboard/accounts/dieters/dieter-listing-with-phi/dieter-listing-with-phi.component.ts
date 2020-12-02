@@ -23,13 +23,14 @@ import {
   unitConversion
 } from '@app/shared'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { DieterListingItem } from './../models'
 
+@UntilDestroy()
 @Component({
   selector: 'dieter-listing-with-phi',
   templateUrl: './dieter-listing-with-phi.component.html',

@@ -20,8 +20,9 @@ import {
   QueuedContent
 } from '@app/dashboard/content/models'
 import { BINDFORM_TOKEN } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-create-dialog',
   templateUrl: './content-create.dialog.html',

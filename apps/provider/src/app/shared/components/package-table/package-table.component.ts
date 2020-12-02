@@ -14,9 +14,10 @@ import {
   PackageDatasource
 } from '@app/shared/components/package-table/services'
 import { CcrPaginator } from '@app/shared/components/paginator'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Package, PackageSelectEvents } from './models'
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-package-table',
   templateUrl: './package-table.component.html'

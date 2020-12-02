@@ -4,8 +4,9 @@ import { CallState } from '@app/layout/store/call/call.state'
 import { UIState } from '@app/layout/store/state'
 import { ContextService } from '@app/service/context.service'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: '[app-call-header-text]',
   templateUrl: './header-text.component.html',

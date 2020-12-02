@@ -1,13 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core'
 import { NavigationStart, Router, RouterEvent } from '@angular/router'
 import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
 import { AccountProvider } from '@coachcare/npm-api'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
 
+@UntilDestroy()
 @Injectable()
 export class TimeTrackerService implements OnDestroy {
   public currentRoute$: BehaviorSubject<TimeTrackerRoute> = new BehaviorSubject<

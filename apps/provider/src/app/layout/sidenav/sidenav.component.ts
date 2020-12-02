@@ -23,7 +23,7 @@ import { configSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { findIndex, get } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { fromEvent, Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
 import { Messaging, OrganizationProvider } from '@coachcare/npm-api'
@@ -34,6 +34,7 @@ export interface SidenavOrg {
   name: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-menu',
   templateUrl: './sidenav.component.html'

@@ -19,9 +19,10 @@ import {
   QUESTION_TYPE_MAP
 } from '@app/dashboard/library/forms/models'
 import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { fromEvent } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-question-editor',
   templateUrl: './question-editor.component.html',

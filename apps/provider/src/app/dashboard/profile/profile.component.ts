@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router'
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { AccSingleResponse, AccUpdateRequest } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider } from '@coachcare/npm-api'
 
 type ProviderProfileSection =
@@ -12,6 +12,7 @@ type ProviderProfileSection =
   | 'security'
   | 'login-history'
 
+@UntilDestroy()
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

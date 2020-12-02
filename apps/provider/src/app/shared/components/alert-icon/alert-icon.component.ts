@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { CCRConfig } from '@app/config'
 import { paletteSelector } from '@app/store/config'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-alert-icon',
   templateUrl: './alert-icon.component.html',

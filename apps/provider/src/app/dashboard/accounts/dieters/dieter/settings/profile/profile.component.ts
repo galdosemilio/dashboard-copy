@@ -19,8 +19,9 @@ import {
   FormUtils,
   PromptDialog
 } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-profile',
   templateUrl: './profile.component.html',

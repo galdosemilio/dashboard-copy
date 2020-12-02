@@ -16,8 +16,9 @@ import {
 import { DateNavigator, DateNavigatorOutput } from '@app/shared'
 import { Authentication, FetchGoalResponse } from '@coachcare/npm-api'
 import { unitOfTime } from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-journal',
   templateUrl: './journal.component.html',

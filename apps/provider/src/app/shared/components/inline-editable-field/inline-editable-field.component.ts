@@ -17,7 +17,7 @@ import {
   FormGroup,
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
 type InlineEditableFieldType = 'text' | 'selector'
@@ -34,6 +34,7 @@ interface SelectorOption {
   value: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-inline-editable-field',
   templateUrl: './inline-editable-field.component.html',

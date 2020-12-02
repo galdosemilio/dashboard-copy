@@ -11,7 +11,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router'
 import { resolveConfig } from '@board/pages/config/section.config'
 import { SelectorOption } from '@coachcare/backend/shared'
 import { ContextService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { PackagePriceItem, PackagePricePlanItem } from '../../model'
 
@@ -20,6 +20,7 @@ export interface PlanSelectorSelectionEvent {
   billing?: PackagePricePlanItem
 }
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-clinic-plan-selector',
   templateUrl: './clinic-plan-selector.component.html',

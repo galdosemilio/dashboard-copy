@@ -1,16 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AbstractControl, FormArray, FormBuilder } from '@angular/forms'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { BindFormDirective } from '@app/shared/directives/bind-form.directive'
 import { BaseQuestion, QuestionDetails } from './base.question'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-multiple-answers-question',
   templateUrl: './multiple-answers.question.component.html',
   styleUrls: ['./multiple-answers.question.component.scss']
 })
-export class MultipleAnswersQuestionComponent extends BaseQuestion
+export class MultipleAnswersQuestionComponent
+  extends BaseQuestion
   implements OnDestroy, OnInit {
   public valueForm: FormArray
 

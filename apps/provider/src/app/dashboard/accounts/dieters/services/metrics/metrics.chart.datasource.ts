@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { groupBy } from 'lodash'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, Subject } from 'rxjs'
 import { MeasurementTimeframe } from '../measurement/measurement.criteria'
 import { MetricsDatabase } from './metrics.database'
@@ -22,6 +22,7 @@ interface MetricsChartDataSourceCriteria extends MetricsDataSourceCriteria {
   timeframe: MeasurementTimeframe
 }
 
+@UntilDestroy()
 export class MetricsChartDataSource extends ChartDataSource<
   any,
   MetricsChartDataSourceCriteria

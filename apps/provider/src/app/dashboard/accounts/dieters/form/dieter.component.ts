@@ -33,11 +33,12 @@ import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { AccountProvider, Goal, Timezone } from '@coachcare/npm-api'
 import { AccountIdentifiersProps } from './account-identifiers/models'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-form',
   templateUrl: './dieter.component.html',

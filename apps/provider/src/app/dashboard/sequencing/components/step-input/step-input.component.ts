@@ -15,7 +15,7 @@ import {
   NG_VALUE_ACCESSOR,
   Validators
 } from '@angular/forms'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import {
@@ -27,6 +27,7 @@ import {
   StepDelays
 } from '../../models'
 
+@UntilDestroy()
 @Component({
   selector: 'sequencing-step-input',
   templateUrl: './step-input.component.html',

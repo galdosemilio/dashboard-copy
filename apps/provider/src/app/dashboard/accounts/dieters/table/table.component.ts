@@ -11,7 +11,7 @@ import {
 } from '@angular/core'
 import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { Router } from '@angular/router'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Affiliation, OrganizationProvider } from '@coachcare/npm-api'
 
 import {
@@ -28,6 +28,7 @@ import {
 import { AccountAccessData, AccountTypeId } from '@coachcare/npm-api'
 import { DietersDataSource } from '../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieters-table',
   templateUrl: './table.component.html',

@@ -21,8 +21,9 @@ import {
   PackageDatabase,
   PackageDatasource
 } from '@app/shared/components/package-table/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-content-form',
   templateUrl: './content.form.component.html',

@@ -8,7 +8,7 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import { ConsultationListingResponse, NamedEntity } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { FormSubmission as FormSubmissionService } from '@coachcare/npm-api'
@@ -19,6 +19,7 @@ export interface LayoutNote extends ConsultationListingResponse {
   submissionId?: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-rightpanel-notes-container',
   templateUrl: './notes-container.component.html',

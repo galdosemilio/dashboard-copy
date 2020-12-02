@@ -1,6 +1,6 @@
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 import * as tinycolor from 'tinycolor2'
 
@@ -12,6 +12,7 @@ import {
 } from '@coachcare/npm-api'
 import { StatisticsDatabase } from './statistics.database'
 
+@UntilDestroy()
 export class ActiveUsersDataSource extends ChartDataSource<
   OrganizationActivityAggregate,
   OrganizationActivityRequest

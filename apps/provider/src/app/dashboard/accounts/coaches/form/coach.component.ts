@@ -22,8 +22,9 @@ import { AccountProvider, Timezone, TimezoneResponse } from '@coachcare/npm-api'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-coach-form',
   templateUrl: './coach.component.html',

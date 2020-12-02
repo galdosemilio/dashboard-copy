@@ -5,12 +5,13 @@ import { callSelector, CallState } from '@app/layout/store/call'
 import { ContextService, LoggingService, NotifierService } from '@app/service'
 import { _, FormUtils, sleep } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { take } from 'rxjs/operators'
 import { AccountProvider } from '@coachcare/npm-api'
 
 type CallRatingOption = 'ok' | 'bad'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-call-rating',
   templateUrl: './call-rating.dialog.html',

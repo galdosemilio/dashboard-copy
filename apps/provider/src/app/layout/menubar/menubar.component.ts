@@ -25,12 +25,13 @@ import { _, LanguagesDialog, TranslationsObject } from '@app/shared'
 import { configSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { get } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { OrganizationProvider, User } from '@coachcare/npm-api'
 import { HelpComponent } from './help'
 
+@UntilDestroy()
 @Component({
   selector: 'app-topbar',
   templateUrl: './menubar.component.html',

@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 interface DateRange {
   start: string
@@ -22,6 +22,7 @@ interface QuickSelectOption {
   generator(): DateRange
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-quick-date-range',
   templateUrl: './quick-date-range.component.html',

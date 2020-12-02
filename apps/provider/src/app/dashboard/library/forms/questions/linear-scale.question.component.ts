@@ -1,15 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BindFormDirective } from '@app/shared/directives/bind-form.directive'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BaseQuestion, QuestionDetails } from './base.question'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-linear-scale-question',
   templateUrl: './linear-scale.question.component.html',
   styleUrls: ['./linear-scale.question.component.scss']
 })
-export class LinearScaleQuestionComponent extends BaseQuestion
+export class LinearScaleQuestionComponent
+  extends BaseQuestion
   implements OnDestroy, OnInit {
   public sliderOpts = {
     displayWith: (value: number) => this.displayWithCalc(value),

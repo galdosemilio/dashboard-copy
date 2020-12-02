@@ -19,7 +19,7 @@ import {
 } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import {
   AccountProvider,
   Affiliation,
@@ -34,6 +34,7 @@ import {
 } from '../models'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieters-expandable-table',
   templateUrl: './expandable-table.component.html',

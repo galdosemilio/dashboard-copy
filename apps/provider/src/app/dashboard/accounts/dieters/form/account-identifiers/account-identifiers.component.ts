@@ -5,7 +5,7 @@ import {
   BindForm,
   BindFormDirective
 } from '@app/shared/directives/bind-form.directive'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountIdentifier, AccountIdentifiersProps } from './models'
 import { AccountIdentifierSyncer } from './utils'
 
@@ -14,6 +14,7 @@ interface GroupedIdentifiers {
   identifiers: AccountIdentifier[]
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-account-identifiers',
   templateUrl: './account-identifiers.component.html',

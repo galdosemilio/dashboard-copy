@@ -19,8 +19,9 @@ import {
 import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-date-input',
   templateUrl: './date-input.component.html',

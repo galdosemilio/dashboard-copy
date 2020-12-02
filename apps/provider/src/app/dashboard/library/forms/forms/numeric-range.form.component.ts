@@ -6,8 +6,9 @@ import {
   Validators
 } from '@angular/forms'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-numeric-range-form',
   templateUrl: './numeric-range.form.component.html',

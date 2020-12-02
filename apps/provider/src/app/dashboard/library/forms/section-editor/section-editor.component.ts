@@ -26,8 +26,9 @@ import {
 } from '@app/shared'
 import { TranslateService } from '@ngx-translate/core'
 import { cloneDeep } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-section-editor',
   templateUrl: './section-editor.component.html',

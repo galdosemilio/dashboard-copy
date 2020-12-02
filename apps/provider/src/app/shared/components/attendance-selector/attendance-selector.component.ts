@@ -13,9 +13,10 @@ import {
   AttendanceStatusAssociation,
   AttendanceStatusEntry
 } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Schedule } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-attendance-selector',
   templateUrl: './attendance-selector.component.html',

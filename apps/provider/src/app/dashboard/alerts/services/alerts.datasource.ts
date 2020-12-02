@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Observable } from 'rxjs'
 
 import { ContextService, NotifierService } from '@app/service'
@@ -19,6 +19,7 @@ import {
 import { AlertNotification } from '../models'
 import { AlertsDatabase } from './alerts.database'
 
+@UntilDestroy()
 @Injectable()
 export class AlertsDataSource extends TableDataSource<
   AlertNotification,

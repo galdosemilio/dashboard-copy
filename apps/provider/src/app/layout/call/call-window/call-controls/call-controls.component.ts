@@ -14,10 +14,11 @@ import { callSelector } from '@app/layout/store/call/call.selector'
 import { CallState } from '@app/layout/store/call/call.state'
 import { UIState } from '@app/layout/store/state'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 
+@UntilDestroy()
 @Component({
   selector: '[app-call-controls]',
   templateUrl: './call-controls.component.html',

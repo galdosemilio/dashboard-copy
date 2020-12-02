@@ -14,13 +14,14 @@ import { FixedPeriod } from '@app/shared/components/date-range/date-range.compon
 import { routerSelector } from '@app/store/router'
 import { select, Store } from '@ngrx/store'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 interface StartPeriod {
   endDate?: string
   startDate?: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-report-controls',
   templateUrl: './controls.component.html',

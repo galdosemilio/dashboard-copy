@@ -11,7 +11,7 @@ import {
   RPMStateSummaryItem
 } from '@coachcare/npm-api'
 import { get } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { RPM } from '@coachcare/npm-api'
 import { TRACKABLE_RPM_CODES, TrackableRPMCodeEntry } from './model'
 
@@ -20,6 +20,7 @@ interface CodeAndTracking {
   billingItem: RPMStateSummaryBillingItem
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-rpm-tracker',
   templateUrl: './rpm-tracker.component.html',

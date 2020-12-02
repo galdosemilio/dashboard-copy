@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { DietersDatabase, DietersDataSource } from '@app/dashboard/accounts'
 import { AlertsDatabase, AlertsDataSource } from '@app/dashboard/alerts'
@@ -18,6 +18,7 @@ import {
 } from '@app/service'
 import { _, ViewUtils } from '@app/shared'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dashboard-panel',
   templateUrl: './dashboard.component.html',

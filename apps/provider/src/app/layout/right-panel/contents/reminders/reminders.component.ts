@@ -23,11 +23,12 @@ import {
 import { TranslateService } from '@ngx-translate/core'
 import { find } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { Alerts } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'app-rightpanel-reminders',
   templateUrl: './reminders.component.html',

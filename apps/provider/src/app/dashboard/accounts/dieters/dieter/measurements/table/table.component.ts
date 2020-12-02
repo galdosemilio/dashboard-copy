@@ -4,10 +4,11 @@ import { MeasurementDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { MeasurementDataSource } from '@app/dashboard/accounts/dieters/services'
 import { ContextService, NotifierService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
 import { MeasurementConfig } from '../measurements.component'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-measurements-table',
   templateUrl: './table.component.html',

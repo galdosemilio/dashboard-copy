@@ -10,8 +10,9 @@ import {
 } from '@app/dashboard/content/services'
 import { NotifierService, SelectedOrganization } from '@app/service'
 import { CcrDropEvent } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-file-explorer',
   templateUrl: './file-explorer.component.html',

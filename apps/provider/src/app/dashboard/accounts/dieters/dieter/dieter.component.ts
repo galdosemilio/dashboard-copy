@@ -11,11 +11,12 @@ import {
   RPM
 } from '@coachcare/npm-api'
 import { get, intersectionBy } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { DoctorPDFDialog, ProgressReportPDFDialog } from '../../dialogs'
 import { Account } from '@coachcare/npm-api/selvera-api/services'
 import * as moment from 'moment'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter',
   templateUrl: './dieter.component.html'

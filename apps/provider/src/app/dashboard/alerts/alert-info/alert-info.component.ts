@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { ContextService } from '@app/service'
 import { ConfirmDialog } from '@app/shared'
 import { _, TranslationsObject } from '@app/shared/utils'
 
+@UntilDestroy()
 @Component({
   selector: 'app-alert-info',
   templateUrl: './alert-info.component.html',

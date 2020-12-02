@@ -13,9 +13,10 @@ import {
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-insert-form-dialog',
   templateUrl: './insert-form.dialog.html',

@@ -14,10 +14,11 @@ import {
 } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { PackageOrganization } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'sequencing-package-form',
   templateUrl: './package-form.component.html',

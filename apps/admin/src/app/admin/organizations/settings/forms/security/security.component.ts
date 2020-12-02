@@ -10,11 +10,12 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { MFA } from '@coachcare/npm-api'
 import { MFAInputComponent } from '../../mfa-input'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-security',
   templateUrl: './security.component.html',

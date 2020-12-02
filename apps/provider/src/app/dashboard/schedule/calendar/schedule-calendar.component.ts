@@ -32,7 +32,7 @@ import {
   FetchAllMeetingRequest,
   FetchCalendarAvailabilitySegment
 } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { ViewMeetingDialog } from '../dialogs/view-meeting'
 import { Meeting } from '../models'
 
@@ -50,6 +50,7 @@ export interface TimeBlock {
 //   timeToDisplay: string;
 // };
 
+@UntilDestroy()
 @Component({
   selector: 'app-schedule-calendar',
   templateUrl: './schedule-calendar.component.html',

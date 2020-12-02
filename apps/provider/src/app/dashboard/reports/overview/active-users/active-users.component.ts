@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty, merge } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
 import {
@@ -16,6 +16,7 @@ import { ConfigService, ContextService, NotifierService } from '@app/service'
 import { ChartData } from '@app/shared'
 import { TimelineUnit } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'app-reports-active-users',
   templateUrl: './active-users.component.html',

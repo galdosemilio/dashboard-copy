@@ -13,9 +13,10 @@ import {
 } from '@app/dashboard/accounts/dieters/services'
 import { DateNavigatorOutput, sleep } from '@app/shared'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-journal-metrics-table',
   templateUrl: './table.component.html',

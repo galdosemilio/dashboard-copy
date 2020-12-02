@@ -1,12 +1,13 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { _, TranslationsObject } from '@app/shared/utils'
 import { Subject } from 'rxjs'
 import { ConfirmDialog, GridDialog, GridDialogData } from '../../dialogs'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-popup-description',
   templateUrl: './description.component.html',

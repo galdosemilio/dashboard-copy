@@ -12,7 +12,7 @@ import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject, Subscription } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { Sequence as SelveraSequenceService } from '@coachcare/npm-api'
@@ -22,6 +22,7 @@ import { SequenceSyncer } from '../utils'
 
 type SequenceComponentSection = 'edit' | 'enrollees' | 'refreshing'
 
+@UntilDestroy()
 @Component({
   selector: 'sequencing-sequence',
   templateUrl: './sequence.component.html',

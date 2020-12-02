@@ -12,9 +12,10 @@ import { callSelector } from '@app/layout/store/call/call.selector'
 import { CallState } from '@app/layout/store/call/call.state'
 import { UIState } from '@app/layout/store/state'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as CallActions from '../../../store/call'
 
+@UntilDestroy()
 @Component({
   selector: 'app-call-header-controls',
   templateUrl: './header-controls.component.html',

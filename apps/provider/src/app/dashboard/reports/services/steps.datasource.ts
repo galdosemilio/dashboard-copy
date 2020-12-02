@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 
 import { NotifierService } from '@app/service'
@@ -7,6 +7,7 @@ import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
 import { ActivityLevelRequest, ActivityLevelSegment } from '@coachcare/npm-api'
 import { StatisticsDatabase } from './statistics.database'
 
+@UntilDestroy()
 export class StepsDataSource extends ChartDataSource<
   ActivityLevelSegment,
   ActivityLevelRequest

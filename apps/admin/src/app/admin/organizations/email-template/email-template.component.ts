@@ -7,9 +7,10 @@ import {
 } from '@coachcare/backend/data'
 import { _ } from '@coachcare/backend/shared'
 import { ContextService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { EmailTemplateDialogComponent } from './dialogs'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-email-template',
   templateUrl: './email-template.component.html'

@@ -5,12 +5,13 @@ import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { ContextService } from '@app/service'
 import { _, AddRecipientDialog, CcrPaginator, PromptDialog } from '@app/shared'
 import { GetAllSeqEnrollmentsResponse } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Sequence as SelveraSequenceService } from '@coachcare/npm-api'
 import { BulkUnenrollDialog } from '../../dialogs'
 import { Sequence } from '../../models'
 import { EnrolleesDatabase, EnrolleesDataSource } from '../../services'
 
+@UntilDestroy()
 @Component({
   selector: 'sequencing-enrollee-listing',
   templateUrl: 'enrollee-listing.component.html',

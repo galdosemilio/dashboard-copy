@@ -8,11 +8,12 @@ import {
   Output,
   ViewChild
 } from '@angular/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { CcrPaginator } from '@app/shared/components/paginator'
 import { Locale, LocaleSelectEvents } from '../locales'
 
+@UntilDestroy()
 @Component({
   selector: 'app-locale-table',
   templateUrl: './locale-table.component.html'

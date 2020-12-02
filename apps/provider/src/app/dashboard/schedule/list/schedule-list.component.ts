@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import { CcrPaginator } from '@app/shared'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { Meeting } from '../models'
@@ -12,6 +12,7 @@ import { ScheduleListTableComponent } from './table'
 
 type QuickSelectOption = 'past' | 'upcoming' | 'all'
 
+@UntilDestroy()
 @Component({
   selector: 'app-schedule-list',
   templateUrl: './schedule-list.component.html',

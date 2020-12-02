@@ -14,13 +14,14 @@ import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
 import { get, unionBy } from 'lodash'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { Interaction } from '@coachcare/npm-api'
 import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models'
 import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-reports-calls',
   templateUrl: './calls.component.html',

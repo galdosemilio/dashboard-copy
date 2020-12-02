@@ -20,7 +20,7 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import {
@@ -35,6 +35,7 @@ import {
 } from '../../models'
 import { Transition } from '../../models/sequence-transition'
 
+@UntilDestroy()
 @Component({
   selector: 'sequencing-form',
   templateUrl: './sequencing-form.component.html',

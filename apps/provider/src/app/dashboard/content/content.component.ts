@@ -35,10 +35,11 @@ import {
 import { _, PromptDialog } from '@app/shared'
 import { Entity, FetchPackagesSegment } from '@coachcare/npm-api'
 import { uniqBy, values } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject, Subscription } from 'rxjs'
 import { AssociationsDatabase, VaultDatasource } from '../accounts'
 
+@UntilDestroy()
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',

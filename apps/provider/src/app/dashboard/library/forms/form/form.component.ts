@@ -23,9 +23,10 @@ import {
 } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
 import { FormAnswer } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-forms-form',
   templateUrl: './form.component.html',

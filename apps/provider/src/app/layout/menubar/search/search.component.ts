@@ -17,9 +17,10 @@ import { ContextService, CurrentAccount, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { AccListRequest, AccountAccessData } from '@coachcare/npm-api'
 import { paletteSelector } from '@app/store/config'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
+@UntilDestroy()
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',

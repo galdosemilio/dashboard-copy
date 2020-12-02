@@ -23,9 +23,10 @@ import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor'
 import * as lodash from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-settings',
   templateUrl: './form.component.html',

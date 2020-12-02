@@ -4,7 +4,7 @@ import { MatDialog } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { GetUserMFAResponse } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { MFA } from '@coachcare/npm-api'
 import { VerifyDeleteMFADialog, VerifyMFADialog } from '../dialogs'
 import { MFAChannel, MFAChannels } from '../models'
@@ -16,6 +16,7 @@ export type MFASetupComponentMode =
   | 'intro'
   | 'sms'
 
+@UntilDestroy()
 @Component({
   selector: 'account-mfa-setup',
   templateUrl: './mfa-setup.component.html',

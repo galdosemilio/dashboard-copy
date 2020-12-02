@@ -1,6 +1,6 @@
 import { MatPaginator, MatSort } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 
 import {
@@ -16,6 +16,7 @@ import {
 } from '@coachcare/npm-api'
 import { StatisticsDatabase } from './statistics.database'
 
+@UntilDestroy()
 export class WeightChangeDataSource extends ChartDataSource<
   WeightChangeSegment,
   WeightChangeRequest

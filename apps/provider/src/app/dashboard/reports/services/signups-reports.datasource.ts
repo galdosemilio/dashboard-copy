@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core'
 import { find, isEmpty, map, zipObject } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 
 import { ConfigService, NotifierService } from '@app/service'
@@ -18,6 +18,7 @@ import {
 } from '@coachcare/npm-api'
 import { ReportsDatabase } from './reports.database'
 
+@UntilDestroy()
 export class SignupsReportsDataSource extends ChartDataSource<
   SignupsTimelineSegment,
   SignupsTimelineRequest

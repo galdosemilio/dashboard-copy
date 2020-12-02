@@ -4,10 +4,11 @@ import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService } from '@app/service'
 import { OrgSingleResponse } from '@coachcare/npm-api'
 import { Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 type ClinicComponentSection = 'info' | 'phases'
 
+@UntilDestroy()
 @Component({
   selector: 'app-clinic',
   templateUrl: './clinic.component.html'

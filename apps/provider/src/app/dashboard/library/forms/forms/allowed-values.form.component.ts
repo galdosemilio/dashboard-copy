@@ -2,8 +2,9 @@ import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-allowed-values-form',
   templateUrl: './allowed-values.form.component.html',

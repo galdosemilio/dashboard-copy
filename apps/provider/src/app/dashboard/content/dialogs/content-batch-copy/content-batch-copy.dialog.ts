@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatStepper } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { BINDFORM_TOKEN, bufferedRequests } from '@app/shared'
 import { _ } from '@app/shared/utils'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FileExplorerRoute } from '../../file-explorer-table'
 import { FileExplorerContent, FileExplorerEvents } from '../../models'
 import { FileExplorerDatabase, FileExplorerDatasource } from '../../services'
@@ -28,6 +28,7 @@ interface ContentBatchCopyDialogProps {
   selectedContents?: FileExplorerContent[]
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-copy-dialog',
   templateUrl: './content-batch-copy.dialog.html',

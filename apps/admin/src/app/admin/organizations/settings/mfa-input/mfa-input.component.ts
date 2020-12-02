@@ -17,9 +17,10 @@ import {
 import { BindForm, BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 import { intersectionBy } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { MFA_SECTIONS, MFASection } from '../models'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-settings-mfa-input',
   templateUrl: './mfa-input.component.html',

@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { merge } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
 
 import {
@@ -11,6 +11,7 @@ import {
 import { ConfigService, ContextService, NotifierService } from '@app/service'
 import { ChartData, DateNavigatorOutput } from '@app/shared'
 
+@UntilDestroy()
 @Component({
   selector: 'app-levl-chart',
   templateUrl: './levl-chart.component.html',

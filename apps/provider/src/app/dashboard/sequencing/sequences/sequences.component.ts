@@ -5,10 +5,11 @@ import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService } from '@app/service'
 import { CcrPaginator } from '@app/shared'
 import { Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { SequencesDatabase, SequencesDataSource } from '../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-sequencing-sequences',
   templateUrl: './sequences.component.html',

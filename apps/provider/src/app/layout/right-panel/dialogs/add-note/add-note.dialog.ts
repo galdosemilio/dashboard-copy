@@ -18,13 +18,14 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _ } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subscription } from 'rxjs'
 
 interface AddNoteDialogData {
   formId: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'add-note-dialog',
   templateUrl: 'add-note.dialog.html',

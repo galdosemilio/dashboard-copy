@@ -17,12 +17,13 @@ import {
 } from '@app/service'
 import { _, CcrPaginator } from '@app/shared'
 import { DieterListingItem } from '../models'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import { DietersDatabase, DietersDataSource } from '../services'
 import { DietersCriteria } from '../services/dieters.criteria'
 
+@UntilDestroy()
 @Component({
   selector: 'dieter-listing-no-phi',
   templateUrl: './dieter-listing-no-phi.component.html',

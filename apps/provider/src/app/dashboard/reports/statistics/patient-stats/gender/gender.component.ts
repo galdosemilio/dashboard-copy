@@ -9,7 +9,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
 import {
@@ -20,6 +20,7 @@ import {
 import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
 import { NotifierService } from '@app/service'
 
+@UntilDestroy()
 @Component({
   selector: 'app-statistics-patient-stats-gender',
   templateUrl: './gender.component.html',

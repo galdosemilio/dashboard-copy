@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Alerts } from '@coachcare/npm-api'
 
 import { ContextService, NotifierService } from '@app/service'
@@ -17,6 +17,7 @@ import {
   AlertTypesPreference
 } from '../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-alerts-table',
   templateUrl: './table.component.html',

@@ -16,9 +16,10 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty, merge } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-reports-enrollment-chart',
   templateUrl: './enrollment-chart.component.html',

@@ -11,7 +11,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatMenu } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { PackageData } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { PackageOrganization } from '@coachcare/npm-api'
 
 interface PackageFilter {
@@ -19,6 +19,7 @@ interface PackageFilter {
   ['pkg-filter']: 'any' | 'all'
 }
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-package-filter',
   templateUrl: './package-filter.component.html',

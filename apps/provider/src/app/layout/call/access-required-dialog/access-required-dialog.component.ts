@@ -16,11 +16,12 @@ import { UIState } from '@app/layout/store/state'
 import { ContextService, SelectedOrganization } from '@app/service'
 import { Actions, ofType } from '@ngrx/effects'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subscription } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
 import { BROWSER_TYPES, TwilioService } from '../services/twilio.service'
 
+@UntilDestroy()
 @Component({
   selector: 'access-required-dialog',
   templateUrl: './access-required-dialog.component.html',

@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
 
 import {
@@ -13,6 +13,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { DateNavigatorOutput } from '@app/shared'
 import * as moment from 'moment'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-journal-food',
   templateUrl: 'food.component.html',

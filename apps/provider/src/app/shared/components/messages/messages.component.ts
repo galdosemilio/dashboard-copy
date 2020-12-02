@@ -25,12 +25,13 @@ import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
 import { first, last, uniqBy } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { Messaging } from '@coachcare/npm-api'
 import { MessageRecipient, MessageThread } from './messages.interfaces'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-messages',
   templateUrl: './messages.component.html',

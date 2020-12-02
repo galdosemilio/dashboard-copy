@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Form, FormSubmission } from '@app/dashboard/library/forms/models'
 import { FormDisplayService } from '@app/dashboard/library/forms/services'
 import { _, BindForm, BINDFORM_TOKEN } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
 interface FormDisplayRouteElement {
@@ -14,6 +14,7 @@ interface FormDisplayRouteElement {
   destination: string[]
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-form-display',
   templateUrl: './form-display.component.html',

@@ -17,8 +17,9 @@ import {
 import { QuestionDetails } from '@app/dashboard/library/forms/questions'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { FormAnswer } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-question-renderer',
   templateUrl: './question-renderer.component.html',

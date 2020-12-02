@@ -21,8 +21,10 @@ import { SelectedOrganization } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
 import { AccountAccessData, FormAnswer } from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FormDisplayService } from '../services'
+
+@UntilDestroy()
 @Component({
   selector: 'app-library-form-manager',
   templateUrl: './manager.component.html',

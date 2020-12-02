@@ -14,10 +14,11 @@ import { ccrPhoneValidator } from '@app/shared/components/phone-input'
 import { AccUpdateRequest, TimezoneResponse } from '@coachcare/npm-api'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
 import { Timezone } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'account-form',
   templateUrl: './form.component.html',

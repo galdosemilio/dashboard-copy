@@ -20,12 +20,13 @@ import {
   MessagingThreadSegment
 } from '@coachcare/npm-api'
 import { findIndex, get, uniqBy } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'
 import { mergeMap, sampleTime } from 'rxjs/operators'
 import { AccountProvider } from '@coachcare/npm-api'
 import { ThreadsDatabase, ThreadsDataSource } from './services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',

@@ -4,13 +4,14 @@ import { MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { AccountProvider, AccSingleResponse, RPM } from '@coachcare/npm-api'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 interface RPMSession {
   end?: string
   start: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-dialog-rpm-patient-report',
   templateUrl: './rpm-patient-report.dialog.html',

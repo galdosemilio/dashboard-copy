@@ -4,7 +4,7 @@ import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService } from '@app/service'
 import { AccSingleResponse } from '@coachcare/npm-api'
 import { Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 type CoachComponentSection =
   | 'profile'
@@ -12,6 +12,7 @@ type CoachComponentSection =
   | 'communications'
   | 'login-history'
 
+@UntilDestroy()
 @Component({
   selector: 'app-coach',
   templateUrl: './coach.component.html',

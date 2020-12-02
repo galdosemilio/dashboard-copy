@@ -1,12 +1,13 @@
 import { Component, Inject, OnDestroy } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { CCRFacade } from '@coachcare/common/store/ccr'
 import { LanguageService } from '@coachcare/common/services/language.service'
 import { differenceWith } from 'lodash'
 import { localeList } from './languages.locales'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-dialog-language',
   templateUrl: 'languages.dialog.html',

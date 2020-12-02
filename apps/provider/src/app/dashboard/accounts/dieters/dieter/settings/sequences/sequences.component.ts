@@ -3,7 +3,7 @@ import { MatDialog, MatPaginator } from '@coachcare/material'
 import { Sequence } from '@app/dashboard/sequencing/models'
 import { ContextService } from '@app/service'
 import { AddRecipientDialog } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { Sequence as SelveraSequenceService } from '@coachcare/npm-api'
 import {
@@ -11,6 +11,7 @@ import {
   SequenceEnrollmentDataSource
 } from '../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-sequences',
   templateUrl: './sequences.component.html'

@@ -19,9 +19,10 @@ import { CcrPaginator } from '@app/shared'
 import { select, Store } from '@ngrx/store'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-statistics-sleep-table',
   templateUrl: './sleep.component.html',

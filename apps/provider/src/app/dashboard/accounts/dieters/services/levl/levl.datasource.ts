@@ -8,12 +8,13 @@ import {
 } from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable } from 'rxjs'
 import { LevlDatabase } from './levl.database'
 
 import { _, DataObject } from '@app/shared'
 
+@UntilDestroy()
 @Injectable()
 export class LevlDataSource extends ChartDataSource<
   BodySummaryDataResponseSegment,

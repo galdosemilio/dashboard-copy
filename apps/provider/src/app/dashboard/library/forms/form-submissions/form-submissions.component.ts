@@ -14,10 +14,11 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import { CcrPaginator, generateCSV } from '@app/shared'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { Form, FormSubmission } from '../models'
 
+@UntilDestroy()
 @Component({
   selector: 'app-library-form-submissions',
   templateUrl: './form-submissions.component.html'

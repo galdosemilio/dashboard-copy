@@ -27,10 +27,11 @@ import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'
 import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 type LoginPageMode = 'patient'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-page-login',
   templateUrl: './login.component.html',

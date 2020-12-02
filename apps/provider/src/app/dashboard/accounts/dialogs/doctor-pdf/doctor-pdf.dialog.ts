@@ -13,7 +13,7 @@ import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as pdfMake from 'pdfmake'
 import { first } from 'rxjs/operators'
 import {
@@ -89,6 +89,7 @@ interface DoctorPDFData {
   weightLossPercent?: number
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-doctor-pdf-dialog',
   templateUrl: './doctor-pdf.dialog.html',

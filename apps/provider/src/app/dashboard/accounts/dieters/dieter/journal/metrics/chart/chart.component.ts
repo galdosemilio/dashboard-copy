@@ -16,9 +16,10 @@ import { DateNavigatorOutput, SelectOptions, sleep } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { merge } from 'lodash'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-journal-metrics-chart',
   templateUrl: './chart.component.html',

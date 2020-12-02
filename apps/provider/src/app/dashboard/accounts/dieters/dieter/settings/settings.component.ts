@@ -6,8 +6,9 @@ import { FormsDatabase } from '@app/dashboard/library/forms/services'
 import { ContextService, EventsService } from '@app/service'
 import { FormSingle, PagedResponse } from '@coachcare/npm-api'
 import { get } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-settings',
   templateUrl: './settings.component.html',

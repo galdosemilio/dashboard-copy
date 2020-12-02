@@ -27,7 +27,7 @@ import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { filter } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { MeasurementChartOutput } from './chart/chart.component'
 
@@ -51,6 +51,7 @@ export type MeasurementConfig = {
   }
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-measurements',
   templateUrl: 'measurements.component.html',

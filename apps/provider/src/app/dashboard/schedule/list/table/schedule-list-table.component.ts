@@ -8,12 +8,13 @@ import {
   UpdateAttendanceRequest
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Schedule } from '@coachcare/npm-api'
 import { DeleteRecurringMeetingDialog, ViewMeetingDialog } from '../../dialogs'
 import { Meeting } from '../../models'
 import { MeetingsDataSource } from '../../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-schedule-list-table',
   templateUrl: './schedule-list-table.component.html',

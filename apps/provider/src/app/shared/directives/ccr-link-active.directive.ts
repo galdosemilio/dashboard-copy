@@ -17,8 +17,9 @@ import {
   RouterLink,
   RouterLinkWithHref
 } from '@angular/router'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Directive({
   selector: '[ccrLinkActive]',
   exportAs: 'ccrLinkActive'

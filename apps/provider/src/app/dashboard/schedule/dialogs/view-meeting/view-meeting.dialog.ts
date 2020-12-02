@@ -32,7 +32,7 @@ import {
 } from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import {
   AccountProvider,
@@ -43,6 +43,7 @@ import { Meeting } from '../../models'
 
 type ViewMeetingDialogEditMode = 'single' | 'recurring'
 
+@UntilDestroy()
 @Component({
   selector: 'app-view-meeting-dialog',
   templateUrl: './view-meeting.dialog.html',

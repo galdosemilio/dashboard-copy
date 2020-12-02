@@ -1,9 +1,10 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ContextService, SelectedOrganization } from '@app/service'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { CcrPaginator } from '../paginator'
 import { LoginHistoryDatabase, LoginHistoryDataSource } from './services'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-login-history',
   templateUrl: './login-history.component.html',

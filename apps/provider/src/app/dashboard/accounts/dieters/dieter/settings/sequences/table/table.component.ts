@@ -4,9 +4,10 @@ import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { ContextService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
 import { GetAllSeqEnrollmentsResponse, Sequence } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SequenceEnrollmentDataSource } from '../../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-sequences-table',
   templateUrl: './table.component.html'

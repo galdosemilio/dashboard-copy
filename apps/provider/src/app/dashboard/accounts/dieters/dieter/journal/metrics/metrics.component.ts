@@ -5,13 +5,14 @@ import { ContextService } from '@app/service'
 import { DateNavigatorOutput } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
 import { MetricsDatabase, MetricsDataSource } from '../../../services'
 import { MetricsChartDataSource } from '../../../services/metrics/metrics.chart.datasource'
 
 type MetricsComponentViewType = 'table' | 'chart'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-journal-metrics',
   templateUrl: './metrics.component.html'

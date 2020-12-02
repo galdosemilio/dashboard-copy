@@ -16,12 +16,13 @@ import { ConfigService, TimeTrackerService } from '@app/service'
 import { MatDatepickerIntl } from '@coachcare/datepicker'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as pdfMake from 'pdfmake'
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { CallLayoutService } from './layout/call/services/call-layout.service'
 import { RecoverCall } from './layout/store/call'
 
+@UntilDestroy()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

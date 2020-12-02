@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { PlatformUpdatesService } from '@app/service'
 import { ZendeskArticle } from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-platform-updates',
   templateUrl: './platform-updates.component.html',

@@ -12,9 +12,10 @@ import {
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-features',
   templateUrl: './features.component.html',

@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 
 import {
@@ -17,6 +17,7 @@ import { generateCSV, ViewUtils } from '@app/shared'
 import { TimelineUnit } from '@coachcare/npm-api'
 import { delay } from 'rxjs/operators'
 
+@UntilDestroy()
 @Component({
   selector: 'app-reports-signups',
   templateUrl: './signups.component.html',

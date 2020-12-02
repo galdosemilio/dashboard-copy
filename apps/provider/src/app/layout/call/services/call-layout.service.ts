@@ -24,10 +24,11 @@ import { CallRatingDialog } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { CookieService } from 'ngx-cookie-service'
 import { DeviceDetectorService } from 'ngx-device-detector'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Interaction } from '@coachcare/npm-api'
 import { AccessDeniedDialogComponent } from '../access-denied-dialog/access-denied-dialog.component'
 
+@UntilDestroy()
 @Injectable()
 export class CallLayoutService implements OnDestroy {
   private callRatingModalOpen: boolean

@@ -13,9 +13,10 @@ import {
   BindForm,
   BINDFORM_TOKEN
 } from '@app/shared/directives/bind-form.directive'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SectionProps } from './app-section.props'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-app-section',
   templateUrl: './app-section.component.html',

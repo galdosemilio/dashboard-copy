@@ -15,7 +15,7 @@ import { _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
 import { get, isEmpty } from 'lodash'
 import * as moment from 'moment'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import {
@@ -30,6 +30,7 @@ import {
   RPMStateSummaryEntry
 } from '../models'
 
+@UntilDestroy()
 @Component({
   selector: 'app-reports-rpm-billing',
   templateUrl: './rpm-billing.component.html',

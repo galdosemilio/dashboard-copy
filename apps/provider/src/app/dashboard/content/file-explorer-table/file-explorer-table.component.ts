@@ -22,13 +22,14 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { BindForm, BINDFORM_TOKEN, CcrPaginator } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export interface FileExplorerRoute {
   content: FileExplorerContent
   pageIndex: number
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-file-explorer-table',
   templateUrl: './file-explorer-table.component.html',
@@ -41,7 +42,8 @@ export interface FileExplorerRoute {
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class FileExplorerTableComponent extends FileExplorerBase
+export class FileExplorerTableComponent
+  extends FileExplorerBase
   implements BindForm, OnDestroy, OnInit {
   @Input()
   allowInlineEdit = true

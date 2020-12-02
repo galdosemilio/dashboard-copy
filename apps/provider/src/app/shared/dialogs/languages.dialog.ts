@@ -1,12 +1,13 @@
 import { Component, OnDestroy } from '@angular/core'
 import { MatDialogRef } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { ContextService, LanguageService } from '@app/service'
 import { differenceWith, get } from 'lodash'
 import { localeList } from './languages.locales'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-dialog-language',
   templateUrl: 'languages.dialog.html',

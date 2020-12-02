@@ -1,13 +1,14 @@
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { _, SelectOptions } from '@app/shared'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import {
   MeasurementAggregation,
   MeasurementDataSource
 } from '../../../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-measurements-aggregation-selector',
   templateUrl: './aggregation-selector.component.html'

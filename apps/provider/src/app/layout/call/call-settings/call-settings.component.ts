@@ -18,11 +18,12 @@ import { callSelector } from '@app/layout/store/call/call.selector'
 import { CallState } from '@app/layout/store/call/call.state'
 import { UIState } from '@app/layout/store/state'
 import { select, Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { createLocalAudioTrack, createLocalVideoTrack } from 'twilio-video'
 import { BROWSER_TYPES, TwilioService } from '../services/twilio.service'
 
+@UntilDestroy()
 @Component({
   selector: 'app-call-settings',
   templateUrl: './call-settings.component.html',

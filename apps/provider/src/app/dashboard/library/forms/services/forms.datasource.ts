@@ -21,10 +21,11 @@ import {
   GetSingleFormRequest,
   UpdateFormRequest
 } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
+@UntilDestroy()
 @Directive()
 export class FormsDatasource
   extends TableDataSource<Form, GetAllFormResponse, GetAllFormRequest>

@@ -9,10 +9,11 @@ import {
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { NotifierService } from '@app/service'
 import { OrganizationEntity } from '@coachcare/npm-api'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { OrganizationProvider } from '@coachcare/npm-api'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-child-clinic-picker',
   templateUrl: './child-clinic-picker.component.html',

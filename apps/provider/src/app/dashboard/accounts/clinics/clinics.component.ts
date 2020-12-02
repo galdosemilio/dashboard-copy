@@ -17,12 +17,13 @@ import {
 } from '@app/service'
 import { CcrPaginator, generateCSV } from '@app/shared'
 import { Store } from '@ngrx/store'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime, first } from 'rxjs/operators'
 import { CreateClinicDialog } from './dialogs'
 import { ClinicsDatabase, ClinicsDataSource } from './services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-clinics',
   templateUrl: './clinics.component.html',

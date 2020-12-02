@@ -6,12 +6,13 @@ import {
   OnInit
 } from '@angular/core'
 import { merge } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { GenderDataSource } from '@app/dashboard/reports/services'
 import { ConfigService, ContextService } from '@app/service'
 import { ChartData } from '@app/shared'
 
+@UntilDestroy()
 @Component({
   selector: 'app-statistics-gender-chart',
   templateUrl: './gender-chart.component.html',

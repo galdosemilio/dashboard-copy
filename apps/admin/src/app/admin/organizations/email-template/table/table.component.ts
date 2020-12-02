@@ -4,10 +4,11 @@ import { EmailTemplatesDataSource } from '@coachcare/backend/data'
 import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { EmailTemplate, OrganizationProvider } from '@coachcare/npm-api'
 import { EmailTemplateDialogComponent } from '../dialogs'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-email-template-table',
   templateUrl: './table.component.html'

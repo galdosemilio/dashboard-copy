@@ -12,7 +12,7 @@ import {
   PackageEnrollmentSegment
 } from '@coachcare/npm-api'
 import { intersectionBy, uniqBy } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import {
@@ -20,6 +20,7 @@ import {
   PhaseEnrollmentDataSource
 } from '../../services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-rightpanel-phases',
   templateUrl: './phases.component.html',

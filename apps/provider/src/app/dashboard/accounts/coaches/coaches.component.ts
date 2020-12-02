@@ -8,7 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { MatDialog, MatSort, Sort } from '@coachcare/material'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { STORAGE_COACHES_PAGINATION } from '@app/config'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
@@ -25,6 +25,7 @@ import { delay } from 'rxjs/operators'
 import { AccountCreateDialog } from '../dialogs'
 import { CoachesDatabase, CoachesDataSource } from './services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-coaches',
   templateUrl: './coaches.component.html',

@@ -5,10 +5,11 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { SupplementDataSource } from '@app/dashboard/accounts/dieters/services'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-journal-supplements-table',
   templateUrl: './table.component.html',

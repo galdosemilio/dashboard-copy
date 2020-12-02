@@ -13,8 +13,9 @@ import {
 } from '@coachcare/backend/data'
 import { PackageAssociation, PackageData } from '@coachcare/npm-api'
 import { BindForm, BINDFORM_TOKEN } from '@coachcare/common/directives'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-organizations-label-selector',
   templateUrl: './label-selector.component.html',

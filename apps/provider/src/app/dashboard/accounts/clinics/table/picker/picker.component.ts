@@ -27,7 +27,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { CcrPaginator } from '@app/shared'
 import { OrganizationAccess } from '@coachcare/npm-api'
 import { forOwn } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
 export interface ClinicsPickerValue {
@@ -42,6 +42,7 @@ export interface ClinicsPickerValue {
   }
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-clinics-table-picker',
   templateUrl: './picker.component.html',

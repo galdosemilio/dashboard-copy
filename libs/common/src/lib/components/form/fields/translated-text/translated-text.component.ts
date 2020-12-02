@@ -13,7 +13,7 @@ import { SelectorOption } from '@coachcare/common/shared'
 import { LanguageService } from '@coachcare/common/services'
 import { LOCALES } from '@coachcare/common/shared'
 import { differenceWith } from 'lodash'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
 interface InitialValueItem {
@@ -21,6 +21,7 @@ interface InitialValueItem {
   content: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-form-field-translated-text',
   templateUrl: './translated-text.component.html',

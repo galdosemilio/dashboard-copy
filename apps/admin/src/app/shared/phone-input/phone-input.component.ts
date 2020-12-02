@@ -16,7 +16,7 @@ import {
 } from '@angular/forms'
 import { NotifierService } from '@coachcare/common/services'
 import { TranslateService } from '@ngx-translate/core'
-import { untilDestroyed } from 'ngx-take-until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { CountryProvider, CountryCode } from '@coachcare/npm-api'
 
 export function ccrPhoneValidator(control: FormControl) {
@@ -26,6 +26,7 @@ export function ccrPhoneValidator(control: FormControl) {
     : null
 }
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-phone-input',
   templateUrl: './phone-input.component.html',
