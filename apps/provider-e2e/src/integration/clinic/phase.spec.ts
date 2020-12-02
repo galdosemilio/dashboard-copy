@@ -67,6 +67,10 @@ describe('Clinics -> Clinic -> Phases', function () {
     cy.tick(1000)
 
     cy.get('mat-dialog-container')
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
       .find('input[data-placeholder="Title"]')
       .type('test title')
 

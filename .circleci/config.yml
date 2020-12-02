@@ -149,6 +149,9 @@ jobs:
           name: Installing Cypress ad-hoc
           command: ./node_modules/.bin/cypress install
       - run:
+          name: Sound card default config
+          command: echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
+      - run:
           name: Running affected e2e
           command: yarn run cy-serve:provider
     parallelism: 5
@@ -161,6 +164,9 @@ jobs:
       - run:
           name: Installing Cypress ad-hoc
           command: ./node_modules/.bin/cypress install
+      - run:
+          name: Sound card default config
+          command: echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
       - run:
           name: Running affected e2e
           command: yarn run cy-serve:admin

@@ -121,7 +121,7 @@ const interceptCoreApiCalls = (
 
   cy.route(
     'GET',
-    '4.0/organization/3378/preference?id=3378&mala=true',
+    '4.0/organization/3378/preference?id=3378**',
     'fixture:/api/organization/getPreference'
   )
   cy.route(

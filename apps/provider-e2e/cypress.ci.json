@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://localhost:4201",
   "defaultCommandTimeout": 60000,
-  "pageLoadTimeout": 180000,
+  "pageLoadTimeout": 120000,
   "numTestsKeptInMemory": 3,
   "viewportWidth": 1280,
   "viewportHeight": 720,
