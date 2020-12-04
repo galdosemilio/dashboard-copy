@@ -45,7 +45,6 @@
           {{ 'PHASE.ENROLL' | translate }}
         </a>
         <button
-        [disabled]="!row.package.organization?.isDirect || !row.package.organization?.permissions.admin"
         mat-button
         color="warn"
         class="ccr-button"

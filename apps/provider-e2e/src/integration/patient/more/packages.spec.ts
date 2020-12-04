@@ -1,11 +1,8 @@
 import { standardSetup } from './../../../support'
 
 describe('Patient profile -> more -> phases and labels', function () {
-  beforeEach(() => {
-    standardSetup()
-  })
-
   it('View and select packages', function () {
+    standardSetup()
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/settings;s=labels`)
 
     cy.get('app-labels-table').find('mat-row').as('packageRows')
@@ -31,5 +28,26 @@ describe('Patient profile -> more -> phases and labels', function () {
       .should('contain', 'Package 3')
       .find('a')
       .click()
+  })
+
+  it(`The 'unenroll' button is not disabled even if there's no direct organization association`, function () {
+    standardSetup(undefined, [
+      {
+        url: '/2.0/access/organization?**',
+        fixture: 'fixture:api/organization/getAllWithNoDirect'
+      }
+    ])
+    cy.setOrganization('cmwl')
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/settings;s=labels`)
+
+    cy.get('app-labels-table').find('mat-row').as('packageRows')
+
+    cy.get('@packageRows')
+      .eq(0)
+      .find('button')
+      .contains('Unenroll')
+      .parent()
+      .should('be.enabled')
   })
 })
