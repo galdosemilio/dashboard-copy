@@ -38,7 +38,6 @@ export class PackageSelectorComponent implements BindForm, OnDestroy, OnInit {
   private _value: string[] = []
 
   constructor(
-    @Host()
     @SkipSelf()
     private bindForm: BindFormDirective,
     private builder: FormBuilder,
