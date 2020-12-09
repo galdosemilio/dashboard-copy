@@ -9,6 +9,7 @@ import {
   GetMessageActivitySummaryRequest,
   GetMessageDraftRequest,
   GetThreadMessagingRequest,
+  MarkAllMessagesAsViewedRequest,
   UpdateThreadMessagingRequest,
   UpsertMessageDraftRequest
 } from './requests'
@@ -177,6 +178,22 @@ export class Messaging {
       endpoint: `/message/draft`,
       method: 'DELETE',
       version: '1.0',
+      data: request
+    })
+  }
+
+  /**
+   * Marks all messages as viewed
+   * @param request must implement MarkAllMessagesAsViewedRequest
+   * @returns Promise<void>
+   */
+  public markAllMessagesAsViewed(
+    request: MarkAllMessagesAsViewedRequest
+  ): Promise<void> {
+    return this.apiService.request({
+      endpoint: `/message/viewed`,
+      method: 'POST',
+      version: '2.0',
       data: request
     })
   }

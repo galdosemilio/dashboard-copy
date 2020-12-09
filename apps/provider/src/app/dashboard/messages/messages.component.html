@@ -12,7 +12,12 @@
   </div>
 
   <div fxFlex="grow" fxLayout="row" fxLayoutAlign="stretch">
-    <div class="ccr-recipients" fxLayout="column">
+    <div class="ccr-recipients" fxLayout="column" fxLayoutGap="10px">
+      <div *ngIf="hasUnreadThreads" class="ccr-recipients-scroll unread-button">
+        <button [disabled]="isMarkingAsRead" (click)="showMarkUnreadDialog()" fxFlex class="ccr-button" mat-button>
+          {{ 'GLOBAL.MESSAGES_MARK_AS_READ' | translate }}
+        </button>
+      </div>
 
       <app-messages-recipients *ngIf="current"
         [current]="current" [total]="source?.total"

@@ -185,7 +185,11 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     status: 201,
     response: { id: '1' }
   }).as('accountPostRequest')
-  cy.route('GET', '/2.0/message/unread', 'fixture:/api/message/getUnreadNone')
+  cy.route(
+    'GET',
+    '/2.0/message/unread',
+    fetchOverride('/2.0/message/unread', 'fixture:/api/message/getUnreadNone')
+  )
   cy.route(
     'GET',
     '/3.0/conference/video/call**',
@@ -202,7 +206,16 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     'fixture:/api/general/emptyDataEmptyPagination'
   )
   cy.route('GET', '/2.0/message/thread?**', 'fixture:/api/message/getThreads')
-  cy.route('GET', '/2.0/message/thread/**', 'fixture:/api/message/getThread')
+  cy.route(
+    'GET',
+    '/2.0/message/thread/**',
+    'fixture:/api/message/getThread'
+  ).as('threadGetRequest')
+  cy.route(
+    'POST',
+    '/2.0/message/viewed',
+    'fixture:/api/general/emptyObject'
+  ).as('threadMarkAsViewedRequest')
   cy.route(
     'GET',
     '/1.0/authentication/**',

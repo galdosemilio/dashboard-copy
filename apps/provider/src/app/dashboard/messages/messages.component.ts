@@ -13,10 +13,12 @@ import {
   EventsService,
   NotifierService
 } from '@app/service'
-import { _, MessageRecipient, MessageThread } from '@app/shared'
+import { _, MessageRecipient, MessageThread, PromptDialog } from '@app/shared'
+import { MatDialog } from '@coachcare/material'
 import {
   AccSingleResponse,
   GetAllMessagingResponse,
+  Messaging,
   MessagingThreadSegment
 } from '@coachcare/npm-api'
 import { findIndex, get, uniqBy } from 'lodash'
@@ -37,7 +39,9 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public account$ = new Subject<string[]>() // observable for source
   public active = 0
   public current: AccSingleResponse
+  public hasUnreadThreads = false
   public interval: any
+  public isMarkingAsRead = false
   public messagingEnabled = false
   public newThread: MessageThread
   public pageIndex$ = new BehaviorSubject<number>(0)
@@ -52,9 +56,11 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     private router: Router,
     private account: AccountProvider,
     private database: ThreadsDatabase,
+    private dialog: MatDialog,
     private config: ConfigService,
     private context: ContextService,
     private bus: EventsService,
+    private messaging: Messaging,
     private notifier: NotifierService
   ) {
     this.pageSize = this.config.get('app.limit.threads', 20)
@@ -104,6 +110,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     this.selectAccounts()
 
     this.setRefresh()
+    this.resolveUnreadThreads()
   }
 
   ngAfterContentInit() {
@@ -170,6 +177,37 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     this.newThread = {
       recipients: accounts
     }
+  }
+
+  public showMarkUnreadDialog(): void {
+    this.dialog
+      .open(PromptDialog, {
+        data: {
+          title: _('GLOBAL.MESSAGES_MARK_AS_READ'),
+          content: _('GLOBAL.MESSAGES_MARK_AS_READ_DESCRIPTION')
+        }
+      })
+      .afterClosed()
+      .subscribe(async (confirm) => {
+        try {
+          if (!confirm) {
+            return
+          }
+
+          this.isMarkingAsRead = true
+
+          await this.messaging.markAllMessagesAsViewed({})
+
+          this.bus.trigger('system.unread.threads')
+
+          this.isMarkingAsRead = false
+
+          this.notifier.success(_('NOTIFY.SUCCESS.THREADS_MARKED_READ'))
+        } catch (error) {
+          console.error(error)
+          this.notifier.error(error)
+        }
+      })
   }
 
   formatThread(t: MessagingThreadSegment): MessageThread {
@@ -241,5 +279,16 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     }
     lastPosition.scrolled = position.scrolled
+  }
+
+  private async resolveUnreadThreads(): Promise<void> {
+    try {
+      const unreadData = await this.messaging.getUnread()
+
+      this.hasUnreadThreads =
+        unreadData.unreadThreadsCount > 0 || unreadData.unreadMessagesCount > 0
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 }

@@ -58,4 +58,45 @@ describe('Messages -> basic message page layout is correct', function () {
       .find('a')
       .should('have.length', 5)
   })
+
+  it('Allows marking all threads as read', function () {
+    cy.setOrganization('ccr')
+    cy.setTimezone('et')
+    standardSetup(undefined, [
+      {
+        url: '/2.0/message/unread',
+        fixture: 'fixture:/api/message/getUnread'
+      }
+    ])
+
+    cy.visit(`/messages`)
+
+    cy.get('div.ccr-recipients')
+      .find('button')
+      .contains('Mark all messages as read')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('Yes')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.wait('@threadMarkAsViewedRequest')
+  })
+
+  it('Mark all threads as read button only appears if there are unread threads', function () {
+    cy.setOrganization('ccr')
+    cy.setTimezone('aet')
+    standardSetup()
+
+    cy.visit(`/messages`)
+
+    cy.get('div.ccr-recipients')
+
+    cy.get('button').contains('Mark all messages as read').should('not.exist')
+  })
 })
