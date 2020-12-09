@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <p>{{ 'REPORTS.MESSAGE_ACTIVITY_DESCRIPTION' | translate:{org: organization} }}</p>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button (click)="downloadCSV()" class="ccr-button" color="primary" mat-button>
+      {{ 'REPORTS.EXPORT_CSV' | translate }}
+    </button>
+  </div>
+</div>

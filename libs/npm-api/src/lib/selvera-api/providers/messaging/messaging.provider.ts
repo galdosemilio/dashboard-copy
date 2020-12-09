@@ -6,6 +6,7 @@ import {
   CreateThreadMessagingRequest,
   DeleteMessageDraftRequest,
   GetAllMessagingRequest,
+  GetMessageActivitySummaryRequest,
   GetMessageDraftRequest,
   GetThreadMessagingRequest,
   UpdateThreadMessagingRequest,
@@ -16,6 +17,7 @@ import {
   GetThreadMessagingResponse,
   GetUnreadMessagingResponse
 } from './responses'
+import { GetMessageActivitySummaryResponse } from './responses/getActivitySummary.response'
 
 export class Messaging {
   public constructor(private readonly apiService: ApiService) {}
@@ -32,6 +34,22 @@ export class Messaging {
       endpoint: `/message`,
       method: 'POST',
       version: '2.0',
+      data: request
+    })
+  }
+
+  /**
+   * Generates a messaging activity summary
+   * @param request must implement GetActivitySummaryRequest
+   * @returns Promise<GetActivitySummaryResponse>
+   */
+  public getActivitySummary(
+    request: GetMessageActivitySummaryRequest
+  ): Promise<GetMessageActivitySummaryResponse> {
+    return this.apiService.request({
+      endpoint: '/message/activity-summary',
+      method: 'GET',
+      version: '1.0',
       data: request
     })
   }

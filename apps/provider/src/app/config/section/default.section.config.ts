@@ -2,7 +2,7 @@ import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/for
 import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
 import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component'
 import { _ } from '@app/shared/utils'
-import { CompositionColumns, JournalTabs } from './consts'
+import { CompositionColumns, JournalTabs, SidenavOptions } from './consts'
 import { SectionConfigDetails } from './models/section.details'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
@@ -37,6 +37,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     SHOW_DAYSHEET_BUTTON: false,
     SHOW_REMINDERS: true,
     REMINDERS_FORM: '15081'
+  },
+  SIDENAV: {
+    HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
   }
 }
 
@@ -65,5 +68,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     SHOW_DAYSHEET_BUTTON: false,
     SHOW_REMINDERS: true,
     REMINDERS_FORM: '172'
+  },
+  SIDENAV: {
+    HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
   }
 }

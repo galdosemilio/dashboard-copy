@@ -15,6 +15,8 @@ import {
 } from './'
 import { CommunicationsReportComponent } from './communications'
 import { CallsComponent } from './communications/calls'
+import { MessageActivityReportComponent } from './custom'
+import { CustomReportsComponent } from './custom/custom-reports.component'
 import { RPMReportComponent } from './rpm'
 import { RPMBillingComponent } from './rpm/rpm-billing'
 
@@ -73,6 +75,14 @@ export const ReportsRoutes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'billing' },
       { path: 'billing', component: RPMBillingComponent }
+    ]
+  },
+  {
+    path: 'custom',
+    component: CustomReportsComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'message-activity' },
+      { path: 'message-activity', component: MessageActivityReportComponent }
     ]
   }
 ]

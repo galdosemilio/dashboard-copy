@@ -3,6 +3,7 @@ import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/ac
 import { PackageSelectorProps } from '@app/shared/components/package-selector/models'
 import { PackageSelectorComponent } from '@app/shared/components/package-selector/package-selector.component'
 import { _ } from '@app/shared/utils'
+import { SidenavOptions } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 
 export const ApolloUSProdSectionConfig: SectionConfigDetails = {
@@ -53,6 +54,9 @@ export const ApolloUSProdSectionConfig: SectionConfigDetails = {
       }
     },
     SHOW_ACC_IDN_INPUT_CREATE: true
+  },
+  SIDENAV: {
+    SHOWN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
   }
 }
 
@@ -109,5 +113,8 @@ export const ApolloUSTestSectionConfig: SectionConfigDetails = {
       }
     },
     SHOW_ACC_IDN_INPUT_CREATE: true
+  },
+  SIDENAV: {
+    SHOWN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
   }
 }

@@ -1,4 +1,5 @@
 export * from './lastMessage'
+export * from './messageActivitySummaryItem'
 export * from './messagingAccount'
 export * from './messagingItem'
 export * from './messagingPreference.single'

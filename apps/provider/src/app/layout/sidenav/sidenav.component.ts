@@ -305,6 +305,12 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 navName: _('SIDENAV.COMMUNICATIONS'),
                 navRoute: 'reports/communications',
                 icon: 'perm_phone_msg'
+              },
+              {
+                code: SidenavOptions.REPORT_CUSTOM,
+                navName: _('SIDENAV.CUSTOM_REPORT'),
+                navRoute: 'reports/custom',
+                icon: 'content_paste'
               }
             ]
           },

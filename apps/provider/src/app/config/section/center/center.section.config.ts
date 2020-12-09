@@ -27,7 +27,8 @@ export const CenterForMedicalWeightLossProdSectionConfig: SectionConfigDetails =
       SidenavOptions.ACCOUNTS_COACHES,
       SidenavOptions.REPORT_OVERVIEW,
       SidenavOptions.REPORT_STATISTICS,
-      SidenavOptions.STORE
+      SidenavOptions.STORE,
+      SidenavOptions.REPORT_CUSTOM
     ],
     SHOWN_OPTIONS: [SidenavOptions.ACCOUNTS_COACHES]
   }
@@ -57,7 +58,8 @@ export const CenterForMedicalWeightLossTestSectionConfig: SectionConfigDetails =
       SidenavOptions.ACCOUNTS_COACHES,
       SidenavOptions.REPORT_OVERVIEW,
       SidenavOptions.REPORT_STATISTICS,
-      SidenavOptions.STORE
+      SidenavOptions.STORE,
+      SidenavOptions.REPORT_CUSTOM
     ],
     SHOWN_OPTIONS: [SidenavOptions.ACCOUNTS_COACHES]
   }

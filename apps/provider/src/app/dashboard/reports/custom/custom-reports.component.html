@@ -1,0 +1,17 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+      <h2 fxFlex>{{'SIDENAV.REPORTS' | translate}}</h2>
+  </div>
+</div>
+
+<div class="ccr-reports">
+  <div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
+    <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['message-activity']">
+      {{ 'REPORTS.MESSAGE_ACTIVITY' | translate }}
+    </a>
+  </div>
+
+  <div class="ccr-subcomponent">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import {
   CommunicationsProviders
 } from './communications'
 import { ControlsComponents } from './controls'
+import { CustomReportsComponents } from './custom'
 import { OverviewComponents } from './overview'
 import { ReportsComponent } from './reports.component'
 import { RPMComponents } from './rpm'
@@ -18,6 +19,7 @@ import { ReportsDatabase, StatisticsDatabase } from './services'
 export const ReportsComponents = [
   ...CommunicationsComponents,
   ...ControlsComponents,
+  ...CustomReportsComponents,
   ...RPMComponents,
   ...StatisticsComponents,
   ...OverviewComponents,
