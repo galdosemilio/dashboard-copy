@@ -104,7 +104,6 @@ export class CcrDateInputComponent
   }
 
   onDatepickerFocus($event: any) {
-    console.log('focusing the MF')
     if ($event && $event.target) {
       this.textInput.nativeElement.select()
       this.onTouched()

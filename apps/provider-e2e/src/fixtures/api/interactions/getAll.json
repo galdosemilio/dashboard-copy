@@ -1,6 +1,16 @@
 {
   "data": [
     {
+      "auditLog": [
+        {
+          "note": "Test Note",
+          "createdBy": {
+            "id": "1",
+            "firstName": "Test Account",
+            "lastName": "Test Account"
+          }
+        }
+      ],
       "id": "6019",
       "initiator": {
         "id": "2852",
@@ -8,7 +18,11 @@
         "lastName": "Pacheco Arrieta",
         "email": "zcyon@coachcare.com"
       },
-      "organization": { "id": "30", "name": "CoachCare", "hierarchyPath": ["30"] },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
       "type": { "id": "2", "name": "External audio call" },
       "source": { "id": "2", "name": "Manual" },
       "includeInCodeBilling": false,
@@ -43,9 +57,13 @@
         ]
       },
       "status": "ended",
-      "time": { "start": "2020-10-03T03:28:00+00:00", "end": "2020-10-03T03:43:00+00:00" }
+      "time": {
+        "start": "2020-10-03T03:28:00+00:00",
+        "end": "2020-10-03T03:43:00+00:00"
+      }
     },
     {
+      "auditLog": [],
       "id": "5982",
       "initiator": {
         "id": "2852",
@@ -54,7 +72,11 @@
         "email": "zcyon@coachcare.com"
       },
       "subaccount": { "id": "462" },
-      "organization": { "id": "30", "name": "CoachCare", "hierarchyPath": ["30"] },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
       "source": { "id": "1", "name": "Twilio" },
       "includeInCodeBilling": true,
       "room": "2852-1601532187795",
@@ -97,6 +119,7 @@
       }
     },
     {
+      "auditLog": [],
       "id": "5981",
       "initiator": {
         "id": "2852",
@@ -105,7 +128,11 @@
         "email": "zcyon@coachcare.com"
       },
       "subaccount": { "id": "462" },
-      "organization": { "id": "30", "name": "CoachCare", "hierarchyPath": ["30"] },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
       "source": { "id": "1", "name": "Twilio" },
       "includeInCodeBilling": true,
       "room": "2852-1601531703484",

@@ -93,6 +93,16 @@
         </mat-cell>
         </ng-container>
 
+        <ng-container cdkColumnDef="note">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.ADDENDUM' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+                <span>{{ 'LIBRARY.FORMS.ADDENDUM' | translate }}</span>
+                <span *ngIf="row.note" (click)="showAddendumDialog(row)" class="patient-link">
+                    {{'LIBRARY.FORMS.VIEW_ADDENDUM_TOOLTIP' | translate }}
+                </span>
+            </mat-cell>
+        </ng-container>
+
         <ng-container cdkColumnDef="actions">
         <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
         <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxFlex.xs="grow">

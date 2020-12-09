@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "Notice",
     "ALERT_TYPE": "Alert Type",
     "BILLABLE_SERVICE": "Billable Service",
+    "CALLS_LATE_EDIT_DESCRIPTION": "A communication record may be modified only one time. In addition, this change requires an explanation be entered below.",
+    "CALL_ADDENDUM_CHANGE": "Changed from {{ previous }} to {{ current }}",
     "CALL_INITIATOR": "Communication Initiator",
     "CLEAR_FILTER": "Clear Filter",
     "COACH_STATISTICS": "Coach Statistics",

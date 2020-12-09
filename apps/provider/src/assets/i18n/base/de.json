@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "Beachten",
     "ALERT_TYPE": "Alarmtyp",
     "BILLABLE_SERVICE": "Abrechenbare Leistung",
+    "CALLS_LATE_EDIT_DESCRIPTION": "Ein Kommunikationsdatensatz darf nur einmal geändert werden. Zusätzlich erfordert diese Änderung eine Erklärung, die unten eingegeben wird.",
+    "CALL_ADDENDUM_CHANGE": "Von {{previous}} in {{current}}",
     "CALL_INITIATOR": "Kommunikation Initiator",
     "CLEAR_FILTER": "Filter zurücksetzen",
     "COACH_STATISTICS": "Trainerstatistiken",

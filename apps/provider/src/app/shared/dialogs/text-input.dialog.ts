@@ -14,6 +14,7 @@ export class TextInputDialog {
     private dialogRef: MatDialogRef<TextInputDialog>,
     @Inject(MAT_DIALOG_DATA)
     public data: {
+      description?: string
       title: string
       label: string
       ok: string

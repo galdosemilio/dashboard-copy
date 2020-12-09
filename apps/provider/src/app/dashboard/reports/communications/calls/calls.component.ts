@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core'
 import { MatDialog, MatSelectChange } from '@coachcare/material'
 import {
   ContextService,
@@ -8,7 +15,9 @@ import {
 import {
   AddManualInteractionDialog,
   CcrPaginator,
-  PromptDialog
+  ConfirmDialog,
+  PromptDialog,
+  TextInputDialog
 } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
@@ -49,6 +58,7 @@ export class CallsComponent implements OnDestroy, OnInit {
     'participants',
     'clinic',
     'start',
+    'note',
     'actions'
   ]
   isLoading = false
@@ -59,6 +69,7 @@ export class CallsComponent implements OnDestroy, OnInit {
   private account$: Subject<string> = new Subject<string>()
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private context: ContextService,
     private database: CallHistoryDatabase,
     private dialog: MatDialog,
@@ -127,6 +138,9 @@ export class CallsComponent implements OnDestroy, OnInit {
       csv += `"TIMESTAMP"${separator}`
       csv += `"TYPE"${separator}`
       csv += `"DURATION"${separator}`
+      csv += `"ADDENDUM TEXT"${separator}`
+      csv += `"ADDENDUM CHANGE"${separator}`
+      csv += `"ADDENDUM CREATOR"${separator}`
 
       for (let i = 0; i < highestParticipantAmount; ++i) {
         csv += `"PARTICIPANT [${i + 1}]"`
@@ -148,6 +162,24 @@ export class CallsComponent implements OnDestroy, OnInit {
           call.type.name
         )}"${separator}`
         csv += `"${call.time.duration} minutes"${separator}`
+        csv += `"${
+          call.latestAuditLog.note ? call.latestAuditLog.note : '-'
+        }"${separator}`
+        if (Object.keys(call.latestAuditLog).length) {
+          csv += `"Changed from ${call.latestAuditLog.billableService.previous.name} to ${call.latestAuditLog.billableService.current.name}"${separator}`
+        } else {
+          csv += `"-"${separator}`
+        }
+        csv += `"${
+          call.latestAuditLog.createdBy
+            ? call.latestAuditLog.createdBy.firstName +
+              ' ' +
+              call.latestAuditLog.createdBy.lastName +
+              ' (ID: ' +
+              call.latestAuditLog.createdBy.id +
+              ')'
+            : '-'
+        }"${separator}`
 
         call.participants.forEach((participant, index) => {
           csv += `"`
@@ -187,17 +219,101 @@ export class CallsComponent implements OnDestroy, OnInit {
         return
       }
 
-      row.billableService = billServ
+      const noteIsRequired =
+        moment().diff(moment(row.time.start), 'hours') >= 24
+      const previousBillableService = row.billableService
+      let note: string | boolean
+
+      if (noteIsRequired) {
+        note = await this.dialog
+          .open(TextInputDialog, {
+            data: {
+              description: _('REPORTS.CALLS_LATE_EDIT_DESCRIPTION'),
+              title: _('LIBRARY.FORMS.ADDENDUM'),
+              ok: _('GLOBAL.UPDATE')
+            },
+            width: '60vw'
+          })
+          .afterClosed()
+          .toPromise()
+      }
+
+      if (noteIsRequired && !note) {
+        $event.source.value = row.billableService.id
+        this.cdr.detectChanges()
+        return
+      }
 
       await this.interaction.update({
         id: row.id,
-        billableService:
-          row.billableService.id !== '-1' ? row.billableService.id : null
+        billableService: billServ.id === '-1' ? null : billServ.id,
+        note: note as string
       })
+
+      row.billableService = billServ
+
+      if (!noteIsRequired) {
+        this.notify.success(_('NOTIFY.SUCCESS.INTERACTION_UPDATED'))
+        return
+      }
+
+      row.note = note as string
+      row.latestAuditLog = {
+        billableService: {
+          previous: previousBillableService,
+          current: billServ
+        },
+        createdBy: {
+          firstName: this.context.user.firstName,
+          lastName: this.context.user.lastName,
+          id: this.context.user.id
+        },
+        note: note as string
+      }
+      row.canUpdateRpmBilling = false
+      row.canBeDeleted = false
       this.notify.success(_('NOTIFY.SUCCESS.INTERACTION_UPDATED'))
     } catch (error) {
       this.notify.error(error)
     }
+  }
+
+  public async showAddendumDialog(row: CallHistoryItem): Promise<void> {
+    const billableServices = Object.values(BILLABLE_SERVICES)
+    const previousService = billableServices.find(
+      (billServ) =>
+        billServ.id === row.latestAuditLog.billableService.previous.id
+    )
+    const currentService = billableServices.find(
+      (billServ) =>
+        billServ.id === row.latestAuditLog.billableService.current.id
+    )
+
+    const translatedLine = await this.translate
+      .get(_('REPORTS.CALL_ADDENDUM_CHANGE'), {
+        previous: previousService
+          ? previousService.name
+          : row.latestAuditLog.billableService.previous.name,
+        current: currentService
+          ? currentService.name
+          : row.latestAuditLog.billableService.current.name
+      })
+      .toPromise()
+
+    this.dialog.open(ConfirmDialog, {
+      data: {
+        title: _('LIBRARY.FORMS.ADDENDUM'),
+        content: `<strong>${
+          row.latestAuditLog.createdBy.firstName +
+          ' ' +
+          row.latestAuditLog.createdBy.lastName
+        }</strong><br/><br/>
+        ${translatedLine}
+        <br/><br/><i>${row.latestAuditLog.note}</i>`,
+        hideAcceptButton: true
+      },
+      width: '60vw'
+    })
   }
 
   showAddInteractionDialog(): void {

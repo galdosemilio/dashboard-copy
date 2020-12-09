@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "Avviso",
     "ALERT_TYPE": "Tipo di Avviso",
     "BILLABLE_SERVICE": "Servizio Fatturabile",
+    "CALLS_LATE_EDIT_DESCRIPTION": "Un record comunicazione può essere modificato solo una volta. Inoltre, questo cambiamento richiede una spiegazione essere riportati sotto.",
+    "CALL_ADDENDUM_CHANGE": "Cambiato da {{previous}} a {{current}}",
     "CALL_INITIATOR": "Comunicazione Iniziatore",
     "CLEAR_FILTER": "Rimuovi Filtro",
     "COACH_STATISTICS": "Statistiche Coach",

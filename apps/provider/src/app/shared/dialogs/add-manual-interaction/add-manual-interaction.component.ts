@@ -72,8 +72,9 @@ export class AddManualInteractionDialog implements OnInit {
         range: {
           start: startTime.toISOString(),
           end: endTime.toISOString()
-        }
-      }
+        },
+        note: 'some note'
+      } as any
 
       await this.interaction.createManual(payload)
       this.notifier.success(_('NOTIFY.SUCCESS.MANUAL_INTERACTION_CREATED'))

@@ -1,7 +1,7 @@
 import { standardSetup } from '../../support'
 
 describe('Dashboard -> Coach Profile', function () {
-  it('View coach profile with 3 tabs', function () {
+  it('View coach profile with 4 tabs', function () {
     standardSetup()
 
     cy.visit(`/accounts/coaches/${Cypress.env('providerIdOther')}`)

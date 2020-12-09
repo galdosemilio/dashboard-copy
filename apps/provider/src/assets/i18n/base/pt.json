@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "Aviso",
     "ALERT_TYPE": "Tipo de Alerta",
     "BILLABLE_SERVICE": "Serviço Cobrável",
+    "CALLS_LATE_EDIT_DESCRIPTION": "uma ficha de comunicação só pode ser modificada uma vez. Além disso, esta mudança requer uma explicação ser indicados abaixo.",
+    "CALL_ADDENDUM_CHANGE": "Alterada de {{previous}} para {{current}}",
     "CALL_INITIATOR": "Comunicação Iniciador",
     "CLEAR_FILTER": "Limpar Filtro",
     "COACH_STATISTICS": "Estatísticas do treinador",

@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "Aviso",
     "ALERT_TYPE": "Tipo de Alerta",
     "BILLABLE_SERVICE": "Servicio Facturable",
+    "CALLS_LATE_EDIT_DESCRIPTION": "Un registro de comunicación puede ser modificado una sola vez. Además, será necesario ingresar una explicación a continuación.",
+    "CALL_ADDENDUM_CHANGE": "Cambiado de {{ previous }} a {{ current }}",
     "CALL_INITIATOR": "Iniciador de la Comunicación",
     "CLEAR_FILTER": "Sin Filtro",
     "COACH_STATISTICS": "Estadísticas del Asesor",

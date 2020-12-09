@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "Remarquer",
     "ALERT_TYPE": "Type d’alerte",
     "BILLABLE_SERVICE": "Service Facturable",
+    "CALLS_LATE_EDIT_DESCRIPTION": "Un enregistrement de communication peut être modifiée qu'une seule fois. De plus, ce changement nécessite une explication entrer ci-dessous.",
+    "CALL_ADDENDUM_CHANGE": "De {{previous}} pour {{current}}",
     "CALL_INITIATOR": "Communication initiateur",
     "CLEAR_FILTER": "Effacer les filtres",
     "COACH_STATISTICS": "Statistiques des coach",

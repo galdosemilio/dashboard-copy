@@ -1,4 +1,4 @@
-import { NamedEntity } from '@coachcare/npm-api'
+import { InteractionAuditEntry, NamedEntity } from '@coachcare/npm-api'
 import * as moment from 'moment'
 import { BILLABLE_SERVICES, BillableService } from './billableServices.map'
 import { INTERACTION_SOURCES, INTERACTION_TYPES } from './interactionType.map'
@@ -28,6 +28,8 @@ export class CallHistoryItem {
     id: string
     lastName: string
   }
+  latestAuditLog: InteractionAuditEntry
+  note: string
   organization?: CallOrganization
   participants: CallParticipant[]
   receiver: { firstName: string; lastName: string }
@@ -88,11 +90,19 @@ export class CallHistoryItem {
       this.billableService = BILLABLE_SERVICES.none
     }
 
-    this.canUpdateRpmBilling = moment().isSameOrBefore(
-      moment(this.time.start),
-      'month'
-    )
+    const maxEditableDate = moment(this.time.start).add(1, 'month').date(14)
+    const creationDate = moment(args.createdAt)
+
+    this.canUpdateRpmBilling =
+      Math.abs(creationDate.diff(moment(), 'hours')) < 24 ||
+      (maxEditableDate.isSameOrAfter(moment()) &&
+        (!args.auditLog || !args.auditLog.length))
+
     this.canBeDeleted =
       this.type && this.type.id === '2' && this.canUpdateRpmBilling
+
+    this.latestAuditLog =
+      args.auditLog && args.auditLog.length ? args.auditLog.pop() : {}
+    this.note = this.latestAuditLog.note || ''
   }
 }

@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "تنويه",
     "ALERT_TYPE": "نوع التنبيه",
     "BILLABLE_SERVICE": "خدمة فوترة",
+    "CALLS_LATE_EDIT_DESCRIPTION": "يمكن تعديل سجل الاتصال مرة واحدة فقط. بالإضافة إلى ذلك ، يتطلب هذا التغيير إدخال تفسير أدناه.",
+    "CALL_ADDENDUM_CHANGE": "تغير من {{ previous }} إلى {{ current }}",
     "CALL_INITIATOR": "الاتصالات المبادر",
     "CLEAR_FILTER": "مسح الفرز",
     "COACH_STATISTICS": "إحصاءات المدرب",

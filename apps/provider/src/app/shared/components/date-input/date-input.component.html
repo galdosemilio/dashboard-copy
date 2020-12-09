@@ -21,7 +21,7 @@
         [matDatepicker]="pickerBirth"
         (focus)="onDatepickerFocus($event)">
         <mat-datepicker-toggle matSuffix [for]="pickerBirth"></mat-datepicker-toggle>
-        <mat-datepicker #pickerBirth [disabled]="true" startView="years"></mat-datepicker>
+        <mat-datepicker #pickerBirth startView="years"></mat-datepicker>
         <mat-error *ngIf="errorMessage && form.touched && form.invalid">{{ errorMessage | translate }}</mat-error>
     </mat-form-field>
 </div>

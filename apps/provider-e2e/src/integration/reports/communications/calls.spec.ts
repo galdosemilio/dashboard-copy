@@ -38,4 +38,27 @@ describe('Reports -> Communications -> Interactions', function () {
       .should('contain', 'CoachCare')
       .should('contain', '0 minutes')
   })
+
+  it('Should show the addendum', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/reports/communications/communications`)
+
+    cy.get('mat-table').get('mat-row').as('interactionRows')
+
+    cy.get('@interactionRows').should('have.length', 3)
+
+    cy.get('@interactionRows')
+      .eq(0)
+      .find('button')
+      .contains('open_in_new')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .should('contain', 'Test Account Test Account')
+      .should('contain', 'Test Note')
+  })
 })

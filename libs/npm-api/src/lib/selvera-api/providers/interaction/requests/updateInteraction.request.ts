@@ -4,4 +4,5 @@
 export interface UpdateInteractionRequest {
   id: string
   billableService?: string
+  note?: string
 }

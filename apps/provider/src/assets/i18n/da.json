@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "Varsel",
     "ALERT_TYPE": "Alarm Type",
     "BILLABLE_SERVICE": "Fakturerbare Service",
+    "CALLS_LATE_EDIT_DESCRIPTION": "En kommunikationspost kan kun ændres én gang. Derudover kræver denne ændring en forklaring, der skal angives nedenfor.",
+    "CALL_ADDENDUM_CHANGE": "Ændret fra {{previous}} til {{current}}",
     "CALL_INITIATOR": "Kommunikation Initiativtager",
     "CLEAR_FILTER": "Ryd Filter",
     "COACH_STATISTICS": "Træner Statistik",

@@ -11,5 +11,7 @@
 </mat-dialog-content>
 
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end stretch">
-  <button [color]="data.color" mat-raised-button matDialogClose>{{ data.accept | translate }}</button>
+  <button *ngIf="!data.hideAcceptButton" [color]="data.color" mat-raised-button matDialogClose>
+    {{ data.accept | translate }}
+  </button>
 </div>

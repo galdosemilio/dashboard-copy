@@ -1004,6 +1004,8 @@
     "ALERT_NOTICE": "הודעה",
     "ALERT_TYPE": "סוג התראה",
     "BILLABLE_SERVICE": "שירות לחיוב",
+    "CALLS_LATE_EDIT_DESCRIPTION": "שיא תקשורת ניתן לשינוי רק פעם אחת. בנוסף, השינוי הזה דורש הסבר להזין להלן.",
+    "CALL_ADDENDUM_CHANGE": "שונתה מ- {{previous}} ל {{current}}",
     "CALL_INITIATOR": "יוזם תקשורת",
     "CLEAR_FILTER": "נקה מסנן",
     "COACH_STATISTICS": "סטטיסטיקת מאמן",
