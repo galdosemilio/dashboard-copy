@@ -51,9 +51,9 @@ describe('Reports -> Communications -> Interactions', function () {
 
     cy.get('@interactionRows')
       .eq(0)
-      .find('button')
-      .contains('open_in_new')
-      .click({ force: true })
+      .find('span')
+      .contains('View Addendum')
+      .trigger('click', { force: true })
 
     cy.tick(1000)
 

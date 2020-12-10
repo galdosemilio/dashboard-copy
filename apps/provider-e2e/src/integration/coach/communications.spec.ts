@@ -20,7 +20,7 @@ describe('Other coach profile -> Communications', function () {
       .should('contain', 'Lascario Pacheco')
       .should('contain', 'CoachCare')
       .should('contain', '15 minutes')
-      .should('contain', 'Yes')
+      .should('contain', 'View Addendum')
 
     cy.get('@interactionRows')
       .eq(1)
@@ -28,7 +28,6 @@ describe('Other coach profile -> Communications', function () {
       .should('contain', 'Lascario Pacheco')
       .should('contain', 'CoachCare')
       .should('contain', '33 minutes')
-      .should('contain', 'No')
 
     cy.get('@interactionRows')
       .eq(2)
@@ -36,7 +35,6 @@ describe('Other coach profile -> Communications', function () {
       .should('contain', 'Lascario Pacheco')
       .should('contain', 'CoachCare')
       .should('contain', '0 minutes')
-      .should('contain', 'No')
   })
 
   it('Should show the addendum', function () {
@@ -50,9 +48,9 @@ describe('Other coach profile -> Communications', function () {
 
     cy.get('@interactionRows')
       .eq(0)
-      .find('button')
-      .contains('open_in_new')
-      .click({ force: true })
+      .find('span')
+      .contains('View Addendum')
+      .trigger('click', { force: true })
 
     cy.tick(1000)
 

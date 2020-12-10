@@ -30,6 +30,7 @@
             <ccr-date-input
                 formControlName="startDate"
                 [max]="now"
+                [min]="lastMonth"
                 [placeholder]="'SEQUENCING.START_DATE' | translate"
                 fxFlex>
             </ccr-date-input>

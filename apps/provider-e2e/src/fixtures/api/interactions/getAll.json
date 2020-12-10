@@ -8,6 +8,10 @@
             "id": "1",
             "firstName": "Test Account",
             "lastName": "Test Account"
+          },
+          "billableService": {
+            "previous": { "id": "2", "name": "Telemedicine" },
+            "current": { "id": "5", "name": "BHI" }
           }
         }
       ],

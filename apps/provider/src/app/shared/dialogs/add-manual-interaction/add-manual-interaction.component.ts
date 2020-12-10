@@ -23,6 +23,9 @@ import { Interaction } from '@coachcare/npm-api'
   styleUrls: ['./add-manual-interaction.component.scss']
 })
 export class AddManualInteractionDialog implements OnInit {
+  public lastMonth: moment.Moment = moment()
+    .subtract(1, 'month')
+    .startOf('month')
   public billableServices: BillableService[] = []
   public durations: { value: string; displayValue: string }[] = [
     { value: 'minutes', displayValue: _('GLOBAL.MINUTES') },
