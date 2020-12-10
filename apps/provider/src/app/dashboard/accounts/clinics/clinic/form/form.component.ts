@@ -5,7 +5,6 @@ import { OrgSingleResponse } from '@coachcare/npm-api'
 @Component({
   selector: 'app-clinic-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class ClinicFormComponent implements OnInit {

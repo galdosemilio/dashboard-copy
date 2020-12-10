@@ -1,29 +1,39 @@
 <div class="messages-header" *ngIf="thread?.recipients.length" fxFlex="nogrow" fxLayout="row"
   fxLayoutAlign="start center">
   <div fxFlex fxLayoutAlign="start center" fxLayoutGap="5px">
-    <ng-container *ngFor="let recipient of thread.recipients">
+    <ng-container *ngFor="let recipient of shownRecipients">
       <ccr-avatar [account]="recipient.id" size="messages"></ccr-avatar>
     </ng-container>
 
     <span>
-      <ng-container *ngIf="thread.recipients.length === 1; else recipients">
-        <span (click)="showProfile(thread.recipients[0])" class="patient-link">{{thread.recipients[0].name}}</span>
+      <ng-container *ngIf="shownRecipients.length === 1; else recipients">
+        <span (click)="showProfile(shownRecipients[0])" class="patient-link">{{shownRecipients[0].name}}</span>
       </ng-container>
       <ng-template #recipients>
-        <ng-container *ngFor="let recipient of thread.recipients; let last = last">
+        <ng-container *ngFor="let recipient of shownRecipients; let last = last">
           <span (click)="showProfile(recipient)" class="patient-link">{{recipient.firstName}}</span>
           <ng-container *ngIf="!last">, </ng-container>
+          <ng-container *ngIf="last && shownRecipients.length < thread?.recipients.length">
+            <br>
+            <span>
+              {{ 'BOARD.MESSAGES_PLUS_MORE' | translate:{amount: thread?.recipients.length - shownRecipients.length} }}
+            </span>
+          </ng-container>
         </ng-container>
       </ng-template>
     </span>
   </div>
-  <div fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" >
+  <div *ngIf="thread?.recipients.length === 1" fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" >
     <ccr-call-control [targets]="thread.recipients"></ccr-call-control>
-    <a *ngIf="thread?.recipients.length === 1" mat-button color="primary" class="ccr-icon-button"
+    <a mat-button color="primary" class="ccr-icon-button"
       (click)="showProfile(thread.recipients[0])">
       <mat-icon>person_outline</mat-icon>
       {{'BOARD.VIEW_PROFILE' | translate}}
     </a>
+  </div>
+  <div fxFlex="nogrow" fxLayout="row" fxLayoutAlign="end center">
+    &nbsp;
+    <mat-icon class="clickable" (click)="onToggleChatInfo()">info</mat-icon>
   </div>
 </div>
 
@@ -40,15 +50,18 @@
       <span class="message-heading" *ngIf="message.timestamp">{{message.timestamp}}</span>
       <div class="message-wrap" [class.message-input]="account.id !== message.author" [class.message-output]="account.id === message.author">
         <ccr-avatar size="big" class="message-img" [account]="message.author" [matTooltip]="message.account.firstName + '' + message.account.lastName"></ccr-avatar>
-        <span class="message-text" [innerHTML]="message.content"></span>
+        <span class="message-text">
+          <small class="name">{{ message.account.firstName + ' ' + message.account.lastName }}</small>
+          <br>
+          <span [innerHTML]="message.content"></span>
+        </span>
       </div>
     </ng-container>
   </div>
-
 </div>
 
 <div class="messages-footer" fxFlex="nogrow">
-  <textarea rows="3" [(ngModel)]="newMessage" [detectKey]="'Enter'" supressOnShiftKeyHold="true" (keyPressed)="sendMessage()"
+  <textarea rows="2" [(ngModel)]="newMessage" [detectKey]="'Enter'" supressOnShiftKeyHold="true" (keyPressed)="sendMessage()"
     [placeholder]="'BOARD.TYPE_YOUR_MESSAGES_HERE' | translate"></textarea>
   <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
     <mat-icon>send</mat-icon> {{'GLOBAL.SEND' | translate}}

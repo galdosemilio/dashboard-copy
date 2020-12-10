@@ -38,6 +38,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public accounts: string[]
   public account$ = new Subject<string[]>() // observable for source
   public active = 0
+  public chatInfoEnabled = false
   public current: AccSingleResponse
   public hasUnreadThreads = false
   public interval: any

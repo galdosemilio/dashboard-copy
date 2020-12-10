@@ -8,7 +8,8 @@ import {
   ClinicFormComponent,
   ClinicInfoComponent,
   ClinicPhasesComponent,
-  ClinicPhasesTableComponent
+  ClinicPhasesTableComponent,
+  ClinicSettingsComponent
 } from './clinic'
 import { ClinicsComponent } from './clinics.component'
 import { CreateClinicDialog, CreatePhaseDialog } from './dialogs'
@@ -25,6 +26,7 @@ export const ClinicsComponents = [
   ClinicsComponent,
   ClinicsPickerComponent,
   ClinicsTableComponent,
+  ClinicSettingsComponent,
   CreateClinicDialog,
   CreatePhaseDialog
 ]

@@ -115,11 +115,13 @@ export class FeaturesComponent implements OnDestroy, OnInit {
               })
             : this.messagingPref.updatePreference({
                 id: this.featurePrefs.messagingPrefs.id,
-                isActive: formValue.messaging
+                isActive: formValue.messaging,
+                useAutoThreadParticipation: formValue.useAutoThreadParticipation
               })
           : formValue.messaging !== null &&
             this.messagingPref.createPreference({
               isActive: formValue.messaging,
+              useAutoThreadParticipation: formValue.useAutoThreadParticipation,
               organization: this.orgId || ''
             })) || Promise.resolve()
       )
@@ -180,7 +182,28 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           : Promise.resolve()
       )
 
-      await Promise.all(promises)
+      const promiseValues = await Promise.all(promises)
+
+      this.refreshFeaturePrefsObject(
+        formValue.messaging,
+        promiseValues[4],
+        'messagingPrefs'
+      )
+      this.refreshFeaturePrefsObject(
+        formValue.videoconference,
+        promiseValues[6],
+        'communicationPrefs'
+      )
+      this.refreshFeaturePrefsObject(
+        formValue.rpm,
+        promiseValues[7],
+        'rpmPrefs'
+      )
+      this.refreshFeaturePrefsObject(
+        formValue.fileVault,
+        promiseValues[3],
+        'fileVaultPrefs'
+      )
 
       this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
     } catch (error) {
@@ -199,6 +222,7 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       patientAutoUnenroll: [null],
       rpm: [null],
       sequences: [null],
+      useAutoThreadParticipation: [null],
       videoconference: [null]
     })
 
@@ -224,6 +248,9 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           this.featurePrefs.messagingPrefs.organization.id === this.orgId
             ? this.featurePrefs.messagingPrefs.isActive
             : null,
+        useAutoThreadParticipation: this.featurePrefs.messagingPrefs
+          ? this.featurePrefs.messagingPrefs.useAutoThreadParticipation
+          : false,
         rpm:
           this.featurePrefs.rpmPrefs &&
           this.featurePrefs.rpmPrefs.organization.id === this.orgId
@@ -257,5 +284,29 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           .subscribe(() => this.onSubmit()),
       1000
     )
+  }
+
+  private refreshFeaturePrefsObject(
+    fieldValue: boolean | null,
+    promiseValue: any,
+    propertyName: string
+  ): void {
+    switch (fieldValue) {
+      case false:
+      case true:
+        this.featurePrefs[propertyName] = {
+          ...this.featurePrefs[propertyName],
+          ...promiseValue,
+          organization: { id: this.orgId }
+        }
+        break
+
+      case null:
+        this.featurePrefs[propertyName] = undefined
+        break
+
+      default:
+        break
+    }
   }
 }

@@ -11,6 +11,7 @@ import { UserSearchComponent } from './autocompleters'
 import { AccountAutocompleterComponent } from './autocompleters/account/account.component'
 import { OrganizationAutocompleterComponent } from './autocompleters/organization/organization.component'
 import {
+  FeatureToggleInputComponent,
   OptionBlockFieldComponent,
   TranslatedTextFormFieldComponent
 } from './fields'
@@ -47,6 +48,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     ConsentFormFieldComponent,
     CountryFormFieldComponent,
     EmailFormFieldComponent,
+    FeatureToggleInputComponent,
     LangFormFieldComponent,
     NumberFormFieldComponent,
     PasswordFormFieldComponent,
@@ -71,6 +73,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     ConsentFormFieldComponent,
     CountryFormFieldComponent,
     EmailFormFieldComponent,
+    FeatureToggleInputComponent,
     LangFormFieldComponent,
     NumberFormFieldComponent,
     PasswordFormFieldComponent,

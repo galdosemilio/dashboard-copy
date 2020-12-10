@@ -59,7 +59,35 @@ describe('Messages -> basic message page layout is correct', function () {
       .should('have.length', 5)
   })
 
-  it('Allows marking all threads as read', function () {
+  it.only('Shows the thread info', function () {
+    cy.setOrganization('ccr')
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit('/messages')
+
+    cy.get('div.messages-header')
+      .find('mat-icon')
+      .contains('info')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('ccr-messages-chat-info')
+      .should('contain', 'Thread Information')
+      .should('contain', 'Eric Di Bari')
+
+    cy.get('ccr-messages-chat-info')
+      .find('mat-icon')
+      .contains('clear')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('ccr-messages-chat-info').should('not.exist')
+  })
+  
+    it('Allows marking all threads as read', function () {
     cy.setOrganization('ccr')
     cy.setTimezone('et')
     standardSetup(undefined, [
@@ -99,4 +127,5 @@ describe('Messages -> basic message page layout is correct', function () {
 
     cy.get('button').contains('Mark all messages as read').should('not.exist')
   })
+
 })

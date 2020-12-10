@@ -1,0 +1,20 @@
+<div class="messages-header" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="center stretch">
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <span fxFlex>{{ 'BOARD.THREAD_INFO' | translate }}</span>
+
+      <mat-icon class="clickable" (click)="onHideChatInfo()">clear</mat-icon>
+  </div>
+</div>
+
+<div class="messages-body">
+  <p>{{ 'BOARD.THREAD_MEMBER_LIST' | translate }}</p>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+      <ccr-user-card
+      *ngFor="let user of thread?.recipients"
+      [allowUserLinking]="true"
+      [showCallButton]="true"
+      [showRemoveButton]="false"
+      [user]="user"></ccr-user-card>
+  </div>
+</div>

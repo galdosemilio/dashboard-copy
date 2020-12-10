@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <div [formGroup]="form" class="ccr-content">
+      <div class="ccr-panel">
+          <h3>{{ 'BOARD.CLINIC_MESSAGE_PREFS' | translate }}</h3>
+          <div class="ccr-grid" fxLayout="column">
+              <mat-grid-list [cols]="colSpan" rowHeight="70px">
+                  <mat-grid-tile>
+                      <ccr-feature-toggle-input
+                      data-cy="org-settings-section-features-messages-autothread"
+                      [inheritable]="false"
+                      [label]="'GLOBAL.AUTOMATIC_THREAD_PARTICIPATION' | translate"
+                      [readonly]="true"
+                      formControlName="useAutoThreadParticipation"
+                      fxFlex></ccr-feature-toggle-input>
+                      <i class="ccr-marker" *ngIf="isInherited">&nbsp;*</i>
+                  </mat-grid-tile>
+              </mat-grid-list>
+          </div>
+      </div>
+  </div>
+
+  <p class="footnotes" *ngIf="isInherited">
+      <i class="ccr-marker">*</i> {{ 'BOARD.CLINIC_INHERITED_PREF' | translate }}
+  </p>
+</div>

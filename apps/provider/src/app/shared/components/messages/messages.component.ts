@@ -18,18 +18,19 @@ import {
   GetAllMessagingRequest,
   GetAllMessagingResponse,
   GetThreadMessagingRequest,
-  GetThreadMessagingResponse
+  GetThreadMessagingResponse,
+  Messaging
 } from '@coachcare/npm-api'
-import { MessageContainer } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
+import { MessagingItem } from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import { first, last, uniqBy } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { Messaging } from '@coachcare/npm-api'
 import { MessageRecipient, MessageThread } from './messages.interfaces'
+import { MessageContainer } from '@app/shared/model'
 
 @UntilDestroy()
 @Component({
@@ -46,7 +47,14 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   @Input()
   dieterId: string
   @Input()
-  thread: MessageThread
+  set thread(thread: MessageThread) {
+    this._thread = thread
+    this.shownRecipients = thread.recipients.slice().splice(0, 3)
+  }
+
+  get thread(): MessageThread {
+    return this._thread
+  }
 
   @Output()
   lastMessageSent = new EventEmitter<string>()
@@ -56,6 +64,8 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   refresh = new EventEmitter<void>()
   @Output()
   gotoProfile = new EventEmitter<MessageRecipient>()
+  @Output()
+  toggleChatInfo = new EventEmitter<void>()
 
   changed$ = new Subject<void>()
   disabled = false
@@ -63,7 +73,9 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   offset = 0
   messages: Array<MessageContainer> = []
   newMessage = ''
+  public shownRecipients = []
 
+  private _thread: MessageThread
   private threadId: string = null
   private previousScrollHeight = 0
   private timers: any[] = []
@@ -132,6 +144,10 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
 
   public loadPrevious(): void {
     this.loadMessages()
+  }
+
+  public onToggleChatInfo(): void {
+    this.toggleChatInfo.emit()
   }
 
   public sendMessage(): void {
@@ -215,7 +231,7 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
         if (!res.data.length) {
           return
         }
-        const latest = first(res.data)
+        const latest = first<MessagingItem>(res.data)
         const current = last(this.messages)
         // FIXME as the backend doesn't retrieve the added ID, this is a workaround
         if (
@@ -259,7 +275,7 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
     from(this.messaging.getThread(threadRequest))
       .pipe(takeUntil(this.changed$))
       .subscribe(
-        (res) => {
+        (res: GetThreadMessagingResponse) => {
           try {
             this.previousScrollHeight = this.messageContainer.nativeElement.scrollHeight
           } catch (err) {

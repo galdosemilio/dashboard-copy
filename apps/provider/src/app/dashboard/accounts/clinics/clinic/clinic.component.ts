@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService } from '@app/service'
@@ -6,12 +6,14 @@ import { OrgSingleResponse } from '@coachcare/npm-api'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
-type ClinicComponentSection = 'info' | 'phases'
+type ClinicComponentSection = 'info' | 'phases' | 'settings'
 
 @UntilDestroy()
 @Component({
   selector: 'app-clinic',
-  templateUrl: './clinic.component.html'
+  templateUrl: './clinic.component.html',
+  styleUrls: ['./clinic.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ClinicComponent implements OnDestroy, OnInit {
   public clinic: OrgSingleResponse

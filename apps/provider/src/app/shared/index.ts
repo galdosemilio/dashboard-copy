@@ -11,8 +11,10 @@ import { Dialogs } from './dialogs'
 import { Directives } from './directives'
 import { IconComponents } from './icons'
 import { Pipes } from './pipes'
+import { FeatureToggleInputComponent } from '@coachcare/common/components/form/fields/feature-toggle-input'
 
 export const Components = [
+  FeatureToggleInputComponent,
   ...CmpComponents,
   ...IconComponents,
   ...Dialogs,

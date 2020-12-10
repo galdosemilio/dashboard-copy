@@ -56,13 +56,24 @@
       ></mat-progress-bar>
     </div>
 
-    <ccr-messages
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between stretch">
+      <ccr-messages
+      fxFlex
       [account]="current"
       [thread]="threads[active] ? threads[active] : newThread"
       (lastMessageSent)="threads[active] ?  threads[active].lastMessageSent = $event : null"
       (viewed)="viewedThread($event)"
       (refresh)="resetThreads()"
       (gotoProfile)="gotoProfile($event)"
-    ></ccr-messages>
+      (toggleChatInfo)="chatInfoEnabled = !chatInfoEnabled"
+      ></ccr-messages>
+
+      <ccr-messages-chat-info
+      *ngIf="chatInfoEnabled"
+      [thread]="threads[active] ? threads[active] : newThread"
+      (hideChatInfo)="chatInfoEnabled = false"
+      fxFlex="30%">
+      </ccr-messages-chat-info>
+    </div>
   </div>
 </div>

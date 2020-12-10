@@ -25,6 +25,15 @@
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-autothread"
+    [inheritable]="false"
+    [label]="'GLOBAL.AUTO_THREAD_PARTICIPATION' | translate"
+    [readonly]="form?.value.messaging === null"
+    formControlName="useAutoThreadParticipation"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
     data-cy="org-settings-section-features-openClient"
     [inheritable]="true"
     [label]="'GLOBAL.OPEN_PATIENT_ENROLLMENT' | translate"

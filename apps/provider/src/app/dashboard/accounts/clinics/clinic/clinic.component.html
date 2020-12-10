@@ -35,6 +35,15 @@
         fxLayoutAlign="center center">
         {{ 'GLOBAL.PHASES_LABELS' | translate }}
         </a>
+
+        <a
+        [class.active]="section === 'settings'"
+        [routerLink]="['.', { s: 'settings' }]"
+        ccrLinkActive="active"
+        fxFlex
+        fxLayoutAlign="center center">
+        {{ 'GLOBAL.SETTINGS' | translate }}
+        </a>
     </div>
 
     <div class="ccr-subcomponent" [ngSwitch]="section">
@@ -44,6 +53,10 @@
 
         <div *ngSwitchCase="'phases'">
             <app-clinic-phases></app-clinic-phases>
+        </div>
+
+        <div *ngSwitchCase="'settings'">
+            <app-clinic-settings></app-clinic-settings>
         </div>
     </div>
 </div>

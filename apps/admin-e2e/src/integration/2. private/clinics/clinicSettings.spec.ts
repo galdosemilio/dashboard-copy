@@ -207,6 +207,10 @@ describe('Clinic Settings', () => {
       .find('.mat-select')
       .should('contain', 'Disabled')
 
+    cy.get('[data-cy="org-settings-section-features-autothread"]')
+      .find('.mat-slide-toggle-input')
+      .should('not.be.checked')
+
     cy.get('[data-cy="org-settings-section-features-openClient"]')
       .find('.mat-select')
       .should('contain', 'Enabled')

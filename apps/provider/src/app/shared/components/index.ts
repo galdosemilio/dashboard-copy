@@ -33,6 +33,7 @@ import {
   LocaleTableComponent
 } from './locale-selector'
 import { LoginHistoryComponent } from './login-history'
+import { CcrMessagesChatInfoComponent } from './messages-chat-info'
 import { CcrMessagesComponent } from './messages/messages.component'
 import { OrganizationSearchComponent } from './organization-search'
 import { PackageEnrollComponent } from './package-enroll'
@@ -115,6 +116,7 @@ export const CmpComponents = [
   CcrCallControlComponent,
   CcrDatasourceOverlayComponent,
   CcrDateInputComponent,
+  CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
   CcrPaginator,
   CcrSelectUserComponent,

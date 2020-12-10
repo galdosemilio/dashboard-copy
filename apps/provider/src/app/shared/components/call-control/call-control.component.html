@@ -22,7 +22,8 @@ matTooltipPosition="above">
   <div
   *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
-  (click)="billableServices.length ? undefined : onClick()">
+  (click)="billableServices.length ? undefined : onClick()"
+  class="clickable">
     <mat-icon class="min">phone</mat-icon>
   </div>
   <ccr-popup-description

@@ -9,9 +9,15 @@ fxLayoutGap="10px">
         {{ 'GLOBAL.YOU' | translate }}
     </small>
     <ng-template #defaultName>
-        <small fxFlex>{{ user.firstName }} {{ user.lastName }}</small>
+        <small
+        [class.patient-link]="allowUserLinking"
+        (click)="onGoToUserProfile(user)"
+        fxFlex>
+            {{ user.firstName }} {{ user.lastName }}
+        </small>
     </ng-template>
     <mat-icon
     *ngIf="showRemoveButton && (!currentAccount || currentAccount.id !== user.account)"
     (click)="onRemove(user.account)" class="clickable float-right">close</mat-icon>
+    <ccr-call-control *ngIf="showCallButton" [mode]="1" [targets]="[user]"></ccr-call-control>
 </div>

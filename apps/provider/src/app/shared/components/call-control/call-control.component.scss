@@ -1,4 +1,5 @@
 @import 'shared/directed-styles';
+@import 'variables';
 
 div,
 div > button {
@@ -7,4 +8,8 @@ div > button {
 
 .min {
   @include horizontal-margin-right(0px !important);
+
+  &.disabled {
+    color: mat-color($ccr-foreground, table-actions);
+  }
 }

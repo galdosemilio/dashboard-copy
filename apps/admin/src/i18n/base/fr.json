@@ -141,6 +141,7 @@
     "APP_STORE": "AppStore",
     "ASSOCIATE": "Associer",
     "AUTO_ENROLL_CLIENT": "Inscription automatique du client sur l'association",
+    "AUTO_THREAD_PARTICIPATION": "Participation fil automatique",
     "BACK": "Retour",
     "BASIC_INFORMATION": "Informations",
     "BCC_EMAILS": "",
