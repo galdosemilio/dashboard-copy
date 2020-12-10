@@ -70,6 +70,7 @@ export class FormsComponent implements OnDestroy, OnInit {
         if (args) {
           await this.datasource.updateForm(
             Object.assign(args, {
+              maximumSubmissions: args.maximumSubmissions ? 1 : null,
               id: form.id
             }) as UpdateFormRequest
           )
