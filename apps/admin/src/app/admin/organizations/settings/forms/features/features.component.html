@@ -28,7 +28,7 @@
     data-cy="org-settings-section-features-autothread"
     [inheritable]="false"
     [label]="'GLOBAL.AUTO_THREAD_PARTICIPATION' | translate"
-    [readonly]="form?.value.messaging === null"
+    [readonly]="form?.value.messaging === null || disabledAutothread"
     formControlName="useAutoThreadParticipation"></ccr-feature-toggle-input>
   </mat-grid-tile>
 

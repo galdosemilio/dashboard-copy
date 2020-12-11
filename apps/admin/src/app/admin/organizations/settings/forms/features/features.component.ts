@@ -14,6 +14,7 @@ import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
+import { environment } from '../../../../../../environments/environment'
 
 @UntilDestroy()
 @Component({
@@ -32,6 +33,7 @@ export class FeaturesComponent implements OnDestroy, OnInit {
   @Input() prefs: any
 
   public clientPackages: any[] = []
+  public disabledAutothread: boolean
   public form: FormGroup
 
   constructor(
@@ -50,6 +52,15 @@ export class FeaturesComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.createForm()
+
+    this.disabledAutothread =
+      environment.ccrApiEnv === 'prod'
+        ? this.orgId === '3637'
+          ? true
+          : false
+        : this.orgId === '30'
+        ? true
+        : false
   }
 
   private async onSubmit(): Promise<void> {
