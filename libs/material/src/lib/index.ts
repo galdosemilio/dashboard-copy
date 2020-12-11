@@ -18,7 +18,7 @@ import {
 } from '@angular/material/core'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatChipsModule } from '@angular/material/chips'
-import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatDatepickerModule } from '@coachcare/datepicker'
 import {
   MAT_DIALOG_DATA,
   MatDialog,

@@ -1,6 +1,7 @@
 export * from './color/index'
 export * from './country/index'
 export * from './consent/index'
+export * from './date-input/index'
 export * from './email/index'
 export * from './lang-selector/index'
 export * from './number/index'

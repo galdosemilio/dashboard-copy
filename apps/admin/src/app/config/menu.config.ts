@@ -151,8 +151,14 @@ const admin: Array<MenuItem> = [
   {
     route: 'reports',
     navName: 'Reports',
-    navRoute: '/admin/reports',
-    icon: 'bar_chart'
+    icon: 'bar_chart',
+    children: [
+      {
+        navName: 'Overview',
+        navRoute: '/admin/reports/overview',
+        icon: 'bar_chart'
+      }
+    ]
   }
 ]
 

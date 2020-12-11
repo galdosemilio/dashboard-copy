@@ -1,11 +1,19 @@
 import { ApiService } from '../../services'
+import { NamedEntity } from '../common/entities'
 import { PagedResponse } from '../content/entities'
-import { EmailTemplate, FoodTrackingPreference } from './entities'
+import {
+  EmailTemplate,
+  FoodTrackingPreference,
+  OrganizationBillingRecord
+} from './entities'
 import {
   CreateAssetsOrganizationPreferenceRequest,
+  CreateBillingRecordRequest,
   CreateEmailTemplateRequest,
+  DeleteBillingRecordRequest,
   GetAllEmailTemplatesRequest,
   GetAllOrganizationRequest,
+  GetBillingRecordRequest,
   OrgAccessRequest,
   OrgCreateAdminPreferenceRequest,
   OrgCreatePreferenceRequest,
@@ -17,6 +25,7 @@ import {
   OrgUpdatePreferenceRequest,
   OrgUpdateRequest,
   OrgUpdateSchedulePreferencesRequest,
+  UpdateBillingRecordRequest,
   UpdateEmailTemplateRequest
 } from './requests'
 import {
@@ -475,6 +484,82 @@ class Organization {
       endpoint: `/organization/preference/email/${request.id}`,
       method: 'PATCH',
       version: '2.0'
+    })
+  }
+
+  /**
+   * Creates a record of organization billing data
+   * @param request must implement CreateBillingRecordRequest
+   * @returns Promise<void>
+   */
+  public createBillingRecord(
+    request: CreateBillingRecordRequest
+  ): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/organization/${request.organization}/billing`,
+      method: 'POST',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Removes a record of organization billing data
+   * @param request must implement DeleteBillingRecordRequest
+   * @returns Promise<void>
+   */
+  public deleteBillingRecord(
+    request: DeleteBillingRecordRequest
+  ): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/organization/${request.organization}/billing`,
+      method: 'DELETE',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Retrieves an organization billing record
+   * @param request must implement GetBillingRecordRequest
+   * @returns Promise<any>
+   */
+  public getBillingRecord(
+    request: GetBillingRecordRequest
+  ): Promise<OrganizationBillingRecord> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/organization/${request.organization}/billing`,
+      method: 'GET',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Updates a record of organization billing data
+   * @param request must implement UpdateBillingRecordRequest
+   * @returns Promise<void>
+   */
+  public updateBillingRecord(
+    request: UpdateBillingRecordRequest
+  ): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/organization/${request.organization}/billing`,
+      method: 'PATCH',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Retrieves a listing of all active billing plans that can be used for organization billing, in alphabetical order
+   * @returns Promise<{data: NamedEntity}>
+   */
+  public getBillingPlans(): Promise<{ data: NamedEntity[] }> {
+    return this.apiService.request({
+      endpoint: `/billing-plan`,
+      method: 'GET',
+      version: '1.0'
     })
   }
 }

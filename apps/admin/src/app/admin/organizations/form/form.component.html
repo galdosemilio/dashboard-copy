@@ -140,6 +140,91 @@
         </mat-grid-list>
       </div>
     </div>
+
+    <div [formGroup]="billingForm" class="ccr-panel">
+      <h3>{{ 'GLOBAL.ECOMMERCE' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <mat-grid-list [cols]="colSpan" rowHeight="70px">
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <mat-select
+              [placeholder]="'ADMIN.ORGS.PLAN' | translate"
+              formControlName="plan">
+                <mat-option *ngFor="let plan of plans" [value]="plan.id">{{ plan.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <mat-select
+              [placeholder]="'ADMIN.ORGS.IS_PAYING' | translate"
+              formControlName="isPaying"
+              [required]="!id">
+                <mat-option [value]="true">{{ 'GLOBAL.YES' | translate }}</mat-option>
+                <mat-option [value]="false">{{ 'GLOBAL.NO' | translate }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div [class.readonly]="readonly" fxFlex>
+              <ccr-date-input
+              [placeholder]="'ADMIN.ORGS.PAYING_START_DATE' | translate"
+              [readonly]="readonly"
+              [required]="false"
+              formControlName="payingStartDate"></ccr-date-input>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile></mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              type="number"
+              min="0"
+              [placeholder]="'ADMIN.ORGS.BASE_PRICING' | translate"
+              [readonly]="readonly"
+              formControlName="basePricing">
+              <span matSuffix>USD</span>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              type="number"
+              min="0"
+              [placeholder]="'ADMIN.ORGS.RPM_PATIENT_PRICING' | translate"
+              [readonly]="readonly"
+              formControlName="rpmPatientPricing">
+              <span matSuffix>USD</span>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div [class.readonly]="readonly" fxFlex>
+              <ccr-date-input
+              [placeholder]="'ADMIN.ORGS.CHURN_DATE' | translate"
+              [readonly]="readonly"
+              [required]="false"
+              formControlName="churnDate"></ccr-date-input>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div [class.readonly]="readonly" fxFlex>
+              <ccr-date-input
+              [placeholder]="'ADMIN.ORGS.RENEWAL_DATE' | translate"
+              [readonly]="readonly"
+              [required]="false"
+              formControlName="renewalDate"></ccr-date-input>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
   </div>
 
   <div class="ccr-action-buttons" fxLayoutAlign="center center">

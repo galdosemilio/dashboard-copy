@@ -64,7 +64,7 @@ const interceptCoreApiCalls = (
   cy.route('GET', '2.0/country?**', 'fixture:/api/countries')
   cy.route(
     'GET',
-    '2.0/organization/?offset=0&limit=10&status=active',
+    '2.0/organization/?**',
     'fixture:/api/organization/organizationList'
   )
   cy.route(
@@ -79,6 +79,12 @@ const interceptCoreApiCalls = (
     '4.0/organization/**/preference/assets?id=*',
     'fixture:/api/organization'
   ).as('apiCallOrgPreference')
+
+  cy.route(
+    'GET',
+    '1.0/warehouse/organization/billing?**',
+    'fixture:/api/general/emptyDataEmptyPagination'
+  ).as('apiCallOrganizationBilling')
 
   cy.route({
     method: 'PATCH',
@@ -208,6 +214,26 @@ const interceptCoreApiCalls = (
       'organizationId'
     )}&accountType=2&offset=0&limit=all`,
     'fixture:/api/account/coachesList'
+  )
+  cy.route(
+    'GET',
+    '1.0/billing-plan',
+    'fixture:/api/organization/getBillingPlans'
+  )
+  cy.route(
+    'GET',
+    '1.0/organization/*/billing**',
+    'fixture:/api/organization/getBillingRecord'
+  )
+  cy.route(
+    'PATCH',
+    '1.0/organization/*/billing',
+    'fixture:/api/general/emptyObject'
+  )
+  cy.route(
+    'POST',
+    '1.0/organization/*/billing',
+    'fixture:/api/general/emptyObject'
   )
 }
 

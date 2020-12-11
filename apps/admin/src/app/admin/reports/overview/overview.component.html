@@ -1,0 +1,16 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center">
+    <h2 fxFlex="0 0 auto">Reports</h2>
+  </div>
+</div>
+
+<ng-container>
+<div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch" fxLayoutGap="5px">
+  <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['list']">{{ 'Inactive Clinics' }}</a>
+  <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['ecommerce']">{{ 'Ecommerce' }}</a>
+</div>
+</ng-container>
+
+<div class="ccr-subcomponent">
+  <router-outlet></router-outlet>
+</div>

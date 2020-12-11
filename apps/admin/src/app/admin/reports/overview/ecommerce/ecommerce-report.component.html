@@ -1,0 +1,32 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+  <ccr-autocompleter-organization
+    [initialOrg]="initialOrg"
+    [placeholder]="'ADMIN.ORGS.ORGANIZATION' | translate"
+    formControlName="organization">
+  </ccr-autocompleter-organization>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <mat-form-field floatLabel="always">
+      <mat-select [placeholder]="'GLOBAL.STATUS' | translate" formControlName="status">
+        <mat-option value="active">{{ 'GLOBAL.ACTIVE' | translate }}</mat-option>
+        <mat-option value="inactive">{{ 'GLOBAL.INACTIVE' | translate }}</mat-option>
+        <mat-option value="all">{{ 'GLOBAL.ALL' | translate }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <ccr-date-input [placeholder]="'GLOBAL.START_DATE' | translate" formControlName="date"></ccr-date-input>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button
+    [disabled]="isLoading || form?.invalid"
+    (click)="downloadCSV()"
+    color="primary"
+    class="ccr-icon-button"
+    fxFlex="0 0 auto" fxFlex.xs="100%"
+    mat-button>
+      <mat-icon>file_download</mat-icon>
+      <span>{{ 'GLOBAL.DOWNLOAD_CSV' | translate }}</span>
+    </button>
+  </div>
+</div>

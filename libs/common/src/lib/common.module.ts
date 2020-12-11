@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
 import { ModuleWithProviders, NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import {
   CcrFormFieldsModule,
@@ -20,6 +21,8 @@ import { CCRStoreModule } from './store/ccr'
   imports: [
     CommonModule,
     CcrFormFieldsModule,
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     FlexLayoutModule,
     RouterModule,

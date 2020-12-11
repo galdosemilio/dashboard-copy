@@ -13,7 +13,7 @@ import { CcrChildClinicPickerComponent } from './child-clinic-picker'
 import { CcrConnectionStatusComponent } from './connection-status/connection-status.component'
 import { CountrySelectorComponent } from './country-selector'
 import { CcrDatasourceOverlayComponent } from './datasource-overlay/datasource-overlay.component'
-import { CcrDateInputComponent } from './date-input'
+import { CcrDateInputComponent } from '@coachcare/common/components/form/fields/date-input'
 import {
   DateNavigator,
   DateNavigatorOutput

@@ -1,10 +1,8 @@
-export * from './list/index'
-
 import {} from '@board/services'
 import {} from '@coachcare/backend/data'
-import { ReportsListComponent } from './list/index'
+import { OverviewComponents } from './overview'
 
-export const ReportsComponents = [ReportsListComponent]
+export const ReportsComponents = [...OverviewComponents]
 
 export const ReportsEntryComponents = []
 

@@ -2,16 +2,20 @@ import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OrganizationsDatabase } from '@coachcare/backend/data'
-import { OrganizationSingle } from '@coachcare/npm-api'
+import {
+  NamedEntity,
+  OrganizationProvider,
+  OrganizationSingle
+} from '@coachcare/npm-api'
 import { FormUtils } from '@coachcare/backend/shared'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-
 import {
   OrganizationDialogs,
   OrganizationParams,
   OrganizationRoutes
 } from '@board/services'
+import * as moment from 'moment'
 
 @Component({
   selector: 'ccr-organizations-form',
@@ -20,8 +24,10 @@ import {
 })
 export class OrganizationsFormComponent implements OnInit {
   form: FormGroup
+  billingForm: FormGroup
   id: string | undefined
   item: OrganizationSingle
+  plans: NamedEntity[] = []
   readonly = true
   colSpan = 2
 
@@ -32,6 +38,7 @@ export class OrganizationsFormComponent implements OnInit {
     private database: OrganizationsDatabase,
     private notifier: NotifierService,
     private dialogs: OrganizationDialogs,
+    private organization: OrganizationProvider,
     public routes: OrganizationRoutes
   ) {}
 
@@ -44,17 +51,25 @@ export class OrganizationsFormComponent implements OnInit {
       }
 
       // setup the FormGroup
-      this.createForm()
+      this.createForms()
       if (this.item) {
         // fill the form
         this.form.patchValue(this.item)
       }
 
       this.readonly = data.editable ? false : true
+
+      if (this.readonly) {
+        this.billingForm.controls['plan'].disable()
+        this.billingForm.controls['isPaying'].disable()
+      } else {
+        this.billingForm.controls['plan'].enable()
+        this.billingForm.controls['isPaying'].enable()
+      }
     })
   }
 
-  createForm() {
+  createForms() {
     // TODO type the object
     this.form = this.builder.group({
       id: this.id,
@@ -80,38 +95,110 @@ export class OrganizationsFormComponent implements OnInit {
       parentOrganizationId: null,
       isActive: true
     })
+
+    this.billingForm = this.builder.group({
+      recordExists: [false],
+      plan: [],
+      isPaying: [false, Validators.required],
+      payingStartDate: [],
+      basePricing: [],
+      rpmPatientPricing: [],
+      churnDate: [],
+      renewalDate: []
+    })
+
+    this.resolveBillingPlans()
+    this.resolveBillingStatus()
   }
 
-  onSubmit() {
-    if (this.form.valid) {
-      this.database
-        .create(this.form.value)
-        .then((res) => {
-          this.notifier.success(_('NOTIFY.SUCCESS.ORG_CREATED'))
-          this.router.navigate([this.routes.single(res.id)])
-        })
-        .catch((err) => this.notifier.error(err))
-    } else {
-      FormUtils.markAsTouched(this.form)
+  async onSubmit(): Promise<void> {
+    try {
+      if (this.form.invalid || this.billingForm.invalid) {
+        FormUtils.markAsTouched(this.form)
+        return
+      }
+
+      const res = await this.database.create(this.form.value)
+
+      const billingFormValue = this.billingForm.value
+      const billingUpdatePayload = FormUtils.pruneEmpty({
+        ...billingFormValue,
+        basePricing:
+          billingFormValue.basePricing && billingFormValue.basePricing > -1
+            ? billingFormValue.basePricing
+            : null,
+        rpmPatientPricing:
+          billingFormValue.rpmPatientPricing &&
+          billingFormValue.basePricing > -1
+            ? billingFormValue.rpmPatientPricing
+            : null,
+        churnDate: billingFormValue.churnDate
+          ? billingFormValue.churnDate.format('YYYY-MM-DD')
+          : null,
+        payingStartDate: billingFormValue.payingStartDate
+          ? billingFormValue.payingStartDate.format('YYYY-MM-DD')
+          : null,
+        renewalDate: billingFormValue.renewalDate
+          ? billingFormValue.renewalDate.format('YYYY-MM-DD')
+          : null,
+        organization: res.id
+      })
+      await this.organization.createBillingRecord(billingUpdatePayload)
+
+      this.notifier.success(_('NOTIFY.SUCCESS.ORG_CREATED'))
+      this.router.navigate([this.routes.single(res.id)])
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 
-  onUpdate() {
-    if (this.form.valid) {
-      const formValue = this.form.value
-      formValue.id = this.id
-      this.database
-        .update(FormUtils.pruneEmpty(formValue))
-        .then(() => {
-          this.notifier.success(_('NOTIFY.SUCCESS.ORG_UPDATED'))
-          this.router.navigate([this.routes.single(this.id as string)], {
-            queryParams: { updated: new Date().getTime() }
-          })
-        })
-        .catch((err) => this.notifier.error(err))
-    } else {
+  async onUpdate(): Promise<void> {
+    if (this.form.invalid || this.billingForm.invalid) {
       FormUtils.markAsTouched(this.form)
+      return
     }
+
+    const billingFormValue = this.billingForm.value
+    const billingUpdatePayload = FormUtils.pruneEmpty(
+      {
+        ...billingFormValue,
+        basePricing:
+          billingFormValue.basePricing && billingFormValue.basePricing > -1
+            ? billingFormValue.basePricing
+            : null,
+        rpmPatientPricing:
+          billingFormValue.rpmPatientPricing &&
+          billingFormValue.basePricing > -1
+            ? billingFormValue.rpmPatientPricing
+            : null,
+        churnDate: billingFormValue.churnDate
+          ? billingFormValue.churnDate.format('YYYY-MM-DD')
+          : null,
+        payingStartDate: billingFormValue.payingStartDate
+          ? billingFormValue.payingStartDate.format('YYYY-MM-DD')
+          : null,
+        renewalDate: billingFormValue.renewalDate
+          ? billingFormValue.renewalDate.format('YYYY-MM-DD')
+          : null,
+        organization: this.id
+      },
+      ['basePricing', 'rpmPatientPricing']
+    )
+
+    if (billingFormValue.recordExists) {
+      await this.organization.updateBillingRecord(billingUpdatePayload)
+    } else {
+      await this.organization.createBillingRecord(billingUpdatePayload)
+    }
+
+    const formValue = this.form.value
+    formValue.id = this.id
+    await this.database.update(FormUtils.pruneEmpty(formValue))
+
+    this.notifier.success(_('NOTIFY.SUCCESS.ORG_UPDATED'))
+    this.router.navigate([this.routes.single(this.id as string)], {
+      queryParams: { updated: new Date().getTime() }
+    })
   }
 
   onCancel() {
@@ -154,5 +241,43 @@ export class OrganizationsFormComponent implements OnInit {
           this.notifier.error(err)
         }
       })
+  }
+
+  private async resolveBillingPlans(): Promise<void> {
+    try {
+      const response = await this.organization.getBillingPlans()
+      this.plans = response.data
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async resolveBillingStatus(): Promise<void> {
+    try {
+      if (!this.id) {
+        return
+      }
+
+      const response = await this.organization.getBillingRecord({
+        organization: this.id
+      })
+
+      this.billingForm.patchValue({
+        recordExists: true,
+        plan: response.plan ? response.plan.id : null,
+        isPaying: response.isPaying,
+        payingStartDate: response.payingStartDate
+          ? moment(response.payingStartDate)
+          : null,
+        basePricing: response.basePricing ? +response.basePricing : null,
+        rpmPatientPricing: response.rpmPatientPricing
+          ? +response.rpmPatientPricing
+          : null,
+        churnDate: response.churnDate ? moment(response.churnDate) : null,
+        renewalDate: response.renewalDate ? moment(response.renewalDate) : null
+      })
+    } catch (error) {
+      console.error(error)
+    }
   }
 }

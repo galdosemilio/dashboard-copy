@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CcrDirectivesModule } from '@coachcare/common/directives'
 import { CcrMaterialModule } from '@coachcare/material'
 import { TranslateModule } from '@ngx-translate/core'
@@ -11,6 +11,7 @@ import { UserSearchComponent } from './autocompleters'
 import { AccountAutocompleterComponent } from './autocompleters/account/account.component'
 import { OrganizationAutocompleterComponent } from './autocompleters/organization/organization.component'
 import {
+  CcrDateInputComponent,
   FeatureToggleInputComponent,
   OptionBlockFieldComponent,
   TranslatedTextFormFieldComponent
@@ -38,12 +39,14 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     ColorPickerModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    FormsModule,
     TranslateModule.forChild(),
     CcrDirectivesModule,
     CcrMaterialModule
   ],
   declarations: [
     // fields
+    CcrDateInputComponent,
     ColorFormFieldComponent,
     ConsentFormFieldComponent,
     CountryFormFieldComponent,
@@ -69,6 +72,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
   ],
   exports: [
     // fields
+    CcrDateInputComponent,
     ColorFormFieldComponent,
     ConsentFormFieldComponent,
     CountryFormFieldComponent,

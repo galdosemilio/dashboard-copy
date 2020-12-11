@@ -1,6 +1,6 @@
 import { standardSetup } from '../../../support'
 
-describe('Reports Listing', () => {
+describe('Reports > Overview > Inactive Clinic Listing', () => {
   beforeEach(() => {
     cy.setTimezone('et')
     standardSetup(true)

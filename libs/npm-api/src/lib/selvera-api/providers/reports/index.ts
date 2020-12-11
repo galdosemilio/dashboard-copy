@@ -4,6 +4,7 @@ import {
   EnrollmentSimpleReportRequest,
   EnrollmentSnapshotRequest,
   EnrollmentTimelineRequest,
+  FetchOrganizationBillingRequest,
   FetchPatientListingAssociationRequest,
   FetchPatientListingPackageEnrollmentsRequest,
   FetchPatientListingRequest,
@@ -24,6 +25,7 @@ import {
   EnrollmentSimpleReportResponse,
   EnrollmentSnapshotSegment,
   EnrollmentTimelineSegment,
+  FetchOrganizationBillingResponse,
   GenderDemographicsSegment,
   OrganizationActivityAggregate,
   PatientCountSegment,
@@ -189,6 +191,22 @@ class Reports {
         version: '2.0'
       })
       .then((response) => response.data)
+  }
+
+  /**
+   * Retrieves a listing of data required to calculate billing information
+   * @param request must implement FetchOrganizationBillingRequest
+   * @returns Promise<FetchOrganizationBillingResponse>
+   */
+  public fetchOrganizationBilling(
+    request: FetchOrganizationBillingRequest
+  ): Promise<FetchOrganizationBillingResponse> {
+    return this.apiService.request({
+      endpoint: '/warehouse/organization/billing',
+      method: 'GET',
+      data: request,
+      version: '1.0'
+    })
   }
 
   /**

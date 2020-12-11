@@ -1,0 +1,8 @@
+{
+  "payingStartDate": "1993-12-15",
+  "renewalDate": "2021-01-12",
+  "isPaying": false,
+  "rpmPatientPricing": "200",
+  "churnDate": "2022-01-12",
+  "plan": { "id": "3", "name": "Health System" }
+}

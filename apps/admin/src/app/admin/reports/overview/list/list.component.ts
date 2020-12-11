@@ -6,7 +6,7 @@ import {
   OrganizationActivityRequest,
   Reports
 } from '@coachcare/npm-api'
-import { environment } from '../../../../environments/environment'
+import { environment } from '../../../../../environments/environment'
 
 @Component({
   selector: 'ccr-report-list',

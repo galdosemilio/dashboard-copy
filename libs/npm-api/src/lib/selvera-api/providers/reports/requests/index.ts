@@ -5,6 +5,7 @@
 export { ActivityLevelRequest } from './activityLevelRequest.interface'
 export { AgeDemographicsRequest } from './ageDemographicsRequest.interface'
 export { DemographicsRequest } from './demographicsRequest.interface'
+export * from './fetchOrganizationBilling.request'
 export * from './fetchPatientListing.request'
 export * from './fetchPatientListingAssociation.request'
 export * from './fetchPatientListingPackageEnrollments.request'

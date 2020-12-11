@@ -3,9 +3,11 @@ import {
   Component,
   DoCheck,
   forwardRef,
+  Host,
   Input,
   OnDestroy,
   OnInit,
+  SkipSelf,
   ViewChild
 } from '@angular/core'
 import {
@@ -16,7 +18,7 @@ import {
   FormGroup,
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
-import { _ } from '@app/shared/utils'
+import { _ } from '@coachcare/common/shared/utils/i18n.utils'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -40,6 +42,7 @@ export class CcrDateInputComponent
   @Input() max?: moment.Moment
   @Input() min?: moment.Moment
   @Input() placeholder: string = _('BOARD.DATE_OF_BIRTH')
+  @Input() readonly = false
   @Input() required = true
   @ViewChild('textInput', { static: false }) textInput
   @ViewChild('datepickerInput', { static: false }) datepickerInput

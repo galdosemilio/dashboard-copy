@@ -1,10 +1,33 @@
 import { Routes } from '@angular/router'
-import { ReportsListComponent } from './reports.index'
+import {
+  EcommerceReportComponent,
+  ReportsListComponent,
+  ReportOverviewComponent
+} from './overview'
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: ReportsListComponent
+    redirectTo: 'overview'
+  },
+  {
+    path: 'overview',
+    component: ReportOverviewComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'list'
+      },
+      {
+        path: 'list',
+        component: ReportsListComponent
+      },
+      {
+        path: 'ecommerce',
+        component: EcommerceReportComponent
+      }
+    ]
   }
 ]

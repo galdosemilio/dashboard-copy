@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -22,7 +23,11 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger
 } from '@coachcare/material'
-import { OrgAccessRequest, OrganizationProvider } from '@coachcare/npm-api'
+import {
+  NamedEntity,
+  OrgAccessRequest,
+  OrganizationProvider
+} from '@coachcare/npm-api'
 import { AutocompleterOption } from '@coachcare/common/shared'
 import { find, result } from 'lodash'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -55,6 +60,7 @@ export class OrganizationAutocompleterComponent
   @Input() formControlName: string
 
   @Input() disabled: any
+  @Input() initialOrg?: NamedEntity
   @Input() placeholder: string
   @Input() readonly: any
   @Input() required: any
@@ -62,7 +68,7 @@ export class OrganizationAutocompleterComponent
 
   @Output() change = new EventEmitter<string | null>()
 
-  @ViewChild(MatAutocompleteTrigger, { static: false })
+  @ViewChild(MatAutocompleteTrigger, { static: true })
   trigger: MatAutocompleteTrigger
 
   _control: AbstractControl | undefined
@@ -70,6 +76,8 @@ export class OrganizationAutocompleterComponent
   hasSelected = false
   items: Array<AutocompleterOption> = []
   value: string | null = null
+
+  private initialLoad = false
 
   get isDisabled() {
     return this.disabled === '' || this.disabled === true
@@ -86,7 +94,8 @@ export class OrganizationAutocompleterComponent
     @Host()
     @SkipSelf()
     private parent: ControlContainer,
-    private organization: OrganizationProvider
+    private organization: OrganizationProvider,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -114,6 +123,12 @@ export class OrganizationAutocompleterComponent
       }
       this.hasSelected = val && val.value && val.value.length > 0
     })
+
+    if (this.initialOrg) {
+      this._input.setValue(this.initialOrg.name)
+    } else {
+      this.initialLoad = true
+    }
   }
 
   propagateChange = (data: any) => {}
@@ -197,10 +212,25 @@ export class OrganizationAutocompleterComponent
           value: c.id,
           viewValue: `${c.name}`
         }))
-        if (this.items.length) {
+        if (this.items.length && this.initialLoad) {
           this.trigger.openPanel()
         } else {
           this.trigger.closePanel()
+        }
+
+        if (this.initialLoad) {
+          return
+        }
+
+        this.initialLoad = true
+
+        if (this.initialOrg) {
+          ;(this
+            .trigger as any)._element.nativeElement.value = this.initialOrg.name
+          this.propagateChange(this.initialOrg.id)
+          this.change.emit(this.initialOrg.id)
+          this.hasSelected = true
+          this.cdr.detectChanges()
         }
       })
   }

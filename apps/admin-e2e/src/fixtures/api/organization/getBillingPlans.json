@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": "3", "name": "Health System" },
+    { "id": "2", "name": "Remote Monitoring" },
+    { "id": "1", "name": "Virtual Health" }
+  ]
+}
