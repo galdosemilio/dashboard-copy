@@ -182,7 +182,7 @@ export class OrganizationsFormComponent implements OnInit {
           : null,
         organization: this.id
       },
-      ['basePricing', 'rpmPatientPricing']
+      billingFormValue.recordExists ? ['basePricing', 'rpmPatientPricing'] : []
     )
 
     if (billingFormValue.recordExists) {
