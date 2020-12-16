@@ -1,0 +1,41 @@
+.image-option {
+  cursor: pointer;
+  border: 1px solid var(--bg-panel);
+  margin-bottom: 15px;
+  padding: 10px;
+
+  &:hover {
+    border: 1px solid var(--primary-lighten);
+  }
+
+  &.active {
+    border: 1px solid var(--primary);
+    background-color: var(--primary-a12);
+    color: var(--primary);
+  }
+
+  .empty-image {
+    color: var(--primary);
+
+    mat-icon {
+      font-size: 64px !important;
+      height: 80px;
+      margin-top: 20px;
+      text-align: center;
+      width: 130px !important;
+    }
+  }
+
+  img {
+    height: 100px;
+    width: auto;
+
+    &.bp-cuff {
+      width: 130px;
+    }
+
+    &.rpm-scale {
+      width: 110px;
+    }
+  }
+}

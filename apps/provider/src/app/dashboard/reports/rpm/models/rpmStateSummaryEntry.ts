@@ -8,6 +8,7 @@ import {
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
+import { RPM_DEVICES, RPMDevice } from './rpmDevices.map'
 
 const MONITORING_PERIOD_SECONDS = 1200
 const MAX_99458_MINUTES = 40
@@ -31,6 +32,7 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
   changedAt: string
   id: string
   organization: OrganizationWithoutShortcode
+  device: RPMDevice
   remainingDays: number
   rpm: ActiveRPMItem | InactiveRPMItem
 
@@ -92,6 +94,28 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
         ? moment(args.rpm.educationProvidedAt).format('MM/DD/YYYY')
         : 'No'
     }
+
+    const devices = Object.values(RPM_DEVICES)
+
+    if (!args.rpm.plan) {
+      this.device = devices.find((device) => device.id === '-1')
+      return
+    }
+
+    const foundPlanDevice = devices.find((device) =>
+      args.rpm.plan ? device.id === args.rpm.plan.id : false
+    )
+
+    if (!foundPlanDevice) {
+      this.device = {
+        id: '-1',
+        name: args.rpm.plan.name,
+        displayName: args.rpm.plan.name
+      }
+      return
+    }
+
+    this.device = foundPlanDevice
   }
 
   private calculateNextObject(

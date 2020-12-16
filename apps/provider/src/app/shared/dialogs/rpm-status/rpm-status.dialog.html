@@ -88,12 +88,20 @@
         <mat-checkbox formControlName="hadFaceToFace">
             {{ 'RPM.FACE_TO_FACE_PROMPT' | translate }}
         </mat-checkbox>
-        <mat-checkbox formControlName="receivedDevice">
-            {{ 'RPM.RECEIVED_DEVICE_PROMPT' | translate }}
-        </mat-checkbox>
         <mat-checkbox formControlName="goalsSet">
             {{ 'RPM.GOALS_SET_PROMPT' | translate }}
         </mat-checkbox>
+
+        <div class="device-prompt-container" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
+            <p>{{ 'RPM.WHAT_DEVICE_PROMPT' | translate }}</p>
+
+            <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
+                <ccr-image-option-selector
+                [options]="rpmDevices"
+                formControlName="deviceSupplied">
+                </ccr-image-option-selector>
+            </div>
+        </div>
     </div>
     </div>
 

@@ -21,7 +21,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.get('@rpmBillingRows')
       .eq(4)
       .find('mat-cell')
-      .eq(6)
+      .eq(7)
       .should('contain', '1')
 
     cy.get('@rpmBillingRows')
@@ -32,7 +32,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.get('@rpmBillingRows')
       .eq(3)
       .find('mat-cell')
-      .eq(6)
+      .eq(7)
       .should('contain', '20m')
       .should('contain', '1')
 
@@ -70,7 +70,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.get('@rpmBillingRows')
       .eq(4)
       .find('mat-cell')
-      .eq(6)
+      .eq(7)
       .should('contain', '1')
 
     cy.get('@rpmBillingRows')
@@ -81,7 +81,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.get('@rpmBillingRows')
       .eq(3)
       .find('mat-cell')
-      .eq(6)
+      .eq(7)
       .should('contain', '20m')
       .should('contain', '1')
 
@@ -112,7 +112,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.get('@rpmBillingRows')
       .eq(1)
       .find('mat-cell')
-      .eq(6)
+      .eq(7)
       .find('table')
       .eq(3)
       .find('tr')

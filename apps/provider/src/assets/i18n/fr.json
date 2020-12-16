@@ -431,6 +431,7 @@
     "MINUTES": "Minutes",
     "MODERATE": "Modéré",
     "MORE": "Plus",
+    "NA": "N/A",
     "NEXT": "Suivant",
     "NO": "Non",
     "NOTES": "Notes",
@@ -1109,6 +1110,7 @@
     "ABOUT_RPM": "Taux de graisse viscérale)",
     "ALL_CODES": "Tous les codes",
     "ALREADY_ELIGIBLE": "Déjà admissible",
+    "BP_CUFF": "Boutons de manchette de tension artérielle BATTRE",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} jours de plus doivent s'écouler",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} plus d'interactions en direct (appel / visite) nécessaires",
     "CLINIC": "Clinique",
@@ -1116,25 +1118,28 @@
     "DEACTIVATE_PROMPT_CONTENT": "Êtes-vous sûr de vouloir désactiver RPM pour ce patient? <br/> <strong> Vous continuerez à être facturé pour ce patient jusqu'à la fin du mois. </ Strong>",
     "DEACTIVATION_REASON": "Motif de désactivation",
     "DEPENDENCY_ICON_DESCRIPTION": "{{code}} exigences non satisfaites",
+    "DEVICE_TYPE": "Type d'appareil",
     "DISABLE_RPM": "Désactiver RPM",
     "EDIT_NOT_ALLOWED": "Vous n'avez pas le droit de modifier le statut RPM de ce patient car vous ne disposez d'aucun privilège administratif pour les cliniques suivantes:",
     "EDIT_NOT_ALLOWED_FOR_CLINIC": "Vous n'avez pas accès à la modification du statut RPM de ce patient car vous ne disposez pas des privilèges d'administrateur pour sa clinique ({{ org }}).",
     "ENABLE_RPM": "Activer RPM",
     "FACE_TO_FACE_PROMPT": "Le patient a consulté un professionnel de la santé qualifié dans mon cabinet au cours des 12 derniers mois.",
+    "GLUCOMETER": "Smart Scan glucomètre",
     "GOALS_SET_PROMPT": "Le patient et ma pratique ont fixé des objectifs spécifiques pour le programme RPM de ce patient",
     "LATEST_ELIGIBLE_CLAIM": "Dernière réclamation éligible",
     "MEDICAL_NECESSITY_PROMPT": "Ce service a été commandé par un professionnel de la santé qualifié",
     "NEXT_CLAIM": "Réclamation suivante",
+    "NONE": "Aucun",
     "NO_ENTRY": "{{patient}} n'a jamais activé RPM",
     "PATIENT_CONSENT_PROMPT": "Le patient a consenti et le consentement a été enregistré dans mon EHR",
     "PERFORMED_BY": "Interprété par",
-    "RECEIVED_DEVICE_PROMPT": "Le patient a reçu de ma pratique un dispositif médical capable de transmettre quotidiennement des données sur le patient et / ou des alertes",
     "RPM_CREATE_FORM_HEADER": "Les conditions suivantes ont été remplies pour ce patient:",
     "RPM_CREATE_NOTICE": "En permettant à ces outils",
     "RPM_CREATE_TITLE": "Surveillance patient à distance ",
     "RPM_DISABLED": "{{patient}} a le RPM désactivé depuis {{date}}",
     "RPM_ENABLED": "{{patient}} a le RPM activé depuis {{date}}",
     "RPM_STATUS": "RPM",
+    "SCALE": "BALANCE intelligent échelle",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} jours de transmission d'appareils supplémentaires nécessaires",
     "STATE": {
       "ACTIVE": "Actif",
@@ -1145,7 +1150,8 @@
     "TRIGGER": {
       "MANUAL": "(manuel)",
       "UNKNOWN": "(inconnu)"
-    }
+    },
+    "WHAT_DEVICE_PROMPT": "Quel dispositif médical a le patient a reçu de ma pratique qui est capable de transmettre des données du patient et / ou des alertes sur une base quotidienne?"
   },
   "SECTION": {
     "APOLLO_US": {

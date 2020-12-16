@@ -17,10 +17,10 @@ $date-highlight-color: saturate(
 }
 
 mat-table {
-  min-width: 2272px !important;
+  min-width: 2478px !important;
 
   @media #{xlarge-and-up} {
-    min-width: 2280px !important;
+    min-width: 2483px !important;
   }
 }
 
@@ -81,6 +81,11 @@ small {
   .cdk-column-dob {
     max-width: 80px;
     min-width: 80px;
+  }
+
+  .cdk-column-deviceSupplied {
+    max-width: 200px;
+    min-width: 200px;
   }
 
   .cdk-column-index {
@@ -196,6 +201,14 @@ th {
 
 .ccr-table .mat-table .mat-header-row .mat-sort-header-button {
   min-height: 20px !important;
+}
+
+.no-highlight {
+  color: var(--text) !important;
+}
+
+.no-next-claim {
+  font-size: 14px;
 }
 
 mat-header-cell.cdk-column-firstName,

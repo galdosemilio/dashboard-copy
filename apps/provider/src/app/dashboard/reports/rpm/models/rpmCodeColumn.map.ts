@@ -4,37 +4,55 @@ export const RPM_CODE_COLUMNS: { [key: string]: any } = {
       column: 'Education Provided',
       route: 'rpm.educationProvidedAtFormatted',
       default: 'No',
+      defaultNoPlan: 'N/A',
+      inParent: true
+    },
+    {
+      column: 'Device Type',
+      route: 'device.name',
+      default: '-',
       inParent: true
     },
     {
       column: 'Device Supplied',
       route: 'rpm.deviceProvidedAtFormatted',
       default: 'No',
+      defaultNoPlan: 'N/A',
       inParent: true
     }
   ],
   ['99454']: [
     {
+      column: 'Device Type',
+      route: 'device.name',
+      default: '-',
+      inParent: true
+    },
+    {
       column: 'Device Supplied',
       route: 'rpm.deviceProvidedAtFormatted',
       default: 'No',
+      defaultNoPlan: 'N/A',
       inParent: true
     },
     {
       column: 'Transmissions of 16 days in Past 30 days (Next Claim)',
       route: 'eligibility.next.transmissions.transmissionsOf16',
-      default: 'No'
+      default: 'No',
+      defaultNoPlan: 'N/A'
     },
     {
       column: '# of Alert Transmissions in past 30 days (Next Claim)',
       route: 'eligibility.next.transmissions.notification.count',
-      default: '0'
+      default: '0',
+      defaultNoPlan: 'N/A'
     },
     {
       column:
         '# of Automated Device Transmissions in past 30 days (Next Claim)',
       route: 'eligibility.next.transmissions.measurements.automated.count',
-      default: '0'
+      default: '0',
+      defaultNoPlan: 'N/A'
     }
   ],
   ['99457']: [

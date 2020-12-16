@@ -21,6 +21,7 @@ import {
   FullyAliveProdSectionConfig,
   FullyAliveTestSectionConfig
 } from './fully-alive'
+import { GrandViewHealthSectionConfig } from './grand-view'
 import { InhealthSectionConfig } from './inhealth'
 import { LeanMDSectionConfig } from './leanmd/leanmd.section.config'
 import { MDTeamSectionConfig } from './mdteam'
@@ -66,6 +67,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7262']: FullyAliveTestSectionConfig,
     ['7355']: ShiftSetGoSectionConfig,
     ['7353']: TrueWeightSectionConfig,
+    ['7420']: GrandViewHealthSectionConfig,
     ['7384']: MDTeamSectionConfig
   },
   prod: {
@@ -78,6 +80,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['4123']: FullyAliveProdSectionConfig,
     ['4156']: ShakeItProdSectionConfig,
     ['5329']: ApolloUSProdSectionConfig,
+    ['5470']: GrandViewHealthSectionConfig,
     ['5529']: ShiftSetGoSectionConfig,
     ['5595']: TrueWeightSectionConfig,
     ['6438']: MDTeamSectionConfig,

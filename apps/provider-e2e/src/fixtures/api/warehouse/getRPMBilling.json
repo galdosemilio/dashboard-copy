@@ -27,7 +27,10 @@
               "earliestEligibleAt": "2020-07-07T04:00:00.000Z",
               "transmissions": {
                 "distinctDates": { "required": 16, "count": 30 },
-                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "measurements": {
+                  "automated": { "count": 0 },
+                  "manual": { "count": 0 }
+                },
                 "notification": { "count": 30 }
               }
             }
@@ -38,7 +41,9 @@
           "eligibility": {
             "next": {
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               },
@@ -52,7 +57,9 @@
             "next": {
               "alreadyEligibleCount": 0,
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               }
@@ -72,7 +79,10 @@
         },
         "consentedAt": "2019-06-13T22:18:22.147+00:00",
         "educationProvidedAt": "2019-06-13T22:18:22.147+00:00",
-        "deviceProvidedAt": "2019-06-13T22:18:22.147+00:00"
+        "deviceProvidedAt": "2019-06-13T22:18:22.147+00:00",
+        "plan": {
+          "id": "1"
+        }
       }
     },
     {
@@ -102,7 +112,10 @@
               "earliestEligibleAt": "2020-07-22T11:00:00.000Z",
               "transmissions": {
                 "distinctDates": { "required": 16, "count": 30 },
-                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "measurements": {
+                  "automated": { "count": 0 },
+                  "manual": { "count": 0 }
+                },
                 "notification": { "count": 30 }
               }
             }
@@ -114,7 +127,9 @@
             "next": {
               "earliestEligibleAt": "2020-07-30T11:00:00.000Z",
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               },
@@ -150,7 +165,10 @@
         },
         "consentedAt": "2019-05-29T14:10:17.992+00:00",
         "educationProvidedAt": "2019-05-29T14:10:17.992+00:00",
-        "deviceProvidedAt": "2019-05-29T14:10:17.992+00:00"
+        "deviceProvidedAt": "2019-05-29T14:10:17.992+00:00",
+        "plan": {
+          "id": "2"
+        }
       }
     },
     {
@@ -168,7 +186,9 @@
       "billing": [
         {
           "code": "99453",
-          "eligibility": { "next": { "earliestEligibleAt": "2020-07-09T04:00:00.000Z" } }
+          "eligibility": {
+            "next": { "earliestEligibleAt": "2020-07-09T04:00:00.000Z" }
+          }
         },
         {
           "code": "99454",
@@ -177,7 +197,10 @@
               "earliestEligibleAt": "2020-07-23T04:00:00.000Z",
               "transmissions": {
                 "distinctDates": { "required": 16, "count": 7 },
-                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "measurements": {
+                  "automated": { "count": 0 },
+                  "manual": { "count": 0 }
+                },
                 "notification": { "count": 7 }
               }
             }
@@ -188,7 +211,9 @@
           "eligibility": {
             "next": {
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               },
@@ -202,7 +227,9 @@
             "next": {
               "alreadyEligibleCount": 0,
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               }
@@ -221,7 +248,10 @@
         },
         "consentedAt": "2020-06-23T17:14:48.495+00:00",
         "educationProvidedAt": "2020-06-23T17:14:48.495+00:00",
-        "deviceProvidedAt": "2020-06-23T17:14:48.495+00:00"
+        "deviceProvidedAt": "2020-06-23T17:14:48.495+00:00",
+        "plan": {
+          "id": "3"
+        }
       }
     },
     {
@@ -239,19 +269,12 @@
       "billing": [
         {
           "code": "99453",
-          "eligibility": { "next": { "earliestEligibleAt": "2020-07-10T04:00:00.000Z" } }
+          "eligibility": {}
         },
         {
           "code": "99454",
           "eligibility": {
-            "next": {
-              "earliestEligibleAt": "2020-07-24T04:00:00.000Z",
-              "transmissions": {
-                "distinctDates": { "required": 16, "count": 6 },
-                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
-                "notification": { "count": 6 }
-              }
-            }
+            "next": {}
           }
         },
         {
@@ -259,7 +282,9 @@
           "eligibility": {
             "next": {
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               },
@@ -273,7 +298,9 @@
             "next": {
               "alreadyEligibleCount": 0,
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               }
@@ -310,7 +337,9 @@
       "billing": [
         {
           "code": "99453",
-          "eligibility": { "next": { "earliestEligibleAt": "2020-07-16T04:00:00.000Z" } }
+          "eligibility": {
+            "next": { "earliestEligibleAt": "2020-07-16T04:00:00.000Z" }
+          }
         },
         {
           "code": "99454",
@@ -319,7 +348,10 @@
               "earliestEligibleAt": "2020-07-30T04:00:00.000Z",
               "transmissions": {
                 "distinctDates": { "required": 16, "count": 0 },
-                "measurements": { "automated": { "count": 0 }, "manual": { "count": 0 } },
+                "measurements": {
+                  "automated": { "count": 0 },
+                  "manual": { "count": 0 }
+                },
                 "notification": { "count": 0 }
               }
             }
@@ -330,7 +362,9 @@
           "eligibility": {
             "next": {
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               },
@@ -344,7 +378,9 @@
             "next": {
               "alreadyEligibleCount": 0,
               "monitoring": {
-                "total": { "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 } },
+                "total": {
+                  "seconds": { "tracked": 0, "required": 1200, "elapsed": 0 }
+                },
                 "automated": { "seconds": { "elapsed": 0 } },
                 "calls": { "seconds": { "elapsed": 0 } }
               }
@@ -363,7 +399,10 @@
         },
         "consentedAt": "2020-06-30T18:09:49.052+00:00",
         "educationProvidedAt": "2020-06-30T18:09:49.052+00:00",
-        "deviceProvidedAt": "2020-06-30T18:09:49.052+00:00"
+        "deviceProvidedAt": "2020-06-30T18:09:49.052+00:00",
+        "plan": {
+          "id": "2"
+        }
       }
     }
   ],

@@ -34,7 +34,7 @@ export class RPM {
       data: request,
       endpoint: '/rpm/state',
       method: 'POST',
-      version: '2.0'
+      version: '3.0'
     })
   }
 
@@ -110,7 +110,7 @@ export class RPM {
       data: request,
       endpoint: '/rpm/state',
       method: 'GET',
-      version: '1.0'
+      version: '3.0'
     })
   }
 

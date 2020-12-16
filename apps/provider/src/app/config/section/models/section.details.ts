@@ -4,6 +4,7 @@ import {
   PatientFormConfigDetails,
   PatientListingConfigDetails,
   RightPanelDetails,
+  RPMDetails,
   SidenavDetails
 } from './'
 
@@ -13,5 +14,6 @@ export interface SectionConfigDetails {
   PATIENT_FORM?: PatientFormConfigDetails
   PATIENT_LISTING?: PatientListingConfigDetails
   RIGHT_PANEL?: RightPanelDetails
+  RPM?: RPMDetails
   SIDENAV?: SidenavDetails
 }

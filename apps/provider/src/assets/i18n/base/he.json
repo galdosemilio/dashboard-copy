@@ -431,6 +431,7 @@
     "MINUTES": "דקות",
     "MODERATE": "בינוני",
     "MORE": "עוד",
+    "NA": "N/A",
     "NEXT": "הבא",
     "NO": "לא",
     "NOTES": "הערות",
@@ -1109,6 +1110,7 @@
     "ABOUT_RPM": "זה מחליף ניטור מרחוק המטופל (RPM) שירותים כי כעת reimbursable על ידי Medicare ו רבים מסחריים payors. תוכל להפעיל את הכלי לאלף הופעות עבור מטופל זה כאן, או ליצור קשר עם <a href=mailto:sales@coachcare.com\"> sales@coachcare.com </a> לקבלת מידע נוסף. הינכם מתבקשים לשים לב כי תשלום נוסף עבור שירותים אלה.\"",
     "ALL_CODES": "כל הקודים",
     "ALREADY_ELIGIBLE": "כבר כשיר",
+    "BP_CUFF": "לחץ דם BEAT קאף",
     "CALENDAR_ICON_DESCRIPTION": "עוד {{ amount }} יום צריך לחלוף",
     "CHAT_ICON_DESCRIPTION": "דרושים {{ amount }} אינטראקציות חיות נוספות (שיחה / ביקור)",
     "CLINIC": "מרפאה",
@@ -1116,25 +1118,28 @@
     "DEACTIVATE_PROMPT_CONTENT": "האם אתה בטוח שברצונך להשבית הכנסה לאלף הופעות עבור חולה זה? <br/><br/><strong> תמשיך לחייב אותך עבור החולה עד סוף החודש. </ strong>",
     "DEACTIVATION_REASON": "סיבה לביטול ההפעלה",
     "DEPENDENCY_ICON_DESCRIPTION": "דרישות {{code}} אינן עומדות",
+    "DEVICE_TYPE": "סוג מכשיר",
     "DISABLE_RPM": "השבת את סלד\"",
     "EDIT_NOT_ALLOWED": "אין לך גישה לעריכת סטטוס הכנסה לאלף הופעות עבור מטופל זה מאחר שאין לך הרשאות ניהול עבור כל אחת מהמרפאות הבאות:",
     "EDIT_NOT_ALLOWED_FOR_CLINIC": "אין לך גישה לעריכת סטטוס ההכנסה לאלף הופעות עבור מטופל זה מכיוון שאין לך הרשאות ניהול עבור המרפאה ({{ org }})",
     "ENABLE_RPM": "הפעל הכנסה לאלף הופעות",
     "FACE_TO_FACE_PROMPT": "המטופל התייעץ פנים אל פנים עם איש מקצוע רפואי מוסמך בפועל שלי במהלך 12 החודשים האחרונים",
+    "GLUCOMETER": "SCAN חכם Glucometer",
     "GOALS_SET_PROMPT": "המטופל והתרגול שלי הציבו יעדים ספציפיים לתוכנית RPM של החולה הזה",
     "LATEST_ELIGIBLE_CLAIM": "התביעה הזכאית האחרונה",
     "MEDICAL_NECESSITY_PROMPT": "שירות זה הוזמן על ידי רופא מקצועי מוסמך",
     "NEXT_CLAIM": "התביעה הבאה",
+    "NONE": "אף אחד",
     "NO_ENTRY": "{{ patient }} מעולם לא הופעל הכנסה לאלף הופעות",
     "PATIENT_CONSENT_PROMPT": "המטופל הסכים והסכמה נרשמה ב- EHR שלי",
     "PERFORMED_BY": "מבוצע על ידי",
-    "RECEIVED_DEVICE_PROMPT": "המטופל קיבל מהפרקטיקה שלי מכשיר רפואי המסוגל להעביר נתוני מטופל ו / או התראות על בסיס יומי",
     "RPM_CREATE_FORM_HEADER": "הדרישות הבאות הושלמו עבור המטופל:",
     "RPM_CREATE_NOTICE": "על ידי הפעלת כלים אלה, תחויב מדי חודש עבור מטופל זה.",
     "RPM_CREATE_TITLE": "ניטור מרחוק למטופל",
     "RPM_DISABLED": "{{ patient }} הופסקה הכנסה לאלף הופעות מאז {{ date }}",
     "RPM_ENABLED": "{{ patient }} הפעילה הכנסה לאלף הופעות מאז {{ date }}",
     "RPM_STATUS": "סלד\"",
+    "SCALE": "יתרת סולם חכם",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} יום נוסף של העברות מכשירים",
     "STATE": {
       "ACTIVE": "פעיל",
@@ -1145,7 +1150,8 @@
     "TRIGGER": {
       "MANUAL": "(מדריך ל)",
       "UNKNOWN": "(לא ידוע)"
-    }
+    },
+    "WHAT_DEVICE_PROMPT": "מה מכשור רפואי יש המטופל שהתקבל בפועל שלי כי הוא מסוגל להעביר נתונים חולים ו / או התראות על בסיס יומי?"
   },
   "SECTION": {
     "APOLLO_US": {

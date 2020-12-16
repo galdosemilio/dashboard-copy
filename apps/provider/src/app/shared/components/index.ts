@@ -54,6 +54,7 @@ import { CcrTimeframeSelectorComponent } from './timeframe-selector/timeframe-se
 import { UserCardComponent } from './user-card'
 import { UserSearchComponent } from './user-search'
 import { WalkthroughComponent } from './walkthrough'
+import { CcrImageOptionSelectorComponent } from './image-option-selector'
 
 export {
   AlertIconComponent,
@@ -70,6 +71,7 @@ export {
   CcrAvatarComponent,
   CcrBadgeComponent,
   CcrDatasourceOverlayComponent,
+  CcrImageOptionSelectorComponent,
   CcrMessagesComponent,
   CcrPaginator,
   CcrSelectUserComponent,
@@ -116,6 +118,7 @@ export const CmpComponents = [
   CcrCallControlComponent,
   CcrDatasourceOverlayComponent,
   CcrDateInputComponent,
+  CcrImageOptionSelectorComponent,
   CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
   CcrPaginator,

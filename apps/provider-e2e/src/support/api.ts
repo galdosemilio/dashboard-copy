@@ -231,7 +231,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.route('GET', '/1.0/food/consumed/*', 'fixture:/api/food/consumed-old')
   cy.route(
     'GET',
-    '/1.0/rpm/state**',
+    '/3.0/rpm/state**',
     fetchOverride('/1.0/rpm/state**', 'fixture:/api/general/emptyData')
   ).as('getRpm')
   cy.route(
@@ -549,7 +549,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
 
   cy.route({
     method: 'POST',
-    url: '/2.0/rpm/state',
+    url: '/3.0/rpm/state',
     status: 201,
     response: {}
   }).as('rpmStatePostRequest')

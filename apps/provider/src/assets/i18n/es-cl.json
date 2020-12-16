@@ -431,6 +431,7 @@
     "MINUTES": "Minutos",
     "MODERATE": "Moderado",
     "MORE": "Más",
+    "NA": "N/A",
     "NEXT": "Siguiente",
     "NO": "No",
     "NOTES": "Notas",
@@ -1109,6 +1110,7 @@
     "ABOUT_RPM": "Permite configurar los servicios de monitoreo remoto de pacientes (RPM, por sus siglas en inglés) los cuales ahora son reembolsables por Medicare y muchos pagadores comerciales. Puede activar RPM aquí, o contactar a <a href=\"mailto:sales@coachcare.com\">sales@coachcare.com</a> para obtener más información. Tenga en cuenta que hay un cargo adicional por estos servicios.",
     "ALL_CODES": "Todos",
     "ALREADY_ELIGIBLE": "Elegible",
+    "BP_CUFF": "BEAT Brazalete de Presión Sanguínea",
     "CALENDAR_ICON_DESCRIPTION": "Tienen que transcurrir {{ amount }} días más",
     "CHAT_ICON_DESCRIPTION": "Se necesitan {{ amount }} interacciones en vivo (llamada/visita) más",
     "CLINIC": "Clínica",
@@ -1116,25 +1118,28 @@
     "DEACTIVATE_PROMPT_CONTENT": "¿Está seguro de que quiere deshabilitar RPM para este paciente?<br/><br/><strong>Se le continuará facturando por este paciente hasta el final del mes.</strong>",
     "DEACTIVATION_REASON": "Razón de la desactivación",
     "DEPENDENCY_ICON_DESCRIPTION": "Requisitos para el código {{code}} no satisfechos",
+    "DEVICE_TYPE": "Tipo de Dispositivo",
     "DISABLE_RPM": "Deshabilitar RPM",
     "EDIT_NOT_ALLOWED": "No tiene acceso para editar el estado de RPM de este paciente ya que no tiene privilegios de administrador para ninguna de las siguientes clínicas:",
     "EDIT_NOT_ALLOWED_FOR_CLINIC": "No tiene acceso para editar el estado de RPM de este paciente ya que no tiene privilegios de administrador para su clínica ({{ org }})",
     "ENABLE_RPM": "Habilitar RPM",
     "FACE_TO_FACE_PROMPT": "El paciente ha consultado cara a cara con un profesional de la salud calificado en mi ejercicio en los últimos 12 meses",
+    "GLUCOMETER": "SCAN Glucómetro Inteligente",
     "GOALS_SET_PROMPT": "El paciente y mi práctica han establecido metas específicas para el programa de RPM de este paciente",
     "LATEST_ELIGIBLE_CLAIM": "Reclamo Elegible más Reciente",
     "MEDICAL_NECESSITY_PROMPT": "Este servicio ha sido solicitado por un profesional de la salud calificado",
     "NEXT_CLAIM": "Siguiente Reclamo",
+    "NONE": "Ninguno",
     "NO_ENTRY": "{{ patient }} nunca ha tenido RPM habilitado",
     "PATIENT_CONSENT_PROMPT": "El paciente ha consentido y el consentimiento se ha registrado en mi EHR",
     "PERFORMED_BY": "Realizado por",
-    "RECEIVED_DEVICE_PROMPT": "El paciente ha recibido de mi ejercicio un dispositivo médico capaz de transmitir datos del paciente y/o alertas diariamente",
     "RPM_CREATE_FORM_HEADER": "Los siguientes requisitos se han completado para este paciente:",
     "RPM_CREATE_NOTICE": "Al habilitar estas herramientas, se le facturará mensualmente por este paciente.",
     "RPM_CREATE_TITLE": "Remote Patient Monitoring",
     "RPM_DISABLED": "{{ patient }} ha tenido RPM deshabilitado desde {{ date }}",
     "RPM_ENABLED": "{{ patient }} ha tenido RPM habilitado desde {{ date }}",
     "RPM_STATUS": "RPM",
+    "SCALE": "BALANCE Balanza Inteligente",
     "SCALE_ICON_DESCRIPTION": "Se necesitan {{ amount }} días más de transmisiones",
     "STATE": {
       "ACTIVE": "Activo",
@@ -1145,7 +1150,8 @@
     "TRIGGER": {
       "MANUAL": "(Manual)",
       "UNKNOWN": "(Desconocido)"
-    }
+    },
+    "WHAT_DEVICE_PROMPT": "¿Qué dispositivo médico ha recibido el paciente de mi práctica que sea capaz de transmitir datos del paciente y/o alertas diariamente?"
   },
   "SECTION": {
     "APOLLO_US": {

@@ -431,6 +431,7 @@
     "MINUTES": "Minutter",
     "MODERATE": "Moderat",
     "MORE": "Mere",
+    "NA": "N/A",
     "NEXT": "Næste",
     "NO": "Nej",
     "NOTES": "Noter",
@@ -1109,6 +1110,7 @@
     "ABOUT_RPM": "Dette skifter ydelse til ekstern patientovervågning (RPM), som nu refunderes af Medicare og mange kommercielle betalere. Du kan aktivere RPM for denne patient her",
     "ALL_CODES": "Alle koder",
     "ALREADY_ELIGIBLE": "Allerede kvalificeret",
+    "BP_CUFF": "BEAT blodtryksmanchet",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} dage mere skal gå",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} kræves flere live interaktioner (opkald / besøg)",
     "CLINIC": "Klinik",
@@ -1116,25 +1118,28 @@
     "DEACTIVATE_PROMPT_CONTENT": "Er du sikker på, at du vil deaktivere RPM for denne patient?<br/><br/><strong>Du vil fortsat blive faktureret for denne patient gennem slutningen af måneden.</strong>",
     "DEACTIVATION_REASON": "Deaktivering Årsag",
     "DEPENDENCY_ICON_DESCRIPTION": "Kravene til kode {{code}} skal være opfyldt, før denne kode er berettiget til fakturering",
+    "DEVICE_TYPE": "Enhedstype",
     "DISABLE_RPM": "Deaktiver RPM",
     "EDIT_NOT_ALLOWED": "Du har ikke adgang til at redigere RPM-status for denne patient, da du ikke har administrative privilegier for nogen af følgende klinikker:",
     "EDIT_NOT_ALLOWED_FOR_CLINIC": "Du har ikke adgang til at redigere RPM-status for denne patient, da du ikke har administrative privilegier for deres klinik ({{ org }})",
     "ENABLE_RPM": "Aktiver RPM",
     "FACE_TO_FACE_PROMPT": "Patienten har konsulteret face-to-face med et kvalificeret sundhedspersonale i min praksis inden for de sidste 12 måneder",
+    "GLUCOMETER": "SCAN Smart Glucometer",
     "GOALS_SET_PROMPT": "Patient og min praksis har sat specifikke mål for denne patients RPM-program",
     "LATEST_ELIGIBLE_CLAIM": "Seneste kvalificerede krav",
     "MEDICAL_NECESSITY_PROMPT": "Denne service er bestilt af en kvalificeret sundhedsperson",
     "NEXT_CLAIM": "Næste krav",
+    "NONE": "Ingen",
     "NO_ENTRY": "{{ patient }} har aldrig haft RPM aktiveret",
     "PATIENT_CONSENT_PROMPT": "Patienten har givet samtykke, og samtykke er registreret i min EHR",
     "PERFORMED_BY": "Udført af",
-    "RECEIVED_DEVICE_PROMPT": "Patienten har modtaget et medicinsk udstyr fra min praksis, der er i stand til at overføre patientdata og/eller alarmer dagligt",
     "RPM_CREATE_FORM_HEADER": "Følgende krav er opfyldt til denne patient:",
     "RPM_CREATE_NOTICE": "Ved at aktivere disse værktøjer",
     "RPM_CREATE_TITLE": "Fjernovervågning af patienten",
     "RPM_DISABLED": "{{ patient }} har haft RPM deaktiveret siden {{ date }}",
     "RPM_ENABLED": "{{ patient }} har haft RPM aktiveret siden {{ date }}",
     "RPM_STATUS": "RPM",
+    "SCALE": "BALANCE Smart Scale",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} dage mere af enhedsoverførsler er nødvendige",
     "STATE": {
       "ACTIVE": "Aktiv",
@@ -1145,7 +1150,8 @@
     "TRIGGER": {
       "MANUAL": "(Manual)",
       "UNKNOWN": "(Ukendt)"
-    }
+    },
+    "WHAT_DEVICE_PROMPT": "Hvad medicinsk udstyr har patienten modtaget fra min praksis, der er i stand til at overføre patientdata og / eller alarmer på daglig basis?"
   },
   "SECTION": {
     "APOLLO_US": {

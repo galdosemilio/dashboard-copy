@@ -45,6 +45,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     'firstName',
     'lastName',
     'dob',
+    'deviceSupplied',
     'status',
     'anyCodeLastEligibleAt',
     'codes'
@@ -403,7 +404,9 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
 
             csv +=
               `"${
-                shownValue !== null && shownValue !== undefined
+                entry.device.id === '-1' && columnInfo.defaultNoPlan
+                  ? columnInfo.defaultNoPlan
+                  : shownValue !== null && shownValue !== undefined
                   ? shownValue
                   : columnInfo.default
               }"` + (index + 1 === columns.length ? '' : this.csvSeparator)

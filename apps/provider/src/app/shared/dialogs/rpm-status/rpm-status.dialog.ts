@@ -10,6 +10,10 @@ import {
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { RPM } from '@coachcare/npm-api'
+import { resolveConfig } from '@app/config/section'
+import { RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
+import { ImageOptionSelectorItem } from '@app/shared/components/image-option-selector'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export interface RPMStatusDialogData {
   accessibleOrganizations: OrganizationAccess[]
@@ -19,6 +23,7 @@ export interface RPMStatusDialogData {
 
 type DialogStatus = 'no_entry' | 'has_entry' | 'new_entry' | 'about'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dialog-rpm-status',
   templateUrl: './rpm-status.dialog.html',
@@ -28,6 +33,7 @@ type DialogStatus = 'no_entry' | 'has_entry' | 'new_entry' | 'about'
 })
 export class RPMStatusDialog implements OnInit {
   accessibleOrganizations: OrganizationAccess[] = []
+  allowNoDeviceOption = false
   canDisableRPM = false
   client: AccountAccessData
   deactivationReasons: RPMDeactivationReason[] = []
@@ -35,6 +41,7 @@ export class RPMStatusDialog implements OnInit {
   entryIsActive = false
   form: FormGroup
   inaccessibleOrganizations: OrganizationAccess[] = []
+  rpmDevices: ImageOptionSelectorItem[] = []
   rpmEntry: RPMStateEntry
   status: DialogStatus = 'no_entry'
   statusCache: DialogStatus
@@ -49,35 +56,9 @@ export class RPMStatusDialog implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.form = this.fb.group({
-      organization: ['', Validators.required],
-      patientConsented: [false, Validators.requiredTrue],
-      hasMedicalNecessity: [false, Validators.requiredTrue],
-      hadFaceToFace: [false, Validators.requiredTrue],
-      receivedDevice: [false, Validators.requiredTrue],
-      goalsSet: [false, Validators.requiredTrue]
-    })
-    this.deactivateRpmForm = this.fb.group({
-      deactivationReason: ['', Validators.required]
-    })
-    this.client = this.context.account
-    this.rpmEntry = this.data.mostRecentEntry
-    this.accessibleOrganizations = this.data.accessibleOrganizations
-    this.inaccessibleOrganizations = this.data.inaccessibleOrganizations
-    this.entryIsActive = this.rpmEntry ? this.rpmEntry.isActive : false
-    this.status = this.rpmEntry ? 'has_entry' : 'no_entry'
-    if (this.accessibleOrganizations && this.accessibleOrganizations.length) {
-      this.form.patchValue({
-        organization: this.accessibleOrganizations[0].organization.id
-      })
-
-      if (this.rpmEntry) {
-        this.canDisableRPM = !!this.accessibleOrganizations.find(
-          (org) => org.organization.id === this.rpmEntry.organization.id
-        )
-      }
-    }
-    this.fetchDeactivationReaons()
+    this.createForms()
+    this.resolveDialogData()
+    this.fetchDeactivationReasons()
   }
 
   async enableRPM() {
@@ -85,16 +66,20 @@ export class RPMStatusDialog implements OnInit {
       return
     }
 
+    const formValue = this.form.value
+
     try {
       await this.rpm.create({
         account: this.context.accountId,
         organization: this.form.value.organization,
+        plan:
+          formValue.deviceSupplied !== '-1' ? formValue.deviceSupplied : null,
         isActive: true,
         conditions: {
           hasMedicalNecessity: true,
           hadFaceToFace: true,
           patientConsented: true,
-          receivedDevice: true,
+          receivedDevice: formValue.deviceSupplied !== '-1',
           goalsSet: true
         }
       })
@@ -114,7 +99,7 @@ export class RPMStatusDialog implements OnInit {
         account: this.rpmEntry.rpmState.account.id,
         organization: this.rpmEntry.rpmState.organization.id,
         isActive: false,
-        deactivationReason: deactivateFormValue.deactivationReason
+        reason: deactivateFormValue.deactivationReason
       })
 
       this.notify.success(_('NOTIFY.SUCCESS.DISABLED_RPM'))
@@ -131,7 +116,31 @@ export class RPMStatusDialog implements OnInit {
     }
   }
 
-  private async fetchDeactivationReaons(): Promise<void> {
+  private createForms(): void {
+    this.form = this.fb.group({
+      organization: ['', Validators.required],
+      patientConsented: [false, Validators.requiredTrue],
+      hasMedicalNecessity: [false, Validators.requiredTrue],
+      hadFaceToFace: [false, Validators.requiredTrue],
+      goalsSet: [false, Validators.requiredTrue],
+      deviceSupplied: ['', Validators.required]
+    })
+
+    this.deactivateRpmForm = this.fb.group({
+      deactivationReason: ['', Validators.required]
+    })
+
+    this.form.controls.organization.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((orgId) => {
+        if (!orgId) {
+          return
+        }
+        this.resolveOrgSettings(orgId)
+      })
+  }
+
+  private async fetchDeactivationReasons(): Promise<void> {
     try {
       const raw = await this.rpm.getDeactivationReasons({
         status: 'active',
@@ -146,6 +155,64 @@ export class RPMStatusDialog implements OnInit {
       this.deactivateRpmForm.patchValue({
         deactivationReason: this.deactivationReasons[0].id
       })
+    } catch (error) {
+      this.notify.error(error)
+    }
+  }
+
+  private resolveDevices(): void {
+    this.rpmDevices = Object.values(RPM_DEVICES).map((device) => ({
+      value: device.id,
+      viewValue: device.displayName,
+      imageSrc: device.imageSrc,
+      imageClass: device.imageClass || ''
+    }))
+
+    if (this.allowNoDeviceOption) {
+      return
+    }
+
+    this.rpmDevices = this.rpmDevices.filter((device) => device.value !== '-1')
+
+    if (this.form.value.deviceSupplied === '-1') {
+      this.form.patchValue({ deviceSupplied: '' })
+    }
+  }
+
+  private resolveDialogData(): void {
+    this.client = this.context.account
+    this.rpmEntry = this.data.mostRecentEntry
+    this.accessibleOrganizations = this.data.accessibleOrganizations
+    this.inaccessibleOrganizations = this.data.inaccessibleOrganizations
+    this.entryIsActive = this.rpmEntry ? this.rpmEntry.isActive : false
+    this.status = this.rpmEntry ? 'has_entry' : 'no_entry'
+    if (this.accessibleOrganizations && this.accessibleOrganizations.length) {
+      this.form.patchValue({
+        organization: this.accessibleOrganizations[0].organization.id
+      })
+
+      if (this.rpmEntry) {
+        this.canDisableRPM = !!this.accessibleOrganizations.find(
+          (org) => org.organization.id === this.rpmEntry.organization.id
+        )
+      }
+    }
+  }
+
+  private async resolveOrgSettings(orgId: string): Promise<void> {
+    try {
+      const orgSingle = await this.context.getOrg(orgId)
+
+      const deviceSelectorSetting = resolveConfig(
+        'RPM.ALLOW_NO_DEVICE_SELECTION',
+        orgSingle
+      )
+      this.allowNoDeviceOption =
+        typeof deviceSelectorSetting === 'object'
+          ? false
+          : deviceSelectorSetting
+
+      this.resolveDevices()
     } catch (error) {
       this.notify.error(error)
     }

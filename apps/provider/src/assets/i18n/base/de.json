@@ -431,6 +431,7 @@
     "MINUTES": "Minuten",
     "MODERATE": "Mäßig",
     "MORE": "Mehr",
+    "NA": "N/A",
     "NEXT": "Nächster",
     "NO": "Nein",
     "NOTES": "Anmerkungen",
@@ -1109,6 +1110,7 @@
     "ABOUT_RPM": "Dies schaltet die RPM-Dienste (Remote Patient Monitoring) ein und aus, die inzwischen von Medicare und vielen kommerziellen Kostenträgern erstattet werden. Sie können das RPM für diesen Patienten hier aktivieren",
     "ALL_CODES": "Alle Codes",
     "ALREADY_ELIGIBLE": "Bereits förderfähig",
+    "BP_CUFF": "BEAT Blutdruckmanschette",
     "CALENDAR_ICON_DESCRIPTION": "Es müssen noch {{ amount }} Tage vergehen",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} weitere Live-Interaktionen (Anruf / Besuch) erforderlich",
     "CLINIC": "Klinik",
@@ -1116,25 +1118,28 @@
     "DEACTIVATE_PROMPT_CONTENT": "Möchten Sie das RPM für diesen Patienten wirklich deaktivieren?<br/><br/><strong>Die Abrechnung für diesen Patienten wird bis Ende des Monats fortgesetzt.</strong>",
     "DEACTIVATION_REASON": "Deaktivierungsgrund",
     "DEPENDENCY_ICON_DESCRIPTION": "{{code}} -krav er ikke opfyldt",
+    "DEVICE_TYPE": "Gerätetyp",
     "DISABLE_RPM": "RPM deaktivieren",
     "EDIT_NOT_ALLOWED": "Sie haben keinen Zugriff auf die Bearbeitung des RPM-Status dieses Patienten, da Sie für keine der folgenden Kliniken über Administratorrechte verfügen:",
     "EDIT_NOT_ALLOWED_FOR_CLINIC": "Sie haben keinen Zugriff auf die Bearbeitung des RPM-Status dieses Patienten, da Sie keine Administratorrechte für seine Klinik ({{ org }}) haben",
     "ENABLE_RPM": "RPM aktivieren",
     "FACE_TO_FACE_PROMPT": "Der Patient hat in den letzten 12 Monaten persönlich eine qualifizierte medizinische Fachkraft in meiner Praxis aufgesucht",
+    "GLUCOMETER": "SCAN Smart-Glucometer",
     "GOALS_SET_PROMPT": "Der Patient und meine Praxis haben spezifische Ziele für das RPM-Programm dieses Patienten festgelegt",
     "LATEST_ELIGIBLE_CLAIM": "Letzter berechtigter Anspruch",
     "MEDICAL_NECESSITY_PROMPT": "Dieser Service wurde von einer qualifizierten medizinischen Fachkraft bestellt",
     "NEXT_CLAIM": "Nächster Anspruch",
+    "NONE": "Keiner",
     "NO_ENTRY": "{{ patient }} hatte noch nie RPM aktiviert",
     "PATIENT_CONSENT_PROMPT": "Der Patient hat zugestimmt und die Zustimmung wurde in meiner EPA festgehalten",
     "PERFORMED_BY": "Durchgeführt von",
-    "RECEIVED_DEVICE_PROMPT": "Der Patient hat von meiner Praxis ein Medizinprodukt erhalten, das in der Lage ist, täglich Patientendaten und/oder Warnmeldungen zu übertragen.",
     "RPM_CREATE_FORM_HEADER": "Die folgenden Anforderungen wurden für diesen Patienten erfüllt:",
     "RPM_CREATE_NOTICE": "Wenn Sie diese Tools aktivieren",
     "RPM_CREATE_TITLE": "Remote Patient Monitoring (RPM, Patientenfernüberwachung)",
     "RPM_DISABLED": "{{ patient }} hat RPM deaktiviert seit {{ date }}",
     "RPM_ENABLED": "{{ patient }} hat RPM aktiviert seit {{ date }}",
     "RPM_STATUS": "RPM",
+    "SCALE": "BALANCE Smart-Skala",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} Tage mehr Geräteübertragung erforderlich",
     "STATE": {
       "ACTIVE": "Aktiv",
@@ -1145,7 +1150,8 @@
     "TRIGGER": {
       "MANUAL": "(Handbuch)",
       "UNKNOWN": "(Unbekannt)"
-    }
+    },
+    "WHAT_DEVICE_PROMPT": "Was Medizinprodukt hat der Patient aus meiner Praxis erhalten die Patienten zum Übertragen von Daten fähig ist und / oder Warnungen auf einer täglichen Basis?"
   },
   "SECTION": {
     "APOLLO_US": {

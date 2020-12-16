@@ -6,17 +6,20 @@ import { RPMStateConditions } from '../entities'
 interface StateRequest {
   account: string
   organization: string
+  note?: string
 }
 
 type ActiveStateCreationRequest = StateRequest & {
   isActive: true
   conditions: RPMStateConditions
+  plan?: string
+  targetDeactivationDate?: string
 }
 
 type InactiveStateCreationRequest = StateRequest & {
-  deactivationReason: string
   isActive: false
   conditions?: RPMStateConditions
+  reason: string
 }
 
 export type CreateRPMStateRequest =

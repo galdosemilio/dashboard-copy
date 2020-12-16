@@ -41,6 +41,13 @@ export function attemptToEnableRpm() {
 
   cy.tick(1000)
 
+  cy.get('mat-dialog-container')
+    .find('.image-option')
+    .eq(0)
+    .click({ force: true })
+
+  cy.tick(1000)
+
   cy.get('button').contains('Enable RPM').click({ force: true })
 
   cy.tick(1000)

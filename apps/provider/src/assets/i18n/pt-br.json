@@ -431,6 +431,7 @@
     "MINUTES": "Minutos",
     "MODERATE": "Moderado",
     "MORE": "Mais",
+    "NA": "N/D",
     "NEXT": "Seguinte",
     "NO": "Não",
     "NOTES": "Notas",
@@ -1109,6 +1110,7 @@
     "ABOUT_RPM": "Estes toggles fazem o monitoramento remoto dos pacientes (RPM) que agora são reembolsáveis pela Medicare e por muitos financiadores comerciais. Pode ativar as RPM para este paciente aqui",
     "ALL_CODES": "Todos os Códigos",
     "ALREADY_ELIGIBLE": "Já elegíveis",
+    "BP_CUFF": "Pressão BATIDA Sangue Cuff",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} dias mais precisam decorrer",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} mais interações ao vivo (ligação / visita) necessárias",
     "CLINIC": "Clínica",
@@ -1116,25 +1118,28 @@
     "DEACTIVATE_PROMPT_CONTENT": "Tem certeza de que deseja desativar o RPM para este paciente?<br/><br/><strong>Continuará a ser cobrado por este paciente até o final do mês.</strong>",
     "DEACTIVATION_REASON": "Motivo da desativação",
     "DEPENDENCY_ICON_DESCRIPTION": "Requisitos do {{code}} não atendidos",
+    "DEVICE_TYPE": "Tipo de Dispositivo",
     "DISABLE_RPM": "Desativar RPM",
     "EDIT_NOT_ALLOWED": "Não tem acesso para editar o estado do RPM para este paciente pois não tem privilégios administrativos para nenhuma das clínicas seguintes:",
     "EDIT_NOT_ALLOWED_FOR_CLINIC": "Não tem acesso para editar o estado do RPM para este paciente pois não tem privilégios administrativos para sua clínica ({{ org }})",
     "ENABLE_RPM": "Ativar RPM",
     "FACE_TO_FACE_PROMPT": "O paciente consultou pessoalmente um profissional de saúde qualificado na minha prática nos últimos 12 meses",
+    "GLUCOMETER": "Smart Scan Glucometer",
     "GOALS_SET_PROMPT": "O paciente e minha clínica estabeleceram metas específicas para o programa de RPM desse paciente",
     "LATEST_ELIGIBLE_CLAIM": "Reivindicação qualificada mais recente",
     "MEDICAL_NECESSITY_PROMPT": "Este serviço foi encomendado por um profissional de saúde qualificado",
     "NEXT_CLAIM": "Próxima reivindicação",
+    "NONE": "Nenhum",
     "NO_ENTRY": "O {{ patient }} nunca teve as RPM ativas",
     "PATIENT_CONSENT_PROMPT": "O paciente consentiu e o consentimento foi registado na minha EHR",
     "PERFORMED_BY": "Desempenhado por",
-    "RECEIVED_DEVICE_PROMPT": "O paciente recebeu do meu consultório um dispositivo médico capaz de transmitir diariamente dados do paciente e/ou alertas diários",
     "RPM_CREATE_FORM_HEADER": "Os seguintes requisitos foram cumpridos para este paciente:",
     "RPM_CREATE_NOTICE": "Ao ativar estas ferramentas",
     "RPM_CREATE_TITLE": "Monitoramento Remoto de Pacientes",
     "RPM_DISABLED": "o {{ patient }} tem as RPM desativadas desde{{ date }}",
     "RPM_ENABLED": "o {{ patient }} tem as RPM ativadas desde{{ date }}",
     "RPM_STATUS": "RPM",
+    "SCALE": "Equilíbrio inteligente Scale",
     "SCALE_ICON_DESCRIPTION": "São necessários {{ amount }} dias mais transmissões de dispositivos",
     "STATE": {
       "ACTIVE": "Ativo",
@@ -1145,7 +1150,8 @@
     "TRIGGER": {
       "MANUAL": "(Manual)",
       "UNKNOWN": "(Desconhecido)"
-    }
+    },
+    "WHAT_DEVICE_PROMPT": "O dispositivo médico tem o paciente recebeu de minha prática que é capaz de transmitir dados e / ou alertas de pacientes em uma base diária?"
   },
   "SECTION": {
     "APOLLO_US": {
