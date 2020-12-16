@@ -204,6 +204,9 @@ export class MatClockView<D> implements AfterContentInit {
   }
 
   _handleMouseup() {
+    if (this.hourView) {
+      this.changeView.emit()
+    }
     document.removeEventListener('mousemove', this.mouseMoveListener)
     document.removeEventListener('touchmove', this.mouseMoveListener)
     document.removeEventListener('mouseup', this.mouseUpListener)
@@ -353,7 +356,6 @@ export class MatClockView<D> implements AfterContentInit {
 
     this.activeDate = date
     if (this.hourView) {
-      this.changeView.emit()
       this.selectedChange.emit(this.activeDate)
     } else {
       this.selectedTime.emit(this.activeDate)
