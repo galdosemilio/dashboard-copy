@@ -227,7 +227,6 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
 
     this.hidden = false
 
-    this.validateMaxDiff()
     const diff = this.interval
 
     const next = moment(this._end).add(diff[0], diff[1])

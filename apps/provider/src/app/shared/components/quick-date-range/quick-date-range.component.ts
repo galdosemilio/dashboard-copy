@@ -191,11 +191,11 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
       generator: () =>
         this.format
           ? {
-              start: moment('2016-01-01').format(this.format),
+              start: moment('2000-01-01').format(this.format),
               end: moment().format(this.format)
             }
           : {
-              start: moment('2016-01-01').toISOString(),
+              start: moment('2000-01-01').toISOString(),
               end: moment().toISOString()
             }
     }
