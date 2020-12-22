@@ -6,7 +6,8 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core'
 import { MatDialog, MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
@@ -38,7 +39,8 @@ import { DieterListingDatabase, DieterListingDataSource } from '../services'
 @Component({
   selector: 'app-dieters-expandable-table',
   templateUrl: './expandable-table.component.html',
-  styleUrls: ['./expandable-table.component.scss']
+  styleUrls: ['./expandable-table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   @Input() source: DieterListingDataSource
@@ -111,7 +113,12 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
     this.source
       .connect()
       .pipe(untilDestroyed(this))
-      .subscribe((value) => (this.rows = value))
+      .subscribe((value) => {
+        this.rows = []
+        this.cdr.detectChanges()
+        this.rows = value
+        this.cdr.detectChanges()
+      })
   }
 
   onEdit(dieter: DieterListingItem) {
@@ -138,10 +145,12 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   }
 
   async onLoadMore(
-    type: 'load-more-orgs' | 'load-more-pkgs',
-    dieter: DieterListingItem,
+    args: { name: string; row: DieterListingItem },
     index: number
   ) {
+    const type = args.name
+    const dieter: DieterListingItem = args.row
+
     const account = this.rows.find(
       (row: any) => row.id && row.id === dieter.id
     ) as DieterListingItem

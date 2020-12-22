@@ -29,7 +29,10 @@ import {
   VaultDatabase
 } from './dieter/settings'
 import { LabelsDatabase } from './dieter/settings'
-import { DietersExpandableTableComponent } from './expandable-table'
+import {
+  DietersExpandableTableComponent,
+  PatientFirstNameCell
+} from './expandable-table'
 import { AccountIdentifiersComponent } from './form/account-identifiers/account-identifiers.component'
 import { AccountIdentifierSyncer } from './form/account-identifiers/utils'
 import { DieterFormComponent } from './form/dieter.component'
@@ -63,6 +66,7 @@ export const DietersComponents = [
   DieterListingWithPhiComponent,
   DieterMessagesComponent,
   AccountIdentifiersComponent,
+  PatientFirstNameCell,
   ...SettingsComponents,
   ...JournalComponents,
   ...MeasurementComponents

@@ -14,7 +14,9 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import { ViewImageDialog } from '@app/shared/dialogs'
 import { FoodMeal } from '@coachcare/npm-api'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-journal-food-table',
   templateUrl: 'expandable-table.component.html',
@@ -22,8 +24,10 @@ import { FoodMeal } from '@coachcare/npm-api'
   encapsulation: ViewEncapsulation.None
 })
 export class FoodExpandableTable implements OnInit {
-  @Input() columns = ['date', 'calories', 'protein', 'carb', 'fat']
+  @Input() columns = ['date', 'calories', 'protein', 'fat']
   @Input() source: FoodDataSource
+
+  public rows: any[] = []
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -35,6 +39,16 @@ export class FoodExpandableTable implements OnInit {
 
   ngOnInit() {
     this.cdr.detectChanges()
+
+    this.source
+      .connect()
+      .pipe(untilDestroyed(this))
+      .subscribe((rows) => {
+        this.rows = []
+        this.cdr.detectChanges()
+        this.rows = rows
+        this.cdr.detectChanges()
+      })
   }
 
   public onOpenThumbnail(row: ConsumedFood): void {
