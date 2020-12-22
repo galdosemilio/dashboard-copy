@@ -41,6 +41,8 @@
       "DELETE_LIST_ASSOCIATION": "Eliminar Asociación a Lista de Active Campaign",
       "DELETE_LIST_ASSOCIATION_CONTENT": "¿Está seguro de que quiere eliminar la asociación a la lista {{list}}?",
       "EDIT_ACTIVE_CAMPAIGN": "Editar Asociación a Lista de Active Campaign",
+      "ENTITY": "Entidad",
+      "IS_BILLABLE": "¿Es Facturable?",
       "IS_PAYING": "Está pagando",
       "LOAD_MORE": "Cargar Más",
       "MARKETING_DESCRIPTION": "Estas listas de Active Campaign están asociadas a o sobre esta clínica. Cuando un proveedor es añadido a o debajo de esta clínica, serán enrolados automáticamente a las listas mostradas abajo.<br><br>Los proveedores que ya estaban asociados a esta clínica cuando la lista de Active Campaign fue añadida no se enrolarán automáticamente. Puede enrolar retroactivamente a uno o todos los proveedores a las nuevas listas de Active Campaign utilizando los botones de \"Enrolar retroactivamente...\",",

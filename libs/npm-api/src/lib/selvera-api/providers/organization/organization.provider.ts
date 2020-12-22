@@ -14,6 +14,7 @@ import {
   GetAllEmailTemplatesRequest,
   GetAllOrganizationRequest,
   GetBillingRecordRequest,
+  GetOrganizationEntityTypesRequest,
   OrgAccessRequest,
   OrgCreateAdminPreferenceRequest,
   OrgCreatePreferenceRequest,
@@ -522,7 +523,7 @@ class Organization {
   /**
    * Retrieves an organization billing record
    * @param request must implement GetBillingRecordRequest
-   * @returns Promise<any>
+   * @returns Promise<OrganizationBillingRecord>
    */
   public getBillingRecord(
     request: GetBillingRecordRequest
@@ -558,6 +559,22 @@ class Organization {
   public getBillingPlans(): Promise<{ data: NamedEntity[] }> {
     return this.apiService.request({
       endpoint: `/billing-plan`,
+      method: 'GET',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Get organization entity type listing
+   * @param request must implement interface GetOrganizationEntityTypesRequest
+   * @returns Promise<PagedResponse<OrganizationEntityType>>
+   */
+  public getEntityTypes(
+    request: GetOrganizationEntityTypesRequest
+  ): Promise<PagedResponse<NamedEntity>> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/organization/entity-type`,
       method: 'GET',
       version: '1.0'
     })

@@ -52,14 +52,18 @@ export class EcommerceReportComponent implements OnInit {
 
       csv += `"ORGANIZATION ID"${separator}`
       csv += `"ORGANIZATION NAME"${separator}`
-      csv += `"REGISTERED PATIENTS"${separator}`
-      csv += `"ACTIVE PATIENTS"${separator}`
+      csv += `"REGISTERED PATIENTS - LAST THREE MONTHS"${separator}`
+      csv += `"ACTIVE PATIENTS - LAST THREE MONTHS"${separator}`
       csv += `"RPM-ENABLED PATIENTS"${separator}`
+      csv += `"TOTAL PATIENTS"${separator}`
       csv += `"REGISTERED COACHES"${separator}`
       csv += `"ACTIVE COACHES"${separator}`
       csv += `"VIDEO CALL AMOUNT"${separator}`
       csv += `"PLAN ID"${separator}`
       csv += `"PLAN NAME"${separator}`
+      csv += `"IS BILLABLE"${separator}`
+      csv += `"ENTITY ID"${separator}`
+      csv += `"ENTITY NAME"${separator}`
       csv += `"BASE PRICING"${separator}`
       csv += `"RPM PATIENT PRICING"${separator}`
       csv += `"CHURN DATE"${separator}`
@@ -74,9 +78,10 @@ export class EcommerceReportComponent implements OnInit {
       response.data.forEach((item) => {
         csv += `"${item.organization.id}"${separator}`
         csv += `"${item.organization.name}"${separator}`
-        csv += `"${item.patients.registered.count}"${separator}`
-        csv += `"${item.patients.active.count}"${separator}`
+        csv += `"${item.patients.lastThreeMonths.registered.count}"${separator}`
+        csv += `"${item.patients.lastThreeMonths.active.count}"${separator}`
         csv += `"${item.patients.rpm.count}"${separator}`
+        csv += `"${item.patients.total.registered.count}"${separator}`
         csv += `"${item.providers.registered.count}"${separator}`
         csv += `"${item.providers.active.count}"${separator}`
         csv += `"${
@@ -87,12 +92,17 @@ export class EcommerceReportComponent implements OnInit {
           item.plan && item.plan.name ? item.plan.name : '-'
         }"${separator}`
         csv += `"${
-          item.pricing.base ? item.pricing.base : '-'
+          item.entity ? (item.entity.isBillable ? 'Yes' : 'No') : '-'
         }"${separator}`
+        csv += `"${item.entity ? item.entity.type.id : '-'}"${separator}`
+        csv += `"${item.entity ? item.entity.type.name : '-'}"${separator}`
+        csv += `"${item.pricing.base ? item.pricing.base : '-'}"${separator}`
         csv += `"${
           item.pricing.rpmPatient ? item.pricing.rpmPatient : '-'
         }"${separator}`
-        csv += `"${item.churnDate ? item.churnDate.split('T')[0] : '-'}"${separator}`
+        csv += `"${
+          item.churnDate ? item.churnDate.split('T')[0] : '-'
+        }"${separator}`
         csv += `"${
           item.payingStartDate ? item.payingStartDate : '-'
         }"${separator}`

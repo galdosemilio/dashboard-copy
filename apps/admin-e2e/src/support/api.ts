@@ -235,6 +235,11 @@ const interceptCoreApiCalls = (
     '1.0/organization/*/billing',
     'fixture:/api/general/emptyObject'
   )
+  cy.route(
+    'GET',
+    '1.0/organization/entity-type**',
+    'fixture:/api/organization/getEntityTypes'
+  )
 }
 
 const seti18n = (): void => {

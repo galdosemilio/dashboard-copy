@@ -1,9 +1,15 @@
+import { NamedEntity } from '../../common/entities'
+
 export interface OrganizationBillingRecord {
   basePricing?: number
   churnDate?: string
+  entity?: {
+    isBillable?: boolean
+    type: NamedEntity
+  }
   isPaying: boolean
   payingStartDate?: string
-  plan: {
+  plan?: {
     id: string
     name: string
     description?: string

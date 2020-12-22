@@ -41,6 +41,8 @@
       "DELETE_LIST_ASSOCIATION": "Delete Active Campaign List Association",
       "DELETE_LIST_ASSOCIATION_CONTENT": "Are you sure you want to delete the association to the list {{ list }}?",
       "EDIT_ACTIVE_CAMPAIGN": "Edit Active Campaign List Association",
+      "ENTITY": "Entity",
+      "IS_BILLABLE": "Is Billable?",
       "IS_PAYING": "Is Paying",
       "LOAD_MORE": "Load More",
       "MARKETING_DESCRIPTION": "These Active Campaign lists are associated at or above this organization. When a provider is added at or below this organization, they will be automatically enrolled in the lists shown below.<br><br>Providers that were already associated to this organization when the Active Campaign list was added will not be automatically enrolled. You may retroactive enroll one or all providers into newly-added Active Campaign lists by using the \"Retroactively Enroll...\" buttons.",

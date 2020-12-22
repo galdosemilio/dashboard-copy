@@ -43,3 +43,5 @@ export * from './createBillingRecord.request'
 export * from './deleteBillingRecord.request'
 export * from './getBillingRecord.request'
 export * from './updateBillingRecord.request'
+
+export * from './getOrganizationEntityTypes.request'

@@ -181,6 +181,27 @@
 
           <mat-grid-tile>
             <mat-form-field [class.readonly]="readonly">
+              <mat-select
+              [placeholder]="'ADMIN.ORGS.ENTITY' | translate"
+              formControlName="entity">
+                <mat-option *ngFor="let entity of entities" [value]="entity.id">{{ entity.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <mat-select
+              [placeholder]="'ADMIN.ORGS.IS_BILLABLE' | translate"
+              formControlName="isBillable">
+                <mat-option [value]="true">{{ 'GLOBAL.YES' | translate }}</mat-option>
+                <mat-option [value]="false">{{ 'GLOBAL.NO' | translate }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
               <input matInput
               type="number"
               min="0"

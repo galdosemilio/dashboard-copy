@@ -23,8 +23,9 @@ import * as moment from 'moment'
   styleUrls: ['./form.component.scss']
 })
 export class OrganizationsFormComponent implements OnInit {
-  form: FormGroup
   billingForm: FormGroup
+  entities: NamedEntity[] = []
+  form: FormGroup
   id: string | undefined
   item: OrganizationSingle
   plans: NamedEntity[] = []
@@ -60,55 +61,66 @@ export class OrganizationsFormComponent implements OnInit {
       this.readonly = data.editable ? false : true
 
       if (this.readonly) {
+        this.billingForm.controls['entity'].disable()
         this.billingForm.controls['plan'].disable()
         this.billingForm.controls['isPaying'].disable()
+        this.billingForm.controls['isBillable'].disable()
       } else {
+        this.billingForm.controls['entity'].enable()
         this.billingForm.controls['plan'].enable()
         this.billingForm.controls['isPaying'].enable()
+        this.billingForm.controls['isBillable'].enable()
       }
     })
   }
 
-  createForms() {
-    // TODO type the object
-    this.form = this.builder.group({
-      id: this.id,
-      name: [null, Validators.required],
-      shortcode: null,
-      contact: this.builder.group({
-        firstName: [null, Validators.required],
-        lastName: [null, Validators.required],
-        email: [null, Validators.required],
-        phone: null
-      }),
-      address: this.builder.group({
-        street: null,
-        city: null,
-        state: null,
-        postalCode: null,
-        country: null
-      }),
-      welcomeEmailAddress: 'no_reply@coachcare.com',
-      passwordResetEmailAddress: 'no_reply@coachcare.com',
-      openAssociationAddProvider: false,
-      openAssociationAddClient: false,
-      parentOrganizationId: null,
-      isActive: true
-    })
+  async createForms(): Promise<void> {
+    try {
+      // TODO type the object
+      this.form = this.builder.group({
+        id: this.id,
+        name: [null, Validators.required],
+        shortcode: null,
+        contact: this.builder.group({
+          firstName: [null, Validators.required],
+          lastName: [null, Validators.required],
+          email: [null, Validators.required],
+          phone: null
+        }),
+        address: this.builder.group({
+          street: null,
+          city: null,
+          state: null,
+          postalCode: null,
+          country: null
+        }),
+        welcomeEmailAddress: 'no_reply@coachcare.com',
+        passwordResetEmailAddress: 'no_reply@coachcare.com',
+        openAssociationAddProvider: false,
+        openAssociationAddClient: false,
+        parentOrganizationId: null,
+        isActive: true
+      })
 
-    this.billingForm = this.builder.group({
-      recordExists: [false],
-      plan: [],
-      isPaying: [false, Validators.required],
-      payingStartDate: [],
-      basePricing: [],
-      rpmPatientPricing: [],
-      churnDate: [],
-      renewalDate: []
-    })
+      this.billingForm = this.builder.group({
+        entity: [],
+        isBillable: [],
+        recordExists: [false],
+        plan: [],
+        isPaying: [false, Validators.required],
+        payingStartDate: [],
+        basePricing: [],
+        rpmPatientPricing: [],
+        churnDate: [],
+        renewalDate: []
+      })
 
-    this.resolveBillingPlans()
-    this.resolveBillingStatus()
+      await Promise.all([this.resolveBillingPlans(), this.resolveEntities()])
+
+      this.resolveBillingStatus()
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
   async onSubmit(): Promise<void> {
@@ -141,7 +153,13 @@ export class OrganizationsFormComponent implements OnInit {
         renewalDate: billingFormValue.renewalDate
           ? billingFormValue.renewalDate.format('YYYY-MM-DD')
           : null,
-        organization: res.id
+        organization: res.id,
+        entity: billingFormValue.entity
+          ? {
+              isBillable: billingFormValue.isBillable || false,
+              type: billingFormValue.entity
+            }
+          : undefined
       })
       await this.organization.createBillingRecord(billingUpdatePayload)
 
@@ -180,9 +198,17 @@ export class OrganizationsFormComponent implements OnInit {
         renewalDate: billingFormValue.renewalDate
           ? billingFormValue.renewalDate.format('YYYY-MM-DD')
           : null,
-        organization: this.id
+        organization: this.id,
+        entity: billingFormValue.entity
+          ? {
+              isBillable: billingFormValue.isBillable || false,
+              type: billingFormValue.entity
+            }
+          : null
       },
-      billingFormValue.recordExists ? ['basePricing', 'rpmPatientPricing'] : []
+      billingFormValue.recordExists
+        ? ['basePricing', 'rpmPatientPricing', 'entity']
+        : []
     )
 
     if (billingFormValue.recordExists) {
@@ -243,6 +269,18 @@ export class OrganizationsFormComponent implements OnInit {
       })
   }
 
+  private async resolveEntities(): Promise<void> {
+    try {
+      const response = await this.organization.getEntityTypes({
+        limit: 'all'
+      })
+
+      this.entities = response.data
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
   private async resolveBillingPlans(): Promise<void> {
     try {
       const response = await this.organization.getBillingPlans()
@@ -274,7 +312,9 @@ export class OrganizationsFormComponent implements OnInit {
           ? +response.rpmPatientPricing
           : null,
         churnDate: response.churnDate ? moment(response.churnDate) : null,
-        renewalDate: response.renewalDate ? moment(response.renewalDate) : null
+        renewalDate: response.renewalDate ? moment(response.renewalDate) : null,
+        entity: response.entity ? response.entity.type.id : null,
+        isBillable: response.entity ? response.entity.isBillable : null
       })
     } catch (error) {
       console.error(error)

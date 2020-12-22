@@ -1,3 +1,5 @@
+import { NamedEntity } from '../../common/entities'
+
 export interface BillingOrganizationEntity {
   id: string
   name: string
@@ -18,9 +20,14 @@ export interface OrganizationBillingItem {
   organization: BillingOrganizationEntity
   parent?: BillingOrganizationEntity
   patients: {
-    active: BillingUserCount
-    registered: BillingUserCount
+    lastThreeMonths: {
+      active: BillingUserCount
+      registered: BillingUserCount
+    }
     rpm: BillingUserCount
+    total: {
+      registered: BillingUserCount
+    }
   }
   providers: BillingUserActivity
   videoCalls?: {
@@ -29,6 +36,10 @@ export interface OrganizationBillingItem {
   plan?: {
     id: string
     name: string
+  }
+  entity?: {
+    isBillable?: boolean
+    type: NamedEntity
   }
   pricing: {
     base: number

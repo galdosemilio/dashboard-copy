@@ -5,6 +5,10 @@
 export interface UpdateBillingRecordRequest {
   basePricing?: boolean
   churnDate?: string
+  entity?: {
+    isBillable?: boolean
+    type: string
+  }
   isPaying?: boolean
   rpmPatientPricing?: boolean
   payingStartDate?: string

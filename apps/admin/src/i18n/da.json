@@ -41,6 +41,8 @@
       "DELETE_LIST_ASSOCIATION": "Slet aktiv kampagne List Association",
       "DELETE_LIST_ASSOCIATION_CONTENT": "Er du sikker på at du vil slette foreningen til listen {{list}}?",
       "EDIT_ACTIVE_CAMPAIGN": "Rediger aktiv kampagne liste Association",
+      "ENTITY": "Enhed",
+      "IS_BILLABLE": "Er faktureres?",
       "IS_PAYING": "Betaler",
       "LOAD_MORE": "Indlæs Flere",
       "MARKETING_DESCRIPTION": "Disse aktiv kampagne lister er forbundet på eller over denne organisation. Når der tilføjes en udbyder på eller under denne organisation, vil de automatisk blive tilmeldt på listerne er vist nedenfor.<br><br>udbydere, der allerede var forbundet til denne organisation aktiv kampagne listen blev tilføjet, vil ikke være automatisk tilmeldt. Du må tilbagevirkende kraft tilmelde en eller alle udbydere i nyligt tilføjede aktiv kampagne lister ved at bruge \"tilbagevirkende kraft på Tilmeld dig...\" knapperne.",

@@ -41,6 +41,8 @@
       "DELETE_LIST_ASSOCIATION": "Elimina Active Campaign Lista Association",
       "DELETE_LIST_ASSOCIATION_CONTENT": "Sei sicuro che si desidera eliminare l'associazione alla lista {{list}?",
       "EDIT_ACTIVE_CAMPAIGN": "Modifica Active Campaign Lista Association",
+      "ENTITY": "Entità",
+      "IS_BILLABLE": "È fatturabile?",
       "IS_PAYING": "Sta Pagando",
       "LOAD_MORE": "Carica Altro",
       "MARKETING_DESCRIPTION": "Queste liste campagna attiva sono associati pari o superiore a questa organizzazione. Quando un fornitore viene aggiunto pari o inferiore a questa organizzazione, saranno automaticamente iscritti nelle liste indicate di seguito.<br><br>E fornitori che sono stati già associati a questa organizzazione quando la lista Active Campaign è stato aggiunto non sarà automaticamente iscritto. Si può retroattiva iscriversi uno o tutti i provider in appena aggiunti liste campagna attiva utilizzando il \"Retroattivamente Iscrizione...\" pulsanti.",

@@ -5,6 +5,10 @@
 export interface CreateBillingRecordRequest {
   basePricing?: number
   churnDate?: string
+  entity?: {
+    type: string
+    isBillable?: boolean
+  }
   isPaying: boolean
   organization: string
   payingStartDate?: string
