@@ -24,7 +24,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   encapsulation: ViewEncapsulation.None
 })
 export class FoodExpandableTable implements OnInit {
-  @Input() columns = ['date', 'calories', 'protein', 'fat']
+  @Input() columns = ['date', 'calories', 'protein', 'carb', 'fat']
   @Input() source: FoodDataSource
 
   public rows: any[] = []
