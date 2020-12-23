@@ -63,7 +63,7 @@ export class EcommerceReportComponent implements OnInit {
       csv += `"PLAN NAME"${separator}`
       csv += `"IS BILLABLE"${separator}`
       csv += `"ENTITY ID"${separator}`
-      csv += `"ENTITY NAME"${separator}`
+      csv += `"ENTITY TYPE"${separator}`
       csv += `"BASE PRICING"${separator}`
       csv += `"RPM PATIENT PRICING"${separator}`
       csv += `"CHURN DATE"${separator}`
@@ -71,7 +71,8 @@ export class EcommerceReportComponent implements OnInit {
       csv += `"IS PAYING"${separator}`
       csv += `"RENEWAL DATE"${separator}`
       csv += `"PARENT CLINIC ID"${separator}`
-      csv += `"PARENT CLINIC NAME"`
+      csv += `"PARENT CLINIC NAME"${separator}`
+      csv += `"END DATE"`
 
       csv += `\r\n`
 
@@ -115,7 +116,8 @@ export class EcommerceReportComponent implements OnInit {
         }"${separator}`
         csv += `"${item.renewalDate ? item.renewalDate : '-'}"${separator}`
         csv += `"${item.parent ? item.parent.id : '-'}"${separator}`
-        csv += `"${item.parent ? item.parent.name : '-'}"`
+        csv += `"${item.parent ? item.parent.name : '-'}"${separator}`
+        csv += `"${formValue.date.endOf('day').format('YYYY-MM-DD')}"`
         csv += `\r\n`
       })
 
