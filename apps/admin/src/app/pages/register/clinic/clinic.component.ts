@@ -60,8 +60,12 @@ import { LastStepComponentProps } from './last-step'
 })
 export class RegisterClinicPageComponent implements OnDestroy, OnInit {
   isLoading = false
+  isOnLastStep = false
   orgName: Partial<OrgPrefState.State>
-  lastStepSetup: LastStepComponentProps = { onlyFirstParagraph: false }
+  lastStepSetup: LastStepComponentProps = {
+    onlyFirstParagraph: false,
+    showGoogleTagManager: false
+  }
   logoUrl: string
   hideSteps: boolean
   hideTitle: boolean
@@ -103,6 +107,8 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
   ngOnDestroy() {}
 
   ngOnInit() {
+    this.resolveGoogleTagManager()
+
     this.mobAppTypes = resolveConfig(
       'REGISTER.MOB_APP_TYPE',
       this.context.organizationId
@@ -295,9 +301,19 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
 
         this.register
           .clinic(data)
-          .then(() => {
+          .then((res) => {
             this.isLoading = false
             this.editable = false
+
+            if (data.plan) {
+              this.lastStepSetup.registrationData = {
+                plan: data.plan.type,
+                clinicId: res.organizationId,
+                billingTerm: data.plan.billingPeriod
+              }
+            }
+
+            this.isOnLastStep = true
             this.changeStep(stepper, stepper._steps.length - 1)
           })
           .catch((err: string) => {
@@ -350,5 +366,20 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
         })
       }
     }, 25)
+  }
+
+  private resolveGoogleTagManager(): void {
+    const showGoogleTagManager = resolveConfig(
+      'REGISTER.SHOW_GOOGLE_TAG',
+      this.context.organizationId,
+      true
+    )
+
+    if (typeof showGoogleTagManager === 'object') {
+      this.lastStepSetup.showGoogleTagManager = false
+      return
+    }
+
+    this.lastStepSetup.showGoogleTagManager = showGoogleTagManager
   }
 }

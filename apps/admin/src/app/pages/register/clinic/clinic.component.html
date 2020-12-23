@@ -59,6 +59,7 @@
 
     <mat-step data-name="clinic_confirmation">
       <ccr-page-section
+        *ngIf="isOnLastStep"
         [compData]="lastStepSetup"
         [orgId]="this.context.organizationId"
         section="REGISTER.LAST_STEP">

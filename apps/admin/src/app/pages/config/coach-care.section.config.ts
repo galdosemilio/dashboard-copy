@@ -5,27 +5,6 @@ export const CoachCareTestSectionConfig: SectionConfigDetails = {
   REGISTER: {
     CLINIC_PLANS: [
       {
-        id: 'track',
-        lastStepMessage: _('CLINIC_PLANS.COACH_CARE.TRACK_LAST_STEP'),
-        name: _('CLINIC_PLANS.COACH_CARE.TRACK'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'track_monthly',
-            name: _('GLOBAL.MONTHLY'),
-            price: 150
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'track_annually',
-            name: _('GLOBAL.ANNUAL'),
-            price: 100
-          }
-        ],
-        targetParentOrg: '30',
-        type: 'track'
-      },
-      {
         id: 'virtual_health',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.V_HEALTH_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.V_HEALTH'),
@@ -85,7 +64,8 @@ export const CoachCareTestSectionConfig: SectionConfigDetails = {
         type: 'healthSystem'
       }
     ],
-    NEWSLETTER_CHECKBOX: true
+    NEWSLETTER_CHECKBOX: true,
+    SHOW_GOOGLE_TAG: false
   }
 }
 
@@ -93,27 +73,6 @@ export const CoachCareProdSectionConfig: SectionConfigDetails = {
   REGISTER: {
     CLINIC_PLANS: [
       {
-        id: 'track',
-        lastStepMessage: _('CLINIC_PLANS.COACH_CARE.TRACK_LAST_STEP'),
-        name: _('CLINIC_PLANS.COACH_CARE.TRACK'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'track_monthly',
-            name: _('GLOBAL.MONTHLY'),
-            price: 150
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'track_annually',
-            name: _('GLOBAL.ANNUAL'),
-            price: 100
-          }
-        ],
-        targetParentOrg: '4066',
-        type: 'track'
-      },
-      {
         id: 'virtual_health',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.V_HEALTH_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.V_HEALTH'),
@@ -173,6 +132,7 @@ export const CoachCareProdSectionConfig: SectionConfigDetails = {
         type: 'healthSystem'
       }
     ],
-    NEWSLETTER_CHECKBOX: true
+    NEWSLETTER_CHECKBOX: true,
+    SHOW_GOOGLE_TAG: true
   }
 }
