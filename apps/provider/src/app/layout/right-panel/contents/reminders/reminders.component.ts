@@ -149,8 +149,8 @@ export class RemindersComponent implements OnInit, OnDestroy {
       organization: this.context.organizationId,
       account: this.context.accountId,
       range: {
-        start: moment().format('YYYY-MM-DD'),
-        end: moment().endOf('year').format('YYYY-MM-DD')
+        start: moment().toISOString(),
+        end: moment().endOf('year').toISOString()
       }
     }
     this.dataService
