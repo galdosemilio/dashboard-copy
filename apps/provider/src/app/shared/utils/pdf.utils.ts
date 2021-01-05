@@ -62,8 +62,9 @@ export function calculateElementRow(
 }
 
 export function calculateProgressElementRow(
-  weekIndex: number,
-  todayYear: number,
+  startWeekIndex: number,
+  startYear: number,
+  endYear: number,
   measurements: BodyMeasurement[],
   key: string,
   decimals: number = 2
@@ -75,34 +76,50 @@ export function calculateProgressElementRow(
     currentWeek: 0,
     lastWeek: 0
   }
-  const lastWeekIndex = weekIndex - 1
+  const lastWeekIndex = startWeekIndex === 1 ? 52 : startWeekIndex - 1
+  const lastWeekIsInLastYear = lastWeekIndex === 1
+
   const firstMeasurement = measurements.find((meas) => meas[key])
   const currentMeasurement = measurements
     .slice()
     .reverse()
     .find((meas) => {
       const measDate = moment(meas.date)
+
       return (
         meas[key] &&
-        measDate.week() === weekIndex &&
-        measDate.year() === todayYear
+        measDate.week() === startWeekIndex &&
+        measDate.year() === startYear
       )
     })
+
   const groupedMeasurements = groupBy(measurements, (meas) =>
     moment(meas.date).week()
   )
+
   const mostRecentMeasurement = measurements
     .slice()
     .reverse()
     .find((meas) => meas[key])
+
+  const pertinentYear = lastWeekIsInLastYear ? startYear - 1 : startYear
+
   let lastWeekMeasurement = groupedMeasurements.find((group) => {
-    const pertinentGroupElement = group.find(
-      (el) => moment(el.date).year() === todayYear
+    const pertinentGroupElement = group.find((el) =>
+      lastWeekIsInLastYear
+        ? moment(el.date).year() === pertinentYear ||
+          moment(el.date).year() === startYear
+        : moment(el.date).year() === pertinentYear
     )
+
     if (pertinentGroupElement) {
       const groupDate = moment(pertinentGroupElement.date)
+
       return (
-        groupDate.week() === lastWeekIndex && groupDate.year() === todayYear
+        groupDate.week() === lastWeekIndex &&
+        (lastWeekIsInLastYear
+          ? groupDate.year() === pertinentYear || groupDate.year() === startYear
+          : groupDate.weekYear() === pertinentYear)
       )
     } else {
       return false
