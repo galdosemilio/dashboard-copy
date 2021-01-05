@@ -391,5 +391,18 @@ export class FileExplorerTableComponent
         parent: currentRoute ? currentRoute.content.id : undefined
       }
     })
+
+    this.source.setSorter(
+      this.sort,
+      () =>
+        ({
+          sort: [
+            {
+              property: this.sort.active || 'createdAt',
+              dir: this.sort.direction || 'asc'
+            }
+          ]
+        } as any)
+    )
   }
 }

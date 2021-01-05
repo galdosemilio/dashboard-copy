@@ -4,6 +4,11 @@
 
 import { PageOffset, PageSize } from '../entities'
 
+export interface GetListContentSort {
+  property: 'createdAt' | 'name'
+  dir?: 'asc' | 'desc'
+}
+
 export interface GetListContentRequest {
   /** Organization to retrieve the content items for. */
   organization: string
@@ -21,5 +26,7 @@ export interface GetListContentRequest {
   limit?: PageSize
   /** Number of items to offset from beginning of the result set. */
   offset?: PageOffset
+  /** A collection that determines how the result should be sorted */
+  sort?: GetListContentSort[]
   searchMode?: 'deep' | 'shallow'
 }

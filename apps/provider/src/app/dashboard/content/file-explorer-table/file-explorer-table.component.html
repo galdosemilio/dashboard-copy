@@ -80,7 +80,7 @@
         </ng-container>
 
         <ng-container cdkColumnDef="name" [formGroup]="form">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.CONTENT.FOLDER_NAME' | translate }}</mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'LIBRARY.CONTENT.FOLDER_NAME' | translate }}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" class="clickable">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1%">
                     <app-content-file-explorer-inline-editor [required]="true" bindForm="name" [overwriteControl]="true"
