@@ -2,30 +2,117 @@
 @import 'variables';
 
 app-dieter-journal-food-table {
-  .ccr-table {
-    mat-table {
-      .cdk-column-date {
-        flex: 3 !important;
+  ccr-datasource-overlay {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+    justify-content: space-between;
+
+    > div {
+      flex: 0 100%;
+      padding: 15px 0;
+
+      &.table-container {
+        padding-left: 15px;
+        padding-right: 15px;
       }
 
-      .cdk-column-carb {
-        flex: 1.5 !important;
+      &.header-row,
+      &.newday-row,
+      &.mealtype-row,
+      &.meal-row {
+        display: flex;
+
+        .bold {
+          font-weight: bold;
+        }
+
+        &.hidden {
+          display: none;
+        }
+
+        &.shaded {
+          background-color: #f0f0f0;
+        }
+
+        > div:first-child {
+          flex: 35%;
+          position: relative;
+
+          > mat-icon {
+            left: -25px;
+            position: absolute;
+            top: -3px;
+          }
+        }
+        > div {
+          flex: 0 15%;
+          text-align: right;
+
+          &:first-child {
+            text-align: left;
+          }
+        }
       }
 
-      .mat-row {
-        align-items: stretch;
-        padding-top: 15px;
+      &.header-row {
+        background-color: #e4e3e3;
+        font-weight: bold;
+        padding: 15px;
+        text-transform: uppercase;
       }
-    }
 
-    small {
-      @include horizontal-margin-left(0.25em);
-      margin-top: 0.42em;
-    }
+      &.newday-row {
+        border-top: 2px solid #ddd;
 
-    .day-summary {
-      span {
-        font-size: 12px;
+        > div:first-child {
+          font-weight: bold;
+          text-indent: 25px;
+        }
+      }
+      &.newday-row:first-child {
+        border-top: none;
+      }
+
+      &.mealtype-row {
+        > div:first-child {
+          text-indent: 35px;
+        }
+      }
+
+      &.meal-row {
+        > div:first-child {
+          > .meal-image-thumbnail {
+            float: left;
+            text-indent: 25px;
+
+            margin: 0 5px;
+            &.clickable {
+              cursor: pointer;
+            }
+
+            img {
+              height: auto;
+              width: 50px;
+            }
+          }
+        }
+      }
+
+      .carb,
+      .fat {
+        > div {
+          margin-right: 5px;
+        }
+        > div:last-child {
+          align-items: flex-end;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          font-size: 12px;
+          margin-top: 4px;
+          place-content: flex-end space-around;
+        }
       }
     }
   }
@@ -42,16 +129,16 @@ app-dieter-journal-food-table {
     }
   }
 
-  .ingredient-item {
-    margin-left: 10px !important;
-  }
-
   .level2 {
     .mat-cell {
       .expandable {
         padding: 0 15px 5px 36px;
       }
     }
+  }
+
+  .serving-ingredients {
+    margin-left: 5px;
   }
 
   .lowercase-text {

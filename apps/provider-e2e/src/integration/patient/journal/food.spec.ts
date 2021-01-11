@@ -46,7 +46,7 @@ describe('Patient profile -> journal -> food', function () {
       .should('contain', '0g')
 
     cy.get('app-dieter-journal-food-table')
-      .find('mat-row.level0')
+      .find('.newday-row')
       .as('tableRows')
 
     cy.get('@tableRows').should('have.length', 7)
@@ -60,25 +60,25 @@ describe('Patient profile -> journal -> food', function () {
     cy.get('@tableRows').eq(6).should('contain', 'Tuesday, Dec 31')
 
     // Inspect for specific ingredients
-    cy.get('@tableRows').eq(5).find('.expandable').trigger('click')
+    cy.get('@tableRows').eq(5).find('.clickable').trigger('click')
 
-    cy.get('@tableRows').eq(6).find('.expandable').trigger('click')
+    cy.get('@tableRows').eq(6).find('.clickable').trigger('click')
 
     cy.get('app-dieter-journal-food-table')
-      .find('mat-row.level1')
+      .find('.mealtype-row')
       .not('.hidden')
       .as('mealRows')
 
     cy.get('@mealRows').should('have.length', 8)
 
-    cy.get('@mealRows').eq(0).find('.expandable').trigger('click')
+    cy.get('@mealRows').eq(0).find('.clickable').trigger('click')
 
-    cy.get('@mealRows').eq(5).find('.expandable').trigger('click')
+    cy.get('@mealRows').eq(5).find('.clickable').trigger('click')
 
-    cy.get('@mealRows').eq(6).find('.expandable').trigger('click')
+    cy.get('@mealRows').eq(6).find('.clickable').trigger('click')
 
     cy.get('app-dieter-journal-food-table')
-      .find('mat-row.level2')
+      .find('.meal-row')
       .not('.hidden')
       .as('consumedRow')
 
@@ -125,7 +125,7 @@ describe('Patient profile -> journal -> food', function () {
       .should('contain', '0g')
 
     cy.get('app-dieter-journal-food-table')
-      .find('mat-row.level0')
+      .find('.newday-row')
       .as('tableRows')
 
     cy.get('@tableRows').should('have.length', 7)
@@ -139,25 +139,25 @@ describe('Patient profile -> journal -> food', function () {
     cy.get('@tableRows').eq(6).should('contain', 'Wednesday, Jan 1')
 
     // Inspect for specific ingredients
-    cy.get('@tableRows').eq(5).find('.expandable').trigger('click')
+    cy.get('@tableRows').eq(5).find('.clickable').trigger('click')
 
-    cy.get('@tableRows').eq(6).find('.expandable').trigger('click')
+    cy.get('@tableRows').eq(6).find('.clickable').trigger('click')
 
     cy.get('app-dieter-journal-food-table')
-      .find('mat-row.level1')
+      .find('.mealtype-row')
       .not('.hidden')
       .as('mealRows')
 
     cy.get('@mealRows').should('have.length', 8)
 
-    cy.get('@mealRows').eq(0).find('.expandable').trigger('click')
+    cy.get('@mealRows').eq(0).find('.clickable').trigger('click')
 
-    cy.get('@mealRows').eq(5).find('.expandable').trigger('click')
+    cy.get('@mealRows').eq(5).find('.clickable').trigger('click')
 
-    cy.get('@mealRows').eq(6).find('.expandable').trigger('click')
+    cy.get('@mealRows').eq(6).find('.clickable').trigger('click')
 
     cy.get('app-dieter-journal-food-table')
-      .find('mat-row.level2')
+      .find('.meal-row')
       .not('.hidden')
       .as('consumedRow')
 

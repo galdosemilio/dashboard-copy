@@ -24,10 +24,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   encapsulation: ViewEncapsulation.None
 })
 export class FoodExpandableTable implements OnInit {
-  @Input() columns = ['date', 'calories', 'protein', 'carb', 'fat']
   @Input() source: FoodDataSource
 
-  public rows: any[] = []
+  public rows: FoodDayAmount[] = []
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -46,9 +45,38 @@ export class FoodExpandableTable implements OnInit {
       .subscribe((rows) => {
         this.rows = []
         this.cdr.detectChanges()
-        this.rows = rows
+
+        this.rows = this.cleanData(rows);
         this.cdr.detectChanges()
       })
+  }
+
+  private cleanData(rows: any[]): any[] {
+    // Apply class for shading to level 0 and 2
+    let level0Count = 0
+    let level2Count = 0
+
+    rows.forEach((t) => {
+      level2Count = t.level !== 2 ? 0 : level2Count
+
+      if (t.level === 0) {
+        t.shading = level0Count % 2 === 1 ? 1 : 0
+        level0Count++
+      } else if (t.level === 1) {
+        t.shading =
+          t.type === 'FOOD.BREAKFAST' || t.type === 'FOOD.DINNER' ? 1 : 0
+      } else if (t.level === 2) {
+        t.shading = level2Count % 2 === 1 ? 1 : 0
+        level2Count++
+      }
+    })
+
+    return [
+      ...rows.filter(
+        (e) =>
+          (e.level !== 2 || !e.meals) && (e.level !== 1 || e.type !== undefined)
+      )
+    ]
   }
 
   public onOpenThumbnail(row: ConsumedFood): void {
@@ -63,26 +91,65 @@ export class FoodExpandableTable implements OnInit {
   }
 
   async toggleRow(row: FoodDayAmount) {
-    if (row.isEmpty || row.level > 1) {
-      return
-    }
+    if (row.level > 1) return
+
+    // Determine the start and end index of the array to examine and potentially modify, instead of interating over whole set
+    // ** ensure that the timezone is considered - I think we should be examining the date differently?
+    const consumedDate =
+      row.level === 1 ? row.meals[0].consumedDate : row.consumedDate
+    const startIndex =
+      row.level === 1
+        ? this.rows.findIndex(
+            (e) =>
+              !e.consumedDate &&
+              e.meals &&
+              e.meals[0].consumedDate >= consumedDate &&
+              e.type === row.type
+          )
+        : this.rows.findIndex(
+            (e) => e.consumedDate && e.consumedDate >= consumedDate
+          )
+    let endIndex =
+      row.level === 1
+        ? this.rows.findIndex(
+            (e, index) =>
+              index > startIndex &&
+              (e.consumedDate === undefined || e.consumedDate > consumedDate)
+          )
+        : this.rows.findIndex(
+            (e) => e.consumedDate && e.consumedDate > consumedDate
+          )
+
+    // startIndex = startIndex === -1 ? 0 : startIndex
+    endIndex = endIndex === -1 ? this.rows.length : endIndex
 
     row.isExpanded = !row.isExpanded
 
     switch (row.level) {
       case 0:
-        row.types.forEach((t) => {
-          t.isHidden = !row.isExpanded
-          if (!row.isExpanded) {
-            t.isExpanded = row.isExpanded
-            t.meals.forEach((m) => (m.isHidden = !t.isExpanded))
+        this.rows.forEach((t, index) => {
+          if (index < startIndex || index > endIndex) return
+
+          if (t.level === 1 && row.isExpanded) {
+            t.isExpanded = false
+            t.isHidden = false
+          } else if (t.level === 1 || t.level === 2) {
+            t.isExpanded = false
+            t.isHidden = true
           }
         })
         break
 
       case 1:
-        row.meals.forEach((m) => (m.isHidden = !row.isExpanded || m.isEmpty))
-        this.fetchAndLoadServings(row.meals.filter((m) => m.id))
+        this.rows.forEach((t, index) => {
+          if (index < startIndex || index > endIndex) return
+
+          this.fetchAndLoadServings(row.meals.filter((m) => m.id))
+
+          if (t.level === 2) {
+            t.isHidden = row.isExpanded ? false : true
+          }
+        })
         break
     }
   }

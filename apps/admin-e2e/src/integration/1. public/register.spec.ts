@@ -43,7 +43,7 @@ function completeClinicPlans(
   args: {
     plan: string
     billingTerm: string
-  } = { plan: 'Track', billingTerm: 'Monthly' }
+  } = { plan: 'Virtual Health', billingTerm: 'Monthly' }
 ) {
   cy.get('ccr-register-clinic-default-clinic-packages')
     .find('.mat-select-trigger')
@@ -147,10 +147,6 @@ const cards = [
 
 const plans = [
   {
-    param: 'track',
-    title: 'Track'
-  },
-  {
     param: 'virtualHealth',
     title: 'Virtual Health'
   },
@@ -225,9 +221,9 @@ describe('Register New Clinic', function () {
 
         if (xhr.request.body.plan) {
           expect(xhr.request.body.plan.billingPeriod).to.equal('monthly')
-          expect(xhr.request.body.plan.type).to.equal('track')
+          expect(xhr.request.body.plan.type).to.equal('virtualHealth')
           expect(xhr.request.body.organization.parentOrganizationId).to.equal(
-            '30'
+            '7412'
           )
         }
       },
@@ -358,18 +354,6 @@ describe('Register New Clinic', function () {
 
     cy.tick(1000)
     cy.wait(1000)
-
-    assessDisplayedPlan({
-      billingTerm: 'Monthly',
-      name: 'Track',
-      price: 150
-    })
-
-    assessDisplayedPlan({
-      billingTerm: 'Annual',
-      name: 'Track',
-      price: 100
-    })
 
     assessDisplayedPlan({
       billingTerm: 'Monthly',

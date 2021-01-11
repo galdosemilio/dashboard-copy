@@ -1,64 +1,92 @@
 <ccr-datasource-overlay class="ccr-table ccr-expand-table ccr-table-stats" [source]="source">
-
-  <ng-template #empty>-</ng-template>
-
-  <mat-table [dataSource]="rows">
-
-    <ng-container cdkColumnDef="date">
-      <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
-        <app-dieter-food-mealname-cell [row]="row" (click)="toggleRow(row)">
-        </app-dieter-food-mealname-cell>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="calories">
-      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CALORIES' | translate }}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
-        <span>{{ 'BOARD.CALORIES' | translate }}</span>
-        <ng-container *ngIf="row.calories; else empty">
-          {{ row.calories | number }}
-        </ng-container>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="protein">
-      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.PROTEIN' | translate }}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
-        <span>{{ 'BOARD.PROTEIN' | translate }}</span>
-        <ng-container *ngIf="row.protein; else empty">
-          {{ (row.protein / 1000).toFixed(0) | number }}
-          <small>{{ 'UNIT.G' | translate }}</small>
-        </ng-container>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="carb">
-      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.CARB' | translate }}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
-        <app-dieter-food-carb-cell *ngIf="row.carbohydrate; else empty" [row]="row"></app-dieter-food-carb-cell>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="fat">
-      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.FAT' | translate }}</mat-header-cell>
-      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" start" fxFlex.xs="grow">
-        <app-dieter-food-fat-cell *ngIf="row.totalFat; else empty" [row]="row"></app-dieter-food-fat-cell>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
-    <mat-row fxLayoutWrap
-      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
-      class="level{{row.level}}" [ngClass]="{
-        'row-even': even,
-        'row-odd': odd,
-        'hidden': row.isHidden,
-        'row-expanded': row.isExpanded,
-        'row-nested': row.level > 0,
-        'row-bottom-border': row.level > 1
-      }"
-    ></mat-row>
-  </mat-table>
-
+    <div class="header-row">
+      <div>{{ 'GLOBAL.DATE' | translate }}</div>
+      <div>{{ 'BOARD.CALORIES' | translate }}</div>
+      <div>{{ 'BOARD.PROTEIN' | translate }}</div>
+      <div>{{ 'BOARD.CARB' | translate }}</div>
+      <div>{{ 'BOARD.FAT' | translate }}</div>
+    </div>
+    <div *ngFor="let row of rows" class="table-container" [ngClass]="{
+      'newday-row': row.level === 0,
+      'mealtype-row': row.level === 1 && !row.consumedDate,
+      'meal-row': row.level === 2,
+      'hidden': row.level > 0 && row.isHidden,
+      'shaded': row.shading === 1
+    }">
+      <div *ngIf="row.level === 0" (click)="toggleRow(row)" class="bold" [ngClass]="{'clickable': row.hasMeals}">
+        <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && !row.isExpanded">keyboard_arrow_down</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && row.isExpanded">keyboard_arrow_up</mat-icon>
+        {{ row.consumedDate | amDateFormat:'dddd, MMM D' }}
+      </div>
+      <div *ngIf="row.level === 1 && !row.consumedDate" (click)="toggleRow(row)" class="bold" [ngClass]="{'clickable': row.hasMeals}">
+        <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && !row.isExpanded">keyboard_arrow_down</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && row.isExpanded">keyboard_arrow_up</mat-icon>
+        {{ row.type | translate }}
+      </div>
+      <div *ngIf="row.level === 2">
+        <div *ngIf="row.image?.thumbnail" (click)="onOpenThumbnail(row)" class="meal-image-thumbnail" [ngClass]="{'clickable' : row.image.thumbnail !== 'assets/image-placeholder.png'}">
+          <img [src]="row.image.thumbnail">
+        </div>
+        <span class="bold">{{ row.name }}</span>
+        <br *ngIf="row.serving">
+        <small *ngIf="row.serving" class="lowercase-text serving-amount">
+          {{ row.serving | fraction }} {{ 'GLOBAL.FOOD_KEYS' | translate }}
+        </small>
+        <br *ngIf="row.level !== 1 && !row.consumedAtMidnight">
+        <small *ngIf="row.level !== 1 && !row.consumedAtMidnight">{{ row.consumedDate | amDateFormat:'h:mm a' }}</small>
+        <div *ngIf="row.serving">
+          <small>
+            <ul class="serving-ingredients">
+              <li *ngFor="let ingredient of row.ingredients">
+                {{ ingredient.ingredient.name }}
+                <span *ngIf="ingredient.ingredient.brand">({{ ingredient.ingredient.brand }})</span><br/>
+                <span class="lowercase-text">{{ ingredient.quantity }} x {{ ingredient.description }}</span>
+              </li>
+            </ul>
+          </small>
+        </div>
+      </div>
+      <div class="calories">{{ row.calories ? (row.calories | number) : '-' }}</div>
+      <div class="protein">
+        {{ row.protein ? ((row.protein / 1000).toFixed(0) | number) : '-' }}
+        <small *ngIf="row.protein">{{ 'UNIT.G' | translate }}</small>
+      </div>
+      <div class="carb">
+        <div>
+          {{ row.carbohydrate ? ((row.carbohydrate / 1000).toFixed(0) | number) : '-' }}
+          <small *ngIf="row.carbohydrate">{{ 'UNIT.G' | translate }}</small>
+        </div>
+        <div *ngIf="row.carbohydrate">
+          <span>
+            {{ 'BOARD.FIBER' | translate }} {{ row.fiber / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+          <span>
+            <ccr-popup-description
+            class="small-popup-description"
+            [title]="'BOARD.NET_CARBS' | translate"
+            [description]="'BOARD.NET_CARBS_DESCRIPTION' | translate"
+            ></ccr-popup-description>
+            {{ 'BOARD.NET_CARBS' | translate }} {{ row.netCarbs / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.SUGAR' | translate }} {{ row.sugar / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="fat">
+        <div>
+          {{ row.totalFat ? ((row.totalFat / 1000).toFixed(0) | number) : '-' }}
+          <small *ngIf="row.totalFat">{{ 'UNIT.G' | translate }}</small>
+        </div>
+        <div *ngIf="row.totalFat">
+          <span>
+            {{ 'BOARD.SAT_FAT' | translate }} {{ row.saturatedFat / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
 </ccr-datasource-overlay>

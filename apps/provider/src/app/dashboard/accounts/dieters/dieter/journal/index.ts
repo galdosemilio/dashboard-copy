@@ -2,10 +2,7 @@ import { DieterJournalComponent } from './journal.component'
 
 import { ExerciseComponent, ExerciseTableComponent } from './exercise/'
 import {
-  FoodCarbCell,
-  FoodExpandableTable,
-  FoodFatCell,
-  FoodMealNameCell
+  FoodExpandableTable
 } from './food/expandable-table'
 import { FoodComponent } from './food/food.component'
 import { HydrationComponent } from './hydration/hydration.component'
@@ -25,12 +22,9 @@ export const JournalComponents = [
   DieterJournalComponent,
   ExerciseComponent,
   ExerciseTableComponent,
-  FoodCarbCell,
   FoodComponent,
   FoodExpandableTable,
-  FoodFatCell,
   FoodKeysComponent,
-  FoodMealNameCell,
   HydrationComponent,
   HydrationTableComponent,
   LevlComponent,
