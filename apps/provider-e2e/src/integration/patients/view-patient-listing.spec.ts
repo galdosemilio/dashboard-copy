@@ -16,7 +16,7 @@ describe('Patient Listing', function () {
       .should('contain', '(193 days)')
 
     cy.get('[data-cy="startDate"]')
-      .eq(3)
+      .eq(1)
       .should('contain', 'Jun 21, 2019')
       .should('contain', '(193 days)')
   })
@@ -36,7 +36,7 @@ describe('Patient Listing', function () {
       .should('contain', '(194 days)')
 
     cy.get('[data-cy="startDate"]')
-      .eq(3)
+      .eq(1)
       .should('contain', 'Jun 21, 2019')
       .should('contain', '(194 days)')
   })
