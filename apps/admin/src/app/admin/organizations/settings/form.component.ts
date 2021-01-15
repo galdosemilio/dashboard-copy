@@ -188,7 +188,11 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
     })
   }
 
-  public onChangeJsonEditor(data = {}): void {
+  public onChangeJsonEditor(data: any = {}): void {
+    if (data.isTrusted !== undefined) {
+      return
+    }
+
     const { mala } = this.form.value
     this.form.patchValue({
       mala: {
