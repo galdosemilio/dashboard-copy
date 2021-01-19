@@ -52,6 +52,7 @@ export class EcommerceReportComponent implements OnInit {
 
       csv += `"ORGANIZATION ID"${separator}`
       csv += `"ORGANIZATION NAME"${separator}`
+      csv += `"NUMBER OF LOCATIONS"${separator}`
       csv += `"REGISTERED PATIENTS - LAST THREE MONTHS"${separator}`
       csv += `"ACTIVE PATIENTS - LAST THREE MONTHS"${separator}`
       csv += `"RPM-ENABLED PATIENTS"${separator}`
@@ -79,6 +80,9 @@ export class EcommerceReportComponent implements OnInit {
       response.data.forEach((item) => {
         csv += `"${item.organization.id}"${separator}`
         csv += `"${item.organization.name}"${separator}`
+        csv += `"${
+          item.numberOfLocations ? item.numberOfLocations : '-'
+        }"${separator}`
         csv += `"${item.patients.lastThreeMonths.registered.count}"${separator}`
         csv += `"${item.patients.lastThreeMonths.active.count}"${separator}`
         csv += `"${item.patients.rpm.count}"${separator}`
@@ -117,7 +121,7 @@ export class EcommerceReportComponent implements OnInit {
         csv += `"${item.renewalDate ? item.renewalDate : '-'}"${separator}`
         csv += `"${item.parent ? item.parent.id : '-'}"${separator}`
         csv += `"${item.parent ? item.parent.name : '-'}"${separator}`
-        csv += `"${formValue.date.endOf('day').format('YYYY-MM-DD')}"`
+        csv += `"${item.reportEndDate ? item.reportEndDate : '-'}"`
         csv += `\r\n`
       })
 

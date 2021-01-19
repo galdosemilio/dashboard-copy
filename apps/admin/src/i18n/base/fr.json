@@ -48,11 +48,13 @@
       "MARKETING_DESCRIPTION": "Ces listes de campagne active sont associées à ou au-dessus de cette organisation. Lorsqu'un fournisseur est ajouté à ou en dessous de cette organisation, ils seront automatiquement inscrits dans les listes ci-dessous.<br><br>Les fournisseurs qui ont déjà été associés à cette organisation lorsque la liste de campagne active a été ajouté ne sera pas automatiquement inscrit. Vous pouvez rétroactifs s'inscrire un ou tous les fournisseurs dans les listes de campagne active nouvellement ajoutée en utilisant le \"Rétroactivement Inscrivez-vous ...\" boutons.",
       "NO_CHILD_CLINIC": "Cette clinique n’a pas de clinique enfant",
       "NO_PARENT_CLINIC": "Pas de clinique parent pour cette clinique.",
+      "NUMBER_OF_LOCATIONS": "Nombre d'emplacements",
       "ORGANIZATION": "Clinique",
       "PARENT_ORG": "Clinique parent",
       "PAYING_START_DATE": "Payer Date de Début",
       "PLAN": "Plan",
       "RENEWAL_DATE": "Date de Renouvellement",
+      "REPORT_END_DATE": "Rapport Date de fin",
       "RPM_PATIENT_PRICING": "RPM Patient Prix",
       "SELECTED_PROVIDER": "Fournisseur sélectionné: {{provider}}",
       "SELECT_PROVIDER": "Sélectionner un fournisseur",
@@ -103,8 +105,6 @@
       "H_SYSTEM_LAST_STEP": "Nous vous remercions de votre inscription au CoachCare Plan de surveillance à distance! S'il vous plaît attendre à recevoir un formulaire de commande détaillant les prix et d'autres termes par AdobeSign pour votre signature électronique.<br><br><strong>S'il vous plaît Note:.. Vous devez exécuter ce bon de commande avant que nous puissions commencer à construire votre application</strong>",
       "R_MONITORING": "Surveillance à distance",
       "R_MONITORING_LAST_STEP": "Nous vous remercions de votre inscription au CoachCare Plan de surveillance à distance! S'il vous plaît attendre à recevoir un formulaire de commande détaillant les prix et d'autres termes par AdobeSign pour votre signature électronique.<br><br><strong>S'il vous plaît Remarque: Vous devez exécuter ce bon de commande avant que nous puissions commencer à construire votre application.</strong>",
-      "TRACK": "Piste",
-      "TRACK_LAST_STEP": "Nous vous remercions de vous inscrire au plan CoachCare piste!",
       "V_HEALTH": "Santé virtuelle",
       "V_HEALTH_LAST_STEP": "Nous vous remercions de votre inscription au plan de la santé virtuel CoachCare!"
     }

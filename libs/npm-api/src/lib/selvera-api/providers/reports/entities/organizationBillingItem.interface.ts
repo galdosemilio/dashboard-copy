@@ -50,4 +50,6 @@ export interface OrganizationBillingItem {
   churnDate?: string
   payingStartDate?: string
   renewalDate?: string
+  numberOfLocations?: number
+  reportEndDate?: string
 }

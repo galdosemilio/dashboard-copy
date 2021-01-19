@@ -8,6 +8,7 @@ export interface OrganizationBillingRecord {
     type: NamedEntity
   }
   isPaying: boolean
+  numberOfLocations?: number
   payingStartDate?: string
   plan?: {
     id: string
@@ -16,4 +17,5 @@ export interface OrganizationBillingRecord {
   }
   renewalDate?: string
   rpmPatientPricing?: number
+  reportEndDate?: string
 }

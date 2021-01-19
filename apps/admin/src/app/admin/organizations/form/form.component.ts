@@ -112,7 +112,9 @@ export class OrganizationsFormComponent implements OnInit {
         basePricing: [],
         rpmPatientPricing: [],
         churnDate: [],
-        renewalDate: []
+        renewalDate: [],
+        numberOfLocations: [0, Validators.min(0)],
+        reportEndDate: []
       })
 
       await Promise.all([this.resolveBillingPlans(), this.resolveEntities()])
@@ -153,13 +155,17 @@ export class OrganizationsFormComponent implements OnInit {
         renewalDate: billingFormValue.renewalDate
           ? billingFormValue.renewalDate.format('YYYY-MM-DD')
           : null,
+        reportEndDate: billingFormValue.reportEndDate
+          ? billingFormValue.reportEndDate.format('YYYY-MM-DD')
+          : null,
         organization: res.id,
         entity: billingFormValue.entity
           ? {
               isBillable: billingFormValue.isBillable || false,
               type: billingFormValue.entity
             }
-          : undefined
+          : undefined,
+        numberOfLocations: billingFormValue.numberOfLocations || null
       })
       await this.organization.createBillingRecord(billingUpdatePayload)
 
@@ -198,16 +204,20 @@ export class OrganizationsFormComponent implements OnInit {
         renewalDate: billingFormValue.renewalDate
           ? billingFormValue.renewalDate.format('YYYY-MM-DD')
           : null,
+        reportEndDate: billingFormValue.reportEndDate
+          ? billingFormValue.reportEndDate.format('YYYY-MM-DD')
+          : null,
         organization: this.id,
         entity: billingFormValue.entity
           ? {
               isBillable: billingFormValue.isBillable || false,
               type: billingFormValue.entity
             }
-          : null
+          : undefined,
+        numberOfLocations: billingFormValue.numberOfLocations || null
       },
       billingFormValue.recordExists
-        ? ['basePricing', 'rpmPatientPricing', 'entity']
+        ? ['basePricing', 'rpmPatientPricing', 'entity', 'numberOfLocations']
         : []
     )
 
@@ -314,7 +324,13 @@ export class OrganizationsFormComponent implements OnInit {
         churnDate: response.churnDate ? moment(response.churnDate) : null,
         renewalDate: response.renewalDate ? moment(response.renewalDate) : null,
         entity: response.entity ? response.entity.type.id : null,
-        isBillable: response.entity ? response.entity.isBillable : null
+        isBillable: response.entity ? response.entity.isBillable : null,
+        numberOfLocations: response.numberOfLocations
+          ? response.numberOfLocations
+          : 0,
+        reportEndDate: response.reportEndDate
+          ? moment(response.reportEndDate)
+          : null
       })
     } catch (error) {
       console.error(error)

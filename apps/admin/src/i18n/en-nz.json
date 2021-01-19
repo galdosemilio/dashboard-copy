@@ -48,11 +48,13 @@
       "MARKETING_DESCRIPTION": "These Active Campaign lists are associated at or above this organization. When a provider is added at or below this organization, they will be automatically enrolled in the lists shown below.<br><br>Providers that were already associated to this organization when the Active Campaign list was added will not be automatically enrolled. You may retroactive enroll one or all providers into newly-added Active Campaign lists by using the \"Retroactively Enroll...\" buttons.",
       "NO_CHILD_CLINIC": "This clinic has no child clinic",
       "NO_PARENT_CLINIC": "This clinic has no parent clinic.",
+      "NUMBER_OF_LOCATIONS": "Number of Locations",
       "ORGANIZATION": "Clinic",
       "PARENT_ORG": "Parent Clinic",
       "PAYING_START_DATE": "Paying Start Date",
       "PLAN": "Plan",
       "RENEWAL_DATE": "Renewal Date",
+      "REPORT_END_DATE": "Report End Date",
       "RPM_PATIENT_PRICING": "RPM Patient Pricing",
       "SELECTED_PROVIDER": "Selected Provider: {{ provider }}",
       "SELECT_PROVIDER": "Select Provider",
@@ -103,8 +105,6 @@
       "H_SYSTEM_LAST_STEP": "Thank you for registering for the CoachCare Remote Monitoring plan! Please expect to receive an Order Form detailing pricing and other terms via AdobeSign for your electronic signature.<br><br><strong>Please Note: You must execute this Order Form before we can begin building your app.</strong>",
       "R_MONITORING": "Remote Monitoring",
       "R_MONITORING_LAST_STEP": "Thank you for registering for the CoachCare Remote Monitoring plan! Please expect to receive an Order Form detailing pricing and other terms via AdobeSign for your electronic signature.<br><br><strong>Please Note: You must execute this Order Form before we can begin building your app.</strong>",
-      "TRACK": "Track",
-      "TRACK_LAST_STEP": "Thank you for registering for the CoachCare Track plan!",
       "V_HEALTH": "Virtual Health",
       "V_HEALTH_LAST_STEP": "Thank you for registering for the CoachCare Virtual Health plan!"
     }

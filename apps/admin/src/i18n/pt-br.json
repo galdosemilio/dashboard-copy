@@ -48,11 +48,13 @@
       "MARKETING_DESCRIPTION": "Estas listas campanha ativa estão associados igual ou superior a esta organização. Quando um fornecedor é adicionado igual ou inferior a esta organização, eles serão automaticamente inscritos nas listas mostradas abaixo.<br><br>Provedores que já foram associados a esta organização quando a lista Ativo Campanha foi adicionado não será automaticamente inscrito. Você pode retroativos inscrever um ou todos os provedores em listas campanha ativa recém-adicionado usando o \"Retroativamente Matricular...\" botões.",
       "NO_CHILD_CLINIC": "Esta clínica não tem clínicas filho",
       "NO_PARENT_CLINIC": "Esta clínica não tem nenhuma clínica mãe",
+      "NUMBER_OF_LOCATIONS": "Número de Locais",
       "ORGANIZATION": "Clínica",
       "PARENT_ORG": "Clínicas mãe",
       "PAYING_START_DATE": "Pagar Data de Início",
       "PLAN": "Plano",
       "RENEWAL_DATE": "Data de Renovação",
+      "REPORT_END_DATE": "Data Relatório Final",
       "RPM_PATIENT_PRICING": "RPM Paciente de Preços",
       "SELECTED_PROVIDER": "Provedor selecionado: {{provider}}",
       "SELECT_PROVIDER": "Select Provider",
@@ -103,8 +105,6 @@
       "H_SYSTEM_LAST_STEP": "Obrigado por se registrar para o plano Sistema de Saúde CoachCare! Por favor esperar para receber um detalhamento preços Order Form e outros termos via AdobeSign para sua assinatura eletrônica.<br><br><strong>Nota: Você deve executar este formulário de pedido antes de podermos começar a construir sua aplicação.</strong>",
       "R_MONITORING": "Monitoramento remoto",
       "R_MONITORING_LAST_STEP": "Obrigado por se registrar para o plano de monitoramento remoto CoachCare! Por favor esperar para receber um detalhamento preços Order Form e outros termos via AdobeSign para sua assinatura eletrônica.<br><br><strong>Nota: Você deve executar este formulário de pedido antes de podermos começar a construir sua aplicação.</strong>",
-      "TRACK": "pista",
-      "TRACK_LAST_STEP": "Obrigado por se registrar para o plano CoachCare pista!",
       "V_HEALTH": "Virtual em Saúde",
       "V_HEALTH_LAST_STEP": "Obrigado por se registrar para o plano de saúde Virtual CoachCare!"
     }
