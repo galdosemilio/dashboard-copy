@@ -6,7 +6,9 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core'
-
+import { ToggleMenu } from '@app/layout/store'
+import { Store } from '@ngrx/store'
+import { CCRConfig } from '@app/config'
 declare const Twilio: any
 
 export interface SidenavItem {
@@ -39,7 +41,10 @@ export class SidenavItemComponent implements OnChanges {
   active = false
   _this: SidenavItemComponent = this
 
-  constructor() {}
+
+  constructor(
+    private store: Store<CCRConfig>,
+  ) {}
 
   ngOnChanges(changes) {
     this.active = this.sidenavItem.expanded
@@ -92,5 +97,10 @@ export class SidenavItemComponent implements OnChanges {
   public performAction(action: string): void {
     if (action === 'videoPlayer') {
     }
+  }
+
+  toggleMenu(e: Event): void {
+    this.store.dispatch(new ToggleMenu())
+    e.stopPropagation()
   }
 }

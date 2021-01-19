@@ -1,6 +1,6 @@
 
 <div
-*ngIf="callState?.subaccountId !== '' && callState.isSupported && callState.conferencingEnabled"
+*ngIf="callState?.subaccountId !== '' && callState.isSupported && callState.conferencingEnabled; else disabled_call_icon"
 [matTooltip]="toolTipMessage"
 fxLayout="row"
 fxLayoutAlign="center center"
@@ -9,7 +9,7 @@ matTooltipPosition="above">
   <button
   *ngIf="mode === 0"
   [class.active]="true"
-  [disabled]="callState?.isCallStarted || !callState?.hasAudioDeviceAccess"
+  [disabled]="callState?.isCallStarted || !callState?.hasAudioDeviceAccess || targets?.length > 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
   (click)="billableServices.length ? undefined : onClick()"
   class="ccr-icon-button"
@@ -17,10 +17,10 @@ matTooltipPosition="above">
   mat-button
   type="button">
     <mat-icon>phone</mat-icon>
-    {{ 'BOARD.CALL_USER' | translate }}
+    <span fxHide.xs>{{ 'BOARD.CALL_USER' | translate }}</span>
   </button>
   <div
-  *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess"
+  *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess && targets?.length === 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
   (click)="billableServices.length ? undefined : onClick()"
   class="clickable">
@@ -42,3 +42,8 @@ matTooltipPosition="above">
 
   <mat-menu #emptyMenu="matMenu"></mat-menu>
 </div>
+<ng-template #disabled_call_icon>
+  <span *ngIf="showDisabledIcon">
+    <mat-icon class="disabled-icon">phone</mat-icon>
+  </span>
+</ng-template>

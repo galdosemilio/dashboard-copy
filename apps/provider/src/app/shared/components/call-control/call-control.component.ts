@@ -45,6 +45,8 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   mode = 0
   @Input()
   targets
+  @Input()
+  showDisabledIcon: boolean
 
   public billableServices: BillableService[] = []
   public callState: CallState

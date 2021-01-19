@@ -49,6 +49,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public pageSize: number
   public source: ThreadsDataSource | null
   public threads: Array<MessageThread> = []
+  public isMessageOpen = false;
 
   @ViewChild('scroll', { static: true })
   scroll: ElementRef
@@ -263,6 +264,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   // TODO move to a Directive with Output event
+
   private calculatePoints() {
     const el = this.scroll.nativeElement
     return {

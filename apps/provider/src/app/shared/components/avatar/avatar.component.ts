@@ -7,7 +7,8 @@ import { _ } from '@app/shared/utils'
 
 @Component({
   selector: 'ccr-avatar',
-  templateUrl: './avatar.component.html'
+  templateUrl: './avatar.component.html',
+  styleUrls: ['./avatar.component.scss']
 })
 export class CcrAvatarComponent {
   @Input() account: string

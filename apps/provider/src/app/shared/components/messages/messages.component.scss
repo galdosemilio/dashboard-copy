@@ -1,0 +1,29 @@
+@import 'variables';
+
+@media only screen and (min-width: $breakpoint-tablet + 1) {
+  .arrow_back,
+  .mobile-messages-icons {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-tablet) {
+  .arrow_back:hover {
+    cursor: pointer;
+  }
+
+  .mobile-message-top {
+    display: block;
+  }
+  .mobile-messages-icons {
+    background: mat-color($ccr-background, selected);
+    display: flex;
+    justify-content: space-around;
+
+    > div {
+      flex-grow: 1;
+      margin: 0 4px;
+      text-align: center;
+    }
+  }
+}

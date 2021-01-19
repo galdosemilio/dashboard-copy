@@ -19,3 +19,21 @@ ccr-messages,
 .unread-button {
   min-height: 30px;
 }
+@media only screen and (max-width: 730px) {
+  .messages-content, .messages-user-list, .ccr-heading{
+    display: none !important;
+  }
+  .ccr-recipients{
+    width: 100%;
+    max-width: inherit;
+  }
+  .ccr-recipients .mat-nav-list .mat-list-item.active{
+    border-left: 5px solid #ddddde;
+    background: #ffffff;
+  }
+  ccr-messages,
+  .ccr-recipients {
+    max-height: 88vh;
+  }
+}
+

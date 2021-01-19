@@ -4,7 +4,8 @@ import { MessageThread } from '../messages/messages.interfaces'
 @Component({
   selector: 'ccr-messages-chat-info',
   templateUrl: './messages-chat-info.component.html',
-  host: { class: 'ccr-messages' }
+  styleUrls: ['./messages-chat-info.component.scss'],
+  host: { class: 'ccr-messages' },
 })
 export class CcrMessagesChatInfoComponent {
   @Input() thread: MessageThread

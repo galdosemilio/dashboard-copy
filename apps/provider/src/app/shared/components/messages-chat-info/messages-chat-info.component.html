@@ -1,8 +1,9 @@
 <div class="messages-header" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="center stretch">
   <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-      <span fxFlex>{{ 'BOARD.THREAD_INFO' | translate }}</span>
+    <mat-icon class="clickable arrow_back" (click)="onHideChatInfo()">arrow_back_ios</mat-icon>
+    <span fxFlex>{{ 'BOARD.THREAD_INFO' | translate }}</span>
 
-      <mat-icon class="clickable" (click)="onHideChatInfo()">clear</mat-icon>
+    <mat-icon class="clickable" fxHide.xs (click)="onHideChatInfo()">clear</mat-icon>
   </div>
 </div>
 
@@ -10,7 +11,7 @@
   <p>{{ 'BOARD.THREAD_MEMBER_LIST' | translate }}</p>
 
   <div fxLayout="column" fxLayoutGap="10px">
-      <ccr-user-card
+    <ccr-user-card
       *ngFor="let user of thread?.recipients"
       [allowUserLinking]="true"
       [showCallButton]="true"

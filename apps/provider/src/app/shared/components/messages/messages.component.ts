@@ -36,7 +36,8 @@ import { MessageContainer } from '@app/shared/model'
 @Component({
   selector: 'ccr-messages',
   templateUrl: './messages.component.html',
-  host: { class: 'ccr-messages' }
+  host: { class: 'ccr-messages' },
+  styleUrls: ['./messages.component.scss']
 })
 export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   @ViewChild('messageBody', { static: false })
@@ -64,6 +65,8 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   refresh = new EventEmitter<void>()
   @Output()
   gotoProfile = new EventEmitter<MessageRecipient>()
+  @Output()
+  onBackToUser = new EventEmitter<void>()
   @Output()
   toggleChatInfo = new EventEmitter<void>()
 
@@ -390,5 +393,9 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
         name: `${r.firstName} ${r.lastName[0].toUpperCase()}.`
       }
     })
+  }
+
+  backToUserList(): void {
+    this.onBackToUser.emit()
   }
 }

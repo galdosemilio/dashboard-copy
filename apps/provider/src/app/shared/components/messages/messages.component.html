@@ -1,11 +1,12 @@
 <div class="messages-header" *ngIf="thread?.recipients.length" fxFlex="nogrow" fxLayout="row"
   fxLayoutAlign="start center">
   <div fxFlex fxLayoutAlign="start center" fxLayoutGap="5px">
+    <mat-icon (click)="backToUserList()" class='arrow_back'>arrow_back_ios</mat-icon>
     <ng-container *ngFor="let recipient of shownRecipients">
       <ccr-avatar [account]="recipient.id" size="messages"></ccr-avatar>
     </ng-container>
 
-    <span>
+    <span class='mobile-message-top'>
       <ng-container *ngIf="shownRecipients.length === 1; else recipients">
         <span (click)="showProfile(shownRecipients[0])" class="patient-link">{{shownRecipients[0].name}}</span>
       </ng-container>
@@ -23,19 +24,28 @@
       </ng-template>
     </span>
   </div>
-  <div *ngIf="thread?.recipients.length === 1" fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" >
+  <div *ngIf="thread?.recipients.length === 1" fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" fxHide.xs>
     <ccr-call-control [targets]="thread.recipients"></ccr-call-control>
     <a mat-button color="primary" class="ccr-icon-button"
       (click)="showProfile(thread.recipients[0])">
       <mat-icon>person_outline</mat-icon>
-      {{'BOARD.VIEW_PROFILE' | translate}}
+      <span fxHide.xs>{{'BOARD.VIEW_PROFILE' | translate}}</span>
     </a>
   </div>
-  <div fxFlex="nogrow" fxLayout="row" fxLayoutAlign="end center">
+  <div fxHide.xs fxFlex="nogrow" fxLayout="row" fxLayoutAlign="end center">
     &nbsp;
     <mat-icon class="clickable" (click)="onToggleChatInfo()">info</mat-icon>
   </div>
 </div>
+<div class='mobile-messages-icons'>
+  <div>
+    <ccr-call-control [targets]="thread.recipients" [showDisabledIcon]="true"></ccr-call-control>
+  </div>
+  <div>
+    <mat-icon class="clickable info-icon" (click)="onToggleChatInfo()">info</mat-icon>
+  </div>
+</div>
+
 
 <div class="messages-body" #messageBody fxFlex="grow">
 
@@ -64,9 +74,10 @@
   <textarea rows="2" [(ngModel)]="newMessage" [detectKey]="'Enter'" supressOnShiftKeyHold="true" (keyPressed)="sendMessage()"
     [placeholder]="'BOARD.TYPE_YOUR_MESSAGES_HERE' | translate"></textarea>
   <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
-    <mat-icon>send</mat-icon> {{'GLOBAL.SEND' | translate}}
+    <mat-icon>send</mat-icon> <span fxHide.xs>{{'GLOBAL.SEND' | translate}}</span>
   </button>
   <ccr-popup-description
+    fxHide.xs
     [title]="'BOARD.MESSAGES_HELP_TITLE' | translate"
     [description]="'BOARD.MESSAGES_HELP_DESCRIPTION' | translate"
     [showIntro]="false"

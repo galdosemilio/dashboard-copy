@@ -1,0 +1,7 @@
+@import 'variables';
+
+@media only screen and (min-width: $breakpoint-tablet + 1px) {
+  .arrow_back {
+    display: none;
+  }
+}

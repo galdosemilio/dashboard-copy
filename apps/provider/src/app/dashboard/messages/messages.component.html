@@ -12,7 +12,7 @@
   </div>
 
   <div fxFlex="grow" fxLayout="row" fxLayoutAlign="stretch">
-    <div class="ccr-recipients" fxLayout="column" fxLayoutGap="10px">
+    <div [class.messages-user-list]="isMessageOpen" class="ccr-recipients" fxLayout="column" fxLayoutGap="10px">
       <div *ngIf="hasUnreadThreads" class="ccr-recipients-scroll unread-button">
         <button [disabled]="isMarkingAsRead" (click)="showMarkUnreadDialog()" fxFlex class="ccr-button" mat-button>
           {{ 'GLOBAL.MESSAGES_MARK_AS_READ' | translate }}
@@ -24,7 +24,7 @@
         (changed)="selectAccounts($event)"
       ></app-messages-recipients>
 
-      <div class="ccr-recipients-scroll" #scroll>
+      <div class="ccr-recipients-scroll" #scroll (click)="isMessageOpen = !isMessageOpen">
         <mat-nav-list>
           <ng-container *ngFor="let thread of threads; let index = index">
           <mat-list-item *ngIf="thread.recipients.length"
@@ -56,7 +56,7 @@
       ></mat-progress-bar>
     </div>
 
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div [class.messages-content]="!isMessageOpen" fxFlex fxLayout="row" fxLayoutAlign="space-between stretch">
       <ccr-messages
       fxFlex
       [account]="current"
@@ -66,13 +66,15 @@
       (refresh)="resetThreads()"
       (gotoProfile)="gotoProfile($event)"
       (toggleChatInfo)="chatInfoEnabled = !chatInfoEnabled"
+      (onBackToUser)="isMessageOpen = !isMessageOpen"
+      *ngIf="!chatInfoEnabled"
       ></ccr-messages>
 
       <ccr-messages-chat-info
       *ngIf="chatInfoEnabled"
       [thread]="threads[active] ? threads[active] : newThread"
       (hideChatInfo)="chatInfoEnabled = false"
-      fxFlex="30%">
+      fxFlex="100%">
       </ccr-messages-chat-info>
     </div>
   </div>
