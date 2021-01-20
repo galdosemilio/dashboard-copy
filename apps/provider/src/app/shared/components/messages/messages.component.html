@@ -59,7 +59,7 @@
     <ng-container *ngFor="let message of messages">
       <span class="message-heading" *ngIf="message.timestamp">{{message.timestamp}}</span>
       <div class="message-wrap" [class.message-input]="account.id !== message.author" [class.message-output]="account.id === message.author">
-        <ccr-avatar size="big" class="message-img" [account]="message.author" [matTooltip]="message.account.firstName + '' + message.account.lastName"></ccr-avatar>
+        <ccr-avatar size="big" class="message-img" [account]="message.author" [matTooltip]="message.account.firstName + ' ' + message.account.lastName"></ccr-avatar>
         <span class="message-text">
           <small class="name">{{ message.account.firstName + ' ' + message.account.lastName }}</small>
           <br>
