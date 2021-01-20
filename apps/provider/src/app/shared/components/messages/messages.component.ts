@@ -78,7 +78,7 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   newMessage = ''
   public shownRecipients = []
 
-  private _thread: MessageThread
+  private _thread?: MessageThread
   private threadId: string = null
   private previousScrollHeight = 0
   private timers: any[] = []
