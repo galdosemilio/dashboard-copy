@@ -14,7 +14,7 @@ import {
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { Subject } from 'rxjs'
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
+import { debounceTime, distinctUntilChanged, skip } from 'rxjs/operators'
 
 type OrganizationSearchComponentModes = 'searchbar' | 'select'
 
@@ -80,6 +80,7 @@ export class OrganizationSearchComponent implements OnInit {
 
     if (this.initialOrg) {
       this.searchCtrl.setValue(this.initialOrg.name, { emitEvent: false })
+      this.setOrgId = this.initialOrg.id
 
       if (this.allowSearchbarReset) {
         this.searchCtrl.disable()
@@ -149,7 +150,7 @@ export class OrganizationSearchComponent implements OnInit {
         this.mode = 'searchbar'
       }
 
-      if (this.organizations.length === 1) {
+      if (!query && this.organizations.length === 1) {
         const orgId = this.organizations[0].organization.id
         this.onOrgSelect({
           value: orgId,
@@ -166,7 +167,11 @@ export class OrganizationSearchComponent implements OnInit {
   private setupAutocomplete(): void {
     this.searchCtrl = new FormControl()
     this.searchCtrl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(
+        skip(this.initialOrg ? 1 : 0),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
       .subscribe((query) => {
         if (query) {
           this.fetchOrganizations(query)
