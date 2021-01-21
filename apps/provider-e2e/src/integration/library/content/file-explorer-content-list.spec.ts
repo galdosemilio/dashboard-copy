@@ -1,5 +1,7 @@
 import { standardSetup } from '../../../support'
 import {
+  attemptFollowFormLink,
+  attemptOpenFormPreviewDialog,
   cloneContent,
   goToNextStep,
   openBatchCloningModal,
@@ -216,5 +218,29 @@ describe('Dashboard -> Digital Library', function () {
     })
 
     cy.wait(3000)
+  })
+
+  it('Allows opening the preview of a form', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/library/content`)
+
+    attemptOpenFormPreviewDialog(0)
+
+    cy.get('.mat-dialog-content')
+      .should('contain', '1020')
+      .should('contain', 'Test Short Answer')
+  })
+
+  it('Allows navigating to the Form page', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/library/content`)
+
+    attemptFollowFormLink(0)
+
+    cy.url().should('contain', '/library/forms/10161')
   })
 })

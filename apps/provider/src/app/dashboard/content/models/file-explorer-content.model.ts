@@ -8,6 +8,7 @@ import { Package } from '@app/shared/components/package-table'
 import { ContentOrganization } from '@coachcare/npm-api'
 
 export interface FileExplorerContentMetadata {
+  id?: string
   url: string
   mimeType: string
   key: string

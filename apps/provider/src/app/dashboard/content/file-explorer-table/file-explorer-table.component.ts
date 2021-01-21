@@ -23,6 +23,7 @@ import {
 } from '@app/service'
 import { BindForm, BINDFORM_TOKEN, CcrPaginator } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { Router } from '@angular/router'
 
 export interface FileExplorerRoute {
   content: FileExplorerContent
@@ -135,7 +136,8 @@ export class FileExplorerTableComponent
   constructor(
     private context: ContextService,
     private formBuilder: FormBuilder,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private router: Router
   ) {
     super()
   }
@@ -226,7 +228,10 @@ export class FileExplorerTableComponent
           metadata: { ...content.metadata, url: downloadUrl.url }
         })
       } else {
-        if (content.metadata && content.metadata.url) {
+        if (
+          content.type.code === 'form' ||
+          (content.metadata && content.metadata.url)
+        ) {
           this.events.openContent.emit(content)
         }
       }
@@ -252,6 +257,16 @@ export class FileExplorerTableComponent
   }
 
   openDirectory(content: FileExplorerContent): void {
+    if (content.type && content.type.code === 'form') {
+      this.router.navigate([
+        '/library/forms',
+        content.metadata.id,
+        'submissions'
+      ])
+
+      return
+    }
+
     if (!content.isFolder) {
       return
     }

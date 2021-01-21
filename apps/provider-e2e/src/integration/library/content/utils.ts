@@ -1,3 +1,22 @@
+export function attemptFollowFormLink(index: number): void {
+  cy.get('mat-table')
+    .find('mat-row')
+    .eq(index)
+    .trigger('dblclick', { force: true })
+  cy.tick(1000)
+}
+
+export function attemptOpenFormPreviewDialog(index: number): void {
+  cy.get('mat-table')
+    .find('mat-row')
+    .eq(index)
+    .find('.cdk-column-actions')
+    .find('mat-icon')
+    .eq(1)
+    .trigger('click', { force: true })
+  cy.tick(1000)
+}
+
 export function cloneContent(): void {
   cy.get('mat-dialog-container')
     .find('button')

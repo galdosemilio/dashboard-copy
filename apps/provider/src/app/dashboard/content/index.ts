@@ -22,6 +22,7 @@ import {
   ContentMoveDialog,
   EmbeddedContentViewerComponent,
   FolderCreateDialog,
+  FormPreviewDialog,
   InsertFormDialog,
   PackageSelectDialog
 } from './dialogs'
@@ -66,6 +67,7 @@ export const ContentComponents = [
   FileFormComponent,
   FileUploadTrackerComponent,
   FolderCreateDialog,
+  FormPreviewDialog,
   InsertFormDialog,
   PackageSelectDialog,
   HyperlinkFormComponent,
@@ -79,6 +81,7 @@ export const ContentEntryComponents = [
   ContentMoveDialog,
   EmbeddedContentViewerComponent,
   FolderCreateDialog,
+  FormPreviewDialog,
   InsertFormDialog,
   PackageSelectDialog
 ]

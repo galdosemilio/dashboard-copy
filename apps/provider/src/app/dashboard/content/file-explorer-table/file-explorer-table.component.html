@@ -153,7 +153,13 @@
             <mat-cell *cdkCellDef="let row" fxLayout="row" fxLayoutAlign="center center">
                 <mat-icon class="file-icon" fontSet="fas" fontIcon="fa-edit" (click)="onEdit(row); $event.stopPropagation()" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.CONTENT.EDIT_CONTENT_TOOLTIP' | translate"></mat-icon>
                 <ccr-icon-move-folder class="file-icon" [class.disabled]="!row.isAdmin" fxLayout="column" fxLayoutAlign="center center" (click)="onMove(row)" [matTooltip]="'LIBRARY.CONTENT.MOVE_CONTENT_TOOLTIP' | translate"></ccr-icon-move-folder>
-                <mat-icon class="file-icon" [class.disabled]="!row.metadata || !row.metadata.url" (click)="onOpen(row)" [matTooltip]="'LIBRARY.CONTENT.PREVIEW_CONTENT_TOOLTIP' | translate">launch</mat-icon>
+                <mat-icon
+                class="file-icon"
+                [class.disabled]="!(row.type.code === 'form') && (!row.metadata || !row.metadata.url)"
+                [matTooltip]="'LIBRARY.CONTENT.PREVIEW_CONTENT_TOOLTIP' | translate"
+                (click)="onOpen(row)">
+                    launch
+                </mat-icon>
                 <mat-icon class="file-icon" (click)="onDelete(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.CONTENT.DELETE_CONTENT_TOOLTIP' | translate">delete</mat-icon>
                 <mat-icon  *ngIf="mode !== 'vault'" class="file-icon" (click)="onCopy(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.CONTENT.CLONE_CONTENT' | translate">content_copy</mat-icon>
             </mat-cell>

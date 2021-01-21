@@ -7,6 +7,7 @@ import {
   ContentMoveDialog,
   EmbeddedContentViewerComponent,
   FolderCreateDialog,
+  FormPreviewDialog,
   InsertFormDialog
 } from '@app/dashboard/content/dialogs'
 import {
@@ -428,6 +429,11 @@ export class ContentComponent implements OnDestroy, OnInit {
   }
 
   private openContent(content: FileExplorerContent) {
+    if (content.type.code === 'form') {
+      this.dialog.open(FormPreviewDialog, { data: { content }, width: '60vw' })
+      return
+    }
+
     if (content.metadata.content) {
       this.dialog.open(EmbeddedContentViewerComponent, {
         data: { content: content.metadata.content, title: content.name }

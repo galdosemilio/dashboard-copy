@@ -1,0 +1,37 @@
+<div matDialogTitle>
+  <div>
+    <mat-icon>library_books</mat-icon>
+    <span>{{ 'LIBRARY.CONTENT.PREVIEW_FORM' | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content>
+  <div
+  *ngIf="form; else loader"
+  fxFlex
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="10px">
+    <h4>{{ form.name }}</h4>
+
+    <div class="scrollable-v">
+      <app-library-forms-form
+        *ngIf="form"
+        [readonly]="true"
+        [data]="form"
+        [fill]="false"
+        [allowAccountChange]="false"
+        [showcase]="true">
+      </app-library-forms-form>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [diameter]="64" [strokeWidth]="4"></mat-spinner>
+  </div>
+</ng-template>
