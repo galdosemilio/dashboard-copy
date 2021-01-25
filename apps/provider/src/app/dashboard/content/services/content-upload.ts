@@ -62,17 +62,26 @@ export class ContentUploadService {
     this.emitUploads()
   }
 
-  createContents(contents: QueuedContent[]): void {
-    contents.forEach((content: QueuedContent) => {
-      const ticket: ContentUploadTicket = {
-        number: this.uploads.length,
-        contentUpload: this.getContentUploadInstance(content),
-        queuedContent: content
+  async createContents(contents: QueuedContent[]): Promise<void> {
+    try {
+      const contentsArray = contents.slice()
+
+      while (contentsArray.length) {
+        const content = contentsArray.shift()
+
+        const ticket: ContentUploadTicket = {
+          number: this.uploads.length,
+          contentUpload: this.getContentUploadInstance(content),
+          queuedContent: content
+        }
+        this.uploads.push(ticket.contentUpload)
+        await this.uploadContent(ticket)
+
+        this.startUploadProgressInterval()
       }
-      this.uploads.push(ticket.contentUpload)
-      this.uploadContent(ticket)
-    })
-    this.startUploadProgressInterval()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   hasPendingUploads(): boolean {
@@ -93,28 +102,34 @@ export class ContentUploadService {
     return new Promise<FileExplorerContent>(async (resolve, reject) => {
       try {
         const ticketContent = ticket.contentUpload.content
-        const content: FileExplorerContent = await this.source.createContent({
-          account: this.context.accountId,
-          createdBy: this.context.user.id,
-          organization: this.organization
-            ? this.organization.id
-            : this.context.organization.id,
-          name: ticketContent.name,
-          description: ticketContent.description,
-          isPublic: ticketContent.isPublic,
-          type: ticketContent.type.id,
-          metadata: ticketContent.metadata,
-          parentId: ticketContent.parentId,
-          parent: ticketContent.parentId || ticketContent.parent
-        })
+        const content: FileExplorerContent = await this.source.createContent(
+          {
+            account: this.context.accountId,
+            createdBy: this.context.user.id,
+            organization: this.organization
+              ? this.organization.id
+              : this.context.organization.id,
+            name: ticketContent.name,
+            description: ticketContent.description,
+            isPublic: ticketContent.isPublic,
+            type: ticketContent.type.id,
+            metadata: ticketContent.metadata,
+            parentId: ticketContent.parentId,
+            parent: ticketContent.parentId || ticketContent.parent
+          },
+          { omitLoading: true }
+        )
 
         if (ticketContent.packages && ticketContent.packages.length) {
           while (ticketContent.packages.length) {
             const p = ticketContent.packages.pop()
-            await this.source.createContentPackage({
-              id: content.id,
-              package: p.id
-            })
+            await this.source.createContentPackage(
+              {
+                id: content.id,
+                package: p.id
+              },
+              { omitLoading: true }
+            )
           }
         }
 
@@ -244,17 +259,17 @@ export class ContentUploadService {
     this.uploadProgressInterval = undefined
   }
 
-  private uploadContent(ticket: ContentUploadTicket): void {
+  private async uploadContent(ticket: ContentUploadTicket): Promise<void> {
     switch (ticket.queuedContent.type.code) {
       case CONTENT_TYPE_MAP.file.code:
-        this.createAsFile(ticket)
+        await this.createAsFile(ticket)
         break
       case CONTENT_TYPE_MAP.hyperlink.code:
       case CONTENT_TYPE_MAP.youtube.code:
-        this.createAsHyperlink(ticket)
+        await this.createAsHyperlink(ticket)
         break
       default:
-        this.createAsDefault(ticket)
+        await this.createAsDefault(ticket)
         break
     }
   }
@@ -304,7 +319,9 @@ export class ContentUploadService {
     }
   }
 
-  private createAsHyperlink(ticket: ContentUploadTicket): void {
+  private createAsHyperlink(
+    ticket: ContentUploadTicket
+  ): Promise<FileExplorerContent> {
     const ticketContent = ticket.contentUpload.content
     ticketContent.type = CONTENT_TYPE_MAP.file
     ticketContent.metadata = Object.assign(
@@ -312,13 +329,15 @@ export class ContentUploadService {
       { mimeType: 'text/html' }
     )
     ticket.contentUpload.content = ticketContent
-    this.requestContentCreation(ticket).catch(
+    return this.requestContentCreation(ticket).catch(
       (error) => (this.uploads[ticket.number].error = error)
     )
   }
 
-  private createAsDefault(ticket: ContentUploadTicket): void {
-    this.requestContentCreation(ticket)
+  private createAsDefault(
+    ticket: ContentUploadTicket
+  ): Promise<FileExplorerContent> {
+    return this.requestContentCreation(ticket)
   }
 
   private requestContentDeletion(id: string): Promise<void> {

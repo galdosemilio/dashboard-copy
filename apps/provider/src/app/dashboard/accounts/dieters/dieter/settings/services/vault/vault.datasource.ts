@@ -22,6 +22,10 @@ import {
 } from '@coachcare/npm-api'
 import { VaultDatabase } from './vault.database'
 
+interface ExecRequestOpts {
+  omitLoading: boolean
+}
+
 export class VaultDatasource extends TableDataSource<
   FileExplorerContent,
   GetAllVaultContentResponse,
@@ -137,7 +141,10 @@ export class VaultDatasource extends TableDataSource<
     return Promise.reject('This action is not supported')
   }
 
-  createContent(args: CreateVaultContentRequest): Promise<FileExplorerContent> {
+  createContent(
+    args: CreateVaultContentRequest,
+    execRequestOpts: ExecRequestOpts = { omitLoading: false }
+  ): Promise<FileExplorerContent> {
     const opts = {
       organizationId: this.criteria.organization
     }
@@ -153,13 +160,18 @@ export class VaultDatasource extends TableDataSource<
             (content: ContentSingle) => new FileExplorerContent(content, opts)
           )
         )
-        .toPromise()
+        .toPromise(),
+      execRequestOpts
     )
   }
 
-  createContentPackage(args: CreateContentPackageRequest): Promise<void> {
+  createContentPackage(
+    args: CreateContentPackageRequest,
+    execRequestOpts: ExecRequestOpts = { omitLoading: false }
+  ): Promise<void> {
     return this.execRequest(
-      this.database.createContentPackage(args).toPromise()
+      this.database.createContentPackage(args).toPromise(),
+      execRequestOpts
     )
   }
 
@@ -212,16 +224,21 @@ export class VaultDatasource extends TableDataSource<
   getUploadUrl(
     args: GetUploadUrlContentRequest
   ): Promise<GetUploadUrlContentResponse> {
-    return this.execRequest(this.database.getUploadUrl(args).toPromise())
+    return this.execRequest(this.database.getUploadUrl(args).toPromise(), {
+      omitLoading: true
+    })
   }
 
   hasParentIdSet(): boolean {
     return this.criteria.parent !== undefined
   }
 
-  private execRequest(promise: Promise<any>): Promise<any> {
+  private execRequest(
+    promise: Promise<any>,
+    execRequestOpts: ExecRequestOpts = { omitLoading: false }
+  ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.isLoading = true
+      this.isLoading = !execRequestOpts.omitLoading
       this.change$.next()
 
       try {

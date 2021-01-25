@@ -23,6 +23,10 @@ import {
 } from '@coachcare/npm-api'
 import { FileExplorerDatabase } from './file-explorer.database'
 
+interface ExecRequestOpts {
+  omitLoading: boolean
+}
+
 export class FileExplorerDatasource extends TableDataSource<
   FileExplorerContent,
   GetAllContentResponse,
@@ -175,7 +179,10 @@ export class FileExplorerDatasource extends TableDataSource<
     }
   }
 
-  createContent(args: CreateContentRequest): Promise<FileExplorerContent> {
+  createContent(
+    args: CreateContentRequest,
+    execRequestOpts: ExecRequestOpts = { omitLoading: false }
+  ): Promise<FileExplorerContent> {
     const opts = {
       organizationId: this.context.organization.id
     }
@@ -187,13 +194,18 @@ export class FileExplorerDatasource extends TableDataSource<
             (content: ContentSingle) => new FileExplorerContent(content, opts)
           )
         )
-        .toPromise()
+        .toPromise(),
+      execRequestOpts
     )
   }
 
-  createContentPackage(args: CreateContentPackageRequest): Promise<void> {
+  createContentPackage(
+    args: CreateContentPackageRequest,
+    execRequestOpts: ExecRequestOpts = { omitLoading: false }
+  ): Promise<void> {
     return this.execRequest(
-      this.database.createContentPackage(args).toPromise()
+      this.database.createContentPackage(args).toPromise(),
+      execRequestOpts
     )
   }
 
@@ -243,22 +255,29 @@ export class FileExplorerDatasource extends TableDataSource<
   }
 
   getDownloadUrl(args: Entity): Promise<any> {
-    return this.execRequest(new Promise((resolve) => resolve()))
+    return this.execRequest(
+      new Promise<void>((resolve) => resolve())
+    )
   }
 
   getUploadUrl(
     args: GetUploadUrlContentRequest
   ): Promise<GetUploadUrlContentResponse> {
-    return this.execRequest(this.database.getUploadUrl(args).toPromise())
+    return this.execRequest(this.database.getUploadUrl(args).toPromise(), {
+      omitLoading: true
+    })
   }
 
   hasParentIdSet(): boolean {
     return this.criteria.parentId !== undefined
   }
 
-  private execRequest(promise: Promise<any>): Promise<any> {
+  private execRequest(
+    promise: Promise<any>,
+    execRequestOpts: ExecRequestOpts = { omitLoading: false }
+  ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
-      this.isLoading = true
+      this.isLoading = !execRequestOpts.omitLoading
       this.change$.next()
 
       try {
