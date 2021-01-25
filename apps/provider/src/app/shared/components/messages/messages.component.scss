@@ -19,6 +19,7 @@
     background: mat-color($ccr-background, selected);
     display: flex;
     justify-content: space-around;
+    min-height: 30px;
 
     > div {
       flex-grow: 1;
