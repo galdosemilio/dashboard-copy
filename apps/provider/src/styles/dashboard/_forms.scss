@@ -97,3 +97,17 @@
     word-wrap: break-word;
   }
 }
+
+.ccr-form-warning-container {
+  mat-error {
+    margin-left: 5px;
+  }
+
+  p {
+    margin-bottom: 0;
+
+    &.error {
+      color: var(--primary);
+    }
+  }
+}

@@ -46,7 +46,10 @@ export class SMSFormComponent
     return this._disabled
   }
 
-  form: FormGroup
+  public currentCharLength = 0
+  public form: FormGroup
+  public MAX_CHAR_LENGTH = 240
+  public textLengthOverflow = false
 
   private _disabled: boolean
 
@@ -91,10 +94,10 @@ export class SMSFormComponent
       text: ['', Validators.required]
     })
 
-    this.form.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe((controls) =>
-        this.propagateChange(this.form.valid ? controls : null)
-      )
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((controls) => {
+      this.propagateChange(this.form.valid ? controls : null)
+      this.currentCharLength = controls.text ? controls.text.length : 0
+      this.textLengthOverflow = this.currentCharLength > this.MAX_CHAR_LENGTH
+    })
   }
 }

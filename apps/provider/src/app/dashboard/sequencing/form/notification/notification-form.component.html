@@ -5,4 +5,13 @@
     <mat-form-field class="ccr-form-field" floatLabel="never">
         <input formControlName="text" matInput type="text" [placeholder]="'SEQUENCING.MESSAGE' | translate">
     </mat-form-field>
+    <div class="ccr-form-warning-container" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <mat-error *ngIf="textLengthOverflow" fxFlex>
+            {{ 'SEQUENCING.NOTIF_TOO_LONG_WARNING' | translate }}
+        </mat-error>
+
+        <p [class.error]="textLengthOverflow">
+            {{ currentCharLength }} / {{ MAX_CHAR_LENGTH }}
+        </p>
+    </div>
 </div>

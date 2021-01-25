@@ -543,4 +543,71 @@ describe('Sequences -> new', function () {
       expect(xhr.request.body.createdBy).to.equal(1)
     })
   })
+
+  it('Shows the max length warnings for SMS and Notification inputs', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/sequences`)
+
+    cy.get('.ccr-icon-button').contains('Create New Sequence').trigger('click')
+
+    setSequenceTitle('Looping Transition with Moved Step')
+
+    addStep()
+
+    cy.get('sequencing-step-input').as('steps')
+    cy.get('@steps').eq(0).as('firstStep')
+
+    cy.get('@firstStep')
+      .find('button')
+      .contains('Add Action')
+      .trigger('click')
+      .trigger('click')
+
+    cy.get('@firstStep').find('mat-select').eq(0).trigger('click').wait(500)
+
+    cy.get('.mat-select-panel')
+      .find('mat-option')
+      .contains('Notification')
+      .trigger('click', { force: true })
+      .wait(500)
+
+    cy.get('@firstStep').find('mat-select').eq(1).trigger('click').wait(500)
+
+    cy.get('.mat-select-panel')
+      .find('mat-option')
+      .contains('SMS')
+      .trigger('click', { force: true })
+      .wait(500)
+
+    cy.get('sequencing-notification-form')
+      .eq(0)
+      .find('input[data-placeholder="Header Text"]')
+      .type('notification header 1')
+
+    cy.get('sequencing-notification-form')
+      .eq(0)
+      .find('input[data-placeholder="Message"]')
+      .type(
+        'notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1notification message 1'
+      )
+
+    cy.get('sequencing-sms-form')
+      .eq(0)
+      .find('input[data-placeholder="Message"]')
+      .type(
+        'sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1sms message 1'
+      )
+
+    cy.get('sequencing-notification-form')
+      .eq(0)
+      .should(
+        'contain',
+        'Notification message exceeds the recommended maximum length.'
+      )
+    cy.get('sequencing-sms-form')
+      .eq(0)
+      .should('contain', 'SMS message exceeds the recommended maximum length.')
+  })
 })
