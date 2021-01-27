@@ -113,8 +113,7 @@ export class OrganizationsFormComponent implements OnInit {
         rpmPatientPricing: [],
         churnDate: [],
         renewalDate: [],
-        numberOfLocations: [0, Validators.min(0)],
-        reportEndDate: []
+        numberOfLocations: [0, Validators.min(0)]
       })
 
       await Promise.all([this.resolveBillingPlans(), this.resolveEntities()])
@@ -154,9 +153,6 @@ export class OrganizationsFormComponent implements OnInit {
           : null,
         renewalDate: billingFormValue.renewalDate
           ? billingFormValue.renewalDate.format('YYYY-MM-DD')
-          : null,
-        reportEndDate: billingFormValue.reportEndDate
-          ? billingFormValue.reportEndDate.format('YYYY-MM-DD')
           : null,
         organization: res.id,
         entity: billingFormValue.entity
@@ -203,9 +199,6 @@ export class OrganizationsFormComponent implements OnInit {
           : null,
         renewalDate: billingFormValue.renewalDate
           ? billingFormValue.renewalDate.format('YYYY-MM-DD')
-          : null,
-        reportEndDate: billingFormValue.reportEndDate
-          ? billingFormValue.reportEndDate.format('YYYY-MM-DD')
           : null,
         organization: this.id,
         entity: billingFormValue.entity
@@ -327,10 +320,7 @@ export class OrganizationsFormComponent implements OnInit {
         isBillable: response.entity ? response.entity.isBillable : null,
         numberOfLocations: response.numberOfLocations
           ? response.numberOfLocations
-          : 0,
-        reportEndDate: response.reportEndDate
-          ? moment(response.reportEndDate)
-          : null
+          : 0
       })
     } catch (error) {
       console.error(error)

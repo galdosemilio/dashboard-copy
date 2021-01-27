@@ -121,7 +121,7 @@ export class EcommerceReportComponent implements OnInit {
         csv += `"${item.renewalDate ? item.renewalDate : '-'}"${separator}`
         csv += `"${item.parent ? item.parent.id : '-'}"${separator}`
         csv += `"${item.parent ? item.parent.name : '-'}"${separator}`
-        csv += `"${item.reportEndDate ? item.reportEndDate : '-'}"`
+        csv += `"${formValue.date.endOf('day').format('YYYY-MM-DD')}"`
         csv += `\r\n`
       })
 

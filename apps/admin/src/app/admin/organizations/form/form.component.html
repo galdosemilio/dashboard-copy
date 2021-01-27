@@ -156,16 +156,6 @@
           </mat-grid-tile>
 
           <mat-grid-tile>
-            <div [class.readonly]="readonly" fxFlex>
-              <ccr-date-input
-              [placeholder]="'ADMIN.ORGS.REPORT_END_DATE' | translate"
-              [readonly]="readonly"
-              [required]="false"
-              formControlName="reportEndDate"></ccr-date-input>
-            </div>
-          </mat-grid-tile>
-
-          <mat-grid-tile>
             <mat-form-field [class.readonly]="readonly">
               <mat-select
               [placeholder]="'ADMIN.ORGS.IS_PAYING' | translate"
