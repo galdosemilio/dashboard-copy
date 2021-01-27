@@ -2,7 +2,9 @@ import {
   ApolloEndosurgeryProdSectionConfig,
   ApolloEndosurgeryTestSectionConfig,
   ApolloUSProdSectionConfig,
-  ApolloUSTestSectionConfig
+  ApolloUSTestSectionConfig,
+  ApolloUSClinicsProdSectionConfig,
+  ApolloUSClinicsTestSectionConfig
 } from './apollo'
 import {
   CenterForMedicalWeightLossProdSectionConfig,
@@ -63,6 +65,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['31']: CoachCareClinicTestSectionConfig,
     ['7016']: RobardSectionConfig,
     ['7059']: ApolloUSTestSectionConfig,
+    ['7517']: ApolloUSClinicsTestSectionConfig,
     ['7242']: InhealthSectionConfig,
     ['7262']: FullyAliveTestSectionConfig,
     ['7355']: ShiftSetGoSectionConfig,
@@ -80,6 +83,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['4123']: FullyAliveProdSectionConfig,
     ['4156']: ShakeItProdSectionConfig,
     ['5329']: ApolloUSProdSectionConfig,
+    ['6504']: ApolloUSClinicsProdSectionConfig,
     ['5470']: GrandViewHealthSectionConfig,
     ['5529']: ShiftSetGoSectionConfig,
     ['5595']: TrueWeightSectionConfig,

@@ -54,9 +54,6 @@ export const ApolloUSProdSectionConfig: SectionConfigDetails = {
       }
     },
     SHOW_ACC_IDN_INPUT_CREATE: true
-  },
-  SIDENAV: {
-    SHOWN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
   }
 }
 
@@ -113,8 +110,5 @@ export const ApolloUSTestSectionConfig: SectionConfigDetails = {
       }
     },
     SHOW_ACC_IDN_INPUT_CREATE: true
-  },
-  SIDENAV: {
-    SHOWN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
   }
 }
