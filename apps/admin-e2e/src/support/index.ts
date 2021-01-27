@@ -25,6 +25,11 @@ const standardSetup = (
   seti18n()
   setSiteLanguageToEnglish()
   interceptCoreApiCalls(auth, apiOverrides)
+  cy.setCookie('cookies-targetingEnabled', 'false', {
+    domain: 'test.www.coachcare.com',
+    secure: true,
+    sameSite: 'no_restriction'
+  })
 }
 
 export { standardSetup }

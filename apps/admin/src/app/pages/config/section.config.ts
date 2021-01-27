@@ -30,7 +30,7 @@ export interface RegisterConfigDetails {
   MOB_APP_TYPE?: BlockOption[]
   NEWSLETTER_CHECKBOX?: boolean
   OPEN_ASSOC_ADD_CLIENT?: boolean
-  SHOW_GOOGLE_TAG?: boolean
+  REDIRECT_ON_CLINIC_REGISTRATION?: boolean
 }
 
 export interface RegisterFirstStepDetails {

@@ -370,7 +370,7 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
 
   private resolveGoogleTagManager(): void {
     const showGoogleTagManager = resolveConfig(
-      'REGISTER.SHOW_GOOGLE_TAG',
+      'REGISTER.REDIRECT_ON_CLINIC_REGISTRATION',
       this.context.organizationId,
       true
     )

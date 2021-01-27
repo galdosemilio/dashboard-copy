@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
+import { SafeResourceUrl } from '@angular/platform-browser'
 import { PageSectionInjectableProps } from '@board/pages/shared/model'
 import { AppStoreFacade, OrgPrefState } from '@coachcare/common/store'
+import { TranslateService } from '@ngx-translate/core'
 import { environment } from 'apps/admin/src/environments/environment'
 import { LastStepComponentProps } from '../model'
 
@@ -19,10 +20,10 @@ export class DefaultLastStepComponent implements OnInit {
   public showGoogleTagManager: boolean
 
   constructor(
-    private domSanitizer: DomSanitizer,
     @Inject(PageSectionInjectableProps)
     private injectedData: PageSectionInjectableProps,
-    private org: AppStoreFacade
+    private org: AppStoreFacade,
+    private translate: TranslateService
   ) {
     this.org.pref$.subscribe((pref) => {
       this.orgName = { displayName: pref.displayName || 'CoachCare' }
@@ -40,25 +41,26 @@ export class DefaultLastStepComponent implements OnInit {
       return
     }
 
-    this.resolveIframeURL()
+    this.resolveRedirectURL()
   }
 
   public refresh(): void {
     window.location.reload()
   }
 
-  private resolveIframeURL(): void {
-    const iframeData = this.data.registrationData
+  private resolveRedirectURL(): void {
+    const currentLang = this.translate.currentLang.split('-')[0]
+    const urlData = this.data.registrationData
       ? this.data.registrationData
       : { plan: '', billingTerm: '', clinicId: '' }
 
-    let iframeURL =
+    let url =
       environment.ccrApiEnv === 'prod'
-        ? `https://www.coachcare.com/ccr-clinic-registration-successful`
-        : 'http://localhost:4000/ccr-clinic-registration-successful'
+        ? `https://www.coachcare.com/ccr-clinic-registration-successful/`
+        : 'https://test.www.coachcare.com/ccr-clinic-registration-successful/'
 
-    iframeURL += `?plan=${iframeData.plan}&billingTerm=${iframeData.billingTerm}&clinicId=${iframeData.clinicId}`
+    url += `?plan=${urlData.plan}&billingTerm=${urlData.billingTerm}&clinicId=${urlData.clinicId}&lang=${currentLang}`
 
-    this.iframeURL = this.domSanitizer.bypassSecurityTrustResourceUrl(iframeURL)
+    window.location.href = url
   }
 }

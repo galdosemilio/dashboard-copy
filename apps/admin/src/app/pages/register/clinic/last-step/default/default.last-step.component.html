@@ -15,12 +15,3 @@
     {{ 'PAGE.REGISTER.STEP3.DEFAULT.REGISTER_NEW_CLINIC' | translate }}
   </button>
 </div>
-
-<div *ngIf="showGoogleTagManager && iframeURL">
-  <iframe
-  [src]="iframeURL"
-  height="0"
-  width="0"
-  style="display:none;visibility:hidden">
-  </iframe>
-</div>

@@ -65,7 +65,7 @@ export const CoachCareTestSectionConfig: SectionConfigDetails = {
       }
     ],
     NEWSLETTER_CHECKBOX: true,
-    SHOW_GOOGLE_TAG: false
+    REDIRECT_ON_CLINIC_REGISTRATION: true
   }
 }
 
@@ -133,6 +133,6 @@ export const CoachCareProdSectionConfig: SectionConfigDetails = {
       }
     ],
     NEWSLETTER_CHECKBOX: true,
-    SHOW_GOOGLE_TAG: true
+    REDIRECT_ON_CLINIC_REGISTRATION: true
   }
 }

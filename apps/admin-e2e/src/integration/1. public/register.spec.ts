@@ -263,14 +263,26 @@ describe('Register New Clinic', function () {
     })
   }
 
-  it('Register without credit card', function () {
+  it('Register without credit card [redirect]', function () {
     cy.visit(`/register/clinic?creditCard=skip`)
     completeStep1()
     completeClinicPlans()
-    cy.get('ccr-page-register-clinic-default-last-step').contains('All Done!')
+
+    cy.url().should('contain', 'ccr-clinic-registration-successful')
   })
 
-  it('Register and skip optional credit card', function () {
+  it('Register without credit card [no redirect]', function () {
+    cy.setOrgCookie('31')
+
+    cy.visit(`/register/clinic?baseOrg=31&creditCard=skip`)
+    completeStep1({ usesNewsletter: false })
+
+    cy.get('ccr-page-register-clinic-default-last-step')
+      .contains('All Done!')
+      .should('be.visible')
+  })
+
+  it('Register and skip optional credit card [redirect]', function () {
     cy.visit(`/register/clinic?creditCard=optional`)
     completeStep1()
     completeClinicPlans()
@@ -278,13 +290,50 @@ describe('Register New Clinic', function () {
       .find('button')
       .contains('Skip')
       .trigger('click')
-    cy.get('ccr-page-register-clinic-default-last-step').contains('All Done!')
+
+    cy.url().should('contain', 'ccr-clinic-registration-successful')
   })
 
-  it('Register and complete optional credit card (Visa)', function () {
+  it('Register and skip optional credit card [no redirect]', function () {
+    cy.setOrgCookie('31')
+
+    cy.visit(`/register/clinic?baseOrg=31&creditCard=optional`)
+    completeStep1({ usesNewsletter: false })
+
+    cy.get('ccr-page-register-clinic-payment')
+      .find('button')
+      .contains('Skip')
+      .trigger('click')
+
+    cy.get('ccr-page-register-clinic-default-last-step')
+      .contains('All Done!')
+      .should('be.visible')
+  })
+
+  it('Register and complete optional credit card (Visa) [redirect]', function () {
     cy.visit(`/register/clinic?creditCard=optional`)
     completeStep1()
     completeClinicPlans()
+    completeCreditCard(cards[0].number)
+
+    cy.get('ccr-page-register-clinic-payment')
+      .find('[type="checkbox"]')
+      .check({ force: true })
+
+    cy.get('ccr-page-register-clinic-payment')
+      .find('button')
+      .contains('Continue')
+      .trigger('click')
+
+    cy.url().should('contain', 'ccr-clinic-registration-successful')
+  })
+
+  it('Register and complete optional credit card (Visa) [no redirect]', function () {
+    cy.setOrgCookie('31')
+
+    cy.visit(`/register/clinic?baseOrg=31&creditCard=optional`)
+    completeStep1({ usesNewsletter: false })
+
     completeCreditCard(cards[0].number)
 
     cy.get('ccr-page-register-clinic-payment')
@@ -302,10 +351,30 @@ describe('Register New Clinic', function () {
   })
 
   for (const card of cards) {
-    it(`Register and complete with required credit card (${card.description})`, function () {
+    it(`Register and complete with required credit card (${card.description}) [redirect]`, function () {
       cy.visit(`/register/clinic`)
       completeStep1()
       completeClinicPlans()
+
+      completeCreditCard(card.number)
+
+      cy.get('ccr-page-register-clinic-payment')
+        .find('[type="checkbox"]')
+        .check({ force: true })
+
+      cy.get('ccr-page-register-clinic-payment')
+        .find('button')
+        .contains('Continue')
+        .trigger('click')
+
+      cy.url().should('contain', 'ccr-clinic-registration-successful')
+    })
+
+    it(`Register and complete with required credit card (${card.description}) [no redirect]`, function () {
+      cy.setOrgCookie('31')
+
+      cy.visit(`/register/clinic?baseOrg=31`)
+      completeStep1({ usesNewsletter: false })
 
       completeCreditCard(card.number)
 
