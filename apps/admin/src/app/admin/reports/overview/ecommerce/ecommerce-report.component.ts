@@ -73,7 +73,7 @@ export class EcommerceReportComponent implements OnInit {
       csv += `"RENEWAL DATE"${separator}`
       csv += `"PARENT CLINIC ID"${separator}`
       csv += `"PARENT CLINIC NAME"${separator}`
-      csv += `"END DATE"`
+      csv += `"AS OF"`
 
       csv += `\r\n`
 
