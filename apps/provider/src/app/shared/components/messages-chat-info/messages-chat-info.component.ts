@@ -5,7 +5,7 @@ import { MessageThread } from '../messages/messages.interfaces'
   selector: 'ccr-messages-chat-info',
   templateUrl: './messages-chat-info.component.html',
   styleUrls: ['./messages-chat-info.component.scss'],
-  host: { class: 'ccr-messages' },
+  host: { class: 'ccr-messages' }
 })
 export class CcrMessagesChatInfoComponent {
   @Input() thread: MessageThread

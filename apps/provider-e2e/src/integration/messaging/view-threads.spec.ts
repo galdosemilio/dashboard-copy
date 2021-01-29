@@ -59,7 +59,7 @@ describe('Messages -> basic message page layout is correct', function () {
       .should('have.length', 5)
   })
 
-  it.only('Shows the thread info', function () {
+  it('Shows the thread info', function () {
     cy.setOrganization('ccr')
     cy.setTimezone('et')
     standardSetup()
@@ -76,6 +76,26 @@ describe('Messages -> basic message page layout is correct', function () {
     cy.get('ccr-messages-chat-info')
       .should('contain', 'Thread Information')
       .should('contain', 'Eric Di Bari')
+      .should('contain', 'CoachCare')
+      .should('contain', 'ID 1')
+
+    cy.get('ccr-messages-chat-info')
+      .find('mat-icon')
+      .contains('info')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .should('contain', 'CoachCare')
+      .should('contain', 'ID 1')
+
+    cy.get('mat-dialog-container')
+      .find('mat-icon')
+      .contains('cancel')
+      .click({ force: true })
+
+    cy.tick(1000)
 
     cy.get('ccr-messages-chat-info')
       .find('mat-icon')
@@ -86,8 +106,8 @@ describe('Messages -> basic message page layout is correct', function () {
 
     cy.get('ccr-messages-chat-info').should('not.exist')
   })
-  
-    it('Allows marking all threads as read', function () {
+
+  it('Allows marking all threads as read', function () {
     cy.setOrganization('ccr')
     cy.setTimezone('et')
     standardSetup(undefined, [
@@ -127,5 +147,4 @@ describe('Messages -> basic message page layout is correct', function () {
 
     cy.get('button').contains('Mark all messages as read').should('not.exist')
   })
-
 })

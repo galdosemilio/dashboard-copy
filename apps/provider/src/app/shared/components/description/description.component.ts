@@ -19,6 +19,8 @@ export class PopupDescriptionComponent implements OnInit, OnDestroy {
   @Input()
   description = ''
   @Input()
+  icon = 'help_outline'
+  @Input()
   isGrid = false
   @Input()
   gridData: GridDialogData = null

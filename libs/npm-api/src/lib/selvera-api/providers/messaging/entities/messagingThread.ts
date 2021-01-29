@@ -2,6 +2,7 @@
  * MessagingThreadSegment
  */
 
+import { NamedEntity } from '../../common/entities'
 import { LastMessage } from './lastMessage'
 import { MessagingAccount } from './messagingAccount'
 
@@ -16,4 +17,6 @@ export interface MessagingThreadSegment {
   lastMessage: LastMessage
   /** Boolean value whether or not the user has read the thread (last message) */
   viewed: boolean
+  /** Organization basic data */
+  organization: NamedEntity & { hierarchyPath: string[] }
 }

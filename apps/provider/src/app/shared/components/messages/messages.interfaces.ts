@@ -1,3 +1,5 @@
+import { NamedEntity } from '@coachcare/npm-api'
+
 export interface MessageRecipient {
   id: string
   name: string
@@ -12,5 +14,6 @@ export interface MessageThread {
   lastMessageId?: string
   lastMessageDate?: string
   lastMessageSent?: string
+  organization?: NamedEntity & { hierarchyPath: string[] }
   unread?: boolean
 }

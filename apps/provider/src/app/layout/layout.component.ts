@@ -86,6 +86,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         --bg-panel: ${palette.bg_panel};
         --base: ${palette.base};
         --text: ${palette.text};
+        --text-light: ${tinycolor(palette.text).lighten(15)};
         --disabled: ${palette.disabled};
         `
       )

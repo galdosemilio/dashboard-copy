@@ -10,6 +10,11 @@
           "firstName": "Eric"
         }
       ],
+      "organization": {
+        "name": "CoachCare",
+        "id": "1",
+        "hierarchyPath": ["1"]
+      },
       "lastMessage": {
         "id": "6112",
         "date": "2020-01-01T03:00:00.000+00:00",
@@ -33,6 +38,11 @@
           "firstName": "Patryk"
         }
       ],
+      "organization": {
+        "name": "CoachCare",
+        "id": "1",
+        "hierarchyPath": ["1"]
+      },
       "lastMessage": {
         "id": "6105",
         "date": "2019-12-31T23:00:00.000+00:00",
@@ -56,6 +66,11 @@
           "firstName": "eric"
         }
       ],
+      "organization": {
+        "name": "CoachCare",
+        "id": "1",
+        "hierarchyPath": ["1"]
+      },
       "lastMessage": {
         "id": "6104",
         "date": "2019-12-31T03:00:00.000+00:00",

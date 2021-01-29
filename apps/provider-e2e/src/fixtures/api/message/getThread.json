@@ -10,6 +10,11 @@
         "id": "6",
         "lastName": "Di Bari",
         "firstName": "Eric"
+      },
+      "organization": {
+        "name": "CoachCare",
+        "id": "1",
+        "hierarchyPath": ["1"]
       }
     },
     {
@@ -22,6 +27,11 @@
         "id": "7",
         "lastName": "Andrew",
         "firstName": "Zengilowski"
+      },
+      "organization": {
+        "name": "CoachCare",
+        "id": "1",
+        "hierarchyPath": ["1"]
       }
     }
   ],

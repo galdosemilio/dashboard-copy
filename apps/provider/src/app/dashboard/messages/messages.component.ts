@@ -49,7 +49,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public pageSize: number
   public source: ThreadsDataSource | null
   public threads: Array<MessageThread> = []
-  public isMessageOpen = false;
+  public isMessageOpen = false
 
   @ViewChild('scroll', { static: true })
   scroll: ElementRef
@@ -229,6 +229,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
       lastMessageId: t.lastMessage.id,
       lastMessageDate: t.lastMessage.date,
       lastMessageSent: t.lastMessage.content,
+      organization: t.organization,
       unread: !t.viewed
     }
   }

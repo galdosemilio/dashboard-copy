@@ -1,9 +1,25 @@
 <div class="messages-header" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="center stretch">
   <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-    <mat-icon class="clickable arrow_back" (click)="onHideChatInfo()">arrow_back_ios</mat-icon>
-    <span fxFlex>{{ 'BOARD.THREAD_INFO' | translate }}</span>
+    <div class="arrow_back">
+      <mat-icon class="clickable" (click)="onHideChatInfo()">arrow_back_ios</mat-icon>
+    </div>
 
-    <mat-icon class="clickable" fxHide.xs (click)="onHideChatInfo()">clear</mat-icon>
+    <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
+      <div fxLayout="row" fxLayoutAlign="stretch center">
+        <span fxFlex>{{ 'BOARD.THREAD_INFO' | translate }}</span>
+
+        <mat-icon class="clickable" fxHide.xs (click)="onHideChatInfo()">clear</mat-icon>
+      </div>
+
+      <div *ngIf="thread.organization" fxLayout="row" fxLayoutAlign="start center" class="assoc-with-clinic">
+        <ccr-popup-description
+        [title]="'BOARD.MESSAGE_THREAD_ASSOCIATED_CLINIC' | translate"
+        [description]="'BOARD.MESSAGE_THREAD_ASSOCIATED_CLINIC_DESC' | translate:{clinicName: thread.organization.name, clinicId: thread.organization.id, id: thread.threadId}"
+        icon="info"
+        ></ccr-popup-description>
+        <p [innerHTML]="'BOARD.THREAD_ASSOCIATED_WITH_CLINIC' | translate:{name: thread.organization.name, id: thread.organization.id}"></p>
+      </div>
+    </div>
   </div>
 </div>
 
