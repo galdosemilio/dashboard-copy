@@ -4,6 +4,7 @@ export * from './services'
 export * from './table/picker/picker.component'
 
 import {
+  AutoThreadManagementComponent,
   ClinicComponent,
   ClinicFormComponent,
   ClinicInfoComponent,
@@ -14,10 +15,12 @@ import {
 import { ClinicsComponent } from './clinics.component'
 import { CreateClinicDialog, CreatePhaseDialog } from './dialogs'
 import { ClinicResolver, ClinicsDatabase } from './services'
+import { ParticipantDatabase } from './clinic/settings/services'
 import { ClinicsPickerComponent } from './table/picker/picker.component'
 import { ClinicsTableComponent } from './table/table.component'
 
 export const ClinicsComponents = [
+  AutoThreadManagementComponent,
   ClinicComponent,
   ClinicFormComponent,
   ClinicInfoComponent,
@@ -33,4 +36,4 @@ export const ClinicsComponents = [
 
 export const ClinicsEntryComponents = [CreateClinicDialog, CreatePhaseDialog]
 
-export const ClinicsProviders = [ClinicResolver, ClinicsDatabase]
+export const ClinicsProviders = [ClinicResolver, ClinicsDatabase, ParticipantDatabase]

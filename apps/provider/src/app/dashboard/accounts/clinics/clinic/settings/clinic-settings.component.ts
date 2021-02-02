@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
-import { MessagingPreference } from '@coachcare/npm-api'
+import { Entity, MessagingPreference } from '@coachcare/npm-api'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
@@ -13,13 +13,19 @@ interface FeaturePreferences {
 @UntilDestroy()
 @Component({
   selector: 'app-clinic-settings',
+  styleUrls: ['./clinic-settings.component.scss'],
   templateUrl: './clinic-settings.component.html'
 })
 export class ClinicSettingsComponent implements OnDestroy, OnInit {
   public colSpan = 1
   public form: FormGroup
+  public isAdmin: boolean
   public isInherited = false
   public isLoading = false
+  public messagePreferenceId: string
+  public autoThreadParticipationEnabled = false
+  public organizationId: string
+  public organizationName: string
 
   private featurePreferences: FeaturePreferences
 
@@ -36,6 +42,7 @@ export class ClinicSettingsComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.createForm()
+    this.resolveAdminPerm()
     this.fetchOrganizationPreferences()
   }
 
@@ -47,6 +54,9 @@ export class ClinicSettingsComponent implements OnDestroy, OnInit {
 
   private async fetchOrganizationPreferences(): Promise<void> {
     try {
+      this.organizationId = this.context.clinic.id
+      this.organizationName = this.context.clinic.name
+
       const preferences = await this.messagingPreference.getOrgPreference({
         organization: this.context.clinic.id
       })
@@ -56,11 +66,12 @@ export class ClinicSettingsComponent implements OnDestroy, OnInit {
       }
 
       this.isInherited = preferences.organization.id !== this.context.clinic.id
+      this.autoThreadParticipationEnabled = !this.isInherited && this.featurePreferences.messaging.useAutoThreadParticipation ? true : false
+      this.messagePreferenceId = this.featurePreferences.messaging.id
 
       this.form.patchValue(
         {
-          useAutoThreadParticipation: this.featurePreferences.messaging
-            .useAutoThreadParticipation
+          useAutoThreadParticipation: this.autoThreadParticipationEnabled
         },
         {
           emitEvent: false
@@ -78,30 +89,43 @@ export class ClinicSettingsComponent implements OnDestroy, OnInit {
   private async onSubmit(): Promise<void> {
     try {
       const formValue = this.form.value
-      const promises = []
 
       this.isLoading = true
 
-      promises.push(
-        this.featurePreferences.messaging
-          ? this.messagingPreference.updateOrgPreference({
-              id: this.featurePreferences.messaging.id,
-              useAutoThreadParticipation: formValue.useAutoThreadParticipation,
-              isActive: true
-            })
-          : this.messagingPreference.createOrgPreference({
-              organization: this.context.clinic.id,
-              useAutoThreadParticipation: formValue.useAutoThreadParticipation,
-              isActive: true
-            })
-      )
+      // If we are updating the existing preference
+      if (!this.isInherited && this.featurePreferences.messaging) {
+        await this.messagingPreference.updateOrgPreference({
+          id: this.featurePreferences.messaging.id,
+          useAutoThreadParticipation: formValue.useAutoThreadParticipation,
+          isActive: true
+        })
+      // If we need to create a new preference
+      } else {
+        const response = await this.messagingPreference.createOrgPreference({
+          organization: this.context.clinic.id,
+          useAutoThreadParticipation: formValue.useAutoThreadParticipation,
+          isActive: true
+        })
 
-      await Promise.all(promises)
+        this.messagePreferenceId = response.id
+      }
+
+      // Update the message preference ID if a new one was created.  Otherwised (on PATCH) just keep the same one
+      this.autoThreadParticipationEnabled = formValue.useAutoThreadParticipation
+      this.isInherited = false
+
       this.notifier.success(_('NOTIFY.SUCCESS.UPDATED_PREFERENCE'))
     } catch (error) {
       this.notifier.error(error)
     } finally {
       this.isLoading = false
     }
+  }
+
+  private async resolveAdminPerm(): Promise<void> {
+    this.isAdmin = await this.context.orgHasPerm(
+      this.context.clinic.id,
+      'admin'
+    )
   }
 }

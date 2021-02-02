@@ -2,6 +2,7 @@ export * from './account-redirect'
 export * from './add-manual-interaction'
 export * from './add-recipient'
 export * from './call-rating'
+export * from './coach-select'
 export * from './confirm.dialog'
 export * from './grid.dialog'
 export * from './languages.dialog'
@@ -19,6 +20,7 @@ import { AccountRedirectDialog } from './account-redirect'
 import { AddManualInteractionDialog } from './add-manual-interaction'
 import { AddRecipientDialog } from './add-recipient'
 import { CallRatingDialog } from './call-rating/call-rating.dialog'
+import { CoachSelectDialog } from './coach-select'
 import { ConfirmDialog } from './confirm.dialog'
 import { GridDialog } from './grid.dialog'
 import { LanguagesDialog } from './languages.dialog'
@@ -37,6 +39,7 @@ export const Dialogs = [
   AddManualInteractionDialog,
   AddRecipientDialog,
   CallRatingDialog,
+  CoachSelectDialog,
   ConfirmDialog,
   GridDialog,
   LanguagesDialog,

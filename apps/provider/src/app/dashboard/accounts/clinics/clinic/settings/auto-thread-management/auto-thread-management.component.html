@@ -1,0 +1,73 @@
+<div fxLayout="row" fxLayoutAlign="end center">
+  <div fxFlex>
+    <button (click)="addCoach()" class="ccr-icon-button" color="primary" mat-button>
+      <mat-icon>add</mat-icon>
+      {{'GLOBAL.ADD_COACH' | translate}}
+    </button>
+  </div>
+
+  <ccr-paginator fxFlex="nogrow" #paginator
+  [length]="source.total"
+  [pageIndex]="source.pageIndex"
+  [pageSize]="source.pageSize"
+  (page)="source.pageIndex = $event.pageIndex"
+  ></ccr-paginator>
+</div>
+
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table [dataSource]="source">
+
+    <ng-container cdkColumnDef="id">
+      <mat-header-cell *cdkHeaderCellDef>{{'LIBRARY.CONTENT.ID' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        {{ row.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="firstName">
+      <mat-header-cell *cdkHeaderCellDef>{{'BOARD.FIRST_NAME' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        {{ row.firstName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="lastName">
+      <mat-header-cell *cdkHeaderCellDef>{{'BOARD.LAST_NAME' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        {{ row.lastName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="createdAt">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.ADDED_ON' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        {{ row.createdAt }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="actions">
+      <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+        <ng-container>
+          <span (click)="onRemove(row)">{{'BOARD.REMOVE' | translate}}</span>
+          <button
+          [class.disabled]="!isAdmin"
+          [disabled]="!isAdmin"
+          (click)="onRemove(row)"
+          mat-icon-button
+          title="{{'BOARD.REMOVE' | translate}}"><mat-icon>delete</mat-icon></button>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{
+        'row-even': even,
+        'row-odd': odd
+      }">
+    </mat-row>
+  </mat-table>
+</ccr-datasource-overlay>

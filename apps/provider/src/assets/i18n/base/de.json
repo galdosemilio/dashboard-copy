@@ -84,8 +84,6 @@
     "CLINIC": "Klinik",
     "CLINICS": "Kliniken",
     "CLINIC_INFORMATION": "Klinikinformationen",
-    "CLINIC_INHERITED_PREF": "Diese Präferenz ist zu Ihrer Klinik von einer übergeordneten Klinik zur Verfügung.",
-    "CLINIC_MESSAGE_PREFS": "Messaging-Einstellungen",
     "CLINIC_NEW": "Neue Klinik hinzufügen",
     "CLINIC_REMOVE": "Klinik löschen",
     "CLINIC_REMOVE_PROMPT": "{{clinic}}' aus deinem Konto entfernen?",
@@ -376,13 +374,25 @@
     "ABOUT": "Über",
     "ACTIVE": "Aktiv",
     "ACTIVITY_TYPE": "Sportart",
+    "ADDED_ON": "Hinzugefügt zu",
+    "ADD_COACH": "Liste Coach",
     "AEROBIC": "Aerobic",
     "ALERTS_GENERATED": "generierte Warnungen",
     "APP_STORE": "App Store",
     "ASSIGNED_CLINICS": "Zugewiesene Kliniken",
     "ASSOCIATED": "Damit verbunden",
     "AT_HOUR": "Am",
-    "AUTOMATIC_THREAD_PARTICIPATION": "Fügen Sie automatisch alle Trainer in Alle Nachrichten-Threads",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "Entfernen Trainer {{ firstName }} {{ lastName }} von Auto Thread Teilnahme?<br><br>Sollte sich dies bestätigen, dieser Trainer nicht automatisch für das auf neue Themen hinzugefügt werden {{ organizationName }} Klinik. Allerdings wird der Trainer den Zugriff auf alle Nachrichten-Threads behalten, zu denen sie zur Zeit Zugriff haben",
+        "TITLE": "Entfernen Coach Auto Faden Teilnahme"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "Wählen Sie einen Coach, um automatisch in dem alle Nachrichten-Threads in <strong>{{selectedOrganizationName}}</strong> Klinik. Der ausgewählte Trainer wird hinzugefügt <strong>alle</strong> bestehende und zukünftige Nachrichten-Threads innerhalb dieser Klinik",
+        "WARNING": "Dieser Trainer kann nicht hinzugefügt werden. Das Konto muss entweder auf der {{selectedOrganizationName}} Klinik oder zu einem ihrer Mutter Kliniken in Verbindung gebracht werden"
+      },
+      "DESCRIPTION": "Automatisch ausgewählten Trainer auf alle Nachrichten-Threads in dieser Klinik hinzufügen"
+    },
     "CANCEL": "Stornieren",
     "CASCADING": "Kaskardierend",
     "CIRCUMFERENCE": "Umfang",

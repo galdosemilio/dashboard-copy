@@ -84,8 +84,6 @@
     "CLINIC": "Clinic",
     "CLINICS": "Clinics",
     "CLINIC_INFORMATION": "Clinic Information",
-    "CLINIC_INHERITED_PREF": "This preference is available to your clinic from a parent clinic.",
-    "CLINIC_MESSAGE_PREFS": "Messaging Preferences",
     "CLINIC_NEW": "Add New Clinic",
     "CLINIC_REMOVE": "Remove Clinic",
     "CLINIC_REMOVE_PROMPT": "Remove '{{clinic}}' from your Account?",
@@ -376,13 +374,25 @@
     "ABOUT": "About",
     "ACTIVE": "Active",
     "ACTIVITY_TYPE": "Activity Type",
+    "ADDED_ON": "Added On",
+    "ADD_COACH": "Add Coach",
     "AEROBIC": "Aerobic",
     "ALERTS_GENERATED": "Alerts Generated",
     "APP_STORE": "App Store",
     "ASSIGNED_CLINICS": "Assigned Clinics",
     "ASSOCIATED": "Associated",
     "AT_HOUR": "At",
-    "AUTOMATIC_THREAD_PARTICIPATION": "Automatically Include All Coaches in All Message Threads",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "Remove coach {{ firstName }} {{ lastName }} from auto thread participation?<br><br>If confirmed, this coach will not be added automatically to any new threads for the {{ organizationName }} clinic.  However, the coach will retain access to any message threads to which they currently have access.",
+        "TITLE": "Remove Coach Auto Thread Participation"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "Select a coach to automatically add to all message threads in <strong>{{ selectedOrganizationName }}</strong> clinic. The selected coach will be added to <strong>all</strong> existing and future message threads within this clinic",
+        "WARNING": "This coach cannot be added.  The account must be associated to either the {{ selectedOrganizationName }} clinic or to one of its parent clinics"
+      },
+      "DESCRIPTION": "Automatically add selected coaches to all message threads in this clinic"
+    },
     "CANCEL": "Cancel",
     "CASCADING": "Cascading",
     "CIRCUMFERENCE": "Circumference",

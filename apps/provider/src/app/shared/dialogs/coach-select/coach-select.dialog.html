@@ -1,0 +1,40 @@
+<div matDialogTitle>
+  <div>
+      <span>{{'GLOBAL.ADD_COACH' | translate}}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <p class="notice entry" [innerHTML]="'GLOBAL.AUTOMATIC_THREAD_PARTICIPATION.COACH_SELECT.DESCRIPTION' | translate:{selectedOrganizationName: selectedOrganization?.name}"></p>
+
+  <div [hidden]="selectedCoach">
+    <input type="text" class="search-box" [placeholder]="'MENU.SEARCH' | translate" [matAutocomplete]="search"
+      [formControl]="searchCtrl" data-cy="coach-search-box">
+
+    <mat-autocomplete #search="matAutocomplete" (optionSelected)="select($event)">
+      <mat-option *ngFor="let account of accounts" [value]="account.id">
+        {{ account.firstName }} {{ account.lastName }} ({{ account.email }})
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+  <p *ngIf="selectedCoach"><strong>{{ selectedCoach.firstName }} {{ selectedCoach.lastName }} ({{ selectedCoach.email }})</strong> <mat-icon class="unset-button" (click)="unsetCoach()">cancel</mat-icon></p>
+  <p *ngIf="showWarning" class="warning" [innerHTML]="'GLOBAL.AUTOMATIC_THREAD_PARTICIPATION.COACH_SELECT.WARNING' | translate:{selectedOrganizationName: selectedOrganization?.name}"></p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+      <button
+      (click)="save()"
+      [disabled]="!selectedCoach || showWarning"
+      class="ccr-button"
+      color="primary"
+      mat-button>{{'GLOBAL.ADD_COACH' | translate}}</button>
+
+      <button
+      matDialogClose
+      class="ccr-button"
+      mat-button>{{'GLOBAL.CANCEL' | translate}}</button>
+</mat-dialog-actions>

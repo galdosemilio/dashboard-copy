@@ -84,8 +84,6 @@
     "CLINIC": "מרפאה",
     "CLINICS": "מרפאות",
     "CLINIC_INFORMATION": "מידע על מרפאה",
-    "CLINIC_INHERITED_PREF": "העדפה זו זמינה במרפאת שלך ממרפאת הורה.",
-    "CLINIC_MESSAGE_PREFS": "שליחת הודעות העדפות",
     "CLINIC_NEW": "הוסף קליניקה חדשה",
     "CLINIC_REMOVE": "הסרת מרפאה",
     "CLINIC_REMOVE_PROMPT": "האם להסיר את '{{clinic}}' מהחשבון שלך?",
@@ -376,13 +374,25 @@
     "ABOUT": "אודות",
     "ACTIVE": "פעיל",
     "ACTIVITY_TYPE": "סוג פעילות",
+    "ADDED_ON": "נוסף על",
+    "ADD_COACH": "להוסיף מאמן",
     "AEROBIC": "אירובי",
     "ALERTS_GENERATED": "התראות שנוצרו",
     "APP_STORE": "חנות אפליקציות",
     "ASSIGNED_CLINICS": "מרפאות שהוקצו",
     "ASSOCIATED": "מקושרים",
     "AT_HOUR": "At",
-    "AUTOMATIC_THREAD_PARTICIPATION": "כלול אוטומטית את כל המאמנים הודעה הנושאים הכל",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "הסר המאמן {{ firstName }} {{ lastName }} מהשתתפות חוט אוטומטי?<br><br>אם אישר, המאמן הזה לא יתווספו באופן אוטומטי נושאים חדשים כלשהם עבור {{ organizationName }} במרפאה. עם זאת, המאמן יישמר גישה לכל הודעת נושאים שאליהם יש כיום גישה",
+        "TITLE": "הסר השתתפות אשכול אוטומטי המאמן"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "בחר מאמן להוסיף באופן אוטומטי את כל נושאי ההודעה <strong>{{selectedOrganizationName}}</strong> מרפא. המאמן שנבחר יתווסף <strong>כל</strong> וקיימים הודעת עתיד הנושאים בתוך המרפאה",
+        "WARNING": "מאמן זה לא ניתן להוסיף. החשבון חייב להיות משויך באפשרות {{selectedOrganizationName}} במרפאת או לאחת המרפאות האם שלה"
+      },
+      "DESCRIPTION": "הוספה אוטומטית של המאמנים שנבחרו לכל הודעה הנושאים בקליניקה זו"
+    },
     "CANCEL": "ביטול",
     "CASCADING": "מדורגים",
     "CIRCUMFERENCE": "היקף",

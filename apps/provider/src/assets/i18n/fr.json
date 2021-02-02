@@ -84,8 +84,6 @@
     "CLINIC": "Clinique",
     "CLINICS": "Cliniques",
     "CLINIC_INFORMATION": "Information clinique",
-    "CLINIC_INHERITED_PREF": "Cette préférence est disponible à votre clinique d'une clinique mère.",
-    "CLINIC_MESSAGE_PREFS": "Préférences de messagerie",
     "CLINIC_NEW": "Ajouter une nouvelle clinique",
     "CLINIC_REMOVE": "Effacer la clinique",
     "CLINIC_REMOVE_PROMPT": "Supprimer « {{clinic}} » de votre compte?",
@@ -376,13 +374,25 @@
     "ABOUT": "À propos",
     "ACTIVE": "Actif",
     "ACTIVITY_TYPE": "TYPE D’ACTIVITÉ",
+    "ADDED_ON": "Ajouté le",
+    "ADD_COACH": "Add Coach",
     "AEROBIC": "Aérobique",
     "ALERTS_GENERATED": "Alertes générées",
     "APP_STORE": "AppStore",
     "ASSIGNED_CLINICS": "Cliniques assignées",
     "ASSOCIATED": "Associé",
     "AT_HOUR": "À",
-    "AUTOMATIC_THREAD_PARTICIPATION": "Automatiquement Inclure tous les entraîneurs dans toutes les discussions message",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "Supprimer l'entraîneur {{ firstName }} {{ lastName }} de la participation de fil automatique?<br><br>Si confirmé, cet entraîneur ne sera pas ajouté automatiquement à tous les nouveaux threads pour la clinique {{ organizationName }}. Cependant, l'entraîneur conservera l'accès à tous les fils de messages auxquels ils ont actuellement accès",
+        "TITLE": "Retirer fil Auto Coach Participation"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "Sélectionnez un entraîneur pour ajouter automatiquement à tous les fils de message dans <strong>{{selectedOrganizationName}}</strong> clinique. L'entraîneur sélectionné sera ajouté à <strong>tous</strong> threads existants et le message d'avenir au sein de cette clinique",
+        "WARNING": "Cet entraîneur ne peut être ajouté. Le compte doit être associé soit à la {{selectedOrganizationName}} clinique ou à l'un de ses cliniques mères"
+      },
+      "DESCRIPTION": "Ajouter automatiquement les entraîneurs sélectionnés à tous les fils de message dans cette clinique"
+    },
     "CANCEL": "Annuler",
     "CASCADING": "En cascade",
     "CIRCUMFERENCE": "Circonférence",

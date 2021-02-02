@@ -84,8 +84,6 @@
     "CLINIC": "Clinica",
     "CLINICS": "Cliniche",
     "CLINIC_INFORMATION": "Informazioni sulla clinica",
-    "CLINIC_INHERITED_PREF": "Questa preferenza è disponibile alla vostra clinica da una clinica genitore.",
-    "CLINIC_MESSAGE_PREFS": "Messaggi Preferenze",
     "CLINIC_NEW": "Aggiungi nuova clinica",
     "CLINIC_REMOVE": "Elimina Clinica",
     "CLINIC_REMOVE_PROMPT": "Eliminare '{{clinic}}' dal tuo Account?",
@@ -376,13 +374,25 @@
     "ABOUT": "Info",
     "ACTIVE": "Attivo",
     "ACTIVITY_TYPE": "Tipo di Attività",
+    "ADDED_ON": "Aggiunto a",
+    "ADD_COACH": "Aggiungere Coach",
     "AEROBIC": "Aerobico",
     "ALERTS_GENERATED": "Avvisi Generati",
     "APP_STORE": "App Store",
     "ASSIGNED_CLINICS": "Cliniche assegnate",
     "ASSOCIATED": "Associato",
     "AT_HOUR": "A",
-    "AUTOMATIC_THREAD_PARTICIPATION": "Includono automaticamente tutti gli allenatori a tutti i messaggi discussioni",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "Rimuovere allenatore {{ firstName }} {{ lastName }} dalla partecipazione filo auto?<br><br>Se confermato, questo allenatore non verrà aggiunto automaticamente a tutti i nuovi thread per il {{ organizationName }} clinica. Tuttavia, l'allenatore sarà mantenere l'accesso a tutti i thread di messaggi a cui attualmente hanno accesso",
+        "TITLE": "Rimuovere Coach Auto Partecipazione Discussione"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "Selezionare un allenatore per aggiungere automaticamente a tutti i thread di messaggi in <strong>{{selectedOrganizationName}}</strong> clinica. L'allenatore selezionato verrà aggiunto a <strong>tutti </strong> thread di messaggi esistenti e futuri all'interno di questa clinica",
+        "WARNING": "Questo allenatore non può essere aggiunto. L'account deve essere associato a uno il {{selectedOrganizationName}} clinica o ad una delle sue cliniche genitore"
+      },
+      "DESCRIPTION": ""
+    },
     "CANCEL": "Annulla",
     "CASCADING": "A Cascata",
     "CIRCUMFERENCE": "Circonferenza",

@@ -84,8 +84,6 @@
     "CLINIC": "Clínica",
     "CLINICS": "Clínicas",
     "CLINIC_INFORMATION": "Informações da Clínica",
-    "CLINIC_INHERITED_PREF": "Essa preferência está disponível para sua clínica de uma clínica pai.",
-    "CLINIC_MESSAGE_PREFS": "Mensagens Preferências",
     "CLINIC_NEW": "Adicionar nova clínica",
     "CLINIC_REMOVE": "Romover Clínica",
     "CLINIC_REMOVE_PROMPT": "Romover a '{{clinic}}' da sua conta?",
@@ -376,13 +374,25 @@
     "ABOUT": "Sobre",
     "ACTIVE": "Ativo",
     "ACTIVITY_TYPE": "Tipo de atividade",
+    "ADDED_ON": "Adicionado",
+    "ADD_COACH": "Adicionar treinador",
     "AEROBIC": "Aeróbico",
     "ALERTS_GENERATED": "Alertas gerados",
     "APP_STORE": "App Store",
     "ASSIGNED_CLINICS": "Clínicas Designadas",
     "ASSOCIATED": "Associado",
     "AT_HOUR": "em",
-    "AUTOMATIC_THREAD_PARTICIPATION": "Incluir automaticamente todos os treinadores em Todos os tópicos de mensagens",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "Remove treinador {{ firstName }} {{ lastName }} da participação linhas automático?<br><br>Se confirmado, este treinador não será automaticamente adicionado a quaisquer novos tópicos para a {{ organizationName }} clínica. No entanto, o treinador vai manter o acesso a quaisquer fios de mensagens a que atualmente têm acesso",
+        "TITLE": "Remover Participação Tópico treinador Auto"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "Escolha um treinador para adicionar automaticamente a todos os tópicos de mensagens em <strong>{{selectedOrganizationName}}</strong> clínica. O treinador selecionados serão adicionados à <strong>todas </strong> fios de mensagens existentes e futuras dentro desta clínica",
+        "WARNING": "Este treinador não pode ser adicionada. A conta deve ser associado quer ao {{selectedOrganizationName}} clínica ou a um dos seus pais clínicas"
+      },
+      "DESCRIPTION": "Adicionar automaticamente treinadores selecionados para os tópicos de mensagens nesta clínica"
+    },
     "CANCEL": "Cancelar",
     "CASCADING": "Em cascata",
     "CIRCUMFERENCE": "Circunferência",

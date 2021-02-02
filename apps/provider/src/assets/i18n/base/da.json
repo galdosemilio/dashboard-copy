@@ -84,8 +84,6 @@
     "CLINIC": "Klinik",
     "CLINICS": "Klinikker",
     "CLINIC_INFORMATION": "Klinikinformation",
-    "CLINIC_INHERITED_PREF": "Denne præference er til rådighed for din klinik fra en forælder klinik.",
-    "CLINIC_MESSAGE_PREFS": "Beskeder Indstillinger",
     "CLINIC_NEW": "Tilføj ny klinik",
     "CLINIC_REMOVE": "Fjern Klinik",
     "CLINIC_REMOVE_PROMPT": "Fjern '{{clinic}}' fra din Konto?",
@@ -376,13 +374,25 @@
     "ABOUT": "Om",
     "ACTIVE": "Aktiv",
     "ACTIVITY_TYPE": "Aktivitetstype",
+    "ADDED_ON": "Lagt på",
+    "ADD_COACH": "Tilføj Coach",
     "AEROBIC": "Aerobic",
     "ALERTS_GENERATED": "Genererede Advarsler",
     "APP_STORE": "App Store",
     "ASSIGNED_CLINICS": "Tildelte klinikker",
     "ASSOCIATED": "Tilknyttet",
     "AT_HOUR": "Ved",
-    "AUTOMATIC_THREAD_PARTICIPATION": "Medtag automatisk alle -turistbusser Alle meddelelsestråde",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "Fjern træner {{ firstName }} {{ lastName }} fra auto tråd deltagelse?<br><br>Hvis bekræftet, denne træner vil ikke automatisk blive tilføjet til eventuelle nye tråde til {{ organizationName }} klinik. Dog vil coachen bevare adgangen til enhver meddelelse tråde, som de i øjeblikket har adgang",
+        "TITLE": "Fjern Coach Auto Tråd Deltagelse"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "Vælg en coach til automatisk at tilføje til alle beskedtråde i <strong>{{selectedOrganizationName}}</strong> klinik. Den valgte træner vil blive føjet til <strong>alle</strong> eksisterende og fremtidige meddelelsestråde inden denne klinik",
+        "WARNING": "Denne træner kan ikke tilføjes. Kontoen skal knyttes til enten {{selectedOrganizationName}} klinik eller et af dets overordnede klinikker"
+      },
+      "DESCRIPTION": "Tilføj automatisk udvalgte trænere til alle beskedtråde i denne klinik"
+    },
     "CANCEL": "Annuller",
     "CASCADING": "Rækkefølger",
     "CIRCUMFERENCE": "Cirkelomkreds",

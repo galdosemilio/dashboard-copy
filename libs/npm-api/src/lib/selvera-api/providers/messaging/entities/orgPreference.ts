@@ -7,5 +7,6 @@ export interface MessagingOrgPreference {
   isActive: boolean
   /** Organization Entity */
   organization: Entity
+  /** A flag indicating if the auto thread participation is active or not for the Organization */
   useAutoThreadParticipation?: boolean
 }

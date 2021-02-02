@@ -84,8 +84,6 @@
     "CLINIC": "Clínica",
     "CLINICS": "Clínicas",
     "CLINIC_INFORMATION": "Información de la Clínica",
-    "CLINIC_INHERITED_PREF": "Esta preferencia está disponible para su clínica desde una clínica superior.",
-    "CLINIC_MESSAGE_PREFS": "Preferencias de Mensajería",
     "CLINIC_NEW": "Añadir Clínica",
     "CLINIC_REMOVE": "Borrar Clínica",
     "CLINIC_REMOVE_PROMPT": "Borrar '{{clinic}}' de su Cuenta?",
@@ -376,13 +374,25 @@
     "ABOUT": "Acerca de",
     "ACTIVE": "Activo",
     "ACTIVITY_TYPE": "Tipo de Actividad",
+    "ADDED_ON": "Añadido",
+    "ADD_COACH": "Añadir Asesor",
     "AEROBIC": "Aeróbico",
     "ALERTS_GENERATED": "Alertas Generadas",
     "APP_STORE": "App Store",
     "ASSIGNED_CLINICS": "Clínicas Asociadas",
     "ASSOCIATED": "Associada",
     "AT_HOUR": "A las",
-    "AUTOMATIC_THREAD_PARTICIPATION": "Incluir a todos los Asesores en todos los hilos de mensajería automáticamente",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "Retire el entrenador de {{ firstName }} {{ lastName }} de la participación hilos automático?<br><br>Si se confirma, este coche no se añadirá automáticamente a cualquier nuevos temas para la clínica {{ organizationName }}. Sin embargo, el entrenador mantendrá el acceso a cualquier cadenas de mensajes a los que actualmente tienen acceso",
+        "TITLE": "Retire el entrenador Auto Participación Tema"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "Seleccionar un entrenador para añadir automáticamente a todas las cadenas de mensajes en <strong>{{selectedOrganizationName}}</strong> clínica. El entrenador seleccionado se añadirá a <strong>todos</strong> los cadenas de mensajes actuales y futuros dentro de esta clínica",
+        "WARNING": "Este entrenador no se puede añadir. La cuenta debe estar asociada a cualquiera de los {{selectedOrganizationName}} clínica o de una de sus clínicas para padres"
+      },
+      "DESCRIPTION": "Añadir automáticamente los asesores seleccionados a todas las cadenas de mensajes en esta clínica"
+    },
     "CANCEL": "Cancelar",
     "CASCADING": "Cascada",
     "CIRCUMFERENCE": "Circunferencia",

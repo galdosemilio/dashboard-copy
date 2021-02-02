@@ -84,8 +84,6 @@
     "CLINIC": "العيادة",
     "CLINICS": "العيادات",
     "CLINIC_INFORMATION": "معلومات العيادة",
-    "CLINIC_INHERITED_PREF": "هذا التفضيل هو متاح لعيادتك من عيادة الأم.",
-    "CLINIC_MESSAGE_PREFS": "مراسلة تفضيلات",
     "CLINIC_NEW": "أضف عيادة جديدة",
     "CLINIC_REMOVE": "إزالة العيادة",
     "CLINIC_REMOVE_PROMPT": "هل تريد إزالة '{{clinic}}'من حسابك؟",
@@ -376,13 +374,25 @@
     "ABOUT": "عن",
     "ACTIVE": "نشيط",
     "ACTIVITY_TYPE": "نوع النشاط",
+    "ADDED_ON": "وأضاف في",
+    "ADD_COACH": "إضافة المدرب",
     "AEROBIC": "هوائي",
     "ALERTS_GENERATED": "التنبيهات الصادرة",
     "APP_STORE": "متجر التطبيقات",
     "ASSIGNED_CLINICS": "العيادات المخصصة",
     "ASSOCIATED": "مقترن",
     "AT_HOUR": "في",
-    "AUTOMATIC_THREAD_PARTICIPATION": "وتشمل تلقائيا جميع المدربين في جميع الرسائل المواضيع",
+    "AUTOMATIC_THREAD_PARTICIPATION": {
+      "COACH_REMOVE": {
+        "DESCRIPTION": "مدرب إزالة {{ firstName }} {{ lastName }} من المشاركة موضوع السيارات منتديات <br><br> أكد إذا، لن يتم إضافة هذا المدرب تلقائيا إلى أي مواضيع جديدة ل {{ organizationName }}  عيادة . ومع ذلك، فإن المدرب يحتفظ الوصول إلى أي المواضيع الرسالة التي لديهم حاليا إمكانية الوصول",
+        "TITLE": "إزالة مدرب السيارات المشاركة الموضوع"
+      },
+      "COACH_SELECT": {
+        "DESCRIPTION": "اختيار مدرب لإضافة تلقائيا لجميع المواضيع الرسالة في <قوية <strong>{{selectedOrganizationName}}</strong> قوي العيادة. ستضاف المدرب المختارة إلى جميع رسالة المستقبل الحالية والمواضيع ضمن هذه العيادة",
+        "WARNING": "لا يمكن إضافة هذا المدرب. يجب أن تترافق الحساب إما إلى {{selectedOrganizationName}} العيادة أو إلى إحدى عيادات الأم"
+      },
+      "DESCRIPTION": "إضافة تلقائيا المدربين المحدد إلى كل المواضيع الرسالة في هذه العيادة"
+    },
     "CANCEL": "إلغاء",
     "CASCADING": "متتالية",
     "CIRCUMFERENCE": "المحيط",

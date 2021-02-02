@@ -1,3 +1,4 @@
+export * from './autoThreadParticipant'
 export * from './lastMessage'
 export * from './messageActivitySummaryItem'
 export * from './messagingAccount'

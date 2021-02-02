@@ -6,19 +6,76 @@ import {
   CreateOrgPreferenceRequest,
   DeletePreferenceRequest,
   GetAccountPreferenceRequest,
+  GetOrgAutoThreadListingRequest,
   GetOrgPreferenceRequest,
   GetSingleAccountPreferenceRequest,
+  ModifyAutoThreadParticipantRequest,
   UpdateAccountMessagingPreferenceRequest,
   UpdateMessagingOrgPreferenceRequest
 } from './requests'
 import {
   CreateAccountPreferenceResponse,
   GetAccountPreferenceResponse,
+  GetOrgAutoThreadParticipantListingResponse,
   GetSingleAccountPreferenceResponse
 } from './responses'
 
 export class MessagingPreference {
   public constructor(private readonly apiService: ApiService) {}
+
+  /**
+   * Get listing of automatic thread participants for a particular org.
+   * Permissions: Provider, OrgAccess
+   *
+   * @param request must implement GetOrgPreferenceRequest
+   * @return Promise<GetOrgAutoThreadParticipantListingResponse> The listing of participants
+   */
+  public getOrgThreadAutoParticipants(
+    request: GetOrgAutoThreadListingRequest
+  ): Promise<GetOrgAutoThreadParticipantListingResponse> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/message/preference/organization/${request.id}/auto-participation`,
+      method: 'GET',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Add participant in automatic thread participants listing for a specific preference.
+   * Permissions: Provider, OrgAccess
+   *
+   * @param request must implement ModifyAutoThreadParticipantRequest
+   * @return Promise<void>
+   */
+  public addThreadAutoParticipant(
+    request: ModifyAutoThreadParticipantRequest
+  ): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/message/preference/organization/${request.id}/auto-participation`,
+      method: 'PUT',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Delete participant in automatic thread participants listing for a specific preference.
+   * Permissions: Provider, OrgAccess
+   *
+   * @param request must implement ModifyAutoThreadParticipantRequest
+   * @return Promise<void>
+   */
+  public deleteThreadAutoParticipant(
+    request: ModifyAutoThreadParticipantRequest
+  ): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/message/preference/organization/${request.id}/auto-participation/${request.account}`,
+      method: 'DELETE',
+      version: '1.0'
+    })
+  }
 
   /**
    * Add notification preference for an account and organization.
