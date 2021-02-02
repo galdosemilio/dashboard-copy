@@ -102,7 +102,7 @@ export class FormComponent implements OnInit, OnDestroy {
       ...this.profile,
       phone: {
         phone: this.profile.phone,
-        countryCode: this.profile.countryCode
+        countryCode: this.profile.countryCode ?? '+1'
       }
     })
   }

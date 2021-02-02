@@ -34,7 +34,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.route('PATCH', `/2.0/account/**`, {
     status: 204,
     response: 'fixture:api/general/emptyObject'
-  })
+  }).as('accountPatchRequest')
   cy.route('GET', '/socket.io/**', '')
   cy.route('POST', '/socket.io/**', '')
 
