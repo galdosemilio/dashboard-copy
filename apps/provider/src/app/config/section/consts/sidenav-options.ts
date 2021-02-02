@@ -17,6 +17,7 @@ export class SidenavOptions {
   static RPM_BILLING = 'rpm_billing'
   static SCHEDULE_AVAILABILITY = 'schedule_availability'
   static SCHEDULE_LIST = 'schedule_list'
+  static SCHEDULE_PARENT = 'schedule_parent'
   static SCHEDULE_SCHEDULE = 'schedule'
   static STORE = 'store'
 }

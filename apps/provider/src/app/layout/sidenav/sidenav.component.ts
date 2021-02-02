@@ -218,6 +218,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             ]
           },
           {
+            code: SidenavOptions.SCHEDULE_PARENT,
             navName: _('SIDENAV.SCHEDULE'),
             route: 'schedule',
             icon: 'date_range',

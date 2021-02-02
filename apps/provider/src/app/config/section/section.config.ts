@@ -15,6 +15,10 @@ import {
   CoachCareClinicTestSectionConfig
 } from './coach-care'
 import {
+  CurryCareProdSectionConfig,
+  CurryCareTestSectionConfig
+} from './currycare'
+import {
   DefaultProdSectionConfig,
   DefaultTestSectionConfig
 } from './default.section.config'
@@ -71,7 +75,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7355']: ShiftSetGoSectionConfig,
     ['7353']: TrueWeightSectionConfig,
     ['7420']: GrandViewHealthSectionConfig,
-    ['7384']: MDTeamSectionConfig
+    ['7384']: MDTeamSectionConfig,
+    ['7520']: CurryCareTestSectionConfig
   },
   prod: {
     ['4050']: LeanMDSectionConfig,
@@ -88,6 +93,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['5529']: ShiftSetGoSectionConfig,
     ['5595']: TrueWeightSectionConfig,
     ['6438']: MDTeamSectionConfig,
-    ['6439']: DrVProdSectionConfig
+    ['6439']: DrVProdSectionConfig,
+    ['4049']: CurryCareProdSectionConfig
   }
 }
