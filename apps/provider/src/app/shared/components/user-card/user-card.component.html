@@ -3,9 +3,9 @@ class="user"
 fxLayout="row"
 fxLayoutAlign="start center"
 fxLayoutGap="10px">
-    <ccr-avatar [account]="user.account"  size="messages"></ccr-avatar>
+    <ccr-avatar [account]="user.account || user.id"  size="messages"></ccr-avatar>
     <small fxFlex
-    *ngIf="currentAccount && currentAccount.id === user.account; else defaultName">
+    *ngIf="currentAccount && (currentAccount.id === user.account || currentAccount.id === user.id); else defaultName">
         {{ 'GLOBAL.YOU' | translate }}
     </small>
     <ng-template #defaultName>

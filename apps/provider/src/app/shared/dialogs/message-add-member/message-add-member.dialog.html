@@ -1,0 +1,71 @@
+<div matDialogTitle>
+  <span [innerHTML]="'BOARD.ADD_MEMBER' | translate"></span>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator gray"></div>
+
+<mat-dialog-content>
+  <p [innerHTML]="'BOARD.THREAD_ADD_MEMBER_DESCRIPTION' | translate"></p>
+
+  <ccr-user-search
+  *ngIf="!selectedAccount"
+  [allowSelf]="true"
+  [excludes]="existingAccounts"
+  [label]="'BOARD.SELECT_PATIENT_COACH' | translate"
+  (select)="onSelectAccount($event)"></ccr-user-search>
+
+  <div
+  *ngIf="selectedAccount"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="end center"
+  fxLayoutAlign.xs="start stretch"
+  fxLayoutGap="25px">
+    <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px">
+      <div fxFlex fxFlex.xs="grow" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="5px">
+        <p class="account-type">{{ 'SEQUENCING.TYPE' | translate }}</p>
+        <p class="account-type">{{ 'BOARD.NAME' | translate }}</p>
+        <p class="account-type">{{ 'LIBRARY.CONTENT.ID' | translate }}</p>
+        <p class="account-type">{{ 'BOARD.EMAIL' | translate }}</p>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+        <p class="account-value">{{ shownAccountType | translate }}</p>
+        <p class="account-value">{{ selectedAccount.firstName }} {{ selectedAccount.lastName }}</p>
+        <p class="account-value">{{ selectedAccount.id }}</p>
+        <p class="account-value">{{ selectedAccount.email }}</p>
+      </div>
+    </div>
+
+    <div fxFlex="40%" fxFlex.xs>
+      <button
+      (click)="selectedAccount = undefined"
+      mat-button
+      class="ccr-icon-button">
+        <mat-icon>account_circle</mat-icon>
+        {{ 'BOARD.SELECT_DIFFERENT_ACCOUNT' | translate }}
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+  [disabled]="!selectedAccount"
+  (click)="onAddToThread()"
+  class="ccr-icon-button"
+  color="primary"
+  mat-button>
+    <mat-icon>check</mat-icon>
+    {{ 'BOARD.ADD_TO_THREAD' | translate }}
+  </button>
+
+  <button
+  class="ccr-icon-button"
+  mat-button
+  matDialogClose>
+    <mat-icon>close</mat-icon>
+    {{ 'GLOBAL.CANCEL' | translate }}
+  </button>
+</mat-dialog-actions>

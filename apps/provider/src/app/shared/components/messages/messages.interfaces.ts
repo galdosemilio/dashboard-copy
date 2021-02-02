@@ -10,6 +10,7 @@ export interface MessageRecipient {
 
 export interface MessageThread {
   threadId?: string
+  allRecipients: Array<MessageRecipient>
   recipients: Array<MessageRecipient>
   lastMessageId?: string
   lastMessageDate?: string

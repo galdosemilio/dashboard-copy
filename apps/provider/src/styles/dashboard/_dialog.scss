@@ -52,6 +52,10 @@
     &.extra-bottom-margin {
       margin-bottom: 24px;
     }
+
+    &.gray {
+      background-color: var(--bg-bar-dark);
+    }
   }
   .mat-dialog-content {
     padding-top: 20px;

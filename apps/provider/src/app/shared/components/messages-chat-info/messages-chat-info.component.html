@@ -27,11 +27,46 @@
   <p>{{ 'BOARD.THREAD_MEMBER_LIST' | translate }}</p>
 
   <div fxLayout="column" fxLayoutGap="10px">
-    <ccr-user-card
-      *ngFor="let user of thread?.recipients"
+      <div *ngFor="let user of thread?.allRecipients" fxLayout="row" fxLayoutAlign="stretch center">
+      <ccr-user-card
+      fxFlex
       [allowUserLinking]="true"
-      [showCallButton]="true"
+      [showCallButton]="user.id !== currentUser.id"
       [showRemoveButton]="false"
       [user]="user"></ccr-user-card>
+
+      <div *ngIf="user.id !== currentUser.id">
+        <mat-icon
+        *ngIf="thread?.allRecipients.length > 2"
+        [matTooltip]="'BOARD.THREAD_REMOVE_MEMBER' | translate:{user: user}"
+        (click)="onRemoveUser(user)"
+        class="clickable delete-button">
+          delete
+        </mat-icon>
+
+        <mat-icon
+        *ngIf="thread?.allRecipients.length <= 2"
+        [matTooltip]="'BOARD.THREAD_UNABLE_REMOVE_MEMBER' | translate:{user: user}"
+        class="delete-button disabled">
+          delete
+        </mat-icon>
+      </div>
+
+      <mat-icon
+      *ngIf="user.id === currentUser.id"
+      [matTooltip]="'BOARD.THREAD_UNABLE_REMOVE_YOURSELF' | translate"
+      class="delete-button disabled">
+        delete
+      </mat-icon>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <button
+      mat-button type="button" color="primary"
+      class="ccr-icon-button" (click)="openAddMemberDialog()">
+        <mat-icon>add</mat-icon>
+        {{ 'BOARD.ADD_MEMBER' | translate }}
+      </button>
+    </div>
   </div>
 </div>

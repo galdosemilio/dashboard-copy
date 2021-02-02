@@ -21,7 +21,7 @@ import {
   Messaging,
   MessagingThreadSegment
 } from '@coachcare/npm-api'
-import { findIndex, get, uniqBy } from 'lodash'
+import { findIndex, get, sortBy, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'
 import { mergeMap, sampleTime } from 'rxjs/operators'
@@ -177,6 +177,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     this.account$.next(this.accounts)
     // update the ccr-messages component
     this.newThread = {
+      allRecipients: accounts,
       recipients: accounts
     }
   }
@@ -213,19 +214,22 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   formatThread(t: MessagingThreadSegment): MessageThread {
-    const accounts = t.account
-      .map((acc, i) => ({
+    const accounts = sortBy(
+      t.account.map((acc) => ({
         id: acc.id,
         name: `${acc.firstName} ${acc.lastName}`,
         firstName: acc.firstName,
         lastName: acc.lastName,
         accountType: null
-      }))
-      .filter((a) => a.id !== this.current.id)
+      })),
+      [(acc) => acc.name.toLowerCase()],
+      ['asc']
+    )
 
     return {
       threadId: t.threadId,
-      recipients: accounts,
+      allRecipients: accounts,
+      recipients: accounts.filter((a) => a.id !== this.current.id),
       lastMessageId: t.lastMessage.id,
       lastMessageDate: t.lastMessage.date,
       lastMessageSent: t.lastMessage.content,

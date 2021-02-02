@@ -10,6 +10,7 @@ import {
   GetMessageDraftRequest,
   GetThreadMessagingRequest,
   MarkAllMessagesAsViewedRequest,
+  UpdateAccountThreadAssociation,
   UpdateThreadMessagingRequest,
   UpsertMessageDraftRequest
 } from './requests'
@@ -193,6 +194,36 @@ export class Messaging {
     return this.apiService.request({
       endpoint: `/message/viewed`,
       method: 'POST',
+      version: '2.0',
+      data: request
+    })
+  }
+
+  /**
+   * Add permission to a user to have access to a thread
+   * @param request must implement AddThreadPermissionRequest
+   * @returns Promise<void>
+   */
+  public addThreadPermission(request: any): Promise<void> {
+    return this.apiService.request({
+      endpoint: `/message/permission`,
+      method: 'POST',
+      version: '2.0',
+      data: request
+    })
+  }
+
+  /**
+   * Edit thread-account association
+   * @param request must implement Acco
+   * @returns Promise<void>
+   */
+  public updateAccountThreadAssociation(
+    request: UpdateAccountThreadAssociation
+  ): Promise<void> {
+    return this.apiService.request({
+      endpoint: `/message/thread/${request.threadId}/${request.account}`,
+      method: 'PATCH',
       version: '2.0',
       data: request
     })

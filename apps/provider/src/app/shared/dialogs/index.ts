@@ -5,6 +5,7 @@ export * from './call-rating'
 export * from './confirm.dialog'
 export * from './grid.dialog'
 export * from './languages.dialog'
+export * from './message-add-member'
 export * from './options.dialog'
 export * from './prompt.dialog'
 export * from './rpm-patient-report'
@@ -21,6 +22,7 @@ import { CallRatingDialog } from './call-rating/call-rating.dialog'
 import { ConfirmDialog } from './confirm.dialog'
 import { GridDialog } from './grid.dialog'
 import { LanguagesDialog } from './languages.dialog'
+import { MessageAddMemberDialog } from './message-add-member'
 import { OptionsDialog } from './options.dialog'
 import { PromptDialog } from './prompt.dialog'
 import { RPMPatientReportDialog } from './rpm-patient-report'
@@ -38,6 +40,7 @@ export const Dialogs = [
   ConfirmDialog,
   GridDialog,
   LanguagesDialog,
+  MessageAddMemberDialog,
   OptionsDialog,
   PromptDialog,
   RPMPatientReportDialog,

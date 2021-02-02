@@ -216,6 +216,18 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     '/2.0/message/viewed',
     'fixture:/api/general/emptyObject'
   ).as('threadMarkAsViewedRequest')
+  cy.route({
+    method: 'POST',
+    url: '/2.0/message/permission',
+    status: 204,
+    response: {}
+  }).as('threadMemberAddRequest')
+  cy.route({
+    method: 'PATCH',
+    url: '/2.0/message/thread/*/*',
+    status: 204,
+    response: {}
+  }).as('threadMemberUpdateRequest')
   cy.route(
     'GET',
     '/1.0/authentication/**',
