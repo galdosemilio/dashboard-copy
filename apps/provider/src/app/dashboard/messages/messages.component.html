@@ -28,7 +28,7 @@
         <mat-nav-list>
           <ng-container *ngFor="let thread of threads; let index = index">
           <mat-list-item *ngIf="thread.recipients.length"
-          (click)="active = index"
+          (click)="active = index; chatInfoEnabled = false;"
           [class.active]="active === index">
             <ccr-badge *ngIf="thread.unread">&nbsp;&nbsp;</ccr-badge>
             <ccr-avatar size="messages" [account]="thread.recipients[0].id" matListIcon></ccr-avatar>

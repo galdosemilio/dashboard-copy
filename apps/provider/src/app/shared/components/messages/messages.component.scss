@@ -1,6 +1,14 @@
 @import 'variables';
 
 @media only screen and (min-width: $breakpoint-tablet + 1) {
+  mat-icon.info-icon {
+    margin-top: -2px;
+  }
+
+  .info-button {
+    margin-left: 13px;
+  }
+
   .arrow_back,
   .mobile-messages-icons {
     display: none;

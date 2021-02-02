@@ -32,9 +32,11 @@
       <span fxHide.xs>{{'BOARD.VIEW_PROFILE' | translate}}</span>
     </a>
   </div>
-  <div fxHide.xs fxFlex="nogrow" fxLayout="row" fxLayoutAlign="end center">
-    &nbsp;
-    <mat-icon class="clickable" (click)="onToggleChatInfo()">info</mat-icon>
+  <div class="info-button" fxHide.xs fxFlex="nogrow" fxLayout="row" fxLayoutAlign="end center">
+    <button (click)="onToggleChatInfo()" class="ccr-icon-button" color="primary" mat-button>
+      <mat-icon class="info-icon">info</mat-icon>
+      {{ 'BOARD.THREAD_INFO' | translate }}
+    </button>
   </div>
 </div>
 <div class='mobile-messages-icons'>
