@@ -108,6 +108,13 @@ app-root:empty::after {
         max-width: 100%;
         height: 100%;
         overflow-y: auto;
+
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
         // @media #{$xlarge-and-up} {
         //   @include horizontal-margin-right(-15px);
         // }
