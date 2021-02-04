@@ -227,38 +227,38 @@
       <div *ngFor="let detail of vitals.controls; let i=index" [formGroupName]="i">
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="totalCholesterol" numberOnly
-          [placeholder]="'MEASUREMENT.TOTAL_CHOLESTEROL' | translate">
+          [placeholder]="'MEASUREMENT.TOTAL_CHOLESTEROL' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
           <mat-error>{{ 'NOTIFY.ERROR.VALUE_NOT_EMPTY' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="ldl" numberOnly max="100"
-          [placeholder]="'MEASUREMENT.LOW_DENSITY_LIPOPROTEIN' | translate">
+          [placeholder]="'MEASUREMENT.LOW_DENSITY_LIPOPROTEIN' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="hdl" numberOnly
-          [placeholder]="'MEASUREMENT.HIGH_DENSITY_LIPOPROTEIN' | translate">
+          [placeholder]="'MEASUREMENT.HIGH_DENSITY_LIPOPROTEIN' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="vldl" numberOnly max="100"
-          [placeholder]="'MEASUREMENT.VERY_LOW_DENSITY_LIPOPROTEIN' | translate">
+          [placeholder]="'MEASUREMENT.VERY_LOW_DENSITY_LIPOPROTEIN' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="triglycerides" numberOnly
-          [placeholder]="'MEASUREMENT.TRIGLYCERIDES' | translate">
+          [placeholder]="'MEASUREMENT.TRIGLYCERIDES' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="fastingGlucose" numberOnly max="100"
-          [placeholder]="'MEASUREMENT.FASTING_GLUCOSE' | translate">
+          [placeholder]="'MEASUREMENT.FASTING_GLUCOSE' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
         </mat-form-field>
 
@@ -270,7 +270,7 @@
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="insulin" numberOnly
-          [placeholder]="'MEASUREMENT.INSULIN' | translate">
+          [placeholder]="'MEASUREMENT.INSULIN' | translate" [wholeNumber]="true">
           <span matSuffix>uU/{{ 'UNIT.MLT' | translate }}</span>
         </mat-form-field>
 
@@ -288,25 +288,25 @@
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="heartRate" numberOnly
-          [placeholder]="'MEASUREMENT.HEART_RATE' | translate">
+          [placeholder]="'MEASUREMENT.HEART_RATE' | translate" [wholeNumber]="true">
           <span matSuffix>/ min</span>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="bloodPressureSystolic" numberOnly
-          [placeholder]="'MEASUREMENT.BLOOD_PRESSURE_SYSTOLIC' | translate">
+          [placeholder]="'MEASUREMENT.BLOOD_PRESSURE_SYSTOLIC' | translate" [wholeNumber]="true">
           <span matSuffix>/ mmHg</span>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="bloodPressureDiastolic" numberOnly
-          [placeholder]="'MEASUREMENT.BLOOD_PRESSURE_DIASTOLIC' | translate">
+          [placeholder]="'MEASUREMENT.BLOOD_PRESSURE_DIASTOLIC' | translate" [wholeNumber]="true">
           <span matSuffix>/ mmHg</span>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="respirationRate" numberOnly
-          [placeholder]="'MEASUREMENT.RESPIRATION_RATE' | translate">
+          [placeholder]="'MEASUREMENT.RESPIRATION_RATE' | translate" [wholeNumber]="true">
           <span matSuffix>/ min</span>
         </mat-form-field>
       </div>
