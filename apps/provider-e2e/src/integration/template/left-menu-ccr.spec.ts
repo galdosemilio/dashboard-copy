@@ -15,7 +15,7 @@ describe('Lefthand menu (standard)', function () {
       .find('app-sidenav-item')
       .not('.hidden')
       .as('menuLinks')
-    cy.get('@menuLinks').should('have.length', 24)
+    cy.get('@menuLinks').should('have.length', 25)
     cy.get('@menuLinks').eq(0).should('contain', 'Dashboard')
     cy.get('@menuLinks').eq(1).should('contain', 'Accounts')
     cy.get('@menuLinks').eq(2).should('contain', 'Patients')
@@ -39,12 +39,52 @@ describe('Lefthand menu (standard)', function () {
     cy.get('@menuLinks').eq(19).should('contain', 'Store')
     cy.get('@menuLinks').eq(20).should('contain', 'Resources')
     cy.get('@menuLinks').eq(21).should('contain', 'Updates')
-    cy.get('@menuLinks').eq(22).should('contain', 'FAQ & Support Guides')
-    cy.get('@menuLinks').eq(23).should('contain', 'Contact Support')
+    cy.get('@menuLinks').eq(22).should('contain', 'Schedule Support Call')
+    cy.get('@menuLinks').eq(23).should('contain', 'Email Support')
+    cy.get('@menuLinks').eq(24).should('contain', 'FAQ & Support Guides')
 
     // Adding for Cypress issue where page continues to load after spec is done
     cy.get('app-dieters-table', {
       timeout: 12000
     })
+  })
+
+  it('Hides the Schedule Support Call link if language is different from English', function () {
+    cy.visit('/')
+
+    cy.get('app-menu', {
+      timeout: 12000
+    })
+      .find('app-sidenav-item')
+      .not('.hidden')
+      .as('menuLinks')
+
+    cy.get('@menuLinks').should('have.length', 25)
+
+    cy.get('@menuLinks').eq(20).should('contain', 'Resources')
+    cy.get('@menuLinks').eq(21).should('contain', 'Updates')
+    cy.get('@menuLinks').eq(22).should('contain', 'Schedule Support Call')
+    cy.get('@menuLinks').eq(23).should('contain', 'Email Support')
+    cy.get('@menuLinks').eq(24).should('contain', 'FAQ & Support Guides')
+
+    cy.get('app-topbar').find('button').contains('Hello').click({ force: true })
+    cy.tick(1000)
+    cy.get('div.mat-menu-content')
+      .find('button')
+      .contains('Language')
+      .click({ force: true })
+    cy.tick(1000)
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('España')
+      .click({ force: true })
+    cy.tick(1000)
+
+    cy.get('@menuLinks').should('have.length', 24)
+
+    cy.get('@menuLinks').eq(20).should('contain', 'Recursos')
+    cy.get('@menuLinks').eq(21).should('contain', 'Novedades')
+    cy.get('@menuLinks').eq(22).should('contain', 'Contactar a Soporte')
+    cy.get('@menuLinks').eq(23).should('contain', 'FAQ y Guías')
   })
 })

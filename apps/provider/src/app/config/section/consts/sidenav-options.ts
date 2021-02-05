@@ -11,6 +11,7 @@ export class SidenavOptions {
   static REPORT_OVERVIEW = 'report_overview'
   static REPORT_STATISTICS = 'report_statistics'
   static REPORT_CUSTOM = 'report_custom'
+  static RESOURCES_SCHEDULE_SUPPORT_CALL = 'schedule_support_call'
   static RESOURCES_PLATFORM_UPDATES = 'platform_updates'
   static RESOURCES_CONTACT = 'contact'
   static RESOURCES_FAQ = 'resources_faq'

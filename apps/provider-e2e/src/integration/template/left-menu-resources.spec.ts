@@ -38,6 +38,30 @@ describe('Lefthand menu (resources link)', function () {
 
     cy.get('@menuLinks')
       .eq(22)
+      .should('contain', 'Schedule Support Call')
+      .find('mat-list-item')
+      .first()
+      .click()
+
+    cy.get('@openWindow').should(
+      'be.calledWithMatch',
+      'https://calendly.com/coachcarekjm/supportcall'
+    )
+
+    cy.get('@menuLinks')
+      .eq(23)
+      .should('contain', 'Email Support')
+      .find('mat-list-item')
+      .first()
+      .click()
+
+    cy.get('@openWindow').should(
+      'be.calledWithMatch',
+      'https://coachcare.zendesk.com/hc/en-us/requests/new'
+    )
+
+    cy.get('@menuLinks')
+      .eq(24)
       .should('contain', 'FAQ & Support Guides')
       .find('mat-list-item')
       .first()
@@ -46,18 +70,6 @@ describe('Lefthand menu (resources link)', function () {
     cy.get('@openWindow').should(
       'be.calledWithMatch',
       'https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard'
-    )
-
-    cy.get('@menuLinks')
-      .eq(23)
-      .should('contain', 'Contact Support')
-      .find('mat-list-item')
-      .first()
-      .click()
-
-    cy.get('@openWindow').should(
-      'be.calledWithMatch',
-      'https://coachcare.zendesk.com/hc/en-us/requests/new'
     )
   })
 })

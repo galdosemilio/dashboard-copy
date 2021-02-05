@@ -338,18 +338,24 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 code: SidenavOptions.RESOURCES_PLATFORM_UPDATES,
                 navName: _('SIDENAV.PLATFORM_UPDATES'),
                 navRoute: '/resources/platform-updates',
-                icon: 'live_help'
+                icon: 'event'
               },
               {
-                code: SidenavOptions.RESOURCES_FAQ,
-                navName: _('SIDENAV.FAQ_SUPPORT'),
-                navLink: `https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard?lang=${this.currentLang}`,
-                icon: 'live_help'
+                code: SidenavOptions.RESOURCES_SCHEDULE_SUPPORT_CALL,
+                navName: _('SIDENAV.SCHEDULE_SUPPORT_CALL'),
+                navLink: 'https://calendly.com/coachcarekjm/supportcall',
+                icon: 'add_ic_call'
               },
               {
                 code: SidenavOptions.RESOURCES_CONTACT,
                 navName: _('SIDENAV.CONTACT_SUPPORT'),
                 navLink: `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${this.currentLang}`,
+                icon: 'email'
+              },
+              {
+                code: SidenavOptions.RESOURCES_FAQ,
+                navName: _('SIDENAV.FAQ_SUPPORT'),
+                navLink: `https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard?lang=${this.currentLang}`,
                 icon: 'live_help'
               }
               // { navName: _('SIDENAV.MARKETING'), navRoute: 'resources/marketing' },
@@ -367,6 +373,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
 
     let idxProviderContactChild
     let idxProviderFaqChild
+    let idxSupportCallChild
     const providerContactLink = this.context.isOrphaned
       ? undefined
       : get(this.context.organization.mala, 'custom.links.providerContact')
@@ -380,6 +387,13 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
           (child) => child.navName === _('SIDENAV.CONTACT_SUPPORT')
         )) > -1
     )
+    idxSupportCallChild =
+      idxProviderContact && this.sidenavItems.length > 0
+        ? this.sidenavItems[idxProviderContact].children.findIndex(
+            (child) => child.navName === _('SIDENAV.SCHEDULE_SUPPORT_CALL')
+          )
+        : -1
+
     idxProviderFaqChild =
       idxProviderContact && this.sidenavItems.length > 0
         ? this.sidenavItems[idxProviderContact].children.findIndex(
@@ -402,6 +416,16 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
         ].navLink = providerFaqLink
           ? providerFaqLink
           : `https://coachcare.zendesk.com/hc/en-us/categories/360001031511-Coach-Provider-Dashboard?lang=${baseLang}`
+      }
+
+      if (idxSupportCallChild > -1) {
+        this.sidenavItems[idxProviderContact].children[idxSupportCallChild] = {
+          ...this.sidenavItems[idxProviderContact].children[
+            idxSupportCallChild
+          ],
+          cssClass:
+            this.translate.currentLang.split('-')[0] === 'en' ? '' : 'hidden'
+        }
       }
     }
   }
