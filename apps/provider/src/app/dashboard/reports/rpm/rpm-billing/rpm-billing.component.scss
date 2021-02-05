@@ -29,10 +29,14 @@ small {
 }
 
 .all-codes-label {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 500;
   margin-bottom: 4px;
   margin-top: 2px;
+
+  @media (min-width: $medium-screen) {
+    font-size: 14px;
+  }
 }
 
 .ccr-hint {
