@@ -34,6 +34,7 @@ export interface RPMStateSummaryBillingItem {
         required: number
       }
       monitoring?: {
+        remaining?: number
         automated: RPMStateSummaryElapsedMetric
         calls: RPMStateSummaryElapsedMetric
         total: {

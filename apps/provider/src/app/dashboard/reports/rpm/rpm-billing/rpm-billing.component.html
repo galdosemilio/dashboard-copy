@@ -114,12 +114,11 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="anyCodeLastEligibleAt">
+        <ng-container cdkColumnDef="activationDate">
             <mat-header-cell *cdkHeaderCellDef [class.dataset-empty]="!source.result?.length" class="first" fxLayoutAlign="center center">
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
                     <small fxLayout="column" fxLayoutAlign="start center">
-                        <span class="all-codes-label">{{ 'RPM.ALL_CODES' | translate }}</span>
-                        <span class="small-mat-sort" mat-sort-header>{{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}</span>
+                        <span class="all-codes-label">{{ 'RPM.ACTIVATION_DATE' | translate }}</span>
                     </small>
                 </div>
             </mat-header-cell>
@@ -129,12 +128,9 @@
             class="date-highlighted"
             fxLayoutAlign="center center"
             fxFlex.xs="grow">
-                <span>
-                    {{ 'RPM.ALL_CODES' | translate }} <br>
-                    {{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}
-                </span>
+                <span class="all-codes-label">{{ 'RPM.ACTIVATION_DATE' | translate }}</span>
 
-                {{ row.anyCodeLastEligibleAt | amDateFormat:'MM/DD/YYYY' }}
+                {{ row.rpm.isActive ? (row.rpm.changedAt | amDateFormat:'MM/DD/YYYY' ) : '' }}
             </mat-cell>
         </ng-container>
 
@@ -142,15 +138,29 @@
             <mat-header-cell *cdkHeaderCellDef>
             <div *ngIf="source.result && source.result.length">
             <table class="code-header-table" *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index">
-                <tr [class.last]="billingIndex === source.result[0].billing.length - 1" class="code-header-item">
-                    <td colSpan="2">{{ billingEntry.code }}</td>
+                <tr class="code-header-item">
+                    <td colSpan="2" style="text-transform: none;">{{ billingEntry.code === '99458' ? '99458 x1' : billingEntry.code }}</td>
                 </tr>
                 <tr>
                     <td class="latest-eligible">
                         {{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}
                     </td>
 
-                    <td [class.last]="billingIndex === source.result[0].billing.length - 1" class="next-claim next-claim-header">
+                    <td class="next-claim next-claim-header">
+                        {{ 'RPM.NEXT_CLAIM' | translate }}
+                    </td>
+                </tr>
+            </table>
+            <table class="code-header-table">
+                <tr class="code-header-item last">
+                    <td colSpan="2" style="text-transform: none;">99458 x2</td>
+                </tr>
+                <tr>
+                    <td class="latest-eligible">
+                        {{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}
+                    </td>
+
+                    <td class="next-claim next-claim-header last">
                         {{ 'RPM.NEXT_CLAIM' | translate }}
                     </td>
                 </tr>
@@ -165,11 +175,10 @@
 
             <div *ngIf="source.result && source.result.length">
             <table
-            *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index"
-            [class.last]="rowIndex === source.result.length - 1"
-            class="code-header-table">
+            *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index" class="code-header-table"
+            [class.last]="rowIndex === source.result.length - 1">
                 <tr>
-                <td [class.last]="rowIndex === source.result.length - 1" class="latest-eligible date-highlighted">
+                <td class="latest-eligible date-highlighted">
                     <span *ngIf="row.rpm.plan">
                         {{ row.billing[billingIndex].eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
                     </span>
@@ -177,7 +186,6 @@
                 </td>
 
                 <td *ngIf="!row.rpm.isActive"
-                [class.last]="billingIndex === source.result[0].billing.length - 1"
                 class="next-claim"
                 fxLayout="row"
                 fxLayoutAlign="center center"
@@ -185,7 +193,6 @@
 
                 <td
                 *ngIf="row.rpm.isActive"
-                [class.last]="billingIndex === source.result[0].billing.length - 1"
                 class="next-claim"
                 fxLayout="row"
                 fxLayoutAlign="center center"
@@ -209,7 +216,7 @@
                 </ccr-rpm-calendar-icon>
 
                 <ccr-rpm-clock-icon
-                *ngIf="row.billing[billingIndex].eligibility.next?.monitoring?.remaining"
+                *ngIf="(billingEntry.code !== '99458' || row.billing[billingIndex].eligibility.next?.alreadyEligibleCount < 1) && row.billing[billingIndex].eligibility.next?.monitoring?.remaining"
                 [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.monitoring.remaining}"
                 [size]="40"
                 text="{{ row.billing[billingIndex].eligibility.next?.monitoring.remaining }}{{ row.billing[billingIndex].eligibility.next?.monitoring.units | translate }}">
@@ -228,6 +235,53 @@
                 [size]="40"
                 text="{{ row.billing[billingIndex].eligibility.next?.liveInteraction.remaining }}">
                 </ccr-rpm-chat-icon>
+                </td>
+                </tr>
+            </table>
+
+            <table [class.last]="rowIndex === source.result.length - 1" class="code-header-table">
+                <tr>
+                <td class="latest-eligible date-highlighted">
+                    <span *ngIf="row.rpm.plan && row.billing[3].eligibility.last?.count > 1">
+                        {{ row.billing[3].eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
+                    </span>
+                    <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
+                </td>
+
+                <td *ngIf="!row.rpm.isActive"
+                class="next-claim"
+                fxLayout="row"
+                fxLayoutAlign="center center"
+                fxLayoutGap="10px">&nbsp;</td>
+
+                <td
+                *ngIf="row.rpm.isActive"
+                class="next-claim last"
+                fxLayout="row"
+                fxLayoutAlign="center center"
+                fxLayoutGap="10px">
+                &nbsp;
+                <span *ngIf="row.billing[3].eligibility.next?.alreadyEligibleCount < 1 || row.billing[3].hasCodeRequirements || row.billing[3].remainingDays">
+                    <ccr-rpm-dependency-icon
+                    [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: '99458 x1'}"
+                    [size]="40"
+                    text="99458 x1">
+                    </ccr-rpm-dependency-icon>
+                </span>
+
+                <ccr-rpm-calendar-icon
+                *ngIf="row.billing[3].remainingDays"
+                [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: row.billing[3].remainingDays}"
+                [size]="40"
+                text="{{ row.billing[3].remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
+                </ccr-rpm-calendar-icon>
+
+                <ccr-rpm-clock-icon
+                *ngIf="row.billing[3].eligibility.next?.monitoring?.remaining"
+                [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[3].eligibility.next?.monitoring.remaining}"
+                [size]="40"
+                text="{{ row.billing[3].eligibility.next?.alreadyEligibleCount >= 1 ? row.billing[3].eligibility.next?.monitoring.remaining : 20 }}{{ row.billing[3].eligibility.next?.monitoring.units | translate }}">
+                </ccr-rpm-clock-icon>
                 </td>
                 </tr>
             </table>

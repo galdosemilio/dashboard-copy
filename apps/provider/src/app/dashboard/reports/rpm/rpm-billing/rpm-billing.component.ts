@@ -8,8 +8,7 @@ import { WalkthroughService } from '@app/service/walkthrough'
 import { CcrPaginator } from '@app/shared'
 import {
   AccountTypeId,
-  FetchRPMBillingSummaryRequest,
-  InactiveRPMItem
+  FetchRPMBillingSummaryRequest
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
@@ -47,7 +46,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     'dob',
     'deviceSupplied',
     'status',
-    'anyCodeLastEligibleAt',
+    'activationDate',
     'codes'
   ]
   public criteria: Partial<FetchRPMBillingSummaryRequest> = {
@@ -168,29 +167,15 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         ? moment()
         : moment(this.criteria.asOf).endOf('day')
 
-      csv += `"As of: ${currentAsOf.format('MMM D, YYYY')}"\r\n`
+      csv += `"As of: ${currentAsOf.format('MMM D, YYYY')}"${this.csvSeparator}`
 
-      csv +=
-        ',,,,,,,,,,"Eligibility","Eligibility","Eligibility","Eligibility","All Codes",'
+      csv += ',,,,,,,,'
 
-      res[0].billing.forEach(
-        (billingEntry, billingEntryIndex, billingEntries) => {
-          const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
-
-          new Array(columnMap.length + 2)
-            .fill(0)
-            .forEach(
-              (columnInfo, index) =>
-                (csv +=
-                  billingEntry.code +
-                  (index < columnMap.length + 1 ? this.csvSeparator : ''))
-            )
-
-          if (billingEntryIndex < billingEntries.length - 1) {
-            csv += this.csvSeparator
-          }
-        }
-      )
+      csv += `"99453"${this.csvSeparator}"99453"${this.csvSeparator}`
+      csv += `"99454"${this.csvSeparator}"99454"${this.csvSeparator}`
+      csv += `"99457"${this.csvSeparator}"99457"${this.csvSeparator}`
+      csv += `"99458 x1"${this.csvSeparator}"99458 x1"${this.csvSeparator}`
+      csv += `"99458 x2"${this.csvSeparator}"99458 x2"`
 
       csv += '\r\n'
 
@@ -203,27 +188,15 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         this.csvSeparator +
         'Date of Birth' +
         this.csvSeparator +
+        'Device Type' +
+        this.csvSeparator +
         'Organization ID' +
         this.csvSeparator +
         'Organization Name' +
         this.csvSeparator +
         'Status' +
         this.csvSeparator +
-        'State Change Reason' +
-        this.csvSeparator +
-        'Deactivation Date' +
-        this.csvSeparator +
-        'Reason for Deactivation' +
-        this.csvSeparator +
         'Activation Date' +
-        this.csvSeparator +
-        'Consent Obtained' +
-        this.csvSeparator +
-        'Face-to-Face within 12 Months' +
-        this.csvSeparator +
-        'Patient Specific Goals Set' +
-        this.csvSeparator +
-        `"Latest Eligible Claim"` +
         this.csvSeparator
 
       res[0].billing.forEach((billingEntry, billingEntryIndex) => {
@@ -233,8 +206,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           return
         }
 
-        csv += `"Latest Eligible Claim"` + this.csvSeparator
-        csv += `"Next Claim"` + this.csvSeparator
+        csv += `"Latest Claim Date"` + this.csvSeparator
+        csv += `"Next Claim Requirements"`
 
         columnMap.forEach((columnInfo, index, columns) => {
           csv +=
@@ -243,6 +216,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         })
 
         if (billingEntryIndex === res[0].billing.length - 1) {
+          csv += `${this.csvSeparator}"Latest Claim Date"` + this.csvSeparator
+          csv += `"Next Claim Requirements"`
           csv += '\r\n'
         } else {
           csv += this.csvSeparator
@@ -259,169 +234,65 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           this.csvSeparator +
           `"${moment(entry.account.dateOfBirth).format('MM/DD/YYYY')}"` +
           this.csvSeparator +
+          `"${entry.device.name}"` +
+          this.csvSeparator +
           `"${entry.organization.id}"` +
           this.csvSeparator +
           `"${entry.organization.name}"` +
           this.csvSeparator +
           `"${entry.rpm.isActive ? 'Active' : 'Inactive'}"` +
           this.csvSeparator +
-          `"${entry.rpm.reason ? entry.rpm.reason.description : 'N/A'}"` +
-          this.csvSeparator +
-          `"${
-            entry.rpm.isActive
-              ? 'No'
-              : moment(entry.rpm.changedAt).format('MM/DD/YYYY')
-          }"` +
-          this.csvSeparator +
-          `"${
-            (entry.rpm as InactiveRPMItem).deactivationReason
-              ? (entry.rpm as InactiveRPMItem).deactivationReason.description ||
-                'No'
-              : 'No'
-          }"` +
-          this.csvSeparator +
           `"${
             entry.rpm.isActive
               ? moment(entry.rpm.changedAt).format('MM/DD/YYYY')
               : 'No'
           }"` +
-          this.csvSeparator +
-          `"${
-            entry.rpm.isActive
-              ? moment(entry.rpm.consentedAt).format('MM/DD/YYYY')
-              : 'No'
-          }"` +
-          this.csvSeparator +
-          `"${
-            entry.rpm.isActive
-              ? entry.rpm.conditions.hadFaceToFace
-                ? 'Yes'
-                : 'No'
-              : 'No'
-          }"` +
-          this.csvSeparator +
-          `"${
-            entry.rpm.isActive
-              ? entry.rpm.conditions.goalsSet !== false
-                ? 'Yes'
-                : 'No'
-              : 'No'
-          }"` +
-          this.csvSeparator +
-          `"${
-            entry.anyCodeLastEligibleAt
-              ? moment(entry.anyCodeLastEligibleAt).format('MM/DD/YYYY')
-              : 'N/A'
-          }"` +
           this.csvSeparator
 
-        entry.billing.forEach((billingEntry, billingEntryIndex) => {
-          const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
-
-          if (!columnMap) {
-            return
-          }
-
-          csv +=
-            `"${
-              billingEntry.eligibility.last
-                ? moment(billingEntry.eligibility.last.timestamp).format(
-                    'MM/DD/YYYY'
-                  )
-                : 'N/A'
-            }"` + this.csvSeparator
-
-          if (!billingEntry.eligibility.next || !entry.rpm.isActive) {
-            csv +=
-              billingEntry.hasClaims &&
-              RPM_SINGLE_TIME_CODES.indexOf(billingEntry.code) !== -1
-                ? '"N/A - once per episode of care"'
-                : '"N/A"'
-            csv += this.csvSeparator
-          } else {
-            csv += '"'
-
-            const nextObjectKeys = Object.keys(
-              billingEntry.eligibility.next
-            ).filter(
-              (key) =>
-                key !== 'earliestEligibleAt' &&
-                billingEntry.eligibility.next[key].remaining
-            )
-
-            if (billingEntry.hasCodeRequirements) {
-              billingEntry.eligibility.next.relatedCodeRequirementsNotMet.forEach(
-                (code, index, array) => {
-                  csv += `${code} requirements not satisfied`
-
-                  if (index + 1 < array.length) {
-                    csv += '; '
-                  }
-                }
-              )
-
-              if (billingEntry.remainingDays || nextObjectKeys.length) {
-                csv += '; '
-              }
-            }
-
-            if (billingEntry.remainingDays) {
-              csv += `${billingEntry.remainingDays} days more need to elapse`
-            }
-
-            if (!nextObjectKeys.length) {
-              csv += '"'
-            } else if (billingEntry.remainingDays) {
-              csv += '; '
-            }
-
-            nextObjectKeys.forEach((nextKey, nextKeyIndex, nextKeyArray) => {
-              const remainingMetricString = this.getRemainingMetricString(
-                billingEntry.eligibility.next[nextKey].remainingRaw ||
-                  billingEntry.eligibility.next[nextKey].remaining,
-                nextKey
-              )
-
-              if (!remainingMetricString) {
-                if (nextKeyIndex === nextKeyArray.length - 1) {
-                  csv += '"'
-                }
-                return
-              }
-
-              csv += `${remainingMetricString}`
-
-              if (nextKeyIndex === nextKeyArray.length - 1) {
-                csv += '"'
-              } else {
-                csv += '; '
-              }
-            })
+        entry.billing
+          .filter((billingEntry) => billingEntry.code !== '99458')
+          .forEach((billingEntry) => {
+            csv += this.getRPMBillingEntryContent(billingEntry, entry)
 
             csv += this.csvSeparator
-          }
-
-          columnMap.forEach((columnInfo, index, columns) => {
-            const shownValue = columnInfo.inParent
-              ? get(entry, columnInfo.route)
-              : get(billingEntry, columnInfo.route)
-
-            csv +=
-              `"${
-                entry.device.id === '-1' && columnInfo.defaultNoPlan
-                  ? columnInfo.defaultNoPlan
-                  : shownValue !== null && shownValue !== undefined
-                  ? shownValue
-                  : columnInfo.default
-              }"` + (index + 1 === columns.length ? '' : this.csvSeparator)
           })
 
-          if (billingEntryIndex === entry.billing.length - 1) {
-            csv += '\r\n'
-          } else {
-            csv += this.csvSeparator
-          }
-        })
+        const lastCodeEntry = entry.billing[3]
+
+        csv += this.getRPMBillingEntryContent(lastCodeEntry, entry)
+
+        csv += this.csvSeparator
+
+        csv += `"${
+          lastCodeEntry.eligibility.last?.count > 1
+            ? moment(lastCodeEntry.eligibility.last.timestamp).format(
+                'MM/DD/YYYY'
+              )
+            : 'N/A'
+        }"${this.csvSeparator}`
+
+        csv += `"`
+
+        const previousConditionsMet =
+          lastCodeEntry.eligibility.next?.alreadyEligibleCount >= 1 &&
+          !lastCodeEntry.hasCodeRequirements &&
+          !lastCodeEntry.remainingDays
+
+        csv += `${
+          !previousConditionsMet ? '99458 x1 requirements not satisfied; ' : ''
+        }`
+
+        if (lastCodeEntry.remainingDays) {
+          csv += `${lastCodeEntry.remainingDays} more calendar days`
+        }
+
+        csv += lastCodeEntry.eligibility.next.monitoring.remaining
+          ? `; ${this.getRemainingMetricString(
+              lastCodeEntry.eligibility.next.monitoring.remaining,
+              'monitoring'
+            )}`
+          : ''
+        csv += '"\r\n'
       })
 
       csv +=
@@ -462,6 +333,113 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   private createStatusFilterForm(): void {
     this.statusFilterForm = this.fb.group({ status: ['active'] })
     this.searchForm = this.fb.group({ query: [''] })
+  }
+
+  private getRPMBillingEntryContent(
+    billingEntry,
+    entry: RPMStateSummaryEntry
+  ): string {
+    let csv = ''
+    const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
+
+    if (!columnMap) {
+      return
+    }
+
+    csv +=
+      `"${
+        billingEntry.eligibility.last
+          ? moment(billingEntry.eligibility.last.timestamp).format('MM/DD/YYYY')
+          : 'N/A'
+      }"` + this.csvSeparator
+
+    if (!billingEntry.eligibility.next || !entry.rpm.isActive) {
+      csv +=
+        billingEntry.hasClaims &&
+        RPM_SINGLE_TIME_CODES.indexOf(billingEntry.code) !== -1
+          ? '"N/A - once per episode of care"'
+          : '"N/A"'
+    } else {
+      csv += '"'
+
+      const nextObjectKeys = Object.keys(billingEntry.eligibility.next).filter(
+        (key) =>
+          key !== 'earliestEligibleAt' &&
+          billingEntry.eligibility.next[key].remaining
+      )
+
+      if (billingEntry.hasCodeRequirements) {
+        billingEntry.eligibility.next.relatedCodeRequirementsNotMet.forEach(
+          (code, index, array) => {
+            csv += `${code} requirements not satisfied`
+
+            if (index + 1 < array.length) {
+              csv += '; '
+            }
+          }
+        )
+
+        if (billingEntry.remainingDays || nextObjectKeys.length) {
+          csv += '; '
+        }
+      }
+
+      if (billingEntry.remainingDays) {
+        csv += `${billingEntry.remainingDays} more calendar days`
+      }
+
+      if (!nextObjectKeys.length) {
+        csv += '"'
+      } else if (
+        billingEntry.code === '99458' &&
+        billingEntry.eligibility.next?.alreadyEligibleCount >= 1
+      ) {
+        csv += `"`
+        return csv
+      } else if (billingEntry.remainingDays) {
+        csv += '; '
+      }
+
+      nextObjectKeys.forEach((nextKey, nextKeyIndex, nextKeyArray) => {
+        const remainingMetricString = this.getRemainingMetricString(
+          billingEntry.eligibility.next[nextKey].remainingRaw ||
+            billingEntry.eligibility.next[nextKey].remaining,
+          nextKey
+        )
+
+        if (!remainingMetricString) {
+          if (nextKeyIndex === nextKeyArray.length - 1) {
+            csv += '"'
+          }
+          return
+        }
+
+        csv += `${remainingMetricString}`
+
+        if (nextKeyIndex === nextKeyArray.length - 1) {
+          csv += '"'
+        } else {
+          csv += '; '
+        }
+      })
+    }
+
+    columnMap.forEach((columnInfo, index, columns) => {
+      const shownValue = columnInfo.inParent
+        ? get(entry, columnInfo.route)
+        : get(billingEntry, columnInfo.route)
+
+      csv +=
+        `"${
+          entry.device.id === '-1' && columnInfo.defaultNoPlan
+            ? columnInfo.defaultNoPlan
+            : shownValue !== null && shownValue !== undefined
+            ? shownValue
+            : columnInfo.default
+        }"` + (index + 1 === columns.length ? '' : this.csvSeparator)
+    })
+
+    return csv
   }
 
   private getRemainingMetricString(value: number, type: string): string {

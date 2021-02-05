@@ -17,10 +17,10 @@ $date-highlight-color: saturate(
 }
 
 mat-table {
-  min-width: 2478px !important;
+  min-width: 2865px !important;
 
   @media #{xlarge-and-up} {
-    min-width: 2483px !important;
+    min-width: 2865px !important;
   }
 }
 
@@ -69,12 +69,12 @@ small {
   }
 
   .cdk-column-codes {
-    max-width: 1580px;
-    min-width: 1580px;
+    max-width: 2000px;
+    min-width: 2000px;
 
     @media #{$xlarge-and-up} {
-      max-width: 1590px !important;
-      min-width: 1590px !important;
+      max-width: 2000px !important;
+      min-width: 2000px !important;
     }
   }
 
@@ -102,7 +102,7 @@ small {
     }
   }
 
-  .cdk-column-anyCodeLastEligibleAt {
+  .cdk-column-activationDate {
     border-left: 1px solid mat-color($ccr-foreground, secondary-text);
     margin-right: 0;
     max-width: 175px;
