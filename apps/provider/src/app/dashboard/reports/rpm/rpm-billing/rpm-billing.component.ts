@@ -57,6 +57,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   public searchForm: FormGroup
   public statusFilterForm: FormGroup
   public source: RPMBillingDataSource
+  public totalCount: number
 
   private refresh$: Subject<void> = new Subject<void>()
 
@@ -108,6 +109,9 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           ? undefined
           : selectedDate.endOf('day').toISOString()
       }
+    })
+    this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
+      this.totalCount = this.source.totalCount ?? 0
     })
 
     this.store

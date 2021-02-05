@@ -3,8 +3,11 @@
         <div fxLayout="row" fxLayout="start center">
             <mat-icon class="title-icon">receipt</mat-icon>
 
-            <h3 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                <span>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</span>
+            <h3 fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</span>
+                    <small class="count" *ngIf="totalCount"><strong>{{ totalCount }}</strong> {{ 'GLOBAL.PATIENTS' | translate }}</small>
+                </div>
                 <ccr-walkthrough [autoClose]="false" guide="rpm"></ccr-walkthrough>
             </h3>
         </div>

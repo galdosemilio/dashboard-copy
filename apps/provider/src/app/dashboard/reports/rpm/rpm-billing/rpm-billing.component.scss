@@ -190,6 +190,10 @@ th {
   }
 }
 
+.count {
+  line-height: 0;
+}
+
 .dataset-empty {
   border-right: 1px solid mat-color($ccr-foreground, secondary-text);
 }

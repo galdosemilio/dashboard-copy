@@ -406,5 +406,7 @@
       }
     }
   ],
-  "pagination": {}
+  "pagination": {
+    "totalCount": 5
+  }
 }

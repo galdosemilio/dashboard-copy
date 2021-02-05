@@ -118,4 +118,16 @@ describe('Reports -> RPM -> RPM Billing', function () {
       .find('tr')
       .should('contain', '99457')
   })
+
+  it('Shows the total count underneath the title', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/reports/rpm/billing`)
+
+    cy.tick(100)
+    cy.get('mat-table', { timeout: 10000 }).find('mat-row').as('rpmBillingRows')
+
+    cy.get('app-reports-rpm-billing').find('h3').should('contain', '5 Patients')
+  })
 })

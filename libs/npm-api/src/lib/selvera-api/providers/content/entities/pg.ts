@@ -8,6 +8,7 @@ export type PageOffset = number
 export interface Pagination {
   next?: number
   prev?: number
+  totalCount?: number
 }
 
 export interface PagedResponse<T> extends ListResponse<T> {
