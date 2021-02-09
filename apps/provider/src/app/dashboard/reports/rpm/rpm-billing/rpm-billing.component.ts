@@ -286,7 +286,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           csv += `${lastCodeEntry.remainingDays} more calendar days`
         }
 
-        csv += lastCodeEntry.eligibility.next.monitoring.remaining
+        csv += lastCodeEntry.eligibility.next.monitoring?.remaining
           ? `; ${this.getRemainingMetricString(
               lastCodeEntry.eligibility.next.monitoring.remaining,
               'monitoring'
@@ -365,7 +365,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       const nextObjectKeys = Object.keys(billingEntry.eligibility.next).filter(
         (key) =>
           key !== 'earliestEligibleAt' &&
-          billingEntry.eligibility.next[key].remaining
+          billingEntry.eligibility.next[key]?.remaining
       )
 
       if (billingEntry.hasCodeRequirements) {
