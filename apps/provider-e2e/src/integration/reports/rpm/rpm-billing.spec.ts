@@ -130,4 +130,73 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.get('app-reports-rpm-billing').find('h3').should('contain', '5 Patients')
   })
+
+  it('It properly generates the CSV report with no "next" data', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.route(
+      'GET',
+      '/3.0/warehouse/rpm/state/billing-summary?**',
+      'fixture:/api/warehouse/getRPMBillingComplete'
+    )
+
+    cy.visit(`/reports/rpm/billing`)
+
+    cy.tick(100)
+    cy.get('mat-table', { timeout: 10000 }).find('mat-row')
+
+    cy.get('app-reports-rpm-billing')
+      .find('button')
+      .contains('Export CSV')
+      .click({ force: true })
+
+    cy.get('snack-bar-container').should('not.exist')
+  })
+
+  it('It properly generates the CSV report with the patient on 99457', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.route(
+      'GET',
+      '/3.0/warehouse/rpm/state/billing-summary?**',
+      'fixture:/api/warehouse/getRPMBillingOn99457'
+    )
+
+    cy.visit(`/reports/rpm/billing`)
+
+    cy.tick(100)
+    cy.get('mat-table', { timeout: 10000 }).find('mat-row')
+
+    cy.get('app-reports-rpm-billing')
+      .find('button')
+      .contains('Export CSV')
+      .click({ force: true })
+
+    cy.get('snack-bar-container').should('not.exist')
+  })
+
+  it('It properly generates the CSV report with the patient on 99458', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.route(
+      'GET',
+      '/3.0/warehouse/rpm/state/billing-summary?**',
+      'fixture:/api/warehouse/getRPMBillingOn99458'
+    )
+
+    cy.visit(`/reports/rpm/billing`)
+
+    cy.tick(100)
+    cy.get('mat-table', { timeout: 10000 }).find('mat-row')
+
+    cy.get('app-reports-rpm-billing')
+      .find('button')
+      .contains('Export CSV')
+      .click({ force: true })
+
+    cy.get('snack-bar-container').should('not.exist')
+  })
 })

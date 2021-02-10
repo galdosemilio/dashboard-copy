@@ -199,9 +199,12 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         'Activation Date' +
         this.csvSeparator
 
+      // We iterate through each billing entry code to set up the headers
       res[0].billing.forEach((billingEntry, billingEntryIndex) => {
         const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
 
+        // If the column map for the code is not found, it means we don't support the code.
+        // We avoid working with it for stability purposes. This has never happened, though.
         if (!columnMap) {
           return
         }
@@ -209,12 +212,16 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         csv += `"Latest Claim Date"` + this.csvSeparator
         csv += `"Next Claim Requirements"`
 
+        // We iterate through the column map properties to set ADDITIONAL cells per code.
+        // This is code currently doesn't run as we were asked to remove any additional cells.
         columnMap.forEach((columnInfo, index, columns) => {
           csv +=
             `"${columnInfo.column}"` +
             (index + 1 === columns.length ? '' : this.csvSeparator)
         })
 
+        // If we're on the last one the codes [99458], we add an additional couple cells.
+        // This is because 99458 was split into two column groups: 99458 x1 and 99458 x2.
         if (billingEntryIndex === res[0].billing.length - 1) {
           csv += `${this.csvSeparator}"Latest Claim Date"` + this.csvSeparator
           csv += `"Next Claim Requirements"`
@@ -224,6 +231,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         }
       })
 
+      // We just go through each row and fill the cells
       res.forEach((entry) => {
         csv +=
           `"${entry.account.id}"` +
@@ -249,6 +257,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           }"` +
           this.csvSeparator
 
+        // We avoid letting the generic logic render the 99458's data since
+        // that code is now a special case and is handled manually.
         entry.billing
           .filter((billingEntry) => billingEntry.code !== '99458')
           .forEach((billingEntry) => {
@@ -257,12 +267,16 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
             csv += this.csvSeparator
           })
 
+        // This is where we start handling 99458 [x1 and x2] manually
         const lastCodeEntry = entry.billing[3]
 
+        // 99458 x1 [yeah, I know it's equivalent to letting the generic logic handle it but
+        // but I separated it for readability]
         csv += this.getRPMBillingEntryContent(lastCodeEntry, entry)
 
         csv += this.csvSeparator
 
+        // 99458 x2
         csv += `"${
           lastCodeEntry.eligibility.last?.count > 1
             ? moment(lastCodeEntry.eligibility.last.timestamp).format(
@@ -273,22 +287,38 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
 
         csv += `"`
 
+        if (!lastCodeEntry.eligibility.next) {
+          csv += 'N/A"\r\n'
+          return
+        }
+
         const previousConditionsMet =
           lastCodeEntry.eligibility.next?.alreadyEligibleCount >= 1 &&
           !lastCodeEntry.hasCodeRequirements &&
           !lastCodeEntry.remainingDays
 
         csv += `${
-          !previousConditionsMet ? '99458 x1 requirements not satisfied; ' : ''
+          !previousConditionsMet ? '99458 x1 requirements not satisfied' : ''
         }`
 
+        // Showing/hiding the semicolon here requires evaluation.
         if (lastCodeEntry.remainingDays) {
-          csv += `${lastCodeEntry.remainingDays} more calendar days`
+          if (!previousConditionsMet) {
+            csv += `; `
+          }
+
+          csv += `${lastCodeEntry.remainingDays} more calendar days; `
         }
 
-        csv += lastCodeEntry.eligibility.next.monitoring?.remaining
-          ? `; ${this.getRemainingMetricString(
-              lastCodeEntry.eligibility.next.monitoring.remaining,
+        // Since all that 99458 x2 requires aside from days an 99458 x1 is monitoring
+        // time, we check for the remaining time that 99458 code reports.
+        // The remaining time reported by the code 99458 is only related to 99458 x2
+        // when the previous iteration of 99458 [99458 x1] has been completed.
+        csv += lastCodeEntry.eligibility.next?.monitoring?.remaining
+          ? `${
+              !lastCodeEntry.remainingDays && !previousConditionsMet ? '; ' : ''
+            }${this.getRemainingMetricString(
+              lastCodeEntry.eligibility.next?.monitoring?.remaining ?? 0,
               'monitoring'
             )}`
           : ''
@@ -346,6 +376,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       return
     }
 
+    // Latest Eligibility
     csv +=
       `"${
         billingEntry.eligibility.last
@@ -353,13 +384,21 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           : 'N/A'
       }"` + this.csvSeparator
 
-    if (!billingEntry.eligibility.next || !entry.rpm.isActive) {
+    // Next Eligibility
+    if (
+      !billingEntry.eligibility.next ||
+      !entry.rpm.isActive ||
+      (billingEntry.code === '99458' &&
+        (billingEntry.eligibility.next?.alreadyEligibleCount ?? 0) >= 1 &&
+        !billingEntry.remainingDays)
+    ) {
       csv +=
         billingEntry.hasClaims &&
         RPM_SINGLE_TIME_CODES.indexOf(billingEntry.code) !== -1
           ? '"N/A - once per episode of care"'
           : '"N/A"'
     } else {
+      // Means we have next eligibility requirements that we should display
       csv += '"'
 
       const nextObjectKeys = Object.keys(billingEntry.eligibility.next).filter(
@@ -368,6 +407,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           billingEntry.eligibility.next[key]?.remaining
       )
 
+      // Previous code requirements (happens between 99458 and 99457, for example)
       if (billingEntry.hasCodeRequirements) {
         billingEntry.eligibility.next.relatedCodeRequirementsNotMet.forEach(
           (code, index, array) => {
@@ -384,10 +424,17 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         }
       }
 
+      // Remaining days
       if (billingEntry.remainingDays) {
         csv += `${billingEntry.remainingDays} more calendar days`
       }
 
+      // The only notable condition here is 99458, that one means
+      // that if there is an alreadyEligibleCount [meaning that the MONITORING TIME has
+      // been completed, not that the iteration is ACTUALLY eligibile.
+      // Don't be fooled by the name of the property like me!], then the requirements
+      // that appear as part of this object are not for 99458 x1 but for 99458 x2
+      // and that we should skip them.
       if (!nextObjectKeys.length) {
         csv += '"'
       } else if (
@@ -400,6 +447,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
         csv += '; '
       }
 
+      // We navigate through each key on the 'next' object to display the missing requirements.
+      // Usually, these are 'monitoring time', 'live interactions', etc.
       nextObjectKeys.forEach((nextKey, nextKeyIndex, nextKeyArray) => {
         const remainingMetricString = this.getRemainingMetricString(
           billingEntry.eligibility.next[nextKey].remainingRaw ||
@@ -424,6 +473,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       })
     }
 
+    // The column map handles ADDITIONAL cells. Since we were asked to remove these,
+    // they're currently deactivated and this portion of the code doesn't do anything.
     columnMap.forEach((columnInfo, index, columns) => {
       const shownValue = columnInfo.inParent
         ? get(entry, columnInfo.route)

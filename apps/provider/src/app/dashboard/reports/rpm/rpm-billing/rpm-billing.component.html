@@ -261,7 +261,7 @@
                 fxLayoutAlign="center center"
                 fxLayoutGap="10px">
                 &nbsp;
-                <span *ngIf="row.billing[3].eligibility.next?.alreadyEligibleCount < 1 || row.billing[3].hasCodeRequirements || row.billing[3].remainingDays">
+                <span *ngIf="(row.billing[3].eligibility.next && row.billing[3].eligibility.next.alreadyEligibleCount < 1) || row.billing[3].hasCodeRequirements || row.billing[3].remainingDays">
                     <ccr-rpm-dependency-icon
                     [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: '99458 x1'}"
                     [size]="40"
