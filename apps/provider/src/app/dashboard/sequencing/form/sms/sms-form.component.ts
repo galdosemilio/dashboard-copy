@@ -48,7 +48,7 @@ export class SMSFormComponent
 
   public currentCharLength = 0
   public form: FormGroup
-  public MAX_CHAR_LENGTH = 240
+  public MAX_CHAR_LENGTH = 160
   public textLengthOverflow = false
 
   private _disabled: boolean
