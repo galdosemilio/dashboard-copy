@@ -96,9 +96,6 @@ describe('Patient Listing', function () {
     for (const sortableHeader of sortableHeaders) {
       cy.get('@headerColumns')
         .contains(sortableHeader.displayValue)
-        .parent()
-        .find('ccr-table-sort-header')
-        .find('div')
         .click({ force: true })
 
       cy.tick(1000)

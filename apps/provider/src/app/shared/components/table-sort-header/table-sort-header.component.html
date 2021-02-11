@@ -1,4 +1,7 @@
-<div (click)="onToggleHeader()" class="clickable">
+<div (click)="onToggleHeader()" class="clickable" fxLayout="row" fxLayoutAlign="start center">
+  <div>
+    <ng-content></ng-content>
+  </div>
   <mat-icon [ngClass]="{ 'asc': direction === 'asc', 'desc': direction === 'desc', none: direction === null }">
     arrow_right_alt
   </mat-icon>

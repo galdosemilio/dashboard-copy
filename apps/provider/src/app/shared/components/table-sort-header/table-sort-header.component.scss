@@ -21,12 +21,7 @@ div {
 
   &:hover {
     mat-icon {
-      display: initial;
-
-      &.none {
-        color: mat-color($ccr-foreground, icon);
-        transform: rotate(-90deg);
-      }
+      visibility: initial;
     }
   }
 }
@@ -34,8 +29,6 @@ div {
 mat-icon {
   font-size: 20px;
   height: 20px;
-  position: absolute;
-  top: 8px;
   width: 20px;
 
   &.asc {
@@ -47,6 +40,8 @@ mat-icon {
   }
 
   &.none {
-    display: none;
+    color: mat-color($ccr-foreground, icon);
+    transform: rotate(-90deg);
+    visibility: hidden;
   }
 }

@@ -9,61 +9,71 @@ class="ccr-table ccr-expand-table ccr-table-stats">
     <thead>
       <tr>
         <td class="column-firstname">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
-            <ccr-table-sort-header property="firstName" fxFlex></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="firstName">
+              <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-lastname">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
-            <ccr-table-sort-header property="lastName" fxFlex></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="lastName" fxFlex>
+              <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-startweight">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'BOARD.START_WEIGHT' | translate }}</span>
-            <ccr-table-sort-header property="weight.first.value" fxFlex="100%"></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="weight.first.value">
+              <span>{{ 'BOARD.START_WEIGHT' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-currentweight">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'BOARD.CURRENT_WEIGHT' | translate }}</span>
-            <ccr-table-sort-header property="weight.last.value" fxFlex="100%"></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="weight.last.value">
+              <span>{{ 'BOARD.CURRENT_WEIGHT' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-weightchange">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'STATS.WEIGHT_CHANGE' | translate }}</span>
-            <ccr-table-sort-header property="weight.change.value" fxFlex="100%"></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="weight.change.value">
+              <span>{{ 'STATS.WEIGHT_CHANGE' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-weightchangepercent">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'STATS.WEIGHT_CHANGE_PERCENT' | translate }}</span>
-            <ccr-table-sort-header property="weight.change.percentage"></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="weight.change.percentage">
+              <span>{{ 'STATS.WEIGHT_CHANGE_PERCENT' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-startdate">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'BOARD.START_DATE' | translate }}</span>
-            <ccr-popup-description
-            [title]="'BOARD.START_DATE' | translate"
-            [description]="'BOARD.START_DATE_DESCRIPTION' | translate"
-            ></ccr-popup-description>
-            <ccr-table-sort-header property="startedAt"></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="startedAt">
+              <span>{{ 'BOARD.START_DATE' | translate }}</span>
+              &nbsp;
+              <ccr-popup-description
+              [title]="'BOARD.START_DATE' | translate"
+              [description]="'BOARD.START_DATE_DESCRIPTION' | translate"
+              ></ccr-popup-description>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-startweightdate">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'BOARD.START_WEIGHT_DATE' | translate }}</span>
-            <ccr-table-sort-header property="weight.first.recordedAt"></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="weight.first.recordedAt">
+              <span>{{ 'BOARD.START_WEIGHT_DATE' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-currentweightdate">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{ 'BOARD.CURRENT_WEIGHT_DATE' | translate }}</span>
-            <ccr-table-sort-header property="weight.last.recordedAt"></ccr-table-sort-header>
+          <div>
+            <ccr-table-sort-header property="weight.last.recordedAt">
+              <span>{{ 'BOARD.CURRENT_WEIGHT_DATE' | translate }}</span>
+            </ccr-table-sort-header>
           </div>
         </td>
         <td class="column-actions">{{ 'BOARD.ACTIONS' | translate }}</td>
