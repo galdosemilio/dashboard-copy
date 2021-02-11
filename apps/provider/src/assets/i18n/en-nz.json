@@ -463,6 +463,7 @@
     "NO_TRACKING": "No Tracking",
     "OK": "OK",
     "PACKAGES": "Phases",
+    "PAGE_SIZE": "Page size",
     "PAGINATION": "Pagination",
     "PAIN": "Pain",
     "PAIN_DESCRIPTION": "{{intensityText}} {{typeText}} pain",

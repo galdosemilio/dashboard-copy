@@ -463,6 +463,7 @@
     "NO_TRACKING": "Ingen Sporing",
     "OK": "OK",
     "PACKAGES": "Faser",
+    "PAGE_SIZE": "Side størrelse",
     "PAGINATION": "Pagination",
     "PAIN": "Smerte",
     "PAIN_DESCRIPTION": "{{intensityText}} {{typeText}} smerte",

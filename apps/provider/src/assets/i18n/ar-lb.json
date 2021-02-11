@@ -463,6 +463,7 @@
     "NO_TRACKING": "لا تتبع",
     "OK": "موافق",
     "PACKAGES": "المراحل",
+    "PAGE_SIZE": "مقاس الصفحه",
     "PAGINATION": "ترقيم الصفحات",
     "PAIN": "الألم",
     "PAIN_DESCRIPTION": "{{intensityText}} {{typeText}} الألم",

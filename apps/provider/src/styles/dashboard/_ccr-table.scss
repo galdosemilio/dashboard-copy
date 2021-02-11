@@ -1,0 +1,84 @@
+@import 'variables';
+
+.ccr-expandable-table {
+  max-height: 100%;
+  max-width: 100%;
+  overflow-y: hidden;
+  overflow-x: visible;
+
+  &-container {
+    max-height: 60vh;
+    overflow: auto;
+  }
+
+  table {
+    margin-right: 120px;
+    position: relative;
+    overflow: visible;
+  }
+
+  table,
+  th,
+  td {
+    border-collapse: collapse;
+  }
+
+  thead {
+    background-color: mat-color($ccr-background, header);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  thead,
+  tbody {
+    & > tr > td {
+      font-size: 14px;
+    }
+  }
+
+  tbody {
+    & > tr > td {
+      line-height: 36px;
+      padding: 0 1em;
+    }
+  }
+
+  thead {
+    & > tr > td {
+      padding: 2px 1em;
+    }
+  }
+
+  .row-expanded.level0 {
+    border-left: 1px solid var(--primary);
+    border-top: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+  }
+
+  .row-expanded.level1,
+  .row-expanded.level2 {
+    border-left: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+
+    & > td {
+      padding: 0 1em 0 3em;
+    }
+  }
+
+  .row-expanded.level2.last-of-group {
+    border-left: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+  }
+
+  .row-nested {
+    &.level1,
+    &.level1 td {
+      background-color: var(--contrast-darken) !important;
+    }
+    &.level2,
+    &.level2 td {
+      background-color: var(--contrast) !important;
+    }
+  }
+}

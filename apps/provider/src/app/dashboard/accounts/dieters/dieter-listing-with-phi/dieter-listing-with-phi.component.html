@@ -24,6 +24,8 @@
       <mat-icon>file_download</mat-icon>
     </button>
 
+    <ccr-page-size-selector [disabled]="!source.isLoaded"></ccr-page-size-selector>
+
     <ccr-paginator fxFlex="nogrow" #paginator
       [length]="source.total"
       [pageIndex]="source.pageIndex"

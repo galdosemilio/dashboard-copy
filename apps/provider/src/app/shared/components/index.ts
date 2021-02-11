@@ -40,6 +40,7 @@ import { PackageEnrollComponent } from './package-enroll'
 import { PackageFilterComponent } from './package-filter'
 import { PackageSelectorComponent } from './package-selector/package-selector.component'
 import { PackageTableComponent } from './package-table/package-table.component'
+import { CcrPageSizeSelectorComponent } from './page-size-selector'
 import { CcrPaginator } from './paginator/paginator.component'
 import { PhoneInputComponent } from './phone-input'
 import { ProgressCircle } from './progress-circle/progress-circle.component'
@@ -55,6 +56,7 @@ import { UserCardComponent } from './user-card'
 import { UserSearchComponent } from './user-search'
 import { WalkthroughComponent } from './walkthrough'
 import { CcrImageOptionSelectorComponent } from './image-option-selector'
+import { CcrTableSortHeaderComponent } from './table-sort-header'
 
 export {
   AlertIconComponent,
@@ -75,6 +77,7 @@ export {
   CcrMessagesComponent,
   CcrPaginator,
   CcrSelectUserComponent,
+  CcrTableSortHeaderComponent,
   CcrTimeframeSelectorComponent,
   CcrCallControlComponent,
   CountrySelectorComponent,
@@ -121,8 +124,10 @@ export const CmpComponents = [
   CcrImageOptionSelectorComponent,
   CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
+  CcrPageSizeSelectorComponent,
   CcrPaginator,
   CcrSelectUserComponent,
+  CcrTableSortHeaderComponent,
   CcrTimeframeSelectorComponent,
   CountrySelectorComponent,
   FormSearchComponent,

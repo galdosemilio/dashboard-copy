@@ -1,4 +1,6 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxShow.xs fxHide>{{ row.firstName }}</div>
+<div fxLayout="row" fxLayoutAlign="start center" fxShow.xs fxHide>
+  <span>{{ row.firstName }}</span>
+</div>
 <div
 [ngClass]="{ 'clickable': row.level === 0, 'non-clickable': row.level > 0, 'non-empty': !row.isEmpty && row.level < 2 }"
 class="expandable"

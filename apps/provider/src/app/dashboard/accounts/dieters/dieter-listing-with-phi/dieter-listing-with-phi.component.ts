@@ -29,6 +29,7 @@ import { delay } from 'rxjs/operators'
 import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { DieterListingItem } from './../models'
+import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
 
 @UntilDestroy()
 @Component({
@@ -41,6 +42,9 @@ export class DieterListingWithPhiComponent
   implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild(PackageFilterComponent, { static: true })
   packageFilterComp: PackageFilterComponent
+
+  @ViewChild(CcrPageSizeSelectorComponent, { static: true })
+  pageSizeSelectorComp: CcrPageSizeSelectorComponent
 
   @ViewChild(CcrPaginator, { static: true })
   paginator: CcrPaginator
@@ -111,6 +115,19 @@ export class DieterListingWithPhiComponent
       this.source.resetPaginator()
     })
 
+    this.pageSizeSelectorComp.onPageSizeChange
+      .pipe(untilDestroyed(this))
+      .subscribe((pageSize) => {
+        this.paginator.pageSize = pageSize ?? this.paginator.pageSize
+
+        if (this.paginator.pageIndex === 0) {
+          this.refresh$.next()
+          return
+        }
+
+        this.paginator.firstPage()
+      })
+
     this.paginator.page.pipe(untilDestroyed(this)).subscribe((page) => {
       window.localStorage.setItem(
         STORAGE_PATIENTS_PAGINATION,
@@ -128,7 +145,7 @@ export class DieterListingWithPhiComponent
   }
 
   onSorted(): void {
-    this.packageFilterComp.resetFilters()
+    this.packageFilterComp.resetFilters(false)
   }
 
   createDialog(): void {

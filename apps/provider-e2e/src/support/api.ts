@@ -482,7 +482,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     'GET',
     '/1.0/warehouse/patient-listing**',
     'fixture:/api/warehouse/getPatientListing'
-  )
+  ).as('patientListingGetRequest')
   cy.route(
     'GET',
     '/2.0/warehouse/organization/activity**',

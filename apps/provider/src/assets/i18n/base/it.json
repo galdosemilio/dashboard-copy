@@ -463,6 +463,7 @@
     "NO_TRACKING": "No tracciabilità",
     "OK": "OK",
     "PACKAGES": "",
+    "PAGE_SIZE": "Dimensioni della pagina",
     "PAGINATION": "paginatura",
     "PAIN": "Dolore",
     "PAIN_DESCRIPTION": "{{intensityText}} {{typeText}} dolore",

@@ -1,0 +1,5 @@
+<div (click)="onToggleHeader()" class="clickable">
+  <mat-icon [ngClass]="{ 'asc': direction === 'asc', 'desc': direction === 'desc', none: direction === null }">
+    arrow_right_alt
+  </mat-icon>
+</div>

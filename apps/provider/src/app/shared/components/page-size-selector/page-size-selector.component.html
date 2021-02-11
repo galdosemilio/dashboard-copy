@@ -1,0 +1,6 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <label>{{ 'GLOBAL.PAGE_SIZE' | translate }}</label>
+  <select #pageSizeSelect [disabled]="disabled" (change)="onSelect($event)">
+    <option *ngFor="let pageSize of pageSizes" [value]="pageSize">{{ pageSize }}</option>
+  </select>
+</div>

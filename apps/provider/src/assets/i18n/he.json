@@ -463,6 +463,7 @@
     "NO_TRACKING": "אין מעקב",
     "OK": "אישור",
     "PACKAGES": "שלבים",
+    "PAGE_SIZE": "גודל עמוד",
     "PAGINATION": "עימוד",
     "PAIN": "כאב",
     "PAIN_DESCRIPTION": "{{intensityText}}{{typeText}} כאב",

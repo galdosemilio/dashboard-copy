@@ -155,7 +155,7 @@ describe('Validate permissions on patient listing page', function () {
 
     cy.get('app-dieters-expandable-table')
       .find('tbody')
-      .find('mat-row:visible')
+      .find('tr:visible')
       .should('have.length', 10)
   })
   it('"View All" and "Client PHI" permission for associated organization: can not access nophi page', function () {
@@ -196,7 +196,7 @@ describe('Validate permissions on patient listing page', function () {
 
     cy.get('app-dieters-expandable-table')
       .find('tbody')
-      .find('mat-row:visible')
+      .find('tr:visible')
       .should('have.length', 10)
   })
   it('Full permissions for associated organization: can not access nophi page', function () {

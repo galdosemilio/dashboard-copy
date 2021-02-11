@@ -9,12 +9,13 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core'
-import { MatDialog, MatSort } from '@coachcare/material'
+import { MatDialog } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
 import {
   AccountRedirectDialog,
+  CcrTableSortDirective,
   PromptDialog,
   PromptDialogData
 } from '@app/shared'
@@ -45,25 +46,12 @@ import { DieterListingDatabase, DieterListingDataSource } from '../services'
 export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   @Input() source: DieterListingDataSource
 
-  @ViewChild(MatSort, { static: true })
-  sort: MatSort
-
-  columns: string[] = [
-    'firstName',
-    'lastName',
-    'startWeight',
-    'endWeight',
-    'weightChange',
-    'weightChangePercent',
-    'startDate',
-    'startWeightDate',
-    'endWeightDate',
-    'actions'
-  ]
-  rows: any
-
   @Output() sorted: EventEmitter<void> = new EventEmitter<void>()
 
+  @ViewChild(CcrTableSortDirective, { static: true })
+  sort: CcrTableSortDirective
+
+  rows: any
   hasAdmin = false
 
   constructor(

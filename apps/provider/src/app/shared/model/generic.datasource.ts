@@ -26,6 +26,7 @@ import {
 import { NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
 import { CcrDatabase } from './generic.database'
+import { CcrTableSortDirective } from '../directives'
 
 export interface DataCriteria {
   doReload?: boolean
@@ -205,7 +206,7 @@ export abstract class CcrDataSource<
     this.unregister('paginator')
   }
 
-  setSorter(sorter: MatSort, getter: () => Partial<C>) {
+  setSorter(sorter: MatSort | CcrTableSortDirective, getter: () => Partial<C>) {
     // listen the paginator events
     if (sorter) {
       this.register('sorter', false, sorter.sortChange.asObservable(), getter)

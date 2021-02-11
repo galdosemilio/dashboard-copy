@@ -78,7 +78,7 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
     })
   }
 
-  onDeselectAll(): void {
+  onDeselectAll(refresh = true): void {
     Object.keys((this.form.controls.packages as FormArray).controls).forEach(
       (key) => {
         ;(this.form.controls.packages as FormArray).controls[key].setValue(
@@ -89,6 +89,11 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
         )
       }
     )
+
+    if (!refresh) {
+      return
+    }
+
     this.onCloseMenu()
   }
 
@@ -105,8 +110,8 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
     )
   }
 
-  resetFilters(): void {
-    this.onDeselectAll()
+  resetFilters(refresh = true): void {
+    this.onDeselectAll(refresh)
   }
 
   private async fetchPackages() {

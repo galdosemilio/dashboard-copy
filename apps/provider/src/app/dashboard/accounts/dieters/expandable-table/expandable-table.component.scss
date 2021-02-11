@@ -2,64 +2,104 @@
 
 app-dieters-expandable-table {
   button.mat-icon-button.mat-button-base {
+    height: 36px;
+    line-height: 36px;
     width: 30px;
   }
 
-  div.non-clickable {
-    cursor: default !important;
+  ccr-popup-description {
+    margin-top: 4px;
   }
 
-  mat-cell,
-  mat-header-cell {
-    &.cdk-column-firstName,
-    &.cdk-column-lastName {
-      min-width: 200px !important;
+  table {
+    .column {
+      &-actions {
+        border-top: unset;
+        height: 36px;
+        max-width: 100px;
+        min-width: 100px;
+        position: sticky;
+        right: 0;
+        text-align: center;
+        top: 0;
+        width: 99px;
+
+        mat-icon {
+          color: mat-color($ccr-foreground, icon);
+        }
+      }
+
+      &-firstname,
+      &-lastname,
+      &-startdate {
+        max-width: 200px;
+        min-width: 200px;
+        width: 200px;
+
+        @media (max-width: $breakpoint-tablet) {
+          max-width: 150px;
+          min-width: 150px;
+          width: 150px;
+
+          span {
+            width: 150px;
+          }
+        }
+      }
+
+      &-currentweightdate,
+      &-startweightdate {
+        max-width: 120px;
+        min-width: 120px;
+        width: 120px;
+      }
+
+      &-startweight {
+        max-width: 120px;
+        min-width: 120px;
+        width: 120px;
+      }
+
+      &-currentweight,
+      &-weightchange,
+      &-weightchangepercent {
+        max-width: 110px;
+        min-width: 110px;
+        width: 110px;
+      }
     }
+  }
 
-    &.cdk-column-startDate,
-    &.cdk-column-startWeightDate,
-    &.cdk-column-endWeightDate {
-      min-width: 175px !important;
+  tbody {
+    .column {
+      &-firstname,
+      &-lastname {
+        span {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      &-firstname {
+        .material-icons {
+          transition: all 0.1s ease-in-out;
+
+          &:before {
+            content: 'keyboard_arrow_down';
+          }
+
+          &.active {
+            transform: rotate(180deg);
+          }
+        }
+      }
     }
-
-    &.cdk-column-weightChangePercent {
-      min-width: 100px !important;
-    }
   }
 
-  mat-header-cell.mat-header-cell {
-    width: 95px;
-  }
-
-  mat-cell.mat-cell {
-    justify-content: flex-start !important;
-    margin-left: 5px;
-    text-align: left;
-    width: 95px;
-  }
-
-  .ccr-table .mat-table mat-header-cell.cdk-column-actions,
-  .ccr-table .mat-table mat-cell.cdk-column-actions {
-    justify-content: center !important;
-  }
-
-  .ccr-expand-table {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  .ccr-table-stats mat-header-cell.header-align-left {
-    margin-left: 5px;
-    justify-content: flex-start !important;
-  }
-
-  .clickable {
-    margin: 0 0 0 7px;
-
-    & > div {
-      text-align: left !important;
-      width: 100%;
+  thead {
+    td.column-actions {
+      background-color: mat-color($ccr-background, header);
     }
   }
 
@@ -71,34 +111,19 @@ app-dieters-expandable-table {
     }
   }
 
-  .mat-header-row mat-header-cell.cdk-column-actions {
-    background: mat-color($ccr-background, header);
-  }
-
-  .row-even mat-cell.cdk-column-actions {
+  .row-even .column-actions {
     background: mat-color($ccr-background, even);
   }
 
-  .row-expanded.level0 {
-    border-left: 1px solid var(--primary);
-    border-top: 1px solid var(--primary);
-    border-right: 1px solid var(--primary);
-  }
-
-  .row-expanded.level1,
-  .row-expanded.level2 {
-    border-left: 1px solid var(--primary);
-    border-right: 1px solid var(--primary);
-  }
-
-  .row-expanded.level2.last-of-group {
-    border-left: 1px solid var(--primary);
-    border-right: 1px solid var(--primary);
-    border-bottom: 1px solid var(--primary);
-  }
-
-  .row-odd mat-cell.cdk-column-actions {
+  .row-odd .column-actions {
     background: mat-color($ccr-background, odd);
+  }
+
+  .row-expanded,
+  .row-nested.level1 {
+    .column-firstname {
+      font-weight: bold;
+    }
   }
 
   .subitem-name {
