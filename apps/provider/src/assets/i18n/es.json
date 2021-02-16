@@ -1174,10 +1174,12 @@
       "NEVER_ACTIVE": "Nunca activo"
     },
     "TIME_TRACKING_COMPLETE": "Monitoreo de Tiempo Completado",
+    "TIME_TRACKING_PAUSED": "Monitoreo de Tiempo Pausado",
     "TRIGGER": {
       "MANUAL": "(Manual)",
       "UNKNOWN": "(Desconocido)"
     },
+    "USER_IDLE_DESCRIPTION": "El monitoreo de tiempo automático para este paciente se ha pausado debido a que se ha estado inactivo por 15 minutos. Para continuar monitoreando el tiempo, por favor interactúe con esta página web moviendo su mouse.",
     "WHAT_DEVICE_PROMPT": "¿Qué dispositivo médico ha recibido el paciente de mi práctica que sea capaz de transmitir datos del paciente y/o alertas diariamente?"
   },
   "SECTION": {

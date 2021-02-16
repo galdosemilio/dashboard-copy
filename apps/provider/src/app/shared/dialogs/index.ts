@@ -4,6 +4,7 @@ export * from './add-recipient'
 export * from './call-rating'
 export * from './coach-select'
 export * from './confirm.dialog'
+export * from './gesture-closing'
 export * from './grid.dialog'
 export * from './languages.dialog'
 export * from './message-add-member'
@@ -22,6 +23,7 @@ import { AddRecipientDialog } from './add-recipient'
 import { CallRatingDialog } from './call-rating/call-rating.dialog'
 import { CoachSelectDialog } from './coach-select'
 import { ConfirmDialog } from './confirm.dialog'
+import { GestureClosingDialog } from './gesture-closing'
 import { GridDialog } from './grid.dialog'
 import { LanguagesDialog } from './languages.dialog'
 import { MessageAddMemberDialog } from './message-add-member'
@@ -41,6 +43,7 @@ export const Dialogs = [
   CallRatingDialog,
   CoachSelectDialog,
   ConfirmDialog,
+  GestureClosingDialog,
   GridDialog,
   LanguagesDialog,
   MessageAddMemberDialog,

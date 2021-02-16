@@ -1174,10 +1174,12 @@
       "NEVER_ACTIVE": "Aldrig aktiv"
     },
     "TIME_TRACKING_COMPLETE": "Tidsovervågning afsluttet",
+    "TIME_TRACKING_PAUSED": "Tidsregistrering Pause",
     "TRIGGER": {
       "MANUAL": "(Manual)",
       "UNKNOWN": "(Ukendt)"
     },
+    "USER_IDLE_DESCRIPTION": "Automatisk tidsregistrering er blevet sat på pause for denne patientgruppe på grund af en 15 minutters periode med inaktivitet. For at fortsætte den automatiske tidsregistrering, behage interagere med denne webside ved at bevæge musen.",
     "WHAT_DEVICE_PROMPT": "Hvad medicinsk udstyr har patienten modtaget fra min praksis, der er i stand til at overføre patientdata og / eller alarmer på daglig basis?"
   },
   "SECTION": {

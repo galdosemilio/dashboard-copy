@@ -1,0 +1,11 @@
+<div *ngIf="data.title" matDialogTitle>
+  <div [innerHTML]="data.title | translate: data.titleParams"></div>
+</div>
+
+<mat-dialog-content>
+  <p [innerHTML]="data.content | translate: data.contentParams"></p>
+</mat-dialog-content>
+
+<mat-dialog-actions *ngIf="data.accept">
+  <button matDialogClose mat-button class="ccr-button" color="primary" [innerHTML]="data.accept | translate: data.acceptParams"></button>
+</mat-dialog-actions>

@@ -1174,10 +1174,12 @@
       "NEVER_ACTIVE": "jamais actif"
     },
     "TIME_TRACKING_COMPLETE": "Suivi du temps terminé",
+    "TIME_TRACKING_PAUSED": "Suivi du temps Paused",
     "TRIGGER": {
       "MANUAL": "(manuel)",
       "UNKNOWN": "(inconnu)"
     },
+    "USER_IDLE_DESCRIPTION": "Le suivi du temps automatique a été mis en pause pour ce patient en raison d'une période de 15 minutes d'inactivité. Pour continuer le suivi automatique de l'heure, veuillez interagir avec cette page en déplaçant votre souris.",
     "WHAT_DEVICE_PROMPT": "Quel dispositif médical a le patient a reçu de ma pratique qui est capable de transmettre des données du patient et / ou des alertes sur une base quotidienne?"
   },
   "SECTION": {

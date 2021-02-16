@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { ReportsDatabase } from '@app/dashboard/reports/services/reports.database'
 import {
   ContextService,
+  GestureService,
   NotifierService,
   TimeTrackerService
 } from '@app/service'
@@ -14,6 +15,10 @@ import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { RPM } from '@coachcare/npm-api'
 import { TRACKABLE_RPM_CODES, TrackableRPMCodeEntry } from './model'
+import { filter } from 'rxjs/operators'
+import { MatDialog } from '@angular/material/dialog'
+import { GestureClosingDialog } from '@app/shared/dialogs'
+import { _ } from '@app/shared/utils'
 
 interface CodeAndTracking {
   trackableCode: TrackableRPMCodeEntry
@@ -84,6 +89,8 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private database: ReportsDatabase,
+    private dialog: MatDialog,
+    private gesture: GestureService,
     private notifier: NotifierService,
     private rpm: RPM,
     private timeTracker: TimeTrackerService
@@ -99,6 +106,13 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       this.account = account
       this.resolveAccountRPMStatus(account)
     })
+
+    this.gesture.userIdle$
+      .pipe(
+        untilDestroyed(this),
+        filter((idle) => idle)
+      )
+      .subscribe(() => this.showUserIdleDialog())
   }
 
   public onForceClosePanel(): void {
@@ -304,6 +318,28 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         this.iterationAmount = 0
         this.seconds = 0
         break
+    }
+  }
+
+  private async showUserIdleDialog(): Promise<void> {
+    try {
+      this.pauseTimer()
+      await this.timeTracker.forceCommit(false)
+
+      this.dialog
+        .open(GestureClosingDialog, {
+          data: {
+            title: _('RPM.TIME_TRACKING_PAUSED'),
+            content: _('RPM.USER_IDLE_DESCRIPTION')
+          }
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.resolveAccountRPMStatus(this.account)
+          this.timeTracker.resetTrackingTimeStart()
+        })
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 

@@ -193,7 +193,7 @@ workflows:
       - execute_affected:
           name: affected_test
           command: test
-          exclude: api,datepicker,layout,common,backend,provider,admin
+          exclude: api,datepicker,layout,common,backend
           requires:
             - affected_build
       - approve_affected_e2e:

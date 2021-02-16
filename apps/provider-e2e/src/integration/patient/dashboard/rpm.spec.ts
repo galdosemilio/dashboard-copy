@@ -238,6 +238,30 @@ describe('Patient profile -> dashboard -> rpm', function () {
     cy.wait(2000)
   })
 
+  it('Shows that the time monitoring is completed when all time has passed', function () {
+    standardSetup(undefined, [
+      {
+        url: '/1.0/rpm/state**',
+        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+      },
+      {
+        url: '/3.0/warehouse/rpm/state/billing-summary?**',
+        fixture: 'fixture:/api/warehouse/getRPMBillingComplete'
+      }
+    ])
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+    cy.get('.ccr-dashboard', { timeout: 12000 })
+
+    cy.wait(4000)
+
+    cy.tick(10000)
+
+    cy.get('app-rpm-tracker').should('not.contain', 'No Tracking')
+    cy.get('app-rpm-tracker').should('contain', 'Time Monitoring Complete')
+  })
+
   it('Properly shows the RPM status on the panel', function () {
     standardSetup(undefined, [
       {
@@ -262,5 +286,33 @@ describe('Patient profile -> dashboard -> rpm', function () {
     cy.get('app-rpm-status-panel').should('contain', '189d')
     cy.get('app-rpm-status-panel').should('contain', '20m')
     cy.get('app-rpm-status-panel').should('contain', '1')
+  })
+
+  it('Shows the inactivity dialog after 15 minutes of inactivity pass, attempts to save the time and is hidden when there is a gesture', function () {
+    standardSetup(undefined, [
+      {
+        url: '/1.0/rpm/state**',
+        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+      }
+    ])
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+    cy.get('.ccr-dashboard', { timeout: 12000 })
+
+    cy.tick(10000)
+
+    cy.wait(3000)
+
+    cy.tick(900000)
+
+    cy.wait('@accountActivityPostRequest')
+
+    cy.get('mat-dialog-container').should('contain', 'Time Tracking')
+
+    cy.get('.ccr-dashboard').click({ force: true })
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container').should('not.exist')
   })
 })

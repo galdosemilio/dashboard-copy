@@ -1174,10 +1174,12 @@
       "NEVER_ACTIVE": "Never active"
     },
     "TIME_TRACKING_COMPLETE": "Time Monitoring Complete",
+    "TIME_TRACKING_PAUSED": "Time Tracking Paused",
     "TRIGGER": {
       "MANUAL": "(Manual)",
       "UNKNOWN": "(Unknown)"
     },
+    "USER_IDLE_DESCRIPTION": "Automatic time tracking has been paused for this patient due to a 15 minute period of inactivity. To continue automatic time tracking, please interact with this webpage by moving your mouse.",
     "WHAT_DEVICE_PROMPT": "What medical device has the patient received from my practice that is capable of transmitting patient data and/or alerts on a daily basis?"
   },
   "SECTION": {

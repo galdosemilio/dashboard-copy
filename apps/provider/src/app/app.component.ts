@@ -12,7 +12,7 @@ import {
   STORAGE_PATIENTS_PAGINATION
 } from '@app/config'
 import { CloseMenuFor, ResizeLayout, UIState } from '@app/layout/store'
-import { ConfigService, TimeTrackerService } from '@app/service'
+import { ConfigService, GestureService, TimeTrackerService } from '@app/service'
 import { MatDatepickerIntl } from '@coachcare/datepicker'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
@@ -42,6 +42,7 @@ export class AppComponent implements OnDestroy, OnInit {
   constructor(
     private callLayout: CallLayoutService,
     private intl: MatDatepickerIntl,
+    private gesture: GestureService,
     private timeTracker: TimeTrackerService,
     private translate: TranslateService,
     private store: Store<UIState>,
@@ -55,6 +56,7 @@ export class AppComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs
+    this.gesture.init()
     this.onLangChange()
     this.translate.onLangChange
       .pipe(untilDestroyed(this))

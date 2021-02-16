@@ -1174,10 +1174,12 @@
       "NEVER_ACTIVE": "Nunca ativo"
     },
     "TIME_TRACKING_COMPLETE": "Monitoramento de tempo completo",
+    "TIME_TRACKING_PAUSED": "Time Tracking em Pausa",
     "TRIGGER": {
       "MANUAL": "(Manual)",
       "UNKNOWN": "(Desconhecido)"
     },
+    "USER_IDLE_DESCRIPTION": "Controle de tempo automático foi pausado para este paciente, devido a um período de inactividade de 15 minutos. Para continuar controle de tempo automático, agradar a interagir com este webpage, movendo o mouse.",
     "WHAT_DEVICE_PROMPT": "O dispositivo médico tem o paciente recebeu de minha prática que é capaz de transmitir dados e / ou alertas de pacientes em uma base diária?"
   },
   "SECTION": {

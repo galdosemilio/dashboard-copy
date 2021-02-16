@@ -1174,10 +1174,12 @@
       "NEVER_ACTIVE": "Nie aktiv"
     },
     "TIME_TRACKING_COMPLETE": "Zeitüberwachung abgeschlossen",
+    "TIME_TRACKING_PAUSED": "Time Tracking Paused",
     "TRIGGER": {
       "MANUAL": "(Handbuch)",
       "UNKNOWN": "(Unbekannt)"
     },
+    "USER_IDLE_DESCRIPTION": "Automatische Zeiterfassung wurde aufgrund eines Zeitraum von 15 Minuten der Inaktivität für diese Patienten angehalten. Um die automatische Zeiterfassung weiter, bitte mit dieser Webseite interagieren, indem Sie mit der Maus zu bewegen.",
     "WHAT_DEVICE_PROMPT": "Was Medizinprodukt hat der Patient aus meiner Praxis erhalten die Patienten zum Übertragen von Daten fähig ist und / oder Warnungen auf einer täglichen Basis?"
   },
   "SECTION": {

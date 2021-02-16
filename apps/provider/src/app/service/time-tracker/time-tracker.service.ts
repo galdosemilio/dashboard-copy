@@ -54,7 +54,9 @@ export class TimeTrackerService implements OnDestroy {
 
   public ngOnDestroy(): void {}
 
-  public async forceCommit(): Promise<void> {
+  public async forceCommit(
+    resetTrackingTimeStart: boolean = true
+  ): Promise<void> {
     try {
       if (!this.currentRoute || !this.trackingTimeStart) {
         return
@@ -63,7 +65,12 @@ export class TimeTrackerService implements OnDestroy {
 
       await this.commitTime(this.currentRoute)
 
-      this.trackingTimeStart = new Date()
+      if (resetTrackingTimeStart) {
+        this.resetTrackingTimeStart()
+      } else {
+        this.trackingTimeStart = undefined
+      }
+
       this.currentRoute = currentRouteCache
     } catch (error) {
       this.notifier.error(error)
@@ -72,6 +79,10 @@ export class TimeTrackerService implements OnDestroy {
 
   public getCurrentRounte(): TimeTrackerRoute {
     return this.currentRoute
+  }
+
+  public resetTrackingTimeStart(): void {
+    this.trackingTimeStart = new Date()
   }
 
   public stashTime(): void {
@@ -135,6 +146,8 @@ export class TimeTrackerService implements OnDestroy {
       }
 
       await this.account.addActivityEvent(stash)
+
+      window.localStorage.removeItem(STORAGE_TIME_TRACKER_STASH)
     } catch (error) {
       this.notifier.error(error)
     }

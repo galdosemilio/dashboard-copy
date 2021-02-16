@@ -44,6 +44,7 @@ import { auditTime, map, tap } from 'rxjs/operators'
 import * as CallActions from '../../store/call'
 import { TwilioBandwidthService } from '../services/twilio-bandwidth.service'
 import { TwilioService } from '../services/twilio.service'
+import { GestureService } from '@app/service'
 
 interface StickyArea {
   x: number
@@ -107,6 +108,7 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
+    private gesture: GestureService,
     private store: Store<UIState>,
     private translator: TranslateService,
     private notifier: NotifierService,
@@ -182,10 +184,12 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.store.dispatch(new CheckDevices())
+    this.gesture.pause()
   }
 
   ngOnDestroy() {
     this.stopRingingInterval()
+    this.gesture.resume()
     this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 
