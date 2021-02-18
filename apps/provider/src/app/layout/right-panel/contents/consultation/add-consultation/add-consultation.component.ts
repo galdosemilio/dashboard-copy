@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core'
 import {
   AbstractControl,
   FormBuilder,
@@ -8,14 +14,18 @@ import {
 } from '@angular/forms'
 import { MatAutocompleteTrigger, MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
-import { find } from 'lodash'
 import * as moment from 'moment-timezone'
 import { Subscription } from 'rxjs'
 import { AccountProvider } from '@coachcare/npm-api'
 
 import { Meeting } from '@app/dashboard/schedule/models'
 import { ScheduleDataService } from '@app/layout/right-panel/services'
-import { ContextService, EventsService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  EventsService,
+  NotifierService,
+  SelectedOrganization
+} from '@app/service'
 import { _, FormUtils, PromptDialog, TranslationsObject } from '@app/shared'
 import {
   AccountAccessData,
@@ -36,11 +46,13 @@ export type AddConsultationAttendee = MeetingAttendee & {
 @Component({
   selector: 'app-add-consultation',
   templateUrl: './add-consultation.component.html',
-  styleUrls: ['./add-consultation.component.scss']
+  styleUrls: ['./add-consultation.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddConsultationComponent implements OnDestroy, OnInit {
   form: FormGroup
   formSubmitted = false
+  initialOrg: SelectedOrganization
   translations: TranslationsObject
   editing = 0
   clinicChangeSubscription: Subscription
@@ -88,10 +100,10 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.initForm()
     this.initTranslations()
-    this.getClinics()
     this.setupAutocomplete()
 
     this.user = this.context.user
+    this.initialOrg = this.context.organization
     this.context.selected$.subscribe((user) => {
       if (user) {
         this.resetParticipants()
@@ -297,22 +309,6 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
       } else {
         return { validateAddress: _('NOTIFY.ERROR.INCOMPLETE_ADDRESS') }
       }
-    }
-  }
-
-  getClinics(): void {
-    this.clinics = this.context.organizations
-      .filter((c) => c.id)
-      .map((c) => ({
-        value: c,
-        viewValue: c.name
-      }))
-    if (this.clinics.length) {
-      const clinic = this.context.organizationId
-        ? find(this.clinics, ['value', { id: this.context.organizationId }])
-        : this.clinics[0]
-
-      this.form.get('clinic').setValue(clinic.value)
     }
   }
 
@@ -573,5 +569,9 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
       // deactivate edit mode
       this.resetForm()
     })
+  }
+
+  public onClinicSelect(clinic): void {
+    this.form.get('clinic').setValue(clinic)
   }
 }

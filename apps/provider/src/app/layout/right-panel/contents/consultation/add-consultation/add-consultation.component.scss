@@ -1,0 +1,18 @@
+app-add-consultation {
+  .org-search-container {
+    overflow-x: hidden;
+
+    ccr-organization-search {
+      width: 100%;
+
+      mat-select {
+        margin-bottom: 15px !important;
+
+        div.mat-select-value {
+          display: block;
+          width: 185px;
+        }
+      }
+    }
+  }
+}

@@ -55,6 +55,8 @@ export class OrganizationSearchComponent implements OnInit {
   @Input() showEmptyOption = true
 
   @Output()
+  onSelect: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()
+  @Output()
   select: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
@@ -88,6 +90,7 @@ export class OrganizationSearchComponent implements OnInit {
 
       this.orgSelected = true
       this.select.next(this.initialOrg)
+      this.onSelect.next(this.initialOrg)
     }
   }
 
@@ -98,6 +101,7 @@ export class OrganizationSearchComponent implements OnInit {
     )
     this.orgSelected = true
     this.select.next(selectedAssoc ? selectedAssoc.organization : undefined)
+    this.onSelect.next(selectedAssoc ? selectedAssoc.organization : undefined)
 
     if (this.allowSearchbarReset) {
       this.searchCtrl.disable()
@@ -110,6 +114,7 @@ export class OrganizationSearchComponent implements OnInit {
     )
     this.orgSelected = true
     this.select.next(association ? association.organization : undefined)
+    this.onSelect.next(association ? association.organization : undefined)
 
     if (this.allowSearchbarReset) {
       this.searchCtrl.disable()
@@ -121,6 +126,7 @@ export class OrganizationSearchComponent implements OnInit {
     this.searchCtrl.enable()
     this.searchCtrl.reset()
     this.select.next()
+    this.onSelect.next()
   }
 
   searchBarDisplayWith(value: any): string {

@@ -1,3 +1,4 @@
+import { AssociationsDatabase } from '@app/dashboard'
 import { RightPanelEntryComponents } from './contents/index'
 import { RightPanelDialogs } from './dialogs/index'
 import { RightPanelComponent } from './right-panel.component'
@@ -21,4 +22,4 @@ export const EntryComponents = [
   ...RightPanelDialogs
 ]
 
-export const Providers = [...RightPanelServices]
+export const Providers = [...RightPanelServices, AssociationsDatabase]

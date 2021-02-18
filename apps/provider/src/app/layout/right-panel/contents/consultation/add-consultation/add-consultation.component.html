@@ -5,11 +5,15 @@
       <mat-error *ngIf="form.get('title').getError('required')">{{'NOTIFY.ERROR.TITLE_EMPTY' | translate}}</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-select #clinic formControlName="clinic" [placeholder]="'BOARD.CLINIC' | translate">
-        <mat-option *ngFor="let clinic of clinics" [value]="clinic.value">{{ clinic.viewValue }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="org-search-container" fxLayout="row" fxLayoutAlign="start center">
+      <ccr-organization-search
+        [initialOrg]="initialOrg"
+        [label]="'BOARD.CLINIC' | translate"
+        [showEmptyOption]="false"
+        (onSelect)="onClinicSelect($event)">
+      </ccr-organization-search>
+    </div>
+
     <ng-container *ngIf="formSubmitted">
       <mat-error *ngIf="form.get('clinic').getError('required')">{{'NOTIFY.ERROR.CLINIC_EMPTY' | translate}}</mat-error>
     </ng-container>
