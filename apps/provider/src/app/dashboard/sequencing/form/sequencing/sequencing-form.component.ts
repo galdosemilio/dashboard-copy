@@ -91,6 +91,12 @@ export class SequencingFormComponent
 
   activeStep: number
   availableStepDelays: StepDelay[][] = []
+  delayOutputFormatter: (value) => string = (value) =>
+    value ? (value > 1 ? value + ' days' : value + ' day') : ''
+  delayInputFormatter: (value) => number | string = (value) =>
+    value !== 'no delay'
+      ? Number(value.split(' ')[0])
+      : _('SEQUENCING.DELAYS.NO_DELAY')
   endingActions: EndingAction[] = []
   initialValue: any
   form: FormGroup
@@ -132,6 +138,14 @@ export class SequencingFormComponent
         this.form.controls[key].markAsTouched()
       })
     })
+  }
+
+  delaySuffixFormat(i: number): string {
+    return this.form.value.steps[i].step?.delay !== 'no delay'
+      ? this.form.value.steps[i].step?.delay !== '1 day'
+        ? _('UNIT.DAYS_DELAY')
+        : _('UNIT.DAY_DELAY')
+      : ''
   }
 
   forceDelayRecalculation(): void {

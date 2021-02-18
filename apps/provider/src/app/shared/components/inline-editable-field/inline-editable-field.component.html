@@ -21,6 +21,19 @@ fxLayoutGap="2%">
             type="text" />
         </mat-form-field>
 
+        <mat-form-field *ngSwitchCase="'number'">
+            <input
+            #numberField
+            [max]="max"
+            [min]="min"
+            [wholeNumber]="true"
+            (blur)="confirmValue()"
+            formControlName="value"
+            matInput
+            numberOnly
+            type="number" />
+        </mat-form-field>
+
 
         <mat-form-field *ngSwitchCase="'selector'">
             <mat-select formControlName="value" (selectionChange)="confirmValue()">
@@ -40,7 +53,7 @@ fxLayoutGap="2%">
     fxFlex="89%"
     fxLayout="row"
     fxLayoutAlign="space-between center">
-        <p fxFlex *ngIf="type !== 'selector'">{{ form.value ? form.value.value : '' }}</p>
+        <p fxFlex *ngIf="type !== 'selector'">{{ (form.value ? form.value.value : '') | translate }}<span *ngIf="displayValueSuffix"> {{ displayValueSuffix | translate }}</span></p>
         <p fxflex *ngIf="type === 'selector'">{{ (selectorDisplayValue || defaultDisplayValue) | translate }}</p>
         <mat-icon
         *ngIf="status === 'view' && !disabled"

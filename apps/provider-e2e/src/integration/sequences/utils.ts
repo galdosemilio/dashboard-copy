@@ -392,14 +392,16 @@ export function selectDelay(stepName: string, delayName: string) {
   cy.clock().tick(5000)
 
   cy.get(`@inlineEditableField`)
-    .find('.mat-select-trigger')
-    .trigger('click')
+    .find('input[type="number"]')
+    .type(delayName.split(' ')[0])
     .wait(500)
 
-  cy.get('mat-option')
-    .contains(`${delayName}`)
-    .trigger('click', { force: true })
-    .wait(500)
+  cy.get('@inlineEditableField')
+    .find('mat-icon')
+    .contains('check_circle')
+    .click({ force: true })
+
+  cy.tick(1000)
 }
 
 export function selectStep(stepName: string): void {

@@ -166,6 +166,12 @@
       "name": "25",
       "createdBy": { "id": "2852" },
       "createdAt": "2019-11-19T07:16:11.962Z"
+    },
+    {
+      "id": "1027",
+      "name": "26",
+      "createdBy": { "id": "2852" },
+      "createdAt": "2019-11-19T07:16:11.962Z"
     }
   ],
   "transitions": [
@@ -398,6 +404,23 @@
           "type": { "id": "2", "name": "Push notification" },
           "isActive": true,
           "payload": { "title": "N 251", "content": "N 251" },
+          "localizations": []
+        }
+      ]
+    },
+    {
+      "createdAt": "2019-11-19T15:03:07.545Z",
+      "createdBy": { "id": "2852" },
+      "delay": "100 days 03:00:00",
+      "from": { "id": "1026" },
+      "id": "1858",
+      "to": { "id": "1027" },
+      "triggers": [
+        {
+          "id": "3142",
+          "type": { "id": "2", "name": "Push notification" },
+          "isActive": true,
+          "payload": { "title": "N 261", "content": "N 261" },
           "localizations": []
         }
       ]

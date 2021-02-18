@@ -55,10 +55,14 @@
                     <ccr-inline-editable-field
                     [defaultDisplayValue]="'SEQUENCING.DELAYS.NO_DELAY'"
                     [disabled]="(blocked && form.value.steps[i].step?.syncState?.inServer) || hardBlocked"
-                    [selectorOptions]="availableStepDelays[i]"
+                    [displayValueSuffix]="delaySuffixFormat(i) | translate"
+                    [inputValueFormat]="delayInputFormatter"
+                    [outputValueFormat]="delayOutputFormatter"
+                    [min]="0"
+                    [max]="10000"
                     [value]="form.value.steps[i].step?.delay"
                     (change)="onDelayChanged($event, i)"
-                    type="selector">
+                    type="number">
                     </ccr-inline-editable-field>
                 </div>
                 <div (click)="onSetActiveStep(i)" fxFlex="25%">

@@ -150,7 +150,7 @@ describe('Sequences -> view', function () {
     cy.get('.step-list-item', { timeout: 20000 }).as('matSelectInputs')
     cy.clock().tick(100000)
 
-    cy.get('@matSelectInputs').should('have.length', 25)
+    cy.get('@matSelectInputs').should('have.length', 26)
 
     addStep()
     setRepeatingAction('loop')
@@ -162,7 +162,7 @@ describe('Sequences -> view', function () {
     cy.tick(1000)
 
     cy.wait('@sequencePostTransition', { timeout: 20000 }).should((xhr) => {
-      expect(xhr.request.body.delay).to.equal('21:00:00')
+      expect(xhr.request.body.delay).to.equal('18:00:00')
     })
   })
 
@@ -179,12 +179,12 @@ describe('Sequences -> view', function () {
 
     assertStepStructure()
 
-    cy.get('@matSelectInputs').should('have.length', 25)
+    cy.get('@matSelectInputs').should('have.length', 26)
 
     clickEnrolleesTab()
     clickEditSequenceTab()
 
-    cy.get('@matSelectInputs').should('have.length', 25)
+    cy.get('@matSelectInputs').should('have.length', 26)
     cy.tick(1000000)
 
     assertStepStructure()
@@ -319,4 +319,7 @@ function assertStepStructure(): void {
 
   cy.get(getStepRowAlias('25')).contains('1 day delay')
   cy.get(getStepRowAlias('25')).contains('2:00 a.m.')
+
+  cy.get(getStepRowAlias('26')).contains('100 days delay')
+  cy.get(getStepRowAlias('26')).contains('5:00 a.m.')
 }
