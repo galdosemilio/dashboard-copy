@@ -76,7 +76,7 @@
     "moment-timezone": "^0.5.31",
     "ng2-charts": "^2.4.2",
     "ngrx-store-freeze": "^0.2.4",
-    "ngx-color-picker": "^10.0.1",
+    "ngx-color-picker": "^11.0.0",
     "ngx-cookie-service": "^10.0.1",
     "ngx-device-detector": "^2.0.0",
     "ngx-moment": "^5.0.0",

@@ -8731,10 +8731,10 @@ ngrx-store-freeze@^0.2.4:
   dependencies:
     deep-freeze-strict "^1.1.1"
 
-ngx-color-picker@^10.0.1:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-10.1.0.tgz#19a6993a74bb3553024623b20ca6ebffd2c50f9c"
-  integrity sha512-Q3BILkQP+l+dcX0joe7+xuHDKydhGnG09sUG1FmlLZFYIEX4+AQqHULh+hUAci8kZlLZuOG+mB2Uq54QYadItw==
+ngx-color-picker@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-11.0.0.tgz#c1e5468505953bc579bf21014a135808820ea753"
+  integrity sha512-HyiFNPYLrCyYbFpLvZJaHC43RhjfDdFDij4pnvk9R46iH1scVtO6f2ibBgxRwBKKsT94KYvOH8wF8OrvztWdEw==
   dependencies:
     tslib "^2.0.0"
 
