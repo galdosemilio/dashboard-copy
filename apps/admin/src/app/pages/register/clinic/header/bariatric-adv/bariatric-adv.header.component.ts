@@ -12,7 +12,6 @@ export class BariatricAdvantageHeaderComponent {
 
   constructor(private org: AppStoreFacade) {
     this.org.pref$.subscribe((pref) => {
-      console.log({ pref })
       this.displayName = pref.displayName || ''
       this.logoUrl =
         pref.assets && pref.assets.logoUrl

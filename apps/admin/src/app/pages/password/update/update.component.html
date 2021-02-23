@@ -21,8 +21,17 @@
       <ccr-form-field-consent required
         *ngIf="consentRequired"
         formControlName="consent"
+        [clinicMsa]="clinicMsa"
         [consentRequired]="consentRequired"
       ></ccr-form-field-consent>
+
+      <div
+      *ngIf="consentRequired && clinicNewsletterCheckboxText"
+      class="mat-form-field newsletter-checkbox"
+      [class.ng-invalid]="form.controls.clinicNewsletter.touched && form.controls.clinicNewsletter.errors">
+        <mat-checkbox formControlName="clinicNewsletter"></mat-checkbox>
+        <span>{{ clinicNewsletterCheckboxText | translate }}</span>
+      </div>
     </form>
 
     <button mat-flat-button color="primary" type="button" class="ccr-button"

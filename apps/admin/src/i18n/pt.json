@@ -594,6 +594,10 @@
       "YOUR_PLAN_SELECTION": "Sua seleção de plano"
     },
     "STEP1": {
+      "HEALTHY_T": {
+        "CLINIC_MSA": "Bariatric Advantage Política de Privacidade",
+        "NEWSLETTER_CHECK_DESC": "Ao marcar esta caixa e selecionando Continuar, concordo em receber o email digital de Transformação saudável, que pode incluir programas e atualizações do produto e promoções."
+      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Os pacientes farão o download do aplicativo MyHealthyJourney e inserirão o código exclusivo de 4 dígitos da sua clínica para acessar todos os recursos do aplicativo. O aplicativo móvel e o painel do provedor da sua clínica estarão ativos dentro de 48 horas após o recebimento do formulário de implementação da plataforma.",
         "MOB_APP_1_TITLE": "MyHealthyJourney App",

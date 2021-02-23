@@ -594,6 +594,10 @@
       "YOUR_PLAN_SELECTION": "Su Plan Seleccionado"
     },
     "STEP1": {
+      "HEALTHY_T": {
+        "CLINIC_MSA": "Política de Privacidad de Bariatric Advantage",
+        "NEWSLETTER_CHECK_DESC": "Al marcar esta casilla y presionar 'Continuar', acepto recibir el correo digital de Healthy Transformation, el cual puede incluir novedades sobre el programa y productos así como también promociones."
+      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Los pacientes descargarán la aplicación MyHealthyJourney e ingresarán el código único de 4 dígitos de su clínica para acceder a las funciones completas de la aplicación. La aplicación móvil de su clínica y su tablero de asesor estarán al aire dentro de las 48 horas posteriores a la recepción del formulario de implementación de la plataforma.",
         "MOB_APP_1_TITLE": "Aplicación MyHealthyJourney",

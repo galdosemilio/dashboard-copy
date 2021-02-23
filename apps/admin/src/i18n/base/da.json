@@ -594,6 +594,10 @@
       "YOUR_PLAN_SELECTION": "Dit valg Plan"
     },
     "STEP1": {
+      "HEALTHY_T": {
+        "CLINIC_MSA": "Bariatric Advantage Privacy Policy",
+        "NEWSLETTER_CHECK_DESC": "Ved at markere dette felt og vælge Fortsæt, jeg accepterer at modtage Sund Transformation digitale e-mail, som kan omfatte programmer og produktopdateringer og tilbud."
+      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Patienter vil downloade MyHealthyJourney-appen og indtaste din kliniks unikke firecifrede kode for at få adgang til appens fulde funktioner. Din kliniks mobilapp og udbyderens dashboard vises direkte inden for 48 timer efter modtagelse af platformens implementeringsformular.",
         "MOB_APP_1_TITLE": "MyHealthyJourney-app",

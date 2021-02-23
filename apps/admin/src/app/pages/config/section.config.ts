@@ -31,6 +31,10 @@ export interface RegisterConfigDetails {
   NEWSLETTER_CHECKBOX?: boolean
   OPEN_ASSOC_ADD_CLIENT?: boolean
   REDIRECT_ON_CLINIC_REGISTRATION?: boolean
+  CLINIC_NEWSLETTER_CHECKBOX_TEXT?: string
+  CLINIC_MSA?: boolean
+  CLINIC_MSA_LINK?: string
+  CLINIC_MSA_LINK_LABEL?: string
 }
 
 export interface RegisterFirstStepDetails {

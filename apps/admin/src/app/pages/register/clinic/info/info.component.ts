@@ -23,6 +23,7 @@ import { LOCALES } from '@coachcare/common/shared'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider } from '@coachcare/npm-api'
+import { ClinicMsaProps } from '@coachcare/common/components'
 
 @UntilDestroy()
 @Component({
@@ -37,6 +38,9 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
   @Output() nextStep = new EventEmitter()
 
   accepted = false
+  clinicMsa?: ClinicMsaProps
+  clinicNewsletter: boolean
+  clinicNewsletterCheckboxText?: string
   hideLanguageSelector = false
   newsletter: boolean
   numericPostalCode = false
@@ -54,11 +58,23 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    const clinicNewsletterConfig = resolveConfig(
+      'REGISTER.CLINIC_NEWSLETTER_CHECKBOX_TEXT',
+      this.context.organizationId
+    )
+
+    this.clinicNewsletterCheckboxText =
+      typeof clinicNewsletterConfig === 'string'
+        ? clinicNewsletterConfig
+        : undefined
+
     this.showNewsletterCheckbox = !!resolveConfig(
       'REGISTER.NEWSLETTER_CHECKBOX',
       this.context.organizationId,
       true
     )
+
+    this.resolveClinicMsa()
 
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.hideLanguageSelector =
@@ -126,6 +142,35 @@ export class RegisterClinicInfoPageComponent implements OnInit, OnDestroy {
         content: err
       }
     })
+  }
+
+  private resolveClinicMsa(): void {
+    const clinicMsaSetting = !!resolveConfig(
+      'REGISTER.CLINIC_MSA',
+      this.context.organizationId
+    )
+
+    if (!clinicMsaSetting) {
+      return
+    }
+
+    const clinicMsaLinkSetting = resolveConfig(
+      'REGISTER.CLINIC_MSA_LINK',
+      this.context.organizationId
+    )
+    const clinicMsaLinkLabelSetting = resolveConfig(
+      'REGISTER.CLINIC_MSA_LINK_LABEL',
+      this.context.organizationId
+    )
+
+    this.clinicMsa = {
+      link:
+        typeof clinicMsaLinkSetting === 'string' ? clinicMsaLinkSetting : '',
+      label:
+        typeof clinicMsaLinkLabelSetting === 'string'
+          ? clinicMsaLinkLabelSetting
+          : ''
+    }
   }
 
   private subscribeToEvents() {

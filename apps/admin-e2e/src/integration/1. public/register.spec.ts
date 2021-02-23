@@ -460,4 +460,32 @@ describe('Register New Clinic', function () {
       price: 'Request Order Form for pricing and terms'
     })
   })
+
+  it('Properly displays Healthy Transformation Privacy Policy and Newsletter checkbox', function () {
+    cy.setOrgCookie('7341')
+    cy.visit(`/register/clinic`)
+
+    cy.get('ccr-form-field-consent').should(
+      'contain',
+      'Bariatric Advantage Privacy Policy'
+    )
+    cy.get('div.newsletter-checkbox').should(
+      'contain',
+      'Healthy Transformation'
+    )
+  })
+
+  it('Properly hides the Healthy Transformation Privacy Policy and Newsletter checkbox', function () {
+    cy.setOrgCookie('31')
+    cy.visit(`/register/clinic`)
+
+    cy.get('ccr-form-field-consent').should(
+      'not.contain',
+      'Bariatric Advantage Privacy Policy'
+    )
+    cy.get('div.newsletter-checkbox').should(
+      'not.contain',
+      'Healthy Transformation'
+    )
+  })
 })

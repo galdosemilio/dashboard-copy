@@ -1,5 +1,11 @@
-import { Component, forwardRef, Inject, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import {
+  Component,
+  forwardRef,
+  Inject,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MFACodeInputMode } from '@board/shared/mfa-code-input'
@@ -12,6 +18,8 @@ import { ConfirmDialog } from '@coachcare/common/dialogs/core'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'
+import { resolveConfig } from '@board/pages/config/section.config'
+import { ClinicMsaProps } from '@coachcare/common/components'
 
 @Component({
   selector: 'ccr-page-password-update',
@@ -25,10 +33,13 @@ import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'
       provide: BINDFORM_TOKEN,
       useValue: forwardRef(() => PasswordUpdatePageComponent)
     }
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class PasswordUpdatePageComponent implements OnInit {
   accountType: string
+  clinicMsa?: ClinicMsaProps
+  clinicNewsletterCheckboxText?: string
   consentRequired: string | undefined
   serverError: string
   form: FormGroup
@@ -49,11 +60,17 @@ export class PasswordUpdatePageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.resolveClinicNewsletterCheckbox()
+    this.resolveClinicMsa()
     this.form = this.builder.group({
       email: '',
       code: '',
       password: '',
       consent: undefined,
+      clinicNewsletter: [
+        undefined,
+        this.clinicNewsletterCheckboxText ? [Validators.required] : []
+      ],
       retry: true
     })
     this.mfaForm = this.builder.group({})
@@ -137,6 +154,47 @@ export class PasswordUpdatePageComponent implements OnInit {
     } finally {
       this.isProcessing = false
     }
+  }
+
+  private resolveClinicMsa(): void {
+    const clinicMsaSetting = !!resolveConfig(
+      'REGISTER.CLINIC_MSA',
+      this.context.organizationId
+    )
+
+    if (!clinicMsaSetting) {
+      return
+    }
+
+    const clinicMsaLinkSetting = resolveConfig(
+      'REGISTER.CLINIC_MSA_LINK',
+      this.context.organizationId
+    )
+    const clinicMsaLinkLabelSetting = resolveConfig(
+      'REGISTER.CLINIC_MSA_LINK_LABEL',
+      this.context.organizationId
+    )
+
+    this.clinicMsa = {
+      link:
+        typeof clinicMsaLinkSetting === 'string' ? clinicMsaLinkSetting : '',
+      label:
+        typeof clinicMsaLinkLabelSetting === 'string'
+          ? clinicMsaLinkLabelSetting
+          : ''
+    }
+  }
+
+  private resolveClinicNewsletterCheckbox(): void {
+    const clinicNewsletterConfig = resolveConfig(
+      'REGISTER.CLINIC_NEWSLETTER_CHECKBOX_TEXT',
+      this.context.organizationId
+    )
+
+    this.clinicNewsletterCheckboxText =
+      typeof clinicNewsletterConfig === 'string'
+        ? clinicNewsletterConfig
+        : undefined
   }
 
   private detectMFA(response: UpdateAccountPasswordResponse) {

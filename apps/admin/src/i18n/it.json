@@ -594,6 +594,10 @@
       "YOUR_PLAN_SELECTION": "La vostra selezione Piano"
     },
     "STEP1": {
+      "HEALTHY_T": {
+        "CLINIC_MSA": "Bariatrica Vantaggio sulla privacy",
+        "NEWSLETTER_CHECK_DESC": "Selezionando questa casella e selezionare Continua, accetto di ricevere il digitale email Trasformazione sano che può includere programmi e aggiornamenti sul prodotto e le promozioni."
+      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "I pazienti scaricheranno l'app MyHealthyJourney e inseriranno il codice univoco a 4 cifre della clinica per accedere alle funzionalità complete dell'app. La dashboard dell'app mobile e del provider della clinica sarà attiva entro 48 ore dalla ricezione del modulo di implementazione della piattaforma.",
         "MOB_APP_1_TITLE": "MyHealthyJourney App",

@@ -23,6 +23,11 @@ import { ContextService } from '@coachcare/common/services'
 import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
 import { get } from 'lodash'
 
+export interface ClinicMsaProps {
+  label: string
+  link: string
+}
+
 @Component({
   selector: 'ccr-form-field-consent',
   templateUrl: './consent.component.html',
@@ -50,6 +55,7 @@ export class ConsentFormFieldComponent implements ControlValueAccessor, OnInit {
   @Input() formControlName: string
   @Input() consentRequired: string | undefined
 
+  @Input() clinicMsa?: ClinicMsaProps
   @Input() disabled: any
   @Input() placeholder: string
   @Input() readonly: any

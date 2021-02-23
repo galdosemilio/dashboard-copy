@@ -129,6 +129,16 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
       }))
     }
 
+    const clinicNewsletterConfig = resolveConfig(
+      'REGISTER.CLINIC_NEWSLETTER_CHECKBOX_TEXT',
+      this.context.organizationId
+    )
+
+    const clinicNewsletterText =
+      typeof clinicNewsletterConfig === 'string'
+        ? clinicNewsletterConfig
+        : undefined
+
     const newsletter = !!resolveConfig(
       'REGISTER.NEWSLETTER_CHECKBOX',
       this.context.organizationId,
@@ -161,6 +171,10 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
           parentOrganizationId: this.context.organizationId,
           name: ['', Validators.required],
           newsletter: [newsletter],
+          clinicNewsletter: [
+            !!clinicNewsletterText,
+            clinicNewsletterText ? Validators.requiredTrue : []
+          ],
           address: this.builder.group({
             street: ['', Validators.required],
             city: ['', Validators.required],

@@ -70,6 +70,7 @@
   <div fxLayout="column" fxLayoutAlign="center stretch">
 
     <ccr-form-field-consent
+      [clinicMsa]="clinicMsa"
       [(ngModel)]="accepted"
       [ngModelOptions]="{standalone: true}"
     ></ccr-form-field-consent>
@@ -85,8 +86,19 @@
       <span>{{ 'FIELD.NEWSLETTER.CONSENT_TEXT' | translate }}</span>
     </div>
 
+    <div
+    *ngIf="clinicNewsletterCheckboxText"
+    class="mat-form-field newsletter-checkbox"
+    formGroupName="organization">
+      <mat-checkbox
+      [(ngModel)]="clinicNewsletter"
+      formControlName="clinicNewsletter">
+      </mat-checkbox>
+      <span>{{ clinicNewsletterCheckboxText | translate }}</span>
+    </div>
+
     <button
-    [disabled]="!accepted || (showNewsletterCheckbox && !newsletter)"
+    [disabled]="!accepted || (showNewsletterCheckbox && !newsletter) || (clinicNewsletterCheckboxText && !clinicNewsletter)"
     (click)="onSubmit()"
     class="nextStep"
     mat-button

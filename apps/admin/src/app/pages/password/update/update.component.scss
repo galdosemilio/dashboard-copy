@@ -1,3 +1,29 @@
-ccr-form-field-consent {
-  margin-bottom: 6px;
+@import 'variables';
+
+ccr-page-password-update {
+  ccr-form-field-consent {
+    margin-bottom: 6px;
+  }
+
+  .newsletter-checkbox {
+    display: block;
+    font-size: 14px;
+    margin-top: 1.5em;
+    margin-left: 29px;
+    width: auto !important;
+
+    &.ng-invalid {
+      .mat-checkbox-frame {
+        border-color: mat-color($ccr-primary);
+      }
+    }
+
+    & > span {
+      margin-left: 8px;
+    }
+
+    > * {
+      line-height: 150%;
+    }
+  }
 }
