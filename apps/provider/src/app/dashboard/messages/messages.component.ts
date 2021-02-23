@@ -280,7 +280,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   private handleScroll(position, lastPosition) {
-    if (position.height + position.scrolled === position.total) {
+    if (position.height + position.scrolled >= position.total - 50) {
       if (!this.source.completed && !this.source.isLoading) {
         // scrolled to the bottom
         this.pageIndex$.next(this.pageIndex$.getValue() + 1)
