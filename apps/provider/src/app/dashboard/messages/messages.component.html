@@ -39,7 +39,7 @@
               </ng-container>
               <ng-template #recipients>
                 <ng-container *ngFor="let recipient of thread.recipients; let last = last">
-                  {{recipient.firstName}}<ng-container *ngIf="!last">, </ng-container>
+                  {{recipient.shortName}} <ng-container *ngIf="!last">, </ng-container>
                 </ng-container>
               </ng-template>
             </h3>

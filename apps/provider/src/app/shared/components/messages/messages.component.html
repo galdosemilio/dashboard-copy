@@ -12,7 +12,7 @@
       </ng-container>
       <ng-template #recipients>
         <ng-container *ngFor="let recipient of shownRecipients; let last = last">
-          <span (click)="showProfile(recipient)" class="patient-link">{{recipient.firstName}}</span>
+          <span (click)="showProfile(recipient)" class="patient-link">{{recipient.shortName}}</span>
           <ng-container *ngIf="!last">, </ng-container>
           <ng-container *ngIf="last && shownRecipients.length < thread?.recipients.length">
             <br>

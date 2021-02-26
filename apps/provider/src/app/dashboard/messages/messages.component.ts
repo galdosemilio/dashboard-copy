@@ -218,6 +218,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
       t.account.map((acc) => ({
         id: acc.id,
         name: `${acc.firstName} ${acc.lastName}`,
+        shortName: `${acc.firstName} ${acc.lastName[0]}.`,
         firstName: acc.firstName,
         lastName: acc.lastName,
         accountType: null

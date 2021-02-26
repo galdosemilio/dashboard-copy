@@ -72,6 +72,7 @@ export class MessagesRecipientsComponent implements OnInit {
       this.selected.push({
         id: account.id,
         name: `${account.firstName} ${account.lastName}`,
+        shortName: `${account.firstName} ${account.lastName[0]}.`,
         firstName: account.firstName,
         lastName: account.lastName,
         accountType: account.accountType.id
