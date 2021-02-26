@@ -134,6 +134,60 @@
         "allowClientPhi": true
       },
       "associatedAt": "2019-05-08T18:07:44.907Z"
+    },
+    {
+      "organization": {
+        "id": "9000",
+        "name": "Apollo Italy",
+        "address": {
+          "city": "New York",
+          "state": "NY - New York",
+          "street": "150 West 28th Street",
+          "country": "IT",
+          "postalCode": "10001"
+        },
+        "contact": {
+          "email": "eric@coachcare.com",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "shortcode": "apolloitaly",
+        "hierarchyPath": [1, 7058, 9000]
+      },
+      "isDirect": true,
+      "permissions": {
+        "admin": true,
+        "viewAll": true,
+        "allowClientPhi": true
+      },
+      "associatedAt": "2019-05-08T18:07:44.907Z"
+    },
+    {
+      "organization": {
+        "id": "8000",
+        "name": "Apollo US",
+        "address": {
+          "city": "New York",
+          "state": "NY - New York",
+          "street": "150 West 28th Street",
+          "country": "US",
+          "postalCode": "10001"
+        },
+        "contact": {
+          "email": "eric@coachcare.com",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "shortcode": "apolloitaly",
+        "hierarchyPath": [1, 7058, 8000]
+      },
+      "isDirect": true,
+      "permissions": {
+        "admin": true,
+        "viewAll": true,
+        "allowClientPhi": true
+      },
+      "associatedAt": "2019-05-08T18:07:44.907Z"
     }
   ],
   "pagination": {}

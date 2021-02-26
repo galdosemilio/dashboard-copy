@@ -7,6 +7,7 @@ describe('Patients -> Add Patient -> Select packages', function () {
   })
 
   it('Allows a provider to create a patient account', function () {
+    cy.setOrganization('ccr')
     cy.visit(`/accounts/patients`)
     cy.get('dieter-listing-with-phi')
       .find('a')
@@ -177,5 +178,56 @@ describe('Patients -> Add Patient -> Select packages', function () {
       'contain',
       'Date of birth is required'
     )
+  })
+
+  it('Shows the Codice Fiscale account identifier if clinic is in Italy', function () {
+    cy.setOrganization('apollo-italy')
+
+    standardSetup(undefined, [
+      {
+        url: '/2.0/access/organization?**',
+        fixture: 'fixture:/api/organization/getAll'
+      }
+    ])
+
+    cy.visit(`/accounts/patients`)
+    cy.get('dieter-listing-with-phi')
+      .find('a')
+      .contains('Add New Patient')
+      .click()
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .find('app-account-identifiers')
+      .find('.mat-select-trigger')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('mat-option').contains('Codice Fiscale').should('exist')
+  })
+
+  it('Does not show the Codice Fiscale account identifier if clinic is not in Italy', function () {
+    cy.setOrganization('apollo-us')
+
+    standardSetup(undefined, [
+      {
+        url: '/2.0/access/organization?**',
+        fixture: 'fixture:/api/organization/getAll'
+      }
+    ])
+
+    cy.visit(`/accounts/patients`)
+    cy.get('dieter-listing-with-phi')
+      .find('a')
+      .contains('Add New Patient')
+      .click()
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .find('app-account-identifiers')
+      .should('be.hidden')
   })
 })

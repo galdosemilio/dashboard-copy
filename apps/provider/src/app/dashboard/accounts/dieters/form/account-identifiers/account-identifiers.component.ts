@@ -24,8 +24,16 @@ export class AccountIdentifiersComponent
   implements BindForm, DoCheck, OnDestroy, OnInit {
   set identifiers(identifiers: AccountIdentifier[]) {
     const groupedIdentifiers: GroupedIdentifiers[] = []
-    this._identifiers = identifiers
-    identifiers.forEach((ident) => {
+    const countryLocaleCode = this.context.organization.address
+      ? this.context.organization.address.country.toLowerCase()
+      : 'us'
+
+    this._identifiers = identifiers.filter(
+      (identifier) =>
+        identifier.localeLock.length === 0 ||
+        identifier.localeLock.includes(countryLocaleCode)
+    )
+    this._identifiers.forEach((ident) => {
       const matchingGroup = groupedIdentifiers.find(
         (group) => group.organization.id === ident.organization.id
       )

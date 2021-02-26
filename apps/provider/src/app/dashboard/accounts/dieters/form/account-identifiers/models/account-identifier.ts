@@ -4,6 +4,7 @@ export class AccountIdentifier {
   dirty?: boolean
   displayName?: string
   id?: string
+  localeLock?: string[]
   organization: SelectedOrganization
   name: string
   required?: boolean
@@ -13,6 +14,7 @@ export class AccountIdentifier {
     this.dirty = args.dirty || false
     this.displayName = args.displayName || args.name
     this.id = args.id || ''
+    this.localeLock = args.localeLock ?? []
     this.organization = args.organization || opts.organization
     this.name = args.name || ''
     this.required = args.required || false

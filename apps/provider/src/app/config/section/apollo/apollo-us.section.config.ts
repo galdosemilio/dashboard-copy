@@ -3,7 +3,6 @@ import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/ac
 import { PackageSelectorProps } from '@app/shared/components/package-selector/models'
 import { PackageSelectorComponent } from '@app/shared/components/package-selector/package-selector.component'
 import { _ } from '@app/shared/utils'
-import { SidenavOptions } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 
 export const ApolloUSProdSectionConfig: SectionConfigDetails = {

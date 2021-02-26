@@ -39,6 +39,12 @@ Cypress.Commands.add('setOrganization', (org: string) => {
     case 'shiftsetgo':
       translatedOrg = 7355
       break
+    case 'apollo-italy':
+      translatedOrg = 9000
+      break
+    case 'apollo-us':
+      translatedOrg = 8000
+      break
     default:
       translatedOrg = 1
   }
