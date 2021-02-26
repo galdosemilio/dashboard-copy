@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "category": "client",
+      "html": "First template HTML",
+      "id": "1",
+      "locale": "en",
+      "operation": "new-account",
+      "organization": "3378",
+      "subject": "First template subject",
+      "text": "First template text"
+    },
+    {
+      "category": "other",
+      "html": "Second template HTML",
+      "id": "2",
+      "locale": "en",
+      "operation": "new-account",
+      "organization": "3378",
+      "subject": "Second template subject",
+      "text": "Second template text"
+    },
+    {
+      "category": "other",
+      "html": "Third template HTML",
+      "id": "3",
+      "locale": "en",
+      "operation": "internal-registration",
+      "organization": "2",
+      "subject": "Third template subject",
+      "text": "Third template text"
+    }
+  ],
+  "pagination": {}
+}

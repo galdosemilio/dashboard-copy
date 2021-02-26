@@ -1,0 +1,6 @@
+@import 'variables';
+
+.disabled {
+  color: mat-color($ccr-background, selected-button) !important;
+  cursor: default !important;
+}

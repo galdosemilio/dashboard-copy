@@ -11,13 +11,21 @@ import { EmailTemplateDialogComponent } from '../dialogs'
 @UntilDestroy()
 @Component({
   selector: 'ccr-organizations-email-template-table',
-  templateUrl: './table.component.html'
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
 export class EmailTemplateTableComponent implements OnDestroy {
   @Input() orgId: string
   @Input() source: EmailTemplatesDataSource
 
-  columns: string[] = ['locale', 'operation', 'category', 'actions']
+  columns: string[] = [
+    'id',
+    'organization',
+    'locale',
+    'operation',
+    'category',
+    'actions'
+  ]
 
   constructor(
     private dialog: MatDialog,

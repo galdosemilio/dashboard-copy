@@ -2,6 +2,21 @@
 
   <mat-table [dataSource]="source">
 
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ID' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+        {{ row.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="organization">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ORGANIZATION' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+        {{ row.organization }}
+        <i class="ccr-marker" *ngIf="row.isInherited">&nbsp;*</i>
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="locale">
       <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.LOCALE' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
@@ -27,10 +42,22 @@
       <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ACTIONS' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let row" fxLayoutAlign="end center" fxLayoutAlign.xs=" center" fxFlex.xs="100%">
         <span (click)="onEdit(row)">{{ 'GLOBAL.EDIT' | translate }}</span>
-        <button (click)="onEdit(row)" mat-icon-button [title]="'GLOBAL.EDIT' | translate"><mat-icon>edit</mat-icon></button>
+        <button
+          [disabled]="row.isInherited"
+          [title]="'GLOBAL.EDIT' | translate"
+          (click)="onEdit(row)"
+          mat-icon-button>
+          <mat-icon [class.disabled]="row.isInherited">edit</mat-icon>
+        </button>
 
         <span (click)="onDelete(row)">{{ 'GLOBAL.DELETE' | translate }}</span>
-        <button (click)="onDelete(row)" mat-icon-button [title]="'GLOBAL.DELETE' | translate"><mat-icon>delete</mat-icon></button>
+        <button
+          [disabled]="row.isInherited"
+          [title]="'GLOBAL.DELETE' | translate"
+          (click)="onDelete(row)"
+          mat-icon-button>
+            <mat-icon [class.disabled]="row.isInherited">delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
@@ -42,4 +69,8 @@
   </mat-table>
 
   <ccr-table-overlay [source]="source" [emptyMsg]="'NOTIFY.ERROR.NO_EMAIL_TEMPLATES' | translate"></ccr-table-overlay>
+
+  <p class="footnotes" *ngIf="source.showMarker">
+    <i class="ccr-marker">*</i> {{ 'ADMIN.ORGS.EMAIL_TEMPLATE_INHERITED' | translate }}
+  </p>
 </div>

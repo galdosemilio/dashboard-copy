@@ -240,6 +240,31 @@ const interceptCoreApiCalls = (
     '1.0/organization/entity-type**',
     'fixture:/api/organization/getEntityTypes'
   )
+  cy.route(
+    'GET',
+    '2.0/organization/preference/email**',
+    'fixture:/api/organization/emailTemplates'
+  )
+  cy.route({
+    method: 'POST',
+    url: '/2.0/organization/preference/email',
+    status: 201,
+    response: { id: '1' }
+  }).as('organizationTemplatePostRequest')
+
+  cy.route({
+    method: 'DELETE',
+    url: '/2.0/organization/preference/email/**',
+    status: 204,
+    response: {}
+  }).as('organizationTemplateDeleteRequest')
+
+  cy.route({
+    method: 'PATCH',
+    url: '/2.0/organization/preference/email/*',
+    status: 204,
+    response: {}
+  }).as('organizationTemplatePatchRequest')
 }
 
 const seti18n = (): void => {
