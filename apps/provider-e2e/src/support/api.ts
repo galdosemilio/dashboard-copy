@@ -78,6 +78,12 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('GET', '/1.0/sequence/1?**', {
     fixture: 'api/sequence/getSingle'
   })
+  cy.intercept('GET', '/1.0/sequence/2?**', {
+    fixture: 'api/sequence/getSingle'
+  })
+  cy.intercept('GET', '/1.0/sequence/3?**', {
+    fixture: 'api/sequence/getSingle'
+  })
 
   cy.intercept('POST', `/1.0/sequence`, {
     statusCode: 200,
@@ -503,6 +509,13 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     statusCode: 201,
     body: { id: '1' }
   }).as('packagePostRequest')
+
+  cy.intercept('PUT', '/1.0/sequence/*/autoenrollment/preference', {
+    statusCode: 204,
+    body: {
+      id: '1'
+    }
+  }).as('sequenceAutoEnrollmentPutRequest')
 
   cy.intercept('PATCH', '/2.0/package/organization/*', {
     statusCode: 204,

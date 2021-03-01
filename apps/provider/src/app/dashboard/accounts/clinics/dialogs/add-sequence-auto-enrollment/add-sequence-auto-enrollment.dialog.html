@@ -1,0 +1,89 @@
+<div matDialogTitle>
+  <div>
+  <mat-icon>add_circle_outline</mat-icon>
+  <span>{{ 'BOARD.CLINIC_ADD_SEQ_AUTO_ENROLLMENT' | translate }}</span>
+  </div>
+
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div [formGroup]="form" mat-dialog-content class="dialog-content">
+  <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px">
+    <h4>{{ 'GLOBAL.SEQUENCE' | translate }}</h4>
+
+    <div>
+      <ccr-sequence-search [allowEmptyOption]="false" (onSelect)="onSelectSequence($event)"></ccr-sequence-search>
+    </div>
+
+    <div *ngIf="sequenceStates?.length && isAdmin">
+      <mat-form-field fxFlex>
+        <mat-select formControlName="sequenceState" [placeholder]="'GLOBAL.STEP' | translate">
+          <mat-option [value]="'-1'">{{ 'SEQUENCING.START_OF_SEQUENCE' | translate }}</mat-option>
+          <mat-option *ngFor="let state of sequenceStates" [value]="state.id">
+            {{ state.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <small *ngIf="selectedSequence && !isAdmin" class="highlighted">
+      {{ 'BOARD.CLINIC_CANT_USE_SEQUENCE_ADMIN' | translate:{name: selectedSequence.organization.name, id: selectedSequence.organization.id} }}
+    </small>
+
+    <h4>{{ 'BOARD.FREQUENCY' | translate }}</h4>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="25px">
+        <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="15px">
+          <mat-radio-button checked (click)="useControl('dayOfWeek')"></mat-radio-button>
+          <p fxFlex="40%">{{ 'BOARD.DAY_OF_WEEK' | translate }}</p>
+          <mat-select formControlName="dayOfWeek">
+            <mat-option
+              *ngFor="let dayOfWeek of daysOfWeek"
+              [value]="dayOfWeek.value">
+              {{ dayOfWeek.viewValue | translate }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="15px">
+          <mat-radio-button (click)="useControl('dayOfMonth')"></mat-radio-button>
+          <p fxFlex="40%">{{ 'BOARD.DAY_OF_MONTH' | translate }}</p>
+          <mat-select formControlName="dayOfMonth">
+            <mat-option
+            *ngFor="let dayOfMonth of daysOfMonth"
+            [value]="dayOfMonth.value">
+              {{ dayOfMonth.viewValue | translate }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <div class="medium-margin-bottom" fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="15px">
+          <mat-radio-button (click)="useControl('fixed')"></mat-radio-button>
+          <p fxFlex="40%">{{ 'BOARD.AMOUNT_OF_DAYS' | translate }}</p>
+          <input [wholeNumber]="true" formControlName="fixed" fxFlex numberOnly style="width: 100%" type="number">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<mat-dialog-actions>
+  <button
+  [disabled]="form?.invalid || !selectedSequence || !isAdmin"
+  (click)="onSubmit()"
+  mat-button
+  color="primary"
+  class="ccr-button">
+    {{ 'GLOBAL.ADD' | translate }}
+  </button>
+
+  <button
+  matDialogClose
+  mat-button
+  class="ccr-button">
+    {{ 'GLOBAL.CANCEL' | translate }}
+  </button>
+</mat-dialog-actions>

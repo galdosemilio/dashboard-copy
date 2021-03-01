@@ -9,6 +9,7 @@ export interface CreateSequenceRequest {
   association?: AssociationOptions
   /** The ID of the user creating the Sequence */
   createdBy: string
+  enrollmentOnAssociation?: boolean
   /** A flag indicating if the sequence is active */
   isActive?: boolean
   /** Name of the sequence */

@@ -1,5 +1,11 @@
 @import 'variables';
 
+app-clinic {
+  .long-text-tab {
+    font-size: 12px;
+  }
+}
+
 app-clinic-form,
 app-clinic-billable-services {
   .ccr-content {

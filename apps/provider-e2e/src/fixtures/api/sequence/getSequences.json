@@ -11,6 +11,17 @@
       "organization": {
         "id": "1",
         "name": "CoachCare"
+      },
+      "enrollmentOnAssociation": true,
+      "autoenrollment": {
+        "enabled": true,
+        "preference": {
+          "time": "09:30:00",
+          "timezone": "America/New_York",
+          "offset": {
+            "dayOfWeek": 2
+          }
+        }
       }
     },
     {
@@ -24,6 +35,17 @@
       "organization": {
         "id": "1",
         "name": "CoachCare"
+      },
+      "enrollmentOnAssociation": true,
+      "autoenrollment": {
+        "enabled": true,
+        "preference": {
+          "time": "09:30:00",
+          "timezone": "America/New_York",
+          "offset": {
+            "fixed": 15
+          }
+        }
       }
     },
     {
@@ -37,6 +59,17 @@
       "organization": {
         "id": "1",
         "name": "CoachCare"
+      },
+      "enrollmentOnAssociation": true,
+      "autoenrollment": {
+        "enabled": true,
+        "preference": {
+          "time": "09:30:00",
+          "timezone": "America/New_York",
+          "offset": {
+            "dayOfMonth": 20
+          }
+        }
       }
     }
   ],

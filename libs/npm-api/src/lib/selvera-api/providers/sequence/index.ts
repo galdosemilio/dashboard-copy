@@ -39,7 +39,8 @@ import {
   UpdateSequenceRequest,
   UpdateSequenceStateRequest,
   UpdateSequenceTriggerMetadataRequest,
-  UpdateSequenceTriggerRequest
+  UpdateSequenceTriggerRequest,
+  UpsertSeqAutoenrollmentPreference
 } from './requests'
 import {
   BulkOrganizationSeqEnrollmentsResponse,
@@ -131,6 +132,22 @@ export class Sequence {
       data: request,
       endpoint: '/sequence/enrollment/inactive',
       method: 'POST',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Upserts autoenrollment preference data
+   * @param request must implement UpsertSeqAutoenrollmentPreference
+   * @returns Promise<void>
+   */
+  public upsertSeqAutoenrollmentPreference(
+    request: UpsertSeqAutoenrollmentPreference
+  ): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/sequence/${request.id}/autoenrollment/preference`,
+      method: 'PUT',
       version: '1.0'
     })
   }

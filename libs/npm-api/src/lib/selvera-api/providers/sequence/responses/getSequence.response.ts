@@ -1,6 +1,7 @@
-import { Entity } from '../../common/entities'
+import { Entity, NamedEntity } from '../../common/entities'
 import {
   SequenceAssociation,
+  SequenceAutoEnrollmentOptions,
   SequenceState,
   SequenceTransition
 } from '../entities'
@@ -12,8 +13,11 @@ import {
 export interface GetSequenceResponse {
   /** Organization Association */
   association: SequenceAssociation
+  /** Autoenrollment options */
+  autoenrollment?: SequenceAutoEnrollmentOptions
   /** Creator user Entity */
   createdBy: Entity
+  enrollmentOnAssociation?: boolean
   /** Sequence ID */
   id: string
   /** A flag indicating if the sequence is active */
@@ -24,4 +28,5 @@ export interface GetSequenceResponse {
   states?: SequenceState[]
   /** Sequence Transition collection. Only present if full = true */
   transitions?: SequenceTransition[]
+  organization?: NamedEntity
 }

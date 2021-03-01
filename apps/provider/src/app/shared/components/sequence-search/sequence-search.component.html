@@ -5,7 +5,9 @@
             [disabled]="readonly"
             [placeholder]="'SEQUENCING.SELECT_SEQUENCE' | translate"
             (selectionChange)="onSequenceSelect($event.value)">
-                <mat-option [value]="''">{{ 'SEQUENCING.NO_SEQUENCES' | translate }}</mat-option>
+                <mat-option *ngIf="allowEmptyOption || !sequences.length" [value]="''">
+                    {{ 'SEQUENCING.NO_SEQUENCES' | translate }}
+                </mat-option>
                 <mat-option *ngFor="let sequence of sequences" [value]="sequence.id">{{ sequence.name }}</mat-option>
             </mat-select>
         </mat-form-field>

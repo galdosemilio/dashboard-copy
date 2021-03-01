@@ -9,6 +9,7 @@ import { FractionPipe } from './fraction.pipe'
 import { MaxCharsPipe } from './max-chars.pipe'
 import { MinutesToHoursPipe } from './minutes-to-hours.pipe'
 import { NumberFormatPipe } from './number-format.pipe'
+import { NumberToWeekdayPipe } from './num-to-weekday.pipe'
 import { UnitConversionPipe } from './unit-conversion.pipe'
 import { UnitLabelPipe } from './unit-label.pipe'
 
@@ -24,6 +25,7 @@ export const Pipes = [
   MaxCharsPipe,
   MinutesToHoursPipe,
   NumberFormatPipe,
+  NumberToWeekdayPipe,
   UnitConversionPipe,
   UnitLabelPipe
 ]

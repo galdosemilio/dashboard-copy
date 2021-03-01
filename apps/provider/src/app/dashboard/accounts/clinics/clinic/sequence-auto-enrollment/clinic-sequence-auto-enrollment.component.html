@@ -1,0 +1,76 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="space-between cente" fxLayoutGap="10px">
+    <div fxFlex>
+      <button
+      [disabled]="!isAdmin"
+      (click)="showAddAutoEnrollmentDialog()"
+      class="ccr-icon-button"
+      color="primary"
+      mat-button>
+        <mat-icon>add</mat-icon>
+        {{ 'BOARD.CLINIC_ADD_SEQ_AUTO_ENROLLMENT' | translate }}
+      </button>
+    </div>
+
+    <ccr-paginator fxFlex="nogrow" #paginator
+      [length]="source.total"
+      [pageIndex]="source.pageIndex"
+      [pageSize]="source.pageSize"
+      (page)="source.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+  </div>
+
+  <ccr-datasource-overlay [source]="source">
+  <div class="ccr-table ccr-expand-table ccr-table-stats">
+    <div class="ccr-expandable-table">
+      <table>
+        <thead>
+          <tr>
+            <td>{{ 'LIBRARY.CONTENT.ID' | translate }}</td>
+            <td>{{ 'SEQUENCING.SEQUENCE_NAME' | translate }}</td>
+            <td>{{ 'BOARD.CLINIC' | translate }}</td>
+            <td>{{ 'BOARD.FREQUENCY' | translate }}</td>
+            <td>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                {{ 'BOARD.ACTIONS' | translate }}
+              </div>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+          *ngFor="let row of rows; let i = index;"
+          class="level{{row.level}}"
+          [ngClass]="{
+            'row-even': i % 2 === 0,
+            'row-odd': i % 2 === 1,
+            'hidden': row.isHidden,
+            'row-expanded': row.isExpanded,
+            'row-nested': row.level > 0,
+            'row-bottom-border': row.level > 1,
+            'last-of-group': row.isLastOfGroup
+          }">
+            <td>{{ row.id }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.organization.name }} ({{'LIBRARY.CONTENT.ID' | translate}} {{ row.organization.id }})</td>
+            <td *ngIf="row.autoenrollment.preference.offset.dayOfMonth !== undefined">
+              {{ 'BOARD.ON_DAY_X_EVERY_MONTH' | translate:{day: row.autoenrollment.preference.offset.dayOfMonth } }}
+            </td>
+            <td *ngIf="row.autoenrollment.preference.offset.dayOfWeek !== undefined">
+              {{ 'BOARD.EVERY_DAYWEEK' | translate:{day: (row.autoenrollment.preference.offset.dayOfWeek | ccrNumToWeekday | translate | lowercase) } }}
+            </td>
+            <td *ngIf="row.autoenrollment.preference.offset.fixed !== undefined">
+              {{ 'BOARD.AFTER_X_DAYS' | translate:{amount: row.autoenrollment.preference.offset.fixed } }}
+            </td>
+            <td>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon [class.disabled]="!row.isAdmin" (click)="showRemoveAutoEnrollmentDialog(row)" class="clickable">delete</mat-icon>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </ccr-datasource-overlay>
+</div>

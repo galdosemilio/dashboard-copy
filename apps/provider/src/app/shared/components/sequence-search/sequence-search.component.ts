@@ -18,6 +18,7 @@ type SequenceSearchComponentModes = 'searchbar' | 'select'
   templateUrl: './sequence-search.component.html'
 })
 export class SequenceSearchComponent implements OnInit {
+  @Input() allowEmptyOption = true
   @Input()
   set readonly(readonly: boolean) {
     this._readonly = readonly
@@ -50,6 +51,8 @@ export class SequenceSearchComponent implements OnInit {
 
   @Output()
   select: Subject<Sequence> = new Subject<Sequence>()
+  @Output()
+  onSelect: Subject<Sequence> = new Subject<Sequence>()
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
   trigger: MatAutocompleteTrigger
@@ -80,16 +83,16 @@ export class SequenceSearchComponent implements OnInit {
       const selectedSequence = this.sequences.find(
         (sequence) => sequence.id === value
       )
-      this.select.next(
-        new Sequence(
-          await this.sequenceService.getSequence({
-            id: selectedSequence.id,
-            organization: this.context.organizationId,
-            status: 'all',
-            full: true
-          })
-        )
+      const selectedSequenceInstance = new Sequence(
+        await this.sequenceService.getSequence({
+          id: selectedSequence.id,
+          organization: this.context.organizationId,
+          status: 'all',
+          full: true
+        })
       )
+      this.select.next(selectedSequenceInstance)
+      this.onSelect.next(selectedSequenceInstance)
     } catch (error) {
       this.notify.error(error)
     }
@@ -98,18 +101,18 @@ export class SequenceSearchComponent implements OnInit {
   async onSequenceSelect(id: string) {
     try {
       const sequence = this.sequences.find((seq) => seq.id === id)
-      this.select.next(
-        new Sequence(
-          sequence
-            ? await this.sequenceService.getSequence({
-                id: sequence.id,
-                organization: this.context.organizationId,
-                status: 'all',
-                full: true
-              })
-            : {}
-        )
+      const selectedSequenceInstance = new Sequence(
+        sequence
+          ? await this.sequenceService.getSequence({
+              id: sequence.id,
+              organization: this.context.organizationId,
+              status: 'all',
+              full: true
+            })
+          : {}
       )
+      this.select.next(selectedSequenceInstance)
+      this.onSelect.next(selectedSequenceInstance)
     } catch (error) {
       this.notify.error(error)
     }

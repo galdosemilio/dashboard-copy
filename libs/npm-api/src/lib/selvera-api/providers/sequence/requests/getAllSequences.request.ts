@@ -15,4 +15,6 @@ export interface GetAllSequencesRequest {
   query?: string
   /** Sequence status filter */
   status?: 'active' | 'inactive' | 'all'
+  /** If the sequence has autoenrollments */
+  autoenrollment?: boolean
 }

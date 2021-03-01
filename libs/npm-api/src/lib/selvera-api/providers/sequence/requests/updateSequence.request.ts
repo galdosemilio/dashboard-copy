@@ -3,6 +3,7 @@
  */
 
 export interface UpdateSequenceRequest {
+  enrollmentOnAssociation?: boolean
   /** ID of the Sequence to be updated */
   id: string
   /** A flag indicating if the Sequence is active */
