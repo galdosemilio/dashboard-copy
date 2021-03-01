@@ -61,7 +61,9 @@ export class FileExplorerContent {
     if (this.type.code === 'file') {
       if (this.metadata.mimeType === 'text/html') {
         this.type = this.metadata.content
-          ? CONTENT_TYPE_MAP.youtube
+          ? this.metadata.content.includes('vimeo')
+            ? CONTENT_TYPE_MAP.vimeo
+            : CONTENT_TYPE_MAP.youtube
           : CONTENT_TYPE_MAP.hyperlink
       } else {
         this.extension = args.name.substring(

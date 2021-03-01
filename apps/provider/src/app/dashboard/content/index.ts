@@ -39,6 +39,7 @@ import {
   ContentFormComponent,
   FileFormComponent,
   HyperlinkFormComponent,
+  VimeoFormComponent,
   YoutubeFormComponent
 } from './forms'
 import {
@@ -71,6 +72,7 @@ export const ContentComponents = [
   InsertFormDialog,
   PackageSelectDialog,
   HyperlinkFormComponent,
+  VimeoFormComponent,
   YoutubeFormComponent
 ]
 

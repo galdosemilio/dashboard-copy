@@ -53,7 +53,8 @@ export class ContentCreateDialog implements OnInit, OnDestroy {
   public supportedContentTypes: string[] = [
     CONTENT_TYPE_MAP.file.code,
     CONTENT_TYPE_MAP.hyperlink.code,
-    CONTENT_TYPE_MAP.youtube.code
+    CONTENT_TYPE_MAP.youtube.code,
+    CONTENT_TYPE_MAP.vimeo.code
   ]
 
   constructor(

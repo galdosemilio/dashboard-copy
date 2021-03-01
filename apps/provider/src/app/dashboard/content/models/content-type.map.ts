@@ -67,5 +67,15 @@ export const CONTENT_TYPE_MAP: { [name: string]: ContentTypeMapItem } = {
       type: '2',
       mimeType: 'text/html'
     })
+  },
+  vimeo: {
+    id: '7',
+    code: 'vimeo',
+    icon: { set: 'fab', name: 'fa-vimeo' },
+    name: 'Vimeo',
+    fetchProperties: () => ({
+      type: '2',
+      mimeType: 'text/html'
+    })
   }
 }

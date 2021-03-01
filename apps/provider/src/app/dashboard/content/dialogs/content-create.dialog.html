@@ -23,7 +23,7 @@
         <mat-step [label]="'LIBRARY.CONTENT.SELECT_CONTENT_TYPE' | translate" [stepControl]="form.controls.contentType">
             <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="stretch" fxLayoutGap="3%" class="step-body">
                 <button fxFlex mat-button color="primary" class="ccr-icon-button" *ngFor="let contentType of contentTypes"
-                    (click)="setContentType(contentType.code)">
+                    (click)="setContentType(contentType.code)" data-cy="content-type-button">
                     <mat-icon
                         [class.svg-based]="contentType.icon.svgIcon"
                         [class.font-based]="contentType.icon.set"
@@ -50,6 +50,9 @@
                 </div>
                 <div *ngSwitchCase="'youtube'">
                     <app-content-youtube-form bindForm="content" [mode]="mode"></app-content-youtube-form>
+                </div>
+                <div *ngSwitchCase="'vimeo'">
+                    <app-content-vimeo-form bindForm="content" [mode]="mode"></app-content-vimeo-form>
                 </div>
             </ng-container>
         </mat-step>

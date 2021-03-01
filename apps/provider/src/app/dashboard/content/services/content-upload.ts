@@ -21,9 +21,7 @@ import { BehaviorSubject, Observable } from 'rxjs'
 
 @Injectable()
 export class ContentUploadService {
-  public contentAdded$: EventEmitter<FileExplorerContent> = new EventEmitter<
-    FileExplorerContent
-  >()
+  public contentAdded$: EventEmitter<FileExplorerContent> = new EventEmitter<FileExplorerContent>()
   public organization: any
   public uploads: ContentUpload[] = []
   public uploads$: BehaviorSubject<ContentUpload[]> = new BehaviorSubject<
@@ -203,6 +201,21 @@ export class ContentUploadService {
         )
         break
 
+      case CONTENT_TYPE_MAP.vimeo.code:
+        contentUpload.content = new FileExplorerContent(
+          Object.assign(
+            { ...content.details },
+            {
+              metadata: {
+                url: content.url,
+                content: `<iframe src="${content.url}" frameborder="0" allow="autoplay;fullscreen;picture-in-picture" width="640" height="360" allowfullscreen></iframe>`
+              },
+              parentId: content.destination.id
+            }
+          )
+        )
+        break
+
       default:
         contentUpload.content = new FileExplorerContent(
           Object.assign(
@@ -266,6 +279,7 @@ export class ContentUploadService {
         break
       case CONTENT_TYPE_MAP.hyperlink.code:
       case CONTENT_TYPE_MAP.youtube.code:
+      case CONTENT_TYPE_MAP.vimeo.code:
         await this.createAsHyperlink(ticket)
         break
       default:
