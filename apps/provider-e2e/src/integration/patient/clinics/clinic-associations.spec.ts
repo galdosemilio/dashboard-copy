@@ -42,7 +42,7 @@ describe('Patient profile -> clinics', function () {
     cy.get('.cdk-overlay-container')
       .find('mat-option')
       .as('clinicOptions')
-      .should('have.length', 6)
+      .should('have.length', 8)
 
     cy.get('@clinicOptions').eq(0).should('contain', 'No Clinics')
 
