@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import {
   AbstractControl,
   FormBuilder,
@@ -12,21 +6,21 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms'
-import { MatAutocompleteTrigger, MatDialog } from '@coachcare/material'
+import { MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
 import { Subscription } from 'rxjs'
-import { AccountProvider } from '@coachcare/npm-api'
 
 import { Meeting } from '@app/dashboard/schedule/models'
 import { ScheduleDataService } from '@app/layout/right-panel/services'
+import { ContextService, EventsService, NotifierService } from '@app/service'
 import {
-  ContextService,
-  EventsService,
-  NotifierService,
-  SelectedOrganization
-} from '@app/service'
-import { _, FormUtils, PromptDialog, TranslationsObject } from '@app/shared'
+  _,
+  FormUtils,
+  PromptDialog,
+  SelectOptions,
+  SelectOption
+} from '@app/shared'
 import {
   AccountAccessData,
   AccSingleResponse,
@@ -36,8 +30,8 @@ import {
   MeetingAttendee,
   OrganizationDetailed
 } from '@coachcare/npm-api'
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { ConsultationFormArgs } from '../consultationFormArgs.interface'
+import { AssociationsDatabase } from '@app/dashboard'
 
 export type AddConsultationAttendee = MeetingAttendee & {
   accountType?: string
@@ -52,8 +46,7 @@ export type AddConsultationAttendee = MeetingAttendee & {
 export class AddConsultationComponent implements OnDestroy, OnInit {
   form: FormGroup
   formSubmitted = false
-  initialOrg: SelectedOrganization
-  translations: TranslationsObject
+  initialOrgOption: SelectOption<string>
   editing = 0
   clinicChangeSubscription: Subscription
   meetingTypeChangeSubscription: Subscription
@@ -62,6 +55,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     return moment()
   }
 
+  clinicOptions: SelectOptions<string> = []
   clinics = []
   durations = []
   repeatOptions = [
@@ -82,14 +76,11 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   addedAttendees: Array<AddConsultationAttendee> = []
   removedAttendees: Array<string> = []
 
-  @ViewChild(MatAutocompleteTrigger, { static: false })
-  trigger: MatAutocompleteTrigger
-
   constructor(
     private builder: FormBuilder,
+    private orgAssocDatabase: AssociationsDatabase,
     private dialog: MatDialog,
     private translator: TranslateService,
-    private account: AccountProvider,
     private context: ContextService,
     private bus: EventsService,
     private notifier: NotifierService,
@@ -99,11 +90,13 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.initForm()
-    this.initTranslations()
-    this.setupAutocomplete()
+    this.fetchOrganizations()
 
     this.user = this.context.user
-    this.initialOrg = this.context.organization
+    this.initialOrgOption = {
+      value: this.context.organizationId,
+      viewValue: this.context.organization.name
+    }
     this.context.selected$.subscribe((user) => {
       if (user) {
         this.resetParticipants()
@@ -129,12 +122,6 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   ngOnDestroy() {
     this.bus.unregister('right-panel.consultation.meeting')
     this.unlistenChanges()
-  }
-
-  initTranslations() {
-    this.translator
-      .get([_('GLOBAL.COACH'), _('GLOBAL.PATIENT')])
-      .subscribe((translations) => (this.translations = translations))
   }
 
   initForm(): void {
@@ -192,6 +179,24 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     if (this.meetingTypeChangeSubscription) {
       this.meetingTypeChangeSubscription.unsubscribe()
       this.meetingTypeChangeSubscription = null
+    }
+  }
+
+  private async fetchOrganizations(): Promise<void> {
+    try {
+      this.clinics = (
+        await this.orgAssocDatabase.fetch({
+          account: this.context.user.id,
+          limit: 'all'
+        })
+      ).data.map((clinic) => clinic.organization)
+
+      this.clinicOptions = this.clinics.map((clinic) => ({
+        value: clinic.id,
+        viewValue: clinic.name
+      }))
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 
@@ -312,7 +317,14 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     }
   }
 
-  clinicChanged(org: OrganizationDetailed): void {
+  clinicChanged(org: OrganizationDetailed | null): void {
+    if (!org) {
+      this.form.get('location').reset()
+      this.meetingTypes = []
+      this.meetingTypesOk = true
+      return
+    }
+
     this.form.get('location').patchValue({
       ...org.address,
       streetAddress: org.address.street
@@ -343,43 +355,6 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
       })
       this.form.get('duration').setValue(type.durations[0])
     }
-  }
-
-  setupAutocomplete(): void {
-    this.searchCtrl = new FormControl()
-    this.searchCtrl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe((query) => {
-        if (query) {
-          this.searchAccounts(query)
-        } else {
-          this.trigger.closePanel()
-        }
-      })
-  }
-
-  searchAccounts(query: string): void {
-    this.account
-      .getList({ query })
-      .then((res) => {
-        this.accounts = res.data.filter(
-          (a) => !this.attendees.some((sa) => sa.id === a.id)
-        )
-        if (this.accounts.length > 0) {
-          this.trigger.openPanel()
-        }
-      })
-      .catch((err) => this.notifier.error(err))
-  }
-
-  formatAccountType(accountType) {
-    let result
-    if ([2, '2', 'provider'].indexOf(accountType) >= 0) {
-      result = this.translations['GLOBAL.COACH']
-    } else if ([3, '3', 'client'].indexOf(accountType) >= 0) {
-      result = this.translations['GLOBAL.PATIENT']
-    }
-    return result ? result : ''
   }
 
   addParticipant(account): void {
@@ -571,7 +546,20 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     })
   }
 
-  public onClinicSelect(clinic): void {
-    this.form.get('clinic').setValue(clinic)
+  public onClinicSelect(option: SelectOption<string>): void {
+    if (!option) {
+      this.form.get('clinic').setValue(null)
+      return
+    }
+
+    const foundClinic = this.clinics.find(
+      (clinic) => clinic.id === option.value
+    )
+
+    if (!foundClinic) {
+      return
+    }
+
+    this.form.get('clinic').setValue(foundClinic)
   }
 }

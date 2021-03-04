@@ -1,0 +1,19 @@
+<div fxFlex>
+  <mat-form-field fxFlex>
+    <input matInput [placeholder]="'RIGHT_PANEL.PARTICIPANTS' | translate" [matAutocomplete]="auto"  [formControl]="searchCtrl">
+  </mat-form-field>
+  <mat-autocomplete
+  #auto="matAutocomplete"
+  (opened)="autocompleteScroll()">
+    <mat-option *ngFor="let account of accounts" (onSelectionChange)="onParticipantSelected(account)">
+      <p>
+        {{ account.firstName + ' ' + account.lastName }}
+        <i>{{ account.accountType.id | accountType | translate }}</i>
+      </p>
+      <small>{{ account.email }}</small>
+    </mat-option>
+    <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
+      <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+    </div>
+  </mat-autocomplete>
+</div>

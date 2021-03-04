@@ -5,13 +5,14 @@
       <mat-error *ngIf="form.get('title').getError('required')">{{'NOTIFY.ERROR.TITLE_EMPTY' | translate}}</mat-error>
     </mat-form-field>
 
-    <div class="org-search-container" fxLayout="row" fxLayoutAlign="start center">
-      <ccr-organization-search
-        [initialOrg]="initialOrg"
-        [label]="'BOARD.CLINIC' | translate"
-        [showEmptyOption]="false"
-        (onSelect)="onClinicSelect($event)">
-      </ccr-organization-search>
+    <div *ngIf="clinicOptions?.length" class="org-search-container" fxLayout="row" fxLayoutAlign="start center">
+      <ccr-search-selector
+      [initialSelection]="initialOrgOption"
+      [options]="clinicOptions"
+      [placeholder]="'BOARD.CLINIC' | translate"
+      (optionSelected)="onClinicSelect($event)"
+      fxFlex>
+      </ccr-search-selector>
     </div>
 
     <ng-container *ngIf="formSubmitted">
@@ -59,25 +60,13 @@
         <mat-error *ngIf="form.get('startTime').getError('required') || form.get('duration').getError('required')">{{'NOTIFY.ERROR.TIMES_EMPTY' | translate}}</mat-error>
       </ng-container>
 
-      <mat-form-field>
-        <input matInput [placeholder]="'RIGHT_PANEL.PARTICIPANTS' | translate" [matAutocomplete]="auto"  [formControl]="searchCtrl">
-      </mat-form-field>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let account of accounts" (onSelectionChange)="addParticipant(account)">
-          <p>
-            {{ account.firstName + ' ' + account.lastName }}
-            <i>{{ formatAccountType(account.accountType.id) }}</i>
-            <!-- TODO implement accountType pipe -->
-          </p>
-          <small>{{ account.email }}</small>
-        </mat-option>
-      </mat-autocomplete>
+      <app-participants-input [excludes]="attendees" (onSelect)="addParticipant($event)"></app-participants-input>
       <div class="participants" *ngIf="attendees.length">
         <div *ngFor="let participant of attendees" fxLayoutAlign="start center" fxLayoutGap="5px">
           <mat-icon (click)="removeParticipant(participant.account)">close</mat-icon>
           <span *ngIf="participant.account === user?.id">{{'GLOBAL.ME' | translate}}</span>
           <span *ngIf="participant.account !== user?.id">{{ participant.firstName + ' ' + participant.lastName }}</span>
-          <span class="participantType" *ngIf="participant.accountType">{{ formatAccountType(participant.accountType) | translate }}</span>
+          <span class="participantType" *ngIf="participant.accountType">{{ participant.accountType | accountType | translate }}</span>
         </div>
       </div>
       <ng-container *ngIf="formSubmitted">

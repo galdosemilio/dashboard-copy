@@ -1,4 +1,5 @@
 import { AbsoluteValuePipe } from './absolute-value.pipe'
+import { AccountTypePipe } from './accountType.pipe'
 import { CapitalizePipe } from './capitalize.pipe'
 import { CcrBinaryPipe } from './ccr-binary.pipe'
 import { CcrKilobytesPipe } from './ccr-kilobytes.pipe'
@@ -12,6 +13,7 @@ import { UnitLabelPipe } from './unit-label.pipe'
 
 export const Pipes = [
   AbsoluteValuePipe,
+  AccountTypePipe,
   CapitalizePipe,
   CcrBinaryPipe,
   CcrKilobytesPipe,

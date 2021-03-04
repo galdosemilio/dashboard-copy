@@ -1,0 +1,25 @@
+<div fxFlex>
+  <mat-form-field fxFlex>
+    <input
+      #input
+      [matAutocomplete]="auto"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [formControl]="queryCtrl"
+      matInput
+      type="text">
+      <button mat-button *ngIf="queryCtrl.value" matSuffix mat-icon-button (click)="clearQuery()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+  </mat-form-field>
+
+  <mat-autocomplete
+  #auto="matAutocomplete"
+  [displayWith]="autocompleteDisplayWith"
+  (opened)="autocompleteScroll()"
+  (optionSelected)="onOptionSelected($event)">
+    <mat-option *ngFor="let option of shownOptions" [value]="option.value">
+      {{ option.viewValue }}
+    </mat-option>
+  </mat-autocomplete>
+</div>

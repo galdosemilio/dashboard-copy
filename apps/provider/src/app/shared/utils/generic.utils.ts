@@ -11,10 +11,11 @@
 
 export type ImplementationOf<T> = { [K in keyof T]?: T[K] }
 
-export type SelectOptions<T> = Array<{
+export type SelectOption<T> = {
   value: T
   viewValue: string
-}>
+}
+export type SelectOptions<T> = Array<SelectOption<T>>
 
 export type UnitFormatter = (v: number) => number | string
 export type UnitFormatters = {

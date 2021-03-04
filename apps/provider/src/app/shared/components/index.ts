@@ -57,6 +57,7 @@ import { UserSearchComponent } from './user-search'
 import { WalkthroughComponent } from './walkthrough'
 import { CcrImageOptionSelectorComponent } from './image-option-selector'
 import { CcrTableSortHeaderComponent } from './table-sort-header'
+import { CcrSearchSelectorComponent } from './search-selector'
 
 export {
   AlertIconComponent,
@@ -76,6 +77,7 @@ export {
   CcrImageOptionSelectorComponent,
   CcrMessagesComponent,
   CcrPaginator,
+  CcrSearchSelectorComponent,
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
   CcrTimeframeSelectorComponent,
@@ -126,6 +128,7 @@ export const CmpComponents = [
   CcrMessagesComponent,
   CcrPageSizeSelectorComponent,
   CcrPaginator,
+  CcrSearchSelectorComponent,
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
   CcrTimeframeSelectorComponent,
