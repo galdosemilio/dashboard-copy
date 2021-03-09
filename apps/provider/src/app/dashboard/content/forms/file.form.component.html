@@ -5,6 +5,9 @@
     </div>
 
     <div>
+        <p class="selectedFileTooLarge" *ngIf="selectedFileTooLarge">
+            The selected file is too large and cannot be uploaded.  Please select a file less than 100MB in size.
+        </p>
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>

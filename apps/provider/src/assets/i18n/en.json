@@ -602,7 +602,7 @@
       "PUBLIC_AVAILABILITY": "Public Availability",
       "PUBLIC_AVAILABILITY_DESCRIPTION": "Public content can be accessed by patients using the mobile app, as well as coaches on the provider dashboard.",
       "QUEUED_CONTENTS": "Queued contents",
-      "RESUME_CREATION": "Resume creating contents",
+      "RESUME_CREATION": "Resume adding content",
       "ROOT": "My Library",
       "SAVE_CHANGES": "Save Changes",
       "SELECTED_CONTENTS": "Selected Content",
@@ -617,6 +617,7 @@
       "TYPE": {
         "DOC": "Word Documents",
         "JPEG": "JPEG Images",
+        "MP4": "MP4 Video",
         "PDF": "PDF Documents",
         "PNG": "PNG Images",
         "PPT": "PowerPoint Presentations",

@@ -27,6 +27,7 @@ export class FileFormComponent implements BindForm {
   @Input() mode: 'digital-library' | 'vault' = 'digital-library'
 
   public form: FormGroup
+  public selectedFileTooLarge = false
   public details: any = {
     type: CONTENT_TYPE_MAP.file,
     name: ''
@@ -53,11 +54,21 @@ export class FileFormComponent implements BindForm {
   }
 
   updateFile(): void {
+    this.selectedFileTooLarge = false
+
     const file: File = this.file.nativeElement.files.length
       ? this.file.nativeElement.files[0]
       : undefined
 
-    if (file) {
+    if (file && file.size && file.size > 100000000) {
+      this.selectedFileTooLarge = true
+      this.file.nativeElement.value = ''
+      this.form.patchValue({
+        details: { ...this.form.value.details, name: '' }
+      })
+
+      return
+    } else if (file) {
       const extensionIndex = file.name.lastIndexOf('.')
 
       this.extension =

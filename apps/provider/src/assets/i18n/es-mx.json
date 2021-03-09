@@ -617,6 +617,7 @@
       "TYPE": {
         "DOC": "Documentos de Word",
         "JPEG": "Imágenes JPEG",
+        "MP4": "Video MP4",
         "PDF": "Documentos PDF",
         "PNG": "Imágenes PNG",
         "PPT": "Presentaciones PowerPoint",

@@ -70,5 +70,10 @@ export const FILE_TYPE_MAP: { [name: string]: FileTypeMapItem } = {
     icon: { name: 'fa-file-alt', set: 'fas' },
     name: _('LIBRARY.CONTENT.TYPE.RTF'),
     mimeType: 'application/rtf'
+  },
+  ['mp4']: {
+    icon: { name: 'fa-file-video', set: 'fas' },
+    name: _('LIBRARY.CONTENT.TYPE.MP4'),
+    mimeType: 'video/mp4'
   }
 }
