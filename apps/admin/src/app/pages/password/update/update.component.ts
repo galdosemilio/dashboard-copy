@@ -67,10 +67,7 @@ export class PasswordUpdatePageComponent implements OnInit {
       code: '',
       password: '',
       consent: undefined,
-      clinicNewsletter: [
-        undefined,
-        this.clinicNewsletterCheckboxText ? [Validators.required] : []
-      ],
+      clinicNewsletter: [undefined],
       retry: true
     })
     this.mfaForm = this.builder.group({})
@@ -84,6 +81,12 @@ export class PasswordUpdatePageComponent implements OnInit {
         code: params.code || '',
         consent: this.consentRequired ? false : undefined
       })
+
+      if (this.consentRequired && this.clinicNewsletterCheckboxText) {
+        this.form.get('clinicNewsletter').setValidators([Validators.required])
+      } else {
+        this.form.get('clinicNewsletter').setValidators([])
+      }
     })
   }
 
