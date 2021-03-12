@@ -92,7 +92,7 @@ describe('Schedule -> view', function () {
 
     cy.route(
       'GET',
-      '/3.0/meeting?**',
+      '/4.0/meeting?**',
       'fixture:/api/meeting/getListingRecurringMarch'
     )
     cy.visit(`/schedule/view`)
@@ -109,11 +109,12 @@ describe('Schedule -> view', function () {
 
     cy.route(
       'GET',
-      '/3.0/meeting?**',
+      '/4.0/meeting?**',
       'fixture:/api/meeting/getListingRecurringShifted'
     )
 
     selectDate(10, 'MAR', 2020)
+    cy.tick(10000)
     assertMeeting('Test meeting 1', {
       timeRange: '10:00-10:30pm',
       attendees: 3
@@ -130,7 +131,7 @@ describe('Schedule -> view', function () {
 
     cy.route(
       'GET',
-      '/3.0/meeting?**',
+      '/4.0/meeting?**',
       'fixture:/api/meeting/getListingRecurringMarch'
     )
     cy.visit(`/schedule/view`)
@@ -146,7 +147,7 @@ describe('Schedule -> view', function () {
 
     cy.route(
       'GET',
-      '/3.0/meeting?**',
+      '/4.0/meeting?**',
       'fixture:/api/meeting/getListingRecurringShifted'
     )
 
@@ -156,6 +157,87 @@ describe('Schedule -> view', function () {
       attendees: 3
     })
     assertMeeting('Test meeting 3', { timeRange: '2:00-3:00am', attendees: 1 })
+  })
+
+  it('Clinic filter properly triggers a refresh', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/schedule/view`)
+
+    cy.get('.calendar-wrapper')
+    cy.tick(10000)
+
+    cy.get('button').contains('Any Clinic').click({ force: true })
+    cy.tick(1000)
+    cy.wait(3000)
+    cy.get('mat-dialog-container')
+      .find('div.mat-select-trigger')
+      .trigger('click', { force: true })
+      .wait(500)
+    cy.tick(1000)
+    cy.get('mat-option').eq(0).click()
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('Select')
+      .click({ force: true })
+
+    cy.wait('@getMeetingsRequest')
+    cy.wait('@getMeetingsRequest')
+    cy.wait('@getMeetingsRequest')
+
+    cy.wait('@getMeetingsRequest').should((xhr) => {
+      expect(xhr.url).to.contain('organization=1')
+    })
+  })
+
+  it('Account filter properly triggers a refresh', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/schedule/view`)
+
+    cy.get('.calendar-wrapper')
+    cy.tick(10000)
+
+    cy.get('button').contains('My Schedule').click({ force: true })
+    cy.tick(1000)
+    cy.get('mat-dialog-container')
+    cy.tick(1000)
+    cy.get('mat-dialog-container')
+      .find('input[placeholder="Search Coach"]')
+      .type('test')
+    cy.tick(1000)
+    cy.get('mat-option').eq(0).click({ force: true })
+    cy.tick(1000)
+
+    cy.wait('@getMeetingsRequest')
+    cy.wait('@getMeetingsRequest')
+
+    cy.wait('@getMeetingsRequest').should((xhr) => {
+      expect(xhr.url).to.contain('account=1')
+    })
+  })
+
+  it('Schedule property shows "Busy Time" meetings', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.route(
+      'GET',
+      '/4.0/meeting?**',
+      'fixture:/api/meeting/getListingWithBusyTimes'
+    )
+
+    cy.visit(`/schedule/view`)
+
+    cy.get('.calendar-wrapper')
+    cy.tick(10000)
+    assertMeeting('Busy Time', {
+      timeRange: '10:00-10:30pm'
+    })
   })
 
   it('Modal properly shows appropriately in ET (New York)', function () {

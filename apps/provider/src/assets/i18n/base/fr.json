@@ -69,6 +69,7 @@
     "ALL_MEETINGS": "Toutes",
     "ALL_PACKAGES": "Patients dans <strong>toutes</strong> les phases sélectionnées",
     "AMOUNT": "Montant",
+    "ANY_CLINIC": "Toute Clinique",
     "ANY_PACKAGES": "Patients dans <strong>n'importe quelle</strong> phase sélectionnée",
     "ASSIGN_FORM_PATIENT": "Soumission d’un nouveau formulaire",
     "ASSOCIATED_AT": "associé à",
@@ -162,6 +163,7 @@
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Fuseaux horaires mesures lors de l'enregistrement",
     "MEETINGS_EMPTY_LIST": "Aucune réunion ne correspond aux critères de recherche",
     "MEETINGS_WITH_USER": "Réunions avec {{ user }}",
+    "MEETING_BUSY_TIME": "Temps occupé",
     "MESSAGES_HELP_DESCRIPTION": "Cliquez sur «Envoyer» ou appuyez sur la touche Entrée ou Retour pour envoyer le message. Pour ajouter une nouvelle ligne, maintenez la touche Maj enfoncée et appuyez sur la touche Entrée ou Retour.",
     "MESSAGES_HELP_TITLE": "Envoyer des Messages",
     "MESSAGES_LOAD": "Chargement des messages…",
@@ -284,6 +286,7 @@
     "VIEW_AS_TABLE": "Voir tableau",
     "VIEW_BY": "Voir par",
     "VIEW_PROFILE": "Voir profil",
+    "VIEW_SCHEDULE_BY_CLINIC": "Voir le calendrier par Clinique",
     "WEEKLY_VIEW": "Vue hebdomadaire",
     "WEIGHT_GOAL": "Objectif de poids",
     "ZIP": "Zip"

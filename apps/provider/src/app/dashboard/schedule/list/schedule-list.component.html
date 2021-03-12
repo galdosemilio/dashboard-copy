@@ -5,14 +5,57 @@
 </div>
 
 <div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="35px">
+    <!-- search bar filter -->
+    <div fxFlex="grow" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+        <div>
+            <ccr-organization-search
+            *ngIf="!selectedClinic"
+            (onSelect)="onSelectClinic($event)"
+            prefixIcon="business">
+            </ccr-organization-search>
+
+            <div *ngIf="selectedClinic">
+                <mat-chip-list>
+                    <mat-chip>
+                        {{ selectedClinic.name }}
+                        <mat-icon (click)="onRemoveClinic()" matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start stretch">
+            <div *ngIf="!filteredAccounts.length">
+                <ccr-user-search
+                [allowSelf]="true"
+                [excludes]="filteredAccounts"
+                [label]="'BOARD.SEARCH_BY_ACCOUNT_NAME_OR_EMAIL' | translate"
+                prefixIcon="person"
+                (select)="onAddAccount($event)"></ccr-user-search>
+            </div>
+            <div *ngIf="filteredAccounts.length">
+                <mat-chip-list>
+                    <mat-chip *ngFor="let account of filteredAccounts; let i = index;" [removable]="true">
+                        {{ 'BOARD.MEETINGS_WITH_USER' | translate:{ user: account.firstName + ' ' + account.lastName } }}
+                        <mat-icon (click)="onRemoveAccount($event)" matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+    </div>
+
     <!-- date filters -->
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-        <div fxFlex="40%">
-            <ccr-date-input [placeholder]="'BOARD.START_DATE' | translate" formControlName="startDate" fxFlex></ccr-date-input>
+    <div fxFlex="40%" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <div fxFlex>
+                <ccr-date-input [placeholder]="'BOARD.START_DATE' | translate" formControlName="startDate" fxFlex></ccr-date-input>
+            </div>
+            <div fxFlex>
+                <ccr-date-input [placeholder]="'BOARD.END_DATE' | translate" formControlName="endDate" fxFlex></ccr-date-input>
+            </div>
         </div>
-        <div fxFlex="40%">
-            <ccr-date-input [placeholder]="'BOARD.END_DATE' | translate" formControlName="endDate" fxFlex></ccr-date-input>
-        </div>
+
         <div fxFlex>
             <div class="ccr-button-group">
                 <button
@@ -51,24 +94,6 @@
             </div>
         </div>
     </div>
-
-    <!-- search bar filter -->
-    <div fxLayout="column" fxLayoutAlign="start stretch">
-        <div *ngIf="!filteredAccounts.length">
-            <ccr-user-search
-            [allowSelf]="true"
-            [excludes]="filteredAccounts"
-            [label]="'BOARD.SEARCH_BY_ACCOUNT_NAME_OR_EMAIL' | translate"
-            (select)="onAddAccount($event)"></ccr-user-search>
-        </div>
-        <div *ngIf="filteredAccounts.length">
-            <mat-chip-list>
-                <mat-chip *ngFor="let account of filteredAccounts; let i = index;" [removable]="true">
-                    {{ 'BOARD.MEETINGS_WITH_USER' | translate:{ user: account.firstName + ' ' + account.lastName } }}
-                    <mat-icon (click)="onRemoveAccount($event)" matChipRemove>cancel</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
-        </div>
     </div>
 
     <!-- table buttons -->
@@ -79,17 +104,17 @@
         mat-button
         fxFlex="nogrow"
         class="ccr-align-center">
-          {{ 'REPORTS.EXPORT_CSV' | translate }}
-          <mat-icon>file_download</mat-icon>
+            {{ 'REPORTS.EXPORT_CSV' | translate }}
+            <mat-icon>file_download</mat-icon>
         </button>
 
         <ccr-paginator fxFlex="nogrow" #paginator
-          [length]="meetingsSource.total"
-          [pageIndex]="meetingsSource.pageIndex"
-          [pageSize]="meetingsSource.pageSize"
-          (page)="meetingsSource.pageIndex = $event.pageIndex"
+            [length]="meetingsSource.total"
+            [pageIndex]="meetingsSource.pageIndex"
+            [pageSize]="meetingsSource.pageSize"
+            (page)="meetingsSource.pageIndex = $event.pageIndex"
         ></ccr-paginator>
-      </div>
+    </div>
 
     <!-- table -->
     <div>

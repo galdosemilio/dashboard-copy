@@ -69,6 +69,7 @@
     "ALL_MEETINGS": "جميع",
     "ALL_PACKAGES": "المرضى في <strong>جميع</strong> المراحل المحددة",
     "AMOUNT": "المقدار",
+    "ANY_CLINIC": "أي عيادة",
     "ANY_PACKAGES": "المرضى في <strong>أي</strong> المرحلة المحددة",
     "ASSIGN_FORM_PATIENT": "تقديم نموذج جديد",
     "ASSOCIATED_AT": "المرتبطة في",
@@ -162,6 +163,7 @@
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "الفروق الزمنية عند حفظ القياسات",
     "MEETINGS_EMPTY_LIST": "لا توجد اجتماعات تطابق معايير البحث",
     "MEETINGS_WITH_USER": "اجتماعات مع {{ user }}",
+    "MEETING_BUSY_TIME": "الوقت مشغول",
     "MESSAGES_HELP_DESCRIPTION": "انقر فوق 'إرسال' أو اضغط على مفتاح الإدخال أو الرجوع لإرسال الرسالة. لإضافة سطر جديد ، اضغط مع الاستمرار على مفتاح Shift واضغط على مفتاح Enter أو Return.",
     "MESSAGES_HELP_TITLE": "إرسل رسائل",
     "MESSAGES_LOAD": "تحميل الرسالة السابقة...",
@@ -284,6 +286,7 @@
     "VIEW_AS_TABLE": "عرض في جدول",
     "VIEW_BY": "عرض بواسطة",
     "VIEW_PROFILE": "عرض الملف الشخصي",
+    "VIEW_SCHEDULE_BY_CLINIC": "عرض الجدول من قبل عيادة",
     "WEEKLY_VIEW": "العرض الأسبوعي",
     "WEIGHT_GOAL": "الوزن المستهدف",
     "ZIP": "المفتاح"

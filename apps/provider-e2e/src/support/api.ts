@@ -202,7 +202,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   )
   cy.route(
     'GET',
-    '/3.0/meeting**',
+    '/4.0/meeting**',
     'fixture:/api/general/emptyDataEmptyPagination'
   )
   cy.route('GET', '/2.0/message/thread?**', 'fixture:/api/message/getThreads')
@@ -369,9 +369,9 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   )
   cy.route(
     'GET',
-    '/3.0/meeting?**',
+    '/4.0/meeting?**',
     fetchOverride('/3.0/meeting?**', 'fixture:/api/meeting/getListing')
-  )
+  ).as('getMeetingsRequest')
   cy.route(
     'GET',
     '/3.0/meeting/**',

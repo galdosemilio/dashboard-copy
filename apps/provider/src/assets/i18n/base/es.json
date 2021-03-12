@@ -69,6 +69,7 @@
     "ALL_MEETINGS": "Todas",
     "ALL_PACKAGES": "Pacientes en <strong>todas</strong> las fases",
     "AMOUNT": "Cantidad",
+    "ANY_CLINIC": "Cualquier Clínica",
     "ANY_PACKAGES": "Pacientes en <strong>algunas</strong> de las fases",
     "ASSIGN_FORM_PATIENT": "Llenar Formulario para Paciente",
     "ASSOCIATED_AT": "Asociado el",
@@ -162,6 +163,7 @@
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Diferencia horaria al guardar Medidas",
     "MEETINGS_EMPTY_LIST": "No hay reuniones que coincidan con el criterio de búsqueda",
     "MEETINGS_WITH_USER": "Reuniones con {{ user }}",
+    "MEETING_BUSY_TIME": "Tiempo Ocupado",
     "MESSAGES_HELP_DESCRIPTION": "Haga clic en 'Enviar' o presione la tecla Intro o Retorno para enviar el mensaje. Para agregar una nueva línea, mantenga presionada la tecla Shift y presione la tecla Enter o Retorno.",
     "MESSAGES_HELP_TITLE": "Enviar Mensajes",
     "MESSAGES_LOAD": "Cargar Mensajes Anteriores...",
@@ -284,6 +286,7 @@
     "VIEW_AS_TABLE": "Ver Tabla",
     "VIEW_BY": "Vista",
     "VIEW_PROFILE": "Ver Perfil",
+    "VIEW_SCHEDULE_BY_CLINIC": "Ver Calendario por Clínica",
     "WEEKLY_VIEW": "Vista Semanal",
     "WEIGHT_GOAL": "Meta de Peso",
     "ZIP": "Postal"

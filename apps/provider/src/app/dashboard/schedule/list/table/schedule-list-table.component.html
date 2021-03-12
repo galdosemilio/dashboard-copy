@@ -46,7 +46,7 @@
             </mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center">
                 <span>{{'BOARD.TITLE' | translate}}</span>
-                <div>{{ row.title }}</div>
+                <div>{{ row.title | translate }}</div>
             </mat-cell>
         </ng-container>
 
@@ -86,6 +86,8 @@
             fxHide.xs>
             <span>{{ 'BOARD.ACTIONS' | translate }}</span>
             <button
+            [class.disabled]="row.access !== 'full'"
+            [disabled]="row.access !== 'full'"
             [title]="'GLOBAL.EDIT' | translate"
             (click)="viewMeeting(row)"
             mat-icon-button>
@@ -93,8 +95,8 @@
         </button>
         <button
               data-cy="schedule-listing-meeting-delete"
-              [class.disabled]="!row.isFuture"
-              [disabled]="!row.isFuture"
+              [class.disabled]="!row.isFuture || row.access !== 'full'"
+              [disabled]="!row.isFuture || row.access !== 'full'"
               [title]="'BOARD.REMOVE' | translate"
               (click)="deleteMeeting(row)"
               mat-icon-button><mat-icon>delete</mat-icon></button>

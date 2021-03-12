@@ -17,7 +17,7 @@ export interface FetchAllMeetingRequest {
   limit?: 'all' | number
   /** Pagination offset */
   offset?: number
-  organization: string
+  organization?: string
   /** @deprecated use 'organization' instead */
   organizationShortcode?: string
   /** Meeting overlap range */

@@ -12,7 +12,7 @@ import { MatDialog } from '@coachcare/material'
 import { Store } from '@ngrx/store'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
-import { Schedule } from '@coachcare/npm-api'
+import { OrganizationEntity, Schedule } from '@coachcare/npm-api'
 
 import { CCRConfig } from '@app/config'
 import { OpenPanel } from '@app/layout/store'
@@ -35,6 +35,8 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { ViewMeetingDialog } from '../dialogs/view-meeting'
 import { Meeting } from '../models'
+import { SelectOrganizationDialog } from '@app/shared/dialogs/select-organization'
+import { DeviceDetectorService } from 'ngx-device-detector'
 
 export interface TimeBlock {
   display: string
@@ -68,12 +70,14 @@ export class ScheduleCalendarComponent
   public selectedMeeting = ''
   public clickedMeeting: any
   public dates: DateNavigatorOutput = {}
+  public selectedOrg?: OrganizationEntity
 
   private selectedUser: SelectedAccount
   private isTableScrolled = false
 
   constructor(
     private cdr: ChangeDetectorRef,
+    private deviceDetector: DeviceDetectorService,
     private dialog: MatDialog,
     private store: Store<CCRConfig>,
     private schedule: Schedule,
@@ -90,6 +94,15 @@ export class ScheduleCalendarComponent
   public ngOnInit(): void {
     this.generateTimes([], [])
     this.selectedUser = this.context.selected
+    this.selectedOrg = this.context.selectedClinic
+
+    this.context.selectedClinic$
+      .pipe(untilDestroyed(this))
+      .subscribe((clinic) => {
+        this.selectedOrg = clinic
+        this.getMeetings(this.dates)
+      })
+
     this.context.selected$.pipe(untilDestroyed(this)).subscribe((user) => {
       if (user && this.selectedUser !== user) {
         this.selectedUser = user
@@ -137,6 +150,10 @@ export class ScheduleCalendarComponent
   }
 
   public clickMeeting(meeting: any) {
+    if (meeting.access === 'restricted') {
+      return
+    }
+
     this.clickedMeeting = meeting
     if (this.isUnavailable(meeting)) {
       if (this.futureMeeting(meeting)) {
@@ -248,6 +265,24 @@ export class ScheduleCalendarComponent
     this.getMeetings(this.dates)
     // prevents exception when changing timeframe from child component
     this.cdr.detectChanges()
+  }
+
+  public showClinicSelectDialog(): void {
+    this.dialog
+      .open(SelectOrganizationDialog, {
+        data: {
+          title: _('BOARD.VIEW_SCHEDULE_BY_CLINIC')
+        },
+        width: !this.deviceDetector.isMobile() ? '60vw' : undefined
+      })
+      .afterClosed()
+      .subscribe((org: OrganizationEntity | null) => {
+        if (!org && org !== null) {
+          return
+        }
+
+        this.context.selectedClinic = org
+      })
   }
 
   private doDeleteRecurring() {
@@ -368,7 +403,7 @@ export class ScheduleCalendarComponent
     }
 
     const meetingRequest: FetchAllMeetingRequest = {
-      organization: this.context.organizationId,
+      organization: this.selectedOrg?.id,
       range: {
         start,
         end

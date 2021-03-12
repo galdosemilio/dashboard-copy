@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core'
 import { FormControl } from '@angular/forms'
 import {
   MatAutocompleteSelectedEvent,
@@ -20,7 +27,9 @@ type OrganizationSearchComponentModes = 'searchbar' | 'select'
 
 @Component({
   selector: 'ccr-organization-search',
-  templateUrl: './organization-search.component.html'
+  templateUrl: './organization-search.component.html',
+  styleUrls: ['./organization-search.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class OrganizationSearchComponent implements OnInit {
   @Input()
@@ -34,6 +43,8 @@ export class OrganizationSearchComponent implements OnInit {
   allowSearchbarReset = false
   @Input()
   ancestor: string
+  @Input()
+  prefixIcon?: string
   @Input()
   set readonly(readonly: boolean) {
     this._readonly = readonly
@@ -53,6 +64,7 @@ export class OrganizationSearchComponent implements OnInit {
   }
   @Input() strict = false
   @Input() showEmptyOption = true
+  @Input() suffixIcon?: string
 
   @Output()
   onSelect: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()

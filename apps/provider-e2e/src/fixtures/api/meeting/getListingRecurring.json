@@ -1,6 +1,7 @@
 {
   "data": [
     {
+      "access": "full",
       "id": "18069",
       "createdBy": "1",
       "title": "Test meeting 1",
@@ -93,6 +94,7 @@
       ]
     },
     {
+      "access": "full",
       "id": "18070",
       "createdBy": "1",
       "title": "Test meeting 2",
@@ -171,6 +173,7 @@
       ]
     },
     {
+      "access": "full",
       "id": "18071",
       "createdBy": "1",
       "title": "Test meeting 3",
@@ -235,6 +238,7 @@
       ]
     },
     {
+      "access": "full",
       "id": "18072",
       "createdBy": "1",
       "title": "Test meeting 4",
@@ -299,6 +303,7 @@
       ]
     },
     {
+      "access": "full",
       "id": "18073",
       "createdBy": "1",
       "title": "Test meeting 5",

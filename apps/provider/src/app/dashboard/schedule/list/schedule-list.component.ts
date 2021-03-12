@@ -9,6 +9,7 @@ import { debounceTime } from 'rxjs/operators'
 import { Meeting } from '../models'
 import { MeetingsDatabase, MeetingsDataSource } from '../services'
 import { ScheduleListTableComponent } from './table'
+import { OrganizationEntity } from '@coachcare/npm-api'
 
 type QuickSelectOption = 'past' | 'upcoming' | 'all'
 
@@ -28,6 +29,7 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
   form: FormGroup
   meetingsSource: MeetingsDataSource
   date$: Subject<void> = new Subject<void>()
+  selectedClinic?: OrganizationEntity
 
   constructor(
     private bus: EventsService,
@@ -165,6 +167,18 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
     this.filteredAccounts$.next()
   }
 
+  public onRemoveClinic(): void {
+    this.selectedClinic = null
+    this.meetingsSource.resetPaginator()
+    this.filteredAccounts$.next()
+  }
+
+  public onSelectClinic(clinic: OrganizationEntity): void {
+    this.selectedClinic = clinic
+    this.meetingsSource.resetPaginator()
+    this.filteredAccounts$.next()
+  }
+
   toggleQuickSelect(selection: QuickSelectOption): void {
     this.form.controls.quickSelect.setValue(selection)
   }
@@ -216,7 +230,7 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
     }))
 
     this.meetingsSource.addOptional(this.context.organization$, () => ({
-      organization: this.context.organizationId
+      organization: this.selectedClinic?.id
     }))
   }
 

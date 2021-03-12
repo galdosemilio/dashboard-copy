@@ -69,6 +69,7 @@
     "ALL_MEETINGS": "All",
     "ALL_PACKAGES": "Patients in <strong>all</strong> selected phases",
     "AMOUNT": "Amount",
+    "ANY_CLINIC": "Any Clinic",
     "ANY_PACKAGES": "Patients in <strong>any</strong> selected phase",
     "ASSIGN_FORM_PATIENT": "New Form Submission",
     "ASSOCIATED_AT": "Associated at",
@@ -162,6 +163,7 @@
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Timezone Differences When Saving Measurements",
     "MEETINGS_EMPTY_LIST": "There are no meetings that match the search criteria",
     "MEETINGS_WITH_USER": "Meetings with {{ user }}",
+    "MEETING_BUSY_TIME": "Busy Time",
     "MESSAGES_HELP_DESCRIPTION": "Click 'Send' or press the Enter or Return key to send message.  To add a new line, hold the Shift key and press the Enter or Return key.",
     "MESSAGES_HELP_TITLE": "Sending Messages",
     "MESSAGES_LOAD": "Load Previous Messages...",
@@ -284,6 +286,7 @@
     "VIEW_AS_TABLE": "View as Table",
     "VIEW_BY": "View by",
     "VIEW_PROFILE": "View Profile",
+    "VIEW_SCHEDULE_BY_CLINIC": "View Schedule by Clinic",
     "WEEKLY_VIEW": "Weekly View",
     "WEIGHT_GOAL": "Weight Goal",
     "ZIP": "Zip"

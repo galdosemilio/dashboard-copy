@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
@@ -12,11 +19,16 @@ import { AccountProvider } from '@coachcare/npm-api'
 @Component({
   selector: 'ccr-user-search',
   templateUrl: './user-search.component.html',
-  styleUrls: ['./user-search.component.scss']
+  styleUrls: ['./user-search.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserSearchComponent implements OnInit {
   @Input()
+  allowSelf = false
+  @Input()
   excludes: any[] = []
+  @Input()
+  floatLabel = 'auto'
   @Input()
   label = ''
   @Input()
@@ -24,7 +36,9 @@ export class UserSearchComponent implements OnInit {
   @Input()
   organization: string
   @Input()
-  allowSelf = false
+  prefixIcon?: string
+  @Input()
+  suffixIcon?: string
 
   @Output()
   select: Subject<any> = new Subject<any>()

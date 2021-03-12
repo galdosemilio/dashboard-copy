@@ -1,6 +1,8 @@
 import * as moment from 'moment'
+import { _ } from '@app/shared/utils'
 
 export class Meeting {
+  access: 'restricted' | 'full'
   attendees: any[]
   creator?: { email: string; firstName: string; id: string; lastName: string }
   date: moment.Moment
@@ -23,6 +25,7 @@ export class Meeting {
   type: { id: string; description: string }
 
   constructor(args: any) {
+    this.access = args.access ?? 'restricted'
     this.attendees =
       args.attendees && args.attendees.length
         ? args.attendees.map((a) => ({ ...a, account: a.id }))
@@ -34,15 +37,18 @@ export class Meeting {
     this.id = args.id
     this.isFuture = moment().isSameOrBefore(this.date)
     this.location = args.location || {}
-    this.organization = {
-      ...args.organization,
-      hierarchy: args.organization.hierarchyPath,
-      shortCode: args.organization.shortcode
-    }
+    this.organization =
+      this.access === 'restricted'
+        ? {}
+        : {
+            ...args.organization,
+            hierarchy: args.organization.hierarchyPath,
+            shortCode: args.organization.shortcode
+          }
     this.recurring = !!args.recurring
     this.template = args.recurring ? args.recurring.template : undefined
     this.time = this.date
-    this.title = args.title
+    this.title = args.title ?? _('BOARD.MEETING_BUSY_TIME')
     this.type = args.type
   }
 }

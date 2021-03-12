@@ -14,6 +14,12 @@
   </div>
 
   <div fxFlex="auto" fxFlex.xs="1 1 100%" fxLayoutAlign="end" fxLayoutAlign.xs="center" fxLayoutAlign.sm="start" fxLayoutGap="7px">
+    <div>
+      <button type="button" mat-button class="ccr-icon-button" (click)="showClinicSelectDialog()">
+        <mat-icon>arrow_drop_down</mat-icon>
+        <span class="truncate">{{ selectedOrg ? selectedOrg.name : ('BOARD.ANY_CLINIC' | translate) }}</span>
+      </button>
+    </div>
     <ccr-select-user
       [title]="'BOARD.SELECT_SCHEDULE' | translate"
       [default]="'BOARD.MY_SCHEDULE' | translate"
@@ -56,9 +62,10 @@ direction="forward">
       <tr #trow *ngFor="let block of timeBlocks; let i = index;" [class.seven-am-row]="i === 28">
         <td>{{(i % 2 === 0) ? block.display : ''}}</td>
         <td *ngFor="let cell of block.cells" [class.available]="cell?.isAvailable">
-          <div *ngIf="cell?.meeting" class="meeting meeting-selectable"
+          <div *ngIf="cell?.meeting" class="meeting"
+          [class.meeting-selectable]="cell.meeting.access === 'full'"
           [class.meeting-selected]="cell.meeting.id === selectedMeeting"
-          [class.meeting-unavailable]="cell.meeting.type.id === '4'"
+          [class.meeting-unavailable]="cell.meeting.type?.id === '4'"
           [style.height.px]="calculateHeight(cell.meeting)"
           [style.top.%]="calculateTop(cell.meeting)"
           (click)="clickMeeting(cell.meeting)">

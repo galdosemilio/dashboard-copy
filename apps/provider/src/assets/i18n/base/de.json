@@ -69,6 +69,7 @@
     "ALL_MEETINGS": "Alle",
     "ALL_PACKAGES": "Patienten in <strong>allen</strong> ausgewählten Phasen",
     "AMOUNT": "Anzahl",
+    "ANY_CLINIC": "Jede Klinik",
     "ANY_PACKAGES": "Patienten in <strong>jeder</strong> ausgewählten Phase",
     "ASSIGN_FORM_PATIENT": "Neue Formulareinreichung",
     "ASSOCIATED_AT": "Verbunden mit",
@@ -162,6 +163,7 @@
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Zeitzone Unterschiede bei Messungen Speichern von",
     "MEETINGS_EMPTY_LIST": "Es gibt keine Besprechungen, die den Suchkriterien entsprechen",
     "MEETINGS_WITH_USER": "Besprechungen mit {{ user }}",
+    "MEETING_BUSY_TIME": "Besetzt Zeit",
     "MESSAGES_HELP_DESCRIPTION": "Klicken Sie auf 'Senden' oder drücken Sie die Eingabetaste, um eine Nachricht zu senden. Um eine neue Zeile hinzuzufügen, halten Sie die Umschalttaste gedrückt und drücken Sie die Eingabetaste oder die Eingabetaste.",
     "MESSAGES_HELP_TITLE": "Sende Nachrichten",
     "MESSAGES_LOAD": "Vorherige Nachrichten laden ...",
@@ -284,6 +286,7 @@
     "VIEW_AS_TABLE": "Als Tabelle anzeigen",
     "VIEW_BY": "Ansicht nach",
     "VIEW_PROFILE": "Profil anzeigen",
+    "VIEW_SCHEDULE_BY_CLINIC": "Zeitplan anzeigen von Clinic",
     "WEEKLY_VIEW": "Wochenansicht",
     "WEIGHT_GOAL": "Zielgewicht",
     "ZIP": "Postleitzahl"

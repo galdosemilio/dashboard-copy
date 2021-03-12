@@ -7,6 +7,7 @@ import {
   CommunicationPreference,
   ContentPreference,
   MessagingPreference,
+  OrganizationEntity,
   OrganizationProvider,
   RPM,
   Sequence,
@@ -339,6 +340,21 @@ export class ContextService {
   }
 
   /**
+   * Selected Clinic (mainly used for the Schedule Clinic Selector)
+   */
+  selectedClinic$: BehaviorSubject<OrganizationEntity> = new BehaviorSubject<OrganizationEntity>(
+    null
+  )
+
+  set selectedClinic(clinic: OrganizationEntity) {
+    this.selectedClinic$.next(clinic)
+  }
+
+  get selectedClinic(): OrganizationEntity {
+    return this.selectedClinic$.getValue()
+  }
+
+  /**
    * Associated Organizations
    */
   organizations: Array<SelectedOrganization>
@@ -526,9 +542,9 @@ export class ContextService {
    * Displayed clinic
    */
 
-  public clinic$: BehaviorSubject<OrgSingleResponse> = new BehaviorSubject<
-    OrgSingleResponse
-  >(null)
+  public clinic$: BehaviorSubject<OrgSingleResponse> = new BehaviorSubject<OrgSingleResponse>(
+    null
+  )
 
   set clinic(clinic: any) {
     this.clinic$.next(clinic)

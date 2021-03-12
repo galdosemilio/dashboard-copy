@@ -1,5 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
-    <mat-form-field>
+    <mat-form-field [floatLabel]="floatLabel">
+        <mat-icon *ngIf="prefixIcon" class="prefix-icon" matPrefix>{{ prefixIcon }}&nbsp;</mat-icon>
         <input
         data-cy="user-search-input"
         [formControl]="searchCtrl"
@@ -7,6 +8,7 @@
         [placeholder]="label | translate"
         matInput
         >
+        <mat-icon *ngIf="suffixIcon" matSuffix>{{ suffixIcon }}</mat-icon>
     </mat-form-field>
     <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let account of accounts" (onSelectionChange)="onSelectAccount(account)">

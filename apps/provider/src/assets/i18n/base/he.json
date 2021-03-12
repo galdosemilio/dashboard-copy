@@ -69,6 +69,7 @@
     "ALL_MEETINGS": "הכל",
     "ALL_PACKAGES": "חולים ב <strong>כל</strong> השלבים שנבחרו",
     "AMOUNT": "כמות",
+    "ANY_CLINIC": "בכל מרפאה",
     "ANY_PACKAGES": "חולים ב <strong>כל</strong> שלב שנבחר",
     "ASSIGN_FORM_PATIENT": "הגשת טופס חדש",
     "ASSOCIATED_AT": "משויך ב",
@@ -162,6 +163,7 @@
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "הפרשי אזור זמן כאשר מדידות שמירה",
     "MEETINGS_EMPTY_LIST": "אין פגישות התואמות את קריטריוני החיפוש",
     "MEETINGS_WITH_USER": "פגישות עם {{ user }}",
+    "MEETING_BUSY_TIME": "תקופה עמוסה",
     "MESSAGES_HELP_DESCRIPTION": "לחץ על 'שלח' או לחץ על מקש Enter או Return כדי לשלוח הודעה. כדי להוסיף שורה חדשה, החזק את מקש Shift ולחץ על מקש Enter או Return.",
     "MESSAGES_HELP_TITLE": "לשלוח הודעות",
     "MESSAGES_LOAD": "טעינת הודעות קודמות...",
@@ -284,6 +286,7 @@
     "VIEW_AS_TABLE": "תצוגת טבלה",
     "VIEW_BY": "תצוגה לפי",
     "VIEW_PROFILE": "צפייה בפרופיל",
+    "VIEW_SCHEDULE_BY_CLINIC": "תצוגת לוח זמנים על ידי קליניקה",
     "WEEKLY_VIEW": "תצוגה שבועית",
     "WEIGHT_GOAL": "משקל יעד",
     "ZIP": "מיקוד"

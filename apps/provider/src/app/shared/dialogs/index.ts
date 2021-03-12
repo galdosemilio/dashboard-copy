@@ -32,6 +32,7 @@ import { PromptDialog } from './prompt.dialog'
 import { RPMPatientReportDialog } from './rpm-patient-report'
 import { RPMStatusDialog } from './rpm-status/rpm-status.dialog'
 import { ScheduleSelectDialog } from './schedule-select.dialog'
+import { SelectOrganizationDialog } from './select-organization'
 import { TextInputDialog } from './text-input.dialog'
 import { ViewImageDialog } from './view-image'
 import { WalkthroughDialog } from './walkthrough'
@@ -52,6 +53,7 @@ export const Dialogs = [
   RPMPatientReportDialog,
   RPMStatusDialog,
   ScheduleSelectDialog,
+  SelectOrganizationDialog,
   TextInputDialog,
   ViewImageDialog,
   WalkthroughDialog

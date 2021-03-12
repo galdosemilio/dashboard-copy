@@ -15,6 +15,7 @@
     <div [hidden]="mode !== 'searchbar'" fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex="grow">
             <mat-form-field fxFlex="grow">
+                <mat-icon *ngIf="prefixIcon" class="prefix-icon" matPrefix>{{ prefixIcon }}</mat-icon>
                 <input
                 [formControl]="searchCtrl"
                 [matAutocomplete]="orgAutocomp"
@@ -31,7 +32,7 @@
         </div>
 
         <mat-icon *ngIf="allowSearchbarReset && orgSelected"
-        class="remove"
+        class="remove clickable"
         [matTooltip]="'LIBRARY.FORMS.RESET_FORM_SEARCHBAR' | translate"
         (click)="resetSearchBar()">cancel</mat-icon>
     </div>
