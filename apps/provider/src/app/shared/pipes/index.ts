@@ -7,6 +7,7 @@ import { CcrUtcPipe } from './ccr-utc.pipe'
 import { ExerciseIntensityPipe } from './exercise-intensity.pipe'
 import { FractionPipe } from './fraction.pipe'
 import { MaxCharsPipe } from './max-chars.pipe'
+import { MinutesToHoursPipe } from './minutes-to-hours.pipe'
 import { NumberFormatPipe } from './number-format.pipe'
 import { UnitConversionPipe } from './unit-conversion.pipe'
 import { UnitLabelPipe } from './unit-label.pipe'
@@ -21,6 +22,7 @@ export const Pipes = [
   ExerciseIntensityPipe,
   FractionPipe,
   MaxCharsPipe,
+  MinutesToHoursPipe,
   NumberFormatPipe,
   UnitConversionPipe,
   UnitLabelPipe
