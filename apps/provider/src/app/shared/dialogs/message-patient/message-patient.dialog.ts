@@ -22,6 +22,7 @@ export interface MessagePatientDialogProps {
 })
 export class MessagePatientDialog implements OnInit {
   public form: FormGroup
+  public isLoading: boolean
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: MessagePatientDialogProps,
@@ -39,6 +40,7 @@ export class MessagePatientDialog implements OnInit {
 
   public async onSubmit(): Promise<void> {
     try {
+      this.isLoading = true
       const threads = (
         await this.message.getAll({
           accounts: [this.context.user.id, this.data.target.id],
@@ -71,6 +73,8 @@ export class MessagePatientDialog implements OnInit {
       this.dialogRef.close()
     } catch (error) {
       this.notifier.error(error)
+    } finally {
+      this.isLoading = false
     }
   }
 
