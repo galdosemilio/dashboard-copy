@@ -13,6 +13,7 @@ import { AddAssociationDialog } from './add-association'
 import { AssignFormDialog } from './assign-form/assign-form.dialog'
 import { DoctorPDFDialog } from './doctor-pdf'
 import { MeasurementDetailDialog } from './measurement-detail/measurement-detail.dialog'
+import { MessagePatientDialog } from './message-patient'
 import { PaymentDisclaimerDialog } from './payment-disclaimer/payment-disclaimer.dialog'
 import { ProgressReportPDFDialog } from './progress-report-pdf'
 import { TriggerDetailDialog } from './trigger-detail'
@@ -23,6 +24,7 @@ export const DialogsComponents = [
   AssignFormDialog,
   DoctorPDFDialog,
   MeasurementDetailDialog,
+  MessagePatientDialog,
   PaymentDisclaimerDialog,
   ProgressReportPDFDialog,
   TriggerDetailDialog
@@ -34,6 +36,7 @@ export const DialogsEntryComponents = [
   AssignFormDialog,
   DoctorPDFDialog,
   MeasurementDetailDialog,
+  MessagePatientDialog,
   PaymentDisclaimerDialog,
   ProgressReportPDFDialog,
   TriggerDetailDialog

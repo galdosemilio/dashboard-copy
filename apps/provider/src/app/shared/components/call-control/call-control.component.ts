@@ -25,11 +25,18 @@ import { TranslateService } from '@ngx-translate/core'
 import { unionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider, Interaction } from '@coachcare/npm-api'
+import * as moment from 'moment'
+import {
+  MessagePatientDialog,
+  MessagePatientDialogProps
+} from '@app/dashboard/accounts/dialogs/message-patient'
+import { DeviceDetectorService } from 'ngx-device-detector'
 
 enum AccountAvailabilityStatus {
   AVAILABLE,
   UNAVAILABLE,
-  UNCERTAIN
+  UNCERTAIN,
+  EXPIRED
 }
 
 @UntilDestroy()
@@ -55,6 +62,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   constructor(
     private account: AccountProvider,
     private context: ContextService,
+    private deviceDetector: DeviceDetectorService,
     private dialog: MatDialog,
     private interaction: Interaction,
     private logging: LoggingService,
@@ -114,8 +122,8 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
           })
           break
         case AccountAvailabilityStatus.UNCERTAIN:
-          await this.showUncertainDialog(billableService)
-          this.logging.log({
+          this.showUncertainDialog(billableService)
+          await this.logging.log({
             logLevel: 'info',
             data: {
               type: 'videoconferencing',
@@ -126,6 +134,9 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
               currentOrg: this.context.organizationId
             }
           })
+          break
+        case AccountAvailabilityStatus.EXPIRED:
+          this.showExpiredDialog()
           break
       }
     } catch (error) {
@@ -165,6 +176,13 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
       availability.status = loginHistory.data[0].organization
         ? AccountAvailabilityStatus.AVAILABLE
         : AccountAvailabilityStatus.UNCERTAIN
+
+      availability.status =
+        Math.abs(
+          moment(loginHistory.data[0].createdAt).diff(moment(), 'days')
+        ) >= 30
+          ? AccountAvailabilityStatus.EXPIRED
+          : availability.status
 
       return availability
     } catch (error) {
@@ -224,6 +242,29 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
         billableServices,
         'id'
       )
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async showExpiredDialog(): Promise<void> {
+    try {
+      const target = this.targets[0]
+      const accName = `${target.firstName} ${target.lastName}`
+      const translatedMessage = await this.translator
+        .get(_('CALL.PATIENT_SESSION_EXPIRED_INITIAL_MESS'), { name: accName })
+        .toPromise()
+
+      this.dialog.open(MessagePatientDialog, {
+        data: {
+          target,
+          title: _('CALL.CALL_CANT_BE_COMPLETED'),
+          content: _('CALL.PATIENT_SESSION_EXPIRED_DESC'),
+          contentParams: { name: accName },
+          initialMessage: translatedMessage
+        } as MessagePatientDialogProps,
+        width: !this.deviceDetector.isMobile() ? '60vw' : undefined
+      })
     } catch (error) {
       this.notifier.error(error)
     }

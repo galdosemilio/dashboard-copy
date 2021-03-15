@@ -1,0 +1,38 @@
+<div matDialogTitle>
+  <div>
+      <span>{{ data.title | translate: data.titleParams }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <p *ngIf="data.content" [innerHTML]="data.content | translate: data.contentParams" class="text-center"></p>
+  <div [formGroup]="form" fxLayout="column" fxLayoutAlign="stretch center">
+    <div style="width: 60%">
+      <mat-form-field fxFlex>
+        <textarea
+        [placeholder]="'Message Content'"
+        cols="30"
+        formControlName="message"
+        matInput
+        rows="5"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+  [disabled]="form.invalid"
+  class="ccr-icon-button"
+  color="primary"
+  mat-button>
+      <mat-icon>check</mat-icon> {{'GLOBAL.SEND' | translate}}
+  </button>
+
+  <button mat-button class="ccr-icon-button" matDialogClose>
+      <mat-icon>close</mat-icon> {{'GLOBAL.CLOSE' | translate}}
+  </button>
+</mat-dialog-actions>
