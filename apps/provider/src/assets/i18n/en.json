@@ -938,6 +938,7 @@
       "MEETING_DELETED": "Meeting deleted.",
       "MEETING_RECURRING_DELETED": "Recurring meeting deleted.",
       "MEETING_UPDATED": "Meeting updated",
+      "MESSAGE_SENT_SUCCESSFULLY": "Message sent successfully.",
       "MFA_DISABLED": "Two-factor Authentication Channel disabled successfully.",
       "MFA_VERIFIED": "Two-factor Authentication Channel verified successfully.",
       "MICROPHONE_CHANGED": "selected microphone changed",

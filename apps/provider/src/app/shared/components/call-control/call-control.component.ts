@@ -13,7 +13,12 @@ import {
 } from '@app/layout/store/call/call.action'
 import { callSelector } from '@app/layout/store/call/call.selector'
 import { ContextService, LoggingService, NotifierService } from '@app/service'
-import { ConfirmDialog, PromptDialog } from '@app/shared/dialogs'
+import {
+  ConfirmDialog,
+  MessagePatientDialog,
+  MessagePatientDialogProps,
+  PromptDialog
+} from '@app/shared/dialogs'
 import {
   AccountTypeId,
   LoginHistoryItem,
@@ -26,10 +31,6 @@ import { unionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider, Interaction } from '@coachcare/npm-api'
 import * as moment from 'moment'
-import {
-  MessagePatientDialog,
-  MessagePatientDialogProps
-} from '@app/dashboard/accounts/dialogs/message-patient'
 import { DeviceDetectorService } from 'ngx-device-detector'
 
 enum AccountAvailabilityStatus {

@@ -8,6 +8,7 @@ export * from './gesture-closing'
 export * from './grid.dialog'
 export * from './languages.dialog'
 export * from './message-add-member'
+export * from './message-patient'
 export * from './options.dialog'
 export * from './prompt.dialog'
 export * from './rpm-patient-report'
@@ -27,6 +28,7 @@ import { GestureClosingDialog } from './gesture-closing'
 import { GridDialog } from './grid.dialog'
 import { LanguagesDialog } from './languages.dialog'
 import { MessageAddMemberDialog } from './message-add-member'
+import { MessagePatientDialog } from './message-patient'
 import { OptionsDialog } from './options.dialog'
 import { PromptDialog } from './prompt.dialog'
 import { RPMPatientReportDialog } from './rpm-patient-report'
@@ -48,6 +50,7 @@ export const Dialogs = [
   GridDialog,
   LanguagesDialog,
   MessageAddMemberDialog,
+  MessagePatientDialog,
   OptionsDialog,
   PromptDialog,
   RPMPatientReportDialog,

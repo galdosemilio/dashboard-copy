@@ -938,6 +938,7 @@
       "MEETING_DELETED": "تم حذف الاجتماع",
       "MEETING_RECURRING_DELETED": "تم حذف الاجتماع المتكرر.",
       "MEETING_UPDATED": "تم تحديث الاجتماع",
+      "MESSAGE_SENT_SUCCESSFULLY": "أرسلت الرسالة بنجاح.",
       "MFA_DISABLED": "تم تعطيل قناة المصادقة الثنائية بنجاح.",
       "MFA_VERIFIED": "تم التحقق من قناة المصادقة ثنائية العوامل بنجاح.",
       "MICROPHONE_CHANGED": "تغيير المايكروفون المحدد",

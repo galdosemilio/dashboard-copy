@@ -938,6 +938,7 @@
       "MEETING_DELETED": "הפגישה נמחקה.",
       "MEETING_RECURRING_DELETED": "פגישה חוזרת נמחקה.",
       "MEETING_UPDATED": "פגישה עודכנה",
+      "MESSAGE_SENT_SUCCESSFULLY": "הודעה נשלחה בהצלחה.",
       "MFA_DISABLED": "ערוץ אימות דו-גורמי הושבת בהצלחה.",
       "MFA_VERIFIED": "ערוץ אימות דו-גורמי אומת בהצלחה.",
       "MICROPHONE_CHANGED": "המיקרופון שנבחר השתנה",

@@ -938,6 +938,7 @@
       "MEETING_DELETED": "Incontro cancellato.",
       "MEETING_RECURRING_DELETED": "Incontro ricorrente cancellato.",
       "MEETING_UPDATED": "Incontro aggiornato",
+      "MESSAGE_SENT_SUCCESSFULLY": "Messaggio inviato con successo.",
       "MFA_DISABLED": "Canale di Autentificazione a Due Fattori disattivato con successo.",
       "MFA_VERIFIED": "Canale di Autenticazione a Due Fattori verificato con successo.",
       "MICROPHONE_CHANGED": "microfono selezionato cambiato",

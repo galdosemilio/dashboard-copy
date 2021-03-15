@@ -938,6 +938,7 @@
       "MEETING_DELETED": "Møde slettet.",
       "MEETING_RECURRING_DELETED": "Tilbagevendende møde slettet.",
       "MEETING_UPDATED": "Møde opdateret",
+      "MESSAGE_SENT_SUCCESSFULLY": "Besked sendt.",
       "MFA_DISABLED": "Two-factor Authentication Channel er deaktiveret.",
       "MFA_VERIFIED": "Two-factor Authentication Channel er verificeret.",
       "MICROPHONE_CHANGED": "valgte mikrofon ændret",
