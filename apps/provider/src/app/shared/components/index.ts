@@ -23,6 +23,7 @@ import {
   DateRangeNavigatorOutput
 } from './date-range/date-range.component'
 import { PopupDescriptionComponent } from './description/description.component'
+import { HelpLinkComponent } from './help-link/help-link.component'
 import { HeightFormFieldComponent } from './dieter-height/dieter-height.component'
 import { FormSearchComponent } from './form-search'
 import { InlineEditableField } from './inline-editable-field'
@@ -98,6 +99,7 @@ export {
   PackageTableComponent,
   PhoneInputComponent,
   PopupDescriptionComponent,
+  HelpLinkComponent,
   ProgressCircle,
   QuickDateRangeComponent,
   MatMomentDateModule,
@@ -148,6 +150,7 @@ export const CmpComponents = [
   PackageTableComponent,
   PhoneInputComponent,
   PopupDescriptionComponent,
+  HelpLinkComponent,
   ProgressCircle,
   QuickDateRangeComponent,
   RPMComponent,

@@ -1,4 +1,10 @@
 <div class="ccr-dashboard">
+  <p class="ccr-hint lowercase">
+    {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.PATIENT' | translate }} {{ 'GLOBAL.DASHBOARD' | translate }}
+
+    <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+  </p>
+
   <div fxLayout="row" fxLayoutGap="1%">
 
     <ccr-stat-diff fxFlex="1 0 100px"

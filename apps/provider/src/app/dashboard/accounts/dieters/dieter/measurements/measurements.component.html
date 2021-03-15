@@ -1,4 +1,10 @@
 
+<p class="ccr-hint initial">
+  {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.PATIENT' | translate }} {{ 'GLOBAL.MEASUREMENTS' | translate }}
+
+  <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+</p>
+
 <div class="ccr-container-mini" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>
   <ul class="ccr-tabs-center" fxLayout="row" fxLayoutAlign.gt-xs="start stretch">
     <li *ngIf="hiddenMeasurementTabs.indexOf('composition') === -1">

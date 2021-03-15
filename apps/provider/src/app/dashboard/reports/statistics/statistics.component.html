@@ -1,6 +1,10 @@
 <div class="ccr-heading">
   <div class="ccr-title" fxLayout="row" fxLayoutAlign="end">
-    <h2 fxFlex>{{ 'SIDENAV.USER_STATISTICS' | translate }}</h2>
+    <h2 fxFlex>
+      {{ 'SIDENAV.USER_STATISTICS' | translate }}
+
+      <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+    </h2>
   </div>
 </div>
 

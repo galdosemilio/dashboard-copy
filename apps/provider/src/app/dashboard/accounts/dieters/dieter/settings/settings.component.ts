@@ -41,6 +41,8 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
   ]
   defaultForm: Form
   fillForm: Form
+  associationZendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360035588992-Changing-a-Patient-Coach-Clinic'
 
   get section(): string {
     return this.component

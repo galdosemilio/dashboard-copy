@@ -26,6 +26,9 @@ export class DieterLabelComponent implements OnInit, AfterViewInit, OnDestroy {
   clinics = [] // available options
   clinic // selected value
 
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360019702272-Editing-a-Patient-Profile'
+
   constructor(
     private notifier: NotifierService,
     private database: LabelsDatabase,

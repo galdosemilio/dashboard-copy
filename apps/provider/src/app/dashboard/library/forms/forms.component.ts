@@ -31,6 +31,8 @@ export class FormsComponent implements OnDestroy, OnInit {
   public datasource: FormsDatasource
   public form: FormGroup
   public userIsAdmin: boolean
+  public zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360022496331-Quick-Overview-of-Forms'
 
   private refresh$: Subject<void> = new Subject<void>()
   private sort: MatSort = new MatSort()

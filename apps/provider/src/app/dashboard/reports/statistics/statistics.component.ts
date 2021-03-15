@@ -10,6 +10,9 @@ import { EventsService } from '@app/service'
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360020083952-Viewing-the-Reports-Statistics'
+
   constructor(private bus: EventsService) {}
 
   ngOnInit() {

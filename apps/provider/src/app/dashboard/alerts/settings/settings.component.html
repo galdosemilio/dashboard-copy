@@ -1,6 +1,10 @@
 <div class="ccr-heading">
   <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
-    <h2 fxFlex>{{ 'ALERTS.ACTIVE_ALERTS' | translate: clinic }}</h2>
+    <h2 fxFlex>
+      {{ 'ALERTS.ACTIVE_ALERTS' | translate: clinic }}
+
+      <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+    </h2>
   </div>
 </div>
 

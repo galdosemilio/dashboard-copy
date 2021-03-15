@@ -40,6 +40,7 @@ export interface AccountCreateDialogData {
 export class AccountCreateDialog implements BindForm, OnInit {
   form: FormGroup
   temp: {}
+  zendeskLink = ''
 
   private organization: any
 
@@ -57,6 +58,11 @@ export class AccountCreateDialog implements BindForm, OnInit {
     private packageEnrollment: PackageEnrollment
   ) {
     this.data = data ? data : {}
+
+    this.zendeskLink =
+      data.accountType === 'coach'
+        ? 'https://coachcare.zendesk.com/hc/en-us/articles/360019620832-Setting-the-Coach-Permissions'
+        : ''
   }
 
   ngOnInit() {

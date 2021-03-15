@@ -57,6 +57,8 @@ export class DieterListingWithPhiComponent
   sort: MatSort = new MatSort()
   source: DieterListingDataSource
   totalCount: number
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360019923251-Adding-a-Patient'
 
   constructor(
     private dialog: MatDialog,

@@ -44,6 +44,8 @@ export class CoachesComponent implements AfterViewInit, OnInit, OnDestroy {
   sort: MatSort = new MatSort()
 
   admin = false
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360019819511-Adding-a-New-Coach'
 
   constructor(
     private dialog: MatDialog,

@@ -1,4 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="start" fxLayoutAlign.xs="stretch" fxLayoutGap="10px">
+    <p class="ccr-hint lowercase">
+        {{ 'GLOBAL.ABOUT' | translate }} {{'LIBRARY._TITLE' | translate}}
+
+        <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+    </p>
+
     <div fxLayout="row" fxLayout.xs="column"
         fxLayoutAlign="start" fxLayoutAlign.xs="stretch"
         fxLayoutWrap.xs fxLayoutGap="10px">

@@ -23,6 +23,8 @@ export class ProfileComponent implements OnDestroy, OnInit {
   profile: AccSingleResponse
   isSaving = false
   section: ProviderProfileSection = 'security'
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/sections/360003260532-Profile'
 
   constructor(
     private account: AccountProvider,

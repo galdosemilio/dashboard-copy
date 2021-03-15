@@ -63,6 +63,8 @@ export class ContentComponent implements OnDestroy, OnInit {
     type: undefined,
     mimeType: undefined
   }
+  public zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360018719912-Adding-to-the-Digital-Library'
 
   private subscriptions: { [key: string]: Subscription } = {}
   organization: SelectedOrganization

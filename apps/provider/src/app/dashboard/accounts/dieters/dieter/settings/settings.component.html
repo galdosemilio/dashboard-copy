@@ -93,6 +93,11 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="'associations'">
+    <p class="ccr-hint">
+      {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.CLINIC_ASSOCIATION' | translate }}
+
+      <ccr-help-link [link]="associationZendeskLink"></ccr-help-link>
+    </p>
     <ccr-account-associations></ccr-account-associations>
   </ng-container>
 

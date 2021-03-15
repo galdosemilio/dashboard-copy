@@ -33,6 +33,9 @@ export class DashboardComponent implements OnDestroy, OnInit {
   canViewAll = true
   canAccessPhi = true
 
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/115001799311-Module-1-Getting-Started-with-your-Coach-dashboard'
+
   constructor(
     private notifier: NotifierService,
     private dietersDatabase: DietersDatabase,

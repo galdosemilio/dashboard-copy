@@ -5,7 +5,10 @@
     <span *ngIf="!data.accountType">{{'BOARD.USER_NEW' | translate}}</span>
     <span *ngIf="data.accountType">
       <span *ngIf="form.value.accountType == 'dieter'">{{'BOARD.PATIENT_NEW' | translate}}</span>
-      <span *ngIf="form.value.accountType == 'coach'">{{'BOARD.COACH_NEW' | translate}}</span>
+      <span *ngIf="form.value.accountType == 'coach'">
+        {{'BOARD.COACH_NEW' | translate}}
+        <ccr-help-link *ngIf="!!zendeskLink" [link]="zendeskLink"></ccr-help-link>
+      </span>
     </span>
   </div>
   <button matDialogClose><mat-icon>cancel</mat-icon></button>

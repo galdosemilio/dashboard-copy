@@ -23,14 +23,18 @@ class="step-input-container">
     </div>
 
     <div fxLayoutAlign="row" fxLayoutAlign="start center">
-        <button
-        [disabled]="hardBlocked || form.invalid"
-        (click)="onAddMessage()"
-        class="ccr-icon-button"
-        color="secondary" mat-button>
-            <mat-icon>add</mat-icon>
-            {{ 'SEQUENCING.ADD_MESSAGE' | translate }}
-        </button>
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <button
+            [disabled]="hardBlocked || form.invalid"
+            (click)="onAddMessage()"
+            class="ccr-icon-button"
+            color="secondary" mat-button>
+                <mat-icon>add</mat-icon>
+                {{ 'SEQUENCING.ADD_MESSAGE' | translate }}
+            </button>
+
+            <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+        </div>
 
         <div *ngIf="messages.length > pageSize" fxFlex fxLayout="row" fxLayoutAlign="end center">
             <button mat-button type="button"

@@ -16,6 +16,8 @@ export class AlertsSettingsComponent implements OnDestroy, OnInit {
   source: AlertTypesDataSource
 
   clinic: Partial<OrganizationWithAddress> = {}
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360020232251-Setting-up-Patient-Alerts'
 
   constructor(
     private context: ContextService,

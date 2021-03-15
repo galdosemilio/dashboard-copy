@@ -29,6 +29,8 @@ export class DieterComponent implements OnDestroy, OnInit {
   public showMessaging: boolean
   public showPatientPDFButton: boolean
   public showRPM: boolean
+  public callUserZendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360019778772-Video-Conferencing-with-a-Patient'
 
   constructor(
     private account: Account,

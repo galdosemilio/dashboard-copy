@@ -1,7 +1,11 @@
 <div>
   <h3>
     <mat-icon>event</mat-icon>
-    <span *ngIf="!editing">{{'RIGHT_PANEL.ADD_NEW_MEETING' | translate}}</span>
+    <span *ngIf="!editing">
+      {{'RIGHT_PANEL.ADD_NEW_MEETING' | translate}}
+
+      <ccr-help-link [link]="addNewMeetingZendeskLink"></ccr-help-link>
+    </span>
     <span *ngIf="editing">{{'RIGHT_PANEL.EDIT_MEETING' | translate}}</span>
   </h3>
 

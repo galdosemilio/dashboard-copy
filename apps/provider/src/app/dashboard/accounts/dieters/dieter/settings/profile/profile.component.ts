@@ -38,6 +38,8 @@ export class DieterProfileComponent implements BindForm, OnDestroy, OnInit {
   form: FormGroup
   dieterId: number
   isLoading = false
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360019702272-Editing-a-Patient-Profile'
 
   constructor(
     private access: Access,

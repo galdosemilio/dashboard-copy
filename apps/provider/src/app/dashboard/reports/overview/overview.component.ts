@@ -8,6 +8,9 @@ import { EventsService } from '@app/service'
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360020078472-Viewing-the-Reports-Overview'
+
   constructor(private bus: EventsService) {}
 
   ngOnInit() {

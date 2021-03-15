@@ -7,7 +7,11 @@
 
   <div class="ccr-heading" fxFlex="nogrow">
     <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
-      <h2>{{ 'GLOBAL.MESSAGES' | translate }}</h2>
+      <h2>
+        {{ 'GLOBAL.MESSAGES' | translate }}
+
+        <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+      </h2>
     </div>
   </div>
 

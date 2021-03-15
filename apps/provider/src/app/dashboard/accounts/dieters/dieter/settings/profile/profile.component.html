@@ -1,4 +1,10 @@
 
+<p class="ccr-hint initial">
+  {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.PROFILE' | translate }}
+
+  <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+</p>
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
   <app-dieter-form #dieter bindForm="dieter" [dieterId]="dieterId"></app-dieter-form>

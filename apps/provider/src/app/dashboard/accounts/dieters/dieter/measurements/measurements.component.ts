@@ -240,6 +240,8 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   columns: string[]
   filteredColumns: string[] = []
   useNewEndpoint: boolean
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360020245112-Viewing-a-Patient-s-Measurements'
 
   // datasource refresh trigger
   refresh$ = new Subject<any>()

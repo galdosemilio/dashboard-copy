@@ -109,6 +109,12 @@ export class SequencingFormComponent
   stepsIndexes: number[] = []
   stepHoursFilters: SequenceHour[][] = []
   stepServerDelays: string[] = []
+  endingActionZendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360035966752-Understanding-Sequence-Delays'
+  addStepZendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360036270491-Adding-Steps-to-a-Sequence'
+  delayZendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360035966752-Understanding-Sequence-Delays'
 
   private _blocked: boolean
   private _hardBlocked: boolean

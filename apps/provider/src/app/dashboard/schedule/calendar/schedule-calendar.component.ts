@@ -71,6 +71,8 @@ export class ScheduleCalendarComponent
   public clickedMeeting: any
   public dates: DateNavigatorOutput = {}
   public selectedOrg?: OrganizationEntity
+  public zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360018626192-Viewing-the-Dashboard-Schedules'
 
   private selectedUser: SelectedAccount
   private isTableScrolled = false

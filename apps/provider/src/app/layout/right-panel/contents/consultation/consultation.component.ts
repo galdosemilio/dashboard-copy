@@ -13,6 +13,8 @@ import { ConsultationFormArgs } from './consultationFormArgs.interface'
 export class ConsultationComponent implements OnInit, OnDestroy {
   formType = 'addConsultation'
   editing = false
+  addNewMeetingZendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360020575472-Adding-a-New-Meeting-in-the-Dashboard'
 
   constructor(private cdr: ChangeDetectorRef, private bus: EventsService) {}
 

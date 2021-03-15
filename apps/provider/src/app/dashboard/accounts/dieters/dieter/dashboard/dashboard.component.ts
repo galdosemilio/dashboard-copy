@@ -25,6 +25,8 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
   usesNewEndpoint: string[] = ['weight', 'bmi', 'bodyFat', 'leanMass']
   refresh$: Subject<void> = new Subject<void>()
   source: MeasurementDataSource | null
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360018829432-Viewing-the-Patient-Dashboard'
 
   @ViewChild(MatSelect, { static: false })
   activitySelector: MatSelect

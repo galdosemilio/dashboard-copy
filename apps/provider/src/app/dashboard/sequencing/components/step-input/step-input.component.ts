@@ -105,6 +105,8 @@ export class StepInputComponent
   minPageIndex = 0
   maxPageIndex = 5
   pageSize = 5
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360035475392-Adding-Actions-to-a-Sequence'
 
   private _blocked: boolean
   private _filteredHours: SequenceHour[] = []

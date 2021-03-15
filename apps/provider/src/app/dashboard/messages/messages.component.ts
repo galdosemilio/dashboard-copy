@@ -50,6 +50,8 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public source: ThreadsDataSource | null
   public threads: Array<MessageThread> = []
   public isMessageOpen = false
+  public zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/sections/360003247792-Messages'
 
   @ViewChild('scroll', { static: true })
   scroll: ElementRef

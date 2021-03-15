@@ -1,4 +1,10 @@
 <div [formGroup]="form">
+  <p class="ccr-hint lowercase">
+    {{ 'GLOBAL.ABOUT' | translate }} {{'BOARD.FORMS' | translate}}
+
+    <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+  </p>
+
   <div class="form-actions" fxLayout="row" fxLayout.xs="column"
   fxLayoutAlign="end start" fxLayoutAlign.xs="stretch">
   <ul class="ccr-breadcrumbs" fxFlex>

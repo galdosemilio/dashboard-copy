@@ -1,7 +1,11 @@
 <div class="ccr-heading">
   <div class="ccr-name" fxLayout="row" fxLayoutAlign.xs="center">
     <ccr-avatar size="bigger" [account]="profile?.id" [editable]="true"></ccr-avatar>
-    <h2>{{'BOARD.PROFILE' | translate}}</h2>
+    <h2>
+      {{'BOARD.PROFILE' | translate}}
+
+      <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+    </h2>
   </div>
 </div>
 

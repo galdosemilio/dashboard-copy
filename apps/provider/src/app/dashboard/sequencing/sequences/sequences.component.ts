@@ -21,6 +21,8 @@ export class SequencesComponent implements OnDestroy, OnInit {
 
   searchControl: FormControl
   source: SequencesDataSource
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/sections/360007119132-Sequences'
 
   constructor(
     private context: ContextService,

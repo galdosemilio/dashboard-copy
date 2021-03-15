@@ -44,6 +44,8 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
   timeframe: unitOfTime.DurationConstructor = this.DEFAULT_TIMEFRAME
   goals: FetchGoalResponse
   dates: DateNavigatorOutput = {}
+  zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360020505591-Viewing-a-Patient-Journal'
 
   hasFoodKeys: number
   hasLevl = false

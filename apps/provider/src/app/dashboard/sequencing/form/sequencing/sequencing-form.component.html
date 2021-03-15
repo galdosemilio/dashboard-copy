@@ -9,6 +9,7 @@
                 required
                 type="text">
                 <mat-icon matSuffix>mode_edit</mat-icon>
+
             </mat-form-field>
         </div>
 
@@ -51,8 +52,9 @@
                     (change)="onNameChanged($event, i)">
                     </ccr-inline-editable-field>
                 </div>
-                <div (click)="onSetActiveStep(i)" fxFlex="25%">
+                <div (click)="onSetActiveStep(i)" fxFlex="35%" fxLayout="row" fxLayoutAlign="start center">
                     <ccr-inline-editable-field
+                    fxFlex="35%"
                     [defaultDisplayValue]="'SEQUENCING.DELAYS.NO_DELAY'"
                     [disabled]="(blocked && form.value.steps[i].step?.syncState?.inServer) || hardBlocked"
                     [displayValueSuffix]="delaySuffixFormat(i) | translate"
@@ -64,8 +66,10 @@
                     (change)="onDelayChanged($event, i)"
                     type="number">
                     </ccr-inline-editable-field>
+
+                    <ccr-help-link fxFlex="10%" [link]="delayZendeskLink"></ccr-help-link>
                 </div>
-                <div (click)="onSetActiveStep(i)" fxFlex="25%">
+                <div (click)="onSetActiveStep(i)" fxFlex>
                     <ccr-inline-editable-field
                     [defaultDisplayValue]="'SEQUENCING.HOURS.MIDNIGHT'"
                     [disabled]="(blocked && form.value.steps[i].step?.syncState?.inServer) || hardBlocked"
@@ -108,10 +112,7 @@
                     {{ 'SEQUENCING.ADD_STEP' | translate }}
                 </button>
 
-                <ccr-popup-description
-                [title]="'SEQUENCING.ADD_STEP' | translate"
-                [description]="'SEQUENCING.ADD_STEP_ABOUT' | translate"
-                ></ccr-popup-description>
+                <ccr-help-link [link]="addStepZendeskLink"></ccr-help-link>
             </div>
         </div>
     </div>

@@ -11,6 +11,9 @@ import { EventsService } from '@app/service'
   styleUrls: ['./schedule-availability.component.scss']
 })
 export class ScheduleAvailabilityComponent implements OnInit {
+  public zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360020732751-Setting-your-Schedule-Availability'
+
   constructor(private store: Store<CCRConfig>, private bus: EventsService) {}
 
   ngOnInit() {

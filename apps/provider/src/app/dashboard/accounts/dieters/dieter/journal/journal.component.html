@@ -1,5 +1,11 @@
 
 <div class="ccr-container-mini">
+  <p class="ccr-hint lowercase">
+    {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.PATIENT' | translate }} {{ 'GLOBAL.JOURNAL' | translate }}
+
+    <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+  </p>
+
   <ul class="ccr-tabs-center" fxLayout="row" fxLayoutAlign.gt-xs="center stretch">
     <li *ngIf="hiddenComponents.indexOf('food') === -1">
       <a mat-button [routerLink]="['.', {s: 'food'}]" [class.active]="section === 'food'">{{ 'GLOBAL.FOOD' | translate }}</a>
