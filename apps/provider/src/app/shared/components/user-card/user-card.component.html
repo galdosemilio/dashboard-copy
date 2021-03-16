@@ -9,12 +9,19 @@ fxLayoutGap="10px">
         {{ 'GLOBAL.YOU' | translate }}
     </small>
     <ng-template #defaultName>
-        <small
-        [class.patient-link]="allowUserLinking"
-        (click)="onGoToUserProfile(user)"
-        fxFlex>
-            {{ user.firstName }} {{ user.lastName }}
-        </small>
+        <div
+        fxFlex
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px">
+            <small
+            [class.patient-link]="allowUserLinking"
+            (click)="onGoToUserProfile(user)"
+            >
+                {{ user.firstName }} {{ user.lastName }}
+
+            </small>
+            <mat-icon *ngIf="allowUserLinkingBlank" class="clickable" (click)="onGoToUserProfile(user, true)">launch</mat-icon>
+        </div>
     </ng-template>
     <mat-icon
     *ngIf="showRemoveButton && (!currentAccount || currentAccount.id !== user.account)"

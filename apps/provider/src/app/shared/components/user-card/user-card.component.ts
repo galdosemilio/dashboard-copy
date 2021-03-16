@@ -12,6 +12,8 @@ export class UserCardComponent implements OnInit {
   @Input()
   allowUserLinking = false
   @Input()
+  allowUserLinkingBlank = false
+  @Input()
   user: any
   @Input()
   showCallButton = false
@@ -22,6 +24,7 @@ export class UserCardComponent implements OnInit {
   remove: Subject<string> = new Subject<string>()
 
   currentAccount: CurrentAccount
+  isGoingToProfile = false
 
   constructor(
     private account: AccountProvider,
@@ -34,22 +37,42 @@ export class UserCardComponent implements OnInit {
     this.currentAccount = this.context.user
   }
 
-  onGoToUserProfile(account): void {
+  async onGoToUserProfile(account, openNewTab = false): Promise<void> {
     if (!this.allowUserLinking) {
       return
     }
 
-    if (account.accountType) {
-      this.router.navigate([this.context.getProfileRoute(account)])
+    if (this.isGoingToProfile) {
+      // prevent to opening new tab twice when double click Icon.
+      return
+    }
+
+    let route = []
+    this.isGoingToProfile = true
+
+    try {
+      if (account.accountType) {
+        route = [this.context.getProfileRoute(account)]
+      } else {
+        const acc: AccSingleResponse = await this.account.getSingle(account.id)
+        route = [this.context.getProfileRoute(acc)]
+      }
+    } catch (err) {
+      this.notifier.error(err)
+    } finally {
+      this.isGoingToProfile = false
+    }
+
+    if (!route.length) {
+      return
+    }
+
+    if (openNewTab) {
+      const newRelativeUrl = this.router.createUrlTree(route)
+      const baseUrl = window.location.href.replace(this.router.url, '')
+      window.open(baseUrl + newRelativeUrl, '_blank')
     } else {
-      this.account
-        .getSingle(account.id)
-        .then((acc: AccSingleResponse) => {
-          this.router.navigate([this.context.getProfileRoute(acc)])
-        })
-        .catch((err) => {
-          this.notifier.error(err)
-        })
+      this.router.navigate(route)
     }
   }
 
