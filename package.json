@@ -73,7 +73,7 @@
     "linkifyjs": "^2.1.9",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "moment-timezone": "^0.5.31",
+    "moment-timezone": "^0.5.33",
     "ng2-charts": "^2.4.2",
     "ngrx-store-freeze": "^0.2.4",
     "ngx-color-picker": "^11.0.0",
