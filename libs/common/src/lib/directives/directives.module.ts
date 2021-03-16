@@ -8,6 +8,7 @@ import { DetectKeyDirective } from './detect-key.directive'
 import { LinkActiveDirective } from './link-active.directive'
 import { LogoDirective } from './logo.directive'
 import { NumberOnlyDirective } from './number-only.directive'
+import { DebounceEventsDirective } from './debounce-events.directive'
 
 @NgModule({
   imports: [CommonModule, MatButtonModule, MatDialogModule, TranslateModule],
@@ -17,7 +18,8 @@ import { NumberOnlyDirective } from './number-only.directive'
     DetectKeyDirective,
     LinkActiveDirective,
     LogoDirective,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    DebounceEventsDirective
   ],
   exports: [
     AvatarDirective,
@@ -25,7 +27,8 @@ import { NumberOnlyDirective } from './number-only.directive'
     DetectKeyDirective,
     LinkActiveDirective,
     LogoDirective,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    DebounceEventsDirective
   ]
 })
 export class CcrDirectivesModule {}

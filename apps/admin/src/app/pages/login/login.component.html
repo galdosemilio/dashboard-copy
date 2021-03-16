@@ -8,7 +8,7 @@
       <div *ngSwitchCase="'default'" fxLayout="column" fxLayoutGap="12px">
         <ng-container *ngTemplateOutlet="badgeButtons;context:{wrapper:'badge-button-wrapper-md-and-down'}"></ng-container>
 
-        <form [formGroup]="form" (keydown.enter)="onSubmit()" fxLayout="column" fxLayoutGap="10px">
+        <form [formGroup]="form" ccrDebounceEvents (ccrSubmit)="onSubmit()" fxLayout="column" fxLayoutGap="10px">
           <ccr-form-field-email
           focus required
           formControlName="email"
@@ -24,7 +24,7 @@
             <mat-error [translate]="'NOTIFY.ERROR.MIN_CHARS'" [translateParams]="{min: 6}"></mat-error>
           </mat-form-field>
 
-          <button mat-flat-button color="primary" type="button" class="ccr-button" [disableRipple]="isLoggingIn" (click)="onSubmit()">
+          <button mat-flat-button color="primary" type="submit" class="ccr-button" [disableRipple]="isLoggingIn">
             <span *ngIf="!isLoggingIn">
               {{ 'GLOBAL.SIGN_IN' | translate }}
             </span>

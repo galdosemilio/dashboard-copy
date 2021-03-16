@@ -3,7 +3,7 @@
  */
 
 import { Inject, Injectable } from '@angular/core'
-import axios, { AxiosResponse, CancelTokenSource, CancelToken } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { uniq } from 'lodash'
 import * as qs from 'qs'
 import { Subject } from 'rxjs'
@@ -29,9 +29,6 @@ class ApiService {
   private token: string
   private langs: string
   private socketClient: io.SocketIOClient.Socket
-  private cancelTokenSources: {
-    [name: string]: CancelTokenSource
-  } = {}
 
   public onUnauthenticatedError = new Subject<boolean>()
 
@@ -247,10 +244,7 @@ class ApiService {
           }
         })
         .catch((err) => {
-          if (axios.isCancel(err)) {
-            // just return instead of throws error if axios request canceled
-            return
-          }
+          // TODO research on axios.CancelToken executor + rxjs
 
           try {
             if (err.response) {
@@ -316,19 +310,6 @@ class ApiService {
         this.token = ''
         break
     }
-  }
-
-  public createCancelToken(name: string): CancelToken {
-    // if a previous cancel token exists, cancel the request
-    if (this.cancelTokenSources[name]) {
-      this.cancelTokenSources[name].cancel()
-    }
-
-    // creating a new cancel token
-    this.cancelTokenSources[name] = axios.CancelToken.source()
-
-    // returning the new cancel token
-    return this.cancelTokenSources[name].token
   }
 }
 
