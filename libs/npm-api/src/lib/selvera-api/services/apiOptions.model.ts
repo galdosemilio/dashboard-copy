@@ -5,7 +5,7 @@
 import { upperFirst } from 'lodash'
 import { CcrRol } from '../model'
 import { ApiOptions } from './apiOptions.interface'
-import { Method, ResponseType } from 'axios'
+import { Method, ResponseType, CancelToken } from 'axios'
 import { HeaderOptions } from './headerOptions.interface'
 
 export class ApiOptionsModel implements ApiOptions {
@@ -20,6 +20,7 @@ export class ApiOptionsModel implements ApiOptions {
   public readonly withCredentials: boolean | undefined = true
   public fullError = false
   public responseType?: ResponseType
+  public cancelToken?: CancelToken
 
   /**
    * @param apiOptions {}
@@ -40,6 +41,7 @@ export class ApiOptionsModel implements ApiOptions {
     this.paramsSerializer = apiOptions.paramsSerializer
     this.withCredentials = apiOptions.withCredentials || true
     this.fullError = apiOptions.fullError || false
+    this.cancelToken = apiOptions.cancelToken
 
     // TODO ensure the format with trim and join
     this.url = `${apiUrl}${this.version}${this.endpoint}`

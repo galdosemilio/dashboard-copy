@@ -28,7 +28,8 @@ class Session {
           method: 'POST',
           version: '2.0',
           data: request,
-          fullError: true
+          fullError: true,
+          cancelToken: this.apiService.createCancelToken('login')
         } as any) // MERGETODO: CHECK THIS TYPE!!!
 
         if (response.mfa) {
@@ -80,7 +81,8 @@ class Session {
       endpoint: '/logout',
       method: 'POST',
       data: token ? { token } : undefined,
-      version: '2.0'
+      version: '2.0',
+      cancelToken: this.apiService.createCancelToken('logout')
     })
   }
 

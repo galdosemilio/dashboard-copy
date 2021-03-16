@@ -2,7 +2,7 @@
  * Interface for api options
  */
 import { Environment } from '../../config/environment.interface'
-import { Method, ResponseType } from 'axios'
+import { Method, ResponseType, CancelToken } from 'axios'
 
 export interface ApiOptions {
   baseUrl?: string
@@ -19,4 +19,5 @@ export interface ApiOptions {
   environment?: Environment
   fullError?: boolean
   omitHeaders?: string[]
+  cancelToken?: CancelToken
 }
