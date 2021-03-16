@@ -44,6 +44,7 @@
           <mat-icon (click)="onEditName(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.FORMS.EDIT_NAME' | translate">edit</mat-icon>
           <mat-icon (click)="onDeleteForm(row)" [matTooltip]="'LIBRARY.FORMS.DELETE_FORM' | translate">delete</mat-icon>
           <mat-icon (click)="onCloneForm(row)" [matTooltip]="'LIBRARY.FORMS.CLONE_FORM' | translate">content_copy</mat-icon>
+          <mat-icon (click)="onGeneratePDF(row)" [matTooltip]="'LIBRARY.FORMS.DOWNLOAD_PDF' | translate">picture_as_pdf</mat-icon>
         </mat-cell>
       </ng-container>
 

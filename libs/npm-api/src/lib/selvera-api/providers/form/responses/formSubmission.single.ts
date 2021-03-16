@@ -2,6 +2,7 @@
  * GET /content/form/submission/:id
  */
 
+import { NamedEntity } from '../../common/entities'
 import {
   FormAddendumRef,
   FormAnswer,
@@ -24,4 +25,6 @@ export interface FormSubmissionSingle {
   createdAt: string
   /** Addendum collection. */
   addendums: Array<FormAddendumRef>
+  /** Organization.*/
+  organization: NamedEntity
 }

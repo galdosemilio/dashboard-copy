@@ -17,7 +17,7 @@ import { AppRoutes } from './app.routing'
 import { LayoutModule } from './layout/layout.module'
 import { MatMomentDateModule, MissingStringsHandler } from './shared'
 
-import { registerLocaleData } from '@angular/common'
+import { DatePipe, registerLocaleData } from '@angular/common'
 import { EffectsModule } from '@ngrx/effects'
 import {
   RouterStateSerializer,
@@ -69,6 +69,7 @@ registerLocaleData(localeEs, 'es')
     SharedModule
   ],
   providers: [
+    DatePipe,
     {
       provide: API_ENVIRONMENT,
       useValue: environment
