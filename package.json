@@ -1,7 +1,65 @@
 {
   "name": "dashboard",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "author": "CoachCare",
+  "release": {
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "parserOpts": {
+            "issuePrefixes": [
+              "FRON-",
+              "IDEA-"
+            ],
+            "issueUrlFormat": "https://selvera.atlassian.net/browse/{prefix}{id}"
+          },
+          "releaseRules": [
+            {
+              "type": "refactor",
+              "release": "patch"
+            }
+          ]
+        }
+      ],
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ]
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        120
+      ],
+      "body-max-line-length": [
+        2,
+        "always",
+        200
+      ]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "yarn affected:lint && yarn format:check"
+    }
+  },
   "scripts": {
     "ng": "nx",
     "nx": "node --max-old-space-size=6144 node_modules/.bin/nx",
@@ -93,10 +151,18 @@
     "@angular/compiler-cli": "10.1.3",
     "@angular/language-service": "10.1.3",
     "@biesbjerg/ngx-translate-extract": "~2.3.4",
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
     "@nrwl/angular": "^10.2.1",
     "@nrwl/cypress": "11.2.12",
     "@nrwl/jest": "10.2.1",
     "@nrwl/workspace": "10.2.1",
+    "@octokit/core": "^3.3.1",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/release-notes-generator": "^9.0.2",
     "@types/jest": "26.0.14",
     "@types/node": "^14.14.6",
     "codelyzer": "~6.0.0",
@@ -105,11 +171,12 @@
     "dotenv": "8.2.0",
     "eslint": "7.9.0",
     "eslint-plugin-cypress": "^2.10.3",
-    "husky": "^5.0.9",
+    "husky": "4",
     "jest": "26.4.2",
     "jest-preset-angular": "8.3.1",
     "ng-packagr": "^10.1.2",
     "prettier": "2.2.1",
+    "semantic-release": "^17.4.2",
     "terser": "^5.3.8",
     "ts-jest": "26.4.0",
     "ts-node": "~9.1.1",
