@@ -37,7 +37,7 @@
       *ngIf="callState && callState.conferencingEnabled && callState.subaccountId != ''"
       class="perm-camera-mic"
       (click)="onOpenCallSettings()">
-        <mat-icon class="camera-icon" color="primary">phone</mat-icon>
+        <mat-icon class="camera-icon" color="primary">videocam</mat-icon>
         <span
         *ngIf="callState?.hasAudioDeviceAccess && callState.audioInputDevices?.length; else disabled"
         class="perm-icon perm-success">

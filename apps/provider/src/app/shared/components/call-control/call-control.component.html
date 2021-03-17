@@ -16,7 +16,7 @@ matTooltipPosition="above">
   color="primary"
   mat-button
   type="button">
-    <mat-icon>phone</mat-icon>
+    <mat-icon>videocam</mat-icon>
     <span fxHide.xs>{{ 'BOARD.CALL_USER' | translate }}</span>
   </button>
   <div
@@ -24,7 +24,7 @@ matTooltipPosition="above">
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
   (click)="billableServices.length ? undefined : onClick()"
   class="clickable">
-    <mat-icon class="min">phone</mat-icon>
+    <mat-icon class="min">videocam</mat-icon>
   </div>
   <ccr-popup-description
   *ngIf="mode === 0 && !callState?.hasAudioDeviceAccess"
@@ -44,6 +44,6 @@ matTooltipPosition="above">
 </div>
 <ng-template #disabled_call_icon>
   <span *ngIf="showDisabledIcon">
-    <mat-icon class="disabled-icon">phone</mat-icon>
+    <mat-icon class="disabled-icon">videocam</mat-icon>
   </span>
 </ng-template>
