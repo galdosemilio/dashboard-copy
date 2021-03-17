@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading" (scroll)="onScroll($event)">
+<div class="reminder-wrapper" fxLayout="column" *ngIf="!isLoading" (scroll)="onScroll($event)">
   <h3>
     <mat-icon>people</mat-icon>
     <span>{{'RIGHT_PANEL.FOR_THIS_PATIENT' | translate}}</span>
@@ -24,8 +24,8 @@
     <span>{{'RIGHT_PANEL.NO_ALERTS' | translate}}</span>
   </div>
 
-  <mat-list *ngIf="alerts.length">
-    <mat-list-item *ngFor="let alert of alerts; let i = index">
+  <mat-list class="alert-item-wrapper" *ngIf="alerts.length">
+    <mat-list-item class="alert-item" *ngFor="let alert of alerts; let i = index">
       <app-rightpanel-alert [alert]="alert" (dismissed)="alerts.splice(i, 1)"></app-rightpanel-alert>
     </mat-list-item>
   </mat-list>
@@ -67,7 +67,7 @@
     </mat-list>
   </ng-container>
 
-  <div *ngIf="shouldShowNotes">
+  <div fxLayout="column" fxFlex="1 1 100%" class="notes-container-wrapper" *ngIf="shouldShowNotes">
     <h4 matSubheader>
       <mat-icon>event_note</mat-icon>
       <span>{{ 'BOARD.NOTES' | translate }}</span>
