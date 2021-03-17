@@ -145,6 +145,15 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
     }
   }
 
+  private async checkPatientActiveSession(id: string): Promise<boolean> {
+    try {
+      await this.account.checkActiveSession({ id })
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
   private async checkPatientAvailability(): Promise<{
     loginItem?: LoginHistoryItem
     organization?: NamedEntity
@@ -157,6 +166,10 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
       ) {
         return { status: AccountAvailabilityStatus.AVAILABLE }
       }
+
+      const activeSession = await this.checkPatientActiveSession(
+        this.targets[0].id
+      )
 
       const loginHistory = await this.account.getLoginHistory({
         organization: this.context.organizationId,
@@ -174,16 +187,13 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
         status: undefined
       }
 
-      availability.status = loginHistory.data[0].organization
-        ? AccountAvailabilityStatus.AVAILABLE
-        : AccountAvailabilityStatus.UNCERTAIN
-
-      availability.status =
-        Math.abs(
-          moment(loginHistory.data[0].createdAt).diff(moment(), 'days')
-        ) >= 30
-          ? AccountAvailabilityStatus.EXPIRED
-          : availability.status
+      if (!activeSession) {
+        availability.status = AccountAvailabilityStatus.EXPIRED
+      } else {
+        availability.status = loginHistory.data[0].organization
+          ? AccountAvailabilityStatus.AVAILABLE
+          : AccountAvailabilityStatus.UNCERTAIN
+      }
 
       return availability
     } catch (error) {

@@ -420,6 +420,21 @@ class Account {
       data: request
     })
   }
+
+  /**
+   * Checks if an account has an active session.
+   * The response is the HTTP code.
+   * @param request must implement Entity
+   * @returns Promise<void>
+   */
+  public checkActiveSession(request: Entity): Promise<void> {
+    return this.apiService.request({
+      endpoint: `/account/${request.id}/session`,
+      method: 'HEAD',
+      version: '1.0',
+      data: request
+    })
+  }
 }
 
 export { Account }
