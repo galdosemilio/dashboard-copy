@@ -1144,6 +1144,7 @@
     "SAVE_MEETING": "حفظ الاجتماع",
     "SAVE_UNAVAILABILITY": "حفظ عدم الإتاحة",
     "SET_AS_UNAVAILABLE": "ضبط كغير متاح",
+    "SKIP_CONFLICT_MEETING_TIMES": "تخطي أوقات اجتماعات التعارض",
     "VISCERAL_FAT_LBS": "الدهون الحشوية بالرطل",
     "VISCERAL_FAT_PERC": "الدهون الحشوية",
     "VISCERAL_FAT_TANITA": "الدهون الحشوية (التقييم)"

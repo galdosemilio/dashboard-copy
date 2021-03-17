@@ -1144,6 +1144,7 @@
     "SAVE_MEETING": "Sauvegarder la rencontre",
     "SAVE_UNAVAILABILITY": "Sauvegarder l’indisponibilité",
     "SET_AS_UNAVAILABLE": "Marquer comme indisponible",
+    "SKIP_CONFLICT_MEETING_TIMES": "Ignorer les heures de réunion en conflit",
     "VISCERAL_FAT_LBS": "Graisse viscérale",
     "VISCERAL_FAT_PERC": "Graisse viscérale %",
     "VISCERAL_FAT_TANITA": "Graisse viscérale (note)"

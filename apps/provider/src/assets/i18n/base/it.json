@@ -1144,6 +1144,7 @@
     "SAVE_MEETING": "Salva Incontro",
     "SAVE_UNAVAILABILITY": "Salva Irreperibilità",
     "SET_AS_UNAVAILABLE": "Imposta Come Irreperibile",
+    "SKIP_CONFLICT_MEETING_TIMES": "Salta gli orari delle riunioni in conflitto",
     "VISCERAL_FAT_LBS": "Grasso Viscerale",
     "VISCERAL_FAT_PERC": "% di Grasso Viscerale",
     "VISCERAL_FAT_TANITA": "Grasso Viscerale (Valutazione)"

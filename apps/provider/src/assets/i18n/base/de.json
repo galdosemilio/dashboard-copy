@@ -1144,6 +1144,7 @@
     "SAVE_MEETING": "Meeting speichern",
     "SAVE_UNAVAILABILITY": "Nicht-Verfügbarkeit speichern",
     "SET_AS_UNAVAILABLE": "Als nicht verfügbar einstellen",
+    "SKIP_CONFLICT_MEETING_TIMES": "Sla conflicterende vergadertijden over",
     "VISCERAL_FAT_LBS": "viszerales Fett",
     "VISCERAL_FAT_PERC": "Viszerales Fett in %",
     "VISCERAL_FAT_TANITA": "Viszerales Fett (Wertung)"

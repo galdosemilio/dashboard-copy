@@ -1144,6 +1144,7 @@
     "SAVE_MEETING": "Guardar Reunião",
     "SAVE_UNAVAILABILITY": "Guardar Indisponibilidade",
     "SET_AS_UNAVAILABLE": "Definir com indisponível",
+    "SKIP_CONFLICT_MEETING_TIMES": "Pular Horários de Reunião de Conflito",
     "VISCERAL_FAT_LBS": "Gordura Visceral",
     "VISCERAL_FAT_PERC": "Gordura Visceral %",
     "VISCERAL_FAT_TANITA": "Gordura Visceral (Classificação)"

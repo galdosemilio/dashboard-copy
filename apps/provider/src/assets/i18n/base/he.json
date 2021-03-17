@@ -1144,6 +1144,7 @@
     "SAVE_MEETING": "שמירת פגישה",
     "SAVE_UNAVAILABILITY": "שמירת אי זמינות",
     "SET_AS_UNAVAILABLE": "מוגדר כלא זמין",
+    "SKIP_CONFLICT_MEETING_TIMES": "דלג על זמני פגישות הסכסוך",
     "VISCERAL_FAT_LBS": "שומן בטני",
     "VISCERAL_FAT_PERC": "שומן בטני %",
     "VISCERAL_FAT_TANITA": "שומן בטן (דירוג)"
