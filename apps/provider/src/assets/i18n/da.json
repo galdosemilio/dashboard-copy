@@ -1117,7 +1117,7 @@
     "ADD_NEW_MEETING": "Tilføj Nyt Møde",
     "AFTER": "Efter",
     "ALLOW_CONFLICT_MEETINGS": "Tillad modstridende møder",
-    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Denne mulighed forhindrer eller tillader oprettelse af det gentagne møde, hvis der er konflikter. Hvis afkrydsningsfeltet ikke er markeret, og der er et tidligere planlagt møde under nogen af de nyoprettede mødetider, oprettes mødet (og eventuelle gentagne møder i denne serie) ikke. Hvis afkrydsningsfeltet er markeret, opretter det mødet (og eventuelle gentagne møder i denne serie), men opretter ikke nogen møder i serien på tidspunkter, hvor deltagere har et allerede planlagt møde",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Denne mulighed forhindrer eller tillader oprettelse af gentagne møder, hvis der er konflikter.<br><br><ul><li><b>Hvis afkrydsningsfeltet ikke er markeret</b> og der er et tidligere planlagt møde under nogen af de nyoprettede mødetider, mødet (og eventuelle gentagne møder i denne serie) oprettes ikke.</li><br><li><b>Hvis afkrydsningsfeltet er markeret</b>, det opretter alle tilsigtede møder (både de indledende og eventuelle gentagne møder i denne serie), selvom en deltager har et allerede planlagt møde i løbet af en af disse tidspunkter. Dette ville resultere i et overlappende møde, hvor to møder er reserveret mindst en del af samme tid.</li></ul>",
     "BODY_FAT_LBS": "Kropsfedt",
     "BODY_FAT_PERC": "Kropsfedt %",
     "BODY_WATER_LBS": "Samlet Kropsvand",

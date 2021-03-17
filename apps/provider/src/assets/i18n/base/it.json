@@ -1117,7 +1117,7 @@
     "ADD_NEW_MEETING": "Aggiungi Nuovo Incontro",
     "AFTER": "Dopo",
     "ALLOW_CONFLICT_MEETINGS": "Consenti riunioni in conflitto",
-    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Questa opzione impedirà o consentirà la creazione della riunione ripetuta in caso di conflitti. Se la casella non è selezionata e c'è una riunione pianificata in precedenza durante uno degli orari di riunione appena creati, la riunione (e tutte le riunioni ripetute in questa serie) non verranno create. Se la casella è selezionata, creerà la riunione (e qualsiasi riunione ripetuta in questa serie) ma non creerà alcuna riunione nella serie durante i periodi per i quali tutti i partecipanti hanno una riunione già programmata",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Questa opzione impedirà o consentirà la creazione di riunioni ripetute in caso di conflitti.<br><br><ul><li><b>Se la casella non è selezionata</b> e c'è una riunione pianificata in precedenza durante uno degli orari di riunione appena creati, la riunione (e qualsiasi riunione ripetuta in questa serie) non verrà creata.</li><br><li><b>Se la casella è selezionata</b>, creerà tutte le riunioni previste (sia le riunioni iniziali che quelle ripetute in questa serie) anche se un partecipante ha una riunione già programmata durante uno di questi orari. Ciò si tradurrebbe in una riunione sovrapposta, in cui vengono prenotate due riunioni per almeno una parte dello stesso tempo.</li></ul>",
     "BODY_FAT_LBS": "Grasso Corporeo",
     "BODY_FAT_PERC": "% di Grasso Corporeo",
     "BODY_WATER_LBS": "Liquidi in Totale nel Corpo",
