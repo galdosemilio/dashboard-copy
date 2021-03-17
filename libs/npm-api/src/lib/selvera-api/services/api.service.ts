@@ -245,7 +245,6 @@ class ApiService {
         })
         .catch((err) => {
           // TODO research on axios.CancelToken executor + rxjs
-
           try {
             if (err.response) {
               const response: AxiosResponse = err.response
