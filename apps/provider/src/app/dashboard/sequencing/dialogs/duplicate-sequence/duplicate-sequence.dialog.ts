@@ -51,7 +51,7 @@ export class DuplicateSequenceDialog implements OnInit {
       const formValue: DuplicateSequenceDialogFormProps = this.form.value
       this.form.disable()
 
-      this.sequence.createSequenceClone({
+      await this.sequence.createSequenceClone({
         id: formValue.sequence.id,
         organization: formValue.organization,
         createdBy: this.context.user.id
