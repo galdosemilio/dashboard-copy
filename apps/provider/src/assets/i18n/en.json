@@ -1117,7 +1117,7 @@
     "ADD_NEW_MEETING": "Add New Meeting",
     "AFTER": "After",
     "ALLOW_CONFLICT_MEETINGS": "Allow Conflicting Meetings",
-    "ALLOW_CONFLICT_MEETINGS_ABOUT": "This option will either prevent or allow meetings that repeat to be created if there are conflicts.<br><br><ul><li><b>If the box is not checked</b> and there is a previously-scheduled meeting during any of the newly-created meeting times, the meeting (and any repeating meetings in this series) will not be created.</li><br><li><b>If the box is checked</b>, it will create all intended meetings (both the initial and any repeating meetings in this series) even if a participants has an already-scheduled meeting during one of those times. This would result in an overlapping meeting, where two meetings are booked for at least part of the same time.</li></ul>",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "This option will either prevent or allow meetings that repeat to be created if there are conflicts.<br><br><ul><li><b>If the box is not checked</b> and there is a previously-scheduled meeting during any of the newly-created meeting times, the meeting (and any repeating meetings in this series) will not be created.</li><br><li><b>If the box is checked</b>, it will create all intended meetings (both the initial and any repeating meetings in this series) even if a participant has an already-scheduled meeting during one of those times. This would result in an overlapping meeting, where two meetings are booked for at least part of the same time.</li></ul>",
     "BODY_FAT_LBS": "Body Fat",
     "BODY_FAT_PERC": "Body Fat %",
     "BODY_WATER_LBS": "Total Body Water",

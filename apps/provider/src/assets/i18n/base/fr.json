@@ -1117,7 +1117,7 @@
     "ADD_NEW_MEETING": "Ajouter une rencontre",
     "AFTER": "Après",
     "ALLOW_CONFLICT_MEETINGS": "Autoriser les réunions conflictuelles",
-    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Cette option empêchera ou autorisera la création de réunions qui se répètent en cas de conflit.<br><br><ul><li><b>Si la case n'est pas cochée</b> et qu'il y a une réunion préalablement programmée pendant l'une des heures de réunion nouvellement créées, la réunion (et toutes les réunions répétées de cette série) ne seront pas créées.</li><br><li><b>Si la case est cochée</b>, il créera toutes les réunions prévues (à la fois les réunions initiales et les réunions répétitives de cette série) même si un participant a déjà une réunion programmée à l'un de ces moments. Il en résulterait une réunion qui se chevaucherait, où deux réunions seraient réservées au moins une partie du même temps.</li></ul>",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Cette option empêchera ou autorisera la création de réunions qui se répètent en cas de conflit.<br><br><ul><li><b>Si la case n'est pas cochée</b> et qu'il y a une réunion préalablement programmée pendant l'une des heures de réunion nouvellement créées, la réunion (et toutes les réunions répétées de cette série) ne seront pas créées.</li><br><li><b>Si la case est cochée</b>, il créera toutes les réunions prévues (à la fois les réunions initiales et les réunions répétitives de cette série), même si un participant a déjà une réunion programmée à l'un de ces moments. Il en résulterait une réunion qui se chevaucherait, où deux réunions seraient réservées au moins une partie du même temps.</li></ul>",
     "BODY_FAT_LBS": "Masse graisseuse",
     "BODY_FAT_PERC": "Masse graisseuse %",
     "BODY_WATER_LBS": "Masse d’eau",
