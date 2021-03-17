@@ -102,6 +102,12 @@
         </div>
       </ng-container>
 
+      <ng-container *ngIf="repeat.value != 'never' && repeat.value != undefined">
+        <mat-checkbox class="mb-10" formControlName="skipConflictCheck">
+          Skip Conflict Meeting Times
+        </mat-checkbox>
+      </ng-container>
+
       <ng-container formGroupName="location">
         <mat-form-field>
           <input matInput formControlName="streetAddress" [placeholder]="'BOARD.STREET' | translate">

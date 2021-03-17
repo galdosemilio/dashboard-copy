@@ -17,4 +17,5 @@ export interface AddMeetingRequest {
   recurring?: MeetingRecurringRequest
   attendees?: Array<MeetingAttendeeRequest>
   location?: MeetingLocationRequest
+  skipConflictCheck?: boolean
 }
