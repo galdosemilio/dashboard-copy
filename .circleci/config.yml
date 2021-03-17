@@ -137,8 +137,41 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Format Check
+          name: Check code formatting
           command: yarn format:check
+      - checkout
+      - run:
+          name: Check commit formatting
+           # This checks all pending commits on a feature branch, but only the 'last' commit on master
+           # because the $CIRCLE_BRANCH and origin/master will be the same in this scenario.
+           # That being said, we shouldn't be pushing multiple (or any at all, really) commits to release directly to master anyway, but we should go through a PR.
+          command:  |
+            MERGE_BASE=$(git merge-base $CIRCLE_BRANCH origin/master)
+            if [ $MERGE_BASE = $CIRCLE_SHA1 ]; then
+              npx commitlint -f $(git rev-parse $CIRCLE_BRANCH^1)
+            else
+              npx commitlint -f $MERGE_BASE
+            fi
+
+  publish_release:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - checkout
+      - run:
+          name: Set up .npmrc
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=$COACHCARE_AUTH_TOKEN" >> ~/.npmrc
+            echo "@coachcare:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+            sudo echo "//npm.pkg.github.com/:_authToken=$COACHCARE_AUTH_TOKEN" > ~/.npmrc
+      - run:
+          name: Set up environment variables
+          command: |
+            echo "export GH_TOKEN=$COACHCARE_AUTH_TOKEN" >> $BASH_ENV
+      - run:
+          name: Publish new release
+          command: npx semantic-release
 
   provider_e2e_parallel:
     <<: *defaults
@@ -289,3 +322,6 @@ workflows:
           requires:
             - approve_production_deployment
           context: dashboard-deployment-production
+      - publish_release:
+          requires:
+            - deploy_production
