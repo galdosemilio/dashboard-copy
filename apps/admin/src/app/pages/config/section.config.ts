@@ -74,7 +74,7 @@ export const SECTION_CONFIG: SectionConfig = {
   },
   prod: {
     ['5341']: ApolloIntSectionConfig,
-    ['5329']: ApolloUSSectionConfig,
+    ['6504']: ApolloUSSectionConfig,
     ['6153']: BariatricAdvantageSectionConfig,
     ['3637']: CoachCareProdSectionConfig,
     ['5489']: GWLPSectionConfig,
