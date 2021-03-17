@@ -1116,6 +1116,8 @@
     "ADD_CONSULTATION": "Konsultation hinzufügen",
     "ADD_NEW_MEETING": "Neues Meeting hinzufügen",
     "AFTER": "Nach",
+    "ALLOW_CONFLICT_MEETINGS": "Sta conflicterende vergaderingen toe",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Deze optie voorkomt of staat toe dat de herhalende vergadering wordt gemaakt als er conflicten zijn. Als het vakje niet is aangevinkt en er is een eerder geplande vergadering tijdens een van de nieuw gemaakte vergadertijden, wordt de vergadering (en eventuele herhalende vergaderingen in deze reeks) niet gemaakt. Als het vakje is aangevinkt, wordt de vergadering (en eventuele herhalende vergaderingen in deze reeks) aangemaakt, maar worden er geen vergaderingen in de reeks gemaakt op tijden waarvoor deelnemers al een geplande vergadering hebben",
     "BODY_FAT_LBS": "Körperfett",
     "BODY_FAT_PERC": "Körperfett in %",
     "BODY_WATER_LBS": "Gesamtkörperwasser",
@@ -1144,7 +1146,6 @@
     "SAVE_MEETING": "Meeting speichern",
     "SAVE_UNAVAILABILITY": "Nicht-Verfügbarkeit speichern",
     "SET_AS_UNAVAILABLE": "Als nicht verfügbar einstellen",
-    "SKIP_CONFLICT_MEETING_TIMES": "Sla conflicterende vergadertijden over",
     "VISCERAL_FAT_LBS": "viszerales Fett",
     "VISCERAL_FAT_PERC": "Viszerales Fett in %",
     "VISCERAL_FAT_TANITA": "Viszerales Fett (Wertung)"

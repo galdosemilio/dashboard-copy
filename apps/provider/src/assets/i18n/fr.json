@@ -1116,6 +1116,8 @@
     "ADD_CONSULTATION": "Ajouter une consultation",
     "ADD_NEW_MEETING": "Ajouter une rencontre",
     "AFTER": "Après",
+    "ALLOW_CONFLICT_MEETINGS": "Autoriser les réunions conflictuelles",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Cette option empêchera ou autorisera la création de la réunion répétée en cas de conflit. Si la case n'est pas cochée et qu'il y a une réunion précédemment planifiée pendant l'une des heures de réunion nouvellement créées, la réunion (et toutes les réunions répétées de cette série) ne seront pas créées. Si la case est cochée, cela créera la réunion (et toutes les réunions répétées de cette série) mais ne créera aucune réunion de la série pendant les périodes pour lesquelles des participants ont déjà une réunion planifiée",
     "BODY_FAT_LBS": "Masse graisseuse",
     "BODY_FAT_PERC": "Masse graisseuse %",
     "BODY_WATER_LBS": "Masse d’eau",
@@ -1144,7 +1146,6 @@
     "SAVE_MEETING": "Sauvegarder la rencontre",
     "SAVE_UNAVAILABILITY": "Sauvegarder l’indisponibilité",
     "SET_AS_UNAVAILABLE": "Marquer comme indisponible",
-    "SKIP_CONFLICT_MEETING_TIMES": "Ignorer les heures de réunion en conflit",
     "VISCERAL_FAT_LBS": "Graisse viscérale",
     "VISCERAL_FAT_PERC": "Graisse viscérale %",
     "VISCERAL_FAT_TANITA": "Graisse viscérale (note)"

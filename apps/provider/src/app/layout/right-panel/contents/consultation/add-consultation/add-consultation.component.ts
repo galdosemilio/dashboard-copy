@@ -138,7 +138,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         repeat: ['never', Validators.required],
         endRepeat: 'never',
         endAfter: null,
-        skipConflictCheck: false,
+        allowConflictMeetings: true,
         location: this.builder.group(
           {
             streetAddress: null,
@@ -405,7 +405,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     if (option === 'never') {
       this.form.get('endRepeat').reset('never')
       this.form.get('endAfter').reset(null)
-      this.form.get('skipConflictCheck').reset(false)
+      this.form.get('allowConflictMeetings').reset(true)
     }
   }
 
@@ -491,7 +491,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
             }
           }
 
-          addMeetingRequest.skipConflictCheck = data.skipConflictCheck
+          addMeetingRequest.skipConflictCheck = !data.allowConflictMeetings
         }
 
         if (this.editing) {

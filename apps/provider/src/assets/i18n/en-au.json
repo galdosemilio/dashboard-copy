@@ -1116,6 +1116,8 @@
     "ADD_CONSULTATION": "Add Consultation",
     "ADD_NEW_MEETING": "Add New Meeting",
     "AFTER": "After",
+    "ALLOW_CONFLICT_MEETINGS": "Allow Conflicting Meetings",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "This option will either prevent or allow the repeating meeting to be created if there are conflicts.  If the box is not checked and there is a previously-scheduled meeting during any of the newly-created meeting times, the meeting (and any repeating meetings in this series) will not be created.  If the box is checked, it will create the meeting (and any repeating meetings in this series) but will not create any meetings in the series during times for which any participants has an already-scheduled meeting",
     "BODY_FAT_LBS": "Body Fat",
     "BODY_FAT_PERC": "Body Fat %",
     "BODY_WATER_LBS": "Total Body Water",
@@ -1144,7 +1146,6 @@
     "SAVE_MEETING": "Save Meeting",
     "SAVE_UNAVAILABILITY": "Save Unavailability",
     "SET_AS_UNAVAILABLE": "Set As Unavailable",
-    "SKIP_CONFLICT_MEETING_TIMES": "Skip Conflict Meeting Times",
     "VISCERAL_FAT_LBS": "Visceral Fat",
     "VISCERAL_FAT_PERC": "Visceral Fat %",
     "VISCERAL_FAT_TANITA": "Visceral Fat (Rating)"

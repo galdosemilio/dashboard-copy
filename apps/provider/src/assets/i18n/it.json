@@ -1116,6 +1116,8 @@
     "ADD_CONSULTATION": "Aggiungi Consulto",
     "ADD_NEW_MEETING": "Aggiungi Nuovo Incontro",
     "AFTER": "Dopo",
+    "ALLOW_CONFLICT_MEETINGS": "Consenti riunioni in conflitto",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Questa opzione impedirà o consentirà la creazione della riunione ripetuta in caso di conflitti. Se la casella non è selezionata e c'è una riunione pianificata in precedenza durante uno degli orari di riunione appena creati, la riunione (e tutte le riunioni ripetute in questa serie) non verranno create. Se la casella è selezionata, creerà la riunione (e qualsiasi riunione ripetuta in questa serie) ma non creerà alcuna riunione nella serie durante i periodi per i quali tutti i partecipanti hanno una riunione già programmata",
     "BODY_FAT_LBS": "Grasso Corporeo",
     "BODY_FAT_PERC": "% di Grasso Corporeo",
     "BODY_WATER_LBS": "Liquidi in Totale nel Corpo",
@@ -1144,7 +1146,6 @@
     "SAVE_MEETING": "Salva Incontro",
     "SAVE_UNAVAILABILITY": "Salva Irreperibilità",
     "SET_AS_UNAVAILABLE": "Imposta Come Irreperibile",
-    "SKIP_CONFLICT_MEETING_TIMES": "Salta gli orari delle riunioni in conflitto",
     "VISCERAL_FAT_LBS": "Grasso Viscerale",
     "VISCERAL_FAT_PERC": "% di Grasso Viscerale",
     "VISCERAL_FAT_TANITA": "Grasso Viscerale (Valutazione)"

@@ -103,9 +103,16 @@
       </ng-container>
 
       <ng-container *ngIf="repeat.value != 'never' && repeat.value != undefined">
-        <mat-checkbox class="mb-10" formControlName="skipConflictCheck">
-          {{ 'RIGHT_PANEL.SKIP_CONFLICT_MEETING_TIMES' | translate }}
-        </mat-checkbox>
+        <div class="mb-10" fxLayoutAlign="start center" fxLayoutGap="7px">
+          <mat-checkbox formControlName="allowConflictMeeting">
+            {{ 'RIGHT_PANEL.ALLOW_CONFLICT_MEETINGS' | translate }}
+          </mat-checkbox>
+          <ccr-popup-description
+          [title]="'RIGHT_PANEL.ALLOW_CONFLICT_MEETINGS' | translate"
+          [description]="'RIGHT_PANEL.ALLOW_CONFLICT_MEETINGS_ABOUT' | translate"
+          fxFlex="4%"
+          ></ccr-popup-description>
+        </div>
       </ng-container>
 
       <ng-container formGroupName="location">

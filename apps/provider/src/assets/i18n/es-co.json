@@ -1116,6 +1116,8 @@
     "ADD_CONSULTATION": "Añadir Consulta",
     "ADD_NEW_MEETING": "Agregar nueva reunión",
     "AFTER": "Después de",
+    "ALLOW_CONFLICT_MEETINGS": "Permitir reuniones en conflicto",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Esta opción evitará o permitirá que se cree la reunión periódica si hay conflictos. Si la casilla no está marcada y hay una reunión programada previamente durante cualquiera de las horas de reunión recién creadas, la reunión (y las reuniones periódicas de esta serie) no se creará. Si la casilla está marcada, creará la reunión (y las reuniones periódicas de esta serie), pero no creará ninguna reunión de la serie durante las horas para las que los participantes ya tienen una reunión programada.",
     "BODY_FAT_LBS": "Grasa Corporal",
     "BODY_FAT_PERC": "Grasa Corporal %",
     "BODY_WATER_LBS": "Agua Corporal Total",
@@ -1144,7 +1146,6 @@
     "SAVE_MEETING": "Guardar Reunión",
     "SAVE_UNAVAILABILITY": "Guardar Indisponibilidad",
     "SET_AS_UNAVAILABLE": "Establecer Indisponibilidad",
-    "SKIP_CONFLICT_MEETING_TIMES": "Omitir horarios de reuniones de conflicto",
     "VISCERAL_FAT_LBS": "Grasa Visceral",
     "VISCERAL_FAT_PERC": "Grasa Visceral %",
     "VISCERAL_FAT_TANITA": "Grasa Visceral (Clasificación)"

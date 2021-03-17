@@ -1116,6 +1116,8 @@
     "ADD_CONSULTATION": "Adicionar consulta",
     "ADD_NEW_MEETING": "Adicionar nova reunião",
     "AFTER": "Depois",
+    "ALLOW_CONFLICT_MEETINGS": "Permitir reuniões conflitantes",
+    "ALLOW_CONFLICT_MEETINGS_ABOUT": "Esta opção impedirá ou permitirá que a reunião repetida seja criada se houver conflitos. Se a caixa não estiver marcada e houver uma reunião agendada anteriormente durante qualquer um dos horários de reunião recém-criados, a reunião (e quaisquer reuniões repetidas nesta série) não será criada. Se a caixa estiver marcada, ela criará a reunião (e quaisquer reuniões repetidas nesta série), mas não criará nenhuma reunião na série durante os horários para os quais algum participante já tenha uma reunião agendada",
     "BODY_FAT_LBS": "Gordura Corporal",
     "BODY_FAT_PERC": "Gordura Corporal %",
     "BODY_WATER_LBS": "Água Corporal Total",
@@ -1144,7 +1146,6 @@
     "SAVE_MEETING": "Guardar Reunião",
     "SAVE_UNAVAILABILITY": "Guardar Indisponibilidade",
     "SET_AS_UNAVAILABLE": "Definir com indisponível",
-    "SKIP_CONFLICT_MEETING_TIMES": "Pular Horários de Reunião de Conflito",
     "VISCERAL_FAT_LBS": "Gordura Visceral",
     "VISCERAL_FAT_PERC": "Gordura Visceral %",
     "VISCERAL_FAT_TANITA": "Gordura Visceral (Classificação)"
