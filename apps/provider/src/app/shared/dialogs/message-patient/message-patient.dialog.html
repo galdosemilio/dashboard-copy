@@ -8,7 +8,7 @@
 <div class="mat-dialog-separator"></div>
 
 <mat-dialog-content>
-  <p *ngIf="data.content" [innerHTML]="data.content | translate: data.contentParams" class="text-center"></p>
+  <p *ngIf="data.content" [innerHTML]="data.content | translate: data.contentParams"></p>
   <div [formGroup]="form" fxLayout="column" fxLayoutAlign="stretch center">
     <div style="width: 60%">
       <mat-form-field fxFlex>
