@@ -340,7 +340,7 @@
     "OTHER": "Other (specify below)",
     "PATIENT_MIC_OR_CAM": "Patient's microphone or camera",
     "PATIENT_SESSION_EXPIRED_DESC": "{{ name }} is not currently logged into their mobile app, and as such, will not be able to receive any incoming calls. You can notify them to log in to the mobile app by sending them a message below.",
-    "PATIENT_SESSION_EXPIRED_INITIAL_MESS": "Hi, {{ name }}, I am trying to start a conference call but am unable to reach you since you are not logged in to the mobile app. Can you please log in and send me a response if and when you're ready to begin?",
+    "PATIENT_SESSION_EXPIRED_INITIAL_MESS": "Hi, {{ name }}, I am trying to start a video call but am unable to reach you since you are not logged in to the mobile app. Can you please log in and send me a response if and when you're ready to begin?",
     "PERMISSION_DENIED": "You have blocked access to your microphone, which is required for conference calling.  To use this feature, please click the Status Indicator (phone icon) in the upper right hand part of the menu bar to properly configure your web browser.",
     "PERMISSION_INFO": "{{ org }} needs to access to your camera and microphone so that when you engage in a conference, other participants can see and hear you. We will ask you to confirm this decision on each browser and computer you use.",
     "PLAY_TEST_SOUND": "Play Sound",

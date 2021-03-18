@@ -261,7 +261,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   private async showExpiredDialog(): Promise<void> {
     try {
       const target = this.targets[0]
-      const accName = `${target.firstName} ${target.lastName}`
+      const accName = `${target.firstName}`
       const translatedMessage = await this.translator
         .get(_('CALL.PATIENT_SESSION_EXPIRED_INITIAL_MESS'), { name: accName })
         .toPromise()

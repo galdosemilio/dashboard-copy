@@ -340,7 +340,7 @@
     "OTHER": "Otro",
     "PATIENT_MIC_OR_CAM": "La cámara o micrófono del paciente",
     "PATIENT_SESSION_EXPIRED_DESC": "{{ name }} no está conectado a su aplicación móvil y, por tanto, no podrá recibir llamadas entrantes. Puede notificarle que inicie sesión en su aplicación móvil enviándole un mensaje.",
-    "PATIENT_SESSION_EXPIRED_INITIAL_MESS": "Hola, {{ name }}, estoy tratando de iniciar una conferencia pero no puedo contactarle ya que no tiene una sesión iniciada en su aplicación móvil. Por favor, ¿podría iniciar sesión y enviarme una respuesta si y cuando esté disponible para comenzar?",
+    "PATIENT_SESSION_EXPIRED_INITIAL_MESS": "Hola, {{ name }}, estoy tratando de iniciar una videollamada pero no puedo contactarle ya que no tiene una sesión iniciada en su aplicación móvil. Por favor, ¿podría iniciar sesión y enviarme una respuesta si y cuando esté disponible para comenzar?",
     "PERMISSION_DENIED": "Ha bloqueado el accesso a su micrófono, el cual es requeridos para realizar llamadas. Para utilizar esta característica, por favor haga clic en el Indicador de Estado (ícono de teléfono) en la parte superior derecha de la barra de menú para configurar su explorador.",
     "PERMISSION_INFO": "{{ org }} necesita acceder a su cámara y micrófono para que cuando entre en una conferencia, otros participantes puedan verlo y escucharlo. Le pediremos que confirme esta decisión en cada explorador y computadora que use.",
     "PLAY_TEST_SOUND": "Reproducir Sonido",
