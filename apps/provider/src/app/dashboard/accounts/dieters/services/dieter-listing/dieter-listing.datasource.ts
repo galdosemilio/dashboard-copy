@@ -1,6 +1,7 @@
 import {
   CcrPaginator,
   ExpandatableTableHeader,
+  formatPhoneNumber,
   TableDataSource
 } from '@app/shared'
 import {
@@ -71,6 +72,7 @@ export class DieterListingDataSource extends TableDataSource<
     response.data.forEach((item) => {
       const dieterListingItem = new DieterListingItem({
         ...item.account,
+        phone: formatPhoneNumber(item.account.phone),
         weight: item.weight || undefined,
         level: 0
       })
