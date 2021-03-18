@@ -22,6 +22,9 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
+        <td class="column-phone">
+          <span>{{ 'BOARD.PHONE_NUMBER' | translate }}</span>
+        </td>
         <td class="column-startweight">
           <div>
             <ccr-table-sort-header property="weight.first.value">
@@ -101,6 +104,9 @@ class="ccr-table ccr-expand-table ccr-table-stats">
         </app-patient-firstname-cell>
       </td>
       <td *ngIf="row.level === 0" class="column-lastname">{{ row.lastName }}</td>
+      <td *ngIf="row.level === 0" class="column-phone">
+        <a *ngIf="row.phone"  [href]="'tel:' + row.phone">{{ row.phone }}</a>
+      </td>
       <td *ngIf="row.level === 0" class="column-startweight">
         <div>
           <ng-container

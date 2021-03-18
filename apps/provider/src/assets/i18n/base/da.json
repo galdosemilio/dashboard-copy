@@ -202,6 +202,7 @@
     "PATIENT_UNCERTAIN_AVAILABILITY": "Patienttilgængelighed er usikker",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "Det er usandsynligt, at dette opkald vil få succes. Patienten, du forsøger at ringe til, er logget på en anden mobilapp end den valgte klinik fra øverste venstre hjørne.",
     "PHONE": "Telefon",
+    "PHONE_NUMBER": "Telefonnummer",
     "PICK": "Vælg",
     "PICKED_ONLY": "Kun Plukket",
     "POSTAL_CODE": "Postnummer",

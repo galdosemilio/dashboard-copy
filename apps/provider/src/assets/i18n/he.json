@@ -202,6 +202,7 @@
     "PATIENT_UNCERTAIN_AVAILABILITY": "זמינות המטופל אינה ודאית",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "סביר להניח שקריאה זו לא תצליח. המטופל שאליו אתה מנסה להתקשר נכנס לאפליקציה סלולרית שונה מהמרפאה שנבחרה בפינה השמאלית העליונה.",
     "PHONE": "טלפון",
+    "PHONE_NUMBER": "מספר טלפון",
     "PICK": "בחירה",
     "PICKED_ONLY": "שנבחרו בלבד",
     "POSTAL_CODE": "מיקוד",

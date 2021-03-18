@@ -12,6 +12,7 @@ export class DieterListingItem implements ExpandableTableItem {
   isLastOfGroup: boolean
   firstName: string
   lastName: string
+  phone: string
   level: number
   organizations: DieterListingOrgItem[]
   orgCount: number
@@ -33,6 +34,7 @@ export class DieterListingItem implements ExpandableTableItem {
     this.isExpanded = args.isExpanded || false
     this.isHidden = args.isHidden || false
     this.lastName = args.lastName || ''
+    this.phone = args.phone || ''
     this.level = args.level || 0
     this.organizations =
       args.organizations && args.organizations.length

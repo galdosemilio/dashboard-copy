@@ -202,6 +202,7 @@
     "PATIENT_UNCERTAIN_AVAILABILITY": "Die Verfügbarkeit des Patienten ist ungewiss",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "Es ist unwahrscheinlich, dass dieser Anruf erfolgreich ist. Der Patient, den Sie anrufen möchten, ist in einer anderen mobilen App als der ausgewählten Klinik in der oberen linken Ecke angemeldet.",
     "PHONE": "Telefon",
+    "PHONE_NUMBER": "Telefonnummer",
     "PICK": "Auswahlen",
     "PICKED_ONLY": "Picked Nur",
     "POSTAL_CODE": "Postleitzahl",

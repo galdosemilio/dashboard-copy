@@ -202,6 +202,7 @@
     "PATIENT_UNCERTAIN_AVAILABILITY": "A disponibilidade do paciente é incerta",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "É improvável que esta chamada seja bem-sucedida. O paciente que você está tentando ligar está conectado a um aplicativo móvel diferente da clínica selecionada no canto superior esquerdo.",
     "PHONE": "Telefone",
+    "PHONE_NUMBER": "Número de telefone",
     "PICK": "Escolher",
     "PICKED_ONLY": "Apenas escolhido",
     "POSTAL_CODE": "Código Postal",

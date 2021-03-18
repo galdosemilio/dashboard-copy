@@ -202,6 +202,7 @@
     "PATIENT_UNCERTAIN_AVAILABILITY": "Patient Availability is Uncertain",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "This call is unlikely to be successful. The patient you are attempting to call is logged into a different mobile app than the selected clinic from the upper left corner.",
     "PHONE": "Phone",
+    "PHONE_NUMBER": "Phone Number",
     "PICK": "Pick",
     "PICKED_ONLY": "Picked Only",
     "POSTAL_CODE": "Postal Code",

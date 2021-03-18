@@ -46,6 +46,15 @@ app-dieters-expandable-table {
           }
         }
       }
+      &-phone {
+        max-width: 130px;
+        min-width: 130px;
+        width: 130px;
+
+        a {
+          color: var(--primary);
+        }
+      }
 
       &-currentweightdate,
       &-startweightdate {

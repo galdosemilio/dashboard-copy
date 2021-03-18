@@ -26,6 +26,7 @@ export interface PatientListingItem {
     firstName: string
     lastName: string
     email: string
+    phone: string
     startedAt?: string
   }
   organizations: {
