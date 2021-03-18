@@ -11,3 +11,4 @@ export const STORAGE_TIME_TRACKER_STASH = 'ccrTimeTrackerStash'
 export const STORAGE_VIDEOCONFERENCE_SETTINGS = 'ccrVideoConferenceSettings'
 export const STORAGE_PAGE_SIZE_PATIENT_LISTING =
   'ccrDefaultPageSizePatientListing'
+export const STORAGE_RPM_BILLING_SORT = 'ccrRPMBillingsSort'

@@ -115,7 +115,7 @@
         </ng-container>
 
         <ng-container cdkColumnDef="activationDate">
-            <mat-header-cell *cdkHeaderCellDef [class.dataset-empty]="!source.result?.length" class="first" fxLayoutAlign="center center">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header="startedAt" [class.dataset-empty]="!source.result?.length" class="first" fxLayoutAlign="center center">
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
                     <small fxLayout="column" fxLayoutAlign="start center">
                         <span class="all-codes-label">{{ 'RPM.ACTIVATION_DATE' | translate }}</span>

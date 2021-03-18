@@ -28,6 +28,7 @@ import {
   RPM_SINGLE_TIME_CODES,
   RPMStateSummaryEntry
 } from '../models'
+import { STORAGE_RPM_BILLING_SORT } from '@app/config'
 
 @UntilDestroy()
 @Component({
@@ -78,6 +79,20 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     this.walkthrough.checkGuideState('rpm')
     this.store.dispatch(new ClosePanel())
     this.createStatusFilterForm()
+
+    this.sort.sortChange.pipe(untilDestroyed(this)).subscribe((res) => {
+      window.localStorage.setItem(STORAGE_RPM_BILLING_SORT, JSON.stringify(res))
+    })
+
+    const storageSort = JSON.parse(
+      window.localStorage.getItem(STORAGE_RPM_BILLING_SORT)
+    )
+
+    if (storageSort) {
+      this.sort.direction = storageSort.direction
+      this.sort.active = storageSort.active
+    }
+
     this.source = new RPMBillingDataSource(
       this.database,
       this.notify,
