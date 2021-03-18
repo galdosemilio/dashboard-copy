@@ -113,6 +113,15 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         filter((idle) => idle)
       )
       .subscribe(() => this.showUserIdleDialog())
+
+    this.context.account$.pipe(untilDestroyed(this)).subscribe((account) => {
+      this.account = account
+      this.resolveAccountRPMStatus(account)
+    })
+
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe(() => {
+      this.resolveAccountRPMStatus(this.account)
+    })
   }
 
   public onForceClosePanel(): void {
