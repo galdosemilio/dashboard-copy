@@ -1,16 +1,12 @@
 import { fromPairs } from 'lodash'
 import { ClientData } from '../../providers/account/entities'
 import { AccSingleResponse } from '../../providers/account/responses'
-import {
-  MeasurementDataPointSummaryItem,
-  SummaryElement
-} from '../../providers/measurement/body/entities'
-import { GetSummaryMeasurementBodyRequest } from '../../providers/measurement/body/requests'
-import { GetSummaryMeasurementBodyResponse } from '../../providers/measurement/body/responses'
+import { MeasurementDataPointSummaryItem } from '../../providers/measurement/body/entities'
 import { Account, Goal, MeasurementBody } from '../../services'
 
 import * as momentNs from 'moment-timezone'
 import { PagedResponse } from '../../providers/content/entities'
+import { BODY_MEASUREMENT_TYPES } from './model'
 const moment = momentNs
 
 export class DieterDashboardSummary {
@@ -119,24 +115,23 @@ export class DieterDashboardSummary {
     dieterId: string,
     activityLevel?: number
   ): Promise<void> {
-    // body summary request
-    const starting: GetSummaryMeasurementBodyRequest = {
-      account: dieterId
-      // TODO include start/end date from current Phase if exists
-    }
-
     return Promise.all([
-      this.measurementBody.getSummary(starting),
+      this.measurementBody.getDataPointSummary({
+        account: dieterId,
+        type: Object.values(BODY_MEASUREMENT_TYPES).map((type) => type.id)
+      }),
       this.goal.fetch({ account: dieterId }),
       this.account.getSingle(dieterId),
       this.measurementBody.getDataPointSummary({
-        account: starting.account,
-        type: ['1', '3'],
+        account: dieterId,
+        type: Object.values(BODY_MEASUREMENT_TYPES)
+          .filter((type) => ['weight', 'bodyFat'].includes(type.name))
+          .map((type) => type.id),
         mode: 'in-group'
       })
     ])
-      .then(([summary, goal, dieter, dataPointSummary]) => {
-        this.populateData(summary, dataPointSummary)
+      .then(([dataPointSummary, goal, dieter, inGroupDataPointSummary]) => {
+        this.populateData(dataPointSummary, inGroupDataPointSummary)
         this.dieter = dieter
         this.calcBMRStat(activityLevel)
 
@@ -156,41 +151,60 @@ export class DieterDashboardSummary {
   }
 
   private populateData(
-    summary: GetSummaryMeasurementBodyResponse,
-    dataPointSummary: PagedResponse<MeasurementDataPointSummaryItem>
+    summary: PagedResponse<MeasurementDataPointSummaryItem>,
+    inGroupSummary: PagedResponse<MeasurementDataPointSummaryItem>
   ): void {
-    const data: { [field: string]: SummaryElement } = fromPairs(
-      summary.data.map((v) => [v.key, v.value])
+    const data: {
+      [field: string]: MeasurementDataPointSummaryItem
+    } = fromPairs(
+      Object.values(BODY_MEASUREMENT_TYPES).map((type) => [
+        type.name,
+        summary.data.find((entry) => entry.type.id.toString() === type.id)
+      ])
+    )
+
+    const inGroupData: {
+      [field: string]: MeasurementDataPointSummaryItem
+    } = fromPairs(
+      Object.values(BODY_MEASUREMENT_TYPES).map((type) => [
+        type.name,
+        inGroupSummary.data.find(
+          (entry) => entry.type.id.toString() === type.id
+        )
+      ])
     )
 
     if (data.bmi) {
-      this.change['bmi'] = data.bmi.change
-      const bmi = data.bmi.record
-      this.starting.BMI = (Number(bmi.first.value) / 1000).toFixed(1)
-      this.current.BMI = (Number(bmi.last.value) / 1000).toFixed(1)
-      this.timestamp.starting.BMI = bmi.first.recordedAt
-      this.timestamp.current.BMI = bmi.last.recordedAt
+      this.change['bmi'] = data.bmi.change.value
+      const bmi = data.bmi
+      this.starting.BMI = (
+        Number(bmi.first.value) / bmi.first.type.multiplier
+      ).toFixed(1)
+      this.current.BMI = (
+        Number(bmi.last.value) / bmi.last.type.multiplier
+      ).toFixed(1)
+      this.timestamp.starting.BMI = bmi.first.createdAt.utc
+      this.timestamp.current.BMI = bmi.last.createdAt.utc
     } else {
       this.starting.BMI = this.current.BMI = null
       this.timestamp.starting.BMI = this.timestamp.current.BMI = null
     }
 
     if (data.weight) {
-      this.change['weight'] = data.weight.change
-      const weight = data.weight.record
+      this.change['weight'] = data.weight.change.value
+      const weight = data.weight
       const sweight = (this.starting.weight = weight.first.value)
       const cweight = (this.current.weight = weight.last.value)
 
-      this.timestamp.starting.weight = weight.first.recordedAt
-      this.timestamp.current.weight = weight.last.recordedAt
+      this.timestamp.starting.weight = weight.first.createdAt.utc
+      this.timestamp.current.weight = weight.last.createdAt.utc
 
       // Body Fat and Lean Mass Calculations
-      if (dataPointSummary.data.length >= 2) {
-        const weightDataPoint = dataPointSummary.data[0]
-        const bodyFatDataPoint = dataPointSummary.data[1]
+      if (inGroupData.bodyFat) {
+        const weightDataPoint = inGroupData.weight
+        const bodyFatDataPoint = inGroupData.bodyFat
 
         this.change['bodyFat'] = bodyFatDataPoint.change.value
-
         this.starting.bodyFat =
           weightDataPoint.first.value *
           (bodyFatDataPoint.first.value /
@@ -207,12 +221,10 @@ export class DieterDashboardSummary {
         // Timestamps for Body Fat / Body Fat Percentage
         this.timestamp.starting.bodyFat = bodyFatDataPoint.first.createdAt.utc
         this.timestamp.current.bodyFat = bodyFatDataPoint.last.createdAt.utc
-
         this.timestamp.starting.bodyFatPercentage =
           bodyFatDataPoint.first.createdAt.utc
         this.timestamp.current.bodyFatPercentage =
           bodyFatDataPoint.last.createdAt.utc
-
         this.change['leanMass'] =
           weightDataPoint.last.value - this.change['bodyFat']
         this.starting.leanMass =
@@ -226,8 +238,8 @@ export class DieterDashboardSummary {
       }
 
       if (data.hydration) {
-        this.change['hydration'] = data.hydration.change
-        const hydration = data.hydration.record
+        this.change['hydration'] = data.hydration.change.value
+        const hydration = data.hydration
         this.starting.waterMass = hydration.first.value
           ? (sweight * hydration.first.value) / 100000
           : null
@@ -235,8 +247,8 @@ export class DieterDashboardSummary {
           ? (cweight * hydration.last.value) / 100000
           : null
 
-        this.timestamp.starting.waterMass = hydration.first.recordedAt
-        this.timestamp.current.waterMass = hydration.last.recordedAt
+        this.timestamp.starting.waterMass = hydration.first.createdAt.utc
+        this.timestamp.current.waterMass = hydration.last.createdAt.utc
       }
     } else {
       this.starting.weight = this.current.weight = null
