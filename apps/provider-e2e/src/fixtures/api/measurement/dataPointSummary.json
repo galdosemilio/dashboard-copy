@@ -1,0 +1,129 @@
+{
+  "data": [
+    {
+      "type": { "id": "1", "name": "Weight", "multiplier": 1, "unit": "g" },
+      "count": 473,
+      "first": {
+        "id": "399837",
+        "type": { "id": "1", "name": "Weight", "multiplier": 1, "unit": "g" },
+        "createdAt": {
+          "utc": "2015-02-12 15:20:01+00",
+          "timezone": "America/New_York",
+          "local": "2020-09-02T03:02:54.914987"
+        },
+        "value": 82100,
+        "group": {
+          "id": "16809",
+          "recordedAt": {
+            "timezone": "America/New_York",
+            "utc": "2017-01-04T05:00:00+00:00",
+            "local": "2017-01-04T00:00:00"
+          },
+          "source": { "id": "3", "name": "Manual" },
+          "createdAt": {
+            "timezone": "America/New_York",
+            "utc": "2015-02-12 15:20:01+00",
+            "local": "2020-09-02T03:02:54.914987"
+          },
+          "account": { "id": "299" }
+        }
+      },
+      "last": {
+        "id": "4183142",
+        "type": { "id": "1", "name": "Weight", "multiplier": 1, "unit": "g" },
+        "createdAt": {
+          "utc": "2019-06-12 03:11:11+00",
+          "timezone": "America/New_York",
+          "local": "2021-03-02T13:23:11.64795"
+        },
+        "value": 83915,
+        "group": {
+          "id": "25436",
+          "recordedAt": {
+            "timezone": "America/New_York",
+            "utc": "2021-03-02T18:23:12+00:00",
+            "local": "2021-03-02T13:23:12"
+          },
+          "source": { "id": "13", "name": "Balance Smart Scale S-5" },
+          "createdAt": {
+            "timezone": "America/New_York",
+            "utc": "2019-06-12 03:11:11+00",
+            "local": "2021-03-02T13:23:11.64795"
+          },
+          "account": { "id": "299" }
+        }
+      },
+      "change": { "value": 1815, "percentage": 2.21 }
+    },
+    {
+      "type": {
+        "id": "3",
+        "name": "Body fat",
+        "multiplier": 1000,
+        "unit": "%"
+      },
+      "count": 490,
+      "first": {
+        "id": "1070623",
+        "type": {
+          "id": "3",
+          "name": "Body fat",
+          "multiplier": 1000,
+          "unit": "%"
+        },
+        "createdAt": {
+          "utc": "2015-02-12 15:20:01+00",
+          "timezone": "America/New_York",
+          "local": "2020-09-02T03:02:54.914987"
+        },
+        "value": 16500,
+        "group": {
+          "id": "16809",
+          "recordedAt": {
+            "timezone": "America/New_York",
+            "utc": "2017-01-04T05:00:00+00:00",
+            "local": "2017-01-04T00:00:00"
+          },
+          "source": { "id": "3", "name": "Manual" },
+          "createdAt": {
+            "timezone": "America/New_York",
+            "utc": "2015-02-12 15:20:01+00",
+            "local": "2020-09-02T03:02:54.914987"
+          },
+          "account": { "id": "299" }
+        }
+      },
+      "last": {
+        "id": "4183143",
+        "type": {
+          "id": "3",
+          "name": "Body fat",
+          "multiplier": 1000,
+          "unit": "%"
+        },
+        "createdAt": {
+          "utc": "2019-04-26 17:52:08+00",
+          "timezone": "America/New_York",
+          "local": "2021-03-02T13:23:11.64795"
+        },
+        "value": 20000,
+        "group": {
+          "id": "25436",
+          "recordedAt": {
+            "timezone": "America/New_York",
+            "utc": "2021-03-02T18:23:12+00:00",
+            "local": "2021-03-02T13:23:12"
+          },
+          "source": { "id": "13", "name": "Balance Smart Scale S-5" },
+          "createdAt": {
+            "timezone": "America/New_York",
+            "utc": "2019-04-26 17:52:08+00",
+            "local": "2021-03-02T13:23:11.64795"
+          },
+          "account": { "id": "299" }
+        }
+      },
+      "change": { "value": 3500, "percentage": 21.21 }
+    }
+  ]
+}

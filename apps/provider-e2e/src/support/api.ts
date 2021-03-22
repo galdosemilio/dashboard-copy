@@ -684,6 +684,12 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     '1.0/communication/interaction/billable-service**',
     'fixture:/api/interactions/getBillableServices'
   )
+
+  cy.route(
+    'GET',
+    '1.0/measurement/data-point/summary?**',
+    'fixture:/api/measurement/dataPointSummary'
+  )
 }
 
 const seti18n = (): void => {
