@@ -189,8 +189,7 @@ export class DieterDashboardSummary {
         const weightDataPoint = dataPointSummary.data[0]
         const bodyFatDataPoint = dataPointSummary.data[1]
 
-        this.change['bodyFat'] =
-          bodyFatDataPoint.first.value - bodyFatDataPoint.last.value
+        this.change['bodyFat'] = bodyFatDataPoint.change.value
 
         this.starting.bodyFat =
           weightDataPoint.first.value *
