@@ -1,11 +1,14 @@
 import * as moment from 'moment'
 import { ApiService } from '../../../services'
+import { PagedResponse } from '../../content/entities'
+import { MeasurementDataPointSummaryItem } from './entities'
 import {
   AddBodyMeasurementRequest,
   FetchBodyMeasurementRequest,
   FetchBodyMeasurementRequestV1,
   FetchBodySummaryRequest,
   FetchUnfilteredBodyMeasurementRequest,
+  GetDataPointSummaryRequest,
   GetSampledMeasurementBodyRequest,
   GetSummaryMeasurementBodyRequest
 } from './requests'
@@ -227,6 +230,22 @@ class MeasurementBody {
       endpoint: `/measurement/body/sampled`,
       method: 'GET',
       version: '2.0',
+      data: request
+    })
+  }
+
+  /**
+   * Retrieves data point summary, with first & last records and changes between them in a specified time window
+   * @param request must implement GetDataPointSummaryRequest
+   * @returns Promise<PagedResponse<MeasurementDataPointSummaryItem>>
+   */
+  public getDataPointSummary(
+    request: GetDataPointSummaryRequest
+  ): Promise<PagedResponse<MeasurementDataPointSummaryItem>> {
+    return this.apiService.request({
+      endpoint: `/measurement/data-point/summary`,
+      method: 'GET',
+      version: '1.0',
       data: request
     })
   }

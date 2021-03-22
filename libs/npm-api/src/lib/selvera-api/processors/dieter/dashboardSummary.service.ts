@@ -1,12 +1,16 @@
 import { fromPairs } from 'lodash'
 import { ClientData } from '../../providers/account/entities'
 import { AccSingleResponse } from '../../providers/account/responses'
-import { SummaryElement } from '../../providers/measurement/body/entities'
+import {
+  MeasurementDataPointSummaryItem,
+  SummaryElement
+} from '../../providers/measurement/body/entities'
 import { GetSummaryMeasurementBodyRequest } from '../../providers/measurement/body/requests'
 import { GetSummaryMeasurementBodyResponse } from '../../providers/measurement/body/responses'
 import { Account, Goal, MeasurementBody } from '../../services'
 
 import * as momentNs from 'moment-timezone'
+import { PagedResponse } from '../../providers/content/entities'
 const moment = momentNs
 
 export class DieterDashboardSummary {
@@ -123,10 +127,16 @@ export class DieterDashboardSummary {
     return Promise.all([
       this.measurementBody.getSummary(starting),
       this.goal.fetch({ account: dieterId }),
-      this.account.getSingle(dieterId)
+      this.account.getSingle(dieterId),
+      this.measurementBody.getDataPointSummary({
+        account: starting.account,
+        type: ['1', '3'],
+        mode: 'in-group'
+      })
     ])
-      .then(([summary, goal, dieter]) => {
-        this.populateData(summary)
+      .then(([summary, goal, dieter, dataPointSummary]) => {
+        console.log({ dataPointSummary })
+        this.populateData(summary, dataPointSummary)
         this.dieter = dieter
         this.calcBMRStat(activityLevel)
 
@@ -145,7 +155,10 @@ export class DieterDashboardSummary {
       .catch(console.error)
   }
 
-  private populateData(summary: GetSummaryMeasurementBodyResponse): void {
+  private populateData(
+    summary: GetSummaryMeasurementBodyResponse,
+    dataPointSummary: PagedResponse<MeasurementDataPointSummaryItem>
+  ): void {
     const data: { [field: string]: SummaryElement } = fromPairs(
       summary.data.map((v) => [v.key, v.value])
     )
@@ -164,19 +177,31 @@ export class DieterDashboardSummary {
       const weight = data.weight.record
       const sweight = (this.starting.weight = weight.first.value)
       const cweight = (this.current.weight = weight.last.value)
-      if (data.bodyFat) {
-        this.change['bodyFat'] = data.bodyFat.change
-        const bodyFat = data.bodyFat.record
-        this.starting.bodyFat = (sweight * bodyFat.first.value) / 100000
-        this.starting.bodyFatPercentage = bodyFat.first.value
-        this.current.bodyFat = (cweight * bodyFat.last.value) / 100000
-        this.current.bodyFatPercentage = bodyFat.last.value
-      }
-      if (data.leanMass) {
-        this.change['leanMass'] = data.leanMass.change
-        const leanMass = data.leanMass.record
-        this.starting.leanMass = (sweight * leanMass.first.value) / 100000
-        this.current.leanMass = (cweight * leanMass.last.value) / 100000
+      if (dataPointSummary.data.length >= 2) {
+        const weightDataPoint = dataPointSummary.data[0]
+        const bodyFatDataPoint = dataPointSummary.data[1]
+        this.change['bodyFat'] =
+          bodyFatDataPoint.first.value - bodyFatDataPoint.last.value
+
+        this.starting.bodyFat =
+          weightDataPoint.first.value *
+          (bodyFatDataPoint.first.value /
+            bodyFatDataPoint.type.multiplier /
+            100)
+        this.starting.bodyFatPercentage =
+          bodyFatDataPoint.first.value / bodyFatDataPoint.type.multiplier
+        this.current.bodyFat =
+          weightDataPoint.last.value *
+          (bodyFatDataPoint.last.value / bodyFatDataPoint.type.multiplier / 100)
+        this.current.bodyFatPercentage =
+          bodyFatDataPoint.last.value / bodyFatDataPoint.type.multiplier
+
+        this.change['leanMass'] =
+          weightDataPoint.last.value - this.change['bodyFat']
+        this.starting.leanMass =
+          weightDataPoint.first.value - this.starting.bodyFat
+        this.current.leanMass =
+          weightDataPoint.last.value - this.current.bodyFat
       }
       if (data.hydration) {
         this.change['hydration'] = data.hydration.change

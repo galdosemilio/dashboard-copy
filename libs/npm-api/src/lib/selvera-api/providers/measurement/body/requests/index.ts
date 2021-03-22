@@ -12,3 +12,4 @@ export { SummaryUnit as BodySummaryUnit } from './summaryUnit.interface'
 
 export * from './getSummaryMeasurementBody.request'
 export * from './getSampledMeasurementBody.request'
+export * from './getDataPointSummary.request'

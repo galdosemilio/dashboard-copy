@@ -1,4 +1,5 @@
 export * from './accountRecord'
+export * from './dataPointSummaryItem'
 export * from './deviceRecord'
 export * from './includeRecord'
 export * from './paginationRecord'
