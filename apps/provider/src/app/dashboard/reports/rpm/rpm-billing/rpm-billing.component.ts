@@ -84,7 +84,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       window.localStorage.setItem(STORAGE_RPM_BILLING_SORT, JSON.stringify(res))
     })
 
-    this.sort.direction = 'desc'
+    this.sort.direction = 'asc'
     this.sort.active = 'lastName'
 
     const storageSort = JSON.parse(
