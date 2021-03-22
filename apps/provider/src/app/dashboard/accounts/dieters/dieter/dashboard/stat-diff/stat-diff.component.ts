@@ -25,6 +25,10 @@ export class StatDiffComponent implements OnChanges, OnInit {
   starting: string
   @Input()
   current: string
+  @Input()
+  startingTimestamp?: string
+  @Input()
+  currentTimestamp?: string
 
   @Output()
   edit = new EventEmitter<void>()

@@ -158,6 +158,7 @@
     "MARK_AS_VIEWED_FOR_ALL": "Marcar como visto por todos los asesores de esta clínica",
     "MARK_AS_VIEWED_FOR_ME": "Marcar como visto por mi",
     "MEASURE": "Medida",
+    "MEASUREMENT_RECORDED_ON": "Medida registrada el {{ date }}",
     "MEASUREMENT_TIMEZONE_NOTICE": "Este paciente está en una zona horaria distinta, sin embargo su zona horaria será usada para guardar las medidas.",
     "MEASUREMENT_TIMEZONE_NOTICE_DESCRIPTION": "Cuando se guarda una medida, la hora y la fecha que se usa para almacenar los datos respetará la preferencia de zona horaria del usuario que guarde dicha medida. En la app móvil, las medidas guardadas serán almacenadas usando la zona horaria del paciente. En el tablero, las medidas guardadas serán almacenadas usando la zona horaria del asesor.<br><br>Tiene una zona horaria diferente a la del paciente seleccionado. Dependiendo del momento del día en el que se guarde una medida, puede ocurrir que la fecha en la cual se guarde esta medida se muestre distinta en la app móvil del paciente y en el tablero de asesor.<br><br>En cualquier caso, los datos se almacenaron correctamente. Las preferencias de zona horaria se utilizan para presentar la fecha y la hora, y para mostrar datos en su <i>hora local</i>. Sin embargo, tenga presente que eso puede derivar en diferencias de fecha y hora en los datos guardados entre usted y este paciente.",
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Diferencia horaria al guardar Medidas",

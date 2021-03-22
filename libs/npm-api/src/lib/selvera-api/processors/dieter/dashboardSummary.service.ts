@@ -28,6 +28,7 @@ export class DieterDashboardSummary {
   public starting: any = {}
   public current: any = {}
   public change: any = {}
+  public timestamp: any = { starting: {}, current: {} }
 
   public constructor(
     private account: Account,
@@ -135,7 +136,6 @@ export class DieterDashboardSummary {
       })
     ])
       .then(([summary, goal, dieter, dataPointSummary]) => {
-        console.log({ dataPointSummary })
         this.populateData(summary, dataPointSummary)
         this.dieter = dieter
         this.calcBMRStat(activityLevel)
@@ -168,8 +168,11 @@ export class DieterDashboardSummary {
       const bmi = data.bmi.record
       this.starting.BMI = (Number(bmi.first.value) / 1000).toFixed(1)
       this.current.BMI = (Number(bmi.last.value) / 1000).toFixed(1)
+      this.timestamp.starting.BMI = bmi.first.recordedAt
+      this.timestamp.current.BMI = bmi.last.recordedAt
     } else {
       this.starting.BMI = this.current.BMI = null
+      this.timestamp.starting.BMI = this.timestamp.current.BMI = null
     }
 
     if (data.weight) {
@@ -177,9 +180,15 @@ export class DieterDashboardSummary {
       const weight = data.weight.record
       const sweight = (this.starting.weight = weight.first.value)
       const cweight = (this.current.weight = weight.last.value)
+
+      this.timestamp.starting.weight = weight.first.recordedAt
+      this.timestamp.current.weight = weight.last.recordedAt
+
+      // Body Fat and Lean Mass Calculations
       if (dataPointSummary.data.length >= 2) {
         const weightDataPoint = dataPointSummary.data[0]
         const bodyFatDataPoint = dataPointSummary.data[1]
+
         this.change['bodyFat'] =
           bodyFatDataPoint.first.value - bodyFatDataPoint.last.value
 
@@ -196,13 +205,27 @@ export class DieterDashboardSummary {
         this.current.bodyFatPercentage =
           bodyFatDataPoint.last.value / bodyFatDataPoint.type.multiplier
 
+        // Timestamps for Body Fat / Body Fat Percentage
+        this.timestamp.starting.bodyFat = bodyFatDataPoint.first.createdAt.utc
+        this.timestamp.current.bodyFat = bodyFatDataPoint.last.createdAt.utc
+
+        this.timestamp.starting.bodyFatPercentage =
+          bodyFatDataPoint.first.createdAt.utc
+        this.timestamp.current.bodyFatPercentage =
+          bodyFatDataPoint.last.createdAt.utc
+
         this.change['leanMass'] =
           weightDataPoint.last.value - this.change['bodyFat']
         this.starting.leanMass =
           weightDataPoint.first.value - this.starting.bodyFat
         this.current.leanMass =
           weightDataPoint.last.value - this.current.bodyFat
+
+        // Timestamps for Lean Mass
+        this.timestamp.starting.leanMass = bodyFatDataPoint.first.createdAt.utc
+        this.timestamp.current.leanMass = bodyFatDataPoint.last.createdAt.utc
       }
+
       if (data.hydration) {
         this.change['hydration'] = data.hydration.change
         const hydration = data.hydration.record
@@ -212,6 +235,9 @@ export class DieterDashboardSummary {
         this.current.waterMass = hydration.last.value
           ? (cweight * hydration.last.value) / 100000
           : null
+
+        this.timestamp.starting.waterMass = hydration.first.recordedAt
+        this.timestamp.current.waterMass = hydration.last.recordedAt
       }
     } else {
       this.starting.weight = this.current.weight = null
@@ -219,6 +245,12 @@ export class DieterDashboardSummary {
       this.starting.bodyFatPercentage = this.current.bodyFatPercentage = null
       this.starting.leanMass = this.current.leanMass = null
       this.starting.waterMass = this.current.waterMass = null
+
+      this.timestamp.starting.weight = this.timestamp.current.weight = null
+      this.timestamp.starting.bodyFat = this.timestamp.current.bodyFat = null
+      this.timestamp.starting.bodyFatPercentage = this.timestamp.current.bodyFatPercentage = null
+      this.timestamp.starting.leanMass = this.timestamp.current.leanMass = null
+      this.timestamp.starting.waterMass = this.timestamp.current.waterMass = null
     }
   }
 }

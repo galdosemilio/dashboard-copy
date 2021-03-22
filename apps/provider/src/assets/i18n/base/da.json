@@ -158,6 +158,7 @@
     "MARK_AS_VIEWED_FOR_ALL": "Markér som set for alle trænere i denne klinik",
     "MARK_AS_VIEWED_FOR_ME": "Markér som set for mig",
     "MEASURE": "Mål",
+    "MEASUREMENT_RECORDED_ON": "Måling optaget på {{date}}",
     "MEASUREMENT_TIMEZONE_NOTICE": "Denne patient er i en anden tidszone, men din tidszone vil blive brugt, når der gemmes.",
     "MEASUREMENT_TIMEZONE_NOTICE_DESCRIPTION": "Når du gemmer en måling, tid og dato bruges til at registrere data vil respektere tidszone præference for brugeren, der gemmer målingen. I den mobile app, vil gemte målinger registreres i patientens tidszone. På instrumentbrættet, vil gemte målinger registreres i udbyderens tidszone.<br><br> Du har en anden tidszone end den aktuelt valgte patient. Afhængig af tidspunktet på dagen en måling er gemt, kan det medføre datoen målingen blev registreret til at blive vist forskellige mellem denne patients mobil app og på udbyderens instrumentbræt.<br><br> I begge tilfælde er data gemt korrekt. Tidszone præferencer bruges til dato og tid præsentation, og til visning af data i din lokale tid. Du skal dog være opmærksom på, at dette kan resultere i dato og klokkeslæt forskelle gemte data mellem dig og denne patient.",
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Tidszone Forskelle Når du gemmer Målinger",

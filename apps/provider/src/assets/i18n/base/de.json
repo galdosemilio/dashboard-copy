@@ -158,6 +158,7 @@
     "MARK_AS_VIEWED_FOR_ALL": "Mark wie für alle Trainer in dieser Klinik angesehen",
     "MARK_AS_VIEWED_FOR_ME": "Mark als für mich angesehen",
     "MEASURE": "Messen",
+    "MEASUREMENT_RECORDED_ON": "Messung aufgezeichnet auf {{date}}",
     "MEASUREMENT_TIMEZONE_NOTICE": "Dieser Patient ist in einer anderen Zeitzone, aber Ihre Zeitzone wird verwendet, wenn speichern.",
     "MEASUREMENT_TIMEZONE_NOTICE_DESCRIPTION": "Bei der Messung zu speichern, verwendet die Uhrzeit und das Datum der Daten aufzeichnen wird die Zeitzone Präferenz des Nutzers respektieren, die die Messung spart. In der mobilen App wird gespeicherten Messungen in der Zeitzone des Patienten aufgezeichnet werden. Auf dem Armaturenbrett werden gespeicherten Messungen in der Zeitzone des Anbieters aufgenommen werden.<br><br> Sie haben eine andere Zeitzone als die aktuell ausgewählten Patienten. Je nach Tageszeit eine Messung gespeichert wird, das das Datum verursachen kann die Messung aufgezeichnet wurde zwischen diesen Patienten mobilen App und auf dem Anbieter Armaturenbrett anders erscheinen.<br><br> In beiden Fällen werden die Daten korrekt gespeichert. Zeitzone Präferenzen für Datum und Uhrzeit Präsentation und zur Anzeige von Daten in Ihrer lokalen Zeit verwendet. Aber bitte beachten Sie, dass dies in Datums- und Zeitdifferenzen von gespeicherten Daten zwischen Ihnen und diesem Patienten führen kann.",
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Zeitzone Unterschiede bei Messungen Speichern von",

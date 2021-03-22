@@ -24,11 +24,15 @@ fxLayout="column" fxLayoutAlign="space-between">
     </div>
 
     <div class="metric-text">
-      <div *ngIf="starting">
+      <div
+      *ngIf="starting"
+      [matTooltip]="startingTimestamp ? ('BOARD.MEASUREMENT_RECORDED_ON' | translate:{date: startingTimestamp | amDateFormat:'ddd MMM D YYYY'}) : undefined">
         {{ 'STATS.STARTING' | translate }}:
         {{ starting | number:'1.1-1' }}
       </div>
-      <div *ngIf="current">
+      <div
+      *ngIf="current"
+      [matTooltip]="currentTimestamp ? ('BOARD.MEASUREMENT_RECORDED_ON' | translate:{date: currentTimestamp | amDateFormat:'ddd MMM D YYYY'}) : undefined">
         {{ 'STATS.CURRENT' | translate }}:
         {{ current | number:'1.1-1' }}
       </div>

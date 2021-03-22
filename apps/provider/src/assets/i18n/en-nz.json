@@ -158,6 +158,7 @@
     "MARK_AS_VIEWED_FOR_ALL": "Mark as viewed for all coaches in this clinic",
     "MARK_AS_VIEWED_FOR_ME": "Mark as viewed for me",
     "MEASURE": "Measure",
+    "MEASUREMENT_RECORDED_ON": "Measurement recorded on {{ date }}",
     "MEASUREMENT_TIMEZONE_NOTICE": "This patient is in a different timezone, but your timezone will be used when saving.",
     "MEASUREMENT_TIMEZONE_NOTICE_DESCRIPTION": "When saving a measurement, the time and date used to record the data will respect the timezone preference of the user that saves the measurement.  In the mobile app, saved measurements will be recorded in the patient’s timezone.  On the dashboard, saved measurements will be recorded in the provider’s timezone.<br><br>You have a different timezone than the currently-selected patient.  Depending on the time of day a measurement is saved, this may cause the date the measurement was recorded to appear different between this patient’s mobile app and on the provider dashboard.<br><br>In either case, the data is saved correctly.  Timezone preferences are used for date and time presentation, and to display data in your <i>local time</i>.  However, please be aware that this may result in perceived date and time differences for saved data between you and this patient.",
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "Timezone Differences When Saving Measurements",

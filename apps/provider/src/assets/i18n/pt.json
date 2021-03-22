@@ -158,6 +158,7 @@
     "MARK_AS_VIEWED_FOR_ALL": "Marcar como visto para todos os treinadore nesta clínica",
     "MARK_AS_VIEWED_FOR_ME": "Marcar como visto para mim",
     "MEASURE": "Medida",
+    "MEASUREMENT_RECORDED_ON": "Medição registrada em {{date}}",
     "MEASUREMENT_TIMEZONE_NOTICE": "Este paciente está em um fuso horário diferente, mas o seu fuso horário será usado ao salvar.",
     "MEASUREMENT_TIMEZONE_NOTICE_DESCRIPTION": "Ao salvar uma medição, a hora ea data utilizada para gravar os dados vão respeitar a preferência fuso horário do usuário que salva a medição. No app móvel, as medições salvas será registrado no fuso horário do paciente. No painel, as medidas salvas será gravado no fuso horário do provedor.<br><br> Você tem um fuso horário diferente do que o paciente atualmente selecionado. Dependendo da hora do dia uma medição é salva, isso pode causar a data da medição foi gravada para aparecer diferente entre aplicativo móvel deste paciente e no painel de instrumentos provedor.<br><br> Em ambos os casos, os dados são salvos corretamente. Preferências de fuso horário são utilizados para a data e hora de apresentação, e aos dados de exibição em sua hora local. No entanto, esteja ciente de que isso pode resultar em data e hora diferenças de dados guardados entre você e este paciente.",
     "MEASUREMENT_TIMEZONE_NOTICE_TITLE": "As diferenças de fuso horário Quando salvar medidas",
