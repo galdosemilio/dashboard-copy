@@ -103,7 +103,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    merge(this.context.account$, this.context.organization$)
+    merge([this.context.account$, this.context.organization$])
       .pipe(
         untilDestroyed(this),
         filter(() => !!this.context.account && !!this.context.organization),
