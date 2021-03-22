@@ -77,7 +77,7 @@
         </ng-container>
 
         <ng-container cdkColumnDef="deviceSupplied" [sticky]="false">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'RPM.DEVICE_TYPE' | translate }}</mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef>{{ 'RPM.DEVICE_TYPE' | translate }}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
                 <span>{{ 'RPM.DEVICE_TYPE' | translate }}</span>
                 <span>{{ row.device?.displayName | translate }}</span>
