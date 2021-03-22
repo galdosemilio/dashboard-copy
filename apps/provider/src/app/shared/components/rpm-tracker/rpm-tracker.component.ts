@@ -15,10 +15,11 @@ import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { RPM } from '@coachcare/npm-api'
 import { TRACKABLE_RPM_CODES, TrackableRPMCodeEntry } from './model'
-import { filter } from 'rxjs/operators'
+import { debounceTime, filter } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog'
 import { GestureClosingDialog } from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
+import { merge } from 'rxjs'
 
 interface CodeAndTracking {
   trackableCode: TrackableRPMCodeEntry
@@ -102,10 +103,16 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.context.account$.pipe(untilDestroyed(this)).subscribe((account) => {
-      this.account = account
-      this.resolveAccountRPMStatus(account)
-    })
+    merge(this.context.account$, this.context.organization$)
+      .pipe(
+        untilDestroyed(this),
+        filter(() => !!this.context.account && !!this.context.organization),
+        debounceTime(100)
+      )
+      .subscribe(() => {
+        this.account = this.context.account
+        this.resolveAccountRPMStatus(this.account)
+      })
 
     this.gesture.userIdle$
       .pipe(
@@ -113,10 +120,6 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         filter((idle) => idle)
       )
       .subscribe(() => this.showUserIdleDialog())
-
-    this.context.organization$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.resolveAccountRPMStatus(this.account)
-    })
   }
 
   public onForceClosePanel(): void {
