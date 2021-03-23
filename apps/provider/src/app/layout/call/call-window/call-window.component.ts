@@ -102,6 +102,7 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
   private callWindow: Element
   private currentRemoteVideoState: boolean
   private inactivityTimeout = 60000
+  private inactivityTimeoutInterval: number
   private inactivityTimeoutActive = false
   private dataTrackTimeout = 4
   private ringingCountdownInterval: any
@@ -167,6 +168,10 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
             CANCEL_CALL
           ),
           tap(() => {
+            if (this.inactivityTimeoutInterval) {
+              clearTimeout(this.inactivityTimeoutInterval)
+            }
+
             this.stopRingingInterval()
           })
         )
@@ -342,6 +347,11 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
       return
     }
 
+    if (this.remoteConnectionStatus === ConnectionStatus.IDLE) {
+      this.store.dispatch(new SetAttemptingReconnect(false))
+      return
+    }
+
     const age = moment().diff(moment(remoteConnStats.timestamp), 'seconds')
 
     if (
@@ -417,19 +427,24 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   }
 
-  private async startInactivityTimeout(): Promise<void> {
+  private startInactivityTimeout(): void {
     if (this.inactivityTimeoutActive) {
       return
     }
 
     this.inactivityTimeoutActive = true
-    await sleep(this.inactivityTimeout)
 
-    if (this.callState.isAttemptingToReconnect) {
-      this.store.dispatch(new HangUp())
-    }
+    this.inactivityTimeoutInterval = setTimeout(() => {
+      if (this.callState.isAttemptingToReconnect && this.callState.callId) {
+        this.store.dispatch(
+          new UpdateCallStatusToEnded({ callId: this.callState.callId })
+        )
+        this.store.dispatch(new HangUp())
+        this.store.dispatch(new SetAttemptingReconnect(false))
+      }
 
-    this.inactivityTimeoutActive = false
+      this.inactivityTimeoutActive = false
+    }, this.inactivityTimeout)
   }
 
   private startFollowingPointer() {

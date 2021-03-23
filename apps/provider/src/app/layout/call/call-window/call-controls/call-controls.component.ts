@@ -7,6 +7,7 @@ import {
   EnableCurrentUserMicrophone,
   HangUp,
   OpenCallSettings,
+  SetAttemptingReconnect,
   Source,
   UpdateCallStatusToEnded
 } from '@app/layout/store/call'
@@ -58,6 +59,7 @@ export class CallControlsComponent implements OnDestroy, OnInit {
   public onHangUp(): void {
     if (this.callState.source === Source.OUTBOUND) {
       this.store.dispatch(new AbortCall(this.callState.callId))
+      this.store.dispatch(new SetAttemptingReconnect(false))
       this.store.dispatch(
         new UpdateCallStatusToEnded({
           callId: this.callState.callId,

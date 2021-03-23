@@ -936,9 +936,7 @@ export class CallEffects {
   )
 
   @Effect()
-  participantConnected$: Observable<
-    Action
-  > = this.twilioService.participantConnected$.pipe(
+  participantConnected$: Observable<Action> = this.twilioService.participantConnected$.pipe(
     skip(1),
     debounceTime(300),
     flatMap((participant) => {
@@ -960,9 +958,7 @@ export class CallEffects {
   )
 
   @Effect()
-  twilioParticipantDisconnected$: Observable<
-    Action
-  > = this.twilioService.participantDisconnected$.pipe(
+  twilioParticipantDisconnected$: Observable<Action> = this.twilioService.participantDisconnected$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
@@ -997,9 +993,7 @@ export class CallEffects {
   )
 
   @Effect()
-  participantEnabledCamera$: Observable<
-    Action
-  > = this.twilioService.trackEnabled$.pipe(
+  participantEnabledCamera$: Observable<Action> = this.twilioService.trackEnabled$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
@@ -1008,9 +1002,7 @@ export class CallEffects {
   )
 
   @Effect()
-  participantDisabledCamera$: Observable<
-    Action
-  > = this.twilioService.trackDisabled$.pipe(
+  participantDisabledCamera$: Observable<Action> = this.twilioService.trackDisabled$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
@@ -1019,9 +1011,7 @@ export class CallEffects {
   )
 
   @Effect()
-  participantStartedVideo$: Observable<
-    Action
-  > = this.twilioService.videoStarted$.pipe(
+  participantStartedVideo$: Observable<Action> = this.twilioService.videoStarted$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
@@ -1039,9 +1029,7 @@ export class CallEffects {
   )
 
   @Effect()
-  participantStoppedVideo$: Observable<
-    Action
-  > = this.twilioService.videoStopped$.pipe(
+  participantStoppedVideo$: Observable<Action> = this.twilioService.videoStopped$.pipe(
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
@@ -1061,7 +1049,7 @@ export class CallEffects {
   @Effect()
   participantDisconnected$ = this.actions$.pipe(
     ofType(callAction.PARTICIPANT_DISCONNECTED),
-    debounceTime(300),
+    debounceTime(1500),
     map((action) => (action as callAction.ParticipantDisconnected).payload),
     flatMap((payload: string) => {
       const actionGroup = []
@@ -1085,7 +1073,6 @@ export class CallEffects {
         actionGroup.push(new callAction.CallEmpty())
       } else if (this.callState.reconnectionBumper) {
         this.twilioService.setRemoteConnSkips()
-        actionGroup.push(new callAction.SetAttemptingReconnect(false))
         actionGroup.push(new callAction.SetReconnectionBumper(false))
       }
       return actionGroup
