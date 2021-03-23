@@ -535,13 +535,9 @@ describe('Sequences -> new', function () {
 
     cy.tick(1000)
 
-    cy.get('button').contains('Duplicate').click({ force: true })
+    cy.get('button').contains('Duplicate').click()
 
-    cy.wait('@cloneSequence').should((xhr) => {
-      expect(xhr.request.body.id).to.equal('1')
-      expect(xhr.request.body.organization).to.equal('1')
-      expect(xhr.request.body.createdBy).to.equal(1)
-    })
+    cy.get('simple-snack-bar').contains('Sequence saved successfully')
   })
 
   it('Shows the max length warnings for SMS and Notification inputs', function () {

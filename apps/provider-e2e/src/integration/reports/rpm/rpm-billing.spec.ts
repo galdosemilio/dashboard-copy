@@ -47,13 +47,12 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
   it('Table shows RPM billing data with proper names: next pagination', function () {
     cy.setTimezone('et')
-    standardSetup()
-
-    cy.route(
-      'GET',
-      '/3.0/warehouse/rpm/state/billing-summary?**',
-      'fixture:/api/warehouse/getRPMBillingPagination'
-    )
+    standardSetup(undefined, [
+      {
+        url: '/3.0/warehouse/rpm/state/billing-summary?**',
+        fixture: 'api/warehouse/getRPMBillingPagination'
+      }
+    ])
 
     cy.visit(`/reports/rpm/billing`)
 
@@ -133,13 +132,12 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
   it('It properly generates the CSV report with no "next" data', function () {
     cy.setTimezone('et')
-    standardSetup()
-
-    cy.route(
-      'GET',
-      '/3.0/warehouse/rpm/state/billing-summary?**',
-      'fixture:/api/warehouse/getRPMBillingComplete'
-    )
+    standardSetup(undefined, [
+      {
+        url: '/3.0/warehouse/rpm/state/billing-summary?**',
+        fixture: 'api/warehouse/getRPMBillingComplete'
+      }
+    ])
 
     cy.visit(`/reports/rpm/billing`)
 
@@ -156,13 +154,12 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
   it('It properly generates the CSV report with the patient on 99457', function () {
     cy.setTimezone('et')
-    standardSetup()
-
-    cy.route(
-      'GET',
-      '/3.0/warehouse/rpm/state/billing-summary?**',
-      'fixture:/api/warehouse/getRPMBillingOn99457'
-    )
+    standardSetup(undefined, [
+      {
+        url: '/3.0/warehouse/rpm/state/billing-summary?**',
+        fixture: 'api/warehouse/getRPMBillingOn99457'
+      }
+    ])
 
     cy.visit(`/reports/rpm/billing`)
 
@@ -179,13 +176,12 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
   it('It properly generates the CSV report with the patient on 99458', function () {
     cy.setTimezone('et')
-    standardSetup()
-
-    cy.route(
-      'GET',
-      '/3.0/warehouse/rpm/state/billing-summary?**',
-      'fixture:/api/warehouse/getRPMBillingOn99458'
-    )
+    standardSetup(undefined, [
+      {
+        url: '/3.0/warehouse/rpm/state/billing-summary?**',
+        fixture: 'api/warehouse/getRPMBillingOn99458'
+      }
+    ])
 
     cy.visit(`/reports/rpm/billing`)
 

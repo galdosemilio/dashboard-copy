@@ -117,11 +117,11 @@ describe('Dashboard -> Patients -> Patient -> More -> Forms', function () {
     standardSetup(undefined, [
       {
         url: `/1.0/content/form/${Cypress.env('formId')}?**`,
-        fixture: 'fixture:/api/form/full-form-removeable'
+        fixture: 'api/form/full-form-removeable'
       },
       {
         url: '/1.0/content/form/submission?**',
-        fixture: 'fixture:/api/form/getListing-removeable'
+        fixture: 'api/form/getListing-removeable'
       }
     ])
 

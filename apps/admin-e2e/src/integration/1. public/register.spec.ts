@@ -185,51 +185,33 @@ describe('Register New Clinic', function () {
     cy.setTimezone('et')
     standardSetup(false)
 
-    cy.route({
-      method: 'POST',
-      onRequest: (xhr) => {
-        expect(xhr.request.body.account.firstName).to.contain('Eric')
-        expect(xhr.request.body.account.lastName).to.contain('Di Bari')
-        expect(xhr.request.body.account.email).to.contain('eric@coachcare.com')
-        expect(xhr.request.body.account.phone).to.contain('5188948256')
-        expect(xhr.request.body.account.timezone).to.contain('America/New_York')
-        expect(xhr.request.body.organization.contact.firstName).to.contain(
-          'Eric'
-        )
-        expect(xhr.request.body.organization.contact.lastName).to.contain(
-          'Di Bari'
-        )
-        expect(xhr.request.body.organization.contact.email).to.contain(
-          'eric@coachcare.com'
-        )
-        expect(xhr.request.body.organization.contact.phone).to.contain(
-          '5188948256'
-        )
-        expect(xhr.request.body.organization.address.street).to.contain(
-          '150 West 28th Street'
-        )
-        expect(xhr.request.body.organization.address.city).to.contain(
-          'New York'
-        )
-        expect(xhr.request.body.organization.address.state).to.contain(
-          'New York'
-        )
-        expect(xhr.request.body.organization.address.postalCode).to.contain(
-          '10001'
-        )
-        expect(xhr.request.body.organization.address.country).to.contain('US')
+    cy.intercept('POST', '3.0/ccr/register', (request) => {
+      expect(request.body.account.firstName).to.contain('Eric')
+      expect(request.body.account.lastName).to.contain('Di Bari')
+      expect(request.body.account.email).to.contain('eric@coachcare.com')
+      expect(request.body.account.phone).to.contain('5188948256')
+      expect(request.body.account.timezone).to.contain('America/New_York')
+      expect(request.body.organization.contact.firstName).to.contain('Eric')
+      expect(request.body.organization.contact.lastName).to.contain('Di Bari')
+      expect(request.body.organization.contact.email).to.contain(
+        'eric@coachcare.com'
+      )
+      expect(request.body.organization.contact.phone).to.contain('5188948256')
+      expect(request.body.organization.address.street).to.contain(
+        '150 West 28th Street'
+      )
+      expect(request.body.organization.address.city).to.contain('New York')
+      expect(request.body.organization.address.state).to.contain('New York')
+      expect(request.body.organization.address.postalCode).to.contain('10001')
+      expect(request.body.organization.address.country).to.contain('US')
 
-        if (xhr.request.body.plan) {
-          expect(xhr.request.body.plan.billingPeriod).to.equal('monthly')
-          expect(xhr.request.body.plan.type).to.equal('virtualHealth')
-          expect(xhr.request.body.organization.parentOrganizationId).to.equal(
-            '7412'
-          )
-        }
-      },
-      url: '3.0/ccr/register',
-      status: 200,
-      response: {}
+      if (request.body.plan) {
+        expect(request.body.plan.billingPeriod).to.equal('monthly')
+        expect(request.body.plan.type).to.equal('virtualHealth')
+        expect(request.body.organization.parentOrganizationId).to.equal('7412')
+      }
+
+      request.reply({})
     })
   })
 
@@ -483,9 +465,6 @@ describe('Register New Clinic', function () {
       'not.contain',
       'Bariatric Advantage Privacy Policy'
     )
-    cy.get('div.newsletter-checkbox').should(
-      'not.contain',
-      'Healthy Transformation'
-    )
+    cy.get('div.newsletter-checkbox').should('not.exist')
   })
 })

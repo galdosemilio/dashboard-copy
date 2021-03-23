@@ -72,7 +72,7 @@ describe('Clinic Marketing List Management', function () {
     cy.tick(1000)
 
     cy.wait('@activeCampaignListAssociationGetRequest').should((xhr) => {
-      expect(xhr.url).to.contain('status=all')
+      expect(xhr.request.url).to.contain('status=all')
     })
 
     cy.get('ccr-organizations-active-campaign')
@@ -87,7 +87,7 @@ describe('Clinic Marketing List Management', function () {
     cy.wait('@activeCampaignListAssociationGetRequest')
 
     cy.wait('@activeCampaignListAssociationGetRequest').should((xhr) => {
-      expect(xhr.url).to.contain('status=inactive')
+      expect(xhr.request.url).to.contain('status=inactive')
     })
 
     cy.get('ccr-organizations-active-campaign')
@@ -99,7 +99,7 @@ describe('Clinic Marketing List Management', function () {
     cy.tick(1000)
 
     cy.wait('@activeCampaignListAssociationGetRequest').should((xhr) => {
-      expect(xhr.url).to.contain('status=active')
+      expect(xhr.request.url).to.contain('status=active')
     })
   })
 
@@ -107,7 +107,7 @@ describe('Clinic Marketing List Management', function () {
     standardSetup(true, undefined, [
       {
         url: '1.0/active-campaign/list/association**',
-        fixture: 'fixture:/api/general/emptyDataEmptyPagination'
+        fixture: 'api/general/emptyDataEmptyPagination'
       }
     ])
 
@@ -215,7 +215,7 @@ describe('Clinic Marketing List Management', function () {
     cy.tick(1000)
 
     cy.wait('@activeCampaignListAssociationDeleteRequest').should((xhr) => {
-      expect(xhr.url).to.contain('34')
+      expect(xhr.request.url).to.contain('34')
     })
 
     cy.wait(2000)
@@ -236,6 +236,12 @@ describe('Clinic Marketing List Management', function () {
       .find('button')
       .contains('Retroactively enroll one provider')
       .click({ force: true })
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container').find(
+      'input[data-placeholder="Select Provider"]'
+    )
+
     cy.tick(1000)
 
     cy.get('mat-dialog-container')

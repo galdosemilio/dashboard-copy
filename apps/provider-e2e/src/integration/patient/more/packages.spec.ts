@@ -12,15 +12,10 @@ describe('Patient profile -> more -> phases and labels', function () {
     cy.get('@packageRows').eq(0).should('contain', 'Package 1')
     cy.get('@packageRows').eq(1).should('contain', 'Package 2')
 
-    cy.route({
-      method: 'POST',
-      url: `/1.0/package/enrollment`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.account).to.contain('3')
-        expect(xhr.request.body.shortcode).to.equal('3')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('POST', `/1.0/package/enrollment`, (request) => {
+      expect(request.body.account).to.contain('3')
+      expect(request.body.shortcode).to.equal('3')
+      request.reply({})
     })
 
     cy.get('@packageRows')
@@ -34,7 +29,7 @@ describe('Patient profile -> more -> phases and labels', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:api/organization/getAllWithNoDirect'
+        fixture: 'api/organization/getAllWithNoDirect'
       }
     ])
     cy.setOrganization('cmwl')

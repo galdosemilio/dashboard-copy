@@ -6,7 +6,7 @@ describe('Validate permissions on homepage', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-nopermissions'
+        fixture: 'api/organization/getAll-nopermissions'
       }
     ])
 
@@ -30,7 +30,7 @@ describe('Validate permissions on homepage', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyviewall'
+        fixture: 'api/organization/getAll-onlyviewall'
       }
     ])
 
@@ -58,7 +58,7 @@ describe('Validate permissions on homepage', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyclientphi'
+        fixture: 'api/organization/getAll-onlyclientphi'
       }
     ])
 
@@ -82,7 +82,7 @@ describe('Validate permissions on homepage', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-noadmin'
+        fixture: 'api/organization/getAll-noadmin'
       }
     ])
 
@@ -120,7 +120,7 @@ describe('Validate permissions on homepage', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll'
+        fixture: 'api/organization/getAll'
       }
     ])
 

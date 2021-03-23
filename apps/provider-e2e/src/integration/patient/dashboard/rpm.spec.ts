@@ -17,7 +17,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       }
     ])
 
@@ -27,11 +27,9 @@ describe('Patient profile -> dashboard -> rpm', function () {
       timeout: 30000
     })
 
-    cy.route({
-      method: 'GET',
-      url: `/2.0/account/${Cypress.env('providerId')}`,
-      status: 403,
-      response: {}
+    cy.intercept('GET', `/2.0/account/${Cypress.env('providerId')}`, {
+      statusCode: 403,
+      body: {}
     })
 
     openRPMDialog()
@@ -68,7 +66,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       }
     ])
 
@@ -94,7 +92,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       }
     ])
 
@@ -110,7 +108,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     attemptToDownloadPatientReport('Excel')
 
     cy.wait('@rpmIndividualSummaryRequest').should((xhr) => {
-      expect(xhr.request.headers.Accept).to.equal(
+      expect(xhr.request.headers.accept).to.equal(
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       )
     })
@@ -120,7 +118,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       }
     ])
 
@@ -136,7 +134,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     attemptToDownloadPatientReport('PDF')
 
     cy.wait('@rpmIndividualSummaryRequest').should((xhr) => {
-      expect(xhr.request.headers.Accept).to.equal('application/pdf')
+      expect(xhr.request.headers.accept).to.equal('application/pdf')
     })
   })
 
@@ -170,7 +168,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       }
     ])
 
@@ -185,11 +183,11 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       },
       {
         url: '/3.0/warehouse/rpm/state/billing-summary?**',
-        fixture: 'fixture:/api/warehouse/getRPMBillingOn99457'
+        fixture: 'api/warehouse/getRPMBillingOn99457'
       }
     ])
 
@@ -210,11 +208,11 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       },
       {
         url: '/3.0/warehouse/rpm/state/billing-summary?**',
-        fixture: 'fixture:/api/warehouse/getRPMBillingOn99458'
+        fixture: 'api/warehouse/getRPMBillingOn99458'
       }
     ])
 
@@ -242,11 +240,11 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       },
       {
         url: '/3.0/warehouse/rpm/state/billing-summary?**',
-        fixture: 'fixture:/api/warehouse/getRPMBillingComplete'
+        fixture: 'api/warehouse/getRPMBillingComplete'
       }
     ])
 
@@ -266,7 +264,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       }
     ])
 
@@ -292,7 +290,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/rpm/state**',
-        fixture: 'fixture:/api/rpm/rpmStateEnabledEntries'
+        fixture: 'api/rpm/rpmStateEnabledEntries'
       }
     ])
 

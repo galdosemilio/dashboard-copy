@@ -146,7 +146,7 @@ describe('Clinic Email Templates', function () {
       .click({ force: true })
 
     cy.wait('@organizationTemplateDeleteRequest').should((xhr) => {
-      expect(xhr.url).to.contain('id=1')
+      expect(xhr.request.url).to.contain('id=1')
     })
 
     cy.wait(2000)
@@ -177,7 +177,7 @@ describe('Clinic Email Templates', function () {
       .click({ force: true })
 
     cy.wait('@organizationTemplatePatchRequest').should((xhr) => {
-      expect(xhr.url).to.contain('1')
+      expect(xhr.request.url).to.contain('1')
       expect(xhr.request.body.locale).to.equal('testlocale')
       expect(xhr.request.body.operation).to.equal('internal-registration')
       expect(xhr.request.body.category).to.equal('other')

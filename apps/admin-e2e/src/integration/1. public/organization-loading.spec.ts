@@ -1,38 +1,21 @@
 import { standardSetup } from '../../support'
 
 function validateOrgPreferenceCalls(orgId: string) {
-  // cy.wait('@sequencePostTransition', { timeout: 20000 }).should((xhr) => {
-  //   expect(xhr.request.body.delay).to.equal('16:00:00');
-  // });
   cy.wait('@apiCallOrgPreference').should((xhr) => {
-    expect(xhr.url).to.contain(
+    expect(xhr.request.url).to.contain(
       `4.0/organization/${orgId}/preference/assets?id=${orgId}&mala=true`
     )
-    expect(xhr.status).to.equal(200)
+    expect(xhr.response.statusCode).to.equal(200)
   })
-  // .its('url')
-  // .should(
-  //   'include',
-  //   `4.0/organization/${orgId}/preference/assets?id=${orgId}&mala=true`
-  // )
-  // .its('status')
-  // .should('be', 200);
   cy.wait('@apiCallAndroidApp').should((xhr) => {
-    expect(xhr.url).to.contain(`1.0/app/android/${orgId}`)
-    expect(xhr.status).to.equal(200)
+    expect(xhr.request.url).to.contain(`1.0/app/android/${orgId}`)
+    expect(xhr.response.statusCode).to.equal(200)
   })
-  // .its('url')
-  // .should('include', `1.0/app/android/${orgId}`)
-  // .its('status')
-  // .should('be', 200);
+
   cy.wait('@apiCallIosApp').should((xhr) => {
-    expect(xhr.url).to.contain(`1.0/app/ios/${orgId}`)
-    expect(xhr.status).to.equal(200)
+    expect(xhr.request.url).to.contain(`1.0/app/ios/${orgId}`)
+    expect(xhr.response.statusCode).to.equal(200)
   })
-  // .its('url')
-  // .should('include', `1.0/app/ios/${orgId}`)
-  // .its('status')
-  // .should('be', 200);
 }
 
 function validateAppStoreBadges() {
@@ -69,17 +52,13 @@ describe('Load homepage', function () {
   })
 
   it('Load default organization homepage (30) with no app links', function () {
-    cy.route({
-      method: 'GET',
-      url: '1.0/app/android/30',
-      status: 404,
-      response: {}
+    cy.intercept('GET', '1.0/app/android/30', {
+      statusCode: 404,
+      body: {}
     })
-    cy.route({
-      method: 'GET',
-      url: '1.0/app/ios/30',
-      status: 404,
-      response: {}
+    cy.intercept('GET', '1.0/app/ios/30', {
+      statusCode: 404,
+      body: {}
     })
 
     cy.visit(`/`)
@@ -90,10 +69,10 @@ describe('Load homepage', function () {
     cy.get('.badge-button-wrapper-lg-and-up').find('a').should('have.length', 0)
 
     cy.wait('@apiCallOrgPreference').should((xhr) => {
-      expect(xhr.url).to.contain(
+      expect(xhr.request.url).to.contain(
         `4.0/organization/30/preference/assets?id=30&mala=true`
       )
-      expect(xhr.status).to.equal(200)
+      expect(xhr.response.statusCode).to.equal(200)
     })
   })
 

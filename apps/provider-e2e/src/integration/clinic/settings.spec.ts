@@ -20,7 +20,7 @@ describe('Clinics -> Clinic -> Settings', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-noadmin'
+        fixture: 'api/organization/getAll-noadmin'
       }
     ])
 
@@ -39,13 +39,13 @@ describe('Clinics -> Clinic -> Settings', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyadmin'
+        fixture: 'api/organization/getAll-onlyadmin'
       }
     ])
 
     cy.visit(`/accounts/clinics/${Cypress.env('clinicId')};s=settings`)
 
-    cy.get('[data-cy="adminPermissionRequired"').should('not.be.visible')
+    cy.get('[data-cy="adminPermissionRequired"').should('not.exist')
 
     cy.get('app-clinic-settings')
 
@@ -62,7 +62,7 @@ describe('Clinics -> Clinic -> Settings', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll'
+        fixture: 'api/organization/getAll'
       }
     ])
 
@@ -72,7 +72,7 @@ describe('Clinics -> Clinic -> Settings', function () {
 
     cy.tick(10000)
 
-    cy.get('[data-cy="adminPermissionRequired"').should('not.be.visible')
+    cy.get('[data-cy="adminPermissionRequired"').should('not.exist')
 
     cy.get('[data-cy="org-settings-section-features-messages-autothread"]')
       .find('.mat-slide-toggle-input')

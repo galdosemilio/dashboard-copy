@@ -85,7 +85,7 @@ describe('Clinic Settings', () => {
       .blur()
 
     cy.wait('@updateOrgCall').should((xhr) => {
-      expect(xhr.status).to.equal(204)
+      expect(xhr.response.statusCode).to.equal(204)
       expect(xhr.request.body.id).to.equal(Cypress.env('organizationId'))
       expect(xhr.request.body.displayName).to.equal('testing 123 and then')
     })
@@ -259,7 +259,7 @@ describe('Clinic Settings', () => {
     cy.get('@iOSInput').clear().type('ios-app-new-value').blur()
 
     cy.wait('@updateMalaCall').should((xhr) => {
-      expect(xhr.status).to.equal(204)
+      expect(xhr.response.statusCode).to.equal(204)
       expect(xhr.request.body.appIds.ios).to.equal('ios-app-new-value')
       expect(xhr.request.body.appIds.android).to.equal('android-app')
     })
@@ -272,7 +272,7 @@ describe('Clinic Settings', () => {
     cy.get('@androidInput').clear().type('android-app-new-value').blur()
 
     cy.wait('@updateMalaCall').should((xhr) => {
-      expect(xhr.status).to.equal(204)
+      expect(xhr.response.statusCode).to.equal(204)
       expect(xhr.request.body.appIds.ios).to.equal('ios-app')
       expect(xhr.request.body.appIds.android).to.equal('android-app-new-value')
     })
@@ -305,7 +305,7 @@ describe('Clinic Settings', () => {
       expect(xhr.request.body.mala.developerPortalTeamId).to.equal('wfe9h023ry')
       expect(xhr.request.body.mala.appStoreConnectTeamId).to.equal('1239712973')
       expect(xhr.request.body.mala.other.other1).to.equal('other text')
-      expect(xhr.status).to.equal(204)
+      expect(xhr.response.statusCode).to.equal(204)
     })
 
     cy.get('[data-cy="org-setting-jsoneditor"]')
@@ -329,7 +329,7 @@ describe('Clinic Settings', () => {
       expect(xhr.request.body.mala.developerPortalTeamId).to.equal('wfe9h023ry')
       expect(xhr.request.body.mala.appStoreConnectTeamId).to.equal('1239712973')
       expect(xhr.request.body.mala.other.other1).to.equal('newjsoneditorvalue')
-      expect(xhr.status).to.equal(204)
+      expect(xhr.response.statusCode).to.equal(204)
     })
   })
 })

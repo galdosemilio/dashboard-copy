@@ -24,7 +24,7 @@ describe('Clinics -> Clinic -> Phases', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-noadmin'
+        fixture: 'api/organization/getAll-noadmin'
       }
     ])
 

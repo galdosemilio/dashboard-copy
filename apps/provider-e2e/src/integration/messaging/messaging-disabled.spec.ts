@@ -23,10 +23,10 @@ describe('Organization Messaging Preference', function () {
 
     cy.visit('/')
 
-    cy.route(
+    cy.intercept(
       'GET',
       '/1.0/message/preference/organization?organization=**',
-      'fixture:/api/message/getOrgPreference-disabled'
+      { fixture: 'api/message/getOrgPreference-disabled' }
     )
 
     cy.get('app-menu')

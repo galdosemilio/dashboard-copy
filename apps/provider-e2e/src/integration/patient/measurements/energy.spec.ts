@@ -55,18 +55,13 @@ describe('Patient profile -> measurement -> energy', function () {
       .find('input[data-placeholder="Steps"]')
       .type('1500')
 
-    cy.route({
-      method: 'POST',
-      url: `/1.0/measurement/activity`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.activity[0].date).to.contain('2019-12-31T19:0')
-        expect(xhr.request.body.activity[0].date).to.contain('-05:00')
-        expect(xhr.request.body.activity[0].steps).to.contain('1500')
-        expect(xhr.request.body.activity[0].device).to.contain('3')
-        expect(xhr.request.body.clientId).to.contain('3')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('POST', `/1.0/measurement/activity`, (request) => {
+      expect(request.body.activity[0].date).to.contain('2019-12-31T19:0')
+      expect(request.body.activity[0].date).to.contain('-05:00')
+      expect(request.body.activity[0].steps).to.contain('1500')
+      expect(request.body.activity[0].device).to.equal(3)
+      expect(request.body.clientId).to.contain('3')
+      request.reply({})
     })
 
     cy.get('add-rightpanel-measurements')
@@ -95,25 +90,20 @@ describe('Patient profile -> measurement -> energy', function () {
 
     cy.get('.mat-calendar-footer').find('button').contains('OK').click()
 
-    cy.route({
-      method: 'POST',
-      url: `/1.0/measurement/sleep`,
-      onRequest: (xhr) => {
-        const firstSleepRecord = xhr.request.body.sleep[0][0]
-        const lastSleepRecord = xhr.request.body.sleep[0][31]
+    cy.intercept('POST', `/1.0/measurement/sleep`, (request) => {
+      const firstSleepRecord = request.body.sleep[0][0]
+      const lastSleepRecord = request.body.sleep[0][31]
 
-        expect(xhr.request.body.clientId).to.contain('3')
-        expect(xhr.request.body.deviceId).to.equal(3)
-        expect(xhr.request.body.sleep[0].length).to.equal(32)
-        expect(firstSleepRecord.quality).to.equal(64)
-        expect(firstSleepRecord.time).to.contain('2019-12-31T19:00')
-        expect(firstSleepRecord.time).to.contain('-05:00')
-        expect(lastSleepRecord.quality).to.equal(64)
-        expect(lastSleepRecord.time).to.contain('2020-01-01T02:45')
-        expect(lastSleepRecord.time).to.contain('-05:00')
-      },
-      status: 200,
-      response: {}
+      expect(request.body.clientId).to.contain('3')
+      expect(request.body.deviceId).to.equal(3)
+      expect(request.body.sleep[0].length).to.equal(32)
+      expect(firstSleepRecord.quality).to.equal(64)
+      expect(firstSleepRecord.time).to.contain('2019-12-31T19:00')
+      expect(firstSleepRecord.time).to.contain('-05:00')
+      expect(lastSleepRecord.quality).to.equal(64)
+      expect(lastSleepRecord.time).to.contain('2020-01-01T02:45')
+      expect(lastSleepRecord.time).to.contain('-05:00')
+      request.reply({})
     })
 
     cy.get('add-rightpanel-measurements')
@@ -139,18 +129,13 @@ describe('Patient profile -> measurement -> energy', function () {
       .find('input[data-placeholder="Steps"]')
       .type('1500')
 
-    cy.route({
-      method: 'POST',
-      url: `/1.0/measurement/activity`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.activity[0].date).to.contain('2020-01-01T11:0')
-        expect(xhr.request.body.activity[0].date).to.contain('+11:00')
-        expect(xhr.request.body.activity[0].steps).to.contain('1500')
-        expect(xhr.request.body.activity[0].device).to.contain('3')
-        expect(xhr.request.body.clientId).to.contain('3')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('POST', `/1.0/measurement/activity`, (request) => {
+      expect(request.body.activity[0].date).to.contain('2020-01-01T11:0')
+      expect(request.body.activity[0].date).to.contain('+11:00')
+      expect(request.body.activity[0].steps).to.contain('1500')
+      expect(request.body.activity[0].device).to.equal(3)
+      expect(request.body.clientId).to.contain('3')
+      request.reply({})
     })
 
     cy.get('add-rightpanel-measurements')
@@ -179,25 +164,20 @@ describe('Patient profile -> measurement -> energy', function () {
 
     cy.get('.mat-calendar-footer').find('button').contains('OK').click()
 
-    cy.route({
-      method: 'POST',
-      url: `/1.0/measurement/sleep`,
-      onRequest: (xhr) => {
-        const firstSleepRecord = xhr.request.body.sleep[0][0]
-        const lastSleepRecord = xhr.request.body.sleep[0][31]
+    cy.intercept('POST', `/1.0/measurement/sleep`, (request) => {
+      const firstSleepRecord = request.body.sleep[0][0]
+      const lastSleepRecord = request.body.sleep[0][31]
 
-        expect(xhr.request.body.clientId).to.contain('3')
-        expect(xhr.request.body.deviceId).to.equal(3)
-        expect(xhr.request.body.sleep[0].length).to.equal(32)
-        expect(firstSleepRecord.quality).to.equal(64)
-        expect(firstSleepRecord.time).to.contain('2020-01-01T11:00')
-        expect(firstSleepRecord.time).to.contain('+11:00')
-        expect(lastSleepRecord.quality).to.equal(64)
-        expect(lastSleepRecord.time).to.contain('2020-01-01T18:45')
-        expect(lastSleepRecord.time).to.contain('+11:00')
-      },
-      status: 200,
-      response: {}
+      expect(request.body.clientId).to.contain('3')
+      expect(request.body.deviceId).to.equal(3)
+      expect(request.body.sleep[0].length).to.equal(32)
+      expect(firstSleepRecord.quality).to.equal(64)
+      expect(firstSleepRecord.time).to.contain('2020-01-01T11:00')
+      expect(firstSleepRecord.time).to.contain('+11:00')
+      expect(lastSleepRecord.quality).to.equal(64)
+      expect(lastSleepRecord.time).to.contain('2020-01-01T18:45')
+      expect(lastSleepRecord.time).to.contain('+11:00')
+      request.reply({})
     })
 
     cy.get('add-rightpanel-measurements')

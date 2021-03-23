@@ -28,7 +28,7 @@ describe('Patient profile -> more -> submenu (standard)', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/content/vault/preference?organization=**',
-        fixture: 'fixture:/api/filevault/getOrgPreference-disabled'
+        fixture: 'api/filevault/getOrgPreference-disabled'
       }
     ])
 

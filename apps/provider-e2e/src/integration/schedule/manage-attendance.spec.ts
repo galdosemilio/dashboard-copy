@@ -27,29 +27,19 @@ describe('Schedule -> manage attendance', function () {
     cy.get('@attendanceOptions').should('have.length', 4)
 
     // // Mark as attended
-    cy.route({
-      method: 'PATCH',
-      url: `/3.0/meeting/attendance`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.id).to.contain('2')
-        expect(xhr.request.body.status).to.equal('3')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('PATCH', `/3.0/meeting/attendance`, (request) => {
+      expect(request.body.id).to.contain('2')
+      expect(request.body.status).to.equal('3')
+      request.reply({})
     })
 
     cy.get('@attendanceOptions').eq(0).trigger('click').wait(1200)
 
     // // Mark as not attended
-    cy.route({
-      method: 'PATCH',
-      url: `/3.0/meeting/attendance`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.id).to.contain('2')
-        expect(xhr.request.body.status).to.equal('2')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('PATCH', `/3.0/meeting/attendance`, (request) => {
+      expect(request.body.id).to.contain('2')
+      expect(request.body.status).to.equal('2')
+      request.reply({})
     })
     cy.get('@attendanceSelectors').eq(1).trigger('click')
     cy.get('.mat-select-panel')

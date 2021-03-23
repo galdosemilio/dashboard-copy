@@ -20,11 +20,9 @@ describe('Lefthand menu (orphaned provider)', function () {
   it('No links should be visible (no org access)', function () {
     cy.setOrganization('ccr')
     standardSetup()
-    cy.route(
-      'GET',
-      '/2.0/access/organization?**',
-      'fixture:/api/general/emptyDataEmptyPagination'
-    )
+    cy.intercept('GET', '/2.0/access/organization?**', {
+      fixture: 'api/general/emptyDataEmptyPagination'
+    })
 
     cy.visit('/')
     cy.get('[data-cy="empty-menu"]').should('exist')

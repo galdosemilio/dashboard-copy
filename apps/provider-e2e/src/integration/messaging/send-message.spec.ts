@@ -6,16 +6,11 @@ describe('Messages -> send message', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.route({
-      method: 'POST',
-      url: `/2.0/message`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.content).to.contain('this is a test')
-        expect(xhr.request.body.subject).to.contain('CoachCare Message')
-        expect(xhr.request.body.threadId).to.contain('1')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('POST', `/2.0/message`, (request) => {
+      expect(request.body.content).to.contain('this is a test')
+      expect(request.body.subject).to.contain('CoachCare Message')
+      expect(request.body.threadId).to.contain('1')
+      request.reply({})
     })
 
     cy.visit(`/messages`)
@@ -31,16 +26,11 @@ describe('Messages -> send message', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.route({
-      method: 'POST',
-      url: `/2.0/message`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.content).to.contain('this is a test')
-        expect(xhr.request.body.subject).to.contain('CoachCare Message')
-        expect(xhr.request.body.threadId).to.contain('1')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('POST', `/2.0/message`, (request) => {
+      expect(request.body.content).to.contain('this is a test')
+      expect(request.body.subject).to.contain('CoachCare Message')
+      expect(request.body.threadId).to.contain('1')
+      request.reply({})
     })
 
     cy.visit(`/messages`)

@@ -19,10 +19,10 @@ describe('Organization Messaging Preference', function () {
 
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
-    cy.route(
+    cy.intercept(
       'GET',
       '/1.0/message/preference/organization?organization=**',
-      'fixture:/api/message/getOrgPreference-disabled'
+      { fixture: 'api/message/getOrgPreference-disabled' }
     )
 
     // Main buttons

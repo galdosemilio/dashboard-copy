@@ -19,11 +19,9 @@ describe('Organization Conferencing Preference', function () {
   })
 
   it('Call button is not available', function () {
-    cy.route(
-      'GET',
-      '/1.0/communication/preference?organization=**',
-      'fixture:/api/communication/getOrgPreference-disabled'
-    )
+    cy.intercept('GET', '/1.0/communication/preference?organization=**', {
+      fixture: 'api/communication/getOrgPreference-disabled'
+    })
 
     cy.get('app-dieter').find('ccr-call-control').should('not.be.visible')
 

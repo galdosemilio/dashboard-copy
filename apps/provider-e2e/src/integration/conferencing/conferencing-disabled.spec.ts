@@ -11,14 +11,13 @@ describe('Organization Conferencing Preference', function () {
 
   it('Call button is not available', function () {
     cy.setOrganization('ccr')
-    standardSetup()
+    standardSetup(undefined, [
+      {
+        url: '/1.0/communication/preference?organization=**',
+        fixture: 'api/communication/getOrgPreference-disabled'
+      }
+    ])
     cy.visit(`/messages`)
-
-    cy.route(
-      'GET',
-      '/1.0/communication/preference?organization=**',
-      'fixture:/api/communication/getOrgPreference-disabled'
-    )
 
     cy.get('ccr-messages').find('ccr-call-control').should('not.be.visible')
   })

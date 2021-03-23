@@ -19,7 +19,7 @@ describe('Patient profile -> association message', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/account?**',
-        fixture: 'fixture:/api/access/getAccountAccessCmwlClinic'
+        fixture: 'api/access/getAccountAccessCmwlClinic'
       }
     ])
 

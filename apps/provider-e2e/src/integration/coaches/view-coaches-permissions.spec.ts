@@ -6,7 +6,7 @@ describe('Validate permissions on coaches listing page', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-nopermissions'
+        fixture: 'api/organization/getAll-nopermissions'
       }
     ])
 
@@ -18,7 +18,7 @@ describe('Validate permissions on coaches listing page', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyadmin'
+        fixture: 'api/organization/getAll-onlyadmin'
       }
     ])
 
@@ -30,7 +30,7 @@ describe('Validate permissions on coaches listing page', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyclientphi'
+        fixture: 'api/organization/getAll-onlyclientphi'
       }
     ])
 
@@ -42,7 +42,7 @@ describe('Validate permissions on coaches listing page', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyviewall'
+        fixture: 'api/organization/getAll-onlyviewall'
       }
     ])
     verifyTable(false)
@@ -53,7 +53,7 @@ describe('Validate permissions on coaches listing page', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-noadmin'
+        fixture: 'api/organization/getAll-noadmin'
       }
     ])
 
@@ -64,7 +64,7 @@ describe('Validate permissions on coaches listing page', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll'
+        fixture: 'api/organization/getAll'
       }
     ])
 

@@ -4,11 +4,9 @@ describe('Account Search in Top Menu', function () {
   it('Account search should not be visible (no org access)', function () {
     cy.setOrganization('ccr')
     standardSetup()
-    cy.route(
-      'GET',
-      '/2.0/access/organization?**',
-      'fixture:/api/general/emptyDataEmptyPagination'
-    )
+    cy.intercept('GET', '/2.0/access/organization?**', {
+      fixture: 'api/general/emptyDataEmptyPagination'
+    })
     cy.visit('/')
 
     cy.get('app-profile')
@@ -27,7 +25,7 @@ describe('Account Search in Top Menu', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-nopermissions'
+        fixture: 'api/organization/getAll-nopermissions'
       }
     ])
     cy.visit('/')
@@ -49,7 +47,7 @@ describe('Account Search in Top Menu', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyclientphi'
+        fixture: 'api/organization/getAll-onlyclientphi'
       }
     ])
     cy.visit('/')
@@ -71,7 +69,7 @@ describe('Account Search in Top Menu', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyviewall'
+        fixture: 'api/organization/getAll-onlyviewall'
       }
     ])
     cy.visit('/')
@@ -98,7 +96,7 @@ describe('Account Search in Top Menu', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-onlyadmin'
+        fixture: 'api/organization/getAll-onlyadmin'
       }
     ])
     cy.visit('/')
@@ -120,7 +118,7 @@ describe('Account Search in Top Menu', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll-noadmin'
+        fixture: 'api/organization/getAll-noadmin'
       }
     ])
     cy.visit('/')
@@ -147,7 +145,7 @@ describe('Account Search in Top Menu', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll'
+        fixture: 'api/organization/getAll'
       }
     ])
     cy.visit('/')

@@ -113,7 +113,7 @@ describe('Messages -> basic message page layout is correct', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/message/unread',
-        fixture: 'fixture:/api/message/getUnread'
+        fixture: 'api/message/getUnread'
       }
     ])
 

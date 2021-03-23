@@ -58,11 +58,9 @@ describe('Patient profile -> clinics', function () {
   })
 
   it('Deletable clinics associations limited to only "admin" permissioned clinic', function () {
-    cy.route(
-      'GET',
-      '/2.0/access/organization?**',
-      'fixture:api/organization/getAll-noadmin'
-    )
+    cy.intercept('GET', '/2.0/access/organization?**', {
+      fixture: 'api/organization/getAll-noadmin'
+    })
 
     cy.visit(
       `/accounts/patients/${Cypress.env('clientId')}/settings;s=associations`
@@ -87,16 +85,12 @@ describe('Patient profile -> clinics', function () {
   })
 
   it('Cannot add association if no "admin" permissioned clinics', function () {
-    cy.route(
-      'GET',
-      '/2.0/access/organization?**',
-      'fixture:api/organization/getAll-noadmin'
-    )
-    cy.route(
-      'GET',
-      '/2.0/access/organization?account=**',
-      'fixture:api/general/emptyDataEmptyPagination'
-    )
+    cy.intercept('GET', '/2.0/access/organization?**', {
+      fixture: 'api/organization/getAll-noadmin'
+    })
+    cy.intercept('GET', '/2.0/access/organization?account=**', {
+      fixture: 'api/general/emptyDataEmptyPagination'
+    })
 
     cy.visit(
       `/accounts/patients/${Cypress.env('clientId')}/settings;s=associations`

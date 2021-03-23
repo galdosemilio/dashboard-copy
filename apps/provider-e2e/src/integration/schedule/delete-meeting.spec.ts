@@ -32,7 +32,7 @@ describe('Schedule -> delete meeting', function () {
 
     // check that delete call was made for single meeting with meeting id meetingId (id is last meeting id from meeting/getListing.json fixture)
     cy.wait('@deleteMeeting')
-      .its('url')
+      .its('request.url')
       .should(
         'equal',
         'https://test.api.coachcare.com/2.0/meeting/single/18073'
@@ -104,11 +104,11 @@ function listViewRecurringMeeting(option: Option): void {
   standardSetup(undefined, [
     {
       url: '/3.0/meeting?**',
-      fixture: 'fixture:/api/meeting/getListingRecurring'
+      fixture: 'api/meeting/getListingRecurring'
     },
     {
       url: '/3.0/meeting/**',
-      fixture: 'fixture:/api/meeting/getSingleRecurring'
+      fixture: 'api/meeting/getSingleRecurring'
     }
   ])
 
@@ -148,11 +148,11 @@ function calendarViewRecurringMeeting(option: Option): void {
   standardSetup(undefined, [
     {
       url: '/3.0/meeting?**',
-      fixture: 'fixture:/api/meeting/getListingRecurring'
+      fixture: 'api/meeting/getListingRecurring'
     },
     {
       url: '/3.0/meeting/**',
-      fixture: 'fixture:/api/meeting/getSingleRecurring'
+      fixture: 'api/meeting/getSingleRecurring'
     }
   ])
 
@@ -202,8 +202,9 @@ function verifyDeleteApiCall(option: Option): void {
 
   switch (option) {
     case 'schedule-delete-after':
-      url =
-        'https://test.api.coachcare.com/2.0/meeting/recurring/18073?after=2019-12-31T05:00:00.000Z'
+      url = `https://test.api.coachcare.com/2.0/meeting/recurring/18073?after=${encodeURIComponent(
+        '2019-12-31T05:00:00.000Z'
+      )}`
       break
     case 'schedule-delete-this-and-future':
       url = 'https://test.api.coachcare.com/2.0/meeting/recurring/18073'
@@ -215,5 +216,5 @@ function verifyDeleteApiCall(option: Option): void {
 
   cy.tick(1000)
 
-  cy.wait('@deleteMeeting').its('url').should('equal', url)
+  cy.wait('@deleteMeeting').its('request.url').should('equal', url)
 }

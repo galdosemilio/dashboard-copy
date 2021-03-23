@@ -101,7 +101,7 @@ describe('Patient Listing', function () {
       cy.tick(1000)
 
       cy.wait('@patientListingGetRequest').should((xhr) => {
-        expect(xhr.url).to.contain(`[property]=${sortableHeader.value}`)
+        expect(xhr.request.url).to.contain(`${sortableHeader.value}`)
       })
 
       cy.tick(1000)
@@ -123,8 +123,8 @@ describe('Patient Listing', function () {
     cy.tick(1000)
 
     cy.wait('@patientListingGetRequest').should((xhr) => {
-      expect(xhr.url).to.contain('limit=50')
-      expect(xhr.url).to.contain('offset=0')
+      expect(xhr.request.url).to.contain('limit=50')
+      expect(xhr.request.url).to.contain('offset=0')
       expect(localStorage.getItem('ccrDefaultPageSizePatientListing')).to.equal(
         '50'
       )

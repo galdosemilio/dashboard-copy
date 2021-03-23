@@ -90,11 +90,9 @@ describe('Schedule -> view', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.route(
-      'GET',
-      '/4.0/meeting?**',
-      'fixture:/api/meeting/getListingRecurringMarch'
-    )
+    cy.intercept('GET', '/4.0/meeting?**', {
+      fixture: 'api/meeting/getListingRecurringMarch'
+    })
     cy.visit(`/schedule/view`)
 
     cy.get('.calendar-wrapper')
@@ -107,11 +105,9 @@ describe('Schedule -> view', function () {
     assertMeeting('Test meeting 4', { timeRange: '2:00-3:00am', attendees: 1 })
     assertMeeting('Test meeting 5', { timeRange: '2:45-3:45am', attendees: 1 })
 
-    cy.route(
-      'GET',
-      '/4.0/meeting?**',
-      'fixture:/api/meeting/getListingRecurringShifted'
-    )
+    cy.intercept('GET', '/4.0/meeting?**', {
+      fixture: 'api/meeting/getListingRecurringShifted'
+    })
 
     selectDate(10, 'MAR', 2020)
     cy.tick(10000)
@@ -129,11 +125,9 @@ describe('Schedule -> view', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.route(
-      'GET',
-      '/4.0/meeting?**',
-      'fixture:/api/meeting/getListingRecurringMarch'
-    )
+    cy.intercept('GET', '/4.0/meeting?**', {
+      fixture: 'api/meeting/getListingRecurringMarch'
+    })
     cy.visit(`/schedule/view`)
 
     cy.get('.calendar-wrapper')
@@ -145,11 +139,9 @@ describe('Schedule -> view', function () {
     assertMeeting('Test meeting 1', { start: '10:00-10:30pm', attendees: 3 })
     assertMeeting('Test meeting 3', { timeRange: '2:00-3:00am', attendees: 1 })
 
-    cy.route(
-      'GET',
-      '/4.0/meeting?**',
-      'fixture:/api/meeting/getListingRecurringShifted'
-    )
+    cy.intercept('GET', '/4.0/meeting?**', {
+      fixture: 'api/meeting/getListingRecurringShifted'
+    })
 
     selectDate(11, 'MAR', 2020)
     assertMeeting('Test meeting 1', {
@@ -189,7 +181,7 @@ describe('Schedule -> view', function () {
     cy.wait('@getMeetingsRequest')
 
     cy.wait('@getMeetingsRequest').should((xhr) => {
-      expect(xhr.url).to.contain('organization=1')
+      expect(xhr.request.url).to.contain('organization=1')
     })
   })
 
@@ -217,7 +209,7 @@ describe('Schedule -> view', function () {
     cy.wait('@getMeetingsRequest')
 
     cy.wait('@getMeetingsRequest').should((xhr) => {
-      expect(xhr.url).to.contain('account=1')
+      expect(xhr.request.url).to.contain('account=1')
     })
   })
 
@@ -225,11 +217,9 @@ describe('Schedule -> view', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.route(
-      'GET',
-      '/4.0/meeting?**',
-      'fixture:/api/meeting/getListingWithBusyTimes'
-    )
+    cy.intercept('GET', '/4.0/meeting?**', {
+      fixture: 'api/meeting/getListingWithBusyTimes'
+    })
 
     cy.visit(`/schedule/view`)
 

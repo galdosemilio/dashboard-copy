@@ -6,7 +6,7 @@ describe('Dashboard -> Digital Library -> Forms -> Form -> Form Submission', fun
     standardSetup(undefined, [
       {
         url: '/1.0/content/form/submission?**',
-        fixture: 'fixture:/api/general/emptyData'
+        fixture: 'api/general/emptyData'
       }
     ])
 

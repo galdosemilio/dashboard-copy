@@ -16,11 +16,9 @@ function access(isOrphaned: boolean, url: string): void {
   cy.setOrganization('ccr')
   standardSetup()
   if (isOrphaned) {
-    cy.route(
-      'GET',
-      '/2.0/access/organization?**',
-      'fixture:/api/general/emptyDataEmptyPagination'
-    )
+    cy.intercept('GET', '/2.0/access/organization?**', {
+      fixture: 'api/general/emptyDataEmptyPagination'
+    })
   }
   cy.visit(url)
 

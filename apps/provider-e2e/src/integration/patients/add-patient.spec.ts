@@ -186,7 +186,7 @@ describe('Patients -> Add Patient -> Select packages', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll'
+        fixture: 'api/organization/getAll'
       }
     ])
 
@@ -214,7 +214,7 @@ describe('Patients -> Add Patient -> Select packages', function () {
     standardSetup(undefined, [
       {
         url: '/2.0/access/organization?**',
-        fixture: 'fixture:/api/organization/getAll'
+        fixture: 'api/organization/getAll'
       }
     ])
 

@@ -5,27 +5,22 @@ describe('Patient profile -> measurement -> vitals', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.route({
-      method: 'POST',
-      url: `/2.0/measurement/body`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.totalCholesterol).to.equal('20')
-        expect(xhr.request.body.ldl).to.equal('20')
-        expect(xhr.request.body.hdl).to.equal('20')
-        expect(xhr.request.body.vldl).to.equal('20')
-        expect(xhr.request.body.triglycerides).to.equal('20')
-        expect(xhr.request.body.fastingGlucose).to.equal('20')
-        expect(xhr.request.body.hba1c).to.equal('20000')
-        expect(xhr.request.body.insulin).to.equal('50')
-        expect(xhr.request.body.hsCrp).to.equal('200000')
-        expect(xhr.request.body.temperature).to.equal('3667')
-        expect(xhr.request.body.heartRate).to.equal('20')
-        expect(xhr.request.body.bloodPressureSystolic).to.equal('20')
-        expect(xhr.request.body.bloodPressureDiastolic).to.equal('20')
-        expect(xhr.request.body.respirationRate).to.equal('20')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('POST', `/2.0/measurement/body`, (request) => {
+      expect(request.body.totalCholesterol).to.equal('20')
+      expect(request.body.ldl).to.equal('20')
+      expect(request.body.hdl).to.equal('20')
+      expect(request.body.vldl).to.equal('20')
+      expect(request.body.triglycerides).to.equal('20')
+      expect(request.body.fastingGlucose).to.equal('20')
+      expect(request.body.hba1c).to.equal('20000')
+      expect(request.body.insulin).to.equal('50')
+      expect(request.body.hsCrp).to.equal('200000')
+      expect(request.body.temperature).to.equal('3667')
+      expect(request.body.heartRate).to.equal('20')
+      expect(request.body.bloodPressureSystolic).to.equal('20')
+      expect(request.body.bloodPressureDiastolic).to.equal('20')
+      expect(request.body.respirationRate).to.equal('20')
+      request.reply({})
     })
 
     cy.visit(
@@ -127,7 +122,7 @@ describe('Patient profile -> measurement -> vitals', function () {
 
     cy.get('@measurementRows').should('have.length', 13)
 
-    cy.get('@measurementRows').eq('12').find('td').as('measurementCells')
+    cy.get('@measurementRows').eq(12).find('td').as('measurementCells')
 
     cy.get('@measurementCells').should('have.length', 16)
 

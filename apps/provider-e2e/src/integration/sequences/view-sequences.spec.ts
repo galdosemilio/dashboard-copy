@@ -27,15 +27,15 @@ describe('Sequences -> view', function () {
       .should('have.length', 3)
     cy.get('app-sequencing-sequences-table')
       .find('mat-row')
-      .eq('0')
+      .eq(0)
       .should('contain', 'CoachCare (id 1)')
     cy.get('app-sequencing-sequences-table')
       .find('mat-row')
-      .eq('1')
+      .eq(1)
       .should('contain', 'CoachCare (id 1)')
     cy.get('app-sequencing-sequences-table')
       .find('mat-row')
-      .eq('2')
+      .eq(2)
       .should('contain', 'CoachCare (id 1)')
   })
 
@@ -62,17 +62,17 @@ describe('Sequences -> view', function () {
       .should('have.length', 3)
     cy.get('app-sequencing-sequences-table')
       .find('mat-row')
-      .eq('0')
+      .eq(0)
       .should('contain', 'first sequence')
       .should('contain', 'Mon, Aug 26 2019')
     cy.get('app-sequencing-sequences-table')
       .find('mat-row')
-      .eq('1')
+      .eq(1)
       .should('contain', 'second sequence')
       .should('contain', 'Tue, Aug 27 2019')
     cy.get('app-sequencing-sequences-table')
       .find('mat-row')
-      .eq('2')
+      .eq(2)
       .should('contain', 'third sequence')
       .should('contain', 'Wed, Aug 28 2019')
   })
@@ -137,15 +137,13 @@ describe('Sequences -> view', function () {
 
   it('Send the proper offset in a looping sequence after adding one step', function () {
     cy.setTimezone('et')
-    standardSetup()
+    standardSetup(undefined, [
+      {
+        url: '/1.0/sequence/enrollment**',
+        fixture: 'api/general/emptyDataEmptyPagination'
+      }
+    ])
     cy.visit('/sequences/sequence/1;s=edit')
-
-    cy.route({
-      method: 'GET',
-      url: '/1.0/sequence/enrollment**',
-      status: 200,
-      response: { data: [], pagination: {} }
-    })
 
     cy.get('.step-list-item', { timeout: 20000 }).as('matSelectInputs')
     cy.clock().tick(100000)
@@ -211,7 +209,7 @@ describe('Sequences -> view', function () {
     saveSequence()
 
     cy.tick(10000)
-    cy.wait(500)
+    cy.wait(1000)
     cy.tick(10000)
 
     cy.wait('@sequenceTriggerDeactivate', { timeout: 20000 }).should((xhr) => {

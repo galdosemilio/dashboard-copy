@@ -85,15 +85,10 @@ describe('Patient profile -> measurement -> composition (AET)', function () {
   // });
 
   it('Add composition measurement in AET (Australia Eastern)', function () {
-    cy.route({
-      method: 'POST',
-      url: `/2.0/measurement/body`,
-      onRequest: (xhr) => {
-        expect(xhr.request.body.recordedAt).to.contain('+11:00')
-        expect(xhr.request.body.weight).to.equal('83915')
-      },
-      status: 200,
-      response: {}
+    cy.intercept('POST', `/2.0/measurement/body`, (request) => {
+      expect(request.body.recordedAt).to.contain('+11:00')
+      expect(request.body.weight).to.equal('83915')
+      request.reply({})
     })
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/measurements`)
 

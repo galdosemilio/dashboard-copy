@@ -13,7 +13,7 @@ describe('Sequences -> enrollment and unenrollment', function () {
     cy.get('[data-cy="sequence-enroll"]').click()
 
     cy.wait('@api-access_organization_sequence')
-      .its('url')
+      .its('request.url')
       .should('include', 'ancestor=999')
 
     cy.tick(10000)
@@ -27,7 +27,7 @@ describe('Sequences -> enrollment and unenrollment', function () {
     cy.tick(10000)
 
     cy.wait('@api-access_account')
-      .its('url')
+      .its('request.url')
       .should('include', 'organization=999')
   })
   it('Unenroll Listing button inactive if no enrollments', function () {
@@ -35,7 +35,7 @@ describe('Sequences -> enrollment and unenrollment', function () {
     standardSetup(undefined, [
       {
         url: '/1.0/sequence/enrollment**',
-        fixture: 'fixture:/api/general/emptyDataEmptyPagination'
+        fixture: 'api/general/emptyDataEmptyPagination'
       }
     ])
 
@@ -59,7 +59,7 @@ describe('Sequences -> enrollment and unenrollment', function () {
     cy.get('[data-cy="sequence-unenroll"]').click()
 
     cy.wait('@api-access_organization_sequence')
-      .its('url')
+      .its('request.url')
       .should('include', 'ancestor=999')
   })
 })
