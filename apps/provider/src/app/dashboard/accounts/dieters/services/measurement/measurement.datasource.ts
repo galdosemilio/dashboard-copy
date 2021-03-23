@@ -14,7 +14,7 @@ import { Entity, FetchBodyMeasurementDataResponse } from '@coachcare/npm-api'
 import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
-import { isArray, merge } from 'lodash'
+import { isArray, merge, uniqBy } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, Subject } from 'rxjs'
@@ -34,6 +34,7 @@ export class MeasurementDataSource extends ChartDataSource<
 > {
   hasMissingWeight = false
   measurement: MeasurementSummaryData
+  missingWeightDates: string[] = []
   palette: CCRPalette
   requiresWeight: MeasurementSummaryData[] = ['bodyFat', 'leanMass']
 
@@ -388,6 +389,12 @@ export class MeasurementDataSource extends ChartDataSource<
 
     if (this.requiresWeight.indexOf(this.measurement) > -1) {
       this.hasMissingWeight = result.some((element) => !element.weight)
+      this.missingWeightDates = uniqBy(
+        result
+          .filter((element) => !element.weight)
+          .map((element) => element.date),
+        (element) => element.split('T')[0]
+      )
     }
 
     const linePoints =

@@ -791,7 +791,7 @@
     "LDL": "LDL",
     "LEAN_MASS": "Lean Mass",
     "LOW_DENSITY_LIPOPROTEIN": "Low-Density Lipoprotein",
-    "MISSING_WEIGHT_NOTE": "Standalone measurement(s) exist for this time period, but cannot be displayed on this graph. These values are visible on the measurement->composition table view only.",
+    "MISSING_WEIGHT_NOTE": "Some measurements exist for this time period that cannot be displayed on this graph. These values are visible on the <a href=\"{{tableViewLink}}\">table view</a> only. The dates for which these measurements exist are:",
     "NECK": "Neck",
     "RESPIRATION_RATE": "Respiration Rate",
     "RESTFULNESS": "Restfulness",

@@ -791,7 +791,7 @@
     "LDL": "LFD",
     "LEAN_MASS": "Masse maigre",
     "LOW_DENSITY_LIPOPROTEIN": "Lipoprotéine à faible densité",
-    "MISSING_WEIGHT_NOTE": "Il existe une ou plusieurs mesures autonomes pour cette période, mais ne peuvent pas être affichées sur ce graphique. Ces valeurs ne sont visibles que sur la vue tableau de mesure-> composition.",
+    "MISSING_WEIGHT_NOTE": "Certaines mesures existent pour cette période qui ne peut être affiché pour ce graphique. Ces valeurs sont visibles sur le <a href=\"{{KEEPtableViewLink}}\">vue de table</a> uniquement. Les dates pour lesquelles ces mesures existent sont:",
     "NECK": "Cou",
     "RESPIRATION_RATE": "Fréquence respiratoire",
     "RESTFULNESS": "Repos",

@@ -1,0 +1,41 @@
+@import 'variables';
+
+@mixin blockquote-style($color) {
+  border: 1px solid $color;
+
+  .blockquote {
+    &-stripe {
+      background-color: $color;
+
+      mat-icon {
+        color: mat-color($ccr-contrast, A700) !important;
+      }
+    }
+  }
+}
+
+.blockquote {
+  &.primary {
+    @include blockquote-style(var(--primary));
+  }
+  &.info {
+    @include blockquote-style(mat-color($ccr-background, info));
+  }
+
+  &.danger {
+    @include blockquote-style(mat-color($ccr-primary));
+  }
+
+  &.warning {
+    @include blockquote-style(mat-color($ccr-background, warning));
+  }
+
+  &-content {
+    font-size: 12px;
+  }
+
+  &-content,
+  &-stripe {
+    padding: 15px;
+  }
+}

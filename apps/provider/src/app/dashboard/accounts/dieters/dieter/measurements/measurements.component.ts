@@ -344,6 +344,17 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       const v = params.get('v')
       this.view = ['table', 'chart', 'list'].indexOf(v) >= 0 ? v : this.view
 
+      const d = params.get('d')
+
+      if (d) {
+        const endDate = moment(d)
+
+        this.updateDates({
+          current: endDate.format('YYYY-MM-DD'),
+          timeframe: 'week'
+        })
+      }
+
       if (this.view === 'list' && !this.sections[this.section].useNewEndpoint) {
         this.view = 'table'
       }

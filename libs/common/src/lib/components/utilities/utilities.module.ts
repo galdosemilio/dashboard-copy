@@ -11,6 +11,7 @@ import { DateNavigatorComponent } from './date-navigator/date-navigator.componen
 import { DateRangeNavigatorComponent } from './date-range-navigator/date-range.component'
 import { HelpComponent } from './help/help.component'
 import { LogoComponent } from './logo/logo.component'
+import { CcrNoticeBlockquoteComponent } from './notice-blockquote'
 import { PaginatorComponent } from './paginator/paginator.component'
 import { ProgressCircleComponent } from './progress-circle/progress-circle.component'
 import { TableOverlayComponent } from './table-overlay/table-overlay.component'
@@ -26,6 +27,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component'
   declarations: [
     AvatarComponent,
     BadgeComponent,
+    CcrNoticeBlockquoteComponent,
     DatasourceOverlayComponent,
     DateNavigatorComponent,
     DateRangeNavigatorComponent,
@@ -38,6 +40,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component'
   exports: [
     AvatarComponent,
     BadgeComponent,
+    CcrNoticeBlockquoteComponent,
     DatasourceOverlayComponent,
     DateNavigatorComponent,
     DateRangeNavigatorComponent,

@@ -791,7 +791,7 @@
     "LDL": "LDL",
     "LEAN_MASS": "Magermasse",
     "LOW_DENSITY_LIPOPROTEIN": "Lipoprotein mitniedriger Dichte",
-    "MISSING_WEIGHT_NOTE": "Für diesen Zeitraum sind eigenständige Messungen vorhanden, die jedoch in diesem Diagramm nicht angezeigt werden können. Diese Werte sind nur in der Ansicht Mess-> Zusammensetzungstabelle sichtbar.",
+    "MISSING_WEIGHT_NOTE": "Einige Messungen existieren für diesen Zeitraum, die nicht für dieses Diagramm angezeigt werden kann. Diese Werte sind sichtbar auf der <a href=\"{{tableViewLink}}\">Tabellenansicht</a> nur. Die Termine für die diese Messungen existieren, sind:",
     "NECK": "Hals",
     "RESPIRATION_RATE": "Atemfrequenz",
     "RESTFULNESS": "Erholtheit",

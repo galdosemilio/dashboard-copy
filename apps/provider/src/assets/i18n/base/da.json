@@ -791,7 +791,7 @@
     "LDL": "LDL",
     "LEAN_MASS": "Mager Masse",
     "LOW_DENSITY_LIPOPROTEIN": "Lipoprotein med lav densitet",
-    "MISSING_WEIGHT_NOTE": "Der findes selvstændige målinger i denne tidsperiode, men kan ikke vises i denne graf. Disse værdier er kun synlige i visningen af ​​måling-> kompositionstabellen.",
+    "MISSING_WEIGHT_NOTE": "Nogle målinger findes for denne tidsperiode, der ikke kan vises for denne graf. Disse værdier er synlige på <a href=\"{{KEEPtableViewLink}}\">tabelvisning</a> kun. Datoerne for der findes disse målinger er:",
     "NECK": "Nakke",
     "RESPIRATION_RATE": "Respirationshastighed",
     "RESTFULNESS": "Komfort",

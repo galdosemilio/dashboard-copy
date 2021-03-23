@@ -12,9 +12,11 @@ import { Directives } from './directives'
 import { IconComponents } from './icons'
 import { Pipes } from './pipes'
 import { FeatureToggleInputComponent } from '@coachcare/common/components/form/fields/feature-toggle-input'
+import { CcrNoticeBlockquoteComponent } from '@coachcare/common/components/utilities/notice-blockquote'
 
 export const Components = [
   FeatureToggleInputComponent,
+  CcrNoticeBlockquoteComponent,
   ...CmpComponents,
   ...IconComponents,
   ...Dialogs,

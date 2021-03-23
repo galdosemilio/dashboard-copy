@@ -1,0 +1,9 @@
+<div class="blockquote {{ type }}" fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <div class="blockquote-stripe" fxLayout="column" fxLayoutAlign="start center">
+    <mat-icon *ngIf="icon">{{icon}}</mat-icon>
+  </div>
+
+  <div class="blockquote-content" fxFlex>
+    <ng-content></ng-content>
+  </div>
+</div>

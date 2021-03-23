@@ -53,6 +53,19 @@
   {{ 'MEASUREMENT.DISTANCE_NOTE' | translate }}
 </p>
 
-<p class="footnotes" *ngIf="source.hasMissingWeight">
-  {{ 'MEASUREMENT.MISSING_WEIGHT_NOTE' | translate }}
-</p>
+<ccr-notice-blockquote *ngIf="source.hasMissingWeight" icon="error_outline" type="primary">
+  <span [innerHTML]="'MEASUREMENT.MISSING_WEIGHT_NOTE' | translate:{tableViewLink: '/accounts/patients/' + source.criteria.account + '/measurements;s=composition;v=table'}"></span>
+  <div *ngIf="source.missingWeightDates?.length" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+    <br>
+
+    <ul>
+      <li *ngFor="let date of source.missingWeightDates">
+        <a
+        [routerLink]="['/accounts/patients', source.criteria.account, 'measurements', {s: 'composition', v: 'table', d: date}]"
+        >
+          {{ date | amDateFormat:'dddd, MMMM D, YYYY' }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</ccr-notice-blockquote>

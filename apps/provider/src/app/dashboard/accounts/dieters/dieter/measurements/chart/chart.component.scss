@@ -1,0 +1,13 @@
+a {
+  color: var(--primary);
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+ul {
+  max-height: 100px;
+  overflow-y: scroll;
+  width: 50%;
+}
