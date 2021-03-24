@@ -136,7 +136,8 @@ export class EnrollmentReportsDataSource extends ChartDataSource<
         const org = aggregate.organization.name
         aggregate.data.forEach((enrollment) => {
           const pack = enrollment.package.id
-          const count = Number(enrollment.registrations.total)
+          let count = Number(enrollment.registrations.total)
+          count = isNaN(count) ? 0 : count
           total += count
 
           data.push({
