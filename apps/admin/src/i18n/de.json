@@ -75,7 +75,7 @@
         "DISPLAY_NAME": "Anzeigename",
         "EDIT_INHERITED": "Voreinstellungen bearbeiten",
         "EMPTY_BCC_EMAILS": "",
-        "FIREBASE_PROJECT_NAME": "Firebase Projektname",
+        "FIREBASE_PROJECT_NAME": "Firebase-Projektname",
         "ICON_HINT": "Icon-Updates werden nach 24 Stunden sichtbar",
         "IMAGES": "Bilder",
         "INHERIT_MFA": "Einstellungen übernehmen",
@@ -209,7 +209,7 @@
     "INCLUDE_INACTIVE": "Inaktive mitbeachten",
     "INFORMATION": "Information",
     "INHERIT": "Übernehmen",
-    "LABEL": "Phase",
+    "LABEL": "Label",
     "LANGUAGE": "Sprache",
     "LAST_NAME": "Nachname",
     "LOCALE": "",
@@ -239,7 +239,7 @@
     "POSTAL_CODE": "Postleitzahl",
     "PREVIOUS": "Vorherige",
     "PROFILE": "Profil",
-    "REGISTER_NEW_CLINIC": "Registrieren Sie ein neues Unternehmen",
+    "REGISTER_NEW_CLINIC": "Ein neues Unternehmen registrieren",
     "REQUEST_RESET": "Passwort zurücksetzen",
     "RESET_PASSWORD": "Passwort zurücksetzen",
     "RETRY": "Wiederholen",
@@ -273,7 +273,7 @@
     "YES": "Ja"
   },
   "LABEL": {
-    "CREATE_NEW": "Phase erstellen",
+    "CREATE_NEW": "Label erstellen",
     "DESCRIPTION": "Beschreibung"
   },
   "LAYOUT": {
@@ -311,19 +311,19 @@
     "AUTH_INFO": "Öffnen Sie Ihre Authenticator-App und sehen Sie sich den Code an, der für Ihr Konto angezeigt wird. Tragen Sie ihn anschließend in das Textfeld unten ein, um Ihre Identität zu bestätigen.<br/><br/>Sie können auch auf \"Backup-Code verwenden\" klicken, um einen der Backup-Codes zu verwenden, die Sie bei der Aktivierung der Multi-Faktor-Authentifizierung erhalten haben.",
     "BACKUP_CODE": "Backup-Code",
     "BACKUP_CODES_INFO": "Hier finden Sie eine Liste der Backup-Codes für den Fall, dass Sie den Zugriff auf den von Ihnen gewählten Kanal für die Zwei-Faktor-Authentifizierung verlieren sollten.<br/><br/><strong>Bewahren Sie sie an einem sicheren Ort auf, da dies die einzige Möglichkeit ist, den Zugriff auf Ihr Konto wiederherzustellen. Beachten Sie, dass jeder Code nur einmal verwendet werden kann.</strong>",
-    "BACKUP_CODE_INFO": "Schreiben Sie eine der Backup-Codes, die Sie erhalten, wenn Sie die mehrstufige Authentifizierung aktiviert und entsorgen. Beachten Sie, dass jeder Code kann nur einmal verwendet werden.",
+    "BACKUP_CODE_INFO": "Verwenden Sie einen beliebigen der Backup-Codes, die Sie bei der Aktivierung der Multi-Faktor-Authentifizierung erhalten haben, und streichen Sie ihn danach von der Liste. Denken Sie daran, dass jeder Code nur einmal verwendet werden kann.",
     "CONTINUE_TO_DASHBOARD": "Weiter zum Dashboard",
     "DOWNLOAD_BACKUP_CODES": "Backup-Codes herunterladen",
     "GOOGLE_AUTHENTICATOR": "Google Authenticator",
     "LAST_PASS_AUTHENTICATOR": "LastPass Authenticator",
-    "MFA_LOGIN_HELP_PROMPT": "Wenn Sie Probleme bei der Anmeldung haben, <a href=mailto:support@coachcare.com?subject=MFA%20Login%20Assistance&body=I%20need%20support%20resetting%20my%20MFA%20login\">kontaktieren Sie den Support</a> für Hilfe.\"",
+    "MFA_LOGIN_HELP_PROMPT": "Wenn Sie Probleme bei der Anmeldung haben, <a href=\"mailto:support@coachcare.com?subject=MFA%20Login%20Assistance&body=I%20need%20support%20resetting%20my%20MFA%20login\">kontaktieren Sie bitte den Support</a> für Hilfe.",
     "MICROSOFT_AUTHENTICATOR": "Microsoft Authenticator",
     "ORG_ENFORCEMENT_INFO": "Ihre Organisation fordert die Verwendung der Zwei-Faktor-Authentifizierung. Bitte wählen Sie einen Zwei-Faktor-Authentifizierungskanal aus, um den Installationsvorgang zu starten.",
     "REGEN_QR": "Neuen QR-Code generieren",
     "RESEND_SMS": "SMS erneut senden",
     "SECRET_KEY_PROMPT": "Oder Sie können diesen Geheimschlüssel in die Authenticator-App eingeben:<br/><strong>{{ key }}</strong>",
     "SEND_BACKUP_CODE": "Backup-Code senden",
-    "SEND_VERIFICATION_CODE": "Bestätigungscode senden",
+    "SEND_VERIFICATION_CODE": "Bestätigungscode eingeben",
     "SMS": "SMS",
     "SMS_INFO": "Wir haben Ihnen eine SMS mit einem Bestätigungscode an Ihre registrierte Telefonnummer gesendet. Wenn Sie ihn erhalten haben, tragen Sie ihn unten in das Textfeld ein, um Ihre Identität zu bestätigen.<br/><br/>Sie können auch auf \"Backup-Code verwenden\" klicken, um einen der Backup-Codes zu verwenden, die Sie bei der Aktivierung der Multi-Faktor-Authentifizierung erhalten haben.",
     "SMS_PHONE_CONFIRM": "Bitte überprüfen Sie Ihre Telefonnummer im untenstehenden Feld. Wenn sie falsch ist, aktualisieren Sie sie bitte. Beachten Sie, dass es sich um ein SMS-fähiges Telefon handeln sollte.",
@@ -383,10 +383,10 @@
       "CHECK_RESET_EMAIL": "Wenn wir ein Konto finden, das mit der von Ihnen eingegebenen E-Mail-Adresse verknüpft ist, senden wir Ihnen in den nächsten Minuten eine E-Mail zum Zurücksetzen des Passwortes zu. Wenn Sie keine E-Mail erhalten haben, überprüfen Sie unbedingt Ihren Spam-Ordner oder versuchen Sie es mit anderen E-Mail-Adressen, die Sie möglicherweise für Ihr Konto verwendet haben.",
       "CLINIC_REMOVED": "Klinik entfernt",
       "EMAIL_TEMPLATE_SAVED": "",
-      "LABEL_ACTIVATED": "Phase aktiviert",
-      "LABEL_CREATED": "Phase erstellt",
-      "LABEL_DEACTIVATED": "Phase deaktiviert",
-      "LABEL_UPDATED": "Phase aktualisiert",
+      "LABEL_ACTIVATED": "Label aktiviert",
+      "LABEL_CREATED": "Label erstellt",
+      "LABEL_DEACTIVATED": "Label deaktiviert",
+      "LABEL_UPDATED": "Label aktualisiert",
       "MFA_VERIFIED": "Zwei-Faktor-Authentifizierungskanal erfolgreich überprüft.",
       "ORG_ACTIVATED": "Klinik aktiviert",
       "ORG_ADDED": "Klinik aufgenommen",
@@ -427,7 +427,7 @@
       "TITLE_SUCCESS": "Meeting abgesagt"
     },
     "NOT_FOUND": {
-      "CONTENT": "Bitte kontaktieren Sie den <a href=https://coachcare.zendesk.com/hc/en-us/requests/new\">CoachCare Support</a> für weitere Hilfe.\"",
+      "CONTENT": "Bitte kontaktieren Sie den <a href=\"https://coachcare.zendesk.com/hc/en-us/requests/new\">CoachCare-Support</a> für weitere Unterstützung.",
       "TITLE": "Seite nicht gefunden"
     },
     "REGISTER": {
@@ -448,7 +448,7 @@
       "HERO": {
         "APOLLO": {
           "POWERED_BY": "Powered by CoachCare",
-          "WELCOME_MESSAGE": "Die Apollo Care Plattform unterstützt Abnehmkliniken mit einer mobilen App, einem Coach-Dashboard und angeschlossenen Geräten, die in einer integrierten Plattform kombiniert sind, um die Patientenversorgung zu verbessern und die Effizienz der Klinik zu steigern.",
+          "WELCOME_MESSAGE": "Die Apollo Care Plattform unterstützt Abnehmkliniken mit einer mobilen App, einem Coach-Dashboard und verbundenen Geräten, die in einer integrierten Plattform kombiniert sind, um die Patientenversorgung zu verbessern und die Effizienz der Klinik zu steigern.",
           "WELCOME_TITLE": "Willkommen bei Apollo Care!"
         },
         "BA": {
@@ -472,7 +472,7 @@
         },
         "SHAKEIT": {
           "POWERED_BY": "Powered by CoachCare",
-          "WELCOME_MESSAGE": "Die Shake It Plattform versorgt Abnehmkliniken mit einer mobilen App, einem Coach-Dashboard und angeschlossenen Geräten, die in einer integrierten Plattform kombiniert sind, um die Patientenversorgung zu verbessern und die Effizienz der Klinik zu steigern.",
+          "WELCOME_MESSAGE": "Die Shake It Plattform versorgt Abnehmkliniken mit einer mobilen App, einem Coach-Dashboard und verbundenen Geräten, die in einer integrierten Plattform kombiniert sind, um die Patientenversorgung zu verbessern und die Effizienz der Klinik zu steigern.",
           "WELCOME_TITLE": "Willkommen bei Shake It!"
         }
       },
@@ -498,7 +498,7 @@
       },
       "STEP2": {
         "BILLING_INFORMATION": "Abrechnungsdaten",
-        "CONFIRMATION_BOX_MESSAGE": "Durch Aktivieren dieses Kontrollkästchens und Klicken auf \"Weiter\" stimme ich zu, rechtlich an dieses Bestellformular gebunden zu sein. Das Abonnement in diesem Bestellformular hat eine Laufzeit von einem Jahr und kann vor Ablauf der Laufzeit nicht gekündigt werden. Dieses Bestellformular unterliegt den Bestimmungen des <a href={{ msaLink }}\" target=\"_blank\">Rahmenvertrags</a>.\"",
+        "CONFIRMATION_BOX_MESSAGE": "Durch Aktivieren dieses Kontrollkästchens und Klicken auf \"Weiter\" stimme ich zu, rechtlich an dieses Bestellformular gebunden zu sein. Das Abonnement in diesem Bestellformular hat eine Laufzeit von einem Jahr und kann vor Ablauf der Laufzeit nicht gekündigt werden. Dieses Bestellformular unterliegt den Bestimmungen des <a href=\"{{ msaLink }}\" target=\"_blank\">Rahmenvertrags</a>.",
         "PAYMENT_INFO": "Jetzt brauchen wir nur noch Ihre Zahlungsinformationen und Sie sin dauf dem Weg zu Ihrer neuen benutzerdefinierten Plattform.",
         "SKIP": "Überspringen"
       },
@@ -506,7 +506,7 @@
         "APOLLO": {
           "ALL_DONE": "<Strong>Fertig!<Strong>",
           "CUSTOM_COACHCARE": "Willkommen auf der Apollo Care Plattform von CoachCare! In Kürze erhalten Sie eine E-Mail mit einem Link, mit dem Sie Ihr Dashboard-Administratorkonto aktivieren, Ihr Passwort festlegen und sich anmelden können. Zusätzlich erhalten Sie eine separate Bestätigungs-E-Mail mit Ihren Klinikinformationen.",
-          "QUESTIONS": "Wenn Sie Fragen haben, zögern Sie bitte nicht unser Implementierungsteam unter <a href=mailto:implementation@coachcare.com\">implementation@coachcare.com</a> oder Ihren Vertriebspartner zu kontaktieren.\"",
+          "QUESTIONS": "Wenn Sie Fragen haben, zögern Sie bitte nicht unser Implementierungsteam unter <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> oder Ihren Vertriebspartner zu kontaktieren.",
           "WELCOME": "Wir freuen uns darauf, mit Ihnen zusammenzuarbeiten und heißen Sie erneut auf der Apollo Care Plattform willkommen!"
         },
         "DEFAULT": {
@@ -525,7 +525,7 @@
         "SHAKEIT": {
           "ALL_DONE": "<Strong>Fertig!<Strong>",
           "CUSTOM_COACHCARE": "Willkommen auf der Shake It Plattform von CoachCare! In Kürze erhalten Sie eine E-Mail mit einem Link, mit dem Sie Ihr Dashboard-Administratorkonto aktivieren, Ihr Passwort festlegen und sich anmelden können. Zusätzlich erhalten Sie eine separate Bestätigungs-E-Mail mit Ihren Klinikinformationen.",
-          "QUESTIONS": "Wenn Sie Fragen haben, zögern Sie bitte nicht unser Implementierungsteam unter <a href=mailto:implementation@coachcare.com\">implementation@coachcare.com</a> oder Ihren Vertriebspartner zu kontaktieren.\"",
+          "QUESTIONS": "Wenn Sie Fragen haben, zögern Sie bitte nicht unser Implementierungsteam unter <a href=\"mailto:implementation@coachcare.com\">implementation@coachcare.com</a> oder Ihren Vertriebspartner zu kontaktieren.",
           "WELCOME": "Wir freuen uns darauf, mit Ihnen zusammenzuarbeiten und heißen Sie erneut auf der Shake It Plattform willkommen!"
         }
       }
@@ -563,13 +563,13 @@
       "DELETE_PROMPT": ""
     },
     "LABEL": {
-      "CONFIRM_ACTIVATE": "Phase aktivieren",
+      "CONFIRM_ACTIVATE": "Label aktivieren",
       "CONFIRM_ACTIVATE_PROMPT": "Wollen Sie '{{item}}' wirklich aktivieren?",
-      "CONFIRM_DEACTIVATE": "Phase deaktivieren",
+      "CONFIRM_DEACTIVATE": "Label deaktivieren",
       "CONFIRM_DEACTIVATE_PROMPT": "Wollen Sie '{{item}}' wirklich deaktivieren?"
     },
     "LABELS": {
-      "DISABLE": "Phase deaktivieren",
+      "DISABLE": "Label deaktivieren",
       "DISABLE_PROMPT": "Möchten Sie die Phase '{{label}}' wirklich deaktivieren?",
       "DISOCCIATE": "Dissoziationsphase",
       "DISOCCIATE_PROMPT": "Möchten Sie die Phase '{{ label }}' wirklich trennen?",
@@ -588,7 +588,7 @@
       "CONFIRM_REMOVE_PARENT": "Eltern entfernen",
       "CONFIRM_REMOVE_PARENT_PROMPT": "Diese Organisation wird nach dieder Entfernung keine Mutterorganisation mehr haben",
       "DISOCCIATE": "Klinikassoziation lösen",
-      "DISOCCIATE_PROMPT": "Wollen Sie {{item}}‘ wirklich trennen?"
+      "DISOCCIATE_PROMPT": "Wollen Sie '{{item}}' wirklich trennen?"
     }
   },
   "REGISTER": {
@@ -700,7 +700,7 @@
     "ADMINS": "Admins",
     "ALERTS": "Alarme",
     "COACHES": "Trainer",
-    "LABELS": "Phasen",
+    "LABELS": "Labels",
     "LIBRARY": "Digitale Bibliothek",
     "MARKETING": "Marketing",
     "MESSAGES": "Mitteilungen",
