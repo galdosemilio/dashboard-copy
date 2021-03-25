@@ -812,8 +812,10 @@
     "VALUE_INVALID": "Der Wert ist ungültig",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoprotein mit sehr niedriger Dichte",
     "VISCERAL_ADIP_TISSUE": "Viszerales Fettgewebevolumen",
+    "VISCERAL_ADIP_TISSUE_ABOUT": "Das im Körper eines Menschen gespeicherte viszerale Fettvolumen, gemessen in Millilitern oder Litern. Diese Messung wird nur von Geräten von Drittanbietern berechnet und derzeit nicht von der Balance Smart Scale aufgezeichnet, die eine mobile App für Patienten direkt verbindet.",
     "VISCERAL_FAT": "Viszerales Fett (in Prozent)",
     "VISCERAL_FAT_MASS": "Viszerale Fettmasse",
+    "VISCERAL_FAT_PERCENTAGE_ABOUT": "Der Prozentsatz des gesamten Körperfetts einer Person, der aus viszeralem Fett besteht. Diese Messung wird nur von Geräten von Drittanbietern berechnet und derzeit nicht von der Balance Smart Scale aufgezeichnet, die eine mobile App für Patienten direkt verbindet.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
         "10_14": "10 ~ 14",

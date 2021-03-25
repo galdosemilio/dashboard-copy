@@ -812,8 +812,10 @@
     "VALUE_INVALID": "Value is invalid",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Very Low-Density Lipoprotein",
     "VISCERAL_ADIP_TISSUE": "Visceral Adipose Tissue Volume",
+    "VISCERAL_ADIP_TISSUE_ABOUT": "The volume of visceral fat stored in an individual’s body, measured in milliliters or liters.  This measurement is calculated only from third party devices, and is not currently recorded from the Balance Smart Scale that connects directly a patients mobile app.",
     "VISCERAL_FAT": "Visceral Fat (Percentage)",
     "VISCERAL_FAT_MASS": "Visceral Fat Mass",
+    "VISCERAL_FAT_PERCENTAGE_ABOUT": "The percentage of an individual’s total bodyfat that is visceral fat.  This measurement is calculated only from third party devices, and is not currently recorded from the Balance Smart Scale that connects directly a patients mobile app.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
         "10_14": "10 ~ 14",

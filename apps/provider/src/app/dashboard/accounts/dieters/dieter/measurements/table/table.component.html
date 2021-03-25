@@ -51,7 +51,13 @@
     </ng-container>
 
     <ng-container matColumnDef="visceralFatPercentage">
-      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.VISCERAL_FAT' | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <span>{{ 'MEASUREMENT.VISCERAL_FAT' | translate }}</span>
+        <ccr-popup-description
+          [title]="'MEASUREMENT.VISCERAL_FAT' | translate"
+          [description]="'MEASUREMENT.VISCERAL_FAT_PERCENTAGE_ABOUT' | translate"
+        ></ccr-popup-description>
+      </th>
       <td mat-cell *matCellDef="let row">
         <ng-container *ngIf="!row.isHeader">
         <ng-container *ngIf="row.visceralFatPercentage; else empty">
@@ -83,6 +89,10 @@
     <ng-container matColumnDef="visceralAdiposeTissue">
       <th mat-header-cell *matHeaderCellDef>
         <span>{{ 'MEASUREMENT.VISCERAL_ADIP_TISSUE' | translate }}</span>
+        <ccr-popup-description
+          [title]="'MEASUREMENT.VISCERAL_ADIP_TISSUE' | translate"
+          [description]="'MEASUREMENT.VISCERAL_ADIP_TISSUE_ABOUT' | translate"
+        ></ccr-popup-description>
       </th>
       <td mat-cell *matCellDef="let row">
         <ng-container *ngIf="!row.isHeader">

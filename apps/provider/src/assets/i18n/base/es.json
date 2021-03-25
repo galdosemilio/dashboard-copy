@@ -812,8 +812,10 @@
     "VALUE_INVALID": "El valor no es válido",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoproteína de Muy Baja Densidad",
     "VISCERAL_ADIP_TISSUE": "Volumen de Tejido Adiposo",
+    "VISCERAL_ADIP_TISSUE_ABOUT": "El volumen de grasa visceral almacenada en el cuerpo de una persona, medido en mililitros o litros. Esta medición se calcula solo a partir de dispositivos de terceros y actualmente no se registra en la balanza inteligente Balance que conecta directamente la aplicación móvil de un paciente.",
     "VISCERAL_FAT": "Grasa Visceral (Porcentaje)",
     "VISCERAL_FAT_MASS": "Masa de Grasa Visceral",
+    "VISCERAL_FAT_PERCENTAGE_ABOUT": "El porcentaje de grasa corporal total de un individuo que es grasa visceral. Esta medición se calcula solo a partir de dispositivos de terceros y actualmente no se registra en la balanza inteligente Balance que conecta directamente la aplicación móvil de un paciente.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
         "10_14": "10 ~ 14",

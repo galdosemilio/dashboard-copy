@@ -812,8 +812,10 @@
     "VALUE_INVALID": "Valore non è valido",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoproteine a Bassissima densità",
     "VISCERAL_ADIP_TISSUE": "Volume del tessuto adiposo viscerale",
+    "VISCERAL_ADIP_TISSUE_ABOUT": "Il volume di grasso viscerale immagazzinato nel corpo di un individuo, misurato in millilitri o litri. Questa misurazione viene calcolata solo da dispositivi di terze parti e non è attualmente registrata dalla Balance Smart Scale che collega direttamente un'app mobile del paziente.",
     "VISCERAL_FAT": "Grasso Viscerale (Percentuale)",
     "VISCERAL_FAT_MASS": "Massa grassa viscerale",
+    "VISCERAL_FAT_PERCENTAGE_ABOUT": "La percentuale del grasso corporeo totale di un individuo che è grasso viscerale. Questa misurazione viene calcolata solo da dispositivi di terze parti e non è attualmente registrata dalla Balance Smart Scale che collega direttamente un'app mobile del paziente.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
         "10_14": "10 ~ 14",

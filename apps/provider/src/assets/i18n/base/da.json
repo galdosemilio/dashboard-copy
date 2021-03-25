@@ -812,8 +812,10 @@
     "VALUE_INVALID": "Værdi er ugyldig",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoprotein med Lav Densitet",
     "VISCERAL_ADIP_TISSUE": "Visceral fedtvolumen",
+    "VISCERAL_ADIP_TISSUE_ABOUT": "Mængden af visceralt fedt lagret i en persons krop målt i milliliter eller liter. Denne måling beregnes kun fra tredjepartsenheder og registreres i øjeblikket ikke fra Balance Smart Scale, der forbinder direkte en patients mobilapp.",
     "VISCERAL_FAT": "Visceralt fedt (Procentdel)",
     "VISCERAL_FAT_MASS": "Visceral fedtmasse",
+    "VISCERAL_FAT_PERCENTAGE_ABOUT": "Procentdelen af den enkeltes samlede kropsfedt, der er visceralt fedt. Denne måling beregnes kun fra tredjepartsenheder og registreres i øjeblikket ikke fra Balance Smart Scale, der forbinder direkte en patients mobilapp.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
         "10_14": "10 ~ 14",
