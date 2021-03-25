@@ -1,0 +1,35 @@
+<div
+[hidden]="services.length === 0"
+fxLayout="column"
+fxLayoutAlign="start stretch"
+fxLayoutGap="10px">
+  <div
+  *ngFor="let service of services; let i = index"
+  [formGroup]="forms[i]"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-around center"
+  fxLayoutAlign.xs="start stretch"
+  fxLayoutGap="10px">
+    <p fxFlex="20%">{{ service.title }}</p>
+
+    <div fxFlex="28%">
+      <ccr-date-input [placeholder]="'ADMIN.SYNC_START_DATE' | translate" formControlName="startDate"></ccr-date-input>
+    </div>
+
+    <div fxFlex="28%">
+      <ccr-date-input [placeholder]="'ADMIN.SYNC_END_DATE' | translate" formControlName="endDate"></ccr-date-input>
+    </div>
+
+    <div fxFlex="12%" fxLayout="row" fxLayoutAlign="center center">
+      <button [disabled]="forms[i].invalid || isLoading" (click)="onSubmit(i)" color="primary" class="ccr-icon-button" fxFlex mat-button>
+        <mat-icon>sync</mat-icon>
+        {{ 'ADMIN.SYNC' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="services.length > 0">
+  <p>{{ 'ADMIN.NO_ASSOCIATED_SERVICES' | translate }}</p>
+</div>

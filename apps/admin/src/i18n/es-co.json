@@ -15,11 +15,13 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Asociaciones",
+    "INTEGRATIONS": "Integraciones",
     "LOGS": {
       "APP_NAME": "App",
       "CREATED_AT": "Fecha",
       "_TITLE": "Logs"
     },
+    "NO_ASSOCIATED_SERVICES": "No hay servicios asociados",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Estado de Asociación de Active Campaign",
       "ACTIVE_CAMPAIGN_DISABLED": "Active Campaign está deshabilitado para esta clínica y sus descendientes.<br><br>Para usar Active Campaign, primero debe habilitarlo.",
@@ -89,7 +91,10 @@
         "SPLASH_HINT": "Actualizaciónes de splash serán visibles después de 24 horas"
       },
       "TITLE": "Clínicas"
-    }
+    },
+    "SYNC": "Sincronizar",
+    "SYNC_END_DATE": "Fecha Inicial de Sinc.",
+    "SYNC_START_DATE": "Fecha Final de Sinc."
   },
   "BOARD": {
     "BACK": "Volver",
@@ -395,6 +400,7 @@
       "PHASE_UPDATED": "Fase actualizada satisfactoriamente.",
       "PHONE_NUMBER_UPDATED": "Número de teléfono actualizado exitosamente.",
       "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Proveedor satisfactoriamente asociado a lista de Active Campaign",
+      "SERVICE_SYNC_SUCCESS": "Servicio sincronizado satisfactoriamente.",
       "SETTINGS_UPDATED": "Configuración actualizada"
     }
   },

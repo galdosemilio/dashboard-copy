@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "id": "6",
+      "service": "google",
+      "title": "GoogleFit",
+      "description": "Google Fit data",
+      "lastSyncedAt": "2021-01-11T06:39:00.649Z"
+    },
+    {
+      "id": "7",
+      "service": "fitbit",
+      "title": "Fitbit",
+      "description": "Fitbit data",
+      "lastSyncedAt": "2020-04-09T08:30:00.945Z"
+    },
+    {
+      "id": "8",
+      "service": "levl",
+      "title": "Levl",
+      "description": "Levl data",
+      "lastSyncedAt": "2018-07-25T14:30:04.033Z"
+    },
+    {
+      "id": "9",
+      "service": "healthkit",
+      "title": "HealthKit",
+      "description": "Apple HealthKit",
+      "lastAuthenticatedAt": "2020-10-19T13:57:53.525Z",
+      "lastSyncedAt": "2021-03-25T19:48:39.080Z"
+    }
+  ]
+}

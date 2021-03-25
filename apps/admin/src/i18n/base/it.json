@@ -15,11 +15,13 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associazioni",
+    "INTEGRATIONS": "Servizio di Sincronizzazione",
     "LOGS": {
       "APP_NAME": "App",
       "CREATED_AT": "Data",
       "_TITLE": "Accessi"
     },
+    "NO_ASSOCIATED_SERVICES": "Non ci sono servizi associati",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Attivo Stato Associazione campagna",
       "ACTIVE_CAMPAIGN_DISABLED": "Campagna attiva è disabilitato per questa clinica e le sue cliniche del bambino.<br><br>Per utilizzarlo è necessario attivare prima.",
@@ -89,7 +91,10 @@
         "SPLASH_HINT": "Gli aggiornamenti Splash saranno visibili dopo 24 ore"
       },
       "TITLE": "Cliniche"
-    }
+    },
+    "SYNC": "Sync",
+    "SYNC_END_DATE": "Sincronizzazione dati Per",
+    "SYNC_START_DATE": "Sincronizzare i dati da"
   },
   "BOARD": {
     "BACK": "Indietro",
@@ -395,6 +400,7 @@
       "PHASE_UPDATED": "Fase aggiornata con successo.",
       "PHONE_NUMBER_UPDATED": "Numero di telefono aggiornato con successo.",
       "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider associato con successo alla lista Active Campaign.",
+      "SERVICE_SYNC_SUCCESS": "Servizio sincronizzato con successo.",
       "SETTINGS_UPDATED": "Impostazioni aggiornate"
     }
   },

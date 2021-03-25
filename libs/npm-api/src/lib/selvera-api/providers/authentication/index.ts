@@ -1,6 +1,10 @@
 import { ApiService } from '../../services/api.service'
 import { AuthenticationService, SyncDate } from './entities'
-import { AuthLevlRequest, SyncExternalDeviceRequest } from './requests'
+import {
+  AuthLevlRequest,
+  ForceDeviceSyncRequest,
+  SyncExternalDeviceRequest
+} from './requests'
 import {
   AuthAvailableResponse,
   DeviceSyncResponse,
@@ -116,6 +120,20 @@ class Authentication {
       data: {
         account
       }
+    })
+  }
+
+  /**
+   * Kick off the syncing process for a specified account & service/device for data in the provided date range
+   * @param request must implement ForceDeviceSyncRequest
+   * @returns Promise<void>
+   */
+  public forceDeviceSync(request: ForceDeviceSyncRequest): Promise<void> {
+    return this.apiService.request({
+      endpoint: `/measurement/device/sync`,
+      method: 'POST',
+      version: '2.0',
+      data: request
     })
   }
 

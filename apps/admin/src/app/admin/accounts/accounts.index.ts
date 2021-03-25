@@ -13,7 +13,7 @@ import {
   AffiliationComponent
 } from './affiliation'
 import { AccountCSVDialogComponent } from './dialogs'
-import { AccountFormComponent } from './form'
+import { AccountFormComponent, DeviceSyncComponent } from './form'
 import { AccountsListComponent, AccountsTableComponent } from './list'
 
 export const AccountsComponents = [
@@ -24,7 +24,8 @@ export const AccountsComponents = [
   AccountsTableComponent,
   AffiliatedAccountsTableComponent,
   AffiliationComponent,
-  AffiliatedOrgComponent
+  AffiliatedOrgComponent,
+  DeviceSyncComponent
 ]
 
 export const AccountsEntryComponents = [AccountCSVDialogComponent]

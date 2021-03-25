@@ -15,11 +15,13 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Verbände",
+    "INTEGRATIONS": "Service Sync",
     "LOGS": {
       "APP_NAME": "App",
       "CREATED_AT": "Datum",
       "_TITLE": "Logs"
     },
+    "NO_ASSOCIATED_SERVICES": "Keine zugehörigen Dienste",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Aktive Kampagne Verband-Status",
       "ACTIVE_CAMPAIGN_DISABLED": "Aktive Kampagne ist für diese Klinik und seine Kinderkliniken deaktiviert.<br><br>Um es zu benutzen, Sie haben es zu ermöglichen, zuerst.",
@@ -89,7 +91,10 @@
         "SPLASH_HINT": "Splash-Updates werden nach 24 Stunden sichtbar"
       },
       "TITLE": "Kliniken"
-    }
+    },
+    "SYNC": "Sync",
+    "SYNC_END_DATE": "Synchronisierungs-Daten zu",
+    "SYNC_START_DATE": "Sync-Daten aus"
   },
   "BOARD": {
     "BACK": "Zurück",
@@ -395,6 +400,7 @@
       "PHASE_UPDATED": "Phase erfolgreich aktualisiert.",
       "PHONE_NUMBER_UPDATED": "Telefonnummer erfolgreich aktualisiert.",
       "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider erfolgreich aktive Kampagne Liste zugeordnet.",
+      "SERVICE_SYNC_SUCCESS": "Service erfolgreich synchronisiert.",
       "SETTINGS_UPDATED": "Einstellungen aktualisiert"
     }
   },

@@ -15,11 +15,13 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associations",
+    "INTEGRATIONS": "خدمة مزامنة",
     "LOGS": {
       "APP_NAME": "App",
       "CREATED_AT": "Date",
       "_TITLE": "Logs"
     },
+    "NO_ASSOCIATED_SERVICES": "لا الخدمات المرتبطة بها",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "مركز جمعية حملة نشطة",
       "ACTIVE_CAMPAIGN_DISABLED": "وتعطيل حملة نشطة لهذه العيادة والعيادات التابعة له.<br><br>من أجل استخدامها لديك لتمكين لأول مرة.",
@@ -89,7 +91,10 @@
         "SPLASH_HINT": "Splash updates will be visible after 24 hours"
       },
       "TITLE": "العيادات"
-    }
+    },
+    "SYNC": "مزامنة",
+    "SYNC_END_DATE": "تزامن لبيانات",
+    "SYNC_START_DATE": "مزامنة البيانات من"
   },
   "BOARD": {
     "BACK": "Go Back",
@@ -395,6 +400,7 @@
       "PHASE_UPDATED": "تم تحديث المرحلة بنجاح.",
       "PHONE_NUMBER_UPDATED": "تم تحديث رقم الهاتف بنجاح.",
       "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "مزود المرتبطة بنجاح إلى قائمة الحملة النشطة.",
+      "SERVICE_SYNC_SUCCESS": "خدمة مزامنة بنجاح.",
       "SETTINGS_UPDATED": "Settings Updated"
     }
   },

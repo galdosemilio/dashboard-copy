@@ -15,11 +15,13 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Foreninger",
+    "INTEGRATIONS": "Tjeneste Sync",
     "LOGS": {
       "APP_NAME": "App",
       "CREATED_AT": "Dato",
       "_TITLE": "Logfiler"
     },
+    "NO_ASSOCIATED_SERVICES": "Ingen tilknyttede tjenester",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Aktiv kampagne Association status",
       "ACTIVE_CAMPAIGN_DISABLED": "Aktiv kampagne er deaktiveret for denne klinik og dens underordnede klinikker.<br><br>For at bruge det skal du aktivere det først.",
@@ -89,7 +91,10 @@
         "SPLASH_HINT": "Splash opdateringer vil være synlige efter 24 timer"
       },
       "TITLE": "Klinikker"
-    }
+    },
+    "SYNC": "Synkronisere",
+    "SYNC_END_DATE": "Synkroniser data Til",
+    "SYNC_START_DATE": "Synkroniser data fra"
   },
   "BOARD": {
     "BACK": "Gå tilbage",
@@ -395,6 +400,7 @@
       "PHASE_UPDATED": "Fase blev opdateret.",
       "PHONE_NUMBER_UPDATED": "Telefonnummer opdateret.",
       "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider held forbundet til aktiv kampagne List.",
+      "SERVICE_SYNC_SUCCESS": "Tjeneste synkroniseret med succes.",
       "SETTINGS_UPDATED": "Indstillinger opdateret"
     }
   },

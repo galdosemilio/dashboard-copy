@@ -15,11 +15,13 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "משוייכים",
+    "INTEGRATIONS": "Sync שירות",
     "LOGS": {
       "APP_NAME": "אפליקציה",
       "CREATED_AT": "תאריך",
       "_TITLE": "רישומי"
     },
+    "NO_ASSOCIATED_SERVICES": "אין שירותים הקשורים",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "סטטוס קמפיין האגודה Active",
       "ACTIVE_CAMPAIGN_DISABLED": "הקמפיין פעיל מושבת בשל מרפאת זה ומרפאות הילד שלה.<br><br>כדי להשתמש בו אתה צריך לאפשר את זה קודם.",
@@ -89,7 +91,10 @@
         "SPLASH_HINT": "Splash updates will be visible after 24 hours"
       },
       "TITLE": "מרפאות"
-    }
+    },
+    "SYNC": "סינכרון",
+    "SYNC_END_DATE": "נתוני סינכרון",
+    "SYNC_START_DATE": "סינכרון נתונים מ"
   },
   "BOARD": {
     "BACK": "חזרה",
@@ -395,6 +400,7 @@
       "PHASE_UPDATED": "השלב עודכן בהצלחה.",
       "PHONE_NUMBER_UPDATED": "מספר הטלפון עודכן בהצלחה.",
       "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "ספק קשור בהצלחה לרשימת קמפיין פעילה.",
+      "SERVICE_SYNC_SUCCESS": "שירות מסונכרן בהצלחה.",
       "SETTINGS_UPDATED": "ההגדרות עודכנו"
     }
   },

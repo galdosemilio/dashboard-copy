@@ -265,6 +265,29 @@ const interceptCoreApiCalls = (
     status: 204,
     response: {}
   }).as('organizationTemplatePatchRequest')
+
+  cy.route(
+    'GET',
+    '/2.0/measurement/device/sync?**',
+    fetchOverride(
+      '/2.0/measurement/device/sync?**',
+      'fixture:/api/measurement/syncDevices'
+    )
+  )
+
+  cy.route({
+    method: 'POST',
+    url: '/2.0/measurement/device/sync',
+    status: 204,
+    response: {}
+  }).as('deviceSyncPostRequest')
+
+  cy.route({
+    method: 'PUT',
+    url: '/2.0/measurement/device/sync/healthkit',
+    status: 204,
+    response: {}
+  }).as('healthkitSyncPutRequest')
 }
 
 const seti18n = (): void => {

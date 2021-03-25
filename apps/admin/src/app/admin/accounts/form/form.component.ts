@@ -3,12 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AccountDialogs, AccountParams, AccountRoutes } from '@board/services'
 import { AccountsDatabase } from '@coachcare/backend/data'
-import {
-  AccountTypeId,
-  AccountTypeIds,
-  GetUserMFAResponse,
-  MFA
-} from '@coachcare/npm-api'
+import { AccountTypeIds, GetUserMFAResponse, MFA } from '@coachcare/npm-api'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'

@@ -15,11 +15,13 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associations",
+    "INTEGRATIONS": "Service Sync",
     "LOGS": {
       "APP_NAME": "App",
       "CREATED_AT": "Date",
       "_TITLE": "Logs"
     },
+    "NO_ASSOCIATED_SERVICES": "No associated services",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Active Campaign Association Status",
       "ACTIVE_CAMPAIGN_DISABLED": "Active Campaign is Disabled for this Clinic and its child clinics.<br><br>In order to use it you have to enable it first.",
@@ -89,7 +91,10 @@
         "SPLASH_HINT": "Splash updates will be visible after 24 hours"
       },
       "TITLE": "Clinics"
-    }
+    },
+    "SYNC": "Sync",
+    "SYNC_END_DATE": "Sync Data To",
+    "SYNC_START_DATE": "Sync Data From"
   },
   "BOARD": {
     "BACK": "Go Back",
@@ -395,6 +400,7 @@
       "PHASE_UPDATED": "Phase updated successfully.",
       "PHONE_NUMBER_UPDATED": "Phone number successfully updated.",
       "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider successfully associated to Active Campaign List.",
+      "SERVICE_SYNC_SUCCESS": "Service synced successfully.",
       "SETTINGS_UPDATED": "Settings Updated"
     }
   },

@@ -110,6 +110,7 @@ export * from './selvera-api/providers/alerts/responses'
 export * from './selvera-api/providers/apilog/requests'
 export * from './selvera-api/providers/apilog/responses'
 
+export * from './selvera-api/providers/authentication/entities'
 export * from './selvera-api/providers/authentication/requests'
 export * from './selvera-api/providers/authentication/responses'
 

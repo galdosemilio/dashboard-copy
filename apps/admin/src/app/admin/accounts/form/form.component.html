@@ -115,6 +115,19 @@
       </div>
     </div>
 
+    <div class="ccr-panel">
+      <h3>{{ 'ADMIN.INTEGRATIONS' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <mat-grid-list [cols]="1" class="device-sync-tile" [rowHeight]="((deviceSyncComp.services.length * 75) || 75) + 'px'">
+
+          <mat-grid-tile class="device-sync-tile">
+            <ccr-integrations-device-sync #deviceSyncComp [accountId]="id" fxFlex></ccr-integrations-device-sync>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </div>
+    </div>
+
     <div *ngIf="id && mfaInstance" class="ccr-panel">
       <h3>{{ 'BOARD.SECURITY' | translate }}</h3>
       <div class="ccr-grid" fxLayout="column">

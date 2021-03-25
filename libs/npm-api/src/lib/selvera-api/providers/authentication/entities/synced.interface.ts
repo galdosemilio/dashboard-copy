@@ -8,6 +8,7 @@ export interface SyncedDeviceDate {
   id: string
   title: AuthenticationTitle
   description: string
+  service?: string
   lastAuthenticatedAt?: string // timestamp
   lastSyncedAt?: string // timestamp
 }
