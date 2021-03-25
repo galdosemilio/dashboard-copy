@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ContextService, EventsService, NotifierService } from '@app/service'
-import { CcrPaginator } from '@app/shared'
+import { _, CcrPaginator } from '@app/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
@@ -28,8 +28,17 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
   filteredAccounts$: Subject<void> = new Subject<any>()
   form: FormGroup
   meetingsSource: MeetingsDataSource
-  date$: Subject<void> = new Subject<void>()
+  form$: Subject<void> = new Subject<void>()
   selectedClinic?: OrganizationEntity
+  meetingStatusOptions = [
+    { value: 'active', viewValue: _('BOARD.ACTIVE_MEETINGS') },
+    { value: 'inactive', viewValue: _('BOARD.DELETED_METTINGS') }
+  ]
+  quickSelectOptions = [
+    { value: 'all', viewValue: _('BOARD.ALL_MEETINGS') },
+    { value: 'upcoming', viewValue: _('BOARD.UPCOMING') },
+    { value: 'past', viewValue: _('BOARD.PAST') }
+  ]
 
   constructor(
     private bus: EventsService,
@@ -179,33 +188,31 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
     this.filteredAccounts$.next()
   }
 
-  toggleQuickSelect(selection: QuickSelectOption): void {
-    this.form.controls.quickSelect.setValue(selection)
-  }
-
   private createForm(): void {
     this.form = this.fb.group({
       endDate: [moment()],
       query: [],
-      quickSelect: ['past'],
-      startDate: [moment().startOf('year')]
+      quickSelect: 'past',
+      startDate: [moment().startOf('year')],
+      meetingStatus: 'active'
     })
 
     merge(
       this.form.controls.startDate.valueChanges,
-      this.form.controls.endDate.valueChanges
+      this.form.controls.endDate.valueChanges,
+      this.form.controls.meetingStatus.valueChanges
     )
       .pipe(untilDestroyed(this), debounceTime(200))
       .subscribe(() => {
         this.meetingsSource.resetPaginator()
-        this.date$.next()
+        this.form$.next()
       })
 
     this.form.controls.quickSelect.valueChanges
       .pipe(untilDestroyed(this))
       .subscribe(this.quickSelectHandler)
 
-    setTimeout(() => this.toggleQuickSelect('upcoming'))
+    setTimeout(() => this.form.controls.quickSelect.setValue('upcoming'))
   }
 
   private createSource(): void {
@@ -218,7 +225,7 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
           : undefined
     }))
 
-    this.meetingsSource.addOptional(this.date$, () => ({
+    this.meetingsSource.addOptional(this.form$, () => ({
       range: {
         start: this.form.value.startDate
           ? this.form.value.startDate.toISOString()
@@ -226,6 +233,9 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
         end: this.form.value.endDate
           ? this.form.value.endDate.toISOString()
           : undefined
+      },
+      status: {
+        meeting: this.form.value.meetingStatus
       }
     }))
 

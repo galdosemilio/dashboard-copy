@@ -23,6 +23,7 @@ export class Meeting {
   time: moment.Moment
   title: string
   type: { id: string; description: string }
+  status: string
 
   constructor(args: any) {
     this.access = args.access ?? 'restricted'
@@ -50,5 +51,6 @@ export class Meeting {
     this.time = this.date
     this.title = args.title ?? _('BOARD.MEETING_BUSY_TIME')
     this.type = args.type
+    this.status = args.status
   }
 }

@@ -57,12 +57,12 @@
             <mat-cell *cdkCellDef="let row">
                 <span>{{'BOARD.SCHEDULE_ATTENDEES_NO_AMOUNT' | translate}}</span>
                 <div>
-                <ul *ngIf="row.isFuture">
+                <ul *ngIf="row.isFuture || row.status === 'inactive'">
                     <li *ngFor="let attendee of row.attendees">
                         {{ attendee.firstName }} {{ attendee.lastName }}
                     </li>
                 </ul>
-                <div *ngIf="!row.isFuture" fxLayout="column" fxLayoutAlign="start stretch">
+                <div *ngIf="!row.isFuture && row.status === 'active'" fxLayout="column" fxLayoutAlign="start stretch">
                     <p *ngFor="let attendee of row.attendees" class="attendance-editor">
                         <span>
                             {{ attendee.firstName }} {{ attendee.lastName }}
@@ -86,8 +86,8 @@
             fxHide.xs>
             <span>{{ 'BOARD.ACTIONS' | translate }}</span>
             <button
-            [class.disabled]="row.access !== 'full'"
-            [disabled]="row.access !== 'full'"
+            [class.disabled]="row.access !== 'full' || row.status === 'inactive'"
+            [disabled]="row.access !== 'full' || row.status === 'inactive'"
             [title]="'GLOBAL.EDIT' | translate"
             (click)="viewMeeting(row)"
             mat-icon-button>
@@ -95,8 +95,8 @@
         </button>
         <button
               data-cy="schedule-listing-meeting-delete"
-              [class.disabled]="!row.isFuture || row.access !== 'full'"
-              [disabled]="!row.isFuture || row.access !== 'full'"
+              [class.disabled]="!row.isFuture || row.access !== 'full' || row.status === 'inactive'"
+              [disabled]="!row.isFuture || row.access !== 'full' || row.status === 'inactive'"
               [title]="'BOARD.REMOVE' | translate"
               (click)="deleteMeeting(row)"
               mat-icon-button><mat-icon>delete</mat-icon></button>

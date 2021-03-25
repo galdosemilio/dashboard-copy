@@ -45,9 +45,9 @@
         </div>
     </div>
 
-    <!-- date filters -->
-    <div fxFlex="40%" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="10px">
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <div fxFlex="30%" fxFlex.lt-lg="40%" fxFlexOffset="10%" fxFlexOffset.lt-lg="0" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="15px">
+        <!-- date filters -->
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
             <div fxFlex>
                 <ccr-date-input [placeholder]="'BOARD.START_DATE' | translate" formControlName="startDate" fxFlex></ccr-date-input>
             </div>
@@ -56,41 +56,28 @@
             </div>
         </div>
 
-        <div fxFlex>
-            <div class="ccr-button-group">
-                <button
-                [class.active]="form.value.quickSelect === 'past'"
-                [matTooltip]="'BOARD.PAST' | translate"
-                (click)="toggleQuickSelect('past')"
-                class="ccr-icon-button"
-                matTooltipPosition="above"
-                mat-button
-                type="button">
-                  <mat-icon>view_day</mat-icon>
-                  {{ 'BOARD.PAST' | translate }}
-                </button>
-                <button
-                [class.active]="form.value.quickSelect === 'upcoming'"
-                [matTooltip]="'BOARD.UPCOMING' | translate"
-                (click)="toggleQuickSelect('upcoming')"
-                class="ccr-icon-button"
-                matTooltipPosition="above"
-                mat-button
-                type="button">
-                  <mat-icon>view_week</mat-icon>
-                  {{ 'BOARD.UPCOMING' | translate }}
-                </button>
-                <button
-                [class.active]="form.value.quickSelect === 'all'"
-                [matTooltip]="'BOARD.UPCOMING' | translate"
-                (click)="toggleQuickSelect('all')"
-                class="ccr-icon-button"
-                matTooltipPosition="above"
-                mat-button
-                type="button">
-                  <mat-icon>view_week</mat-icon>
-                  {{ 'BOARD.ALL_MEETINGS' | translate }}
-                </button>
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <div fxFlex fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                    <mat-select formControlName="quickSelect">
+                    <mat-option *ngFor="let option of quickSelectOptions" [value]="option.value">
+                        {{ option.viewValue | translate }}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex fxLayoutAlign="start center" fxLayoutGap="7px">
+                <mat-form-field fxFlex>
+                    <mat-select formControlName="meetingStatus">
+                    <mat-option *ngFor="let option of meetingStatusOptions" [value]="option.value">
+                        {{ option.viewValue | translate }}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <ccr-popup-description
+                [title]="'BOARD.DISPLAY_ACTIVE_OR_DELETED_MEETINGS' | translate"
+                [description]="'BOARD.DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT' | translate"
+                ></ccr-popup-description>
             </div>
         </div>
     </div>
