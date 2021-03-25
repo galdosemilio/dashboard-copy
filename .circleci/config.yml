@@ -34,7 +34,6 @@ npm_dependency_installation: &npm_dependency_installation
         exit 5
     fi
 dependency_cache_key: &dependency_cache_key dependency-cache-{{ checksum "yarn.lock" }}
-
 jobs:
   setup:
     <<: *defaults
@@ -141,11 +140,12 @@ jobs:
           command: yarn format:check
       - checkout
       - run:
-          name: Check commit formatting
-           # This checks all pending commits on a feature branch, but only the 'last' commit on master
-           # because the $CIRCLE_BRANCH and origin/master will be the same in this scenario.
-           # That being said, we shouldn't be pushing multiple (or any at all, really) commits to release directly to master anyway, but we should go through a PR.
-          command:  |
+          name:
+            Check commit formatting
+            # This checks all pending commits on a feature branch, but only the 'last' commit on master
+            # because the $CIRCLE_BRANCH and origin/master will be the same in this scenario.
+            # That being said, we shouldn't be pushing multiple (or any at all, really) commits to release directly to master anyway, but we should go through a PR.
+          command: |
             MERGE_BASE=$(git merge-base $CIRCLE_BRANCH origin/master)
             if [ $MERGE_BASE = $CIRCLE_SHA1 ]; then
               npx commitlint -f $(git rev-parse $CIRCLE_BRANCH^1)
@@ -164,7 +164,7 @@ jobs:
           command: |
             echo "//npm.pkg.github.com/:_authToken=$COACHCARE_AUTH_TOKEN" >> ~/.npmrc
             echo "@coachcare:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-            sudo echo "//npm.pkg.github.com/:_authToken=$COACHCARE_AUTH_TOKEN" > ~/.npmrc
+            echo "//npm.pkg.github.com/:_authToken=$COACHCARE_AUTH_TOKEN" > ~/.npmrc
       - run:
           name: Set up environment variables
           command: |
