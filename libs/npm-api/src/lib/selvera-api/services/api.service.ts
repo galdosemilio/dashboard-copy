@@ -252,8 +252,7 @@ class ApiService {
               let defaultMsg
               switch (response.status) {
                 case 401:
-                  // this.onUnauthenticatedError.next(true);
-                  // this.doLogout();
+                  this.handleErrorCode(response.data ?? {})
                   defaultMsg = 'You must be authenticated'
                   break
                 case 403:
@@ -298,7 +297,7 @@ class ApiService {
     return response.data.message ? response.data.message : defaultMsg
   }
 
-  private handleErrorCode(data: { code: string; message: string }): void {
+  private handleErrorCode(data: { code?: string; message?: string }): void {
     switch (data.code) {
       case 'mfa.invalid-token':
         // no action
