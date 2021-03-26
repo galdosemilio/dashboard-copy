@@ -795,6 +795,8 @@
     "NECK": "Nakke",
     "RESPIRATION_RATE": "Respirationshastighed",
     "RESTFULNESS": "Komfort",
+    "SHOULD_BE_MAXIMUM": "Bør være {{value}} højst",
+    "SHOULD_BE_MINIMUM": "Bør være {{value}} mindst",
     "SLEEP": "Sove",
     "SLEEP_ENDTIME": "Sove Sluttidspunkt",
     "SLEEP_STARTTIME": "Sove Starttid",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "Samlet kropsvand",
     "TOTAL_CHOLESTEROL": "Samlet Kolesterol",
     "TRIGLYCERIDES": "Triglycerider",
+    "VALUE_INVALID": "Værdi er ugyldig",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoprotein med Lav Densitet",
     "VISCERAL_ADIP_TISSUE": "Visceral fedtvolumen",
     "VISCERAL_FAT": "Visceralt fedt (Procentdel)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "Den valgte tid skal være i fremtiden.",
       "TITLE_EMPTY": "Mødetitel kan ikke være tom.",
       "UNAVAILABILITY_CONFLICT": "Den valgte tidsblok er allerede reserveret.",
-      "UPDATE_ATTENDANCE": "Deltagelse kunne ikke opdateres",
-      "VALUE_NOT_EMPTY": "Værdien kan ikke være tom."
+      "UPDATE_ATTENDANCE": "Deltagelse kunne ikke opdateres"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "ikke tilgængelig i øjeblikket",

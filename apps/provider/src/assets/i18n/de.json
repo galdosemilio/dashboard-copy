@@ -795,6 +795,8 @@
     "NECK": "Hals",
     "RESPIRATION_RATE": "Atemfrequenz",
     "RESTFULNESS": "Erholtheit",
+    "SHOULD_BE_MAXIMUM": "Sollte sein {{value}} höchstens",
+    "SHOULD_BE_MINIMUM": "Sollte sein {{value}} mindestens",
     "SLEEP": "Schlafen",
     "SLEEP_ENDTIME": "Schlaf-Endzeit",
     "SLEEP_STARTTIME": "Schlaf-Startzeit",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "Gesamtkörperwasser",
     "TOTAL_CHOLESTEROL": "Gesamtcholesterin",
     "TRIGLYCERIDES": "Triglyzeride",
+    "VALUE_INVALID": "Der Wert ist ungültig",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoprotein mit sehr niedriger Dichte",
     "VISCERAL_ADIP_TISSUE": "Viszerales Fettgewebevolumen",
     "VISCERAL_FAT": "Viszerales Fett (in Prozent)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "Ausgewählte Zeit sollte in Zukunft sein.",
       "TITLE_EMPTY": "Meetingstitel kann nicht leer sein.",
       "UNAVAILABILITY_CONFLICT": "Der gewählte Zeitfenster ist bereits reserviert.",
-      "UPDATE_ATTENDANCE": "Teilnahme konnte nicht aktualisiert werden",
-      "VALUE_NOT_EMPTY": "Der Wert darf nicht leer sein."
+      "UPDATE_ATTENDANCE": "Teilnahme konnte nicht aktualisiert werden"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "sind derzeit nicht verfügbar",
@@ -1290,7 +1292,6 @@
     "ADD_MESSAGE": "Nachricht hinzufügen",
     "ADD_RECIPIENTS": "Teilnehmer hinzufügen",
     "ADD_STEP": "Schritt hinzufügen",
-    "ADD_STEP_ABOUT": "Ein 'Schritt' repräsentiert die Nachricht(en), die jedem angemeldeten Patienten an einem bestimmten Tag zugestellt werden soll(en). Zwischen den einzelnen Schritten wird eine Verzögerung für die Anzahl der Tage festgelegt, die abgewartet werden müssen, bevor mit dem nächsten Schritt fortgefahren wird. Die Nachricht(en) werden jeden Morgen in der Ortszeit des Patienten zugestellt. Sie können jede beliebige Nachricht mit einer beliebigen Kombination aus E-Mail, Benachrichtigung über die mobile App und/oder Textnachricht (SMS) senden. Der 'Titel', den Sie jedem Schritt geben, dient nur der internen Referenz.",
     "ALL_ORG_PATIENTS": "Alle Patienten in der Klinik",
     "ASSOC_WITH": "Verbunden mit der Klinik <strong>{{org}}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "Massenregistrierung",

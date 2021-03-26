@@ -795,6 +795,8 @@
     "NECK": "Pescoço",
     "RESPIRATION_RATE": "Taxa de respiração",
     "RESTFULNESS": "Descanso",
+    "SHOULD_BE_MAXIMUM": "Deve ser {{value}}, no máximo,",
+    "SHOULD_BE_MINIMUM": "Deve ser {{value}}, pelo menos",
     "SLEEP": "Sono",
     "SLEEP_ENDTIME": "Hora de fim do sono",
     "SLEEP_STARTTIME": "Hora de início do sono",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "Água corporal total",
     "TOTAL_CHOLESTEROL": "Colesterol total",
     "TRIGLYCERIDES": "Triglicerídeos",
+    "VALUE_INVALID": "O valor é inválido",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoproteína de Muito Baixa Densidade",
     "VISCERAL_ADIP_TISSUE": "Volume do tecido adiposo visceral",
     "VISCERAL_FAT": "Gordura Visceral (Percentagem)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "O horário selecionado deve estar no futuro.",
       "TITLE_EMPTY": "O título da reunião não pode estar vazio.",
       "UNAVAILABILITY_CONFLICT": "O intervalo de tempo selecionado já está reservado.",
-      "UPDATE_ATTENDANCE": "A participação não pôde ser atualizada",
-      "VALUE_NOT_EMPTY": "O valor não pode estar vazio."
+      "UPDATE_ATTENDANCE": "A participação não pôde ser atualizada"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "estão indisponíveis no momento",

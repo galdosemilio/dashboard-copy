@@ -87,42 +87,49 @@
           <input matInput formControlName="waist" numberOnly
           [placeholder]="'MEASUREMENT.WAIST' | translate">
           <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '200'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="arm" numberOnly
           [placeholder]="'MEASUREMENT.ARM' | translate">
           <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '200'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="chest" numberOnly
           [placeholder]="'MEASUREMENT.CHEST' | translate">
           <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '200'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="hip" numberOnly
           [placeholder]="'MEASUREMENT.HIP' | translate">
           <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '200'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="thigh" numberOnly
           [placeholder]="'MEASUREMENT.THIGH' | translate">
           <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '200'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="neck" numberOnly
           [placeholder]="'MEASUREMENT.NECK' | translate">
           <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '200'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="thorax" numberOnly
           [placeholder]="'MEASUREMENT.THORAX' | translate">
           <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '200'} }}</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -133,61 +140,70 @@
           <input matInput formControlName="weight" numberOnly
           [placeholder]="'MEASUREMENT.WEIGHT' | translate" (change)="onCompositionChange('weight')">
           <span matSuffix>{{ 'composition' | unitLabel | translate }}</span>
-          <mat-error>{{ 'NOTIFY.ERROR.VALUE_NOT_EMPTY' | translate }}</mat-error>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MINIMUM' | translate:{value: '1'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="bodyFat" numberOnly max="100"
           [placeholder]="'RIGHT_PANEL.BODY_FAT_PERC' | translate" (change)="onCompositionChange('bodyFat')">
           <span matSuffix>%</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '100'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="bodyFatLbs" numberOnly
           [placeholder]="'RIGHT_PANEL.BODY_FAT_LBS' | translate" (change)="onCompositionChange('bodyFatLbs')">
           <span matSuffix>{{ 'composition' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.VALUE_INVALID' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="visceralFat" numberOnly max="100"
           [placeholder]="'RIGHT_PANEL.VISCERAL_FAT_PERC' | translate" (change)="onCompositionChange('visceralFat')">
           <span matSuffix>%</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '100'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="visceralFatLbs" numberOnly
           [placeholder]="'RIGHT_PANEL.VISCERAL_FAT_LBS' | translate" (change)="onCompositionChange('visceralFatLbs')">
           <span matSuffix>{{ 'composition' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.VALUE_INVALID' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="visceralFatTanita" numberOnly max="100"
           [placeholder]="'RIGHT_PANEL.VISCERAL_FAT_TANITA' | translate">
           <span matSuffix>{{ 'UNIT.UNITS' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.VALUE_INVALID' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="visceralAdiposeTissue" numberOnly
           [placeholder]="'MEASUREMENT.VISCERAL_ADIP_TISSUE' | translate" (change)="onCompositionChange('visceralAdiposeTissue')">
           <span matSuffix>{{ 'UNIT.LT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.VALUE_INVALID' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="waterPercentage" numberOnly
           [placeholder]="'RIGHT_PANEL.BODY_WATER_PERC' | translate" (change)="onCompositionChange('waterPercentage')">
           <span matSuffix>%</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '100'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="waterLbs" numberOnly
           [placeholder]="'RIGHT_PANEL.BODY_WATER_LBS' | translate" (change)="onCompositionChange('waterLbs')">
           <span matSuffix>{{ 'composition' | unitLabel | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.VALUE_INVALID' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="filteredFields.indexOf('ketones') === -1" class="ccr-align-right">
           <input matInput formControlName="ketones" numberOnly
           [placeholder]="'MEASUREMENT.KETONES' | translate" (change)="onCompositionChange('ketones')">
           <span matSuffix>{{ 'UNIT.MMOL' | translate }}/{{ 'UNIT.LT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.VALUE_INVALID' | translate }}</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -197,6 +213,7 @@
           <input matInput formControlName="steps" numberOnly [wholeNumber]="true"
           [placeholder]="'MEASUREMENT.STEPS' | translate">
           <span matSuffix>{{ 'UNIT.STEPS' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.VALUE_INVALID' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -229,85 +246,98 @@
           <input matInput formControlName="totalCholesterol" numberOnly
           [placeholder]="'MEASUREMENT.TOTAL_CHOLESTEROL' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
-          <mat-error>{{ 'NOTIFY.ERROR.VALUE_NOT_EMPTY' | translate }}</mat-error>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '20000'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="ldl" numberOnly max="100"
           [placeholder]="'MEASUREMENT.LOW_DENSITY_LIPOPROTEIN' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '15000'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="hdl" numberOnly
           [placeholder]="'MEASUREMENT.HIGH_DENSITY_LIPOPROTEIN' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '15000'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="vldl" numberOnly max="100"
           [placeholder]="'MEASUREMENT.VERY_LOW_DENSITY_LIPOPROTEIN' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '15000'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="triglycerides" numberOnly
           [placeholder]="'MEASUREMENT.TRIGLYCERIDES' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '32767'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="fastingGlucose" numberOnly max="100"
           [placeholder]="'MEASUREMENT.FASTING_GLUCOSE' | translate" [wholeNumber]="true">
           <span matSuffix>{{ 'UNIT.MGR' | translate }} / {{ 'UNIT.DLT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '7500'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="hba1c" numberOnly
           [placeholder]="'MEASUREMENT.HBA1C' | translate">
           <span matSuffix>%</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '100'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="insulin" numberOnly
           [placeholder]="'MEASUREMENT.INSULIN' | translate" [wholeNumber]="true">
           <span matSuffix>uU/{{ 'UNIT.MLT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '4000'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="hsCrp" numberOnly
           [placeholder]="'MEASUREMENT.HSCRP' | translate">
           <span matSuffix>{{ 'UNIT.MGR' | translate }}/{{ 'UNIT.LT' | translate }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '350'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="temperature" numberOnly
           [placeholder]="'MEASUREMENT.TEMPERATURE' | translate">
           <span matSuffix>{{ measurementPreference === 'metric' || measurementPreference === 'uk' ? '&#8451;' : '&#8457;' }}</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '115'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="heartRate" numberOnly
           [placeholder]="'MEASUREMENT.HEART_RATE' | translate" [wholeNumber]="true">
           <span matSuffix>/ min</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '650'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="bloodPressureSystolic" numberOnly
           [placeholder]="'MEASUREMENT.BLOOD_PRESSURE_SYSTOLIC' | translate" [wholeNumber]="true">
           <span matSuffix>/ mmHg</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '500'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="bloodPressureDiastolic" numberOnly
           [placeholder]="'MEASUREMENT.BLOOD_PRESSURE_DIASTOLIC' | translate" [wholeNumber]="true">
           <span matSuffix>/ mmHg</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '500'} }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="respirationRate" numberOnly
           [placeholder]="'MEASUREMENT.RESPIRATION_RATE' | translate" [wholeNumber]="true">
           <span matSuffix>/ min</span>
+          <mat-error>{{ 'MEASUREMENT.SHOULD_BE_MAXIMUM' | translate:{value: '400'} }}</mat-error>
         </mat-form-field>
       </div>
     </div>

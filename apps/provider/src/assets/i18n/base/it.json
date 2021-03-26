@@ -795,6 +795,8 @@
     "NECK": "Collo",
     "RESPIRATION_RATE": "Frequenza Respiratoria",
     "RESTFULNESS": "A riposo",
+    "SHOULD_BE_MAXIMUM": "Dovrebbe essere {{value}} al massimo",
+    "SHOULD_BE_MINIMUM": "Dovrebbe essere {{value}} almeno",
     "SLEEP": "Sonno",
     "SLEEP_ENDTIME": "Orario di Fine Sonno",
     "SLEEP_STARTTIME": "Orario di Inizio Sonno",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "Acqua corporea totale",
     "TOTAL_CHOLESTEROL": "Colesterolo Totale",
     "TRIGLYCERIDES": "Trigliceridi",
+    "VALUE_INVALID": "Valore non è valido",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoproteine a Bassissima densità",
     "VISCERAL_ADIP_TISSUE": "Volume del tessuto adiposo viscerale",
     "VISCERAL_FAT": "Grasso Viscerale (Percentuale)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "L'orario selezionato deve essere nel futuro.",
       "TITLE_EMPTY": "Il titolo dell'incontro non può essere vuoto.",
       "UNAVAILABILITY_CONFLICT": "L'orario selezionato è già stato riservato.",
-      "UPDATE_ATTENDANCE": "La frequenza non può essere aggiornata",
-      "VALUE_NOT_EMPTY": "Il valore non può essere vuoto."
+      "UPDATE_ATTENDANCE": "La frequenza non può essere aggiornata"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "sono attualmente irreperibili",

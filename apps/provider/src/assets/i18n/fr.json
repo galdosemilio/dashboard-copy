@@ -795,6 +795,8 @@
     "NECK": "Cou",
     "RESPIRATION_RATE": "Fréquence respiratoire",
     "RESTFULNESS": "Repos",
+    "SHOULD_BE_MAXIMUM": "Devrait être {{value}} au plus",
+    "SHOULD_BE_MINIMUM": "Devrait être {{value}} au moins",
     "SLEEP": "Sommeil",
     "SLEEP_ENDTIME": "Heure de fin de sommeil",
     "SLEEP_STARTTIME": "Heure de début de sommeil",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "Eau corporelle totale",
     "TOTAL_CHOLESTEROL": "Total cholestérol",
     "TRIGLYCERIDES": "Triglycérides",
+    "VALUE_INVALID": "La valeur est invalide",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoprotéine à faible densité",
     "VISCERAL_ADIP_TISSUE": "Volume du tissu adipeux viscéral",
     "VISCERAL_FAT": "Graisse viscérale (pourcentage)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "Le temps sélectionné doit être dans le futur",
       "TITLE_EMPTY": "Le titre de la rencontre ne peut être vide",
       "UNAVAILABILITY_CONFLICT": "Le créneau sélectionné est déjà réservé",
-      "UPDATE_ATTENDANCE": "La participation n'a pas pu être mise à jour",
-      "VALUE_NOT_EMPTY": "La valeur ne peut pas être vide"
+      "UPDATE_ATTENDANCE": "La participation n'a pas pu être mise à jour"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "sont indisponibles",

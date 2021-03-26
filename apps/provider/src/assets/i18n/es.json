@@ -795,6 +795,8 @@
     "NECK": "Cuello",
     "RESPIRATION_RATE": "Ritmo respiratorio",
     "RESTFULNESS": "Reposo",
+    "SHOULD_BE_MAXIMUM": "Debería ser {{ value }} como máximo",
+    "SHOULD_BE_MINIMUM": "Debería ser {{ value }} como mínimo",
     "SLEEP": "Sueño",
     "SLEEP_ENDTIME": "Hora de Despertar",
     "SLEEP_STARTTIME": "Hora de Dormir",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "Agua Corporal Total",
     "TOTAL_CHOLESTEROL": "Colesterol Total",
     "TRIGLYCERIDES": "Triglicéridos",
+    "VALUE_INVALID": "El valor no es válido",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Lipoproteína de Muy Baja Densidad",
     "VISCERAL_ADIP_TISSUE": "Volumen de Tejido Adiposo",
     "VISCERAL_FAT": "Grasa Visceral (Porcentaje)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "El tiempo seleccionado debe ser en el futuro.",
       "TITLE_EMPTY": "El título no puede estar vacío.",
       "UNAVAILABILITY_CONFLICT": "El intervalo de tiempo seleccionado ya está reservado.",
-      "UPDATE_ATTENDANCE": "Asistencia no puedo ser actualizado",
-      "VALUE_NOT_EMPTY": "Este valor no puede ser vacío."
+      "UPDATE_ATTENDANCE": "Asistencia no puedo ser actualizado"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "no están disponibles actualmente",

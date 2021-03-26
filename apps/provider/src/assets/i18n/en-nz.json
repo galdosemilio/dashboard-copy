@@ -795,6 +795,8 @@
     "NECK": "Neck",
     "RESPIRATION_RATE": "Respiration Rate",
     "RESTFULNESS": "Restfulness",
+    "SHOULD_BE_MAXIMUM": "Should be {{ value }} at most",
+    "SHOULD_BE_MINIMUM": "Should be {{ value }} at least",
     "SLEEP": "Sleep",
     "SLEEP_ENDTIME": "Sleep End Time",
     "SLEEP_STARTTIME": "Sleep Start Time",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "Total Body Water",
     "TOTAL_CHOLESTEROL": "Total Cholesterol",
     "TRIGLYCERIDES": "Triglycerides",
+    "VALUE_INVALID": "Value is invalid",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "Very Low-Density Lipoprotein",
     "VISCERAL_ADIP_TISSUE": "Visceral Adipose Tissue Volume",
     "VISCERAL_FAT": "Visceral Fat (Percentage)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "Selected time should be in future.",
       "TITLE_EMPTY": "Meeting title cannot be empty.",
       "UNAVAILABILITY_CONFLICT": "The selected timeslot is already reserved.",
-      "UPDATE_ATTENDANCE": "Attendance could not be updated",
-      "VALUE_NOT_EMPTY": "Value can not be empty."
+      "UPDATE_ATTENDANCE": "Attendance could not be updated"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "are currently unavailable",

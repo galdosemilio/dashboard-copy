@@ -795,6 +795,8 @@
     "NECK": "رقبه",
     "RESPIRATION_RATE": "معدل التنفس",
     "RESTFULNESS": "الاسترخاء",
+    "SHOULD_BE_MAXIMUM": "يجب أن يكون {{value}} على الأكثر",
+    "SHOULD_BE_MINIMUM": "يجب أن يكون {{value}} على الأقل",
     "SLEEP": "النوم",
     "SLEEP_ENDTIME": "وقت انتهاء النوم",
     "SLEEP_STARTTIME": "وقت بداية النوم",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "مجموع الماء في الجسم",
     "TOTAL_CHOLESTEROL": "إجمالي الكوليسترول",
     "TRIGLYCERIDES": "الدهون الثلاثية",
+    "VALUE_INVALID": "القيمة غير صحيحة",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "البروتين الدهني منخفض الكثافة",
     "VISCERAL_ADIP_TISSUE": "حجم الأنسجة الدهنية الحشوية",
     "VISCERAL_FAT": "الدهون الحشوية (النسبة المئوية)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "يجب أن يكون الوقت المحدد في المستقبل",
       "TITLE_EMPTY": "لا يمكن ترك عنوان الاجتماع فارغًا",
       "UNAVAILABILITY_CONFLICT": "الفاصل الزمني المحدد محجوز بالفعل.",
-      "UPDATE_ATTENDANCE": "لا يمكن تحديث الحضور",
-      "VALUE_NOT_EMPTY": "لا يمكن ترك القيمة فارغة"
+      "UPDATE_ATTENDANCE": "لا يمكن تحديث الحضور"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "غير متاح حاليًا",

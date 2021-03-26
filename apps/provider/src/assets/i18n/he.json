@@ -795,6 +795,8 @@
     "NECK": "צוואר",
     "RESPIRATION_RATE": "קצב נשימה",
     "RESTFULNESS": "נינוחות",
+    "SHOULD_BE_MAXIMUM": "אמור להיות {{value}} לכל היותר",
+    "SHOULD_BE_MINIMUM": "אמור להיות {{value}} לפחות",
     "SLEEP": "שינה",
     "SLEEP_ENDTIME": "שעת סיום שינה",
     "SLEEP_STARTTIME": "שעת התחלת שינה",
@@ -807,6 +809,7 @@
     "TOTAL_BODY_WATER": "סך כל המים בגוף",
     "TOTAL_CHOLESTEROL": "כולסטרול כללי",
     "TRIGLYCERIDES": "טריגליצרידים",
+    "VALUE_INVALID": "הערך אינו חוקי",
     "VERY_LOW_DENSITY_LIPOPROTEIN": "ליפופרוטאין בצפיפות נמוכה מאוד",
     "VISCERAL_ADIP_TISSUE": "נפח רקמות שומן בקרקפת",
     "VISCERAL_FAT": "שומן בטן (אחוז)",
@@ -891,8 +894,7 @@
       "TIME_SHOULD_BE_FUTURE": "הזמן הנבחר צריך להיות עתידי.",
       "TITLE_EMPTY": "כותרת הפגישה לא יכולה להישאר ריקה.",
       "UNAVAILABILITY_CONFLICT": "השעה שנבחרה כבר שמורה.",
-      "UPDATE_ATTENDANCE": "לא ניתן היה לעדכן את הנוכחות",
-      "VALUE_NOT_EMPTY": "הערך לא יכול להישאר ריק."
+      "UPDATE_ATTENDANCE": "לא ניתן היה לעדכן את הנוכחות"
     },
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "כרגע לא זמינים",
