@@ -21,6 +21,7 @@ export function unitConversion(
           break
         case 'uk':
         case 'us':
+        default:
           // to Pounds
           res = value / POUND
           break
@@ -36,6 +37,7 @@ export function unitConversion(
           break
         case 'uk':
         case 'us':
+        default:
           // to Inches
           res = value * INCHES
           break
@@ -51,6 +53,7 @@ export function unitConversion(
           res = value / 1000
           break
         case 'us':
+        default:
           // to Miles
           res = value * MILES
           break
@@ -74,6 +77,7 @@ export function unitConversion(
           res = value * 0.001
           break
         case 'us':
+        default:
           // to Ounces
           res = value * OUNCES
           break
