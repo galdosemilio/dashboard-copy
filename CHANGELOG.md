@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/coachcare/dashboard/compare/v1.0.0...v1.1.0) (2021-03-27)
+
+
+### Bug Fixes
+
+* style for infinite scroll for notes component [FRON-2103] ([0bebfec](https://github.com/coachcare/dashboard/commit/0bebfec4c22dcad5a691d2c3e22ce6b800c221f4))
+
+
+### Features
+
+* add zendesk link to pages [IDEA-704] ([8cb9e29](https://github.com/coachcare/dashboard/commit/8cb9e29bca64565d00607a65b4a6c9dc958d968e))
+
 # 1.0.0 (2021-03-26)
 
 
