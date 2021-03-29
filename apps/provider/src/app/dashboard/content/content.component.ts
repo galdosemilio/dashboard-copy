@@ -55,6 +55,8 @@ export class ContentComponent implements OnDestroy, OnInit {
   public clinic: string
   public viewMode: 'list' | 'grid' = 'list'
   public events: FileExplorerEvents = new FileExplorerEvents()
+  public cloneContentZendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360049925131-How-to-Clone-Duplicate-Digital-Library-Content'
   public contentType$: BehaviorSubject<string> = new BehaviorSubject<string>('')
   public contentTypes: ContentTypeMapItem[] = values(CONTENT_TYPE_MAP)
   public fileType$: BehaviorSubject<string> = new BehaviorSubject<string>('')

@@ -99,6 +99,10 @@
                 <span>{{ 'LIBRARY.CONTENT.CLONE_CONTENT' | translate }}</span>
             </button>
 
+            <ccr-help-link
+            *ngIf="organization && organization.permissions.admin && organization.isDirect"
+            [link]="cloneContentZendeskLink"></ccr-help-link>
+
             <ccr-popup-description
             *ngIf="!organization || !(organization.permissions.admin && organization.isDirect)"
             [title]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS_TITLE' | translate"

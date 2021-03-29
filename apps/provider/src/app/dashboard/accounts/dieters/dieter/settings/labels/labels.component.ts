@@ -27,7 +27,7 @@ export class DieterLabelComponent implements OnInit, AfterViewInit, OnDestroy {
   clinic // selected value
 
   zendeskLink =
-    'https://coachcare.zendesk.com/hc/en-us/articles/360019702272-Editing-a-Patient-Profile'
+    'https://coachcare.zendesk.com/hc/en-us/articles/360043753631-What-are-Phases-'
 
   constructor(
     private notifier: NotifierService,
