@@ -8,4 +8,9 @@ export interface FetchMeetingTypesResponse {
   description: string
   isActive: boolean
   durations: Array<string> // postgres intervals
+  colors: {
+    default: string
+    light: string
+    contrast: string
+  }
 }

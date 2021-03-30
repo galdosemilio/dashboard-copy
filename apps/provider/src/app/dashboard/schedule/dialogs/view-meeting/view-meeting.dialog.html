@@ -22,7 +22,13 @@
                 <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
                     <mat-form-field *ngIf="meetingTypes && meetingTypes.length">
                     <mat-select formControlName="meetingTypeId" [placeholder]="'RIGHT_PANEL.MEETING_TYPE' | translate">
-                        <mat-option *ngFor="let type of meetingTypes" [value]="type">{{ type.description }}</mat-option>
+                        <mat-select-trigger>
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="7px">
+                                <span>{{ selectedMeetingType ? selectedMeetingType.description : '' }}</span>
+                                <span *ngIf="selectedMeetingType" class="meeting-type-color-bullet" [style.background]="selectedMeetingType.colors.default" ></span>
+                            </div>
+                        </mat-select-trigger>
+                    <mat-option *ngFor="let type of meetingTypes" [value]="type" [style.border-left]="'10px solid ' + type.colors.default">{{ type.description }}</mat-option>
                     </mat-select>
                     <mat-error *ngIf="form.get('meetingTypeId').getError('required')">{{'NOTIFY.ERROR.MEETING_TYPE_EMPTY' | translate}}</mat-error>
                     </mat-form-field>
@@ -208,7 +214,10 @@
                 </div>
                 <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
                     <h4>{{ 'RIGHT_PANEL.MEETING_TYPE' | translate }}</h4>
-                    <p>{{ meeting.type.description | translate }}</p>
+                    <div flexLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="7px" >
+                        <p>{{ meeting.type.description | translate }}</p>
+                        <span fxFlex="15px" class="meeting-type-color-bullet" [style.background]="meeting.colors?.default" ></span>
+                    </div>
                 </div>
                 </div>
 

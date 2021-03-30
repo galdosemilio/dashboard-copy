@@ -6,6 +6,7 @@ import {
   AccountProvider,
   CommunicationPreference,
   ContentPreference,
+  FetchMeetingTypesResponse,
   MessagingPreference,
   OrganizationEntity,
   OrganizationProvider,
@@ -32,7 +33,8 @@ import {
   OrganizationWithAddress,
   OrgPreferencesResponse,
   OrgSingleResponse,
-  RPMPreferenceSingle
+  RPMPreferenceSingle,
+  Schedule
 } from '@coachcare/npm-api'
 import { UpdatePalette } from '@app/store/config'
 import { AuthService } from './auth.service'
@@ -59,6 +61,7 @@ export type SelectedOrganization = OrganizationWithAddress & {
   preferences?: Partial<CcrOrgPreferencesResponse>
   isDirect: boolean
   mala?: any
+  meetingTypes?: FetchMeetingTypesResponse[]
   // disabled?: boolean;
 }
 
@@ -79,7 +82,8 @@ export class ContextService {
     private bus: EventsService,
     private lang: LanguageService,
     private rpm: RPM,
-    private sequence: Sequence
+    private sequence: Sequence,
+    private schedule: Schedule
   ) {
     // this.bus.register('organizations.disable-all', this.disableAll.bind(this));
     // this.bus.register('organizations.enable-all', this.enableAll.bind(this));
@@ -224,7 +228,6 @@ export class ContextService {
       const commsPrefs = await this.resolveCommsPreference(organization)
       const messagingPrefs = await this.resolveMessagingPreference(organization)
       const fileVaultPrefs = await this.resolveFileVaultPreference(organization)
-
       const rpmPrefs = await this.resolveRPMOrgPreference(organization)
 
       organization.preferences.rpm = rpmPrefs
@@ -232,6 +235,10 @@ export class ContextService {
       organization.preferences.comms = commsPrefs
       organization.preferences.messaging = messagingPrefs
       organization.preferences.fileVault = fileVaultPrefs
+
+      organization.meetingTypes = await this.schedule.fetchTypes(
+        organization.id
+      )
       // organization.preferences.sequences = { enabled: true };
 
       this.updateColors(organization.assets.color || {})

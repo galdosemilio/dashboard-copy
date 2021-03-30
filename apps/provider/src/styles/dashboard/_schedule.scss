@@ -13,9 +13,8 @@
     }
     padding: 0 10px;
     &.meeting {
-      background-color: var(--primary-lighten);
-      border: 1px solid var(--primary-lighten);
-      border-left: 2px solid var(--primary);
+      border: 1px solid;
+      border-left: 2px solid;
       color: var(--primary-lighten-contrast);
     }
     &.available {
@@ -106,9 +105,8 @@
         }
 
         .meeting {
-          background-color: var(--primary-lighten);
-          border: 1px solid var(--primary-lighten);
-          border-left: 2px solid var(--primary);
+          border: 1px solid;
+          border-left: 2px solid;
           color: var(--primary-lighten-contrast);
           font-size: 0.8em;
           left: 0;

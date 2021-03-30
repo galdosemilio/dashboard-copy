@@ -1,3 +1,4 @@
+import { sortBy } from 'lodash'
 import {
   AddAttendanceEntryRequest,
   AddAttendeeRequest,
@@ -39,6 +40,7 @@ import { ApiService } from '../../services/index'
 import { Entity } from '../common/entities'
 import { PagedResponse } from '../content/entities'
 import { AttendanceStatusAssociation, AttendanceStatusEntry } from './entities'
+import { generateMeetingTypeColor } from '@coachcare/common/shared'
 
 /**
  * Schedule Service. Fetching and setting schedules
@@ -157,7 +159,12 @@ class Schedule {
         method: 'GET',
         version: '2.0'
       })
-      .then((res) => res.meetingTypes)
+      .then((res) => {
+        return sortBy(res.meetingTypes, (t) => t.typeId).map((t, ix) => ({
+          ...t,
+          colors: generateMeetingTypeColor(ix)
+        }))
+      })
   }
 
   /**

@@ -419,7 +419,9 @@ export class ScheduleCalendarComponent
       this.schedule.fetchAllMeeting(meetingRequest)
     ])
       .then(([availableResponse, meetingResponse]) => {
-        const cleanResponse = meetingResponse.data.map((m) => new Meeting(m))
+        const cleanResponse = meetingResponse.data.map(
+          (m) => new Meeting(m, this.context.organization.meetingTypes)
+        )
         const meetings = new Array<Meeting>()
         cleanResponse.forEach((m) => {
           if (m.date.day() === m.endDate.day()) {

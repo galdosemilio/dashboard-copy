@@ -22,11 +22,21 @@
     <mat-error *ngIf="!meetingTypesOk">{{'NOTIFY.ERROR.MEETING_TYPES_NOT_CONFIGURED' | translate}}</mat-error>
 
     <ng-container *ngIf="meetingTypesOk">
-      <mat-form-field *ngIf="meetingTypes && meetingTypes.length">
-        <mat-select formControlName="meetingTypeId" [placeholder]="'RIGHT_PANEL.MEETING_TYPE' | translate">
-          <mat-option *ngFor="let type of meetingTypes" [value]="type">{{ type.description }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div fxLayout="row" fxLayoutGap="7px" *ngIf="meetingTypes && meetingTypes.length">
+        <mat-form-field >
+          <mat-select formControlName="meetingTypeId" [placeholder]="'RIGHT_PANEL.MEETING_TYPE' | translate">
+            <mat-select-trigger>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="7px">
+                <span>{{ selectedMeetingType ? selectedMeetingType.description : '' }}</span>
+                <span *ngIf="selectedMeetingType" class="meeting-type-color-bullet" [style.background]="selectedMeetingType.colors.default" ></span>
+              </div>
+            </mat-select-trigger>
+            <mat-option *ngFor="let type of meetingTypes" [value]="type" [style.border-left]="'10px solid ' + type.colors.default">{{ type.description }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div></div>
+      </div>
+
       <ng-container *ngIf="formSubmitted">
         <mat-error *ngIf="form.get('meetingTypeId').getError('required')">{{'NOTIFY.ERROR.MEETING_TYPE_EMPTY' | translate}}</mat-error>
       </ng-container>

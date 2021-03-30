@@ -105,6 +105,7 @@
 
         <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
         <mat-row fxLayoutWrap
+          [style.border-left]="'12px solid' + row.colors?.default"
           *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
           [ngClass]="{ 'row-even': even, 'row-odd': odd }"
         ></mat-row>

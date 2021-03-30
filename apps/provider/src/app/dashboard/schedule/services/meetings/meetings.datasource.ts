@@ -1,7 +1,8 @@
 import { CcrPaginator, TableDataSource } from '@app/shared'
 import {
   FetchAllMeetingRequest,
-  FetchAllMeetingResponse
+  FetchAllMeetingResponse,
+  FetchMeetingTypesResponse
 } from '@coachcare/npm-api'
 import { Observable } from 'rxjs'
 import { Meeting } from '../../models'
@@ -14,7 +15,8 @@ export class MeetingsDataSource extends TableDataSource<
 > {
   constructor(
     protected database: MeetingsDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginator,
+    private meetingTypes?: FetchMeetingTypesResponse[]
   ) {
     super()
 
@@ -44,6 +46,6 @@ export class MeetingsDataSource extends TableDataSource<
     this.total = result.pagination.next
       ? result.pagination.next + 1
       : this.criteria.offset + result.data.length
-    return result.data.map((element) => new Meeting(element))
+    return result.data.map((element) => new Meeting(element, this.meetingTypes))
   }
 }

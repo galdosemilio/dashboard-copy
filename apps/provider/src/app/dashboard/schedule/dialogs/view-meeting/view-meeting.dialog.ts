@@ -92,6 +92,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     | 'delete-recurring' = 'view'
   today: moment.Moment = moment().startOf('day')
   translations: any
+  selectedMeetingType: FetchMeetingTypesResponse
 
   constructor(
     private account: AccountProvider,
@@ -115,6 +116,12 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     this.initialize()
     this.initTranslations()
     this.setupAutocomplete()
+
+    this.form.controls.meetingTypeId.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((meetingType) => {
+        this.selectedMeetingType = meetingType
+      })
   }
 
   async onSubmit(recreate: boolean = this.editMode === 'recurring') {

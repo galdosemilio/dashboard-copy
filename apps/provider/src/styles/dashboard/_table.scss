@@ -118,9 +118,10 @@ mat-header-row {
     mat-row {
       flex-direction: row !important;
 
-      border: 1px solid transparent;
+      margin: 1px 0;
       height: auto;
       min-height: 40px;
+      border: 0px;
 
       @media #{$small-and-down} {
         padding: 13px;

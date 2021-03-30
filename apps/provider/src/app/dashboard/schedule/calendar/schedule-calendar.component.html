@@ -11,7 +11,6 @@
 
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap.xs="10px">
   <div fxFlex="0 1 auto" fxLayoutAlign="start" fxLayoutAlign.xs="center" class="calendar-options">
-    <span class="meeting">{{'BOARD.CONSULTATIONS' | translate}}</span>
     <span class="available">{{'BOARD.AVAILABLE' | translate}}</span>
     <span class="unavailable">{{'BOARD.UNAVAILABLE' | translate}}</span>
     <!-- <mat-icon [matTooltip]="'BOARD.SCHEDULE_TOOLTIP' | translate">help</mat-icon> -->
@@ -72,6 +71,10 @@ direction="forward">
           [class.meeting-unavailable]="cell.meeting.type?.id === '4'"
           [style.height.px]="calculateHeight(cell.meeting)"
           [style.top.%]="calculateTop(cell.meeting)"
+          [style.background]="cell.meeting?.colors?.light || 'transparent'"
+          [style.border-color]="cell.meeting?.colors?.light || 'transparent'"
+          [style.border-left-color]="cell.meeting?.colors?.default || 'transparent'"
+          [style.color]="cell.meeting?.colors?.contrast || 'black'"
           (click)="clickMeeting(cell.meeting)">
             <div class="meeting-content">
               <div class="meeting-time">{{ cell.meeting.timeToDisplay }}</div>

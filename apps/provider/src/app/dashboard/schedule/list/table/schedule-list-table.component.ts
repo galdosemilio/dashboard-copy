@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog, MatSort } from '@coachcare/material'
 import { ScheduleDataService } from '@app/layout/right-panel/services'
-import { EventsService, NotifierService } from '@app/service'
+import { ContextService, EventsService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared'
 import {
   AttendanceStatusEntry,
@@ -41,7 +41,8 @@ export class ScheduleListTableComponent implements OnDestroy, OnInit {
     private dataService: ScheduleDataService,
     private dialog: MatDialog,
     private notifier: NotifierService,
-    private schedule: Schedule
+    private schedule: Schedule,
+    private context: ContextService
   ) {}
 
   ngOnDestroy(): void {

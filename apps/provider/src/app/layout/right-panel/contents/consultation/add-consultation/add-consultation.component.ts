@@ -32,11 +32,13 @@ import {
 } from '@coachcare/npm-api'
 import { ConsultationFormArgs } from '../consultationFormArgs.interface'
 import { AssociationsDatabase } from '@app/dashboard'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export type AddConsultationAttendee = MeetingAttendee & {
   accountType?: string
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-add-consultation',
   templateUrl: './add-consultation.component.html',
@@ -75,6 +77,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   attendees: Array<AddConsultationAttendee> = []
   addedAttendees: Array<AddConsultationAttendee> = []
   removedAttendees: Array<string> = []
+  selectedMeetingType: FetchMeetingTypesResponse
 
   constructor(
     private builder: FormBuilder,
@@ -156,6 +159,12 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         validator: this.validateForm
       }
     )
+
+    this.form.controls.meetingTypeId.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((meetingType) => {
+        this.selectedMeetingType = meetingType
+      })
 
     this.listenChanges()
   }

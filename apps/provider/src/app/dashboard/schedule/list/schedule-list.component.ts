@@ -216,7 +216,11 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
   }
 
   private createSource(): void {
-    this.meetingsSource = new MeetingsDataSource(this.database, this.paginator)
+    this.meetingsSource = new MeetingsDataSource(
+      this.database,
+      this.paginator,
+      this.context.organization.meetingTypes
+    )
 
     this.meetingsSource.addOptional(this.filteredAccounts$, () => ({
       account:

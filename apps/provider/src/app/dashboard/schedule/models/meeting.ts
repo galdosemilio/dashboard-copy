@@ -1,5 +1,7 @@
 import * as moment from 'moment'
 import { _ } from '@app/shared/utils'
+import { FetchMeetingTypesResponse } from '@coachcare/npm-api'
+import { getDefaultMeetingTypeColor } from '@coachcare/common/shared'
 
 export class Meeting {
   access: 'restricted' | 'full'
@@ -22,10 +24,18 @@ export class Meeting {
   template?: any
   time: moment.Moment
   title: string
-  type: { id: string; description: string }
+  type: {
+    id: string
+    description: string
+  }
   status: string
+  colors?: {
+    default: string
+    light: string
+    contrast: string
+  }
 
-  constructor(args: any) {
+  constructor(args: any, meetingTypes?: FetchMeetingTypesResponse[]) {
     this.access = args.access ?? 'restricted'
     this.attendees =
       args.attendees && args.attendees.length
@@ -50,7 +60,14 @@ export class Meeting {
     this.template = args.recurring ? args.recurring.template : undefined
     this.time = this.date
     this.title = args.title ?? _('BOARD.MEETING_BUSY_TIME')
+
     this.type = args.type
+
     this.status = args.status
+
+    const defaultColors = getDefaultMeetingTypeColor()
+    this.colors =
+      meetingTypes?.find((i) => i.typeId === Number(this.type?.id))?.colors ||
+      defaultColors
   }
 }
