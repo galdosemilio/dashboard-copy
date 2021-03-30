@@ -24,7 +24,6 @@ export class CallRatingDialog implements OnDestroy, OnInit {
   public hoveredOption: string
   public isLoading: boolean
   public selectedOption: string
-  public preventClosing: boolean
   public remotePeerLogData?: any
 
   private userLogData: any = {}
@@ -45,7 +44,6 @@ export class CallRatingDialog implements OnDestroy, OnInit {
   public ngOnInit(): void {
     this.refreshCurrentUser()
     this.createForm()
-    this.startWindowTimeout()
 
     this.store
       .pipe(select(callSelector), take(1), untilDestroyed(this))
@@ -83,19 +81,6 @@ export class CallRatingDialog implements OnDestroy, OnInit {
     }
 
     switch (reason) {
-      case 'timeout':
-        await this.logging.log({
-          logLevel: 'info',
-          data: {
-            type: 'videoconferencing',
-            functionType: 'videoconferencing-feedback',
-            message: 'closed modal due to timeout',
-            ...this.userLogData,
-            ...this.remotePeerLogData
-          }
-        })
-        break
-
       case 'closeButton':
         await this.logging.log({
           logLevel: 'info',
@@ -191,19 +176,5 @@ export class CallRatingDialog implements OnDestroy, OnInit {
       unexpectedCallDrop: [''],
       other: ['']
     })
-
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((formValue) => {
-      this.preventClosing = true
-    })
-  }
-
-  private async startWindowTimeout(): Promise<void> {
-    await sleep(15000)
-
-    if (this.preventClosing) {
-      return
-    }
-
-    this.close('timeout')
   }
 }
