@@ -8,7 +8,10 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { MatDialog, MatSort } from '@coachcare/material'
-import { STORAGE_PATIENTS_PAGINATION } from '@app/config'
+import {
+  STORAGE_PAGE_SIZE_PATIENT_LISTING,
+  STORAGE_PATIENTS_PAGINATION
+} from '@app/config'
 import { resolveConfig } from '@app/config/section'
 import {
   ContextService,
@@ -59,6 +62,7 @@ export class DieterListingWithPhiComponent
   totalCount: number
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360019923251-Adding-a-Patient'
+  defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_PATIENT_LISTING
 
   constructor(
     private dialog: MatDialog,

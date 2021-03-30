@@ -28,7 +28,11 @@ import {
   RPM_SINGLE_TIME_CODES,
   RPMStateSummaryEntry
 } from '../models'
-import { STORAGE_RPM_BILLING_SORT } from '@app/config'
+import {
+  STORAGE_PAGE_SIZE_RPM_BILLING,
+  STORAGE_RPM_BILLING_SORT
+} from '@app/config'
+import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
 
 @UntilDestroy()
 @Component({
@@ -39,6 +43,8 @@ import { STORAGE_RPM_BILLING_SORT } from '@app/config'
 export class RPMBillingComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
   @ViewChild(MatSort, { static: true }) sort: MatSort
+  @ViewChild(CcrPageSizeSelectorComponent, { static: true })
+  pageSizeSelectorComp: CcrPageSizeSelectorComponent
 
   public columns: string[] = [
     'index',
@@ -60,6 +66,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   public totalCount: number
 
   private refresh$: Subject<void> = new Subject<void>()
+
+  defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_RPM_BILLING
 
   constructor(
     private context: ContextService,
@@ -127,6 +135,20 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           : selectedDate.endOf('day').toISOString()
       }
     })
+
+    this.pageSizeSelectorComp.onPageSizeChange
+      .pipe(untilDestroyed(this))
+      .subscribe((pageSize) => {
+        this.paginator.pageSize = pageSize ?? this.paginator.pageSize
+
+        if (this.paginator.pageIndex === 0) {
+          this.refresh$.next()
+          return
+        }
+
+        this.paginator.firstPage()
+      })
+
     this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
       this.totalCount = this.source.totalCount ?? 0
     })

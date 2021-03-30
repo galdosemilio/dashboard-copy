@@ -19,32 +19,41 @@ export class CcrPageSizeSelectorComponent implements AfterViewInit {
 
   @Input() disabled = false
 
+  @Input() defaultPageSize = 10
+
+  @Input() defaultPageSizeStorageKey
+
   @Output() onPageSizeChange: EventEmitter<number> = new EventEmitter<number>()
 
   public pageSizes: number[] = [10, 25, 50]
   public selectedPageSize?: number
 
   public ngAfterViewInit(): void {
-    const pageSize = window.localStorage.getItem(
-      STORAGE_PAGE_SIZE_PATIENT_LISTING
-    )
+    let pageSize = this.defaultPageSize
 
-    if (!pageSize) {
-      return
+    if (this.defaultPageSizeStorageKey) {
+      const pageSizeString = window.localStorage.getItem(
+        this.defaultPageSizeStorageKey
+      )
+
+      if (pageSizeString) {
+        pageSize = Number(pageSizeString)
+      }
     }
 
-    const pageSizeAsNumber = Number(pageSize)
-
-    this.select.nativeElement.value = pageSizeAsNumber
-    this.onSelect({ target: { value: pageSizeAsNumber } })
+    this.select.nativeElement.value = pageSize
+    this.onSelect({ target: { value: pageSize } })
   }
 
   public onSelect($event): void {
     this.selectedPageSize = Number($event.target.value ?? 10)
     this.onPageSizeChange.emit(this.selectedPageSize)
-    window.localStorage.setItem(
-      STORAGE_PAGE_SIZE_PATIENT_LISTING,
-      this.selectedPageSize.toString()
-    )
+
+    if (this.defaultPageSizeStorageKey) {
+      window.localStorage.setItem(
+        this.defaultPageSizeStorageKey,
+        this.selectedPageSize.toString()
+      )
+    }
   }
 }
