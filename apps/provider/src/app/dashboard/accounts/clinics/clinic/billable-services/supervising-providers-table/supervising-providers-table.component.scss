@@ -1,0 +1,29 @@
+@import 'variables';
+
+mat-icon.disabled {
+  color: mat-color($ccr-foreground, divider);
+  cursor: default !important;
+}
+
+table {
+  width: 100%;
+
+  tbody {
+    .empty-listing-row {
+      td {
+        color: var(--primary);
+        background-color: darken(mat-color($ccr-background, header), 5%);
+        line-height: 64px;
+        text-align: center;
+      }
+    }
+
+    td {
+      line-height: 36px;
+    }
+  }
+
+  td {
+    line-height: 32px;
+  }
+}

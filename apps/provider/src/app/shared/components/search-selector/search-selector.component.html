@@ -8,7 +8,7 @@
       [formControl]="queryCtrl"
       matInput
       type="text">
-      <button mat-button *ngIf="queryCtrl.value" matSuffix mat-icon-button (click)="clearQuery()">
+      <button mat-button *ngIf="showClearButton && queryCtrl.value" matSuffix mat-icon-button (click)="clearQuery()">
         <mat-icon>cancel</mat-icon>
       </button>
   </mat-form-field>

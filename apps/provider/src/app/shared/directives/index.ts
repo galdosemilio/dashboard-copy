@@ -4,6 +4,7 @@ export * from './ccr-draggable.directive'
 export * from './ccr-dropzone.directive'
 export * from './ccr-link-active.directive'
 export * from './detect-key.directive'
+export * from './input-mask'
 export * from './mutation-observer.directive'
 export * from './number-only.directive'
 export * from './table-sort'
@@ -17,12 +18,14 @@ import { CcrTableSortDirective } from './table-sort'
 import { DetectKeyDirective } from './detect-key.directive'
 import { MutationObserverDirective } from './mutation-observer.directive'
 import { NumberOnlyDirective } from './number-only.directive'
+import { CcrInputMaskDirective } from './input-mask'
 
 export const Directives = [
   BindFormDirective,
   CcrAvatarDirective,
   CcrDraggableDirective,
   CcrDropzoneDirective,
+  CcrInputMaskDirective,
   CcrLinkActiveDirective,
   CcrTableSortDirective,
   DetectKeyDirective,

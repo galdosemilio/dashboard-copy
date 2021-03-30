@@ -14,7 +14,8 @@
         "goalsSet": true
       },
       "trigger": "manual",
-      "createdAt": "2020-07-07 21:05:54.092+00"
+      "createdAt": "2020-07-07 21:05:54.092+00",
+      "supervisingProvider": { "id": "1" }
     }
   ],
   "pagination": {}

@@ -126,7 +126,8 @@
     span {
       text-transform: uppercase;
     }
-    [matdialogclose] {
+    [matdialogclose],
+    .matdialogclose {
       background: none;
       border: 0;
       cursor: pointer;

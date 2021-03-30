@@ -1,0 +1,61 @@
+<div>
+  <div *ngIf="entryIsActive">
+    <p class="notice entry" *ngIf="entryPending">
+        {{ entryPending === 'same-day' ? ('RPM.RPM_WILL_BE_ENABLED_AT_6_AM' | translate) : ('RPM.RPM_WILL_BE_ENABLED_TOMORROW' | translate) }}
+    </p>
+    <p class="notice entry" *ngIf="!entryPending">
+        {{ 'RPM.RPM_ENABLED' | translate:{
+            patient: client.firstName + ' ' + client.lastName,
+            date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY' }
+        }}
+    </p>
+    <div *ngIf="!canDisableRPM">
+        <p>{{ 'RPM.EDIT_NOT_ALLOWED_FOR_CLINIC' | translate:{org: rpmEntry.organization.name} }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="!entryIsActive">
+    <p class="notice entry">
+        {{ 'RPM.RPM_DISABLED' | translate:{
+            patient: client.firstName + ' ' + client.lastName,
+            date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY' }  }}
+    </p>
+    <div *ngIf="!accessibleOrganizations || !accessibleOrganizations.length">
+        <p>{{ 'RPM.EDIT_NOT_ALLOWED' | translate }}</p>
+        <ul>
+            <li *ngFor="let organization of inaccessibleOrganizations">{{ organization.organization.name }}</li>
+        </ul>
+    </div>
+  </div>
+
+  <div class="separator"></div>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+      <div>
+        <p *ngIf="entryIsActive" class="notice performed-by">{{ 'RPM.ENABLED_BY' | translate }}</p>
+        <p *ngIf="!entryIsActive" class="notice performed-by">{{ 'RPM.DISABLED_BY' | translate }}</p>
+        <div class="user-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <div>
+                <ccr-avatar size="bigger" [account]="rpmEntry.rpmState.createdBy.id"></ccr-avatar>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px">
+                <p>{{ rpmEntry.rpmState.createdBy.firstName | translate }} {{ rpmEntry.rpmState.createdBy.lastName }}</p>
+                <p>{{ rpmEntry.rpmState.createdBy.email }}</p>
+                <p>{{ rpmEntry.rpmState.createdBy.phone }}</p>
+            </div>
+        </div>
+      </div>
+
+      <div *ngIf="entryIsActive && rpmEntry.rpmState.supervisingProvider">
+        <p class="notice performed-by">{{ 'GLOBAL.SUPERVISING_PROVIDER' | translate }}</p>
+        <div class="user-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <div>
+                <ccr-avatar size="bigger" [account]="rpmEntry.rpmState.supervisingProvider.id"></ccr-avatar>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px">
+                <p>{{ rpmEntry.rpmState.supervisingProvider.firstName | translate }} {{ rpmEntry.rpmState.supervisingProvider.lastName }}</p>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

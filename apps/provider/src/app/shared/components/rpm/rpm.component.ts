@@ -36,6 +36,7 @@ export class RPMComponent implements AfterViewInit, OnInit {
 
   accessibleOrganizations: OrganizationAccess[] = []
   inaccessibleOrganizations: OrganizationAccess[] = []
+  mostRecentEdition: RPMStateEntry
   mostRecentEntry: RPMStateEntry
   isLoading = false
   rpmEntries: RPMStateEntry[] = []
@@ -74,7 +75,11 @@ export class RPMComponent implements AfterViewInit, OnInit {
       })
       .afterClosed()
       .subscribe((closingState) => {
-        if (closingState === 'new_entry' || closingState === 'remove_entry') {
+        if (
+          closingState === 'new_entry' ||
+          closingState === 'remove_entry' ||
+          closingState === true
+        ) {
           this.rpmStatusChange.emit()
           this.refresh()
         }

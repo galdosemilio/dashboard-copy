@@ -1,7 +1,7 @@
 import { SelectedOrganization } from '@app/service'
 import { RPMState as SelveraRPMState } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-
+import * as moment from 'moment'
 interface RPMEntryStatus {
   code: string
   displayName: string
@@ -43,13 +43,29 @@ export const RPMTriggerTypes: { [key: string]: RPMEntryTrigger } = {
   }
 }
 
+export type RPMStateEntryPendingStatus = 'same-day' | 'future'
+
 export class RPMStateEntry {
   isActive: boolean
+  pending: RPMStateEntryPendingStatus
   organization: SelectedOrganization
   rpmState: RPMState
 
   constructor(args: any, opts: any = {}) {
+    const now = moment()
     this.isActive = args.rpmState ? args.rpmState.isActive : false
+
+    if (args.rpmState) {
+      if (
+        moment(args.rpmState.startedAt).isSame(now, 'day') &&
+        moment(args.rpmState.startedAt).isAfter(now)
+      ) {
+        this.pending = 'same-day'
+      } else if (moment(args.rpmState.startedAt).isAfter(now)) {
+        this.pending = 'future'
+      }
+    }
+
     this.organization = args.rpmState
       ? args.rpmState.organization
       : args.organization || {}

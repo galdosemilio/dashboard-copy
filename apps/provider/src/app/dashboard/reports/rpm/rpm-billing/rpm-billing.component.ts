@@ -382,6 +382,21 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     }
   }
 
+  public async downloadSuperbill(): Promise<void> {
+    try {
+      const data = await this.source.fetchSuperbill()
+      const blob = new Blob([data])
+      const link = document.createElement('a')
+      const rawFileName = `${this.context.organization.name}__RPM_Superbill`
+      link.href = window.URL.createObjectURL(blob)
+      link.download = `${rawFileName.replace(/\W/gi, '')}.xlsx`
+      link.click()
+    } catch (error) {
+      console.error(error)
+      this.notify.error(error)
+    }
+  }
+
   public onStatusFilterChange($event: Event): void {
     if ($event.type === 'change') {
       this.paginator.firstPage()

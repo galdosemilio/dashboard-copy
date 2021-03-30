@@ -59,6 +59,7 @@ import { WalkthroughComponent } from './walkthrough'
 import { CcrImageOptionSelectorComponent } from './image-option-selector'
 import { CcrTableSortHeaderComponent } from './table-sort-header'
 import { CcrSearchSelectorComponent } from './search-selector'
+import { CcrTinInputComponent } from './tin-input'
 
 export {
   AlertIconComponent,
@@ -82,6 +83,7 @@ export {
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
   CcrTimeframeSelectorComponent,
+  CcrTinInputComponent,
   CcrCallControlComponent,
   CountrySelectorComponent,
   FormSearchComponent,
@@ -134,6 +136,7 @@ export const CmpComponents = [
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
   CcrTimeframeSelectorComponent,
+  CcrTinInputComponent,
   CountrySelectorComponent,
   FormSearchComponent,
   HeightFormFieldComponent,

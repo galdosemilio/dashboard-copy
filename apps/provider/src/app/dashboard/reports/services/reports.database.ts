@@ -92,9 +92,15 @@ export class ReportsDatabase extends CcrDatabase {
     return this.reports.fetchSimpleEnrollmentReport(request)
   }
 
-  fetchRPMBillingReport(
+  public fetchRPMBillingReport(
     args: FetchRPMBillingSummaryRequest
   ): Promise<PagedResponse<RPMStateSummaryItem>> {
     return this.reports.fetchRPMBillingSummary(args)
+  }
+
+  public fetchRPMSuperbillReport(
+    args: FetchRPMBillingSummaryRequest
+  ): Promise<Blob> {
+    return this.reports.fetchRPMSuperbill(args)
   }
 }

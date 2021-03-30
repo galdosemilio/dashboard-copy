@@ -43,6 +43,8 @@ export class CcrSearchSelectorComponent implements OnInit {
   }
 
   @Input() placeholder = ''
+  @Input() readonly = false
+  @Input() showClearButton = true
 
   @Output()
   optionSelected: EventEmitter<SelectOption<any> | null> = new EventEmitter<SelectOption<any> | null>()
@@ -53,7 +55,6 @@ export class CcrSearchSelectorComponent implements OnInit {
 
   public queryCtrl: FormControl
   public filteredOptions: SelectOptions<any> = []
-  public readonly = false
   public shownOptions: SelectOptions<any> = []
 
   private _options: SelectOptions<any> = []

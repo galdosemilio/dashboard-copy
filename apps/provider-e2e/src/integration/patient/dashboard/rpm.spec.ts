@@ -2,6 +2,7 @@ import { standardSetup } from './../../../support'
 import {
   attemptToDisableRpm,
   attemptToDownloadPatientReport,
+  attemptToEditRPM,
   attemptToEnableRpm,
   openRPMDialog,
   openRPMReportDialog
@@ -46,6 +47,8 @@ describe('Patient profile -> dashboard -> rpm', function () {
     cy.get('.ccr-dashboard', {
       timeout: 30000
     })
+
+    cy.wait(1000)
 
     openRPMDialog()
     attemptToEnableRpm()
@@ -339,5 +342,82 @@ describe('Patient profile -> dashboard -> rpm', function () {
     cy.tick(1000)
 
     cy.get('mat-dialog-container').should('not.exist')
+  })
+
+  it('Allows a provider to edit the RPM entry during the first 24 hours', function () {
+    standardSetup(undefined, [
+      {
+        url: '/1.0/rpm/state**',
+        fixture: '/api/rpm/rpmStateEnabledBefore24'
+      }
+    ])
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+    cy.get('.ccr-dashboard', { timeout: 12000 })
+
+    openRPMDialog()
+    attemptToEditRPM()
+
+    cy.wait('@rpmDiagnosisPutRequest').should((xhr) => {
+      expect(xhr.request.body.id).to.equal('1')
+      expect(xhr.request.body.primary).to.equal('edited primary diagnosis')
+      expect(xhr.request.body.secondary).to.equal('edited secondary diagnosis')
+    })
+  })
+
+  it('Allows the provider to edit the entry ONCE after 24 hours have passed', function () {
+    standardSetup(undefined, [
+      {
+        url: '/1.0/rpm/state**',
+        fixture: '/api/rpm/rpmStateEnabledEntries'
+      }
+    ])
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+    cy.get('.ccr-dashboard', { timeout: 12000 })
+
+    openRPMDialog()
+
+    attemptToEditRPM('some explanation')
+
+    cy.wait('@rpmDiagnosisPutRequest').should((xhr) => {
+      expect(xhr.request.body.id).to.equal('1')
+      expect(xhr.request.body.primary).to.equal('edited primary diagnosis')
+      expect(xhr.request.body.secondary).to.equal('edited secondary diagnosis')
+      expect(xhr.request.body.note).to.equal('some explanation')
+    })
+
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('Edit Diagnosis')
+      .parent()
+      .should('have.attr', 'disabled')
+  })
+
+  it('Prevents users from editing the RPM entry if more than 24 hours passed and there is already an edition to the field', function () {
+    standardSetup(undefined, [
+      {
+        url: '/1.0/rpm/state**',
+        fixture: '/api/rpm/rpmStateEnabledEntries'
+      },
+      {
+        url: '1.0/rpm/state/1/diagnosis/audit?**',
+        fixture: '/api/rpm/rpmDiagnosisAuditEntries'
+      }
+    ])
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+    cy.get('.ccr-dashboard', { timeout: 12000 })
+
+    openRPMDialog()
+
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('Edit Diagnosis')
+      .parent()
+      .should('have.attr', 'disabled')
   })
 })

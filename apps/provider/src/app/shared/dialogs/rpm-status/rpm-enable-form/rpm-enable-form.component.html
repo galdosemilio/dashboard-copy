@@ -1,0 +1,79 @@
+<mat-horizontal-stepper (selectionChange)="stepperChange($event)" linear #stepper>
+  <mat-step [stepControl]="form.get('setup')">
+    <div
+    [formGroup]="form.get('setup')"
+    class="agreement-form"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="15px">
+      <mat-form-field [hidden]="accessibleOrganizations.length < 2">
+        <mat-select formControlName="organization" [placeholder]="'RPM.CLINIC' | translate">
+            <mat-option *ngFor="let organization of accessibleOrganizations" [value]="organization.organization.id">
+            {{ organization.organization.name }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <ccr-search-selector
+      *ngIf="supervisingProviderOptions?.length"
+      [initialSelection]="supervisingProviderOptions[0]"
+      [placeholder]="'GLOBAL.SUPERVISING_PROVIDER' | translate"
+      [options]="supervisingProviderOptions"
+      (optionSelected)="onSupervisingProviderSelected($event)">
+      </ccr-search-selector>
+
+      <p
+      *ngIf="!supervisingProviderOptions?.length && selectedClinic"
+      [innerHTML]="'RPM.NO_SUPERVISING_PROVIDER_WARNING' | translate:{clinic: selectedClinic.organization}"
+      class="highlighted">
+      </p>
+
+      <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
+        <mat-label>{{ 'RPM.PRIMARY_DIAGNOSIS' | translate }}</mat-label>
+        <textarea formControlName="primaryDiagnosis" matInput></textarea>
+      </mat-form-field>
+
+      <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
+        <mat-label>{{ 'RPM.SECONDARY_DIAGNOSIS' | translate }}</mat-label>
+        <textarea formControlName="secondaryDiagnosis" matInput></textarea>
+      </mat-form-field>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="form.get('agreement')">
+    <div [formGroup]="form.get('agreement')" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px">
+        <p class="notice create">{{ 'RPM.RPM_CREATE_NOTICE' | translate }}</p>
+        <p>{{ 'RPM.RPM_CREATE_FORM_HEADER' | translate }}</p>
+        <mat-checkbox formControlName="patientConsented">
+            {{ 'RPM.PATIENT_CONSENT_PROMPT' | translate }}
+        </mat-checkbox>
+        <mat-checkbox formControlName="hasMedicalNecessity">
+            {{ 'RPM.MEDICAL_NECESSITY_PROMPT' | translate }}
+        </mat-checkbox>
+        <mat-checkbox formControlName="hadFaceToFace">
+            {{ 'RPM.FACE_TO_FACE_PROMPT' | translate }}
+        </mat-checkbox>
+        <mat-checkbox formControlName="goalsSet">
+            {{ 'RPM.GOALS_SET_PROMPT' | translate }}
+        </mat-checkbox>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="form.get('deviceSupplied')">
+    <div
+    [formGroup]="form"
+    class="device-prompt-container"
+    fxLayout="column"
+    fxLayoutAlign="stretch stretch"
+    fxLayoutGap="10px">
+      <p>{{ 'RPM.WHAT_DEVICE_PROMPT' | translate }}</p>
+
+      <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
+          <ccr-image-option-selector
+          [options]="rpmDevices"
+          formControlName="deviceSupplied">
+          </ccr-image-option-selector>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

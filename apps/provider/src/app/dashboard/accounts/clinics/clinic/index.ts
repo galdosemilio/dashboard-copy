@@ -1,3 +1,4 @@
+export * from './billable-services'
 export * from './clinic.component'
 export * from './form'
 export * from './info'

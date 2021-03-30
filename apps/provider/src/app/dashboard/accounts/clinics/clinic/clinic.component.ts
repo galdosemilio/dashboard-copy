@@ -1,12 +1,23 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService } from '@app/service'
 import { OrgSingleResponse } from '@coachcare/npm-api'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { ClinicBillableServicesComponent } from './billable-services'
 
-type ClinicComponentSection = 'info' | 'phases' | 'settings'
+type ClinicComponentSection =
+  | 'info'
+  | 'phases'
+  | 'settings'
+  | 'billable-services'
 
 @UntilDestroy()
 @Component({
@@ -16,6 +27,9 @@ type ClinicComponentSection = 'info' | 'phases' | 'settings'
   encapsulation: ViewEncapsulation.None
 })
 export class ClinicComponent implements OnDestroy, OnInit {
+  @ViewChild(ClinicBillableServicesComponent, { static: false })
+  clinicBillableServicesComp: ClinicBillableServicesComponent
+
   public clinic: OrgSingleResponse
   public section: ClinicComponentSection = 'info'
 
@@ -42,5 +56,11 @@ export class ClinicComponent implements OnDestroy, OnInit {
         const s = params.get('s') || 'info'
         this.section = s as ClinicComponentSection
       })
+  }
+
+  public isTinValid(): boolean {
+    return this.clinicBillableServicesComp
+      ? this.clinicBillableServicesComp.isTinValid()
+      : true
   }
 }

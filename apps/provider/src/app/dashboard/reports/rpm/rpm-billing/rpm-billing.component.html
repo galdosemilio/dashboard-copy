@@ -32,7 +32,15 @@
             [disabled]="!source.isLoaded || source.isEmpty"
             (click)="downloadCSV()"
             mat-button class="ccr-align-center">
-                {{ 'REPORTS.EXPORT_CSV' | translate }}
+                {{ 'REPORTS.EXPORT_REPORT' | translate }}
+                <mat-icon>file_download</mat-icon>
+            </button>
+
+            <button
+            [disabled]="!source.isLoaded || source.isEmpty"
+            (click)="downloadSuperbill()"
+            mat-button class="ccr-align-center">
+                {{ 'RPM.EXPORT_SUPERBILL' | translate }}
                 <mat-icon>file_download</mat-icon>
             </button>
 

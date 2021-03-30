@@ -1,0 +1,52 @@
+<div class="ccr-table ccr-expand-table ccr-table-stats">
+<div class="ccr-expandable-table">
+  <table>
+    <thead>
+      <tr>
+        <td>{{ 'LIBRARY.CONTENT.ID' | translate }}</td>
+        <td>{{ 'BOARD.FIRST_NAME' | translate }}</td>
+        <td>{{ 'BOARD.LAST_NAME' | translate }}</td>
+        <td>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            {{ 'BOARD.ACTIONS' | translate }}
+          </div>
+        </td>
+      </tr>
+    </thead>
+    <tbody *ngIf="rows?.length">
+      <tr
+      *ngFor="let row of rows; let i = index;"
+      class="level{{row.level}}"
+      [ngClass]="{
+        'row-even': i % 2 === 0,
+        'row-odd': i % 2 === 1,
+        'hidden': row.isHidden,
+        'row-expanded': row.isExpanded,
+        'row-nested': row.level > 0,
+        'row-bottom-border': row.level > 1,
+        'last-of-group': row.isLastOfGroup
+      }">
+        <td>{{ row.account.id }}</td>
+        <td>{{ row.account.firstName }}</td>
+        <td>{{ row.account.lastName }}</td>
+        <td>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon
+            [matTooltip]="source.isInherited ? ('BOARD.CLINIC_CANT_REMOVE_INHERITED_SUP_PROV' | translate) : ('BOARD.CLINIC_REMOVE_SUP_PROVIDER_TITLE' | translate)"
+            [class.disabled]="source.isInherited || !isAdmin"
+            (click)="showRemoveProviderDialog(row)"
+            class="clickable">
+              delete
+            </mat-icon>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="!rows || !rows.length">
+      <tr class="empty-listing-row">
+        <td colspan="4">{{ 'BOARD.CLINIC_NO_SUPERVISING_PROVIDERS' | translate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

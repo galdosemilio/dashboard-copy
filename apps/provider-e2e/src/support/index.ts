@@ -13,7 +13,6 @@ const standardSetup = (
   enableGuides: boolean = false
 ): void => {
   cy.log('Init standard setup')
-  cy.server()
 
   setSystemDate(startDate ? startDate : null)
   seti18n()

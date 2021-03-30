@@ -84,6 +84,8 @@ describe('Reports -> RPM -> RPM Billing', function () {
       .should('contain', '20m')
       .should('contain', '1')
 
+    cy.tick(1000)
+
     cy.get('ccr-paginator')
       .find('button[aria-label="Previous page"][disabled="true"]')
       .should('have.length', 1)
@@ -146,7 +148,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.get('app-reports-rpm-billing')
       .find('button')
-      .contains('Export CSV')
+      .contains('Export Report')
       .click({ force: true })
 
     cy.get('snack-bar-container').should('not.exist')
@@ -168,7 +170,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.get('app-reports-rpm-billing')
       .find('button')
-      .contains('Export CSV')
+      .contains('Export Report')
       .click({ force: true })
 
     cy.get('snack-bar-container').should('not.exist')
@@ -190,7 +192,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.get('app-reports-rpm-billing')
       .find('button')
-      .contains('Export CSV')
+      .contains('Export Report')
       .click({ force: true })
 
     cy.get('snack-bar-container').should('not.exist')

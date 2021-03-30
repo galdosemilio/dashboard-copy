@@ -10,6 +10,7 @@ export interface GetListRequest {
   limit?: number | 'all'
   offset: number
   organization: string
+  reason?: string
   strict?: boolean
   status?: RPMStatus
 }

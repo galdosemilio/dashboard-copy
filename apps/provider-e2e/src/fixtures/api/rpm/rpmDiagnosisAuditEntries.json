@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "state": { "id": "182" },
+      "primary": {
+        "current": "This is a primary diagnosis edition",
+        "previous": "This is a primary diagnosis edition"
+      },
+      "secondary": {
+        "current": "This is a secondary diagnosis edition",
+        "previous": "This is a secondary diagnosis edition"
+      },
+      "account": {
+        "id": "7304",
+        "firstName": "Time Tracker",
+        "lastName": "Coach"
+      },
+      "createdAt": "2021-03-15 08:36:25.55124+00",
+      "note": "Another explanation. This should fail."
+    }
+  ],
+  "pagination": {}
+}

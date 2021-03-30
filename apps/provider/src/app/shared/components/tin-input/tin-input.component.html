@@ -1,0 +1,19 @@
+<mat-form-field [formGroup]="form" class="example-form-field" floatLabel="always" fxFlex>
+  <mat-label>{{ 'GLOBAL.TIN' | translate }}</mat-label>
+  <input
+  [ccrInputMask]="maskFormat"
+  [placeholder]="maskFormat"
+  [readonly]="readonly || isInherited"
+  [wholeNumber]="true"
+  formControlName="tin"
+  numberOnly
+  matInput
+  type="text">
+  <button *ngIf="!isClearable && !readonly" mat-button matSuffix mat-icon-button>
+    <mat-icon>mode_edit</mat-icon>
+  </button>
+  <button *ngIf="isClearable && !readonly" (click)="clearTin()" mat-button matSuffix mat-icon-button>
+    <mat-icon>delete</mat-icon>
+  </button>
+  <mat-error *ngIf="form.invalid">{{ 'BOARD.TIN_INVALID' | translate }}</mat-error>
+</mat-form-field>

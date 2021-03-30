@@ -1,8 +1,15 @@
 import { ApiService } from '../../services'
 import { Entity } from '../common/entities'
 import { PagedResponse } from '../content/entities'
-import { RPMReason, RPMPreferenceSingle, RPMState } from './entities'
 import {
+  RPMReason,
+  RPMPreferenceSingle,
+  RPMState,
+  RPMDiagnosisAuditEntry,
+  SupervisingProviderAssociationItem
+} from './entities'
+import {
+  AddSupervisingProviderRequest,
   CreateRPMPreferenceRequest,
   CreateRPMStateRequest,
   GetAuditListRequest,
@@ -10,7 +17,9 @@ import {
   GetPatientRPMReportRequest,
   GetRPMReasonsRequest,
   GetRPMPreferenceByOrgRequest,
-  UpdateRPMPreferenceRequest
+  GetSupervisingProvidersRequest,
+  UpdateRPMPreferenceRequest,
+  UpsertRPMDiagnosisRequest
 } from './requests'
 import { GetPatientRPMReportResponse } from './responses'
 
@@ -19,6 +28,53 @@ import { GetPatientRPMReportResponse } from './responses'
  */
 export class RPM {
   public constructor(private readonly apiService: ApiService) {}
+
+  /**
+   * Adds a supervising provider with a given account ID to the supervising provider list for an organization.
+   * @param request must implement AddSupervisingProviderRequest
+   * @returns Promise<void>
+   */
+  public addSupervisingProvider(
+    request: AddSupervisingProviderRequest
+  ): Promise<Entity> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/rpm/supervising-provider`,
+      method: 'POST',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Retrieves a supervising provider listing for a given organization.
+   * The most applicable listing is retrieved based on the organization hierarchy traversal.
+   * @param request must implement GetSupervisingProvidersRequest
+   * @returns Promise<PagedResponse<SupervisingProviderAssociationItem>>
+   */
+  public getSupervisingProviders(
+    request: GetSupervisingProvidersRequest
+  ): Promise<PagedResponse<SupervisingProviderAssociationItem>> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/rpm/supervising-provider`,
+      method: 'GET',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Removes a supervising provider with a given association ID from the supervising provider list for an organization.
+   * @param request must implement Entity
+   * @returns Promise<void>
+   */
+  public removeSupervisingProvider(request: Entity): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/rpm/supervising-provider/${request.id}`,
+      method: 'DELETE',
+      version: '1.0'
+    })
+  }
 
   /**
    * Create RPM state entry
@@ -30,7 +86,7 @@ export class RPM {
       data: request,
       endpoint: '/rpm/state',
       method: 'POST',
-      version: '3.0'
+      version: '4.0'
     })
   }
 
@@ -97,6 +153,22 @@ export class RPM {
   }
 
   /**
+   * Retrieve a listing of diagnosis audit log entries
+   * @param request must implement Entity
+   * @returns Promise<PagedResponse<RPMDiagnosisAuditEntry>>
+   */
+  public getDiagnosisAuditList(
+    request: Entity
+  ): Promise<PagedResponse<RPMDiagnosisAuditEntry>> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/rpm/state/${request.id}/diagnosis/audit`,
+      method: 'GET',
+      version: '1.0'
+    })
+  }
+
+  /**
    * Get RPM state entry listing
    * @param request must implement GetListRequest
    * @returns PagedResponse<RPMState>
@@ -106,7 +178,7 @@ export class RPM {
       data: request,
       endpoint: '/rpm/state',
       method: 'GET',
-      version: '3.0'
+      version: '4.0'
     })
   }
 
@@ -209,6 +281,23 @@ export class RPM {
       data: request,
       endpoint: `/rpm/preference/organization/${request.id}`,
       method: 'PATCH',
+      version: '1.0'
+    })
+  }
+
+  /**
+   * Creates or updates the diagnosis for RPM subscription.
+   * Diagnosis can only be edited once, with audit note, after the grace period is up.
+   * During the grace period, the diagnosis can be updated in-place without limits.
+   * This call replaces both primary & secondary diagnosis in one go.
+   * @param request must implement UpsertRPMDiagnosisRequest
+   * @returns Promise<void>
+   */
+  public upsertRPMDiagnosis(request: UpsertRPMDiagnosisRequest): Promise<void> {
+    return this.apiService.request({
+      data: request,
+      endpoint: `/rpm/state/${request.id}/diagnosis`,
+      method: 'PUT',
       version: '1.0'
     })
   }

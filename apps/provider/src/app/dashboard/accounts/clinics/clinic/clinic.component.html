@@ -28,6 +28,15 @@
         </a>
 
         <a
+        [class.active]="section === 'billable-services'"
+        [routerLink]="['.', { s: 'billable-services' }]"
+        ccrLinkActive="active"
+        fxFlex
+        fxLayoutAlign="center center">
+        {{ 'BOARD.CLINIC_BILLABLE_SERVICES' | translate }}
+        </a>
+
+        <a
         [class.active]="section === 'phases'"
         [routerLink]="['.', { s: 'phases' }]"
         ccrLinkActive="active"
@@ -49,6 +58,10 @@
     <div class="ccr-subcomponent" [ngSwitch]="section">
         <div *ngSwitchCase="'info'">
             <app-clinic-info [clinic]="clinic"></app-clinic-info>
+        </div>
+
+        <div *ngSwitchCase="'billable-services'">
+            <app-clinic-billable-services></app-clinic-billable-services>
         </div>
 
         <div *ngSwitchCase="'phases'">

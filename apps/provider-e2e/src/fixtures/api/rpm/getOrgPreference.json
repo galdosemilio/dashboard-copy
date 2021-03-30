@@ -1,7 +1,8 @@
 {
-    "id": "1",
-    "organization": {
-        "id": "1"
-    },
-    "isActive": true
+  "id": "1",
+  "organization": {
+    "id": "1"
+  },
+  "taxIdentificationNumber": "123456789",
+  "isActive": true
 }

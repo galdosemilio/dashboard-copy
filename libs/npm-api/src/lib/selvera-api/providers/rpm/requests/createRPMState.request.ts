@@ -1,4 +1,4 @@
-import { RPMStateConditions } from '../entities'
+import { RPMDiagnosis, RPMStateConditions } from '../entities'
 
 /**
  * Interface for POST /rpm/state
@@ -12,7 +12,9 @@ interface StateRequest {
 type ActiveStateCreationRequest = StateRequest & {
   isActive: true
   conditions: RPMStateConditions
+  diagnosis: RPMDiagnosis
   plan?: string
+  supervisingProvider: string
   targetDeactivationDate?: string
 }
 

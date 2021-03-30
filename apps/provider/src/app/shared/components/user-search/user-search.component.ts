@@ -42,6 +42,8 @@ export class UserSearchComponent implements OnInit {
 
   @Output()
   select: Subject<any> = new Subject<any>()
+  @Output()
+  onSelect: Subject<any> = new Subject<any>()
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
   trigger: MatAutocompleteTrigger
@@ -75,6 +77,7 @@ export class UserSearchComponent implements OnInit {
   onSelectAccount(account): void {
     if (account && account.id) {
       this.select.next(account)
+      this.onSelect.next(account)
     }
   }
 

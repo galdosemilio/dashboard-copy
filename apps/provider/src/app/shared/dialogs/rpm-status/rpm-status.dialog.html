@@ -5,7 +5,7 @@
         <mat-icon class="rpm-help-icon" (click)="showAboutPage()">help_outline</mat-icon>
         </span>
     </div>
-    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+    <button class="matdialogclose" [matDialogClose]="updatedEntry"><mat-icon>cancel</mat-icon></button>
 </div>
 
 
@@ -13,98 +13,46 @@
 
 <mat-dialog-content>
     <div [ngSwitch]="status">
-    <div *ngSwitchCase="'no_entry'">
-        <p class="notice no-entry">
-            {{ 'RPM.NO_ENTRY' | translate:{patient: client.firstName + ' ' + client.lastName } }}
-        </p>
-        <div *ngIf="!accessibleOrganizations || !accessibleOrganizations.length">
-            <p>{{ 'RPM.EDIT_NOT_ALLOWED' | translate }}</p>
-            <ul>
-                <li *ngFor="let organization of inaccessibleOrganizations">{{ organization.organization.name }}</li>
-            </ul>
-        </div>
+    <div *ngSwitchCase="'has_entry'" [formGroup]="form">
+        <app-dialog-rpm-entry-card
+            [accessibleOrganizations]="accessibleOrganizations"
+            [canDisableRPM]="canDisableRPM"
+            [client]="client"
+            [entryIsActive]="entryIsActive"
+            [entryPending]="entryPending"
+            [inaccessibleOrganizations]="inaccessibleOrganizations"
+            [rpmEntry]="rpmEntry">
+        </app-dialog-rpm-entry-card>
+
+        <br>
+
+        <app-dialog-rpm-edit-form
+            *ngIf="entryIsActive"
+            [entryAge]="entryAge"
+            [rpmEntry]="rpmEntry"
+            formControlName="editEntry">
+        </app-dialog-rpm-edit-form>
+    </div>
+
+    <div *ngSwitchCase="'edit_entry'" [formGroup]="form">
+        <app-dialog-rpm-edit-form
+            [entryAge]="entryAge"
+            [mode]="'edit'"
+            [rpmEntry]="rpmEntry"
+            [showModeToggle]="false"
+            formControlName="editEntry">
+        </app-dialog-rpm-edit-form>
     </div>
 
 
-    <div *ngSwitchCase="'has_entry'">
-        <div *ngIf="entryIsActive">
-        <p class="notice entry">
-            {{ 'RPM.RPM_ENABLED' | translate:{
-                patient: client.firstName + ' ' + client.lastName,
-                date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY' }
-            }}
-        </p>
-        <div *ngIf="!canDisableRPM">
-            <p>{{ 'RPM.EDIT_NOT_ALLOWED_FOR_CLINIC' | translate:{org: rpmEntry.organization.name} }}</p>
-        </div>
-        </div>
-        <div *ngIf="!entryIsActive">
-        <p class="notice entry">
-            {{ 'RPM.RPM_DISABLED' | translate:{
-                patient: client.firstName + ' ' + client.lastName,
-                date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY' }  }}
-        </p>
-        <div *ngIf="!accessibleOrganizations || !accessibleOrganizations.length">
-            <p>{{ 'RPM.EDIT_NOT_ALLOWED' | translate }}</p>
-            <ul>
-                <li *ngFor="let organization of inaccessibleOrganizations">{{ organization.organization.name }}</li>
-            </ul>
-        </div>
-        </div>
-
-        <div class="separator"></div>
-
-        <p class="notice performed-by">{{ 'RPM.PERFORMED_BY' | translate }}</p>
-        <div class="user-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <div>
-                <ccr-avatar size="bigger" [account]="rpmEntry.rpmState.createdBy.id"></ccr-avatar>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px">
-                <p>{{ rpmEntry.rpmState.createdBy.firstName | translate }} {{ rpmEntry.rpmState.createdBy.lastName }}</p>
-                <p>{{ rpmEntry.rpmState.createdBy.email }}</p>
-                <p>{{ rpmEntry.rpmState.createdBy.phone }}</p>
-            </div>
-        </div>
+    <div *ngSwitchCase="'new_entry'" [formGroup]="form">
+        <app-dialog-rpm-enable-form
+            formControlName="enableForm"
+            [accessibleOrganizations]="accessibleOrganizations"
+            [nextStep$]="nextStep$"
+            (enableFormStep)="onEnableFormStepChange($event)">
+        </app-dialog-rpm-enable-form>
     </div>
-
-
-    <div *ngSwitchCase="'new_entry'">
-    <div [formGroup]="form" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px">
-        <mat-form-field [hidden]="accessibleOrganizations.length < 2">
-        <mat-select formControlName="organization" [placeholder]="'RPM.CLINIC' | translate">
-            <mat-option *ngFor="let organization of accessibleOrganizations" [value]="organization.organization.id">
-            {{ organization.organization.name }}
-            </mat-option>
-        </mat-select>
-        </mat-form-field>
-        <p class="notice create">{{ 'RPM.RPM_CREATE_NOTICE' | translate }}</p>
-        <p>{{ 'RPM.RPM_CREATE_FORM_HEADER' | translate }}</p>
-        <mat-checkbox formControlName="patientConsented">
-            {{ 'RPM.PATIENT_CONSENT_PROMPT' | translate }}
-        </mat-checkbox>
-        <mat-checkbox formControlName="hasMedicalNecessity">
-            {{ 'RPM.MEDICAL_NECESSITY_PROMPT' | translate }}
-        </mat-checkbox>
-        <mat-checkbox formControlName="hadFaceToFace">
-            {{ 'RPM.FACE_TO_FACE_PROMPT' | translate }}
-        </mat-checkbox>
-        <mat-checkbox formControlName="goalsSet">
-            {{ 'RPM.GOALS_SET_PROMPT' | translate }}
-        </mat-checkbox>
-
-        <div class="device-prompt-container" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
-            <p>{{ 'RPM.WHAT_DEVICE_PROMPT' | translate }}</p>
-
-            <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
-                <ccr-image-option-selector
-                [options]="rpmDevices"
-                formControlName="deviceSupplied">
-                </ccr-image-option-selector>
-            </div>
-        </div>
-    </div>
-    </div>
-
 
     <div *ngSwitchCase="'remove_entry'" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="30px">
         <p class="notice remove-entry" [innerHTML]="'RPM.DEACTIVATE_PROMPT_CONTENT' | translate"></p>
@@ -147,23 +95,74 @@
             mat-button>{{ 'GLOBAL.NO' | translate }}</button>
         </div>
 
+        <div *ngSwitchCase="'edit_entry'">
+            <button
+            [disabled]="form.get('editEntry').invalid"
+            (click)="updateRPMEntry()"
+            class="ccr-button"
+            color="primary"
+            mat-button>{{ 'LIBRARY.CONTENT.SAVE_CHANGES' | translate }}</button>
+
+            <button
+            (click)="cancelEdition()"
+            class="ccr-button"
+            mat-button>{{ 'GLOBAL.BACK' | translate }}</button>
+        </div>
+
+        <div *ngSwitchCase="'new_entry'" fxLayoutAlign="center center">
+            <button
+            *ngIf="currentStepperStep < 2"
+            [disabled]="form.get('enableForm').invalid"
+            (click)="nextStep$.next()"
+            class="ccr-button"
+            color="primary"
+            mat-button>{{ 'GLOBAL.NEXT' | translate }}</button>
+
+            <button
+            *ngIf="currentStepperStep === 2"
+            (click)="enableRPM()"
+            [disabled]="form.get('enableForm').invalid"
+            class="ccr-button"
+            color="primary"
+            mat-button>{{ 'RPM.ENABLE_RPM' | translate }}</button>
+
+            <button
+            class="ccr-button"
+            mat-button
+            matDialogClose>
+                {{ 'GLOBAL.CLOSE' | translate }}
+            </button>
+        </div>
+
         <div *ngSwitchCase="'about'">
             <button
             (click)="status = statusCache"
             class="ccr-button"
             mat-button>
-                {{ 'GLOBAL.RETURN' | translate }}
+                {{ 'GLOBAL.BACK' | translate }}
             </button>
+        </div>
+
+        <div *ngSwitchCase="'new_entry'" fxLayoutAlign="start center">
+            <span class="mt-20 mb-10" *ngIf="currentStepperStep === 2">{{ 'RPM.RPM_WILL_BE_ENABLED_TOMORROW' | translate }}</span>
         </div>
 
         <div *ngSwitchDefault>
             <button
             *ngIf="!entryIsActive"
-            (click)="status === 'new_entry' ? enableRPM() : status = 'new_entry'"
+            (click)="statusCache = status; status === 'new_entry' ? enableRPM() : status = 'new_entry'"
             [disabled]="(!accessibleOrganizations || !accessibleOrganizations.length) || (status === 'new_entry' && form.invalid)"
             class="ccr-button"
             color="primary"
             mat-button>{{ 'RPM.ENABLE_RPM' | translate }}</button>
+
+            <button
+            *ngIf="entryIsActive"
+            (click)="status = 'edit_entry'"
+            [disabled]="entryAge === 'after24Edited' || !accessibleOrganizations.length || !accessibleOrganizations.length"
+            class="ccr-button"
+            color="primary"
+            mat-button>{{ 'RPM.EDIT_DIAGNOSIS' | translate }}</button>
 
             <button
             *ngIf="entryIsActive"
@@ -173,7 +172,7 @@
             color="primary"
             mat-button>{{ 'RPM.DISABLE_RPM' | translate }}</button>
 
-            <button class="ccr-button" mat-button matDialogClose>
+            <button class="ccr-button" mat-button [matDialogClose]="updatedEntry">
                 {{ 'GLOBAL.CLOSE' | translate }}
             </button>
         </div>

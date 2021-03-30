@@ -1,0 +1,42 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <h4
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px">
+    <span>{{ 'GLOBAL.DIAGNOSIS' | translate }}</span>
+  </h4>
+
+  <div
+  [formGroup]="form"
+  class="agreement-form"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="15px">
+    <mat-form-field class="example-full-width">
+      <mat-label>{{ 'RPM.PRIMARY_DIAGNOSIS' | translate }}</mat-label>
+      <textarea [readonly]="mode === 'readonly'" formControlName="primaryDiagnosis" matInput></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>{{ 'RPM.SECONDARY_DIAGNOSIS' | translate }}</mat-label>
+      <textarea [readonly]="mode === 'readonly'" formControlName="secondaryDiagnosis" matInput></textarea>
+    </mat-form-field>
+
+    <mat-form-field
+    [hidden]="(mode === 'readonly' && !form.get('note').value) || entryAge === 'before24'"
+    class="example-full-width">
+      <mat-label>{{ 'RPM.EXPLANATION' | translate }}</mat-label>
+      <textarea [readonly]="mode === 'readonly'" formControlName="note" matInput></textarea>
+    </mat-form-field>
+
+    <small *ngIf="entryAge === 'after24Edited'" class="highlighted">
+      {{ 'RPM.CANT_EDIT_ENTRY' | translate }}
+    </small>
+
+    <small
+    *ngIf="entryAge === 'after24' && mode === 'edit'"
+    class="highlighted">
+      {{ 'RPM.24H_AGE_NOTICE' | translate }}
+    </small>
+  </div>
+</div>

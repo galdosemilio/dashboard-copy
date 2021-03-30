@@ -1,0 +1,17 @@
+@import 'variables';
+
+app-clinic-billable-services {
+  mat-icon.disabled {
+    color: mat-color($ccr-foreground, divider);
+    cursor: default !important;
+  }
+
+  .ccr-grid .mat-grid-tile .mat-figure {
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  .tin-notice {
+    margin-top: -15px;
+  }
+}

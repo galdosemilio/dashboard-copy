@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router'
 import { ClinicComponent } from './clinic/clinic.component'
 import { ClinicsComponent } from './clinics.component'
-import { ClinicResolver } from './services'
+import { ClinicResolver, TinInputGuard } from './services'
 
 export const ClinicsRoutes: Routes = [
   {
@@ -12,6 +12,7 @@ export const ClinicsRoutes: Routes = [
   {
     path: ':id',
     component: ClinicComponent,
-    resolve: { clinic: ClinicResolver }
+    resolve: { clinic: ClinicResolver },
+    canDeactivate: [TinInputGuard]
   }
 ]

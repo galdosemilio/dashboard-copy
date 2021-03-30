@@ -11,7 +11,10 @@ export function openRPMReportDialog() {
 }
 
 export function attemptToDisableRpm(reason?: string, note?: string) {
-  cy.get('button').contains('Disable RPM').click({ force: true })
+  cy.get('mat-dialog-container')
+    .find('button')
+    .contains('Disable RPM')
+    .click({ force: true })
   cy.tick(1000)
 
   if (reason) {
@@ -46,14 +49,72 @@ export function attemptToDownloadPatientReport(type: 'PDF' | 'Excel') {
   cy.tick(1000)
 }
 
+export function attemptToEditRPM(explanation?: string) {
+  cy.get('mat-dialog-container')
+    .find('button')
+    .contains('Edit Diagnosis')
+    .click({ force: true })
+
+  cy.tick(1000)
+
+  cy.get('mat-dialog-container')
+    .find('textarea')
+    .eq(0)
+    .clear()
+    .type('edited primary diagnosis')
+
+  cy.tick(1000)
+
+  cy.get('mat-dialog-container')
+    .find('textarea')
+    .eq(1)
+    .clear()
+    .type('edited secondary diagnosis')
+
+  if (explanation) {
+    cy.get('mat-dialog-container')
+      .find('textarea')
+      .eq(2)
+      .clear()
+      .type(explanation)
+  }
+
+  cy.tick(1000)
+
+  cy.get('mat-dialog-container')
+    .find('button')
+    .contains('Save Changes')
+    .click({ force: true })
+
+  cy.tick(1000)
+}
+
 export function attemptToEnableRpm() {
-  cy.get('button').contains('Enable RPM').click({ force: true })
+  cy.get('mat-dialog-container')
+    .find('textarea')
+    .should('be.enabled')
+    .eq(0)
+    .type('test primary diagnosis')
+
+  cy.tick(1000)
+
+  cy.get('mat-dialog-container')
+    .find('button')
+    .contains('Next')
+    .click({ force: true })
 
   cy.tick(1000)
 
   cy.get('mat-dialog-container')
     .find('.mat-checkbox-inner-container')
     .click({ force: true, multiple: true })
+
+  cy.tick(1000)
+
+  cy.get('mat-dialog-container')
+    .find('button')
+    .contains('Next')
+    .click({ force: true })
 
   cy.tick(1000)
 

@@ -376,6 +376,22 @@ class Reports {
       version: '3.0'
     })
   }
+
+  public fetchRPMSuperbill(
+    request: FetchRPMBillingSummaryRequest
+  ): Promise<Blob> {
+    return this.apiService.request({
+      endpoint: '/warehouse/rpm/state/billing-summary',
+      headers: {
+        Accept:
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      },
+      method: 'GET',
+      data: request,
+      responseType: 'blob',
+      version: '3.0'
+    })
+  }
 }
 
 export { Reports }

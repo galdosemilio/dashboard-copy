@@ -2,7 +2,10 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
-import { RPMStateEntry } from '@app/shared/components/rpm/models'
+import {
+  RPMStateEntry,
+  RPMStateEntryPendingStatus
+} from '@app/shared/components/rpm/models'
 import {
   AccountAccessData,
   OrganizationAccess,
@@ -10,9 +13,12 @@ import {
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { RPM } from '@coachcare/npm-api'
-import { resolveConfig } from '@app/config/section'
-import { RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
-import { ImageOptionSelectorItem } from '@app/shared/components/image-option-selector'
+import * as moment from 'moment'
+import { Subject } from 'rxjs'
+import {
+  RPMEditFormComponentEditMode,
+  RPMEntryAgeStatus
+} from './rpm-edit-form'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export interface RPMStatusDialogData {
@@ -21,7 +27,7 @@ export interface RPMStatusDialogData {
   mostRecentEntry: RPMStateEntry
 }
 
-type DialogStatus = 'no_entry' | 'has_entry' | 'new_entry' | 'about'
+type DialogStatus = 'has_entry' | 'new_entry' | 'about'
 
 @UntilDestroy()
 @Component({
@@ -32,21 +38,27 @@ type DialogStatus = 'no_entry' | 'has_entry' | 'new_entry' | 'about'
   encapsulation: ViewEncapsulation.None
 })
 export class RPMStatusDialog implements OnInit {
-  accessibleOrganizations: OrganizationAccess[] = []
-  allowNoDeviceOption = false
-  canDisableRPM = false
-  client: AccountAccessData
-  deactivationReasons: RPMReason[] = []
-  deactivateRpmForm: FormGroup
-  entryIsActive = false
-  form: FormGroup
-  inaccessibleOrganizations: OrganizationAccess[] = []
-  rpmDevices: ImageOptionSelectorItem[] = []
-  rpmEntry: RPMStateEntry
-  status: DialogStatus = 'no_entry'
-  statusCache: DialogStatus
-  requiresDeactivationNote = false
+  public accessibleOrganizations: OrganizationAccess[] = []
+  public canDisableRPM = false
+  public client: AccountAccessData
+  public currentStepperStep = 0
+  public deactivateRpmForm: FormGroup
+  public editFormEditMode: RPMEditFormComponentEditMode
+  public enableFormStepIndex: number
+  public enableFormValidity: boolean
+  public entryAge: RPMEntryAgeStatus
+  public entryIsActive = false
+  public entryPending: RPMStateEntryPendingStatus
+  public form: FormGroup
+  public inaccessibleOrganizations: OrganizationAccess[] = []
+  public nextStep$: Subject<void> = new Subject<void>()
+  public rpmEntry: RPMStateEntry
+  public status: DialogStatus
+  public statusCache: DialogStatus
+  public updatedEntry: boolean
 
+  deactivationReasons: RPMReason[] = []
+  requiresDeactivationNote = false
   constructor(
     private context: ContextService,
     @Inject(MAT_DIALOG_DATA) public data: RPMStatusDialogData,
@@ -56,23 +68,41 @@ export class RPMStatusDialog implements OnInit {
     private rpm: RPM
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.createForms()
     this.resolveDialogData()
     this.fetchDeactivationReasons()
+    this.calculateEntryAge()
   }
 
-  async enableRPM() {
+  public cancelEdition(): void {
+    this.status = 'has_entry'
+
+    this.form.get('editEntry').patchValue({
+      primaryDiagnosis: this.rpmEntry.rpmState.diagnosis.primary,
+      secondaryDiagnosis: this.rpmEntry.rpmState.diagnosis.secondary,
+      note: this.rpmEntry.rpmState.note
+    })
+  }
+
+  public async enableRPM(): Promise<void> {
     if (!this.accessibleOrganizations || !this.accessibleOrganizations.length) {
       return
     }
 
-    const formValue = this.form.value
+    const formValue = this.form.value.enableForm
 
     try {
       await this.rpm.create({
+        diagnosis: {
+          primary: formValue.setup.primaryDiagnosis,
+          secondary: formValue.setup.secondaryDiagnosis
+            ? formValue.setup.secondaryDiagnosis
+            : undefined
+        },
+        supervisingProvider: formValue.setup.supervisingProvider,
         account: this.context.accountId,
-        organization: this.form.value.organization,
+        organization: formValue.setup.organization,
         plan:
           formValue.deviceSupplied !== '-1' ? formValue.deviceSupplied : null,
         isActive: true,
@@ -92,7 +122,7 @@ export class RPMStatusDialog implements OnInit {
     }
   }
 
-  async disableRPM() {
+  public async disableRPM(): Promise<void> {
     try {
       const deactivateFormValue = this.deactivateRpmForm.value
 
@@ -113,21 +143,82 @@ export class RPMStatusDialog implements OnInit {
     }
   }
 
-  showAboutPage() {
+  public onEnableFormStepChange(index: number): void {
+    this.currentStepperStep = index
+  }
+
+  public showAboutPage(): void {
     if (this.status !== 'about') {
       this.statusCache = this.status
       this.status = 'about'
     }
   }
 
+  public async updateRPMEntry(): Promise<void> {
+    try {
+      const formValue = this.form.get('editEntry').value
+
+      await this.rpm.upsertRPMDiagnosis({
+        id: this.rpmEntry.rpmState.id,
+        primary: formValue.primaryDiagnosis,
+        secondary: formValue.secondaryDiagnosis
+          ? formValue.secondaryDiagnosis
+          : undefined,
+        note: formValue.note ? formValue.note : undefined
+      })
+
+      this.entryAge =
+        this.entryAge === 'after24' ? 'after24Edited' : this.entryAge
+
+      this.rpmEntry.rpmState.diagnosis.primary = formValue.primaryDiagnosis
+      this.rpmEntry.rpmState.diagnosis.secondary = formValue.secondaryDiagnosis
+        ? formValue.secondaryDiagnosis
+        : undefined
+
+      this.updatedEntry = true
+      this.status = 'has_entry'
+      this.notify.success(_('NOTIFY.SUCCESS.UPDATED_RPM'))
+    } catch (error) {
+      this.notify.error(error)
+    }
+  }
+
+  private async calculateEntryAge(): Promise<void> {
+    try {
+      if (!this.rpmEntry) {
+        this.entryAge = 'before24'
+        return
+      }
+
+      const mostRecentEntryAge = Math.abs(
+        moment(this.rpmEntry.rpmState.createdAt).diff(moment(), 'hours')
+      )
+      const diagnosisAuditEntries = await this.rpm.getDiagnosisAuditList({
+        id: this.rpmEntry.rpmState.id
+      })
+
+      this.entryAge = 'before24'
+
+      if (mostRecentEntryAge >= 24) {
+        this.entryAge = diagnosisAuditEntries.data.length
+          ? 'after24Edited'
+          : 'after24'
+      }
+    } catch (error) {
+      this.notify.error(error)
+    }
+  }
+
   private createForms(): void {
     this.form = this.fb.group({
+      enableForm: [null, Validators.required],
       organization: ['', Validators.required],
       patientConsented: [false, Validators.requiredTrue],
       hasMedicalNecessity: [false, Validators.requiredTrue],
       hadFaceToFace: [false, Validators.requiredTrue],
       goalsSet: [false, Validators.requiredTrue],
-      deviceSupplied: ['', Validators.required]
+      deviceSupplied: ['', Validators.required],
+      editEntry: [null, Validators.required]
     })
 
     this.deactivateRpmForm = this.fb.group({
@@ -148,15 +239,6 @@ export class RPMStatusDialog implements OnInit {
         this.deactivateRpmForm.controls.note.setValidators(
           this.requiresDeactivationNote ? Validators.required : []
         )
-      })
-
-    this.form.controls.organization.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe((orgId) => {
-        if (!orgId) {
-          return
-        }
-        this.resolveOrgSettings(orgId)
       })
   }
 
@@ -182,32 +264,14 @@ export class RPMStatusDialog implements OnInit {
     }
   }
 
-  private resolveDevices(): void {
-    this.rpmDevices = Object.values(RPM_DEVICES).map((device) => ({
-      value: device.id,
-      viewValue: device.displayName,
-      imageSrc: device.imageSrc,
-      imageClass: device.imageClass || ''
-    }))
-
-    if (this.allowNoDeviceOption) {
-      return
-    }
-
-    this.rpmDevices = this.rpmDevices.filter((device) => device.value !== '-1')
-
-    if (this.form.value.deviceSupplied === '-1') {
-      this.form.patchValue({ deviceSupplied: '' })
-    }
-  }
-
   private resolveDialogData(): void {
     this.client = this.context.account
     this.rpmEntry = this.data.mostRecentEntry
     this.accessibleOrganizations = this.data.accessibleOrganizations
     this.inaccessibleOrganizations = this.data.inaccessibleOrganizations
     this.entryIsActive = this.rpmEntry ? this.rpmEntry.isActive : false
-    this.status = this.rpmEntry ? 'has_entry' : 'no_entry'
+    this.entryPending = this.rpmEntry ? this.rpmEntry.pending : undefined
+    this.status = this.rpmEntry ? 'has_entry' : 'new_entry'
     if (this.accessibleOrganizations && this.accessibleOrganizations.length) {
       this.form.patchValue({
         organization: this.accessibleOrganizations[0].organization.id
@@ -219,24 +283,13 @@ export class RPMStatusDialog implements OnInit {
         )
       }
     }
-  }
 
-  private async resolveOrgSettings(orgId: string): Promise<void> {
-    try {
-      const orgSingle = await this.context.getOrg(orgId)
-
-      const deviceSelectorSetting = resolveConfig(
-        'RPM.ALLOW_NO_DEVICE_SELECTION',
-        orgSingle
-      )
-      this.allowNoDeviceOption =
-        typeof deviceSelectorSetting === 'object'
-          ? false
-          : deviceSelectorSetting
-
-      this.resolveDevices()
-    } catch (error) {
-      this.notify.error(error)
+    if (this.entryIsActive) {
+      this.form.get('editEntry').patchValue({
+        primaryDiagnosis: this.rpmEntry.rpmState.diagnosis?.primary,
+        secondaryDiagnosis: this.rpmEntry.rpmState.diagnosis?.secondary,
+        note: this.rpmEntry.rpmState.note ?? ''
+      })
     }
   }
 }

@@ -195,9 +195,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('GET', '/1.0/food/consumed/*', {
     fixture: 'api/food/consumed-old'
   })
-  cy.intercept('GET', '/3.0/rpm/state**', {
-    fixture: fetchOverride('/1.0/rpm/state**', 'api/general/emptyData')
-  }).as('getRpm')
+
   cy.intercept('GET', '/1.0/rpm/preference/organization?organization=**', {
     fixture: 'api/rpm/getOrgPreference'
   })
@@ -219,6 +217,30 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
       'api/filevault/getOrgPreference-enabled'
     )
   })
+
+  cy.intercept('GET', '/4.0/rpm/state**', {
+    fixture: fetchOverride('/1.0/rpm/state**', 'api/general/emptyData')
+  }).as('getRpm')
+
+  cy.intercept('GET', '/1.0/rpm/preference/organization/**', {
+    fixture: fetchOverride(
+      '/1.0/rpm/preference/organization?organization=**',
+      'api/rpm/getOrgPreference'
+    )
+  })
+  cy.intercept('PATCH', '/1.0/rpm/preference/organization/**', {
+    statusCode: 204,
+    body: {}
+  }).as('rpmPreferencePatchRequest')
+  cy.intercept('POST', '/1.0/rpm/preference/organization', {
+    statusCode: 204,
+    body: { id: '1' }
+  }).as('rpmPreferencePostRequest')
+  cy.intercept('DELETE', '/1.0/rpm/preference/organization/**', {
+    statusCode: 204,
+    body: {}
+  }).as('rpmPreferenceDeleteRequest')
+
   cy.intercept('GET', '/1.0/message/preference/organization?organization=**', {
     fixture: 'api/message/getOrgPreference-enabled'
   })
@@ -227,9 +249,20 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     data.id = Cypress.env('organizationId')
     data.isActive = Cypress.env('organizationId') === 1 ? false : true
 
-    cy.intercept('GET', `/1.0/rpm/preference/organization?organization=**`, {
-      body: data
-    })
+    const override = fetchOverride(
+      '/1.0/rpm/preference/organization?organization=**',
+      ''
+    )
+
+    cy.intercept(
+      'GET',
+      `/1.0/rpm/preference/organization?organization=**`,
+      override
+        ? {
+            fixture: override
+          }
+        : { body: data, statusCode: 200 }
+    )
   })
 
   cy.intercept('GET', '/1.0/content?**', {
@@ -424,9 +457,8 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     fixture: 'api/rpm/deactivationReasons'
   })
 
-  cy.intercept('POST', '/3.0/rpm/state', {
-    statusCode: 201,
-    body: {}
+  cy.intercept('POST', '/4.0/rpm/state', {
+    fixture: 'api/general/emptyData'
   }).as('rpmStatePostRequest')
 
   cy.intercept('GET', '/1.0/rpm/individual-summary**', {
@@ -517,6 +549,35 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('GET', '1.0/measurement/data-point/summary?**', {
     fixture: 'api/measurement/dataPointSummary'
   })
+
+  cy.intercept('GET', '1.0/rpm/supervising-provider?**', {
+    fixture: fetchOverride(
+      '1.0/rpm/supervising-provider?**',
+      'api/rpm/supervisingProviders'
+    )
+  })
+
+  cy.intercept('POST', '1.0/rpm/supervising-provider', {
+    statusCode: 204,
+    body: { id: '1' }
+  }).as('supervisingProviderPostRequest')
+
+  cy.intercept('DELETE', '1.0/rpm/supervising-provider/**', {
+    statusCode: 204,
+    body: {}
+  }).as('supervisingProviderDeleteRequest')
+
+  cy.intercept('GET', '1.0/rpm/state/1/diagnosis/audit?**', {
+    fixture: fetchOverride(
+      '1.0/rpm/state/1/diagnosis/audit?**',
+      'api/general/emptyDataEmptyPagination'
+    )
+  })
+
+  cy.intercept('PUT', '1.0/rpm/state/1/diagnosis', {
+    statusCode: 204,
+    body: {}
+  }).as('rpmDiagnosisPutRequest')
 }
 
 const seti18n = (): void => {

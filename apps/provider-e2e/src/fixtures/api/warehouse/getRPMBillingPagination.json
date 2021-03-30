@@ -406,5 +406,5 @@
       }
     }
   ],
-  "pagination": { "next": 10 }
+  "pagination": { "next": 100 }
 }
