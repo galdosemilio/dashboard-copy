@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/coachcare/dashboard/compare/v1.1.0...v1.2.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* adjusted 401 error handling [FRON-2110] ([356b0b5](https://github.com/coachcare/dashboard/commit/356b0b580e776b5707b17aad923e4ec028b8301b))
+* adjusted phase link, add clone link [IDEA-704] ([9210584](https://github.com/coachcare/dashboard/commit/9210584bff826394b6bdf8854819f4231186f37f))
+
+
+### Features
+
+* add meeting status filter option to schedule list view [IDEA-345] ([e33ee60](https://github.com/coachcare/dashboard/commit/e33ee60f8ccaca6a790a3156ca3ac33c97dc7595))
+* add tooltip for visceral columns [FRON-2072] ([7009c36](https://github.com/coachcare/dashboard/commit/7009c36678895ed6525031c460ed77a523651eab))
+* added custom error mess [FRON-2035] ([272c8ed](https://github.com/coachcare/dashboard/commit/272c8ed98e6bbdedecb7ae4afe687b572ab5fe0d))
+
 # [1.1.0](https://github.com/coachcare/dashboard/compare/v1.0.0...v1.1.0) (2021-03-27)
 
 
