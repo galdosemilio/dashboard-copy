@@ -44,6 +44,7 @@ export interface OrganizationBillingItem {
   pricing: {
     base: number
     rpmPatient: number
+    nonRpmPatient?: number
   }
   isPaying?: boolean
   registrationDate?: string

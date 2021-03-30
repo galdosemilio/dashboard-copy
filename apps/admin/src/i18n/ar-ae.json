@@ -57,6 +57,7 @@
       "PAYING_START_DATE": "دفع تاريخ بدء",
       "PLAN": "خطة",
       "RENEWAL_DATE": "تاريخ التجديد",
+      "RPM_NON_PATIENT_PRICING": "في NonRPM التسعير المرضى",
       "RPM_PATIENT_PRICING": "RPM التسعير المريض",
       "SELECTED_PROVIDER": "مزود المختارة: {{provider}}",
       "SELECT_PROVIDER": "حدد مزود",

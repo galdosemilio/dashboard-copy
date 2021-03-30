@@ -57,6 +57,7 @@
       "PAYING_START_DATE": "Fecha de Inicio de Pago",
       "PLAN": "Plan",
       "RENEWAL_DATE": "Fecha de Renovación",
+      "RPM_NON_PATIENT_PRICING": "Precio por Paciente NoRPM",
       "RPM_PATIENT_PRICING": "Precio de Paciente RPM",
       "SELECTED_PROVIDER": "Proveedor seleccionado: {{provider}}",
       "SELECT_PROVIDER": "Seleccione Proveedor",

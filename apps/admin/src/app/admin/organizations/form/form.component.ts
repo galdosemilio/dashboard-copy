@@ -111,6 +111,7 @@ export class OrganizationsFormComponent implements OnInit {
         payingStartDate: [],
         basePricing: [],
         rpmPatientPricing: [],
+        nonRpmPatientPricing: [],
         churnDate: [],
         renewalDate: [],
         numberOfLocations: [0, Validators.min(0)]
@@ -313,6 +314,9 @@ export class OrganizationsFormComponent implements OnInit {
         basePricing: response.basePricing ? +response.basePricing : null,
         rpmPatientPricing: response.rpmPatientPricing
           ? +response.rpmPatientPricing
+          : null,
+        nonRpmPatientPricing: response.nonRpmPatientPricing
+          ? +response.nonRpmPatientPricing
           : null,
         churnDate: response.churnDate ? moment(response.churnDate) : null,
         renewalDate: response.renewalDate ? moment(response.renewalDate) : null,

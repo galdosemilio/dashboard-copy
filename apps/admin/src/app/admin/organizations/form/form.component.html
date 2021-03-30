@@ -235,6 +235,18 @@
           </mat-grid-tile>
 
           <mat-grid-tile>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              type="number"
+              min="0"
+              [placeholder]="'ADMIN.ORGS.RPM_NON_PATIENT_PRICING' | translate"
+              [readonly]="readonly"
+              formControlName="nonRpmPatientPricing">
+              <span matSuffix>USD</span>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
             <div [class.readonly]="readonly" fxFlex>
               <ccr-date-input
               [placeholder]="'ADMIN.ORGS.CHURN_DATE' | translate"

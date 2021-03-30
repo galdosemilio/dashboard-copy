@@ -57,6 +57,7 @@
       "PAYING_START_DATE": "תשלום התחלת תאריך",
       "PLAN": "לְתַכְנֵן",
       "RENEWAL_DATE": "תאריך חידוש",
+      "RPM_NON_PATIENT_PRICING": "לפי תמחור חולה NonRPM",
       "RPM_PATIENT_PRICING": "תמחור חולה סל\"ד",
       "SELECTED_PROVIDER": "ספק נבחר: {{provider}}",
       "SELECT_PROVIDER": "ספק בחר",

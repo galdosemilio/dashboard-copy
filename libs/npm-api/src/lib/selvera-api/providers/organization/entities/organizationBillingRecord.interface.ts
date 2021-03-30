@@ -17,5 +17,6 @@ export interface OrganizationBillingRecord {
   }
   renewalDate?: string
   rpmPatientPricing?: number
+  nonRpmPatientPricing?: number
   reportEndDate?: string
 }

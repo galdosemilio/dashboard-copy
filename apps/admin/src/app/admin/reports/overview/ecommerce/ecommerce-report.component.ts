@@ -67,6 +67,7 @@ export class EcommerceReportComponent implements OnInit {
       csv += `"ENTITY TYPE"${separator}`
       csv += `"BASE PRICING"${separator}`
       csv += `"RPM PATIENT PRICING"${separator}`
+      csv += `"PER NONRPM PATIENT PRICING"${separator}`
       csv += `"CHURN DATE"${separator}`
       csv += `"PAYING START DATE"${separator}`
       csv += `"IS PAYING"${separator}`
@@ -104,6 +105,9 @@ export class EcommerceReportComponent implements OnInit {
         csv += `"${item.pricing.base ? item.pricing.base : '-'}"${separator}`
         csv += `"${
           item.pricing.rpmPatient ? item.pricing.rpmPatient : '-'
+        }"${separator}`
+        csv += `"${
+          item.pricing.nonRpmPatient ? item.pricing.nonRpmPatient : '-'
         }"${separator}`
         csv += `"${
           item.churnDate ? item.churnDate.split('T')[0] : '-'

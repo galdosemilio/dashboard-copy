@@ -57,6 +57,7 @@
       "PAYING_START_DATE": "Betaler Startdato",
       "PLAN": "Plan",
       "RENEWAL_DATE": "Fornyelse Dato",
+      "RPM_NON_PATIENT_PRICING": "Per NonRPM Patient Pricing",
       "RPM_PATIENT_PRICING": "RPM Patient Pricing",
       "SELECTED_PROVIDER": "Valgt Provider: {{provider}}",
       "SELECT_PROVIDER": "Vælg Provider",
