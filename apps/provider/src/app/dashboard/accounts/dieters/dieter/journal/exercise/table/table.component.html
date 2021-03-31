@@ -34,13 +34,13 @@
       </mat-cell>
     </ng-container>
 
-    <!-- <ng-container cdkColumnDef="notes">
+    <ng-container cdkColumnDef="notes">
       <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.NOTES' | translate}}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{'GLOBAL.NOTES' | translate}}</span>
-        <mat-icon>notes</mat-icon>
+        {{ row.notes }}
       </mat-cell>
-    </ng-container> -->
+    </ng-container>
 
     <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
     <mat-row fxLayoutWrap

@@ -7,7 +7,7 @@ import { ExerciseDataSource } from '@app/dashboard/accounts/dieters/services'
   styleUrls: ['./table.component.scss']
 })
 export class ExerciseTableComponent implements OnInit {
-  @Input() columns = ['date', 'activity_type', 'intensity', 'duration']
+  @Input() columns = ['date', 'activity_type', 'intensity', 'duration', 'notes']
   @Input() source: ExerciseDataSource | null
 
   constructor(private cdr: ChangeDetectorRef) {}
