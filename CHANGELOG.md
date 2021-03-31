@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/coachcare/dashboard/compare/v1.2.0...v1.2.1) (2021-03-31)
+
+
+### Bug Fixes
+
+* added default cases for unit pipe [FRON-2048] ([1095cbe](https://github.com/coachcare/dashboard/commit/1095cbe4a73532eb5ef1119b33fc9e2f520670ac))
+
 # [1.2.0](https://github.com/coachcare/dashboard/compare/v1.1.0...v1.2.0) (2021-03-30)
 
 
