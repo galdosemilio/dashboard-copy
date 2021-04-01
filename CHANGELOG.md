@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/coachcare/dashboard/compare/v1.2.1...v1.3.0) (2021-04-01)
+
+
+### Features
+
+* add notes column to exercise table [IDEA-400] ([8742e70](https://github.com/coachcare/dashboard/commit/8742e70072adf270bbd551d9e66053e07493963f))
+* set up pernonrpmpatient pricing field [IDEA-673] ([cb6e5fd](https://github.com/coachcare/dashboard/commit/cb6e5fd51d7235623cb9c2dd9ceb3b5672d58bea))
+
 ## [1.2.1](https://github.com/coachcare/dashboard/compare/v1.2.0...v1.2.1) (2021-03-31)
 
 
