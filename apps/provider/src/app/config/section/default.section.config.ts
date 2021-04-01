@@ -7,7 +7,8 @@ import { SectionConfigDetails } from './models/section.details'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
-    SHOW_CLINIC_CREATE_BUTTON: false
+    SHOW_CLINIC_CREATE_BUTTON: false,
+    SHOW_CLINIC_CREATE_BUTTON_DIRECT: false
   },
   JOURNAL: {
     ALLOW_MEASUREMENT_LIST_VIEW: false,
@@ -45,7 +46,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
 
 export const DefaultProdSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
-    SHOW_CLINIC_CREATE_BUTTON: false
+    SHOW_CLINIC_CREATE_BUTTON: false,
+    SHOW_CLINIC_CREATE_BUTTON_DIRECT: false
   },
   JOURNAL: {
     ALLOW_MEASUREMENT_LIST_VIEW: false,

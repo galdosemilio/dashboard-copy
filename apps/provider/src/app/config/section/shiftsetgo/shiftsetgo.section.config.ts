@@ -2,6 +2,9 @@ import { CompositionColumns } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 
 export const ShiftSetGoSectionConfig: SectionConfigDetails = {
+  CLINIC_LISTING: {
+    SHOW_CLINIC_CREATE_BUTTON_DIRECT: true
+  },
   JOURNAL: {
     ALLOW_MEASUREMENT_LIST_VIEW: true,
     HIDDEN_COMPOSITION_COLUMNS: [

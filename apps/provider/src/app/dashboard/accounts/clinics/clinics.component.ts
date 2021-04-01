@@ -54,7 +54,13 @@ export class ClinicsComponent implements OnInit, OnDestroy {
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.clinic = org
       this.showCreateClinic =
-        resolveConfig('CLINIC_LISTING.SHOW_CLINIC_CREATE_BUTTON', org) || false
+        resolveConfig(
+          'CLINIC_LISTING.SHOW_CLINIC_CREATE_BUTTON_DIRECT',
+          org,
+          true
+        ) ||
+        resolveConfig('CLINIC_LISTING.SHOW_CLINIC_CREATE_BUTTON', org) ||
+        false
     })
 
     this.store.dispatch(new ClosePanel())
