@@ -1765,10 +1765,10 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@ngneat/until-destroy@^8.0.3":
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/@ngneat/until-destroy/-/until-destroy-8.0.3.tgz#d27523d71fb3941a1c22a22e2eb9c86629dfc7cb"
-  integrity sha512-mHU118pETO+71yeKKr8HTwCP+4X/tYSYxgMNYZSJ7oiOAujHc8Rwz7TQpAFCM1trkCZEEe6fKKzQZ0V3cZFkJw==
+"@ngneat/until-destroy@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@ngneat/until-destroy/-/until-destroy-8.0.4.tgz#08c61fc791012d38fcb3310ec03de4f4df9f29d1"
+  integrity sha512-FBh40y22VLFBOReBNOEhSn9dWix0AVYdEAF08N54jUYOGTbwjSORe/hjCrpuxcEdlw3lgTO5r2EgEl3n+kvfyA==
   dependencies:
     glob "^7.1.6"
     minimist "1.2.5"
