@@ -2907,10 +2907,10 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-ang-jsoneditor@^1.10.2:
-  version "1.10.4"
-  resolved "https://registry.yarnpkg.com/ang-jsoneditor/-/ang-jsoneditor-1.10.4.tgz#0b04a1ac1e6e6b5e16f225bd95685331d761d91a"
-  integrity sha512-2ySm00beagg8v632l8lbGzQBlSB6Y5MMBL+3uWXJatq2WPMIE8G81vPQeeJbRJFiesrXupPvZWhhAqzw/5C1pQ==
+ang-jsoneditor@^1.10.5:
+  version "1.10.5"
+  resolved "https://registry.yarnpkg.com/ang-jsoneditor/-/ang-jsoneditor-1.10.5.tgz#a140e59b8ae27f707eaadd7b233105faccae3256"
+  integrity sha512-i4sPCpKUN7DQzNctcJcEoMRex850iGvweaL3AYuFOJUWADyJ3BVMjv3GprUzA+jqURs83NucPFsIE1v1iMT2jA==
   dependencies:
     tslib "^2.0.0"
 

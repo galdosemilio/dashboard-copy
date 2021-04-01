@@ -122,7 +122,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@nrwl/nx": "^7.8.7",
     "@types/lodash": "^4.14.161",
-    "ang-jsoneditor": "^1.10.2",
+    "ang-jsoneditor": "^1.10.5",
     "angularx-qrcode": "^10.0.10",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
