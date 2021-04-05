@@ -1,3 +1,5 @@
+import { environment } from 'apps/provider/src/environments/environment'
+
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -187,13 +189,13 @@ export class FormsTableComponent {
   }
 
   private async getLogoImage(): Promise<any> {
-    if (!this.context.organization.assets?.logoUrl) {
+    if (!this.context.organization) {
       return
     }
 
     try {
       const image = await this.getBase64ImageFromURL(
-        this.context.organization.assets.logoUrl
+        `${environment.awsAssetsUrl}/${this.context.organization.id}_logo.png`
       )
 
       return image

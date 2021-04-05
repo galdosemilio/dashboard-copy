@@ -8,5 +8,6 @@ export const environment: Environment = {
   production: true,
   role: 'provider',
   selveraApiEnv: 'test',
-  url: 'https://dashboard.coachcaredev.com/provider'
+  url: 'https://dashboard.coachcaredev.com/provider',
+  awsAssetsUrl: 'https://s3.amazonaws.com/dev.assets.cc'
 }

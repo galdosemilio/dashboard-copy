@@ -10,4 +10,5 @@ export interface Environment {
   role: string
   selveraApiEnv: 'ccrDemo' | 'dev' | 'prod' | 'test'
   url: string
+  awsAssetsUrl: string
 }

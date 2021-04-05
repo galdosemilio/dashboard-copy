@@ -1,3 +1,5 @@
+import { environment } from 'apps/provider/src/environments/environment'
+
 import { Component, Input } from '@angular/core'
 import { DatePipe } from '@angular/common'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -30,6 +32,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import * as pdfMake from 'pdfmake'
+
 @UntilDestroy()
 @Component({
   selector: 'app-library-form-submissions-table',
@@ -277,13 +280,13 @@ export class FormSubmissionsTableComponent {
   private async getLogoImage(
     organization: SelectedOrganization
   ): Promise<string> {
-    if (!organization.assets?.logoUrl) {
+    if (!organization) {
       return
     }
 
     try {
       const image = await this.getBase64ImageFromURL(
-        organization.assets.logoUrl
+        `${environment.awsAssetsUrl}/${organization.id}_logo.png`
       )
 
       return image

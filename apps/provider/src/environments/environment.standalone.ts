@@ -8,5 +8,6 @@ export const environment: Environment = {
   production: false,
   role: 'provider',
   selveraApiEnv: 'test',
-  url: 'http://localhost:4201'
+  url: 'http://localhost:4201',
+  awsAssetsUrl: 'https://s3.amazonaws.com/dev.assets.cc'
 }
