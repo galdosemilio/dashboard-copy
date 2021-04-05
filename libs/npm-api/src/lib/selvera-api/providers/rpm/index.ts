@@ -1,18 +1,14 @@
 import { ApiService } from '../../services'
 import { Entity } from '../common/entities'
 import { PagedResponse } from '../content/entities'
-import {
-  RPMDeactivationReason,
-  RPMPreferenceSingle,
-  RPMState
-} from './entities'
+import { RPMReason, RPMPreferenceSingle, RPMState } from './entities'
 import {
   CreateRPMPreferenceRequest,
   CreateRPMStateRequest,
   GetAuditListRequest,
   GetListRequest,
   GetPatientRPMReportRequest,
-  GetRPMDeactivationReasonsRequest,
+  GetRPMReasonsRequest,
   GetRPMPreferenceByOrgRequest,
   UpdateRPMPreferenceRequest
 } from './requests'
@@ -86,17 +82,17 @@ export class RPM {
 
   /**
    * Retrieves RPM state deactivation reason listing
-   * @param request must implement GetRPMDeactivationReasonsRequest
-   * @returns Promise<PagedResponse<RPMDeactivationReason>>
+   * @param request must implement GetRPMReasonsRequest
+   * @returns Promise<PagedResponse<RPMReason>>
    */
-  public getDeactivationReasons(
-    request: GetRPMDeactivationReasonsRequest
-  ): Promise<PagedResponse<RPMDeactivationReason>> {
+  public getReasons(
+    request: GetRPMReasonsRequest
+  ): Promise<PagedResponse<RPMReason>> {
     return this.apiService.request({
       data: request,
-      endpoint: '/rpm/state/deactivation-reason',
+      endpoint: '/rpm/state/reason',
       method: 'GET',
-      version: '1.0'
+      version: '3.0'
     })
   }
 

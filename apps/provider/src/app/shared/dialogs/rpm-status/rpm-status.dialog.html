@@ -110,15 +110,20 @@
         <p class="notice remove-entry" [innerHTML]="'RPM.DEACTIVATE_PROMPT_CONTENT' | translate"></p>
 
         <div [formGroup]="deactivateRpmForm" fxLayout="row" fxLayoutAlign="center center">
-            <mat-form-field floatLabel="always" fxFlex="60%">
-            <mat-select
-            formControlName="deactivationReason"
-            [placeholder]="'RPM.DEACTIVATION_REASON' | translate">
-                <mat-option *ngFor="let deactivationReason of deactivationReasons" [value]="deactivationReason.id">
-                    {{ deactivationReason.description }}
-                </mat-option>
-            </mat-select>
-            </mat-form-field>
+            <div fxFlex="60%" fxLayout="column">
+                <mat-form-field floatLabel="always">
+                    <mat-select
+                    formControlName="deactivationReason"
+                    [placeholder]="'RPM.DEACTIVATION_REASON' | translate">
+                        <mat-option *ngFor="let deactivationReason of deactivationReasons" [value]="deactivationReason.id">
+                            {{ deactivationReason.description }}
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="requiresDeactivationNote">
+                        <textarea matInput matTextareaAutosize matAutosizeMinRows="3" formControlName="note" [placeholder]="'GLOBAL.NOTES' | translate"></textarea>
+                      </mat-form-field>
+            </div>
         </div>
     </div>
 

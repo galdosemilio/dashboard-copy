@@ -20,6 +20,7 @@ type InactiveStateCreationRequest = StateRequest & {
   isActive: false
   conditions?: RPMStateConditions
   reason: string
+  note?: string
 }
 
 export type CreateRPMStateRequest =

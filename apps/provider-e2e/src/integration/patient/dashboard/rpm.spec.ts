@@ -88,6 +88,33 @@ describe('Patient profile -> dashboard -> rpm', function () {
     cy.wait(5000)
   })
 
+  it('Requests a note if the selected deactivation reason requires it', function () {
+    standardSetup(undefined, [
+      {
+        url: '/1.0/rpm/state**',
+        fixture: 'api/rpm/rpmStateEnabledEntries'
+      }
+    ])
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+    cy.get('.ccr-dashboard', {
+      timeout: 30000
+    })
+
+    openRPMDialog()
+    attemptToDisableRpm('Other', 'test note')
+
+    cy.wait('@rpmStatePostRequest').should((xhr) => {
+      expect(xhr.request.body.account).to.equal('3')
+      expect(xhr.request.body.isActive).to.equal(false)
+      expect(xhr.request.body.organization).to.equal('1')
+      expect(xhr.request.body.note).to.equal('test note')
+    })
+
+    cy.wait(5000)
+  })
+
   it('Properly fetches the RPM report (Excel)', function () {
     standardSetup(undefined, [
       {
@@ -176,7 +203,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
     cy.get('.ccr-dashboard', { timeout: 12000 })
 
-    cy.get('app-rpm-tracker').should('contain', 'No Tracking')
+    cy.get('app-rpm-tracker').should('contain', 'No Tracking').wait(3000)
   })
 
   it('Should track time if the current code requires monitoring time', function () {

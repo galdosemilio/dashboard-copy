@@ -10,9 +10,25 @@ export function openRPMReportDialog() {
   cy.tick(1000)
 }
 
-export function attemptToDisableRpm() {
+export function attemptToDisableRpm(reason?: string, note?: string) {
   cy.get('button').contains('Disable RPM').click({ force: true })
   cy.tick(1000)
+
+  if (reason) {
+    cy.get('mat-dialog-container').find('div.mat-select-trigger').click()
+    cy.tick(1000)
+    cy.get('mat-option').contains(reason).click()
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .find('textarea')
+      .should('be.enabled')
+      .clear()
+      .type(note)
+
+    cy.tick(1000)
+  }
+
   cy.get('button').contains('Yes').click({ force: true })
   cy.tick(1000)
 }

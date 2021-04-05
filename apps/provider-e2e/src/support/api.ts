@@ -420,7 +420,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     body: {}
   }).as('accountActivityPostRequest')
 
-  cy.intercept('GET', '/1.0/rpm/state/deactivation-reason**', {
+  cy.intercept('GET', '/3.0/rpm/state/reason**', {
     fixture: 'api/rpm/deactivationReasons'
   })
 

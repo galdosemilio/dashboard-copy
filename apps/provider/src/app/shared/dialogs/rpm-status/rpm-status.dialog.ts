@@ -6,7 +6,7 @@ import { RPMStateEntry } from '@app/shared/components/rpm/models'
 import {
   AccountAccessData,
   OrganizationAccess,
-  RPMDeactivationReason
+  RPMReason
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { RPM } from '@coachcare/npm-api'
@@ -36,7 +36,7 @@ export class RPMStatusDialog implements OnInit {
   allowNoDeviceOption = false
   canDisableRPM = false
   client: AccountAccessData
-  deactivationReasons: RPMDeactivationReason[] = []
+  deactivationReasons: RPMReason[] = []
   deactivateRpmForm: FormGroup
   entryIsActive = false
   form: FormGroup
@@ -45,6 +45,7 @@ export class RPMStatusDialog implements OnInit {
   rpmEntry: RPMStateEntry
   status: DialogStatus = 'no_entry'
   statusCache: DialogStatus
+  requiresDeactivationNote = false
 
   constructor(
     private context: ContextService,
@@ -99,7 +100,10 @@ export class RPMStatusDialog implements OnInit {
         account: this.rpmEntry.rpmState.account.id,
         organization: this.rpmEntry.rpmState.organization.id,
         isActive: false,
-        reason: deactivateFormValue.deactivationReason
+        reason: deactivateFormValue.deactivationReason,
+        note: this.requiresDeactivationNote
+          ? deactivateFormValue.note
+          : undefined
       })
 
       this.notify.success(_('NOTIFY.SUCCESS.DISABLED_RPM'))
@@ -127,8 +131,24 @@ export class RPMStatusDialog implements OnInit {
     })
 
     this.deactivateRpmForm = this.fb.group({
-      deactivationReason: ['', Validators.required]
+      deactivationReason: ['', Validators.required],
+      note: ''
     })
+
+    this.deactivateRpmForm.controls.deactivationReason.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((deactivationReasonId: string) => {
+        const deactivationReason = this.deactivationReasons.find(
+          (deacReason) => deacReason.id === deactivationReasonId
+        )
+
+        this.requiresDeactivationNote =
+          deactivationReason?.requiresNote ?? false
+
+        this.deactivateRpmForm.controls.note.setValidators(
+          this.requiresDeactivationNote ? Validators.required : []
+        )
+      })
 
     this.form.controls.organization.valueChanges
       .pipe(untilDestroyed(this))
@@ -142,10 +162,12 @@ export class RPMStatusDialog implements OnInit {
 
   private async fetchDeactivationReasons(): Promise<void> {
     try {
-      const raw = await this.rpm.getDeactivationReasons({
+      const raw = await this.rpm.getReasons({
         status: 'active',
+        appliesToState: 'inactive',
         limit: 'all'
       })
+
       this.deactivationReasons = raw.data
 
       if (!this.deactivationReasons.length) {
