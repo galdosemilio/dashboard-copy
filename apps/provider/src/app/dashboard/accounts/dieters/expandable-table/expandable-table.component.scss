@@ -12,6 +12,7 @@ app-dieters-expandable-table {
   }
 
   table {
+    min-width: 100%;
     .column {
       &-actions {
         border-top: unset;
@@ -32,9 +33,7 @@ app-dieters-expandable-table {
       &-firstname,
       &-lastname,
       &-startdate {
-        max-width: 200px;
         min-width: 200px;
-        width: 200px;
 
         @media (max-width: $breakpoint-tablet) {
           max-width: 150px;
