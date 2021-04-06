@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/coachcare/dashboard/compare/v1.3.0...v1.4.0) (2021-04-06)
+
+
+### Bug Fixes
+
+* enabled direct clinic creation for shiftsetgo [FRON-2120] ([d3053b4](https://github.com/coachcare/dashboard/commit/d3053b48cc58741cfebc072ac9bae4b3d9b6f8f3))
+
+
+### Features
+
+* add page size selector to the RPM Billing Report [FRON-2113] ([116888c](https://github.com/coachcare/dashboard/commit/116888c4714ba23edbab9c9d87174050a05d2ed1))
+* fetch clinic logs for PDF forms [FRON-2112] ([d57596c](https://github.com/coachcare/dashboard/commit/d57596c9e2adac2540165bd546660f641ef40c05))
+
 # [1.3.0](https://github.com/coachcare/dashboard/compare/v1.2.1...v1.3.0) (2021-04-01)
 
 
