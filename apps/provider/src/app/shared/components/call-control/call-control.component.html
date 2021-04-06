@@ -11,7 +11,7 @@ matTooltipPosition="above">
   [class.active]="true"
   [disabled]="callState?.isCallStarted || !callState?.hasAudioDeviceAccess || targets?.length > 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
-  (click)="billableServices.length ? undefined : onClick()"
+  (click)="$event.stopPropagation() ;billableServices.length ? undefined : onClick()"
   class="ccr-icon-button"
   color="primary"
   mat-button
@@ -22,7 +22,7 @@ matTooltipPosition="above">
   <div
   *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess && targets?.length === 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
-  (click)="billableServices.length ? undefined : onClick()"
+  (click)="$event.stopPropagation(); billableServices.length ? undefined : onClick()"
   class="clickable">
     <mat-icon class="min">videocam</mat-icon>
   </div>
