@@ -1140,6 +1140,8 @@
     "PROVIDERS": "Coach",
     "REMOVE_INTERACTION_DESCRIPTION": "Sei sicuro di voler rimuovere questa comunicazione? Questa azione non può essere annullata.",
     "REMOVE_INTERACTION_TITLE": "Rimuovere Comunicazione",
+    "RPM_BILLING_DOWNLOAD_CONFIRM": "Conferma la data di fine del rapporto",
+    "RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT": "La data selezionata è precedente all'ultimo giorno del mese, quindi questo rapporto potrebbe non includere tutte le attività fatturabili per il mese.",
     "RPM_BILLING_TITLE": "Fatturazione MRP",
     "SIGNUPS_DESCRIPTION": "Questo resoconto mostra il numero totale dei pazienti che si sono associati alla clinica nel periodo di tempo selezionato. Ogni paziente sarà elencato solo una volta. Ad esempio",
     "SIGNUPS_TITLE": "Registrazioni Pazienti",

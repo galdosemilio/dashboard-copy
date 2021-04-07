@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MatSort } from '@coachcare/material'
+import { MatDialog, MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { ClosePanel, OpenPanel } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
@@ -16,7 +16,7 @@ import { get, isEmpty } from 'lodash'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { debounceTime } from 'rxjs/operators'
+import { debounceTime, filter } from 'rxjs/operators'
 import {
   ReportsCriteria,
   ReportsDatabase,
@@ -33,6 +33,7 @@ import {
   STORAGE_RPM_BILLING_SORT
 } from '@app/config'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
+import { PromptDialog } from '@app/shared/dialogs'
 
 @UntilDestroy()
 @Component({
@@ -76,7 +77,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     private notify: NotifierService,
     private router: Router,
     private store: Store<ReportsState>,
-    private walkthrough: WalkthroughService
+    private walkthrough: WalkthroughService,
+    private dialog: MatDialog
   ) {}
 
   public ngOnDestroy(): void {
@@ -170,7 +172,40 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     this.searchForm.reset()
   }
 
-  public async downloadCSV(): Promise<void> {
+  public download(superBillDownload: boolean = false): Promise<void> {
+    const criteria = this.source.args
+
+    const now = moment()
+    const currentAsOf = moment(criteria.asOf).isSameOrAfter(now, 'day')
+      ? now
+      : moment(criteria.asOf).endOf('day')
+
+    if (
+      currentAsOf.isSame(now, 'day') ||
+      currentAsOf.isSame(currentAsOf.clone().endOf('month'), 'day')
+    ) {
+      return superBillDownload
+        ? this.downloadSuperbill()
+        : this.downloadRPMBill()
+    }
+
+    this.dialog
+      .open(PromptDialog, {
+        data: {
+          title: _('REPORTS.RPM_BILLING_DOWNLOAD_CONFIRM'),
+          content: _('REPORTS.RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT'),
+          yes: _('BOARD.DOWNLOAD_REPORT'),
+          no: _('GLOBAL.CANCEL')
+        }
+      })
+      .afterClosed()
+      .pipe(filter((res) => res))
+      .subscribe(() => {
+        superBillDownload ? this.downloadSuperbill() : this.downloadRPMBill()
+      })
+  }
+
+  public async downloadRPMBill(): Promise<void> {
     try {
       const criteria = this.source.args
       const rawResponse = await this.database.fetchRPMBillingReport({

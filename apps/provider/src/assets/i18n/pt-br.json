@@ -1140,6 +1140,8 @@
     "PROVIDERS": "Treinadores",
     "REMOVE_INTERACTION_DESCRIPTION": "Tem certeza de que deseja remover esta comunicação? Essa ação não pode ser desfeita.",
     "REMOVE_INTERACTION_TITLE": "Remover Comunicação",
+    "RPM_BILLING_DOWNLOAD_CONFIRM": "Confirme a data de término do relatório",
+    "RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT": "A data que você selecionou é anterior ao último dia do mês, portanto, este relatório pode não incluir todas as atividades faturáveis do mês.",
     "RPM_BILLING_TITLE": "Faturação RPM",
     "SIGNUPS_DESCRIPTION": "Este relatório mostra o número total de pacientes que se associaram à clínica durante o período de tempo selecionado.  Cada paciente será listado apenas uma vez.  Por exemplo",
     "SIGNUPS_TITLE": "Inscrições de pacientes",

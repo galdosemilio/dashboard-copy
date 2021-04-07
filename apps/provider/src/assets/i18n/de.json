@@ -1140,6 +1140,8 @@
     "PROVIDERS": "Trainer",
     "REMOVE_INTERACTION_DESCRIPTION": "Sind Sie sicher, dass Sie diese Kommunikation entfernen? Diese Aktion kann nicht rückgängig gemacht werden.",
     "REMOVE_INTERACTION_TITLE": "Entfernen Kommunikation",
+    "RPM_BILLING_DOWNLOAD_CONFIRM": "Bestätigen Sie das Enddatum des Berichts",
+    "RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT": "Das von Ihnen ausgewählte Datum liegt vor dem letzten Tag des Monats, sodass dieser Bericht möglicherweise nicht alle abrechnungsfähigen Aktivitäten für den Monat enthält.",
     "RPM_BILLING_TITLE": "RPM Abrechnung",
     "SIGNUPS_DESCRIPTION": "Dieser Bericht zeigt die Gesamtanzahl der Personen, die während der ausgewählten Zeitperiode Patient dieser Klinik geworden sind. Jeder Patient wird nur einmal aufgeführt. Beispiel: Im Januar ist ein Patient Ihrer Klinik beigetreten, im Februar ist kein Patient beigetreten. Der Bericht zeigt dann für Januar eine 1 und für Februar eine 0. Sie können den kompletten Datensatz in einer CSV/Excel-Datei herunterladen, indem Sie auf die Schaltfläche 'CSV-Datei exportieren' klicken.",
     "SIGNUPS_TITLE": "Patientenanmeldungen",
