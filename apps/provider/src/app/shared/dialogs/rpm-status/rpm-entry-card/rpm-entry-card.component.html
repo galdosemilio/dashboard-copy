@@ -30,32 +30,7 @@
 
   <div class="separator"></div>
 
-  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="25px">
-      <div>
-        <p *ngIf="entryIsActive" class="notice performed-by">{{ 'RPM.ENABLED_BY' | translate }}</p>
-        <p *ngIf="!entryIsActive" class="notice performed-by">{{ 'RPM.DISABLED_BY' | translate }}</p>
-        <div class="user-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <div>
-                <ccr-avatar size="bigger" [account]="rpmEntry.rpmState.createdBy.id"></ccr-avatar>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px">
-                <p>{{ rpmEntry.rpmState.createdBy.firstName | translate }} {{ rpmEntry.rpmState.createdBy.lastName }}</p>
-                <p>{{ rpmEntry.rpmState.createdBy.email }}</p>
-                <p>{{ rpmEntry.rpmState.createdBy.phone }}</p>
-            </div>
-        </div>
-      </div>
-
-      <div *ngIf="entryIsActive && rpmEntry.rpmState.supervisingProvider">
-        <p class="notice performed-by">{{ 'GLOBAL.SUPERVISING_PROVIDER' | translate }}</p>
-        <div class="user-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <div>
-                <ccr-avatar size="bigger" [account]="rpmEntry.rpmState.supervisingProvider.id"></ccr-avatar>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px">
-                <p>{{ rpmEntry.rpmState.supervisingProvider.firstName | translate }} {{ rpmEntry.rpmState.supervisingProvider.lastName }}</p>
-            </div>
-        </div>
-      </div>
+  <div>
+    <app-rpm-status-info [rpmEntry]="rpmEntry"></app-rpm-status-info>
   </div>
 </div>

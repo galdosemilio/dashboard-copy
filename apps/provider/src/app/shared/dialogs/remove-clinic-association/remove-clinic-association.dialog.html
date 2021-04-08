@@ -1,0 +1,37 @@
+<div matDialogTitle>
+  <div>{{ 'ASSOCIATIONS.REMOVE_CLINIC_ASSOCIATION' | translate }}</div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+    <p [innerHTML]="'ASSOCIATIONS.REMOVE_ASSOCIATION_HELP' | translate"></p>
+
+    <div *ngIf="entryIsActive">
+      <p [innerHTML]="'RPM.PATIENT_HAS_RPM_SESSION' | translate"></p>
+
+      <div>
+        <p class="notice entry" *ngIf="entryPending">
+            {{ entryPending === 'same-day' ? ('RPM.RPM_WILL_BE_ENABLED_AT_6_AM' | translate) : ('RPM.RPM_WILL_BE_ENABLED_TOMORROW' | translate) }}
+        </p>
+        <p class="notice entry" *ngIf="!entryPending">
+            {{ 'RPM.RPM_ENABLED' | translate:{
+                patient: client.firstName + ' ' + client.lastName,
+                date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY' }
+            }}
+        </p>
+      </div>
+
+      <div class="separator"></div>
+
+      <app-rpm-status-info [rpmEntry]="rpmEntry"></app-rpm-status-info>
+    </div>
+
+    <p class="ccr-text-bold" [innerHTML]="'BOARD.SURE_WANT_TO_CONTINUE' | translate"></p>
+  </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end stretch" fxLayoutAlign.xs="center stretch">
+  <button mat-raised-button class="ccr-button" color="warn" [matDialogClose]="true">{{ 'GLOBAL.YES' | translate }}</button>
+  <button mat-raised-button class="ccr-button" [matDialogClose]="false">{{ 'GLOBAL.NO' | translate }}</button>
+</div>

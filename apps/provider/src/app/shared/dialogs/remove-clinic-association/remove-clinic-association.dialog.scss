@@ -1,0 +1,35 @@
+@import 'variables';
+
+.notice {
+  text-align: center;
+
+  &.create {
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  &.entry,
+  &.no-entry {
+    font-weight: bold;
+  }
+
+  &.performed-by {
+    margin-bottom: 5px;
+  }
+
+  &.rpm-cta {
+    color: var(--primary, mat-color($ccr-primary));
+    cursor: pointer;
+    font-weight: normal !important;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.separator {
+  border: 1px solid var(--bg-panel, mat-color($ccr-background, chart));
+  height: 0;
+  margin: 15px auto 25px auto;
+  width: 90%;
+}

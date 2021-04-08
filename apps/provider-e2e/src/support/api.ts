@@ -578,6 +578,11 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     statusCode: 204,
     body: {}
   }).as('rpmDiagnosisPutRequest')
+
+  cy.intercept('DELETE', '2.0/association/**', {
+    statusCode: 204,
+    body: {}
+  }).as('clinicAssociationDeleteRequest')
 }
 
 const seti18n = (): void => {

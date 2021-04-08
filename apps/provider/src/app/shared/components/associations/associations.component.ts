@@ -7,10 +7,14 @@ import {
   AssociationsDataSource
 } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations'
 import { ContextService, NotifierService } from '@app/service'
-import { PromptDialog } from '@app/shared/dialogs'
+import {
+  PromptDialog,
+  RemoveClinicAssociationDialog
+} from '@app/shared/dialogs'
 import { OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { OrganizationAssociation } from '@coachcare/npm-api'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-account-associations',
@@ -90,23 +94,21 @@ export class CcrAccountAssociationsComponent implements OnInit {
       return
     }
     this.dialog
-      .open(PromptDialog, {
+      .open(RemoveClinicAssociationDialog, {
         data: {
-          title: _('ASSOCIATIONS.REMOVE_CLINIC_ASSOCIATION'),
-          content: _('ASSOCIATIONS.REMOVE_ASSOCIATION_HELP')
+          organizationId: association.organization.id
         }
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
         try {
-          if (confirm) {
-            await this.organizationAssociation.delete({
-              account: this.account,
-              organization: association.organization.id
-            })
-            this.paginator.firstPage()
-            this.source.refresh()
-          }
+          await this.organizationAssociation.delete({
+            account: this.account,
+            organization: association.organization.id
+          })
+          this.paginator.firstPage()
+          this.source.refresh()
         } catch (error) {
           this.notify.error(error)
         }

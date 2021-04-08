@@ -11,6 +11,7 @@ export * from './message-add-member'
 export * from './message-patient'
 export * from './options.dialog'
 export * from './prompt.dialog'
+export * from './remove-clinic-association'
 export * from './rpm-patient-report'
 export * from './rpm-status'
 export * from './schedule-select.dialog'
@@ -40,6 +41,7 @@ import { TextInputDialog } from './text-input.dialog'
 import { ViewImageDialog } from './view-image'
 import { WalkthroughDialog } from './walkthrough'
 import { RPMEditFormComponent, RPMEntryCardComponent } from './rpm-status'
+import { RemoveClinicAssociationDialog } from './remove-clinic-association'
 
 export const Dialogs = [
   AccountRedirectDialog,
@@ -55,6 +57,7 @@ export const Dialogs = [
   MessagePatientDialog,
   OptionsDialog,
   PromptDialog,
+  RemoveClinicAssociationDialog,
   RPMPatientReportDialog,
   RPMStatusDialog,
   ScheduleSelectDialog,

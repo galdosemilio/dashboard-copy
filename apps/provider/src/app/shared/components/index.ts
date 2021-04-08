@@ -60,6 +60,7 @@ import { CcrImageOptionSelectorComponent } from './image-option-selector'
 import { CcrTableSortHeaderComponent } from './table-sort-header'
 import { CcrSearchSelectorComponent } from './search-selector'
 import { CcrTinInputComponent } from './tin-input'
+import { RPMStatusInfoComponent } from './rpm-status-info'
 
 export {
   AlertIconComponent,
@@ -158,6 +159,7 @@ export const CmpComponents = [
   QuickDateRangeComponent,
   RPMComponent,
   RPMTrackerComponent,
+  RPMStatusInfoComponent,
   RPMStatusPanelComponent,
   SequenceSearchComponent,
   TextFormFieldComponent,
