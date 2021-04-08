@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Ajouter Clinique Association",
     "ASSOCIATE": "Associer",
     "ASSOCIATIONS_EMPTY_LIST": "Il n'y a pas d'associations qui correspondent aux critères de recherche.",
-    "REMOVE_ASSOCIATION_HELP": "Vous êtes sur le point de supprimer une association de cet utilisateur. Cela signifie que les entraîneurs peuvent ne pas être en mesure d'accéder à leurs données ni leurs profils plus. Toute inscription RPM existant entre ce patient et la clinique sélectionnée sera également désactivé.<br/><br/><strong>Êtes-vous sûr de vouloir continuer?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Vous êtes sur le point de supprimer une association de cet utilisateur. Cela signifie que les entraîneurs peuvent ne pas être en mesure d'accéder à leurs données ni leurs profils plus. Toute inscription RPM existant entre ce patient et la clinique sélectionnée sera également désactivé.",
     "REMOVE_CLINIC_ASSOCIATION": "Retirer Clinique Association"
   },
   "BOARD": {
@@ -285,6 +285,7 @@
     "STATUS": "Statut",
     "STREET": "Rue",
     "SUGAR": "Sucre",
+    "SURE_WANT_TO_CONTINUE": "Es-tu sur de vouloir continuer?",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Sélectionnez un seul patient ou l'entraîneur d'ajouter à ce fil de message.<br><br>Une fois ajouté, ce compte aura accès à la vue <strong>tous</strong> messages existants et nouveaux dans ce fil de message. De plus, ils seront en mesure d'ajouter de nouveaux messages sur le fil.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associé à <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informations du fil",
@@ -1226,6 +1227,7 @@
     "NONE": "Aucun",
     "NO_SUPERVISING_PROVIDER_WARNING": "La clinique {{clinic.name}} n'a pas de disposition des fournisseurs de supervision. L'administrateur de la clinique doit ajouter au moins un fournisseur de supervision dans la <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">clinique Paramètres</a> avant RPM peut être activé pour cette clinique.",
     "PATIENT_CONSENT_PROMPT": "Le patient a consenti et le consentement a été enregistré dans mon EHR",
+    "PATIENT_HAS_RPM_SESSION": "Ce patient a la session RPM suivante:",
     "PRIMARY_DIAGNOSIS": "Diagnostic Primaire",
     "RPM_CREATE_FORM_HEADER": "Les conditions suivantes ont été remplies pour ce patient:",
     "RPM_CREATE_NOTICE": "En permettant à ces outils",

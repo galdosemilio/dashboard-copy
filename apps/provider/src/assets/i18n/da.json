@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Tilføj klinik association",
     "ASSOCIATE": "Associer",
     "ASSOCIATIONS_EMPTY_LIST": "Der er ingen associationer, der matcher søgekriterierne.",
-    "REMOVE_ASSOCIATION_HELP": "Du er ved at fjerne en forening fra denne bruger. Det betyder, at busser ikke kan være i stand til at få adgang til deres data eller deres profiler mere. Enhver eksisterende RPM indskrivning mellem denne patient og den valgte klinik vil også blive deaktiveret.<br/><br/><strong>Er du sikker på du ønsker at fortsætte?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Du er ved at fjerne en forening fra denne bruger. Det betyder, at busser ikke kan være i stand til at få adgang til deres data eller deres profiler mere. Alle eksisterende RPM indskrivning mellem denne patient og den valgte klinik vil også deaktiveres.",
     "REMOVE_CLINIC_ASSOCIATION": "Fjern klinik association"
   },
   "BOARD": {
@@ -285,6 +285,7 @@
     "STATUS": "Status",
     "STREET": "Gade",
     "SUGAR": "Sukker",
+    "SURE_WANT_TO_CONTINUE": "Er du sikker på du vil fortsætte?",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Vælg en enkelt patient eller træner for at tilføje denne besked tråd.<br><br> Når den er tilføjet, vil denne konto har adgang til visning <strong>alle</strong> eksisterende og nye meddelelser i denne besked tråd. Endvidere vil de være i stand til at tilføje nye meddelelser til tråden.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Tråd, er forbundet med <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Tråd Information",
@@ -1226,6 +1227,7 @@
     "NONE": "Ingen",
     "NO_SUPERVISING_PROVIDER_WARNING": "Klinikken {{clinic.name}} ikke har nogen ledige fører tilsyn Providers. Klinikken administrator skal tilføje mindst én Supervising Provider i <a href=\"accounts/clinics/{{clinic.id}};s=billing-services\">Clinic Indstillinger</a> før RPM kan være aktiveret for denne klinik.",
     "PATIENT_CONSENT_PROMPT": "Patienten har givet samtykke, og samtykke er registreret i min EHR",
+    "PATIENT_HAS_RPM_SESSION": "Denne patient har følgende RPM session:",
     "PRIMARY_DIAGNOSIS": "Primær diagnose",
     "RPM_CREATE_FORM_HEADER": "Følgende krav er opfyldt til denne patient:",
     "RPM_CREATE_NOTICE": "Ved at aktivere disse værktøjer",

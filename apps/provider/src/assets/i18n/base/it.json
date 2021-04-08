@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Aggiungi Associazione Clinica",
     "ASSOCIATE": "Associa",
     "ASSOCIATIONS_EMPTY_LIST": "Non ci sono associazioni che corrispondono ai criteri di ricerca.",
-    "REMOVE_ASSOCIATION_HELP": "Stai per rimuovere un associazione di questo utente. Questo significa che gli allenatori potrebbero non essere in grado di accedere ai propri dati, né i loro profili più. Qualsiasi iscrizione RPM esistente tra questo paziente e la clinica selezionato sarà anche disattivata.<br/><br/><strong>Sei sicuro di voler continuare?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Stai per rimuovere un associazione di questo utente. Questo significa che gli allenatori potrebbero non essere in grado di accedere ai propri dati, né i loro profili più. Qualsiasi iscrizione RPM esistente tra questo paziente e la clinica selezionato sarà anche disattivata.",
     "REMOVE_CLINIC_ASSOCIATION": "Elimina Associazione Clinica"
   },
   "BOARD": {
@@ -285,6 +285,7 @@
     "STATUS": "Stato",
     "STREET": "Via",
     "SUGAR": "Zuccheri",
+    "SURE_WANT_TO_CONTINUE": "Sei sicuro di voler continuare?",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Selezionare un singolo paziente o pullman per aggiungere a questo thread di messaggi.<br><br> Una volta aggiunto, questo account avrà accesso a vista <strong>tutti</strong> messaggi esistenti e nuovi in ​​questo thread di messaggi. Inoltre, essi saranno in grado di aggiungere nuovi messaggi al thread.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associato <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informazioni Discussione",
@@ -1226,6 +1227,7 @@
     "NONE": "Nessuna",
     "NO_SUPERVISING_PROVIDER_WARNING": "La clinica {{clinic.name}} non ha nessun Provider Supervisione disponibili. L'amministratore clinica deve aggiungere almeno una supervisione Provider nel <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">Impostazioni Clinic</a> prima RPM può essere abilitata per questa clinica.",
     "PATIENT_CONSENT_PROMPT": "Il paziente ha acconsentito e il consenso è stato registrato nella mia cartella clinica elettronica",
+    "PATIENT_HAS_RPM_SESSION": "Questo paziente ha la seguente sessione di RPM:",
     "PRIMARY_DIAGNOSIS": "Diagnosi Primaria",
     "RPM_CREATE_FORM_HEADER": "I seguenti requisiti sono stati completati per questo paziente:",
     "RPM_CREATE_NOTICE": "Abilitando questi strumenti",

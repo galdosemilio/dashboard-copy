@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Add Clinic Association",
     "ASSOCIATE": "Associate",
     "ASSOCIATIONS_EMPTY_LIST": "There are no associations that match the search criteria.",
-    "REMOVE_ASSOCIATION_HELP": "You're about to remove an association from this user. This means that coaches may not be able to access their data nor their profiles any more.  Any existing RPM enrollment between this patient and the selected clinic will also be deactivated.<br/><br/><strong>Are you sure you want to continue?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "You're about to remove an association from this user. This means that coaches may not be able to access their data nor their profiles any more. Any existing RPM enrollment between this patient and the selected clinic will also be deactivated.",
     "REMOVE_CLINIC_ASSOCIATION": "Remove Clinic Association"
   },
   "BOARD": {
@@ -285,6 +285,7 @@
     "STATUS": "Status",
     "STREET": "Street",
     "SUGAR": "Sugar",
+    "SURE_WANT_TO_CONTINUE": "Are you sure you want to continue?",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Select a single patient or coach to add to this message thread.<br><br>Once added, this account will have access to view <strong>all</strong> existing and new messages in this message thread. Further, they will be able to add new messages to the thread.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associated with <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Thread Information",
@@ -1226,6 +1227,7 @@
     "NONE": "None",
     "NO_SUPERVISING_PROVIDER_WARNING": "The clinic {{clinic.name}} does not have any available Supervising Providers. The clinic administrator must add at least one Supervising Provider in the <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">Clinic Settings</a> before RPM can be enabled for this clinic.",
     "PATIENT_CONSENT_PROMPT": "Patient has consented and consent has been recorded in my EHR",
+    "PATIENT_HAS_RPM_SESSION": "This patient has the following RPM session:",
     "PRIMARY_DIAGNOSIS": "Primary Diagnosis",
     "RPM_CREATE_FORM_HEADER": "The following requirements have been completed for this patient:",
     "RPM_CREATE_NOTICE": "By enabling these tools, you will be billed monthly for this patient.",

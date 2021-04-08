@@ -39,7 +39,7 @@
     "ADD_CLINIC_ASSOCIATION": "Adicionar Associação Clínica",
     "ASSOCIATE": "Associar",
     "ASSOCIATIONS_EMPTY_LIST": "Não existem associações que correspondam aos critérios de pesquisa.",
-    "REMOVE_ASSOCIATION_HELP": "Você está prestes a remover uma associação deste utilizador. Isto significa que treinadores podem não ser capazes de acessar seus dados, nem os seus perfis mais. Qualquer inscrição RPM existente entre este paciente ea clínica selecionado também será desativado.<br/><br/><strong>Tem certeza de que deseja continuar?</strong>",
+    "REMOVE_ASSOCIATION_HELP": "Você está prestes a remover uma associação deste utilizador. Isto significa que treinadores podem não ser capazes de acessar seus dados, nem os seus perfis mais. Qualquer inscrição RPM existente entre este paciente ea clínica selecionado também será desativado.",
     "REMOVE_CLINIC_ASSOCIATION": "Remover Associação Clínica"
   },
   "BOARD": {
@@ -285,6 +285,7 @@
     "STATUS": "Estado",
     "STREET": "Rua",
     "SUGAR": "Açúcar",
+    "SURE_WANT_TO_CONTINUE": "Você tem certeza que quer continuar?",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Selecione um único paciente ou treinador para adicionar a este tópico de mensagem.<br><br> Uma vez adicionado, esta conta terá acesso a vista <strong>todas</strong> mensagens existentes e novos neste segmento de mensagem. Além disso, eles serão capazes de adicionar novas mensagens para o segmento.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associado <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informações fio",
@@ -1226,6 +1227,7 @@
     "NONE": "Nenhum",
     "NO_SUPERVISING_PROVIDER_WARNING": "A clínica {{clinic.name}} não tem nenhum Provedores de Supervisão disponíveis. O administrador clínica deve adicionar pelo menos um provedor de Supervisão na <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">Configurações clínica</a> antes de RPM pode ser activada para esta clínica.",
     "PATIENT_CONSENT_PROMPT": "O paciente consentiu e o consentimento foi registado na minha EHR",
+    "PATIENT_HAS_RPM_SESSION": "Este paciente tem a seguinte sessão RPM:",
     "PRIMARY_DIAGNOSIS": "Diagnóstico Primário",
     "RPM_CREATE_FORM_HEADER": "Os seguintes requisitos foram cumpridos para este paciente:",
     "RPM_CREATE_NOTICE": "Ao ativar estas ferramentas",
