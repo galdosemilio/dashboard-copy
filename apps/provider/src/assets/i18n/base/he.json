@@ -1224,7 +1224,7 @@
     "MEDICAL_NECESSITY_PROMPT": "שירות זה הוזמן על ידי רופא מקצועי מוסמך",
     "NEXT_CLAIM": "דרישות תביעה הבאות",
     "NONE": "אף אחד",
-    "NO_SUPERVISING_PROVIDER_WARNING": "המרפאה {{KEEPclinic.name}} אין שום ספקי פיקוח זמין. מנהל מרפאת חייב להוסיף לפחות ספק פיקוח אחד <a href=\"/accounts/clinics/{{clinic.id}};s=billable-services\">הגדרות קליניק</a> לפני סל\"ד ניתן לאפשר לך מרפאה זו.",
+    "NO_SUPERVISING_PROVIDER_WARNING": "המרפאה {{KEEPclinic.name}} אין שום ספקי פיקוח זמין. מנהל מרפאת חייב להוסיף לפחות ספק פיקוח אחד <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">הגדרות קליניק</a> לפני סל\"ד ניתן לאפשר לך מרפאה זו.",
     "PATIENT_CONSENT_PROMPT": "המטופל הסכים והסכמה נרשמה ב- EHR שלי",
     "PRIMARY_DIAGNOSIS": "אבחון ראשוני",
     "RPM_CREATE_FORM_HEADER": "הדרישות הבאות הושלמו עבור המטופל:",

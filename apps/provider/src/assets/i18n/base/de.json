@@ -1194,8 +1194,8 @@
     "VISCERAL_FAT_TANITA": "Viszerales Fett (Bewertung)"
   },
   "RPM": {
-    "ABOUT_RPM": "Dies schaltet die RPM-Dienste (Remote Patient Monitoring) ein und aus, die inzwischen von Medicare und vielen kommerziellen Kostenträgern erstattet werden. Sie können das RPM für diesen Patienten hier aktivieren oder sich an <a href='mailto:sales@coachcare.com'>sales@coachcare.com</a> wenden für weitere Informationen. Bitte beachten Sie, dass für diese Dienste ein Zuschlag erhoben wird.",
     "24H_AGE_NOTICE": "Diese RPM-Sitzung wird bereits nach 24 Stunden bearbeitet einmal worden. Es kann nicht wieder geändert werden.",
+    "ABOUT_RPM": "Dies schaltet die RPM-Dienste (Remote Patient Monitoring) ein und aus, die inzwischen von Medicare und vielen kommerziellen Kostenträgern erstattet werden. Sie können das RPM für diesen Patienten hier aktivieren oder sich an <a href='mailto:sales@coachcare.com'>sales@coachcare.com</a> wenden für weitere Informationen. Bitte beachten Sie, dass für diese Dienste ein Zuschlag erhoben wird.",
     "ACTIVATION_DATE": "Aktivierungs-Datum",
     "ALREADY_ELIGIBLE": "Bereits förderfähig",
     "BP_CUFF": "BEAT Blutdruckmanschette",
@@ -1224,7 +1224,7 @@
     "MEDICAL_NECESSITY_PROMPT": "Dieser Service wurde von einer qualifizierten medizinischen Fachkraft bestellt",
     "NEXT_CLAIM": "Weiter Anspruch Anforderungen",
     "NONE": "Keiner",
-    "NO_SUPERVISING_PROVIDER_WARNING": "Die Klinik {{clinic.name}} hat keinen verfügbaren Supervising Providers. Der Administrator Klinik muss mindestens ein Supervising Provider in der hinzufügen <a href=\"/accounts/clinics/{{clinic.id}};s=billable-service\">Klinik-Einstellungen</a> vor RPM kann für diese Klinik aktiviert werden.",
+    "NO_SUPERVISING_PROVIDER_WARNING": "Die Klinik {{clinic.name}} hat keinen verfügbaren Supervising Providers. Der Administrator Klinik muss mindestens ein Supervising Provider in der hinzufügen <a href=\"accounts/clinics/{{clinic.id}};s=billable-service\">Klinik-Einstellungen</a> vor RPM kann für diese Klinik aktiviert werden.",
     "PATIENT_CONSENT_PROMPT": "Der Patient hat zugestimmt und die Zustimmung wurde in meiner EPA festgehalten",
     "PRIMARY_DIAGNOSIS": "Erstdiagnose",
     "RPM_CREATE_FORM_HEADER": "Die folgenden Anforderungen wurden für diesen Patienten erfüllt:",

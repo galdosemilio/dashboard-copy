@@ -1224,7 +1224,7 @@
     "MEDICAL_NECESSITY_PROMPT": "Ce service a été commandé par un professionnel de la santé qualifié",
     "NEXT_CLAIM": "Exigences suivant Claim",
     "NONE": "Aucun",
-    "NO_SUPERVISING_PROVIDER_WARNING": "La clinique {{clinic.name}} n'a pas de disposition des fournisseurs de supervision. L'administrateur de la clinique doit ajouter au moins un fournisseur de supervision dans la <a href=\"/accounts/clinics/{{clinic.id}};s=billable-services\">clinique Paramètres</a> avant RPM peut être activé pour cette clinique.",
+    "NO_SUPERVISING_PROVIDER_WARNING": "La clinique {{clinic.name}} n'a pas de disposition des fournisseurs de supervision. L'administrateur de la clinique doit ajouter au moins un fournisseur de supervision dans la <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">clinique Paramètres</a> avant RPM peut être activé pour cette clinique.",
     "PATIENT_CONSENT_PROMPT": "Le patient a consenti et le consentement a été enregistré dans mon EHR",
     "PRIMARY_DIAGNOSIS": "Diagnostic Primaire",
     "RPM_CREATE_FORM_HEADER": "Les conditions suivantes ont été remplies pour ce patient:",

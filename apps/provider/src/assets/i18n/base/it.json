@@ -1224,7 +1224,7 @@
     "MEDICAL_NECESSITY_PROMPT": "Questo servizio è stato ordinato da un operatore sanitario.",
     "NEXT_CLAIM": "Avanti Requisiti Claim",
     "NONE": "Nessuna",
-    "NO_SUPERVISING_PROVIDER_WARNING": "La clinica {{clinic.name}} non ha nessun Provider Supervisione disponibili. L'amministratore clinica deve aggiungere almeno una supervisione Provider nel <a href=\"/accounts/clinics/{{clinic.id}};s=billable-services\">Impostazioni Clinic</a> prima RPM può essere abilitata per questa clinica.",
+    "NO_SUPERVISING_PROVIDER_WARNING": "La clinica {{clinic.name}} non ha nessun Provider Supervisione disponibili. L'amministratore clinica deve aggiungere almeno una supervisione Provider nel <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">Impostazioni Clinic</a> prima RPM può essere abilitata per questa clinica.",
     "PATIENT_CONSENT_PROMPT": "Il paziente ha acconsentito e il consenso è stato registrato nella mia cartella clinica elettronica",
     "PRIMARY_DIAGNOSIS": "Diagnosi Primaria",
     "RPM_CREATE_FORM_HEADER": "I seguenti requisiti sono stati completati per questo paziente:",

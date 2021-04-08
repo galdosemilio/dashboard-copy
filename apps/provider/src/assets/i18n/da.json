@@ -1224,7 +1224,7 @@
     "MEDICAL_NECESSITY_PROMPT": "Denne service er bestilt af en kvalificeret sundhedsperson",
     "NEXT_CLAIM": "Næste Claim Krav",
     "NONE": "Ingen",
-    "NO_SUPERVISING_PROVIDER_WARNING": "Klinikken {{clinic.name}} ikke har nogen ledige fører tilsyn Providers. Klinikken administrator skal tilføje mindst én Supervising Provider i <a href=\"/accounts/clinics/{{clinic.id}};s=billing-services\">Clinic Indstillinger</a> før RPM kan være aktiveret for denne klinik.",
+    "NO_SUPERVISING_PROVIDER_WARNING": "Klinikken {{clinic.name}} ikke har nogen ledige fører tilsyn Providers. Klinikken administrator skal tilføje mindst én Supervising Provider i <a href=\"accounts/clinics/{{clinic.id}};s=billing-services\">Clinic Indstillinger</a> før RPM kan være aktiveret for denne klinik.",
     "PATIENT_CONSENT_PROMPT": "Patienten har givet samtykke, og samtykke er registreret i min EHR",
     "PRIMARY_DIAGNOSIS": "Primær diagnose",
     "RPM_CREATE_FORM_HEADER": "Følgende krav er opfyldt til denne patient:",

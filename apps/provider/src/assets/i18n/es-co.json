@@ -1224,7 +1224,7 @@
     "MEDICAL_NECESSITY_PROMPT": "Este servicio ha sido solicitado por un profesional de la salud calificado",
     "NEXT_CLAIM": "Requisitos para el siguiente Reclamo",
     "NONE": "Ninguno",
-    "NO_SUPERVISING_PROVIDER_WARNING": "La clínica {{clinic.name}} no tiene a ningún Asesor Supervisor disponible. El administrador de la clínica debe añadir al menos un Asesor Supervisor en las <a href=\"/accounts/clinics/{{clinic.id}};s=billable-services\">Configuraciones de la Clínica</a> antes de que se pueda habilitar RPM en esta clínica.",
+    "NO_SUPERVISING_PROVIDER_WARNING": "La clínica {{clinic.name}} no tiene a ningún Asesor Supervisor disponible. El administrador de la clínica debe añadir al menos un Asesor Supervisor en las <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">Configuraciones de la Clínica</a> antes de que se pueda habilitar RPM en esta clínica.",
     "PATIENT_CONSENT_PROMPT": "El paciente ha consentido y el consentimiento se ha registrado en mi EHR",
     "PRIMARY_DIAGNOSIS": "Diagnóstico Primario",
     "RPM_CREATE_FORM_HEADER": "Los siguientes requisitos se han completado para este paciente:",

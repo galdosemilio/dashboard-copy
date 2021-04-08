@@ -1224,7 +1224,7 @@
     "MEDICAL_NECESSITY_PROMPT": "This service has been ordered by a qualified healthcare professional",
     "NEXT_CLAIM": "Next Claim Requirements",
     "NONE": "None",
-    "NO_SUPERVISING_PROVIDER_WARNING": "The clinic {{clinic.name}} does not have any available Supervising Providers. The clinic administrator must add at least one Supervising Provider in the <a href=\"/accounts/clinics/{{clinic.id}};s=billable-services\">Clinic Settings</a> before RPM can be enabled for this clinic.",
+    "NO_SUPERVISING_PROVIDER_WARNING": "The clinic {{clinic.name}} does not have any available Supervising Providers. The clinic administrator must add at least one Supervising Provider in the <a href=\"accounts/clinics/{{clinic.id}};s=billable-services\">Clinic Settings</a> before RPM can be enabled for this clinic.",
     "PATIENT_CONSENT_PROMPT": "Patient has consented and consent has been recorded in my EHR",
     "PRIMARY_DIAGNOSIS": "Primary Diagnosis",
     "RPM_CREATE_FORM_HEADER": "The following requirements have been completed for this patient:",
