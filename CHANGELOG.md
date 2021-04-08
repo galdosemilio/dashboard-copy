@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/coachcare/dashboard/compare/v1.4.0...v1.5.0) (2021-04-08)
+
+
+### Bug Fixes
+
+* start call icon in user search results [FRON-2121] ([1fc9736](https://github.com/coachcare/dashboard/commit/1fc9736491ca40cb469c3e2d6bce36963f8f4c16))
+
+
+### Features
+
+* add note for other deactivate reason for RPM [FRON-2119] ([5f9d2e4](https://github.com/coachcare/dashboard/commit/5f9d2e472b85b564e8ab02efb9d97151b16e1f71))
+* adjusted e2e test environment ([b3efc5b](https://github.com/coachcare/dashboard/commit/b3efc5b16bab712453dcaad9173fe75f8de7ba8d))
+* implemented rpm superbill features [IDEA-718] [IDEA-768] ([5752b59](https://github.com/coachcare/dashboard/commit/5752b593421295037763394d7337cb6011311755))
+
 # [1.4.0](https://github.com/coachcare/dashboard/compare/v1.3.0...v1.4.0) (2021-04-06)
 
 
