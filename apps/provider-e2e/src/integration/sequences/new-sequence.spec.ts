@@ -40,6 +40,8 @@ describe('Sequences -> new', function () {
     cy.get('[data-cy="sequenceClinicInfo"]').contains(
       'Associated with clinic CoachCare (ID 1)'
     )
+
+    cy.get('.step-list-item').as('steps')
   })
 
   it('Hours availablity respect previous selections', function () {
@@ -425,9 +427,6 @@ describe('Sequences -> new', function () {
   })
 
   it('Can edit the sequence without losing consistency', function () {
-    cy.setTimezone('et')
-    standardSetup()
-
     cy.visit(`/sequences`)
 
     cy.get('.ccr-icon-button').contains('Create New Sequence').trigger('click')
@@ -519,9 +518,6 @@ describe('Sequences -> new', function () {
   })
 
   it('Can duplicate a sequence', function () {
-    cy.setTimezone('et')
-    standardSetup()
-
     cy.visit(`/sequences`)
 
     cy.get('app-sequencing-sequences-table').find('mat-row').as('sequenceRows')
@@ -541,9 +537,6 @@ describe('Sequences -> new', function () {
   })
 
   it('Shows the max length warnings for SMS and Notification inputs', function () {
-    cy.setTimezone('et')
-    standardSetup()
-
     cy.visit(`/sequences`)
 
     cy.get('.ccr-icon-button').contains('Create New Sequence').trigger('click')

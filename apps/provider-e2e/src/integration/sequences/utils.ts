@@ -229,6 +229,7 @@ export function deactivateReorder(): void {
 export function deleteStep(stepName: string): void {
   cy.get(getStepRowAlias(stepName))
     .find('mat-icon:visible')
+    .contains('delete')
     .eq(0)
     .trigger('click')
 
