@@ -3,10 +3,15 @@ import { standardSetup } from './../../../support'
 describe('Patient profile -> clinics', function () {
   beforeEach(() => {
     cy.setTimezone('et')
+    standardSetup(undefined, [
+      {
+        url: '/1.0/rpm/state**',
+        fixture: 'api/rpm/rpmStateEnabledEntries'
+      }
+    ])
   })
 
   it('Clinics associations exist for patient, and show correctly', function () {
-    standardSetup()
     cy.visit(
       `/accounts/patients/${Cypress.env('clientId')}/settings;s=associations`
     )
@@ -26,7 +31,6 @@ describe('Patient profile -> clinics', function () {
   })
 
   it('Clinics associations can be added for patient', function () {
-    standardSetup()
     cy.visit(
       `/accounts/patients/${Cypress.env('clientId')}/settings;s=associations`
     )
@@ -59,7 +63,6 @@ describe('Patient profile -> clinics', function () {
   })
 
   it('Deletable clinics associations limited to only "admin" permissioned clinic', function () {
-    standardSetup()
     cy.intercept('GET', '/2.0/access/organization?**', {
       fixture: 'api/organization/getAll-noadmin'
     })
@@ -87,7 +90,6 @@ describe('Patient profile -> clinics', function () {
   })
 
   it('Cannot add association if no "admin" permissioned clinics', function () {
-    standardSetup()
     cy.intercept('GET', '/2.0/access/organization?**', {
       fixture: 'api/organization/getAll-noadmin'
     })
@@ -106,13 +108,6 @@ describe('Patient profile -> clinics', function () {
   })
 
   it('Properly shows the current RPM session (if enabled)', function () {
-    standardSetup(undefined, [
-      {
-        url: '/1.0/rpm/state**',
-        fixture: 'api/rpm/rpmStateEnabledEntries'
-      }
-    ])
-
     cy.visit(
       `/accounts/patients/${Cypress.env('clientId')}/settings;s=associations`
     )
@@ -140,13 +135,6 @@ describe('Patient profile -> clinics', function () {
   })
 
   it('Properly shows the Inaccessible Coach message in the RPM session', function () {
-    standardSetup(undefined, [
-      {
-        url: '/1.0/rpm/state**',
-        fixture: 'api/rpm/rpmStateEnabledEntries'
-      }
-    ])
-
     cy.visit(
       `/accounts/patients/${Cypress.env('clientId')}/settings;s=associations`
     )
