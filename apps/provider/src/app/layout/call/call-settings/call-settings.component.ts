@@ -75,6 +75,7 @@ export class CallSettingsComponent implements OnDestroy, OnInit {
     }
   }
   testAudioSound
+  formValueChangesSub
 
   constructor(
     private builder: FormBuilder,
@@ -93,6 +94,7 @@ export class CallSettingsComponent implements OnDestroy, OnInit {
   ngOnDestroy() {
     this.disableAudioPreview()
     this.disableVideoPreview()
+    this.formValueChangesSub.unsubscribe()
   }
 
   ngOnInit() {
@@ -154,7 +156,7 @@ export class CallSettingsComponent implements OnDestroy, OnInit {
       selectedAudioOutputDevice: []
     })
 
-    this.form.valueChanges
+    this.formValueChangesSub = this.form.valueChanges
       .pipe(untilDestroyed(this), debounceTime(300))
       .subscribe((controls) => {
         this.updateVideoPreview(controls.selectedVideoInputDevice)
