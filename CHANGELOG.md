@@ -1,3 +1,11 @@
+## [1.5.1](https://github.com/coachcare/dashboard/compare/v1.5.0...v1.5.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* adjusted clinic settings link [FRON-2127] ([35dfa2d](https://github.com/coachcare/dashboard/commit/35dfa2df39c7ba106591a80e81dd50af6ddfe28b))
+* adjusted cypress tests ([733c0ec](https://github.com/coachcare/dashboard/commit/733c0ec35e8444ab713573a56ae125013d12cf58))
+
 # [1.5.0](https://github.com/coachcare/dashboard/compare/v1.4.0...v1.5.0) (2021-04-08)
 
 
