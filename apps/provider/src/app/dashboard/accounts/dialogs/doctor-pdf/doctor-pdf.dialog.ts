@@ -38,7 +38,6 @@ interface PDFProvider {
   firstName: string
   lastName: string
   practice: string
-  fax: string
 }
 
 interface PDFTableElement {
@@ -510,10 +509,9 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
 
     answers.forEach((answerObj) => {
       const provider: PDFProvider = {
-        firstName: answerObj.answers[0].response.value,
-        lastName: answerObj.answers[1].response.value,
-        practice: answerObj.answers[2].response.value,
-        fax: answerObj.answers[3].response.value
+        firstName: answerObj.answers[0]?.response.value ?? '',
+        lastName: answerObj.answers[1]?.response.value ?? '',
+        practice: answerObj.answers[2]?.response.value ?? ''
       }
 
       if (
