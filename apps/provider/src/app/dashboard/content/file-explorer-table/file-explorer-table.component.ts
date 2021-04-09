@@ -411,12 +411,16 @@ export class FileExplorerTableComponent
       this.sort,
       () =>
         ({
-          sort: [
-            {
-              property: this.sort.active || 'createdAt',
-              dir: this.sort.direction || 'asc'
-            }
-          ]
+          sort:
+            this.sort.active && this.sort.direction
+              ? [
+                  {
+                    property: this.sort.active,
+                    dir: this.sort.direction
+                  }
+                ]
+              : [],
+          isCustomSort: !this.sort.active || !this.sort.direction
         } as any)
     )
   }

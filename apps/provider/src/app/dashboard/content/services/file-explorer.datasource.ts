@@ -1,4 +1,4 @@
-import { chain, fromPairs } from 'lodash'
+import { chain, fromPairs, orderBy } from 'lodash'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -84,46 +84,28 @@ export class FileExplorerDatasource extends TableDataSource<
 
     let fileExplorerSortOrder = 0
     const opts = { organizationId: this.context.organizationId }
-    const data = result.data
-      .map((r: ContentSingle) => {
-        const localSortOrder = r.sortOrder ? false : true
-        fileExplorerSortOrder = r.sortOrder
-          ? r.sortOrder
-          : ++fileExplorerSortOrder
-        return new FileExplorerContent(
-          {
-            ...r,
-            localSortOrder: localSortOrder,
-            sortOrder: fileExplorerSortOrder,
-            isAdmin:
-              this.context.organization.permissions.admin &&
-              this.context.organization.isDirect &&
-              perms[r.organization.id]
-          },
-          opts
-        )
-      })
-      .sort((prev, next) => {
-        if (prev.sortOrder > next.sortOrder) {
-          return 1
-        } else if (prev.sortOrder < next.sortOrder) {
-          return -1
-        } else {
-          return 0
-        }
-      })
-      .sort((prev, next) => {
-        if (prev.isForeign && !next.isForeign) {
-          return -1
-        } else if (
-          (prev.isForeign && next.isForeign) ||
-          (!prev.isForeign && !next.isForeign)
-        ) {
-          return 0
-        } else if (!prev.isForeign && next.isForeign) {
-          return 1
-        }
-      })
+    let data = result.data.map((r: ContentSingle) => {
+      const localSortOrder = r.sortOrder ? false : true
+      fileExplorerSortOrder = r.sortOrder
+        ? r.sortOrder
+        : ++fileExplorerSortOrder
+      return new FileExplorerContent(
+        {
+          ...r,
+          localSortOrder: localSortOrder,
+          sortOrder: fileExplorerSortOrder,
+          isAdmin:
+            this.context.organization.permissions.admin &&
+            this.context.organization.isDirect &&
+            perms[r.organization.id]
+        },
+        opts
+      )
+    })
+
+    if (this.criteria.isCustomSort) {
+      data = orderBy(data, ['isForeign', 'sortOrder'], ['desc', 'asc'])
+    }
 
     data.forEach((content: FileExplorerContent, index: number) => {
       if (content.isForeign && data[index + 1] && !data[index + 1].isForeign) {

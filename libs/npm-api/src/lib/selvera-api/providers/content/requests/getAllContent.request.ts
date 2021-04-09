@@ -22,4 +22,5 @@ export interface GetAllContentRequest {
   /** Number of items to offset from beginning of the result set. */
   offset?: PageOffset
   sort?: ContentSort[]
+  isCustomSort?: boolean
 }
