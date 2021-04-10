@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/coachcare/dashboard/compare/v1.5.1...v1.5.2) (2021-04-10)
+
+
+### Bug Fixes
+
+* solved an issue causing the doctor pdf to crash [FRON-2129] ([7ddbf62](https://github.com/coachcare/dashboard/commit/7ddbf6225f97b6f77a4598c60c1f796983d0a812))
+
 ## [1.5.1](https://github.com/coachcare/dashboard/compare/v1.5.0...v1.5.1) (2021-04-09)
 
 
