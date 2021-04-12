@@ -19,7 +19,7 @@ describe('Messaging Feature for Patient Profile', function () {
     cy.tick(10000)
 
     cy.wait('@upsertMessageDraft', { timeout: 10000 }).should((xhr) => {
-      expect(xhr.request.body.data.message).to.equal('this is a test')
+      expect(xhr.request.body.data.patientMessage).to.equal('this is a test')
     })
   })
 })
