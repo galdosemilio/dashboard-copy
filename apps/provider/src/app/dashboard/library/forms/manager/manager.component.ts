@@ -19,10 +19,16 @@ import {
 } from '@app/dashboard/library/forms/models'
 import { SelectedOrganization } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
-import { AccountAccessData, FormAnswer } from '@coachcare/npm-api'
+import {
+  AccountAccessData,
+  FormAnswer,
+  FormSubmission as FormSubmissionService
+} from '@coachcare/npm-api'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FormDisplayService } from '../services'
+import { auditTime, takeUntil } from 'rxjs/operators'
+import * as moment from 'moment'
 
 @UntilDestroy()
 @Component({
@@ -54,6 +60,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
     this._selectedDieter = dieter
     // Seems way more performant than detecting changes, although it looks hacky --Zcyon
     setTimeout(() => this.form.patchValue({ selectedDieter: dieter }))
+    this.fetchDraft()
   }
 
   get selectedDieter(): AccountAccessData {
@@ -66,13 +73,17 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
   @Output()
   selectDieter: EventEmitter<void> = new EventEmitter<void>()
 
+  public draftSaveDate: moment.Moment
   public events: ManagerEvents = new ManagerEvents()
   public form: FormGroup
+  public isSavingDraft: boolean
   public hasMultipleSections = false
   public selectedSection: FormSection
 
   private _selectedDieter: AccountAccessData
   private defaultSectionName: string
+  private draftAuditTime = 5000
+  private hasDraft: boolean
   private selectedQuestion: FormQuestion
   private updatedSections: FormSection[] = []
 
@@ -80,12 +91,17 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
     public formDisplay: FormDisplayService,
     private cdr: ChangeDetectorRef,
     private formBuilder: FormBuilder,
+    private formSubmission: FormSubmissionService,
     private translate: TranslateService
   ) {}
 
   ngOnDestroy() {}
 
   ngOnInit() {
+    if (this.content.id) {
+      this.fetchDraft()
+    }
+
     this.createForm()
     if (!this.content.sections.length) {
       this.addFormSection()
@@ -119,6 +135,11 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
     this.hasMultipleSections = true
     this.content.sections.push(newSection)
     this.cdr.detectChanges()
+  }
+
+  public saveForm(): void {
+    this.formDisplay.save$.next()
+    this.removeDraft()
   }
 
   private addFormQuestion(section: FormSection): void {
@@ -181,6 +202,72 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
           setTimeout(() => this.events.refreshQuestionIndexes.emit())
         }
       })
+
+    if (this.content.id && this.fill) {
+      this.form.valueChanges
+        .pipe(
+          untilDestroyed(this),
+          auditTime(this.draftAuditTime),
+          takeUntil(this.formDisplay.save$)
+        )
+        .subscribe(() => {
+          void this.saveDraft()
+        })
+    }
+  }
+
+  private async fetchDraft(): Promise<void> {
+    try {
+      const draft = await this.formSubmission.getDraft({
+        account: this.selectedDieter.id,
+        form: this.content.id
+      })
+
+      this.hasDraft = true
+      this.draftSaveDate = moment(draft.data.date)
+      this.form.patchValue(draft.data.form)
+    } catch (error) {
+      this.hasDraft = false
+    }
+  }
+
+  private async removeDraft(): Promise<void> {
+    if (!this.hasDraft) {
+      return
+    }
+
+    try {
+      await this.formSubmission.deleteDraft({
+        account: this.selectedDieter.id,
+        form: this.content.id
+      })
+      this.hasDraft = false
+    } catch (error) {}
+  }
+
+  private async saveDraft(): Promise<void> {
+    try {
+      const {
+        sections,
+        selectedDieter,
+        updatedSections,
+        values,
+        ...draftData
+      } = this.form.value
+
+      this.isSavingDraft = true
+      await this.formSubmission.upsertDraft({
+        account: this.selectedDieter.id,
+        form: this.content.id,
+        data: { form: draftData, date: moment().toISOString() }
+      })
+
+      this.hasDraft = true
+      this.draftSaveDate = moment()
+    } catch (error) {
+    } finally {
+      this.isSavingDraft = false
+    }
   }
 
   private stageQuestionChanges(question: FormQuestion = this.selectedQuestion) {

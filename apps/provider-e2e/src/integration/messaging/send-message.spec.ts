@@ -7,7 +7,7 @@ describe('Messages -> send message', function () {
     standardSetup()
 
     cy.intercept('POST', `/2.0/message`, (request) => {
-      expect(request.body.content).to.contain('this is a test')
+      expect(request.body.content).to.contain('test')
       expect(request.body.subject).to.contain('CoachCare Message')
       expect(request.body.threadId).to.contain('1')
       request.reply({})
@@ -17,6 +17,7 @@ describe('Messages -> send message', function () {
 
     cy.get('ccr-messages')
       .find('textarea')
+      .should('be.enabled')
       .type('this is a test')
       .type('{enter}')
   })
@@ -27,7 +28,7 @@ describe('Messages -> send message', function () {
     standardSetup()
 
     cy.intercept('POST', `/2.0/message`, (request) => {
-      expect(request.body.content).to.contain('this is a test')
+      expect(request.body.content).to.contain('test')
       expect(request.body.subject).to.contain('CoachCare Message')
       expect(request.body.threadId).to.contain('1')
       request.reply({})
@@ -49,10 +50,32 @@ describe('Messages -> send message', function () {
 
     cy.get('ccr-messages')
       .find('textarea')
+      .should('be.enabled')
       .type('this is a test')
       .type('{shift}{enter}')
       .type('{shift}{enter}')
       .type('next line')
-      .should('have.value', 'this is a test\n\nnext line')
+      .should('contain.value', 'test\n\nnext line')
+  })
+
+  it('saves a draft', function () {
+    cy.setOrganization('ccr')
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/messages`)
+
+    cy.wait(1500)
+
+    cy.get('ccr-messages')
+      .find('textarea')
+      .should('be.enabled')
+      .type('this is a test')
+
+    cy.tick(10000)
+
+    cy.wait('@upsertMessageDraft', { timeout: 10000 }).should((xhr) => {
+      expect(xhr.request.body.data.message).to.contain('test')
+    })
   })
 })

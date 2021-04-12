@@ -27,10 +27,12 @@ import { TranslateService } from '@ngx-translate/core'
 import { first, last, uniqBy } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { from, Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { from, merge, Subject } from 'rxjs'
+import { auditTime, takeUntil } from 'rxjs/operators'
 import { MessageRecipient, MessageThread } from './messages.interfaces'
 import { MessageContainer } from '@app/shared/model'
+
+type MessagesDraftData = { message?: string; patientMessage?: string }
 
 @UntilDestroy()
 @Component({
@@ -48,8 +50,12 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   @Input()
   dieterId: string
   @Input()
+  mode: 'patient' | 'messages' = 'messages'
+  @Input()
   set thread(thread: MessageThread) {
+    this.forceDraftSync$.next()
     this._thread = thread
+    this.fetchDraft()
     this.shownRecipients = thread.recipients.slice().splice(0, 3)
   }
 
@@ -79,6 +85,11 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   public shownRecipients = []
 
   private _thread?: MessageThread
+  private draftAuditTime = 5000
+  private draftData: MessagesDraftData = {}
+  private draftExists = false
+  private forceDraftSync$: Subject<void> = new Subject<void>()
+  private onTextInputChange$: Subject<string> = new Subject<string>()
   private threadId: string = null
   private previousScrollHeight = 0
   private timers: any[] = []
@@ -95,6 +106,22 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
     this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
       this.renderTimestamps()
     })
+
+    merge(
+      this.onTextInputChange$.pipe(auditTime(this.draftAuditTime)),
+      this.forceDraftSync$
+    )
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        const text = this.newMessage
+
+        if (!text) {
+          void this.removeDraft()
+          return
+        }
+
+        void this.saveDraft(text)
+      })
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -141,6 +168,10 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
     }
   }
 
+  public onTextInputChange(text: string) {
+    this.onTextInputChange$.next(text)
+  }
+
   public showProfile(account: MessageRecipient): void {
     this.gotoProfile.emit(account)
   }
@@ -163,6 +194,8 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
       this.createNewThread()
     } else {
       this.addToThread()
+      this.removeDraft()
+      this.onTextInputChange('')
     }
   }
 
@@ -214,6 +247,11 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
       .pipe(takeUntil(this.changed$))
       .subscribe((res: GetAllMessagingResponse) => {
         this.threadId = res.data.length > 0 ? res.data[0].threadId : null
+
+        if (!this.thread) {
+          this.fetchDraft()
+        }
+
         this.loadMessages()
       })
   }
@@ -260,6 +298,85 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
           this.scrollMessagesToBottom(true)
         }
       })
+  }
+
+  private async fetchDraft(): Promise<void> {
+    try {
+      if (!(this.threadId || this.thread?.threadId)) {
+        return
+      }
+
+      const draft = await this.messaging.getDraft({
+        threadId: this.thread?.threadId ?? this.threadId
+      })
+
+      this.draftData = draft.data
+
+      this.newMessage =
+        this.mode === 'messages'
+          ? this.draftData.message ?? ''
+          : this.draftData.patientMessage ?? ''
+
+      this.draftExists = true
+    } catch (error) {
+      this.newMessage = ''
+      this.draftExists = false
+    }
+  }
+
+  private async removeDraft(): Promise<void> {
+    if (!this.draftExists) {
+      return
+    }
+
+    try {
+      const threadId = this.thread?.threadId ?? this.threadId
+
+      if (this.mode === 'messages' && this.draftData.patientMessage) {
+        await this.messaging.upsertDraft({
+          threadId,
+          data: { ...this.draftData, message: undefined }
+        })
+        return
+      }
+
+      if (this.mode === 'patient' && this.draftData.message) {
+        await this.messaging.upsertDraft({
+          threadId,
+          data: { ...this.draftData, patientMessage: undefined }
+        })
+        return
+      }
+
+      await this.messaging.deleteDraft({
+        threadId
+      })
+
+      this.draftExists = false
+    } catch (error) {}
+  }
+
+  private async saveDraft(text: string): Promise<void> {
+    if (!text || !this.threadId) {
+      return
+    }
+
+    try {
+      const payload: MessagesDraftData = {
+        message: this.mode === 'messages' ? text : this.draftData.message,
+        patientMessage:
+          this.mode === 'patient' ? text : this.draftData.patientMessage
+      }
+
+      await this.messaging.upsertDraft({
+        threadId: this.threadId,
+        data: payload
+      })
+      this.draftExists = true
+      this.draftData = payload
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
   private loadMessages(): void {

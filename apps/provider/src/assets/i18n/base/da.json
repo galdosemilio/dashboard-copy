@@ -712,6 +712,7 @@
       "DELETE_SECTION_TITLE": "Slet Sektion",
       "DESCRIPTION": "Beskrivelse",
       "DOWNLOAD_PDF": "Hent PDF",
+      "DRAFT_SAVED_ON": "Udkast gemt den {{date}}",
       "EDIT_FORM": "Rediger Formular",
       "EDIT_NAME": "Rediger navn",
       "EDIT_TOOLTIP": "Rediger Formular",

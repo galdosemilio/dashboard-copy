@@ -583,6 +583,30 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     statusCode: 204,
     body: {}
   }).as('clinicAssociationDeleteRequest')
+  cy.intercept('GET', '/1.0/message/draft**', {
+    statusCode: 404,
+    body: {}
+  })
+
+  cy.intercept('PUT', '/1.0/message/draft', {
+    statusCode: 204,
+    body: {}
+  }).as('upsertMessageDraft')
+
+  cy.intercept('DELETE', '/1.0/message/draft**', {
+    statusCode: 204,
+    body: {}
+  })
+
+  cy.intercept('GET', '1.0/content/form/submission/draft/**', {
+    statusCode: 404,
+    body: {}
+  })
+
+  cy.intercept('PUT', '1.0/content/form/submission/draft/**', {
+    statusCode: 204,
+    body: {}
+  }).as('upsertFormSubmissionDraft')
 }
 
 const seti18n = (): void => {

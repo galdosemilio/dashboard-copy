@@ -4,6 +4,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { BindFormDirective } from '@app/shared/directives/bind-form.directive'
 import { BaseQuestion, QuestionDetails } from './base.question'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -40,28 +41,25 @@ export class MultipleAnswersQuestionComponent
       this.question.allowedValues.map(() => [])
     )
 
-    if (this.readonly) {
-      this.form.valueChanges
-        .pipe(untilDestroyed(this))
-        .subscribe((controls) => this.setValueForm(controls))
-      if (this.form.value) {
-        this.setValueForm(this.form.value)
-      }
-    } else {
-      this.valueForm.valueChanges
-        .pipe(untilDestroyed(this))
-        .subscribe((controls) => {
-          if (controls) {
-            const values: string[] = []
-            controls.forEach((control: boolean, index: number) => {
-              if (control) {
-                values.push(this.question.allowedValues[index])
-              }
-            })
-            this.form.patchValue({ value: values })
-          }
-        })
+    this.form.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((controls) => this.setValueForm(controls))
+    if (this.form.value) {
+      this.setValueForm(this.form.value)
     }
+
+    this.valueForm.valueChanges
+      .pipe(
+        untilDestroyed(this),
+        filter((controls) => controls)
+      )
+      .subscribe((controls) => {
+        const values = controls
+          .map((control, index) => [control, index])
+          .filter(([control]) => control)
+          .map(([, index]) => this.question.allowedValues[index])
+        this.form.patchValue({ value: values }, { emitEvent: false })
+      })
   }
 
   private setValueForm(formValue: any) {

@@ -712,6 +712,7 @@
       "DELETE_SECTION_TITLE": "מחיקת חלק",
       "DESCRIPTION": "תיאור",
       "DOWNLOAD_PDF": "הורד PDF",
+      "DRAFT_SAVED_ON": "טיוטה שנשמרה בתאריך {{date}}",
       "EDIT_FORM": "עריכת טופס",
       "EDIT_NAME": "ערוך שם",
       "EDIT_TOOLTIP": "עריכת טופס",

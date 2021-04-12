@@ -51,6 +51,16 @@ export class LinearScaleQuestionComponent
       this.valueForm.patchValue({
         value: value
       })
+    } else {
+      this.form.valueChanges
+        .pipe(untilDestroyed(this))
+        .subscribe((controls) => {
+          const value: number =
+            this.question.allowedValues.indexOf(controls.value.toString()) *
+            this.sliderOpts.step
+
+          this.valueForm.patchValue({ value }, { emitEvent: false })
+        })
     }
   }
 

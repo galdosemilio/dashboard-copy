@@ -712,6 +712,7 @@
       "DELETE_SECTION_TITLE": "Delete Section",
       "DESCRIPTION": "Description",
       "DOWNLOAD_PDF": "Download PDF",
+      "DRAFT_SAVED_ON": "Draft saved on {{ date }}",
       "EDIT_FORM": "Edit Form",
       "EDIT_NAME": "Edit Name",
       "EDIT_TOOLTIP": "Edit Form",

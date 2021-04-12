@@ -712,6 +712,7 @@
       "DELETE_SECTION_TITLE": "löschen Abschnitt",
       "DESCRIPTION": "Beschreibung",
       "DOWNLOAD_PDF": "PDF Herunterladen",
+      "DRAFT_SAVED_ON": "Entwurf gespeichert am {{date}}",
       "EDIT_FORM": "Formular bearbeiten",
       "EDIT_NAME": "Namen bearbeiten",
       "EDIT_TOOLTIP": "Formular bearbeiten",

@@ -73,4 +73,32 @@ describe('Dashboard -> Digital Library -> Forms -> Form -> Form Submission', fun
       .should('contain', '2:44 am')
       .should('contain', 'CoachCare')
   })
+
+  it('Saves a draft', function () {
+    cy.setTimezone('et')
+    standardSetup(undefined, [
+      {
+        url: '/1.0/content/form/submission?**',
+        fixture: 'api/general/emptyData'
+      }
+    ])
+
+    cy.visit(`/library/forms/${Cypress.env('formId')}/fill`)
+
+    cy.get('[cy-data="form-submission-patient-yes"]').click()
+
+    cy.tick(10000)
+
+    cy.get('app-dieters-table').find('mat-row').first().click()
+
+    cy.tick(10000)
+
+    cy.get('app-library-short-answer-question').find('textarea').type('123')
+
+    cy.tick(10000)
+
+    cy.wait('@upsertFormSubmissionDraft').should((xhr) => {
+      expect(xhr.request.body.data.form['0']['1'].value).to.equal('123')
+    })
+  })
 })

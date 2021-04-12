@@ -712,6 +712,7 @@
       "DELETE_SECTION_TITLE": "Supprimer la section",
       "DESCRIPTION": "Description",
       "DOWNLOAD_PDF": "Télécharger le PDF",
+      "DRAFT_SAVED_ON": "Brouillon enregistré le {{date}}",
       "EDIT_FORM": "Éditer le formulaire",
       "EDIT_NAME": "Modifier le nom",
       "EDIT_TOOLTIP": "Éditer le formulaire",

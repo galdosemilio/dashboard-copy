@@ -712,6 +712,7 @@
       "DELETE_SECTION_TITLE": "حذف القسم",
       "DESCRIPTION": "الوصف",
       "DOWNLOAD_PDF": "تحميل PDF",
+      "DRAFT_SAVED_ON": "تم حفظ المسودة في {{date}}",
       "EDIT_FORM": "تحرير النموذج",
       "EDIT_NAME": "تعديل الاسم",
       "EDIT_TOOLTIP": "تحرير النموذج",

@@ -1,6 +1,6 @@
 <div class="ccr-heading" *ngIf="!readonly" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end end" fxLayoutAlign.xs="stretch" fxLayoutGap="15px">
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end stretch" fxLayoutGap.xs="10px">
-    <div fxFlex="nogrow" fxLayoutGap="5px" fxFlex.xs="grow" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutAlign.xs="center" fxLayoutAlign.sm="start">
+    <div fxFlex="nogrow" fxLayoutGap="5px" fxFlex.xs="grow" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center" fxLayoutAlign.sm="start">
       <button *ngIf="!fill" type="button" mat-button class="ccr-icon-button" (click)="addFormSection()">
         <mat-icon >playlist_add</mat-icon>
         <span *ngIf="!hasMultipleSections">
@@ -24,9 +24,15 @@
       <button
         mat-flat-button class="ccr-button"
         [disabled]="!preview && !form.valid"
-        color="primary" (click)="formDisplay.save$.next()">
+        color="primary" (click)="saveForm()">
           <span>{{ 'GLOBAL.SAVE' | translate }}</span>
       </button>
+      <div *ngIf="fill" fxLayout="row" fxLayoutAlign="center center">
+        <mat-spinner *ngIf="isSavingDraft" [diameter]="28" [strokeWidth]="2"></mat-spinner>
+        <small *ngIf="!isSavingDraft && hasDraft">
+          {{ 'LIBRARY.FORMS.DRAFT_SAVED_ON' | translate:{ date: draftSaveDate | amDateFormat:'ddd, MMM D YYYY h:mm a' } }}
+        </small>
+      </div>
     </div>
   </div>
 </div>

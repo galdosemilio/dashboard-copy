@@ -712,6 +712,7 @@
       "DELETE_SECTION_TITLE": "Apagar Seção",
       "DESCRIPTION": "Descrição",
       "DOWNLOAD_PDF": "baixar PDF",
+      "DRAFT_SAVED_ON": "Rascunho salvo em {{date}}",
       "EDIT_FORM": "Editar Formulário",
       "EDIT_NAME": "Editar o Nome",
       "EDIT_TOOLTIP": "Editar Formulário",

@@ -113,7 +113,7 @@ export class FormSubmission {
    */
   public deleteDraft(request: DeleteFormSubmissionDraftRequest): Promise<void> {
     return this.apiService.request({
-      endpoint: `/content/form/submission/draft/${request.form}?account=${request.account}`,
+      endpoint: `/content/form/submission/draft/${request.form}`,
       method: 'DELETE',
       version: '1.0',
       data: request
