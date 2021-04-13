@@ -85,9 +85,6 @@
   }
   tbody {
     width: 100%;
-    height: 400px;
-    overflow-y: overlay;
-    overflow-x: hidden;
     tr {
       overflow: visible;
       width: 100%;
@@ -151,6 +148,81 @@
       &:last-of-type {
         td {
           border-width: 1px;
+        }
+      }
+    }
+  }
+
+  &.month {
+    display: table !important;
+    border-collapse: initial;
+    border-spacing: 0px;
+
+    thead {
+      display: table-header-group;
+      th {
+        width: 14.3%;
+      }
+    }
+
+    tbody {
+      tr {
+        height: 100px;
+        display: table-row;
+        td {
+          width: initial;
+          border-width: 0 0 1px 1px;
+          height: 100px;
+          &:first-of-type {
+            width: initial;
+            border: 1px solid mat-color($ccr-foreground, divider);
+            border-width: 0 0 1px 1px;
+            background-color: mat-color($ccr-background, odd);
+            &.available {
+              background-color: mat-color($ccr-background, even);
+              cursor: pointer;
+            }
+          }
+
+          &.available {
+            cursor: pointer;
+          }
+
+          &:last-child {
+            border-right-width: 1px;
+          }
+
+          &.selected {
+            background-color: var(--primary-lighten);
+          }
+        }
+
+        &:first-child {
+          td {
+            border-top-width: 1px;
+          }
+        }
+
+        &.tr-expand {
+          height: 0px;
+          min-height: 0px;
+          transition: min-height 0.3s;
+
+          td {
+            height: initial;
+          }
+
+          &:not(.open) {
+            td {
+              border-width: 0px;
+              padding: 0;
+            }
+          }
+
+          &.open {
+            height: initial;
+            min-height: 100px;
+          }
         }
       }
     }

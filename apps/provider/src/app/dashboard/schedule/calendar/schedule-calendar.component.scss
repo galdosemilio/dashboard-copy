@@ -25,6 +25,8 @@ date-navigator {
 .calendar-wrapper {
   flex: 1;
   display: block !important;
+  height: 100%;
+  overflow-x: hidden;
 }
 .calendar {
   height: 100%;
@@ -32,7 +34,38 @@ date-navigator {
 .calendar-body {
   flex: 1 auto;
   width: 100%;
-  overflow-x: hidden;
+
+  .month-cell-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    justify-content: space-between;
+
+    .month-cell-date {
+      p {
+        font-size: 18px;
+        text-align: right;
+      }
+    }
+
+    > p {
+      font-size: 12px;
+    }
+  }
+
+  .month-meeting-wrap {
+    display: flex;
+    flex-wrap: wrap;
+
+    .meeting {
+      position: relative;
+      width: auto;
+      margin: 5px;
+    }
+  }
 }
 
 .truncate {

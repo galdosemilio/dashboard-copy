@@ -66,7 +66,7 @@ export class ScheduleCalendarComponent
   public days: Array<string> = [moment().format('ddd D')]
   public startDate: any = moment().set({ hours: 0, minutes: 0, seconds: 0 })
   public timeBlocks: Array<TimeBlock> = []
-  public timerange: 'day' | 'week' = 'week'
+  public timerange: 'month' | 'day' | 'week' = 'week'
   public selectedMeeting = ''
   public clickedMeeting: any
   public dates: DateNavigatorOutput = {}
@@ -76,6 +76,8 @@ export class ScheduleCalendarComponent
 
   private selectedUser: SelectedAccount
   private isTableScrolled = false
+  private selectedRowIndex = null
+  selectedCell = null
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -318,66 +320,98 @@ export class ScheduleCalendarComponent
     this.timeBlocks.length = 0
 
     let startDate = !isEmpty(this.dates)
-      ? moment(this.dates.startDate)
-      : this.startDate.clone()
+      ? moment(this.dates.startDate).startOf('day')
+      : this.startDate.clone().startOf('day')
+
+    let endDate = !isEmpty(this.dates)
+      ? moment(
+          this.timerange === 'month' ? this.dates.endDate : this.dates.startDate
+        ).endOf('day')
+      : this.startDate.clone().endOf('day')
+
+    if (this.timerange === 'month') {
+      startDate = startDate.clone().subtract(startDate.weekday(), 'day')
+    }
 
     // so that we can offset all the dates to that year, ignoring DST
-    const dayDiff = Math.abs(startDate.diff(moment().set('year', 1900), 'days'))
-    startDate = startDate.subtract(dayDiff, 'days').startOf('day')
+    const dayDiff = Math.abs(
+      startDate.diff(startDate.clone().set('year', 1900), 'days')
+    )
+    startDate = startDate.subtract(dayDiff, 'days')
+    endDate = endDate.subtract(dayDiff, 'days')
 
-    while (this.timeBlocks.length < 96) {
+    const blockDuration = this.timerange === 'month' ? 24 * 60 * 7 : 15
+    const cellCount = this.timerange === 'day' ? 1 : 7
+
+    while (true) {
       const time =
         this.timeBlocks.length === 0
           ? startDate.toDate()
           : moment(this.timeBlocks[this.timeBlocks.length - 1].time)
-              .add(15, 'minutes')
+              .add(blockDuration, 'minutes')
               .toDate()
+
+      if (moment(time).isAfter(endDate)) {
+        break
+      }
 
       const block = {
         display: moment(time).format('h:mm A'),
-        duration: 15,
+        duration: blockDuration,
         time: time,
         cells: new Array<{
           isAvailable: boolean
           meeting: Meeting
+          meetings: Meeting[]
+          duration: number
+          time: Date
         }>()
       }
 
-      for (let i = 0; i < (this.timerange === 'day' ? 1 : 7); ++i) {
+      for (let i = 0; i < cellCount; ++i) {
         block.cells.push({
-          isAvailable: availabilities.some((segment) => {
-            const targetTime = moment(time).add(i, 'days')
-            const startTime = moment(segment.startTime).subtract(
-              dayDiff,
-              'days'
-            )
-            const endTime = moment(segment.endTime).subtract(dayDiff, 'days')
+          isAvailable:
+            this.timerange === 'month'
+              ? moment(time).add(i, 'day').month() ===
+                moment(this.dates.startDate).month()
+              : availabilities.some((segment) => {
+                  const targetTime = moment(time).add(i, 'days')
+                  const startTime = moment(segment.startTime).subtract(
+                    dayDiff,
+                    'days'
+                  )
+                  const endTime = moment(segment.endTime).subtract(
+                    dayDiff,
+                    'days'
+                  )
 
-            return (
-              targetTime.isBetween(startTime, endTime, null, '[]') &&
-              targetTime
-                .add(15, 'minutes')
-                .isBetween(startTime, endTime, null, '[]')
-            )
-          }),
-          meeting: null
+                  return (
+                    targetTime.isBetween(startTime, endTime, null, '[]') &&
+                    targetTime
+                      .add(15, 'minutes')
+                      .isBetween(startTime, endTime, null, '[]')
+                  )
+                }),
+          meeting: null,
+          meetings: [],
+          duration: this.timerange === 'month' ? 24 * 60 : 15,
+          time: moment(time).add(i, 'day').toDate()
         })
       }
 
-      meetings.forEach((meeting) => {
-        const minuteDiff = meeting.date.minutes() - moment(time).minutes()
-        if (
-          meeting.date.hour() === moment(time).hour() &&
-          minuteDiff >= 0 &&
-          minuteDiff < 15
-        ) {
-          const index = this.days.findIndex(
-            (day) => day === meeting.date.format('ddd D')
+      block.cells.forEach((cell) => {
+        const matchedMeetings = meetings.filter((meeting) => {
+          const meetingDate = meeting.date.clone().subtract(dayDiff, 'days')
+          return meetingDate.isBetween(
+            moment(cell.time),
+            moment(cell.time).add(cell.duration, 'minutes'),
+            null,
+            '[)'
           )
-          if (index > -1) {
-            block.cells[index].meeting = meeting
-          }
-        }
+        })
+
+        cell.meeting = matchedMeetings[0]
+        cell.meetings = matchedMeetings
       })
       this.timeBlocks.push(block)
     }
@@ -387,6 +421,10 @@ export class ScheduleCalendarComponent
     if (!this.selectedUser || !date) {
       return
     }
+
+    this.timeBlocks = []
+    this.selectedCell = null
+    this.selectedRowIndex = null
 
     this.days =
       this.timerange === 'day'
@@ -477,5 +515,19 @@ export class ScheduleCalendarComponent
     const start = meeting.date.format('h:mm')
     const end = meeting.endDate.format('h:mma')
     return `${start}-${end}`
+  }
+
+  public clickCell(index: number, cell: any) {
+    if (
+      index === this.selectedRowIndex &&
+      this.selectedCell &&
+      moment(this.selectedCell.time).isSame(moment(cell.time))
+    ) {
+      this.selectedRowIndex = null
+      this.selectedCell = null
+    } else {
+      this.selectedRowIndex = index
+      this.selectedCell = cell
+    }
   }
 }
