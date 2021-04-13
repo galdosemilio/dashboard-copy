@@ -1,3 +1,19 @@
+# [1.6.0](https://github.com/coachcare/dashboard/compare/v1.5.2...v1.6.0) (2021-04-13)
+
+
+### Bug Fixes
+
+* added missing translations ([45d1e3a](https://github.com/coachcare/dashboard/commit/45d1e3a18d5573c564a633ce72b6f98be1c41a03))
+* adjusted structure of test ([1fa62c3](https://github.com/coachcare/dashboard/commit/1fa62c39dbfdbb91ba24a28ba96e02f2ca8448b6))
+* call red stays after end call [FRON-2124] ([d8e1907](https://github.com/coachcare/dashboard/commit/d8e1907a665fa761a6c5b6bc0006bfb1cb61d49f))
+
+
+### Features
+
+* add billing download confirm dialog [IDEA-706] ([7193d19](https://github.com/coachcare/dashboard/commit/7193d19121b602822d6e93109fb904fdd2dfcc15))
+* implemented draft for forms and messaging [FRON-1602] ([5a97479](https://github.com/coachcare/dashboard/commit/5a97479260b90b43e15200cfcbe58fa13d247099))
+* implemented rpm data on clinic assoc deletion [IDEA-711] ([2b85657](https://github.com/coachcare/dashboard/commit/2b85657613ee81669091c6251c95312bdf64fa94))
+
 ## [1.5.2](https://github.com/coachcare/dashboard/compare/v1.5.1...v1.5.2) (2021-04-10)
 
 
