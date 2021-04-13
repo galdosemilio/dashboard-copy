@@ -263,6 +263,7 @@
     "SEARCH_RECIPIENTS": "Teilnehmer suchen",
     "SELECT": "Auswählen",
     "SELECTED": "Ausgewählt",
+    "SELECTED_CLINIC": "Ausgewählte Klinik",
     "SELECTED_LOCALES": "ausgewählte Locales",
     "SELECT_AVAILABILITY": "Wählen Sie Verfügbarkeit",
     "SELECT_DIFFERENT_ACCOUNT": "Wählen Sie ein anderes Konto",
@@ -1243,6 +1244,7 @@
     "SCALE": "BALANCE Smart-Skala",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} Tage mehr Geräteübertragung erforderlich",
     "SECONDARY_DIAGNOSIS": "Nebendiagnose (Optional)",
+    "SELECT_ORGANIZATION_DESCRIPTION": "Standardmäßig wird dieser Bericht zeigt nun den RPM-Abrechnungsstatus aller Patienten auf die Sie Zugriff haben, unabhängig von der Klinik von der oberen linken Ecke des Bildschirms ausgewählt. eine Klinik in diesem Bereich wird nur filtert die nur Patienten zu zeigen, die Auflistung, die RPM von innerhalb oder unterhalb der ausgewählten Klinik aktiviert haben.",
     "STATE": {
       "ACTIVE": "Aktiv",
       "INACTIVE": "Inaktiv",

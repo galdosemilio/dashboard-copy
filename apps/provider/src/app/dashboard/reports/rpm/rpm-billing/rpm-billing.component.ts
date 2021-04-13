@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog, MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
@@ -8,7 +14,8 @@ import { WalkthroughService } from '@app/service/walkthrough'
 import { CcrPaginator } from '@app/shared'
 import {
   AccountTypeId,
-  FetchRPMBillingSummaryRequest
+  FetchRPMBillingSummaryRequest,
+  OrganizationEntity
 } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
@@ -39,7 +46,8 @@ import { PromptDialog } from '@app/shared/dialogs'
 @Component({
   selector: 'app-reports-rpm-billing',
   templateUrl: './rpm-billing.component.html',
-  styleUrls: ['./rpm-billing.component.scss']
+  styleUrls: ['./rpm-billing.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RPMBillingComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
@@ -62,6 +70,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   }
   public csvSeparator = ','
   public searchForm: FormGroup
+  public selectedClinic?: OrganizationEntity
   public statusFilterForm: FormGroup
   public source: RPMBillingDataSource
   public totalCount: number
@@ -125,16 +134,15 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       this.searchForm.controls.query.valueChanges.pipe(debounceTime(500)),
       () => ({ query: this.searchForm.value.query || undefined })
     )
-    this.source.addOptional(this.context.organization$, () => ({
-      organization: this.context.organizationId
-    }))
     this.source.addOptional(this.refresh$, () => {
       const selectedDate = moment(this.criteria.asOf)
 
       return {
         asOf: selectedDate.isSameOrAfter(moment(), 'day')
           ? undefined
-          : selectedDate.endOf('day').toISOString()
+          : selectedDate.endOf('day').toISOString(),
+
+        organization: this.selectedClinic?.id ?? undefined
       }
     })
 
@@ -430,6 +438,16 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       console.error(error)
       this.notify.error(error)
     }
+  }
+
+  public onRemoveClinic(): void {
+    this.selectedClinic = null
+    this.refresh$.next()
+  }
+
+  public onSelectClinic(clinic: OrganizationEntity): void {
+    this.selectedClinic = clinic
+    this.refresh$.next()
   }
 
   public onStatusFilterChange($event: Event): void {

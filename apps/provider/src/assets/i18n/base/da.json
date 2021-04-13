@@ -263,6 +263,7 @@
     "SEARCH_RECIPIENTS": "Søg efter deltager",
     "SELECT": "Vælg",
     "SELECTED": "Valgt",
+    "SELECTED_CLINIC": "Udvalgt Clinic",
     "SELECTED_LOCALES": "Udvalgte Lokale",
     "SELECT_AVAILABILITY": "Vælg Tilgængelighed",
     "SELECT_DIFFERENT_ACCOUNT": "Vælg en anden konto",
@@ -1243,6 +1244,7 @@
     "SCALE": "BALANCE Smart Scale",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} dage mere af enhedsoverførsler er nødvendige",
     "SECONDARY_DIAGNOSIS": "Bidiagnose (valgfri)",
+    "SELECT_ORGANIZATION_DESCRIPTION": "Som standard vil denne rapport nu vise RPM fakturering status for alle patienter, som du har adgang til, uanset den valgte fra det øverste venstre hjørne af skærmen klinik. Valg af en klinik i dette område vil filtrere notering til kun at vise patienter, som har RPM aktiveres indefra eller under den valgte klinik.",
     "STATE": {
       "ACTIVE": "Aktiv",
       "INACTIVE": "Inaktiv",

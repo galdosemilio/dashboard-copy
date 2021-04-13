@@ -263,6 +263,7 @@
     "SEARCH_RECIPIENTS": "Cerca Iscritto",
     "SELECT": "Seleziona",
     "SELECTED": "Selezionato",
+    "SELECTED_CLINIC": "Clinica Selezionati",
     "SELECTED_LOCALES": "Luoghi Selezionati",
     "SELECT_AVAILABILITY": "Seleziona Disponibilità",
     "SELECT_DIFFERENT_ACCOUNT": "Seleziona un altro account",
@@ -1243,6 +1244,7 @@
     "SCALE": "BALANCE intelligente Scala",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} giorni in più di trasmissioni del dispositivo necessarie",
     "SECONDARY_DIAGNOSIS": "La diagnosi secondaria (opzionale)",
+    "SELECT_ORGANIZATION_DESCRIPTION": "Per impostazione predefinita, questa relazione sarà ora visualizzare lo stato di giri di fatturazione di tutti i pazienti a cui si ha accesso, indipendentemente dalla clinica selezionato dalla parte superiore sinistra dello schermo. La selezione di una clinica in questo campo filtrerà la messa in vendita di mostrare solo i pazienti che hanno RPM attivato all'interno o al di sotto della clinica selezionato.",
     "STATE": {
       "ACTIVE": "Attivo",
       "INACTIVE": "Inattivo",

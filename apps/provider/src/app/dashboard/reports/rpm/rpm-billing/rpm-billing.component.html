@@ -1,5 +1,5 @@
 <div class="report-heading">
-    <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
         <div fxLayout="row" fxLayout="start center">
             <mat-icon class="title-icon">receipt</mat-icon>
 
@@ -12,50 +12,90 @@
             </h3>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-            <mat-form-field
-            [formGroup]="searchForm"
-            fxFlex>
-                <input
-                [placeholder]="'BOARD.FILTER_BY_PATIENT_NAME' | translate"
-                formControlName="query"
-                matInput
-                type="text">
-                <mat-icon
-                *ngIf="searchForm?.value.query"
-                (click)="clearSearchForm()"
-                class="clickable"
-                matSuffix>cancel</mat-icon>
-            </mat-form-field>
+        <div fxFlex fxLayout="column" fxLayoutAlign="end stretch">
+            <div class="org-search-container" fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+                <div fxFlex fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+                    <ccr-organization-search fxFlex
+                    *ngIf="!selectedClinic"
+                    (onSelect)="onSelectClinic($event)"
+                    prefixIcon="business">
+                    </ccr-organization-search>
 
-            <button
-            [disabled]="!source.isLoaded || source.isEmpty"
-            (click)="download()"
-            mat-button class="ccr-align-center">
-                {{ 'REPORTS.EXPORT_REPORT' | translate }}
-                <mat-icon>file_download</mat-icon>
-            </button>
+                    <ccr-popup-description
+                    *ngIf="!selectedClinic"
+                    fxFlex="10%"
+                    [title]="'BOARD.SELECT_ORGANIZATION' | translate"
+                    [description]="'RPM.SELECT_ORGANIZATION_DESCRIPTION' | translate"
+                    [showIntro]="false"
+                    ></ccr-popup-description>
 
-            <button
-            [disabled]="!source.isLoaded || source.isEmpty"
-            (click)="download(true)"
-            mat-button class="ccr-align-center">
-                {{ 'RPM.EXPORT_SUPERBILL' | translate }}
-                <mat-icon>file_download</mat-icon>
-            </button>
+                    <div *ngIf="selectedClinic" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                        <span class="ccr-text-bold clinic-label">{{ 'BOARD.SELECTED_CLINIC' | translate }}</span>
+                        <mat-chip-list>
+                            <mat-chip>
+                                {{ selectedClinic.name }}
+                                <mat-icon (click)="onRemoveClinic()" matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </div>
 
-            <ccr-page-size-selector
-                defaultPageSize="50"
-                [defaultPageSizeStorageKey]="defaultPageSizeStorageKey"
-                [disabled]="!source.isLoaded"
-            ></ccr-page-size-selector>
+                <div fxFlex="35%" fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px">
+                    <button
+                    [disabled]="!source.isLoaded || source.isEmpty"
+                    (click)="download()"
+                    mat-button class="ccr-align-center">
+                        {{ 'REPORTS.EXPORT_REPORT' | translate }}
+                        <mat-icon>file_download</mat-icon>
+                    </button>
 
-            <ccr-paginator fxFlex="nogrow" #paginator
-            [length]="source.total"
-            [pageIndex]="source.pageIndex"
-            [pageSize]="source.pageSize"
-            (page)="source.pageIndex = $event.pageIndex"
-          ></ccr-paginator>
+                    <button
+                    [disabled]="!source.isLoaded || source.isEmpty"
+                    (click)="download(true)"
+                    mat-button class="ccr-align-center">
+                        {{ 'RPM.EXPORT_SUPERBILL' | translate }}
+                        <mat-icon>file_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="stretch end" fxLayoutGap="10px">
+                <div fxFlex>
+                    <mat-form-field
+                    [formGroup]="searchForm"
+                    fxFlex
+                    class="minus-margin-bottom">
+                        <mat-icon class="prefix-icon" matPrefix>person</mat-icon>
+                        <input
+                        [placeholder]="'BOARD.FILTER_BY_PATIENT_NAME' | translate"
+                        formControlName="query"
+                        matInput
+                        type="text">
+                        <mat-icon
+                        *ngIf="searchForm?.value.query"
+                        (click)="clearSearchForm()"
+                        class="clickable"
+                        matSuffix>cancel</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="6.5%">&nbsp;</div>
+
+                <div fxFlex="35%" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                    <ccr-page-size-selector
+                        defaultPageSize="50"
+                        [defaultPageSizeStorageKey]="defaultPageSizeStorageKey"
+                        [disabled]="!source.isLoaded"
+                    ></ccr-page-size-selector>
+
+                    <ccr-paginator fxFlex="nogrow" #paginator
+                    [length]="source.total"
+                    [pageIndex]="source.pageIndex"
+                    [pageSize]="source.pageSize"
+                    (page)="source.pageIndex = $event.pageIndex"
+                    ></ccr-paginator>
+                </div>
+            </div>
         </div>
     </div>
 </div>

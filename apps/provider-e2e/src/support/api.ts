@@ -378,7 +378,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
       '/3.0/warehouse/rpm/state/billing-summary?**',
       'api/warehouse/getRPMBilling'
     )
-  })
+  }).as('billingSummaryGetRequest')
   cy.intercept('GET', '/2.0/warehouse/organization/sign-ups/timeline**', {
     fixture: 'api/warehouse/getSignups'
   })

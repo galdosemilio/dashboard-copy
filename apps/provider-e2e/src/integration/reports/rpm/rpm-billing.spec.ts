@@ -197,4 +197,15 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.get('snack-bar-container').should('not.exist')
   })
+
+  it('It properly fetches the RPM billing without organization', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/reports/rpm/billing`)
+
+    cy.wait('@billingSummaryGetRequest').should((xhr) => {
+      expect(xhr.request.url).to.not.contain('organization')
+    })
+  })
 })

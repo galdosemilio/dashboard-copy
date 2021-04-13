@@ -263,6 +263,7 @@
     "SEARCH_RECIPIENTS": "Rechercher une inscription",
     "SELECT": "Sélectionner",
     "SELECTED": "Sélectionné",
+    "SELECTED_CLINIC": "Clinique Sélectionnée",
     "SELECTED_LOCALES": "Lieux sélectionnés",
     "SELECT_AVAILABILITY": "Sélectionner une disponibilité",
     "SELECT_DIFFERENT_ACCOUNT": "Sélectionnez un autre compte",
@@ -1243,6 +1244,7 @@
     "SCALE": "BALANCE intelligent échelle",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} jours de transmission d'appareils supplémentaires nécessaires",
     "SECONDARY_DIAGNOSIS": "Diagnostic secondaire (Facultatif)",
+    "SELECT_ORGANIZATION_DESCRIPTION": "Par défaut, ce rapport affiche maintenant l'état de facturation RPM de tous les patients auxquels vous avez accès, quelle que soit la clinique choisie dans le coin supérieur gauche de l'écran. La sélection d'une clinique dans ce domaine filtrera l'annonce pour afficher uniquement les patients qui ont activé RPM à l'intérieur ou en dessous de la clinique choisie.",
     "STATE": {
       "ACTIVE": "Actif",
       "INACTIVE": "Inactif",

@@ -263,6 +263,7 @@
     "SEARCH_RECIPIENTS": "חיפוש מטופלים",
     "SELECT": "בחירה",
     "SELECTED": "בחירה",
+    "SELECTED_CLINIC": "מרפאת נבחרת",
     "SELECTED_LOCALES": "אזורים שנבחרו",
     "SELECT_AVAILABILITY": "בחירת זמינות",
     "SELECT_DIFFERENT_ACCOUNT": "בחר חשבון שונה",
@@ -1243,6 +1244,7 @@
     "SCALE": "יתרת סולם חכם",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} יום נוסף של העברות מכשירים",
     "SECONDARY_DIAGNOSIS": "אבחון משני (אופציונלי)",
+    "SELECT_ORGANIZATION_DESCRIPTION": "כברירת מחדל, דוח זה חברה יציג את מצב חיובי RPM של כול חולים שאל יש לך גישה, ללא קשר במרפאת הנבחרת מתוך השמאלי העליונה של המסך. בחירת מרפאת בתחום זה יסנן את הרישום להראות רק חולים אשר יש סל\"ד מופעל מתוך או מתחת מרפאה שנבחרו.",
     "STATE": {
       "ACTIVE": "פעיל",
       "INACTIVE": "לא פעיל",

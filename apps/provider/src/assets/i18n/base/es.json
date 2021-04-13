@@ -263,6 +263,7 @@
     "SEARCH_RECIPIENTS": "Buscar Destinatarios",
     "SELECT": "Seleccionar",
     "SELECTED": "Seleccionada",
+    "SELECTED_CLINIC": "Clínica Seleccionada",
     "SELECTED_LOCALES": "Idiomas Seleccionados",
     "SELECT_AVAILABILITY": "Disponibilidad de",
     "SELECT_DIFFERENT_ACCOUNT": "Seleccionar una Cuenta Diferente",
@@ -1243,6 +1244,7 @@
     "SCALE": "BALANCE Balanza Inteligente",
     "SCALE_ICON_DESCRIPTION": "Se necesitan {{ amount }} días más de transmisiones",
     "SECONDARY_DIAGNOSIS": "Diagnóstico Secundario (Optional)",
+    "SELECT_ORGANIZATION_DESCRIPTION": "Por defecto, este reporte ahora mostrará el estado de RPM de todos los pacientes a los cuales tenga acceso, independientemente de la clínica seleccionada en la esquina superior izquierda de la pantalla. Seleccionar una clínica en este campo filtrará el listado y mostrará el estado de los pacientes que tengan RPM activado en esa clínica o sus subclínicas.",
     "STATE": {
       "ACTIVE": "Activo",
       "INACTIVE": "Inactivo",
