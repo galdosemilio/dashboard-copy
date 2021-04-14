@@ -191,37 +191,11 @@
           &:last-child {
             border-right-width: 1px;
           }
-
-          &.selected {
-            background-color: var(--primary-lighten);
-          }
         }
 
         &:first-child {
           td {
             border-top-width: 1px;
-          }
-        }
-
-        &.tr-expand {
-          height: 0px;
-          min-height: 0px;
-          transition: min-height 0.3s;
-
-          td {
-            height: initial;
-          }
-
-          &:not(.open) {
-            td {
-              border-width: 0px;
-              padding: 0;
-            }
-          }
-
-          &.open {
-            height: initial;
-            min-height: 100px;
           }
         }
       }

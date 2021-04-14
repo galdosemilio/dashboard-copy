@@ -1,0 +1,21 @@
+<div matDialogTitle>
+    <div>
+        <span>{{ time | amDateFormat:'ddd, MMM D' }}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <div class="meeting-container">
+        <div *ngFor="let meeting of meetings" class="meeting" (click)="viewMeeting(meeting)">
+            <div
+              class="meeting-badge"
+              [style.background-color]="meeting.colors?.default"
+            ></div>
+            <div class="meeting-time">{{ meeting.timeToDisplay }}</div>
+            <div class="meeting-title">{{ meeting.title | translate }}</div>
+          </div>
+    </div>
+</mat-dialog-content>

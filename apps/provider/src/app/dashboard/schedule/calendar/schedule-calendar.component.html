@@ -71,28 +71,28 @@ direction="forward">
       <tr #trow *ngFor="let block of timeBlocks; let i = index;" [class.seven-am-row]="i === 28">
         <td>{{(i % 2 === 0) ? block.display : ''}}</td>
         <td *ngFor="let cell of block.cells" [class.available]="cell?.isAvailable">
-          <div *ngIf="cell?.meeting" class="meeting"
-          [class.meeting-selectable]="cell.meeting.access === 'full'"
-          [class.meeting-selected]="cell.meeting.id === selectedMeeting"
-          [class.meeting-unavailable]="cell.meeting.type?.id === '4'"
-          [style.height.px]="calculateHeight(cell.meeting)"
-          [style.top.%]="calculateTop(cell.meeting)"
-          [style.background]="cell.meeting?.colors?.light || 'transparent'"
-          [style.border-color]="cell.meeting?.colors?.light || 'transparent'"
-          [style.border-left-color]="cell.meeting?.colors?.default || 'transparent'"
-          [style.color]="cell.meeting?.colors?.contrast || 'black'"
-          (click)="clickMeeting(cell.meeting)">
+          <div *ngIf="cell?.meetings?.length" class="meeting"
+          [class.meeting-selectable]="cell.meetings[0].access === 'full'"
+          [class.meeting-selected]="cell.meetings[0].id === selectedMeeting"
+          [class.meeting-unavailable]="cell.meetings[0].type?.id === '4'"
+          [style.height.px]="calculateHeight(cell.meetings[0])"
+          [style.top.%]="calculateTop(cell.meetings[0])"
+          [style.background]="cell.meetings[0]?.colors?.light"
+          [style.border-color]="cell.meetings[0]?.colors?.light"
+          [style.border-left-color]="cell.meetings[0]?.colors?.default"
+          [style.color]="cell.meetings[0]?.colors?.contrast"
+          (click)="clickMeeting(cell.meetings[0])">
             <div class="meeting-content">
-              <div class="meeting-time">{{ cell.meeting.timeToDisplay }}</div>
-              <div class="meeting-title">{{ cell.meeting.title | translate }}</div>
+              <div class="meeting-time">{{ cell.meetings[0].timeToDisplay }}</div>
+              <div class="meeting-title">{{ cell.meetings[0].title | translate }}</div>
               <div
-              *ngIf="cell.meeting.attendees && cell.meeting.attendees.length"
+              *ngIf="cell.meetings[0].attendees && cell.meetings[0].attendees.length"
               class="meeting-participans">
-              <span *ngIf="cell.meeting.attendees.length === 1">
-                {{ 'BOARD.SCHEDULE_ATTENDEE' | translate:{ amount: cell.meeting.attendees.length } }}
+              <span *ngIf="cell.meetings[0].attendees.length === 1">
+                {{ 'BOARD.SCHEDULE_ATTENDEE' | translate:{ amount: cell.meetings[0].attendees.length } }}
               </span>
-              <span *ngIf="cell.meeting.attendees.length > 1">
-                {{ 'BOARD.SCHEDULE_ATTENDEES' | translate:{ amount: cell.meeting.attendees.length } }}
+              <span *ngIf="cell.meetings[0].attendees.length > 1">
+                {{ 'BOARD.SCHEDULE_ATTENDEES' | translate:{ amount: cell.meetings[0].attendees.length } }}
               </span>
               </div>
             </div>
@@ -115,46 +115,26 @@ direction="forward">
       </tr>
     </thead>
     <tbody #tbody class="calendar-body" data-cy="schedule-calendar-view-body">
-      <ng-template ngFor let-block [ngForOf]="timeBlocks" let-i="index">
-        <tr #trow>
-          <td *ngFor="let cell of block.cells" [class.available]="cell?.isAvailable" [class.selected]="selectedRowIndex == i && cell.time === selectedCell?.time" >
-            <div class="month-cell-wrap" (click)="clickCell(i, cell)">
-              <div class="month-cell-date">
-                <p>{{ cell.time | amDateFormat:'D' }}</p>
+      <tr #trow *ngFor="let block of timeBlocks">
+        <td *ngFor="let cell of block.cells" [class.available]="cell?.isAvailable" [class.cell-highlight]="cell?.isToday">
+          <div class="month-cell-wrap">
+            <div class="month-cell-date">
+              <p>{{ cell.time | amDateFormat:'D' }}</p>
+            </div>
+            <div class="month-cell-container">
+              <div *ngFor="let meeting of cell.meetings | slice:0:3;" class="month-meeting" (click)="clickMeeting(meeting)">
+                <div
+                  class="meeting-badge"
+                  [style.background-color]="meeting.colors?.default"
+                ></div>
+                <div class="meeting-time">{{ meeting.timeToDisplay }}</div>
+                <div class="meeting-title">{{ meeting.title | translate }}</div>
               </div>
-              <p *ngIf="cell.meetings.length">
-                {{ cell.meetings.length }} {{ 'GLOBAL.MEETINGS' | translate }}
-              </p>
+              <div *ngIf="cell.meetings.length > 3" class="month-meeting-more" (click)="viewAllMeetings(cell)">{{'BOARD.SEE_MORE' | translate}}</div>
             </div>
-          </td>
-        </tr>
-        <tr class="tr-expand" [class.open]="selectedRowIndex == i && selectedCell?.meetings?.length">
-          <td colspan="7" *ngIf="selectedRowIndex == i && selectedCell?.meetings?.length">
-            <div class="month-meeting-wrap">
-              <div *ngFor="let meeting of selectedCell?.meetings;" class="meeting"
-                [class.meeting-selectable]="meeting.access === 'full'"
-                [class.meeting-selected]="meeting.id === selectedMeeting"
-                [class.meeting-unavailable]="meeting.type?.id === '4'"
-                (click)="clickMeeting(meeting)">
-                  <div class="meeting-content">
-                    <div class="meeting-time">{{ meeting.timeToDisplay }}</div>
-                    <div class="meeting-title">{{ meeting.title | translate }}</div>
-                    <div
-                    *ngIf="meeting.attendees && meeting.attendees.length"
-                    class="meeting-participans">
-                    <span *ngIf="meeting.attendees.length === 1">
-                      {{ 'BOARD.SCHEDULE_ATTENDEE' | translate:{ amount: meeting.attendees.length } }}
-                    </span>
-                    <span *ngIf="meeting.attendees.length > 1">
-                      {{ 'BOARD.SCHEDULE_ATTENDEES' | translate:{ amount: meeting.attendees.length } }}
-                    </span>
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

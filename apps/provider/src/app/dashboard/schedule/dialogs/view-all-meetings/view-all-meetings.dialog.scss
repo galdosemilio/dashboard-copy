@@ -1,0 +1,36 @@
+.meeting-container {
+  .meeting {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 13px;
+    flex-wrap: nowrap;
+    height: 25px;
+    padding: 5px 10px;
+
+    &:hover {
+      background: whitesmoke;
+    }
+
+    .meeting-badge {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .meeting-time {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 0 10px;
+    }
+
+    .meeting-title {
+      font-weight: bold;
+      line-height: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

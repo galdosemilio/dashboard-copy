@@ -10,7 +10,7 @@ import {
 } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { Store } from '@ngrx/store'
-import { isEmpty } from 'lodash'
+import { isEmpty, range } from 'lodash'
 import * as moment from 'moment-timezone'
 import { OrganizationEntity, Schedule } from '@coachcare/npm-api'
 
@@ -37,15 +37,20 @@ import { ViewMeetingDialog } from '../dialogs/view-meeting'
 import { Meeting } from '../models'
 import { SelectOrganizationDialog } from '@app/shared/dialogs/select-organization'
 import { DeviceDetectorService } from 'ngx-device-detector'
+import { ViewAllMeetingsDialog } from '../dialogs'
 
 export interface TimeBlock {
   display: string
   duration: number
   time: Date
-  cells: {
-    isAvailable: boolean
-    meeting: Meeting
-  }[]
+  cells: TimeBlockCell[]
+}
+
+interface TimeBlockCell {
+  isAvailable: boolean
+  meetings: Meeting[]
+  time: Date
+  duration: number
 }
 
 // export type Meeting = FetchMeetingResponse & {
@@ -76,8 +81,6 @@ export class ScheduleCalendarComponent
 
   private selectedUser: SelectedAccount
   private isTableScrolled = false
-  private selectedRowIndex = null
-  selectedCell = null
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -250,6 +253,14 @@ export class ScheduleCalendarComponent
     })
   }
 
+  public viewAllMeetings(cell: TimeBlockCell) {
+    this.dialog.open(ViewAllMeetingsDialog, {
+      data: { meetings: cell.meetings, time: cell.time },
+      panelClass: 'ccr-full-dialog',
+      disableClose: true
+    })
+  }
+
   public futureMeeting(meeting: any) {
     return moment(meeting.startTime).isAfter(moment(), 'minutes')
   }
@@ -330,7 +341,7 @@ export class ScheduleCalendarComponent
       : this.startDate.clone().endOf('day')
 
     if (this.timerange === 'month') {
-      startDate = startDate.clone().subtract(startDate.weekday(), 'day')
+      startDate = startDate.clone().startOf('week')
     }
 
     // so that we can offset all the dates to that year, ignoring DST
@@ -355,21 +366,14 @@ export class ScheduleCalendarComponent
         break
       }
 
-      const block = {
-        display: moment(time).format('h:mm A'),
-        duration: blockDuration,
-        time: time,
-        cells: new Array<{
-          isAvailable: boolean
-          meeting: Meeting
-          meetings: Meeting[]
-          duration: number
-          time: Date
-        }>()
-      }
+      const today = moment()
 
-      for (let i = 0; i < cellCount; ++i) {
-        block.cells.push({
+      const cells: TimeBlockCell[] = range(cellCount).map((i) => {
+        const cellTime = moment(time).add(i, 'day')
+        const cellDuration = this.timerange === 'month' ? 24 * 60 : 15
+
+        return {
+          isToday: this.isToday(today, cellTime),
           isAvailable:
             this.timerange === 'month'
               ? moment(time).add(i, 'day').month() ===
@@ -392,27 +396,27 @@ export class ScheduleCalendarComponent
                       .isBetween(startTime, endTime, null, '[]')
                   )
                 }),
-          meeting: null,
-          meetings: [],
-          duration: this.timerange === 'month' ? 24 * 60 : 15,
-          time: moment(time).add(i, 'day').toDate()
-        })
+          meetings: meetings.filter((meeting) => {
+            const meetingDate = meeting.date.clone().subtract(dayDiff, 'days')
+            return meetingDate.isBetween(
+              cellTime,
+              cellTime.clone().add(cellDuration, 'minutes'),
+              null,
+              '[)'
+            )
+          }),
+          duration: cellDuration,
+          time: cellTime.toDate()
+        }
+      })
+
+      const block = {
+        display: moment(time).format('h:mm A'),
+        duration: blockDuration,
+        time: time,
+        cells
       }
 
-      block.cells.forEach((cell) => {
-        const matchedMeetings = meetings.filter((meeting) => {
-          const meetingDate = meeting.date.clone().subtract(dayDiff, 'days')
-          return meetingDate.isBetween(
-            moment(cell.time),
-            moment(cell.time).add(cell.duration, 'minutes'),
-            null,
-            '[)'
-          )
-        })
-
-        cell.meeting = matchedMeetings[0]
-        cell.meetings = matchedMeetings
-      })
       this.timeBlocks.push(block)
     }
   }
@@ -423,8 +427,6 @@ export class ScheduleCalendarComponent
     }
 
     this.timeBlocks = []
-    this.selectedCell = null
-    this.selectedRowIndex = null
 
     this.days =
       this.timerange === 'day'
@@ -433,8 +435,17 @@ export class ScheduleCalendarComponent
             moment(date.startDate).add(i, 'day').format('ddd D')
           )
 
-    const start = moment(date.startDate).startOf('day').toISOString()
-    const end = moment(date.endDate).endOf('day').toISOString()
+    const start =
+      this.timerange === 'month'
+        ? moment(date.startDate)
+            .subtract(6, 'days')
+            .startOf('day')
+            .toISOString()
+        : moment(date.startDate).startOf('day').toISOString()
+    const end =
+      this.timerange === 'month'
+        ? moment(date.endDate).add(6, 'days').startOf('day').toISOString()
+        : moment(date.endDate).endOf('day').toISOString()
 
     const availableRequest = {
       startTime: start,
@@ -462,7 +473,8 @@ export class ScheduleCalendarComponent
         )
         const meetings = new Array<Meeting>()
         cleanResponse.forEach((m) => {
-          if (m.date.day() === m.endDate.day()) {
+          const nextDay = m.date.clone().add(1, 'day').startOf('day')
+          if (m.endDate.isSameOrBefore(nextDay)) {
             const meeting = {
               ...m,
               timeToDisplay: this.timeToDisplay(m),
@@ -486,13 +498,8 @@ export class ScheduleCalendarComponent
               selectable: this.selectableMeeting(m)
             }
 
-            startMeeting.endTime = startMeeting.date
-              .hours(24)
-              .minutes(0)
-              .toISOString()
-            endMeeting.startTime = startMeeting.endDate
-              .startOf('day')
-              .toISOString()
+            startMeeting.endDate = nextDay
+            endMeeting.date = nextDay
 
             meetings.push(startMeeting)
             meetings.push(endMeeting)
@@ -517,17 +524,7 @@ export class ScheduleCalendarComponent
     return `${start}-${end}`
   }
 
-  public clickCell(index: number, cell: any) {
-    if (
-      index === this.selectedRowIndex &&
-      this.selectedCell &&
-      moment(this.selectedCell.time).isSame(moment(cell.time))
-    ) {
-      this.selectedRowIndex = null
-      this.selectedCell = null
-    } else {
-      this.selectedRowIndex = index
-      this.selectedCell = cell
-    }
+  private isToday(today: moment.Moment, time: moment.Moment): boolean {
+    return today.format('MMM D') === time.format('MMM D')
   }
 }

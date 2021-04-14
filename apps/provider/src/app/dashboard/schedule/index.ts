@@ -9,6 +9,7 @@ import { DeleteRecurringMeetingDialog } from './dialogs'
 import { RecurringAddDialog } from './dialogs/recurring-add.dialog'
 import { SingleAddDialog } from './dialogs/single-add.dialog'
 import { ViewMeetingDialog } from './dialogs/view-meeting'
+import { ViewAllMeetingsDialog } from './dialogs/view-all-meetings'
 import { ScheduleListComponent, ScheduleListTableComponent } from './list'
 import { MeetingsDatabase } from './services'
 
@@ -22,14 +23,16 @@ export const ScheduleComponents = [
   ScheduleListTableComponent,
   SingleAddDialog,
   RecurringAddDialog,
-  ViewMeetingDialog
+  ViewMeetingDialog,
+  ViewAllMeetingsDialog
 ]
 
 export const ScheduleEntryComponents = [
   DeleteRecurringMeetingDialog,
   SingleAddDialog,
   RecurringAddDialog,
-  ViewMeetingDialog
+  ViewMeetingDialog,
+  ViewAllMeetingsDialog
 ]
 
 export const ScheduleProviders = [MeetingsDatabase]

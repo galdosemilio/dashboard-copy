@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'shared/directed-styles';
+
 :host {
   display: flex;
   flex-direction: column !important;
@@ -22,6 +23,16 @@ date-navigator {
   margin-top: 10px;
 }
 
+.cell-highlight {
+  background-color: var(--primary-a26) !important;
+
+  .month-meeting {
+    &:hover {
+      background: var(--primary-a40) !important;
+    }
+  }
+}
+
 .calendar-wrapper {
   flex: 1;
   display: block !important;
@@ -36,18 +47,79 @@ date-navigator {
   width: 100%;
 
   .month-cell-wrap {
-    position: relative;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding: 10px;
+    padding: 5px;
     box-sizing: border-box;
     justify-content: space-between;
 
     .month-cell-date {
+      margin-bottom: 5px;
       p {
         font-size: 18px;
         text-align: right;
+      }
+    }
+
+    .month-cell-container {
+      flex: 1;
+
+      .month-meeting {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        height: 25%;
+        flex-wrap: nowrap;
+
+        &:hover {
+          background: whitesmoke;
+        }
+
+        .meeting-badge {
+          width: 10px;
+          min-width: 10px;
+          height: 10px;
+          min-height: 10px;
+          border-radius: 50%;
+          margin-right: 5px;
+        }
+
+        .meeting-time {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin-right: 5px;
+
+          @media #{$medium-and-down} {
+            display: none;
+          }
+        }
+
+        .meeting-title {
+          font-weight: bold;
+          line-height: 12px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .month-meeting-more {
+        font-size: 12px;
+        font-weight: bold;
+        height: 25%;
+        display: flex;
+        align-items: center;
+        padding-left: 5px;
+
+        &:hover {
+          background: whitesmoke;
+        }
       }
     }
 

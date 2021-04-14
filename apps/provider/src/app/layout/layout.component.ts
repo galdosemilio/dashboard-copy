@@ -61,6 +61,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         --primary-darken: ${tinycolor(primary).darken(26)};
         --primary-a12: ${tinycolor(primary).setAlpha(0.12)};
         --primary-a26: ${tinycolor(primary).setAlpha(0.26)};
+        --primary-a40: ${tinycolor(primary).setAlpha(0.4)};
         --primary-a60: ${tinycolor(primary).setAlpha(0.6)};
         --accent: ${accent};
         --accent-contrast: ${this.getContrast(accent)};
