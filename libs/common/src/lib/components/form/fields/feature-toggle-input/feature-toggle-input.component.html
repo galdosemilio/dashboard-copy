@@ -1,6 +1,21 @@
-<div [formGroup]="form" fxLayout="row" fxLayoutAlign="space-between center">
+<div [formGroup]="form" fxLayout="row" [fxLayoutAlign]="subLabel ? 'space-between start' : 'space-between center'">
   <div fxFlex>
-    <span>{{ label | translate }}</span>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span>
+        <strong>{{ label | translate }}</strong>
+      </span>
+
+      <ccr-help-link *ngIf="zendeskLink" [link]="zendeskLink"></ccr-help-link>
+
+      <ccr-popup-description
+      *ngIf="popupDescription"
+      [title]="popupDescription.title | translate"
+      [description]="popupDescription.description | translate"
+      [showIntro]="false">
+      </ccr-popup-description>
+    </div>
+
+    <span *ngIf="subLabel" class="sub-label">{{ subLabel | translate }}</span>
   </div>
 
   <div *ngIf="inheritable; else toggles" fxFlex="29%" fxLayout="column" fxLayoutAlign="start end">

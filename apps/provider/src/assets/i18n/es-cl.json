@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "Preferencia de RPM actualizada satisfactoriamente.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "Autoenrolamiento de secuencia removido satisfactoriamente.",
       "SEQUENCE_SAVED": "Secuencia actualizada satisfactoriamente.",
+      "SEQUENCE_SETTINGS_UPDATED": "Configuración de la secuencia actualizada satisfactoriamente.",
       "SEQUENCING_BULK_UNENROLL": "Destinatarios removidos satisfactoriamente.",
       "SEQUENCING_PATIENTS_ENROLLED": "Pacientes enrolados satisfactoriamente.",
       "SLEEP_ADDED": "Descanso añadido exitosamente.",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "Destinatarios",
     "ENROLLEES_EMPTY_LIST": "No hay destinatarios para esta secuencia.",
     "ENROLLMENTS_EMPTY_LIST": "No hay enrolamientos para este paciente en esta secuencia.",
+    "FORCE_EMAIL_BRANDING": "Forzar la Marca de los Emails",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "Esta configuración permite determinar si los correos electrónicos enviados desde esta sencuencia usarán el nombre, el logo y los colores de la clínica seleccionada cuando se creó esta secuencia.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "Los correos electrónicos enviados desde esta secuencia siempre usarán el nombre de la clínica, el logo, y los colores de la clínica {{clinicName}} (ID {{clinicId}})",
     "HEADER_TEXT": "Cabecera",
     "HOURS": {
       "10_AM": "10:00 a.m.",

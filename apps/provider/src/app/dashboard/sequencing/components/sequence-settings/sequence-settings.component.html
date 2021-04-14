@@ -1,0 +1,18 @@
+<div [formGroup]="form" class="ccr-content">
+  <div class="ccr-panel">
+    <div class="ccr-grid" fxLayout="column">
+      <mat-grid-list [cols]="colSpan" rowHeight="120px">
+        <mat-grid-tile [colspan]="colSpan">
+          <ccr-feature-toggle-input
+          data-cy="sequence-settings-section-force-email-branding"
+          [inheritable]="false"
+          [label]="'SEQUENCING.FORCE_EMAIL_BRANDING' | translate"
+          [popupDescription]="forceBrandingPopupDescription"
+          [subLabel]="'SEQUENCING.FORCE_EMAIL_BRANDING_SUBTEXT' | translate:{clinicName: currentClinic.name, clinicId: currentClinic.id}"
+          formControlName="forceEmailBranding"
+          fxFlex></ccr-feature-toggle-input>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>

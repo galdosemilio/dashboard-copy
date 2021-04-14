@@ -2,9 +2,11 @@ import { standardSetup } from '../../support'
 import {
   addStep,
   assertSelectedStep,
+  assertSequenceSettings,
   assertStepAction,
   clickEditSequenceTab,
   clickEnrolleesTab,
+  clickSettingsTab,
   deleteStepAction,
   getStepRowAlias,
   saveSequence,
@@ -239,6 +241,40 @@ describe('Sequences -> view', function () {
     cy.tick(10000)
 
     assertSelectedStep('23')
+  })
+
+  it('Properly displays the settings of a Sequence', function () {
+    cy.setTimezone('et')
+    standardSetup()
+    cy.visit('/sequences/sequence/1;s=edit')
+
+    cy.get('.step-list-item', { timeout: 20000 }).as('matSelectInputs')
+    cy.tick(100000)
+
+    clickSettingsTab()
+
+    assertSequenceSettings(true)
+  })
+
+  it('Allows the provider to change the settings of a Sequence', function () {
+    cy.setTimezone('et')
+    standardSetup()
+    cy.visit('/sequences/sequence/1;s=edit')
+
+    cy.get('.step-list-item', { timeout: 20000 }).as('matSelectInputs')
+    cy.tick(100000)
+
+    clickSettingsTab()
+
+    cy.get('[data-cy="sequence-settings-section-force-email-branding"]')
+      .find('.mat-slide-toggle-input')
+      .click({ force: true })
+
+    cy.tick(1000)
+
+    cy.wait('@patchSequence').should((xhr) => {
+      expect(xhr.request.body.enrollment).to.equal(null)
+    })
   })
 })
 

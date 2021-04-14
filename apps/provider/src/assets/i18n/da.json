@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "RPM præference opdateret.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "Sekvens autoenrollment fjernet.",
       "SEQUENCE_SAVED": "Sekvens gemt med succes.",
+      "SEQUENCE_SETTINGS_UPDATED": "Sequence indstillinger opdateret.",
       "SEQUENCING_BULK_UNENROLL": "Patienter afmeldt med succes.",
       "SEQUENCING_PATIENTS_ENROLLED": "Patienter har tilmeldt sig.",
       "SLEEP_ADDED": "Søvn opdateret med succes.",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "Deltagere",
     "ENROLLEES_EMPTY_LIST": "Der er ingen deltagere til denne sekvens.",
     "ENROLLMENTS_EMPTY_LIST": "Der er ingen tilmeldinger for patienten i denne sekvens.",
+    "FORCE_EMAIL_BRANDING": "Kraft Email Branding",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "Denne indstilling styrer, om branding på de e-mails sendt fra denne sekvens brug klinikken navn, logo og farver fra klinikken, der blev valgt, da sekvensen blev oprettet.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "E-mails, der sendes ud fra denne sekvens, vil altid bruge klinik navn, logo og farver til {{clinicName}} (id {{clinicId}}) klinik.",
     "HEADER_TEXT": "Overskriftstekst",
     "HOURS": {
       "10_AM": "10:00 a.m.",

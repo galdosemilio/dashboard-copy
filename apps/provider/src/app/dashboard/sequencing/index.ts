@@ -1,6 +1,7 @@
 import {
   EnrolleeListingComponent,
   MessageInputComponent,
+  SequenceSettingsComponent,
   StepInputComponent
 } from './components'
 import {
@@ -35,6 +36,7 @@ export const SequencingComponents = [
   PackageFormComponent,
   SequenceComponent,
   SequencesComponent,
+  SequenceSettingsComponent,
   SequencesTableComponent,
   SequencingFormComponent,
   SMSFormComponent,

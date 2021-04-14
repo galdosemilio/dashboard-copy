@@ -1,4 +1,5 @@
 export * from './associationOptions'
+export * from './enrollmentSettings'
 export * from './projectedTransition'
 export * from './sequence'
 export * from './sequenceAssociation'

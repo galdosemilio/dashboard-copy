@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "RPM preferenza aggiornato con successo.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "la registrazione automatica Sequenza rimosso con successo.",
       "SEQUENCE_SAVED": "Sequenza salvata con successo.",
+      "SEQUENCE_SETTINGS_UPDATED": "Impostazioni della sequenza aggiornati correttamente.",
       "SEQUENCING_BULK_UNENROLL": "Pazienti non iscritti correttamente.",
       "SEQUENCING_PATIENTS_ENROLLED": "Pazienti iscritti con successo.",
       "SLEEP_ADDED": "Sonno aggiunto con successo.",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "Iscritti",
     "ENROLLEES_EMPTY_LIST": "Non ci sono iscritti per questa sequenza.",
     "ENROLLMENTS_EMPTY_LIST": "Non ci sono iscrizioni per il paziente in questa sequenza.",
+    "FORCE_EMAIL_BRANDING": "Forza Email Branding",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "Questa impostazione controlla se il marchio sulle email inviate da questo uso sequenza clinica nome, il logo ei colori dalla clinica che è stata selezionata al momento della creazione della sequenza.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "Messaggi di posta elettronica inviati da questa sequenza sempre utilizzerà il nome clinica, logo e colori per la {{clinicName}} (ID {{clinicId}}) clinica.",
     "HEADER_TEXT": "Intestazione",
     "HOURS": {
       "10_AM": "10:00 del mattino.",

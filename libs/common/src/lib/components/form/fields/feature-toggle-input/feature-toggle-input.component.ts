@@ -11,6 +11,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 @Component({
   selector: 'ccr-feature-toggle-input',
   templateUrl: './feature-toggle-input.component.html',
+  styleUrls: ['./feature-toggle-input.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,6 +24,9 @@ export class FeatureToggleInputComponent
   implements ControlValueAccessor, OnDestroy, OnInit {
   @Input() inheritable: boolean
   @Input() label: string
+  @Input() popupDescription?: { title: string; description: string }
+  @Input() subLabel?: string
+  @Input() zendeskLink?: string
   @Input()
   set readonly(readonly: boolean) {
     this._readonly = readonly

@@ -5,6 +5,9 @@
   "createdBy": {
     "id": "1"
   },
+  "enrollment": {
+    "organization": "999"
+  },
   "isActive": true,
   "organization": {
     "id": "999",

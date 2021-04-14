@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "RPM preference updated successfully.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "Sequence autoenrollment removed successfully.",
       "SEQUENCE_SAVED": "Sequence saved successfully.",
+      "SEQUENCE_SETTINGS_UPDATED": "Sequence settings updated successfully.",
       "SEQUENCING_BULK_UNENROLL": "Patients unenrolled successfully.",
       "SEQUENCING_PATIENTS_ENROLLED": "Patients enrolled successfully.",
       "SLEEP_ADDED": "Sleep successfully added.",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "Enrollees",
     "ENROLLEES_EMPTY_LIST": "There are no enrollees for this sequence.",
     "ENROLLMENTS_EMPTY_LIST": "There are no enrollments for the patient in this sequence.",
+    "FORCE_EMAIL_BRANDING": "Force Email Branding",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "This settings controls if the branding on the emails sent from this sequence use the clinic name, logo and colors from the clinic that was selected when the sequence was created.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "Emails sent out from this sequence will always use the clinic name, logo, and colors for the {{clinicName}} (ID {{clinicId}}) clinic.",
     "HEADER_TEXT": "Header Text",
     "HOURS": {
       "10_AM": "10:00 a.m.",

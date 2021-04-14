@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "RPM Präferenz erfolgreich aktualisiert.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "Sequenz der automatischen Registrierung erfolgreich entfernt.",
       "SEQUENCE_SAVED": "Sequenz erfolgreich gespeichert.",
+      "SEQUENCE_SETTINGS_UPDATED": "Sequenzeinstellungen erfolgreich aktualisiert.",
       "SEQUENCING_BULK_UNENROLL": "Patienten erfolgreich abgemeldet.",
       "SEQUENCING_PATIENTS_ENROLLED": "Patienten erfolgreich angemeldet.",
       "SLEEP_ADDED": "Schlaf erfolgreich hinzugefügt.",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "Teilnehmer",
     "ENROLLEES_EMPTY_LIST": "Es gibt keine Teilnehmer für diese Sequenz.",
     "ENROLLMENTS_EMPTY_LIST": "Es gibt keine Anmeldungen für den Patienten in dieser Sequenz.",
+    "FORCE_EMAIL_BRANDING": "Kraft E-Mail-Branding",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "Diese Einstellung steuert, ob das Branding auf den E-Mail von dieser Sequenz Verwendung die Klinik Namen, das Logo und Farben aus der Klinik geschickt, die ausgewählt wurde, wenn die Sequenz erstellt wurde.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "E-Mails von dieser Sequenz ausgesendet werden immer die Klinik Namen, das Logo verwenden, und Farben für die {{clinicName}} (ID {{clinicId}}) Klinik.",
     "HEADER_TEXT": "Überschrift",
     "HOURS": {
       "10_AM": "10:00 Uhr.",

@@ -2,6 +2,7 @@ import {
   Entity,
   NamedEntity,
   SequenceAssociation,
+  SequenceEnrollmentSettings,
   SequenceState as SelveraSequenceState,
   SequenceTransition,
   SequenceTrigger
@@ -27,6 +28,7 @@ export class Sequence {
   createdAt: string
   createdBy: Entity
   endingAction: any
+  enrollment: SequenceEnrollmentSettings | null
   hasLoop?: boolean
   id: string
   isActive: string
@@ -37,6 +39,7 @@ export class Sequence {
   transitions?: SequenceTransition[] | Transition[]
 
   constructor(args: any, opts: SyncState = {}) {
+    this.enrollment = args.enrollment ?? null
     this.association = args.association
       ? {
           createdAt: args.association.createdAt || '',

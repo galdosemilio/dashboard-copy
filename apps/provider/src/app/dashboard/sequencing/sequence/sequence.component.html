@@ -52,6 +52,16 @@ fxLayoutAlign=" stretch">
   data-cy="sequence-button-enrollees">
     {{ 'SEQUENCING.ENROLLEES' | translate }}
   </a>
+  <a
+  *ngIf="sequence"
+  [class.active]="section === 'settings'"
+  [routerLink]="['.', { s: 'settings' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center"
+  data-cy="sequence-button-settings">
+    {{ 'GLOBAL.SETTINGS' | translate }}
+  </a>
 </div>
 
 <ng-container [ngSwitch]="section">
@@ -77,5 +87,11 @@ fxLayoutAlign=" stretch">
         <sequencing-enrollee-listing
         [sequence]="sequence"
         class="sequencing-section"></sequencing-enrollee-listing>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'settings'">
+        <div class="sequencing-section">
+            <sequencing-sequence-settings [sequence]="sequence"></sequencing-sequence-settings>
+        </div>
     </ng-container>
 </ng-container>

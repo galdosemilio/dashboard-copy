@@ -135,6 +135,12 @@ export function assertSelectedStep(stepName: string): void {
   cy.tick(1000)
 }
 
+export function assertSequenceSettings(forceBranding: boolean): void {
+  cy.get('[data-cy="sequence-settings-section-force-email-branding"]')
+    .find('.mat-slide-toggle-input')
+    .should(`${forceBranding ? '' : 'not.'}be.checked`)
+}
+
 export function assertStepAction(
   stepName: string,
   actionType: StepActionType,
@@ -216,6 +222,12 @@ export function clickEditSequenceTab(): void {
 
 export function clickEnrolleesTab(): void {
   cy.get('div.ccr-tabs').find('a').contains('Enrollees').click()
+
+  cy.tick(10000)
+}
+
+export function clickSettingsTab(): void {
+  cy.get('div.ccr-tabs').find('a').contains('Settings').click()
 
   cy.tick(10000)
 }

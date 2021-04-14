@@ -1,0 +1,42 @@
+@import 'variables';
+
+.ccr-content {
+  h3 {
+    display: block !important;
+    line-height: 22px;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+
+    > .mat-icon {
+      vertical-align: bottom;
+    }
+
+    > .mat-subheader {
+      color: mat-color($ccr-foreground, hint-text);
+      font-size: 90%;
+      padding: 0;
+      text-transform: none;
+    }
+  }
+
+  .ccr-panel {
+    border: 1px solid mat-color($ccr-foreground, divider);
+    margin-bottom: 25px;
+    padding: 0 25px 5px;
+
+    > h3 {
+      background: mat-color($ccr-background, app-bar);
+      line-height: 30px;
+      margin: 0 -25px 20px;
+      padding: 0 10px;
+    }
+  }
+}
+
+div.mat-form-field-wrapper {
+  div.mat-form-field-underline {
+    height: 0 !important;
+  }
+}

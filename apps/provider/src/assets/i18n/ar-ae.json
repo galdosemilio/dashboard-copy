@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "RPM تفضيل تحديث بنجاح.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "تسلسل الانتساب التلقائي إزالة بنجاح.",
       "SEQUENCE_SAVED": "تم حفظ التسلسل بنجاح.",
+      "SEQUENCE_SETTINGS_UPDATED": "ضبط تسلسل تجديد بنجاح.",
       "SEQUENCING_BULK_UNENROLL": "المرضى غير المسجلين بنجاح.",
       "SEQUENCING_PATIENTS_ENROLLED": "المرضى المسجلين بنجاح.",
       "SLEEP_ADDED": "تم إضافة النوم بنجاح",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "المسجلات",
     "ENROLLEES_EMPTY_LIST": "لا توجد مسجلات لهذا التسلسل.",
     "ENROLLMENTS_EMPTY_LIST": "لا توجد تسجيلات للمريض في هذا التسلسل.",
+    "FORCE_EMAIL_BRANDING": "قوة العلامة التجارية البريد الإلكتروني",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "هذه الإعدادات الضوابط إذا كانت العلامة التجارية على رسائل البريد الإلكتروني المرسلة من هذا الاستخدام تسلسل العيادة اسم والشعار والألوان من العيادة التي تم تحديدها عندما تم إنشاء التسلسل.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "ورسائل البريد الإلكتروني المرسلة الخروج من هذا التسلسل دائما استخدام اسم العيادة، والشعار، والألوان ل {{clinicName}} (ID {{clinicId}}) عيادة.",
     "HEADER_TEXT": "نص الرأس",
     "HOURS": {
       "10_AM": "10:00 a.m.",

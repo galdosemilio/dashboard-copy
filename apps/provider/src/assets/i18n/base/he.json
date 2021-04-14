@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "העדפת סל\"ד עודכנה בהצלחה.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "הרשמה אוטומטית רצף הוסר בהצלחה.",
       "SEQUENCE_SAVED": "הרצף נשמר בהצלחה.",
+      "SEQUENCE_SETTINGS_UPDATED": "הגדרות רצף עודכנו בהצלחה.",
       "SEQUENCING_BULK_UNENROLL": "חולים שלא נרשמו בהצלחה.",
       "SEQUENCING_PATIENTS_ENROLLED": "חולים נרשמו בהצלחה.",
       "SLEEP_ADDED": "נוסף שינה בהצלחה.",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "נרשמים",
     "ENROLLEES_EMPTY_LIST": "אין רשומות לרצף זה.",
     "ENROLLMENTS_EMPTY_LIST": "ברצף זה אין הרשמות לחולה.",
+    "FORCE_EMAIL_BRANDING": "מיתוג דוא\"ל חיל",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "שולטת בהגדרות זה אם המיתוג על הודעות דוא\"ל שנשלחו משימוש רצף זה המרפאה שם, הלוגו והצבעים מהמרפאה כי נבחרה כאשר רצף נוצרה.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "הודעות דוא\"ל שנשלחו מ- רצף זה תמיד ישתמש בשם מרפאה, לוגו, וצבעים עבור {{clinicName}} (מזהה {{clinicId}}) במרפאה.",
     "HEADER_TEXT": "טקסט כותרת",
     "HOURS": {
       "10_AM": "10:00 a.m.",

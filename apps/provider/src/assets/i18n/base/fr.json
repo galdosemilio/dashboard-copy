@@ -1015,6 +1015,7 @@
       "RPM_PREF_UPDATED": "Préférence RPM mis à jour avec succès.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "Séquence autoenrollment supprimé avec succès.",
       "SEQUENCE_SAVED": "Séquence enregistrée avec succès.",
+      "SEQUENCE_SETTINGS_UPDATED": "Paramètres de séquence mis à jour.",
       "SEQUENCING_BULK_UNENROLL": "Les patients se sont inscrits avec succès.",
       "SEQUENCING_PATIENTS_ENROLLED": "Patients inscrits avec succès",
       "SLEEP_ADDED": "Sommeil ajouté avec succès.",
@@ -1411,6 +1412,9 @@
     "ENROLLEES": "Inscrits",
     "ENROLLEES_EMPTY_LIST": "Aucun inscrit pour cette séquence",
     "ENROLLMENTS_EMPTY_LIST": "Aucune inscription pour le patient dans cette séquence",
+    "FORCE_EMAIL_BRANDING": "Force de l'image de marque e-mail",
+    "FORCE_EMAIL_BRANDING_DESCRIPTION": "Ce contrôle des paramètres si l'image de marque sur les e-mails envoyés à partir de cette séquence utiliser le nom clinique, le logo et les couleurs de la clinique qui a été sélectionnée lorsque la séquence a été créée.",
+    "FORCE_EMAIL_BRANDING_SUBTEXT": "Les e-mails envoyés à partir de cette séquence utiliseront toujours le nom de la clinique, le logo et les couleurs pour le {{clinicName}} (ID {{clinicId}}) clinique.",
     "HEADER_TEXT": "Titre",
     "HOURS": {
       "10_AM": "10:00 du matin.",
