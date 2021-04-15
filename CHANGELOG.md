@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/coachcare/dashboard/compare/v1.6.0...v1.7.0) (2021-04-15)
+
+
+### Bug Fixes
+
+* adjusted messaging spec ([00604d9](https://github.com/coachcare/dashboard/commit/00604d9c9982306f255162bdcddc75476b530d20))
+
+
+### Features
+
+* add color to meeting type [FRON-1637] ([7490a95](https://github.com/coachcare/dashboard/commit/7490a95562fc616f3498089a3a1a3ede229fab8d))
+* implemented org-agnostic rpm billing report [IDEA-774] ([9ee03eb](https://github.com/coachcare/dashboard/commit/9ee03eb48cd4ef84527ff25eaa4cdb5a7c01a1af))
+
 # [1.6.0](https://github.com/coachcare/dashboard/compare/v1.5.2...v1.6.0) (2021-04-13)
 
 
