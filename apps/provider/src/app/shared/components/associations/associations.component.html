@@ -48,8 +48,11 @@
                 <ng-container cdkColumnDef="permissions">
                     <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.PERMISSIONS' | translate }}</mat-header-cell>
                     <mat-cell *cdkCellDef="let row; let i = index" fxFlex.xs="grow">
-                        <div [formGroup]="formArray.controls[i]" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-                            <mat-checkbox formControlName="viewAll">{{ 'PERM.ACCESSALL' | translate }}</mat-checkbox>
+                        <div [formGroup]="formArray.controls[i]" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <ccr-access-level-selector
+                            fxFlex="75%"
+                            formControlName="access">
+                            </ccr-access-level-selector>
                             <mat-checkbox formControlName="admin">{{ 'PERM.ADMIN' | translate }}</mat-checkbox>
                         </div>
                     </mat-cell>

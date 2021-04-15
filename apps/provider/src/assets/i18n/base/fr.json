@@ -1045,10 +1045,14 @@
     }
   },
   "PERM": {
+    "ACCESS": "Accès",
     "ACCESSALL": "Voir tout",
     "ADMIN": "Administrateur",
     "HELP_ACCESSALL": "<p> La permission <b>’VOIR TOUT'</b> permet à un coach de voir tous les clients et toutes les données clients associés à la clinique sélectionnée. Il s’agit d’une fonctionnalité appropriée si vos clients consultent différents coachs dans votre clinique ou si vos coachs se remplacent fréquemment auprès des patients. Cela peut également servir à l’équipe en charge du service client.</p>",
-    "HELP_ADMIN": "<P> <b> « afficher » </ b> autorisation permet à un entraîneur pour afficher tous les clients et toutes les données des clients associés à la clinique choisie. Ceci est approprié si vos clients généralement voir différents entraîneurs quand ils visitent votre clinique ou si vos entraîneurs couvrent souvent les patients pour l'autre. Ceci est également approprié pour le personnel qui gèrent des tâches de service à la clientèle. </ P>"
+    "HELP_ADMIN": "<P> <b> « afficher » </ b> autorisation permet à un entraîneur pour afficher tous les clients et toutes les données des clients associés à la clinique choisie. Ceci est approprié si vos clients généralement voir différents entraîneurs quand ils visitent votre clinique ou si vos entraîneurs couvrent souvent les patients pour l'autre. Ceci est également approprié pour le personnel qui gèrent des tâches de service à la clientèle. </ P>",
+    "LIMITED_ACCESS": "Accès limité",
+    "NO_ACCESS": "Pas d'accès",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Tout voir"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Mettre fin à l’inscription",

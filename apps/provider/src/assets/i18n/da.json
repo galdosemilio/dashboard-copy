@@ -1045,10 +1045,14 @@
     }
   },
   "PERM": {
+    "ACCESS": "Adgang",
     "ACCESSALL": "Vis Alle",
     "ADMIN": "Admin",
     "HELP_ACCESSALL": "<p>Tilladelsen til <b>\"VIS ALLE\"</b> giver en træner mulighed for at se alle kunder og al kundedata, der er forbundet med den valgte klinik. Dette er nyttigt hvis dine kunder typisk arbejder med forskellige trænere, når de besøger din klinik, eller hvis trænere ofte dækker hinanden med at sørge for patienterne. Dette er også nyttigt for det personale, der håndterer kundeserviceopgaver. </p>",
-    "HELP_ADMIN": "<p><b>'ADMIN'</b> tilladelse giver en coach mulighed for at tilføje"
+    "HELP_ADMIN": "<p><b>'ADMIN'</b> tilladelse giver en coach mulighed for at tilføje",
+    "LIMITED_ACCESS": "Begrænset adgang",
+    "NO_ACCESS": "Ingen adgang",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Se alle"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Afslut Tilmelding",

@@ -1045,10 +1045,14 @@
     }
   },
   "PERM": {
+    "ACCESS": "Zugriff",
     "ACCESSALL": "Alle ansehen",
     "ADMIN": "Administrator",
     "HELP_ACCESSALL": "<p> Die <b> ‚Alle anzeigen‘ </b> Berechtigung erlaubt es, einem Trainer alle Kunden und alle Kundendaten an die ausgewählte Klinik zugeordnet sind einzusehen. Dies ist sinnvoll, wenn Ihre Kunden typischerweise unterschiedliche Trainer sehen, wenn sie Ihre Klinik besuchen oder wenn Ihre Trainer häufig Patienten anderer Trainer mitbetreuen. Dies ist auch geeignet für Mitarbeiter, die Kundendienstaufgaben übernehmen. </p>",
-    "HELP_ADMIN": "<p>Die<b>'ADMIN'</b>-Berechtigung erlaubt es einem Coach, Folgendes hinzuzufügen"
+    "HELP_ADMIN": "<p>Die<b>'ADMIN'</b>-Berechtigung erlaubt es einem Coach, Folgendes hinzuzufügen",
+    "LIMITED_ACCESS": "Eingeschränkter Zugang",
+    "NO_ACCESS": "Kein Zugang",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Alle anzeigen"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Einschreibung beenden",

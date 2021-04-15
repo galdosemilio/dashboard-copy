@@ -1045,10 +1045,14 @@
     }
   },
   "PERM": {
+    "ACCESS": "Accesso",
     "ACCESSALL": "Visualizza Tutto",
     "ADMIN": "Admin",
     "HELP_ACCESSALL": "<p> Il permesso <b>'VISUALIZZA TUTTO'</b> permette ad un coach di visualizzare tutti i clienti e tutti i dati dei clienti associati alla clinica selezionata. Questo è appropriato se i clienti vedono solitamente diversi coach quando visitano la clinica o se i coach spesso si occupano di pazienti altrui. È appropriato anche per lo staff che gestisce le mansioni di servizio clienti.</p>",
-    "HELP_ADMIN": "<p>Il permesso <b>'ADMIN'</b> permette ad un coach di aggiungere"
+    "HELP_ADMIN": "<p>Il permesso <b>'ADMIN'</b> permette ad un coach di aggiungere",
+    "LIMITED_ACCESS": "Accesso Limitato",
+    "NO_ACCESS": "Nessun Accesso",
+    "PATIENT_PHI_AND_VIEW_ALL": "Paziente PHI + Visualizza Tutto"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Termina Registrazione",

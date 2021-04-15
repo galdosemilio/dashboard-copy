@@ -13,6 +13,7 @@ describe('Dashboard -> Coach Own Profile', function () {
     cy.get('@coachMenuLinks').eq(1).should('contain', ' Security')
     cy.get('@coachMenuLinks').eq(2).should('contain', ' Communications')
     cy.get('@coachMenuLinks').eq(3).should('contain', ' Login History')
+    cy.get('account-form')
   })
 
   it('Allows the user to save the coach data', function () {

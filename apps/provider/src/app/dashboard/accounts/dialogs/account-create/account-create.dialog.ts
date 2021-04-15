@@ -112,7 +112,8 @@ export class AccountCreateDialog implements BindForm, OnInit {
             organization: firstClinic.clinicId,
             permissions: {
               viewAll: firstClinic.accessall,
-              admin: firstClinic.admin
+              admin: firstClinic.admin,
+              allowClientPhi: firstClinic.allowClientPhi
             }
           }
           break
@@ -153,7 +154,8 @@ export class AccountCreateDialog implements BindForm, OnInit {
                         organization: c.clinicId,
                         permissions: {
                           viewAll: c.accessall,
-                          admin: c.admin
+                          admin: c.admin,
+                          allowClientPhi: c.allowClientPhi || undefined
                         }
                       })
                     })

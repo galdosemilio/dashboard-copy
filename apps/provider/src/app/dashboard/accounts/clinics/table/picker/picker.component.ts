@@ -24,7 +24,11 @@ import {
   ClinicsDataSource
 } from '@app/dashboard/accounts/clinics/services'
 import { ContextService, NotifierService } from '@app/service'
-import { CcrPaginator } from '@app/shared'
+import {
+  AssociationAccessLevel,
+  CcrPaginator,
+  COACH_ASSOCIATION_ACCESS_LEVELS
+} from '@app/shared'
 import { OrganizationAccess } from '@coachcare/npm-api'
 import { forOwn } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -35,10 +39,12 @@ export interface ClinicsPickerValue {
   picked: boolean
   admin: boolean
   accessall: boolean
+  allowClientPhi: boolean
   initial: {
     picked: boolean
     admin: boolean
     accessall: boolean
+    allowClientPhi: boolean
   }
 }
 
@@ -90,6 +96,9 @@ export class ClinicsPickerComponent
   clinics: Array<OrganizationAccess> = []
   isLoading = true
   isOwnProfile = true
+  permissionLevels: AssociationAccessLevel[] = Object.values(
+    COACH_ASSOCIATION_ACCESS_LEVELS
+  )
 
   // object mapping the table
   data: { [id: string]: ClinicsPickerValue } = {}
@@ -163,10 +172,12 @@ export class ClinicsPickerComponent
                 picked: true,
                 admin: c.permissions.admin,
                 accessall: c.permissions.viewAll,
+                allowClientPhi: c.permissions.allowClientPhi,
                 initial: {
                   picked: true,
                   admin: c.permissions.admin,
-                  accessall: c.permissions.viewAll
+                  accessall: c.permissions.viewAll,
+                  allowClientPhi: c.permissions.allowClientPhi
                 }
               }
             })
@@ -182,10 +193,12 @@ export class ClinicsPickerComponent
             picked: false,
             admin: false,
             accessall: false,
+            allowClientPhi: false,
             initial: {
               picked: false,
               admin: false,
-              accessall: false
+              accessall: false,
+              allowClientPhi: false
             }
           }
         }
@@ -207,7 +220,8 @@ export class ClinicsPickerComponent
         initial: {
           picked: val.picked,
           admin: val.admin,
-          accessall: val.accessall
+          accessall: val.accessall,
+          allowClientPhi: val.allowClientPhi
         }
       }
     })
@@ -233,6 +247,22 @@ export class ClinicsPickerComponent
     this.classList = baseClasses.join(' ')
   }
 
+  onAccessChange(accessLevel: AssociationAccessLevel, orgId: string): void {
+    const perms = accessLevel?.perms ?? null
+
+    if (!perms) {
+      return
+    }
+
+    this.data[orgId] = {
+      ...this.data[orgId],
+      ...perms,
+      allowClientPhi: perms.allowClientPhi || undefined,
+      accessall: perms.viewAll
+    }
+    this.onChange()
+  }
+
   onSelect(id) {
     const enabled = this.data[id].picked
     this.data[id].picked = !enabled
@@ -245,6 +275,7 @@ export class ClinicsPickerComponent
       (c) =>
         c.picked !== c.initial.picked ||
         c.accessall !== c.initial.accessall ||
+        c.allowClientPhi !== c.initial.allowClientPhi ||
         c.admin !== c.initial.admin
     )
     // prevent required validator to detect an empty array

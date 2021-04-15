@@ -46,20 +46,21 @@
     </ng-container>
 
     <ng-container cdkColumnDef="perm_viewall">
-      <mat-header-cell *cdkHeaderCellDef fxFlex="15%" class="ccr-help" (click)="toggleHelp('help-accessall')">
-        {{'PERM.ACCESSALL' | translate}} <mat-icon>help_outline</mat-icon>
+      <mat-header-cell *cdkHeaderCellDef fxFlex="22%" class="ccr-help">
+        {{'PERM.ACCESS' | translate}}
       </mat-header-cell>
       <mat-cell *cdkCellDef="let row" class="ccr-help invisible"
-      fxLayoutAlign="center center" fxFlex="15%"
+      fxLayoutAlign="center center" fxFlex="22%"
       fxLayoutAlign.xs="start center" fxFlex.xs="grow"
       fxFlexOffset.xs="12%" fxFlexOrder.xs="3"
       [class.visible]="data[row.organization.id] && data[row.organization.id].picked">
-        <mat-checkbox
-          [(ngModel)]="data[row.organization.id] && data[row.organization.id].accessall"
-          name="accessall"
-          (change)="onChange()">
-          <span class="xs-label">{{'PERM.ACCESSALL' | translate}}</span>
-        </mat-checkbox>
+      <span class="xs-label">{{'PERM.ACCESS' | translate}}</span>
+        <ccr-access-level-selector
+        *ngIf="data[row.organization.id] && data[row.organization.id].picked"
+        [organization]="row.organization"
+        (onSelect)="onAccessChange($event, row.organization.id)"
+        fxFlex>
+        </ccr-access-level-selector>
         <mat-icon fxHide fxShow.xs (click)="toggleHelp('help-accessall')">help_outline</mat-icon>
       </mat-cell>
     </ng-container>

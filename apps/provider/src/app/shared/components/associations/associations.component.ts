@@ -7,15 +7,19 @@ import {
   AssociationsDataSource
 } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations'
 import { ContextService, NotifierService } from '@app/service'
-import {
-  PromptDialog,
-  RemoveClinicAssociationDialog
-} from '@app/shared/dialogs'
+import { RemoveClinicAssociationDialog } from '@app/shared/dialogs'
 import { OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { OrganizationAssociation } from '@coachcare/npm-api'
 import { filter } from 'rxjs/operators'
+import {
+  AssociationAccessLevel,
+  COACH_ASSOCIATION_ACCESS_LEVELS,
+  convertPermissionsToAccessLevel
+} from '@app/shared/model'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-account-associations',
   templateUrl: './associations.component.html',
@@ -31,10 +35,14 @@ export class CcrAccountAssociationsComponent implements OnInit {
   columns: string[] = ['name', 'associatedAt', 'permissions', 'actions']
   formArray: FormArray
   hasAdmins = false
+  permissionLevels: AssociationAccessLevel[] = Object.values(
+    COACH_ASSOCIATION_ACCESS_LEVELS
+  )
   results: OrganizationAccess[] = []
   source: AssociationsDataSource
 
   private initialValue: OrganizationAccess[]
+  private ignoreChanges: boolean
 
   constructor(
     private context: ContextService,
@@ -43,7 +51,9 @@ export class CcrAccountAssociationsComponent implements OnInit {
     private fb: FormBuilder,
     private notify: NotifierService,
     private organizationAssociation: OrganizationAssociation
-  ) {}
+  ) {
+    this.syncControl = this.syncControl.bind(this)
+  }
 
   ngOnInit(): void {
     if (this.readonly) {
@@ -134,7 +144,9 @@ export class CcrAccountAssociationsComponent implements OnInit {
     results.forEach((association: any) => {
       const formGroup = this.fb.group({
         admin: new FormControl(association.permissions.admin),
-        viewAll: new FormControl(association.permissions.viewAll)
+        access: new FormControl(
+          convertPermissionsToAccessLevel(association.permissions)
+        )
       })
       if (!association.canDelete) {
         formGroup.disable()
@@ -142,36 +154,18 @@ export class CcrAccountAssociationsComponent implements OnInit {
       this.formArray.push(formGroup)
     })
 
-    this.formArray.valueChanges.subscribe((controls) => {
-      try {
-        if (controls && controls.length) {
-          controls.forEach(async (control, index) => {
-            const initialAssoc = this.initialValue[index]
-              ? this.initialValue[index]
-              : undefined
-            if (
-              initialAssoc &&
-              (control.admin !== initialAssoc.permissions.admin ||
-                control.viewAll !== initialAssoc.permissions.viewAll)
-            ) {
-              this.initialValue[index] = {
-                ...initialAssoc,
-                permissions: control
-              }
-              await this.organizationAssociation.update({
-                account: this.account,
-                organization: initialAssoc.organization.id,
-                isActive: true,
-                permissions: control
-              })
-              this.notify.success(_('NOTIFY.SUCCESS.ASSOCIATION_UPDATED'))
-            }
-          })
+    this.formArray.valueChanges
+      .pipe(
+        untilDestroyed(this),
+        filter(() => !this.ignoreChanges)
+      )
+      .subscribe((controls) => {
+        try {
+          controls?.forEach(this.syncControl)
+        } catch (error) {
+          this.notify.error(error)
         }
-      } catch (error) {
-        this.notify.error(error)
-      }
-    })
+      })
   }
 
   private async checkIfProviderHasAdmin() {
@@ -189,6 +183,61 @@ export class CcrAccountAssociationsComponent implements OnInit {
       this.hasAdmins = hasAdmins
     } catch (error) {
       this.notify.error(error)
+    }
+  }
+
+  private async syncControl(control, index): Promise<void> {
+    const currentPerms =
+      COACH_ASSOCIATION_ACCESS_LEVELS[control.access]?.perms ?? null
+
+    try {
+      const initialAssoc = this.initialValue[index]
+        ? this.initialValue[index]
+        : undefined
+
+      if (
+        !initialAssoc ||
+        (control.admin === initialAssoc.permissions.admin &&
+          currentPerms.viewAll === initialAssoc.permissions.viewAll &&
+          currentPerms.allowClientPhi ===
+            initialAssoc.permissions.allowClientPhi)
+      ) {
+        return
+      }
+
+      // we handle it separately because the admin toggle is independent
+      if (control.admin !== initialAssoc.permissions.admin) {
+        await this.organizationAssociation.update({
+          account: this.account,
+          organization: initialAssoc.organization.id,
+          isActive: true,
+          permissions: { admin: control.admin }
+        })
+      } else {
+        await this.organizationAssociation.update({
+          account: this.account,
+          organization: initialAssoc.organization.id,
+          isActive: true,
+          permissions: currentPerms
+        })
+      }
+
+      this.initialValue[index] = {
+        ...initialAssoc,
+        permissions: { ...currentPerms, admin: control.admin }
+      }
+
+      this.notify.success(_('NOTIFY.SUCCESS.ASSOCIATION_UPDATED'))
+    } catch (error) {
+      this.ignoreChanges = true
+      this.formArray.controls[index]
+        .get('access')
+        .patchValue(
+          convertPermissionsToAccessLevel(this.initialValue[index].permissions),
+          { emitEvent: false }
+        )
+      this.notify.error(error)
+      this.ignoreChanges = false
     }
   }
 }

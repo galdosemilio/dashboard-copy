@@ -1045,10 +1045,14 @@
     }
   },
   "PERM": {
+    "ACCESS": "Acceso",
     "ACCESSALL": "Ver Todos",
     "ADMIN": "Admin",
     "HELP_ACCESSALL": "<p>El permiso <b>'VER TODOS'</b> le permite al asesor ver todos los clientes y sus datos asociados a la clínica seleccionada. Esto es apropiado si sus clientes típicamente ver diferentes asesores cuando visitan su clínica o si los asesores frecuentemente se cubren pacientes entre sí. Esto también es apropiado para personal que hace tareas de soporte al cliente.</p>",
-    "HELP_ADMIN": "<p>El permiso de <b>'ADMIN'</b> le permite al asesor añadir, borrar y gestionar cuentas de clientes y asesores, así como editar la configuración de la clínica. Esto es apropiado para el personal de su clínica que administra a los asesores, brindan soporte al cliente o registran nuevos clientes.</p>"
+    "HELP_ADMIN": "<p>El permiso de <b>'ADMIN'</b> le permite al asesor añadir, borrar y gestionar cuentas de clientes y asesores, así como editar la configuración de la clínica. Esto es apropiado para el personal de su clínica que administra a los asesores, brindan soporte al cliente o registran nuevos clientes.</p>",
+    "LIMITED_ACCESS": "Acceso Limitado",
+    "NO_ACCESS": "Sin Acceso",
+    "PATIENT_PHI_AND_VIEW_ALL": "ISF del paciente + Ver Todos"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Desinscribir",

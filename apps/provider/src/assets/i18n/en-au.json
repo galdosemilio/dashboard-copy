@@ -1045,10 +1045,14 @@
     }
   },
   "PERM": {
+    "ACCESS": "Access",
     "ACCESSALL": "View All",
     "ADMIN": "Admin",
     "HELP_ACCESSALL": "<p> The <b>'VIEW ALL'</b> permission allows a coach to view all client and all clients data associated to the selected clinic. This is appropriate if your clients typically see different coaches when they visit your clinic or if your coaches frequently cover patients for each other. This is also appropriate for staff that handle customer service tasks.</p>",
-    "HELP_ADMIN": "<p>The <b>'ADMIN'</b> permission allows a coach to add, delete and manage client and coach accounts, as well as edit clinic settings. This is appropriate for staff at your clinic that manage coaches, handle customer service or onboard new clients.</p>"
+    "HELP_ADMIN": "<p>The <b>'ADMIN'</b> permission allows a coach to add, delete and manage client and coach accounts, as well as edit clinic settings. This is appropriate for staff at your clinic that manage coaches, handle customer service or onboard new clients.</p>",
+    "LIMITED_ACCESS": "Limited Access",
+    "NO_ACCESS": "No Access",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + View All"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "End Enrollment",

@@ -4,6 +4,7 @@ import { MatMomentDateModule } from '@coachcare/datepicker'
 
 import { AlertIconComponent } from './alert-icon/alert-icon.component'
 import { AppSectionComponent } from './app-section/app-section.component'
+import { CcrAccessLevelSelectorComponent } from './access-level-selector'
 import { CcrAccountAssociationsComponent } from './associations'
 import { CcrAttendanceSelectorComponent } from './attendance-selector'
 import { CcrAvatarComponent } from './avatar/avatar.component'
@@ -65,6 +66,7 @@ import { RPMStatusInfoComponent } from './rpm-status-info'
 export {
   AlertIconComponent,
   AppSectionComponent,
+  CcrAccessLevelSelectorComponent,
   CcrAttendanceSelectorComponent,
   DateNavigator,
   DateNavigatorOutput,
@@ -119,6 +121,7 @@ export const CmpComponents = [
   AppSectionComponent,
   DateNavigator,
   DateRangeNavigator,
+  CcrAccessLevelSelectorComponent,
   CcrAccountAssociationsComponent,
   CcrAttendanceSelectorComponent,
   CcrAvatarComponent,
