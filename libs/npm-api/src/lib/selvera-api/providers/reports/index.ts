@@ -373,7 +373,8 @@ class Reports {
       endpoint: '/warehouse/rpm/state/billing-summary',
       method: 'GET',
       data: request,
-      version: '3.0'
+      version: '3.0',
+      omitHeaders: ['organization']
     })
   }
 

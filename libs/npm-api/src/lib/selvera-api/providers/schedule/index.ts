@@ -228,7 +228,8 @@ class Schedule {
       endpoint: '/meeting',
       method: 'GET',
       data: fetchAllMeetingRequest,
-      version: '4.0'
+      version: '4.0',
+      omitHeaders: ['organization']
     })
   }
 
