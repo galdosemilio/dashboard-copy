@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/coachcare/dashboard/compare/v1.7.0...v1.8.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* removed org header in agnostic requests [FRON-2138] ([62769a1](https://github.com/coachcare/dashboard/commit/62769a1d3173420ec9abebbab1a2660b1638e1f9))
+
+
+### Features
+
+* update sort for digital library [FRON-2069] ([c3386ee](https://github.com/coachcare/dashboard/commit/c3386eef7b969e316916fe4d1d14db091f50fcb0))
+
 # [1.7.0](https://github.com/coachcare/dashboard/compare/v1.6.0...v1.7.0) (2021-04-15)
 
 
