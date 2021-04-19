@@ -4,7 +4,7 @@
   [class.disabled]="!callState?.hasAudioDeviceAccess || !callState.audioInputDevices?.length || acceptedCall"
   [disabled]="acceptedCall"
   mat-mini-fab>
-    <mat-icon>videocam</mat-icon>
+    <mat-icon>phone</mat-icon>
     <ccr-popup-description
       *ngIf="!callState?.hasAudioDeviceAccess || !callState.audioInputDevices?.length"
       [title]="'CALL.MICROPHONE_ACCESS_BLOCKED' | translate"

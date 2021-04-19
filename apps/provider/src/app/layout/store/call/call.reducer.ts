@@ -134,6 +134,8 @@ export function callReducer(state = initialState, action: Action): CallState {
     case Actions.CREATE_LOCAL_TRACKS:
       return {
         ...state,
+        isMicrophoneEnabled: (action as Actions.CreateLocalTracks).payload
+          .enableAudio,
         isCameraEnabled: (action as Actions.CreateLocalTracks).payload
           .enableVideo
       }

@@ -252,6 +252,10 @@ export class TwilioService {
   }
 
   enableCamera() {
+    if (this.currentRoom?.localParticipant === undefined) {
+      return
+    }
+
     createLocalVideoTrack({
       deviceId: this.selectedVideoInputDevice
     }).then((track) => {
@@ -285,17 +289,17 @@ export class TwilioService {
   }
 
   enableMicrophone() {
-    const self = this
+    if (this.currentRoom?.localParticipant === undefined) {
+      return
+    }
+
     createLocalAudioTrack({
-      deviceId: self.selectedAudioInputDevice
+      deviceId: this.selectedAudioInputDevice
     }).then((track) => {
       this.localAudioTrack = track
-
-      if (self.currentRoom && self.currentRoom.localParticipant) {
-        self.currentRoom.localParticipant.publishTrack(track)
-        const container = document.getElementById(this.localAudioMediaElementId)
-        container.appendChild(track.attach())
-      }
+      this.currentRoom.localParticipant.publishTrack(track)
+      const container = document.getElementById(this.localAudioMediaElementId)
+      container.appendChild(track.attach())
     })
   }
 
