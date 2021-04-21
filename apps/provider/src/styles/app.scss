@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'settings/font-awesome';
 @import 'settings/normalize';
 @import 'settings/material';
 @import 'settings/generics';
@@ -35,3 +34,4 @@
 @import 'shared/paginator';
 @import 'shared/styled';
 @import 'shared/directed-styles';
+@import '~libs/common/src/lib/styles/settings/font-awesome';
