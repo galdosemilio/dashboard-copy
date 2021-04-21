@@ -47,7 +47,7 @@ export type RPMStateEntryPendingStatus = 'same-day' | 'future'
 
 export class RPMStateEntry {
   isActive: boolean
-  pending: RPMStateEntryPendingStatus
+  pending?: RPMStateEntryPendingStatus
   organization: SelectedOrganization
   rpmState: RPMState
 

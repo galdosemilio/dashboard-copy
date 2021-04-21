@@ -20,11 +20,14 @@ import { MatDialog } from '@angular/material/dialog'
 import { GestureClosingDialog } from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
 import { merge } from 'rxjs'
+import { RPMStateEntry } from '../rpm/models'
 
 interface CodeAndTracking {
   trackableCode: TrackableRPMCodeEntry
   billingItem: RPMStateSummaryBillingItem
 }
+
+type TimerUnavailableError = 'no-tracking' | 'active-tomorrow' | 'active-6m'
 
 @UntilDestroy()
 @Component({
@@ -42,6 +45,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   public showTimer = false
   public timerDisplay = '00:00'
   public timeTrackingComplete = false
+  public timerUnavailableError: TimerUnavailableError = 'no-tracking'
 
   private set iterationAmount(amount: number) {
     this._iterationAmount = amount > 0 ? amount : 0
@@ -179,10 +183,19 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         return
       }
 
-      if (response.data.shift().isActive) {
+      const rpmEntry = new RPMStateEntry({ rpmState: response.data.shift() })
+
+      if (rpmEntry.isActive && !rpmEntry.pending) {
         await this.resolveRPMBillingStatus(account)
       } else {
         this.stopTimer()
+
+        if (!rpmEntry.pending) {
+          return
+        }
+
+        this.timerUnavailableError =
+          rpmEntry.pending === 'future' ? 'active-tomorrow' : 'active-6m'
       }
     } catch (error) {
       this.notifier.error(error)
@@ -368,6 +381,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     delete this.timerInterval
 
     this.showTimer = false
+    this.timerUnavailableError = 'no-tracking'
     this.seconds = 0
   }
 

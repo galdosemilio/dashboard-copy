@@ -54,9 +54,26 @@
 <div *ngIf="!showTimer" fxFlex fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex fxLayout="column" fxLayoutAlign="center center">
         <button (click)="toggleRPMStatusPanel()" mat-button>
-            <div class="no-tracking-notice" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
-                <span class="timer">{{ 'GLOBAL.NO_TRACKING' | translate }}</span>
-                <mat-icon>query_builder</mat-icon>
+            <div
+            [ngSwitch]="timerUnavailableError"
+            class="no-tracking-notice"
+            fxLayout="row"
+            fxLayoutGap="5px"
+            fxLayoutAlign="start center">
+                <div *ngSwitchDefault fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <span class="timer">{{ 'GLOBAL.NO_TRACKING' | translate }}</span>
+                    <mat-icon>query_builder</mat-icon>
+                </div>
+
+                <div *ngSwitchCase="'active-tomorrow'" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <span class="timer">{{ 'RPM.TIME_TRACKER_TOMORROW' | translate }}</span>
+                    <mat-icon>query_builder</mat-icon>
+                </div>
+
+                <div *ngSwitchCase="'active-6am'" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <span class="timer">{{ 'RPM.TIME_TRACKER_6AM' | translate }}</span>
+                    <mat-icon>query_builder</mat-icon>
+                </div>
             </div>
         </button>
     </div>
