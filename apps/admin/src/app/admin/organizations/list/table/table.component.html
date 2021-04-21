@@ -25,7 +25,11 @@
       <mat-cell *matCellDef="let row"
       fxLayoutAlign=" center" fxFlex.xs="100%"
       (click)="onDisplay(row)" [class.clickable]="row.isActive">
-        <ng-container *ngIf="row.app.android?.bundle">{{ row.app.android.bundle }}</ng-container>
+        <ng-container *ngIf="row.app.android?.bundle">
+          {{ row.app.android.bundle }}
+          &nbsp;
+          <i class="fas fa-qrcode"></i>
+        </ng-container>
       </mat-cell>
     </ng-container>
 
@@ -34,7 +38,11 @@
       <mat-cell *matCellDef="let row"
       fxLayoutAlign=" center" fxFlex.xs="100%"
       (click)="onDisplay(row)" [class.clickable]="row.isActive">
-        <ng-container *ngIf="row.app.ios?.bundle">{{ row.app.ios.bundle }}</ng-container>
+        <ng-container *ngIf="row.app.ios?.bundle">
+          {{ row.app.ios.bundle }}
+          &nbsp;
+          <i class="fas fa-qrcode"></i>
+        </ng-container>
       </mat-cell>
     </ng-container>
 
