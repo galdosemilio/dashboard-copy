@@ -2,7 +2,7 @@
 
   <mat-table [dataSource]="source" matSort>
 
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="id" sticky>
       <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
       <mat-cell *matCellDef="let row"
       fxLayoutAlign=" center" fxFlex.xs="100%"
@@ -11,12 +11,48 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="name" sticky>
       <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'GLOBAL.NAME' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let row"
       fxLayoutAlign=" center" fxFlex.xs="100%"
       (click)="onDisplay(row)" [class.clickable]="row.isActive">
         {{ row.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="androidAppId">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ANDROID_APP_ID' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row)" [class.clickable]="row.isActive">
+        <ng-container *ngIf="row.app.android?.bundle">{{ row.app.android.bundle }}</ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="iosAppId">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.IOS_APP_ID' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row)" [class.clickable]="row.isActive">
+        <ng-container *ngIf="row.app.ios?.bundle">{{ row.app.ios.bundle }}</ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="parentOrg">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.PARENT' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row)" [class.clickable]="row.isActive">
+        <ng-container *ngIf="row.parent">{{ row.parent.name }} ({{ 'GLOBAL.ID' | translate }} {{ row.parent.id }})</ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="plan">
+      <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.PLAN' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      (click)="onDisplay(row)" [class.clickable]="row.isActive">
+        <ng-container *ngIf="row.plan">{{ row.plan.name }} ({{ 'GLOBAL.ID' | translate }} {{ row.plan.id }})</ng-container>
       </mat-cell>
     </ng-container>
 

@@ -12,6 +12,7 @@
     }
 
     .mat-drawer-content.ng-star-inserted {
+      overflow: hidden;
       @media #{map-get($config, lte-xs)} {
         margin-left: 0px !important;
       }
@@ -33,7 +34,10 @@
           transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1);
 
           @media #{map-get($config, lte-xs)} {
-            background: var(--primary-contrast, mat-color($primary, default-contrast));
+            background: var(
+              --primary-contrast,
+              mat-color($primary, default-contrast)
+            );
             border-bottom: 1px solid var(--primary, mat-color($primary));
             color: mat-color($foreground, text);
           }
@@ -42,7 +46,10 @@
         /* row */
         > div {
           height: calc(
-            100% - #{map-get($config, topbar-height)} - #{map-get($config, footer-height)}
+            100% - #{map-get($config, topbar-height)} - #{map-get(
+                $config,
+                footer-height
+              )}
           );
           position: relative;
 
@@ -67,7 +74,10 @@
 
             > :last-child {
               display: block;
-              background-color: var(--contrast-darken, mat-color($primary, darker-contrast));
+              background-color: var(
+                --contrast-darken,
+                mat-color($primary, darker-contrast)
+              );
               box-shadow: -1px 0 0 mat-color($background, box-shadow);
               color: mat-color($foreground, text);
               min-height: 100%;

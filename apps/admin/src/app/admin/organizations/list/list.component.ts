@@ -10,7 +10,15 @@ import { PaginatorComponent } from '@coachcare/common/components'
   providers: [OrganizationsDataSource]
 })
 export class OrganizationsListComponent implements OnInit, OnDestroy {
-  columns = ['id', 'name', 'actions']
+  columns = [
+    'id',
+    'name',
+    'androidAppId',
+    'iosAppId',
+    'parentOrg',
+    'plan',
+    'actions'
+  ]
 
   @ViewChild(PaginatorComponent, { static: true })
   paginator: PaginatorComponent
