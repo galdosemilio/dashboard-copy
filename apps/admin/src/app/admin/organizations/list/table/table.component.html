@@ -24,7 +24,7 @@
       <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ANDROID_APP_ID' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let row"
       fxLayoutAlign=" center" fxFlex.xs="100%">
-        <ng-container *ngIf="row.app.android?.id">
+        <ng-container *ngIf="row.app?.android?.id">
           {{ row.app.android.id }}
           &nbsp;
           <i *ngIf="row.app.android.id" (click)="showQRCodeDialog(row, 'android')" class="fas fa-qrcode clickable"></i>
@@ -36,7 +36,7 @@
       <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.IOS_APP_ID' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let row"
       fxLayoutAlign=" center" fxFlex.xs="100%">
-        <ng-container *ngIf="row.app.ios?.id">
+        <ng-container *ngIf="row.app?.ios?.id">
           {{ row.app.ios.id }}
           &nbsp;
           <i *ngIf="row.app.ios.url" (click)="showQRCodeDialog(row, 'ios')" class="fas fa-qrcode clickable"></i>
