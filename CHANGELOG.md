@@ -1,3 +1,11 @@
+# [1.9.0](https://github.com/coachcare/dashboard/compare/v1.8.0...v1.9.0) (2021-04-21)
+
+
+### Features
+
+* added sequence auto enrollment mgmt [IDEA-276] ([eccbccd](https://github.com/coachcare/dashboard/commit/eccbccd8ea9b464a5d4127891b383b83cb3f8c72))
+* implemented sequence settings page [IDEA-789] ([37f5ebf](https://github.com/coachcare/dashboard/commit/37f5ebfb961fd23f4529f7d838d37f7ed322b982))
+
 # [1.8.0](https://github.com/coachcare/dashboard/compare/v1.7.0...v1.8.0) (2021-04-16)
 
 
