@@ -13,6 +13,7 @@ import {
   SharedEntryComponents
 } from '@board/shared/shared.barrel'
 import { CcrMaterialModule } from '@coachcare/material'
+import { QRCodeModule } from 'angularx-qrcode'
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { CcrMaterialModule } from '@coachcare/material'
     TranslateModule.forChild(),
     AppCommonModule.forChild(),
     CcrFormFieldsModule,
-    CcrMaterialModule
+    CcrMaterialModule,
+    QRCodeModule
   ],
   exports: [
     FlexLayoutModule,

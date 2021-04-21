@@ -1,0 +1,14 @@
+<div matDialogTitle>
+  <div>
+    <span matDialogTitle [innerHTML]="data.title | translate:data.titleParams"></span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+  <p [innerHTML]="data.description | translate:data.descriptionParams"></p>
+
+  <div class="qr-code-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <qrcode *ngIf="data.qrData" [qrdata]="data.qrData" [size]="128" [level]="'M'"></qrcode>
+  </div>
+</mat-dialog-content>

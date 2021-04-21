@@ -23,12 +23,11 @@
     <ng-container matColumnDef="androidAppId">
       <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.ANDROID_APP_ID' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let row"
-      fxLayoutAlign=" center" fxFlex.xs="100%"
-      (click)="onDisplay(row)" [class.clickable]="row.isActive">
-        <ng-container *ngIf="row.app.android?.bundle">
-          {{ row.app.android.bundle }}
+      fxLayoutAlign=" center" fxFlex.xs="100%">
+        <ng-container *ngIf="row.app.android?.id">
+          {{ row.app.android.id }}
           &nbsp;
-          <i class="fas fa-qrcode"></i>
+          <i *ngIf="row.app.android.id" (click)="showQRCodeDialog(row, 'android')" class="fas fa-qrcode clickable"></i>
         </ng-container>
       </mat-cell>
     </ng-container>
@@ -36,12 +35,11 @@
     <ng-container matColumnDef="iosAppId">
       <mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.IOS_APP_ID' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let row"
-      fxLayoutAlign=" center" fxFlex.xs="100%"
-      (click)="onDisplay(row)" [class.clickable]="row.isActive">
-        <ng-container *ngIf="row.app.ios?.bundle">
-          {{ row.app.ios.bundle }}
+      fxLayoutAlign=" center" fxFlex.xs="100%">
+        <ng-container *ngIf="row.app.ios?.id">
+          {{ row.app.ios.id }}
           &nbsp;
-          <i class="fas fa-qrcode"></i>
+          <i *ngIf="row.app.ios.url" (click)="showQRCodeDialog(row, 'ios')" class="fas fa-qrcode clickable"></i>
         </ng-container>
       </mat-cell>
     </ng-container>

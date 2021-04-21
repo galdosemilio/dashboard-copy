@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatSort } from '@coachcare/material'
+import { MatDialog, MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { getterSorter } from '@coachcare/backend/model'
 import { _ } from '@coachcare/backend/shared'
@@ -11,6 +11,10 @@ import {
   OrganizationsDataSource
 } from '@coachcare/backend/data'
 import { OrgEntityExtended } from '@coachcare/npm-api'
+import {
+  QRCodeDisplayDialog,
+  QRCodeDisplayDialogData
+} from '@board/shared/dialogs'
 
 @Component({
   selector: 'ccr-organizations-table',
@@ -28,6 +32,7 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
     protected router: Router,
     protected notifier: NotifierService,
     protected database: OrganizationsDatabase,
+    private dialog: MatDialog,
     protected dialogs: OrganizationDialogs,
     public routes: OrganizationRoutes
   ) {}
@@ -82,5 +87,23 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
           this.notifier.error(err)
         }
       })
+  }
+
+  public showQRCodeDialog(
+    row: OrgEntityExtended,
+    appType: 'android' | 'ios'
+  ): void {
+    this.dialog.open(QRCodeDisplayDialog, {
+      data: {
+        qrData: row.app[appType].url,
+        title:
+          appType === 'android'
+            ? _('ADMIN.ORGS.MOB_APP_QRCODE_ANDROID')
+            : _('ADMIN.ORGS.MOB_APP_QRCODE_IOS'),
+        description: _('ADMIN.ORGS.MOB_APP_QRCODE_DESC'),
+        descriptionParams: { id: row.id, name: row.name }
+      } as QRCodeDisplayDialogData
+    })
+    console.log({ row, appType })
   }
 }
