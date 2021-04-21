@@ -27,7 +27,7 @@ interface CodeAndTracking {
   billingItem: RPMStateSummaryBillingItem
 }
 
-type TimerUnavailableError = 'no-tracking' | 'active-tomorrow' | 'active-6m'
+type TimerUnavailableError = 'no-tracking' | 'active-tomorrow' | 'active-6am'
 
 @UntilDestroy()
 @Component({
@@ -195,7 +195,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         }
 
         this.timerUnavailableError =
-          rpmEntry.pending === 'future' ? 'active-tomorrow' : 'active-6m'
+          rpmEntry.pending === 'future' ? 'active-tomorrow' : 'active-6am'
       }
     } catch (error) {
       this.notifier.error(error)
