@@ -3,10 +3,10 @@ import { MAT_DIALOG_DATA } from '@coachcare/material'
 
 export interface QRCodeDisplayDialogData {
   description?: string
-  descriptionParams?: any
+  descriptionParams?: Record<string, string | number>
   qrData: string
   title: string
-  titleParams?: any
+  titleParams?: Record<string, string | number>
 }
 
 @Component({
@@ -14,10 +14,6 @@ export interface QRCodeDisplayDialogData {
   templateUrl: 'qr-code-display.dialog.html',
   host: { class: 'ccr-dialog' }
 })
-export class QRCodeDisplayDialog implements OnInit {
+export class QRCodeDisplayDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: QRCodeDisplayDialogData) {}
-
-  public ngOnInit(): void {
-    console.log({ data: this.data })
-  }
 }

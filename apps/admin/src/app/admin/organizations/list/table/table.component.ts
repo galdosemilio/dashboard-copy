@@ -104,6 +104,5 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
         descriptionParams: { id: row.id, name: row.name }
       } as QRCodeDisplayDialogData
     })
-    console.log({ row, appType })
   }
 }

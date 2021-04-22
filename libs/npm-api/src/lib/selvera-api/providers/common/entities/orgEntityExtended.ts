@@ -2,6 +2,7 @@
  * OrgEntityExtended
  */
 
+import { NamedEntity } from './namedEntity'
 import { OrgEntity } from './orgEntity'
 
 export interface OrgAppInfo {
@@ -23,4 +24,6 @@ export interface OrgEntityExtended extends OrgEntity {
     ios?: OrgAppInfo
     android?: OrgAppInfo
   }
+  plan?: NamedEntity
+  parent?: NamedEntity
 }
