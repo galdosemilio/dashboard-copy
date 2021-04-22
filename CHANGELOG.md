@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/coachcare/dashboard/compare/v1.9.0...v1.10.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* solved bug with 6am time ([f1ce30d](https://github.com/coachcare/dashboard/commit/f1ce30df7c553f915a68d200a6dbeb063e9a8648))
+
+
+### Features
+
+* added cases for active rpm that don't track [FRON-2143] ([c211a3e](https://github.com/coachcare/dashboard/commit/c211a3e1c75697033007ea3808b6c1d1262472dd))
+
 # [1.9.0](https://github.com/coachcare/dashboard/compare/v1.8.0...v1.9.0) (2021-04-21)
 
 
