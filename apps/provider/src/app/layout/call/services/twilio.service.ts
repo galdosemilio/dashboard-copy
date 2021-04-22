@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { TwilioBandwidthService } from '@app/layout/call/services/twilio-bandwidth.service'
-import { BehaviorSubject, from, Observable } from 'rxjs'
 import { Interaction } from '@coachcare/sdk'
+import { BehaviorSubject, from, Observable, of } from 'rxjs'
 
 import {
   connect,
@@ -50,6 +50,9 @@ export class TwilioService {
   public localVideoTrack = null
   public localAudioTrack = null
   public currentRoom = null
+  public localVideoEnabled = false
+  public localAudioEnabled = false
+  public generatedLocalTracks = false
 
   public remoteAudioMediaElementId = 'remote-audio-media'
   public remoteVideoMediaElementId = 'remote-video-media'
@@ -135,20 +138,24 @@ export class TwilioService {
   generateLocalTracks(
     twilioConfiguration: TwilioConfiguration
   ): Observable<any> {
-    const self = this
-    self.configuration = twilioConfiguration
+    this.configuration = twilioConfiguration
+    if (this.generatedLocalTracks) {
+      return of({ status: 'ok' })
+    }
+
+    this.generatedLocalTracks = true
 
     return from(
       createLocalTracks({
         audio: twilioConfiguration.enableAudio,
         video: twilioConfiguration.enableVideo
       }).then((localTracks) => {
-        self.localTracks = localTracks
-        self.localAudioTrack = this.getDevicesOfKind(localTracks, 'audio')[0]
-        if (self.configuration.enableVideo) {
-          self.localVideoTrack = this.getDevicesOfKind(localTracks, 'video')[0]
+        this.localTracks = localTracks
+        this.localAudioTrack = this.getDevicesOfKind(localTracks, 'audio')[0]
+        if (this.configuration.enableVideo) {
+          this.localVideoTrack = this.getDevicesOfKind(localTracks, 'video')[0]
         }
-        self.attachLocalTracks()
+        this.attachLocalTracks()
         return { status: 'ok' }
       })
     )
@@ -169,8 +176,8 @@ export class TwilioService {
           // Calculate bandwidth by polling
           self.twilioBandwidthService.monitorRoom(self.currentRoom)
 
-          // Attach the Tracks of the Room's Participants.
-          self.attachAvailableParticipants()
+          // Connect the Tracks of the Room's Participants.
+          self.connectAvailableParticipants()
 
           // When a Participant joins the Room, log the event.
           self.currentRoom.on(
@@ -221,6 +228,8 @@ export class TwilioService {
               const attachedElements = publication.track.detach()
               attachedElements.forEach((element) => element.remove())
             })
+
+            this.generatedLocalTracks = false
           })
           return { status: 'ok' }
         })
@@ -229,7 +238,6 @@ export class TwilioService {
   }
 
   disableCamera() {
-    const self = this
     if (this.localVideoTrack) {
       this.localVideoTrack.disable()
       this.localVideoTrack.stop()
@@ -237,7 +245,7 @@ export class TwilioService {
       if (this.currentRoom) {
         this.currentRoom.localParticipant.videoTracks.forEach((publication) => {
           const track = publication.track
-          self.currentRoom.localParticipant.unpublishTrack(track)
+          this.currentRoom.localParticipant.unpublishTrack(track)
 
           track.detach().forEach(function (detachedElement) {
             detachedElement.remove()
@@ -246,24 +254,36 @@ export class TwilioService {
       }
     }
     this.localVideoTrack = null
+    this.localVideoEnabled = false
   }
 
-  enableCamera() {
+  async enableCamera() {
     if (this.currentRoom?.localParticipant === undefined) {
       return
     }
 
-    createLocalVideoTrack({
-      deviceId: this.selectedVideoInputDevice
-    }).then((track) => {
-      this.localVideoTrack = track
-      this.currentRoom.localParticipant.publishTrack(track)
+    this.localVideoEnabled = true
 
-      const container = document.getElementById(this.localVideoMediaElementId)
-      const element = track.attach()
-      element.style.height = '100%'
-      container.appendChild(element)
+    const track = await createLocalVideoTrack({
+      deviceId: this.selectedVideoInputDevice
     })
+    await this.currentRoom.localParticipant.publishTrack(track)
+
+    if (!this.localVideoEnabled) {
+      // prevent race condition for disable/enable camera
+      await this.currentRoom.localParticipant.unpublishTrack(track)
+      track.disable()
+      track.stop()
+      track.detach()
+
+      return
+    }
+
+    this.localVideoTrack = track
+    const container = document.getElementById(this.localVideoMediaElementId)
+    const element = track.attach()
+    element.style.height = '100%'
+    container.appendChild(element)
   }
 
   disableMicrophone() {
@@ -283,21 +303,35 @@ export class TwilioService {
       }
       this.localAudioTrack = null
     }
+    this.localAudioEnabled = false
   }
 
-  enableMicrophone() {
+  async enableMicrophone() {
     if (this.currentRoom?.localParticipant === undefined) {
       return
     }
 
-    createLocalAudioTrack({
+    this.localAudioEnabled = true
+
+    const track = await createLocalAudioTrack({
       deviceId: this.selectedAudioInputDevice
-    }).then((track) => {
-      this.localAudioTrack = track
-      this.currentRoom.localParticipant.publishTrack(track)
-      const container = document.getElementById(this.localAudioMediaElementId)
-      container.appendChild(track.attach())
     })
+
+    await this.currentRoom.localParticipant.publishTrack(track)
+
+    if (!this.localAudioEnabled) {
+      // prevent race condition for disable/enable audio
+      await this.currentRoom.localParticipant.unpublishTrack(track)
+      track.disable()
+      track.stop()
+      track.detach()
+
+      return
+    }
+
+    this.localAudioTrack = track
+    const container = document.getElementById(this.localAudioMediaElementId)
+    container.appendChild(track.attach())
   }
 
   applyCamera(deviceId) {
@@ -351,16 +385,37 @@ export class TwilioService {
 
   attachTrack(publication, container) {
     if (container && !publication.track.isStopped) {
+      const videoElements = container.getElementsByTagName('video')
+      while (videoElements.length) {
+        container.removeChild(videoElements.item(0))
+      }
+
+      const audioElements = container.getElementsByTagName('audio')
+      while (audioElements.length) {
+        container.removeChild(audioElements.item(0))
+      }
+
       const element = publication.track.attach()
       element.style.height = '100%'
+
       container.appendChild(element)
     }
   }
 
+  // connect current participants
+  connectAvailableParticipants() {
+    this.currentRoom.participants.forEach(this.onParticipantConnected)
+  }
+
   // attach current participants on DOM element
   attachAvailableParticipants() {
-    const self = this
-    this.currentRoom.participants.forEach(this.onParticipantConnected)
+    this.currentRoom.participants.forEach((participant) => {
+      participant.tracks.forEach((publication) => {
+        if (publication.isSubscribed) {
+          this.attachParticipantTrack(publication, participant)
+        }
+      })
+    })
   }
 
   // attach new participant on DOM element
@@ -416,6 +471,10 @@ export class TwilioService {
       this.localVideoTrack = null
       this.localAudioTrack = null
     }
+
+    this.localVideoEnabled = false
+    this.localAudioEnabled = false
+    this.generatedLocalTracks = false
   }
 
   public hideVideoContainer(sid: string) {
@@ -443,7 +502,10 @@ export class TwilioService {
   }
 
   private onParticipantConnected(participant) {
-    this.participants.push(participant)
+    if (!this.participants.some((p) => p.identity === participant.identity)) {
+      this.participants.push(participant)
+    }
+
     this.participantConnected$.next(participant.identity)
 
     participant.tracks.forEach((publication) => {
