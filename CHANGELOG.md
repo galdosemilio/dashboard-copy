@@ -1,3 +1,18 @@
+# [1.11.0](https://github.com/coachcare/dashboard/compare/v1.10.0...v1.11.0) (2021-04-23)
+
+
+### Bug Fixes
+
+* added extra validation ([554f729](https://github.com/coachcare/dashboard/commit/554f7291454a9f94991200187119deb75683d522))
+* create local audio/video track only on a call [FRON-2124] ([efd7999](https://github.com/coachcare/dashboard/commit/efd7999a0de0212218026c0d985e1b0f8a2c15ee))
+* implemented requested changes ([ed9a6f3](https://github.com/coachcare/dashboard/commit/ed9a6f3885df2c672233efb9aab8e4d7c42cc8af))
+
+
+### Features
+
+* added new cells ([441cd6d](https://github.com/coachcare/dashboard/commit/441cd6de963ff40344bc34aabe4f37c96e04dbcc))
+* added qr code button ([181d844](https://github.com/coachcare/dashboard/commit/181d84417ecb0509167bce1e0f4abb33876b22ed))
+
 # [1.10.0](https://github.com/coachcare/dashboard/compare/v1.9.0...v1.10.0) (2021-04-22)
 
 
