@@ -46,7 +46,11 @@
             </mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center">
                 <span>{{'BOARD.TITLE' | translate}}</span>
-                <div>{{ row.title | translate }}</div>
+                <div>{{ row.title | translate }}
+                    <span *ngIf="row.status === 'inactive' && source?.criteria?.status?.meeting === 'all'">
+                        ({{'BOARD.DELETED' | translate}})
+                    </span>
+                </div>
             </mat-cell>
         </ng-container>
 

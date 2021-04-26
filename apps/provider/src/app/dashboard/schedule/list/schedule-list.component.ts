@@ -33,13 +33,14 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
   form$: Subject<void> = new Subject<void>()
   selectedClinic?: OrganizationEntity
   meetingStatusOptions = [
-    { value: 'active', viewValue: _('BOARD.ACTIVE_MEETINGS') },
-    { value: 'inactive', viewValue: _('BOARD.DELETED_METTINGS') }
+    { value: 'active', viewValue: _('MEETINGS.ACTIVE_MEETINGS') },
+    { value: 'inactive', viewValue: _('MEETINGS.DELETED_METTINGS') },
+    { value: 'all', viewValue: _('MEETINGS.ALL_MEETINGS') }
   ]
   quickSelectOptions = [
-    { value: 'all', viewValue: _('BOARD.ALL_MEETINGS') },
-    { value: 'upcoming', viewValue: _('BOARD.UPCOMING') },
-    { value: 'past', viewValue: _('BOARD.PAST') }
+    { value: 'all', viewValue: _('MEETINGS.ALL') },
+    { value: 'upcoming', viewValue: _('MEETINGS.UPCOMING') },
+    { value: 'past', viewValue: _('MEETINGS.PAST') }
   ]
 
   constructor(

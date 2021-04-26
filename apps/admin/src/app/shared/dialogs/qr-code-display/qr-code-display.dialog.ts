@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import { Component, Inject, ViewChild } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@coachcare/material'
-import { NamedEntity } from '@coachcare/npm-api'
+import { NamedEntity } from '@coachcare/sdk'
 import { QRCodeComponent } from 'angularx-qrcode'
 
 export interface QRCodeDisplayDialogData {
