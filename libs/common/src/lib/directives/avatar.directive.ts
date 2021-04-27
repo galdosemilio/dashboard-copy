@@ -16,7 +16,7 @@ export class CcrAvatarDirective {
   src: string
 
   @Input()
-  default = '../assets/avatar.png'
+  default = '/assets/avatar.png'
 
   constructor(
     private cdr: ChangeDetectorRef,

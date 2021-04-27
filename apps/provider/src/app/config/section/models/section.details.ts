@@ -5,7 +5,8 @@ import {
   PatientListingConfigDetails,
   RightPanelDetails,
   RPMDetails,
-  SidenavDetails
+  SidenavDetails,
+  CohortReportsDetails
 } from './'
 
 export interface SectionConfigDetails {
@@ -16,4 +17,5 @@ export interface SectionConfigDetails {
   RIGHT_PANEL?: RightPanelDetails
   RPM?: RPMDetails
   SIDENAV?: SidenavDetails
+  COHORT_REPORTS?: CohortReportsDetails
 }

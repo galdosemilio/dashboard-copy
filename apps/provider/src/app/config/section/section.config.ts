@@ -41,6 +41,10 @@ import { SectionConfigDetails } from './models/section.details'
 import { RobardSectionConfig } from './robard'
 import { ShiftSetGoSectionConfig } from './shiftsetgo/shiftsetgo.section.config'
 import { TrueWeightSectionConfig } from './true-weight/true-weight.section.config'
+import {
+  IdealYouTestSectionConfig,
+  IdealYouProdSectionConfig
+} from './ideal-you'
 
 export interface SectionConfigObject {
   component: any
@@ -64,6 +68,7 @@ export const SECTION_CONFIG: SectionConfig = {
     prod: DefaultProdSectionConfig
   },
   test: {
+    ['3235']: IdealYouTestSectionConfig,
     ['3381']: LeanMDSectionConfig,
     ['4479']: ApolloEndosurgeryTestSectionConfig,
     ['5748']: ShakeItTestSectionConfig,
@@ -94,6 +99,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6375']: ApolloInternationalDemoClinicSectionConfig,
     ['5329']: ApolloUSProdSectionConfig,
     ['5341']: ApolloInternationalSectionConfig,
+    ['5544']: IdealYouProdSectionConfig,
     ['6504']: ApolloUSClinicsProdSectionConfig,
     ['5470']: GrandViewHealthSectionConfig,
     ['5529']: ShiftSetGoSectionConfig,

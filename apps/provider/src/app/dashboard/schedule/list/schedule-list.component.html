@@ -27,12 +27,12 @@
 
         <div fxLayout="column" fxLayoutAlign="start stretch">
             <div *ngIf="!filteredAccounts.length">
-                <ccr-user-search
+                <user-search
                 [allowSelf]="true"
                 [excludes]="filteredAccounts"
                 [label]="'BOARD.SEARCH_BY_ACCOUNT_NAME_OR_EMAIL' | translate"
                 prefixIcon="person"
-                (select)="onAddAccount($event)"></ccr-user-search>
+                (select)="onAddAccount($event)"></user-search>
             </div>
             <div *ngIf="filteredAccounts.length">
                 <mat-chip-list>

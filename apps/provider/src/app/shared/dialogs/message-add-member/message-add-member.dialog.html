@@ -8,12 +8,12 @@
 <mat-dialog-content>
   <p [innerHTML]="'BOARD.THREAD_ADD_MEMBER_DESCRIPTION' | translate"></p>
 
-  <ccr-user-search
+  <user-search
   *ngIf="!selectedAccount"
   [allowSelf]="true"
   [excludes]="existingAccounts"
   [label]="'BOARD.SELECT_PATIENT_COACH' | translate"
-  (select)="onSelectAccount($event)"></ccr-user-search>
+  (select)="onSelectAccount($event)"></user-search>
 
   <div
   *ngIf="selectedAccount"

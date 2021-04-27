@@ -11,7 +11,8 @@ import {
   SleepTableComponent,
   StatisticsComponent,
   StepsChartComponent,
-  WeightChangeTableComponent
+  WeightChangeTableComponent,
+  CohortWeightLossComponent
 } from './'
 import { CommunicationsReportComponent } from './communications'
 import { CallsComponent } from './communications/calls'
@@ -47,6 +48,7 @@ export const ReportsRoutes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'patient' },
       { path: 'patient', component: PatientStatsComponent },
       { path: 'coach', component: CoachStatsComponent },
+      { path: 'cohort', component: CohortWeightLossComponent },
       {
         path: 'activity',
         component: PatientActivityComponent,

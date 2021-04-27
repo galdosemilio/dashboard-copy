@@ -11,14 +11,14 @@
 <mat-dialog-content>
   <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
     <p [innerHTML]="'BOARD.CLINIC_ADD_SUP_PROVIDER_DESC' | translate:{clinic: clinic}"></p>
-    <ccr-user-search
+    <user-search
       *ngIf="!selectedAccount"
       [allowSelf]="true"
       [label]="'MENU.SEARCH'"
       [organization]="clinic.id"
       [type]="'2'"
       (onSelect)="onUserSelect($event)">
-    </ccr-user-search>
+    </user-search>
 
     <div
     *ngIf="selectedAccount"

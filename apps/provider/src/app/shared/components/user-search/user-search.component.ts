@@ -17,7 +17,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { AccountProvider } from '@coachcare/sdk'
 
 @Component({
-  selector: 'ccr-user-search',
+  selector: 'user-search',
   templateUrl: './user-search.component.html',
   styleUrls: ['./user-search.component.scss'],
   encapsulation: ViewEncapsulation.None

@@ -23,7 +23,7 @@ import { LOCALES, SelectOptions } from '@app/shared/utils'
 import { isArray, isEqual } from 'lodash'
 
 @Component({
-  selector: 'ccr-form-field-lang',
+  selector: 'form-field-lang',
   templateUrl: './lang-selector.component.html',
   providers: [
     {

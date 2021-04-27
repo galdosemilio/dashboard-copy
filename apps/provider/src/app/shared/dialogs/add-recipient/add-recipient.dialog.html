@@ -26,14 +26,14 @@
             fxLayoutAlign="space-between stretch"
             fxLayoutGap="25px">
                 <div fxFlex>
-                    <ccr-user-search
+                    <user-search
                     data-cy="sequence-enroll-search-patients"
                     [excludes]="recipients"
                     [label]="'SEQUENCING.SELECT_USERS' | translate"
                     [type]="'3'"
                     [organization]="sequence.organization.id"
                     (remove)="onRemoveRecipient($event)"
-                    (select)="onAddRecipient($event)"></ccr-user-search>
+                    (select)="onAddRecipient($event)"></user-search>
                 </div>
                 <div
                 fxFlex

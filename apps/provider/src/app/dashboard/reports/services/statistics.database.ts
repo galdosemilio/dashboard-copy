@@ -9,6 +9,8 @@ import {
   AgeDemographicsSegment,
   GenderDemographicsRequest,
   GenderDemographicsSegment,
+  MeasurementCohortReportRequest,
+  MeasurementCohortReportResponse,
   OrganizationActivityAggregate,
   OrganizationActivityRequest,
   ProviderCountRequest,
@@ -61,5 +63,11 @@ export class StatisticsDatabase extends CcrDatabase {
     args: ProviderCountRequest
   ): Promise<Array<ProviderCountSegment>> {
     return this.reports.fetchProviderCount(args)
+  }
+
+  fetchMeasurementCohortReport(
+    args: MeasurementCohortReportRequest
+  ): Promise<MeasurementCohortReportResponse> {
+    return this.reports.fetchMeasurementCohortReport(args)
   }
 }

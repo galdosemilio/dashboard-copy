@@ -19,10 +19,13 @@
     <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['activity']">
       {{ 'REPORTS.PATIENT_ACTIVITY' | translate }}
     </a>
+    <a *ngIf="showCohortWeightLossReport" fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['cohort']">
+      {{ 'REPORTS.COHORT_WEIGHT_LOSS' | translate }}
+    </a>
   </div>
 
-  <app-report-controls></app-report-controls>
 
+  <app-report-controls *ngIf="showReportControls"></app-report-controls>
 
   <div class="ccr-subcomponent">
     <router-outlet></router-outlet>
