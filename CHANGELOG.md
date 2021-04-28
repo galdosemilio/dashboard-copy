@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/coachcare/dashboard/compare/v1.11.0...v1.12.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* calendar view edge case [FRON-2134] ([2e3234e](https://github.com/coachcare/dashboard/commit/2e3234efc6ef567104c277e3d10647fcf54ec63e))
+
+
+### Features
+
+* add month calendar view [IDEA-124] ([983150b](https://github.com/coachcare/dashboard/commit/983150b465c16f5778e7f78c4f2701b4cd7cf5cc))
+
 # [1.11.0](https://github.com/coachcare/dashboard/compare/v1.10.0...v1.11.0) (2021-04-23)
 
 
