@@ -53,6 +53,8 @@ interface TimeBlockCell {
   duration: number
 }
 
+type ScheduleCalendarTimeRange = 'month' | 'day' | 'week'
+
 // export type Meeting = FetchMeetingResponse & {
 //   timeToDisplay: string;
 // };
@@ -69,9 +71,10 @@ export class ScheduleCalendarComponent
   @ViewChildren('trow') rows: Array<ElementRef>
 
   public days: Array<string> = [moment().format('ddd D')]
+  public hasLoaded = false
   public startDate: any = moment().set({ hours: 0, minutes: 0, seconds: 0 })
   public timeBlocks: Array<TimeBlock> = []
-  public timerange: 'month' | 'day' | 'week' = 'week'
+  public timerange: ScheduleCalendarTimeRange = 'week'
   public selectedMeeting = ''
   public clickedMeeting: any
   public dates: DateNavigatorOutput = {}
@@ -150,6 +153,12 @@ export class ScheduleCalendarComponent
         targetElement.scrollIntoView(true)
       }
     }
+  }
+
+  public changeTimeRange(timerange: ScheduleCalendarTimeRange): void {
+    this.hasLoaded = false
+    this.timerange = timerange
+    this.isTableScrolled = this.timerange !== 'month' ? false : true
   }
 
   public setSelected(value: string) {
@@ -419,14 +428,14 @@ export class ScheduleCalendarComponent
 
       this.timeBlocks.push(block)
     }
+    this.hasLoaded = true
   }
 
   private getMeetings(date: DateNavigatorOutput) {
     if (!this.selectedUser || !date) {
+      this.hasLoaded = true
       return
     }
-
-    this.timeBlocks = []
 
     this.days =
       this.timerange === 'day'
@@ -507,7 +516,10 @@ export class ScheduleCalendarComponent
         })
         this.generateTimes(meetings, availableResponse.entries)
       })
-      .catch((err) => this.notifier.error(err))
+      .catch((err) => {
+        this.hasLoaded = true
+        this.notifier.error(err)
+      })
   }
 
   private isUnavailable(meeting: any) {

@@ -30,19 +30,19 @@
     ></ccr-select-user>
     <div class="ccr-button-group">
       <button type="button" mat-button class="ccr-icon-button"
-      (click)="timerange = 'month'" [class.active]="timerange === 'month'"
+      (click)="changeTimeRange('month')" [class.active]="timerange === 'month'"
       [matTooltip]="'BOARD.DAILY_VIEW' | translate" matTooltipPosition="above">
         <mat-icon>view_module</mat-icon>
         {{'GLOBAL.MONTH' | translate}}
       </button>
       <button type="button" mat-button class="ccr-icon-button"
-      (click)="timerange = 'day'" [class.active]="timerange === 'day'"
+      (click)="changeTimeRange('day')" [class.active]="timerange === 'day'"
       [matTooltip]="'BOARD.DAILY_VIEW' | translate" matTooltipPosition="above">
         <mat-icon>view_day</mat-icon>
         {{'GLOBAL.DAY' | translate}}
       </button>
       <button type="button" mat-button class="ccr-icon-button"
-      (click)="timerange = 'week'" [class.active]="timerange === 'week'"
+      (click)="changeTimeRange('week')" [class.active]="timerange === 'week'"
       [matTooltip]="'BOARD.WEEKLY_VIEW' | translate" matTooltipPosition="above">
         <mat-icon>view_week</mat-icon>
         {{'GLOBAL.WEEK' | translate}}
@@ -59,7 +59,7 @@
 direction="forward">
 </date-navigator>
 
-<div class="calendar-wrapper">
+<div *ngIf="hasLoaded" class="calendar-wrapper">
   <table *ngIf="timerange !== 'month'" fxFlex="grow" fxLayout="column" class="calendar" [class.week]="timerange == 'week'">
     <thead>
       <tr>
@@ -102,39 +102,41 @@ direction="forward">
     </tbody>
   </table>
 
-  <table *ngIf="timerange === 'month'" fxFlex="grow" fxLayout="column" class="calendar month">
-    <thead>
-      <tr>
-        <th>{{'GLOBAL.SUNDAY' | translate}}</th>
-        <th>{{'GLOBAL.MONDAY' | translate}}</th>
-        <th>{{'GLOBAL.TUESDAY' | translate}}</th>
-        <th>{{'GLOBAL.WEDNESDAY' | translate}}</th>
-        <th>{{'GLOBAL.THURSDAY' | translate}}</th>
-        <th>{{'GLOBAL.FRIDAY' | translate}}</th>
-        <th>{{'GLOBAL.SATURDAY' | translate}}</th>
-      </tr>
-    </thead>
-    <tbody #tbody class="calendar-body" data-cy="schedule-calendar-view-body">
-      <tr #trow *ngFor="let block of timeBlocks">
-        <td *ngFor="let cell of block.cells" [class.available]="cell?.isAvailable" [class.cell-highlight]="cell?.isToday">
-          <div class="month-cell-wrap">
-            <div class="month-cell-date">
-              <p>{{ cell.time | amDateFormat:'D' }}</p>
-            </div>
-            <div class="month-cell-container">
-              <div *ngFor="let meeting of cell.meetings | slice:0:3;" class="month-meeting" (click)="clickMeeting(meeting)">
-                <div
-                  class="meeting-badge"
-                  [style.background-color]="meeting.colors?.default"
-                ></div>
-                <div class="meeting-time">{{ meeting.timeToDisplay }}</div>
-                <div class="meeting-title">{{ meeting.title | translate }}</div>
+  <div *ngIf="timerange === 'month'" class="month-calendar-container">
+    <table fxFlex="grow" fxLayout="column" class="calendar month">
+      <thead>
+        <tr>
+          <th>{{'GLOBAL.SUNDAY' | translate}}</th>
+          <th>{{'GLOBAL.MONDAY' | translate}}</th>
+          <th>{{'GLOBAL.TUESDAY' | translate}}</th>
+          <th>{{'GLOBAL.WEDNESDAY' | translate}}</th>
+          <th>{{'GLOBAL.THURSDAY' | translate}}</th>
+          <th>{{'GLOBAL.FRIDAY' | translate}}</th>
+          <th>{{'GLOBAL.SATURDAY' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody #tbody class="calendar-body" data-cy="schedule-calendar-view-body">
+        <tr #trow *ngFor="let block of timeBlocks">
+          <td *ngFor="let cell of block.cells" [class.available]="cell?.isAvailable" [class.cell-highlight]="cell?.isToday">
+            <div class="month-cell-wrap">
+              <div class="month-cell-date">
+                <p>{{ cell.time | amDateFormat:'D' }}</p>
               </div>
-              <div *ngIf="cell.meetings.length > 3" class="month-meeting-more" (click)="viewAllMeetings(cell)">{{'BOARD.SEE_MORE' | translate}}</div>
+              <div class="month-cell-container">
+                <div *ngFor="let meeting of cell.meetings | slice:0:3;" class="month-meeting" (click)="clickMeeting(meeting)">
+                  <div
+                    class="meeting-badge"
+                    [style.background-color]="meeting.colors?.default"
+                  ></div>
+                  <div class="meeting-time">{{ meeting.timeToDisplay }}</div>
+                  <div class="meeting-title">{{ meeting.title | translate }}</div>
+                </div>
+                <div *ngIf="cell.meetings.length > 3" class="month-meeting-more" (click)="viewAllMeetings(cell)">{{'BOARD.SEE_MORE' | translate}}</div>
+              </div>
             </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -37,13 +37,14 @@ date-navigator {
   flex: 1;
   display: block !important;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .calendar {
   height: 100%;
 }
 .calendar-body {
   flex: 1 auto;
+  overflow-x: hidden;
   width: 100%;
 
   .month-cell-wrap {
@@ -138,6 +139,12 @@ date-navigator {
       margin: 5px;
     }
   }
+}
+
+.month-calendar-container {
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .truncate {
