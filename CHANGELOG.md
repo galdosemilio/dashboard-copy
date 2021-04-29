@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/coachcare/dashboard/compare/v1.12.0...v1.12.1) (2021-04-29)
+
+
+### Bug Fixes
+
+* adjusted scrolling behavior of schedule calendar ([4c235b4](https://github.com/coachcare/dashboard/commit/4c235b42d56374fa366df3aa2703406f41a1d5f4))
+
 # [1.12.0](https://github.com/coachcare/dashboard/compare/v1.11.0...v1.12.0) (2021-04-28)
 
 
