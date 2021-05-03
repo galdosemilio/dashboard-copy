@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/coachcare/dashboard/compare/v1.12.1...v1.13.0) (2021-05-03)
+
+
+### Features
+
+* enhanced coach permission setting on create and edit [IDEA-662] ([45cda49](https://github.com/coachcare/dashboard/commit/45cda491a1c8a4547ae6a0e7411b5bbc2a1ffcfb))
+
 ## [1.12.1](https://github.com/coachcare/dashboard/compare/v1.12.0...v1.12.1) (2021-04-29)
 
 
