@@ -59,7 +59,7 @@ export class CcrAccessLevelSelectorComponent
     this.createForm()
 
     if (this.initialSelection) {
-      this.control.setValue(this.initialSelection ?? 'no-access')
+      this.control.setValue(this.initialSelection ?? 'limited-access')
     }
 
     if (!this.organization) {
@@ -85,12 +85,12 @@ export class CcrAccessLevelSelectorComponent
 
   public writeValue(selection: CoachAssociationPermissionOptions): void {
     if (this.control) {
-      this.control.setValue(selection ?? 'no-access')
+      this.control.setValue(selection ?? 'limited-access')
     }
   }
 
   private createForm(): void {
-    this.control = new FormControl('no-access')
+    this.control = new FormControl('limited-access')
 
     this.control.valueChanges
       .pipe(untilDestroyed(this))

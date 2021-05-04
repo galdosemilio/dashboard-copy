@@ -9,7 +9,6 @@ export interface AssociationAccessLevel {
 }
 
 export type CoachAssociationPermissionOptions =
-  | 'no-access'
   | 'limited-access'
   | 'view-all'
   | 'patient-phi-and-view-all'
@@ -17,15 +16,10 @@ export type CoachAssociationPermissionOptions =
 export const COACH_ASSOCIATION_ACCESS_LEVELS: {
   [key: string]: AssociationAccessLevel
 } = {
-  ['no-access']: {
-    value: 'no-access',
-    displayValue: _('PERM.NO_ACCESS'),
-    perms: { allowClientPhi: false, viewAll: false }
-  },
   ['limited-access']: {
     value: 'limited-access',
     displayValue: _('PERM.LIMITED_ACCESS'),
-    perms: { allowClientPhi: true, viewAll: false }
+    perms: { allowClientPhi: false, viewAll: false }
   },
   ['view-all']: {
     value: 'view-all',
