@@ -139,7 +139,7 @@
     "ngx-device-detector": "^2.0.0",
     "ngx-moment": "^5.0.0",
     "pdfmake": "^0.1.68",
-    "rxjs": "~6.6.3",
+    "rxjs": "~6.6.7",
     "socket.io": "^2.3.0",
     "tinycolor2": "^1.4.1",
     "twilio-video": "^2.7.3",
