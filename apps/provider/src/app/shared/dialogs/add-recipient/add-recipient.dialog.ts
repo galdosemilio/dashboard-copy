@@ -155,7 +155,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       this.state = 'processing'
 
       await this.seq.createBulkOrganizationSeqEnrollments({
-        organization: this.currentOrg.id,
+        organization:
+          this.data.sequence.enrollment?.organization.id ?? this.currentOrg.id,
         sequence: this.data.sequence.id,
         executeAt: {
           local: moment(this.executeAt).format(this.executeAtFormat)
@@ -172,7 +173,9 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       while (orgChildren.length) {
         this.currentOrg = orgChildren.shift()
         await this.seq.createBulkOrganizationSeqEnrollments({
-          organization: this.currentOrg.id,
+          organization:
+            this.data.sequence.enrollment?.organization.id ??
+            this.currentOrg.id,
           sequence: this.data.sequence.id,
           executeAt: {
             local: moment(this.executeAt).format(this.executeAtFormat)
@@ -205,7 +208,9 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       )
       await this.seq.createBulkSeqEnrollments({
         createdBy: this.context.user.id,
-        organization: this.context.organizationId,
+        organization:
+          this.data.sequence.enrollment?.organization.id ??
+          this.context.organizationId,
         sequence: this.sequence.id,
         transition: transition.id,
         accounts: this.recipients.map((recipient) => recipient.id),
