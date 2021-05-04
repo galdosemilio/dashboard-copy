@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/material'
-import { AccountProvider, AccountAccessData } from '@coachcare/npm-api'
+import { AccountProvider, AccountAccessData } from '@coachcare/sdk'
 import { _ } from '@coachcare/common/shared'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { TranslateService } from '@ngx-translate/core'

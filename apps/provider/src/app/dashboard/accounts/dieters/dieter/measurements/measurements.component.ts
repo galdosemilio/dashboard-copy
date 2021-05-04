@@ -22,7 +22,8 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, CcrPaginator, DateNavigatorOutput } from '@app/shared'
+import { _, DateNavigatorOutput } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { filter } from 'lodash'
@@ -59,7 +60,8 @@ export type MeasurementConfig = {
   encapsulation: ViewEncapsulation.None
 })
 export class DieterMeasurementsComponent implements OnInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   // controls with their config
   aggregation: MeasurementAggregation
   allowListView = false

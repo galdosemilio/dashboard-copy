@@ -4,7 +4,7 @@ import {
   OrgAccessRequest,
   OrgAccessResponse,
   OrganizationProvider
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class AssociationsDatabase implements CcrDatabase {

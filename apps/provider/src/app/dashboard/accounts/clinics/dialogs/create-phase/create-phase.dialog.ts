@@ -3,10 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { Package } from '@app/shared/components/package-table'
-import {
-  NamedEntity,
-  Package as SelveraPackageService
-} from '@coachcare/npm-api'
+import { NamedEntity, Package as SelveraPackageService } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 
 @Component({

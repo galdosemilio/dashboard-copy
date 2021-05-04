@@ -23,7 +23,7 @@ import {
   AccountAccessData,
   FormAnswer,
   FormSubmission as FormSubmissionService
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FormDisplayService } from '../services'

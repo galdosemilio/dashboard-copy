@@ -6,7 +6,7 @@ import {
   OrganizationAssociation,
   OrganizationEntity,
   OrganizationPermission
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 
 @Component({

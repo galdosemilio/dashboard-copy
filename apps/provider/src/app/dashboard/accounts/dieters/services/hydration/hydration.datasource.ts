@@ -6,7 +6,7 @@ import { CcrDataSource } from '@app/shared'
 import {
   GetHydrationSummaryRequest,
   HydrationSummaryResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { HydrationDatabase } from './hydration.database'
 
 export interface HydrationSummary extends HydrationSummaryResponse {

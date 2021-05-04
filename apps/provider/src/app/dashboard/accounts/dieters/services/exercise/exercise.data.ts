@@ -1,5 +1,5 @@
 import { _ } from '@app/shared'
-import { ExerciseType } from '@coachcare/npm-api'
+import { ExerciseType } from '@coachcare/sdk'
 import * as moment from 'moment'
 
 export interface Duration {

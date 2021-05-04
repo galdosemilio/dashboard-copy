@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core'
 import { CcrDatabase } from '@app/shared'
-import {
-  FetchAllMeetingRequest,
-  FetchAllMeetingResponse
-} from '@coachcare/npm-api'
+import { FetchAllMeetingRequest, FetchAllMeetingResponse } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { Schedule } from '@coachcare/npm-api'
+import { Schedule } from '@coachcare/sdk'
 
 @Injectable()
 export class MeetingsDatabase extends CcrDatabase {

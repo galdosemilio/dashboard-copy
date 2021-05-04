@@ -4,7 +4,7 @@ import {
   GetListOrganizationRequest,
   OrganizationSingle,
   OrgSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { BehaviorSubject } from 'rxjs'
 
 // DataSource

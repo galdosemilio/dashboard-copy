@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { CookieService } from 'ngx-cookie-service'
-import { AccountProvider, ApiService } from '@coachcare/npm-api'
+import { AccountProvider, ApiService } from '@coachcare/sdk'
 
 import { CCRApp } from '@app/config'
-import { Profile } from '@coachcare/npm-api'
+import { Profile } from '@coachcare/sdk'
 import { _, locIsRtl } from '@app/shared/utils'
 import { ConfigService } from './config.service'
 import { EventsService } from './events.service'

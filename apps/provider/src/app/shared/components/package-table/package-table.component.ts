@@ -13,7 +13,7 @@ import {
   PackageDatabase,
   PackageDatasource
 } from '@app/shared/components/package-table/services'
-import { CcrPaginator } from '@app/shared/components/paginator'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Package, PackageSelectEvents } from './models'
 
@@ -23,8 +23,8 @@ import { Package, PackageSelectEvents } from './models'
   templateUrl: './package-table.component.html'
 })
 export class PackageTableComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   @Input()
   set array(a: Package[]) {

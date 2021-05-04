@@ -4,7 +4,7 @@ import {
   OrgEntityExtended,
   OrgListSegment,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _, AutocompleterOption } from '@coachcare/backend/shared'
 import { clone } from 'lodash'
 

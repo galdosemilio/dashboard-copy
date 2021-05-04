@@ -4,7 +4,8 @@ import {
   PainDataSource
 } from '@app/dashboard/accounts/dieters/services'
 import { ContextService, NotifierService } from '@app/service'
-import { CcrPaginator, DateNavigatorOutput } from '@app/shared'
+import { DateNavigatorOutput } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import * as moment from 'moment'
 import { BehaviorSubject } from 'rxjs'
 
@@ -20,7 +21,7 @@ export class PainComponent implements OnInit {
   }
 
   @ViewChild('paginator', { static: false })
-  paginator: CcrPaginator
+  paginator: CcrPaginatorComponent
 
   date$ = new BehaviorSubject<DateNavigatorOutput>({})
   source: PainDataSource | null

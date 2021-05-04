@@ -7,6 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog, MatSort } from '@coachcare/material'
 import {
   STORAGE_PAGE_SIZE_PATIENT_LISTING,
@@ -19,12 +20,7 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import {
-  _,
-  CcrPaginator,
-  PackageFilterComponent,
-  unitConversion
-} from '@app/shared'
+import { _, PackageFilterComponent, unitConversion } from '@app/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
@@ -49,8 +45,8 @@ export class DieterListingWithPhiComponent
   @ViewChild(CcrPageSizeSelectorComponent, { static: true })
   pageSizeSelectorComp: CcrPageSizeSelectorComponent
 
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   clinic: SelectedOrganization
   csvSeparator = ','

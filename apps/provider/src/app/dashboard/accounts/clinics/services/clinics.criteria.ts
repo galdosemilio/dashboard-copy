@@ -1,4 +1,4 @@
-import { OrgAccessRequest } from '@coachcare/npm-api'
+import { OrgAccessRequest } from '@coachcare/sdk'
 
 export interface ClinicCriteria extends OrgAccessRequest {
   admin?: boolean // with admin permissions

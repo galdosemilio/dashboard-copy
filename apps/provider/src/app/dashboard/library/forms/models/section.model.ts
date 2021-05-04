@@ -1,8 +1,4 @@
-import {
-  FormQuestionSingle,
-  FormRef,
-  FormSectionSingle
-} from '@coachcare/npm-api'
+import { FormQuestionSingle, FormRef, FormSectionSingle } from '@coachcare/sdk'
 import { FormQuestion } from './question.model'
 
 export class FormSection implements FormSectionSingle {

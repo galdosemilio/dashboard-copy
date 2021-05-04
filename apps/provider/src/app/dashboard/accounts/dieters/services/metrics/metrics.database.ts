@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import * as moment from 'moment'
-import { Exercise, FoodKey } from '@coachcare/npm-api'
+import { Exercise, FoodKey } from '@coachcare/sdk'
 import {
   MetricsDataSourceCriteria,
   MetricsDataSourceResponse

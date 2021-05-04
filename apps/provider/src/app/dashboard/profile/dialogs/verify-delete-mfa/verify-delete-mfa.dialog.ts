@@ -3,11 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
-import {
-  GetUserMFAResponse,
-  VerifyDeleteUserMFARequest
-} from '@coachcare/npm-api'
-import { MFA } from '@coachcare/npm-api'
+import { GetUserMFAResponse, VerifyDeleteUserMFARequest } from '@coachcare/sdk'
+import { MFA } from '@coachcare/sdk'
 import { MFAVerificatorMode } from '../../mfa-verificator'
 import { MFAChannels } from '../../models'
 

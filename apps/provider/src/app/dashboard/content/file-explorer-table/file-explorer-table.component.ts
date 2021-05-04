@@ -10,6 +10,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort, MatTable } from '@coachcare/material'
 import { FileExplorerBase } from '@app/dashboard/content/file-explorer-base/file-explorer-base'
 import {
@@ -21,7 +22,7 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { BindForm, BINDFORM_TOKEN, CcrPaginator } from '@app/shared'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Router } from '@angular/router'
 
@@ -68,8 +69,8 @@ export class FileExplorerTableComponent
   mode: 'digital-library' | 'vault'
   @Input()
   organization: SelectedOrganization
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   @ViewChild(MatSort, { static: true })
   sort: MatSort
   @ViewChild(MatTable, { read: ElementRef, static: true })

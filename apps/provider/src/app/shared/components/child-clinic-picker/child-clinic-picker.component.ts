@@ -8,10 +8,10 @@ import {
 } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { NotifierService } from '@app/service'
-import { OrganizationEntity } from '@coachcare/npm-api'
+import { OrganizationEntity } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
-import { OrganizationProvider } from '@coachcare/npm-api'
+import { OrganizationProvider } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({

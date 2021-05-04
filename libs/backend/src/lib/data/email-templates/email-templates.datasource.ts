@@ -3,7 +3,7 @@ import {
   EmailTemplate as SelveraEmailTemplate,
   GetAllEmailTemplatesRequest,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { EmailTemplatesDatabase } from './email-templates.database'
 import { EmailTemplate } from './model'

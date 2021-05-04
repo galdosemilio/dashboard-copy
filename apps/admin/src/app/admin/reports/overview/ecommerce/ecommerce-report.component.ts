@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NotifierService } from '@coachcare/common/services'
 import { generateCSV } from '@coachcare/common/shared'
-import { NamedEntity, Reports } from '@coachcare/npm-api'
+import { NamedEntity, Reports } from '@coachcare/sdk'
 import { environment } from '../../../../../environments/environment'
 import * as moment from 'moment'
 

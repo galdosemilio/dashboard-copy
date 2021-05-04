@@ -18,8 +18,8 @@ import {
   FormSubmissionsDatasource
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
-import { CcrPaginator } from '@app/shared'
-import { FormAnswer, FormSingle } from '@coachcare/npm-api'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { FormAnswer, FormSingle } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { map } from 'rxjs/operators'
@@ -52,7 +52,7 @@ export class DieterFormsComponent implements OnInit, OnDestroy {
   @Output()
   formSelected: EventEmitter<Form> = new EventEmitter<Form>()
 
-  @ViewChild(CcrPaginator, { static: true }) paginator
+  @ViewChild(CcrPaginatorComponent, { static: true }) paginator
 
   public account: any
   public answers: FormAnswer[]

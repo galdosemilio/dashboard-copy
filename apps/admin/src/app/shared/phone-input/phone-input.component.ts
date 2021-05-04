@@ -17,7 +17,7 @@ import {
 import { NotifierService } from '@coachcare/common/services'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { CountryProvider, CountryCode } from '@coachcare/npm-api'
+import { CountryProvider, CountryCode } from '@coachcare/sdk'
 
 export function ccrPhoneValidator(control: FormControl) {
   const value = control.value || {}

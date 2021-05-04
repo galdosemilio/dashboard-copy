@@ -1,5 +1,5 @@
 import { unitConversion } from '@app/shared'
-import { AccountMeasurementPreferenceType, Entity } from '@coachcare/npm-api'
+import { AccountMeasurementPreferenceType, Entity } from '@coachcare/sdk'
 import * as moment from 'moment'
 
 interface Device {

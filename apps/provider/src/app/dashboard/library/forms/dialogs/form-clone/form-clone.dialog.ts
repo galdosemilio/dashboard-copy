@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
-import { OrganizationEntity } from '@coachcare/npm-api'
+import { OrganizationEntity } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
-import { Form as SelveraFormService } from '@coachcare/npm-api'
+import { Form as SelveraFormService } from '@coachcare/sdk'
 import { Form } from '../../models'
 
 export interface FormCloneDialogData {

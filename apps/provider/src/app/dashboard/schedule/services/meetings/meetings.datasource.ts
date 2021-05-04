@@ -1,9 +1,7 @@
-import { CcrPaginator, TableDataSource } from '@app/shared'
-import {
-  FetchAllMeetingRequest,
-  FetchAllMeetingResponse,
-  FetchMeetingTypesResponse
-} from '@coachcare/npm-api'
+import { MeetingTypeWithColor } from '@app/service'
+import { TableDataSource } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { FetchAllMeetingRequest, FetchAllMeetingResponse } from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { Meeting } from '../../models'
 import { MeetingsDatabase } from './meetings.database'
@@ -15,8 +13,8 @@ export class MeetingsDataSource extends TableDataSource<
 > {
   constructor(
     protected database: MeetingsDatabase,
-    private paginator?: CcrPaginator,
-    private meetingTypes?: FetchMeetingTypesResponse[]
+    private paginator?: CcrPaginatorComponent,
+    private meetingTypes?: MeetingTypeWithColor[]
   ) {
     super()
 

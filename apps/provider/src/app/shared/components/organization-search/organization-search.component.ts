@@ -18,7 +18,7 @@ import {
   OrganizationAccess,
   OrganizationEntity,
   OrganizationPermission
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, skip } from 'rxjs/operators'

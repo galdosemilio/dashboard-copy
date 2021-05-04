@@ -17,7 +17,7 @@ import {
   AccountTypeIds,
   OrganizationProvider,
   OrgListSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { ConfigService, NotifierService } from '@coachcare/common/services'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { ScheduleSelectData } from './schedule-select-data.interface'

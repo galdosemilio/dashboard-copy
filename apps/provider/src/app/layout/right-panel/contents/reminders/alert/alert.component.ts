@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { Alerts } from '@coachcare/npm-api'
+import { Alerts } from '@coachcare/sdk'
 
 import { ContextService, NotifierService } from '@app/service'
 import {
   NotificationToggleRequest,
   ToggleGroupAlertsRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Component({
   selector: 'app-rightpanel-alert',

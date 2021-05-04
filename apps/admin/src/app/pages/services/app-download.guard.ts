@@ -5,7 +5,7 @@ import {
   Router,
   RouterStateSnapshot
 } from '@angular/router'
-import { MobileApp } from '@coachcare/npm-api'
+import { MobileApp } from '@coachcare/sdk'
 
 @Injectable({
   providedIn: 'root'

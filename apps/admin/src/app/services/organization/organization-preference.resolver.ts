@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
 import {
   OrganizationPreference,
   OrganizationPreferenceSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { OrganizationRoutes } from './organization.routes'
 
 @Injectable()

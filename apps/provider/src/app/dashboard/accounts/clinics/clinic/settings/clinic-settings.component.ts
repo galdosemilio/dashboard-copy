@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
-import { Entity, MessagingPreference } from '@coachcare/npm-api'
+import { Entity, MessagingPreference } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
@@ -66,7 +66,11 @@ export class ClinicSettingsComponent implements OnDestroy, OnInit {
       }
 
       this.isInherited = preferences.organization.id !== this.context.clinic.id
-      this.autoThreadParticipationEnabled = !this.isInherited && this.featurePreferences.messaging.useAutoThreadParticipation ? true : false
+      this.autoThreadParticipationEnabled =
+        !this.isInherited &&
+        this.featurePreferences.messaging.useAutoThreadParticipation
+          ? true
+          : false
       this.messagePreferenceId = this.featurePreferences.messaging.id
 
       this.form.patchValue(
@@ -99,7 +103,7 @@ export class ClinicSettingsComponent implements OnDestroy, OnInit {
           useAutoThreadParticipation: formValue.useAutoThreadParticipation,
           isActive: true
         })
-      // If we need to create a new preference
+        // If we need to create a new preference
       } else {
         const response = await this.messagingPreference.createOrgPreference({
           organization: this.context.clinic.id,

@@ -1,4 +1,4 @@
-import { NamedEntity } from '@coachcare/npm-api'
+import { NamedEntity } from '@coachcare/sdk'
 
 interface ActiveCampaignListItemOpts {
   organizationId: string

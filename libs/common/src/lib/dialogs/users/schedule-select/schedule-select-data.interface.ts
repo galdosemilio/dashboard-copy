@@ -1,4 +1,4 @@
-import { AccountAccessData } from '@coachcare/npm-api'
+import { AccountAccessData } from '@coachcare/sdk'
 
 /**
  * ScheduleSelectDialog Data Interface

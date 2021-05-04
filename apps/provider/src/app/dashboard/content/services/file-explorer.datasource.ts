@@ -20,7 +20,7 @@ import {
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
   UpdateContentRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { FileExplorerDatabase } from './file-explorer.database'
 
 interface ExecRequestOpts {

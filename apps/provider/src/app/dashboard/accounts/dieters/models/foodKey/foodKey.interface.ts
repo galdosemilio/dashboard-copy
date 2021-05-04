@@ -1,4 +1,4 @@
-import { FetchAllConsumedKeyResponse } from '@coachcare/npm-api'
+import { FetchAllConsumedKeyResponse } from '@coachcare/sdk'
 
 export interface FoodKeyData {
   key: string

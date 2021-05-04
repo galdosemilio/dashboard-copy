@@ -1,4 +1,4 @@
-import { appLocales } from '../../libs/npm-api/src/lib/selvera-api/services/i18n.config'
+import { appLocales } from '@coachcare/sdk/dist/lib/services/i18n.config'
 
 export const locales = Object.keys(appLocales).map((locale: string) =>
   locale.toLowerCase()

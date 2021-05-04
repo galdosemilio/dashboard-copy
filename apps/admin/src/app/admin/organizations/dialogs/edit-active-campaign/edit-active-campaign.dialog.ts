@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ActiveCampaignListItem } from '@coachcare/backend/data'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-import { ActiveCampaign } from '@coachcare/npm-api'
+import { ActiveCampaign } from '@coachcare/sdk'
 
 export interface EditActiveCampaignDialogData {
   activeCampaign: ActiveCampaignListItem

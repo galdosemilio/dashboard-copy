@@ -7,8 +7,8 @@ import {
   GetListOrganizationRequest,
   GetListOrganizationResponse,
   UpdateOrganizationRequest
-} from '@coachcare/npm-api'
-import { OrganizationProvider } from '@coachcare/npm-api'
+} from '@coachcare/sdk'
+import { OrganizationProvider } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 
 import { OrganizationsCriteria } from './organization.types'

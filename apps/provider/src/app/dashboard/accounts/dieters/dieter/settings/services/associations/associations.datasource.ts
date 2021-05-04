@@ -5,7 +5,7 @@ import {
   OrgAccessRequest,
   OrgAccessResponse,
   OrganizationAccess
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { AssociationsDatabase } from './associations.database'
 

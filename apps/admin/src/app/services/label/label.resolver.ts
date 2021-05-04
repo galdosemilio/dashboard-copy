@@ -5,7 +5,7 @@ import {
   Router,
   RouterStateSnapshot
 } from '@angular/router'
-import { Package, PackageSingle } from '@coachcare/npm-api'
+import { Package, PackageSingle } from '@coachcare/sdk'
 
 @Injectable()
 export class LabelResolver implements Resolve<PackageSingle> {

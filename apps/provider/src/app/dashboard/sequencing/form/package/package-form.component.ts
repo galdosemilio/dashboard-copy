@@ -16,7 +16,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { PackageOrganization } from '@coachcare/npm-api'
+import { PackageOrganization } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({

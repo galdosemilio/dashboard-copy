@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MAT_DIALOG_DATA, MatPaginator } from '@coachcare/material'
 import { Sequence } from '@app/dashboard/sequencing/models'
 import { ContextService } from '@app/service'
-import { GetAllSeqEnrollmentsResponse } from '@coachcare/npm-api'
+import { GetAllSeqEnrollmentsResponse } from '@coachcare/sdk'
 import {
   TriggerHistoryDatabase,
   TriggerHistoryDataSource

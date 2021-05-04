@@ -1,5 +1,5 @@
 import { _ } from '@app/shared/utils'
-import { AccountTypeId, AccountTypeTitle } from '@coachcare/npm-api'
+import { AccountTypeId, AccountTypeTitle } from '@coachcare/sdk'
 
 interface AccountTypeInfo {
   displayName?: string

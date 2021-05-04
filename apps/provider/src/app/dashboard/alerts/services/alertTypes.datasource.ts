@@ -11,7 +11,7 @@ import {
   AlertPreferenceResponse,
   AlertTypesResponse,
   FetchAlertPreferenceRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { filter, fromPairs } from 'lodash'
 import * as moment from 'moment'
 import { from, Observable } from 'rxjs'

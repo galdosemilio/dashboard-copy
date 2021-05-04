@@ -1,12 +1,13 @@
 import { FormSubmission } from '@app/dashboard/library/forms/models'
 import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services/form-submissions.database'
-import { _, CcrPaginator, TableDataSource } from '@app/shared'
+import { _, TableDataSource } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   Entity,
   FormSubmissionSegment,
   GetAllFormSubmissionRequest,
   GetAllFormSubmissionResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 
 export class FormSubmissionsDatasource extends TableDataSource<
@@ -19,7 +20,7 @@ export class FormSubmissionsDatasource extends TableDataSource<
 
   constructor(
     protected database: FormSubmissionsDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
     if (this.paginator) {

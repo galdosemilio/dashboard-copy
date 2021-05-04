@@ -4,7 +4,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Access } from '@coachcare/npm-api'
+import { Access } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({

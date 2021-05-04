@@ -16,7 +16,7 @@ import {
 } from '@app/dashboard/library/forms/models'
 import { QuestionDetails } from '@app/dashboard/library/forms/questions'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
-import { FormAnswer } from '@coachcare/npm-api'
+import { FormAnswer } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()

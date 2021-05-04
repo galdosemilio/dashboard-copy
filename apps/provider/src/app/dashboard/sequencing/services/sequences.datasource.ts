@@ -4,7 +4,7 @@ import {
   GetAllSequencesRequest,
   GetSequenceResponse,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { Sequence } from '../models'
 import { SequencesDatabase } from './sequences.database'

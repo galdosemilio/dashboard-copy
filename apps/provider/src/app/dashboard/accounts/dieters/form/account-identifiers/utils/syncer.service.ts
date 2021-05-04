@@ -4,7 +4,7 @@ import { differenceBy, intersectionBy } from 'lodash'
 import {
   AccountIdentifier as SelveraAccountIdentifier,
   OrganizationProvider
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { AccountIdentifier } from '../models'
 
 @Injectable()

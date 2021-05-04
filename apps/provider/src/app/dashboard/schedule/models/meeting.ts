@@ -1,7 +1,7 @@
 import * as moment from 'moment'
 import { _ } from '@app/shared/utils'
-import { FetchMeetingTypesResponse } from '@coachcare/npm-api'
 import { getDefaultMeetingTypeColor } from '@coachcare/common/shared'
+import { MeetingTypeWithColor } from '@app/service'
 
 export class Meeting {
   access: 'restricted' | 'full'
@@ -35,7 +35,7 @@ export class Meeting {
     contrast: string
   }
 
-  constructor(args: any, meetingTypes?: FetchMeetingTypesResponse[]) {
+  constructor(args: any, meetingTypes?: MeetingTypeWithColor[]) {
     this.access = args.access ?? 'restricted'
     this.attendees =
       args.attendees && args.attendees.length

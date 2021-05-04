@@ -28,14 +28,14 @@ import {
   AccSingleResponse,
   FetchGoalResponse,
   TimezoneResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { AccountProvider, Goal, Timezone } from '@coachcare/npm-api'
+import { AccountProvider, Goal, Timezone } from '@coachcare/sdk'
 import { AccountIdentifiersProps } from './account-identifiers/models'
 
 @UntilDestroy()

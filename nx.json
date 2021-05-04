@@ -13,7 +13,7 @@
   "projects": {
     "provider": {
       "tags": [],
-      "implicitDependencies": ["npm-api", "material"]
+      "implicitDependencies": ["material"]
     },
     "provider-e2e": {
       "tags": [],
@@ -21,7 +21,7 @@
     },
     "admin": {
       "tags": [],
-      "implicitDependencies": ["common", "backend", "npm-api", "material"]
+      "implicitDependencies": ["common", "backend", "material"]
     },
     "admin-e2e": {
       "tags": [],
@@ -39,9 +39,6 @@
       "tags": []
     },
     "datepicker": {
-      "tags": []
-    },
-    "npm-api": {
       "tags": []
     },
     "material": {

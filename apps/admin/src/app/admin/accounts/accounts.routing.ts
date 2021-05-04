@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router'
-import { AccountTypeId } from '@coachcare/npm-api'
+import { AccountTypeId } from '@coachcare/sdk'
 
 import { AccountResolver } from '@board/services'
-// import { LogsListComponent } from '../userlogs/userlogs.index';
 import {
   AccountComponent,
   AccountFormComponent,

@@ -9,12 +9,12 @@ import {
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
-import { AccountAccessData } from '@coachcare/npm-api'
+import { AccountAccessData } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-user-search',

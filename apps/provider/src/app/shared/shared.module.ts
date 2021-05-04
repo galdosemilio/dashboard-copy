@@ -63,6 +63,10 @@ import { ChartsModule } from 'ng2-charts'
 import { MomentModule } from 'ngx-moment'
 import { Components, EntryComponents, Providers } from './index'
 import { AppLocaleCode, locales } from './utils'
+import {
+  CcrFormFieldsModule,
+  CcrUtilityComponentsModule
+} from '@coachcare/common/components'
 
 // register supported locales
 locales.forEach(async (code: AppLocaleCode) => {
@@ -77,6 +81,8 @@ locales.forEach(async (code: AppLocaleCode) => {
 
 const SHARED_MODULES = [
   A11yModule,
+  CcrFormFieldsModule,
+  CcrUtilityComponentsModule,
   CdkTableModule,
   // BidiModule,
   ObserversModule,

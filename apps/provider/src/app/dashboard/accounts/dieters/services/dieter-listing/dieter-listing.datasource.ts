@@ -1,14 +1,14 @@
 import {
-  CcrPaginator,
   ExpandatableTableHeader,
   formatPhoneNumber,
   TableDataSource
 } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   CountedPaginatedResponse,
   FetchPatientListingRequest,
   PatientListingItem
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { from, Observable } from 'rxjs'
 import {
@@ -30,7 +30,7 @@ export class DieterListingDataSource extends TableDataSource<
 
   constructor(
     protected database: DieterListingDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
 

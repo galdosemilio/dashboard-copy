@@ -8,7 +8,7 @@ import {
 import { Subject } from 'rxjs'
 
 import { ContextService, NotifierService } from '@app/service'
-import { CcrPaginator } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { LabelsDatabase, LabelsDataSource } from '../services'
 
 @Component({
@@ -17,8 +17,8 @@ import { LabelsDatabase, LabelsDataSource } from '../services'
   styleUrls: ['./labels.component.scss']
 })
 export class DieterLabelComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   source: LabelsDataSource
   param$ = new Subject<any>()

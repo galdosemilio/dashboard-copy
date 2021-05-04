@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ContextService, SelectedOrganization } from '@app/service'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { CcrPaginator } from '../paginator'
 import { LoginHistoryDatabase, LoginHistoryDataSource } from './services'
 
 @UntilDestroy()
@@ -14,7 +14,8 @@ export class LoginHistoryComponent implements OnDestroy, OnInit {
   @Input() account?: string
   @Input() patientMode = false
 
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public columns: string[] = ['createdAt', 'organization']
   public organization: SelectedOrganization

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { ContextService, LoggingService } from '@app/service'
-import { ConnectionStats } from '@coachcare/npm-api'
+import { ConnectionStats } from '@coachcare/sdk'
 import { Subject } from 'rxjs'
-import { TwilioRoomMonitor } from '@coachcare/npm-api'
+import { TwilioRoomMonitor } from '@coachcare/sdk'
 import { LocalDataTrack, Room } from 'twilio-video'
 
 @Injectable()
@@ -103,14 +103,15 @@ export class TwilioBandwidthService {
       this.dataTrackPublished.resolve = resolve
       this.dataTrackPublished.reject = reject
     })
-
-    this.currentRoom.localParticipant.on('trackPublished', (publication) => {
-      if (publication.track === this.dataTrack) {
-        this.dataTrackPublished.resolve()
+    ;(this.currentRoom.localParticipant as any).on(
+      'trackPublished',
+      (publication) => {
+        if (publication.track === this.dataTrack) {
+          this.dataTrackPublished.resolve()
+        }
       }
-    })
-
-    this.currentRoom.localParticipant.on(
+    )
+    ;(this.currentRoom.localParticipant as any).on(
       'trackPublicationFailed',
       (error, track) => {
         if (track === this.dataTrack) {

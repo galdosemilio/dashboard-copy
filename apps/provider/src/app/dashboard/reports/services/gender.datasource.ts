@@ -8,7 +8,7 @@ import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
 import {
   GenderDemographicsRequest,
   GenderDemographicsSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @UntilDestroy()
 export class GenderDataSource extends ChartDataSource<

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 
 import { from, Observable } from 'rxjs'
-import { Hydration } from '@coachcare/npm-api'
+import { Hydration } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
-import { GetHydrationSummaryRequest } from '@coachcare/npm-api'
+import { GetHydrationSummaryRequest } from '@coachcare/sdk'
 
 @Injectable()
 export class HydrationDatabase extends CcrDatabase {

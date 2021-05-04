@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { AccountTypeId } from '@coachcare/npm-api'
+import { AccountTypeId } from '@coachcare/sdk'
 import { CcrRol } from '@coachcare/backend/shared'
 import { ContextService } from '@coachcare/common/services'
 

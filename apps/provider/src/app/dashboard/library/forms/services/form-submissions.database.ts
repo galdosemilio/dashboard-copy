@@ -7,9 +7,9 @@ import {
   FormSubmissionSingle,
   GetAllFormSubmissionRequest,
   GetAllFormSubmissionResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { FormSubmission as SelveraFormSubmissionService } from '@coachcare/npm-api'
+import { FormSubmission as SelveraFormSubmissionService } from '@coachcare/sdk'
 import { FormSubmission } from '../models'
 
 @Injectable()

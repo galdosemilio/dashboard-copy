@@ -1,12 +1,13 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { ContextService } from '@app/service'
-import { _, AddRecipientDialog, CcrPaginator, PromptDialog } from '@app/shared'
-import { GetAllSeqEnrollmentsResponse } from '@coachcare/npm-api'
+import { _, AddRecipientDialog, PromptDialog } from '@app/shared'
+import { GetAllSeqEnrollmentsResponse } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Sequence as SelveraSequenceService } from '@coachcare/npm-api'
+import { Sequence as SelveraSequenceService } from '@coachcare/sdk'
 import { BulkUnenrollDialog } from '../../dialogs'
 import { Sequence } from '../../models'
 import { EnrolleesDatabase, EnrolleesDataSource } from '../../services'
@@ -18,7 +19,7 @@ import { EnrolleesDatabase, EnrolleesDataSource } from '../../services'
   styleUrls: ['./enrollee-listing.component.scss']
 })
 export class EnrolleeListingComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: true }) paginator
+  @ViewChild(CcrPaginatorComponent, { static: true }) paginator
 
   @Input() sequence: Sequence
   source: EnrolleesDataSource

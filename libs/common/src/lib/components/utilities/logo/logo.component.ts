@@ -15,7 +15,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core'
-import { OrganizationPreference, SignedUrl } from '@coachcare/npm-api'
+import { OrganizationPreference, SignedUrl } from '@coachcare/sdk'
 import { LogoDirective } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'

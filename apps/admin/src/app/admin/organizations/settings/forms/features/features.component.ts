@@ -8,7 +8,7 @@ import {
   OrganizationPreference,
   RPM,
   Sequence
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core'
 import {
   GetAllPackageEnrollmentRequest,
   GetAllPackageEnrollmentResponse
-} from '@coachcare/npm-api'
-import { PackageEnrollment } from '@coachcare/npm-api'
+} from '@coachcare/sdk'
+import { PackageEnrollment } from '@coachcare/sdk'
 
 @Injectable()
 export class PhaseEnrollmentDatabase {

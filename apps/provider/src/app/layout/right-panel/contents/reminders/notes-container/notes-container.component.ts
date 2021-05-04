@@ -6,12 +6,12 @@ import {
   FormSubmissionsDatasource
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
-import { ConsultationListingResponse, NamedEntity } from '@coachcare/npm-api'
+import { ConsultationListingResponse, NamedEntity } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
-import { FormSubmission as FormSubmissionService } from '@coachcare/npm-api'
+import { FormSubmission as FormSubmissionService } from '@coachcare/sdk'
 
 export interface LayoutNote extends ConsultationListingResponse {
   isDeletable?: boolean

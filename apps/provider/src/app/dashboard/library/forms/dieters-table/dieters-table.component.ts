@@ -8,8 +8,8 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { DietersDatabase, DietersDataSource } from '@app/dashboard/accounts'
 import { ContextService, NotifierService } from '@app/service'
-import { CcrPaginator } from '@app/shared'
-import { AccountAccessData } from '@coachcare/npm-api'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { AccountAccessData } from '@coachcare/sdk'
 import { debounceTime, delay } from 'rxjs/operators'
 
 @Component({
@@ -17,10 +17,9 @@ import { debounceTime, delay } from 'rxjs/operators'
   templateUrl: './dieters-table.component.html'
 })
 export class DietersTableComponent implements OnInit {
-  @Output() onSelect: EventEmitter<AccountAccessData> = new EventEmitter<
-    AccountAccessData
-  >()
-  @ViewChild(CcrPaginator, { static: false }) paginator
+  @Output()
+  onSelect: EventEmitter<AccountAccessData> = new EventEmitter<AccountAccessData>()
+  @ViewChild(CcrPaginatorComponent, { static: false }) paginator
 
   public columns: string[] = ['firstName', 'lastName', 'email', 'created']
   public form: FormGroup

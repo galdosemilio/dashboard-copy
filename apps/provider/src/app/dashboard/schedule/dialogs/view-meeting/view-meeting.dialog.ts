@@ -13,12 +13,13 @@ import {
 } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { AddConsultationAttendee } from '@app/layout/right-panel/contents/consultation/add-consultation/add-consultation.component'
-import { ScheduleDataService } from '@app/layout/right-panel/services'
 import {
   ContextService,
   CurrentAccount,
   EventsService,
-  NotifierService
+  MeetingTypeWithColor,
+  NotifierService,
+  ScheduleDataService
 } from '@app/service'
 import { _, FormUtils } from '@app/shared'
 import {
@@ -27,18 +28,13 @@ import {
   AddAttendeeRequest,
   AddMeetingRequest,
   AttendanceStatusEntry,
-  FetchMeetingTypesResponse,
   UpdateAttendanceRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import {
-  AccountProvider,
-  OrganizationProvider,
-  Schedule
-} from '@coachcare/npm-api'
+import { AccountProvider, OrganizationProvider, Schedule } from '@coachcare/sdk'
 import { Meeting } from '../../models'
 
 type ViewMeetingDialogEditMode = 'single' | 'recurring'
@@ -74,7 +70,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
   isLoading = false
   meeting: Meeting
   meetingDuration: string
-  meetingTypes: FetchMeetingTypesResponse[] = []
+  meetingTypes: MeetingTypeWithColor[] = []
   removedAttendees: any[] = []
   repeatOptions = [
     { value: 'never', viewValue: _('RIGHT_PANEL.NEVER') },
@@ -92,7 +88,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     | 'delete-recurring' = 'view'
   today: moment.Moment = moment().startOf('day')
   translations: any
-  selectedMeetingType: FetchMeetingTypesResponse
+  selectedMeetingType: MeetingTypeWithColor
 
   constructor(
     private account: AccountProvider,
@@ -641,9 +637,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     this.form
       .get('meetingTypeId')
       .valueChanges.pipe(untilDestroyed(this))
-      .subscribe((type: FetchMeetingTypesResponse) =>
-        this.meetingTypeChanged(type)
-      )
+      .subscribe((type: MeetingTypeWithColor) => this.meetingTypeChanged(type))
   }
 
   private validateForm(control: AbstractControl) {

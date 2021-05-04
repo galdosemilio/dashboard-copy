@@ -13,11 +13,11 @@ import {
   AccountTypeId,
   CreateOrganizationAssociationRequest,
   DeleteOrganizationAssociationRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import {
   OrganizationAutocompleterComponent,
-  PaginatorComponent
+  CcrPaginatorComponent
 } from '@coachcare/common/components'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
@@ -33,8 +33,8 @@ import { Subject } from 'rxjs'
 export class AffiliationComponent implements OnInit {
   @ViewChild(OrganizationAutocompleterComponent, { static: true })
   autocompleter: OrganizationAutocompleterComponent
-  @ViewChild(PaginatorComponent, { static: true })
-  paginator: PaginatorComponent
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   accountType: AccountTypeId
   account: AccountSingle

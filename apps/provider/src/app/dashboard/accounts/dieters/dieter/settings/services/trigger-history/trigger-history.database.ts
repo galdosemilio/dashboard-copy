@@ -5,7 +5,7 @@ import {
   PagedResponse,
   Sequence,
   TriggerHistoryItem
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class TriggerHistoryDatabase extends CcrDatabase {

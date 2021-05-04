@@ -9,10 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MFACodeInputMode } from '@board/shared/mfa-code-input'
-import {
-  AccountPassword,
-  UpdateAccountPasswordResponse
-} from '@coachcare/npm-api'
+import { AccountPassword, UpdateAccountPasswordResponse } from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { ConfirmDialog } from '@coachcare/common/dialogs/core'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'

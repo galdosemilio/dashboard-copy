@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { NotifierService } from '@app/service'
 import { _, TableDataSource } from '@app/shared'
-import { AuthAvailableResponse, DeviceSyncResponse } from '@coachcare/npm-api'
+import { AuthAvailableResponse, DeviceSyncResponse } from '@coachcare/sdk'
 import { find, orderBy } from 'lodash'
 import { from, Observable } from 'rxjs'
 import { DevicesDatabase } from './devices.database'

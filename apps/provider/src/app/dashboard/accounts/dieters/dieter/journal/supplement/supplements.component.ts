@@ -7,7 +7,7 @@ import {
 } from '@app/dashboard/accounts/dieters/services'
 import { ContextService, NotifierService } from '@app/service'
 import { DateNavigatorOutput } from '@app/shared'
-import { FetchSupplementsSegment } from '@coachcare/npm-api'
+import { FetchSupplementsSegment } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-dieter-journal-supplements',

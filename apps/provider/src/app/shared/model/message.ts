@@ -1,4 +1,4 @@
-import { MessagingAccount, MessagingItem } from '@coachcare/npm-api'
+import { MessagingAccount, MessagingItem } from '@coachcare/sdk'
 import * as linkifyHtml from 'linkifyjs/html'
 
 export class MessageContainer implements MessagingItem {

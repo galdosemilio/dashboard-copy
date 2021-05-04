@@ -17,7 +17,7 @@ import {
   OrganizationProvider,
   OrganizationAccess,
   RPM
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { sortBy, uniqBy } from 'lodash'
 import * as moment from 'moment'

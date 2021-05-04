@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { ContextService, NotifierService } from '@app/service'
-import { CcrPaginator, PromptDialog } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
-import { Sequence } from '@coachcare/npm-api'
+import { Sequence } from '@coachcare/sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { filter } from 'rxjs/operators'
 import { AddSequenceAutoenrollmentDialog } from '../../dialogs'
@@ -19,7 +20,8 @@ import {
   styleUrls: ['./clinic-sequence-auto-enrollment.component.scss']
 })
 export class ClinicSequenceAutoEnrollmentComponent implements OnInit {
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public isAdmin = false
   public rows: GetSequenceResponseWithExtras[] = []

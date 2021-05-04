@@ -8,7 +8,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { FormQuestion, FormSection } from '@app/dashboard/library/forms/models'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
-import { FormAnswer } from '@coachcare/npm-api'
+import { FormAnswer } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-library-section-renderer',

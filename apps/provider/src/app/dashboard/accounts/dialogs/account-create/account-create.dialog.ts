@@ -18,7 +18,7 @@ import {
   Affiliation,
   Goal,
   PackageEnrollment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { AccountIdentifierSyncer } from '../../dieters/form/account-identifiers/utils'
 
 export interface AccountCreateDialogData {

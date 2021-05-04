@@ -3,10 +3,7 @@ import { Observable } from 'rxjs'
 
 import { NotifierService } from '@app/service/notifier.service'
 import { TableDataSource } from '@app/shared'
-import {
-  GetAllMessagingResponse,
-  MessagingThreadSegment
-} from '@coachcare/npm-api'
+import { GetAllMessagingResponse, MessagingThreadSegment } from '@coachcare/sdk'
 import { ThreadsCriteria } from './threads.criteria'
 import { ThreadsDatabase } from './threads.database'
 

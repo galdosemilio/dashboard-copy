@@ -12,7 +12,7 @@ import { Router } from '@angular/router'
 import { ClinicsDataSource } from '@app/dashboard/accounts/clinics/services'
 import { ContextService, NotifierService } from '@app/service'
 import { _, PromptDialog, PromptDialogData } from '@app/shared'
-import { Affiliation, OrganizationAccess } from '@coachcare/npm-api'
+import { Affiliation, OrganizationAccess } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-clinics-table',

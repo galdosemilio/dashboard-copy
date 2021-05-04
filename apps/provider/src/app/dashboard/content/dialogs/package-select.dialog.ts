@@ -9,7 +9,7 @@ import {
   PackageDatabase,
   PackageDatasource
 } from '@app/shared/components/package-table/services'
-import { FetchPackagesSegment } from '@coachcare/npm-api'
+import { FetchPackagesSegment } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-content-package-select-dialog',

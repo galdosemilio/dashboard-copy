@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
-import { OrganizationProvider, OrganizationSingle } from '@coachcare/npm-api'
+import { OrganizationProvider, OrganizationSingle } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { ClinicFlatNode, ClinicNode, NodeType } from './organization.types'
 

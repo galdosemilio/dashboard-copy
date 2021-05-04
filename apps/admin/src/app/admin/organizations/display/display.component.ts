@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { OrganizationSingle } from '@coachcare/npm-api'
+import { OrganizationSingle } from '@coachcare/sdk'
 
 import { OrganizationParams, OrganizationRoutes } from '@board/services'
 

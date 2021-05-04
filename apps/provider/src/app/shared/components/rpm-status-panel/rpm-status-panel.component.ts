@@ -14,7 +14,7 @@ import {
 } from '@app/dashboard/reports/rpm/models'
 import { ReportsDatabase } from '@app/dashboard/reports/services/reports.database'
 import { ContextService, NotifierService } from '@app/service'
-import { AccountAccessData } from '@coachcare/npm-api'
+import { AccountAccessData } from '@coachcare/sdk'
 import * as moment from 'moment'
 
 @Component({

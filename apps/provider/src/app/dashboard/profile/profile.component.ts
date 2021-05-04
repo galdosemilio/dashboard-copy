@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
-import { AccSingleResponse, AccUpdateRequest } from '@coachcare/npm-api'
+import { AccSingleResponse, AccUpdateRequest } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 
 type ProviderProfileSection =
   | 'communications'

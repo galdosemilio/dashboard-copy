@@ -17,6 +17,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort, MatTable } from '@coachcare/material'
 
 import {
@@ -26,10 +27,9 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import {
   AssociationAccessLevel,
-  CcrPaginator,
   COACH_ASSOCIATION_ACCESS_LEVELS
-} from '@app/shared'
-import { OrganizationAccess } from '@coachcare/npm-api'
+} from '@app/shared/model/accessLevels'
+import { OrganizationAccess } from '@coachcare/sdk'
 import { forOwn } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -73,8 +73,8 @@ export class ClinicsPickerComponent
   classList = 'ccr-table-picker' // to write new classes without Renderer
   @ViewChild('table', { static: true })
   table: MatTable<any>
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   @ViewChild(MatSort, { static: true })
   sort: MatSort
 

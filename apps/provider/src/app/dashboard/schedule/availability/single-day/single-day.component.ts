@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import * as moment from 'moment-timezone'
-import { Schedule } from '@coachcare/npm-api'
+import { Schedule } from '@coachcare/sdk'
 
 import { SingleAddDialog } from '@app/dashboard/schedule/dialogs/single-add.dialog'
 import { ContextService, NotifierService, SelectedAccount } from '@app/service'
@@ -10,7 +10,7 @@ import {
   FetchAllAccountObjectResponse,
   FetchCalendarAvailabilityRequest,
   FetchCalendarAvailabilitySegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 export type SingleDayAvailabilitySegment = FetchCalendarAvailabilitySegment & {
   startDate: string

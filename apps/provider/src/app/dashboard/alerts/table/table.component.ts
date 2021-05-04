@@ -1,13 +1,13 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Alerts } from '@coachcare/npm-api'
+import { Alerts } from '@coachcare/sdk'
 
 import { ContextService, NotifierService } from '@app/service'
 import {
   NotificationToggleRequest,
   ToggleGroupAlertsRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { first } from 'rxjs/operators'
 import { AlertNotification } from '../models'
 import {

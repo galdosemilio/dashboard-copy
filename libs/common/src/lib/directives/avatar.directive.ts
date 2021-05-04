@@ -1,30 +1,42 @@
-import { Directive, HostBinding, HostListener, Input } from '@angular/core'
-import { ApiService } from '@coachcare/npm-api'
-import { ConfigService } from '@coachcare/common/services'
+import { ChangeDetectorRef, Directive, HostBinding, Input } from '@angular/core'
+import { ApiService } from '@coachcare/sdk'
+import { EventsService } from '../services'
 
 @Directive({
   selector: 'img[ccrAvatar]',
-  exportAs: 'ccrAvatar'
+  exportAs: 'ccrAvatar',
+  host: {
+    '(error)': 'onError()'
+  }
 })
-export class AvatarDirective {
-  @HostBinding('src') src: string
+export class CcrAvatarDirective {
+  account: string
 
-  @Input() default: string = this.config.get('api.avatar.default')
+  @HostBinding('src')
+  src: string
 
-  account: string | number
-  private path: string
+  @Input()
+  default = '../assets/avatar.png'
 
-  constructor(private api: ApiService, private config: ConfigService) {
-    this.path = config.get('api.avatar.path')
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private api: ApiService,
+    private bus: EventsService
+  ) {
+    this.bus.register('user.avatar', (id: string) => {
+      if (id === this.account) {
+        this.refresh(true)
+        this.cdr.detectChanges()
+      }
+    })
   }
 
   @Input()
-  set ccrAvatar(account: string | number) {
+  set ccrAvatar(account) {
     this.account = account
     this.refresh()
   }
 
-  @HostListener('error')
   onError() {
     this.src = this.default
   }
@@ -32,8 +44,7 @@ export class AvatarDirective {
   refresh(force = false) {
     this.src = this.account
       ? this.api.getUrl(
-          this.path.replace(/:id/g, this.account.toString()) +
-            (force ? `?${+new Date()}` : ''),
+          `/account/${this.account}/avatar` + (force ? `?${+new Date()}` : ''),
           '2.0'
         )
       : this.default

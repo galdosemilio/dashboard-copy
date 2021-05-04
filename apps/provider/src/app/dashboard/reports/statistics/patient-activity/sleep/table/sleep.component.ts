@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort } from '@coachcare/material'
 import {
   ReportsCriteria,
@@ -15,7 +16,6 @@ import {
 import { ReportsState } from '@app/dashboard/reports/store'
 import { criteriaSelector } from '@app/dashboard/reports/store'
 import { NotifierService } from '@app/service'
-import { CcrPaginator } from '@app/shared'
 import { select, Store } from '@ngrx/store'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
@@ -29,8 +29,8 @@ import { Subject } from 'rxjs'
   styleUrls: ['./sleep.component.scss']
 })
 export class SleepTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   @ViewChild(MatSort, { static: true })
   sort: MatSort
 

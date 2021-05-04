@@ -11,7 +11,7 @@ import {
   LoginSessionResponse,
   MobileApp,
   Session
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { SessionActions } from '@coachcare/backend/store/session'
 import { ConfirmDialog } from '@coachcare/common/dialogs/core'
@@ -142,6 +142,7 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       this.session
         .login(request as any) // MERGETODO: CHECK THIS TYPE!!!
         .then(async (response) => {
+          console.log(JSON.stringify(response))
           if (response.mfa) {
             this.detectMFA(response as any) // MERGETODO: CHECK THIS TYPE!!!
           } else {

@@ -1,11 +1,11 @@
 import { TableDataSource } from '@app/shared/model'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   GetLoginHistoryRequest,
   LoginHistoryItem,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { CcrPaginator } from '../../paginator'
 import { LoginHistoryDatabase } from './login-history.database'
 
 export class LoginHistoryDataSource extends TableDataSource<
@@ -15,7 +15,7 @@ export class LoginHistoryDataSource extends TableDataSource<
 > {
   constructor(
     protected database: LoginHistoryDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
 

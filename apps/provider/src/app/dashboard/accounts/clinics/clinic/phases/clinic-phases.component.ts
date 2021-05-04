@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { ContextService } from '@app/service'
-import { CcrPaginator } from '@app/shared'
 import {
   PackageDatabase,
   PackageDatasource
 } from '@app/shared/components/package-table/services'
-import { OrgSingleResponse } from '@coachcare/npm-api'
+import { OrgSingleResponse } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { CreatePhaseDialog } from '../../dialogs'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 
 @UntilDestroy()
 @Component({
@@ -17,7 +17,8 @@ import { CreatePhaseDialog } from '../../dialogs'
   styleUrls: ['./clinic-phases.component.scss']
 })
 export class ClinicPhasesComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public isAdmin: boolean
   public clinic: OrgSingleResponse

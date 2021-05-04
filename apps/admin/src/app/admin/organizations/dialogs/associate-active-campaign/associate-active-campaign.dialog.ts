@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-import { ActiveCampaign, NamedEntity } from '@coachcare/npm-api'
+import { ActiveCampaign, NamedEntity } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 

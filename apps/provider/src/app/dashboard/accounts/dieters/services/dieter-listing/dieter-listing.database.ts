@@ -8,8 +8,8 @@ import {
   PatientListingPackageEnrollmentItem,
   FetchPatientListingAssociationRequest,
   FetchPatientListingPackageEnrollmentsRequest
-} from '@coachcare/npm-api'
-import { Reports } from '@coachcare/npm-api'
+} from '@coachcare/sdk'
+import { Reports } from '@coachcare/sdk'
 
 @Injectable()
 export class DieterListingDatabase extends CcrDatabase {

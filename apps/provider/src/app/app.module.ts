@@ -34,15 +34,15 @@ import {
 
 import localeEs from '@angular/common/locales/es'
 import { SharedModule } from './shared/shared.module'
-import { NpmApiModule } from '@coachcare/npm-api'
-import { API_ENVIRONMENT } from '@coachcare/npm-api/selvera-api/model'
+import { CoachcareSdkModule } from '@coachcare/common'
+import { API_ENVIRONMENT } from '@coachcare/common/model'
 
 registerLocaleData(localeEs, 'es')
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    NpmApiModule,
+    CoachcareSdkModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

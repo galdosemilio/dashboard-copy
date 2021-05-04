@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core'
 
 import { _ } from '@app/shared'
-import { AccountAccessData } from '@coachcare/npm-api'
+import { AccountAccessData } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-search-result-item',

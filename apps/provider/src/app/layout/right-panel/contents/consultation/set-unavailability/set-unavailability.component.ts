@@ -8,10 +8,14 @@ import {
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
 
-import { ScheduleDataService } from '@app/layout/right-panel/services'
-import { ContextService, EventsService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  EventsService,
+  NotifierService,
+  ScheduleDataService
+} from '@app/service'
 import { _, FormUtils, TranslationsObject } from '@app/shared'
-import { AddMeetingRequest, MeetingAttendee } from '@coachcare/npm-api'
+import { AddMeetingRequest, MeetingAttendee } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-set-unavailability',

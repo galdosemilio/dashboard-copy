@@ -20,7 +20,7 @@ import {
   AccountProvider,
   DieterDashboardSummary,
   OrganizationProvider
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
 import {
   MeasurementDatabase,

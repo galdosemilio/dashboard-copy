@@ -15,13 +15,14 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { CcrPaginator, generateCSV } from '@app/shared'
+import { generateCSV } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime, first } from 'rxjs/operators'
 import { CreateClinicDialog } from './dialogs'
 import { ClinicsDatabase, ClinicsDataSource } from './services'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 
 @UntilDestroy()
 @Component({
@@ -31,7 +32,8 @@ import { ClinicsDatabase, ClinicsDataSource } from './services'
   encapsulation: ViewEncapsulation.None
 })
 export class ClinicsComponent implements OnInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public clinic: SelectedOrganization
   public filterForm: FormGroup

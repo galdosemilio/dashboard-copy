@@ -19,14 +19,14 @@ import {
   AlertNotification,
   FetchAllMeetingRequest,
   NotificationRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import { find } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
-import { Alerts } from '@coachcare/npm-api'
+import { Alerts } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({

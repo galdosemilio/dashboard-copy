@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 
 import { ContextService, EventsService } from '@app/service'
-import { AccSingleResponse } from '@coachcare/npm-api'
+import { AccSingleResponse } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-dieter-messages',

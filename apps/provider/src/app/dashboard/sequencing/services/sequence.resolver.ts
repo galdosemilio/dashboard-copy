@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 import { ContextService, NotifierService } from '@app/service'
-import { Sequence as SelveraSequenceProvider } from '@coachcare/npm-api'
+import { Sequence as SelveraSequenceProvider } from '@coachcare/sdk'
 import { Sequence } from '../models'
 
 @Injectable()

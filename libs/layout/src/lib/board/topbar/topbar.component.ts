@@ -9,7 +9,7 @@ import {
   LayoutService
 } from '@coachcare/common/services'
 import { AppPalette } from '@coachcare/common/shared'
-import { User } from '@coachcare/npm-api'
+import { User } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-topbar',

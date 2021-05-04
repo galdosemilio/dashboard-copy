@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { OrganizationPreference } from '@coachcare/npm-api'
+import { OrganizationPreference } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 

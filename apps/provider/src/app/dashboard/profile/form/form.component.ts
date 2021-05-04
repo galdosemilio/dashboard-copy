@@ -11,12 +11,12 @@ import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { CurrentAccount } from '@app/service'
 import { FormUtils, MEASUREMENT_UNITS } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
-import { AccUpdateRequest, TimezoneResponse } from '@coachcare/npm-api'
+import { AccUpdateRequest, TimezoneResponse } from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
-import { Timezone } from '@coachcare/npm-api'
+import { Timezone } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -41,9 +41,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   @Output()
-  onProfileSaved: EventEmitter<AccUpdateRequest> = new EventEmitter<
-    AccUpdateRequest
-  >()
+  onProfileSaved: EventEmitter<AccUpdateRequest> = new EventEmitter<AccUpdateRequest>()
 
   timezones: Array<TimezoneResponse> = this.timezone.fetch()
   units = MEASUREMENT_UNITS

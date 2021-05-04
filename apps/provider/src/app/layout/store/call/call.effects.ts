@@ -15,10 +15,7 @@ import { UIState } from '@app/layout/store/state'
 import { ContextService } from '@app/service/context.service'
 import { LoggingService } from '@app/service/logging.service'
 import { NotifierService } from '@app/service/notifier.service'
-import {
-  FetchCallsResponse,
-  GetCallAvailabilityResponse
-} from '@coachcare/npm-api'
+import { FetchCallsResponse, GetCallAvailabilityResponse } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils/i18n.utils'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Action, select, Store } from '@ngrx/store'
@@ -36,7 +33,7 @@ import {
   switchMap,
   tap
 } from 'rxjs/operators'
-import { Conference, Interaction } from '@coachcare/npm-api'
+import { Conference, Interaction } from '@coachcare/sdk'
 import * as callAction from './call.action'
 import {
   AbortCall,

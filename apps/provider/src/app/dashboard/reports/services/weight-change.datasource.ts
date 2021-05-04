@@ -13,7 +13,7 @@ import {
   WeightChangeRequest,
   WeightChangeResponse,
   WeightChangeSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { StatisticsDatabase } from './statistics.database'
 
 @UntilDestroy()

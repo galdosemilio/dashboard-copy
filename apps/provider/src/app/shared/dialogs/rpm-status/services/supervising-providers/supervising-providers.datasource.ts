@@ -1,11 +1,11 @@
-import { CcrPaginator } from '@app/shared/components'
 import { TableDataSource } from '@app/shared/model'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   GetSupervisingProvidersRequest,
   NamedEntity,
   PagedResponse,
   SupervisingProviderAssociationItem
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { BehaviorSubject, from, Observable } from 'rxjs'
 import { SupervisingProvidersDatabase } from './supervising-providers.database'
 
@@ -20,7 +20,7 @@ export class SupervisingProvidersDataSource extends TableDataSource<
 
   constructor(
     protected database: SupervisingProvidersDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
 

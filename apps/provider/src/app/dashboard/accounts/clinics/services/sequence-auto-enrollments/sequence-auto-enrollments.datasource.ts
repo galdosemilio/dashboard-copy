@@ -1,6 +1,7 @@
-import { CcrPaginator, TableDataSource } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { TableDataSource } from '@app/shared'
 import { _ } from '@app/shared/utils'
-import { GetAllSequencesRequest, PagedResponse } from '@coachcare/npm-api'
+import { GetAllSequencesRequest, PagedResponse } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import {
   GetAllSequencesRequestWithRefresh,
@@ -15,7 +16,7 @@ export class SequenceAutoEnrollmentsDataSource extends TableDataSource<
 > {
   constructor(
     protected database: SequenceAutoEnrollmentsDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
 

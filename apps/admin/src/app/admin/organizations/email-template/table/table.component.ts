@@ -5,7 +5,7 @@ import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { EmailTemplate, OrganizationProvider } from '@coachcare/npm-api'
+import { EmailTemplate, OrganizationProvider } from '@coachcare/sdk'
 import { EmailTemplateDialogComponent } from '../dialogs'
 
 @UntilDestroy()

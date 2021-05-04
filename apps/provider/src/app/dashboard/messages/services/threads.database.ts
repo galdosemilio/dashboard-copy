@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { from, Observable, of } from 'rxjs'
-import { Messaging } from '@coachcare/npm-api'
+import { Messaging } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
-import { GetAllMessagingResponse } from '@coachcare/npm-api'
+import { GetAllMessagingResponse } from '@coachcare/sdk'
 import { ThreadsCriteria } from './threads.criteria'
 
 @Injectable()

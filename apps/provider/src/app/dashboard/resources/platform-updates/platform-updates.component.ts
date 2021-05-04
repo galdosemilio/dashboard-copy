@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { PlatformUpdatesService } from '@app/service'
-import { ZendeskArticle } from '@coachcare/npm-api'
+import { ZendeskArticle } from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 

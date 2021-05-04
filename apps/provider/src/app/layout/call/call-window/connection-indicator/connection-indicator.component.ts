@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { ConnectionStatus } from '@coachcare/npm-api'
+import { ConnectionStatus } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-call-connection-indicator',

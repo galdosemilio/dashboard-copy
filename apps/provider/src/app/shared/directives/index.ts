@@ -1,5 +1,4 @@
 export * from './bind-form.directive'
-export * from './ccr-avatar.directive'
 export * from './ccr-draggable.directive'
 export * from './ccr-dropzone.directive'
 export * from './ccr-link-active.directive'
@@ -10,7 +9,6 @@ export * from './number-only.directive'
 export * from './table-sort'
 
 import { BindFormDirective } from './bind-form.directive'
-import { CcrAvatarDirective } from './ccr-avatar.directive'
 import { CcrDraggableDirective } from './ccr-draggable.directive'
 import { CcrDropzoneDirective } from './ccr-dropzone.directive'
 import { CcrLinkActiveDirective } from './ccr-link-active.directive'
@@ -22,7 +20,6 @@ import { CcrInputMaskDirective } from './input-mask'
 
 export const Directives = [
   BindFormDirective,
-  CcrAvatarDirective,
   CcrDraggableDirective,
   CcrDropzoneDirective,
   CcrInputMaskDirective,

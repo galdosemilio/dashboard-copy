@@ -5,7 +5,7 @@ import {
   OrganizationWithoutShortcode,
   RPMStateSummaryBillingItem,
   RPMStateSummaryItem
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 import { RPM_DEVICES, RPMDevice } from './rpmDevices.map'

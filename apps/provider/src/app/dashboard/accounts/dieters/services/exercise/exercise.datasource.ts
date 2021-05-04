@@ -1,10 +1,7 @@
 import { MatPaginator } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { TableDataSource } from '@app/shared'
-import {
-  GetAllExerciseRequest,
-  GetAllExerciseResponse
-} from '@coachcare/npm-api'
+import { GetAllExerciseRequest, GetAllExerciseResponse } from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { ExerciseData } from './exercise.data'
 import { ExerciseDatabase } from './exercise.database'

@@ -4,7 +4,7 @@ import {
   AuthAvailableResponse,
   Authentication,
   DeviceSyncResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class DevicesDatabase extends CcrDatabase {

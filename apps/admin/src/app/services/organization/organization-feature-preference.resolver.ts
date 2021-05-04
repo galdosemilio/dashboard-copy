@@ -18,7 +18,7 @@ import {
   RPM,
   RPMPreferenceSingle,
   Sequence
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { OrganizationFeaturePrefs } from './organization.types'
 
 @Injectable()

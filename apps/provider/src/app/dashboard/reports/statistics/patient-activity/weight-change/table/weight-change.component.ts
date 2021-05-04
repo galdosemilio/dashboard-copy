@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort } from '@coachcare/material'
 import {
   ReportsCriteria,
@@ -14,7 +15,7 @@ import {
 } from '@app/dashboard/reports/services'
 import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
 import { ContextService, NotifierService } from '@app/service'
-import { _, CcrPaginator, unitConversion, unitLabel } from '@app/shared'
+import { _, unitConversion, unitLabel } from '@app/shared'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty } from 'lodash'
@@ -30,8 +31,8 @@ import { Subject } from 'rxjs'
 })
 export class WeightChangeTableComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   @ViewChild(MatSort, { static: true })
   sort: MatSort
 

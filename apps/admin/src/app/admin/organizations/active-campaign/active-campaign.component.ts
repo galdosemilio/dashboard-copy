@@ -13,7 +13,7 @@ import {
   EnrollProviderCampaignDialogComponent
 } from '../dialogs'
 import { AssociateAllProvidersDialogComponent } from '../dialogs/associate-all-providers/associate-all-providers.dialog'
-import { OrganizationPreference } from '@coachcare/npm-api'
+import { OrganizationPreference } from '@coachcare/sdk'
 import { PromptDialog } from '@coachcare/common/dialogs/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 

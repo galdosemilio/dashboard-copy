@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core'
 import { CcrDatabase } from '@app/shared'
-import {
-  GetAllExerciseRequest,
-  GetAllExerciseResponse
-} from '@coachcare/npm-api'
+import { GetAllExerciseRequest, GetAllExerciseResponse } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { Exercise } from '@coachcare/npm-api'
+import { Exercise } from '@coachcare/sdk'
 
 @Injectable()
 export class ExerciseDatabase extends CcrDatabase {

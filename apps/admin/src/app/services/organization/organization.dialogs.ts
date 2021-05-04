@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 
 import { OrganizationsDatabase } from '@coachcare/backend/data'
-import { Entity, NamedEntity } from '@coachcare/npm-api'
+import { Entity, NamedEntity } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 

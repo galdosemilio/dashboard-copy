@@ -2,7 +2,7 @@ import {
   FetchAllConsumedMealIngredients,
   FetchAllSingleConsumedMealResponse,
   FoodConsumedSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import * as moment from 'moment'
 
 export class ConsumedFood implements FetchAllSingleConsumedMealResponse {

@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
-import { NamedEntity, RPM, RPMPreferenceSingle } from '@coachcare/npm-api'
-import { Organization } from '@coachcare/npm-api/selvera-api/services'
+import {
+  NamedEntity,
+  OrganizationProvider,
+  RPM,
+  RPMPreferenceSingle
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -40,7 +44,7 @@ export class ClinicBillableServicesComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private organization: Organization,
+    private organization: OrganizationProvider,
     private rpm: RPM
   ) {}
 

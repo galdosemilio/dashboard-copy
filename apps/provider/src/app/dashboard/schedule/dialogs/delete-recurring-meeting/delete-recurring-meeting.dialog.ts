@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-import { DeleteRecurringMeetingRequest } from '@coachcare/npm-api'
+import { DeleteRecurringMeetingRequest } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { Meeting } from '../../models'
 

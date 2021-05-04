@@ -4,7 +4,7 @@ import {
   Entity,
   FetchBodyMeasurementRequest,
   FetchBodyMeasurementResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { BodyMeasurement } from '../../models/measurement/bodyMeasurement'
 import { MeasurementDatabase } from './measurement.database'

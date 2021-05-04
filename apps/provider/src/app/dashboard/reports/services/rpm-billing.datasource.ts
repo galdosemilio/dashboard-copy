@@ -1,12 +1,12 @@
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort } from '@coachcare/material'
 import { NotifierService } from '@app/service'
-import { CcrPaginator } from '@app/shared/components/paginator'
 import { TableDataSource } from '@app/shared/model'
 import {
   FetchRPMBillingSummaryRequest,
   PagedResponse,
   RPMStateSummaryItem
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { from, Observable } from 'rxjs'
 import { RPM_CODE_COLUMNS, RPMStateSummaryEntry } from '../rpm/models'
@@ -22,7 +22,7 @@ export class RPMBillingDataSource extends TableDataSource<
   constructor(
     protected database: ReportsDatabase,
     protected notify: NotifierService,
-    private paginator?: CcrPaginator,
+    private paginator?: CcrPaginatorComponent,
     private sort?: MatSort
   ) {
     super()

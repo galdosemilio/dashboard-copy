@@ -9,7 +9,7 @@ import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
 import {
   OrganizationActivityAggregate,
   OrganizationActivityRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { StatisticsDatabase } from './statistics.database'
 
 @UntilDestroy()

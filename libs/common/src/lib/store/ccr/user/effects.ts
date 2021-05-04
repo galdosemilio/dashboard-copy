@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { AccountProvider, Session } from '@coachcare/npm-api'
+import { AccountProvider, Session } from '@coachcare/sdk'
 import { CcrRolesMap } from '@coachcare/common/shared'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Action } from '@ngrx/store'

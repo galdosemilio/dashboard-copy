@@ -1,4 +1,4 @@
-import { FormQuestionTypeSingle } from '@coachcare/npm-api'
+import { FormQuestionTypeSingle } from '@coachcare/sdk'
 
 export interface FormQuestionType extends FormQuestionTypeSingle {
   component?: any

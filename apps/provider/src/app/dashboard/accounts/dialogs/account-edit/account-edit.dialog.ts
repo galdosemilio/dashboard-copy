@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { FormUtils } from '@app/shared'
 import * as moment from 'moment'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 
 export interface AccountEditDialogData {
   id: string

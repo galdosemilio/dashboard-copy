@@ -17,7 +17,7 @@ import {
   CoachAssociationPermissionOptions,
   COACH_ASSOCIATION_ACCESS_LEVELS
 } from '@app/shared/model'
-import { Entity } from '@coachcare/npm-api'
+import { Entity } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()

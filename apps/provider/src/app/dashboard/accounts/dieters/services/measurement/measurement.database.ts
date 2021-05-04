@@ -4,7 +4,7 @@ import {
   MeasurementActivity,
   MeasurementBody,
   MeasurementSleep
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 import {
   ActivitySummaryValues,
@@ -28,7 +28,7 @@ import {
   FetchSleepMeasurementSummaryRequest,
   FetchSleepMeasurementSummaryResponse,
   SummaryDataResponse as FoodSummaryDataResponseSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import {
   MeasurementCriteria,
   MeasurementSummaryData

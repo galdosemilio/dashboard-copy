@@ -7,14 +7,11 @@ import { AppSectionComponent } from './app-section/app-section.component'
 import { CcrAccessLevelSelectorComponent } from './access-level-selector'
 import { CcrAccountAssociationsComponent } from './associations'
 import { CcrAttendanceSelectorComponent } from './attendance-selector'
-import { CcrAvatarComponent } from './avatar/avatar.component'
-import { CcrBadgeComponent } from './badge/badge.component'
 import { CcrCallControlComponent } from './call-control/call-control.component'
 import { CcrChildClinicPickerComponent } from './child-clinic-picker'
 import { CcrConnectionStatusComponent } from './connection-status/connection-status.component'
 import { CountrySelectorComponent } from './country-selector'
-import { CcrDatasourceOverlayComponent } from './datasource-overlay/datasource-overlay.component'
-import { CcrDateInputComponent } from '@coachcare/common/components/form/fields/date-input'
+// import { CcrDateInputComponent } from '@coachcare/common/components/form/fields/date-input'
 import {
   DateNavigator,
   DateNavigatorOutput
@@ -43,7 +40,6 @@ import { PackageFilterComponent } from './package-filter'
 import { PackageSelectorComponent } from './package-selector/package-selector.component'
 import { PackageTableComponent } from './package-table/package-table.component'
 import { CcrPageSizeSelectorComponent } from './page-size-selector'
-import { CcrPaginator } from './paginator/paginator.component'
 import { PhoneInputComponent } from './phone-input'
 import { ProgressCircle } from './progress-circle/progress-circle.component'
 import { QuickDateRangeComponent } from './quick-date-range'
@@ -52,7 +48,6 @@ import { RPMTrackerComponent } from './rpm-tracker'
 import { RPMComponent } from './rpm/rpm.component'
 import { CcrSelectUserComponent } from './select-user/select-user.component'
 import { SequenceSearchComponent } from './sequence-search'
-import { TextFormFieldComponent } from './text/index'
 import { CcrTimeframeSelectorComponent } from './timeframe-selector/timeframe-selector.component'
 import { UserCardComponent } from './user-card'
 import { UserSearchComponent } from './user-search'
@@ -75,13 +70,9 @@ export {
   CcrAccountAssociationsComponent,
   CcrChildClinicPickerComponent,
   CcrConnectionStatusComponent,
-  CcrDateInputComponent,
-  CcrAvatarComponent,
-  CcrBadgeComponent,
-  CcrDatasourceOverlayComponent,
+  // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
   CcrMessagesComponent,
-  CcrPaginator,
   CcrSearchSelectorComponent,
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
@@ -110,7 +101,6 @@ export {
   MatMomentDateModule,
   RPMComponent,
   SequenceSearchComponent,
-  TextFormFieldComponent,
   UserCardComponent,
   UserSearchComponent,
   WalkthroughComponent
@@ -124,18 +114,14 @@ export const CmpComponents = [
   CcrAccessLevelSelectorComponent,
   CcrAccountAssociationsComponent,
   CcrAttendanceSelectorComponent,
-  CcrAvatarComponent,
-  CcrBadgeComponent,
   CcrChildClinicPickerComponent,
   CcrConnectionStatusComponent,
   CcrCallControlComponent,
-  CcrDatasourceOverlayComponent,
-  CcrDateInputComponent,
+  // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
   CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
   CcrPageSizeSelectorComponent,
-  CcrPaginator,
   CcrSearchSelectorComponent,
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
@@ -165,7 +151,6 @@ export const CmpComponents = [
   RPMStatusInfoComponent,
   RPMStatusPanelComponent,
   SequenceSearchComponent,
-  TextFormFieldComponent,
   UserCardComponent,
   UserSearchComponent,
   WalkthroughComponent

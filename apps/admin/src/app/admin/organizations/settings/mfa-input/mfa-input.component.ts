@@ -13,7 +13,7 @@ import {
   AccountTypes,
   GetMFAOrganizationPreferenceResponse,
   MFA
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { BindForm, BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 import { intersectionBy } from 'lodash'

@@ -5,7 +5,7 @@ import { MeasurementDataSource } from '@app/dashboard/accounts/dieters/services'
 import { ContextService, NotifierService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
+import { AccountMeasurementPreferenceType } from '@coachcare/sdk'
 import { MeasurementConfig } from '../measurements.component'
 
 @UntilDestroy()

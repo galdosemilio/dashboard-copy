@@ -3,7 +3,7 @@ import { MatDialog, MatPaginator } from '@coachcare/material'
 import { TriggerDetailDialog } from '@app/dashboard/accounts/dialogs'
 import { ContextService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
-import { GetAllSeqEnrollmentsResponse, Sequence } from '@coachcare/npm-api'
+import { GetAllSeqEnrollmentsResponse, Sequence } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SequenceEnrollmentDataSource } from '../../services'
 

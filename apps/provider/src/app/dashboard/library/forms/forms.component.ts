@@ -12,8 +12,9 @@ import {
   FormsDatasource
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
-import { _, CcrPaginator, PromptDialog } from '@app/shared'
-import { CreateFormRequest, UpdateFormRequest } from '@coachcare/npm-api'
+import { _, PromptDialog } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { CreateFormRequest, UpdateFormRequest } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
@@ -25,8 +26,8 @@ import { debounceTime } from 'rxjs/operators'
   styleUrls: ['./forms.component.scss']
 })
 export class FormsComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public datasource: FormsDatasource
   public form: FormGroup

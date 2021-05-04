@@ -1,14 +1,13 @@
-import { Component, HostBinding, Input, ViewChild } from '@angular/core'
-import { AccountAvatar, SubmitAccountAvatarRequest } from '@coachcare/npm-api'
+import { Component, HostBinding, Input } from '@angular/core'
 import { _ } from '@coachcare/common/shared'
-import { AvatarDirective } from '@coachcare/common/directives'
-import { NotifierService } from '@coachcare/common/services'
+import { EventsService, NotifierService } from '@coachcare/common/services'
+import { AccountProvider, AvatarSubmitRequest } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-avatar',
   templateUrl: './avatar.component.html'
 })
-export class AvatarComponent {
+export class CcrAvatarComponent {
   @Input() account: string
   @Input() size: string
 
@@ -16,12 +15,13 @@ export class AvatarComponent {
   @Input()
   editable = false
 
-  @ViewChild('avatar', { static: false })
-  avatar: AvatarDirective
+  constructor(
+    private api: AccountProvider,
+    private bus: EventsService,
+    private notifier: NotifierService
+  ) {}
 
-  constructor(private api: AccountAvatar, private notifier: NotifierService) {}
-
-  uploadAvatar(e: any) {
+  uploadAvatar(e) {
     const file = e.target.files ? e.target.files[0] : null
 
     if (file) {
@@ -31,14 +31,14 @@ export class AvatarComponent {
     }
   }
 
-  private handleUpload(e: any) {
-    const request: SubmitAccountAvatarRequest = {
-      id: this.account,
+  private handleUpload(e) {
+    const request: AvatarSubmitRequest = {
+      client: this.account,
       avatar: btoa(e.target.result)
     }
     this.api
-      .submit(request)
-      .then(() => this.avatar.refresh(true))
+      .submitAvatar(request)
+      .then(() => this.bus.trigger('user.avatar', this.account))
       .catch(() => this.notifier.error(_('NOTIFY.ERROR.AVATAR_UPLOAD_FAILED')))
   }
 }

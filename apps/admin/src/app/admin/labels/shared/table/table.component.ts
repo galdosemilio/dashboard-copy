@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { LabelDialogs } from '@board/services'
 import { LabelsDatabase, LabelsDataSource } from '@coachcare/backend/data'
 import { getterSorter } from '@coachcare/backend/model'
-import { PackageSingle } from '@coachcare/npm-api'
+import { PackageSingle } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 

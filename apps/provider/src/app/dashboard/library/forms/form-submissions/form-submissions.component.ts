@@ -12,7 +12,8 @@ import {
   FormSubmissionsDatasource
 } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
-import { CcrPaginator, generateCSV } from '@app/shared'
+import { generateCSV } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
@@ -24,8 +25,8 @@ import { Form, FormSubmission } from '../models'
   templateUrl: './form-submissions.component.html'
 })
 export class FormSubmissionsComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public currentOrg: any
   public hasSubmissions = false

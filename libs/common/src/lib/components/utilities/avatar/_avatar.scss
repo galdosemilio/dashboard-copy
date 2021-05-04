@@ -56,5 +56,12 @@
         text-shadow: -1px -1px 20px mat-color($primary, default-contrast);
       }
     }
+
+    @media only screen and (max-width: 770px) {
+      .avatar-mobile {
+        height: 30px;
+        width: 30px;
+      }
+    }
   }
 }

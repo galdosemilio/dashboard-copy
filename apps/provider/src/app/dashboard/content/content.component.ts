@@ -34,7 +34,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
-import { Entity, FetchPackagesSegment } from '@coachcare/npm-api'
+import { Entity, FetchPackagesSegment } from '@coachcare/sdk'
 import { uniqBy, values } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject, Subscription } from 'rxjs'

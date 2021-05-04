@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { AccountDialogs, AccountRoutes } from '@board/services'
 import { AccountsDatabase, AccountsDataSource } from '@coachcare/backend/data'
 import { getterSorter } from '@coachcare/backend/model'
-import { AccountFullData, AccountTypeId } from '@coachcare/npm-api'
+import { AccountFullData, AccountTypeId } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 

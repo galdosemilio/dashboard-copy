@@ -4,7 +4,7 @@ import { MessageThread } from '@app/shared/components'
 import { AccountTypes } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@coachcare/material'
-import { Messaging } from '@coachcare/npm-api'
+import { Messaging } from '@coachcare/sdk'
 
 interface MessageAddMemberDialogProps {
   thread: MessageThread

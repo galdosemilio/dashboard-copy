@@ -4,9 +4,9 @@ import {
   GetAllInteractionsRequest,
   InteractionSingle,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { Interaction } from '@coachcare/npm-api'
+import { Interaction } from '@coachcare/sdk'
 
 @Injectable()
 export class CallHistoryDatabase implements CcrDatabase {

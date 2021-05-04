@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { STORAGE_NEWS_LAST_SEEN_TIMESTAMP } from '@app/config'
 import { NotifierService } from '@app/service/notifier.service'
-import { ZendeskArticle } from '@coachcare/npm-api'
+import { ZendeskArticle } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { BehaviorSubject } from 'rxjs'
-import { Zendesk } from '@coachcare/npm-api'
+import { Zendesk } from '@coachcare/sdk'
 
 @Injectable()
 export class PlatformUpdatesService {

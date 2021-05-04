@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { AddLogRequest } from '@coachcare/npm-api'
+import { AddLogRequest } from '@coachcare/sdk'
 import { environment } from '../../environments/environment'
-import { Logging } from '@coachcare/npm-api'
+import { Logging } from '@coachcare/sdk'
 import { LanguageService } from './language.service'
 
 interface Log extends Partial<AddLogRequest> {

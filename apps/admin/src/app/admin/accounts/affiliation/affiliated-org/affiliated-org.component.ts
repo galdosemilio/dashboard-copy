@@ -11,9 +11,9 @@ import {
   CreateOrganizationAssignmentRequest,
   OrganizationAssociation,
   UpdateOrganizationAssociationRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
-import { PaginatorComponent } from '@coachcare/common/components'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
 import { Subject } from 'rxjs'
 
@@ -32,8 +32,8 @@ export class AffiliatedOrgComponent implements OnInit {
 
   @Input() org: GetListSegment
 
-  @ViewChild(PaginatorComponent, { static: false })
-  paginator: PaginatorComponent
+  @ViewChild(CcrPaginatorComponent, { static: false })
+  paginator: CcrPaginatorComponent
   refresh$ = new Subject<any>()
 
   constructor(

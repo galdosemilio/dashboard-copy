@@ -3,7 +3,7 @@ import {
   GetAllPackageEnrollmentRequest,
   GetAllPackageEnrollmentResponse,
   PackageEnrollmentSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { PhaseEnrollmentDatabase } from '..'
 

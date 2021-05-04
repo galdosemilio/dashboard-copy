@@ -4,15 +4,15 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { CcrDirectivesModule } from '@coachcare/common/directives'
 import { CcrMaterialModule } from '@coachcare/material'
 import { TranslateModule } from '@ngx-translate/core'
-import { AvatarComponent } from './avatar/avatar.component'
+import { CcrAvatarComponent } from './avatar/avatar.component'
 import { BadgeComponent } from './badge/badge.component'
-import { DatasourceOverlayComponent } from './datasource-overlay/datasource-overlay.component'
+import { CcrDatasourceOverlayComponent } from './datasource-overlay/datasource-overlay.component'
 import { DateNavigatorComponent } from './date-navigator/date-navigator.component'
 import { DateRangeNavigatorComponent } from './date-range-navigator/date-range.component'
 import { HelpComponent } from './help/help.component'
 import { LogoComponent } from './logo/logo.component'
 import { CcrNoticeBlockquoteComponent } from './notice-blockquote'
-import { PaginatorComponent } from './paginator/paginator.component'
+import { CcrPaginatorComponent } from './paginator/paginator.component'
 import { ProgressCircleComponent } from './progress-circle/progress-circle.component'
 import { TableOverlayComponent } from './table-overlay/table-overlay.component'
 
@@ -25,28 +25,28 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component'
     TranslateModule.forChild()
   ],
   declarations: [
-    AvatarComponent,
+    CcrAvatarComponent,
     BadgeComponent,
     CcrNoticeBlockquoteComponent,
-    DatasourceOverlayComponent,
+    CcrDatasourceOverlayComponent,
     DateNavigatorComponent,
     DateRangeNavigatorComponent,
     HelpComponent,
     LogoComponent,
-    PaginatorComponent,
+    CcrPaginatorComponent,
     ProgressCircleComponent,
     TableOverlayComponent
   ],
   exports: [
-    AvatarComponent,
+    CcrAvatarComponent,
     BadgeComponent,
     CcrNoticeBlockquoteComponent,
-    DatasourceOverlayComponent,
+    CcrDatasourceOverlayComponent,
     DateNavigatorComponent,
     DateRangeNavigatorComponent,
     HelpComponent,
     LogoComponent,
-    PaginatorComponent,
+    CcrPaginatorComponent,
     ProgressCircleComponent,
     TableOverlayComponent
   ]

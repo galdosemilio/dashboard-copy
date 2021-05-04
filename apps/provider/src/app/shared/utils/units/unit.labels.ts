@@ -1,4 +1,4 @@
-import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
+import { AccountMeasurementPreferenceType } from '@coachcare/sdk'
 
 import { _ } from '../i18n.utils'
 import { Metric } from './conversion.types'

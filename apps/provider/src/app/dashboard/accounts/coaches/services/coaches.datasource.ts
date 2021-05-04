@@ -8,7 +8,7 @@ import {
   AccAccesibleSort,
   AccListResponse,
   AccountAccessData
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { CoachesCriteria } from './coaches.criteria'
 import { CoachesDatabase } from './coaches.database'
 

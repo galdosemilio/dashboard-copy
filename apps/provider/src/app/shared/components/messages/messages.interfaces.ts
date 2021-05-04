@@ -1,4 +1,4 @@
-import { NamedEntity } from '@coachcare/npm-api'
+import { NamedEntity } from '@coachcare/sdk'
 
 export interface MessageRecipient {
   id: string

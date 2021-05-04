@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { from, Observable } from 'rxjs'
-import { AccListResponse, AccountProvider } from '@coachcare/npm-api'
+import { AccListResponse, AccountProvider } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
 import { CoachesCriteria } from './coaches.criteria'

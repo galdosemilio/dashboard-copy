@@ -13,7 +13,7 @@ import {
 } from '@app/dashboard/accounts/dieters/services'
 import { ContextService, NotifierService } from '@app/service'
 import { ViewImageDialog } from '@app/shared/dialogs'
-import { FoodMeal } from '@coachcare/npm-api'
+import { FoodMeal } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()
@@ -46,7 +46,7 @@ export class FoodExpandableTable implements OnInit {
         this.rows = []
         this.cdr.detectChanges()
 
-        this.rows = this.cleanData(rows);
+        this.rows = this.cleanData(rows)
         this.cdr.detectChanges()
       })
   }

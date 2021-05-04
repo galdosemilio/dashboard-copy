@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { AccountSingle, AccountTypeIds, MFA } from '@coachcare/npm-api'
+import { AccountSingle, AccountTypeIds, MFA } from '@coachcare/sdk'
 import { CcrRolesMap } from '@coachcare/backend/shared'
 import {
   AuthService,

@@ -3,7 +3,7 @@ import {
   ActiveCampaignListAssociationItem,
   GetActiveCampaignListAssociationRequest,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { ActiveCampaignDatabase } from './active-campaign.database'
 import { ActiveCampaignListItem } from './model'

@@ -3,7 +3,7 @@ import { MatDialog } from '@coachcare/material'
 
 import { ContextService, SelectedAccount } from '@app/service'
 import { ScheduleSelectDialog } from '@app/shared/dialogs/schedule-select.dialog'
-import { AccountTypeId } from '@coachcare/npm-api'
+import { AccountTypeId } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-select-user',

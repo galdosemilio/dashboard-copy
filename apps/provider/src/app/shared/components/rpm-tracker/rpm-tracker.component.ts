@@ -10,10 +10,10 @@ import {
   AccountAccessData,
   RPMStateSummaryBillingItem,
   RPMStateSummaryItem
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { RPM } from '@coachcare/npm-api'
+import { RPM } from '@coachcare/sdk'
 import { TRACKABLE_RPM_CODES, TrackableRPMCodeEntry } from './model'
 import { debounceTime, filter } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog'

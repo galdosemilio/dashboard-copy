@@ -17,14 +17,14 @@ import {
   GetAllFormResponse,
   GetSingleFormRequest,
   UpdateFormRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import {
   Form as FormService,
   FormQuestion as FormQuestionService,
   FormSection as FormSectionService,
   FormSubmission as FormSubmissionService
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class FormsDatabase extends CcrDatabase {

@@ -22,7 +22,7 @@ import {
 } from '@angular/forms'
 import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
 import { ContextService } from '@app/service'
-import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
+import { AccountMeasurementPreferenceType } from '@coachcare/sdk'
 import { FEETS } from '@app/shared/utils/units'
 
 @Component({

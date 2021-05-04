@@ -15,9 +15,9 @@ import {
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
   UpdateContentRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { Content, ContentPackage } from '@coachcare/npm-api'
+import { Content, ContentPackage } from '@coachcare/sdk'
 
 @Injectable()
 export class FileExplorerDatabase extends CcrDatabase {

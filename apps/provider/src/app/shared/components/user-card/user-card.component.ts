@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core'
 import { Router } from '@angular/router'
 import { ContextService, CurrentAccount, NotifierService } from '@app/service'
-import { AccountProvider, AccSingleResponse } from '@coachcare/npm-api'
+import { AccountProvider, AccSingleResponse } from '@coachcare/sdk'
 import { Subject } from 'rxjs'
 
 @Component({

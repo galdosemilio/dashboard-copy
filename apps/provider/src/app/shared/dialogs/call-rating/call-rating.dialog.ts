@@ -7,7 +7,7 @@ import { _, FormUtils, sleep } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { take } from 'rxjs/operators'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 
 type CallRatingOption = 'ok' | 'bad'
 

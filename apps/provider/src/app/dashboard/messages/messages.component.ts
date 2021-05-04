@@ -20,12 +20,12 @@ import {
   GetAllMessagingResponse,
   Messaging,
   MessagingThreadSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { findIndex, get, sortBy, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'
 import { mergeMap, sampleTime } from 'rxjs/operators'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 import { ThreadsDatabase, ThreadsDataSource } from './services'
 
 @UntilDestroy()

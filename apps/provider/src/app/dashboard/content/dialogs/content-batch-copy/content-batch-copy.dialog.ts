@@ -16,10 +16,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FileExplorerRoute } from '../../file-explorer-table'
 import { FileExplorerContent, FileExplorerEvents } from '../../models'
 import { FileExplorerDatabase, FileExplorerDatasource } from '../../services'
-import {
-  OrganizationPermission,
-  OrganizationWithAddress
-} from '@coachcare/npm-api'
+import { OrganizationPermission, OrganizationWithAddress } from '@coachcare/sdk'
 
 interface ContentBatchCopyDialogProps {
   datasource: any

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import * as moment from 'moment'
-import { Schedule } from '@coachcare/npm-api'
+import { Schedule } from '@coachcare/sdk'
 
 import { Meeting } from '@app/dashboard/schedule/models'
-import { FetchAllMeetingRequest } from '@coachcare/npm-api'
+import { FetchAllMeetingRequest } from '@coachcare/sdk'
 
 @Injectable()
 export class NotificationsDataService {

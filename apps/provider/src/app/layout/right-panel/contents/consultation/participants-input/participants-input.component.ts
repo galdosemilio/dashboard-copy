@@ -14,11 +14,11 @@ import {
 import { NotifierService } from '@app/service'
 import { sleep, _ } from '@app/shared/utils'
 import {
+  AccountProvider,
   AccountAccessData,
   GetListAccountRequest,
   GetListAccountResponse
-} from '@coachcare/npm-api'
-import { Account } from '@coachcare/npm-api/selvera-api/services'
+} from '@coachcare/sdk'
 import { fromEvent, of } from 'rxjs'
 import {
   debounceTime,
@@ -51,7 +51,10 @@ export class ScheduleParticipantsInputComponent implements OnInit {
   private hasNextPage = false
   private pageIndex = 0
 
-  constructor(private account: Account, private notifier: NotifierService) {}
+  constructor(
+    private account: AccountProvider,
+    private notifier: NotifierService
+  ) {}
 
   public ngOnInit(): void {
     this.createControl()

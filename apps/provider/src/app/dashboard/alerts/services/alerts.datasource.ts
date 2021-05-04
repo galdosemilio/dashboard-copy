@@ -12,10 +12,7 @@ import {
   unitConversion,
   unitLabel
 } from '@app/shared'
-import {
-  AlertNotificationResponse,
-  NotificationRequest
-} from '@coachcare/npm-api'
+import { AlertNotificationResponse, NotificationRequest } from '@coachcare/sdk'
 import { AlertNotification } from '../models'
 import { AlertsDatabase } from './alerts.database'
 

@@ -5,7 +5,7 @@ import {
   GetLoginHistoryRequest,
   LoginHistoryItem,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class LoginHistoryDatabase extends CcrDatabase {

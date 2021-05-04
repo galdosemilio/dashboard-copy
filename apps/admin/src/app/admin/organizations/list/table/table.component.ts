@@ -10,11 +10,11 @@ import {
   OrganizationsDatabase,
   OrganizationsDataSource
 } from '@coachcare/backend/data'
-import { OrgEntityExtended } from '@coachcare/npm-api'
 import {
   QRCodeDisplayDialog,
   QRCodeDisplayDialogData
 } from '@board/shared/dialogs'
+import { OrgEntityExtended } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-organizations-table',

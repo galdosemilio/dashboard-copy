@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
-import { AccountProvider, AccSingleResponse } from '@coachcare/npm-api'
+import { AccountProvider, AccSingleResponse } from '@coachcare/sdk'
 
 import { ContextService, NotifierService } from '@app/service'
 

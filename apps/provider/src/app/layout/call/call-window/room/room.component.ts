@@ -18,7 +18,7 @@ import { Actions, ofType } from '@ngrx/effects'
 import { select, Store } from '@ngrx/store'
 import { Subscription } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import { ConnectionStats, ConnectionStatus } from '@coachcare/npm-api'
+import { ConnectionStats, ConnectionStatus } from '@coachcare/sdk'
 import { TwilioBandwidthService } from '../../services/twilio-bandwidth.service'
 
 @Component({

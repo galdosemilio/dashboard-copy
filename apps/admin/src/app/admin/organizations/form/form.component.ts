@@ -6,7 +6,7 @@ import {
   NamedEntity,
   OrganizationProvider,
   OrganizationSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { FormUtils } from '@coachcare/backend/shared'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'

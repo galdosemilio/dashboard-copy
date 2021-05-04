@@ -4,7 +4,7 @@ import {
   GetAllPackageRequest,
   GetAllPackageResponse,
   PackageSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _, AutocompleterOption } from '@coachcare/backend/shared'
 import { Observable } from 'rxjs'
 import { LabelsDatabase } from './labels.database'

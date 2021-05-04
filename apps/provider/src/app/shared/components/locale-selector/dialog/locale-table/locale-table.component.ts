@@ -8,9 +8,8 @@ import {
   Output,
   ViewChild
 } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-
-import { CcrPaginator } from '@app/shared/components/paginator'
 import { Locale, LocaleSelectEvents } from '../locales'
 
 @UntilDestroy()
@@ -19,8 +18,8 @@ import { Locale, LocaleSelectEvents } from '../locales'
   templateUrl: './locale-table.component.html'
 })
 export class LocaleTableComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: false })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: false })
+  paginator: CcrPaginatorComponent
 
   @Input()
   set array(a: Array<Locale>) {

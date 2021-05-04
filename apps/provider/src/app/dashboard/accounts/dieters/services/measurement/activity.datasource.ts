@@ -2,7 +2,7 @@ import { from, Observable } from 'rxjs'
 
 import { NotifierService } from '@app/service'
 import { CcrDataSource } from '@app/shared'
-import { FetchActivityRequest, FetchActivityResponse } from '@coachcare/npm-api'
+import { FetchActivityRequest, FetchActivityResponse } from '@coachcare/sdk'
 import { MeasurementDatabase } from './measurement.database'
 
 export class ActivityDataSource extends CcrDataSource<

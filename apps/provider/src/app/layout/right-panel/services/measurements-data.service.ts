@@ -3,13 +3,13 @@ import {
   MeasurementActivity,
   MeasurementBody,
   MeasurementSleep
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 import {
   AddActivityRequest,
   AddBodyMeasurementRequest,
   AddManualSleepMeasurementRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class MeasurementsDataService {

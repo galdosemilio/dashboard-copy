@@ -1,13 +1,14 @@
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   Account,
   AutoThreadParticipant,
   MessagingPreference
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { ParticipantDatabase, ParticipantsDataSource } from '../services'
 import { MatDialog } from '@coachcare/material'
 import { NotifierService } from '@app/service'
-import { _, PromptDialog, PromptDialogData, CcrPaginator } from '@app/shared'
+import { _, PromptDialog, PromptDialogData } from '@app/shared'
 import { CoachSelectDialog } from '@app/shared/dialogs'
 
 @Component({
@@ -16,7 +17,7 @@ import { CoachSelectDialog } from '@app/shared/dialogs'
   styleUrls: ['./auto-thread-management.component.scss']
 })
 export class AutoThreadManagementComponent implements OnInit {
-  @ViewChild(CcrPaginator, { static: true }) paginator
+  @ViewChild(CcrPaginatorComponent, { static: true }) paginator
   @Input() isAdmin: boolean
   @Input() messagePreferenceId: string
   @Input() organizationId: string

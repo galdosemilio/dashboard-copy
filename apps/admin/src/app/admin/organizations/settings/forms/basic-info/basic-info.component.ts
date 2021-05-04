@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import {
   OrganizationPreference,
   OrganizationPreferenceSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 

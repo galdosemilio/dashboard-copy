@@ -3,8 +3,10 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
+  OnChanges,
   OnDestroy,
-  OnInit
+  OnInit,
+  SimpleChanges
 } from '@angular/core'
 import { AppDataSource } from '@coachcare/backend/model'
 import { _ } from '@coachcare/common/shared'
@@ -21,14 +23,23 @@ import { takeUntil } from 'rxjs/operators'
   },
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatasourceOverlayComponent implements OnInit, OnDestroy {
-  @Input() source: AppDataSource<any, any, any>
+export class CcrDatasourceOverlayComponent
+  implements OnChanges, OnInit, OnDestroy {
+  @Input()
+  source: AppDataSource<any, any, any>
 
-  @Input() emptyMsg: string
-  @Input() waitMsg = _('NOTIFY.SOURCE.DEFAULT_WAIT')
-  @Input() delayMsg = _('NOTIFY.SOURCE.DEFAULT_DELAY')
-  @Input() timeoutMsg = _('NOTIFY.SOURCE.DEFAULT_TIMEOUT')
-  @Input() showErrors = true
+  @Input()
+  emptyMsg: string
+  @Input()
+  waitMsg = _('NOTIFY.SOURCE.DEFAULT_WAIT')
+  @Input()
+  delayMsg = _('NOTIFY.SOURCE.DEFAULT_DELAY')
+  @Input()
+  timeoutMsg = _('NOTIFY.SOURCE.DEFAULT_TIMEOUT')
+  @Input()
+  showErrors = true
+  @Input()
+  inaccessible = false
 
   private onDestroy$ = new Subject<void>()
 
@@ -55,6 +66,15 @@ export class DatasourceOverlayComponent implements OnInit, OnDestroy {
       this.source.change$.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
         this.cdr.markForCheck()
       })
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (
+      changes.emptyMsg &&
+      changes.emptyMsg.previousValue !== changes.emptyMsg.currentValue
+    ) {
+      this.source.showEmpty = changes.emptyMsg.currentValue
     }
   }
 

@@ -10,7 +10,7 @@ import {
   GetListAccountRequest,
   GetListAccountResponse,
   UpdateAccountRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 
 @Injectable()

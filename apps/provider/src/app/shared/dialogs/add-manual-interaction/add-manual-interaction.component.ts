@@ -7,14 +7,11 @@ import {
   INTERACTION_TYPES
 } from '@app/dashboard/reports/communications/models'
 import { ContextService, NotifierService } from '@app/service'
-import {
-  CreateManualInteractionRequest,
-  InteractionType
-} from '@coachcare/npm-api'
+import { CreateManualInteractionRequest, InteractionType } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { unionBy } from 'lodash'
 import * as moment from 'moment'
-import { Interaction } from '@coachcare/npm-api'
+import { Interaction } from '@coachcare/sdk'
 
 @Component({
   selector: 'add-manual-interaction-dialog',

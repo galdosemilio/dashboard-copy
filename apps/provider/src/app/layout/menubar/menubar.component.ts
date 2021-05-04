@@ -28,7 +28,7 @@ import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { OrganizationProvider, User } from '@coachcare/npm-api'
+import { OrganizationProvider, User } from '@coachcare/sdk'
 import { HelpComponent } from './help'
 
 @UntilDestroy()

@@ -1,12 +1,16 @@
 <!-- <div *ngIf="!source.isLoading && !source.hasErrors()"> -->
-  <ng-content></ng-content>
+  <ng-content *ngIf="!inaccessible"></ng-content>
 <!-- </div> -->
 
-<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="ccr-overlay" *ngIf="source.isLoading || (showErrors && source.hasErrors())">
-  <mat-spinner *ngIf="source.isLoading"></mat-spinner>
-  <div *ngIf="source.isLoading && source.loadingMsg">{{ source.loadingMsg | translate }}</div>
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="ccr-overlay" *ngIf="source.isLoading || inaccessible || (showErrors && source.hasErrors())">
+  <mat-spinner *ngIf="!inaccessible && source.isLoading"></mat-spinner>
+  <div *ngIf="!inaccessible && source.isLoading && source.loadingMsg">{{ source.loadingMsg | translate }}</div>
 
-  <div class="ccr-errors" *ngIf="showErrors && !source.isLoading && source.hasErrors()">
+  <div class="ccr-errors" *ngIf="!inaccessible && showErrors && !source.isLoading && source.hasErrors()">
     <span *ngFor="let error of source.getErrors()">{{ error | translate }}</span>
+  </div>
+
+  <div class="ccr-errors" *ngIf="inaccessible">
+    <span>{{ 'NOTIFY.INFO.GENERAL_PERMISSION_ACCESS_NOTIFICATION' | translate }}</span>
   </div>
 </div>

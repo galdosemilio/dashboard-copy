@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store'
 
-import { FetchCallDetailsResponse } from '@coachcare/npm-api'
+import { FetchCallDetailsResponse } from '@coachcare/sdk'
 import * as Actions from './call.action'
 import { Source } from './call.action'
 import {

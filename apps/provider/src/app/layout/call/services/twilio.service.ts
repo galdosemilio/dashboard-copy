@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { TwilioBandwidthService } from '@app/layout/call/services/twilio-bandwidth.service'
 import { BehaviorSubject, from, Observable } from 'rxjs'
-import { Interaction } from '@coachcare/npm-api'
+import { Interaction } from '@coachcare/sdk'
 
 import {
   connect,
@@ -10,10 +10,7 @@ import {
   createLocalVideoTrack
 } from 'twilio-video'
 
-import {
-  CreateCallTokenRequest,
-  CreateCallTokenResponse
-} from '@coachcare/npm-api'
+import { CreateCallTokenRequest, CreateCallTokenResponse } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils/i18n.utils'
 
 import { LoggingService } from '@app/service'

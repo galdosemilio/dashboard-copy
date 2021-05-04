@@ -5,7 +5,7 @@ import {
   AccountFullData,
   AccountTypeIds,
   ActiveCampaign
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { sleep } from '@coachcare/common/shared'
 

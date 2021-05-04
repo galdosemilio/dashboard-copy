@@ -7,10 +7,10 @@ import {
 } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import * as moment from 'moment-timezone'
-import { Schedule } from '@coachcare/npm-api'
+import { Schedule } from '@coachcare/sdk'
 
 import { _, FormUtils } from '@app/shared'
-import { AddSingleAvailabilityRequest } from '@coachcare/npm-api'
+import { AddSingleAvailabilityRequest } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-single-add-dialog',

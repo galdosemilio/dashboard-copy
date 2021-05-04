@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService } from '@app/service'
-import { AccSingleResponse } from '@coachcare/npm-api'
+import { AccSingleResponse } from '@coachcare/sdk'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 

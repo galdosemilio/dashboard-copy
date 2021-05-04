@@ -29,7 +29,7 @@ import {
   AccountFullData,
   AccListAllRequest,
   AccListRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import {
   _,
   AutocompleterOption,

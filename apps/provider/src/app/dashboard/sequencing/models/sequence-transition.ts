@@ -3,7 +3,7 @@ import {
   SequenceTransition,
   SequenceTrigger,
   TriggerLocalization as SelveraTriggerLocalization
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { SyncState } from './sync-state'
 
 interface Trigger extends SequenceTrigger {

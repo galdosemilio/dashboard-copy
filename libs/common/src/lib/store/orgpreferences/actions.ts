@@ -1,4 +1,4 @@
-import { OrganizationPreferenceSingle, OrgAssets } from '@coachcare/npm-api'
+import { OrganizationPreferenceSingle, OrgAssets } from '@coachcare/sdk'
 import { Action } from '@ngrx/store'
 
 /**

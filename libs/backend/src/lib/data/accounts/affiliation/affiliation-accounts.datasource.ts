@@ -4,7 +4,7 @@ import {
   AccountAccessData,
   GetListAccountRequest,
   GetListAccountResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { AffiliationAccountsDatabase } from './affiliation-accounts.database'
 

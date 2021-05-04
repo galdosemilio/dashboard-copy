@@ -22,7 +22,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
-import { FormAnswer } from '@coachcare/npm-api'
+import { FormAnswer } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable } from 'rxjs'
 

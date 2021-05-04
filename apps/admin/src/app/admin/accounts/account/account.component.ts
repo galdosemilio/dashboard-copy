@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { AccountSingle } from '@coachcare/npm-api'
+import { AccountSingle } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-accounts-account',

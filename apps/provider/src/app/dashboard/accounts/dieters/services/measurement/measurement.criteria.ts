@@ -10,7 +10,7 @@ import {
   SleepSummaryUnit,
   SummaryActivityResponseSegment,
   SummarySleepMeasurementResponseSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 export type MeasurementTimeframe = 'alltime' | 'year' | 'month' | 'week' | 'day'
 

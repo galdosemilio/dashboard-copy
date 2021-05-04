@@ -6,7 +6,7 @@ import {
   AccountRef,
   GetUserMFAResponse,
   MFA
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'

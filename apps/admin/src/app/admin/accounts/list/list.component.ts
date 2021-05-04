@@ -3,8 +3,8 @@ import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { AccountsDataSource } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
-import { AccountTypeId } from '@coachcare/npm-api'
-import { PaginatorComponent } from '@coachcare/common/components'
+import { AccountTypeId } from '@coachcare/sdk'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { AccountCSVDialogComponent } from '../dialogs'
 
 @Component({
@@ -17,8 +17,8 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   accountType: AccountTypeId
   columns = ['id', 'name', 'email', 'actions']
 
-  @ViewChild(PaginatorComponent, { static: true })
-  paginator: PaginatorComponent
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   constructor(
     private dialog: MatDialog,

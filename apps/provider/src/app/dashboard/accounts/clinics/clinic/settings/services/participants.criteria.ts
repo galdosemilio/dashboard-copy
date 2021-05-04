@@ -1,7 +1,8 @@
-import { GetOrgAutoThreadParticipantListingResponse } from '@coachcare/npm-api'
+import { GetOrgAutoThreadParticipantListingResponse } from '@coachcare/sdk'
 
-export interface ParticipantsCriteria extends GetOrgAutoThreadParticipantListingResponse {
+export interface ParticipantsCriteria
+  extends GetOrgAutoThreadParticipantListingResponse {
   id: string
   offset: number
-  limit: number | 'all';
+  limit: number | 'all'
 }

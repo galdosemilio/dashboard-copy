@@ -1,12 +1,12 @@
 import { ContextService } from '@app/service'
-import { CcrPaginator } from '@app/shared/components'
 import { TableDataSource } from '@app/shared/model'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   GetAllPackageOrganizationRequest,
   GetAllPackageOrganizationResponse,
   PackageAssociation,
   PackageOrganizationSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { Package } from '../models'
 import { PackageDatabase } from './package.database'
@@ -21,7 +21,7 @@ export class PackageDatasource extends TableDataSource<
   constructor(
     protected context: ContextService,
     protected database: PackageDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
     this.addDefault({

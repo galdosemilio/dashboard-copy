@@ -1,5 +1,5 @@
 import { _ } from '@app/shared/utils'
-import { AllOrgPermissions } from '@coachcare/npm-api'
+import { AllOrgPermissions } from '@coachcare/sdk'
 import { isEqual } from 'lodash'
 
 export interface AssociationAccessLevel {

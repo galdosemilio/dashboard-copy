@@ -22,7 +22,7 @@ import {
 import { LOCALES } from '@coachcare/common/shared'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 import { ClinicMsaProps } from '@coachcare/common/components'
 
 @UntilDestroy()

@@ -8,7 +8,7 @@ import { ConfigService, LayoutService } from '@coachcare/common/services'
 import { AppPalette, MenuItem } from '@coachcare/common/shared'
 import { Store } from '@ngrx/store'
 import { findIndex } from 'lodash'
-import { Messaging } from '@coachcare/npm-api'
+import { Messaging } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-menu',

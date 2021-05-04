@@ -14,10 +14,10 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
 import { NotifierService } from '@app/service'
-import { CountryCode } from '@coachcare/npm-api'
+import { CountryCode } from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { CountryProvider } from '@coachcare/npm-api'
+import { CountryProvider } from '@coachcare/sdk'
 
 export function ccrPhoneValidator(control: FormControl) {
   const value = control.value || {}

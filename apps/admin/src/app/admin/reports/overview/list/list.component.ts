@@ -5,7 +5,7 @@ import {
   OrganizationActivityAggregate,
   OrganizationActivityRequest,
   Reports
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { environment } from '../../../../../environments/environment'
 
 @Component({

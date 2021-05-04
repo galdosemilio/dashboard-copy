@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { ApiService } from '@coachcare/npm-api'
+import { ApiService } from '@coachcare/sdk'
 import {
   APP_ENVIRONMENT,
   AppEnvironment,

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { OrganizationsDataSource } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
-import { PaginatorComponent } from '@coachcare/common/components'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 
 @Component({
   selector: 'ccr-organizations-list',
@@ -20,8 +20,8 @@ export class OrganizationsListComponent implements OnInit, OnDestroy {
     'actions'
   ]
 
-  @ViewChild(PaginatorComponent, { static: true })
-  paginator: PaginatorComponent
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   constructor(public source: OrganizationsDataSource) {}
 

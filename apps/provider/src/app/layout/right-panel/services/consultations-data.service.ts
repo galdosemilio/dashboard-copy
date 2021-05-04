@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
-import { Consultation } from '@coachcare/npm-api'
+import { Consultation } from '@coachcare/sdk'
 
 import {
   ConsultationListingRequest,
   ConsultationListingResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class ConsultationsDataService {

@@ -1,5 +1,5 @@
 import { SafeResourceUrl } from '@angular/platform-browser'
-import { Entity, FormAnswer, FormQuestionSingle } from '@coachcare/npm-api'
+import { Entity, FormAnswer, FormQuestionSingle } from '@coachcare/sdk'
 import { FormQuestionType } from './question-type.interface'
 import { QUESTION_TYPE_MAP } from './question-type.map'
 

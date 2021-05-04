@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { LabelsDataSource } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
-import { PaginatorComponent } from '@coachcare/common/components'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 
 @Component({
   selector: 'ccr-package-list',
@@ -12,8 +12,8 @@ import { PaginatorComponent } from '@coachcare/common/components'
 export class LabelsListComponent implements OnInit, OnDestroy {
   columns = ['id', 'title', 'actions']
 
-  @ViewChild(PaginatorComponent, { static: true })
-  paginator: PaginatorComponent
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   constructor(public source: LabelsDataSource) {}
 

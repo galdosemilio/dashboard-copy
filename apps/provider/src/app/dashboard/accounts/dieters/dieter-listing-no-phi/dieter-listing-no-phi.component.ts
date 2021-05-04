@@ -7,6 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort, Sort } from '@coachcare/material'
 import { STORAGE_PATIENTS_PAGINATION } from '@app/config'
 import {
@@ -15,7 +16,7 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, CcrPaginator } from '@app/shared'
+import { _ } from '@app/shared'
 import { DieterListingItem } from '../models'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
@@ -32,8 +33,8 @@ import { DietersCriteria } from '../services/dieters.criteria'
 })
 export class DieterListingNoPhiComponent
   implements AfterViewInit, OnInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   clinic: SelectedOrganization
   csvSeparator = ','

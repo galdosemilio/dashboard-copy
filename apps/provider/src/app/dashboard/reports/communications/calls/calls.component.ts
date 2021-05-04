@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog, MatSelectChange } from '@coachcare/material'
 import {
   ContextService,
@@ -14,7 +15,6 @@ import {
 } from '@app/service'
 import {
   AddManualInteractionDialog,
-  CcrPaginator,
   ConfirmDialog,
   PromptDialog,
   TextInputDialog
@@ -26,7 +26,7 @@ import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
-import { Interaction } from '@coachcare/npm-api'
+import { Interaction } from '@coachcare/sdk'
 import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models'
 import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
 
@@ -48,7 +48,7 @@ export class CallsComponent implements OnDestroy, OnInit {
 
   @Input() allowCreation = false
 
-  @ViewChild(CcrPaginator, { static: true }) paginator
+  @ViewChild(CcrPaginatorComponent, { static: true }) paginator
 
   billableServices: BillableService[] = []
   clinic: SelectedOrganization

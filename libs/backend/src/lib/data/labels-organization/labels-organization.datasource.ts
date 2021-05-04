@@ -4,7 +4,7 @@ import {
   GetAllPackageOrganizationRequest,
   GetAllPackageOrganizationResponse,
   PackageAssociation
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { LabelsOrganizationDatabase } from './labels-organization.database'
 
 export interface PackageAssociationElement extends PackageAssociation {

@@ -3,9 +3,9 @@ import { CcrDatabase } from '@app/shared/model'
 import {
   GetAllPackageOrganizationRequest,
   GetAllPackageOrganizationResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { PackageOrganization } from '@coachcare/npm-api'
+import { PackageOrganization } from '@coachcare/sdk'
 
 @Injectable()
 export class PackageDatabase extends CcrDatabase {

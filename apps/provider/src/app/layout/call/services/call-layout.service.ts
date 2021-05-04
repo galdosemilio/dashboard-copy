@@ -25,7 +25,7 @@ import { Store } from '@ngrx/store'
 import { CookieService } from 'ngx-cookie-service'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Interaction } from '@coachcare/npm-api'
+import { Interaction } from '@coachcare/sdk'
 import { AccessDeniedDialogComponent } from '../access-denied-dialog/access-denied-dialog.component'
 
 @UntilDestroy()

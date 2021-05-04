@@ -2,6 +2,10 @@
   $foreground: map-get($theme, foreground);
 
   ccr-paginator {
+    .pagination {
+      direction: initial;
+    }
+
     background-color: transparent !important;
     display: block;
     text-align: right;

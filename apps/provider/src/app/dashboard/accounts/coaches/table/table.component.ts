@@ -14,7 +14,7 @@ import {
   AccountTypeId,
   Affiliation,
   OrganizationProvider
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 import { ContextService, NotifierService } from '@app/service'
 import {

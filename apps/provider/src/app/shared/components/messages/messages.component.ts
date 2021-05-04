@@ -20,9 +20,9 @@ import {
   GetThreadMessagingRequest,
   GetThreadMessagingResponse,
   Messaging
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
-import { MessagingItem } from '@coachcare/npm-api'
+import { MessagingItem } from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import { first, last, uniqBy } from 'lodash'
 import * as moment from 'moment-timezone'

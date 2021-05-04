@@ -6,17 +6,17 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog, MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { ClosePanel, OpenPanel } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
 import { WalkthroughService } from '@app/service/walkthrough'
-import { CcrPaginator } from '@app/shared'
 import {
   AccountTypeId,
   FetchRPMBillingSummaryRequest,
   OrganizationEntity
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
 import { get, isEmpty } from 'lodash'
@@ -50,7 +50,8 @@ import { PromptDialog } from '@app/shared/dialogs'
   encapsulation: ViewEncapsulation.None
 })
 export class RPMBillingComponent implements OnDestroy, OnInit {
-  @ViewChild(CcrPaginator, { static: true }) paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   @ViewChild(MatSort, { static: true }) sort: MatSort
   @ViewChild(CcrPageSizeSelectorComponent, { static: true })
   pageSizeSelectorComp: CcrPageSizeSelectorComponent

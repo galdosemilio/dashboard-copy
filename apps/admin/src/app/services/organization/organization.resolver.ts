@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
 
-import { OrganizationProvider, OrganizationSingle } from '@coachcare/npm-api'
+import { OrganizationProvider, OrganizationSingle } from '@coachcare/sdk'
 import { OrganizationRoutes } from './organization.routes'
 
 @Injectable()

@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Form } from '@app/dashboard/library/forms/models'
 import { FormsDatabase } from '@app/dashboard/library/forms/services'
 import { ContextService, NotifierService } from '@app/service'
-import { FormSingle } from '@coachcare/npm-api'
+import { FormSingle } from '@coachcare/sdk'
 import { map } from 'rxjs/operators'
 import { FileExplorerContent } from '../../models'
 

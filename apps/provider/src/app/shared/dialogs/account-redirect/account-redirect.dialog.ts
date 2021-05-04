@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { Router } from '@angular/router'
-import { AccountTypeId } from '@coachcare/npm-api'
+import { AccountTypeId } from '@coachcare/sdk'
 
 interface AccountRedirectDialogProps {
   account: any

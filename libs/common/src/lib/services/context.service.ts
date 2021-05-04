@@ -12,7 +12,7 @@ import {
   OrganizationPreference,
   OrganizationPreferenceSingle,
   OrgEntity
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { CCRSelectors, CCRState } from '@coachcare/backend/store'
 import { OrgPrefActions } from '@coachcare/common/store'
 import { select, Store } from '@ngrx/store'
@@ -137,7 +137,7 @@ export class ContextService {
       }
 
       // app initialization promise
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         // TODO review lang initialization
         this.lang.init()
 

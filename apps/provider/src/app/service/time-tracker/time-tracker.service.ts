@@ -3,7 +3,7 @@ import { NavigationStart, Router, RouterEvent } from '@angular/router'
 import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
@@ -11,9 +11,9 @@ import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
 @UntilDestroy()
 @Injectable()
 export class TimeTrackerService implements OnDestroy {
-  public currentRoute$: BehaviorSubject<TimeTrackerRoute> = new BehaviorSubject<
-    TimeTrackerRoute
-  >(undefined)
+  public currentRoute$: BehaviorSubject<TimeTrackerRoute> = new BehaviorSubject<TimeTrackerRoute>(
+    undefined
+  )
 
   set currentRoute(route: TimeTrackerRoute) {
     this.currentRoute$.next(route)

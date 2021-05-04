@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 import {
   AuthenticatorApp,
   AuthenticatorApps,

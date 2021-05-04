@@ -1,4 +1,4 @@
-import { AccountSingle, AccountTypeId } from '@coachcare/npm-api'
+import { AccountSingle, AccountTypeId } from '@coachcare/sdk'
 
 export interface AccountResolved {
   account?: AccountSingle

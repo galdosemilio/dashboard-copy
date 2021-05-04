@@ -4,7 +4,7 @@ import { resolveConfig } from '@app/config/section'
 import { Form } from '@app/dashboard/library/forms/models'
 import { FormsDatabase } from '@app/dashboard/library/forms/services'
 import { ContextService, EventsService } from '@app/service'
-import { FormSingle, PagedResponse } from '@coachcare/npm-api'
+import { FormSingle, PagedResponse } from '@coachcare/sdk'
 import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 

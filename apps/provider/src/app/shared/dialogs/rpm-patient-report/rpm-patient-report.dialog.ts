@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
-import { AccountProvider, AccSingleResponse, RPM } from '@coachcare/npm-api'
+import { AccountProvider, AccSingleResponse, RPM } from '@coachcare/sdk'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { OrgSingleResponse } from '@coachcare/npm-api'
+import { OrgSingleResponse } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-clinic-info',

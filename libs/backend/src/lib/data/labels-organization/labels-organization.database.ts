@@ -3,7 +3,7 @@ import {
   GetAllPackageOrganizationRequest,
   GetAllPackageOrganizationResponse,
   PackageOrganization
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class LabelsOrganizationDatabase {

@@ -4,7 +4,7 @@ import {
   AccountFullData,
   GetAllAccountRequest,
   GetAllAccountResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _, AutocompleterOption } from '@coachcare/backend/shared'
 import { get } from 'lodash'
 import { Observable } from 'rxjs'

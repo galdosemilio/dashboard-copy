@@ -14,7 +14,7 @@ import { EventsService } from '@app/service'
 import { ContextService } from '@app/service/context.service'
 import { TranslationsObject } from '@app/shared'
 import { Store } from '@ngrx/store'
-import { Conference } from '@coachcare/npm-api'
+import { Conference } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-layout-base',

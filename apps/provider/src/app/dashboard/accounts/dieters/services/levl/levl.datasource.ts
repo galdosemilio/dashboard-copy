@@ -5,7 +5,7 @@ import {
   BodySummaryDataResponseSegment,
   FetchBodySummaryRequest,
   FetchBodySummaryResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'

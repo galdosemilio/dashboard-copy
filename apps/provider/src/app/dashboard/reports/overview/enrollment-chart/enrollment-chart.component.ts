@@ -8,10 +8,7 @@ import {
 import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
 import { ConfigService, ContextService, NotifierService } from '@app/service'
 import { _, ChartData, ViewUtils } from '@app/shared'
-import {
-  EnrollmentSimpleReportResponse,
-  TimelineUnit
-} from '@coachcare/npm-api'
+import { EnrollmentSimpleReportResponse, TimelineUnit } from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty, merge } from 'lodash'

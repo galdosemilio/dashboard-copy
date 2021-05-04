@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { MeasurementBody, Reports } from '@coachcare/npm-api'
+import { MeasurementBody, Reports } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
 import {
   FetchBodySummaryRequest,
   FetchBodySummaryResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class LevlDatabase extends CcrDatabase {

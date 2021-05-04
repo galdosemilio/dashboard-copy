@@ -18,7 +18,7 @@ import {
   PromptDialog
 } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Access, AccountProvider, Affiliation } from '@coachcare/npm-api'
+import { Access, AccountProvider, Affiliation } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({

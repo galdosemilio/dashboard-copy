@@ -10,7 +10,7 @@ import {
   FetchAllConsumedKeyResponse,
   FetchAllOrganizationKeyRequest,
   FetchAllOrganizationKeyResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 import {
   FoodKeyData,

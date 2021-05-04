@@ -3,7 +3,7 @@ import * as moment from 'moment-timezone'
 
 import { NotificationsDataService } from '@app/layout/right-panel/services'
 import { ConfigService, ContextService, NotifierService } from '@app/service'
-import { FetchAllMeetingRequest } from '@coachcare/npm-api'
+import { FetchAllMeetingRequest } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-rightpanel-notifications',

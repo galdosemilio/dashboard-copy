@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { FoodKey } from '@coachcare/npm-api'
+import { FoodKey } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
 import {
@@ -7,7 +7,7 @@ import {
   FetchAllConsumedKeyResponse,
   FetchAllOrganizationKeyRequest,
   FetchAllOrganizationKeyResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class FoodKeyDatabase extends CcrDatabase {

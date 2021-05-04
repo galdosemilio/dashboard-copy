@@ -7,10 +7,7 @@ import {
   EVENT_PHASE_ASSOC_REMOVED,
   EventsService
 } from '@app/service'
-import {
-  OrganizationDetailed,
-  PackageEnrollmentSegment
-} from '@coachcare/npm-api'
+import { OrganizationDetailed, PackageEnrollmentSegment } from '@coachcare/sdk'
 import { intersectionBy, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'

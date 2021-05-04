@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 
 import { ContextService, NotifierService } from '@app/service'
-import { AccSingleResponse } from '@coachcare/npm-api'
+import { AccSingleResponse } from '@coachcare/sdk'
 
 @Injectable()
 export class DieterResolver implements Resolve<AccSingleResponse> {

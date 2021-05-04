@@ -1,8 +1,8 @@
 import {
   AppLocaleCode,
   appLocales as npmLocales
-} from '@coachcare/npm-api/selvera-api/services/i18n.config'
-export { AppLocaleCode } from '@coachcare/npm-api/selvera-api/services/i18n.config'
+} from '@coachcare/sdk/dist/lib/services/i18n.config'
+export { AppLocaleCode } from '@coachcare/sdk/dist/lib/services/i18n.config'
 
 /**
  * Flag information

@@ -3,9 +3,9 @@ import { _, CcrDatabase } from '@app/shared'
 import {
   FetchAllConsumedRequest,
   GetAllFoodConsumedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { FoodConsumed } from '@coachcare/npm-api'
+import { FoodConsumed } from '@coachcare/sdk'
 
 @Injectable()
 export class FoodDatabase extends CcrDatabase {

@@ -1,13 +1,14 @@
 import { FormAddendumDatabase } from '@app/dashboard/library/forms/services/form-addendum.database'
 import { NotifierService } from '@app/service'
-import { CcrPaginator, TableDataSource } from '@app/shared'
+import { TableDataSource } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   CreateFormAddendumRequest,
   Entity,
   FormAddendumSingle,
   GetAllFormAddendumRequest,
   GetAllFormAddendumResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 
 export class FormAddendumDatasource extends TableDataSource<
@@ -18,7 +19,7 @@ export class FormAddendumDatasource extends TableDataSource<
   constructor(
     protected database: FormAddendumDatabase,
     private notify: NotifierService,
-    private paginator: CcrPaginator
+    private paginator: CcrPaginatorComponent
   ) {
     super()
     this.addOptional(this.paginator.page, () => ({

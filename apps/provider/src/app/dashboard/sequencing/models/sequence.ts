@@ -6,7 +6,7 @@ import {
   SequenceState as SelveraSequenceState,
   SequenceTransition,
   SequenceTrigger
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import * as moment from 'moment'
 import { Transition } from './sequence-transition'
 import { SyncState } from './sync-state'

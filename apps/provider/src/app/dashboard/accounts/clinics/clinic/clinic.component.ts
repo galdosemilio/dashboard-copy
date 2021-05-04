@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService } from '@app/service'
-import { OrgSingleResponse } from '@coachcare/npm-api'
+import { OrgSingleResponse } from '@coachcare/sdk'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { ClinicBillableServicesComponent } from './billable-services'

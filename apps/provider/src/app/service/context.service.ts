@@ -6,14 +6,13 @@ import {
   AccountProvider,
   CommunicationPreference,
   ContentPreference,
-  FetchMeetingTypesResponse,
   MessagingPreference,
   OrganizationEntity,
   OrganizationProvider,
   RPM,
   Sequence,
   User
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 import { CCRConfig, CCRPalette, Palette } from '@app/config'
 import { InitLayout } from '@app/layout/store/layout'
@@ -33,15 +32,15 @@ import {
   OrganizationWithAddress,
   OrgPreferencesResponse,
   OrgSingleResponse,
-  RPMPreferenceSingle,
-  Schedule
-} from '@coachcare/npm-api'
+  RPMPreferenceSingle
+} from '@coachcare/sdk'
 import { UpdatePalette } from '@app/store/config'
 import { AuthService } from './auth.service'
 import { ConfigService } from './config.service'
 import { EventsService } from './events.service'
 import { LanguageService } from './language.service'
-import { ApiService } from '@coachcare/npm-api/selvera-api/services'
+import { MeetingTypeWithColor, ScheduleDataService } from './schedule'
+import { ApiService } from '@coachcare/sdk'
 
 interface CcrOrgPreferencesResponse extends OrgPreferencesResponse {
   comms: CommunicationPreferenceSingle
@@ -61,7 +60,7 @@ export type SelectedOrganization = OrganizationWithAddress & {
   preferences?: Partial<CcrOrgPreferencesResponse>
   isDirect: boolean
   mala?: any
-  meetingTypes?: FetchMeetingTypesResponse[]
+  meetingTypes?: MeetingTypeWithColor[]
   // disabled?: boolean;
 }
 
@@ -83,7 +82,7 @@ export class ContextService {
     private lang: LanguageService,
     private rpm: RPM,
     private sequence: Sequence,
-    private schedule: Schedule
+    private schedule: ScheduleDataService
   ) {
     // this.bus.register('organizations.disable-all', this.disableAll.bind(this));
     // this.bus.register('organizations.enable-all', this.enableAll.bind(this));
@@ -236,7 +235,7 @@ export class ContextService {
       organization.preferences.messaging = messagingPrefs
       organization.preferences.fileVault = fileVaultPrefs
 
-      organization.meetingTypes = await this.schedule.fetchTypes(
+      organization.meetingTypes = await this.schedule.fetchMeetingTypes(
         organization.id
       )
       // organization.preferences.sequences = { enabled: true };
@@ -251,7 +250,7 @@ export class ContextService {
         })
       }
 
-      this.api.appendHeaders({ organization: organization.id })
+      this.api.appendHeaders({ organization: organization.id } as any)
     } catch (e) {}
 
     this.organization$.next(organization)

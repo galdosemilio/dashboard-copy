@@ -19,17 +19,13 @@ import {
   MessagePatientDialogProps,
   PromptDialog
 } from '@app/shared/dialogs'
-import {
-  AccountTypeId,
-  LoginHistoryItem,
-  NamedEntity
-} from '@coachcare/npm-api'
+import { AccountTypeId, LoginHistoryItem, NamedEntity } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils/i18n.utils'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { unionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { AccountProvider, Interaction } from '@coachcare/npm-api'
+import { AccountProvider, Interaction } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { DeviceDetectorService } from 'ngx-device-detector'
 

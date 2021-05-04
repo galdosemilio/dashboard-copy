@@ -9,10 +9,10 @@ import {
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/material'
-import { AccountProvider, Messaging } from '@coachcare/npm-api'
+import { AccountProvider, Messaging } from '@coachcare/sdk'
 
 import { MessageRecipient } from '@app/shared'
-import { AccountAccessData, AccSingleResponse } from '@coachcare/npm-api'
+import { AccountAccessData, AccSingleResponse } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 

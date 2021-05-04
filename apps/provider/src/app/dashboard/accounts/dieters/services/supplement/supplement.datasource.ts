@@ -8,7 +8,7 @@ import {
   FetchSupplementsSegment,
   FetchSupplementSummaryRequest,
   FetchSupplementSummaryResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { SupplementDatabase } from './supplement.database'
 
 export type SupplementCriteria = FetchSupplementSummaryRequest & {

@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
-import { OrganizationEntity, OrganizationPermission } from '@coachcare/npm-api'
+import { OrganizationEntity, OrganizationPermission } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
-import { Sequence as CcrSequenceService } from '@coachcare/npm-api'
+import { Sequence as CcrSequenceService } from '@coachcare/sdk'
 import { Sequence } from '../../models'
 
 export interface DuplicateSequenceDialogProps {

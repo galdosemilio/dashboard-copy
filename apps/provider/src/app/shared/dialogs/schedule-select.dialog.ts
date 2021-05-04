@@ -20,7 +20,7 @@ import {
   AccListRequest,
   AccountAccessData,
   Profile
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { paletteSelector } from '@app/store/config'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 

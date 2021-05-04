@@ -12,7 +12,7 @@ import {
 import { FormsDatasource } from '@app/dashboard/library/forms/services'
 import { _, TranslationsObject } from '@app/shared'
 import { MatDialog, Sort } from '@coachcare/material'
-import { Form as CcrFormService } from '@coachcare/npm-api'
+import { Form as CcrFormService } from '@coachcare/sdk'
 
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'

@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { ContextService } from '@app/service'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@coachcare/material'
-import { NamedEntity } from '@coachcare/npm-api'
-import { Account, Organization } from '@coachcare/npm-api/selvera-api/services'
+import { NamedEntity, OrganizationProvider } from '@coachcare/sdk'
 
 interface AddSupervisingProviderDialogProps {
   clinic: NamedEntity
@@ -23,7 +22,7 @@ export class AddSupervisingProviderDialog implements OnInit {
     private context: ContextService,
     @Inject(MAT_DIALOG_DATA) private data: AddSupervisingProviderDialogProps,
     private dialogRef: MatDialogRef<AddSupervisingProviderDialog>,
-    private organization: Organization
+    private organization: OrganizationProvider
   ) {}
 
   public ngOnInit(): void {

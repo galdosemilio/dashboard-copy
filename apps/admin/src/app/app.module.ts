@@ -12,8 +12,8 @@ import { AppComponent } from './app.component'
 import { routes } from './app.routing'
 import { projectConfig } from './config/index'
 import { PlusSignSerializer } from './services'
-import { NpmApiModule } from '@coachcare/npm-api'
-import { API_ENVIRONMENT } from '@coachcare/npm-api/selvera-api/model'
+import { API_ENVIRONMENT } from '@coachcare/common/model'
+import { CoachcareSdkModule } from '../../../../libs/common/src/lib/sdk.module'
 
 // last ones overwrite the first
 export const catalogs: TranslateCatalogs = {
@@ -27,7 +27,7 @@ export const catalogs: TranslateCatalogs = {
     NxModule.forRoot(),
     AppCommonModule.forRoot(environment, projectConfig, catalogs),
     MatMomentDateModule,
-    NpmApiModule,
+    CoachcareSdkModule,
     RouterModule.forRoot(routes, {
       enableTracing: false, // debugging
       initialNavigation: 'enabled',

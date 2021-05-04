@@ -1,7 +1,7 @@
 import {
   FetchAllConsumedMealIngredients,
   FetchAllSingleConsumedMealResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
   mealId: string

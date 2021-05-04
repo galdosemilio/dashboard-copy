@@ -12,7 +12,7 @@ import { MatDialog } from '@coachcare/material'
 import { Store } from '@ngrx/store'
 import { isEmpty, range } from 'lodash'
 import * as moment from 'moment-timezone'
-import { OrganizationEntity, Schedule } from '@coachcare/npm-api'
+import { OrganizationEntity, Schedule } from '@coachcare/sdk'
 
 import { CCRConfig } from '@app/config'
 import { OpenPanel } from '@app/layout/store'
@@ -31,7 +31,7 @@ import {
 import {
   FetchAllMeetingRequest,
   FetchCalendarAvailabilitySegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { ViewMeetingDialog } from '../dialogs/view-meeting'
 import { Meeting } from '../models'

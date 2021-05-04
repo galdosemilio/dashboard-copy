@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { STORAGE_PROVIDER_ROUTE } from '@app/config'
 import { CookieService } from 'ngx-cookie-service'
-import { ApiService } from '@coachcare/npm-api'
+import { ApiService } from '@coachcare/sdk'
 import { environment } from '../../environments/environment'
 
 @Injectable()

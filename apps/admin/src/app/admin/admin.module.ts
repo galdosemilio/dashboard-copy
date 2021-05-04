@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { SharedModule } from '@board/shared/shared.module'
 import { AdminProviders } from './admin.index'
 import { routes } from './admin.routing'
-import { NpmApiModule } from '@coachcare/npm-api'
+import { CoachcareSdkModule } from '../../../../../libs/common/src/lib/sdk.module'
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { NpmApiModule } from '@coachcare/npm-api'
     FlexLayoutModule,
     SharedModule,
     LayoutModule,
-    NpmApiModule,
+    CoachcareSdkModule,
     TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],

@@ -7,9 +7,9 @@ import {
   FormAddendumSingle,
   GetAllFormAddendumRequest,
   GetAllFormAddendumResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { AccountProvider, FormAddendum } from '@coachcare/npm-api'
+import { AccountProvider, FormAddendum } from '@coachcare/sdk'
 
 @Injectable()
 export class FormAddendumDatabase extends CcrDatabase {

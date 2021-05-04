@@ -7,7 +7,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _ } from '@app/shared/utils'
-import { OrganizationProvider } from '@coachcare/npm-api'
+import { OrganizationProvider } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-clinics-create-dialog',

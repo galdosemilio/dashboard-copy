@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { MAT_LABEL_GLOBAL_OPTIONS, MatDialogRef } from '@coachcare/material'
-import { AccountAccessData } from '@coachcare/npm-api'
+import { AccountAccessData } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-library-patient-select-dialog',

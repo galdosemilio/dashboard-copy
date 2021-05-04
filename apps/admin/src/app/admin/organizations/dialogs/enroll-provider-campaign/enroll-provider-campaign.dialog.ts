@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-import { ActiveCampaign } from '@coachcare/npm-api'
+import { ActiveCampaign } from '@coachcare/sdk'
 
 interface EnrollProviderCampaignDialogData {
   organizationId: string

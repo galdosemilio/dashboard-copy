@@ -1,6 +1,6 @@
 import { Icon } from '@app/dashboard/content/models/icon.interface'
 import { _ } from '@app/shared'
-import { ContentType } from '@coachcare/npm-api'
+import { ContentType } from '@coachcare/sdk'
 
 /**
  * This maps known code names to Angular Material icons.

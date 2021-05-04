@@ -1,4 +1,4 @@
-import { InteractionAuditEntry, NamedEntity } from '@coachcare/npm-api'
+import { InteractionAuditEntry, NamedEntity } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { BILLABLE_SERVICES, BillableService } from './billableServices.map'
 import { INTERACTION_SOURCES, INTERACTION_TYPES } from './interactionType.map'

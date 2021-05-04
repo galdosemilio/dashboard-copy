@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Reports } from '@coachcare/npm-api'
+import { Reports } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared/model'
 import {
@@ -14,7 +14,7 @@ import {
   RPMStateSummaryItem,
   SignupsTimelineRequest,
   SignupsTimelineSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class ReportsDatabase extends CcrDatabase {

@@ -11,15 +11,14 @@ import {
   CoachPermissionsDialog,
   RemoveClinicAssociationDialog
 } from '@app/shared/dialogs'
-import { OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
-import { OrganizationAssociation } from '@coachcare/npm-api'
+import { OrganizationAccess, OrganizationAssociation } from '@coachcare/sdk'
 import { filter } from 'rxjs/operators'
 import {
   AssociationAccessLevel,
   COACH_ASSOCIATION_ACCESS_LEVELS,
   convertPermissionsToAccessLevel
-} from '@app/shared/model'
+} from '@app/shared/model/accessLevels'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()

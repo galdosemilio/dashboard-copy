@@ -1,4 +1,4 @@
-import { OrganizationPreferenceSingle } from '@coachcare/npm-api'
+import { OrganizationPreferenceSingle } from '@coachcare/sdk'
 import { AppPalette, Palette } from '@coachcare/common/shared'
 
 // ensure default assets in the store

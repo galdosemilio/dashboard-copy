@@ -1,5 +1,5 @@
 import { SelectedOrganization } from '@app/service'
-import { RPMState as SelveraRPMState } from '@coachcare/npm-api'
+import { RPMState as SelveraRPMState } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 interface RPMEntryStatus {

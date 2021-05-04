@@ -8,7 +8,7 @@ import {
   GetAllExerciseResponse,
   FetchAllConsumedKeyRequest,
   FetchAllConsumedKeyResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { MetricsDatabase } from './metrics.database'
 
 export interface MetricsDataSourceCriteria

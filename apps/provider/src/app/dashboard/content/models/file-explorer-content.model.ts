@@ -5,7 +5,7 @@ import {
 import { FILE_TYPE_MAP } from '@app/dashboard/content/models/file-type.map'
 import { Icon } from '@app/dashboard/content/models/icon.interface'
 import { Package } from '@app/shared/components/package-table'
-import { ContentOrganization } from '@coachcare/npm-api'
+import { ContentOrganization } from '@coachcare/sdk'
 
 export interface FileExplorerContentMetadata {
   id?: string

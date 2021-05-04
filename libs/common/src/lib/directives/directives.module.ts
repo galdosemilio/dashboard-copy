@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { MatButtonModule, MatDialogModule } from '@coachcare/material'
 import { TranslateModule } from '@ngx-translate/core'
-import { AvatarDirective } from './avatar.directive'
+import { CcrAvatarDirective } from './avatar.directive'
 import { BindFormDirective } from './bind-form.directive'
 import { DetectKeyDirective } from './detect-key.directive'
 import { LinkActiveDirective } from './link-active.directive'
@@ -13,7 +13,7 @@ import { DebounceEventsDirective } from './debounce-events.directive'
 @NgModule({
   imports: [CommonModule, MatButtonModule, MatDialogModule, TranslateModule],
   declarations: [
-    AvatarDirective,
+    CcrAvatarDirective,
     BindFormDirective,
     DetectKeyDirective,
     LinkActiveDirective,
@@ -22,7 +22,7 @@ import { DebounceEventsDirective } from './debounce-events.directive'
     DebounceEventsDirective
   ],
   exports: [
-    AvatarDirective,
+    CcrAvatarDirective,
     BindFormDirective,
     DetectKeyDirective,
     LinkActiveDirective,

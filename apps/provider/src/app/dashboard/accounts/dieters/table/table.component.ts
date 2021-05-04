@@ -12,7 +12,7 @@ import {
 import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Affiliation, OrganizationProvider } from '@coachcare/npm-api'
+import { Affiliation, OrganizationProvider } from '@coachcare/sdk'
 
 import {
   AccountEditDialog,
@@ -25,7 +25,7 @@ import {
   PromptDialog,
   PromptDialogData
 } from '@app/shared'
-import { AccountAccessData, AccountTypeId } from '@coachcare/npm-api'
+import { AccountAccessData, AccountTypeId } from '@coachcare/sdk'
 import { DietersDataSource } from '../services'
 
 @UntilDestroy()

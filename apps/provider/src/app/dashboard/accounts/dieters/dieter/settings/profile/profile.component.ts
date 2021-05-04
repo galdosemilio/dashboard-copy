@@ -6,7 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { Access, AccountProvider, Goal } from '@coachcare/npm-api'
+import { Access, AccountProvider, Goal } from '@coachcare/sdk'
 
 import { MatDialog } from '@coachcare/material'
 import { DieterFormComponent } from '@app/dashboard/accounts/dieters/form'

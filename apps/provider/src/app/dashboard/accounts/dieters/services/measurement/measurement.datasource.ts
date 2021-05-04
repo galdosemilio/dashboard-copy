@@ -10,7 +10,7 @@ import {
   unitConversion,
   unitLabel
 } from '@app/shared'
-import { Entity, FetchBodyMeasurementDataResponse } from '@coachcare/npm-api'
+import { Entity, FetchBodyMeasurementDataResponse } from '@coachcare/sdk'
 import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'

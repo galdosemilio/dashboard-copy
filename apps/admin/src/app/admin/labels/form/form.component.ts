@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LabelDialogs, LabelRoutes } from '@board/services'
 import { LabelsDatabase } from '@coachcare/backend/data'
-import { UpdatePackageRequest } from '@coachcare/npm-api'
+import { UpdatePackageRequest } from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 

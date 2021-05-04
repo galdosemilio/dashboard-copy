@@ -10,7 +10,7 @@ import {
   TranslationsObject,
   ViewUtils
 } from '@app/shared'
-import { PatientCountRequest, PatientCountSegment } from '@coachcare/npm-api'
+import { PatientCountRequest, PatientCountSegment } from '@coachcare/sdk'
 import { ReportsDatabase } from './reports.database'
 
 export class EnrollmentReportsDataSource extends ChartDataSource<

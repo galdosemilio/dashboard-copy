@@ -20,7 +20,7 @@ import {
   GetAllFormResponse,
   GetSingleFormRequest,
   UpdateFormRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'

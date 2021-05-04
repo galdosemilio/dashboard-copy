@@ -11,7 +11,7 @@ import {
   AccountRef,
   AccSingleResponse,
   RPM
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 export interface RemoveClinicAssociationDialogProps {
   organizationId: string

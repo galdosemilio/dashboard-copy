@@ -6,15 +6,13 @@ import {
   PhaseEnrollmentDatabase,
   PhaseEnrollmentDataSource
 } from './phase-enrollment'
-import { ScheduleDataService } from './schedule-data.service'
 
 export {
   ConsultationsDataService,
   MeasurementsDataService,
   NotificationsDataService,
   PhaseEnrollmentDatabase,
-  PhaseEnrollmentDataSource,
-  ScheduleDataService
+  PhaseEnrollmentDataSource
 }
 
 export const RightPanelServices = [
@@ -22,6 +20,5 @@ export const RightPanelServices = [
   ConsultationsDataService,
   MeasurementsDataService,
   NotificationsDataService,
-  PhaseEnrollmentDatabase,
-  ScheduleDataService
+  PhaseEnrollmentDatabase
 ]

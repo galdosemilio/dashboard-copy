@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@coachcare/material'
-import { AccountRef, Messaging } from '@coachcare/npm-api'
+import { AccountRef, Messaging } from '@coachcare/sdk'
 
 export interface MessagePatientDialogProps {
   content?: string

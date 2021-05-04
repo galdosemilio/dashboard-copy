@@ -1,15 +1,16 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog, MatSort } from '@coachcare/material'
-import { ScheduleDataService } from '@app/layout/right-panel/services'
-import { ContextService, EventsService, NotifierService } from '@app/service'
-import { PromptDialog } from '@app/shared'
 import {
-  AttendanceStatusEntry,
-  UpdateAttendanceRequest
-} from '@coachcare/npm-api'
+  ContextService,
+  EventsService,
+  NotifierService,
+  ScheduleDataService
+} from '@app/service'
+import { PromptDialog } from '@app/shared'
+import { AttendanceStatusEntry, UpdateAttendanceRequest } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Schedule } from '@coachcare/npm-api'
+import { Schedule } from '@coachcare/sdk'
 import { DeleteRecurringMeetingDialog, ViewMeetingDialog } from '../../dialogs'
 import { Meeting } from '../../models'
 import { MeetingsDataSource } from '../../services'

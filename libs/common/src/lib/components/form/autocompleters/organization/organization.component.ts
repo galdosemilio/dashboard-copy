@@ -27,7 +27,7 @@ import {
   NamedEntity,
   OrgAccessRequest,
   OrganizationProvider
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { AutocompleterOption } from '@coachcare/common/shared'
 import { find, result } from 'lodash'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'

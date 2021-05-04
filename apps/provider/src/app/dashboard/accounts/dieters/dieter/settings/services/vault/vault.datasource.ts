@@ -19,7 +19,7 @@ import {
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
   UpdateContentRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { VaultDatabase } from './vault.database'
 
 interface ExecRequestOpts {

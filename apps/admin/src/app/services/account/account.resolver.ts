@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
 
-import { AccountProvider, AccountSingle } from '@coachcare/npm-api'
+import { AccountProvider, AccountSingle } from '@coachcare/sdk'
 
 @Injectable()
 export class AccountResolver implements Resolve<AccountSingle | null> {

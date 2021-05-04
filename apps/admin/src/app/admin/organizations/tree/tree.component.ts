@@ -18,7 +18,7 @@ import {
   ClinicNode,
   OrganizationsTreeDatabase
 } from '@coachcare/backend/data'
-import { OrganizationSingle } from '@coachcare/npm-api'
+import { OrganizationSingle } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'

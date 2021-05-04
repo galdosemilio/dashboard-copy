@@ -10,9 +10,9 @@ import {
   AccountAccessData,
   OrganizationAccess,
   RPMReason
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
-import { RPM } from '@coachcare/npm-api'
+import { RPM } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { Subject } from 'rxjs'
 import {

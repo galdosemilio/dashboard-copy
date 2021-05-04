@@ -2,7 +2,7 @@ import {
   ContentOrganization,
   FetchPackagesSegment,
   PackageOrganizationSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 interface PackageOptions {
   organizationId: string

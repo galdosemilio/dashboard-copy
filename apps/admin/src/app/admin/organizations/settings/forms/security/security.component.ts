@@ -12,7 +12,7 @@ import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
-import { MFA } from '@coachcare/npm-api'
+import { MFA } from '@coachcare/sdk'
 import { MFAInputComponent } from '../../mfa-input'
 
 @UntilDestroy()

@@ -1,4 +1,4 @@
-import { FormSectionSingle, OrgRef } from '@coachcare/npm-api'
+import { FormSectionSingle, OrgRef } from '@coachcare/sdk'
 import { FormSection } from './section.model'
 
 export class Form {

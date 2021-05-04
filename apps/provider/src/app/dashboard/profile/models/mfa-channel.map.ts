@@ -1,5 +1,5 @@
 import { _ } from '@app/shared'
-import { NamedEntity } from '@coachcare/npm-api'
+import { NamedEntity } from '@coachcare/sdk'
 
 export class MFAChannel implements NamedEntity {
   code: 'auth' | 'sms' | 'unknown' | 'disabled'

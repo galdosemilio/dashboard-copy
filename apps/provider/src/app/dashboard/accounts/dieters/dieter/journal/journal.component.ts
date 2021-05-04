@@ -14,7 +14,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { DateNavigator, DateNavigatorOutput } from '@app/shared'
-import { Authentication, FetchGoalResponse } from '@coachcare/npm-api'
+import { Authentication, FetchGoalResponse } from '@coachcare/sdk'
 import { unitOfTime } from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 

@@ -6,14 +6,14 @@ import { TableDataSource } from '@app/shared'
 import {
   AutoThreadParticipant,
   GetOrgAutoThreadListingRequest,
-  GetOrgAutoThreadParticipantListingResponse,
-} from '@coachcare/npm-api'
+  GetOrgAutoThreadParticipantListingResponse
+} from '@coachcare/sdk'
 import { ParticipantsCriteria } from './participants.criteria'
 import { ParticipantDatabase } from './participants.database'
 import * as moment from 'moment'
 
 export class ParticipantsDataSource extends TableDataSource<
-AutoThreadParticipant,
+  AutoThreadParticipant,
   GetOrgAutoThreadParticipantListingResponse,
   ParticipantsCriteria
 > {
@@ -37,20 +37,24 @@ AutoThreadParticipant,
     return { data: [], pagination: {} }
   }
 
-  fetch(criteria: GetOrgAutoThreadListingRequest): Observable<GetOrgAutoThreadParticipantListingResponse> {
+  fetch(
+    criteria: GetOrgAutoThreadListingRequest
+  ): Observable<GetOrgAutoThreadParticipantListingResponse> {
     return this.database.fetch(criteria)
   }
 
-  mapResult(result: GetOrgAutoThreadParticipantListingResponse): Array<AutoThreadParticipant> {
+  mapResult(
+    result: GetOrgAutoThreadParticipantListingResponse
+  ): Array<AutoThreadParticipant> {
     // pagination handling
     this.total = result.pagination.next
       ? result.pagination.next + 1
       : this.criteria.offset + result.data.length
 
-      for (const t of result.data) {
-        t.createdAt = moment(t.createdAt).format('dddd, MMM D, YYYY')
-      }
+    for (const t of result.data) {
+      t.createdAt = moment(t.createdAt).format('dddd, MMM D, YYYY')
+    }
 
-      return result.data
+    return result.data
   }
 }

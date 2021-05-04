@@ -4,7 +4,7 @@ import { from, Observable, of } from 'rxjs'
 
 import { NotifierService } from '@app/service'
 import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
-import { ActivityLevelRequest, ActivityLevelSegment } from '@coachcare/npm-api'
+import { ActivityLevelRequest, ActivityLevelSegment } from '@coachcare/sdk'
 import { StatisticsDatabase } from './statistics.database'
 
 @UntilDestroy()

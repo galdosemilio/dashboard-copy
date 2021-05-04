@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ContextService, SelectedOrganization } from '@app/service'
 import { generateCSV } from '@app/shared'
-import { Messaging } from '@coachcare/npm-api'
+import { Messaging } from '@coachcare/sdk'
 import * as moment from 'moment'
 
 @Component({

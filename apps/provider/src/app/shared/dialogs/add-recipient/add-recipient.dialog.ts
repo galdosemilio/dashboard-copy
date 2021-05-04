@@ -19,7 +19,7 @@ import {
   OrganizationEntity,
   OrganizationProvider,
   Sequence as SelveraSequenceService
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'

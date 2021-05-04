@@ -1,4 +1,4 @@
-import { AccountMeasurementPreferenceType } from '@coachcare/npm-api'
+import { AccountMeasurementPreferenceType } from '@coachcare/sdk'
 
 import { INCH, Metric, POUND } from './conversion.types'
 

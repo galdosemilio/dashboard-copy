@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Reports } from '@coachcare/npm-api'
+import { Reports } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
 import {
@@ -17,7 +17,7 @@ import {
   SleepReportResponse,
   WeightChangeRequest,
   WeightChangeResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class StatisticsDatabase extends CcrDatabase {

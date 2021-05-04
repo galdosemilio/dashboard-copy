@@ -12,10 +12,7 @@ import {
   TranslationsObject,
   ViewUtils
 } from '@app/shared'
-import {
-  SignupsTimelineRequest,
-  SignupsTimelineSegment
-} from '@coachcare/npm-api'
+import { SignupsTimelineRequest, SignupsTimelineSegment } from '@coachcare/sdk'
 import { ReportsDatabase } from './reports.database'
 
 @UntilDestroy()

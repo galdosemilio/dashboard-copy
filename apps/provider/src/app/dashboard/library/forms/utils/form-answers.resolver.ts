@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services'
 import { NotifierService } from '@app/service'
 import { _ } from '@app/shared'
-import { FormSubmissionSingle } from '@coachcare/npm-api'
+import { FormSubmissionSingle } from '@coachcare/sdk'
 
 @Injectable()
 export class FormAnswersResolver implements Resolve<FormSubmissionSingle> {

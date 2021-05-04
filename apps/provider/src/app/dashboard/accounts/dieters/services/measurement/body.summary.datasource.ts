@@ -6,7 +6,7 @@ import {
   BodySummaryDataResponseSegment,
   FetchBodySummaryRequest,
   FetchBodySummaryResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { MeasurementDatabase } from './measurement.database'
 
 export class BodySummaryDataSource extends CcrDataSource<

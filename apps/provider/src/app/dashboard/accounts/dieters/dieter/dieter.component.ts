@@ -5,15 +5,15 @@ import { resolveConfig } from '@app/config/section'
 import { ContextService, NotifierService } from '@app/service'
 import { RPMPatientReportDialog } from '@app/shared'
 import {
+  AccountProvider,
   AccSingleResponse,
   DieterDashboardSummary,
   OrganizationProvider,
   RPM
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { get, intersectionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { DoctorPDFDialog, ProgressReportPDFDialog } from '../../dialogs'
-import { Account } from '@coachcare/npm-api/selvera-api/services'
 import * as moment from 'moment'
 
 @UntilDestroy()
@@ -33,7 +33,7 @@ export class DieterComponent implements OnDestroy, OnInit {
     'https://coachcare.zendesk.com/hc/en-us/articles/360019778772-Video-Conferencing-with-a-Patient'
 
   constructor(
-    private account: Account,
+    private account: AccountProvider,
     private context: ContextService,
     private data: DieterDashboardSummary,
     private dialog: MatDialog,

@@ -10,7 +10,7 @@ import {
   OrganizationProvider,
   Package,
   UpdatePackageRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 
 @Injectable()

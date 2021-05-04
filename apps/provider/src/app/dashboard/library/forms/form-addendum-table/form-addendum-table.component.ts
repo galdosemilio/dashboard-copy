@@ -7,8 +7,9 @@ import {
   FormAddendumDatasource
 } from '@app/dashboard/library/forms/services'
 import { NotifierService } from '@app/service'
-import { _, CcrPaginator, TextInputDialog } from '@app/shared'
-import { FormAddendumSingle } from '@coachcare/npm-api'
+import { _, TextInputDialog } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { FormAddendumSingle } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-library-form-addendum-table',
@@ -18,8 +19,8 @@ export class FormAddendumTableComponent implements OnInit {
   @Input()
   submission: FormSubmission
 
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public columns: string[] = ['createdAt', 'content', 'actions']
   public source: FormAddendumDatasource

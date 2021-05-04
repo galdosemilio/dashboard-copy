@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { Supplement } from '@coachcare/npm-api'
+import { Supplement } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
 import {
   FetchSupplementsResponse,
   FetchSupplementSummaryRequest,
   FetchSupplementSummaryResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class SupplementDatabase extends CcrDatabase {

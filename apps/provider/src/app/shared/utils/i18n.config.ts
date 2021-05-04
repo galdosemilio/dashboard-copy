@@ -1,5 +1,5 @@
-import { AppLocaleCode, appLocales as npmLocales } from '@coachcare/npm-api'
-export { AppLocaleCode } from '@coachcare/npm-api'
+import { AppLocaleCode, appLocales as npmLocales } from '@coachcare/sdk'
+export { AppLocaleCode } from '@coachcare/sdk'
 
 /**
  * Flag information

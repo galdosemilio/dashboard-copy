@@ -5,7 +5,7 @@ import { ContextService } from '@app/service'
 import { AddRecipientDialog } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { Sequence as SelveraSequenceService } from '@coachcare/npm-api'
+import { Sequence as SelveraSequenceService } from '@coachcare/sdk'
 import {
   SequenceEnrollmentDatabase,
   SequenceEnrollmentDataSource

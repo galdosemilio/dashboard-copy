@@ -7,7 +7,7 @@ import {
   NamedEntity,
   PagedResponse,
   TriggerHistoryItem
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { TriggerHistoryDatabase } from './trigger-history.database'
 

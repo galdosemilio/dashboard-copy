@@ -8,7 +8,7 @@ import {
   AccountAccessData,
   OrganizationEntity,
   OrganizationProvider
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { FormControl } from '@angular/forms'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { MatAutocompleteTrigger } from '@coachcare/material'
@@ -83,10 +83,10 @@ export class CoachSelectDialog implements OnInit {
         const accountOrgs = accounts.data[0].organizations.map((e) => e.id)
         this.showWarning = !(
           this.selectedOrganization !== undefined &&
-          accountOrgs.some(x =>
+          accountOrgs.some((x) =>
             this.selectedOrganization.hierarchyPath.includes(x)
-            )
           )
+        )
       })
   }
 

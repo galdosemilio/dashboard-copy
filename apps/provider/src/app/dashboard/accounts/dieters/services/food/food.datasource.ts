@@ -4,7 +4,7 @@ import {
   FetchAllConsumedRequest,
   FoodConsumedSingle,
   GetAllFoodConsumedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import * as moment from 'moment-timezone'
 import { Observable } from 'rxjs'
 import { ConsumedFood } from '../../models/consumedFood/consumedFood'

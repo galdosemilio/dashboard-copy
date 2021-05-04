@@ -4,12 +4,9 @@ import { findIndex } from 'lodash'
 import { Subject } from 'rxjs'
 
 import { ContextService, EventsService, NotifierService } from '@app/service'
-import { _, CcrPaginator } from '@app/shared'
-import {
-  AlertsDatabase,
-  AlertsDataSource,
-  AlertTypesDataSource
-} from './services'
+import { _ } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { AlertsDatabase, AlertsDataSource } from './services'
 
 @Component({
   selector: 'app-reports-alerts',
@@ -18,8 +15,8 @@ import {
   providers: [AlertsDataSource]
 })
 export class AlertsComponent implements OnInit, OnDestroy {
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   source: AlertsDataSource
 
   alert: string

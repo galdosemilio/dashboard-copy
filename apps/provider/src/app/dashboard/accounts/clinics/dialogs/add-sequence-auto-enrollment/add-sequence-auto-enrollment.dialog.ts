@@ -4,7 +4,7 @@ import { MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
 import { SelectOptions } from '@app/shared'
 import { _ } from '@app/shared/utils'
-import { Sequence as SequenceProvider } from '@coachcare/npm-api'
+import { Sequence as SequenceProvider } from '@coachcare/sdk'
 import { Sequence, SequenceState } from '@app/dashboard/sequencing/models'
 
 @Component({

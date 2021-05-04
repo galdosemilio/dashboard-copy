@@ -6,7 +6,7 @@ import {
   OrganizationPreferenceSingle,
   OrganizationSingle,
   RPMPreferenceSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 export interface OrganizationFeaturePrefs {
   associationPrefs: {

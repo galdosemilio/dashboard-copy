@@ -1,16 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": [
-      "node",
-      "jest"
-    ],
+    "types": ["node", "jest"],
     "module": "CommonJS"
   },
   "files": [],
-  "include": [
-    "../../libs/npm-api/src/lib/config/env"
-  ],
   "references": [
     {
       "path": "./tsconfig.app.json"

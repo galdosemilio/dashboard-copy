@@ -4,8 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { MatTableModule } from '@angular/material/table'
 import { RouterModule } from '@angular/router'
 import { TranslateModule } from '@ngx-translate/core'
-
-import { UserLogsModule } from '@board/admin/userlogs/index'
 import { SharedModule } from '@board/shared/shared.module'
 import {
   CcrFormFieldsModule,
@@ -27,7 +25,6 @@ import { routes } from './accounts.routing'
     MatTableModule,
     RouterModule.forChild(routes),
     TranslateModule.forChild(),
-    // UserLogsModule,
     SharedModule,
     CcrFormFieldsModule,
     CcrUtilityComponentsModule,

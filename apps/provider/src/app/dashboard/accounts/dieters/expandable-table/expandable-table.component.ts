@@ -27,7 +27,7 @@ import {
   Affiliation,
   OrganizationProvider,
   AccountTypeId
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
 import {
   DieterListingItem,

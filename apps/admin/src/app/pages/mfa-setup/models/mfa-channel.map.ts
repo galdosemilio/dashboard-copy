@@ -1,4 +1,4 @@
-import { NamedEntity } from '@coachcare/npm-api'
+import { NamedEntity } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 
 export const MFAChannels: { [key: string]: MFAChannel } = {

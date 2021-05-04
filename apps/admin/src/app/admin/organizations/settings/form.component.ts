@@ -17,7 +17,7 @@ import {
   OrganizationPreference,
   OrganizationPreferenceSingle,
   OrganizationSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { NotifierService } from '@coachcare/common/services'

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
-import { AccountProvider } from '@coachcare/npm-api'
+import { AccountProvider } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
-import { AccListResponse } from '@coachcare/npm-api'
+import { AccListResponse } from '@coachcare/sdk'
 import { DietersCriteria } from './dieters.criteria'
 
 @Injectable()

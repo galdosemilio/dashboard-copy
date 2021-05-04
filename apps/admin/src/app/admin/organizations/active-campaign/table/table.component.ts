@@ -7,11 +7,11 @@ import {
 } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
 import { _, SelectorOption } from '@coachcare/backend/shared'
-import { PaginatorComponent } from '@coachcare/common/components'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { PromptDialog } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
 import { debounceTime } from 'rxjs/operators'
-import { ActiveCampaign } from '@coachcare/npm-api'
+import { ActiveCampaign } from '@coachcare/sdk'
 import { EditActiveCampaignDialogComponent } from '../../dialogs'
 
 @Component({
@@ -23,8 +23,8 @@ export class OrganizationActiveCampaignTableComponent
   implements OnDestroy, OnInit {
   @Input() source: ActiveCampaignDataSource
 
-  @ViewChild(PaginatorComponent, { static: true })
-  paginator: PaginatorComponent
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public columns: string[] = [
     'id',

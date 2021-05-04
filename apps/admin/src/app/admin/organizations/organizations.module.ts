@@ -4,9 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { MatTableModule } from '@angular/material/table'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from '@board/shared/shared.module'
+import { CoachcareSdkModule } from '@coachcare/common'
 import { CcrUtilityComponentsModule } from '@coachcare/common/components'
 import { CcrDirectivesModule } from '@coachcare/common/directives'
-import { NpmApiModule } from '@coachcare/npm-api'
 import { TranslateModule } from '@ngx-translate/core'
 import { NgJsonEditorModule } from 'ang-jsoneditor'
 import {
@@ -23,7 +23,7 @@ import { routes } from './organizations.routing'
     CommonModule,
     ReactiveFormsModule,
     NgJsonEditorModule,
-    NpmApiModule,
+    CoachcareSdkModule,
     MatTableModule,
     RouterModule.forChild(routes),
     TranslateModule.forChild(),

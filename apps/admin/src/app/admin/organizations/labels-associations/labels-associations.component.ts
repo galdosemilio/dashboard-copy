@@ -19,9 +19,9 @@ import {
   PackageAssociationElement
 } from '@coachcare/backend/data'
 import { getterPaginator } from '@coachcare/backend/model'
-import { Package, PackageOrganization, PackageSingle } from '@coachcare/npm-api'
+import { Package, PackageOrganization, PackageSingle } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
-import { PaginatorComponent } from '@coachcare/common/components'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -35,8 +35,8 @@ import { CreateLabelDialogComponent } from '../dialogs'
   styleUrls: ['./labels-associations.component.scss']
 })
 export class LabelsAssociationsComponent implements OnDestroy, OnInit {
-  @ViewChild(PaginatorComponent, { static: true })
-  paginator: PaginatorComponent
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
 
   public columns: string[] = [
     'id',

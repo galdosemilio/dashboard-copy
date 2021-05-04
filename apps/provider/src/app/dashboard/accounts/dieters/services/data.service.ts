@@ -3,7 +3,7 @@ import {
   MeasurementActivity,
   MeasurementBody,
   MeasurementSleep
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 import {
   FetchActivitySummaryRequest,
@@ -15,7 +15,7 @@ import {
   FetchBodySummaryResponse,
   FetchSleepMeasurementSummaryRequest,
   FetchSleepMeasurementSummaryResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class DieterDataService {

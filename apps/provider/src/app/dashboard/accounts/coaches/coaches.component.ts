@@ -7,6 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
@@ -18,7 +19,7 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, CcrPaginator } from '@app/shared'
+import { _ } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { Subject } from 'rxjs'
 import { delay } from 'rxjs/operators'
@@ -38,8 +39,8 @@ export class CoachesComponent implements AfterViewInit, OnInit, OnDestroy {
 
   clinic: SelectedOrganization
 
-  @ViewChild(CcrPaginator, { static: true })
-  paginator: CcrPaginator
+  @ViewChild(CcrPaginatorComponent, { static: true })
+  paginator: CcrPaginatorComponent
   refresh$: Subject<void> = new Subject<void>()
   sort: MatSort = new MatSort()
 

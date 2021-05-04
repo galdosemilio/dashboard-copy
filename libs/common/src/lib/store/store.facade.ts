@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 
-import { OrganizationPreferenceSingle, OrgAssets } from '@coachcare/npm-api'
+import { OrganizationPreferenceSingle, OrgAssets } from '@coachcare/sdk'
 import {
   OrgPrefActions,
   OrgPrefSelectors,

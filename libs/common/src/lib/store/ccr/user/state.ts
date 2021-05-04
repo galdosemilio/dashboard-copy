@@ -1,4 +1,4 @@
-import { AccountSingle } from '@coachcare/npm-api'
+import { AccountSingle } from '@coachcare/sdk'
 
 export type State = AccountSingle
 

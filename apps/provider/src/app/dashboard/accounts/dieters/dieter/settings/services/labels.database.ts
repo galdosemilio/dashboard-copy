@@ -10,7 +10,7 @@ import {
   GetAllPackageOrganizationRequest,
   PackageEnrollment,
   PackageOrganization
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { merge } from 'lodash'
 import * as moment from 'moment'
 import { from, Observable } from 'rxjs'

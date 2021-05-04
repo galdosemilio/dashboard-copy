@@ -11,7 +11,7 @@ import {
   LabelsOrganizationDatabase,
   LabelsOrganizationDataSource
 } from '@coachcare/backend/data'
-import { PackageAssociation, PackageData } from '@coachcare/npm-api'
+import { PackageAssociation, PackageData } from '@coachcare/sdk'
 import { BindForm, BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 

@@ -9,7 +9,7 @@ import {
   MFA,
   Session,
   VerifyUserMFARequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { _, CcrRolesMap } from '@coachcare/backend/shared'
 import {
   AuthService,

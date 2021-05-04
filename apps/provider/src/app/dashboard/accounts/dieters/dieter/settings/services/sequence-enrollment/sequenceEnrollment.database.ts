@@ -5,7 +5,7 @@ import {
   GetTimeframedSeqEnrollmentsRequest,
   PagedResponse,
   Sequence
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class SequenceEnrollmentDatabase extends CcrDatabase {

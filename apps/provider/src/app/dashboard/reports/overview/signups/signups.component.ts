@@ -14,7 +14,7 @@ import {
 import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
 import { ConfigService, ContextService, NotifierService } from '@app/service'
 import { generateCSV, ViewUtils } from '@app/shared'
-import { TimelineUnit } from '@coachcare/npm-api'
+import { TimelineUnit } from '@coachcare/sdk'
 import { delay } from 'rxjs/operators'
 
 @UntilDestroy()

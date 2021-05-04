@@ -13,8 +13,8 @@ import {
   CreateUserMFARequest,
   CreateUserMFAResponse,
   VerifyUserMFARequest
-} from '@coachcare/npm-api'
-import { MFA } from '@coachcare/npm-api'
+} from '@coachcare/sdk'
+import { MFA } from '@coachcare/sdk'
 import { MFAChannel } from '../../models'
 
 export interface VerifyMFADialogProps {

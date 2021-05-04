@@ -7,7 +7,7 @@ import {
   OrgAccesibleSort,
   OrgAccessResponse,
   OrganizationAccess
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { ClinicCriteria } from './clinics.criteria'
 import { ClinicsDatabase } from './clinics.database'
 

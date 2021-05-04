@@ -12,8 +12,13 @@ import * as moment from 'moment-timezone'
 import { Subscription } from 'rxjs'
 
 import { Meeting } from '@app/dashboard/schedule/models'
-import { ScheduleDataService } from '@app/layout/right-panel/services'
-import { ContextService, EventsService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  EventsService,
+  MeetingTypeWithColor,
+  NotifierService,
+  ScheduleDataService
+} from '@app/service'
 import {
   _,
   FormUtils,
@@ -26,10 +31,9 @@ import {
   AccSingleResponse,
   AddAttendeeRequest,
   AddMeetingRequest,
-  FetchMeetingTypesResponse,
   MeetingAttendee,
   OrganizationDetailed
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { ConsultationFormArgs } from '../consultationFormArgs.interface'
 import { AssociationsDatabase } from '@app/dashboard'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -70,14 +74,14 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     { value: 'never', viewValue: _('RIGHT_PANEL.NEVER') },
     { value: 'after', viewValue: _('RIGHT_PANEL.AFTER') }
   ]
-  meetingTypes: FetchMeetingTypesResponse[]
+  meetingTypes: MeetingTypeWithColor[]
   searchCtrl: FormControl
   user: AccSingleResponse
   accounts: Array<AccountAccessData>
   attendees: Array<AddConsultationAttendee> = []
   addedAttendees: Array<AddConsultationAttendee> = []
   removedAttendees: Array<string> = []
-  selectedMeetingType: FetchMeetingTypesResponse
+  selectedMeetingType: MeetingTypeWithColor
 
   constructor(
     private builder: FormBuilder,
@@ -176,7 +180,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
 
     this.meetingTypeChangeSubscription = this.form
       .get('meetingTypeId')
-      .valueChanges.subscribe((type: FetchMeetingTypesResponse) =>
+      .valueChanges.subscribe((type: MeetingTypeWithColor) =>
         this.meetingTypeChanged(type)
       )
   }

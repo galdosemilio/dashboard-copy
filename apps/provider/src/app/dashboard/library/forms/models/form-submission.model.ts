@@ -5,7 +5,7 @@ import {
   FormAnswer,
   FormRefNamed,
   FormSubmissionSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 export class FormSubmission implements Partial<FormSubmissionSegment> {
   public answers: FormAnswer[]

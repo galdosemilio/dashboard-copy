@@ -10,7 +10,7 @@ import {
   FetchAlertPreferenceRequest,
   FetchAlertTypesRequest,
   NotificationRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class AlertsDatabase extends CcrDatabase {

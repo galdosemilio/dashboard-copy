@@ -22,7 +22,7 @@ import { ContextService } from '@coachcare/common/services'
 import { MAIN_REG_COUNTRIES, REG_COUNTRIES } from '@coachcare/common/shared'
 import { TranslateService } from '@ngx-translate/core'
 import { differenceWith, intersectionWith, map, sortBy } from 'lodash'
-import { CountryProvider } from '@coachcare/npm-api'
+import { CountryProvider } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-form-field-country',

@@ -1,9 +1,10 @@
-import { CcrPaginator, TableDataSource } from '@app/shared'
+import { TableDataSource } from '@app/shared'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   GetAllInteractionsRequest,
   InteractionSingle,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { CallHistoryItem } from '../../models'
 import { CallHistoryDatabase } from './call-history.database'
@@ -17,7 +18,7 @@ export class CallHistoryDataSource extends TableDataSource<
 
   constructor(
     protected database: CallHistoryDatabase,
-    private paginator?: CcrPaginator
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
     if (this.paginator) {

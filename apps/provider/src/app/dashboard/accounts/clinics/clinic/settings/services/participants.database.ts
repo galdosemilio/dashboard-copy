@@ -5,7 +5,7 @@ import {
   GetOrgAutoThreadListingRequest,
   GetOrgAutoThreadParticipantListingResponse,
   MessagingPreference
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 @Injectable()
 export class ParticipantDatabase extends CcrDatabase {
@@ -13,9 +13,9 @@ export class ParticipantDatabase extends CcrDatabase {
     super()
   }
 
-  fetch(args: GetOrgAutoThreadListingRequest): Observable<GetOrgAutoThreadParticipantListingResponse> {
-    return from(
-      this.messagingPreference.getOrgThreadAutoParticipants(args)
-    )
+  fetch(
+    args: GetOrgAutoThreadListingRequest
+  ): Observable<GetOrgAutoThreadParticipantListingResponse> {
+    return from(this.messagingPreference.getOrgThreadAutoParticipants(args))
   }
 }

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
-import { Authentication, SyncedDeviceDate } from '@coachcare/npm-api'
+import { Authentication, SyncedDeviceDate } from '@coachcare/sdk'
 import * as moment from 'moment'
 
 @Component({

@@ -4,7 +4,7 @@ import {
   GetAllSeqEnrollmentsResponse,
   GetTimeframedSeqEnrollmentsRequest,
   PagedResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { EnrolleesDatabase } from './enrollees.database'
 

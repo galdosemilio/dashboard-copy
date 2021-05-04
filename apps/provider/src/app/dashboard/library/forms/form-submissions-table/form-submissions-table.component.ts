@@ -26,7 +26,7 @@ import {
   Form as CcrFormService,
   FormAnswer,
   FormSubmissionSingle
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'

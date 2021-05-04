@@ -5,7 +5,7 @@ import { _, TableDataSource } from '@app/shared'
 import {
   FetchPackagesSegment,
   GetAllPackageOrganizationRequest
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { find } from 'lodash'
 import { Observable } from 'rxjs'
 import { LabelsDatabase, PackagesAndEnrollments } from './labels.database'

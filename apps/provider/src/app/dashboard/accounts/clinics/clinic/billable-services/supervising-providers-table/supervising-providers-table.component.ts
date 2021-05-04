@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ContextService, NotifierService } from '@app/service'
 import { PromptDialog, SupervisingProvidersDataSource } from '@app/shared'
 import { _ } from '@app/shared/utils'
-import { RPM, SupervisingProviderAssociationItem } from '@coachcare/npm-api'
+import { RPM, SupervisingProviderAssociationItem } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()

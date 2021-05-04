@@ -3,7 +3,7 @@ import {
   RPMStateEntry,
   RPMStateEntryPendingStatus
 } from '@app/shared/components/rpm/models'
-import { AccountRef, OrganizationAccess } from '@coachcare/npm-api'
+import { AccountRef, OrganizationAccess } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-dialog-rpm-entry-card',

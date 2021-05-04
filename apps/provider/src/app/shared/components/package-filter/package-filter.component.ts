@@ -10,9 +10,9 @@ import {
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatMenu } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
-import { PackageData } from '@coachcare/npm-api'
+import { PackageData } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { PackageOrganization } from '@coachcare/npm-api'
+import { PackageOrganization } from '@coachcare/sdk'
 
 interface PackageFilter {
   pkg: string[]
@@ -27,9 +27,8 @@ interface PackageFilter {
   encapsulation: ViewEncapsulation.None
 })
 export class PackageFilterComponent implements OnDestroy, OnInit {
-  @Output() change: EventEmitter<PackageFilter> = new EventEmitter<
-    PackageFilter
-  >()
+  @Output()
+  change: EventEmitter<PackageFilter> = new EventEmitter<PackageFilter>()
   @ViewChild('menu', { static: true }) menu: MatMenu
 
   form: FormGroup

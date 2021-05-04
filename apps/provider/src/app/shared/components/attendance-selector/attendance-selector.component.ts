@@ -12,9 +12,9 @@ import { NotifierService } from '@app/service'
 import {
   AttendanceStatusAssociation,
   AttendanceStatusEntry
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Schedule } from '@coachcare/npm-api'
+import { Schedule } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -26,9 +26,8 @@ export class CcrAttendanceSelectorComponent implements OnDestroy, OnInit {
   @Input() attendanceStatus: AttendanceStatusEntry
   @Input() meeting: Meeting
 
-  @Output() change: EventEmitter<AttendanceStatusEntry> = new EventEmitter<
-    AttendanceStatusEntry
-  >()
+  @Output()
+  change: EventEmitter<AttendanceStatusEntry> = new EventEmitter<AttendanceStatusEntry>()
 
   attendanceStatusOptions: AttendanceStatusEntry[] = []
   form: FormGroup

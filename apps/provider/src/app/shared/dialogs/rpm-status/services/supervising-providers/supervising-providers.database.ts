@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { CcrDatabase } from '@app/shared'
-import { PagedResponse, RPM } from '@coachcare/npm-api'
+import { PagedResponse, RPM } from '@coachcare/sdk'
 
 @Injectable()
 export class SupervisingProvidersDatabase implements CcrDatabase {

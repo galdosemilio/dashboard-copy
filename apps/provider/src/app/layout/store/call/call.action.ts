@@ -10,7 +10,7 @@ import {
   FetchCallsRequest,
   UpdateCallRequest,
   VideoTokenResponse
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Action } from '@ngrx/store'
 
 /**

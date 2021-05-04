@@ -4,7 +4,7 @@ import {
   AccountTypeIds,
   AccountProvider,
   OrganizationProvider
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { OrganizationAutocompleterComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'

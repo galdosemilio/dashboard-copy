@@ -10,8 +10,8 @@ import {
   AlertOrgPreference,
   CreateOrgAlertPreferenceRequest,
   UpdateOrgAlertPreferenceRequest
-} from '@coachcare/npm-api'
-import { Alerts } from '@coachcare/npm-api'
+} from '@coachcare/sdk'
+import { Alerts } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-alert-types-table',

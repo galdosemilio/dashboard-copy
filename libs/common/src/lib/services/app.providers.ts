@@ -14,13 +14,9 @@ import {
 // tslint:disable-next-line:no-unused-variable
 import {
   Account,
-  // AccountV2,
   Affiliation,
-  // ApiLog,
   ApiService,
-  // Assignment,
   CCRBlacklist,
-  Consultation,
   Food,
   FoodKey,
   Goal,
@@ -39,7 +35,7 @@ import {
   Supplement,
   Timezone,
   User
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { onAppInit } from './app.init'
 import { AuthGuard } from './auth.guard'
 import { AuthService } from './auth.service'

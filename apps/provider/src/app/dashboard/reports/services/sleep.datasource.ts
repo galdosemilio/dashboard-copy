@@ -14,7 +14,7 @@ import {
   SleepReportRequest,
   SleepReportResponse,
   SleepReportSegment
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 
 export class SleepDataSource extends ChartDataSource<
   SleepReportSegment,

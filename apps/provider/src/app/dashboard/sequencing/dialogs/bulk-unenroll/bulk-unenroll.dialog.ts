@@ -2,12 +2,12 @@ import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { NotifierService } from '@app/service'
-import { OrganizationEntity } from '@coachcare/npm-api'
+import { OrganizationEntity } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import {
   OrganizationProvider,
   Sequence as SelveraSequenceService
-} from '@coachcare/npm-api'
+} from '@coachcare/sdk'
 import { Sequence } from '../../models'
 
 type BulkUnenrollDialogState = 'form' | 'processing'

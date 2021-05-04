@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators'
 import { Form } from '@app/dashboard/library/forms/models'
 import { FormsDatabase } from '@app/dashboard/library/forms/services'
 import { ContextService } from '@app/service'
-import { FormSingle } from '@coachcare/npm-api'
+import { FormSingle } from '@coachcare/sdk'
 
 @Injectable()
 export class FormResolver implements Resolve<Form> {
