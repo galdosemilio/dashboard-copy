@@ -1045,14 +1045,18 @@
     }
   },
   "PERM": {
-    "ACCESS": "Adgang",
+    "ABOUT_CLINIC_PERMISSION": "Om Clinic tilladelser",
     "ACCESSALL": "Vis Alle",
     "ADMIN": "Admin",
-    "HELP_ACCESSALL": "<p>Tilladelsen til <b>\"VIS ALLE\"</b> giver en træner mulighed for at se alle kunder og al kundedata, der er forbundet med den valgte klinik. Dette er nyttigt hvis dine kunder typisk arbejder med forskellige trænere, når de besøger din klinik, eller hvis trænere ofte dækker hinanden med at sørge for patienterne. Dette er også nyttigt for det personale, der håndterer kundeserviceopgaver. </p>",
-    "HELP_ADMIN": "<p><b>'ADMIN'</b> tilladelse giver en coach mulighed for at tilføje",
+    "ADMIN_ACCESS": "Admin Access",
+    "ADMIN_ACCESS_DESCRIPTION": "Administrativ adgang separat aktiveret eller deaktiveret for træneren inden klinikken. Administrativ adgang giver trænere til at styre alle funktioner i klinikken med platformen. Dette indebærer først og fremmest:...<br><ul><li>Tilføjelse og fjernelse af konti (både patienter og trænere)</li><li>Administration sekvenser</li><li>Managing digitalt indhold bibliotek og formularer</li><li>Administration af underretninger indstillinger.</li></ul>",
     "LIMITED_ACCESS": "Begrænset adgang",
-    "NO_ACCESS": "Ingen adgang",
-    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Se alle"
+    "LIMITED_ACCESS_DESCRIPTION": "Denne mulighed er den laveste tilladelse niveau. Det vil kun afsløre aggregerede data til klinikken gennem rapporter og statistikker. Ingen detaljer patient (navn, e-mail-adresse, fødselsdato, etc.) vil blive udsat for.",
+    "PATIENT_ACCESS": "Patient Adgang",
+    "PATIENT_ACCESS_DESCRIPTION": "Patient adgang præsenteres en rullemenu. En af tre muligheder skal vælges. Valget vil påvirke, hvor meget data coachen har adgang til for patienter i klinikken:",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Se alle",
+    "PATIENT_PHI_VIEW_ALL_DESCRIPTION": "Dette er det højeste tilladelsesniveau. Det udsætter alle tilgængelige patientdata og informationer (mad logs, målinger, alarmer osv) til træneren for alle patienter inden for denne klinik.",
+    "VIEW_ALL_DESCRIPTION": "Ud over den rapportering og statistiske data, denne mulighed udsætter yderligere tre segmenter af funktionalitet:<br><br><ul><li>ID, fornavn, efternavn, e-mail, og dato for alle patienter inden for klinikken registrering kan ses.</li><li>Beskeder kan oprettes fra træner med eventuelle patienter inde i klinikken.</li><li>Sequence tilmeldinger kan styres for eventuelle patienter inde i klinikken.</li></ul>"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Afslut Tilmelding",

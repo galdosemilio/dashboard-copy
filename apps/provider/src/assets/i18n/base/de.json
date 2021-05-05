@@ -1045,14 +1045,18 @@
     }
   },
   "PERM": {
-    "ACCESS": "Zugriff",
+    "ABOUT_CLINIC_PERMISSION": "Über die Klinik Berechtigungen",
     "ACCESSALL": "Alle ansehen",
     "ADMIN": "Administrator",
-    "HELP_ACCESSALL": "<p> Die <b> ‚Alle anzeigen‘ </b> Berechtigung erlaubt es, einem Trainer alle Kunden und alle Kundendaten an die ausgewählte Klinik zugeordnet sind einzusehen. Dies ist sinnvoll, wenn Ihre Kunden typischerweise unterschiedliche Trainer sehen, wenn sie Ihre Klinik besuchen oder wenn Ihre Trainer häufig Patienten anderer Trainer mitbetreuen. Dies ist auch geeignet für Mitarbeiter, die Kundendienstaufgaben übernehmen. </p>",
-    "HELP_ADMIN": "<p>Die<b>'ADMIN'</b>-Berechtigung erlaubt es einem Coach, Folgendes hinzuzufügen",
+    "ADMIN_ACCESS": "Admin Access",
+    "ADMIN_ACCESS_DESCRIPTION": "Administratorzugriff wird separat aktiviert oder für den Trainer innerhalb der Klinik deaktiviert. Trainer administrativer Zugriff ermöglicht mit der Plattform, die alle Merkmale der Klinik zu verwalten. Dabei geht es in erster Linie:...<br><ul><li>Hinzufügen und Entfernen von Konten (sowohl Patienten als auch Busse)</li><li>Verwalten von Sequenzen</li><li>Verwalten von digitalen Bibliothek Inhalt und Formen</li><li>Benachrichtigungen Einstellungen verwalten.</li></ul>",
     "LIMITED_ACCESS": "Eingeschränkter Zugang",
-    "NO_ACCESS": "Kein Zugang",
-    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Alle anzeigen"
+    "LIMITED_ACCESS_DESCRIPTION": "Diese Option ist die niedrigste Berechtigungsstufe. Es wird nur aggregierte Daten für die Klinik durch Berichte und Statistiken aus. Keine Patientendaten (Name, E-Mail-Adresse, Geburtsdatum, etc.) ausgesetzt sein werden.",
+    "PATIENT_ACCESS": "Patient Zugang",
+    "PATIENT_ACCESS_DESCRIPTION": "Zugang zum Patienten wird ein Dropdown-Menü dargestellt. Eine von drei Optionen gewählt werden. Die Auswahl wird Auswirkungen darauf, wie viele Daten der Trainer den Zugang zu für die Patienten in der Klinik hat:",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Alle anzeigen",
+    "PATIENT_PHI_VIEW_ALL_DESCRIPTION": "Dies ist die höchste Berechtigungsstufe. Es setzt alle verfügbaren Patientendaten und Informationen (Lebensmittel-Protokolle, Messungen, Alarme, etc.) mit dem Trainer für alle Patienten in dieser Klinik.",
+    "VIEW_ALL_DESCRIPTION": "Neben der Berichterstattung und statistische Daten, setzt diese Option drei zusätzliche Segmente der Funktionalität:<br><br><ul><li>Die ID, Vorname, Nachname, E-Mail und Anmeldetag aller Patienten in der Klinik kann betrachtet werden.</li><li>Nachrichten vom Trainer erstellt mit allen Patienten in der Klinik werden können.</li><li>Sequence Einschreibungen für alle Patienten in der Klinik verwaltet werden können.</li></ul>"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Einschreibung beenden",

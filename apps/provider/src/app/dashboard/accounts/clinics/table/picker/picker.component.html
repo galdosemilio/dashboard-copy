@@ -46,15 +46,15 @@
     </ng-container>
 
     <ng-container cdkColumnDef="perm_viewall">
-      <mat-header-cell *cdkHeaderCellDef fxFlex="22%" class="ccr-help">
-        {{'PERM.ACCESS' | translate}}
+      <mat-header-cell *cdkHeaderCellDef (click)="toggleHelp('help-accessall')" fxFlex="22%" class="ccr-help">
+        {{ 'PERM.PATIENT_ACCESS' | translate}} <mat-icon>help_outline</mat-icon>
       </mat-header-cell>
       <mat-cell *cdkCellDef="let row" class="ccr-help invisible"
       fxLayoutAlign="center center" fxFlex="22%"
       fxLayoutAlign.xs="start center" fxFlex.xs="grow"
       fxFlexOffset.xs="12%" fxFlexOrder.xs="3"
       [class.visible]="data[row.organization.id] && data[row.organization.id].picked">
-      <span class="xs-label">{{'PERM.ACCESS' | translate}}</span>
+      <span class="xs-label">{{ 'PERM.PATIENT_ACCESS' | translate}}</span>
         <ccr-access-level-selector
         *ngIf="data[row.organization.id] && data[row.organization.id].picked"
         [organization]="row.organization"
@@ -94,8 +94,32 @@
   <div class="ccr-table-help">
     <button mat-icon-button type="button" (click)="toggleHelp()"><mat-icon>cancel</mat-icon></button>
 
-    <div class="help-accessall" [innerHTML]="'PERM.HELP_ACCESSALL' | translate"></div>
-    <div class="help-admin" [innerHTML]="'PERM.HELP_ADMIN' | translate"></div>
+    <div class="help-accessall">
+      <p class="no-margin"><strong>{{ 'PERM.PATIENT_ACCESS' | translate }}</strong></p>
+      <p>{{ 'PERM.PATIENT_ACCESS_DESCRIPTION' | translate }}</p>
+
+      <ul>
+        <li>
+          <p class="no-margin"><strong>{{ 'PERM.LIMITED_ACCESS' | translate }}</strong></p>
+          <p>{{ 'PERM.LIMITED_ACCESS_DESCRIPTION' | translate }}</p>
+        </li>
+
+        <li>
+          <p class="no-margin"><strong>{{ 'PERM.ACCESSALL' | translate }}</strong></p>
+          <p [innerHTML]="'PERM.VIEW_ALL_DESCRIPTION' | translate"></p>
+        </li>
+
+        <li>
+          <p class="no-margin"><strong>{{ 'PERM.PATIENT_PHI_AND_VIEW_ALL' | translate }}</strong></p>
+          <p>{{ 'PERM.PATIENT_PHI_VIEW_ALL_DESCRIPTION' | translate }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="help-admin">
+      <p class="no-margin"><strong>{{ 'PERM.ADMIN_ACCESS' | translate }}</strong></p>
+      <p [innerHTML]="'PERM.ADMIN_ACCESS_DESCRIPTION' | translate"></p>
+    </div>
   </div>
 
   <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isDisabled || source.hasErrors()">

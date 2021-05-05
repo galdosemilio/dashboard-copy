@@ -1045,14 +1045,18 @@
     }
   },
   "PERM": {
-    "ACCESS": "Acceso",
+    "ABOUT_CLINIC_PERMISSION": "Acerca de los Permisos de Clínica",
     "ACCESSALL": "Ver Todos",
     "ADMIN": "Admin",
-    "HELP_ACCESSALL": "<p>El permiso <b>'VER TODOS'</b> le permite al asesor ver todos los clientes y sus datos asociados a la clínica seleccionada. Esto es apropiado si sus clientes típicamente ver diferentes asesores cuando visitan su clínica o si los asesores frecuentemente se cubren pacientes entre sí. Esto también es apropiado para personal que hace tareas de soporte al cliente.</p>",
-    "HELP_ADMIN": "<p>El permiso de <b>'ADMIN'</b> le permite al asesor añadir, borrar y gestionar cuentas de clientes y asesores, así como editar la configuración de la clínica. Esto es apropiado para el personal de su clínica que administra a los asesores, brindan soporte al cliente o registran nuevos clientes.</p>",
+    "ADMIN_ACCESS": "Acceso Administrativo",
+    "ADMIN_ACCESS_DESCRIPTION": "El acceso administrativo se habilita o deshabilita de forma separada para el asesor en la clínica. El acceso administrativo permite a los asesores manipular todas las características de la clínica con la plataforma. Esto, primariamente involucra:<br><br><ul><li>Añadir y remover cuentas (pacientes y asesores).</li><li>Administrar secuencias.</li><li>Administrar el contenido de la biblioteca digital y los formularios.</li><li>Administrar configuraciones de alertas.</li></ul>",
     "LIMITED_ACCESS": "Acceso Limitado",
-    "NO_ACCESS": "Sin Acceso",
-    "PATIENT_PHI_AND_VIEW_ALL": "ISF del paciente + Ver Todos"
+    "LIMITED_ACCESS_DESCRIPTION": "Esta opción es el nivel más bajo de permisos. Sólo expondrá datos agregados de la clínica a través de reportes y estadísticas. Ningún detalle de los pacientes (nombre, dirección de correo electrónico, fecha de nacimiento, etc.) será expuesto.",
+    "PATIENT_ACCESS": "Acceso de Paciente",
+    "PATIENT_ACCESS_DESCRIPTION": "El acceso de paciente se presenta como una lista desplegable. Una de tres opciones debe ser seleccionada. La selección impactará a cuánta información de los pacientes tiene acceso el asesor dentro de la clínica:",
+    "PATIENT_PHI_AND_VIEW_ALL": "ISF del paciente + Ver Todos",
+    "PATIENT_PHI_VIEW_ALL_DESCRIPTION": "Este es el nivel de permiso más alto. Presenta toda la información disponible de los pacientes (diario de comidas, medidas, alertas, etc.) a los asesores dentro de esta clínica.",
+    "VIEW_ALL_DESCRIPTION": "En adición de reportes y datos estadísticos, esta opción presenta tres segmentos adicionales de funcionalidad:<br><br><ul><li>El ID, nombre, apellido, correo electrónico y fecha de registro de todos los pacientes dentro de la clínica pueden ser vistos.</li><li>Se puede crear mensajes desde el asesor hacia cualquier paciente dentro de la clínica.</li><li>Se pueden administrar los enrolamientos a secuencias de cualquier paciente dentro de la clínica.</li></ul>"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Desinscribir",

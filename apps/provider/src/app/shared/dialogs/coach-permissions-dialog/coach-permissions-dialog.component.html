@@ -1,0 +1,39 @@
+<div matDialogTitle>
+  <div>
+      <span>{{ 'PERM.ABOUT_CLINIC_PERMISSION' | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content>
+  <p class="no-margin"><strong>{{ 'PERM.PATIENT_ACCESS' | translate }}</strong></p>
+  <p>{{ 'PERM.PATIENT_ACCESS_DESCRIPTION' | translate }}</p>
+
+  <ul>
+    <li>
+      <p class="no-margin"><strong>{{ 'PERM.LIMITED_ACCESS' | translate }}</strong></p>
+      <p>{{ 'PERM.LIMITED_ACCESS_DESCRIPTION' | translate }}</p>
+    </li>
+
+    <li>
+      <p class="no-margin"><strong>{{ 'PERM.ACCESSALL' | translate }}</strong></p>
+      <p [innerHTML]="'PERM.VIEW_ALL_DESCRIPTION' | translate"></p>
+    </li>
+
+    <li>
+      <p class="no-margin"><strong>{{ 'PERM.PATIENT_PHI_AND_VIEW_ALL' | translate }}</strong></p>
+      <p>{{ 'PERM.PATIENT_PHI_VIEW_ALL_DESCRIPTION' | translate }}</p>
+    </li>
+  </ul>
+
+  <p class="no-margin"><strong>{{ 'PERM.ADMIN_ACCESS' | translate }}</strong></p>
+  <p [innerHTML]="'PERM.ADMIN_ACCESS_DESCRIPTION' | translate"></p>
+</div>
+
+<mat-dialog-actions>
+  <button mat-button class="ccr-button" matDialogClose>
+      {{ 'GLOBAL.CLOSE' | translate }}
+  </button>
+</mat-dialog-actions>

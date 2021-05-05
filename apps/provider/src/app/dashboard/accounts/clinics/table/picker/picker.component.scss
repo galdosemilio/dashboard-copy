@@ -1,5 +1,13 @@
 .help-enabled.help-accessall .help-accessall,
 .help-enabled.help-admin .help-admin {
+  li {
+    margin-bottom: 10px;
+  }
+
+  p.no-margin {
+    margin: 0;
+  }
+
   display: block;
 }
 

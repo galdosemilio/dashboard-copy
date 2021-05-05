@@ -1045,14 +1045,18 @@
     }
   },
   "PERM": {
-    "ACCESS": "Access",
+    "ABOUT_CLINIC_PERMISSION": "About Clinic Permissions",
     "ACCESSALL": "View All",
     "ADMIN": "Admin",
-    "HELP_ACCESSALL": "<p> The <b>'VIEW ALL'</b> permission allows a coach to view all client and all clients data associated to the selected clinic. This is appropriate if your clients typically see different coaches when they visit your clinic or if your coaches frequently cover patients for each other. This is also appropriate for staff that handle customer service tasks.</p>",
-    "HELP_ADMIN": "<p>The <b>'ADMIN'</b> permission allows a coach to add, delete and manage client and coach accounts, as well as edit clinic settings. This is appropriate for staff at your clinic that manage coaches, handle customer service or onboard new clients.</p>",
+    "ADMIN_ACCESS": "Admin Access",
+    "ADMIN_ACCESS_DESCRIPTION": "Administrative access is separately enabled or disabled for the coach within the clinic.  Administrative access allows coaches to manage all features of the clinic with the platform. This primarily involves:<br><ul><li>Adding and removing accounts (both patients and coaches).</li><li>Managing sequences.</li><li>Managing digital library content and forms.</li><li>Managing alerts settings.</li></ul>",
     "LIMITED_ACCESS": "Limited Access",
-    "NO_ACCESS": "No Access",
-    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + View All"
+    "LIMITED_ACCESS_DESCRIPTION": "This option is the lowest permission level. It will only expose aggregate data for the clinic through reports and statistics. No patient details (name, email address, date of birth, etc) will be exposed.",
+    "PATIENT_ACCESS": "Patient Access",
+    "PATIENT_ACCESS_DESCRIPTION": "Patient access is presented a dropdown menu. One of three options must be selected. The selection will impact how much data the coach has access to for patients within the clinic:",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + View All",
+    "PATIENT_PHI_VIEW_ALL_DESCRIPTION": "This is the highest permission level. It exposes all available patient data and information (food logs, measurements, alerts, etc) to the coach for all patients within this clinic.",
+    "VIEW_ALL_DESCRIPTION": "In addition to the reporting and statistical data, this option exposes three additional segments of functionality:<br><br><ul><li>The ID, first name, last name, email, and registration date of all patients within the clinic can viewed.</li><li>Messages can be created from the coach with any patients inside the clinic.</li><li>Sequence enrollments can be managed for any patients inside the clinic.</li></ul>"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "End Enrollment",

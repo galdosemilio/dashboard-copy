@@ -1045,14 +1045,18 @@
     }
   },
   "PERM": {
-    "ACCESS": "Accesso",
+    "ABOUT_CLINIC_PERMISSION": "A proposito di Clinica Permessi",
     "ACCESSALL": "Visualizza Tutto",
     "ADMIN": "Admin",
-    "HELP_ACCESSALL": "<p> Il permesso <b>'VISUALIZZA TUTTO'</b> permette ad un coach di visualizzare tutti i clienti e tutti i dati dei clienti associati alla clinica selezionata. Questo è appropriato se i clienti vedono solitamente diversi coach quando visitano la clinica o se i coach spesso si occupano di pazienti altrui. È appropriato anche per lo staff che gestisce le mansioni di servizio clienti.</p>",
-    "HELP_ADMIN": "<p>Il permesso <b>'ADMIN'</b> permette ad un coach di aggiungere",
+    "ADMIN_ACCESS": "Admin Access",
+    "ADMIN_ACCESS_DESCRIPTION": "Accesso amministrativo è parte attivata o disattivata per l'allenatore all'interno della clinica. Accesso amministrativo permette agli allenatori di gestire tutte le funzioni della clinica con la piattaforma. Si tratta in primo luogo:...<br><ul><li>Aggiunta e rimozione di account (sia per i pazienti e pullman)</li><li>sequenze Gestione</li><li>Gestione del contenuto della biblioteca digitale e forme</li><li>Gestione delle impostazioni degli avvisi.</li></ul>",
     "LIMITED_ACCESS": "Accesso Limitato",
-    "NO_ACCESS": "Nessun Accesso",
-    "PATIENT_PHI_AND_VIEW_ALL": "Paziente PHI + Visualizza Tutto"
+    "LIMITED_ACCESS_DESCRIPTION": "Questa opzione è il livello di autorizzazione più basso. Si esporrà solo i dati aggregati per la clinica attraverso report e statistiche. Nessun paziente (nome, indirizzo email, data di nascita, ecc) saranno esposti.",
+    "PATIENT_ACCESS": "l'accesso dei pazienti",
+    "PATIENT_ACCESS_DESCRIPTION": "l'accesso dei pazienti si presenta un menu a discesa. Una delle tre opzioni deve essere selezionato. La selezione avrà un impatto la quantità di dati l'allenatore ha accesso a dei pazienti all'interno della clinica:",
+    "PATIENT_PHI_AND_VIEW_ALL": "Paziente PHI + Visualizza Tutto",
+    "PATIENT_PHI_VIEW_ALL_DESCRIPTION": "Questo è il livello di autorizzazione più alto. Espone tutti i dati disponibili del paziente e informazioni (tronchi alimentari, misure, allarmi, ecc) per l'allenatore per tutti i pazienti all'interno di questa clinica.",
+    "VIEW_ALL_DESCRIPTION": "Oltre al reporting e dati statistici, questa opzione espone tre segmenti aggiuntivi di funzionalità:<br><br><ul><li>L'ID, nome, cognome, e-mail, e la data di registrazione di tutti i pazienti all'interno della clinica può visualizzato.</li><li>I messaggi possono essere creati dal pullman con tutti i pazienti all'interno della clinica.</li><li>iscrizioni sequenza possono essere gestiti per tutti i pazienti all'interno della clinica.</li></ul>"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Termina Registrazione",

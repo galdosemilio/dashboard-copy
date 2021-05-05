@@ -1045,14 +1045,18 @@
     }
   },
   "PERM": {
-    "ACCESS": "Acesso",
+    "ABOUT_CLINIC_PERMISSION": "Sobre permissões Clínica",
     "ACCESSALL": "Ver todos",
     "ADMIN": "Administrador",
-    "HELP_ACCESSALL": "<p> A permissão <b> 'VER TODOS' </ b> permite que um treinador visualize todos os dados do cliente e de todos os clientes associados à clínica selecionada. Isso é apropriado se seus clientes normalmente consultam diferentes treinadores quando visitam sua clínica ou se seus treinadores freqüentemente cobrem pacientes uns dos outros. Isso também é apropriado para a equipa que trata das tarefas de atendimento ao cliente. </ P>",
-    "HELP_ADMIN": "<p>A permissão de <b>'ADMIN'</b> permite que um treinador acrescente",
+    "ADMIN_ACCESS": "administrador de acesso",
+    "ADMIN_ACCESS_DESCRIPTION": "acesso administrativo é separadamente ativada ou desativada para o treinador dentro da clínica. O acesso administrativo permite os treinadores para gerenciar todos os recursos da clínica com a plataforma. Isso envolve principalmente:...<br><ul><li>Adicionar e remover contas (ambos os pacientes e treinadores)</li><li>seqüências Gerenciando</li><li>Gerenciando o conteúdo da biblioteca digital e formas</li><li>Gerenciando configurações de alerta.</li></ul>",
     "LIMITED_ACCESS": "Acesso Limitado",
-    "NO_ACCESS": "Sem Acesso",
-    "PATIENT_PHI_AND_VIEW_ALL": "Paciente PHI + Ver Todos"
+    "LIMITED_ACCESS_DESCRIPTION": "Esta opção é o nível de permissão menor. Ele só irá expor dados agregados para a clínica por meio de relatórios e estatísticas. Não há detalhes do paciente (nome, endereço de e-mail, data de nascimento, etc.) serão expostos.",
+    "PATIENT_ACCESS": "Acesso paciente",
+    "PATIENT_ACCESS_DESCRIPTION": "o acesso do paciente é apresentado um menu suspenso. Uma das três opções deve ser selecionado. A seleção terá impacto sobre a quantidade de dados o treinador tem acesso a dos doentes dentro da clínica:",
+    "PATIENT_PHI_AND_VIEW_ALL": "Paciente PHI + Ver Todos",
+    "PATIENT_PHI_VIEW_ALL_DESCRIPTION": "Este é o nível de permissão mais alto. Ela expõe todos os dados disponíveis de pacientes e informações (logs de alimentos, medições, alertas, etc) para o treinador para todos os pacientes dentro desta clínica.",
+    "VIEW_ALL_DESCRIPTION": "Além da apresentação de relatórios e dados estatísticos, esta opção expõe três segmentos adicionais de funcionalidade:<br><br><ul><li>O ID, nome, sobrenome, e-mail e data de todos os pacientes dentro da clínica de registro pode ser vista.</li><li>as mensagens podem ser criados a partir do treinador com quaisquer pacientes dentro da clínica.</li><li>matrículas Sequência podem ser geridos por quaisquer pacientes dentro da clínica.</li></ul>"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Finalizar Subscrição",

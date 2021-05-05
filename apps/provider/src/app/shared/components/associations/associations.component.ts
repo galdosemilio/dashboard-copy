@@ -7,7 +7,10 @@ import {
   AssociationsDataSource
 } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations'
 import { ContextService, NotifierService } from '@app/service'
-import { RemoveClinicAssociationDialog } from '@app/shared/dialogs'
+import {
+  CoachPermissionsDialog,
+  RemoveClinicAssociationDialog
+} from '@app/shared/dialogs'
 import { OrganizationAccess } from '@coachcare/npm-api'
 import { _ } from '@app/shared/utils'
 import { OrganizationAssociation } from '@coachcare/npm-api'
@@ -123,6 +126,10 @@ export class CcrAccountAssociationsComponent implements OnInit {
           this.notify.error(error)
         }
       })
+  }
+
+  public showPermissionsDialog(): void {
+    this.dialog.open(CoachPermissionsDialog)
   }
 
   private filterColumn(column: string): void {

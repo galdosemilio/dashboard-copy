@@ -46,7 +46,12 @@
                 </ng-container>
 
                 <ng-container cdkColumnDef="permissions">
-                    <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.PERMISSIONS' | translate }}</mat-header-cell>
+                    <mat-header-cell *cdkHeaderCellDef>
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <p>{{ 'GLOBAL.PERMISSIONS' | translate }}</p>
+                            <mat-icon (click)="showPermissionsDialog()">help_outline</mat-icon>
+                        </div>
+                    </mat-header-cell>
                     <mat-cell *cdkCellDef="let row; let i = index" fxFlex.xs="grow">
                         <div [formGroup]="formArray.controls[i]" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                             <ccr-access-level-selector

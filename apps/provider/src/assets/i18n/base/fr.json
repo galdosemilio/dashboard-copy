@@ -1045,14 +1045,18 @@
     }
   },
   "PERM": {
-    "ACCESS": "Accès",
+    "ABOUT_CLINIC_PERMISSION": "À propos des autorisations Clinique",
     "ACCESSALL": "Voir tout",
     "ADMIN": "Administrateur",
-    "HELP_ACCESSALL": "<p> La permission <b>’VOIR TOUT'</b> permet à un coach de voir tous les clients et toutes les données clients associés à la clinique sélectionnée. Il s’agit d’une fonctionnalité appropriée si vos clients consultent différents coachs dans votre clinique ou si vos coachs se remplacent fréquemment auprès des patients. Cela peut également servir à l’équipe en charge du service client.</p>",
-    "HELP_ADMIN": "<P> <b> « afficher » </ b> autorisation permet à un entraîneur pour afficher tous les clients et toutes les données des clients associés à la clinique choisie. Ceci est approprié si vos clients généralement voir différents entraîneurs quand ils visitent votre clinique ou si vos entraîneurs couvrent souvent les patients pour l'autre. Ceci est également approprié pour le personnel qui gèrent des tâches de service à la clientèle. </ P>",
+    "ADMIN_ACCESS": "Accès admin",
+    "ADMIN_ACCESS_DESCRIPTION": "Cet accès est activé ou désactivé séparément pour l'entraîneur au sein de la clinique. Cet accès permet aux entraîneurs de gérer toutes les fonctions de la clinique avec la plate-forme. Cela implique principalement:...<br><ul><li>Ajout et suppression de comptes (les patients et les entraîneurs)</li><li>séquences Gestion</li><li>Gestion de contenu de la bibliothèque numérique et formes</li><li>Gestion des paramètres des alertes.</li></ul>",
     "LIMITED_ACCESS": "Accès limité",
-    "NO_ACCESS": "Pas d'accès",
-    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Tout voir"
+    "LIMITED_ACCESS_DESCRIPTION": "Cette option est le niveau d'autorisation le plus bas. Il n'exposera des données agrégées pour la clinique par des rapports et des statistiques. Aucun détail patient (nom, adresse e-mail, date de naissance, etc.) seront exposés.",
+    "PATIENT_ACCESS": "L'accès des patients",
+    "PATIENT_ACCESS_DESCRIPTION": "L'accès des patients est présenté un menu déroulant. L'une des trois options doit être sélectionnée. La sélection aura un impact sur la quantité de données l'entraîneur a accès à des patients dans la clinique:",
+    "PATIENT_PHI_AND_VIEW_ALL": "Patient PHI + Tout voir",
+    "PATIENT_PHI_VIEW_ALL_DESCRIPTION": "Ceci est le niveau d'autorisation le plus élevé. Il expose toutes les données des patients et des informations disponibles (journaux alimentaires, mesures, alertes, etc.) à l'entraîneur pour tous les patients dans cette clinique.",
+    "VIEW_ALL_DESCRIPTION": "En plus des rapports et des données statistiques, cette option expose trois segments supplémentaires de la fonctionnalité:<br><br><ul><li>ID, prénom, nom, email et date d'enregistrement de tous les patients dans la clinique peuvent vu.</li><li>les messages peuvent être créés à partir de l'entraîneur avec des patients à l'intérieur de la clinique.</li><li>les inscriptions de séquence peuvent être gérés pour les patients à l'intérieur de la clinique.</li></ul>"
   },
   "PHASE": {
     "CONFIRM_UNENROLL": "Mettre fin à l’inscription",

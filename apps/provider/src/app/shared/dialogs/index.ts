@@ -2,6 +2,7 @@ export * from './account-redirect'
 export * from './add-manual-interaction'
 export * from './add-recipient'
 export * from './call-rating'
+export * from './coach-permissions-dialog'
 export * from './coach-select'
 export * from './confirm.dialog'
 export * from './gesture-closing'
@@ -42,12 +43,14 @@ import { ViewImageDialog } from './view-image'
 import { WalkthroughDialog } from './walkthrough'
 import { RPMEditFormComponent, RPMEntryCardComponent } from './rpm-status'
 import { RemoveClinicAssociationDialog } from './remove-clinic-association'
+import { CoachPermissionsDialog } from './coach-permissions-dialog'
 
 export const Dialogs = [
   AccountRedirectDialog,
   AddManualInteractionDialog,
   AddRecipientDialog,
   CallRatingDialog,
+  CoachPermissionsDialog,
   CoachSelectDialog,
   ConfirmDialog,
   GestureClosingDialog,
