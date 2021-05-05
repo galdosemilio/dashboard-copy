@@ -15,6 +15,11 @@ div.ccr-table {
     .cdk-column-androidAppId,
     .cdk-column-iosAppId {
       min-width: 200px;
+
+      a {
+        color: var(--text);
+        margin-right: 5px;
+      }
     }
 
     .cdk-column-actions {

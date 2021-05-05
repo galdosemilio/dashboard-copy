@@ -42,6 +42,7 @@
       "CREATE_NEW": "Klinik erstellen",
       "DELETE_LIST_ASSOCIATION": "Löschen Aktive Kampagne Liste Verband",
       "DELETE_LIST_ASSOCIATION_CONTENT": "Sind Sie sicher, dass Sie die Zuordnung zu der Liste löschen möchten, {{list}}?",
+      "DOWNLOAD_QR_CODE": "Herunterladen QR-Code",
       "EDIT_ACTIVE_CAMPAIGN": "Bearbeiten Aktive Kampagne Liste Verband",
       "EMAIL_TEMPLATE_INHERITED": "Diese Vorlage ist durch eine übergeordnete Klinik zur Verfügung. Es kann nur durch die Klinik bearbeitet oder gelöscht werden, die es besitzt.",
       "ENTITY": "Entität",

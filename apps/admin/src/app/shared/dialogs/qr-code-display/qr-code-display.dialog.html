@@ -9,6 +9,14 @@
   <p [innerHTML]="data.description | translate:data.descriptionParams"></p>
 
   <div class="qr-code-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <qrcode *ngIf="data.qrData" [qrdata]="data.qrData" [size]="128" [level]="'M'"></qrcode>
+    <qrcode *ngIf="data.qrData" [qrdata]="data.qrData" [width]="256" [level]="'M'"></qrcode>
+  </div>
+
+  <div (click)="downloadQRCode()" class="clickable" fxLayout="row" fxLayoutAlign="center center">
+    <a>{{ 'ADMIN.ORGS.DOWNLOAD_QR_CODE' | translate }}</a>
+  </div>
+
+  <div hidden>
+    <qrcode *ngIf="data.qrData" #downloadableQrCode [qrdata]="data.qrData" [width]="1200" [level]="'M'"></qrcode>
   </div>
 </mat-dialog-content>

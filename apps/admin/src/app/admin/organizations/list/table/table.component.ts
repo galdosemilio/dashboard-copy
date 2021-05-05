@@ -95,6 +95,8 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
   ): void {
     this.dialog.open(QRCodeDisplayDialog, {
       data: {
+        organization: row,
+        appType,
         qrData: row.app[appType].url,
         title:
           appType === 'android'

@@ -42,6 +42,7 @@
       "CREATE_NEW": "Crear Clínica",
       "DELETE_LIST_ASSOCIATION": "Eliminar Asociación a Lista de Active Campaign",
       "DELETE_LIST_ASSOCIATION_CONTENT": "¿Está seguro de que quiere eliminar la asociación a la lista {{list}}?",
+      "DOWNLOAD_QR_CODE": "Descargar Código QR",
       "EDIT_ACTIVE_CAMPAIGN": "Editar Asociación a Lista de Active Campaign",
       "EMAIL_TEMPLATE_INHERITED": "Esta plantilla está disponible a través de una clínica superior. Sólo puede ser editada o eliminada desde la clínica que la posee.",
       "ENTITY": "Entidad",

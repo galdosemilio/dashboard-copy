@@ -42,6 +42,7 @@
       "CREATE_NEW": "יצירת מרפאה",
       "DELETE_LIST_ASSOCIATION": "האגודה רשימת מסעות פרסום מחק פעיל",
       "DELETE_LIST_ASSOCIATION_CONTENT": "האם אתה בטוח שאתה רוצה למחוק את השיוך לרשימת {{list}}?",
+      "DOWNLOAD_QR_CODE": "הורד QR Code",
       "EDIT_ACTIVE_CAMPAIGN": "האגודה רשימת ערוך קמפיין פעיל",
       "EMAIL_TEMPLATE_INHERITED": "תבנית זו זמינה דרך מרפאת הורה. ניתן לערוך אותו או למחוק רק דרך המרפאה שהכלי שלו.",
       "ENTITY": "יֵשׁוּת",

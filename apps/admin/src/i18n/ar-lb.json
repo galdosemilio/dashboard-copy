@@ -42,6 +42,7 @@
       "CREATE_NEW": "إنشاء عيادة",
       "DELETE_LIST_ASSOCIATION": "حملة نشطة الحذف جمعية قائمة",
       "DELETE_LIST_ASSOCIATION_CONTENT": "هل أنت متأكد أنك تريد حذف الجمعية إلى قائمة {{list}}؟",
+      "DOWNLOAD_QR_CODE": "تحميل رمز الاستجابة السريعة",
       "EDIT_ACTIVE_CAMPAIGN": "تحرير الحملة النشطة جمعية قائمة",
       "EMAIL_TEMPLATE_INHERITED": "هذا القالب هو متاح من خلال عيادة الأم. لا يمكن إلا أن تعدل أو تحذف من خلال العيادة التي تملك ذلك.",
       "ENTITY": "شخصية",

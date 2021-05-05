@@ -42,6 +42,7 @@
       "CREATE_NEW": "Create Clinic",
       "DELETE_LIST_ASSOCIATION": "Delete Active Campaign List Association",
       "DELETE_LIST_ASSOCIATION_CONTENT": "Are you sure you want to delete the association to the list {{ list }}?",
+      "DOWNLOAD_QR_CODE": "Download QR Code",
       "EDIT_ACTIVE_CAMPAIGN": "Edit Active Campaign List Association",
       "EMAIL_TEMPLATE_INHERITED": "This template is available through a parent clinic. It can only be edited or deleted through the clinic that owns it.",
       "ENTITY": "Entity",
