@@ -1,3 +1,16 @@
+# [1.14.0](https://github.com/coachcare/dashboard/compare/v1.13.0...v1.14.0) (2021-05-06)
+
+
+### Bug Fixes
+
+* adjusted selectable access levels [IDEA-662] ([29de7f5](https://github.com/coachcare/dashboard/commit/29de7f52b40efb929f00446559fe119772c267a7))
+* seq enrollment uses enforced org id [FRON-2155] ([51a39dc](https://github.com/coachcare/dashboard/commit/51a39dc7b58b0c924b8c90c8b48827da394c84ae))
+
+
+### Features
+
+* added permission level descriptions [IDEA-662] ([628eadd](https://github.com/coachcare/dashboard/commit/628eaddc07bc7128c4ec2d6dedbe42c2d873697d))
+
 # [1.13.0](https://github.com/coachcare/dashboard/compare/v1.12.1...v1.13.0) (2021-05-03)
 
 
