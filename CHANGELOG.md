@@ -1,3 +1,13 @@
+# [1.15.0](https://github.com/coachcare/dashboard/compare/v1.14.0...v1.15.0) (2021-05-07)
+
+
+### Features
+
+* added links for qr code and app ids [IDEA-813] ([ba85443](https://github.com/coachcare/dashboard/commit/ba8544327f904470bca46377c3565b4b62f528aa))
+* implemented coachcare sdk [FRON-2133] ([0c1d4cc](https://github.com/coachcare/dashboard/commit/0c1d4cc286ab5859042dca4b0684f997718c0b30))
+* implemented cohort weight loss report [IDEA-844] ([485665f](https://github.com/coachcare/dashboard/commit/485665ffac8591e74f14f92e77471612a1eeb633))
+* set all meetings option to list view [FRON-2140] ([39a8975](https://github.com/coachcare/dashboard/commit/39a89755b3424777afaa4ae0dc6c543396650d47))
+
 # [1.14.0](https://github.com/coachcare/dashboard/compare/v1.13.0...v1.14.0) (2021-05-06)
 
 
