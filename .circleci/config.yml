@@ -116,10 +116,18 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
+      - aws-s3/copy:
+          arguments: --acl public-read --recursive
+          from: ./admin
+          to: s3://$DEPLOYMENT_BUCKET/
       - aws-s3/sync:
           arguments: --acl public-read --delete
           from: ./admin
           to: s3://$DEPLOYMENT_BUCKET/
+      - aws-s3/copy:
+          arguments: --acl public-read --recursive
+          from: ./provider
+          to: s3://$DEPLOYMENT_BUCKET/provider
       - aws-s3/sync:
           arguments: --acl public-read --delete
           from: ./provider
