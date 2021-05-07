@@ -21,6 +21,8 @@ import * as pdfMake from 'pdfmake'
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { CallLayoutService } from './layout/call/services/call-layout.service'
 import { RecoverCall } from './layout/store/call'
+import { environment } from '../environments/environment'
+import { ApiService } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -40,6 +42,7 @@ export class AppComponent implements OnDestroy, OnInit {
   private globalKey = 'GLOBAL'
 
   constructor(
+    private api: ApiService,
     private callLayout: CallLayoutService,
     private intl: MatDatepickerIntl,
     private gesture: GestureService,
@@ -49,6 +52,7 @@ export class AppComponent implements OnDestroy, OnInit {
     config: ConfigService,
     @Inject(DOCUMENT) document: HTMLDocument
   ) {
+    this.api.setEnvironment(environment.selveraApiEnv)
     this.config = config.get('app.screen')
   }
 

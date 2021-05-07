@@ -79,13 +79,13 @@ import {
   AccountAvatar
   // ApiLog
 } from '@coachcare/sdk'
-import { ApiServiceOptions } from '@coachcare/sdk/dist/lib/services/api.service'
+
+const generalApiService = new ApiService()
 
 export const SdkApiProviders = [
   {
     provide: ApiService,
-    useClass: ApiService,
-    deps: []
+    useValue: generalApiService
   },
   {
     provide: AccountProvider,
