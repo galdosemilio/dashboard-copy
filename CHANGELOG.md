@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/coachcare/dashboard/compare/v1.15.0...v1.15.1) (2021-05-07)
+
+
+### Bug Fixes
+
+* solved target api ([951204b](https://github.com/coachcare/dashboard/commit/951204b5f33ed92d1c861268d91ea1523cdf840f))
+
 # [1.15.0](https://github.com/coachcare/dashboard/compare/v1.14.0...v1.15.0) (2021-05-07)
 
 
