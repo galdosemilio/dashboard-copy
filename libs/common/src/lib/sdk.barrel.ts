@@ -79,8 +79,10 @@ import {
   AccountAvatar
   // ApiLog
 } from '@coachcare/sdk'
+import { environment } from './environments/environment'
 
 const generalApiService = new ApiService()
+generalApiService.setEnvironment(environment.ccrApiEnv)
 
 export const SdkApiProviders = [
   {

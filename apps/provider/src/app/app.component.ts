@@ -52,7 +52,6 @@ export class AppComponent implements OnDestroy, OnInit {
     config: ConfigService,
     @Inject(DOCUMENT) document: HTMLDocument
   ) {
-    this.api.setEnvironment(environment.selveraApiEnv)
     this.config = config.get('app.screen')
   }
 
