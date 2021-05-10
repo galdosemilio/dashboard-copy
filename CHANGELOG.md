@@ -1,3 +1,10 @@
+## [1.15.3](https://github.com/coachcare/dashboard/compare/v1.15.2...v1.15.3) (2021-05-10)
+
+
+### Bug Fixes
+
+* added default cohorts for ideal you on prod [IDEA-844] ([a02cb32](https://github.com/coachcare/dashboard/commit/a02cb324097231f5d2b4c1f42707ef1eefa75a0a))
+
 ## [1.15.2](https://github.com/coachcare/dashboard/compare/v1.15.1...v1.15.2) (2021-05-10)
 
 
