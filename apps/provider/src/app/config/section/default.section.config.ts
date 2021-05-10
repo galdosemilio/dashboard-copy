@@ -86,5 +86,18 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   },
   SIDENAV: {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
+  },
+  COHORT_REPORTS: {
+    SHOW_COHORT_WEIGHT_LOSS_REPORT: false,
+    COHORTS: [
+      { days: 7 * 1, gracePeriod: 1 },
+      { days: 7 * 2, gracePeriod: 3 },
+      { days: 7 * 4, gracePeriod: 4 },
+      { days: 7 * 8, gracePeriod: 5 },
+      { days: 7 * 12, gracePeriod: 6 },
+      { days: 7 * 16, gracePeriod: 7 },
+      { days: 7 * 24, gracePeriod: 10 },
+      { days: 7 * 52, gracePeriod: 21 }
+    ]
   }
 }
