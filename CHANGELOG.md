@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/coachcare/dashboard/compare/v1.15.3...v1.15.4) (2021-05-11)
+
+
+### Bug Fixes
+
+* upgraded @coachcare/sdk [FRON-2166] ([5b9bc49](https://github.com/coachcare/dashboard/commit/5b9bc49dbd349634c802001d074c889a2ad33f75))
+
 ## [1.15.3](https://github.com/coachcare/dashboard/compare/v1.15.2...v1.15.3) (2021-05-10)
 
 
