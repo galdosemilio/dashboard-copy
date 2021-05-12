@@ -77,12 +77,15 @@ export class CcrAccountAssociationsComponent implements OnInit {
       status: 'active',
       strict: true
     })
-    this.source.connect().subscribe((results) => {
-      if (this.showPermissions) {
-        this.generateFormArray(results)
-      }
-      this.results = results
-    })
+    this.source
+      .connect()
+      .pipe(untilDestroyed(this))
+      .subscribe((results) => {
+        if (this.showPermissions) {
+          this.generateFormArray(results)
+        }
+        this.results = results
+      })
     this.checkIfProviderHasAdmin()
   }
 
