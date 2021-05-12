@@ -42,8 +42,8 @@ const en = {
   longDateFormat: {
     LT: 'h:mm a',
     LTS: 'h:mm:ss a',
-    L: 'DD/MM/YYYY',
-    l: 'D/M/YYYY',
+    L: 'MM/DD/YYYY',
+    l: 'M/D/YYYY',
     LL: 'MMMM D, YYYY',
     ll: 'MMM D, YYYY',
     LLL: 'MMMM D, YYYY [at] h:mm a',

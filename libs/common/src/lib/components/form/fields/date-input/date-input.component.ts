@@ -3,11 +3,9 @@ import {
   Component,
   DoCheck,
   forwardRef,
-  Host,
   Input,
   OnDestroy,
   OnInit,
-  SkipSelf,
   ViewChild
 } from '@angular/core'
 import {
