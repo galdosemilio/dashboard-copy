@@ -76,12 +76,17 @@ import {
   Zendesk,
   AccountPassword,
   OrganizationPreference,
-  AccountAvatar
+  AccountAvatar,
+  AuthenticationToken
   // ApiLog
 } from '@coachcare/sdk'
 import { environment } from './environments/environment'
 
-const generalApiService = new ApiService()
+const generalApiService = new ApiService({
+  token: new AuthenticationToken(),
+  caching: { enabled: false },
+  throttling: { enabled: false }
+})
 generalApiService.setEnvironment(environment.ccrApiEnv)
 
 export const SdkApiProviders = [
