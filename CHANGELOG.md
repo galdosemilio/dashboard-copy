@@ -1,3 +1,10 @@
+## [1.15.7](https://github.com/coachcare/dashboard/compare/v1.15.6...v1.15.7) (2021-05-12)
+
+
+### Bug Fixes
+
+* disabled apiservice cache [FRON-2170] ([d7438b1](https://github.com/coachcare/dashboard/commit/d7438b1a6bab170a617532e2dfc2ba766234c645))
+
 ## [1.15.6](https://github.com/coachcare/dashboard/compare/v1.15.5...v1.15.6) (2021-05-12)
 
 
