@@ -72,8 +72,8 @@ export class FormSearchComponent implements OnDestroy, OnInit {
       .subscribe(() => this.fetchForms())
   }
 
-  private fetchForms() {
-    this.formsDatabase
+  private async fetchForms(): Promise<void> {
+    const response = await this.formsDatabase
       .fetch({
         organization: this.context.organization.id,
         status: 'active',
@@ -82,11 +82,11 @@ export class FormSearchComponent implements OnDestroy, OnInit {
           ? this.form.controls.query.value.trim()
           : undefined
       })
-      .subscribe((response: GetAllFormResponse) => {
-        if (response.pagination.next) {
-          this.showSearchBar = true
-        }
-        this.forms = response.data.map((single: FormSingle) => new Form(single))
-      })
+      .toPromise()
+
+    if (response.pagination.next) {
+      this.showSearchBar = true
+    }
+    this.forms = response.data.map((single: FormSingle) => new Form(single))
   }
 }
