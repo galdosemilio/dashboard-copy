@@ -88,6 +88,7 @@
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "Add Autoenrollment",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Select a coach to be included as a <strong>Supervising Provider</strong> option for Billable Services at and below the {{ clinic.name }} clinic.",
     "CLINIC_AUTOMATIC_ENROLLMENT": "Automatic Sequence Enrollment",
+    "CLINIC_AUTOMATIC_ENROLLMENT_ABOUT": "New patients added to this clinic will be enrolled automatically into these sequences.  Each entry can use one of three options to set when the patient will be enrolled in the sequence:<br><br><ul><li><b>Day of Week</b> The patient will be enrolled at the next occurrence of the selected day (Monday, Tuesday, etc.).  If the patient is enrolled on the same day (for example 'Sunday' is selected and the current day is also Sunday), the enrollment will happen on the following Sunday in 1 week.<br></li><li><b>Day of Month</b> The patient will be enrolled at the next calendar day occurrence.  If the patient is enrolled on the same day (for example '1' is selected and the current day is also the first of the month), the enrollment will happen at the beginning of the next month.  Also, for months that do not have one of the selected day (for example, '31' is selected but April only has 30 days), the enrollment will happen on the first of the next month.<br></li><li><b>Amount of Days</b> The patient will be enrolled into the sequence a set number of days after being added to the clinic</li></ul>",
     "CLINIC_BILLABLE_SERVICES": "Billable Services",
     "CLINIC_BILLABLE_SERVICES_DESC": "Settings for your clinic related to billable and insurace-reimbursable services.",
     "CLINIC_CANT_REMOVE_INHERITED_SUP_PROV": "Inherited Supervising Providers cannot be deleted",
@@ -156,6 +157,7 @@
     "EMAIL": "Email",
     "END_DATE": "End Date",
     "END_TIME": "End Time",
+    "ENROLLMENT_WINDOW": "Enrollment Window",
     "EVERY_DAYWEEK": "Every {{ day }}",
     "FAT": "Fat",
     "FIBER": "Fiber",
@@ -919,7 +921,6 @@
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "You do not have permission to access this profile",
-      "AVATAR_UPLOAD_FAILED": "The upload failed, please try again.",
       "BIRTHDATE_REQUIRED": "Date of birth is required",
       "BLOOD_PRESSURE_REQUIRED": "Both blood pressure values are required.",
       "BOTH_SLEEP_TIMES": "One of the sleep times can not be empty.",
@@ -967,7 +968,6 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "are currently unavailable",
       "CONTACT_NOT_AVAILABLE": "is currently unavailable",
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Your account does not have permission to access this feature",
       "HUNG_UP": "hung up",
       "MULTIPLE_CSV_FILES": "Multiple CSV files will be downloaded with a maximum of 5000 patients in each file.",
       "NO_ANSWER": "did not pickup"

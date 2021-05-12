@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "Associations",
     "INTEGRATIONS": "Sync service",
     "LOGS": {
-      "APP_NAME": "App",
-      "CREATED_AT": "Date",
       "_TITLE": "Connexions"
     },
     "NO_ASSOCIATED_SERVICES": "Aucun service associés",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "Doit contenir au moins ((min)) caractères.",
       "NO_ACTIVE_CAMPAIGNS": "Il n'y a pas d'associations Liste campagne active",
       "NO_EMAIL_TEMPLATES": "",
-      "NO_LOG_MESSAGES": "Aucune connexion pour cet utilisateur",
       "NO_ORGANIZATIONS": "Aucun résultat d’organisation",
       "NO_RESULTING_LABELS": "Aucun résultat de labels"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "Assurez-vous que les mots de passe sont identiques.",

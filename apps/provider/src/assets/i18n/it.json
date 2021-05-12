@@ -88,6 +88,7 @@
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "Aggiungere registrazione automatica",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Selezionare un pullman per essere inclusa come un <strong>Supervisione Provider</strong> opzione per fatturabili servizi e al di sotto del {{clinic.name}} clinica.",
     "CLINIC_AUTOMATIC_ENROLLMENT": "Sequenza di iscrizione automatica",
+    "CLINIC_AUTOMATIC_ENROLLMENT_ABOUT": "I nuovi pazienti aggiunti a questa clinica verranno automaticamente arruolati in queste sequenze. Ogni voce può utilizzare una delle tre opzioni per impostare quando il paziente verrà arruolato nella sequenza:<br><br><ul><li><b>Giorno della settimana</b> Il paziente verrà arruolato al prossimo occorrenza del giorno selezionato (lunedì, martedì, ecc.). Se il paziente viene arruolato lo stesso giorno (ad esempio è selezionato \"Domenica\" e anche il giorno corrente è domenica), l'iscrizione avverrà la domenica successiva in 1 settimana.<br></li><li><b>Giorno di Mese</b> Il paziente verrà arruolato al successivo giorno di calendario. Se il paziente viene arruolato lo stesso giorno (ad esempio è selezionato \"1\" e il giorno corrente è anche il primo del mese), l'arruolamento avverrà all'inizio del mese successivo. Inoltre, per i mesi che non hanno uno dei giorni selezionati (ad esempio, \"31\" è selezionato ma aprile ha solo 30 giorni), l'iscrizione avverrà il primo del mese successivo.<br></li><li><b> Quantità di giorni</b> Il paziente verrà arruolato nella sequenza un determinato numero di giorni dopo essere stato aggiunto alla clinica</li></ul>",
     "CLINIC_BILLABLE_SERVICES": "Servizi Fatturabili",
     "CLINIC_BILLABLE_SERVICES_DESC": "Impostazioni per la vostra clinica relativi a servizi fatturabili e insurace rimborsabile.",
     "CLINIC_CANT_REMOVE_INHERITED_SUP_PROV": "Provider Supervisione ereditati non possono essere eliminati",
@@ -156,6 +157,7 @@
     "EMAIL": "E-mail",
     "END_DATE": "Data Fine",
     "END_TIME": "Ora Fine",
+    "ENROLLMENT_WINDOW": "Finestra di registrazione",
     "EVERY_DAYWEEK": "Ogni {{day}}",
     "FAT": "Grassi",
     "FIBER": "Fibre",
@@ -919,7 +921,6 @@
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "Non hai il permesso di accedere a questo profilo",
-      "AVATAR_UPLOAD_FAILED": "Il caricamento è fallito",
       "BIRTHDATE_REQUIRED": "È richiesta la data di nascita",
       "BLOOD_PRESSURE_REQUIRED": "Sono necessari entrambi i valori della pressione sanguigna.",
       "BOTH_SLEEP_TIMES": "Uno degli orari del sonno non può essere vuoto.",
@@ -967,7 +968,6 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "sono attualmente irreperibili",
       "CONTACT_NOT_AVAILABLE": "è attualmente irreperibile",
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Il tuo account non dispone dell'autorizzazione per accedere a questa funzione",
       "HUNG_UP": "riaggancia",
       "MULTIPLE_CSV_FILES": "Verranno scaricati più file CSV con un massimo di 5000 pazienti in ciascun file.",
       "NO_ANSWER": "non ha risposto"

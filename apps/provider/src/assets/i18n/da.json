@@ -88,6 +88,7 @@
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "Tilføj Autoenrollment",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Vælg en coach til at indgå som en <strong>Tilsyn Provider</strong> mulighed for Fakturerbare Services på og under {{clinic.name}} klinik.",
     "CLINIC_AUTOMATIC_ENROLLMENT": "Automatisk Sequence Tilmelding",
+    "CLINIC_AUTOMATIC_ENROLLMENT_ABOUT": "Nye patienter, der føjes til denne klinik, vil automatisk blive tilmeldt disse sekvenser. Hver post kan bruge en af ​​tre indstillinger til at indstille, hvornår patienten skal tilmeldes sekvensen: <br><br><ul><li><b>Ugedag</b> Patienten registreres ved den næste forekomst af den valgte dag (mandag, tirsdag osv.). Hvis patienten er tilmeldt samme dag (f.eks. Vælges 'søndag' og den aktuelle dag også er søndag), vil tilmeldingen ske den følgende søndag om 1 uge. <br></li><li><b>Månedens dag</b> Patienten registreres ved den næste kalenderdagsforekomst. Hvis patienten er tilmeldt samme dag (f.eks. Vælges '1' og den aktuelle dag også er den første i måneden), vil tilmeldingen ske i begyndelsen af ​​den næste måned. I måneder, der ikke har en af ​​den valgte dag (for eksempel er '31' valgt, men april kun har 30 dage), vil tilmeldingen ske den første i den næste måned.<br></li><li><b> Antal dage</b> Patienten vil blive tilmeldt sekvensen et bestemt antal dage efter tilføjelse til klinikken </li></ul>",
     "CLINIC_BILLABLE_SERVICES": "Fakturerbare Services",
     "CLINIC_BILLABLE_SERVICES_DESC": "Indstillinger for din klinik i tilknytning til fakturerbare og insurace-refunderes tjenester.",
     "CLINIC_CANT_REMOVE_INHERITED_SUP_PROV": "Arvelige fører tilsyn udbydere kan ikke slettes",
@@ -156,6 +157,7 @@
     "EMAIL": "E-mail",
     "END_DATE": "Slutdato",
     "END_TIME": "Sluttid",
+    "ENROLLMENT_WINDOW": "Tilmeldingsvindue",
     "EVERY_DAYWEEK": "Hver {{day}}",
     "FAT": "Fedt",
     "FIBER": "Fiber",
@@ -919,7 +921,6 @@
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "Du har ikke tilladelse til at få adgang til denne profil",
-      "AVATAR_UPLOAD_FAILED": "Upload mislykkedes",
       "BIRTHDATE_REQUIRED": "Fødselsdato er påkrævet",
       "BLOOD_PRESSURE_REQUIRED": "Begge blodtrykværdier er påkrævet.",
       "BOTH_SLEEP_TIMES": "En af sovetiderne kan ikke være tom.",
@@ -967,7 +968,6 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "ikke tilgængelig i øjeblikket",
       "CONTACT_NOT_AVAILABLE": "er ikke tilgængelig på nuværende tidspunkt",
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Din konto har ikke tilladelse til at få adgang til denne funktion",
       "HUNG_UP": "lagde på",
       "MULTIPLE_CSV_FILES": "Flere CSV-filer vil blive downloadet med maksimalt 5000 patienter i hver fil.",
       "NO_ANSWER": "tog den ikke"

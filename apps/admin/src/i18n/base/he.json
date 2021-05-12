@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "משוייכים",
     "INTEGRATIONS": "Sync שירות",
     "LOGS": {
-      "APP_NAME": "אפליקציה",
-      "CREATED_AT": "תאריך",
       "_TITLE": "רישומי"
     },
     "NO_ASSOCIATED_SERVICES": "אין שירותים הקשורים",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "חייבת להיות לפחות {{min}} תווים",
       "NO_ACTIVE_CAMPAIGNS": "אין עמותות רשימת הקמפיין פעילות",
       "NO_EMAIL_TEMPLATES": "אין תבניות דוא\"ל לארגון זה.",
-      "NO_LOG_MESSAGES": "אין רישומי logs עבור משתמש זה",
       "NO_ORGANIZATIONS": "אין תוצאות מרפאות",
       "NO_RESULTING_LABELS": "אין תוצאות תוויות"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "נא לוודא כי הסיסמאות שלך תואמות.",

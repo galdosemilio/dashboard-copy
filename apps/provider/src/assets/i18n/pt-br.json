@@ -88,6 +88,7 @@
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "Adicionar registro automático",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Escolha um treinador para ser incluído como um <strong>Supervisão Provider</strong> opção para serviços faturáveis ​​na e abaixo da {{clinic.name}} clínica.",
     "CLINIC_AUTOMATIC_ENROLLMENT": "A inscrição automática Sequence",
+    "CLINIC_AUTOMATIC_ENROLLMENT_ABOUT": "Novos pacientes adicionados a esta clínica serão inscritos automaticamente nessas sequências. Cada entrada pode usar uma das três opções para definir quando o paciente será inscrito na sequência:<br><br><ul><li><b>Dia da semana</b> O paciente será inscrito no próximo ocorrência do dia selecionado (segunda, terça, etc.). Se o paciente estiver inscrito no mesmo dia (por exemplo, 'Domingo' for selecionado e o dia atual também for domingo), a inscrição acontecerá no domingo seguinte em 1 semana.<br></li><li><b>Dia do Mês</b> O paciente será inscrito na ocorrência do próximo dia de calendário. Se o paciente for inscrito no mesmo dia (por exemplo '1' for selecionado e o dia atual também for o primeiro dia do mês), a inscrição acontecerá no início do mês seguinte. Além disso, para meses que não têm um dos dias selecionados (por exemplo, '31' é selecionado, mas abril tem apenas 30 dias), a inscrição acontecerá no primeiro dia do mês seguinte.<br></li><li><b>Quantidade de dias</b> O paciente será inscrito na sequência um determinado número de dias após ser adicionado à clínica</li></ul>",
     "CLINIC_BILLABLE_SERVICES": "Serviços Faturáveis",
     "CLINIC_BILLABLE_SERVICES_DESC": "Configurações para sua clínica relacionadas com serviços faturáveis ​​e insurace reembolsável.",
     "CLINIC_CANT_REMOVE_INHERITED_SUP_PROV": "Provedores de Supervisão herdadas não pode ser excluído",
@@ -156,6 +157,7 @@
     "EMAIL": "Email",
     "END_DATE": "Data de fim",
     "END_TIME": "Tempo de fim",
+    "ENROLLMENT_WINDOW": "Janela de inscrição",
     "EVERY_DAYWEEK": "Cada {{day}}",
     "FAT": "Gordura",
     "FIBER": "Fibra",
@@ -919,7 +921,6 @@
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "Não tem permissão para aceder a este perfil",
-      "AVATAR_UPLOAD_FAILED": "O upload falhou",
       "BIRTHDATE_REQUIRED": "A data de nascimento é obrigatória",
       "BLOOD_PRESSURE_REQUIRED": "Ambos os valores da pressão arterial são necessários.",
       "BOTH_SLEEP_TIMES": "Um dos tempos de sono não pode estar vazio.",
@@ -967,7 +968,6 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "estão indisponíveis no momento",
       "CONTACT_NOT_AVAILABLE": "está indisponível no momento",
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Sua conta não tem permissão para acessar este recurso",
       "HUNG_UP": "desligar",
       "MULTIPLE_CSV_FILES": "Vários arquivos CSV serão baixados com um máximo de 5000 pacientes em cada arquivo.",
       "NO_ANSWER": "não atendeu"

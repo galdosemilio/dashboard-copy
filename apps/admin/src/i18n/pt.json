@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "Associações",
     "INTEGRATIONS": "Serviço de Sincronização",
     "LOGS": {
-      "APP_NAME": "App",
-      "CREATED_AT": "Data",
       "_TITLE": "Entradas"
     },
     "NO_ASSOCIATED_SERVICES": "Não serviços associados",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "Tem de ter pelo menos{{min}} carácteres",
       "NO_ACTIVE_CAMPAIGNS": "Não há ativos associações lista da campanha",
       "NO_EMAIL_TEMPLATES": "",
-      "NO_LOG_MESSAGES": "Não há registos para este utilizador.",
       "NO_ORGANIZATIONS": "Resultado sem nenhuma organização",
       "NO_RESULTING_LABELS": "Sem rótulos resultantes"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "Por favor certifique-se que as suas senhas são idênticas.",

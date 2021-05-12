@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "Associations",
     "INTEGRATIONS": "Service Sync",
     "LOGS": {
-      "APP_NAME": "App",
-      "CREATED_AT": "Date",
       "_TITLE": "Logs"
     },
     "NO_ASSOCIATED_SERVICES": "No associated services",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "Must be at least {{min}} characters",
       "NO_ACTIVE_CAMPAIGNS": "There are no Active Campaign List associations",
       "NO_EMAIL_TEMPLATES": "There are no email templates for this organization.",
-      "NO_LOG_MESSAGES": "There are no logs for this user",
       "NO_ORGANIZATIONS": "No resulting organizations",
       "NO_RESULTING_LABELS": "No resulting labels"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "Please make sure your passwords match.",

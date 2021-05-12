@@ -88,6 +88,7 @@
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "Añadir Autoenrolamiento",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Seleccione un asesor para que sea añadido como una opción de <strong>Asesor Supervisor</strong> para Servicios Facturables en y debajo de la clínica {{clinic.name}}.",
     "CLINIC_AUTOMATIC_ENROLLMENT": "Enrolamiento Automático de Secuencias",
+    "CLINIC_AUTOMATIC_ENROLLMENT_ABOUT": "Los nuevos pacientes agregados a esta clínica se inscribirán automáticamente en estas secuencias. Cada entrada puede usar una de las tres opciones para establecer cuándo se inscribirá al paciente en la secuencia:<br><br><ul><li><b>Día de la semana</b> El paciente se inscribirá en el próximo ocurrencia del día seleccionado (lunes, martes, etc.). Si el paciente está inscrito el mismo día (por ejemplo, se selecciona 'Domingo' y el día actual también es domingo), la inscripción se realizará el domingo siguiente en 1 semana.<br></li><li><b>Día de Mes</b> El paciente será inscrito en el siguiente día calendario. Si el paciente se inscribe el mismo día (por ejemplo, se selecciona '1' y el día actual también es el primero del mes), la inscripción se realizará a principios del mes siguiente. Además, para los meses que no tienen uno de los días seleccionados (por ejemplo, se selecciona '31' pero abril solo tiene 30 días), la inscripción se realizará el primer día del mes siguiente.<br></li><li><b>Cantidad de días</b> El paciente será inscrito en la secuencia una cantidad determinada de días después de haber sido agregado a la clínica</li></ul>",
     "CLINIC_BILLABLE_SERVICES": "Servicios Facturables",
     "CLINIC_BILLABLE_SERVICES_DESC": "Configuraciones de su clínica relacionadas con servicios facturables y reembolsables.",
     "CLINIC_CANT_REMOVE_INHERITED_SUP_PROV": "Los Asesores Supervisores heredados no se pueden eliminar",
@@ -156,6 +157,7 @@
     "EMAIL": "Correo",
     "END_DATE": "Fecha Final",
     "END_TIME": "Hora Final",
+    "ENROLLMENT_WINDOW": "Ventana de inscripción",
     "EVERY_DAYWEEK": "Cada {{day}}",
     "FAT": "Grasa",
     "FIBER": "Fibra",
@@ -919,7 +921,6 @@
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "No tiene permiso para acceder a este perfil",
-      "AVATAR_UPLOAD_FAILED": "Hubo un error en la carga, por favor intente de nuevo.",
       "BIRTHDATE_REQUIRED": "Fecha de nacimiento requerida",
       "BLOOD_PRESSURE_REQUIRED": "Ambos valores de presión sanguínea son requeridos.",
       "BOTH_SLEEP_TIMES": "Una de las horas de sueño no puede estar vacía.",
@@ -967,7 +968,6 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "no están disponibles actualmente",
       "CONTACT_NOT_AVAILABLE": "no está disponible",
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Su cuenta no tiene permiso para acceder a esta función",
       "HUNG_UP": "colgar",
       "MULTIPLE_CSV_FILES": "Se generará multiples archivos CSV con un máximo de 5000 pacientes cada uno.",
       "NO_ANSWER": "no recogió"

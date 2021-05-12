@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "Associations",
     "INTEGRATIONS": "خدمة مزامنة",
     "LOGS": {
-      "APP_NAME": "App",
-      "CREATED_AT": "Date",
       "_TITLE": "Logs"
     },
     "NO_ASSOCIATED_SERVICES": "لا الخدمات المرتبطة بها",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "يجب أن تحتوي  {{min}}  رمزًا.",
       "NO_ACTIVE_CAMPAIGNS": "لا توجد جمعيات قائمة الحملة النشطة",
       "NO_EMAIL_TEMPLATES": "لا توجد قوالب بريد إلكتروني لهذه المؤسسة.",
-      "NO_LOG_MESSAGES": "There are no logs for this user",
       "NO_ORGANIZATIONS": "لم تنشأ أي منظمات",
       "NO_RESULTING_LABELS": "No resulting labels"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "يُرجى التأكد من تطابق كلمة المرور الخاصة بك.",

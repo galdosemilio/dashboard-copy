@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
   <div fxLayout="row" fxLayoutAlign="space-between cente" fxLayoutGap="10px">
-    <div fxFlex>
+    <div fxFlex fxLayoutGap="5px">
       <button
       [disabled]="!isAdmin"
       (click)="showAddAutoEnrollmentDialog()"
@@ -10,6 +10,10 @@
         <mat-icon>add</mat-icon>
         {{ 'BOARD.CLINIC_ADD_SEQ_AUTO_ENROLLMENT' | translate }}
       </button>
+      <ccr-popup-description
+        [title]="'BOARD.CLINIC_AUTOMATIC_ENROLLMENT' | translate"
+        [description]="'BOARD.CLINIC_AUTOMATIC_ENROLLMENT_ABOUT' | translate"
+      ></ccr-popup-description>
     </div>
 
     <ccr-paginator fxFlex="nogrow" #paginator
@@ -29,7 +33,7 @@
             <td>{{ 'LIBRARY.CONTENT.ID' | translate }}</td>
             <td>{{ 'SEQUENCING.SEQUENCE_NAME' | translate }}</td>
             <td>{{ 'BOARD.CLINIC' | translate }}</td>
-            <td>{{ 'BOARD.FREQUENCY' | translate }}</td>
+            <td>{{ 'BOARD.ENROLLMENT_WINDOW' | translate }}</td>
             <td>
               <div fxLayout="row" fxLayoutAlign="center center">
                 {{ 'BOARD.ACTIONS' | translate }}

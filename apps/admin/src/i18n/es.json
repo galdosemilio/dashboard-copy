@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "Asociaciones",
     "INTEGRATIONS": "Integraciones",
     "LOGS": {
-      "APP_NAME": "App",
-      "CREATED_AT": "Fecha",
       "_TITLE": "Logs"
     },
     "NO_ASSOCIATED_SERVICES": "No hay servicios asociados",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "Debe tener por lo menos {{min}} caracteres",
       "NO_ACTIVE_CAMPAIGNS": "No hay asociaciones a listas de Active Campaign.",
       "NO_EMAIL_TEMPLATES": "No hay plantillas de email para esta organización.",
-      "NO_LOG_MESSAGES": "No hay registros para este usuario",
       "NO_ORGANIZATIONS": "No hay resultados",
       "NO_RESULTING_LABELS": "No hay resultados"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "Asegúrese que las contraseñas sean iguales.",

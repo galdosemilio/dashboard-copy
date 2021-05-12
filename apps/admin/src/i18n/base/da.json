@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "Foreninger",
     "INTEGRATIONS": "Tjeneste Sync",
     "LOGS": {
-      "APP_NAME": "App",
-      "CREATED_AT": "Dato",
       "_TITLE": "Logfiler"
     },
     "NO_ASSOCIATED_SERVICES": "Ingen tilknyttede tjenester",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "Skal være mindst {{min}} tegn",
       "NO_ACTIVE_CAMPAIGNS": "Der er ingen aktiv kampagne List foreninger",
       "NO_EMAIL_TEMPLATES": "Der er ingen e-mail-skabeloner til denne organisation.",
-      "NO_LOG_MESSAGES": "Der er ingen logfiler for denne bruger",
       "NO_ORGANIZATIONS": "Ingen resulterende organisationer",
       "NO_RESULTING_LABELS": "Ingen resulterende etiketter"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "Sørg venligst for at dine adgangskoder er ens.",

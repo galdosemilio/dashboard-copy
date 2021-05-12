@@ -17,8 +17,6 @@
     "ASSOCIATIONS": "Verbände",
     "INTEGRATIONS": "Service Sync",
     "LOGS": {
-      "APP_NAME": "App",
-      "CREATED_AT": "Datum",
       "_TITLE": "Logs"
     },
     "NO_ASSOCIATED_SERVICES": "Keine zugehörigen Dienste",
@@ -359,9 +357,11 @@
       "MIN_CHARS": "Muss mindestens {{min}} Zeichen lang sein",
       "NO_ACTIVE_CAMPAIGNS": "Es gibt keine aktive Kampagne Liste Verbände",
       "NO_EMAIL_TEMPLATES": "",
-      "NO_LOG_MESSAGES": "Es gibt keine Protokolle für diesen Benutzer",
       "NO_ORGANIZATIONS": "Keine resultierenden Organisationen",
       "NO_RESULTING_LABELS": "Keine resultierenden Labels"
+    },
+    "INFO": {
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
     },
     "PASSWORD": {
       "BOTH_MATCH": "Bitte stellen Sie sicher, dass Ihre Kennwörter übereinstimmen.",

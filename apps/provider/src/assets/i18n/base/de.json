@@ -88,6 +88,7 @@
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "In der automatischen Registrierung",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Einen Trainer wählt als <strong>enthalten sein Provider Supervising</strong> Option für abrechenbare Leistungen an und unterhalb der {{clinic.name}} Klinik.",
     "CLINIC_AUTOMATIC_ENROLLMENT": "Automatische Sequenz Enrollment",
+    "CLINIC_AUTOMATIC_ENROLLMENT_ABOUT": "Neue Patienten, die dieser Klinik hinzugefügt wurden, werden automatisch in diese Sequenzen aufgenommen. Jeder Eintrag kann eine von drei Optionen verwenden, um festzulegen, wann der Patient in die Sequenz aufgenommen wird:<br><br><ul><li><b>Wochentag</b> Der Patient wird am nächsten eingeschrieben Auftreten des ausgewählten Tages (Montag, Dienstag usw.). Wenn der Patient am selben Tag eingeschrieben ist (z. B. \"Sonntag\" ausgewählt ist und der aktuelle Tag auch Sonntag ist), erfolgt die Einschreibung am folgenden Sonntag in 1 Woche.<br></li><li><b>Tag von Monat</b> Der Patient wird am nächsten Kalendertag registriert. Wenn der Patient am selben Tag eingeschrieben ist (z. B. \"1\" ausgewählt ist und der aktuelle Tag auch der erste des Monats ist), erfolgt die Einschreibung zu Beginn des nächsten Monats. Für Monate, in denen keiner der ausgewählten Tage vorliegt (z. B. \"31\", im April jedoch nur 30 Tage), erfolgt die Registrierung am ersten des nächsten Monats.<br></li><li><b>Anzahl der Tage</b> Der Patient wird eine festgelegte Anzahl von Tagen nach dem Hinzufügen zur Klinik in die Sequenz aufgenommen.</li></ul>",
     "CLINIC_BILLABLE_SERVICES": "Abrechenbaren Leistungen",
     "CLINIC_BILLABLE_SERVICES_DESC": "Einstellungen für Ihre Klinik im Zusammenhang mit abrechenbaren und Insurace rückzahlbaren Dienste.",
     "CLINIC_CANT_REMOVE_INHERITED_SUP_PROV": "Inherited Supervising Provider können nicht gelöscht werden",
@@ -156,6 +157,7 @@
     "EMAIL": "Email",
     "END_DATE": "Endtermin",
     "END_TIME": "Endzeit",
+    "ENROLLMENT_WINDOW": "Anmeldefenster",
     "EVERY_DAYWEEK": "Jeder {{day}}",
     "FAT": "Fett",
     "FIBER": "Ballaststoffe",
@@ -919,7 +921,6 @@
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "Sie haben keine Berechtigung, auf dieses Profil zuzugreifen",
-      "AVATAR_UPLOAD_FAILED": "Hochladen fehlgeschlagen",
       "BIRTHDATE_REQUIRED": "Geburtsdatum ist erforderlich",
       "BLOOD_PRESSURE_REQUIRED": "Es müssen beide Blutdruckwerte angegeben werden.",
       "BOTH_SLEEP_TIMES": "Eine der Schlafzeiten kann nicht leer sein.",
@@ -967,7 +968,6 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "sind derzeit nicht verfügbar",
       "CONTACT_NOT_AVAILABLE": "Zur Zeit nicht erreichbar",
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Ihr Konto verfügt nicht über die Berechtigung, auf diese Funktion zuzugreifen",
       "HUNG_UP": "aufgehangen",
       "MULTIPLE_CSV_FILES": "In jeder Datei werden mehrere CSV-Dateien mit maximal 5000 Patienten heruntergeladen.",
       "NO_ANSWER": "hat nicht angenommen"

@@ -88,6 +88,7 @@
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "Ajouter Autoenrollment",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Sélectionnez un entraîneur à inclure comme <strong>Contrôle fournisseur</strong> option des services facturables à la clinique et au-dessous {{clinic.name}}.",
     "CLINIC_AUTOMATIC_ENROLLMENT": "L'inscription automatique Séquence",
+    "CLINIC_AUTOMATIC_ENROLLMENT_ABOUT": "Les nouveaux patients ajoutés à cette clinique seront automatiquement inscrits dans ces séquences. Chaque entrée peut utiliser l'une des trois options pour définir quand le patient sera inscrit dans la séquence:<br><br><ul><li><b>Jour de la semaine</b> Le patient sera inscrit au prochain occurrence du jour sélectionné (lundi, mardi, etc.). Si le patient est inscrit le même jour (par exemple \"Dimanche\" est sélectionné et le jour actuel est également dimanche), l'inscription aura lieu le dimanche suivant dans 1 semaine.<br></li><li><b>Jour de Mois</b> Le patient sera inscrit au prochain jour calendaire. Si le patient est inscrit le même jour (par exemple, «1» est sélectionné et le jour en cours est également le premier du mois), l'inscription aura lieu au début du mois suivant. De plus, pour les mois qui n'ont pas l'un des jours sélectionnés (par exemple, «31» est sélectionné mais avril ne compte que 30 jours), l'inscription aura lieu le premier du mois suivant.<br></li><li><b>Nombre de jours</b> Le patient sera inscrit dans la séquence un certain nombre de jours après avoir été ajouté à la clinique</li></ul>",
     "CLINIC_BILLABLE_SERVICES": "Services facturables",
     "CLINIC_BILLABLE_SERVICES_DESC": "Paramètres de votre clinique liés aux services facturables et remboursables. Insurace",
     "CLINIC_CANT_REMOVE_INHERITED_SUP_PROV": "Les fournisseurs hérités ne peuvent pas être Superviser supprimés",
@@ -156,6 +157,7 @@
     "EMAIL": "Mail",
     "END_DATE": "Date de fin",
     "END_TIME": "Heure de fin",
+    "ENROLLMENT_WINDOW": "Fenêtre d'inscription",
     "EVERY_DAYWEEK": "Chaque {{day}}",
     "FAT": "Gras",
     "FIBER": "Fibre",
@@ -919,7 +921,6 @@
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "Vous n'êtes pas autorisé à accéder à ce profil",
-      "AVATAR_UPLOAD_FAILED": "Le téléchargement a échoué, veuillez réessayer",
       "BIRTHDATE_REQUIRED": "La date de naissance est requise",
       "BLOOD_PRESSURE_REQUIRED": "Les deux valeurs de pression artérielle sont nécessaires.",
       "BOTH_SLEEP_TIMES": "Une des périodes de sommeil ne peut être vide",
@@ -967,7 +968,6 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "sont indisponibles",
       "CONTACT_NOT_AVAILABLE": "est indisponible",
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Votre compte n'est pas autorisé à accéder à cette fonctionnalité",
       "HUNG_UP": "raccrocher",
       "MULTIPLE_CSV_FILES": "Plusieurs fichiers CSV seront téléchargés avec un maximum de 5000 patients dans chaque fichier.",
       "NO_ANSWER": "n’a pas répondu"
