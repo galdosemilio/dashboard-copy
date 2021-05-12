@@ -31,19 +31,22 @@ export const Colors: CCRColors = {
   update(palette: CCRPalette): void {
     COLORS.length = 0
 
-    const mix1 = tinycolor.mix(palette.primary, palette.accent, 33)
-    const mix2 = tinycolor.mix(palette.primary, palette.accent, 66)
+    const primary = palette.primary
+    const accent =
+      primary === palette.accent
+        ? tinycolor(primary).lighten(20).toHexString()
+        : palette.accent
+
+    const mix1 = tinycolor.mix(primary, accent, 33)
+    const mix2 = tinycolor.mix(primary, accent, 66)
 
     const c1 = drop(
-      tinycolor(palette.primary).setAlpha(0.7).desaturate().analogous(),
+      tinycolor(primary).setAlpha(0.7).desaturate().analogous(),
       3
     )
     const c2 = drop(tinycolor(mix1).setAlpha(0.7).desaturate().analogous(), 3)
     const c3 = drop(tinycolor(mix2).setAlpha(0.7).desaturate().analogous(), 3)
-    const c4 = drop(
-      tinycolor(palette.accent).setAlpha(0.7).desaturate().analogous(),
-      3
-    )
+    const c4 = drop(tinycolor(accent).setAlpha(0.7).desaturate().analogous(), 3)
 
     invokeMap(flatten(zip(c4, c3, c2, c1)), 'toHexString').forEach((c) => {
       COLORS.push([c, tinycolor(c).desaturate().darken(15).toHexString()])
