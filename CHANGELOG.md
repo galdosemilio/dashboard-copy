@@ -1,3 +1,10 @@
+## [1.15.5](https://github.com/coachcare/dashboard/compare/v1.15.4...v1.15.5) (2021-05-12)
+
+
+### Bug Fixes
+
+* prevent race condiation for disable/enable audio and video [FRON-2111] ([5399717](https://github.com/coachcare/dashboard/commit/539971737b2e6704facd89cc14ca8f4bf0652af7))
+
 ## [1.15.4](https://github.com/coachcare/dashboard/compare/v1.15.3...v1.15.4) (2021-05-11)
 
 
