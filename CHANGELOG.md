@@ -1,3 +1,12 @@
+## [1.15.6](https://github.com/coachcare/dashboard/compare/v1.15.5...v1.15.6) (2021-05-12)
+
+
+### Bug Fixes
+
+* prevented lingering subscription issue [FRON-2170] ([7d9ec2b](https://github.com/coachcare/dashboard/commit/7d9ec2b117cc112abeb46e999efaf658f568cc3d))
+* solved form fetching logic [FRON-2168] ([81f7170](https://github.com/coachcare/dashboard/commit/81f71705b81767894d1ef2722519f8ff6f487e55))
+* solved issue with date format [FRON-2175] ([61b69cf](https://github.com/coachcare/dashboard/commit/61b69cf93cb03d5cb16b15ed3914e90be82f302d))
+
 ## [1.15.5](https://github.com/coachcare/dashboard/compare/v1.15.4...v1.15.5) (2021-05-12)
 
 
