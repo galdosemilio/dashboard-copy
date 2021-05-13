@@ -361,7 +361,7 @@
       "NO_RESULTING_LABELS": "Keine resultierenden Labels"
     },
     "INFO": {
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Ihr Konto ist nicht berechtigt, auf diese Funktion zugreifen"
     },
     "PASSWORD": {
       "BOTH_MATCH": "Bitte stellen Sie sicher, dass Ihre Kennwörter übereinstimmen.",

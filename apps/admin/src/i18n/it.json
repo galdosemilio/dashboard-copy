@@ -361,7 +361,7 @@
       "NO_RESULTING_LABELS": "Non risultano etichette"
     },
     "INFO": {
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Il tuo account non dispone dell'autorizzazione per accedere a questa funzione"
     },
     "PASSWORD": {
       "BOTH_MATCH": "Ti preghiamo di assicurarti che la password corrisponda.",

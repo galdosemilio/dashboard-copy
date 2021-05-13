@@ -361,7 +361,7 @@
       "NO_RESULTING_LABELS": "Ingen resulterende etiketter"
     },
     "INFO": {
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Din konto har ikke tilladelse til at få adgang til denne funktion"
     },
     "PASSWORD": {
       "BOTH_MATCH": "Sørg venligst for at dine adgangskoder er ens.",

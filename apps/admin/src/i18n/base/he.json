@@ -361,7 +361,7 @@
       "NO_RESULTING_LABELS": "אין תוצאות תוויות"
     },
     "INFO": {
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "החשבון שלך אין הרשאת גישה לתכונה זו"
     },
     "PASSWORD": {
       "BOTH_MATCH": "נא לוודא כי הסיסמאות שלך תואמות.",

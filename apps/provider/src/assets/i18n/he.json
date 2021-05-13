@@ -968,6 +968,7 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "כרגע לא זמינים",
       "CONTACT_NOT_AVAILABLE": "כרגע לא זמין",
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "החשבון שלך אין הרשאת גישה לתכונה זו",
       "HUNG_UP": "ניתוק",
       "MULTIPLE_CSV_FILES": "מספר קבצי CSV יורדו עם מקסימום 5000 חולים בכל קובץ.",
       "NO_ANSWER": "אין מענה"

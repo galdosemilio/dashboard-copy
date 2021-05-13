@@ -361,7 +361,7 @@
       "NO_RESULTING_LABELS": "Aucun résultat de labels"
     },
     "INFO": {
-      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": ""
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Votre compte n'a pas l'autorisation d'accéder à cette fonctionnalité"
     },
     "PASSWORD": {
       "BOTH_MATCH": "Assurez-vous que les mots de passe sont identiques.",

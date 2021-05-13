@@ -968,6 +968,7 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "are currently unavailable",
       "CONTACT_NOT_AVAILABLE": "is currently unavailable",
+      "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Your account does not have permission to access this feature",
       "HUNG_UP": "hung up",
       "MULTIPLE_CSV_FILES": "Multiple CSV files will be downloaded with a maximum of 5000 patients in each file.",
       "NO_ANSWER": "did not pickup"

@@ -76,7 +76,7 @@
     "extract": "yarn extract:admin && yarn extract:provider && yarn extract:cleanup",
     "extract:cleanup": "node_modules/.bin/ts-node ./tools/i18n",
     "extract:admin": "node_modules/.bin/ngx-translate-extract -i ./apps/admin/src/app ./libs/layout/src/lib ./libs/backend/src/lib ./libs/common/src/lib -o ./apps/admin/src/i18n/base/*.json -c -s -f namespaced-json -m _ --fi '  '",
-    "extract:provider": "node_modules/.bin/ngx-translate-extract -i ./apps/provider/src/app ./libs/common/src/lib/components/form/fields/date-input -o ./apps/provider/src/assets/i18n/base/*.json -c -s -f namespaced-json -m _ --fi '  '",
+    "extract:provider": "node_modules/.bin/ngx-translate-extract -i ./apps/provider/src/app ./libs/common/src/lib/components/form/fields/date-input ./libs/common/src/lib/components/utilities/datasource-overlay -o ./apps/provider/src/assets/i18n/base/*.json -c -s -f namespaced-json -m _ --fi '  '",
     "extract:common": "node_modules/.bin/ngx-translate-extract --input ./libs/common/src/lib --output ./libs/common/src/i18n/*.json --clean --sort --format namespaced-json --marker _ --fi '  '",
     "extract:layout": "node_modules/.bin/ngx-translate-extract --input ./libs/layout/src/lib --output ./libs/layout/src/assets/i18n/*.json --clean --sort --format namespaced-json --marker _ --fi '  '",
     "affected:apps": "nx affected:apps",
