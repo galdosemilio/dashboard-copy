@@ -1,10 +1,15 @@
 <div class="ccr-heading">
   <div class="ccr-title" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutWrap.xs fxLayoutGap="10px">
-    <h2>
-      {{ 'GLOBAL.COACHES' | translate }}
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <h2 fxFlex>
+        {{ 'GLOBAL.COACHES' | translate }}
 
-      <ccr-help-link [link]="zendeskLink"></ccr-help-link>
-    </h2>
+        <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+      </h2>
+      <h2>
+        <small class="count" *ngIf="source.totalCount"><strong>{{ source.totalCount }}</strong> {{ 'GLOBAL.COACHES' | translate }}</small>
+      </h2>
+    </div>
 
     <a *ngIf="clinic?.permissions.admin"
     mat-button color="primary" class="ccr-icon-button"

@@ -17,6 +17,8 @@ export class CoachesDataSource extends TableDataSource<
   AccListResponse,
   CoachesCriteria
 > {
+  totalCount: number
+
   constructor(
     protected notify: NotifierService,
     protected database: CoachesDatabase,
@@ -49,7 +51,7 @@ export class CoachesDataSource extends TableDataSource<
   }
 
   defaultFetch(): AccListResponse {
-    return { data: [], pagination: {} }
+    return { data: [], pagination: { totalCount: 0 } }
   }
 
   fetch(criteria: CoachesCriteria): Observable<AccListResponse> {
@@ -57,6 +59,8 @@ export class CoachesDataSource extends TableDataSource<
   }
 
   mapResult(result: AccListResponse): Array<AccountAccessData> {
+    this.totalCount = result.pagination.totalCount
+
     // pagination handling
     this.total = result.pagination.next
       ? result.pagination.next + 1

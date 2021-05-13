@@ -49,7 +49,7 @@ export class DietersDataSource extends TableDataSource<
   }
 
   defaultFetch(): AccListResponse {
-    return { data: [], pagination: {} }
+    return { data: [], pagination: { totalCount: 0 } }
   }
 
   fetch(criteria): Observable<AccListResponse> {
