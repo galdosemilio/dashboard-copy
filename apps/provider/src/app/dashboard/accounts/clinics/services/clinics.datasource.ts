@@ -16,6 +16,8 @@ export class ClinicsDataSource extends TableDataSource<
   OrgAccessResponse,
   ClinicCriteria
 > {
+  totalCount: number
+
   constructor(
     protected notify: NotifierService,
     protected database: ClinicsDatabase,
@@ -47,7 +49,7 @@ export class ClinicsDataSource extends TableDataSource<
   }
 
   defaultFetch(): OrgAccessResponse {
-    return { data: [], pagination: {} }
+    return { data: [], pagination: { totalCount: 0 } }
   }
 
   fetch(criteria: ClinicCriteria): Observable<OrgAccessResponse> {
@@ -55,6 +57,7 @@ export class ClinicsDataSource extends TableDataSource<
   }
 
   mapResult(result: OrgAccessResponse): Array<OrganizationAccess> {
+    this.totalCount = result.pagination.totalCount
     // pagination handling
     this.total = result.pagination.next
       ? result.pagination.next + 1

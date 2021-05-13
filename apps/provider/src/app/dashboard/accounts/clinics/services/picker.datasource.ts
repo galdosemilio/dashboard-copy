@@ -48,8 +48,8 @@ export class ClinicPickerDataSource extends TableDataSource<
 
   defaultFetch(): Array<OrgAccessResponse> {
     return [
-      { data: [], pagination: {} },
-      { data: [], pagination: {} }
+      { data: [], pagination: { totalCount: 0 } },
+      { data: [], pagination: { totalCount: 0 } }
     ]
   }
 

@@ -1,7 +1,12 @@
 
 <div class="ccr-heading">
   <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
-    <h2 fxFlex>{{'BOARD.CLINICS' | translate}}</h2>
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <h2 fxFlex>{{'BOARD.CLINICS' | translate}}</h2>
+      <h2>
+        <small class="count" *ngIf="source.totalCount"><strong>{{ source.totalCount }}</strong> {{ 'GLOBAL.CLINICS' | translate }}</small>
+      </h2>
+    </div>
 
     <a *ngIf="showCreateClinic && clinic?.permissions.admin"
     mat-button color="primary" class="ccr-icon-button"

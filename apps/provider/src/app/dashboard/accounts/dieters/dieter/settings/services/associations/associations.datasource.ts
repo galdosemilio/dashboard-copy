@@ -29,7 +29,7 @@ export class AssociationsDataSource extends TableDataSource<
   }
 
   defaultFetch(): OrgAccessResponse {
-    return { data: [], pagination: {} }
+    return { data: [], pagination: { totalCount: 0 } }
   }
 
   fetch(criteria: OrgAccessRequest): Observable<OrgAccessResponse> {
