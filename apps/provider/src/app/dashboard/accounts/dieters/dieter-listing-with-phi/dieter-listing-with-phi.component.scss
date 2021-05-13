@@ -1,0 +1,26 @@
+@import 'variables';
+
+@media only screen and (max-width: $breakpoint-tablet) {
+  .ccr-heading {
+    display: block !important;
+
+    .ccr-title {
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+    .ccr-page-size-label {
+      display: none;
+    }
+
+    .ccr-htools {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+    }
+  }
+
+  .ccr-expandable-table-container {
+    max-height: inherit;
+  }
+}
