@@ -1,3 +1,11 @@
+## [1.15.8](https://github.com/coachcare/dashboard/compare/v1.15.7...v1.15.8) (2021-05-13)
+
+
+### Bug Fixes
+
+* added missing translations ([545d485](https://github.com/coachcare/dashboard/commit/545d4857e8206f61154633f97540a24824508c58))
+* use light accent color for generating chart colors if primary is the same with accent [FRON-2147] ([50768bb](https://github.com/coachcare/dashboard/commit/50768bb22b596096e91b1648f53bf27e2e5db192))
+
 ## [1.15.7](https://github.com/coachcare/dashboard/compare/v1.15.6...v1.15.7) (2021-05-12)
 
 
