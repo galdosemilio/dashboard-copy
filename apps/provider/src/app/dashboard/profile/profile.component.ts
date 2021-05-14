@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { ContextService, EventsService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  CurrentAccount,
+  EventsService,
+  NotifierService
+} from '@app/service'
 import { _ } from '@app/shared'
 import { AccSingleResponse, AccUpdateRequest } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -40,6 +45,9 @@ export class ProfileComponent implements OnDestroy, OnInit {
     this.profile = this.context.user
 
     this.bus.trigger('right-panel.component.set', 'notifications')
+    this.bus.listen('user.data', (user: CurrentAccount) => {
+      this.profile = user
+    })
 
     this.route.paramMap
       .pipe(untilDestroyed(this))
