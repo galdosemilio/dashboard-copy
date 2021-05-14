@@ -1,3 +1,7 @@
+h4 {
+  width: 100%;
+}
+
 .font-icon {
   font-size: 14px !important;
 }
@@ -11,6 +15,10 @@
   height: 100%;
 
   .alert-item-wrapper {
+    min-height: 93px;
+    max-height: 300px;
+    overflow-y: auto;
+
     .alert-item {
       height: fit-content;
     }
@@ -20,4 +28,17 @@
     overflow: hidden;
     min-height: 200px;
   }
+}
+
+.click-to-expand-notice {
+  display: block;
+  margin: 5px 0;
+}
+
+.collapsed-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  height: 0;
+  padding: 0 !important;
+  width: 100%;
 }

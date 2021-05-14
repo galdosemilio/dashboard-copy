@@ -36,10 +36,13 @@ import { Alerts } from '@coachcare/sdk'
 })
 export class RemindersComponent implements OnInit, OnDestroy {
   public alerts = []
+  public alertsCollapsed?: boolean
   public dateSections: Array<any> = []
   public isLoading = true
   public isScheduleEnabled = false
+  public notesCollapsed?: boolean
   public notesRefresh$: Subject<string> = new Subject<string>()
+  public phasesCollapsed?: boolean
   public shouldShowDaysheetButton = false
   public shouldShowNotes = true
   public shouldShowPhaseEnrollments = false

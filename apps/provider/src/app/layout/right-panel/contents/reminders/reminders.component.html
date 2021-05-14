@@ -5,30 +5,44 @@
   </h3>
 
   <div>
-    <h4 matSubheader>
+    <h4 matSubheader (click)="phasesCollapsed = !phasesCollapsed" fxLayout="row" fxLayoutAlign="start center">
       <mat-icon class="font-icon" fontSet="fas" fontIcon="fa-tag"></mat-icon>
-      <span>{{ 'RIGHT_PANEL.PHASES' | translate }}</span>
+      <span fxFlex>{{ 'RIGHT_PANEL.PHASES' | translate }}</span>
+      <mat-icon class="clickable">
+        {{ phasesCollapsed ? 'expand_more' : 'expand_less' }}
+      </mat-icon>
     </h4>
 
-    <div fxLayout="row" fxLayoutAlign="stretch stretch">
+    <div [class.collapsed-wrapper]="phasesCollapsed" fxLayout="row" fxLayoutAlign="stretch stretch">
       <app-rightpanel-phases fxFlex></app-rightpanel-phases>
     </div>
+
+    <small *ngIf="phasesCollapsed" (click)="phasesCollapsed = false" class="ccr-text-center clickable click-to-expand-notice">
+      {{ 'RIGHT_PANEL.CLICK_TO_EXPAND' | translate }}
+    </small>
   </div>
 
-  <h4 matSubheader>
+  <h4 matSubheader (click)="alertsCollapsed = !alertsCollapsed" fxLayout="row" fxLayoutAlign="start center">
     <mat-icon>notifications_active</mat-icon>
-    <span>{{ 'RIGHT_PANEL.RECENT_ALERTS' | translate }}</span>
+    <span fxFlex>{{ 'RIGHT_PANEL.RECENT_ALERTS' | translate }}</span>
+    <mat-icon class="clickable">
+      {{ alertsCollapsed ? 'expand_more' : 'expand_less' }}
+    </mat-icon>
   </h4>
 
-  <div class="items-none" *ngIf="alerts.length === 0">
+  <div class="items-none" *ngIf="!alertsCollapsed && alerts.length === 0">
     <span>{{'RIGHT_PANEL.NO_ALERTS' | translate}}</span>
   </div>
 
-  <mat-list class="alert-item-wrapper" *ngIf="alerts.length">
+  <mat-list class="alert-item-wrapper" *ngIf="!alertsCollapsed && alerts.length">
     <mat-list-item class="alert-item" *ngFor="let alert of alerts; let i = index">
       <app-rightpanel-alert [alert]="alert" (dismissed)="alerts.splice(i, 1)"></app-rightpanel-alert>
     </mat-list-item>
   </mat-list>
+
+  <small *ngIf="alertsCollapsed" (click)="alertsCollapsed = false" class="ccr-text-center clickable click-to-expand-notice">
+    {{ 'RIGHT_PANEL.CLICK_TO_EXPAND' | translate }}
+  </small>
 
   <ng-container *ngIf="isScheduleEnabled">
     <h4 matSubheader>
@@ -68,17 +82,22 @@
   </ng-container>
 
   <div fxLayout="column" fxFlex="1 1 100%" class="notes-container-wrapper" *ngIf="shouldShowNotes">
-    <h4 matSubheader>
-      <mat-icon>event_note</mat-icon>
-      <span>{{ 'BOARD.NOTES' | translate }}</span>
-      <ccr-popup-description
-      class="sidebar-header-placement"
-      [title]="'BOARD.NOTES' | translate"
-      [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_NOTES_DESCRIPTION' | translate"
-      ></ccr-popup-description>
+    <h4 matSubheader (click)="notesCollapsed = !notesCollapsed" fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon>event_note</mat-icon>
+        <span>{{ 'BOARD.NOTES' | translate }}</span>
+        <ccr-popup-description
+        class="sidebar-header-placement"
+        [title]="'BOARD.NOTES' | translate"
+        [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_NOTES_DESCRIPTION' | translate"
+        ></ccr-popup-description>
+      </div>
+      <mat-icon class="clickable">
+        {{ notesCollapsed ? 'expand_more' : 'expand_less' }}
+      </mat-icon>
     </h4>
 
-    <div class="items-create" fxLayout="column" fxLayoutGap="10px">
+    <div *ngIf="!notesCollapsed" class="items-create" fxLayout="column" fxLayoutGap="10px">
       <button
       *ngIf="shouldShowDaysheetButton"
       (click)="showDaysheetDialog()"
@@ -101,7 +120,11 @@
       </button>
     </div>
 
-    <app-rightpanel-notes-container [refresh$]="notesRefresh$"></app-rightpanel-notes-container>
+    <app-rightpanel-notes-container [class.collapsed-wrapper]="notesCollapsed" [refresh$]="notesRefresh$"></app-rightpanel-notes-container>
+
+    <small *ngIf="notesCollapsed" (click)="notesCollapsed = false" class="ccr-text-center clickable click-to-expand-notice">
+      {{ 'RIGHT_PANEL.CLICK_TO_EXPAND' | translate }}
+    </small>
   </div>
 </div>
 
