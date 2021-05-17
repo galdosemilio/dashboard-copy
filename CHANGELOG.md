@@ -1,3 +1,17 @@
+# [1.16.0](https://github.com/coachcare/dashboard/compare/v1.15.8...v1.16.0) (2021-05-17)
+
+
+### Bug Fixes
+
+* put updated user info to profile after change info [FRON-2160] ([9c4b362](https://github.com/coachcare/dashboard/commit/9c4b362395498033625cacf38c7536b395d47b2c))
+
+
+### Features
+
+* put clinics count to table header [IDEA-814] ([0b3a54c](https://github.com/coachcare/dashboard/commit/0b3a54c9f5fdab647f48998ea9a2ac73adb140aa))
+* right panel sections are now collapsible [FRON-2157] ([fe9619b](https://github.com/coachcare/dashboard/commit/fe9619bb1c2f57714e48b6da5fa7d4fd33de5353))
+* show count of coaches to table [IDEA-814] ([f41febe](https://github.com/coachcare/dashboard/commit/f41febeab958034317057f303c6ae03207df0348))
+
 ## [1.15.8](https://github.com/coachcare/dashboard/compare/v1.15.7...v1.15.8) (2021-05-13)
 
 
