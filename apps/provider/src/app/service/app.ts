@@ -28,6 +28,7 @@ import { OrphanedAccountGuard } from './guards'
 import { WalkthroughService } from './walkthrough'
 import { GestureService } from './gesture'
 import { APP_CONFIG } from '@coachcare/common/shared'
+import { FormPDFService } from './formPDFService'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -88,6 +89,7 @@ export function AppProviders() {
     PlatformUpdatesService,
     ScheduleDataService,
     TimeTrackerService,
+    FormPDFService,
     {
       provide: LOCALE_ID,
       useExisting: LanguageService

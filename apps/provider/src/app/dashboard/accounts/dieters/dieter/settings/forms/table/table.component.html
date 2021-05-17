@@ -47,6 +47,7 @@
                 [class.disabled]="!row.canRemoveSubmission"
                 [matTooltip]="'LIBRARY.FORMS.REMOVE_SUBMISSION' | translate"
                 (click)="onRemoveSubmission(row)">delete</mat-icon>
+                <mat-icon (click)="onGeneratePDF(row)" [matTooltip]="'LIBRARY.FORMS.DOWNLOAD_PDF' | translate">picture_as_pdf</mat-icon>
             </mat-cell>
         </ng-container>
 

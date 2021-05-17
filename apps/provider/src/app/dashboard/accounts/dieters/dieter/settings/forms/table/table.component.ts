@@ -3,7 +3,7 @@ import { MatDialog } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { FormSubmission } from '@app/dashboard/library/forms/models'
 import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services'
-import { NotifierService } from '@app/service'
+import { FormPDFService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
 
@@ -16,9 +16,7 @@ export class DieterFormsTableComponent {
   source: FormSubmissionsDatasource
 
   @Output()
-  selectSubmission: EventEmitter<FormSubmission> = new EventEmitter<
-    FormSubmission
-  >()
+  selectSubmission: EventEmitter<FormSubmission> = new EventEmitter<FormSubmission>()
 
   public columns: string[] = [
     'formName',
@@ -31,7 +29,8 @@ export class DieterFormsTableComponent {
   constructor(
     private dialog: MatDialog,
     private notifier: NotifierService,
-    private router: Router
+    private router: Router,
+    private formPDFService: FormPDFService
   ) {}
 
   onGoToProviderProfile(formSubmission: FormSubmission) {
@@ -69,5 +68,9 @@ export class DieterFormsTableComponent {
 
   onViewForm(submission: FormSubmission): void {
     this.selectSubmission.emit(submission)
+  }
+
+  async onGeneratePDF(submission: FormSubmission): Promise<void> {
+    this.formPDFService.generatePDF(submission)
   }
 }
