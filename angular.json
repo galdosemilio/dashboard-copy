@@ -1,5 +1,32 @@
 {
   "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "warnings": {
+      "typescriptMismatch": false
+    }
+  },
+  "defaultProject": "provider",
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/web:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/web:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    }
+  },
   "projects": {
     "provider": {
       "projectType": "application",
@@ -571,22 +598,127 @@
           "style": "scss"
         }
       }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "warnings": {
-      "typescriptMismatch": false
-    }
-  },
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
     },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+    "measurement-charts": {
+      "projectType": "application",
+      "root": "apps/measurement-charts",
+      "sourceRoot": "apps/measurement-charts/src",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/measurement-charts",
+            "index": "apps/measurement-charts/src/index.html",
+            "main": "apps/measurement-charts/src/main.ts",
+            "polyfills": "apps/measurement-charts/src/polyfills.ts",
+            "tsConfig": "apps/measurement-charts/tsconfig.app.json",
+            "assets": [
+              "apps/measurement-charts/src/favicon.ico",
+              "apps/measurement-charts/src/assets"
+            ],
+            "styles": ["apps/measurement-charts/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "prod": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/measurement-charts/src/environments/environment.ts",
+                  "with": "apps/measurement-charts/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/measurement-charts/src/environments/environment.ts",
+                  "with": "apps/measurement-charts/src/environments/environment.test.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "measurement-charts:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "measurement-charts:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/measurement-charts/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/measurement-charts"],
+          "options": {
+            "jestConfig": "apps/measurement-charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "measurement-charts-e2e": {
+      "root": "apps/measurement-charts-e2e",
+      "sourceRoot": "apps/measurement-charts-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/measurement-charts-e2e/cypress.json",
+            "tsConfig": "apps/measurement-charts-e2e/tsconfig.e2e.json",
+            "devServerTarget": "measurement-charts:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "measurement-charts:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/measurement-charts-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
     }
-  },
-  "defaultProject": "provider"
+  }
 }

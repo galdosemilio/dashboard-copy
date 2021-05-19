@@ -1,5 +1,4 @@
 {
-  "npmScope": "dashboard",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {
@@ -9,6 +8,18 @@
     "tslint.json": "*",
     "nx.json": "*",
     "tsconfig.base.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "dashboard",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
   },
   "projects": {
     "provider": {
@@ -43,17 +54,13 @@
     },
     "material": {
       "tags": []
+    },
+    "measurement-charts": {
+      "tags": []
+    },
+    "measurement-charts-e2e": {
+      "tags": [],
+      "implicitDependencies": ["measurement-charts"]
     }
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
-  },
-  "affected": {
-    "defaultBase": "master"
   }
 }

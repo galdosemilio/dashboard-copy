@@ -1,0 +1,10 @@
+dashboard-date-range-selector {
+  .date-range-container {
+    align-items: center;
+    background-color: var(--selector-background-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 15px;
+  }
+}

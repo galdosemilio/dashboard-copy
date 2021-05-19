@@ -1,0 +1,208 @@
+dashboard-nav {
+  .tab-group {
+    display: flex;
+    border-bottom: 1px solid #b5b3b3;
+    height: 44px;
+  }
+
+  .wrapper {
+    height: calc(100vh - 60px);
+    position: relative;
+
+    #list-wrapper {
+      height: 100%;
+      overflow-x: hidden;
+
+      #pull-up-refresh {
+        position: relative;
+        height: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #b5b3b3;
+        overflow: hidden;
+
+        #refreshing-wrapper {
+          display: flex;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.4);
+          z-index: 1;
+
+          .loading-bar {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+
+            div {
+              box-sizing: border-box;
+              display: block;
+              position: absolute;
+              width: 64px;
+              height: 64px;
+              margin: 8px;
+              border: 8px solid var(--primary);
+              border-radius: 50%;
+              animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+              border-color: var(--primary) transparent transparent transparent;
+
+              &::nth-child(1) {
+                animation-delay: -0.45s;
+              }
+              &::nth-child(2) {
+                animation-delay: -0.3s;
+              }
+              &::nth-child(3) {
+                animation-delay: -0.15s;
+              }
+            }
+          }
+          @keyframes loading {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+
+      #list-content {
+        background-color: white;
+      }
+
+      .list-item {
+        height: 70px;
+        width: 100%;
+        position: relative;
+        border-bottom: 1px solid #b5b3b3;
+        box-sizing: border-box;
+        color: var(--text);
+        font-size: 17px;
+        box-sizing: border-box;
+
+        .item {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          background-color: white;
+          display: flex;
+          padding: 12px 20px;
+          box-sizing: border-box;
+
+          p {
+            padding: 0;
+            margin: 0;
+            line-height: 25px;
+          }
+          .date-wrap {
+            margin: 0 10px;
+            font-size: 22px;
+            font-weight: bold;
+          }
+          .content {
+            margin: 0 10px;
+          }
+          .arrow-right {
+            line-height: 45px;
+            flex: 1;
+            float: right;
+            text-align: right;
+          }
+        }
+
+        .action {
+          width: 100%;
+          height: 100%;
+          background-color: #d4d4d4;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+
+          .btn-delete {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 30px;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary);
+          }
+        }
+      }
+    }
+
+    #error {
+      position: absolute;
+      display: none;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      color: red;
+    }
+
+    #loading-wrapper {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.4);
+      z-index: 1;
+
+      .loading-bar {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+
+        div {
+          box-sizing: border-box;
+          display: block;
+          position: absolute;
+          width: 64px;
+          height: 64px;
+          margin: 8px;
+          border: 8px solid var(--primary);
+          border-radius: 50%;
+          animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          border-color: var(--primary) transparent transparent transparent;
+
+          &::nth-child(1) {
+            animation-delay: -0.45s;
+          }
+          &::nth-child(2) {
+            animation-delay: -0.3s;
+          }
+          &::nth-child(3) {
+            animation-delay: -0.15s;
+          }
+        }
+      }
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}

@@ -94,6 +94,9 @@ jobs:
           name: Execute full build for PROVIDER
           command: NODE_OPTIONS=--max_old_space_size=6144 yarn build provider -c << parameters.mode >>
       - run:
+          name: Execute full build for MEASUREMENT CHARTS
+          command: yarn build measurement-charts -c << parameters.mode >> --base-href /measurement-charts/
+      - run:
           name: Copy deployment files
           command: cp appspec.yml ~/repo/dist/apps && cp -r scripts ~/repo/dist/apps
       - persist_to_workspace:
@@ -132,6 +135,14 @@ jobs:
           arguments: --acl public-read --delete
           from: ./provider
           to: s3://$DEPLOYMENT_BUCKET/provider
+      - aws-s3/copy:
+          arguments: --acl public-read --recursive
+          from: ./measurement-charts
+          to: s3://$DEPLOYMENT_BUCKET/measurement-charts
+      - aws-s3/sync:
+          arguments: --acl public-read --delete
+          from: ./measurement-charts
+          to: s3://$DEPLOYMENT_BUCKET/measurement-charts
       - run:
           name: Push SumoLogic deployment notification
           command: |
@@ -234,7 +245,7 @@ workflows:
       - execute_affected:
           name: affected_test
           command: test
-          exclude: api,datepicker,layout,common,backend
+          exclude: api,datepicker,layout,common,backend,measurement-charts
           requires:
             - affected_build
       - approve_affected_e2e:
