@@ -460,10 +460,6 @@
           "WELCOME_MESSAGE": "The Apollo Care platform powers weight loss clinics with a mobile app, coach dashboard and connected devices combined in one integrated platform to improve patient care and increase clinic efficiencies.",
           "WELCOME_TITLE": "Welcome to Apollo Care!"
         },
-        "BA": {
-          "WELCOME_MESSAGE": "The {{ org }} platform powers weight loss clinics with a mobile app, coach dashboard and connected devices combined in one integrated platform to improve patient care and increase clinic efficiencies.",
-          "WELCOME_TITLE": "Welcome to {{ org }}!"
-        },
         "DEFAULT": {
           "CLINIC_REGISTRATION": "Clinic Registration"
         },
@@ -611,10 +607,6 @@
       "YOUR_PLAN_SELECTION": "Your Plan Selection"
     },
     "STEP1": {
-      "HEALTHY_T": {
-        "CLINIC_MSA": "Bariatric Advantage Privacy Policy",
-        "NEWSLETTER_CHECK_DESC": "By checking this box and selecting Continue, I agree to receive the Healthy Transformation digital email that may include program and product updates and promotions."
-      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Patients will download the MyHealthyJourney app and enter your clinic’s unique 4 digit code to access the app’s full features. Your clinic's mobile app and provider dashboard will be live within 48 hours after receiving the platform implementation form.",
         "MOB_APP_1_TITLE": "MyHealthyJourney App",

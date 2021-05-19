@@ -1,7 +1,6 @@
 import {
   ApolloHeaderComponent,
   ApolloHeaderTitleComponent,
-  BariatricAdvantageHeaderComponent,
   DefaultHeaderComponent,
   DefaultHeaderTitleComponent,
   GWLPHeaderComponent,
@@ -16,7 +15,6 @@ import {
 export const HeaderComponents = [
   ApolloHeaderComponent,
   ApolloHeaderTitleComponent,
-  BariatricAdvantageHeaderComponent,
   DefaultHeaderComponent,
   DefaultHeaderTitleComponent,
   GWLPHeaderComponent,
@@ -30,7 +28,6 @@ export const HeaderComponents = [
 export const HeaderEntryComponents = [
   ApolloHeaderComponent,
   ApolloHeaderTitleComponent,
-  BariatricAdvantageHeaderComponent,
   DefaultHeaderComponent,
   DefaultHeaderTitleComponent,
   GWLPHeaderComponent,

@@ -460,10 +460,6 @@
           "WELCOME_MESSAGE": "A plataforma Apollo Care capacita clínicas de perda de peso com uma aplicação móvel, painel de controlo do treinador e dispositivos conectados combinados em uma plataforma integrada para melhorar o atendimento ao paciente e aumentar o desempenho.",
           "WELCOME_TITLE": "Bem-vindo à Apllo Care!"
         },
-        "BA": {
-          "WELCOME_MESSAGE": "A plataforma Bariatric Advantage capacita clínicas de perda de peso com uma aplicação móvel, painel de treino e dispositivos conectados combinados numa plataforma integrada para melhorar o atendimento ao paciente e aumentar a eficiência da clínica.",
-          "WELCOME_TITLE": "Bem-vindo à Bariatric Advantage!"
-        },
         "DEFAULT": {
           "CLINIC_REGISTRATION": "Registo de clínica"
         },
@@ -611,10 +607,6 @@
       "YOUR_PLAN_SELECTION": "Sua seleção de plano"
     },
     "STEP1": {
-      "HEALTHY_T": {
-        "CLINIC_MSA": "Bariatric Advantage Política de Privacidade",
-        "NEWSLETTER_CHECK_DESC": "Ao marcar esta caixa e selecionando Continuar, concordo em receber o email digital de Transformação saudável, que pode incluir programas e atualizações do produto e promoções."
-      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Os pacientes farão o download do aplicativo MyHealthyJourney e inserirão o código exclusivo de 4 dígitos da sua clínica para acessar todos os recursos do aplicativo. O aplicativo móvel e o painel do provedor da sua clínica estarão ativos dentro de 48 horas após o recebimento do formulário de implementação da plataforma.",
         "MOB_APP_1_TITLE": "MyHealthyJourney App",

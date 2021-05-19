@@ -460,10 +460,6 @@
           "WELCOME_MESSAGE": "Apollo Care-platformen driver vægttabsklinikker med en mobilapp, trænerpanel og tilsluttede enheder kombineret i en integreret platform for at forbedre patientplejen og øge klinikens effektivitet.",
           "WELCOME_TITLE": "Velkommen til Apollo Care!"
         },
-        "BA": {
-          "WELCOME_MESSAGE": "{{ org }}-platformen driver vægttabsklinikker med en mobilapp, trænerpanel og tilsluttede enheder kombineret i en integreret platform for at forbedre patientplejen og øge klinikens effektivitet.",
-          "WELCOME_TITLE": "Velkommen til {{ org }}!"
-        },
         "DEFAULT": {
           "CLINIC_REGISTRATION": "Klinik Registrering"
         },
@@ -611,10 +607,6 @@
       "YOUR_PLAN_SELECTION": "Dit valg Plan"
     },
     "STEP1": {
-      "HEALTHY_T": {
-        "CLINIC_MSA": "Bariatric Advantage Privacy Policy",
-        "NEWSLETTER_CHECK_DESC": "Ved at markere dette felt og vælge Fortsæt, jeg accepterer at modtage Sund Transformation digitale e-mail, som kan omfatte programmer og produktopdateringer og tilbud."
-      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Patienter vil downloade MyHealthyJourney-appen og indtaste din kliniks unikke firecifrede kode for at få adgang til appens fulde funktioner. Din kliniks mobilapp og udbyderens dashboard vises direkte inden for 48 timer efter modtagelse af platformens implementeringsformular.",
         "MOB_APP_1_TITLE": "MyHealthyJourney-app",

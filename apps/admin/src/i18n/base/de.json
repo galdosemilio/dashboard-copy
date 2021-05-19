@@ -460,10 +460,6 @@
           "WELCOME_MESSAGE": "Die Apollo Care Plattform unterstützt Abnehmkliniken mit einer mobilen App, einem Coach-Dashboard und verbundenen Geräten, die in einer integrierten Plattform kombiniert sind, um die Patientenversorgung zu verbessern und die Effizienz der Klinik zu steigern.",
           "WELCOME_TITLE": "Willkommen bei Apollo Care!"
         },
-        "BA": {
-          "WELCOME_MESSAGE": "Die Bariatric Advantage Plattform unterstützt Abnehmkliniken mit einer mobilen App, einem Coach-Dashboard und verbundenen Geräten, die in einer integrierten Plattform kombiniert sind, um die Patientenversorgung zu verbessern und die Effizienz der Klinik zu steigern.",
-          "WELCOME_TITLE": "Willkommen bei Bariatric Advantage!"
-        },
         "DEFAULT": {
           "CLINIC_REGISTRATION": "Klinikanmeldung"
         },
@@ -611,10 +607,6 @@
       "YOUR_PLAN_SELECTION": "Ihr Plan Auswahl"
     },
     "STEP1": {
-      "HEALTHY_T": {
-        "CLINIC_MSA": "Bariatric Vorteil Datenschutz",
-        "NEWSLETTER_CHECK_DESC": "Durch die Überprüfung dieser Box und Auswählen Weiter stimme ich die gesunde Transformation digitale E-Mail zu erhalten, das Programm und Produkt-Updates und Sonderangebote können."
-      },
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Patienten laden die MyHealthyJourney-App herunter und geben den eindeutigen 4-stelligen Code Ihrer Klinik ein, um auf alle Funktionen der App zuzugreifen. Die mobile App und das Provider-Dashboard Ihrer Klinik sind innerhalb von 48 Stunden nach Erhalt des Plattformimplementierungsformulars verfügbar.",
         "MOB_APP_1_TITLE": "MyHealthyJourney App",

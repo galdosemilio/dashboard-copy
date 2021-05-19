@@ -1,6 +1,5 @@
 export * from './default/default.header.component'
 export * from './apollo/apollo.header.component'
-export * from './bariatric-adv'
 export * from './gwlp'
 export * from './inhealth'
 export * from './nutrimost'

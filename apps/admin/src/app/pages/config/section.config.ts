@@ -35,6 +35,7 @@ export interface RegisterConfigDetails {
   CLINIC_MSA?: boolean
   CLINIC_MSA_LINK?: string
   CLINIC_MSA_LINK_LABEL?: string
+  SELF_REGISTER?: boolean
 }
 
 export interface RegisterFirstStepDetails {

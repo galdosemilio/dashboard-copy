@@ -10,6 +10,7 @@
 import {
   Component,
   ElementRef,
+  Inject,
   OnDestroy,
   OnInit,
   ViewChild
@@ -29,7 +30,12 @@ import {
 import { ActivatedRoute, Router } from '@angular/router'
 import { resolveConfig } from '@board/pages/config/section.config'
 import { Register } from '@coachcare/sdk'
-import { _, FormUtils } from '@coachcare/common/shared'
+import {
+  _,
+  FormUtils,
+  APP_ENVIRONMENT,
+  AppEnvironment
+} from '@coachcare/common/shared'
 import { CCRFacade } from '@coachcare/common/store/ccr'
 import { BlockOption } from '@coachcare/common/components'
 import { ConfirmDialog, LanguagesDialog } from '@coachcare/common/dialogs/core'
@@ -79,11 +85,13 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
   step0: FormGroup
   step1: FormGroup
   step2: FormGroup
+  allowedSelfRegister: boolean
 
   @ViewChild('top', { static: false })
   top: ElementRef
 
   constructor(
+    @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
     public context: ContextService,
     private cookie: CookieService,
     private dialog: MatDialog,
@@ -250,6 +258,17 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
       'REGISTER.SHOW_REGISTER_ICON',
       this.context.organizationId
     )
+
+    const allowedSelfRegister =
+      resolveConfig(
+        'REGISTER.SELF_REGISTER',
+        this.context.organizationId,
+        true
+      ) ?? true
+
+    if (!allowedSelfRegister) {
+      window.location.replace('https://www.coachcare.com/pricing/')
+    }
   }
 
   validateStep1(step1: FormGroup) {

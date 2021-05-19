@@ -13,6 +13,7 @@ export const DefaultSectionConfig: SectionConfigDetails = {
     INFO: {
       DESCRIPTION: DefaultInfoDescriptionComponent
     },
-    LAST_STEP: DefaultLastStepComponent
+    LAST_STEP: DefaultLastStepComponent,
+    SELF_REGISTER: true
   }
 }
