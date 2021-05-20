@@ -13,8 +13,8 @@
   </div>
 </div>
 
-<div class="ccr-call-window-container">
-  <div class="ccr-overlay-title" xFlex fxLayout="row" fxLayoutAlign="start middle"
+<div class="ccr-call-window-container" fxFlex fxLayout="column">
+  <div class="ccr-overlay-title" fxLayout="row" fxLayoutAlign="start middle"
   [ngClass]="{'fullscreen':callState?.windowState != 'MAXIMIZED'}">
     <div
     (mousedown)="callState?.windowState === 'DEFAULT' && followPointer()"
@@ -30,7 +30,7 @@
   <div class="ccr-overlay-separator" *ngIf="callState?.windowState !== 'FULLSCREEN'"></div>
   <div [ngClass]="{'container-overlap':callState?.windowState != 'MINIMIZED'}">
     <app-call-room #roomComponent></app-call-room>
-    <div class="ccr-overlapping-panel" xFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
+    <div class="ccr-overlapping-panel" fxFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
       <div fxFlex="65" fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="5px">
         <span [hidden]="!callState?.isAttemptingToReconnect && (callState?.participantJoined || callState?.controlsState === 'NOTIFYING')">
           {{ ((callState?.isReconnect || callState?.isAttemptingToReconnect) ? ('CALL.RECONNECTING' | translate) : ('CALL.CALLING' | translate)) | uppercase }}...
@@ -42,7 +42,7 @@
         </small>
       </div>
     </div>
-    <div class="ccr-overlapping-panel" xFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
+    <div class="ccr-overlapping-panel" fxFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
       <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
         <div class="ccr-caller" *ngIf="!callState.hasVideoStarted">
           <ccr-avatar size="bigger" [account]="callState?.room?.recipient?.id" matListIcon></ccr-avatar>
@@ -57,13 +57,19 @@
           </small>
         </div>
 
-        <div app-call-video-request xFlex fxLayout="row" fxLayoutAlign="start center"
+        <div app-call-video-request fxFlex fxLayout="row" fxLayoutAlign="start center"
           fxLayoutGap="20px"
           class="notification" *ngIf="callState?.controlsState === 'NOTIFYING'" ></div>
-
-        <div app-call-controls xFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px"
-          class="call-controls" *ngIf="callState?.controlsState === 'CALL_ON_GOING'"></div>
       </div>
     </div>
   </div>
+
+  <div
+    app-call-controls
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="20px"
+    class="call-controls"
+    *ngIf="callState?.controlsState === 'CALL_ON_GOING' && callState?.windowState != 'MINIMIZED'"
+  ></div>
 </div>

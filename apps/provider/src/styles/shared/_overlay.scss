@@ -102,16 +102,20 @@ app-call-settings {
           color: mat-color($ccr-foreground, info);
         }
       }
-      .call-controls {
-        .mat-mini-fab {
-          background: mat-color($ccr-background, selected);
-          color: mat-color($ccr-foreground, base);
-        }
-        .mat-mini-fab[disabled] {
-          background: mat-color($ccr-background, disabled-button);
-          color: mat-color($ccr-foreground, disabled-button);
-        }
-      }
+    }
+  }
+
+  .call-controls {
+    padding: 10px;
+    border-top: 1px solid mat-color($ccr-background, selected);
+
+    .mat-mini-fab {
+      background: mat-color($ccr-background, selected);
+      color: mat-color($ccr-foreground, base);
+    }
+    .mat-mini-fab[disabled] {
+      background: mat-color($ccr-background, disabled-button);
+      color: mat-color($ccr-foreground, disabled-button);
     }
   }
 }
