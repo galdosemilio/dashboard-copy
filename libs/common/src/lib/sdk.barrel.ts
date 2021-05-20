@@ -15,7 +15,6 @@ import {
   Content,
   ContentPackage,
   ContentPreference,
-  // Consultation,
   CountryProvider,
   Device,
   Exercise,
@@ -54,7 +53,6 @@ import {
   MessagingPreference,
   MFA,
   MobileApp,
-  // Notes,
   Notification,
   OrganizationProvider,
   OrganizationAssignment,
@@ -78,14 +76,13 @@ import {
   OrganizationPreference,
   AccountAvatar,
   AuthenticationToken
-  // ApiLog
 } from '@coachcare/sdk'
 import { environment } from './environments/environment'
 
 const generalApiService = new ApiService({
   token: new AuthenticationToken(),
   caching: { enabled: false },
-  throttling: { enabled: false }
+  throttling: { enabled: true }
 })
 generalApiService.setEnvironment(environment.ccrApiEnv)
 
