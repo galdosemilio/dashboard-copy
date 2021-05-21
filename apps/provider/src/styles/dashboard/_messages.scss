@@ -70,6 +70,10 @@
       max-width: 320px;
       padding: 9px 13px;
       word-wrap: break-word;
+
+      &.force-word-break {
+        word-break: break-all;
+      }
     }
 
     .message-wrap {
