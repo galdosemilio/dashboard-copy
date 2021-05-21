@@ -62,8 +62,8 @@ const en = {
   relativeTime: {
     future: 'in %s',
     past: '%s ago',
-    ss: 'a few seconds',
-    s: '%s seconds',
+    s: 'a few seconds',
+    ss: '%d seconds',
     m: 'a minute',
     mm: '%d minutes',
     h: 'an hour',
