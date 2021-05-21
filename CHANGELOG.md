@@ -1,3 +1,18 @@
+# [1.17.0](https://github.com/coachcare/dashboard/compare/v1.16.0...v1.17.0) (2021-05-21)
+
+
+### Bug Fixes
+
+* solved second count format issue ([ccdcc05](https://github.com/coachcare/dashboard/commit/ccdcc0511906a7980093a252529b395f44cf002b))
+* solved word break issue [FRON-2142] ([adab22f](https://github.com/coachcare/dashboard/commit/adab22fdc61c5b55e51fe1ccfdb764d4b6a8ff2a))
+
+
+### Features
+
+* add download pdf form in patients forms page [IDEA-885] ([24654c3](https://github.com/coachcare/dashboard/commit/24654c3cd08eef487204f61e8435caac6e1ed509))
+* add option for turn off self register [IDEA-913] ([41bf37a](https://github.com/coachcare/dashboard/commit/41bf37a6b55a291325b728b95c907b6b8d4a2e47))
+* enabled throttling ([6b49e8c](https://github.com/coachcare/dashboard/commit/6b49e8cf72fab2c020f68fe68af275fc8ff670fb))
+
 # [1.16.0](https://github.com/coachcare/dashboard/compare/v1.15.8...v1.16.0) (2021-05-17)
 
 
