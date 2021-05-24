@@ -82,7 +82,7 @@ import { environment } from './environments/environment'
 const generalApiService = new ApiService({
   token: new AuthenticationToken(),
   caching: { enabled: false },
-  throttling: { enabled: true }
+  throttling: { enabled: true, options: { defaultRateLimit: 10 } }
 })
 generalApiService.setEnvironment(environment.ccrApiEnv)
 
