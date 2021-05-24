@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/coachcare/dashboard/compare/v1.17.0...v1.17.1) (2021-05-24)
+
+
+### Bug Fixes
+
+* bumped up default rate limit ([b9a33c2](https://github.com/coachcare/dashboard/commit/b9a33c24ccc3d1593785ed1a42a86e9887117cdc))
+
 # [1.17.0](https://github.com/coachcare/dashboard/compare/v1.16.0...v1.17.0) (2021-05-21)
 
 
