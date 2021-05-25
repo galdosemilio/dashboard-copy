@@ -16,7 +16,7 @@
   </h4>
 
   <div class="contents">
-    <mat-radio-group fxLayout='column' fxLayoutGap="10px" [(ngModel)]="formType" *ngIf="!editing">
+    <mat-radio-group fxLayout='column' fxLayoutGap="10px" [(ngModel)]="formType" *ngIf="!editing && showUnavailablity">
       <mat-radio-button value="addConsultation" >{{'RIGHT_PANEL.ADD_CONSULTATION' | translate}}</mat-radio-button>
       <mat-radio-button value="addUnavailability" >{{'RIGHT_PANEL.SET_AS_UNAVAILABLE' | translate}}</mat-radio-button>
     </mat-radio-group>

@@ -3,9 +3,8 @@ import { MatDialog } from '@coachcare/material'
 import * as moment from 'moment-timezone'
 import { Schedule } from '@coachcare/sdk'
 
-import { RecurringAddDialog } from '@app/dashboard/schedule/dialogs/recurring-add.dialog'
 import { ContextService, NotifierService, SelectedAccount } from '@app/service'
-import { _, PromptDialog } from '@app/shared'
+import { _, PromptDialog, RecurringAddDialog } from '@app/shared'
 
 export interface ScheduleAvailabilityRecurringSegment {
   id: string

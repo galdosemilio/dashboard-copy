@@ -7,7 +7,6 @@ import {
   Output
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { Meeting } from '@app/dashboard/schedule/models'
 import { NotifierService } from '@app/service'
 import {
   AttendanceStatusAssociation,
@@ -15,6 +14,7 @@ import {
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Schedule } from '@coachcare/sdk'
+import { Meeting } from '@app/shared/model'
 
 @UntilDestroy()
 @Component({

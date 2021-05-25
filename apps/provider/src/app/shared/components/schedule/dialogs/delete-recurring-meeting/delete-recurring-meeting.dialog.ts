@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { DeleteRecurringMeetingRequest } from '@coachcare/sdk'
 import * as moment from 'moment'
-import { Meeting } from '../../models'
+import { Meeting } from '@app/shared/model'
 
 interface DeleteRecurringMeetingDialogProps {
   meeting: Meeting

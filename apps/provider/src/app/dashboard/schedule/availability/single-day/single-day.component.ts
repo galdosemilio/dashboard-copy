@@ -3,9 +3,8 @@ import { MatDialog } from '@coachcare/material'
 import * as moment from 'moment-timezone'
 import { Schedule } from '@coachcare/sdk'
 
-import { SingleAddDialog } from '@app/dashboard/schedule/dialogs/single-add.dialog'
 import { ContextService, NotifierService, SelectedAccount } from '@app/service'
-import { _, PromptDialog } from '@app/shared'
+import { _, PromptDialog, SingleAddDialog } from '@app/shared'
 import {
   FetchAllAccountObjectResponse,
   FetchCalendarAvailabilityRequest,

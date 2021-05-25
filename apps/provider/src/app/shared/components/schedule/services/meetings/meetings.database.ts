@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { CcrDatabase } from '@app/shared'
+import { CcrDatabase } from '@app/shared/model'
 import { FetchAllMeetingRequest, FetchAllMeetingResponse } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { Schedule } from '@coachcare/sdk'

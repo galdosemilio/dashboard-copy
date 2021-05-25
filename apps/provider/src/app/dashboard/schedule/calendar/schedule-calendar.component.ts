@@ -26,18 +26,18 @@ import {
   _,
   DateNavigatorOutput,
   OptionsDialog,
-  PromptDialog
+  PromptDialog,
+  ViewMeetingDialog,
+  ViewAllMeetingsDialog,
+  Meeting
 } from '@app/shared'
 import {
   FetchAllMeetingRequest,
   FetchCalendarAvailabilitySegment
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { ViewMeetingDialog } from '../dialogs/view-meeting'
-import { Meeting } from '../models'
 import { SelectOrganizationDialog } from '@app/shared/dialogs/select-organization'
 import { DeviceDetectorService } from 'ngx-device-detector'
-import { ViewAllMeetingsDialog } from '../dialogs'
 
 export interface TimeBlock {
   display: string

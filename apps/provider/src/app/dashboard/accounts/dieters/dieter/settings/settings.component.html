@@ -45,6 +45,11 @@
         {{ 'GLOBAL.LOGIN_HISTORY' | translate }}
       </a>
     </li>
+    <li *ngIf="components.indexOf('meetings') > -1">
+      <a mat-button [routerLink]="['.', {s: 'meetings'}]" [class.active]="section === 'meetings'">
+        {{ 'GLOBAL.MEETINGS' | translate }}
+      </a>
+    </li>
   </ul>
 </div>
 <!-- <div *ngIf="section === 'forms'" class="ccr-container-mini" fxLayout="row" fxLayoutAlign="flex-end">
@@ -107,5 +112,9 @@
 
   <ng-container *ngSwitchCase="'login-history'">
     <ccr-login-history [patientMode]="true"></ccr-login-history>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'meetings'">
+    <app-dieter-meetings></app-dieter-meetings>
   </ng-container>
 </div>

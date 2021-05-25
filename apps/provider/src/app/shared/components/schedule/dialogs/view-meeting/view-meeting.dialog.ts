@@ -21,7 +21,7 @@ import {
   NotifierService,
   ScheduleDataService
 } from '@app/service'
-import { _, FormUtils } from '@app/shared'
+import { _, FormUtils } from '@app/shared/utils'
 import {
   AccountAccessData,
   AccSingleResponse,
@@ -35,7 +35,7 @@ import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { AccountProvider, OrganizationProvider, Schedule } from '@coachcare/sdk'
-import { Meeting } from '../../models'
+import { Meeting } from '@app/shared/model'
 
 type ViewMeetingDialogEditMode = 'single' | 'recurring'
 

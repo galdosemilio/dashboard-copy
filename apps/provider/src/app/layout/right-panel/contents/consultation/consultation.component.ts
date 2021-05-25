@@ -15,6 +15,7 @@ export class ConsultationComponent implements OnInit, OnDestroy {
   editing = false
   addNewMeetingZendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020575472-Adding-a-New-Meeting-in-the-Dashboard'
+  showUnavailablity = true
 
   constructor(private cdr: ChangeDetectorRef, private bus: EventsService) {}
 
@@ -24,6 +25,10 @@ export class ConsultationComponent implements OnInit, OnDestroy {
     this.bus.register(
       'right-panel.consultation.editing',
       this.setEditing.bind(this)
+    )
+    this.bus.register(
+      'right-panel.consultation.display.set-as-unavailable',
+      this.displayUnavailability.bind(this)
     )
   }
 
@@ -41,5 +46,9 @@ export class ConsultationComponent implements OnInit, OnDestroy {
     this.formType = args.form
     this.cdr.detectChanges()
     this.bus.trigger('right-panel.consultation.meeting', args)
+  }
+
+  displayUnavailability(value: boolean): void {
+    this.showUnavailablity = value
   }
 }

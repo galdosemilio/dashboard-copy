@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Meeting } from '@app/dashboard/schedule/models'
+import { Meeting } from '@app/shared/model'
 import { generateMeetingTypeColor } from '@coachcare/common/shared'
 import {
   AddAttendeeRequest,

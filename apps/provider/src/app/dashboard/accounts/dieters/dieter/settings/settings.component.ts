@@ -25,7 +25,8 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
     'communications',
     'associations',
     'file-vault',
-    'login-history'
+    'login-history',
+    'meetings'
   ]
   component = 'profile'
   defaultComponents = [
@@ -37,7 +38,8 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
     'communications',
     'associations',
     'file-vault',
-    'login-history'
+    'login-history',
+    'meetings'
   ]
   defaultForm: Form
   fillForm: Form

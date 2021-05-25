@@ -1,0 +1,80 @@
+<div class="mt-20" [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex>
+      <ccr-organization-search
+      *ngIf="!selectedClinic"
+      (onSelect)="onSelectClinic($event)"
+      prefixIcon="business">
+      </ccr-organization-search>
+
+      <div *ngIf="selectedClinic">
+          <mat-chip-list>
+              <mat-chip>
+                  {{ selectedClinic.name }}
+                  <mat-icon (click)="onRemoveClinic()" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+          </mat-chip-list>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <div fxFlex>
+            <ccr-date-input [placeholder]="'BOARD.START_DATE' | translate" formControlName="startDate" fxFlex></ccr-date-input>
+        </div>
+        <div fxFlex>
+            <ccr-date-input [placeholder]="'BOARD.END_DATE' | translate" formControlName="endDate" fxFlex></ccr-date-input>
+        </div>
+    </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <div fxFlex fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+                <mat-select formControlName="quickSelect">
+                <mat-option *ngFor="let option of quickSelectOptions" [value]="option.value">
+                    {{ option.viewValue | translate }}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxFlex fxLayoutAlign="start center" fxLayoutGap="7px">
+            <mat-form-field fxFlex>
+                <mat-select formControlName="meetingStatus">
+                <mat-option *ngFor="let option of meetingStatusOptions" [value]="option.value">
+                    {{ option.viewValue | translate }}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <ccr-popup-description
+            [title]="'BOARD.DISPLAY_ACTIVE_OR_DELETED_MEETINGS' | translate"
+            [description]="'BOARD.DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT' | translate"
+            ></ccr-popup-description>
+        </div>
+    </div>
+  </div>
+
+  <!-- table buttons -->
+  <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="space-between center">
+      <button
+      [disabled]="!meetingsSource.result?.length || meetingsSource.isLoading"
+      (click)="downloadCSV()"
+      mat-button
+      fxFlex="nogrow"
+      class="ccr-align-center">
+          {{ 'REPORTS.EXPORT_CSV' | translate }}
+          <mat-icon>file_download</mat-icon>
+      </button>
+
+      <ccr-paginator fxFlex="nogrow" #paginator
+          [length]="meetingsSource.total"
+          [pageIndex]="meetingsSource.pageIndex"
+          [pageSize]="meetingsSource.pageSize"
+          (page)="meetingsSource.pageIndex = $event.pageIndex"
+      ></ccr-paginator>
+  </div>
+
+  <!-- table -->
+  <div>
+      <app-schedule-list-table [source]="meetingsSource"></app-schedule-list-table>
+  </div>
+</div>

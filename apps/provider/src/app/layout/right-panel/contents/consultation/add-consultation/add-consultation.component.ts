@@ -11,7 +11,6 @@ import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
 import { Subscription } from 'rxjs'
 
-import { Meeting } from '@app/dashboard/schedule/models'
 import {
   ContextService,
   EventsService,
@@ -24,7 +23,8 @@ import {
   FormUtils,
   PromptDialog,
   SelectOptions,
-  SelectOption
+  SelectOption,
+  Meeting
 } from '@app/shared'
 import {
   AccountAccessData,

@@ -57,6 +57,16 @@ import { CcrTableSortHeaderComponent } from './table-sort-header'
 import { CcrSearchSelectorComponent } from './search-selector'
 import { CcrTinInputComponent } from './tin-input'
 import { RPMStatusInfoComponent } from './rpm-status-info'
+import {
+  ScheduleListTableComponent,
+  DeleteRecurringMeetingDialog,
+  SingleAddDialog,
+  RecurringAddDialog,
+  ViewMeetingDialog,
+  ViewAllMeetingsDialog,
+  MeetingsDataSource,
+  MeetingsDatabase
+} from './schedule'
 
 export {
   AlertIconComponent,
@@ -103,7 +113,15 @@ export {
   SequenceSearchComponent,
   UserCardComponent,
   UserSearchComponent,
-  WalkthroughComponent
+  WalkthroughComponent,
+  ScheduleListTableComponent,
+  DeleteRecurringMeetingDialog,
+  SingleAddDialog,
+  RecurringAddDialog,
+  ViewMeetingDialog,
+  ViewAllMeetingsDialog,
+  MeetingsDataSource,
+  MeetingsDatabase
 }
 
 export const CmpComponents = [
@@ -153,7 +171,13 @@ export const CmpComponents = [
   SequenceSearchComponent,
   UserCardComponent,
   UserSearchComponent,
-  WalkthroughComponent
+  WalkthroughComponent,
+  ScheduleListTableComponent,
+  DeleteRecurringMeetingDialog,
+  SingleAddDialog,
+  RecurringAddDialog,
+  ViewMeetingDialog,
+  ViewAllMeetingsDialog
 ]
 
 export const CmpEntryComponents = [
@@ -161,5 +185,10 @@ export const CmpEntryComponents = [
   LocaleTableComponent,
   PackageEnrollComponent,
   PackageSelectorComponent,
-  RPMComponent
+  RPMComponent,
+  DeleteRecurringMeetingDialog,
+  SingleAddDialog,
+  RecurringAddDialog,
+  ViewMeetingDialog,
+  ViewAllMeetingsDialog
 ]

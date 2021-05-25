@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import * as moment from 'moment-timezone'
 import { Schedule } from '@coachcare/sdk'
 
-import { _, FormUtils } from '@app/shared'
+import { _, FormUtils } from '@app/shared/utils'
 import { AddSingleAvailabilityRequest } from '@coachcare/sdk'
 
 @Component({

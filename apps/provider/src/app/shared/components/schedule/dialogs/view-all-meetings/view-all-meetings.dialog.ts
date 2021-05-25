@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialog } from '@coachcare/material'
-import { Meeting } from '../../models'
+import { Meeting } from '@app/shared/model'
 import { ViewMeetingDialog } from '../view-meeting'
 
 interface ViewAllMeetingsDialogProps {

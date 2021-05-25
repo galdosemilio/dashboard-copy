@@ -19,18 +19,16 @@ type QuickSelectOption = 'past' | 'upcoming' | 'all'
 
 @UntilDestroy()
 @Component({
-  selector: 'app-schedule-list',
-  templateUrl: './schedule-list.component.html',
-  styleUrls: ['./schedule-list.component.scss']
+  selector: 'app-dieter-meetings',
+  templateUrl: './meetings.component.html',
+  styleUrls: ['./meetings.component.scss']
 })
-export class ScheduleListComponent implements OnDestroy, OnInit {
+export class DieterMeetingsComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
   @ViewChild(ScheduleListTableComponent, { static: true })
   listTable: ScheduleListTableComponent
 
-  filteredAccounts: any[] = []
-  filteredAccounts$: Subject<void> = new Subject<any>()
   form: FormGroup
   meetingsSource: MeetingsDataSource
   form$: Subject<void> = new Subject<void>()
@@ -60,7 +58,12 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.bus.trigger('right-panel.component.set', 'addConsultation')
-
+    setTimeout(() => {
+      this.bus.trigger(
+        'right-panel.consultation.display.set-as-unavailable',
+        false
+      )
+    }, 25) // set time for disable "Set as unavailable", b/c it does not work if the event happens in the same time with set right component
     this.createForm()
     this.createSource()
 
@@ -85,15 +88,7 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
       const meetings = response.data.map((element) => new Meeting(element))
       const orgName = this.context.organization.name.replace(/\s/g, '_')
       const filename = `${orgName}_Schedule_List.csv`
-      let mostAttendees = 0
-
-      meetings.forEach(
-        (meeting) =>
-          (mostAttendees =
-            meeting.attendees.length > mostAttendees
-              ? meeting.attendees.length
-              : mostAttendees)
-      )
+      const mostAttendees = Math.max(...meetings.map((m) => m.attendees.length))
 
       let csv = ''
       csv += 'SCHEDULE LIST\r\n'
@@ -168,32 +163,6 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
     }
   }
 
-  onAddAccount($event: any): void {
-    if ($event.id && $event.firstName) {
-      this.filteredAccounts.push($event)
-      this.meetingsSource.resetPaginator()
-      this.filteredAccounts$.next()
-    }
-  }
-
-  onRemoveAccount(index: number): void {
-    this.filteredAccounts.splice(index, 1)
-    this.meetingsSource.resetPaginator()
-    this.filteredAccounts$.next()
-  }
-
-  public onRemoveClinic(): void {
-    this.selectedClinic = null
-    this.meetingsSource.resetPaginator()
-    this.filteredAccounts$.next()
-  }
-
-  public onSelectClinic(clinic: OrganizationEntity): void {
-    this.selectedClinic = clinic
-    this.meetingsSource.resetPaginator()
-    this.filteredAccounts$.next()
-  }
-
   private createForm(): void {
     this.form = this.fb.group({
       endDate: [moment()],
@@ -228,11 +197,12 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
       this.context.organization.meetingTypes
     )
 
-    this.meetingsSource.addOptional(this.filteredAccounts$, () => ({
-      account:
-        this.filteredAccounts && this.filteredAccounts.length
-          ? this.filteredAccounts[0].id
-          : undefined
+    this.meetingsSource.addDefault({
+      account: this.context.accountId
+    })
+
+    this.meetingsSource.addOptional(this.context.organization$, () => ({
+      organization: this.selectedClinic?.id
     }))
 
     this.meetingsSource.addOptional(this.form$, () => ({
@@ -247,10 +217,6 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
       status: {
         meeting: this.form.value.meetingStatus
       }
-    }))
-
-    this.meetingsSource.addOptional(this.context.organization$, () => ({
-      organization: this.selectedClinic?.id
     }))
   }
 
@@ -285,5 +251,17 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
 
     this.form.patchValue(newFormValue, { emitEvent: false })
     this.meetingsSource.resetPaginator()
+  }
+
+  public onRemoveClinic(): void {
+    this.selectedClinic = null
+    this.meetingsSource.resetPaginator()
+    this.form$.next()
+  }
+
+  public onSelectClinic(clinic: OrganizationEntity): void {
+    this.selectedClinic = clinic
+    this.meetingsSource.resetPaginator()
+    this.form$.next()
   }
 }

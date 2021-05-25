@@ -6,14 +6,14 @@ import {
   NotifierService,
   ScheduleDataService
 } from '@app/service'
-import { PromptDialog } from '@app/shared'
 import { AttendanceStatusEntry, UpdateAttendanceRequest } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Schedule } from '@coachcare/sdk'
-import { DeleteRecurringMeetingDialog, ViewMeetingDialog } from '../../dialogs'
-import { Meeting } from '../../models'
-import { MeetingsDataSource } from '../../services'
+import { PromptDialog } from '@app/shared/dialogs'
+import { DeleteRecurringMeetingDialog, ViewMeetingDialog } from '../dialogs'
+import { Meeting } from '@app/shared/model'
+import { MeetingsDataSource } from '../services'
 
 @UntilDestroy()
 @Component({

@@ -503,6 +503,7 @@
     "MAXIMUM": "Maximum",
     "ME": "Me",
     "MEASUREMENTS": "Measurements",
+    "MEETINGS": "Meetings",
     "MESSAGES": "Messages",
     "MESSAGES_MARK_AS_READ": "Mark all messages as read",
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "This will clear your unread message count, but also mark all messages as if you have seen them. This action cannot be undone.",

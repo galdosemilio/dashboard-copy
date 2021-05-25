@@ -13,11 +13,10 @@ import {
 } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import * as moment from 'moment-timezone'
-import { Schedule } from '@coachcare/sdk'
 
 import { ConfigService } from '@app/service'
-import { _, FormUtils } from '@app/shared'
-import { AddRecurrentAvailabilityRequest } from '@coachcare/sdk'
+import { _, FormUtils } from '@app/shared/utils'
+import { AddRecurrentAvailabilityRequest, Schedule } from '@coachcare/sdk'
 
 export interface RecurringAddDialogData
   extends AddRecurrentAvailabilityRequest {

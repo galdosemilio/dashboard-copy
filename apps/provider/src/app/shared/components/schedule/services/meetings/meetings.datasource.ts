@@ -1,9 +1,8 @@
 import { MeetingTypeWithColor } from '@app/service'
-import { TableDataSource } from '@app/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { FetchAllMeetingRequest, FetchAllMeetingResponse } from '@coachcare/sdk'
+import { TableDataSource, Meeting } from '@app/shared/model'
 import { Observable } from 'rxjs'
-import { Meeting } from '../../models'
 import { MeetingsDatabase } from './meetings.database'
 
 export class MeetingsDataSource extends TableDataSource<

@@ -6,6 +6,7 @@ export * from './utils'
 
 import { CmpComponents, CmpEntryComponents } from './components'
 import { LoginHistoryDatabase } from './components/login-history'
+import { MeetingsDatabase } from './components/schedule/services'
 import { PackageDatabase } from './components/package-table/services'
 import { Dialogs, Components as DialogComponents } from './dialogs'
 import { Directives } from './directives'
@@ -41,5 +42,6 @@ export const Providers = [
   PackageDatabase,
   LoginHistoryDatabase,
   SupervisingProvidersDatabase,
-  CallControlService
+  CallControlService,
+  MeetingsDatabase
 ]
