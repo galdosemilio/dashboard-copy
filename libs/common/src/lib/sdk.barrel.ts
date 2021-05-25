@@ -79,14 +79,31 @@ import {
 } from '@coachcare/sdk'
 import { environment } from './environments/environment'
 
+const authenticationToken = new AuthenticationToken()
+
 const generalApiService = new ApiService({
-  token: new AuthenticationToken(),
+  token: authenticationToken,
   caching: { enabled: false },
   throttling: { enabled: true, options: { defaultRateLimit: 10 } }
 })
+
+const measurementApiService = new ApiService({
+  token: authenticationToken,
+  caching: { enabled: false },
+  throttling: {
+    enabled: true,
+    options: { headers: { enabled: false } }
+  }
+})
+
 generalApiService.setEnvironment(environment.ccrApiEnv)
+measurementApiService.setEnvironment(environment.ccrApiEnv)
 
 export const SdkApiProviders = [
+  {
+    provide: measurementApiService,
+    useValue: measurementApiService
+  },
   {
     provide: ApiService,
     useValue: generalApiService
@@ -182,10 +199,18 @@ export const SdkApiProviders = [
   {
     provide: MeasurementActivity,
     useClass: MeasurementActivity,
-    deps: [ApiService]
+    deps: [measurementApiService]
   },
-  { provide: MeasurementBody, useClass: MeasurementBody, deps: [ApiService] },
-  { provide: MeasurementSleep, useClass: MeasurementSleep, deps: [ApiService] },
+  {
+    provide: MeasurementBody,
+    useClass: MeasurementBody,
+    deps: [measurementApiService]
+  },
+  {
+    provide: MeasurementSleep,
+    useClass: MeasurementSleep,
+    deps: [measurementApiService]
+  },
   { provide: Messaging, useClass: Messaging, deps: [ApiService] },
   {
     provide: MessagingPermission,
