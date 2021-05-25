@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/coachcare/dashboard/compare/v1.17.1...v1.17.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* change position of call controlls [FRON-2174] ([2b7a329](https://github.com/coachcare/dashboard/commit/2b7a32981fdd38e13b3979ab66a452f7b2eccd60))
+
 ## [1.17.1](https://github.com/coachcare/dashboard/compare/v1.17.0...v1.17.1) (2021-05-24)
 
 
