@@ -1,3 +1,10 @@
+## [1.17.3](https://github.com/coachcare/dashboard/compare/v1.17.2...v1.17.3) (2021-05-26)
+
+
+### Bug Fixes
+
+* added measurement-specific throttling values ([d744ac7](https://github.com/coachcare/dashboard/commit/d744ac7282f2b5f3edf62bdb001365e2a9abc1a2))
+
 ## [1.17.2](https://github.com/coachcare/dashboard/compare/v1.17.1...v1.17.2) (2021-05-25)
 
 
