@@ -44,7 +44,7 @@
     </div>
     <div class="ccr-overlapping-panel" fxFlex fxLayout="column" fxFlexFill *ngIf="callState?.windowState != 'MINIMIZED'">
       <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
-        <div class="ccr-caller" *ngIf="!callState.hasVideoStarted">
+        <div class="ccr-caller" *ngIf="!callState.isRemoteVideoEnabled">
           <ccr-avatar size="bigger" [account]="callState?.room?.recipient?.id" matListIcon></ccr-avatar>
         </div>
       </div>

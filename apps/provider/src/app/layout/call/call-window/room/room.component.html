@@ -1,7 +1,7 @@
 <div id="remote-audio-media">
 
 </div>
-<div id="remote-video-media" class="main-video" [hidden]="!callState.hasVideoStarted">
+<div id="remote-video-media" class="main-video" [hidden]="!callState.isRemoteVideoEnabled">
     <app-call-connection-indicator [connectionStatus]="remoteConnectionStatus"></app-call-connection-indicator>
 </div>
 <div id="local-audio-media"></div>
