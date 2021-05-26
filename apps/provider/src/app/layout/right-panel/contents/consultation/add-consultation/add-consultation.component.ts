@@ -100,10 +100,6 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     this.fetchOrganizations()
 
     this.user = this.context.user
-    this.initialOrgOption = {
-      value: this.context.organizationId,
-      viewValue: this.context.organization.name
-    }
     this.context.selected$.subscribe((user) => {
       if (user) {
         this.resetParticipants()
@@ -209,6 +205,18 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         value: clinic.id,
         viewValue: clinic.name
       }))
+
+      if (!this.clinicOptions.length) {
+        return
+      }
+
+      const contextClinic = this.clinicOptions.find(
+        (clinic) => clinic.value === this.context.organizationId
+      )
+
+      this.initialOrgOption = contextClinic
+        ? contextClinic
+        : this.clinicOptions[0]
     } catch (error) {
       this.notifier.error(error)
     }
