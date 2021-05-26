@@ -84,7 +84,7 @@ const authenticationToken = new AuthenticationToken()
 const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
-  throttling: { enabled: true, options: { defaultRateLimit: 10 } }
+  throttling: { enabled: true, options: { defaultRateLimit: 17 } }
 })
 
 const measurementApiService = new ApiService({
