@@ -166,7 +166,7 @@ export class CcrSearchSelectorComponent implements OnInit {
       return
     }
 
-    const queryRegex = new RegExp(`${query}`, 'gi')
+    const queryRegex = new RegExp(`${trimmedQuery}`, 'gi')
 
     this.filteredOptions = this.options.filter((opt) =>
       queryRegex.test(opt.viewValue)
