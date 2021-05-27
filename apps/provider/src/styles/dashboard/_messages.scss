@@ -70,10 +70,7 @@
       max-width: 320px;
       padding: 9px 13px;
       word-wrap: break-word;
-
-      &.force-word-break {
-        word-break: break-all;
-      }
+      overflow-wrap: break-word;
     }
 
     .message-wrap {
@@ -104,7 +101,7 @@
           background-color: var(--primary-lighten);
           color: var(--primary-lighten-contrast);
           @media #{$medium-and-down} {
-            max-width: 100%;
+            max-width: 250px;
           }
         }
       }

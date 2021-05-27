@@ -8,15 +8,11 @@ export class MessageContainer implements MessagingItem {
   public readonly createdAt: string
   public readonly content: string
   public readonly account: MessagingAccount
-  public readonly hasLongWord: boolean
   public timestamp: string | null
 
   public constructor(item: MessagingItem) {
     this.timestamp = null
     Object.assign(this, item)
-    this.hasLongWord = this.content
-      .split(/\s/g)
-      .some((word) => word.length > 20)
     this.content = this.content.replace(/\n/g, '<br />')
     this.content = linkifyHtml(this.content, { target: '_blank' })
   }
