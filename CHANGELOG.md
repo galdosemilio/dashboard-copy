@@ -1,3 +1,17 @@
+## [1.17.4](https://github.com/coachcare/dashboard/compare/v1.17.3...v1.17.4) (2021-05-27)
+
+
+### Bug Fixes
+
+* adjusted initial org option calculation [FRON-2156] ([2181cca](https://github.com/coachcare/dashboard/commit/2181cca4074a48b8e68092d4dd59d25ed91cbbad))
+* adjusted search selector regex to use trimmed val [FRON-2156] ([d9986f6](https://github.com/coachcare/dashboard/commit/d9986f6462cb84400097523b12e9d3fcec2163db))
+* inspect isRemoteVideoEnabled [FRON-2188] ([e528a41](https://github.com/coachcare/dashboard/commit/e528a41b6681bd2b2fb7fdb19b48f93dd305a948))
+
+
+### Performance Improvements
+
+* changed defaultRateLimit ([cf24630](https://github.com/coachcare/dashboard/commit/cf246304b29a3896d50df7ad1d3f1f2f7dc2f065))
+
 ## [1.17.3](https://github.com/coachcare/dashboard/compare/v1.17.2...v1.17.3) (2021-05-26)
 
 
