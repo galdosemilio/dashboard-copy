@@ -1,3 +1,10 @@
+## [1.17.5](https://github.com/coachcare/dashboard/compare/v1.17.4...v1.17.5) (2021-05-27)
+
+
+### Bug Fixes
+
+* properly solved long words issue on messages [FRON-2193] ([f1ee501](https://github.com/coachcare/dashboard/commit/f1ee5016799d20edc6bad21202f982a302f3e91e))
+
 ## [1.17.4](https://github.com/coachcare/dashboard/compare/v1.17.3...v1.17.4) (2021-05-27)
 
 
