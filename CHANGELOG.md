@@ -1,3 +1,10 @@
+## [1.17.6](https://github.com/coachcare/dashboard/compare/v1.17.5...v1.17.6) (2021-06-01)
+
+
+### Bug Fixes
+
+* adj org and target org params on seq enroll [FRON-2181] ([532e51c](https://github.com/coachcare/dashboard/commit/532e51cf632b67a075f5f6956f9656b3135fa392))
+
 ## [1.17.5](https://github.com/coachcare/dashboard/compare/v1.17.4...v1.17.5) (2021-05-27)
 
 
