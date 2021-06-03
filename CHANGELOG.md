@@ -1,3 +1,10 @@
+## [1.17.7](https://github.com/coachcare/dashboard/compare/v1.17.6...v1.17.7) (2021-06-03)
+
+
+### Bug Fixes
+
+* removed organization check on login session [FRON-2195] ([369c872](https://github.com/coachcare/dashboard/commit/369c8727dce10f952dfef1892048d142099b5b2b))
+
 ## [1.17.6](https://github.com/coachcare/dashboard/compare/v1.17.5...v1.17.6) (2021-06-01)
 
 
