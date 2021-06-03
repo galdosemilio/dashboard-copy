@@ -186,9 +186,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
       if (!activeSession) {
         availability.status = AccountAvailabilityStatus.EXPIRED
       } else {
-        availability.status = loginHistory.data[0].organization
-          ? AccountAvailabilityStatus.AVAILABLE
-          : AccountAvailabilityStatus.UNCERTAIN
+        availability.status = AccountAvailabilityStatus.AVAILABLE
       }
 
       return availability
