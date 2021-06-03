@@ -25,9 +25,9 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { unionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { AccountProvider, Interaction } from '@coachcare/sdk'
-import * as moment from 'moment'
+import { AccountProvider } from '@coachcare/sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
+import { CallControlService } from '@coachcare/common/services'
 
 enum AccountAvailabilityStatus {
   AVAILABLE,
@@ -61,12 +61,12 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
     private context: ContextService,
     private deviceDetector: DeviceDetectorService,
     private dialog: MatDialog,
-    private interaction: Interaction,
     private logging: LoggingService,
     private notifier: NotifierService,
     private store: Store<UIState>,
     private translator: TranslateService,
-    private twilioService: TwilioService
+    private twilioService: TwilioService,
+    private callControlService: CallControlService
   ) {
     this.store
       .pipe(select(callSelector), untilDestroyed(this))
@@ -88,7 +88,21 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.resolveBillableServices()
+    this.callControlService.getBillableServices()
+    this.callControlService.billableServices$
+      .pipe(untilDestroyed(this))
+      .subscribe((data) => {
+        const billableServices = data.map((billServ) => ({
+          ...billServ,
+          displayName: billServ.name
+        }))
+
+        this.billableServices = unionBy(
+          Object.values(BILLABLE_SERVICES),
+          billableServices,
+          'id'
+        )
+      })
   }
 
   public async onClick(
@@ -231,25 +245,6 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
         }
       })
     )
-  }
-
-  private async resolveBillableServices(): Promise<void> {
-    try {
-      const billableServices = (
-        await this.interaction.getBillableServices({
-          limit: 'all',
-          status: 'active'
-        })
-      ).data.map((billServ) => ({ ...billServ, displayName: billServ.name }))
-
-      this.billableServices = unionBy(
-        Object.values(BILLABLE_SERVICES),
-        billableServices,
-        'id'
-      )
-    } catch (error) {
-      this.notifier.error(error)
-    }
   }
 
   private async showExpiredDialog(): Promise<void> {

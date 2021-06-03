@@ -9,6 +9,7 @@ export * from './language.service'
 export * from './layout.service'
 export * from './notifier.service'
 export * from './stripe.service'
+export * from './call-control.service'
 
 export * from './i18n/loader'
 

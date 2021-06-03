@@ -17,7 +17,8 @@ import { SupervisingProvidersDatabase } from './dialogs/rpm-status/services'
 import {
   ConfigService,
   EventsService,
-  NotifierService
+  NotifierService,
+  CallControlService
 } from '@coachcare/common/services'
 
 export const Components = [
@@ -39,5 +40,6 @@ export const Providers = [
   EventsService,
   PackageDatabase,
   LoginHistoryDatabase,
-  SupervisingProvidersDatabase
+  SupervisingProvidersDatabase,
+  CallControlService
 ]
