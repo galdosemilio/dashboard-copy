@@ -1,3 +1,11 @@
+# [1.19.0](https://github.com/coachcare/dashboard/compare/v1.18.0...v1.19.0) (2021-06-04)
+
+
+### Features
+
+* add meetings tab [IDEA-800] ([35acf88](https://github.com/coachcare/dashboard/commit/35acf88a6b8af46518be8a1b831b8ea32c14df14))
+* optimize billable services fetching for call controls [FRON-2189] ([63ed4b1](https://github.com/coachcare/dashboard/commit/63ed4b18c36ddddc2254e842e7687a0526d2229d))
+
 # [1.18.0](https://github.com/coachcare/dashboard/compare/v1.17.7...v1.18.0) (2021-06-04)
 
 
