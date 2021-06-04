@@ -26,9 +26,7 @@ export class EmbedContentPickerComponent {
   }
 
   @Output()
-  selectContent: Subject<FileExplorerContent> = new Subject<
-    FileExplorerContent
-  >()
+  selectContent: Subject<FileExplorerContent> = new Subject<FileExplorerContent>()
 
   selectedContent: FileExplorerContent
   selectedContentURL: SafeResourceUrl
@@ -37,7 +35,8 @@ export class EmbedContentPickerComponent {
     whitelistedContentTypes: [
       CONTENT_TYPE_MAP.folder.code,
       CONTENT_TYPE_MAP.hyperlink.code,
-      CONTENT_TYPE_MAP.file.code
+      CONTENT_TYPE_MAP.file.code,
+      CONTENT_TYPE_MAP.youtube.code
     ]
   }
   status: 'view_content' | 'pick_content' | 'no_content' = 'no_content'
@@ -55,7 +54,8 @@ export class EmbedContentPickerComponent {
     if (
       content &&
       (content.type.code === CONTENT_TYPE_MAP.file.code ||
-        content.type.code === CONTENT_TYPE_MAP.hyperlink.code)
+        content.type.code === CONTENT_TYPE_MAP.hyperlink.code ||
+        content.type.code === CONTENT_TYPE_MAP.youtube.code)
     ) {
       this.selectedContent = content
       this.selectedContentURL = this.sanitizer.bypassSecurityTrustResourceUrl(
