@@ -153,38 +153,32 @@ export class ActiveUsersDataSource extends ChartDataSource<
 
     const barChartData = [
       {
-        label: this.translations['REPORTS.INACTIVE_CLIENTS'],
-        stack: 'stack0',
-        data: data.inactiveClients,
-        visible: false
-      },
-      {
         label: this.translations['REPORTS.ACTIVE_CLIENTS'],
         stack: 'stack0',
         data: data.activeClients,
-        visible: true
+        visible: false
       },
       {
-        label: this.translations['REPORTS.INACTIVE_PROVIDERS'],
-        stack: 'stack1',
-        data: data.inactiveProviders,
-        visible: false
+        label: this.translations['REPORTS.INACTIVE_CLIENTS'],
+        stack: 'stack0',
+        data: data.inactiveClients,
+        visible: true
       },
       {
         label: this.translations['REPORTS.ACTIVE_PROVIDERS'],
         stack: 'stack1',
         data: data.activeProviders,
+        visible: false
+      },
+      {
+        label: this.translations['REPORTS.INACTIVE_PROVIDERS'],
+        stack: 'stack1',
+        data: data.inactiveProviders,
         visible: true
       }
     ]
 
     const barChartColors = [
-      {
-        backgroundColor: this.config.get('colors').get(0),
-        hoverBackgroundColor: tinycolor(this.config.get('colors').get(0))
-          .darken()
-          .toString()
-      },
       {
         backgroundColor: this.config.get('colors').get(1),
         hoverBackgroundColor: tinycolor(this.config.get('colors').get(1))
@@ -192,12 +186,18 @@ export class ActiveUsersDataSource extends ChartDataSource<
           .toString()
       },
       {
-        backgroundColor: '#dfdfdf',
-        hoverBackgroundColor: tinycolor('#dfdfdf').darken().toString()
+        backgroundColor: this.config.get('colors').get(0),
+        hoverBackgroundColor: tinycolor(this.config.get('colors').get(0))
+          .darken()
+          .toString()
       },
       {
         backgroundColor: '#ababab',
         hoverBackgroundColor: tinycolor('#ababab').darken().toString()
+      },
+      {
+        backgroundColor: '#dfdfdf',
+        hoverBackgroundColor: tinycolor('#dfdfdf').darken().toString()
       }
     ]
 
