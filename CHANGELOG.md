@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/coachcare/dashboard/compare/v1.17.7...v1.18.0) (2021-06-04)
+
+
+### Features
+
+* added youtube as selectable content in forms [FRON-2198] ([5735924](https://github.com/coachcare/dashboard/commit/57359240e52ba60f3d9907af8d27435b213b4ab8))
+
 ## [1.17.7](https://github.com/coachcare/dashboard/compare/v1.17.6...v1.17.7) (2021-06-03)
 
 
