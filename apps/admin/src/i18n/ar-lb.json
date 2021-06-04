@@ -344,9 +344,6 @@
     "YESTERDAY": "[Yesterday]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "عنوان البريد الإلكتروني حساس لحالة الأحرف"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "لقد فشل التحميل، يُرجى إعادة المحاولة",
       "EMAIL_ALREADY_REGISTERED": "عنوان البريد الإلكتروني مسجل بالفعل",

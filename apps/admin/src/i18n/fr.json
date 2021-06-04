@@ -344,9 +344,6 @@
     "YESTERDAY": "(Hier)"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "Votre adresse-mail est sensible aux majuscules"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Le téléchargement a échoué, veuillez réessayer",
       "EMAIL_ALREADY_REGISTERED": "L’adresse mail est déjà enregistrée",

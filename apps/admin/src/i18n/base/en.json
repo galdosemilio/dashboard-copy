@@ -344,9 +344,6 @@
     "YESTERDAY": "[Yesterday]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "Your email address is case sensitive"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "The upload failed, please try again.",
       "EMAIL_ALREADY_REGISTERED": "The Email Address is already registered.",

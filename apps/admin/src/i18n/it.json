@@ -344,9 +344,6 @@
     "YESTERDAY": "[Ieri]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "Il tuo indirizzo e-mail è sensibile alle maiuscole"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Caricamento fallito, ti preghiamo di riprovare.",
       "EMAIL_ALREADY_REGISTERED": "L'Indirizzo E-mail è già registrato.",

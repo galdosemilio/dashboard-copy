@@ -344,9 +344,6 @@
     "YESTERDAY": "[אתמול]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "כתובת הדואר האלקטרוני היא תלויית רישיות"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "ההעלאה נכשלה, יש לנסות שוב.",
       "EMAIL_ALREADY_REGISTERED": "כתובת האימייל כבר רשומה במערכת.",

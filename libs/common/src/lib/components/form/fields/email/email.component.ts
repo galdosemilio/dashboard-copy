@@ -138,11 +138,6 @@ export class EmailFormFieldComponent implements ControlValueAccessor, OnInit {
     return null
   }
 
-  isEmailCaseSensitive(value: string) {
-    const regex = /[A-Z]/
-    return value && regex.test(value)
-  }
-
   private updateErrorState() {
     if (this._control) {
       this._input.errorState = this._control.invalid

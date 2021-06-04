@@ -344,9 +344,6 @@
     "YESTERDAY": "[Ayer]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "La dirección de correo electrónico distingue entre mayúsculas y minúsculas"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Hubo un error en la carga, por favor intente de nuevo.",
       "EMAIL_ALREADY_REGISTERED": "El correo electrónico ya está registrado.",

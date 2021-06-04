@@ -344,9 +344,6 @@
     "YESTERDAY": "[I går]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "E-mail-adressen er hovedtekstmæssig"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Upload mislykkedes, prøv venligst igen.",
       "EMAIL_ALREADY_REGISTERED": "Denne E-mail Adresse er allerede registreret.",

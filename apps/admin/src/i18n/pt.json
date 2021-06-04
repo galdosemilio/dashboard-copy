@@ -344,9 +344,6 @@
     "YESTERDAY": "[Ontem]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "O seu endereço de e-mail é sensível a maiúsculas e minúsculas"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "O upload falhou, por favor tente novamente.",
       "EMAIL_ALREADY_REGISTERED": "Este email já se encontra registado.",

@@ -344,9 +344,6 @@
     "YESTERDAY": "[Yesterday]"
   },
   "NOTIFY": {
-    "EMAIL": {
-      "EMAIL_CASE_SENSITIVE": "Groß- und Kleinschreibung müssen bei Ihrer E-Mail-Adresse berücksichtigt werden"
-    },
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Der Upload ist fehlgeschlagen, bitte versuchen Sie es erneut.",
       "EMAIL_ALREADY_REGISTERED": "Die E-Mail Adresse ist bereits registriert.",
