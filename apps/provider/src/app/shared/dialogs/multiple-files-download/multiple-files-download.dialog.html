@@ -1,0 +1,44 @@
+<div matDialogTitle>
+    <div>
+        <span>{{'REPORTS.MULTIPLE_FILES_REQUIRED' | translate}}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+    <div *ngIf="!isDownloading && !isCompleted">
+        <p>
+            {{ 'REPORTS.MULTIPLE_FILES_REQUIRED_DESCRIPTION' | translate:{total: totalFileCount} }}
+        </p>
+        <mat-radio-group
+            class="download-options"
+            [(ngModel)]="downloadOption"
+        >
+            <mat-radio-button class="download-option" value="all">{{ 'REPORTS.DOWNLOAD_ALL_FILES' | translate:{total: totalFileCount} }}</mat-radio-button>
+            <mat-radio-button class="download-option" value="single">{{ 'REPORTS.DOWNLOAD_ONLY_FIRST_FILE' | translate }}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngIf="isDownloading">
+        <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+        <p class="progress-label">
+            {{ 'REPORTS.DOWNLOAD_PROGRESS' | translate:{total: totalFileCount, count: downloadCount} }}
+        </p>
+    </div>
+    <p *ngIf="isCompleted">{{ 'REPORTS.ALL_FILES_DOWNLOADED' | translate }}</p>
+  </mat-dialog-content>
+
+  <div mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end stretch" fxLayoutAlign.xs="center stretch">
+    <button
+        *ngIf="!isDownloading && !isCompleted"
+        (click)="onSubmit()"
+        class="ccr-icon-button"
+        color="primary"
+        mat-button
+    >
+      <mat-icon>file_download</mat-icon> {{'GLOBAL.DOWNLOAD' | translate}}
+  </button>
+
+  <button mat-button class="ccr-icon-button" matDialogClose>
+      <mat-icon>close</mat-icon> {{'GLOBAL.CLOSE' | translate}}
+  </button>
+  </div>

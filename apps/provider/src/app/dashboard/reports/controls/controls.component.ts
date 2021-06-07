@@ -72,6 +72,13 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
                 .format()
             }
             break
+          case '/reports/communications/communications':
+            this.startView = 'month'
+            this.startPeriod = {
+              endDate: moment().startOf('month').format(),
+              startDate: moment().endOf('month').format()
+            }
+            break
           default:
             this.startView = 'week'
             delete this.fixedPeriod

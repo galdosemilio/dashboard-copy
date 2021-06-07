@@ -16,19 +16,22 @@ import {
 import {
   AddManualInteractionDialog,
   ConfirmDialog,
+  MultipleFilesDownloadDialog,
   PromptDialog,
   TextInputDialog
 } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
-import { get, unionBy } from 'lodash'
+import { get, isEmpty, unionBy } from 'lodash'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { first } from 'rxjs/operators'
-import { Interaction } from '@coachcare/sdk'
+import { Interaction, InteractionSingle } from '@coachcare/sdk'
 import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models'
 import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
+import { select, Store } from '@ngrx/store'
+import { criteriaSelector, ReportsState } from '../../store'
+import { ReportsCriteria } from '../../services'
 
 @UntilDestroy()
 @Component({
@@ -64,9 +67,17 @@ export class CallsComponent implements OnDestroy, OnInit {
   isLoading = false
   shownColumns: string[] = this.columns.slice()
   source: CallHistoryDataSource
+  reportsCriteria?: ReportsCriteria
+  downloadLimit = 1000
+  downloadData: Array<InteractionSingle[]> = []
 
   private _account: string
   private account$: Subject<string> = new Subject<string>()
+
+  private refresh$ = new Subject<void>()
+  private download$: Subject<number>
+  private downloadCompleted$ = new Subject<void>()
+  private downloadCount$: Subject<number> = new Subject<number>()
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -75,12 +86,15 @@ export class CallsComponent implements OnDestroy, OnInit {
     private dialog: MatDialog,
     private interaction: Interaction,
     private notify: NotifierService,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    private store: Store<ReportsState>
+  ) {
+    this.handleDownload$ = this.handleDownload$.bind(this)
+  }
 
   ngOnDestroy() {}
 
-  async ngOnInit() {
+  ngOnInit() {
     try {
       this.source = new CallHistoryDataSource(this.database, this.paginator)
       this.source.addDefault({
@@ -90,6 +104,17 @@ export class CallsComponent implements OnDestroy, OnInit {
         organization: this.context.organizationId
       }))
       this.source.addOptional(this.account$, () => ({ account: this.account }))
+
+      this.source.addOptional(this.refresh$, () => {
+        return this.reportsCriteria
+          ? {
+              range: {
+                start: this.reportsCriteria.startDate,
+                end: this.reportsCriteria.endDate
+              }
+            }
+          : {}
+      })
     } catch (error) {
       this.notify.error(error)
     }
@@ -99,27 +124,36 @@ export class CallsComponent implements OnDestroy, OnInit {
       this.refreshShownColumns()
       this.resolveBillableServices()
     })
+
+    this.store
+      .pipe(untilDestroyed(this), select(criteriaSelector))
+      .subscribe((reportsCriteria: ReportsCriteria) => {
+        if (!isEmpty(reportsCriteria)) {
+          this.reportsCriteria = reportsCriteria
+          this.source.resetPaginator()
+          this.refresh$.next()
+        }
+      })
   }
 
-  async downloadCSV() {
-    try {
-      const translations = await this.translate.getTranslation('en').toPromise()
+  async download() {
+    const translations = {
+      CALL: {
+        INTERACTION_TYPES: await this.translate
+          .get('CALL.INTERACTION_TYPES')
+          .toPromise()
+      }
+    }
 
-      this.isLoading = true
-
-      const source = new CallHistoryDataSource(this.database)
-      source.addDefault({
-        organization: this.context.organizationId,
-        account: this.account || undefined,
-        limit: 'all',
-        offset: 0
-      })
-
-      const calls = await source.connect().pipe(first()).toPromise()
+    this.downloadData.forEach((t, tIndex) => {
+      const calls = t
+        .reverse()
+        .map((item) => new CallHistoryItem(item))
+        .reverse()
 
       const separator = ','
       const orgName = this.context.organization.name.replace(/\s/g, '_')
-      const filename = `${orgName}_COMMS_REPORT.csv`
+      const filename = `${orgName}_COMMS_REPORT_${tIndex + 1}.csv`
       let highestParticipantAmount = 0
 
       calls.forEach(
@@ -199,11 +233,46 @@ export class CallsComponent implements OnDestroy, OnInit {
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
-    } catch (error) {
-      this.notify.error(error)
-    } finally {
-      this.isLoading = false
-    }
+    })
+
+    this.downloadCompleted$.next()
+  }
+
+  downloadCSV() {
+    this.isLoading = true
+    this.downloadData = []
+
+    this.download$ = new Subject<number>()
+
+    this.download$.pipe(untilDestroyed(this)).subscribe(this.handleDownload$)
+
+    this.download$.next(0)
+  }
+
+  public showMultipleFileDownloadDialog(
+    page: number,
+    totalFileCount: number
+  ): void {
+    const dialog = this.dialog.open(MultipleFilesDownloadDialog, {
+      data: {
+        continueDownload: (isMultipleDownload) => {
+          if (isMultipleDownload) {
+            this.downloadCount$.next(page + 1)
+            this.download$.next(page + 1)
+          } else {
+            this.download()
+            dialog.close()
+          }
+        },
+        downloadCompleted$: this.downloadCompleted$,
+        downloadCount$: this.downloadCount$,
+        totalFileCount
+      },
+      width: '60vw'
+    })
+    dialog.afterClosed().subscribe(() => {
+      this.download$?.unsubscribe()
+    })
   }
 
   public async onRpmBillableChange(
@@ -349,6 +418,54 @@ export class CallsComponent implements OnDestroy, OnInit {
 
         this.removeInteraction(interaction)
       })
+  }
+
+  private async handleDownload$(page: number): Promise<void> {
+    try {
+      const res = await this.database
+        .fetch({
+          organization: this.context.organizationId,
+          account: this.account || undefined,
+          range: this.reportsCriteria
+            ? {
+                start: this.reportsCriteria.startDate,
+                end: this.reportsCriteria.endDate
+              }
+            : undefined,
+          limit: this.downloadLimit,
+          offset: page * this.downloadLimit
+        })
+        .toPromise()
+
+      this.isLoading = false
+
+      if (!this.download$) {
+        return
+      }
+
+      this.downloadCount$.next(page + 1)
+      this.downloadData.push(res.data)
+
+      if (!res.pagination.next) {
+        return this.download()
+      }
+
+      if (
+        page === 0 &&
+        res.pagination.totalCount &&
+        Math.ceil(res.pagination.totalCount / this.downloadLimit) >= 2
+      ) {
+        return this.showMultipleFileDownloadDialog(
+          page,
+          Math.ceil(res.pagination.totalCount / this.downloadLimit)
+        )
+      }
+
+      this.download$.next(page + 1)
+    } catch (error) {
+      this.isLoading = false
+      this.notify.error(error)
+    }
   }
 
   private refreshShownColumns(): void {
