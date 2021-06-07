@@ -43,6 +43,7 @@ export class NotesContainerComponent implements OnDestroy, OnInit {
   public submissionSource: FormSubmissionsDatasource
 
   private _formId: string
+  private notesContainerOffset = 50
   private notesPageSize = 10
   private notesSearchNext: number
   private notesSubject: Subject<void> = new Subject<void>()
@@ -97,7 +98,8 @@ export class NotesContainerComponent implements OnDestroy, OnInit {
     if (
       !this.isSearchingNotes &&
       this.notesSearchNext &&
-      target.offsetHeight + target.scrollTop >= target.scrollHeight
+      target.offsetHeight + target.scrollTop >=
+        target.scrollHeight - this.notesContainerOffset
     ) {
       this.isSearchingNotes = true
       this.notesSubject.next()
