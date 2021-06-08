@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/coachcare/dashboard/compare/v1.19.0...v1.19.1) (2021-06-08)
+
+
+### Bug Fixes
+
+* adjusted notes container trigger offset [FRON-2197] ([2266f1c](https://github.com/coachcare/dashboard/commit/2266f1c39df19c0fd83a69ec587804f16d4ec001))
+
 # [1.19.0](https://github.com/coachcare/dashboard/compare/v1.18.0...v1.19.0) (2021-06-04)
 
 
