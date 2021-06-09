@@ -54,7 +54,9 @@ export class DieterMeetingsComponent implements OnDestroy, OnInit {
     this.quickSelectHandler = this.quickSelectHandler.bind(this)
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.bus.trigger('right-panel.component.set', 'reminders')
+  }
 
   ngOnInit(): void {
     this.bus.trigger('right-panel.component.set', 'addConsultation')
