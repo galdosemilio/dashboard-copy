@@ -344,9 +344,9 @@ export class CallEffects {
         this.interaction.createCall({
           ...createCallRequest,
           billableService:
-            this.callState.billableService.id !== '-1'
-              ? this.callState.billableService.id
-              : undefined
+            this.callState.billableService.id === '-1'
+              ? null
+              : this.callState.billableService.id
         })
       ).pipe(
         map((call: any) => {
