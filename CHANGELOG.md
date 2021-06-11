@@ -1,3 +1,16 @@
+# [1.20.0](https://github.com/coachcare/dashboard/compare/v1.19.1...v1.20.0) (2021-06-11)
+
+
+### Bug Fixes
+
+* none billable service capture issue for call [FRON-2201] ([2291013](https://github.com/coachcare/dashboard/commit/22910139f6fa3794b89d31f41714be736a5d5356))
+* updated avatar calls to v3.0 [FRON-2199] ([e3c45f9](https://github.com/coachcare/dashboard/commit/e3c45f9531170e699b64f8802a007171687994b5))
+
+
+### Features
+
+* put back reminders right panel when leave from meetings tab [FRON-2203] ([5bdac0f](https://github.com/coachcare/dashboard/commit/5bdac0fb6c40ad74ff412c61b4f9fc95843a9b33))
+
 ## [1.19.1](https://github.com/coachcare/dashboard/compare/v1.19.0...v1.19.1) (2021-06-08)
 
 
