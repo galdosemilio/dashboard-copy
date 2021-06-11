@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Directive, HostBinding, Input } from '@angular/core'
-import { ApiService } from '@coachcare/sdk'
+import { AccountProvider } from '@coachcare/sdk'
 import { EventsService } from '../services'
 
 @Directive({
@@ -10,7 +10,7 @@ import { EventsService } from '../services'
   }
 })
 export class CcrAvatarDirective {
-  account: string
+  accountId: string
 
   @HostBinding('src')
   src: string
@@ -20,20 +20,20 @@ export class CcrAvatarDirective {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private api: ApiService,
-    private bus: EventsService
+    private bus: EventsService,
+    private account: AccountProvider
   ) {
     this.bus.register('user.avatar', (id: string) => {
-      if (id === this.account) {
-        this.refresh(true)
+      if (id === this.accountId) {
+        this.refresh()
         this.cdr.detectChanges()
       }
     })
   }
 
   @Input()
-  set ccrAvatar(account) {
-    this.account = account
+  set ccrAvatar(accountId) {
+    this.accountId = accountId
     this.refresh()
   }
 
@@ -41,12 +41,9 @@ export class CcrAvatarDirective {
     this.src = this.default
   }
 
-  refresh(force = false) {
-    this.src = this.account
-      ? this.api.getUrl(
-          `/account/${this.account}/avatar` + (force ? `?${+new Date()}` : ''),
-          '2.0'
-        )
-      : this.default
+  async refresh() {
+    this.src =
+      (this.accountId && (await this.account.getAvatar(this.accountId)).url) ||
+      this.default
   }
 }
