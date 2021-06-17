@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/coachcare/dashboard/compare/v1.21.0...v1.21.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* translation for german [IDEA-916] ([ecdedc5](https://github.com/coachcare/dashboard/commit/ecdedc5328fe82e40faec93d0d0bd0c49de485f5))
+
 # [1.21.0](https://github.com/coachcare/dashboard/compare/v1.20.0...v1.21.0) (2021-06-17)
 
 
