@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/coachcare/dashboard/compare/v1.20.0...v1.21.0) (2021-06-17)
+
+
+### Features
+
+* add date selection to communication report [IDEA-902] ([d74e86c](https://github.com/coachcare/dashboard/commit/d74e86c9c51f8735c61d057e482961262873cb55))
+
 # [1.20.0](https://github.com/coachcare/dashboard/compare/v1.19.1...v1.20.0) (2021-06-11)
 
 
