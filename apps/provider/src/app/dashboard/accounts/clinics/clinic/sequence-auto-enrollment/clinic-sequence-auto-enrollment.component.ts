@@ -76,7 +76,7 @@ export class ClinicSequenceAutoEnrollmentComponent implements OnInit {
       this.database,
       this.paginator
     )
-    this.source.addDefault({ organization: this.context.organizationId })
+    this.source.addDefault({ organization: this.context.clinic.id })
     this.source.connect().subscribe((rows) => (this.rows = rows))
   }
 

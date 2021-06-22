@@ -14,7 +14,7 @@
     <h4>{{ 'GLOBAL.SEQUENCE' | translate }}</h4>
 
     <div>
-      <ccr-sequence-search [allowEmptyOption]="false" (onSelect)="onSelectSequence($event)"></ccr-sequence-search>
+      <ccr-sequence-search [allowEmptyOption]="false" [organizationId]="organizationId" (onSelect)="onSelectSequence($event)"></ccr-sequence-search>
     </div>
 
     <div *ngIf="sequenceStates?.length && isAdmin">

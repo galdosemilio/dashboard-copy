@@ -47,6 +47,7 @@ export class AddSequenceAutoenrollmentDialog implements OnInit {
     }
   ]
   public daysOfMonth: SelectOptions<number> = []
+  public organizationId: string
   public selectedSequence?: Sequence
   public sequenceStates: SequenceState[]
 
@@ -59,6 +60,8 @@ export class AddSequenceAutoenrollmentDialog implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.organizationId = this.context.clinic.id
+
     this.createDaysOptions()
     this.createForm()
     this.useControl('dayOfWeek')

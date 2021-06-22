@@ -19,6 +19,7 @@ type SequenceSearchComponentModes = 'searchbar' | 'select'
 })
 export class SequenceSearchComponent implements OnInit {
   @Input() allowEmptyOption = true
+  @Input() organizationId?: string
   @Input()
   set readonly(readonly: boolean) {
     this._readonly = readonly
@@ -86,7 +87,7 @@ export class SequenceSearchComponent implements OnInit {
       const selectedSequenceInstance = new Sequence(
         await this.sequenceService.getSequence({
           id: selectedSequence.id,
-          organization: this.context.organizationId,
+          organization: this.organizationId ?? this.context.organizationId,
           status: 'all',
           full: true
         })
@@ -105,7 +106,7 @@ export class SequenceSearchComponent implements OnInit {
         sequence
           ? await this.sequenceService.getSequence({
               id: sequence.id,
-              organization: this.context.organizationId,
+              organization: this.organizationId ?? this.context.organizationId,
               status: 'all',
               full: true
             })
@@ -130,7 +131,7 @@ export class SequenceSearchComponent implements OnInit {
     try {
       const response = await this.database
         .fetch({
-          organization: this.context.organizationId,
+          organization: this.organizationId ?? this.context.organizationId,
           query: query,
           status: 'active'
         })
