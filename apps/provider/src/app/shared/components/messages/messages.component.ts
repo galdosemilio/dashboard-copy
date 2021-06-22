@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -31,6 +32,7 @@ import { from, merge, Subject } from 'rxjs'
 import { auditTime, takeUntil } from 'rxjs/operators'
 import { MessageRecipient, MessageThread } from './messages.interfaces'
 import { MessageContainer } from '@app/shared/model'
+import { STORAGE_MESSAGE_INPUT_HEIGHT } from '@app/config'
 
 type MessagesDraftData = { message?: string; patientMessage?: string }
 
@@ -41,9 +43,13 @@ type MessagesDraftData = { message?: string; patientMessage?: string }
   host: { class: 'ccr-messages' },
   styleUrls: ['./messages.component.scss']
 })
-export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
+export class CcrMessagesComponent
+  implements OnChanges, OnDestroy, OnInit, AfterViewInit {
   @ViewChild('messageBody', { static: false })
   private messageContainer: ElementRef
+
+  @ViewChild('messageFooter', { static: false })
+  private messageFooter: ElementRef
 
   @Input()
   account: AccSingleResponse
@@ -93,6 +99,7 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
   private threadId: string = null
   private previousScrollHeight = 0
   private timers: any[] = []
+  private resizerClientY = 0
 
   constructor(
     private messaging: Messaging,
@@ -100,9 +107,12 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
     private context: ContextService,
     private notifier: NotifierService,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.onResize = this.onResize.bind(this)
+    this.onResizeEnd = this.onResizeEnd.bind(this)
+  }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
       this.renderTimestamps()
     })
@@ -124,7 +134,17 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
       })
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngAfterViewInit(): void {
+    const messageInputHeight = window.localStorage.getItem(
+      STORAGE_MESSAGE_INPUT_HEIGHT
+    )
+
+    if (messageInputHeight) {
+      this.resizeMessageInput(Number(messageInputHeight))
+    }
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this.timers[0]) {
       this.timers[0] = clearInterval(this.timers[0])
       this.timers[1] = clearInterval(this.timers[1])
@@ -161,11 +181,21 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
     }
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.timers[0]) {
       clearInterval(this.timers[0])
       clearInterval(this.timers[1])
     }
+
+    document.removeEventListener('mousemove', this.onResize)
+    document.removeEventListener('mouseup', this.onResizeEnd)
+  }
+
+  public onResizeStart(event: MouseEvent) {
+    event.preventDefault()
+
+    document.addEventListener('mousemove', this.onResize)
+    document.addEventListener('mouseup', this.onResizeEnd)
   }
 
   public onTextInputChange(text: string) {
@@ -197,6 +227,36 @@ export class CcrMessagesComponent implements OnChanges, OnDestroy, OnInit {
       this.removeDraft()
       this.onTextInputChange('')
     }
+  }
+
+  private onResize(e: MouseEvent): void {
+    e.preventDefault()
+    const clientY = e.clientY
+    const deltaY = clientY - (this.resizerClientY || clientY)
+    this.resizerClientY = clientY
+
+    const height = Math.round(
+      parseInt(getComputedStyle(this.messageFooter.nativeElement).height, 10) -
+        deltaY
+    )
+
+    window.localStorage.setItem(STORAGE_MESSAGE_INPUT_HEIGHT, String(height))
+
+    this.resizeMessageInput(height)
+  }
+
+  private onResizeEnd(event: MouseEvent): void {
+    event.preventDefault()
+    document.removeEventListener('mousemove', this.onResize)
+    document.removeEventListener('mouseup', this.onResizeEnd)
+    this.resizerClientY = 0
+  }
+
+  private resizeMessageInput(height: number): void {
+    this.messageFooter.nativeElement.style.flex = `0 ${
+      height < 10 ? 0 : height
+    }px`
+    this.messageContainer.nativeElement.style.flex = '1 0'
   }
 
   private setRefresh() {

@@ -71,8 +71,10 @@
     </ng-container>
   </div>
 </div>
-
-<div class="messages-footer" fxFlex="nogrow">
+<div class="message-footer-resize">
+  <mat-icon (mousedown)="onResizeStart($event)" class="clickable">expand</mat-icon>
+</div>
+<div class="messages-footer" #messageFooter>
   <textarea
   rows="2"
   [(ngModel)]="newMessage"
@@ -81,15 +83,17 @@
   (ngModelChange)="onTextInputChange($event)"
   (keyPressed)="sendMessage()"
     [placeholder]="'BOARD.TYPE_YOUR_MESSAGES_HERE' | translate"></textarea>
-  <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
-    <mat-icon>send</mat-icon> <span fxHide.xs>{{'GLOBAL.SEND' | translate}}</span>
-  </button>
-  <ccr-popup-description
-    fxHide.xs
-    [title]="'BOARD.MESSAGES_HELP_TITLE' | translate"
-    [description]="'BOARD.MESSAGES_HELP_DESCRIPTION' | translate"
-    [showIntro]="false"
-  ></ccr-popup-description>
+  <div class="send-button-wrap">
+    <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
+      <mat-icon>send</mat-icon> <span fxHide.xs>{{'GLOBAL.SEND' | translate}}</span>
+    </button>
+    <ccr-popup-description
+      fxHide.xs
+      [title]="'BOARD.MESSAGES_HELP_TITLE' | translate"
+      [description]="'BOARD.MESSAGES_HELP_DESCRIPTION' | translate"
+      [showIntro]="false"
+    ></ccr-popup-description>
+  </div>
 </div>
 
 <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="loading || disabled">

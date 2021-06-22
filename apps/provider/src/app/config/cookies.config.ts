@@ -13,3 +13,4 @@ export const STORAGE_PAGE_SIZE_PATIENT_LISTING =
   'ccrDefaultPageSizePatientListing'
 export const STORAGE_RPM_BILLING_SORT = 'ccrRPMBillingsSort'
 export const STORAGE_PAGE_SIZE_RPM_BILLING = 'ccrDefaultPageSizeRPMBillings'
+export const STORAGE_MESSAGE_INPUT_HEIGHT = 'ccrMessageInputHeight'

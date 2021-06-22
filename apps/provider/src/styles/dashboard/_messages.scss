@@ -110,20 +110,58 @@
 
   .messages-footer {
     align-items: center;
-    border-top: 1px solid mat-color($ccr-foreground, divider);
     display: flex;
     flex-shrink: 0;
     min-height: 90px;
+    padding: 15px 0;
     @include horizontal-padding-right(12px);
 
     > textarea {
+      box-sizing: border-box;
+      border: none;
       color: mat-color($ccr-foreground, base);
       flex-grow: 1;
       @include horizontal-margin-right(12px);
-      border: none;
+      height: 100%;
       outline: none;
-      resize: none;
       padding: 12px;
+      resize: none;
+    }
+
+    .send-button-wrap {
+      display: flex;
+      padding: 12px 0;
+      height: 100%;
+
+      .ccr-button {
+        height: fit-content;
+      }
+
+      ccr-popup-description {
+        margin-left: 5px;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .message-footer-resize {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &::before {
+      background-color: mat-color($ccr-foreground, divider);
+      content: '';
+      height: 2px;
+      position: absolute;
+      width: 100%;
+    }
+
+    img {
+      cursor: pointer;
+      height: 20px;
+      z-index: 1;
     }
   }
 }
