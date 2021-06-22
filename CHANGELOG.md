@@ -1,3 +1,15 @@
+# [1.22.0](https://github.com/coachcare/dashboard/compare/v1.21.1...v1.22.0) (2021-06-22)
+
+
+### Bug Fixes
+
+* adjusted clinic seq auto enrollment org [FRON-2223] ([9af6bd9](https://github.com/coachcare/dashboard/commit/9af6bd9a36041dac6793f97de8f18999d19e0aaa))
+
+
+### Features
+
+* implemented initial approach for the charts project [FRON-2150] ([9de5fbe](https://github.com/coachcare/dashboard/commit/9de5fbe389627392dcc5e9c6fc1d138a5af98eae))
+
 ## [1.21.1](https://github.com/coachcare/dashboard/compare/v1.21.0...v1.21.1) (2021-06-17)
 
 
