@@ -50,6 +50,7 @@ export class CallsComponent implements OnDestroy, OnInit {
   }
 
   @Input() allowCreation = false
+  @Input() listenToReportCriteria = true
 
   @ViewChild(CcrPaginatorComponent, { static: true }) paginator
 
@@ -124,6 +125,10 @@ export class CallsComponent implements OnDestroy, OnInit {
       this.refreshShownColumns()
       this.resolveBillableServices()
     })
+
+    if (!this.listenToReportCriteria) {
+      return
+    }
 
     this.store
       .pipe(untilDestroyed(this), select(criteriaSelector))

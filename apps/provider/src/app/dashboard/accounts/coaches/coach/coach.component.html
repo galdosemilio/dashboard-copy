@@ -69,7 +69,7 @@ data-cy="coachProfileMenu">
     </div>
 
     <div *ngSwitchCase="'communications'">
-      <app-reports-calls [account]="coachId"></app-reports-calls>
+      <app-reports-calls [account]="coachId" [listenToReportCriteria]="false"></app-reports-calls>
     </div>
 
     <div *ngSwitchCase="'login-history'">
