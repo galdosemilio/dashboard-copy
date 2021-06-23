@@ -1,6 +1,6 @@
-import { baseData, CcrElement } from '@chart/model'
+import { baseData, CcrElement, Tab } from '@chart/model'
 import { api } from '@chart/service/api'
-import { eventService, modalService } from '@chart/service'
+import { tabService, modalService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 import {
   MeasurementDataPointAggregate,
@@ -10,6 +10,7 @@ import {
 import { DateTime } from 'luxon'
 
 import './list.element.scss'
+
 export class ListElement extends CcrElement {
   private _loading: boolean
   private hasMore = true
@@ -44,8 +45,8 @@ export class ListElement extends CcrElement {
 
     this.pullToRefreshList(document.getElementById('list-wrapper'))
 
-    eventService.baseDataEvent$.subscribe((data) => {
-      if (data) {
+    tabService.selectedTab$.subscribe((tab) => {
+      if (tab === Tab.LIST && api.baseData.token) {
         this.generateList()
       }
     })

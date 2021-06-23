@@ -1,6 +1,6 @@
 import { CcrElement, Tab } from '@chart/model'
 import { translate } from '@chart/service/i18n'
-import { tabService } from '@chart/service/tab/tab.service'
+import { tabService } from '@chart/service'
 import { Subscription } from 'rxjs'
 
 import './nav-item.element.scss'

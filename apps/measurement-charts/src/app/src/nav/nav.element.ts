@@ -1,5 +1,5 @@
 import { CcrElement, Tab } from '@chart/model'
-import { tabService } from '@chart/service/tab/tab.service'
+import { tabService } from '@chart/service'
 import { Subscription } from 'rxjs'
 
 import './nav.element.scss'

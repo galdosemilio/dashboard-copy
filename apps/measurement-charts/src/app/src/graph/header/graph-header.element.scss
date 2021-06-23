@@ -1,0 +1,42 @@
+dashboard-graph-header {
+  #graph-header {
+    padding: 10px;
+
+    .header-average {
+      color: var(--text);
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .average-wrap {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      margin-top: 5px;
+
+      .range {
+        color: var(--primary);
+        margin-block-end: 0;
+        margin-block-start: 0;
+
+        .unit {
+          color: var(--primary);
+          font-size: 14px;
+        }
+      }
+
+      .value {
+        color: var(--primary);
+        font-size: 30px;
+        margin: 0;
+      }
+
+      .unit {
+        color: var(--text);
+        font-size: 18px;
+        margin: 0;
+        padding: 5px;
+      }
+    }
+  }
+}

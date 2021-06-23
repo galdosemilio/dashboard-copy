@@ -2,10 +2,9 @@ import './app.element.scss'
 
 import { baseData, BaseData, Tab, Timeframe } from '../model'
 import { api } from '../service/api'
-import { eventService } from '@chart/service'
+import { eventService, tabService } from '@chart/service'
 import { Settings as LuxonSettings } from 'luxon'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
-import { tabService } from '@chart/service/tab/tab.service'
 
 export class AppElement extends HTMLElement {
   constructor() {
