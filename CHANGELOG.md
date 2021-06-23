@@ -1,3 +1,16 @@
+# [1.23.0](https://github.com/coachcare/dashboard/compare/v1.22.0...v1.23.0) (2021-06-23)
+
+
+### Bug Fixes
+
+* issue with date range on comms report [FRON-2229] ([9058aac](https://github.com/coachcare/dashboard/commit/9058aacd8b34addcbee1b3fe4554279cd7b6dc1c))
+* set initial timeframe [FRON-2226] ([9255deb](https://github.com/coachcare/dashboard/commit/9255deb6c0b309fb6b7a1c197454be15237a058a))
+
+
+### Features
+
+* add header template to graph tab [FRON-2217] ([1581397](https://github.com/coachcare/dashboard/commit/15813972813ce37cfaddefe8bcaa6e1fd500c644))
+
 # [1.22.0](https://github.com/coachcare/dashboard/compare/v1.21.1...v1.22.0) (2021-06-22)
 
 
