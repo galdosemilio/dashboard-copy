@@ -48,9 +48,9 @@ export class DateRangeSelectorElement extends CcrElement {
       eventService
         .listen<Timeframe>('graph.timeframe')
         .subscribe(this.refreshTimeframe),
-      eventService.baseDataEvent$.subscribe((data) => {
+      eventService.baseDataEvent$.subscribe((data) =>
         this.refreshTimeframe(data.timeframe)
-      })
+      )
     )
   }
 

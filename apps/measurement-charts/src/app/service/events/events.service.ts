@@ -1,4 +1,4 @@
-import { BaseData } from '@chart/model'
+import { baseData, BaseData } from '@chart/model'
 import { BehaviorSubject, Observable, Subject } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 
@@ -12,8 +12,8 @@ interface EventProps {
 class EventService {
   private event$: Subject<EventProps> = new Subject<EventProps>()
 
-  public baseDataEvent$: BehaviorSubject<BaseData> = new BehaviorSubject<BaseData | null>(
-    null
+  public baseDataEvent$: BehaviorSubject<BaseData> = new BehaviorSubject<BaseData>(
+    baseData
   )
 
   public listen<T>(name: EventString): Observable<T> {

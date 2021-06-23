@@ -1,4 +1,4 @@
-import { CcrElement } from '@chart/model'
+import { CcrElement, Timeframe } from '@chart/model'
 import { eventService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 import { Subscription } from 'rxjs'
@@ -35,23 +35,27 @@ export class TimeframeSelectorElement extends CcrElement {
     this.listenToEvents()
 
     this.subscriptions.push(
-      eventService.baseDataEvent$.subscribe((data) => {
-        const foundOption = this.selectorItems.find(
-          (item) => data.timeframe === item.dataset.timeframe
-        )
-
-        if (!foundOption) {
-          return
-        }
-
-        eventService.trigger('graph.timeframe', foundOption.dataset.timeframe)
-        this.onItemClick({ target: foundOption })
-      })
+      eventService.baseDataEvent$.subscribe((data) =>
+        this.onChangeTimeFrame(data.timeframe)
+      )
     )
   }
 
   onDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+  }
+
+  private onChangeTimeFrame(timeframe: Timeframe): void {
+    const foundOption = this.selectorItems.find(
+      (item) => timeframe === item.dataset.timeframe
+    )
+
+    if (!foundOption) {
+      return
+    }
+
+    eventService.trigger('graph.timeframe', foundOption.dataset.timeframe)
+    this.onItemClick({ target: foundOption })
   }
 
   private deactivateSelectorItems(): void {
