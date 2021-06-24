@@ -10,6 +10,7 @@ import {
 import { DateTime } from 'luxon'
 
 import './list.element.scss'
+import { DataPointChangedEvent, EventType } from '@chart/model/event'
 
 export class ListElement extends CcrElement {
   private _loading: boolean
@@ -165,9 +166,12 @@ export class ListElement extends CcrElement {
   }
 
   async onDeleteDataPoint(id: string) {
-    this.loading(true)
     try {
+      this.loading(true)
+
       await api.measurementDataPoint.delete({ id })
+      modalService.close$.next()
+
       this.data = this.data.filter((item) => item.point.id !== id)
 
       if (typeof this.offset === 'number' && this.offset > 0) {
@@ -176,6 +180,13 @@ export class ListElement extends CcrElement {
 
       document.getElementById('list-content').innerText = ''
       this.addItemToListView(this.data)
+
+      const event: DataPointChangedEvent = {
+        type: EventType.DATA_POINT_CHANGED,
+        dataPointTypeId: api.baseData.dataPointTypeId
+      }
+
+      window.postMessage(JSON.stringify(event), '*')
     } catch (err) {
       this.error(err)
     } finally {
