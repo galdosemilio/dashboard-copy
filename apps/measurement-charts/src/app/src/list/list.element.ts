@@ -16,6 +16,7 @@ export class ListElement extends CcrElement {
   private hasMore = true
   private offset: number
   private limit: number | 'all'
+  private data: MeasurementDataPointAggregate[]
   private listStartPosition = { x: 0, y: 0 }
   private listCurrentPosition = { x: 0, y: 0 }
   private itemDragStart = 0
@@ -47,7 +48,7 @@ export class ListElement extends CcrElement {
 
     tabService.selectedTab$.subscribe((tab) => {
       if (tab === Tab.LIST && api.baseData.token) {
-        this.generateList()
+        this.refresh()
       }
     })
   }
@@ -164,8 +165,22 @@ export class ListElement extends CcrElement {
   }
 
   async onDeleteDataPoint(id: string) {
-    await api.measurementDataPoint.delete({ id })
-    modalService.close$.next()
+    this.loading(true)
+    try {
+      await api.measurementDataPoint.delete({ id })
+      this.data = this.data.filter((item) => item.point.id !== id)
+
+      if (typeof this.offset === 'number' && this.offset > 0) {
+        this.offset -= 1
+      }
+
+      document.getElementById('list-content').innerText = ''
+      this.addItemToListView(this.data)
+    } catch (err) {
+      this.error(err)
+    } finally {
+      this.loading(false)
+    }
   }
 
   onScrollList() {
@@ -176,7 +191,7 @@ export class ListElement extends CcrElement {
       wrapper.scrollTop + wrapper.offsetHeight >= content.offsetHeight - 20 &&
       !this._loading
     ) {
-      this.generateList()
+      this.loadList()
     }
   }
 
@@ -228,16 +243,46 @@ export class ListElement extends CcrElement {
       this.swipeItem(itemElement, deleteElement.offsetWidth)
 
       deleteElement.addEventListener('click', () =>
-        this.onDeleteDataPoint(item.point.id)
+        this.openDeleteConfirm(item)
       )
 
       itemElement.addEventListener('click', () => this.openDetails(item))
     }
   }
 
+  private openDeleteConfirm(item: MeasurementDataPointAggregate) {
+    modalService.open$.next({
+      title: translate('CONFIRM'),
+      content: `
+        <div class="delete-confirm-modal">
+          <div class="modal-content">
+            <p>${translate('DELETE_CONFIRM')}</p>
+          </div>
+          <div class="actions">
+            <div id="delete-button" class="delete-btn">${translate(
+              'DELETE'
+            )}</div>
+            <div id="close-button" class="cancel-btn">${translate(
+              'CANCEL'
+            )}</div>
+          </div>
+        </div>
+      `
+    })
+
+    document.getElementById('delete-button').addEventListener('click', () => {
+      modalService.close$.next()
+      this.onDeleteDataPoint(item.point.id)
+    })
+    document
+      .getElementById('close-button')
+      .addEventListener('click', () => modalService.close$.next())
+  }
+
   private openDetails(item: MeasurementDataPointAggregate) {
     modalService.open$.next({
       title: translate('DETAILS'),
+      full: true,
       content: `
         <div class="detail-view">
           <div class="detail-item">
@@ -295,11 +340,12 @@ export class ListElement extends CcrElement {
   private refresh() {
     this.hasMore = true
     this.offset = 0
+    this.data = []
     document.getElementById('list-content').innerText = ''
-    this.generateList()
+    this.loadList()
   }
 
-  private async generateList() {
+  private async loadList() {
     if (!this.hasMore) {
       return
     }
@@ -321,6 +367,7 @@ export class ListElement extends CcrElement {
 
       this.offset = res.pagination.next
       this.hasMore = !!res.pagination.next
+      this.data = this.data.concat(res.data)
       this.addItemToListView(res.data)
     } catch (err) {
       this.error(err)

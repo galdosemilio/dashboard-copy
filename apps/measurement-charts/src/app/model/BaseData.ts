@@ -46,4 +46,5 @@ export const baseData: BaseData = {
 export interface Modal {
   title: string
   content: string
+  full?: boolean
 }

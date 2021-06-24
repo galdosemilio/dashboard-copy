@@ -20,8 +20,22 @@ export class ModalElement extends CcrElement {
     )
 
     document
-      .getElementById('back-btn')
+      .getElementById('close-btn')
       .addEventListener('click', () => this.onCloseModal())
+  }
+
+  render(): void {
+    this.innerHTML = `
+      <div id='modal'>
+        <div id='modal-wrap'>
+          <div id='modal-header'>
+            <div id='close-btn'></div>
+            <div id='modal-title'></div>
+          </div>
+          <div id='modal-body'></div>
+        </div>
+      </div>
+    `
   }
 
   private onOpenModal(data: Modal | null) {
@@ -30,25 +44,15 @@ export class ModalElement extends CcrElement {
     const { title, content } = data
     document.getElementById('modal-title').innerText = title
     document.getElementById('modal-body').innerHTML = content
-    document.getElementById('modal').setAttribute('class', 'open')
+    document
+      .getElementById('modal')
+      .setAttribute('class', `open ${data.full ? 'full' : ''}`)
   }
 
   private onCloseModal() {
     document.getElementById('modal-title').innerText = ''
     document.getElementById('modal-body').innerText = ''
     document.getElementById('modal').setAttribute('class', '')
-  }
-
-  render(): void {
-    this.innerHTML = `
-      <div id='modal'>
-        <div id='modal-header'>
-          <div id='back-btn'></div>
-          <div id='modal-title'></div>
-        </div>
-        <div id='modal-body'></div>
-      </div>
-    `
   }
 }
 
