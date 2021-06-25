@@ -2,7 +2,11 @@ import { baseData, BaseData } from '@chart/model'
 import { BehaviorSubject, Observable, Subject } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 
-type EventString = 'graph.timeframe' | 'graph.date-range'
+type EventString =
+  | 'graph.timeframe'
+  | 'graph.date-range'
+  | 'graph.date-range-previous'
+  | 'graph.date-range-next'
 
 interface EventProps {
   name: string

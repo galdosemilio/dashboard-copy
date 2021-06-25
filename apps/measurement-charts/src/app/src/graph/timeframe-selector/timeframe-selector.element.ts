@@ -1,12 +1,11 @@
 import { CcrElement, Timeframe } from '@chart/model'
 import { eventService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
-import { Subscription } from 'rxjs'
+
 import './timeframe-selector.element.scss'
 
 export class TimeframeSelectorElement extends CcrElement {
   private selectorItems: HTMLDivElement[] = []
-  private subscriptions: Subscription[] = []
 
   constructor() {
     super()
@@ -39,10 +38,6 @@ export class TimeframeSelectorElement extends CcrElement {
         this.onChangeTimeFrame(data.timeframe)
       )
     )
-  }
-
-  onDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 
   private onChangeTimeFrame(timeframe: Timeframe): void {

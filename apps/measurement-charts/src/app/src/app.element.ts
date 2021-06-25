@@ -6,6 +6,8 @@ import { eventService, tabService } from '@chart/service'
 import { Settings as LuxonSettings } from 'luxon'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 
+import './lib'
+
 export class AppElement extends HTMLElement {
   constructor() {
     super()

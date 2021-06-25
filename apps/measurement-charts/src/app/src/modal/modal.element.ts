@@ -1,16 +1,9 @@
 import { CcrElement, Modal } from '@chart/model'
 import { modalService } from '@chart/service'
-import { Subscription } from 'rxjs'
 
 import './modal.element.scss'
 
 export class ModalElement extends CcrElement {
-  private subscriptions: Subscription[] = []
-
-  onDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe())
-  }
-
   afterViewInit(): void {
     this.subscriptions.push(
       modalService.open$.subscribe((content) => this.onOpenModal(content))

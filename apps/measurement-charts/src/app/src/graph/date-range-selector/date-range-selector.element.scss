@@ -4,7 +4,16 @@ dashboard-date-range-selector {
     background-color: var(--selector-background-light);
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 0 15px;
+
+    p {
+      text-align: center;
+      width: 75%;
+    }
+
+    span {
+      cursor: pointer;
+    }
   }
 }

@@ -6,16 +6,31 @@ import './date-range-selector.element.scss'
 
 export class DateRangeSelectorElement extends CcrElement {
   private dateRange: DateRange = { start: '', end: '' }
-  private subscriptions = []
   private timeframe: Timeframe = Timeframe.WEEK
 
   constructor() {
     super()
     this.refreshTimeframe = this.refreshTimeframe.bind(this)
+    this.onClickLeft = this.onClickLeft.bind(this)
+    this.onClickRight = this.onClickRight.bind(this)
+  }
+
+  afterViewInit(): void {
+    document
+      .querySelector('#timeframe-left')
+      .addEventListener('click', this.onClickLeft)
+    document
+      .querySelector('#timeframe-right')
+      .addEventListener('click', this.onClickRight)
   }
 
   onDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+    document
+      .querySelector('#timeframe-left')
+      .removeEventListener('click', this.onClickLeft)
+    document
+      .querySelector('#timeframe-right')
+      .removeEventListener('click', this.onClickRight)
   }
 
   onInit(): void {
@@ -25,11 +40,38 @@ export class DateRangeSelectorElement extends CcrElement {
   render() {
     this.innerHTML = `
       <div class="date-range-container">
+        <span id="timeframe-left">◀</span>
         <p>
           ${this.renderDateRange()}
         </p>
+        <span id="timeframe-right">▶</span>
       </div>
     `
+
+    this.afterViewInit()
+  }
+
+  private listenToEvents(): void {
+    this.subscriptions.push(
+      eventService
+        .listen<Timeframe>('graph.timeframe')
+        .subscribe(this.refreshTimeframe),
+      eventService.listen('graph.date-range-next').subscribe(this.onClickRight),
+      eventService
+        .listen('graph.date-range-previous')
+        .subscribe(this.onClickLeft),
+      eventService.baseDataEvent$.subscribe((data) =>
+        this.refreshTimeframe(data.timeframe)
+      )
+    )
+  }
+
+  private onClickLeft(): void {
+    this.updateDateRange(false)
+  }
+
+  private onClickRight(): void {
+    this.updateDateRange(true)
   }
 
   private refreshDateRange(timeframe: Timeframe): void {
@@ -41,17 +83,6 @@ export class DateRangeSelectorElement extends CcrElement {
     }
 
     eventService.trigger('graph.date-range', this.dateRange)
-  }
-
-  private listenToEvents(): void {
-    this.subscriptions.push(
-      eventService
-        .listen<Timeframe>('graph.timeframe')
-        .subscribe(this.refreshTimeframe),
-      eventService.baseDataEvent$.subscribe((data) =>
-        this.refreshTimeframe(data.timeframe)
-      )
-    )
   }
 
   private refreshTimeframe(timeframe: Timeframe): void {
@@ -78,6 +109,30 @@ export class DateRangeSelectorElement extends CcrElement {
       case Timeframe.MONTH:
         return `<span>${start.toFormat(format)}</span>`
     }
+  }
+
+  private updateDateRange(forward: boolean): void {
+    this.dateRange = forward
+      ? {
+          start: DateTime.fromISO(this.dateRange.start)
+            .plus({ [this.timeframe]: 1 })
+            .toISO(),
+          end: DateTime.fromISO(this.dateRange.end)
+            .plus({ [this.timeframe]: 1 })
+            .toISO()
+        }
+      : {
+          start: DateTime.fromISO(this.dateRange.start)
+            .minus({ [this.timeframe]: 1 })
+            .toISO(),
+          end: DateTime.fromISO(this.dateRange.end)
+            .minus({ [this.timeframe]: 1 })
+            .toISO()
+        }
+
+    eventService.trigger('graph.date-range', this.dateRange)
+    this.render()
+    this.afterViewInit()
   }
 }
 

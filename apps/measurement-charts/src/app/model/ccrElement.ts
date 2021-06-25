@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
+import { Subscription } from 'rxjs'
+
 export interface CcrElementInterface {
   afterViewInit(): void
   onDestroy(): void
@@ -11,6 +13,7 @@ export class CcrElement<T = Record<string, unknown>>
   extends HTMLElement
   implements CcrElementInterface {
   protected attrs: T = {} as T
+  protected subscriptions: Subscription[] = []
 
   connectedCallback() {
     this.mapAttributes()
@@ -20,6 +23,7 @@ export class CcrElement<T = Record<string, unknown>>
   }
 
   disconnectedCallback() {
+    this.clearSubscriptions()
     this.onDestroy()
   }
 
@@ -30,6 +34,10 @@ export class CcrElement<T = Record<string, unknown>>
   onInit(): void {}
 
   render(): void {}
+
+  private clearSubscriptions(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+  }
 
   private mapAttributes(): void {
     Object.values(this.attributes).forEach(

@@ -1,16 +1,9 @@
 import { CcrElement, Tab } from '@chart/model'
 import { tabService } from '@chart/service'
-import { Subscription } from 'rxjs'
 
 import './nav.element.scss'
 
 export class NavElement extends CcrElement {
-  private subscriptions: Subscription[] = []
-
-  onDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe())
-  }
-
   afterViewInit(): void {
     this.subscriptions.push(
       tabService.selectedTab$.subscribe((tab) => this.onChangeTab(tab))

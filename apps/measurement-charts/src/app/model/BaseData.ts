@@ -28,7 +28,7 @@ export interface BaseData {
 }
 
 export const baseData: BaseData = {
-  accountId: '7402',
+  accountId: '299',
   token: '',
   dataPointTypeId: '1',
   locale: 'en',

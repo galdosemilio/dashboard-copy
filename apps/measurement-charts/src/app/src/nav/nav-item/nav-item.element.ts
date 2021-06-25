@@ -1,7 +1,6 @@
 import { CcrElement, Tab } from '@chart/model'
 import { translate } from '@chart/service/i18n'
 import { tabService } from '@chart/service'
-import { Subscription } from 'rxjs'
 
 import './nav-item.element.scss'
 
@@ -12,7 +11,6 @@ interface NavItemElementAttrs {
 
 export class NavItemElement extends CcrElement<NavItemElementAttrs> {
   private tabItemId: string
-  private subscriptions: Subscription[] = []
 
   afterViewInit(): void {
     this.subscribeToTabService()
@@ -21,10 +19,6 @@ export class NavItemElement extends CcrElement<NavItemElementAttrs> {
 
   onInit(): void {
     this.tabItemId = `#nav-item-${this.attrs.link}`
-  }
-
-  onDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe())
   }
 
   render(): void {
