@@ -142,7 +142,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
     cy.tick(1000)
 
     cy.wait('@supervisingProviderDeleteRequest').should((xhr) => {
-      expect(xhr.request.url).to.contain('id=1')
+      expect(xhr.request.url).to.contain('1')
     })
   })
 
@@ -273,7 +273,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
     cy.tick(1000)
 
     cy.wait('@rpmPreferenceDeleteRequest').should((xhr) => {
-      expect(xhr.request.url).to.contain('id=1')
+      expect(xhr.request.url).to.contain('1')
     })
   })
 })

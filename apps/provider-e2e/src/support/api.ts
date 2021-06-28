@@ -193,6 +193,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('GET', '/1.0/authentication/**', {
     fixture: 'api/access/availableDevices'
   })
+  cy.intercept('GET', '/3.0/account/*/avatar', { fixture: 'api/avatar/get' })
   cy.intercept('GET', '/2.0/food/consumed**', { fixture: 'api/food/consumed' })
   cy.intercept('GET', '/2.0/food/meal/**', { fixture: 'api/food/consumedMeal' })
   cy.intercept('GET', '/2.0/nutrition/summary?**', {

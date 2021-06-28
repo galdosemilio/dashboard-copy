@@ -26,7 +26,6 @@ import { ccrPhoneValidator } from '@app/shared/components/phone-input'
 import {
   AccountMeasurementPreferenceType,
   AccSingleResponse,
-  FetchGoalResponse,
   TimezoneResponse
 } from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
@@ -35,7 +34,7 @@ import { clone } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { AccountProvider, Goal, Timezone } from '@coachcare/sdk'
+import { AccountProvider, Timezone } from '@coachcare/sdk'
 import { AccountIdentifiersProps } from './account-identifiers/models'
 
 @UntilDestroy()
@@ -54,6 +53,9 @@ import { AccountIdentifiersProps } from './account-identifiers/models'
 export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
   @Input()
   dieterId: number
+
+  @Input()
+  hideWeightGoal: boolean
 
   datepickerMode: 'datepicker' | 'text' = 'datepicker'
   form: FormGroup
@@ -92,7 +94,6 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
     private responsive: Store<UIResponsiveState>,
     private translator: TranslateService,
     private account: AccountProvider,
-    private goal: Goal,
     private timezone: Timezone,
     private notifier: NotifierService
   ) {
@@ -184,14 +185,9 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
   }
 
   private loadDieterData(): void {
-    Promise.all([
-      this.account.getSingle(this.dieterId),
-      this.goal.fetch({ account: `${this.dieterId}` })
-    ])
-      .then(async (res) => {
-        const account: AccSingleResponse = res[0]
-        const goals: FetchGoalResponse = res[1]
-
+    this.account
+      .getSingle(this.dieterId)
+      .then(async (account) => {
         // override initial values
         this.form.patchValue({
           password: undefined
@@ -199,7 +195,7 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
 
         // TODO pending start date and initial weight
         this.form.patchValue(
-          DieterFormComponent.postRead(account, goals, this.measurement)
+          DieterFormComponent.postRead(account, this.measurement)
         )
 
         this.isLoading = false
@@ -256,7 +252,6 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
 
   static postRead(
     acc: AccSingleResponse,
-    goals: FetchGoalResponse,
     pref: AccountMeasurementPreferenceType
   ) {
     const account: any = acc
@@ -283,12 +278,6 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
         : ['en']
 
     account['preferredLocales'] = preferredLocales
-
-    // process the incoming goals
-    account['weightGoal'] =
-      goals.goal.weight !== null
-        ? Math.round(unitConversion(pref, 'composition', goals.goal.weight))
-        : 0
 
     account['phone'] = {
       phone: account.phone,

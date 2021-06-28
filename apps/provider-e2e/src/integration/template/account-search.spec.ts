@@ -17,7 +17,7 @@ describe('Account Search in Top Menu', function () {
     cy.get('[data-cy="search-disabled"]').should('exist')
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('ccr-form-field-lang').should('have.length', 1)
+    cy.get('form-field-lang').should('have.length', 1)
   })
 
   it('Account search should be visible: no permissions', function () {

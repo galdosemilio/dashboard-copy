@@ -50,6 +50,11 @@
         {{ 'GLOBAL.MEETINGS' | translate }}
       </a>
     </li>
+    <li *ngIf="components.indexOf('goals') > -1">
+      <a mat-button [routerLink]="['.', {s: 'goals'}]" [class.active]="section === 'goals'">
+        {{ 'GLOBAL.GOALS' | translate }}
+      </a>
+    </li>
   </ul>
 </div>
 <!-- <div *ngIf="section === 'forms'" class="ccr-container-mini" fxLayout="row" fxLayoutAlign="flex-end">
@@ -116,5 +121,9 @@
 
   <ng-container *ngSwitchCase="'meetings'">
     <app-dieter-meetings></app-dieter-meetings>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'goals'">
+    <app-dieter-goals></app-dieter-goals>
   </ng-container>
 </div>

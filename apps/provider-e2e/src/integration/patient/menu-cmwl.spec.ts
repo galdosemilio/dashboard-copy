@@ -51,7 +51,7 @@ describe('Patient profile -> more -> submenu (cmwl)', function () {
     // More button
     cy.get('@menuLinks').eq(4).click()
 
-    cy.get('@subLinks').should('have.length', 7)
+    cy.get('@subLinks').should('have.length', 9)
     cy.get('@subLinks').eq(0).should('contain', 'Profile')
     cy.get('@subLinks').eq(1).should('contain', 'Phases')
     cy.get('@subLinks').eq(2).should('contain', 'Devices')
@@ -59,6 +59,8 @@ describe('Patient profile -> more -> submenu (cmwl)', function () {
     cy.get('@subLinks').eq(4).should('contain', 'Clinics')
     cy.get('@subLinks').eq(5).should('contain', 'File Vault')
     cy.get('@subLinks').eq(6).should('contain', 'Login History')
+    cy.get('@subLinks').eq(7).should('contain', 'Meetings')
+    cy.get('@subLinks').eq(8).should('contain', 'Goals')
 
     // A bit of a hack - this component loads very late, but cypress will continue loading the page between spec files.  So, the component loads (and the API call is made) during a gray area where no api stub/intercepts are active.  So, waiting for it to load forces the spec to pass.
     cy.get('app-rpm')

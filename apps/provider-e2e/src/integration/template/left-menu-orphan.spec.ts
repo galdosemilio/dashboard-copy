@@ -28,6 +28,6 @@ describe('Lefthand menu (orphaned provider)', function () {
     cy.get('[data-cy="empty-menu"]').should('exist')
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('ccr-form-field-lang').should('have.length', 1)
+    cy.get('form-field-lang').should('have.length', 1)
   })
 })

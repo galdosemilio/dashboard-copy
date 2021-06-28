@@ -1,6 +1,10 @@
 import { standardSetup } from './../../support'
 
 describe('Patient profile -> association message', function () {
+  afterEach(() => {
+    cy.wait(3000)
+  })
+
   it('Association message is not shown', function () {
     cy.setTimezone('et')
     standardSetup()

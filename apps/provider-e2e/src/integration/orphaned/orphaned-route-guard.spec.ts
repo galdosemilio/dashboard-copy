@@ -24,5 +24,5 @@ function access(isOrphaned: boolean, url: string): void {
 
   cy.url().should('eq', `${Cypress.env('baseUrl')}/profile`)
   // Adding for Cypress issue where page continues to load after spec is done
-  cy.get('ccr-form-field-lang').should('have.length', 1)
+  cy.get('form-field-lang').should('have.length', 1)
 }

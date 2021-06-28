@@ -157,6 +157,34 @@
                 }
               ]
             },
+            "e2e": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/common/src/lib/environments/environment.ts",
+                  "with": "libs/common/src/lib/environments/environment.e2e.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "24kb",
+                  "maximumError": "48kb"
+                }
+              ]
+            },
             "standalone": {
               "fileReplacements": [
                 {
@@ -201,6 +229,9 @@
             },
             "standalone": {
               "browserTarget": "provider:build"
+            },
+            "e2e": {
+              "browserTarget": "provider:build:e2e"
             }
           }
         },
@@ -244,6 +275,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "provider:serve:production"
+            },
+            "e2e": {
+              "devServerTarget": "provider:serve:e2e"
             }
           }
         },

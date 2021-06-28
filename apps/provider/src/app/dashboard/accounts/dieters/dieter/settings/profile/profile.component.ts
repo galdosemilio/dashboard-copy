@@ -6,7 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { Access, AccountProvider, Goal } from '@coachcare/sdk'
+import { Access, AccountProvider } from '@coachcare/sdk'
 
 import { MatDialog } from '@coachcare/material'
 import { DieterFormComponent } from '@app/dashboard/accounts/dieters/form'
@@ -50,7 +50,6 @@ export class DieterProfileComponent implements BindForm, OnDestroy, OnInit {
     private context: ContextService,
     private dialog: MatDialog,
     private formUtils: FormUtils,
-    private goal: Goal,
     private notifier: NotifierService
   ) {}
 
@@ -71,7 +70,7 @@ export class DieterProfileComponent implements BindForm, OnDestroy, OnInit {
     if (this.form.valid) {
       this.isLoading = true
       const pref = this.context.user.measurementPreference
-      const { data, goals } = DieterFormComponent.preSave(
+      const { data } = DieterFormComponent.preSave(
         this.form.value['dieter'],
         pref
       )
@@ -81,13 +80,6 @@ export class DieterProfileComponent implements BindForm, OnDestroy, OnInit {
         .update(data)
         .then(async () => {
           await this.accIdentifierSyncer.sync(data.identifiers, data.id)
-          // save goals
-          this.goal
-            .update({
-              account: data.id,
-              goal: goals
-            })
-            .catch((err) => this.notifier.error(err))
 
           this.isLoading = false
           this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_UPDATED'))

@@ -12,6 +12,9 @@ export function unitLabel(
   const plural = unitConversion(pref, metric, value, false)
 
   switch (metric) {
+    case 'cal':
+      return _('UNIT.CALS')
+      break
     // composition
     case 'composition':
       switch (pref) {
@@ -42,6 +45,9 @@ export function unitLabel(
           return _('UNIT.MI')
       }
       break
+    case 'duration':
+      return _('UNIT.HOURS')
+      break
     // height
     case 'height':
       switch (pref) {
@@ -61,6 +67,10 @@ export function unitLabel(
         case 'us':
           return _('UNIT.MPH')
       }
+      break
+    // step
+    case 'step':
+      return _('UNIT.STEPS')
       break
     // volume
     case 'volume':

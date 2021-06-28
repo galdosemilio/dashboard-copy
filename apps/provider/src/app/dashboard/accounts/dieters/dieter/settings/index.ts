@@ -7,6 +7,7 @@ export { DieterLabelComponent } from './labels/labels.component'
 export { LabelsTableComponent } from './labels/table/table.component'
 export { DieterProfileComponent } from './profile/profile.component'
 export { DieterSettingsComponent } from './settings.component'
+export { DieterGoalsComponent } from './goals/goals.component'
 export * from './sequences'
 export * from './services'
 export * from './meetings'
@@ -25,7 +26,7 @@ import {
 } from './sequences'
 import { DieterSettingsComponent } from './settings.component'
 import { DieterMeetingsComponent } from './meetings'
-
+import { DieterGoalsComponent } from './goals/goals.component'
 export const SettingsComponents = [
   DieterFileVaultComponent,
   DeviceStatusComponent,
@@ -38,5 +39,6 @@ export const SettingsComponents = [
   DevicesTableComponent,
   DieterFormsComponent,
   DieterFormsTableComponent,
-  LabelsTableComponent
+  LabelsTableComponent,
+  DieterGoalsComponent
 ]

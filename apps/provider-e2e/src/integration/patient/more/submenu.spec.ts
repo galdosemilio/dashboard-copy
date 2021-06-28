@@ -9,7 +9,7 @@ describe('Patient profile -> more -> submenu (standard)', function () {
 
     cy.get('app-dieter-settings').find('li').as('menuLinks')
 
-    cy.get('@menuLinks').should('have.length', 9)
+    cy.get('@menuLinks').should('have.length', 11)
     cy.get('@menuLinks').eq(0).should('contain', 'Profile')
     cy.get('@menuLinks').eq(1).should('contain', 'Phases')
     cy.get('@menuLinks').eq(2).should('contain', 'Devices')
@@ -19,6 +19,8 @@ describe('Patient profile -> more -> submenu (standard)', function () {
     cy.get('@menuLinks').eq(6).should('contain', 'Clinics')
     cy.get('@menuLinks').eq(7).should('contain', 'File Vault')
     cy.get('@menuLinks').eq(8).should('contain', 'Login History')
+    cy.get('@menuLinks').eq(9).should('contain', 'Meetings')
+    cy.get('@menuLinks').eq(10).should('contain', 'Goals')
 
     cy.wait(2000)
   })
@@ -36,7 +38,7 @@ describe('Patient profile -> more -> submenu (standard)', function () {
 
     cy.get('app-dieter-settings').find('li').as('menuLinks')
 
-    cy.get('@menuLinks').should('have.length', 8)
+    cy.get('@menuLinks').should('have.length', 10)
     cy.get('@menuLinks').eq(0).should('contain', 'Profile')
     cy.get('@menuLinks').eq(1).should('contain', 'Phases')
     cy.get('@menuLinks').eq(2).should('contain', 'Devices')
@@ -45,6 +47,8 @@ describe('Patient profile -> more -> submenu (standard)', function () {
     cy.get('@menuLinks').eq(5).should('contain', 'Communications')
     cy.get('@menuLinks').eq(6).should('contain', 'Clinics')
     cy.get('@menuLinks').eq(7).should('contain', 'Login History')
+    cy.get('@menuLinks').eq(8).should('contain', 'Meetings')
+    cy.get('@menuLinks').eq(9).should('contain', 'Goals')
 
     cy.wait(2000)
   })

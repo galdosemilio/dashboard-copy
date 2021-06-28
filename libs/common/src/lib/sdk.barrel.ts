@@ -84,17 +84,23 @@ const authenticationToken = new AuthenticationToken()
 const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
-  throttling: { enabled: true, options: { defaultRateLimit: 17 } }
+  throttling: environment.enableThrottling
+    ? { enabled: true, options: { defaultRateLimit: 17 } }
+    : { enabled: false }
 })
 
 const measurementApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
-  throttling: {
-    enabled: true,
-    options: { headers: { enabled: false } }
-  }
+  throttling: environment.enableThrottling
+    ? {
+        enabled: true,
+        options: { headers: { enabled: false } }
+      }
+    : { enabled: false }
 })
+
+console.log({ enableThrottling: environment.enableThrottling })
 
 generalApiService.setEnvironment(environment.ccrApiEnv)
 measurementApiService.setEnvironment(environment.ccrApiEnv)

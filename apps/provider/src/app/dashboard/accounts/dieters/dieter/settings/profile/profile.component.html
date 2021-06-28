@@ -7,7 +7,7 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
-  <app-dieter-form #dieter bindForm="dieter" [dieterId]="dieterId"></app-dieter-form>
+  <app-dieter-form #dieter bindForm="dieter" [dieterId]="dieterId" hideWeightGoal="true"></app-dieter-form>
 
   <div fxLayout="row" fxLayoutAlign="space-around center">
     <button mat-raised-button class="ccr-button" color="primary">

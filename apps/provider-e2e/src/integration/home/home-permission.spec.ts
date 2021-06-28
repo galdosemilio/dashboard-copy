@@ -1,6 +1,10 @@
 import { standardSetup } from './../../support'
 
 describe('Validate permissions on homepage', function () {
+  afterEach(() => {
+    cy.wait(3000)
+  })
+
   it('No permissions for associated organization', function () {
     cy.setTimezone('et')
     standardSetup(undefined, [

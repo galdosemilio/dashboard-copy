@@ -51,7 +51,7 @@ describe('Patient profile -> more -> submenu (standard)', function () {
     // More button
     cy.get('@menuLinks').eq(4).click()
 
-    cy.get('@subLinks').should('have.length', 9)
+    cy.get('@subLinks').should('have.length', 11)
 
     cy.get('@subLinks').eq(0).should('contain', 'Profile')
     cy.get('@subLinks').eq(1).should('contain', 'Phases')
@@ -62,5 +62,7 @@ describe('Patient profile -> more -> submenu (standard)', function () {
     cy.get('@subLinks').eq(6).should('contain', 'Clinics')
     cy.get('@subLinks').eq(7).should('contain', 'File Vault')
     cy.get('@subLinks').eq(8).should('contain', 'Login History')
+    cy.get('@subLinks').eq(9).should('contain', 'Meetings')
+    cy.get('@subLinks').eq(10).should('contain', 'Goals')
   })
 })

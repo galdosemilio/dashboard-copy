@@ -103,7 +103,7 @@
         </mat-form-field>
       </mat-grid-tile> -->
 
-      <mat-grid-tile>
+      <mat-grid-tile *ngIf="!hideWeightGoal">
         <mat-form-field class="ccr-align-right">
           <input matInput formControlName="weightGoal" type="number" placeholder="{{'BOARD.WEIGHT_GOAL' | translate}} ({{'BOARD.OPTIONAL' | translate}})">
           <span matSuffix>{{ 'composition' | unitLabel | translate }}</span>
