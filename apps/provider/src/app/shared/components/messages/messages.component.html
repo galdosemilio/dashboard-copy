@@ -72,7 +72,7 @@
   </div>
 </div>
 <div class="message-footer-resize">
-  <mat-icon (mousedown)="onResizeStart($event)" class="clickable">expand</mat-icon>
+  <mat-icon (mousedown)="onResizeStart($event)" class="clickable" fxHide.xs fxHide.sm>expand</mat-icon>
 </div>
 <div class="messages-footer" #messageFooter>
   <textarea
