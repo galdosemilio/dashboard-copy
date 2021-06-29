@@ -13,6 +13,7 @@ import {
 } from '@app/dashboard/content/models'
 import { FileExplorerDatasource } from '@app/dashboard/content/services'
 import { ContextService, SelectedOrganization } from '@app/service'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FileExplorerBase } from '../file-explorer-base/file-explorer-base'
 
 interface FileExplorerContentDirectory {
@@ -25,13 +26,15 @@ interface FileExplorerContentDirectory {
   source?: FileExplorerDatasource
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-content-file-explorer-list',
   templateUrl: './file-explorer-list.component.html',
   styleUrls: ['./file-explorer-list.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FileExplorerListComponent extends FileExplorerBase
+export class FileExplorerListComponent
+  extends FileExplorerBase
   implements OnDestroy, OnInit {
   @Input()
   options: FileExplorerBaseOptions = {
@@ -45,6 +48,7 @@ export class FileExplorerListComponent extends FileExplorerBase
 
   public contentDirectories: FileExplorerContentDirectory[]
   public selectedContentId: string
+  public isLoading: boolean
 
   constructor(private cdr: ChangeDetectorRef, private context: ContextService) {
     super()
@@ -96,6 +100,9 @@ export class FileExplorerListComponent extends FileExplorerBase
       delete directory.source
     } else {
       directory.source = this.source.getChildDatasource()
+
+      this.isLoading = directory.source.isLoading
+
       // Overrides to support the File Vault
       directory.source.addDefault({
         account: this.context.accountId,
@@ -103,6 +110,11 @@ export class FileExplorerListComponent extends FileExplorerBase
       } as any)
       directory.source.addDefault({ organization: this.organization.id })
       directory.source.addDefault({ parentId: directory.content.id })
+
+      directory.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
+        this.isLoading = directory.source.isLoading
+        this.cdr.detectChanges()
+      })
     }
 
     directory.isOpen = !directory.isOpen

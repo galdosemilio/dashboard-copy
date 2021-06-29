@@ -18,7 +18,7 @@
                 <div *ngIf="!directory.content.isPublic">
                     <mat-icon class="directory-private-icon">lock</mat-icon>
                 </div>
-                <div *ngIf="directory.source && directory.source.isLoading">
+                <div *ngIf="selectedContentId === directory.content.id && isLoading">
                     <mat-spinner strokeWidth="3" [diameter]="25"></mat-spinner>
                 </div>
             </strong>
