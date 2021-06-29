@@ -754,6 +754,7 @@
       "FORM_DELETE_CONTENT": "¿Está seguro de querer eliminar el formulario? Esta acción no se puede deshacer.",
       "FORM_DELETE_TITLE": "Eliminar Formulario",
       "FORM_NAME": "Nombre del Formulario",
+      "HTTP_LINK_CONTENT_ERROR": "El contenido seleccionado no se puede utilizar. Por motivos de seguridad, los enlaces a sitios web deben comenzar con \"https\" y no con \"http\".",
       "INACTIVE": "Inactivo",
       "JUST_ONE": "Uno",
       "LAST_NAME": "Apellido",

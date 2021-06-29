@@ -28,6 +28,7 @@ export class EmbedContentPickerComponent {
   @Output()
   selectContent: Subject<FileExplorerContent> = new Subject<FileExplorerContent>()
 
+  isValidLink = true
   selectedContent: FileExplorerContent
   selectedContentURL: SafeResourceUrl
   selectorOpts: any = {
@@ -57,10 +58,11 @@ export class EmbedContentPickerComponent {
         content.type.code === CONTENT_TYPE_MAP.hyperlink.code ||
         content.type.code === CONTENT_TYPE_MAP.youtube.code)
     ) {
+      this.isValidLink = content.metadata.url.startsWith('https:')
       this.selectedContent = content
-      this.selectedContentURL = this.sanitizer.bypassSecurityTrustResourceUrl(
-        content.metadata.url
-      )
+      this.selectedContentURL =
+        this.isValidLink &&
+        this.sanitizer.bypassSecurityTrustResourceUrl(content.metadata.url)
     }
   }
 }

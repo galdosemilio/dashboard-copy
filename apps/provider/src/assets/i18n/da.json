@@ -754,6 +754,7 @@
       "FORM_DELETE_CONTENT": "Er du sikker på, at du vil slette denne form? Du kan ikke fortryde denne handling.",
       "FORM_DELETE_TITLE": "Slet form",
       "FORM_NAME": "Form navn",
+      "HTTP_LINK_CONTENT_ERROR": "Det valgte indhold kan ikke bruges. Af sikkerhedsmæssige årsager skal websitelinks starte med \"https\" og ikke \"http\".",
       "INACTIVE": "Inaktiv",
       "JUST_ONE": "En",
       "LAST_NAME": "Efternavn",

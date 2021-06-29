@@ -754,6 +754,7 @@
       "FORM_DELETE_CONTENT": "Möchten Sie dieses Formular wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
       "FORM_DELETE_TITLE": "Formular löschen",
       "FORM_NAME": "Formularname",
+      "HTTP_LINK_CONTENT_ERROR": "Der ausgewählte Inhalt kann nicht verwendet werden. Aus Sicherheitsgründen müssen Website-Links mit \"https\" und nicht mit \"http\" beginnen.",
       "INACTIVE": "Inaktiv",
       "JUST_ONE": "Ein",
       "LAST_NAME": "Nachname",

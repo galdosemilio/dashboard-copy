@@ -754,6 +754,7 @@
       "FORM_DELETE_CONTENT": "Tem a certeza que pretende eliminar este formulário? Não é possível desfazer esta ação.",
       "FORM_DELETE_TITLE": "Excluir Formulário",
       "FORM_NAME": "Nome do Formulário",
+      "HTTP_LINK_CONTENT_ERROR": "O conteúdo selecionado não pode ser usado. Por motivos de segurança, os links do site devem começar com \"https\" e não com \"http\".",
       "INACTIVE": "Inativo",
       "JUST_ONE": "Um",
       "LAST_NAME": "Sobrenome",

@@ -14,8 +14,8 @@
             (contentSelected)="contentSelected($event)"
             [opts]="selectorOpts"></app-content-file-explorer-content-selector>
         </div>
-
-        <div fxFlex="39%" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+        <p class="http-link-error" *ngIf="!isValidLink" fxFlex="39%">{{ 'LIBRARY.FORMS.HTTP_LINK_CONTENT_ERROR' | translate }}</p>
+        <div *ngIf="isValidLink" fxFlex="39%" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
             <iframe *ngIf="selectedContentURL" [src]="selectedContentURL" frameborder="0"></iframe>
             <p *ngIf="!selectedContentURL">Preview</p>
             <button

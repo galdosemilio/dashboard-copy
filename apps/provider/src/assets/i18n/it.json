@@ -754,6 +754,7 @@
       "FORM_DELETE_CONTENT": "Sei sicuro di voler eliminare questo modulo? Non è possibile annullare questa azione.",
       "FORM_DELETE_TITLE": "Elimina Modulo",
       "FORM_NAME": "Nome Modulo",
+      "HTTP_LINK_CONTENT_ERROR": "Il contenuto selezionato non può essere utilizzato. Per motivi di sicurezza, i collegamenti ai siti Web devono iniziare con \"https\" e non con \"http\".",
       "INACTIVE": "Inattivo",
       "JUST_ONE": "Uno",
       "LAST_NAME": "Cognome",

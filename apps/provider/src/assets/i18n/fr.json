@@ -754,6 +754,7 @@
       "FORM_DELETE_CONTENT": "Etes-vous sûr de vouloir supprimer ce formulaire? Vous ne pouvez pas annuler cette action.",
       "FORM_DELETE_TITLE": "supprimer le formulaire",
       "FORM_NAME": "Nom du formulaire",
+      "HTTP_LINK_CONTENT_ERROR": "Le contenu sélectionné ne peut pas être utilisé. Pour des raisons de sécurité, les liens vers les sites Web doivent commencer par \"https\" et non par \"http\".",
       "INACTIVE": "Inactif",
       "JUST_ONE": "Un",
       "LAST_NAME": "Nom de famille",
