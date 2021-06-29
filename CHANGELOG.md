@@ -1,3 +1,18 @@
+# [1.24.0](https://github.com/coachcare/dashboard/compare/v1.23.0...v1.24.0) (2021-06-29)
+
+
+### Bug Fixes
+
+* made resize indicator desktop-only [FRON-2206] ([31432b1](https://github.com/coachcare/dashboard/commit/31432b12d139ebb84ed76fc046bf1b2c61651f84))
+
+
+### Features
+
+* add measurement chart entry deletion modal [FRON-2225] ([0365b08](https://github.com/coachcare/dashboard/commit/0365b08669159ce7c9a809b84fb901597c9b9920))
+* allow message box to be expanded [FRON-2206] ([0eb48e7](https://github.com/coachcare/dashboard/commit/0eb48e7e96f10379c4c332d9dffe5def836f2f92))
+* imeplemented graph view [FRON-2224] ([a91394f](https://github.com/coachcare/dashboard/commit/a91394f80d60cb0d1442b46131db0d1d8612f012))
+* send event to app after delete data point [FRON-2227] ([93c9761](https://github.com/coachcare/dashboard/commit/93c976161022ae9eeefb6890de0940f79283dcfe))
+
 # [1.23.0](https://github.com/coachcare/dashboard/compare/v1.22.0...v1.23.0) (2021-06-23)
 
 
