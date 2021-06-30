@@ -253,10 +253,10 @@ export class CcrMessagesComponent
   }
 
   private resizeMessageInput(height: number): void {
-    this.messageFooter.nativeElement.style.flex = `0 ${
+    this.messageFooter.nativeElement.style.height = `${
       height < 10 ? 0 : height
     }px`
-    this.messageContainer.nativeElement.style.flex = '1 0'
+    this.messageContainer.nativeElement.style.flex = '1'
   }
 
   private setRefresh() {
