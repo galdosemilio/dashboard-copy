@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/coachcare/dashboard/compare/v1.24.0...v1.24.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* message box issue in patient profile [FRON-2236] ([4d19ad1](https://github.com/coachcare/dashboard/commit/4d19ad1380e5df40bf3e7e6f279b90d9269c84f1))
+
 # [1.24.0](https://github.com/coachcare/dashboard/compare/v1.23.0...v1.24.0) (2021-06-29)
 
 
