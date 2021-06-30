@@ -1,4 +1,4 @@
-import { baseData, CcrElement, DateRange } from '../../model'
+import { baseData, CcrElement, DateRange, Timeframe } from '../../model'
 import { createChart } from 'lightweight-charts'
 import { eventService } from '@chart/service'
 import { api } from '@chart/service/api'
@@ -9,23 +9,37 @@ import {
 } from '@coachcare/sdk'
 import { groupBy } from 'lodash'
 import { Subject } from 'rxjs'
-import { debounceTime, filter } from 'rxjs/operators'
+import { auditTime, debounceTime, filter } from 'rxjs/operators'
+
+interface GraphEntry {
+  value: number
+  time: string
+}
 
 import './graph.element.scss'
 
 export class GraphElement extends CcrElement {
   private chart
   private chartHeight = 400
-  private dateRange: DateRange
-  private lineSeries
-  private resizeChart$: Subject<void> = new Subject<void>()
   private chartTimeFormat = 'yyyy-MM-dd'
+  private data: GraphEntry[] = []
+  private dateRange: DateRange
+  private isLoading: boolean
+  private firstTime = true
+  private lineSeries
+  private rangeChangeBumper = false
+  private resizeChart$: Subject<void> = new Subject<void>()
+  private timeframe: Timeframe
+  private visibleLocalRangeChanged$: Subject<
+    Record<string, unknown>
+  > = new Subject<Record<string, unknown>>()
 
   constructor() {
     super()
     this.resizeChart = this.resizeChart.bind(this)
-    this.onSwipeLeft = this.onSwipeLeft.bind(this)
-    this.onSwipeRight = this.onSwipeRight.bind(this)
+    this.onVisibleLogicalRangeChanged = this.onVisibleLogicalRangeChanged.bind(
+      this
+    )
   }
 
   onInit(): void {
@@ -52,9 +66,10 @@ export class GraphElement extends CcrElement {
   private addLineSeries(): void {
     this.lineSeries = this.chart.addLineSeries({
       priceFormat: {
-        type: 'volume',
+        type: 'custom',
         precision: 1,
-        minMove: 0.5
+        minMove: 0.5,
+        formatter: (value) => value.toFixed() + ' unit'
       },
       priceLineVisible: false,
       lastValueVisible: false,
@@ -69,7 +84,6 @@ export class GraphElement extends CcrElement {
       'lightweight-chart-container'
     )
     this.chart = createChart(chartContainer, {
-      handleScroll: false,
       width: document.documentElement.clientWidth,
       height: this.chartHeight,
       layout: {
@@ -90,15 +104,20 @@ export class GraphElement extends CcrElement {
       }
     })
 
-    chartContainer.addEventListener('swiped-left', this.onSwipeLeft)
-    chartContainer.addEventListener('swiped-right', this.onSwipeRight)
+    this.chart
+      .timeScale()
+      .subscribeVisibleLogicalRangeChange((newVisibleLogicalRange) =>
+        this.visibleLocalRangeChanged$.next(newVisibleLogicalRange)
+      )
   }
 
-  private async fetchMeasurements(): Promise<void> {
+  private async fetchMeasurements(append = true): Promise<void> {
     try {
-      if (!this.dateRange) {
+      if (!this.dateRange || this.isLoading) {
         return
       }
+
+      this.isLoading = true
 
       const measurements = await api.measurementDataPoint.getAggregates({
         account: api.baseData.accountId,
@@ -108,39 +127,43 @@ export class GraphElement extends CcrElement {
         unit: 'day'
       })
 
-      const emptyGroups = this.createEmptyDateGroups()
+      const emptyGroups = this.createEmptyDateGroups(this.dateRange)
 
       const groupedValues = groupBy(
         [...emptyGroups, ...measurements.data],
         (group) => group.bucket.date
       )
 
-      const data = Object.values(groupedValues)
-        .map((group) => {
-          const filteredGroup = group.filter(
-            (entry) => entry.point.id !== 'empty-group'
-          )
+      const data: GraphEntry[] = Object.values(groupedValues).map((group) => {
+        const filteredGroup = group.filter(
+          (entry) => entry.point.id !== 'empty-group'
+        )
 
-          const hadEntries = filteredGroup.length > 0
+        const hadEntries = filteredGroup.length > 0
 
-          const lastEntry = hadEntries ? filteredGroup.pop() : group.pop()
+        const lastEntry = hadEntries ? filteredGroup.pop() : group.pop()
 
-          return {
-            time: DateTime.fromISO(lastEntry.bucket.timestamp)
-              .minus({ month: 1 })
-              .toFormat(this.chartTimeFormat),
-            value: hadEntries
-              ? convertToReadableFormat(
-                  lastEntry.point.value,
-                  lastEntry.point.type,
-                  baseData.metric
-                )
-              : undefined
-          }
-        })
-        .filter((entry) => !!entry)
+        return {
+          time: DateTime.fromISO(lastEntry.bucket.timestamp)
+            .minus({ month: 1 })
+            .toFormat(this.chartTimeFormat),
+          value: hadEntries
+            ? convertToReadableFormat(
+                lastEntry.point.value,
+                lastEntry.point.type,
+                baseData.metric
+              )
+            : undefined
+        }
+      })
 
-      this.lineSeries.setData([...data])
+      this.data = append ? this.data.concat(data) : data.concat(this.data)
+
+      this.lineSeries.setData(this.data.map((entry) => ({ ...entry })))
+
+      if (!this.firstTime) {
+        return
+      }
 
       this.chart.timeScale().setVisibleRange({
         from: DateTime.fromISO(this.dateRange.start).toFormat(
@@ -148,16 +171,28 @@ export class GraphElement extends CcrElement {
         ),
         to: DateTime.fromISO(this.dateRange.end).toFormat(this.chartTimeFormat)
       })
+
       this.chart.timeScale().fitContent()
+      this.firstTime = false
+      this.rangeChangeBumper = true
+
+      // TODO: investigate how to detect that the chart has finished resizing
+      setTimeout(() => {
+        this.rangeChangeBumper = false
+      }, 1500)
     } catch (error) {
       console.error(error)
+    } finally {
+      this.isLoading = false
     }
   }
 
-  private createEmptyDateGroups(): MeasurementDataPointAggregate[] {
+  private createEmptyDateGroups(
+    dateRange: DateRange
+  ): MeasurementDataPointAggregate[] {
     const emptyGroups: MeasurementDataPointAggregate[] = []
-    const startDate = DateTime.fromISO(this.dateRange.start)
-    const endDate = DateTime.fromISO(this.dateRange.end)
+    const startDate = DateTime.fromISO(dateRange.start)
+    const endDate = DateTime.fromISO(dateRange.end)
 
     let currentDate = startDate
 
@@ -189,21 +224,45 @@ export class GraphElement extends CcrElement {
     return emptyGroups
   }
 
+  private hasSameDateEntry(date: DateTime): boolean {
+    return this.data.some((entry) => {
+      const entryDate = DateTime.fromISO(entry.time).plus({ month: 1 })
+      return (
+        date.hasSame(entryDate, 'day') &&
+        date.hasSame(entryDate, 'month') &&
+        date.hasSame(entryDate, 'year')
+      )
+    })
+  }
+
   private listenToEvents(): void {
     this.subscriptions.push(
       eventService
         .listen<DateRange>('graph.date-range')
+        .pipe(debounceTime(700))
         .subscribe((dateRange) => {
+          this.data = []
+          this.firstTime = true
+          this.rangeChangeBumper = false
           this.dateRange = dateRange
           this.fetchMeasurements()
         }),
+      eventService
+        .listen<Timeframe>('graph.timeframe')
+        .subscribe((timeframe) => (this.timeframe = timeframe)),
       eventService.baseDataEvent$.subscribe(() => this.fetchMeasurements()),
       this.resizeChart$
         .pipe(
           debounceTime(1000),
           filter(() => !!this.chart)
         )
-        .subscribe(this.resizeChart)
+        .subscribe(this.resizeChart),
+      this.visibleLocalRangeChanged$
+        .pipe(
+          filter(() => !this.isLoading && !this.rangeChangeBumper),
+          auditTime(300)
+        )
+        .subscribe(this.onVisibleLogicalRangeChanged)
     )
   }
 
@@ -211,12 +270,55 @@ export class GraphElement extends CcrElement {
     window.addEventListener('resize', () => this.resizeChart$.next())
   }
 
-  private onSwipeLeft(): void {
-    eventService.trigger('graph.date-range-next')
-  }
+  private onVisibleLogicalRangeChanged(newVisibleLogicalRange): void {
+    if (!this.data?.length) {
+      return
+    }
 
-  private onSwipeRight(): void {
-    eventService.trigger('graph.date-range-previous')
+    const barsInfo = this.lineSeries.barsInLogicalRange(newVisibleLogicalRange)
+
+    const fromLogical = this.chart
+      .timeScale()
+      .coordinateToLogical(newVisibleLogicalRange.from)
+
+    let pivotDate: DateTime
+    let endDate: DateTime
+    let startDate: DateTime
+    let append: boolean
+
+    if (fromLogical < 0) {
+      pivotDate = DateTime.fromISO(this.data[0].time).plus({ month: 1 })
+      endDate = pivotDate.minus({ millisecond: 1 }).endOf(this.timeframe)
+      startDate = pivotDate
+        .minus({ [this.timeframe]: 1 })
+        .startOf(this.timeframe)
+
+      append = false
+
+      if (this.hasSameDateEntry(endDate)) {
+        return
+      }
+    } else if (barsInfo?.barsAfter < 0) {
+      pivotDate = DateTime.fromISO(this.data[this.data.length - 1].time)
+        .plus({ month: 1 })
+        .endOf(this.timeframe)
+      endDate = pivotDate.plus({ [this.timeframe]: 1 }).endOf(this.timeframe)
+      startDate = pivotDate.plus({ millisecond: 1 }).startOf(this.timeframe)
+      append = true
+
+      if (this.hasSameDateEntry(pivotDate) || startDate > DateTime.now()) {
+        return
+      }
+    } else {
+      return
+    }
+
+    this.dateRange = {
+      start: startDate.toISO(),
+      end: endDate.toISO()
+    }
+
+    void this.fetchMeasurements(append)
   }
 
   private resizeChart(): void {
