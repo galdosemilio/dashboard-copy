@@ -142,13 +142,15 @@ export class CallsComponent implements OnDestroy, OnInit {
   }
 
   async download() {
-    const translations = {
-      CALL: {
-        INTERACTION_TYPES: await this.translate
-          .get('CALL.INTERACTION_TYPES')
-          .toPromise()
-      }
-    }
+    const translations = await this.translate
+      .get([
+        _('CALL.INTERACTION_TYPES.EXTERNAL_AUDIO_CALL'),
+        _('CALL.INTERACTION_TYPES.EXTERNAL_VIDEO_CALL'),
+        _('CALL.INTERACTION_TYPES.FACE_TO_FACE'),
+        _('CALL.INTERACTION_TYPES.MANUAL'),
+        _('CALL.INTERACTION_TYPES.VIDEO_CALL')
+      ])
+      .toPromise()
 
     this.downloadData.forEach((t, tIndex) => {
       const calls = t
@@ -195,11 +197,9 @@ export class CallsComponent implements OnDestroy, OnInit {
         csv += `"${call.organization.name} (ID: ${call.organization.id})"${separator}`
 
         csv += `"${moment(call.time.start).toISOString()}"${separator}`
-        csv += `"${get(
-          translations,
-          call.type.displayName,
-          call.type.name
-        )}"${separator}`
+        csv += `"${
+          translations[call.type.displayName] || call.type.name
+        }"${separator}`
         csv += `"${call.time.duration} minutes"${separator}`
         csv += `"${
           call.latestAuditLog.note ? call.latestAuditLog.note : '-'
