@@ -224,10 +224,27 @@ jobs:
           command: yarn run cy-serve:admin
     parallelism: 3
 
+  commit_count_check:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Commit Count Check
+          command: |
+            commitCount=$(git rev-list --right-only --count origin/master...origin/${CIRCLE_BRANCH})
+            if [ $commitCount -gt 1 ]
+            then
+              exit 1
+            fi
+
 workflows:
   setup_build_deploy:
     jobs:
       - setup
+      - commit_count_check:
+          requires:
+            - setup
       - format_check:
           requires:
             - setup
