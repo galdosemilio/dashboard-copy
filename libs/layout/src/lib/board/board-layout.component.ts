@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./board-layout.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-// tslint:disable-next-line:component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class BoardLayout implements OnInit, OnDestroy {
   isMenuOpened: boolean
   isPanelOpened: boolean

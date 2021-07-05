@@ -1,6 +1,5 @@
-// tslint:disable:no-invalid-template-strings
-import { NgModule } from '@angular/core'
 import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
+import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule, UrlSerializer } from '@angular/router'
 import { AppCommonModule } from '@coachcare/common'

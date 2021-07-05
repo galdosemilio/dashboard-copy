@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core'
 import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'
-declare var Stripe: any
+declare const Stripe: any
 
 @Injectable()
 export class StripeService {

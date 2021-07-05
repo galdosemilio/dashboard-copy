@@ -49,7 +49,7 @@ import { AssociationsDatabase, VaultDatasource } from '../accounts'
 export class ContentComponent implements OnDestroy, OnInit {
   @Input() mode: 'digital-library' | 'vault' = 'digital-library'
   @Input() organizationOverride: any
-  //tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('source') datasource: FileExplorerDatasource | VaultDatasource
 
   public clinic: string

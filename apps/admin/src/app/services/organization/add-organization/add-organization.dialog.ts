@@ -21,7 +21,7 @@ export interface AccountCreateDialogData {
   host: { class: 'ccr-dialog' },
   encapsulation: ViewEncapsulation.None
 })
-// tslint:disable-next-line:component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class AddOrganizationDialog {
   form: FormGroup
   temp: {}

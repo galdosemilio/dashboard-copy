@@ -1,10 +1,4 @@
-import {
-  Component,
-  forwardRef,
-  Inject,
-  OnInit,
-  ViewEncapsulation
-} from '@angular/core'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { MatDialogRef } from '@coachcare/material'
 
 @Component({

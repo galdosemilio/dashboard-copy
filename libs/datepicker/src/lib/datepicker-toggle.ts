@@ -53,7 +53,7 @@ export class MatDatepickerToggle<D>
   private _stateChanges = Subscription.EMPTY
 
   /** Datepicker instance that the button will toggle. */
-  // tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('for')
   datepicker: MatDatepicker<D>
 

@@ -101,7 +101,6 @@ export class SleepTableComponent implements OnInit, AfterViewInit, OnDestroy {
     criteria.limit = 'all'
     criteria.offset = 0
     this.database.fetchSleep(criteria).then((res) => {
-      const format = 'YYYY-MM-DD'
       const dates = res.data.map((d) => d.date)
       const orgName = res.data[0].organization.name
       const filename = `${orgName}_Sleep_Report_${dates[0]}_${

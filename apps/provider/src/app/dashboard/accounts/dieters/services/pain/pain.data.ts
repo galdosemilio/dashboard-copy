@@ -1,4 +1,3 @@
-import { _ } from '@app/shared'
 import * as moment from 'moment'
 
 // TODO move to npm-api

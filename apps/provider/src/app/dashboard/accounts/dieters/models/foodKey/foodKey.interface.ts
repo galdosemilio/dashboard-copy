@@ -1,5 +1,3 @@
-import { FetchAllConsumedKeyResponse } from '@coachcare/sdk'
-
 export interface FoodKeyData {
   key: string
   name: string

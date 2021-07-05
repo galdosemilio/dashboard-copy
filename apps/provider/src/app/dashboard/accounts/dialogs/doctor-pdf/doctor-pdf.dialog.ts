@@ -435,15 +435,13 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
     property: 'weight' | 'bmi' | 'bodyFatPercentage'
   ): PDFElement {
     const valuesCopy = values.slice()
-    let start: number
-    let current: number
     let change = 0
 
     const startObject = valuesCopy.find((entry) => entry[property])
     const currentObject = valuesCopy.reverse().find((entry) => entry[property])
 
-    start = startObject ? startObject[property] : 0
-    current = currentObject ? currentObject[property] : 0
+    const start: number = startObject ? startObject[property] : 0
+    const current: number = currentObject ? currentObject[property] : 0
 
     if (start && current) {
       change = current - start

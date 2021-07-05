@@ -18,9 +18,7 @@ export class MetricsDatabase {
         organization: args.organization
       })
 
-      let keys
-
-      keys = orgKeys.length
+      const keys = orgKeys.length
         ? await this.foodKey.fetchAllConsumed({
             organization: args.organization,
             account: args.account,

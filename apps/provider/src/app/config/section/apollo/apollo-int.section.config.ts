@@ -1,6 +1,5 @@
 import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component'
 import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
-import { _ } from '@app/shared/utils'
 import { SectionConfigDetails } from '../models/section.details'
 
 export const ApolloInternationalSectionConfig: SectionConfigDetails = {

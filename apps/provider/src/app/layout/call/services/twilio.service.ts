@@ -11,7 +11,6 @@ import {
 } from 'twilio-video'
 
 import { CreateCallTokenRequest, CreateCallTokenResponse } from '@coachcare/sdk'
-import { _ } from '@app/shared/utils/i18n.utils'
 
 import { LoggingService } from '@app/service'
 import { DeviceDetectorService } from 'ngx-device-detector'
@@ -37,11 +36,6 @@ export const BROWSER_TYPES = {
   OPERA: 'opera',
   SAFARI: 'safari',
   UNKNOWN: 'unknown'
-}
-
-const initialParticipantIdentifier: ParticipantIdentifier = {
-  id: '',
-  name: ''
 }
 
 @Injectable()

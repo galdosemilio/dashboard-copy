@@ -15,7 +15,7 @@ import {
   FileExplorerContent
 } from '@app/dashboard/content/models'
 import { ContextService } from '@app/service'
-import { BindForm, BINDFORM_TOKEN, sleep } from '@app/shared'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { Package } from '@app/shared/components/package-table'
 import {
   PackageDatabase,

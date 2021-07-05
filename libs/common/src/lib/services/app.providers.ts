@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-// tslint:disable-next-line:no-unused-variable
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 import { APP_INITIALIZER, InjectionToken, LOCALE_ID } from '@angular/core'
 import { RouteReuseStrategy } from '@angular/router'
 import {
@@ -7,35 +7,9 @@ import {
   APP_ENVIRONMENT,
   AppConfig,
   AppEnvironment,
-  API_ENVIRONMENT,
   FormUtils,
   ViewUtils
 } from '@coachcare/common/shared'
-// tslint:disable-next-line:no-unused-variable
-import {
-  Account,
-  Affiliation,
-  ApiService,
-  CCRBlacklist,
-  Food,
-  FoodKey,
-  Goal,
-  Hydration,
-  Logging,
-  MeasurementActivity,
-  MeasurementBody,
-  MeasurementSleep,
-  Messaging,
-  MobileApp,
-  Organization,
-  OrganizationAssociation,
-  Phase,
-  Reports,
-  Schedule,
-  Supplement,
-  Timezone,
-  User
-} from '@coachcare/sdk'
 import { onAppInit } from './app.init'
 import { AuthGuard } from './auth.guard'
 import { AuthService } from './auth.service'

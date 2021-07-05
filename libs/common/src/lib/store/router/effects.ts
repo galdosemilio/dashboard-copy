@@ -2,7 +2,7 @@ import { Location } from '@angular/common'
 import { Injectable } from '@angular/core'
 import { NavigationExtras, Router } from '@angular/router'
 import { Actions, Effect, ofType } from '@ngrx/effects'
-// tslint:disable-next-line:no-unused-variable
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import { Observable } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
 

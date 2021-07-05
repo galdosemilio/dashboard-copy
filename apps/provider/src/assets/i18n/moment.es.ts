@@ -47,23 +47,23 @@ const es = {
   },
   calendar: {
     sameDay: function (): string {
-      // tslint:disable-next-line:no-invalid-this
+      // eslint-disable-next-line no-invalid-this
       return '[hoy a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     nextDay: function (): string {
-      // tslint:disable-next-line:no-invalid-this
+      // eslint-disable-next-line no-invalid-this
       return '[mañana a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     nextWeek: function (): string {
-      // tslint:disable-next-line:no-invalid-this
+      // eslint-disable-next-line no-invalid-this
       return 'dddd [a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     lastDay: function (): string {
-      // tslint:disable-next-line:no-invalid-this
+      // eslint-disable-next-line no-invalid-this
       return '[ayer a la' + (Number(this.hours()) !== 1 ? 's' : '') + '] LT'
     },
     lastWeek: function (): string {
-      // tslint:disable-next-line:no-invalid-this
+      // eslint-disable-next-line no-invalid-this
       return (
         '[el] dddd [pasado a la' +
         (Number(this.hours()) !== 1 ? 's' : '') +

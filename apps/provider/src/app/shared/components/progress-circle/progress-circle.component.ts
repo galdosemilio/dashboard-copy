@@ -21,11 +21,11 @@ export class ProgressCircle implements OnChanges, OnInit {
   @ViewChild('path', { static: true }) private path: ElementRef
   @ViewChild('restpath', { static: true }) private restpath: ElementRef
 
-  // tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('headertext') primarytext: string
   @Input() value: number
   @Input() maximumvalue: number
-  // tslint:disable-next-line:no-input-rename
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('renderFooter') footer: string
   @Input() measurementUnit: string
   @Input() decimalPlaces = 0
@@ -96,9 +96,9 @@ export class ProgressCircle implements OnChanges, OnInit {
     )
 
     const arcSweep = endAngle < 0 ? 0 : 1
-    let largeArcFlag: number
 
-    largeArcFlag = Math.abs(endAngle) >= 0 && Math.abs(endAngle) <= 180 ? 0 : 1
+    const largeArcFlag: number =
+      Math.abs(endAngle) >= 0 && Math.abs(endAngle) <= 180 ? 0 : 1
 
     return `M${start}A${pathRadius},${pathRadius} 0 ${largeArcFlag},${arcSweep} ${end}`
   }

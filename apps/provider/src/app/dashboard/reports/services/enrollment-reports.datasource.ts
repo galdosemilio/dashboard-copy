@@ -4,7 +4,6 @@ import { from, Observable, of } from 'rxjs'
 
 import { ConfigService, NotifierService } from '@app/service'
 import {
-  _,
   ChartData,
   ChartDataSource,
   TranslationsObject,
@@ -94,7 +93,6 @@ export class EnrollmentReportsDataSource extends ChartDataSource<
     // formats
     const endDate = moment(this.criteria.endDate)
     const currentDate = moment(this.criteria.startDate)
-    const diff = endDate.diff(this.criteria.startDate, 'days')
 
     let xlabelFormat
     let tooltipFormat

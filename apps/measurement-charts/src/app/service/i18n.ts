@@ -114,7 +114,7 @@ const texts = {
     CREATED_AT: 'Créé à',
     DATE: 'Date',
     DELETE: 'Effacer',
-    DELETE_CONFIRM: "Êtes-vous sûr de supprimer l'entrée ?",
+    DELETE_CONFIRM: "Êtes-vous sûr de supprimer l'entrée ?",
     DETAILS: 'Des détails',
     GRAPH: 'Graphique',
     LIST: 'Lister',

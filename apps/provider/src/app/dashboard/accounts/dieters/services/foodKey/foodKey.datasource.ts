@@ -12,10 +12,7 @@ import {
   FetchAllOrganizationKeyResponse
 } from '@coachcare/sdk'
 
-import {
-  FoodKeyData,
-  FoodKeySegment
-} from '@app/dashboard/accounts/dieters/models/foodKey/foodKey.interface'
+import { FoodKeySegment } from '@app/dashboard/accounts/dieters/models/foodKey/foodKey.interface'
 import { FoodKeyDatabase } from './foodKey.database'
 
 export type FoodKeyCollection = [

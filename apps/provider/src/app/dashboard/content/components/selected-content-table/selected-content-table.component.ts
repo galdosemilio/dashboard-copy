@@ -1,6 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core'
 import { FileExplorerContent, FileExplorerEvents } from '../../models'
-import { FileExplorerDatasource } from '../../services'
 
 @Component({
   selector: 'app-content-selected-table',

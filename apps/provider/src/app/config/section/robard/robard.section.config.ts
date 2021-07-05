@@ -1,4 +1,4 @@
-import { JournalTabs, SidenavOptions } from '../consts'
+import { JournalTabs } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 
 export const RobardSectionConfig: SectionConfigDetails = {

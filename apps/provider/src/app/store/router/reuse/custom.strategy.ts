@@ -1,4 +1,4 @@
-import { ActivatedRouteSnapshot, DetachedRouteHandle } from '@angular/router'
+import { ActivatedRouteSnapshot } from '@angular/router'
 import { DefaultRouteReuseStrategy } from './default.strategy'
 
 /**

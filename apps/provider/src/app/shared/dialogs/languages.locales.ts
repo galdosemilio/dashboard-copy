@@ -15,7 +15,7 @@ export interface SupportedLocale {
     flag: any
   }>
 }
-export let localeList: Array<SupportedLocale> = []
+export const localeList: Array<SupportedLocale> = []
 
 locales.map((code) => {
   const locale = appLocales[code]

@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 
 import { EventsService } from '@app/service'
-import { _, PromptDialog } from '@app/shared'
 
 import { ConsultationFormArgs } from './consultationFormArgs.interface'
 

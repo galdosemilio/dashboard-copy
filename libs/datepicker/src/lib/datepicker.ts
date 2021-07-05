@@ -225,12 +225,12 @@ export class MatDatepicker<D> implements OnInit, OnDestroy {
   yearSelected: EventEmitter<D> = new EventEmitter<D>()
 
   /** Emits when the datepicker has been opened. */
-  // tslint:disable-next-line:no-output-rename
+  // eslint-disable-next-line @angular-eslint/no-output-rename
   @Output('opened')
   openedStream: EventEmitter<void> = new EventEmitter<void>()
 
   /** Emits when the datepicker has been closed. */
-  // tslint:disable-next-line:no-output-rename
+  // eslint-disable-next-line @angular-eslint/no-output-rename
   @Output('closed')
   closedStream: EventEmitter<void> = new EventEmitter<void>()
 

@@ -1,4 +1,4 @@
-import { Component, Directive, Injectable, OnInit } from '@angular/core'
+import { Directive, Injectable, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { FormQuestion } from '@app/dashboard/library/forms/models'
 import { BindForm, BindFormDirective } from '@app/shared/directives'

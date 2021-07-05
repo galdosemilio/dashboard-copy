@@ -1,5 +1,3 @@
-import { filter } from 'rxjs/operators'
-
 export function selectDate(date: number, month: string, year: number): void {
   cy.get('date-navigator').find('button.mat-icon-button').click({ force: true })
 

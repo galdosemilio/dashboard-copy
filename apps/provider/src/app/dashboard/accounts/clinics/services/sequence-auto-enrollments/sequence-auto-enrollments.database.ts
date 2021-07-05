@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ContextService } from '@app/service'
-import { bufferedRequests, CcrDatabase } from '@app/shared'
+import { CcrDatabase } from '@app/shared'
 import {
   GetAllSequencesRequest,
   GetSequenceResponse,

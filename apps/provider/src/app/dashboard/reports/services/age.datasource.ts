@@ -102,7 +102,6 @@ export class AgeDataSource extends ChartDataSource<
         )
       })
 
-    const headings = []
     const chart: ChartData = {
       type: 'pie',
       datasets: [

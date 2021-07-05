@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
-import * as moment from 'moment-timezone'
 
 import { AgeDataSource } from '@app/dashboard/reports/services'
 

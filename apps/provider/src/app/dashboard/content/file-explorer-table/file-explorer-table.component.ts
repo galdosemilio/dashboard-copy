@@ -183,10 +183,9 @@ export class FileExplorerTableComponent
   }
 
   goUp(): void {
-    let page: number, route: FileExplorerRoute
     this.route.pop()
-    route = this.route[this.route.length - 1]
-    page = route ? route.pageIndex : this.root.pageIndex
+    const route = this.route[this.route.length - 1]
+    const page = route ? route.pageIndex : this.root.pageIndex
     this.setPage({ pageIndex: page })
     this.source.refresh()
   }

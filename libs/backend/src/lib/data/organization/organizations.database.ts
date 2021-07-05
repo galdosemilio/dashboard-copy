@@ -5,7 +5,6 @@ import {
   GetAllOrganizationRequest,
   GetAllOrganizationResponse,
   GetListOrganizationRequest,
-  GetListOrganizationResponse,
   UpdateOrganizationRequest
 } from '@coachcare/sdk'
 import { OrganizationProvider } from '@coachcare/sdk'

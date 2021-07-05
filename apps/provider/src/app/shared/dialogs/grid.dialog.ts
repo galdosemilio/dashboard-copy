@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 
 import { LanguageService } from '@app/service'
-import { _ } from '@app/shared/utils/i18n.utils'
 
 export interface GridDialogContent {
   rows?: number

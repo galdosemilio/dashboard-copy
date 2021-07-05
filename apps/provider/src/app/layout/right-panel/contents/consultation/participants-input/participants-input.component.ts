@@ -12,7 +12,7 @@ import {
   MatAutocompleteTrigger
 } from '@angular/material/autocomplete'
 import { NotifierService } from '@app/service'
-import { sleep, _ } from '@app/shared/utils'
+import { sleep } from '@app/shared/utils'
 import {
   AccountProvider,
   AccountAccessData,

@@ -23,7 +23,6 @@ import {
   tap
 } from 'rxjs/operators'
 
-import { NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
 import { CcrDatabase } from './generic.database'
 import { CcrTableSortDirective } from '../directives'

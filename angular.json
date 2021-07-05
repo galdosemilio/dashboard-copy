@@ -1,7 +1,7 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@nrwl/angular",
+    "defaultCollection": "@angular-eslint/schematics",
     "warnings": {
       "typescriptMismatch": false
     }
@@ -242,13 +242,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "apps/provider/tsconfig.app.json",
-              "apps/provider/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/provider/**/*"]
+            "lintFilePatterns": [
+              "apps/provider/**/*.ts",
+              "apps/provider/**/*.html"
+            ]
           }
         },
         "test": {
@@ -282,10 +281,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["apps/provider-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/provider-e2e/**/*"]
+            "lintFilePatterns": [
+              "apps/provider-e2e/**/*.ts",
+              "apps/provider-e2e/**/*.html"
+            ]
           }
         }
       }
@@ -438,13 +439,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "apps/admin/tsconfig.app.json",
-              "apps/admin/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/admin/**/*"]
+            "lintFilePatterns": ["apps/admin/**/*.ts", "apps/admin/**/*.html"]
           }
         },
         "test": {
@@ -475,10 +472,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["apps/admin-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/admin-e2e/**/*"]
+            "lintFilePatterns": [
+              "apps/admin-e2e/**/*.ts",
+              "apps/admin-e2e/**/*.html"
+            ]
           }
         }
       }
@@ -490,13 +489,9 @@
       "prefix": "dashboard",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/common/tsconfig.lib.json",
-              "libs/common/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/common/**/*"]
+            "lintFilePatterns": ["libs/common/**/*.ts", "libs/common/**/*.html"]
           }
         },
         "test": {
@@ -520,13 +515,9 @@
       "prefix": "dashboard",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/layout/tsconfig.lib.json",
-              "libs/layout/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/layout/**/*"]
+            "lintFilePatterns": ["libs/layout/**/*.ts", "libs/layout/**/*.html"]
           }
         },
         "test": {
@@ -550,13 +541,12 @@
       "prefix": "dashboard",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/backend/tsconfig.lib.json",
-              "libs/backend/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/backend/**/*"]
+            "lintFilePatterns": [
+              "libs/backend/**/*.ts",
+              "libs/backend/**/*.html"
+            ]
           }
         },
         "test": {
@@ -580,13 +570,12 @@
       "prefix": "dashboard",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/datepicker/tsconfig.lib.json",
-              "libs/datepicker/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/datepicker/**/*"]
+            "lintFilePatterns": [
+              "libs/datepicker/**/*.ts",
+              "libs/datepicker/**/*.html"
+            ]
           }
         },
         "test": {
@@ -610,13 +599,12 @@
       "prefix": "dashboard",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/material/tsconfig.lib.json",
-              "libs/material/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/material/**/*"]
+            "lintFilePatterns": [
+              "libs/material/**/*.ts",
+              "libs/material/**/*.html"
+            ]
           }
         },
         "test": {

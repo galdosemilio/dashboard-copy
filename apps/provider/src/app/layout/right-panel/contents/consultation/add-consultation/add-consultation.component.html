@@ -94,7 +94,7 @@
         <mat-error *ngIf="form.get('repeat').getError('required')">{{'NOTIFY.ERROR.REPEAT_EMPTY' | translate}}</mat-error>
       </ng-container>
 
-      <ng-container *ngIf="repeat.value != 'never' && repeat.value != undefined">
+      <ng-container *ngIf="repeat.value !== 'never' && repeat.value !== undefined">
         <div fxLayoutAlign="start center" fxLayoutGap="7px">
           <mat-form-field>
             <mat-select #endRepeat formControlName="endRepeat"
@@ -112,7 +112,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="repeat.value != 'never' && repeat.value != undefined">
+      <ng-container *ngIf="repeat.value !== 'never' && repeat.value !== undefined">
         <div class="mb-10" fxLayoutAlign="start center" fxLayoutGap="7px">
           <mat-checkbox formControlName="allowConflictMeetings">
             {{ 'RIGHT_PANEL.ALLOW_CONFLICT_MEETINGS' | translate }}

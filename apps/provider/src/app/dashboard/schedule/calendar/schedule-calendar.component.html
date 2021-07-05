@@ -60,7 +60,7 @@ direction="forward">
 </date-navigator>
 
 <div *ngIf="hasLoaded" class="calendar-wrapper">
-  <table *ngIf="timerange !== 'month'" fxFlex="grow" fxLayout="column" class="calendar" [class.week]="timerange == 'week'">
+  <table *ngIf="timerange !== 'month'" fxFlex="grow" fxLayout="column" class="calendar" [class.week]="timerange === 'week'">
     <thead>
       <tr>
         <th></th>

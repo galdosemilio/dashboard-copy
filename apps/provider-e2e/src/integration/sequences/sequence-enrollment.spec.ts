@@ -1,7 +1,6 @@
 import { standardSetup } from '../../support'
 import {
   attemptBulkEnrollPatients,
-  attemptEnrollPatients,
   selectAutocompleteOption,
   selectEnrollmentStep
 } from './utils'

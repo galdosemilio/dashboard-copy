@@ -159,7 +159,6 @@ export class ContextService {
         // }
 
         // check the user preferences
-        let preferences: AccPreferencesResponse
         let defaultOrganization: string
         let org: SelectedOrganization
 
@@ -171,7 +170,9 @@ export class ContextService {
           org = this.getAccessibleOrg()
           defaultOrganization = org.id
         }
-        preferences = merge({}, this.user.preference, { defaultOrganization })
+        const preferences = merge({}, this.user.preference, {
+          defaultOrganization
+        })
 
         if (!this.user.preference && org.permissions.viewAll) {
           await this.accservice.savePreferences({

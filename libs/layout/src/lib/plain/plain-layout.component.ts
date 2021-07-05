@@ -14,7 +14,7 @@ import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
   templateUrl: './plain-layout.component.html',
   styleUrls: ['./plain-layout.component.scss']
 })
-// tslint:disable-next-line:component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class PlainLayout implements OnInit, OnDestroy {
   lang: string
   logoUrl: string

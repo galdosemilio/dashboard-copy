@@ -142,13 +142,15 @@ export class NotesContainerComponent implements OnDestroy, OnInit {
   }
 
   private async getNotes(submissions: FormSubmission[], onEnd: boolean = true) {
+    const consultationType: any = 'private'
+
     if (onEnd) {
       this.notes = [
         ...this.notes,
         ...submissions.map((submission) => ({
           client: submission.account.id,
           consultationTime: submission.createdAt,
-          consultationType: 'private' as 'private',
+          consultationType,
           internalNote: submission.answers[0].response.value,
           isDeletable: true,
           provider: submission.submittedBy.id,
@@ -162,7 +164,7 @@ export class NotesContainerComponent implements OnDestroy, OnInit {
         ...submissions.map((submission) => ({
           client: submission.account.id,
           consultationTime: submission.createdAt,
-          consultationType: 'private' as 'private',
+          consultationType,
           internalNote: submission.answers[0].response.value,
           isDeletable: true,
           provider: submission.submittedBy.id,

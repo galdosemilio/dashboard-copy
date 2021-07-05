@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { remove } from 'lodash'
 import { BehaviorSubject } from 'rxjs'
 
 export type CcrEvent = {

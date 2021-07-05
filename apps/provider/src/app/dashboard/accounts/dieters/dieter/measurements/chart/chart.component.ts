@@ -148,6 +148,7 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
       // takes the control of all the API parameters
       this.source.register('chart', true, this.refresh$, () => {
         // adjust the unit according to the selected timeframe
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         let unit
         switch (this.dates.timeframe) {
           case 'week':
@@ -159,6 +160,7 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
           case 'year':
           case 'alltime':
           default:
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             unit = 'month'
         }
         return {

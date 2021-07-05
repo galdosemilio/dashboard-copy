@@ -5,15 +5,23 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["apps/measurement-charts/tsconfig.*?.json"]
+        "project": "./tsconfig.*?.json"
       },
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": 0
-      }
+        "@nrwl/nx/enforce-module-boundaries": "off"
+      },
+      "extends": [
+        "plugin:@nrwl/nx/angular",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ]
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {}
+      "rules": {},
+      "extends": [
+        "plugin:@nrwl/nx/angular-template",
+        "plugin:@angular-eslint/template/recommended"
+      ]
     },
     {
       "files": ["*.js", "*.jsx"],

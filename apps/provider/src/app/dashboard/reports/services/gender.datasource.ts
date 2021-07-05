@@ -88,7 +88,6 @@ export class GenderDataSource extends ChartDataSource<
     const percentage = result.map((v) => v.percentage)
     const labels = result.map((v) => () => this.translations[v.name])
 
-    const headings = []
     const chart: ChartData = {
       type: 'pie',
       datasets: [

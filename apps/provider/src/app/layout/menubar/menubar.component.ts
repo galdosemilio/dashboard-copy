@@ -21,7 +21,7 @@ import {
   OpenCallSettings
 } from '@app/layout/store/call'
 import { AuthService, ContextService, SelectedOrganization } from '@app/service'
-import { _, LanguagesDialog, TranslationsObject } from '@app/shared'
+import { LanguagesDialog, TranslationsObject } from '@app/shared'
 import { configSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { get } from 'lodash'

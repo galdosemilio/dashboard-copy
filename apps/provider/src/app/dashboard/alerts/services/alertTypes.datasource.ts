@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { resolveConfig } from '@app/config/section'
 import { ContextService, NotifierService } from '@app/service'
 import {
   _,
@@ -249,6 +248,7 @@ export class AlertTypesDataSource extends TableDataSource<
   }
 
   private getTranslationString(typeCode, option, suffix = '') {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const existing = [
       _('ALERTS.TYPES.WEIGHT_REGAINED_THRESHOLD'),
       _('ALERTS.TYPES.WEIGHT_REGAINED_THRESHOLD_DESCRIPTION'),

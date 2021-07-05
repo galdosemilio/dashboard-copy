@@ -48,7 +48,7 @@ const ChartOptions = () => ({
         tooltipEl = document.createElement('div')
         tooltipEl.id = 'chartjs-tooltip'
         tooltipEl.innerHTML = '<table></table>'
-        // tslint:disable-next-line:no-invalid-this
+        // eslint-disable-next-line no-invalid-this
         this._chart.canvas.parentElement.appendChild(tooltipEl)
       }
 
@@ -99,7 +99,7 @@ const ChartOptions = () => ({
       }
 
       // `this` will be the overall tooltip
-      // tslint:disable-next-line:no-invalid-this
+      // eslint-disable-next-line no-invalid-this
       // const position = this._chart.canvas.getBoundingClientRect();
 
       // display, position, and set styles for font

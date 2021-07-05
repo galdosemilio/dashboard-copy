@@ -7,7 +7,6 @@ import {
   Output,
   ViewChild
 } from '@angular/core'
-import { STORAGE_PAGE_SIZE_PATIENT_LISTING } from '@app/config'
 
 @Component({
   selector: 'ccr-page-size-selector',

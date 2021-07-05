@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { MeasurementBody, Reports } from '@coachcare/sdk'
+import { MeasurementBody } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
 import {

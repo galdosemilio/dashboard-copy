@@ -80,7 +80,7 @@ export class CookieService {
     if (document.cookie && document.cookie !== '') {
       const split: Array<string> = document.cookie.split(';')
 
-      // tslint:disable-next-line:prefer-for-of
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < split.length; i += 1) {
         const currentCookie: Array<string> = split[i].split('=')
 

@@ -43,7 +43,7 @@ import { FEETS } from '@app/shared/utils/units'
     },
     { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
   ],
-  // tslint:disable-next-line:use-host-property-decorator
+  // eslint-disable-next-line
   host: {
     class: 'mat-form-field',
     '[class.mat-input-invalid]': '_control?.invalid && _control?.touched',

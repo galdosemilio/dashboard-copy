@@ -93,9 +93,8 @@ export class ProgressCircleComponent implements OnInit, OnChanges {
     )
 
     const arcSweep = endAngle < 0 ? 0 : 1
-    let largeArcFlag: number
-
-    largeArcFlag = Math.abs(endAngle) >= 0 && Math.abs(endAngle) <= 180 ? 0 : 1
+    const largeArcFlag =
+      Math.abs(endAngle) >= 0 && Math.abs(endAngle) <= 180 ? 0 : 1
 
     return `M${start}A${pathRadius},${pathRadius} 0 ${largeArcFlag},${arcSweep} ${end}`
   }

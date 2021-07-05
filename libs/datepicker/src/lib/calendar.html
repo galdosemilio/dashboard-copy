@@ -2,8 +2,8 @@
 
   <div class="mat-calendar-header-date" *ngIf="showCalendarControls">
     <button class="mat-calendar-header-date-year mat-calendar-control"
-    [class.mat-calendar-control-active]="view == 'years'"
-    [@controlActive]="view == 'years' ? 'active' : ''"
+    [class.mat-calendar-control-active]="view === 'years'"
+    [@controlActive]="view === 'years' ? 'active' : ''"
     [attr.aria-label]="_intl.switchToYearViewLabel"
     (click)="changeView('years')">
       {{ _yearButtonText }}
@@ -11,8 +11,8 @@
     </button>
 
     <button class="mat-calendar-header-date-month mat-calendar-control"
-    [class.mat-calendar-control-active]="view == 'month' || view == 'year'"
-    [@controlActive]="view == 'month' || view == 'year' ? 'active' : ''"
+    [class.mat-calendar-control-active]="view === 'month' || view === 'year'"
+    [@controlActive]="view === 'month' || view === 'year' ? 'active' : ''"
     [attr.aria-label]="_intl.switchToMonthViewLabel"
     (click)="changeView('month')">
       <span class="mat-calendar-header-date-dayname">{{ _dayButtonText }}, </span>
@@ -23,16 +23,16 @@
   <div class="mat-calendar-header-time">
     <div class="mat-calendar-header-time-hour">
       <button class="mat-calendar-control"
-      [class.mat-calendar-control-active]="view == 'clock' && _hourView"
-      [@controlActive]="view == 'clock' && _hourView ? 'active' : ''"
+      [class.mat-calendar-control-active]="view === 'clock' && _hourView"
+      [@controlActive]="view === 'clock' && _hourView ? 'active' : ''"
       [attr.aria-label]="_intl.switchToHourViewLabel"
       (click)="_showHourView()">
         {{ _hourButtonText }}
       </button>
       <span>:</span>
       <button class="mat-calendar-control"
-      [class.mat-calendar-control-active]="view == 'clock' && !_hourView"
-      [@controlActive]="view == 'clock' && !_hourView ? 'active' : ''"
+      [class.mat-calendar-control-active]="view === 'clock' && !_hourView"
+      [@controlActive]="view === 'clock' && !_hourView ? 'active' : ''"
       [attr.aria-label]="_intl.switchToMinuteViewLabel"
       (click)="_showMinuteView()">
         {{ _minuteButtonText }}

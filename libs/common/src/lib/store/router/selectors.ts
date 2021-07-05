@@ -1,4 +1,4 @@
-// tslint:disable-next-line:no-unused-variable
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import { createFeatureSelector, MemoizedSelector } from '@ngrx/store'
 import { State } from './state'
 

@@ -372,8 +372,6 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     const baseLang = this.currentLang.split('-')[0]
 
     let idxProviderContactChild
-    let idxProviderFaqChild
-    let idxSupportCallChild
     const providerContactLink = this.context.isOrphaned
       ? undefined
       : get(this.context.organization.mala, 'custom.links.providerContact')
@@ -387,14 +385,14 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
           (child) => child.navName === _('SIDENAV.CONTACT_SUPPORT')
         )) > -1
     )
-    idxSupportCallChild =
+    const idxSupportCallChild =
       idxProviderContact && this.sidenavItems.length > 0
         ? this.sidenavItems[idxProviderContact].children.findIndex(
             (child) => child.navName === _('SIDENAV.SCHEDULE_SUPPORT_CALL')
           )
         : -1
 
-    idxProviderFaqChild =
+    const idxProviderFaqChild =
       idxProviderContact && this.sidenavItems.length > 0
         ? this.sidenavItems[idxProviderContact].children.findIndex(
             (child) => child.navName === _('SIDENAV.FAQ_SUPPORT')

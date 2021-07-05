@@ -1,35 +1,58 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": "./tsconfig.*?.json"
+      },
+      "extends": ["plugin:@nrwl/nx/typescript"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nrwl/nx/enforce-module-boundaries": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "off",
+          {
+            "accessibility": "explicit"
+          }
+        ],
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
           "error",
           {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
+            "vars": "all",
+            "args": "none",
+            "ignoreRestSiblings": true
           }
-        ]
+        ],
+        "dot-notation": "off",
+        "id-blacklist": "off",
+        "id-match": "off",
+        "import/no-deprecated": "off",
+        "no-async-promise-executor": "off",
+        "no-bitwise": "off",
+        "no-case-declarations": "off",
+        "no-control-regex": "off",
+        "no-constant-condition": "off",
+        "no-empty": "off",
+        "no-empty-function": "off",
+        "no-fallthrough": "off",
+        "no-shadow": "off",
+        "no-prototype-builtins": "off",
+        "no-underscore-dangle": "off",
+        "no-useless-escape": "off"
       }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
-      "rules": {}
     }
-  ]
+  ],
+  "plugins": ["@nrwl/nx"]
 }

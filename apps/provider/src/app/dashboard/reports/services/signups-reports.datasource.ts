@@ -115,7 +115,6 @@ export class SignupsReportsDataSource extends ChartDataSource<
     // formats
     const endDate = moment(this.criteria.endDate)
     const currentDate = moment(this.criteria.startDate)
-    const diff = endDate.diff(this.criteria.startDate, 'days')
 
     let xlabelFormat
     let tooltipFormat
@@ -164,7 +163,7 @@ export class SignupsReportsDataSource extends ChartDataSource<
           title: org.name.trim(),
           id: org.id
         })
-        // tslint:disable-next-line:no-unused-expression
+        // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
         orgs.indexOf(org.name) === -1 ? orgs.push(org.name.trim()) : () => {} // no-op of typescript
       })
       // store the min and max

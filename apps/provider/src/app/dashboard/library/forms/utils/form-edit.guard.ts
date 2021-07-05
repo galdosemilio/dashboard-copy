@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { MatDialog } from '@coachcare/material'
 import { CanDeactivate } from '@angular/router'
 import { LibraryFormComponent } from '@app/dashboard/library/forms/form/form.component'
 import { Observable } from 'rxjs'

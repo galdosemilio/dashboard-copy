@@ -1,5 +1,5 @@
 import { standardSetup } from '../../support'
-import { Availability, verifyDayAvailability, WeekDays } from './utils'
+import { verifyDayAvailability, WeekDays } from './utils'
 
 describe('Schedule -> availability', function () {
   it('Schedule shows proper availability white/gray blocks in ET (New York)', function () {

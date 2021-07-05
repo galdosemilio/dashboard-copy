@@ -7,7 +7,6 @@ import {
   PagedResponse,
   RPMStateSummaryItem
 } from '@coachcare/sdk'
-import { _ } from '@app/shared/utils'
 import { from, Observable } from 'rxjs'
 import { RPM_CODE_COLUMNS, RPMStateSummaryEntry } from '../rpm/models'
 import { ReportsDatabase } from './reports.database'

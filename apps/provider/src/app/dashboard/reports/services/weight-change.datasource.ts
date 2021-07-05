@@ -139,7 +139,6 @@ export class WeightChangeDataSource extends ChartDataSource<
           displayColors: false,
           callbacks: {
             title: (tooltipItem, d) => {
-              const i = tooltipItem[0].index
               return 'Name: ' + d.datasets[0].fullNames[tooltipItem[0].index]
             },
             label: (tooltipItem, d) => {

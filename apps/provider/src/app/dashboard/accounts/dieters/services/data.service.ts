@@ -8,9 +8,6 @@ import {
 import {
   FetchActivitySummaryRequest,
   FetchActivitySummaryResponse,
-  FetchBodyMeasurementRequest,
-  FetchBodyMeasurementRequestV1,
-  FetchBodyMeasurementResponse,
   FetchBodySummaryRequest,
   FetchBodySummaryResponse,
   FetchSleepMeasurementSummaryRequest,

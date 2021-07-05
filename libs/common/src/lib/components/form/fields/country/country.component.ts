@@ -39,7 +39,7 @@ import { CountryProvider } from '@coachcare/sdk'
       multi: true
     }
   ],
-  // tslint:disable-next-line:use-host-property-decorator
+  // eslint-disable-next-line
   host: {
     class: 'mat-form-field',
     '[class.mat-input-invalid]': '_control.invalid && _control.touched',

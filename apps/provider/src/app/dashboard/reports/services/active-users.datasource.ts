@@ -201,10 +201,12 @@ export class ActiveUsersDataSource extends ChartDataSource<
       }
     ]
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const totalizer = {
       id: 'totalizer',
 
       beforeUpdate: (chartT) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const chartTotals = {}
         let utmost = 0
 

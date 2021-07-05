@@ -1,4 +1,4 @@
-//tslint:disable:no-conflicting-lifecycle
+/* eslint-disable @angular-eslint/no-conflicting-lifecycle */
 import {
   AfterContentInit,
   ContentChildren,

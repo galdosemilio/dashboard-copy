@@ -11,7 +11,7 @@ import { EventEmitter } from '@angular/core'
 import { MatSort } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AppDataSource, getterSorter } from '@coachcare/backend/model'
-import { AccountSingle, AccountTypeId, AccountTypeIds } from '@coachcare/sdk'
+import { AccountSingle, AccountTypeIds } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 
 @Component({

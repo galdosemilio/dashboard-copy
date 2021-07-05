@@ -9,7 +9,6 @@ import {
 import { ToggleMenu } from '@app/layout/store'
 import { Store } from '@ngrx/store'
 import { CCRConfig } from '@app/config'
-declare const Twilio: any
 
 export interface SidenavItem {
   code?: string
@@ -41,10 +40,7 @@ export class SidenavItemComponent implements OnChanges {
   active = false
   _this: SidenavItemComponent = this
 
-
-  constructor(
-    private store: Store<CCRConfig>,
-  ) {}
+  constructor(private store: Store<CCRConfig>) {}
 
   ngOnChanges(changes) {
     this.active = this.sidenavItem.expanded

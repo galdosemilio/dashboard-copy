@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
-import { Entity, MessagingPreference } from '@coachcare/sdk'
+import { MessagingPreference } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 

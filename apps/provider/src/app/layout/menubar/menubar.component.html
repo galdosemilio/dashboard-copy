@@ -34,7 +34,7 @@
   <div class="right-controls">
     <div class="perm-camera-mic-wrapper">
       <div
-      *ngIf="callState && callState.conferencingEnabled && callState.subaccountId != ''"
+      *ngIf="callState && callState.conferencingEnabled && callState.subaccountId !== ''"
       class="perm-camera-mic"
       (click)="onOpenCallSettings()">
         <mat-icon class="camera-icon" color="primary">videocam</mat-icon>

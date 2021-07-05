@@ -5,7 +5,6 @@ import {
   ActiveCampaignDatabase,
   ActiveCampaignDataSource
 } from '@coachcare/backend/data'
-import { _ } from '@coachcare/backend/shared'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import {
@@ -14,7 +13,6 @@ import {
 } from '../dialogs'
 import { AssociateAllProvidersDialogComponent } from '../dialogs/associate-all-providers/associate-all-providers.dialog'
 import { OrganizationPreference } from '@coachcare/sdk'
-import { PromptDialog } from '@coachcare/common/dialogs/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 
 @UntilDestroy()

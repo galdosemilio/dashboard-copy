@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CCRConfig } from '@app/config'
 import { ContextService } from '@app/service'
@@ -6,7 +6,6 @@ import { DateNavigatorOutput } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { BehaviorSubject } from 'rxjs'
 import { MetricsDatabase, MetricsDataSource } from '../../../services'
 import { MetricsChartDataSource } from '../../../services/metrics/metrics.chart.datasource'
 

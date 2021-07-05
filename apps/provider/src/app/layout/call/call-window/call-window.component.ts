@@ -32,7 +32,6 @@ import {
 } from '@app/layout/store/call/call.action'
 import { CallState } from '@app/layout/store/call/call.state'
 import { NotifierService } from '@app/service/notifier.service'
-import { sleep } from '@app/shared'
 import { ConnectionStats, ConnectionStatus } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils/i18n.utils'
 import { Actions, ofType } from '@ngrx/effects'

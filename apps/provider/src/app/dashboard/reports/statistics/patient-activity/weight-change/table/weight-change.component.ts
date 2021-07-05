@@ -101,8 +101,6 @@ export class WeightChangeTableComponent
       if (!res.data.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
-      const format = 'YYYY-MM-DD'
-      const orgName = res.data[0].organization.name
       const filename = `Patient_Weight_Change_${criteria.startDate}_${criteria.endDate}.csv`
       let csv = ''
       csv += 'WEIGHT CHANGE REPORT\r\n'

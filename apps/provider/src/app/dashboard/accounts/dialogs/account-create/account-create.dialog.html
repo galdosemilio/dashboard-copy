@@ -4,8 +4,8 @@
     <mat-icon>add_circle_outline</mat-icon>
     <span *ngIf="!data.accountType">{{'BOARD.USER_NEW' | translate}}</span>
     <span *ngIf="data.accountType">
-      <span *ngIf="form.value.accountType == 'dieter'">{{'BOARD.PATIENT_NEW' | translate}}</span>
-      <span *ngIf="form.value.accountType == 'coach'">
+      <span *ngIf="form.value.accountType === 'dieter'">{{'BOARD.PATIENT_NEW' | translate}}</span>
+      <span *ngIf="form.value.accountType === 'coach'">
         {{'BOARD.COACH_NEW' | translate}}
         <ccr-help-link *ngIf="!!zendeskLink" [link]="zendeskLink"></ccr-help-link>
       </span>
@@ -29,12 +29,12 @@
 
     <app-dieter-form bindForm="dieter"
       [initial]="temp" (final)="onTypeChange($event)"
-      *ngIf="form.value.accountType == 'dieter'">
+      *ngIf="form.value.accountType === 'dieter'">
     </app-dieter-form>
 
     <app-coach-form bindForm="coach"
       [initial]="temp" (final)="onTypeChange($event)"
-      *ngIf="form.value.accountType == 'coach'">
+      *ngIf="form.value.accountType === 'coach'">
     </app-coach-form>
 
   </form>

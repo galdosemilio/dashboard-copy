@@ -48,7 +48,6 @@ export class BulkUnenrollDialog implements OnInit {
     try {
       this.lockDialog()
       let completedOrgs = 0
-      const formValue = this.form.value
       const orgAmount = this.orgChildren.length + 1
       const orgChildren = this.orgChildren.slice()
 

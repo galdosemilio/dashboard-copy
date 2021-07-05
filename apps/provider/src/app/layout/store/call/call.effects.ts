@@ -35,13 +35,7 @@ import {
 } from 'rxjs/operators'
 import { Conference, Interaction } from '@coachcare/sdk'
 import * as callAction from './call.action'
-import {
-  AbortCall,
-  CancelCall,
-  DeviceAvailability,
-  InitiatedCallsDetail,
-  Source
-} from './call.action'
+import { CancelCall, DeviceAvailability, Source } from './call.action'
 
 @Injectable()
 export class CallEffects {

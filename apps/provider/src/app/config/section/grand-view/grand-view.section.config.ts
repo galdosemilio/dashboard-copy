@@ -1,4 +1,3 @@
-import { _ } from '@app/shared/utils'
 import { SectionConfigDetails } from '../models/section.details'
 
 export const GrandViewHealthSectionConfig: SectionConfigDetails = {

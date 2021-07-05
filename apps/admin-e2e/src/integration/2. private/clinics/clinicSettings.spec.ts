@@ -247,7 +247,7 @@ describe('Clinic Settings', () => {
       .find('.mat-checkbox-input')
       .should('have.length', 4)
       .each(($el) => {
-        // tslint:disable-next-line:no-unused-expression
+        // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
         expect($el).not.to.be.checked
       })
   })

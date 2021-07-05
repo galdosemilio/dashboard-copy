@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { _, CcrDatabase } from '@app/shared'
+import { CcrDatabase } from '@app/shared'
 import {
   FetchAllConsumedRequest,
   GetAllFoodConsumedResponse

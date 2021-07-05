@@ -1,4 +1,4 @@
-declare var require: any
+declare const require: any
 import { merge } from 'lodash'
 import { config as defaultCfg } from './env/default'
 import { Environment } from './environment.interface'

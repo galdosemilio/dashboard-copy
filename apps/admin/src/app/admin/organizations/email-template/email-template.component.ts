@@ -5,7 +5,6 @@ import {
   EmailTemplatesDatabase,
   EmailTemplatesDataSource
 } from '@coachcare/backend/data'
-import { _ } from '@coachcare/backend/shared'
 import { ContextService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { EmailTemplateDialogComponent } from './dialogs'

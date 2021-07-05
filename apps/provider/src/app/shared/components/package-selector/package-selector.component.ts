@@ -1,10 +1,9 @@
-import { Component, Host, OnDestroy, OnInit, SkipSelf } from '@angular/core'
+import { Component, OnDestroy, OnInit, SkipSelf } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import {
   BindForm,
   BindFormDirective
 } from '@app/shared/directives/bind-form.directive'
-import { _ } from '@app/shared/utils'
 import { PackageSelectorElement, PackageSelectorProps } from './models'
 
 @Component({

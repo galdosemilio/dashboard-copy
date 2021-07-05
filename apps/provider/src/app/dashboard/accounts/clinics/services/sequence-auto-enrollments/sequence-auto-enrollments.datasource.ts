@@ -1,6 +1,5 @@
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { TableDataSource } from '@app/shared'
-import { _ } from '@app/shared/utils'
 import { GetAllSequencesRequest, PagedResponse } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import {

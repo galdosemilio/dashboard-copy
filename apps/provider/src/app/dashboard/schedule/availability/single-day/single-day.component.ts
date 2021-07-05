@@ -6,7 +6,6 @@ import { Schedule } from '@coachcare/sdk'
 import { ContextService, NotifierService, SelectedAccount } from '@app/service'
 import { _, PromptDialog, SingleAddDialog } from '@app/shared'
 import {
-  FetchAllAccountObjectResponse,
   FetchCalendarAvailabilityRequest,
   FetchCalendarAvailabilitySegment
 } from '@coachcare/sdk'

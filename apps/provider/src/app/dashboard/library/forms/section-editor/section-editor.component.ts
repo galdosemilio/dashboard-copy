@@ -1,7 +1,6 @@
 import {
   ChangeDetectorRef,
   Component,
-  ElementRef,
   forwardRef,
   Input,
   OnDestroy,

@@ -11,15 +11,8 @@ import {
   AccountEntryComponents,
   AccountProviders
 } from './accounts'
+import { ContentEntryComponents, ContentProviders } from './content'
 import {
-  ContentComponents,
-  ContentEntryComponents,
-  ContentProviders
-} from './content'
-import {
-  FormsComponents,
-  FormsEntryComponents,
-  FormsProviders,
   LibraryComponents,
   LibraryEntryComponents,
   LibraryProviders

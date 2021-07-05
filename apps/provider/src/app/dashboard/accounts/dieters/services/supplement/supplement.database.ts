@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
 import { Supplement } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared'
