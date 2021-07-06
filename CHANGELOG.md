@@ -1,3 +1,19 @@
+# [1.25.0](https://github.com/coachcare/dashboard/compare/v1.24.1...v1.25.0) (2021-07-06)
+
+
+### Bug Fixes
+
+* loading indicate in file explorer [FRON-2207] ([185d394](https://github.com/coachcare/dashboard/commit/185d3941405ed71fb78cb92a3d2a60c0818de692))
+* send list item delete event [FRON-2227] ([11beb84](https://github.com/coachcare/dashboard/commit/11beb842562f32ad3b591e2d1a033350182f8145))
+* translation extraction issues [FRON-2219] ([7ac70aa](https://github.com/coachcare/dashboard/commit/7ac70aa72e83321932f91fb3d07bd8f086d89bab))
+
+
+### Features
+
+* added commit count check [FRON-2152] ([6dc4465](https://github.com/coachcare/dashboard/commit/6dc446598c1d8551bda353605d90816e01112d91))
+* implemented drag to load interaction [FRON-2231] ([02ba172](https://github.com/coachcare/dashboard/commit/02ba1725498f08fa7894cbe54221bfaf4902789f))
+* show error message for http link [FRON-2208] ([23281ff](https://github.com/coachcare/dashboard/commit/23281ff8e3c46b9f09d1fc296c491909ff90988b))
+
 ## [1.24.1](https://github.com/coachcare/dashboard/compare/v1.24.0...v1.24.1) (2021-06-30)
 
 
