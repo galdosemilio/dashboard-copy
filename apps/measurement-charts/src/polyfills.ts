@@ -8,3 +8,11 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 ;(window as any).global = window
+
+declare global {
+  interface Window {
+    ReactNativeWebView?: {
+      postMessage(msg: string): void
+    }
+  }
+}

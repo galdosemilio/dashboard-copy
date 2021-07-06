@@ -186,7 +186,7 @@ export class ListElement extends CcrElement {
         dataPointTypeId: api.baseData.dataPointTypeId
       }
 
-      window.postMessage(JSON.stringify(event), '*')
+      window.ReactNativeWebView?.postMessage(JSON.stringify(event))
     } catch (err) {
       this.error(err)
     } finally {
