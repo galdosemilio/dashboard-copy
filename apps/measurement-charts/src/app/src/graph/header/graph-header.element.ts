@@ -1,7 +1,9 @@
-import { CcrElement, GraphHeader, Tab } from '@chart/model'
-import { tabService } from '@chart/service'
+import { CcrElement } from '@chart/model'
+import { eventService } from '@chart/service'
+import { api } from '@chart/service/api'
+import { convertUnitToPreferenceFormat } from '@coachcare/sdk'
+import { GraphEntry } from '../graph.element'
 import './graph-header.element.scss'
-
 export class GraphHeaderElement extends CcrElement {
   render() {
     this.innerHTML = `
@@ -13,31 +15,37 @@ export class GraphHeaderElement extends CcrElement {
   }
 
   afterViewInit() {
-    tabService.selectedTab$.subscribe((tab) => {
-      // for now, the header is setup when change tab.
-      // but it need to set after get charts data when we integration charts endpoints
-      if (tab === Tab.GRAPH) {
-        this.setHeader()
-      }
-    })
+    eventService
+      .listen<GraphEntry[]>('graph.data')
+      .subscribe((data: GraphEntry[]) => this.setHeader(data))
   }
 
-  private setHeader() {
-    const data: GraphHeader = {
-      value: 100,
-      range: {
-        min: 222,
-        max: 333
-      },
-      unit: 'lbs'
-    }
+  private setHeader(data: GraphEntry[]) {
+    const filteredData = data.filter((entry) => entry.value !== undefined)
+    const values = filteredData.map((entry) => entry.value)
 
-    const value = data.value as number
-    const range = `${data.range.min}<span class="unit">${data.unit}</span>- ${data.range.max}<span class="unit">${data.unit}</span>`
+    const min = (filteredData.length ? Math.min(...values) : 0).toFixed(2)
+
+    const max = (filteredData.length ? Math.max(...values) : 0).toFixed(2)
+
+    const average = (filteredData.length
+      ? Math.round(
+          values.reduce((value, entry) => (value += entry), 0) /
+            Math.max(values.length, 1)
+        )
+      : 0
+    ).toFixed(2)
+
+    const unit = convertUnitToPreferenceFormat(
+      api.baseData.dataPointType,
+      api.baseData.metric
+    )
+
+    const range = `${min}<span class="unit">${unit}</span>- ${max}<span class="unit">${unit}</span>`
 
     document.getElementById('graph-header').innerHTML = `
       <div class="average-wrap">
-        <p class="value">${value}<span class="unit">${data.unit}</span></p>
+        <p class="value">${average}<span class="unit">${unit}</span></p>
         <p class="range">${range}</p>
       </div>
     `

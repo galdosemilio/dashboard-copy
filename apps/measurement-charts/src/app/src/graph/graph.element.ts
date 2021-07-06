@@ -5,15 +5,22 @@ import { api } from '@chart/service/api'
 import { DateTime } from 'luxon'
 import {
   convertToReadableFormat,
+  convertUnitToPreferenceFormat,
   MeasurementDataPointAggregate
 } from '@coachcare/sdk'
 import { groupBy } from 'lodash'
 import { Subject } from 'rxjs'
 import { auditTime, debounceTime, filter } from 'rxjs/operators'
 
-interface GraphEntry {
+export interface GraphEntry {
   value: number
   time: string
+}
+
+interface GraphTimeData {
+  day: number
+  month: number
+  year: number
 }
 
 import './graph.element.scss'
@@ -69,11 +76,19 @@ export class GraphElement extends CcrElement {
         type: 'custom',
         precision: 1,
         minMove: 0.5,
-        formatter: (value) => value.toFixed() + ' unit'
+        formatter: (value) =>
+          value.toFixed() +
+          ' ' +
+          (api.baseData.dataPointType
+            ? convertUnitToPreferenceFormat(
+                api.baseData.dataPointType,
+                api.baseData.metric
+              )
+            : '')
       },
       priceLineVisible: false,
       lastValueVisible: false,
-      priceLineColor: baseData.colors.primary,
+      priceLineColor: api.baseData.colors.primary,
       color: baseData.colors.primary,
       lineWidth: 2
     })
@@ -120,7 +135,7 @@ export class GraphElement extends CcrElement {
       this.isLoading = true
 
       const measurements = await api.measurementDataPoint.getAggregates({
-        account: api.baseData.accountId,
+        account: api.baseData.accountId || undefined,
         type: [api.baseData.dataPointTypeId],
         recordedAt: this.dateRange,
         limit: 'all',
@@ -173,6 +188,10 @@ export class GraphElement extends CcrElement {
       })
 
       this.chart.timeScale().fitContent()
+      eventService.trigger(
+        'graph.data',
+        this.getEntriesBetweenRange(this.dateRange)
+      )
       this.firstTime = false
       this.rangeChangeBumper = true
 
@@ -224,6 +243,16 @@ export class GraphElement extends CcrElement {
     return emptyGroups
   }
 
+  private getEntriesBetweenRange(dateRange: DateRange): GraphEntry[] {
+    const initialDate = DateTime.fromISO(dateRange.start).minus({ month: 1 })
+    const finalDate = DateTime.fromISO(dateRange.end).minus({ month: 1 })
+
+    return this.data.filter((entry) => {
+      const entryDate = DateTime.fromISO(entry.time)
+      return entryDate >= initialDate && entryDate <= finalDate
+    })
+  }
+
   private hasSameDateEntry(date: DateTime): boolean {
     return this.data.some((entry) => {
       const entryDate = DateTime.fromISO(entry.time).plus({ month: 1 })
@@ -270,7 +299,9 @@ export class GraphElement extends CcrElement {
     window.addEventListener('resize', () => this.resizeChart$.next())
   }
 
-  private onVisibleLogicalRangeChanged(newVisibleLogicalRange): void {
+  private async onVisibleLogicalRangeChanged(
+    newVisibleLogicalRange
+  ): Promise<void> {
     if (!this.data?.length) {
       return
     }
@@ -296,6 +327,7 @@ export class GraphElement extends CcrElement {
       append = false
 
       if (this.hasSameDateEntry(endDate)) {
+        this.reportSelectedDateRange(barsInfo)
         return
       }
     } else if (barsInfo?.barsAfter < 0) {
@@ -307,6 +339,7 @@ export class GraphElement extends CcrElement {
       append = true
 
       if (this.hasSameDateEntry(pivotDate) || startDate > DateTime.now()) {
+        this.reportSelectedDateRange(barsInfo)
         return
       }
     } else {
@@ -318,7 +351,41 @@ export class GraphElement extends CcrElement {
       end: endDate.toISO()
     }
 
-    void this.fetchMeasurements(append)
+    await this.fetchMeasurements(append)
+    this.reportSelectedDateRange(barsInfo)
+  }
+
+  private reportSelectedDateRange(
+    barsInfo: { from: GraphTimeData; to: GraphTimeData } | null
+  ): void {
+    if (!barsInfo) {
+      return
+    }
+
+    const initial = DateTime.now()
+      .set({
+        day: barsInfo.from.day,
+        month: barsInfo.from.month,
+        year: barsInfo.from.year
+      })
+      .plus({ month: 1 })
+      .startOf('day')
+    const final = DateTime.now()
+      .set({
+        day: barsInfo.to.day,
+        month: barsInfo.to.month,
+        year: barsInfo.to.year
+      })
+      .plus({ month: 1 })
+      .endOf('day')
+
+    eventService.trigger(
+      'graph.data',
+      this.getEntriesBetweenRange({
+        start: initial.toISO(),
+        end: final.toISO()
+      })
+    )
   }
 
   private resizeChart(): void {

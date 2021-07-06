@@ -220,7 +220,7 @@ export class ListElement extends CcrElement {
           <p class='date-month'>
             ${dateMoment.toFormat('MMM')}
           </p>
-          <p class='date-day' style="color: ${baseData.colors.primary}">
+          <p class='date-day' style="color: ${api.baseData.colors.primary}">
             ${dateMoment.toFormat('d')}
           </p>
         </div>
@@ -228,9 +228,12 @@ export class ListElement extends CcrElement {
           <p class='value'>${item.point.type.name}: ${convertToReadableFormat(
         item.point.value,
         item.point.type,
-        baseData.metric
+        api.baseData.metric
       ).toFixed(2)}
-            ${convertUnitToPreferenceFormat(item.point.type, baseData.metric)}
+            ${convertUnitToPreferenceFormat(
+              item.point.type,
+              api.baseData.metric
+            )}
           </p>
           <p>${dateMoment.toFormat('h:mm a')}</p>
         </div>
@@ -302,9 +305,12 @@ export class ListElement extends CcrElement {
               ${convertToReadableFormat(
                 item.point.value,
                 item.point.type,
-                baseData.metric
+                api.baseData.metric
               ).toFixed(2)}
-              ${convertUnitToPreferenceFormat(item.point.type, baseData.metric)}
+              ${convertUnitToPreferenceFormat(
+                item.point.type,
+                api.baseData.metric
+              )}
             </p>
           </div>
           <div class="detail-item">
@@ -365,7 +371,7 @@ export class ListElement extends CcrElement {
 
     try {
       const res = await api.measurementDataPoint.getAggregates({
-        account: api.baseData.accountId,
+        account: api.baseData.accountId || undefined,
         recordedAt: {
           start: new Date('2020-01-01').toISOString(),
           end: new Date().toISOString()

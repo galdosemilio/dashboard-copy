@@ -46,17 +46,24 @@ export class AppElement extends HTMLElement {
       }
     }
 
-    tabService.selectedTab$.next(data.view)
-
     this.onMessage(data)
   }
 
-  private onMessage(data: BaseData) {
-    api.appendBaseData(data)
+  private async onMessage(data: BaseData) {
+    api.setToken(data.token)
+
+    const dataPointType = await api.measurementDataPointType.getSingle({
+      id: data.dataPointTypeId
+    })
+    api.appendBaseData({
+      ...data,
+      dataPointType
+    })
     this.setColorPattern()
     this.setLayout(data)
     this.setDateTimeSettings()
-    api.setToken(data.token)
+
+    tabService.selectedTab$.next(data.view)
     eventService.baseDataEvent$.next(data)
   }
 
@@ -64,9 +71,9 @@ export class AppElement extends HTMLElement {
     document.body.setAttribute(
       'style',
       `
-        --primary: ${baseData.colors.primary};
-        --accent: ${baseData.colors.accent};
-        --text: ${baseData.colors.text};
+        --primary: ${api.baseData.colors.primary};
+        --accent: ${api.baseData.colors.accent};
+        --text: ${api.baseData.colors.text};
         --selector-background: #383838;
         --selector-background-light: #f5f5f5;
         --selector-contrast: #dedede;

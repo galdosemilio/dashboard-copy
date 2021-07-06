@@ -7,6 +7,7 @@ type EventString =
   | 'graph.date-range'
   | 'graph.date-range-previous'
   | 'graph.date-range-next'
+  | 'graph.data'
 
 interface EventProps {
   name: string

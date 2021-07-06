@@ -1,4 +1,5 @@
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
+import { MeasurementDataPointType } from '@coachcare/sdk'
 
 export enum Timeframe {
   WEEK = 'week',
@@ -25,6 +26,7 @@ export interface BaseData {
     accent: string
     text: string
   }
+  dataPointType?: MeasurementDataPointType
 }
 
 export const baseData: BaseData = {

@@ -2,7 +2,8 @@ import { baseData, BaseData } from '@chart/model'
 import {
   ApiService,
   AuthenticationToken,
-  MeasurementDataPointProvider
+  MeasurementDataPointProvider,
+  MeasurementDataPointTypeProvider
 } from '@coachcare/sdk'
 import { Environment } from '@coachcare/sdk/dist/lib/config'
 import { environment } from '../../environments/environment'
@@ -10,6 +11,7 @@ import { environment } from '../../environments/environment'
 export class Api {
   public baseData: BaseData = baseData
   public readonly measurementDataPoint: MeasurementDataPointProvider
+  public readonly measurementDataPointType: MeasurementDataPointTypeProvider
 
   public apiService: ApiService
   public token: AuthenticationToken
@@ -19,6 +21,9 @@ export class Api {
     this.apiService = this.setup()
 
     this.measurementDataPoint = new MeasurementDataPointProvider(
+      this.apiService
+    )
+    this.measurementDataPointType = new MeasurementDataPointTypeProvider(
       this.apiService
     )
   }
