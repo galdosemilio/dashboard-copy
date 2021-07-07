@@ -38,6 +38,8 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SelectOrganizationDialog } from '@app/shared/dialogs/select-organization'
 import { DeviceDetectorService } from 'ngx-device-detector'
+import { Subject } from 'rxjs'
+import { debounceTime } from 'rxjs/operators'
 
 export interface TimeBlock {
   display: string
@@ -54,10 +56,6 @@ interface TimeBlockCell {
 }
 
 type ScheduleCalendarTimeRange = 'month' | 'day' | 'week'
-
-// export type Meeting = FetchMeetingResponse & {
-//   timeToDisplay: string;
-// };
 
 @UntilDestroy()
 @Component({
@@ -83,6 +81,7 @@ export class ScheduleCalendarComponent
     'https://coachcare.zendesk.com/hc/en-us/articles/360018626192-Viewing-the-Dashboard-Schedules'
 
   private selectedUser: SelectedAccount
+  private getMeetings$: Subject<void> = new Subject<void>()
   private isTableScrolled = false
 
   constructor(
@@ -119,6 +118,12 @@ export class ScheduleCalendarComponent
         this.getMeetings(this.dates)
       }
     })
+
+    this.getMeetings$
+      .pipe(debounceTime(300), untilDestroyed(this))
+      .subscribe(() => {
+        this.getMeetings(this.dates)
+      })
 
     setTimeout(
       () =>
@@ -286,7 +291,7 @@ export class ScheduleCalendarComponent
 
   public selectedDate(dates: DateNavigatorOutput): void {
     this.dates = dates
-    this.getMeetings(this.dates)
+    this.getMeetings$.next()
     // prevents exception when changing timeframe from child component
     this.cdr.detectChanges()
   }
