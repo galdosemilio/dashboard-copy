@@ -1,3 +1,15 @@
+# [1.26.0](https://github.com/coachcare/dashboard/compare/v1.25.0...v1.26.0) (2021-07-07)
+
+
+### Bug Fixes
+
+* superbill now fetches all entries [FRON-2237] ([6536727](https://github.com/coachcare/dashboard/commit/6536727f5337934f1f513750674a95d216d50099))
+
+
+### Features
+
+* set graph header based on aggregated data [FRON-2232] ([949543c](https://github.com/coachcare/dashboard/commit/949543c38bf90ff5ddd17e27a32ca7d1c1c544fd))
+
 # [1.25.0](https://github.com/coachcare/dashboard/compare/v1.24.1...v1.25.0) (2021-07-06)
 
 
