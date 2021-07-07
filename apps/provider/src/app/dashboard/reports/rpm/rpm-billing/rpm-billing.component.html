@@ -42,7 +42,7 @@
 
                 <div fxFlex="35%" fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px">
                     <button
-                    [disabled]="!source.isLoaded || source.isEmpty"
+                    [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
                     (click)="download()"
                     mat-button class="ccr-align-center">
                         {{ 'REPORTS.EXPORT_REPORT' | translate }}
@@ -50,7 +50,7 @@
                     </button>
 
                     <button
-                    [disabled]="!source.isLoaded || source.isEmpty"
+                    [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
                     (click)="download(true)"
                     mat-button class="ccr-align-center">
                         {{ 'RPM.EXPORT_SUPERBILL' | translate }}

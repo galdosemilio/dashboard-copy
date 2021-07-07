@@ -70,6 +70,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     asOf: moment().format('YYYY-MM-DD')
   }
   public csvSeparator = ','
+  public isLoading: boolean
   public searchForm: FormGroup
   public selectedClinic?: OrganizationEntity
   public statusFilterForm: FormGroup
@@ -216,6 +217,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
 
   public async downloadRPMBill(): Promise<void> {
     try {
+      this.isLoading = true
       const criteria = this.source.args
       const rawResponse = await this.database.fetchRPMBillingReport({
         ...criteria,
@@ -423,12 +425,19 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       document.body.removeChild(link)
     } catch (error) {
       this.notify.error(error)
+    } finally {
+      this.isLoading = false
     }
   }
 
   public async downloadSuperbill(): Promise<void> {
     try {
-      const data = await this.source.fetchSuperbill()
+      this.isLoading = true
+      const data = await this.source.fetchSuperbill({
+        ...this.source.args,
+        limit: 'all',
+        offset: 0
+      })
       const blob = new Blob([data])
       const link = document.createElement('a')
       const rawFileName = `${this.context.organization.name}__RPM_Superbill`
@@ -438,6 +447,8 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     } catch (error) {
       console.error(error)
       this.notify.error(error)
+    } finally {
+      this.isLoading = false
     }
   }
 

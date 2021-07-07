@@ -59,8 +59,8 @@ export class RPMBillingDataSource extends TableDataSource<
     return from(this.database.fetchRPMBillingReport(criteria))
   }
 
-  fetchSuperbill(): Promise<any> {
-    return this.database.fetchRPMSuperbillReport(this.criteria)
+  fetchSuperbill(criteria: FetchRPMBillingSummaryRequest): Promise<any> {
+    return this.database.fetchRPMSuperbillReport(criteria)
   }
 
   mapResult(
