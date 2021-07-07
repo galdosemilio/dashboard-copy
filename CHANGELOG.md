@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/coachcare/dashboard/compare/v1.26.0...v1.26.1) (2021-07-07)
+
+
+### Bug Fixes
+
+* use debounceTime for get meetings [FRON-2228] ([387d6e8](https://github.com/coachcare/dashboard/commit/387d6e80565216d76ab2d2ee5538879c9cfc4f29))
+
 # [1.26.0](https://github.com/coachcare/dashboard/compare/v1.25.0...v1.26.0) (2021-07-07)
 
 
