@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/coachcare/dashboard/compare/v1.26.1...v1.27.0) (2021-07-08)
+
+
+### Features
+
+* add goals tab to patient page [IDEA-941] ([a0ebd2f](https://github.com/coachcare/dashboard/commit/a0ebd2f2d82b5672385dd17e6b0f1cce3d114eb2))
+
 ## [1.26.1](https://github.com/coachcare/dashboard/compare/v1.26.0...v1.26.1) (2021-07-07)
 
 
