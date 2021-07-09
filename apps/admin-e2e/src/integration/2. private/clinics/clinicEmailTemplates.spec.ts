@@ -146,7 +146,7 @@ describe('Clinic Email Templates', function () {
       .click({ force: true })
 
     cy.wait('@organizationTemplateDeleteRequest').should((xhr) => {
-      expect(xhr.request.url).to.contain('id=1')
+      expect(xhr.request.url).to.contain('email/1')
     })
 
     cy.wait(2000)
