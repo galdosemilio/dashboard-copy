@@ -5,6 +5,7 @@ import { api } from '../service/api'
 import { eventService, tabService } from '@chart/service'
 import { Settings as LuxonSettings } from 'luxon'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
+import { convertUnitToPreferenceFormat } from '@coachcare/sdk'
 
 export class AppElement extends HTMLElement {
   constructor() {
@@ -43,7 +44,8 @@ export class AppElement extends HTMLElement {
         primary: params.get('primary-color') ?? baseData.colors.primary,
         accent: params.get('accent-color') ?? baseData.colors.accent,
         text: params.get('text-color') ?? baseData.colors.text
-      }
+      },
+      unit: ''
     }
 
     this.onMessage(data)
@@ -55,9 +57,13 @@ export class AppElement extends HTMLElement {
     const dataPointType = await api.measurementDataPointType.getSingle({
       id: data.dataPointTypeId
     })
+
     api.appendBaseData({
       ...data,
-      dataPointType
+      dataPointType,
+      unit: !dataPointType.unit
+        ? ''
+        : convertUnitToPreferenceFormat(dataPointType, data.metric)
     })
     this.setColorPattern()
     this.setLayout(data)

@@ -36,16 +36,11 @@ export class GraphHeaderElement extends CcrElement {
       : 0
     ).toFixed(2)
 
-    const unit = convertUnitToPreferenceFormat(
-      api.baseData.dataPointType,
-      api.baseData.metric
-    )
-
-    const range = `${min}<span class="unit">${unit}</span>- ${max}<span class="unit">${unit}</span>`
+    const range = `${min}<span class="unit">${api.baseData.unit}</span>- ${max}<span class="unit">${api.baseData.unit}</span>`
 
     document.getElementById('graph-header').innerHTML = `
       <div class="average-wrap">
-        <p class="value">${average}<span class="unit">${unit}</span></p>
+        <p class="value">${average}<span class="unit">${api.baseData.unit}</span></p>
         <p class="range">${range}</p>
       </div>
     `

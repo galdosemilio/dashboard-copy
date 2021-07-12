@@ -27,6 +27,7 @@ export interface BaseData {
     text: string
   }
   dataPointType?: MeasurementDataPointType
+  unit: string
 }
 
 export const baseData: BaseData = {
@@ -42,7 +43,8 @@ export const baseData: BaseData = {
     primary: '#f05d5c',
     accent: '#f8b1b1',
     text: '#484848'
-  }
+  },
+  unit: ''
 }
 
 export interface Modal {

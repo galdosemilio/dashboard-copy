@@ -117,6 +117,8 @@ export class ListElement extends CcrElement {
         : 0
 
     if (changeY > 2) {
+      event.stopPropagation()
+      event.preventDefault()
       this.isStartedListSwipe = true
     }
 
@@ -195,11 +197,10 @@ export class ListElement extends CcrElement {
   }
 
   onScrollList() {
-    const wrapper = document.getElementById('list-wrapper')
     const content = document.getElementById('list-content')
 
     if (
-      wrapper.scrollTop + wrapper.offsetHeight >= content.offsetHeight - 20 &&
+      content.scrollTop + content.offsetHeight >= content.offsetHeight - 20 &&
       !this._loading
     ) {
       this.loadList()
@@ -211,6 +212,7 @@ export class ListElement extends CcrElement {
       const dateMoment = DateTime.fromISO(item.bucket.timestamp)
       const element = document.createElement('div')
       element.className = 'list-item'
+      const showTime = item.point.type.span.id === '2'
 
       const itemElement = document.createElement('div')
       itemElement.className = 'item'
@@ -230,12 +232,11 @@ export class ListElement extends CcrElement {
         item.point.type,
         api.baseData.metric
       ).toFixed(2)}
-            ${convertUnitToPreferenceFormat(
-              item.point.type,
-              api.baseData.metric
-            )}
+            ${api.baseData.unit}
           </p>
-          <p>${dateMoment.toFormat('h:mm a')}</p>
+          <p style='display: ${
+            showTime ? 'block' : 'none'
+          }'>${dateMoment.toFormat('h:mm a')}</p>
         </div>
         <p class="arrow-right">▶</p>
       `
@@ -307,10 +308,7 @@ export class ListElement extends CcrElement {
                 item.point.type,
                 api.baseData.metric
               ).toFixed(2)}
-              ${convertUnitToPreferenceFormat(
-                item.point.type,
-                api.baseData.metric
-              )}
+              ${api.baseData.unit}
             </p>
           </div>
           <div class="detail-item">

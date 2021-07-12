@@ -76,15 +76,7 @@ export class GraphElement extends CcrElement {
         type: 'custom',
         precision: 1,
         minMove: 0.5,
-        formatter: (value) =>
-          value.toFixed() +
-          ' ' +
-          (api.baseData.dataPointType
-            ? convertUnitToPreferenceFormat(
-                api.baseData.dataPointType,
-                api.baseData.metric
-              )
-            : '')
+        formatter: (value) => value.toFixed() + ' ' + api.baseData.unit
       },
       priceLineVisible: false,
       lastValueVisible: false,
