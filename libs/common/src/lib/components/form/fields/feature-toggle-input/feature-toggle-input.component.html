@@ -15,7 +15,7 @@
       </ccr-popup-description>
     </div>
 
-    <span *ngIf="subLabel" class="sub-label">{{ subLabel | translate }}</span>
+    <span *ngIf="subLabel" [innerHTML]="subLabel | translate" class="sub-label"></span>
   </div>
 
   <div *ngIf="inheritable; else toggles" fxFlex="29%" fxLayout="column" fxLayoutAlign="start end">

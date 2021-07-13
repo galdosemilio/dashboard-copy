@@ -1,0 +1,34 @@
+<form
+[formGroup]="form"
+fxLayout="column"
+fxLayoutAlign="start stretch"
+fxLayoutGap="10px"
+novalidate>
+  <mat-form-field fxFlex>
+    <input
+    formControlName="name"
+    [placeholder]="'BOARD.NAME' | translate"
+    type="text"
+    matInput
+    required>
+  </mat-form-field>
+
+  <mat-form-field fxFlex>
+    <input
+    formControlName="description"
+    [placeholder]="'BOARD.DESCRIPTION' | translate"
+    type="text"
+    matInput>
+  </mat-form-field>
+
+  <br>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-slide-toggle
+    [checked]="translationsEnabled"
+    (change)="toggleTranslationsForm($event)">
+      {{ 'BOARD.CLINIC_ENABLE_TRANSLATIONS' | translate }}
+    </mat-slide-toggle>
+  </div>
+
+  <app-translated-text-input *ngIf="translationsEnabled" formControlName="translations"></app-translated-text-input>
+</form>

@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "Logs"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "Fügen Sie eine neue Sprache hinzu",
+      "DATA_POINTS": "Datenpunkttypen",
+      "EDIT_DATA_POINT_TYPE": "Daten bearbeiten Punkttyp",
+      "ENABLE_TRANSLATIONS": "Aktivieren Übersetzungen"
+    },
     "NO_ASSOCIATED_SERVICES": "Keine zugehörigen Dienste",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Aktive Kampagne Verband-Status",
@@ -718,6 +724,7 @@
     "LABELS": "Labels",
     "LIBRARY": "Digitale Bibliothek",
     "MARKETING": "Marketing",
+    "MEASUREMENTS": "Messungen",
     "MESSAGES": "Mitteilungen",
     "NOTIFICATIONS": "Benachrichtigungen",
     "ORGANIZATIONS": "Organisationen",

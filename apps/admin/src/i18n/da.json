@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "Logfiler"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "Tilføj et nyt sprog",
+      "DATA_POINTS": "Datapunkt Typer",
+      "EDIT_DATA_POINT_TYPE": "Rediger data Pointtype",
+      "ENABLE_TRANSLATIONS": "Aktiver Oversættelser"
+    },
     "NO_ASSOCIATED_SERVICES": "Ingen tilknyttede tjenester",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Aktiv kampagne Association status",
@@ -718,6 +724,7 @@
     "LABELS": "Faser",
     "LIBRARY": "Digitalt Bibliotek",
     "MARKETING": "Marketing",
+    "MEASUREMENTS": "Målinger",
     "MESSAGES": "Beskeder",
     "NOTIFICATIONS": "Notifikationer",
     "ORGANIZATIONS": "Organisationer",

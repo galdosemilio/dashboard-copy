@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "Entradas"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "Adicione uma nova língua",
+      "DATA_POINTS": "Tipos de pontos de dados",
+      "EDIT_DATA_POINT_TYPE": "Editar Dados Tipo de Ponto",
+      "ENABLE_TRANSLATIONS": "Ativar Traduções"
+    },
     "NO_ASSOCIATED_SERVICES": "Não serviços associados",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Estado Activo Associação Campanha",
@@ -718,6 +724,7 @@
     "LABELS": "Fases",
     "LIBRARY": "Livraria Digital",
     "MARKETING": "Marketing",
+    "MEASUREMENTS": "Medidas",
     "MESSAGES": "Mensagens",
     "NOTIFICATIONS": "Notificações",
     "ORGANIZATIONS": "Organizações",

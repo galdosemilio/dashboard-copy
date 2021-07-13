@@ -81,6 +81,7 @@ import {
   MeetingsDatabase
 } from './schedule'
 import { CcrPermissionFilterComponent } from './permission-filter'
+import { TranslatedTextInputComponent } from './translated-text-input'
 
 export {
   AccountPhaseListComponent,
@@ -136,6 +137,7 @@ export {
   MatMomentDateModule,
   RPMComponent,
   SequenceSearchComponent,
+  TranslatedTextInputComponent,
   UserCardComponent,
   UserSearchComponent,
   WalkthroughComponent,
@@ -207,6 +209,7 @@ export const CmpComponents = [
   UserSearchComponent,
   WalkthroughComponent,
   ScheduleListTableComponent,
+  TranslatedTextInputComponent,
   DeleteRecurringMeetingDialog,
   SingleAddDialog,
   RecurringAddDialog,

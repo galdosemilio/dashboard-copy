@@ -17,9 +17,9 @@ interface CcrDropzoneOptions {
   isLongDroppable?: boolean
 }
 
-export interface CcrDropEvent {
-  drag: any
-  drop: any
+export interface CcrDropEvent<T = unknown> {
+  drag: T
+  drop: T
 }
 
 @Directive({

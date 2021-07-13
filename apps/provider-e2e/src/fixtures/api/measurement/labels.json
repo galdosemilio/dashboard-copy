@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "sortOrder": 6,
+      "name": "Composition",
+      "translations": [],
+      "status": "active",
+      "organization": { "id": "30" }
+    },
+    {
+      "id": "19",
+      "sortOrder": 26,
+      "name": "Label with Translations",
+      "translations": [
+        {
+          "locale": "de",
+          "name": "Ich bien",
+          "description": "Ich bien description"
+        },
+        {
+          "locale": "en",
+          "name": "In English",
+          "description": "Desc in english"
+        },
+        {
+          "locale": "es",
+          "name": "In Spanish",
+          "description": "Desc in Spanish"
+        }
+      ],
+      "status": "active",
+      "organization": { "id": "30" }
+    },
+    {
+      "id": "21",
+      "name": "Special Types",
+      "translations": [],
+      "status": "active",
+      "organization": { "id": "30" }
+    }
+  ],
+  "pagination": {}
+}

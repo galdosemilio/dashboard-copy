@@ -9,6 +9,8 @@ import {
   ClinicComponent,
   ClinicFormComponent,
   ClinicInfoComponent,
+  ClinicMeasurementLabelsComponent,
+  ClinicMeasurementsComponent,
   ClinicPhasesComponent,
   ClinicPhasesTableComponent,
   ClinicSequenceAutoEnrollmentComponent,
@@ -17,14 +19,19 @@ import {
 } from './clinic'
 import { ClinicsComponent } from './clinics.component'
 import {
+  AddDataPointTypeDialog,
+  AddMeasurementLabelDialog,
   AddSequenceAutoenrollmentDialog,
   AddSupervisingProviderDialog,
   CreateClinicDialog,
-  CreatePhaseDialog
+  CreatePhaseDialog,
+  EditMeasurementLabelDialog
 } from './dialogs'
+import { MeasurementLabelFormComponent } from './forms'
 import {
   ClinicResolver,
   ClinicsDatabase,
+  MeasurementLabelDatabase,
   SequenceAutoEnrollmentsDatabase,
   TinInputGuard
 } from './services'
@@ -34,6 +41,8 @@ import { ClinicsTableComponent } from './table/table.component'
 import { CcrOrganizationDialogs } from '@coachcare/common/services'
 
 export const ClinicsComponents = [
+  AddDataPointTypeDialog,
+  AddMeasurementLabelDialog,
   AddSupervisingProviderDialog,
   AddSequenceAutoenrollmentDialog,
   AutoThreadManagementComponent,
@@ -41,6 +50,8 @@ export const ClinicsComponents = [
   ClinicComponent,
   ClinicFormComponent,
   ClinicInfoComponent,
+  ClinicMeasurementLabelsComponent,
+  ClinicMeasurementsComponent,
   ClinicPhasesComponent,
   ClinicPhasesTableComponent,
   ClinicSupervisingProvidersTable,
@@ -50,20 +61,27 @@ export const ClinicsComponents = [
   ClinicSequenceAutoEnrollmentComponent,
   ClinicSettingsComponent,
   CreateClinicDialog,
-  CreatePhaseDialog
+  CreatePhaseDialog,
+  EditMeasurementLabelDialog,
+  MeasurementLabelFormComponent
 ]
 
 export const ClinicsEntryComponents = [
+  AddDataPointTypeDialog,
+  AddMeasurementLabelDialog,
   AddSupervisingProviderDialog,
   AddSequenceAutoenrollmentDialog,
   CreateClinicDialog,
-  CreatePhaseDialog
+  CreatePhaseDialog,
+  CreatePhaseDialog,
+  EditMeasurementLabelDialog
 ]
 
 export const ClinicsProviders = [
   CcrOrganizationDialogs,
   ClinicResolver,
   ClinicsDatabase,
+  MeasurementLabelDatabase,
   ParticipantDatabase,
   TinInputGuard,
   SequenceAutoEnrollmentsDatabase

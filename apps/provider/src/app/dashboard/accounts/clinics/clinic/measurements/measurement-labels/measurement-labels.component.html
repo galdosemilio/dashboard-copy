@@ -1,0 +1,124 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <ccr-datasource-overlay [source]="source">
+    <div class="ccr-table ccr-expand-table ccr-table-stats">
+      <div class="ccr-expandable-table">
+        <table>
+          <thead>
+            <th [class.large-padding-left]="reordering" class="id-header">{{ 'GLOBAL.ID' | translate }}</th>
+            <th>{{ 'BOARD.NAME' | translate }}</th>
+            <th>{{ 'BOARD.DESCRIPTION' | translate }}</th>
+            <th>{{ 'BOARD.UNIT' | translate }}</th>
+            <th>{{ 'BOARD.VISIBILITY' | translate }}</th>
+            <th>{{ 'BOARD.BOUNDS' | translate }}</th>
+            <th class="ccr-text-center">{{ 'BOARD.ACTIONS' | translate }}</th>
+          </thead>
+          <tbody>
+            <tr
+            *ngFor="let row of rows; let i = index;"
+            [ccrDraggable]="{ data: row, isDraggable: reordering }"
+            [ccrDropzone]="{ data: row, isDroppable: reordering, isLongDroppable: reordering }"
+            (ccrDrop)="onDropRow($event)"
+            (ccrLongDrop)="onDropRow($event)"
+            class="level{{row.level}}"
+            [ngClass]="{
+              'row-even': i % 2 === 0,
+              'row-odd': i % 2 === 1,
+              'hidden': row.isHidden,
+              'row-expanded': row.isExpanded,
+              'row-nested': row.level > 0,
+              'row-bottom-border': row.level > 1
+            }">
+              <td style="width: 70px;">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                  <mat-icon
+                  *ngIf="reordering"
+                  [class.medium-margin-left]="reordering && row.level > 0"
+                  class="drag-handle drag-icon">
+                    reorder
+                  </mat-icon>
+                  <i
+                  *ngIf="row.level === 0 && !row.isEmpty"
+                  [class.active]="row.isExpanded"
+                  (click)="toggleRow(row)"
+                  aria-hidden="true"
+                  class="material-icons dropdown-icon">
+                  </i>
+                  <span
+                  [class.medium-margin-left]="!reordering && row.isEmpty"
+                  [class.large-margin-left]="reordering && row.isEmpty && row.level === 0">
+                    {{ row.id }}
+                  </span>
+                </div>
+              </td>
+              <td>
+                <span *ngIf="row.level === 0">{{ row.name }}</span>
+                <span *ngIf="row.level === 1">{{ row.type.name }}</span>
+              </td>
+              <td [attr.colspan]="row.level === 0 ? 4 : 1">
+                <span *ngIf="row.level === 0">{{ row.description }}</span>
+                <span *ngIf="row.level === 1">
+                  {{ row.type.description }}
+                </span>
+              </td>
+              <td *ngIf="row.level === 1">
+                <div [hidden]="reordering">
+                  {{ row.type.unit?.symbol }}
+                </div>
+              </td>
+              <td *ngIf="row.level === 1">
+                <div [hidden]="reordering">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                  <span fxFlex>{{ 'VISIBILITY.EXPOSED' | translate }}:</span>
+                  <select [(ngModel)]="row.client.isExposed" (change)="updateVisibility(row, 'isExposed')">
+                    <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
+                    <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
+                  </select>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                  <span fxFlex>{{ 'VISIBILITY.MODIFIABLE' | translate }}:</span>
+                  <select [(ngModel)]="row.client.isModifiable" (change)="updateVisibility(row, 'isModifiable')">
+                    <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
+                    <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
+                  </select>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                  <span fxFlex>{{ 'VISIBILITY.DEFAULT' | translate }}:</span>
+                  <select [(ngModel)]="row.client.isDefault" (change)="updateVisibility(row, 'isDefault')">
+                    <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
+                    <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
+                  </select>
+                </div>
+                </div>
+              </td>
+              <td *ngIf="row.level === 1">
+                <div [hidden]="reordering">
+                  {{ 'BOARD.CLINIC_LOWER_BOUND' | translate }}: {{ row.parsedBounds.lower }}<br>
+                  {{ 'BOARD.CLINIC_UPPER_BOUND' | translate }}: {{ row.parsedBounds.upper }}
+                </div>
+              </td>
+              <td>
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                  <mat-icon
+                  *ngIf="row.level === 0"
+                  [class.disabled]="disableActions"
+                  (click)="showEditRowDialog(row)"
+                  class="clickable">
+                    edit
+                  </mat-icon>
+                  <mat-icon
+                  [class.disabled]="disableActions"
+                  (click)="showDeleteRowDialog(row)"
+                  class="clickable">
+                    delete
+                  </mat-icon>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ccr-datasource-overlay>
+</div>

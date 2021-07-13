@@ -77,7 +77,11 @@ import {
   Supplement,
   Timezone,
   User,
-  Zendesk
+  Zendesk,
+  MeasurementPreferenceProvider,
+  MeasurementLabelProvider,
+  MeasurementDataPointTypeProvider,
+  MeasurementDataPointProvider
 } from '@coachcare/sdk'
 
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
@@ -246,6 +250,28 @@ export const SdkApiProviders = [
     useClass: MeasurementSleep,
     deps: [measurementApiService]
   },
+  { provide: MeasurementBody, useClass: MeasurementBody, deps: [ApiService] },
+  {
+    provide: MeasurementDataPointProvider,
+    useClass: MeasurementDataPointProvider,
+    deps: [ApiService]
+  },
+  {
+    provide: MeasurementDataPointTypeProvider,
+    useClass: MeasurementDataPointTypeProvider,
+    deps: [ApiService]
+  },
+  {
+    provide: MeasurementPreferenceProvider,
+    useClass: MeasurementPreferenceProvider,
+    deps: [ApiService]
+  },
+  {
+    provide: MeasurementLabelProvider,
+    useClass: MeasurementLabelProvider,
+    deps: [ApiService]
+  },
+  { provide: MeasurementSleep, useClass: MeasurementSleep, deps: [ApiService] },
   { provide: Messaging, useClass: Messaging, deps: [ApiService] },
   {
     provide: MessagingPermission,

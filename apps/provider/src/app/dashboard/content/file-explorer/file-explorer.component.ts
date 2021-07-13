@@ -17,6 +17,11 @@ import { CcrDropEvent } from '@app/shared'
 import { AccountTypeIds } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+interface FileExplorerDropEvent {
+  id: string
+  sortOrder: number
+}
+
 @UntilDestroy()
 @Component({
   selector: 'app-content-file-explorer',
@@ -70,7 +75,7 @@ export class FileExplorerComponent implements OnDestroy, OnInit {
     if (this.events) {
       this.events.contentSorted
         .pipe(untilDestroyed(this))
-        .subscribe(async ($event: CcrDropEvent) => {
+        .subscribe(async ($event: CcrDropEvent<FileExplorerDropEvent>) => {
           try {
             const draggedIndex = this.datasource.result.findIndex(
               (element) => element.id === $event.drag.id

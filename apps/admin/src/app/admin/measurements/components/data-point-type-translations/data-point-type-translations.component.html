@@ -1,0 +1,43 @@
+<div [formGroup]="translationForm" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <div
+  *ngFor="let translation of translations; let i = index;"
+  [formGroupName]="i"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="10px">
+      <div class="lang-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <p fxFlex>{{resolveLangFromValue(translationForm.controls[i]?.value).nativeName}}</p>
+        <div fxFlex="10%" fxLayout="row" fxLayoutAlign="end center">
+          <mat-icon (click)="onRemoveLanguage(i)" class="clickable language-remove">clear</mat-icon>
+      </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+          <input
+          [placeholder]="'GLOBAL.NAME' | translate"
+          formControlName="name"
+          matInput
+          required
+          type="text">
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+          <input
+          [placeholder]="'GLOBAL.DESCRIPTION' | translate"
+          formControlName="description"
+          matInput
+          type="text">
+        </mat-form-field>
+      </div>
+  </div>
+
+  <div [formGroup]="addLangForm" class="lang-selector" fxLayout="row" fxLayoutAlign="stretch center">
+    <mat-form-field fxFlex>
+        <mat-select formControlName="language">
+            <mat-option value="">{{ 'ADMIN.MEAS.ADD_NEW_LANGUAGE' | translate }}</mat-option>
+            <mat-option *ngFor="let lang of resolveSelectableLangs()" [value]="lang.code">{{ lang.nativeName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 export * from './clinics.criteria'
 export * from './clinics.database'
 export * from './clinics.datasource'
+export * from './measurement-label'
 export * from './picker.datasource'
 export * from './resolvers'
 export * from './guards'

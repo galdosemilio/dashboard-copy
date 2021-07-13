@@ -32,6 +32,13 @@ export const routes: Routes = [
           import('./labels/labels.module').then((m) => m.LabelsModule)
       },
       {
+        path: 'measurements',
+        loadChildren: () =>
+          import('./measurements/measurements.module').then(
+            (m) => m.MeasurementsModule
+          )
+      },
+      {
         path: 'reports',
         loadChildren: () =>
           import('./reports/reports.module').then((m) => m.ReportsModule)

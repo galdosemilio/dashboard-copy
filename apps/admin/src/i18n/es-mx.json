@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "Logs"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "Añadir un Nuevo Idioma",
+      "DATA_POINTS": "Tipos de Datos",
+      "EDIT_DATA_POINT_TYPE": "Editar Tipo de Dato",
+      "ENABLE_TRANSLATIONS": "Habilitar Traducciones"
+    },
     "NO_ASSOCIATED_SERVICES": "No hay servicios asociados",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Estado de Asociación de Active Campaign",
@@ -718,6 +724,7 @@
     "LABELS": "Fases",
     "LIBRARY": "Biblioteca Digital",
     "MARKETING": "Marketing",
+    "MEASUREMENTS": "Medidas",
     "MESSAGES": "FAQs",
     "NOTIFICATIONS": "Notificaciones",
     "ORGANIZATIONS": "Organizaciones",

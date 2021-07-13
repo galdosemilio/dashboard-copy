@@ -1,0 +1,17 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center">
+    <h2 fxFlex="0 0 auto">{{ 'SIDENAV.MEASUREMENTS' | translate }}</h2>
+  </div>
+</div>
+
+<ng-container>
+<div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch" fxLayoutGap="5px">
+  <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['data-points']">
+    {{ 'ADMIN.MEAS.DATA_POINTS' | translate }}
+  </a>
+</div>
+</ng-container>
+
+<div class="ccr-subcomponent">
+  <router-outlet></router-outlet>
+</div>

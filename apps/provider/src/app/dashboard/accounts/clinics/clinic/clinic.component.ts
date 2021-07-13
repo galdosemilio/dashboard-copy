@@ -14,7 +14,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { ClinicBillableServicesComponent } from './billable-services'
 
 type ClinicComponentSection =
-  | 'auto-enrollment'
+  | 'measurements'
   | 'info'
   | 'phases'
   | 'settings'

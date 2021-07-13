@@ -1,0 +1,475 @@
+{
+  "data": [
+    {
+      "id": "6",
+      "sortOrder": 2,
+      "type": {
+        "id": "6",
+        "name": "Blood pressure - systolic",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "mmHg", "display": "mmHg" },
+        "bound": { "lower": 21, "upper": 501 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "2",
+        "name": "Vitals",
+        "status": "active",
+        "sortOrder": 12,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "7",
+      "sortOrder": 3,
+      "type": {
+        "id": "7",
+        "name": "Heart rate",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "bpm", "display": "bpm" },
+        "bound": { "lower": 11, "upper": 651 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "2",
+        "name": "Vitals",
+        "status": "active",
+        "sortOrder": 12,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "4",
+      "sortOrder": 15,
+      "type": {
+        "id": "46",
+        "name": "BMI",
+        "span": { "id": "1", "name": "Instant" },
+        "bound": { "lower": 1, "upper": 200001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1000,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "2",
+      "sortOrder": 16,
+      "type": {
+        "id": "3",
+        "name": "Body fat",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "%", "display": "%" },
+        "bound": { "lower": 1001, "upper": 100001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1000,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "1",
+      "sortOrder": 18,
+      "type": {
+        "id": "1",
+        "name": "Weight",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "g", "display": "g" },
+        "bound": { "lower": 1, "upper": 750001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "3",
+      "sortOrder": 19,
+      "type": {
+        "id": "4",
+        "name": "Fat mass weight",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "g", "display": "g" },
+        "bound": { "lower": 1, "upper": 750001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "12",
+      "sortOrder": 21,
+      "type": {
+        "id": "8",
+        "name": "Blood oxygen level",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "%", "display": "%" },
+        "bound": { "lower": 1001, "upper": 100001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1000,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "11",
+      "sortOrder": 22,
+      "type": {
+        "id": "15",
+        "name": "Arm circumference",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "mm", "display": "mm" },
+        "bound": { "lower": 1, "upper": 1001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "5",
+      "type": {
+        "id": "5",
+        "name": "Blood pressure - diastolic",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "mmHg", "display": "mmHg" },
+        "bound": { "lower": 21, "upper": 501 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "2",
+        "name": "Vitals",
+        "status": "active",
+        "sortOrder": 12,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "16",
+      "type": {
+        "id": "9",
+        "name": "Bone weight",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "g", "display": "g" },
+        "bound": { "lower": 1, "upper": 120001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "8",
+        "name": "This is a new measurement label",
+        "status": "inactive",
+        "sortOrder": 12,
+        "description": "A new description",
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "20",
+      "type": {
+        "id": "12",
+        "name": "Visceral fat percentage",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "%", "display": "%" },
+        "bound": { "lower": 1001, "upper": 100001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1000,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "26",
+      "type": {
+        "id": "27",
+        "name": "HBA1c",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "%", "display": "%" },
+        "bound": { "lower": 1001, "upper": 100001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1000,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "13",
+        "name": "One with translations",
+        "status": "active",
+        "sortOrder": 17,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": {
+        "isExposed": false,
+        "isModifiable": false,
+        "isDefault": false
+      }
+    },
+    {
+      "id": "8",
+      "type": {
+        "id": "31",
+        "name": "Temperature",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "C", "display": "C" },
+        "bound": { "lower": 1001, "upper": 5001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 100,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "2",
+        "name": "Vitals",
+        "status": "active",
+        "sortOrder": 12,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "21",
+      "type": {
+        "id": "43",
+        "name": "Visceral fat - Tanita",
+        "span": { "id": "1", "name": "Instant" },
+        "bound": { "lower": 1, "upper": 61 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "22",
+      "type": {
+        "id": "45",
+        "name": "Visceral adipose tissue",
+        "span": { "id": "1", "name": "Instant" },
+        "unit": { "symbol": "ml", "display": "ml" },
+        "bound": { "lower": 1, "upper": 80001 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "1",
+        "name": "Measurements",
+        "status": "active",
+        "sortOrder": 6,
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "23",
+      "type": {
+        "id": "47",
+        "name": "Steps",
+        "span": { "id": "2", "name": "Date" },
+        "bound": { "lower": 1, "upper": 100000 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "description": "Number of steps taken on a day",
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "21",
+        "name": "Energy",
+        "status": "active",
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "24",
+      "type": {
+        "id": "48",
+        "name": "Sleep",
+        "span": { "id": "2", "name": "Date" },
+        "unit": { "symbol": "s", "display": "s" },
+        "bound": { "lower": 1, "upper": 86400 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "description": "Number of seconds slept per day",
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "21",
+        "name": "Energy",
+        "status": "active",
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    },
+    {
+      "id": "25",
+      "type": {
+        "id": "49",
+        "name": "Hydration",
+        "span": { "id": "2", "name": "Date" },
+        "unit": { "symbol": "ml", "display": "ml" },
+        "bound": { "lower": 1, "upper": 40000 },
+        "status": "active",
+        "graphType": "line",
+        "multiplier": 1,
+        "description": "Water consumption per day",
+        "accessibility": "public"
+      },
+      "label": {
+        "id": "21",
+        "name": "Energy",
+        "status": "active",
+        "organization": { "id": "30" }
+      },
+      "status": "active",
+      "organization": { "id": "30" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+    }
+  ],
+  "pagination": {}
+}

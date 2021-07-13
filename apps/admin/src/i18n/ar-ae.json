@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "Logs"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "Add a New Language",
+      "DATA_POINTS": "أنواع البيانات نقطة",
+      "EDIT_DATA_POINT_TYPE": "تحرير بيانات نوع نقطة",
+      "ENABLE_TRANSLATIONS": "تمكين التراجم"
+    },
     "NO_ASSOCIATED_SERVICES": "لا الخدمات المرتبطة بها",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "مركز جمعية حملة نشطة",
@@ -718,6 +724,7 @@
     "LABELS": "المراحل",
     "LIBRARY": "المكتبة الرقمية",
     "MARKETING": "تسويق",
+    "MEASUREMENTS": "قياسات",
     "MESSAGES": "الرسائل",
     "NOTIFICATIONS": "إشعارات",
     "ORGANIZATIONS": "Organizations",

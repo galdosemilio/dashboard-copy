@@ -112,6 +112,9 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '4.0/organization/3378/preference?id=3378**', {
     fixture: 'api/organization/getPreference'
   })
+  cy.intercept('GET', '1.0/measurement/data-point/type?**', {
+    fixture: 'api/measurement/getDataPointType'
+  })
   cy.intercept('GET', '1.0/message/preference/organization?organization=**', {
     fixture: 'api/organization/getPreferenceMessage'
   })

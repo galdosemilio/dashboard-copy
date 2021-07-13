@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "Accessi"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "Aggiungi una nuova lingua",
+      "DATA_POINTS": "Tipi di dati Point",
+      "EDIT_DATA_POINT_TYPE": "Modifica Dati Tipo Point",
+      "ENABLE_TRANSLATIONS": "Abilita Translations"
+    },
     "NO_ASSOCIATED_SERVICES": "Non ci sono servizi associati",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Attivo Stato Associazione campagna",
@@ -718,6 +724,7 @@
     "LABELS": "Fasi",
     "LIBRARY": "Biblioteca Digitale",
     "MARKETING": "Marketing",
+    "MEASUREMENTS": "Misure",
     "MESSAGES": "Messaggi",
     "NOTIFICATIONS": "Notifiche",
     "ORGANIZATIONS": "Organizzazioni",

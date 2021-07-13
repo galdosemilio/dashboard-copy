@@ -1,0 +1,87 @@
+@import 'variables';
+
+table {
+  width: 100%;
+
+  th {
+    line-height: 32px;
+
+    &.id-header {
+      padding-left: 43px;
+
+      &.large-padding-left {
+        padding-left: 70px;
+      }
+    }
+  }
+
+  th,
+  td {
+    height: 100%;
+    min-height: 32px;
+    text-align: left;
+    padding: 0 1em;
+
+    .dropdown-icon {
+      cursor: pointer;
+      position: relative;
+      transition: all 0.1s ease-in-out;
+
+      &:before {
+        content: 'keyboard_arrow_down';
+      }
+
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  tbody {
+    & > tr.ccr-long-dragover {
+      border-top: 5px solid var(--primary);
+    }
+  }
+
+  thead,
+  tbody {
+    & > th,
+    & > tr > td {
+      font-size: 14px;
+
+      mat-icon.disabled {
+        color: mat-color($ccr-foreground, divider);
+        cursor: default !important;
+      }
+    }
+  }
+}
+
+.ccr-expandable-table {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.ccr-text-center {
+  text-align: center !important;
+}
+
+.drag-handle {
+  color: mat-color($ccr-foreground, divider);
+  cursor: pointer;
+}
+
+.medium-margin-left {
+  margin-left: 30px;
+}
+
+.large-margin-left {
+  margin-left: 29px;
+}
+
+.row-expanded {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+}

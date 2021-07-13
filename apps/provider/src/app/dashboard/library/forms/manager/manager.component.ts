@@ -30,6 +30,12 @@ import { FormDisplayService } from '../services'
 import { auditTime, takeUntil } from 'rxjs/operators'
 import * as moment from 'moment'
 
+interface ManagerDropEvent {
+  index: number
+  question: FormQuestion
+  section: FormSection
+}
+
 @UntilDestroy()
 @Component({
   selector: 'app-library-form-manager',
@@ -354,7 +360,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
 
     this.events.moveQuestion
       .pipe(untilDestroyed(this))
-      .subscribe((moveEvent: CcrDropEvent) => {
+      .subscribe((moveEvent: CcrDropEvent<ManagerDropEvent>) => {
         if (this.selectedQuestion) {
           this.stageQuestionChanges()
         }
@@ -416,7 +422,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
 
     this.events.moveQuestionIntoSection
       .pipe(untilDestroyed(this))
-      .subscribe((moveEvent: CcrDropEvent) => {
+      .subscribe((moveEvent: CcrDropEvent<ManagerDropEvent>) => {
         if (this.selectedQuestion) {
           this.stageQuestionChanges()
         }

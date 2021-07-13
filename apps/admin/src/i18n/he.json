@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "רישומי"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "הוסף שפה חדשה",
+      "DATA_POINTS": "סוגי נקודות נתונים",
+      "EDIT_DATA_POINT_TYPE": "עריכת נתונים פוינט סוג",
+      "ENABLE_TRANSLATIONS": "אפשר תרגומים"
+    },
     "NO_ASSOCIATED_SERVICES": "אין שירותים הקשורים",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "סטטוס קמפיין האגודה Active",
@@ -718,6 +724,7 @@
     "LABELS": "תווית",
     "LIBRARY": "ספרייה דיגיטלית",
     "MARKETING": "שיווק",
+    "MEASUREMENTS": "מידות",
     "MESSAGES": "הודעות",
     "NOTIFICATIONS": "עדכונים",
     "ORGANIZATIONS": "מרפאות",

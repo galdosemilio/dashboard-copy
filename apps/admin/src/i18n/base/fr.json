@@ -19,6 +19,12 @@
     "LOGS": {
       "_TITLE": "Connexions"
     },
+    "MEAS": {
+      "ADD_NEW_LANGUAGE": "Ajouter une nouvelle langue",
+      "DATA_POINTS": "Types de points de données",
+      "EDIT_DATA_POINT_TYPE": "Modifier les données Type de point",
+      "ENABLE_TRANSLATIONS": "Activer Traductions"
+    },
     "NO_ASSOCIATED_SERVICES": "Aucun service associés",
     "ORGS": {
       "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Campagne active Statut Association",
@@ -718,6 +724,7 @@
     "LABELS": "Phases",
     "LIBRARY": "Bibliothèque digitale",
     "MARKETING": "Commercialisation",
+    "MEASUREMENTS": "Des mesures",
     "MESSAGES": "Messages",
     "NOTIFICATIONS": "Notifications",
     "ORGANIZATIONS": "Organisations",

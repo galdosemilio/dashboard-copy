@@ -1,3 +1,6 @@
+export * from './add-data-point-type'
+export * from './add-measurement-label'
+export * from './edit-measurement-label'
 export * from './add-supervising-provider'
 export * from './add-sequence-auto-enrollment'
 export * from './create-clinic.dialog'

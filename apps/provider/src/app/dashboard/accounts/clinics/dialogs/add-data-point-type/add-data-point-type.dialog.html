@@ -1,0 +1,65 @@
+<div matDialogTitle>
+  <div>
+    <mat-icon>add_circle_outline</mat-icon>
+    <span>{{ 'BOARD.CLINIC_ADD_DATA_POINT_TYPE' | translate }}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content>
+  <form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  fxLayout="row"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="10px"
+  novalidate>
+    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="10px" fxFlex="50%">
+      <mat-form-field class="full-width">
+        <mat-select formControlName="label">
+          <mat-option *ngFor="let label of data.measurementLabels" [value]="label.id">
+            {{ label.name }} ({{ 'GLOBAL.ID' | translate }} {{ label.id }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-select formControlName="dataPointType">
+          <mat-option *ngFor="let type of dataPointTypes" [value]="type.id">
+            {{ type.name }} ({{ 'GLOBAL.ID' | translate }} {{ type.id }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="selectedDataPointType" class="data-type-container" fxFlex>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+          <p><strong>{{ 'BOARD.CLINIC_SELECTED_DATA_POINT_TYPE' | translate | uppercase }}</strong></p>
+          <p>{{ 'GLOBAL.ID' | translate }}: {{ selectedDataPointType.id }}</p>
+          <p>{{ 'BOARD.NAME' | translate}}: {{ selectedDataPointType.name }}</p>
+          <p>{{ 'BOARD.UNIT' | translate }}: {{ convertUnitToReadableFormat(selectedDataPointType) }}</p>
+          <p>{{ 'BOARD.CLINIC_LOWER_BOUND' | translate }}: {{ (selectedDataPointType.bound.lower / selectedDataPointType.multiplier).toFixed() }}</p>
+          <p>{{ 'BOARD.CLINIC_UPPER_BOUND' | translate }}: {{ (selectedDataPointType.bound.upper / selectedDataPointType.multiplier).toFixed() }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<mat-dialog-actions>
+  <button
+  [disabled]="form.invalid"
+  (click)="onSubmit()"
+  class="ccr-icon-button"
+  color="primary"
+  mat-button>
+    <mat-icon>check</mat-icon> {{'GLOBAL.SAVE' | translate}}
+  </button>
+
+  <button mat-button class="ccr-icon-button" matDialogClose>
+    <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+  </button>
+</mat-dialog-actions>

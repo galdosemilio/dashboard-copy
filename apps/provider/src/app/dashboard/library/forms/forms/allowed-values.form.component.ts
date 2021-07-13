@@ -80,7 +80,7 @@ export class AllowedValuesFormComponent implements BindForm, OnDestroy, OnInit {
     )
   }
 
-  onDrop($event: CcrDropEvent): void {
+  onDrop($event: CcrDropEvent<string>): void {
     if ($event.drag === $event.drop) {
       return
     }

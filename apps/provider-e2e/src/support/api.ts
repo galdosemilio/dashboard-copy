@@ -321,6 +321,45 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('GET', '/3.0/measurement/body?**', {
     fixture: 'api/measurement/getBody'
   })
+  cy.intercept('GET', '/1.0/measurement/label?**', {
+    fixture: 'api/measurement/labels'
+  }).as('measurementLabelGetRequest')
+  cy.intercept('POST', '/1.0/measurement/label', {
+    statusCode: 204,
+    body: {}
+  }).as('measurementLabelPostRequest')
+  cy.intercept('PATCH', '/1.0/measurement/label/**', {
+    statusCode: 204,
+    body: {}
+  }).as('measurementLabelPatchRequest')
+  cy.intercept('GET', '/1.0/measurement/preference?**', {
+    fixture: fetchOverride(
+      '/1.0/measurement/preference?**',
+      'api/measurement/preference'
+    )
+  })
+  cy.intercept('POST', '/1.0/measurement/preference', {
+    statusCode: 204,
+    body: {}
+  })
+  cy.intercept('PATCH', '/1.0/measurement/preference/**', {
+    statusCode: 204,
+    body: {}
+  })
+  cy.intercept('GET', '/1.0/measurement/data-point/type?**', {
+    fixture: 'api/measurement/getDataPointType'
+  })
+  cy.intercept('GET', '/1.0/measurement/data-point/type/association?**', {
+    fixture: 'api/measurement/dataPointAssociations'
+  })
+  cy.intercept('POST', '/1.0/measurement/data-point/type/association', {
+    statusCode: 204,
+    body: {}
+  }).as('measurementDataPointTypeAssocPostRequest')
+  cy.intercept('DELETE', '/1.0/measurement/data-point/type/association/**', {
+    statusCode: 204,
+    body: {}
+  }).as('measurementDataPointTypeAssocDeleteRequest')
   cy.intercept('GET', '/2.0/available/calendar?**', {
     fixture: 'api/meeting/getAvailability'
   })

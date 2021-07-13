@@ -1,0 +1,10 @@
+@import 'variables';
+
+.data-type-container {
+  background-color: mat-color($ccr-background, app-bar);
+  padding: 10px;
+}
+
+.full-width {
+  width: 100%;
+}

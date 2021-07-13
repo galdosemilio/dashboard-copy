@@ -149,6 +149,12 @@ const admin: Array<MenuItem> = [
     icon: 'business_center'
   },
   {
+    route: 'measurements',
+    navName: _('SIDENAV.MEASUREMENTS'),
+    navRoute: '/admin/measurements',
+    icon: 'collections_bookmark'
+  },
+  {
     route: 'reports',
     navName: 'Reports',
     icon: 'bar_chart',

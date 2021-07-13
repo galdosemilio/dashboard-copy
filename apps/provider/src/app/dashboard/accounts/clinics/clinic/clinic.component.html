@@ -46,13 +46,12 @@
         </a>
 
         <a
-        [class.active]="section === 'auto-enrollment'"
-        [routerLink]="['.', { s: 'auto-enrollment' }]"
+        [class.active]="section === 'measurements'"
+        [routerLink]="['.', { s: 'measurements' }]"
         ccrLinkActive="active"
-        class="long-text-tab"
         fxFlex
         fxLayoutAlign="center center">
-        {{ 'BOARD.CLINIC_AUTOMATIC_ENROLLMENT' | translate }}
+        {{ 'GLOBAL.MEASUREMENTS' | translate }}
         </a>
 
         <a
@@ -87,8 +86,8 @@
             <app-clinic-billable-services></app-clinic-billable-services>
         </div>
 
-        <div *ngSwitchCase="'auto-enrollment'">
-            <app-clinic-sequence-auto-enrollment></app-clinic-sequence-auto-enrollment>
+        <div *ngSwitchCase="'measurements'">
+            <app-clinic-measurements></app-clinic-measurements>
         </div>
 
         <div *ngSwitchCase="'phases'">
