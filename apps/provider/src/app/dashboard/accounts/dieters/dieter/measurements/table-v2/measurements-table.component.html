@@ -1,0 +1,116 @@
+<ccr-datasource-overlay *ngIf="columns?.length; else emptyColumns" [source]="source">
+  <div class="ccr-table ccr-expand-table ccr-table-stats">
+    <div class="ccr-expandable-table">
+      <table>
+        <thead>
+          <tr>
+            <td class="date-cell">{{ 'GLOBAL.DATE' | translate }}</td>
+            <td class="device-cell">{{ 'MEASUREMENT.DEVICE' | translate }}</td>
+            <td *ngFor="let column of columns" class="common-cell" [ngClass]="{ 'wide-cell': column.id === '12' || column.id === '43' || column.id === '45' }">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <div>{{ column.name }}</div>
+                <div [ngSwitch]="column.id" fxFlex>
+                  <ccr-popup-description
+                  *ngSwitchCase="'12'"
+                  [title]="'MEASUREMENT.VISCERAL_FAT' | translate"
+                  [description]="'MEASUREMENT.VISCERAL_FAT_PERCENTAGE_ABOUT' | translate"
+                  ></ccr-popup-description>
+                  <ccr-popup-description
+                  *ngSwitchCase="'43'"
+                  isGrid="true"
+                  [gridData]="visceralFatRatingTooltip"
+                  ></ccr-popup-description>
+                  <ccr-popup-description
+                  *ngSwitchCase="'45'"
+                  [title]="'MEASUREMENT.VISCERAL_ADIP_TISSUE' | translate"
+                  [description]="'MEASUREMENT.VISCERAL_ADIP_TISSUE_ABOUT' | translate"
+                  ></ccr-popup-description>
+                </div>
+              </div>
+            </td>
+            <td class="actions-cell">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                {{ 'BOARD.ACTIONS' | translate }}
+              </div>
+            </td>
+          </tr>
+        </thead>
+        <tbody *ngIf="rows?.length">
+          <tr
+          *ngFor="let row of rows; let i = index;"
+          [ngClass]="{
+            'row-even': i % 2 === 0,
+            'row-odd': i % 2 === 1
+          }">
+            <td
+            class="ccr-text-weight-bold date-cell"
+            [class.ccr-text-right]="!row.shouldShowDate"
+            [class.ccr-text-weight-normal]="!row.shouldShowDate">
+              <span>
+                {{ row.recordedAt.utc | amDateFormat:(row.shouldShowDate ? 'ddd MMM D, YYYY' : 'h:mm a') }}
+              </span>
+            </td>
+            <td class="device-cell">
+              <div *ngIf="!row.shouldShowDate">
+                <span *ngIf="row.source.name; else emptyCell">{{ row.source.name }}</span>
+              </div>
+            </td>
+            <td
+            *ngFor="let column of columns"
+            class="common-cell"
+            [ngClass]="{ 'wide-cell': column.id === '12' || column.id === '43' || column.id === '45' }"
+            [ngSwitch]="column.id">
+              <div *ngIf="!row.shouldShowDate">
+                <ng-container *ngSwitchCase="'3'">
+                  <ng-container *ngTemplateOutlet="entryWithWeight; context: { row: row, column: column }"></ng-container>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'50'">
+                  <ng-container *ngTemplateOutlet="entryWithWeight; context: { row: row, column: column }"></ng-container>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'12'">
+                  <ng-container *ngTemplateOutlet="entryWithWeight; context: { row: row, column: column }"></ng-container>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'13'">
+                  <ng-container *ngTemplateOutlet="entryWithWeight; context: { row: row, column: column }"></ng-container>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'48'">
+                  <span *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
+                    {{ convertToHms(getGroupValue(row, column.id)) }} <span>{{ 'UNIT.HOURS' | translate }}</span>
+                  </span>
+                </ng-container>
+
+                <ng-container *ngSwitchDefault>
+                  <span *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
+                    {{ getGroupValue(row, column.id) | unitConvertToReadable:getGroupType(row, column.id) }}<span class="small">{{ getGroupUnit(row, column.id) }}</span>
+                  </span>
+                </ng-container>
+              </div>
+            </td>
+            <td class="actions-cell">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon *ngIf="!row.isEmpty" (click)="onDeleteGroup(row)" class="clickable">delete</mat-icon>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+</ccr-datasource-overlay>
+
+<ng-template #entryWithWeight let-row="row" let-column="column">
+  <span *ngIf="getGroupValue(row, column.id) !== null && getGroupWeightProportion(row, column.id) !== null; else emptyCell">
+    {{ getGroupWeightProportion(row, column.id) | unitConvertToReadable:getGroupType(row, '1') }}<span class="small">{{ getGroupUnit(row, '1') }}</span>
+    <span class="small">&nbsp;({{ getGroupValue(row, column.id) | unitConvertToReadable:getGroupType(row, column.id) }}%)</span>
+  </span>
+</ng-template>
+<ng-template #emptyCell>-</ng-template>
+<ng-template #emptyColumns>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <p class="empty-column-notice">{{ 'NOTIFY.ERROR.NO_DATA_POINT_FOR_LABEL' | translate }}</p>
+  </div>
+</ng-template>

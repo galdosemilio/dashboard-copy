@@ -69,11 +69,17 @@ export class ClinicMeasurementsComponent implements OnInit {
     const availableMeasurementLabels = this.source.result.filter(
       (item) => item.level === 0
     )
+
+    const usedDataPointTypes = this.source.result.filter(
+      (item) => item.level === 1
+    )
+
     this.dialog
       .open(AddDataPointTypeDialog, {
         data: {
           measurementLabels: availableMeasurementLabels,
-          hasMeasurementPreference: this.currentMeasurementPref !== undefined
+          hasMeasurementPreference: this.currentMeasurementPref !== undefined,
+          unavailableDataPointTypes: usedDataPointTypes
         } as AddDataPointTypeDialogProps,
         width: '60vw'
       })

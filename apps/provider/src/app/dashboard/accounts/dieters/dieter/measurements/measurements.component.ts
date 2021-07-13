@@ -19,6 +19,8 @@ import {
 import {
   ContextService,
   EventsService,
+  ExtendedMeasurementLabelEntry,
+  MeasurementLabelService,
   NotifierService,
   SelectedOrganization
 } from '@app/service'
@@ -31,6 +33,7 @@ import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { MeasurementChartOutput } from './chart/chart.component'
+import { MeasurementLabelEntry } from '@coachcare/sdk'
 
 export type MeasurementSections =
   | 'composition'
@@ -45,7 +48,7 @@ export type MeasurementDataElement = {
   limitEntries?: boolean
 }
 export type MeasurementConfig = {
-  [S in MeasurementSections]: {
+  [key: string]: {
     data: MeasurementDataElement[]
     columns: string[]
     allowDetail?: boolean
@@ -67,7 +70,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   aggregation: MeasurementAggregation
   allowListView = false
   components = ['composition', 'circumference', 'energy', 'food', 'vitals']
-  component: MeasurementSections = 'composition'
+  component = 'composition'
   sections: MeasurementConfig = {
     composition: {
       data: [
@@ -243,6 +246,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       useNewEndpoint: true
     }
   }
+  public selectedLabel: MeasurementLabelEntry
 
   timeframe = 'week'
   view = 'table'
@@ -252,12 +256,13 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   columns: string[]
   filteredColumns: string[] = []
   additionalColumns: string[] = []
+  useNewTable = true
   useNewEndpoint: boolean
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020245112-Viewing-a-Patient-s-Measurements'
 
   // datasource refresh trigger
-  refresh$ = new Subject<any>()
+  refresh$ = new Subject<string>()
 
   source: MeasurementDataSource | null
 
@@ -270,6 +275,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     private translator: TranslateService,
     private context: ContextService,
     private bus: EventsService,
+    private measurementLabel: MeasurementLabelService,
     private notifier: NotifierService,
     private database: MeasurementDatabase,
     private store: Store<CCRConfig>
@@ -367,7 +373,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     // component initialization
     this.route.paramMap.subscribe((params: ParamMap) => {
       // TODO add timeframe, date
-      const s = params.get('s') as MeasurementSections
+      const s = params.get('s') as string
       this.section = this.components.indexOf(s) >= 0 ? s : this.component
 
       const v = params.get('v')
@@ -455,15 +461,18 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     this.refreshData()
   }
 
-  get section(): MeasurementSections {
+  get section(): string {
     return this.component
   }
-  set section(target: MeasurementSections) {
+  set section(target: string) {
+    const sectionsTarget = this.sections[target] ?? null
     this.component = target
-    this.data = this.sections[target].data.map((data) => data.code)
-    this.useNewEndpoint = this.sections[target].useNewEndpoint
-    this.columns = this.sections[target].columns
-    this.chartColumns = this.sections[target].columns
+    this.data = sectionsTarget
+      ? sectionsTarget.data.map((data) => data.code)
+      : []
+    this.useNewEndpoint = sectionsTarget ? sectionsTarget.useNewEndpoint : false
+    this.columns = sectionsTarget ? sectionsTarget.columns : []
+    this.chartColumns = sectionsTarget ? sectionsTarget.columns : []
 
     if (this.filteredColumns && this.filteredColumns.length) {
       this.chartColumns = this.chartColumns.filter(
@@ -504,6 +513,10 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges()
   }
 
+  chartV2Changed(data: { timeframe: string }) {
+    this.timeframe = data.timeframe
+  }
+
   chartChanged(data: MeasurementChartOutput) {
     this.aggregation = data.aggregation
     this.source.measurement = data.measurement
@@ -513,6 +526,20 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     } else {
       this.refresh$.next('measurements.chartChanged')
     }
+  }
+
+  public onSelectTab(label: ExtendedMeasurementLabelEntry | string): void {
+    if (label === 'energy' || label === 'food') {
+      this.useNewTable = false
+      return
+    }
+
+    this.useNewTable = true
+
+    const labelEntry: ExtendedMeasurementLabelEntry = label as ExtendedMeasurementLabelEntry
+
+    this.selectedLabel = labelEntry
+    this.section = labelEntry.routeLink
   }
 
   refreshData(): void {

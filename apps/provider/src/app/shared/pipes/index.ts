@@ -12,6 +12,10 @@ import { NumberFormatPipe } from './number-format.pipe'
 import { NumberToWeekdayPipe } from './num-to-weekday.pipe'
 import { UnitConversionPipe } from './unit-conversion.pipe'
 import { UnitLabelPipe } from './unit-label.pipe'
+import {
+  UnitConvertFromReadablePipe,
+  UnitConvertToReadablePipe
+} from './unit-conversion'
 
 export const Pipes = [
   AbsoluteValuePipe,
@@ -27,5 +31,7 @@ export const Pipes = [
   NumberFormatPipe,
   NumberToWeekdayPipe,
   UnitConversionPipe,
+  UnitConvertFromReadablePipe,
+  UnitConvertToReadablePipe,
   UnitLabelPipe
 ]

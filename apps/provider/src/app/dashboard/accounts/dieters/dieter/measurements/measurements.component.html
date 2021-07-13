@@ -6,25 +6,11 @@
 </p>
 
 <div class="ccr-container-mini" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>
-  <ul class="ccr-tabs-center" fxLayout="row" fxLayoutAlign.gt-xs="start stretch">
-    <li *ngIf="hiddenMeasurementTabs.indexOf('composition') === -1">
-      <a mat-button [routerLink]="['.', {s: 'composition'}]" [class.active]="section === 'composition'">{{ 'GLOBAL.COMPOSITION' | translate }}</a>
-    </li>
-    <li *ngIf="hiddenMeasurementTabs.indexOf('circumference') === -1">
-      <a mat-button [routerLink]="['.', {s: 'circumference'}]" [class.active]="section === 'circumference'">{{ 'GLOBAL.CIRCUMFERENCE' | translate }}</a>
-    </li>
-    <li *ngIf="hiddenMeasurementTabs.indexOf('energy') === -1">
-      <a mat-button [routerLink]="['.', {s: 'energy'}]" [class.active]="section === 'energy'">{{ 'GLOBAL.ENERGY' | translate }}</a>
-    </li>
-    <li *ngIf="hiddenMeasurementTabs.indexOf('food') === -1">
-      <a mat-button [routerLink]="['.', {s: 'food'}]" [class.active]="section === 'food'">{{ 'GLOBAL.FOOD' | translate }}</a>
-    </li>
-    <li *ngIf="hiddenMeasurementTabs.indexOf('vitals') === -1">
-      <a mat-button [routerLink]="['.', {s: 'vitals'}]" [class.active]="section === 'vitals'">{{ 'GLOBAL.VITALS' | translate }}</a>
-    </li>
-  </ul>
+  <div fxFlex="79%">
+    <app-dieter-measurements-tabs [section]="section" (onSelect)="onSelectTab($event)"></app-dieter-measurements-tabs>
+  </div>
 
-  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>
+  <div fxFlex="20%" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>
     <a *ngIf="useNewEndpoint && allowListView && view !== 'list'" mat-button class="ccr-icon-button" fxFlex="0 0 150px" fxFlex.xs="grow" (click)="toggleView('list')">
       <mat-icon>view_headline</mat-icon>
       <span>{{ 'BOARD.VIEW_AS_LIST' | translate }}</span>
@@ -64,6 +50,7 @@ fxLayoutGap="25px">
   <ng-container *ngSwitchCase="'chart'">
 
     <app-dieter-measurements-chart
+      *ngIf="!useNewTable"
       [embedded]="true"
       [source]="source"
       [metrics]="chartColumns"
@@ -72,25 +59,40 @@ fxLayoutGap="25px">
       (change)="chartChanged($event)"
     ></app-dieter-measurements-chart>
 
+    <app-dieter-measurements-chart-v2
+      *ngIf="useNewTable"
+      [dates]="dates"
+      [embedded]="true"
+      [label]="selectedLabel"
+      [timeframe]="timeframe"
+      (onChange)="chartV2Changed($event)"
+    ></app-dieter-measurements-chart-v2>
+
   </ng-container>
 
   <ng-container *ngSwitchCase="'list'">
     <app-dieter-measurements-table
+    *ngIf="!useNewTable"
       [source]="source"
       [columns]="columns"
       [sections]="sections"
       [section]="section"
     ></app-dieter-measurements-table>
+
+    <app-dieter-measurements-table-v2 *ngIf="useNewTable && selectedLabel" [dates]="dates" [label]="selectedLabel">
+    </app-dieter-measurements-table-v2>
   </ng-container>
 
   <ng-container *ngSwitchCase="'table'">
-
     <app-dieter-measurements-table
+      *ngIf="!useNewTable"
       [source]="source"
       [columns]="columns"
       [sections]="sections"
       [section]="section"
     ></app-dieter-measurements-table>
 
+    <app-dieter-measurements-table-v2 *ngIf="useNewTable && selectedLabel" [dates]="dates" [label]="selectedLabel">
+    </app-dieter-measurements-table-v2>
   </ng-container>
 </div>

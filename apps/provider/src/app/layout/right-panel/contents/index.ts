@@ -1,4 +1,4 @@
-import { AddMeasurementsComponent } from './add-measurements/add-measurements.component'
+import { AddMeasurementsV2Component } from './add-measurements-v2'
 import { AddConsultationComponent } from './consultation/add-consultation/add-consultation.component'
 import { ConsultationComponent } from './consultation/consultation.component'
 import { ScheduleParticipantsInputComponent } from './consultation/participants-input'
@@ -12,7 +12,7 @@ import { RemindersComponent } from './reminders/reminders.component'
 
 export const RightPanelEntryComponents = [
   AddConsultationComponent,
-  AddMeasurementsComponent,
+  AddMeasurementsV2Component,
   ConsultationComponent,
   NotificationsComponent,
   NoteComponent,
@@ -26,7 +26,7 @@ export const RightPanelEntryComponents = [
 
 export {
   AddConsultationComponent,
-  AddMeasurementsComponent,
+  AddMeasurementsV2Component,
   ConsultationComponent,
   NotificationsComponent,
   NoteComponent,

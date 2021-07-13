@@ -50,6 +50,7 @@ import {
   LevlDatabase,
   LevlDataSource,
   MeasurementDatabase,
+  MeasurementDatabaseV2,
   MetricsDatabase,
   PainDatabase,
   SupplementDatabase
@@ -95,6 +96,7 @@ export const DietersProviders = [
   HydrationDatabase,
   LevlDataSource,
   MeasurementDatabase,
+  MeasurementDatabaseV2,
   MetricsDatabase,
   PainDatabase,
   SupplementDatabase,

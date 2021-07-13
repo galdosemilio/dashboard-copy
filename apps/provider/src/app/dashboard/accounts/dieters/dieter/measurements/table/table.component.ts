@@ -123,7 +123,7 @@ export class MeasurementTableComponent implements OnDestroy, OnInit {
     this.measurementPreference = this.context.user.measurementPreference
   }
 
-  deleteBodyMeasurement(row: any) {
+  deleteBodyMeasurement(row) {
     if (!row.device) {
       return
     }
@@ -149,7 +149,7 @@ export class MeasurementTableComponent implements OnDestroy, OnInit {
       })
   }
 
-  showMeasurementsModal(row: any) {
+  showMeasurementsModal(row) {
     if (this.sections[this.section].allowDetail) {
       this.dialog
         .open(MeasurementDetailDialog, {

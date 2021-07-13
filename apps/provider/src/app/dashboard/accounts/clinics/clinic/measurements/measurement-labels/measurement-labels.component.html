@@ -67,6 +67,7 @@
               </td>
               <td *ngIf="row.level === 1">
                 <div [hidden]="reordering">
+                <p class="visibility-subtitle">{{ 'GLOBAL.PATIENT' | translate }}</p>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
                   <span fxFlex>{{ 'VISIBILITY.EXPOSED' | translate }}:</span>
                   <select [(ngModel)]="row.client.isExposed" (change)="updateVisibility(row, 'isExposed')">
@@ -75,7 +76,7 @@
                   </select>
                 </div>
 
-                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                <div [hidden]="!row.client.isExposed" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
                   <span fxFlex>{{ 'VISIBILITY.MODIFIABLE' | translate }}:</span>
                   <select [(ngModel)]="row.client.isModifiable" (change)="updateVisibility(row, 'isModifiable')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
@@ -83,9 +84,18 @@
                   </select>
                 </div>
 
-                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                <div [hidden]="!row.client.isExposed" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
                   <span fxFlex>{{ 'VISIBILITY.DEFAULT' | translate }}:</span>
                   <select [(ngModel)]="row.client.isDefault" (change)="updateVisibility(row, 'isDefault')">
+                    <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
+                    <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
+                  </select>
+                </div>
+
+                <p class="visibility-subtitle">{{ 'GLOBAL.COACH' | translate }}</p>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                  <span fxFlex>{{ 'VISIBILITY.MODIFIABLE' | translate }}:</span>
+                  <select [(ngModel)]="row.provider.isModifiable" (change)="updateVisibility(row, 'isModifiable', 'provider')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
                   </select>

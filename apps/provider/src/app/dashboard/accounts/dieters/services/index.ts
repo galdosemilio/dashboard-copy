@@ -24,6 +24,8 @@ export * from './measurement/measurement.criteria'
 export * from './measurement/measurement.database'
 export * from './measurement/measurement.datasource'
 
+export * from './measurement-v2'
+
 export * from './metrics'
 
 export * from './pain/pain.database'

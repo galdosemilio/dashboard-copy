@@ -1,19 +1,20 @@
-add-rightpanel-measurements {
+app-rightpanel-measurements-v2 {
+  form {
+    padding: 0 15px;
+  }
+
+  input {
+    text-align: right !important;
+  }
+
+  .radio-group-container {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+
   .notes-container {
     margin-bottom: 15px;
     max-height: 35vh !important;
-  }
-
-  .action-button-container {
-    margin-bottom: 10px;
-  }
-
-  .mat-form-field.ng-invalid {
-    margin-bottom: 1em;
-  }
-
-  .notes-container {
-    max-height: 55vh;
     overflow-y: auto;
 
     mat-spinner {

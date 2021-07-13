@@ -106,17 +106,27 @@ export class ClinicMeasurementLabelsComponent implements OnInit {
 
   public async updateVisibility(
     row,
-    prop: 'isModifiable' | 'isExposed' | 'isDefault'
+    prop: 'isModifiable' | 'isExposed' | 'isDefault',
+    type: 'provider' | 'client' = 'client'
   ): Promise<void> {
     try {
-      row.client[prop] = row.client[prop] === 'true'
+      if (type === 'client') {
+        row.client[prop] = row.client[prop] === 'true'
 
-      await this.dataPointType.updateAssociation({
-        id: row.id,
-        isExposedToClient: row.client.isExposed,
-        isModifiableByClient: row.client.isModifiable,
-        isClientDefault: row.client.isDefault
-      })
+        await this.dataPointType.updateAssociation({
+          id: row.id,
+          isExposedToClient: row.client.isExposed,
+          isModifiableByClient: row.client.isModifiable,
+          isClientDefault: row.client.isDefault
+        })
+      } else {
+        row.provider[prop] = row.provider[prop] === 'true'
+
+        await this.dataPointType.updateAssociation({
+          id: row.id,
+          isModifiableByProvider: row.provider.isModifiable
+        })
+      }
 
       this.notifier.success(_('NOTIFY.SUCCESS.DATA_POINT_UPDATED'))
     } catch (error) {

@@ -1,5 +1,6 @@
 export * from './auth.guard'
 export * from './conference.guard'
+export * from './measurement-label'
 
 export * from './auth.service'
 export * from './config.service'

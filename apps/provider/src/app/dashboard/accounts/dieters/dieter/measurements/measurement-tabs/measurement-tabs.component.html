@@ -1,0 +1,20 @@
+<div class="ccr-tabs-container">
+  <ul class="ccr-tabs-center" fxLayout="row" fxLayoutAlign.gt-xs="start stretch">
+    <li *ngFor="let label of measurementLabels">
+      <a
+      mat-button
+      [class.active]="section === label.routeLink"
+      [routerLink]="['.', {s: label.routeLink}]"
+      (click)="onSelectTab(label)">
+        {{ label.name }}
+      </a>
+    </li>
+    <li *ngIf="hiddenMeasurementTabs.indexOf('food') === -1">
+      <a
+      [routerLink]="['.', {s: 'food'}]"
+      [class.active]="section === 'food'"
+      (click)="onSelectTab('food')"
+      mat-button>{{ 'GLOBAL.FOOD' | translate }}</a>
+    </li>
+  </ul>
+</div>

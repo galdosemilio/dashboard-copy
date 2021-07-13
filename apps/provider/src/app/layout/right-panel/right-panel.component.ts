@@ -11,7 +11,7 @@ import { select, Store } from '@ngrx/store'
 
 import { panelCompSelector, UILayoutState } from '@app/layout/store'
 import {
-  AddMeasurementsComponent,
+  AddMeasurementsV2Component,
   ConsultationComponent,
   NotificationsComponent,
   RemindersComponent
@@ -19,7 +19,7 @@ import {
 
 const Components = {
   addConsultation: ConsultationComponent,
-  addMeasurements: AddMeasurementsComponent,
+  addMeasurements: AddMeasurementsV2Component,
   notifications: NotificationsComponent,
   reminders: RemindersComponent
 }

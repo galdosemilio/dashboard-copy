@@ -101,66 +101,11 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
     { value: 'bmi', viewValue: _('MEASUREMENT.BMI') },
     { value: 'bodyFat', viewValue: _('MEASUREMENT.BODY_FAT') },
     { value: 'leanMass', viewValue: _('MEASUREMENT.LEAN_MASS') },
-    {
-      value: 'visceralFatPercentage',
-      viewValue: _('MEASUREMENT.VISCERAL_FAT')
-    },
-    {
-      value: 'visceralFatTanita',
-      viewValue: _('MEASUREMENT.VISCERAL_FAT_TANITA.VISCERAL_FAT_TANITA')
-    },
-    {
-      value: 'visceralAdiposeTissue',
-      viewValue: _('MEASUREMENT.VISCERAL_ADIP_TISSUE')
-    },
-    { value: 'waterPercentage', viewValue: _('MEASUREMENT.HYDRATION') },
     { value: 'steps', viewValue: _('MEASUREMENT.STEPS') },
     { value: 'average', viewValue: _('MEASUREMENT.STEP_AVERAGE') },
     { value: 'distance', viewValue: _('MEASUREMENT.DISTANCE') },
     { value: 'total', viewValue: _('MEASUREMENT.SLEEP') },
-    { value: 'sleepQuality', viewValue: _('MEASUREMENT.RESTFULNESS') },
-    { value: 'waist', viewValue: _('MEASUREMENT.WAIST') },
-    { value: 'arm', viewValue: _('MEASUREMENT.ARM') },
-    { value: 'chest', viewValue: _('MEASUREMENT.CHEST') },
-    { value: 'hip', viewValue: _('MEASUREMENT.HIP') },
-    { value: 'thigh', viewValue: _('MEASUREMENT.THIGH') },
-    { value: 'neck', viewValue: _('MEASUREMENT.NECK') },
-    { value: 'thorax', viewValue: _('MEASUREMENT.THORAX') },
-    { value: 'calories', viewValue: _('MEASUREMENT.CALORIES') },
-    { value: 'protein', viewValue: _('BOARD.PROTEIN') },
-    { value: 'carbohydrates', viewValue: _('MEASUREMENT.CARBS') },
-    { value: 'totalFat', viewValue: _('BOARD.FAT') },
-    {
-      value: 'totalCholesterol',
-      viewValue: _('MEASUREMENT.TOTAL_CHOLESTEROL')
-    },
-    { value: 'ldl', viewValue: _('MEASUREMENT.LOW_DENSITY_LIPOPROTEIN') },
-    { value: 'hdl', viewValue: _('MEASUREMENT.HIGH_DENSITY_LIPOPROTEIN') },
-    { value: 'vldl', viewValue: _('MEASUREMENT.VERY_LOW_DENSITY_LIPOPROTEIN') },
-    { value: 'triglycerides', viewValue: _('MEASUREMENT.TRIGLYCERIDES') },
-    { value: 'fastingGlucose', viewValue: _('MEASUREMENT.FASTING_GLUCOSE') },
-    { value: 'hba1c', viewValue: _('MEASUREMENT.HBA1C') },
-    { value: 'insulin', viewValue: _('MEASUREMENT.INSULIN') },
-    { value: 'hsCrp', viewValue: _('MEASUREMENT.HIGH_SENSITIVITY_C_REACTIVE') },
-    { value: 'heartRate', viewValue: _('MEASUREMENT.HEART_RATE') },
-    { value: 'temperature', viewValue: _('MEASUREMENT.TEMPERATURE') },
-    { value: 'respirationRate', viewValue: _('MEASUREMENT.RESPIRATION_RATE') },
-    {
-      value: 'bloodOxygenLevel',
-      viewValue: _('MEASUREMENT.BLOOD_OXYGEN')
-    },
-    {
-      value: 'bloodPressureString',
-      viewValue: _('MEASUREMENT.BLOOD_PRESSURE')
-    },
-    {
-      value: 'extracellularWaterToBodyWater',
-      viewValue: _('MEASUREMENT.EXTRACELLULAR_WATER')
-    },
-    { value: 'totalBodyWater', viewValue: _('MEASUREMENT.TOTAL_BODY_WATER') },
-    { value: 'visceralFatMass', viewValue: _('MEASUREMENT.VISCERAL_FAT_MASS') },
-    { value: 'insulin', viewValue: _('MEASUREMENT.INSULIN') },
-    { value: 'ketones', viewValue: _('MEASUREMENT.KETONES') }
+    { value: 'sleepQuality', viewValue: _('MEASUREMENT.RESTFULNESS') }
   ]
   measurements: SelectOptions<MeasurementSummaryData> = []
 
@@ -178,7 +123,7 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
   dates: DateNavigatorOutput = {}
 
   // refresh chart trigger
-  refresh$ = new Subject<any>()
+  refresh$ = new Subject<string | boolean>()
 
   constructor(private cdr: ChangeDetectorRef, private config: ConfigService) {}
 

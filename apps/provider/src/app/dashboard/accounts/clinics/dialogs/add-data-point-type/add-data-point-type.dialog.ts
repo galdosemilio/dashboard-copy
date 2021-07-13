@@ -17,6 +17,7 @@ import { MeasurementLabelTableEntry } from '../../services'
 export interface AddDataPointTypeDialogProps {
   hasMeasurementPreference: boolean
   measurementLabels: MeasurementLabelTableEntry[]
+  unavailableDataPointTypes: MeasurementLabelTableEntry[]
 }
 
 @UntilDestroy()
@@ -104,7 +105,12 @@ export class AddDataPointTypeDialog implements OnInit {
   private async fetchDataPointTypes(): Promise<void> {
     try {
       const dataPointTypes = await this.dataPointType.getAll({ limit: 'all' })
-      this.dataPointTypes = dataPointTypes.data
+      this.dataPointTypes = dataPointTypes.data.filter(
+        (dataPointType) =>
+          !this.data.unavailableDataPointTypes?.some(
+            (entry) => entry.id === dataPointType.id
+          )
+      )
 
       this.form.patchValue({ dataPointType: this.dataPointTypes[0].id })
       this.selectedDataPointType = this.dataPointTypes[0]

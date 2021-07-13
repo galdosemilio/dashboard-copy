@@ -1,0 +1,121 @@
+<div>
+  <h3>
+    <mat-icon>people</mat-icon>
+    <span>{{'RIGHT_PANEL.FOR_THIS_PATIENT' | translate}}</span>
+  </h3>
+
+  <h4 matSubheader *ngIf="shouldShowDaysheetButton">
+    <mat-icon>event_note</mat-icon>
+    <span>{{ 'BOARD.NOTES' | translate }}</span>
+    <ccr-popup-description
+    class="sidebar-header-placement"
+    [title]="'BOARD.NOTES' | translate"
+    [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_NOTES_DESCRIPTION' | translate"
+    ></ccr-popup-description>
+  </h4>
+
+  <div
+  *ngIf="shouldShowDaysheetButton"
+  class="items-create"
+  fxLayout="column"
+  fxLayoutAlign="center stretch"
+  fxLayoutGap="10px">
+      <button
+      (click)="showDaysheetDialog()"
+      class="ccr-icon-button"
+      color="primary"
+      mat-button
+      type="button">
+        <mat-icon>add</mat-icon>
+        {{ 'BOARD.ADD_NEW_DAYSHEET' | translate }}
+      </button>
+
+      <button
+      (click)="showNoteDialog()"
+      class="ccr-icon-button"
+      color="primary"
+      mat-button
+      type="button">
+        <mat-icon>add</mat-icon>
+        {{'BOARD.ADD_NEW_NOTE' | translate}}
+      </button>
+  </div>
+
+  <app-rightpanel-notes-container *ngIf="shouldShowDaysheetButton" [refresh$]="notesRefresh$"></app-rightpanel-notes-container>
+
+  <h4 matSubheader>
+    <mat-icon>add_circle_outline</mat-icon>
+    <span>{{ 'BOARD.NEW_MEASUREMENTS' | translate }}</span>
+  </h4>
+
+  <form fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+    <div [formGroup]="labelsForm" class="radio-group-container">
+      <mat-radio-group formControlName="label" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <mat-radio-button *ngFor="let label of labels" [value]="label.id">{{ label.name }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div
+    *ngIf="measurementForm"
+    [formGroup]="measurementForm"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="10px">
+      <div [formGroup]="labelsForm">
+        <ccr-date-input formControlName="date" [placeholder]="'GLOBAL.DATE' | translate"></ccr-date-input>
+      </div>
+
+      <div *ngFor="let assoc of typesAssoc; let i = index;" fxFlex>
+        <div *ngIf="assoc.provider.isModifiable" [ngSwitch]="assoc.type.id">
+          <div *ngSwitchCase="'48'">
+            <ccr-magnitude-input
+              [formControlName]="i"
+              [label]="'MEASUREMENT.SLEEP' | translate"
+              [magnitudes]="magnitudes">
+            </ccr-magnitude-input>
+          </div>
+
+          <div *ngSwitchDefault>
+            <mat-form-field fxFlex>
+              <input [placeholder]="assoc.type.name" [formControlName]="i" matInput type="number">
+              <span *ngIf="assoc.type.unit" matSuffix>{{ getMeasurementPreferenceUnit(assoc.type) }}</span>
+              <mat-error *ngIf="measurementForm?.controls[i].hasError('min')">{{ 'NOTIFY.ERROR.VALUE_TOO_LOW' | translate }}</mat-error>
+              <mat-error *ngIf="measurementForm?.controls[i].hasError('max')">{{ 'NOTIFY.ERROR.VALUE_TOO_HIGH' | translate }}</mat-error>
+              <mat-error *ngIf="measurementForm?.controls[i].hasError('dependencyError')">{{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: measurementForm?.controls[i].errors['dependencyError']} }}</mat-error>
+              <mat-hint
+              *ngIf="measurementForm?.controls[i].value && dataTypeInputProps[typesAssoc[i].type.id]?.hasWeightProportion && !measurementForm?.controls[i].hasError('dependencyError')">
+                {{ getWeightProportion(i) }}
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button
+      [disabled]="measurementForm?.invalid || !typesAssoc?.length"
+      (click)="onSubmit()"
+      mat-button
+      class="ccr-icon-button"
+      color="primary">
+        <mat-icon>add</mat-icon>
+        {{ 'BOARD.ADD_MEASUREMENT' | translate }}
+      </button>
+    </div>
+
+    <div
+    *ngIf="shouldShowTimezoneNotice"
+    class="timezone-notice-container"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="5px">
+      <ccr-popup-description
+        [description]="'BOARD.MEASUREMENT_TIMEZONE_NOTICE_DESCRIPTION' | translate"
+        [title]="'BOARD.MEASUREMENT_TIMEZONE_NOTICE_TITLE' | translate">
+      </ccr-popup-description>
+
+      <small>{{ 'BOARD.MEASUREMENT_TIMEZONE_NOTICE' | translate }}</small>
+    </div>
+  </form>
+</div>

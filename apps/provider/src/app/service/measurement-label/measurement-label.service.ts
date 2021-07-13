@@ -69,7 +69,9 @@ export class MeasurementLabelService {
 
       this.measurementLabels = response.data.map((label) => ({
         ...label,
-        routeLink: label.name.replace(/\s/gi, '-').toLowerCase()
+        routeLink: encodeURIComponent(
+          label.name.replace(/\s/gi, '-').toLowerCase()
+        )
       }))
       return this.measurementLabels.slice()
     } catch (error) {

@@ -36,6 +36,7 @@ import {
 } from './locale-selector'
 import { LoginHistoryComponent } from './login-history'
 import { CcrMessagesChatInfoComponent } from './messages-chat-info'
+import { CcrMagnitudeInputComponent } from './magnitude-input'
 import { CcrMessagesComponent } from './messages/messages.component'
 import { CcrLastLoginComponent } from './last-login'
 import { CcrMicLevelIndicatorComponent } from './mic-level-indicator'
@@ -169,6 +170,7 @@ export const CmpComponents = [
   // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
   CcrLastLoginComponent,
+  CcrMagnitudeInputComponent,
   CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
   CcrMicLevelIndicatorComponent,
