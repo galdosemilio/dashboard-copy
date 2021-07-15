@@ -100,8 +100,6 @@ const measurementApiService = new ApiService({
     : { enabled: false }
 })
 
-console.log({ enableThrottling: environment.enableThrottling })
-
 generalApiService.setEnvironment(environment.ccrApiEnv)
 measurementApiService.setEnvironment(environment.ccrApiEnv)
 
