@@ -33,7 +33,9 @@
       <mat-header-cell *cdkHeaderCellDef>{{ cohort.days }} {{ 'UNIT.DAYS' | translate }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ cohort.days }} {{ 'UNIT.DAYS' | translate }}</span>
-        {{ row.cohorts[i]?.change.value | unitConversion: 'composition' }} {{ 'composition' | unitLabel | translate }}
+        <span *ngIf="row.cohorts[i]; else empty">
+          {{ row.cohorts[i].change.value | unitConversion: 'composition' }} {{ 'composition' | unitLabel | translate }}
+        </span>
       </mat-cell>
     </ng-container>
 
@@ -52,3 +54,5 @@
 [pageSize]="source.pageSize"
 (page)="source.pageIndex = $event.pageIndex"
 ></ccr-paginator>
+
+<ng-template #empty>-</ng-template>

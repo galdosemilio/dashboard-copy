@@ -29,9 +29,9 @@ export class CohortWeightLossDataSource extends TableDataSource<
   ) {
     super()
 
+    this.pageSize = 25
     this.addDefault({
       type: 1,
-      mode: 'simple',
       cohorts: this.cohorts
     })
     // listen the paginator events
@@ -71,10 +71,6 @@ export class CohortWeightLossDataSource extends TableDataSource<
     return from(this.database.fetchMeasurementCohortReport(criteria))
   }
 
-  fetchSuperbill(): Promise<any> {
-    return this.database.fetchMeasurementCohortReport(this.criteria)
-  }
-
   mapResult(
     result: MeasurementCohortReportResponse
   ): Array<MeasurementCohortSegment> {
@@ -82,10 +78,6 @@ export class CohortWeightLossDataSource extends TableDataSource<
     this.total = result.pagination.next
       ? result.pagination.next + 1
       : this.criteria.offset + result.data.length
-
-    if (!result?.data?.length) {
-      return []
-    }
 
     return result.data
   }
