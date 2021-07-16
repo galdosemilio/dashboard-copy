@@ -1,6 +1,13 @@
-import { ChangeDetectorRef, Directive, HostBinding, Input } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Directive,
+  HostBinding,
+  Input,
+  OnInit
+} from '@angular/core'
 import { AccountProvider } from '@coachcare/sdk'
 import { EventsService } from '../services'
+import { sleep } from '../shared'
 
 @Directive({
   selector: 'img[ccrAvatar]',
@@ -9,11 +16,17 @@ import { EventsService } from '../services'
     '(error)': 'onError()'
   }
 })
-export class CcrAvatarDirective {
+export class CcrAvatarDirective implements OnInit {
   accountId: string
 
   @HostBinding('src')
   src: string
+
+  @Input()
+  set ccrAvatar(accountId) {
+    this.accountId = accountId
+    this.refresh()
+  }
 
   @Input()
   default = '/assets/avatar.png'
@@ -22,28 +35,39 @@ export class CcrAvatarDirective {
     private cdr: ChangeDetectorRef,
     private bus: EventsService,
     private account: AccountProvider
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
     this.bus.register('user.avatar', (id: string) => {
       if (id === this.accountId) {
         this.refresh()
-        this.cdr.detectChanges()
       }
     })
   }
 
-  @Input()
-  set ccrAvatar(accountId) {
-    this.accountId = accountId
-    this.refresh()
-  }
-
-  onError() {
+  private onError() {
     this.src = this.default
   }
 
-  async refresh() {
-    this.src =
-      (this.accountId && (await this.account.getAvatar(this.accountId)).url) ||
-      this.default
+  private async refresh(): Promise<void> {
+    try {
+      // we wait for a while after uploading it
+      await sleep(2000)
+
+      const newSrc =
+        (this.accountId &&
+          (await this.account.getAvatar(this.accountId)).url) ||
+        this.default
+
+      this.setSrc(`${newSrc}`)
+    } catch (error) {
+      console.log(error)
+      this.onError()
+    }
+  }
+
+  private setSrc(src: string): void {
+    this.src = src
+    this.cdr.detectChanges()
   }
 }

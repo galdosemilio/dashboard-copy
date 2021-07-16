@@ -11,14 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { resolveConfig } from '@app/config/section'
 import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
-import {
-  _,
-  BindForm,
-  BINDFORM_TOKEN,
-  getInputFactor,
-  sleep,
-  unitConversion
-} from '@app/shared'
+import { _, BindForm, BINDFORM_TOKEN, getInputFactor, sleep } from '@app/shared'
 import { PackageSelectorProps } from '@app/shared/components/package-selector/models'
 import { Package } from '@app/shared/components/package-table/models/package.model'
 import { PackageDatabase } from '@app/shared/components/package-table/services/package.database'
