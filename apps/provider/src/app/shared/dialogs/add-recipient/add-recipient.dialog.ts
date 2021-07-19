@@ -227,7 +227,10 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     }
   }
 
-  private calcDelayedDate(serverDelay: string): string {
+  private calcDelayedDate(
+    serverDelay: string,
+    resolution: 'full' | 'onlyHours' = 'full'
+  ): string {
     const splitServerDelay = serverDelay.split(/\s/)
     let hourAmount
     let daysAmount
@@ -252,9 +255,13 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
         'day'
       )
     }
-    this.delayAcc = daysAmount
-      ? this.delayAcc.add(daysAmount, 'days')
-      : this.delayAcc
+
+    if (resolution !== 'onlyHours') {
+      this.delayAcc = daysAmount
+        ? this.delayAcc.add(daysAmount, 'days')
+        : this.delayAcc
+    }
+
     this.delayAcc = hourAmount
       ? this.delayAcc.add(hourAmount, 'hours')
       : this.delayAcc
@@ -302,7 +309,10 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     this.steps = this.stepOptions.map((state, index) => ({
       index: index + 1,
       name: state.name,
-      date: this.calcDelayedDate(state.serverDelay)
+      date: this.calcDelayedDate(
+        state.serverDelay,
+        index === 0 ? 'onlyHours' : 'full'
+      )
     }))
 
     this.executeAt =
