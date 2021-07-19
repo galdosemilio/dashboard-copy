@@ -4,6 +4,7 @@ import { filter, map } from 'rxjs/operators'
 
 type EventString =
   | 'graph.timeframe'
+  | 'graph.date-range-change'
   | 'graph.date-range'
   | 'graph.date-range-previous'
   | 'graph.date-range-next'

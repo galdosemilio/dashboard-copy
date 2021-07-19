@@ -26,17 +26,16 @@ export interface BaseData {
     accent: string
     text: string
   }
-  dataPointType?: MeasurementDataPointType
-  unit: string
+  dataPointTypes: MeasurementDataPointType[]
 }
 
 export const baseData: BaseData = {
+  dataPointTypeId: '',
   accountId: '299',
   token: '',
-  dataPointTypeId: '1',
   locale: 'en',
   timezone: 'America/Chicago',
-  timeframe: Timeframe.WEEK,
+  timeframe: Timeframe.MONTH,
   metric: 'us',
   view: Tab.LIST,
   colors: {
@@ -44,7 +43,7 @@ export const baseData: BaseData = {
     accent: '#f8b1b1',
     text: '#484848'
   },
-  unit: ''
+  dataPointTypes: []
 }
 
 export interface Modal {

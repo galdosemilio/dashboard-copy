@@ -5,7 +5,6 @@ import { api } from '@chart/service/api'
 import { DateTime } from 'luxon'
 import {
   convertToReadableFormat,
-  convertUnitToPreferenceFormat,
   MeasurementDataPointAggregate
 } from '@coachcare/sdk'
 import { groupBy } from 'lodash'
@@ -29,11 +28,12 @@ export class GraphElement extends CcrElement {
   private chart
   private chartHeight = 400
   private chartTimeFormat = 'yyyy-MM-dd'
-  private data: GraphEntry[] = []
+  private data: GraphEntry[][] = []
   private dateRange: DateRange
   private isLoading: boolean
+  private isReady = false
   private firstTime = true
-  private lineSeries
+  private lineSeries = []
   private rangeChangeBumper = false
   private resizeChart$: Subject<void> = new Subject<void>()
   private timeframe: Timeframe
@@ -56,7 +56,11 @@ export class GraphElement extends CcrElement {
 
   afterViewInit(): void {
     this.createChart()
-    this.addLineSeries()
+
+    eventService.baseDataEvent$.subscribe(() => {
+      this.isReady = true
+      this.addLineSeries()
+    })
   }
 
   render() {
@@ -71,18 +75,25 @@ export class GraphElement extends CcrElement {
   }
 
   private addLineSeries(): void {
-    this.lineSeries = this.chart.addLineSeries({
-      priceFormat: {
-        type: 'custom',
-        precision: 1,
-        minMove: 0.5,
-        formatter: (value) => value.toFixed() + ' ' + api.baseData.unit
-      },
-      priceLineVisible: false,
-      lastValueVisible: false,
-      priceLineColor: api.baseData.colors.primary,
-      color: baseData.colors.primary,
-      lineWidth: 2
+    api.baseData.dataPointTypes.forEach((type, index) => {
+      const unit = api.unit(type)
+      const color = Object.keys(api.baseData.colors)[index]
+
+      const series = this.chart.addLineSeries({
+        priceFormat: {
+          type: 'custom',
+          precision: 1,
+          minMove: 0.5,
+          formatter: (value) => value.toFixed() + ' ' + unit
+        },
+        priceLineVisible: false,
+        lastValueVisible: false,
+        priceLineColor: api.baseData.colors[color],
+        color: api.baseData.colors[color],
+        lineWidth: 2
+      })
+
+      this.lineSeries.push(series)
     })
   }
 
@@ -99,14 +110,7 @@ export class GraphElement extends CcrElement {
       timeScale: {
         lockVisibleTimeRangeOnResize: true,
         tickMarkFormatter: (time) => {
-          const date = new Date(time.year, time.month, time.day)
-          return (
-            date.getFullYear() +
-            '/' +
-            (date.getMonth() + 1) +
-            '/' +
-            date.getDate()
-          )
+          return DateTime.now().set(time).toFormat('yyyy/MM/dd')
         }
       }
     })
@@ -120,7 +124,7 @@ export class GraphElement extends CcrElement {
 
   private async fetchMeasurements(append = true): Promise<void> {
     try {
-      if (!this.dateRange || this.isLoading) {
+      if (!this.isReady || !this.dateRange || this.isLoading) {
         return
       }
 
@@ -128,45 +132,58 @@ export class GraphElement extends CcrElement {
 
       const measurements = await api.measurementDataPoint.getAggregates({
         account: api.baseData.accountId || undefined,
-        type: [api.baseData.dataPointTypeId],
+        type: api.baseData.dataPointTypes.map((t) => t.id),
         recordedAt: this.dateRange,
         limit: 'all',
         unit: 'day'
       })
 
-      const emptyGroups = this.createEmptyDateGroups(this.dateRange)
-
-      const groupedValues = groupBy(
-        [...emptyGroups, ...measurements.data],
-        (group) => group.bucket.date
+      const measurementMaps = api.baseData.dataPointTypes.map((type) =>
+        measurements.data.filter((entry) => entry.point.type.id === type.id)
       )
 
-      const data: GraphEntry[] = Object.values(groupedValues).map((group) => {
-        const filteredGroup = group.filter(
-          (entry) => entry.point.id !== 'empty-group'
+      measurementMaps.forEach((values, index) => {
+        const emptyGroups = this.createEmptyDateGroups(this.dateRange)
+        const groupedValues = groupBy([...emptyGroups, ...values], (group) =>
+          DateTime.fromISO(group.bucket.timestamp).toFormat(
+            this.chartTimeFormat
+          )
         )
 
-        const hadEntries = filteredGroup.length > 0
+        const data: GraphEntry[] = Object.values(groupedValues).map((group) => {
+          const filteredGroup = group.filter(
+            (entry) => entry.point.id !== 'empty-group'
+          )
 
-        const lastEntry = hadEntries ? filteredGroup.pop() : group.pop()
+          const hadEntries = filteredGroup.length > 0
 
-        return {
-          time: DateTime.fromISO(lastEntry.bucket.timestamp)
-            .minus({ month: 1 })
-            .toFormat(this.chartTimeFormat),
-          value: hadEntries
-            ? convertToReadableFormat(
-                lastEntry.point.value,
-                lastEntry.point.type,
-                baseData.metric
-              )
-            : undefined
-        }
+          const lastEntry = hadEntries
+            ? filteredGroup[filteredGroup.length - 1]
+            : group[group.length - 1]
+
+          return {
+            time: DateTime.fromISO(lastEntry.bucket.timestamp).toFormat(
+              this.chartTimeFormat
+            ),
+            value: hadEntries
+              ? convertToReadableFormat(
+                  lastEntry.point.value,
+                  lastEntry.point.type,
+                  baseData.metric
+                )
+              : undefined
+          }
+        })
+
+        const initalData = this.data[index] || []
+
+        this.data[index] = append
+          ? initalData.concat(data)
+          : data.concat(initalData)
+        this.lineSeries[index].setData(
+          this.data[index].map((entry) => ({ ...entry }))
+        )
       })
-
-      this.data = append ? this.data.concat(data) : data.concat(this.data)
-
-      this.lineSeries.setData(this.data.map((entry) => ({ ...entry })))
 
       if (!this.firstTime) {
         return
@@ -211,8 +228,8 @@ export class GraphElement extends CcrElement {
       emptyGroups.push({
         bucket: {
           date: currentDate.toFormat(this.chartTimeFormat),
-          timezone: '',
-          timestamp: currentDate.toISO(),
+          timezone: api.baseData.timezone,
+          timestamp: currentDate.toUTC().toISO(),
           unit: 'day'
         },
         operation: 'last',
@@ -235,25 +252,31 @@ export class GraphElement extends CcrElement {
     return emptyGroups
   }
 
-  private getEntriesBetweenRange(dateRange: DateRange): GraphEntry[] {
-    const initialDate = DateTime.fromISO(dateRange.start).minus({ month: 1 })
-    const finalDate = DateTime.fromISO(dateRange.end).minus({ month: 1 })
+  private getEntriesBetweenRange(dateRange: DateRange): GraphEntry[][] {
+    const initialDate = DateTime.fromISO(dateRange.start)
+    const finalDate = DateTime.fromISO(dateRange.end)
 
-    return this.data.filter((entry) => {
-      const entryDate = DateTime.fromISO(entry.time)
-      return entryDate >= initialDate && entryDate <= finalDate
-    })
+    return this.data.map((entries) =>
+      entries.filter((entry) => {
+        const entryDate = DateTime.fromISO(entry.time)
+        return entryDate >= initialDate && entryDate <= finalDate
+      })
+    )
   }
 
   private hasSameDateEntry(date: DateTime): boolean {
-    return this.data.some((entry) => {
-      const entryDate = DateTime.fromISO(entry.time).plus({ month: 1 })
-      return (
-        date.hasSame(entryDate, 'day') &&
-        date.hasSame(entryDate, 'month') &&
-        date.hasSame(entryDate, 'year')
-      )
-    })
+    return this.data
+      .reduce((enties, current) => {
+        return enties.concat(current)
+      }, [])
+      .some((entry) => {
+        const entryDate = DateTime.fromISO(entry.time)
+        return (
+          date.hasSame(entryDate, 'day') &&
+          date.hasSame(entryDate, 'month') &&
+          date.hasSame(entryDate, 'year')
+        )
+      })
   }
 
   private listenToEvents(): void {
@@ -298,7 +321,9 @@ export class GraphElement extends CcrElement {
       return
     }
 
-    const barsInfo = this.lineSeries.barsInLogicalRange(newVisibleLogicalRange)
+    const barsInfo = this.lineSeries[0].barsInLogicalRange(
+      newVisibleLogicalRange
+    )
 
     const fromLogical = this.chart
       .timeScale()
@@ -310,8 +335,8 @@ export class GraphElement extends CcrElement {
     let append: boolean
 
     if (fromLogical < 0) {
-      pivotDate = DateTime.fromISO(this.data[0].time).plus({ month: 1 })
-      endDate = pivotDate.minus({ millisecond: 1 }).endOf(this.timeframe)
+      pivotDate = DateTime.fromISO(this.data[0][0].time)
+      endDate = pivotDate.minus({ [this.timeframe]: 1 }).endOf(this.timeframe)
       startDate = pivotDate
         .minus({ [this.timeframe]: 1 })
         .startOf(this.timeframe)
@@ -319,22 +344,25 @@ export class GraphElement extends CcrElement {
       append = false
 
       if (this.hasSameDateEntry(endDate)) {
-        this.reportSelectedDateRange(barsInfo)
+        this.reportSelectedDateRange()
         return
       }
     } else if (barsInfo?.barsAfter < 0) {
-      pivotDate = DateTime.fromISO(this.data[this.data.length - 1].time)
-        .plus({ month: 1 })
-        .endOf(this.timeframe)
+      pivotDate = DateTime.fromISO(
+        this.data[0][this.data[0].length - 1].time
+      ).endOf(this.timeframe)
       endDate = pivotDate.plus({ [this.timeframe]: 1 }).endOf(this.timeframe)
-      startDate = pivotDate.plus({ millisecond: 1 }).startOf(this.timeframe)
+      startDate = pivotDate
+        .plus({ [this.timeframe]: 1 })
+        .startOf(this.timeframe)
       append = true
 
       if (this.hasSameDateEntry(pivotDate) || startDate > DateTime.now()) {
-        this.reportSelectedDateRange(barsInfo)
+        this.reportSelectedDateRange()
         return
       }
     } else {
+      this.reportSelectedDateRange()
       return
     }
 
@@ -344,32 +372,36 @@ export class GraphElement extends CcrElement {
     }
 
     await this.fetchMeasurements(append)
-    this.reportSelectedDateRange(barsInfo)
+    this.reportSelectedDateRange()
   }
 
-  private reportSelectedDateRange(
-    barsInfo: { from: GraphTimeData; to: GraphTimeData } | null
-  ): void {
-    if (!barsInfo) {
+  private reportSelectedDateRange(): void {
+    const range = this.chart.timeScale().getVisibleRange()
+
+    if (!range) {
       return
     }
 
     const initial = DateTime.now()
       .set({
-        day: barsInfo.from.day,
-        month: barsInfo.from.month,
-        year: barsInfo.from.year
+        day: range.from.day,
+        month: range.from.month,
+        year: range.from.year
       })
-      .plus({ month: 1 })
       .startOf('day')
+
     const final = DateTime.now()
       .set({
-        day: barsInfo.to.day,
-        month: barsInfo.to.month,
-        year: barsInfo.to.year
+        day: range.to.day,
+        month: range.to.month,
+        year: range.to.year
       })
-      .plus({ month: 1 })
       .endOf('day')
+
+    eventService.trigger('graph.date-range-change', {
+      start: final.startOf(this.timeframe).toISO(),
+      end: final.endOf(this.timeframe).toISO()
+    })
 
     eventService.trigger(
       'graph.data',

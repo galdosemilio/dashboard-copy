@@ -1,11 +1,10 @@
-import { baseData, CcrElement, Tab } from '@chart/model'
+import { CcrElement, Tab } from '@chart/model'
 import { api } from '@chart/service/api'
 import { tabService, modalService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 import {
   MeasurementDataPointAggregate,
-  convertToReadableFormat,
-  convertUnitToPreferenceFormat
+  convertToReadableFormat
 } from '@coachcare/sdk'
 import { DateTime } from 'luxon'
 
@@ -167,14 +166,13 @@ export class ListElement extends CcrElement {
     this.isStartedItemSwipe = false
   }
 
-  async onDeleteDataPoint(id: string) {
+  async onDeleteDataPoint(item: MeasurementDataPointAggregate) {
     try {
       this.loading(true)
 
-      await api.measurementDataPoint.delete({ id })
-      modalService.close$.next()
+      await api.measurementDataPoint.deleteGroup({ id: item.point.group.id })
 
-      this.data = this.data.filter((item) => item.point.id !== id)
+      this.data = this.data.filter((t) => t.point.id !== item.point.id)
 
       if (typeof this.offset === 'number' && this.offset > 0) {
         this.offset -= 1
@@ -189,6 +187,7 @@ export class ListElement extends CcrElement {
       }
 
       window.ReactNativeWebView?.postMessage(JSON.stringify(event))
+      modalService.close$.next()
     } catch (err) {
       this.error(err)
     } finally {
@@ -212,31 +211,24 @@ export class ListElement extends CcrElement {
       const dateMoment = DateTime.fromISO(item.bucket.timestamp)
       const element = document.createElement('div')
       element.className = 'list-item'
-      const showTime = item.point.type.span.id === '2'
 
       const itemElement = document.createElement('div')
       itemElement.className = 'item'
 
-      itemElement.innerHTML = `
-        <div class='date-wrap'>
-          <p class='date-month'>
-            ${dateMoment.toFormat('MMM')}
-          </p>
-          <p class='date-day' style="color: ${api.baseData.colors.primary}">
-            ${dateMoment.toFormat('d')}
-          </p>
-        </div>
-        <div class='content'>
-          <p class='value'>${item.point.type.name}: ${convertToReadableFormat(
+      const unit = api.unit(item.point.type)
+
+      const value = convertToReadableFormat(
         item.point.value,
         item.point.type,
         api.baseData.metric
-      ).toFixed(2)}
-            ${api.baseData.unit}
+      ).toFixed(unit ? 2 : 0)
+
+      itemElement.innerHTML = `
+        <div class='content'>
+          <p class='value'>${item.point.type.name}: ${value}
+            ${unit}
           </p>
-          <p style='display: ${
-            showTime ? 'block' : 'none'
-          }'>${dateMoment.toFormat('h:mm a')}</p>
+          <p>${dateMoment.toFormat('EEE, MMM d, yyyy')}</p>
         </div>
         <p class="arrow-right">▶</p>
       `
@@ -287,7 +279,7 @@ export class ListElement extends CcrElement {
 
     document.getElementById('delete-button').addEventListener('click', () => {
       modalService.close$.next()
-      this.onDeleteDataPoint(item.point.id)
+      this.onDeleteDataPoint(item)
     })
     document
       .getElementById('close-button')
@@ -295,6 +287,7 @@ export class ListElement extends CcrElement {
   }
 
   private openDetails(item: MeasurementDataPointAggregate) {
+    const unit = api.unit(item.point.type)
     modalService.open$.next({
       title: translate('DETAILS'),
       full: true,
@@ -308,7 +301,7 @@ export class ListElement extends CcrElement {
                 item.point.type,
                 api.baseData.metric
               ).toFixed(2)}
-              ${api.baseData.unit}
+              ${unit}
             </p>
           </div>
           <div class="detail-item">
@@ -344,7 +337,7 @@ export class ListElement extends CcrElement {
 
     document
       .getElementById('delete-item')
-      .addEventListener('click', () => this.onDeleteDataPoint(item.point.id))
+      .addEventListener('click', () => this.onDeleteDataPoint(item))
   }
 
   private error(msg: string) {
@@ -375,7 +368,7 @@ export class ListElement extends CcrElement {
           end: new Date().toISOString()
         },
         unit: 'day',
-        type: [api.baseData.dataPointTypeId],
+        type: api.baseData.dataPointTypes.map((t) => t.id),
         limit: this.limit,
         offset: this.offset
       })

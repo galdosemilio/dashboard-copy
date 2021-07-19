@@ -1,6 +1,8 @@
 dashboard-graph-header {
   #graph-header {
     padding: 10px;
+    width: '100%';
+    display: flex;
 
     .header-average {
       color: var(--text);
@@ -8,7 +10,8 @@ dashboard-graph-header {
       text-transform: uppercase;
     }
 
-    .average-wrap {
+    .header-wrap {
+      flex: 1;
       align-items: flex-start;
       display: flex;
       flex-direction: column;

@@ -16,21 +16,31 @@ export class DateRangeSelectorElement extends CcrElement {
   }
 
   afterViewInit(): void {
-    document
+    // we just commented bellow for switching timeframe by arrows. because we wanted to put it back easily when we need it.
+    /* document
       .querySelector('#timeframe-left')
       .addEventListener('click', this.onClickLeft)
     document
       .querySelector('#timeframe-right')
-      .addEventListener('click', this.onClickRight)
+      .addEventListener('click', this.onClickRight) */
+
+    eventService
+      .listen<DateRange>('graph.date-range-change')
+      .subscribe((dateRange) => {
+        this.dateRange = dateRange
+        this.renderDateRange()
+      })
   }
 
   onDestroy(): void {
-    document
+    // we just commented bellow for switching timeframe by arrows. because we wanted to put it back easily when we need it.
+    /* document
       .querySelector('#timeframe-left')
       .removeEventListener('click', this.onClickLeft)
     document
       .querySelector('#timeframe-right')
       .removeEventListener('click', this.onClickRight)
+    */
   }
 
   onInit(): void {
@@ -38,15 +48,7 @@ export class DateRangeSelectorElement extends CcrElement {
   }
 
   render() {
-    this.innerHTML = `
-      <div class="date-range-container">
-        <span id="timeframe-left">◀</span>
-        <p>
-          ${this.renderDateRange()}
-        </p>
-        <span id="timeframe-right">▶</span>
-      </div>
-    `
+    this.renderDateRange()
 
     this.afterViewInit()
   }
@@ -91,24 +93,34 @@ export class DateRangeSelectorElement extends CcrElement {
     this.render()
   }
 
-  private renderDateRange(): string {
+  private renderDateRange(): void {
     const start = DateTime.fromISO(this.dateRange.start)
     const end = DateTime.fromISO(this.dateRange.end)
     const format =
       this.timeframe === Timeframe.WEEK ? 'EEE, MMM d, yyyy' : 'MMM yyyy'
-
+    let dateRangeHtml = ''
     switch (this.timeframe) {
       case Timeframe.WEEK:
       case Timeframe.YEAR:
-        return `
+        dateRangeHtml = `
         <span>${start.toFormat(format)}</span>
         <span>-</span>
         <span>${end.toFormat(format)}</span>
         `
-
+        break
       case Timeframe.MONTH:
-        return `<span>${start.toFormat(format)}</span>`
+        dateRangeHtml = `<span>${start.toFormat(format)}</span>`
+        break
     }
+
+    this.innerHTML = `
+      <div class="date-range-container">
+        <span id="timeframe-left" style="display:none">◀</span>
+        <p>
+          ${dateRangeHtml}
+        </p>
+        <span id="timeframe-right" style="display:none">▶</span>
+      </div>`
   }
 
   private updateDateRange(forward: boolean): void {

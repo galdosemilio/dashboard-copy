@@ -2,6 +2,8 @@ import { baseData, BaseData } from '@chart/model'
 import {
   ApiService,
   AuthenticationToken,
+  convertUnitToPreferenceFormat,
+  MeasurementDataPointMinimalType,
   MeasurementDataPointProvider,
   MeasurementDataPointTypeProvider
 } from '@coachcare/sdk'
@@ -53,6 +55,12 @@ export class Api {
     )
 
     return apiService
+  }
+
+  public unit(dataPointType: MeasurementDataPointMinimalType) {
+    return !dataPointType.unit
+      ? ''
+      : convertUnitToPreferenceFormat(dataPointType, api.baseData.metric)
   }
 }
 

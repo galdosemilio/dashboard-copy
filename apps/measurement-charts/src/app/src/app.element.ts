@@ -5,7 +5,7 @@ import { api } from '../service/api'
 import { eventService, tabService } from '@chart/service'
 import { Settings as LuxonSettings } from 'luxon'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
-import { convertUnitToPreferenceFormat } from '@coachcare/sdk'
+import { MeasurementDataPointType, SYNTHETIC_TYPES } from '@coachcare/sdk'
 
 export class AppElement extends HTMLElement {
   constructor() {
@@ -28,10 +28,11 @@ export class AppElement extends HTMLElement {
     }
 
     const params = new URLSearchParams(window.location.search)
+    const dataPointTypeId = params.get('dataPointTypeId')
 
     const data: BaseData = {
+      dataPointTypeId,
       token: params.get('token'),
-      dataPointTypeId: params.get('dataPointTypeId'),
       accountId: params.get('accountId') ?? undefined,
       locale: params.get('locale') ?? baseData.locale,
       timezone: params.get('timezone') ?? baseData.timezone,
@@ -45,7 +46,7 @@ export class AppElement extends HTMLElement {
         accent: params.get('accent-color') ?? baseData.colors.accent,
         text: params.get('text-color') ?? baseData.colors.text
       },
-      unit: ''
+      dataPointTypes: []
     }
 
     this.onMessage(data)
@@ -54,16 +55,24 @@ export class AppElement extends HTMLElement {
   private async onMessage(data: BaseData) {
     api.setToken(data.token)
 
-    const dataPointType = await api.measurementDataPointType.getSingle({
-      id: data.dataPointTypeId
-    })
+    const dataPointTypeIds = data.dataPointTypeId
+      ? SYNTHETIC_TYPES.find((t) => t.id === data.dataPointTypeId)
+          ?.sourceTypeIds || [data.dataPointTypeId]
+      : []
+
+    const dataPointTypes: MeasurementDataPointType[] = []
+
+    for (const id of dataPointTypeIds) {
+      const res = await api.measurementDataPointType.getSingle({
+        id
+      })
+
+      dataPointTypes.push(res)
+    }
 
     api.appendBaseData({
       ...data,
-      dataPointType,
-      unit: !dataPointType.unit
-        ? ''
-        : convertUnitToPreferenceFormat(dataPointType, data.metric)
+      dataPointTypes
     })
     this.setColorPattern()
     this.setLayout(data)
