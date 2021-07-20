@@ -81,7 +81,7 @@ export class FormsDatasource
   createFormQuestion(args: FormQuestion): Promise<FormQuestion> {
     return this.execRequest(
       this.database
-        .createFormQuestion(args)
+        .createFormQuestion({ ...args, description: args.description?.trim() })
         .pipe(
           map(
             (formQuestion: FormQuestionSingle) => new FormQuestion(formQuestion)
@@ -94,7 +94,7 @@ export class FormsDatasource
   createFormSection(args: FormSection): Promise<FormSection> {
     return this.execRequest(
       this.database
-        .createFormSection(args)
+        .createFormSection({ ...args, description: args.description?.trim() })
         .pipe(map((formSection: FormSectionSingle) => formSection))
         .toPromise()
     )
@@ -124,7 +124,7 @@ export class FormsDatasource
   updateFormQuestion(args: FormQuestion): Promise<FormQuestion> {
     return this.execRequest(
       this.database
-        .updateFormQuestion(args)
+        .updateFormQuestion({ ...args, description: args.description?.trim() })
         .pipe(
           map(
             (formQuestion: FormQuestionSingle) => new FormQuestion(formQuestion)
@@ -137,7 +137,7 @@ export class FormsDatasource
   updateFormSection(args: FormSection): Promise<FormSection> {
     return this.execRequest(
       this.database
-        .updateFormSection(args)
+        .updateFormSection({ ...args, description: args.description?.trim() })
         .pipe(map((formSection: FormSectionSingle) => formSection))
         .toPromise()
     )
