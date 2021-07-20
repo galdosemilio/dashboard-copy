@@ -7,6 +7,7 @@ import { ContextService, EventsService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { AlertsDatabase, AlertsDataSource } from './services'
+import { debounceTime } from 'rxjs/operators'
 
 @Component({
   selector: 'app-reports-alerts',
@@ -56,7 +57,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
       account: this.context.user.id,
       viewed: false
     }))
-    this.source.addOptional(this.refresh$, () => {
+    this.source.addOptional(this.refresh$.pipe(debounceTime(300)), () => {
       const k = findIndex(this.alerts, { value: this.alert })
       console.log({ alerts: this.alerts, alert: this.alert })
       return k === 0
