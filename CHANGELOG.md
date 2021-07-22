@@ -1,3 +1,18 @@
+## [1.27.1](https://github.com/coachcare/dashboard/compare/v1.27.0...v1.27.1) (2021-07-22)
+
+
+### Bug Fixes
+
+* added debounce to refresh subject [FRON-2249] ([3763693](https://github.com/coachcare/dashboard/commit/37636930a58efb8afd192f0e4ede3bad02fb85bc))
+* adjusted cohort fetching and empty cohort display [FRON-2243] ([00ed233](https://github.com/coachcare/dashboard/commit/00ed233f4eccb08985df946c65e8cbf0d914019c))
+* adjusted offset calculation on table [IDEA-894] ([4ecf8da](https://github.com/coachcare/dashboard/commit/4ecf8da351878bad5d5a69ca072abd778949e578))
+* adjusted question and section edition [FRON-2239] ([972f475](https://github.com/coachcare/dashboard/commit/972f475c8b3ddf9275e70a5cf9df7e1fe9020ca8))
+* adjusted updated avatar fetching logic [FRON-2242] ([1c6b72b](https://github.com/coachcare/dashboard/commit/1c6b72bd71657e2291dfb4ef8f63912d5a3146d7))
+* allowed enroll on the same day [IDEA-893] ([cba3de5](https://github.com/coachcare/dashboard/commit/cba3de5a201ae07dd76522948108d4bea884e736))
+* remove password update test and fix clinic email test [FRON-2240] ([f34bd97](https://github.com/coachcare/dashboard/commit/f34bd974526672f780a40e88d5c463c4027fbdc3))
+* removed unnecessary console.log ([82ef2c5](https://github.com/coachcare/dashboard/commit/82ef2c5da8f2dc5c85027f25ebaa23138521c380))
+* webview chart cleanup [MOB-3150] ([1f52078](https://github.com/coachcare/dashboard/commit/1f52078196c2627f5fd16a55b271a7d4999a752c))
+
 # [1.27.0](https://github.com/coachcare/dashboard/compare/v1.26.1...v1.27.0) (2021-07-08)
 
 
