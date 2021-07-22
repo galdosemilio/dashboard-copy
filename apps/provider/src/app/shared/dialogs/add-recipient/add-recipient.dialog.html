@@ -74,7 +74,7 @@
             matInput
             required
             formControlName="startDate"
-            [min]="tomorrow"
+            [min]="today"
             [placeholder]="'SEQUENCING.START_DATE' | translate"
             [matDatepicker]="startDatePicker" readonly="true">
             <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>

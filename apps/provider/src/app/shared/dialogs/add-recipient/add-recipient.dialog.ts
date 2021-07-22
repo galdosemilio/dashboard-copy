@@ -73,7 +73,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   public state: 'form' | 'processing' = 'form'
   public stepOptions: SequenceState[] = []
   public steps: TableStep[] = []
-  public tomorrow: moment.Moment = moment().add(1, 'day')
+  public today: moment.Moment = moment()
 
   private _sequence: Sequence
   private delayAcc: moment.Moment
@@ -229,7 +229,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
 
   private calcDelayedDate(
     serverDelay: string,
-    resolution: 'full' | 'onlyHours' = 'full'
+    resolution: 'full' | 'only-hours' = 'full'
   ): string {
     const splitServerDelay = serverDelay.split(/\s/)
     let hourAmount
@@ -256,7 +256,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       )
     }
 
-    if (resolution !== 'onlyHours') {
+    if (resolution !== 'only-hours') {
       this.delayAcc = daysAmount
         ? this.delayAcc.add(daysAmount, 'days')
         : this.delayAcc
@@ -275,7 +275,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      startDate: [this.tomorrow, Validators.required],
+      startDate: [this.today, Validators.required],
       startStep: [0, Validators.required]
     })
 
@@ -311,7 +311,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       name: state.name,
       date: this.calcDelayedDate(
         state.serverDelay,
-        index === 0 ? 'onlyHours' : 'full'
+        index === 0 ? 'only-hours' : 'full'
       )
     }))
 
