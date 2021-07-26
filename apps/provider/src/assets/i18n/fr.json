@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "Déplacer ce contenu vers un autre dossier",
       "MOVING": "Déplacer",
       "NEW_FOLDER": "Nouveau dossier",
-      "NO_ADMIN_ACCESS": "Vous ne pouvez pas gérer le contenu de la bibliothèque numérique de {{ organization }} puisque vous n'êtes pas directement affecté à {{ organization }} avec des autorisations d'administrateur.",
+      "NO_ADMIN_ACCESS": "Vous n'êtes pas en mesure de gérer le contenu de la bibliothèque numérique pour {{organization}}, car vous n'avez pas d'autorisations d'administration pour {{organization}}.",
       "NO_ADMIN_ACCESS_TITLE": "Gestion de la bibliothèque numérique désactivée",
       "NO_DESCRIPTION": "Aucune description",
       "PARENT_FOLDER": "Dossier parent",

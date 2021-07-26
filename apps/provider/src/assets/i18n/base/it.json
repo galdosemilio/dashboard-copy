@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "Sposta questo contenuto in una cartella diversa",
       "MOVING": "Spostamento",
       "NEW_FOLDER": "Nuova Cartella",
-      "NO_ADMIN_ACCESS": "Non puoi gestire i contenuti della biblioteca digitale di {{ organization }} perché non sei stato direttamente assegnato a {{ organization }} con permessi da amministratore.",
+      "NO_ADMIN_ACCESS": "Non sei in grado di gestire il contenuto della biblioteca digitale per {{organization}} poiché non si dispone delle autorizzazioni di amministrazione per {{organization}}.",
       "NO_ADMIN_ACCESS_TITLE": "Gestione Biblioteca Digitale Disabilitata",
       "NO_DESCRIPTION": "Nessuna Descrizione",
       "PARENT_FOLDER": "Cartella principale",

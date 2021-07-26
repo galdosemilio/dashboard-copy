@@ -63,6 +63,10 @@ export class FormsTableComponent {
   }
 
   onCloneForm(form: Form): void {
+    if (!form.isAdmin) {
+      return
+    }
+
     const data: FormCloneDialogData = {
       form
     }
@@ -84,6 +88,10 @@ export class FormsTableComponent {
   }
 
   onDeleteForm(form: Form): void {
+    if (!form.isAdmin) {
+      return
+    }
+
     this.onDelete.emit(form)
   }
 
@@ -92,7 +100,7 @@ export class FormsTableComponent {
   }
 
   onShowForm(form: Form): void {
-    if (form.isAdmin) {
+    if (form.isAdmin && form.canFetchSubmissions) {
       this.router.navigate([form.id, 'edit'], { relativeTo: this.route })
     }
   }

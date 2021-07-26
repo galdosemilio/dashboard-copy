@@ -96,7 +96,6 @@ export class FileExplorerDatasource extends TableDataSource<
           sortOrder: fileExplorerSortOrder,
           isAdmin:
             this.context.organization.permissions.admin &&
-            this.context.organization.isDirect &&
             perms[r.organization.id]
         },
         opts

@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "Verschieben Sie diesen Inhalt Artikel in einen anderen Ordner",
       "MOVING": "Verschieben um",
       "NEW_FOLDER": "Neuer Ordner",
-      "NO_ADMIN_ACCESS": "Sie können den Inhalt der digitalen Bibliothek für {{ organization }} nicht verwalten, da Ihnen für {{ organization }} keine Administratorrechte zugeordnet wurden.",
+      "NO_ADMIN_ACCESS": "Sie können digitale Bibliotheksinhalte nicht für {{organization}} nicht verwalten.",
       "NO_ADMIN_ACCESS_TITLE": "Verwaltung digitaler Bibliotheken deaktiviert",
       "NO_DESCRIPTION": "Keine Beschreibung",
       "PARENT_FOLDER": "Übergeordneter Ordner",

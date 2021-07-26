@@ -11,7 +11,11 @@ import {
   FormSubmissionsDatabase,
   FormSubmissionsDatasource
 } from '@app/dashboard/library/forms/services'
-import { ContextService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  NotifierService,
+  SelectedOrganization
+} from '@app/service'
 import { generateCSV } from '@app/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import * as moment from 'moment'
@@ -28,7 +32,8 @@ export class FormSubmissionsComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
 
-  public currentOrg: any
+  public canSeeSubmissions = false
+  public currentOrg: SelectedOrganization
   public hasSubmissions = false
   public source: FormSubmissionsDatasource
   public title: string
@@ -57,7 +62,6 @@ export class FormSubmissionsComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.currentOrg = this.context.organization
     this.source = new FormSubmissionsDatasource(this.database, this.paginator)
     this.source.addDefault({
       form: this.formId,
@@ -79,6 +83,13 @@ export class FormSubmissionsComponent implements OnDestroy, OnInit {
       .subscribe(
         (submissions) => (this.hasSubmissions = submissions.length > 0)
       )
+
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
+      this.currentOrg = org
+      this.canSeeSubmissions =
+        this.currentOrg.permissions.viewAll &&
+        this.currentOrg.permissions.allowClientPhi
+    })
   }
 
   public async onGenerateCSV() {

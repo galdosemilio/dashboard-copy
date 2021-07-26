@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "Mover este item de conteúdo para uma pasta diferente",
       "MOVING": "Movendo",
       "NEW_FOLDER": "Nova Pasta",
-      "NO_ADMIN_ACCESS": "Não tem permissão para gerir o conteúdo de biblioteca digital da {{ organization }} porque não está diretamente associado à{{ organization }} com permissões administrativas.",
+      "NO_ADMIN_ACCESS": "Você não é capaz de gerenciar o conteúdo da biblioteca digital para {{organization}} desde que você não tem permissões de administrador para {{organization}}.",
       "NO_ADMIN_ACCESS_TITLE": "Gestão de Biblioteca Digital Desativada",
       "NO_DESCRIPTION": "Sem Descrição",
       "PARENT_FOLDER": "Pasta Pai",

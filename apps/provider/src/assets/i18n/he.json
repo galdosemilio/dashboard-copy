@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "העברת התוכן לתיקייה אחרת",
       "MOVING": "הזזה",
       "NEW_FOLDER": "תיקיה חדשה",
-      "NO_ADMIN_ACCESS": "אין באפשרותך לנהל תוכן ספריה דיגיטלית עבור {{ organization }}, מכיוון שאינך מוקצה ישירות ל - {{ organization }} עם הרשאות מנהל.",
+      "NO_ADMIN_ACCESS": "אתה לא יכול לנהל תוכן ספריה דיגיטלית עבור {{organization}} מאז אין לך הרשאות מנהל עבור {{organization}}.",
       "NO_ADMIN_ACCESS_TITLE": "ניהול ספריה דיגיטלית מושבת",
       "NO_DESCRIPTION": "אין תיאור",
       "PARENT_FOLDER": "תיקיית אב",

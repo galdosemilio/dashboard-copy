@@ -57,7 +57,7 @@
             </div> -->
             <button
             (click)="createFolder()"
-            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            [disabled]="!organization || !(organization.permissions.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -67,7 +67,7 @@
             </button>
             <button
             (click)="createContent()"
-            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            [disabled]="!organization || !(organization.permissions.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -79,7 +79,7 @@
             <button
             *ngIf="mode === 'digital-library'"
             (click)="insertForm()"
-            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            [disabled]="!organization || !(organization.permissions.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -90,7 +90,7 @@
             <button
             *ngIf="mode === 'digital-library'"
             (click)="openBatchCloneDialog()"
-            [disabled]="!organization || !(organization.permissions.admin && organization.isDirect)"
+            [disabled]="!organization || !(organization.permissions.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -100,11 +100,11 @@
             </button>
 
             <ccr-help-link
-            *ngIf="organization && organization.permissions.admin && organization.isDirect"
+            *ngIf="organization && organization.permissions.admin"
             [link]="cloneContentZendeskLink"></ccr-help-link>
 
             <ccr-popup-description
-            *ngIf="!organization || !(organization.permissions.admin && organization.isDirect)"
+            *ngIf="!organization || !(organization.permissions.admin)"
             [title]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS_TITLE' | translate"
             [description]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS' | translate:{organization: organization.name}"
             [showIntro]="false"

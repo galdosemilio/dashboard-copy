@@ -40,10 +40,10 @@
         <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
           <mat-icon (click)="onViewFormSubmissions(row)" [matTooltip]="'LIBRARY.FORMS.VIEW_ANSWERS_TOOLTIP' | translate">view_list</mat-icon>
           <mat-icon (click)="onFillForm(row)" [matTooltip]="'LIBRARY.FORMS.FILL_TOOLTIP' | translate">ballot</mat-icon>
-          <mat-icon (click)="onShowForm(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.FORMS.EDIT_TOOLTIP' | translate">launch</mat-icon>
+          <mat-icon (click)="onShowForm(row)" [class.disabled]="!row.isAdmin || !row.canFetchSubmissions" [matTooltip]="'LIBRARY.FORMS.EDIT_TOOLTIP' | translate">launch</mat-icon>
           <mat-icon (click)="onEditName(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.FORMS.EDIT_NAME' | translate">edit</mat-icon>
-          <mat-icon (click)="onDeleteForm(row)" [matTooltip]="'LIBRARY.FORMS.DELETE_FORM' | translate">delete</mat-icon>
-          <mat-icon (click)="onCloneForm(row)" [matTooltip]="'LIBRARY.FORMS.CLONE_FORM' | translate">content_copy</mat-icon>
+          <mat-icon (click)="onDeleteForm(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.FORMS.DELETE_FORM' | translate">delete</mat-icon>
+          <mat-icon (click)="onCloneForm(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.FORMS.CLONE_FORM' | translate">content_copy</mat-icon>
           <mat-icon (click)="onGeneratePDF(row)" [matTooltip]="'LIBRARY.FORMS.DOWNLOAD_PDF' | translate">picture_as_pdf</mat-icon>
         </mat-cell>
       </ng-container>

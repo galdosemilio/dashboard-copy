@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "Move this content item to a different folder",
       "MOVING": "Moving",
       "NEW_FOLDER": "New Folder",
-      "NO_ADMIN_ACCESS": "You are not able to manage digital library content for {{ organization }} since you are not directly assigned to {{ organization }} with admin permissions.",
+      "NO_ADMIN_ACCESS": "You are not able to manage digital library content for {{ organization }} since you don't have admin permissions for {{ organization }}.",
       "NO_ADMIN_ACCESS_TITLE": "Digital Library Management Disabled",
       "NO_DESCRIPTION": "No Description",
       "PARENT_FOLDER": "Parent Folder",

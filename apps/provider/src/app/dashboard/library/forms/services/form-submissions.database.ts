@@ -26,24 +26,28 @@ export class FormSubmissionsDatabase extends CcrDatabase {
   ): Observable<GetAllFormSubmissionResponse> {
     return from(
       new Promise<GetAllFormSubmissionResponse>(async (resolve, reject) => {
-        const response = await this.formSubmission.getAll(args)
-        const parsedData: any = []
+        try {
+          const response = await this.formSubmission.getAll(args)
+          const parsedData: FormSubmission[] = []
 
-        while (response.data.length) {
-          const submission: FormSubmissionSegment = response.data.shift()
+          while (response.data.length) {
+            const submission: FormSubmissionSegment = response.data.shift()
 
-          parsedData.push(
-            new FormSubmission({
-              ...submission,
-              isAdmin: await this.context.orgHasPerm(
-                submission.organization.id,
-                'admin'
-              )
-            })
-          )
+            parsedData.push(
+              new FormSubmission({
+                ...submission,
+                isAdmin: await this.context.orgHasPerm(
+                  submission.organization.id,
+                  'admin'
+                )
+              })
+            )
+          }
+
+          resolve({ ...response, data: parsedData })
+        } catch (error) {
+          reject(error)
         }
-
-        resolve({ ...response, data: parsedData })
       })
     )
   }

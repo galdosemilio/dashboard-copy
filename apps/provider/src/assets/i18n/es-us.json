@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "Mover este contenido a un directorio diferente",
       "MOVING": "Moviendo",
       "NEW_FOLDER": "Nueva Carpeta",
-      "NO_ADMIN_ACCESS": "No puede administrar el contenido de la biblioteca digital para {{ organization }} ya que su cuenta no se encuentra directamente asociada a {{ organization }} con permisos de administrador.",
+      "NO_ADMIN_ACCESS": "No puede administrar el contenido de la biblioteca digital para {{ organization }} ya que no tiene permisos de administrador para la clínica {{ organization }}.",
       "NO_ADMIN_ACCESS_TITLE": "Administración de Biblioteca Digital Deshabilitada",
       "NO_DESCRIPTION": "Sin Descripción",
       "PARENT_FOLDER": "Carpeta Anterior",

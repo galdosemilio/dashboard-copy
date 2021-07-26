@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "Flyt denne element indhold til en anden mappe",
       "MOVING": "Flytter",
       "NEW_FOLDER": "Ny Mappe",
-      "NO_ADMIN_ACCESS": "Du er ikke i stand til at administrere digitalt biblioteksindhold for {{ organization }}, da du ikke direkte er tildelt {{ organization }} med administratorrettigheder.",
+      "NO_ADMIN_ACCESS": "Du er ikke i stand til at styre digitalt biblioteksindhold for {{organization}}, da du ikke har administratortilladelser til {{organization}}.",
       "NO_ADMIN_ACCESS_TITLE": "Digital biblioteksstyring deaktiveret",
       "NO_DESCRIPTION": "Ingen Beskrivelse",
       "PARENT_FOLDER": "Parent Folder",

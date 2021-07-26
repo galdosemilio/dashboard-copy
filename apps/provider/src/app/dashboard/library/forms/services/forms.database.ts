@@ -235,7 +235,13 @@ export class FormsDatabase extends CcrDatabase {
               isAdmin: await this.context.orgHasPerm(
                 form.organization.id,
                 'admin'
-              )
+              ),
+              canFetchSubmissions:
+                (await this.context.orgHasPerm(
+                  form.organization.id,
+                  'allowClientPhi'
+                )) &&
+                (await this.context.orgHasPerm(form.organization.id, 'viewAll'))
             })
           )
         }

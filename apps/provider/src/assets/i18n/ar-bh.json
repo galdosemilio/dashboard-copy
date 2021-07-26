@@ -663,7 +663,7 @@
       "MOVE_CONTENT_TOOLTIP": "نقل محتوى هذا العنصر إلى مجلد مختلف",
       "MOVING": "يتم النقل",
       "NEW_FOLDER": "مجلد جديد",
-      "NO_ADMIN_ACCESS": "لا يمكنك إدارة محتوى المكتبة الرقمية لـ {{ organization }} نظرًا لأنك لم يتم تعيينك مباشرة {{ organization }} باستخدام أذونات المسؤول.",
+      "NO_ADMIN_ACCESS": "أنت غير قادر على إدارة محتوى المكتبة الرقمية ل {{organization}} لأنك لا تملك أذونات المسؤول عن {{organization}}.",
       "NO_ADMIN_ACCESS_TITLE": "تعطيل إدارة المكتبة الرقمية",
       "NO_DESCRIPTION": "لا يتوفر وصف",
       "PARENT_FOLDER": "المجلد الأصل",

@@ -13,7 +13,7 @@ export class FormSubmissionsResolver implements Resolve<boolean> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<boolean> {
-    return new Promise<boolean>(async (resolve, reject) => {
+    return new Promise<boolean>(async (resolve) => {
       try {
         const response = await this.database
           .fetch({

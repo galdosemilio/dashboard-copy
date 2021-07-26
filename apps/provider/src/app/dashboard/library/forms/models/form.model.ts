@@ -3,6 +3,7 @@ import { FormSection } from './section.model'
 
 export class Form {
   public allowAddendum: boolean
+  public canFetchSubmissions: boolean
   public id: string
   public isActive: boolean
   public isForeign: boolean
@@ -31,5 +32,6 @@ export class Form {
         )
       : []
     this.isAdmin = args.isAdmin
+    this.canFetchSubmissions = args.canFetchSubmissions
   }
 }

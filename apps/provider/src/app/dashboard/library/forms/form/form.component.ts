@@ -141,12 +141,23 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
 
     this.context.organization$
       .pipe(untilDestroyed(this))
-      .subscribe(
-        (organization) =>
-          (this.selectedClinic = this.formSubmission
-            ? this.formSubmission.organization
-            : organization)
-      )
+      .subscribe((organization) => {
+        this.selectedClinic = this.formSubmission
+          ? this.formSubmission.organization
+          : organization
+
+        if (this.formSubmission) {
+          return
+        }
+
+        this.hasError =
+          !this.selectedClinic.permissions.viewAll ||
+          !this.selectedClinic.permissions.allowClientPhi ||
+          !this.selectedClinic.permissions.admin
+        this.errorMessage = this.hasError
+          ? _('NOTIFY.INFO.GENERAL_PERMISSION_ACCESS_NOTIFICATION')
+          : ''
+      })
   }
 
   ngOnDestroy(): void {
