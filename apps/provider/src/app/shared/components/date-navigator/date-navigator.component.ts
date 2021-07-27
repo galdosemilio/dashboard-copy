@@ -46,6 +46,12 @@ export class DateNavigator implements OnChanges {
   set max(max: boolean | string) {
     this._limit =
       max === true ? moment() : max ? moment(max) : moment('2500-01-01')
+
+    if (this._current.isSameOrBefore(this._limit, this.timeframe)) {
+      return
+    }
+
+    this.pickerDate(moment().toDate())
   }
 
   @Output() selectedDate = new EventEmitter<DateNavigatorOutput>()

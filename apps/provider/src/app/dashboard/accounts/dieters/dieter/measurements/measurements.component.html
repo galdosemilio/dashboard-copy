@@ -47,7 +47,7 @@
 fxLayout="column"
 fxLayoutAlign="center space-around"
 fxLayoutGap="25px">
-  <date-navigator [timeframe]="timeframe" [date]="dates.current" (selectedDate)="updateDates($event)"></date-navigator>
+  <date-navigator [max]="section !== 'food'" [timeframe]="timeframe" [date]="dates.current" (selectedDate)="updateDates($event)"></date-navigator>
 </div>
 
 <div [hidden]="view !== 'list'" fxLayout="column" fxLayoutAlign="center end">

@@ -149,15 +149,11 @@ export class FoodDataSource extends StatsDataSource<
   }
 
   private addEmptyDays(groupedFood) {
-    let endDate = moment(this.args.endDate)
-
-    if (endDate.isAfter(moment(), 'day')) {
-      endDate = endDate.add(1, 'day')
-    }
+    const endDate = moment(this.args.endDate)
 
     for (
       let currentDate = moment(this.args.startDate);
-      currentDate.isSameOrBefore(endDate);
+      currentDate.isSameOrBefore(endDate, 'day');
       currentDate = currentDate.add(1, 'day')
     ) {
       if (

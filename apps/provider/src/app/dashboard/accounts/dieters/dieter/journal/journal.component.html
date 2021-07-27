@@ -34,6 +34,7 @@
 
 <date-navigator
   [hidden]="component === 'metrics'"
+  [max]="section !== 'food'"
   [showTimeframeSelector]="component === 'exercise'"
   [timeframe]="timeframe"
   [date]="dates.current"
