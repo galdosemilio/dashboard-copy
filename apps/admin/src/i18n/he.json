@@ -124,7 +124,8 @@
   "EMAIL_TEMPLATE_OPS": {
     "INTERNAL_REGISTRATION": "רישום פנימי",
     "INTERNAL_REGISTRATION_PLAN": "רישום פנימי (עם תכניות)",
-    "NEW_ACCOUNT": "חשבון חדש"
+    "NEW_ACCOUNT": "חשבון חדש",
+    "PASSWORD_RESET": "איפוס סיסמא"
   },
   "FIELD": {
     "CONSENT": {

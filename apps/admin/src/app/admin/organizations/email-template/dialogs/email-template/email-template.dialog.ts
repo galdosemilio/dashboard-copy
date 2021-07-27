@@ -48,6 +48,10 @@ export class EmailTemplateDialogComponent implements OnInit {
     {
       value: 'new-account',
       displayValue: _('EMAIL_TEMPLATE_OPS.NEW_ACCOUNT')
+    },
+    {
+      value: 'password-reset',
+      displayValue: _('EMAIL_TEMPLATE_OPS.PASSWORD_RESET')
     }
   ]
   orgId: string

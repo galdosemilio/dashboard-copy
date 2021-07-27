@@ -124,7 +124,8 @@
   "EMAIL_TEMPLATE_OPS": {
     "INTERNAL_REGISTRATION": "Intern registrering",
     "INTERNAL_REGISTRATION_PLAN": "Intern registrering (med planer)",
-    "NEW_ACCOUNT": "Ny konto"
+    "NEW_ACCOUNT": "Ny konto",
+    "PASSWORD_RESET": "Nulstil kodeord"
   },
   "FIELD": {
     "CONSENT": {

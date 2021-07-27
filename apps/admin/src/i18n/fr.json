@@ -124,7 +124,8 @@
   "EMAIL_TEMPLATE_OPS": {
     "INTERNAL_REGISTRATION": "Enregistrement interne",
     "INTERNAL_REGISTRATION_PLAN": "Enregistrement interne (avec plans)",
-    "NEW_ACCOUNT": "Nouveau compte"
+    "NEW_ACCOUNT": "Nouveau compte",
+    "PASSWORD_RESET": "Réinitialisation du mot de passe"
   },
   "FIELD": {
     "CONSENT": {

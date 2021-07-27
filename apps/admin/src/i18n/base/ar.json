@@ -124,7 +124,8 @@
   "EMAIL_TEMPLATE_OPS": {
     "INTERNAL_REGISTRATION": "التسجيل الداخلي",
     "INTERNAL_REGISTRATION_PLAN": "التسجيل الداخلي (مع الخطط)",
-    "NEW_ACCOUNT": "حساب جديد"
+    "NEW_ACCOUNT": "حساب جديد",
+    "PASSWORD_RESET": "إعادة تعيين كلمة المرور"
   },
   "FIELD": {
     "CONSENT": {
