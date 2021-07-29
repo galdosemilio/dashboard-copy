@@ -1,3 +1,16 @@
+# [1.28.0](https://github.com/coachcare/dashboard/compare/v1.27.1...v1.28.0) (2021-07-29)
+
+
+### Bug Fixes
+
+* added support for future dates in food tables [FRON-1695] ([13fa328](https://github.com/coachcare/dashboard/commit/13fa32885df6e87c3b7d8a76ba04fd8a4320fdd7))
+* adjusted DL and Forms permissions logic [FRON-2251] ([59872dc](https://github.com/coachcare/dashboard/commit/59872dc89d457374dc2de124d1a7363bc4d3f71c))
+
+
+### Features
+
+* allowed password reset in email template dialog [FRON-2252] ([38dc0b0](https://github.com/coachcare/dashboard/commit/38dc0b08efd226d2ffed3925881a7a43d8524da8))
+
 ## [1.27.1](https://github.com/coachcare/dashboard/compare/v1.27.0...v1.27.1) (2021-07-22)
 
 
