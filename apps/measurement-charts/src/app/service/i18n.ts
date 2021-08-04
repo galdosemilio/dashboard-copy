@@ -21,7 +21,9 @@ const texts = {
     SOURCE: 'مصدر',
     TIME: 'زمن',
     WEEK: 'أسبوع',
-    YEAR: 'سنة'
+    YEAR: 'سنة',
+    BLOOD_PRESSURE: 'ضغط الدم',
+    NO_RECORD: 'لا قياسات سابقة مسجلة ل'
   },
   da: {
     AVERAGE: 'Gennemsnit',
@@ -42,7 +44,9 @@ const texts = {
     SOURCE: 'Kilde',
     TIME: 'Tid',
     WEEK: 'Uge',
-    YEAR: 'År'
+    YEAR: 'År',
+    BLOOD_PRESSURE: 'Blodtryk',
+    NO_RECORD: 'Ingen tidligere målinger registreret for'
   },
   de: {
     AVERAGE: 'Durchschnittlich',
@@ -63,7 +67,9 @@ const texts = {
     SOURCE: 'Quelle',
     TIME: 'Zeit',
     WEEK: 'Woche',
-    YEAR: 'Jahr'
+    YEAR: 'Jahr',
+    BLOOD_PRESSURE: 'Blutdruck',
+    NO_RECORD: 'Keine vorherigen Messungen aufgezeichnet für'
   },
   en: {
     AVERAGE: 'Average',
@@ -84,7 +90,9 @@ const texts = {
     SOURCE: 'Source',
     TIME: 'Time',
     WEEK: 'Week',
-    YEAR: 'Year'
+    YEAR: 'Year',
+    BLOOD_PRESSURE: 'Blood Pressure',
+    NO_RECORD: 'No previous measurements recorded for'
   },
   es: {
     AVERAGE: 'Promedio',
@@ -105,7 +113,9 @@ const texts = {
     SOURCE: 'Fuente',
     TIME: 'Hora',
     WEEK: 'Semana',
-    YEAR: 'Año'
+    YEAR: 'Año',
+    BLOOD_PRESSURE: 'Presión sanguínea',
+    NO_RECORD: 'No se han registrado mediciones previas para'
   },
   fr: {
     AVERAGE: 'Moyenne',
@@ -126,7 +136,9 @@ const texts = {
     SOURCE: 'La source',
     TIME: 'Temps',
     WEEK: 'Semaine',
-    YEAR: 'An'
+    YEAR: 'An',
+    BLOOD_PRESSURE: 'Pression artérielle',
+    NO_RECORD: 'Aucune mesure précédente enregistrée pour'
   },
   he: {
     AVERAGE: 'מְמוּצָע',
@@ -147,7 +159,9 @@ const texts = {
     SOURCE: 'מָקוֹר',
     TIME: 'זְמַן',
     WEEK: 'שָׁבוּעַ',
-    YEAR: 'שָׁנָה'
+    YEAR: 'שָׁנָה',
+    BLOOD_PRESSURE: 'לחץ דם',
+    NO_RECORD: 'לא נרשמו מדידות קודמות עבור'
   },
   it: {
     AVERAGE: 'Media',
@@ -168,7 +182,9 @@ const texts = {
     SOURCE: 'Fonte',
     TIME: 'Tempo',
     WEEK: 'Settimana',
-    YEAR: 'Anno'
+    YEAR: 'Anno',
+    BLOOD_PRESSURE: 'Pressione sanguigna',
+    NO_RECORD: 'Nessuna misurazione precedente registrata per'
   },
   pt: {
     AVERAGE: 'Média',
@@ -189,7 +205,9 @@ const texts = {
     SOURCE: 'Fonte',
     TIME: 'Tempo',
     WEEK: 'Semana',
-    YEAR: 'Ano'
+    YEAR: 'Ano',
+    BLOOD_PRESSURE: 'Pressão arterial',
+    NO_RECORD: 'Nenhuma medição anterior registrada para'
   }
 }
 

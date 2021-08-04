@@ -1,4 +1,4 @@
-import { CcrElement, Tab } from '@chart/model'
+import { CcrElement, MeasurementsEnum, Tab } from '@chart/model'
 import { api } from '@chart/service/api'
 import { tabService, modalService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
@@ -9,7 +9,9 @@ import {
 import { DateTime } from 'luxon'
 
 import './list.element.scss'
-import { DataPointChangedEvent, EventType } from '@chart/model/event'
+import { DataPointChangedEvent, EventType, ListItem } from '@chart/model'
+import { groupBy } from 'lodash'
+import * as utils from '@chart/utils'
 
 export class ListElement extends CcrElement {
   private _loading: boolean
@@ -19,10 +21,6 @@ export class ListElement extends CcrElement {
   private data: MeasurementDataPointAggregate[]
   private listStartPosition = { x: 0, y: 0 }
   private listCurrentPosition = { x: 0, y: 0 }
-  private itemDragStart = 0
-  private itemDragEnd = 0
-  private isStartedItemSwipe = false
-  private isStartedListSwipe = false
 
   constructor() {
     super()
@@ -77,9 +75,7 @@ export class ListElement extends CcrElement {
   }
 
   private swipeEndList(element: HTMLElement, event: TouchEvent): void {
-    this.isStartedListSwipe = false
-
-    if (element.scrollTop !== 0 || this.isStartedItemSwipe) {
+    if (element.scrollTop !== 0) {
       return
     }
 
@@ -102,7 +98,7 @@ export class ListElement extends CcrElement {
   }
 
   private swipeMoveList(element: HTMLElement, event: TouchEvent): void {
-    if (element.scrollTop !== 0 || this.isStartedItemSwipe) {
+    if (element.scrollTop !== 0) {
       return
     }
 
@@ -118,75 +114,39 @@ export class ListElement extends CcrElement {
     if (changeY > 2) {
       event.stopPropagation()
       event.preventDefault()
-      this.isStartedListSwipe = true
     }
 
     document.getElementById('pull-up-refresh').style.transition = 'none'
     document.getElementById('pull-up-refresh').style.height = `${changeY}px`
   }
 
-  private swipeItem(element: HTMLElement, offset: number) {
-    this.itemDragStart = 0
-    this.itemDragEnd = 0
-
-    element.addEventListener('touchstart', (e) => this.swipeStartItem(e))
-    element.addEventListener('touchmove', (e) => this.swipeMoveItem(element, e))
-    element.addEventListener('touchend', () =>
-      this.swipeEndItem(element, offset)
-    )
-  }
-
-  private swipeStartItem(event: TouchEvent): void {
-    this.itemDragEnd = event.touches[0].clientX
-  }
-
-  private swipeMoveItem(element: HTMLElement, event: TouchEvent): void {
-    if (this.isStartedListSwipe) {
-      return
-    }
-
-    this.itemDragStart = this.itemDragEnd - event.touches[0].pageX
-    this.itemDragEnd = event.touches[0].pageX
-
-    if (Math.abs(this.itemDragStart) > 2) {
-      this.isStartedItemSwipe = true
-    }
-
-    element.style.left = element.offsetLeft - this.itemDragStart + 'px'
-  }
-
-  private swipeEndItem(element: HTMLElement, offset): void {
-    if (this.isRtl && element.offsetLeft - 5 >= offset) {
-      element.style.left = offset + 'px'
-    } else if (!this.isRtl && element.offsetLeft * -1 - 5 >= offset) {
-      element.style.left = -offset + 'px'
-    } else {
-      element.style.left = 0 + 'px'
-    }
-    this.isStartedItemSwipe = false
-  }
-
-  async onDeleteDataPoint(item: MeasurementDataPointAggregate) {
+  async onDeleteDataPoint(item: ListItem) {
     try {
       this.loading(true)
 
-      await api.measurementDataPoint.deleteGroup({ id: item.point.group.id })
+      await api.measurementDataPoint.deleteGroup({ id: item.groupId })
 
-      this.data = this.data.filter((t) => t.point.id !== item.point.id)
+      const deletedData = this.data.filter(
+        (t) => t.point.group.id === item.groupId
+      )
+      this.data = this.data.filter((t) => t.point.group.id !== item.groupId)
 
       if (typeof this.offset === 'number' && this.offset > 0) {
         this.offset -= 1
       }
 
       document.getElementById('list-content').innerText = ''
-      this.addItemToListView(this.data)
+      this.addItemToListView()
 
-      const event: DataPointChangedEvent = {
-        type: EventType.DATA_POINT_CHANGED,
-        dataPointTypeId: api.baseData.dataPointTypeId
+      if (deletedData.length > 0) {
+        const event: DataPointChangedEvent = {
+          type: EventType.DATA_POINT_CHANGED,
+          data: deletedData[0]
+        }
+
+        window.ReactNativeWebView?.postMessage(JSON.stringify(event))
       }
 
-      window.ReactNativeWebView?.postMessage(JSON.stringify(event))
       modalService.close$.next()
     } catch (err) {
       this.error(err)
@@ -206,27 +166,35 @@ export class ListElement extends CcrElement {
     }
   }
 
-  private addItemToListView(data: MeasurementDataPointAggregate[]) {
-    for (const item of data) {
-      const dateMoment = DateTime.fromISO(item.bucket.timestamp)
+  private addItemToListView() {
+    const list = this.getListItems()
+
+    if (list.length === 0) {
+      const dataPointName =
+        api.baseData.dataPointTypeId === MeasurementsEnum.BLOOD_PRESSURE_GENERAL
+          ? translate('BLOOD_PRESSURE')
+          : api.baseData.dataPointTypes[0].name
+
+      const element = document.createElement('div')
+      element.className = 'list-no-item'
+      element.innerText = `${translate('NO_RECORD')} ${dataPointName}`
+
+      document.getElementById('list-content').appendChild(element)
+      return
+    }
+
+    for (const item of list) {
+      const dateMoment = DateTime.fromISO(item.timestamp)
       const element = document.createElement('div')
       element.className = 'list-item'
 
       const itemElement = document.createElement('div')
       itemElement.className = 'item'
 
-      const unit = api.unit(item.point.type)
-
-      const value = convertToReadableFormat(
-        item.point.value,
-        item.point.type,
-        api.baseData.metric
-      ).toFixed(unit ? 2 : 0)
-
       itemElement.innerHTML = `
         <div class='content'>
-          <p class='value'>${item.point.type.name}: ${value}
-            ${unit}
+          <p class='value'>${item.name}: ${item.value}
+            ${item.unit}
           </p>
           <p>${dateMoment.toFormat('EEE, MMM d, yyyy')}</p>
         </div>
@@ -247,8 +215,6 @@ export class ListElement extends CcrElement {
 
       document.getElementById('list-content').appendChild(element)
 
-      this.swipeItem(itemElement, deleteElement.offsetWidth)
-
       deleteElement.addEventListener('click', () =>
         this.openDeleteConfirm(item)
       )
@@ -257,7 +223,7 @@ export class ListElement extends CcrElement {
     }
   }
 
-  private openDeleteConfirm(item: MeasurementDataPointAggregate) {
+  private openDeleteConfirm(item: ListItem) {
     modalService.open$.next({
       title: translate('CONFIRM'),
       content: `
@@ -286,45 +252,40 @@ export class ListElement extends CcrElement {
       .addEventListener('click', () => modalService.close$.next())
   }
 
-  private openDetails(item: MeasurementDataPointAggregate) {
-    const unit = api.unit(item.point.type)
+  private openDetails(item: ListItem) {
     modalService.open$.next({
       title: translate('DETAILS'),
       full: true,
       content: `
         <div class="detail-view">
           <div class="detail-item">
-            <p class="detail-title">${item.point.type.name}</p>
+            <p class="detail-title">${item.name}</p>
             <p class="detail-content">
-              ${convertToReadableFormat(
-                item.point.value,
-                item.point.type,
-                api.baseData.metric
-              ).toFixed(2)}
-              ${unit}
+              ${item.value}
+              ${item.unit}
             </p>
           </div>
           <div class="detail-item">
             <p class="detail-title">${translate('DATE')}</p>
             <p class="detail-content">${DateTime.fromISO(
-              item.bucket.timestamp
+              item.timestamp
             ).toLocaleString(DateTime.DATE_MED)}</p>
           </div>
           <div class="detail-item">
             <p class="detail-title">${translate('TIME')}</p>
             <p class="detail-content">${DateTime.fromISO(
-              item.bucket.timestamp
+              item.timestamp
             ).toLocaleString(DateTime.TIME_SIMPLE)}</p>
           </div>
           <div class="detail-item">
             <p class="detail-title">${translate('CREATED_AT')}</p>
             <p class="detail-content">${DateTime.fromISO(
-              item.point.createdAt.utc
+              item.createdAt
             ).toLocaleString(DateTime.DATETIME_MED)}</p>
           </div>
           <div class="detail-item">
             <p class="detail-title">${translate('SOURCE')}</p>
-            <p class="detail-content">${item.point.group.source.name}</p>
+            <p class="detail-content">${item.source}</p>
           </div>
           <div class="action">
             <div id="delete-item" class="delete-btn">${translate(
@@ -363,10 +324,6 @@ export class ListElement extends CcrElement {
     try {
       const res = await api.measurementDataPoint.getAggregates({
         account: api.baseData.accountId || undefined,
-        recordedAt: {
-          start: new Date('2020-01-01').toISOString(),
-          end: new Date().toISOString()
-        },
         unit: 'day',
         type: api.baseData.dataPointTypes.map((t) => t.id),
         limit: this.limit,
@@ -376,12 +333,79 @@ export class ListElement extends CcrElement {
       this.offset = res.pagination.next
       this.hasMore = !!res.pagination.next
       this.data = this.data.concat(res.data)
-      this.addItemToListView(res.data)
+      this.addItemToListView()
     } catch (err) {
       this.error(err)
     }
 
     this.loading(false)
+  }
+
+  private getListItems(): ListItem[] {
+    const list: ListItem[] = []
+
+    if (
+      api.baseData.dataPointTypeId === MeasurementsEnum.BLOOD_PRESSURE_GENERAL
+    ) {
+      const groupedValues = groupBy(this.data, (item) => item.point.group.id)
+
+      for (const [groupId, dataPoints] of Object.entries(groupedValues)) {
+        const dataPoint = dataPoints[0]
+
+        if (!dataPoint) {
+          continue
+        }
+
+        const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
+        const value = dataPoints
+          .map((t) =>
+            utils.formart(
+              convertToReadableFormat(
+                t.point.value,
+                t.point.type,
+                api.baseData.metric
+              ),
+              api.baseData.dataPointTypeId
+            )
+          )
+          .join('/')
+
+        list.push({
+          groupId,
+          name: translate('BLOOD_PRESSURE'),
+          value,
+          unit,
+          source: dataPoint.point.group.source.name,
+          timestamp: dataPoint.bucket.timestamp,
+          createdAt: dataPoint.point.group.createdAt.utc
+        })
+      }
+    } else {
+      for (const dataPoint of this.data) {
+        const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
+
+        const value = utils.formart(
+          convertToReadableFormat(
+            dataPoint.point.value,
+            dataPoint.point.type,
+            api.baseData.metric
+          ),
+          api.baseData.dataPointTypeId
+        )
+
+        list.push({
+          groupId: dataPoint.point.group.id,
+          name: dataPoint.point.type.name,
+          value,
+          unit,
+          source: dataPoint.point.group.source.name,
+          timestamp: dataPoint.bucket.timestamp,
+          createdAt: dataPoint.point.createdAt.utc
+        })
+      }
+    }
+
+    return list
   }
 
   private loading(showLoading: boolean) {

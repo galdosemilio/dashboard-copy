@@ -1,13 +1,16 @@
 import {
-  ApiService,
   Access,
+  AccountAvatar,
   AccountIdentifier,
-  AccountProvider,
+  AccountPassword,
   AccountPreference,
+  AccountProvider,
   ActiveCampaign,
-  Authentication,
   Affiliation,
   Alerts,
+  ApiService,
+  Authentication,
+  AuthenticationToken,
   CCRBlacklist,
   Chart,
   CommunicationPreference,
@@ -23,16 +26,16 @@ import {
   Feedback,
   FileVault,
   Food,
-  FoodV2,
   FoodConsumed,
   FoodFavorite,
   FoodIngredient,
+  FoodKey,
   FoodMeal,
   FoodMealOrganization,
   FoodMealServing,
   FoodPreference,
   FoodServing,
-  FoodKey,
+  FoodV2,
   Form,
   FormAddendum,
   FormQuestion,
@@ -45,48 +48,49 @@ import {
   Interaction,
   Logging,
   MALA,
+  MFA,
   MeasurementActivity,
   MeasurementBody,
   MeasurementSleep,
   Messaging,
   MessagingPermission,
   MessagingPreference,
-  MFA,
   MobileApp,
   Notification,
-  OrganizationProvider,
   OrganizationAssignment,
   OrganizationAssociation,
+  OrganizationPreference,
+  OrganizationProvider,
   Package,
   PackageEnrollment,
   PackageOrganization,
   PainTracking,
   Phase,
+  RPM,
   Register,
   Reports,
-  RPM,
   Schedule,
   Sequence,
   Session,
   Supplement,
   Timezone,
   User,
-  Zendesk,
-  AccountPassword,
-  OrganizationPreference,
-  AccountAvatar,
-  AuthenticationToken
+  Zendesk
 } from '@coachcare/sdk'
+
+import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
 import { environment } from './environments/environment'
 
 const authenticationToken = new AuthenticationToken()
+const headers = new ApiHeaders()
 
 const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
   throttling: environment.enableThrottling
     ? { enabled: true, options: { defaultRateLimit: 17 } }
-    : { enabled: false }
+    : { enabled: false },
+  headers
 })
 
 const measurementApiService = new ApiService({
@@ -97,7 +101,8 @@ const measurementApiService = new ApiService({
         enabled: true,
         options: { headers: { enabled: false } }
       }
-    : { enabled: false }
+    : { enabled: false },
+  headers
 })
 
 generalApiService.setEnvironment(environment.ccrApiEnv)

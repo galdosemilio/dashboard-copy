@@ -76,6 +76,12 @@ dashboard-nav {
 
       #list-content {
         background-color: white;
+
+        .list-no-item {
+          color: var(--text);
+          padding: 80px 20px;
+          text-align: center;
+        }
       }
 
       .list-item {

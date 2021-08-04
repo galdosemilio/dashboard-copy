@@ -1,7 +1,8 @@
-import { CcrElement } from '@chart/model'
+import { CcrElement, MeasurementsEnum } from '@chart/model'
 import { eventService } from '@chart/service'
 import { api } from '@chart/service/api'
 import { GraphEntry } from '../graph.element'
+import * as utils from '@chart/utils'
 import './graph-header.element.scss'
 export class GraphHeaderElement extends CcrElement {
   render() {
@@ -22,28 +23,37 @@ export class GraphHeaderElement extends CcrElement {
   private setHeader(data: GraphEntry[][]) {
     let headers = ''
     const showUnitToLast =
-      new Set(api.baseData.dataPointTypes.map((t) => api.unit(t))).size === 1
+      new Set(
+        api.baseData.dataPointTypes.map((t) =>
+          utils.unit(t, api.baseData.metric)
+        )
+      ).size === 1
 
     data.forEach((entries, index) => {
       const filteredData = entries.filter((entry) => entry.value !== undefined)
       const values = filteredData.map((entry) => entry.value)
 
-      const min = (filteredData.length ? Math.min(...values) : 0).toFixed(2)
+      const min = utils.formart(
+        filteredData.length ? Math.min(...values) : 0,
+        api.baseData.dataPointTypeId
+      )
 
-      const max = (filteredData.length ? Math.max(...values) : 0).toFixed(2)
+      const max = utils.formart(
+        filteredData.length ? Math.max(...values) : 0,
+        api.baseData.dataPointTypeId
+      )
 
-      let average = filteredData.length
+      const average = filteredData.length
         ? Math.round(
             values.reduce((value, entry) => (value += entry), 0) /
               Math.max(values.length, 1)
           )
         : 0
 
-      let unit = api.unit(api.baseData.dataPointTypes[index])
-
-      if (unit) {
-        average = Number(average.toFixed(2))
-      }
+      let unit = utils.unit(
+        api.baseData.dataPointTypes[index],
+        api.baseData.metric
+      )
 
       if (showUnitToLast && index < data.length - 1) {
         unit = ''
@@ -51,7 +61,10 @@ export class GraphHeaderElement extends CcrElement {
 
       const range = `${min} - ${max}<span class="unit">${unit}</span>`
       const header = `<div class="header-wrap">
-        <p class="value">${average}<span class="unit">${unit}</span></p>
+        <p class="value">${utils.formart(
+          average,
+          api.baseData.dataPointTypeId
+        )}<span class="unit">${unit}</span></p>
         <p class="range">${range}</p>
       </div>`
 

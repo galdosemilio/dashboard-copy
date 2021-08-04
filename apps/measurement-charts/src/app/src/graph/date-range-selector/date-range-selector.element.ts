@@ -80,8 +80,12 @@ export class DateRangeSelectorElement extends CcrElement {
     const today = DateTime.now()
 
     this.dateRange = {
-      start: today.startOf(timeframe).toISO(),
-      end: today.endOf(timeframe).toISO()
+      start: today
+        .minus({ [timeframe]: 1 })
+        .plus({ day: 1 })
+        .startOf('day')
+        .toISO(),
+      end: today.endOf('day').toISO()
     }
 
     eventService.trigger('graph.date-range', this.dateRange)
@@ -97,21 +101,12 @@ export class DateRangeSelectorElement extends CcrElement {
     const start = DateTime.fromISO(this.dateRange.start)
     const end = DateTime.fromISO(this.dateRange.end)
     const format =
-      this.timeframe === Timeframe.WEEK ? 'EEE, MMM d, yyyy' : 'MMM yyyy'
-    let dateRangeHtml = ''
-    switch (this.timeframe) {
-      case Timeframe.WEEK:
-      case Timeframe.YEAR:
-        dateRangeHtml = `
-        <span>${start.toFormat(format)}</span>
-        <span>-</span>
-        <span>${end.toFormat(format)}</span>
-        `
-        break
-      case Timeframe.MONTH:
-        dateRangeHtml = `<span>${start.toFormat(format)}</span>`
-        break
-    }
+      this.timeframe === Timeframe.WEEK ? 'EEE, MMM d, yyyy' : 'MMM d, yyyy'
+    const dateRangeHtml = `
+    <span>${start.toFormat(format)}</span>
+    <span>-</span>
+    <span>${end.toFormat(format)}</span>
+    `
 
     this.innerHTML = `
       <div class="date-range-container">

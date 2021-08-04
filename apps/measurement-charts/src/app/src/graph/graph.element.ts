@@ -1,15 +1,26 @@
-import { baseData, CcrElement, DateRange, Timeframe } from '../../model'
+import './graph.element.scss'
+
+import * as utils from '@chart/utils'
+
+import {
+  CcrElement,
+  DateRange,
+  MeasurementsEnum,
+  Timeframe,
+  baseData
+} from '../../model'
+import {
+  MeasurementDataPointAggregate,
+  convertToReadableFormat
+} from '@coachcare/sdk'
+import { auditTime, debounceTime, filter } from 'rxjs/operators'
+
+import { DateTime } from 'luxon'
+import { Subject } from 'rxjs'
+import { api } from '@chart/service/api'
 import { createChart } from 'lightweight-charts'
 import { eventService } from '@chart/service'
-import { api } from '@chart/service/api'
-import { DateTime } from 'luxon'
-import {
-  convertToReadableFormat,
-  MeasurementDataPointAggregate
-} from '@coachcare/sdk'
 import { groupBy } from 'lodash'
-import { Subject } from 'rxjs'
-import { auditTime, debounceTime, filter } from 'rxjs/operators'
 
 export interface GraphEntry {
   value: number
@@ -21,8 +32,6 @@ interface GraphTimeData {
   month: number
   year: number
 }
-
-import './graph.element.scss'
 
 export class GraphElement extends CcrElement {
   private chart
@@ -76,15 +85,17 @@ export class GraphElement extends CcrElement {
 
   private addLineSeries(): void {
     api.baseData.dataPointTypes.forEach((type, index) => {
-      const unit = api.unit(type)
+      const unit = utils.unit(type, api.baseData.metric)
       const color = Object.keys(api.baseData.colors)[index]
 
       const series = this.chart.addLineSeries({
         priceFormat: {
           type: 'custom',
           precision: 1,
-          minMove: 0.5,
-          formatter: (value) => value.toFixed() + ' ' + unit
+          minMove:
+            api.baseData.dataPointTypeId === MeasurementsEnum.SLEEP ? 60 : 0.5,
+          formatter: (value) =>
+            utils.formart(value, api.baseData.dataPointTypeId) + ' ' + unit
         },
         priceLineVisible: false,
         lastValueVisible: false,
@@ -106,6 +117,9 @@ export class GraphElement extends CcrElement {
       height: this.chartHeight,
       layout: {
         fontFamily: 'Montserrat'
+      },
+      handleScale: {
+        pinch: false
       },
       timeScale: {
         lockVisibleTimeRangeOnResize: true,
@@ -285,11 +299,13 @@ export class GraphElement extends CcrElement {
         .listen<DateRange>('graph.date-range')
         .pipe(debounceTime(700))
         .subscribe((dateRange) => {
-          this.data = []
-          this.firstTime = true
-          this.rangeChangeBumper = false
-          this.dateRange = dateRange
-          this.fetchMeasurements()
+          if (api.baseData.token) {
+            this.data = []
+            this.firstTime = true
+            this.rangeChangeBumper = false
+            this.dateRange = dateRange
+            this.fetchMeasurements()
+          }
         }),
       eventService
         .listen<Timeframe>('graph.timeframe')
@@ -336,10 +352,11 @@ export class GraphElement extends CcrElement {
 
     if (fromLogical < 0) {
       pivotDate = DateTime.fromISO(this.data[0][0].time)
-      endDate = pivotDate.minus({ [this.timeframe]: 1 }).endOf(this.timeframe)
-      startDate = pivotDate
+      endDate = pivotDate.minus({ day: 1 }).endOf('day')
+      startDate = endDate
         .minus({ [this.timeframe]: 1 })
-        .startOf(this.timeframe)
+        .plus({ day: 1 })
+        .startOf('day')
 
       append = false
 
@@ -348,13 +365,9 @@ export class GraphElement extends CcrElement {
         return
       }
     } else if (barsInfo?.barsAfter < 0) {
-      pivotDate = DateTime.fromISO(
-        this.data[0][this.data[0].length - 1].time
-      ).endOf(this.timeframe)
-      endDate = pivotDate.plus({ [this.timeframe]: 1 }).endOf(this.timeframe)
-      startDate = pivotDate
-        .plus({ [this.timeframe]: 1 })
-        .startOf(this.timeframe)
+      pivotDate = DateTime.fromISO(this.data[0][this.data[0].length - 1].time)
+      startDate = pivotDate.plus({ day: 1 }).startOf('day')
+      endDate = pivotDate.plus({ [this.timeframe]: 1 }).endOf('day')
       append = true
 
       if (this.hasSameDateEntry(pivotDate) || startDate > DateTime.now()) {
@@ -398,10 +411,16 @@ export class GraphElement extends CcrElement {
       })
       .endOf('day')
 
-    eventService.trigger('graph.date-range-change', {
-      start: final.startOf(this.timeframe).toISO(),
-      end: final.endOf(this.timeframe).toISO()
-    })
+    const timeRange = {
+      start: final
+        .minus({ [this.timeframe]: 1 })
+        .plus({ day: 1 })
+        .startOf('day')
+        .toISO(),
+      end: final.toISO()
+    }
+
+    eventService.trigger('graph.date-range-change', timeRange)
 
     eventService.trigger(
       'graph.data',
