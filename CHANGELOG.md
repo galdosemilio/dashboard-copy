@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/coachcare/dashboard/compare/v1.28.0...v1.28.1) (2021-08-04)
+
+
+### Bug Fixes
+
+* update chart/list app [MOB-3163] ([57ea526](https://github.com/coachcare/dashboard/commit/57ea526a97daea84e76b98e7d798e63e578fc225))
+
 # [1.28.0](https://github.com/coachcare/dashboard/compare/v1.27.1...v1.28.0) (2021-07-29)
 
 
