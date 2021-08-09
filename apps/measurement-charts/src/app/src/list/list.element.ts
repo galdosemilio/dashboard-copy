@@ -272,12 +272,6 @@ export class ListElement extends CcrElement {
             ).toLocaleString(DateTime.DATE_MED)}</p>
           </div>
           <div class="detail-item">
-            <p class="detail-title">${translate('TIME')}</p>
-            <p class="detail-content">${DateTime.fromISO(
-              item.timestamp
-            ).toLocaleString(DateTime.TIME_SIMPLE)}</p>
-          </div>
-          <div class="detail-item">
             <p class="detail-title">${translate('CREATED_AT')}</p>
             <p class="detail-content">${DateTime.fromISO(
               item.createdAt

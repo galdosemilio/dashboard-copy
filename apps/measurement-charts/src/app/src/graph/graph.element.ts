@@ -20,25 +20,24 @@ import { Subject } from 'rxjs'
 import { api } from '@chart/service/api'
 import { createChart } from 'lightweight-charts'
 import { eventService } from '@chart/service'
-import { groupBy } from 'lodash'
+import { groupBy, sortBy } from 'lodash'
+import { translate } from '@chart/service/i18n'
 
 export interface GraphEntry {
   value: number
   time: string
 }
 
-interface GraphTimeData {
-  day: number
-  month: number
-  year: number
-}
-
 export class GraphElement extends CcrElement {
   private chart
-  private chartHeight = 400
+  private chartHeightOffset = 275
   private chartTimeFormat = 'yyyy-MM-dd'
   private data: GraphEntry[][] = []
   private dateRange: DateRange
+  private dateRangeButton: HTMLButtonElement
+  private readonly EMPTY_PERIOD_TOLERANCE = 3
+  private emptyPeriodCount = 0
+  private hasEntries: boolean
   private isLoading: boolean
   private isReady = false
   private firstTime = true
@@ -70,14 +69,33 @@ export class GraphElement extends CcrElement {
       this.isReady = true
       this.addLineSeries()
     })
+
+    this.dateRangeButton = document.querySelector('#previous-date-range-button')
+
+    this.dateRangeButton.addEventListener('click', () => {
+      if (this.dateRangeButton.classList.contains('disabled')) {
+        return
+      }
+
+      this.setDateRangeButtonState(false)
+      eventService.trigger('graph.date-range-previous')
+    })
   }
 
   render() {
     this.innerHTML = `
       <div id="graph-content">
         <dashboard-graph-timeframe-selector></dashboard-graph-timeframe-selector>
-        <dashboard-graph-header></dashboard-graph-header>
+        <dashboard-date-range-selector></dashboard-date-range-selector>
+        <dashboard-graph-header id="graph-header-container"></dashboard-graph-header>
 
+        <p class="hidden" id="empty-data-error">${translate(
+          'NO_DATA_CHOOSE_DIFF_RANGE'
+        )}<br/><br/>
+        <span id="previous-date-range-button">${translate(
+          'GO_TO_PREVIOUS_DATE_RANGE'
+        )}</span>
+        </p>
         <div id="lightweight-chart-container"></div>
       </div>
     `
@@ -101,7 +119,23 @@ export class GraphElement extends CcrElement {
         lastValueVisible: false,
         priceLineColor: api.baseData.colors[color],
         color: api.baseData.colors[color],
-        lineWidth: 2
+        lineWidth: 2,
+        autoscaleInfoProvider: (original) => {
+          const res = original()
+          if (res && res.priceRange !== null) {
+            res.priceRange.minValue = convertToReadableFormat(
+              api.baseData.dataPointTypes[index].bound.lower,
+              api.baseData.dataPointTypes[index],
+              api.baseData.metric
+            )
+            res.priceRange.maxValue = convertToReadableFormat(
+              api.baseData.dataPointTypes[index].bound.upper * 0.25,
+              api.baseData.dataPointTypes[index],
+              api.baseData.metric
+            )
+          }
+          return res
+        }
       })
 
       this.lineSeries.push(series)
@@ -114,18 +148,25 @@ export class GraphElement extends CcrElement {
     )
     this.chart = createChart(chartContainer, {
       width: document.documentElement.clientWidth,
-      height: this.chartHeight,
+      height: document.documentElement.clientHeight - this.chartHeightOffset,
       layout: {
         fontFamily: 'Montserrat'
       },
       handleScale: {
-        pinch: false
+        axisPressedMouseMove: {
+          price: false,
+          time: false
+        },
+        pinch: false,
+        mouseWheel: false
       },
       timeScale: {
         lockVisibleTimeRangeOnResize: true,
         tickMarkFormatter: (time) => {
           return DateTime.now().set(time).toFormat('yyyy/MM/dd')
-        }
+        },
+        minBarSpacing: 6,
+        barSpacing: 6
       }
     })
 
@@ -164,12 +205,21 @@ export class GraphElement extends CcrElement {
           )
         )
 
-        const data: GraphEntry[] = Object.values(groupedValues).map((group) => {
+        const uniqueGroups = Object.keys(groupedValues).filter(
+          (key) => !this.data[index]?.some((entry) => entry.time === key)
+        )
+
+        const data: GraphEntry[] = sortBy(uniqueGroups, (key) =>
+          DateTime.fromISO(key)
+        ).map((groupKey) => {
+          const group = groupedValues[groupKey]
           const filteredGroup = group.filter(
             (entry) => entry.point.id !== 'empty-group'
           )
 
           const hadEntries = filteredGroup.length > 0
+
+          this.hasEntries = this.hasEntries || hadEntries
 
           const lastEntry = hadEntries
             ? filteredGroup[filteredGroup.length - 1]
@@ -198,6 +248,18 @@ export class GraphElement extends CcrElement {
           this.data[index].map((entry) => ({ ...entry }))
         )
       })
+
+      if (
+        !measurements.data.length &&
+        !this.hasEntries &&
+        ++this.emptyPeriodCount >= this.EMPTY_PERIOD_TOLERANCE
+      ) {
+        this.showEmptyDataError()
+      } else {
+        this.hideEmptyDataError()
+      }
+
+      this.setDateRangeButtonState(true)
 
       if (!this.firstTime) {
         return
@@ -293,6 +355,14 @@ export class GraphElement extends CcrElement {
       })
   }
 
+  private hideEmptyDataError(): void {
+    document.querySelector('#empty-data-error').classList.add('hidden')
+    document
+      .querySelector('#lightweight-chart-container')
+      .classList.remove('hidden')
+    document.querySelector('#graph-header-container').classList.remove('hidden')
+  }
+
   private listenToEvents(): void {
     this.subscriptions.push(
       eventService
@@ -302,6 +372,7 @@ export class GraphElement extends CcrElement {
           if (api.baseData.token) {
             this.data = []
             this.firstTime = true
+            this.emptyPeriodCount = 0
             this.rangeChangeBumper = false
             this.dateRange = dateRange
             this.fetchMeasurements()
@@ -370,7 +441,11 @@ export class GraphElement extends CcrElement {
       endDate = pivotDate.plus({ [this.timeframe]: 1 }).endOf('day')
       append = true
 
-      if (this.hasSameDateEntry(pivotDate) || startDate > DateTime.now()) {
+      const lastDate = api.baseData.lastDate
+        ? DateTime.fromISO(api.baseData.lastDate)
+        : DateTime.now()
+
+      if (this.hasSameDateEntry(pivotDate) || startDate > lastDate) {
         this.reportSelectedDateRange()
         return
       }
@@ -432,7 +507,26 @@ export class GraphElement extends CcrElement {
   }
 
   private resizeChart(): void {
-    this.chart.resize(document.documentElement.clientWidth, this.chartHeight)
+    this.chart.resize(
+      document.documentElement.clientWidth,
+      document.documentElement.clientHeight - this.chartHeightOffset
+    )
+  }
+
+  private setDateRangeButtonState(enabled: boolean): void {
+    if (enabled) {
+      this.dateRangeButton.classList.remove('disabled')
+    } else {
+      this.dateRangeButton.classList.add('disabled')
+    }
+  }
+
+  private showEmptyDataError(): void {
+    document.querySelector('#empty-data-error').classList.remove('hidden')
+    document
+      .querySelector('#lightweight-chart-container')
+      .classList.add('hidden')
+    document.querySelector('#graph-header-container').classList.add('hidden')
   }
 }
 

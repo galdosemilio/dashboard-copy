@@ -16,6 +16,7 @@ export interface BaseData {
   accountId?: string
   token: string
   dataPointTypeId: string
+  lastDate?: string
   locale: string
   timezone: string
   timeframe: Timeframe

@@ -3,7 +3,7 @@ import './app.element.scss'
 import { baseData, BaseData, Tab, Timeframe } from '../model'
 import { api } from '../service/api'
 import { eventService, tabService } from '@chart/service'
-import { Settings as LuxonSettings } from 'luxon'
+import { DateTime, Settings as LuxonSettings } from 'luxon'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 import { MeasurementDataPointType, SYNTHETIC_TYPES } from '@coachcare/sdk'
 
@@ -35,6 +35,7 @@ export class AppElement extends HTMLElement {
       token: params.get('token'),
       accountId: params.get('accountId') ?? undefined,
       locale: params.get('locale') ?? baseData.locale,
+      lastDate: params.get('lastDate') ?? DateTime.now().toISO(),
       timezone: params.get('timezone') ?? baseData.timezone,
       timeframe: (params.get('timeframe') as Timeframe) ?? baseData.timeframe,
       metric:
@@ -70,13 +71,18 @@ export class AppElement extends HTMLElement {
       dataPointTypes.push(res)
     }
 
+    this.setLayout(data)
+    this.setDateTimeSettings(data)
+
+    if (!data.lastDate) {
+      data.lastDate = DateTime.now().toISO()
+    }
+
     api.appendBaseData({
       ...data,
       dataPointTypes
     })
     this.setColorPattern()
-    this.setLayout(data)
-    this.setDateTimeSettings()
 
     tabService.selectedTab$.next(data.view)
     eventService.baseDataEvent$.next(data)
@@ -96,9 +102,9 @@ export class AppElement extends HTMLElement {
     )
   }
 
-  private setDateTimeSettings() {
-    LuxonSettings.defaultLocale = api.baseData.locale
-    LuxonSettings.defaultZoneName = api.baseData.timezone
+  private setDateTimeSettings(data: BaseData) {
+    LuxonSettings.defaultLocale = data.locale
+    LuxonSettings.defaultZoneName = data.timezone
   }
 
   private setLayout(data: BaseData) {

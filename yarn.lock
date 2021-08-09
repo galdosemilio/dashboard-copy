@@ -11446,10 +11446,10 @@ lightercollective@^0.1.0:
   resolved "https://registry.npmjs.org/lightercollective/-/lightercollective-0.1.0.tgz#70df102c530dcb8d0ccabfe6175a8d00d5f61300"
   integrity sha512-J9tg5uraYoQKaWbmrzDDexbG6hHnMcWS1qLYgJSWE+mpA3U5OCSeMUhb+K55otgZJ34oFdR0ECvdIb3xuO5JOQ==
 
-lightweight-charts@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.npmjs.org/lightweight-charts/-/lightweight-charts-3.3.0.tgz#cbaafe8977ac342d45e847e12eb5c7b36007358a"
-  integrity sha512-W5jeBrXcHG8eHnIQ0L2CB9TLkrrsjNPlQq5SICPO8PnJ3dJ8jZkLCAwemZ7Ym7ZGCfKCz6ow1EPbyzNYxblnkw==
+lightweight-charts@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.npmjs.org/lightweight-charts/-/lightweight-charts-3.5.0.tgz#b675ef3733c13bb2ae61d263843680e31e3459b2"
+  integrity sha512-IK+Wqk0QNq2lPj0VKtgpg+mCCbA6T2+V788QA7M1PckcwHmAeLpjGz+/vpeEl4cBzmWSAEzCbN64aRbNP5yLwQ==
   dependencies:
     fancy-canvas "0.2.2"
 

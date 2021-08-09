@@ -9,4 +9,25 @@ dashboard-graph {
       }
     }
   }
+
+  p#empty-data-error {
+    margin: 15px 10px 0 10px;
+    text-align: center;
+  }
+
+  span#previous-date-range-button {
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    color: var(--primary);
+    padding: 10px;
+
+    &.disabled {
+      border-color: lightgray;
+      color: lightgray;
+    }
+  }
+
+  .hidden {
+    display: none !important;
+  }
 }

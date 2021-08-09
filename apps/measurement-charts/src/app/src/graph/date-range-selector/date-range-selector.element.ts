@@ -1,5 +1,6 @@
 import { CcrElement, DateRange, Timeframe } from '@chart/model'
 import { eventService } from '@chart/service'
+import { api } from '@chart/service/api'
 import { DateTime } from 'luxon'
 
 import './date-range-selector.element.scss'
@@ -77,15 +78,17 @@ export class DateRangeSelectorElement extends CcrElement {
   }
 
   private refreshDateRange(timeframe: Timeframe): void {
-    const today = DateTime.now()
+    const lastDate = api.baseData.lastDate
+      ? DateTime.fromISO(api.baseData.lastDate)
+      : DateTime.now()
 
     this.dateRange = {
-      start: today
+      start: lastDate
         .minus({ [timeframe]: 1 })
         .plus({ day: 1 })
         .startOf('day')
         .toISO(),
-      end: today.endOf('day').toISO()
+      end: lastDate.endOf('day').toISO()
     }
 
     eventService.trigger('graph.date-range', this.dateRange)

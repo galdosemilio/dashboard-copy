@@ -8,7 +8,6 @@ export class GraphHeaderElement extends CcrElement {
   render() {
     this.innerHTML = `
       <div>
-        <dashboard-date-range-selector></dashboard-date-range-selector>
         <div id="graph-header"></div>
       </div>
     `
