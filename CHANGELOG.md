@@ -1,3 +1,11 @@
+## [1.28.2](https://github.com/coachcare/dashboard/compare/v1.28.1...v1.28.2) (2021-08-11)
+
+
+### Bug Fixes
+
+* multiple minor charts bugfixes [FRON-2262] ([57cd815](https://github.com/coachcare/dashboard/commit/57cd815ec6eff220f0a9d0f476dd5a1d9925a25e))
+* update list view and change date range [FRON-2258] ([edf50d1](https://github.com/coachcare/dashboard/commit/edf50d1a0366c279ba3c681daf273ccc3973d57f))
+
 ## [1.28.1](https://github.com/coachcare/dashboard/compare/v1.28.0...v1.28.1) (2021-08-04)
 
 
