@@ -16,7 +16,7 @@ import {
 import { auditTime, debounceTime, filter } from 'rxjs/operators'
 
 import { DateTime } from 'luxon'
-import { Subject } from 'rxjs'
+import { merge, Subject } from 'rxjs'
 import { api } from '@chart/service/api'
 import { createChart } from 'lightweight-charts'
 import { eventService } from '@chart/service'
@@ -48,6 +48,7 @@ export class GraphElement extends CcrElement {
   private visibleLocalRangeChanged$: Subject<
     Record<string, unknown>
   > = new Subject<Record<string, unknown>>()
+  private scaleChart$: Subject<void> = new Subject<void>()
 
   constructor() {
     super()
@@ -55,6 +56,7 @@ export class GraphElement extends CcrElement {
     this.onVisibleLogicalRangeChanged = this.onVisibleLogicalRangeChanged.bind(
       this
     )
+    this.scaleChart = this.scaleChart.bind(this)
   }
 
   onInit(): void {
@@ -119,23 +121,7 @@ export class GraphElement extends CcrElement {
         lastValueVisible: false,
         priceLineColor: api.baseData.colors[color],
         color: api.baseData.colors[color],
-        lineWidth: 2,
-        autoscaleInfoProvider: (original) => {
-          const res = original()
-          if (res && res.priceRange !== null) {
-            res.priceRange.minValue = convertToReadableFormat(
-              api.baseData.dataPointTypes[index].bound.lower,
-              api.baseData.dataPointTypes[index],
-              api.baseData.metric
-            )
-            res.priceRange.maxValue = convertToReadableFormat(
-              api.baseData.dataPointTypes[index].bound.upper * 0.25,
-              api.baseData.dataPointTypes[index],
-              api.baseData.metric
-            )
-          }
-          return res
-        }
+        lineWidth: 2
       })
 
       this.lineSeries.push(series)
@@ -247,6 +233,14 @@ export class GraphElement extends CcrElement {
         this.lineSeries[index].setData(
           this.data[index].map((entry) => ({ ...entry }))
         )
+        this.lineSeries[index].setMarkers(
+          this.data[index].map((entry) => ({
+            time: entry.time,
+            shape: 'circle',
+            position: 'inBar',
+            color: api.baseData.colors.primary
+          }))
+        )
       })
 
       if (
@@ -260,6 +254,7 @@ export class GraphElement extends CcrElement {
       }
 
       this.setDateRangeButtonState(true)
+      this.scaleChart$.next()
 
       if (!this.firstTime) {
         return
@@ -273,6 +268,7 @@ export class GraphElement extends CcrElement {
       })
 
       this.chart.timeScale().fitContent()
+      this.chart.applyOptions({ priceScale: { autoScale: false } })
       eventService.trigger(
         'graph.data',
         this.getEntriesBetweenRange(this.dateRange)
@@ -393,7 +389,13 @@ export class GraphElement extends CcrElement {
           filter(() => !this.isLoading && !this.rangeChangeBumper),
           auditTime(300)
         )
-        .subscribe(this.onVisibleLogicalRangeChanged)
+        .subscribe(this.onVisibleLogicalRangeChanged),
+      merge(this.scaleChart$, this.visibleLocalRangeChanged$)
+        .pipe(
+          filter(() => !this.isLoading && !this.rangeChangeBumper),
+          debounceTime(1500)
+        )
+        .subscribe(this.scaleChart)
     )
   }
 
@@ -511,6 +513,15 @@ export class GraphElement extends CcrElement {
       document.documentElement.clientWidth,
       document.documentElement.clientHeight - this.chartHeightOffset
     )
+  }
+
+  private async scaleChart(): Promise<void> {
+    if (!this.chart) {
+      return
+    }
+    this.chart.applyOptions({ priceScale: { autoScale: true } })
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    this.chart.applyOptions({ priceScale: { autoScale: false } })
   }
 
   private setDateRangeButtonState(enabled: boolean): void {
