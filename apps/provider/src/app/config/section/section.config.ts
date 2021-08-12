@@ -38,6 +38,7 @@ import {
   ShakeItTestSectionConfig
 } from './metagenics'
 import { SectionConfigDetails } from './models/section.details'
+import { PeakHealthGroupSectionConfig } from './peak-health-group'
 import { RobardSectionConfig } from './robard'
 import { ShiftSetGoSectionConfig } from './shiftsetgo/shiftsetgo.section.config'
 import { TrueWeightSectionConfig } from './true-weight/true-weight.section.config'
@@ -85,7 +86,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7353']: TrueWeightSectionConfig,
     ['7420']: GrandViewHealthSectionConfig,
     ['7384']: MDTeamSectionConfig,
-    ['7520']: CurryCareTestSectionConfig
+    ['7520']: CurryCareTestSectionConfig,
+    ['7534']: PeakHealthGroupSectionConfig
   },
   prod: {
     ['4050']: LeanMDSectionConfig,
@@ -106,6 +108,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['5595']: TrueWeightSectionConfig,
     ['6438']: MDTeamSectionConfig,
     ['6439']: DrVProdSectionConfig,
-    ['4049']: CurryCareProdSectionConfig
+    ['4049']: CurryCareProdSectionConfig,
+    ['6869']: PeakHealthGroupSectionConfig
   }
 }
