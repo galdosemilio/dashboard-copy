@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "Am Tag {{day}} eines jeden Monats",
     "OPEN_IN_NEW": "in neuem Tab öffnen ",
     "OPTIONAL": "Optional",
+    "PATIENT_CALL_EXPLANATION": "Sie erhalten möglicherweise eingehende Videokonferenzen von Ihrem Coach oder Anbieter in diesem Dashboard. Eine Benachrichtigung wird auf dem Bildschirm angezeigt, wenn ein eingehender Anruf empfangen wird, von dem Sie den Anruf beantworten können.",
+    "PATIENT_DASHBOARD_WELCOME": "Willkommen, {{name}}",
     "PATIENT_EDIT": "Patienten bearbeiten",
     "PATIENT_NEW": "Neue Patienten hinzufügen",
     "PATIENT_PAYMENT": "Patientenzahlung",

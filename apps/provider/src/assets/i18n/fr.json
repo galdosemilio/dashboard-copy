@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "Le jour {{day}} de chaque mois",
     "OPEN_IN_NEW": "Ouvrir dans un nouvel onglet",
     "OPTIONAL": "Facultatif",
+    "PATIENT_CALL_EXPLANATION": "Vous pouvez recevoir des appels de vidéoconférence entrants depuis votre entraîneur ou votre fournisseur sur ce tableau de bord. Une notification sera affichée à l'écran lorsqu'un appel entrant est reçu, à partir duquel vous pouvez répondre à l'appel.",
+    "PATIENT_DASHBOARD_WELCOME": "Bienvenue, {{name}}",
     "PATIENT_EDIT": "Éditer patient",
     "PATIENT_NEW": "Ajouter un nouveau patient",
     "PATIENT_PAYMENT": "Paiement des patients",

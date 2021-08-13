@@ -18,6 +18,7 @@ export interface SidenavItem {
   navAction?: string
   route?: string
   icon?: string
+  isAllowedForPatients?: boolean
   children?: Array<SidenavItem>
   expanded?: boolean
   badge?: number | string

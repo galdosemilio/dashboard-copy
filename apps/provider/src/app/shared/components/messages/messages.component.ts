@@ -13,6 +13,7 @@ import {
 } from '@angular/core'
 import { ConfigService, ContextService, NotifierService } from '@app/service'
 import {
+  AccountTypeIds,
   AccSingleResponse,
   AddMessageMessagingRequest,
   CreateThreadMessagingRequest,
@@ -84,6 +85,7 @@ export class CcrMessagesComponent
 
   changed$ = new Subject<void>()
   disabled = false
+  public isProvider = false
   loading = false
   offset = 0
   messages: Array<MessageContainer> = []
@@ -113,6 +115,8 @@ export class CcrMessagesComponent
   }
 
   public ngOnInit(): void {
+    this.isProvider =
+      this.context.user.accountType.id === AccountTypeIds.Provider
     this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
       this.renderTimestamps()
     })
@@ -203,6 +207,10 @@ export class CcrMessagesComponent
   }
 
   public showProfile(account: MessageRecipient): void {
+    if (!this.isProvider) {
+      return
+    }
+
     this.gotoProfile.emit(account)
   }
 

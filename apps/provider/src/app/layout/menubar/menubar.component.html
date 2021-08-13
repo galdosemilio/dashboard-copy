@@ -73,7 +73,7 @@
         <span>{{ 'MENU.LOGOUT' | translate }}</span>
       </button>
     </mat-menu>
-    <div class="notification-icon" (click)="togglePanel($event)" [class.invisible]="!panelEnabled">
+    <div *ngIf="showNotifButton" class="notification-icon" (click)="togglePanel($event)" [class.invisible]="!panelEnabled">
       <mat-icon>notifications_none</mat-icon>
     </div>
   </div>

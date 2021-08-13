@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "ביום {{day}} בכל חודש",
     "OPEN_IN_NEW": "פתח בכרטיסייה חדשה",
     "OPTIONAL": "אופציונלי",
+    "PATIENT_CALL_EXPLANATION": "ייתכן שתקבל שיחות ועידת וידאו נכנסות מהמאמן או מהספק שלך על לוח המחוונים. הודעה תוצג על המסך כאשר מתקבלת שיחה נכנסת, שממנו תוכל לענות לשיחה.",
+    "PATIENT_DASHBOARD_WELCOME": "ברוכים הבאים, {{name}}}",
     "PATIENT_EDIT": "עריכת מטופל",
     "PATIENT_NEW": "הוספת מטופל חדש",
     "PATIENT_PAYMENT": "Patient Payment",

@@ -8,11 +8,11 @@
 
     <span class='mobile-message-top'>
       <ng-container *ngIf="shownRecipients.length === 1; else recipients">
-        <span (click)="showProfile(shownRecipients[0])" class="patient-link">{{shownRecipients[0].name}}</span>
+        <span (click)="showProfile(shownRecipients[0])" [class.patient-link]="isProvider">{{shownRecipients[0].name}}</span>
       </ng-container>
       <ng-template #recipients>
         <ng-container *ngFor="let recipient of shownRecipients; let last = last">
-          <span (click)="showProfile(recipient)" class="patient-link">{{recipient.shortName}}</span>
+          <span (click)="showProfile(recipient)" [class.patient-link]="isProvider">{{recipient.shortName}}</span>
           <ng-container *ngIf="!last">, </ng-container>
           <ng-container *ngIf="last && shownRecipients.length < thread?.recipients.length">
             <br>
@@ -26,7 +26,7 @@
   </div>
   <div *ngIf="thread?.recipients.length === 1" fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" fxHide.xs>
     <ccr-call-control [targets]="thread.recipients"></ccr-call-control>
-    <a mat-button color="primary" class="ccr-icon-button"
+    <a *ngIf="isProvider" mat-button color="primary" class="ccr-icon-button"
       (click)="showProfile(thread.recipients[0])">
       <mat-icon>person_outline</mat-icon>
       <span fxHide.xs>{{'BOARD.VIEW_PROFILE' | translate}}</span>

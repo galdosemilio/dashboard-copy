@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "På dag {{day}} i hver måned",
     "OPEN_IN_NEW": "Åbn i ny fane",
     "OPTIONAL": "Valgfri",
+    "PATIENT_CALL_EXPLANATION": "Du kan modtage indgående videokonferenceopkald fra din træner eller udbyder på dette dashboard. En meddelelse vises på skærmen, når et indgående opkald er modtaget, hvorfra du kan besvare opkaldet.",
+    "PATIENT_DASHBOARD_WELCOME": "Velkommen, {{name}}",
     "PATIENT_EDIT": "Rediger Patient",
     "PATIENT_NEW": "Tilføj Ny Patient",
     "PATIENT_PAYMENT": "Patientbetaling",

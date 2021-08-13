@@ -23,7 +23,7 @@
         </button>
       </div>
 
-      <app-messages-recipients *ngIf="current"
+      <app-messages-recipients *ngIf="current && isProvider"
         [current]="current" [total]="source?.total"
         (changed)="selectAccounts($event)"
       ></app-messages-recipients>

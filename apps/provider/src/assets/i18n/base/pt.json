@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "No dia {{day}} de cada mês",
     "OPEN_IN_NEW": "Open in New Tab",
     "OPTIONAL": "Opcional",
+    "PATIENT_CALL_EXPLANATION": "Você pode receber chamadas de conferência de vídeo recebidas em seu treinador ou provedor neste painel. Uma notificação será exibida na tela quando uma chamada recebida é recebida, a partir da qual você pode atender a chamada.",
+    "PATIENT_DASHBOARD_WELCOME": "Bem-vindo, {{name}}",
     "PATIENT_EDIT": "Editar paciente",
     "PATIENT_NEW": "Adicionar novo paciente",
     "PATIENT_PAYMENT": "Pagamentos do Paciente",

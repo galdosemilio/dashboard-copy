@@ -12,11 +12,9 @@
   "json.format.enable": true,
   "html.format.enable": false,
   "html.format.wrapLineLength": 100,
-  "prettier.disableLanguages": [
-    "html",
-    "jsonc"
-  ],
+  "prettier.disableLanguages": ["html", "jsonc"],
   "tslint.autoFixOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "javascript.implicitProjectConfig.experimentalDecorators": true
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

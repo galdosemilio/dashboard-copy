@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "El día {{day}} de cada mes",
     "OPEN_IN_NEW": "Abrir en una Pestaña Nueva",
     "OPTIONAL": "Opcional",
+    "PATIENT_CALL_EXPLANATION": "Puede recibir llamadas de videoconferencia de su asesor o proveedor en este tablero. Una notificación aparecerá en la pantalla cuando se reciba una llamada y desde ella puede contestar.",
+    "PATIENT_DASHBOARD_WELCOME": "Bienvenido, {{ name }}",
     "PATIENT_EDIT": "Editar Paciente",
     "PATIENT_NEW": "Nuevo Paciente",
     "PATIENT_PAYMENT": "Patient Payment",

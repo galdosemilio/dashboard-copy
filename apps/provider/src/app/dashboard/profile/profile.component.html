@@ -25,6 +25,7 @@ fxLayoutAlign=" stretch">
     {{ 'GLOBAL.PROFILE' | translate }}
   </a>
   <a
+  *ngIf="isProvider"
   [class.active]="section === 'security'"
   [routerLink]="['.', { s: 'security' }]"
   ccrLinkActive="active"
@@ -33,6 +34,7 @@ fxLayoutAlign=" stretch">
     {{ 'GLOBAL.SECURITY' | translate }}
   </a>
   <a
+  *ngIf="isProvider"
   [class.active]="section === 'communications'"
   [routerLink]="['.', { s: 'communications' }]"
   ccrLinkActive="active"
@@ -41,6 +43,7 @@ fxLayoutAlign=" stretch">
     {{ 'REPORTS.COMMS_CALLS' | translate }}
   </a>
   <a
+  *ngIf="isProvider"
   [class.active]="section === 'login-history'"
   [routerLink]="['.', { s: 'login-history' }]"
   ccrLinkActive="active"

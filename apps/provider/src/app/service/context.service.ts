@@ -92,7 +92,8 @@ export class ContextService {
     return (): Promise<any> => {
       return new Promise((resolve, reject) => {
         this.lang.initLanguage()
-        if (!this.auth.check()) {
+        const authCheck = this.auth.check()
+        if (!authCheck) {
           this.auth.redirect()
           reject()
         }
@@ -174,7 +175,7 @@ export class ContextService {
           defaultOrganization
         })
 
-        if (!this.user.preference && org.permissions.viewAll) {
+        if (!this.user.preference && org.permissions?.viewAll) {
           await this.accservice.savePreferences({
             account: this.user.id,
             ...preferences
@@ -310,7 +311,7 @@ export class ContextService {
 
   private getAccessibleOrg() {
     const allowed = this.organizations.find(
-      (o) => o.permissions.viewAll === true
+      (o) => o.permissions?.viewAll === true
     )
 
     return allowed ? allowed : this.organizations[0]

@@ -1,8 +1,8 @@
 <mat-toolbar>
   <div fxFlexFill>
-    <button mat-button class="topnav-logo" [matMenuTriggerFor]="orgs" (menuOpened)="menuOpened()" (menuClosed)="menuClosed$.next()">
+    <button [disabled]="!hasMoreThanOneClinic" mat-button class="topnav-logo" [matMenuTriggerFor]="orgs" (menuOpened)="menuOpened()" (menuClosed)="menuClosed$.next()">
       <img [attr.src]="logoSrc" />
-      <i class="material-icons"></i>
+      <i *ngIf="hasMoreThanOneClinic" class="material-icons"></i>
     </button>
     <mat-menu #orgs="matMenu" class="org-selector"
     [overlapTrigger]="false" yPosition="below" xPosition="after">

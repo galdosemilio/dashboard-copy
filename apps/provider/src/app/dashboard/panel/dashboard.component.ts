@@ -17,6 +17,7 @@ import {
   WalkthroughService
 } from '@app/service'
 import { _, ViewUtils } from '@app/shared'
+import { AccountTypeIds, AccSingleResponse } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -28,10 +29,12 @@ import { _, ViewUtils } from '@app/shared'
 export class DashboardComponent implements OnDestroy, OnInit {
   recentsSource: DietersDataSource
   alertsSource: AlertsDataSource
+  public isProvider = false
   signupSource: SignupsReportsDataSource
 
   canViewAll = true
   canAccessPhi = true
+  public currentUser: AccSingleResponse
 
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/115001799311-Module-1-Getting-Started-with-your-Coach-dashboard'
@@ -50,6 +53,9 @@ export class DashboardComponent implements OnDestroy, OnInit {
   ) {}
 
   ngOnInit() {
+    this.isProvider =
+      this.context.user.accountType.id === AccountTypeIds.Provider
+    this.currentUser = this.context.user
     this.walkthrough.checkGuideState('dashboard')
     // this.bus.trigger('organizations.enable-all');
     this.bus.trigger('right-panel.component.set', 'notifications')

@@ -38,8 +38,6 @@
           {{ 'GLOBAL.FORGOT_PASSWORD' | translate }}
         </a>
 
-        <span class="text-center">{{ 'GLOBAL.SIGN_FROM_APP' | translate }}</span>
-
         <ng-container *ngTemplateOutlet="badgeButtons;context:{wrapper:'badge-button-wrapper-lg-and-up'}"></ng-container>
         <a *ngIf="showRegisterCompany" class="new-clinic-prompt text-center" color="primary" routerLink="/register/clinic">
           {{ 'GLOBAL.REGISTER_NEW_CLINIC' | translate }}
@@ -47,7 +45,6 @@
       </div>
 
       <div *ngSwitchCase="'patient'" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
-        <p class="text-center">{{ 'GLOBAL.SIGN_FROM_APP' | translate }}</p>
         <a mat-button color="primary" routerLink="/password/reset" class="ccr-button">
           {{ 'GLOBAL.FORGOT_PASSWORD' | translate }}
         </a>

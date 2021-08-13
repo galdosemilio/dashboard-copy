@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "Il giorno {{day}} di ogni mese",
     "OPEN_IN_NEW": "Apri in una nuova scheda",
     "OPTIONAL": "Opzionale",
+    "PATIENT_CALL_EXPLANATION": "È possibile ricevere chiamate di videoconferenza in entrata dal tuo allenatore o fornitore su questa dashboard. Una notifica verrà visualizzata sullo schermo quando viene ricevuta una chiamata in entrata, da cui è possibile rispondere alla chiamata.",
+    "PATIENT_DASHBOARD_WELCOME": "Benvenuto, {{name}}",
     "PATIENT_EDIT": "Modifica Paziente",
     "PATIENT_NEW": "Aggiungi Nuovo Paziente",
     "PATIENT_PAYMENT": "Pagamento Paziente",

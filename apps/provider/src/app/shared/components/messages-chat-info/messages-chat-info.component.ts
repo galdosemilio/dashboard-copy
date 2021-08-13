@@ -3,7 +3,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { MessageAddMemberDialog, PromptDialog } from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
 import { MatDialog } from '@coachcare/material'
-import { Messaging } from '@coachcare/sdk'
+import { AccountTypeIds, Messaging } from '@coachcare/sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { MessageThread } from '../messages/messages.interfaces'
 import { filter } from 'rxjs/operators'
@@ -21,6 +21,7 @@ export class CcrMessagesChatInfoComponent implements OnInit {
   @Output() hideChatInfo: EventEmitter<void> = new EventEmitter<void>()
 
   public currentUser
+  public isProvider = false
 
   constructor(
     private context: ContextService,
@@ -32,6 +33,8 @@ export class CcrMessagesChatInfoComponent implements OnInit {
 
   public ngOnInit(): void {
     this.currentUser = this.context.user
+    this.isProvider =
+      this.context.user.accountType.id === AccountTypeIds.Provider
   }
 
   public onHideChatInfo(): void {

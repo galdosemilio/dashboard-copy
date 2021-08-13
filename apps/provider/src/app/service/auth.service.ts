@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { STORAGE_PROVIDER_ROUTE } from '@app/config'
 import { CookieService } from 'ngx-cookie-service'
-import { ApiService } from '@coachcare/sdk'
+import { AccountTypeIds, ApiService } from '@coachcare/sdk'
 import { environment } from '../../environments/environment'
 
 @Injectable()
@@ -10,9 +10,18 @@ export class AuthService {
     api.onUnauthenticatedError.subscribe(() => this.redirect())
   }
 
-  check(): boolean {
+  check(): AccountTypeIds | false {
     const role = this.cookie.get('ccrStatic')
-    return !role ? false : role === environment.role
+    switch (role) {
+      case 'provider':
+        return AccountTypeIds.Provider
+
+      case 'client':
+        return AccountTypeIds.Client
+
+      default:
+        return false
+    }
   }
 
   get(): string {

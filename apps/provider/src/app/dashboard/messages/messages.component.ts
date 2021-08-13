@@ -16,6 +16,7 @@ import {
 import { _, MessageRecipient, MessageThread, PromptDialog } from '@app/shared'
 import { MatDialog } from '@coachcare/material'
 import {
+  AccountTypeIds,
   AccSingleResponse,
   GetAllMessagingResponse,
   Messaging,
@@ -43,6 +44,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public hasUnreadThreads = false
   public interval: any
   public isMarkingAsRead = false
+  public isProvider = false
   public messagingEnabled = false
   public newThread: MessageThread
   public pageIndex$ = new BehaviorSubject<number>(0)
@@ -111,6 +113,8 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
       })
 
     this.current = this.context.user
+    this.isProvider =
+      this.context.user.accountType.id === AccountTypeIds.Provider
     this.selectAccounts()
 
     this.setRefresh()
@@ -204,6 +208,9 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
           await this.messaging.markAllMessagesAsViewed({})
 
           this.bus.trigger('system.unread.threads')
+          this.threads.forEach((thread) => (thread.unread = false))
+
+          await this.resolveUnreadThreads()
 
           this.isMarkingAsRead = false
 

@@ -131,7 +131,11 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       const request: LoginSessionRequest = {
         ...this.form.value,
         deviceType: DeviceTypeIds.Web,
-        allowedAccountTypes: [AccountTypeIds.Admin, AccountTypeIds.Provider],
+        allowedAccountTypes: [
+          AccountTypeIds.Admin,
+          AccountTypeIds.Provider,
+          AccountTypeIds.Client
+        ],
         organization:
           this.context.organizationId || this.environment.defaultOrgId
       }
@@ -142,7 +146,6 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       this.session
         .login(request as any) // MERGETODO: CHECK THIS TYPE!!!
         .then(async (response) => {
-          console.log(JSON.stringify(response))
           if (response.mfa) {
             this.detectMFA(response as any) // MERGETODO: CHECK THIS TYPE!!!
           } else {

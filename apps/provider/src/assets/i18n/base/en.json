@@ -227,6 +227,8 @@
     "ON_DAY_X_EVERY_MONTH": "On day {{ day }} of every month",
     "OPEN_IN_NEW": "Open in New Tab",
     "OPTIONAL": "Optional",
+    "PATIENT_CALL_EXPLANATION": "You may receive incoming video conference calls from your coach or provider on this dashboard. A notification will be displayed on the screen when an incoming call is received, from which you can answer the call.",
+    "PATIENT_DASHBOARD_WELCOME": "Welcome, {{ name }}",
     "PATIENT_EDIT": "Edit Patient",
     "PATIENT_NEW": "Add New Patient",
     "PATIENT_PAYMENT": "Patient Payment",

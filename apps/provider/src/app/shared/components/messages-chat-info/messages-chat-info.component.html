@@ -30,13 +30,13 @@
       <div *ngFor="let user of thread?.allRecipients" fxLayout="row" fxLayoutAlign="stretch center">
       <ccr-user-card
       fxFlex
-      [allowUserLinking]="true"
-      [allowUserLinkingBlank]="true"
-      [showCallButton]="user.id !== currentUser.id"
+      [allowUserLinking]="isProvider"
+      [allowUserLinkingBlank]="isProvider"
+      [showCallButton]="isProvider && user.id !== currentUser.id"
       [showRemoveButton]="false"
       [user]="user"></ccr-user-card>
 
-      <div *ngIf="user.id !== currentUser.id">
+      <div *ngIf="isProvider && user.id !== currentUser.id">
         <mat-icon
         *ngIf="thread?.allRecipients.length > 2"
         [matTooltip]="'BOARD.THREAD_REMOVE_MEMBER' | translate:{user: user}"
@@ -54,7 +54,7 @@
       </div>
 
       <mat-icon
-      *ngIf="user.id === currentUser.id"
+      *ngIf="isProvider && user.id === currentUser.id"
       [matTooltip]="'BOARD.THREAD_UNABLE_REMOVE_YOURSELF' | translate"
       class="delete-button disabled">
         delete
@@ -63,6 +63,7 @@
 
     <div fxLayout="row" fxLayoutAlign="start center">
       <button
+      *ngIf="isProvider"
       mat-button type="button" color="primary"
       class="ccr-icon-button" (click)="openAddMemberDialog()">
         <mat-icon>add</mat-icon>

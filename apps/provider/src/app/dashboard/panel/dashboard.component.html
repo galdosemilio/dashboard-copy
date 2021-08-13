@@ -1,3 +1,4 @@
+<div *ngIf="isProvider; else patientDashboard">
 <div class="ccr-heading">
   <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
     <h2 fxFlex>
@@ -52,3 +53,16 @@
   </div>
 
 </div>
+</div>
+
+<ng-template #patientDashboard>
+  <div class="ccr-heading">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+      <h2 fxFlex>
+        {{ 'BOARD.PATIENT_DASHBOARD_WELCOME' | translate:{name:currentUser.firstName } }}
+      </h2>
+    </div>
+  </div>
+
+  <p>{{ 'BOARD.PATIENT_CALL_EXPLANATION' | translate }}</p>
+</ng-template>

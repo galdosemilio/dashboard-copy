@@ -26,7 +26,7 @@ import { findIndex, get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { fromEvent, Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
-import { Messaging, OrganizationProvider } from '@coachcare/sdk'
+import { AccountTypeIds, Messaging, OrganizationProvider } from '@coachcare/sdk'
 import { SidenavItem } from './sidenav-item/sidenav-item.component'
 
 export interface SidenavOrg {
@@ -56,6 +56,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   menuContainer: HTMLElement
   menuClosed$ = new Subject<Event>()
   isSearchingClinics = false
+  hasMoreThanOneClinic = false
   searchNext = 0
   searchQuery: string = undefined
 
@@ -94,6 +95,8 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.hasMoreThanOneClinic = this.context.organizations.length > 1
+
     this.currentLang = this.translate.currentLang
     this.isOrphaned = this.context.isOrphaned
 
@@ -190,7 +193,8 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             code: SidenavOptions.DASHBOARD,
             navName: _('GLOBAL.DASHBOARD'),
             navRoute: 'dashboard',
-            icon: 'dashboard'
+            icon: 'dashboard',
+            isAllowedForPatients: true
           },
           {
             navName: _('SIDENAV.ACCOUNTS'),
@@ -249,6 +253,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             route: 'messages',
             navRoute: 'messages',
             icon: 'chat',
+            isAllowedForPatients: true,
             badge: 0
           },
           {
@@ -331,6 +336,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             navName: _('SIDENAV.RESOURCES'),
             route: 'resources',
             icon: 'help',
+            isAllowedForPatients: true,
             navRoute: 'messages',
             children: [
               {
@@ -344,13 +350,15 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
                 code: SidenavOptions.RESOURCES_SCHEDULE_SUPPORT_CALL,
                 navName: _('SIDENAV.SCHEDULE_SUPPORT_CALL'),
                 navLink: 'https://calendly.com/coachcarekjm/supportcall',
-                icon: 'add_ic_call'
+                icon: 'add_ic_call',
+                isAllowedForPatients: true
               },
               {
                 code: SidenavOptions.RESOURCES_CONTACT,
                 navName: _('SIDENAV.CONTACT_SUPPORT'),
                 navLink: `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${this.currentLang}`,
-                icon: 'email'
+                icon: 'email',
+                isAllowedForPatients: true
               },
               {
                 code: SidenavOptions.RESOURCES_FAQ,
@@ -478,6 +486,10 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   updateSections(org: SelectedOrganization) {
+    if (this.context.user.accountType.id === AccountTypeIds.Client) {
+      this.filterForClients()
+    }
+
     let hiddenOptions = resolveConfig('SIDENAV.HIDDEN_OPTIONS', org)
     const shownOptions = resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true) || []
 
@@ -613,5 +625,18 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
         message: 'Failed to load the clinic logo'
       }
     })
+  }
+
+  private filterForClients(): void {
+    this.sidenavItems = this.sidenavItems.filter(
+      (item) => item.isAllowedForPatients
+    )
+
+    this.sidenavItems = this.sidenavItems.map((item) => ({
+      ...item,
+      children: item.children?.filter(
+        (childItem) => childItem.isAllowedForPatients
+      )
+    }))
   }
 }

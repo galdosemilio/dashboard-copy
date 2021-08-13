@@ -28,7 +28,7 @@ import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { OrganizationProvider, User } from '@coachcare/sdk'
+import { AccountTypeIds, OrganizationProvider, User } from '@coachcare/sdk'
 import { HelpComponent } from './help'
 
 @UntilDestroy()
@@ -58,6 +58,7 @@ export class MenubarComponent implements OnDestroy, OnInit {
 
   subscriptions: Subscription[]
   callState: CallState
+  showNotifButton = true
   showHelpButton = false
 
   constructor(
@@ -84,6 +85,11 @@ export class MenubarComponent implements OnDestroy, OnInit {
   ngOnDestroy() {}
 
   ngOnInit() {
+    if (this.context.user.accountType.id === AccountTypeIds.Client) {
+      this.showNotifButton = false
+      this.store.dispatch(new TogglePanel())
+    }
+
     this.context.organization$.subscribe((org) => {
       this.organization = org
       // TODO consider logo-mark for md screens
@@ -100,7 +106,9 @@ export class MenubarComponent implements OnDestroy, OnInit {
 
   initSearch() {
     this.context.orphanedAccount$.subscribe((isOrphaned) => {
-      this.searchEnabled = !isOrphaned
+      this.searchEnabled =
+        this.context.user.accountType.id === AccountTypeIds.Provider &&
+        !isOrphaned
     })
 
     this.searchCtrl = new FormControl()

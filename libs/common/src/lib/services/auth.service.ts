@@ -24,7 +24,7 @@ export class AuthService {
 
   login(role: CcrRol) {
     // TODO v7 get the requested Angular route and pass it to the login
-    if (role === 'provider') {
+    if (role === 'provider' || role === 'client') {
       const providerReturnURL = window.localStorage.getItem(
         STORAGE_PROVIDER_URL
       )
