@@ -1,3 +1,15 @@
+# [1.29.0](https://github.com/coachcare/dashboard/compare/v1.28.2...v1.29.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* implemented semi-automatic y-scaling [FRON-2267] ([91a2e8d](https://github.com/coachcare/dashboard/commit/91a2e8d5cf3de7c08b6c0ca3781bf99f0674c4a3))
+
+
+### Features
+
+* add clinic create button for peak health group [FRON-2260] ([4f49497](https://github.com/coachcare/dashboard/commit/4f49497767ed35c22590e11281765b2a1b40ff87))
+
 ## [1.28.2](https://github.com/coachcare/dashboard/compare/v1.28.1...v1.28.2) (2021-08-11)
 
 
