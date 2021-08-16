@@ -1,3 +1,10 @@
+## [1.29.1](https://github.com/coachcare/dashboard/compare/v1.29.0...v1.29.1) (2021-08-16)
+
+
+### Bug Fixes
+
+* upgraded sdk version [FRON-2271] ([8ce2f81](https://github.com/coachcare/dashboard/commit/8ce2f813e81e0863413a206b6d892c0bb09b7aa7))
+
 # [1.29.0](https://github.com/coachcare/dashboard/compare/v1.28.2...v1.29.0) (2021-08-13)
 
 
