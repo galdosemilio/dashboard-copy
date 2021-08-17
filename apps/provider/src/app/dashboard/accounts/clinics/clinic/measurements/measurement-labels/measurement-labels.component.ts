@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { NotifierService } from '@app/service'
+import { ContextService, NotifierService } from '@app/service'
 import { CcrDropEvent, _ } from '@app/shared'
 import { PromptDialog } from '@coachcare/common/dialogs/core'
 import { MatDialog } from '@coachcare/material'
 import {
+  convertUnitToPreferenceFormat,
+  MeasurementDataPointMinimalType,
   MeasurementDataPointTypeAssociation,
   MeasurementDataPointTypeProvider,
   MeasurementLabelProvider
@@ -33,6 +35,7 @@ export class ClinicMeasurementLabelsComponent implements OnInit {
   public rows: MeasurementLabelTableEntry[] = []
 
   constructor(
+    private context: ContextService,
     private dataPointType: MeasurementDataPointTypeProvider,
     private dialog: MatDialog,
     private measurementLabel: MeasurementLabelProvider,
@@ -62,6 +65,15 @@ export class ClinicMeasurementLabelsComponent implements OnInit {
     } catch (error) {
       this.notifier.error(error)
     }
+  }
+
+  public convertUnitToReadableFormat(
+    type: MeasurementDataPointMinimalType
+  ): string {
+    return convertUnitToPreferenceFormat(
+      type,
+      this.context.user.measurementPreference
+    )
   }
 
   public toggleRow(row: MeasurementLabelTableEntry): void {

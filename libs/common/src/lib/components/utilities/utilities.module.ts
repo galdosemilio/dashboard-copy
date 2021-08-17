@@ -9,6 +9,7 @@ import { BadgeComponent } from './badge/badge.component'
 import { CcrDatasourceOverlayComponent } from './datasource-overlay/datasource-overlay.component'
 import { DateNavigatorComponent } from './date-navigator/date-navigator.component'
 import { DateRangeNavigatorComponent } from './date-range-navigator/date-range.component'
+import { PopupDescriptionComponent } from './description'
 import { HelpComponent } from './help/help.component'
 import { LogoComponent } from './logo/logo.component'
 import { CcrNoticeBlockquoteComponent } from './notice-blockquote'
@@ -34,6 +35,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component'
     HelpComponent,
     LogoComponent,
     CcrPaginatorComponent,
+    PopupDescriptionComponent,
     ProgressCircleComponent,
     TableOverlayComponent
   ],
@@ -47,6 +49,7 @@ import { TableOverlayComponent } from './table-overlay/table-overlay.component'
     HelpComponent,
     LogoComponent,
     CcrPaginatorComponent,
+    PopupDescriptionComponent,
     ProgressCircleComponent,
     TableOverlayComponent
   ]

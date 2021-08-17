@@ -23,7 +23,6 @@ import {
   DateRangeNavigator,
   DateRangeNavigatorOutput
 } from './date-range/date-range.component'
-import { PopupDescriptionComponent } from './description/description.component'
 import { HelpLinkComponent } from './help-link/help-link.component'
 import { HeightFormFieldComponent } from './dieter-height/dieter-height.component'
 import { FormSearchComponent } from './form-search'
@@ -131,7 +130,6 @@ export {
   PhasesDatabase,
   PhasesDataSegment,
   PhoneInputComponent,
-  PopupDescriptionComponent,
   HelpLinkComponent,
   ProgressCircle,
   QuickDateRangeComponent,
@@ -198,7 +196,6 @@ export const CmpComponents = [
   PackageTableComponent,
   PhasesTableComponent,
   PhoneInputComponent,
-  PopupDescriptionComponent,
   HelpLinkComponent,
   ProgressCircle,
   QuickDateRangeComponent,

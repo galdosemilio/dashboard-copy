@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import {
   ContextService,
   EventsService,
+  LanguageService,
   MeasurementLabelService,
   NotifierService
 } from '@app/service'
@@ -130,7 +131,8 @@ export class MeasurementsTableV2Component implements OnInit {
         cols: 2,
         text: _('MEASUREMENT.VISCERAL_FAT_TANITA.TOOLTIP.SHOULD_ENGAGE')
       }
-    ]
+    ],
+    dir: 'ltr'
   }
 
   private _dates: DateNavigatorOutput
@@ -144,11 +146,13 @@ export class MeasurementsTableV2Component implements OnInit {
     private database: MeasurementDatabaseV2,
     private dataPoint: MeasurementDataPointProvider,
     private dialog: MatDialog,
+    private language: LanguageService,
     private measurementLabel: MeasurementLabelService,
     private notifier: NotifierService
   ) {}
 
   public ngOnInit(): void {
+    this.visceralFatRatingTooltip.dir = this.language.getDir()
     void this.refreshColumns()
     this.createDataSource()
     this.subscribeToEvents()

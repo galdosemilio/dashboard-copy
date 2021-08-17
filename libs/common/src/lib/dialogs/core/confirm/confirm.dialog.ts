@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { _ } from '@coachcare/common/shared'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { ConfirmDialogData } from './confirm-data.interface'
 
 /**
@@ -9,9 +9,7 @@ import { ConfirmDialogData } from './confirm-data.interface'
 @Component({
   selector: 'ccr-dialog-confirm',
   templateUrl: 'confirm.dialog.html',
-  host: {
-    class: 'ccr-dialog ccr-confirm'
-  }
+  host: { class: 'ccr-dialog ccr-confirm' }
 })
 export class ConfirmDialog {
   title = ''
@@ -23,12 +21,14 @@ export class ConfirmDialog {
   ) {
     // WARNING be sure to have translated strings of the parameters
     // because after the extraction they are empty
-    this.data = {
-      titleParams: {},
-      contentParams: {},
-      accept: _('GLOBAL.OK'),
-      color: '',
-      ...data
-    }
+    this.data = Object.assign(
+      {
+        titleParams: {},
+        contentParams: {},
+        accept: _('GLOBAL.OK'),
+        color: ''
+      },
+      data
+    )
   }
 }

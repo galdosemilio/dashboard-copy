@@ -4,6 +4,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@coachcare/material'
 import {
+  convertToReadableFormat,
   convertUnitToPreferenceFormat,
   MeasurementPreferenceProvider
 } from '@coachcare/sdk'
@@ -17,7 +18,7 @@ import { MeasurementLabelTableEntry } from '../../services'
 export interface AddDataPointTypeDialogProps {
   hasMeasurementPreference: boolean
   measurementLabels: MeasurementLabelTableEntry[]
-  unavailableDataPointTypes: MeasurementLabelTableEntry[]
+  unavailableDataPointTypes: MeasurementDataPointMinimalType[]
 }
 
 @UntilDestroy()
@@ -57,6 +58,17 @@ export class AddDataPointTypeDialog implements OnInit {
     type: MeasurementDataPointMinimalType
   ): string {
     return convertUnitToPreferenceFormat(
+      type,
+      this.context.user.measurementPreference
+    )
+  }
+
+  public convertValueToReadableFormat(
+    quantity: number,
+    type: MeasurementDataPointMinimalType
+  ): number {
+    return convertToReadableFormat(
+      quantity,
       type,
       this.context.user.measurementPreference
     )

@@ -8,7 +8,7 @@
 <div class="mat-dialog-separator"></div>
 
 <mat-dialog-content>
-    <mat-grid-list [cols]="data.cols" [rowHeight]="data.rowHeight + 'px'" [dir]="language.getDir()">
+    <mat-grid-list [cols]="data.cols" [rowHeight]="data.rowHeight + 'px'" [dir]="data.dir">
         <mat-grid-tile
             *ngFor="let tile of data.contents"
             [colspan]="tile.cols"

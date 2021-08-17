@@ -80,8 +80,7 @@ import {
   Zendesk,
   MeasurementPreferenceProvider,
   MeasurementLabelProvider,
-  MeasurementDataPointTypeProvider,
-  MeasurementDataPointProvider
+  MeasurementDataPointTypeProvider
 } from '@coachcare/sdk'
 
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'

@@ -3,9 +3,13 @@ import { MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
-import { _, TranslationsObject } from '@app/shared/utils'
 import { Subject } from 'rxjs'
-import { ConfirmDialog, GridDialog, GridDialogData } from '../../dialogs'
+import {
+  ConfirmDialog,
+  GridDialog,
+  GridDialogData
+} from '@coachcare/common/dialogs/core'
+import { _, TranslationsObject } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({

@@ -8,4 +8,5 @@ export interface ConfirmDialogData {
   contentParams?: any
   accept?: string
   color?: string
+  hideAcceptButton?: boolean
 }

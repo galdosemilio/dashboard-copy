@@ -18,17 +18,17 @@
   novalidate>
     <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="10px" fxFlex="50%">
       <mat-form-field class="full-width">
-        <mat-select formControlName="label">
+        <mat-select formControlName="label" [placeholder]="'BOARD.CATEGORY' | translate">
           <mat-option *ngFor="let label of data.measurementLabels" [value]="label.id">
-            {{ label.name }} ({{ 'GLOBAL.ID' | translate }} {{ label.id }})
+            {{ label.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-select formControlName="dataPointType">
+        <mat-select formControlName="dataPointType" [placeholder]="'BOARD.DATA_POINT' | translate">
           <mat-option *ngFor="let type of dataPointTypes" [value]="type.id">
-            {{ type.name }} ({{ 'GLOBAL.ID' | translate }} {{ type.id }})
+            {{ type.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -37,12 +37,10 @@
     <div *ngIf="selectedDataPointType" class="data-type-container" fxFlex>
       <div fxLayout="row" fxLayoutAlign="start center">
         <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
-          <p><strong>{{ 'BOARD.CLINIC_SELECTED_DATA_POINT_TYPE' | translate | uppercase }}</strong></p>
-          <p>{{ 'GLOBAL.ID' | translate }}: {{ selectedDataPointType.id }}</p>
-          <p>{{ 'BOARD.NAME' | translate}}: {{ selectedDataPointType.name }}</p>
-          <p>{{ 'BOARD.UNIT' | translate }}: {{ convertUnitToReadableFormat(selectedDataPointType) }}</p>
-          <p>{{ 'BOARD.CLINIC_LOWER_BOUND' | translate }}: {{ (selectedDataPointType.bound.lower / selectedDataPointType.multiplier).toFixed() }}</p>
-          <p>{{ 'BOARD.CLINIC_UPPER_BOUND' | translate }}: {{ (selectedDataPointType.bound.upper / selectedDataPointType.multiplier).toFixed() }}</p>
+          <p>{{ 'GLOBAL.ABOUT' | translate }}<strong> {{ selectedDataPointType.name }} </strong></p>
+          <p>{{ 'BOARD.UNIT' | translate }}: <strong>{{ convertUnitToReadableFormat(selectedDataPointType) }}</strong></p>
+          <p>{{ 'BOARD.ALLOWED_RANGE' | translate }}: <strong>{{ convertValueToReadableFormat((selectedDataPointType.bound.lower / selectedDataPointType.multiplier), selectedDataPointType).toFixed() }}</strong> - <strong>{{ convertValueToReadableFormat((selectedDataPointType.bound.upper / selectedDataPointType.multiplier), selectedDataPointType).toFixed() }}</strong></p>
+          <p>{{ 'BOARD.INTERNAL_ID' | translate }}: <strong>{{ selectedDataPointType.id }}</strong></p>
         </div>
       </div>
     </div>

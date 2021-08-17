@@ -60,6 +60,10 @@ table {
 .ccr-expandable-table {
   max-height: 250px;
   overflow-y: auto;
+
+  &.reordering {
+    max-height: 43vh;
+  }
 }
 
 .ccr-text-center {

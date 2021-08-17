@@ -1,8 +1,6 @@
 import { Component, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 
-import { LanguageService } from '@app/service'
-
 export interface GridDialogContent {
   rows?: number
   class?: string
@@ -15,6 +13,7 @@ export interface GridDialogData {
   rowHeight?: number
   cols: number
   contents: Array<GridDialogContent>
+  dir: 'rtl' | 'ltr'
 }
 
 @Component({
@@ -25,8 +24,7 @@ export interface GridDialogData {
 export class GridDialog {
   constructor(
     public dialogRef: MatDialogRef<GridDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: GridDialogData,
-    public language: LanguageService
+    @Inject(MAT_DIALOG_DATA) public data: GridDialogData
   ) {
     // WARNING be sure to have translated strings of the parameters
     // because after the extraction they are empty
@@ -35,7 +33,8 @@ export class GridDialog {
         title: {},
         rowHeight: 0,
         cols: 0,
-        contents: []
+        contents: [],
+        dir: 'ltr'
       },
       data
     )

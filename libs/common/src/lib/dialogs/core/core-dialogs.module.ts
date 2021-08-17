@@ -10,6 +10,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core'
 
 import { ConfirmDialog } from './confirm/confirm.dialog'
+import { GridDialog } from './grid'
 import { LanguagesDialog } from './language/languages.dialog'
 import { PromptDialog } from './prompt/prompt.dialog'
 
@@ -23,8 +24,8 @@ import { PromptDialog } from './prompt/prompt.dialog'
     MatIconModule,
     TranslateModule
   ],
-  declarations: [ConfirmDialog, PromptDialog, LanguagesDialog],
-  entryComponents: [ConfirmDialog, PromptDialog, LanguagesDialog],
-  exports: [ConfirmDialog, PromptDialog, LanguagesDialog]
+  declarations: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog],
+  entryComponents: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog],
+  exports: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog]
 })
 export class CcrCoreDialogsModule {}

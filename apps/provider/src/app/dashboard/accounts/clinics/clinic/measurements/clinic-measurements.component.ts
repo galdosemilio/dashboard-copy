@@ -8,6 +8,7 @@ import {
 import { _ } from '@app/shared/utils'
 import { MatDialog } from '@coachcare/material'
 import {
+  MeasurementDataPointTypeAssociation,
   MeasurementPreferenceProvider,
   NamedEntity,
   OrganizationProvider
@@ -42,6 +43,18 @@ export class ClinicMeasurementsComponent implements OnInit {
   public isAdmin = false
   public reordering = false
   public source: MeasurementLabelDataSource
+  public useDefaultMeasurementPreferenceAbout = {
+    title: _('BOARD.CLINIC_USE_DEFAULT_MEASUREMENT_PREFERENCE'),
+    description: _(
+      'BOARD.CLINIC_USE_DEFAULT_MEASUREMENT_PREFERENCE_DESCRIPTION'
+    )
+  }
+  public measurementAllowToChildClinicsAbout = {
+    title: _('BOARD.CLINIC_MEASUREMENT_ALLOW_TO_CHILD_CLINICS'),
+    description: _(
+      'BOARD.CLINIC_MEASUREMENT_ALLOW_TO_CHILD_CLINICS_DESCRIPTION'
+    )
+  }
 
   constructor(
     private context: ContextService,
@@ -72,14 +85,16 @@ export class ClinicMeasurementsComponent implements OnInit {
 
     const usedDataPointTypes = this.source.result.filter(
       (item) => item.level === 1
-    )
+    ) as MeasurementDataPointTypeAssociation[]
 
     this.dialog
       .open(AddDataPointTypeDialog, {
         data: {
           measurementLabels: availableMeasurementLabels,
           hasMeasurementPreference: this.currentMeasurementPref !== undefined,
-          unavailableDataPointTypes: usedDataPointTypes
+          unavailableDataPointTypes: usedDataPointTypes.map((entry) => ({
+            ...entry.type
+          }))
         } as AddDataPointTypeDialogProps,
         width: '60vw'
       })
@@ -145,7 +160,7 @@ export class ClinicMeasurementsComponent implements OnInit {
   }
 
   private createSource(): void {
-    this.source = new MeasurementLabelDataSource(this.database)
+    this.source = new MeasurementLabelDataSource(this.database, this.context)
     this.source.addDefault({
       organization: this.context.clinic.id,
       status: 'active',

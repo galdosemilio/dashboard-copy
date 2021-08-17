@@ -6,6 +6,7 @@ import { CcrDirectivesModule } from '@coachcare/common/directives'
 import { CcrMaterialModule } from '@coachcare/material'
 import { TranslateModule } from '@ngx-translate/core'
 import { ColorPickerModule } from 'ngx-color-picker'
+import { CcrUtilityComponentsModule } from '../utilities/utilities.module'
 import { UserSearchComponent } from './autocompleters'
 
 import { AccountAutocompleterComponent } from './autocompleters/account/account.component'
@@ -43,7 +44,8 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     FormsModule,
     TranslateModule.forChild(),
     CcrDirectivesModule,
-    CcrMaterialModule
+    CcrMaterialModule,
+    CcrUtilityComponentsModule
   ],
   declarations: [
     // fields

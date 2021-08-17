@@ -1,6 +1,8 @@
 <div [formGroup]="form">
+  <p *ngIf="!reordering">{{ 'BOARD.CLINIC_MEASUREMENTS_DESC' | translate }}</p>
+
   <div class="ccr-content">
-    <div class="ccr-panel">
+    <div *ngIf="!reordering" class="ccr-panel">
       <h3>{{ 'GLOBAL.SETTINGS' | translate }}</h3>
       <div class="ccr-grid" fxLayout="column">
         <mat-grid-list [cols]="colSpan" rowHeight="80px">
@@ -8,7 +10,8 @@
             <ccr-feature-toggle-input
             data-cy="org-settings-section-features-messages-autothread"
             [inheritable]="false"
-            [label]="'BOARD.CLINIC_MEASUREMENT_PREFERENCE_INHERITANCE' | translate"
+            [label]="'BOARD.CLINIC_USE_DEFAULT_MEASUREMENT_PREFERENCE' | translate"
+            [popupDescription]="useDefaultMeasurementPreferenceAbout"
             [readonly]="!isAdmin || (inheritedClinic && !descendantTypeManagement)"
             [subLabel]="inheritedClinic ? ('BOARD.CLINIC_MEASUREMENT_PREF_INHERITED_FROM' | translate:inheritedClinic) : undefined"
             formControlName="inheritMeasurementPreference"
@@ -21,8 +24,9 @@
             <ccr-feature-toggle-input
             data-cy="org-settings-section-features-messages-autothread"
             [inheritable]="false"
-            [label]="'BOARD.CLINIC_DESCENDANT_TYPE_MANAGEMENT' | translate"
+            [label]="'BOARD.CLINIC_MEASUREMENT_ALLOW_TO_CHILD_CLINICS' | translate"
             [readonly]="!isAdmin || inheritedClinic"
+            [popupDescription]="measurementAllowToChildClinicsAbout"
             formControlName="descendantTypeManagement"
             fxFlex></ccr-feature-toggle-input>
           </mat-grid-tile>
@@ -57,7 +61,7 @@
             </button>
           </div>
         </div>
-        <mat-grid-list [cols]="colSpan" rowHeight="275px">
+        <mat-grid-list [cols]="colSpan" [rowHeight]="reordering ? '44vh' : '275px'">
           <mat-grid-tile [colspan]="colSpan" fxLayout="column" fxLayoutAlign="start stretch">
             <div class="measurement-labels-container">
               <app-clinic-measurement-labels

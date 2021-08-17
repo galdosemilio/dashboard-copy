@@ -1,5 +1,7 @@
+import { ContextService } from '@app/service'
 import { ExpandableTableItem, TableDataSource } from '@app/shared'
 import {
+  convertToReadableFormat,
   GetMeasurementDataPointTypeAssociationsRequest,
   MeasurementDataPointTypeAssociation,
   MeasurementLabelEntry
@@ -26,7 +28,10 @@ export class MeasurementLabelDataSource extends TableDataSource<
   MeasurementLabelsWithTypes[],
   MeasurementLabelDataSourceCriteria
 > {
-  constructor(protected database: MeasurementLabelDatabase) {
+  constructor(
+    protected database: MeasurementLabelDatabase,
+    private context: ContextService
+  ) {
     super()
   }
 
@@ -66,8 +71,16 @@ export class MeasurementLabelDataSource extends TableDataSource<
             ...item,
             sortOrder: currentTypeSortOrder,
             parsedBounds: {
-              lower: (item.type.bound.lower / item.type.multiplier).toFixed(),
-              upper: (item.type.bound.upper / item.type.multiplier).toFixed()
+              lower: convertToReadableFormat(
+                item.type.bound.lower,
+                item.type,
+                this.context.user.measurementPreference
+              ).toFixed(),
+              upper: convertToReadableFormat(
+                item.type.bound.upper,
+                item.type,
+                this.context.user.measurementPreference
+              ).toFixed()
             },
             isEmpty: true,
             isExpanded: false,

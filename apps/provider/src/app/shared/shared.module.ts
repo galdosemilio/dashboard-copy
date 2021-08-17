@@ -31,6 +31,7 @@ import {
   CcrFormFieldsModule,
   CcrUtilityComponentsModule
 } from '@coachcare/common/components'
+import { CcrCoreDialogsModule } from '@coachcare/common/dialogs/core'
 
 // register supported locales
 locales.forEach(async (code: AppLocaleCode) => {
@@ -45,6 +46,7 @@ locales.forEach(async (code: AppLocaleCode) => {
 
 const SHARED_MODULES = [
   A11yModule,
+  CcrCoreDialogsModule,
   CcrFormFieldsModule,
   CcrUtilityComponentsModule,
   CdkTableModule,

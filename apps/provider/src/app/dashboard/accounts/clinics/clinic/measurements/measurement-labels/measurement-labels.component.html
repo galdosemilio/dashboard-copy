@@ -1,14 +1,14 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
   <ccr-datasource-overlay [source]="source">
     <div class="ccr-table ccr-expand-table ccr-table-stats">
-      <div class="ccr-expandable-table">
+      <div [class.reordering]="reordering" class="ccr-expandable-table">
         <table>
           <thead>
             <th [class.large-padding-left]="reordering" class="id-header">{{ 'GLOBAL.ID' | translate }}</th>
             <th>{{ 'BOARD.NAME' | translate }}</th>
             <th>{{ 'BOARD.DESCRIPTION' | translate }}</th>
-            <th>{{ 'BOARD.UNIT' | translate }}</th>
             <th>{{ 'BOARD.VISIBILITY' | translate }}</th>
+            <th>{{ 'BOARD.UNIT' | translate }}</th>
             <th>{{ 'BOARD.BOUNDS' | translate }}</th>
             <th class="ccr-text-center">{{ 'BOARD.ACTIONS' | translate }}</th>
           </thead>
@@ -51,7 +51,7 @@
                 </div>
               </td>
               <td>
-                <span *ngIf="row.level === 0">{{ row.name }}</span>
+                <span *ngIf="row.level === 0"><strong>{{ row.name }}</strong></span>
                 <span *ngIf="row.level === 1">{{ row.type.name }}</span>
               </td>
               <td [attr.colspan]="row.level === 0 ? 4 : 1">
@@ -62,14 +62,15 @@
               </td>
               <td *ngIf="row.level === 1">
                 <div [hidden]="reordering">
-                  {{ row.type.unit?.symbol }}
-                </div>
-              </td>
-              <td *ngIf="row.level === 1">
-                <div [hidden]="reordering">
-                <p class="visibility-subtitle">{{ 'GLOBAL.PATIENT' | translate }}</p>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                  <span fxFlex>{{ 'VISIBILITY.EXPOSED' | translate }}:</span>
+                  <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <span>{{ 'VISIBILITY.EXPOSED_TO_PATIENTS' | translate }}:</span>
+                    <ccr-popup-description
+                    [title]="'VISIBILITY.EXPOSED_TO_PATIENTS' | translate"
+                    [description]="'VISIBILITY.EXPOSED_TO_PATIENTS_DESCRIPTION' | translate"
+                    >
+                    </ccr-popup-description>
+                  </div>
                   <select [(ngModel)]="row.client.isExposed" (change)="updateVisibility(row, 'isExposed')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
@@ -77,7 +78,14 @@
                 </div>
 
                 <div [hidden]="!row.client.isExposed" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                  <span fxFlex>{{ 'VISIBILITY.MODIFIABLE' | translate }}:</span>
+                  <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <span>{{ 'VISIBILITY.MODIFIABLE_BY_PATIENTS' | translate }}:</span>
+                    <ccr-popup-description
+                    [title]="'VISIBILITY.MODIFIABLE_BY_PATIENTS' | translate"
+                    [description]="'VISIBILITY.MODIFIABLE_BY_PATIENTS_DESCRIPTION' | translate"
+                    >
+                    </ccr-popup-description>
+                  </div>
                   <select [(ngModel)]="row.client.isModifiable" (change)="updateVisibility(row, 'isModifiable')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
@@ -85,16 +93,29 @@
                 </div>
 
                 <div [hidden]="!row.client.isExposed" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                  <span fxFlex>{{ 'VISIBILITY.DEFAULT' | translate }}:</span>
+                  <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <span>{{ 'VISIBILITY.DEFAULT_FOR_PATIENTS' | translate }}:</span>
+                    <ccr-popup-description
+                    [title]="'VISIBILITY.DEFAULT_FOR_PATIENTS' | translate"
+                    [description]="'VISIBILITY.DEFAULT_FOR_PATIENTS_DESCRIPTION' | translate"
+                    >
+                    </ccr-popup-description>
+                  </div>
                   <select [(ngModel)]="row.client.isDefault" (change)="updateVisibility(row, 'isDefault')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
                   </select>
                 </div>
 
-                <p class="visibility-subtitle">{{ 'GLOBAL.COACH' | translate }}</p>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                  <span fxFlex>{{ 'VISIBILITY.MODIFIABLE' | translate }}:</span>
+                  <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <span>{{ 'VISIBILITY.MODIFIABLE_BY_COACHES' | translate }}:</span>
+                    <ccr-popup-description
+                    [title]="'VISIBILITY.MODIFIABLE_BY_COACHES' | translate"
+                    [description]="'VISIBILITY.MODIFIABLE_BY_COACHES_DESCRIPTION' | translate"
+                    >
+                    </ccr-popup-description>
+                  </div>
                   <select [(ngModel)]="row.provider.isModifiable" (change)="updateVisibility(row, 'isModifiable', 'provider')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
@@ -104,8 +125,12 @@
               </td>
               <td *ngIf="row.level === 1">
                 <div [hidden]="reordering">
-                  {{ 'BOARD.CLINIC_LOWER_BOUND' | translate }}: {{ row.parsedBounds.lower }}<br>
-                  {{ 'BOARD.CLINIC_UPPER_BOUND' | translate }}: {{ row.parsedBounds.upper }}
+                  {{ convertUnitToReadableFormat(row.type) }}
+                </div>
+              </td>
+              <td *ngIf="row.level === 1">
+                <div [hidden]="reordering">
+                  {{ 'BOARD.ALLOWED_RANGE' | translate }}: <strong>{{ row.parsedBounds.lower }} - {{ row.parsedBounds.upper }}</strong>
                 </div>
               </td>
               <td>
