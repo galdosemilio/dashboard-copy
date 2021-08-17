@@ -88,7 +88,9 @@ const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
   throttling: environment.enableThrottling
-    ? { enabled: true, options: { defaultRateLimit: 17 } }
+    ? environment.ccrApiEnv === 'prod'
+      ? { enabled: true, options: { defaultRateLimit: 17 } }
+      : { enabled: true, options: { defaultRateLimit: 5 } }
     : { enabled: false },
   headers
 })
@@ -99,7 +101,7 @@ const measurementApiService = new ApiService({
   throttling: environment.enableThrottling
     ? {
         enabled: true,
-        options: { headers: { enabled: false } }
+        options: { headers: { enabled: false }, defaultRateLimit: 2 }
       }
     : { enabled: false },
   headers
