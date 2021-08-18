@@ -448,7 +448,7 @@ export class GraphElement extends CcrElement {
       append = true
 
       const lastDate = api.baseData.lastDate
-        ? DateTime.fromFormat(api.baseData.lastDate, 'YYYY-MM-DD')
+        ? DateTime.fromFormat(api.baseData.lastDate, 'yyyy-MM-dd')
         : DateTime.now()
 
       if (this.hasSameDateEntry(pivotDate) || startDate > lastDate) {

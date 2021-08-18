@@ -79,7 +79,7 @@ export class DateRangeSelectorElement extends CcrElement {
 
   private refreshDateRange(timeframe: Timeframe): void {
     const lastDate = api.baseData.lastDate
-      ? DateTime.fromFormat(api.baseData.lastDate, 'YYYY-MM-DD')
+      ? DateTime.fromFormat(api.baseData.lastDate, 'yyyy-MM-dd')
       : DateTime.now()
 
     this.dateRange = {
