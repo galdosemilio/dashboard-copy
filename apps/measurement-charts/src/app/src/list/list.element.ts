@@ -10,7 +10,7 @@ import { DateTime } from 'luxon'
 
 import './list.element.scss'
 import { DataPointChangedEvent, EventType, ListItem } from '@chart/model'
-import { groupBy } from 'lodash'
+import { groupBy, uniqBy } from 'lodash'
 import * as utils from '@chart/utils'
 
 export class ListElement extends CcrElement {
@@ -326,7 +326,7 @@ export class ListElement extends CcrElement {
 
       this.offset = res.pagination.next
       this.hasMore = !!res.pagination.next
-      this.data = this.data.concat(res.data)
+      this.data = uniqBy(this.data.concat(res.data), (entry) => entry.point.id)
       this.addItemToListView()
     } catch (err) {
       this.error(err)

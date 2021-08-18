@@ -146,13 +146,17 @@ export class GraphElement extends CcrElement {
         pinch: false,
         mouseWheel: false
       },
+      handleScroll: {
+        vertTouchDrag: false,
+        pressedMouseMove: false,
+        mouseWheel: false,
+        horzTouchDrag: true
+      },
       timeScale: {
         lockVisibleTimeRangeOnResize: true,
         tickMarkFormatter: (time) => {
           return DateTime.now().set(time).toFormat('yyyy/MM/dd')
-        },
-        minBarSpacing: 6,
-        barSpacing: 6
+        }
       }
     })
 
@@ -393,7 +397,7 @@ export class GraphElement extends CcrElement {
       merge(this.scaleChart$, this.visibleLocalRangeChanged$)
         .pipe(
           filter(() => !this.isLoading && !this.rangeChangeBumper),
-          debounceTime(1500)
+          debounceTime(600)
         )
         .subscribe(this.scaleChart)
     )
@@ -444,7 +448,7 @@ export class GraphElement extends CcrElement {
       append = true
 
       const lastDate = api.baseData.lastDate
-        ? DateTime.fromISO(api.baseData.lastDate)
+        ? DateTime.fromFormat(api.baseData.lastDate, 'YYYY-MM-DD')
         : DateTime.now()
 
       if (this.hasSameDateEntry(pivotDate) || startDate > lastDate) {
@@ -519,6 +523,17 @@ export class GraphElement extends CcrElement {
     if (!this.chart) {
       return
     }
+    this.chart.applyOptions(
+      this.timeframe === 'month' || this.timeframe === 'week'
+        ? {
+            timeScale: {
+              minBarSpacing: 6,
+              barSpacing: 6
+            }
+          }
+        : { timeScale: { barSpacing: 6 } }
+    )
+
     this.chart.applyOptions({ priceScale: { autoScale: true } })
     await new Promise((resolve) => setTimeout(resolve, 500))
     this.chart.applyOptions({ priceScale: { autoScale: false } })

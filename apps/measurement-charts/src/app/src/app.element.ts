@@ -35,7 +35,7 @@ export class AppElement extends HTMLElement {
       token: params.get('token'),
       accountId: params.get('accountId') ?? undefined,
       locale: params.get('locale') ?? baseData.locale,
-      lastDate: params.get('lastDate') ?? DateTime.now().toISO(),
+      lastDate: params.get('lastDate') ?? DateTime.now().toFormat('YYYY-MM-DD'),
       timezone: params.get('timezone') ?? baseData.timezone,
       timeframe: (params.get('timeframe') as Timeframe) ?? baseData.timeframe,
       metric:
@@ -75,7 +75,7 @@ export class AppElement extends HTMLElement {
     this.setDateTimeSettings(data)
 
     if (!data.lastDate) {
-      data.lastDate = DateTime.now().toISO()
+      data.lastDate = DateTime.now().toFormat('YYYY-MM-DD')
     }
 
     api.appendBaseData({
