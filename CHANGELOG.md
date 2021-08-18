@@ -1,3 +1,11 @@
+## [1.29.2](https://github.com/coachcare/dashboard/compare/v1.29.1...v1.29.2) (2021-08-18)
+
+
+### Bug Fixes
+
+* adjusted rate limits for the test server [FRON-2275] ([a9792d6](https://github.com/coachcare/dashboard/commit/a9792d6fb9231f55933fa5a9681b495c908dbe54))
+* implemented minor bugfixes [FRON-2276] ([fac7cf1](https://github.com/coachcare/dashboard/commit/fac7cf11f35cd3f75b3c9a1b1b7bae0cbcc69411))
+
 ## [1.29.1](https://github.com/coachcare/dashboard/compare/v1.29.0...v1.29.1) (2021-08-16)
 
 
