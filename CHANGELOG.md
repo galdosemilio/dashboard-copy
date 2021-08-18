@@ -1,3 +1,10 @@
+## [1.29.3](https://github.com/coachcare/dashboard/compare/v1.29.2...v1.29.3) (2021-08-18)
+
+
+### Bug Fixes
+
+* adjusted expected date format [FRON-2276] ([85bd921](https://github.com/coachcare/dashboard/commit/85bd92107382f7fdf49126b65bb0793a0ec8124d))
+
 ## [1.29.2](https://github.com/coachcare/dashboard/compare/v1.29.1...v1.29.2) (2021-08-18)
 
 
