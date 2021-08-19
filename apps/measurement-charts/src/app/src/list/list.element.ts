@@ -12,6 +12,8 @@ import './list.element.scss'
 import { DataPointChangedEvent, EventType, ListItem } from '@chart/model'
 import { groupBy, uniqBy } from 'lodash'
 import * as utils from '@chart/utils'
+import { Subject } from 'rxjs'
+import { debounceTime } from 'rxjs/operators'
 
 export class ListElement extends CcrElement {
   private _loading: boolean
@@ -21,6 +23,7 @@ export class ListElement extends CcrElement {
   private data: MeasurementDataPointAggregate[]
   private listStartPosition = { x: 0, y: 0 }
   private listCurrentPosition = { x: 0, y: 0 }
+  private onScrollList$: Subject<void> = new Subject<void>()
 
   constructor() {
     super()
@@ -40,15 +43,21 @@ export class ListElement extends CcrElement {
   afterViewInit() {
     document
       .getElementById('list-wrapper')
-      .addEventListener('scroll', this.onScrollList)
+      .addEventListener('scroll', () => this.onScrollList$.next())
+
+    this.subscriptions.push(
+      this.onScrollList$.pipe(debounceTime(600)).subscribe(this.onScrollList)
+    )
 
     this.pullToRefreshList(document.getElementById('list-wrapper'))
 
-    tabService.selectedTab$.subscribe((tab) => {
-      if (tab === Tab.LIST && api.baseData.token) {
-        this.refresh()
-      }
-    })
+    this.subscriptions.push(
+      tabService.selectedTab$.subscribe((tab) => {
+        if (tab === Tab.LIST && api.baseData.token) {
+          this.refresh()
+        }
+      })
+    )
   }
 
   private pullToRefreshList(element: HTMLElement): void {
@@ -136,7 +145,7 @@ export class ListElement extends CcrElement {
       }
 
       document.getElementById('list-content').innerText = ''
-      this.addItemToListView()
+      this.addItemToListView(this.data)
 
       if (deletedData.length > 0) {
         const event: DataPointChangedEvent = {
@@ -166,8 +175,8 @@ export class ListElement extends CcrElement {
     }
   }
 
-  private addItemToListView() {
-    const list = this.getListItems()
+  private addItemToListView(entries: MeasurementDataPointAggregate[]) {
+    const list = this.getListItems(entries)
 
     if (list.length === 0) {
       const dataPointName =
@@ -204,52 +213,13 @@ export class ListElement extends CcrElement {
       const actionElement = document.createElement('div')
       actionElement.className = 'action'
 
-      const deleteElement = document.createElement('div')
-      deleteElement.className = 'btn-delete'
-      deleteElement.innerText = translate('DELETE')
-
-      actionElement.appendChild(deleteElement)
-
       element.appendChild(itemElement)
       element.appendChild(actionElement)
 
       document.getElementById('list-content').appendChild(element)
 
-      deleteElement.addEventListener('click', () =>
-        this.openDeleteConfirm(item)
-      )
-
       itemElement.addEventListener('click', () => this.openDetails(item))
     }
-  }
-
-  private openDeleteConfirm(item: ListItem) {
-    modalService.open$.next({
-      title: translate('CONFIRM'),
-      content: `
-        <div class="delete-confirm-modal">
-          <div class="modal-content">
-            <p>${translate('DELETE_CONFIRM')}</p>
-          </div>
-          <div class="actions">
-            <div id="delete-button" class="delete-btn">${translate(
-              'DELETE'
-            )}</div>
-            <div id="close-button" class="cancel-btn">${translate(
-              'CANCEL'
-            )}</div>
-          </div>
-        </div>
-      `
-    })
-
-    document.getElementById('delete-button').addEventListener('click', () => {
-      modalService.close$.next()
-      this.onDeleteDataPoint(item)
-    })
-    document
-      .getElementById('close-button')
-      .addEventListener('click', () => modalService.close$.next())
   }
 
   private openDetails(item: ListItem) {
@@ -327,7 +297,7 @@ export class ListElement extends CcrElement {
       this.offset = res.pagination.next
       this.hasMore = !!res.pagination.next
       this.data = uniqBy(this.data.concat(res.data), (entry) => entry.point.id)
-      this.addItemToListView()
+      this.addItemToListView(res.data)
     } catch (err) {
       this.error(err)
     }
@@ -335,13 +305,13 @@ export class ListElement extends CcrElement {
     this.loading(false)
   }
 
-  private getListItems(): ListItem[] {
+  private getListItems(entries: MeasurementDataPointAggregate[]): ListItem[] {
     const list: ListItem[] = []
 
     if (
       api.baseData.dataPointTypeId === MeasurementsEnum.BLOOD_PRESSURE_GENERAL
     ) {
-      const groupedValues = groupBy(this.data, (item) => item.point.group.id)
+      const groupedValues = groupBy(entries, (item) => item.point.group.id)
 
       for (const [groupId, dataPoints] of Object.entries(groupedValues)) {
         const dataPoint = dataPoints[0]
@@ -353,7 +323,7 @@ export class ListElement extends CcrElement {
         const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
         const value = dataPoints
           .map((t) =>
-            utils.formart(
+            utils.format(
               convertToReadableFormat(
                 t.point.value,
                 t.point.type,
@@ -375,10 +345,10 @@ export class ListElement extends CcrElement {
         })
       }
     } else {
-      for (const dataPoint of this.data) {
+      for (const dataPoint of entries) {
         const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
 
-        const value = utils.formart(
+        const value = utils.format(
           convertToReadableFormat(
             dataPoint.point.value,
             dataPoint.point.type,

@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import { MeasurementsEnum } from '@chart/model'
 import {
   convertUnitToPreferenceFormat,
@@ -6,7 +5,7 @@ import {
 } from '@coachcare/sdk'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 
-export const formart = (value: number, dataPointTypeId: string) => {
+export const format = (value: number, dataPointTypeId: string) => {
   switch (dataPointTypeId) {
     case MeasurementsEnum.STEPS:
       return value.toFixed(0)

@@ -115,13 +115,22 @@ export class GraphElement extends CcrElement {
           minMove:
             api.baseData.dataPointTypeId === MeasurementsEnum.SLEEP ? 60 : 0.5,
           formatter: (value) =>
-            utils.formart(value, api.baseData.dataPointTypeId) + ' ' + unit
+            utils.format(value, api.baseData.dataPointTypeId) + ' ' + unit
         },
         priceLineVisible: false,
         lastValueVisible: false,
         priceLineColor: api.baseData.colors[color],
         color: api.baseData.colors[color],
-        lineWidth: 2
+        lineWidth: 2,
+        autoscaleInfoProvider: (original) => {
+          const res = original()
+
+          if (res && res.priceRange !== null) {
+            res.priceRange.minValue = 0
+          }
+
+          return res
+        }
       })
 
       this.lineSeries.push(series)
@@ -156,6 +165,15 @@ export class GraphElement extends CcrElement {
         lockVisibleTimeRangeOnResize: true,
         tickMarkFormatter: (time) => {
           return DateTime.now().set(time).toFormat('yyyy/MM/dd')
+        }
+      }
+    })
+
+    this.chart.applyOptions({
+      priceScale: {
+        scaleMargins: {
+          bottom: 0,
+          top: 0.1
         }
       }
     })
@@ -258,9 +276,9 @@ export class GraphElement extends CcrElement {
       }
 
       this.setDateRangeButtonState(true)
-      this.scaleChart$.next()
 
       if (!this.firstTime) {
+        this.scaleChart$.next()
         return
       }
 
@@ -268,7 +286,9 @@ export class GraphElement extends CcrElement {
         from: DateTime.fromISO(this.dateRange.start).toFormat(
           this.chartTimeFormat
         ),
-        to: DateTime.fromISO(this.dateRange.end).toFormat(this.chartTimeFormat)
+        to: DateTime.fromISO(this.dateRange.end)
+          .plus({ day: this.timeframe === 'year' ? 7 : 1 })
+          .toFormat(this.chartTimeFormat)
       })
 
       this.chart.timeScale().fitContent()
@@ -279,6 +299,7 @@ export class GraphElement extends CcrElement {
       )
       this.firstTime = false
       this.rangeChangeBumper = true
+      this.scaleChart()
 
       // TODO: investigate how to detect that the chart has finished resizing
       setTimeout(() => {
@@ -531,7 +552,7 @@ export class GraphElement extends CcrElement {
               barSpacing: 6
             }
           }
-        : { timeScale: { barSpacing: 6 } }
+        : { timeScale: { minBarSpacing: 1, barSpacing: 1 } }
     )
 
     this.chart.applyOptions({ priceScale: { autoScale: true } })

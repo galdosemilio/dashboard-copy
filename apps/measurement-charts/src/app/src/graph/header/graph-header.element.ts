@@ -32,12 +32,12 @@ export class GraphHeaderElement extends CcrElement {
       const filteredData = entries.filter((entry) => entry.value !== undefined)
       const values = filteredData.map((entry) => entry.value)
 
-      const min = utils.formart(
+      const min = utils.format(
         filteredData.length ? Math.min(...values) : 0,
         api.baseData.dataPointTypeId
       )
 
-      const max = utils.formart(
+      const max = utils.format(
         filteredData.length ? Math.max(...values) : 0,
         api.baseData.dataPointTypeId
       )
@@ -60,7 +60,7 @@ export class GraphHeaderElement extends CcrElement {
 
       const range = `${min} - ${max}<span class="unit">${unit}</span>`
       const header = `<div class="header-wrap">
-        <p class="value">${utils.formart(
+        <p class="value">${utils.format(
           average,
           api.baseData.dataPointTypeId
         )}<span class="unit">${unit}</span></p>
