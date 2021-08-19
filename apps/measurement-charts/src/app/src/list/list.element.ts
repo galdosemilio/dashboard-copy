@@ -166,9 +166,10 @@ export class ListElement extends CcrElement {
 
   onScrollList() {
     const content = document.getElementById('list-content')
+    const wrapper = document.getElementById('list-wrapper')
 
     if (
-      content.scrollTop + content.offsetHeight >= content.offsetHeight - 20 &&
+      wrapper.scrollTop + wrapper.offsetHeight >= content.offsetHeight - 40 &&
       !this._loading
     ) {
       this.loadList()

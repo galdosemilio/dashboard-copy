@@ -126,7 +126,7 @@ export class GraphElement extends CcrElement {
           const res = original()
 
           if (res && res.priceRange !== null) {
-            res.priceRange.minValue = 0
+            res.priceRange.minValue = Math.max(res.priceRange.minValue, 0)
           }
 
           return res
@@ -552,7 +552,7 @@ export class GraphElement extends CcrElement {
               barSpacing: 6
             }
           }
-        : { timeScale: { minBarSpacing: 1, barSpacing: 1 } }
+        : { timeScale: { minBarSpacing: 1, barSpacing: 2 } }
     )
 
     this.chart.applyOptions({ priceScale: { autoScale: true } })
