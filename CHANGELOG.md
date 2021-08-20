@@ -1,3 +1,17 @@
+# [1.30.0](https://github.com/coachcare/dashboard/compare/v1.29.6...v1.30.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* adjusted bar spacing for multiple timeframes [FRON-2278] ([36ae100](https://github.com/coachcare/dashboard/commit/36ae1003a310ab5af2cf55411d0f2a0b58d3ac6e))
+* removed call controls for patients [FRON-2248] ([87b97fb](https://github.com/coachcare/dashboard/commit/87b97fb49bc22274f42f72da96b528ded91082eb))
+* removed unread update count for patients [FRON-2248] ([ab9fb44](https://github.com/coachcare/dashboard/commit/ab9fb4457caa0dd886a6336ab70a71d431c74118))
+
+
+### Features
+
+* implemented patient dasbhoard [FRON-2248] ([fac3f88](https://github.com/coachcare/dashboard/commit/fac3f883d3a3f812ced27e6123dc5d5c78c6544f))
+
 ## [1.29.6](https://github.com/coachcare/dashboard/compare/v1.29.5...v1.29.6) (2021-08-20)
 
 
