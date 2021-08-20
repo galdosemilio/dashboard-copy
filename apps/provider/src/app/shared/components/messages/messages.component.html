@@ -25,7 +25,7 @@
     </span>
   </div>
   <div *ngIf="thread?.recipients.length === 1" fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" fxHide.xs>
-    <ccr-call-control [targets]="thread.recipients"></ccr-call-control>
+    <ccr-call-control *ngIf="isProvider" [targets]="thread.recipients"></ccr-call-control>
     <a *ngIf="isProvider" mat-button color="primary" class="ccr-icon-button"
       (click)="showProfile(thread.recipients[0])">
       <mat-icon>person_outline</mat-icon>
