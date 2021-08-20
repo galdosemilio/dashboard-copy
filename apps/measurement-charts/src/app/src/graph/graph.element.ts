@@ -351,9 +351,23 @@ export class GraphElement extends CcrElement {
     return emptyGroups
   }
 
+  private getBarSpacingSettings(
+    timeframe: Timeframe
+  ): { barSpacing: number; minBarSpacing: number } {
+    switch (timeframe) {
+      case 'week':
+        return { minBarSpacing: 33, barSpacing: 33 }
+      case 'month':
+        return { minBarSpacing: 8, barSpacing: 8 }
+      case 'year':
+        return { minBarSpacing: 0.05, barSpacing: 0.8 }
+    }
+  }
+
   private getTimeframeChartOffset(timeframe: Timeframe): number {
     switch (timeframe) {
       case 'week':
+        return 1
       case 'month':
         return 5
       case 'year':
@@ -567,16 +581,9 @@ export class GraphElement extends CcrElement {
     if (!this.chart) {
       return
     }
-    this.chart.applyOptions(
-      this.timeframe === 'month' || this.timeframe === 'week'
-        ? {
-            timeScale: {
-              minBarSpacing: 6,
-              barSpacing: 6
-            }
-          }
-        : { timeScale: { minBarSpacing: 0.05, barSpacing: 0.8 } }
-    )
+    this.chart.applyOptions({
+      timeScale: this.getBarSpacingSettings(this.timeframe)
+    })
 
     this.chart.applyOptions({ priceScale: { autoScale: true } })
     await new Promise((resolve) => setTimeout(resolve, 500))
