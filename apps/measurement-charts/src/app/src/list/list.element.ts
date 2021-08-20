@@ -1,6 +1,6 @@
 import { CcrElement, MeasurementsEnum, Tab } from '@chart/model'
 import { api } from '@chart/service/api'
-import { tabService, modalService } from '@chart/service'
+import { tabService, modalService, eventService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 import {
   MeasurementDataPointAggregate,
@@ -18,6 +18,7 @@ import { debounceTime } from 'rxjs/operators'
 export class ListElement extends CcrElement {
   private _loading: boolean
   private hasMore = true
+  private firstTime = true
   private offset: number
   private limit: number | 'all'
   private data: MeasurementDataPointAggregate[]
@@ -46,7 +47,7 @@ export class ListElement extends CcrElement {
       .addEventListener('scroll', () => this.onScrollList$.next())
 
     this.subscriptions.push(
-      this.onScrollList$.pipe(debounceTime(600)).subscribe(this.onScrollList)
+      this.onScrollList$.pipe(debounceTime(300)).subscribe(this.onScrollList)
     )
 
     this.pullToRefreshList(document.getElementById('list-wrapper'))
@@ -169,7 +170,7 @@ export class ListElement extends CcrElement {
     const wrapper = document.getElementById('list-wrapper')
 
     if (
-      wrapper.scrollTop + wrapper.offsetHeight >= content.offsetHeight - 40 &&
+      wrapper.scrollTop + wrapper.offsetHeight >= content.offsetHeight - 60 &&
       !this._loading
     ) {
       this.loadList()
@@ -179,17 +180,8 @@ export class ListElement extends CcrElement {
   private addItemToListView(entries: MeasurementDataPointAggregate[]) {
     const list = this.getListItems(entries)
 
-    if (list.length === 0) {
-      const dataPointName =
-        api.baseData.dataPointTypeId === MeasurementsEnum.BLOOD_PRESSURE_GENERAL
-          ? translate('BLOOD_PRESSURE')
-          : api.baseData.dataPointTypes[0].name
-
-      const element = document.createElement('div')
-      element.className = 'list-no-item'
-      element.innerText = `${translate('NO_RECORD')} ${dataPointName}`
-
-      document.getElementById('list-content').appendChild(element)
+    if (list.length === 0 && this.firstTime) {
+      this.showEmptyListError()
       return
     }
 
@@ -275,7 +267,9 @@ export class ListElement extends CcrElement {
     this.hasMore = true
     this.offset = 0
     this.data = []
+    this.firstTime = true
     document.getElementById('list-content').innerText = ''
+    eventService.trigger('list.no-previous-entries', false)
     this.loadList()
   }
 
@@ -299,6 +293,7 @@ export class ListElement extends CcrElement {
       this.hasMore = !!res.pagination.next
       this.data = uniqBy(this.data.concat(res.data), (entry) => entry.point.id)
       this.addItemToListView(res.data)
+      this.firstTime = false
     } catch (err) {
       this.error(err)
     }
@@ -378,6 +373,20 @@ export class ListElement extends CcrElement {
     document.getElementById('loading-wrapper').style.display = showLoading
       ? 'flex'
       : 'none'
+  }
+
+  private showEmptyListError(): void {
+    const dataPointName =
+      api.baseData.dataPointTypeId === MeasurementsEnum.BLOOD_PRESSURE_GENERAL
+        ? translate('BLOOD_PRESSURE')
+        : api.baseData.dataPointTypes[0].name
+
+    const element = document.createElement('div')
+    element.className = 'list-no-item'
+    element.innerText = `${translate('NO_RECORD')} ${dataPointName}`
+
+    document.getElementById('list-content').appendChild(element)
+    eventService.trigger('list.no-previous-entries', true)
   }
 }
 

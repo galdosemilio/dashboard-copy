@@ -42,6 +42,7 @@ export class GraphElement extends CcrElement {
   private isReady = false
   private firstTime = true
   private lineSeries = []
+  private listViewReportedEmpty = false
   private rangeChangeBumper = false
   private resizeChart$: Subject<void> = new Subject<void>()
   private timeframe: Timeframe
@@ -266,9 +267,10 @@ export class GraphElement extends CcrElement {
       })
 
       if (
-        !measurements.data.length &&
-        !this.hasEntries &&
-        ++this.emptyPeriodCount >= this.EMPTY_PERIOD_TOLERANCE
+        (!measurements.data.length &&
+          !this.hasEntries &&
+          ++this.emptyPeriodCount >= this.EMPTY_PERIOD_TOLERANCE) ||
+        this.listViewReportedEmpty
       ) {
         this.showEmptyDataError()
       } else {
@@ -286,13 +288,13 @@ export class GraphElement extends CcrElement {
         from: DateTime.fromISO(this.dateRange.start).toFormat(
           this.chartTimeFormat
         ),
-        to: DateTime.fromISO(this.dateRange.end)
-          .plus({ day: this.timeframe === 'year' ? 7 : 1 })
-          .toFormat(this.chartTimeFormat)
+        to: DateTime.fromISO(this.dateRange.end).toFormat(this.chartTimeFormat)
       })
 
-      this.chart.timeScale().fitContent()
-      this.chart.applyOptions({ priceScale: { autoScale: false } })
+      this.chart.applyOptions({
+        priceScale: { autoScale: false },
+        timeScale: { rightOffset: this.getTimeframeChartOffset(this.timeframe) }
+      })
       eventService.trigger(
         'graph.data',
         this.getEntriesBetweenRange(this.dateRange)
@@ -349,6 +351,16 @@ export class GraphElement extends CcrElement {
     return emptyGroups
   }
 
+  private getTimeframeChartOffset(timeframe: Timeframe): number {
+    switch (timeframe) {
+      case 'week':
+      case 'month':
+        return 5
+      case 'year':
+        return 37
+    }
+  }
+
   private getEntriesBetweenRange(dateRange: DateRange): GraphEntry[][] {
     const initialDate = DateTime.fromISO(dateRange.start)
     const finalDate = DateTime.fromISO(dateRange.end)
@@ -402,6 +414,17 @@ export class GraphElement extends CcrElement {
       eventService
         .listen<Timeframe>('graph.timeframe')
         .subscribe((timeframe) => (this.timeframe = timeframe)),
+      eventService
+        .listen<boolean>('list.no-previous-entries')
+        .subscribe((isEmpty) => {
+          this.listViewReportedEmpty = isEmpty
+
+          if (!this.listViewReportedEmpty) {
+            return
+          }
+
+          this.showEmptyDataError()
+        }),
       eventService.baseDataEvent$.subscribe(() => this.fetchMeasurements()),
       this.resizeChart$
         .pipe(
@@ -552,7 +575,7 @@ export class GraphElement extends CcrElement {
               barSpacing: 6
             }
           }
-        : { timeScale: { minBarSpacing: 1, barSpacing: 2 } }
+        : { timeScale: { minBarSpacing: 0.05, barSpacing: 0.8 } }
     )
 
     this.chart.applyOptions({ priceScale: { autoScale: true } })
