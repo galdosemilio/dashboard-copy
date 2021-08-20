@@ -62,6 +62,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private currentLang: string
   private isOrphaned: boolean
+  private isProvider = false
 
   constructor(
     router: Router,
@@ -95,6 +96,8 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isProvider =
+      this.context.user.accountType.id === AccountTypeIds.Provider
     this.hasMoreThanOneClinic = this.context.organizations.length > 1
 
     this.currentLang = this.translate.currentLang
@@ -467,9 +470,9 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
       return
     }
 
-    this.sidenavItems[
-      resourcesItemIndex
-    ].badge = this.platformUpdates.notSeenArticleAmount
+    this.sidenavItems[resourcesItemIndex].badge = this.isProvider
+      ? this.platformUpdates.notSeenArticleAmount
+      : 0
 
     const updatesSubItemIndex = findIndex(
       this.sidenavItems[resourcesItemIndex].children,
@@ -486,7 +489,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   updateSections(org: SelectedOrganization) {
-    if (this.context.user.accountType.id === AccountTypeIds.Client) {
+    if (!this.isProvider) {
       this.filterForClients()
     }
 
