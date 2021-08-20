@@ -1,3 +1,10 @@
+## [1.29.6](https://github.com/coachcare/dashboard/compare/v1.29.5...v1.29.6) (2021-08-20)
+
+
+### Bug Fixes
+
+* minor bugfixes to the list and graph views [FRON-2278] ([8352cdf](https://github.com/coachcare/dashboard/commit/8352cdf0c03cc4d8eaa0bd4646cbcf90405a0fc8))
+
 ## [1.29.5](https://github.com/coachcare/dashboard/compare/v1.29.4...v1.29.5) (2021-08-20)
 
 
