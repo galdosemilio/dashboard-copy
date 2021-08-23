@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
+import { AccountTypeIds } from '@coachcare/sdk'
 import { WalkthroughDialog } from '@app/shared/dialogs/walkthrough'
 import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
@@ -25,7 +26,10 @@ export class WalkthroughService {
       const storageProp = WALKTHROUGHS[name].storageItem
       const hasSeenGuide = window.localStorage.getItem(storageProp)
 
-      if (hasSeenGuide) {
+      if (
+        hasSeenGuide ||
+        this.context.user.accountType.id === AccountTypeIds.Client
+      ) {
         return
       }
 
