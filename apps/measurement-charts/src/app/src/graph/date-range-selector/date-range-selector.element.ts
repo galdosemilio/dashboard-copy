@@ -1,12 +1,15 @@
 import { CcrElement, DateRange, Timeframe } from '@chart/model'
 import { eventService } from '@chart/service'
 import { api } from '@chart/service/api'
+import { MeasurementDataPointAggregate } from '@coachcare/sdk'
 import { DateTime } from 'luxon'
+import { filter } from 'rxjs/operators'
 
 import './date-range-selector.element.scss'
 
 export class DateRangeSelectorElement extends CcrElement {
   private dateRange: DateRange = { start: '', end: '' }
+  private hasMostRecentEntry = false
   private timeframe: Timeframe = Timeframe.WEEK
 
   constructor() {
@@ -65,7 +68,17 @@ export class DateRangeSelectorElement extends CcrElement {
         .subscribe(this.onClickLeft),
       eventService.baseDataEvent$.subscribe((data) =>
         this.refreshTimeframe(data.timeframe)
-      )
+      ),
+      eventService
+        .listen('list.refresh')
+        .subscribe(() => (this.hasMostRecentEntry = false)),
+      eventService
+        .listen<MeasurementDataPointAggregate>('list.most-recent-entry')
+        .pipe(filter((entry) => entry && !this.hasMostRecentEntry))
+        .subscribe((entry) => {
+          this.hasMostRecentEntry = true
+          this.setEndDate(entry.bucket.timestamp)
+        })
     )
   }
 
@@ -121,8 +134,31 @@ export class DateRangeSelectorElement extends CcrElement {
       </div>`
   }
 
+  private setEndDate(isoDate: string): void {
+    const endDate = DateTime.fromISO(isoDate)
+    const dateRange = {
+      end: endDate.endOf('day').toISO(),
+      start: endDate
+        .minus({ [this.timeframe]: 1 })
+        .startOf('day')
+        .toISO()
+    }
+    this.setDateRange(dateRange)
+  }
+
+  private setDateRange(dateRange: DateRange): void {
+    this.dateRange = {
+      start: dateRange.start,
+      end: dateRange.end
+    }
+
+    eventService.trigger('graph.date-range', this.dateRange)
+    this.render()
+    this.afterViewInit()
+  }
+
   private updateDateRange(forward: boolean): void {
-    this.dateRange = forward
+    const dateRange = forward
       ? {
           start: DateTime.fromISO(this.dateRange.start)
             .plus({ [this.timeframe]: 1 })
@@ -140,9 +176,7 @@ export class DateRangeSelectorElement extends CcrElement {
             .toISO()
         }
 
-    eventService.trigger('graph.date-range', this.dateRange)
-    this.render()
-    this.afterViewInit()
+    this.setDateRange(dateRange)
   }
 }
 

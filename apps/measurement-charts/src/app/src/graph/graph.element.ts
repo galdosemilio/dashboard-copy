@@ -35,7 +35,7 @@ export class GraphElement extends CcrElement {
   private data: GraphEntry[][] = []
   private dateRange: DateRange
   private dateRangeButton: HTMLButtonElement
-  private readonly EMPTY_PERIOD_TOLERANCE = 3
+  private readonly EMPTY_PERIOD_TOLERANCE = 2
   private emptyPeriodCount = 0
   private hasEntries: boolean
   private isLoading: boolean

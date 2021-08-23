@@ -270,6 +270,7 @@ export class ListElement extends CcrElement {
     this.firstTime = true
     document.getElementById('list-content').innerText = ''
     eventService.trigger('list.no-previous-entries', false)
+    eventService.trigger('list.refresh')
     this.loadList()
   }
 
@@ -292,6 +293,12 @@ export class ListElement extends CcrElement {
       this.offset = res.pagination.next
       this.hasMore = !!res.pagination.next
       this.data = uniqBy(this.data.concat(res.data), (entry) => entry.point.id)
+      eventService.trigger<MeasurementDataPointAggregate>(
+        'list.most-recent-entry',
+        this.getMostRecentFromDate(
+          DateTime.fromFormat(api.baseData.lastDate, 'yyyy-MM-dd')
+        )
+      )
       this.addItemToListView(res.data)
       this.firstTime = false
     } catch (err) {
@@ -366,6 +373,12 @@ export class ListElement extends CcrElement {
     }
 
     return list
+  }
+
+  private getMostRecentFromDate(date: DateTime): MeasurementDataPointAggregate {
+    return this.data.find(
+      (entry) => DateTime.fromISO(entry.bucket.timestamp) <= date
+    )
   }
 
   private loading(showLoading: boolean) {
