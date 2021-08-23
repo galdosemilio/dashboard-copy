@@ -1,3 +1,11 @@
+## [1.30.1](https://github.com/coachcare/dashboard/compare/v1.30.0...v1.30.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* hide initial popup for patients on dashboard [FRON-2294] ([295c0c9](https://github.com/coachcare/dashboard/commit/295c0c9b06297b5fe3f58b76b31fa9ca918d9524))
+* minor graph behavior adjustments [FRON-2287] ([12ae4f1](https://github.com/coachcare/dashboard/commit/12ae4f1796e0a8aca680e3bfe6b14541a9d3835a))
+
 # [1.30.0](https://github.com/coachcare/dashboard/compare/v1.29.6...v1.30.0) (2021-08-20)
 
 
