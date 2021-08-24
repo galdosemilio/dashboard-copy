@@ -1303,7 +1303,7 @@
     "RPM_CREATE_NOTICE": "Al habilitar estas herramientas, se le facturará mensualmente por este paciente.",
     "RPM_CREATE_TITLE": "Remote Patient Monitoring",
     "RPM_DISABLED": "{{ patient }} ha tenido RPM deshabilitado desde {{ date }}",
-    "RPM_ENABLED": "{{ patient }} ha tenido RPM habilitado desde {{ date }}",
+    "RPM_ENABLED": "{{ patient }} ha tenido RPM habilitado desde {{ date }} en clínica {{ clinic.name }} (ID: {{ clinic.id }})",
     "RPM_STATUS": "RPM",
     "RPM_WILL_BE_ENABLED_AT_6_AM": "El episodio de atención RPM se habilitará a las 6 a. M.",
     "RPM_WILL_BE_ENABLED_TOMORROW": "Mañana se habilitará el episodio de atención RPM",

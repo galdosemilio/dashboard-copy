@@ -1303,7 +1303,7 @@
     "RPM_CREATE_NOTICE": "Abilitando questi strumenti",
     "RPM_CREATE_TITLE": "Monitoraggio Remoto del Paziente",
     "RPM_DISABLED": "{{ patient }} ha avuto il MRP disattivato dal {{ date }}",
-    "RPM_ENABLED": "{{ patient }} ha avuto il MRP attivo dal {{ date }}",
+    "RPM_ENABLED": "{{ patient }} ha avuto il MRP attivo dal {{ date }} in clinica {{ clinic.name }} (ID: {{ clinic.id }})",
     "RPM_STATUS": "RPM",
     "RPM_WILL_BE_ENABLED_AT_6_AM": "L'episodio di cura RPM sarà abilitato alle 6 del mattino",
     "RPM_WILL_BE_ENABLED_TOMORROW": "L'episodio di cura RPM sarà abilitato domani",

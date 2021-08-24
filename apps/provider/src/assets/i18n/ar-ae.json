@@ -1303,7 +1303,7 @@
     "RPM_CREATE_NOTICE": "بتمكين هذه الأدوات ، سيتم محاسبتك شهريًا لهذا المريض.",
     "RPM_CREATE_TITLE": "مراقبة المريض عن بعد",
     "RPM_DISABLED": "{{patient}} تم تعطيل RPM منذ {{date}}",
-    "RPM_ENABLED": "{{patient}} لديه RPM ممكّن منذ {{date}}",
+    "RPM_ENABLED": "{{patient}} لديه RPM ممكّن منذ {{date}} في العيادة {{ clinic.name }} (هوية شخصية: {{ clinic.id }}) ",
     "RPM_STATUS": "RPM",
     "RPM_WILL_BE_ENABLED_AT_6_AM": "سيتم تفعيل حلقة الرعاية RPM في الساعة 6 صباحًا",
     "RPM_WILL_BE_ENABLED_TOMORROW": "سيتم تفعيل حلقة RPM للرعاية غدًا",

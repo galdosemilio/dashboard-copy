@@ -1303,7 +1303,7 @@
     "RPM_CREATE_NOTICE": "Wenn Sie diese Tools aktivieren, wird Ihnen der Patient monatlich in Rechnung gestellt.",
     "RPM_CREATE_TITLE": "Remote Patient Monitoring (RPM, Patientenfernüberwachung)",
     "RPM_DISABLED": "{{ patient }} hat RPM deaktiviert seit {{ date }}",
-    "RPM_ENABLED": "{{ patient }} hat RPM aktiviert seit {{ date }}",
+    "RPM_ENABLED": "{{ patient }} hat RPM aktiviert seit {{ date }} in der Klinik {{ clinic.name }} (ICH WÜRDE: {{ clinic.id }})",
     "RPM_STATUS": "RPM",
     "RPM_WILL_BE_ENABLED_AT_6_AM": "Die RPM-Folge der Pflege wird um 6 Uhr morgens aktiviert",
     "RPM_WILL_BE_ENABLED_TOMORROW": "Die RPM-Folge der Pflege wird morgen aktiviert",

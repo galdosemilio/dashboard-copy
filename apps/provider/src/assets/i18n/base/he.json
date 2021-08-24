@@ -1303,7 +1303,7 @@
     "RPM_CREATE_NOTICE": "על ידי הפעלת כלים אלה, תחויב מדי חודש עבור מטופל זה.",
     "RPM_CREATE_TITLE": "ניטור מרחוק למטופל",
     "RPM_DISABLED": "{{ patient }} הופסקה הכנסה לאלף הופעות מאז {{ date }}",
-    "RPM_ENABLED": "{{ patient }} הפעילה הכנסה לאלף הופעות מאז {{ date }}",
+    "RPM_ENABLED": "{{ patient }} הפעילה הכנסה לאלף הופעות מאז {{ date }} במרפאה {{ clinic.name }} (תְעוּדַת זֶהוּת: {{ clinic.id }})",
     "RPM_STATUS": "סלד\"",
     "RPM_WILL_BE_ENABLED_AT_6_AM": "פרק ה- RPM של טיפול יופעל בשעה 6 בבוקר",
     "RPM_WILL_BE_ENABLED_TOMORROW": "פרק ה- RPM של טיפול יופעל מחר",

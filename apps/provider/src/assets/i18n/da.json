@@ -1303,7 +1303,7 @@
     "RPM_CREATE_NOTICE": "Ved at aktivere disse værktøjer",
     "RPM_CREATE_TITLE": "Fjernovervågning af patienten",
     "RPM_DISABLED": "{{ patient }} har haft RPM deaktiveret siden {{ date }}",
-    "RPM_ENABLED": "{{ patient }} har haft RPM aktiveret siden {{ date }}",
+    "RPM_ENABLED": "{{ patient }} har haft RPM aktiveret siden {{ date }} i klinik {{ clinic.name }} (ID.: {{ clinic.id }})",
     "RPM_STATUS": "RPM",
     "RPM_WILL_BE_ENABLED_AT_6_AM": "RPM-episoden af pleje aktiveres klokken 6",
     "RPM_WILL_BE_ENABLED_TOMORROW": "RPM-episoden af pleje aktiveres i morgen",
