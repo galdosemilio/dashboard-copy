@@ -25,13 +25,6 @@ class="ccr-table ccr-expand-table ccr-table-stats">
         <td class="column-phone">
           <span>{{ 'BOARD.PHONE_NUMBER' | translate }}</span>
         </td>
-        <td class="column-startweight">
-          <div>
-            <ccr-table-sort-header property="weight.first.value">
-              <span>{{ 'BOARD.START_WEIGHT' | translate }}</span>
-            </ccr-table-sort-header>
-          </div>
-        </td>
         <td class="column-currentweight">
           <div>
             <ccr-table-sort-header property="weight.last.value">
@@ -39,17 +32,10 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
-        <td class="column-weightchange">
+        <td class="column-currentweightdate">
           <div>
-            <ccr-table-sort-header property="weight.change.value">
-              <span>{{ 'STATS.WEIGHT_CHANGE' | translate }}</span>
-            </ccr-table-sort-header>
-          </div>
-        </td>
-        <td class="column-weightchangepercent">
-          <div>
-            <ccr-table-sort-header property="weight.change.percentage">
-              <span>{{ 'STATS.WEIGHT_CHANGE_PERCENT' | translate }}</span>
+            <ccr-table-sort-header property="weight.last.recordedAt">
+              <span>{{ 'BOARD.CURRENT_WEIGHT_DATE' | translate }}</span>
             </ccr-table-sort-header>
           </div>
         </td>
@@ -65,6 +51,13 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
+        <td class="column-startweight">
+          <div>
+            <ccr-table-sort-header property="weight.first.value">
+              <span>{{ 'BOARD.START_WEIGHT' | translate }}</span>
+            </ccr-table-sort-header>
+          </div>
+        </td>
         <td class="column-startweightdate">
           <div>
             <ccr-table-sort-header property="weight.first.recordedAt">
@@ -72,10 +65,17 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
-        <td class="column-currentweightdate">
+        <td class="column-weightchange">
           <div>
-            <ccr-table-sort-header property="weight.last.recordedAt">
-              <span>{{ 'BOARD.CURRENT_WEIGHT_DATE' | translate }}</span>
+            <ccr-table-sort-header property="weight.change.value">
+              <span>{{ 'STATS.WEIGHT_CHANGE' | translate }}</span>
+            </ccr-table-sort-header>
+          </div>
+        </td>
+        <td class="column-weightchangepercent">
+          <div>
+            <ccr-table-sort-header property="weight.change.percentage">
+              <span>{{ 'STATS.WEIGHT_CHANGE_PERCENT' | translate }}</span>
             </ccr-table-sort-header>
           </div>
         </td>
