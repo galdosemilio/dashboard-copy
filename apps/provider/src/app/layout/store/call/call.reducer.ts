@@ -202,7 +202,8 @@ export function callReducer(state = initialState, action: Action): CallState {
     case Actions.SET_VIDEO_AS_STOPPED:
       return {
         ...state,
-        hasVideoStarted: false
+        hasVideoStarted: false,
+        isRemoteVideoEnabled: false
       }
     case Actions.PARTICIPANT_ENABLED_CAMERA:
       return {
