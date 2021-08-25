@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import {
-  CreateLocalTracks,
+  AcceptCall,
+  CancelCall,
   DeclineCall
 } from '@app/layout/store/call/call.action'
 import { callSelector } from '@app/layout/store/call/call.selector'
 import { CallState } from '@app/layout/store/call/call.state'
 import { UIState } from '@app/layout/store/state'
+import { ContextService } from '@app/service'
+import { Conference } from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
 import { Subject, timer } from 'rxjs'
 
@@ -15,12 +18,18 @@ import { Subject, timer } from 'rxjs'
   styleUrls: ['./video-request.component.scss']
 })
 export class CallVideoRequestComponent implements OnDestroy, OnInit {
+  callPollInterval: number
   callState: CallState
   acceptedCall = false
   audioPopupTrigger: Subject<void> = new Subject<void>()
 
   private acceptingTimeout: any
-  constructor(private store: Store<UIState>) {
+  private fetchingCallDetails = false
+  constructor(
+    private communication: Conference,
+    private context: ContextService,
+    private store: Store<UIState>
+  ) {
     this.store
       .pipe(select(callSelector))
       .subscribe((callState) => (this.callState = callState))
@@ -28,20 +37,17 @@ export class CallVideoRequestComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.startAcceptingTimer()
+    this.startCallPolling()
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.stopCallPolling()
+  }
 
   onAcceptVideo() {
     this.acceptedCall = true
-    this.store.dispatch(
-      new CreateLocalTracks({
-        enableAudio: this.callState.hasAudioDeviceAccess,
-        enableVideo: true,
-        roomName: this.callState.room.name,
-        authenticationToken: this.callState.twilioToken
-      })
-    )
+    this.stopCallPolling()
+    this.store.dispatch(new AcceptCall({ enableVideo: true }))
   }
 
   onAcceptAudio() {
@@ -52,18 +58,13 @@ export class CallVideoRequestComponent implements OnDestroy, OnInit {
       this.audioPopupTrigger.next()
     } else {
       this.acceptedCall = true
-      this.store.dispatch(
-        new CreateLocalTracks({
-          enableAudio: this.callState.hasAudioDeviceAccess,
-          enableVideo: false,
-          roomName: this.callState.room.name,
-          authenticationToken: this.callState.twilioToken
-        })
-      )
+      this.stopCallPolling()
+      this.store.dispatch(new AcceptCall({ enableVideo: false }))
     }
   }
 
   onRejectCall() {
+    this.stopCallPolling()
     this.store.dispatch(new DeclineCall(this.callState.callId))
   }
 
@@ -85,5 +86,39 @@ export class CallVideoRequestComponent implements OnDestroy, OnInit {
         }
       }
     })
+  }
+
+  private startCallPolling(): void {
+    this.callPollInterval = setInterval(async () => {
+      try {
+        if (this.fetchingCallDetails || !this.callState.callId) {
+          return
+        }
+        this.fetchingCallDetails = true
+
+        const callDetail = await this.communication.fetchCallDetail({
+          callId: this.callState.callId
+        })
+
+        if (
+          callDetail.participants.attended.some(
+            (participant) => participant.id === this.context.user.id
+          )
+        ) {
+          this.store.dispatch(new CancelCall())
+        }
+      } catch (error) {
+      } finally {
+        this.fetchingCallDetails = false
+      }
+    }, 5000)
+  }
+
+  private stopCallPolling(): void {
+    if (!this.callPollInterval) {
+      return
+    }
+    clearInterval(this.callPollInterval)
+    this.callPollInterval = null
   }
 }

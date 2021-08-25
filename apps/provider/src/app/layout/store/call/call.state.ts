@@ -56,6 +56,7 @@ export interface CallState {
   isVideoStreamAvailable: boolean
   isCameraEnabled: boolean
   isRemoteVideoEnabled: boolean
+  isLocalVideoEnabled: boolean
   isMicrophoneEnabled: boolean
   selectedAudioInputDevice: string
   selectedAudioOutputDevice: string
@@ -109,6 +110,7 @@ export const initialState: CallState = {
   isCameraEnabled: false,
   hasVideoStarted: false,
   isRemoteVideoEnabled: false,
+  isLocalVideoEnabled: false,
   isMicrophoneEnabled: true,
   room: initialRoom,
   selectedAudioInputDevice: '',

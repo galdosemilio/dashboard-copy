@@ -226,6 +226,11 @@ export function callReducer(state = initialState, action: Action): CallState {
         (action as Actions.ParticipantConnected).payload,
         false
       )
+    case Actions.ACCEPT_CALL:
+      return {
+        ...state,
+        isLocalVideoEnabled: (action as Actions.AcceptCall).payload.enableVideo
+      }
     case Actions.CANCEL_CALL:
       return {
         ...state,

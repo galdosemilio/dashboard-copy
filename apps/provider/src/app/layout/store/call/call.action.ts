@@ -92,6 +92,7 @@ export const APPLY_SELECTED_AUDIO_OUTPUT_DEVICE =
   'CALL apply selected audio output device'
 export const APPLY_SELECTED_VIDEO_DEVICE = 'CALL apply selected video device'
 export const CLOSE_SETTINGS = 'CALL close settings'
+export const ACCEPT_CALL = 'CALL accept call'
 export const ABORT_CALL = 'CALL abort call'
 export const DECLINE_CALL = 'CALL decline call'
 export const CANCEL_CALL = 'CALL cancel call'
@@ -493,6 +494,12 @@ export class AbortCall implements Action {
   readonly type = ABORT_CALL
 
   constructor(public payload: string) {}
+}
+
+export class AcceptCall implements Action {
+  readonly type = ACCEPT_CALL
+
+  constructor(public payload: { enableVideo: boolean }) {}
 }
 
 export class DeclineCall implements Action {

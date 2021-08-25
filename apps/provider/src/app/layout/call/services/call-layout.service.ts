@@ -14,6 +14,7 @@ import { CallSettingsComponent } from '@app/layout/call/call-settings/call-setti
 import { CallWindowComponent } from '@app/layout/call/call-window/call-window.component'
 import { UIState } from '@app/layout/store'
 import {
+  AcceptCall,
   CloseCallsBeforeInitiate,
   ReceiveCall,
   Source,
@@ -176,6 +177,10 @@ export class CallLayoutService implements OnDestroy {
               )
             }
           })
+        )
+
+        this.store.dispatch(
+          new AcceptCall({ enableVideo: videoConferenceData.video })
         )
       }
     } catch (error) {

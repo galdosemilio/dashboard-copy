@@ -183,6 +183,7 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as callAction.ReceiveCall).payload),
     flatMap((payload) => {
+      const actions = []
       this.logging.log({
         logLevel: 'info',
         data: {
@@ -192,13 +193,13 @@ export class CallEffects {
           callId: payload.callId
         }
       })
-      return [
-        new callAction.FetchTwilioToken({
-          id: payload.callId,
-          account: this.context.accountId
-        }),
-        new callAction.FetchCallDetails({ callId: payload.callId })
-      ]
+
+      if (!this.callState.isReconnect) {
+        actions.push(new callAction.ShowIncomingCall(this.callState.room))
+      }
+
+      actions.push(new callAction.FetchCallDetails({ callId: payload.callId }))
+      return actions
     })
   )
 
@@ -227,7 +228,14 @@ export class CallEffects {
       const actions = []
       if (!this.callState.isReconnect) {
         if (this.callState.source === Source.INBOUND) {
-          actions.push(new callAction.ShowIncomingCall(this.callState.room))
+          actions.push(
+            new callAction.CreateLocalTracks({
+              enableAudio: this.callState.hasAudioDeviceAccess,
+              enableVideo: this.callState.isLocalVideoEnabled ?? false,
+              roomName: this.callState.room.name,
+              authenticationToken: this.callState.twilioToken
+            })
+          )
         } else if (this.callState.source === Source.OUTBOUND) {
           actions.push(new callAction.ShowWaitingCall(this.callState.room))
         }
@@ -849,6 +857,20 @@ export class CallEffects {
         id: payload,
         event: 'aborted'
       })
+    })
+  )
+
+  @Effect()
+  acceptCall$ = this.actions$.pipe(
+    ofType(callAction.ACCEPT_CALL),
+    debounceTime(300),
+    switchMap(() => {
+      return [
+        new callAction.FetchTwilioToken({
+          id: this.callState.callId,
+          account: this.context.accountId
+        })
+      ]
     })
   )
 
