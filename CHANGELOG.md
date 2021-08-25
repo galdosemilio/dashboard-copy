@@ -1,3 +1,17 @@
+# [1.31.0](https://github.com/coachcare/dashboard/compare/v1.30.1...v1.31.0) (2021-08-25)
+
+
+### Bug Fixes
+
+* add clinic name and ID to RPM deactivation message [FRON-2279] ([7ede56f](https://github.com/coachcare/dashboard/commit/7ede56f70bc3426d241f79f5686b2dbff385a5a9))
+* rearrange order of columns in patients section [FRON-2282] ([d2ae3b3](https://github.com/coachcare/dashboard/commit/d2ae3b3767f4a8e38b1456dd7452702bafab97b6))
+* solved bug preventing camera from disappearing [FRON-2302] ([3eb428a](https://github.com/coachcare/dashboard/commit/3eb428ab37b95c5b68b8cfb80bbe93ac09eeb175))
+
+
+### Features
+
+* added support for different device call pickup [FRON-2302] ([8f99067](https://github.com/coachcare/dashboard/commit/8f99067083557ff06177561861e507292967defc))
+
 ## [1.30.1](https://github.com/coachcare/dashboard/compare/v1.30.0...v1.30.1) (2021-08-23)
 
 
