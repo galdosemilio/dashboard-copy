@@ -933,6 +933,11 @@
     "TOMORROW": "[Mañana]",
     "YESTERDAY": "[Ayer]"
   },
+  "MY_SCHEDULE": {
+    "LAST_BLOOD_TEST": "Último análisis de sangre",
+    "LAST_CONSULTATION": "Ultima Consulta",
+    "NEXT_CONSULTATION": "Próxima Consulta"
+  },
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "No tiene permiso para acceder a este perfil",

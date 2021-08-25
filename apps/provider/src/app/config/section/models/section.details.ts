@@ -1,6 +1,7 @@
 import {
   ClinicListingConfigDetails,
   JournalConfigDetails,
+  PatientDashboardConfigDetails,
   PatientFormConfigDetails,
   PatientListingConfigDetails,
   RightPanelDetails,
@@ -18,4 +19,5 @@ export interface SectionConfigDetails {
   RPM?: RPMDetails
   SIDENAV?: SidenavDetails
   COHORT_REPORTS?: CohortReportsDetails
+  PATIENT_DASHBOARD?: PatientDashboardConfigDetails
 }

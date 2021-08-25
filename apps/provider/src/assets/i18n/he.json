@@ -933,6 +933,11 @@
     "TOMORROW": "[מחר]",
     "YESTERDAY": "[אתמול]"
   },
+  "MY_SCHEDULE": {
+    "LAST_BLOOD_TEST": "בדיקת דם אחרונה",
+    "LAST_CONSULTATION": "התייעצות אחרונה",
+    "NEXT_CONSULTATION": "התייעצות הבאה"
+  },
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "אין לך הרשאה לגשת לפרופיל זה",

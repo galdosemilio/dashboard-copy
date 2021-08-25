@@ -53,6 +53,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
       { days: 7 * 24, gracePeriod: 10 },
       { days: 7 * 52, gracePeriod: 21 }
     ]
+  },
+  PATIENT_DASHBOARD: {
+    SHOW_MY_SCHEDULE: false
   }
 }
 
@@ -98,5 +101,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
       { days: 7 * 24, gracePeriod: 10 },
       { days: 7 * 52, gracePeriod: 21 }
     ]
+  },
+  PATIENT_DASHBOARD: {
+    SHOW_MY_SCHEDULE: false
   }
 }

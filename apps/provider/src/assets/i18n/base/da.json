@@ -933,6 +933,11 @@
     "TOMORROW": "[Tomorrow]",
     "YESTERDAY": "[Yesterday]"
   },
+  "MY_SCHEDULE": {
+    "LAST_BLOOD_TEST": "Sidste blodprøve",
+    "LAST_CONSULTATION": "Sidste konsultation",
+    "NEXT_CONSULTATION": "Næste konsultation"
+  },
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "Du har ikke tilladelse til at få adgang til denne profil",

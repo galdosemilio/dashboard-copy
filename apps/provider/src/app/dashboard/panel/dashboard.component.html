@@ -65,4 +65,15 @@
   </div>
 
   <p>{{ 'BOARD.PATIENT_CALL_EXPLANATION' | translate }}</p>
+
+  <div
+  *ngIf="showMySchedule"
+  fxLayout="column"
+  fxLayout.gt-md="row"
+  fxLayoutAlign=" stretch"
+  fxLayoutGap="35px">
+    <div fxFlex="50%">
+      <ccr-my-schedule></ccr-my-schedule>
+    </div>
+  </div>
 </ng-template>

@@ -1,5 +1,6 @@
 export * from './clinic-listing.details'
 export * from './journal.details'
+export * from './patient-dashboard.details'
 export * from './patient-form.details'
 export * from './patient-listing.details'
 export * from './right-panel.details'

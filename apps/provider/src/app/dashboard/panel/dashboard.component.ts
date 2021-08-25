@@ -18,6 +18,7 @@ import {
 } from '@app/service'
 import { _, ViewUtils } from '@app/shared'
 import { AccountTypeIds, AccSingleResponse } from '@coachcare/sdk'
+import { resolveConfig } from '@app/config/section'
 
 @UntilDestroy()
 @Component({
@@ -35,6 +36,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
   canViewAll = true
   canAccessPhi = true
   public currentUser: AccSingleResponse
+  public showMySchedule = false
 
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/115001799311-Module-1-Getting-Started-with-your-Coach-dashboard'
@@ -64,6 +66,11 @@ export class DashboardComponent implements OnDestroy, OnInit {
       this.canAccessPhi =
         org && org.permissions ? org.permissions.allowClientPhi : false
       this.canViewAll = org && org.permissions ? org.permissions.viewAll : false
+      this.showMySchedule =
+        resolveConfig(
+          'PATIENT_DASHBOARD.SHOW_MY_SCHEDULE',
+          this.context.organization
+        ) ?? false
     })
 
     const errorHandler = function (err) {

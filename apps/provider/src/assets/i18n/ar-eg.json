@@ -933,6 +933,11 @@
     "TOMORROW": "[غدًا]",
     "YESTERDAY": "[أمس]"
   },
+  "MY_SCHEDULE": {
+    "LAST_BLOOD_TEST": "آخر فحص دم",
+    "LAST_CONSULTATION": "آخر استشارة",
+    "NEXT_CONSULTATION": "الاستشارة التالية"
+  },
   "NOTIFY": {
     "ERROR": {
       "ACCOUNT_NO_ACCESS_PERMISSION": "ليس لديك إذن للوصول إلى هذا الملف الشخصي",

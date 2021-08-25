@@ -5,6 +5,7 @@ export * from './resources'
 export * from './profile'
 export * from './reports'
 export * from './alerts'
+export * from './my-schedule'
 
 import {
   AccountComponents,
@@ -24,13 +25,15 @@ import {
   UserProfileProviders
 } from './profile'
 import { ResourcesComponents, ResourcesEntryComponents } from './resources'
+import { MyScheduleComponents } from './my-schedule'
 
 export const DashboardComponents = [
   ...PanelComponents,
   ...AccountComponents,
   ...LibraryComponents,
   ...ResourcesComponents,
-  ...ProfileComponents
+  ...ProfileComponents,
+  ...MyScheduleComponents
 ]
 
 export const DashboardEntryComponents = [
@@ -38,7 +41,8 @@ export const DashboardEntryComponents = [
   ...ContentEntryComponents,
   ...LibraryEntryComponents,
   ...ResourcesEntryComponents,
-  ...ProfileEntryComponents
+  ...ProfileEntryComponents,
+  ...MyScheduleComponents
 ]
 
 export const DashboardProviders = [
