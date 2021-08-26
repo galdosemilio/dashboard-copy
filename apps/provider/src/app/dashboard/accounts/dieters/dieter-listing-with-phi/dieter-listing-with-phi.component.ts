@@ -29,6 +29,7 @@ import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { DieterListingItem } from './../models'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
+import { DataPointTypes } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -96,6 +97,12 @@ export class DieterListingWithPhiComponent
         organization: this.context.organizationId
       })
     )
+    this.source.addDefault({
+      type: [
+        DataPointTypes.BLOOD_PRESSURE_SYSTOLIC,
+        DataPointTypes.BLOOD_PRESSURE_DIASTOLIC
+      ]
+    })
 
     this.source.errorHandler = errorHandler
     this.source.addOptional(this.refresh$, () => ({ ...this.packageFilter }))

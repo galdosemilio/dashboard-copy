@@ -26,7 +26,10 @@ import {
   AccountProvider,
   Affiliation,
   OrganizationProvider,
-  AccountTypeId
+  AccountTypeId,
+  MeasurementDataPointMinimalType,
+  convertToReadableFormat,
+  DataPointTypes
 } from '@coachcare/sdk'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
 import {
@@ -35,6 +38,7 @@ import {
   DieterListingPackageItem
 } from '../models'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
+import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 
 @UntilDestroy()
 @Component({
@@ -51,6 +55,7 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   @ViewChild(CcrTableSortDirective, { static: true })
   sort: CcrTableSortDirective
 
+  measurementPreference: UserMeasurementPreferenceType
   rows: any
   hasAdmin = false
 
@@ -74,20 +79,32 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.measurementPreference = this.context.user.measurementPreference
     this.store.dispatch(new ClosePanel())
 
     this.source.setSorter(
       this.sort,
       () =>
         ({
-          sort: [
-            {
-              property: this.sort.active || 'firstName',
-              dir: this.sort.direction || 'asc'
-            }
-          ]
+          sort: this.sort.direction
+            ? [
+                {
+                  property: this.sort.active || 'firstName',
+                  dir: this.sort.direction || 'asc'
+                }
+              ]
+            : [
+                {
+                  property: 'firstName',
+                  dir: 'asc'
+                }
+              ]
         } as any)
     )
+
+    this.source.addDefault({
+      ['type-sort']: DataPointTypes.BLOOD_PRESSURE_SYSTOLIC
+    })
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.hasAdmin = org && org.permissions ? org.permissions.admin : false
@@ -107,6 +124,16 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
         this.rows = value
         this.cdr.detectChanges()
       })
+  }
+
+  convertToReadableFormat(
+    value: number,
+    type: MeasurementDataPointMinimalType,
+    measurementPreference: UserMeasurementPreferenceType
+  ): string {
+    return convertToReadableFormat(value, type, measurementPreference).toFixed(
+      0
+    )
   }
 
   onEdit(dieter: DieterListingItem) {

@@ -79,6 +79,14 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
+
+        <td class="column-currentweightdate">
+          <div>
+            <ccr-table-sort-header property="metric.value">
+              <span>{{ 'MEASUREMENT.BLOOD_PRESSURE' | translate }}</span>
+            </ccr-table-sort-header>
+          </div>
+        </td>
         <td class="column-actions">{{ 'BOARD.ACTIONS' | translate }}</td>
       </tr>
     </thead>
@@ -95,7 +103,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       'row-bottom-border': row.level > 1,
       'last-of-group': row.isLastOfGroup
     }">
-      <td class="column-firstname" [attr.colspan]="row.level >= 1 ? 9 : 1">
+      <td class="column-firstname" [attr.colspan]="row.level >= 1 ? 10 : 1">
         <app-patient-firstname-cell
           [row]="row"
           (toggleRow)="toggleRow($event)"
@@ -156,6 +164,12 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           [ngTemplateOutlet]="row.weight?.change?.percent ? weightpercent : empty"
           [ngTemplateOutletContext]="{weightPercent: row.weight?.change?.percent}"></ng-container>
           </div>
+        </div>
+      </td>
+      <td *ngIf="row.level === 0" class="column-currentweightdate">
+        <div *ngIf="row.dataPoints?.length === 2; else empty">
+          {{ convertToReadableFormat(row.dataPoints[0].value, row.dataPoints[0].type, measurementPreference) }} / {{ convertToReadableFormat(row.dataPoints[1].value, row.dataPoints[1].type, measurementPreference) }}
+          {{ row.dataPoints[0].type.unit }}
         </div>
       </td>
       <td class="column-actions">

@@ -74,6 +74,7 @@ export class DieterListingDataSource extends TableDataSource<
         ...item.account,
         phone: formatPhoneNumber(item.account.phone),
         weight: item.weight || undefined,
+        dataPoints: item.dataPoints,
         level: 0
       })
       rows.push(dieterListingItem)

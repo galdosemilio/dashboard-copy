@@ -1,9 +1,11 @@
 import { ExpandableTableItem } from '@app/shared'
+import { MeasurementDataPointSingle } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { DieterListingOrgItem } from './dieterListingOrgItem'
 import { DieterListingPackageItem } from './dieterListingPackageItem'
 
 export class DieterListingItem implements ExpandableTableItem {
+  dataPoints: MeasurementDataPointSingle[]
   email: string
   id: string
   isEmpty: boolean
@@ -27,6 +29,7 @@ export class DieterListingItem implements ExpandableTableItem {
   }
 
   constructor(args: any) {
+    this.dataPoints = args.dataPoints ?? null
     this.id = args.id || ''
     this.email = args.email || ''
     this.firstName = args.firstName || ''
