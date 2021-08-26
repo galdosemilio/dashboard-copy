@@ -25,7 +25,6 @@ fxLayoutAlign=" stretch">
     {{ 'GLOBAL.PROFILE' | translate }}
   </a>
   <a
-  *ngIf="isProvider"
   [class.active]="section === 'security'"
   [routerLink]="['.', { s: 'security' }]"
   ccrLinkActive="active"
