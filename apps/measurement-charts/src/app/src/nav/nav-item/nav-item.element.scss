@@ -4,14 +4,15 @@ ccr-nav-item {
   .tab {
     flex: 1;
     text-align: center;
-    padding: 10px;
+    height: 100%;
     position: relative;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text);
+    text-transform: uppercase;
 
     &.active {
       font-weight: bold;
@@ -23,7 +24,7 @@ ccr-nav-item {
       height: 5px;
       background: var(--primary);
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
     }
   }

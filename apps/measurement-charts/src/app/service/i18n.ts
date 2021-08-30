@@ -26,7 +26,9 @@ const texts = {
     BLOOD_PRESSURE: 'ضغط الدم',
     NO_RECORD: 'لا قياسات سابقة مسجلة ل',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'لا توجد بيانات للفترة الحالية. من فضلك، اختر نطاق تاريخ مختلف.'
+      'لا توجد بيانات للفترة الحالية. من فضلك، اختر نطاق تاريخ مختلف.',
+    DATA_SOURCE: 'مصدر البيانات',
+    HIGHEST_VALUE_FOR_DAY: 'أعلى قيمة لليوم'
   },
   da: {
     AVERAGE: 'Gennemsnit',
@@ -52,7 +54,9 @@ const texts = {
     BLOOD_PRESSURE: 'Blodtryk',
     NO_RECORD: 'Ingen tidligere målinger registreret for',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'Ingen data for den nuværende periode. Vælg venligst et andet datointerval.'
+      'Ingen data for den nuværende periode. Vælg venligst et andet datointerval.',
+    DATA_SOURCE: 'Datakilde',
+    HIGHEST_VALUE_FOR_DAY: 'Højeste værdi for dagen'
   },
   de: {
     AVERAGE: 'Durchschnittlich',
@@ -78,7 +82,9 @@ const texts = {
     BLOOD_PRESSURE: 'Blutdruck',
     NO_RECORD: 'Keine vorherigen Messungen aufgezeichnet für',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'Keine Daten für den aktuellen Zeitraum. Bitte wählen Sie einen anderen Datumsbereich.'
+      'Keine Daten für den aktuellen Zeitraum. Bitte wählen Sie einen anderen Datumsbereich.',
+    DATA_SOURCE: 'Datenquelle',
+    HIGHEST_VALUE_FOR_DAY: 'Höchster Wert für Tag'
   },
   en: {
     AVERAGE: 'Average',
@@ -104,7 +110,9 @@ const texts = {
     BLOOD_PRESSURE: 'Blood Pressure',
     NO_RECORD: 'No previous measurements recorded for',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'No data for the current period. Please, choose a different date range.'
+      'No data for the current period. Please, choose a different date range.',
+    DATA_SOURCE: 'Data Source',
+    HIGHEST_VALUE_FOR_DAY: 'Highest value for day'
   },
   es: {
     AVERAGE: 'Promedio',
@@ -130,7 +138,9 @@ const texts = {
     BLOOD_PRESSURE: 'Presión sanguínea',
     NO_RECORD: 'No se han registrado mediciones previas para',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'No hay datos para este período. Por favor, escoja un rango de fechas diferente.'
+      'No hay datos para este período. Por favor, escoja un rango de fechas diferente.',
+    DATA_SOURCE: 'Fuente de datos',
+    HIGHEST_VALUE_FOR_DAY: 'Valor más alto por día'
   },
   fr: {
     AVERAGE: 'Moyenne',
@@ -156,7 +166,9 @@ const texts = {
     BLOOD_PRESSURE: 'Pression artérielle',
     NO_RECORD: 'Aucune mesure précédente enregistrée pour',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      "Aucune donnée pour la période en cours. S'il vous plaît, choisissez une plage de date différente."
+      "Aucune donnée pour la période en cours. S'il vous plaît, choisissez une plage de date différente.",
+    DATA_SOURCE: 'La source de données',
+    HIGHEST_VALUE_FOR_DAY: 'Valeur la plus élevée pour la journée'
   },
   he: {
     AVERAGE: 'מְמוּצָע',
@@ -182,7 +194,9 @@ const texts = {
     BLOOD_PRESSURE: 'לחץ דם',
     NO_RECORD: 'לא נרשמו מדידות קודמות עבור',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'אין נתונים לתקופה הנוכחית. בבקשה, בחר טווח תאריך אחר.'
+      'אין נתונים לתקופה הנוכחית. בבקשה, בחר טווח תאריך אחר.',
+    DATA_SOURCE: 'מקור מידע',
+    HIGHEST_VALUE_FOR_DAY: 'הערך הגבוה ביותר ליום'
   },
   it: {
     AVERAGE: 'Media',
@@ -208,7 +222,9 @@ const texts = {
     BLOOD_PRESSURE: 'Pressione sanguigna',
     NO_RECORD: 'Nessuna misurazione precedente registrata per',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'Nessun dato per il periodo corrente. Per favore, scegli un intervallo di date diverso.'
+      'Nessun dato per il periodo corrente. Per favore, scegli un intervallo di date diverso.',
+    DATA_SOURCE: 'Fonte di dati',
+    HIGHEST_VALUE_FOR_DAY: 'Valore più alto per il giorno'
   },
   pt: {
     AVERAGE: 'Média',
@@ -234,7 +250,9 @@ const texts = {
     BLOOD_PRESSURE: 'Pressão arterial',
     NO_RECORD: 'Nenhuma medição anterior registrada para',
     NO_DATA_CHOOSE_DIFF_RANGE:
-      'Não há dados para o período atual. Por favor, escolha um intervalo de datas diferente.'
+      'Não há dados para o período atual. Por favor, escolha um intervalo de datas diferente.',
+    DATA_SOURCE: 'Fonte de dados',
+    HIGHEST_VALUE_FOR_DAY: 'Maior valor para o dia'
   }
 }
 

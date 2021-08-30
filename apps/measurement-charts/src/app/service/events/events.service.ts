@@ -9,6 +9,8 @@ type EventString =
   | 'graph.date-range-previous'
   | 'graph.date-range-next'
   | 'graph.data'
+  | 'graph.sources'
+  | 'graph.source-change'
   | 'list.refresh'
   | 'list.no-previous-entries'
   | 'list.most-recent-entry'

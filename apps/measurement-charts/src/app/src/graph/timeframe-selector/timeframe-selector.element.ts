@@ -18,11 +18,9 @@ export class TimeframeSelectorElement extends CcrElement {
         <div class="timeframe-selector-item" data-timeframe="week">${translate(
           'WEEK'
         )}</div>
-        <div class="timeframe-selector-item-separator">|</div>
         <div class="timeframe-selector-item" data-timeframe="month">${translate(
           'MONTH'
         )}</div>
-        <div class="timeframe-selector-item-separator">|</div>
         <div class="timeframe-selector-item" data-timeframe="year">${translate(
           'YEAR'
         )}</div>

@@ -28,6 +28,7 @@ export interface BaseData {
     text: string
   }
   dataPointTypes: MeasurementDataPointType[]
+  sourceId?: string
 }
 
 export const baseData: BaseData = {

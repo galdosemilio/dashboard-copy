@@ -1,7 +1,6 @@
 import './graph.element.scss'
 
 import * as utils from '@chart/utils'
-
 import {
   CcrElement,
   DateRange,
@@ -20,7 +19,7 @@ import { merge, Subject } from 'rxjs'
 import { api } from '@chart/service/api'
 import { createChart } from 'lightweight-charts'
 import { eventService } from '@chart/service'
-import { groupBy, sortBy } from 'lodash'
+import { chain, groupBy, maxBy, sortBy } from 'lodash'
 import { translate } from '@chart/service/i18n'
 
 export interface GraphEntry {
@@ -30,8 +29,10 @@ export interface GraphEntry {
 
 export class GraphElement extends CcrElement {
   private chart
-  private chartHeightOffset = 275
+  private chartHeightOffset = 225
   private chartTimeFormat = 'yyyy-MM-dd'
+  private sourceId: string
+  private measurementData: MeasurementDataPointAggregate[] = []
   private data: GraphEntry[][] = []
   private dateRange: DateRange
   private dateRangeButton: HTMLButtonElement
@@ -68,9 +69,16 @@ export class GraphElement extends CcrElement {
   afterViewInit(): void {
     this.createChart()
 
-    eventService.baseDataEvent$.subscribe(() => {
+    eventService.baseDataEvent$.subscribe((baseData) => {
+      this.sourceId = baseData.sourceId
       this.isReady = true
       this.addLineSeries()
+    })
+
+    eventService.listen<string>('graph.source-change').subscribe((source) => {
+      this.sourceId = source
+
+      this.onChangedSource()
     })
 
     this.dateRangeButton = document.querySelector('#previous-date-range-button')
@@ -88,6 +96,7 @@ export class GraphElement extends CcrElement {
   render() {
     this.innerHTML = `
       <div id="graph-content">
+        <dashboard-source-selector></dashboard-source-selector>
         <dashboard-graph-timeframe-selector></dashboard-graph-timeframe-selector>
         <dashboard-date-range-selector></dashboard-date-range-selector>
         <dashboard-graph-header id="graph-header-container"></dashboard-graph-header>
@@ -186,6 +195,68 @@ export class GraphElement extends CcrElement {
       )
   }
 
+  private onChangedSource(): void {
+    const measurementData = this.sourceId
+      ? this.measurementData.filter(
+          (entry) => entry.point.group.source.id === this.sourceId
+        )
+      : this.measurementData
+
+    const measurementMaps = api.baseData.dataPointTypes.map((type) =>
+      measurementData.filter((entry) => entry.point.type.id === type.id)
+    )
+
+    measurementMaps.forEach((values, index) => {
+      const groupedValues = groupBy(values, (group) =>
+        DateTime.fromISO(group.bucket.timestamp).toFormat(this.chartTimeFormat)
+      )
+
+      for (const entry of this.data[index]) {
+        if (groupedValues[entry.time]) {
+          const newEntry = maxBy(
+            groupedValues[entry.time],
+            (grp) => grp.point.value
+          )
+
+          entry.value = convertToReadableFormat(
+            newEntry.point.value,
+            newEntry.point.type,
+            baseData.metric
+          )
+        } else {
+          entry.value = undefined
+        }
+      }
+      this.lineSeries[index].setData(
+        this.data[index].map((entry) => ({ ...entry }))
+      )
+      this.lineSeries[index].setMarkers(
+        this.data[index].map((entry) => ({
+          time: entry.time,
+          shape: 'circle',
+          position: 'inBar',
+          color: api.baseData.colors.primary
+        }))
+      )
+    })
+
+    this.chart.timeScale().setVisibleRange({
+      from: DateTime.fromISO(this.dateRange.start).toFormat(
+        this.chartTimeFormat
+      ),
+      to: DateTime.fromISO(this.dateRange.end).toFormat(this.chartTimeFormat)
+    })
+
+    this.chart.applyOptions({
+      priceScale: { autoScale: false },
+      timeScale: { rightOffset: this.getTimeframeChartOffset(this.timeframe) }
+    })
+    eventService.trigger(
+      'graph.data',
+      this.getEntriesBetweenRange(this.dateRange)
+    )
+  }
+
   private async fetchMeasurements(append = true): Promise<void> {
     try {
       if (!this.isReady || !this.dateRange || this.isLoading) {
@@ -198,12 +269,40 @@ export class GraphElement extends CcrElement {
         account: api.baseData.accountId || undefined,
         type: api.baseData.dataPointTypes.map((t) => t.id),
         recordedAt: this.dateRange,
+        'include-in-partition': 'source',
         limit: 'all',
         unit: 'day'
       })
 
+      this.measurementData = append
+        ? this.measurementData.concat(measurements.data)
+        : measurements.data.concat(this.measurementData)
+
+      const sources = chain(this.measurementData)
+        .map((entry) => entry.point.group.source)
+        .uniqBy((src) => src.id)
+        .sortBy((src) => src.id)
+        .value()
+
+      if (sources.length > 1) {
+        eventService.trigger('graph.sources', sources)
+
+        const chartHeightOffset = 275
+
+        if (chartHeightOffset !== this.chartHeightOffset) {
+          this.chartHeightOffset = chartHeightOffset
+          this.resizeChart$.next()
+        }
+      }
+
+      const measurementData = this.sourceId
+        ? measurements.data.filter(
+            (entry) => entry.point.group.source.id === this.sourceId
+          )
+        : measurements.data
+
       const measurementMaps = api.baseData.dataPointTypes.map((type) =>
-        measurements.data.filter((entry) => entry.point.type.id === type.id)
+        measurementData.filter((entry) => entry.point.type.id === type.id)
       )
 
       measurementMaps.forEach((values, index) => {
@@ -225,23 +324,26 @@ export class GraphElement extends CcrElement {
           const filteredGroup = group.filter(
             (entry) => entry.point.id !== 'empty-group'
           )
+          const emptyGroup = group.find(
+            (entry) => entry.point.id === 'empty-group'
+          )
 
           const hadEntries = filteredGroup.length > 0
 
           this.hasEntries = this.hasEntries || hadEntries
 
-          const lastEntry = hadEntries
-            ? filteredGroup[filteredGroup.length - 1]
-            : group[group.length - 1]
+          const entry = hadEntries
+            ? maxBy(filteredGroup, (grp) => grp.point.value)
+            : emptyGroup
 
           return {
-            time: DateTime.fromISO(lastEntry.bucket.timestamp).toFormat(
+            time: DateTime.fromISO(entry.bucket.timestamp).toFormat(
               this.chartTimeFormat
             ),
             value: hadEntries
               ? convertToReadableFormat(
-                  lastEntry.point.value,
-                  lastEntry.point.type,
+                  entry.point.value,
+                  entry.point.type,
                   baseData.metric
                 )
               : undefined
@@ -267,7 +369,7 @@ export class GraphElement extends CcrElement {
       })
 
       if (
-        (!measurements.data.length &&
+        (!measurementData.length &&
           !this.hasEntries &&
           ++this.emptyPeriodCount >= this.EMPTY_PERIOD_TOLERANCE) ||
         this.listViewReportedEmpty

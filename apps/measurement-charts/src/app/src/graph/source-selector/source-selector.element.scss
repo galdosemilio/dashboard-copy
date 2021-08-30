@@ -1,0 +1,36 @@
+.source-select-container {
+  padding: 15px 10px 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    color: var(--gray);
+  }
+
+  .select-wrap {
+    height: 35px;
+    border: 1px solid var(--text);
+    border-radius: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 20px;
+    padding: 0 10px;
+
+    [dir='rtl'] & {
+      margin-left: 0px;
+      margin-right: 20px;
+    }
+
+    select {
+      font-size: 16px;
+      border: 0;
+      width: 100%;
+      outline: none;
+      color: var(--text);
+    }
+  }
+}

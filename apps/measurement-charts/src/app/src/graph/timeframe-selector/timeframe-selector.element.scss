@@ -2,29 +2,24 @@ dashboard-graph-timeframe-selector {
   div.timeframe-selector {
     &-container {
       align-items: center;
-      background-color: var(--selector-background);
-      border-radius: 15px;
-      color: var(--selector-contrast);
+      color: var(--gray);
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
       margin: 15px auto;
-      max-width: 80%;
     }
 
     &-item {
-      border-radius: 5px;
       cursor: pointer;
-      margin: 10px 0;
-      padding: 5px 10px;
+      padding: 7px 10px;
+      border: 1px solid var(--selector-contrast);
+      flex: 1;
+      text-align: center;
+      margin: 0px 10px;
 
       &.active {
-        background-color: var(--selector-contrast);
-        color: var(--text);
-      }
-
-      &-separator {
-        padding: 15px 0;
+        border-color: var(--primary);
+        color: var(--primary);
       }
     }
   }

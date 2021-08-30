@@ -1,8 +1,8 @@
 dashboard-nav {
   .tab-group {
     display: flex;
-    border-bottom: 1px solid #b5b3b3;
-    height: 44px;
+    height: 40px;
+    background-color: var(--gray-light);
   }
 
   .wrapper {

@@ -47,7 +47,8 @@ export class AppElement extends HTMLElement {
         accent: params.get('accent-color') ?? baseData.colors.accent,
         text: params.get('text-color') ?? baseData.colors.text
       },
-      dataPointTypes: []
+      dataPointTypes: [],
+      sourceId: params.get('sourceId') ?? undefined
     }
 
     this.onMessage(data)
@@ -98,6 +99,8 @@ export class AppElement extends HTMLElement {
         --selector-background: #383838;
         --selector-background-light: #f5f5f5;
         --selector-contrast: #dedede;
+        --gray-light: rgb(247, 247, 247);
+        --gray: rgb(155,155,155)
       `
     )
   }

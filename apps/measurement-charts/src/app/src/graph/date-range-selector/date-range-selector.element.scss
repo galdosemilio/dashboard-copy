@@ -6,9 +6,12 @@ dashboard-date-range-selector {
     flex-direction: row;
     justify-content: space-evenly;
     padding: 0 15px;
+    margin: 0 10px;
 
     p {
       text-align: center;
+      margin: 10px 0;
+      color: var(--text);
     }
 
     span {
