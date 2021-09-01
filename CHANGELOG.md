@@ -1,3 +1,10 @@
+## [1.32.1](https://github.com/coachcare/dashboard/compare/v1.32.0...v1.32.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* patient listing bp reverse ([e624f62](https://github.com/coachcare/dashboard/commit/e624f625591b00ae1b59e4431d38941f087b65e0))
+
 # [1.32.0](https://github.com/coachcare/dashboard/compare/v1.31.1...v1.32.0) (2021-09-01)
 
 
