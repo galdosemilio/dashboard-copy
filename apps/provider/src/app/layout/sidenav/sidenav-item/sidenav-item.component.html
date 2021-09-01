@@ -29,7 +29,12 @@
   <mat-list-item *ngIf="sidenavItem.navRoute" class="mat-list-item {{levelClass}}" (click)="toggleMenu($event)"
   [routerLink]="sidenavItem.navRoute" routerLinkActive="active">
     <ccr-badge *ngIf="sidenavItem.badge">{{ sidenavItem.badge }}</ccr-badge>
-    <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>
+    <ng-container *ngIf="!sidenavItem.fontIcon; else fontIcon">
+      <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>
+    </ng-container>
+    <ng-template #fontIcon>
+      <mat-icon [fontSet]="sidenavItem.fontIcon.fontSet" [fontIcon]="sidenavItem.fontIcon.fontIcon"></mat-icon>
+    </ng-template>
     <span>{{ sidenavItem.navName | translate }}</span>
   </mat-list-item>
 

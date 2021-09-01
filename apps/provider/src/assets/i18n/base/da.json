@@ -1549,6 +1549,7 @@
     "NOTIFICATIONS": "Notifikationer",
     "OVERVIEW": "Oversigt",
     "PLATFORM_UPDATES": "Opdateringer",
+    "PROFILE_SETTINGS": "Profil & Indstillinger.",
     "REPORTS": "Rapporter",
     "RESOURCES": "Ressourcer",
     "RPM": "RPM",
@@ -1560,6 +1561,7 @@
     "SEQUENCES": "Sekvenser",
     "SETTINGS": "indstillinger",
     "STORE": "Butik",
+    "TEST_RESULTS": "Test resultater",
     "USER_STATISTICS": "Brugerstatistik"
   },
   "STATS": {

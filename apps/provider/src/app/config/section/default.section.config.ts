@@ -39,7 +39,7 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     REMINDERS_FORM: '15081'
   },
   SIDENAV: {
-    HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
+    HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM, SidenavOptions.TEST_RESULTS]
   },
   COHORT_REPORTS: {
     SHOW_COHORT_WEIGHT_LOSS_REPORT: false,
@@ -84,7 +84,7 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     REMINDERS_FORM: '172'
   },
   SIDENAV: {
-    HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
+    HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM, SidenavOptions.TEST_RESULTS]
   },
   COHORT_REPORTS: {
     SHOW_COHORT_WEIGHT_LOSS_REPORT: false,

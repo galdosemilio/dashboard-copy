@@ -19,10 +19,12 @@ export interface SidenavItem {
   route?: string
   icon?: string
   isAllowedForPatients?: boolean
+  isHiddenForProviders?: boolean
   children?: Array<SidenavItem>
   expanded?: boolean
   badge?: number | string
   cssClass?: string
+  fontIcon?: { fontSet: string; fontIcon: string }
 }
 
 @Component({

@@ -30,6 +30,10 @@ export const SVG_ICONS: IconConfigItem[] = [
   {
     name: 'svg-video',
     url: './assets/svg/video.svg'
+  },
+  {
+    name: 'svg-vial',
+    url: './assets/svg/vial.svg'
   }
 ]
 

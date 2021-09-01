@@ -48,6 +48,13 @@ const routes: Routes = [
           import('./messages/messages.module').then((m) => m.MessagesModule)
       },
       {
+        path: 'test-results',
+        loadChildren: () =>
+          import('./test-results/test-results.module').then(
+            (m) => m.TestResultsModule
+          )
+      },
+      {
         path: 'alerts',
         children: AlertsRoutes
       },

@@ -1549,6 +1549,7 @@
     "NOTIFICATIONS": "Notificaciones",
     "OVERVIEW": "Visión General",
     "PLATFORM_UPDATES": "Novedades",
+    "PROFILE_SETTINGS": "Configuración de perfil",
     "REPORTS": "Informes",
     "RESOURCES": "Recursos",
     "RPM": "RPM",
@@ -1560,6 +1561,7 @@
     "SEQUENCES": "Secuencias",
     "SETTINGS": "Configuración",
     "STORE": "Tienda",
+    "TEST_RESULTS": "Resultados de la prueba",
     "USER_STATISTICS": "Estadísticas"
   },
   "STATS": {

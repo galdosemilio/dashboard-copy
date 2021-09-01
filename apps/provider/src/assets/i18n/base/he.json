@@ -1549,6 +1549,7 @@
     "NOTIFICATIONS": "עדכונים",
     "OVERVIEW": "סקירה",
     "PLATFORM_UPDATES": "עדכונים",
+    "PROFILE_SETTINGS": "הגדרות פרופיל",
     "REPORTS": "דוחות",
     "RESOURCES": "מקורות",
     "RPM": "סלד\"",
@@ -1560,6 +1561,7 @@
     "SEQUENCES": "רצפים",
     "SETTINGS": "הגדרות",
     "STORE": "חנות",
+    "TEST_RESULTS": "תוצאות מבחן",
     "USER_STATISTICS": "סטטיסטיקות משתמשים"
   },
   "STATS": {

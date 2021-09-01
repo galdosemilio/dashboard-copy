@@ -46,6 +46,10 @@ import {
   IdealYouTestSectionConfig,
   IdealYouProdSectionConfig
 } from './ideal-you'
+import {
+  WellCoreTestSectionConfig,
+  WellCoreProdSectionConfig
+} from './wellcore'
 
 export interface SectionConfigObject {
   component: any
@@ -87,7 +91,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7420']: GrandViewHealthSectionConfig,
     ['7384']: MDTeamSectionConfig,
     ['7520']: CurryCareTestSectionConfig,
-    ['7534']: PeakHealthGroupSectionConfig
+    ['7534']: PeakHealthGroupSectionConfig,
+    ['7535']: WellCoreTestSectionConfig
   },
   prod: {
     ['4050']: LeanMDSectionConfig,
@@ -109,6 +114,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6438']: MDTeamSectionConfig,
     ['6439']: DrVProdSectionConfig,
     ['4049']: CurryCareProdSectionConfig,
-    ['6869']: PeakHealthGroupSectionConfig
+    ['6869']: PeakHealthGroupSectionConfig,
+    ['6891']: WellCoreProdSectionConfig
   }
 }

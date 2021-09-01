@@ -1549,6 +1549,7 @@
     "NOTIFICATIONS": "إشعارات",
     "OVERVIEW": "نظرة عامة",
     "PLATFORM_UPDATES": "التحديثات",
+    "PROFILE_SETTINGS": "إعدادات الملف الشخصي",
     "REPORTS": "تقارير",
     "RESOURCES": "المصادر",
     "RPM": "RPM",
@@ -1560,6 +1561,7 @@
     "SEQUENCES": "متواليات",
     "SETTINGS": "الإعدادات",
     "STORE": "متجر",
+    "TEST_RESULTS": "نتائج الإختبار",
     "USER_STATISTICS": "إحصاءات المستخدم"
   },
   "STATS": {

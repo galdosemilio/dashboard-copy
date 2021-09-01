@@ -18,6 +18,7 @@ import { DashboardRoutes } from './dashboard.routing'
 import { LibraryFormsModule } from './library/forms/forms.module'
 import { ReportsModule } from './reports/reports.module'
 import { SequencingModule } from './sequencing/sequencing.module'
+import { TestResultsModule } from './test-results/test-results.module'
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { SequencingModule } from './sequencing/sequencing.module'
     DietersModule,
     DietersTableModule,
     DashboardRoutes,
-    SequencingModule
+    SequencingModule,
+    TestResultsModule
   ],
   exports: [RouterModule],
   declarations: DashboardComponents,

@@ -200,6 +200,15 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             isAllowedForPatients: true
           },
           {
+            code: SidenavOptions.TEST_RESULTS,
+            navName: _('SIDENAV.TEST_RESULTS'),
+            route: 'test-results',
+            navRoute: 'test-results',
+            isAllowedForPatients: true,
+            isHiddenForProviders: true,
+            fontIcon: { fontSet: 'fas', fontIcon: 'fa-vial' }
+          },
+          {
             navName: _('SIDENAV.ACCOUNTS'),
             route: 'accounts',
             icon: 'people',
@@ -335,6 +344,15 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             icon: 'shopping_cart'
           },
           {
+            code: SidenavOptions.PROFILE_SETTINGS,
+            navName: _('SIDENAV.PROFILE_SETTINGS'),
+            route: 'profile',
+            navRoute: 'profile',
+            icon: 'person',
+            isAllowedForPatients: true,
+            isHiddenForProviders: true
+          },
+          {
             badge: 10,
             navName: _('SIDENAV.RESOURCES'),
             route: 'resources',
@@ -396,6 +414,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
           (child) => child.navName === _('SIDENAV.CONTACT_SUPPORT')
         )) > -1
     )
+
     const idxSupportCallChild =
       idxProviderContact && this.sidenavItems.length > 0
         ? this.sidenavItems[idxProviderContact].children.findIndex(
@@ -489,9 +508,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   updateSections(org: SelectedOrganization) {
-    if (!this.isProvider) {
-      this.filterForClients()
-    }
+    this.filterSideNavItems()
 
     let hiddenOptions = resolveConfig('SIDENAV.HIDDEN_OPTIONS', org)
     const shownOptions = resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true) || []
@@ -630,16 +647,20 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     })
   }
 
-  private filterForClients(): void {
-    this.sidenavItems = this.sidenavItems.filter(
-      (item) => item.isAllowedForPatients
-    )
+  private filterSideNavItems() {
+    this.sidenavItems = this.sidenavItems.filter((item) => {
+      return this.isProvider
+        ? !item.isHiddenForProviders
+        : item.isAllowedForPatients
+    })
 
     this.sidenavItems = this.sidenavItems.map((item) => ({
       ...item,
-      children: item.children?.filter(
-        (childItem) => childItem.isAllowedForPatients
-      )
+      children: item.children?.filter((childItem) => {
+        return this.isProvider
+          ? !childItem.isHiddenForProviders
+          : childItem.isAllowedForPatients
+      })
     }))
   }
 }
