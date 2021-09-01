@@ -234,6 +234,7 @@
     "ORG_ID": "Organisation id",
     "ORG_NAME": "Organisationens navn",
     "ORG_TO_EXCLUDE": "Søg i organisationer, der skal udelukkes",
+    "ORG_TO_INCLUDE": "Inkludere organisationsforeninger",
     "PARENT": "Forældre",
     "PASSWORD": "Adgangskode",
     "PATIENT": "Patient",

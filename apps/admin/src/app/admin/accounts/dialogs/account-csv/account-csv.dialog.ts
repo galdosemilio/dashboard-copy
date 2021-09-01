@@ -8,6 +8,7 @@ import {
 import { OrganizationAutocompleterComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'
+import { escapeCSVText } from '@coachcare/common/shared'
 
 @Component({
   selector: 'ccr-account-csv-dialog',
@@ -20,6 +21,7 @@ import * as moment from 'moment'
 export class AccountCSVDialogComponent implements OnInit {
   @ViewChild(OrganizationAutocompleterComponent, { static: false })
   autocompleter: OrganizationAutocompleterComponent
+  public includeAssociations
   excludedOrgs: any[] = []
   isLoading = false
 
@@ -34,12 +36,15 @@ export class AccountCSVDialogComponent implements OnInit {
   async downloadCSV() {
     try {
       this.isLoading = true
-      const response = await this.account.getAll({
+      const request = {
         exclude: this.excludedOrgs.map((org) => org.id),
         accountType: AccountTypeIds.Provider,
-        limit: 'all'
-      } as any)
-
+        limit: 'all',
+        include: this.includeAssociations
+          ? 'organization-association'
+          : undefined
+      }
+      const response = await this.account.getAll(request as any)
       const csv = this.generateCSV(response.data as AccountFullData[])
       const date = moment().format('YYYY-MM-DD')
       const filename = `Provider_List_${date}.csv`
@@ -92,14 +97,30 @@ export class AccountCSVDialogComponent implements OnInit {
     csv += `"FIRST NAME"${separator}`
     csv += `"LAST NAME"${separator}`
     csv += `"EMAIL"${separator}`
-    csv += `"PHONE"\r\n`
+    csv += `"PHONE"`
+
+    if (this.includeAssociations) {
+      csv += `${separator}`
+      csv += `"ORGANIZATION"${separator}`
+      csv += `"ORGANIZATION ID"`
+    }
+
+    csv += `\r\n`
 
     accounts.forEach((account: any) => {
       csv += `"${account.id || ''}"${separator}`
       csv += `"${account.firstName || ''}"${separator}`
       csv += `"${account.lastName || ''}"${separator}`
       csv += `"${account.email || ''}"${separator}`
-      csv += `"${account.countryCode || ''}${account.phone || ''}"\r\n`
+      csv += `"${account.countryCode || ''}${account.phone || ''}"`
+
+      if (account.organization) {
+        csv += `${separator}`
+        csv += `"${escapeCSVText(account.organization.name || '')}"${separator}`
+        csv += `"${account.organization.id || ''}"`
+      }
+
+      csv += `\r\n`
     })
 
     return csv

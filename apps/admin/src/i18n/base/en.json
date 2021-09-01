@@ -234,6 +234,7 @@
     "ORG_ID": "Organization ID",
     "ORG_NAME": "Organization Name",
     "ORG_TO_EXCLUDE": "Search Organizations to Exclude",
+    "ORG_TO_INCLUDE": "Include organization associations",
     "PARENT": "Parent",
     "PASSWORD": "Password",
     "PATIENT": "Patient",

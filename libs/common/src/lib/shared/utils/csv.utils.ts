@@ -16,3 +16,8 @@ export function generateCSV(args: GenerateCSVArgs): void {
   link.click()
   document.body.removeChild(link)
 }
+
+export function escapeCSVText(original: string): string {
+  const pattern = new RegExp(/"/, 'g')
+  return original.replace(pattern, `$&$&`)
+}

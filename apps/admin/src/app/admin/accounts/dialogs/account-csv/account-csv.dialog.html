@@ -7,6 +7,10 @@
 
 <div class="mat-dialog-separator"></div>
 
+<mat-checkbox [(ngModel)]="includeAssociations">
+  {{ 'GLOBAL.ORG_TO_INCLUDE' | translate }}
+</mat-checkbox>
+
 <mat-dialog-content>
   <div fxLayout="column" fxLayoutAlign="start center">
     <ccr-autocompleter-organization #autocompleter
@@ -35,5 +39,12 @@
   [disabled]="isLoading"
   (click)="downloadCSV()"
   mat-button
-  class="ccr-button">{{ 'GLOBAL.DOWNLOAD_CSV' | translate }}</button>
+  class="ccr-button">
+    <span *ngIf="!isLoading">
+      {{ 'GLOBAL.DOWNLOAD_CSV' | translate }}
+    </span>
+    <span *ngIf="isLoading">
+      <mat-spinner strokeWidth="3" diameter="20"></mat-spinner>
+    </span>
+  </button>
 </mat-dialog-actions>
