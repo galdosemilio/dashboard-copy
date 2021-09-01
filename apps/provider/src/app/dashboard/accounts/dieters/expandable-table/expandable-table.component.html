@@ -168,7 +168,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       </td>
       <td *ngIf="row.level === 0" class="column-currentweightdate">
         <div *ngIf="row.dataPoints?.length === 2; else empty">
-          {{ convertToReadableFormat(row.dataPoints[0].value, row.dataPoints[0].type, measurementPreference) }} / {{ convertToReadableFormat(row.dataPoints[1].value, row.dataPoints[1].type, measurementPreference) }}
+          {{ convertToReadableFormat(row.dataPoints[1].value, row.dataPoints[1].type, measurementPreference) }} / {{ convertToReadableFormat(row.dataPoints[0].value, row.dataPoints[0].type, measurementPreference) }}
           {{ row.dataPoints[0].type.unit }}
         </div>
       </td>
