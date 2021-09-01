@@ -7,15 +7,15 @@
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</th>
       <td mat-cell *matCellDef="let row">
-        {{ row.date | amDateFormat:'ddd, MMM D' }}
+        {{ row.bucket.timestamp | amDateFormat:'ddd, MMM D' }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="amount">
       <th mat-header-cell *matHeaderCellDef>{{'BOARD.AMOUNT' | translate}}</th>
       <td mat-cell *matCellDef="let row">
-        <ng-container *ngIf="row.total; else empty">
-          {{ row.total | unitConversion: 'volume' }}<small style="text-transform: uppercase">{{ 'volume' | unitLabel | translate }}</small>
+        <ng-container *ngIf="row.point.value; else empty">
+          {{ row.point.value | unitConversion: 'volume' }} <small style="text-transform: uppercase">{{ 'volume' | unitLabel | translate }}</small>
         </ng-container>
       </td>
     </ng-container>

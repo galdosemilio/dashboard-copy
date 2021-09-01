@@ -5,17 +5,17 @@ import { NotifierService } from '@app/service'
 import { CcrDataSource } from '@app/shared'
 import {
   GetHydrationSummaryRequest,
-  HydrationSummaryResponse
+  MeasurementDataPointAggregate
 } from '@coachcare/sdk'
 import { HydrationDatabase } from './hydration.database'
 
-export interface HydrationSummary extends HydrationSummaryResponse {
+export interface HydrationSummary extends MeasurementDataPointAggregate {
   dailyGoal: number
 }
 
 export class HydrationDataSource extends CcrDataSource<
   HydrationSummary,
-  Array<HydrationSummaryResponse>,
+  Array<MeasurementDataPointAggregate>,
   GetHydrationSummaryRequest
 > {
   constructor(
@@ -26,21 +26,25 @@ export class HydrationDataSource extends CcrDataSource<
     super()
   }
 
-  defaultFetch(): Array<HydrationSummaryResponse> {
+  defaultFetch(): Array<MeasurementDataPointAggregate> {
     return []
   }
 
-  fetch(criteria): Observable<Array<HydrationSummaryResponse>> {
+  fetch(criteria): Observable<Array<MeasurementDataPointAggregate>> {
     return this.database.fetchSummary(criteria)
   }
 
-  mapResult(result: Array<HydrationSummaryResponse>): Array<HydrationSummary> {
+  mapResult(
+    result: Array<MeasurementDataPointAggregate>
+  ): Array<HydrationSummary> {
     return result
-      .filter((segment) => moment(segment.date).isSameOrBefore(moment()))
-      .map((segment) => ({
-        ...segment,
+      .filter((entry) =>
+        moment(entry.bucket.timestamp).isSameOrBefore(moment())
+      )
+      .map((entry) => ({
+        ...entry,
         dailyGoal: this.dailyGoal
-          ? Math.round((segment.total * 100) / this.dailyGoal)
+          ? Math.round((entry.point.value * 100) / this.dailyGoal)
           : null
       }))
   }

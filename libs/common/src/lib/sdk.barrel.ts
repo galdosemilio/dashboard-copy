@@ -51,6 +51,7 @@ import {
   MFA,
   MeasurementActivity,
   MeasurementBody,
+  MeasurementDataPointProvider,
   MeasurementSleep,
   Messaging,
   MessagingPermission,
@@ -215,6 +216,11 @@ export const SdkApiProviders = [
   {
     provide: MeasurementBody,
     useClass: MeasurementBody,
+    deps: [measurementApiService]
+  },
+  {
+    provide: MeasurementDataPointProvider,
+    useClass: MeasurementDataPointProvider,
     deps: [measurementApiService]
   },
   {
