@@ -1,3 +1,11 @@
+## [1.31.1](https://github.com/coachcare/dashboard/compare/v1.31.0...v1.31.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* reorder cell content in patient listing [FRON-2282] ([1873b00](https://github.com/coachcare/dashboard/commit/1873b000bc4f43773383d675d6aa1021b3c0256d))
+* show security tab for patient in profile [FRON-2313] ([a3ea878](https://github.com/coachcare/dashboard/commit/a3ea878bcfd3511b340d5e3f5cd56cad2cd68da3))
+
 # [1.31.0](https://github.com/coachcare/dashboard/compare/v1.30.1...v1.31.0) (2021-08-25)
 
 
