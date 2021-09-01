@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/coachcare/dashboard/compare/v1.31.1...v1.32.0) (2021-09-01)
+
+
+### Features
+
+* added bp support for patient listing [FRON-2293] ([86e2e1e](https://github.com/coachcare/dashboard/commit/86e2e1e7d8c04e65678cdbd80e36e05dfe020691))
+
 ## [1.31.1](https://github.com/coachcare/dashboard/compare/v1.31.0...v1.31.1) (2021-09-01)
 
 
