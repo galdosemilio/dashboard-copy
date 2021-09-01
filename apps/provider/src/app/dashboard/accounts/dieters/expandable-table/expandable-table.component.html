@@ -107,6 +107,27 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       <td *ngIf="row.level === 0" class="column-phone">
         <a *ngIf="row.phone"  [href]="'tel:' + row.phone">{{ row.phone }}</a>
       </td>
+      <td *ngIf="row.level === 0" class="column-currentweight">
+        <div>
+          <ng-container
+          [ngTemplateOutlet]="row.weight?.end?.value ? weightreg : empty"
+          [ngTemplateOutletContext]="{weight: row.weight, weightValue: row.weight?.end?.value}"></ng-container>
+        </div>
+      </td>
+      <td *ngIf="row.level === 0" class="column-currentweightdate">
+        <div>
+          <ng-container
+          [ngTemplateOutlet]="row.weight?.end?.date ? datereg : empty"
+          [ngTemplateOutletContext]="{date: row.weight?.end?.date}"></ng-container>
+        </div>
+      </td>
+      <td *ngIf="row.level === 0" class="column-startdate">
+        <div data-cy="startDate">
+          <ng-container
+          [ngTemplateOutlet]="row.startedAt ? longdatereg : empty"
+          [ngTemplateOutletContext]="{date: row.startedAt, totalDays: row.totalDays}"></ng-container>
+        </div>
+      </td>
       <td *ngIf="row.level === 0" class="column-startweight">
         <div>
           <ng-container
@@ -114,11 +135,11 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           [ngTemplateOutletContext]="{weight: row.weight, weightValue: row.weight?.start?.value}"></ng-container>
         </div>
       </td>
-      <td *ngIf="row.level === 0" class="column-currentweight">
+      <td *ngIf="row.level === 0" class="column-startweightdate">
         <div>
           <ng-container
-          [ngTemplateOutlet]="row.weight?.end?.value ? weightreg : empty"
-          [ngTemplateOutletContext]="{weight: row.weight, weightValue: row.weight?.end?.value}"></ng-container>
+          [ngTemplateOutlet]="row.weight?.start?.date ? datereg : empty"
+          [ngTemplateOutletContext]="{date: row.weight?.start?.date}"></ng-container>
         </div>
       </td>
       <td *ngIf="row.level === 0" class="column-weightchange">
@@ -135,27 +156,6 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           [ngTemplateOutlet]="row.weight?.change?.percent ? weightpercent : empty"
           [ngTemplateOutletContext]="{weightPercent: row.weight?.change?.percent}"></ng-container>
           </div>
-        </div>
-      </td>
-      <td *ngIf="row.level === 0" class="column-startdate">
-        <div data-cy="startDate">
-          <ng-container
-          [ngTemplateOutlet]="row.startedAt ? longdatereg : empty"
-          [ngTemplateOutletContext]="{date: row.startedAt, totalDays: row.totalDays}"></ng-container>
-        </div>
-      </td>
-      <td *ngIf="row.level === 0" class="column-startweightdate">
-        <div>
-          <ng-container
-          [ngTemplateOutlet]="row.weight?.start?.date ? datereg : empty"
-          [ngTemplateOutletContext]="{date: row.weight?.start?.date}"></ng-container>
-        </div>
-      </td>
-      <td *ngIf="row.level === 0" class="column-currentweightdate">
-        <div>
-          <ng-container
-          [ngTemplateOutlet]="row.weight?.end?.date ? datereg : empty"
-          [ngTemplateOutletContext]="{date: row.weight?.end?.date}"></ng-container>
         </div>
       </td>
       <td class="column-actions">
