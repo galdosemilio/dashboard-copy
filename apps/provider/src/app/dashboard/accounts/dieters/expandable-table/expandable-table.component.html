@@ -25,6 +25,13 @@ class="ccr-table ccr-expand-table ccr-table-stats">
         <td class="column-phone">
           <span>{{ 'BOARD.PHONE_NUMBER' | translate }}</span>
         </td>
+        <td class="column-bloodpressure">
+          <div>
+            <ccr-table-sort-header property="metric.value">
+              <span>{{ 'MEASUREMENT.BLOOD_PRESSURE' | translate }}</span>
+            </ccr-table-sort-header>
+          </div>
+        </td>
         <td class="column-currentweight">
           <div>
             <ccr-table-sort-header property="weight.last.value">
@@ -79,14 +86,6 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
-
-        <td class="column-currentweightdate">
-          <div>
-            <ccr-table-sort-header property="metric.value">
-              <span>{{ 'MEASUREMENT.BLOOD_PRESSURE' | translate }}</span>
-            </ccr-table-sort-header>
-          </div>
-        </td>
         <td class="column-actions">{{ 'BOARD.ACTIONS' | translate }}</td>
       </tr>
     </thead>
@@ -114,6 +113,12 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       <td *ngIf="row.level === 0" class="column-lastname">{{ row.lastName }}</td>
       <td *ngIf="row.level === 0" class="column-phone">
         <a *ngIf="row.phone"  [href]="'tel:' + row.phone">{{ row.phone }}</a>
+      </td>
+      <td *ngIf="row.level === 0" class="column-bloodpressure">
+        <div *ngIf="row.dataPoints?.length === 2; else empty">
+          {{ convertToReadableFormat(row.dataPoints[1].value, row.dataPoints[1].type, measurementPreference) }} / {{ convertToReadableFormat(row.dataPoints[0].value, row.dataPoints[0].type, measurementPreference) }}
+          {{ row.dataPoints[0].type.unit }}
+        </div>
       </td>
       <td *ngIf="row.level === 0" class="column-currentweight">
         <div>
@@ -164,12 +169,6 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           [ngTemplateOutlet]="row.weight?.change?.percent ? weightpercent : empty"
           [ngTemplateOutletContext]="{weightPercent: row.weight?.change?.percent}"></ng-container>
           </div>
-        </div>
-      </td>
-      <td *ngIf="row.level === 0" class="column-currentweightdate">
-        <div *ngIf="row.dataPoints?.length === 2; else empty">
-          {{ convertToReadableFormat(row.dataPoints[1].value, row.dataPoints[1].type, measurementPreference) }} / {{ convertToReadableFormat(row.dataPoints[0].value, row.dataPoints[0].type, measurementPreference) }}
-          {{ row.dataPoints[0].type.unit }}
         </div>
       </td>
       <td class="column-actions">
