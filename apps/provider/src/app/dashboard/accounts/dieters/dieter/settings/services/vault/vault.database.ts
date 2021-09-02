@@ -16,7 +16,7 @@ import {
   GetDownloadUrlResponse,
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
-  UpdateContentRequest
+  UpdateVaultContentRequest
 } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 
@@ -103,7 +103,7 @@ export class VaultDatabase extends CcrDatabase {
   }
 
   public updateContent(
-    args: UpdateContentRequest,
+    args: UpdateVaultContentRequest,
     opts: any
   ): Observable<FileExplorerContent> {
     return from(
@@ -111,12 +111,11 @@ export class VaultDatabase extends CcrDatabase {
         try {
           const request = {
             id: args.id,
-            parent: args.parentId,
-            parentId: args.parentId,
+            parent: args.parent,
             name: args.name,
-            isPublic: args.isPublic,
             description: args.description || null,
-            sortOrder: args.sortOrder
+            sortOrder: args.sortOrder,
+            isVisibleToPatient: args.isVisibleToPatient
           }
           await this.fileVault.update(request)
           const content: ContentSingle = await this.fileVault.getSingle({

@@ -130,6 +130,14 @@
                 </div>
             </mat-cell>
         </ng-container>
+
+        <ng-container cdkColumnDef="isVisibleToPatient">
+            <mat-header-cell *cdkHeaderCellDef fxFlex="15%">{{ 'LIBRARY.CONTENT.PATIENT_VISIBILITY' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxFlex="15%">
+                {{ row.isVisibleToPatient ? ('LIBRARY.CONTENT.VISIBLE' | translate) : ('LIBRARY.CONTENT.HIDDEN' | translate) }}
+            </mat-cell>
+        </ng-container>
+
         <ng-container cdkColumnDef="createdAt">
             <mat-header-cell *cdkHeaderCellDef fxFlex="15%" mat-sort-header>{{ 'LIBRARY.CONTENT.CREATED' | translate }}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxFlex="15%">

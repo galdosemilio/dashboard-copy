@@ -7,7 +7,7 @@ import {
   OnInit,
   Output
 } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
 import { PackageSelectDialog } from '@app/dashboard/content/dialogs'
 import {
@@ -22,6 +22,7 @@ import {
   PackageDatasource
 } from '@app/shared/components/package-table/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { _ } from '@coachcare/backend/shared'
 
 @UntilDestroy()
 @Component({
@@ -92,6 +93,10 @@ export class ContentFormComponent implements BindForm, OnInit, OnDestroy {
   public organization: any
   public packages: Package[] = []
   public shownPackages: Package[] = []
+  public patientVisibilities = [
+    { value: false, name: _('LIBRARY.CONTENT.HIDDEN_FROM_PATIENT') },
+    { value: true, name: _('LIBRARY.CONTENT.VISIBLE_TO_PATIENT') }
+  ]
   public set fetchingPackages(fP: boolean) {
     this._fetchingPackages = fP
     if (fP) {
@@ -150,6 +155,14 @@ export class ContentFormComponent implements BindForm, OnInit, OnDestroy {
 
     if (this.hiddenFields.indexOf('name') !== -1) {
       this.form.controls.name.clearValidators()
+    }
+
+    if (this.mode === 'vault') {
+      const newControl = new FormControl(
+        this.details?.isVisibleToPatient ?? false,
+        [Validators.required]
+      )
+      this.form.addControl('isVisibleToPatient', newControl)
     }
 
     this.hideFirstSection =

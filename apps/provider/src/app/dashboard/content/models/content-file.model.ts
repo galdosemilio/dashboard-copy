@@ -23,6 +23,7 @@ export class ContentFile implements Partial<FileExplorerContent> {
   parent?: string
   public packages?: Package[]
   public hasPackageAssociations?: boolean
+  public isVisibleToPatient?: boolean
 
   constructor(args: any) {
     this.file = args.file
@@ -50,5 +51,6 @@ export class ContentFile implements Partial<FileExplorerContent> {
 
     this.packages = args.packages
     this.hasPackageAssociations = args.hasPackageAssociations
+    this.isVisibleToPatient = args.isVisibleToPatient
   }
 }

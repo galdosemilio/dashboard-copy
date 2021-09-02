@@ -65,6 +65,7 @@ export class FolderCreateDialog implements BindForm, OnInit {
           description: details.description,
           isPublic: details.isPublic,
           packages: details.packages,
+          isVisibleToPatient: details.isVisibleToPatient,
           metadata: {}
         })
       }

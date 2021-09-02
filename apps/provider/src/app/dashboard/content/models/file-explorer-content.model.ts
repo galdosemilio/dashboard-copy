@@ -38,6 +38,7 @@ export class FileExplorerContent {
   public packages?: Package[]
   public hasPackageAssociations?: boolean
   public sortOrder?: number
+  public isVisibleToPatient?: boolean
 
   constructor(args: any, opts?: any) {
     this.checked = args.checked || false
@@ -87,5 +88,6 @@ export class FileExplorerContent {
     this.packages = args.packages
     this.hasPackageAssociations = args.hasPackageAssociations
     this.sortOrder = args.sortOrder || null
+    this.isVisibleToPatient = args.isVisibleToPatient
   }
 }

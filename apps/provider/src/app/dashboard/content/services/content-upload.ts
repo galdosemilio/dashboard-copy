@@ -113,7 +113,8 @@ export class ContentUploadService {
             type: ticketContent.type.id,
             metadata: ticketContent.metadata,
             parentId: ticketContent.parentId,
-            parent: ticketContent.parentId || ticketContent.parent
+            parent: ticketContent.parentId || ticketContent.parent,
+            isVisibleToPatient: ticketContent.isVisibleToPatient
           },
           { omitLoading: true }
         )

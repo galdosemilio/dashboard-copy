@@ -279,11 +279,15 @@ export class ContentComponent implements OnDestroy, OnInit {
           if (content.isPublic) {
             updatedContent = await this.datasource.updateContent({
               ...content,
+              parent: content.parent || content.parentId,
+              isVisibleToPatient: content.isVisibleToPatient,
               sortOrder: undefined
             })
           } else if (content.packages && content.packages.length) {
             updatedContent = await this.datasource.updateContent({
               ...content,
+              parent: content.parent || content.parentId,
+              isVisibleToPatient: content.isVisibleToPatient,
               sortOrder: undefined
             })
 
@@ -300,6 +304,8 @@ export class ContentComponent implements OnDestroy, OnInit {
             updatedContent ||
               (await this.datasource.updateContent({
                 ...content,
+                parent: content.parent || content.parentId,
+                isVisibleToPatient: content.isVisibleToPatient,
                 sortOrder: undefined
               }))
           )
@@ -321,7 +327,11 @@ export class ContentComponent implements OnDestroy, OnInit {
             const content = Object.assign({}, event.content)
             content.parentId = event.to
             this.events.contentUpdated.emit(
-              await this.datasource.updateContent(content)
+              await this.datasource.updateContent({
+                ...content,
+                parent: content.parent || content.parentId,
+                isVisibleToPatient: content.isVisibleToPatient
+              })
             )
             this.events.contentMoved.emit(event)
           }

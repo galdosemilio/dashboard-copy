@@ -18,7 +18,7 @@ import {
   GetAllVaultContentResponse,
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
-  UpdateContentRequest
+  UpdateVaultContentRequest
 } from '@coachcare/sdk'
 import { VaultDatabase } from './vault.database'
 
@@ -175,7 +175,7 @@ export class VaultDatasource extends TableDataSource<
     )
   }
 
-  updateContent(args: UpdateContentRequest): Promise<FileExplorerContent> {
+  updateContent(args: UpdateVaultContentRequest): Promise<FileExplorerContent> {
     const opts = {
       organizationId: this.criteria.organization
     }

@@ -97,6 +97,7 @@ export class FileExplorerTableComponent
     'icon',
     'name',
     'description',
+    'isVisibleToPatient',
     'createdAt',
     'availability',
     'actions'
@@ -346,6 +347,8 @@ export class FileExplorerTableComponent
 
     if (this.mode === 'vault') {
       filteredColumns = ['availability']
+    } else {
+      filteredColumns = ['isVisibleToPatient']
     }
 
     filteredColumns = [...filteredColumns, ...this.hiddenColumns]
