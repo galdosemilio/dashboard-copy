@@ -1,3 +1,17 @@
+# [1.33.0](https://github.com/coachcare/dashboard/compare/v1.32.1...v1.33.0) (2021-09-03)
+
+
+### Bug Fixes
+
+* move blood pressure field to right of phone [FRON-2335] ([1d1309d](https://github.com/coachcare/dashboard/commit/1d1309de8724fd3f24e6d85c7778487912e97a55))
+* use measurement endpoint for water tracking [FRON-2329] ([8e11faa](https://github.com/coachcare/dashboard/commit/8e11faadc71ff13cd30982943f583fd69824bd65))
+
+
+### Features
+
+* add patient visibility to file vault [FRON-2324] ([9ab6f46](https://github.com/coachcare/dashboard/commit/9ab6f469017ad4f9a898a438b3dfbeeb1ec407ce))
+* add source selector to graph [FRON-2259] ([3c62d12](https://github.com/coachcare/dashboard/commit/3c62d12a95eadfaf470c85ca2ce3abb005070bfa))
+
 ## [1.32.1](https://github.com/coachcare/dashboard/compare/v1.32.0...v1.32.1) (2021-09-01)
 
 
