@@ -6,8 +6,7 @@ import { NamedEntity } from '@coachcare/sdk'
 import './source-selector.element.scss'
 
 export class SourceSelectorElement extends CcrElement {
-  private sourceId: string
-  private sources: NamedEntity[]
+  private sourceId = '-1'
 
   constructor() {
     super()
@@ -33,7 +32,7 @@ export class SourceSelectorElement extends CcrElement {
       this.innerHTML = ''
     }
 
-    let options = `<option value="">${translate(
+    let options = `<option value="-1">${translate(
       'HIGHEST_VALUE_FOR_DAY'
     )}</option>`
 

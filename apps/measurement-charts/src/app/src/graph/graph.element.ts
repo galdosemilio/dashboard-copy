@@ -31,7 +31,7 @@ export class GraphElement extends CcrElement {
   private chart
   private chartHeightOffset = 225
   private chartTimeFormat = 'yyyy-MM-dd'
-  private sourceId: string
+  private sourceId = '-1'
   private measurementData: MeasurementDataPointAggregate[] = []
   private data: GraphEntry[][] = []
   private dateRange: DateRange
@@ -70,7 +70,7 @@ export class GraphElement extends CcrElement {
     this.createChart()
 
     eventService.baseDataEvent$.subscribe((baseData) => {
-      this.sourceId = baseData.sourceId
+      this.sourceId = baseData.sourceId || '-1'
       this.isReady = true
       this.addLineSeries()
     })
@@ -196,10 +196,11 @@ export class GraphElement extends CcrElement {
   }
 
   private onChangedSource(): void {
-    const measurementData = this.sourceId
-      ? this.measurementData.filter(
-          (entry) => entry.point.group.source.id === this.sourceId
-        )
+    const filteredData = this.measurementData.filter(
+      (entry) => entry.point.group.source.id === this.sourceId
+    )
+    const measurementData = filteredData.length
+      ? filteredData
       : this.measurementData
 
     const measurementMaps = api.baseData.dataPointTypes.map((type) =>
@@ -295,10 +296,12 @@ export class GraphElement extends CcrElement {
         }
       }
 
-      const measurementData = this.sourceId
-        ? measurements.data.filter(
-            (entry) => entry.point.group.source.id === this.sourceId
-          )
+      const filteredData = measurements.data.filter(
+        (entry) => entry.point.group.source.id === this.sourceId
+      )
+
+      const measurementData = filteredData.length
+        ? filteredData
         : measurements.data
 
       const measurementMaps = api.baseData.dataPointTypes.map((type) =>
