@@ -403,7 +403,10 @@ export class CallEffects {
         }
       })
 
-      this.callLayoutService.showCallRatingModal()
+      if (this.callState.twilioToken) {
+        this.callLayoutService.showCallRatingModal()
+      }
+
       return this.interaction
         .attemptCallEnd({ id: updateCallRequest.callId })
         .catch((error) => {})
@@ -498,6 +501,11 @@ export class CallEffects {
       this.twilioService.stopRinging()
       this.twilioService.disconnect()
       this.callLayoutService.closeCall()
+
+      if (!this.callState.twilioToken) {
+        return
+      }
+
       this.callLayoutService.showCallRatingModal()
     })
   )
