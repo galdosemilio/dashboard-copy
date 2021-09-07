@@ -130,7 +130,7 @@
     "ang-jsoneditor": "^1.10.5",
     "angularx-qrcode": "^10.0.10",
     "chart.js": "^2.9.3",
-    "core-js": "^3.6.5",
+    "core-js": "^3.17.2",
     "document-register-element": "1.13.1",
     "hammerjs": "^2.0.8",
     "jsoneditor": "^9.1.9",
