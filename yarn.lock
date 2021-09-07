@@ -3237,16 +3237,6 @@
     "@typescript-eslint/experimental-utils" "^4.3.0"
     confusing-browser-globals "^1.0.9"
 
-"@nrwl/jest@10.2.1":
-  version "10.2.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-10.2.1.tgz#2141a722868b38c514b891091dfd0596a57da500"
-  integrity sha512-JD7mjCAm2g+p7ALiC9aVzL8YNDFHUQUbZHp1H3mbntqi/VXMHfWY5/yL2yiFE3ocZpHMxYpJ5dFDL0ZsF8QtzA==
-  dependencies:
-    "@angular-devkit/architect" "~0.1000.0"
-    "@angular-devkit/core" "~10.0.0"
-    "@angular-devkit/schematics" "~10.0.0"
-    rxjs "^6.5.4"
-
 "@nrwl/jest@10.4.10":
   version "10.4.10"
   resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-10.4.10.tgz#a9915f696dfdfdf88b1408ff18aa27820e26839c"
