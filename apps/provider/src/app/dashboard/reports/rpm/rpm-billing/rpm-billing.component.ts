@@ -338,7 +338,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
           this.csvSeparator +
           `"${
             entry.rpm.isActive
-              ? moment(entry.rpm.changedAt).format('MM/DD/YYYY')
+              ? moment(entry.rpm.startedAt).format('MM/DD/YYYY')
               : 'No'
           }"` +
           this.csvSeparator

@@ -184,7 +184,7 @@
             fxFlex.xs="grow">
                 <span class="all-codes-label">{{ 'RPM.ACTIVATION_DATE' | translate }}</span>
 
-                {{ row.rpm.isActive ? (row.rpm.changedAt | amDateFormat:'MM/DD/YYYY' ) : '' }}
+                {{ row.rpm.isActive ? (row.rpm.startedAt | amDateFormat:'MM/DD/YYYY' ) : '' }}
             </mat-cell>
         </ng-container>
 
