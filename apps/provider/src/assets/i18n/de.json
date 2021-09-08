@@ -303,6 +303,7 @@
     "STREET": "Straße",
     "SUGAR": "Zucker",
     "SURE_WANT_TO_CONTINUE": "Sind Sie sicher, dass Sie fortfahren wollen?",
+    "TEST_RESULTS": "Testergebnisse",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Wählen Sie einen einzelnen Patienten oder Trainer zu dieser Nachricht Thread hinzuzufügen.<br><br> Nach dem Hinzufügen dieses Konto Zugriff auf Blick <strong>alle</strong> bestehende und neue Nachrichten in diesem Nachrichtenthread. Des Weiteren werden sie neue Nachrichten an den Thread hinzufügen können.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Gewinde im Zusammenhang mit <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Themen-Informationen",

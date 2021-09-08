@@ -303,6 +303,7 @@
     "STREET": "Gade",
     "SUGAR": "Sukker",
     "SURE_WANT_TO_CONTINUE": "Er du sikker på du vil fortsætte?",
+    "TEST_RESULTS": "Test Resultater",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Vælg en enkelt patient eller træner for at tilføje denne besked tråd.<br><br> Når den er tilføjet, vil denne konto har adgang til visning <strong>alle</strong> eksisterende og nye meddelelser i denne besked tråd. Endvidere vil de være i stand til at tilføje nye meddelelser til tråden.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Tråd, er forbundet med <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Tråd Information",

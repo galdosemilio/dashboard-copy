@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="start" fxLayoutAlign.xs="stretch" fxLayoutGap="10px">
-    <p class="ccr-hint lowercase">
+    <p *ngIf="isProvider" class="ccr-hint lowercase">
         {{ 'GLOBAL.ABOUT' | translate }} {{'LIBRARY._TITLE' | translate}}
 
         <ccr-help-link [link]="zendeskLink"></ccr-help-link>
@@ -11,9 +11,11 @@
         <div fxFlex fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="start">
             <ccr-organization-search
                 *ngIf="mode === 'vault'"
-                [account]="context.accountId"
+                [account]="isProvider ? context.accountId : context.user.id"
+                [hidden]="!isProvider && filteredOrgs.length === 1"
                 [setOrgId]="organizationOverride?.id"
                 [showEmptyOption]="false"
+                (filteredOrgs)="filteredOrgs = $event || []"
                 (select)="selectOrganization($event)">
             </ccr-organization-search>
 
@@ -57,7 +59,7 @@
             </div> -->
             <button
             (click)="createFolder()"
-            [disabled]="!organization || !(organization.permissions.admin)"
+            [disabled]="!organization || !(organization.permissions?.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -67,7 +69,7 @@
             </button>
             <button
             (click)="createContent()"
-            [disabled]="!organization || !(organization.permissions.admin)"
+            [disabled]="!organization || !(organization.permissions?.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -79,7 +81,7 @@
             <button
             *ngIf="mode === 'digital-library'"
             (click)="insertForm()"
-            [disabled]="!organization || !(organization.permissions.admin)"
+            [disabled]="!organization || !(organization.permissions?.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -90,7 +92,7 @@
             <button
             *ngIf="mode === 'digital-library'"
             (click)="openBatchCloneDialog()"
-            [disabled]="!organization || !(organization.permissions.admin)"
+            [disabled]="!organization || !(organization.permissions?.admin)"
             class="ccr-icon-button"
             color="primary"
             fxFlex="0 0 auto"
@@ -100,11 +102,11 @@
             </button>
 
             <ccr-help-link
-            *ngIf="organization && organization.permissions.admin"
+            *ngIf="organization && organization.permissions?.admin"
             [link]="cloneContentZendeskLink"></ccr-help-link>
 
             <ccr-popup-description
-            *ngIf="!organization || !(organization.permissions.admin)"
+            *ngIf="!organization || !(organization.permissions?.admin)"
             [title]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS_TITLE' | translate"
             [description]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS' | translate:{organization: organization.name}"
             [showIntro]="false"
@@ -119,8 +121,9 @@
             fxLayoutAlign.xs="center"
             fxLayoutGap="7px">
                 <button
+                *ngIf="isProvider"
                 (click)="createFolder()"
-                [disabled]="!organization || !organization.permissions.allowClientPhi"
+                [disabled]="!organization || !organization.permissions?.allowClientPhi"
                 class="ccr-icon-button"
                 color="primary"
                 fxFlex="0 0 auto"
@@ -129,8 +132,9 @@
                     <span>{{ 'LIBRARY.CONTENT.NEW_FOLDER' | translate }}</span>
                 </button>
                 <button
+                *ngIf="isProvider"
                 (click)="createContent()"
-                [disabled]="!organization || !organization.permissions.allowClientPhi"
+                [disabled]="!organization || !organization.permissions?.allowClientPhi"
                 class="ccr-icon-button"
                 color="primary"
                 fxFlex="0 0 auto"
@@ -139,9 +143,9 @@
                     <span>{{ 'LIBRARY.CONTENT.ADD_CONTENT' | translate }}</span>
                 </button>
                 <button
-                *ngIf="mode === 'digital-library'"
+                *ngIf="isProvider && mode === 'digital-library'"
                 (click)="insertForm()"
-                [disabled]="!organization || !organization.permissions.allowClientPhi"
+                [disabled]="!organization || !organization.permissions?.allowClientPhi"
                 class="ccr-icon-button"
                 color="primary"
                 fxFlex="0 0 auto"

@@ -3,7 +3,7 @@
         <div [ngSwitch]="mode">
             <app-content-file-explorer-table
                 *ngSwitchCase="'list'"
-                [inaccessible]="useMode === 'vault' && (!organization || !organization.permissions.allowClientPhi)"
+                [inaccessible]="isProvider && useMode === 'vault' && (!organization || !organization.permissions?.allowClientPhi)"
                 [mode]="useMode"
                 [source]="datasource"
                 [events]="events"
@@ -12,7 +12,7 @@
 
             <app-content-file-explorer-grid
                 *ngSwitchCase="'grid'"
-                [inaccessible]="useMode === 'vault' && (!organization || !organization.permissions.allowClientPhi)"
+                [inaccessible]="isProvider && useMode === 'vault' && (!organization || !organization.permissions?.allowClientPhi)"
                 [source]="datasource"
                 [events]="events"
             ></app-content-file-explorer-grid>

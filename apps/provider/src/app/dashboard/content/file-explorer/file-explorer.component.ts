@@ -8,8 +8,13 @@ import {
   ContentUploadService,
   FileExplorerDatasource
 } from '@app/dashboard/content/services'
-import { NotifierService, SelectedOrganization } from '@app/service'
+import {
+  ContextService,
+  NotifierService,
+  SelectedOrganization
+} from '@app/service'
 import { CcrDropEvent } from '@app/shared'
+import { AccountTypeIds } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()
@@ -41,6 +46,7 @@ export class FileExplorerComponent implements OnDestroy, OnInit {
   @Input()
   useMode: 'digital-library' | 'vault'
 
+  public isProvider: boolean
   public selectedContent: FileExplorerContent
   public shouldShowUploadTracker: boolean
 
@@ -48,6 +54,7 @@ export class FileExplorerComponent implements OnDestroy, OnInit {
 
   constructor(
     private contentUpload: ContentUploadService,
+    private context: ContextService,
     private notifier: NotifierService
   ) {
     this.contentUpload.visibleUploads$.subscribe((uploads: ContentUpload[]) => {
@@ -58,6 +65,8 @@ export class FileExplorerComponent implements OnDestroy, OnInit {
   ngOnDestroy() {}
 
   ngOnInit() {
+    this.isProvider =
+      this.context.user.accountType.id === AccountTypeIds.Provider
     if (this.events) {
       this.events.contentSorted
         .pipe(untilDestroyed(this))

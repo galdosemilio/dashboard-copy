@@ -303,6 +303,7 @@
     "STREET": "Via",
     "SUGAR": "Zuccheri",
     "SURE_WANT_TO_CONTINUE": "Sei sicuro di voler continuare?",
+    "TEST_RESULTS": "Risultati del Test",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Selezionare un singolo paziente o pullman per aggiungere a questo thread di messaggi.<br><br> Una volta aggiunto, questo account avrà accesso a vista <strong>tutti</strong> messaggi esistenti e nuovi in ​​questo thread di messaggi. Inoltre, essi saranno in grado di aggiungere nuovi messaggi al thread.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associato <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informazioni Discussione",

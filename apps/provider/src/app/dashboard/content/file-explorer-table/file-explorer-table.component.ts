@@ -25,6 +25,7 @@ import {
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Router } from '@angular/router'
+import { AccountTypeIds } from '@coachcare/sdk'
 
 export interface FileExplorerRoute {
   content: FileExplorerContent
@@ -113,6 +114,7 @@ export class FileExplorerTableComponent
     'actions'
   ]
   public form: FormGroup
+  public isProvider: boolean
   public root: FileExplorerRoute = {
     content: {
       id: null,
@@ -151,6 +153,8 @@ export class FileExplorerTableComponent
   }
 
   ngOnInit() {
+    this.isProvider =
+      this.context.user.accountType.id === AccountTypeIds.Provider
     this.form = this.formBuilder.group({
       name: ['Content Name'],
       description: [''],
@@ -351,6 +355,10 @@ export class FileExplorerTableComponent
       filteredColumns = ['isVisibleToPatient']
     }
 
+    if (!this.isProvider) {
+      filteredColumns.push('isVisibleToPatient')
+    }
+
     filteredColumns = [...filteredColumns, ...this.hiddenColumns]
 
     this.columns = this.allColumns.filter(
@@ -365,9 +373,12 @@ export class FileExplorerTableComponent
 
   private subscribeToEvents(): void {
     this.context.account$.pipe(untilDestroyed(this)).subscribe((account) => {
-      this.accountName = account
-        ? `${account.firstName} ${account.lastName}`
-        : ''
+      const user = this.context.user
+      this.accountName = this.isProvider
+        ? account
+          ? `${account.firstName} ${account.lastName}`
+          : ''
+        : `${user.firstName} ${user.lastName}`
     })
 
     this.events.contentUpdated.pipe(untilDestroyed(this)).subscribe(() => {

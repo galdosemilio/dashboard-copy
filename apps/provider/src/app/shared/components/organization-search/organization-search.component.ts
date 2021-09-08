@@ -69,6 +69,10 @@ export class OrganizationSearchComponent implements OnInit {
   @Output()
   onSelect: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()
   @Output()
+  filteredOrgs: Subject<OrganizationEntity[]> = new Subject<
+    OrganizationEntity[]
+  >()
+  @Output()
   select: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
@@ -163,6 +167,8 @@ export class OrganizationSearchComponent implements OnInit {
       if (response.data && response.data.length) {
         this.organizations = response.data
       }
+
+      this.filteredOrgs.next(this.organizations.map((org) => org.organization))
 
       if (this.organizations.length >= this.selectModeThreshold) {
         this.mode = 'searchbar'

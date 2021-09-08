@@ -303,6 +303,7 @@
     "STREET": "רחוב",
     "SUGAR": "סוכר",
     "SURE_WANT_TO_CONTINUE": "האם אתה בטוח שאתה רוצה להמשיך?",
+    "TEST_RESULTS": "תוצאות מבחן",
     "THREAD_ADD_MEMBER_DESCRIPTION": "בחר חולה או מאמן יחיד להוסיף חוט הודעה זו.<br><br>לאחר הוספה, יהיה גישה לחשבון זה כדי להציג <strong>כל ההודעות</strong> קיימות וחדשות בפתיל הודעה זו. יתר על כן, הם יוכלו להוסיף הודעות חדשות על החוט.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "מפרסם הקשורים <strong>{{name}} (מזהה {{id}})</strong>",
     "THREAD_INFO": "מידע Thread",

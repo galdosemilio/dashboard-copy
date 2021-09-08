@@ -303,6 +303,7 @@
     "STREET": "Rua",
     "SUGAR": "Açúcar",
     "SURE_WANT_TO_CONTINUE": "Você tem certeza que quer continuar?",
+    "TEST_RESULTS": "Resultado dos Testes",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Selecione um único paciente ou treinador para adicionar a este tópico de mensagem.<br><br> Uma vez adicionado, esta conta terá acesso a vista <strong>todas</strong> mensagens existentes e novos neste segmento de mensagem. Além disso, eles serão capazes de adicionar novas mensagens para o segmento.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associado <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informações fio",

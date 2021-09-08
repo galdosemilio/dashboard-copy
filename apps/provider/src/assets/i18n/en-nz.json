@@ -303,6 +303,7 @@
     "STREET": "Street",
     "SUGAR": "Sugar",
     "SURE_WANT_TO_CONTINUE": "Are you sure you want to continue?",
+    "TEST_RESULTS": "Test Results",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Select a single patient or coach to add to this message thread.<br><br>Once added, this account will have access to view <strong>all</strong> existing and new messages in this message thread. Further, they will be able to add new messages to the thread.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associated with <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Thread Information",

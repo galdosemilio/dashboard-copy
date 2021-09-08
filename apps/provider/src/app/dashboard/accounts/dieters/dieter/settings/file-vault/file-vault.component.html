@@ -9,16 +9,16 @@
     </div>
     <div fxFlex fxLayout="row" fxLayoutAlign="stretch center">
         <ccr-organization-search
-            [account]="context.accountId"
+            [account]="isProvider ? context.accountId : context.user.id"
             [showEmptyOption]="false"
             fxFlex
-            (select)="selectOrganization($event)">
+            (onSelect)="selectOrganization($event)">
         </ccr-organization-search>
     </div>
 </div>
 
 <div *ngIf="status === 'file-vault'">
-    <div class="help-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <div *ngIf="isProvider" class="help-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
         <p>{{ 'GLOBAL.FILE_VAULT_ABOUT' | translate }}</p>
         <a
         href="https://coachcare.zendesk.com/hc/en-us/articles/360039544791-File-Vault-Select-Release-Wednesday-February-5-2020-"

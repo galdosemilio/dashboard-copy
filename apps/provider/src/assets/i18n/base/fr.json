@@ -303,6 +303,7 @@
     "STREET": "Rue",
     "SUGAR": "Sucre",
     "SURE_WANT_TO_CONTINUE": "Es-tu sur de vouloir continuer?",
+    "TEST_RESULTS": "Résultats de Test",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Sélectionnez un seul patient ou l'entraîneur d'ajouter à ce fil de message.<br><br>Une fois ajouté, ce compte aura accès à la vue <strong>tous</strong> messages existants et nouveaux dans ce fil de message. De plus, ils seront en mesure d'ajouter de nouveaux messages sur le fil.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associé à <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informations du fil",

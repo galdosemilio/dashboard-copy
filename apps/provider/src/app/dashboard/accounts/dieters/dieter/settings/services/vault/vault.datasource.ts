@@ -100,7 +100,7 @@ export class VaultDatasource extends TableDataSource<
             localSortOrder: localSortOrder,
             sortOrder: fileExplorerSortOrder,
             isAdmin:
-              this.context.organization.permissions.allowClientPhi &&
+              this.context.organization.permissions?.allowClientPhi &&
               perms[r.organization.id]
           },
           opts

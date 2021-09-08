@@ -66,6 +66,8 @@ export type SelectedOrganization = OrganizationWithAddress & {
 
 @Injectable()
 export class ContextService {
+  public isProvider: boolean
+
   constructor(
     private api: ApiService,
     private store: Store<CCRConfig>,
@@ -114,6 +116,7 @@ export class ContextService {
 
       try {
         this.selected = this.user
+        this.isProvider = this.user.accountType.id === AccountTypeIds.Provider
 
         // check if associated to organizations
         try {
@@ -489,11 +492,8 @@ export class ContextService {
     direct: boolean = false
   ) {
     const org = await this.getOrg(id)
-    return org && org.id
-      ? direct
-        ? org.isDirect && org.permissions[perm]
-        : org.permissions[perm]
-      : false
+    const hasPerm = org?.permissions?.[perm]
+    return org?.id ? (direct ? org.isDirect && hasPerm : hasPerm) : false
   }
 
   /**

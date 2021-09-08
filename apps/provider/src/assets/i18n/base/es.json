@@ -303,6 +303,7 @@
     "STREET": "Calle",
     "SUGAR": "Azúcar",
     "SURE_WANT_TO_CONTINUE": "¿Está seguro de querer continuar?",
+    "TEST_RESULTS": "Resultados de Pruebas",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Seleccione un paciente o un asesor para añadirlo a este hilo de mensajes.<br><br>Una vez que se añada, dicha cuenta tendrá acceso para ver <strong>todos</strong> los mensajes existentes y futuros. También, serán capaces de añadir mensajes al hilo.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Hilo asociado a <strong>{{ name }} (ID {{id}})</strong>",
     "THREAD_INFO": "Información del Hilo",

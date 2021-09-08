@@ -34,11 +34,15 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
-import { Entity, FetchPackagesSegment } from '@coachcare/sdk'
+import {
+  Entity,
+  FetchPackagesSegment,
+  OrganizationEntity
+} from '@coachcare/sdk'
 import { uniqBy, values } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject, Subscription } from 'rxjs'
-import { AssociationsDatabase, VaultDatasource } from '../accounts'
+import { VaultDatasource } from '../accounts'
 
 @UntilDestroy()
 @Component({
@@ -61,6 +65,8 @@ export class ContentComponent implements OnDestroy, OnInit {
   public contentTypes: ContentTypeMapItem[] = values(CONTENT_TYPE_MAP)
   public fileType$: BehaviorSubject<string> = new BehaviorSubject<string>('')
   public fileTypes: FileTypeMapItem[] = uniqBy(values(FILE_TYPE_MAP), 'name')
+  public filteredOrgs: OrganizationEntity[] = []
+  public isProvider: boolean
   public sourceOptionals: any = {
     type: undefined,
     mimeType: undefined
@@ -73,7 +79,6 @@ export class ContentComponent implements OnDestroy, OnInit {
   organizationOverride$: Subject<any> = new Subject<any>()
 
   constructor(
-    private associationsDatabase: AssociationsDatabase,
     public context: ContextService,
     private database: FileExplorerDatabase,
     private dialog: MatDialog,
@@ -90,6 +95,12 @@ export class ContentComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.isProvider = this.context.isProvider
+
+    if (!this.isProvider) {
+      this.organizationOverride = this.context.organization
+    }
+
     this.mergeFileTypeMimes()
     if (!this.datasource) {
       this.datasource = new FileExplorerDatasource(

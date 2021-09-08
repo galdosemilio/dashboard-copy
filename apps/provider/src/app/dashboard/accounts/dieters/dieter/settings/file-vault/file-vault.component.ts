@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
 import { bufferedRequests } from '@app/shared'
+import { OrganizationEntity } from '@coachcare/sdk'
 import { Subject } from 'rxjs'
 import {
   AssociationsDatabase,
@@ -14,7 +15,9 @@ import {
   styleUrls: ['./file-vault.component.scss']
 })
 export class DieterFileVaultComponent implements OnInit {
-  organizations: any[] = []
+  public isProvider: boolean
+  organizations: OrganizationEntity[] = []
+  searchedOrgs: OrganizationEntity[] = []
   singleOrg: any
   source: VaultDatasource
   status: 'loading' | 'file-vault' | 'select-org' = 'loading'
@@ -29,14 +32,17 @@ export class DieterFileVaultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isProvider = this.context.isProvider
     this.source = new VaultDatasource(
       this.context,
       this.notifier,
       this.database
     )
-    this.source.addDefault({ account: this.context.accountId })
+    this.source.addDefault({
+      account: this.isProvider ? this.context.accountId : this.context.user.id
+    })
     this.source.addOptional(this.singleOrg$, () => ({
-      organization: this.singleOrg.id
+      organization: this.singleOrg?.id
     }))
     this.fetchAccessibleOrganizations()
   }
@@ -53,7 +59,9 @@ export class DieterFileVaultComponent implements OnInit {
   private async fetchAccessibleOrganizations() {
     try {
       const response = await this.associationsDatabase.fetch({
-        account: this.context.accountId,
+        account: this.isProvider
+          ? this.context.accountId
+          : this.context.user.id,
         status: 'active'
       })
 
