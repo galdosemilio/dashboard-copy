@@ -151,7 +151,7 @@
     "rxjs": "~6.6.7",
     "socket.io": "^2.3.0",
     "tinycolor2": "^1.4.1",
-    "tslib": "^2.0.0",
+    "tslib": "^2.2.0",
     "twilio-video": "^2.7.3",
     "zone.js": "^0.11.1"
   },
