@@ -1,3 +1,19 @@
+# [1.34.0](https://github.com/coachcare/dashboard/compare/v1.33.0...v1.34.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* activation date now shows startedAt date [FRON-2344] ([50adc6c](https://github.com/coachcare/dashboard/commit/50adc6c905ee7d0124144c767689c8b53611e9f6))
+* chart issue with source id [FRON-2259] ([b3f3b00](https://github.com/coachcare/dashboard/commit/b3f3b00ca85a76a74ed9b5ecf818c72505574e27))
+* solved call rating modal appearance issue [FRON-2325] ([3a88895](https://github.com/coachcare/dashboard/commit/3a8889560fda3f1c838b1cd2ec63d4c466adfc7e))
+
+
+### Features
+
+* add associated clinics and organization id to provider CSV export [FRON-1759] ([877ae94](https://github.com/coachcare/dashboard/commit/877ae949c777d98bc4a8606cd78ac17670a0be2c))
+* add my schedule component [FRON-2307] ([e9bf9a8](https://github.com/coachcare/dashboard/commit/e9bf9a85d838ce3097609cfec78ce0e0e77bdd2c))
+* patient dashboard - update left hand menu [FRON-2305] ([a17ab4e](https://github.com/coachcare/dashboard/commit/a17ab4edfc376ba3f9ee45434cf7fdfd6a7b5b90))
+
 # [1.33.0](https://github.com/coachcare/dashboard/compare/v1.32.1...v1.33.0) (2021-09-03)
 
 
