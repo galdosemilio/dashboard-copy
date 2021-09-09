@@ -5,7 +5,7 @@ import {
   MeasurementLabelService,
   NotifierService
 } from '@app/service'
-import { _ } from '@app/shared/utils'
+import { _, sleep } from '@app/shared/utils'
 import { MatDialog } from '@coachcare/material'
 import {
   MeasurementDataPointTypeAssociation,
@@ -183,6 +183,10 @@ export class ClinicMeasurementsComponent implements OnInit {
       this.descendantTypeManagement =
         single.descendantTypeManagement === 'active'
 
+      this.inheritedClinic = isInherited
+        ? await this.organization.getSingle(single.organization.id)
+        : undefined
+
       this.form.patchValue(
         {
           descendantTypeManagement: this.descendantTypeManagement,
@@ -191,9 +195,8 @@ export class ClinicMeasurementsComponent implements OnInit {
         { emitEvent: false }
       )
 
-      this.inheritedClinic = isInherited
-        ? await this.organization.getSingle(single.organization.id)
-        : undefined
+      // we wait for a little bit because the Form values take a while to trigger the observers
+      await sleep(100)
 
       this.ignoreFormChanges = false
     } catch (error) {
@@ -250,7 +253,10 @@ export class ClinicMeasurementsComponent implements OnInit {
         })
       }
 
-      void this.fetchMeasurementPreference()
+      this.source.inheritsPreference = inherit
+      await this.fetchMeasurementPreference()
+      this.source.measurementPreference = this.currentMeasurementPref
+      this.source.refresh()
 
       this.notifier.success(_('NOTIFY.SUCCESS.MEASUREMENT_PREF_UPDATED'))
     } catch (error) {

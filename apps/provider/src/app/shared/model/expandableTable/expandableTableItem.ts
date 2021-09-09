@@ -4,5 +4,6 @@ export interface ExpandableTableItem<T = unknown> {
   isExpanded: boolean
   isHidden: boolean
   isLastOfGroup?: boolean
+  id?: string
   level: number
 }

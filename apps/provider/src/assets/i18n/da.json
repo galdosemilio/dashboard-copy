@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "Præferencen bliver arvet fra<strong>{{name}}</strong> (ID {{id}})",
     "CLINIC_NEW": "Tilføj ny klinik",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "Der er ingen, der fører tilsyn udbydere.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "Måling typen ledelse er deaktiveret fra den overordnede klinik.",
     "CLINIC_REMOVE": "Fjern Klinik",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Fjern Autoenrollment",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Er du sikker på du ønsker at fjerne autoenrollment post for sekvensen {{name}}?",

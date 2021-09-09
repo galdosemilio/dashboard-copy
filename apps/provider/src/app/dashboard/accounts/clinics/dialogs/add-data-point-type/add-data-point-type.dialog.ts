@@ -13,6 +13,7 @@ import {
   MeasurementDataPointTypeProvider
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { TranslateService } from '@ngx-translate/core'
 import { MeasurementLabelTableEntry } from '../../services'
 
 export interface AddDataPointTypeDialogProps {
@@ -40,7 +41,8 @@ export class AddDataPointTypeDialog implements OnInit {
     private dialogRef: MatDialogRef<AddDataPointTypeDialog>,
     private fb: FormBuilder,
     private measurementPreference: MeasurementPreferenceProvider,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -59,7 +61,8 @@ export class AddDataPointTypeDialog implements OnInit {
   ): string {
     return convertUnitToPreferenceFormat(
       type,
-      this.context.user.measurementPreference
+      this.context.user.measurementPreference,
+      this.translate.currentLang
     )
   }
 

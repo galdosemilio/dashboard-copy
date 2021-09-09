@@ -16,7 +16,14 @@
       min-height: 36px;
     }
 
+    th {
+      height: 32px;
+      min-height: 32px;
+    }
+
     thead {
+      font-size: 14px;
+
       .date-cell,
       .actions-cell {
         background-color: mat-color($ccr-background, header);
@@ -34,7 +41,11 @@
     }
 
     .wide-cell {
-      min-width: 180px !important;
+      min-width: 130px !important;
+
+      ccr-popup-description {
+        margin-right: 10px;
+      }
     }
 
     .date-cell {

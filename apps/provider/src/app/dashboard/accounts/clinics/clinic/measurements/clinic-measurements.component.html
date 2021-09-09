@@ -37,24 +37,21 @@
     <div class="ccr-panel">
       <h3>{{ 'BOARD.CLINIC_MEASUREMENT_LABELS' | translate }}</h3>
       <div class="ccr-grid" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-        <p *ngIf="inheritedClinic && !descendantTypeManagement">
-          {{ 'BOARD.CLINIC_PREVENT_DATA_POINT_TYPE_MGMT' | translate }}
-        </p>
         <div class="button-container" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-          <button [disabled]="inheritedClinic && !descendantTypeManagement"
+          <button [disabled]="inheritedClinic"
           mat-button type="button" color="primary"
           class="ccr-icon-button" (click)="showAddMeasurementLabelDialog()">
             <mat-icon>add</mat-icon>
             {{ 'BOARD.CLINIC_ADD_MEASUREMENT_LABEL' | translate }}
           </button>
-          <button [disabled]="inheritedClinic && !descendantTypeManagement"
+          <button [disabled]="inheritedClinic"
           mat-button type="button" color="primary"
           class="ccr-icon-button" (click)="showAddDataPointTypeDialog()">
             <mat-icon>add</mat-icon>
             {{ 'BOARD.CLINIC_ADD_DATA_POINT_TYPE' | translate }}
           </button>
           <div fxFlex fxLayout="row" fxLayoutAlign="end center">
-            <button [disabled]="inheritedClinic && !descendantTypeManagement"
+            <button [disabled]="inheritedClinic"
             mat-button type="button" color="primary"
             class="ccr-button" (click)="toggleMeasurementLabelReordering()">
               {{ reordering ? ('GLOBAL.STOP_REORDERING' | translate) : ('GLOBAL.REORDER' | translate) }}
@@ -65,7 +62,7 @@
           <mat-grid-tile [colspan]="colSpan" fxLayout="column" fxLayoutAlign="start stretch">
             <div class="measurement-labels-container">
               <app-clinic-measurement-labels
-              [disableActions]="inheritedClinic && !descendantTypeManagement"
+              [disableActions]="inheritedClinic"
               [reordering]="reordering"
               [source]="source">
               </app-clinic-measurement-labels>

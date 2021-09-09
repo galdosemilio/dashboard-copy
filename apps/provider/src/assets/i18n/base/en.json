@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "The preference is being inherited from <strong>{{ name }}</strong> (ID {{ id }})",
     "CLINIC_NEW": "Add New Clinic",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "There are no supervising providers.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "Measurement type management is disabled from the parent clinic.",
     "CLINIC_REMOVE": "Remove Clinic",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Remove Autoenrollment",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Are you sure you want to remove the autoenrollment entry for the sequence {{ name }}?",

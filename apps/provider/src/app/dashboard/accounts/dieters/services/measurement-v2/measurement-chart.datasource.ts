@@ -21,6 +21,8 @@ import { paletteSelector } from '@app/store/config'
 import { convertToReadableFormat } from '@coachcare/sdk'
 import { ContextService } from '@app/service'
 import { flatMap, groupBy, sortBy, uniqBy } from 'lodash'
+import * as tinycolor from 'tinycolor2'
+import { TranslateService } from '@ngx-translate/core'
 
 interface DataPointEntry {
   createdAt: MeasurementDataPointTimestamp
@@ -43,7 +45,8 @@ export class MeasurementChartDataSource extends ChartDataSource<
   constructor(
     protected database: MeasurementDatabaseV2,
     private store: Store<CCRConfig>,
-    private context: ContextService
+    private context: ContextService,
+    private translate: TranslateService
   ) {
     super()
 
@@ -113,21 +116,24 @@ export class MeasurementChartDataSource extends ChartDataSource<
         {
           borderColor: this.palette.accent,
           pointBackgroundColor: this.palette.primary
-        }
-      ],
-      datasets: [
+        },
         {
-          data: Object.values(groupedData)[0]?.map((entry) => ({
-            x: moment(entry.createdAt.utc).format('ddd D'),
-            y: convertToReadableFormat(
-              entry.value,
-              entry.type,
-              this.context.user.measurementPreference
-            ).toFixed(1)
-          })),
-          lineTension: 0
+          borderColor: this.palette.accent,
+          pointBackgroundColor: tinycolor(this.palette.primary).lighten(20),
+          backgroundColor: 'transparent'
         }
       ],
+      datasets: Object.values(groupedData).map((group) => ({
+        data: group.map((entry) => ({
+          x: moment(entry.createdAt.utc).format('ddd D'),
+          y: convertToReadableFormat(
+            entry.value,
+            entry.type,
+            this.context.user.measurementPreference
+          ).toFixed(1)
+        })),
+        lineTension: 0
+      })),
       labels: [
         '',
         ...this.createEmptyDateGroups().map((dateGroup) =>
@@ -214,7 +220,8 @@ export class MeasurementChartDataSource extends ChartDataSource<
       this.context.user.measurementPreference
     ).toFixed(1)} ${convertUnitToPreferenceFormat(
       dataPoint.type,
-      this.context.user.measurementPreference
+      this.context.user.measurementPreference,
+      this.translate.currentLang
     )}`
   }
 }

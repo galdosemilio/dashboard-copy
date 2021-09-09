@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "La preferenza viene ereditato da <strong>{{name}}</strong> (ID {{id}})",
     "CLINIC_NEW": "Aggiungi nuova clinica",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "Non ci sono fornitori di supervisione.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "Gestione tipo di misura è disabilitato dalla clinica genitore.",
     "CLINIC_REMOVE": "Elimina Clinica",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Rimuovere registrazione automatica",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Sei sicuro di voler rimuovere la voce la registrazione automatica per la successione {{name}}?",

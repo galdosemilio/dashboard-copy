@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -17,7 +17,7 @@ import { _, TranslationsObject } from '@coachcare/common/shared'
   templateUrl: './description.component.html',
   styleUrls: ['./description.component.scss']
 })
-export class PopupDescriptionComponent implements OnInit, OnDestroy {
+export class PopupDescriptionComponent implements OnInit {
   @Input()
   title = ''
   @Input()
@@ -48,8 +48,6 @@ export class PopupDescriptionComponent implements OnInit, OnDestroy {
       this.trigger.pipe(untilDestroyed(this)).subscribe(() => this.openDialog())
     }
   }
-
-  ngOnDestroy() {}
 
   public openDialog(): void {
     if (!this.isGrid) {

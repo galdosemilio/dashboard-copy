@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "La préférence est héritée de <strong>{{name}}</strong> (ID {{id}})",
     "CLINIC_NEW": "Ajouter une nouvelle clinique",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "Il n'y a pas de fournisseurs de supervision.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "La gestion du type de mesure est désactivé à partir de la clinique mère.",
     "CLINIC_REMOVE": "Effacer la clinique",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Retirer Autoenrollment",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Etes-vous sûr de vouloir supprimer l'entrée d'auto-inscription pour la séquence {{name}}?",

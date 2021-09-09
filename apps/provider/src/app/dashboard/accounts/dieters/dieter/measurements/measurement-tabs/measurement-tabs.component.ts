@@ -35,6 +35,9 @@ export class MeasurementTabsComponent implements OnInit {
     this.measurementLabels = labels
 
     if (!this.measurementLabels.length) {
+      if (!this.hiddenMeasurementTabs.includes('food')) {
+        this.onSelectTab('food')
+      }
       return
     }
 

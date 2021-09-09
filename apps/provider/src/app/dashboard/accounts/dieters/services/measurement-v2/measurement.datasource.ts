@@ -1,5 +1,6 @@
 import { TableDataSource } from '@app/shared'
 import {
+  DataPointTypes,
   GetMeasurementDataPointGroupsRequest,
   GetMeasurementDataPointGroupsResponse,
   MeasurementDataPointGroup
@@ -8,9 +9,12 @@ import { from, Observable } from 'rxjs'
 import { MeasurementDatabaseV2 } from './measurement.database'
 import * as moment from 'moment'
 import { flatMap } from 'lodash'
+import { MeasurementLabelService } from '@app/service'
+import { MAX_ENTRIES_PER_DAY } from '../measurement/measurement.datasource'
 
 export interface MeasurementDataPointGroupTableEntry
   extends MeasurementDataPointGroup {
+  canBeDeleted?: boolean
   isEmpty?: boolean
   shouldShowDate?: boolean
 }
@@ -20,7 +24,13 @@ export class MeasurementDataSourceV2 extends TableDataSource<
   GetMeasurementDataPointGroupsResponse,
   GetMeasurementDataPointGroupsRequest
 > {
-  constructor(protected database: MeasurementDatabaseV2) {
+  public hasTooMuchForSingleDay = false
+  public showDistanceNote = false
+
+  constructor(
+    protected database: MeasurementDatabaseV2,
+    private measurementLabel: MeasurementLabelService
+  ) {
     super()
   }
 
@@ -37,10 +47,15 @@ export class MeasurementDataSourceV2 extends TableDataSource<
   public mapResult(
     response: GetMeasurementDataPointGroupsResponse
   ): MeasurementDataPointGroupTableEntry[] {
-    const emptyDateGroups = this.createEmptyDateGroups()
+    this.hasTooMuchForSingleDay = false
+    this.showDistanceNote = false
 
-    return flatMap(emptyDateGroups, (dateGroup) => {
-      const existingGroups = response.data.filter((group) =>
+    const blockedDataPointAssocIds = this.measurementLabel.dataPointTypes
+      .filter((assoc) => !assoc.provider.isModifiable)
+      .map((assoc) => assoc.type.id)
+    const emptyDateGroups = this.createEmptyDateGroups()
+    const flat = flatMap(emptyDateGroups, (dateGroup) => {
+      let existingGroups = response.data.filter((group) =>
         moment(group.recordedAt.utc).isSame(
           moment(dateGroup.recordedAt.utc),
           'day'
@@ -51,6 +66,11 @@ export class MeasurementDataSourceV2 extends TableDataSource<
         return [dateGroup]
       }
 
+      if (existingGroups.length > MAX_ENTRIES_PER_DAY) {
+        this.hasTooMuchForSingleDay = true
+        existingGroups = existingGroups.slice(0, MAX_ENTRIES_PER_DAY)
+      }
+
       return [dateGroup, ...existingGroups]
     })
       .map((group, idx, groups) => [group, groups[idx - 1]])
@@ -59,8 +79,19 @@ export class MeasurementDataSourceV2 extends TableDataSource<
         const shouldShowDate = previous?.recordedAt.utc
           ? !currentDate.isSame(previous?.recordedAt.utc, 'day')
           : true
-        return { ...current, shouldShowDate }
+        const canBeDeleted = current.dataPoints.some(
+          (dataPoint) => !blockedDataPointAssocIds.includes(dataPoint.type.id)
+        )
+        return { ...current, shouldShowDate, canBeDeleted }
       })
+
+    this.showDistanceNote = flat.some((entry) =>
+      entry.dataPoints.some(
+        (dataPoint) => dataPoint.type.id === DataPointTypes.STEPS
+      )
+    )
+
+    return flat
   }
 
   private createEmptyDateGroups(): MeasurementDataPointGroupTableEntry[] {
@@ -87,7 +118,8 @@ export class MeasurementDataSourceV2 extends TableDataSource<
           timezone: ''
         },
         source: { id: 'local', name: '' },
-        isEmpty: true
+        isEmpty: true,
+        canBeDeleted: false
       })
 
       currentDate = currentDate.add(1, 'day')

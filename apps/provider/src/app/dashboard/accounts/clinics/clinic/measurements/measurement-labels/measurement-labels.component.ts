@@ -11,6 +11,7 @@ import {
   MeasurementLabelProvider
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { TranslateService } from '@ngx-translate/core'
 import { filter } from 'rxjs/operators'
 import {
   EditMeasurementLabelDialog,
@@ -39,7 +40,8 @@ export class ClinicMeasurementLabelsComponent implements OnInit {
     private dataPointType: MeasurementDataPointTypeProvider,
     private dialog: MatDialog,
     private measurementLabel: MeasurementLabelProvider,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -72,7 +74,8 @@ export class ClinicMeasurementLabelsComponent implements OnInit {
   ): string {
     return convertUnitToPreferenceFormat(
       type,
-      this.context.user.measurementPreference
+      this.context.user.measurementPreference,
+      this.translate.currentLang
     )
   }
 
@@ -150,6 +153,10 @@ export class ClinicMeasurementLabelsComponent implements OnInit {
     row: MeasurementLabelTableEntry
   ): Promise<void> {
     try {
+      for (const association of row.children) {
+        await this.dataPointType.deleteAssociation({ id: association.id })
+      }
+
       await this.measurementLabel.update({
         id: row.id,
         status: 'inactive'

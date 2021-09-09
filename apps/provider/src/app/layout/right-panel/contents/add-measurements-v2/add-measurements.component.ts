@@ -35,6 +35,7 @@ import { Subject } from 'rxjs'
 import { DATA_TYPE_INPUT_PROPS } from './model'
 import { AddDaysheetDialog, AddNoteDialog } from '../../dialogs'
 import { debounceTime } from 'rxjs/operators'
+import { TranslateService } from '@ngx-translate/core'
 
 @UntilDestroy()
 @Component({
@@ -78,7 +79,8 @@ export class AddMeasurementsV2Component implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private measurementLabel: MeasurementLabelService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {
     this.dataTypeDependencyValidator = this.dataTypeDependencyValidator.bind(
       this
@@ -123,7 +125,8 @@ export class AddMeasurementsV2Component implements OnInit {
   public getMeasurementPreferenceUnit(type: MeasurementDataPointType): string {
     return convertUnitToPreferenceFormat(
       type,
-      this.context.user.measurementPreference
+      this.context.user.measurementPreference,
+      this.translate.currentLang
     )
   }
 
@@ -145,7 +148,8 @@ export class AddMeasurementsV2Component implements OnInit {
       1
     )} ${convertUnitToPreferenceFormat(
       weightTypeAssoc.type,
-      this.context.user.measurementPreference
+      this.context.user.measurementPreference,
+      this.translate.currentLang
     )}`
   }
 
@@ -286,22 +290,28 @@ export class AddMeasurementsV2Component implements OnInit {
       const convertedFormValue = this.convertFormValue(formValue)
       let date: moment.Moment = moment(this.labelsForm.value.date.toISOString())
       const now = moment()
+      const usesUpsert = this.typesAssoc.some(
+        (typeAssoc) => typeAssoc.type.span.id === '2'
+      )
 
       let savedMeasurement: boolean
       let attempts
       let error: string
 
       if (date.isBefore(now, 'day')) {
-        attempts = this.maxAddAttempts
-      } else {
         attempts = 0
+        date.set('hour', 23)
+        date.set('minute', 59)
+        date.set('second', 0)
+      } else {
+        attempts = this.maxAddAttempts
         date = now
       }
 
       do {
         try {
           error = ''
-          await this.dataPoint.upsertGroupDataPoint({
+          const payload = {
             account: this.context.accountId,
             dataPoints: this.typesAssoc
               .map((typeAssoc, idx) =>
@@ -315,7 +325,14 @@ export class AddMeasurementsV2Component implements OnInit {
               .filter((dataPoint) => dataPoint !== null),
             recordedAt: date.toISOString(),
             source: '3'
-          })
+          }
+
+          if (usesUpsert) {
+            await this.dataPoint.upsertGroupDataPoint(payload)
+          } else {
+            await this.dataPoint.createGroup(payload)
+          }
+
           savedMeasurement = true
         } catch (err) {
           error = err

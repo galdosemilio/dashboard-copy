@@ -3,14 +3,15 @@
     <div class="ccr-table ccr-expand-table ccr-table-stats">
       <div [class.reordering]="reordering" class="ccr-expandable-table">
         <table>
+          <caption hidden>{{ 'BOARD.CLINIC_MEASUREMENT_LABELS' | translate }}</caption>
           <thead>
-            <th [class.large-padding-left]="reordering" class="id-header">{{ 'GLOBAL.ID' | translate }}</th>
-            <th>{{ 'BOARD.NAME' | translate }}</th>
-            <th>{{ 'BOARD.DESCRIPTION' | translate }}</th>
-            <th>{{ 'BOARD.VISIBILITY' | translate }}</th>
-            <th>{{ 'BOARD.UNIT' | translate }}</th>
-            <th>{{ 'BOARD.BOUNDS' | translate }}</th>
-            <th class="ccr-text-center">{{ 'BOARD.ACTIONS' | translate }}</th>
+            <th [class.large-padding-left]="reordering" class="id-header" scope="col">{{ 'GLOBAL.ID' | translate }}</th>
+            <th scope="col">{{ 'BOARD.NAME' | translate }}</th>
+            <th scope="col">{{ 'BOARD.DESCRIPTION' | translate }}</th>
+            <th scope="col">{{ 'BOARD.VISIBILITY' | translate }}</th>
+            <th scope="col">{{ 'BOARD.BOUNDS' | translate }}</th>
+            <th scope="col">{{ 'BOARD.UNIT' | translate }}</th>
+            <th class="ccr-text-center" scope="col">{{ 'BOARD.ACTIONS' | translate }}</th>
           </thead>
           <tbody>
             <tr
@@ -71,7 +72,10 @@
                     >
                     </ccr-popup-description>
                   </div>
-                  <select [(ngModel)]="row.client.isExposed" (change)="updateVisibility(row, 'isExposed')">
+                  <select
+                  [(ngModel)]="row.client.isExposed"
+                  [disabled]="disableActions"
+                  (change)="updateVisibility(row, 'isExposed')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
                   </select>
@@ -86,7 +90,10 @@
                     >
                     </ccr-popup-description>
                   </div>
-                  <select [(ngModel)]="row.client.isModifiable" (change)="updateVisibility(row, 'isModifiable')">
+                  <select
+                  [(ngModel)]="row.client.isModifiable"
+                  [disabled]="disableActions"
+                  (change)="updateVisibility(row, 'isModifiable')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
                   </select>
@@ -101,7 +108,10 @@
                     >
                     </ccr-popup-description>
                   </div>
-                  <select [(ngModel)]="row.client.isDefault" (change)="updateVisibility(row, 'isDefault')">
+                  <select
+                  [(ngModel)]="row.client.isDefault"
+                  [disabled]="disableActions"
+                  (change)="updateVisibility(row, 'isDefault')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
                   </select>
@@ -116,7 +126,10 @@
                     >
                     </ccr-popup-description>
                   </div>
-                  <select [(ngModel)]="row.provider.isModifiable" (change)="updateVisibility(row, 'isModifiable', 'provider')">
+                  <select
+                  [(ngModel)]="row.provider.isModifiable"
+                  [disabled]="disableActions"
+                  (change)="updateVisibility(row, 'isModifiable', 'provider')">
                     <option [value]="true">{{ 'GLOBAL.YES' | translate }}</option>
                     <option [value]="false">{{ 'GLOBAL.NO' | translate }}</option>
                   </select>
@@ -125,12 +138,12 @@
               </td>
               <td *ngIf="row.level === 1">
                 <div [hidden]="reordering">
-                  {{ convertUnitToReadableFormat(row.type) }}
+                  {{ 'BOARD.ALLOWED_RANGE' | translate }}: <strong>{{ row.parsedBounds.lower }} - {{ row.parsedBounds.upper }}</strong>
                 </div>
               </td>
               <td *ngIf="row.level === 1">
                 <div [hidden]="reordering">
-                  {{ 'BOARD.ALLOWED_RANGE' | translate }}: <strong>{{ row.parsedBounds.lower }} - {{ row.parsedBounds.upper }}</strong>
+                  {{ convertUnitToReadableFormat(row.type) }}
                 </div>
               </td>
               <td>

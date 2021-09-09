@@ -6,6 +6,7 @@ import {
   MeasurementDataPointTypeAssociation,
   MeasurementLabelEntry
 } from '@coachcare/sdk'
+import { MeasurementPreferenceEntry } from '@coachcare/sdk/dist/lib/providers/measurement/preference'
 import { chain } from 'lodash'
 import { from, Observable } from 'rxjs'
 import {
@@ -28,6 +29,9 @@ export class MeasurementLabelDataSource extends TableDataSource<
   MeasurementLabelsWithTypes[],
   MeasurementLabelDataSourceCriteria
 > {
+  public inheritsPreference = false
+  public measurementPreference: MeasurementPreferenceEntry
+
   constructor(
     protected database: MeasurementLabelDatabase,
     private context: ContextService
@@ -49,11 +53,19 @@ export class MeasurementLabelDataSource extends TableDataSource<
     result: MeasurementLabelsWithTypes[]
   ): MeasurementLabelTableEntry[] {
     let previousLabelSortOrder = 0
+    const filteredResult = this.inheritsPreference
+      ? result.filter(
+          (entry) =>
+            entry.organization.id === this.measurementPreference.organization.id
+        )
+      : result.filter(
+          (entry) => entry.organization.id === this.context.clinic.id
+        )
     const expandedLabels = this.criteria.expandedLabels?.slice() ?? []
 
     this.criteria.expandedLabels = []
 
-    return chain(result)
+    return chain(filteredResult)
       .flatMap((label) => {
         let previousTypeSortOrder = 0
         const labelIsExpanded = expandedLabels.length

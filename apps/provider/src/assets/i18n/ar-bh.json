@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "ويجري الموروثة تفضيل من <strong>{{name}}</strong> (ID {{id}})",
     "CLINIC_NEW": "أضف عيادة جديدة",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "لا توجد مقدمي الإشراف.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "تم تعطيل إدارة نوع القياس من عيادة الأم.",
     "CLINIC_REMOVE": "إزالة العيادة",
     "CLINIC_REMOVE_AUTOENROLLMENT": "إزالة الانتساب التلقائي",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "هل أنت متأكد أنك تريد إزالة إدخال الانتساب التلقائي للتسلسل {{name}}؟",

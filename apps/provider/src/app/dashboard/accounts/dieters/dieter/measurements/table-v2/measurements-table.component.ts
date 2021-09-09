@@ -10,11 +10,13 @@ import { DateNavigatorOutput, PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import {
   convertUnitToPreferenceFormat,
+  DataPointTypes,
   MeasurementDataPointGroup,
   MeasurementDataPointMinimalType,
   MeasurementDataPointProvider,
   MeasurementDataPointType,
-  MeasurementLabelEntry
+  MeasurementLabelEntry,
+  MeasurementUnitConversions
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
@@ -26,6 +28,7 @@ import {
 import * as moment from 'moment'
 import { MatDialog } from '@coachcare/material'
 import { filter } from 'rxjs/operators'
+import { TranslateService } from '@ngx-translate/core'
 
 @UntilDestroy()
 @Component({
@@ -148,7 +151,8 @@ export class MeasurementsTableV2Component implements OnInit {
     private dialog: MatDialog,
     private language: LanguageService,
     private measurementLabel: MeasurementLabelService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -162,6 +166,31 @@ export class MeasurementsTableV2Component implements OnInit {
     const hours = Math.floor(seconds / 3600)
     const minutes = Math.floor((seconds % 3600) / 60)
     return `${hours}:${('00' + minutes).substr(-2, 2)}`
+  }
+
+  public getDistanceUnit(): string {
+    return MeasurementUnitConversions['m'].getMeasurementPreferenceUnit(
+      this.context.user.measurementPreference
+    )
+  }
+
+  public getGroupDistance(group: MeasurementDataPointGroup): string | null {
+    const stepsDataPoint = group.dataPoints.find(
+      (dataPoint) => dataPoint.type.id === DataPointTypes.STEPS
+    )
+
+    if (!stepsDataPoint) {
+      return null
+    }
+
+    const distance = stepsDataPoint.value * 0.75758
+
+    return MeasurementUnitConversions['m']
+      .convertToReadableFormat(
+        distance,
+        this.context.user.measurementPreference
+      )
+      .toFixed(1)
   }
 
   public getGroupType(
@@ -180,7 +209,8 @@ export class MeasurementsTableV2Component implements OnInit {
   ): string {
     return convertUnitToPreferenceFormat(
       group.dataPoints.find((dataPoint) => dataPoint.type.id === typeId)?.type,
-      this.context.user.measurementPreference
+      this.context.user.measurementPreference,
+      this.translate.currentLang
     )
   }
 
@@ -217,6 +247,10 @@ export class MeasurementsTableV2Component implements OnInit {
   }
 
   public onDeleteGroup(group: MeasurementDataPointGroup): void {
+    if (!(group as MeasurementDataPointGroupTableEntry).canBeDeleted) {
+      return
+    }
+
     this.dialog
       .open(PromptDialog, {
         data: {
@@ -232,7 +266,10 @@ export class MeasurementsTableV2Component implements OnInit {
   }
 
   private createDataSource(): void {
-    this.source = new MeasurementDataSourceV2(this.database)
+    this.source = new MeasurementDataSourceV2(
+      this.database,
+      this.measurementLabel
+    )
 
     this.source.addDefault({
       limit: 'all'
@@ -247,7 +284,9 @@ export class MeasurementsTableV2Component implements OnInit {
       account: this.context.accountId
     }))
     this.source.addRequired(this.columns$, () => ({
-      type: this.columns.map((type) => type.id)
+      type: this.columns
+        .map((type) => type.id)
+        .filter((id) => !isNaN(Number(id)))
     }))
 
     this.source
@@ -279,6 +318,23 @@ export class MeasurementsTableV2Component implements OnInit {
       )
 
       this.columns = associations.map((assoc) => assoc.type)
+
+      const stepIndex = this.columns.findIndex(
+        (col) => col.id === DataPointTypes.STEPS
+      )
+
+      if (stepIndex > -1) {
+        this.columns.splice(stepIndex + 1, 0, {
+          id: 'distance',
+          name: _('MEASUREMENT.DISTANCE'),
+          accessibility: 'public',
+          bound: { lower: 0, upper: 0 },
+          status: 'active',
+          multiplier: 1,
+          span: undefined
+        })
+      }
+
       this.columns$.next()
     } catch (error) {
       this.notifier.error(error)

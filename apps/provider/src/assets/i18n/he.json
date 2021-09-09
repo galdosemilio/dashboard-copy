@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "ההעדפה היא להיות בירושה <strong>{{name}}</strong> (ID {{id}})",
     "CLINIC_NEW": "הוסף קליניקה חדשה",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "אין ספקים ופיקוח.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "הנהלת סוג מדידת מושבת ממרפאת ההורה.",
     "CLINIC_REMOVE": "הסרת מרפאה",
     "CLINIC_REMOVE_AUTOENROLLMENT": "הסר הרשמה אוטומטית",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "האם אתה בטוח שברצונך להסיר את כניסתם הרשמה אוטומטית עבור רצף {{name}}?",

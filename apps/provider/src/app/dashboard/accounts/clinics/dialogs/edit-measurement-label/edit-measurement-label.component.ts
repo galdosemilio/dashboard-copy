@@ -40,7 +40,10 @@ export class EditMeasurementLabelDialog implements OnInit {
     this.form.get('value').patchValue({
       name: label.name,
       description: label.description ?? null,
-      translations: label.translations
+      translations: label.translations.map((translation) => ({
+        ...translation,
+        language: translation.locale
+      }))
     })
   }
 

@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "Esta preferencia está siendo heredada de <strong>{{name}}</strong> (ID {{id}})",
     "CLINIC_NEW": "Añadir Clínica",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "No hay asesores supervisores.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "La gestión de tipos de medidas está deshabilitada desde la clínica superior.",
     "CLINIC_REMOVE": "Borrar Clínica",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Eliminar Autoenrolamiento",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "¿Está seguro de querer eliminar el autoenrolamiento para la secuencia {{ name }}?",

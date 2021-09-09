@@ -30,6 +30,7 @@ import {
   NamedEntity
 } from '@coachcare/sdk'
 import { SYNTHETIC_DATA_TYPES } from '@app/dashboard/accounts/dieters/models'
+import { TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-dieter-measurements-chart-v2',
@@ -90,7 +91,8 @@ export class MeasurementChartV2Component implements OnInit {
     private database: MeasurementDatabaseV2,
     private measurementLabel: MeasurementLabelService,
     private notifier: NotifierService,
-    private store: Store<CCRConfig>
+    private store: Store<CCRConfig>,
+    private translate: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -121,7 +123,8 @@ export class MeasurementChartV2Component implements OnInit {
     this.source = new MeasurementChartDataSource(
       this.database,
       this.store,
-      this.context
+      this.context,
+      this.translate
     )
 
     if (this.types.length) {

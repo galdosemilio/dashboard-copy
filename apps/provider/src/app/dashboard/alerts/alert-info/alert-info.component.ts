@@ -4,8 +4,8 @@ import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 import { ContextService } from '@app/service'
-import { ConfirmDialog } from '@app/shared/dialogs/confirm.dialog'
 import { _, TranslationsObject } from '@app/shared/utils'
+import { ConfirmDialog } from '@coachcare/common/dialogs/core'
 
 @UntilDestroy()
 @Component({

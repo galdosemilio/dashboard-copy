@@ -125,7 +125,6 @@
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "Die Präferenz wird geerbt von <strong>{{name}}</strong> (ID {{id}})",
     "CLINIC_NEW": "Neue Klinik hinzufügen",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "Es gibt keine Überwachung Anbieter.",
-    "CLINIC_PREVENT_DATA_POINT_TYPE_MGMT": "Art der Messung Management wird von der übergeordneten Klinik deaktiviert.",
     "CLINIC_REMOVE": "Klinik löschen",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Entfernen Sie die automatische Registrierung",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Sind Sie sicher, dass Sie die automatische Registrierung Eintrag für die Sequenz zu entfernende {{name}}?",

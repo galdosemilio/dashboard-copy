@@ -27,54 +27,6 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="steps">
-      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.STEPS' | translate }}</th>
-      <td mat-cell *matCellDef="let row">
-        <ng-container *ngIf="!row.isHeader">
-        <ng-container *ngIf="row.stepTotal; else empty">
-          <p>{{ row.stepTotal | number }}<small *ngIf="row.stepEntries.length < 2">&nbsp;{{ row.stepEntries[0].device.name }}</small></p>
-          <div *ngIf="row.stepEntries.length >= 2">
-            <small *ngFor="let entry of row.stepEntries" class="small-value">
-              <span>{{ entry.device.name }}</span>
-              <span>&nbsp;{{ entry.steps | number }}</span>
-            </small>
-          </div>
-        </ng-container>
-        </ng-container>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="average">
-      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.STEP_AVERAGE' | translate }}</th>
-      <td mat-cell *matCellDef="let row">
-        <ng-container *ngIf="!row.isHeader">
-        <ng-container *ngIf="row.stepAverage; else empty">
-          {{ row.stepAverage | number }}
-        </ng-container>
-        </ng-container>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="distance">
-      <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.DISTANCE' | translate }}</th>
-      <td mat-cell *matCellDef="let row; let index = index;">
-        <ng-container *ngIf="!row.isHeader">
-        <ng-container *ngIf="row.distanceTotal; else empty">
-          <p>
-            {{ row.distanceTotal.toFixed(2) }} <small>{{ 'distance' | unitLabel | translate }}</small>
-            <i class="ccr-marker" *ngIf="source.distanceNote[index]">&nbsp;*</i>
-          </p>
-          <div *ngIf="row.stepEntries.length >= 2">
-            <small *ngFor="let entry of row.stepEntries" class="small-value">
-              <span>{{ entry.distance | number }}</span>
-              <span>&nbsp;{{ 'distance' | unitLabel | translate }}</span>
-            </small>
-          </div>
-        </ng-container>
-        </ng-container>
-      </td>
-    </ng-container>
-
     <ng-container matColumnDef="calories">
       <th mat-header-cell *matHeaderCellDef>{{ 'MEASUREMENT.CALORIES' | translate }}</th>
       <td mat-cell *matCellDef="let row">
