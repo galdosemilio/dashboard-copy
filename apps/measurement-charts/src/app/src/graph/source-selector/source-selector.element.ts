@@ -53,6 +53,7 @@ export class SourceSelectorElement extends CcrElement {
         <label>${translate('DATA_SOURCE')}: </label>
         <div class="select-wrap">
           ${selectElement}
+          <img class="select-icon" src="assets/img/chevron_down.png" />
         </div>
       </div>
     `
