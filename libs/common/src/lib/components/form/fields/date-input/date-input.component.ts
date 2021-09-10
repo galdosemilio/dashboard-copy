@@ -42,8 +42,8 @@ export class CcrDateInputComponent
   @Input() placeholder: string = _('BOARD.DATE_OF_BIRTH')
   @Input() readonly = false
   @Input() required = true
-  @ViewChild('textInput', { static: false }) textInput
-  @ViewChild('datepickerInput', { static: false }) datepickerInput
+  @ViewChild('textInput', { static: true }) textInput
+  @ViewChild('datepickerInput', { static: true }) datepickerInput
 
   datepickerMode: 'datepicker' | 'text' = 'datepicker'
   form: FormGroup
@@ -105,14 +105,16 @@ export class CcrDateInputComponent
   }
 
   onDatepickerFocus($event: any) {
+    const currentDate = this.form.controls.date.value
+
+    this.datepickerMode = 'text'
+    this.cdr.detectChanges()
+
     if ($event && $event.target) {
       this.textInput.nativeElement.select()
       this.onTouched()
     }
 
-    const currentDate = this.form.controls.date.value
-    this.datepickerMode = 'text'
-    this.cdr.detectChanges()
     if (currentDate) {
       this.form.controls.textDate.setValue(
         moment(currentDate).format(this.format)
