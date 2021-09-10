@@ -873,6 +873,11 @@ export class CallEffects {
     ofType(callAction.ACCEPT_CALL),
     debounceTime(300),
     switchMap(() => {
+      this.interaction.createCallEvent({
+        id: this.callState.callId,
+        event: 'participant-joined'
+      })
+
       return [
         new callAction.FetchTwilioToken({
           id: this.callState.callId,
