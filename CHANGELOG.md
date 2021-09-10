@@ -1,3 +1,11 @@
+## [1.34.1](https://github.com/coachcare/dashboard/compare/v1.34.0...v1.34.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* added default style removal on ios [FRON-2339] ([7b5be84](https://github.com/coachcare/dashboard/commit/7b5be84922b5a7d862d6eb475897722e7c26309d))
+* upgraded sdk to v15.0.1 ([92c2a30](https://github.com/coachcare/dashboard/commit/92c2a306274ebee61f64e00dd595c17d4bc6c850))
+
 # [1.34.0](https://github.com/coachcare/dashboard/compare/v1.33.0...v1.34.0) (2021-09-09)
 
 
