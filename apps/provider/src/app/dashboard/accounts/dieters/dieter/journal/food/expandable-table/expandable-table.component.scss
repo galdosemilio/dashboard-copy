@@ -100,7 +100,8 @@ app-dieter-journal-food-table {
       }
 
       .carb,
-      .fat {
+      .fat,
+      .others {
         > div {
           margin-right: 5px;
         }
@@ -112,6 +113,16 @@ app-dieter-journal-food-table {
           font-size: 12px;
           margin-top: 4px;
           place-content: flex-end space-around;
+        }
+      }
+
+      .others {
+        > div {
+          font-size: 12px;
+        }
+
+        > div:last-child {
+          margin-top: 20px;
         }
       }
     }

@@ -79,6 +79,20 @@ export class FoodExpandableTable implements OnInit {
     ]
   }
 
+  public checkOthersContents(row: FoodDayAmount): boolean {
+    return !!(
+      row.cholesterol ||
+      row.sodium ||
+      row.calcium ||
+      row.iron ||
+      row.potassium ||
+      row.vitaminA ||
+      row.vitaminB ||
+      row.vitaminC ||
+      row.vitaminD
+    )
+  }
+
   public onOpenThumbnail(row: ConsumedFood): void {
     if (!row.hasImageUrl) {
       return

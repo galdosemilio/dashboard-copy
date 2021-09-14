@@ -5,6 +5,7 @@
       <div>{{ 'BOARD.PROTEIN' | translate }}</div>
       <div>{{ 'BOARD.CARB' | translate }}</div>
       <div>{{ 'BOARD.FAT' | translate }}</div>
+      <div>{{ 'BOARD.OTHERS' | translate }}</div>
     </div>
     <div *ngFor="let row of rows" class="table-container" [ngClass]="{
       'newday-row': row.level === 0,
@@ -83,10 +84,64 @@
         </div>
         <div *ngIf="row.totalFat">
           <span>
+            {{ 'BOARD.MONO_FAT' | translate }} {{ row.monounsaturatedFat / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.POLY_FAT' | translate }} {{ row.polyunsaturatedFat / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+          <span>
             {{ 'BOARD.SAT_FAT' | translate }} {{ row.saturatedFat / 1000 | number:'1.0-1' }}
             <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.TRANS_FAT' | translate }} {{ row.transFat / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.G' | translate }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="others">
+        <div *ngIf="checkOthersContents(row); else empty">
+          <span>
+            {{ 'BOARD.CHOLESTEROL' | translate }} {{ row.cholesterol | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.SODIUM' | translate }} {{ row.sodium / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.CALCIUM' | translate }} {{ row.calcium / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.IRON' | translate }} {{ row.iron / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.POTASSIUM' | translate }} {{ row.potassium | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.VITAMIN_A' | translate }} {{ row.vitaminA / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.VITAMIN_B' | translate }} {{ row.vitaminB / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.VITAMIN_C' | translate }} {{ row.vitaminC / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
+          </span>
+          <span>
+            {{ 'BOARD.VITAMIN_D' | translate }} {{ row.vitaminD / 1000 | number:'1.0-1' }}
+            <small>{{ 'UNIT.MGR' | translate }}</small>
           </span>
         </div>
       </div>
     </div>
 </ccr-datasource-overlay>
+
+<ng-template #empty>-</ng-template>

@@ -2,6 +2,7 @@ export class FoodData {
   calories = { goal: 2000, avg: 0, amount: 0 }
   protein = { goal: 0, avg: 0, amount: 0 }
   carbohydrate = { goal: 0, avg: 0, amount: 0 }
+  netCarbs = { goal: 0, avg: 0, amount: 0 }
   totalFat = { goal: 0, avg: 0, amount: 0 }
   sugar = { goal: 0, avg: 0, amount: 0 }
   fiber = { goal: 0, avg: 0, amount: 0 }
@@ -15,6 +16,7 @@ export class FoodData {
     this.sugar.amount += meal.sugar
     this.fiber.amount += meal.fiber
     this.saturatedFat.amount += meal.saturatedFat
+    this.netCarbs.amount += meal.netCarbs
   }
 
   calculateAverage(daysNumber) {
@@ -29,5 +31,6 @@ export class FoodData {
       : 0
     this.fiber.avg = daysNumber ? this.fiber.amount / daysNumber : 0
     this.sugar.avg = daysNumber ? this.sugar.amount / daysNumber : 0
+    this.netCarbs.avg = daysNumber ? this.netCarbs.amount / daysNumber : 0
   }
 }

@@ -34,6 +34,7 @@
           [maximumvalue]="data.carbohydrate.goal"
           [measurementUnit]="'g'">
         </progress-circle>
+        <p class="subtext">{{ 'GRAPH.DAILY_AVG_NET_CARBS' | translate }} <span class="subtext-value">{{ data.netCarbs.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
         <p class="subtext">{{ 'GRAPH.DAILY_AVG_FIBER' | translate }} <span class="subtext-value">{{ data.fiber.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
         <p class="subtext">{{ 'GRAPH.DAILY_AVG_SUGAR' | translate }} <span class="subtext-value">{{ data.sugar.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
       </div>
