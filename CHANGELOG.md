@@ -1,3 +1,15 @@
+# [1.35.0](https://github.com/coachcare/dashboard/compare/v1.34.1...v1.35.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* solved issue with date picker [FRON-2334] ([bbb39f4](https://github.com/coachcare/dashboard/commit/bbb39f4e6b08fafdd8d6ea0536ea43088f01867d))
+
+
+### Features
+
+* sent call event on pickup [FRON-2341] ([11a94da](https://github.com/coachcare/dashboard/commit/11a94da47272927babca41fcd780a8ee92544370))
+
 ## [1.34.1](https://github.com/coachcare/dashboard/compare/v1.34.0...v1.34.1) (2021-09-10)
 
 
