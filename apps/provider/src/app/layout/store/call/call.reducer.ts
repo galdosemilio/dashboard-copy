@@ -14,6 +14,11 @@ import {
 
 export function callReducer(state = initialState, action: Action): CallState {
   switch (action.type) {
+    case Actions.SET_CALL_IS_EXPECTED:
+      return {
+        ...state,
+        isExpected: (action as Actions.SetCallIsExpected).payload
+      }
     case Actions.SET_CALL_IS_SUPPORTED:
       return {
         ...state,
@@ -291,17 +296,20 @@ export function callReducer(state = initialState, action: Action): CallState {
         fetchDevicesSuccess: payload.video && payload.audio
       }
     case Actions.APPLY_SELECTED_AUDIO_DEVICE:
-      const audioInputDevice = (action as Actions.ApplySelectedAudioDevice)
+      const selAudioDevice = (action as Actions.ApplySelectedAudioDevice)
         .payload
-      return { ...state, selectedAudioInputDevice: audioInputDevice }
+      return { ...state, selectedAudioInputDevice: selAudioDevice.deviceId }
     case Actions.APPLY_SELECTED_AUDIO_OUTPUT_DEVICE:
-      const audioOutputDevice = (action as Actions.ApplySelectedAudioOutputDevice)
+      const selAudioOutputDevice = (action as Actions.ApplySelectedAudioOutputDevice)
         .payload
-      return { ...state, selectedAudioOutputDevice: audioOutputDevice }
+      return {
+        ...state,
+        selectedAudioOutputDevice: selAudioOutputDevice.deviceId
+      }
     case Actions.APPLY_SELECTED_VIDEO_DEVICE:
-      const videoInputDevice = (action as Actions.ApplySelectedVideoDevice)
+      const selVideoDevice = (action as Actions.ApplySelectedVideoDevice)
         .payload
-      return { ...state, selectedVideoInputDevice: videoInputDevice }
+      return { ...state, selectedVideoInputDevice: selVideoDevice.deviceId }
     case Actions.FETCH_AUDIO_DEVICES_COMPLETE:
       const audioDevices = (action as Actions.FetchAudioDevicesComplete).payload
       return {
@@ -338,6 +346,11 @@ export function callReducer(state = initialState, action: Action): CallState {
       return {
         ...state,
         callEndState: (action as Actions.SetCallEnd).payload
+      }
+    case Actions.SET_LOCAL_VIDEO_ENABLED:
+      return {
+        ...state,
+        isLocalVideoEnabled: (action as Actions.SetLocalVideoEnabled).payload
       }
     case Actions.ATTEMPT_CLOSE_CALL:
       return {

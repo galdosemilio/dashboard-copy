@@ -1,0 +1,10 @@
+<div *ngIf="deviceId; else micWarning" fxLayout="row" fxLayoutAlign="space-between center">
+  <mat-icon color="primary">mic</mat-icon>
+  <div class="mic-block-wrapper" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+    <div *ngFor="let block of micBlocks; let i = index;" class="mic-block">&nbsp;</div>
+  </div>
+</div>
+
+<ng-template #micWarning>
+  <p class="mic-block-warning-wrapper">{{ 'CALL.AUDIO_INPUT_PREVIEW_UNAVAILABLE' | translate }}</p>
+</ng-template>

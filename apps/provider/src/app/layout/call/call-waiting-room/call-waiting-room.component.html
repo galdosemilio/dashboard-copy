@@ -1,0 +1,139 @@
+<div class="waiting-room-container" fxLayout="row" fxLayoutAlign="stretch stretch">
+  <div [hidden]="isMobile && showSettings" class="call-room" fxFlex>
+    <div class="video-preview">
+      <div *ngIf="!callState.callId; else callRoom" #videoPreview></div>
+    </div>
+
+    <div
+    [class.transparent]="!callState.callId && callState.isCameraEnabled || callState.callId && callState.isRemoteVideoEnabled"
+    class="avatar-container"
+    fxLayout="row"
+    fxLayoutAlign="center center">
+      <ccr-avatar></ccr-avatar>
+    </div>
+
+    <div class="call-actions-container" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="15px">
+      <button
+      [disabled]="!callState.hasAudioDeviceAccess"
+      (click)="toggleMicrophone$.next()"
+      mat-fab>
+        <mat-icon *ngIf="callState.isMicrophoneEnabled">mic</mat-icon>
+        <mat-icon *ngIf="!callState.isMicrophoneEnabled">mic_off</mat-icon>
+      </button>
+
+      <button
+      [class.disabled]="!callState.hasVideoDeviceAccess"
+      (click)="toggleCamera$.next()"
+      mat-fab>
+        <mat-icon *ngIf="callState.isCameraEnabled">videocam</mat-icon>
+        <mat-icon *ngIf="!callState.isCameraEnabled">videocam_off</mat-icon>
+        <ccr-popup-description
+        *ngIf="!callState.hasVideoDeviceAccess"
+        [title]="'CALL.CAMERA_ACCESS_BLOCKED' | translate"
+        [description]="'CALL.CAMERA_ACCESS_BLOCKED_HELPTEXT' | translate"
+        [showIntro]="false"
+        [trigger]="videoPopupTrigger">
+        </ccr-popup-description>
+      </button>
+
+      <button (click)="hangUp()" mat-fab>
+        <mat-icon>call_end</mat-icon>
+      </button>
+
+      <button *ngIf="isMobile" (click)="toggleSettingsSection()" mat-fab>
+        <mat-icon>settings</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div
+  [hidden]="isMobile && !showSettings"
+  class="side-content"
+  fxFlex="100% 100% 30%"
+  fxFlex.sm="100%"
+  fxFlex.xs="100%"
+  fxLayout="column"
+  fxLayoutGap="10px">
+    <div class="title-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <h2 fxFlex>{{ 'BOARD.CONFERENCE_WAITING_ROOM' | translate }}</h2>
+      <mat-icon *ngIf="isMobile" (click)="toggleSettingsSection()" fxFlex="10%">close</mat-icon>
+    </div>
+
+    <div class="settings-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+      <div>
+        <p
+        class="section-title"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="5px">
+          <mat-icon>phone_in_talk</mat-icon><span>{{ 'BOARD.STATUS' | translate }}</span>
+        </p>
+
+        <div *ngIf="!isCallStarted; else ongoingMeetingStatus" class="section-content">
+          <p>{{ 'BOARD.WAITING_TO_START' | translate }}</p>
+          <small>{{ 'BOARD.WAITING_TO_START_NOTE' | translate }}</small>
+        </div>
+      </div>
+
+      <div>
+        <p
+        class="section-title"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="5px">
+          <mat-icon>people</mat-icon><span>{{ 'RIGHT_PANEL.PARTICIPANTS' | translate }}</span>
+        </p>
+
+        <div class="section-content">
+          <p
+          *ngFor="let entity of data.attendeeEntities"
+          class="attendee-item"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="2px">
+            <mat-icon *ngIf="entity.id === currentUserId || isCallStarted; else notAttended" class="active">check_circle</mat-icon>
+            <span>
+              {{ entity.name }}
+              <span *ngIf="entity.id === currentUserId">&nbsp;({{ 'GLOBAL.YOU' | translate }})</span>
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p
+        class="section-title"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="5px">
+          <mat-icon>settings</mat-icon><span>{{ 'GLOBAL.SETTINGS' | translate }}</span>
+        </p>
+
+        <div
+        class="section-content"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        fxLayoutAlign.sm="start start"
+        fxLayoutAlign.xs="start start"
+        fxLayoutGap="15px">
+          <ccr-call-settings-form
+          (videoTrack$)="onVideoTrackChange($event)"
+          mode="waiting-room">
+          </ccr-call-settings-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #callRoom>
+  <app-call-room></app-call-room>
+</ng-template>
+
+<ng-template #notAttended>
+  <mat-icon>highlight_off</mat-icon>
+</ng-template>
+
+<ng-template #ongoingMeetingStatus>
+  <p>{{ 'BOARD.ONGOING' | translate }}</p>
+</ng-template>

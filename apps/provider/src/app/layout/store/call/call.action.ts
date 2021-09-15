@@ -16,6 +16,7 @@ import { Action } from '@ngrx/store'
 /**
  * Action Types
  */
+export const SET_CALL_IS_EXPECTED = 'CALL setting call being expected'
 export const SET_CALL_IS_SUPPORTED = 'CALL function supported'
 export const SET_CONFERENCING_ENABLED = 'CALL conferencing enabled'
 export const INITIATE_CALL = 'CALL inititiate call'
@@ -112,6 +113,7 @@ export const RECOVER_CALL = 'CALL recover call'
 export const SET_ATTEMPTING_RECONNECT = 'CALL set attempting to reconnect'
 export const SET_RECONNECTION_BUMPER = 'CALL set reconnection bumper'
 export const STORE_CALL_SETTINGS = 'CALL store call window settings'
+export const SET_LOCAL_VIDEO_ENABLED = 'CALL set local video enabled'
 
 export const Source = {
   INBOUND: 'INBOUND',
@@ -151,6 +153,11 @@ export interface ReconnectConfiguration {
 /**
  * Actions
  */
+export class SetCallIsExpected implements Action {
+  readonly type = SET_CALL_IS_EXPECTED
+
+  constructor(public payload: boolean) {}
+}
 export class SetCallIsSupported implements Action {
   readonly type = SET_CALL_IS_SUPPORTED
 
@@ -159,6 +166,12 @@ export class SetCallIsSupported implements Action {
 
 export class SetConferencingEnabled implements Action {
   readonly type = SET_CONFERENCING_ENABLED
+
+  constructor(public payload: boolean) {}
+}
+
+export class SetLocalVideoEnabled implements Action {
+  readonly type = SET_LOCAL_VIDEO_ENABLED
 
   constructor(public payload: boolean) {}
 }
@@ -471,19 +484,19 @@ export class FetchDevicesSuccess implements Action {
 export class ApplySelectedAudioDevice implements Action {
   readonly type = APPLY_SELECTED_AUDIO_DEVICE
 
-  constructor(public payload: string) {}
+  constructor(public payload: { deviceId: string; closeSettings: boolean }) {}
 }
 
 export class ApplySelectedAudioOutputDevice implements Action {
   readonly type = APPLY_SELECTED_AUDIO_OUTPUT_DEVICE
 
-  constructor(public payload: string) {}
+  constructor(public payload: { deviceId: string; closeSettings: boolean }) {}
 }
 
 export class ApplySelectedVideoDevice implements Action {
   readonly type = APPLY_SELECTED_VIDEO_DEVICE
 
-  constructor(public payload: string) {}
+  constructor(public payload: { deviceId: string; closeSettings: boolean }) {}
 }
 
 export class CloseSettings implements Action {

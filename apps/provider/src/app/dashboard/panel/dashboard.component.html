@@ -67,13 +67,17 @@
   <p>{{ 'BOARD.PATIENT_CALL_EXPLANATION' | translate }}</p>
 
   <div
-  *ngIf="showMySchedule"
   fxLayout="column"
-  fxLayout.gt-md="row"
-  fxLayoutAlign=" stretch"
-  fxLayoutGap="35px">
-    <div fxFlex="50%">
-      <ccr-my-schedule></ccr-my-schedule>
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="25px">
+    <div class="next-meeting-container">
+        <ccr-next-meeting></ccr-next-meeting>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <div *ngIf="showMySchedule" fxFlex="50%">
+        <ccr-my-schedule></ccr-my-schedule>
+      </div>
     </div>
   </div>
 </ng-template>

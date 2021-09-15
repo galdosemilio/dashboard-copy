@@ -34,6 +34,8 @@ import {
 import { LoginHistoryComponent } from './login-history'
 import { CcrMessagesChatInfoComponent } from './messages-chat-info'
 import { CcrMessagesComponent } from './messages/messages.component'
+import { CcrMicLevelIndicatorComponent } from './mic-level-indicator'
+import { CcrNextMeetingComponent } from './next-meeting'
 import { OrganizationSearchComponent } from './organization-search'
 import { PackageEnrollComponent } from './package-enroll'
 import { PackageFilterComponent } from './package-filter'
@@ -83,6 +85,7 @@ export {
   // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
   CcrMessagesComponent,
+  CcrMicLevelIndicatorComponent,
   CcrSearchSelectorComponent,
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
@@ -139,6 +142,8 @@ export const CmpComponents = [
   CcrImageOptionSelectorComponent,
   CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
+  CcrMicLevelIndicatorComponent,
+  CcrNextMeetingComponent,
   CcrPageSizeSelectorComponent,
   CcrSearchSelectorComponent,
   CcrSelectUserComponent,

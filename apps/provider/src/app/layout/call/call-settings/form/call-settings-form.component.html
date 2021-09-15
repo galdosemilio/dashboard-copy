@@ -1,0 +1,142 @@
+<form
+[formGroup]="form"
+fxFlex
+fxLayout="row"
+fxLayoutAlign="space-evenly center"
+fxLayoutAlign.sm="start center"
+fxLayoutAlign.xs="start center"
+fxLayoutGap="15px">
+  <!-- Fields Container -->
+  <div
+  fxLayout="column"
+  fxLayout.xs="column"
+  fxLayoutAlign="center space-around"
+  fxLayoutGap="15px">
+
+    <!-- Video Input Field -->
+    <div class="input-container" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-between stretch">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <span class="input-label" fxFlex>{{ 'VIDEO.VIDEO_INPUT' | translate }}</span>
+      </div>
+
+      <mat-form-field
+      [hidden]="!callState?.hasVideoDeviceAccess || !callState.videoInputDevices.length"
+      class="ccr-form-field"
+      floatLabel="never">
+        <mat-select formControlName="selectedVideoInputDevice" [placeholder]="'VIDEO.VIDEO_INPUT' | translate">
+          <mat-option *ngFor="let device of callState?.videoInputDevices" [value]="device.deviceId">
+            {{ device.label | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Audio Input Field -->
+    <div
+    class="input-container"
+    fxLayout="column"
+    fxLayoutAlign="space-between stretch">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <span class="input-label" fxFlex>{{ 'VIDEO.AUDIO_INPUT' | translate }}</span>
+
+        <ccr-mic-level-indicator
+        [deviceId]="this.previewState.audio?.deviceId"
+        fxFlex="50%">
+        </ccr-mic-level-indicator>
+      </div>
+
+      <mat-form-field
+      [hidden]="!callState?.hasAudioDeviceAccess || !callState?.audioInputDevices.length"
+      class="ccr-form-field"
+      floatLabel="never">
+        <mat-select formControlName="selectedAudioInputDevice" [placeholder]="'VIDEO.AUDIO_INPUT' | translate">
+          <mat-option *ngFor="let device of callState?.audioInputDevices" [value]="device.deviceId">
+            {{ device.label | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div fxFlex *ngIf="!callState?.hasAudioDeviceAccess || !callState?.audioInputDevices.length">
+        {{ 'CALL.AUDIO_INPUT_BLOCKED' | translate }}
+        <a
+        class="help-link"
+        [href]="deviceHelpLinks.current.audio"
+        target="_blank">
+        {{ 'CALL.DEVICE_HELP' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <!-- Audio Output Field -->
+    <div
+    *ngIf="previewState.audioOutput.enabled"
+    class="input-container"
+    fxLayout="column"
+    fxLayoutAlign="space-between stretch">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <span class="input-label" fxFlex>{{ 'VIDEO.AUDIO_OUTPUT' | translate }}</span>
+
+        <div
+        fxFlex="35%"
+        fxFlex.xs="40%"
+        fxLayout="row"
+        fxLayoutAlign="center center">
+          <button
+          (click)="onTestAudioOutput()"
+          [disabled]="!canPlaySound"
+          class="ccr-icon-button small"
+          color="primary"
+          mat-button>
+            <mat-icon>play_circle_filled</mat-icon>
+            {{ 'CALL.PLAY_TEST_SOUND' | translate }}
+          </button>
+        </div>
+      </div>
+      <mat-form-field
+      [hidden]="!callState?.audioOutputDevices || !callState?.audioOutputDevices.length"
+      class="ccr-form-field"
+      floatLabel="never">
+        <mat-select
+        formControlName="selectedAudioOutputDevice"
+        [placeholder]="'VIDEO.AUDIO_OUTPUT' | translate">
+          <mat-option *ngFor="let device of callState?.audioOutputDevices" [value]="device.deviceId">
+            {{ device.label | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-hint>{{ 'CALL.ONLY_CALL' | translate }}</mat-hint>
+      </mat-form-field>
+      <div fxFlex *ngIf="!callState?.audioOutputDevices || !callState?.audioOutputDevices.length">
+        {{ 'CALL.AUDIO_OUTPUT_BLOCKED' | translate }}
+      </div>
+    </div>
+
+    <!-- Apply Button Container -->
+    <div
+    *ngIf="mode === 'settings-modal'"
+    class="button-wrapper"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px">
+      <button (click)="onApply()" class="ccr-button" color="primary" mat-button type="button">
+        {{ 'CALL.APPLY' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Video Preview Container -->
+  <div>
+    <div fxFlex *ngIf="!callState?.hasVideoDeviceAccess || !callState.videoInputDevices.length">
+      {{ 'CALL.VIDEO_INPUT_BLOCKED' | translate }}
+      <a
+      class="help-link"
+      [href]="deviceHelpLinks.current.video"
+      target="_blank">
+        {{ 'CALL.DEVICE_HELP' | translate }}
+      </a>
+    </div>
+    <div [hidden]="mode !== 'settings-modal'" #videoPreview class="video-preview" fxLayout="row" fxLayoutAlign="center center">
+      <div [hidden]="!previewState.video.enabled"></div>
+      <p [hidden]="previewState.video.enabled">{{ 'CALL.VIDEO_PREVIEW_UNAVAILABLE' | translate }}</p>
+    </div>
+  </div>
+</form>

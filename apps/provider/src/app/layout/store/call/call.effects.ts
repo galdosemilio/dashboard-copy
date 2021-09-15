@@ -434,13 +434,25 @@ export class CallEffects {
     tap(() => this.callLayoutService.normalizeWindow())
   )
 
-  @Effect({ dispatch: false })
+  @Effect()
   showIncomingCall$ = this.actions$.pipe(
     ofType(callAction.SHOW_INCOMING_CALL),
     debounceTime(300),
-    tap(() => {
+    switchMap(() => {
+      if (this.callState.isExpected) {
+        this.callLayoutService.showCall()
+        return [
+          new callAction.AcceptCall({
+            enableVideo: this.callState.isLocalVideoEnabled
+          }),
+          new callAction.SetCallIsExpected(false)
+        ]
+      }
+
       this.twilioService.playRinging()
       this.callLayoutService.showCall()
+
+      return []
     })
   )
 
@@ -819,6 +831,11 @@ export class CallEffects {
       if (this.callState.isMicrophoneEnabled) {
         this.twilioService.applyMicrophone(payload)
       }
+
+      if (!payload.closeSettings) {
+        return
+      }
+
       this.callLayoutService.closeSettings()
     })
   )

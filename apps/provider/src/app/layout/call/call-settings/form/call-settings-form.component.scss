@@ -1,0 +1,71 @@
+@import 'variables';
+
+$video-preview-height: 150px;
+$video-preview-width: 200px;
+
+ccr-call-settings-form {
+  .ccr-form-field {
+    .mat-form-field-infix {
+      background: mat-color($ccr-background, app-bar) !important;
+    }
+  }
+
+  .content {
+    padding: 0 25px;
+
+    .button-wrapper {
+      width: 100%;
+    }
+  }
+
+  .help-link {
+    color: var(--primary) !important;
+    display: block;
+    font-size: 0.95em;
+    padding-top: 5px;
+  }
+
+  .input {
+    &-label {
+      text-transform: uppercase;
+    }
+  }
+
+  @media #{$small-and-down} {
+    .mat-select-value-text {
+      text-overflow: ellipsis;
+      width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+    }
+  }
+
+  .mic-block {
+    border: 1px solid var(--toolbar, mat-color($ccr-background, tools));
+    height: 20px;
+    width: 10px;
+
+    &-warning-wrapper {
+      text-align: center;
+      width: $video-preview-width;
+    }
+
+    &-wrapper {
+      width: calc(#{$video-preview-width} - 24px);
+    }
+
+    &.active {
+      background-color: var(--primary);
+    }
+  }
+
+  .video-preview {
+    width: 100%;
+    height: auto;
+
+    p {
+      text-align: center;
+    }
+  }
+}

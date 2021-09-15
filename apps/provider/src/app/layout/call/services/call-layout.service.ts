@@ -10,7 +10,7 @@ import {
 import { BILLABLE_SERVICES } from '@app/dashboard/reports/communications/models'
 import { AccessRequiredDialogComponent } from '@app/layout/call/access-required-dialog/access-required-dialog.component'
 import { BrowserSupportDialogComponent } from '@app/layout/call/browser-support-dialog/browser-support-dialog.component'
-import { CallSettingsComponent } from '@app/layout/call/call-settings/call-settings.component'
+import { CcrCallSettingsComponent } from '@app/layout/call/call-settings'
 import { CallWindowComponent } from '@app/layout/call/call-window/call-window.component'
 import { UIState } from '@app/layout/store'
 import {
@@ -86,7 +86,7 @@ export class CallLayoutService implements OnDestroy {
   }
 
   showSettings() {
-    this.dialog.open(CallSettingsComponent, {
+    this.dialog.open(CcrCallSettingsComponent, {
       width: '60vw',
       panelClass: 'ccr-full-dialog'
     })

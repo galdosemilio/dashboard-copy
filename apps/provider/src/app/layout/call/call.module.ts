@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core'
 import { AccessDeniedDialogComponent } from '@app/layout/call/access-denied-dialog/access-denied-dialog.component'
 import { AccessRequiredDialogComponent } from '@app/layout/call/access-required-dialog/access-required-dialog.component'
 import { BrowserSupportDialogComponent } from '@app/layout/call/browser-support-dialog/browser-support-dialog.component'
-import { CallSettingsComponent } from '@app/layout/call/call-settings/call-settings.component'
 import { SharedModule } from '@app/shared/shared.module'
 import { CallWindowComponent, Components, Providers } from './'
 
@@ -13,7 +12,6 @@ import { CallWindowComponent, Components, Providers } from './'
   declarations: Components,
   entryComponents: [
     CallWindowComponent,
-    CallSettingsComponent,
     AccessDeniedDialogComponent,
     AccessRequiredDialogComponent,
     BrowserSupportDialogComponent

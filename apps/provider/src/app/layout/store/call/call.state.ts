@@ -38,6 +38,7 @@ export interface CallEndState {
 export interface CallState {
   billableService: BillableService
   isSupported: boolean
+  isExpected: boolean
   isCallStarted: boolean
   isReconnect: boolean
   twilioToken: string
@@ -93,6 +94,7 @@ export const initialState: CallState = {
     displayName: ''
   },
   isSupported: false,
+  isExpected: false,
   isCallStarted: false,
   isReconnect: false,
   twilioToken: '',
