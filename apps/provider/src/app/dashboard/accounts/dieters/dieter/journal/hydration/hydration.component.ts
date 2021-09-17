@@ -14,6 +14,8 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import { DateNavigatorOutput } from '@app/shared'
 
+import * as moment from 'moment'
+
 @Component({
   selector: 'app-dieter-journal-hydration',
   templateUrl: 'hydration.component.html',
@@ -50,8 +52,8 @@ export class HydrationComponent implements OnInit, OnDestroy {
     this.source.addRequired(this.date$, () => {
       const dates = this.date$.getValue()
       return {
-        startDate: dates.startDate,
-        endDate: dates.endDate
+        startDate: moment(dates.startDate).startOf('day').toISOString(),
+        endDate: moment(dates.endDate).endOf('day').toISOString()
       }
     })
   }
