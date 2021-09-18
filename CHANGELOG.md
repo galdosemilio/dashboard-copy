@@ -1,3 +1,10 @@
+## [1.35.1](https://github.com/coachcare/dashboard/compare/v1.35.0...v1.35.1) (2021-09-18)
+
+
+### Bug Fixes
+
+* adjusted date range to cover the whole period [FRON-2351] ([6cd8589](https://github.com/coachcare/dashboard/commit/6cd8589ca6054ea33482f3f67a9a1dd7348b03bf))
+
 # [1.35.0](https://github.com/coachcare/dashboard/compare/v1.34.1...v1.35.0) (2021-09-14)
 
 
