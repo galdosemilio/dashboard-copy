@@ -7,7 +7,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import {
   ClinicPickerDataSource,
   ClinicsDatabase,
@@ -23,6 +23,7 @@ import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { Subject } from 'rxjs'
 import * as moment from 'moment'
 
 @UntilDestroy()
@@ -44,6 +45,8 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
   @HostBinding('class.ccr-styled')
   @Input()
   styled = false
+
+  @Input() markAsTouched: Subject<void>
 
   @ViewChild(ClinicsPickerComponent, { static: false })
   picker: ClinicsPickerComponent
@@ -98,6 +101,7 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
 
   createForm() {
     this.form = this.builder.group({
+      addresses: [[]],
       birthday: '',
       id: this.coachId,
       firstName: '',
@@ -112,6 +116,12 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
       preferredLocales: [],
       phone: [null, [ccrPhoneValidator]],
       clinics: []
+    })
+  }
+
+  createAddressForm() {
+    return this.builder.group({
+      address: [null, Validators.required]
     })
   }
 
@@ -165,6 +175,10 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
     // collect the clinics data
     const clinics = data.clinics
     delete data.clinics
+
+    if (data.addresses?.length) {
+      data.addresses = data.addresses.filter((address) => address)
+    }
 
     return { data, clinics }
   }

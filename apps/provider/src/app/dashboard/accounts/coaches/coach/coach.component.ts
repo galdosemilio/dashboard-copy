@@ -8,6 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 type CoachComponentSection =
   | 'profile'
+  | 'addresses'
   | 'clinics'
   | 'communications'
   | 'login-history'

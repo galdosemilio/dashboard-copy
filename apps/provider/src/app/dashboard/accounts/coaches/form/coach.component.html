@@ -70,9 +70,25 @@
         </h3>
       </div> -->
 
-      <app-clinics-table-picker *ngIf="!coachId" required formControlName="clinics" [disabled]="isOwnProfile"
-      [source]="source"
+      <div *ngIf="!coachId" class="section-grid">
+        <p>{{ 'BOARD.ADDRESSES' | translate }}</p>
+
+        <div>
+          <ccr-account-addresses
+            formControlName="addresses"
+            [markAsTouched]="markAsTouched">
+          </ccr-account-addresses>
+        </div>
+      </div>
+
+      <app-clinics-table-picker
+      *ngIf="!coachId"
       [coachId]="coachId"
+      [disabled]="isOwnProfile"
+      [source]="source"
+      class="section-grid"
+      formControlName="clinics"
+      required
     ></app-clinics-table-picker>
   </div>
 </ng-container>

@@ -6,6 +6,7 @@ import {
   AccountPreference,
   AccountProvider,
   ActiveCampaign,
+  AddressProvider,
   Affiliation,
   Alerts,
   ApiService,
@@ -147,6 +148,7 @@ export const SdkApiProviders = [
     deps: [ApiService]
   },
   { provide: ActiveCampaign, useClass: ActiveCampaign, deps: [ApiService] },
+  { provide: AddressProvider, useClass: AddressProvider, deps: [ApiService] },
   { provide: Authentication, useClass: Authentication, deps: [ApiService] },
   { provide: Affiliation, useClass: Affiliation, deps: [ApiService] },
   { provide: Alerts, useClass: Alerts, deps: [ApiService] },

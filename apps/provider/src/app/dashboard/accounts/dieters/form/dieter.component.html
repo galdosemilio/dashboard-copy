@@ -136,6 +136,15 @@
       <ccr-app-section [args]="accountIdentifiersArgs" bindForm="identifiers" section="PATIENT_FORM.ACCOUNT_IDENTIFIERS_INPUT"></ccr-app-section>
     </div>
 
+    <div class="section-grid" *ngIf="!dieterId">
+      <p>{{ 'BOARD.ADDRESSES' | translate }}</p>
+
+      <ccr-account-addresses
+        formControlName="addresses"
+        [markAsTouched]="markAsTouched">
+      </ccr-account-addresses>
+    </div>
+
     <div class="section-grid" *ngIf="!dieterId && hasPackages">
       <ccr-app-section
         bindForm="packages"

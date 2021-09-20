@@ -66,6 +66,37 @@ describe('Patients -> Add Patient -> Select packages', function () {
       .find('input[data-placeholder="Weight Goal (Optional)"]')
       .type('200')
 
+    cy.get('button').contains('Add New Address').click()
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .find('div.mat-select-trigger')
+      .eq(6)
+      .click({ force: true })
+
+    cy.get('mat-option').contains('Billing').click({ force: true })
+    cy.tick(1000)
+    cy.get('.cdk-overlay-transparent-backdrop').click()
+
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="Address Line 1"]')
+      .type('Address Line 1')
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="Address Line 2"]')
+      .type('Address Line 2')
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="City"]')
+      .type('City')
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="State"]')
+      .type('State')
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="Postal Code"]')
+      .type('123456')
+
+    cy.tick(1000)
+
     cy.get('app-content-package-table').find('mat-row').as('packageRows')
 
     cy.get('@packageRows')
@@ -105,6 +136,16 @@ describe('Patients -> Add Patient -> Select packages', function () {
       expect(xhr.request.body.account).to.equal('1')
       expect(xhr.request.body.goal[0].goal).to.equal('weight')
       expect(xhr.request.body.goal[0].quantity).to.equal(90718)
+    })
+
+    cy.wait('@postAddressRequest').should((xhr) => {
+      expect(xhr.request.url).to.contain('1')
+      expect(xhr.request.body.address1).to.equal('Address Line 1')
+      expect(xhr.request.body.address2).to.equal('Address Line 2')
+      expect(xhr.request.body.city).to.equal('City')
+      expect(xhr.request.body.stateProvince).to.equal('State')
+      expect(xhr.request.body.postalCode).to.equal('123456')
+      expect(xhr.request.body.labels[0]).to.equal('1')
     })
 
     cy.wait(2000)

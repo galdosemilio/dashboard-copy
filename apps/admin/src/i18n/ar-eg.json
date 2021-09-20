@@ -104,6 +104,7 @@
     "BASIC_INFORMATION": "Basic Information",
     "DATE_OF_BIRTH": "تاريخ الولادة",
     "DELETE_MFA_INSTANCE": "إلغاء تنشيط قناة المصادقة ثنائية العوامل",
+    "GENDER": "جنس تذكير أو تأنيث",
     "PERSONAL_INFORMATION": "Personal Information",
     "SECURITY": "الأمان"
   },

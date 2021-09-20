@@ -25,6 +25,14 @@ fxLayoutAlign=" stretch">
     {{ 'GLOBAL.PROFILE' | translate }}
   </a>
   <a
+  [class.active]="section === 'addresses'"
+  [routerLink]="['.', { s: 'addresses' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center">
+    {{ 'BOARD.ADDRESSES' | translate }}
+  </a>
+  <a
   [class.active]="section === 'security'"
   [routerLink]="['.', { s: 'security' }]"
   ccrLinkActive="active"
@@ -60,7 +68,9 @@ fxLayoutAlign=" stretch">
       <mat-spinner></mat-spinner>
     </div>
   </ng-container>
-
+  <ng-container *ngSwitchCase="'addresses'">
+    <ccr-account-addresses [account]="profile.id"></ccr-account-addresses>
+  </ng-container>
   <ng-container *ngSwitchCase="'security'">
     <app-profile-security></app-profile-security>
   </ng-container>

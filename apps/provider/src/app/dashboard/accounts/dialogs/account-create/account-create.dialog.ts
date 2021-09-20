@@ -15,11 +15,13 @@ import { Package } from '@app/shared/components/package-table'
 import * as moment from 'moment'
 import {
   AccountProvider,
+  AddressProvider,
   Affiliation,
   Goal,
   PackageEnrollment
 } from '@coachcare/sdk'
 import { AccountIdentifierSyncer } from '../../dieters/form/account-identifiers/utils'
+import { Subject } from 'rxjs'
 
 export interface AccountCreateDialogData {
   accountType?: string
@@ -41,7 +43,7 @@ export class AccountCreateDialog implements BindForm, OnInit {
   form: FormGroup
   temp: {}
   zendeskLink = ''
-
+  markAsTouched$: Subject<void> = new Subject<void>()
   private organization: any
 
   constructor(
@@ -55,7 +57,8 @@ export class AccountCreateDialog implements BindForm, OnInit {
     private affiliation: Affiliation,
     private notifier: NotifierService,
     private formUtils: FormUtils,
-    private packageEnrollment: PackageEnrollment
+    private packageEnrollment: PackageEnrollment,
+    private addressProvider: AddressProvider
   ) {
     this.data = data ? data : {}
 
@@ -137,7 +140,6 @@ export class AccountCreateDialog implements BindForm, OnInit {
               })
               await this.updateGoals({ account: data.id, goals: goals })
               break
-
             case 'coach':
               // coach associations with its permissions
               clinics
@@ -164,12 +166,27 @@ export class AccountCreateDialog implements BindForm, OnInit {
               break
           }
 
+          if (data.addresses?.length) {
+            for (const address of data.addresses) {
+              await this.addressProvider.createAddress({
+                account: data.id,
+                address1: address.address1,
+                address2: address.address2 || undefined,
+                city: address.city,
+                country: address.country,
+                labels: address.labels,
+                postalCode: address.postalCode,
+                stateProvince: address.stateProvince
+              })
+            }
+          }
           // return the result to the caller component
           this.dialogRef.close(data)
         })
         .catch((err) => this.notifier.error(err))
     } else {
       this.formUtils.markAsTouched(this.form)
+      this.markAsTouched$.next()
     }
   }
 

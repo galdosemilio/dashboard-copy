@@ -621,6 +621,29 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     statusCode: 204,
     body: {}
   }).as('upsertFormSubmissionDraft')
+
+  cy.intercept('GET', '1.0/address/label', {
+    fixture: 'api/address/addressLabels'
+  })
+
+  cy.intercept('POST', `1.0/account/${Cypress.env('clientId')}/address`, {
+    statusCode: 204,
+    body: {}
+  }).as('postAddressRequest')
+
+  cy.intercept('PATCH', `1.0/account/${Cypress.env('clientId')}/address/**`, {
+    statusCode: 204,
+    body: {}
+  }).as('patchAddressRequest')
+
+  cy.intercept('DELETE', `1.0/account/${Cypress.env('clientId')}/address/**`, {
+    statusCode: 204,
+    body: {}
+  }).as('deleteAddressRequest')
+
+  cy.intercept('GET', `1.0/account/${Cypress.env('clientId')}/address**`, {
+    fixture: 'api/address/getAddresses'
+  })
 }
 
 const seti18n = (): void => {

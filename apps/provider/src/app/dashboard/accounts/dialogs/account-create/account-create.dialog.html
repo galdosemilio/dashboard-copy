@@ -27,13 +27,19 @@
       </mat-radio-group>
     </div>
 
-    <app-dieter-form bindForm="dieter"
-      [initial]="temp" (final)="onTypeChange($event)"
+    <app-dieter-form
+      bindForm="dieter"
+      [markAsTouched]="markAsTouched$"
+      [initial]="temp"
+      (final)="onTypeChange($event)"
       *ngIf="form.value.accountType === 'dieter'">
     </app-dieter-form>
 
-    <app-coach-form bindForm="coach"
-      [initial]="temp" (final)="onTypeChange($event)"
+    <app-coach-form
+      bindForm="coach"
+      [markAsTouched]="markAsTouched$"
+      [initial]="temp"
+      (final)="onTypeChange($event)"
       *ngIf="form.value.accountType === 'coach'">
     </app-coach-form>
 

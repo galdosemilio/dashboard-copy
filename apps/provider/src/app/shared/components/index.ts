@@ -3,6 +3,9 @@ export * from './messages/messages.interfaces'
 import { MatMomentDateModule } from '@coachcare/datepicker'
 
 import { AlertIconComponent } from './alert-icon/alert-icon.component'
+import { AddressFormComponent } from './address-form/address-form.component'
+import { AddressesComponent } from './addresses/addresses.component'
+import { AddAddressDialog } from './add-address-dialog'
 import { AppSectionComponent } from './app-section/app-section.component'
 import { CcrAccessLevelSelectorComponent } from './access-level-selector'
 import { CcrAccountAssociationsComponent } from './associations'
@@ -72,6 +75,9 @@ import {
 
 export {
   AlertIconComponent,
+  AddressFormComponent,
+  AddressesComponent,
+  AddAddressDialog,
   AppSectionComponent,
   CcrAccessLevelSelectorComponent,
   CcrAttendanceSelectorComponent,
@@ -129,6 +135,9 @@ export {
 
 export const CmpComponents = [
   AlertIconComponent,
+  AddressesComponent,
+  AddressFormComponent,
+  AddAddressDialog,
   AppSectionComponent,
   DateNavigator,
   DateRangeNavigator,
@@ -186,6 +195,7 @@ export const CmpComponents = [
 ]
 
 export const CmpEntryComponents = [
+  AddAddressDialog,
   LocaleSelectDialog,
   LocaleTableComponent,
   PackageEnrollComponent,

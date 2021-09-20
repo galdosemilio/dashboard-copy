@@ -104,6 +104,7 @@
     "BASIC_INFORMATION": "Informazioni di Base",
     "DATE_OF_BIRTH": "Data di nascita",
     "DELETE_MFA_INSTANCE": "Disattiva Canale di Autenticazione a Due Fattori",
+    "GENDER": "Genere",
     "PERSONAL_INFORMATION": "Informazioni Personali",
     "SECURITY": "Sicurezza"
   },

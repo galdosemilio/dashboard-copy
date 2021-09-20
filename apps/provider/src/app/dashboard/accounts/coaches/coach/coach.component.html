@@ -34,6 +34,14 @@ data-cy="coachProfileMenu">
     {{ 'GLOBAL.PROFILE' | translate }}
   </a>
   <a
+  [class.active]="section === 'addresses'"
+  [routerLink]="['.', { s: 'addresses' }]"
+  ccrLinkActive="active"
+  fxFlex
+  fxLayoutAlign="center center">
+    {{ 'BOARD.ADDRESSES' | translate }}
+  </a>
+  <a
   [class.active]="section === 'clinics'"
   [routerLink]="['.', { s: 'clinics' }]"
   ccrLinkActive="active"
@@ -62,6 +70,10 @@ data-cy="coachProfileMenu">
 <div class="ccr-subcomponent" [ngSwitch]="section">
     <div *ngSwitchCase="'profile'">
       <app-coach-profile></app-coach-profile>
+    </div>
+
+    <div *ngSwitchCase="'addresses'">
+      <ccr-account-addresses [account]="coachId"></ccr-account-addresses>
     </div>
 
     <div *ngSwitchCase="'clinics'">

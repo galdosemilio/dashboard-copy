@@ -5,6 +5,11 @@
         {{ 'GLOBAL.PROFILE' | translate }}
       </a>
     </li>
+    <li *ngIf="components.includes('addresses')">
+      <a mat-button [routerLink]="['.', {s: 'addresses'}]" [class.active]="section === 'addresses'">
+        {{ 'BOARD.ADDRESSES' | translate }}
+      </a>
+    </li>
     <li *ngIf="components.indexOf('labels') > -1">
       <a mat-button [routerLink]="['.', {s: 'labels'}]" [class.active]="section === 'labels'">
         {{ 'GLOBAL.PHASES_LABELS' | translate }}
@@ -73,6 +78,11 @@
   <ng-container *ngSwitchCase="'profile'">
 
     <app-dieter-profile></app-dieter-profile>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'addresses'">
+
+    <ccr-account-addresses [account]="account"></ccr-account-addresses>
 
   </ng-container>
   <ng-container *ngSwitchCase="'labels'">

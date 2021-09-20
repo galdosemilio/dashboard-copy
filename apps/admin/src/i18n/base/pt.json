@@ -104,6 +104,7 @@
     "BASIC_INFORMATION": "Informação básica",
     "DATE_OF_BIRTH": "Data de nascimento",
     "DELETE_MFA_INSTANCE": "Desativar a autenticação de dois factores",
+    "GENDER": "Gênero",
     "PERSONAL_INFORMATION": "Informação Pessoal",
     "SECURITY": "Segurança"
   },

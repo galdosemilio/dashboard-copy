@@ -18,6 +18,7 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
   account: string
   components = [
     'profile',
+    'addresses',
     'labels',
     'devices',
     'forms',
@@ -32,6 +33,7 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
   component = 'profile'
   defaultComponents = [
     'profile',
+    'addresses',
     'labels',
     'devices',
     'forms',

@@ -50,6 +50,8 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
   @Input()
   hideWeightGoal: boolean
 
+  @Input() markAsTouched: Subject<void>
+
   datepickerMode: 'datepicker' | 'text' = 'datepicker'
   form: FormGroup
   isLoading = false
@@ -75,6 +77,7 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
   hasPackages = false
   hasSelectedPackages = false
   showAccountIdentifiersInput = false
+
   public showUnderageNotice = false
 
   private minimumPatientAge = 16
@@ -135,6 +138,7 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
 
   createForm() {
     this.form = this.builder.group({
+      addresses: [[]],
       organization: this.context.organization.name,
       hasMinimumAgeConsent: [false, this.minimumAgeConsentValidator],
       id: this.dieterId,
@@ -156,13 +160,15 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
       clientStartedAt: null
     })
 
-    this.form.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        (controls) =>
-          (this.hasSelectedPackages =
-            controls.packages && controls.packages.length)
-      )
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((controls) => {
+      this.hasSelectedPackages = controls.packages && controls.packages.length
+    })
+  }
+
+  createAddressForm() {
+    return this.builder.group({
+      address: [null, Validators.required]
+    })
   }
 
   onDatepickerFocus($event: any) {
@@ -308,6 +314,11 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
       gender: data.clientGender,
       startedAt: data.clientStartedAt || undefined
     }
+
+    if (data.addresses?.length) {
+      data.addresses = data.addresses.filter((address) => address)
+    }
+
     delete data.clientStartedAt
     delete data.clientBirthday
     delete data.clientGender

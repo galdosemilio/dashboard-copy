@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "address1": "Address Line 1",
+      "address2": "Address Line 2",
+      "stateProvince": "State",
+      "city": "City",
+      "country": { "id": "US", "name": "United States" },
+      "postalCode": "123456",
+      "labels": [{ "id": "1", "name": "Billing" }]
+    }
+  ],
+  "pagination": {}
+}

@@ -1,0 +1,6 @@
+{
+  "data": [
+    { "id": "1", "name": "Billing" },
+    { "id": "2", "name": "Shipping" }
+  ]
+}

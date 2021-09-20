@@ -104,6 +104,7 @@
     "BASIC_INFORMATION": "Basis Information",
     "DATE_OF_BIRTH": "Fødselsdato",
     "DELETE_MFA_INSTANCE": "Deaktiver tofaktorautentiseringskanal",
+    "GENDER": "Køn",
     "PERSONAL_INFORMATION": "Personlig information",
     "SECURITY": "Sikkerhed"
   },

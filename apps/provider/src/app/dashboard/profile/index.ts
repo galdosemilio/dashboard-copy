@@ -7,7 +7,6 @@ import { MFAVerificatorComponent } from './mfa-verificator'
 import { MFASetupComponent } from './mfa/mfa-setup.component'
 import { ProfileComponent } from './profile.component'
 import { SecurityComponent } from './security'
-
 export const ProfileComponents = [
   MFASetupComponent,
   MFAVerificatorComponent,

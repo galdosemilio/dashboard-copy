@@ -104,6 +104,7 @@
     "BASIC_INFORMATION": "מידע בסיסי",
     "DATE_OF_BIRTH": "תאריך לידה",
     "DELETE_MFA_INSTANCE": "בטל את ערוץ האימות הדו-גורמי",
+    "GENDER": "מִין",
     "PERSONAL_INFORMATION": "מידע אישי",
     "SECURITY": "אבטחה"
   },

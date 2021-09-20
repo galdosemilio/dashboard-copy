@@ -1,0 +1,57 @@
+<div class="mt-20" [formGroup]="form">
+  <mat-grid-list class="ccr-grid" cols="1" rowHeight="70px">
+    <mat-grid-tile>
+      <div>
+
+      </div>
+      <mat-form-field>
+        <mat-select [placeholder]="'BOARD.ADDRESS_TYPE' | translate" required multiple formControlName="labels">
+          <mat-option *ngFor="let option of types" [value]="option.id">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('labels').getError('required')">{{ 'NOTIFY.ERROR.ADDRESS_TYPE_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput required formControlName="address1"
+        [placeholder]="'BOARD.ADDRESS_LINE_ONE' | translate">
+        <mat-error *ngIf="form.get('address1').getError('required')">{{ 'NOTIFY.ERROR.ADDRESS_LINE_ONE_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput formControlName="address2"
+        [placeholder]="'BOARD.ADDRESS_LINE_TWO' | translate">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput required formControlName="city"
+        [placeholder]="'BOARD.CITY' | translate">
+        <mat-error *ngIf="form.get('city').getError('required')">{{ 'NOTIFY.ERROR.ADDRESS_CITY_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput required formControlName="stateProvince"
+        [placeholder]="'BOARD.STATE' | translate">
+        <mat-error *ngIf="form.get('stateProvince').getError('required')">{{ 'NOTIFY.ERROR.ADDRESS_STATE_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput required formControlName="postalCode"
+        [placeholder]="'BOARD.POSTAL_CODE' | translate">
+        <mat-error *ngIf="form.get('postalCode').getError('required')">{{ 'NOTIFY.ERROR.ADDRESS_POSTAL_CODE_REQUIRED' | translate }}</mat-error>
+
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div fxFlex>
+        <ccr-country-selector [placeholder]="'BOARD.COUNTRY' | translate" fxFlex required formControlName="country"></ccr-country-selector>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

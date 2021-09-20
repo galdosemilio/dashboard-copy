@@ -1,5 +1,6 @@
 export * from './accessLevels'
 export * from './accountTypes'
+export * from './addressTypes'
 export * from './apiSummary'
 export * from './bodySummary'
 export * from './countries'

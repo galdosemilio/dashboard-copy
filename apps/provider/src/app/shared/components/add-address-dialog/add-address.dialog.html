@@ -1,0 +1,26 @@
+<div matDialogTitle>
+    <div>
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>{{'BOARD.ADD_NEW_ADDRESS' | translate}}</span>
+    </div>
+      <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+<div fxLayout="column" fxLayoutAlign="center stretch">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
+        <ccr-address-form [markAsTouched]="markAsTouched$" formControlName="address" required [types]="addressLabels"></ccr-address-form>
+    </form>
+</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button
+    (click)="onSubmit()"
+    class="ccr-button"
+    color="primary"
+    mat-button>{{ 'GLOBAL.CREATE' | translate }}</button>
+    <button class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CANCEL' | translate }}</button>
+</mat-dialog-actions>

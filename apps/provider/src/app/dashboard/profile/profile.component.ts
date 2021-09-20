@@ -17,6 +17,7 @@ import { AccountProvider } from '@coachcare/sdk'
 import * as moment from 'moment'
 
 type ProviderProfileSection =
+  | 'addresses'
   | 'communications'
   | 'profile'
   | 'security'
