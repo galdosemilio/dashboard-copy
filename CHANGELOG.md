@@ -1,3 +1,12 @@
+# [1.36.0](https://github.com/coachcare/dashboard/compare/v1.35.1...v1.36.0) (2021-09-21)
+
+
+### Features
+
+* added file vault to test results page [FRON-2311] ([1df55d3](https://github.com/coachcare/dashboard/commit/1df55d38b1c578b3a1b6e4c41f8b1f7aebbae6f6))
+* added other nutries to food table [FRON-2274] ([b780aaa](https://github.com/coachcare/dashboard/commit/b780aaaba55a5818e30789e5022c1430c317b814))
+* implemented patient waiting room feature [FRON-2301] ([0ae9d93](https://github.com/coachcare/dashboard/commit/0ae9d933c3704341bfbdf3eb1af7f89640425d17))
+
 ## [1.35.1](https://github.com/coachcare/dashboard/compare/v1.35.0...v1.35.1) (2021-09-18)
 
 
