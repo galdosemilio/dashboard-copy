@@ -214,6 +214,8 @@ export class ContextService {
   async updateOrganization(organization: any) {
     // MERGETODO: CHECK THIS TYPE!!!
     try {
+      this.api.appendHeaders({ organization: organization.id })
+
       // fetch assets if they are not present
       if (!organization.preferences) {
         let prefs = await this.orgservice.getPreferences(organization.id, true)
@@ -247,15 +249,13 @@ export class ContextService {
 
       this.updateColors(organization.assets.color || {})
 
-      if (organization.id && organization.permissions.viewAll) {
+      if (organization.id) {
         // stores this org as default
         await this.accservice.updatePreferences({
           account: this.user.id,
           defaultOrganization: organization.id
         })
       }
-
-      this.api.appendHeaders({ organization: organization.id } as any)
     } catch (e) {}
 
     this.organization$.next(organization)
