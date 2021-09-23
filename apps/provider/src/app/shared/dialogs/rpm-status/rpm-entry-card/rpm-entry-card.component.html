@@ -6,7 +6,8 @@
     <p class="notice entry" *ngIf="!entryPending">
         {{ 'RPM.RPM_ENABLED' | translate:{
             patient: client.firstName + ' ' + client.lastName,
-            date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY' }
+            date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
+            clinic: rpmEntry.organization }
         }}
     </p>
     <div *ngIf="!canDisableRPM">
