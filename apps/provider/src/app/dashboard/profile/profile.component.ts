@@ -14,6 +14,7 @@ import {
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider } from '@coachcare/sdk'
+import * as moment from 'moment'
 
 type ProviderProfileSection =
   | 'communications'
@@ -73,6 +74,13 @@ export class ProfileComponent implements OnDestroy, OnInit {
 
     const updateRequest: AccUpdateRequest = {
       ...formData,
+      profile: {
+        birthday: formData.birthday
+          ? (formData.birthday as moment.Moment).format('YYYY-MM-DD')
+          : undefined,
+        height: formData.height || undefined,
+        gender: formData.gender || undefined
+      },
       phone: formData.phone.phone,
       countryCode: formData.phone.countryCode
     }

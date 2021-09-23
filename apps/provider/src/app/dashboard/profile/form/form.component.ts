@@ -17,6 +17,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
 import { Timezone } from '@coachcare/sdk'
+import * as moment from 'moment'
 
 @UntilDestroy()
 @Component({
@@ -84,11 +85,14 @@ export class FormComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.form = this.builder.group({
+      birthday: '',
       id: null,
       firstName: '',
       lastName: '',
       phone: [null, [ccrPhoneValidator]],
       email: '',
+      gender: '',
+      height: '',
       timezone: 'America/New_York',
       measurementPreference: null,
       preferredLocales: []
@@ -98,6 +102,10 @@ export class FormComponent implements OnInit, OnDestroy {
   populateFields(): void {
     this.form.patchValue({
       ...this.profile,
+      ...(this.profile.profile ? this.profile.profile : {}),
+      birthday: this.profile.profile?.birthday
+        ? moment(this.profile.profile.birthday)
+        : null,
       phone: {
         phone: this.profile.phone,
         countryCode: this.profile.countryCode ?? '+1'

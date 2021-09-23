@@ -5,7 +5,7 @@ import {
   GetAllOrganizationRequest,
   GetAllOrganizationResponse,
   GetListOrganizationRequest,
-  UpdateOrganizationRequest
+  OrgUpdateRequest
 } from '@coachcare/sdk'
 import { OrganizationProvider } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
@@ -40,7 +40,7 @@ export class OrganizationsDatabase extends AppDatabase {
     return this.organization.create(request)
   }
 
-  update(request: UpdateOrganizationRequest) {
+  update(request: OrgUpdateRequest) {
     return this.organization.update(request)
   }
 

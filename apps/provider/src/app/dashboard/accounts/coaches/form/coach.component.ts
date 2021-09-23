@@ -23,6 +23,7 @@ import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import * as moment from 'moment'
 
 @UntilDestroy()
 @Component({
@@ -97,10 +98,13 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
 
   createForm() {
     this.form = this.builder.group({
+      birthday: '',
       id: this.coachId,
       firstName: '',
       lastName: '',
       email: '',
+      gender: '',
+      height: '',
       password: Math.random().toString(13).substr(2), // TODO the API should do this
       isActive: true,
       timezone: 'America/New_York',
@@ -122,6 +126,10 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
         // update the form
         this.form.patchValue({
           ...account,
+          ...(account.profile ? account.profile : {}),
+          birthday: account.profile?.birthday
+            ? moment(account.profile.birthday)
+            : null,
           password: undefined,
           phone: {
             phone: account.phone,
@@ -141,6 +149,18 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
       phone: coachData.phone.phone,
       countryCode: coachData.phone.countryCode
     })
+
+    data.profile = {
+      gender: data.gender || undefined,
+      height: data.height || undefined,
+      birthday: data.birthday
+        ? (data.birthday as moment.Moment).format('YYYY-MM-DD')
+        : undefined
+    }
+
+    delete data.gender
+    delete data.height
+    delete data.birthday
 
     // collect the clinics data
     const clinics = data.clinics

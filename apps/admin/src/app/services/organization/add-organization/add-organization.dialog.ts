@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 
 import { OrganizationsDatabase } from '@coachcare/backend/data'
-import { UpdateOrganizationRequest } from '@coachcare/sdk'
+import { OrgUpdateRequest } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { NotifierService } from '@coachcare/common/services'
 
@@ -47,7 +47,7 @@ export class AddOrganizationDialog {
     if (!this.selectedOrganization) {
       return
     }
-    let req: UpdateOrganizationRequest
+    let req: OrgUpdateRequest
     if (this.data.addChild) {
       req = {
         id: this.selectedOrganization,

@@ -13,6 +13,7 @@ import { OrganizationAutocompleterComponent } from './autocompleters/organizatio
 import {
   CcrDateInputComponent,
   FeatureToggleInputComponent,
+  GenderInputComponent,
   OptionBlockFieldComponent,
   TranslatedTextFormFieldComponent
 } from './fields'
@@ -52,6 +53,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     CountryFormFieldComponent,
     EmailFormFieldComponent,
     FeatureToggleInputComponent,
+    GenderInputComponent,
     LangFormFieldComponent,
     NumberFormFieldComponent,
     PasswordFormFieldComponent,
@@ -78,6 +80,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
     CountryFormFieldComponent,
     EmailFormFieldComponent,
     FeatureToggleInputComponent,
+    GenderInputComponent,
     LangFormFieldComponent,
     NumberFormFieldComponent,
     PasswordFormFieldComponent,
