@@ -1,3 +1,10 @@
+## [1.36.1](https://github.com/coachcare/dashboard/compare/v1.36.0...v1.36.1) (2021-09-23)
+
+
+### Bug Fixes
+
+* solved issue with clinic interpolation [FRON-2363] ([11636c7](https://github.com/coachcare/dashboard/commit/11636c71dfcc0f5162945430c7e33a11771672c4))
+
 # [1.36.0](https://github.com/coachcare/dashboard/compare/v1.35.1...v1.36.0) (2021-09-21)
 
 
