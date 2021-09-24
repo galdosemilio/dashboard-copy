@@ -74,6 +74,15 @@
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-remove-enrollments-on-assoc"
+    [inheritable]="false"
+    [label]="'GLOBAL.REMOVE_ENROLLMENTS_ON_ASSOC' | translate"
+    formControlName="removeEnrollmentsOnAssoc">
+    </ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
     data-cy="org-settings-section-features-autoenroll"
     [inheritable]="false"
     [label]="'GLOBAL.AUTO_ENROLL_CLIENT' | translate"

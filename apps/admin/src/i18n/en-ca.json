@@ -249,6 +249,7 @@
     "PREVIOUS": "Previous",
     "PROFILE": "Profile",
     "REGISTER_NEW_CLINIC": "Register a new Company",
+    "REMOVE_ENROLLMENTS_ON_ASSOC": "Remove Patient Enrollments on Association",
     "REQUEST_RESET": "Reset Password",
     "RESET_PASSWORD": "Reset Password",
     "RETRY": "Retry",

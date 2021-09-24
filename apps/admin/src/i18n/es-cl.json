@@ -249,6 +249,7 @@
     "PREVIOUS": "Anterior",
     "PROFILE": "Perfil",
     "REGISTER_NEW_CLINIC": "Registrar una nueva Compañía",
+    "REMOVE_ENROLLMENTS_ON_ASSOC": "Eliminar Enrolamientos de Pacientes al Asociar",
     "REQUEST_RESET": "Cambiar Contraseña",
     "RESET_PASSWORD": "Restablecer Contraseña",
     "RETRY": "Reintentar",

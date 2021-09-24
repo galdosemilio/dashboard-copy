@@ -92,7 +92,9 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           id: this.orgId,
           automaticDisassociation: {
             client: formValue.patientAutoUnenroll || false
-          }
+          },
+          removeEnrollmentsOnAssociation:
+            formValue.removeEnrollmentsOnAssoc || false
         })
       )
 
@@ -231,6 +233,7 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       openAddClient: [null],
       openAddProvider: [null],
       patientAutoUnenroll: [null],
+      removeEnrollmentsOnAssoc: [null],
       rpm: [null],
       sequences: [null],
       useAutoThreadParticipation: [null],
@@ -262,6 +265,9 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         useAutoThreadParticipation: this.featurePrefs.messagingPrefs
           ? this.featurePrefs.messagingPrefs.useAutoThreadParticipation
           : false,
+        removeEnrollmentsOnAssoc:
+          this.featurePrefs.associationPrefs.removeEnrollmentsOnAssociation ??
+          false,
         rpm:
           this.featurePrefs.rpmPrefs &&
           this.featurePrefs.rpmPrefs.organization.id === this.orgId

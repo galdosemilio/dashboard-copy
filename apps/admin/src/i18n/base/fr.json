@@ -249,6 +249,7 @@
     "PREVIOUS": "Précédent",
     "PROFILE": "Profil",
     "REGISTER_NEW_CLINIC": "Inscrire une nouvelle entreprise",
+    "REMOVE_ENROLLMENTS_ON_ASSOC": "Supprimer les inscriptions du patient sur l'association",
     "REQUEST_RESET": "Réinitialiser le mot de passe",
     "RESET_PASSWORD": "Réinitialiser le mot de passe",
     "RETRY": "Recommencez",
