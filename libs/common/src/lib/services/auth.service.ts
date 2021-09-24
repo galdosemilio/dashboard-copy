@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { ApiService } from '@coachcare/sdk'
 import {
   APP_ENVIRONMENT,
   AppEnvironment,
@@ -14,7 +13,6 @@ import { STORAGE_ADMIN_URL, STORAGE_PROVIDER_URL } from './cookie.service'
 @Injectable()
 export class AuthService {
   constructor(
-    api: ApiService,
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
     private router: Router
   ) {

@@ -83,7 +83,7 @@ import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
 import { environment } from './environments/environment'
 
 const authenticationToken = new AuthenticationToken()
-const headers = new ApiHeaders()
+export const SDK_HEADERS = new ApiHeaders()
 
 const generalApiService = new ApiService({
   token: authenticationToken,
@@ -93,7 +93,7 @@ const generalApiService = new ApiService({
       ? { enabled: true, options: { defaultRateLimit: 17 } }
       : { enabled: true, options: { defaultRateLimit: 5 } }
     : { enabled: false },
-  headers
+  headers: SDK_HEADERS
 })
 
 const measurementApiService = new ApiService({
@@ -105,7 +105,7 @@ const measurementApiService = new ApiService({
         options: { headers: { enabled: false }, defaultRateLimit: 2 }
       }
     : { enabled: false },
-  headers
+  headers: SDK_HEADERS
 })
 
 generalApiService.setEnvironment(environment.ccrApiEnv)
