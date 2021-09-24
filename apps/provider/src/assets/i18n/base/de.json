@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "TAGESDURCHSCHNITT↵KALORIEN",
     "DAILY_AVG_CARB": "TAGESDURCHSCHNITT↵KOHLENHYDRATE",
+    "DAILY_AVG_CHOLESTEROL": "Tagesdurchschnitt Cholesterin",
     "DAILY_AVG_FAT": "TAGESDURCHSCHNITT↵FETT",
     "DAILY_AVG_FIBER": "Tagesdurchschnitt Ballaststoffe",
     "DAILY_AVG_NET_CARBS": "Tägliche AVG-Netzkohlenhydrate",
     "DAILY_AVG_NOTICE": "*Tage ohne verzehrte Lebensmittel werden nicht in die tägliche Durchschnittsberechnung einbezogen",
     "DAILY_AVG_PROTEIN": "TAGESDURCHSCHNITT↵PROTEIN",
+    "DAILY_AVG_SODIUM": "Tagesdurchschnitt Natrium",
     "DAILY_AVG_SUGAR": "Tagesdurchschnitt Zucker",
     "DAILY_AVG_S_FAT": "Tagesdurchschnitt Gesättigte Fette",
     "SIGNUPS": "Anmeldungen"

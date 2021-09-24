@@ -58,7 +58,13 @@ export class FoodComponent implements OnInit, OnDestroy {
 
     this.responsive
       .pipe(untilDestroyed(this), select(responsiveSelector))
-      .subscribe((state) => (this.cols = state.columns))
+      .subscribe((state) => {
+        /**
+         * We're recalculating the column amount due to the general
+         * case being 4 columns
+         */
+        this.cols = state.columns === 2 ? 2 : 5
+      })
   }
 
   ngOnDestroy() {

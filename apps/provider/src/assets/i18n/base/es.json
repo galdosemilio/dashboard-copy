@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "PROM. DIARIO\nCALORÍAS",
     "DAILY_AVG_CARB": "PROM. DIARIO\nCARB",
+    "DAILY_AVG_CHOLESTEROL": "Colesterol promedio diario",
     "DAILY_AVG_FAT": "PROM. DIARIO\nGRASA",
     "DAILY_AVG_FIBER": "PROM. DIARIO FIBRA",
     "DAILY_AVG_NET_CARBS": "PROM. DIARIO CARBS NETOS",
     "DAILY_AVG_NOTICE": "*Los días sin alimentos consumidos no están incluidos en el cálculo promedio diario",
     "DAILY_AVG_PROTEIN": "PROM. DIARIO\nPROTEÍNA",
+    "DAILY_AVG_SODIUM": "Sodio promedio diario",
     "DAILY_AVG_SUGAR": "PROM. DIARIO AZÚCAR",
     "DAILY_AVG_S_FAT": "PROM. DIARIO GRASA SAT.",
     "SIGNUPS": "Inscripciones"

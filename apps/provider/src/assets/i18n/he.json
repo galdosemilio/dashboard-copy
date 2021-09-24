@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "ממוצע יומי קלוריות",
     "DAILY_AVG_CARB": "ממוצע יומי פחמימות",
+    "DAILY_AVG_CHOLESTEROL": "כולסטרול ממוצע יומי",
     "DAILY_AVG_FAT": "ממוצע יומי שומן",
     "DAILY_AVG_FIBER": "סיב ממוצע יומי",
     "DAILY_AVG_NET_CARBS": "יומי AVG נטו פחמימות",
     "DAILY_AVG_NOTICE": "ימים ללא מזון נצרך אינם כלולים בחישוב הממוצע היומי*",
     "DAILY_AVG_PROTEIN": "ממוצע יומי חלבון",
+    "DAILY_AVG_SODIUM": "נתרן ממוצע יומי",
     "DAILY_AVG_SUGAR": "סוכר יומי ממוצע",
     "DAILY_AVG_S_FAT": "שומן רווי ממוצע יומי",
     "SIGNUPS": "הרשמות"

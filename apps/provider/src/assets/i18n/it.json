@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "MEDIA GIORNALIERA↵CALORIE",
     "DAILY_AVG_CARB": "MEDIA GIORNALIERA↵CARBOIDRATI",
+    "DAILY_AVG_CHOLESTEROL": "Colesterolo medio giornaliero",
     "DAILY_AVG_FAT": "MEDIA GIORNALIERA↵GRASSI",
     "DAILY_AVG_FIBER": "Media Giornaliera Fibre",
     "DAILY_AVG_NET_CARBS": "Carbs di AVG quotidiani",
     "DAILY_AVG_NOTICE": "*I giorni senza cibo consumato non sono inclusi nel calcolo della media giornaliera",
     "DAILY_AVG_PROTEIN": "MEDIA GIORNALIERA↵PROTEINE",
+    "DAILY_AVG_SODIUM": "Sodio medio giornaliero",
     "DAILY_AVG_SUGAR": "Media Giornaliera Zuccheri",
     "DAILY_AVG_S_FAT": "Media Giornaliera Grassi Sat.",
     "SIGNUPS": "Iscrizioni"

@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "CALORIES MOY. PAR JOUR",
     "DAILY_AVG_CARB": "GLUCIDES MOY. PAR JOUR",
+    "DAILY_AVG_CHOLESTEROL": "Cholestérol quotidien moyen",
     "DAILY_AVG_FAT": "GRAISSES MOY. PAR JOUR",
     "DAILY_AVG_FIBER": "FIBRES MOY. PAR JOUR",
     "DAILY_AVG_NET_CARBS": "Glucides quotidiens avec net avg",
     "DAILY_AVG_NOTICE": "*Les jours sans aliments consommés ne sont pas inclus dans le calcul de la moyenne journalière",
     "DAILY_AVG_PROTEIN": "PROTÉINES MOY. PAR JOUR",
+    "DAILY_AVG_SODIUM": "Moyenne quotidienne de sodium",
     "DAILY_AVG_SUGAR": "SUCRE MOY. PAR JOUR",
     "DAILY_AVG_S_FAT": "GRAISSES SAT. MOY. PAR JOUR",
     "SIGNUPS": "Inscriptions"

@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "معدل السعرات الحرارية اليومية",
     "DAILY_AVG_CARB": "معدل الكربوهيدرات اليومية",
+    "DAILY_AVG_CHOLESTEROL": "متوسط الكوليسترول اليومي",
     "DAILY_AVG_FAT": "معدل الدهون اليومية",
     "DAILY_AVG_FIBER": "متوسط ​​الألياف يوميا",
     "DAILY_AVG_NET_CARBS": "AVG صافي الكربوهيدرات",
     "DAILY_AVG_NOTICE": "لا يتم تضمين أيام بدون طعام مستهلك في حساب المتوسط ​​اليومي*",
     "DAILY_AVG_PROTEIN": "معدل البروتين اليومي",
+    "DAILY_AVG_SODIUM": "المتوسط اليومي للصوديوم",
     "DAILY_AVG_SUGAR": "متوسط ​​السكر اليومي",
     "DAILY_AVG_S_FAT": "المعدل اليومي للدهون المشبعة",
     "SIGNUPS": "تسجيلات الدخول"

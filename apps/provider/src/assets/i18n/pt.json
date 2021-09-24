@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "MÉDIA DIÁRIA.↵CALORIAS",
     "DAILY_AVG_CARB": "MÉDIA DIÁRIA.↵CARBS",
+    "DAILY_AVG_CHOLESTEROL": "Colesterol médio diário",
     "DAILY_AVG_FAT": "MÉDIA DIÁRIA.↵GORDURA",
     "DAILY_AVG_FIBER": "Fibra Média Diária",
     "DAILY_AVG_NET_CARBS": "Carboidratos Daily AVG Net",
     "DAILY_AVG_NOTICE": "*Os dias sem alimentos consumidos não são incluídos no cálculo da média diária",
     "DAILY_AVG_PROTEIN": "MÉDIA DIÁRIA.↵PROTEÍNA",
+    "DAILY_AVG_SODIUM": "Sódio médio diário",
     "DAILY_AVG_SUGAR": "Açúcar Médio Diário",
     "DAILY_AVG_S_FAT": "Gordura Sat. Média Diária",
     "SIGNUPS": "Inscrições"

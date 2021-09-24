@@ -54,6 +54,14 @@
 
       </div>
     </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <div class="gray-box">
+          <p class="subtext">{{ 'GRAPH.DAILY_AVG_SODIUM' | translate }} <span class="subtext-value">{{ data.sodium.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
+          <p class="subtext">{{ 'GRAPH.DAILY_AVG_CHOLESTEROL' | translate }} <span class="subtext-value">{{ data.cholesterol.avg | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
+        </div>
+      </div>
+    </mat-grid-tile>
   </mat-grid-list>
   <small class="average-explainer">{{ 'GRAPH.DAILY_AVG_NOTICE' | translate }}</small>
 </div>

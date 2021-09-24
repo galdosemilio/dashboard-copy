@@ -33,6 +33,12 @@ mat-grid-tile {
     width: 100%;
   }
 
+  .gray-box {
+    justify-content: center;
+    height: 129px;
+    background-color: mat-color($ccr-background, app-bar);
+  }
+
   .subtext {
     font-size: 12px;
     margin: 0 auto 0.5em auto;

@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "DAGLIGE GENNEMSNIT.↵KALORIER",
     "DAILY_AVG_CARB": "DAGLIGE GENNEMSNIT.↵KULHYDRATER",
+    "DAILY_AVG_CHOLESTEROL": "Dagligt gennemsnitligt kolesterol",
     "DAILY_AVG_FAT": "DAGLIGE GENNEMSNIT.↵FEDT",
     "DAILY_AVG_FIBER": "Daglige gennemsnit Fiber",
     "DAILY_AVG_NET_CARBS": "Daglige AVG NET CARBS",
     "DAILY_AVG_NOTICE": "*Dage uden konsumeret mad er ikke inkluderet i den daglige gennemsnitlige beregning",
     "DAILY_AVG_PROTEIN": "DAGLIGE GENNEMSNIT.↵PROTEIN",
+    "DAILY_AVG_SODIUM": "Dagligt gennemsnitligt natrium",
     "DAILY_AVG_SUGAR": "Dagligt gennemsnit sukker",
     "DAILY_AVG_S_FAT": "Dagligt gennemsnit Sat. Fedt",
     "SIGNUPS": "Tilmeldinger"

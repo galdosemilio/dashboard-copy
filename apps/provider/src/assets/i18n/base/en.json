@@ -609,11 +609,13 @@
   "GRAPH": {
     "DAILY_AVG_CALORIES": "DAILY AVG.\nCALORIES",
     "DAILY_AVG_CARB": "DAILY AVG.\nCARB",
+    "DAILY_AVG_CHOLESTEROL": "Daily Avg Cholesterol",
     "DAILY_AVG_FAT": "DAILY AVG.\nFAT",
     "DAILY_AVG_FIBER": "Daily Avg Fiber",
     "DAILY_AVG_NET_CARBS": "Daily Avg Net Carbs",
     "DAILY_AVG_NOTICE": "*Days without consumed food are not included in the daily average calculation",
     "DAILY_AVG_PROTEIN": "DAILY AVG.\nPROTEIN",
+    "DAILY_AVG_SODIUM": "Daily Avg Sodium",
     "DAILY_AVG_SUGAR": "Daily Avg Sugar",
     "DAILY_AVG_S_FAT": "Daily Avg Sat. Fat",
     "SIGNUPS": "Signups"
