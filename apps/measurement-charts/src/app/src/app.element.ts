@@ -33,22 +33,22 @@ export class AppElement extends HTMLElement {
     const data: BaseData = {
       dataPointTypeId,
       token: params.get('token'),
-      accountId: params.get('accountId') ?? undefined,
-      locale: params.get('locale') ?? baseData.locale,
-      lastDate: params.get('lastDate') ?? DateTime.now().toFormat('yyyy-MM-dd'),
-      timezone: params.get('timezone') ?? baseData.timezone,
-      timeframe: (params.get('timeframe') as Timeframe) ?? baseData.timeframe,
+      accountId: params.get('accountId') || undefined,
+      locale: params.get('locale') || baseData.locale,
+      lastDate: params.get('lastDate') || DateTime.now().toFormat('yyyy-MM-dd'),
+      timezone: params.get('timezone') || baseData.timezone,
+      timeframe: (params.get('timeframe') as Timeframe) || baseData.timeframe,
       metric:
-        (params.get('metric') as UserMeasurementPreferenceType) ??
+        (params.get('metric') as UserMeasurementPreferenceType) ||
         baseData.metric,
-      view: (params.get('view') as Tab) ?? Tab.LIST,
+      view: (params.get('view') as Tab) || Tab.LIST,
       colors: {
-        primary: params.get('primary-color') ?? baseData.colors.primary,
-        accent: params.get('accent-color') ?? baseData.colors.accent,
-        text: params.get('text-color') ?? baseData.colors.text
+        primary: params.get('primary-color') || baseData.colors.primary,
+        accent: params.get('accent-color') || baseData.colors.accent,
+        text: params.get('text-color') || baseData.colors.text
       },
       dataPointTypes: [],
-      sourceId: params.get('sourceId') ?? undefined
+      sourceId: params.get('sourceId') || undefined
     }
 
     this.onMessage(data)
