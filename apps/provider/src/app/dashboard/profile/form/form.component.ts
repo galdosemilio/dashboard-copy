@@ -8,7 +8,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
-import { CurrentAccount } from '@app/service'
+import { ContextService, CurrentAccount } from '@app/service'
 import { FormUtils, MEASUREMENT_UNITS } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
 import { AccUpdateRequest, TimezoneResponse } from '@coachcare/sdk'
@@ -28,6 +28,7 @@ import * as moment from 'moment'
 export class FormComponent implements OnInit, OnDestroy {
   _data = new BehaviorSubject<CurrentAccount>(null)
   form: FormGroup
+  public isProvider = false
   lang: String
   colSpan = 2
   rowSpan = false
@@ -49,6 +50,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   constructor(
     private builder: FormBuilder,
+    private context: ContextService,
     private responsive: Store<UIResponsiveState>,
     private translator: TranslateService,
     private timezone: Timezone,
@@ -56,6 +58,8 @@ export class FormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.isProvider = this.context.isProvider
+
     // setup the FormGroup
     this.createForm()
 

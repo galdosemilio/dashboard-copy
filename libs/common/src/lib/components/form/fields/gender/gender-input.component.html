@@ -1,5 +1,5 @@
 <mat-form-field [formGroup]="form" fxFlex>
-  <mat-select required formControlName="gender" [placeholder]="'BOARD.GENDER' | translate">
+  <mat-select [required]="required" formControlName="gender" [placeholder]="'BOARD.GENDER' | translate">
     <mat-option *ngFor="let gender of genders" [value]="gender.value">
       {{ gender.viewValue | translate }}
     </mat-option>

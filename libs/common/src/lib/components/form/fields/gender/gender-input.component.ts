@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit } from '@angular/core'
+import { Component, forwardRef, Input, OnInit } from '@angular/core'
 import {
   ControlValueAccessor,
   FormBuilder,
@@ -21,6 +21,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   ]
 })
 export class GenderInputComponent implements ControlValueAccessor, OnInit {
+  @Input() required = false
+
   public form: FormGroup
   public genders = [
     { value: 'male', viewValue: _('SELECTOR.GENDER.MALE') },
