@@ -1,3 +1,18 @@
+# [1.37.0](https://github.com/coachcare/dashboard/compare/v1.36.1...v1.37.0) (2021-09-27)
+
+
+### Bug Fixes
+
+* adjusted fallback behavior of properties [MOB-3326] ([487d643](https://github.com/coachcare/dashboard/commit/487d643dde1e872a36bb5c8930f6391d661f2e65))
+* adjusted org header management [FRON-2330] ([263034c](https://github.com/coachcare/dashboard/commit/263034c31834db1e6a2d87ae49fc8138d23b8cd2))
+* clear stored headers on page load [FRON-2330] ([300ba20](https://github.com/coachcare/dashboard/commit/300ba201d7b90c1e2600bdc1dd2c70adafce1b88))
+
+
+### Features
+
+* added extra properties for providers [FRON-2353] ([4ef7c5c](https://github.com/coachcare/dashboard/commit/4ef7c5ccc058d40930dd01fcf9c5d1a9a32d625a))
+* removeEnrollmentsOnAssociation feature toggle [FRON-2360] ([3842db8](https://github.com/coachcare/dashboard/commit/3842db8ed1f0b6319a4b6c5d1e0b3ff6cff2c259))
+
 ## [1.36.1](https://github.com/coachcare/dashboard/compare/v1.36.0...v1.36.1) (2021-09-23)
 
 
