@@ -1,3 +1,10 @@
+## [1.37.1](https://github.com/coachcare/dashboard/compare/v1.37.0...v1.37.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* marked certain coach input as non-required [FRON-2353] ([7ea321a](https://github.com/coachcare/dashboard/commit/7ea321a11ae06305bbab2f74e3b8b355c928806c))
+
 # [1.37.0](https://github.com/coachcare/dashboard/compare/v1.36.1...v1.37.0) (2021-09-27)
 
 
