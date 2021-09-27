@@ -22,6 +22,7 @@ export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
 
   id: string
   name: string
+  moodRating?: string
   imageUrl: string
   saturatedFat = 0
   polyunsaturatedFat = 0

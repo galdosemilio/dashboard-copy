@@ -15,6 +15,32 @@ import { ContextService, NotifierService } from '@app/service'
 import { ViewImageDialog } from '@app/shared/dialogs'
 import { FoodMeal } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { resolveConfig } from '@app/config/section'
+
+enum MOOD_COLORS {
+  SAD = '#F16961',
+  MEH = '#F7AC41',
+  OKAY = '#FCEE21',
+  HAPPY = '#BDE121',
+  EXCITED = '#7ED321',
+  UNKNOWN = 'transparent'
+}
+
+enum MOOD_VALUES {
+  SAD = 1,
+  MEH = 2,
+  OKAY = 3,
+  HAPPY = 4,
+  EXCITED = 5
+}
+
+enum MOOD_ICONS {
+  SAD = 'sentiment_very_dissatisfied',
+  MEH = 'sentiment_dissatisfied',
+  OKAY = 'sentiment_neutral',
+  HAPPY = 'sentiment_satisfied',
+  EXCITED = 'sentiment_very_satisfied'
+}
 
 @UntilDestroy()
 @Component({
@@ -27,6 +53,7 @@ export class FoodExpandableTable implements OnInit {
   @Input() source: FoodDataSource
 
   public rows: FoodDayAmount[] = []
+  public showFoodMoodAndNote = false
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -49,6 +76,13 @@ export class FoodExpandableTable implements OnInit {
         this.rows = this.cleanData(rows)
         this.cdr.detectChanges()
       })
+
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
+      this.showFoodMoodAndNote = resolveConfig(
+        'JOURNAL.SHOW_FOOD_MOOD_AND_NOTE',
+        org
+      )
+    })
   }
 
   private cleanData(rows: any[]): any[] {
@@ -206,6 +240,42 @@ export class FoodExpandableTable implements OnInit {
       })
     } catch (error) {
       this.notify.error(error)
+    }
+  }
+
+  getMoodIcon(meal: ConsumedFood): string {
+    switch (meal.moodRating) {
+      case MOOD_VALUES.SAD:
+        return MOOD_ICONS.SAD
+      case MOOD_VALUES.MEH:
+        return MOOD_ICONS.MEH
+      case MOOD_VALUES.OKAY:
+        return MOOD_ICONS.OKAY
+      case MOOD_VALUES.HAPPY:
+        return MOOD_ICONS.HAPPY
+      case MOOD_VALUES.EXCITED:
+        return MOOD_ICONS.EXCITED
+
+      default:
+        return
+    }
+  }
+
+  getMoodIconColor(meal: ConsumedFood): string {
+    switch (meal.moodRating) {
+      case MOOD_VALUES.SAD:
+        return MOOD_COLORS.SAD
+      case MOOD_VALUES.MEH:
+        return MOOD_COLORS.MEH
+      case MOOD_VALUES.OKAY:
+        return MOOD_COLORS.OKAY
+      case MOOD_VALUES.HAPPY:
+        return MOOD_COLORS.HAPPY
+      case MOOD_VALUES.EXCITED:
+        return MOOD_COLORS.EXCITED
+
+      default:
+        return MOOD_COLORS.UNKNOWN
     }
   }
 }

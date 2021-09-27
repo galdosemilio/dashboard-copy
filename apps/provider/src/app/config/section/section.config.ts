@@ -30,6 +30,7 @@ import {
   FullyAliveTestSectionConfig
 } from './fully-alive'
 import { GrandViewHealthSectionConfig } from './grand-view'
+import { HernriedSectionConfig } from './hernried'
 import { InhealthSectionConfig } from './inhealth'
 import { LeanMDSectionConfig } from './leanmd/leanmd.section.config'
 import { MDTeamSectionConfig } from './mdteam'
@@ -92,7 +93,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7384']: MDTeamSectionConfig,
     ['7520']: CurryCareTestSectionConfig,
     ['7534']: PeakHealthGroupSectionConfig,
-    ['7535']: WellCoreTestSectionConfig
+    ['7535']: WellCoreTestSectionConfig,
+    ['7536']: HernriedSectionConfig
   },
   prod: {
     ['4050']: LeanMDSectionConfig,
@@ -115,6 +117,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6439']: DrVProdSectionConfig,
     ['4049']: CurryCareProdSectionConfig,
     ['6869']: PeakHealthGroupSectionConfig,
-    ['6891']: WellCoreProdSectionConfig
+    ['6891']: WellCoreProdSectionConfig,
+    ['6475']: HernriedSectionConfig
   }
 }

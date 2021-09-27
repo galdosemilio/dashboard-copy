@@ -82,6 +82,7 @@ export class FoodDataSource extends StatsDataSource<
         const typeAmount = new FoodDayAmount(true, 1)
         gt.forEach((m) => {
           typeAmount.type = m.type
+          typeAmount.moodRating = m.moodRating
           typeAmount.calculateAmount(m)
           m.level = 2
           m.isHidden = true

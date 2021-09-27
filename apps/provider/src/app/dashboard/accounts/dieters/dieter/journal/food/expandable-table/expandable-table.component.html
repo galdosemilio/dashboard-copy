@@ -28,13 +28,28 @@
         <div *ngIf="row.image?.thumbnail" (click)="onOpenThumbnail(row)" class="meal-image-thumbnail" [ngClass]="{'clickable' : row.image.thumbnail !== 'assets/image-placeholder.png'}">
           <img [src]="row.image.thumbnail">
         </div>
-        <span class="bold">{{ row.name }}</span>
-        <br *ngIf="row.serving">
-        <small *ngIf="row.serving" class="lowercase-text serving-amount">
-          {{ row.serving | fraction }} {{ 'GLOBAL.FOOD_KEYS' | translate }}
-        </small>
-        <br *ngIf="row.level !== 1 && !row.consumedAtMidnight">
-        <small *ngIf="row.level !== 1 && !row.consumedAtMidnight">{{ row.consumedDate | amDateFormat:'h:mm a' }}</small>
+        <div>
+          <span class="bold">{{ row.name }}</span>
+          <span *ngIf="showFoodMoodAndNote && row.note">
+            <ccr-popup-description
+            class="notes-popup-description"
+            icon="text_snippet"
+            [showIntro]="false"
+            [title]="'GLOBAL.NOTES' | translate"
+            [description]="row.note"
+            dialogWidth="50%"
+            ></ccr-popup-description>
+          </span>
+          <br *ngIf="row.serving">
+          <small *ngIf="row.serving" class="lowercase-text serving-amount">
+            {{ row.serving | fraction }} {{ 'GLOBAL.FOOD_KEYS' | translate }}
+          </small>
+          <br *ngIf="row.level !== 1 && !row.consumedAtMidnight">
+          <small *ngIf="row.level !== 1 && !row.consumedAtMidnight">{{ row.consumedDate | amDateFormat:'h:mm a' }}</small>
+        </div>
+        <div *ngIf="showFoodMoodAndNote && row.moodRating">
+          <mat-icon class="meal-mood-rating-icon" [style.color]="getMoodIconColor(row)">{{getMoodIcon(row)}}</mat-icon>
+        </div>
         <div *ngIf="row.serving">
           <small>
             <ul class="serving-ingredients">

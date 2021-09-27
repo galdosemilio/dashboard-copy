@@ -28,6 +28,8 @@ export class PopupDescriptionComponent implements OnInit, OnDestroy {
   showIntro = true
   @Input()
   trigger: Subject<void>
+  @Input()
+  dialogWidth?: string
 
   translations: TranslationsObject
 
@@ -54,7 +56,8 @@ export class PopupDescriptionComponent implements OnInit, OnDestroy {
         data: {
           title: `${intro}${this.title}`,
           content: this.description
-        }
+        },
+        width: this.dialogWidth
       })
     } else {
       this.dialog.open(GridDialog, {

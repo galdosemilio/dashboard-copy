@@ -140,6 +140,22 @@ app-dieter-journal-food-table {
     }
   }
 
+  .notes-popup-description {
+    mat-icon {
+      font-size: 15px !important;
+      height: 18px !important;
+      margin-left: 10px;
+      width: 15px !important;
+    }
+  }
+
+  .meal-mood-rating-icon {
+    font-size: 40px;
+    height: 40px !important;
+    text-indent: 30px;
+    width: 40px !important;
+  }
+
   .level2 {
     .mat-cell {
       .expandable {

@@ -17,7 +17,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     HIDDEN_TABS: [JournalTabs.METRICS],
     PHYSICIAN_FORM: '15096',
     SHOW_DOCTOR_PDF_BUTTON: false,
-    SHOW_PATIENT_PDF_BUTTON: false
+    SHOW_PATIENT_PDF_BUTTON: false,
+    SHOW_FOOD_MOOD_AND_NOTE: false
   },
   PATIENT_FORM: {
     ACCOUNT_IDENTIFIERS_INPUT: {
@@ -72,7 +73,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     HIDDEN_TABS: [JournalTabs.METRICS],
     PHYSICIAN_FORM: '293',
     SHOW_DOCTOR_PDF_BUTTON: false,
-    SHOW_PATIENT_PDF_BUTTON: false
+    SHOW_PATIENT_PDF_BUTTON: false,
+    SHOW_FOOD_MOOD_AND_NOTE: false
   },
   PATIENT_FORM: {
     PACKAGE_ENROLL: {

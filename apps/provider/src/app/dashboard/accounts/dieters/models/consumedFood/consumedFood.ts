@@ -26,6 +26,7 @@ export class ConsumedFood implements FetchAllSingleConsumedMealResponse {
   name: string
   netCarbs: number
   note: string
+  moodRating?: number
   polyunsaturatedFat: number
   potassium: number
   protein: number
@@ -66,6 +67,7 @@ export class ConsumedFood implements FetchAllSingleConsumedMealResponse {
     this.metadata = {}
     this.name = args.meal.name
     this.note = args.note
+    this.moodRating = args.moodRating
     this.potassium = args.summary.potassium || 0
     this.protein = args.summary.protein || 0
     this.saturatedFat = args.summary.saturatedFat || 0

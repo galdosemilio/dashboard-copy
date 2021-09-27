@@ -9,4 +9,5 @@ export interface JournalConfigDetails {
   PHYSICIAN_FORM?: string
   SHOW_DOCTOR_PDF_BUTTON?: boolean
   SHOW_PATIENT_PDF_BUTTON?: boolean
+  SHOW_FOOD_MOOD_AND_NOTE?: boolean
 }
