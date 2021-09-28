@@ -1,3 +1,10 @@
+## [1.37.2](https://github.com/coachcare/dashboard/compare/v1.37.1...v1.37.2) (2021-09-28)
+
+
+### Bug Fixes
+
+* issue preventing feature state from showing [FRON-2364] ([a96a01c](https://github.com/coachcare/dashboard/commit/a96a01cd1888bf7ea42dde0194f4194e85a1846e))
+
 ## [1.37.1](https://github.com/coachcare/dashboard/compare/v1.37.0...v1.37.1) (2021-09-27)
 
 
