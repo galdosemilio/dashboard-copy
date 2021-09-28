@@ -77,7 +77,7 @@ export class OrganizationFeaturePreferenceResolver
           patientAutoUnenroll: single.automaticDisassociation
             ? single.automaticDisassociation.client
             : false,
-          removeEnrollmentsOnAssoc:
+          removeEnrollmentsOnAssociation:
             single.removeEnrollmentsOnAssociation ?? false
         })
       } catch (error) {
