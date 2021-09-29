@@ -24,6 +24,8 @@ export interface SidenavItem {
   expanded?: boolean
   badge?: number | string
   cssClass?: string
+  shouldFetchNavLink?: boolean
+  getNavLink?: () => Promise<string>
   fontIcon?: { fontSet: string; fontIcon: string }
 }
 
@@ -91,6 +93,20 @@ export class SidenavItemComponent implements OnChanges {
 
   newWindow(link: string) {
     window.open(link, '_blank')
+  }
+
+  public async onClickNavLink(sidenavItem: SidenavItem): Promise<void> {
+    try {
+      let link = sidenavItem.navLink
+
+      if (sidenavItem.shouldFetchNavLink) {
+        link = await sidenavItem.getNavLink()
+      }
+
+      return this.newWindow(link)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   public performAction(action: string): void {

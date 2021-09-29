@@ -26,7 +26,12 @@ import { findIndex, get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { fromEvent, Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
-import { AccountTypeIds, Messaging, OrganizationProvider } from '@coachcare/sdk'
+import {
+  AccountTypeIds,
+  Authentication,
+  Messaging,
+  OrganizationProvider
+} from '@coachcare/sdk'
 import { SidenavItem } from './sidenav-item/sidenav-item.component'
 
 export interface SidenavOrg {
@@ -61,11 +66,13 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   searchQuery: string = undefined
 
   private currentLang: string
+  private readonly DEFAULT_STORE_LINK = 'https://store.coachcare.com/'
   private isOrphaned: boolean
   private isProvider = false
 
   constructor(
     router: Router,
+    private authentication: Authentication,
     private bus: EventsService,
     private context: ContextService,
     private messaging: Messaging,
@@ -75,6 +82,8 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     private store: Store<CCRConfig>,
     private translate: TranslateService
   ) {
+    this.fetchStoreLink = this.fetchStoreLink.bind(this)
+
     this.store
       .pipe(select(configSelector))
       .subscribe((conf) => (this.palette = conf.palette))
@@ -338,12 +347,6 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             icon: 'playlist_add_track'
           },
           {
-            code: SidenavOptions.STORE,
-            navName: _('SIDENAV.STORE'),
-            navLink: 'https://store.coachcare.com/',
-            icon: 'shopping_cart'
-          },
-          {
             code: SidenavOptions.PROFILE_SETTINGS,
             navName: _('SIDENAV.PROFILE_SETTINGS'),
             route: 'profile',
@@ -351,6 +354,15 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
             icon: 'person',
             isAllowedForPatients: true,
             isHiddenForProviders: true
+          },
+          {
+            code: SidenavOptions.STORE,
+            navName: _('SIDENAV.STORE'),
+            navLink: this.DEFAULT_STORE_LINK,
+            icon: 'shopping_cart',
+            isAllowedForPatients: true,
+            shouldFetchNavLink: true,
+            getNavLink: this.fetchStoreLink
           },
           {
             badge: 10,
@@ -507,11 +519,16 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     ].badge = this.platformUpdates.notSeenArticleAmount
   }
 
-  updateSections(org: SelectedOrganization) {
+  async updateSections(org: SelectedOrganization): Promise<void> {
     this.filterSideNavItems()
 
-    let hiddenOptions = resolveConfig('SIDENAV.HIDDEN_OPTIONS', org)
-    const shownOptions = resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true) || []
+    let hiddenOptions = this.isProvider
+      ? resolveConfig('SIDENAV.HIDDEN_OPTIONS', org)
+      : resolveConfig('SIDENAV.PATIENT_HIDDEN_OPTIONS', org)
+    const shownOptions =
+      (this.isProvider
+        ? resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true)
+        : resolveConfig('SIDENAV.PATIENT_SHOWN_OPTIONS', org, true)) || []
 
     if (Array.isArray(hiddenOptions) && Array.isArray(shownOptions)) {
       hiddenOptions = hiddenOptions.filter(
@@ -645,6 +662,27 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
         message: 'Failed to load the clinic logo'
       }
     })
+  }
+
+  private async fetchStoreLink(): Promise<string> {
+    try {
+      const shouldFetch = resolveConfig(
+        'SIDENAV.FETCH_STORE_LINK',
+        this.context.organization
+      )
+
+      if (!shouldFetch || this.isProvider) {
+        return this.DEFAULT_STORE_LINK
+      }
+
+      const response = await this.authentication.shopify({
+        organization: this.context.organizationId
+      })
+      return response.url
+    } catch (error) {
+      this.notifier.error(error)
+      return this.DEFAULT_STORE_LINK
+    }
   }
 
   private filterSideNavItems() {

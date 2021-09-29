@@ -39,6 +39,7 @@ import {
   ShakeItTestSectionConfig
 } from './metagenics'
 import { SectionConfigDetails } from './models/section.details'
+import { MuscleWiseSectionConfig } from './musclewise'
 import { PeakHealthGroupSectionConfig } from './peak-health-group'
 import { RobardSectionConfig } from './robard'
 import { ShiftSetGoSectionConfig } from './shiftsetgo/shiftsetgo.section.config'
@@ -94,7 +95,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7520']: CurryCareTestSectionConfig,
     ['7534']: PeakHealthGroupSectionConfig,
     ['7535']: WellCoreTestSectionConfig,
-    ['7536']: HernriedSectionConfig
+    ['7536']: HernriedSectionConfig,
+    ['7537']: MuscleWiseSectionConfig
   },
   prod: {
     ['4050']: LeanMDSectionConfig,
@@ -118,6 +120,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['4049']: CurryCareProdSectionConfig,
     ['6869']: PeakHealthGroupSectionConfig,
     ['6891']: WellCoreProdSectionConfig,
-    ['6475']: HernriedSectionConfig
+    ['6475']: HernriedSectionConfig,
+    ['6916']: MuscleWiseSectionConfig
   }
 }

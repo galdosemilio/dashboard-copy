@@ -39,7 +39,7 @@
   </mat-list-item>
 
   <mat-list-item *ngIf="sidenavItem.navLink" class="mat-list-item {{levelClass}}"
-  (click)="newWindow(sidenavItem.navLink)">
+  (click)="onClickNavLink(sidenavItem)">
     <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>
     <span>{{ sidenavItem.navName | translate }}</span>
   </mat-list-item>
