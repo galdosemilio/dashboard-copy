@@ -215,6 +215,8 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       columns: [
         'date',
         'device',
+        'heartRate',
+        'bloodPressureString',
         'totalCholesterol',
         'ldl',
         'hdl',
@@ -225,8 +227,6 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
         'hsCrp',
         'temperature',
         'respirationRate',
-        'heartRate',
-        'bloodPressureString',
         'insulin'
       ],
       allowDetail: true,
