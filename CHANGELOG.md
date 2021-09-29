@@ -1,3 +1,11 @@
+# [1.38.0](https://github.com/coachcare/dashboard/compare/v1.37.2...v1.38.0) (2021-09-29)
+
+
+### Features
+
+* add sodium, cholesterol avg to food journal [FRON-2346] ([8c56a98](https://github.com/coachcare/dashboard/commit/8c56a98b91136a6cdee6d3fd0049994f770674b4))
+* expose food mood and notes [FRON-2286] ([e542ac9](https://github.com/coachcare/dashboard/commit/e542ac93463128612846fde8ef3a36985f63247b))
+
 ## [1.37.2](https://github.com/coachcare/dashboard/compare/v1.37.1...v1.37.2) (2021-09-28)
 
 
