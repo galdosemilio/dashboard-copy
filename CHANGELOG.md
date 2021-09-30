@@ -1,3 +1,16 @@
+# [1.39.0](https://github.com/coachcare/dashboard/compare/v1.38.0...v1.39.0) (2021-09-30)
+
+
+### Bug Fixes
+
+* allowed shown patient options to cascade [FRON-2362] ([9d1da44](https://github.com/coachcare/dashboard/commit/9d1da449464e100f1ae3538ac5b532a973ec442e))
+* shift blood pressure and heart rate columns [FRON-2281] ([32acb38](https://github.com/coachcare/dashboard/commit/32acb3812d7daa123af6c24814233f8ae3b4f793))
+
+
+### Features
+
+* added custom store link for musclewise [FRON-2362] ([3853e99](https://github.com/coachcare/dashboard/commit/3853e999f32c2f4433ed539209ff62d1b1fd14ee))
+
 # [1.38.0](https://github.com/coachcare/dashboard/compare/v1.37.2...v1.38.0) (2021-09-29)
 
 
