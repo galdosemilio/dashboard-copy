@@ -215,6 +215,7 @@
     "INCLUDE_INACTIVE": "Inkluder Inaktiv",
     "INFORMATION": "Information",
     "INHERIT": "Arve",
+    "INHERITED_FROM": "Arvet fra klinik med id {{org.id}}",
     "IOS_APP_ID": "iOS App-id",
     "LABEL": "Fase",
     "LANGUAGE": "Sprog",

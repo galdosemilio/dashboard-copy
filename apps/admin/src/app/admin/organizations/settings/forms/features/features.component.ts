@@ -7,7 +7,8 @@ import {
   OrganizationProvider,
   OrganizationPreference,
   RPM,
-  Sequence
+  Sequence,
+  NamedEntity
 } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
@@ -15,6 +16,13 @@ import { NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { environment } from '../../../../../../environments/environment'
+import { get } from 'lodash'
+
+interface FeatureSettingsEntry {
+  isInheritable: boolean
+  inheritedFrom?: NamedEntity
+  prefRoute: string
+}
 
 @UntilDestroy()
 @Component({
@@ -35,6 +43,54 @@ export class FeaturesComponent implements OnDestroy, OnInit {
   public clientPackages: any[] = []
   public disabledAutothread: boolean
   public form: FormGroup
+  public featureSettings: { [key: string]: FeatureSettingsEntry } = {
+    videoConference: {
+      isInheritable: true,
+      prefRoute: 'communicationPrefs'
+    },
+    digitalLibrary: {
+      isInheritable: true,
+      prefRoute: 'contentPrefs'
+    },
+    messaging: {
+      isInheritable: true,
+      prefRoute: 'messagingPrefs'
+    },
+    useAutoThreadParticipation: {
+      isInheritable: false,
+      prefRoute: 'messagingPrefs'
+    },
+    openAddClient: {
+      isInheritable: true,
+      prefRoute: 'openAddClient'
+    },
+    patientAutoUnenroll: {
+      isInheritable: false,
+      prefRoute: 'patientAutoUnenroll'
+    },
+    sequences: {
+      isInheritable: true,
+      prefRoute: 'sequencePrefs'
+    },
+    rpm: {
+      isInheritable: true,
+      prefRoute: 'rpmPrefs'
+    },
+    fileVault: {
+      isInheritable: true,
+      prefRoute: 'fileVaultPrefs'
+    },
+    removeEnrollmentsOnAssoc: {
+      isInheritable: false,
+      prefRoute: 'removeEnrollmentsOnAssoc'
+    },
+    autoEnroll: {
+      isInheritable: false,
+      prefRoute: 'autoEnroll'
+    }
+  }
+
+  private readonly inheritedFromString = _('GLOBAL.INHERITED_FROM')
 
   constructor(
     private communicationPrefs: CommunicationPreference,
@@ -99,10 +155,17 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       )
 
       promises.push(
-        this.contentPrefs.upsertContentPreference({
-          organization: this.orgId || '',
-          isActive: formValue.content
-        })
+        formValue.content === null
+          ? this.featurePrefs.contentPrefs &&
+            this.featurePrefs.contentPrefs.organization.id === this.orgId
+            ? this.contentPrefs.deleteContentPreference({
+                organization: this.orgId || ''
+              })
+            : Promise.resolve()
+          : this.contentPrefs.upsertContentPreference({
+              organization: this.orgId || '',
+              isActive: formValue.content
+            })
       )
 
       promises.push(
@@ -198,9 +261,19 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       const promiseValues = await Promise.all(promises)
 
       this.refreshFeaturePrefsObject(
+        formValue.fileVault,
+        promiseValues[3],
+        'fileVaultPrefs'
+      )
+      this.refreshFeaturePrefsObject(
         formValue.messaging,
         promiseValues[4],
         'messagingPrefs'
+      )
+      this.refreshFeaturePrefsObject(
+        formValue.sequences,
+        promiseValues[5],
+        'sequencePrefs'
       )
       this.refreshFeaturePrefsObject(
         formValue.videoconference,
@@ -212,11 +285,8 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         promiseValues[7],
         'rpmPrefs'
       )
-      this.refreshFeaturePrefsObject(
-        formValue.fileVault,
-        promiseValues[3],
-        'fileVaultPrefs'
-      )
+
+      this.refreshFeatureSettingsObject()
 
       this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
     } catch (error) {
@@ -247,9 +317,11 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           : []
 
       this.form.patchValue({
-        content: this.featurePrefs.contentPrefs
-          ? this.featurePrefs.contentPrefs.isActive
-          : false,
+        content:
+          this.featurePrefs.contentPrefs &&
+          this.featurePrefs.contentPrefs.organization.id === this.orgId
+            ? this.featurePrefs.contentPrefs.isActive
+            : null,
         fileVault: this.featurePrefs.fileVaultPrefs
           ? this.featurePrefs.fileVaultPrefs.isActive
           : null,
@@ -273,9 +345,11 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           this.featurePrefs.rpmPrefs.organization.id === this.orgId
             ? this.featurePrefs.rpmPrefs.isActive
             : null,
-        sequences: this.featurePrefs.sequencePrefs
-          ? this.featurePrefs.sequencePrefs.isActive
-          : false,
+        sequences:
+          this.featurePrefs.sequencePrefs &&
+          this.featurePrefs.sequencePrefs.organization.id === this.orgId
+            ? this.featurePrefs.sequencePrefs.isActive
+            : null,
         videoconference:
           this.featurePrefs.communicationPrefs &&
           this.featurePrefs.communicationPrefs.organization.id === this.orgId
@@ -293,6 +367,8 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           : false
       })
     }
+
+    this.refreshFeatureSettingsObject()
 
     setTimeout(
       () =>
@@ -325,5 +401,34 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       default:
         break
     }
+  }
+
+  private refreshFeatureSettingsObject(): void {
+    const updates: { [key: string]: FeatureSettingsEntry } = {}
+
+    Object.keys(this.featureSettings).forEach((key) => {
+      const setting = this.featureSettings[key]
+
+      if (!setting.isInheritable) {
+        return
+      }
+
+      const pref: { organization?: NamedEntity } = get(
+        this.featurePrefs,
+        setting.prefRoute
+      )
+
+      if (!pref) {
+        return
+      }
+
+      updates[key] = {
+        ...setting,
+        inheritedFrom:
+          pref.organization?.id !== this.orgId ? pref.organization : null
+      }
+    })
+
+    this.featureSettings = { ...this.featureSettings, ...updates }
   }
 }

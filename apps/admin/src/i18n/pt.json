@@ -215,6 +215,7 @@
     "INCLUDE_INACTIVE": "Incluir inativos",
     "INFORMATION": "Informação",
     "INHERIT": "Herdar",
+    "INHERITED_FROM": "Herdado de Clínica com ID {{org.id}}",
     "IOS_APP_ID": "iOS App ID",
     "LABEL": "Rótulo",
     "LANGUAGE": "Língua",

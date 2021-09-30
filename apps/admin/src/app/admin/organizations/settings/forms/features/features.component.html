@@ -2,7 +2,8 @@
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-video"
-    [inheritable]="true"
+    [inheritable]="featureSettings.videoConference.isInheritable"
+    [subLabel]="(featureSettings.videoConference.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.videoConference.inheritedFrom}"
     [label]="'GLOBAL.VIDEOCONFERENCE' | translate"
     formControlName="videoconference"></ccr-feature-toggle-input>
   </mat-grid-tile>
@@ -10,32 +11,42 @@
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-library"
-    [inheritable]="false"
+    [inheritable]="featureSettings.digitalLibrary.isInheritable"
     [label]="'GLOBAL.DIGITAL_LIBRARY' | translate"
+    [subLabel]="(featureSettings.digitalLibrary.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.digitalLibrary.inheritedFrom}"
     formControlName="content"></ccr-feature-toggle-input>
   </mat-grid-tile>
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-messaging"
-    [inheritable]="true"
+    [inheritable]="featureSettings.messaging.isInheritable"
     [label]="'GLOBAL.MESSAGING' | translate"
+    [subLabel]="(featureSettings.messaging.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.messaging.inheritedFrom}"
     formControlName="messaging"></ccr-feature-toggle-input>
   </mat-grid-tile>
 
   <mat-grid-tile>
+    <div fxFlex *ngIf="form?.value.messaging === null" fxLayout="row" fxLayoutAlign="space-between center">
+      <span fxFlex>
+        <strong>{{ 'GLOBAL.AUTO_THREAD_PARTICIPATION' | translate }}</strong>
+      </span>
+      <span>{{ 'GLOBAL.INHERIT' | translate }}</span>
+    </div>
+
     <ccr-feature-toggle-input
+    *ngIf="form?.value.messaging !== null"
     data-cy="org-settings-section-features-autothread"
-    [inheritable]="false"
+    [inheritable]="featureSettings.useAutoThreadParticipation.isInheritable"
     [label]="'GLOBAL.AUTO_THREAD_PARTICIPATION' | translate"
-    [readonly]="form?.value.messaging === null || disabledAutothread"
+    [readonly]="disabledAutothread"
     formControlName="useAutoThreadParticipation"></ccr-feature-toggle-input>
   </mat-grid-tile>
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-openClient"
-    [inheritable]="true"
+    [inheritable]="featureSettings.openAddClient.isInheritable"
     [label]="'GLOBAL.OPEN_PATIENT_ENROLLMENT' | translate"
     formControlName="openAddClient"></ccr-feature-toggle-input>
   </mat-grid-tile>
@@ -43,7 +54,7 @@
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-patientAutoDisassociate"
-    [inheritable]="false"
+    [inheritable]="featureSettings.patientAutoUnenroll.isInheritable"
     [label]="'GLOBAL.PATIENT_AUTOMATIC_DISASSOCIATION' | translate"
     formControlName="patientAutoUnenroll"></ccr-feature-toggle-input>
   </mat-grid-tile>
@@ -51,23 +62,26 @@
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-sequences"
-    [inheritable]="false"
+    [inheritable]="featureSettings.sequences.isInheritable"
     [label]="'GLOBAL.SEQUENCES' | translate"
+    [subLabel]="(featureSettings.sequences.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.sequences.inheritedFrom}"
     formControlName="sequences"></ccr-feature-toggle-input>
   </mat-grid-tile>
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-rpm"
-    [inheritable]="true"
+    [inheritable]="featureSettings.rpm.isInheritable"
     [label]="'GLOBAL.RPM' | translate"
+    [subLabel]="(featureSettings.rpm.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.rpm.inheritedFrom}"
     formControlName="rpm"></ccr-feature-toggle-input>
   </mat-grid-tile>
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-filevault"
-    [inheritable]="true"
+    [inheritable]="featureSettings.fileVault.isInheritable"
+    [subLabel]="(featureSettings.fileVault.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.fileVault.inheritedFrom}"
     [label]="'GLOBAL.FILE_VAULT' | translate"
     formControlName="fileVault"></ccr-feature-toggle-input>
   </mat-grid-tile>
@@ -75,7 +89,7 @@
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-remove-enrollments-on-assoc"
-    [inheritable]="false"
+    [inheritable]="featureSettings.removeEnrollmentsOnAssoc.isInheritable"
     [label]="'GLOBAL.REMOVE_ENROLLMENTS_ON_ASSOC' | translate"
     formControlName="removeEnrollmentsOnAssoc">
     </ccr-feature-toggle-input>
@@ -84,7 +98,7 @@
   <mat-grid-tile>
     <ccr-feature-toggle-input
     data-cy="org-settings-section-features-autoenroll"
-    [inheritable]="false"
+    [inheritable]="featureSettings.autoEnroll.isInheritable"
     [label]="'GLOBAL.AUTO_ENROLL_CLIENT' | translate"
     formControlName="autoEnroll">
     </ccr-feature-toggle-input>

@@ -215,6 +215,7 @@
     "INCLUDE_INACTIVE": "Incluir Inactivas",
     "INFORMATION": "Información",
     "INHERIT": "Heredar",
+    "INHERITED_FROM": "",
     "IOS_APP_ID": "ID de App de iOS",
     "LABEL": "Fase",
     "LANGUAGE": "Idioma",

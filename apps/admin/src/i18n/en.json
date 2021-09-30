@@ -215,6 +215,7 @@
     "INCLUDE_INACTIVE": "Include Inactive",
     "INFORMATION": "Information",
     "INHERIT": "Inherit",
+    "INHERITED_FROM": "Inherited from clinic with ID {{ org.id }}",
     "IOS_APP_ID": "iOS App ID",
     "LABEL": "Phase",
     "LANGUAGE": "Language",

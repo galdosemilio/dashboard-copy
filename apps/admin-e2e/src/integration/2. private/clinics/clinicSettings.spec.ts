@@ -200,8 +200,8 @@ describe('Clinic Settings', () => {
       .should('contain', 'Enabled')
 
     cy.get('[data-cy="org-settings-section-features-library"]')
-      .find('.mat-slide-toggle-input')
-      .should('be.checked')
+      .find('.mat-select')
+      .should('contain', 'Enabled')
 
     cy.get('[data-cy="org-settings-section-features-messaging"]')
       .find('.mat-select')
@@ -220,8 +220,8 @@ describe('Clinic Settings', () => {
       .should('not.be.checked')
 
     cy.get('[data-cy="org-settings-section-features-sequences"]')
-      .find('.mat-slide-toggle-input')
-      .should('be.checked')
+      .find('.mat-select')
+      .should('contain', 'Enabled')
 
     cy.get('[data-cy="org-settings-section-features-rpm"]')
       .find('.mat-select')

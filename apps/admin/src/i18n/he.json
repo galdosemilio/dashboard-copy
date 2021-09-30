@@ -215,6 +215,7 @@
     "INCLUDE_INACTIVE": "כולל לא פעיל",
     "INFORMATION": "מידע",
     "INHERIT": "ירושה",
+    "INHERITED_FROM": "בירושה מרפאה עם מזהה {{org.id}}",
     "IOS_APP_ID": "מזהה אפליקציה ב- iOS",
     "LABEL": "תווית",
     "LANGUAGE": "שפה",
