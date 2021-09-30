@@ -528,7 +528,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     const shownOptions =
       (this.isProvider
         ? resolveConfig('SIDENAV.SHOWN_OPTIONS', org, true)
-        : resolveConfig('SIDENAV.PATIENT_SHOWN_OPTIONS', org, true)) || []
+        : resolveConfig('SIDENAV.PATIENT_SHOWN_OPTIONS', org)) || []
 
     if (Array.isArray(hiddenOptions) && Array.isArray(shownOptions)) {
       hiddenOptions = hiddenOptions.filter(
