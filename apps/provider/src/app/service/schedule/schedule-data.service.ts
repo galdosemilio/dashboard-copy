@@ -76,7 +76,10 @@ export class ScheduleDataService {
   }
 
   public async fetchMeeting(id: string): Promise<Meeting> {
-    return Promise.resolve(new Meeting(await this.schedule.fetchMeeting(id)))
+    return new Meeting({
+      ...(await this.schedule.fetchMeeting(id)),
+      access: 'full'
+    })
   }
 
   public deleteAttendee(meetingId: string, accountId: string): Promise<void> {
