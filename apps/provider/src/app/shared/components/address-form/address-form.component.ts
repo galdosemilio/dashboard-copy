@@ -50,6 +50,7 @@ export class AddressFormComponent
   @Input() types: AddressLabel[] = []
 
   @Input() markAsTouched: Subject<void>
+  @Input() mode: 'create' | 'edit' = 'edit'
 
   @Output() changeAddress = new EventEmitter<any>()
 
@@ -116,7 +117,18 @@ export class AddressFormComponent
   }
 
   private onChange(value) {
-    this.propagateChange(this.form.valid ? value : null)
+    this.propagateChange(
+      this.form.valid
+        ? {
+            ...value,
+            address2: value.address2
+              ? value.address2
+              : this.mode === 'create'
+              ? undefined
+              : null
+          }
+        : null
+    )
   }
 
   public validate(control: AbstractControl): ValidationErrors {

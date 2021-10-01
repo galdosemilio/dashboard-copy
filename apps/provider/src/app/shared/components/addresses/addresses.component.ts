@@ -162,7 +162,7 @@ export class AddressesComponent
         id: item.id.toString(),
         labels: item.labels.map((l) => l.id.toString()),
         address1: item.address1,
-        address2: item.address2,
+        address2: item.address2 ?? null,
         city: item.city,
         stateProvince: item.stateProvince,
         postalCode: item.postalCode,

@@ -3,11 +3,12 @@
     <div class="mt-20 no-margin-top" fxLayoutAlign="start">
       <button
         *ngIf="addressLabels.length > 0"
+        [disabled]="form.invalid || form.get('addresses')?.length >= 2"
+        (click)="onAddNewAddress()"
         class="ccr-icon-button"
         color="primary"
         type="button"
-        mat-button
-        (click)="onAddNewAddress()">
+        mat-button>
         <mat-icon>add</mat-icon> {{ 'BOARD.ADD_NEW_ADDRESS' | translate }}
       </button>
     </div>
@@ -15,7 +16,12 @@
       <div class="address-container" formArrayName="addresses">
         <ng-container *ngFor="let addressForm of addressesForm.controls; let i = index">
           <div class="ccr-widget" [formGroup]="addressForm">
-            <ccr-address-form formControlName="address" [markAsTouched]="markAsTouched" required [types]="addressLabels"></ccr-address-form>
+            <ccr-address-form
+            [markAsTouched]="markAsTouched"
+            [mode]="account ? 'edit' : 'create'"
+            [types]="addressLabels"
+            formControlName="address"
+            required></ccr-address-form>
             <div class="actions" fxLayout="row" fxLayoutAlign="center">
               <button
                 class="ccr-icon-button"

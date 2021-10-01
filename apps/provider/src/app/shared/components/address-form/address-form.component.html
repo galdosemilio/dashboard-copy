@@ -1,9 +1,6 @@
 <div class="mt-20" [formGroup]="form">
   <mat-grid-list class="ccr-grid" cols="1" rowHeight="70px">
     <mat-grid-tile>
-      <div>
-
-      </div>
       <mat-form-field>
         <mat-select [placeholder]="'BOARD.ADDRESS_TYPE' | translate" required multiple formControlName="labels">
           <mat-option *ngFor="let option of types" [value]="option.id">

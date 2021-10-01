@@ -36,9 +36,9 @@
             <ccr-gender-input [required]="false" formControlName="gender" fxFlex></ccr-gender-input>
           </mat-grid-tile>
 
-          <mat-grid-tile>
+          <!-- <mat-grid-tile>
             <ccr-form-field-height [required]="false" formControlName="height"></ccr-form-field-height>
-          </mat-grid-tile>
+          </mat-grid-tile> -->
 
 
           <mat-grid-tile>
@@ -71,7 +71,7 @@
       </div> -->
 
       <div *ngIf="!coachId" class="section-grid">
-        <p>{{ 'BOARD.ADDRESSES' | translate }}</p>
+        <p>{{ 'BOARD.ADDRESSES' | translate }} <small class="text-italic">{{ 'BOARD.OPTIONAL' | translate }}</small></p>
 
         <div>
           <ccr-account-addresses

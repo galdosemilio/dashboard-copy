@@ -74,6 +74,50 @@ describe('Patient profile -> More -> Addresses', function () {
     })
   })
 
+  it('Allows the provider to add an address without inserting the second line', function () {
+    cy.get('ccr-account-addresses')
+      .find('button')
+      .contains('Add New Address')
+      .click()
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container')
+      .find('div.mat-select-trigger')
+      .eq(0)
+      .click({ force: true })
+
+    cy.get('mat-option').contains('Shipping').click({ force: true })
+    cy.tick(1000)
+    cy.get('.cdk-overlay-transparent-backdrop').click()
+
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="Address Line 1"]')
+      .type('Address Line 1')
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="City"]')
+      .type('City')
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="State"]')
+      .type('State')
+    cy.get('mat-dialog-container')
+      .find('input[data-placeholder="Postal Code"]')
+      .type('123456')
+
+    cy.tick(1000)
+
+    cy.get('button').contains('Create').click()
+
+    cy.wait('@postAddressRequest').should((xhr) => {
+      expect(xhr.request.url).to.contain('1')
+      expect(xhr.request.body.address1).to.equal('Address Line 1')
+      expect(xhr.request.body.address2).to.equal(undefined)
+      expect(xhr.request.body.city).to.equal('City')
+      expect(xhr.request.body.stateProvince).to.equal('State')
+      expect(xhr.request.body.postalCode).to.equal('123456')
+      expect(xhr.request.body.labels[0]).to.equal('2')
+    })
+  })
+
   it('Allows the provider to update an address', function () {
     cy.get('ccr-account-addresses')
     cy.tick(1000)

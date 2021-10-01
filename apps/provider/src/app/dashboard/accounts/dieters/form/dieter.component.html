@@ -137,7 +137,7 @@
     </div>
 
     <div class="section-grid" *ngIf="!dieterId">
-      <p>{{ 'BOARD.ADDRESSES' | translate }}</p>
+      <p>{{ 'BOARD.ADDRESSES' | translate }} <small class="text-italic">{{ 'BOARD.OPTIONAL' | translate }}</small></p>
 
       <ccr-account-addresses
         formControlName="addresses"
