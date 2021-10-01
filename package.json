@@ -144,7 +144,7 @@
     "ngrx-store-freeze": "^0.2.4",
     "ngx-color-picker": "^11.0.0",
     "ngx-cookie-service": "^10.0.1",
-    "ngx-device-detector": "^2.0.0",
+    "ngx-device-detector": "^2.1.1",
     "ngx-moment": "^5.0.0",
     "pdfmake": "^0.1.68",
     "regenerator-runtime": "0.13.7",
