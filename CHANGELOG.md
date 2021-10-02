@@ -1,3 +1,17 @@
+# [1.40.0](https://github.com/coachcare/dashboard/compare/v1.39.0...v1.40.0) (2021-10-02)
+
+
+### Bug Fixes
+
+* added access state to single meetings [FRON-2369] ([7010253](https://github.com/coachcare/dashboard/commit/70102536399c7ea5bb21b2ac7a66ecafae7d9af4))
+* adjustments to address mgmt and coach height [FRON-2372] ([c693d9a](https://github.com/coachcare/dashboard/commit/c693d9abd1d448fbed6135faf54843afbbd1e922))
+
+
+### Features
+
+* add address management [FRON-2349] ([8a0d62b](https://github.com/coachcare/dashboard/commit/8a0d62bd4a311e2c525254b0c6da6a4d667b272b))
+* added support for camera toggling message [IDEA-929] ([31edbcc](https://github.com/coachcare/dashboard/commit/31edbcc84d84ed006e3a2aa81c604fc3d34603ea))
+
 # [1.39.0](https://github.com/coachcare/dashboard/compare/v1.38.0...v1.39.0) (2021-09-30)
 
 
