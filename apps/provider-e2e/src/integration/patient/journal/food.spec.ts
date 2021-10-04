@@ -7,7 +7,7 @@ describe('Patient profile -> journal -> food', function () {
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/journal`)
 
     cy.get('app-dieter-journal-food').find('mat-grid-tile').as('summaryBoxes')
-    cy.get('@summaryBoxes').should('have.length', 4)
+    cy.get('@summaryBoxes').should('have.length', 5)
     cy.get('@summaryBoxes').eq(0).should('contain', 'CALORIES')
     cy.get('@summaryBoxes').eq(1).should('contain', 'PROTEIN')
     cy.get('@summaryBoxes')
@@ -32,7 +32,7 @@ describe('Patient profile -> journal -> food', function () {
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/journal`)
 
     cy.get('app-dieter-journal-food').find('mat-grid-tile').as('summaryBoxes')
-    cy.get('@summaryBoxes').should('have.length', 4)
+    cy.get('@summaryBoxes').should('have.length', 5)
     cy.get('@summaryBoxes').eq(0).should('contain', '300')
     cy.get('@summaryBoxes').eq(1).should('contain', '30.0g')
     cy.get('@summaryBoxes')
@@ -45,9 +45,7 @@ describe('Patient profile -> journal -> food', function () {
       .should('contain', '3.0g')
       .should('contain', '0g')
 
-    cy.get('app-dieter-journal-food-table')
-      .find('.newday-row')
-      .as('tableRows')
+    cy.get('app-dieter-journal-food-table').find('.newday-row').as('tableRows')
 
     cy.get('@tableRows').should('have.length', 7)
 
@@ -111,7 +109,7 @@ describe('Patient profile -> journal -> food', function () {
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/journal`)
 
     cy.get('app-dieter-journal-food').find('mat-grid-tile').as('summaryBoxes')
-    cy.get('@summaryBoxes').should('have.length', 4)
+    cy.get('@summaryBoxes').should('have.length', 5)
     cy.get('@summaryBoxes').eq(0).should('contain', '300')
     cy.get('@summaryBoxes').eq(1).should('contain', '30.0g')
     cy.get('@summaryBoxes')
@@ -124,9 +122,7 @@ describe('Patient profile -> journal -> food', function () {
       .should('contain', '3.0g')
       .should('contain', '0g')
 
-    cy.get('app-dieter-journal-food-table')
-      .find('.newday-row')
-      .as('tableRows')
+    cy.get('app-dieter-journal-food-table').find('.newday-row').as('tableRows')
 
     cy.get('@tableRows').should('have.length', 7)
 
@@ -181,5 +177,36 @@ describe('Patient profile -> journal -> food', function () {
       .should('contain', '30 g')
 
     cy.wait(3000)
+  })
+
+  it('Food info is properly converted', function () {
+    cy.setTimezone('aet')
+    standardSetup()
+
+    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/journal`)
+
+    cy.get('app-dieter-journal-food-table').find('.newday-row').as('dayRows')
+
+    cy.get('@dayRows').eq(5).as('focusRow')
+
+    cy.get('@focusRow').should('contain', '100').should('contain', '10 g')
+
+    cy.get('@focusRow').should('contain', 'Fiber 1 g')
+    cy.get('@focusRow').should('contain', 'Net Carbs 0 g')
+    cy.get('@focusRow').should('contain', 'Sugar 10 g')
+    cy.get('@focusRow').should('contain', 'Fiber 1 g')
+    cy.get('@focusRow').should('contain', 'Polyunsaturated 1 g')
+    cy.get('@focusRow').should('contain', 'Monounsaturated 1 g')
+    cy.get('@focusRow').should('contain', 'Sat. Fat 0 g')
+    cy.get('@focusRow').should('contain', 'Trans Fat 1 g')
+    cy.get('@focusRow').should('contain', 'Cholesterol 10 mg')
+    cy.get('@focusRow').should('contain', 'Sodium 100 mg')
+    cy.get('@focusRow').should('contain', 'Calcium 1,000 mg')
+    cy.get('@focusRow').should('contain', 'Iron 1 mg')
+    cy.get('@focusRow').should('contain', 'Potassium 100 mg')
+    cy.get('@focusRow').should('contain', 'Vitamin A 1 μg')
+    cy.get('@focusRow').should('contain', 'Vitamin B 1 μg')
+    cy.get('@focusRow').should('contain', 'Vitamin C 1 mg')
+    cy.get('@focusRow').should('contain', 'Vitamin D 1 μg')
   })
 })

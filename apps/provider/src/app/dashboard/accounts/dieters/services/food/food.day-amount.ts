@@ -73,5 +73,7 @@ export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
     this.vitaminB += meal.vitaminB || 0
     this.vitaminC += meal.vitaminC || 0
     this.vitaminD += meal.vitaminD || 0
+    this.polyunsaturatedFat += meal.polyunsaturatedFat || 0
+    this.monounsaturatedFat += meal.monounsaturatedFat || 0
   }
 }

@@ -27,8 +27,18 @@
         "potassium": 100,
         "protein": 10000,
         "saturatedFat": 10,
+        "transFat": 1000,
         "sodium": 100,
-        "totalFat": 1000
+        "totalFat": 1000,
+        "polyunsaturatedFat": 1000,
+        "monounsaturatedFat": 1000,
+        "calcium": 1000,
+        "iron": 1000,
+        "sugar": 10000,
+        "vitaminA": 1000,
+        "vitaminB": 1000,
+        "vitaminC": 1000,
+        "vitaminD": 1000
       }
     },
     {
