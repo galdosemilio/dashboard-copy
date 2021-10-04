@@ -1,0 +1,16 @@
+{
+  "counter": {
+    "successful": 0,
+    "warning": 1
+  },
+  "issues": [
+    {
+      "item": {
+        "id": "1992",
+        "name": "Test form"
+      },
+      "code": "content.copy.dry-run.form-not-accessible",
+      "message": "Related form is not accessible"
+    }
+  ]
+}

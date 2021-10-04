@@ -8,6 +8,9 @@
   "env": {
     "clientId": 3,
     "clinicId": 1,
+    "firstContentItemId": "1992",
+    "secondContentItemId": "1877",
+    "thirdContentItemId": "1715",
     "formId": 1,
     "formSubmissionId": 1,
     "organizationId": 1,

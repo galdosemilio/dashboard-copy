@@ -477,7 +477,40 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     fixture: 'api/rpm/rpmStateAuditEntries.json'
   })
 
-  cy.intercept('POST', '/1.0/content/copy/**', {
+  cy.intercept(
+    'POST',
+    `/1.0/content/copy/${Cypress.env('firstContentItemId')}/dry-run`,
+    {
+      fixture: fetchOverride(
+        `/1.0/content/copy/${Cypress.env('firstContentItemId')}/dry-run`,
+        'api/library/dry-run-success'
+      )
+    }
+  )
+
+  cy.intercept(
+    'POST',
+    `/1.0/content/copy/${Cypress.env('secondContentItemId')}/dry-run`,
+    {
+      fixture: fetchOverride(
+        `/1.0/content/copy/${Cypress.env('secondContentItemId')}/dry-run`,
+        'api/library/dry-run-success'
+      )
+    }
+  )
+
+  cy.intercept(
+    'POST',
+    `/1.0/content/copy/${Cypress.env('thirdContentItemId')}/dry-run`,
+    {
+      fixture: fetchOverride(
+        `/1.0/content/copy/${Cypress.env('thirdContentItemId')}/dry-run`,
+        'api/library/dry-run-success'
+      )
+    }
+  )
+
+  cy.intercept('POST', '/1.0/content/copy/*', {
     statusCode: 201,
     body: { id: '1' }
   }).as('contentCopyRequest')

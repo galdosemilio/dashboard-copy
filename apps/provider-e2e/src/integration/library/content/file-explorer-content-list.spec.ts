@@ -220,6 +220,104 @@ describe('Dashboard -> Digital Library', function () {
     cy.wait(3000)
   })
 
+  it('Shows errors if the dry-run fails and allows cloning', function () {
+    cy.setTimezone('et')
+    standardSetup(undefined, [
+      {
+        url: `/1.0/content/copy/${Cypress.env('firstContentItemId')}/dry-run`,
+        fixture: 'api/library/dry-run-first-failed'
+      },
+      {
+        url: `/1.0/content/copy/${Cypress.env('secondContentItemId')}/dry-run`,
+        fixture: 'api/library/dry-run-second-failed'
+      }
+    ])
+
+    cy.visit(`/library/content`)
+
+    openBatchCloningModal()
+    waitForModalTable()
+    selectContentInModal(0)
+    selectContentInModal(1)
+    selectContentInModal(2)
+    goToNextStep()
+    goToNextStep()
+    selectAvailability('Public')
+
+    cy.get('mat-dialog-container')
+      .find('.mat-select-trigger')
+      .trigger('click', { force: true })
+      .wait(500)
+
+    cy.get('.mat-option').eq(0).trigger('click')
+    cy.tick(1000)
+
+    goToNextStep()
+
+    cloneContent()
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container').should(
+      'contain',
+      'Related form is not accessible'
+    )
+
+    cy.get('mat-dialog-container').find('button').contains('Continue').click()
+
+    cy.wait('@contentCopyRequest').should((xhr) => {
+      expect(xhr.request.body.id).to.equal('1715')
+      expect(xhr.request.body.mode).to.equal('public')
+      expect(xhr.request.body.organization).to.equal('1')
+    })
+
+    cy.wait(3000)
+  })
+
+  it('Should prevent cloning if all the contents on the dry-run fail', function () {
+    cy.setTimezone('et')
+    standardSetup(undefined, [
+      {
+        url: `/1.0/content/copy/${Cypress.env('firstContentItemId')}/dry-run`,
+        fixture: 'api/library/dry-run-first-failed'
+      }
+    ])
+
+    cy.visit(`/library/content`)
+
+    openBatchCloningModal()
+    waitForModalTable()
+    selectContentInModal(0)
+    goToNextStep()
+    goToNextStep()
+    selectAvailability('Public')
+
+    cy.get('mat-dialog-container')
+      .find('.mat-select-trigger')
+      .trigger('click', { force: true })
+      .wait(500)
+
+    cy.get('.mat-option').eq(0).trigger('click')
+    cy.tick(1000)
+
+    goToNextStep()
+
+    cloneContent()
+
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container').should(
+      'contain',
+      'Related form is not accessible'
+    )
+
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('Continue')
+      .parent()
+      .should('be.disabled')
+  })
+
   it('Allows opening the preview of a form', function () {
     cy.setTimezone('et')
     standardSetup()

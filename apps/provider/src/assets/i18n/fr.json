@@ -656,6 +656,8 @@
       "BY_PACKAGE_AVAILABILITY": "Disponibilité par colis",
       "BY_PACKAGE_AVAILABILITY_DESCRIPTION": "Les phases sont destinées au contenu que vous souhaitez partager avec les utilisateurs dans les phases sélectionnées. Vous pouvez attribuer du contenu à une ou plusieurs phases. Les patients doivent être affectés à la ou aux phases sélectionnées pour afficher le contenu.<br><br>Pour affecter des phases aux patients, visitez le tableau de bord du patient, sélectionnez PLUS, sélectionnez PHASES et inscrivez-les dans la phase appropriée.",
       "CLONE_CONTENT": "Contenu du clone",
+      "CLONE_WARNING_DESCRIPTION": "Les éléments suivants que vous avez sélectionnés ne peuvent pas être clonés en raison de la structure de la clinique. Vous pouvez procéder en clonant tous les éléments de contenu éligibles ou en annulant cette demande.",
+      "CLONE_WARNING_TITLE": "Certains éléments ne peuvent pas être clonés",
       "CLONING_CONTENTS": "Clonage Sommaire...",
       "CLOSE_CONTENT_CREATE_WARNING": "Êtes-vous sûr de vouloir arrêter la création de contenu?",
       "CONTENT_EDIT": "Éditer le contenu",

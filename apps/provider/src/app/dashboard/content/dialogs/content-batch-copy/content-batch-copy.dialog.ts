@@ -16,7 +16,12 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { FileExplorerRoute } from '../../file-explorer-table'
 import { FileExplorerContent, FileExplorerEvents } from '../../models'
 import { FileExplorerDatabase, FileExplorerDatasource } from '../../services'
-import { OrganizationPermission, OrganizationWithAddress } from '@coachcare/sdk'
+import {
+  ContentCopyIssue,
+  OrganizationPermission,
+  OrganizationWithAddress
+} from '@coachcare/sdk'
+import { uniqBy } from 'lodash'
 
 interface ContentBatchCopyDialogProps {
   datasource: any
@@ -51,6 +56,12 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
     return this._checkedContents
   }
 
+  public get errorContents(): FileExplorerContent[] {
+    return this.checkedContents.filter((c) =>
+      this.contentCopyIssues.map((e) => e.item.id).includes(c.id)
+    )
+  }
+
   public datasource: FileExplorerDatasource
   public events: FileExplorerEvents
   public form: FormGroup
@@ -72,9 +83,16 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
     disableForeignContent: true,
     shouldShowRootFolderButton: true
   }
-  public status: 'ready' | 'processing' = 'ready'
+  public contentCopyIssues: ContentCopyIssue[] = []
+  public status: 'ready' | 'processing' | 'error' = 'ready'
 
   private _checkedContents: FileExplorerContent[] = []
+
+  get uniqueCopyErrorMessages() {
+    return uniqBy(this.contentCopyIssues, (issue) => issue.message).map(
+      (issue) => issue.message
+    )
+  }
 
   constructor(
     private context: ContextService,
@@ -149,17 +167,60 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
       }
 
       this.status = 'processing'
-
+      this.contentCopyIssues = []
       const formValue = this.form.value
 
       const promises = this.checkedContents.map((content) =>
-        this.datasource.copyContent({
+        this.datasource.copyDry({
           to: formValue.targetFolder,
           content: content,
           overrideDetails: formValue.overrideDetails,
           organizationId: formValue.targetOrganization
         })
       )
+
+      const res = await Promise.all(promises)
+
+      this.contentCopyIssues = res.reduce((issues, item) => {
+        return issues.concat(item.issues)
+      }, [])
+
+      if (this.contentCopyIssues.length > 0) {
+        this.status = 'error'
+        return
+      }
+
+      await this.onCloneContents()
+    } catch (error) {
+      this.notifier.error(error)
+      this.status = 'ready'
+    }
+  }
+
+  public async onCloneContents(): Promise<void> {
+    try {
+      if (this.form.invalid) {
+        return
+      }
+
+      this.status = 'processing'
+      const formValue = this.form.value
+
+      const promises = this.checkedContents
+        .filter(
+          (content) =>
+            !this.contentCopyIssues.some(
+              (issue) => issue.item.id === content.id
+            )
+        )
+        .map((content) =>
+          this.datasource.copyContent({
+            to: formValue.targetFolder,
+            content: content,
+            overrideDetails: formValue.overrideDetails,
+            organizationId: formValue.targetOrganization
+          })
+        )
 
       await bufferedRequests(promises)
 
@@ -174,7 +235,6 @@ export class ContentBatchCopyDialog implements OnDestroy, OnInit {
   }
 
   public selectOrganization(organization: OrganizationWithAddress): void {
-    console.log({ organization })
     if (!organization || !organization.id) {
       return
     }

@@ -89,12 +89,25 @@
         <p>{{ 'LIBRARY.CONTENT.CLONING_CONTENTS' | translate }}</p>
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
+
+    <div [hidden]="status !== 'error'">
+        <h4 class="warning-title">{{ 'LIBRARY.CONTENT.CLONE_WARNING_TITLE' | translate }}</h4>
+        <ul class="mb-10">
+            <li *ngFor="let error of uniqueCopyErrorMessages">{{ error }}</li>
+        </ul>
+
+        <app-content-selected-table
+            [contents]="errorContents"
+            [events]="events"
+            [disabled]="true">
+        </app-content-selected-table>
+    </div>
 </div>
 
 <mat-dialog-actions>
-    <div *ngIf="status === 'ready'">
+    <div>
         <button
-        *ngIf="!isOnLastStep()"
+        *ngIf="!isOnLastStep() && status === 'ready'"
         [disabled]="nextButtonIsDisabled()"
         mat-button
         class="ccr-button"
@@ -104,7 +117,7 @@
         </button>
 
         <button
-        *ngIf="isOnLastStep()"
+        *ngIf="isOnLastStep() && status === 'ready'"
         [disabled]="form.invalid"
         (click)="onSubmit()"
         class="ccr-button"
@@ -113,7 +126,17 @@
         {{ 'LIBRARY.CONTENT.CLONE_CONTENT' | translate }}
         </button>
 
-        <button mat-button class="ccr-button" (click)="closeDialog()">
+        <button
+        *ngIf="status === 'error'"
+        [disabled]="form.invalid || contentCopyIssues.length >= checkedContents.length"
+        (click)="onCloneContents()"
+        class="ccr-button"
+        color="primary"
+        mat-button>
+        {{ 'GLOBAL.CONTINUE' | translate }}
+        </button>
+
+        <button *ngIf="status !== 'processing'" mat-button class="ccr-button" (click)="closeDialog()">
         {{ 'GLOBAL.CANCEL' | translate }}
         </button>
     </div>

@@ -3,6 +3,7 @@ import { FileExplorerContent } from '@app/dashboard/content/models'
 import { ContextService } from '@app/service'
 import { CcrDatabase } from '@app/shared'
 import {
+  ContentCopyDryRunResponse,
   ContentSingle,
   CopyContentRequest,
   CreateContentPackageRequest,
@@ -36,6 +37,21 @@ export class FileExplorerDatabase extends CcrDatabase {
           const entity = await this.content.copy(args)
           const single = await this.content.getSingle(entity)
           resolve(single)
+        } catch (error) {
+          reject(error)
+        }
+      })
+    )
+  }
+
+  public copyContentDry(
+    args: CopyContentRequest
+  ): Observable<ContentCopyDryRunResponse> {
+    return from(
+      new Promise<ContentCopyDryRunResponse>(async (resolve, reject) => {
+        try {
+          const entity = await this.content.copyDryRun(args)
+          resolve(entity)
         } catch (error) {
           reject(error)
         }

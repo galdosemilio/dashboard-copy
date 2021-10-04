@@ -9,6 +9,7 @@ import {
 import { ContextService, NotifierService } from '@app/service'
 import { _, bufferedRequests, TableDataSource } from '@app/shared'
 import {
+  ContentCopyDryRunResponse,
   ContentSingle,
   CreateContentPackageRequest,
   CreateContentRequest,
@@ -158,6 +159,19 @@ export class FileExplorerDatasource extends TableDataSource<
     } catch (error) {
       return Promise.reject(error)
     }
+  }
+
+  public async copyDry(
+    args: ContentCopiedEvent
+  ): Promise<ContentCopyDryRunResponse> {
+    return this.database
+      .copyContentDry({
+        id: args.content.id,
+        organization: args.organizationId || this.context.organizationId,
+        parentId: args.to || undefined,
+        mode: args.overrideDetails.isPublic ? 'public' : 'private'
+      })
+      .toPromise()
   }
 
   createContent(
