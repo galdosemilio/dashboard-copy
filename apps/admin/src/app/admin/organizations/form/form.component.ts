@@ -211,7 +211,13 @@ export class OrganizationsFormComponent implements OnInit {
         numberOfLocations: billingFormValue.numberOfLocations || null
       },
       billingFormValue.recordExists
-        ? ['basePricing', 'rpmPatientPricing', 'entity', 'numberOfLocations']
+        ? [
+            'basePricing',
+            'rpmPatientPricing',
+            'entity',
+            'numberOfLocations',
+            'churnDate'
+          ]
         : []
     )
 

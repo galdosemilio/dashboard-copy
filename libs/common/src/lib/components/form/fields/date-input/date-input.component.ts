@@ -35,6 +35,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 })
 export class CcrDateInputComponent
   implements ControlValueAccessor, DoCheck, OnDestroy, OnInit {
+  @Input() allowsEmpty = false
   @Input() errorMessage?: string
   @Input() formControlName?: string
   @Input() max?: moment.Moment
@@ -133,6 +134,8 @@ export class CcrDateInputComponent
     this.cdr.detectChanges()
     if (this.lastValidDate) {
       this.form.controls.date.setValue(moment(this.lastValidDate).toISOString())
+    } else if (this.allowsEmpty) {
+      this.form.controls.date.setValue(null)
     }
   }
 
@@ -171,12 +174,16 @@ export class CcrDateInputComponent
           ? momentDate.toISOString()
           : moment()
         if (this.form.controls.textDate.valid) {
-          this.propagateChange(momentDate.startOf('day'))
+          this.propagateChange(
+            momentDate.isValid() ? momentDate.startOf('day') : null
+          )
         }
       } else {
         momentDate = moment(controls.date, 'YYYY/MM/DD').startOf('day')
         if (this.form.controls.date.valid) {
-          setTimeout(() => this.propagateChange(momentDate))
+          setTimeout(() =>
+            this.propagateChange(momentDate.isValid() ? momentDate : null)
+          )
         }
       }
     })

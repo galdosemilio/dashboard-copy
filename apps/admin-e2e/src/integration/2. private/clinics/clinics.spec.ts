@@ -38,6 +38,8 @@ describe('Clinic Listing Page', () => {
 
     cy.get('button.mat-raised-button', { timeout: 10000 }).eq(0).click()
 
+    cy.tick(10000)
+
     cy.get('simple-snack-bar', { timeout: 10000 }).should(
       'contain',
       'Clinic deactivated'
@@ -49,9 +51,17 @@ describe('Clinic Listing Page', () => {
 
     cy.get('ccr-organizations-list', { timeout: 10000 })
 
-    cy.get('button.mat-icon-button', { timeout: 10000 }).eq(0).click()
+    cy.get('button.mat-icon-button', { timeout: 10000 })
+      .eq(0)
+      .click({ force: true })
 
-    cy.get('button.ccr-icon-button', { timeout: 10000 }).eq(0).click()
+    cy.tick(10000)
+
+    cy.get('button.ccr-icon-button', { timeout: 10000 })
+      .eq(0)
+      .click({ force: true })
+
+    cy.tick(10000)
 
     cy.get('simple-snack-bar', { timeout: 10000 }).should(
       'contain',
