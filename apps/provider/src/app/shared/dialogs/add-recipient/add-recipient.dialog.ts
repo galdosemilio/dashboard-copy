@@ -309,10 +309,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     this.steps = this.stepOptions.map((state, index) => ({
       index: index + 1,
       name: state.name,
-      date: this.calcDelayedDate(
-        state.serverDelay,
-        index === 0 ? 'only-hours' : 'full'
-      )
+      date: this.calcDelayedDate(state.serverDelay)
     }))
 
     this.executeAt =
