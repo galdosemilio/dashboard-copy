@@ -74,6 +74,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   public stepOptions: SequenceState[] = []
   public steps: TableStep[] = []
   public today: moment.Moment = moment()
+  public isFirstStepImmediateProcess = false
+  public firstStepDate: Date
 
   private _sequence: Sequence
   private delayAcc: moment.Moment
@@ -312,6 +314,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       date: this.calcDelayedDate(state.serverDelay)
     }))
 
+    const startDateMoment = moment(this.form.value.startDate || undefined)
+
     this.executeAt =
       this.steps.length > 1 && this.form.value.startStep
         ? this.steps[this.form.value.startStep - 1].date
@@ -320,6 +324,13 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
             .toISOString()
 
     this.steps.splice(0, this.form.value.startStep || 0)
+
+    const firstStepDateMoment = moment(this.steps[0].date)
+
+    this.firstStepDate = firstStepDateMoment.toDate()
+    this.isFirstStepImmediateProcess = firstStepDateMoment.isSameOrBefore(
+      startDateMoment
+    )
 
     delete this.delayAcc
   }

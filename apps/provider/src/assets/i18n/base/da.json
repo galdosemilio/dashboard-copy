@@ -1559,6 +1559,7 @@
     "SENT_AT": "Sendt den",
     "SEQUENCES_ABOUT": "Sekvenser er en pre-registrerede besked levering system til dine patienter. Du er i stand til at skabe en progression af dage og levere en e-mail",
     "SEQUENCES_EMPTY_LIST": "Der er ingen sekvenser, der matcher søgekriterierne.",
+    "SEQUENCE_FIRST_STEP_IMMEDIATE_PROCESS_NOTE": "Enhver meddelelse eller handling, der er planlagt forud for {{selectedTime}}, behandles straks, når en patient er tilmeldt denne sekvens",
     "SEQUENCE_NAME": "Sekvensnavn",
     "SEQUENCE_PREVIEW": "Eksempel på rækkefølge",
     "SMS_NUMBER_INFO": "På grund af SMS'ens karakter",

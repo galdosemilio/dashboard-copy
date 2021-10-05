@@ -1559,6 +1559,7 @@
     "SENT_AT": "Senden an",
     "SEQUENCES_ABOUT": "Sequenzen sind ein vorprogrammiertes Nachrichtenzustellsystem für Ihre Patienten. Sie können einen Tagesverlauf erstellen und E-Mails, Benachrichtigungen für die mobile App und/oder Textnachrichten (SMS) in einer vorgegebenen Reihenfolge versenden. Sie können mehrere Sequenzen für verschiedene Zwecke erstellen (z.B. tägliche Erinnerungen oder Motivationen) und haben die Kontrolle darüber, welche Patienten in welche Sequenz(en) aufgenommen werden.",
     "SEQUENCES_EMPTY_LIST": "Es gibt keine Sequenzen, die den Suchkriterien entsprechen.",
+    "SEQUENCE_FIRST_STEP_IMMEDIATE_PROCESS_NOTE": "Jede Nachricht oder Aktion, die vor {{ selectedTime }} geplant wurde, wird sofort verarbeitet, wenn ein Patient in diese Sequenz aufgenommen wird",
     "SEQUENCE_NAME": "Sequenz-Name",
     "SEQUENCE_PREVIEW": "Sequenz-Vorschau",
     "SMS_NUMBER_INFO": "Aufgrund der Art der SMS",

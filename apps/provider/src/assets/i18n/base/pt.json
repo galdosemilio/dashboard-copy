@@ -1559,6 +1559,7 @@
     "SENT_AT": "Enviado a",
     "SEQUENCES_ABOUT": "As Sequências são um sistema de entrega de mensagens pré-agendado para os seus pacientes.  Pode criar uma progressão de dias e entregar um email",
     "SEQUENCES_EMPTY_LIST": "Não há sequências correspondentes ao critério de pesquisa.",
+    "SEQUENCE_FIRST_STEP_IMMEDIATE_PROCESS_NOTE": "Qualquer mensagem ou ação agendada antes de {{selectedTime}} será processada imediatamente quando um paciente for inscrito nesta sequência",
     "SEQUENCE_NAME": "Nome da Sequência",
     "SEQUENCE_PREVIEW": "Pré-visualização da Sequência",
     "SMS_NUMBER_INFO": "Devido à natureza do SMS",

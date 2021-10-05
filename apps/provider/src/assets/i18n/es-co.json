@@ -1559,6 +1559,7 @@
     "SENT_AT": "Enviado el",
     "SEQUENCES_ABOUT": "Las secuencias son un sistema de mensajería pre-programada para sus pacientes. Tiene la posibilidad de crear una progresión de días y enviar email, notificaciones de aplicación móvil y/o mensajes de texto (SMS) en una secuencia predefinida. Puede crear múltiples secuencias con diferentes propósitos (como recordatorios o mensajes motivacionales) y tiene la facultad de seleccionar cuáles pacientes estarán asociados con cada una de las secuencias.",
     "SEQUENCES_EMPTY_LIST": "No hay secuencias que coincidan con el criterio de búsqueda",
+    "SEQUENCE_FIRST_STEP_IMMEDIATE_PROCESS_NOTE": "Cualquier mensaje o acción programada antes de {{selectedTime}} se procesará inmediatamente cuando un paciente se inscriba en esta secuencia.",
     "SEQUENCE_NAME": "Nombre de la Secuencia",
     "SEQUENCE_PREVIEW": "Previsualización de Secuencia",
     "SMS_NUMBER_INFO": "Debido a la naturaleza de los SMS, el número desde el cual se envía el mensaje ('+1 (334) 398-6234' en la vista previa) se asigna automáticamente.",

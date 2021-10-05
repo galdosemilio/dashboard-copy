@@ -1559,6 +1559,7 @@
     "SENT_AT": "Envoyé à",
     "SEQUENCES_ABOUT": "Les séquences sont un système de diffusion de messages préprogrammés pour vos patients. Vous pouvez créer une progression de jours et envoyer un courriel, une notification d'application mobile et/ou un message texte (SMS) dans une séquence prédéfinie. Vous pouvez créer plusieurs séquences à des fins différentes (comme un rappel quotidien ou un message de motivation) et vous avez le contrôle sur les patients qui sont inscrits dans telle ou telle séquence.",
     "SEQUENCES_EMPTY_LIST": "Aucune séquence correspondant aux critères de recherche.",
+    "SEQUENCE_FIRST_STEP_IMMEDIATE_PROCESS_NOTE": "Tout message ou action programmé avant {{ selectedTime }} sera traité immédiatement lorsqu'un patient est inscrit dans cette séquence",
     "SEQUENCE_NAME": "Nom de la séquence",
     "SEQUENCE_PREVIEW": "Aperçu de la séquence",
     "SMS_NUMBER_INFO": "En raison de la nature des SMS",

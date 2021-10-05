@@ -1559,6 +1559,7 @@
     "SENT_AT": "Sent At",
     "SEQUENCES_ABOUT": "Sequences are a pre-scheduled message delivery system for your patients.  You are able to create a progression of days and deliver an email, mobile app notification, and/or text message (SMS) in a pre-set sequence.  You can create multiple sequences for different purposes (such as a daily reminder or motivational message) and you have control over which patients are enrolled in which sequence(s).",
     "SEQUENCES_EMPTY_LIST": "There are no sequences that match the search criteria.",
+    "SEQUENCE_FIRST_STEP_IMMEDIATE_PROCESS_NOTE": "Any message or action scheduled prior to {{ selectedTime }} will be processed immediately when a patient is enrolled into this sequence",
     "SEQUENCE_NAME": "Sequence Name",
     "SEQUENCE_PREVIEW": "Sequence Preview",
     "SMS_NUMBER_INFO": "Due the nature of SMS, the number from which the message is sent (‘+1 (334) 398-6234’ in this preview image) is automatically assigned.",

@@ -90,6 +90,10 @@
         </mat-form-field>
     </div>
 
+    <small *ngIf="isFirstStepImmediateProcess" class="step-note">{{ 'SEQUENCING.SEQUENCE_FIRST_STEP_IMMEDIATE_PROCESS_NOTE' | translate: {
+        selectedTime: today | amDateFormat:'ddd, MMM D YYYY h:mm a'
+    } }}</small>
+
     <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="25px">
         <h3>{{ 'SEQUENCING.SEQUENCE_PREVIEW' | translate }}</h3>
         <div class="ccr-table scrollable-v" fxFlex>
