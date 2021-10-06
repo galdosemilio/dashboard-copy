@@ -8,6 +8,7 @@ import { PagesComponents, PagesEntryComponents } from './pages.barrel'
 import { PagesProviders } from './pages.providers'
 import { PagesRouting } from './pages.routing'
 import { PagesStoreModule } from './store'
+import { WellcoreModule } from './wellcore/wellcore.module'
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { PagesStoreModule } from './store'
     FormsModule,
     PagesRouting,
     SharedModule,
+    WellcoreModule,
     PagesStoreModule.forParent(),
     QRCodeModule
   ],

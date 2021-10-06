@@ -1,0 +1,55 @@
+@import 'variables';
+
+@font-face {
+  font-family: 'Trade Gothic Bold Condensed';
+  font-style: normal;
+  font-weight: bold;
+  src: url(/assets/wellcore/fonts/trade-gothic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter Light';
+  font-style: normal;
+  font-weight: lighter;
+  src: url(/assets/wellcore/fonts/inter-light.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url(/assets/wellcore/fonts/inter-regular.woff2) format('woff2');
+}
+
+ccr-wellcore-container {
+  .host {
+    background: rgb(29, 18, 31);
+    background: linear-gradient(
+      135deg,
+      rgba(46, 78, 103, 1) 0%,
+      rgba(29, 18, 31, 1) 100%
+    );
+    min-height: 100vh;
+
+    & > div {
+      color: mat-color($wellcore, white);
+      font-family: 'Inter Regular';
+      margin: 0 auto;
+      width: 90%;
+    }
+  }
+
+  button.ccr-button.mat-button,
+  button.mat-flat-button.ccr-button {
+    font-size: 16px;
+    height: 42px;
+    line-height: 32px;
+    padding: 0 25px;
+    border-radius: 24px !important;
+  }
+
+  .mat-button-disabled {
+    border: 1px solid rgba(mat-color($wellcore, platinum), 0.3) !important;
+    color: rgba(mat-color($wellcore, platinum), 0.3) !important;
+  }
+}

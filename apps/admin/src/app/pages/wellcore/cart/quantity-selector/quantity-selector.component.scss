@@ -1,0 +1,36 @@
+@import 'variables';
+
+button.ccr-icon-button {
+  border-color: mat-color($wellcore, platinum);
+  border-radius: 100%;
+  font-size: 12px;
+  height: 20px;
+  min-width: 0;
+  line-height: 16px;
+  padding: 0;
+  width: 20px;
+
+  mat-icon {
+    font-size: 16px !important;
+    height: 20px;
+    line-height: 18px;
+    width: 18px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+@media #{$small-and-down} {
+  button.ccr-icon-button {
+    font-size: 24px;
+    line-height: 20px;
+    height: 32px;
+    width: 32px;
+  }
+
+  p {
+    font-size: 24px;
+  }
+}

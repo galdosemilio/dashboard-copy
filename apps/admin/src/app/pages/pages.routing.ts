@@ -25,8 +25,25 @@ import {
   UnsupportedBrowserPageComponent
 } from '@board/shared/shared.barrel'
 import { MFASetupPageComponent } from './mfa-setup'
+import {
+  WellcoreBloodSampleKitComponent,
+  WellcoreCartComponent,
+  WellcoreContainerComponent
+} from './wellcore'
 
 const routes: Routes = [
+  {
+    path: 'wellcore',
+    component: WellcoreContainerComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'blood-sample'
+      },
+      { path: 'blood-sample', component: WellcoreBloodSampleKitComponent },
+      { path: 'cart', component: WellcoreCartComponent }
+    ]
+  },
   {
     path: '',
     component: PlainLayout,
