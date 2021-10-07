@@ -75,8 +75,11 @@
     "ALL_PACKAGES": "المرضى في <strong>جميع</strong> المراحل المحددة",
     "AMOUNT": "المقدار",
     "AMOUNT_OF_DAYS": "عدد الأيام",
+    "ANY_AVAILABLE": "أي شيء متوفر",
     "ANY_CLINIC": "أي عيادة",
     "ANY_PACKAGES": "المرضى في <strong>أي</strong> المرحلة المحددة",
+    "APPOINTMENT_BOOK": "موعد الكتاب",
+    "APPOINTMENT_NEW": "موعد جديد",
     "APPOINTMENT_TYPE": "{{type}} موعد",
     "ASSIGN_FORM_PATIENT": "تقديم نموذج جديد",
     "ASSOCIATED_AT": "المرتبطة في",
@@ -262,6 +265,7 @@
     "POLY_FAT": "المشبعة المتعددة",
     "POSTAL_CODE": "الرمز البريدي",
     "POTASSIUM": "البوتاسيوم",
+    "PREFERRED_PROVIDER": "المزود المفضل",
     "PROFILE": "الملف الشخصي",
     "PROTEIN": "البروتين",
     "RECENT_REG": "آخر تسجيلات الدخول",
@@ -1045,6 +1049,7 @@
       "NO_SUPPLEMENTS_FOUND": "لم يتم تحديد أي إضافات لهذه المنظمة."
     },
     "SUCCESS": {
+      "APPOINTMENT_BOOKED": "تم حجز موعدك!",
       "ASSOCIATION_CREATED": "تم إنشاء جمعية بنجاح.",
       "ASSOCIATION_UPDATED": "تم تحديث الرابطة بنجاح.",
       "CAMERA_CHANGED": "تغيير الكاميرا المحدد",

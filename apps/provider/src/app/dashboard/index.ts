@@ -6,6 +6,7 @@ export * from './profile'
 export * from './reports'
 export * from './alerts'
 export * from './my-schedule'
+export * from './new-appointment'
 
 import {
   AccountComponents,
@@ -26,6 +27,7 @@ import {
 } from './profile'
 import { ResourcesComponents, ResourcesEntryComponents } from './resources'
 import { MyScheduleComponents } from './my-schedule'
+import { NewAppointmentComponents } from './new-appointment'
 
 export const DashboardComponents = [
   ...PanelComponents,
@@ -33,7 +35,8 @@ export const DashboardComponents = [
   ...LibraryComponents,
   ...ResourcesComponents,
   ...ProfileComponents,
-  ...MyScheduleComponents
+  ...MyScheduleComponents,
+  ...NewAppointmentComponents
 ]
 
 export const DashboardEntryComponents = [
@@ -42,7 +45,8 @@ export const DashboardEntryComponents = [
   ...LibraryEntryComponents,
   ...ResourcesEntryComponents,
   ...ProfileEntryComponents,
-  ...MyScheduleComponents
+  ...MyScheduleComponents,
+  ...NewAppointmentComponents
 ]
 
 export const DashboardProviders = [

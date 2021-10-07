@@ -75,8 +75,11 @@
     "ALL_PACKAGES": "Pacientes em <strong>todas</strong> fases selecionadas",
     "AMOUNT": "Quantidade",
     "AMOUNT_OF_DAYS": "Quantidade de Dias",
+    "ANY_AVAILABLE": "Qualquer disponível",
     "ANY_CLINIC": "Qualquer Clinic",
     "ANY_PACKAGES": "Pacientes em <strong>qualquer</strong> fase selecionada",
+    "APPOINTMENT_BOOK": "Anotação de livro",
+    "APPOINTMENT_NEW": "Novo compromisso",
     "APPOINTMENT_TYPE": "Nomeação {{type}}",
     "ASSIGN_FORM_PATIENT": "Sumissão de Novo Formulário",
     "ASSOCIATED_AT": "Associado a",
@@ -262,6 +265,7 @@
     "POLY_FAT": "Poliinsaturado",
     "POSTAL_CODE": "Código Postal",
     "POTASSIUM": "Potássio",
+    "PREFERRED_PROVIDER": "Provedor preferido",
     "PROFILE": "Perfil",
     "PROTEIN": "Proteína",
     "RECENT_REG": "Últimas inscrições",
@@ -1045,6 +1049,7 @@
       "NO_SUPPLEMENTS_FOUND": "Nenhum suplemento está definido para esta organização."
     },
     "SUCCESS": {
+      "APPOINTMENT_BOOKED": "Sua consulta marcada!",
       "ASSOCIATION_CREATED": "Associação criada com sucesso.",
       "ASSOCIATION_UPDATED": "Associação atualizada com sucesso.",
       "CAMERA_CHANGED": "câmera selecionada mudada",

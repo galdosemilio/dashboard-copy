@@ -75,8 +75,11 @@
     "ALL_PACKAGES": "Patients in <strong>all</strong> selected phases",
     "AMOUNT": "Amount",
     "AMOUNT_OF_DAYS": "Amount of Days",
+    "ANY_AVAILABLE": "Any Available",
     "ANY_CLINIC": "Any Clinic",
     "ANY_PACKAGES": "Patients in <strong>any</strong> selected phase",
+    "APPOINTMENT_BOOK": "Book Appointment",
+    "APPOINTMENT_NEW": "New Appointment",
     "APPOINTMENT_TYPE": "{{ type }} Appointment",
     "ASSIGN_FORM_PATIENT": "New Form Submission",
     "ASSOCIATED_AT": "Associated at",
@@ -262,6 +265,7 @@
     "POLY_FAT": "Polyunsaturated",
     "POSTAL_CODE": "Postal Code",
     "POTASSIUM": "Potassium",
+    "PREFERRED_PROVIDER": "Preferred Provider",
     "PROFILE": "Profile",
     "PROTEIN": "Protein",
     "RECENT_REG": "Latest Signups",
@@ -1045,6 +1049,7 @@
       "NO_SUPPLEMENTS_FOUND": "No supplements are defined for this clinic."
     },
     "SUCCESS": {
+      "APPOINTMENT_BOOKED": "Your Appointment Booked!",
       "ASSOCIATION_CREATED": "Association created successfully.",
       "ASSOCIATION_UPDATED": "Association updated successfully.",
       "CAMERA_CHANGED": "selected camera changed",

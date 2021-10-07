@@ -6,7 +6,8 @@ export const WellCoreProdSectionConfig: SectionConfigDetails = {
     PATIENT_SHOWN_OPTIONS: [SidenavOptions.TEST_RESULTS]
   },
   PATIENT_DASHBOARD: {
-    SHOW_MY_SCHEDULE: true
+    SHOW_MY_SCHEDULE: true,
+    SHOW_NEW_APPOINTMENT: true
   }
 }
 
@@ -15,6 +16,7 @@ export const WellCoreTestSectionConfig: SectionConfigDetails = {
     PATIENT_SHOWN_OPTIONS: [SidenavOptions.TEST_RESULTS]
   },
   PATIENT_DASHBOARD: {
-    SHOW_MY_SCHEDULE: true
+    SHOW_MY_SCHEDULE: true,
+    SHOW_NEW_APPOINTMENT: true
   }
 }

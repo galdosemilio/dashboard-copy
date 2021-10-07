@@ -37,6 +37,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
   canAccessPhi = true
   public currentUser: AccSingleResponse
   public showMySchedule = false
+  public showNewAppointmentButton = false
 
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/115001799311-Module-1-Getting-Started-with-your-Coach-dashboard'
@@ -69,6 +70,12 @@ export class DashboardComponent implements OnDestroy, OnInit {
       this.showMySchedule =
         resolveConfig(
           'PATIENT_DASHBOARD.SHOW_MY_SCHEDULE',
+          this.context.organization
+        ) ?? false
+
+      this.showNewAppointmentButton =
+        resolveConfig(
+          'PATIENT_DASHBOARD.SHOW_NEW_APPOINTMENT',
           this.context.organization
         ) ?? false
     })

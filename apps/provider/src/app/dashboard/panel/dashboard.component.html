@@ -65,7 +65,19 @@
   </div>
 
   <p>{{ 'BOARD.PATIENT_CALL_EXPLANATION' | translate }}</p>
-
+  <div class="mb-10" *ngIf="showNewAppointmentButton">
+    <a
+      mat-button
+      color="primary"
+      class="ccr-icon-button"
+      fxFlex="nogrow"
+      data-cy="new-appointment-button"
+      [routerLink]="['/new-appointment']"
+    >
+      <mat-icon>add</mat-icon>
+      <span>{{ 'BOARD.APPOINTMENT_NEW' | translate }}</span>
+    </a>
+  </div>
   <div
   fxLayout="column"
   fxLayoutAlign="start stretch"

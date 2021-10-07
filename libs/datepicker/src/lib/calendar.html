@@ -127,7 +127,7 @@
     </mat-years-view>
   </div>
 
-  <div class="mat-calendar-footer">
+  <div class="mat-calendar-footer" *ngIf="showActionControls">
     <button mat-button
     (click)="_cancelClicked()"
     [attr.aria-label]="_intl.buttonCancelLabel">

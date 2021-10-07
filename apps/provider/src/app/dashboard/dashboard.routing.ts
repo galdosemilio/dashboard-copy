@@ -11,6 +11,7 @@ import { CoachesRoutes } from './accounts/coaches/coaches.routing'
 import { DietersRoutes } from './accounts/dieters/dieters.routing'
 import { AlertsRoutes } from './alerts/alerts.routing'
 import { LibraryRoutes } from './library'
+import { NewAppointmentComponent } from './new-appointment'
 import { DashPanelRoutes } from './panel/panel.routing'
 import { ReportsRoutes } from './reports/reports.routing'
 import { PlatformUpdatesComponent } from './resources'
@@ -73,7 +74,8 @@ const routes: Routes = [
       {
         path: 'resources/platform-updates',
         component: PlatformUpdatesComponent
-      }
+      },
+      { path: 'new-appointment', component: NewAppointmentComponent }
       // { path: 'resources/support', component: SupportComponent },
       // { path: 'resources/marketing', component: MarketingComponent },
       // { path: 'resources/faqs', component: FaqsComponent }

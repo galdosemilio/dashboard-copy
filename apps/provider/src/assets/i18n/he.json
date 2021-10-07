@@ -75,8 +75,11 @@
     "ALL_PACKAGES": "חולים ב <strong>כל</strong> השלבים שנבחרו",
     "AMOUNT": "כמות",
     "AMOUNT_OF_DAYS": "כמות הימים",
+    "ANY_AVAILABLE": "כל זמין",
     "ANY_CLINIC": "בכל מרפאה",
     "ANY_PACKAGES": "חולים ב <strong>כל</strong> שלב שנבחר",
+    "APPOINTMENT_BOOK": "מינוי ספר",
+    "APPOINTMENT_NEW": "תור חדש",
     "APPOINTMENT_TYPE": "{{type}} מינוי",
     "ASSIGN_FORM_PATIENT": "הגשת טופס חדש",
     "ASSOCIATED_AT": "משויך ב",
@@ -262,6 +265,7 @@
     "POLY_FAT": "ריאלוס",
     "POSTAL_CODE": "מיקוד",
     "POTASSIUM": "אֶשׁלָגָן",
+    "PREFERRED_PROVIDER": "ספק מועדף",
     "PROFILE": "פרופיל",
     "PROTEIN": "חלבון",
     "RECENT_REG": "נרשמים אחרונים",
@@ -1045,6 +1049,7 @@
       "NO_SUPPLEMENTS_FOUND": "לא הוגדרו תוספי מזון למרפאה זו."
     },
     "SUCCESS": {
+      "APPOINTMENT_BOOKED": "פגישתך הוזמנה!",
       "ASSOCIATION_CREATED": "האגודה נוצרה בהצלחה.",
       "ASSOCIATION_UPDATED": "האיגוד עודכן בהצלחה.",
       "CAMERA_CHANGED": "המצלמה שנבחרה השתנתה",

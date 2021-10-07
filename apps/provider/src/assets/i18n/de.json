@@ -75,8 +75,11 @@
     "ALL_PACKAGES": "Patienten in <strong>allen</strong> ausgewählten Phasen",
     "AMOUNT": "Anzahl",
     "AMOUNT_OF_DAYS": "Anzahl der Tage",
+    "ANY_AVAILABLE": "Beliebig verfügbar",
     "ANY_CLINIC": "Jede Klinik",
     "ANY_PACKAGES": "Patienten in <strong>jeder</strong> ausgewählten Phase",
+    "APPOINTMENT_BOOK": "Einen Termin verabreden",
+    "APPOINTMENT_NEW": "Neuer Termin",
     "APPOINTMENT_TYPE": "{{type}} Termin",
     "ASSIGN_FORM_PATIENT": "Neue Formulareinreichung",
     "ASSOCIATED_AT": "Verbunden mit",
@@ -262,6 +265,7 @@
     "POLY_FAT": "Mehrfach ungesättigt",
     "POSTAL_CODE": "Postleitzahl",
     "POTASSIUM": "Kalium",
+    "PREFERRED_PROVIDER": "Bevorzugter Anbieter",
     "PROFILE": "Profil",
     "PROTEIN": "Eiweiß",
     "RECENT_REG": "neueste Anmeldungen",
@@ -1045,6 +1049,7 @@
       "NO_SUPPLEMENTS_FOUND": "Für diese Organisation definiert sind keine Ergänzungen geplant."
     },
     "SUCCESS": {
+      "APPOINTMENT_BOOKED": "Ihr Termin gebucht!",
       "ASSOCIATION_CREATED": "Verbindung erfolgreich erstellt",
       "ASSOCIATION_UPDATED": "Verbindung erfolgreich aktualisiert",
       "CAMERA_CHANGED": "ausgewählte Kamera geändert",

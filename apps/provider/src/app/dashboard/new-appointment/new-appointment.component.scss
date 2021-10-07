@@ -1,0 +1,76 @@
+@import 'shared/directed-styles';
+@import 'variables';
+
+:host {
+  height: 100%;
+
+  .appointment-body {
+    overflow: hidden;
+
+    .mat-calendar {
+      width: 100% !important;
+      max-width: unset !important;
+    }
+
+    .time-slots-wrap {
+      overflow: auto;
+
+      .time-slots {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 20px;
+        row-gap: 10px;
+
+        .time-slot {
+          cursor: pointer;
+          text-align: center;
+          padding: 5px 0;
+          border: 1px solid gray;
+          border-radius: 5px;
+
+          &.active {
+            border-color: var(--primary) !important;
+            color: var(--primary) !important;
+          }
+        }
+      }
+    }
+  }
+
+  .appointment-actions {
+    margin-top: 20px;
+    > div {
+      padding: 20px;
+      border: 1px solid var(--primary);
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: center;
+
+      p {
+        text-align: center;
+      }
+
+      .ccr-button {
+        padding: 5px 20px;
+      }
+    }
+  }
+
+  @media ($mat-small) {
+    height: unset;
+
+    .appointment-body {
+      overflow: unset;
+
+      .mat-calendar {
+        max-height: 470px !important;
+      }
+
+      .time-slots-wrap {
+        overflow: unset;
+      }
+    }
+  }
+}

@@ -60,7 +60,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     ]
   },
   PATIENT_DASHBOARD: {
-    SHOW_MY_SCHEDULE: false
+    SHOW_MY_SCHEDULE: false,
+    SHOW_NEW_APPOINTMENT: false
   }
 }
 
@@ -113,6 +114,7 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     ]
   },
   PATIENT_DASHBOARD: {
-    SHOW_MY_SCHEDULE: false
+    SHOW_MY_SCHEDULE: false,
+    SHOW_NEW_APPOINTMENT: false
   }
 }

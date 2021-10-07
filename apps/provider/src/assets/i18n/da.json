@@ -75,8 +75,11 @@
     "ALL_PACKAGES": "Patienter i <strong>alle</strong> valgte faser",
     "AMOUNT": "Antal",
     "AMOUNT_OF_DAYS": "Antal dage",
+    "ANY_AVAILABLE": "Enhver tilgængelig",
     "ANY_CLINIC": "Enhver Clinic",
     "ANY_PACKAGES": "Patienter i <strong>enhver</strong> valgt fase",
+    "APPOINTMENT_BOOK": "Bestil tid",
+    "APPOINTMENT_NEW": "Ny aftale",
     "APPOINTMENT_TYPE": "{{type}} aftaler",
     "ASSIGN_FORM_PATIENT": "Ny formindgivelse",
     "ASSOCIATED_AT": "Associeret ved",
@@ -262,6 +265,7 @@
     "POLY_FAT": "Flerumættet",
     "POSTAL_CODE": "Postnummer",
     "POTASSIUM": "Kalium",
+    "PREFERRED_PROVIDER": "Foretrukken udbyder",
     "PROFILE": "Profil",
     "PROTEIN": "Protein",
     "RECENT_REG": "Seneste Tilmeldinger",
@@ -1045,6 +1049,7 @@
       "NO_SUPPLEMENTS_FOUND": "Der er ikke fastsat nogen kosttilskud for denne organisation."
     },
     "SUCCESS": {
+      "APPOINTMENT_BOOKED": "Din aftale er reserveret!",
       "ASSOCIATION_CREATED": "Association oprettet med succes.",
       "ASSOCIATION_UPDATED": "Association opdateret med succes.",
       "CAMERA_CHANGED": "det valgte kamera ændrede",

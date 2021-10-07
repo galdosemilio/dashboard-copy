@@ -151,6 +151,9 @@ export class MatCalendar<D>
   @Input()
   showCalendarControls = true
 
+  @Input()
+  showActionControls = true
+
   /** Emits when the currently selected month changes. Does not mean a date change. */
   @Output()
   monthSelected = new EventEmitter<D>()
@@ -413,6 +416,10 @@ export class MatCalendar<D>
     //   this._userSelection.emit();
     // }
     this.selected = date
+
+    if (!this.showActionControls) {
+      this._submitClicked()
+    }
   }
 
   /** Handles date selection in the month view. */
@@ -421,6 +428,10 @@ export class MatCalendar<D>
     if (this._hasTime) {
       this.changeView('clock')
     }
+
+    if (!this.showActionControls) {
+      this._submitClicked()
+    }
   }
 
   /** Handles month selection in the year view. */
@@ -428,12 +439,20 @@ export class MatCalendar<D>
     this.selected = month
     this.monthSelected.emit(this.activeDate)
     this.changeView('month')
+
+    if (!this.showActionControls) {
+      this._submitClicked()
+    }
   }
 
   _yearSelected(year: D): void {
     this.selected = year
     this.yearSelected.emit(this.activeDate)
     this.changeView('year')
+
+    if (!this.showActionControls) {
+      this._submitClicked()
+    }
   }
 
   /** Handles user clicks on the period label. */
