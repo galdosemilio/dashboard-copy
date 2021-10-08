@@ -1,3 +1,17 @@
+# [1.41.0](https://github.com/coachcare/dashboard/compare/v1.40.0...v1.41.0) (2021-10-08)
+
+
+### Bug Fixes
+
+* adjusted calculations for multiple food props [FRON-2368] ([249af06](https://github.com/coachcare/dashboard/commit/249af06c83449f3fd26e02e41c33197160828cb9))
+* allowed churndate to be deleted [FRON-2367] ([d6a99a5](https://github.com/coachcare/dashboard/commit/d6a99a51d8cd0a6c97e47fa3aa809d0c28da6a54))
+* improve organization preferences [FRON-1684] ([ed0ed56](https://github.com/coachcare/dashboard/commit/ed0ed560bbe316b8c77bfff94e9a9332271efee1))
+
+
+### Features
+
+* added wellcore onboarding pages [FRON-2374] ([cfd5d78](https://github.com/coachcare/dashboard/commit/cfd5d783bf8ed8fd7fa778a67e497724117d4fdd))
+
 # [1.40.0](https://github.com/coachcare/dashboard/compare/v1.39.0...v1.40.0) (2021-10-02)
 
 
