@@ -324,6 +324,9 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('GET', '/2.0/available/calendar?**', {
     fixture: 'api/meeting/getAvailability'
   })
+  cy.intercept('GET', '/2.0/available?provider**', {
+    fixture: 'api/general/emptyDataEmptyPagination'
+  })
   cy.intercept('GET', '/1.0/meeting/attendance/status/**', {
     fixture: 'api/meeting/getAttendanceStatuses'
   })
@@ -439,7 +442,10 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     fixture: 'api/form/getStructure'
   })
   cy.intercept('GET', '/2.0/account/*/external-identifier?account=**', {
-    fixture: 'api/general/emptyData'
+    fixture: fetchOverride(
+      '/2.0/account/*/external-identifier?account=**',
+      'api/general/emptyData'
+    )
   })
   cy.intercept('DELETE', '/1.0/content/form/submission/**', {
     statusCode: 204,

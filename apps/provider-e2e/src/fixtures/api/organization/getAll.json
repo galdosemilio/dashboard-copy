@@ -188,6 +188,33 @@
         "allowClientPhi": true
       },
       "associatedAt": "2019-05-08T18:07:44.907Z"
+    },
+    {
+      "organization": {
+        "id": "7535",
+        "name": "Wellcore",
+        "address": {
+          "city": "New York",
+          "state": "NY - New York",
+          "street": "150 West 28th Street",
+          "country": "US",
+          "postalCode": "10001"
+        },
+        "contact": {
+          "email": "eric@coachcare.com",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "shortcode": "wellcore",
+        "hierarchyPath": [7535, 1]
+      },
+      "isDirect": true,
+      "permissions": {
+        "admin": true,
+        "viewAll": true,
+        "allowClientPhi": true
+      },
+      "associatedAt": "2019-05-09T18:07:44.907Z"
     }
   ],
   "pagination": {}

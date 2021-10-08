@@ -6,6 +6,7 @@ import { ScheduleAvailabilityComponent } from './availability/schedule-availabil
 import { ScheduleAvailabilitySingleDayComponent } from './availability/single-day/single-day.component'
 import { ScheduleCalendarComponent } from './calendar/schedule-calendar.component'
 import { ScheduleListComponent } from './list'
+import { AvailabilityManagementService } from './service'
 
 export const ScheduleComponents = [
   ScheduleAvailabilityComponent,
@@ -17,7 +18,7 @@ export const ScheduleComponents = [
 
 export const ScheduleEntryComponents = []
 
-export const ScheduleProviders = []
+export const ScheduleProviders = [AvailabilityManagementService]
 
 export {
   ScheduleAvailabilityComponent,

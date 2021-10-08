@@ -33,14 +33,14 @@
       <span class="mat-availability-value mat-availability-empty" fxFlex="1 0 130px" fxShow fxHide.xs>{{'BOARD.END_TIME' | translate}}</span>
     </div>
 
-    <div class="mat-availability-col" *ngIf="segment.id">
+    <div class="mat-availability-col" *ngIf="segment.id && !isDisabledAvailabilityManagement">
       <button mat-icon-button class="ccr-icon-button" fxFlex.xs="0 0 30px"
       [attr.aria-label]="'BOARD.DELETE_AVAILABILITY' | translate" (click)="deleteSegment(segment)">
         <mat-icon>delete</mat-icon>
         <span fxShow.xs fxHide>{{'GLOBAL.DELETE' | translate}}</span>
       </button>
     </div>
-    <div class="mat-availability-col" *ngIf="!segment.id">
+    <div class="mat-availability-col" *ngIf="!segment.id && !isDisabledAvailabilityManagement">
       <button mat-icon-button class="ccr-icon-button" fxFlex.xs="0 0 30px"
       [attr.aria-label]="'BOARD.ADD_BLOCK_OF_TIME' | translate" (click)="openDialog(segment)">
         <mat-icon>add_circle_outline</mat-icon>
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <button mat-button class="ccr-button mat-availability-action" (click)="deleteAll()">
+  <button *ngIf="!isDisabledAvailabilityManagement" mat-button class="ccr-button mat-availability-action" (click)="deleteAll()">
     <span>{{'GLOBAL.RESET_ALL' | translate}}</span>
   </button>
 </div>

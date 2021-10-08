@@ -1027,6 +1027,7 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "no están disponibles actualmente",
       "CONTACT_NOT_AVAILABLE": "no está disponible",
+      "DISABLE_AVAILABILITY_MANAGEMENT": "Su cuenta de proveedor está asociada a un sistema de gestión de recetas externo. Como tal, no puede administrar la disponibilidad de su horario desde este panel. La disponibilidad se importará del sistema de gestión de recetas y se actualizará automáticamente aquí.",
       "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Su cuenta no tiene permiso para acceder a esta característica",
       "HUNG_UP": "colgar",
       "MULTIPLE_CSV_FILES": "Se generará multiples archivos CSV con un máximo de 5000 pacientes cada uno.",

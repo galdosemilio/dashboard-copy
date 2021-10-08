@@ -1027,6 +1027,7 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "are currently unavailable",
       "CONTACT_NOT_AVAILABLE": "is currently unavailable",
+      "DISABLE_AVAILABILITY_MANAGEMENT": "Your provider account is associated to an external prescription management system.  As such, you may not manage your schedule availability from this dashboard.  Availability will be imported from the prescription management system and will be automatically updated here.",
       "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Your account does not have permission to access this feature",
       "HUNG_UP": "hung up",
       "MULTIPLE_CSV_FILES": "Multiple CSV files will be downloaded with a maximum of 5000 patients in each file.",

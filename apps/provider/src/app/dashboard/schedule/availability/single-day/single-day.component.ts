@@ -9,6 +9,8 @@ import {
   FetchCalendarAvailabilityRequest,
   FetchCalendarAvailabilitySegment
 } from '@coachcare/sdk'
+import { AvailabilityManagementService } from '../../service'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export type SingleDayAvailabilitySegment = FetchCalendarAvailabilitySegment & {
   startDate: string
@@ -16,6 +18,7 @@ export type SingleDayAvailabilitySegment = FetchCalendarAvailabilitySegment & {
   newline: boolean
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-schedule-availability-single',
   templateUrl: './single-day.component.html',
@@ -23,10 +26,11 @@ export type SingleDayAvailabilitySegment = FetchCalendarAvailabilitySegment & {
 })
 export class ScheduleAvailabilitySingleDayComponent implements OnInit {
   private user: SelectedAccount
-
+  public isDisabledAvailabilityManagement = false
   public segments: SingleDayAvailabilitySegment[] = []
 
   constructor(
+    private availabilityManagement: AvailabilityManagementService,
     private dialog: MatDialog,
     private schedule: Schedule,
     private context: ContextService,
@@ -40,6 +44,12 @@ export class ScheduleAvailabilitySingleDayComponent implements OnInit {
         this.loadAvailability()
       }
     })
+
+    this.availabilityManagement.isDisabledAvailabilityManagement$
+      .pipe(untilDestroyed(this))
+      .subscribe((isDisabled) => {
+        this.isDisabledAvailabilityManagement = isDisabled
+      })
   }
 
   public loadAvailability() {

@@ -24,7 +24,7 @@
       <span class="mat-availability-value mat-availability-empty" fxFlex="1 0 110px">{{'BOARD.END_TIME' | translate}}</span>
     </div>
 
-    <div class="mat-availability-col">
+    <div class="mat-availability-col" *ngIf="!isDisabledAvailabilityManagement">
       <button mat-icon-button class="ccr-icon-button" fxFlex.xs="0 0 30px" (click)="openDialog()">
         <mat-icon>add_circle_outline</mat-icon>
         <span fxShow.xs fxHide>{{'BOARD.ADD_SINGLE_AVAILABILITY' | translate}}</span>
@@ -63,7 +63,7 @@
       <span class="mat-availability-value" fxFlex="1 0 110px" fxShow fxHide.xs>{{ segment.endTime }}</span>
     </div>
 
-    <div class="mat-availability-col" *ngIf="segment.ids">
+    <div class="mat-availability-col" *ngIf="segment.ids && !isDisabledAvailabilityManagement">
       <button mat-icon-button class="ccr-icon-button" fxFlex.xs="0 0 30px"
       [attr.aria-label]="'BOARD.DELETE_AVAILABILITY' | translate" (click)="deleteSegment(segment)">
         <mat-icon>delete</mat-icon>

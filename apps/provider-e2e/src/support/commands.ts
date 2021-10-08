@@ -45,6 +45,9 @@ Cypress.Commands.add('setOrganization', (org: string) => {
     case 'apollo-us':
       translatedOrg = 8000
       break
+    case 'wellcore':
+      translatedOrg = 7535
+      break
     default:
       translatedOrg = 1
   }

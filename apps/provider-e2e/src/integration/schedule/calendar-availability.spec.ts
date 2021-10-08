@@ -314,4 +314,81 @@ describe('Schedule -> availability', function () {
       }
     )
   })
+
+  it('Allows providers to modify their availability if the organization is different from Wellcore', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`schedule/available/recurring`)
+
+    cy.get('app-schedule-availability').should(
+      'not.contain',
+      'Your provider account is associated to an external prescription management system.'
+    )
+
+    cy.get('app-schedule-availability-recurring')
+      .find('button')
+      .should('have.length', 8)
+  })
+
+  it("Allows providers to modify their availability (wellcore) if the org is Wellcore and they don't have a Prescribery ID", function () {
+    cy.setTimezone('et')
+    cy.setOrganization('wellcore')
+    standardSetup()
+
+    cy.visit(`schedule/available/recurring`)
+
+    cy.get('app-schedule-availability').should(
+      'not.contain',
+      'Your provider account is associated to an external prescription management system.'
+    )
+
+    cy.get('app-schedule-availability-recurring')
+      .find('button')
+      .should('have.length', 8)
+  })
+
+  it('Prevents providers from modifying their availability (wellcore) if the org is Wellcore and they have a Prescribery ID', function () {
+    cy.setTimezone('et')
+    cy.setOrganization('wellcore')
+    standardSetup(undefined, [
+      {
+        url: '/2.0/account/*/external-identifier?account=**',
+        fixture: 'api/account/getPrescriberyExternalIdentifier'
+      }
+    ])
+
+    cy.visit(`schedule/available/recurring`)
+
+    cy.get('app-schedule-availability').should(
+      'contain',
+      'Your provider account is associated to an external prescription management system.'
+    )
+
+    cy.get('app-schedule-availability-recurring')
+      .find('button')
+      .should('have.length', 0)
+  })
+
+  it('Prevents providers from modifying their availability (single) if the org is Wellcore and they have a Prescribery ID', function () {
+    cy.setTimezone('et')
+    cy.setOrganization('wellcore')
+    standardSetup(undefined, [
+      {
+        url: '/2.0/account/*/external-identifier?account=**',
+        fixture: 'api/account/getPrescriberyExternalIdentifier'
+      }
+    ])
+
+    cy.visit(`schedule/available/single`)
+
+    cy.get('app-schedule-availability').should(
+      'contain',
+      'Your provider account is associated to an external prescription management system.'
+    )
+
+    cy.get('app-schedule-availability-single')
+      .find('button')
+      .should('have.length', 0)
+  })
 })

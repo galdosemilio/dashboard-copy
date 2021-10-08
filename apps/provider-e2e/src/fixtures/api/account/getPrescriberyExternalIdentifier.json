@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "account": {
+        "id": "1"
+      },
+      "organization": {
+        "id": "7535",
+        "name": "Wellcore",
+        "shortCode": "wellcore",
+        "hierarchyPath": ["7535", "30"]
+      },
+      "name": "Prescribery ID",
+      "value": "prescribery_id",
+      "isActive": true
+    }
+  ]
+}

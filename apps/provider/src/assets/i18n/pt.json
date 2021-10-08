@@ -1027,6 +1027,7 @@
     "INFO": {
       "CONTACTS_NOT_AVAILABLE": "estão indisponíveis no momento",
       "CONTACT_NOT_AVAILABLE": "está indisponível no momento",
+      "DISABLE_AVAILABILITY_MANAGEMENT": "Sua conta de provedor está associada a um sistema externo de gerenciamento de receitas. Como tal, você não pode gerenciar a disponibilidade de sua programação a partir deste painel. A disponibilidade será importada do sistema de gerenciamento de prescrição e atualizada automaticamente aqui.",
       "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "A sua conta não tem permissão para aceder a esta funcionalidade",
       "HUNG_UP": "desligar",
       "MULTIPLE_CSV_FILES": "Vários arquivos CSV serão baixados com um máximo de 5000 pacientes em cada arquivo.",

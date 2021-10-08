@@ -5,6 +5,8 @@ import { Schedule } from '@coachcare/sdk'
 
 import { ContextService, NotifierService, SelectedAccount } from '@app/service'
 import { _, PromptDialog, RecurringAddDialog } from '@app/shared'
+import { AvailabilityManagementService } from '../../service'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export interface ScheduleAvailabilityRecurringSegment {
   id: string
@@ -14,6 +16,7 @@ export interface ScheduleAvailabilityRecurringSegment {
   end: moment.Moment
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-schedule-availability-recurring',
   templateUrl: './recurring.component.html',
@@ -25,8 +28,10 @@ export class ScheduleAvailabilityRecurringComponent implements OnInit {
 
   public days = []
   public segments: ScheduleAvailabilityRecurringSegment[] = []
+  public isDisabledAvailabilityManagement = false
 
   constructor(
+    private availabilityManagement: AvailabilityManagementService,
     private dialog: MatDialog,
     private schedule: Schedule,
     private context: ContextService,
@@ -55,6 +60,12 @@ export class ScheduleAvailabilityRecurringComponent implements OnInit {
         this.loadAvailability()
       }
     })
+
+    this.availabilityManagement.isDisabledAvailabilityManagement$
+      .pipe(untilDestroyed(this))
+      .subscribe((isDisabled) => {
+        this.isDisabledAvailabilityManagement = isDisabled
+      })
 
     this.emptySegment = {
       id: '',

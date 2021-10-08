@@ -12,4 +12,5 @@ export interface Environment {
   url: string
   awsAssetsUrl: string
   coachcareOrgId: string
+  wellCoreOrgId: string
 }

@@ -10,5 +10,6 @@ export const environment: Environment = {
   selveraApiEnv: 'test',
   url: 'https://dashboard.coachcaredev.com/provider',
   awsAssetsUrl: 'https://s3.amazonaws.com/dev.assets.cc',
-  coachcareOrgId: '30'
+  coachcareOrgId: '30',
+  wellCoreOrgId: '7535'
 }
