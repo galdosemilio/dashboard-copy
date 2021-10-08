@@ -308,7 +308,11 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       ? this.sequence.states.filter((state) => state.name !== 'root')
       : []
 
-    this.steps = this.stepOptions.map((state, index) => ({
+    const stepsCopy = this.stepOptions.slice()
+
+    stepsCopy.splice(0, this.form.value.startStep || 0)
+
+    this.steps = stepsCopy.map((state, index) => ({
       index: index + 1,
       name: state.name,
       date: this.calcDelayedDate(state.serverDelay)
@@ -318,12 +322,10 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
 
     this.executeAt =
       this.steps.length > 1 && this.form.value.startStep
-        ? this.steps[this.form.value.startStep - 1].date
+        ? this.steps[0].date
         : moment(this.form.value.startDate || undefined)
             .startOf('day')
             .toISOString()
-
-    this.steps.splice(0, this.form.value.startStep || 0)
 
     const firstStepDateMoment = moment(this.steps[0].date)
 
