@@ -111,7 +111,7 @@ export class CallVideoRequestComponent implements OnDestroy, OnInit {
       } finally {
         this.fetchingCallDetails = false
       }
-    }, 5000)
+    }, 15000)
   }
 
   private stopCallPolling(): void {
