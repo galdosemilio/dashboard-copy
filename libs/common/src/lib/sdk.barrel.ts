@@ -91,7 +91,7 @@ const generalApiService = new ApiService({
   caching: { enabled: false },
   throttling: environment.enableThrottling
     ? environment.ccrApiEnv === 'prod'
-      ? { enabled: true, options: { defaultRateLimit: 17 } }
+      ? { enabled: true, options: { defaultRateLimit: 15 } }
       : { enabled: true, options: { defaultRateLimit: 5 } }
     : { enabled: false },
   headers: SDK_HEADERS
