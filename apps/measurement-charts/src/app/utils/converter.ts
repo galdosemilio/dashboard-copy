@@ -1,15 +1,15 @@
-import { MeasurementsEnum } from '@chart/model'
 import {
   convertUnitToPreferenceFormat,
+  DataPointTypes,
   MeasurementDataPointMinimalType
 } from '@coachcare/sdk'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 
 export const format = (value: number, dataPointTypeId: string) => {
   switch (dataPointTypeId) {
-    case MeasurementsEnum.STEPS:
+    case DataPointTypes.STEPS:
       return value.toFixed(0)
-    case MeasurementsEnum.SLEEP:
+    case DataPointTypes.SLEEP:
       const hours = Math.floor(value / 3600)
       const minutes = Math.floor((value % 3600) / 60)
       return `${hours > 9 ? hours : `0${hours}`}:${
@@ -24,7 +24,7 @@ export const unit = (
   dataPointType: MeasurementDataPointMinimalType,
   metric: UserMeasurementPreferenceType
 ) => {
-  if (dataPointType.id === MeasurementsEnum.SLEEP) {
+  if (dataPointType.id === DataPointTypes.SLEEP) {
     return ''
   }
 

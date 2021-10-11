@@ -1,16 +1,12 @@
 import './graph.element.scss'
 
 import * as utils from '@chart/utils'
-import {
-  CcrElement,
-  DateRange,
-  MeasurementsEnum,
-  Timeframe,
-  baseData
-} from '../../model'
+import { CcrElement, DateRange, Timeframe, baseData } from '../../model'
 import {
   MeasurementDataPointAggregate,
-  convertToReadableFormat
+  convertToReadableFormat,
+  MeasurementDataPointType,
+  DataPointTypes
 } from '@coachcare/sdk'
 import { auditTime, debounceTime, filter } from 'rxjs/operators'
 
@@ -25,6 +21,7 @@ import { translate } from '@chart/service/i18n'
 export interface GraphEntry {
   value: number
   time: string
+  weightValue?: number
 }
 
 export class GraphElement extends CcrElement {
@@ -51,6 +48,7 @@ export class GraphElement extends CcrElement {
     Record<string, unknown>
   > = new Subject<Record<string, unknown>>()
   private scaleChart$: Subject<void> = new Subject<void>()
+  private dataPointTypes: MeasurementDataPointType[]
 
   constructor() {
     super()
@@ -70,8 +68,21 @@ export class GraphElement extends CcrElement {
     this.createChart()
 
     eventService.baseDataEvent$.subscribe((baseData) => {
+      if (!baseData.dataPointTypeId) {
+        return
+      }
+
       this.sourceId = baseData.sourceId || '-1'
       this.isReady = true
+
+      if (baseData.isWeightRequired) {
+        this.dataPointTypes = baseData.dataPointTypes.filter(
+          (d) => d.id !== DataPointTypes.WEIGHT
+        )
+      } else {
+        this.dataPointTypes = baseData.dataPointTypes
+      }
+
       this.addLineSeries()
     })
 
@@ -114,7 +125,7 @@ export class GraphElement extends CcrElement {
   }
 
   private addLineSeries(): void {
-    api.baseData.dataPointTypes.forEach((type, index) => {
+    this.dataPointTypes.forEach((type, index) => {
       const unit = utils.unit(type, api.baseData.metric)
       const color = Object.keys(api.baseData.colors)[index]
 
@@ -123,7 +134,7 @@ export class GraphElement extends CcrElement {
           type: 'custom',
           precision: 1,
           minMove:
-            api.baseData.dataPointTypeId === MeasurementsEnum.SLEEP ? 60 : 0.5,
+            api.baseData.dataPointTypeId === DataPointTypes.SLEEP ? 60 : 0.5,
           formatter: (value) =>
             utils.format(value, api.baseData.dataPointTypeId) + ' ' + unit
         },
@@ -203,7 +214,7 @@ export class GraphElement extends CcrElement {
       ? filteredData
       : this.measurementData
 
-    const measurementMaps = api.baseData.dataPointTypes.map((type) =>
+    const measurementMaps = this.dataPointTypes.map((type) =>
       measurementData.filter((entry) => entry.point.type.id === type.id)
     )
 
@@ -266,7 +277,7 @@ export class GraphElement extends CcrElement {
 
       this.isLoading = true
 
-      const measurements = await api.measurementDataPoint.getAggregates({
+      const results = await api.measurementDataPoint.getAggregates({
         account: api.baseData.accountId || undefined,
         type: api.baseData.dataPointTypes.map((t) => t.id),
         recordedAt: this.dateRange,
@@ -275,9 +286,23 @@ export class GraphElement extends CcrElement {
         unit: 'day'
       })
 
+      let measurements = results.data
+      let weightMeasurements: MeasurementDataPointAggregate[] = []
+
+      if (api.baseData.isWeightRequired) {
+        weightMeasurements = measurements.filter(
+          (m) => m.point.type.id === DataPointTypes.WEIGHT
+        )
+        const otherMeasurements = measurements.filter(
+          (m) => m.point.type.id !== DataPointTypes.WEIGHT
+        )
+
+        measurements = otherMeasurements
+      }
+
       this.measurementData = append
-        ? this.measurementData.concat(measurements.data)
-        : measurements.data.concat(this.measurementData)
+        ? this.measurementData.concat(measurements)
+        : measurements.concat(this.measurementData)
 
       const sources = chain(this.measurementData)
         .map((entry) => entry.point.group.source)
@@ -296,15 +321,13 @@ export class GraphElement extends CcrElement {
         }
       }
 
-      const filteredData = measurements.data.filter(
+      const filteredData = measurements.filter(
         (entry) => entry.point.group.source.id === this.sourceId
       )
 
-      const measurementData = filteredData.length
-        ? filteredData
-        : measurements.data
+      const measurementData = filteredData.length ? filteredData : measurements
 
-      const measurementMaps = api.baseData.dataPointTypes.map((type) =>
+      const measurementMaps = this.dataPointTypes.map((type) =>
         measurementData.filter((entry) => entry.point.type.id === type.id)
       )
 
@@ -339,6 +362,13 @@ export class GraphElement extends CcrElement {
             ? maxBy(filteredGroup, (grp) => grp.point.value)
             : emptyGroup
 
+          const weightEntry =
+            entry &&
+            weightMeasurements.find(
+              (w) =>
+                w.bucket.date === entry.bucket.date &&
+                w.point.group.source.id === entry.point?.group?.source.id
+            )
           return {
             time: DateTime.fromISO(entry.bucket.timestamp).toFormat(
               this.chartTimeFormat
@@ -347,6 +377,13 @@ export class GraphElement extends CcrElement {
               ? convertToReadableFormat(
                   entry.point.value,
                   entry.point.type,
+                  baseData.metric
+                )
+              : undefined,
+            weightValue: weightEntry
+              ? convertToReadableFormat(
+                  weightEntry.point.value,
+                  weightEntry.point.type,
                   baseData.metric
                 )
               : undefined
@@ -458,7 +495,10 @@ export class GraphElement extends CcrElement {
 
   private getBarSpacingSettings(
     timeframe: Timeframe
-  ): { barSpacing: number; minBarSpacing: number } {
+  ): {
+    barSpacing: number
+    minBarSpacing: number
+  } {
     switch (timeframe) {
       case 'week':
         return { minBarSpacing: 33, barSpacing: 33 }
@@ -544,7 +584,6 @@ export class GraphElement extends CcrElement {
 
           this.showEmptyDataError()
         }),
-      eventService.baseDataEvent$.subscribe(() => this.fetchMeasurements()),
       this.resizeChart$
         .pipe(
           debounceTime(1000),

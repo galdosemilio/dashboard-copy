@@ -1,11 +1,15 @@
 import './app.element.scss'
 
-import { baseData, BaseData, Tab, Timeframe } from '../model'
+import { baseData, BaseData, Tab, Timeframe, requiredWeightIds } from '../model'
 import { api } from '../service/api'
 import { eventService, tabService } from '@chart/service'
 import { DateTime, Settings as LuxonSettings } from 'luxon'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
-import { MeasurementDataPointType, SYNTHETIC_TYPES } from '@coachcare/sdk'
+import {
+  DataPointTypes,
+  MeasurementDataPointType,
+  SYNTHETIC_TYPES
+} from '@coachcare/sdk'
 
 export class AppElement extends HTMLElement {
   constructor() {
@@ -57,10 +61,25 @@ export class AppElement extends HTMLElement {
   private async onMessage(data: BaseData) {
     api.setToken(data.token)
 
-    const dataPointTypeIds = data.dataPointTypeId
-      ? SYNTHETIC_TYPES.find((t) => t.id === data.dataPointTypeId)
-          ?.sourceTypeIds || [data.dataPointTypeId]
-      : []
+    let dataPointTypeIds = [data.dataPointTypeId]
+
+    const syntheticType = SYNTHETIC_TYPES.find(
+      (t) => t.id === data.dataPointTypeId
+    )
+
+    if (syntheticType) {
+      dataPointTypeIds = syntheticType.sourceTypeIds
+    }
+
+    const isRequiredWeight = requiredWeightIds.some((requiredWeightId) =>
+      dataPointTypeIds.includes(requiredWeightId)
+    )
+
+    if (isRequiredWeight) {
+      dataPointTypeIds = (dataPointTypeIds as DataPointTypes[]).concat([
+        DataPointTypes.WEIGHT
+      ])
+    }
 
     const dataPointTypes: MeasurementDataPointType[] = []
 
@@ -79,10 +98,10 @@ export class AppElement extends HTMLElement {
       data.lastDate = DateTime.now().toFormat('yyyy-MM-dd')
     }
 
-    api.appendBaseData({
-      ...data,
-      dataPointTypes
-    })
+    data.isWeightRequired = isRequiredWeight
+    data.dataPointTypes = dataPointTypes
+
+    api.appendBaseData(data)
     this.setColorPattern()
 
     tabService.selectedTab$.next(data.view)

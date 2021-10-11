@@ -1,10 +1,11 @@
-import { CcrElement, MeasurementsEnum, Tab } from '@chart/model'
+import { CcrElement, Tab } from '@chart/model'
 import { api } from '@chart/service/api'
 import { tabService, modalService, eventService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 import {
   MeasurementDataPointAggregate,
-  convertToReadableFormat
+  convertToReadableFormat,
+  DataPointTypes
 } from '@coachcare/sdk'
 import { DateTime } from 'luxon'
 
@@ -309,67 +310,140 @@ export class ListElement extends CcrElement {
   }
 
   private getListItems(entries: MeasurementDataPointAggregate[]): ListItem[] {
+    return api.baseData.dataPointTypeId ===
+      DataPointTypes.BLOOD_PRESSURE_GENERAL
+      ? this.getListAsBloodPressure(entries)
+      : api.baseData.isWeightRequired
+      ? this.getListAsWeightRequired(entries)
+      : this.getListAsGeneric(entries)
+  }
+
+  private getListAsBloodPressure(
+    entries: MeasurementDataPointAggregate[]
+  ): ListItem[] {
     const list: ListItem[] = []
 
-    if (
-      api.baseData.dataPointTypeId === MeasurementsEnum.BLOOD_PRESSURE_GENERAL
-    ) {
-      const groupedValues = groupBy(entries, (item) => item.point.group.id)
+    const groupedValues = groupBy(entries, (item) => item.point.group.id)
 
-      for (const [groupId, dataPoints] of Object.entries(groupedValues)) {
-        const dataPoint = dataPoints[0]
+    for (const [groupId, dataPoints] of Object.entries(groupedValues)) {
+      const dataPoint = dataPoints[0]
 
-        if (!dataPoint) {
-          continue
-        }
+      if (!dataPoint) {
+        continue
+      }
 
-        const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
-        const value = dataPoints
-          .map((t) =>
-            utils.format(
-              convertToReadableFormat(
-                t.point.value,
-                t.point.type,
-                api.baseData.metric
-              ),
-              api.baseData.dataPointTypeId
-            )
+      const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
+      const value = dataPoints
+        .map((t) =>
+          utils.format(
+            convertToReadableFormat(
+              t.point.value,
+              t.point.type,
+              api.baseData.metric
+            ),
+            api.baseData.dataPointTypeId
           )
-          .join('/')
-
-        list.push({
-          groupId,
-          name: translate('BLOOD_PRESSURE'),
-          value,
-          unit,
-          source: dataPoint.point.group.source.name,
-          timestamp: dataPoint.bucket.timestamp,
-          createdAt: dataPoint.point.group.createdAt.utc
-        })
-      }
-    } else {
-      for (const dataPoint of entries) {
-        const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
-
-        const value = utils.format(
-          convertToReadableFormat(
-            dataPoint.point.value,
-            dataPoint.point.type,
-            api.baseData.metric
-          ),
-          api.baseData.dataPointTypeId
         )
+        .join('/')
 
-        list.push({
-          groupId: dataPoint.point.group.id,
-          name: dataPoint.point.type.name,
-          value,
-          unit,
-          source: dataPoint.point.group.source.name,
-          timestamp: dataPoint.bucket.timestamp,
-          createdAt: dataPoint.point.createdAt.utc
-        })
-      }
+      list.push({
+        groupId,
+        name: translate('BLOOD_PRESSURE'),
+        value,
+        unit,
+        source: dataPoint.point.group.source.name,
+        timestamp: dataPoint.bucket.timestamp,
+        createdAt: dataPoint.point.group.createdAt.utc
+      })
+    }
+
+    return list
+  }
+
+  private getListAsGeneric(
+    entries: MeasurementDataPointAggregate[]
+  ): ListItem[] {
+    const list: ListItem[] = []
+
+    for (const dataPoint of entries) {
+      const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
+
+      const value = utils.format(
+        convertToReadableFormat(
+          dataPoint.point.value,
+          dataPoint.point.type,
+          api.baseData.metric
+        ),
+        api.baseData.dataPointTypeId
+      )
+
+      list.push({
+        groupId: dataPoint.point.group.id,
+        name: dataPoint.point.type.name,
+        value,
+        unit,
+        source: dataPoint.point.group.source.name,
+        timestamp: dataPoint.bucket.timestamp,
+        createdAt: dataPoint.point.createdAt.utc
+      })
+    }
+
+    return list
+  }
+
+  private getListAsWeightRequired(
+    entries: MeasurementDataPointAggregate[]
+  ): ListItem[] {
+    const list: ListItem[] = []
+
+    const weightDataPoints = entries.filter(
+      (item) => item.point.type.id === DataPointTypes.WEIGHT
+    )
+    const dataPoints = entries.filter(
+      (item) => item.point.type.id !== DataPointTypes.WEIGHT
+    )
+
+    for (const dataPoint of dataPoints) {
+      const unit = utils.unit(dataPoint.point.type, api.baseData.metric)
+
+      const weightDataPointType = api.baseData.dataPointTypes.find(
+        (d) => d.id === DataPointTypes.WEIGHT
+      )
+      const weightDataPoint = weightDataPoints.find(
+        (item) => item.bucket.date === dataPoint.bucket.date
+      )
+      const weightUnit = utils.unit(weightDataPointType, api.baseData.metric)
+
+      const value = utils.format(
+        convertToReadableFormat(
+          dataPoint.point.value,
+          dataPoint.point.type,
+          api.baseData.metric
+        ),
+        api.baseData.dataPointTypeId
+      )
+
+      const weightInitialValue =
+        ((weightDataPoint?.point.value || 0) * Number(value)) / 100
+
+      const weightValue = utils.format(
+        convertToReadableFormat(
+          weightInitialValue,
+          weightDataPointType,
+          api.baseData.metric
+        ),
+        DataPointTypes.WEIGHT
+      )
+
+      list.push({
+        groupId: dataPoint.point.group.id,
+        name: dataPoint.point.type.name,
+        value: `${weightValue} ${weightUnit}`,
+        unit: `(${value} ${unit})`,
+        source: dataPoint.point.group.source.name,
+        timestamp: dataPoint.bucket.timestamp,
+        createdAt: dataPoint.point.createdAt.utc
+      })
     }
 
     return list
@@ -390,7 +464,7 @@ export class ListElement extends CcrElement {
 
   private showEmptyListError(): void {
     const dataPointName =
-      api.baseData.dataPointTypeId === MeasurementsEnum.BLOOD_PRESSURE_GENERAL
+      api.baseData.dataPointTypeId === DataPointTypes.BLOOD_PRESSURE_GENERAL
         ? translate('BLOOD_PRESSURE')
         : api.baseData.dataPointTypes[0].name
 

@@ -1,5 +1,5 @@
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
-import { MeasurementDataPointType } from '@coachcare/sdk'
+import { DataPointTypes, MeasurementDataPointType } from '@coachcare/sdk'
 
 export enum Timeframe {
   WEEK = 'week',
@@ -29,6 +29,7 @@ export interface BaseData {
   }
   dataPointTypes: MeasurementDataPointType[]
   sourceId?: string
+  isWeightRequired?: boolean
 }
 
 export const baseData: BaseData = {
@@ -53,3 +54,8 @@ export interface Modal {
   content: string
   full?: boolean
 }
+
+export const requiredWeightIds: string[] = [
+  DataPointTypes.BODY_FAT_PERCENTAGE,
+  DataPointTypes.LEAN_MASS_PERCENT
+]

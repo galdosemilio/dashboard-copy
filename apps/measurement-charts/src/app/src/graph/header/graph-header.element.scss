@@ -23,8 +23,12 @@ dashboard-graph-header {
         margin-block-start: 0;
 
         .unit {
-          color: var(--primary);
+          color: var(--text);
           font-size: 14px;
+        }
+
+        .sub-value {
+          font-size: 12px;
         }
       }
 
@@ -34,11 +38,16 @@ dashboard-graph-header {
         margin: 0;
       }
 
+      .sub-value {
+        font-size: 18px;
+      }
+
       .unit {
         color: var(--text);
         font-size: 18px;
         margin: 0;
-        padding: 5px;
+        padding-left: 5px;
+        padding-bottom: 5px;
       }
     }
   }
