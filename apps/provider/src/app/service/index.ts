@@ -1,5 +1,3 @@
-export * from './consts'
-
 export * from './auth.guard'
 export * from './conference.guard'
 
@@ -11,6 +9,7 @@ export * from './gesture'
 export * from './guards'
 export * from './language.service'
 export * from './logging.service'
+export * from './messaging'
 export * from './notifier.service'
 export * from './platform-updates'
 export * from './schedule'

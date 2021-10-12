@@ -3,7 +3,13 @@ import { APP_INITIALIZER, LOCALE_ID } from '@angular/core'
 import { RouteReuseStrategy } from '@angular/router'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { CookieService } from 'ngx-cookie-service'
-import { AccountProvider, Goal, MeasurementBody } from '@coachcare/sdk'
+import {
+  AccountProvider,
+  ApiService,
+  Goal,
+  MeasurementBody,
+  Messaging
+} from '@coachcare/sdk'
 import { DieterDashboardSummary } from '@coachcare/sdk'
 
 import { CCR_CONFIG, Config } from '@app/config'
@@ -29,6 +35,7 @@ import { WalkthroughService } from './walkthrough'
 import { GestureService } from './gesture'
 import { APP_CONFIG } from '@coachcare/common/shared'
 import { FormPDFService } from './formPDFService'
+import { MessagingService } from './messaging'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -85,6 +92,16 @@ export function AppProviders() {
     ListingPaginationGuard,
     LoggingService,
     NotifierService,
+    {
+      provide: MessagingService,
+      deps: [
+        ApiService,
+        Messaging,
+        ContextService,
+        ConfigService,
+        NotifierService
+      ]
+    },
     OrphanedAccountGuard,
     PlatformUpdatesService,
     ScheduleDataService,

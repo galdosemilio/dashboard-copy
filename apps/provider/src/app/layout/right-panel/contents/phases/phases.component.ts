@@ -1,12 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { LabelsDataSegment } from '@app/dashboard'
-import {
-  ContextService,
-  EVENT_PHASE_ASSOC_ADDED,
-  EVENT_PHASE_ASSOC_REMOVED,
-  EventsService
-} from '@app/service'
+import { ContextService, EventsService } from '@app/service'
 import { OrganizationDetailed, PackageEnrollmentSegment } from '@coachcare/sdk'
 import { intersectionBy, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -155,8 +150,8 @@ export class PhasesComponent implements OnDestroy, OnInit {
   }
 
   private subscribeToBus(): void {
-    this.bus.register(EVENT_PHASE_ASSOC_ADDED, this.onPhaseAdded)
-    this.bus.register(EVENT_PHASE_ASSOC_REMOVED, this.onPhaseRemoved)
+    this.bus.register('phases.assoc.added', this.onPhaseAdded)
+    this.bus.register('phases.assoc.removed', this.onPhaseRemoved)
   }
 
   private subscribeToScroll(): void {
@@ -166,7 +161,7 @@ export class PhasesComponent implements OnDestroy, OnInit {
   }
 
   private unsubscribeFromBus(): void {
-    this.bus.unregister(EVENT_PHASE_ASSOC_ADDED)
-    this.bus.unregister(EVENT_PHASE_ASSOC_REMOVED)
+    this.bus.unregister('phases.assoc.added')
+    this.bus.unregister('phases.assoc.removed')
   }
 }

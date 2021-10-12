@@ -13,7 +13,7 @@ import { SidenavOptions } from '@app/config/section/consts'
 import { FetchSubaccount } from '@app/layout/store/call/call.action'
 import {
   ContextService,
-  EventsService,
+  MessagingService,
   NotifierService,
   PlatformUpdatesService,
   SelectedOrganization
@@ -29,7 +29,6 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
 import {
   AccountTypeIds,
   Authentication,
-  Messaging,
   OrganizationProvider
 } from '@coachcare/sdk'
 import { SidenavItem } from './sidenav-item/sidenav-item.component'
@@ -73,9 +72,8 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(
     router: Router,
     private authentication: Authentication,
-    private bus: EventsService,
     private context: ContextService,
-    private messaging: Messaging,
+    private messaging: MessagingService,
     private notifier: NotifierService,
     private orgservice: OrganizationProvider,
     private platformUpdates: PlatformUpdatesService,
@@ -83,6 +81,7 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     private translate: TranslateService
   ) {
     this.fetchStoreLink = this.fetchStoreLink.bind(this)
+    this.updateUnread = this.updateUnread.bind(this)
 
     this.store
       .pipe(select(configSelector))
@@ -138,11 +137,13 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     })
 
     // listen event to refresh unread
-    this.bus.listen('system.timer', this.updateUnread.bind(this))
-    this.bus.listen('system.unread.threads', this.updateUnread.bind(this))
+    this.messaging.unreadCount$
+      .pipe(untilDestroyed(this))
+      .subscribe(this.updateUnread)
+
     this.platformUpdates.articles$
       .pipe(untilDestroyed(this))
-      .subscribe(this.updateUnread.bind(this))
+      .subscribe(this.updateUnread)
 
     this.store.dispatch(new FetchSubaccount(this.context.organizationId))
   }
@@ -481,16 +482,15 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     })
   }
 
-  updateUnread() {
+  private updateUnread(): void {
     if (!this.context.isOrphaned) {
-      Promise.all([this.messaging.getUnread()]).then(([threads]) => {
-        // update the unread threads
-        const m = findIndex(this.sidenavItems, { navRoute: 'messages' })
-        if (this.sidenavItems[m].badge !== threads.unreadThreadsCount) {
-          this.sidenavItems[m].badge = threads.unreadThreadsCount
-          this.sidenavItems[m] = Object.assign({}, this.sidenavItems[m])
-        }
-      })
+      const { unreadThreadsCount } = this.messaging.unreadCount$.getValue()
+
+      const m = findIndex(this.sidenavItems, { navRoute: 'messages' })
+      if (this.sidenavItems[m].badge !== unreadThreadsCount) {
+        this.sidenavItems[m].badge = unreadThreadsCount
+        this.sidenavItems[m] = Object.assign({}, this.sidenavItems[m])
+      }
     }
 
     const resourcesItemIndex = findIndex(this.sidenavItems, {

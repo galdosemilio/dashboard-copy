@@ -11,7 +11,12 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core'
-import { ConfigService, ContextService, NotifierService } from '@app/service'
+import {
+  ConfigService,
+  ContextService,
+  MessagingService,
+  NotifierService
+} from '@app/service'
 import {
   AccountTypeIds,
   AccSingleResponse,
@@ -107,11 +112,13 @@ export class CcrMessagesComponent
     private messaging: Messaging,
     private config: ConfigService,
     private context: ContextService,
+    private messagingService: MessagingService,
     private notifier: NotifierService,
     private translate: TranslateService
   ) {
     this.onResize = this.onResize.bind(this)
     this.onResizeEnd = this.onResizeEnd.bind(this)
+    this.checkNewMessages = this.checkNewMessages.bind(this)
   }
 
   public ngOnInit(): void {
@@ -273,9 +280,9 @@ export class CcrMessagesComponent
         this.renderTimestamps()
       }, this.config.get('app.refresh.chat.updateTimestamps', 20000))
 
-      this.timers[1] = setInterval(() => {
-        this.checkNewMessages()
-      }, this.config.get('app.refresh.chat.newMessages', 7500))
+      this.messagingService.newMessage$
+        .pipe(untilDestroyed(this))
+        .subscribe(this.checkNewMessages)
     }
   }
 

@@ -1,8 +1,28 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
+export type CcrEventType =
+  | 'add-measurement.section.change'
+  | 'boot'
+  | 'dieter.measurement.refresh'
+  | 'phases.assoc.added'
+  | 'phases.assoc.removed'
+  | 'right-panel.component.set'
+  | 'right-panel.consultation.display.set-as-unavailable'
+  | 'right-panel.consultation.editing'
+  | 'right-panel.consultation.form'
+  | 'right-panel.consultation.meeting'
+  | 'right-panel.deactivate'
+  | 'schedule.table.refresh'
+  | 'schedule.table.selected'
+  | 'system.threads.unread'
+  | 'system.threads.new-message'
+  | 'system.timer'
+  | 'user.data'
+  | 'videoconferencing.ratingWindow.setState'
+
 export type CcrEvent = {
-  name: string
+  name: CcrEventType
   data?: any
 }
 
@@ -37,15 +57,15 @@ export class EventsService {
     }, 30000)
   }
 
-  trigger(name: string, data: any = null) {
+  trigger(name: CcrEventType, data: any = null) {
     this.bu$.next({ name, data })
   }
 
-  register(name: string, listener: CcrEventListener): string {
+  register(name: CcrEventType, listener: CcrEventListener): string {
     return this.listen(name, listener)
   }
 
-  listen(name: string, listener: CcrEventListener): string {
+  listen(name: CcrEventType, listener: CcrEventListener): string {
     // initialize the listeners
     if (!this.listeners[name]) {
       this.listeners[name] = []
@@ -60,7 +80,7 @@ export class EventsService {
     return id
   }
 
-  unlisten(name: string, id: string) {
+  unlisten(name: CcrEventType, id: string) {
     if (!this.listeners[name] || !this.listeners[name].length) {
       return
     }
@@ -71,7 +91,7 @@ export class EventsService {
     this.map[name].splice(pos, 1)
   }
 
-  unregister(name: string) {
+  unregister(name: CcrEventType) {
     if (this.listeners[name]) {
       this.listeners[name] = []
       this.map[name] = []

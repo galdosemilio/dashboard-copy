@@ -11,6 +11,7 @@ import {
   ConfigService,
   ContextService,
   EventsService,
+  MessagingService,
   NotifierService
 } from '@app/service'
 import { _, MessageRecipient, MessageThread, PromptDialog } from '@app/shared'
@@ -18,14 +19,13 @@ import { MatDialog } from '@coachcare/material'
 import {
   AccountTypeIds,
   AccSingleResponse,
-  GetAllMessagingResponse,
   Messaging,
   MessagingThreadSegment
 } from '@coachcare/sdk'
 import { findIndex, get, sortBy, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'
-import { mergeMap, sampleTime } from 'rxjs/operators'
+import { filter, mergeMap, sampleTime, tap } from 'rxjs/operators'
 import { AccountProvider } from '@coachcare/sdk'
 import { ThreadsDatabase, ThreadsDataSource } from './services'
 
@@ -42,7 +42,6 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public chatInfoEnabled = false
   public current: AccSingleResponse
   public hasUnreadThreads = false
-  public interval: any
   public isMarkingAsRead = false
   public isProvider = false
   public messagingEnabled = false
@@ -67,9 +66,12 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     private context: ContextService,
     private bus: EventsService,
     private messaging: Messaging,
+    private messagingService: MessagingService,
     private notifier: NotifierService
   ) {
     this.pageSize = this.config.get('app.limit.threads', 20)
+    this.refreshThreads = this.refreshThreads.bind(this)
+    this.formatThread = this.formatThread.bind(this)
   }
 
   ngOnInit() {
@@ -97,7 +99,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         this.threads = uniqBy(
-          this.threads.concat(res.map(this.formatThread.bind(this))),
+          this.threads.concat(res.map(this.formatThread)),
           'threadId'
         )
       })
@@ -134,43 +136,49 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnDestroy() {
     this.source.disconnect()
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
   }
 
-  setRefresh() {
-    if (this.interval) {
-      return
-    }
+  private setRefresh(): void {
+    this.messagingService.unreadCount$
+      .pipe(
+        untilDestroyed(this),
+        tap(() => this.resolveUnreadThreads()),
+        filter((unreadResponse) => unreadResponse.unreadThreadsCount > 0)
+      )
+      .subscribe(() => {
+        void this.refreshThreads()
+      })
+  }
 
-    this.interval = setInterval(() => {
-      this.source
+  private async refreshThreads(): Promise<void> {
+    try {
+      const res = await this.source
         .query({ offset: 0 })
         .pipe(untilDestroyed(this))
-        .subscribe((res: GetAllMessagingResponse) => {
-          const latest = res.data.length ? res.data[0] : null
-          const first = this.threads.length ? this.threads[0] : null
+        .toPromise()
 
-          if (
-            latest &&
-            (latest.threadId !== first.threadId ||
-              latest.lastMessage.content !== first.lastMessageSent)
-          ) {
-            const active =
-              first && this.threads[this.active]
-                ? this.threads[this.active]
-                : null
-            const threads = res.data.map(
-              this.formatThread.bind(this)
-            ) as MessageThread[]
+      const latest = res.data?.[0] ?? null
+      const first = this.threads?.[0] ?? null
 
-            this.threads = uniqBy(threads.concat(this.threads), 'threadId')
+      if (
+        latest?.threadId === first.threadId &&
+        latest?.lastMessage.content === first.lastMessageSent
+      ) {
+        return
+      }
 
-            this.active = findIndex(this.threads, { threadId: active.threadId })
-          }
-        })
-    }, this.config.get('app.refresh.chat.updateThread', 30000))
+      const active =
+        first && this.threads[this.active] ? this.threads[this.active] : null
+      const threads = res.data.map(this.formatThread) as MessageThread[]
+
+      this.threads = uniqBy(threads.concat(this.threads), 'threadId')
+
+      this.active = findIndex(this.threads, {
+        threadId: active.threadId
+      })
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
   selectAccounts(accounts: MessageRecipient[] = []) {
@@ -207,10 +215,8 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
 
           await this.messaging.markAllMessagesAsViewed({})
 
-          this.bus.trigger('system.unread.threads')
+          void this.messagingService.refreshUnreadCount()
           this.threads.forEach((thread) => (thread.unread = false))
-
-          await this.resolveUnreadThreads()
 
           this.isMarkingAsRead = false
 
@@ -254,7 +260,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
         threads[i].unread = false
       }
     })
-    this.bus.trigger('system.unread.threads')
+    void this.messagingService.refreshUnreadCount()
   }
 
   resetThreads() {
@@ -299,14 +305,12 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     lastPosition.scrolled = position.scrolled
   }
 
-  private async resolveUnreadThreads(): Promise<void> {
-    try {
-      const unreadData = await this.messaging.getUnread()
+  private resolveUnreadThreads(): void {
+    const {
+      unreadThreadsCount,
+      unreadMessagesCount
+    } = this.messagingService.unreadCount$.getValue()
 
-      this.hasUnreadThreads =
-        unreadData.unreadThreadsCount > 0 || unreadData.unreadMessagesCount > 0
-    } catch (error) {
-      this.notifier.error(error)
-    }
+    this.hasUnreadThreads = unreadThreadsCount > 0 || unreadMessagesCount > 0
   }
 }

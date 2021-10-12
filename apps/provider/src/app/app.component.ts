@@ -12,7 +12,12 @@ import {
   STORAGE_PATIENTS_PAGINATION
 } from '@app/config'
 import { CloseMenuFor, ResizeLayout, UIState } from '@app/layout/store'
-import { ConfigService, GestureService, TimeTrackerService } from '@app/service'
+import {
+  ConfigService,
+  GestureService,
+  MessagingService,
+  TimeTrackerService
+} from '@app/service'
 import { MatDatepickerIntl } from '@coachcare/datepicker'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
@@ -21,7 +26,6 @@ import * as pdfMake from 'pdfmake'
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { CallLayoutService } from './layout/call/services/call-layout.service'
 import { RecoverCall } from './layout/store/call'
-import { ApiService } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -41,10 +45,10 @@ export class AppComponent implements OnDestroy, OnInit {
   private globalKey = 'GLOBAL'
 
   constructor(
-    private api: ApiService,
     private callLayout: CallLayoutService,
     private intl: MatDatepickerIntl,
     private gesture: GestureService,
+    private messaging: MessagingService,
     private timeTracker: TimeTrackerService,
     private translate: TranslateService,
     private store: Store<UIState>,
@@ -58,7 +62,7 @@ export class AppComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs
-    this.gesture.init()
+    this.initGlobalServices()
     this.onLangChange()
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
@@ -82,6 +86,11 @@ export class AppComponent implements OnDestroy, OnInit {
   private clearAccountsPaginationCache(): void {
     window.localStorage.removeItem(STORAGE_PATIENTS_PAGINATION)
     window.localStorage.removeItem(STORAGE_COACHES_PAGINATION)
+  }
+
+  private initGlobalServices(): void {
+    this.gesture.init()
+    this.messaging.init()
   }
 
   private onLangChange() {

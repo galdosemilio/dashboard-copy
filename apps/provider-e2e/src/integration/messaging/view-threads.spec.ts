@@ -27,7 +27,7 @@ describe('Messages -> basic message page layout is correct', function () {
       .find('.message-wrap')
       .last()
       .find('a')
-      .should('have.length', 5)
+      .should('have.length', 4)
   })
 
   it('View layout and thread in AET (Australia Eastern)', function () {
@@ -56,7 +56,7 @@ describe('Messages -> basic message page layout is correct', function () {
       .find('.message-wrap')
       .last()
       .find('a')
-      .should('have.length', 5)
+      .should('have.length', 4)
   })
 
   it('Shows the thread info', function () {

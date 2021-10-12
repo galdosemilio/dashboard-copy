@@ -10,12 +10,7 @@ import {
   LabelsDataSegment,
   LabelsDataSource
 } from '@app/dashboard/accounts/dieters/dieter/settings/services'
-import {
-  EVENT_PHASE_ASSOC_ADDED,
-  EVENT_PHASE_ASSOC_REMOVED,
-  EventsService,
-  NotifierService
-} from '@app/service'
+import { EventsService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 
 @Component({
@@ -49,7 +44,7 @@ export class LabelsTableComponent implements AfterViewInit {
         this.source.enrollments.find((enrollment) => enrollment.isActive)
       )
       .then(() => {
-        this.bus.trigger(EVENT_PHASE_ASSOC_ADDED, item)
+        this.bus.trigger('phases.assoc.added', item)
         this.notifier.success(_('NOTIFY.SUCCESS.PACKAGE_ENROLLED'))
         this.source.refresh()
       })
@@ -62,7 +57,7 @@ export class LabelsTableComponent implements AfterViewInit {
     this.database
       .unenrollPrompt(item)
       .then(() => {
-        this.bus.trigger(EVENT_PHASE_ASSOC_REMOVED, item)
+        this.bus.trigger('phases.assoc.removed', item)
         this.notifier.success(_('NOTIFY.SUCCESS.PACKAGE_UNENROLLED'))
         this.source.refresh()
       })
