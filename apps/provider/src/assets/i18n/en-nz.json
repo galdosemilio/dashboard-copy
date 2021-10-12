@@ -1259,6 +1259,7 @@
     "RPM_BILLING_DOWNLOAD_CONFIRM": "Confirm Report End Date",
     "RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT": "The date you selected is before the last day of the month, so this report may not include all billable activity for the month.",
     "RPM_BILLING_TITLE": "RPM Billing",
+    "RPM_BILLING_TOP_LEVEL_ACCOUNT": "Top level accounts will default to the currently-selected clinic",
     "SIGNUPS_DESCRIPTION": "This report shows the total number of patients that become associated with the clinic during the selected time period.  Each patient will only be listed once.  For example, one patient joined your clinic in January but no patients in Feburary, the report will show January as 1 and February as 0.  For the complete dataset, you can download the CSV/Excel file by clicking the 'Export CSV' button.",
     "SIGNUPS_TITLE": "Patient Signups",
     "SLEEP_REPORT": "Sleep Report",

@@ -1259,6 +1259,7 @@
     "RPM_BILLING_DOWNLOAD_CONFIRM": "Bekræft rapportens slutdato",
     "RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT": "Den valgte dato ligger inden den sidste dag i måneden, så denne rapport indeholder muligvis ikke alle fakturerbare aktiviteter for måneden.",
     "RPM_BILLING_TITLE": "RPM-fakturering",
+    "RPM_BILLING_TOP_LEVEL_ACCOUNT": "Konti på øverste niveau vil som standard blive valgt til den aktuelt valgte klinik",
     "SIGNUPS_DESCRIPTION": "Denne rapport viser det samlede antal patienter, der bliver forbundet med klinikken i løbet af den valgte periode. Hver patient vil kun blive opført én gang. For eksempel",
     "SIGNUPS_TITLE": "Patient Tilmeldinger",
     "SLEEP_REPORT": "Søvnrapport",

@@ -1259,6 +1259,7 @@
     "RPM_BILLING_DOWNLOAD_CONFIRM": "Confirmar la fecha de finalización del informe",
     "RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT": "La fecha que seleccionó es anterior al último día del mes, por lo que es posible que este informe no incluya toda la actividad facturable del mes.",
     "RPM_BILLING_TITLE": "Facturación por RPM",
+    "RPM_BILLING_TOP_LEVEL_ACCOUNT": "Las cuentas de nivel superior se establecerán de forma predeterminada en la clínica seleccionada actualmente",
     "SIGNUPS_DESCRIPTION": "Este reporte muestra el número total de pacientes que se asociaron a la clínica durante el periodo de tiempo seleccionado. Cada paciente solo aparecerá en la lista una vez. Por ejemplo, un paciente se unió a su clínica en Enero pero ningún paciente en Febrero; el reporte mostrará Enero con 1 y Febrero con 0. Para el conjunto de datos completo, puede descargar el archivo CSV/Excel haciendo clic en el botón 'Exportar CSV'.",
     "SIGNUPS_TITLE": "Pacientes Registrados",
     "SLEEP_REPORT": "Informe de Sueño",

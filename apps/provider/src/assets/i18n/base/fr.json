@@ -1259,6 +1259,7 @@
     "RPM_BILLING_DOWNLOAD_CONFIRM": "Confirmer la date de fin du rapport",
     "RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT": "La date que vous avez sélectionnée est antérieure au dernier jour du mois. Par conséquent, ce rapport peut ne pas inclure toutes les activités facturables du mois.",
     "RPM_BILLING_TITLE": "Facturation RPM",
+    "RPM_BILLING_TOP_LEVEL_ACCOUNT": "Les comptes de niveau supérieur seront par défaut la clinique actuellement sélectionnée",
     "SIGNUPS_DESCRIPTION": "Ce rapport indique le nombre total de patients inscrits ou associés dans un forfait, une phase ou une étiquette au cours de la période sélectionnée. Si un forfait, une phase ou une étiquette n’a aucun inscrit, il ne sera pas montré. Vous pouvez télécharger les données brutes pour chaque utilisateur et forfait, phase, ou une association d'étiquettes au format CSV / Excel en cliquant sur le bouton ‘Exporter CSV. Si votre clinique n'a pas les paquets, les phases ou les étiquettes activées, vous ne verrez pas les données dans ce tableau.",
     "SIGNUPS_TITLE": "Inscriptions du patient",
     "SLEEP_REPORT": "Rapport de sommeil",

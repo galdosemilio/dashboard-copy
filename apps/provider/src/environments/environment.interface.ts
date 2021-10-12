@@ -11,4 +11,5 @@ export interface Environment {
   selveraApiEnv: 'ccrDemo' | 'dev' | 'prod' | 'test'
   url: string
   awsAssetsUrl: string
+  coachcareOrgId: string
 }

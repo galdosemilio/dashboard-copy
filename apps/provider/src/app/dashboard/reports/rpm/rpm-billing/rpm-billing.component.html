@@ -11,7 +11,7 @@
                 <ccr-walkthrough [autoClose]="false" guide="rpm"></ccr-walkthrough>
             </h3>
         </div>
-
+        <small class="top-level-accout-label" *ngIf="isTopLevelAccount">{{ 'REPORTS.RPM_BILLING_TOP_LEVEL_ACCOUNT' | translate }}</small>
         <div fxFlex fxLayout="column" fxLayoutAlign="end stretch">
             <div class="org-search-container" fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
                 <div fxFlex fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">

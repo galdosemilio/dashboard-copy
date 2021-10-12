@@ -41,6 +41,7 @@ import {
 } from '@app/config'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
 import { PromptDialog } from '@app/shared/dialogs'
+import { environment } from 'apps/provider/src/environments/environment'
 
 @UntilDestroy()
 @Component({
@@ -76,6 +77,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   public statusFilterForm: FormGroup
   public source: RPMBillingDataSource
   public totalCount: number
+  public isTopLevelAccount = false
 
   private refresh$: Subject<void> = new Subject<void>()
 
@@ -97,6 +99,19 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
+      if (
+        org.id === environment.coachcareOrgId ||
+        org.hierarchyPath.toString().includes(environment.coachcareOrgId)
+      ) {
+        // coachcare only
+        this.onSelectClinic(org)
+        this.isTopLevelAccount = true
+      } else {
+        this.isTopLevelAccount = false
+      }
+    })
+
     this.walkthrough.checkGuideState('rpm')
     this.store.dispatch(new ClosePanel())
     this.createStatusFilterForm()
