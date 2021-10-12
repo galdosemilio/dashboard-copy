@@ -1,3 +1,13 @@
+## [1.41.1](https://github.com/coachcare/dashboard/compare/v1.41.0...v1.41.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* decreased rate limit by a little bit [FRON-2382] ([ffee74a](https://github.com/coachcare/dashboard/commit/ffee74a6d7fa1f7ddf42ce84b41ebb27a67c3b57))
+* incorrect date of first step in sequence preview [FRON-2356] ([df94d73](https://github.com/coachcare/dashboard/commit/df94d734a99514c52ee1452a0fc4e4648361af20))
+* increased call poll interval when ringing [FRON-2381] ([87e16e6](https://github.com/coachcare/dashboard/commit/87e16e65f37127859b71fbcc9cc091e148919d6f))
+* increased long polling timeouts ([fc111b1](https://github.com/coachcare/dashboard/commit/fc111b1a423662326365d97d6cfef9a296f49b64))
+
 # [1.41.0](https://github.com/coachcare/dashboard/compare/v1.40.0...v1.41.0) (2021-10-08)
 
 
