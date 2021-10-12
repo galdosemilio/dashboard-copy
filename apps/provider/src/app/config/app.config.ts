@@ -67,8 +67,8 @@ export const AppConfig: CCRApp = {
   },
   refresh: {
     chat: {
-      newMessages: 5000,
-      updateThread: 30000,
+      newMessages: 15000,
+      updateThread: 60000,
       updateTimestamps: 20000
     }
   },
