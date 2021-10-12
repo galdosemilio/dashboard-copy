@@ -5,7 +5,7 @@ import {
   Input,
   OnInit
 } from '@angular/core'
-import { AccountProvider } from '@coachcare/sdk'
+import { AccountAvatar } from '@coachcare/sdk'
 import { EventsService } from '../services'
 import { sleep } from '../shared'
 
@@ -34,7 +34,7 @@ export class CcrAvatarDirective implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private bus: EventsService,
-    private account: AccountProvider
+    private accountAvatar: AccountAvatar
   ) {}
 
   public ngOnInit(): void {
@@ -56,12 +56,15 @@ export class CcrAvatarDirective implements OnInit {
 
       const newSrc =
         (this.accountId &&
-          (await this.account.getAvatar(this.accountId)).url) ||
+          (
+            await this.accountAvatar.get({
+              id: this.accountId
+            })
+          ).url) ||
         this.default
 
       this.setSrc(`${newSrc}`)
     } catch (error) {
-      console.log(error)
       this.onError()
     }
   }

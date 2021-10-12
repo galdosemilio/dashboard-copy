@@ -86,6 +86,17 @@ import { environment } from './environments/environment'
 const authenticationToken = new AuthenticationToken()
 export const SDK_HEADERS = new ApiHeaders()
 
+const avatarApiService = new ApiService({
+  token: authenticationToken,
+  caching: { enabled: true, options: { ttl: { milliseconds: 300000 } } },
+  throttling: environment.enableThrottling
+    ? environment.ccrApiEnv === 'prod'
+      ? { enabled: true, options: { defaultRateLimit: 15 } }
+      : { enabled: true, options: { defaultRateLimit: 5 } }
+    : { enabled: false },
+  headers: SDK_HEADERS
+})
+
 const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
@@ -109,10 +120,15 @@ const measurementApiService = new ApiService({
   headers: SDK_HEADERS
 })
 
+avatarApiService.setEnvironment(environment.ccrApiEnv)
 generalApiService.setEnvironment(environment.ccrApiEnv)
 measurementApiService.setEnvironment(environment.ccrApiEnv)
 
 export const SdkApiProviders = [
+  {
+    provide: avatarApiService,
+    useValue: avatarApiService
+  },
   {
     provide: measurementApiService,
     useValue: measurementApiService
@@ -131,7 +147,7 @@ export const SdkApiProviders = [
     useClass: Access,
     deps: [ApiService]
   },
-  { provide: AccountAvatar, useClass: AccountAvatar, deps: [ApiService] },
+  { provide: AccountAvatar, useClass: AccountAvatar, deps: [avatarApiService] },
   {
     provide: AccountIdentifier,
     useClass: AccountIdentifier,
