@@ -1,3 +1,18 @@
+# [1.42.0](https://github.com/coachcare/dashboard/compare/v1.41.1...v1.42.0) (2021-10-13)
+
+
+### Bug Fixes
+
+* adjusted delay calculation ([c72695c](https://github.com/coachcare/dashboard/commit/c72695cd7601a59263ea110f6d0aa9b3840b1d23))
+* cache the response of get avatar calls [FRON-2384] ([3a17397](https://github.com/coachcare/dashboard/commit/3a17397dd4cf1f53d805b12146980f5cc2275e35))
+* show note for first step process immediately [FRON-2357] ([397faef](https://github.com/coachcare/dashboard/commit/397faefcff6cd33b0926588dc893692a46cc365b))
+
+
+### Features
+
+* add digital library dry run and present notice [FRON-2336] ([2a3e15b](https://github.com/coachcare/dashboard/commit/2a3e15b981197b72928c11adeb14f8f2ab5883ad))
+* added ws support for messaging [FRON-2383] ([8aaf562](https://github.com/coachcare/dashboard/commit/8aaf56245af9ae4f5de603c8429dc571a9d1476a))
+
 ## [1.41.1](https://github.com/coachcare/dashboard/compare/v1.41.0...v1.41.1) (2021-10-12)
 
 
