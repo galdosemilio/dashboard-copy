@@ -656,7 +656,6 @@
       "BY_PACKAGE_AVAILABILITY": "'Efter pakke' tilgængelighed",
       "BY_PACKAGE_AVAILABILITY_DESCRIPTION": "Faser er beregnet til indhold, som du ønsker at dele med brugere i de valgte faser. Du kan tildele indhold til en eller flere faser. Patienter skal tildeles den eller de valgte fase (r) for at se indholdet.<br><br>For at tildele faser til patienter skal du besøge patientens instrumentbræt, vælge MERE, vælge FASER og tilmelde dem i den relevante fase.",
       "CLONE_CONTENT": "Klonindhold",
-      "CLONE_WARNING_DESCRIPTION": "Følgende elementer, du har valgt, kan ikke klones på grund af klinikkens struktur. Du kan fortsætte med at klone alle kvalificerede indholdselementer eller annullere denne anmodning.",
       "CLONE_WARNING_TITLE": "Nogle elementer kan ikke klones",
       "CLONING_CONTENTS": "Kloning Indhold ...",
       "CLOSE_CONTENT_CREATE_WARNING": "Er du sikker på at du ønsker at stoppe med at skabe indhold?",
@@ -871,6 +870,7 @@
       "OLDEST": "Ældste"
     },
     "ARM": "Arm",
+    "BLOOD_OXYGEN": "Blod ilt",
     "BLOOD_PRESSURE": "Blodtryk",
     "BLOOD_PRESSURE_DIASTOLIC": "Diastolisk blodtryk",
     "BLOOD_PRESSURE_SYSTOLIC": "Systolisk blodtryk",

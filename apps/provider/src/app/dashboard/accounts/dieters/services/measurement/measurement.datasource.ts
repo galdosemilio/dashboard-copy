@@ -107,6 +107,7 @@ export class MeasurementDataSource extends ChartDataSource<
           bmi: [() => '', (v) => v.toFixed(1), true],
           bloodPressureDiastolic: [() => 'mmHg', (v) => v.toFixed(1), true],
           bloodPressureSystolic: [() => 'mmHg', (v) => v.toFixed(1), true],
+          bloodOxygenLevel: [() => '', (v) => v.toFixed(0), true],
           bodyFat: [genLabel('composition'), (v) => v.toFixed(1), true],
           leanMass: [genLabel('composition'), (v) => v.toFixed(1), true],
           visceralFatPercentage: [() => '%', (v) => v.toFixed(1), false],

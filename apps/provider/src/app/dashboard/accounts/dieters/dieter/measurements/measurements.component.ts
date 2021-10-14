@@ -26,7 +26,7 @@ import { _, DateNavigatorOutput } from '@app/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
-import { filter } from 'lodash'
+import { filter, uniq } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
@@ -210,6 +210,10 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
           code: 'bloodPressureDiastolic',
           displayName: _('MEASUREMENT.BLOOD_PRESSURE_DIASTOLIC')
         },
+        {
+          code: 'bloodOxygenLevel',
+          displayName: _('MEASUREMENT.BLOOD_OXYGEN')
+        },
         { code: 'insulin', displayName: _('MEASUREMENT.INSULIN') }
       ],
       columns: [
@@ -241,6 +245,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   chartColumns: string[]
   columns: string[]
   filteredColumns: string[] = []
+  additionalColumns: string[] = []
   useNewEndpoint: boolean
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020245112-Viewing-a-Patient-s-Measurements'
@@ -296,6 +301,16 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       } else {
         filteredColumns = allColumns
       }
+
+      const additionalColumns =
+        this.section === 'vitals'
+          ? resolveConfig(
+              'JOURNAL.ADDITIONAL_VITALS_COLUMNS',
+              this.context.organization
+            )
+          : []
+
+      filteredColumns = filteredColumns.concat(additionalColumns)
 
       this.columns = filteredColumns
     })
@@ -390,6 +405,14 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
           this.context.organization
         )
 
+        this.additionalColumns =
+          this.section === 'vitals'
+            ? resolveConfig(
+                'JOURNAL.ADDITIONAL_VITALS_COLUMNS',
+                this.context.organization
+              )
+            : []
+
         if (!this.allowListView && this.view === 'list') {
           this.view = 'table'
         } else if (
@@ -399,7 +422,14 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
         ) {
           this.view = 'list'
         }
+
         this.resolveHiddenMeasurementTabs(organization)
+
+        this.chartColumns = uniq(
+          this.chartColumns.concat(this.additionalColumns)
+        )
+
+        this.source.refresh()
       })
     this.resolveHiddenMeasurementTabs(this.context.organization)
   }

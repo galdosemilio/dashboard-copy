@@ -656,7 +656,6 @@
       "BY_PACKAGE_AVAILABILITY": "'By Package' Availability",
       "BY_PACKAGE_AVAILABILITY_DESCRIPTION": "Content by phase is available to patients in the mobile app that are enrolled in a selected phase.  If multiple phases are selected for a content item, a patient in at least one of these phases will have access to the content.  In addition, this content is also available to coaches on the provider dashboard.<br><br>To assign phases to patients, visit the patient’s profile, select MORE, select PHASES, and enroll them in the desired phase(s).",
       "CLONE_CONTENT": "Clone Content",
-      "CLONE_WARNING_DESCRIPTION": "The following items you have selected cannot be cloned due to the clinic structure.  You may proceed by cloning all eligible content items, or canceling this request.",
       "CLONE_WARNING_TITLE": "Some items cannot be cloned",
       "CLONING_CONTENTS": "Cloning Contents...",
       "CLOSE_CONTENT_CREATE_WARNING": "Are you sure you want to stop creating contents?",
@@ -871,6 +870,7 @@
       "OLDEST": "Oldest"
     },
     "ARM": "Arm",
+    "BLOOD_OXYGEN": "Blood oxygen",
     "BLOOD_PRESSURE": "Blood Pressure",
     "BLOOD_PRESSURE_DIASTOLIC": "Diastolic Blood Pressure",
     "BLOOD_PRESSURE_SYSTOLIC": "Systolic Blood Pressure",

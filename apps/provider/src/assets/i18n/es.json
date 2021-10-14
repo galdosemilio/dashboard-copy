@@ -656,7 +656,6 @@
       "BY_PACKAGE_AVAILABILITY": "Disponibilidad 'Por Fase'",
       "BY_PACKAGE_AVAILABILITY_DESCRIPTION": "La disponibilidad por fase está ideada para el contenido que desee compartir con usuarios en las fases seleccionadas. Puede asignar contenido a una o varias fases. Los pacientes deben estar asignados a dichas fases seleccionadas para ver el contenido.<br><br>Para asignar fases a pacientes, visite el tablero del paciente, seleccione MÁS, luego FASES, y asígnelos a las fases correspondientes.",
       "CLONE_CONTENT": "Clonar Contenido",
-      "CLONE_WARNING_DESCRIPTION": "Los siguientes elementos que ha seleccionado no se pueden clonar debido a la estructura de la clínica. Puede continuar clonando todos los elementos de contenido elegibles o cancelando esta solicitud.",
       "CLONE_WARNING_TITLE": "Algunos elementos no se pueden clonar",
       "CLONING_CONTENTS": "Clonando Contenidos...",
       "CLOSE_CONTENT_CREATE_WARNING": "¿Estás seguro de querer dejar de crear contenidos?",
@@ -871,6 +870,7 @@
       "OLDEST": "Más Antigua"
     },
     "ARM": "Brazo",
+    "BLOOD_OXYGEN": "Oxigeno en sangre",
     "BLOOD_PRESSURE": "Presión Sanguínea",
     "BLOOD_PRESSURE_DIASTOLIC": "Pres. Sang. Diastólica",
     "BLOOD_PRESSURE_SYSTOLIC": "Pres. Sang. Sistólica",

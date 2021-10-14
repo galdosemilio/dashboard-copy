@@ -656,7 +656,6 @@
       "BY_PACKAGE_AVAILABILITY": "Verfügbarkeit \"nach Paket\"",
       "BY_PACKAGE_AVAILABILITY_DESCRIPTION": "Phasen sind für Inhalte gedacht, die Sie in den ausgewählten Phasen für Benutzer freigeben möchten. Sie können Inhalte einer oder mehreren Phasen zuweisen. Patienten müssen diesen ausgewählten Phasen zugewiesen werden, um den Inhalt anzuzeigen.<br><br>Um Patienten Phasen zuzuweisen, besuchen Sie das Dashboard des Patienten, wählen Sie MEHR, wählen Sie PHASEN und registrieren Sie sie in der entsprechenden Phase.",
       "CLONE_CONTENT": "Inhalt kopieren",
-      "CLONE_WARNING_DESCRIPTION": "Die folgenden von Ihnen ausgewählten Elemente können aufgrund der Klinikstruktur nicht geklont werden. Sie können fortfahren, indem Sie alle berechtigten Inhaltselemente klonen oder diese Anfrage abbrechen.",
       "CLONE_WARNING_TITLE": "Einige Gegenstände können nicht geklont werden",
       "CLONING_CONTENTS": "Cloning Inhalt ...",
       "CLOSE_CONTENT_CREATE_WARNING": "Sind Sie sicher, dass Sie aufhören möchten Inhalte zu schaffen?",
@@ -871,6 +870,7 @@
       "OLDEST": "Älteste"
     },
     "ARM": "Arm",
+    "BLOOD_OXYGEN": "Blutsauerstoff",
     "BLOOD_PRESSURE": "Blutdruck",
     "BLOOD_PRESSURE_DIASTOLIC": "Diastolischer Blutdruck",
     "BLOOD_PRESSURE_SYSTOLIC": "Systolischer Blutdruck",

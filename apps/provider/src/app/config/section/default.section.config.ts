@@ -12,6 +12,7 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   JOURNAL: {
     ALLOW_MEASUREMENT_LIST_VIEW: false,
     HIDDEN_COMPOSITION_COLUMNS: [CompositionColumns.KETONES],
+    ADDITIONAL_VITALS_COLUMNS: [],
     HIDDEN_MEASUREMENT_TABS: [],
     HIDDEN_SETTINGS_TABS: [],
     HIDDEN_TABS: [JournalTabs.METRICS],
@@ -71,6 +72,7 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   JOURNAL: {
     ALLOW_MEASUREMENT_LIST_VIEW: false,
     HIDDEN_COMPOSITION_COLUMNS: [CompositionColumns.KETONES],
+    ADDITIONAL_VITALS_COLUMNS: [],
     HIDDEN_MEASUREMENT_TABS: [],
     HIDDEN_SETTINGS_TABS: [],
     HIDDEN_TABS: [JournalTabs.METRICS],

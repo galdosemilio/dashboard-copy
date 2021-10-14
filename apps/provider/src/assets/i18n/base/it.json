@@ -656,7 +656,6 @@
       "BY_PACKAGE_AVAILABILITY": "Disponibilità \"per pacchetto\"",
       "BY_PACKAGE_AVAILABILITY_DESCRIPTION": "Le fasi sono pensate per i contenuti che desideri condividere con gli utenti nelle fasi selezionate. È possibile assegnare il contenuto a una o più fasi. I pazienti devono essere assegnati alle fasi selezionate per visualizzare il contenuto.<br><br>Per assegnare fasi ai pazienti, visitare la dashboard del paziente, selezionare ALTRO, selezionare FASI e registrarli nella fase appropriata.",
       "CLONE_CONTENT": "Clona contenuto",
-      "CLONE_WARNING_DESCRIPTION": "I seguenti elementi selezionati non possono essere clonati a causa della struttura della clinica. Puoi procedere clonando tutti gli elementi di contenuto idonei o annullando questa richiesta.",
       "CLONE_WARNING_TITLE": "Alcuni elementi non possono essere clonati",
       "CLONING_CONTENTS": "Clonazione contenuto...",
       "CLOSE_CONTENT_CREATE_WARNING": "Sei sicuro di voler smettere di creare contenuti?",
@@ -871,6 +870,7 @@
       "OLDEST": "Più Vecchio"
     },
     "ARM": "Braccio",
+    "BLOOD_OXYGEN": "Ossigeno nel sangue",
     "BLOOD_PRESSURE": "Pressione Sanguigna",
     "BLOOD_PRESSURE_DIASTOLIC": "Pressione Sanguigna Diastolica",
     "BLOOD_PRESSURE_SYSTOLIC": "Pressione Sanguigna Sistolica",

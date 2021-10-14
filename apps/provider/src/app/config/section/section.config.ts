@@ -40,7 +40,7 @@ import {
 } from './metagenics'
 import { SectionConfigDetails } from './models/section.details'
 import { MuscleWiseSectionConfig } from './musclewise'
-import { PeakHealthGroupSectionConfig } from './peak-health-group'
+import { HomeAndThrivingSectionConfig } from './home-and-thriving'
 import { RobardSectionConfig } from './robard'
 import { ShiftSetGoSectionConfig } from './shiftsetgo/shiftsetgo.section.config'
 import { TrueWeightSectionConfig } from './true-weight/true-weight.section.config'
@@ -93,7 +93,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7420']: GrandViewHealthSectionConfig,
     ['7384']: MDTeamSectionConfig,
     ['7520']: CurryCareTestSectionConfig,
-    ['7534']: PeakHealthGroupSectionConfig,
+    ['7532']: HomeAndThrivingSectionConfig,
     ['7535']: WellCoreTestSectionConfig,
     ['7536']: HernriedSectionConfig,
     ['7537']: MuscleWiseSectionConfig
@@ -118,7 +118,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6438']: MDTeamSectionConfig,
     ['6439']: DrVProdSectionConfig,
     ['4049']: CurryCareProdSectionConfig,
-    ['6869']: PeakHealthGroupSectionConfig,
+    ['6869']: HomeAndThrivingSectionConfig,
     ['6891']: WellCoreProdSectionConfig,
     ['6475']: HernriedSectionConfig,
     ['6916']: MuscleWiseSectionConfig

@@ -54,6 +54,7 @@ export class BodyMeasurement {
   bloodPressureDiastolic: number
   bloodPressureString: string
   bloodPressureSystolic: number
+  bloodOxygenLevel: number
   bmi: number
   bodyFat: number
   bodyFatPercentage: number
@@ -132,6 +133,9 @@ export class BodyMeasurement {
       this.bloodPressureDiastolic && this.bloodPressureSystolic
         ? `${this.bloodPressureSystolic}/${this.bloodPressureDiastolic}`
         : ''
+    this.bloodOxygenLevel = Number(
+      args.bloodOxygenLevel ? args.bloodOxygenLevel / 1000 : 0
+    )
     this.bmi = Number(args.bmi ? args.bmi / 1000 : 0)
     this.bodyFatPercentage = Number(args.bodyFat ? args.bodyFat / 1000 : 0)
     this.bodyFat =

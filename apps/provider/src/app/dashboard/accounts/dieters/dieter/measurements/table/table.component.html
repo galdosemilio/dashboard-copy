@@ -520,6 +520,18 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="bloodOxygenLevel">
+      <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.BLOOD_OXYGEN' | translate}}</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.isHeader">
+        <ng-container *ngIf="row.bloodOxygenLevel; else empty">
+          {{ row.bloodOxygenLevel.toFixed(1) }}
+          <small>%</small>
+        </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="insulin">
       <th mat-header-cell *matHeaderCellDef>{{'MEASUREMENT.INSULIN' | translate}}</th>
       <td mat-cell *matCellDef="let row">

@@ -108,6 +108,10 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
     { value: 'temperature', viewValue: _('MEASUREMENT.TEMPERATURE') },
     { value: 'respirationRate', viewValue: _('MEASUREMENT.RESPIRATION_RATE') },
     {
+      value: 'bloodOxygenLevel',
+      viewValue: _('MEASUREMENT.BLOOD_OXYGEN')
+    },
+    {
       value: 'bloodPressureString',
       viewValue: _('MEASUREMENT.BLOOD_PRESSURE')
     },

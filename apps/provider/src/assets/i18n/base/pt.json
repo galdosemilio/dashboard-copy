@@ -656,7 +656,6 @@
       "BY_PACKAGE_AVAILABILITY": "Disponibilidade 'Por pacote'",
       "BY_PACKAGE_AVAILABILITY_DESCRIPTION": "As fases destinam-se ao conteúdo que você deseja compartilhar com os usuários nas fases selecionadas. Você pode atribuir conteúdo a uma ou várias fases. Os pacientes devem ser designados à (s) fase (s) selecionada (s) para visualizar o conteúdo.<br><br>Para atribuir fases aos pacientes, visite o painel do paciente, selecione MAIS, selecione FASES e inscreva-as na fase apropriada.",
       "CLONE_CONTENT": "Conteúdo do Clone",
-      "CLONE_WARNING_DESCRIPTION": "Os seguintes itens que você selecionou não podem ser clonados devido à estrutura da clínica. Você pode prosseguir clonando todos os itens de conteúdo elegíveis ou cancelando esta solicitação.",
       "CLONE_WARNING_TITLE": "Alguns itens não podem ser clonados",
       "CLONING_CONTENTS": "Clonagem Índice...",
       "CLOSE_CONTENT_CREATE_WARNING": "Tem a certeza que pretende parar de criar conteúdo?",
@@ -871,6 +870,7 @@
       "OLDEST": "Mais Antigo"
     },
     "ARM": "Braço",
+    "BLOOD_OXYGEN": "Oxigênio no sangue",
     "BLOOD_PRESSURE": "Pressão Arterial",
     "BLOOD_PRESSURE_DIASTOLIC": "Pressão Arterial Diastólica",
     "BLOOD_PRESSURE_SYSTOLIC": "Pressão Arterial Sistólica",
