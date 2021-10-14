@@ -1,5 +1,10 @@
-<div fxLayout="column" fxLayoutAlign="center stretch">
-    <mat-form-field [class.readonly]="readonly" [formGroup]="form" fxFlex>
+<div fxLayout="column" fxLayoutAlign="center stretch" fxFlex>
+    <mat-form-field
+    [appearance]="appearance"
+    [class.readonly]="readonly"
+    [floatLabel]="floatLabel"
+    [formGroup]="form"
+    fxFlex>
         <input
         #textInput
         matInput

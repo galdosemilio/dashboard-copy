@@ -1,0 +1,242 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <!-- Name and personal info section -->
+  <div
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="15px">
+    <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-evenly center"
+    fxLayoutAlign.xs="start stretch"
+    fxLayoutGap="5%"
+    fxLayoutGap.xs="15px">
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">First Name</p>
+
+        <mat-form-field appearance="outline" floatLabel="never">
+          <input class="generic" formControlName="firstName" type="text" matInput>
+        </mat-form-field>
+      </div>
+
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">Last Name</p>
+
+        <mat-form-field appearance="outline" floatLabel="never">
+          <input class="generic" formControlName="lastName" type="text" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-evenly center"
+    fxLayoutAlign.xs="start stretch"
+    fxLayoutGap="5%"
+    fxLayoutGap.xs="15px">
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">Gender</p>
+
+        <mat-radio-group formControlName="gender" class="generic" fxLayout="row" fxLayoutGap="15px">
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">DOB</p>
+
+        <ccr-date-input
+          appearance="outline"
+          formControlName="dob"
+          floatLabel="never"
+          fxFlex
+          placeholder=" ">
+        </ccr-date-input>
+      </div>
+    </div>
+
+    <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-evenly center"
+    fxLayoutAlign.xs="start stretch"
+    fxLayoutGap="5%"
+    fxLayoutGap.xs="15px">
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">Email</p>
+
+        <mat-form-field appearance="outline" floatLabel="never">
+          <input class="generic" formControlName="email" type="email" matInput>
+        </mat-form-field>
+      </div>
+
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">Phone #</p>
+
+        <mat-form-field appearance="outline" floatLabel="never">
+          <input class="generic" formControlName="phone" type="tel" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <!-- Address Section -->
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-evenly center"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.xs="start stretch"
+    fxLayoutGap="2%"
+    fxLayoutGap.sm="15px"
+    fxLayoutGap.xs="15px">
+      <p class="input-label" fxFlex="10%">Address Line 1</p>
+
+      <mat-form-field appearance="outline" floatLabel="never">
+        <input class="generic" formControlName="address1" type="text" matInput>
+      </mat-form-field>
+    </div>
+
+    <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-evenly center"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.xs="start stretch"
+    fxLayoutGap="2%"
+    fxLayoutGap.sm="15px"
+    fxLayoutGap.xs="15px">
+      <p class="input-label" fxFlex="10%">Address Line 2</p>
+
+      <mat-form-field appearance="outline" floatLabel="never">
+        <input class="generic" formControlName="address2" type="text" matInput>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Extra Address Section -->
+  <div
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="15px">
+    <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-evenly center"
+    fxLayoutAlign.xs="start stretch"
+    fxLayoutGap="5%"
+    fxLayoutGap.xs="15px">
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">City</p>
+
+        <mat-form-field appearance="outline" floatLabel="never">
+          <input class="generic" formControlName="city" type="email" matInput>
+        </mat-form-field>
+      </div>
+
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%">
+        <p class="input-label" fxFlex="20%">State</p>
+
+        <mat-form-field appearance="outline" floatLabel="never">
+          <input class="generic" formControlName="state" type="tel" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-evenly center"
+    fxLayoutAlign.xs="start stretch"
+    fxLayoutGap="5%"
+    fxLayoutGap.xs="15px">
+      <div
+      fxFlex
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start stretch"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="5%"
+      fxLayoutGap.sm="15px">
+        <p class="input-label" fxFlex="20%">Zip</p>
+
+        <mat-form-field appearance="outline" floatLabel="never">
+          <input class="generic" formControlName="zip" type="email" matInput>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex></div>
+    </div>
+  </div>
+</div>

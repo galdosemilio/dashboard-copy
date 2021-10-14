@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+  <div *ngFor="let question of questions; let i = index" fxLayout="column" fxLayoutGap="10px">
+    <h5 class="input-label">{{ question.title }}</h5>
+
+    <mat-form-field appearance="outline" floatLabel="never">
+      <input
+      [formControl]="form.controls[i]"
+      [required]="question.isRequired"
+      class="generic"
+      matInput
+      type="text">
+    </mat-form-field>
+
+    <mat-error *ngIf="form.controls[i].touched && form.controls[i].hasError('required')">
+      <small>This field is required</small>
+    </mat-error>
+  </div>
+</div>

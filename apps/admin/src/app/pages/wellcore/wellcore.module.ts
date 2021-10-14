@@ -5,18 +5,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import {
   MatButtonModule,
+  MatCheckboxModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatRadioModule,
   MatStepperModule,
   MatSelectModule
 } from '@coachcare/material'
 import { MatDatepickerModule } from '@angular/material/datepicker'
-
-import { WellcoreComponents } from './wellcore.barrel'
+import { CcrFormFieldsModule } from '@coachcare/common/components'
+import { WellcoreComponents, WellcoreProviders } from './wellcore.barrel'
 
 @NgModule({
   imports: [
+    CcrFormFieldsModule,
     CommonModule,
     FlexLayoutModule,
     FormsModule,
@@ -28,11 +31,15 @@ import { WellcoreComponents } from './wellcore.barrel'
     MatIconModule,
     MatInputModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule
   ],
   exports: [],
   declarations: WellcoreComponents,
   entryComponents: [],
-  providers: []
+  providers: WellcoreProviders
 })
 export class WellcoreModule {}

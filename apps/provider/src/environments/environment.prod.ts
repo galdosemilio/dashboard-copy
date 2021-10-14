@@ -11,5 +11,6 @@ export const environment: Environment = {
   url: 'https://dashboard.coachcare.com/provider',
   awsAssetsUrl: 'https://s3.amazonaws.com/prod.assets.cc',
   coachcareOrgId: '3637',
-  wellCoreOrgId: '6891'
+  wellCoreOrgId: '6891',
+  wellcoreMedicalFormId: '831'
 }

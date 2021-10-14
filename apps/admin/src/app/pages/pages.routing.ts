@@ -29,7 +29,9 @@ import {
   WellcoreBloodSampleKitComponent,
   WellcoreCartComponent,
   WellcoreCheckoutComponent,
-  WellcoreContainerComponent
+  WellcoreContainerComponent,
+  WellcoreMedicalIntakeFormComponent,
+  WellcoreThankYouComponent
 } from './wellcore'
 
 const routes: Routes = [
@@ -43,7 +45,15 @@ const routes: Routes = [
       },
       { path: 'blood-sample', component: WellcoreBloodSampleKitComponent },
       { path: 'cart', component: WellcoreCartComponent },
-      { path: 'checkout', component: WellcoreCheckoutComponent }
+      { path: 'checkout', component: WellcoreCheckoutComponent },
+      {
+        path: 'medical-intake-form',
+        component: WellcoreMedicalIntakeFormComponent
+      },
+      {
+        path: 'thank-you',
+        component: WellcoreThankYouComponent
+      }
     ]
   },
   {

@@ -8,6 +8,7 @@ export * from './confirm.dialog'
 export * from './gesture-closing'
 export * from './grid.dialog'
 export * from './languages.dialog'
+export * from './medical-intake-form'
 export * from './message-add-member'
 export * from './message-patient'
 export * from './options.dialog'
@@ -30,6 +31,7 @@ import { ConfirmDialog } from './confirm.dialog'
 import { GestureClosingDialog } from './gesture-closing'
 import { GridDialog } from './grid.dialog'
 import { LanguagesDialog } from './languages.dialog'
+import { MedicalIntakeFormDialog } from './medical-intake-form'
 import { MessageAddMemberDialog } from './message-add-member'
 import { MessagePatientDialog } from './message-patient'
 import { OptionsDialog } from './options.dialog'
@@ -58,6 +60,7 @@ export const Dialogs = [
   GestureClosingDialog,
   GridDialog,
   LanguagesDialog,
+  MedicalIntakeFormDialog,
   MessageAddMemberDialog,
   MessagePatientDialog,
   OptionsDialog,

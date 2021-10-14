@@ -6,10 +6,10 @@ export const environment: AppEnvironment = {
   appVersion: '1.0',
   ccrApiEnv: 'test',
   cookieDomain: 'test.api.coachcare.com',
-
   production: true,
   stripeKey: 'pk_test_q5X8FrXn7vv7p3E5STRXFvtv',
   cdn: 'https://d3vngy9ttk2wws.cloudfront.net',
   url: 'https://dashboard.coachcaredev.com',
-  defaultOrgId: '30'
+  defaultOrgId: '30',
+  wellcoreMedicalFormId: '15189'
 }

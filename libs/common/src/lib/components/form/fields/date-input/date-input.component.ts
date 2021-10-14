@@ -36,7 +36,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 export class CcrDateInputComponent
   implements ControlValueAccessor, DoCheck, OnDestroy, OnInit {
   @Input() allowsEmpty = false
+  @Input() appearance?: string
   @Input() errorMessage?: string
+  @Input() floatLabel: 'always' | 'never' = 'always'
   @Input() formControlName?: string
   @Input() max?: moment.Moment
   @Input() min?: moment.Moment
