@@ -1,3 +1,16 @@
+# [1.43.0](https://github.com/coachcare/dashboard/compare/v1.42.0...v1.43.0) (2021-10-18)
+
+
+### Bug Fixes
+
+* select default org in rpm report for coachcare [FRON-2342] ([390a527](https://github.com/coachcare/dashboard/commit/390a5279117c8ec957da2b31cdf0f7a01956c6ce))
+
+
+### Features
+
+* add blood oxygen to vitals for hat [FRON-2388] ([dd56f1e](https://github.com/coachcare/dashboard/commit/dd56f1edb1bde83a7664647e609fd1b40e8a12e9))
+* disable wellcore provider availability management [FRON-2373] ([15d8ec6](https://github.com/coachcare/dashboard/commit/15d8ec6ac750c523457e8fca151be9fcae1473db))
+
 # [1.42.0](https://github.com/coachcare/dashboard/compare/v1.41.1...v1.42.0) (2021-10-13)
 
 
