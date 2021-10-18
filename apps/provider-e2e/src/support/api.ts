@@ -680,7 +680,30 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     body: {}
   }).as('deleteAddressRequest')
 
-  cy.intercept('GET', `1.0/account/${Cypress.env('clientId')}/address**`, {
+  cy.intercept('GET', `1.0/account/${Cypress.env('providerId')}/address**`, {
+    fixture: 'api/address/getAddresses'
+  })
+
+  cy.intercept('POST', `1.0/account/${Cypress.env('providerId')}/address`, {
+    statusCode: 204,
+    body: {}
+  }).as('postAddressRequest')
+
+  cy.intercept('PATCH', `1.0/account/${Cypress.env('providerId')}/address/**`, {
+    statusCode: 204,
+    body: {}
+  }).as('patchAddressRequest')
+
+  cy.intercept(
+    'DELETE',
+    `1.0/account/${Cypress.env('providerId')}/address/**`,
+    {
+      statusCode: 204,
+      body: {}
+    }
+  ).as('deleteAddressRequest')
+
+  cy.intercept('GET', `1.0/account/${Cypress.env('providerId')}/address**`, {
     fixture: 'api/address/getAddresses'
   })
 }
