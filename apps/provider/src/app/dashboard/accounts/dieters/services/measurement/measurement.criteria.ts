@@ -65,4 +65,5 @@ export interface MeasurementCriteria {
   limit?: number | 'all'
   offset?: number
   inferLastEntry?: boolean
+  limitEntries?: boolean
 }

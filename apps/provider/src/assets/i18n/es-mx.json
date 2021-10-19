@@ -905,6 +905,7 @@
     "LEAN_MASS": "Masa Magra",
     "LOW_DENSITY_LIPOPROTEIN": "Lipoproteínas de Baja Densidad",
     "MISSING_WEIGHT_NOTE": "Existen medidas para este período que no pueden ser mostradas en el gráfico. Estos valores solamente son visibles en la <a href=\"{{tableViewLink}}\">vista de table</a>. Las fechas para las cuales existen estas medidas son:",
+    "MORE_DATA_EXISTS_FOR_DAY": "Existen más datos pero sólo se muestran las últimas 5 medidas del día.",
     "NECK": "Cuello",
     "RESPIRATION_RATE": "Ritmo respiratorio",
     "RESTFULNESS": "Reposo",

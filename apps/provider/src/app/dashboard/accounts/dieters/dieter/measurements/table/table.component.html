@@ -579,4 +579,8 @@
     <i class="ccr-marker">*</i> {{ 'MEASUREMENT.DISTANCE_NOTE' | translate }}
   </p>
 
+  <p class="footnotes" *ngIf="source.hasTooMuchForSingleDay">
+    <i class="ccr-marker">*</i> {{ 'MEASUREMENT.MORE_DATA_EXISTS_FOR_DAY' | translate }}
+  </p>
+
 </ccr-datasource-overlay>

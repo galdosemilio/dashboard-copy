@@ -53,6 +53,10 @@
   {{ 'MEASUREMENT.DISTANCE_NOTE' | translate }}
 </p>
 
+<p class="footnotes" *ngIf="source.hasTooMuchForSingleDay">
+  <i class="ccr-marker">*</i> {{ 'MEASUREMENT.MORE_DATA_EXISTS_FOR_DAY' | translate }}
+</p>
+
 <ccr-notice-blockquote *ngIf="source.hasMissingWeight" icon="error_outline" type="primary">
   <span [innerHTML]="'MEASUREMENT.MISSING_WEIGHT_NOTE' | translate:{tableViewLink: '/accounts/patients/' + source.criteria.account + '/measurements;s=composition;v=table'}"></span>
   <div *ngIf="source.missingWeightDates?.length" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">

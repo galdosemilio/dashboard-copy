@@ -27,11 +27,14 @@ import {
 } from './measurement.criteria'
 import { MeasurementDatabase } from './measurement.database'
 
+const MAX_ENTRIES_PER_DAY = 5
+
 @UntilDestroy()
 export class MeasurementDataSource extends ChartDataSource<
   any,
   MeasurementCriteria
 > {
+  hasTooMuchForSingleDay = false
   hasMissingWeight = false
   measurement: MeasurementSummaryData
   missingWeightDates: string[] = []
@@ -281,6 +284,8 @@ export class MeasurementDataSource extends ChartDataSource<
           this.total = response.pagination.next
             ? response.pagination.next + 1
             : this.criteria.offset + response.data.length
+
+          this.hasTooMuchForSingleDay = false
 
           let result: BodyMeasurement[] = []
           const cleanMeasurements = response.data.map(
@@ -592,10 +597,21 @@ export class MeasurementDataSource extends ChartDataSource<
   private preprocessMeasurements(
     measurements: BodyMeasurement[]
   ): BodyMeasurement[][] {
-    const preprocessedMeasurements: BodyMeasurement[][] = this.groupBy(
+    const groupedMeasurements: BodyMeasurement[][] = this.groupBy(
       measurements,
       (measurement) => moment(measurement.recordedAt).format('YYYY-MM-DD')
     )
+
+    const preprocessedMeasurements = this.criteria.limitEntries
+      ? groupedMeasurements.map((group) => {
+          if (group.length > 5) {
+            this.hasTooMuchForSingleDay = true
+            group = group.slice(0, MAX_ENTRIES_PER_DAY)
+          }
+
+          return group
+        })
+      : groupedMeasurements
 
     if (!this.criteria.omitEmptyDays && this.criteria.timeframe !== 'alltime') {
       this.addEmptyDays(preprocessedMeasurements)

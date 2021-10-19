@@ -42,6 +42,7 @@ export type MeasurementDataElement = {
   code: MeasurementSummaryData
   displayName: string
   dynamic?: boolean
+  limitEntries?: boolean
 }
 export type MeasurementConfig = {
   [S in MeasurementSections]: {
@@ -199,9 +200,14 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
         { code: 'temperature', displayName: _('MEASUREMENT.TEMPERATURE') },
         {
           code: 'respirationRate',
-          displayName: _('MEASUREMENT.RESPIRATION_RATE')
+          displayName: _('MEASUREMENT.RESPIRATION_RATE'),
+          limitEntries: true
         },
-        { code: 'heartRate', displayName: _('MEASUREMENT.HEART_RATE') },
+        {
+          code: 'heartRate',
+          displayName: _('MEASUREMENT.HEART_RATE'),
+          limitEntries: true
+        },
         {
           code: 'bloodPressureSystolic',
           displayName: _('MEASUREMENT.BLOOD_PRESSURE_SYSTOLIC')
@@ -314,6 +320,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
 
       this.columns = filteredColumns
     })
+
     this.source.addDefault({
       account: this.context.accountId
     })
@@ -341,7 +348,10 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
         useNewEndpoint: this.useNewEndpoint,
         max: 'all',
         omitEmptyDays:
-          this.view === 'chart' || this.view === 'list' ? true : false
+          this.view === 'chart' || this.view === 'list' ? true : false,
+        limitEntries: this.sections[this.section].data.some(
+          (type) => type.limitEntries
+        )
       }
     })
 

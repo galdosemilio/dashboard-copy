@@ -905,6 +905,7 @@
     "LEAN_MASS": "Magermasse",
     "LOW_DENSITY_LIPOPROTEIN": "Lipoprotein mitniedriger Dichte",
     "MISSING_WEIGHT_NOTE": "Einige Messungen existieren für diesen Zeitraum, die nicht für dieses Diagramm angezeigt werden kann. Diese Werte sind sichtbar auf der <a href=\"{{tableViewLink}}\">Tabellenansicht</a> nur. Die Termine für die diese Messungen existieren, sind:",
+    "MORE_DATA_EXISTS_FOR_DAY": "Weitere Daten existieren, aber nur die letzten fünf Einträge für einen Tag werden angezeigt.",
     "NECK": "Hals",
     "RESPIRATION_RATE": "Atemfrequenz",
     "RESTFULNESS": "Erholtheit",
