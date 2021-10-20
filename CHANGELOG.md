@@ -1,3 +1,10 @@
+## [1.44.1](https://github.com/coachcare/dashboard/compare/v1.44.0...v1.44.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* disabled new appointment button for wellcore [FRON-2401] ([86c8405](https://github.com/coachcare/dashboard/commit/86c8405645328c3abf11657ca13bfc299f829c7c))
+
 # [1.44.0](https://github.com/coachcare/dashboard/compare/v1.43.0...v1.44.0) (2021-10-20)
 
 
