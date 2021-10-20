@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 import { MatStepper } from '@coachcare/material'
 import { UntilDestroy } from '@ngneat/until-destroy'
 
@@ -13,7 +14,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   @ViewChild('stepper', { static: true })
   stepper: MatStepper
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
   public accountInfo: FormGroup
   public billingInfo: FormGroup
   public paymentInfo: FormGroup
@@ -26,7 +27,16 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.accountInfo = this.fb.group({})
+    this.accountInfo = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', Validators.required],
+      gender: ['male'],
+      height: [''],
+      birthday: ['']
+    })
+
     this.billingInfo = this.fb.group({})
     this.paymentInfo = this.fb.group({})
     this.orderReview = this.fb.group({})
@@ -39,7 +49,11 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   public prevStep(): void {
-    this.stepper.previous()
-    this.step += 1
+    if (this.step > 0) {
+      this.stepper.previous()
+      this.step -= 1
+    } else {
+      this.router.navigate(['/wellcore/cart'])
+    }
   }
 }

@@ -1,15 +1,17 @@
 import {
+  WellcoreAccountComponent,
   WellcoreBloodSampleKitComponent,
   WellcoreCartComponent,
+  WellcoreCheckoutComponent,
   WellcoreContainerComponent,
-  WellcoreQuantitySelectorComponent,
-  WellcoreCheckoutComponent
+  WellcoreQuantitySelectorComponent
 } from '.'
 
 export const WellcoreComponents = [
+  WellcoreAccountComponent,
   WellcoreBloodSampleKitComponent,
   WellcoreCartComponent,
+  WellcoreCheckoutComponent,
   WellcoreContainerComponent,
-  WellcoreQuantitySelectorComponent,
-  WellcoreCheckoutComponent
+  WellcoreQuantitySelectorComponent
 ]

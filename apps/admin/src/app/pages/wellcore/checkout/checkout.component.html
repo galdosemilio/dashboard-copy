@@ -18,9 +18,8 @@
     <mat-horizontal-stepper fxFlex linear #stepper>
       <mat-step [stepControl]="accountInfo" class="dddddd">
         <div class="step-container">
-          <div class="step-header">Account Information</div>
+          <ccr-wellcore-account-info [formGroup]="accountInfo"></ccr-wellcore-account-info>
         </div>
-
       </mat-step>
       <mat-step [stepControl]="billingInfo">
         <div class="step-container">
