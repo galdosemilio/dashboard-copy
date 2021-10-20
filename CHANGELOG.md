@@ -1,3 +1,17 @@
+# [1.44.0](https://github.com/coachcare/dashboard/compare/v1.43.0...v1.44.0) (2021-10-20)
+
+
+### Bug Fixes
+
+* added support for address endpoints ([190c95f](https://github.com/coachcare/dashboard/commit/190c95fcc230331754e9b73c785d615b14674caa))
+* restored app in background support [FRON-2399] ([0f80696](https://github.com/coachcare/dashboard/commit/0f80696f9feeb139017b1d88ba5a69d7512682b2))
+
+
+### Features
+
+* add new appointment component [FRON-2320] ([215ee37](https://github.com/coachcare/dashboard/commit/215ee37f348bbbb896658177f135a8761385a5cc))
+* display weight and percent for bodyfat and leanmass [FRON-2379] ([3ceecc6](https://github.com/coachcare/dashboard/commit/3ceecc61189b081033c36057aa42e41b771821d3))
+
 # [1.43.0](https://github.com/coachcare/dashboard/compare/v1.42.0...v1.43.0) (2021-10-18)
 
 
