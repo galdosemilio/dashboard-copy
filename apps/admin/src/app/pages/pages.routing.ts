@@ -28,6 +28,7 @@ import { MFASetupPageComponent } from './mfa-setup'
 import {
   WellcoreBloodSampleKitComponent,
   WellcoreCartComponent,
+  WellcoreCheckoutComponent,
   WellcoreContainerComponent
 } from './wellcore'
 
@@ -41,7 +42,8 @@ const routes: Routes = [
         redirectTo: 'blood-sample'
       },
       { path: 'blood-sample', component: WellcoreBloodSampleKitComponent },
-      { path: 'cart', component: WellcoreCartComponent }
+      { path: 'cart', component: WellcoreCartComponent },
+      { path: 'checkout', component: WellcoreCheckoutComponent }
     ]
   },
   {

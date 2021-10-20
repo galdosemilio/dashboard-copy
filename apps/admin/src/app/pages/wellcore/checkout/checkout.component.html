@@ -1,0 +1,54 @@
+<div
+  class="checkout"
+  fxLayout="row"
+  fxLayout.sm="column"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-between start"
+  fxLayoutAlign.sm="start stretch"
+  fxLayoutAlign.xs="start stretch"
+  fxLayoutGap="50px"
+  fxLayoutGap.sm="25px"
+  fxLayoutAlign.xs="start stretch"
+>
+  <div fxFlex="33%">
+    <p class="checkout-title">Checkout</p>
+  </div>
+
+  <div class="checkout-table-container" fxFlex="77%" fxHide.xs fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <mat-horizontal-stepper fxFlex linear #stepper>
+      <mat-step [stepControl]="accountInfo" class="dddddd">
+        <div class="step-container">
+          <div class="step-header">Account Information</div>
+        </div>
+
+      </mat-step>
+      <mat-step [stepControl]="billingInfo">
+        <div class="step-container">
+          <div class="step-header">Billing and Shipping Information</div>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="paymentInfo">
+        <div class="step-container">
+          <div class="step-header">Payment Information</div>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="orderReview">
+        <div class="step-container">
+          <div class="step-header">Cart and Order Review</div>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="orderConfirm">
+        <div class="step-container">
+          <div class="step-header">Order Confirmation</div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+    <div
+        fxLayout="row"
+        fxLayoutAlign="space-between start"
+      >
+      <button mat-flat-button class="ccr-step-button" (click)="prevStep()">Back</button>
+      <button mat-flat-button class="ccr-step-button" (click)="nextStep()">Next</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+@import 'variables';
+
+$border-color: rgba(mat-color($wellcore, platinum), 0.5);
+
+.checkout {
+  padding: 25px;
+
+  &-subtitle {
+    font-family: 'Inter Light';
+    font-size: 36px;
+    font-weight: lighter;
+    margin-bottom: 0;
+  }
+
+  &-table-container {
+    margin-top: 15px;
+
+    .mat-stepper-horizontal {
+      background-color: transparent;
+
+      .step-container {
+        margin-top: 50px;
+
+        .step-header {
+          font-weight: 200;
+          font-size: 40px;
+          font-family: 'Inter Light';
+          color: linear-gradient(
+              112.99deg,
+              rgba(141, 189, 216, 0.6) 22.93%,
+              rgba(255, 255, 255, 0) 89.69%
+            ),
+            linear-gradient(0deg, #ffffff, #ffffff);
+          line-height: 48px;
+        }
+      }
+    }
+  }
+
+  &-title {
+    font-family: 'Trade Gothic Bold Condensed';
+    font-size: 100px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  button.ccr-step-button.mat-button,
+  button.mat-flat-button.ccr-step-button {
+    background: transparent;
+    border: 1px solid #8dbdd8;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: white;
+    height: 48px;
+    opacity: 0.8;
+    padding: 0 30px;
+  }
+}

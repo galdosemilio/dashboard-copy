@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
-import { MatButtonModule, MatIconModule } from '@coachcare/material'
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatStepperModule
+} from '@coachcare/material'
 import { WellcoreComponents } from './wellcore.barrel'
 
 @NgModule({
@@ -13,7 +17,8 @@ import { WellcoreComponents } from './wellcore.barrel'
     ReactiveFormsModule,
     RouterModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule
   ],
   exports: [],
   declarations: WellcoreComponents,
