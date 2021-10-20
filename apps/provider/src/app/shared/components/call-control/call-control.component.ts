@@ -212,6 +212,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   private dispatchCallAction(billableService: BillableService): void {
     this.store.dispatch(
       new CloseCallsBeforeInitiate({
+        participantIsAway: false,
         billableService,
         callId: '',
         isReconnect: false,

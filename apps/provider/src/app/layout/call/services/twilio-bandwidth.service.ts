@@ -13,7 +13,8 @@ import {
   callSelector,
   CallState,
   DisableCurrentUserCamera,
-  EnableCurrentUserCamera
+  EnableCurrentUserCamera,
+  SetParticipantIsAway
 } from '@app/layout/store/call'
 import { sleep } from '@app/shared/utils'
 
@@ -78,6 +79,13 @@ export class TwilioBandwidthService {
     const message: TwilioDataMessage = JSON.parse(raw)
 
     switch (message.type) {
+      case TwilioDataMessageType.MOB_APP_OFF:
+        this.store.dispatch(new SetParticipantIsAway(true))
+        break
+      case TwilioDataMessageType.MOB_APP_ON:
+        this.store.dispatch(new SetParticipantIsAway(false))
+        break
+
       case TwilioDataMessageType.MOB_CAM_OFF:
       case TwilioDataMessageType.MOB_CAM_ON:
         this.listenToVideoDataTrack = true

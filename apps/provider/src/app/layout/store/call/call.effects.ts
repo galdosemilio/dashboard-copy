@@ -136,6 +136,7 @@ export class CallEffects {
       } else {
         return of(
           new callAction.ReceiveCall({
+            participantIsAway: false,
             billableService: {
               id: '',
               displayName: '',
@@ -1274,6 +1275,7 @@ export class CallEffects {
 
   initiatePendingCall() {
     return new callAction.InitiateCall({
+      participantIsAway: false,
       billableService: this.callState.billableService,
       callId: this.callState.callId,
       isReconnect: this.callState.isReconnect,
@@ -1303,10 +1305,14 @@ export class CallEffects {
     flatMap(() => {
       const actions = []
 
-      if (this.callState.isAttemptingToReconnect) {
+      if (
+        this.callState.isAttemptingToReconnect ||
+        this.callState.participantIsAway
+      ) {
         actions.push(new callAction.SetReconnectionBumper(true))
         this.twilioService.hideVideoContainer('')
       } else {
+        actions.push(new callAction.SetReconnectionBumper(false))
         this.twilioService.showVideoContainer('')
       }
       return actions

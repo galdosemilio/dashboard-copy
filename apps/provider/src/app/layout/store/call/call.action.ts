@@ -114,6 +114,7 @@ export const SET_ATTEMPTING_RECONNECT = 'CALL set attempting to reconnect'
 export const SET_RECONNECTION_BUMPER = 'CALL set reconnection bumper'
 export const STORE_CALL_SETTINGS = 'CALL store call window settings'
 export const SET_LOCAL_VIDEO_ENABLED = 'CALL set local video enabled'
+export const SET_PARTICIPANT_IS_AWAY = 'CALL set participant is away'
 
 export const Source = {
   INBOUND: 'INBOUND',
@@ -121,6 +122,7 @@ export const Source = {
 }
 
 export interface CallDetail {
+  participantIsAway: boolean
   callId: string
   isReconnect: boolean
   source: string
@@ -601,6 +603,12 @@ export class StoreCallSettings implements Action {
   constructor() {}
 }
 
+export class SetParticipantIsAway implements Action {
+  readonly type = SET_PARTICIPANT_IS_AWAY
+
+  constructor(public payload: boolean) {}
+}
+
 // Actions data type
 export type Actions =
   | InitiateCall
@@ -684,3 +692,4 @@ export type Actions =
   | SetAttemptingReconnect
   | SetReconnectionBumper
   | StoreCallSettings
+  | SetParticipantIsAway

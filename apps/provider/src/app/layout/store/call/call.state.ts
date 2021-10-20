@@ -73,6 +73,7 @@ export interface CallState {
   lastPosition: any
   isAttemptingToReconnect: boolean
   reconnectionBumper: boolean
+  participantIsAway: boolean
 }
 
 export const initialRoom: RoomState = {
@@ -128,5 +129,6 @@ export const initialState: CallState = {
   isBeingDragged: false,
   conferencingEnabled: false,
   isAttemptingToReconnect: false,
-  reconnectionBumper: false
+  reconnectionBumper: false,
+  participantIsAway: false
 }

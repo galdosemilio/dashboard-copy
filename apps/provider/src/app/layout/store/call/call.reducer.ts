@@ -202,7 +202,8 @@ export function callReducer(state = initialState, action: Action): CallState {
     case Actions.SET_VIDEO_AS_STARTED:
       return {
         ...state,
-        hasVideoStarted: true
+        hasVideoStarted: true,
+        isRemoteVideoEnabled: true
       }
     case Actions.SET_VIDEO_AS_STOPPED:
       return {
@@ -335,6 +336,10 @@ export function callReducer(state = initialState, action: Action): CallState {
     case Actions.CLOSE_CALLS_BEFORE_INITIATE:
       return {
         ...state,
+        isAttemptingToReconnect: (action as Actions.InitiateCall).payload
+          .isReconnect,
+        participantIsAway: (action as Actions.InitiateCall).payload
+          .participantIsAway,
         source: (action as Actions.InitiateCall).payload.source,
         isReconnect: (action as Actions.InitiateCall).payload.isReconnect,
         callId: (action as Actions.InitiateCall).payload.callId,
@@ -386,6 +391,12 @@ export function callReducer(state = initialState, action: Action): CallState {
       return {
         ...state,
         reconnectionBumper: (action as Actions.SetReconnectionBumper).payload
+      }
+
+    case Actions.SET_PARTICIPANT_IS_AWAY:
+      return {
+        ...state,
+        participantIsAway: (action as Actions.SetParticipantIsAway).payload
       }
     default: {
       return state

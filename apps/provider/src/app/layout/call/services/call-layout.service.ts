@@ -129,6 +129,7 @@ export class CallLayoutService implements OnDestroy {
       ) {
         this.store.dispatch(
           new CloseCallsBeforeInitiate({
+            participantIsAway: false,
             billableService: billableService,
             callId: '',
             isReconnect: false,
@@ -155,6 +156,7 @@ export class CallLayoutService implements OnDestroy {
       } else {
         this.store.dispatch(
           new ReceiveCall({
+            participantIsAway: false,
             billableService: billableService,
             callId: recentCall.id,
             isReconnect: true,
