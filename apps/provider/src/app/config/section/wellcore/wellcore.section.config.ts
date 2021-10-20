@@ -7,7 +7,7 @@ export const WellCoreProdSectionConfig: SectionConfigDetails = {
   },
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: true,
-    SHOW_NEW_APPOINTMENT: true
+    SHOW_NEW_APPOINTMENT: false
   }
 }
 
@@ -17,6 +17,6 @@ export const WellCoreTestSectionConfig: SectionConfigDetails = {
   },
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: true,
-    SHOW_NEW_APPOINTMENT: true
+    SHOW_NEW_APPOINTMENT: false
   }
 }
