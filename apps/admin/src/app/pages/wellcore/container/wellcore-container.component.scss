@@ -170,7 +170,8 @@ ccr-wellcore-container {
       width: 100%;
 
       .ccr-wellcore-label {
-        width: 150px;
+        width: 122px;
+        min-width: 122px;
         font-weight: 200;
         font-size: 14px;
         font-family: 'Inter Light';

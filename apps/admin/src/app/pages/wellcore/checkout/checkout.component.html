@@ -21,9 +21,9 @@
           <ccr-wellcore-account-info [formGroup]="accountInfo"></ccr-wellcore-account-info>
         </div>
       </mat-step>
-      <mat-step [stepControl]="billingInfo">
+      <mat-step [stepControl]="shippingInfo">
         <div class="step-container">
-          <div class="step-header">Billing and Shipping Information</div>
+          <ccr-wellcore-shipping-info [formGroup]="shippingInfo"></ccr-wellcore-shipping-info>
         </div>
       </mat-step>
       <mat-step [stepControl]="paymentInfo">

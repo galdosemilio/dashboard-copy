@@ -1,4 +1,4 @@
-<div class="ccr-wellcore-form-title">Account Information</div>
+<div class="ccr-wellcore-form-title">Shipping Information</div>
 <form class="ccr-wellcore-form" [formGroup]="formGroup">
   <div
     fxLayout="row"
@@ -23,29 +23,18 @@
       </mat-form-field>
     </div>
   </div>
-  <div
-    fxLayout="row"
-    fxLayout.sm="column"
-    fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
-    fxLayoutGap="50px"
-    fxLayoutGap.sm="10px"
-  >
-    <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Email Address</label>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="email">
-        <mat-error *ngIf="formGroup.get('email').getError('required')">Email is required</mat-error>
-        <mat-error *ngIf="formGroup.get('email').getError('email')">Email is invalid</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Phone Number</label>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="phoneNumber">
-        <mat-error *ngIf="formGroup.get('phoneNumber').getError('required')">Phone number is required</mat-error>
-      </mat-form-field>
-    </div>
+  <div class="ccr-wellcore-field">
+    <label class="ccr-wellcore-label">Address Line 1</label>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="address1">
+      <mat-error *ngIf="formGroup.get('address1').getError('required')">Address Line 1 is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="ccr-wellcore-field">
+    <label class="ccr-wellcore-label">Address Line 2</label>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="address2">
+    </mat-form-field>
   </div>
   <div
     fxLayout="row"
@@ -56,20 +45,20 @@
     fxLayoutGap.sm="0px"
   >
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Gender</label>
+      <label class="ccr-wellcore-label">City</label>
       <mat-form-field appearance="outline">
-        <mat-select
-        formControlName="gender">
-          <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.label }}</mat-option>
-        </mat-select>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="formGroup.get('city').getError('required')">City is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Height</label>
+      <label class="ccr-wellcore-label">State</label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="height">
+        <input matInput formControlName="state">
+        <mat-error *ngIf="formGroup.get('state').getError('required')">State is required</mat-error>
       </mat-form-field>
     </div>
+
   </div>
   <div
     fxLayout="row"
@@ -80,11 +69,10 @@
     fxLayoutGap.sm="0px"
   >
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Birthday</label>
+      <label class="ccr-wellcore-label">Zip</label>
       <mat-form-field appearance="outline">
-        <input matInput [matDatepicker]="picker" formControlName="birthday">
-        <mat-datepicker-toggle matSuffix class="wellcore-calendar-wrap" [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker class="wellcore-calendar" #picker></mat-datepicker>
+        <input matInput formControlName="zip">
+        <mat-error *ngIf="formGroup.get('zip').getError('required')">Zip is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">

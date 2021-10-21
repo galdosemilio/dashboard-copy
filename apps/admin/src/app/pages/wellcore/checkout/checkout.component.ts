@@ -16,7 +16,7 @@ export class WellcoreCheckoutComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router) {}
   public accountInfo: FormGroup
-  public billingInfo: FormGroup
+  public shippingInfo: FormGroup
   public paymentInfo: FormGroup
   public orderReview: FormGroup
   public orderConfirm: FormGroup
@@ -36,8 +36,15 @@ export class WellcoreCheckoutComponent implements OnInit {
       height: [''],
       birthday: ['']
     })
-
-    this.billingInfo = this.fb.group({})
+    this.shippingInfo = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: [''],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zip: ['', Validators.required]
+    })
     this.paymentInfo = this.fb.group({})
     this.orderReview = this.fb.group({})
     this.orderConfirm = this.fb.group({})
