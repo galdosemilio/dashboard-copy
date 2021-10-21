@@ -31,9 +31,9 @@
           <div class="step-header">Payment Information</div>
         </div>
       </mat-step>
-      <mat-step [stepControl]="orderReview">
+      <mat-step>
         <div class="step-container">
-          <div class="step-header">Cart and Order Review</div>
+          <ccr-wellcore-review-order [checkoutData]="checkoutData"></ccr-wellcore-review-order>
         </div>
       </mat-step>
       <mat-step [stepControl]="orderConfirm">

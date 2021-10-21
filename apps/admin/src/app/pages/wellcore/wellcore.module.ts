@@ -16,6 +16,7 @@ import {
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { CcrFormFieldsModule } from '@coachcare/common/components'
 import { WellcoreComponents, WellcoreProviders } from './wellcore.barrel'
+import { MomentModule } from 'ngx-moment'
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { WellcoreComponents, WellcoreProviders } from './wellcore.barrel'
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MomentModule
   ],
   exports: [],
   declarations: WellcoreComponents,

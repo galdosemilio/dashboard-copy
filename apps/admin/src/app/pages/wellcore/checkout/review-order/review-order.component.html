@@ -1,0 +1,121 @@
+<div class="ccr-wellcore-form-title">Review Order</div>
+<div class="review-container">
+  <div class="review-content" *ngIf="checkoutData.accountInfo">
+    <p class="review-subtitle">Account Info</p>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>First Name: </span>{{ checkoutData.accountInfo.firstName }}</p>
+      <p class="review-item"><span>Last Name: </span>{{ checkoutData.accountInfo.lastName }}</p>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>Phone Number: </span>{{ checkoutData.accountInfo.phoneNumber }}</p>
+      <p class="review-item"><span>Email Address: </span>{{ checkoutData.accountInfo.email }}</p>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>Gender: </span>{{ checkoutData.accountInfo.gender }}</p>
+      <p class="review-item"><span>Height: </span>{{ checkoutData.accountInfo.height ? checkoutData.accountInfo.height + 'ft' : '' }}</p>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>Birthday: </span>
+        {{ checkoutData.accountInfo.birthday ? (checkoutData.accountInfo.birthday | amDateFormat:'YYYY/MM/DD') : '' }}
+      </p>
+    </div>
+  </div>
+  <div class="review-content">
+    <p class="review-subtitle">Shipping Address</p>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>First Name: </span>Zhang</p>
+      <p class="review-item"><span>Last Name: </span>Xin</p>
+    </div>
+    <p class="review-item"><span>Address 1: </span>4083 North Bengston Avenue</p>
+    <p class="review-item"><span>Address 2: </span></p>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>City: </span>Fresno</p>
+      <p class="review-item"><span>State: </span>CA</p>
+      <p class="review-item"><span>Zip: </span>93705</p>
+    </div>
+  </div>
+  <div class="review-content">
+    <p class="review-subtitle">Billing Address</p>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>First Name: </span>Zhang</p>
+      <p class="review-item"><span>Last Name: </span>Xin</p>
+    </div>
+    <p class="review-item"><span>Address 1: </span>4083 North Bengston Avenue</p>
+    <p class="review-item"><span>Address 2: </span></p>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>City: </span>Fresno</p>
+      <p class="review-item"><span>State: </span>CA</p>
+      <p class="review-item"><span>Zip: </span>93705</p>
+    </div>
+  </div>
+  <div class="review-content">
+    <p class="review-subtitle">Payment Info</p>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.sm="start stretch"
+      fxLayoutGap="50px"
+      fxLayoutGap.sm="10px"
+    >
+      <p class="review-item"><span>Card Number: </span>*4053</p>
+      <p class="review-item"><span>Expiration: </span>12/21</p>
+    </div>
+  </div>
+</div>

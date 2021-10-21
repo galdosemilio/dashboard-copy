@@ -2,7 +2,19 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { MatStepper } from '@coachcare/material'
-import { UntilDestroy } from '@ngneat/until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+
+export interface CheckoutData {
+  accountInfo?: {
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: string
+    gender: string
+    height?: string
+    birthday?: Date
+  }
+}
 
 @UntilDestroy()
 @Component({
@@ -21,6 +33,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   public orderReview: FormGroup
   public orderConfirm: FormGroup
   public step = 0
+  public checkoutData: CheckoutData = {}
 
   public ngOnInit(): void {
     this.createForm()
@@ -48,6 +61,12 @@ export class WellcoreCheckoutComponent implements OnInit {
     this.paymentInfo = this.fb.group({})
     this.orderReview = this.fb.group({})
     this.orderConfirm = this.fb.group({})
+
+    this.accountInfo.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((control) => {
+        this.checkoutData.accountInfo = control
+      })
   }
 
   public nextStep(): void {

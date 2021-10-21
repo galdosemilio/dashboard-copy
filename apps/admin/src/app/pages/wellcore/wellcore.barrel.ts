@@ -10,8 +10,9 @@ import {
   WellcoreMainFormComponent,
   WellcoreMedicalIntakeFormComponent,
   WellcoreThankYouComponent,
+  WellcoreShippingInfoComponent,
   WellcoreQuantitySelectorComponent,
-  WellcoreShippingInfoComponent
+  WellcoreReviewOrderComponent
 } from '.'
 
 export const WellcoreComponents = [
@@ -27,7 +28,9 @@ export const WellcoreComponents = [
   WellcoreQuantitySelectorComponent,
   WellcoreThankYouComponent,
   WellcoreQuantitySelectorComponent,
-  WellcoreShippingInfoComponent
+  WellcoreShippingInfoComponent,
+  WellcoreQuantitySelectorComponent,
+  WellcoreReviewOrderComponent
 ]
 
 export const WellcoreProviders = [...SdkApiProviders]
