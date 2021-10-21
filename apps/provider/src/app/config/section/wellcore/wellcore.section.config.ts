@@ -7,7 +7,7 @@ export const WellCoreSectionConfig: SectionConfigDetails = {
   },
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: true,
-    SHOW_NEW_APPOINTMENT: false,
+    SHOW_NEW_APPOINTMENT: true,
     SHOW_MEDICAL_INTAKE_FORM: true
   }
 }
