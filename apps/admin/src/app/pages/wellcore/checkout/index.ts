@@ -1,4 +1,5 @@
 export * from './checkout.component'
+export * from './billing-info'
 export * from './account-info'
 export * from './shipping-info'
 export * from './review-order'

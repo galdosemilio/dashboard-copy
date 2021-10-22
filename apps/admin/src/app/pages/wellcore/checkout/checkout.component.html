@@ -28,7 +28,9 @@
       </mat-step>
       <mat-step [stepControl]="paymentInfo">
         <div class="step-container">
-          <div class="step-header">Payment Information</div>
+          <ccr-wellcore-billing-info
+          [billingFormGroup]="paymentInfo.get('billingInfo')"
+          [creditFormGroup]="paymentInfo.get('creditCardInfo')"></ccr-wellcore-billing-info>
         </div>
       </mat-step>
       <mat-step>

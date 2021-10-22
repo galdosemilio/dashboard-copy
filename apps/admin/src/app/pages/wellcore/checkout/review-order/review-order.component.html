@@ -58,11 +58,11 @@
       fxLayoutGap="50px"
       fxLayoutGap.sm="10px"
     >
-      <p class="review-item"><span>First Name: </span>Zhang</p>
-      <p class="review-item"><span>Last Name: </span>Xin</p>
+      <p class="review-item"><span>First Name: </span>{{ checkoutData.shippingInfo?.firstName }}</p>
+      <p class="review-item"><span>Last Name: </span>{{ checkoutData.shippingInfo?.lastName }}</p>
     </div>
-    <p class="review-item"><span>Address 1: </span>4083 North Bengston Avenue</p>
-    <p class="review-item"><span>Address 2: </span></p>
+    <p class="review-item"><span>Address 1: </span>{{ checkoutData.shippingInfo?.address1 }}</p>
+    <p class="review-item"><span>Address 2: </span>{{ checkoutData.shippingInfo?.address2 }}</p>
     <div
       fxLayout="row"
       fxLayout.sm="column"
@@ -71,9 +71,9 @@
       fxLayoutGap="50px"
       fxLayoutGap.sm="10px"
     >
-      <p class="review-item"><span>City: </span>Fresno</p>
-      <p class="review-item"><span>State: </span>CA</p>
-      <p class="review-item"><span>Zip: </span>93705</p>
+      <p class="review-item"><span>City: </span>{{ checkoutData.shippingInfo?.city }}</p>
+      <p class="review-item"><span>State: </span>{{ checkoutData.shippingInfo?.state }}</p>
+      <p class="review-item"><span>Zip: </span>{{ checkoutData.shippingInfo?.zip }}</p>
     </div>
   </div>
   <div class="review-content">
@@ -86,11 +86,11 @@
       fxLayoutGap="50px"
       fxLayoutGap.sm="10px"
     >
-      <p class="review-item"><span>First Name: </span>Zhang</p>
-      <p class="review-item"><span>Last Name: </span>Xin</p>
+      <p class="review-item"><span>First Name: </span>{{ checkoutData.paymentInfo?.billingInfo.firstName }}</p>
+      <p class="review-item"><span>Last Name: </span>{{ checkoutData.paymentInfo?.billingInfo.lastName }}</p>
     </div>
-    <p class="review-item"><span>Address 1: </span>4083 North Bengston Avenue</p>
-    <p class="review-item"><span>Address 2: </span></p>
+    <p class="review-item"><span>Address 1: </span>{{ checkoutData.paymentInfo?.billingInfo.address1 }}</p>
+    <p class="review-item"><span>Address 2: </span>{{ checkoutData.paymentInfo?.billingInfo.address2 }}</p>
     <div
       fxLayout="row"
       fxLayout.sm="column"
@@ -99,9 +99,9 @@
       fxLayoutGap="50px"
       fxLayoutGap.sm="10px"
     >
-      <p class="review-item"><span>City: </span>Fresno</p>
-      <p class="review-item"><span>State: </span>CA</p>
-      <p class="review-item"><span>Zip: </span>93705</p>
+      <p class="review-item"><span>City: </span>{{ checkoutData.paymentInfo?.billingInfo.city }}</p>
+      <p class="review-item"><span>State: </span>{{ checkoutData.paymentInfo?.billingInfo.state }}</p>
+      <p class="review-item"><span>Zip: </span>{{ checkoutData.paymentInfo?.billingInfo.zip }}</p>
     </div>
   </div>
   <div class="review-content">
@@ -114,8 +114,8 @@
       fxLayoutGap="50px"
       fxLayoutGap.sm="10px"
     >
-      <p class="review-item"><span>Card Number: </span>*4053</p>
-      <p class="review-item"><span>Expiration: </span>12/21</p>
+      <p class="review-item"><span>Card Number: </span>{{ checkoutData.paymentInfo?.creditCardInfo.cardNumber }}</p>
+      <p class="review-item"><span>Expiration: </span>{{ checkoutData.paymentInfo?.creditCardInfo.expirationDate }}</p>
     </div>
   </div>
 </div>

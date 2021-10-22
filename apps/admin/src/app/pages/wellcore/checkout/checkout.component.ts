@@ -14,6 +14,31 @@ export interface CheckoutData {
     height?: string
     birthday?: Date
   }
+  paymentInfo?: {
+    billingInfo: {
+      firstName: string
+      lastName: string
+      address1: string
+      address2?: string
+      city: string
+      state: string
+      zip: string
+    }
+    creditCardInfo: {
+      cardNumber: string
+      cvv: string
+      expirationDate: string
+    }
+  }
+  shippingInfo?: {
+    firstName: string
+    lastName: string
+    address1: string
+    address2?: string
+    city: string
+    state: string
+    zip: string
+  }
 }
 
 @UntilDestroy()
@@ -59,15 +84,36 @@ export class WellcoreCheckoutComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     })
-    this.paymentInfo = this.fb.group({})
+    this.paymentInfo = this.fb.group({
+      billingInfo: this.fb.group({
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        address1: ['', Validators.required],
+        address2: [''],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        zip: ['', Validators.required]
+      }),
+      creditCardInfo: this.fb.group({
+        cardNumber: ['', Validators.required],
+        cvv: ['', Validators.required],
+        expirationDate: ['', Validators.required]
+      })
+    })
     this.orderReview = this.fb.group({})
     this.orderConfirm = this.fb.group({})
 
     this.accountInfo.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((control) => {
-        this.checkoutData.accountInfo = control
-      })
+      .subscribe((control) => (this.checkoutData.accountInfo = control))
+
+    this.paymentInfo.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((controls) => (this.checkoutData.paymentInfo = controls))
+
+    this.shippingInfo.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((controls) => (this.checkoutData.shippingInfo = controls))
   }
 
   public nextStep(): void {

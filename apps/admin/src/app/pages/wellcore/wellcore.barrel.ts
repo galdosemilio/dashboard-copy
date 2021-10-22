@@ -13,13 +13,15 @@ import {
   WellcoreShippingInfoComponent,
   WellcoreOrderConfirmComponent,
   WellcoreQuantitySelectorComponent,
-  WellcoreReviewOrderComponent
+  WellcoreReviewOrderComponent,
+  WellcoreBillingInfoComponent
 } from '.'
 
 export const WellcoreComponents = [
   WellcoreAccountComponent,
   WellcoreActivitiesFormComponent,
   WellcoreAdditionalQuestionsFormComponent,
+  WellcoreBillingInfoComponent,
   WellcoreBloodSampleKitComponent,
   WellcoreCartComponent,
   WellcoreCheckoutComponent,

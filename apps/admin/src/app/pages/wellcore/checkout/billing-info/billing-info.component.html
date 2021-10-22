@@ -1,0 +1,117 @@
+<div class="ccr-wellcore-form-title">Credit Card Information</div>
+
+<form [formGroup]="creditFormGroup" class="ccr-wellcore-form">
+  <div class="ccr-wellcore-field">
+    <label class="ccr-wellcore-label">Credit Card Number</label>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="cardNumber">
+      <mat-error *ngIf="creditFormGroup.get('cardNumber').getError('required')">The credit card number is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div
+  fxLayout="row"
+  fxLayout.sm="column"
+  fxLayoutAlign="space-between start"
+  fxLayoutAlign.sm="start stretch"
+  fxLayoutGap="50px"
+  fxLayoutGap.sm="0px">
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">Expiration Date</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="expirationDate">
+        <mat-error *ngIf="creditFormGroup.get('expirationDate').getError('required')">The expiration date is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">CVV</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="cvv">
+        <mat-error *ngIf="creditFormGroup.get('cvv').getError('required')">The CVV is required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+<br>
+
+<div class="ccr-wellcore-form-title">Billing Information</div>
+
+<form [formGroup]="billingFormGroup" class="ccr-wellcore-form">
+  <div
+  fxLayout="row"
+  fxLayout.sm="column"
+  fxLayoutAlign="space-between start"
+  fxLayoutAlign.sm="start stretch"
+  fxLayoutGap="50px"
+  fxLayoutGap.sm="0px">
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">First Name</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="firstName">
+        <mat-error *ngIf="billingFormGroup.get('firstName').getError('required')">First name is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">Last Name</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="lastName">
+        <mat-error *ngIf="billingFormGroup.get('lastName').getError('required')">Last name is required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="ccr-wellcore-field">
+    <label class="ccr-wellcore-label">Address Line 1</label>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="address1">
+      <mat-error *ngIf="billingFormGroup.get('address1').getError('required')">Address Line 1 is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="ccr-wellcore-field">
+    <label class="ccr-wellcore-label">Address Line 2</label>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="address2">
+    </mat-form-field>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px">
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">City</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="city">
+        <mat-error *ngIf="billingFormGroup.get('city').getError('required')">City is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">State</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="state">
+        <mat-error *ngIf="billingFormGroup.get('state').getError('required')">State is required</mat-error>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px">
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">Zip</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="zip">
+        <mat-error *ngIf="billingFormGroup.get('zip').getError('required')">Zip is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-wellcore-field">
+    </div>
+  </div>
+</form>
