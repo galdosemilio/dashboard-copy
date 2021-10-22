@@ -1,3 +1,18 @@
+# [1.45.0](https://github.com/coachcare/dashboard/compare/v1.44.1...v1.45.0) (2021-10-22)
+
+
+### Bug Fixes
+
+* enabled new appointment button [FRON-2402] ([c2b682c](https://github.com/coachcare/dashboard/commit/c2b682cc913ec5e877bf39eb356d587e9f80365a))
+* limited entries on table and chart view [FRON-2378] ([1e5fbdb](https://github.com/coachcare/dashboard/commit/1e5fbdb18f37b38ccc58a3c63113b78ec7f83ab2))
+
+
+### Features
+
+* build wellcore account info [FRON-2391] ([66589c8](https://github.com/coachcare/dashboard/commit/66589c8ee3a6635a7d5d14daa8983430660d73b0))
+* build wellcore initial checkout pages [FRON-2390] ([7bf558a](https://github.com/coachcare/dashboard/commit/7bf558a28263b0c02662327b037ea513645d2e7e))
+* implemented medical intake questionnaire [FRON-2377] ([cdaf174](https://github.com/coachcare/dashboard/commit/cdaf1743b83457dd14d5180b5410c4e2e03471c3))
+
 ## [1.44.1](https://github.com/coachcare/dashboard/compare/v1.44.0...v1.44.1) (2021-10-20)
 
 
