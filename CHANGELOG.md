@@ -1,3 +1,13 @@
+# [1.46.0](https://github.com/coachcare/dashboard/compare/v1.45.0...v1.46.0) (2021-10-22)
+
+
+### Features
+
+* added credit card and billing info form [FRON-2393] ([9d451b3](https://github.com/coachcare/dashboard/commit/9d451b38041643a923aeec2f0361a45c951517b3))
+* build order confirm step [FRON-2395] ([e00fe18](https://github.com/coachcare/dashboard/commit/e00fe180b67d9f72d132c3c3fce7b7202b801936))
+* build review order step [FRON-2394] ([483cfda](https://github.com/coachcare/dashboard/commit/483cfdad76fa76d0af05cc0abdc5a5bd4e98fc05))
+* build shipping info [FRON-2392] ([4eb0cca](https://github.com/coachcare/dashboard/commit/4eb0ccab057ab7bb96c188a1d258f01991d783a5))
+
 # [1.45.0](https://github.com/coachcare/dashboard/compare/v1.44.1...v1.45.0) (2021-10-22)
 
 
