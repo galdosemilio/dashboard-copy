@@ -34,6 +34,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   public orderConfirm: FormGroup
   public step = 0
   public checkoutData: CheckoutData = {}
+  public emailAddress: string
 
   public ngOnInit(): void {
     this.createForm()
@@ -72,6 +73,14 @@ export class WellcoreCheckoutComponent implements OnInit {
   public nextStep(): void {
     this.stepper.next()
     this.step += 1
+
+    if (this.step === 4) {
+      this.emailAddress = this.accountInfo.value.email
+
+      setTimeout(() => {
+        window.location.href = 'https://dashboard.coachcare.com/6891'
+      }, 8000)
+    }
   }
 
   public prevStep(): void {

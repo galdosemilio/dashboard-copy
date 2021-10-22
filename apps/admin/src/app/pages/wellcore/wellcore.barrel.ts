@@ -11,6 +11,7 @@ import {
   WellcoreMedicalIntakeFormComponent,
   WellcoreThankYouComponent,
   WellcoreShippingInfoComponent,
+  WellcoreOrderConfirmComponent,
   WellcoreQuantitySelectorComponent,
   WellcoreReviewOrderComponent
 } from '.'
@@ -25,6 +26,7 @@ export const WellcoreComponents = [
   WellcoreContainerComponent,
   WellcoreMainFormComponent,
   WellcoreMedicalIntakeFormComponent,
+  WellcoreOrderConfirmComponent,
   WellcoreQuantitySelectorComponent,
   WellcoreThankYouComponent,
   WellcoreQuantitySelectorComponent,

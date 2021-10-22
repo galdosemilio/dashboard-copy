@@ -36,9 +36,9 @@
           <ccr-wellcore-review-order [checkoutData]="checkoutData"></ccr-wellcore-review-order>
         </div>
       </mat-step>
-      <mat-step [stepControl]="orderConfirm">
+      <mat-step>
         <div class="step-container">
-          <div class="step-header">Order Confirmation</div>
+          <ccr-wellcore-order-confirm [emailAddress]="emailAddress"></ccr-wellcore-order-confirm>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
