@@ -371,7 +371,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('GET', '/1.0/hydration/summary?**', {
     fixture: 'api/hydration/hydration-summary.json'
   })
-  cy.intercept('GET', '/1.0/measurement/activity/summary?**', {
+  cy.intercept('GET', '/2.0/measurement/activity/summary?**', {
     fixture: 'api/measurement/getActivitySummary'
   })
   cy.intercept('GET', '/1.0/measurement/sleep/summary?**', {

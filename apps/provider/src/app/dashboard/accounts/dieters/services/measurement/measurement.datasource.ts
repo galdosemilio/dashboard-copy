@@ -365,6 +365,16 @@ export class MeasurementDataSource extends ChartDataSource<
             ? (row.stepTotal / KILOMETER) * 1000
             : row.distanceTotal || 0
         )
+
+        row.stepEntries = row.stepEntries.map((entry) => ({
+          ...entry,
+          distance: unitConversion(
+            units,
+            'distance',
+            Number((entry.steps / KILOMETER) * 1000),
+            false
+          )
+        }))
       }
       row.stepTotal = Number(row.stepTotal || 0)
       row.distanceTotal = unitConversion(

@@ -20,6 +20,7 @@ describe('Patient profile -> measurement -> energy', function () {
       .eq(6)
       .should('contain', 'Jan 1, 2020')
       .should('contain', '50')
+      .should('contain', 'Manual')
     cy.get('@measurementRows').eq(5).should('contain', 'Dec 31, 2019')
     cy.get('@measurementRows')
       .eq(4)
@@ -35,6 +36,10 @@ describe('Patient profile -> measurement -> energy', function () {
     cy.get('@measurementRows')
       .eq(0)
       .should('contain', 'Dec 26, 2019')
+      .should('contain', '20')
+      .should('contain', 'Manual')
+      .should('contain', '10')
+      .should('contain', 'BLE Activity Tracker')
       .should('contain', '20')
   })
 

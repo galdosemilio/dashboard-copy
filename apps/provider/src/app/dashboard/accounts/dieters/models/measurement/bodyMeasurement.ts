@@ -1,5 +1,9 @@
 import { unitConversion } from '@app/shared'
-import { AccountMeasurementPreferenceType, Entity } from '@coachcare/sdk'
+import {
+  AccountMeasurementPreferenceType,
+  Entity,
+  NamedEntity
+} from '@coachcare/sdk'
 import * as moment from 'moment'
 
 interface Device {
@@ -89,6 +93,12 @@ export class BodyMeasurement {
   sleepMinutes: number
   sleepQuality: number
   stepAverage: number
+  stepEntries: {
+    date: string
+    device: NamedEntity
+    distance: number
+    steps: number
+  }
   stepTotal: number
   thigh: number
   thorax: number
@@ -205,8 +215,9 @@ export class BodyMeasurement {
     this.respirationRate = args.respirationRate || 0
     this.sleepMinutes = args.sleepMinutes || 0
     this.sleepQuality = args.sleepQuality || 0
-    this.stepAverage = args.stepAverage || 0
-    this.stepTotal = args.stepTotal || 0
+    this.stepAverage = args.aggregates?.steps?.avg || 0
+    this.stepTotal = args.aggregates?.steps?.total || 0
+    this.stepEntries = args.entries ?? []
     this.temperature =
       (args.temperature > 100 ? args.temperature / 100 : args.temperature) || 0
     this.temperature =

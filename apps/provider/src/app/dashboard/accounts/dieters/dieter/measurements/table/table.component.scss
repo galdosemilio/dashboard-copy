@@ -1,6 +1,10 @@
 @import 'shared/directed-styles';
 @import 'variables';
 
+p {
+  margin: 0;
+}
+
 td.mat-cell.cdk-column-actions,
 td.mat-footer-cell.cdk-column-actions,
 th.mat-header-cell.cdk-column-actions {
@@ -61,6 +65,10 @@ tr.header {
 
 .row-odd td.cdk-column-actions {
   background: mat-color($ccr-background, odd);
+}
+
+.small-value {
+  display: block;
 }
 
 .text-right {

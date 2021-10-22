@@ -62,16 +62,13 @@ export class MeasurementDatabase extends CcrDatabase {
     return this.activity.fetchActivity(request)
   }
 
-  fetchActivitySummary(
-    args: FetchActivitySummaryRequest
-  ): Promise<FetchActivitySummaryResponse> {
+  fetchActivitySummary(args: any): Promise<FetchActivitySummaryResponse> {
     const request: FetchActivitySummaryRequest = {
       account: args.account,
-      data: args.data,
       unit: args.unit,
-      startDate: args.startDate,
-      endDate: args.endDate ? args.endDate : undefined,
-      max: args.max ? args.max : undefined
+      start: args.startDate,
+      end: args.endDate ? args.endDate : undefined,
+      limit: args.max ? args.max : undefined
     }
 
     return this.activity.fetchSummary(request)

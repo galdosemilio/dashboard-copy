@@ -280,7 +280,13 @@
       <td mat-cell *matCellDef="let row">
         <ng-container *ngIf="!row.isHeader">
         <ng-container *ngIf="row.stepTotal; else empty">
-          {{ row.stepTotal | number }}
+          <p>{{ row.stepTotal | number }}<small *ngIf="row.stepEntries.length < 2">&nbsp;{{ row.stepEntries[0].device.name }}</small></p>
+          <div *ngIf="row.stepEntries.length >= 2">
+            <small *ngFor="let entry of row.stepEntries" class="small-value">
+              <span>{{ entry.device.name }}</span>
+              <span>&nbsp;{{ entry.steps | number }}</span>
+            </small>
+          </div>
         </ng-container>
         </ng-container>
       </td>
@@ -302,8 +308,16 @@
       <td mat-cell *matCellDef="let row; let index = index;">
         <ng-container *ngIf="!row.isHeader">
         <ng-container *ngIf="row.distanceTotal; else empty">
-          {{ row.distanceTotal.toFixed(2) }} <small>{{ 'distance' | unitLabel | translate }}</small>
-          <i class="ccr-marker" *ngIf="source.distanceNote[index]">&nbsp;*</i>
+          <p>
+            {{ row.distanceTotal.toFixed(2) }} <small>{{ 'distance' | unitLabel | translate }}</small>
+            <i class="ccr-marker" *ngIf="source.distanceNote[index]">&nbsp;*</i>
+          </p>
+          <div *ngIf="row.stepEntries.length >= 2">
+            <small *ngFor="let entry of row.stepEntries" class="small-value">
+              <span>{{ entry.distance | number }}</span>
+              <span>&nbsp;{{ 'distance' | unitLabel | translate }}</span>
+            </small>
+          </div>
         </ng-container>
         </ng-container>
       </td>

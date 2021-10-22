@@ -1,61 +1,114 @@
 {
-    "data": [
+  "data": [
+    {
+      "date": "2019-12-26",
+      "entries": [
         {
-            "date": "2019-12-26T00:00:00.000Z",
-            "stepTotal": 20,
-            "stepAverage": 20,
-            "distanceTotal": 0,
-            "distanceAverage": 0
+          "date": "2019-12-26",
+          "steps": 10,
+          "device": {
+            "id": "3",
+            "name": "Manual"
+          }
         },
         {
-            "date": "2019-12-27T00:00:00.000Z",
-            "stepTotal": 0,
-            "stepAverage": 0,
-            "distanceTotal": 0,
-            "distanceAverage": 0
-        },
-        {
-            "date": "2019-12-28T00:00:00.000Z",
-            "stepTotal": 0,
-            "stepAverage": 0,
-            "distanceTotal": 0,
-            "distanceAverage": 0
-        },
-        {
-            "date": "2019-12-29T00:00:00.000Z",
-            "stepTotal": 0,
-            "stepAverage": 0,
-            "distanceTotal": 0,
-            "distanceAverage": 0
-        },
-        {
-            "date": "2019-12-30T00:00:00.000Z",
-            "stepTotal": 0,
-            "stepAverage": 0,
-            "distanceTotal": 0,
-            "distanceAverage": 0
-        },
-        {
-            "date": "2019-12-31T00:00:00.000Z",
-            "stepTotal": 0,
-            "stepAverage": 0,
-            "distanceTotal": 0,
-            "distanceAverage": 0
-        },
-        {
-            "date": "2020-01-01T00:00:00.000Z",
-            "stepTotal": 50,
-            "stepAverage": 50,
-            "distanceTotal": 0,
-            "distanceAverage": 0
+          "date": "2019-12-26",
+          "steps": 20,
+          "device": {
+            "id": "4",
+            "name": "BLE Activity Tracker"
+          }
         }
-    ],
-    "summary": {
-        "stepsMin": 20,
-        "stepsMax": 50,
-        "stepsAverage": 35,
-        "distanceMin": 0,
-        "distanceMax": 0,
-        "distanceAverage": 0
+      ],
+      "aggregates": {
+        "steps": {
+          "max": 20,
+          "avg": 10,
+          "min": 0,
+          "total": 20
+        }
+      }
+    },
+    {
+      "date": "2019-12-27",
+      "entries": [],
+      "aggregates": {
+        "steps": {
+          "max": 0,
+          "avg": 0,
+          "min": 0,
+          "total": 0
+        }
+      }
+    },
+    {
+      "date": "2019-12-28",
+      "entries": [],
+      "aggregates": {
+        "steps": {
+          "max": 0,
+          "avg": 0,
+          "min": 0,
+          "total": 0
+        }
+      }
+    },
+    {
+      "date": "2019-12-29",
+      "entries": [],
+      "aggregates": {
+        "steps": {
+          "max": 0,
+          "avg": 0,
+          "min": 0,
+          "total": 0
+        }
+      }
+    },
+    {
+      "date": "2019-12-30",
+      "entries": [],
+      "aggregates": {
+        "steps": {
+          "max": 0,
+          "avg": 0,
+          "min": 0,
+          "total": 0
+        }
+      }
+    },
+    {
+      "date": "2019-12-31",
+      "entries": [],
+      "aggregates": {
+        "steps": {
+          "max": 0,
+          "avg": 0,
+          "min": 0,
+          "total": 0
+        }
+      }
+    },
+    {
+      "date": "2020-01-01",
+      "entries": [
+        {
+          "date": "2020-01-01",
+          "steps": 50,
+          "device": {
+            "id": "3",
+            "name": "Manual"
+          }
+        }
+      ],
+      "aggregates": {
+        "steps": {
+          "max": 50,
+          "avg": 50,
+          "min": 50,
+          "total": 50
+        }
+      }
     }
+  ]
 }
