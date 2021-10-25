@@ -14,3 +14,85 @@
     margin: 0;
   }
 }
+
+.wellcore-sidenav {
+  background: linear-gradient(111.42deg, #1b1c1e 3.64%, #4d6577 93.21%);
+
+  app-menu-wellcore {
+    mat-sidenav-content > mat-nav-list {
+      .mat-list-item {
+        .mat-list-item-content {
+          color: mat-color($wellcore, platinum);
+        }
+
+        &:focus {
+          background: transparent;
+        }
+        &:active,
+        &:focus {
+          outline: none;
+          .mat-list-item-content {
+            color: var(--accent);
+          }
+        }
+        &.level1 {
+          &:hover {
+            background: transparent;
+            .mat-list-item-content {
+              color: var(--accent);
+            }
+          }
+        }
+        &.level2 {
+          background-color: transparent;
+          &:hover {
+            background-color: transparent;
+            .mat-list-item-content {
+              color: var(--accent);
+            }
+          }
+          &.active > {
+            background-color: transparent;
+            .mat-list-item-content {
+              color: var(--accent);
+            }
+          }
+        }
+      }
+    }
+
+    .account-info {
+      .user-avatar {
+        transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1) !important;
+      }
+      .user-name {
+        transition: all 0.75s cubic-bezier(0.35, 0, 0.25, 1) !important;
+      }
+      @media #{$medium-only} {
+        .user-avatar {
+          height: 40px !important;
+          width: 40px !important;
+        }
+
+        .user-name {
+          font-size: 0px !important;
+        }
+      }
+    }
+  }
+
+  &.open app-menu-wellcore {
+    .account-info {
+      @media #{$medium-only} {
+        .user-avatar {
+          height: 100px !important;
+          width: 100px !important;
+        }
+
+        .user-name {
+          font-size: 20px !important;
+        }
+      }
+    }
+  }
+}

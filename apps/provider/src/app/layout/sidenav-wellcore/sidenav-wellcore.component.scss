@@ -1,0 +1,30 @@
+:host {
+  .logo {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .mat-toolbar {
+    background-color: transparent;
+  }
+
+  .account-info {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+
+    .user-avatar {
+      height: 100px;
+      width: 100px;
+    }
+
+    .user-name {
+      color: white;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  }
+}

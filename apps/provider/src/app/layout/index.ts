@@ -9,6 +9,7 @@ import { SearchResultItemComponent } from './menubar/search/search-result-item/s
 import { SearchComponent } from './menubar/search/search.component'
 import { SidenavItemComponent } from './sidenav/sidenav-item/sidenav-item.component'
 import { SidenavComponent } from './sidenav/sidenav.component'
+import { SidenavWellcoreComponent } from './sidenav-wellcore/sidenav-wellcore.component'
 
 export const LayoutComponents = [
   DefaultLayoutComponent,
@@ -20,7 +21,8 @@ export const LayoutComponents = [
   SearchResultItemComponent,
   SidenavComponent,
   SidenavItemComponent,
-  WellcoreLayoutComponent
+  WellcoreLayoutComponent,
+  SidenavWellcoreComponent
 ]
 
 export const LayoutEntryComponents = [HelpComponent]

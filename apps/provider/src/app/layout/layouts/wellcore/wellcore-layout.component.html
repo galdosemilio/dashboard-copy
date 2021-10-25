@@ -3,11 +3,12 @@
   <mat-sidenav
     (click)="menuOpen($event)"
     [class.open]="layout?.menu.opened"
+    class="wellcore-sidenav"
     disableClose="true"
     mode="side"
     opened="true">
 
-    <app-menu [isOpened]="layout?.menu.opened"></app-menu>
+    <app-menu-wellcore [isOpened]="layout?.menu.opened"></app-menu-wellcore>
   </mat-sidenav>
 
   <div fxLayout="column">

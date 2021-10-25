@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <img [attr.src]="logoSrc" class="logo"/>
+</mat-toolbar>
+<div class="account-info">
+  <div class="user-avatar">
+    <ccr-avatar [account]="context.user.id"></ccr-avatar>
+  </div>
+  <p class="user-name">{{ userName }}</p>
+</div>
+
+<mat-sidenav-content data-cy="templateLefthandMenu">
+
+<mat-nav-list [disableRipple]="false" [class.open]="isOpened">
+  <app-sidenav-item
+    *ngFor="let sidenavItem of sidenavItems"
+    [sidenavItem]="sidenavItem"
+    [isSidenavOpen]="isOpened"
+    [parent]="_this"
+  ></app-sidenav-item>
+  <span *ngIf="sidenavItems.length === 0" data-cy="empty-menu"><!-- Placeholder for cypress tests--></span>
+</mat-nav-list>
+
+
+</mat-sidenav-content>

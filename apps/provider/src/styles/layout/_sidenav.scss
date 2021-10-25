@@ -1,3 +1,4 @@
+@import '~libs/common/src/lib/styles/variables';
 @import 'variables';
 @import 'shared/directed-styles';
 
@@ -13,8 +14,8 @@
     width: 225px !important;
   }
   &-content {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 
     &::-webkit-scrollbar {
       display: none;
@@ -65,8 +66,8 @@ button.topnav-logo {
   max-width: 400px;
   min-width: 225px;
 
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 
   &::-webkit-scrollbar {
     display: none;
@@ -110,7 +111,8 @@ button.topnav-logo {
   }
 }
 
-app-menu {
+app-menu,
+app-menu-wellcore {
   > .mat-toolbar {
     background: var(--bg-bar);
     box-shadow: none;
