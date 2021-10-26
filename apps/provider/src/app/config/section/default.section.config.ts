@@ -1,6 +1,7 @@
 import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component'
 import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
 import { DefaultLayoutComponent } from '@app/layout/layouts'
+import { DefaultScheduleListComponent } from '@app/dashboard/schedule/list'
 import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component'
 import { CompositionColumns, JournalTabs, SidenavOptions } from './consts'
 import { SectionConfigDetails } from './models/section.details'
@@ -68,6 +69,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   GLOBAL: {
     LAYOUT: {
       component: DefaultLayoutComponent
+    },
+    SCHEDULE_LIST: {
+      component: DefaultScheduleListComponent
     }
   }
 }
@@ -128,6 +132,9 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   GLOBAL: {
     LAYOUT: {
       component: DefaultLayoutComponent
+    },
+    SCHEDULE_LIST: {
+      component: DefaultScheduleListComponent
     }
   }
 }

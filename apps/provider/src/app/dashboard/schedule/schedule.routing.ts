@@ -3,9 +3,9 @@ import {
   ScheduleAvailabilityComponent,
   ScheduleAvailabilityRecurringComponent,
   ScheduleAvailabilitySingleDayComponent,
-  ScheduleCalendarComponent,
-  ScheduleListComponent
+  ScheduleCalendarComponent
 } from './'
+import { BaseScheduleListComponent } from './list'
 
 export const ScheduleRoutes: Routes = [
   {
@@ -23,6 +23,6 @@ export const ScheduleRoutes: Routes = [
   },
   {
     path: 'list',
-    component: ScheduleListComponent
+    component: BaseScheduleListComponent
   }
 ]

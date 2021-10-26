@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ContextService, EventsService, NotifierService } from '@app/service'
+import { Meeting } from '@app/shared/model'
+import { _ } from '@app/shared/utils'
 import {
-  Meeting,
   MeetingsDatabase,
   MeetingsDataSource,
-  ScheduleListTableComponent,
-  _
-} from '@app/shared'
+  ScheduleListTableComponent
+} from '@app/shared/components/schedule'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -19,11 +19,10 @@ type QuickSelectOption = 'past' | 'upcoming' | 'all'
 
 @UntilDestroy()
 @Component({
-  selector: 'app-schedule-list',
-  templateUrl: './schedule-list.component.html',
-  styleUrls: ['./schedule-list.component.scss']
+  selector: 'ccr-default-schedule-list',
+  templateUrl: './default-schedule-list.component.html'
 })
-export class ScheduleListComponent implements OnDestroy, OnInit {
+export class DefaultScheduleListComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
   @ViewChild(ScheduleListTableComponent, { static: true })

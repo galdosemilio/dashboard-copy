@@ -1,0 +1,36 @@
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
+  <h2>{{ 'BOARD.APPOINTMENTS' | translate }}</h2>
+  <h3>{{ 'BOARD.UPCOMING_APPOINTMENTS' | translate }}</h3>
+
+  <div
+  fxLayout="row wrap"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="25px"
+  fxLayout
+  style="width: 100%;">
+    <ccr-wellcore-meeting-container
+      *ngFor="let meeting of nextMeetings"
+      [disabled]="isLoading"
+      [meeting]="meeting"
+      (onRefresh$)="fetchMeetings()"
+      fxFlex="33%">
+    </ccr-wellcore-meeting-container>
+
+    <ccr-wellcore-meeting-container [disabled]="isLoading" fxFlex="33%"></ccr-wellcore-meeting-container>
+  </div>
+
+  <h3>{{ 'BOARD.PAST_APPOINTMENTS' | translate }}</h3>
+
+  <div
+  fxLayout="row wrap"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="25px"
+  fxLayout
+  style="width: 100%;">
+    <ccr-wellcore-meeting-container
+      *ngFor="let meeting of pastMeetings"
+      [meeting]="meeting"
+      fxFlex="33%">
+    </ccr-wellcore-meeting-container>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+@import '~libs/common/src/lib/styles/variables/colors';
+
+.wellcore-component {
+  h2 {
+    color: mat-color($wellcore, wellcore-blue);
+    font-size: 48px;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: 32px;
+    font-weight: lighter;
+    margin: 0;
+  }
+}

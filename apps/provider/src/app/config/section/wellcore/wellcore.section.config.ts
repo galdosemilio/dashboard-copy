@@ -1,4 +1,5 @@
 import { WellcoreLayoutComponent } from '@app/layout/layouts'
+import { WellcoreScheduleListComponent } from '@app/dashboard/schedule/list'
 import { SidenavOptions } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 
@@ -6,6 +7,9 @@ export const WellCoreSectionConfig: SectionConfigDetails = {
   GLOBAL: {
     LAYOUT: {
       component: WellcoreLayoutComponent
+    },
+    SCHEDULE_LIST: {
+      component: WellcoreScheduleListComponent
     }
   },
   SIDENAV: {
