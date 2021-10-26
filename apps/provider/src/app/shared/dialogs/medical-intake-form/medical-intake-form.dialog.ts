@@ -17,10 +17,7 @@ export class MedicalIntakeFormDialog implements OnInit {
     }
   }
 
-  public baseUrl: string =
-    environment.selveraApiEnv === 'test'
-      ? 'http://localhost:4200/'
-      : 'https://dashboard.coachcare.com/'
+  public baseUrl: string = environment.loginSite
 
   public url: SafeUrl
 
@@ -31,7 +28,7 @@ export class MedicalIntakeFormDialog implements OnInit {
 
   public ngOnInit(): void {
     this.url = this.domSanitizer.bypassSecurityTrustResourceUrl(
-      this.baseUrl + 'wellcore/medical-intake-form'
+      this.baseUrl + '/wellcore/medical-intake-form'
     )
   }
 }
