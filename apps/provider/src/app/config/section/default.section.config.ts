@@ -1,5 +1,6 @@
 import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component'
 import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
+import { DefaultLayoutComponent } from '@app/layout/layouts'
 import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component'
 import { CompositionColumns, JournalTabs, SidenavOptions } from './consts'
 import { SectionConfigDetails } from './models/section.details'
@@ -63,6 +64,11 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     SHOW_MY_SCHEDULE: false,
     SHOW_NEW_APPOINTMENT: false,
     SHOW_MEDICAL_INTAKE_FORM: false
+  },
+  GLOBAL: {
+    LAYOUT: {
+      component: DefaultLayoutComponent
+    }
   }
 }
 
@@ -118,5 +124,10 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     SHOW_MY_SCHEDULE: false,
     SHOW_NEW_APPOINTMENT: false,
     SHOW_MEDICAL_INTAKE_FORM: false
+  },
+  GLOBAL: {
+    LAYOUT: {
+      component: DefaultLayoutComponent
+    }
   }
 }

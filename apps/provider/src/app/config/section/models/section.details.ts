@@ -1,6 +1,7 @@
 import {
   ClinicListingConfigDetails,
   JournalConfigDetails,
+  GlobalConfigDetails,
   PatientDashboardConfigDetails,
   PatientFormConfigDetails,
   PatientListingConfigDetails,
@@ -13,6 +14,7 @@ import {
 export interface SectionConfigDetails {
   CLINIC_LISTING?: ClinicListingConfigDetails
   JOURNAL?: JournalConfigDetails
+  GLOBAL?: GlobalConfigDetails
   PATIENT_FORM?: PatientFormConfigDetails
   PATIENT_LISTING?: PatientListingConfigDetails
   RIGHT_PANEL?: RightPanelDetails

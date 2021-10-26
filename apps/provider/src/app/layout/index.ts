@@ -1,8 +1,8 @@
 export * from './layout.component'
 
-import { LayoutBaseComponent } from './base/base.component'
 import { FooterComponent } from './footer/footer.component'
 import { LayoutComponent } from './layout.component'
+import { DefaultLayoutComponent, WellcoreLayoutComponent } from './layouts'
 import { HelpComponent } from './menubar/help'
 import { MenubarComponent } from './menubar/menubar.component'
 import { SearchResultItemComponent } from './menubar/search/search-result-item/search-result-item.component'
@@ -11,7 +11,7 @@ import { SidenavItemComponent } from './sidenav/sidenav-item/sidenav-item.compon
 import { SidenavComponent } from './sidenav/sidenav.component'
 
 export const LayoutComponents = [
-  LayoutBaseComponent,
+  DefaultLayoutComponent,
   LayoutComponent,
   FooterComponent,
   HelpComponent,
@@ -19,7 +19,8 @@ export const LayoutComponents = [
   SearchComponent,
   SearchResultItemComponent,
   SidenavComponent,
-  SidenavItemComponent
+  SidenavItemComponent,
+  WellcoreLayoutComponent
 ]
 
 export const LayoutEntryComponents = [HelpComponent]

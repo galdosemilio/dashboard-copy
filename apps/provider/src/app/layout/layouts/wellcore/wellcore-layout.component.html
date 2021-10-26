@@ -1,0 +1,26 @@
+<!-- CAUTION: any change in this layout needs CSS sync -->
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav
+    (click)="menuOpen($event)"
+    [class.open]="layout?.menu.opened"
+    disableClose="true"
+    mode="side"
+    opened="true">
+
+    <app-menu [isOpened]="layout?.menu.opened"></app-menu>
+  </mat-sidenav>
+
+  <div fxLayout="column">
+    <div fxLayout="row">
+      <div fxFlex>
+        <router-outlet>
+          <ccr-call-rating *ngIf="showVideoRating"></ccr-call-rating>
+        </router-outlet>
+      </div>
+
+      <app-right-panel *ngIf="panelEnabled && layout?.panel.enabled" [class.open]="layout?.panel.opened"></app-right-panel>
+    </div>
+  </div>
+</mat-sidenav-container>
+
+<app-footer></app-footer>
