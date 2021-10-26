@@ -1,3 +1,15 @@
+# [1.47.0](https://github.com/coachcare/dashboard/compare/v1.46.0...v1.47.0) (2021-10-26)
+
+
+### Bug Fixes
+
+* missing setting for the medical intake form [FRON-2412] ([699b37a](https://github.com/coachcare/dashboard/commit/699b37a06d4e960ae66529340a4992d433974da8))
+
+
+### Features
+
+* added extra info to the steps table [FRON-2385] ([edb0084](https://github.com/coachcare/dashboard/commit/edb0084644b47da5096e54922e42c833326b95b5))
+
 # [1.46.0](https://github.com/coachcare/dashboard/compare/v1.45.0...v1.46.0) (2021-10-22)
 
 
