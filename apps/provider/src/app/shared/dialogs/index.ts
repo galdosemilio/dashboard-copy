@@ -21,6 +21,7 @@ export * from './text-input.dialog'
 export * from './view-image'
 export * from './walkthrough'
 export * from './multiple-files-download'
+export * from './remove-patient-meeting'
 
 import { AccountRedirectDialog } from './account-redirect'
 import { AddManualInteractionDialog } from './add-manual-interaction'
@@ -48,6 +49,7 @@ import { RPMEditFormComponent, RPMEntryCardComponent } from './rpm-status'
 import { RemoveClinicAssociationDialog } from './remove-clinic-association'
 import { CoachPermissionsDialog } from './coach-permissions-dialog'
 import { MultipleFilesDownloadDialog } from './multiple-files-download'
+import { RemovePatientMeetingDialog } from './remove-patient-meeting'
 
 export const Dialogs = [
   AccountRedirectDialog,
@@ -73,7 +75,8 @@ export const Dialogs = [
   TextInputDialog,
   ViewImageDialog,
   WalkthroughDialog,
-  MultipleFilesDownloadDialog
+  MultipleFilesDownloadDialog,
+  RemovePatientMeetingDialog
 ]
 
 export const Components = [

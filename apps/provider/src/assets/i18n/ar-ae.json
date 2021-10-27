@@ -44,9 +44,11 @@
   },
   "BOARD": {
     "ACC_MULTI_ASSOCIATION": "",
+    "ACC_REMOVED_MEETINGS": "المريض {{firstName}} {{lastName}} لديه اجتماعات مجدولة في المستقبل داخل هذه العيادة. إذا تابعت وأخرجت المريض من العيادة ، فسيتم إلغاء جميع الاجتماعات المستقبلية تلقائيًا. <br><br>الاجتماعات التي ستتم إزالتها هي:",
     "ACETONEPPM": "أسيتون (جزء في المليون)",
     "ACTION": "إجراء",
     "ACTIONS": "الإجراءات",
+    "ADDITIONAL_MEETINGS_NOT_DISPLAYED": "اجتماعات إضافية غير معروضة",
     "ADDRESS": "العنوان",
     "ADDRESSES": "عناوين",
     "ADDRESS_LINE_ONE": "العنوان السطر 1",

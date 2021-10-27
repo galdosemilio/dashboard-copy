@@ -12,7 +12,13 @@ import {
   RemoveClinicAssociationDialog
 } from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
-import { OrganizationAccess, OrganizationAssociation } from '@coachcare/sdk'
+import {
+  AccountAccessData,
+  OrganizationAccess,
+  OrganizationAssociation,
+  OrganizationWithAddress,
+  Schedule
+} from '@coachcare/sdk'
 import { filter } from 'rxjs/operators'
 import {
   AssociationAccessLevel,
@@ -20,6 +26,7 @@ import {
   convertPermissionsToAccessLevel
 } from '@app/shared/model/accessLevels'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { confirmRemoveAssociatedMeetings } from '@app/dashboard/accounts/dieters/helpers'
 
 @UntilDestroy()
 @Component({
@@ -28,7 +35,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   styleUrls: ['./associations.component.scss']
 })
 export class CcrAccountAssociationsComponent implements OnInit {
-  @Input() account: string
+  @Input() account: AccountAccessData
   @Input() readonly = false
   @Input() showPermissions = false
 
@@ -52,7 +59,8 @@ export class CcrAccountAssociationsComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private notify: NotifierService,
-    private organizationAssociation: OrganizationAssociation
+    private organizationAssociation: OrganizationAssociation,
+    private schedule: Schedule
   ) {
     this.syncControl = this.syncControl.bind(this)
   }
@@ -66,14 +74,14 @@ export class CcrAccountAssociationsComponent implements OnInit {
       this.filterColumn('permissions')
     }
 
-    this.account = this.account || this.context.accountId
+    this.account = this.account || this.context.account
     this.source = new AssociationsDataSource(
       this.database,
       this.context,
       this.paginator
     )
     this.source.addDefault({
-      account: this.account,
+      account: this.account.id,
       status: 'active',
       strict: true
     })
@@ -116,18 +124,33 @@ export class CcrAccountAssociationsComponent implements OnInit {
       })
       .afterClosed()
       .pipe(filter((confirm) => confirm))
-      .subscribe(async () => {
-        try {
-          await this.organizationAssociation.delete({
-            account: this.account,
-            organization: association.organization.id
-          })
-          this.paginator.firstPage()
-          this.source.refresh()
-        } catch (error) {
-          this.notify.error(error)
-        }
+      .subscribe(() => this.deleteAssociation(association.organization))
+  }
+
+  private async deleteAssociation(
+    organization: OrganizationWithAddress
+  ): Promise<void> {
+    try {
+      const confirmed = await confirmRemoveAssociatedMeetings({
+        account: this.account,
+        dialog: this.dialog,
+        organization: organization.id,
+        schedule: this.schedule
       })
+
+      if (!confirmed) {
+        return
+      }
+
+      await this.organizationAssociation.delete({
+        account: this.account.id,
+        organization: organization.id
+      })
+      this.paginator.firstPage()
+      this.source.refresh()
+    } catch (error) {
+      this.notify.error(error)
+    }
   }
 
   public showPermissionsDialog(): void {
@@ -217,14 +240,14 @@ export class CcrAccountAssociationsComponent implements OnInit {
       // we handle it separately because the admin toggle is independent
       if (control.admin !== initialAssoc.permissions.admin) {
         await this.organizationAssociation.update({
-          account: this.account,
+          account: this.account.id,
           organization: initialAssoc.organization.id,
           isActive: true,
           permissions: { admin: control.admin }
         })
       } else {
         await this.organizationAssociation.update({
-          account: this.account,
+          account: this.account.id,
           organization: initialAssoc.organization.id,
           isActive: true,
           permissions: currentPerms

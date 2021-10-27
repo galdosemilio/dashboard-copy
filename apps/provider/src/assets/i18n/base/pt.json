@@ -44,9 +44,11 @@
   },
   "BOARD": {
     "ACC_MULTI_ASSOCIATION": "Esta conta está associada com outras do que a clínica selecionou uma ou mais clínicas. <br> Utilize os <strong> associações </ strong> lista para remover a conta da clínica desejada.",
+    "ACC_REMOVED_MEETINGS": "O paciente {{firstName}} {{lastName}} tem reuniões agendadas no futuro nesta clínica. Se você continuar e remover o paciente da clínica, todas as reuniões futuras serão canceladas automaticamente.<br><br>As reuniões que serão removidas são:",
     "ACETONEPPM": "Acetona (parts per million)",
     "ACTION": "Ação",
     "ACTIONS": "Ações",
+    "ADDITIONAL_MEETINGS_NOT_DISPLAYED": "Reuniões adicionais não exibidas",
     "ADDRESS": "Morada",
     "ADDRESSES": "Endereços",
     "ADDRESS_LINE_ONE": "Endereço Linha 1",

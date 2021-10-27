@@ -11,6 +11,7 @@ import {
 } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { Router } from '@angular/router'
+
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
 import {
@@ -29,7 +30,8 @@ import {
   AccountTypeId,
   MeasurementDataPointMinimalType,
   convertToReadableFormat,
-  DataPointTypes
+  DataPointTypes,
+  Schedule
 } from '@coachcare/sdk'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
 import {
@@ -39,6 +41,8 @@ import {
 } from '../models'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
+import { confirmRemoveAssociatedMeetings } from '@app/dashboard/accounts/dieters/helpers'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -69,7 +73,8 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
     private notify: NotifierService,
     private organization: OrganizationProvider,
     private router: Router,
-    private store: Store<UILayoutState>
+    private store: Store<UILayoutState>,
+    private schedule: Schedule
   ) {}
 
   ngOnDestroy(): void {
@@ -280,24 +285,35 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
         this.dialog
           .open(PromptDialog, { data: data })
           .afterClosed()
-          .subscribe((confirm) => {
-            if (confirm) {
-              this.affiliation
-                .disassociate({
-                  account: dieter.id,
-                  organization: this.source.args.organization
-                })
-                .then(() => {
-                  this.notify.success(_('NOTIFY.SUCCESS.PATIENT_REMOVED'))
-                  // trigger a table refresh
-                  this.source.refresh()
-                })
-                .catch((err) => this.notify.error(err))
-            }
-          })
+          .pipe(filter((confirm) => confirm))
+          .subscribe(() => this.deletePatient(dieter))
       }
     } catch (error) {
       this.notify.error(error)
+    }
+  }
+
+  private async deletePatient(dieter: DieterListingItem): Promise<void> {
+    try {
+      const confirmed = await confirmRemoveAssociatedMeetings({
+        account: dieter,
+        dialog: this.dialog,
+        organization: this.source.args.organization,
+        schedule: this.schedule
+      })
+
+      if (!confirmed) {
+        return
+      }
+
+      await this.affiliation.disassociate({
+        account: dieter.id,
+        organization: this.source.args.organization
+      })
+      this.notify.success(_('NOTIFY.SUCCESS.PATIENT_REMOVED'))
+      this.source.refresh()
+    } catch (err) {
+      this.notify.error(err)
     }
   }
 

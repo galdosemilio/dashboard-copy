@@ -12,7 +12,7 @@ import {
 import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Affiliation, OrganizationProvider } from '@coachcare/sdk'
+import { Affiliation, OrganizationProvider, Schedule } from '@coachcare/sdk'
 
 import {
   AccountEditDialog,
@@ -27,6 +27,9 @@ import {
 } from '@app/shared'
 import { AccountAccessData, AccountTypeId } from '@coachcare/sdk'
 import { DietersDataSource } from '../services'
+import { DieterListingItem } from '../models'
+import { confirmRemoveAssociatedMeetings } from '@app/dashboard/accounts/dieters/helpers'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -67,7 +70,8 @@ export class DietersTableComponent implements OnInit, OnDestroy {
     private affiliation: Affiliation,
     private context: ContextService,
     private notifier: NotifierService,
-    private router: Router
+    private router: Router,
+    private schedule: Schedule
   ) {}
 
   ngOnInit() {
@@ -175,24 +179,35 @@ export class DietersTableComponent implements OnInit, OnDestroy {
         this.dialog
           .open(PromptDialog, { data: data })
           .afterClosed()
-          .subscribe((confirm) => {
-            if (confirm) {
-              this.affiliation
-                .disassociate({
-                  account: dieter.id,
-                  organization: this.source.args.organization
-                })
-                .then(() => {
-                  this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_REMOVED'))
-                  // trigger a table refresh
-                  this.source.refresh()
-                })
-                .catch((err) => this.notifier.error(err))
-            }
-          })
+          .pipe(filter((confirm) => confirm))
+          .subscribe(() => this.deletePatient(dieter))
       }
     } catch (error) {
       this.notifier.error(error)
+    }
+  }
+
+  private async deletePatient(dieter: DieterListingItem): Promise<void> {
+    try {
+      const confirmed = await confirmRemoveAssociatedMeetings({
+        account: dieter,
+        dialog: this.dialog,
+        organization: this.source.args.organization,
+        schedule: this.schedule
+      })
+
+      if (!confirmed) {
+        return
+      }
+
+      await this.affiliation.disassociate({
+        account: dieter.id,
+        organization: this.source.args.organization
+      })
+      this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_REMOVED'))
+      this.source.refresh()
+    } catch (err) {
+      this.notifier.error(err)
     }
   }
 }

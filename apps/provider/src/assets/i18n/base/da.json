@@ -44,9 +44,11 @@
   },
   "BOARD": {
     "ACC_MULTI_ASSOCIATION": "",
+    "ACC_REMOVED_MEETINGS": "Patienten {{firstName}} {{lastName}} har møder planlagt i fremtiden i denne klinik. Hvis du fortsætter og fjerner patienten fra klinikken, vil alle fremtidige møder automatisk blive aflyst.<br><br>De møder, der fjernes, er:",
     "ACETONEPPM": "Acetone (dele per million)",
     "ACTION": "Handling",
     "ACTIONS": "Handlinger",
+    "ADDITIONAL_MEETINGS_NOT_DISPLAYED": "Yderligere møder vises ikke",
     "ADDRESS": "Adresse",
     "ADDRESSES": "Adresser",
     "ADDRESS_LINE_ONE": "Adresse linie 1",

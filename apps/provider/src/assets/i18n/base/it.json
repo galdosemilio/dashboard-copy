@@ -44,9 +44,11 @@
   },
   "BOARD": {
     "ACC_MULTI_ASSOCIATION": "Questo account è associato a uno o più cliniche diverse dalla clinica selezionato. <br> Utilizzare il <strong> Associazioni </ strong> messa in vendita di rimuovere l'account dalla clinica desiderata.",
+    "ACC_REMOVED_MEETINGS": "Il paziente {{firstName}} {{lastName}} ha riunioni programmate in futuro all'interno di questa clinica. Se continui e rimuovi il paziente dalla clinica, tutti gli incontri futuri verranno annullati automaticamente.<br><br>Gli incontri che verranno rimossi sono:",
     "ACETONEPPM": "Acetone (parti per milione)",
     "ACTION": "Azione",
     "ACTIONS": "Azioni",
+    "ADDITIONAL_MEETINGS_NOT_DISPLAYED": "Riunioni aggiuntive non visualizzate",
     "ADDRESS": "Indirizzo",
     "ADDRESSES": "Indirizzi",
     "ADDRESS_LINE_ONE": "Indirizzo Linea 1",

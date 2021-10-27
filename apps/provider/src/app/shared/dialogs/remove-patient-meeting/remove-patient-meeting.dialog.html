@@ -1,0 +1,43 @@
+<div matDialogTitle>
+    <div>
+        <mat-icon>info</mat-icon>
+        <span>{{ 'GLOBAL.NOTICE' | translate}}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+    <p [innerHTML]="'BOARD.ACC_REMOVED_MEETINGS' | translate : {
+        firstName: data.firstName,
+        lastName: data.lastName
+    }"></p>
+    <ul>
+        <li *ngFor="let meeting of meetings">
+            <span><b>{{ meeting.title }} </b></span>
+            <span>{{ meeting.start.local | amDateFormat:'LLLL' }}</span>
+        </li>
+        <li *ngIf="hasMoreMeetings">
+            <i>
+                {{ 'BOARD.ADDITIONAL_MEETINGS_NOT_DISPLAYED' | translate }}
+            </i>
+        </li>
+    </ul>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button
+    (click)="onContinue()"
+    mat-button
+    class="ccr-button"
+    color="primary">
+        {{ 'GLOBAL.CONTINUE' | translate }}
+    </button>
+    <button
+    mat-button
+    matDialogClose
+    class="ccr-button">
+        {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

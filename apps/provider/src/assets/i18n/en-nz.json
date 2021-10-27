@@ -44,9 +44,11 @@
   },
   "BOARD": {
     "ACC_MULTI_ASSOCIATION": "This account is associated with one or more clinics other than the selected clinic.<br><br>Please use the <strong>associations</strong> listing to remove the account from the desired clinic.",
+    "ACC_REMOVED_MEETINGS": "The patient {{firstName}} {{lastName}} has meetings scheduled in the future within this clinic.  If you continue and remove the patient from the clinic, all future meetings will be cancelled automatically.<br><br>The meetings that will be removed are:",
     "ACETONEPPM": "Acetone (parts per million)",
     "ACTION": "Action",
     "ACTIONS": "Actions",
+    "ADDITIONAL_MEETINGS_NOT_DISPLAYED": "Additional meetings not displayed",
     "ADDRESS": "Address",
     "ADDRESSES": "Addresses",
     "ADDRESS_LINE_ONE": "Address Line 1",

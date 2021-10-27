@@ -44,9 +44,11 @@
   },
   "BOARD": {
     "ACC_MULTI_ASSOCIATION": "",
+    "ACC_REMOVED_MEETINGS": "למטופל {{firstName}} {{lastName}} מתוכננות פגישות בעתיד במרפאה זו. אם תמשיך ותסיר את המטופל מהמרפאה, כל הפגישות העתידיות יבוטלו אוטומטית.<br><br>הפגישות שיוסרו הן:",
     "ACETONEPPM": "אצטון (חלקים למיליון)",
     "ACTION": "פעולה",
     "ACTIONS": "פעולות",
+    "ADDITIONAL_MEETINGS_NOT_DISPLAYED": "פגישות נוספות לא מוצגות",
     "ADDRESS": "כתובת",
     "ADDRESSES": "כתובות",
     "ADDRESS_LINE_ONE": "שורת כתובת 1",

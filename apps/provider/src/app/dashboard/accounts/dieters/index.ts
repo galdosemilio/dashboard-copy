@@ -1,5 +1,6 @@
 export * from './form/dieter.component'
 export * from './services'
+export * from './helpers'
 export * from './dieter/settings'
 
 export * from './dieter/dieter.component'
