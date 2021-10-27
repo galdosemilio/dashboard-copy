@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { from, Observable } from 'rxjs'
 
-import { CcrDatabase } from '@app/shared'
+import { CcrDatabase } from '@app/shared/model'
 import {
   Alerts,
   AlertNotificationResponse,

@@ -5,7 +5,8 @@ import { from, Observable, of } from 'rxjs'
 import * as tinycolor from 'tinycolor2'
 
 import { ConfigService, NotifierService } from '@app/service'
-import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
+import { ChartData, ChartDataSource } from '@app/shared/model'
+import { _, TranslationsObject } from '@app/shared/utils'
 import {
   OrganizationActivityAggregate,
   OrganizationActivityRequest

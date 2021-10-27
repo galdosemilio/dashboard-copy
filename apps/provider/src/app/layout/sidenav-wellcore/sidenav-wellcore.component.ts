@@ -10,6 +10,7 @@ import { CCRConfig, CCRPalette } from '@app/config'
 import { SidenavOptions } from '@app/config/section/consts'
 import { FetchSubaccount } from '@app/layout/store/call/call.action'
 import {
+  AuthService,
   ContextService,
   MessagingService,
   SelectedOrganization
@@ -21,6 +22,8 @@ import { TranslateService } from '@ngx-translate/core'
 import { findIndex, get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SidenavItem } from '../sidenav/sidenav-item/sidenav-item.component'
+import { User } from '@coachcare/sdk'
+import { filter } from 'rxjs/operators'
 
 export interface SidenavOrg {
   id: string
@@ -52,9 +55,11 @@ export class SidenavWellcoreComponent
   constructor(
     router: Router,
     public context: ContextService,
+    private auth: AuthService,
     private messaging: MessagingService,
     private store: Store<CCRConfig>,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private user: User
   ) {
     this.updateUnread = this.updateUnread.bind(this)
 
@@ -62,12 +67,12 @@ export class SidenavWellcoreComponent
       .pipe(select(configSelector))
       .subscribe((conf) => (this.palette = conf.palette))
 
-    router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe((event: NavigationStart) => {
         this.route = event.url.split('/')[1]
         this.updateNavigation()
-      }
-    })
+      })
   }
 
   ngAfterViewInit() {}
@@ -160,6 +165,11 @@ export class SidenavWellcoreComponent
     this.updateUnread()
   }
 
+  public async logout(): Promise<void> {
+    await this.user.logout()
+    this.auth.redirect()
+  }
+
   private updateContactLinks(): void {
     const baseLang = this.currentLang.split('-')[0]
 
@@ -208,7 +218,6 @@ export class SidenavWellcoreComponent
     this.sidenavItems = this.sidenavItems.map((item) => {
       if (this.route === item.route && !item.expanded) {
         item.expanded = true
-        return { ...item }
       }
       return item
     })
@@ -216,10 +225,13 @@ export class SidenavWellcoreComponent
 
   private updateUnread(): void {
     const { unreadThreadsCount } = this.messaging.unreadCount$.getValue()
-    const m = findIndex(this.sidenavItems, { navRoute: 'messages' })
-    if (this.sidenavItems[m].badge !== unreadThreadsCount) {
-      this.sidenavItems[m].badge = unreadThreadsCount
-      this.sidenavItems[m] = Object.assign({}, this.sidenavItems[m])
+    const messagesIndex = findIndex(this.sidenavItems, { navRoute: 'messages' })
+    if (this.sidenavItems[messagesIndex].badge !== unreadThreadsCount) {
+      this.sidenavItems[messagesIndex].badge = unreadThreadsCount
+      this.sidenavItems[messagesIndex] = Object.assign(
+        {},
+        this.sidenavItems[messagesIndex]
+      )
     }
   }
 }

@@ -5,6 +5,8 @@ import { MatDialog } from '@coachcare/material'
 import { Store } from '@ngrx/store'
 import { CCRConfig } from '@app/config'
 import { TogglePanel } from '@app/layout/store/layout'
+import { ContextService } from '@app/service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ccr-wellcore-meeting-container',
@@ -17,7 +19,12 @@ export class WellcoreMeetingContainer implements OnInit {
 
   @Output() onRefresh$: EventEmitter<void> = new EventEmitter<void>()
 
-  constructor(private dialog: MatDialog, private store: Store<CCRConfig>) {}
+  constructor(
+    private context: ContextService,
+    private dialog: MatDialog,
+    private router: Router,
+    private store: Store<CCRConfig>
+  ) {}
 
   public ngOnInit(): void {}
 
@@ -34,6 +41,10 @@ export class WellcoreMeetingContainer implements OnInit {
   }
 
   public onSchedule(): void {
-    this.store.dispatch(new TogglePanel())
+    if (this.context.isProvider) {
+      this.store.dispatch(new TogglePanel())
+    } else {
+      this.router.navigate(['/new-appointment'])
+    }
   }
 }

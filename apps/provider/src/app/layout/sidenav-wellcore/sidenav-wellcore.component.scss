@@ -28,3 +28,14 @@
     }
   }
 }
+
+app-menu-wellcore-ring {
+  opacity: 0.5;
+  position: absolute;
+  top: 15%;
+  left: -170%;
+
+  &:nth-child(odd) {
+    opacity: 1;
+  }
+}

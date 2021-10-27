@@ -9,7 +9,7 @@ import {
   SortDirection
 } from '@app/dashboard/reports/services'
 import { NotifierService } from '@app/service'
-import { ChartData, ChartDataSource } from '@app/shared'
+import { ChartData, ChartDataSource } from '@app/shared/model'
 import {
   SleepReportRequest,
   SleepReportResponse,

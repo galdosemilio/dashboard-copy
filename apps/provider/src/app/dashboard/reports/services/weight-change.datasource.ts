@@ -8,7 +8,8 @@ import {
   WeightChangeOrder
 } from '@app/dashboard/reports/services'
 import { NotifierService } from '@app/service'
-import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
+import { _, TranslationsObject } from '@app/shared/utils'
+import { ChartData, ChartDataSource } from '@app/shared/model'
 import {
   WeightChangeRequest,
   WeightChangeResponse,

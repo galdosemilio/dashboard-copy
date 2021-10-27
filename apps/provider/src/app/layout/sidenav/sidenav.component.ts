@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit
-} from '@angular/core'
-import { FormControl } from '@angular/forms'
+import { Component, Input, OnInit } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
 import { CCRConfig, CCRPalette } from '@app/config'
 import { resolveConfig } from '@app/config/section'
@@ -24,13 +17,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { findIndex, get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { fromEvent, Subject } from 'rxjs'
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators'
-import {
-  AccountTypeIds,
-  Authentication,
-  OrganizationProvider
-} from '@coachcare/sdk'
+import { AccountTypeIds, Authentication } from '@coachcare/sdk'
 import { SidenavItem } from './sidenav-item/sidenav-item.component'
 
 export interface SidenavOrg {
@@ -43,26 +30,17 @@ export interface SidenavOrg {
   selector: 'app-menu',
   templateUrl: './sidenav.component.html'
 })
-export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
+export class SidenavComponent implements OnInit {
   @Input()
   isOpened = false
 
   _this: SidenavComponent = this
+  organization: SelectedOrganization
   sidenavItems: SidenavItem[] = []
 
   logoSrc = './assets/logo.png'
   palette: CCRPalette
   route: string
-
-  searchCtrl: FormControl
-  organization: SelectedOrganization
-  organizations: Array<SidenavOrg> = []
-  menuContainer: HTMLElement
-  menuClosed$ = new Subject<Event>()
-  isSearchingClinics = false
-  hasMoreThanOneClinic = false
-  searchNext = 0
-  searchQuery: string = undefined
 
   private currentLang: string
   private readonly DEFAULT_STORE_LINK = 'https://store.coachcare.com/'
@@ -75,7 +53,6 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     private context: ContextService,
     private messaging: MessagingService,
     private notifier: NotifierService,
-    private orgservice: OrganizationProvider,
     private platformUpdates: PlatformUpdatesService,
     private store: Store<CCRConfig>,
     private translate: TranslateService
@@ -95,23 +72,12 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     })
   }
 
-  ngAfterViewInit() {
-    this.menuContainer = document.querySelector('.org-selector')
-  }
-
-  ngOnDestroy(): void {
-    this.menuClosed$.complete()
-  }
-
   ngOnInit() {
     this.isProvider =
       this.context.user.accountType.id === AccountTypeIds.Provider
-    this.hasMoreThanOneClinic = this.context.organizations.length > 1
 
     this.currentLang = this.translate.currentLang
     this.isOrphaned = this.context.isOrphaned
-
-    this.initSearch()
 
     this.context.orphanedAccount$.subscribe((isOrphaned) => {
       this.isOrphaned = isOrphaned
@@ -124,7 +90,6 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
     })
 
     this.context.organization$.subscribe((org) => {
-      this.organization = org
       // update the video option
       this.updateSections(org)
       // TODO consider logo-mark for md screens
@@ -146,56 +111,6 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(this.updateUnread)
 
     this.store.dispatch(new FetchSubaccount(this.context.organizationId))
-  }
-
-  menuOpened() {
-    this.menuContainer = document.querySelector('.org-selector')
-    fromEvent(this.menuContainer, 'scroll')
-      .pipe(takeUntil(this.menuClosed$))
-      .subscribe(($event: Event) => {
-        const target = $event.target as HTMLElement
-        if (
-          !this.isSearchingClinics &&
-          this.searchNext &&
-          target.offsetHeight + target.scrollTop >= target.scrollHeight * 0.75
-        ) {
-          this.searchClinics(this.searchQuery)
-        }
-      })
-  }
-
-  initSearch() {
-    this.searchCtrl = new FormControl()
-    this.searchCtrl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe((query) => {
-        this.menuContainer.scrollTop = 0
-        this.searchQuery = query.trim() || undefined
-        this.searchNext = 0
-        this.searchClinics(this.searchQuery)
-      })
-
-    this.searchClinics(this.searchQuery)
-  }
-
-  async searchClinics(query: string) {
-    this.isSearchingClinics = true
-    const orgs = await this.orgservice.getAccessibleList({
-      query,
-      status: 'active',
-      offset: this.searchNext,
-      limit: 24
-    })
-    const sidenavOrgs = orgs.data.map((org) => ({
-      id: org.organization.id,
-      name: org.organization.name
-    }))
-    this.organizations =
-      this.searchNext === 0
-        ? sidenavOrgs
-        : this.organizations.concat(sidenavOrgs)
-    this.searchNext = orgs.pagination.next || 0
-    this.isSearchingClinics = false
   }
 
   initNavigation(menuEnabled: boolean) {
@@ -641,13 +556,6 @@ export class SidenavComponent implements AfterViewInit, OnInit, OnDestroy {
           }
         }
       })
-    }
-  }
-
-  selectOrg(org: SidenavOrg) {
-    if (org.id !== this.organization.id) {
-      this.context.organizationId = org.id
-      this.store.dispatch(new FetchSubaccount(org.id))
     }
   }
 

@@ -5,13 +5,13 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Observable } from 'rxjs'
 
 import { ContextService, NotifierService } from '@app/service'
+import { TableDataSource } from '@app/shared/model'
 import {
   _,
-  TableDataSource,
   TranslationsObject,
   unitConversion,
   unitLabel
-} from '@app/shared'
+} from '@app/shared/utils'
 import { AlertNotificationResponse, NotificationRequest } from '@coachcare/sdk'
 import { AlertNotification } from '../models'
 import { AlertsDatabase } from './alerts.database'

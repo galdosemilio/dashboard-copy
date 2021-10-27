@@ -3,12 +3,8 @@ import * as moment from 'moment-timezone'
 import { from, Observable, of } from 'rxjs'
 
 import { ConfigService, NotifierService } from '@app/service'
-import {
-  ChartData,
-  ChartDataSource,
-  TranslationsObject,
-  ViewUtils
-} from '@app/shared'
+import { ChartData, ChartDataSource } from '@app/shared/model'
+import { TranslationsObject, ViewUtils } from '@app/shared/utils'
 import { PatientCountRequest, PatientCountSegment } from '@coachcare/sdk'
 import { ReportsDatabase } from './reports.database'
 

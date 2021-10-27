@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Reports } from '@coachcare/sdk'
 
-import { CcrDatabase } from '@app/shared'
+import { CcrDatabase } from '@app/shared/model'
 import {
   ActivityLevelRequest,
   ActivityLevelSegment,

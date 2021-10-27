@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Inject,
   OnInit,
@@ -17,9 +18,10 @@ import { Conference } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { select, Store } from '@ngrx/store'
 import { paletteSelector } from '@app/store/config'
-import { applyPalette, configViewLangAttrs } from '../helpers'
+import { applyPalette, configViewLangAttrs, translateTexts } from '../helpers'
 import { DOCUMENT } from '@angular/common'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
+import { TranslationsObject } from '@app/shared'
 
 @UntilDestroy()
 @Component({
@@ -32,17 +34,22 @@ export class WellcoreLayoutComponent implements AfterViewInit, OnInit {
   public palette?: CCRPalette
   public panelEnabled = true
   public showVideoRating = false
+  public translations: TranslationsObject = {}
 
   constructor(
-    private context: ContextService,
     private callNotificationService: Conference,
+    private cdr: ChangeDetectorRef,
+    private context: ContextService,
+    private bus: EventsService,
     @Inject(DOCUMENT) private document: Document,
     private events: EventsService,
     private language: LanguageService,
     private renderer: Renderer2,
     private store: Store<CCRConfig>,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.translateTexts = this.translateTexts.bind(this)
+  }
 
   public ngAfterViewInit(): void {
     this.update(this.language.get())
@@ -83,6 +90,8 @@ export class WellcoreLayoutComponent implements AfterViewInit, OnInit {
       this.lang = change.lang ?? 'en'
       this.update(change.lang)
     })
+
+    this.bus.register('user.data', this.translateTexts)
   }
 
   private setRatingWindowState(openState: boolean = false): void {
@@ -94,6 +103,7 @@ export class WellcoreLayoutComponent implements AfterViewInit, OnInit {
       .pipe(select(layoutSelector), untilDestroyed(this))
       .subscribe((state) => {
         this.layout = state
+        this.cdr.detectChanges()
       })
 
     this.store
@@ -104,7 +114,12 @@ export class WellcoreLayoutComponent implements AfterViewInit, OnInit {
       })
   }
 
+  private async translateTexts(): Promise<void> {
+    this.translations = await translateTexts(this.translate, this.context.user)
+  }
+
   private update(lang: string): void {
     configViewLangAttrs(this.document, lang, this.language.getDir())
+    void this.translateTexts()
   }
 }

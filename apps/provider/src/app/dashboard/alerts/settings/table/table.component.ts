@@ -5,7 +5,7 @@ import {
   AlertTypesPreference
 } from '@app/dashboard/alerts/services'
 import { ContextService, NotifierService } from '@app/service'
-import { _, SelectOptions, uxPoundsToGrams } from '@app/shared'
+import { _, SelectOptions, uxPoundsToGrams } from '@app/shared/utils'
 import {
   AlertOrgPreference,
   CreateOrgAlertPreferenceRequest,

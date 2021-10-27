@@ -3,7 +3,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 
 import { NotifierService } from '@app/service'
-import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
+import { _, TranslationsObject } from '@app/shared/utils'
+import { ChartData, ChartDataSource } from '@app/shared/model'
 import { ActivityLevelRequest, ActivityLevelSegment } from '@coachcare/sdk'
 import { StatisticsDatabase } from './statistics.database'
 

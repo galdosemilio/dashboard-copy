@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
-import {
-  _,
-  TableDataSource,
-  uxAproximateGrams,
-  uxPoundsToGrams
-} from '@app/shared'
+import { TableDataSource } from '@app/shared/model'
+import { _, uxAproximateGrams, uxPoundsToGrams } from '@app/shared/utils'
 import {
   AlertPreferenceResponse,
   AlertTypesResponse,

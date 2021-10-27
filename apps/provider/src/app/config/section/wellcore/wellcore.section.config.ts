@@ -2,9 +2,13 @@ import { WellcoreLayoutComponent } from '@app/layout/layouts'
 import { WellcoreScheduleListComponent } from '@app/dashboard/schedule/list'
 import { SidenavOptions } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
+import { WellcoreDashboardComponent } from '@app/dashboard/panel'
 
 export const WellCoreSectionConfig: SectionConfigDetails = {
   GLOBAL: {
+    DASHBOARD: {
+      component: WellcoreDashboardComponent
+    },
     LAYOUT: {
       component: WellcoreLayoutComponent
     },

@@ -5,6 +5,7 @@ import { DefaultScheduleListComponent } from '@app/dashboard/schedule/list'
 import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component'
 import { CompositionColumns, JournalTabs, SidenavOptions } from './consts'
 import { SectionConfigDetails } from './models/section.details'
+import { DefaultDashboardComponent } from '@app/dashboard/panel'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
@@ -67,6 +68,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     SHOW_MEDICAL_INTAKE_FORM: false
   },
   GLOBAL: {
+    DASHBOARD: {
+      component: DefaultDashboardComponent
+    },
     LAYOUT: {
       component: DefaultLayoutComponent
     },
@@ -130,6 +134,9 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     SHOW_MEDICAL_INTAKE_FORM: false
   },
   GLOBAL: {
+    DASHBOARD: {
+      component: DefaultDashboardComponent
+    },
     LAYOUT: {
       component: DefaultLayoutComponent
     },

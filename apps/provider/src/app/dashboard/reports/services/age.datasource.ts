@@ -4,7 +4,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 
 import { NotifierService } from '@app/service'
-import { _, ChartData, ChartDataSource, TranslationsObject } from '@app/shared'
+import { ChartData, ChartDataSource } from '@app/shared/model'
+import { _, TranslationsObject } from '@app/shared/utils'
 import {
   AgeDemographicsRequest,
   AgeDemographicsSegment,

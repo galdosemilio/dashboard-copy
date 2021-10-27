@@ -1,0 +1,95 @@
+<div *ngIf="isProvider; else patientDashboard">
+  <div class="ccr-heading">
+    <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+      <h2 fxFlex>
+        {{ 'SIDENAV.DASHBOARD' | translate }}
+
+        <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+      </h2>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="35px">
+    <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign=" stretch" fxLayoutGap="35px">
+
+      <div class="ccr-widget" fxFlex="auto">
+        <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+          <h2 fxFlex>
+            {{ 'SIDENAV.ALERTS' | translate }}
+          </h2>
+          <a mat-button class="ccr-button" [routerLink]="['/alerts/notifications']" *ngIf="canAccessPhi && canViewAll" data-cy="view-all-alert-button">{{ 'HOME.VIEW_ALL' | translate }}</a>
+        </div>
+
+        <app-alerts-table
+          data-cy="alert-listing"
+          [source]="alertsSource"
+          [columns]="['name', 'type', 'actions']"
+        ></app-alerts-table>
+      </div>
+
+      <div class="ccr-widget" fxFlex="42%">
+        <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+          <h2 fxFlex>{{ 'REPORTS.SIGNUPS_TITLE' | translate }}</h2>
+          <a mat-button class="ccr-button" [routerLink]="['/reports/overview/signups']" fxHide fxShow.gt-lg>{{ 'HOME.VIEW_COMPLETE_REPORT' | translate }}</a>
+        </div>
+
+        <app-reports-signups-chart
+          [source]="signupSource"
+        ></app-reports-signups-chart>
+      </div>
+    </div>
+
+    <div class="ccr-widget">
+      <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end" fxLayoutWrap.xs>
+        <h2 fxFlex>{{ 'BOARD.RECENT_REG' | translate }}</h2>
+        <a mat-button class="ccr-button" [routerLink]="['/accounts/patients']" *ngIf="canViewAll" data-cy="view-all-patients-button">{{ 'HOME.VIEW_ALL_PATIENTS' | translate }}</a>
+      </div>
+
+      <app-dieters-table
+        data-cy="view-lastest-signups"
+        [source]="recentsSource"
+        [withSorting]="false"
+      ></app-dieters-table>
+    </div>
+
+  </div>
+  </div>
+
+  <ng-template #patientDashboard>
+    <div class="ccr-heading">
+      <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+        <h2 fxFlex>
+          {{ 'BOARD.PATIENT_DASHBOARD_WELCOME' | translate:{name:currentUser.firstName } }}
+        </h2>
+      </div>
+    </div>
+
+    <p>{{ 'BOARD.PATIENT_CALL_EXPLANATION' | translate }}</p>
+    <div class="mb-10" *ngIf="showNewAppointmentButton">
+      <a
+        mat-button
+        color="primary"
+        class="ccr-icon-button"
+        fxFlex="nogrow"
+        data-cy="new-appointment-button"
+        [routerLink]="['/new-appointment']"
+      >
+        <mat-icon>add</mat-icon>
+        <span>{{ 'BOARD.APPOINTMENT_NEW' | translate }}</span>
+      </a>
+    </div>
+    <div
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="25px">
+      <div class="next-meeting-container">
+          <ccr-next-meeting></ccr-next-meeting>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start stretch">
+        <div *ngIf="showMySchedule" fxFlex="50%">
+          <ccr-my-schedule></ccr-my-schedule>
+        </div>
+      </div>
+    </div>
+  </ng-template>

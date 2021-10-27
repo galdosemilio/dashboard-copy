@@ -1,0 +1,24 @@
+<div fxFlexFill>
+  <button [disabled]="!hasMoreThanOneClinic" mat-button class="topnav-logo" [matMenuTriggerFor]="orgs" (menuOpened)="menuOpened()" (menuClosed)="menuClosed$.next()">
+    <img [attr.src]="logoSrc" />
+    <i *ngIf="hasMoreThanOneClinic" class="material-icons"></i>
+  </button>
+  <mat-menu #orgs="matMenu" class="org-selector"
+  [overlapTrigger]="false" yPosition="below" xPosition="after">
+
+    <ccr-form-field-text
+    [formControl]="searchCtrl"
+    (click)="$event.stopPropagation()"
+    (keydown)="$event.stopPropagation()"
+    [placeholder]="'BOARD.SEARCH_CLINIC' | translate">
+      <ccr-icon-search *ngIf="!isSearchingClinics" matSuffix fill="rgba(0, 0, 0, 0.42)" [size]="20" [stroke]="5"></ccr-icon-search>
+      <mat-spinner  *ngIf="isSearchingClinics" matSuffix [diameter]="20" [strokeWidth]="2"></mat-spinner>
+    </ccr-form-field-text>
+
+    <button
+      *ngFor="let org of organizations"
+      [class.active]="org.id === organization?.id"
+      (click)="selectOrg(org)"
+      mat-menu-item>{{ org.name | translate }}</button>
+  </mat-menu>
+</div>

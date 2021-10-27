@@ -5,13 +5,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
 
 import { ConfigService, NotifierService } from '@app/service'
-import {
-  _,
-  ChartData,
-  ChartDataSource,
-  TranslationsObject,
-  ViewUtils
-} from '@app/shared'
+import { ChartData, ChartDataSource } from '@app/shared/model'
+import { _, TranslationsObject, ViewUtils } from '@app/shared/utils'
 import { SignupsTimelineRequest, SignupsTimelineSegment } from '@coachcare/sdk'
 import { ReportsDatabase } from './reports.database'
 

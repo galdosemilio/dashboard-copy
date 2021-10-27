@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { ClosePanel, UILayoutState } from '@app/layout/store/layout'
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import { Meeting } from '@app/shared/model/meeting'
 import { Schedule } from '@coachcare/sdk'
+import { Store } from '@ngrx/store'
 import * as moment from 'moment'
 
 @Component({
@@ -18,7 +20,8 @@ export class WellcoreScheduleListComponent implements OnDestroy, OnInit {
     private bus: EventsService,
     private context: ContextService,
     private notifier: NotifierService,
-    private schedule: Schedule
+    private schedule: Schedule,
+    private store: Store<UILayoutState>
   ) {}
 
   public ngOnDestroy(): void {
@@ -27,6 +30,7 @@ export class WellcoreScheduleListComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     void this.fetchMeetings()
+    this.store.dispatch(new ClosePanel())
     this.bus.trigger('right-panel.component.set', 'addConsultation')
     this.bus.trigger('right-panel.consultation.form', {
       form: 'addConsultation'

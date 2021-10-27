@@ -3,7 +3,7 @@ import { find } from 'lodash'
 import { from, Observable } from 'rxjs'
 
 import { NotifierService } from '@app/service'
-import { TableDataSource } from '@app/shared'
+import { TableDataSource } from '@app/shared/model'
 import {
   AccAccesibleSort,
   AccListResponse,

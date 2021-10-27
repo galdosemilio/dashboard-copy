@@ -4,7 +4,7 @@ import { findIndex } from 'lodash'
 import { Subject } from 'rxjs'
 
 import { ContextService, EventsService, NotifierService } from '@app/service'
-import { _ } from '@app/shared'
+import { _ } from '@app/shared/utils'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { AlertsDatabase, AlertsDataSource } from './services'
 import { debounceTime } from 'rxjs/operators'

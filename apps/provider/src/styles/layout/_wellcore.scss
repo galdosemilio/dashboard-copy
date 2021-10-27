@@ -1,5 +1,24 @@
 @import '~libs/common/src/lib/styles/variables/colors';
 
+ccr-wellcore-layout {
+  .mat-drawer-content.ng-star-inserted {
+    & > div > div {
+      height: calc(100% - #{$footer-height});
+    }
+  }
+
+  .ccr-title {
+    h2 {
+      color: mat-color($wellcore, wellcore-blue);
+      font-family: Roboto, 'Helvetica Neue', sans-serif;
+      font-size: 48px !important;
+      font-weight: bold;
+      margin: 0;
+      text-transform: uppercase;
+    }
+  }
+}
+
 .wellcore-component {
   h2 {
     color: mat-color($wellcore, wellcore-blue);
@@ -23,11 +42,14 @@
       .mat-list-item {
         .mat-list-item-content {
           color: mat-color($wellcore, platinum);
+          text-align: center;
         }
 
         &:focus {
           background: transparent;
         }
+
+        &.active,
         &:active,
         &:focus {
           outline: none;
@@ -56,6 +78,16 @@
             .mat-list-item-content {
               color: var(--accent);
             }
+          }
+        }
+
+        mat-icon {
+          display: none;
+        }
+
+        @media #{$medium-only} {
+          mat-icon {
+            display: initial;
           }
         }
       }
