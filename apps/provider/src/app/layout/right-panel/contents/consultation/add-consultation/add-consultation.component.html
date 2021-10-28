@@ -79,6 +79,17 @@
           <span class="participantType" *ngIf="participant.accountType">{{ participant.accountType | accountType | translate }}</span>
         </div>
       </div>
+      <div
+      *ngIf="unaccessibleAttendees.length > 0 && selectedOrg"
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+      fxLayoutGap="10px">
+        <mat-error *ngFor="let participant of unaccessibleAttendees">{{'NOTIFY.ERROR.PARTICIPANT_VISIBILITY_ERROR' | translate: {
+          firstName: participant.firstName,
+          lastName: participant.lastName,
+          clinicName: selectedOrg.name
+        } }}</mat-error>
+      </div>
       <ng-container *ngIf="formSubmitted">
         <mat-error *ngIf="attendees.length === 0">{{'NOTIFY.ERROR.PARTICIPANTS_EMPTY' | translate}}</mat-error>
       </ng-container>
@@ -144,13 +155,13 @@
       </ng-container>
 
       <div class="action-buttons" *ngIf="!editing">
-        <a mat-button color="primary" (click)="onSubmit()" class="ccr-icon-button">
+        <a [disabled]="isDisabledSubmit" mat-button color="primary" (click)="onSubmit()" class="ccr-icon-button">
           <mat-icon>add</mat-icon>
           {{'RIGHT_PANEL.SAVE_MEETING' | translate}}
         </a>
       </div>
       <div class="action-buttons" *ngIf="editing">
-        <a mat-button color="primary" class="ccr-icon-button"
+        <a [disabled]="isDisabledSubmit" mat-button color="primary" class="ccr-icon-button"
         [title]="'GLOBAL.UPDATE' | translate" (click)="onSubmit()">
           <mat-icon>check</mat-icon>
           {{'GLOBAL.UPDATE' | translate}}

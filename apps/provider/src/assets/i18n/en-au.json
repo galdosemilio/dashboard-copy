@@ -1021,6 +1021,7 @@
       "NO_PATIENT_LISTING_PERMISSION": "You do not have proper permission to view the listings for this clinic. Please ask your clinic administrator for 'View All Account' or for 'Admin' permissions.",
       "NO_PHASE_ENROLLMENTS": "There are no phases associated with the patient.",
       "PARTICIPANTS_EMPTY": "Please select at least one participant.",
+      "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} is not part of the selected clinic \"{{ clinicName }}\".  This may result is visibility issues, where other meeting participants may not see them listed as an attendee on this meeting.",
       "REPEAT_EMPTY": "Please select a repeat option.",
       "RETRIEVING_MEETING_TYPES": "The selected clinic doesn't have meeting types. Please contact your administrator.",
       "SCHEDULE_CONFLICT": "{{name}} has a schedule conflict.",

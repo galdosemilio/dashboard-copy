@@ -1021,6 +1021,7 @@
       "NO_PATIENT_LISTING_PERMISSION": "Non hai il permesso adeguato per visualizzare gli elenchi di questa clinica. Ti preghiamo di chiedere all'amministratore della tua clinica per un permesso 'Visualizza Tutti gli Account' o 'Admin'.",
       "NO_PHASE_ENROLLMENTS": "Non ci sono fasi associate con il paziente.",
       "PARTICIPANTS_EMPTY": "Ti preghiamo di selezionare almeno un partecipante.",
+      "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} non fa parte della clinica selezionata \"{{clinicName}}\". Ciò potrebbe comportare problemi di visibilità, in cui altri partecipanti alla riunione potrebbero non vederli elencati come partecipanti a questa riunione.",
       "REPEAT_EMPTY": "Ti preghiamo di selezionare un'opzione ripetuta.",
       "RETRIEVING_MEETING_TYPES": "L'organizzazione selezionata non ha tipi di incontri. Ti preghiamo di contattare il tuo amministratore.",
       "SCHEDULE_CONFLICT": "{{name}} ha un conflitto di programmazione.",

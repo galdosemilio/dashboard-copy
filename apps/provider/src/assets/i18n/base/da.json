@@ -1021,6 +1021,7 @@
       "NO_PATIENT_LISTING_PERMISSION": "Du har ikke den rette tilladelse til at se fortegnelserne for denne klinik. Bed venligst din klinikadministrator om tilladelser til 'Vis Alle Konti' eller 'Admin'.",
       "NO_PHASE_ENROLLMENTS": "Der er ingen faser forbundet med patienten.",
       "PARTICIPANTS_EMPTY": "Vælg venligst mindst en deltager.",
+      "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} er ikke en del af den valgte klinik \"{{clinicName}}\". Dette kan resultere i synlighedsproblemer, hvor andre mødedeltagere muligvis ikke ser dem opført som deltagere på dette møde.",
       "REPEAT_EMPTY": "Vælg venligst en gentagelsesindstilling.",
       "RETRIEVING_MEETING_TYPES": "Den valgte organisation har ikke mødetyper. Kontakt venligst din administrator.",
       "SCHEDULE_CONFLICT": "{{name}} har en tidsplanskonflikt.",

@@ -32,7 +32,8 @@ import {
   AddAttendeeRequest,
   AddMeetingRequest,
   MeetingAttendee,
-  OrganizationDetailed
+  OrganizationDetailed,
+  OrganizationProvider
 } from '@coachcare/sdk'
 import { ConsultationFormArgs } from '../consultationFormArgs.interface'
 import { AssociationsDatabase } from '@app/dashboard'
@@ -40,6 +41,10 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export type AddConsultationAttendee = MeetingAttendee & {
   accountType?: string
+}
+
+interface AttendeesOrganigation {
+  [account: string]: Array<string>
 }
 
 @UntilDestroy()
@@ -82,10 +87,15 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   addedAttendees: Array<AddConsultationAttendee> = []
   removedAttendees: Array<string> = []
   selectedMeetingType: MeetingTypeWithColor
+  attendeeOrgs: AttendeesOrganigation = {}
+  unaccessibleAttendees: Array<AddConsultationAttendee> = []
+  isDisabledSubmit: boolean = false
+  selectedOrg: OrganizationDetailed
 
   constructor(
     private builder: FormBuilder,
     private orgAssocDatabase: AssociationsDatabase,
+    private org: OrganizationProvider,
     private dialog: MatDialog,
     private translator: TranslateService,
     private context: ContextService,
@@ -364,6 +374,9 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
       .catch(() =>
         this.notifier.error(_('NOTIFY.ERROR.RETRIEVING_MEETING_TYPES'))
       )
+
+    this.selectedOrg = org
+    this.checkAttendeesAccessbility()
   }
 
   meetingTypeChanged(type): void {
@@ -391,6 +404,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         accountType: account.accountType
       }
       this.attendees.push(attendee)
+      this.checkAttendeesAccessbility(attendee)
 
       if (this.editing) {
         if (!this.removedAttendees.some((id) => id === attendee.id)) {
@@ -415,6 +429,8 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         this.addedAttendees = this.addedAttendees.filter((a) => id !== a.id)
       }
     }
+
+    this.checkAttendeesAccessbility()
   }
 
   resetParticipants(): void {
@@ -586,5 +602,42 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     }
 
     this.form.get('clinic').setValue(foundClinic)
+  }
+
+  private async checkAttendeesAccessbility(
+    newAttendee?: AddConsultationAttendee
+  ): Promise<void> {
+    if (newAttendee && !this.attendeeOrgs[newAttendee.id]) {
+      try {
+        this.isDisabledSubmit = true
+        const orgs = await this.org.getAccessibleList({
+          account: newAttendee.id,
+          status: 'active',
+          strict: false,
+          limit: 'all'
+        })
+
+        this.attendeeOrgs[newAttendee.id] = orgs.data.map(
+          (org) => org.organization.id
+        )
+      } catch (err) {
+        this.notifier.error(err)
+      } finally {
+        this.isDisabledSubmit = false
+      }
+    }
+
+    this.unaccessibleAttendees = []
+
+    if (!this.selectedOrg) {
+      return
+    }
+
+    this.unaccessibleAttendees = this.attendees.filter(
+      (attendee) =>
+        !this.attendeeOrgs[attendee.id]?.includes(this.selectedOrg.id)
+    )
+
+    this.isDisabledSubmit = this.unaccessibleAttendees.length > 0
   }
 }

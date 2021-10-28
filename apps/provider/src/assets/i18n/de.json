@@ -1021,6 +1021,7 @@
       "NO_PATIENT_LISTING_PERMISSION": "Sie haben keine ausdrückliche Genehmigung die Inserate dieser Klinik zu sehen. Bitte fragen Sie Ihren Klinik-Administrator nach ‚Alle Accounts anzeigen‘ oder ‚Admin‘ Berechtigungen.",
       "NO_PHASE_ENROLLMENTS": "Es gibt keine Phasen mit dem Patienten in Verbindung gebracht.",
       "PARTICIPANTS_EMPTY": "Bitte wählen Sie mindestens einen Teilnehmer.",
+      "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} ist nicht Teil der ausgewählten Klinik \"{{clinicName}}\". Dies kann zu Sichtbarkeitsproblemen führen, bei denen andere Besprechungsteilnehmer sie möglicherweise nicht als Teilnehmer in dieser Besprechung aufgeführt sehen.",
       "REPEAT_EMPTY": "Bitte wählen Sie eine Wiederholungsoption.",
       "RETRIEVING_MEETING_TYPES": "Die ausgewählte Organisation hat keine Meeting-Typen. Bitte kontaktieren Sie Ihren Administrator.",
       "SCHEDULE_CONFLICT": "{{name}} hat einen Konflikt im Zeitplan.",

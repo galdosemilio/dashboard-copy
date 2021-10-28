@@ -1021,6 +1021,7 @@
       "NO_PATIENT_LISTING_PERMISSION": "Vous n’avez pas les autorisations requises pour voir les listes de cette clinique. Veuillez demander à l’administrateur de votre clinique pour les autorisations “VOIR TOUT” et “ADMIN”",
       "NO_PHASE_ENROLLMENTS": "Il n'y a pas de phases associées au patient.",
       "PARTICIPANTS_EMPTY": "Sélectionnez au moins un participant",
+      "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} ne fait pas partie de la clinique sélectionnée \"{{clinicName}}\". Cela peut entraîner des problèmes de visibilité, où les autres participants à la réunion peuvent ne pas les voir répertoriés en tant que participants à cette réunion.",
       "REPEAT_EMPTY": "Sélectionnez une option de répétition",
       "RETRIEVING_MEETING_TYPES": "L’organisation sélectionnée n’a pas de type de rencontres. Veuillez contacter votre administrateur.",
       "SCHEDULE_CONFLICT": "{{name}} a un conflit d'horaire.",
