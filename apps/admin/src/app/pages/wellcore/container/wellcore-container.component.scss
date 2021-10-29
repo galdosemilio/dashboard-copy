@@ -172,6 +172,21 @@ ccr-wellcore-container {
         padding-top: 15px;
       }
     }
+
+    .ccr-wellcore-stripe {
+      margin-bottom: 10px;
+
+      .ccr-wellcore-stripe-field {
+        border: 1px solid #8dbdd8;
+        border-radius: 4px;
+        padding: 10px;
+      }
+
+      mat-error {
+        margin-top: 5px;
+        font-size: 12px;
+      }
+    }
   }
 
   .mat-datepicker-content {

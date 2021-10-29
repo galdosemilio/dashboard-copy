@@ -114,8 +114,8 @@
       fxLayoutGap="50px"
       fxLayoutGap.sm="10px"
     >
-      <p class="review-item"><span>Card Number: </span>{{ checkoutData.paymentInfo?.creditCardInfo.cardNumber }}</p>
-      <p class="review-item"><span>Expiration: </span>{{ checkoutData.paymentInfo?.creditCardInfo.expirationDate }}</p>
+      <p class="review-item"><span>Card Number: </span><sapn *ngIf="checkoutData.paymentInfo?.creditCardInfo.last4">************{{ checkoutData.paymentInfo?.creditCardInfo.last4 }}</sapn></p>
+      <p class="review-item"><span>Expiration: </span>{{ checkoutData.paymentInfo?.creditCardInfo.exp_month }}/{{ checkoutData.paymentInfo?.creditCardInfo.exp_year }}</p>
     </div>
   </div>
 </div>

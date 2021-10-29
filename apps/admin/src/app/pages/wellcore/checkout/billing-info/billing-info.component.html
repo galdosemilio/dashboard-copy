@@ -1,36 +1,15 @@
 <div class="ccr-wellcore-form-title">Credit Card Information</div>
 
 <form [formGroup]="creditFormGroup" class="ccr-wellcore-form">
-  <div class="ccr-wellcore-field">
-    <label class="ccr-wellcore-label">Credit Card Number</label>
-    <mat-form-field appearance="outline">
-      <input matInput formControlName="cardNumber">
-      <mat-error *ngIf="creditFormGroup.get('cardNumber').getError('required')">The credit card number is required</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div
-  fxLayout="row"
-  fxLayout.sm="column"
-  fxLayoutAlign="space-between start"
-  fxLayoutAlign.sm="start stretch"
-  fxLayoutGap="50px"
-  fxLayoutGap.sm="0px">
-    <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Expiration Date</label>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="expirationDate">
-        <mat-error *ngIf="creditFormGroup.get('expirationDate').getError('required')">The expiration date is required</mat-error>
-      </mat-form-field>
+  <div class="ccr-wellcore-stripe">
+    <div class="ccr-wellcore-stripe-field">
+      <ngx-stripe-card
+        [options]="cardOptions"
+        [elementsOptions]="elementsOptions"
+        (change)="onChange($event)"
+      ></ngx-stripe-card>
     </div>
-
-    <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">CVV</label>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="cvv">
-        <mat-error *ngIf="creditFormGroup.get('cvv').getError('required')">The CVV is required</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-error *ngIf="stripeErrorMessage">{{ stripeErrorMessage }}</mat-error>
   </div>
 </form>
 

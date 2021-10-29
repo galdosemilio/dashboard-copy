@@ -25,9 +25,10 @@ export interface CheckoutData {
       zip: string
     }
     creditCardInfo: {
-      cardNumber: string
-      cvv: string
-      expirationDate: string
+      stripeToken: string
+      last4: string
+      exp_month: string
+      exp_year: string
     }
   }
   shippingInfo?: {
@@ -95,9 +96,10 @@ export class WellcoreCheckoutComponent implements OnInit {
         zip: ['', Validators.required]
       }),
       creditCardInfo: this.fb.group({
-        cardNumber: ['', Validators.required],
-        cvv: ['', Validators.required],
-        expirationDate: ['', Validators.required]
+        stripeToken: ['', Validators.required],
+        last4: ['', Validators.required],
+        exp_month: ['', Validators.required],
+        exp_year: ['', Validators.required]
       })
     })
     this.orderReview = this.fb.group({})
