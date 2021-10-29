@@ -1,3 +1,11 @@
+## [1.47.1](https://github.com/coachcare/dashboard/compare/v1.47.0...v1.47.1) (2021-10-29)
+
+
+### Bug Fixes
+
+* adjusted base url resolving condition [FRON-2415] ([b043895](https://github.com/coachcare/dashboard/commit/b0438951eb6edf4345115b3624007e4e1cda8efc))
+* decrease waiting time after messaging [FRON-2387] ([a411a14](https://github.com/coachcare/dashboard/commit/a411a141da864b3474ed313d577891aa555d40b4))
+
 # [1.47.0](https://github.com/coachcare/dashboard/compare/v1.46.0...v1.47.0) (2021-10-26)
 
 
