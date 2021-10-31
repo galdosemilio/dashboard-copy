@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   Inject,
   OnInit,
@@ -22,6 +21,7 @@ import { applyPalette, configViewLangAttrs, translateTexts } from '../helpers'
 import { DOCUMENT } from '@angular/common'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { TranslationsObject } from '@app/shared'
+import { sleep } from '@app/shared/utils/async.utils'
 
 @UntilDestroy()
 @Component({
@@ -38,7 +38,6 @@ export class WellcoreLayoutComponent implements AfterViewInit, OnInit {
 
   constructor(
     private callNotificationService: Conference,
-    private cdr: ChangeDetectorRef,
     private context: ContextService,
     private bus: EventsService,
     @Inject(DOCUMENT) private document: Document,
@@ -101,9 +100,9 @@ export class WellcoreLayoutComponent implements AfterViewInit, OnInit {
   private subscribeToStores(): void {
     this.store
       .pipe(select(layoutSelector), untilDestroyed(this))
-      .subscribe((state) => {
+      .subscribe(async (state) => {
+        await sleep(1)
         this.layout = state
-        this.cdr.detectChanges()
       })
 
     this.store

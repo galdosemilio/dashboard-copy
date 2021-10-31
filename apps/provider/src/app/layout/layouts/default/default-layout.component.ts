@@ -14,6 +14,7 @@ import {
 import { FetchInitiatedCalls } from '@app/layout/store/call'
 import { ContextService, EventsService, LanguageService } from '@app/service'
 import { TranslationsObject } from '@app/shared'
+import { sleep } from '@app/shared/utils/async.utils'
 import { Conference } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { select, Store } from '@ngrx/store'
@@ -37,8 +38,8 @@ export class DefaultLayoutComponent implements AfterViewInit, OnInit {
 
   constructor(
     private bus: EventsService,
-    private context: ContextService,
     private callNotificationService: Conference,
+    private context: ContextService,
     @Inject(DOCUMENT) private document: Document,
     private events: EventsService,
     private language: LanguageService,
@@ -99,7 +100,8 @@ export class DefaultLayoutComponent implements AfterViewInit, OnInit {
   private subscribeToStores(): void {
     this.store
       .pipe(select(layoutSelector), untilDestroyed(this))
-      .subscribe((state) => {
+      .subscribe(async (state) => {
+        await sleep(1)
         this.layout = state
       })
 
