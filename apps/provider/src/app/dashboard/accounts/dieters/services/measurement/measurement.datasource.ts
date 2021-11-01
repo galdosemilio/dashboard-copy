@@ -27,7 +27,7 @@ import {
 } from './measurement.criteria'
 import { MeasurementDatabase } from './measurement.database'
 
-const MAX_ENTRIES_PER_DAY = 5
+const MAX_ENTRIES_PER_DAY = 24
 
 @UntilDestroy()
 export class MeasurementDataSource extends ChartDataSource<
