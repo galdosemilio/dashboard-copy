@@ -1,3 +1,22 @@
+# [1.48.0](https://github.com/coachcare/dashboard/compare/v1.47.1...v1.48.0) (2021-11-01)
+
+
+### Bug Fixes
+
+* additional adjustments to all the designs ([c1d57df](https://github.com/coachcare/dashboard/commit/c1d57df195d0a6f6da92254f30503fb491b2fd91))
+* increase max entries per day for measurement [FRON-2419] ([6d6f3ed](https://github.com/coachcare/dashboard/commit/6d6f3eda70796af89f8d8cb7201d841f744d7d1a))
+* show meeting visibility issues warning message [FRON-2205] ([d5015c7](https://github.com/coachcare/dashboard/commit/d5015c7ebc83ecbf15d63f4c97cc594a7980a712))
+* upgraded sdk version [FRON-2164] ([e6ad546](https://github.com/coachcare/dashboard/commit/e6ad546208c456b28354e25afefba5a164761bbc))
+
+
+### Features
+
+* add notice for removed meeting [FRON-2403] ([c6672dd](https://github.com/coachcare/dashboard/commit/c6672ddcde6f3f5bb6535543b8652467e1e67cc3))
+* added custom schedule list page for Wellcore [FRON-2410] ([1fd01a4](https://github.com/coachcare/dashboard/commit/1fd01a4a4b5bf6ed591926ed564b119d3ff25398))
+* added support for dynamic layout [FRON-2408] ([8c020f1](https://github.com/coachcare/dashboard/commit/8c020f1e4ce9b6715fa7de29e311ab5bc9e2e670))
+* build wellcore sidenav [FRON-2409] ([ef427c3](https://github.com/coachcare/dashboard/commit/ef427c34b55a22fe3f4ec25c0ff49c3ad3dcc781))
+* integrate stripe element for wellcore [FRON-2416] ([2299035](https://github.com/coachcare/dashboard/commit/2299035ac058857f843fbdd944721a18c2efe96f))
+
 ## [1.47.1](https://github.com/coachcare/dashboard/compare/v1.47.0...v1.47.1) (2021-10-29)
 
 
