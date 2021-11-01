@@ -27,7 +27,7 @@ import {
 } from './measurement.criteria'
 import { MeasurementDatabase } from './measurement.database'
 
-const MAX_ENTRIES_PER_DAY = 24
+export const MAX_ENTRIES_PER_DAY = 24
 
 @UntilDestroy()
 export class MeasurementDataSource extends ChartDataSource<
@@ -465,12 +465,12 @@ export class MeasurementDataSource extends ChartDataSource<
       case 'week':
         xMaxTicks = 11
         xlabelFormat = 'ddd D'
-        tooltipFormat = 'ddd, MMM D'
+        tooltipFormat = 'ddd, MMM D h:mm a'
         break
       case 'month':
         xMaxTicks = 31
         xlabelFormat = 'MMM D'
-        tooltipFormat = 'MMM D'
+        tooltipFormat = 'MMM D h:mm a'
         break
       case 'year':
         xMaxTicks = 12
@@ -487,7 +487,6 @@ export class MeasurementDataSource extends ChartDataSource<
         xlabelFormat = 'MMM YYYY'
         tooltipFormat = 'MMM DD, YYYY'
     }
-    tooltipFormat = 'ddd, MMM D' // tmp
 
     // FIXME if we're charting multiple fields, multiple axis needs to be handled
 

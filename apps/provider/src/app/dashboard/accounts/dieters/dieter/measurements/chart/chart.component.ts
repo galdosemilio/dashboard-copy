@@ -11,7 +11,8 @@ import {
 } from '@angular/core'
 import {
   MeasurementAggregation,
-  MeasurementDataSource
+  MeasurementDataSource,
+  MAX_ENTRIES_PER_DAY
 } from '@app/dashboard/accounts/dieters/services'
 import {
   MeasurementSummaryData,
@@ -23,6 +24,7 @@ import { filter, merge } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
+import { ChartPluginsOptions } from 'chart.js'
 
 export interface MeasurementChartOutput {
   aggregation: MeasurementAggregation
@@ -56,6 +58,40 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
 
   aggregation: MeasurementAggregation
   chart: ChartData
+  plugins: ChartPluginsOptions = [
+    {
+      id: 'day-offset',
+      afterUpdate: (chart) => {
+        if (this.timeframe === 'year' || this.timeframe === 'alltime') {
+          return
+        }
+
+        const tickSlotAmount = this.timeframe === 'week' ? 8 : 31
+        const dataset = chart.config.data.datasets[0]
+        const metadata: ChartData = Object.values(dataset._meta)[0]
+
+        if (!metadata) {
+          return
+        }
+
+        const chartWidth = metadata.data[0]._xScale.width
+        const offset = chartWidth / tickSlotAmount / MAX_ENTRIES_PER_DAY
+
+        let previousDate = ''
+        let cumulativeOffset = 0
+
+        metadata.data.forEach((entry, index) => {
+          const dataEntry = dataset.data[index]
+          const isSameDate = previousDate.includes(dataEntry.x)
+
+          cumulativeOffset = isSameDate ? cumulativeOffset + offset : 0
+          entry._model.x += cumulativeOffset
+
+          previousDate = dataEntry.x
+        })
+      }
+    }
+  ]
 
   // measurements selector
   measurementTypes: SelectOptions<MeasurementSummaryData> = [
@@ -180,7 +216,9 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
       })
     } else {
       // let the parent take the control
-      this.source.register('chart', false, this.refresh$, () => ({}))
+      this.source.register('chart', false, this.refresh$, () => ({
+        limitEntries: true
+      }))
     }
 
     this.source
