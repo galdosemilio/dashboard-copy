@@ -1,3 +1,10 @@
+## [1.48.1](https://github.com/coachcare/dashboard/compare/v1.48.0...v1.48.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* added horizontal offset to entries of same day [FRON-2400] ([7465154](https://github.com/coachcare/dashboard/commit/7465154dcced2f8c28847537d9a3e380185680f8))
+
 # [1.48.0](https://github.com/coachcare/dashboard/compare/v1.47.1...v1.48.0) (2021-11-01)
 
 
