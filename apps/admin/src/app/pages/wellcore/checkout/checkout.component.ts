@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators
+} from '@angular/forms'
 import { Router } from '@angular/router'
 import { MatStepper } from '@coachcare/material'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -9,6 +15,7 @@ export interface CheckoutData {
     firstName: string
     lastName: string
     email: string
+    emailConfirmation: string
     phoneNumber: string
     gender: string
     height?: string
@@ -61,6 +68,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   public step = 0
   public checkoutData: CheckoutData = {}
   public emailAddress: string
+  public useShippingAddress: boolean = true
 
   public ngOnInit(): void {
     this.createForm()
@@ -71,10 +79,14 @@ export class WellcoreCheckoutComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      emailConfirmation: [
+        '',
+        [Validators.required, Validators.email, this.validateEmailMatches()]
+      ],
       phoneNumber: ['', Validators.required],
-      gender: ['male'],
-      height: [''],
-      birthday: ['']
+      gender: ['male', Validators.required],
+      height: ['', Validators.required],
+      birthday: ['', Validators.required]
     })
     this.shippingInfo = this.fb.group({
       firstName: ['', Validators.required],
@@ -115,7 +127,12 @@ export class WellcoreCheckoutComponent implements OnInit {
 
     this.shippingInfo.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((controls) => (this.checkoutData.shippingInfo = controls))
+      .subscribe((controls) => {
+        this.checkoutData.shippingInfo = controls
+        if (this.useShippingAddress) {
+          this.paymentInfo.controls.billingInfo.patchValue(controls)
+        }
+      })
   }
 
   public nextStep(): void {
@@ -137,6 +154,32 @@ export class WellcoreCheckoutComponent implements OnInit {
       this.step -= 1
     } else {
       this.router.navigate(['/wellcore/cart'])
+    }
+  }
+
+  public onChangeUseShippingAddress(value: boolean): void {
+    this.useShippingAddress = value
+
+    const patchValue = this.useShippingAddress
+      ? this.shippingInfo.value
+      : {
+          firstName: '',
+          lastName: '',
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: ''
+        }
+
+    this.paymentInfo.controls.billingInfo.patchValue(patchValue)
+  }
+
+  private validateEmailMatches(): ValidatorFn {
+    return (control: AbstractControl) => {
+      return control.value === this.checkoutData.accountInfo?.email
+        ? null
+        : { wrongMatch: true }
     }
   }
 }

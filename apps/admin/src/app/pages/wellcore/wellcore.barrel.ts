@@ -1,5 +1,7 @@
 import { SdkApiProviders } from '@coachcare/common/sdk.barrel'
 import {
+  WellcoreHeaderComponent,
+  WellcoreFooterComponent,
   WellcoreAccountComponent,
   WellcoreActivitiesFormComponent,
   WellcoreAdditionalQuestionsFormComponent,
@@ -18,6 +20,8 @@ import {
 } from '.'
 
 export const WellcoreComponents = [
+  WellcoreHeaderComponent,
+  WellcoreFooterComponent,
   WellcoreAccountComponent,
   WellcoreActivitiesFormComponent,
   WellcoreAdditionalQuestionsFormComponent,

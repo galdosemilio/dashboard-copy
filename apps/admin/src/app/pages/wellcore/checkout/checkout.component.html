@@ -16,7 +16,7 @@
 
   <div class="checkout-table-container" fxFlex="77%" fxHide.xs fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
     <mat-horizontal-stepper fxFlex linear #stepper>
-      <mat-step [stepControl]="accountInfo" class="dddddd">
+      <mat-step [stepControl]="accountInfo">
         <div class="step-container">
           <ccr-wellcore-account-info [formGroup]="accountInfo"></ccr-wellcore-account-info>
         </div>
@@ -29,6 +29,8 @@
       <mat-step [stepControl]="paymentInfo">
         <div class="step-container">
           <ccr-wellcore-billing-info
+          [useShippingAddress]="useShippingAddress"
+          (onChangeUseShippingAddress)="onChangeUseShippingAddress($event)"
           [billingFormGroup]="paymentInfo.get('billingInfo')"
           [creditFormGroup]="paymentInfo.get('creditCardInfo')"></ccr-wellcore-billing-info>
         </div>

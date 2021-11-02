@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { StripeService, StripeCardComponent } from 'ngx-stripe'
 import {
@@ -16,6 +23,10 @@ export class WellcoreBillingInfoComponent implements OnInit {
 
   @Input() billingFormGroup: FormGroup
   @Input() creditFormGroup: FormGroup
+  @Input() useShippingAddress: boolean
+
+  @Output()
+  onChangeUseShippingAddress: EventEmitter<boolean> = new EventEmitter<boolean>()
 
   public stripeErrorMessage: string
 
@@ -71,5 +82,9 @@ export class WellcoreBillingInfoComponent implements OnInit {
         }
       })
     }
+  }
+
+  public onChangeAddressOption(value: boolean): void {
+    this.onChangeUseShippingAddress.emit(value)
   }
 }

@@ -9,14 +9,14 @@
     fxLayoutGap.sm="0px"
   >
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">First Name</label>
+      <label class="ccr-wellcore-label">First Name <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="firstName">
         <mat-error *ngIf="formGroup.get('firstName').getError('required')">First name is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Last Name</label>
+      <label class="ccr-wellcore-label">Last Name <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="lastName">
         <mat-error *ngIf="formGroup.get('lastName').getError('required')">Last name is required</mat-error>
@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="ccr-wellcore-field">
-    <label class="ccr-wellcore-label">Address Line 1</label>
+    <label class="ccr-wellcore-label">Address Line 1 <span>*</span></label>
     <mat-form-field appearance="outline">
       <input matInput formControlName="address1">
       <mat-error *ngIf="formGroup.get('address1').getError('required')">Address Line 1 is required</mat-error>
@@ -45,14 +45,14 @@
     fxLayoutGap.sm="0px"
   >
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">City</label>
+      <label class="ccr-wellcore-label">City <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="city">
         <mat-error *ngIf="formGroup.get('city').getError('required')">City is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">State</label>
+      <label class="ccr-wellcore-label">State <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="state">
         <mat-error *ngIf="formGroup.get('state').getError('required')">State is required</mat-error>
@@ -69,7 +69,7 @@
     fxLayoutGap.sm="0px"
   >
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Zip</label>
+      <label class="ccr-wellcore-label">Zip <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="zip">
         <mat-error *ngIf="formGroup.get('zip').getError('required')">Zip is required</mat-error>
