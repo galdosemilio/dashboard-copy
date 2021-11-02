@@ -65,7 +65,7 @@ export class DefaultScheduleListComponent implements OnDestroy, OnInit {
 
     this.context.organization$
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.paginator.firstPage())
+      .subscribe((org) => this.onSelectClinic(org))
   }
 
   async downloadCSV() {
