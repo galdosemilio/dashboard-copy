@@ -531,6 +531,9 @@ export class SequencingFormComponent
               : true
             transition.delay =
               stepObject.step.serverDelay || stepObject.step.delay
+
+            stepObject.step.syncState.edited =
+              stepObject.step.syncState.edited || transition.syncState.edited
           }
         })
         this.form.controls.transitions.patchValue(currentTransitions)

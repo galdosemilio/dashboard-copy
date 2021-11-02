@@ -74,7 +74,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   })
   cy.intercept('GET', '/1.0/sequence?**', {
     fixture: 'api/sequence/getSequences'
-  })
+  }).as('getSequences')
   cy.intercept('GET', '/1.0/sequence/1?**', {
     fixture: 'api/sequence/getSingle'
   })

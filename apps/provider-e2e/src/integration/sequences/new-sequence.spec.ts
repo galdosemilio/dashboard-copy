@@ -534,6 +534,8 @@ describe('Sequences -> new', function () {
     cy.get('button').contains('Duplicate').click()
 
     cy.get('simple-snack-bar').contains('Sequence saved successfully')
+
+    cy.wait('@getSequences')
   })
 
   it('Shows the max length warnings for SMS and Notification inputs', function () {
