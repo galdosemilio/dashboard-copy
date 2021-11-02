@@ -607,6 +607,9 @@
       "VIEW_BENEFITS_PRICING": "Ver Lista de Precios y Beneficios",
       "YOUR_PLAN_SELECTION": "Su Plan Seleccionado"
     },
+    "PASSWORD_UPDATE": {
+      "HT_NEWSLETTER_CHECKBOX": "Al marcar esta casilla y seleccionar Grabar Contraseña, acepto recibir el correo digital de Healthy Transformations el cual puede incluir novedades y promociones sobre los programas y productos."
+    },
     "STEP1": {
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Los pacientes descargarán la aplicación MyHealthyJourney e ingresarán el código único de 4 dígitos de su clínica para acceder a las funciones completas de la aplicación. La aplicación móvil de su clínica y su tablero de asesor estarán al aire dentro de las 48 horas posteriores a la recepción del formulario de implementación de la plataforma.",

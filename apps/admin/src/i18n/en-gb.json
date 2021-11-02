@@ -607,6 +607,9 @@
       "VIEW_BENEFITS_PRICING": "View Full Benefits & Pricing",
       "YOUR_PLAN_SELECTION": "Your Plan Selection"
     },
+    "PASSWORD_UPDATE": {
+      "HT_NEWSLETTER_CHECKBOX": "By checking this box and selecting Save Password, I agree to receive the Healthy Transformation digital email that may include program and product updates and promotions."
+    },
     "STEP1": {
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Patients will download the MyHealthyJourney app and enter your clinic’s unique 4 digit code to access the app’s full features. Your clinic's mobile app and provider dashboard will be live within 48 hours after receiving the platform implementation form.",

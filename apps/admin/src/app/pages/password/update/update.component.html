@@ -26,11 +26,11 @@
       ></ccr-form-field-consent>
 
       <div
-      *ngIf="consentRequired && clinicNewsletterCheckboxText"
-      class="mat-form-field newsletter-checkbox"
-      [class.ng-invalid]="form.controls.clinicNewsletter.touched && form.controls.clinicNewsletter.errors">
-        <mat-checkbox formControlName="clinicNewsletter"></mat-checkbox>
-        <span>{{ clinicNewsletterCheckboxText | translate }}</span>
+      *ngIf="consentRequired && customCheckboxConfig"
+      class="mat-form-field custom-checkbox"
+      [class.ng-invalid]="form.get(customCheckboxConfig.fieldName).touched && form.get(customCheckboxConfig.fieldName).errors">
+        <mat-checkbox [formControlName]="customCheckboxConfig.fieldName"></mat-checkbox>
+        <span [innerHTML]="customCheckboxConfig.text | translate"></span>
       </div>
     </form>
 

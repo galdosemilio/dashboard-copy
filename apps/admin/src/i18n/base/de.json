@@ -607,6 +607,9 @@
       "VIEW_BENEFITS_PRICING": "Vollständige Vorteile und Preise",
       "YOUR_PLAN_SELECTION": "Ihr Plan Auswahl"
     },
+    "PASSWORD_UPDATE": {
+      "HT_NEWSLETTER_CHECKBOX": "Durch Aktivieren dieses Kontrollkästchens und Auswahl des Kennworts Speichern Sie erklären Sie sich damit einverstanden, die digitale gesunde Transformation-E-Mails zu erhalten, die Programm- und Produktaktualisierungen und -aktionen umfassen kann."
+    },
     "STEP1": {
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Patienten laden die MyHealthyJourney-App herunter und geben den eindeutigen 4-stelligen Code Ihrer Klinik ein, um auf alle Funktionen der App zuzugreifen. Die mobile App und das Provider-Dashboard Ihrer Klinik sind innerhalb von 48 Stunden nach Erhalt des Plattformimplementierungsformulars verfügbar.",

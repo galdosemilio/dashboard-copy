@@ -607,6 +607,9 @@
       "VIEW_BENEFITS_PRICING": "Voir tous les avantages et prix",
       "YOUR_PLAN_SELECTION": "Votre plan de sélection"
     },
+    "PASSWORD_UPDATE": {
+      "HT_NEWSLETTER_CHECKBOX": "En cochant cette case et en sélectionnant Enregistrer le mot de passe, j'accepte de recevoir les courriels numériques de transformation sains pouvant inclure des mises à jour et des promotions de programme et de produits."
+    },
     "STEP1": {
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Les patients téléchargeront l'application MyHealthyJourney et saisiront le code unique à 4 chiffres de votre clinique pour accéder à toutes les fonctionnalités de l'application. L'application mobile et le tableau de bord de votre fournisseur seront en ligne dans les 48 heures suivant la réception du formulaire de mise en œuvre de la plateforme.",

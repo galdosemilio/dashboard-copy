@@ -1,4 +1,5 @@
 import { BlockOption } from '@coachcare/common/components'
+import { AccountTypeIds } from '@coachcare/sdk'
 import { environment } from '../../../environments/environment'
 import { PackagePriceItem } from '../register/clinic/clinic-packages/model'
 import { ApolloIntSectionConfig } from './apollo-int.section.config'
@@ -20,6 +21,13 @@ import {
 } from './robard.section.config'
 import { ShakeItSectionConfig } from './shake-it.section.config'
 
+export interface CustomCheckboxConfig {
+  text: string
+  fieldName: string
+  links?: string[]
+  supportedAccTypes: AccountTypeIds[]
+}
+
 export interface RegisterConfigDetails {
   CLINIC_PLANS?: PackagePriceItem[]
   HEADER?: any
@@ -31,7 +39,7 @@ export interface RegisterConfigDetails {
   NEWSLETTER_CHECKBOX?: boolean
   OPEN_ASSOC_ADD_CLIENT?: boolean
   REDIRECT_ON_CLINIC_REGISTRATION?: boolean
-  CLINIC_NEWSLETTER_CHECKBOX_TEXT?: string
+  CLINIC_PW_RES_CUSTOM_CHECKBOX?: CustomCheckboxConfig
   CLINIC_MSA?: boolean
   CLINIC_MSA_LINK?: string
   CLINIC_MSA_LINK_LABEL?: string

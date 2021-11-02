@@ -607,6 +607,9 @@
       "VIEW_BENEFITS_PRICING": "Vantaggi View Full & Prezzi",
       "YOUR_PLAN_SELECTION": "La vostra selezione Piano"
     },
+    "PASSWORD_UPDATE": {
+      "HT_NEWSLETTER_CHECKBOX": "Selezionando questa casella e selezionando Salva password, accetto di ricevere l'e-mail digitale della trasformazione sana che può includere aggiornamenti e promozioni del programma e del prodotto."
+    },
     "STEP1": {
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "I pazienti scaricheranno l'app MyHealthyJourney e inseriranno il codice univoco a 4 cifre della clinica per accedere alle funzionalità complete dell'app. La dashboard dell'app mobile e del provider della clinica sarà attiva entro 48 ore dalla ricezione del modulo di implementazione della piattaforma.",

@@ -607,6 +607,9 @@
       "VIEW_BENEFITS_PRICING": "Benefícios e Preços visão completa",
       "YOUR_PLAN_SELECTION": "Sua seleção de plano"
     },
+    "PASSWORD_UPDATE": {
+      "HT_NEWSLETTER_CHECKBOX": "Ao marcar esta caixa e selecionar Salvar senha, concordo em receber o e-mail digital de transformação saudável que pode incluir atualizações e promoções do programa e do produto."
+    },
     "STEP1": {
       "ROBARD": {
         "MOB_APP_1_DESCRIPTION": "Os pacientes farão o download do aplicativo MyHealthyJourney e inserirão o código exclusivo de 4 dígitos da sua clínica para acessar todos os recursos do aplicativo. O aplicativo móvel e o painel do provedor da sua clínica estarão ativos dentro de 48 horas após o recebimento do formulário de implementação da plataforma.",

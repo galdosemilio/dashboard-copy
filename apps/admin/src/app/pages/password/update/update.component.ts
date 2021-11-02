@@ -5,17 +5,24 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MFACodeInputMode } from '@board/shared/mfa-code-input'
-import { AccountPassword, UpdateAccountPasswordResponse } from '@coachcare/sdk'
+import {
+  AccountPassword,
+  AccountTypeIds,
+  UpdateAccountPasswordResponse
+} from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { ConfirmDialog } from '@coachcare/common/dialogs/core'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import { ContextService, NotifierService } from '@coachcare/common/services'
 import { APP_ENVIRONMENT, AppEnvironment } from '@coachcare/common/shared'
-import { resolveConfig } from '@board/pages/config/section.config'
+import {
+  CustomCheckboxConfig,
+  resolveConfig
+} from '@board/pages/config/section.config'
 import { ClinicMsaProps } from '@coachcare/common/components'
 
 @Component({
@@ -38,6 +45,7 @@ export class PasswordUpdatePageComponent implements OnInit {
   clinicMsa?: ClinicMsaProps
   clinicNewsletterCheckboxText?: string
   consentRequired: string | undefined
+  customCheckboxConfig?: CustomCheckboxConfig
   serverError: string
   form: FormGroup
   formType: 'update' | 'create' = 'update'
@@ -57,14 +65,12 @@ export class PasswordUpdatePageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.resolveClinicNewsletterCheckbox()
     this.resolveClinicMsa()
     this.form = this.builder.group({
       email: '',
       code: '',
       password: '',
       consent: undefined,
-      clinicNewsletter: [undefined],
       retry: true
     })
     this.mfaForm = this.builder.group({})
@@ -79,10 +85,13 @@ export class PasswordUpdatePageComponent implements OnInit {
         consent: this.consentRequired ? false : undefined
       })
 
-      if (this.consentRequired && this.clinicNewsletterCheckboxText) {
-        this.form.get('clinicNewsletter').setValidators([Validators.required])
-      } else {
-        this.form.get('clinicNewsletter').setValidators([])
+      this.resolveClinicCustomCheckbox()
+
+      if (this.consentRequired && this.customCheckboxConfig) {
+        this.form.addControl(
+          this.customCheckboxConfig.fieldName,
+          new FormControl(undefined, [Validators.requiredTrue])
+        )
       }
     })
   }
@@ -185,16 +194,21 @@ export class PasswordUpdatePageComponent implements OnInit {
     }
   }
 
-  private resolveClinicNewsletterCheckbox(): void {
-    const clinicNewsletterConfig = resolveConfig(
-      'REGISTER.CLINIC_NEWSLETTER_CHECKBOX_TEXT',
+  private resolveClinicCustomCheckbox(): void {
+    const clinicCustomCheckboxConfig: CustomCheckboxConfig = resolveConfig(
+      'REGISTER.CLINIC_PW_RES_CUSTOM_CHECKBOX',
       this.context.organizationId
     )
 
-    this.clinicNewsletterCheckboxText =
-      typeof clinicNewsletterConfig === 'string'
-        ? clinicNewsletterConfig
-        : undefined
+    if (
+      !clinicCustomCheckboxConfig?.supportedAccTypes.includes(
+        this.accountType as AccountTypeIds
+      )
+    ) {
+      return
+    }
+
+    this.customCheckboxConfig = clinicCustomCheckboxConfig
   }
 
   private detectMFA(response: UpdateAccountPasswordResponse) {
