@@ -8,11 +8,7 @@ export const HealthyTransformationSectionConfig: SectionConfigDetails = {
     CLINIC_PW_RES_CUSTOM_CHECKBOX: {
       text: _('REGISTER.PASSWORD_UPDATE.HT_NEWSLETTER_CHECKBOX'),
       fieldName: 'clinicNewsletter',
-      supportedAccTypes: [
-        AccountTypeIds.Provider,
-        AccountTypeIds.Client,
-        AccountTypeIds.Admin
-      ]
+      supportedAccTypes: [AccountTypeIds.Client]
     }
   }
 }

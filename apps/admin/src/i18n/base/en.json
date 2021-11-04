@@ -608,7 +608,9 @@
       "YOUR_PLAN_SELECTION": "Your Plan Selection"
     },
     "PASSWORD_UPDATE": {
-      "HT_NEWSLETTER_CHECKBOX": "By checking this box and selecting Save Password, I agree to receive the Healthy Transformation digital email that may include program and product updates and promotions."
+      "HT_NEWSLETTER_CHECKBOX": "By checking this box and selecting Save Password, I agree to receive the Healthy Transformation digital email that may include program and product updates and promotions.",
+      "MW_CUSTOM_CHECKBOX": "By checking this box, I confirm that I meet and can comply with the program requirements and restrictions.",
+      "MW_CUSTOM_LINK": "Program Requirements and Restrictions."
     },
     "STEP1": {
       "ROBARD": {

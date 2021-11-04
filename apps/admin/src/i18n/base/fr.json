@@ -608,7 +608,9 @@
       "YOUR_PLAN_SELECTION": "Votre plan de sélection"
     },
     "PASSWORD_UPDATE": {
-      "HT_NEWSLETTER_CHECKBOX": "En cochant cette case et en sélectionnant Enregistrer le mot de passe, j'accepte de recevoir les courriels numériques de transformation sains pouvant inclure des mises à jour et des promotions de programme et de produits."
+      "HT_NEWSLETTER_CHECKBOX": "En cochant cette case et en sélectionnant Enregistrer le mot de passe, j'accepte de recevoir les courriels numériques de transformation sains pouvant inclure des mises à jour et des promotions de programme et de produits.",
+      "MW_CUSTOM_CHECKBOX": "En cochant cette case, je confirme que je rencontre et peut vous conformer aux exigences et aux restrictions du programme.",
+      "MW_CUSTOM_LINK": "Exigences de programme et restrictions."
     },
     "STEP1": {
       "ROBARD": {

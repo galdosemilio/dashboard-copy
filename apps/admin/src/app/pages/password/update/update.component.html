@@ -31,6 +31,8 @@
       [class.ng-invalid]="form.get(customCheckboxConfig.fieldName).touched && form.get(customCheckboxConfig.fieldName).errors">
         <mat-checkbox [formControlName]="customCheckboxConfig.fieldName"></mat-checkbox>
         <span [innerHTML]="customCheckboxConfig.text | translate"></span>
+        &nbsp;
+        <a *ngFor="let link of customCheckboxConfig.links" [href]="link.url" target="_blank">{{ link.text | translate }}</a>
       </div>
     </form>
 

@@ -608,7 +608,9 @@
       "YOUR_PLAN_SELECTION": "Dit valg Plan"
     },
     "PASSWORD_UPDATE": {
-      "HT_NEWSLETTER_CHECKBOX": "Ved at tjekke denne boks og vælge Gem adgangskode accepterer jeg at modtage den sunde transformation Digital e-mail, der kan omfatte program- og produktopdateringer og kampagner."
+      "HT_NEWSLETTER_CHECKBOX": "Ved at tjekke denne boks og vælge Gem adgangskode accepterer jeg at modtage den sunde transformation Digital e-mail, der kan omfatte program- og produktopdateringer og kampagner.",
+      "MW_CUSTOM_CHECKBOX": "Ved at tjekke denne boks bekræfter jeg, at jeg møder og kan overholde programkravene og begrænsningerne.",
+      "MW_CUSTOM_LINK": "Programkrav og begrænsninger."
     },
     "STEP1": {
       "ROBARD": {

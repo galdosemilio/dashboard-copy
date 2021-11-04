@@ -14,6 +14,7 @@ import { GWLPSectionConfig } from './gwlp.section.config'
 import { HealthyTransformationSectionConfig } from './healthy-transformation.config'
 import { InHealthSectionConfig } from './inhealth.section.config'
 import { ITGSectionConfig } from './itg.section.config'
+import { MuscleWiseSectionConfig } from './musclewise.section.config'
 import { NutrimostSectionConfig } from './nutrimost.section.config'
 import {
   RobardProdSectionConfig,
@@ -24,7 +25,7 @@ import { ShakeItSectionConfig } from './shake-it.section.config'
 export interface CustomCheckboxConfig {
   text: string
   fieldName: string
-  links?: string[]
+  links?: { text: string; url: string }[]
   supportedAccTypes: AccountTypeIds[]
 }
 
@@ -79,7 +80,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7185']: ITGSectionConfig,
     ['7229']: NutrimostSectionConfig,
     ['7016']: RobardTestSectionConfig,
-    ['5748']: ShakeItSectionConfig
+    ['5748']: ShakeItSectionConfig,
+    ['7537']: MuscleWiseSectionConfig
   },
   prod: {
     ['5341']: ApolloIntSectionConfig,
@@ -92,7 +94,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['5481']: ITGSectionConfig,
     ['5604']: NutrimostSectionConfig,
     ['4118']: RobardProdSectionConfig,
-    ['4156']: ShakeItSectionConfig
+    ['4156']: ShakeItSectionConfig,
+    ['6916']: MuscleWiseSectionConfig
   }
 }
 

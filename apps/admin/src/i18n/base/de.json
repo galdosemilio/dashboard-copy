@@ -608,7 +608,9 @@
       "YOUR_PLAN_SELECTION": "Ihr Plan Auswahl"
     },
     "PASSWORD_UPDATE": {
-      "HT_NEWSLETTER_CHECKBOX": "Durch Aktivieren dieses Kontrollkästchens und Auswahl des Kennworts Speichern Sie erklären Sie sich damit einverstanden, die digitale gesunde Transformation-E-Mails zu erhalten, die Programm- und Produktaktualisierungen und -aktionen umfassen kann."
+      "HT_NEWSLETTER_CHECKBOX": "Durch Aktivieren dieses Kontrollkästchens und Auswahl des Kennworts Speichern Sie erklären Sie sich damit einverstanden, die digitale gesunde Transformation-E-Mails zu erhalten, die Programm- und Produktaktualisierungen und -aktionen umfassen kann.",
+      "MW_CUSTOM_CHECKBOX": "Durch die Überprüfung dieses Kontrollkreises bestätige ich, dass ich mich treffen und den Programmanforderungen und Einschränkungen erfüllen kann.",
+      "MW_CUSTOM_LINK": "Programmanforderungen und -beschränkungen."
     },
     "STEP1": {
       "ROBARD": {

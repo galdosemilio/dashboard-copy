@@ -608,7 +608,9 @@
       "YOUR_PLAN_SELECTION": "La vostra selezione Piano"
     },
     "PASSWORD_UPDATE": {
-      "HT_NEWSLETTER_CHECKBOX": "Selezionando questa casella e selezionando Salva password, accetto di ricevere l'e-mail digitale della trasformazione sana che può includere aggiornamenti e promozioni del programma e del prodotto."
+      "HT_NEWSLETTER_CHECKBOX": "Selezionando questa casella e selezionando Salva password, accetto di ricevere l'e-mail digitale della trasformazione sana che può includere aggiornamenti e promozioni del programma e del prodotto.",
+      "MW_CUSTOM_CHECKBOX": "Controllando questa casella, confermo di soddisfare e posso rispettare i requisiti del programma e le restrizioni.",
+      "MW_CUSTOM_LINK": "Requisiti e restrizioni del programma."
     },
     "STEP1": {
       "ROBARD": {
