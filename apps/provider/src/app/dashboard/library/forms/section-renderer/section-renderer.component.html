@@ -9,8 +9,11 @@ fxLayoutGap="0.5em" [formGroup]="form">
   <div class="section-body" fxLayout="column" fxLayoutGap="3%">
       <div fxLayout="row" fxLayoutAlign="start start"
       *ngFor="let question of renderableQuestions; let i = index">
-          <div *ngIf="renderableIndexes[i]" fxLayout="column" fxLayoutAlign="start space-around">
+          <div *ngIf="renderableIndexes[i]" class="number-container" fxLayout="row" fxLayoutAlign="start center">
             <h2 class="question-number">{{ renderableIndexes[i] }}</h2>
+            <mat-icon *ngIf="readonly" [class.active]="question.answer" class="answer-indicator">
+              {{ question.answer ? 'check_circle' : 'remove_circle_outline' }}
+            </mat-icon>
           </div>
           <app-library-question-renderer
           fxFlex="grow"

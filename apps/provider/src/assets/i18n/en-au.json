@@ -864,6 +864,7 @@
       "SUBMITTER": "Submitter",
       "TEXT": "Text",
       "TEXT_QUESTION_HELP": "This question type is used to display instructional text or a description. It cannot be responded to, and will simply be displayed in the form at this location.",
+      "UNANSWERED": "Unanswered",
       "UNLIMITED": "Unlimited",
       "UNSAVED_CHANGES": "Unsaved Changes",
       "UNSAVED_CHANGES_WARNING": "If you change tabs you'll lose all unsaved changes, are you sure you want to leave?",

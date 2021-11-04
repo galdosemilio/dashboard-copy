@@ -864,6 +864,7 @@
       "SUBMITTER": "Déposant",
       "TEXT": "Texte",
       "TEXT_QUESTION_HELP": "Ce type de question est utilisé pour afficher le texte d'instruction ou une description. Il ne peut être répondu à",
+      "UNANSWERED": "Sans réponse",
       "UNLIMITED": "Illimité",
       "UNSAVED_CHANGES": "Modifications non sauvegardées",
       "UNSAVED_CHANGES_WARNING": "En changeant d’onglets vous perdrez toutes les modifications non sauvegardées, voulez-vous quitter?",

@@ -21,6 +21,7 @@
       }
       &-number {
         color: mat-color($ccr-foreground, secondary-text);
+        line-height: 24px;
         margin: 0 10px 0 10px;
       }
     }

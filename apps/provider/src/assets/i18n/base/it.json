@@ -864,6 +864,7 @@
       "SUBMITTER": "Mittente",
       "TEXT": "Testo",
       "TEXT_QUESTION_HELP": "Questo tipo di domanda è utilizzato per mostrare testi istruttivi o una descrizione. Non è possibile rispondere",
+      "UNANSWERED": "Senza risposta",
       "UNLIMITED": "Illimitato",
       "UNSAVED_CHANGES": "Modifiche non salvate",
       "UNSAVED_CHANGES_WARNING": "Se cambi scheda perderai tutte le modifiche non salvate",

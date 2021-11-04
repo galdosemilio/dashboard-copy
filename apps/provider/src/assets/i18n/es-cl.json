@@ -864,6 +864,7 @@
       "SUBMITTER": "Enviado por",
       "TEXT": "Texto",
       "TEXT_QUESTION_HELP": "Este tipo de pregunta se utiliza para mostrar texto o alguna descripción. No se puede responder, y simplemente se mostrará en el formulario en esta ubicación.",
+      "UNANSWERED": "Sin Respuesta",
       "UNLIMITED": "Ilimitados",
       "UNSAVED_CHANGES": "Cambios sin Guardar",
       "UNSAVED_CHANGES_WARNING": "Si cambia de pestaña perderá todos los cambios que no se hayan guardado, ¿está seguro de querer cambiar de pestaña?",

@@ -864,6 +864,7 @@
       "SUBMITTER": "Remetente",
       "TEXT": "Texto",
       "TEXT_QUESTION_HELP": "Esse tipo de pergunta é usado para exibir um texto com instruções ou uma descrição. Não pode ser respondida",
+      "UNANSWERED": "Sem resposta",
       "UNLIMITED": "Ilimitado",
       "UNSAVED_CHANGES": "Alterações não guardadas",
       "UNSAVED_CHANGES_WARNING": "Se alterar os separadores irá perder todas as alterações não guardadas",

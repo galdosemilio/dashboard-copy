@@ -7,13 +7,21 @@
       <iframe [src]="question.url" frameborder="0"></iframe>
     </div>
     <div *ngSwitchDefault>
-      <h5>
-        {{ question.title }}
-        <span class="required" *ngIf="question.isRequired">&nbsp;*</span>
-      </h5>
+      <div (click)="collapsed = false" [class.clickable]="collapsed" fxLayout="row" fxLayoutAlign="start center">
+        <h5 fxFlex>
+          {{ question.title }}
+          <span class="required" *ngIf="question.isRequired">&nbsp;*</span>
+        </h5>
+        <div *ngIf="!hasAnswer" fxFlex="18%" fxLayout="row" fxLayout="end center">
+          <span fxFlex class="collapse-notice">{{ 'LIBRARY.FORMS.UNANSWERED' | translate }}</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </div>
+      </div>
       <h4 *ngIf="question.description">{{ question.description }}</h4>
 
-      <ng-container *ngComponentOutlet="question.questionType.component; injector: questionInjector"></ng-container>
+      <div [hidden]="collapsed">
+        <ng-container *ngComponentOutlet="question.questionType.component; injector: questionInjector"></ng-container>
+      </div>
     </div>
   </div>
 </ng-container>

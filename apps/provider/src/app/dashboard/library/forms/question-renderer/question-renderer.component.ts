@@ -42,7 +42,9 @@ export class QuestionRendererComponent implements BindForm, OnDestroy, OnInit {
   @Input()
   readonly = false
 
+  public collapsed: boolean
   public form: FormGroup
+  public hasAnswer: boolean
   public questionInjector: Injector
 
   constructor(
@@ -57,6 +59,9 @@ export class QuestionRendererComponent implements BindForm, OnDestroy, OnInit {
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
+    this.hasAnswer = !this.readonly || !!this.answer
+    this.collapsed = !this.hasAnswer
+
     if (this.question.questionType.usesUrl) {
       this.question.url = this.sanitizer.bypassSecurityTrustResourceUrl(
         this.question.title

@@ -4,3 +4,15 @@ h4 {
   @include ccr-title-h;
   font-size: 1.4em;
 }
+
+.active {
+  color: var(--primary);
+}
+
+.answer-indicator {
+  margin-right: 5px;
+}
+
+.number-container {
+  margin-top: 10px;
+}

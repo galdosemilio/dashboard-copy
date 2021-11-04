@@ -31,3 +31,10 @@ iframe {
 .required {
   color: mat-color($ccr-base, 400);
 }
+
+.collapse-notice {
+  line-height: 24px;
+  font-style: italic;
+  text-align: right;
+  text-transform: uppercase;
+}

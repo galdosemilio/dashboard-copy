@@ -864,6 +864,7 @@
       "SUBMITTER": "Submitter",
       "TEXT": "Tekst",
       "TEXT_QUESTION_HELP": "Denne spørgsmålstype bruges til at vise instruktionstekst eller en beskrivelse. Det kan ikke besvares",
+      "UNANSWERED": "Ubesvaret",
       "UNLIMITED": "Ubegrænset",
       "UNSAVED_CHANGES": "Ikke-gemte ændringer",
       "UNSAVED_CHANGES_WARNING": "Hvis du ændrer faner, mister du alle ændringer, der ikke er gemt",

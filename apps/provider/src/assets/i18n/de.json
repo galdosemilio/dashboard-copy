@@ -864,6 +864,7 @@
       "SUBMITTER": "Einreichender",
       "TEXT": "Text",
       "TEXT_QUESTION_HELP": "Dieser Fragetyp wird verwendet, um Anweisungen oder Beschreibungen anzuzeigen. Diese können nicht beantwortet werden und werden lediglich an dieser Stelle im Formular angezeigt.",
+      "UNANSWERED": "Unbeantwortet",
       "UNLIMITED": "Unbegrenzt",
       "UNSAVED_CHANGES": "Nicht gespeicherte Änderungen",
       "UNSAVED_CHANGES_WARNING": "Wenn Sie die Tabs wechseln, gehen alle nicht gespeicherten Änderungen verloren",
