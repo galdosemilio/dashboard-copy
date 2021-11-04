@@ -16,6 +16,8 @@ export interface CheckoutData {
     lastName: string
     email: string
     emailConfirmation: string
+    password: string
+    passwordConfirmation: string
     phoneNumber: string
     gender: string
     height?: string
@@ -79,12 +81,11 @@ export class WellcoreCheckoutComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      emailConfirmation: [
-        '',
-        [Validators.required, Validators.email, this.validateEmailMatches()]
-      ],
+      emailConfirmation: ['', [this.validateEmailMatches()]],
+      password: ['', [Validators.required]],
+      passwordConfirmation: ['', [this.validatePasswordMatches()]],
       phoneNumber: ['', Validators.required],
-      gender: ['male', Validators.required],
+      gender: ['', Validators.required],
       height: ['', Validators.required],
       birthday: ['', Validators.required]
     })
@@ -178,6 +179,14 @@ export class WellcoreCheckoutComponent implements OnInit {
   private validateEmailMatches(): ValidatorFn {
     return (control: AbstractControl) => {
       return control.value === this.checkoutData.accountInfo?.email
+        ? null
+        : { wrongMatch: true }
+    }
+  }
+
+  private validatePasswordMatches(): ValidatorFn {
+    return (control: AbstractControl) => {
+      return control.value === this.checkoutData.accountInfo?.password
         ? null
         : { wrongMatch: true }
     }

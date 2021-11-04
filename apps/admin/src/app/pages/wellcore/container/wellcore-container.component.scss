@@ -210,16 +210,14 @@ ccr-wellcore-container {
       }
     }
   }
+}
 
-  .mat-datepicker-content {
-    .mat-calendar {
-      mat-calendar-header {
-        .mat-calendar-header {
-          max-width: 100%;
-          width: 100%;
-          background-color: #2a3f55;
-        }
-      }
+.mat-calendar {
+  mat-calendar-header {
+    .mat-calendar-header {
+      max-width: 100%;
+      width: 100%;
+      background-color: #2a3f55;
     }
   }
 }
