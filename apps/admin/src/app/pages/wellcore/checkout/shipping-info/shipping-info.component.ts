@@ -1,5 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { FormGroup } from '@angular/forms'
+import { SelectorOption } from '@coachcare/common/shared'
+import { STATES_LIST } from '../../model'
 
 @Component({
   selector: 'ccr-wellcore-shipping-info',
@@ -9,12 +11,9 @@ import { FormGroup } from '@angular/forms'
 export class WellcoreShippingInfoComponent implements OnInit, OnDestroy {
   @Input() formGroup: FormGroup
 
-  constructor() {}
+  public states: SelectorOption[] = STATES_LIST
 
-  genders = [
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' }
-  ]
+  constructor() {}
 
   ngOnInit() {}
 

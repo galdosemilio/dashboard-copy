@@ -77,7 +77,10 @@
     <div class="ccr-wellcore-field">
       <label class="ccr-wellcore-label">State <span>*</span></label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="state">
+        <mat-select
+        formControlName="state">
+          <mat-option *ngFor="let state of states" [value]="state.value">{{ state.viewValue }}</mat-option>
+        </mat-select>
         <mat-error *ngIf="billingFormGroup.get('state').getError('required')">State is required</mat-error>
       </mat-form-field>
     </div>
@@ -91,10 +94,10 @@
     fxLayoutGap="50px"
     fxLayoutGap.sm="0px">
     <div class="ccr-wellcore-field">
-      <label class="ccr-wellcore-label">Zip <span>*</span></label>
+      <label class="ccr-wellcore-label">Zip Code<span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="zip">
-        <mat-error *ngIf="billingFormGroup.get('zip').getError('required')">Zip is required</mat-error>
+        <mat-error *ngIf="billingFormGroup.get('zip').getError('required')">Zip Code is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">

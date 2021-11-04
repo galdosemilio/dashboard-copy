@@ -13,6 +13,8 @@ import {
   StripeCardElementOptions,
   StripeElementsOptions
 } from '@stripe/stripe-js'
+import { SelectorOption } from '@coachcare/common/shared'
+import { STATES_LIST } from '../../model'
 
 @Component({
   selector: 'ccr-wellcore-billing-info',
@@ -28,6 +30,7 @@ export class WellcoreBillingInfoComponent implements OnInit {
   @Output()
   onChangeUseShippingAddress: EventEmitter<boolean> = new EventEmitter<boolean>()
 
+  public states: SelectorOption[] = STATES_LIST
   public stripeErrorMessage: string
 
   public cardOptions: StripeCardElementOptions = {
