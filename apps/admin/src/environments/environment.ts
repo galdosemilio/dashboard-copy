@@ -11,7 +11,8 @@ export const environment: AppEnvironment = {
   cdn: 'https://d3vngy9ttk2wws.cloudfront.net',
   url: 'http://localhost:4200',
   defaultOrgId: '30',
-  wellcoreMedicalFormId: '15189'
+  wellcoreMedicalFormId: '15189',
+  wellcoreOrgId: '7535'
 }
 
 /*

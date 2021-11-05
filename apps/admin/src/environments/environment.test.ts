@@ -11,5 +11,6 @@ export const environment: AppEnvironment = {
   cdn: 'https://d3vngy9ttk2wws.cloudfront.net',
   url: 'https://dashboard.coachcaredev.com',
   defaultOrgId: '30',
-  wellcoreMedicalFormId: '15189'
+  wellcoreMedicalFormId: '15189',
+  wellcoreOrgId: '7535'
 }

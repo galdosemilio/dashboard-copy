@@ -7,8 +7,11 @@ import {
   Validators
 } from '@angular/forms'
 import { Router } from '@angular/router'
+import { sleep } from '@coachcare/common/shared'
 import { MatStepper } from '@coachcare/material'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { environment } from 'apps/admin/src/environments/environment'
+import * as moment from 'moment'
 
 export interface CheckoutData {
   accountInfo?: {
@@ -76,6 +79,53 @@ export class WellcoreCheckoutComponent implements OnInit {
     this.createForm()
   }
 
+  public checkAccountInfoErrors(): boolean {
+    return (
+      (this.accountInfo.get('gender').touched &&
+        this.accountInfo.get('gender').invalid) ||
+      (this.accountInfo.get('birthday').touched &&
+        this.accountInfo.get('birthday').invalid)
+    )
+  }
+
+  public async nextStep(): Promise<void> {
+    this.stepper.next()
+    this.step += 1
+
+    if (this.step === 4) {
+      this.emailAddress = this.accountInfo.value.email
+      await sleep(8000)
+      window.location.href = `${environment.url}/${environment.wellcoreOrgId}`
+    }
+  }
+
+  public prevStep(): void {
+    if (this.step > 0) {
+      this.stepper.previous()
+      this.step -= 1
+    } else {
+      this.router.navigate(['/wellcore/cart'])
+    }
+  }
+
+  public onChangeUseShippingAddress(value: boolean): void {
+    this.useShippingAddress = value
+
+    const patchValue = this.useShippingAddress
+      ? this.shippingInfo.value
+      : {
+          firstName: '',
+          lastName: '',
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: ''
+        }
+
+    this.paymentInfo.controls.billingInfo.patchValue(patchValue)
+  }
+
   private createForm(): void {
     this.accountInfo = this.fb.group({
       firstName: ['', Validators.required],
@@ -85,9 +135,9 @@ export class WellcoreCheckoutComponent implements OnInit {
       password: ['', [Validators.required]],
       passwordConfirmation: ['', [this.validatePasswordMatches()]],
       phoneNumber: ['', Validators.required],
-      gender: ['', Validators.required],
+      gender: ['', [Validators.required, this.validateGender]],
       height: ['', Validators.required],
-      birthday: ['', Validators.required]
+      birthday: ['', [Validators.required, this.validateAge]]
     })
     this.shippingInfo = this.fb.group({
       firstName: ['', Validators.required],
@@ -136,44 +186,14 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
   }
 
-  public nextStep(): void {
-    this.stepper.next()
-    this.step += 1
-
-    if (this.step === 4) {
-      this.emailAddress = this.accountInfo.value.email
-
-      setTimeout(() => {
-        window.location.href = 'https://dashboard.coachcare.com/6891'
-      }, 8000)
-    }
+  private validateAge(control: AbstractControl) {
+    return control.value && moment().diff(moment(control.value), 'years') < 18
+      ? { invalidAge: true }
+      : null
   }
 
-  public prevStep(): void {
-    if (this.step > 0) {
-      this.stepper.previous()
-      this.step -= 1
-    } else {
-      this.router.navigate(['/wellcore/cart'])
-    }
-  }
-
-  public onChangeUseShippingAddress(value: boolean): void {
-    this.useShippingAddress = value
-
-    const patchValue = this.useShippingAddress
-      ? this.shippingInfo.value
-      : {
-          firstName: '',
-          lastName: '',
-          address1: '',
-          address2: '',
-          city: '',
-          state: '',
-          zip: ''
-        }
-
-    this.paymentInfo.controls.billingInfo.patchValue(patchValue)
+  private validateGender(control: AbstractControl) {
+    return control.value === 'female' ? { invalidGender: true } : null
   }
 
   private validateEmailMatches(): ValidatorFn {

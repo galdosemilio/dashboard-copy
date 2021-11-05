@@ -21,4 +21,5 @@ export interface AppEnvironment extends ApiEnvironment {
   url: string
   defaultOrgId: string
   wellcoreMedicalFormId: string
+  wellcoreOrgId: string
 }
