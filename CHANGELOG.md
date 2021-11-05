@@ -1,3 +1,22 @@
+# [1.49.0](https://github.com/coachcare/dashboard/compare/v1.48.1...v1.49.0) (2021-11-05)
+
+
+### Bug Fixes
+
+* restored ht newsletter checkbox [FRON-2425] ([f725211](https://github.com/coachcare/dashboard/commit/f72521113d5ca7c5d046cbf69f750cbeb0aa6115))
+* reverted dashboard summary calculations ([e5d4bf9](https://github.com/coachcare/dashboard/commit/e5d4bf90d79cd87604f113749ea67a850081b922))
+* tied initial org to clinic selection [ FRON-2407] ([ddc7b0c](https://github.com/coachcare/dashboard/commit/ddc7b0c8f5c9053da01d749f6cd88fe1035f6be6))
+* update account info form [FRON-2431] ([645769c](https://github.com/coachcare/dashboard/commit/645769cc7430b41d34d48175f3f185898528190d))
+* update wellcore onboarding page [FRON-2421] ([754ebbc](https://github.com/coachcare/dashboard/commit/754ebbcd3250641e14b1ef4c1064145383fcd564))
+* use dropdown for state and change zip label [FRON-2432] [FRON-2433] ([2bc8ae5](https://github.com/coachcare/dashboard/commit/2bc8ae55307beaeb6577107e4f86dd5733fa332f))
+
+
+### Features
+
+* added behavior for empty questions [FRON-2420] ([a594854](https://github.com/coachcare/dashboard/commit/a594854dc782a0f3466c751385c781278e429d0e))
+* added musclewise custom checkbox link [FRON-2424] ([934b031](https://github.com/coachcare/dashboard/commit/934b03113f7030116a4c7cd18a63cb1bbfbcc34c))
+* added wellcore loading indicator [FRON-2430] ([1c8f476](https://github.com/coachcare/dashboard/commit/1c8f4762d0253601970ded37fd33d7747fa51b2a))
+
 ## [1.48.1](https://github.com/coachcare/dashboard/compare/v1.48.0...v1.48.1) (2021-11-02)
 
 
