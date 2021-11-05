@@ -3,6 +3,9 @@
     <ccr-wellcore-header></ccr-wellcore-header>
     <div class="host-content">
       <router-outlet></router-outlet>
+      <div *ngIf="showSpinner" class="wellcore-loading-indicator">
+        <mat-spinner></mat-spinner>
+      </div>
     </div>
     <ccr-wellcore-footer></ccr-wellcore-footer>
   </div>

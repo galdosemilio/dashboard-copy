@@ -11,7 +11,8 @@ import {
   MatInputModule,
   MatRadioModule,
   MatStepperModule,
-  MatSelectModule
+  MatSelectModule,
+  MatProgressSpinnerModule
 } from '@coachcare/material'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { CcrFormFieldsModule } from '@coachcare/common/components'
@@ -36,6 +37,7 @@ import { NgxStripeModule } from 'ngx-stripe'
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
     MomentModule,
     NgxStripeModule.forRoot('pk_test_q5X8FrXn7vv7p3E5STRXFvtv')

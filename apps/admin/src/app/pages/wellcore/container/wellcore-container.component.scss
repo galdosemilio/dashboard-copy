@@ -210,6 +210,23 @@ ccr-wellcore-container {
       }
     }
   }
+
+  .wellcore-loading-indicator {
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+
+    mat-spinner {
+      margin: calc(50vh - 50px) calc(50vw - 50px);
+
+      circle {
+        stroke: mat-color($wellcore, platinum);
+      }
+    }
+  }
 }
 
 .mat-calendar {
