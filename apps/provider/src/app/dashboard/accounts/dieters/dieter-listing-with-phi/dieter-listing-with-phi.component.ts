@@ -29,7 +29,7 @@ import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { DieterListingItem } from './../models'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
-import { DataPointTypes } from '@coachcare/sdk'
+import { convertToReadableFormat, DataPointTypes } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -258,7 +258,11 @@ export class DieterListingWithPhiComponent
         this.csvSeparator +
         'Last Name' +
         this.csvSeparator +
+        'Phone Number' +
+        this.csvSeparator +
         'Email' +
+        this.csvSeparator +
+        'Blood Pressure' +
         this.csvSeparator +
         'Start Weight' +
         this.csvSeparator +
@@ -323,7 +327,23 @@ export class DieterListingWithPhiComponent
             this.csvSeparator +
             `"${d.lastName}"` +
             this.csvSeparator +
+            `"${d.phone}"` +
+            this.csvSeparator +
             `"${d.email}"` +
+            this.csvSeparator +
+            `"${
+              d.dataPoints.length === 2
+                ? `${convertToReadableFormat(
+                    d.dataPoints[1].value,
+                    d.dataPoints[1].type,
+                    rawPreference
+                  )} / ${convertToReadableFormat(
+                    d.dataPoints[0].value,
+                    d.dataPoints[0].type,
+                    rawPreference
+                  )} ${d.dataPoints[0].type.unit}`
+                : ''
+            }"` +
             this.csvSeparator +
             `"${
               d.weight
