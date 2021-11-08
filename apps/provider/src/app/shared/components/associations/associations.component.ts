@@ -16,6 +16,7 @@ import {
   AccountAccessData,
   OrganizationAccess,
   OrganizationAssociation,
+  OrganizationProvider,
   OrganizationWithAddress,
   Schedule
 } from '@coachcare/sdk'
@@ -59,6 +60,7 @@ export class CcrAccountAssociationsComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private notify: NotifierService,
+    private organization: OrganizationProvider,
     private organizationAssociation: OrganizationAssociation,
     private schedule: Schedule
   ) {
@@ -131,10 +133,18 @@ export class CcrAccountAssociationsComponent implements OnInit {
     organization: OrganizationWithAddress
   ): Promise<void> {
     try {
+      const response = await this.organization.getAccessibleList({
+        account: this.account.id,
+        status: 'active',
+        strict: true,
+        limit: 'all'
+      })
+
       const confirmed = await confirmRemoveAssociatedMeetings({
         account: this.account,
         dialog: this.dialog,
-        organization: organization.id,
+        organizationId: organization.id,
+        organizations: response.data,
         schedule: this.schedule
       })
 

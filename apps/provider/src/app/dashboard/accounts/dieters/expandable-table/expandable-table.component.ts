@@ -31,7 +31,8 @@ import {
   MeasurementDataPointMinimalType,
   convertToReadableFormat,
   DataPointTypes,
-  Schedule
+  Schedule,
+  OrganizationAccess
 } from '@coachcare/sdk'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
 import {
@@ -264,7 +265,9 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
         limit: 2
       })
 
-      const hasDiffClinic = response.data.find(
+      const organizations = response.data
+
+      const hasDiffClinic = organizations.find(
         (access) => access.organization.id !== this.context.organizationId
       )
 
@@ -286,19 +289,23 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
           .open(PromptDialog, { data: data })
           .afterClosed()
           .pipe(filter((confirm) => confirm))
-          .subscribe(() => this.deletePatient(dieter))
+          .subscribe(() => this.deletePatient(dieter, organizations))
       }
     } catch (error) {
       this.notify.error(error)
     }
   }
 
-  private async deletePatient(dieter: DieterListingItem): Promise<void> {
+  private async deletePatient(
+    dieter: DieterListingItem,
+    organizations: Array<OrganizationAccess>
+  ): Promise<void> {
     try {
       const confirmed = await confirmRemoveAssociatedMeetings({
         account: dieter,
         dialog: this.dialog,
-        organization: this.source.args.organization,
+        organizationId: this.source.args.organization,
+        organizations,
         schedule: this.schedule
       })
 

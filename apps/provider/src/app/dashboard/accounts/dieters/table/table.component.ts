@@ -12,7 +12,12 @@ import {
 import { MatDialog, MatSort, Sort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Affiliation, OrganizationProvider, Schedule } from '@coachcare/sdk'
+import {
+  Affiliation,
+  OrganizationAccess,
+  OrganizationProvider,
+  Schedule
+} from '@coachcare/sdk'
 
 import {
   AccountEditDialog,
@@ -158,7 +163,9 @@ export class DietersTableComponent implements OnInit, OnDestroy {
         limit: 2
       })
 
-      const hasDiffClinic = response.data.find(
+      const organizations = response.data
+
+      const hasDiffClinic = organizations.find(
         (access) => access.organization.id !== this.context.organizationId
       )
 
@@ -180,19 +187,23 @@ export class DietersTableComponent implements OnInit, OnDestroy {
           .open(PromptDialog, { data: data })
           .afterClosed()
           .pipe(filter((confirm) => confirm))
-          .subscribe(() => this.deletePatient(dieter))
+          .subscribe(() => this.deletePatient(dieter, organizations))
       }
     } catch (error) {
       this.notifier.error(error)
     }
   }
 
-  private async deletePatient(dieter: DieterListingItem): Promise<void> {
+  private async deletePatient(
+    dieter: DieterListingItem,
+    organizations: Array<OrganizationAccess>
+  ): Promise<void> {
     try {
       const confirmed = await confirmRemoveAssociatedMeetings({
         account: dieter,
         dialog: this.dialog,
-        organization: this.source.args.organization,
+        organizationId: this.source.args.organization,
+        organizations,
         schedule: this.schedule
       })
 

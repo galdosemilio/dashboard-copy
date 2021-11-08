@@ -16,7 +16,7 @@
     <ul>
         <li *ngFor="let meeting of meetings">
             <span><b>{{ meeting.title }} </b></span>
-            <span>{{ meeting.start.local | amDateFormat:'LLLL' }}</span>
+            <span>{{ meeting.start.utc | amDateFormat:'LLLL' }}</span>
         </li>
         <li *ngIf="hasMoreMeetings">
             <i>
