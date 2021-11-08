@@ -12,6 +12,9 @@ export const COOKIE_SELVERA_ADMIN = 'SELVERAadmin'
 export const STORAGE_HIDE_REGISTER_COMPANY = 'ccrHideRegisterNewCompanyLink'
 export const STORAGE_PROVIDER_URL = 'ccrProviderRoute'
 export const STORAGE_ADMIN_URL = 'ccrAdminRoute'
+export const ECOMMERCE_ACCESS_TOKEN = 'ecommerceAccessToken'
+export const ECOMMERCE_REFRESH_TOKEN = 'ecommerceRefreshToken'
+export const ECOMMERCE_CART_ID = 'ecommerceGuestCartId'
 
 /**
  * Cookie Service

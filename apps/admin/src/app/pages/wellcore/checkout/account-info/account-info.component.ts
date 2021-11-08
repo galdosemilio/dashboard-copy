@@ -11,6 +11,7 @@ interface SelectOption {
   templateUrl: './account-info.component.html'
 })
 export class WellcoreAccountComponent implements OnInit, OnDestroy {
+  @Input() accountCreated = false
   @Input() formGroup: FormGroup
 
   constructor() {}

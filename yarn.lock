@@ -3939,6 +3939,17 @@
   resolved "https://registry.yarnpkg.com/@sphinxxxx/color-conversion/-/color-conversion-2.2.2.tgz#03ecc29279e3c0c832f6185a5bfa3497858ac8ca"
   integrity sha512-XExJS3cLqgrmNBIP3bBw6+1oQ1ksGjFh0+oClDKFYpCCqx/hlqwWO5KO/S63fzUo67SxI9dMrF0y5T/Ey7h8Zw==
 
+"@spree/storefront-api-v2-sdk@^4.11.0":
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/@spree/storefront-api-v2-sdk/-/storefront-api-v2-sdk-4.11.0.tgz#412a254e45cb2dc28530ac3248d8442dd078ac0c"
+  integrity sha512-PFzIYFQL8D0GMAXb69iABDAJeKbL32G8f6br8H8MM199+yo6nt49ymJHvBmobViqfYk+kTi2awmrGH2+ln7JLg==
+  dependencies:
+    axios "^0.21.4"
+    lodash "^4.17.21"
+    qs "^6.10.1"
+  optionalDependencies:
+    node-fetch "^2.6.1"
+
 "@stripe/stripe-js@^1.20.3":
   version "1.20.3"
   resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.20.3.tgz#6f479d53ad933b8b17b6c708bbc2840b7512d80e"
@@ -5318,7 +5329,7 @@ axios@0.19.2:
   dependencies:
     follow-redirects "1.5.10"
 
-axios@^0.21.3:
+axios@^0.21.3, axios@^0.21.4:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==

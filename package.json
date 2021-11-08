@@ -125,6 +125,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@nrwl/nx": "^7.8.7",
+    "@spree/storefront-api-v2-sdk": "^4.11.0",
     "@stripe/stripe-js": "^1.20.3",
     "@types/lodash": "^4.14.161",
     "@types/luxon": "^1.27.0",

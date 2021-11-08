@@ -34,7 +34,7 @@
     <div class="ccr-wellcore-field">
       <label class="ccr-wellcore-label">Email Address <span>*</span></label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="email">
+        <input [readonly]="accountCreated" matInput formControlName="email">
         <mat-error *ngIf="formGroup.get('email').getError('required')">Email is required</mat-error>
         <mat-error *ngIf="formGroup.get('email').getError('email')">Email is invalid</mat-error>
       </mat-form-field>
@@ -60,14 +60,14 @@
     <div class="ccr-wellcore-field">
       <label class="ccr-wellcore-label">Password <span>*</span></label>
       <mat-form-field appearance="outline">
-        <input type="password" matInput formControlName="password">
+        <input [readonly]="accountCreated" type="password" matInput formControlName="password">
         <mat-error *ngIf="formGroup.get('password').getError('required')">Password is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
       <label class="ccr-wellcore-label">Confirm<br>Password <span>*</span></label>
       <mat-form-field appearance="outline">
-        <input type="password" matInput formControlName="passwordConfirmation">
+        <input [readonly]="accountCreated" type="password" matInput formControlName="passwordConfirmation">
         <mat-error *ngIf="formGroup.get('passwordConfirmation').getError('wrongMatch')">Password does not match</mat-error>
       </mat-form-field>
     </div>
@@ -119,6 +119,7 @@
       <label class="ccr-wellcore-label">Gender <span>*</span></label>
       <mat-form-field appearance="outline">
         <mat-select
+        [readonly]="accountCreated"
         formControlName="gender">
           <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.name }}</mat-option>
         </mat-select>

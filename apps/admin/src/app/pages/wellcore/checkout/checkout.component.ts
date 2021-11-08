@@ -7,11 +7,31 @@ import {
   Validators
 } from '@angular/forms'
 import { Router } from '@angular/router'
+import {
+  CookieService,
+  ECOMMERCE_ACCESS_TOKEN,
+  ECOMMERCE_CART_ID,
+  ECOMMERCE_REFRESH_TOKEN,
+  EventsService,
+  LanguageService,
+  NotifierService
+} from '@coachcare/common/services'
 import { sleep } from '@coachcare/common/shared'
 import { MatStepper } from '@coachcare/material'
+import {
+  AccountIdentifier,
+  AccountProvider,
+  AddLogRequest,
+  DeviceTypeIds,
+  Logging,
+  Register
+} from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 import { environment } from 'apps/admin/src/environments/environment'
 import * as moment from 'moment'
+
+const SPREE_EXTERNAL_ID_NAME = 'spree'
 
 export interface CheckoutData {
   accountInfo?: {
@@ -64,8 +84,9 @@ export class WellcoreCheckoutComponent implements OnInit {
   @ViewChild('stepper', { static: true })
   stepper: MatStepper
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  public accountId: string
   public accountInfo: FormGroup
+  public accountCreated = false
   public shippingInfo: FormGroup
   public paymentInfo: FormGroup
   public orderReview: FormGroup
@@ -75,7 +96,26 @@ export class WellcoreCheckoutComponent implements OnInit {
   public emailAddress: string
   public useShippingAddress: boolean = true
 
+  private spree: Client
+
+  constructor(
+    private account: AccountProvider,
+    private accountIdentifier: AccountIdentifier,
+    private bus: EventsService,
+    private cookie: CookieService,
+    private fb: FormBuilder,
+    private lang: LanguageService,
+    private log: Logging,
+    private notifier: NotifierService,
+    private register: Register,
+    private router: Router
+  ) {}
+
   public ngOnInit(): void {
+    this.spree = makeClient({
+      host: 'http://localhost:4000'
+    })
+
     this.createForm()
   }
 
@@ -89,20 +129,31 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   public async nextStep(): Promise<void> {
-    this.stepper.next()
-    this.step += 1
+    const from = this.stepper.selectedIndex
 
-    if (this.step === 4) {
-      this.emailAddress = this.accountInfo.value.email
-      await sleep(8000)
-      window.location.href = `${environment.url}/${environment.wellcoreOrgId}`
+    switch (from) {
+      case 0:
+        if (!this.accountCreated) {
+          await this.createUserAccount()
+        } else {
+          await this.updateUserAccount()
+        }
+        break
+
+      case 3:
+        this.emailAddress = this.accountInfo.value.email
+        void this.startRedirection()
+        break
     }
+
+    this.stepper.next()
+    this.step = this.stepper.selectedIndex
   }
 
   public prevStep(): void {
     if (this.step > 0) {
       this.stepper.previous()
-      this.step -= 1
+      this.step = this.stepper.selectedIndex
     } else {
       this.router.navigate(['/wellcore/cart'])
     }
@@ -184,6 +235,156 @@ export class WellcoreCheckoutComponent implements OnInit {
           this.paymentInfo.controls.billingInfo.patchValue(controls)
         }
       })
+  }
+
+  private async createUserAccount(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+      const accountData = this.accountInfo.value
+
+      const single = await this.register.client({
+        organization: environment.wellcoreOrgId,
+        firstName: accountData.firstName,
+        lastName: accountData.lastName,
+        email: accountData.email,
+        password: accountData.password,
+        phone: accountData.phoneNumber,
+        deviceType: DeviceTypeIds.Web,
+        client: {
+          birthday: moment(accountData.birthday).format('YYYY-MM-DD'),
+          height: accountData.height,
+          gender: accountData.gender
+        }
+      })
+
+      this.accountId = single.id
+
+      this.accountCreated = true
+
+      const spreeAccountResult = await this.spree.account.create({
+        user: {
+          email: accountData.email,
+          password: accountData.password,
+          password_confirmation: accountData.password
+        }
+      })
+
+      if (spreeAccountResult.isFail()) {
+        throw new Error(
+          `Spree account creation error. Reason: ${
+            spreeAccountResult.fail().message
+          }`
+        )
+      }
+
+      const spreeToken = await this.spree.authentication.getToken({
+        username: accountData.email,
+        password: accountData.password
+      })
+
+      if (spreeToken.isFail()) {
+        throw new Error(
+          `Spree token fetch error. Reason: ${spreeToken.fail().message}`
+        )
+      }
+
+      this.cookie.set(ECOMMERCE_ACCESS_TOKEN, spreeToken.success().access_token)
+      this.cookie.set(
+        ECOMMERCE_REFRESH_TOKEN,
+        spreeToken.success().refresh_token
+      )
+
+      await this.accountIdentifier.add({
+        account: single.id,
+        organization: environment.wellcoreOrgId,
+        name: SPREE_EXTERNAL_ID_NAME,
+        value: accountData.email
+      })
+
+      const cart = await this.spree.cart.create({
+        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+      })
+
+      if (cart.isFail()) {
+        throw new Error(
+          `Spree cart creation error. Reason: ${cart.fail().message}`
+        )
+      }
+
+      this.cookie.set(ECOMMERCE_CART_ID, cart.success().data.id)
+
+      const products = await this.spree.products.list({
+        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+      })
+
+      if (products.isFail()) {
+        throw new Error(
+          `Spree product fetching error. Reason: ${products.fail().message}`
+        )
+      }
+
+      const addItemResult = await this.spree.cart.addItem(
+        {
+          bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+        },
+        {
+          variant_id: products.success().data.shift()?.id,
+          quantity: 1
+        }
+      )
+
+      if (addItemResult.isFail()) {
+        throw new Error(
+          `Spree item add error. Reason: ${addItemResult.fail().message}`
+        )
+      }
+    } catch (error) {
+      const addLogRequest: AddLogRequest = {
+        app: 'ccr-staticProvider',
+        logLevel: 'error',
+        keywords: [
+          {
+            platform: window.navigator.appVersion,
+            environment: environment.ccrApiEnv,
+            deviceLocale: this.lang.get(),
+            userAgent: window.navigator.userAgent
+          }
+        ],
+        message: `[WELLCORE ONBOARDING] ${error}`
+      }
+
+      await this.log.add(addLogRequest)
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
+  private async startRedirection(): Promise<void> {
+    await sleep(8000)
+    window.location.href = `${environment.url}/${environment.wellcoreOrgId}`
+  }
+
+  private async updateUserAccount(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const accountData = this.accountInfo.value
+      await this.account.update({
+        id: this.accountId,
+        firstName: accountData.firstName,
+        lastName: accountData.lastName,
+        phone: accountData.phoneNumber,
+        client: {
+          height: accountData.height,
+          gender: accountData.gender
+        }
+      })
+    } catch (error) {
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
   }
 
   private validateAge(control: AbstractControl) {
