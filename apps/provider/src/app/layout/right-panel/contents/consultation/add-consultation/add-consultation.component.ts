@@ -635,7 +635,11 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
 
     this.unaccessibleAttendees = this.attendees.filter(
       (attendee) =>
-        !this.attendeeOrgs[attendee.id]?.includes(this.selectedOrg.id)
+        !this.attendeeOrgs[attendee.id]?.some((orgId) =>
+          this.selectedOrg.hierarchyPath
+            .map((hierarchy) => hierarchy.toString())
+            .includes(orgId)
+        )
     )
 
     this.isDisabledSubmit = this.unaccessibleAttendees.length > 0
