@@ -1,7 +1,12 @@
 <div class="ccr-wellcore-form-title">Review Order</div>
 <div class="review-container">
   <div class="review-content" *ngIf="checkoutData.accountInfo">
-    <p class="review-subtitle">Account Info</p>
+    <p class="review-subtitle">
+      Account Info
+      <button (click)="goToStep(0)" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </p>
     <div
       fxLayout="row"
       fxLayout.sm="column"
@@ -49,7 +54,12 @@
     </div>
   </div>
   <div class="review-content">
-    <p class="review-subtitle">Shipping Address</p>
+    <p class="review-subtitle">
+      Shipping Address
+      <button (click)="goToStep(1)" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </p>
     <div
       fxLayout="row"
       fxLayout.sm="column"
@@ -77,7 +87,12 @@
     </div>
   </div>
   <div class="review-content">
-    <p class="review-subtitle">Billing Address</p>
+    <p class="review-subtitle">
+      Billing Address
+      <button (click)="goToStep(2)" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </p>
     <div
       fxLayout="row"
       fxLayout.sm="column"
@@ -105,7 +120,12 @@
     </div>
   </div>
   <div class="review-content">
-    <p class="review-subtitle">Payment Info</p>
+    <p class="review-subtitle">
+      Payment Info
+      <button (click)="goToStep(3)" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </p>
     <div
       fxLayout="row"
       fxLayout.sm="column"

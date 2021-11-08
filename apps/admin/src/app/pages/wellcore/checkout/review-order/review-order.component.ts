@@ -1,4 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input } from '@angular/core'
+import { MatStepper } from '@coachcare/material'
 import { CheckoutData } from '..'
 
 @Component({
@@ -6,12 +7,11 @@ import { CheckoutData } from '..'
   templateUrl: './review-order.component.html',
   styleUrls: ['./review-order.component.scss']
 })
-export class WellcoreReviewOrderComponent implements OnInit, OnDestroy {
+export class WellcoreReviewOrderComponent {
   @Input() checkoutData: CheckoutData
+  @Input() stepper: MatStepper
 
-  constructor() {}
-
-  ngOnInit() {}
-
-  ngOnDestroy() {}
+  public goToStep(index: number): void {
+    this.stepper.selectedIndex = index
+  }
 }

@@ -1,4 +1,10 @@
 .review-container {
+  button.mat-icon-button {
+    mat-icon {
+      margin-top: -12px;
+    }
+  }
+
   .review-content {
     margin-bottom: 30px;
 
