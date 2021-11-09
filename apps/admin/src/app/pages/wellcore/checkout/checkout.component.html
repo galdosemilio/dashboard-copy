@@ -19,7 +19,7 @@
       <mat-step [stepControl]="accountInfo">
         <div class="step-container">
           <ccr-wellcore-account-info
-            [accountCreated]="accountCreated"
+            [accountCreated]="!!account"
             [formGroup]="accountInfo">
           </ccr-wellcore-account-info>
         </div>
@@ -52,8 +52,11 @@
     <mat-error *ngIf="checkAccountInfoErrors()">
       <small>Only men ages 18 years or older are eligible to register for the WellCore program.</small>
     </mat-error>
+    <mat-error *ngIf="checkBillingInfoErrors()">
+      <small>Only individuals located in the following states are currently eligible to enroll in WellCore: {{ whitelistedStates.join(',') }}</small>
+    </mat-error>
     <div
-      [hidden]="checkAccountInfoErrors()"
+      [hidden]="checkAccountInfoErrors() || checkBillingInfoErrors()"
       fxLayout="row"
       fxLayoutAlign="space-between start">
       <button mat-flat-button class="ccr-step-button" (click)="prevStep()">Back</button>

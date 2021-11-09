@@ -12,5 +12,6 @@ export const environment: AppEnvironment = {
   url: 'https://dashboard.coachcare.com',
   defaultOrgId: '3637',
   wellcoreMedicalFormId: '831',
-  wellcoreOrgId: '6891'
+  wellcoreOrgId: '6891',
+  wellcoreEcommerceHost: 'https://wellcore-test.ecommerce.coachcare.com'
 }

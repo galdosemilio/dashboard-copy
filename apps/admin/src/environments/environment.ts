@@ -12,7 +12,8 @@ export const environment: AppEnvironment = {
   url: 'http://localhost:4200',
   defaultOrgId: '30',
   wellcoreMedicalFormId: '15189',
-  wellcoreOrgId: '7535'
+  wellcoreOrgId: '7535',
+  wellcoreEcommerceHost: 'https://wellcore-test.ecommerce.coachcare.com'
 }
 
 /*

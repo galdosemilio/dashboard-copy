@@ -13,8 +13,7 @@ import {
   StripeCardElementOptions,
   StripeElementsOptions
 } from '@stripe/stripe-js'
-import { SelectorOption } from '@coachcare/common/shared'
-import { STATES_LIST } from '../../model'
+import { STATES_LIST, WhitelistedSelectorOption } from '../../model'
 
 @Component({
   selector: 'ccr-wellcore-billing-info',
@@ -30,7 +29,7 @@ export class WellcoreBillingInfoComponent implements OnInit {
   @Output()
   onChangeUseShippingAddress: EventEmitter<boolean> = new EventEmitter<boolean>()
 
-  public states: SelectorOption[] = STATES_LIST
+  public states: WhitelistedSelectorOption[] = STATES_LIST
   public stripeErrorMessage: string
 
   public cardOptions: StripeCardElementOptions = {
@@ -74,6 +73,7 @@ export class WellcoreBillingInfoComponent implements OnInit {
         if (result.token) {
           // Use the token
           this.creditFormGroup.patchValue({
+            type: result.token.card.brand.toLowerCase(),
             stripeToken: result.token.id,
             last4: result.token.card.last4,
             exp_month: result.token.card.exp_month,

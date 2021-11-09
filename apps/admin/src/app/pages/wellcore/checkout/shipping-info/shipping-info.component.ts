@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { SelectorOption } from '@coachcare/common/shared'
-import { STATES_LIST } from '../../model'
+import { STATES_LIST, WhitelistedSelectorOption } from '../../model'
 
 @Component({
   selector: 'ccr-wellcore-shipping-info',
@@ -11,5 +10,5 @@ import { STATES_LIST } from '../../model'
 export class WellcoreShippingInfoComponent {
   @Input() formGroup: FormGroup
 
-  public states: SelectorOption[] = STATES_LIST
+  public states: WhitelistedSelectorOption[] = STATES_LIST
 }

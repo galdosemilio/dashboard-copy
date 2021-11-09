@@ -100,7 +100,11 @@ export class WellcoreCheckoutComponent implements OnInit {
   public checkoutData: CheckoutData = {}
   public emailAddress: string
   public useShippingAddress: boolean = true
+  public whitelistedStates: string[] = STATES_LIST.filter(
+    (state) => state.whitelisted
+  ).map((state) => state.viewValue)
 
+  private billingAddress: AccountAddress
   private shippingAddress: AccountAddress
   private spree: Client
 
@@ -120,7 +124,7 @@ export class WellcoreCheckoutComponent implements OnInit {
 
   public ngOnInit(): void {
     this.spree = makeClient({
-      host: 'http://localhost:4000'
+      host: environment.wellcoreEcommerceHost
     })
 
     this.createForm()
@@ -132,6 +136,15 @@ export class WellcoreCheckoutComponent implements OnInit {
         this.accountInfo.get('gender').invalid) ||
       (this.accountInfo.get('birthday').touched &&
         this.accountInfo.get('birthday').invalid)
+    )
+  }
+
+  public checkBillingInfoErrors(): boolean {
+    const billingAddressGroup = this.paymentInfo.get('billingInfo')
+    return (
+      this.stepper.selectedIndex === 2 &&
+      (billingAddressGroup.get('state').touched || this.useShippingAddress) &&
+      billingAddressGroup.get('state').invalid
     )
   }
 
@@ -157,6 +170,17 @@ export class WellcoreCheckoutComponent implements OnInit {
         }
 
         await this.updateShippingAddressOnSpree()
+        break
+
+      case 2:
+        if (!this.billingAddress) {
+          await this.createBillingAddress()
+        } else {
+          await this.updateBillingAddress()
+        }
+
+        await this.updatePaymentMethodOnSpree()
+        await this.updateBillingAddressOnSpree()
         break
 
       case 3:
@@ -225,10 +249,11 @@ export class WellcoreCheckoutComponent implements OnInit {
         address1: ['', Validators.required],
         address2: [''],
         city: ['', Validators.required],
-        state: ['', Validators.required],
+        state: ['', [Validators.required, this.validateWhitelistedState]],
         zip: ['', Validators.required]
       }),
       creditCardInfo: this.fb.group({
+        type: ['', Validators.required],
         stripeToken: ['', Validators.required],
         last4: ['', Validators.required],
         exp_month: ['', Validators.required],
@@ -256,6 +281,32 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
   }
 
+  private async createBillingAddress(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+      const billingData = this.paymentInfo.get('billingInfo').value
+
+      await this.addressProvider.createAddress({
+        account: this.account.id,
+        name: `${billingData.firstName} ${billingData.lastName}`,
+        address1: billingData.address1,
+        address2: billingData.address2 || undefined,
+        city: billingData.city,
+        postalCode: billingData.zip,
+        stateProvince: billingData.state,
+        country: 'US',
+        labels: ['1']
+      })
+
+      await this.resolveAccountAddresses()
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
   private async createShippingAddress(): Promise<void> {
     try {
       this.bus.trigger('wellcore.loading.show', true)
@@ -274,6 +325,47 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
 
       await this.resolveAccountAddresses()
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
+  private async updateBillingAddressOnSpree(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+      const billingData = this.paymentInfo.get('billingInfo').value
+
+      const orderUpdateRes = await this.spree.checkout.orderUpdate(
+        { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
+        {
+          order: {
+            bill_address_attributes: {
+              firstname: billingData.firstName,
+              lastname: billingData.lastName,
+              address1: billingData.address1,
+              address2: billingData.address2 || '',
+              city: billingData.city,
+              phone: this.account.phone,
+              zipcode: billingData.zip,
+              state_name: STATES_LIST.find(
+                (state) => state.value === billingData.state
+              )?.viewValue,
+              country_iso: 'US'
+            }
+          }
+        }
+      )
+
+      if (orderUpdateRes.isFail()) {
+        throw new Error(
+          `[WELLCORE] Order address could not be updated. Reason: ${
+            orderUpdateRes.fail().message
+          }`
+        )
+      }
     } catch (error) {
       this.notifier.error(error)
       throw new Error(error)
@@ -449,7 +541,19 @@ export class WellcoreCheckoutComponent implements OnInit {
     }
   }
 
-  private loadAddressIntoForm(address: AccountAddress): void {
+  private loadBillingAddressIntoForm(address: AccountAddress): void {
+    this.paymentInfo.get('billingInfo').patchValue({
+      firstName: address.name.split(' ')[0],
+      lastName: address.name.split(' ')[1] || '',
+      address1: address.address1,
+      address2: address.address2 || '',
+      state: address.stateProvince,
+      country: address.country,
+      zip: address.postalCode
+    })
+  }
+
+  private loadShippingAddressIntoForm(address: AccountAddress): void {
     this.shippingInfo.patchValue({
       firstName: address.name.split(' ')[0],
       lastName: address.name.split(' ')[1] || '',
@@ -470,20 +574,33 @@ export class WellcoreCheckoutComponent implements OnInit {
         limit: 'all'
       })
 
-      const address = response.data.find((addressEntry) =>
+      const shippingAddress = response.data.find((addressEntry) =>
         addressEntry.labels.some((label) => label.name === 'shipping')
       )
 
-      if (address) {
-        this.shippingAddress = address
-        this.loadAddressIntoForm(address)
-        return
+      const billingAddress = response.data.find((addressEntry) =>
+        addressEntry.labels.some((label) => label.name === 'billing')
+      )
+
+      if (shippingAddress) {
+        this.shippingAddress = shippingAddress
+        this.loadShippingAddressIntoForm(shippingAddress)
+      } else {
+        this.shippingInfo.patchValue({
+          firstName: this.account.firstName,
+          lastName: this.account.lastName
+        })
       }
 
-      this.shippingInfo.patchValue({
-        firstName: this.account.firstName,
-        lastName: this.account.lastName
-      })
+      if (billingAddress) {
+        this.billingAddress = billingAddress
+        this.loadBillingAddressIntoForm(billingAddress)
+      } else {
+        this.paymentInfo.get('billingInfo').patchValue({
+          firstName: this.account.firstName,
+          lastName: this.account.lastName
+        })
+      }
     } catch (error) {
       this.notifier.error(error)
     } finally {
@@ -494,6 +611,31 @@ export class WellcoreCheckoutComponent implements OnInit {
   private async startRedirection(): Promise<void> {
     await sleep(8000)
     window.location.href = `${environment.url}/${environment.wellcoreOrgId}`
+  }
+
+  private async updateBillingAddress(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const billingData = this.paymentInfo.get('billingInfo').value
+
+      await this.addressProvider.updateAddress({
+        id: this.billingAddress.id.toString(),
+        account: this.account.id,
+        name: `${billingData.firstName} ${billingData.lastName}`,
+        address1: billingData.address1,
+        address2: billingData.address2 || null,
+        stateProvince: billingData.state,
+        postalCode: billingData.zip
+      })
+
+      await this.resolveAccountAddresses()
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
   }
 
   private async updateShippingAddress(): Promise<void> {
@@ -513,6 +655,46 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
 
       await this.resolveAccountAddresses()
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
+  private async updatePaymentMethodOnSpree(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const paymentInfo = this.paymentInfo.value.creditCardInfo
+
+      const paymentMethods = await this.spree.checkout.paymentMethods({
+        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+      })
+
+      if (
+        paymentMethods.isFail() ||
+        paymentMethods.success().data.length <= 0
+      ) {
+        throw new Error(
+          `[WELLCORE] Can't fetch payment methods. Reason: ${
+            paymentMethods.fail().message
+          }`
+        )
+      }
+
+      // const paymentResult = await this.spree.checkout.addPayment(
+      //   { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
+      //   {
+      //     payment_method_id: paymentMethods.success().data.shift().id,
+      //     gateway_payment_profile_id: paymentInfo.stripeToken,
+      //     cc_type: paymentInfo.type,
+      //     last_digits: paymentInfo.last4,
+      //     month: paymentInfo.exp_month,
+      //     year: paymentInfo.exp_year
+      //   }
+      // )
     } catch (error) {
       this.notifier.error(error)
       throw new Error(error)
@@ -566,5 +748,12 @@ export class WellcoreCheckoutComponent implements OnInit {
         ? null
         : { wrongMatch: true }
     }
+  }
+
+  private validateWhitelistedState(control: AbstractControl) {
+    return STATES_LIST.find((state) => state.value === control.value)
+      ?.whitelisted
+      ? null
+      : { invalidState: true }
   }
 }

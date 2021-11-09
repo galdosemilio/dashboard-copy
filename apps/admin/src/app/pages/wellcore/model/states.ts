@@ -1,4 +1,10 @@
-export const STATES_LIST = [
+import { SelectorOption } from '@coachcare/common/shared'
+
+export interface WhitelistedSelectorOption extends SelectorOption {
+  whitelisted?: boolean
+}
+
+export const STATES_LIST: WhitelistedSelectorOption[] = [
   {
     viewValue: 'Alabama',
     value: 'AL'
@@ -201,7 +207,8 @@ export const STATES_LIST = [
   },
   {
     viewValue: 'Texas',
-    value: 'TX'
+    value: 'TX',
+    whitelisted: true
   },
   {
     viewValue: 'Utah',

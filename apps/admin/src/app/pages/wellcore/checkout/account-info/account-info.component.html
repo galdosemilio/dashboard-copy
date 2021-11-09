@@ -118,9 +118,7 @@
     <div class="ccr-wellcore-field">
       <label class="ccr-wellcore-label">Gender <span>*</span></label>
       <mat-form-field appearance="outline">
-        <mat-select
-        [readonly]="accountCreated"
-        formControlName="gender">
+        <mat-select formControlName="gender">
           <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.name }}</mat-option>
         </mat-select>
         <mat-error *ngIf="formGroup.get('gender').getError('required')">Gender is required</mat-error>
