@@ -6,7 +6,7 @@ orbs:
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: cypress/browsers:node14.15.0-chrome86-ff82
+    - image: cypress/browsers:node14.17.0-chrome88-ff89
       environment:
         TZ: 'America/New_York'
   resource_class: large

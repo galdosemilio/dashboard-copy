@@ -51,6 +51,7 @@ export class SidenavWellcoreComponent
   organization: SelectedOrganization
   userName: string
   private currentLang: string
+  private isProvider = false
 
   constructor(
     router: Router,
@@ -83,8 +84,10 @@ export class SidenavWellcoreComponent
     const user = this.context.user
     this.userName = user.firstName + ' ' + user.lastName
     this.currentLang = this.translate.currentLang
+    this.isProvider = this.context.isProvider
 
     this.initNavigation()
+    this.filterSideNavItems()
 
     this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
       this.currentLang = this.translate.currentLang
@@ -110,52 +113,79 @@ export class SidenavWellcoreComponent
         code: SidenavOptions.DASHBOARD,
         navName: _('GLOBAL.DASHBOARD'),
         navRoute: 'dashboard',
-        icon: 'dashboard'
+        icon: 'dashboard',
+        isAllowedForPatients: true
+      },
+      {
+        code: SidenavOptions.ACCOUNTS_PATIENTS,
+        navName: _('GLOBAL.PATIENTS'),
+        navRoute: 'accounts/patients',
+        icon: 'person',
+        isAllowedForPatients: false
       },
       {
         code: SidenavOptions.NEW_APPOINTMENT,
         navName: _('GLOBAL.APPOINTMENTS'),
-        navRoute: 'schedule/list',
-        icon: 'date_range'
+        navRoute: 'schedule/mosaic',
+        icon: 'date_range',
+        isAllowedForPatients: true,
+        isHiddenForProviders: true
+      },
+      {
+        code: SidenavOptions.SCHEDULE_PARENT,
+        navName: _('SIDENAV.SCHEDULE'),
+        route: 'schedule',
+        icon: 'date_range',
+        children: [
+          {
+            code: SidenavOptions.SCHEDULE_LIST,
+            navName: _('SIDENAV.SCHEDULE_LIST'),
+            navRoute: 'schedule/list',
+            icon: 'schedule'
+          },
+          {
+            code: SidenavOptions.SCHEDULE_SCHEDULE,
+            navName: _('SIDENAV.SCHEDULE_VIEW'),
+            navRoute: 'schedule/view',
+            icon: 'schedule'
+          }
+        ]
       },
       {
         code: SidenavOptions.TEST_RESULTS,
         navName: _('SIDENAV.TEST_RESULTS'),
         route: 'test-results',
         navRoute: 'test-results',
-        fontIcon: { fontSet: 'fas', fontIcon: 'fa-vial' }
-      },
-      {
-        code: SidenavOptions.MESSAGES,
-        navName: _('SIDENAV.MESSAGES'),
-        route: 'messages',
-        navRoute: 'messages',
-        icon: 'chat',
-        badge: 0
+        fontIcon: { fontSet: 'fas', fontIcon: 'fa-vial' },
+        isAllowedForPatients: true
       },
       {
         code: SidenavOptions.PROFILE_SETTINGS,
         navName: _('SIDENAV.PROFILE_SETTINGS'),
         route: 'profile',
         navRoute: 'profile',
-        icon: 'person'
+        icon: 'person',
+        isAllowedForPatients: true
       },
       {
         navName: _('SIDENAV.RESOURCES'),
         route: 'resources',
         icon: 'help',
         navRoute: 'resources',
+        isAllowedForPatients: true,
         children: [
           {
             code: SidenavOptions.RESOURCES_SCHEDULE_SUPPORT_CALL,
             navName: _('SIDENAV.SCHEDULE_SUPPORT_CALL'),
             navLink: 'https://calendly.com/coachcarekjm/supportcall',
+            isAllowedForPatients: true,
             icon: 'add_ic_call'
           },
           {
             code: SidenavOptions.RESOURCES_CONTACT,
             navName: _('SIDENAV.CONTACT_SUPPORT'),
             navLink: `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${this.currentLang}`,
+            isAllowedForPatients: true,
             icon: 'email'
           }
         ]
@@ -168,6 +198,23 @@ export class SidenavWellcoreComponent
   public async logout(): Promise<void> {
     await this.user.logout()
     this.auth.redirect()
+  }
+
+  private filterSideNavItems() {
+    this.sidenavItems = this.sidenavItems.filter((item) => {
+      return this.isProvider
+        ? !item.isHiddenForProviders
+        : item.isAllowedForPatients
+    })
+
+    this.sidenavItems = this.sidenavItems.map((item) => ({
+      ...item,
+      children: item.children?.filter((childItem) => {
+        return this.isProvider
+          ? !childItem.isHiddenForProviders
+          : childItem.isAllowedForPatients
+      })
+    }))
   }
 
   private updateContactLinks(): void {
@@ -187,7 +234,7 @@ export class SidenavWellcoreComponent
     )
 
     const idxSupportCallChild =
-      idxProviderContact && this.sidenavItems.length > 0
+      idxProviderContact >= 0 && this.sidenavItems.length > 0
         ? this.sidenavItems[idxProviderContact].children.findIndex(
             (child) => child.navName === _('SIDENAV.SCHEDULE_SUPPORT_CALL')
           )
@@ -226,6 +273,11 @@ export class SidenavWellcoreComponent
   private updateUnread(): void {
     const { unreadThreadsCount } = this.messaging.unreadCount$.getValue()
     const messagesIndex = findIndex(this.sidenavItems, { navRoute: 'messages' })
+
+    if (messagesIndex < 0) {
+      return
+    }
+
     if (this.sidenavItems[messagesIndex].badge !== unreadThreadsCount) {
       this.sidenavItems[messagesIndex].badge = unreadThreadsCount
       this.sidenavItems[messagesIndex] = Object.assign(

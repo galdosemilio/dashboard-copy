@@ -5,23 +5,18 @@ import { ScheduleAvailabilityRecurringComponent } from './availability/recurring
 import { ScheduleAvailabilityComponent } from './availability/schedule-availability.component'
 import { ScheduleAvailabilitySingleDayComponent } from './availability/single-day/single-day.component'
 import { ScheduleCalendarComponent } from './calendar/schedule-calendar.component'
-import {
-  BaseScheduleListComponent,
-  DefaultScheduleListComponent,
-  WellcoreMeetingContainer,
-  WellcoreScheduleListComponent
-} from './list'
+import { ScheduleMeetingContainer, ScheduleMosaicComponent } from './mosaic'
+import { ScheduleListComponent } from './list'
 import { AvailabilityManagementService } from './service'
 
 export const ScheduleComponents = [
-  BaseScheduleListComponent,
   ScheduleAvailabilityComponent,
   ScheduleAvailabilityRecurringComponent,
   ScheduleAvailabilitySingleDayComponent,
   ScheduleCalendarComponent,
-  DefaultScheduleListComponent,
-  WellcoreMeetingContainer,
-  WellcoreScheduleListComponent
+  ScheduleListComponent,
+  ScheduleMeetingContainer,
+  ScheduleMosaicComponent
 ]
 
 export const ScheduleEntryComponents = []
@@ -29,11 +24,11 @@ export const ScheduleEntryComponents = []
 export const ScheduleProviders = [AvailabilityManagementService]
 
 export {
-  BaseScheduleListComponent,
   ScheduleAvailabilityComponent,
   ScheduleAvailabilityRecurringComponent,
   ScheduleAvailabilitySingleDayComponent,
   ScheduleCalendarComponent,
-  DefaultScheduleListComponent,
-  WellcoreScheduleListComponent
+  ScheduleListComponent,
+  ScheduleMeetingContainer,
+  ScheduleMosaicComponent
 }

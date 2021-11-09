@@ -3,7 +3,8 @@ import {
   Component,
   Inject,
   OnInit,
-  Renderer2
+  Renderer2,
+  ViewEncapsulation
 } from '@angular/core'
 import { CCRConfig, CCRPalette } from '@app/config'
 import {
@@ -26,7 +27,9 @@ import { sleep } from '@app/shared/utils/async.utils'
 @UntilDestroy()
 @Component({
   selector: 'ccr-wellcore-layout',
-  templateUrl: './wellcore-layout.component.html'
+  templateUrl: './wellcore-layout.component.html',
+  styleUrls: ['./wellcore-layout.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class WellcoreLayoutComponent implements AfterViewInit, OnInit {
   public lang = 'en'

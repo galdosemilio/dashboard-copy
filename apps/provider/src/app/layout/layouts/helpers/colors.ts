@@ -28,6 +28,7 @@ export function applyPalette(
     --primary-a26: ${tinycolor(primary).setAlpha(0.26)};
     --primary-a40: ${tinycolor(primary).setAlpha(0.4)};
     --primary-a60: ${tinycolor(primary).setAlpha(0.6)};
+    --primary-a80: ${tinycolor(primary).setAlpha(0.8)};
     --accent: ${accent};
     --accent-contrast: ${getContrast(accent)};
     --accent-lighten: ${tinycolor(accent).lighten(26)};

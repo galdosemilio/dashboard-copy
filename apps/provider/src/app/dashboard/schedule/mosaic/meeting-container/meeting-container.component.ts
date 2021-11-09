@@ -9,11 +9,11 @@ import { ContextService } from '@app/service'
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'ccr-wellcore-meeting-container',
+  selector: 'ccr-meeting-container',
   templateUrl: './meeting-container.component.html',
   styleUrls: ['./meeting-container.component.scss']
 })
-export class WellcoreMeetingContainer implements OnInit {
+export class ScheduleMeetingContainer implements OnInit {
   @Input() disabled = false
   @Input() meeting?: Meeting
 

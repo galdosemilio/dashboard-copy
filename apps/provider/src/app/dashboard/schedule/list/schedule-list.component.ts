@@ -19,10 +19,10 @@ type QuickSelectOption = 'past' | 'upcoming' | 'all'
 
 @UntilDestroy()
 @Component({
-  selector: 'ccr-default-schedule-list',
-  templateUrl: './default-schedule-list.component.html'
+  selector: 'ccr-schedule-list',
+  templateUrl: './schedule-list.component.html'
 })
-export class DefaultScheduleListComponent implements OnDestroy, OnInit {
+export class ScheduleListComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
   @ViewChild(ScheduleListTableComponent, { static: true })

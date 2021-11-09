@@ -192,6 +192,7 @@ export class WellcoreCheckoutComponent implements OnInit {
 
       case 3:
         this.emailAddress = this.accountInfo.value.email
+        await this.completeOrder()
         void this.startRedirection()
         break
     }
@@ -286,6 +287,29 @@ export class WellcoreCheckoutComponent implements OnInit {
           this.paymentInfo.controls.billingInfo.patchValue(controls)
         }
       })
+  }
+
+  private async completeOrder(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const orderCompleteResult = await this.spree.checkout.complete({
+        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+      })
+
+      if (orderCompleteResult.isFail()) {
+        throw new Error(
+          `[WELLCORE] Order can't be completed. Reason: ${
+            orderCompleteResult.fail().message
+          }`
+        )
+      }
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
   }
 
   private async createBillingAddress(): Promise<void> {
@@ -705,8 +729,6 @@ export class WellcoreCheckoutComponent implements OnInit {
     try {
       this.bus.trigger('wellcore.loading.show', true)
 
-      const paymentInfo = this.paymentInfo.value.creditCardInfo
-
       const paymentMethods = await this.spree.checkout.paymentMethods({
         bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
       })
@@ -722,17 +744,33 @@ export class WellcoreCheckoutComponent implements OnInit {
         )
       }
 
-      // const paymentResult = await this.spree.checkout.addPayment(
-      //   { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
-      //   {
-      //     payment_method_id: paymentMethods.success().data.shift().id,
-      //     gateway_payment_profile_id: paymentInfo.stripeToken,
-      //     cc_type: paymentInfo.type,
-      //     last_digits: paymentInfo.last4,
-      //     month: paymentInfo.exp_month,
-      //     year: paymentInfo.exp_year
-      //   }
-      // )
+      const paymentMethodId = paymentMethods.success().data.shift().id
+
+      const paymentResult = await this.spree.checkout.orderUpdate(
+        { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
+        {
+          order: {
+            payments_attributes: [{ payment_method_id: paymentMethodId }]
+          },
+          payment_source: {
+            [paymentMethodId]: {
+              number: '4111111111111111',
+              month: '1',
+              year: '2022',
+              verification_value: '123',
+              name: `${this.account.firstName} ${this.account.lastName}`
+            }
+          }
+        }
+      )
+
+      if (paymentResult.isFail()) {
+        throw new Error(
+          `[WELLCORE] Cannot add payment method. Reason ${
+            paymentResult.fail().message
+          }`
+        )
+      }
     } catch (error) {
       this.notifier.error(error)
       throw new Error(error)

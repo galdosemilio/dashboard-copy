@@ -40,9 +40,24 @@ ccr-wellcore-layout {
   app-menu-wellcore {
     mat-sidenav-content > mat-nav-list {
       .mat-list-item {
+        i.material-icons {
+          position: absolute;
+          right: 10px;
+        }
+
         .mat-list-item-content {
           color: mat-color($wellcore, platinum);
           text-align: center;
+
+          mat-icon {
+            display: none !important;
+          }
+
+          @media #{$medium-only} {
+            mat-icon {
+              display: initial !important;
+            }
+          }
         }
 
         &:focus {
@@ -78,16 +93,6 @@ ccr-wellcore-layout {
             .mat-list-item-content {
               color: var(--accent);
             }
-          }
-        }
-
-        mat-icon {
-          display: none;
-        }
-
-        @media #{$medium-only} {
-          mat-icon {
-            display: initial;
           }
         }
       }

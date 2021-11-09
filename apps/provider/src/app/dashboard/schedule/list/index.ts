@@ -1,2 +1,1 @@
-export * from './base.component'
-export * from './layouts'
+export * from './schedule-list.component'

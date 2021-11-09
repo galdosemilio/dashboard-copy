@@ -7,11 +7,11 @@ import { Store } from '@ngrx/store'
 import * as moment from 'moment'
 
 @Component({
-  selector: 'ccr-wellcore-schedule-list',
-  templateUrl: './wellcore-schedule-list.component.html',
+  selector: 'ccr-schedule-mosaic',
+  templateUrl: './schedule-mosaic.component.html',
   host: { class: 'wellcore-component' }
 })
-export class WellcoreScheduleListComponent implements OnDestroy, OnInit {
+export class ScheduleMosaicComponent implements OnDestroy, OnInit {
   public isLoading = false
   public nextMeetings: Meeting[] = []
   public pastMeetings: Meeting[] = []

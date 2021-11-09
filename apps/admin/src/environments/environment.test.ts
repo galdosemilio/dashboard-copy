@@ -9,7 +9,7 @@ export const environment: AppEnvironment = {
   production: true,
   stripeKey: 'pk_test_q5X8FrXn7vv7p3E5STRXFvtv',
   cdn: 'https://d3vngy9ttk2wws.cloudfront.net',
-  url: 'https://dashboard.coachcaredev.com',
+  url: 'https://test.dashboard.coachcare.com',
   defaultOrgId: '30',
   wellcoreMedicalFormId: '15189',
   wellcoreOrgId: '7535',
