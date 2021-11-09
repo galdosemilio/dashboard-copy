@@ -9,20 +9,20 @@ matTooltipPosition="above">
   <button
   *ngIf="mode === 0"
   [class.active]="true"
-  [disabled]="callState?.isCallStarted || !callState?.hasAudioDeviceAccess || targets?.length > 1"
+  [disabled]="disabled || callState?.isCallStarted || !callState?.hasAudioDeviceAccess || targets?.length > 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
-  (click)="$event.stopPropagation() ;billableServices.length ? undefined : onClick()"
+  (click)="$event.stopPropagation() ; !defaultBillableService && billableServices.length ? undefined : onClick(defaultBillableService)"
   class="ccr-icon-button"
   color="primary"
   mat-button
   type="button">
-    <mat-icon>videocam</mat-icon>
-    <span fxHide.xs>{{ 'BOARD.CALL_USER' | translate }}</span>
+    <mat-icon *ngIf="showIcon">videocam</mat-icon>
+    <span fxHide.xs>{{ label | translate }}</span>
   </button>
   <div
   *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess && targets?.length === 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
-  (click)="$event.stopPropagation(); billableServices.length ? undefined : onClick()"
+  (click)="$event.stopPropagation(); !defaultBillableService && billableServices.length ? undefined : onClick(defaultBillableService)"
   class="clickable">
     <mat-icon class="min">videocam</mat-icon>
   </div>

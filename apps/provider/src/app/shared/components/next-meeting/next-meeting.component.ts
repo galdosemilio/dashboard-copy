@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { BILLABLE_SERVICES } from '@app/dashboard/reports/communications/models'
 import {
   CcrCallWaitingRoomComponent,
   CcrCallWaitingRoomProps
@@ -30,7 +31,10 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
    * We need to make sure that this variable is false if there's
    * an active call so that we don't clog the app with media sources.
    */
+  public callTargets: string[] = []
   public canJoinSession = false
+  public defaultBillableService = BILLABLE_SERVICES.none
+  public isProvider = false
   public upcomingMeeting?: Meeting
 
   private dataSource: MeetingsDataSource
@@ -52,6 +56,7 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
+    this.isProvider = this.context.isProvider
     this.createMeetingsSource()
     void this.fetchMeetings()
 
@@ -68,7 +73,10 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
   private checkJoinStatus(): void {
     this.canJoinSession = this.hasOngoingCall
       ? false
-      : this.upcomingMeeting.date.isSameOrBefore(moment())
+      : this.upcomingMeeting.date
+          .clone()
+          .subtract(15, 'minutes')
+          .isSameOrBefore(moment())
     this.checkMeetingDurationStatus()
   }
 
@@ -111,6 +119,12 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
       this.stopJoinStatusInterval()
       return
     }
+
+    this.callTargets = [
+      meeting.attendees
+        .filter((attendee) => attendee.id !== this.context.user.id)
+        .pop()
+    ]
 
     this.attendeeEntities = meeting.attendees.map((attendee) => ({
       id: attendee.id,

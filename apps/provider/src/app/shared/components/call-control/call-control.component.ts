@@ -46,9 +46,17 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   @ViewChild(MatMenuTrigger, { static: false }) matMenuTrigger: MatMenuTrigger
 
   @Input()
+  defaultBillableService?: BillableService
+  @Input()
+  disabled = false
+  @Input()
+  label = _('BOARD.CALL_USER')
+  @Input()
   mode = 0
   @Input()
   targets
+  @Input()
+  showIcon = true
   @Input()
   showDisabledIcon: boolean
 
@@ -109,7 +117,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
     billableService: BillableService = BILLABLE_SERVICES.none
   ): Promise<void> {
     try {
-      if (!this.billableServices.length) {
+      if (this.defaultBillableService || !this.billableServices.length) {
         this.matMenuTrigger.closeMenu()
       }
 

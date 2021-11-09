@@ -39,13 +39,23 @@ fxLayoutGap="15px">
   <div fxFlex="32%" fxFlex.xs="40%" fxLayout="column" fxLayoutAlign="center stretch">
     <p class="session-start-cta">{{ 'BOARD.SESSION_STARTS_AT' | translate:{time: (upcomingMeeting.date | amDateFormat:'h:mm a')} }}</p>
     <button
-    [disabled]="!canJoinSession"
-    (click)="joinSession()"
-    class="ccr-button"
-    color="primary"
-    mat-button>
+      *ngIf="!isProvider"
+      [disabled]="!canJoinSession"
+      (click)="joinSession()"
+      class="ccr-button"
+      color="primary"
+      mat-button>
       {{ 'BOARD.JOIN_SESSION' | translate }}
     </button>
+
+    <ccr-call-control
+      *ngIf="isProvider"
+      [defaultBillableService]="defaultBillableService"
+      [disabled]="!canJoinSession"
+      [label]="'BOARD.JOIN_SESSION' | translate"
+      [showIcon]="false"
+      [targets]="callTargets"
+    ></ccr-call-control>
   </div>
   </div>
 </div>

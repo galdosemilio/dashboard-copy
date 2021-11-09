@@ -36,6 +36,7 @@ import {
 import { Conference, Interaction } from '@coachcare/sdk'
 import * as callAction from './call.action'
 import { CancelCall, DeviceAvailability, Source } from './call.action'
+import { EnterFullscreen } from '.'
 
 @Injectable()
 export class CallEffects {
@@ -446,6 +447,7 @@ export class CallEffects {
           new callAction.AcceptCall({
             enableVideo: this.callState.isLocalVideoEnabled
           }),
+          new EnterFullscreen(),
           new callAction.SetCallIsExpected(false)
         ]
       }
