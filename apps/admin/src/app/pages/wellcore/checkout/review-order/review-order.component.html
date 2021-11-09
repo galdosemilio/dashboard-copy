@@ -1,6 +1,26 @@
 <div class="ccr-wellcore-form-title">Review Order</div>
 <div class="review-container">
   <div class="review-content" *ngIf="checkoutData.accountInfo">
+    <p class="review-subtitle">Cart Info</p>
+    <div class="cart-info-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+      <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+        <div *ngFor="let item of cartItems" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+          <div>
+            <img
+            [alt]="item.attributes.name"
+            class="mini-product-image"
+            src="/assets/wellcore/images/wellcore-blood-kit-cropped.png" />
+          </div>
+          <p>{{ item.attributes.name }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="cartInfo" fxFlex="20%" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="5px">
+        <span>Subtotal: {{ cartInfo.attributes.pre_tax_total | currency:'USD':'symbol':'1.0-0':'en-US' }}</span>
+        <span>Tax: {{ cartInfo.attributes.tax_total | currency:'USD':'symbol':'1.0-0':'en-US' }}</span>
+        <span>Grand Total: {{ cartInfo.attributes.total | currency:'USD':'symbol':'1.0-0':'en-US' }}</span>
+      </div>
+    </div>
     <p class="review-subtitle">
       Account Info
       <button (click)="goToStep(0)" mat-icon-button>

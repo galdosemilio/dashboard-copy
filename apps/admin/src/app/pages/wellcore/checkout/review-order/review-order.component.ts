@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core'
 import { MatStepper } from '@coachcare/material'
+import { OrderAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
+import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
 import { CheckoutData } from '..'
 
 @Component({
@@ -8,6 +10,8 @@ import { CheckoutData } from '..'
   styleUrls: ['./review-order.component.scss']
 })
 export class WellcoreReviewOrderComponent {
+  @Input() cartInfo: OrderAttr
+  @Input() cartItems: ProductAttr[] = []
   @Input() checkoutData: CheckoutData
   @Input() stepper: MatStepper
 

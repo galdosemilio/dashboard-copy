@@ -31,6 +31,9 @@ import {
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
+import { OrderAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
+import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
+import { RelationType } from '@spree/storefront-api-v2-sdk/types/interfaces/Relationships'
 import { environment } from 'apps/admin/src/environments/environment'
 import * as moment from 'moment'
 import { STATES_LIST } from '../model'
@@ -92,6 +95,8 @@ export class WellcoreCheckoutComponent implements OnInit {
   public accountId: string
   public accountInfo: FormGroup
   public accountCreated = false
+  public cartInfo: OrderAttr
+  public cartItems: ProductAttr[] = []
   public shippingInfo: FormGroup
   public paymentInfo: FormGroup
   public orderReview: FormGroup
@@ -104,6 +109,7 @@ export class WellcoreCheckoutComponent implements OnInit {
     (state) => state.whitelisted
   ).map((state) => state.viewValue)
 
+  private allProducts = []
   private billingAddress: AccountAddress
   private shippingAddress: AccountAddress
   private spree: Client
@@ -181,6 +187,7 @@ export class WellcoreCheckoutComponent implements OnInit {
 
         await this.updatePaymentMethodOnSpree()
         await this.updateBillingAddressOnSpree()
+        await this.resolveCartItems()
         break
 
       case 3:
@@ -503,6 +510,8 @@ export class WellcoreCheckoutComponent implements OnInit {
         )
       }
 
+      this.allProducts = products.success().data.slice()
+
       const addItemResult = await this.spree.cart.addItem(
         {
           bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
@@ -605,6 +614,35 @@ export class WellcoreCheckoutComponent implements OnInit {
       this.notifier.error(error)
     } finally {
       this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
+  private async resolveCartItems(): Promise<void> {
+    try {
+      const cartShowResult = await this.spree.cart.show({
+        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+      })
+
+      if (cartShowResult.isFail()) {
+        throw new Error(
+          `[WELLCORE] Cannot fetch cart items. Reason ${
+            cartShowResult.fail().message
+          }`
+        )
+      }
+
+      this.cartInfo = cartShowResult.success().data
+
+      this.cartItems = (cartShowResult.success().data.relationships.variants
+        .data as RelationType[])
+        .map(
+          (variant) =>
+            this.allProducts.find((product) => product.id === variant.id) ??
+            null
+        )
+        .filter((item) => item)
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 
