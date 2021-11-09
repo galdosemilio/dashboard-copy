@@ -176,10 +176,12 @@ export class FormsTableComponent {
           margin: [0, 12, 0, 8]
         },
         question: {
-          margin: [0, 8, 0, 3]
+          margin: [0, 8, 0, 3],
+          bold: true
         },
         answer: {
-          margin: [0, 4]
+          margin: [0, 4],
+          bold: false
         },
         addendum: {
           margin: [0, 4]
@@ -294,6 +296,7 @@ export class FormsTableComponent {
       {
         stack: [
           {
+            bold: true,
             ol: questions
           }
         ]

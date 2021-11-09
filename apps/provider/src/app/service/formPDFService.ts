@@ -46,7 +46,7 @@ interface PDFTableBody {
 }
 
 interface PDFColumn {
-  width?: number
+  width?: number | string
   canvas?: PDFCanvas[]
   text?: string
   style?: string
@@ -109,7 +109,8 @@ export class FormPDFService {
         _('LIBRARY.FORMS.SUBMITTED_BY'),
         _('LIBRARY.FORMS.SUBMITTED_ON'),
         _('LIBRARY.FORMS.ADDENDUMS'),
-        _('LIBRARY.FORMS.NOTES')
+        _('LIBRARY.FORMS.NOTES'),
+        _('LIBRARY.FORMS.UNANSWERED')
       ])
       .subscribe((translations) => (this.i18n = translations))
   }
@@ -189,10 +190,18 @@ export class FormPDFService {
           margin: [0, 12, 0, 8]
         },
         question: {
-          margin: [0, 8, 0, 3]
+          margin: [0, 8, 0, 3],
+          bold: true
         },
         answer: {
-          margin: [0, 4]
+          margin: [0, 4],
+          bold: false
+        },
+        unanswered: {
+          alignment: 'right',
+          margin: [0, 8, 0, 3],
+          italics: true,
+          bold: false
         },
         addendum: {
           margin: [0, 4]
@@ -412,6 +421,7 @@ export class FormPDFService {
       {
         stack: [
           {
+            bold: true,
             ol: questions
           }
         ]
@@ -438,12 +448,29 @@ export class FormPDFService {
         typeof item.question === 'object' && item.question.id === question.id
     )
 
-    const contents: PDFContent[] = [{ text: question.title, style: 'question' }]
+    const questionContent: PDFColumn[] = [
+      {
+        width: '*',
+        text: question.title,
+        style: 'question'
+      }
+    ]
+
+    const contents: PDFContent[] = [{ columns: questionContent }]
 
     if (
       question.questionType.name === 'text' ||
       question.questionType.name === 'content'
     ) {
+      return contents
+    }
+
+    if (!answer) {
+      questionContent.push({
+        text: this.i18n['LIBRARY.FORMS.UNANSWERED'],
+        style: 'unanswered'
+      })
+
       return contents
     }
 
