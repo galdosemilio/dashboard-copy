@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { SelectorOption } from '@coachcare/common/shared'
 import { STATES_LIST } from '../../model'
@@ -8,14 +8,8 @@ import { STATES_LIST } from '../../model'
   templateUrl: './shipping-info.component.html',
   styleUrls: ['./shipping-info.component.scss']
 })
-export class WellcoreShippingInfoComponent implements OnInit, OnDestroy {
+export class WellcoreShippingInfoComponent {
   @Input() formGroup: FormGroup
 
   public states: SelectorOption[] = STATES_LIST
-
-  constructor() {}
-
-  ngOnInit() {}
-
-  ngOnDestroy() {}
 }

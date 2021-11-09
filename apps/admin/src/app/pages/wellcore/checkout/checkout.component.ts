@@ -19,9 +19,12 @@ import {
 import { sleep } from '@coachcare/common/shared'
 import { MatStepper } from '@coachcare/material'
 import {
+  AccountAddress,
   AccountIdentifier,
   AccountProvider,
+  AccountSingle,
   AddLogRequest,
+  AddressProvider,
   DeviceTypeIds,
   Logging,
   Register
@@ -30,6 +33,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 import { environment } from 'apps/admin/src/environments/environment'
 import * as moment from 'moment'
+import { STATES_LIST } from '../model'
 
 const SPREE_EXTERNAL_ID_NAME = 'spree'
 
@@ -84,6 +88,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   @ViewChild('stepper', { static: true })
   stepper: MatStepper
 
+  public account: AccountSingle
   public accountId: string
   public accountInfo: FormGroup
   public accountCreated = false
@@ -96,11 +101,13 @@ export class WellcoreCheckoutComponent implements OnInit {
   public emailAddress: string
   public useShippingAddress: boolean = true
 
+  private shippingAddress: AccountAddress
   private spree: Client
 
   constructor(
-    private account: AccountProvider,
+    private accountProvider: AccountProvider,
     private accountIdentifier: AccountIdentifier,
+    private addressProvider: AddressProvider,
     private bus: EventsService,
     private cookie: CookieService,
     private fb: FormBuilder,
@@ -138,6 +145,18 @@ export class WellcoreCheckoutComponent implements OnInit {
         } else {
           await this.updateUserAccount()
         }
+
+        await this.resolveAccountAddresses()
+        break
+
+      case 1:
+        if (!this.shippingAddress) {
+          await this.createShippingAddress()
+        } else {
+          await this.updateShippingAddress()
+        }
+
+        await this.updateShippingAddressOnSpree()
         break
 
       case 3:
@@ -237,6 +256,73 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
   }
 
+  private async createShippingAddress(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+      const shippingData = this.shippingInfo.value
+
+      await this.addressProvider.createAddress({
+        account: this.account.id,
+        name: `${shippingData.firstName} ${shippingData.lastName}`,
+        address1: shippingData.address1,
+        address2: shippingData.address2 || undefined,
+        city: shippingData.city,
+        postalCode: shippingData.zip,
+        stateProvince: shippingData.state,
+        country: 'US',
+        labels: ['2']
+      })
+
+      await this.resolveAccountAddresses()
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
+  private async updateShippingAddressOnSpree(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+      const shippingData = this.shippingInfo.value
+
+      const orderUpdateRes = await this.spree.checkout.orderUpdate(
+        { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
+        {
+          order: {
+            ship_address_attributes: {
+              firstname: shippingData.firstName,
+              lastname: shippingData.lastName,
+              address1: shippingData.address1,
+              address2: shippingData.address2 || '',
+              city: shippingData.city,
+              phone: this.account.phone,
+              zipcode: shippingData.zip,
+              state_name: STATES_LIST.find(
+                (state) => state.value === shippingData.state
+              )?.viewValue,
+              country_iso: 'US'
+            }
+          }
+        }
+      )
+
+      if (orderUpdateRes.isFail()) {
+        throw new Error(
+          `[WELLCORE] Order address could not be updated. Reason: ${
+            orderUpdateRes.fail().message
+          }`
+        )
+      }
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
   private async createUserAccount(): Promise<void> {
     try {
       this.bus.trigger('wellcore.loading.show', true)
@@ -256,6 +342,8 @@ export class WellcoreCheckoutComponent implements OnInit {
           gender: accountData.gender
         }
       })
+
+      this.account = await this.accountProvider.getSingle(single.id)
 
       this.accountId = single.id
 
@@ -361,9 +449,76 @@ export class WellcoreCheckoutComponent implements OnInit {
     }
   }
 
+  private loadAddressIntoForm(address: AccountAddress): void {
+    this.shippingInfo.patchValue({
+      firstName: address.name.split(' ')[0],
+      lastName: address.name.split(' ')[1] || '',
+      address1: address.address1,
+      address2: address.address2 || '',
+      state: address.stateProvince,
+      country: address.country,
+      zip: address.postalCode
+    })
+  }
+
+  private async resolveAccountAddresses(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const response = await this.addressProvider.getAddressList({
+        account: this.account.id,
+        limit: 'all'
+      })
+
+      const address = response.data.find((addressEntry) =>
+        addressEntry.labels.some((label) => label.name === 'shipping')
+      )
+
+      if (address) {
+        this.shippingAddress = address
+        this.loadAddressIntoForm(address)
+        return
+      }
+
+      this.shippingInfo.patchValue({
+        firstName: this.account.firstName,
+        lastName: this.account.lastName
+      })
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
   private async startRedirection(): Promise<void> {
     await sleep(8000)
     window.location.href = `${environment.url}/${environment.wellcoreOrgId}`
+  }
+
+  private async updateShippingAddress(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const shippingData = this.shippingInfo.value
+
+      await this.addressProvider.updateAddress({
+        id: this.shippingAddress.id.toString(),
+        account: this.account.id,
+        name: `${shippingData.firstName} ${shippingData.lastName}`,
+        address1: shippingData.address1,
+        address2: shippingData.address2 || null,
+        stateProvince: shippingData.state,
+        postalCode: shippingData.zip
+      })
+
+      await this.resolveAccountAddresses()
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
   }
 
   private async updateUserAccount(): Promise<void> {
@@ -371,7 +526,7 @@ export class WellcoreCheckoutComponent implements OnInit {
       this.bus.trigger('wellcore.loading.show', true)
 
       const accountData = this.accountInfo.value
-      await this.account.update({
+      await this.accountProvider.update({
         id: this.accountId,
         firstName: accountData.firstName,
         lastName: accountData.lastName,
