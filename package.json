@@ -134,7 +134,7 @@
     "core-js": "^3.17.2",
     "document-register-element": "1.13.1",
     "hammerjs": "^2.0.8",
-    "jsoneditor": "^9.1.9",
+    "jsoneditor": "^9.5.7",
     "lightweight-charts": "^3.5.0",
     "linkifyjs": "^3.0.1",
     "lodash": "^4.17.21",
