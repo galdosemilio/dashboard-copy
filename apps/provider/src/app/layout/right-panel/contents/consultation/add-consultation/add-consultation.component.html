@@ -136,7 +136,7 @@
         </div>
       </ng-container>
 
-      <ng-container formGroupName="location">
+      <ng-container formGroupName="location" *ngIf="shouldDisplayAddress">
         <mat-form-field>
           <input matInput formControlName="streetAddress" [placeholder]="'BOARD.STREET' | translate">
         </mat-form-field>

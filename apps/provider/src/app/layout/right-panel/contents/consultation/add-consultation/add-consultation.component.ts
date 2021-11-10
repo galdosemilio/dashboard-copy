@@ -28,11 +28,13 @@ import {
 } from '@app/shared'
 import {
   AccountAccessData,
+  AccountTypeIds,
   AccSingleResponse,
   AddAttendeeRequest,
   AddMeetingRequest,
   MeetingAttendee,
   OrganizationDetailed,
+  OrganizationPreference,
   OrganizationProvider
 } from '@coachcare/sdk'
 import { ConsultationFormArgs } from '../consultationFormArgs.interface'
@@ -91,11 +93,13 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   unaccessibleAttendees: Array<AddConsultationAttendee> = []
   isDisabledSubmit: boolean = false
   selectedOrg: OrganizationDetailed
+  shouldDisplayAddress: boolean = true
 
   constructor(
     private builder: FormBuilder,
     private orgAssocDatabase: AssociationsDatabase,
     private org: OrganizationProvider,
+    private orgPreference: OrganizationPreference,
     private dialog: MatDialog,
     private translator: TranslateService,
     private context: ContextService,
@@ -349,7 +353,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
     }
   }
 
-  clinicChanged(org: OrganizationDetailed | null): void {
+  async clinicChanged(org: OrganizationDetailed | null): Promise<void> {
     if (!org) {
       this.form.get('location').reset()
       this.meetingTypes = []
@@ -357,26 +361,39 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
       return
     }
 
-    this.form.get('location').patchValue({
-      ...org.address,
-      streetAddress: org.address.street
-    })
-    this.dataService
-      .fetchMeetingTypes(org.id)
-      .then((res) => {
-        this.meetingTypesOk = res.length > 0
-        // TODO ML support i18n mapping the description
-        this.meetingTypes = res.filter((t) => [4, 5].indexOf(t.typeId) === -1)
-        if (res.length) {
-          this.form.get('meetingTypeId').setValue(res[0])
-        }
+    try {
+      const preference = await this.orgPreference.getSingle({
+        id: org.id
       })
-      .catch(() =>
-        this.notifier.error(_('NOTIFY.ERROR.RETRIEVING_MEETING_TYPES'))
+
+      this.shouldDisplayAddress =
+        preference.scheduling === undefined ||
+        (preference.scheduling?.address?.display?.enabled &&
+          !preference.scheduling.disabledFor?.includes(
+            this.context.user.accountType.id as AccountTypeIds
+          ))
+
+      const meetingTypes = await this.dataService.fetchMeetingTypes(org.id)
+
+      this.meetingTypesOk = meetingTypes.length > 0
+      // TODO ML support i18n mapping the description
+      this.meetingTypes = meetingTypes.filter(
+        (t) => [4, 5].indexOf(t.typeId) === -1
       )
 
-    this.selectedOrg = org
-    this.checkAttendeesAccessbility()
+      if (meetingTypes.length) {
+        this.form.get('meetingTypeId').setValue(meetingTypes[0])
+      }
+
+      this.form.get('location').patchValue({
+        ...org.address,
+        streetAddress: org.address.street
+      })
+      this.selectedOrg = org
+      this.checkAttendeesAccessbility()
+    } catch (err) {
+      this.notifier.error(err)
+    }
   }
 
   meetingTypeChanged(type): void {

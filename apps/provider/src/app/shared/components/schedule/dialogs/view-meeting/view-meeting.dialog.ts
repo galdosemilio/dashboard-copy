@@ -24,10 +24,12 @@ import {
 import { _, FormUtils } from '@app/shared/utils'
 import {
   AccountAccessData,
+  AccountTypeIds,
   AccSingleResponse,
   AddAttendeeRequest,
   AddMeetingRequest,
   AttendanceStatusEntry,
+  OrganizationPreference,
   UpdateAttendanceRequest
 } from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
@@ -89,6 +91,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
   today: moment.Moment = moment().startOf('day')
   translations: any
   selectedMeetingType: MeetingTypeWithColor
+  shouldDisplayAddress: boolean = true
 
   constructor(
     private account: AccountProvider,
@@ -101,6 +104,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     private formUtils: FormUtils,
     private notify: NotifierService,
     private organization: OrganizationProvider,
+    private organizationPreference: OrganizationPreference,
     private router: Router,
     private schedule: Schedule,
     private translate: TranslateService
@@ -112,12 +116,6 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     this.initialize()
     this.initTranslations()
     this.setupAutocomplete()
-
-    this.form.controls.meetingTypeId.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe((meetingType) => {
-        this.selectedMeetingType = meetingType
-      })
   }
 
   async onSubmit(recreate: boolean = this.editMode === 'recurring') {
@@ -530,9 +528,26 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     try {
       this.currentAccount = this.context.user
       this.meeting = meeting
+      const preference = await this.organizationPreference.getSingle({
+        id: meeting.organization.id
+      })
+
+      this.shouldDisplayAddress =
+        preference.scheduling === undefined ||
+        (preference.scheduling?.address?.display?.enabled &&
+          !preference.scheduling.disabledFor?.includes(
+            this.context.user.accountType.id as AccountTypeIds
+          ))
+
       this.createForm()
       this.subscribeToEvents()
       this.resetForm(meeting)
+
+      this.form.controls.meetingTypeId.valueChanges
+        .pipe(untilDestroyed(this))
+        .subscribe((meetingType) => {
+          this.selectedMeetingType = meetingType
+        })
     } catch (error) {
       this.notify.error(error)
     }

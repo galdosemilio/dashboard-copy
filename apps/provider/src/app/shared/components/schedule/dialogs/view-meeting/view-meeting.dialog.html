@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <div formGroupName="location" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                <div formGroupName="location" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px" *ngIf="shouldDisplayAddress">
                     <div fxFlex="49%">
                         <mat-form-field fxFlex>
                             <input matInput formControlName="streetAddress" [placeholder]="'BOARD.STREET' | translate">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
 
-                <div formGroupName="location" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px">
+                <div formGroupName="location" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="35px" *ngIf="shouldDisplayAddress">
                     <div fxFlex="49%">
                         <mat-form-field fxFlex>
                             <input matInput formControlName="state" [placeholder]="'BOARD.STATE' | translate">
@@ -238,15 +238,15 @@
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="35px">
-                <div fxFlex="49%" *ngIf="meeting.location">
-                    <h4>{{ 'BOARD.ADDRESS' | translate }}</h4>
-                    <p>{{ meeting.location.streetAddress }}, {{ meeting.location.city }} ({{ meeting.location.country }})</p>
-                </div>
-                <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
-                    <h4>{{ 'BOARD.FREQUENCY' | translate }}</h4>
-                    <p *ngIf="meeting.recurring">{{'BOARD.RECURRING' | translate}}</p>
-                    <p *ngIf="!meeting.recurring">{{'BOARD.SINGLE_DAY' | translate}}</p>
-                </div>
+                    <div fxFlex="49%" *ngIf="meeting.location && shouldDisplayAddress">
+                        <h4>{{ 'BOARD.ADDRESS' | translate }}</h4>
+                        <p>{{ meeting.location.streetAddress }}, {{ meeting.location.city }} ({{ meeting.location.country }})</p>
+                    </div>
+                    <div fxFlex="49%" fxLayout="column" fxLayoutAlign="start stretch">
+                        <h4>{{ 'BOARD.FREQUENCY' | translate }}</h4>
+                        <p *ngIf="meeting.recurring">{{'BOARD.RECURRING' | translate}}</p>
+                        <p *ngIf="!meeting.recurring">{{'BOARD.SINGLE_DAY' | translate}}</p>
+                    </div>
                 </div>
 
                 <div *ngIf="meeting.creator" fxLayout="column" fxLayoutAlign="center start">
