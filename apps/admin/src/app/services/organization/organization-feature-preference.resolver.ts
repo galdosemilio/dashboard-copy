@@ -15,6 +15,8 @@ import {
   MessagingPreference,
   MessagingPreferenceSingle,
   OrganizationProvider,
+  OrgGetSchedulePreferenceRequest,
+  OrgSchedulePreferencesResponse,
   RPM,
   RPMPreferenceSingle,
   Sequence
@@ -44,7 +46,8 @@ export class OrganizationFeaturePreferenceResolver
           this.resolveCommunicationPreference({ organization: id }),
           this.resolveSequencesPreference({ organization: id }),
           this.resolveRPMPreference({ organization: id }),
-          this.resolveFileVaultPreference({ organization: id })
+          this.resolveFileVaultPreference({ organization: id }),
+          this.resolveSchedulePreference({ organization: id })
         ])
 
         const resolvedPrefs = {
@@ -54,7 +57,8 @@ export class OrganizationFeaturePreferenceResolver
           communicationPrefs: featurePreferences[3],
           sequencePrefs: featurePreferences[4],
           rpmPrefs: featurePreferences[5],
-          fileVaultPrefs: featurePreferences[6]
+          fileVaultPrefs: featurePreferences[6],
+          schedulePrefs: featurePreferences[7]
         }
         resolve(resolvedPrefs)
       } catch (error) {
@@ -152,6 +156,18 @@ export class OrganizationFeaturePreferenceResolver
     return new Promise<GetSeqOrgPreferenceResponse>(async (resolve) => {
       try {
         resolve(await this.sequence.getSeqOrgPreferenceByOrg(request))
+      } catch (error) {
+        resolve(undefined)
+      }
+    })
+  }
+
+  private resolveSchedulePreference(
+    request: OrgGetSchedulePreferenceRequest
+  ): Promise<OrgSchedulePreferencesResponse> {
+    return new Promise<OrgSchedulePreferencesResponse>(async (resolve) => {
+      try {
+        resolve(await this.organization.getSchedulePreference(request))
       } catch (error) {
         resolve(undefined)
       }

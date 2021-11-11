@@ -26,6 +26,7 @@ export class FeatureToggleInputComponent
   @Input() label: string
   @Input() popupDescription?: { title: string; description: string }
   @Input() subLabel?: string
+  @Input() isConfigureOption?: boolean
   @Input() zendeskLink?: string
   @Input()
   set readonly(readonly: boolean) {

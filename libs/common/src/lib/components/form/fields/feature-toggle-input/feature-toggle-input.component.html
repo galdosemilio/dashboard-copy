@@ -21,8 +21,9 @@
   <div *ngIf="inheritable; else toggles" fxFlex="29%" fxLayout="column" fxLayoutAlign="start end">
     <mat-form-field>
       <mat-select formControlName="active">
-        <mat-option [value]="true">{{ 'GLOBAL.ENABLED' | translate }}</mat-option>
-        <mat-option [value]="false">{{ 'GLOBAL.DISABLED' | translate }}</mat-option>
+        <mat-option *ngIf="isConfigureOption" [value]="true">{{ 'GLOBAL.CONFIGURED' | translate }}</mat-option>
+        <mat-option *ngIf="!isConfigureOption" [value]="true">{{ 'GLOBAL.ENABLED' | translate }}</mat-option>
+        <mat-option *ngIf="!isConfigureOption" [value]="false">{{ 'GLOBAL.DISABLED' | translate }}</mat-option>
         <mat-option [value]="'inherit'">{{ 'GLOBAL.INHERIT' | translate }}</mat-option>
       </mat-select>
     </mat-form-field>

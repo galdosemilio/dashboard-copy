@@ -114,4 +114,40 @@
       </ccr-organizations-label-selector>
     </div>
   </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-schedule"
+    [inheritable]="featureSettings.schedule.isInheritable"
+    [isConfigureOption]="featureSettings.schedule.isConfigureOption"
+    [label]="'GLOBAL.SCHEDULING' | translate"
+    [subLabel]="(featureSettings.schedule.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.schedule.inheritedFrom}"
+    formControlName="schedule"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <ng-container *ngIf="form?.value.schedule">
+    <mat-grid-tile>
+      <ccr-feature-toggle-input
+      data-cy="org-settings-section-features-schedule-primary"
+      [inheritable]="featureSettings.scheduleIsPrimary.isInheritable"
+      [label]="'GLOBAL.SCHEDULING_PRIMARY' | translate"
+      formControlName="scheduleIsPrimary"></ccr-feature-toggle-input>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <ccr-feature-toggle-input
+      data-cy="org-settings-section-features-schedule-address-display-providers"
+      [inheritable]="featureSettings.scheduleAddressDisplayProviders.isInheritable"
+      [label]="'GLOBAL.SCHEDULING_ADDRESS_DISPLAY_PROVIDERS' | translate"
+      formControlName="scheduleAddressDisplayProviders"></ccr-feature-toggle-input>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <ccr-feature-toggle-input
+      data-cy="org-settings-section-features-schedule-address-display-patients"
+      [inheritable]="featureSettings.scheduleAddressDisplayPatients.isInheritable"
+      [label]="'GLOBAL.SCHEDULING_ADDRESS_DISPLAY_PATIENTS' | translate"
+      formControlName="scheduleAddressDisplayPatients"></ccr-feature-toggle-input>
+    </mat-grid-tile>
+  </ng-container>
 </mat-grid-list>

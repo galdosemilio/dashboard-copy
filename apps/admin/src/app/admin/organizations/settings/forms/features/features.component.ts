@@ -8,7 +8,8 @@ import {
   OrganizationPreference,
   RPM,
   Sequence,
-  NamedEntity
+  NamedEntity,
+  AccountTypeIds
 } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
@@ -22,6 +23,7 @@ interface FeatureSettingsEntry {
   isInheritable: boolean
   inheritedFrom?: NamedEntity
   prefRoute: string
+  isConfigureOption?: boolean
 }
 
 @UntilDestroy()
@@ -87,6 +89,23 @@ export class FeaturesComponent implements OnDestroy, OnInit {
     autoEnroll: {
       isInheritable: false,
       prefRoute: 'autoEnroll'
+    },
+    schedule: {
+      isInheritable: true,
+      isConfigureOption: true,
+      prefRoute: 'schedulePrefs'
+    },
+    scheduleIsPrimary: {
+      isInheritable: false,
+      prefRoute: 'scheduleIsPrimary'
+    },
+    scheduleAddressDisplayProviders: {
+      isInheritable: false,
+      prefRoute: 'scheduleAddressDisplayProviders'
+    },
+    scheduleAddressDisplayPatients: {
+      isInheritable: false,
+      prefRoute: 'scheduleAddressDisplayPatients'
     }
   }
 
@@ -258,6 +277,59 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           : Promise.resolve()
       )
 
+      promises.push(
+        this.featurePrefs.schedulePrefs &&
+          this.featurePrefs.schedulePrefs.id === this.orgId
+          ? formValue.schedule === null
+            ? this.organization.deleteSchedulePreference(this.orgId)
+            : this.organization.updateSchedulePreference({
+                organization: this.orgId,
+                disabledFor:
+                  (!formValue.scheduleAddressDisplayProviders &&
+                    !formValue.scheduleAddressDisplayPatients) ||
+                  (formValue.scheduleAddressDisplayProviders &&
+                    formValue.scheduleAddressDisplayPatients)
+                    ? []
+                    : formValue.scheduleAddressDisplayProviders
+                    ? [AccountTypeIds.Client]
+                    : [AccountTypeIds.Provider],
+                isPrimary: formValue.scheduleIsPrimary,
+                address: {
+                  display: {
+                    enabled:
+                      formValue.scheduleAddressDisplayProviders ||
+                      formValue.scheduleAddressDisplayPatients
+                        ? true
+                        : false
+                  }
+                }
+              })
+          : formValue.schedule !== null
+          ? this.organization.createSchedulePreference({
+              organization: this.orgId,
+              disabledFor:
+                (!formValue.scheduleAddressDisplayProviders &&
+                  !formValue.scheduleAddressDisplayPatients) ||
+                (formValue.scheduleAddressDisplayProviders &&
+                  formValue.scheduleAddressDisplayPatients)
+                  ? []
+                  : formValue.scheduleAddressDisplayProviders
+                  ? [AccountTypeIds.Client]
+                  : [AccountTypeIds.Provider],
+              isPrimary: formValue.scheduleIsPrimary,
+              address: {
+                display: {
+                  enabled:
+                    formValue.scheduleAddressDisplayProviders ||
+                    formValue.scheduleAddressDisplayPatients
+                      ? true
+                      : false
+                }
+              }
+            })
+          : Promise.resolve()
+      )
+
       const promiseValues = await Promise.all(promises)
 
       this.refreshFeaturePrefsObject(
@@ -286,6 +358,12 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         'rpmPrefs'
       )
 
+      this.refreshFeaturePrefsObject(
+        formValue.schedule,
+        promiseValues[8],
+        'schedulePrefs'
+      )
+
       this.refreshFeatureSettingsObject()
 
       this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
@@ -307,7 +385,11 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       rpm: [null],
       sequences: [null],
       useAutoThreadParticipation: [null],
-      videoconference: [null]
+      videoconference: [null],
+      schedule: [null],
+      scheduleIsPrimary: [null],
+      scheduleAddressDisplayProviders: [null],
+      scheduleAddressDisplayPatients: [null]
     })
 
     if (this.featurePrefs) {
@@ -364,7 +446,39 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         autoEnrollClientLabelId: this.clientPackages.slice(),
         patientAutoUnenroll: this.featurePrefs.associationPrefs
           ? this.featurePrefs.associationPrefs.patientAutoUnenroll
-          : false
+          : false,
+        schedule:
+          this.featurePrefs.schedulePrefs &&
+          this.featurePrefs.schedulePrefs.id === this.orgId
+            ? true
+            : null,
+        scheduleIsPrimary:
+          this.featurePrefs.schedulePrefs &&
+          this.featurePrefs.schedulePrefs.id === this.orgId
+            ? this.featurePrefs.schedulePrefs.isPrimary
+            : true,
+        scheduleAddressDisplayProviders:
+          this.featurePrefs.schedulePrefs &&
+          this.featurePrefs.schedulePrefs.id === this.orgId
+            ? this.featurePrefs.schedulePrefs.disabledFor &&
+              this.featurePrefs.schedulePrefs.disabledFor.includes(
+                AccountTypeIds.Provider
+              )
+              ? false
+              : this.featurePrefs.schedulePrefs.address?.display?.enabled ??
+                true
+            : true,
+        scheduleAddressDisplayPatients:
+          this.featurePrefs.schedulePrefs &&
+          this.featurePrefs.schedulePrefs.id === this.orgId
+            ? this.featurePrefs.schedulePrefs.disabledFor &&
+              this.featurePrefs.schedulePrefs.disabledFor.includes(
+                AccountTypeIds.Client
+              )
+              ? false
+              : this.featurePrefs.schedulePrefs.address?.display?.enabled ??
+                true
+            : true
       })
     }
 
@@ -390,6 +504,10 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         this.featurePrefs[propertyName] = {
           ...this.featurePrefs[propertyName],
           ...promiseValue,
+          id:
+            propertyName === 'schedulePrefs'
+              ? this.orgId
+              : this.featurePrefs[propertyName]?.id,
           organization: { id: this.orgId }
         }
         break
@@ -413,7 +531,7 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         return
       }
 
-      const pref: { organization?: NamedEntity } = get(
+      const pref: { id?: string; organization?: NamedEntity } = get(
         this.featurePrefs,
         setting.prefRoute
       )
@@ -422,10 +540,18 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         return
       }
 
+      const inheritedFrom =
+        key === 'schedule'
+          ? pref.id !== this.orgId
+            ? { id: pref.id, name: '' }
+            : null
+          : pref.organization?.id !== this.orgId
+          ? pref.organization
+          : null
+
       updates[key] = {
         ...setting,
-        inheritedFrom:
-          pref.organization?.id !== this.orgId ? pref.organization : null
+        inheritedFrom
       }
     })
 

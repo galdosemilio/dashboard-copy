@@ -2347,10 +2347,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@coachcare/sdk@15.6.2":
-  version "15.6.2"
-  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/15.6.2/c0a6c84531f048640ab258d87b09ac1ed38946bd7004d9faf8108117696f1b5c#ebed2c86c0aa9c949470bea7c66183fd5be8579c"
-  integrity sha512-tjQESKgzKfF1lxUcNJ3CLXFkySmfIdYGHeMRXRBfY1I8buc4fZNE3fV/NQ+s9+UN11ZelBNw5TQ8b5wxsHuTiA==
+"@coachcare/sdk@^16.0.1":
+  version "16.0.1"
+  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/16.0.1/ca2ddb1d1164ef02efe5f7bccbb427dd031e2cf82f6e32ece888b5f0441859ae#d21cc00c41ecf90e626a81c87b9432927ba4e3c0"
+  integrity sha512-ZrTGZlUVB+rKXeMj1VFWR9Af2Y4tvd37FHziV+hMLjNCRdzaF3XvWK+qnqamlhw8OdgifK5KYNq9OGqVVPUpqA==
   dependencies:
     "@types/qs" "^6.9.6"
     "@types/twilio-video" "^2.7.3"

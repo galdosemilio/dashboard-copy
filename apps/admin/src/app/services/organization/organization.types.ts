@@ -5,6 +5,7 @@ import {
   MessagingPreferenceSingle,
   OrganizationPreferenceSingle,
   OrganizationSingle,
+  OrgSchedulePreferencesResponse,
   RPMPreferenceSingle
 } from '@coachcare/sdk'
 
@@ -20,6 +21,7 @@ export interface OrganizationFeaturePrefs {
   onboarding: any
   rpmPrefs: RPMPreferenceSingle
   sequencePrefs: GetSeqOrgPreferenceResponse
+  schedulePrefs: OrgSchedulePreferencesResponse
 }
 
 export interface OrganizationResolved {
