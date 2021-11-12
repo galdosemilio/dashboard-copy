@@ -1,3 +1,22 @@
+# [1.50.0](https://github.com/coachcare/dashboard/compare/v1.49.0...v1.50.0) (2021-11-12)
+
+
+### Bug Fixes
+
+* add phone number add bp for download patient [FRON-2448] ([efc109e](https://github.com/coachcare/dashboard/commit/efc109ef456660fcfd1061755511d22c9a2d4912))
+* adjust form PDF for collapsed question for unanswered [FRON-2449] ([739b02f](https://github.com/coachcare/dashboard/commit/739b02fb832317cb091fd9c6ce987e9b49d0d584))
+* adjusted behavior of next-meeting component [HOTFIX] ([c812c76](https://github.com/coachcare/dashboard/commit/c812c761291c3af6b697aa8d68c6ff5d3895ce5b))
+* check unaccessible attendees with org hierarchy [FRON-2443] ([f5dee9c](https://github.com/coachcare/dashboard/commit/f5dee9c77353b6ec510aa2895ff82082fb164fe9))
+* presented next meeting component [FRON-2450] ([c2bf268](https://github.com/coachcare/dashboard/commit/c2bf2688e248c21da96bc9144f5ac59d232e346e))
+* show popup meeting dialog when removing a patient [FRON-2444] ([2c966cd](https://github.com/coachcare/dashboard/commit/2c966cd4d2d423389f4b0e051c1affa0eff67a50))
+* tied step edition state to transition edition state [FRON-2359] ([103d843](https://github.com/coachcare/dashboard/commit/103d843f951a5a9c0ea0bffa7b344d0497cc288e))
+
+
+### Features
+
+* added step exploration on review page [FRON-2435] ([856bf31](https://github.com/coachcare/dashboard/commit/856bf3118da173702ed6a6ece4dcd453b5bf1383))
+* added validation for account info page [FRON-2438] ([8c19f86](https://github.com/coachcare/dashboard/commit/8c19f867e12ffb972cf7b7d1e195d130da72847e))
+
 # [1.49.0](https://github.com/coachcare/dashboard/compare/v1.48.1...v1.49.0) (2021-11-05)
 
 
