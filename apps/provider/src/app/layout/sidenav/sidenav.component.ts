@@ -57,6 +57,7 @@ export class SidenavComponent implements OnInit {
     private store: Store<CCRConfig>,
     private translate: TranslateService
   ) {
+    this.getStoreNavName = this.getStoreNavName.bind(this)
     this.fetchStoreLink = this.fetchStoreLink.bind(this)
     this.updateUnread = this.updateUnread.bind(this)
 
@@ -273,7 +274,7 @@ export class SidenavComponent implements OnInit {
           },
           {
             code: SidenavOptions.STORE,
-            navName: _('SIDENAV.STORE'),
+            navName: this.getStoreNavName(),
             navLink: this.DEFAULT_STORE_LINK,
             icon: 'shopping_cart',
             isAllowedForPatients: true,
@@ -570,6 +571,15 @@ export class SidenavComponent implements OnInit {
         message: 'Failed to load the clinic logo'
       }
     })
+  }
+
+  private getStoreNavName(): string {
+    const storeName = resolveConfig(
+      'SIDENAV.STORE_NAV_NAME',
+      this.context.organization
+    )
+
+    return storeName || _('SIDENAV.STORE')
   }
 
   private async fetchStoreLink(): Promise<string> {

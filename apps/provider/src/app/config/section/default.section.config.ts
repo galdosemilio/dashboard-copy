@@ -6,6 +6,7 @@ import { PackageEnrollComponent } from '@app/shared/components/package-enroll/pa
 import { CompositionColumns, JournalTabs, SidenavOptions } from './consts'
 import { SectionConfigDetails } from './models/section.details'
 import { DefaultDashboardComponent } from '@app/dashboard/panel'
+import { _ } from '@app/shared/utils'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
@@ -47,7 +48,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM],
     PATIENT_HIDDEN_OPTIONS: [SidenavOptions.TEST_RESULTS, SidenavOptions.STORE],
     PATIENT_SHOWN_OPTIONS: [],
-    FETCH_STORE_LINK: false
+    FETCH_STORE_LINK: false,
+    STORE_NAV_NAME: _('SIDENAV.STORE')
   },
   COHORT_REPORTS: {
     SHOW_COHORT_WEIGHT_LOSS_REPORT: false,
@@ -113,7 +115,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM],
     PATIENT_HIDDEN_OPTIONS: [SidenavOptions.TEST_RESULTS, SidenavOptions.STORE],
     PATIENT_SHOWN_OPTIONS: [],
-    FETCH_STORE_LINK: false
+    FETCH_STORE_LINK: false,
+    STORE_NAV_NAME: _('SIDENAV.STORE')
   },
   COHORT_REPORTS: {
     SHOW_COHORT_WEIGHT_LOSS_REPORT: false,

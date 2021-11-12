@@ -213,7 +213,8 @@ app-menu-wellcore {
           overflow: hidden;
           text-overflow: ellipsis;
           transition: inherit;
-          white-space: nowrap;
+          white-space: pre-wrap;
+          line-height: initial;
           @media #{$medium-only} {
             display: none;
           }
