@@ -8,6 +8,11 @@ class="ccr-table ccr-expand-table ccr-table-stats">
   <table ccrTableSort>
     <thead>
       <tr>
+        <td class="column-id">
+          <div>
+            <span>{{ 'GLOBAL.ID' | translate }}</span>
+          </div>
+        </td>
         <td class="column-firstname">
           <div>
             <ccr-table-sort-header property="firstName">
@@ -102,8 +107,33 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       'row-bottom-border': row.level > 1,
       'last-of-group': row.isLastOfGroup
     }">
-      <td class="column-firstname" [attr.colspan]="row.level >= 1 ? 10 : 1">
+      <td class="column-id" [attr.colspan]="row.level >= 1 ? 11 : 1">
+        <div
+          *ngIf="row.level < 1"
+          [ngClass]="{ 'clickable': row.level === 0, 'non-clickable': row.level > 0, 'non-empty': !row.isEmpty && row.level < 2 }"
+          class="expandable"
+          fxLayoutAlign="start center">
+        <i
+          [class.active]="row.isExpanded"
+          (click)="toggleRow(row)"
+          aria-hidden="true"
+          class="material-icons">
+        </i>
+        <span>{{ row.id }}</span>
+        </div>
+
+
         <app-patient-firstname-cell
+          *ngIf="row.level >= 1"
+          [row]="row"
+          (toggleRow)="toggleRow($event)"
+          (showDieter)="showDieter($event)"
+          (onLoadMore)="onLoadMore($event, i)">
+        </app-patient-firstname-cell>
+      </td>
+      <td class="column-firstname">
+        <app-patient-firstname-cell
+          *ngIf="row.level < 1"
           [row]="row"
           (toggleRow)="toggleRow($event)"
           (showDieter)="showDieter($event)"

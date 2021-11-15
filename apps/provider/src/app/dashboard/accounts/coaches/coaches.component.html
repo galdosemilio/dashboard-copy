@@ -21,6 +21,12 @@
 
   <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="space-between center">
     <!-- Export CSV button here -->
+    <button mat-button fxFlex="nogrow" class="ccr-align-center"
+    [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()" fxHide.xs
+    data-cy="download-csv-button">
+      {{ 'REPORTS.EXPORT_CSV' | translate }}
+      <mat-icon>file_download</mat-icon>
+    </button>
 
     <ccr-paginator fxFlex="nogrow" #paginator
       [length]="source.total"

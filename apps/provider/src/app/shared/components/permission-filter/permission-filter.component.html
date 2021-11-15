@@ -1,0 +1,36 @@
+<div [formGroup]="form">
+  <button mat-button [matMenuTriggerFor]="menu">
+    <span>{{ 'BOARD.FILTER_BY_PERMISSION' | translate }}</span>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu" [overlapTrigger]="true" xPosition="before">
+    <div class="mat-menu-content" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
+        <mat-checkbox
+        (click)="$event.stopPropagation();"
+        formControlName="admin">
+          {{ 'PERM.ADMIN' | translate }}
+        </mat-checkbox>
+        <mat-checkbox
+        (click)="$event.stopPropagation();"
+        formControlName="viewAll">
+          {{ 'PERM.ACCESSALL' | translate }}
+        </mat-checkbox>
+        <mat-checkbox
+        (click)="$event.stopPropagation();"
+        formControlName="clientPhi">
+          {{ 'PERM.CLIENT_PHI' | translate }}
+        </mat-checkbox>
+      </div>
+
+      <div class="action-button-container">
+        <button
+        [innerHTML]="'CALL.APPLY' | translate"
+        (click)="onApplyFilter();"
+        class="quick-select-button"
+        mat-stroked-button></button>
+      </div>
+    </div>
+  </mat-menu>
+</div>

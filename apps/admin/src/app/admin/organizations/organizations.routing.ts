@@ -4,6 +4,7 @@ import {
   OrganizationPreferenceResolver,
   OrganizationResolver
 } from '@board/services'
+import { CcrOrganizationTreePageComponent } from '@coachcare/common/components'
 
 import { OrganizationActiveCampaignComponent } from './active-campaign'
 import { OrganizationsDisplayComponent } from './display'
@@ -12,7 +13,6 @@ import { OrganizationsFormComponent } from './form'
 import { LabelsAssociationsComponent } from './labels-associations'
 import { OrganizationsListComponent } from './list'
 import { OrganizationsSettingsComponent } from './settings'
-import { OrganizationsTreeComponent } from './tree'
 
 export const routes: Routes = [
   {
@@ -60,7 +60,7 @@ export const routes: Routes = [
       },
       {
         path: 'tree',
-        component: OrganizationsTreeComponent
+        component: CcrOrganizationTreePageComponent
       },
       {
         path: 'marketing',

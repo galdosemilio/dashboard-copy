@@ -13,4 +13,6 @@ export * from './call-control.service'
 
 export * from './i18n/loader'
 
+export * from './organization'
+
 export { AppProviders } from './app.providers'

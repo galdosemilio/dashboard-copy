@@ -1,11 +1,14 @@
 <div class="ccr-heading">
   <div class="ccr-name" fxLayout="row" fxLayoutAlign.xs="center">
     <ccr-avatar size="bigger" [account]="profile?.id" [editable]="true"></ccr-avatar>
-    <h2>
-      {{'BOARD.PROFILE' | translate}}
-
-      <ccr-help-link [link]="zendeskLink"></ccr-help-link>
-    </h2>
+    <div fxLayout="column" fxLayoutAlign="center start">
+      <h2>
+        {{'BOARD.PROFILE' | translate}}
+        <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+      </h2>
+      <p>{{ 'GLOBAL.ID' | translate }} {{ profile.id }}</p>
+      <ccr-last-login [accountId]="profile.id" [routerLinkArgs]="['.', {s: 'login-history'}]"></ccr-last-login>
+    </div>
   </div>
 </div>
 

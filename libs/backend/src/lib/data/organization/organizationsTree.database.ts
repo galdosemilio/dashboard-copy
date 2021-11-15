@@ -20,11 +20,11 @@ export class OrganizationsTreeDatabase {
 
   rootLevelNodes = [
     {
-      nodeName: _('ADMIN.ORGS.PARENT_ORG'),
+      nodeName: _('SHARED.ORGS.PARENT_ORG'),
       nodeType: NodeTypes.parentNode
     },
     {
-      nodeName: _('ADMIN.ORGS.CHILD_ORGS'),
+      nodeName: _('SHARED.ORGS.CHILD_ORGS'),
       nodeType: NodeTypes.childNode
     }
   ]

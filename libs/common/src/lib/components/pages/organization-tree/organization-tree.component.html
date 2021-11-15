@@ -14,13 +14,16 @@
           <ng-container *ngIf="isEmpty(node)">
             <span *ngIf="node.nodeName === 'NO_CHILD'; then no_child else no_parent"></span>
             <ng-template #no_child>
-              {{ 'ADMIN.ORGS.NO_CHILD_CLINIC' | translate }}
+              {{ 'SHARED.ORGS.NO_CHILD_CLINIC' | translate }}
             </ng-template>
             <ng-template #no_parent>
-              {{ 'ADMIN.ORGS.NO_PARENT_CLINIC' | translate }}
+              {{ 'SHARED.ORGS.NO_PARENT_CLINIC' | translate }}
             </ng-template>
           </ng-container>
-        <button mat-icon-button *ngIf="treeControl.getLevel(node) && !isEmpty(node)" (click)="onDelete(node)">
+        <button
+        *ngIf="!readonly && treeControl.getLevel(node) && !isEmpty(node)"
+        (click)="onDelete(node)"
+        mat-icon-button>
           <mat-icon>close</mat-icon>
         </button>
       </mat-tree-node>
@@ -37,14 +40,19 @@
           </mat-icon>
         </button>
         {{ node.nodeName | translate }}
-        <a mat-icon-button color="primary" class="ccr-icon-button" (click)="createDialog(node)">
+        <a
+          *ngIf="!readonly"
+          (click)="createDialog(node)"
+          class="ccr-icon-button"
+          color="primary"
+          mat-icon-button>
           <mat-icon>add</mat-icon>
         </a>
       </mat-tree-node>
 
       <mat-tree-node *matTreeNodeDef="let node; when: isLoadMore" matTreeNodePadding indent="80">
         <button mat-button (click)="loadMore(node)">
-          {{ 'ADMIN.ORGS.LOAD_MORE' | translate }}
+          {{ 'GLOBAL.LOAD_MORE' | translate }}
         </button>
       </mat-tree-node>
     </mat-tree>

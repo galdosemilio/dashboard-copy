@@ -8,11 +8,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import {
-  OrganizationFeaturePrefs,
-  OrganizationParams,
-  OrganizationRoutes
-} from '@board/services'
+import { OrganizationRoutes } from '@board/services'
 import {
   OrganizationPreference,
   OrganizationPreferenceSingle,
@@ -20,7 +16,11 @@ import {
 } from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
-import { NotifierService } from '@coachcare/common/services'
+import {
+  NotifierService,
+  OrganizationFeaturePrefs,
+  OrganizationParams
+} from '@coachcare/common/services'
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor'
 import * as lodash from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'

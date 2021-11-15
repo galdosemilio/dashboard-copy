@@ -17,6 +17,8 @@
   </div>
 
   <div [formGroup]="filterForm" class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <ccr-permission-filter (onChange)="filterByPermissions($event)" fxFlex="nogrow"></ccr-permission-filter>
+
     <mat-form-field fxFlex>
       <input
       [placeholder]="'BOARD.SEARCH_CLINIC' | translate"

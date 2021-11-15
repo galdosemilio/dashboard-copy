@@ -25,8 +25,6 @@
       "ACTIVE_CAMPAIGN_DISABLED": "הקמפיין פעיל מושבת בשל מרפאת זה ומרפאות הילד שלה.<br><br>כדי להשתמש בו אתה צריך לאפשר את זה קודם.",
       "ACTIVE_CAMPAIGN_IS_INHERITED": "רשימת קמפיינים פעילים זו זמינה למרפאה זו ממרפאת הורים.",
       "ACTIVE_CAMPAIGN_LISTS": "רשימות קמפיין פעילות",
-      "ADD_CHILD_ORG": "הוספת מרפאת בת",
-      "ADD_PARENT_ORG": "הוספת מרפאת אב",
       "ASSOC_ACTIVE_CAMPAIGN": "מבצע עמית פעיל",
       "ASSOC_ALL_PROVIDERS": "למפרע לרשום כל ספקי או מתחת מרפאה זו",
       "ASSOC_ALL_PROVIDERS_CURRENT": "ספק הרשמת {{provider}} ...",
@@ -35,7 +33,6 @@
       "ASSOC_ALL_PROVIDERS_WARNING": "אתה עומד לרשום את כל ספקים ממרפאת זו; פעולה זו עשויה לארוך זמן מה להשלים, אתה בטוח שאתה רוצה להמשיך?",
       "ASSOC_PROVIDER_CAMPAIGN": "למפרע להירשם ספק אחד",
       "BASE_PRICING": "תמחור Base",
-      "CHILD_ORGS": "מרפאת בת",
       "CHURN_DATE": "תאריך נטישה",
       "CREATE_NEW": "יצירת מרפאה",
       "DELETE_LIST_ASSOCIATION": "האגודה רשימת מסעות פרסום מחק פעיל",
@@ -46,16 +43,12 @@
       "ENTITY": "יֵשׁוּת",
       "IS_BILLABLE": "האם לחיוב?",
       "IS_PAYING": "משלם",
-      "LOAD_MORE": "טען עוד",
       "MARKETING_DESCRIPTION": "רשימות קמפיין פעילות אלו קשור או מעל הארגון הזה. כאשר ספקית מתווספת או מתחת הארגון הזה, הם יירשמו אוטומטית ברשימות המוצג להלן.<br><br> ספקים שכבר היו קשור לארגון זה כאשר רשימת הקמפיין הפעיל נוספה לא תירשם באופן אוטומטי. ייתכן בדיעבד ורשם אחד או כל הספקים לתוך רשימות קמפיין פעילות חדש שנוספות על ידי שימוש \"למפרע הרשם ... \" כפתורים.",
       "MOB_APP_QRCODE_ANDROID": "קוד Android Mobile App QR",
       "MOB_APP_QRCODE_DESC": "זהו קוד QR עבור היישום לנייד עבור {{name}} (מזהה {{id}})",
       "MOB_APP_QRCODE_IOS": "iOS Mobile App QR Code",
-      "NO_CHILD_CLINIC": "למרפאה זו אין מרפאת בת",
-      "NO_PARENT_CLINIC": "למרפאה זו אין מרפאת אב",
       "NUMBER_OF_LOCATIONS": "מספר המיקומים",
       "ORGANIZATION": "מרפאה",
-      "PARENT_ORG": "מרפאת אב",
       "PAYING_START_DATE": "תשלום התחלת תאריך",
       "PLAN": "לְתַכְנֵן",
       "RENEWAL_DATE": "תאריך חידוש",
@@ -221,6 +214,7 @@
     "LABEL": "תווית",
     "LANGUAGE": "שפה",
     "LAST_NAME": "שם משפחה",
+    "LOAD_MORE": "לטעון יותר",
     "LOCALE": "אזור",
     "LOCATION": "מיקום",
     "MEASUREMENT": "מדידה",
@@ -588,16 +582,6 @@
       "ENABLE_PROMPT": "האם אתה בטוח שברצונך להפעיל את השלב '{{label}}'?"
     },
     "ORGS": {
-      "CONFIRM_ACTIVATE": "הפעלת המרפאה",
-      "CONFIRM_ACTIVATE_PROMPT": "האם ברצונך להפעיל את הפריט? '{{item}}'?",
-      "CONFIRM_DEACTIVATE": "המרפאה בוטלה",
-      "CONFIRM_DEACTIVATE_PROMPT": "האם ברצונך לבטל את הפריט? '{{item}}'?",
-      "CONFIRM_REMOVE_CHILD": "להסיר את הבת",
-      "CONFIRM_REMOVE_CHILD_PROMPT": "מרפאת הבת תהיה ללא מרפאת אב אחרי המחיקה",
-      "CONFIRM_REMOVE_ORG": "המרפאה לא פעילה",
-      "CONFIRM_REMOVE_ORG_PROMPT": "האם ברצונך לבטל את הפריט? '{{item}}'?",
-      "CONFIRM_REMOVE_PARENT": "הסרת אב",
-      "CONFIRM_REMOVE_PARENT_PROMPT": "מרפאה זו תישאר ללא מרפאת אב אחרי ההסרה",
       "DISOCCIATE": "ניתוק מרפאה",
       "DISOCCIATE_PROMPT": "האם ברצונך לנתק את הפריט? '{{item}}'?"
     }
@@ -705,6 +689,24 @@
       "METRIC": "מטרי",
       "UK": "בריטניה",
       "US": "ארצות הברית"
+    }
+  },
+  "SHARED": {
+    "ORGS": {
+      "ADD_CHILD_ORG": "הוסף מרפאת ילדים",
+      "ADD_PARENT_ORG": "הוסף מרפאת האב",
+      "CHILD_ORGS": "מרפאות ילדים",
+      "CONFIRM_ACTIVATE": "הפעל את הקליניקה",
+      "CONFIRM_ACTIVATE_PROMPT": "האם אתה באמת רוצה להפעיל '{{item}}'?",
+      "CONFIRM_REMOVE_CHILD": "הסר את הילד",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "לארגון הילד לא יהיה הורה לאחר הסרה זו",
+      "CONFIRM_REMOVE_ORG": "בטל קליניק",
+      "CONFIRM_REMOVE_ORG_PROMPT": "האם אתה באמת רוצה לבטל את '{{item}}'?",
+      "CONFIRM_REMOVE_PARENT": "הסר את ההורה",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "לארגון זה לא תהיה ארגון הורה לאחר הסרה זו",
+      "NO_CHILD_CLINIC": "למרפאה הזאת אין מרפאת ילדים",
+      "NO_PARENT_CLINIC": "למרפאה זו אין מרפאת אב.",
+      "PARENT_ORG": "מרפאת האב"
     }
   },
   "SIDENAV": {

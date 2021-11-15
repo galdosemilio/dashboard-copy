@@ -25,8 +25,6 @@
       "ACTIVE_CAMPAIGN_DISABLED": "Campagna attiva è disabilitato per questa clinica e le sue cliniche del bambino.<br><br>Per utilizzarlo è necessario attivare prima.",
       "ACTIVE_CAMPAIGN_IS_INHERITED": "Questo elenco di campagne attive è disponibile per questa clinica da una clinica madre.",
       "ACTIVE_CAMPAIGN_LISTS": "Liste campagna attiva",
-      "ADD_CHILD_ORG": "Aggiungi clinica figlia",
-      "ADD_PARENT_ORG": "Aggiungi clinica madre",
       "ASSOC_ACTIVE_CAMPAIGN": "Associate Active Campaign",
       "ASSOC_ALL_PROVIDERS": "Retroattivamente iscriversi tutti i fornitori pari o inferiore a questa clinica",
       "ASSOC_ALL_PROVIDERS_CURRENT": "Iscrivendosi fornitore {{provider}} ...",
@@ -35,7 +33,6 @@
       "ASSOC_ALL_PROVIDERS_WARNING": "Stai per iscriversi tutti i fornitori di questa clinica; questa operazione può richiedere del tempo per completare, sei sicuro di voler continuare?",
       "ASSOC_PROVIDER_CAMPAIGN": "Retroattivamente iscriversi un provider",
       "BASE_PRICING": "Prezzi Base",
-      "CHILD_ORGS": "Cliniche Figlie",
       "CHURN_DATE": "Churn Data",
       "CREATE_NEW": "Crea Clinica",
       "DELETE_LIST_ASSOCIATION": "Elimina Active Campaign Lista Association",
@@ -46,16 +43,12 @@
       "ENTITY": "Entità",
       "IS_BILLABLE": "È fatturabile?",
       "IS_PAYING": "Sta Pagando",
-      "LOAD_MORE": "Carica Altro",
       "MARKETING_DESCRIPTION": "Queste liste campagna attiva sono associati pari o superiore a questa organizzazione. Quando un fornitore viene aggiunto pari o inferiore a questa organizzazione, saranno automaticamente iscritti nelle liste indicate di seguito.<br><br>E fornitori che sono stati già associati a questa organizzazione quando la lista Active Campaign è stato aggiunto non sarà automaticamente iscritto. Si può retroattiva iscriversi uno o tutti i provider in appena aggiunti liste campagna attiva utilizzando il \"Retroattivamente Iscrizione...\" pulsanti.",
       "MOB_APP_QRCODE_ANDROID": "Android Mobile App QR Code",
       "MOB_APP_QRCODE_DESC": "Questo è il codice QR per l'applicazione mobile per {{name}} (ID {{id}})",
       "MOB_APP_QRCODE_IOS": "iOS Mobile App QR Code",
-      "NO_CHILD_CLINIC": "Questa clinica non ha cliniche figlie",
-      "NO_PARENT_CLINIC": "Questa clinica non ha una clinica madre.",
       "NUMBER_OF_LOCATIONS": "Numero di posizioni",
       "ORGANIZATION": "Clinica",
-      "PARENT_ORG": "Clinica Madre",
       "PAYING_START_DATE": "Pagare Data di Inizio",
       "PLAN": "Piano",
       "RENEWAL_DATE": "Data di Rinnovo",
@@ -221,6 +214,7 @@
     "LABEL": "Fase",
     "LANGUAGE": "Linguaggio",
     "LAST_NAME": "Cognome",
+    "LOAD_MORE": "Carica di più",
     "LOCALE": "",
     "LOCATION": "Posizione",
     "MEASUREMENT": "Misurazioni",
@@ -588,16 +582,6 @@
       "ENABLE_PROMPT": "Sei sicuro di voler abilitare la fase '{{label}}'?"
     },
     "ORGS": {
-      "CONFIRM_ACTIVATE": "Attiva Clinica",
-      "CONFIRM_ACTIVATE_PROMPT": "Vuoi davvero attivare '{{item}}'?",
-      "CONFIRM_DEACTIVATE": "Disattiva Clinica",
-      "CONFIRM_DEACTIVATE_PROMPT": "Vuoi davvero disattivare '{{item}}'?",
-      "CONFIRM_REMOVE_CHILD": "Elimina Figlia",
-      "CONFIRM_REMOVE_CHILD_PROMPT": "L'organizzazione figlia non avrà madre dopo questa eliminazione",
-      "CONFIRM_REMOVE_ORG": "Disattiva Clinica",
-      "CONFIRM_REMOVE_ORG_PROMPT": "Vuoi davvero disattivare '{{item}}'?",
-      "CONFIRM_REMOVE_PARENT": "Elimina Madre",
-      "CONFIRM_REMOVE_PARENT_PROMPT": "Questa organizzazione non avrà organizzazione madre dopo questa eliminazione",
       "DISOCCIATE": "Dissocia Clinica",
       "DISOCCIATE_PROMPT": "Vuoi davvero dissociare '{{item}}'?"
     }
@@ -705,6 +689,24 @@
       "METRIC": "Metrico",
       "UK": "UK",
       "US": "USA"
+    }
+  },
+  "SHARED": {
+    "ORGS": {
+      "ADD_CHILD_ORG": "Aggiungi clinica bambino.",
+      "ADD_PARENT_ORG": "Aggiungi clinica genitore.",
+      "CHILD_ORGS": "Cliniche per bambini",
+      "CONFIRM_ACTIVATE": "Attiva la clinica",
+      "CONFIRM_ACTIVATE_PROMPT": "Vuoi davvero attivare '{{item}}'?",
+      "CONFIRM_REMOVE_CHILD": "Rimuovere il bambino",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "L'organizzazione figlio non avrà genitore dopo questa rimozione",
+      "CONFIRM_REMOVE_ORG": "Disattiva la clinica",
+      "CONFIRM_REMOVE_ORG_PROMPT": "Vuoi davvero disattivare '{{item}}'?",
+      "CONFIRM_REMOVE_PARENT": "Rimuovi Parent.",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "Questa organizzazione non avrà un'organizzazione madre dopo questa rimozione",
+      "NO_CHILD_CLINIC": "Questa clinica non ha una clinica per bambini",
+      "NO_PARENT_CLINIC": "Questa clinica non ha una clinica genitore.",
+      "PARENT_ORG": "Clinica dei genitori"
     }
   },
   "SIDENAV": {

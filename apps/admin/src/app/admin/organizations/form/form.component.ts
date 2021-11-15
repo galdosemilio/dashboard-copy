@@ -9,12 +9,12 @@ import {
 } from '@coachcare/sdk'
 import { FormUtils } from '@coachcare/backend/shared'
 import { _ } from '@coachcare/backend/shared'
-import { NotifierService } from '@coachcare/common/services'
 import {
-  OrganizationDialogs,
-  OrganizationParams,
-  OrganizationRoutes
-} from '@board/services'
+  CcrOrganizationDialogs,
+  NotifierService,
+  OrganizationParams
+} from '@coachcare/common/services'
+import { OrganizationRoutes } from '@board/services'
 import * as moment from 'moment'
 
 @Component({
@@ -38,7 +38,7 @@ export class OrganizationsFormComponent implements OnInit {
     private router: Router,
     private database: OrganizationsDatabase,
     private notifier: NotifierService,
-    private dialogs: OrganizationDialogs,
+    private dialogs: CcrOrganizationDialogs,
     private organization: OrganizationProvider,
     public routes: OrganizationRoutes
   ) {}

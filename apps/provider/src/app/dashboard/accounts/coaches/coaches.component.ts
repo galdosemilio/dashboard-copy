@@ -25,6 +25,8 @@ import { Subject } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import { AccountCreateDialog } from '../dialogs'
 import { CoachesDatabase, CoachesDataSource } from './services'
+import { AccountAccessData } from '@coachcare/sdk'
+import * as moment from 'moment'
 
 @UntilDestroy()
 @Component({
@@ -154,6 +156,96 @@ export class CoachesComponent implements AfterViewInit, OnInit, OnDestroy {
           this.source.refresh()
         }
       })
+  }
+
+  public async downloadCSV(): Promise<void> {
+    try {
+      this.source.isLoading = true
+      this.source.change$.next()
+      const MAX_PER_CSV = 5000
+      const csvAmount = Math.ceil(this.source.totalCount / MAX_PER_CSV)
+
+      if (csvAmount > 1) {
+        this.notifier.info(_('NOTIFY.INFO.MULTIPLE_CSV_FILES'))
+      }
+
+      for (let i = 0; i < csvAmount; ++i) {
+        await this.generateSingleCSV(MAX_PER_CSV, MAX_PER_CSV * i)
+      }
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.source.isLoading = false
+      this.source.change$.next()
+    }
+  }
+
+  private async generateSingleCSV(
+    limit: number,
+    offset: number
+  ): Promise<void> {
+    try {
+      const criteria = {
+        ...this.source.args,
+        limit: limit,
+        offset: offset,
+        organization: this.context.organizationId
+      }
+
+      const res = await this.database.fetchAll(criteria).toPromise()
+      const csvSeparator = ','
+
+      if (!res.data.length) {
+        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+      }
+
+      const orgName = this.context.organization.name.replace(/\s/g, '_')
+      const filename = `${orgName}_Coach_List.csv`
+      let csv = ''
+      csv += 'PATIENT LIST\r\n'
+      csv +=
+        'ID' +
+        csvSeparator +
+        'First Name' +
+        csvSeparator +
+        'Last Name' +
+        csvSeparator +
+        'Email' +
+        csvSeparator +
+        'Onboarding Date' +
+        '\r\n'
+
+      res.data.forEach((entry: AccountAccessData) => {
+        const onboardingOrg = entry.organizations.find(
+          (org) => org.accessType === 'association'
+        )
+
+        csv +=
+          `"${entry.id}"` +
+          csvSeparator +
+          `"${entry.firstName}"` +
+          csvSeparator +
+          `"${entry.lastName}"` +
+          csvSeparator +
+          `"${entry.email}"` +
+          csvSeparator +
+          `"${
+            onboardingOrg ? moment(onboardingOrg.createdAt).toISOString() : '-'
+          }"` +
+          '\r\n'
+      })
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.setAttribute('visibility', 'hidden')
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      return Promise.resolve()
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
   private recoverPagination(): void {

@@ -19,6 +19,7 @@ type ClinicComponentSection =
   | 'phases'
   | 'settings'
   | 'billable-services'
+  | 'hierarchy'
 
 @UntilDestroy()
 @Component({

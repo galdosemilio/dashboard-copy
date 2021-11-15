@@ -35,7 +35,15 @@
   fxLayoutGap.xs="10px">
     <div class="ccr-name" fxFlex="auto" fxLayout="row" fxLayoutAlign="start">
       <ccr-avatar size="bigger" [account]="dieter?.id"></ccr-avatar>
-      <h2>{{ dieter?.firstName | capitalize }} {{ dieter?.lastName | capitalize }}</h2>
+      <div fxLayout="column" fxLayoutAlign="center start">
+        <h2>{{ dieter?.firstName | capitalize }} {{ dieter?.lastName | capitalize }}</h2>
+        <p>{{ 'GLOBAL.ID' | translate }} {{ dieter?.id }}</p>
+        <ccr-last-login
+          *ngIf="dieter"
+          [accountId]="dieter.id"
+          [routerLinkArgs]="['settings', {s: 'login-history'}]">
+        </ccr-last-login>
+      </div>
     </div>
     <div fxFlex="nogrow" fxFlex.xs="grow"
     fxLayout="row" fxLayout.xs="column"

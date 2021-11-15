@@ -37,6 +37,7 @@ import {
 import { LoginHistoryComponent } from './login-history'
 import { CcrMessagesChatInfoComponent } from './messages-chat-info'
 import { CcrMessagesComponent } from './messages/messages.component'
+import { CcrLastLoginComponent } from './last-login'
 import { CcrMicLevelIndicatorComponent } from './mic-level-indicator'
 import { CcrNextMeetingComponent } from './next-meeting'
 import { OrganizationSearchComponent } from './organization-search'
@@ -72,6 +73,7 @@ import {
   MeetingsDataSource,
   MeetingsDatabase
 } from './schedule'
+import { CcrPermissionFilterComponent } from './permission-filter'
 
 export {
   AlertIconComponent,
@@ -90,6 +92,7 @@ export {
   CcrConnectionStatusComponent,
   // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
+  CcrLastLoginComponent,
   CcrMessagesComponent,
   CcrMicLevelIndicatorComponent,
   CcrSearchSelectorComponent,
@@ -98,6 +101,7 @@ export {
   CcrTimeframeSelectorComponent,
   CcrTinInputComponent,
   CcrCallControlComponent,
+  CcrPermissionFilterComponent,
   CountrySelectorComponent,
   FormSearchComponent,
   HeightFormFieldComponent,
@@ -149,11 +153,13 @@ export const CmpComponents = [
   CcrCallControlComponent,
   // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
+  CcrLastLoginComponent,
   CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
   CcrMicLevelIndicatorComponent,
   CcrNextMeetingComponent,
   CcrPageSizeSelectorComponent,
+  CcrPermissionFilterComponent,
   CcrSearchSelectorComponent,
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,

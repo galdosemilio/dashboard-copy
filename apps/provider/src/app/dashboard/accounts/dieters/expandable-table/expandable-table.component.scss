@@ -14,7 +14,13 @@ app-dieters-expandable-table {
   table {
     min-width: 100%;
     .column {
+      &-id {
+        max-width: 100px !important;
+        min-width: 100px !important;
+      }
+
       &-firstname,
+      &-id,
       &-lastname {
         max-width: 200px;
         min-width: 200px;
@@ -34,7 +40,7 @@ app-dieters-expandable-table {
         }
       }
 
-      &-firstname {
+      &-id {
         left: 0;
 
         @media (max-width: $breakpoint-tablet) {
@@ -42,8 +48,16 @@ app-dieters-expandable-table {
         }
       }
 
+      &-firstname {
+        left: 100px;
+
+        @media (max-width: $breakpoint-tablet) {
+          left: initial;
+        }
+      }
+
       &-lastname {
-        left: 200px;
+        left: 300px;
 
         @media (max-width: $breakpoint-tablet) {
           left: initial;
@@ -116,6 +130,7 @@ app-dieters-expandable-table {
   tbody {
     .column {
       &-firstname,
+      &-id,
       &-lastname {
         span {
           overflow: hidden;
@@ -124,7 +139,7 @@ app-dieters-expandable-table {
         }
       }
 
-      &-firstname {
+      &-id {
         .material-icons {
           transition: all 0.1s ease-in-out;
 
@@ -141,6 +156,13 @@ app-dieters-expandable-table {
   }
 
   thead {
+    .column-id {
+      div {
+        padding-left: 24px;
+      }
+    }
+
+    .column-id,
     .column-firstname,
     .column-lastname,
     .column-actions {
@@ -159,6 +181,7 @@ app-dieters-expandable-table {
 
   .row-even {
     .column-firstname,
+    .column-id,
     .column-lastname,
     .column-actions {
       background: mat-color($ccr-background, even);
@@ -167,6 +190,7 @@ app-dieters-expandable-table {
 
   .row-odd {
     .column-firstname,
+    .column-id,
     .column-lastname,
     .column-actions {
       background: mat-color($ccr-background, odd);
@@ -175,7 +199,7 @@ app-dieters-expandable-table {
 
   .row-expanded,
   .row-nested.level1 {
-    .column-firstname {
+    .column-id {
       font-weight: bold;
     }
   }

@@ -12,7 +12,7 @@ import {
   MatSelectChange
 } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
-import { OrganizationParams } from '@board/services'
+
 import {
   LabelsOrganizationDatabase,
   LabelsOrganizationDataSource,
@@ -23,7 +23,11 @@ import { Package, PackageOrganization, PackageSingle } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
-import { ContextService, NotifierService } from '@coachcare/common/services'
+import {
+  ContextService,
+  NotifierService,
+  OrganizationParams
+} from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 import { CreateLabelDialogComponent } from '../dialogs'

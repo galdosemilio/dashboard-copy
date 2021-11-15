@@ -32,7 +32,7 @@ import { CoachesDataSource } from '../services'
 })
 export class CoachesTableComponent implements OnInit {
   @Input()
-  columns = ['firstName', 'lastName', 'email', 'date', 'actions']
+  columns = ['id', 'firstName', 'lastName', 'email', 'date', 'actions']
   @Input()
   source: CoachesDataSource | null
   @Input()

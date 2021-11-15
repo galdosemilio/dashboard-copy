@@ -5,7 +5,10 @@ import { MatTableModule } from '@angular/material/table'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from '@board/shared/shared.module'
 import { CoachcareSdkModule } from '@coachcare/common'
-import { CcrUtilityComponentsModule } from '@coachcare/common/components'
+import {
+  CcrCommonPagesModule,
+  CcrUtilityComponentsModule
+} from '@coachcare/common/components'
 import { CcrDirectivesModule } from '@coachcare/common/directives'
 import { TranslateModule } from '@ngx-translate/core'
 import { NgJsonEditorModule } from 'ang-jsoneditor'
@@ -20,6 +23,7 @@ import { routes } from './organizations.routing'
   imports: [
     CcrDirectivesModule,
     CcrUtilityComponentsModule,
+    CcrCommonPagesModule,
     CommonModule,
     ReactiveFormsModule,
     NgJsonEditorModule,

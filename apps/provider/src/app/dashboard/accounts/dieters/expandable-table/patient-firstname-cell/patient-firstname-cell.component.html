@@ -4,15 +4,7 @@
 <div
 [ngClass]="{ 'clickable': row.level === 0, 'non-clickable': row.level > 0, 'non-empty': !row.isEmpty && row.level < 2 }"
 class="expandable"
-fxLayoutAlign="start center"
-fxHide.xs>
-  <i
-    *ngIf="row.level < 1"
-    [class.active]="row.isExpanded"
-    (click)="toggleRow.emit(row)"
-    aria-hidden="true"
-    class="material-icons">
-  </i>
+fxLayoutAlign="start center">
   <span *ngIf="row.level === 0" (click)="showDieter.emit(row)" fxFlex>{{ row.firstName }}</span>
   <span *ngIf="row.level > 0">
     <span *ngIf="row.name !== 'load-more-pkgs' && row.name !== 'load-more-orgs'" [class.subitem-name]="row.level === 2">

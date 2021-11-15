@@ -24,6 +24,7 @@ import { NotifierService } from './notifier.service'
 import { StripeService } from './stripe.service'
 
 import { AppRouteReuseStrategy } from './router/custom.reuse-strategy'
+import { CcrOrganizationDialogs } from './organization'
 
 export function AppProviders(
   environment: AppEnvironment,
@@ -75,6 +76,7 @@ export function AppProviders(
     },
     // view helpers
     FormUtils,
-    ViewUtils
+    ViewUtils,
+    CcrOrganizationDialogs
   ]
 }

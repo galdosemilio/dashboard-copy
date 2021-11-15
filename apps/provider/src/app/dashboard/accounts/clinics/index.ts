@@ -31,6 +31,7 @@ import {
 import { ParticipantDatabase } from './clinic/settings/services'
 import { ClinicsPickerComponent } from './table/picker/picker.component'
 import { ClinicsTableComponent } from './table/table.component'
+import { CcrOrganizationDialogs } from '@coachcare/common/services'
 
 export const ClinicsComponents = [
   AddSupervisingProviderDialog,
@@ -60,6 +61,7 @@ export const ClinicsEntryComponents = [
 ]
 
 export const ClinicsProviders = [
+  CcrOrganizationDialogs,
   ClinicResolver,
   ClinicsDatabase,
   ParticipantDatabase,

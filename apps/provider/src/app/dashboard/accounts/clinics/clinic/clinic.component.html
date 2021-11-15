@@ -28,6 +28,15 @@
         </a>
 
         <a
+        [class.active]="section === 'hierarchy'"
+        [routerLink]="['.', { s: 'hierarchy' }]"
+        ccrLinkActive="active"
+        fxFlex
+        fxLayoutAlign="center center">
+        {{ 'GLOBAL.HIERARCHY' | translate }}
+        </a>
+
+        <a
         [class.active]="section === 'billable-services'"
         [routerLink]="['.', { s: 'billable-services' }]"
         ccrLinkActive="active"
@@ -68,6 +77,10 @@
     <div class="ccr-subcomponent" [ngSwitch]="section">
         <div *ngSwitchCase="'info'">
             <app-clinic-info [clinic]="clinic"></app-clinic-info>
+        </div>
+
+        <div *ngSwitchCase="'hierarchy'">
+            <ccr-organization-tree-page [organization]="clinic" [readonly]="true"></ccr-organization-tree-page>
         </div>
 
         <div *ngSwitchCase="'billable-services'">

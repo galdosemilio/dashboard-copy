@@ -7,7 +7,7 @@ import { _ } from '@coachcare/backend/shared'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 
 @Injectable()
-export class OrganizationDialogs {
+export class CcrOrganizationDialogs {
   constructor(
     protected dialog: MatDialog,
     protected database: OrganizationsDatabase
@@ -16,8 +16,8 @@ export class OrganizationDialogs {
   activatePrompt(item: NamedEntity): Promise<any> {
     return new Promise((resolve, reject) => {
       const data: PromptDialogData = {
-        title: _('PROMPT.ORGS.CONFIRM_ACTIVATE'),
-        content: _('PROMPT.ORGS.CONFIRM_ACTIVATE_PROMPT'),
+        title: _('SHARED.ORGS.CONFIRM_ACTIVATE'),
+        content: _('SHARED.ORGS.CONFIRM_ACTIVATE_PROMPT'),
         contentParams: { item: `${item.name}` }
       }
 
@@ -43,8 +43,8 @@ export class OrganizationDialogs {
   deactivatePrompt(item: NamedEntity): Promise<any> {
     return new Promise((resolve, reject) => {
       const data: PromptDialogData = {
-        title: _('PROMPT.ORGS.CONFIRM_DEACTIVATE'),
-        content: _('PROMPT.ORGS.CONFIRM_DEACTIVATE_PROMPT'),
+        title: _('SHARED.ORGS.CONFIRM_REMOVE_ORG'),
+        content: _('SHARED.ORGS.CONFIRM_REMOVE_ORG_PROMPT'),
         contentParams: { item: `${item.name}` }
       }
 
@@ -70,8 +70,8 @@ export class OrganizationDialogs {
   deletePrompt(item: NamedEntity): Promise<any> {
     return new Promise((resolve, reject) => {
       const data: PromptDialogData = {
-        title: _('PROMPT.ORGS.CONFIRM_REMOVE_ORG'),
-        content: _('PROMPT.ORGS.CONFIRM_REMOVE_ORG_PROMPT'),
+        title: _('SHARED.ORGS.CONFIRM_REMOVE_ORG'),
+        content: _('SHARED.ORGS.CONFIRM_REMOVE_ORG_PROMPT'),
         contentParams: { item: `${item.name}` }
       }
 

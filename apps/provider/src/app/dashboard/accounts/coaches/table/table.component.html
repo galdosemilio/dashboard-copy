@@ -2,6 +2,14 @@
 
   <mat-table [dataSource]="source" matSort (matSortChange)="onSort($event)" [class.notClickable]="!showActions" data-cy="coach-table">
 
+    <ng-container cdkColumnDef="id">
+      <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.ID' | translate}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" (click)="showCoach(row)" class="clickable">
+        <span>{{'GLOBAL.ID' | translate}}</span>
+        {{row.id}}
+      </mat-cell>
+    </ng-container>
+
     <ng-container cdkColumnDef="firstName">
       <mat-header-cell *cdkHeaderCellDef mat-sort-header="firstName">{{'BOARD.FIRST_NAME' | translate}}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" (click)="showCoach(row)" class="clickable">

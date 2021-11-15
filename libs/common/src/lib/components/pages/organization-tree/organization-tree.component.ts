@@ -1,5 +1,5 @@
 import { FlatTreeControl } from '@angular/cdk/tree'
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import {
   MatDialog,
   MatTreeFlatDataSource,
@@ -9,11 +9,6 @@ import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
 
 import {
-  AddOrganizationDialog,
-  OrganizationDialogs,
-  OrganizationParams
-} from '@board/services'
-import {
   ClinicFlatNode,
   ClinicNode,
   OrganizationsTreeDatabase
@@ -22,14 +17,20 @@ import { OrganizationSingle } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
+import { CcrAddOrganizationDialog } from '@coachcare/common/dialogs'
+import {
+  CcrOrganizationDialogs,
+  OrganizationParams
+} from '@coachcare/common/services/organization'
 
 @Component({
-  selector: 'ccr-organizations-tree',
-  templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss']
+  selector: 'ccr-organization-tree-page',
+  templateUrl: './organization-tree.component.html',
+  styleUrls: ['./organization-tree.component.scss']
 })
-export class OrganizationsTreeComponent implements OnInit {
-  organzation: OrganizationSingle
+export class CcrOrganizationTreePageComponent implements OnInit {
+  @Input() organization: OrganizationSingle
+  @Input() readonly: boolean
 
   nodeMap = new Map<string, ClinicFlatNode>()
   treeControl: FlatTreeControl<ClinicFlatNode>
@@ -40,14 +41,14 @@ export class OrganizationsTreeComponent implements OnInit {
     private database: OrganizationsTreeDatabase,
     private route: ActivatedRoute,
     private notifier: NotifierService,
-    private dialogs: OrganizationDialogs,
+    private dialogs: CcrOrganizationDialogs,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: OrganizationParams) => {
       if (data.org) {
-        this.organzation = data.org
+        this.organization = data.org
       }
     })
 
@@ -58,7 +59,7 @@ export class OrganizationsTreeComponent implements OnInit {
       this.getChildren
     )
 
-    this.database.initialize(this.organzation)
+    this.database.initialize(this.organization)
 
     this.treeControl = new FlatTreeControl<ClinicFlatNode>(
       this.getLevel,
@@ -132,15 +133,14 @@ export class OrganizationsTreeComponent implements OnInit {
   }
 
   createDialog(node: ClinicFlatNode) {
-    console.log({ node })
     this.dialog
-      .open(AddOrganizationDialog, {
+      .open(CcrAddOrganizationDialog, {
         data: {
           accountType: 'coach',
           title:
             node.nodeType === 'childNode'
-              ? _('ADMIN.ORGS.ADD_CHILD_ORG')
-              : _('ADMIN.ORGS.ADD_PARENT_ORG'),
+              ? _('SHARED.ORGS.ADD_CHILD_ORG')
+              : _('SHARED.ORGS.ADD_PARENT_ORG'),
           organization: node.org.id,
           addChild: node.nodeType === 'childNode'
         },
@@ -150,7 +150,7 @@ export class OrganizationsTreeComponent implements OnInit {
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          this.database.initialize(this.organzation)
+          this.database.initialize(this.organization)
           this.treeControl.expand(this.treeControl.dataNodes[0])
         }
       })
@@ -158,22 +158,22 @@ export class OrganizationsTreeComponent implements OnInit {
 
   onDelete(node: ClinicFlatNode) {
     const data: PromptDialogData = {
-      title: node.org.hierarchyPath.includes(this.organzation.id)
-        ? _('PROMPT.ORGS.CONFIRM_REMOVE_CHILD')
-        : _('PROMPT.ORGS.CONFIRM_REMOVE_PARENT'),
-      content: node.org.hierarchyPath.includes(this.organzation.id)
-        ? _('PROMPT.ORGS.CONFIRM_REMOVE_CHILD_PROMPT')
-        : _('PROMPT.ORGS.CONFIRM_REMOVE_PARENT_PROMPT'),
+      title: node.org.hierarchyPath.includes(this.organization.id)
+        ? _('SHARED.ORGS.CONFIRM_REMOVE_CHILD')
+        : _('SHARED.ORGS.CONFIRM_REMOVE_PARENT'),
+      content: node.org.hierarchyPath.includes(this.organization.id)
+        ? _('SHARED.ORGS.CONFIRM_REMOVE_CHILD_PROMPT')
+        : _('SHARED.ORGS.CONFIRM_REMOVE_PARENT_PROMPT'),
       contentParams: { item: `${node.org.name}` }
     }
 
-    const org = node.org.hierarchyPath.includes(this.organzation.id)
+    const org = node.org.hierarchyPath.includes(this.organization.id)
       ? node.org
-      : this.organzation
+      : this.organization
     this.dialogs
       .removePrompt(org, data)
       .then(() => {
-        this.database.initialize(this.organzation)
+        this.database.initialize(this.organization)
         this.treeControl.expand(this.treeControl.dataNodes[0])
         this.notifier.success(_('NOTIFY.SUCCESS.CLINIC_REMOVED'))
       })

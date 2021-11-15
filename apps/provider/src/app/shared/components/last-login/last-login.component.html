@@ -1,0 +1,5 @@
+<a *ngIf="lastLoginEntry" [routerLink]="routerLinkArgs">
+  <small>
+    {{ 'BOARD.LAST_LOGIN' | translate }}: {{ lastLoginEntry.createdAt | amDateFormat:'dddd MMM D, YYYY h:mm a' }}
+  </small>
+</a>

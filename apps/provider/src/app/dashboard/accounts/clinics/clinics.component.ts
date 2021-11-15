@@ -23,6 +23,7 @@ import { debounceTime, first } from 'rxjs/operators'
 import { CreateClinicDialog } from './dialogs'
 import { ClinicsDatabase, ClinicsDataSource } from './services'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { AllOrgPermissions } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -37,6 +38,8 @@ export class ClinicsComponent implements OnInit, OnDestroy {
 
   public clinic: SelectedOrganization
   public filterForm: FormGroup
+  public permissions?: AllOrgPermissions
+  public permissions$: Subject<AllOrgPermissions> = new Subject<AllOrgPermissions>()
   public query$: Subject<string> = new Subject<string>()
   public showCreateClinic = false
   public sort: MatSort = new MatSort()
@@ -51,6 +54,11 @@ export class ClinicsComponent implements OnInit, OnDestroy {
     private database: ClinicsDatabase,
     private store: Store<UILayoutState>
   ) {}
+
+  public ngOnDestroy(): void {
+    this.store.dispatch(new OpenPanel())
+    this.source.disconnect()
+  }
 
   public ngOnInit(): void {
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
@@ -79,6 +87,10 @@ export class ClinicsComponent implements OnInit, OnDestroy {
 
     this.source.addOptional(this.query$, () => ({
       query: this.filterForm.value.query
+    }))
+
+    this.source.addOptional(this.permissions$, () => ({
+      ...this.permissions
     }))
 
     this.createFilterForm()
@@ -159,15 +171,15 @@ export class ClinicsComponent implements OnInit, OnDestroy {
     }
   }
 
+  public filterByPermissions(permissions: AllOrgPermissions): void {
+    this.permissions = permissions
+    this.permissions$.next(permissions)
+  }
+
   public onSorted(sort: Sort): void {
     this.sort.active = sort.active
     this.sort.direction = sort.direction
     this.sort.sortChange.emit(sort)
-  }
-
-  ngOnDestroy() {
-    this.store.dispatch(new OpenPanel())
-    this.source.disconnect()
   }
 
   private createFilterForm(): void {

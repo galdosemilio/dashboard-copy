@@ -25,8 +25,6 @@
       "ACTIVE_CAMPAIGN_DISABLED": "Active Campaign is Disabled for this Clinic and its child clinics.<br><br>In order to use it you have to enable it first.",
       "ACTIVE_CAMPAIGN_IS_INHERITED": "This Active Campaign list is available to this clinic from a parent clinic.",
       "ACTIVE_CAMPAIGN_LISTS": "Active Campaign Lists",
-      "ADD_CHILD_ORG": "Add child clinic",
-      "ADD_PARENT_ORG": "Add parent clinic",
       "ASSOC_ACTIVE_CAMPAIGN": "Associate Active Campaign",
       "ASSOC_ALL_PROVIDERS": "Retroactively enroll all providers at or below this clinic",
       "ASSOC_ALL_PROVIDERS_CURRENT": "Enrolling provider {{ provider }}...",
@@ -35,7 +33,6 @@
       "ASSOC_ALL_PROVIDERS_WARNING": "You're about to enroll ALL the providers from this clinic and its subclinics; this operation can take a while to complete, are you sure you want to continue?",
       "ASSOC_PROVIDER_CAMPAIGN": "Retroactively enroll one provider",
       "BASE_PRICING": "Base Pricing",
-      "CHILD_ORGS": "Child Clinics",
       "CHURN_DATE": "Churn Date",
       "CREATE_NEW": "Create Clinic",
       "DELETE_LIST_ASSOCIATION": "Delete Active Campaign List Association",
@@ -46,16 +43,12 @@
       "ENTITY": "Entity",
       "IS_BILLABLE": "Is Billable?",
       "IS_PAYING": "Is Paying",
-      "LOAD_MORE": "Load More",
       "MARKETING_DESCRIPTION": "These Active Campaign lists are associated at or above this organization. When a provider is added at or below this organization, they will be automatically enrolled in the lists shown below.<br><br>Providers that were already associated to this organization when the Active Campaign list was added will not be automatically enrolled. You may retroactive enroll one or all providers into newly-added Active Campaign lists by using the \"Retroactively Enroll...\" buttons.",
       "MOB_APP_QRCODE_ANDROID": "Android Mobile App QR Code",
       "MOB_APP_QRCODE_DESC": "This is the QR Code for the mobile app for {{ name }} (ID {{id}})",
       "MOB_APP_QRCODE_IOS": "iOS Mobile App QR Code",
-      "NO_CHILD_CLINIC": "This clinic has no child clinic",
-      "NO_PARENT_CLINIC": "This clinic has no parent clinic.",
       "NUMBER_OF_LOCATIONS": "Number of Locations",
       "ORGANIZATION": "Clinic",
-      "PARENT_ORG": "Parent Clinic",
       "PAYING_START_DATE": "Paying Start Date",
       "PLAN": "Plan",
       "RENEWAL_DATE": "Renewal Date",
@@ -221,6 +214,7 @@
     "LABEL": "Phase",
     "LANGUAGE": "Language",
     "LAST_NAME": "Last Name",
+    "LOAD_MORE": "Load More",
     "LOCALE": "Locale",
     "LOCATION": "Location",
     "MEASUREMENT": "Measurement",
@@ -588,16 +582,6 @@
       "ENABLE_PROMPT": "Are you sure you want to enable the phase '{{label}}'?"
     },
     "ORGS": {
-      "CONFIRM_ACTIVATE": "Activate Clinic",
-      "CONFIRM_ACTIVATE_PROMPT": "Do you really want to activate '{{item}}'?",
-      "CONFIRM_DEACTIVATE": "Deactivate Clinic",
-      "CONFIRM_DEACTIVATE_PROMPT": "Do you really want to deactivate '{{item}}'?",
-      "CONFIRM_REMOVE_CHILD": "Remove Child",
-      "CONFIRM_REMOVE_CHILD_PROMPT": "The child organization will have no parent after this removal",
-      "CONFIRM_REMOVE_ORG": "Deactivate Clinic",
-      "CONFIRM_REMOVE_ORG_PROMPT": "Do you really want to deactivate '{{item}}'?",
-      "CONFIRM_REMOVE_PARENT": "Remove Parent",
-      "CONFIRM_REMOVE_PARENT_PROMPT": "This organization will have no parent organization after this removal",
       "DISOCCIATE": "Dissociate Clinic",
       "DISOCCIATE_PROMPT": "Do you really want to dissociate '{{item}}'?"
     }
@@ -705,6 +689,24 @@
       "METRIC": "Metric",
       "UK": "UK",
       "US": "US"
+    }
+  },
+  "SHARED": {
+    "ORGS": {
+      "ADD_CHILD_ORG": "Add child clinic",
+      "ADD_PARENT_ORG": "Add parent clinic",
+      "CHILD_ORGS": "Child Clinics",
+      "CONFIRM_ACTIVATE": "Activate Clinic",
+      "CONFIRM_ACTIVATE_PROMPT": "Do you really want to activate '{{item}}'?",
+      "CONFIRM_REMOVE_CHILD": "Remove Child",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "The child organization will have no parent after this removal",
+      "CONFIRM_REMOVE_ORG": "Deactivate Clinic",
+      "CONFIRM_REMOVE_ORG_PROMPT": "Do you really want to deactivate '{{item}}'?",
+      "CONFIRM_REMOVE_PARENT": "Remove Parent",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "This organization will have no parent organization after this removal",
+      "NO_CHILD_CLINIC": "This clinic has no child clinic",
+      "NO_PARENT_CLINIC": "This clinic has no parent clinic.",
+      "PARENT_ORG": "Parent Clinic"
     }
   },
   "SIDENAV": {

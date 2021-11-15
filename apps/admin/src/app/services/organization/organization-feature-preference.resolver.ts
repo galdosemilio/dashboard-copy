@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
+import { OrganizationFeaturePrefs } from '@coachcare/common/services'
 import {
   CommunicationPreference,
   CommunicationPreferenceSingle,
@@ -21,7 +22,6 @@ import {
   RPMPreferenceSingle,
   Sequence
 } from '@coachcare/sdk'
-import { OrganizationFeaturePrefs } from './organization.types'
 
 @Injectable()
 export class OrganizationFeaturePreferenceResolver

@@ -3,9 +3,12 @@ import { MatDialog, MatSort } from '@coachcare/material'
 import { Router } from '@angular/router'
 import { getterSorter } from '@coachcare/backend/model'
 import { _ } from '@coachcare/backend/shared'
-import { NotifierService } from '@coachcare/common/services'
+import {
+  CcrOrganizationDialogs,
+  NotifierService
+} from '@coachcare/common/services'
 
-import { OrganizationDialogs, OrganizationRoutes } from '@board/services'
+import { OrganizationRoutes } from '@board/services'
 import {
   OrganizationsDatabase,
   OrganizationsDataSource
@@ -33,7 +36,7 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
     protected notifier: NotifierService,
     protected database: OrganizationsDatabase,
     private dialog: MatDialog,
-    protected dialogs: OrganizationDialogs,
+    protected dialogs: CcrOrganizationDialogs,
     public routes: OrganizationRoutes
   ) {}
 

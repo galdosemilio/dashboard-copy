@@ -25,8 +25,6 @@
       "ACTIVE_CAMPAIGN_DISABLED": "وتعطيل حملة نشطة لهذه العيادة والعيادات التابعة له.<br><br>من أجل استخدامها لديك لتمكين لأول مرة.",
       "ACTIVE_CAMPAIGN_IS_INHERITED": "قائمة الحملات النشطة هذه متاحة لهذه العيادة من عيادة الآباء.",
       "ACTIVE_CAMPAIGN_LISTS": "قوائم حملة نشطة",
-      "ADD_CHILD_ORG": "عيادات الطفل",
-      "ADD_PARENT_ORG": "Add parent clinic",
       "ASSOC_ACTIVE_CAMPAIGN": "حملة نشطة المنتسبين",
       "ASSOC_ALL_PROVIDERS": "تسجيل بأثر رجعي جميع مقدمي عند أو أقل من هذه العيادة",
       "ASSOC_ALL_PROVIDERS_CURRENT": "تسجيل مزود {{provider}} ...",
@@ -35,7 +33,6 @@
       "ASSOC_ALL_PROVIDERS_WARNING": "كنت على وشك الالتحاق ALL مقدمي من هذه العيادة. هذه العملية يمكن أن تستغرق بعض الوقت لإكمال، هل أنت متأكد من أنك تريد المتابعة؟",
       "ASSOC_PROVIDER_CAMPAIGN": "تسجيل بأثر رجعي مزود واحد",
       "BASE_PRICING": "التسعير قاعدة",
-      "CHILD_ORGS": "Child Clinics",
       "CHURN_DATE": "زبد التسجيل",
       "CREATE_NEW": "إنشاء عيادة",
       "DELETE_LIST_ASSOCIATION": "حملة نشطة الحذف جمعية قائمة",
@@ -46,16 +43,12 @@
       "ENTITY": "شخصية",
       "IS_BILLABLE": "غير فوترة؟",
       "IS_PAYING": "هل دفع",
-      "LOAD_MORE": "تحميل المزيد",
       "MARKETING_DESCRIPTION": "ترتبط القوائم الحملة النشطة هذه عند أو فوق هذه المنظمة. عند إضافة مزود أو يقل عن هذه المنظمة، التي سيتم إدراجهم تلقائيا في القوائم هو مبين أدناه.<br><br> مقدمي التي ارتبطت بالفعل إلى هذه المنظمة عندما تم إضافة قائمة الحملة النشطة لن يكون تلقائيا المسجلين. تستطيع بأثر رجعي تسجل واحد أو جميع مقدمي في قوائم الحملة النشطة المضافة حديثا باستخدام \"بأثر رجعي تسجل ... \" الأزرار.",
       "MOB_APP_QRCODE_ANDROID": "الروبوت موبايل التطبيق رمز الاستجابة السريعة",
       "MOB_APP_QRCODE_DESC": "هذا هو رمز الاستجابة السريعة للتطبيقات المحمول ل {{name}} (ID {{id}})",
       "MOB_APP_QRCODE_IOS": "دائرة الرقابة الداخلية موبايل التطبيق رمز الاستجابة السريعة",
-      "NO_CHILD_CLINIC": "This clinic has no child clinic",
-      "NO_PARENT_CLINIC": "This clinic has no parent clinic.",
       "NUMBER_OF_LOCATIONS": "عدد من المواقع",
       "ORGANIZATION": "Clinic",
-      "PARENT_ORG": "عيادة الوالدين",
       "PAYING_START_DATE": "دفع تاريخ بدء",
       "PLAN": "خطة",
       "RENEWAL_DATE": "تاريخ التجديد",
@@ -221,6 +214,7 @@
     "LABEL": "مرحلة",
     "LANGUAGE": "لغة",
     "LAST_NAME": "الاسم الأخير",
+    "LOAD_MORE": "تحميل المزيد",
     "LOCALE": "مكان",
     "LOCATION": "الموقع",
     "MEASUREMENT": "Measurement",
@@ -588,16 +582,6 @@
       "ENABLE_PROMPT": "هل أنت متأكد من أنك تريد تمكين المرحلة \"{{label}}\"؟"
     },
     "ORGS": {
-      "CONFIRM_ACTIVATE": "Activate Clinic",
-      "CONFIRM_ACTIVATE_PROMPT": "Do you really want to activate '{{item}}'?",
-      "CONFIRM_DEACTIVATE": "Deactivate Clinic",
-      "CONFIRM_DEACTIVATE_PROMPT": "Do you really want to deactivate '{{item}}'?",
-      "CONFIRM_REMOVE_CHILD": "إزالة طفل",
-      "CONFIRM_REMOVE_CHILD_PROMPT": "ان تمتلك منظمة الطفل أي والد بعد هذه الإزالة",
-      "CONFIRM_REMOVE_ORG": "Deactivate Clinic",
-      "CONFIRM_REMOVE_ORG_PROMPT": "Do you really want to deactivate '{{item}}'?",
-      "CONFIRM_REMOVE_PARENT": "إزالة والد",
-      "CONFIRM_REMOVE_PARENT_PROMPT": "لن تمتلك هذا المنظمة تنظيم أبوي بعد هذه الإزالة",
       "DISOCCIATE": "Dissociate Clinic",
       "DISOCCIATE_PROMPT": "Do you really want to dissociate '{{item}}'?"
     }
@@ -705,6 +689,24 @@
       "METRIC": "متري",
       "UK": "بريطانيا",
       "US": "أميركا"
+    }
+  },
+  "SHARED": {
+    "ORGS": {
+      "ADD_CHILD_ORG": "إضافة عيادة الطفل",
+      "ADD_PARENT_ORG": "إضافة العيادة الأصل",
+      "CHILD_ORGS": "عيادات الطفل",
+      "CONFIRM_ACTIVATE": "تنشيط العيادة",
+      "CONFIRM_ACTIVATE_PROMPT": "هل تريد حقا تنشيط '{{item}}'؟",
+      "CONFIRM_REMOVE_CHILD": "إزالة الطفل",
+      "CONFIRM_REMOVE_CHILD_PROMPT": "لن يكون لدى منظمة الطفل أحد الوالدين بعد هذا الإزالة",
+      "CONFIRM_REMOVE_ORG": "إلغاء تنشيط العيادة",
+      "CONFIRM_REMOVE_ORG_PROMPT": "هل تريد حقا إلغاء تنشيط \"{{item}}\"؟",
+      "CONFIRM_REMOVE_PARENT": "إزالة الأصل",
+      "CONFIRM_REMOVE_PARENT_PROMPT": "لن تواجه هذه المنظمة منظمة أصل بعد هذه الإزالة",
+      "NO_CHILD_CLINIC": "هذه العيادة لا يوجد لديه عيادة طفل",
+      "NO_PARENT_CLINIC": "هذه العيادة لا يوجد لديه عيادة أصلية.",
+      "PARENT_ORG": "عيادة الأم"
     }
   },
   "SIDENAV": {

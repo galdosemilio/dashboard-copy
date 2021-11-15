@@ -3,11 +3,9 @@ export * from './email-template'
 export * from './form'
 export * from './list'
 export * from './settings'
-export * from './tree'
 
 import {
   AddOrganizationDialog,
-  OrganizationDialogs,
   OrganizationFeaturePreferenceResolver,
   OrganizationPreferenceResolver,
   OrganizationResolver,
@@ -16,9 +14,9 @@ import {
 import {
   ActiveCampaignDatabase,
   LabelsOrganizationDatabase,
-  OrganizationsDatabase,
-  OrganizationsTreeDatabase
+  OrganizationsDatabase
 } from '@coachcare/backend/data'
+import { CcrOrganizationDialogs } from '@coachcare/common/services'
 import {
   OrganizationActiveCampaignComponent,
   OrganizationActiveCampaignTableComponent
@@ -53,7 +51,6 @@ import {
   OrganizationsSettingsComponent,
   SecurityComponent
 } from './settings'
-import { OrganizationsTreeComponent } from './tree'
 
 // Module Collections
 
@@ -83,7 +80,6 @@ export const OrganizationComponents = [
   OrganizationsTableComponent,
   OrganizationsDisplayComponent,
   OrganizationsFormComponent,
-  OrganizationsTreeComponent,
   OrganizationsSettingsComponent,
   MFAInputComponent,
   SecurityComponent
@@ -102,9 +98,9 @@ export const OrganizationEntryComponents = [
 export const OrganizationProviders = [
   ActiveCampaignDatabase,
   LabelsOrganizationDatabase,
-  OrganizationsTreeDatabase,
+
   OrganizationsDatabase,
-  OrganizationDialogs,
+  CcrOrganizationDialogs,
   OrganizationFeaturePreferenceResolver,
   OrganizationResolver,
   OrganizationPreferenceResolver,

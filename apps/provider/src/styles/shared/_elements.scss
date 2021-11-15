@@ -102,10 +102,19 @@
   h3 {
     font-size: 32px;
     font-weight: 500;
-    line-height: 70px;
+    line-height: 32px;
     margin: 0;
     @include horizontal-padding-left(10px);
     white-space: nowrap;
+  }
+
+  p {
+    @include horizontal-padding-left(12px);
+    margin-bottom: 0;
+  }
+
+  a {
+    @include horizontal-padding-left(12px);
   }
 }
 
