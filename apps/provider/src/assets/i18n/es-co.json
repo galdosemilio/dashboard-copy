@@ -77,7 +77,6 @@
     "ALL_PACKAGES": "Pacientes en <strong>todas</strong> las fases",
     "AMOUNT": "Cantidad",
     "AMOUNT_OF_DAYS": "Cantidad de Días",
-    "ANY_AVAILABLE": "Cualquier disponible",
     "ANY_CLINIC": "Cualquier Clínica",
     "ANY_PACKAGES": "Pacientes en <strong>algunas</strong> de las fases",
     "APPOINTMENTS": "Reuniones",
@@ -376,6 +375,8 @@
     "WEEKLY_EXERCISE_GOAL": "Objetivo de ejercicio semanal",
     "WEEKLY_VIEW": "Vista Semanal",
     "WEIGHT_GOAL": "Meta de Peso",
+    "WELLCORE_CONSULTATION": "Consulta de WellCore",
+    "WELLCORE_PROVIDER": "Proveedor WellCore",
     "ZIP": "Postal"
   },
   "CALL": {

@@ -77,7 +77,6 @@
     "ALL_PACKAGES": "חולים ב <strong>כל</strong> השלבים שנבחרו",
     "AMOUNT": "כמות",
     "AMOUNT_OF_DAYS": "כמות הימים",
-    "ANY_AVAILABLE": "כל זמין",
     "ANY_CLINIC": "בכל מרפאה",
     "ANY_PACKAGES": "חולים ב <strong>כל</strong> שלב שנבחר",
     "APPOINTMENTS": "מינויים",
@@ -376,6 +375,8 @@
     "WEEKLY_EXERCISE_GOAL": "יעד תרגיל שבועי",
     "WEEKLY_VIEW": "תצוגה שבועית",
     "WEIGHT_GOAL": "משקל יעד",
+    "WELLCORE_CONSULTATION": "ייעוץ WellCore",
+    "WELLCORE_PROVIDER": "ספק WellCore",
     "ZIP": "מיקוד"
   },
   "CALL": {

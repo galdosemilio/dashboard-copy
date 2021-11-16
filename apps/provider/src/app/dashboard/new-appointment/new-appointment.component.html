@@ -10,36 +10,17 @@
 <div class="appointment-body" fxLayout="column" fxFlex fxLayout.gt-sm="row" fxLayoutAlign=" stretch" fxLayoutGap="20px">
   <div fxFlex="25%">
     <form [formGroup]="form" novalidate >
-      <div fxLayout="row" fxLayoutGap="7px" *ngIf="meetingTypes && meetingTypes.length">
-        <mat-form-field >
-          <mat-select formControlName="meetingType" [placeholder]="'RIGHT_PANEL.MEETING_TYPE' | translate">
-            <mat-select-trigger>
-              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="7px">
-                <span>{{ selectedMeetingType ? selectedMeetingType.description : '' }}</span>
-                <span *ngIf="selectedMeetingType" class="meeting-type-color-bullet" [style.background]="selectedMeetingType.colors.default" ></span>
-              </div>
-            </mat-select-trigger>
-            <mat-option *ngFor="let type of meetingTypes" [value]="type" [style.border-left]="'10px solid ' + type.colors.default">{{ type.description }}</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="static-field">
+        <label>{{ 'RIGHT_PANEL.MEETING_TYPE' | translate }}</label>
+        <p>{{ 'BOARD.WELLCORE_CONSULTATION' | translate }}</p>
       </div>
-      <div fxLayout="row" fxLayoutGap="7px">
-        <mat-form-field>
-          <mat-select formControlName="duration" [placeholder]="'BOARD.DURATION' | translate">
-            <mat-option *ngFor="let d of durations" [value]="d.value">
-              {{ d.viewValue | translate }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="static-field">
+        <label>{{ 'BOARD.DURATION' | translate }}</label>
+        <p>10 {{ 'GLOBAL.MINUTES' | translate }}</p>
       </div>
-      <div fxLayout="row" fxLayoutGap="7px">
-        <mat-form-field>
-          <mat-select formControlName="providerId" [placeholder]="'BOARD.PREFERRED_PROVIDER' | translate">
-            <mat-option *ngFor="let c of coaches" [value]="c.id">
-              {{ c.name | translate }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="static-field">
+        <label>{{ 'BOARD.PREFERRED_PROVIDER' | translate }}</label>
+        <p>{{ 'BOARD.WELLCORE_PROVIDER' | translate }}</p>
       </div>
     </form>
   </div>

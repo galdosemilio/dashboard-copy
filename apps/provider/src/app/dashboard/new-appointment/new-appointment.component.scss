@@ -6,6 +6,7 @@
 
   .appointment-body {
     overflow: hidden;
+    margin-top: 20px;
 
     .mat-calendar {
       width: 100% !important;
@@ -33,6 +34,21 @@
             color: var(--primary) !important;
           }
         }
+      }
+    }
+
+    .static-field {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+      margin-bottom: 1.25em;
+
+      label {
+        color: #b1afae;
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 5px 0;
       }
     }
   }

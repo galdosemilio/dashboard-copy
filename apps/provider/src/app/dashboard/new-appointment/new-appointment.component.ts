@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { ContextService, MeetingTypeWithColor } from '@app/service'
-import { _ } from '@app/shared'
+import { ContextService } from '@app/service'
+import { TranslationsObject, _ } from '@app/shared'
 import { NotifierService } from '@coachcare/common/services'
 import {
   AccountProvider,
@@ -18,6 +18,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { isEqual } from 'lodash'
 import * as moment from 'moment-timezone'
 import { debounceTime } from 'rxjs/operators'
+import { environment } from 'apps/provider/src/environments/environment'
+import { TranslateService } from '@ngx-translate/core'
 
 @UntilDestroy()
 @Component({
@@ -27,17 +29,15 @@ import { debounceTime } from 'rxjs/operators'
 })
 export class NewAppointmentComponent implements OnInit, OnDestroy {
   public form: FormGroup
-
-  public meetingTypes: MeetingTypeWithColor[] = []
-  public durations = []
   public coaches: NamedEntity[] = []
   public timeSlots: MeetingTimeslot[] = []
 
   public now = moment()
-  public selectedMeetingType: MeetingTypeWithColor
   public selectedDate = this.now
   public isLoading = false
   public selectedSlot: MeetingTimeslot = null
+
+  private i18n: TranslationsObject
 
   get availableCoachesIds() {
     return this.coaches.filter((c) => c.id).map((c) => c.id)
@@ -49,12 +49,17 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
     private context: ContextService,
     private notifier: NotifierService,
     private schedule: Schedule,
+    private translator: TranslateService,
     private router: Router,
     private organization: OrganizationProvider
-  ) {}
+  ) {
+    this.translate()
+    this.translator.onLangChange
+      .pipe(untilDestroyed(this))
+      .subscribe(() => this.translate())
+  }
 
   ngOnInit() {
-    this.meetingTypes = this.context.organization.meetingTypes
     this.createForm()
     this.getCoaches()
   }
@@ -63,8 +68,8 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
 
   private createForm(): void {
     this.form = this.builder.group({
-      meetingType: [null, Validators.required],
-      duration: [null, Validators.required],
+      meetingType: [environment.wellcoreMeetingId, Validators.required],
+      duration: [10, Validators.required],
       slot: [null, Validators.required],
       date: [this.now, Validators.required],
       providerId: ['']
@@ -74,12 +79,7 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
   }
 
   private async getCoaches(): Promise<void> {
-    this.coaches = [
-      {
-        id: '',
-        name: _('BOARD.ANY_AVAILABLE')
-      }
-    ]
+    this.coaches = []
     this.isLoading = true
 
     try {
@@ -109,25 +109,7 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
   }
 
   private listenChanges(): void {
-    this.form.controls.meetingType.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe((meetingType: MeetingTypeWithColor) => {
-        this.meetingTypeChanged(meetingType)
-      })
-
-    this.form.controls.duration.valueChanges
-      .pipe(untilDestroyed(this), debounceTime(500))
-      .subscribe(() => {
-        this.getTimeSlots()
-      })
-
     this.form.controls.date.valueChanges
-      .pipe(untilDestroyed(this), debounceTime(500))
-      .subscribe(() => {
-        this.getTimeSlots()
-      })
-
-    this.form.controls.providerId.valueChanges
       .pipe(untilDestroyed(this), debounceTime(500))
       .subscribe(() => {
         this.getTimeSlots()
@@ -146,9 +128,7 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
       this.isLoading = true
 
       const response = await this.schedule.fetchOpenTimeslots({
-        accounts: value.providerId
-          ? [value.providerId]
-          : this.availableCoachesIds,
+        accounts: this.availableCoachesIds,
         duration: value.duration,
         start: value.date.startOf('day').toISOString(),
         end: value.date.clone().endOf('day').toISOString(),
@@ -179,20 +159,6 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
     }
   }
 
-  private meetingTypeChanged(type: MeetingTypeWithColor): void {
-    this.selectedMeetingType = type
-    this.durations.length = 0
-    if (type.durations.length) {
-      type.durations.forEach((d) => {
-        this.durations.push({
-          value: moment.duration(d).asMinutes(),
-          viewValue: moment.duration(d).humanize()
-        })
-      })
-      this.form.get('duration').setValue(this.durations[0].value)
-    }
-  }
-
   public onSelectDate(date: moment.Moment): void {
     this.selectedDate = date
     this.form.get('date').setValue(date)
@@ -217,7 +183,6 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
 
     try {
       const value = this.form.value
-      const meetingType = value.meetingType as MeetingTypeWithColor
       const slot = value.slot as MeetingTimeslot
 
       const org = await this.organization.getSingle(this.context.organizationId)
@@ -250,21 +215,27 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
       const newMeeting: AddMeetingRequest = {
         location,
         attendees,
-        title: meetingType.description,
+        title: this.i18n['BOARD.WELLCORE_CONSULTATION'],
         startTime: startTime.toISOString(),
         endTime: endTime.toISOString(),
-        meetingTypeId: meetingType.typeId.toString(),
+        meetingTypeId: value.meetingType,
         organizationId: this.context.organizationId,
         timezone: this.context.user.timezone
       }
 
       await this.schedule.addMeeting(newMeeting)
+      this.router.navigate(['/dashboard'])
+      this.notifier.success(_('NOTIFY.SUCCESS.APPOINTMENT_BOOKED'))
     } catch (err) {
       this.notifier.error(err)
     } finally {
       this.isLoading = false
-      this.router.navigate(['/dashboard'])
-      this.notifier.success(_('NOTIFY.SUCCESS.APPOINTMENT_BOOKED'))
     }
+  }
+
+  private translate(): void {
+    this.translator
+      .get([_('BOARD.WELLCORE_CONSULTATION')])
+      .subscribe((translations) => (this.i18n = translations))
   }
 }

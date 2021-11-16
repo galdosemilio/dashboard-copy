@@ -14,4 +14,5 @@ export interface Environment {
   coachcareOrgId: string
   wellCoreOrgId: string
   wellcoreMedicalFormId: string
+  wellcoreMeetingId: number
 }

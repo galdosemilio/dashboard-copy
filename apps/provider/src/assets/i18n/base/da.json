@@ -77,7 +77,6 @@
     "ALL_PACKAGES": "Patienter i <strong>alle</strong> valgte faser",
     "AMOUNT": "Antal",
     "AMOUNT_OF_DAYS": "Antal dage",
-    "ANY_AVAILABLE": "Enhver tilgængelig",
     "ANY_CLINIC": "Enhver Clinic",
     "ANY_PACKAGES": "Patienter i <strong>enhver</strong> valgt fase",
     "APPOINTMENTS": "Aftaler",
@@ -376,6 +375,8 @@
     "WEEKLY_EXERCISE_GOAL": "Ugentligt træningsmål",
     "WEEKLY_VIEW": "Ugentlig Oversigt",
     "WEIGHT_GOAL": "Vægtmål",
+    "WELLCORE_CONSULTATION": "WellCore konsultation",
+    "WELLCORE_PROVIDER": "WellCore udbyder",
     "ZIP": "Postnr."
   },
   "CALL": {
