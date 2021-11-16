@@ -27,7 +27,7 @@
 
   <p *ngIf="!edit">{{ 'LIBRARY.FORMS.MAX_SUBMISSIONS_NOTICE' | translate }}</p>
 
-  <mat-radio-group class="radio-group" formControlName="removableSubmissions">
+  <mat-radio-group *ngIf="!edit" class="radio-group" formControlName="removableSubmissions">
     <strong>
       <span class="ccr-strong">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS' | translate }}&nbsp;*</span>
     </strong>
@@ -36,6 +36,21 @@
       <mat-radio-button [value]="false">{{ 'GLOBAL.NO' | translate }}</mat-radio-button>
     </div>
   </mat-radio-group>
+
+  <div *ngIf="edit">
+    <div *ngIf="removableSubmissionsStatus !== 'submitting'">
+      <strong>
+        <span class="ccr-strong">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS' | translate }}&nbsp;*</span>
+      </strong>
+      <p>{{ (form.value.removableSubmissions ? 'GLOBAL.YES' : 'GLOBAL.NO') | translate }}</p>
+      <i *ngIf="removableSubmissionsStatus === 'pending'">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS_NOT_EDITABLE' | translate }} <a class="link" (click)="requestChangeRemovableSubmissions()">{{'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS_SUBMIT_SUPPORT' | translate}}</a></i>
+      <i *ngIf="removableSubmissionsStatus === 'submitted'">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS_SUBMIT_SUCCESS' | translate }}</i>
+      <i *ngIf="removableSubmissionsStatus === 'error'">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS_SUBMIT_ERROR' | translate }}</i>
+    </div>
+    <div *ngIf="removableSubmissionsStatus === 'submitting'">
+      <mat-spinner strokeWidth="5" diameter="30"></mat-spinner>
+    </div>
+  </div>
 
   <p *ngIf="!edit">{{ 'LIBRARY.FORMS.REMOVABLE_SUBMISSIONS_NOTICE' | translate }}</p>
 </div>
