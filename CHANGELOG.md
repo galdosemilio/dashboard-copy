@@ -1,3 +1,22 @@
+# [1.51.0](https://github.com/coachcare/dashboard/compare/v1.50.0...v1.51.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* added billing info state check [FRON-2442] ([7616861](https://github.com/coachcare/dashboard/commit/7616861121cb18c35e225c05582c5c6d7c001858))
+* changed final button to complete and pay [FRON-2446] ([8901743](https://github.com/coachcare/dashboard/commit/890174365416d7d1b219a266d64c6a7e8016da82))
+* removed unnecessary newline [FRON-2455] ([f0a02d7](https://github.com/coachcare/dashboard/commit/f0a02d7bcbc461e31608e0eb42e25556b81eaaf5))
+* show dynamic store nav name for musclewise [FRON-2455] ([b47dea8](https://github.com/coachcare/dashboard/commit/b47dea826e8d135e24e9ee6fccd83d532fe7218a))
+* small adjustments to wellcore pages [FRON-2452] ([e84541c](https://github.com/coachcare/dashboard/commit/e84541c4fc3d81b41f03c1d9fdc7745afaa13eb9))
+
+
+### Features
+
+* added review order api integration [FRON-2445] ([491a894](https://github.com/coachcare/dashboard/commit/491a89475494721da9a386e9cae5b5e6de8e8069))
+* added shipping api interactions [FRON-2441] ([412f68c](https://github.com/coachcare/dashboard/commit/412f68c834b0bfdde5c1d8e02719e20b770c8861))
+* added support for acc and cart creation [FRON-2439] ([02773de](https://github.com/coachcare/dashboard/commit/02773de0cb58b4a9b4b13d71a20aa53aba5cac62))
+* expose scheduling preferences on admin site [FRON-2427] ([dd46ccb](https://github.com/coachcare/dashboard/commit/dd46ccbe0dfd68f9a5589e2af8645daba279a595))
+
 # [1.50.0](https://github.com/coachcare/dashboard/compare/v1.49.0...v1.50.0) (2021-11-12)
 
 
