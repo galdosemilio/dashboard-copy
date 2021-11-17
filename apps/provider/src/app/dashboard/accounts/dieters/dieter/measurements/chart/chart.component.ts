@@ -67,27 +67,29 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         const tickSlotAmount = this.timeframe === 'week' ? 8 : 31
-        const dataset = chart.config.data.datasets[0]
-        const metadata: ChartData = Object.values(dataset._meta)[0]
 
-        if (!metadata) {
-          return
-        }
+        chart.config.data.datasets.forEach((dataset) => {
+          const metadata: ChartData = Object.values(dataset._meta)[0]
 
-        const chartWidth = metadata.data[0]._xScale.width
-        const offset = chartWidth / tickSlotAmount / MAX_ENTRIES_PER_DAY
+          if (!metadata) {
+            return
+          }
 
-        let previousDate = ''
-        let cumulativeOffset = 0
+          const chartWidth = metadata.data[0]._xScale.width
+          const offset = chartWidth / tickSlotAmount / MAX_ENTRIES_PER_DAY
 
-        metadata.data.forEach((entry, index) => {
-          const dataEntry = dataset.data[index]
-          const isSameDate = previousDate.includes(dataEntry.x)
+          let previousDate = ''
+          let cumulativeOffset = 0
 
-          cumulativeOffset = isSameDate ? cumulativeOffset + offset : 0
-          entry._model.x += cumulativeOffset
+          metadata.data.forEach((entry, index) => {
+            const dataEntry = dataset.data[index]
+            const isSameDate = previousDate.includes(dataEntry.x)
 
-          previousDate = dataEntry.x
+            cumulativeOffset = isSameDate ? cumulativeOffset + offset : 0
+            entry._model.x += cumulativeOffset
+
+            previousDate = dataEntry.x
+          })
         })
       }
     }
