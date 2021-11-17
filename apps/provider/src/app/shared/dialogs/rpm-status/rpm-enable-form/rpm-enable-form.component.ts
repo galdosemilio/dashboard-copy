@@ -9,10 +9,12 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import {
+  AbstractControl,
   ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
+  ValidationErrors,
   Validators
 } from '@angular/forms'
 import { resolveConfig } from '@app/config/section'
@@ -23,9 +25,9 @@ import {
 import { RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
 import { ContextService, NotifierService } from '@app/service'
 import { ImageOptionSelectorItem } from '@app/shared/components/image-option-selector'
-import { SelectOption } from '@app/shared/utils'
+import { _, SelectOption } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { OrganizationAccess } from '@coachcare/sdk'
+import { OrganizationAccess, RPM } from '@coachcare/sdk'
 import { MatStepper } from '@coachcare/material'
 import { auditTime } from 'rxjs/operators'
 import { Subject } from 'rxjs'
@@ -54,6 +56,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
 
   public allowNoDeviceOption = false
   public form: FormGroup
+  public blockFormError?: string
   public rpmDevices: ImageOptionSelectorItem[] = []
   public selectedClinic?: OrganizationAccess
   public supervisingProviderOptions: SelectOption<string>[] = []
@@ -64,8 +67,11 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
     private context: ContextService,
     private database: SupervisingProvidersDatabase,
     private fb: FormBuilder,
-    private notify: NotifierService
-  ) {}
+    private notify: NotifierService,
+    private rpm: RPM
+  ) {
+    this.validateRPMPreference = this.validateRPMPreference.bind(this)
+  }
 
   public ngOnInit(): void {
     this.createForm()
@@ -99,7 +105,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       setup: this.fb.group({
-        organization: ['', Validators.required],
+        organization: ['', Validators.required, this.validateRPMPreference],
         supervisingProvider: ['', Validators.required],
         primaryDiagnosis: ['', Validators.required],
         secondaryDiagnosis: ['']
@@ -244,6 +250,31 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
     this.nextStep$
       .pipe(untilDestroyed(this))
       .subscribe(() => this.stepper.next())
+  }
+
+  private async validateRPMPreference(
+    control: AbstractControl
+  ): Promise<ValidationErrors | null> {
+    try {
+      if (!control.value) {
+        return
+      }
+
+      this.blockFormError = ''
+
+      const pref = await this.rpm.getRPMPreferenceByOrg({
+        organization: control.value
+      })
+
+      if (pref.isActive) {
+        return null
+      }
+
+      this.blockFormError = _('NOTIFY.ERROR.RPM_NOT_ENABLED_CLINIC')
+      return { invalidRPMPref: true }
+    } catch (error) {
+      this.notify.error(error)
+    }
   }
 
   private verifySupervisingProviderSelection(): void {

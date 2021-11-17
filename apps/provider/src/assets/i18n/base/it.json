@@ -1029,6 +1029,7 @@
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} non fa parte della clinica selezionata \"{{clinicName}}\". Ciò potrebbe comportare problemi di visibilità, in cui altri partecipanti alla riunione potrebbero non vederli elencati come partecipanti a questa riunione.",
       "REPEAT_EMPTY": "Ti preghiamo di selezionare un'opzione ripetuta.",
       "RETRIEVING_MEETING_TYPES": "L'organizzazione selezionata non ha tipi di incontri. Ti preghiamo di contattare il tuo amministratore.",
+      "RPM_NOT_ENABLED_CLINIC": "RPM non è abilitato per la clinica {{clinic.name}}. Si prega di selezionare una clinica diversa.",
       "SCHEDULE_CONFLICT": "{{name}} ha un conflitto di programmazione.",
       "SEQUENCING_NO_ENROLLED": "Non sono stati registrati account di pazienti. Invia di nuovo questo modulo.",
       "SEQUENCING_NO_UNENROLLED_ERROR": "Nessun account paziente è stato annullato. Invia di nuovo questo modulo.",

@@ -1029,6 +1029,7 @@
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} não faz parte da clínica selecionada \"{{clinicName}}\". Isso pode resultar em problemas de visibilidade, em que outros participantes da reunião podem não vê-los listados como participantes desta reunião.",
       "REPEAT_EMPTY": "Por favor selecione uma opção de repetição.",
       "RETRIEVING_MEETING_TYPES": "A organização selecionada não possui tipos de reunião. Por favor contate seu administrador.",
+      "RPM_NOT_ENABLED_CLINIC": "RPM não está ativado para a clínica {{clinic.name}}. Por favor, selecione uma clínica diferente.",
       "SCHEDULE_CONFLICT": "{{name}} tem um conflito de agenda.",
       "SEQUENCING_NO_ENROLLED": "Nenhuma conta de paciente foi registrada. Envie este formulário novamente.",
       "SEQUENCING_NO_UNENROLLED_ERROR": "Nenhuma conta de paciente foi cancelada. Envie este formulário novamente.",

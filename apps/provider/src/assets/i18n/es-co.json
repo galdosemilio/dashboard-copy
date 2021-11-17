@@ -1029,6 +1029,7 @@
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} no es parte de la clínica seleccionada \"{{clinicName}}\". Esto puede resultar en problemas de visibilidad, donde otros participantes de la reunión pueden no verlos en la lista como asistentes a esta reunión.",
       "REPEAT_EMPTY": "Seleccione una opción de repetición.",
       "RETRIEVING_MEETING_TYPES": "La organización seleccionada no tiene Tipos de Eventos relacionados. Por favor contacte su administrador.",
+      "RPM_NOT_ENABLED_CLINIC": "El RPM no está habilitado para la clínica {{ clinic.name }}. Por favor, escoja una clínica diferente.",
       "SCHEDULE_CONFLICT": "{{name}} ya tiene ocupada su agenda.",
       "SEQUENCING_NO_ENROLLED": "No se añadió ningún destinatario. Por favor, envíe el formulario de nuevo.",
       "SEQUENCING_NO_UNENROLLED_ERROR": "No se removió ningún destinatario. Por favor, envíe el formulario de nuevo.",

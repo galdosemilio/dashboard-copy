@@ -1029,6 +1029,7 @@
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} er ikke en del af den valgte klinik \"{{clinicName}}\". Dette kan resultere i synlighedsproblemer, hvor andre mødedeltagere muligvis ikke ser dem opført som deltagere på dette møde.",
       "REPEAT_EMPTY": "Vælg venligst en gentagelsesindstilling.",
       "RETRIEVING_MEETING_TYPES": "Den valgte organisation har ikke mødetyper. Kontakt venligst din administrator.",
+      "RPM_NOT_ENABLED_CLINIC": "RPM er ikke aktiveret til klinikken {{clinic.name}}. Vælg venligst en anden klinik.",
       "SCHEDULE_CONFLICT": "{{name}} har en tidsplanskonflikt.",
       "SEQUENCING_NO_ENROLLED": "Der blev ikke registreret nogen patientkonti. Send denne formular igen.",
       "SEQUENCING_NO_UNENROLLED_ERROR": "Ingen patientkonti blev ikke registreret. Send denne formular igen.",

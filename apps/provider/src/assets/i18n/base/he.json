@@ -1029,6 +1029,7 @@
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} אינו חלק מהמרפאה שנבחרה \"{{clinicName}}\". ייתכן שהתוצאה היא בעיות נראות, שבהן ייתכן שמשתתפים אחרים בפגישה לא יראו אותם רשומים כמשתתפים בפגישה זו.",
       "REPEAT_EMPTY": "יש לבחור את אפשרות חזרה.",
       "RETRIEVING_MEETING_TYPES": "למרפאה הנבחרת אין סוגי פגישה. יש ליצור קשר עם מנהל המערכת.",
+      "RPM_NOT_ENABLED_CLINIC": "RPM אינו מופעל עבור המרפאה {{clinic.name}}. בחר מרפאה אחרת.",
       "SCHEDULE_CONFLICT": "{{name}} יש התנגשות בלוח זמנים.",
       "SEQUENCING_NO_ENROLLED": "לא נרשמו חשבונות מטופלים. אנא שלח שוב טופס זה.",
       "SEQUENCING_NO_UNENROLLED_ERROR": "לא נרשמו חשבונות מטופלים. אנא שלח שוב טופס זה.",

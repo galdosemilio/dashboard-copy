@@ -1029,6 +1029,7 @@
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} is not part of the selected clinic \"{{ clinicName }}\".  This may result is visibility issues, where other meeting participants may not see them listed as an attendee on this meeting.",
       "REPEAT_EMPTY": "Please select a repeat option.",
       "RETRIEVING_MEETING_TYPES": "The selected clinic doesn't have meeting types. Please contact your administrator.",
+      "RPM_NOT_ENABLED_CLINIC": "RPM is not enabled for the clinic {{clinic.name}}. Please select a different clinic.",
       "SCHEDULE_CONFLICT": "{{name}} has a schedule conflict.",
       "SEQUENCING_NO_ENROLLED": "No patient accounts were enrolled. Please submit this form again.",
       "SEQUENCING_NO_UNENROLLED_ERROR": "No patient accounts were unenrolled. Please submit this form again.",

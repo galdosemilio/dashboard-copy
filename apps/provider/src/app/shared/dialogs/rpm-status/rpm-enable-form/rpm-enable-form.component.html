@@ -14,29 +14,35 @@
         </mat-select>
       </mat-form-field>
 
-      <ccr-search-selector
-      *ngIf="supervisingProviderOptions?.length"
-      [initialSelection]="supervisingProviderOptions[0]"
-      [placeholder]="'GLOBAL.SUPERVISING_PROVIDER' | translate"
-      [options]="supervisingProviderOptions"
-      (optionSelected)="onSupervisingProviderSelected($event)">
-      </ccr-search-selector>
+      <div
+        *ngIf="!blockFormError; else blockFormErrorDisplay"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        fxLayoutGap="15px">
+        <ccr-search-selector
+        *ngIf="supervisingProviderOptions?.length"
+        [initialSelection]="supervisingProviderOptions[0]"
+        [placeholder]="'GLOBAL.SUPERVISING_PROVIDER' | translate"
+        [options]="supervisingProviderOptions"
+        (optionSelected)="onSupervisingProviderSelected($event)">
+        </ccr-search-selector>
 
-      <p
-      *ngIf="!supervisingProviderOptions?.length && selectedClinic"
-      [innerHTML]="'RPM.NO_SUPERVISING_PROVIDER_WARNING' | translate:{clinic: selectedClinic.organization}"
-      class="highlighted">
-      </p>
+        <p
+        *ngIf="!supervisingProvidersDataSource.isLoading && !supervisingProviderOptions?.length && selectedClinic"
+        [innerHTML]="'RPM.NO_SUPERVISING_PROVIDER_WARNING' | translate:{clinic: selectedClinic.organization}"
+        class="highlighted">
+        </p>
 
-      <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
-        <mat-label>{{ 'RPM.PRIMARY_DIAGNOSIS' | translate }}</mat-label>
-        <textarea formControlName="primaryDiagnosis" matInput></textarea>
-      </mat-form-field>
+        <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
+          <mat-label>{{ 'RPM.PRIMARY_DIAGNOSIS' | translate }}</mat-label>
+          <textarea formControlName="primaryDiagnosis" matInput></textarea>
+        </mat-form-field>
 
-      <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
-        <mat-label>{{ 'RPM.SECONDARY_DIAGNOSIS' | translate }}</mat-label>
-        <textarea formControlName="secondaryDiagnosis" matInput></textarea>
-      </mat-form-field>
+        <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
+          <mat-label>{{ 'RPM.SECONDARY_DIAGNOSIS' | translate }}</mat-label>
+          <textarea formControlName="secondaryDiagnosis" matInput></textarea>
+        </mat-form-field>
+      </div>
     </div>
   </mat-step>
 
@@ -77,3 +83,9 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper>
+
+<ng-template #blockFormErrorDisplay>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-error>{{ blockFormError | translate:{clinic: selectedClinic.organization} }}</mat-error>
+  </div>
+</ng-template>
