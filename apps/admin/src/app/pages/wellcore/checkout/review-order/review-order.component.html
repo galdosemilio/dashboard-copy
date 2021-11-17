@@ -57,8 +57,8 @@
       fxLayoutGap="50px"
       fxLayoutGap.sm="10px"
     >
-      <p class="review-item"><span>Gender: </span>{{ checkoutData.accountInfo.gender }}</p>
-      <p class="review-item"><span>Height: </span>{{ checkoutData.accountInfo.height ? checkoutData.accountInfo.height + 'ft' : '' }}</p>
+      <p class="review-item"><span>Gender: </span>{{ checkoutData.accountInfo.gender | titlecase }}</p>
+      <p class="review-item"><span>Height: </span>{{ checkoutData.accountInfo.height ? checkoutData.accountInfo.heightDisplayValue : '' }}</p>
     </div>
     <div
       fxLayout="row"
@@ -69,7 +69,7 @@
       fxLayoutGap.sm="10px"
     >
       <p class="review-item"><span>Birthday: </span>
-        {{ checkoutData.accountInfo.birthday ? (checkoutData.accountInfo.birthday | amDateFormat:'YYYY/MM/DD') : '' }}
+        {{ checkoutData.accountInfo.birthday ? (checkoutData.accountInfo.birthday | amDateFormat:'M/D/YYYY') : '' }}
       </p>
     </div>
   </div>

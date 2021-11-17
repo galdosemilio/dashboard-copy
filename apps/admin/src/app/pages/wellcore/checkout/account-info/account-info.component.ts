@@ -1,11 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { FormGroup } from '@angular/forms'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { range, uniqBy } from 'lodash'
 
 interface SelectOption {
   value: string | number
   name: string
 }
+
+@UntilDestroy()
 @Component({
   selector: 'ccr-wellcore-account-info',
   templateUrl: './account-info.component.html'
@@ -31,6 +34,19 @@ export class WellcoreAccountComponent implements OnInit, OnDestroy {
       })),
       (v) => v.name
     )
+
+    this.formGroup
+      .get('height')
+      .valueChanges.pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        if (!value) {
+          return
+        }
+
+        this.formGroup
+          .get('heightDisplayValue')
+          .setValue(this.heights.find((height) => height.value === value).name)
+      })
   }
 
   ngOnDestroy() {}

@@ -16,7 +16,6 @@ import {
   LanguageService,
   NotifierService
 } from '@coachcare/common/services'
-import { sleep } from '@coachcare/common/shared'
 import { MatStepper } from '@coachcare/material'
 import {
   AccountAddress,
@@ -51,6 +50,7 @@ export interface CheckoutData {
     phoneNumber: string
     gender: string
     height?: string
+    heightDisplayValue?: string
     birthday?: Date
   }
   paymentInfo?: {
@@ -103,7 +103,6 @@ export class WellcoreCheckoutComponent implements OnInit {
   public orderConfirm: FormGroup
   public step = 0
   public checkoutData: CheckoutData = {}
-  public emailAddress: string
   public useShippingAddress: boolean = true
   public whitelistedStates: string[] = STATES_LIST.filter(
     (state) => state.whitelisted
@@ -154,6 +153,19 @@ export class WellcoreCheckoutComponent implements OnInit {
     )
   }
 
+  public getNextStepLabel(): string {
+    switch (this.stepper.selectedIndex) {
+      case 3:
+        return 'Complete and Pay'
+
+      case 4:
+        return 'Complete Medical Intake Form'
+
+      default:
+        return 'Next'
+    }
+  }
+
   public async nextStep(): Promise<void> {
     const from = this.stepper.selectedIndex
 
@@ -191,8 +203,10 @@ export class WellcoreCheckoutComponent implements OnInit {
         break
 
       case 3:
-        this.emailAddress = this.accountInfo.value.email
         await this.completeOrder()
+        break
+
+      case 4:
         void this.startRedirection()
         break
     }
@@ -239,6 +253,7 @@ export class WellcoreCheckoutComponent implements OnInit {
       phoneNumber: ['', Validators.required],
       gender: ['', [Validators.required, this.validateGender]],
       height: ['', Validators.required],
+      heightDisplayValue: [''],
       birthday: ['', [Validators.required, this.validateAge]]
     })
     this.shippingInfo = this.fb.group({
@@ -283,8 +298,21 @@ export class WellcoreCheckoutComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((controls) => {
         this.checkoutData.shippingInfo = controls
+
+        if (this.shippingInfo.invalid) {
+          return
+        }
+
         if (this.useShippingAddress) {
           this.paymentInfo.controls.billingInfo.patchValue(controls)
+          this.paymentInfo.controls.billingInfo.updateValueAndValidity()
+
+          if (this.paymentInfo.controls.billingInfo.valid) {
+            return
+          }
+
+          this.paymentInfo.controls.billingInfo.reset()
+          this.useShippingAddress = false
         }
       })
   }
@@ -671,7 +699,6 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   private async startRedirection(): Promise<void> {
-    await sleep(8000)
     window.location.href = `${environment.url}/${environment.wellcoreOrgId}`
   }
 
