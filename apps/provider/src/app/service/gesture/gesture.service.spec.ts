@@ -1,19 +1,22 @@
 import { GestureService } from './gesture.service'
 import { sleep } from '@app/shared/utils'
+import * as moment from 'moment'
 
 let gestureService = new GestureService()
 
 describe('Gesture Service Tests', () => {
   beforeEach(() => {
     gestureService = new GestureService()
-    gestureService.init({ userIdleTimeout: 100 })
+    gestureService.init({
+      userIdleTimeout: moment.duration(100, 'milliseconds')
+    })
   })
 
   it('Should mark the user as active right away', () => {
     expect(gestureService.userIdle$.getValue()).toEqual(false)
   })
 
-  it('Should mark the user as idle if 15 minutes pass without any interaction', async () => {
+  it('Should mark the user as idle if 5 minutes pass without any interaction', async () => {
     await sleep(200)
     expect(gestureService.userIdle$.getValue()).toEqual(true)
   })

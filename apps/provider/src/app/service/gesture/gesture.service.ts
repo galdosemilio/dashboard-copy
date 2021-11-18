@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, fromEvent, merge, Observable, Subject } from 'rxjs'
 import { auditTime, debounceTime, filter } from 'rxjs/operators'
-
+import * as moment from 'moment-timezone'
 interface GestureServiceInitProps {
-  userIdleTimeout: number
+  userIdleTimeout: moment.Duration
 }
 
 @Injectable()
@@ -12,7 +12,7 @@ export class GestureService {
     false
   )
 
-  private userIdleTimeout = 900000
+  private userIdleTimeout: moment.Duration
   private isPaused = false
   private simpleEvent$: Observable<Event> = new Observable<Event>()
   private userIdleBumper$: Subject<void> = new Subject<void>()
@@ -28,7 +28,9 @@ export class GestureService {
   }
 
   public init(
-    props: GestureServiceInitProps = { userIdleTimeout: 900000 }
+    props: GestureServiceInitProps = {
+      userIdleTimeout: moment.duration(5, 'minutes')
+    }
   ): void {
     this.userIdleTimeout = props.userIdleTimeout
 
@@ -42,7 +44,7 @@ export class GestureService {
 
     this.userIdleBumper$
       .pipe(
-        debounceTime(this.userIdleTimeout),
+        debounceTime(this.userIdleTimeout.asMilliseconds()),
         filter(() => !this.isPaused)
       )
       .subscribe(() => this.userIdle$.next(true))
