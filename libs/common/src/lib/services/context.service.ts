@@ -40,6 +40,8 @@ export type SelectedOrganization = Partial<OrgEntity> & {
   preferences?: OrganizationPreferenceSingle
 }
 
+const wellcoreBaseUrl = 'my.teamwellcore.com'
+
 /**
  * Context Service
  */
@@ -62,8 +64,14 @@ export class ContextService {
   init() {
     return (): Promise<any> => {
       // Fetch baseOrgId from URL params
+      const isWellCoreUrl = window.location.host.includes(wellcoreBaseUrl)
       let urlParams = this.resolveUrlParams()
-      let baseOrgId = urlParams.baseOrg ? urlParams.baseOrg || null : null
+      let baseOrgId = isWellCoreUrl
+        ? this.environment.wellcoreOrgId
+        : urlParams.baseOrg
+        ? urlParams.baseOrg || null
+        : null
+
       const cookieOrgId = this.cookie.get(COOKIE_ORG)
 
       // Check if the baseOrgId is different from what we have in the cookie

@@ -28,6 +28,7 @@ import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { resolveConfig } from '../config/section.config'
 
 type LoginPageMode = 'patient'
 
@@ -279,6 +280,16 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
   }
 
   private resolveRegisterNewCompanyLink(params): void {
+    const shouldShowRegisterCompany = resolveConfig(
+      'LOGIN.SHOW_REGISTER_NEW_COMPANY',
+      this.context.organizationId
+    )
+
+    if (!shouldShowRegisterCompany) {
+      this.showRegisterCompany = false
+      return
+    }
+
     const storageValue = window.localStorage.getItem(
       STORAGE_HIDE_REGISTER_COMPANY
     )

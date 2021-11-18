@@ -15,5 +15,8 @@ export const DefaultSectionConfig: SectionConfigDetails = {
     },
     LAST_STEP: DefaultLastStepComponent,
     SELF_REGISTER: true
+  },
+  LOGIN: {
+    SHOW_REGISTER_NEW_COMPANY: true
   }
 }

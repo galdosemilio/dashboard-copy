@@ -21,6 +21,11 @@ import {
   RobardTestSectionConfig
 } from './robard.section.config'
 import { ShakeItSectionConfig } from './shake-it.section.config'
+import { WellCoreSectionConfig } from './wellcore.section.config'
+
+export interface LoginConfigDetails {
+  SHOW_REGISTER_NEW_COMPANY?: boolean
+}
 
 export interface CustomCheckboxConfig {
   text: string
@@ -55,6 +60,7 @@ export interface RegisterFirstStepDetails {
 
 export interface SectionConfigDetails {
   REGISTER?: RegisterConfigDetails
+  LOGIN?: LoginConfigDetails
 }
 
 export interface SectionConfigItem {
@@ -81,6 +87,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7229']: NutrimostSectionConfig,
     ['7016']: RobardTestSectionConfig,
     ['5748']: ShakeItSectionConfig,
+    ['7535']: WellCoreSectionConfig,
     ['7537']: MuscleWiseSectionConfig
   },
   prod: {
@@ -95,7 +102,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['5604']: NutrimostSectionConfig,
     ['4118']: RobardProdSectionConfig,
     ['4156']: ShakeItSectionConfig,
-    ['6916']: MuscleWiseSectionConfig
+    ['6916']: MuscleWiseSectionConfig,
+    ['6891']: WellCoreSectionConfig
   }
 }
 
@@ -129,6 +137,7 @@ export function resolveConfig(
         defaultConfig = defaultConfig ? defaultConfig[segment] : undefined
         config = config ? config[segment] : undefined
       })
-    return config !== null ? config || defaultConfig : {}
+
+    return config ?? defaultConfig ?? {}
   }
 }
