@@ -1,0 +1,11 @@
+ccr-form-fill-dialog {
+  .form-container {
+    max-height: 100vh;
+    padding: 15px;
+    overflow-y: auto;
+
+    ccr-datasource-overlay {
+      padding: 25px 25px 85px 25px;
+    }
+  }
+}

@@ -3,7 +3,8 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
+  ViewEncapsulation
 } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
 import { CCRConfig, CCRPalette } from '@app/config'
@@ -34,7 +35,8 @@ export interface SidenavOrg {
 @Component({
   selector: 'app-menu-wellcore',
   templateUrl: './sidenav-wellcore.component.html',
-  styleUrls: ['./sidenav-wellcore.component.scss']
+  styleUrls: ['./sidenav-wellcore.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SidenavWellcoreComponent
   implements AfterViewInit, OnInit, OnDestroy {
@@ -96,6 +98,7 @@ export class SidenavWellcoreComponent
 
     this.context.organization$.subscribe((org) => {
       this.organization = org
+      this.updateSections(org)
       this.updateContactLinks()
     })
 
@@ -157,6 +160,14 @@ export class SidenavWellcoreComponent
             icon: 'schedule'
           }
         ]
+      },
+      {
+        code: SidenavOptions.DIGITAL_LIBRARY,
+        navName: _('SIDENAV.LIBRARY'),
+        route: 'library',
+        navRoute: 'library',
+        icon: 'folder',
+        badge: 0
       },
       {
         code: SidenavOptions.TEST_RESULTS,
@@ -275,6 +286,19 @@ export class SidenavWellcoreComponent
       }
       return item
     })
+  }
+
+  private updateSections(org: SelectedOrganization): void {
+    const enabledLibrary = get(org, 'preferences.content.enabled', false)
+
+    const libIdx = findIndex(this.sidenavItems, {
+      navName: _('SIDENAV.LIBRARY')
+    })
+
+    this.sidenavItems[libIdx] = {
+      ...this.sidenavItems[libIdx],
+      cssClass: enabledLibrary ? '' : 'hidden'
+    }
   }
 
   private updateUnread(): void {

@@ -8,6 +8,7 @@ import {
   FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
+  FormFillDialog,
   PatientSelectDialog,
   ViewAddendumDialog
 } from '@app/dashboard/library/forms/dialogs'
@@ -75,6 +76,7 @@ export const FormsComponents = [
   FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
+  FormFillDialog,
   FormFormComponent,
   FormManagerComponent,
   FormsComponent,
@@ -96,6 +98,7 @@ export const FormsEntryComponents = [
   FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
+  FormFillDialog,
   PatientSelectDialog,
   ViewAddendumDialog,
   ...questionComponents

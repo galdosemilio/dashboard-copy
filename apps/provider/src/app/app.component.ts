@@ -28,7 +28,8 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { CallLayoutService } from './layout/call/services/call-layout.service'
 import { RecoverCall } from './layout/store/call'
 import { MatDialog } from '@coachcare/material'
-import { MedicalIntakeFormDialog } from './shared'
+import { environment } from '../environments/environment'
+import { FormFillDialog } from './dashboard/library/forms/dialogs/form-fill'
 
 @UntilDestroy()
 @Component({
@@ -99,7 +100,8 @@ export class AppComponent implements OnDestroy, OnInit {
     this.medicalIntakeForm.init()
 
     this.medicalIntakeForm.showModal$.pipe(untilDestroyed(this)).subscribe(() =>
-      this.dialog.open(MedicalIntakeFormDialog, {
+      this.dialog.open(FormFillDialog, {
+        data: { formId: environment.wellcoreMedicalFormId },
         panelClass: 'ccr-fullscreen-dialog',
         disableClose: true
       })
