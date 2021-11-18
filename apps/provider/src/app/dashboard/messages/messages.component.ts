@@ -54,6 +54,16 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
   public zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/sections/360003247792-Messages'
 
+  get showCreateNewMessageButton() {
+    return (
+      this.current &&
+      this.isProvider &&
+      this.threads.length === 0 &&
+      this.accounts.length > 1 &&
+      !this.source?.isLoading
+    )
+  }
+
   @ViewChild('scroll', { static: true })
   scroll: ElementRef
 

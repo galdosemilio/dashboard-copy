@@ -27,7 +27,15 @@
         [current]="current" [total]="source?.total"
         (changed)="selectAccounts($event)"
       ></app-messages-recipients>
-
+      <a
+        mat-button
+        color="primary"
+        class="ccr-button btn-create-new-message"
+        *ngIf="showCreateNewMessageButton"
+        (click)="isMessageOpen = !isMessageOpen"
+      >
+        {{ 'GLOBAL.CREATE_NEW_MESSAGE' | translate }}
+      </a>
       <div class="ccr-recipients-scroll" #scroll (click)="isMessageOpen = !isMessageOpen">
         <mat-nav-list>
           <ng-container *ngFor="let thread of threads; let index = index">

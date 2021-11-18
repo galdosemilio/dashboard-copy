@@ -16,6 +16,10 @@ ccr-messages,
   }
 }
 
+.btn-create-new-message {
+  display: none;
+}
+
 .unread-button {
   min-height: 30px;
 }
@@ -36,5 +40,8 @@ ccr-messages,
   ccr-messages,
   .ccr-recipients {
     max-height: 88vh;
+  }
+  .btn-create-new-message {
+    display: block;
   }
 }
