@@ -124,6 +124,13 @@ export class SidenavWellcoreComponent
         isAllowedForPatients: false
       },
       {
+        code: SidenavOptions.ACCOUNTS_COACHES,
+        navName: _('GLOBAL.COACHES'),
+        navRoute: 'accounts/coaches',
+        icon: 'assignment_ind',
+        isAllowedForPatients: false
+      },
+      {
         code: SidenavOptions.NEW_APPOINTMENT,
         navName: _('GLOBAL.APPOINTMENTS'),
         navRoute: 'schedule/mosaic',
