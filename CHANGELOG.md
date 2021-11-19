@@ -1,3 +1,18 @@
+# [1.52.0](https://github.com/coachcare/dashboard/compare/v1.51.0...v1.52.0) (2021-11-19)
+
+
+### Bug Fixes
+
+* add create new message button [MOB-3438] ([bc312db](https://github.com/coachcare/dashboard/commit/bc312db4c17a1cb69a8fb311d313f071376fa500))
+* added clinic rpm preference validation [FRON-2473] ([f13400d](https://github.com/coachcare/dashboard/commit/f13400dfd86c405d12395a8a856b5b12992bbf05))
+* modify form removable submissions setting [FRON-2463] ([da7ad89](https://github.com/coachcare/dashboard/commit/da7ad89a1190a2ce88eefb3b91cbb4dbd8f6ed4b))
+* secondary datasets are now offset horizontally [FRON-2459] ([6f94cc6](https://github.com/coachcare/dashboard/commit/6f94cc6e7a785e85acd42729f4ff91dd9f611cdb))
+
+
+### Features
+
+* implemented general account feature improvements [FRON-1551] ([5435741](https://github.com/coachcare/dashboard/commit/543574186f4bfaf102a004ec2f23bca2767fb1ba))
+
 # [1.51.0](https://github.com/coachcare/dashboard/compare/v1.50.0...v1.51.0) (2021-11-16)
 
 
