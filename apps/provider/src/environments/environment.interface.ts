@@ -15,4 +15,5 @@ export interface Environment {
   wellCoreOrgId: string
   wellcoreMedicalFormId: string
   wellcoreMeetingId: number
+  wellcoreEligibleToSelfSchedulePhaseId: string
 }

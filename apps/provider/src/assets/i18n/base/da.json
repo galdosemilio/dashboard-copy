@@ -166,6 +166,7 @@
     "DEVICE": "Enhed",
     "DEVICES": "Enheder",
     "DIETERS_EMPTY_LIST": "Ingen patienter er tilknyttet denne organisation endnu.",
+    "DISABLED_SELF_SCHEDULE": "For at bestille en tid skal du først have modtaget din blodprøve fra laboratoriet. Du vil modtage en meddelelse, når laboratorieresultaterne er modtaget, og du er berettiget til at planlægge en tid",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Vis aktive eller slettede møder",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Ethvert møde, der er planlagt på platformen, er et 'aktivt' møde. Hvis et aktivt møde slettes af træneren eller patienten, bliver det et 'slettet' møde. Som standard er kun de aktive møder præsenteret i denne liste. Slettede møder kan ses ved at ændre denne rullemenu til 'Slettede møder'.",
     "DOB": "DOB",

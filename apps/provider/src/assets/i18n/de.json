@@ -166,6 +166,7 @@
     "DEVICE": "Gerät",
     "DEVICES": "Geräte",
     "DIETERS_EMPTY_LIST": "Dieser Organisation sind noch keine Patienten zugeordnet.",
+    "DISABLED_SELF_SCHEDULE": "Um einen Termin zu vereinbaren, müssen Sie zuerst Ihr Laborergebnis erhalten haben. Sie erhalten eine Benachrichtigung, wenn die Laborergebnisse vorliegen und Sie berechtigt sind, einen Termin zu vereinbaren",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Aktive oder gelöschte Besprechungen anzeigen",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Jedes auf der Plattform geplante Meeting ist ein aktives Meeting. Wenn eine aktive Besprechung vom Coach oder Patienten gelöscht wird, wird sie zu einer \"gelöschten\" Besprechung. Standardmäßig werden in dieser Liste nur die aktiven Besprechungen angezeigt. Gelöschte Besprechungen können angezeigt werden, indem Sie diese Dropdown-Liste in \"Gelöschte Besprechungen\" ändern.",
     "DOB": "DOB",

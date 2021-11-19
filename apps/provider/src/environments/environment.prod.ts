@@ -13,5 +13,6 @@ export const environment: Environment = {
   coachcareOrgId: '3637',
   wellCoreOrgId: '6891',
   wellcoreMedicalFormId: '831',
-  wellcoreMeetingId: 400
+  wellcoreMeetingId: 400,
+  wellcoreEligibleToSelfSchedulePhaseId: '1522'
 }

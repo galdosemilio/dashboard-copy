@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ClosePanel, UILayoutState } from '@app/layout/store/layout'
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import { Meeting } from '@app/shared/model/meeting'
-import { Schedule } from '@coachcare/sdk'
+import { PackageEnrollment, Schedule } from '@coachcare/sdk'
 import { Store } from '@ngrx/store'
 import * as moment from 'moment'
-
+import { environment } from 'apps/provider/src/environments/environment'
 @Component({
   selector: 'ccr-schedule-mosaic',
   templateUrl: './schedule-mosaic.component.html',
@@ -15,11 +15,13 @@ export class ScheduleMosaicComponent implements OnDestroy, OnInit {
   public isLoading = false
   public nextMeetings: Meeting[] = []
   public pastMeetings: Meeting[] = []
+  public eligibleToSelfSchedule: boolean = false
 
   constructor(
     private bus: EventsService,
     private context: ContextService,
     private notifier: NotifierService,
+    private packageEnrollment: PackageEnrollment,
     private schedule: Schedule,
     private store: Store<UILayoutState>
   ) {}
@@ -29,18 +31,18 @@ export class ScheduleMosaicComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
-    void this.fetchMeetings()
+    this.fetchData()
     this.store.dispatch(new ClosePanel())
     this.bus.trigger('right-panel.component.set', 'addConsultation')
     this.bus.trigger('right-panel.consultation.form', {
       form: 'addConsultation'
     })
     this.bus.register('schedule.table.refresh', () => {
-      this.fetchMeetings()
+      this.fetchData()
     })
   }
 
-  private async fetchMeetings(): Promise<void> {
+  private async fetchData(): Promise<void> {
     try {
       this.isLoading = true
       const pastMeetings = await this.schedule.fetchAllMeeting({
@@ -74,10 +76,23 @@ export class ScheduleMosaicComponent implements OnDestroy, OnInit {
       this.nextMeetings = nextMeetings.data.map(
         (meeting) => new Meeting(meeting)
       )
+
+      this.eligibleToSelfSchedule = await this.getSelfSchedulingEligibility()
     } catch (error) {
       this.notifier.error(error)
     } finally {
       this.isLoading = false
     }
+  }
+
+  private async getSelfSchedulingEligibility(): Promise<boolean> {
+    const res = await this.packageEnrollment.getAll({
+      organization: this.context.organizationId,
+      limit: 1,
+      account: this.context.user.id,
+      package: environment.wellcoreEligibleToSelfSchedulePhaseId
+    })
+
+    return res.data[0]?.isActive === true
   }
 }

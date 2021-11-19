@@ -3,6 +3,7 @@
   <h3>{{ 'BOARD.UPCOMING_APPOINTMENTS' | translate }}</h3>
 
   <div
+  *ngIf="eligibleToSelfSchedule; else disabledSelfSchedule"
   fxLayout="row"
   fxLayout.xs="column"
   fxLayoutAlign="start stretch"
@@ -19,6 +20,9 @@
 
     <ccr-meeting-container [disabled]="isLoading" fxFlex="33%"></ccr-meeting-container>
   </div>
+  <ng-template #disabledSelfSchedule>
+    <p *ngIf="!isLoading">{{ 'BOARD.DISABLED_SELF_SCHEDULE'| translate }}</p>
+  </ng-template>
 
   <h3>{{ 'BOARD.PAST_APPOINTMENTS' | translate }}</h3>
 

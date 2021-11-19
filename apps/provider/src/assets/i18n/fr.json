@@ -166,6 +166,7 @@
     "DEVICE": "Appareil",
     "DEVICES": "Appareils",
     "DIETERS_EMPTY_LIST": "Aucun patient affilié à cette organisation.",
+    "DISABLED_SELF_SCHEDULE": "Pour prendre rendez-vous, vous devez d'abord avoir reçu votre test sanguin de résultat de laboratoire. Vous recevrez une notification lorsque les résultats du laboratoire auront été reçus et vous pourrez prendre rendez-vous",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Afficher les réunions actives ou supprimées",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Toute réunion programmée sur la plate-forme est une réunion «active». Si une réunion active est supprimée par le coach ou le patient, elle devient une réunion «supprimée». Par défaut, seules les réunions actives sont présentées dans cette liste. Les réunions supprimées peuvent être visualisées en modifiant ce menu déroulant en «Réunions supprimées».",
     "DOB": "DOB",

@@ -166,6 +166,7 @@
     "DEVICE": "Dispositivo",
     "DEVICES": "Dispositivos",
     "DIETERS_EMPTY_LIST": "Todavía no hay pacientes asociados a esta organización.",
+    "DISABLED_SELF_SCHEDULE": "Para programar una cita, primero debe haber recibido el resultado de su análisis de sangre de laboratorio. Recibirá una notificación cuando se hayan recibido los resultados del laboratorio y sea elegible para programar una cita.",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Mostrar reuniones activas o eliminadas",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Cualquier reunión programada en la plataforma es una reunión \"activa\". Si el entrenador o el paciente eliminan una reunión activa, se convierte en una reunión \"eliminada\". De forma predeterminada, solo las reuniones activas se presentan en esta lista. Las reuniones eliminadas se pueden ver cambiando este menú desplegable a \"Reuniones eliminadas\".",
     "DOB": "FDN",
