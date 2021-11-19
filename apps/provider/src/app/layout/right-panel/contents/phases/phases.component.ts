@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { LabelsDataSegment } from '@app/dashboard'
+import { PhasesDataSegment } from '@app/shared'
 import { ContextService, EventsService } from '@app/service'
 import { OrganizationDetailed, PackageEnrollmentSegment } from '@coachcare/sdk'
 import { intersectionBy, uniqBy } from 'lodash'
@@ -88,7 +88,7 @@ export class PhasesComponent implements OnDestroy, OnInit {
     })
   }
 
-  private onPhaseAdded(phase: LabelsDataSegment): void {
+  private onPhaseAdded(phase: PhasesDataSegment): void {
     const phaseHierarchyPath = (phase.package
       .organization as OrganizationDetailed).hierarchyPath
 
@@ -114,7 +114,7 @@ export class PhasesComponent implements OnDestroy, OnInit {
     ]
   }
 
-  private onPhaseRemoved(phase: LabelsDataSegment): void {
+  private onPhaseRemoved(phase: PhasesDataSegment): void {
     const phaseHierarchyPath = (phase.package
       .organization as OrganizationDetailed).hierarchyPath
 

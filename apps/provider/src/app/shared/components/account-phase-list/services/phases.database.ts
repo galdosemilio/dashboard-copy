@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { resolveConfig } from '@app/config/section/utils'
-import { LabelsDataSegment } from '@app/dashboard/accounts/dieters/dieter/settings'
 import { ContextService } from '@app/service'
-import { _, CcrDatabase, PromptDialog, PromptDialogData } from '@app/shared'
+import { PromptDialog, PromptDialogData } from '@app/shared/dialogs'
+import { CcrDatabase } from '@app/shared/model'
+import { _ } from '@app/shared/utils'
 import {
   FetchEnrollmentsResponse,
   FetchPackagesResponse,
@@ -15,12 +16,14 @@ import { merge } from 'lodash'
 import * as moment from 'moment'
 import { from, Observable } from 'rxjs'
 
+import { PhasesDataSegment } from './phases.datasource'
+
 export type PackagesAndEnrollments = FetchPackagesResponse & {
   enrollments: FetchEnrollmentsResponse
 }
 
 @Injectable()
-export class LabelsDatabase extends CcrDatabase {
+export class PhasesDatabase extends CcrDatabase {
   constructor(
     private context: ContextService,
     private dialog: MatDialog,
@@ -93,7 +96,7 @@ export class LabelsDatabase extends CcrDatabase {
     )
   }
 
-  async enroll(item: LabelsDataSegment, old: LabelsDataSegment): Promise<any> {
+  async enroll(item: PhasesDataSegment, old: PhasesDataSegment): Promise<any> {
     const unenrollThenEnroll = resolveConfig(
       'PATIENT_FORM.UNENROLL_THEN_ENROLL',
       this.context.organization
@@ -112,7 +115,7 @@ export class LabelsDatabase extends CcrDatabase {
     })
   }
 
-  unenrollPrompt(item: LabelsDataSegment): Promise<void | string> {
+  unenrollPrompt(item: PhasesDataSegment): Promise<void | string> {
     return new Promise((resolve, reject) => {
       const data: PromptDialogData = {
         title: _('PHASE.CONFIRM_UNENROLL'),

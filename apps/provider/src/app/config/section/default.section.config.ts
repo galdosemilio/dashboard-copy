@@ -75,6 +75,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     LAYOUT: {
       component: DefaultLayoutComponent
     }
+  },
+  PROVIDER_PROFILE: {
+    SHOW_PHASE_LISTING: false
   }
 }
 
@@ -139,5 +142,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     LAYOUT: {
       component: DefaultLayoutComponent
     }
+  },
+  PROVIDER_PROFILE: {
+    SHOW_PHASE_LISTING: false
   }
 }

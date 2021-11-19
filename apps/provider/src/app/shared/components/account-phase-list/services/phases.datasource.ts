@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core'
 import { MatPaginator, MatSort } from '@coachcare/material'
 import { NotifierService } from '@app/service'
-import { _, TableDataSource } from '@app/shared'
+import { TableDataSource } from '@app/shared/model'
+import { _ } from '@app/shared/utils'
 import {
   FetchPackagesSegment,
   GetAllPackageOrganizationRequest
 } from '@coachcare/sdk'
 import { find } from 'lodash'
 import { Observable } from 'rxjs'
-import { LabelsDatabase, PackagesAndEnrollments } from './labels.database'
+import { PhasesDatabase, PackagesAndEnrollments } from './phases.database'
 
-export type LabelsDataSegment = {
+export type PhasesDataSegment = {
   id: string | null
   package: FetchPackagesSegment
   inherited: boolean
@@ -21,8 +22,8 @@ export type LabelsDataSegment = {
 }
 
 @Injectable()
-export class LabelsDataSource extends TableDataSource<
-  LabelsDataSegment,
+export class PhasesDataSource extends TableDataSource<
+  PhasesDataSegment,
   PackagesAndEnrollments,
   GetAllPackageOrganizationRequest
 > {
@@ -31,7 +32,7 @@ export class LabelsDataSource extends TableDataSource<
 
   constructor(
     protected notify: NotifierService,
-    protected database: LabelsDatabase,
+    protected database: PhasesDatabase,
     private paginator?: MatPaginator,
     private sort?: MatSort
   ) {
@@ -62,7 +63,7 @@ export class LabelsDataSource extends TableDataSource<
     return this.database.fetch(criteria)
   }
 
-  mapResult(result: PackagesAndEnrollments): Array<LabelsDataSegment> {
+  mapResult(result: PackagesAndEnrollments): Array<PhasesDataSegment> {
     this.total = result.pagination.next
       ? result.pagination.next + 1
       : this.criteria.offset !== undefined
@@ -106,7 +107,7 @@ export class LabelsDataSource extends TableDataSource<
     })
   }
 
-  postResult(result: Array<LabelsDataSegment>): Array<LabelsDataSegment> {
+  postResult(result: Array<PhasesDataSegment>): Array<PhasesDataSegment> {
     this.showMarker = result.some((v) => v.inherited)
 
     return result

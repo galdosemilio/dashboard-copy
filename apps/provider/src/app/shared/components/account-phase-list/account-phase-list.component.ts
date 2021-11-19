@@ -8,19 +8,20 @@ import {
 import { Subject } from 'rxjs'
 
 import { ContextService, NotifierService } from '@app/service'
+import { PhasesDatabase, PhasesDataSource } from './services'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
-import { LabelsDatabase, LabelsDataSource } from '../services'
 
 @Component({
-  selector: 'app-dieter-labels',
-  templateUrl: './labels.component.html',
-  styleUrls: ['./labels.component.scss']
+  selector: 'app-account-phase-list',
+  templateUrl: './account-phase-list.component.html',
+  styleUrls: ['./account-phase-list.component.scss']
 })
-export class DieterLabelComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AccountPhaseListComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
 
-  source: LabelsDataSource
+  source: PhasesDataSource
   param$ = new Subject<any>()
 
   clinics = [] // available options
@@ -31,12 +32,12 @@ export class DieterLabelComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private notifier: NotifierService,
-    private database: LabelsDatabase,
+    private database: PhasesDatabase,
     private context: ContextService
   ) {}
 
   ngOnInit() {
-    this.source = new LabelsDataSource(
+    this.source = new PhasesDataSource(
       this.notifier,
       this.database,
       this.paginator

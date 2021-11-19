@@ -29,7 +29,6 @@ import {
   TriggerHistoryDatabase,
   VaultDatabase
 } from './dieter/settings'
-import { LabelsDatabase } from './dieter/settings'
 import {
   DietersExpandableTableComponent,
   PatientFirstNameCell
@@ -94,7 +93,6 @@ export const DietersProviders = [
   FoodKeyDatabase,
   GoalsResolver,
   HydrationDatabase,
-  LabelsDatabase,
   LevlDataSource,
   MeasurementDatabase,
   MetricsDatabase,

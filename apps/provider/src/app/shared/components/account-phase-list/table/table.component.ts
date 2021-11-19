@@ -5,28 +5,28 @@ import {
   Input
 } from '@angular/core'
 
-import {
-  LabelsDatabase,
-  LabelsDataSegment,
-  LabelsDataSource
-} from '@app/dashboard/accounts/dieters/dieter/settings/services'
 import { EventsService, NotifierService } from '@app/service'
-import { _ } from '@app/shared'
+import { _ } from '@app/shared/utils'
+import {
+  PhasesDatabase,
+  PhasesDataSegment,
+  PhasesDataSource
+} from '../services'
 
 @Component({
-  selector: 'app-labels-table',
+  selector: 'app-phases-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class LabelsTableComponent implements AfterViewInit {
+export class PhasesTableComponent implements AfterViewInit {
   @Input()
-  source: LabelsDataSource
+  source: PhasesDataSource
   @Input()
   columns = ['id', 'title', 'organization', 'status', 'action'] // 'history'
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private database: LabelsDatabase,
+    private database: PhasesDatabase,
     private bus: EventsService,
     private notifier: NotifierService
   ) {}
@@ -37,7 +37,7 @@ export class LabelsTableComponent implements AfterViewInit {
     })
   }
 
-  enroll(item: LabelsDataSegment) {
+  enroll(item: PhasesDataSegment) {
     this.database
       .enroll(
         item,
@@ -53,7 +53,7 @@ export class LabelsTableComponent implements AfterViewInit {
       })
   }
 
-  unenroll(item: LabelsDataSegment) {
+  unenroll(item: PhasesDataSegment) {
     this.database
       .unenrollPrompt(item)
       .then(() => {

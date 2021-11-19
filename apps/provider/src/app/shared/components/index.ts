@@ -64,6 +64,13 @@ import { CcrSearchSelectorComponent } from './search-selector'
 import { CcrTinInputComponent } from './tin-input'
 import { RPMStatusInfoComponent } from './rpm-status-info'
 import {
+  AccountPhaseListComponent,
+  PhasesDataSource,
+  PhasesDatabase,
+  PhasesTableComponent,
+  PhasesDataSegment
+} from './account-phase-list'
+import {
   ScheduleListTableComponent,
   DeleteRecurringMeetingDialog,
   SingleAddDialog,
@@ -76,6 +83,7 @@ import {
 import { CcrPermissionFilterComponent } from './permission-filter'
 
 export {
+  AccountPhaseListComponent,
   AlertIconComponent,
   AddressFormComponent,
   AddressesComponent,
@@ -116,6 +124,10 @@ export {
   PackageEnrollComponent,
   PackageFilterComponent,
   PackageTableComponent,
+  PhasesTableComponent,
+  PhasesDataSource,
+  PhasesDatabase,
+  PhasesDataSegment,
   PhoneInputComponent,
   PopupDescriptionComponent,
   HelpLinkComponent,
@@ -138,6 +150,7 @@ export {
 }
 
 export const CmpComponents = [
+  AccountPhaseListComponent,
   AlertIconComponent,
   AddressesComponent,
   AddressFormComponent,
@@ -179,6 +192,7 @@ export const CmpComponents = [
   PackageEnrollComponent,
   PackageFilterComponent,
   PackageTableComponent,
+  PhasesTableComponent,
   PhoneInputComponent,
   PopupDescriptionComponent,
   HelpLinkComponent,

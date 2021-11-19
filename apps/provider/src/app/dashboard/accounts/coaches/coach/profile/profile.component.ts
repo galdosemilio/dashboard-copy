@@ -19,6 +19,7 @@ import {
 } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Access, AccountProvider, Affiliation } from '@coachcare/sdk'
+import { resolveConfig } from '@app/config/section'
 
 @UntilDestroy()
 @Component({
@@ -36,6 +37,7 @@ export class CoachProfileComponent implements BindForm, OnDestroy, OnInit {
   form: FormGroup
   coachId: number
   isLoading = false
+  showPhaseList = false
 
   @ViewChild(CoachFormComponent, { static: false })
   coachForm: CoachFormComponent
@@ -56,6 +58,13 @@ export class CoachProfileComponent implements BindForm, OnDestroy, OnInit {
   ngOnInit() {
     this.coachId = +this.context.accountId
     this.createForm()
+
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
+      this.showPhaseList = resolveConfig(
+        'PROVIDER_PROFILE.SHOW_PHASE_LISTING',
+        org
+      )
+    })
   }
 
   createForm() {
