@@ -1,3 +1,18 @@
+# [1.53.0](https://github.com/coachcare/dashboard/compare/v1.52.0...v1.53.0) (2021-11-20)
+
+
+### Bug Fixes
+
+* expose provider coaches menu link for wellcore [FRON-2481] ([e4d95c2](https://github.com/coachcare/dashboard/commit/e4d95c2f1f4435422e9752e35bb1e39663906e48))
+* implemented small adjustments to onboarding workflow [FRON-2466] ([99fb78d](https://github.com/coachcare/dashboard/commit/99fb78d73f75ebcdfe49ac5ea2610d74d59cac10))
+* style for org selector [FRON-2475] ([4a7ad89](https://github.com/coachcare/dashboard/commit/4a7ad898848fb857f1a67b5aef6cc384fc9984a7))
+* use hardcode meeting options for wellcore [FRON-2465] ([97fca77](https://github.com/coachcare/dashboard/commit/97fca77523a8b8dba3b2935e258d28cc53a0ff74))
+
+
+### Features
+
+* hide address field for scheduling based on org preference [FRON-2426] ([667f7f9](https://github.com/coachcare/dashboard/commit/667f7f93ab010c8918fb1a341e6e791bb6cba231))
+
 # [1.52.0](https://github.com/coachcare/dashboard/compare/v1.51.0...v1.52.0) (2021-11-19)
 
 
