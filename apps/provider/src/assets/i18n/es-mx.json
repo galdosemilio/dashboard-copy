@@ -1036,6 +1036,8 @@
       "MESSAGE_NOT_SEND": "Hubo un error enviando el mensaje, por favor intente de nuevo.",
       "NOTE_ADDED": "No se pudo agregar correctamente la nota. Por favor reintente mas tarde.",
       "NOTHING_TO_EXPORT": "No hay datos para exportar.",
+      "NO_AVAILABLE_COACHES_FOR_DAY": "No hay asesores disponibles para el día seleccionado.",
+      "NO_COACHES_FOR_STATE": "No hay asesores disponibles en su estado.",
       "NO_COACH_LISTING_PERMISSION": "Usted no tiene permiso para ver el listado de pacientes en esta clínica. Por favor pídale al administrador de su clínica el permiso de 'Ver todas las cuentas' o de 'Administrador'.",
       "NO_PATIENT_LISTING_PERMISSION": "Usted no tiene permiso para ver los listados en esta clínica. Por favor pídale al administrador de su clínica el permiso de 'Ver todas las cuentas' o de 'Administrador'.",
       "NO_PHASE_ENROLLMENTS": "No hay fases asociadas al paciente.",

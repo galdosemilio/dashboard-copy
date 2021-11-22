@@ -1036,6 +1036,8 @@
       "MESSAGE_NOT_SEND": "Der opstod en fejl ved afsendelsen af denne besked. Prøv venligst igen.",
       "NOTE_ADDED": "Note kunne ikke tilføjes. Prøv venligst igen senere.",
       "NOTHING_TO_EXPORT": "Der er ingen data til at eksportere.",
+      "NO_AVAILABLE_COACHES_FOR_DAY": "Der er ingen tilgængelige træner til den valgte dag.",
+      "NO_COACHES_FOR_STATE": "Der er ingen tilgængelige busser i din stat.",
       "NO_COACH_LISTING_PERMISSION": "Du har ikke den rette tilladelse til at se kontooversigten for denne klinik. Bed venligst din klinikadministrator om tilladelser til 'Vis Alle Konti' eller 'Admin'.",
       "NO_PATIENT_LISTING_PERMISSION": "Du har ikke den rette tilladelse til at se fortegnelserne for denne klinik. Bed venligst din klinikadministrator om tilladelser til 'Vis Alle Konti' eller 'Admin'.",
       "NO_PHASE_ENROLLMENTS": "Der er ingen faser forbundet med patienten.",

@@ -2,16 +2,23 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ContextService } from '@app/service'
-import { TranslationsObject, _ } from '@app/shared'
+import {
+  AddressLabel,
+  TranslationsObject,
+  WELLCORE_PHASE_STATE_MAP,
+  _
+} from '@app/shared'
 import { NotifierService } from '@coachcare/common/services'
 import {
   AccountProvider,
   AccountTypeIds,
   AddMeetingRequest,
+  AddressProvider,
   MeetingAttendeeRequest,
   MeetingTimeslot,
   NamedEntity,
   OrganizationProvider,
+  PackageEnrollment,
   Schedule
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -45,10 +52,12 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
 
   constructor(
     private account: AccountProvider,
+    private addressProvider: AddressProvider,
     private builder: FormBuilder,
     private context: ContextService,
     private notifier: NotifierService,
     private schedule: Schedule,
+    private packageEnrollment: PackageEnrollment,
     private translator: TranslateService,
     private router: Router,
     private organization: OrganizationProvider
@@ -83,27 +92,58 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
     this.isLoading = true
 
     try {
-      const res = await this.account.getList({
+      const userAddressResponse = await this.addressProvider.getAddressList({
+        account: this.context.user.id,
+        limit: 'all'
+      })
+
+      const billingAddress = userAddressResponse.data.find((item) =>
+        item.labels
+          .map((label) => label.id.toString())
+          .includes(AddressLabel.Billing)
+      )
+
+      const wellcoreStatePhaseEntry = Object.values(
+        WELLCORE_PHASE_STATE_MAP
+      ).find((entry) =>
+        entry.states.includes(billingAddress?.stateProvince?.toLowerCase())
+      )
+
+      if (!wellcoreStatePhaseEntry) {
+        return
+      }
+
+      const providersResponse = await this.account.getList({
         organization: this.context.organizationId,
         accountType: AccountTypeIds.Provider,
         limit: 'all',
         strict: false
       })
 
-      const newCoaches = res.data.map((provider) => ({
+      const newCoaches = providersResponse.data.map((provider) => ({
         id: provider.id,
         name: `${provider.firstName} ${provider.lastName}`
       }))
 
-      if (newCoaches.length === 1) {
-        this.coaches = newCoaches
-      } else {
-        this.coaches = this.coaches.concat(newCoaches)
+      for (const coach of newCoaches) {
+        const checkpackageEnrollmentResponse = await this.packageEnrollment.checkPackageEnrollment(
+          {
+            organization: this.context.organizationId,
+            account: coach.id,
+            package:
+              environment.selveraApiEnv === 'test'
+                ? wellcoreStatePhaseEntry.testPhase
+                : wellcoreStatePhaseEntry.prodPhase
+          }
+        )
+
+        if (checkpackageEnrollmentResponse.enrolled) {
+          this.coaches.push(coach)
+        }
       }
     } catch (err) {
       this.notifier.error(err)
     } finally {
-      this.form.get('providerId').setValue(this.coaches[0].id)
       this.isLoading = false
     }
   }

@@ -1036,6 +1036,8 @@
       "MESSAGE_NOT_SEND": "There was an error sending the message. Try again please.",
       "NOTE_ADDED": "Note could not be added. Please try later.",
       "NOTHING_TO_EXPORT": "There's no data to export.",
+      "NO_AVAILABLE_COACHES_FOR_DAY": "There are no available coaches for the selected day.",
+      "NO_COACHES_FOR_STATE": "There are no available coaches in your state.",
       "NO_COACH_LISTING_PERMISSION": "You do not have proper permission to view account listing for this clinic. Please ask your clinic administrator for 'View All Account' or for 'Admin' permissions.",
       "NO_PATIENT_LISTING_PERMISSION": "You do not have proper permission to view the listings for this clinic. Please ask your clinic administrator for 'View All Account' or for 'Admin' permissions.",
       "NO_PHASE_ENROLLMENTS": "There are no phases associated with the patient.",

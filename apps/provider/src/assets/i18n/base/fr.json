@@ -1036,6 +1036,8 @@
       "MESSAGE_NOT_SEND": "Erreur lors de l’envoi du message. Réessayez.",
       "NOTE_ADDED": "La note n’a pas pu être ajoutée. Réessayez.",
       "NOTHING_TO_EXPORT": "Aucune donnée à exporter",
+      "NO_AVAILABLE_COACHES_FOR_DAY": "Il n'y a pas de coachs disponibles pour la journée sélectionnée.",
+      "NO_COACHES_FOR_STATE": "Il n'y a pas d'entraîneurs disponibles dans votre état.",
       "NO_COACH_LISTING_PERMISSION": "Vous n’avez pas les autorisations requises pour voir les listes de cette clinique. Veuillez demander à l’administrateur de votre clinique pour les autorisations “VOIR TOUT” et “ADMIN”",
       "NO_PATIENT_LISTING_PERMISSION": "Vous n’avez pas les autorisations requises pour voir les listes de cette clinique. Veuillez demander à l’administrateur de votre clinique pour les autorisations “VOIR TOUT” et “ADMIN”",
       "NO_PHASE_ENROLLMENTS": "Il n'y a pas de phases associées au patient.",

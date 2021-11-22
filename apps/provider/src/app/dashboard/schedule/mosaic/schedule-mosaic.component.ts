@@ -90,6 +90,7 @@ export class ScheduleMosaicComponent implements OnDestroy, OnInit {
       organization: this.context.organizationId,
       limit: 1,
       account: this.context.user.id,
+      isActive: true,
       package: environment.wellcoreEligibleToSelfSchedulePhaseId
     })
 
