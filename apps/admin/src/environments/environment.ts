@@ -13,6 +13,7 @@ export const environment: AppEnvironment = {
   defaultOrgId: '30',
   wellcoreMedicalFormId: '15189',
   wellcoreOrgId: '7535',
+  wellcoreUrl: 'https://test.my.teamwellcore.com',
   wellcoreEcommerceHost: 'https://wellcore-test.ecommerce.coachcare.com'
 }
 
