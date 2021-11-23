@@ -7,11 +7,7 @@ import {
   NotifierService
 } from '@app/service'
 import { _ } from '@app/shared'
-import {
-  AccountTypeIds,
-  AccSingleResponse,
-  AccUpdateRequest
-} from '@coachcare/sdk'
+import { AccSingleResponse, AccUpdateRequest } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider } from '@coachcare/sdk'
 import * as moment from 'moment'
@@ -33,6 +29,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
   displayOrphanedMessage = false
   profile: AccSingleResponse
   isProvider: boolean
+  isPatient: boolean
   isSaving = false
   section: ProviderProfileSection = 'security'
   zendeskLink =
@@ -50,9 +47,8 @@ export class ProfileComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.profile = this.context.user
-    this.isProvider =
-      this.context.user.accountType.id === AccountTypeIds.Provider
-
+    this.isProvider = this.context.isProvider
+    this.isPatient = this.context.isPatient
     this.bus.trigger('right-panel.component.set', 'notifications')
     this.bus.listen('user.data', (user: CurrentAccount) => {
       this.profile = user

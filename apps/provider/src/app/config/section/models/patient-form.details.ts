@@ -7,4 +7,5 @@ export interface PatientFormConfigDetails {
   PACKAGE_ENROLL?: SectionConfigObject
   PACKAGE_ENROLL_GRID?: SectionConfigObject
   UNENROLL_THEN_ENROLL?: boolean
+  DISABLE_EDIT_BILLING_ADDRESS?: boolean
 }

@@ -166,6 +166,7 @@
     "DEVICE": "Dispositivo",
     "DEVICES": "Dispositivi",
     "DIETERS_EMPTY_LIST": "Nessun paziente è ancora associato a questa organizzazione.",
+    "DISABLED_EDIT_BILLING_ADDRESS": "Lo stato dell'indirizzo di fatturazione viene utilizzato per determinare l'idoneità alla pianificazione. Contatta l'assistenza per modificare l'indirizzo di fatturazione.",
     "DISABLED_SELF_SCHEDULE": "Per fissare un appuntamento, devi prima aver ricevuto il tuo esame del sangue del risultato di laboratorio. Riceverai una notifica quando i risultati del laboratorio saranno stati ricevuti e sarai idoneo a fissare un appuntamento",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Visualizza riunioni attive o eliminate",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Qualsiasi riunione programmata sulla piattaforma è una riunione \"attiva\". Se una riunione attiva viene eliminata dall'allenatore o dal paziente, diventa una riunione \"eliminata\". Per impostazione predefinita, in questo elenco vengono presentate solo le riunioni attive. Le riunioni eliminate possono essere visualizzate modificando questo menu a discesa in \"Riunioni eliminate\".",

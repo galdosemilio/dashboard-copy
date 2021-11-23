@@ -166,6 +166,7 @@
     "DEVICE": "Dispositivo",
     "DEVICES": "Dispositivos",
     "DIETERS_EMPTY_LIST": "Ainda sem pacientes associados a esta organização.",
+    "DISABLED_EDIT_BILLING_ADDRESS": "O estado do seu endereço de cobrança é usado para determinar a elegibilidade para agendamento. Entre em contato com o suporte para alterar seu endereço de cobrança.",
     "DISABLED_SELF_SCHEDULE": "Para agendar uma consulta, você deve primeiro ter recebido seu exame de sangue com resultado de laboratório. Você receberá uma notificação quando os resultados do laboratório forem recebidos e você estiver qualificado para agendar uma consulta",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Exibir reuniões ativas ou excluídas",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Any meeting scheduled on the platform is an ‘active’ meeting.  If an active meeting is deleted by the coach or patient, it becomes a 'deleted' meeting.  By default, only the active meetings are presented in this listing.  Deleted meetings can be viewed by changing this dropdown to 'Deleted Meetings'.",

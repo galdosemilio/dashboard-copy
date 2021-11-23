@@ -67,6 +67,7 @@ export type SelectedOrganization = OrganizationWithAddress & {
 @Injectable()
 export class ContextService {
   public isProvider: boolean
+  public isPatient: boolean
 
   constructor(
     private api: ApiService,
@@ -117,6 +118,7 @@ export class ContextService {
       try {
         this.selected = this.user
         this.isProvider = this.user.accountType.id === AccountTypeIds.Provider
+        this.isPatient = this.user.accountType.id === AccountTypeIds.Client
 
         // check if associated to organizations
         try {

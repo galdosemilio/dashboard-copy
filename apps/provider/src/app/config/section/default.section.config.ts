@@ -35,7 +35,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     PACKAGE_ENROLL: {
       component: PackageEnrollComponent
     },
-    UNENROLL_THEN_ENROLL: false
+    UNENROLL_THEN_ENROLL: false,
+    DISABLE_EDIT_BILLING_ADDRESS: false
   },
   PATIENT_LISTING: {
     SHOW_PATIENT_CREATE_BUTTON: true
@@ -105,7 +106,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     PACKAGE_ENROLL: {
       component: PackageEnrollComponent
     },
-    UNENROLL_THEN_ENROLL: false
+    UNENROLL_THEN_ENROLL: false,
+    DISABLE_EDIT_BILLING_ADDRESS: false
   },
   PATIENT_LISTING: {
     SHOW_PATIENT_CREATE_BUTTON: true

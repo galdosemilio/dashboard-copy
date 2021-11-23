@@ -20,10 +20,10 @@ import {
   Validators
 } from '@angular/forms'
 import { UserAddress } from '@app/shared'
-import { AddressLabel } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
+import { LabelOption } from '../addresses/addresses.component'
 
 @UntilDestroy()
 @Component({
@@ -47,10 +47,11 @@ export class AddressFormComponent
   implements ControlValueAccessor, OnInit, OnDestroy, Validator {
   form: FormGroup
 
-  @Input() types: AddressLabel[] = []
+  @Input() types: LabelOption[] = []
 
   @Input() markAsTouched: Subject<void>
   @Input() mode: 'create' | 'edit' = 'edit'
+  @Input() readonly: boolean = false
 
   @Output() changeAddress = new EventEmitter<any>()
 
@@ -99,6 +100,10 @@ export class AddressFormComponent
       postalCode: ['', Validators.required],
       country: ['US', Validators.required]
     })
+
+    if (this.readonly) {
+      this.form.disable()
+    }
 
     this.form.valueChanges
       .pipe(untilDestroyed(this), debounceTime(500))

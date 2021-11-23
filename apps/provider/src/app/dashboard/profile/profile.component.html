@@ -72,7 +72,7 @@ fxLayoutAlign=" stretch">
     </div>
   </ng-container>
   <ng-container *ngSwitchCase="'addresses'">
-    <ccr-account-addresses [account]="profile.id" class="medium-margin-top"></ccr-account-addresses>
+    <ccr-account-addresses [account]="profile.id" [isPatient]="isPatient" class="medium-margin-top"></ccr-account-addresses>
   </ng-container>
   <ng-container *ngSwitchCase="'security'">
     <app-profile-security></app-profile-security>

@@ -5,14 +5,13 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core'
-import { NotifierService } from '@app/service'
+import { ContextService, NotifierService } from '@app/service'
 import { UserAddress } from '@app/shared'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
 import { _ } from '@app/shared/utils'
 import { AddAddressDialog } from '@app/shared/components/add-address-dialog/add-address.dialog'
 import { MatDialog } from '@coachcare/material'
 import {
-  AddressLabel,
   AddressProvider,
   CreateAccountAddressRequest,
   UpdateAccountAddressRequest
@@ -29,6 +28,14 @@ import { isEmpty, isEqual } from 'lodash'
 import { debounceTime, filter } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { PromptDialog } from '@coachcare/common/dialogs/core'
+import { resolveConfig } from '@app/config/section'
+
+export interface LabelOption {
+  id: string
+  name: string
+  disabled?: boolean
+}
+
 @UntilDestroy()
 @Component({
   selector: 'ccr-account-addresses',
@@ -65,6 +72,8 @@ export class AddressesComponent
 
   @Input() markAsTouched: Subject<void>
 
+  @Input() isPatient = false
+
   set addressesForm(value: FormArray) {
     if (!this.form) {
       return
@@ -78,15 +87,19 @@ export class AddressesComponent
   }
 
   public form: FormGroup
-  public addressLabels: AddressLabel[] = []
+  public addressLabels: LabelOption[] = []
+  public labelOptions: Array<LabelOption & { disabled: boolean }> = []
   public userAddresses: UserAddress[] = []
   public isLoading = false
+  public isBillingAddressReadonly = false
+  public billingAddressLabelId = '1'
 
   private propagateChange: (data) => void = () => {}
   private propagateTouched: () => void = () => {}
 
   constructor(
     private builder: FormBuilder,
+    private context: ContextService,
     private addressProvider: AddressProvider,
     private dialog: MatDialog,
     private notifier: NotifierService
@@ -95,6 +108,12 @@ export class AddressesComponent
   public ngOnInit() {
     this.createForm()
     this.getAddressTypes()
+
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
+      this.isBillingAddressReadonly =
+        this.isPatient &&
+        resolveConfig('PATIENT_FORM.DISABLE_EDIT_BILLING_ADDRESS', org)
+    })
   }
 
   public registerOnChange(fn): void {
@@ -141,7 +160,20 @@ export class AddressesComponent
   private async getAddressTypes(): Promise<void> {
     const res = await this.addressProvider.getAddressLabels()
 
-    this.addressLabels = res.data
+    this.addressLabels = res.data.map((item) => ({
+      id: item.id.toString(),
+      name: item.name
+    }))
+
+    this.labelOptions = this.addressLabels.map((label) => ({
+      ...label,
+      disabled:
+        label.id === this.billingAddressLabelId &&
+        this.isBillingAddressReadonly &&
+        this.userAddresses.some((address) =>
+          address.labels.includes(this.billingAddressLabelId)
+        )
+    }))
   }
 
   private async getAddresses(): Promise<void> {

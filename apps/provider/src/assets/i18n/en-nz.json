@@ -166,6 +166,7 @@
     "DEVICE": "Device",
     "DEVICES": "Devices",
     "DIETERS_EMPTY_LIST": "No patients are associated to this clinic yet.",
+    "DISABLED_EDIT_BILLING_ADDRESS": "Your billing address state is used to determine eligibility for scheduling.  Please contact support to change your billing address.",
     "DISABLED_SELF_SCHEDULE": "To schedule an appointment, you must first have received your lab result blood test. You will receive a notification when the lab results have been received and you are eligible to schedule an appointment",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Display Active or Deleted Meetings",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Any meeting scheduled on the platform is an ‘active’ meeting.  If an active meeting is deleted by the coach or patient, it becomes a ‘deleted’ meeting.  By default, only the active meetings are presented in this listing.  Deleted meetings can be viewed by changing this dropdown to ‘Deleted Meetings’.",

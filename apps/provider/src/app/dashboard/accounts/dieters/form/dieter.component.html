@@ -140,6 +140,7 @@
       <p>{{ 'BOARD.ADDRESSES' | translate }} <small class="text-italic">{{ 'BOARD.OPTIONAL' | translate }}</small></p>
 
       <ccr-account-addresses
+        [isPatient]="true"
         formControlName="addresses"
         [markAsTouched]="markAsTouched">
       </ccr-account-addresses>

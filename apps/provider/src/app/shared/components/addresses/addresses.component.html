@@ -19,19 +19,26 @@
             <ccr-address-form
             [markAsTouched]="markAsTouched"
             [mode]="account ? 'edit' : 'create'"
-            [types]="addressLabels"
+            [readonly]="isBillingAddressReadonly && userAddresses[i]?.labels.includes(billingAddressLabelId)"
+            [types]="labelOptions"
             formControlName="address"
             required></ccr-address-form>
             <div class="actions" fxLayout="row" fxLayoutAlign="center">
               <button
                 class="ccr-icon-button"
                 color="primary"
+                [disabled]="isBillingAddressReadonly && userAddresses[i]?.labels.includes(billingAddressLabelId)"
                 mat-button
                 type="button"
                 (click)="onDeleteAddress(i)">
                 {{ 'BOARD.DELETE_ADDRESS' | translate }}
               </button>
             </div>
+            <p
+              *ngIf="isBillingAddressReadonly && userAddresses[i]?.labels.includes(billingAddressLabelId)"
+              class="notify">
+              {{ 'BOARD.DISABLED_EDIT_BILLING_ADDRESS' | translate }}
+            </p>
           </div>
         </ng-container>
       </div>
