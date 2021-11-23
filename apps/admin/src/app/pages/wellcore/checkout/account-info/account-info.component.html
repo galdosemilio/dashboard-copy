@@ -42,10 +42,10 @@
     <div class="ccr-wellcore-field">
       <label class="ccr-wellcore-label">Confirm Email <span>*</span></label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="emailConfirmation">
+        <input [readonly]="accountCreated" matInput formControlName="emailConfirmation">
         <mat-error *ngIf="formGroup.get('emailConfirmation').getError('required')">Confirm Email is required</mat-error>
         <mat-error *ngIf="formGroup.get('emailConfirmation').getError('email')">Confirm Email is invalid</mat-error>
-        <mat-error *ngIf="formGroup.get('emailConfirmation').getError('wrongMatch')">Email does not matched</mat-error>
+        <mat-error *ngIf="formGroup.get('emailConfirmation').getError('wrongMatch')">Email does not match</mat-error>
       </mat-form-field>
     </div>
   </div>

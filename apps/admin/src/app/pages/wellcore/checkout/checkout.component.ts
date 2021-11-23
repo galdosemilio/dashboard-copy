@@ -28,7 +28,8 @@ import {
   CcrRolesMap,
   DeviceTypeIds,
   Logging,
-  Register
+  Register,
+  Session
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
@@ -113,8 +114,14 @@ export class WellcoreCheckoutComponent implements OnInit {
     private log: Logging,
     private notifier: NotifierService,
     private register: Register,
-    private router: Router
-  ) {}
+    private router: Router,
+    private session: Session
+  ) {
+    this.validateAge = this.validateAge.bind(this)
+    this.validateEmailMatches = this.validateEmailMatches.bind(this)
+    this.validateGender = this.validateGender.bind(this)
+    this.validatePasswordMatches = this.validatePasswordMatches.bind(this)
+  }
 
   public ngOnInit(): void {
     this.spree = makeClient({
@@ -122,14 +129,16 @@ export class WellcoreCheckoutComponent implements OnInit {
     })
 
     this.createForm()
+    this.resolveOnboardingProgress()
   }
 
   public checkAccountInfoErrors(): boolean {
     return (
-      (this.accountInfo.get('gender').touched &&
+      !this.accountCreated &&
+      ((this.accountInfo.get('gender').touched &&
         this.accountInfo.get('gender').invalid) ||
-      (this.accountInfo.get('birthday').touched &&
-        this.accountInfo.get('birthday').invalid)
+        (this.accountInfo.get('birthday').touched &&
+          this.accountInfo.get('birthday').invalid))
     )
   }
 
@@ -524,6 +533,152 @@ export class WellcoreCheckoutComponent implements OnInit {
     }
   }
 
+  private async resolveCartItems(): Promise<void> {
+    try {
+      const cartShowResult = await this.spree.cart.show({
+        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+      })
+
+      if (cartShowResult.isFail()) {
+        throw new Error(
+          `[WELLCORE] Cannot fetch cart items. Reason ${
+            cartShowResult.fail().message
+          }`
+        )
+      }
+
+      this.cartInfo = cartShowResult.success().data
+
+      this.cartItems = (cartShowResult.success().data.relationships.variants
+        .data as RelationType[])
+        .map(
+          (variant) =>
+            this.allProducts.find((product) => product.id === variant.id) ??
+            null
+        )
+        .filter((item) => item)
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async resolveOnboardingProgress(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const session = await this.session.check()
+      const bearerToken = this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
+
+      // There's not even an active session
+      if (!session?.id || !bearerToken) {
+        return
+      }
+
+      const account = await this.accountProvider.getSingle(session.id)
+
+      // This should never happen, but just in case
+      if (!account) {
+        return
+      }
+
+      this.account = account
+
+      this.accountCreated = true
+
+      this.accountInfo.patchValue({
+        ...account,
+        emailConfirmation: account.email,
+        password: ' ',
+        passwordConfirmation: ' ',
+        phoneNumber: account.phone,
+        gender: account.profile.gender,
+        height: account.profile.height,
+        birthday: account.profile.birthday
+      })
+
+      this.stepper.next()
+
+      const addresses = await this.addressProvider.getAddressList({
+        account: account.id,
+        limit: 'all'
+      })
+
+      const shippingAddress = addresses.data.find((address) =>
+        address.labels.some((label) => label.id.toString() === '2')
+      )
+
+      // Address Type 2 means Shipping
+      if (!shippingAddress) {
+        return
+      }
+
+      const splitShippingAddressName = shippingAddress.name.split(' ')
+
+      this.shippingInfo.patchValue({
+        ...shippingAddress,
+        country: shippingAddress.country.id,
+        firstName: splitShippingAddressName[0],
+        lastName: splitShippingAddressName[1] || '',
+        state: shippingAddress.stateProvince,
+        zip: shippingAddress.postalCode
+      })
+
+      this.stepper.next()
+
+      const billingAddress = addresses.data.find((address) =>
+        address.labels.some((label) => label.id.toString() === '1')
+      )
+
+      if (!billingAddress) {
+        return
+      }
+
+      const splitBillingAddressName = billingAddress.name.split(' ')
+
+      this.paymentInfo.patchValue({
+        billingInfo: {
+          ...billingAddress,
+          country: billingAddress.country.id,
+          firstName: splitBillingAddressName[0],
+          lastName: splitBillingAddressName[1] || '',
+          state: billingAddress.stateProvince,
+          zip: billingAddress.postalCode
+        },
+        creditCardInfo: {
+          type: ' ',
+          stripeToken: ' ',
+          last4: ' ',
+          exp_month: ' ',
+          exp_year: ' '
+        }
+      })
+
+      this.stepper.next()
+
+      const completedOrders = await this.spree.account.completedOrdersList({
+        bearerToken
+      })
+
+      if (!completedOrders.isFail() && completedOrders.success().data.length) {
+        void this.startRedirection()
+        return
+      }
+
+      const cart = await this.spree.cart.show({ bearerToken })
+
+      if (cart.isFail() || !cart.success().data?.id) {
+        return
+      }
+
+      await this.resolveCartItems()
+    } catch (error) {
+      console.error(error)
+      this.notifier.error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
+
   private async startRedirection(): Promise<void> {
     window.location.href = `${environment.wellcoreUrl}/provider/dashboard?baseOrg=${environment.wellcoreOrgId}`
   }
@@ -602,18 +757,25 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   private validateAge(control: AbstractControl) {
-    return control.value && moment().diff(moment(control.value), 'years') < 18
+    return !this.accountCreated &&
+      control.value &&
+      moment().diff(moment(control.value), 'years') < 18
       ? { invalidAge: true }
       : null
   }
 
+  private validateCreditCardInfo(control: AbstractControl) {}
+
   private validateGender(control: AbstractControl) {
-    return control.value === 'female' ? { invalidGender: true } : null
+    return !this.accountCreated && control.value === 'female'
+      ? { invalidGender: true }
+      : null
   }
 
   private validateEmailMatches(): ValidatorFn {
     return (control: AbstractControl) => {
-      return control.value === this.checkoutData.accountInfo?.email
+      return this.accountCreated ||
+        control.value === this.checkoutData.accountInfo?.email
         ? null
         : { wrongMatch: true }
     }
@@ -621,7 +783,8 @@ export class WellcoreCheckoutComponent implements OnInit {
 
   private validatePasswordMatches(): ValidatorFn {
     return (control: AbstractControl) => {
-      return control.value === this.checkoutData.accountInfo?.password
+      return this.accountCreated ||
+        control.value === this.checkoutData.accountInfo?.password
         ? null
         : { wrongMatch: true }
     }
