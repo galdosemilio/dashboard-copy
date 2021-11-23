@@ -175,6 +175,7 @@ export class SidenavWellcoreComponent
         route: 'test-results',
         navRoute: 'test-results',
         fontIcon: { fontSet: 'fas', fontIcon: 'fa-vial' },
+        isHiddenForProviders: true,
         isAllowedForPatients: true
       },
       {

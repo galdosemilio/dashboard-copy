@@ -11,7 +11,7 @@
       </h2>
     </div>
 
-    <a *ngIf="clinic?.permissions.admin"
+    <a *ngIf="isPatientCreationEnabled"
     mat-button color="primary" class="ccr-icon-button"
     fxFlex="nogrow" (click)="createDialog()"
     data-cy="new-patient-button">

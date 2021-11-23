@@ -22,5 +22,8 @@ export const WellCoreSectionConfig: SectionConfigDetails = {
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: true
+  },
+  PATIENT_LISTING: {
+    SHOW_PATIENT_CREATE_BUTTON: false
   }
 }

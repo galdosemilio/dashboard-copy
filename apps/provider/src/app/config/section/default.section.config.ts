@@ -37,6 +37,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     },
     UNENROLL_THEN_ENROLL: false
   },
+  PATIENT_LISTING: {
+    SHOW_PATIENT_CREATE_BUTTON: true
+  },
   RIGHT_PANEL: {
     DAYSHEETS_FORM: '15121',
     SHOW_DAYSHEET_BUTTON: false,
@@ -103,6 +106,9 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
       component: PackageEnrollComponent
     },
     UNENROLL_THEN_ENROLL: false
+  },
+  PATIENT_LISTING: {
+    SHOW_PATIENT_CREATE_BUTTON: true
   },
   RIGHT_PANEL: {
     DAYSHEETS_FORM: '238',

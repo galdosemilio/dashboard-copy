@@ -60,6 +60,7 @@ export class DieterListingWithPhiComponent
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360019923251-Adding-a-Patient'
   defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_PATIENT_LISTING
+  isPatientCreationEnabled = true
 
   constructor(
     private dialog: MatDialog,
@@ -122,6 +123,9 @@ export class DieterListingWithPhiComponent
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.clinic = org
       this.source.resetPaginator()
+      this.isPatientCreationEnabled =
+        this.clinic?.permissions.admin &&
+        resolveConfig('PATIENT_LISTING.SHOW_PATIENT_CREATE_BUTTON', org)
     })
 
     this.pageSizeSelectorComp.onPageSizeChange
