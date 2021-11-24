@@ -39,6 +39,16 @@ $border-color: rgba(mat-color($wellcore, platinum), 0.5);
         }
       }
     }
+
+    .login-link {
+      margin-top: 10px;
+
+      a {
+        color: white;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
   }
 
   &-title {

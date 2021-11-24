@@ -7,6 +7,7 @@ import {
   Validators
 } from '@angular/forms'
 import { Router } from '@angular/router'
+import { AddressLabelType } from '@coachcare/common/model'
 import { authenticationToken } from '@coachcare/common/sdk.barrel'
 import {
   CookieService,
@@ -23,6 +24,7 @@ import {
   AccountIdentifier,
   AccountProvider,
   AccountSingle,
+  AccountTypeIds,
   AddLogRequest,
   AddressProvider,
   CcrRolesMap,
@@ -73,6 +75,8 @@ export interface CheckoutData {
   }
 }
 
+type FirstStepMode = 'signup' | 'login'
+
 @UntilDestroy()
 @Component({
   selector: 'ccr-wellcore-checkout',
@@ -91,14 +95,14 @@ export class WellcoreCheckoutComponent implements OnInit {
   public billingInfo: FormGroup
   public orderReview: FormGroup
   public orderConfirm: FormGroup
-  public step = 0
+  public loginInfo: FormGroup
+  public firstStepMode: FirstStepMode = 'signup'
   public checkoutData: CheckoutData = {}
   public useShippingAddress: boolean = true
   public whitelistedStates: string[] = STATES_LIST.filter(
     (state) => state.whitelisted
   ).map((state) => state.viewValue)
 
-  private allProducts = []
   private billingAddress: AccountAddress
   private shippingAddress: AccountAddress
   private spree: Client
@@ -129,11 +133,11 @@ export class WellcoreCheckoutComponent implements OnInit {
     })
 
     this.createForm()
-    this.resolveOnboardingProgress()
   }
 
   public checkAccountInfoErrors(): boolean {
     return (
+      this.firstStepMode === 'signup' &&
       !this.accountCreated &&
       ((this.accountInfo.get('gender').touched &&
         this.accountInfo.get('gender').invalid) ||
@@ -152,6 +156,11 @@ export class WellcoreCheckoutComponent implements OnInit {
 
   public getNextStepLabel(): string {
     switch (this.stepper.selectedIndex) {
+      case 0:
+        if (this.firstStepMode === 'login') {
+          return 'Login'
+        }
+        return 'Next'
       case 3:
         return 'Complete Medical Intake Form'
 
@@ -165,6 +174,11 @@ export class WellcoreCheckoutComponent implements OnInit {
 
     switch (from) {
       case 0:
+        if (this.firstStepMode === 'login') {
+          await this.loginAccount()
+          return
+        }
+
         if (this.accountInfo.invalid) {
           this.accountInfo.markAllAsTouched()
           return
@@ -211,15 +225,17 @@ export class WellcoreCheckoutComponent implements OnInit {
     }
 
     this.stepper.next()
-    this.step = this.stepper.selectedIndex
   }
 
   public prevStep(): void {
-    if (this.step > 0) {
-      this.stepper.previous()
-      this.step = this.stepper.selectedIndex
+    if (this.stepper.selectedIndex === 0) {
+      if (this.firstStepMode === 'signup') {
+        this.router.navigate(['/wellcore/cart'])
+      } else {
+        this.firstStepMode = 'signup'
+      }
     } else {
-      this.router.navigate(['/wellcore/cart'])
+      this.stepper.previous()
     }
   }
 
@@ -241,6 +257,18 @@ export class WellcoreCheckoutComponent implements OnInit {
     this.billingInfo.patchValue(patchValue)
   }
 
+  public changeFirstStepMode(mode: FirstStepMode): void {
+    this.firstStepMode = mode
+  }
+
+  private async attemptLogout(): Promise<void> {
+    try {
+      await this.session.logout()
+    } catch (error) {
+      return
+    }
+  }
+
   private createForm(): void {
     this.accountInfo = this.fb.group({
       firstName: ['', Validators.required],
@@ -258,6 +286,10 @@ export class WellcoreCheckoutComponent implements OnInit {
       heightDisplayValue: [''],
       birthday: ['', [Validators.required, this.validateAge]],
       agreements: [false, [Validators.requiredTrue]]
+    })
+    this.loginInfo = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     })
     this.shippingInfo = this.fb.group({
       firstName: ['', Validators.required],
@@ -420,31 +452,59 @@ export class WellcoreCheckoutComponent implements OnInit {
         )
       }
 
-      const spreeToken = await this.spree.authentication.getToken({
-        username: accountData.email,
-        password: accountData.password
-      })
-
-      if (spreeToken.isFail()) {
-        throw new Error(
-          `Spree token fetch error. Reason: ${spreeToken.fail().message}`
-        )
+      await this.loadSpreeInfo(accountData.email, accountData.password)
+    } catch (error) {
+      const addLogRequest: AddLogRequest = {
+        app: 'ccr-staticProvider',
+        logLevel: 'error',
+        keywords: [
+          {
+            platform: window.navigator.appVersion,
+            environment: environment.ccrApiEnv,
+            deviceLocale: this.lang.get(),
+            userAgent: window.navigator.userAgent
+          }
+        ],
+        message: `[WELLCORE ONBOARDING] ${error}`
       }
 
-      this.cookie.set(ECOMMERCE_ACCESS_TOKEN, spreeToken.success().access_token)
-      this.cookie.set(
-        ECOMMERCE_REFRESH_TOKEN,
-        spreeToken.success().refresh_token
-      )
+      await this.log.add(addLogRequest)
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
+  }
 
-      await this.accountIdentifier.add({
-        account: single.id,
-        organization: environment.wellcoreOrgId,
-        name: SPREE_EXTERNAL_ID_NAME,
-        value: accountData.email
+  private getPartialAddressEcommerceAddress(
+    addresses: AccountAddress[],
+    type: AddressLabelType
+  ): AccountAddress {
+    return addresses.find((address) =>
+      address.labels.some((label) => label.id.toString() === type)
+    )
+  }
+
+  private async loginAccount(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+      const loginInfo = this.loginInfo.value
+
+      await this.attemptLogout()
+
+      await this.session.login({
+        email: loginInfo.email,
+        password: loginInfo.password,
+        deviceType: DeviceTypeIds.Web,
+        allowedAccountTypes: [AccountTypeIds.Client],
+        organization: environment.wellcoreOrgId
       })
+
+      await this.resolveOnboardingProgress()
+      this.firstStepMode = 'signup'
     } catch (error) {
       this.notifier.error(error)
+
       const addLogRequest: AddLogRequest = {
         app: 'ccr-staticProvider',
         logLevel: 'error',
@@ -464,6 +524,29 @@ export class WellcoreCheckoutComponent implements OnInit {
     } finally {
       this.bus.trigger('wellcore.loading.show', false)
     }
+  }
+
+  private async loadSpreeInfo(email: string, password: string): Promise<void> {
+    const spreeToken = await this.spree.authentication.getToken({
+      username: email,
+      password: password
+    })
+
+    if (spreeToken.isFail()) {
+      throw new Error(
+        `Spree token fetch error. Reason: ${spreeToken.fail().message}`
+      )
+    }
+
+    this.cookie.set(ECOMMERCE_ACCESS_TOKEN, spreeToken.success().access_token)
+    this.cookie.set(ECOMMERCE_REFRESH_TOKEN, spreeToken.success().refresh_token)
+
+    await this.accountIdentifier.add({
+      account: this.accountId,
+      organization: environment.wellcoreOrgId,
+      name: SPREE_EXTERNAL_ID_NAME,
+      value: email
+    })
   }
 
   private loadBillingAddressIntoForm(address: AccountAddress): void {
@@ -533,44 +616,16 @@ export class WellcoreCheckoutComponent implements OnInit {
     }
   }
 
-  private async resolveCartItems(): Promise<void> {
-    try {
-      const cartShowResult = await this.spree.cart.show({
-        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
-      })
-
-      if (cartShowResult.isFail()) {
-        throw new Error(
-          `[WELLCORE] Cannot fetch cart items. Reason ${
-            cartShowResult.fail().message
-          }`
-        )
-      }
-
-      this.cartInfo = cartShowResult.success().data
-
-      this.cartItems = (cartShowResult.success().data.relationships.variants
-        .data as RelationType[])
-        .map(
-          (variant) =>
-            this.allProducts.find((product) => product.id === variant.id) ??
-            null
-        )
-        .filter((item) => item)
-    } catch (error) {
-      this.notifier.error(error)
-    }
-  }
-
   private async resolveOnboardingProgress(): Promise<void> {
     try {
+      const loginInfo = this.loginInfo.value
+
       this.bus.trigger('wellcore.loading.show', true)
 
       const session = await this.session.check()
-      const bearerToken = this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
 
       // There's not even an active session
-      if (!session?.id || !bearerToken) {
+      if (!session?.id) {
         return
       }
 
@@ -578,22 +633,26 @@ export class WellcoreCheckoutComponent implements OnInit {
 
       // This should never happen, but just in case
       if (!account) {
-        return
+        throw new Error('No account could be fetched with the current session')
       }
 
       this.account = account
+      this.accountId = account.id
+
+      await this.loadSpreeInfo(loginInfo.email, loginInfo.password)
 
       this.accountCreated = true
 
       this.accountInfo.patchValue({
         ...account,
         emailConfirmation: account.email,
-        password: ' ',
-        passwordConfirmation: ' ',
+        password: '123Abc..',
+        passwordConfirmation: '123Abc..',
         phoneNumber: account.phone,
         gender: account.profile.gender,
         height: account.profile.height,
-        birthday: account.profile.birthday
+        birthday: account.profile.birthday,
+        agreements: true
       })
 
       this.stepper.next()
@@ -603,77 +662,55 @@ export class WellcoreCheckoutComponent implements OnInit {
         limit: 'all'
       })
 
-      const shippingAddress = addresses.data.find((address) =>
-        address.labels.some((label) => label.id.toString() === '2')
+      const shippingAddress = this.getPartialAddressEcommerceAddress(
+        addresses.data,
+        AddressLabelType.SHIPPING
       )
 
-      // Address Type 2 means Shipping
       if (!shippingAddress) {
+        this.shippingInfo.patchValue({
+          firstName: account.firstName,
+          lastName: account.lastName
+        })
         return
       }
 
-      const splitShippingAddressName = shippingAddress.name.split(' ')
+      const [shipFirstName, shipLastName = ''] = shippingAddress.name.split(' ')
 
       this.shippingInfo.patchValue({
         ...shippingAddress,
         country: shippingAddress.country.id,
-        firstName: splitShippingAddressName[0],
-        lastName: splitShippingAddressName[1] || '',
+        firstName: shipFirstName,
+        lastName: shipLastName || '',
         state: shippingAddress.stateProvince,
         zip: shippingAddress.postalCode
       })
 
       this.stepper.next()
 
-      const billingAddress = addresses.data.find((address) =>
-        address.labels.some((label) => label.id.toString() === '1')
+      const billingAddress = this.getPartialAddressEcommerceAddress(
+        addresses.data,
+        AddressLabelType.BILLING
       )
 
       if (!billingAddress) {
         return
       }
 
-      const splitBillingAddressName = billingAddress.name.split(' ')
+      const [billFirstName, billLastName = ''] = billingAddress.name.split(' ')
 
-      this.paymentInfo.patchValue({
-        billingInfo: {
-          ...billingAddress,
-          country: billingAddress.country.id,
-          firstName: splitBillingAddressName[0],
-          lastName: splitBillingAddressName[1] || '',
-          state: billingAddress.stateProvince,
-          zip: billingAddress.postalCode
-        },
-        creditCardInfo: {
-          type: ' ',
-          stripeToken: ' ',
-          last4: ' ',
-          exp_month: ' ',
-          exp_year: ' '
-        }
+      this.billingInfo.patchValue({
+        ...billingAddress,
+        country: billingAddress.country.id,
+        firstName: billFirstName,
+        lastName: billLastName,
+        state: billingAddress.stateProvince,
+        zip: billingAddress.postalCode
       })
 
       this.stepper.next()
-
-      const completedOrders = await this.spree.account.completedOrdersList({
-        bearerToken
-      })
-
-      if (!completedOrders.isFail() && completedOrders.success().data.length) {
-        void this.startRedirection()
-        return
-      }
-
-      const cart = await this.spree.cart.show({ bearerToken })
-
-      if (cart.isFail() || !cart.success().data?.id) {
-        return
-      }
-
-      await this.resolveCartItems()
     } catch (error) {
-      console.error(error)
-      this.notifier.error(error)
+      throw new Error(error)
     } finally {
       this.bus.trigger('wellcore.loading.show', false)
     }
@@ -763,8 +800,6 @@ export class WellcoreCheckoutComponent implements OnInit {
       ? { invalidAge: true }
       : null
   }
-
-  private validateCreditCardInfo(control: AbstractControl) {}
 
   private validateGender(control: AbstractControl) {
     return !this.accountCreated && control.value === 'female'

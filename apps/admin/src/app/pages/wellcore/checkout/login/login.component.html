@@ -1,0 +1,28 @@
+<div class="ccr-wellcore-form-title">Continue Registration</div>
+<form class="ccr-wellcore-form" [formGroup]="formGroup">
+  <p>Log into your account to continue your registration</p>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="10px"
+  >
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">Email Address <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="email">
+        <mat-error *ngIf="formGroup.get('email').getError('required')">Email is required</mat-error>
+        <mat-error *ngIf="formGroup.get('email').getError('email')">Email is invalid</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">Password <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="formGroup.get('password').getError('required')">Password is required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

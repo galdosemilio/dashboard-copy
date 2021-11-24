@@ -2,12 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ContextService } from '@app/service'
-import {
-  AddressLabel,
-  TranslationsObject,
-  WELLCORE_PHASE_STATE_MAP,
-  _
-} from '@app/shared'
+import { TranslationsObject, WELLCORE_PHASE_STATE_MAP, _ } from '@app/shared'
 import { NotifierService } from '@coachcare/common/services'
 import {
   AccountProvider,
@@ -27,6 +22,7 @@ import * as moment from 'moment-timezone'
 import { debounceTime } from 'rxjs/operators'
 import { environment } from 'apps/provider/src/environments/environment'
 import { TranslateService } from '@ngx-translate/core'
+import { AddressLabelType } from '@coachcare/common/model'
 
 @UntilDestroy()
 @Component({
@@ -100,7 +96,7 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
       const billingAddress = userAddressResponse.data.find((item) =>
         item.labels
           .map((label) => label.id.toString())
-          .includes(AddressLabel.Billing)
+          .includes(AddressLabelType.BILLING)
       )
 
       const wellcoreStatePhaseEntry = Object.values(
