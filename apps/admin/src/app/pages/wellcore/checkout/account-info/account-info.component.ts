@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { range, uniqBy } from 'lodash'
@@ -11,7 +17,9 @@ interface SelectOption {
 @UntilDestroy()
 @Component({
   selector: 'ccr-wellcore-account-info',
-  templateUrl: './account-info.component.html'
+  templateUrl: './account-info.component.html',
+  styleUrls: ['./account-info.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class WellcoreAccountComponent implements OnInit, OnDestroy {
   @Input() accountCreated = false

@@ -254,7 +254,8 @@ export class WellcoreCheckoutComponent implements OnInit {
       gender: ['', [Validators.required, this.validateGender]],
       height: ['', Validators.required],
       heightDisplayValue: [''],
-      birthday: ['', [Validators.required, this.validateAge]]
+      birthday: ['', [Validators.required, this.validateAge]],
+      agreements: [false, [Validators.requiredTrue]]
     })
     this.shippingInfo = this.fb.group({
       firstName: ['', Validators.required],

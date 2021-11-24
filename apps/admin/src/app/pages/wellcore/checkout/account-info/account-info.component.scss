@@ -1,0 +1,12 @@
+ccr-wellcore-account-info {
+  mat-checkbox {
+    .mat-checkbox-layout {
+      display: inline;
+
+      .mat-checkbox-label {
+        line-height: 150%;
+        white-space: normal;
+      }
+    }
+  }
+}

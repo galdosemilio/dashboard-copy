@@ -170,18 +170,23 @@ ccr-wellcore-container {
     .ccr-wellcore-field {
       display: flex;
       width: 100%;
+    }
 
-      .ccr-wellcore-label {
-        width: 122px;
-        min-width: 122px;
-        font-weight: 200;
-        font-size: 14px;
-        font-family: 'Inter Light';
-        padding-top: 15px;
+    .ccr-wellcore-label {
+      width: 122px;
+      min-width: 122px;
+      font-weight: 200;
+      font-size: 14px;
+      font-family: 'Inter Light';
+      padding-top: 15px;
 
-        span {
-          color: #f05d5c;
-        }
+      span {
+        color: #f05d5c;
+      }
+
+      a {
+        color: white;
+        text-decoration: underline;
       }
     }
 
@@ -208,6 +213,11 @@ ccr-wellcore-container {
       .mat-checkbox-label {
         font-family: 'Inter Light';
       }
+    }
+
+    mat-error {
+      margin-top: 5px;
+      font-size: 12px;
     }
   }
 
