@@ -248,8 +248,11 @@ export class WellcoreCheckoutComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       emailConfirmation: ['', [this.validateEmailMatches()]],
-      password: ['', [Validators.required]],
-      passwordConfirmation: ['', [this.validatePasswordMatches()]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      passwordConfirmation: [
+        '',
+        [this.validatePasswordMatches(), Validators.minLength(8)]
+      ],
       phoneNumber: ['', Validators.required],
       gender: ['', [Validators.required, this.validateGender]],
       height: ['', Validators.required],
