@@ -7,6 +7,7 @@ import { FormDisplayService } from '@app/dashboard/library/forms/services'
 import { _, BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
+import { ContextService } from '@app/service'
 
 interface FormDisplayRouteElement {
   type: 'text' | 'form' | 'submission'
@@ -31,6 +32,7 @@ export class FormDisplayComponent implements BindForm, OnDestroy, OnInit {
   public form: FormGroup
   public data: Form
   public disableSave = true
+  public isProvider = false
   public preview = false
   public routes: FormDisplayRouteElement[] = [
     {
@@ -42,6 +44,7 @@ export class FormDisplayComponent implements BindForm, OnDestroy, OnInit {
 
   constructor(
     public formDisplay: FormDisplayService,
+    private context: ContextService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router
@@ -52,6 +55,8 @@ export class FormDisplayComponent implements BindForm, OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.isProvider = this.context.isProvider
+
     this.route.data.pipe(untilDestroyed(this)).subscribe((data: any) => {
       this.data = data.form
 

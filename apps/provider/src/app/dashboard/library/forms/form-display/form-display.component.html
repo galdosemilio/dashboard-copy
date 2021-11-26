@@ -13,9 +13,9 @@
 </div>
 
 <div class="ccr-tabs" fxFlex="nogrow" fxLayout="row" fxLayoutAlign=" stretch">
-  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['submissions']" [routerLink]="['submissions']">{{ 'LIBRARY.FORMS.VIEW_ANSWERS_TOOLTIP' | translate }}</a>
+  <a *ngIf="isProvider" fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['submissions']" [routerLink]="['submissions']">{{ 'LIBRARY.FORMS.VIEW_ANSWERS_TOOLTIP' | translate }}</a>
   <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['fill']" [routerLink]="['fill']">{{ 'LIBRARY.FORMS.FILL_TOOLTIP' | translate }}</a>
-  <a fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['edit']" [routerLink]="['edit']">{{ 'LIBRARY.FORMS.EDIT_TOOLTIP' | translate }}</a>
+  <a *ngIf="isProvider" fxFlex fxLayoutAlign="center center" ccrLinkActive="active" [urlLinks]="['edit']" [routerLink]="['edit']">{{ 'LIBRARY.FORMS.EDIT_TOOLTIP' | translate }}</a>
 </div>
 
 <div class="ccr-subcomponent" fxFlex="grow">

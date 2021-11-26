@@ -36,7 +36,6 @@ import { GestureService } from './gesture'
 import { APP_CONFIG } from '@coachcare/common/shared'
 import { FormPDFService } from './formPDFService'
 import { MessagingService } from './messaging'
-import { MedicalIntakeFormService } from './medical-intake-form'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -92,7 +91,6 @@ export function AppProviders() {
     LanguageService,
     ListingPaginationGuard,
     LoggingService,
-    MedicalIntakeFormService,
     NotifierService,
     {
       provide: MessagingService,

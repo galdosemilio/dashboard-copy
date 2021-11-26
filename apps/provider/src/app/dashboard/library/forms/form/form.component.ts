@@ -68,6 +68,7 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
   public preview = false
   public selectedClinic: SelectedOrganization
   public showIntro = false
+  public skipAccSel = false
   public source: FormsDatasource
 
   private _account: any
@@ -92,6 +93,18 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
     this.source.addDefault({ organization: this.context.organization.id })
     this.formsSyncer = new FormsSyncer(this.source)
     this.source.isLoading = false
+
+    this.route.params.subscribe((params) => {
+      this.skipAccSel = params.skipAccSel
+
+      if (!this.skipAccSel) {
+        return
+      }
+
+      // This triggers the current account to be selected
+      this.account = undefined
+    })
+
     this.route.data.subscribe((data: any) => {
       this.fill = data.fill || false
       this.readonly = data.readonly || false

@@ -6,8 +6,35 @@
       </h2>
     </div>
   </div>
+  <div *ngIf="isPatient">
+    <p>{{ 'BOARD.WELCOME_WELLCORE' | translate }}</p>
+    <ul *ngIf="!isLoading" class="patient-tasks">
+      <li>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+          <a mat-button color="primary" class="ccr-button" [routerLink]="[medicalIntakeFormLink, { skipAccSel: true }]">
+            {{ 'BOARD.COMPLETE_MY_ONBOARDING_QUESTIONNAIRE' | translate }}
+          </a>
+          <mat-icon *ngIf="submittedMedicalIntakeForm">check_circle</mat-icon>
+        </div>
+      </li>
+      <li>
+        <a mat-button color="primary" class="ccr-button" routerLink="/test-results">
+          {{ 'BOARD.SEE_MY_BLOOD_ANALYSIS' | translate }}
+        </a>
+      </li>
+      <li *ngIf="!eligibleToSelfSchedule">
+          <a mat-button color="primary" class="ccr-button" routerLink="/new-appointment">
+            {{ 'BOARD.SCHEDULE_PROVIDER_VIDEO_CONFERENCE_CALL' | translate }}
+          </a>
+        </li>
+    </ul>
+  </div>
 
   <div>
     <ccr-next-meeting></ccr-next-meeting>
   </div>
+</div>
+
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
 </div>

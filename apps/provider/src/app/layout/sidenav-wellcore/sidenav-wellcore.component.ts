@@ -167,6 +167,7 @@ export class SidenavWellcoreComponent
         route: 'library',
         navRoute: 'library',
         icon: 'folder',
+        isAllowedForPatients: true,
         badge: 0
       },
       {

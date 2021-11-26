@@ -18,7 +18,6 @@ import {
   MessagingService,
   TimeTrackerService
 } from '@app/service'
-import { MedicalIntakeFormService } from '@app/service/medical-intake-form'
 import { MatDatepickerIntl } from '@coachcare/datepicker'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
@@ -27,9 +26,6 @@ import * as pdfMake from 'pdfmake'
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { CallLayoutService } from './layout/call/services/call-layout.service'
 import { RecoverCall } from './layout/store/call'
-import { MatDialog } from '@coachcare/material'
-import { environment } from '../environments/environment'
-import { FormFillDialog } from './dashboard/library/forms/dialogs/form-fill'
 
 @UntilDestroy()
 @Component({
@@ -50,10 +46,8 @@ export class AppComponent implements OnDestroy, OnInit {
 
   constructor(
     private callLayout: CallLayoutService,
-    private dialog: MatDialog,
     private intl: MatDatepickerIntl,
     private gesture: GestureService,
-    private medicalIntakeForm: MedicalIntakeFormService,
     private messaging: MessagingService,
     private timeTracker: TimeTrackerService,
     private translate: TranslateService,
@@ -97,15 +91,6 @@ export class AppComponent implements OnDestroy, OnInit {
   private initGlobalServices(): void {
     this.gesture.init()
     this.messaging.init()
-    this.medicalIntakeForm.init()
-
-    this.medicalIntakeForm.showModal$.pipe(untilDestroyed(this)).subscribe(() =>
-      this.dialog.open(FormFillDialog, {
-        data: { formId: environment.wellcoreMedicalFormId },
-        panelClass: 'ccr-fullscreen-dialog',
-        disableClose: true
-      })
-    )
   }
 
   private onLangChange() {

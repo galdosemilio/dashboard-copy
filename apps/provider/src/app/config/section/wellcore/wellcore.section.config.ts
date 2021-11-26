@@ -18,8 +18,7 @@ export const WellCoreSectionConfig: SectionConfigDetails = {
   },
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: true,
-    SHOW_NEW_APPOINTMENT: true,
-    SHOW_MEDICAL_INTAKE_FORM: true
+    SHOW_NEW_APPOINTMENT: true
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: true

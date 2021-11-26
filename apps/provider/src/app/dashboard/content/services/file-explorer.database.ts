@@ -108,7 +108,11 @@ export class FileExplorerDatabase extends CcrDatabase {
   }
 
   public fetch(args: GetAllContentRequest): Observable<GetAllContentResponse> {
-    return from(this.content.getAll(args))
+    return from(
+      this.context.isProvider
+        ? this.content.getAll(args)
+        : this.content.getList(args)
+    )
   }
 
   public getAllContentPackage(
