@@ -11,7 +11,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 export class WellcoreCartComponent implements OnInit {
   public cartTotal = 0
   public form: FormGroup
-  public itemPrice = 99
+  public itemPrice = 0
 
   constructor(private fb: FormBuilder) {}
 
