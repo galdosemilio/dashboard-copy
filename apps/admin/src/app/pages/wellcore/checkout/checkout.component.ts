@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router'
 import {
   CookieService,
+  COOKIE_ROLE,
   ECOMMERCE_ACCESS_TOKEN,
   ECOMMERCE_REFRESH_TOKEN,
   EventsService,
@@ -23,6 +24,7 @@ import {
   AccountSingle,
   AddLogRequest,
   AddressProvider,
+  CcrRolesMap,
   DeviceTypeIds,
   Logging,
   Register
@@ -374,6 +376,13 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
 
       this.account = await this.accountProvider.getSingle(single.id)
+
+      this.cookie.set(
+        COOKIE_ROLE,
+        CcrRolesMap(this.account.accountType.id),
+        1,
+        '/'
+      )
 
       this.accountId = single.id
 
