@@ -10,7 +10,6 @@ import { Router } from '@angular/router'
 import {
   CookieService,
   ECOMMERCE_ACCESS_TOKEN,
-  ECOMMERCE_CART_ID,
   ECOMMERCE_REFRESH_TOKEN,
   EventsService,
   LanguageService,
@@ -30,9 +29,6 @@ import {
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
-import { OrderAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
-import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
-import { RelationType } from '@spree/storefront-api-v2-sdk/types/interfaces/Relationships'
 import { environment } from 'apps/admin/src/environments/environment'
 import * as moment from 'moment'
 import { STATES_LIST } from '../model'
@@ -53,22 +49,14 @@ export interface CheckoutData {
     heightDisplayValue?: string
     birthday?: Date
   }
-  paymentInfo?: {
-    billingInfo: {
-      firstName: string
-      lastName: string
-      address1: string
-      address2?: string
-      city: string
-      state: string
-      zip: string
-    }
-    creditCardInfo: {
-      stripeToken: string
-      last4: string
-      exp_month: string
-      exp_year: string
-    }
+  billingInfo?: {
+    firstName: string
+    lastName: string
+    address1: string
+    address2?: string
+    city: string
+    state: string
+    zip: string
   }
   shippingInfo?: {
     firstName: string
@@ -95,10 +83,8 @@ export class WellcoreCheckoutComponent implements OnInit {
   public accountId: string
   public accountInfo: FormGroup
   public accountCreated = false
-  public cartInfo: OrderAttr
-  public cartItems: ProductAttr[] = []
   public shippingInfo: FormGroup
-  public paymentInfo: FormGroup
+  public billingInfo: FormGroup
   public orderReview: FormGroup
   public orderConfirm: FormGroup
   public step = 0
@@ -145,20 +131,16 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   public checkBillingInfoErrors(): boolean {
-    const billingAddressGroup = this.paymentInfo.get('billingInfo')
     return (
       this.stepper.selectedIndex === 2 &&
-      (billingAddressGroup.get('state').touched || this.useShippingAddress) &&
-      billingAddressGroup.get('state').invalid
+      (this.billingInfo.get('state').touched || this.useShippingAddress) &&
+      this.billingInfo.get('state').invalid
     )
   }
 
   public getNextStepLabel(): string {
     switch (this.stepper.selectedIndex) {
       case 3:
-        return 'Complete and Pay'
-
-      case 4:
         return 'Complete Medical Intake Form'
 
       default:
@@ -171,6 +153,11 @@ export class WellcoreCheckoutComponent implements OnInit {
 
     switch (from) {
       case 0:
+        if (this.accountInfo.invalid) {
+          this.accountInfo.markAllAsTouched()
+          return
+        }
+
         if (!this.accountCreated) {
           await this.createUserAccount()
         } else {
@@ -181,32 +168,32 @@ export class WellcoreCheckoutComponent implements OnInit {
         break
 
       case 1:
+        if (this.shippingInfo.invalid) {
+          this.shippingInfo.markAllAsTouched()
+          return
+        }
+
         if (!this.shippingAddress) {
           await this.createShippingAddress()
         } else {
           await this.updateShippingAddress()
         }
-
-        await this.updateShippingAddressOnSpree()
         break
 
       case 2:
+        if (this.billingInfo.invalid) {
+          this.billingInfo.markAllAsTouched()
+          return
+        }
+
         if (!this.billingAddress) {
           await this.createBillingAddress()
         } else {
           await this.updateBillingAddress()
         }
-
-        await this.updatePaymentMethodOnSpree()
-        await this.updateBillingAddressOnSpree()
-        await this.resolveCartItems()
         break
 
       case 3:
-        await this.completeOrder()
-        break
-
-      case 4:
         void this.startRedirection()
         break
     }
@@ -239,7 +226,7 @@ export class WellcoreCheckoutComponent implements OnInit {
           zip: ''
         }
 
-    this.paymentInfo.controls.billingInfo.patchValue(patchValue)
+    this.billingInfo.patchValue(patchValue)
   }
 
   private createForm(): void {
@@ -269,34 +256,25 @@ export class WellcoreCheckoutComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     })
-    this.paymentInfo = this.fb.group({
-      billingInfo: this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        address1: ['', Validators.required],
-        address2: [''],
-        city: ['', Validators.required],
-        state: ['', [Validators.required, this.validateWhitelistedState]],
-        zip: ['', Validators.required]
-      }),
-      creditCardInfo: this.fb.group({
-        type: ['', Validators.required],
-        stripeToken: ['', Validators.required],
-        last4: ['', Validators.required],
-        exp_month: ['', Validators.required],
-        exp_year: ['', Validators.required]
-      })
-    })
-    this.orderReview = this.fb.group({})
+    ;(this.billingInfo = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: [''],
+      city: ['', Validators.required],
+      state: ['', [Validators.required, this.validateWhitelistedState]],
+      zip: ['', Validators.required]
+    })),
+      (this.orderReview = this.fb.group({}))
     this.orderConfirm = this.fb.group({})
 
     this.accountInfo.valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((control) => (this.checkoutData.accountInfo = control))
 
-    this.paymentInfo.valueChanges
+    this.billingInfo.valueChanges
       .pipe(untilDestroyed(this))
-      .subscribe((controls) => (this.checkoutData.paymentInfo = controls))
+      .subscribe((controls) => (this.checkoutData.billingInfo = controls))
 
     this.shippingInfo.valueChanges
       .pipe(untilDestroyed(this))
@@ -308,46 +286,24 @@ export class WellcoreCheckoutComponent implements OnInit {
         }
 
         if (this.useShippingAddress) {
-          this.paymentInfo.controls.billingInfo.patchValue(controls)
-          this.paymentInfo.controls.billingInfo.updateValueAndValidity()
+          this.billingInfo.patchValue(controls)
+          this.billingInfo.updateValueAndValidity()
 
-          if (this.paymentInfo.controls.billingInfo.valid) {
+          if (this.billingInfo.valid) {
             return
           }
 
-          this.paymentInfo.controls.billingInfo.reset()
+          this.billingInfo.reset()
           this.useShippingAddress = false
         }
       })
   }
 
-  private async completeOrder(): Promise<void> {
-    try {
-      this.bus.trigger('wellcore.loading.show', true)
-
-      const orderCompleteResult = await this.spree.checkout.complete({
-        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
-      })
-
-      if (orderCompleteResult.isFail()) {
-        throw new Error(
-          `[WELLCORE] Order can't be completed. Reason: ${
-            orderCompleteResult.fail().message
-          }`
-        )
-      }
-    } catch (error) {
-      this.notifier.error(error)
-      throw new Error(error)
-    } finally {
-      this.bus.trigger('wellcore.loading.show', false)
-    }
-  }
-
   private async createBillingAddress(): Promise<void> {
+    // Todo: need to integrate spree api for create address for billing when it's ready
     try {
       this.bus.trigger('wellcore.loading.show', true)
-      const billingData = this.paymentInfo.get('billingInfo').value
+      const billingData = this.billingInfo.value
 
       await this.addressProvider.createAddress({
         account: this.account.id,
@@ -371,6 +327,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   private async createShippingAddress(): Promise<void> {
+    // Todo: need to integrate spree api for create address for shipping when it's ready
     try {
       this.bus.trigger('wellcore.loading.show', true)
       const shippingData = this.shippingInfo.value
@@ -388,88 +345,6 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
 
       await this.resolveAccountAddresses()
-    } catch (error) {
-      this.notifier.error(error)
-      throw new Error(error)
-    } finally {
-      this.bus.trigger('wellcore.loading.show', false)
-    }
-  }
-
-  private async updateBillingAddressOnSpree(): Promise<void> {
-    try {
-      this.bus.trigger('wellcore.loading.show', true)
-      const billingData = this.paymentInfo.get('billingInfo').value
-
-      const orderUpdateRes = await this.spree.checkout.orderUpdate(
-        { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
-        {
-          order: {
-            bill_address_attributes: {
-              firstname: billingData.firstName,
-              lastname: billingData.lastName,
-              address1: billingData.address1,
-              address2: billingData.address2 || '',
-              city: billingData.city,
-              phone: this.account.phone,
-              zipcode: billingData.zip,
-              state_name: STATES_LIST.find(
-                (state) => state.value === billingData.state
-              )?.viewValue,
-              country_iso: 'US'
-            }
-          }
-        }
-      )
-
-      if (orderUpdateRes.isFail()) {
-        throw new Error(
-          `[WELLCORE] Order address could not be updated. Reason: ${
-            orderUpdateRes.fail().message
-          }`
-        )
-      }
-    } catch (error) {
-      this.notifier.error(error)
-      throw new Error(error)
-    } finally {
-      this.bus.trigger('wellcore.loading.show', false)
-    }
-  }
-
-  private async updateShippingAddressOnSpree(): Promise<void> {
-    try {
-      this.bus.trigger('wellcore.loading.show', true)
-      const shippingData = this.shippingInfo.value
-
-      const orderUpdateRes = await this.spree.checkout.orderUpdate(
-        { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
-        {
-          order: {
-            ship_address_attributes: {
-              firstname: shippingData.firstName,
-              lastname: shippingData.lastName,
-              address1: shippingData.address1,
-              address2: shippingData.address2 || '',
-              city: shippingData.city,
-              phone: this.account.phone,
-              zipcode: shippingData.zip,
-              state_name: STATES_LIST.find(
-                (state) => state.value === shippingData.state
-              )?.viewValue,
-              country_iso: 'US'
-            }
-          }
-        }
-      )
-
-      if (orderUpdateRes.isFail()) {
-        throw new Error(
-          `[WELLCORE] Order address could not be updated. Reason: ${
-            orderUpdateRes.fail().message
-          }`
-        )
-      }
     } catch (error) {
       this.notifier.error(error)
       throw new Error(error)
@@ -543,46 +418,6 @@ export class WellcoreCheckoutComponent implements OnInit {
         name: SPREE_EXTERNAL_ID_NAME,
         value: accountData.email
       })
-
-      const cart = await this.spree.cart.create({
-        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
-      })
-
-      if (cart.isFail()) {
-        throw new Error(
-          `Spree cart creation error. Reason: ${cart.fail().message}`
-        )
-      }
-
-      this.cookie.set(ECOMMERCE_CART_ID, cart.success().data.id)
-
-      const products = await this.spree.products.list({
-        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
-      })
-
-      if (products.isFail()) {
-        throw new Error(
-          `Spree product fetching error. Reason: ${products.fail().message}`
-        )
-      }
-
-      this.allProducts = products.success().data.slice()
-
-      const addItemResult = await this.spree.cart.addItem(
-        {
-          bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
-        },
-        {
-          variant_id: products.success().data.shift()?.id,
-          quantity: 1
-        }
-      )
-
-      if (addItemResult.isFail()) {
-        throw new Error(
-          `Spree item add error. Reason: ${addItemResult.fail().message}`
-        )
-      }
     } catch (error) {
       const addLogRequest: AddLogRequest = {
         app: 'ccr-staticProvider',
@@ -607,7 +442,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   private loadBillingAddressIntoForm(address: AccountAddress): void {
-    this.paymentInfo.get('billingInfo').patchValue({
+    this.billingInfo.patchValue({
       firstName: address.name.split(' ')[0],
       lastName: address.name.split(' ')[1] || '',
       address1: address.address1,
@@ -661,7 +496,7 @@ export class WellcoreCheckoutComponent implements OnInit {
         this.billingAddress = billingAddress
         this.loadBillingAddressIntoForm(billingAddress)
       } else {
-        this.paymentInfo.get('billingInfo').patchValue({
+        this.billingInfo.patchValue({
           firstName: this.account.firstName,
           lastName: this.account.lastName
         })
@@ -673,44 +508,16 @@ export class WellcoreCheckoutComponent implements OnInit {
     }
   }
 
-  private async resolveCartItems(): Promise<void> {
-    try {
-      const cartShowResult = await this.spree.cart.show({
-        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
-      })
-
-      if (cartShowResult.isFail()) {
-        throw new Error(
-          `[WELLCORE] Cannot fetch cart items. Reason ${
-            cartShowResult.fail().message
-          }`
-        )
-      }
-
-      this.cartInfo = cartShowResult.success().data
-
-      this.cartItems = (cartShowResult.success().data.relationships.variants
-        .data as RelationType[])
-        .map(
-          (variant) =>
-            this.allProducts.find((product) => product.id === variant.id) ??
-            null
-        )
-        .filter((item) => item)
-    } catch (error) {
-      this.notifier.error(error)
-    }
-  }
-
   private async startRedirection(): Promise<void> {
-    window.location.href = `${environment.wellcoreUrl}/${environment.wellcoreOrgId}`
+    window.location.href = `${environment.wellcoreUrl}?baseOrg=${environment.wellcoreOrgId}`
   }
 
   private async updateBillingAddress(): Promise<void> {
+    // Todo: need to integrate spree api for update address for billing when it's ready
     try {
       this.bus.trigger('wellcore.loading.show', true)
 
-      const billingData = this.paymentInfo.get('billingInfo').value
+      const billingData = this.billingInfo.value
 
       await this.addressProvider.updateAddress({
         id: this.billingAddress.id.toString(),
@@ -732,6 +539,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   private async updateShippingAddress(): Promise<void> {
+    // Todo: need to integrate spree api for create address for billing when it's ready
     try {
       this.bus.trigger('wellcore.loading.show', true)
 
@@ -748,60 +556,6 @@ export class WellcoreCheckoutComponent implements OnInit {
       })
 
       await this.resolveAccountAddresses()
-    } catch (error) {
-      this.notifier.error(error)
-      throw new Error(error)
-    } finally {
-      this.bus.trigger('wellcore.loading.show', false)
-    }
-  }
-
-  private async updatePaymentMethodOnSpree(): Promise<void> {
-    try {
-      this.bus.trigger('wellcore.loading.show', true)
-
-      const paymentMethods = await this.spree.checkout.paymentMethods({
-        bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN)
-      })
-
-      if (
-        paymentMethods.isFail() ||
-        paymentMethods.success().data.length <= 0
-      ) {
-        throw new Error(
-          `[WELLCORE] Can't fetch payment methods. Reason: ${
-            paymentMethods.fail().message
-          }`
-        )
-      }
-
-      const paymentMethodId = paymentMethods.success().data.shift().id
-
-      const paymentResult = await this.spree.checkout.orderUpdate(
-        { bearerToken: this.cookie.get(ECOMMERCE_ACCESS_TOKEN) },
-        {
-          order: {
-            payments_attributes: [{ payment_method_id: paymentMethodId }]
-          },
-          payment_source: {
-            [paymentMethodId]: {
-              number: '4111111111111111',
-              month: '1',
-              year: '2022',
-              verification_value: '123',
-              name: `${this.account.firstName} ${this.account.lastName}`
-            }
-          }
-        }
-      )
-
-      if (paymentResult.isFail()) {
-        throw new Error(
-          `[WELLCORE] Cannot add payment method. Reason ${
-            paymentResult.fail().message
-          }`
-        )
-      }
     } catch (error) {
       this.notifier.error(error)
       throw new Error(error)

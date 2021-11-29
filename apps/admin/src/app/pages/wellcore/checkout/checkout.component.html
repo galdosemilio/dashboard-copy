@@ -16,7 +16,7 @@
 
   <div class="checkout-table-container" fxFlex="77%" fxHide.xs fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
     <mat-horizontal-stepper fxFlex linear #stepper>
-      <mat-step [stepControl]="accountInfo">
+      <mat-step>
         <div class="step-container">
           <ccr-wellcore-account-info
             [accountCreated]="!!account"
@@ -24,28 +24,18 @@
           </ccr-wellcore-account-info>
         </div>
       </mat-step>
-      <mat-step [stepControl]="shippingInfo">
+      <mat-step>
         <div class="step-container">
           <ccr-wellcore-shipping-info [formGroup]="shippingInfo"></ccr-wellcore-shipping-info>
         </div>
       </mat-step>
-      <mat-step [stepControl]="paymentInfo">
+      <mat-step>
         <div class="step-container">
           <ccr-wellcore-billing-info
           [useShippingAddress]="useShippingAddress"
           (onChangeUseShippingAddress)="onChangeUseShippingAddress($event)"
-          [billingFormGroup]="paymentInfo.get('billingInfo')"
-          [creditFormGroup]="paymentInfo.get('creditCardInfo')"></ccr-wellcore-billing-info>
-        </div>
-      </mat-step>
-      <mat-step>
-        <div class="step-container">
-          <ccr-wellcore-review-order
-            [cartInfo]="cartInfo"
-            [cartItems]="cartItems"
-            [checkoutData]="checkoutData"
-            [stepper]="stepper">
-          </ccr-wellcore-review-order>
+          [formGroup]="billingInfo"
+          ></ccr-wellcore-billing-info>
         </div>
       </mat-step>
       <mat-step>
@@ -63,9 +53,18 @@
     <div
       [hidden]="checkAccountInfoErrors() || checkBillingInfoErrors()"
       fxLayout="row"
-      fxLayoutAlign="space-between start">
-      <button mat-flat-button class="ccr-step-button" (click)="prevStep()">Back</button>
-      <button mat-flat-button class="ccr-step-button" (click)="nextStep()">{{ getNextStepLabel() }}</button>
+      fxLayoutAlign="stretch center">
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <button
+          (click)="prevStep()"
+          class="ccr-step-button"
+          mat-flat-button>
+            Back
+          </button>
+        </div>
+        <div fxFlex fxLayout="row" fxLayoutAlign="end center">
+          <button mat-flat-button class="ccr-step-button" (click)="nextStep()">{{ getNextStepLabel() }}</button>
+        </div>
     </div>
   </div>
 </div>

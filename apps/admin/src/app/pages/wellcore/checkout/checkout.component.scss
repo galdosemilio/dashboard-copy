@@ -2,6 +2,10 @@
 
 $border-color: rgba(mat-color($wellcore, platinum), 0.5);
 
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}
+
 .checkout {
   padding: 25px;
 

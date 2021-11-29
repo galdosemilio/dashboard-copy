@@ -1,20 +1,3 @@
-<div class="ccr-wellcore-form-title">Credit Card Information</div>
-
-<form [formGroup]="creditFormGroup" class="ccr-wellcore-form">
-  <div class="ccr-wellcore-stripe">
-    <div class="ccr-wellcore-stripe-field">
-      <ngx-stripe-card
-        [options]="cardOptions"
-        [elementsOptions]="elementsOptions"
-        (change)="onChange($event)"
-      ></ngx-stripe-card>
-    </div>
-    <mat-error *ngIf="stripeErrorMessage">{{ stripeErrorMessage }}</mat-error>
-  </div>
-</form>
-
-<br>
-
 <div class="ccr-wellcore-form-title">Billing Information</div>
 <div class="ccr-wellcore-field-select">
   <mat-checkbox
@@ -24,7 +7,7 @@
     Billing info is same as shipping
   </mat-checkbox>
 </div>
-<form *ngIf="!useShippingAddress" [formGroup]="billingFormGroup" class="ccr-wellcore-form">
+<form *ngIf="!useShippingAddress" [formGroup]="formGroup" class="ccr-wellcore-form">
   <div
   fxLayout="row"
   fxLayout.sm="column"
@@ -36,14 +19,14 @@
       <label class="ccr-wellcore-label">First Name <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="firstName">
-        <mat-error *ngIf="billingFormGroup.get('firstName').getError('required')">First name is required</mat-error>
+        <mat-error *ngIf="formGroup.get('firstName').getError('required')">First name is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
       <label class="ccr-wellcore-label">Last Name <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="lastName">
-        <mat-error *ngIf="billingFormGroup.get('lastName').getError('required')">Last name is required</mat-error>
+        <mat-error *ngIf="formGroup.get('lastName').getError('required')">Last name is required</mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -51,7 +34,7 @@
     <label class="ccr-wellcore-label">Address Line 1 <span>*</span></label>
     <mat-form-field appearance="outline">
       <input matInput formControlName="address1">
-      <mat-error *ngIf="billingFormGroup.get('address1').getError('required')">Address Line 1 is required</mat-error>
+      <mat-error *ngIf="formGroup.get('address1').getError('required')">Address Line 1 is required</mat-error>
     </mat-form-field>
   </div>
   <div class="ccr-wellcore-field">
@@ -71,7 +54,7 @@
       <label class="ccr-wellcore-label">City <span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="city">
-        <mat-error *ngIf="billingFormGroup.get('city').getError('required')">City is required</mat-error>
+        <mat-error *ngIf="formGroup.get('city').getError('required')">City is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
@@ -81,7 +64,7 @@
         formControlName="state">
           <mat-option *ngFor="let state of states" [value]="state.value">{{ state.viewValue }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="billingFormGroup.get('state').getError('required')">State is required</mat-error>
+        <mat-error *ngIf="formGroup.get('state').getError('required')">State is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -97,7 +80,7 @@
       <label class="ccr-wellcore-label">Zip Code<span>*</span></label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="zip">
-        <mat-error *ngIf="billingFormGroup.get('zip').getError('required')">Zip Code is required</mat-error>
+        <mat-error *ngIf="formGroup.get('zip').getError('required')">Zip Code is required</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
