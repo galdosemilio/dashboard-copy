@@ -1,3 +1,26 @@
+# [1.54.0](https://github.com/coachcare/dashboard/compare/v1.53.0...v1.54.0) (2021-11-29)
+
+
+### Bug Fixes
+
+* add agreements to checkout [FRON-2493] ([c9754be](https://github.com/coachcare/dashboard/commit/c9754be54dfb2f4ec3ce76f18edde25b703243a0))
+* add minlength validation for password [FROM-2495] ([e64e206](https://github.com/coachcare/dashboard/commit/e64e206bc4fbe93bffa350bcac05b0c2855d443f))
+* check eligible to self-schedule [FRON-2476] ([589af26](https://github.com/coachcare/dashboard/commit/589af265f4a1b69fdbb07dc17166f9fd0c9e734a))
+* check providers phase for wellcore [FRON-2483] ([7eca5c8](https://github.com/coachcare/dashboard/commit/7eca5c8266b6126b43e38bd6570e8b0edfccb214))
+* do not permit wellcore patients to modify billing address [FRON-2484] ([b049cd7](https://github.com/coachcare/dashboard/commit/b049cd79b86e71a05f3da0cf3729ebc1461ba5ec))
+* hide register company link in wellcore [FRON-2477] ([4408a83](https://github.com/coachcare/dashboard/commit/4408a83f23df86df0102a557cb47495b0f8c308e))
+* hide test results menu for provider and add new patient [FRON-2490] ([f8adde6](https://github.com/coachcare/dashboard/commit/f8adde62542c4d4af0b34effd5ac3768134517ea))
+* implemented cleanup requirements [FRON-2500] ([92c7dce](https://github.com/coachcare/dashboard/commit/92c7dcef227f3d5db02d64a9e7117d0718a0e97d))
+* redirect to teamwellcore domain after wellcore onboarding [FRON-2487] ([5b03b39](https://github.com/coachcare/dashboard/commit/5b03b39922d3a1ede33f4a357f78b8540752cb6f))
+* update layout for medical intake form [FRON-2497] ([606a397](https://github.com/coachcare/dashboard/commit/606a397750f4d9f9194871fe578282b5717697c4))
+* update wellcore onboarding pages [FRON-2496] ([6af3cc7](https://github.com/coachcare/dashboard/commit/6af3cc7f498d438fe4aa8d06891387cdcac4199a))
+
+
+### Features
+
+* add phase listing to provider profile tab for wellcore [FRON-2482] ([fa4fc51](https://github.com/coachcare/dashboard/commit/fa4fc51681f8334894ec0e3fa9f91fd48a1b7252))
+* reworked wellcore mif dialog [FRON-2467] ([bf636f1](https://github.com/coachcare/dashboard/commit/bf636f133a01368858aa7c5da259bab2db8e965c))
+
 # [1.53.0](https://github.com/coachcare/dashboard/compare/v1.52.0...v1.53.0) (2021-11-20)
 
 
