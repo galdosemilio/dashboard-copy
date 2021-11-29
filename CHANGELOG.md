@@ -1,3 +1,10 @@
+## [1.54.2](https://github.com/coachcare/dashboard/compare/v1.54.1...v1.54.2) (2021-11-29)
+
+
+### Bug Fixes
+
+* presented error message before attempting to log in ([67b765d](https://github.com/coachcare/dashboard/commit/67b765d64b8de5d9a8715dcc8615d208ee33622f))
+
 ## [1.54.1](https://github.com/coachcare/dashboard/compare/v1.54.0...v1.54.1) (2021-11-29)
 
 
