@@ -1,3 +1,10 @@
+## [1.54.1](https://github.com/coachcare/dashboard/compare/v1.54.0...v1.54.1) (2021-11-29)
+
+
+### Bug Fixes
+
+* adjusted spree route and added role cookie ([ea0c021](https://github.com/coachcare/dashboard/commit/ea0c02182c00d22239372d7a478976059632f816))
+
 # [1.54.0](https://github.com/coachcare/dashboard/compare/v1.53.0...v1.54.0) (2021-11-29)
 
 
