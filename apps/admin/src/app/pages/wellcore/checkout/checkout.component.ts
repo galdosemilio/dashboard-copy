@@ -428,6 +428,7 @@ export class WellcoreCheckoutComponent implements OnInit {
         value: accountData.email
       })
     } catch (error) {
+      this.notifier.error(error)
       const addLogRequest: AddLogRequest = {
         app: 'ccr-staticProvider',
         logLevel: 'error',
@@ -443,7 +444,6 @@ export class WellcoreCheckoutComponent implements OnInit {
       }
 
       await this.log.add(addLogRequest)
-      this.notifier.error(error)
       throw new Error(error)
     } finally {
       this.bus.trigger('wellcore.loading.show', false)
