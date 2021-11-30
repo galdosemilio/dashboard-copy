@@ -18,14 +18,14 @@
         </div>
       </li>
       <li>
-        <a mat-button color="primary" class="ccr-button" routerLink="/test-results">
+        <button mat-button routerLink="/test-results" disabled>
           {{ 'BOARD.SEE_MY_BLOOD_ANALYSIS' | translate }}
-        </a>
+        </button>
       </li>
       <li *ngIf="!eligibleToSelfSchedule">
-          <a mat-button color="primary" class="ccr-button" routerLink="/new-appointment">
+          <button mat-button routerLink="/new-appointment" disabled>
             {{ 'BOARD.SCHEDULE_PROVIDER_VIDEO_CONFERENCE_CALL' | translate }}
-          </a>
+          </button>
         </li>
     </ul>
   </div>
