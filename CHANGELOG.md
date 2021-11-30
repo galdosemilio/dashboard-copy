@@ -1,3 +1,12 @@
+## [1.54.3](https://github.com/coachcare/dashboard/compare/v1.54.2...v1.54.3) (2021-11-30)
+
+
+### Bug Fixes
+
+* added support for clinic-based loginSites [FRON-2502] ([b570070](https://github.com/coachcare/dashboard/commit/b5700707622d7b438f7e95a67052e0311d1a0f12))
+* disabled homepage buttons ([ef764ad](https://github.com/coachcare/dashboard/commit/ef764ad3cc50d4801a46e84e4c505478d8b40c6e))
+* set up environment-aware session management [FRON-2501] ([4cb2c55](https://github.com/coachcare/dashboard/commit/4cb2c552cd76a2f6043c48d5b906873cb49bb217))
+
 ## [1.54.2](https://github.com/coachcare/dashboard/compare/v1.54.1...v1.54.2) (2021-11-29)
 
 
