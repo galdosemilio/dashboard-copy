@@ -24,7 +24,8 @@ import { ShakeItSectionConfig } from './shake-it.section.config'
 import { WellCoreSectionConfig } from './wellcore.section.config'
 
 export interface LoginConfigDetails {
-  SHOW_REGISTER_NEW_COMPANY?: boolean
+  SHOW_REGISTER_NEW_COMPANY: boolean
+  USE_COOKIE_BASED_SESSION: boolean
 }
 
 export interface CustomCheckboxConfig {

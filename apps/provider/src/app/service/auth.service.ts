@@ -3,6 +3,7 @@ import { STORAGE_PROVIDER_ROUTE } from '@app/config'
 import { CookieService } from 'ngx-cookie-service'
 import { AccountTypeIds, ApiService } from '@coachcare/sdk'
 import { environment } from '../../environments/environment'
+import { authenticationToken } from '@coachcare/common/sdk.barrel'
 
 @Injectable()
 export class AuthService {
@@ -29,6 +30,7 @@ export class AuthService {
   }
 
   remove(): void {
+    authenticationToken.value = undefined
     this.cookie.delete('ccrStatic', '/')
   }
 

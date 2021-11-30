@@ -5,6 +5,7 @@ import {
   AppEnvironment,
   CcrRol
 } from '@coachcare/common/shared'
+import { authenticationToken } from '../sdk.barrel'
 import { STORAGE_ADMIN_URL, STORAGE_PROVIDER_URL } from './cookie.service'
 
 /**
@@ -43,6 +44,7 @@ export class AuthService {
   }
 
   logout(): void {
+    authenticationToken.value = undefined
     // FIXME why redirect to root from toolbar fails?
     this.router.navigateByUrl('/').then((success) => {
       if (!success) {

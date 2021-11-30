@@ -7,6 +7,7 @@ import {
   Validators
 } from '@angular/forms'
 import { Router } from '@angular/router'
+import { authenticationToken } from '@coachcare/common/sdk.barrel'
 import {
   CookieService,
   COOKIE_ROLE,
@@ -367,13 +368,19 @@ export class WellcoreCheckoutComponent implements OnInit {
         email: accountData.email,
         password: accountData.password,
         phone: accountData.phoneNumber,
-        deviceType: DeviceTypeIds.Web,
+        deviceType: environment.production
+          ? DeviceTypeIds.iOS
+          : DeviceTypeIds.Web,
         client: {
           birthday: moment(accountData.birthday).format('YYYY-MM-DD'),
           height: accountData.height,
           gender: accountData.gender
         }
       })
+
+      if (single.token) {
+        authenticationToken.value = single.token
+      }
 
       this.account = await this.accountProvider.getSingle(single.id)
 

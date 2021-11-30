@@ -83,7 +83,7 @@ import {
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
 import { environment } from './environments/environment'
 
-const authenticationToken = new AuthenticationToken()
+export const authenticationToken = new AuthenticationToken()
 export const SDK_HEADERS = new ApiHeaders()
 
 const avatarApiService = new ApiService({

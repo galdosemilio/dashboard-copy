@@ -10,7 +10,8 @@ import {
   LoginSessionRequest,
   LoginSessionResponse,
   MobileApp,
-  Session
+  Session,
+  SessionRequest
 } from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { SessionActions } from '@coachcare/backend/store/session'
@@ -29,6 +30,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { resolveConfig } from '../config/section.config'
+import { authenticationToken } from '@coachcare/common/sdk.barrel'
 
 type LoginPageMode = 'patient'
 
@@ -59,6 +61,8 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
   mode: MFACodeInputMode | LoginPageMode = 'default'
   orgName: string
   showRegisterCompany = false
+
+  private cookieBasedSession = true
 
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
@@ -105,6 +109,13 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       email: '',
       password: ''
     })
+
+    this.cookieBasedSession =
+      resolveConfig(
+        'LOGIN.USE_COOKIE_BASED_SESSION',
+        this.context.organizationId
+      ) ?? true
+
     this.mfaForm = this.builder.group({})
     this.resolveBadgeLinks(
       this.translate.currentLang.split('-')[0].toLowerCase()
@@ -131,7 +142,9 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     if (this.form.valid) {
       const request: LoginSessionRequest = {
         ...this.form.value,
-        deviceType: DeviceTypeIds.Web,
+        deviceType: this.cookieBasedSession
+          ? DeviceTypeIds.Web
+          : DeviceTypeIds.iOS,
         allowedAccountTypes: [
           AccountTypeIds.Admin,
           AccountTypeIds.Provider,
@@ -145,8 +158,12 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
 
       this.isLoggingIn = true
       this.session
-        .login(request as any) // MERGETODO: CHECK THIS TYPE!!!
+        .login(request as SessionRequest)
         .then(async (response) => {
+          if (response.token) {
+            authenticationToken.value = response.token
+          }
+
           if (response.mfa) {
             this.detectMFA(response as any) // MERGETODO: CHECK THIS TYPE!!!
           } else {
@@ -192,9 +209,11 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
       }
 
       this.isLoggingIn = true
-      await this.session.loginMFA({
+      const response = await this.session.loginMFA({
         ...this.form.value,
-        deviceType: DeviceTypeIds.Web,
+        deviceType: this.cookieBasedSession
+          ? DeviceTypeIds.Web
+          : DeviceTypeIds.iOS,
         allowedAccountTypes: [AccountTypeIds.Admin, AccountTypeIds.Provider],
         organization:
           this.context.organizationId || this.environment.defaultOrgId,
@@ -205,6 +224,10 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
             : ''
         }
       })
+
+      if (response.token) {
+        authenticationToken.value = response.token
+      }
 
       const checkResponse = await this.session.check()
 
@@ -220,6 +243,7 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
   private attemptLogout(): Promise<void> {
     return new Promise<void>(async (resolve) => {
       try {
+        authenticationToken.value = undefined
         await this.session.logout()
       } finally {
         resolve()

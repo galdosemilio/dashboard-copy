@@ -17,6 +17,7 @@ export const DefaultSectionConfig: SectionConfigDetails = {
     SELF_REGISTER: true
   },
   LOGIN: {
-    SHOW_REGISTER_NEW_COMPANY: true
+    SHOW_REGISTER_NEW_COMPANY: true,
+    USE_COOKIE_BASED_SESSION: true
   }
 }
