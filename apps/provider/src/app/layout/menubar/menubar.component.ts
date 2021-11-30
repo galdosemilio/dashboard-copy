@@ -30,6 +30,7 @@ import { Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { AccountTypeIds, OrganizationProvider, User } from '@coachcare/sdk'
 import { HelpComponent } from './help'
+import { resolveConfig } from '@app/config/section'
 
 @UntilDestroy()
 @Component({
@@ -147,8 +148,13 @@ export class MenubarComponent implements OnDestroy, OnInit {
   }
 
   logout(): void {
+    const loginSite = resolveConfig(
+      'GLOBAL.LOGIN_SITE_URL',
+      this.context.organization
+    )
+
     this.user.logout().then(() => {
-      this.auth.redirect()
+      this.auth.redirect(loginSite)
     })
   }
 

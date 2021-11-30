@@ -34,9 +34,12 @@ export class AuthService {
     this.cookie.delete('ccrStatic', '/')
   }
 
-  redirect(): void {
+  redirect(loginSite = environment.loginSite): void {
     this.remove()
+
     window.localStorage[STORAGE_PROVIDER_ROUTE] = window.location.href
-    window.location.href = environment.loginSite
+    window.location.href = environment.production
+      ? loginSite
+      : 'http://localhost:4200'
   }
 }

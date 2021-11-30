@@ -25,6 +25,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SidenavItem } from '../sidenav/sidenav-item/sidenav-item.component'
 import { User } from '@coachcare/sdk'
 import { filter } from 'rxjs/operators'
+import { resolveConfig } from '@app/config/section'
 
 export interface SidenavOrg {
   id: string
@@ -216,8 +217,12 @@ export class SidenavWellcoreComponent
   }
 
   public async logout(): Promise<void> {
+    const loginSite = resolveConfig(
+      'GLOBAL.LOGIN_SITE_URL',
+      this.context.organization
+    )
     await this.user.logout()
-    this.auth.redirect()
+    this.auth.redirect(loginSite)
   }
 
   private filterSideNavItems() {

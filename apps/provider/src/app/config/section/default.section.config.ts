@@ -77,7 +77,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     },
     LAYOUT: {
       component: DefaultLayoutComponent
-    }
+    },
+    LOGIN_SITE_URL: 'https://test.dashboard.coachcare.com'
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: false
@@ -147,7 +148,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     },
     LAYOUT: {
       component: DefaultLayoutComponent
-    }
+    },
+    LOGIN_SITE_URL: 'https://dashboard.coachcare.com'
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: false
