@@ -475,7 +475,7 @@ export class MeasurementDataSource extends ChartDataSource<
       case 'year':
         xMaxTicks = 12
         xlabelFormat = 'MMM YYYY'
-        tooltipFormat = 'MMM YYYY'
+        tooltipFormat = 'MMM DD, YYYY h:mm a'
         break
       case 'alltime':
         xMaxTicks = 18
