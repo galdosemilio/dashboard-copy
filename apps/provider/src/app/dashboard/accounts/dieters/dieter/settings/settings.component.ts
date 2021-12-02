@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { resolveConfig } from '@app/config/section'
-import { Form } from '@app/dashboard/library/forms/models'
-import { FormsDatabase } from '@app/dashboard/library/forms/services'
 import { ContextService, EventsService } from '@app/service'
-import { FormSingle, PagedResponse } from '@coachcare/sdk'
 import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
@@ -45,8 +42,6 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
     'meetings',
     'goals'
   ]
-  defaultForm: Form
-  fillForm: Form
   associationZendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360035588992-Changing-a-Patient-Coach-Clinic'
 
@@ -59,7 +54,6 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private context: ContextService,
-    private formsDatabase: FormsDatabase,
     private route: ActivatedRoute,
     private bus: EventsService
   ) {}
@@ -115,15 +109,6 @@ export class DieterSettingsComponent implements OnInit, OnDestroy {
       const s = params.get('s')
       this.section = this.components.indexOf(s) >= 0 ? s : this.component
     })
-
-    this.formsDatabase
-      .fetch({ organization: this.context.organization.id })
-      .pipe(untilDestroyed(this))
-      .subscribe((response: PagedResponse<FormSingle>) => {
-        if (response.data && response.data.length === 1) {
-          this.defaultForm = new Form(response.data[0])
-        }
-      })
 
     this.bus.trigger('right-panel.component.set', 'reminders')
   }

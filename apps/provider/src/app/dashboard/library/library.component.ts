@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { ContentUploadService } from '@app/dashboard/content/services'
-import { EventsService } from '@app/service'
+import { ContextService, EventsService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
 
 @Component({
@@ -17,13 +17,17 @@ export class LibraryComponent implements OnInit {
     }
   }
 
+  public isProvider: boolean
+
   constructor(
     private contentUpload: ContentUploadService,
+    private context: ContextService,
     private dialog: MatDialog,
     private bus: EventsService
   ) {}
 
   ngOnInit() {
+    this.isProvider = this.context.isProvider
     this.bus.trigger('right-panel.deactivate')
   }
 

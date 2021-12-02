@@ -17,7 +17,7 @@ import {
   ManagerEvents,
   QUESTION_TYPE_MAP
 } from '@app/dashboard/library/forms/models'
-import { SelectedOrganization } from '@app/service'
+import { ContextService, SelectedOrganization } from '@app/service'
 import { _, BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
 import {
   AccountAccessData,
@@ -76,6 +76,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
   public draftSaveDate: moment.Moment
   public events: ManagerEvents = new ManagerEvents()
   public form: FormGroup
+  public isProvider: boolean
   public isSavingDraft: boolean
   public hasMultipleSections = false
   public selectedSection: FormSection
@@ -90,6 +91,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
   constructor(
     public formDisplay: FormDisplayService,
     private cdr: ChangeDetectorRef,
+    private context: ContextService,
     private formBuilder: FormBuilder,
     private formSubmission: FormSubmissionService,
     private translate: TranslateService
@@ -98,6 +100,8 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
   ngOnDestroy() {}
 
   ngOnInit() {
+    this.isProvider = this.context.isProvider
+
     if (this.content.id) {
       this.fetchDraft()
     }

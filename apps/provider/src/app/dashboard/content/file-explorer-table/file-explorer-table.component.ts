@@ -261,8 +261,30 @@ export class FileExplorerTableComponent
     }
   }
 
+  public openContent(content: FileExplorerContent): void {
+    if (this.isProvider) {
+      return
+    }
+
+    if (content.type.code === CONTENT_TYPE_MAP.form.code) {
+      this.router.navigate([
+        '/library/forms',
+        content.metadata.id,
+        'dieter-submissions'
+      ])
+      return
+    }
+
+    if (content.type.code === CONTENT_TYPE_MAP.folder.code) {
+      this.openDirectory(content)
+      return
+    }
+
+    this.onOpen(content)
+  }
+
   openDirectory(content: FileExplorerContent): void {
-    if (content.type && content.type.code === 'form') {
+    if (content.type && content.type.code === CONTENT_TYPE_MAP.form.code) {
       this.router.navigate([
         '/library/forms',
         content.metadata.id,
@@ -356,7 +378,12 @@ export class FileExplorerTableComponent
     }
 
     if (!this.isProvider) {
-      filteredColumns.push('isVisibleToPatient')
+      filteredColumns = [
+        ...filteredColumns,
+        'isVisibleToPatient',
+        'availability',
+        'actions'
+      ]
     }
 
     filteredColumns = [...filteredColumns, ...this.hiddenColumns]

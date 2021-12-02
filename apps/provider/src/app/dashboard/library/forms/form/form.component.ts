@@ -65,6 +65,7 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
   public form: FormGroup
   public hasError: boolean
   public invalidAccount: boolean
+  public isProvider: boolean
   public preview = false
   public selectedClinic: SelectedOrganization
   public showIntro = false
@@ -148,6 +149,8 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
+    this.isProvider = this.context.isProvider
+
     if (this.formSubmission) {
       this.selectedClinic = this.formSubmission.organization
     }

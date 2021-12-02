@@ -1,3 +1,4 @@
+export * from './assign-form'
 export * from './form-clone'
 export * from './form-create.dialog'
 export * from './form-edit.dialog'

@@ -60,6 +60,22 @@ export class FormDisplayComponent implements BindForm, OnDestroy, OnInit {
     this.route.data.pipe(untilDestroyed(this)).subscribe((data: any) => {
       this.data = data.form
 
+      if (!this.isProvider) {
+        this.routes = [
+          {
+            type: 'form',
+            payload: this.data,
+            destination: ['./dieter-submissions']
+          },
+          {
+            type: 'text',
+            payload: _('LIBRARY.FORMS.VIEW_ANSWERS_TOOLTIP'),
+            destination: ['./dieter-submissions']
+          }
+        ]
+        return
+      }
+
       this.routes[1] = {
         type: 'form',
         payload: this.data,
@@ -126,6 +142,10 @@ export class FormDisplayComponent implements BindForm, OnDestroy, OnInit {
       .subscribe((enable) => (this.disableSave = !enable))
 
     this.formDisplay.saved$.pipe(untilDestroyed(this)).subscribe(() => {
+      if (!this.isProvider) {
+        return
+      }
+
       this.router.navigate(['./'], { relativeTo: this.route })
     })
   }

@@ -1,6 +1,7 @@
 import { RunGuardsAndResolvers } from '@angular/router'
 import { ContentComponent } from '@app/dashboard/content'
 import {
+  DieterSubmissionsComponent,
   FormAnswersResolver,
   FormDisplayComponent,
   FormEditGuard,
@@ -79,6 +80,10 @@ export const LibraryRoutes = [
                 }
               }
             ]
+          },
+          {
+            path: 'dieter-submissions',
+            component: DieterSubmissionsComponent
           }
         ]
       }

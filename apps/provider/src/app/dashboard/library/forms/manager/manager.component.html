@@ -84,7 +84,7 @@
           </span>
         </span>
 
-        <div *ngIf="fill">
+        <div *ngIf="fill && isProvider">
             <p>
               <span [innerHTML]=" 'LIBRARY.FORMS.SUBMITTED_UNDER_CLINIC' | translate:{clinic: selectedClinic?.name} "></span>&nbsp;
               <ccr-popup-description

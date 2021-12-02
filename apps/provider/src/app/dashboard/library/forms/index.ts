@@ -1,3 +1,4 @@
+export * from './dieter-submissions'
 export * from './form/form.component'
 export * from './forms.component'
 export * from './form-display/form-display.component'
@@ -5,6 +6,11 @@ export * from './form-submissions/form-submissions.component'
 export * from './utils'
 
 import {
+  DieterSubmissionsComponent,
+  DieterSubmissionsTableComponent
+} from './dieter-submissions'
+import {
+  AssignFormDialog,
   FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
@@ -70,6 +76,9 @@ const questionComponents = [
 export const FormsComponents = [
   LibraryFormComponent,
   AllowedValuesFormComponent,
+  AssignFormDialog,
+  DieterSubmissionsComponent,
+  DieterSubmissionsTableComponent,
   DietersTableComponent,
   EmbedContentPickerComponent,
   FormAddendumTableComponent,
@@ -95,6 +104,7 @@ export const FormsComponents = [
 ]
 
 export const FormsEntryComponents = [
+  AssignFormDialog,
   FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,

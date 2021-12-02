@@ -8,7 +8,7 @@
 </div>
 
 <div class="ccr-library" fxLayout="column" fxLayoutGap="5px">
-  <div class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
+  <div *ngIf="isProvider" class="ccr-tabs" fxLayout="row" fxLayoutAlign=" stretch">
     <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['content']">
       {{ 'LIBRARY.CONTENT._TITLE' | translate }}
     </a>

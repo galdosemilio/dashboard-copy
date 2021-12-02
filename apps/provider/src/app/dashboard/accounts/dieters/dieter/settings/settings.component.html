@@ -98,7 +98,8 @@
 
   <ng-container *ngSwitchCase="'forms'">
 
-    <app-dieter-forms [fillForm]="fillForm" (formSelected)="disableAssignForm = !!$event"></app-dieter-forms>
+    <app-library-dieter-submissions (formSelected)="disableAssignForm = !!$event">
+    </app-library-dieter-submissions>
 
   </ng-container>
 

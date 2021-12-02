@@ -1,21 +1,25 @@
 <div [hidden]="selectedForm && answers">
     <div fxLayout="column" fxLayoutAlign="start stretch">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
             <ccr-popup-description
+            *ngIf="isProvider"
             [title]="'BOARD.SEARCH_CLINIC' | translate"
             [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_CLINIC_DESCRIPTION' | translate"
             ></ccr-popup-description>
             <ccr-organization-search
+            *ngIf="isProvider"
             [allowSearchbarReset]="true"
             [initialOrg]="initialOrg"
             (select)="onOrganizationSelect($event)"
             fxFlex></ccr-organization-search>
             <ccr-popup-description
+            *ngIf="isProvider"
             [title]="'LIBRARY.FORMS.SEARCH_BY_NAME' | translate"
             [description]="'LIBRARY.FORMS.SEARCH_BY_NAME_DESCRIPTION' | translate"
             ></ccr-popup-description>
-            <form-search (change)="formFilter = $event" fxFlex></form-search>
+            <form-search *ngIf="isProvider" (change)="formFilter = $event" fxFlex></form-search>
             <button
+                [disabled]="hasReachedSubmissionLimit"
                 (click)="assignForm()"
                 class="ccr-icon-button"
                 color="primary"
@@ -28,8 +32,10 @@
 
     </div>
 
-    <div class="ccr-htools" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
         <ccr-popup-description
+        *ngIf="isProvider"
+        fxFlex
         [title]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_FORMS' | translate"
         [description]="'LIBRARY.FORMS.SUBMISSION_LISTING_EXPLANATION_FORMS_DESCRIPTION' | translate"
         ></ccr-popup-description>
@@ -43,10 +49,10 @@
     </div>
 
     <ccr-datasource-overlay class="ccr-table" [source]="source">
-        <app-dieter-forms-table
+        <app-library-dieter-submissions-table
             [source]="source"
             (selectSubmission)="onSelectSubmission($event)"
-        ></app-dieter-forms-table>
+        ></app-library-dieter-submissions-table>
     </ccr-datasource-overlay>
 </div>
 

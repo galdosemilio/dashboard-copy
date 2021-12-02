@@ -177,6 +177,7 @@
         <mat-row fxLayoutWrap
           *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
           [ngClass]="{ 'row-even': even, 'row-odd': odd, 'last-inherited': row.isLastForeign }" class="clickable"
+          (click)="openContent(row)"
           (dblclick)="openDirectory(row)" [ccrDraggable]="{ data: row, isDraggable: row.isAdmin && rowOnEdition.id !== row.id && !row.isForeign }"
           [ccrDropzone]="{ data: row, isDroppable: row.isFolder && !row.isForeign, isLongDroppable: row.isAdmin && !row.isForeign}"
           (ccrDrop)="dropContent($event)" (ccrLongDrop)="sortContent($event)"

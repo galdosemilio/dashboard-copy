@@ -8,10 +8,10 @@ import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
 
 @Component({
-  selector: 'app-dieter-forms-table',
+  selector: 'app-library-dieter-submissions-table',
   templateUrl: './table.component.html'
 })
-export class DieterFormsTableComponent {
+export class DieterSubmissionsTableComponent {
   @Input()
   source: FormSubmissionsDatasource
 

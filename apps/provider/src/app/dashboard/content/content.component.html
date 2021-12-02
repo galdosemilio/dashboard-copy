@@ -19,6 +19,7 @@
                 (select)="selectOrganization($event)">
             </ccr-organization-search>
 
+            <div *ngIf="isProvider" fxFlex fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="start">
             <mat-form-field class="ccr-filter" floatLabel="never" fxFlex="nogrow">
                 <mat-select
                 [placeholder]="'LIBRARY.CONTENT.TYPE_FILTER' | translate"
@@ -38,14 +39,17 @@
                     <mat-option *ngFor="let type of fileTypes; let i = index;" [value]="i">{{ type.name | translate }}</mat-option>
                 </mat-select>
             </mat-form-field>
+            </div>
         </div>
         <div
-        *ngIf="mode === 'digital-library'; else fileVaultControls"
-        fxFlex
-        fxFlex.xs="1 1 100%"
-        fxLayoutAlign="end center"
-        fxLayoutAlign.xs="center"
-        fxLayoutGap="7px">
+        *ngIf="mode === 'digital-library'; else fileVaultControls">
+            <div
+            *ngIf="isProvider"
+            fxFlex
+            fxFlex.xs="1 1 100%"
+            fxLayoutAlign="end center"
+            fxLayoutAlign.xs="center"
+            fxLayoutGap="7px">
             <!-- this is temporally removed because of FRON-677 -->
             <!-- <div class="ccr-button-group">
                 <a mat-button class="ccr-icon-button" (click)="setViewMode('list')" [class.active]="viewMode === 'list'"
@@ -111,6 +115,7 @@
             [description]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS' | translate:{organization: organization.name}"
             [showIntro]="false"
             ></ccr-popup-description>
+            </div>
         </div>
 
         <ng-template #fileVaultControls>

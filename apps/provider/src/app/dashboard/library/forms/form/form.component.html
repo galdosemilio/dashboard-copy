@@ -52,7 +52,7 @@
       </ng-container>
 
     <app-library-form-addendum-table
-    *ngIf="readonly && formSubmission && data && data.allowAddendum"
+    *ngIf="isProvider && readonly && formSubmission && data && data.allowAddendum"
     [submission]="formSubmission"
     ></app-library-form-addendum-table>
   </div>

@@ -34,7 +34,7 @@ export class WellcoreDashboardComponent implements OnInit {
     private notify: NotifierService
   ) {
     this.isPatient = this.context.user.accountType.id === AccountTypeIds.Client
-    this.medicalIntakeFormLink = `/library/forms/${environment.wellcoreMedicalFormId}/fill`
+    this.medicalIntakeFormLink = `/library/forms/${environment.wellcoreMedicalFormId}/dieter-submissions`
   }
 
   ngOnInit() {

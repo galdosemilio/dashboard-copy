@@ -2,14 +2,12 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnDestroy,
   OnInit,
   Output,
   ViewChild
 } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
-import { AssignFormDialog } from '@app/dashboard/accounts/dialogs'
 import { Form, FormSubmission } from '@app/dashboard/library/forms/models'
 import {
   FormDisplayService,
@@ -22,15 +20,17 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { FormAnswer, FormSingle } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { filter, map, take } from 'rxjs/operators'
+import { AssignFormDialog } from '../dialogs'
+import { ActivatedRoute } from '@angular/router'
 
 @UntilDestroy()
 @Component({
-  selector: 'app-dieter-forms',
+  selector: 'app-library-dieter-submissions',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.scss']
 })
-export class DieterFormsComponent implements OnInit, OnDestroy {
+export class DieterSubmissionsComponent implements OnInit {
   @Input()
   set fillForm(form: Form) {
     if (form) {
@@ -56,10 +56,12 @@ export class DieterFormsComponent implements OnInit, OnDestroy {
 
   public account: any
   public answers: FormAnswer[]
-  public defaultForm: Form
+  public isProvider: boolean
   public fill = false
   public form: FormGroup
   public forms: Form[] = []
+  public hasCalculatedLimit: boolean
+  public hasReachedSubmissionLimit: boolean
   public readonly = true
   public source: FormSubmissionsDatasource
   public selectedSubmission: FormSubmission
@@ -85,6 +87,7 @@ export class DieterFormsComponent implements OnInit, OnDestroy {
     return this._formFilter
   }
   private formFilterChange$: Subject<string> = new Subject<string>()
+  private formId: string
   private _selectedForm: Form
 
   constructor(
@@ -93,14 +96,30 @@ export class DieterFormsComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private formDisplay: FormDisplayService,
     private formsDatabase: FormsDatabase,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnDestroy() {}
-
   ngOnInit() {
+    this.isProvider = this.context.isProvider
     this.initialOrg = this.context.organization
     this.createDatasource()
+
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((map) => {
+      this.formId = map.get('id')
+
+      if (this.isProvider) {
+        return
+      }
+
+      this.source
+        .connect()
+        .pipe(take(1))
+        .subscribe(() => void this.resolveSubmissionLimit(this.formId))
+
+      this.formFilter = this.formId
+    })
+
     this.formDisplay.saved$
       .pipe(untilDestroyed(this))
       .subscribe(() => this.showSubmissions())
@@ -182,26 +201,54 @@ export class DieterFormsComponent implements OnInit, OnDestroy {
   }
 
   assignForm() {
-    if (this.defaultForm) {
-      this.fillForm = this.defaultForm
-    } else {
-      this.dialog
-        .open(AssignFormDialog, {
-          width: '80vw',
-          panelClass: 'ccr-full-dialog'
-        })
-        .afterClosed()
+    if (!this.isProvider) {
+      void this.resolveFillForm(this.formId)
+      return
+    }
+
+    this.dialog
+      .open(AssignFormDialog, {
+        width: '80vw',
+        panelClass: 'ccr-full-dialog'
+      })
+      .afterClosed()
+      .pipe(
+        untilDestroyed(this),
+        filter(($event) => $event.form)
+      )
+      .subscribe(($event) => void this.resolveFillForm($event.form))
+  }
+
+  private async resolveFillForm(formId: string): Promise<void> {
+    try {
+      this.formsDatabase
+        .readForm({ id: formId, full: true })
         .pipe(untilDestroyed(this))
-        .subscribe(($event: any) => {
-          if ($event.form) {
-            this.formsDatabase
-              .readForm({ id: $event.form, full: true })
-              .pipe(untilDestroyed(this))
-              .subscribe((response: FormSingle) => {
-                this.fillForm = new Form(response)
-              })
-          }
-        })
+        .subscribe(
+          (response: FormSingle) => (this.fillForm = new Form(response))
+        )
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async resolveSubmissionLimit(formId: string): Promise<void> {
+    try {
+      const form = await this.formsDatabase
+        .readForm({ id: formId })
+        .pipe(untilDestroyed(this))
+        .toPromise()
+
+      if (!form.maximumSubmissions) {
+        this.hasReachedSubmissionLimit = false
+        return
+      }
+
+      this.hasReachedSubmissionLimit = this.source.result.length > 0
+
+      this.onSelectSubmission(this.source.result[0])
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 }
