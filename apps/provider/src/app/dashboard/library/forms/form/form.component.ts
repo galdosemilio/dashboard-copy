@@ -163,6 +163,10 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
           return
         }
 
+        if (this.hasError) {
+          return
+        }
+
         this.hasError =
           !this.selectedClinic.permissions.viewAll ||
           !this.selectedClinic.permissions.allowClientPhi ||
