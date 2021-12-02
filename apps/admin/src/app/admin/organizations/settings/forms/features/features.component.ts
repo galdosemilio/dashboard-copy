@@ -9,7 +9,8 @@ import {
   RPM,
   Sequence,
   NamedEntity,
-  AccountTypeIds
+  AccountTypeIds,
+  Entity
 } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
@@ -249,12 +250,18 @@ export class FeaturesComponent implements OnDestroy, OnInit {
               })
             : this.communicationPrefs.updatePreference({
                 id: this.featurePrefs.communicationPrefs.id,
-                videoConferencing: { isEnabled: formValue.videoconference }
+                videoConferencing: { isEnabled: formValue.videoconference },
+                recording: {
+                  isEnabled: formValue.videoconferenceRecording ?? false
+                }
               })
           : formValue.videoconference !== null &&
             this.communicationPrefs.createPreference({
               organization: this.orgId || '',
-              videoConferencing: { isEnabled: formValue.videoconference }
+              videoConferencing: { isEnabled: formValue.videoconference },
+              recording: {
+                isEnabled: formValue.videoconferenceRecording ?? false
+              }
             })) || Promise.resolve()
       )
 
@@ -386,6 +393,7 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       sequences: [null],
       useAutoThreadParticipation: [null],
       videoconference: [null],
+      videoconferenceRecording: [null],
       schedule: [null],
       scheduleIsPrimary: [null],
       scheduleAddressDisplayProviders: [null],
@@ -437,6 +445,9 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           this.featurePrefs.communicationPrefs.organization.id === this.orgId
             ? this.featurePrefs.communicationPrefs.videoConferencing.isEnabled
             : null,
+        videoconferenceRecording: this.featurePrefs.communicationPrefs
+          ? this.featurePrefs.communicationPrefs.recording.isEnabled
+          : false,
         autoEnroll:
           this.featurePrefs.onboarding &&
           this.featurePrefs.onboarding.client &&
@@ -495,19 +506,22 @@ export class FeaturesComponent implements OnDestroy, OnInit {
 
   private refreshFeaturePrefsObject(
     fieldValue: boolean | null,
-    promiseValue: any,
+    promiseValue: Entity | boolean,
     propertyName: string
   ): void {
     switch (fieldValue) {
       case false:
       case true:
+        const promiseValueIsBoolean = typeof promiseValue === 'boolean'
+
         this.featurePrefs[propertyName] = {
           ...this.featurePrefs[propertyName],
-          ...promiseValue,
           id:
             propertyName === 'schedulePrefs'
               ? this.orgId
-              : this.featurePrefs[propertyName]?.id,
+              : promiseValueIsBoolean // this means that we did a PATCH or UPDATE meaning we already have the ID
+              ? this.featurePrefs[propertyName]?.id
+              : (promiseValue as Entity).id, // this means we ran a CREATE meaning we have to extract the ID from the response
           organization: { id: this.orgId }
         }
         break

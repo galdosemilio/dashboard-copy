@@ -10,6 +10,15 @@
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
+    data-cy="org-settings-section-features-video-recording"
+    [readonly]="!featurePrefs.communicationPrefs || featureSettings.videoConference.inheritedFrom"
+    [inheritable]="false"
+    [label]="'GLOBAL.VIDEOCONFERENCE_RECORDING' | translate"
+    formControlName="videoconferenceRecording"></ccr-feature-toggle-input>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <ccr-feature-toggle-input
     data-cy="org-settings-section-features-library"
     [inheritable]="featureSettings.digitalLibrary.isInheritable"
     [label]="'GLOBAL.DIGITAL_LIBRARY' | translate"
