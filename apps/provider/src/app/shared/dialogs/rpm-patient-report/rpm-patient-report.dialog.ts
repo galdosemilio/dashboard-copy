@@ -105,10 +105,12 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
   }
 
   private createForm(): void {
+    const lastMonth = moment().subtract(1, 'month')
+
     this.form = this.fb.group({
-      endDate: [moment(), Validators.required],
+      endDate: [lastMonth.clone().endOf('month'), Validators.required],
       format: ['pdf'],
-      startDate: [moment().startOf('month'), Validators.required]
+      startDate: [lastMonth.clone().startOf('month'), Validators.required]
     })
 
     this.form.controls.startDate.valueChanges
