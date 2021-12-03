@@ -525,7 +525,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   }
 
   private async startRedirection(): Promise<void> {
-    window.location.href = `${environment.wellcoreUrl}?baseOrg=${environment.wellcoreOrgId}`
+    window.location.href = `${environment.wellcoreUrl}/provider/dashboard?baseOrg=${environment.wellcoreOrgId}`
   }
 
   private async updateBillingAddress(): Promise<void> {
