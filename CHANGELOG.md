@@ -1,3 +1,17 @@
+# [1.55.0](https://github.com/coachcare/dashboard/compare/v1.54.3...v1.55.0) (2021-12-03)
+
+
+### Bug Fixes
+
+* change idle timeout to five mins [FRON-2471] ([f5a2baf](https://github.com/coachcare/dashboard/commit/f5a2baf9af676edc9d53c9e131222040226170c3))
+* restrict editing access with submissions [FRON-2504] ([9044c54](https://github.com/coachcare/dashboard/commit/9044c54d2847f202875bee10799af937d45854f5))
+* show date in measurement chart yearly view [FRON-2474] ([04c40a6](https://github.com/coachcare/dashboard/commit/04c40a620ddfc92a10b2a5864dbbafc198f87fdc))
+
+
+### Features
+
+* added support for videoconference recording flag [FRON-2300] ([ca11914](https://github.com/coachcare/dashboard/commit/ca119147c863a824252c45015c45974380378fc4))
+
 ## [1.54.3](https://github.com/coachcare/dashboard/compare/v1.54.2...v1.54.3) (2021-11-30)
 
 
