@@ -113,7 +113,7 @@ export class VaultDatabase extends CcrDatabase {
             id: args.id,
             parent: args.parent,
             name: args.name,
-            description: args.description || null,
+            description: args.description === '' ? null : args.description,
             sortOrder: args.sortOrder,
             isVisibleToPatient: args.isVisibleToPatient
           }

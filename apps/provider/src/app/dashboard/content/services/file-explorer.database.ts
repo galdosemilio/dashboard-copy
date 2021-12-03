@@ -139,7 +139,7 @@ export class FileExplorerDatabase extends CcrDatabase {
             parentId: args.parentId,
             name: args.name,
             isPublic: args.isPublic,
-            description: args.description || null,
+            description: args.description === '' ? null : args.description,
             sortOrder: args.sortOrder
           }
           await this.content.update(request)
