@@ -1,3 +1,19 @@
+# [1.56.0](https://github.com/coachcare/dashboard/compare/v1.55.0...v1.56.0) (2021-12-06)
+
+
+### Bug Fixes
+
+* description is erased when shifting content order [FRON-2355] ([28d336c](https://github.com/coachcare/dashboard/commit/28d336c15808a0ea41fb2d5f08e6a4dd8482a109))
+* redirect to dashboard after process wellcore onboarding [FRON-2508] ([ec46e36](https://github.com/coachcare/dashboard/commit/ec46e36ef59d9d7074813ed5f60383072046f338))
+* select last month as start and end for download rpm report [FRON-2511] ([75f6295](https://github.com/coachcare/dashboard/commit/75f6295de9b9fc30d60517156497f1a798084858))
+
+
+### Features
+
+* add page for continue registration [FRON-2485] ([2597c44](https://github.com/coachcare/dashboard/commit/2597c44bcbca3ac4576a7ccc0d6454aa07343286))
+* added onboarding flow recovery [FRON-2486] ([e1af3a0](https://github.com/coachcare/dashboard/commit/e1af3a0c32b30b88170292a6501e15f690d6c7e6))
+* adjusted dl behavior for patients [FRON-2507] ([9afaf73](https://github.com/coachcare/dashboard/commit/9afaf73fc78e4972ba700830ee98966f6a549f1f))
+
 # [1.55.0](https://github.com/coachcare/dashboard/compare/v1.54.3...v1.55.0) (2021-12-03)
 
 
