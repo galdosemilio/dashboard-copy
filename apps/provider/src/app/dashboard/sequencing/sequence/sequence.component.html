@@ -70,11 +70,11 @@ fxLayoutAlign=" stretch">
             <small *ngIf="hasEnrollees && sequence.hasLoop">{{ 'SEQUENCING.EDITING_DISABLED_NOTICE' | translate }}</small>
             <small *ngIf="hasEnrollees && !sequence.hasLoop">{{ 'SEQUENCING.EDITING_PARTIAL_DISABLED_NOTICE' | translate }}</small>
             <small *ngIf="!isAdmin && !hasEnrollees">{{ 'SEQUENCING.EDITING_DISABLED_ADMIN_NOTICE' | translate }}</small>
-
+            <small *ngIf="isAdmin && !hasEnrollees && enabledAutoenrollment">{{ 'SEQUENCING.EDITING_DISABLED_AUTOENROLLMENT_ENABLED_NOTICE' | translate }}</small>
             <div [formGroup]="form">
                 <sequencing-form
                 [sequence]="sequence"
-                [blocked]="hasEnrollees || !isAdmin || hardBlocked"
+                [blocked]="hasEnrollees || !isAdmin || hardBlocked || enabledAutoenrollment"
                 [hardBlocked]="!isAdmin || hardBlocked"
                 (loadFinished)="onFormLoadFinish$.emit()"
                 [markAsTouched]="markAsTouched$"

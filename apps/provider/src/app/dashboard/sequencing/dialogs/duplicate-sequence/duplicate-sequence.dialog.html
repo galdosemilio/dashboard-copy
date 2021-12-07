@@ -18,6 +18,7 @@
         fxFlex></ccr-organization-search>
 
         <small *ngIf="noAdminOrg" class="error">{{ 'SEQUENCING.NO_ADMIN_ORG' | translate }}</small>
+        <p *ngIf="enabledAutoenrollment">{{ 'SEQUENCING.CLONE_AUTOENROLLMENT_ENABLED_NOTICE' | translate }}</p>
     </div>
 </mat-dialog-content>
 

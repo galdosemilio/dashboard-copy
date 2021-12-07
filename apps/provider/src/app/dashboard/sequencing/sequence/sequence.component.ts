@@ -34,6 +34,7 @@ export class SequenceComponent implements OnDestroy, OnInit {
 
   form: FormGroup
   hardBlocked = false
+  enabledAutoenrollment = false
   hasEnrollees: boolean
   hasSteps: boolean
   isAdmin: boolean
@@ -122,6 +123,7 @@ export class SequenceComponent implements OnDestroy, OnInit {
         }),
         { inServer: true }
       )
+      this.enabledAutoenrollment = sequence.autoenrollment?.enabled || false
       this.section = 'refreshing'
       this.sequence = undefined
       this.cdr.detectChanges()
@@ -172,6 +174,8 @@ export class SequenceComponent implements OnDestroy, OnInit {
 
         this.hasEnrollees = response.data.length > 0
       }
+      this.enabledAutoenrollment =
+        this.sequence?.autoenrollment?.enabled || false
     })
   }
 

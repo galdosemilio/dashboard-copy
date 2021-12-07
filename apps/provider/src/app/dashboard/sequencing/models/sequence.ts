@@ -2,6 +2,7 @@ import {
   Entity,
   NamedEntity,
   SequenceAssociation,
+  SequenceAutoEnrollmentOptions,
   SequenceEnrollmentSettings,
   SequenceState as SelveraSequenceState,
   SequenceTransition,
@@ -25,6 +26,7 @@ export interface SequenceState extends SelveraSequenceState {
 
 export class Sequence {
   association: SequenceAssociation
+  autoenrollment: SequenceAutoEnrollmentOptions | null
   createdAt: string
   createdBy: Entity
   endingAction: any
@@ -40,6 +42,7 @@ export class Sequence {
 
   constructor(args: any, opts: SyncState = {}) {
     this.enrollment = args.enrollment ?? null
+    this.autoenrollment = args.autoenrollment ?? null
     this.association = args.association
       ? {
           createdAt: args.association.createdAt || '',

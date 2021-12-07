@@ -28,6 +28,7 @@ export class DuplicateSequenceDialog implements OnInit {
   public initialOrg: OrganizationEntity
   public isLoading = false
   public noAdminOrg = false
+  public enabledAutoenrollment = false
   public requiredPermissions: Partial<OrganizationPermission> = { admin: true }
 
   constructor(
@@ -99,6 +100,8 @@ export class DuplicateSequenceDialog implements OnInit {
         status: 'active',
         full: true
       })
+
+      this.enabledAutoenrollment = response.autoenrollment?.enabled || false
 
       const sequence = new Sequence(response, {
         inServer: false,
