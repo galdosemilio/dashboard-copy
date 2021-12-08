@@ -462,6 +462,11 @@ export class MeasurementDataSource extends ChartDataSource<
     let tooltipFormat
     let xMaxTicks
     switch (this.args.timeframe) {
+      case 'day':
+        xMaxTicks = 26
+        xlabelFormat = 'h:mm a'
+        tooltipFormat = 'ddd D h:mm a'
+        break
       case 'week':
         xMaxTicks = 11
         xlabelFormat = 'ddd D'
@@ -749,8 +754,8 @@ export class MeasurementDataSource extends ChartDataSource<
     labelFormat: string
   ): string[] {
     const labels = []
-    const startDate = moment(this.criteria.startDate)
-    const endDate = moment(this.criteria.endDate)
+    const startDate = moment(this.criteria.startDate).startOf('day')
+    const endDate = moment(this.criteria.endDate).endOf('day')
     const currentDate =
       this.criteria.timeframe === 'alltime'
         ? moment(results[0].recordedAt).startOf('day')
@@ -758,7 +763,7 @@ export class MeasurementDataSource extends ChartDataSource<
     while (currentDate.isSameOrBefore(endDate)) {
       const formattedDate = currentDate.format(labelFormat)
       labels.push(formattedDate)
-      currentDate.add(1, 'day')
+      currentDate.add(1, this.args.timeframe === 'day' ? 'hour' : 'day')
     }
 
     return labels
@@ -786,7 +791,7 @@ export class MeasurementDataSource extends ChartDataSource<
               : this.min
           this.max = !this.max || value > this.max ? Math.ceil(value) : this.max
           resultCache.push({
-            x: moment(result.date).format(labelFormat),
+            x: moment(result.date).startOf('hour').format(labelFormat),
             y: value
           })
         })

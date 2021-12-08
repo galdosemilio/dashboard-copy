@@ -105,6 +105,7 @@ export class MeasurementChartV2Component implements OnInit {
   }
 
   public onTimeframeChange(): void {
+    this.source.timeframe = this.timeframe
     this.onChange.emit({ timeframe: this.timeframe })
   }
 
@@ -129,6 +130,7 @@ export class MeasurementChartV2Component implements OnInit {
 
     if (this.types.length) {
       this.source.type = this.types[0].id
+      this.source.timeframe = this.timeframe
     }
 
     this.source.addDefault({ account: this.context.accountId, limit: 'all' })

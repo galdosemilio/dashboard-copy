@@ -38,7 +38,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
   GetMeasurementDataPointGroupsRequest
 > {
   public type: string
-
+  public timeframe: string
   private headings: string[] = []
   private palette: CCRPalette
 
@@ -107,8 +107,39 @@ export class MeasurementChartDataSource extends ChartDataSource<
     const sortedResult = sortBy(result, (entry) =>
       moment(entry.recordedAt.utc).unix()
     )
+
+    // formats
+    let xlabelFormat
+    let tooltipFormat
+
+    switch (this.timeframe) {
+      case 'day':
+        xlabelFormat = 'h:mm a'
+        tooltipFormat = 'ddd D h:mm a'
+        break
+      case 'week':
+        xlabelFormat = 'ddd D'
+        tooltipFormat = 'ddd, MMM D h:mm a'
+        break
+      case 'month':
+        xlabelFormat = 'MMM D'
+        tooltipFormat = 'MMM D h:mm a'
+        break
+      case 'year':
+        xlabelFormat = 'MMM YYYY'
+        tooltipFormat = 'MMM DD, YYYY h:mm a'
+        break
+      case 'alltime':
+        xlabelFormat = 'MMM DD, YYYY'
+        tooltipFormat = 'MMM DD, YYYY'
+        break
+      default:
+        xlabelFormat = 'ddd D'
+        tooltipFormat = 'ddd, MMM D h:mm a'
+    }
+
     this.headings = sortedResult.map((entry) =>
-      moment(entry.recordedAt.utc).format('ddd D')
+      moment(entry.recordedAt.utc).format(tooltipFormat)
     )
 
     const chart: ChartData = {
@@ -125,7 +156,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
       ],
       datasets: Object.values(groupedData).map((group) => ({
         data: group.map((entry) => ({
-          x: moment(entry.createdAt.utc).format('ddd D'),
+          x: moment(entry.createdAt.utc).startOf('hour').format(xlabelFormat),
           y: convertToReadableFormat(
             entry.value,
             entry.type,
@@ -137,7 +168,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
       labels: [
         '',
         ...this.createEmptyDateGroups().map((dateGroup) =>
-          moment(dateGroup.recordedAt.utc).format('ddd D')
+          moment(dateGroup.recordedAt.utc).format(xlabelFormat)
         ),
         ''
       ],
@@ -205,7 +236,10 @@ export class MeasurementChartDataSource extends ChartDataSource<
         source: { id: 'local', name: 'local' }
       })
 
-      currentDate = currentDate.add(1, 'day')
+      currentDate = currentDate.add(
+        1,
+        this.timeframe === 'day' ? 'hour' : 'day'
+      )
     }
 
     return emptyGroups
