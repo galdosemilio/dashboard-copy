@@ -748,6 +748,7 @@
       "LIST_VIEW": "Vista em Lista",
       "LOAD_MORE": "Carregar mais...",
       "LOCK_CONTENT_TOOLTIP": "Este item é privado",
+      "MAXIMUM_UPLOAD_SIZE_NOTICE": "Mais de 100 MB de arquivos estão selecionados para upload. Clique em Carregar itens da fila para carregar e processar esses arquivos. Você pode então clicar em Adicionar Novo Conteúdo para adicionar itens adicionais à Biblioteca Digital.",
       "MOVE_CONTENT": "Mover Conteúdo",
       "MOVE_CONTENT_TOOLTIP": "Mover este item de conteúdo para uma pasta diferente",
       "MOVING": "Movendo",

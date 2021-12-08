@@ -748,6 +748,7 @@
       "LIST_VIEW": "Listevisning",
       "LOAD_MORE": "Indlæs mere...",
       "LOCK_CONTENT_TOOLTIP": "Denne vare er privat",
+      "MAXIMUM_UPLOAD_SIZE_NOTICE": "Mere end 100 MB filer er valgt til upload. Klik på Upload elementer i kø for at uploade og behandle disse filer. Du kan derefter klikke på Tilføj nyt indhold for at tilføje yderligere elementer til det digitale bibliotek.",
       "MOVE_CONTENT": "Flyt Indhold",
       "MOVE_CONTENT_TOOLTIP": "Flyt denne element indhold til en anden mappe",
       "MOVING": "Flytter",

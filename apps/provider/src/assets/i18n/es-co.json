@@ -748,6 +748,7 @@
       "LIST_VIEW": "Ver Lista",
       "LOAD_MORE": "Cargar más...",
       "LOCK_CONTENT_TOOLTIP": "Este contenido es privado, y no es visible para ningún paciente",
+      "MAXIMUM_UPLOAD_SIZE_NOTICE": "Se seleccionan más de 100 MB de archivos para cargar. Haga clic en Cargar elementos en cola para cargar y procesar estos archivos. Luego puede hacer clic en Agregar nuevo contenido para agregar elementos adicionales a la Biblioteca digital.",
       "MOVE_CONTENT": "Mover Contenido",
       "MOVE_CONTENT_TOOLTIP": "Mover este contenido a un directorio diferente",
       "MOVING": "Moviendo",

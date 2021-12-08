@@ -76,9 +76,9 @@
                         </div>
                     </div>
                 </div>
-
+                <div *ngIf="reachedMaximumUploadSize">{{ 'LIBRARY.CONTENT.MAXIMUM_UPLOAD_SIZE_NOTICE' | translate }}</div>
                 <div fxLayout="row" fxLayoutAlign="space-evenly center" class="queued-buttons-wrapper">
-                    <button mat-button class="ccr-button" (click)="resetDialog()">{{ 'LIBRARY.CONTENT.DIFF_CONTENT' | translate }}</button>
+                    <button [disabled]="reachedMaximumUploadSize" mat-button class="ccr-button" (click)="resetDialog()">{{ 'LIBRARY.CONTENT.DIFF_CONTENT' | translate }}</button>
                     <button mat-button color="primary" class="ccr-button" (click)="closeDialog()" [disabled]="!queuedContents.length">{{ 'LIBRARY.CONTENT.START_UPLOAD' | translate }}</button>
                 </div>
             </div>

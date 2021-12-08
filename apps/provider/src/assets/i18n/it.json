@@ -748,6 +748,7 @@
       "LIST_VIEW": "Vista a Lista",
       "LOAD_MORE": "Carica altro…",
       "LOCK_CONTENT_TOOLTIP": "Questo elemento è privato",
+      "MAXIMUM_UPLOAD_SIZE_NOTICE": "Sono stati selezionati più di 100 MB di file da caricare. Fare clic su Carica elementi in coda per caricare ed elaborare questi file. Puoi quindi fare clic su Aggiungi nuovo contenuto per aggiungere ulteriori elementi alla Libreria digitale.",
       "MOVE_CONTENT": "Sposta Contenuto",
       "MOVE_CONTENT_TOOLTIP": "Sposta questo contenuto in una cartella diversa",
       "MOVING": "Spostamento",

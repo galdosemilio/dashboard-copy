@@ -748,6 +748,7 @@
       "LIST_VIEW": "Voir liste",
       "LOAD_MORE": "Charger plus…",
       "LOCK_CONTENT_TOOLTIP": "Cet article est privé, il ne peut être vu par aucun patient",
+      "MAXIMUM_UPLOAD_SIZE_NOTICE": "Plus de 100 Mo de fichiers sont sélectionnés pour le téléchargement. Veuillez cliquer sur Télécharger les éléments en file d'attente pour télécharger et traiter ces fichiers. Vous pouvez ensuite cliquer sur Ajouter un nouveau contenu pour ajouter des éléments supplémentaires à la bibliothèque numérique.",
       "MOVE_CONTENT": "Déplacer contenu",
       "MOVE_CONTENT_TOOLTIP": "Déplacer ce contenu vers un autre dossier",
       "MOVING": "Déplacer",

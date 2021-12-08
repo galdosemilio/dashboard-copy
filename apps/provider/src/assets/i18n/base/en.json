@@ -748,6 +748,7 @@
       "LIST_VIEW": "List View",
       "LOAD_MORE": "Load more...",
       "LOCK_CONTENT_TOOLTIP": "This item is private, and is not visible to any patients",
+      "MAXIMUM_UPLOAD_SIZE_NOTICE": "More than 100MB of files are selected to upload.  Please click Upload queued items to upload and process these files.  You may then click Add New Content to add additional items to the Digital Library.",
       "MOVE_CONTENT": "Move Content",
       "MOVE_CONTENT_TOOLTIP": "Move this content item to a different folder",
       "MOVING": "Moving",

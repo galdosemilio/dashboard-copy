@@ -22,6 +22,8 @@ import {
 import { BINDFORM_TOKEN } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+const MAXIMUM_UPLOAD_SIZE = 100 * 1000 * 1000 // 100 MB
+
 @UntilDestroy()
 @Component({
   selector: 'app-content-create-dialog',
@@ -50,6 +52,7 @@ export class ContentCreateDialog implements OnInit, OnDestroy {
     shouldShowRootFolderButton: true
   }
   public showCloseConfirm: boolean
+  public reachedMaximumUploadSize = false
   public supportedContentTypes: string[] = [
     CONTENT_TYPE_MAP.file.code,
     CONTENT_TYPE_MAP.hyperlink.code,
@@ -107,6 +110,7 @@ export class ContentCreateDialog implements OnInit, OnDestroy {
 
   removeQueuedContent(index: number): void {
     this.queuedContents.splice(index, 1)
+    this.checkMaximumUploadSize()
   }
 
   resetDialog(): void {
@@ -165,7 +169,7 @@ export class ContentCreateDialog implements OnInit, OnDestroy {
           }
         ) as QueuedContent
       )
-
+      this.checkMaximumUploadSize()
       this.form.reset()
     }
   }
@@ -185,5 +189,12 @@ export class ContentCreateDialog implements OnInit, OnDestroy {
         this.contentTypes.push(CONTENT_TYPE_MAP[key])
       }
     })
+  }
+
+  private checkMaximumUploadSize(): void {
+    this.reachedMaximumUploadSize =
+      this.queuedContents.reduce((totalSize, current) => {
+        return totalSize + (current.file?.size || 0)
+      }, 0) > MAXIMUM_UPLOAD_SIZE
   }
 }

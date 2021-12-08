@@ -748,6 +748,7 @@
       "LIST_VIEW": "Listenansicht",
       "LOAD_MORE": "Mehr laden...",
       "LOCK_CONTENT_TOOLTIP": "Dieser Eintrag ist privat",
+      "MAXIMUM_UPLOAD_SIZE_NOTICE": "Es werden mehr als 100 MB Dateien zum Hochladen ausgewählt. Klicken Sie auf Elemente in der Warteschlange hochladen, um diese Dateien hochzuladen und zu verarbeiten. Sie können dann auf Neuen Inhalt hinzufügen klicken, um der Digitalen Bibliothek zusätzliche Elemente hinzuzufügen.",
       "MOVE_CONTENT": "Inhalt verschieben",
       "MOVE_CONTENT_TOOLTIP": "Verschieben Sie diesen Inhalt Artikel in einen anderen Ordner",
       "MOVING": "Verschieben um",
