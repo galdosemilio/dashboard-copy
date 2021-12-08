@@ -1,6 +1,7 @@
 export * from './associations'
 export * from './devices.database'
 export * from './devices.datasource'
+export * from './phase-enrollment'
 export * from './sequence-enrollment'
 export * from './trigger-history'
 export * from './vault'

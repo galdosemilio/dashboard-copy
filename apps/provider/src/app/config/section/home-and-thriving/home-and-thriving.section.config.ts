@@ -5,6 +5,7 @@ export const HomeAndThrivingSectionConfig: SectionConfigDetails = {
     SHOW_CLINIC_CREATE_BUTTON_DIRECT: true
   },
   JOURNAL: {
+    HIDDEN_SETTINGS_TABS: [],
     ADDITIONAL_VITALS_COLUMNS: ['bloodOxygenLevel']
   }
 }

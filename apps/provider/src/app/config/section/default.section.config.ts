@@ -2,7 +2,12 @@ import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/for
 import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
 import { DefaultLayoutComponent } from '@app/layout/layouts'
 import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component'
-import { CompositionColumns, JournalTabs, SidenavOptions } from './consts'
+import {
+  CompositionColumns,
+  JournalTabs,
+  SettingsTabs,
+  SidenavOptions
+} from './consts'
 import { SectionConfigDetails } from './models/section.details'
 import { DefaultDashboardComponent } from '@app/dashboard/panel'
 import { _ } from '@app/shared/utils'
@@ -17,7 +22,7 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     HIDDEN_COMPOSITION_COLUMNS: [CompositionColumns.KETONES],
     ADDITIONAL_VITALS_COLUMNS: [],
     HIDDEN_MEASUREMENT_TABS: [],
-    HIDDEN_SETTINGS_TABS: [],
+    HIDDEN_SETTINGS_TABS: [SettingsTabs.PHASE_HISTORY],
     HIDDEN_TABS: [JournalTabs.METRICS],
     PHYSICIAN_FORM: '15096',
     SHOW_DOCTOR_PDF_BUTTON: false,
@@ -95,7 +100,7 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     HIDDEN_COMPOSITION_COLUMNS: [CompositionColumns.KETONES],
     ADDITIONAL_VITALS_COLUMNS: [],
     HIDDEN_MEASUREMENT_TABS: [],
-    HIDDEN_SETTINGS_TABS: [],
+    HIDDEN_SETTINGS_TABS: [SettingsTabs.PHASE_HISTORY],
     HIDDEN_TABS: [JournalTabs.METRICS],
     PHYSICIAN_FORM: '293',
     SHOW_DOCTOR_PDF_BUTTON: false,

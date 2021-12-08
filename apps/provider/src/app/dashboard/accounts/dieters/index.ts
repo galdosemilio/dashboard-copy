@@ -24,6 +24,7 @@ import { DieterMessagesComponent } from './dieter/messages/messages.component'
 import {
   AssociationsDatabase,
   DevicesDatabase,
+  PhaseEnrollmentDatabase,
   SequenceEnrollmentDatabase,
   SettingsComponents,
   TriggerHistoryDatabase,
@@ -97,6 +98,7 @@ export const DietersProviders = [
   MeasurementDatabase,
   MetricsDatabase,
   PainDatabase,
+  PhaseEnrollmentDatabase,
   SupplementDatabase,
   LevlDatabase,
   SequenceEnrollmentDatabase,

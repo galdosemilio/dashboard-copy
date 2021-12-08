@@ -1,0 +1,50 @@
+<ccr-datasource-overlay [source]="source">
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <ccr-paginator fxFlex="nogrow" #paginator
+      [length]="source.total"
+      [pageIndex]="source.pageIndex"
+      [pageSize]="source.pageSize"
+      (page)="source.pageIndex = $event.pageIndex"
+    ></ccr-paginator>
+  </div>
+
+  <div class="ccr-expandable-table-container">
+    <div class="ccr-expandable-table">
+      <table ccrTableSort>
+        <caption hidden>{{ 'GLOBAL.PHASE_HISTORY' | translate }}</caption>
+        <thead>
+          <th scope="col">{{ 'GLOBAL.ID' | translate }}</th>
+          <th class="name-column" scope="col">{{ 'BOARD.NAME' | translate }}</th>
+          <th class="clinic-column" scope="col">{{ 'BOARD.CLINIC' | translate }}</th>
+          <th class="enrollment-column" scope="col">{{ 'BOARD.ENROLLMENT_START' | translate }}</th>
+          <th class="enrollment-column" scope="col">{{ 'BOARD.ENROLLMENT_END' | translate }}</th>
+        </thead>
+
+        <tbody>
+          <tr
+          *ngFor="let enrollment of result; let i = index"
+          [ngClass]="{
+            'row-even': i % 2 === 0,
+            'row-odd': i % 2 === 1
+          }">
+            <td>{{ enrollment.package.id }}</td>
+            <td class="name-column">{{ enrollment.package.title }}</td>
+            <td class="clinic-column">{{ enrollment.organization.name }}</td>
+            <td *ngIf="enrollment.enroll.start; else empty" class="enrollment-column">
+              {{ enrollment.enroll.start | amDateFormat:'dddd, MMMM DD, YYYY' }}
+            </td>
+            <td *ngIf="enrollment.enroll.end; else empty" class="enrollment-column">
+              {{ enrollment.enroll.end | amDateFormat:'dddd, MMMM DD, YYYY' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ccr-datasource-overlay>
+
+<ng-template #empty>
+  <td class="ccr-text-center">
+    -
+  </td>
+</ng-template>

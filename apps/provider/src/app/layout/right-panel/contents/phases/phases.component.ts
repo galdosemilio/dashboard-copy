@@ -106,7 +106,10 @@ export class PhasesComponent implements OnDestroy, OnInit {
       {
         ...phase,
         account: { id: '' },
-        organization: { id: phase.package.organization.id },
+        organization: {
+          id: phase.package.organization.id,
+          name: phase.package.organization.name ?? ''
+        },
         isActive: true,
         enroll: { start: '' }
       },

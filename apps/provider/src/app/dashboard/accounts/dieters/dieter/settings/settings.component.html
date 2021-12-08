@@ -15,6 +15,11 @@
         {{ 'GLOBAL.PHASES_LABELS' | translate }}
       </a>
     </li>
+    <li *ngIf="components.indexOf('phase-history') > -1">
+      <a mat-button [routerLink]="['.', {s: 'phase-history'}]" [class.active]="section === 'phase-history'">
+        {{ 'GLOBAL.PHASE_HISTORY' | translate }}
+      </a>
+    </li>
     <li *ngIf="components.indexOf('devices') > -1">
       <a mat-button [routerLink]="['.', {s: 'devices'}]" [class.active]="section === 'devices'">
         {{ 'BOARD.DEVICES' | translate }}
@@ -88,6 +93,11 @@
   <ng-container *ngSwitchCase="'labels'">
 
     <app-account-phase-list></app-account-phase-list>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="'phase-history'">
+
+    <app-dieter-phase-history></app-dieter-phase-history>
 
   </ng-container>
   <ng-container *ngSwitchCase="'devices'">

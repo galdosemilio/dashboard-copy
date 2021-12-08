@@ -4,4 +4,5 @@ export class SettingsTabs {
   static DEVICES = 'devices'
   static FORMS = 'forms'
   static FILE_VAULT = 'file-vault'
+  static PHASE_HISTORY = 'phase-history'
 }
