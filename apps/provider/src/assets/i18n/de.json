@@ -1254,6 +1254,7 @@
     "ACTIVE_USERS": "aktive Benutzer",
     "ACTIVE_USERS_DESCRIPTION": "Dieser Bericht zeigt die Anzahl der aktiven und inaktiven Patienten und Trainer in der ausgewählten Klinik während der letzten 8 Monate. Für jedes gemeldete Datum gibt es zwei Balken. Der linke Balken repräsentiert die Gesamtanzahl der Patienten und der rechte Balken die Gesamtanzahl der Trainer. Jeder Balken besteht aus einem unteren grauen Bereich (inaktive Konten) und einem oberen hervorgehobenen Bereich (aktive Konten). Wenn Sie mit der Maus über einen Balken fahren, werden die genauen Zahlen für jede der vier Gruppierungen angezeigt. Ein aktiver Benutzer ist ein Patient, der eine sinnvolle Interaktion mit der App hatte oder ein Coach, der eine sinnvolle Interaktion mit dem Dashboard hatte.",
     "ACTIVE_USERS_HINT": "Die Daten für {{month}} enthalten Daten vom {{first}} bis heute ({{diff}} Tage).",
+    "ADDENDUM_DESCRIPTION": "Das ADDENDUM ist ein internes Feld, um Änderungen an Kommunikationsdatensätzen formal zu verfolgen, die sich auf die Erstattung oder Abrechnung der Versicherung auswirken können.",
     "AGE": "Alter",
     "AGE_GROUP": "Altersgruppe",
     "AGE_GROUP_DESCRIPTION": "Diese Grafik zeigt den Prozentsatz der Patienten aus jedem markierten Altersbereich für den ausgewählten Zeitraum.",

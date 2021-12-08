@@ -1254,6 +1254,7 @@
     "ACTIVE_USERS": "Aktive Brugere",
     "ACTIVE_USERS_DESCRIPTION": "Denne rapport viser antallet af aktive og inaktive patienter og trænere i den valgte klinik i løbet af de sidste 8 måneder. Der er to søjler for hver indberettet dato. Den venstre bar er det totale antal patienter",
     "ACTIVE_USERS_HINT": "Dataene for {{month}} indeholder data fra {{first}} til i dag ({{diff}} dage).",
+    "ADDENDUM_DESCRIPTION": "Addendummet er et internt felt til formelt at spore ændringer til kommunikationsregistre, der kan påvirke forsikringsgodtgørelse eller fakturering.",
     "AGE": "Alder",
     "AGE_GROUP": "Aldersgruppe",
     "AGE_GROUP_DESCRIPTION": "Dette diagram viser procentdelen af ​​alle patienter i hver markeret aldersgruppe for den valgte tidsperiode.",

@@ -1254,6 +1254,7 @@
     "ACTIVE_USERS": "Utilisateurs actifs",
     "ACTIVE_USERS_DESCRIPTION": "Ce rapport indique le nombre de patients actifs et inactifs et les entraîneurs dans la clinique sélectionnée au cours des 8 derniers mois. Il y a deux barres pour chaque date indiquée. La barre de gauche est le nombre total de patients, et la barre de droite est le nombre total d'entraîneurs. Chaque barre est composée d'une zone grise fond (comptes inactifs) et une zone en surbrillance supérieure (comptes actifs). Planant au-dessus de la barre affiche les numéros spécifiques dans chacun des quatre groupes. Un utilisateur actif est un patient qui a eu une interaction significative avec l'application ou un entraîneur avec le tableau de bord.",
     "ACTIVE_USERS_HINT": "Les données pour ((month)) incluent des données de ((first)) jusque (((diff)) days).",
+    "ADDENDUM_DESCRIPTION": "L'addenda est un champ interne pour suivre formellement les modifications apportées aux enregistrements de communication pouvant avoir une incidence sur le remboursement ou la facturation de l'assurance.",
     "AGE": "Âge",
     "AGE_GROUP": "Tranche d’âge",
     "AGE_GROUP_DESCRIPTION": "Ce graphique montre le pourcentage des patients de chaque tranche d’âge pour la période sélectionnée.",

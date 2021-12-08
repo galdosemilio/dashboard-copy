@@ -94,7 +94,10 @@
         </ng-container>
 
         <ng-container cdkColumnDef="note">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.ADDENDUM' | translate }}</mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef>
+                {{ 'LIBRARY.FORMS.ADDENDUM' | translate }}
+                <em class="ccr-marker">**</em>
+            </mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
                 <span>{{ 'LIBRARY.FORMS.ADDENDUM' | translate }}</span>
                 <span *ngIf="row.note" (click)="showAddendumDialog(row)" class="patient-link">
@@ -129,7 +132,9 @@
 
 </ccr-datasource-overlay>
 
-<small class="table-hint"><i class="ccr-marker">&nbsp;*</i> {{ 'REPORTS.CALL_INITIATOR' | translate }}</small>
+<small class="table-hint"><em class="ccr-marker">&nbsp;*</em> {{ 'REPORTS.CALL_INITIATOR' | translate }}</small>
+<br>
+<small class="table-hint"><em class="ccr-marker">&nbsp;**</em> {{ 'REPORTS.ADDENDUM_DESCRIPTION' | translate }}</small>
 <br>
 <small *ngIf="source.hasNonDeletableEntry" class="table-hint">
     {{ 'REPORTS.NON_DELETABLE_INTERACTIONS' | translate }}

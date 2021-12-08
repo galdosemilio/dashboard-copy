@@ -1254,6 +1254,7 @@
     "ACTIVE_USERS": "Utilizadores ativos",
     "ACTIVE_USERS_DESCRIPTION": "Este relatório mostra o número de pacientes e treinadores ativos e inativos na clínica selecionada durante os últimos 8 meses.  Existem duas barras para cada data reportada.  A barra da esquerda é o número total de pacientes",
     "ACTIVE_USERS_HINT": "Os dados de {{month}} incluem dados de {{first}} até hoje ({{diff}} dias).",
+    "ADDENDUM_DESCRIPTION": "O adendo é um campo interno para rastrear formalmente as alterações nos registros de comunicação que podem impactar o reembolso ou o faturamento do seguro.",
     "AGE": "Idade",
     "AGE_GROUP": "Idade do Grupo",
     "AGE_GROUP_DESCRIPTION": "Este gráfico mostra a percentagem de todos os pacientes em cada faixa etária rotulada para o período de tempo selecionado.",

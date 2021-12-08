@@ -1254,6 +1254,7 @@
     "ACTIVE_USERS": "Utenti Attivi",
     "ACTIVE_USERS_DESCRIPTION": "Questo resoconto mostra il numero di pazienti e coach attivi e inattivi nella clinica selezionata negli ultimi 8 mesi. Ci sono due barre per ogni data riportata. La barra di sinistra è il numero totale dei pazienti",
     "ACTIVE_USERS_HINT": "I dati di {{month}} includono i dati dal {{first}} fino ad oggi ({{diff}} giorni).",
+    "ADDENDUM_DESCRIPTION": "L'addendum è un campo interno per tracciare formalmente le modifiche ai record di comunicazione che possono influire sul rimborso o dalla fatturazione dell'assicurazione.",
     "AGE": "Età",
     "AGE_GROUP": "Fascia d'Età",
     "AGE_GROUP_DESCRIPTION": "Questo grafico mostra la percentuale di tutti i pazienti in ogni fascia d'età etichettata per il periodo di tempo selezionato.",

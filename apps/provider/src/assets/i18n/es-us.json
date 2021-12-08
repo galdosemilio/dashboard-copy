@@ -1254,6 +1254,7 @@
     "ACTIVE_USERS": "Usuarios Activos",
     "ACTIVE_USERS_DESCRIPTION": "Este informe muestra el número de pacientes y entrenadores activos e inactivos en la clínica seleccionada durante los últimos 8 meses. Hay dos barras para cada fecha reportada. La barra izquierda es el número total de pacientes y la barra derecha es el número total de entrenadores. Cada barra se compone de un área gris inferior (cuentas inactivas) y un área resaltada superior (cuentas activas). Al pasar el cursor sobre la barra, se mostrarán los números específicos en cada uno de los cuatro grupos. Un usuario activo es un paciente que tuvo una interacción significativa con la aplicación o un entrenador con el panel de control.",
     "ACTIVE_USERS_HINT": "Los datos de {{month}} incluyen datos desde {{first}} hasta hoy ({{diff}} días).",
+    "ADDENDUM_DESCRIPTION": "El Adendo es un campo interno para hacer el seguimiento formal de cambios a registros de comunicaciones que podrían impactar la facturación o el reembolso.",
     "AGE": "Edad",
     "AGE_GROUP": "Grupo de Edad",
     "AGE_GROUP_DESCRIPTION": "Esta grafica muestra el porcentaje de todos los pacientes por rango de edad en el período seleccionado.",

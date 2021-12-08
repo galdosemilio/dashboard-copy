@@ -1254,6 +1254,7 @@
     "ACTIVE_USERS": "Active Users",
     "ACTIVE_USERS_DESCRIPTION": "This report shows the number of active and inactive patients and coaches in the selected clinic during the last 8 months.  There are two bars for each reported date.  The left bar is the total number of patients, and the right bar is the total number of coaches.  Each bar is composed of a bottom gray area (inactive accounts) and a top highlighted area (active accounts). Hovering over the bar will display the specific numbers in each of the four groupings.  An active user is, a patient who had any meaningful interaction with the app or a coach with the dashboard.",
     "ACTIVE_USERS_HINT": "The data for {{month}} includes data from {{first}} through today ({{diff}} days).",
+    "ADDENDUM_DESCRIPTION": "The Addendum is an internal field to formally track changes to communication records that may impact insurance reimbursement or billing.",
     "AGE": "Age",
     "AGE_GROUP": "Age Group",
     "AGE_GROUP_DESCRIPTION": "This chart shows the percent of all patients in each labeled age range for the selected time period.",
