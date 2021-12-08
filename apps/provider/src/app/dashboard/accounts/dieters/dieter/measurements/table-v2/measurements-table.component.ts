@@ -3,6 +3,9 @@ import {
   ContextService,
   EventsService,
   LanguageService,
+  MeasurementDatabaseV2,
+  MeasurementDataPointGroupTableEntry,
+  MeasurementDataSourceV2,
   MeasurementLabelService,
   NotifierService
 } from '@app/service'
@@ -20,11 +23,6 @@ import {
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import {
-  MeasurementDatabaseV2,
-  MeasurementDataPointGroupTableEntry,
-  MeasurementDataSourceV2
-} from '../../../services'
 import * as moment from 'moment'
 import { MatDialog } from '@coachcare/material'
 import { filter } from 'rxjs/operators'

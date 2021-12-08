@@ -1,4 +1,4 @@
-import { TableDataSource } from '@app/shared'
+import { TableDataSource } from '@app/shared/model'
 import {
   DataPointTypes,
   GetMeasurementDataPointGroupsRequest,
@@ -10,7 +10,8 @@ import { MeasurementDatabaseV2 } from './measurement.database'
 import * as moment from 'moment'
 import { flatMap } from 'lodash'
 import { MeasurementLabelService } from '@app/service'
-import { MAX_ENTRIES_PER_DAY } from '../measurement/measurement.datasource'
+
+export const MEASUREMENT_MAX_ENTRIES_PER_DAY = 24
 
 export interface MeasurementDataPointGroupTableEntry
   extends MeasurementDataPointGroup {
@@ -66,9 +67,12 @@ export class MeasurementDataSourceV2 extends TableDataSource<
         return [dateGroup]
       }
 
-      if (existingGroups.length > MAX_ENTRIES_PER_DAY) {
+      if (existingGroups.length > MEASUREMENT_MAX_ENTRIES_PER_DAY) {
         this.hasTooMuchForSingleDay = true
-        existingGroups = existingGroups.slice(0, MAX_ENTRIES_PER_DAY)
+        existingGroups = existingGroups.slice(
+          0,
+          MEASUREMENT_MAX_ENTRIES_PER_DAY
+        )
       }
 
       return [dateGroup, ...existingGroups]

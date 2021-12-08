@@ -1,4 +1,4 @@
-import { ChartData, ChartDataSource } from '@app/shared'
+import { ChartData, ChartDataSource } from '@app/shared/model'
 import {
   convertUnitToPreferenceFormat,
   DataPoint,

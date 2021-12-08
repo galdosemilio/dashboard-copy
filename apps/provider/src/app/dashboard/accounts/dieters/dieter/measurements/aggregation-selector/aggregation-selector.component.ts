@@ -1,12 +1,10 @@
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { MeasurementAggregation } from '@app/service'
 import { _, SelectOptions } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import {
-  MeasurementAggregation,
-  MeasurementDataSource
-} from '../../../services'
+import { MeasurementDataSource } from '../../../services'
 
 @UntilDestroy()
 @Component({
@@ -20,9 +18,7 @@ export class AggregationSelectorComponent implements OnDestroy, OnInit {
   source: MeasurementDataSource | null
 
   @Output()
-  change: Subject<MeasurementAggregation> = new Subject<
-    MeasurementAggregation
-  >()
+  change: Subject<MeasurementAggregation> = new Subject<MeasurementAggregation>()
 
   form: FormGroup
 

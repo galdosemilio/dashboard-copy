@@ -13,13 +13,15 @@ import {
   MeasurementLabelService,
   NotifierService
 } from '@app/service'
-import { ChartData, DateNavigatorOutput, SelectOptions, _ } from '@app/shared'
+import { ChartData } from '@app/shared/model'
+import { DateNavigatorOutput } from '@app/shared/components'
+import { SelectOptions, _ } from '@app/shared/utils'
 import { Subject } from 'rxjs'
 import {
   MeasurementChartDataSource,
   MeasurementDatabaseV2,
   MeasurementTimeframe
-} from '../../../services'
+} from '@app/service'
 import * as moment from 'moment'
 import { Store } from '@ngrx/store'
 import { CCRConfig } from '@app/config'
@@ -33,11 +35,11 @@ import { SYNTHETIC_DATA_TYPES } from '@app/dashboard/accounts/dieters/models'
 import { TranslateService } from '@ngx-translate/core'
 
 @Component({
-  selector: 'app-dieter-measurements-chart-v2',
+  selector: 'ccr-measurements-chart-v2',
   templateUrl: './chart.component.html',
   host: { class: 'ccr-chart' }
 })
-export class MeasurementChartV2Component implements OnInit {
+export class CcrMeasurementChartV2Component implements OnInit {
   @Input()
   @HostBinding('class.ccr-chart-embedded')
   embedded = false
@@ -107,6 +109,12 @@ export class MeasurementChartV2Component implements OnInit {
   public onTimeframeChange(): void {
     this.source.timeframe = this.timeframe
     this.onChange.emit({ timeframe: this.timeframe })
+  }
+
+  public updateDates(dates: DateNavigatorOutput): void {
+    this.dates = dates
+    // prevents exception when changing timeframe from child component
+    this.cdr.detectChanges()
   }
 
   private buildViews(enabled: string[]) {

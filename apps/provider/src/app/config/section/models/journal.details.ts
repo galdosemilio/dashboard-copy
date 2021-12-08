@@ -1,4 +1,4 @@
-import { MeasurementSummaryData } from '@app/dashboard'
+import { MeasurementSummaryData } from '@app/service'
 import { CompositionColumns, MeasurementTabs, SettingsTabs } from '../consts'
 
 export interface JournalConfigDetails {

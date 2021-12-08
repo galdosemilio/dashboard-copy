@@ -59,14 +59,14 @@ fxLayoutGap="25px">
       (change)="chartChanged($event)"
     ></app-dieter-measurements-chart>
 
-    <app-dieter-measurements-chart-v2
+    <ccr-measurements-chart-v2
       *ngIf="useNewTable"
       [dates]="dates"
       [embedded]="true"
       [label]="selectedLabel"
       [timeframe]="timeframe"
       (onChange)="chartV2Changed($event)"
-    ></app-dieter-measurements-chart-v2>
+    ></ccr-measurements-chart-v2>
 
   </ng-container>
 

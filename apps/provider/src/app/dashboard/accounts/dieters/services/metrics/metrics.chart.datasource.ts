@@ -1,5 +1,5 @@
 import { CCRConfig, CCRPalette } from '@app/config'
-import { ContextService } from '@app/service'
+import { ContextService, MeasurementTimeframe } from '@app/service'
 import { ChartData, ChartDataSource } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { paletteSelector } from '@app/store/config'
@@ -9,7 +9,6 @@ import { groupBy } from 'lodash'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, Subject } from 'rxjs'
-import { MeasurementTimeframe } from '../measurement/measurement.criteria'
 import { MetricsDatabase } from './metrics.database'
 import {
   MetricsDataSourceCriteria,

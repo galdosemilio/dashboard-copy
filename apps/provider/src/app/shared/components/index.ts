@@ -11,6 +11,7 @@ import { CcrAccessLevelSelectorComponent } from './access-level-selector'
 import { CcrAccountAssociationsComponent } from './associations'
 import { CcrAttendanceSelectorComponent } from './attendance-selector'
 import { CcrCallControlComponent } from './call-control/call-control.component'
+import { CcrMeasurementChartV2Component } from './chart-v2'
 import { CcrChildClinicPickerComponent } from './child-clinic-picker'
 import { CcrConnectionStatusComponent } from './connection-status/connection-status.component'
 import { CountrySelectorComponent } from './country-selector'
@@ -102,6 +103,7 @@ export {
   // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
   CcrLastLoginComponent,
+  CcrMeasurementChartV2Component,
   CcrMessagesComponent,
   CcrMicLevelIndicatorComponent,
   CcrSearchSelectorComponent,
@@ -169,6 +171,7 @@ export const CmpComponents = [
   CcrImageOptionSelectorComponent,
   CcrLastLoginComponent,
   CcrMagnitudeInputComponent,
+  CcrMeasurementChartV2Component,
   CcrMessagesChatInfoComponent,
   CcrMessagesComponent,
   CcrMicLevelIndicatorComponent,

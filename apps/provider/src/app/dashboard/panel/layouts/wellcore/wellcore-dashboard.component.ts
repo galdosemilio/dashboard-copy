@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core'
 import {
   ContextService,
+  MeasurementLabelService,
   NotifierService,
   SelectedOrganization
 } from '@app/service'
+import { DateNavigatorOutput } from '@app/shared/components'
 import {
   AccountTypeIds,
   FormSubmission,
+  MeasurementLabelEntry,
   PackageEnrollment
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -21,15 +24,18 @@ import { filter } from 'rxjs/operators'
   host: { class: 'wellcore-component' }
 })
 export class WellcoreDashboardComponent implements OnInit {
+  public dates: DateNavigatorOutput = {}
   public submittedMedicalIntakeForm = false
   public eligibleToSelfSchedule = false
   public isLoading = false
   public isPatient: boolean
   public medicalIntakeFormLink: string
+  public selectedLabel: MeasurementLabelEntry
 
   constructor(
     private context: ContextService,
     private formSubmission: FormSubmission,
+    private measurementLabel: MeasurementLabelService,
     private packageEnrollment: PackageEnrollment,
     private notify: NotifierService
   ) {
@@ -37,7 +43,9 @@ export class WellcoreDashboardComponent implements OnInit {
     this.medicalIntakeFormLink = `/library/forms/${environment.wellcoreMedicalFormId}/dieter-submissions`
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.resolveFirstLabel()
+
     this.context.organization$
       .pipe(untilDestroyed(this))
       .pipe(filter(() => this.isPatient))
@@ -84,5 +92,13 @@ export class WellcoreDashboardComponent implements OnInit {
     })
 
     return res.enrolled
+  }
+
+  private async resolveFirstLabel(): Promise<void> {
+    const firstLabel = (
+      await this.measurementLabel.fetchMeasurementLabels()
+    ).shift()
+
+    this.selectedLabel = firstLabel
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { CcrDatabase } from '@app/shared'
+import { CcrDatabase } from '@app/shared/model'
 import {
   GetMeasurementDataPointGroupsRequest,
   GetMeasurementDataPointGroupsResponse,

@@ -20,11 +20,8 @@ export * from './levl/levl.datasource'
 export * from './measurement/activity.datasource'
 export * from './measurement/body.measurement.datasource'
 export * from './measurement/body.summary.datasource'
-export * from './measurement/measurement.criteria'
 export * from './measurement/measurement.database'
 export * from './measurement/measurement.datasource'
-
-export * from './measurement-v2'
 
 export * from './metrics'
 

@@ -9,16 +9,14 @@ import {
   OnInit,
   Output
 } from '@angular/core'
+import { MeasurementDataSource } from '@app/dashboard/accounts/dieters/services'
 import {
+  ConfigService,
+  MEASUREMENT_MAX_ENTRIES_PER_DAY,
   MeasurementAggregation,
-  MeasurementDataSource,
-  MAX_ENTRIES_PER_DAY
-} from '@app/dashboard/accounts/dieters/services'
-import {
   MeasurementSummaryData,
   MeasurementTimeframe
-} from '@app/dashboard/accounts/dieters/services'
-import { ConfigService } from '@app/service'
+} from '@app/service'
 import { _, ChartData, DateNavigatorOutput, SelectOptions } from '@app/shared'
 import { filter, merge } from 'lodash'
 import * as moment from 'moment-timezone'
@@ -76,7 +74,8 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
           }
 
           const chartWidth = metadata.data[0]._xScale.width
-          const offset = chartWidth / tickSlotAmount / MAX_ENTRIES_PER_DAY
+          const offset =
+            chartWidth / tickSlotAmount / MEASUREMENT_MAX_ENTRIES_PER_DAY
 
           let previousDate = ''
           let cumulativeOffset = 0

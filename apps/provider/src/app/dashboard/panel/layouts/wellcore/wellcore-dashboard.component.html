@@ -6,9 +6,9 @@
       </h2>
     </div>
   </div>
-  <div *ngIf="isPatient">
+  <div *ngIf="isPatient && !isLoading">
     <p>{{ 'BOARD.WELCOME_WELLCORE' | translate }}</p>
-    <ul *ngIf="!isLoading" class="patient-tasks">
+    <ul class="patient-tasks">
       <li>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
           <a mat-button color="primary" class="ccr-button" [routerLink]="[medicalIntakeFormLink]">
@@ -26,8 +26,17 @@
           <button mat-button routerLink="/new-appointment" disabled>
             {{ 'BOARD.SCHEDULE_PROVIDER_VIDEO_CONFERENCE_CALL' | translate }}
           </button>
-        </li>
+      </li>
     </ul>
+
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+      <h3>{{ 'BOARD.MY_PROGRESS' | translate }}</h3>
+
+      <ccr-measurements-chart-v2
+      [dates]="dates"
+      [label]="selectedLabel">
+      </ccr-measurements-chart-v2>
+    </div>
   </div>
 
   <div>

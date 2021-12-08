@@ -10,17 +10,17 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { CCRConfig } from '@app/config'
 import { resolveConfig } from '@app/config/section'
 import {
-  MeasurementAggregation,
   MeasurementDatabase,
-  MeasurementDataSource,
-  MeasurementSummaryData,
-  MeasurementTimeframe
+  MeasurementDataSource
 } from '@app/dashboard/accounts/dieters/services'
 import {
   ContextService,
   EventsService,
   ExtendedMeasurementLabelEntry,
+  MeasurementAggregation,
   MeasurementLabelService,
+  MeasurementSummaryData,
+  MeasurementTimeframe,
   NotifierService,
   SelectedOrganization
 } from '@app/service'

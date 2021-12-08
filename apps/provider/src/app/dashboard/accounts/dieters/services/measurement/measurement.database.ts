@@ -5,7 +5,7 @@ import {
   MeasurementBody,
   MeasurementSleep
 } from '@coachcare/sdk'
-
+import { MeasurementCriteria, MeasurementSummaryData } from '@app/service'
 import {
   ActivitySummaryValues,
   BodySummaryValues,
@@ -29,10 +29,6 @@ import {
   FetchSleepMeasurementSummaryResponse,
   SummaryDataResponse as FoodSummaryDataResponseSegment
 } from '@coachcare/sdk'
-import {
-  MeasurementCriteria,
-  MeasurementSummaryData
-} from './measurement.criteria'
 
 @Injectable()
 export class MeasurementDatabase extends CcrDatabase {

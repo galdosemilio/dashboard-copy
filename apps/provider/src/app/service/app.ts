@@ -37,6 +37,7 @@ import { APP_CONFIG } from '@coachcare/common/shared'
 import { FormPDFService } from './formPDFService'
 import { MessagingService } from './messaging'
 import { MeasurementLabelService } from './measurement-label'
+import { MeasurementDatabaseV2 } from './measurement-v2'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -93,6 +94,7 @@ export function AppProviders() {
     ListingPaginationGuard,
     LoggingService,
     MeasurementLabelService,
+    MeasurementDatabaseV2,
     NotifierService,
     {
       provide: MessagingService,

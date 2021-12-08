@@ -7,11 +7,8 @@ import {
   OnInit,
   Output
 } from '@angular/core'
-import {
-  MeasurementTimeframe,
-  MetricsChartDataSource
-} from '@app/dashboard/accounts/dieters/services'
-import { ConfigService } from '@app/service'
+import { MetricsChartDataSource } from '@app/dashboard/accounts/dieters/services'
+import { ConfigService, MeasurementTimeframe } from '@app/service'
 import { DateNavigatorOutput, SelectOptions, sleep } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { merge } from 'lodash'
@@ -34,9 +31,7 @@ export class MetricsChartComponent implements OnDestroy, OnInit {
   timeframe: MeasurementTimeframe = 'week'
 
   @Output()
-  dateChange: EventEmitter<DateNavigatorOutput> = new EventEmitter<
-    DateNavigatorOutput
-  >()
+  dateChange: EventEmitter<DateNavigatorOutput> = new EventEmitter<DateNavigatorOutput>()
 
   public chart: any
   // dates navigator store

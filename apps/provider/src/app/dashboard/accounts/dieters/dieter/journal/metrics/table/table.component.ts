@@ -7,10 +7,10 @@ import {
   Output
 } from '@angular/core'
 import {
-  MeasurementTimeframe,
   MetricsDataSource,
   MetricsRow
 } from '@app/dashboard/accounts/dieters/services'
+import { MeasurementTimeframe } from '@app/service'
 import { DateNavigatorOutput, sleep } from '@app/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -28,9 +28,7 @@ export class MetricsTableComponent implements OnDestroy, OnInit {
   @Input() timeframe: MeasurementTimeframe
 
   @Output()
-  dateChange: EventEmitter<DateNavigatorOutput> = new EventEmitter<
-    DateNavigatorOutput
-  >()
+  dateChange: EventEmitter<DateNavigatorOutput> = new EventEmitter<DateNavigatorOutput>()
 
   public columns: string[] = ['date', 'red_foods', 'aerobic', 'strength']
   // dates navigator store

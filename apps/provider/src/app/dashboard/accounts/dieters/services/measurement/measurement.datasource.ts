@@ -1,5 +1,13 @@
 import { CCRConfig, CCRPalette } from '@app/config'
-import { ContextService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  NotifierService,
+  MEASUREMENT_MAX_ENTRIES_PER_DAY,
+  MeasurementAggregation,
+  MeasurementCriteria,
+  MeasurementSummaryData,
+  MeasurementSummarySegment
+} from '@app/service'
 import {
   _,
   APISummaryResponse,
@@ -19,15 +27,7 @@ import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, Subject } from 'rxjs'
 import { BodyMeasurement } from '../../models/measurement/bodyMeasurement'
-import {
-  MeasurementAggregation,
-  MeasurementCriteria,
-  MeasurementSummaryData,
-  MeasurementSummarySegment
-} from './measurement.criteria'
 import { MeasurementDatabase } from './measurement.database'
-
-export const MAX_ENTRIES_PER_DAY = 24
 
 @UntilDestroy()
 export class MeasurementDataSource extends ChartDataSource<
@@ -620,7 +620,7 @@ export class MeasurementDataSource extends ChartDataSource<
       ? groupedMeasurements.map((group) => {
           if (group.length > 5) {
             this.hasTooMuchForSingleDay = true
-            group = group.slice(0, MAX_ENTRIES_PER_DAY)
+            group = group.slice(0, MEASUREMENT_MAX_ENTRIES_PER_DAY)
           }
 
           return group
