@@ -11,7 +11,7 @@
     <ul class="patient-tasks">
       <li>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-          <a mat-button color="primary" class="ccr-button" [routerLink]="[medicalIntakeFormLink]">
+          <a mat-button color="primary" class="ccr-button" [routerLink]="[medicalIntakeFormLink]" [state]="{ autoAssignForm: !submittedMedicalIntakeForm }">
             {{ 'BOARD.COMPLETE_MY_ONBOARDING_QUESTIONNAIRE' | translate }}
           </a>
           <mat-icon *ngIf="submittedMedicalIntakeForm">check_circle</mat-icon>

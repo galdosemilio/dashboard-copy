@@ -22,7 +22,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { filter, map, take } from 'rxjs/operators'
 import { AssignFormDialog } from '../dialogs'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @UntilDestroy()
 @Component({
@@ -89,6 +89,7 @@ export class DieterSubmissionsComponent implements OnInit {
   private formFilterChange$: Subject<string> = new Subject<string>()
   private formId: string
   private _selectedForm: Form
+  private autoAssignForm: boolean
 
   constructor(
     private context: ContextService,
@@ -97,8 +98,12 @@ export class DieterSubmissionsComponent implements OnInit {
     private formDisplay: FormDisplayService,
     private formsDatabase: FormsDatabase,
     private notifier: NotifierService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.autoAssignForm = !!this.router.getCurrentNavigation().extras.state
+      ?.autoAssignForm
+  }
 
   ngOnInit() {
     this.isProvider = this.context.isProvider
@@ -235,9 +240,13 @@ export class DieterSubmissionsComponent implements OnInit {
   private async resolveSubmissionLimit(formId: string): Promise<void> {
     try {
       const form = await this.formsDatabase
-        .readForm({ id: formId })
+        .readForm({ id: formId, full: this.autoAssignForm })
         .pipe(untilDestroyed(this))
         .toPromise()
+
+      if (this.autoAssignForm) {
+        this.fillForm = new Form(form)
+      }
 
       if (!form.maximumSubmissions) {
         this.hasReachedSubmissionLimit = false
