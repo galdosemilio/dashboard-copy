@@ -89,25 +89,23 @@ import { environment } from './environments/environment'
 export const authenticationToken = new AuthenticationToken()
 export const SDK_HEADERS = new ApiHeaders()
 
+const generalThrottlingSettings = environment.enableThrottling
+  ? environment.ccrApiEnv === 'prod'
+    ? { enabled: true, options: { defaultRateLimit: 15 } }
+    : { enabled: true, options: { defaultRateLimit: 10 } }
+  : { enabled: false }
+
 const avatarApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: true, options: { ttl: { milliseconds: 300000 } } },
-  throttling: environment.enableThrottling
-    ? environment.ccrApiEnv === 'prod'
-      ? { enabled: true, options: { defaultRateLimit: 15 } }
-      : { enabled: true, options: { defaultRateLimit: 5 } }
-    : { enabled: false },
+  throttling: generalThrottlingSettings,
   headers: SDK_HEADERS
 })
 
 const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
-  throttling: environment.enableThrottling
-    ? environment.ccrApiEnv === 'prod'
-      ? { enabled: true, options: { defaultRateLimit: 15 } }
-      : { enabled: true, options: { defaultRateLimit: 5 } }
-    : { enabled: false },
+  throttling: generalThrottlingSettings,
   headers: SDK_HEADERS
 })
 
