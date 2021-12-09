@@ -61,6 +61,7 @@ export type SelectedOrganization = OrganizationWithAddress & {
   isDirect: boolean
   mala?: any
   meetingTypes?: MeetingTypeWithColor[]
+  createdAt?: string
   // disabled?: boolean;
 }
 
@@ -426,7 +427,8 @@ export class ContextService {
           address: res.address,
           permissions: perms || {},
           assets: defprefs.assets,
-          isDirect: false
+          isDirect: false,
+          createdAt: res.createdAt
         }
         this.organizations.push(org)
         return org

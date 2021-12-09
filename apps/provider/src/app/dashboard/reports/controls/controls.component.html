@@ -6,6 +6,7 @@
     [startView]="startView"
     [start]="startPeriod?.startDate"
     [end]="startPeriod?.endDate"
+    [min]="minDate"
     (selectedDate)="updateDates($event)"></date-range-navigator>
     <date-navigator
     *ngIf="!range"

@@ -43,6 +43,7 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
   fixedPeriod: FixedPeriod
   startPeriod: StartPeriod = {}
   startView: 'week' | 'month' | 'year' | 'years' = 'month'
+  minDate: string
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -54,6 +55,7 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       if (org && org.id && org.id !== this.clinic) {
+        this.minDate = org.createdAt
         this.selectClinic(org.id)
       }
     })

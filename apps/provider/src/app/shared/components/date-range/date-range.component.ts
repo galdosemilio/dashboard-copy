@@ -56,6 +56,8 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
       max === true ? moment() : max ? moment(max) : moment('2500-01-01')
   }
 
+  @Input() min?: string
+
   @Input() fixedPeriod: FixedPeriod
   @Input() set startView(value: 'week' | 'month' | 'year' | 'years') {
     this._startView = value

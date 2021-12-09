@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
-  <app-quick-date-range [timeframe]="quickTimeframe" (select)="onQuickSelect($event)" fxFlex="25%"></app-quick-date-range>
+  <app-quick-date-range [min]="min" [timeframe]="quickTimeframe" (select)="onQuickSelect($event)" fxFlex="25%"></app-quick-date-range>
 
   <div class="container" fxFlex="75%">
     <mat-grid-list cols="6" rowHeight="30px">

@@ -38,6 +38,8 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
     return this._timeframe
   }
 
+  @Input() min?: string
+
   @Input() format: string
   @Output() select: EventEmitter<DateRange> = new EventEmitter<DateRange>()
 
@@ -191,11 +193,15 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
       generator: () =>
         this.format
           ? {
-              start: moment('2000-01-01').format(this.format),
+              start: this.min
+                ? moment(this.min).format(this.format)
+                : moment('2000-01-01').format(this.format),
               end: moment().format(this.format)
             }
           : {
-              start: moment('2000-01-01').toISOString(),
+              start: this.min
+                ? moment(this.min).format(this.format)
+                : moment('2000-01-01').format(this.format),
               end: moment().toISOString()
             }
     }
