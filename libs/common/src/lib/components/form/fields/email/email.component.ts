@@ -16,7 +16,8 @@ import {
   ControlValueAccessor,
   FormControl,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR
+  NG_VALUE_ACCESSOR,
+  Validators
 } from '@angular/forms'
 import { MatInput } from '@coachcare/material'
 
@@ -129,11 +130,10 @@ export class EmailFormFieldComponent implements ControlValueAccessor, OnInit {
   }
 
   validate(c: FormControl) {
-    const regex = /^[^@]+@[^@]+\.[^@]{2,}$/
     if (this.isRequired && !c.value) {
       return { ccrFieldEmail: 'required' }
     } else if (c.value) {
-      return regex.test(String(c.value)) ? null : { ccrFieldEmail: 'format' }
+      return Validators.email(c) ? { ccrFieldEmail: 'format' } : null
     }
     return null
   }

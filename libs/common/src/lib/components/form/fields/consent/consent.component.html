@@ -14,7 +14,7 @@
 </ng-template>
 
 <ng-template #provider>
-  <span *ngIf="clinicMsa"><a href="{{ clinicMsa.link | translate }}" target="_blank" ref="noopener noreferrer">{{ clinicMsa.label | translate }}</a>, </span>
+  <span *ngIf="clinicMsa"><a href="{{ clinicMsa.link | translate }}" target="_blank" rel="noopener noreferrer">{{ clinicMsa.label | translate }}</a>, </span>
   <a href="{{ linkMsa || 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MASTER_SUBSCRIPTION_AGREEMENT' | translate }}</a>,
   <a href="{{ linkTerms || ('LINK.TERMS_OF_SERVICE' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>,
   <a href="{{ linkPrivacy || ('LINK.PRIVACY_POLICY' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
