@@ -27,5 +27,8 @@
     <mat-form-field>
         <mat-label>{{ 'GLOBAL.PHONE' | translate }}</mat-label>
         <input formControlName="phone" matInput placeholder="1 2345 6789" required type="tel">
+        <mat-error *ngIf="form.get('phone').getError('required')">
+            {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.PHONE' | translate } }}
+        </mat-error>
     </mat-form-field>
 </div>

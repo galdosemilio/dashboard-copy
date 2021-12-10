@@ -12,4 +12,7 @@
       {{ timezone.viewValue[language] ? timezone.viewValue[language] : timezone.viewValue['en'] }}
     </mat-option>
   </mat-select>
+  <mat-error *ngIf="isRequired && !selected">
+    {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.TIMEZONE' | translate } }}
+  </mat-error>
 </mat-form-field>

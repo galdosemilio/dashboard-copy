@@ -356,6 +356,7 @@
   "NOTIFY": {
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Upload mislykkedes, prøv venligst igen.",
+      "DATA_TYPE_IS_REQUIRED": "{{ type }} er påkrævet",
       "EMAIL_ALREADY_REGISTERED": "Denne E-mail Adresse er allerede registreret.",
       "EMPTY_USER_LISTING": "Ingen resulterende brugere",
       "FILL_THE_FORM": "Udfyld venligst alle felter, inden du fortsætter.",

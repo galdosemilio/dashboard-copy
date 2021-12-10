@@ -356,6 +356,7 @@
   "NOTIFY": {
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Le téléchargement a échoué, veuillez réessayer",
+      "DATA_TYPE_IS_REQUIRED": "{{ type }} est requis",
       "EMAIL_ALREADY_REGISTERED": "L’adresse mail est déjà enregistrée",
       "EMPTY_USER_LISTING": "Aucun résultat d’utilisateurs",
       "FILL_THE_FORM": "Veuillez compléter tous les champs avant de continuer",

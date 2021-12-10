@@ -356,6 +356,7 @@
   "NOTIFY": {
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Hubo un error en la carga, por favor intente de nuevo.",
+      "DATA_TYPE_IS_REQUIRED": "{{type}} es obligatorio",
       "EMAIL_ALREADY_REGISTERED": "El correo electrónico ya está registrado.",
       "EMPTY_USER_LISTING": "No hay resultados",
       "FILL_THE_FORM": "Por favor complete todos los campos antes de continuar.",

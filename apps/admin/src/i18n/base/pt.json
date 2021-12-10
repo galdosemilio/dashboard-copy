@@ -356,6 +356,7 @@
   "NOTIFY": {
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "O upload falhou, por favor tente novamente.",
+      "DATA_TYPE_IS_REQUIRED": "{{type}} é obrigatório",
       "EMAIL_ALREADY_REGISTERED": "Este email já se encontra registado.",
       "EMPTY_USER_LISTING": "Nenhum utilizador resultante",
       "FILL_THE_FORM": "Por favor complete todos os campos antes de continuar.",

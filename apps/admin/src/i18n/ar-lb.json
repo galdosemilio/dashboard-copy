@@ -356,6 +356,7 @@
   "NOTIFY": {
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "لقد فشل التحميل، يُرجى إعادة المحاولة",
+      "DATA_TYPE_IS_REQUIRED": "{{type}} مطلوب",
       "EMAIL_ALREADY_REGISTERED": "عنوان البريد الإلكتروني مسجل بالفعل",
       "EMPTY_USER_LISTING": "No resulting users",
       "FILL_THE_FORM": "يُرجى إكمال جميع الحقول قبل المتابعة",

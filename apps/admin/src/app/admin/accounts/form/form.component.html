@@ -27,6 +27,9 @@
               formControlName="firstName"
               required [readonly]="readonly"
               [placeholder]="'GLOBAL.FIRST_NAME' | translate">
+              <mat-error *ngIf="form.get('firstName').getError('required')">
+                {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.FIRST_NAME' | translate } }}
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -36,6 +39,9 @@
               formControlName="lastName"
               required [readonly]="readonly"
               [placeholder]="'GLOBAL.LAST_NAME' | translate">
+              <mat-error *ngIf="form.get('lastName').getError('required')">
+                {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.LAST_NAME' | translate } }}
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -44,7 +50,14 @@
             formControlName="email"
             required [readonly]="readonly"
             [placeholder]="'GLOBAL.EMAIL' | translate"
-            ></ccr-form-field-email>
+            >
+              <mat-error *ngIf="form.get('email').getError('required')">
+                {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.EMAIL' | translate } }}
+              </mat-error>
+              <mat-error *ngIf="form.get('email').getError('ccrFieldEmail') === 'format'">
+                {{ 'NOTIFY.ERROR.INVALID_EMAIL' | translate }}
+              </mat-error>
+            </ccr-form-field-email>
           </mat-grid-tile>
 
           <mat-grid-tile>
@@ -52,7 +65,8 @@
             formControlName="timezone"
             required [readonly]="readonly"
             [placeholder]="'GLOBAL.TIMEZONE' | translate"
-            ></ccr-form-field-timezone>
+            >
+            </ccr-form-field-timezone>
           </mat-grid-tile>
 
           <mat-grid-tile>
@@ -84,15 +98,24 @@
               [placeholder]="'GLOBAL.BIRTHDAY' | translate">
               <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
               <mat-datepicker #birthday></mat-datepicker>
+              <mat-error *ngIf="form.get('clientData').get('birthday').getError('required')">
+                {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.BIRTHDAY' | translate } }}
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile formGroupName="clientData">
-            <ccr-form-field-text type="number"
-            required [readonly]="readonly" suffix="cm"
-            formControlName="height"
-            [placeholder]="'GLOBAL.HEIGHT' | translate"
-            ></ccr-form-field-text>
+            <mat-form-field [class.readonly]="readonly">
+              <input matInput
+              formControlName="height"
+              required [readonly]="readonly"
+              type="number"
+              [placeholder]="'GLOBAL.HEIGHT' | translate">
+              <span matSuffix>cm</span>
+              <mat-error *ngIf="form.get('clientData').get('height').getError('required')">
+                {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.HEIGHT' | translate } }}
+              </mat-error>
+            </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile formGroupName="clientData">
@@ -100,7 +123,11 @@
             required [readonly]="readonly"
             formControlName="gender"
             [placeholder]="'GLOBAL.GENDER' | translate"
-            ></ccr-form-selector>
+            >
+            <mat-error *ngIf="form.get('clientData').get('gender').getError('required')">
+              {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.GENDER' | translate } }}
+            </mat-error>
+          </ccr-form-selector>
           </mat-grid-tile>
 
           <mat-grid-tile>

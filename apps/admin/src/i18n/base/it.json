@@ -356,6 +356,7 @@
   "NOTIFY": {
     "ERROR": {
       "AVATAR_UPLOAD_FAILED": "Caricamento fallito, ti preghiamo di riprovare.",
+      "DATA_TYPE_IS_REQUIRED": "{{ type }} è obbligatorio",
       "EMAIL_ALREADY_REGISTERED": "L'Indirizzo E-mail è già registrato.",
       "EMPTY_USER_LISTING": "Non risultano utenti",
       "FILL_THE_FORM": "Ti preghiamo di completare tutti i campi prima di continuare.",
