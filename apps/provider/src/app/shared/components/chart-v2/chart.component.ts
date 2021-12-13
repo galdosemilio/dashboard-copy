@@ -161,6 +161,11 @@ export class CcrMeasurementChartV2Component implements OnInit {
 
   private async resolveTypes(): Promise<void> {
     try {
+      if (!this.label) {
+        this.types = []
+        return
+      }
+
       const types = (
         await this.measurementLabel.resolveLabelDataPointTypes(this.label)
       ).map((assoc) => assoc.type)

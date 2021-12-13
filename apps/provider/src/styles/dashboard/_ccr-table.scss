@@ -47,8 +47,9 @@
   thead {
     & > tr > td,
     & > th {
+      height: 32px;
       padding: 2px 1em;
-      line-height: 36px;
+      text-align: left;
     }
   }
 
