@@ -4,11 +4,14 @@ import { CookieService } from 'ngx-cookie-service'
 import { AccountTypeIds, ApiService } from '@coachcare/sdk'
 import { environment } from '../../environments/environment'
 import { authenticationToken } from '@coachcare/common/sdk.barrel'
+import { debounceTime } from 'rxjs/operators'
 
 @Injectable()
 export class AuthService {
   constructor(api: ApiService, private cookie: CookieService) {
-    api.onUnauthenticatedError.subscribe(() => this.redirect())
+    api.onUnauthenticatedError
+      .pipe(debounceTime(500))
+      .subscribe(() => this.redirect())
   }
 
   check(): AccountTypeIds | false {
