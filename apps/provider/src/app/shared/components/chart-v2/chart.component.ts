@@ -10,18 +10,17 @@ import {
 import {
   ConfigService,
   ContextService,
+  MeasurementChartDataSource,
+  MeasurementDatabaseV2,
   MeasurementLabelService,
+  MEASUREMENT_MAX_ENTRIES_PER_DAY,
+  MeasurementTimeframe,
   NotifierService
 } from '@app/service'
 import { ChartData } from '@app/shared/model'
 import { DateNavigatorOutput } from '@app/shared/components'
 import { SelectOptions, _ } from '@app/shared/utils'
 import { Subject } from 'rxjs'
-import {
-  MeasurementChartDataSource,
-  MeasurementDatabaseV2,
-  MeasurementTimeframe
-} from '@app/service'
 import * as moment from 'moment'
 import { Store } from '@ngrx/store'
 import { CCRConfig } from '@app/config'
@@ -33,6 +32,7 @@ import {
 } from '@coachcare/sdk'
 import { SYNTHETIC_DATA_TYPES } from '@app/dashboard/accounts/dieters/models'
 import { TranslateService } from '@ngx-translate/core'
+import { ChartPluginsOptions } from 'chart.js'
 
 @Component({
   selector: 'ccr-measurements-chart-v2',
@@ -71,6 +71,43 @@ export class CcrMeasurementChartV2Component implements OnInit {
   public chart: ChartData
   public types: NamedEntity[] = []
   public source: MeasurementChartDataSource
+  public plugins: ChartPluginsOptions = [
+    {
+      id: 'day-offset',
+      afterUpdate: (chart) => {
+        if (this.timeframe === 'year' || this.timeframe === 'alltime') {
+          return
+        }
+
+        const tickSlotAmount = this.timeframe === 'week' ? 8 : 31
+
+        chart.config.data.datasets.forEach((dataset) => {
+          const metadata: ChartData = Object.values(dataset._meta)[0]
+
+          if (!metadata) {
+            return
+          }
+
+          const chartWidth = metadata.data[0]._xScale.width
+          const offset =
+            chartWidth / tickSlotAmount / MEASUREMENT_MAX_ENTRIES_PER_DAY
+
+          let previousDate = ''
+          let cumulativeOffset = 0
+
+          metadata.data.forEach((entry, index) => {
+            const dataEntry = dataset.data[index]
+            const isSameDate = previousDate.includes(dataEntry.x)
+
+            cumulativeOffset = isSameDate ? cumulativeOffset + offset : 0
+            entry._model.x += cumulativeOffset
+
+            previousDate = dataEntry.x
+          })
+        })
+      }
+    }
+  ]
 
   private dates$: Subject<DateNavigatorOutput> = new Subject<DateNavigatorOutput>()
   private _dates: DateNavigatorOutput
