@@ -18,12 +18,12 @@
         </div>
       </li>
       <li>
-        <button mat-button routerLink="/test-results" disabled>
+        <button mat-button routerLink="/test-results" [disabled]="!eligibleToSelfSchedule">
           {{ 'BOARD.SEE_MY_BLOOD_ANALYSIS' | translate }}
         </button>
       </li>
-      <li *ngIf="!eligibleToSelfSchedule">
-          <button mat-button routerLink="/new-appointment" disabled>
+      <li>
+          <button mat-button routerLink="/new-appointment" [disabled]="!eligibleToSelfSchedule">
             {{ 'BOARD.SCHEDULE_PROVIDER_VIDEO_CONFERENCE_CALL' | translate }}
           </button>
       </li>
