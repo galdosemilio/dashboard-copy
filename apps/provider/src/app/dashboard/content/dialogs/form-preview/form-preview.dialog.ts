@@ -28,7 +28,7 @@ export class FormPreviewDialog implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.resolveForm()
+    void this.resolveForm()
   }
 
   private async resolveForm(): Promise<void> {

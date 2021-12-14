@@ -231,7 +231,7 @@ export class AccountAutocompleterComponent
       })
     }
 
-    request.then((res) => {
+    void request.then((res) => {
       if (res.data.length) {
         // fill the resulting accounts
         this.items = res.data.map((c: AccountAccessData | AccountFullData) => ({

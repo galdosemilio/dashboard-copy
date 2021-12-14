@@ -91,7 +91,7 @@ export class ClinicsTableComponent implements OnInit {
         '_blank'
       )
     } else {
-      this.router.navigate(['/accounts/clinics', row.organization.id])
+      void this.router.navigate(['/accounts/clinics', row.organization.id])
     }
   }
 }

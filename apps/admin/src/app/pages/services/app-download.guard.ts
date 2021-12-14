@@ -25,11 +25,11 @@ export class AppDownloadGuard implements CanActivate {
     const organization = route.params['organization']
 
     if (['android', 'ios'].indexOf(platform) === -1) {
-      this.router.navigate(['/not-found'])
+      void this.router.navigate(['/not-found'])
       return true
     }
     if (!organization || isNaN(Number(organization))) {
-      this.router.navigate(['/not-found'])
+      void this.router.navigate(['/not-found'])
       return true
     }
 

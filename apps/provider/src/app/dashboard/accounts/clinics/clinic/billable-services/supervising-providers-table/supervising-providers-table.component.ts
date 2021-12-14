@@ -27,7 +27,7 @@ export class ClinicSupervisingProvidersTable implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.resolveAdminStatus()
+    void this.resolveAdminStatus()
     this.source
       .connect()
       .pipe(untilDestroyed(this))
@@ -51,7 +51,7 @@ export class ClinicSupervisingProvidersTable implements OnInit {
       })
       .afterClosed()
       .pipe((confirm) => confirm)
-      .subscribe(() => this.removeSupervisingProvider(association))
+      .subscribe(() => void this.removeSupervisingProvider(association))
   }
 
   private async removeSupervisingProvider(

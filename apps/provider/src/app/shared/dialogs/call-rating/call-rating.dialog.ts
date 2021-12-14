@@ -148,7 +148,7 @@ export class CallRatingDialog implements OnDestroy, OnInit {
       }
 
       this.notifier.success(_('NOTIFY.SUCCESS.THANK_YOU_FEEDBACK'))
-      this.close()
+      void this.close()
     } catch (error) {
       this.notifier.error(error)
     } finally {

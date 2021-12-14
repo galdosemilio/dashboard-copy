@@ -115,7 +115,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       )
       .subscribe(() => {
         this.account = this.context.account
-        this.resolveAccountRPMStatus(this.account)
+        void this.resolveAccountRPMStatus(this.account)
       })
 
     this.gesture.userIdle$
@@ -147,7 +147,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
       this.pauseTimer()
       await this.timeTracker.forceCommit()
-      this.resolveAccountRPMStatus(this.account)
+      void this.resolveAccountRPMStatus(this.account)
     } catch (error) {
       this.notifier.error(error)
     }
@@ -355,7 +355,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         })
         .afterClosed()
         .subscribe(() => {
-          this.resolveAccountRPMStatus(this.account)
+          void this.resolveAccountRPMStatus(this.account)
           this.timeTracker.resetTrackingTimeStart()
         })
     } catch (error) {
@@ -388,7 +388,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   private timerHandler(): void {
     ++this.seconds
 
-    this.handleSecondPassing()
+    void this.handleSecondPassing()
 
     this.cdr.detectChanges()
   }

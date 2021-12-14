@@ -57,7 +57,7 @@ export class TranslatedTextFormFieldComponent implements OnDestroy, OnInit {
       return
     }
 
-    this.loadInitialValues(this.initial)
+    void this.loadInitialValues(this.initial)
   }
 
   public onNewLanguageSelect(event: MatSelectChange): void {

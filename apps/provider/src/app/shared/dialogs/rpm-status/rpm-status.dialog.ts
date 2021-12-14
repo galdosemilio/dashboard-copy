@@ -71,8 +71,8 @@ export class RPMStatusDialog implements OnInit {
   public ngOnInit(): void {
     this.createForms()
     this.resolveDialogData()
-    this.fetchDeactivationReasons()
-    this.calculateEntryAge()
+    void this.fetchDeactivationReasons()
+    void this.calculateEntryAge()
   }
 
   public cancelEdition(): void {

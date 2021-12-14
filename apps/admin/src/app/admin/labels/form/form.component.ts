@@ -60,7 +60,7 @@ export class LabelFormComponent implements OnInit {
         .create(this.form.value)
         .then((res) => {
           this.notifier.success(_('NOTIFY.SUCCESS.LABEL_CREATED'))
-          this.router.navigate([this.routes.single(res.id)])
+          void this.router.navigate([this.routes.single(res.id)])
         })
         .catch((err) => this.notifier.error(err))
     } else {
@@ -82,7 +82,7 @@ export class LabelFormComponent implements OnInit {
           .update(req)
           .then(() => {
             this.notifier.success(_('NOTIFY.SUCCESS.LABEL_UPDATED'))
-            this.router.navigate([this.routes.single(this.id as string)])
+            void this.router.navigate([this.routes.single(this.id as string)])
           })
           .catch((err) => this.notifier.error(err))
       }
@@ -94,10 +94,10 @@ export class LabelFormComponent implements OnInit {
   onCancel() {
     if (!this.id) {
       // create
-      this.router.navigate([this.routes.list()])
+      void this.router.navigate([this.routes.list()])
     } else {
       // update
-      this.router.navigate([this.routes.single(this.id as string)])
+      void this.router.navigate([this.routes.single(this.id as string)])
     }
   }
 

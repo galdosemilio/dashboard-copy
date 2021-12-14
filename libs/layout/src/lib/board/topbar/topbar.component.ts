@@ -43,7 +43,7 @@ export class TopbarComponent {
   }
 
   logout(): void {
-    this.user.logout().then(() => {
+    void this.user.logout().then(() => {
       this.auth.logout()
     })
   }

@@ -508,7 +508,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       s: this.component,
       v: mode ? mode : this.view === 'table' ? 'chart' : 'table'
     }
-    this.router.navigate(['.', params], {
+    void this.router.navigate(['.', params], {
       relativeTo: this.route
     })
   }

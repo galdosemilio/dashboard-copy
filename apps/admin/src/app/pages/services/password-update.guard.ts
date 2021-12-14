@@ -25,7 +25,7 @@ export class PasswordUpdateGuard implements CanActivate {
       !emailRegex.test(route.queryParams.email)
     ) {
       // FIXME show an error message?
-      this.router.navigate(['/'])
+      void this.router.navigate(['/'])
       return false
     }
 

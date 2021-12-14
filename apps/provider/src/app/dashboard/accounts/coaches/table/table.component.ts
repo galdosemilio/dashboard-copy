@@ -125,7 +125,7 @@ export class CoachesTableComponent implements OnInit {
           '_blank'
         )
       } else {
-        this.router.navigate(['/accounts/coaches', coach.id])
+        void this.router.navigate(['/accounts/coaches', coach.id])
       }
     }
   }

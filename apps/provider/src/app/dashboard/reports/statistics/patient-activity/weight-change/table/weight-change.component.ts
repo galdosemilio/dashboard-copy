@@ -97,7 +97,7 @@ export class WeightChangeTableComponent
     const criteria = this.source.args
     criteria.limit = 'all'
     criteria.offset = 0
-    this.database.fetchWeightChange(criteria).then((res) => {
+    void this.database.fetchWeightChange(criteria).then((res) => {
       if (!res.data.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }

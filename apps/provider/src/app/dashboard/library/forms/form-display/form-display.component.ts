@@ -124,7 +124,7 @@ export class FormDisplayComponent implements BindForm, OnDestroy, OnInit {
   }
 
   goUp(route: FormDisplayRouteElement) {
-    this.router.navigate(route.destination, { relativeTo: this.route })
+    void this.router.navigate(route.destination, { relativeTo: this.route })
   }
 
   togglePreview(): void {
@@ -146,7 +146,7 @@ export class FormDisplayComponent implements BindForm, OnDestroy, OnInit {
         return
       }
 
-      this.router.navigate(['./'], { relativeTo: this.route })
+      void this.router.navigate(['./'], { relativeTo: this.route })
     })
   }
 }

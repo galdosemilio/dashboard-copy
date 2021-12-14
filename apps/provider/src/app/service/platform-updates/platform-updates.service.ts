@@ -27,7 +27,7 @@ export class PlatformUpdatesService {
 
   constructor(private notifier: NotifierService, private zendesk: Zendesk) {
     this.resolveLastSeenTimestamp()
-    this.fetchCurrentArticles()
+    void this.fetchCurrentArticles()
   }
 
   public commitLastSeenTimestamp(): void {

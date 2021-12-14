@@ -33,7 +33,7 @@ export class FormSearchComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.createForm()
-    this.fetchForms()
+    void this.fetchForms()
   }
 
   onFormAutocompleteSelect($event: MatAutocompleteSelectedEvent) {

@@ -74,7 +74,7 @@ export class SequenceSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchSequences()
+    void this.fetchSequences()
     this.setupAutocomplete()
   }
 
@@ -155,7 +155,7 @@ export class SequenceSearchComponent implements OnInit {
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
         if (query) {
-          this.fetchSequences(query)
+          void this.fetchSequences(query)
         } else {
           this.trigger.closePanel()
         }

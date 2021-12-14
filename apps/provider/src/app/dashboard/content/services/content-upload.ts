@@ -53,7 +53,7 @@ export class ContentUploadService {
         }
 
         if (upload.id) {
-          this.requestContentDeletion(upload.id)
+          void this.requestContentDeletion(upload.id)
         }
       })
 
@@ -333,7 +333,7 @@ export class ContentUploadService {
       })
     } catch (error) {
       if (ticket.contentUpload.id) {
-        this.requestContentDeletion(ticket.contentUpload.id)
+        void this.requestContentDeletion(ticket.contentUpload.id)
       }
       this.uploads[ticket.number].error = error
     }

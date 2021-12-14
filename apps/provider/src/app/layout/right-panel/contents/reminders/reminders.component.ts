@@ -75,7 +75,7 @@ export class RemindersComponent implements OnInit, OnDestroy {
       .subscribe((organization) => {
         this.formId = resolveConfig('RIGHT_PANEL.REMINDERS_FORM', organization)
 
-        this.context
+        void this.context
           .orgHasScheduleEnabled(AccountTypeIds.Provider)
           .then((enabled) => {
             if (enabled) {
@@ -98,7 +98,7 @@ export class RemindersComponent implements OnInit, OnDestroy {
         )
         this.shouldShowDaysheetButton = !!shouldShowDaysheetButton
       })
-    this.getAlerts()
+    void this.getAlerts()
   }
 
   public showDaysheetDialog(): void {

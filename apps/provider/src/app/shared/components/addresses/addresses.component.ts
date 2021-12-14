@@ -62,7 +62,7 @@ export class AddressesComponent
     if (this._account !== value) {
       this._account = value
 
-      this.getAddresses()
+      void this.getAddresses()
     }
   }
 
@@ -107,7 +107,7 @@ export class AddressesComponent
 
   public ngOnInit() {
     this.createForm()
-    this.getAddressTypes()
+    void this.getAddressTypes()
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.isBillingAddressReadonly =
@@ -220,7 +220,7 @@ export class AddressesComponent
             .pipe(debounceTime(1000), untilDestroyed(this))
             .subscribe((controls) => {
               if (addressForm.valid) {
-                this.onChangeAddress(index, controls.address)
+                void this.onChangeAddress(index, controls.address)
               }
             })
 
@@ -255,7 +255,7 @@ export class AddressesComponent
         filter((address) => address)
       )
       .subscribe((address: UserAddress) => {
-        this.onCreateAddress({
+        void this.onCreateAddress({
           account: this.account,
           ...address
         })

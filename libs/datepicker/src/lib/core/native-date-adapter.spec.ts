@@ -17,7 +17,7 @@ describe('NativeDateAdapter', () => {
   let assertValidDate: (d: Date | null, valid: boolean) => void
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       imports: [NativeDateModule]
     }).compileComponents()
   }))
@@ -638,7 +638,7 @@ describe('NativeDateAdapter with MAT_DATE_LOCALE override', () => {
   let adapter: NativeDateAdapter
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       imports: [NativeDateModule],
       providers: [{ provide: MAT_DATE_LOCALE, useValue: 'da-DK' }]
     }).compileComponents()
@@ -669,7 +669,7 @@ describe('NativeDateAdapter with LOCALE_ID override', () => {
   let adapter: NativeDateAdapter
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       imports: [NativeDateModule],
       providers: [{ provide: LOCALE_ID, useValue: 'da-DK' }]
     }).compileComponents()

@@ -48,7 +48,7 @@ export class PagesEffects {
       this.cookie.set(COOKIE_CALL_DEVICES_MODAL, 'false', 365, '/')
 
       if (enforceMFA) {
-        this.router.navigate(['/mfa-setup'])
+        void this.router.navigate(['/mfa-setup'])
       } else {
         this.auth.login(role)
       }

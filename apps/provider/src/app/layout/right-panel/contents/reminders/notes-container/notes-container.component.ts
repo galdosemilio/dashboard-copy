@@ -71,7 +71,7 @@ export class NotesContainerComponent implements OnDestroy, OnInit {
         const submission = new FormSubmission(
           await this.formSubmissionService.getSingle({ id: submissionId })
         )
-        this.getNotes([submission], false)
+        void this.getNotes([submission], false)
       } catch (error) {
         this.notifier.error(error)
       }
@@ -137,7 +137,7 @@ export class NotesContainerComponent implements OnDestroy, OnInit {
       .subscribe((submissions: FormSubmission[]) => {
         this.isSearchingNotes = false
         this.notesSearchNext = this.submissionSource.next
-        this.getNotes(submissions)
+        void this.getNotes(submissions)
       })
   }
 

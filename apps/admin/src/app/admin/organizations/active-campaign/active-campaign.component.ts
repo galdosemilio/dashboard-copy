@@ -51,7 +51,7 @@ export class OrganizationActiveCampaignComponent implements OnDestroy, OnInit {
       this.organizationId = data.org.id || this.context.organizationId
       this.source.addDefault({ organization: this.organizationId, limit: 10 })
       this.source.refresh()
-      this.resolveActiveCampaignStatus()
+      void this.resolveActiveCampaignStatus()
     })
   }
 

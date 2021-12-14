@@ -17,7 +17,7 @@ export class AccountResolver implements Resolve<AccountSingle | null> {
       })
       .catch(() => {
         // TODO notify error
-        this.router.navigate(['../'])
+        void this.router.navigate(['../'])
         return null
       })
   }

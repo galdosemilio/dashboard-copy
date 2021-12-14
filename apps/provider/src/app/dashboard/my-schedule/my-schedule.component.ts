@@ -52,7 +52,7 @@ export class MyScheduleComponent implements OnInit, OnDestroy {
     combineLatest([this.context.account$, this.context.organization$])
       .pipe(untilDestroyed(this))
       .subscribe(() => {
-        this.initSource()
+        void this.initSource()
       })
   }
 

@@ -102,7 +102,7 @@ export class ContextService {
           reject()
         }
         this.ui.dispatch(new InitLayout())
-        this.loadData().then(resolve)
+        void this.loadData().then(resolve)
       })
     }
   }
@@ -379,7 +379,7 @@ export class ContextService {
   organization$ = new BehaviorSubject<SelectedOrganization>(null)
 
   set organization(organization: SelectedOrganization) {
-    this.updateOrganization(organization)
+    void this.updateOrganization(organization)
   }
   get organization(): SelectedOrganization {
     return this.organization$.getValue()
@@ -387,7 +387,7 @@ export class ContextService {
 
   set organizationId(id: string | undefined) {
     this.getOrg(id)
-      .then((organization) => this.updateOrganization(organization))
+      .then((organization) => void this.updateOrganization(organization))
       .catch(console.error)
   }
   get organizationId(): string | undefined {

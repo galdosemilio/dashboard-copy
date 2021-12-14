@@ -31,14 +31,14 @@ export class ScheduleMosaicComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
-    this.fetchData()
+    void this.fetchData()
     this.store.dispatch(new ClosePanel())
     this.bus.trigger('right-panel.component.set', 'addConsultation')
     this.bus.trigger('right-panel.consultation.form', {
       form: 'addConsultation'
     })
     this.bus.register('schedule.table.refresh', () => {
-      this.fetchData()
+      void this.fetchData()
     })
   }
 

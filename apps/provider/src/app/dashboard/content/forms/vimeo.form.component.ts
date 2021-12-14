@@ -75,7 +75,7 @@ export class VimeoFormComponent implements BindForm {
       if (this.pattern.test(controls.embedUrl)) {
         params = this.processAsDefault(controls.embedUrl)
       } else {
-        this.logging.log({
+        void this.logging.log({
           logLevel: 'warn',
           data: {
             type: 'digital-library-add-content',

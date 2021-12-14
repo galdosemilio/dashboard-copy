@@ -66,7 +66,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
     this._selectedDieter = dieter
     // Seems way more performant than detecting changes, although it looks hacky --Zcyon
     setTimeout(() => this.form.patchValue({ selectedDieter: dieter }))
-    this.fetchDraft()
+    void this.fetchDraft()
   }
 
   get selectedDieter(): AccountAccessData {
@@ -109,7 +109,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
     this.isProvider = this.context.isProvider
 
     if (this.content.id) {
-      this.fetchDraft()
+      void this.fetchDraft()
     }
 
     this.createForm()
@@ -149,7 +149,7 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
 
   public saveForm(): void {
     this.formDisplay.save$.next()
-    this.removeDraft()
+    void this.removeDraft()
   }
 
   private addFormQuestion(section: FormSection): void {

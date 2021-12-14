@@ -71,7 +71,7 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
     this.hasFoodKeys = await this.context.orgHasFoodMode('Key-based')
 
     // TODO move to resolver and manage the component access
-    this.authentication.available(this.context.accountId).then((res) => {
+    void this.authentication.available(this.context.accountId).then((res) => {
       this.hasLevl = res.data.filter(
         (v) => v.service === 'levl' && typeof v.token !== 'undefined'
       ).length
@@ -79,7 +79,7 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
         : false
     })
 
-    this.route.parent.data.forEach((data: any) => {
+    void this.route.parent.data.forEach((data: any) => {
       this.goals = data.goals
     })
 

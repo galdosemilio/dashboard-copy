@@ -88,7 +88,7 @@ export class LanguageService {
   save(language: string): void {
     this.cookie.set('ccrStaticLanguage', language, null, '/')
     if (this.uid) {
-      this.account
+      void this.account
         .update({
           id: this.uid,
           preferredLocales: [language]

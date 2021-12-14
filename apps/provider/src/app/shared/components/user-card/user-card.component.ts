@@ -72,7 +72,7 @@ export class UserCardComponent implements OnInit {
       const baseUrl = window.location.href.replace(this.router.url, '')
       window.open(baseUrl + newRelativeUrl, '_blank')
     } else {
-      this.router.navigate(route)
+      void this.router.navigate(route)
     }
   }
 

@@ -44,7 +44,7 @@ export class CcrAttendanceSelectorComponent implements OnDestroy, OnInit {
     this.createForm()
 
     if (this.meeting) {
-      this.fetchAttendanceStatusOptions()
+      void this.fetchAttendanceStatusOptions()
     }
   }
 

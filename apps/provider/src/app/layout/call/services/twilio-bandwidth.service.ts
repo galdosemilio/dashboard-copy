@@ -157,7 +157,7 @@ export class TwilioBandwidthService {
 
   private setupDataTracks(): void {
     this.dataTrack = new LocalDataTrack()
-    this.currentRoom.localParticipant.publishTrack(this.dataTrack)
+    void this.currentRoom.localParticipant.publishTrack(this.dataTrack)
 
     this.dataTrackPublished.promise = new Promise((resolve, reject) => {
       this.dataTrackPublished.resolve = resolve

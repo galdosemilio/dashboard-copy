@@ -278,12 +278,12 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
 
   gotoProfile(account: MessageRecipient) {
     if (account.accountType) {
-      this.router.navigate([this.context.getProfileRoute(account)])
+      void this.router.navigate([this.context.getProfileRoute(account)])
     } else {
       this.account
         .getSingle(account.id)
         .then((acc: AccSingleResponse) => {
-          this.router.navigate([this.context.getProfileRoute(acc)])
+          void this.router.navigate([this.context.getProfileRoute(acc)])
         })
         .catch((err) => {
           this.notifier.error(err)

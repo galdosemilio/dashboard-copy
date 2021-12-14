@@ -18,7 +18,7 @@ export class DieterResolver implements Resolve<AccSingleResponse> {
     const id = route.params['id']
     try {
       if (!this.context.organization.permissions.allowClientPhi) {
-        this.router.navigate(['/accounts/patients'])
+        void this.router.navigate(['/accounts/patients'])
       }
 
       const acc = await this.account.getSingle(id)
@@ -31,10 +31,10 @@ export class DieterResolver implements Resolve<AccSingleResponse> {
             this.context.account = coach
             return acc
           } else {
-            this.router.navigate(['/accounts/patients'])
+            void this.router.navigate(['/accounts/patients'])
           }
         } catch (e) {
-          this.router.navigate(['/accounts/patients'])
+          void this.router.navigate(['/accounts/patients'])
         }
       } else {
         return acc

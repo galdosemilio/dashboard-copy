@@ -93,7 +93,7 @@ export class OrganizationSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchOrganizations()
+    void this.fetchOrganizations()
     this.setupAutocomplete()
 
     if (this.initialOrg) {
@@ -198,7 +198,7 @@ export class OrganizationSearchComponent implements OnInit {
       )
       .subscribe((query) => {
         if (query) {
-          this.fetchOrganizations(query)
+          void this.fetchOrganizations(query)
         } else {
           this.trigger.closePanel()
         }

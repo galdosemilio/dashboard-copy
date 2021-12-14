@@ -72,7 +72,7 @@ export class SequencesTableComponent {
     try {
       this.source.isLoading = true
       this.source.change$.next()
-      this.router.navigate(['sequence', sequence.id, { s: 'edit' }], {
+      void this.router.navigate(['sequence', sequence.id, { s: 'edit' }], {
         relativeTo: this.route
       })
     } catch (error) {

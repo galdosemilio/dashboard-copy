@@ -144,7 +144,7 @@ export class StepsChartComponent implements OnInit, OnDestroy {
 
   downloadCSV() {
     const criteria = this.source.args
-    this.database.fetchActivityLevel(criteria).then((res) => {
+    void this.database.fetchActivityLevel(criteria).then((res) => {
       const filename = `Patient_Steps_${criteria.startDate}_${criteria.endDate}.csv`
       let csv = ''
       csv += 'PATIENT STEPS REPORT\r\n'

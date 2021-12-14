@@ -92,7 +92,7 @@ export class MessagesRecipientsComponent implements OnInit {
   }
 
   private searchAccounts(query: string): void {
-    this.account.getList({ query }).then((res) => {
+    void this.account.getList({ query }).then((res) => {
       this.accounts = res.data.filter(
         (a) =>
           a.id !== this.current.id &&

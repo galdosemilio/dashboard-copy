@@ -111,7 +111,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.initForm()
-    this.fetchOrganizations()
+    void this.fetchOrganizations()
 
     this.user = this.context.user
     this.context.selected$.subscribe((user) => {
@@ -390,7 +390,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         streetAddress: org.address.street
       })
       this.selectedOrg = org
-      this.checkAttendeesAccessbility()
+      void this.checkAttendeesAccessbility()
     } catch (err) {
       this.notifier.error(err)
     }
@@ -421,7 +421,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         accountType: account.accountType
       }
       this.attendees.push(attendee)
-      this.checkAttendeesAccessbility(attendee)
+      void this.checkAttendeesAccessbility(attendee)
 
       if (this.editing) {
         if (!this.removedAttendees.some((id) => id === attendee.id)) {
@@ -447,7 +447,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
       }
     }
 
-    this.checkAttendeesAccessbility()
+    void this.checkAttendeesAccessbility()
   }
 
   resetParticipants(): void {

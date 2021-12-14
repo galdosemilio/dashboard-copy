@@ -64,7 +64,7 @@ export class VerifyMFADialog implements BindForm, OnInit {
     this.channel = this.data.channel
     this.form = this.fb.group({})
     await this.checkExistingMFA()
-    this.onAccept()
+    void this.onAccept()
   }
 
   async onAccept() {

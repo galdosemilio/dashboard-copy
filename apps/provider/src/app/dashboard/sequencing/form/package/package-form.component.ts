@@ -74,7 +74,7 @@ export class PackageFormComponent
 
   ngOnInit(): void {
     this.createForm()
-    this.fetchPackages()
+    void this.fetchPackages()
 
     this.markAsTouched.pipe(untilDestroyed(this)).subscribe(() => {
       this.form.markAsTouched()

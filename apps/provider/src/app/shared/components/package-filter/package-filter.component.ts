@@ -46,12 +46,12 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.createForm()
-    this.fetchPackages()
+    void this.fetchPackages()
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe(() => {
       this.packages = []
       this.createForm()
-      this.fetchPackages()
+      void this.fetchPackages()
     })
   }
 

@@ -42,7 +42,7 @@ export class DuplicateSequenceDialog implements OnInit {
 
   public ngOnInit(): void {
     this.createForm()
-    this.readData()
+    void this.readData()
     this.initialOrg = this.context.organization
   }
 

@@ -52,7 +52,7 @@ export class PhasesComponent implements OnDestroy, OnInit {
   }
 
   public goToPhaseManagement(): void {
-    this.router.navigate([
+    void this.router.navigate([
       `/accounts/patients/${this.context.accountId}/settings`,
       { s: 'labels' }
     ])

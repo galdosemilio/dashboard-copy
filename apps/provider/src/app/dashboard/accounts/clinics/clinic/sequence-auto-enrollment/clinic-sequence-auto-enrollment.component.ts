@@ -37,7 +37,7 @@ export class ClinicSequenceAutoEnrollmentComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.resolveAdminStatus()
+    void this.resolveAdminStatus()
     this.createSource()
   }
 

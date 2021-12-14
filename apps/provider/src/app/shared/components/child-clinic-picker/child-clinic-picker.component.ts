@@ -24,7 +24,7 @@ export class CcrChildClinicPickerComponent implements OnDestroy, OnInit {
     this._organizaton = org
 
     if (this._organizaton) {
-      this.fetchChildOrgs()
+      void this.fetchChildOrgs()
     } else {
       this.childOrgs = []
     }

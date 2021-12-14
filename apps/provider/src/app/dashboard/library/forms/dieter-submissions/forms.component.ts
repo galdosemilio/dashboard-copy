@@ -255,7 +255,7 @@ export class DieterSubmissionsComponent implements OnInit {
 
       this.hasReachedSubmissionLimit = this.source.result.length > 0
 
-      this.onSelectSubmission(this.source.result[0])
+      void this.onSelectSubmission(this.source.result[0])
     } catch (error) {
       this.notifier.error(error)
     }

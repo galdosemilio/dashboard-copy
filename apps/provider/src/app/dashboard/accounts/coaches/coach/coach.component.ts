@@ -38,7 +38,7 @@ export class CoachComponent implements OnDestroy, OnInit {
     this.store.dispatch(new ClosePanel())
     this.coachId = this.context.accountId
 
-    this.route.data.forEach((data: any) => {
+    void this.route.data.forEach((data: any) => {
       this.coach = data.account
     })
 

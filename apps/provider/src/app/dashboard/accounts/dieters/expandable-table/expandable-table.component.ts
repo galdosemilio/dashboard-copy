@@ -339,7 +339,7 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
           '_blank'
         )
       } else {
-        this.router.navigate(['/accounts/patients', dieter.id])
+        void this.router.navigate(['/accounts/patients', dieter.id])
       }
     } catch (error) {
       this.notify.error(error)

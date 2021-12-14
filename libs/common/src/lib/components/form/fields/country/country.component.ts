@@ -87,9 +87,9 @@ export class CountryFormFieldComponent implements ControlValueAccessor, OnInit {
     const parent = this.parent.control as AbstractControl
     this._control = parent.get(this.formControlName) as AbstractControl
     // fill the translated options
-    this.translate()
+    void this.translate()
     this.translator.onLangChange.subscribe(() => {
-      this.translate()
+      void this.translate()
     })
   }
 

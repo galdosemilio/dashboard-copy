@@ -155,7 +155,7 @@ export class AddMeasurementsV2Component implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
-    this.processWithNewFramework()
+    void this.processWithNewFramework()
   }
 
   public showDaysheetDialog(): void {

@@ -51,8 +51,8 @@ export class ClinicBillableServicesComponent implements OnInit {
   public ngOnInit(): void {
     this.createForm()
     this.createSource()
-    this.resolveRPMPreference()
-    this.resolveAdminStatus()
+    void this.resolveRPMPreference()
+    void this.resolveAdminStatus()
   }
 
   public isTinValid(): boolean {
@@ -67,7 +67,7 @@ export class ClinicBillableServicesComponent implements OnInit {
       .afterClosed()
       .pipe(filter((account) => account))
       .subscribe((account) => {
-        this.addSupervisingProvider(account)
+        void this.addSupervisingProvider(account)
       })
   }
 
@@ -88,7 +88,7 @@ export class ClinicBillableServicesComponent implements OnInit {
           this.rpmPrefUpdateBlock = true
           this.form.patchValue({ tin: '' })
           this.rpmPrefUpdateBlock = false
-          this.syncPreference()
+          void this.syncPreference()
         })
     } else {
       this.dialog
@@ -102,7 +102,7 @@ export class ClinicBillableServicesComponent implements OnInit {
         .afterClosed()
         .pipe(filter((confirm) => confirm))
         .subscribe(() => {
-          this.removeRPMPreference()
+          void this.removeRPMPreference()
         })
     }
   }
@@ -138,7 +138,7 @@ export class ClinicBillableServicesComponent implements OnInit {
       })
       this.notifier.success(_('NOTIFY.SUCCESS.SUPERVISING_PROVIDER_ADDED'))
       this.rpmPrefUpdateBlock = true
-      this.resolveRPMPreference()
+      void this.resolveRPMPreference()
       this.source.forceEmpty = false
       this.source.refresh()
     } catch (error) {
@@ -163,7 +163,7 @@ export class ClinicBillableServicesComponent implements OnInit {
           return
         }
 
-        this.syncPreference()
+        void this.syncPreference()
       })
 
     this.form.controls.isInherited.valueChanges
@@ -182,7 +182,7 @@ export class ClinicBillableServicesComponent implements OnInit {
           })
 
           this.rpmPrefUpdateBlock = true
-          this.resolveRPMPreference()
+          void this.resolveRPMPreference()
         }
       })
   }
@@ -274,7 +274,7 @@ export class ClinicBillableServicesComponent implements OnInit {
         }
 
         await this.rpm.deleteRPMPreference({ id: this.rpmPref.id })
-        this.resolveRPMPreference()
+        void this.resolveRPMPreference()
       })
   }
 

@@ -116,7 +116,7 @@ export class MenubarComponent implements OnDestroy, OnInit {
     this.searchCtrl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
-        this.searchClinics(query)
+        void this.searchClinics(query)
       })
   }
 
@@ -153,7 +153,7 @@ export class MenubarComponent implements OnDestroy, OnInit {
       this.context.organization
     )
 
-    this.user.logout().then(() => {
+    void this.user.logout().then(() => {
       this.auth.redirect(loginSite)
     })
   }

@@ -332,7 +332,7 @@ export class TwilioService {
     if (deviceId !== this.selectedVideoInputDevice) {
       this.selectedVideoInputDevice = deviceId
       this.disableCamera()
-      this.enableCamera()
+      void this.enableCamera()
     }
   }
 
@@ -340,7 +340,7 @@ export class TwilioService {
     if (deviceId !== this.selectedAudioInputDevice) {
       this.selectedAudioInputDevice = deviceId
       this.disableMicrophone()
-      this.enableMicrophone()
+      void this.enableMicrophone()
     }
   }
 
@@ -509,7 +509,7 @@ export class TwilioService {
     })
 
     participant.on('trackSubscribed', (track) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -552,7 +552,7 @@ export class TwilioService {
     })
 
     participant.on('trackUnsubscribed', (track) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',

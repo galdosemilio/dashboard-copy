@@ -52,7 +52,7 @@ export class OrganizationsFormComponent implements OnInit {
       }
 
       // setup the FormGroup
-      this.createForms()
+      void this.createForms()
       if (this.item) {
         // fill the form
         this.form.patchValue(this.item)
@@ -119,7 +119,7 @@ export class OrganizationsFormComponent implements OnInit {
 
       await Promise.all([this.resolveBillingPlans(), this.resolveEntities()])
 
-      this.resolveBillingStatus()
+      void this.resolveBillingStatus()
     } catch (error) {
       this.notifier.error(error)
     }
@@ -167,7 +167,7 @@ export class OrganizationsFormComponent implements OnInit {
       await this.organization.createBillingRecord(billingUpdatePayload)
 
       this.notifier.success(_('NOTIFY.SUCCESS.ORG_CREATED'))
-      this.router.navigate([this.routes.single(res.id)])
+      void this.router.navigate([this.routes.single(res.id)])
     } catch (error) {
       this.notifier.error(error)
     }
@@ -232,7 +232,7 @@ export class OrganizationsFormComponent implements OnInit {
     await this.database.update(FormUtils.pruneEmpty(formValue))
 
     this.notifier.success(_('NOTIFY.SUCCESS.ORG_UPDATED'))
-    this.router.navigate([this.routes.single(this.id as string)], {
+    void this.router.navigate([this.routes.single(this.id as string)], {
       queryParams: { updated: new Date().getTime() }
     })
   }
@@ -240,10 +240,10 @@ export class OrganizationsFormComponent implements OnInit {
   onCancel() {
     if (!this.id) {
       // create
-      this.router.navigate([this.routes.list()])
+      void this.router.navigate([this.routes.list()])
     } else {
       // update
-      this.router.navigate([this.routes.single(this.id as string)])
+      void this.router.navigate([this.routes.single(this.id as string)])
     }
   }
 

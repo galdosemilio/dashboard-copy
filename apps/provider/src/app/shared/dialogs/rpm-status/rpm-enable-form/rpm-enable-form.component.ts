@@ -145,7 +145,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
         if (!orgId) {
           return
         }
-        this.resolveOrgSettings(orgId)
+        void this.resolveOrgSettings(orgId)
       })
   }
 

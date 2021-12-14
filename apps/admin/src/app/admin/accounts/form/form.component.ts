@@ -68,7 +68,7 @@ export class AccountFormComponent implements OnInit {
       this.readonly = data.readonly ? true : false
 
       if (this.id) {
-        this.resolveMFAInstance()
+        void this.resolveMFAInstance()
       }
     })
   }
@@ -103,7 +103,7 @@ export class AccountFormComponent implements OnInit {
     try {
       const response = await this.dialogs.deactivateMFA(this.mfaInstance)
       if (response) {
-        this.resolveMFAInstance()
+        void this.resolveMFAInstance()
       }
     } catch (error) {
       this.notifier.error(error)
@@ -128,7 +128,7 @@ export class AccountFormComponent implements OnInit {
         .create(FormUtils.pruneEmpty(formValue))
         .then((res) => {
           this.notifier.success(_('NOTIFY.SUCCESS.ACC_CREATED'))
-          this.router.navigate(['../', res.id], { relativeTo: this.route })
+          void this.router.navigate(['../', res.id], { relativeTo: this.route })
         })
         .catch((err) => this.notifier.error(err))
     } else {
@@ -155,7 +155,7 @@ export class AccountFormComponent implements OnInit {
         .update(FormUtils.pruneEmpty(formValue))
         .then((res) => {
           this.notifier.success(_('NOTIFY.SUCCESS.ACC_UPDATED'))
-          this.router.navigate(['../'], {
+          void this.router.navigate(['../'], {
             relativeTo: this.route,
             queryParams: { updated: new Date().getTime() }
           })
@@ -169,10 +169,10 @@ export class AccountFormComponent implements OnInit {
   onCancel() {
     if (!this.id) {
       // create
-      this.router.navigate([this.routes.list(this.accountType as any)]) // MERGETODO: CHECK THIS TYPE!!!
+      void this.router.navigate([this.routes.list(this.accountType as any)]) // MERGETODO: CHECK THIS TYPE!!!
     } else {
       // update
-      this.router.navigate(['../'], { relativeTo: this.route })
+      void this.router.navigate(['../'], { relativeTo: this.route })
     }
   }
 

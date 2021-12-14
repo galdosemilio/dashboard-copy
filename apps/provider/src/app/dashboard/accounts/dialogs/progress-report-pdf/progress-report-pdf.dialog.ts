@@ -94,7 +94,7 @@ export class ProgressReportPDFDialog implements OnInit {
 
   ngOnInit(): void {
     this.createForm()
-    this.fetchAccount()
+    void this.fetchAccount()
     this.fetchColors()
     this.yearWeeks = this.calculateYearWeeks()
 

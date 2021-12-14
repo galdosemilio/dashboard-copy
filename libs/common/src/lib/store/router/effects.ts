@@ -27,7 +27,7 @@ export class RouterEffects {
     map((action) => action.payload),
     tap(({ path, query: queryParams, extras }) => {
       const navExtras: NavigationExtras = { queryParams, ...extras }
-      this.router.navigate(path, navExtras)
+      void this.router.navigate(path, navExtras)
     })
   )
 

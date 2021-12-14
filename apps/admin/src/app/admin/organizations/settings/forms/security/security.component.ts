@@ -122,7 +122,7 @@ export class SecurityComponent implements OnDestroy, OnInit {
       this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
       if (this.mfaInput) {
         this.firstLoad = false
-        this.mfaInput.reload()
+        void this.mfaInput.reload()
       }
     } catch (error) {
       this.notifier.error(error)
@@ -138,7 +138,7 @@ export class SecurityComponent implements OnDestroy, OnInit {
           .pipe(untilDestroyed(this), debounceTime(500))
           .subscribe(() => {
             if (this.firstLoad) {
-              this.onSubmit()
+              void this.onSubmit()
             } else {
               this.firstLoad = true
             }

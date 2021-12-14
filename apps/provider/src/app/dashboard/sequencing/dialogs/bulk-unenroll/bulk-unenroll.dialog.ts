@@ -91,7 +91,7 @@ export class BulkUnenrollDialog implements OnInit {
   public onOrgSelect($event: OrganizationEntity): void {
     if (typeof $event === 'object' && $event.id) {
       this.selectedOrg = $event
-      this.fetchOrgChildren(this.selectedOrg.id)
+      void this.fetchOrgChildren(this.selectedOrg.id)
       this.form.controls.organization.setValue(this.selectedOrg.id)
     }
   }

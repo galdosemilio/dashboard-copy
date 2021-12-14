@@ -17,11 +17,11 @@ export class CoachResolver implements Resolve<AccSingleResponse> {
     const id = route.params['id']
     try {
       if (!this.context.organization.permissions.admin) {
-        this.router.navigate(['/accounts/coaches'])
+        void this.router.navigate(['/accounts/coaches'])
       }
 
       if (this.context.user.id === id) {
-        this.router.navigate(['/profile'])
+        void this.router.navigate(['/profile'])
       }
 
       const acc = await this.account.getSingle(id)
@@ -34,10 +34,10 @@ export class CoachResolver implements Resolve<AccSingleResponse> {
             this.context.account = coach
             return acc
           } else {
-            this.router.navigate(['/accounts/coaches'])
+            void this.router.navigate(['/accounts/coaches'])
           }
         } catch (e) {
-          this.router.navigate(['/accounts/coaches'])
+          void this.router.navigate(['/accounts/coaches'])
         }
       } else {
         return acc

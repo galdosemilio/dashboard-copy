@@ -35,7 +35,7 @@ export class LevlComponent implements OnInit {
       s: this.component,
       v: this.view === 'table' ? 'chart' : 'table'
     }
-    this.router.navigate(['.', params], {
+    void this.router.navigate(['.', params], {
       relativeTo: this.route
     })
   }

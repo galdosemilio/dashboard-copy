@@ -24,7 +24,7 @@ export class AppElement extends HTMLElement {
     `
 
     document.addEventListener('message', (event: Event) => {
-      this.onMessage(JSON.parse(event['data']) as BaseData)
+      void this.onMessage(JSON.parse(event['data']) as BaseData)
     })
 
     if (!window.location.search) {
@@ -55,7 +55,7 @@ export class AppElement extends HTMLElement {
       sourceId: params.get('sourceId') || undefined
     }
 
-    this.onMessage(data)
+    void this.onMessage(data)
   }
 
   private async onMessage(data: BaseData) {

@@ -38,7 +38,7 @@ export class AddDaysheetDialog implements AfterViewInit, OnInit {
   ) {}
 
   ngAfterViewInit(): void {
-    this.fetchForm()
+    void this.fetchForm()
   }
 
   ngOnInit(): void {

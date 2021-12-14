@@ -94,7 +94,7 @@ export class CallEffects {
     map((action) => (action as callAction.InitiateCall).payload),
     flatMap((payload) => {
       const actionGroup = []
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -186,7 +186,7 @@ export class CallEffects {
     map((action) => (action as callAction.ReceiveCall).payload),
     flatMap((payload) => {
       const actions = []
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -395,7 +395,7 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap((updateCallRequest) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -881,7 +881,7 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap((payload) => {
-      this.interaction.createCallEvent({
+      void this.interaction.createCallEvent({
         id: payload,
         event: 'aborted'
       })
@@ -893,7 +893,7 @@ export class CallEffects {
     ofType(callAction.ACCEPT_CALL),
     debounceTime(300),
     switchMap(() => {
-      this.interaction.createCallEvent({
+      void this.interaction.createCallEvent({
         id: this.callState.callId,
         event: 'participant-joined'
       })
@@ -913,7 +913,7 @@ export class CallEffects {
     debounceTime(300),
     map((action) => (action as any).payload),
     tap((payload) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -923,7 +923,7 @@ export class CallEffects {
         }
       })
 
-      this.interaction.createCallEvent({
+      void this.interaction.createCallEvent({
         id: payload,
         event: 'declined'
       })
@@ -937,7 +937,7 @@ export class CallEffects {
     skip(1),
     debounceTime(300),
     switchMap((decline) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -957,7 +957,7 @@ export class CallEffects {
     skip(1),
     debounceTime(300),
     switchMap((data) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -991,7 +991,7 @@ export class CallEffects {
     debounceTime(300),
     flatMap((participant) => {
       const actions = []
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -1065,7 +1065,7 @@ export class CallEffects {
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -1083,7 +1083,7 @@ export class CallEffects {
     skip(1),
     debounceTime(300),
     switchMap((participant) => {
-      this.logging.log({
+      void this.logging.log({
         logLevel: 'info',
         data: {
           type: 'videoconferencing',
@@ -1297,7 +1297,7 @@ export class CallEffects {
   recoverCall$: Observable<Action> = this.actions$.pipe(
     ofType(callAction.RECOVER_CALL),
     tap(() => {
-      this.callLayoutService.recoverCall()
+      void this.callLayoutService.recoverCall()
     })
   )
 

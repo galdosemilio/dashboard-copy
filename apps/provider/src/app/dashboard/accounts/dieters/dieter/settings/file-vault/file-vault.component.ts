@@ -44,7 +44,7 @@ export class DieterFileVaultComponent implements OnInit {
     this.source.addOptional(this.singleOrg$, () => ({
       organization: this.singleOrg?.id
     }))
-    this.fetchAccessibleOrganizations()
+    void this.fetchAccessibleOrganizations()
   }
 
   async selectOrganization(org: any) {

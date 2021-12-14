@@ -97,7 +97,9 @@ export class CcrLinkActiveDirective
           this.renderer.removeClass(this.element.nativeElement, c)
         }
       })
-      Promise.resolve(hasActiveLinks).then((active) => (this.active = active))
+      void Promise.resolve(hasActiveLinks).then(
+        (active) => (this.active = active)
+      )
     }
   }
 

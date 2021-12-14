@@ -64,7 +64,7 @@ export class DieterGoalsComponent implements BindForm, OnInit {
   public ngOnInit(): void {
     this.dieterId = +this.context.accountId
     this.createForm()
-    this.loadGoals()
+    void this.loadGoals()
     this.bus.trigger('right-panel.component.set', 'reminders')
   }
 

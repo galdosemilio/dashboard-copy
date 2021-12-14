@@ -58,7 +58,7 @@ export class RPMComponent implements AfterViewInit, OnInit {
   }
 
   async ngOnInit() {
-    this.refresh()
+    void this.refresh()
   }
 
   openStatusDialog() {
@@ -85,7 +85,7 @@ export class RPMComponent implements AfterViewInit, OnInit {
       )
       .subscribe(() => {
         this.rpmStatusChange.emit()
-        this.refresh()
+        void this.refresh()
       })
   }
 

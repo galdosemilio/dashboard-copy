@@ -44,7 +44,7 @@ export class WellcoreDashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.resolveFirstLabel()
+    void this.resolveFirstLabel()
 
     this.context.organization$
       .pipe(untilDestroyed(this))

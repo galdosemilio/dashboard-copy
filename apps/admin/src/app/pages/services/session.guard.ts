@@ -60,7 +60,7 @@ export class SessionGuard implements CanLoad, CanActivate {
         if (session.loggedIn) {
           switch (session.account) {
             case 'admin':
-              this.router.navigate([`/${session.account}`])
+              void this.router.navigate([`/${session.account}`])
               break
             default:
               this.auth.login(session.account as CcrRol)

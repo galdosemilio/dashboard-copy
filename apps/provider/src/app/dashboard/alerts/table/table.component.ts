@@ -46,7 +46,7 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
       this.canAccessPhi =
         org && org.permissions ? org.permissions.allowClientPhi : false
       this.canViewAll = org && org.permissions ? org.permissions.viewAll : false
-      this.fetchAlertTypes()
+      void this.fetchAlertTypes()
     })
   }
 
@@ -73,7 +73,7 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
       )
     } else {
       account.accountType = '3'
-      this.router.navigate([this.context.getProfileRoute(account)])
+      void this.router.navigate([this.context.getProfileRoute(account)])
     }
   }
 

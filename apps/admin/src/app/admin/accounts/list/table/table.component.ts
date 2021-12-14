@@ -46,13 +46,13 @@ export class AccountsTableComponent implements OnInit, OnDestroy {
   }
 
   onDisplay(row: AccountFullData) {
-    this.router.navigate([
+    void this.router.navigate([
       this.routes.single(row.accountType.id as AccountTypeId, row.id)
     ])
   }
 
   onEdit(row: AccountFullData) {
-    this.router.navigate([
+    void this.router.navigate([
       this.routes.edit(row.accountType.id as AccountTypeId, row.id)
     ])
   }

@@ -42,8 +42,8 @@ export class ClinicSettingsComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.createForm()
-    this.resolveAdminPerm()
-    this.fetchOrganizationPreferences()
+    void this.resolveAdminPerm()
+    void this.fetchOrganizationPreferences()
   }
 
   private createForm(): void {

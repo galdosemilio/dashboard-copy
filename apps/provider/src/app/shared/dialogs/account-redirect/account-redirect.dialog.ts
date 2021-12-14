@@ -35,14 +35,18 @@ export class AccountRedirectDialog implements OnInit {
 
   goToAssociationListing(): void {
     if (this.accountType === AccountTypeId.Client) {
-      this.router.navigate([
+      void this.router.navigate([
         '/accounts/patients',
         this.accountId,
         'settings',
         { s: 'associations' }
       ])
     } else if (this.accountType === AccountTypeId.Provider) {
-      this.router.navigate(['/accounts/coaches', this.accountId, 'profile'])
+      void this.router.navigate([
+        '/accounts/coaches',
+        this.accountId,
+        'profile'
+      ])
     }
 
     this.dialog.close()

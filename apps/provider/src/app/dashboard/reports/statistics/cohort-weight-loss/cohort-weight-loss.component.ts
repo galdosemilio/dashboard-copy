@@ -74,7 +74,7 @@ export class CohortWeightLossComponent
     )
 
     if (!showCohortWeightLossReport) {
-      this.router.navigate(['.'], { relativeTo: this.activeRoute.parent })
+      void this.router.navigate(['.'], { relativeTo: this.activeRoute.parent })
     }
 
     this.source = new CohortWeightLossDataSource(
@@ -117,7 +117,7 @@ export class CohortWeightLossComponent
     const criteria = this.source.args
     criteria.limit = 'all'
     criteria.offset = 0
-    this.database.fetchMeasurementCohortReport(criteria).then((res) => {
+    void this.database.fetchMeasurementCohortReport(criteria).then((res) => {
       if (!res.data.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }

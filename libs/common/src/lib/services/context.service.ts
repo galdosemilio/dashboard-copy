@@ -342,7 +342,7 @@ export class ContextService {
   )
 
   set organization(organization: SelectedOrganization) {
-    this.updateOrganization(organization)
+    void this.updateOrganization(organization)
   }
   get organization(): SelectedOrganization {
     return this.organization$.getValue()
@@ -354,7 +354,7 @@ export class ContextService {
     if (this.organizations.length) {
       // if organizations are loaded, update preferences and assets
       const organization = this.organizations.find((o) => o.id === id)
-      this.updateOrganization(organization)
+      void this.updateOrganization(organization)
     } else {
       // direct assign for guests
       this._organizationId = id

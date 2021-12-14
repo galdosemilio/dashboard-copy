@@ -80,7 +80,7 @@ export class FormsTableComponent {
   }
 
   onDisplayForm(form: Form): void {
-    this.router.navigate([form.id], { relativeTo: this.route })
+    void this.router.navigate([form.id], { relativeTo: this.route })
   }
 
   onDeleteForm(form: Form): void {
@@ -92,17 +92,19 @@ export class FormsTableComponent {
   }
 
   onFillForm(form: Form): void {
-    this.router.navigate([form.id, 'fill'], { relativeTo: this.route })
+    void this.router.navigate([form.id, 'fill'], { relativeTo: this.route })
   }
 
   onShowForm(form: Form): void {
     if (form.isAdmin && form.canFetchSubmissions) {
-      this.router.navigate([form.id, 'edit'], { relativeTo: this.route })
+      void this.router.navigate([form.id, 'edit'], { relativeTo: this.route })
     }
   }
 
   onViewFormSubmissions(form: Form): void {
-    this.router.navigate([form.id, 'submissions'], { relativeTo: this.route })
+    void this.router.navigate([form.id, 'submissions'], {
+      relativeTo: this.route
+    })
   }
 
   onSort(sort: Sort): void {
@@ -123,7 +125,7 @@ export class FormsTableComponent {
 
   async onGeneratePDF(form: Form) {
     const detailedForm = await this.getFormData(form)
-    this.generatePdf(detailedForm)
+    void this.generatePdf(detailedForm)
   }
 
   private async getFormData(form: Form): Promise<Form> {

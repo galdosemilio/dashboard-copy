@@ -65,7 +65,7 @@ export class MenuComponent implements OnInit {
   }
 
   updateUnread() {
-    Promise.all([this.messaging.getUnread()]).then(([threads]) => {
+    void Promise.all([this.messaging.getUnread()]).then(([threads]) => {
       // update the unread threads
       const m = findIndex(this.menuItems, { navRoute: 'messages' })
       if (this.menuItems[m].unread !== threads.unreadThreadsCount) {

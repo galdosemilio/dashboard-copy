@@ -86,7 +86,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
       .update(updateRequest)
       .then(() => {
         this.notifier.success(_('NOTIFY.SUCCESS.PROFILE_UPDATED'))
-        this.context.updateUser()
+        void this.context.updateUser()
         this.isSaving = false
       })
       .catch((err) => {

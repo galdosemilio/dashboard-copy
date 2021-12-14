@@ -100,7 +100,7 @@ export class ScheduleParticipantsInputComponent implements OnInit {
         }
 
         if (query) {
-          this.searchAccounts(query)
+          void this.searchAccounts(query)
         } else {
           this.trigger.closePanel()
         }

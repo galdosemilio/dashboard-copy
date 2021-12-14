@@ -174,7 +174,7 @@ export class ListElement extends CcrElement {
       wrapper.scrollTop + wrapper.offsetHeight >= content.offsetHeight - 60 &&
       !this._loading
     ) {
-      this.loadList()
+      void this.loadList()
     }
   }
 
@@ -272,7 +272,7 @@ export class ListElement extends CcrElement {
     document.getElementById('list-content').innerText = ''
     eventService.trigger('list.no-previous-entries', false)
     eventService.trigger('list.refresh')
-    this.loadList()
+    void this.loadList()
   }
 
   private async loadList() {

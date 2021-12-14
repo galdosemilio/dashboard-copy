@@ -51,14 +51,14 @@ export class OrganizationsTableComponent implements OnInit, OnDestroy {
   onDisplay(row: OrgEntityExtended) {
     // TODO change this when getSingle is available for Admins
     if (row.isActive) {
-      this.router.navigate([this.routes.single(row.id)])
+      void this.router.navigate([this.routes.single(row.id)])
     }
   }
 
   onEdit(row: OrgEntityExtended) {
     // TODO change this when getSingle is available for Admins
     if (row.isActive) {
-      this.router.navigate([this.routes.edit(row.id)])
+      void this.router.navigate([this.routes.edit(row.id)])
     }
   }
 

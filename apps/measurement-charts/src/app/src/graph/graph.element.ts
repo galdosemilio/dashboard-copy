@@ -443,7 +443,7 @@ export class GraphElement extends CcrElement {
       )
       this.firstTime = false
       this.rangeChangeBumper = true
-      this.scaleChart()
+      void this.scaleChart()
 
       // TODO: investigate how to detect that the chart has finished resizing
       setTimeout(() => {
@@ -567,7 +567,7 @@ export class GraphElement extends CcrElement {
             this.emptyPeriodCount = 0
             this.rangeChangeBumper = false
             this.dateRange = dateRange
-            this.fetchMeasurements()
+            void this.fetchMeasurements()
           }
         }),
       eventService

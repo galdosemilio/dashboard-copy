@@ -96,7 +96,7 @@ export class CcrAccountAssociationsComponent implements OnInit {
         }
         this.results = results
       })
-    this.checkIfProviderHasAdmin()
+    void this.checkIfProviderHasAdmin()
   }
 
   onAddAssociation(): void {

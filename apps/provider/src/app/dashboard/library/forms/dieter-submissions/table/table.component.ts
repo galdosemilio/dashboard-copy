@@ -35,7 +35,7 @@ export class DieterSubmissionsTableComponent {
   ) {}
 
   onGoToProviderProfile(formSubmission: FormSubmission) {
-    this.router.navigate([
+    void this.router.navigate([
       '/accounts/coaches/',
       formSubmission.submittedBy.id,
       'profile'
@@ -71,6 +71,6 @@ export class DieterSubmissionsTableComponent {
   }
 
   async onGeneratePDF(submission: FormSubmission): Promise<void> {
-    this.formPDFService.generatePDF(submission)
+    void this.formPDFService.generatePDF(submission)
   }
 }

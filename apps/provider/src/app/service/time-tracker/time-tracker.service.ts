@@ -38,7 +38,7 @@ export class TimeTrackerService implements OnDestroy {
     this.router.events
       .pipe(untilDestroyed(this))
       .subscribe(this.routeEventHandler)
-    this.commitStashedTime()
+    void this.commitStashedTime()
     this.context.organization$
       .pipe(untilDestroyed(this))
       .subscribe(async () => {

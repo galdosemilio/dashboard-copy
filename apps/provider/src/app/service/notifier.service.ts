@@ -72,7 +72,7 @@ export class NotifierService {
       ...options
     })
     if (options.log) {
-      this.logging.log({ logLevel: 'info', data: options.data })
+      void this.logging.log({ logLevel: 'info', data: options.data })
     }
   }
 
@@ -82,7 +82,7 @@ export class NotifierService {
       ...options
     })
     if (options.log) {
-      this.logging.log({ logLevel: 'info', data: options.data })
+      void this.logging.log({ logLevel: 'info', data: options.data })
     }
   }
 
@@ -92,7 +92,7 @@ export class NotifierService {
       ...options
     })
     if (options.log) {
-      this.logging.log({ logLevel: 'warn', data: options.data })
+      void this.logging.log({ logLevel: 'warn', data: options.data })
     }
   }
 
@@ -102,7 +102,7 @@ export class NotifierService {
       ...options
     })
     if (options.log) {
-      this.logging.log({ logLevel: 'error', data: options.data })
+      void this.logging.log({ logLevel: 'error', data: options.data })
     }
   }
 

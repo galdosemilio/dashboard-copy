@@ -21,7 +21,7 @@ export class OrganizationResolver
       .then((org) => org)
       .catch(() => {
         // TODO log error
-        this.router.navigate([this.routes.list()])
+        void this.router.navigate([this.routes.list()])
         return null
       })
   }

@@ -201,7 +201,7 @@ export class OrganizationAutocompleterComponent
 
   // TODO support admin and non-admin queries
   fetch(args: Partial<OrgAccessRequest>): void {
-    this.organization
+    void this.organization
       .getAll({
         name: args.query,
         limit: 5,

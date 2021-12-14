@@ -66,7 +66,7 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.createForm()
-    this.getCoaches()
+    void this.getCoaches()
   }
 
   ngOnDestroy() {}
@@ -148,7 +148,7 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
     this.form.controls.date.valueChanges
       .pipe(untilDestroyed(this), debounceTime(500))
       .subscribe(() => {
-        this.getTimeSlots()
+        void this.getTimeSlots()
       })
   }
 
@@ -260,7 +260,7 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
       }
 
       await this.schedule.addMeeting(newMeeting)
-      this.router.navigate(['/dashboard'])
+      void this.router.navigate(['/dashboard'])
       this.notifier.success(_('NOTIFY.SUCCESS.APPOINTMENT_BOOKED'))
     } catch (err) {
       this.notifier.error(err)

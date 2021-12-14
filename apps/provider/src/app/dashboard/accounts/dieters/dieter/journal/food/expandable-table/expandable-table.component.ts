@@ -192,7 +192,7 @@ export class FoodExpandableTable implements OnInit {
         this.rows.forEach((t, index) => {
           if (index < startIndex || index > endIndex) return
 
-          this.fetchAndLoadServings(row.meals.filter((m) => m.id))
+          void this.fetchAndLoadServings(row.meals.filter((m) => m.id))
 
           if (t.level === 2) {
             t.isHidden = row.isExpanded ? false : true

@@ -35,7 +35,7 @@ export class ClinicPhasesComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.createDatasource()
-    this.resolveAdminPerm()
+    void this.resolveAdminPerm()
     this.context.clinic$
       .pipe(untilDestroyed(this))
       .subscribe((clinic) => (this.clinic = clinic))

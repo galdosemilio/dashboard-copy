@@ -230,7 +230,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   public prevStep(): void {
     if (this.stepper.selectedIndex === 0) {
       if (this.firstStepMode === 'signup') {
-        this.router.navigate(['/wellcore/cart'])
+        void this.router.navigate(['/wellcore/cart'])
       } else {
         this.firstStepMode = 'signup'
       }

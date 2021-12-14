@@ -93,7 +93,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       (account.accountType.id === '2' && this.admin)
     ) {
       this.accounts = []
-      this.router.navigate([this.context.getProfileRoute(account)])
+      void this.router.navigate([this.context.getProfileRoute(account)])
     }
   }
 

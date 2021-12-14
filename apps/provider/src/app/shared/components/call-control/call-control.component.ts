@@ -156,7 +156,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
           })
           break
         case AccountAvailabilityStatus.EXPIRED:
-          this.showExpiredDialog()
+          void this.showExpiredDialog()
           break
       }
     } catch (error) {

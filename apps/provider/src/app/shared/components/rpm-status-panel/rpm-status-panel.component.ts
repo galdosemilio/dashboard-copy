@@ -52,7 +52,7 @@ export class RPMStatusPanelComponent implements OnInit {
   }
 
   public onRefresh(): void {
-    this.fetchRPMBillingStatus()
+    void this.fetchRPMBillingStatus()
   }
 
   private async fetchRPMBillingStatus(): Promise<void> {

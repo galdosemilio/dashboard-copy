@@ -17,7 +17,7 @@ export class AvailabilityManagementService {
 
   public init(): void {
     this.context.organization$.subscribe((org) => {
-      this.checkDisabledAvailabilityManagement(org.id)
+      void this.checkDisabledAvailabilityManagement(org.id)
     })
   }
 

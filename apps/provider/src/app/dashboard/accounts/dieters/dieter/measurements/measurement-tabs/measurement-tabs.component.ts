@@ -23,7 +23,7 @@ export class MeasurementTabsComponent implements OnInit {
   constructor(private measurementLabel: MeasurementLabelService) {}
 
   public ngOnInit(): void {
-    this.fetchMeasurementLabels()
+    void this.fetchMeasurementLabels()
   }
 
   public onSelectTab(label: ExtendedMeasurementLabelEntry | string): void {

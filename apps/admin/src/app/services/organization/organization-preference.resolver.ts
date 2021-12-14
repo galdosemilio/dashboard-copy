@@ -26,7 +26,7 @@ export class OrganizationPreferenceResolver
       .then((preferences) => preferences)
       .catch(() => {
         // TODO log error
-        this.router.navigate([this.routes.list()])
+        void this.router.navigate([this.routes.list()])
         return null
       })
   }

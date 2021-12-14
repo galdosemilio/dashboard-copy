@@ -239,7 +239,7 @@ export class PasswordUpdatePageComponent implements OnInit {
     })
 
     dialogConfirm.afterClosed().subscribe(() => {
-      this.router.navigate(
+      void this.router.navigate(
         ['/'],
         this.accountType
           ? { queryParams: { accountType: this.accountType } }

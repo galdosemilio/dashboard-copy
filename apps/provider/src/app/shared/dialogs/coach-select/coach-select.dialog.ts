@@ -75,7 +75,7 @@ export class CoachSelectDialog implements OnInit {
     this.selectedCoach = coach
 
     // get organizations to which this coach account belongs.  Calculate any intersect of this coach's org associations to the select org's hierarchy path.  If the selectionOrganization loaded (is not undefined) AND there is at least one intersection, the account should be addable
-    this.account
+    void this.account
       .getList({
         account: this.selectedCoach.id
       })

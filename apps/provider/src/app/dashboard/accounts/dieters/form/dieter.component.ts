@@ -131,7 +131,7 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
         'PATIENT_FORM.SHOW_ACC_IDN_INPUT_CREATE',
         this.context.organization
       )
-    this.resolvePackageAmount()
+    void this.resolvePackageAmount()
   }
 
   ngOnDestroy() {}

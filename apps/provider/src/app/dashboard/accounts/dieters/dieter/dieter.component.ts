@@ -46,9 +46,9 @@ export class DieterComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
-    this.sendWarmupNotification()
-    this.data.init(this.context.accountId)
-    this.route.data.forEach((data: any) => {
+    void this.sendWarmupNotification()
+    void this.data.init(this.context.accountId)
+    void this.route.data.forEach((data: any) => {
       this.dieter = data.account
     })
 
@@ -74,8 +74,8 @@ export class DieterComponent implements OnDestroy, OnInit {
           organization
         )
 
-        this.resolvePatientForeigness()
-        this.resolvePatientRPMStatus()
+        void this.resolvePatientForeigness()
+        void this.resolvePatientRPMStatus()
       })
   }
 

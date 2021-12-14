@@ -37,11 +37,13 @@ export class LabelsTableComponent implements OnInit, OnDestroy {
   }
 
   onDisplay(row: PackageSingle): void {
-    this.router.navigate([row.id], { relativeTo: this.route })
+    void this.router.navigate([row.id], { relativeTo: this.route })
   }
 
   onEdit(row: PackageSingle): void {
-    this.router.navigate([row.id, 'info', 'edit'], { relativeTo: this.route })
+    void this.router.navigate([row.id, 'info', 'edit'], {
+      relativeTo: this.route
+    })
   }
 
   onActivate(row: PackageSingle) {

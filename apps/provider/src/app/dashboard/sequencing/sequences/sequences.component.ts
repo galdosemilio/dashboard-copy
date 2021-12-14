@@ -43,7 +43,7 @@ export class SequencesComponent implements OnDestroy, OnInit {
   }
 
   createSequence(): void {
-    this.router.navigate(['new'], { relativeTo: this.route })
+    void this.router.navigate(['new'], { relativeTo: this.route })
   }
 
   private createDataSource(): void {

@@ -132,7 +132,7 @@ export class DietersTableComponent implements OnInit, OnDestroy {
           '_blank'
         )
       } else {
-        this.router.navigate(['/accounts/patients', dieter.id])
+        void this.router.navigate(['/accounts/patients', dieter.id])
         if (this.canAccessPhi) {
           this.onSelected.emit(dieter)
           if (this.defaultClickAction) {
@@ -145,7 +145,7 @@ export class DietersTableComponent implements OnInit, OnDestroy {
                 '_blank'
               )
             } else {
-              this.router.navigate(['/accounts/patients', dieter.id])
+              void this.router.navigate(['/accounts/patients', dieter.id])
             }
           }
         }

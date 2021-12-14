@@ -79,7 +79,7 @@ export class SequenceComponent implements OnDestroy, OnInit {
     this.form = this.fb.group({ sequence: [null, Validators.required] })
     this.subscribeToForm()
     this.fetchResolvedData()
-    this.fetchAdminPermissions()
+    void this.fetchAdminPermissions()
   }
 
   public deleteSequence(): void {
@@ -128,7 +128,11 @@ export class SequenceComponent implements OnDestroy, OnInit {
       this.sequence = undefined
       this.cdr.detectChanges()
       this.sequence = sequence
-      this.router.navigate(['/sequences/sequence', sequence.id, { s: 'edit' }])
+      void this.router.navigate([
+        '/sequences/sequence',
+        sequence.id,
+        { s: 'edit' }
+      ])
       this.form = this.fb.group({ sequence: [null, Validators.required] })
       this.subscribeToForm()
       this.form.controls.sequence.setValue(sequence)

@@ -18,7 +18,7 @@ export class CcrMicLevelIndicatorComponent implements OnDestroy, OnInit {
     this._deviceId = id
 
     if (id) {
-      this.refreshAudioPreview()
+      void this.refreshAudioPreview()
     } else {
       this.disableAudioPreview()
     }

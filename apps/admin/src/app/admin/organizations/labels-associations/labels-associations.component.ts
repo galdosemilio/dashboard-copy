@@ -78,7 +78,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.subscribeToRoute()
-    this.fetchAllLabels()
+    void this.fetchAllLabels()
     this.createForm()
   }
 
@@ -270,7 +270,11 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
   }
 
   public onGoToPhasePage(association: PackageAssociationElement): void {
-    this.router.navigate(['/admin/labels/', association.package.id, 'info'])
+    void this.router.navigate([
+      '/admin/labels/',
+      association.package.id,
+      'info'
+    ])
   }
 
   public onSelectOption($event: MatAutocompleteSelectedEvent) {
@@ -287,7 +291,7 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
       .pipe(filter((result) => result && result.id))
       .subscribe((result) => {
         this.selectedLabelId = result.id
-        this.associate()
+        void this.associate()
       })
   }
 

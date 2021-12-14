@@ -40,7 +40,7 @@ export class FormSubmissionsTableComponent {
 
   onGoToPatientProfile(formSubmission: FormSubmission) {
     if (formSubmission.account.id !== formSubmission.submittedBy.id) {
-      this.router.navigate([
+      void this.router.navigate([
         '/accounts/patients/',
         formSubmission.account.id,
         'dashboard'
@@ -55,7 +55,7 @@ export class FormSubmissionsTableComponent {
       const acc = await this.account.getSingle(formSubmission.submittedBy.id)
 
       if (acc.id === this.context.user.id) {
-        this.router.navigate(['/profile'])
+        void this.router.navigate(['/profile'])
         return
       }
 
@@ -68,7 +68,7 @@ export class FormSubmissionsTableComponent {
       if (account) {
         switch (account.accountType.id) {
           case '2':
-            this.router.navigate([
+            void this.router.navigate([
               '/accounts/coaches/',
               formSubmission.submittedBy.id,
               'profile'
@@ -76,7 +76,7 @@ export class FormSubmissionsTableComponent {
             break
 
           case '3':
-            this.router.navigate([
+            void this.router.navigate([
               '/accounts/patients/',
               formSubmission.submittedBy.id,
               'dashboard'
@@ -119,10 +119,10 @@ export class FormSubmissionsTableComponent {
   }
 
   onViewForm(formSubmission: FormSubmission): void {
-    this.router.navigate([formSubmission.id], { relativeTo: this.route })
+    void this.router.navigate([formSubmission.id], { relativeTo: this.route })
   }
 
   async onGeneratePDF(formSubmission: FormSubmission): Promise<void> {
-    this.formPDFService.generatePDF(formSubmission)
+    void this.formPDFService.generatePDF(formSubmission)
   }
 }

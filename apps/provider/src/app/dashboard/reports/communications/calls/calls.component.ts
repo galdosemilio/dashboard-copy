@@ -124,7 +124,7 @@ export class CallsComponent implements OnInit {
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.clinic = org
       this.refreshShownColumns()
-      this.resolveBillableServices()
+      void this.resolveBillableServices()
     })
 
     if (!this.listenToReportCriteria) {
@@ -266,7 +266,7 @@ export class CallsComponent implements OnInit {
             this.downloadCount$.next(page + 1)
             this.download$.next(page + 1)
           } else {
-            this.download()
+            void this.download()
             dialog.close()
           }
         },
@@ -413,7 +413,7 @@ export class CallsComponent implements OnInit {
       })
       .afterClosed()
       .pipe(filter((confirm) => confirm))
-      .subscribe(() => this.removeInteraction(interaction))
+      .subscribe(() => void this.removeInteraction(interaction))
   }
 
   private async handleDownload$(page: number): Promise<void> {

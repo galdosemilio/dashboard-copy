@@ -45,7 +45,7 @@ export class MetricsComponent implements OnDestroy, OnInit {
       v: view
     }
 
-    this.router.navigate(['.', params], { relativeTo: this.route })
+    void this.router.navigate(['.', params], { relativeTo: this.route })
   }
 
   private createSources(): void {

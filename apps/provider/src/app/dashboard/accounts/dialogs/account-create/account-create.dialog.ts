@@ -151,7 +151,7 @@ export class AccountCreateDialog implements BindForm, OnInit {
                       organization: c.clinicId
                     })
                     .then(() => {
-                      this.affiliation.update({
+                      void this.affiliation.update({
                         account: data.id,
                         organization: c.clinicId,
                         permissions: {

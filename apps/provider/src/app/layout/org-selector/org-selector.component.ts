@@ -59,7 +59,7 @@ export class SidenavOrgSelectorComponent
           this.searchNext &&
           target.offsetHeight + target.scrollTop >= target.scrollHeight * 0.75
         ) {
-          this.searchClinics(this.searchQuery)
+          void this.searchClinics(this.searchQuery)
         }
       })
   }
@@ -91,10 +91,10 @@ export class SidenavOrgSelectorComponent
         this.menuContainer.scrollTop = 0
         this.searchQuery = query.trim() || undefined
         this.searchNext = 0
-        this.searchClinics(this.searchQuery)
+        void this.searchClinics(this.searchQuery)
       })
 
-    this.searchClinics(this.searchQuery)
+    void this.searchClinics(this.searchQuery)
   }
 
   private async searchClinics(query: string) {

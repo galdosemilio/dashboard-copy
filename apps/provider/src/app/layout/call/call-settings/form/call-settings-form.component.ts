@@ -167,8 +167,8 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
     this.formValueChangesSub = this.form.valueChanges
       .pipe(untilDestroyed(this), debounceTime(300))
       .subscribe((controls) => {
-        this.updateVideoPreview(controls.selectedVideoInputDevice)
-        this.updateAudioPreview(controls.selectedAudioInputDevice)
+        void this.updateVideoPreview(controls.selectedVideoInputDevice)
+        void this.updateAudioPreview(controls.selectedAudioInputDevice)
         this.previewState.audioOutput.deviceId =
           controls.selectedAudioOutputDevice
         this.onApply$.next()

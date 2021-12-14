@@ -24,7 +24,7 @@ export class LabelResolver implements Resolve<PackageSingle> {
       })
       .catch(() => {
         // TODO notify error
-        this.router.navigate(['/packages'])
+        void this.router.navigate(['/packages'])
         return Promise.reject(null)
       })
   }

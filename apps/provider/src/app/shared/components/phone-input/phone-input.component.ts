@@ -61,7 +61,7 @@ export class PhoneInputComponent
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.resolveCountryCodes()
+    void this.resolveCountryCodes()
     this.createForm()
     this.listenToLangChanges()
   }

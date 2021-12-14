@@ -154,7 +154,7 @@ export class ContentComponent implements OnDestroy, OnInit {
       .afterClosed()
       .pipe(filter((queuedContents) => queuedContents && queuedContents.length))
       .subscribe(async (queuedContents: QueuedContent[]) => {
-        this.contentUpload.createContents(queuedContents)
+        void this.contentUpload.createContents(queuedContents)
       })
   }
 
@@ -357,7 +357,7 @@ export class ContentComponent implements OnDestroy, OnInit {
     )
     this.subscriptions.copyContent = this.events.copyContent.subscribe(
       (event: ContentCopiedEvent) => {
-        this.copyContent(event)
+        void this.copyContent(event)
       }
     )
     this.contentType$.pipe(untilDestroyed(this)).subscribe((index: string) => {

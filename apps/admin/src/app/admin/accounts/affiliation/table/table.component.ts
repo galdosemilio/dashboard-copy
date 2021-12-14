@@ -51,7 +51,7 @@ export class AffiliatedAccountsTableComponent implements OnInit, OnDestroy {
   }
 
   onDisplay(id: string): void {
-    this.router.navigate([id], { relativeTo: this.route })
+    void this.router.navigate([id], { relativeTo: this.route })
   }
 
   onRemove(item: AccountSingle) {

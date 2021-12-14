@@ -226,7 +226,9 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       .afterClosed()
       .pipe(filter((res) => res))
       .subscribe(() => {
-        superBillDownload ? this.downloadSuperbill() : this.downloadRPMBill()
+        superBillDownload
+          ? void this.downloadSuperbill()
+          : void this.downloadRPMBill()
       })
   }
 
@@ -487,7 +489,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
   }
 
   public openPatientProfile(rpmStateEntry: RPMStateSummaryEntry): void {
-    this.router.navigate([
+    void this.router.navigate([
       this.context.getProfileRoute({
         ...rpmStateEntry.account,
         accountType: AccountTypeId.Client

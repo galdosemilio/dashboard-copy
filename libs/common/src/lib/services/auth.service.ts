@@ -38,7 +38,7 @@ export class AuthService {
       if (adminReturnUrl) {
         location.href = adminReturnUrl
       } else {
-        this.router.navigate([`/${role}`])
+        void this.router.navigate([`/${role}`])
       }
     }
   }
@@ -46,7 +46,7 @@ export class AuthService {
   logout(): void {
     authenticationToken.value = undefined
     // FIXME why redirect to root from toolbar fails?
-    this.router.navigateByUrl('/').then((success) => {
+    void this.router.navigateByUrl('/').then((success) => {
       if (!success) {
         location.href = '/'
       }

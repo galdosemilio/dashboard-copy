@@ -120,13 +120,13 @@ export class LoginPageComponent implements BindForm, OnDestroy, OnInit {
     this.resolveBadgeLinks(
       this.translate.currentLang.split('-')[0].toLowerCase()
     )
-    this.resolveMobileAppRedirects()
+    void this.resolveMobileAppRedirects()
     this.translate.onLangChange
       .pipe(untilDestroyed(this))
       .subscribe((translation: any) =>
         this.resolveBadgeLinks(translation.lang.split('-')[0].toLowerCase())
       )
-    this.checkExistingSession()
+    void this.checkExistingSession()
     this.isLoggingIn = false
   }
 

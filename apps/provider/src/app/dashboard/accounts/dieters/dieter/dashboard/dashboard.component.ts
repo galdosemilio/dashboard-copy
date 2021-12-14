@@ -52,7 +52,7 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // default level is low
-    this.data.init(this.context.accountId)
+    void this.data.init(this.context.accountId)
     this.currentMeasurement = this.metrics[0]
 
     this.currentMeasurement = this.metrics[0]

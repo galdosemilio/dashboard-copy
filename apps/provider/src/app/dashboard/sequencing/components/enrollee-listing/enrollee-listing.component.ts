@@ -109,7 +109,7 @@ export class EnrolleeListingComponent implements OnDestroy, OnInit {
   }
 
   onGoToPatientProfile(enrollment): void {
-    this.router.navigate([
+    void this.router.navigate([
       '/accounts/patients/',
       enrollment.account.id,
       'dashboard'

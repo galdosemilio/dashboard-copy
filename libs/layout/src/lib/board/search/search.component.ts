@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit {
 
   onSelect(account: AutocompleterOption): void {
     this.results = []
-    this.router.navigate(
+    void this.router.navigate(
       typeof account.value === 'string' ? [account.value] : account.value
     )
   }

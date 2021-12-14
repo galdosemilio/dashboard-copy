@@ -25,7 +25,7 @@ export class CcrAvatarDirective implements OnInit {
   @Input()
   set ccrAvatar(accountId) {
     this.accountId = accountId
-    this.refresh()
+    void this.refresh()
   }
 
   @Input()
@@ -40,7 +40,7 @@ export class CcrAvatarDirective implements OnInit {
   public ngOnInit(): void {
     this.bus.register('user.avatar', (id: string) => {
       if (id === this.accountId) {
-        this.refresh()
+        void this.refresh()
       }
     })
   }

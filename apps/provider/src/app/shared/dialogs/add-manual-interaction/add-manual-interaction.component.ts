@@ -45,8 +45,8 @@ export class AddManualInteractionDialog implements OnInit {
 
   public ngOnInit(): void {
     this.createForm()
-    this.fetchInteractionTypes()
-    this.resolveBillableServices()
+    void this.fetchInteractionTypes()
+    void this.resolveBillableServices()
   }
 
   public async onSubmit(): Promise<void> {

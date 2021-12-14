@@ -246,7 +246,7 @@ export class FileExplorerTableComponent
       return
     }
 
-    this.onOpenContent(content)
+    void this.onOpenContent(content)
   }
 
   private async onOpenContent(content: FileExplorerContent) {
@@ -294,7 +294,7 @@ export class FileExplorerTableComponent
     }
 
     if (content.type.code === CONTENT_TYPE_MAP.form.code) {
-      this.router.navigate([
+      void this.router.navigate([
         '/library/forms',
         content.metadata.id,
         'dieter-submissions'
@@ -307,12 +307,12 @@ export class FileExplorerTableComponent
       return
     }
 
-    this.onOpen(content)
+    void this.onOpen(content)
   }
 
   openDirectory(content: FileExplorerContent): void {
     if (content.type && content.type.code === CONTENT_TYPE_MAP.form.code) {
-      this.router.navigate([
+      void this.router.navigate([
         '/library/forms',
         content.metadata.id,
         'submissions'

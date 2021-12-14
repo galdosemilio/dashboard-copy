@@ -130,7 +130,7 @@ export class MFASetupComponent implements OnDestroy, OnInit {
 
   reset(): void {
     delete this.mode
-    this.ngOnInit()
+    void this.ngOnInit()
   }
 
   setUp(channel: MFAChannel): void {

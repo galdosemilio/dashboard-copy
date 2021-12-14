@@ -18,7 +18,7 @@ export class DietersGuard implements CanActivate {
     const permissions = this.context.organization.permissions
 
     if (permissions && (!permissions.allowClientPhi || !permissions.viewAll)) {
-      this.router.navigate(['/accounts/patients/nophi'])
+      void this.router.navigate(['/accounts/patients/nophi'])
       return false
     } else {
       return true

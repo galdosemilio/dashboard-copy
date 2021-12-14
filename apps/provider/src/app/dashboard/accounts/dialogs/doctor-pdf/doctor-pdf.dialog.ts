@@ -129,7 +129,7 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
     )
 
     this.createForm()
-    this.fetchProviders()
+    void this.fetchProviders()
     this.fetchColors()
   }
 

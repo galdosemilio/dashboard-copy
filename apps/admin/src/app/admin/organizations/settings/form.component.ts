@@ -107,7 +107,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
         const { displayName, id, bccEmails } = rset
 
         if (this.id !== id) {
-          this.organizationPreference.create({
+          void this.organizationPreference.create({
             id: this.id || ''
           })
         }
@@ -249,7 +249,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
       .pipe(debounceTime(1000), untilDestroyed(this))
       .subscribe(() => {
         if (this.firstLoadPassed) {
-          this.onUpdate()
+          void this.onUpdate()
         } else {
           this.firstLoadPassed = true
         }
@@ -310,7 +310,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
         await Promise.all(request)
 
         this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
-        this.router.navigate(['../'], {
+        void this.router.navigate(['../'], {
           relativeTo: this.route,
           queryParams: { updated: new Date().getTime() }
         })

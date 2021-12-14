@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     SDK_HEADERS.values = {}
 
     if (window.navigator.userAgent.match(/(MSIE|Trident)/)) {
-      this.router.navigate(['/unsupported-browser'])
+      void this.router.navigate(['/unsupported-browser'])
     }
   }
 }

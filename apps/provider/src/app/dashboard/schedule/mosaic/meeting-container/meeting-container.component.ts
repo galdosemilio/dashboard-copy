@@ -44,7 +44,7 @@ export class ScheduleMeetingContainer implements OnInit {
     if (this.context.isProvider) {
       this.store.dispatch(new TogglePanel())
     } else {
-      this.router.navigate(['/new-appointment'])
+      void this.router.navigate(['/new-appointment'])
     }
   }
 }

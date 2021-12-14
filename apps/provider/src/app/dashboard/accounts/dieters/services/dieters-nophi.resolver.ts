@@ -18,7 +18,7 @@ export class DietersNoPhiGuard implements CanActivate {
     const permissions = this.context.organization.permissions
 
     if (permissions && permissions.viewAll && permissions.allowClientPhi) {
-      this.router.navigate(['/accounts/patients'])
+      void this.router.navigate(['/accounts/patients'])
       return false
     } else {
       return true

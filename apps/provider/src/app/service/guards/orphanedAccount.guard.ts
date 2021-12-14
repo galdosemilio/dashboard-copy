@@ -16,7 +16,7 @@ export class OrphanedAccountGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     if (this.context.isOrphaned && state.url.indexOf('profile') < 0) {
-      this.router.navigate(['/profile'])
+      void this.router.navigate(['/profile'])
       return false
     } else {
       return true

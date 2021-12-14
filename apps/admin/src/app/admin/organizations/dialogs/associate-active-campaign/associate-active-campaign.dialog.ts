@@ -30,7 +30,7 @@ export class AssociateActiveCampaignDialogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.createForm()
-    this.fetchActiveCampaigns()
+    void this.fetchActiveCampaigns()
   }
 
   public async onSubmit(): Promise<void> {

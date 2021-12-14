@@ -44,7 +44,7 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.createForm()
-    this.fetchAccountData()
+    void this.fetchAccountData()
   }
 
   public async onDownloadReport(): Promise<void> {

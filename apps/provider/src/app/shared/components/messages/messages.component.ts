@@ -67,7 +67,7 @@ export class CcrMessagesComponent
   set thread(thread: MessageThread) {
     this.forceDraftSync$.next()
     this._thread = thread
-    this.fetchDraft()
+    void this.fetchDraft()
     this.shownRecipients = thread.recipients.slice().splice(0, 3)
   }
 
@@ -239,7 +239,7 @@ export class CcrMessagesComponent
       this.createNewThread()
     } else {
       this.addToThread()
-      this.removeDraft()
+      void this.removeDraft()
       this.onTextInputChange('')
     }
   }
@@ -324,7 +324,7 @@ export class CcrMessagesComponent
         this.threadId = res.data.length > 0 ? res.data[0].threadId : null
 
         if (!this.thread) {
-          this.fetchDraft()
+          void this.fetchDraft()
         }
 
         this.loadMessages()

@@ -111,7 +111,9 @@ export class FormsComponent implements OnDestroy, OnInit {
             }) as CreateFormRequest
           )
 
-          this.router.navigate([res.id, 'edit'], { relativeTo: this.route })
+          void this.router.navigate([res.id, 'edit'], {
+            relativeTo: this.route
+          })
           this.notifier.success(_('NOTIFY.SUCCESS.FORM_CREATED'))
           this.paginator.firstPage()
           this.datasource.refresh()

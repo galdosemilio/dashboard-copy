@@ -92,7 +92,7 @@ export class SidenavComponent implements OnInit {
 
     this.context.organization$.subscribe((org) => {
       // update the video option
-      this.updateSections(org)
+      void this.updateSections(org)
       // TODO consider logo-mark for md screens
       this.logoSrc =
         org && org.assets && org.assets.logoUrl
@@ -323,7 +323,7 @@ export class SidenavComponent implements OnInit {
         ]
 
     this.updateUnread()
-    this.updateSections(this.context.organization)
+    void this.updateSections(this.context.organization)
   }
 
   private updateContactLinks(): void {

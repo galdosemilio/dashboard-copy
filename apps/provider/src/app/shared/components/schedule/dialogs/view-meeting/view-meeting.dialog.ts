@@ -113,7 +113,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
   ngOnDestroy() {}
 
   ngOnInit() {
-    this.initialize()
+    void this.initialize()
     this.initTranslations()
     this.setupAutocomplete()
   }
@@ -234,7 +234,9 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
         this.notify.success(_('NOTIFY.SUCCESS.MEETING_UPDATED'))
         this.bus.trigger('schedule.table.refresh')
 
-        this.initialize(await this.dataService.fetchMeeting(this.meeting.id))
+        void this.initialize(
+          await this.dataService.fetchMeeting(this.meeting.id)
+        )
         this.state = 'view'
         this.addedAttendees = []
         this.removedAttendees = []
@@ -288,7 +290,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     if (account.accountType.id === '3') {
       account.accountType = '3'
       account.id = account.account
-      this.router.navigate([this.context.getProfileRoute(account)])
+      void this.router.navigate([this.context.getProfileRoute(account)])
       this.dialogRef.close()
     }
   }
@@ -541,7 +543,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
 
       this.createForm()
       this.subscribeToEvents()
-      this.resetForm(meeting)
+      void this.resetForm(meeting)
 
       this.form.controls.meetingTypeId.valueChanges
         .pipe(untilDestroyed(this))
