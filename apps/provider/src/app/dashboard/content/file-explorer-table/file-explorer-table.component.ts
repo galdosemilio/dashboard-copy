@@ -11,7 +11,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
-import { MatSort, MatTable } from '@coachcare/material'
+import { MatDialog, MatSort, MatTable } from '@coachcare/material'
 import { FileExplorerBase } from '@app/dashboard/content/file-explorer-base/file-explorer-base'
 import {
   CONTENT_TYPE_MAP,
@@ -23,9 +23,13 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
+import { _ } from '@coachcare/backend/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Router } from '@angular/router'
 import { AccountTypeIds } from '@coachcare/sdk'
+import { FILE_TYPE_MAP } from '@app/dashboard/content/models/file-type.map'
+import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
+import { filter } from 'rxjs/operators'
 
 export interface FileExplorerRoute {
   content: FileExplorerContent
@@ -139,6 +143,7 @@ export class FileExplorerTableComponent
 
   constructor(
     private context: ContextService,
+    private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private notifier: NotifierService,
     private router: Router
@@ -223,6 +228,28 @@ export class FileExplorerTableComponent
   }
 
   async onOpen(content: FileExplorerContent) {
+    if (
+      content.extension &&
+      FILE_TYPE_MAP[content.extension]?.readable === false
+    ) {
+      const data: PromptDialogData = {
+        title: _('LIBRARY.CONTENT.DOWNLOAD_CONTENT'),
+        content: _('LIBRARY.CONTENT.PREVIEW_CONTENT_DOWNLOADABLE_NOTICE'),
+        yes: _('GLOBAL.DOWNLOAD'),
+        no: _('GLOBAL.CANCEL')
+      }
+      this.dialog
+        .open(PromptDialog, { data })
+        .afterClosed()
+        .pipe(filter((confirm) => confirm))
+        .subscribe(() => this.onOpenContent(content))
+      return
+    }
+
+    this.onOpenContent(content)
+  }
+
+  private async onOpenContent(content: FileExplorerContent) {
     try {
       if (this.mode === 'vault') {
         const downloadUrl = await this.source.getDownloadUrl({
@@ -401,11 +428,15 @@ export class FileExplorerTableComponent
   private subscribeToEvents(): void {
     this.context.account$.pipe(untilDestroyed(this)).subscribe((account) => {
       const user = this.context.user
-      this.accountName = this.isProvider
-        ? account
+
+      if (this.isProvider) {
+        this.accountName = account
           ? `${account.firstName} ${account.lastName}`
           : ''
-        : `${user.firstName} ${user.lastName}`
+        return
+      }
+
+      this.accountName = `${user.firstName} ${user.lastName}`
     })
 
     this.events.contentUpdated.pipe(untilDestroyed(this)).subscribe(() => {
