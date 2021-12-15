@@ -75,9 +75,9 @@ export class DieterSubmissionsComponent implements OnInit {
   }
 
   private _formFilter: string
-  set formFilter(filter: string) {
-    if (typeof filter === 'string' || filter === undefined) {
-      this._formFilter = filter
+  set formFilter(formFilter: string) {
+    if (typeof formFilter === 'string' || formFilter === undefined) {
+      this._formFilter = formFilter
       this.formFilterChange$.next()
       this.paginator.firstPage()
     }
@@ -101,7 +101,7 @@ export class DieterSubmissionsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.autoAssignForm = !!this.router.getCurrentNavigation().extras.state
+    this.autoAssignForm = !!this.router.getCurrentNavigation()?.extras.state
       ?.autoAssignForm
   }
 
@@ -110,8 +110,8 @@ export class DieterSubmissionsComponent implements OnInit {
     this.initialOrg = this.context.organization
     this.createDatasource()
 
-    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((map) => {
-      this.formId = map.get('id')
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((paramMap) => {
+      this.formId = paramMap.get('id')
 
       if (this.isProvider) {
         return

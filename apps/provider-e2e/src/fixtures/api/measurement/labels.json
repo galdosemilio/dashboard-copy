@@ -6,7 +6,7 @@
       "name": "Composition",
       "translations": [],
       "status": "active",
-      "organization": { "id": "30" }
+      "organization": { "id": "1" }
     },
     {
       "id": "19",
@@ -30,14 +30,14 @@
         }
       ],
       "status": "active",
-      "organization": { "id": "30" }
+      "organization": { "id": "1" }
     },
     {
       "id": "21",
       "name": "Special Types",
       "translations": [],
       "status": "active",
-      "organization": { "id": "30" }
+      "organization": { "id": "1" }
     }
   ],
   "pagination": {}

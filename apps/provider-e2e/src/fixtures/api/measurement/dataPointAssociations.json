@@ -19,11 +19,12 @@
         "name": "Vitals",
         "status": "active",
         "sortOrder": 12,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "7",
@@ -44,11 +45,12 @@
         "name": "Vitals",
         "status": "active",
         "sortOrder": 12,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "4",
@@ -68,15 +70,16 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "2",
@@ -97,15 +100,16 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "1",
@@ -126,15 +130,16 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "3",
@@ -155,15 +160,16 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "12",
@@ -184,15 +190,16 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "11",
@@ -213,15 +220,16 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "5",
@@ -241,11 +249,12 @@
         "name": "Vitals",
         "status": "active",
         "sortOrder": 12,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "16",
@@ -266,15 +275,16 @@
         "status": "inactive",
         "sortOrder": 12,
         "description": "A new description",
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "20",
@@ -294,11 +304,12 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "26",
@@ -318,15 +329,16 @@
         "name": "One with translations",
         "status": "active",
         "sortOrder": 17,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
+      "organization": { "id": "1" },
       "client": {
         "isExposed": false,
         "isModifiable": false,
         "isDefault": false
-      }
+      },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "8",
@@ -346,11 +358,12 @@
         "name": "Vitals",
         "status": "active",
         "sortOrder": 12,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "21",
@@ -369,11 +382,12 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "22",
@@ -393,11 +407,12 @@
         "name": "Measurements",
         "status": "active",
         "sortOrder": 6,
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "23",
@@ -416,11 +431,12 @@
         "id": "21",
         "name": "Energy",
         "status": "active",
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "24",
@@ -440,11 +456,12 @@
         "id": "21",
         "name": "Energy",
         "status": "active",
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     },
     {
       "id": "25",
@@ -464,11 +481,12 @@
         "id": "21",
         "name": "Energy",
         "status": "active",
-        "organization": { "id": "30" }
+        "organization": { "id": "1" }
       },
       "status": "active",
-      "organization": { "id": "30" },
-      "client": { "isExposed": true, "isModifiable": true, "isDefault": true }
+      "organization": { "id": "1" },
+      "client": { "isExposed": true, "isModifiable": true, "isDefault": true },
+      "provider": { "isModifiable": true }
     }
   ],
   "pagination": {}

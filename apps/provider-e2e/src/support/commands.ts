@@ -1,7 +1,18 @@
+type ValidOrganization =
+  | 'cmwl'
+  | 'ccr'
+  | 'mdteam'
+  | 'inhealth'
+  | 'shiftsetgo'
+  | 'apollo-italy'
+  | 'apollo-us'
+  | 'wellcore'
+  | 'musclewise'
+
 declare namespace Cypress {
   interface Chainable<Subject> {
     setTimezone(value: string): Chainable<void>
-    setOrganization(value: string): Chainable<void>
+    setOrganization(value: ValidOrganization): Chainable<void>
   }
 }
 
@@ -20,7 +31,7 @@ Cypress.Commands.add('setTimezone', (tz: 'en' | 'aet') => {
   Cypress.env('timezone', tzProper)
 })
 
-Cypress.Commands.add('setOrganization', (org: string) => {
+Cypress.Commands.add('setOrganization', (org: ValidOrganization) => {
   let translatedOrg: number
 
   switch (org) {
@@ -47,6 +58,9 @@ Cypress.Commands.add('setOrganization', (org: string) => {
       break
     case 'wellcore':
       translatedOrg = 7535
+      break
+    case 'musclewise':
+      translatedOrg = 7537
       break
     default:
       translatedOrg = 1

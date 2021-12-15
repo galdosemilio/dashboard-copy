@@ -20,6 +20,7 @@ type ClinicComponentSection =
   | 'settings'
   | 'billable-services'
   | 'hierarchy'
+  | 'auto-enrollment'
 
 @UntilDestroy()
 @Component({

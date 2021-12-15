@@ -1,10 +1,11 @@
 export function syncThirdPartyService(index: number, service: string) {
   cy.get('ccr-integrations-device-sync')
     .find('button.ccr-icon-button')
+    .should('be.enabled')
     .eq(index)
     .click()
 
-  cy.tick(1000)
+  cy.tick(5000)
 
   if (service === 'healthkit') {
     cy.wait('@healthkitSyncPutRequest').should((xhr) => {

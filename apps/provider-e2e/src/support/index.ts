@@ -4,22 +4,32 @@ import { setSystemDate } from './date'
 import {
   setGuideStorage,
   setProviderSiteCookie,
+  setProviderSiteCookieAsClient,
   setSiteLanguageToEnglish
 } from './state'
 
-const standardSetup = (
-  startDate?: number,
-  apiOverrides?: ApiOverrideEntry[],
-  enableGuides: boolean = false
-): void => {
+export interface StandardSetupOptions {
+  apiOverrides?: ApiOverrideEntry[]
+  enableGuides?: boolean
+  mode?: 'client' | 'provider' // we default to 'provider'
+  startDate?: number
+}
+
+const standardSetup = (opts: StandardSetupOptions = {}): void => {
   cy.log('Init standard setup')
 
-  setSystemDate(startDate ? startDate : null)
+  setSystemDate(opts.startDate ?? null)
   seti18n()
-  setGuideStorage(!enableGuides)
-  setProviderSiteCookie()
+  setGuideStorage(!opts.enableGuides)
+
+  if (opts.mode === 'client') {
+    setProviderSiteCookieAsClient()
+  } else {
+    setProviderSiteCookie()
+  }
+
   setSiteLanguageToEnglish()
-  interceptCoreApiCalls(apiOverrides)
+  interceptCoreApiCalls(opts.apiOverrides ?? [], opts.mode)
 }
 
 Cypress.on('uncaught:exception', (err, runnable) => {

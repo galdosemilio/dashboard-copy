@@ -86,7 +86,9 @@ describe('Clinic Settings', () => {
 
     cy.wait('@updateOrgCall').should((xhr) => {
       expect(xhr.response.statusCode).to.equal(204)
-      expect(xhr.request.body.id).to.equal(Cypress.env('organizationId'))
+      expect(xhr.request.body.id).to.equal(
+        Cypress.env('organizationId').toString()
+      )
       expect(xhr.request.body.displayName).to.equal('testing 123 and then')
     })
   })

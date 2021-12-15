@@ -77,7 +77,13 @@ export class RPMStateEntry {
             : RPMStateTypes.inactive,
           trigger: RPMTriggerTypes[args.rpmState.trigger]
             ? RPMTriggerTypes[args.rpmState.trigger]
-            : RPMTriggerTypes.unknown
+            : RPMTriggerTypes.unknown,
+          supervisingProvider: {
+            ...args.rpmState.supervisingProvider,
+            firstName:
+              args.rpmState.supervisingProvider.firstName ||
+              _('BOARD.INACCESSIBLE_PROVIDER')
+          }
         }
       : { status: RPMStateTypes.neverActive }
   }

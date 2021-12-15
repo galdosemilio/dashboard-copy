@@ -4,6 +4,12 @@ const setProviderSiteCookie = (): void => {
   cy.setCookie('ccrStatic', 'provider')
 }
 
+const setProviderSiteCookieAsClient = (): void => {
+  cy.log('Setting cookie for provider site as client')
+
+  cy.setCookie('ccrStatic', 'client')
+}
+
 const setGuideStorage = (seen: boolean = true): void => {
   if (!seen) {
     return
@@ -19,4 +25,9 @@ const setSiteLanguageToEnglish = (): void => {
   cy.setCookie('ccrStaticLanguage', 'en')
 }
 
-export { setGuideStorage, setProviderSiteCookie, setSiteLanguageToEnglish }
+export {
+  setGuideStorage,
+  setProviderSiteCookie,
+  setProviderSiteCookieAsClient,
+  setSiteLanguageToEnglish
+}

@@ -46,6 +46,15 @@
         </a>
 
         <a
+        [class.active]="section === 'auto-enrollment'"
+        [routerLink]="['.', { s: 'auto-enrollment' }]"
+        ccrLinkActive="active"
+        fxFlex
+        fxLayoutAlign="center center">
+        {{ 'BOARD.CLINIC_AUTOMATIC_ENROLLMENT' | translate }}
+        </a>
+
+        <a
         [class.active]="section === 'measurements'"
         [routerLink]="['.', { s: 'measurements' }]"
         ccrLinkActive="active"
@@ -92,6 +101,10 @@
 
         <div *ngSwitchCase="'phases'">
             <app-clinic-phases></app-clinic-phases>
+        </div>
+
+        <div *ngSwitchCase="'auto-enrollment'">
+            <app-clinic-sequence-auto-enrollment></app-clinic-sequence-auto-enrollment>
         </div>
 
         <div *ngSwitchCase="'settings'">

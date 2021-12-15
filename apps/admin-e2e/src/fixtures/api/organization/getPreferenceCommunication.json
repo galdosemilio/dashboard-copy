@@ -6,5 +6,8 @@
   "isActive": true,
   "videoConferencing": {
     "isEnabled": true
+  },
+  "recording": {
+    "enabled": true
   }
 }

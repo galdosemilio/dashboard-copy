@@ -11,23 +11,33 @@ function fetchOverride(url: string, fixture: string): string {
     : fixture
 }
 
-const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
+function setupAccountEndpointData(data) {
+  data.preference.defaultOrganization = Cypress.env('organizationId')
+  data.timezone = Cypress.env('timezone')
+
+  cy.intercept('GET', `/2.0/account/${Cypress.env('providerId')}`, {
+    body: { ...data, id: Cypress.env('providerId') }
+  }).as('getSingleAccount')
+
+  cy.intercept('GET', `/2.0/account/${Cypress.env('providerIdOther')}`, {
+    body: { ...data, id: Cypress.env('providerIdOther') }
+  }).as('getSingleAccount')
+}
+
+const interceptCoreApiCalls = (
+  apiOverrides?: ApiOverrideEntry[],
+  mode: 'provider' | 'client' = 'provider'
+): void => {
   cy.log('Loading base API intercept files')
 
   cy.log('Setting api overrides')
   overrides = apiOverrides ? apiOverrides : []
-  cy.fixture(`api/account/getSingle`).then((data) => {
-    data.preference.defaultOrganization = Cypress.env('organizationId')
-    data.timezone = Cypress.env('timezone')
 
-    cy.intercept('GET', `/2.0/account/${Cypress.env('providerId')}`, {
-      body: { ...data, id: Cypress.env('providerId') }
-    }).as('getSingleAccount')
-
-    cy.intercept('GET', `/2.0/account/${Cypress.env('providerIdOther')}`, {
-      body: { ...data, id: Cypress.env('providerIdOther') }
-    }).as('getSingleAccount')
-  })
+  if (mode === 'provider') {
+    cy.fixture(`api/account/getSingle`).then(setupAccountEndpointData)
+  } else {
+    cy.fixture(`api/account/getSinglePatient`).then(setupAccountEndpointData)
+  }
 
   cy.intercept('PATCH', `/2.0/account/**`, {
     statusCode: 204,
@@ -52,9 +62,13 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
 
     cy.intercept(
       'GET',
-      `/4.0/organization/${Cypress.env('organizationId')}/preference?mala=true`,
+      `/4.0/organization/${Cypress.env('organizationId')}/preference**`,
       { body: data }
     )
+
+    cy.intercept('GET', `/4.0/organization/undefined/preference**`, {
+      body: data
+    })
   })
   cy.fixture('api/sequence/getOrgPreference').then((data) => {
     data.id = Cypress.env('organizationId')
@@ -182,6 +196,9 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('POST', '/2.0/message/viewed', {
     fixture: 'api/general/emptyObject'
   }).as('threadMarkAsViewedRequest')
+  cy.intercept('POST', '/2.0/message', { statusCode: 204, body: {} }).as(
+    'messagePostRequest'
+  )
   cy.intercept('POST', '/2.0/message/permission', {
     statusCode: 204,
     body: {}
@@ -360,6 +377,9 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
     statusCode: 204,
     body: {}
   }).as('measurementDataPointTypeAssocDeleteRequest')
+  cy.intercept('GET', '1.0/measurement/data-point/group?**', {
+    fixture: 'api/general/emptyDataEmptyPagination'
+  })
   cy.intercept('GET', '/2.0/available/calendar?**', {
     fixture: 'api/meeting/getAvailability'
   })
@@ -707,7 +727,7 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   cy.intercept('POST', `1.0/account/${Cypress.env('clientId')}/address`, {
     statusCode: 204,
     body: {}
-  }).as('postAddressRequest')
+  }).as('postAddressRequestClient')
 
   cy.intercept('PATCH', `1.0/account/${Cypress.env('clientId')}/address/**`, {
     statusCode: 204,
@@ -720,6 +740,10 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
   }).as('deleteAddressRequest')
 
   cy.intercept('GET', `1.0/account/${Cypress.env('providerId')}/address**`, {
+    fixture: 'api/address/getAddresses'
+  })
+
+  cy.intercept('GET', `1.0/account/${Cypress.env('clientId')}/address**`, {
     fixture: 'api/address/getAddresses'
   })
 
@@ -744,6 +768,10 @@ const interceptCoreApiCalls = (apiOverrides?: ApiOverrideEntry[]): void => {
 
   cy.intercept('GET', `1.0/account/${Cypress.env('providerId')}/address**`, {
     fixture: 'api/address/getAddresses'
+  })
+
+  cy.intercept('GET', '2.0/package/enrollment/check?**', {
+    body: { enrolled: true }
   })
 }
 

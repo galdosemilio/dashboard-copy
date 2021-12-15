@@ -13,8 +13,8 @@ export class MaxCharsPipe implements PipeTransform {
   }
 
   transform(v: string, charLength: any): any {
-    if (!charLength) {
-      return v
+    if (!charLength || !v) {
+      return v ?? ''
     }
     charLength = Number(charLength) || this.maxLength
     const ellipsis = v.length > charLength ? '...' : ''
