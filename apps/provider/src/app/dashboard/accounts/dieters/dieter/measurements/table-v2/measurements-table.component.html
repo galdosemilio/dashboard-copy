@@ -54,7 +54,7 @@
               </span>
             </td>
             <td class="device-cell">
-              <div *ngIf="!row.shouldShowDate">
+              <div *ngIf="!row.shouldShowDate; else emptyCell">
                 <span *ngIf="row.source.name; else emptyCell">{{ row.source.name }}</span>
               </div>
             </td>
@@ -63,7 +63,7 @@
             class="common-cell"
             [ngClass]="{ 'wide-cell': column.id === '12' || column.id === '43' || column.id === '45' }"
             [ngSwitch]="column.id">
-              <div *ngIf="!row.shouldShowDate">
+              <div *ngIf="!row.shouldShowDate; else emptyCell">
                 <ng-container *ngSwitchCase="'3'">
                   <ng-container *ngTemplateOutlet="entryWithWeight; context: { row: row, column: column }"></ng-container>
                 </ng-container>

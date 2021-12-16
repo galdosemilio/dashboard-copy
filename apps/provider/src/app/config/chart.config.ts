@@ -100,13 +100,13 @@ const ChartOptions = () => ({
 
       // `this` will be the overall tooltip
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const position = this._chart.canvas.getBoundingClientRect()
+      this._chart.canvas.getBoundingClientRect()
 
       // display, position, and set styles for font
       tooltipEl.style.opacity = '1'
       tooltipEl.style.left = tooltipModel.caretX + 'px'
       tooltipEl.style.top = tooltipModel.caretY + 'px'
-      // TODO customize the adjustment according graph type
+
       const tooltipHeight = tooltipEl.scrollHeight || tooltipEl.clientHeight
       tooltipEl.style.marginTop = '-' + tooltipHeight / 2 + 'px'
     }
@@ -119,7 +119,7 @@ const ChartOptions = () => ({
     yAxes: [
       {
         ticks: {
-          beginAtZero: true,
+          beginAtZero: false,
           callback: function (value, index, values) {
             return value.toFixed(1)
           }

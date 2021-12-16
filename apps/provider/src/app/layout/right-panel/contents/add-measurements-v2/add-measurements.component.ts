@@ -23,6 +23,7 @@ import { MatDialog } from '@coachcare/material'
 import {
   AccountProvider,
   convertFromReadableFormat,
+  convertToReadableFormat,
   convertUnitToPreferenceFormat,
   MeasurementDataPointProvider,
   MeasurementDataPointType,
@@ -214,8 +215,24 @@ export class AddMeasurementsV2Component implements OnInit {
     this.measurementForm = this.fb.array(
       types.map((type) => {
         const control = new FormControl('', [
-          Validators.min(Math.round(type.bound.lower / type.multiplier)),
-          Validators.max(Math.round(type.bound.upper / type.multiplier)),
+          Validators.min(
+            Math.round(
+              convertToReadableFormat(
+                type.bound.lower,
+                type,
+                this.context.user.measurementPreference
+              )
+            )
+          ),
+          Validators.max(
+            Math.round(
+              convertToReadableFormat(
+                type.bound.upper,
+                type,
+                this.context.user.measurementPreference
+              )
+            )
+          ),
           this.dataTypeDependencyValidator(type.id)
         ])
 
@@ -373,7 +390,9 @@ export class AddMeasurementsV2Component implements OnInit {
 
   private resetForm(): void {
     this.oldForm.reset()
-    this.labelsForm.reset({ date: moment(), label: this.labels[0]?.id })
+
+    const label = this.labelsForm.value.label
+    this.labelsForm.reset({ date: moment(), label })
   }
 
   private async resolveLabels(): Promise<void> {

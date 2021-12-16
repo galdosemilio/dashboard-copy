@@ -101,7 +101,7 @@
     "CLEAR": "Clear",
     "CLINIC": "Clinic",
     "CLINICS": "Clinics",
-    "CLINIC_ADD_DATA_POINT_TYPE": "Add Data Point",
+    "CLINIC_ADD_DATA_POINT_TYPE": "Add Data Point Type",
     "CLINIC_ADD_MEASUREMENT_LABEL": "Add Category",
     "CLINIC_ADD_SEQ_AUTO_ENROLLMENT": "Add Autoenrollment",
     "CLINIC_ADD_SUP_PROVIDER_DESC": "Select a coach to be included as a <strong>Supervising Provider</strong> option for Billable Services at and below the {{ clinic.name }} clinic.",
@@ -121,7 +121,7 @@
     "CLINIC_MEASUREMENTS_DESC": "Configure which measurements are displayed to users in your clinic.  These settings impact the Patient->Measurements area on the dashboard and the Progress section of the mobile app.  Groupings of Data Points (weight, body fat, etc) are organized into custom-named Categories.  This feature allows your clinic to expose progress and measurement data that is appropriate for your organization.",
     "CLINIC_MEASUREMENT_ALLOW_TO_CHILD_CLINICS": "Allow Child Clinics to Manage Preferences",
     "CLINIC_MEASUREMENT_ALLOW_TO_CHILD_CLINICS_DESCRIPTION": "This setting only applies to organizations that have multiple clinics or mobile applications.  When disabled, it will enforce all child clinics to use the arrangement of categories and data points as shown below.  If enabled, it allows child clinics to customize their arrangement of categories and data points.",
-    "CLINIC_MEASUREMENT_LABELS": "Category and Data Point Arrangement",
+    "CLINIC_MEASUREMENT_LABELS": "Category and Data Point Type Arrangement",
     "CLINIC_MEASUREMENT_PREF_INHERITED_FROM": "The preference is being inherited from <strong>{{ name }}</strong> (ID {{ id }})",
     "CLINIC_NEW": "Add New Clinic",
     "CLINIC_NO_SUPERVISING_PROVIDERS": "There are no supervising providers.",
@@ -1745,13 +1745,13 @@
   },
   "VISIBILITY": {
     "DEFAULT_FOR_PATIENTS": "Default for Patients",
-    "DEFAULT_FOR_PATIENTS_DESCRIPTION": "When enabled, this data point will, by default, be added to the Summary section of the mobile application for patients.  This section stores the favorite and commonly used data points.  All patients will have the ability to unfavorite this data point.",
+    "DEFAULT_FOR_PATIENTS_DESCRIPTION": "When enabled, this data point type will, by default, be added to the Summary section of the mobile application for patients. This section stores the favorite and commonly used data points. All patients will have the ability to unfavorite this data point type.",
     "EXPOSED_TO_PATIENTS": "Exposed to Patients",
-    "EXPOSED_TO_PATIENTS_DESCRIPTION": "When enabled, this data point will be displayed to patients in the mobile application.  This setting only impacts the visibility of the data.  If not exposed to patients, the data will still exist and can be viewed by coaches on the dashboard.",
+    "EXPOSED_TO_PATIENTS_DESCRIPTION": "When enabled, this data point type will be displayed to patients in the mobile application.  This setting only impacts the visibility of the data. If not exposed to patients, the data will still exist and can be viewed by coaches on the dashboard.",
     "MODIFIABLE_BY_COACHES": "Modifiable by Coaches",
-    "MODIFIABLE_BY_COACHES_DESCRIPTION": "When enabled, this data point will only be able to be viewed.  Coaches will not be able to add or remove the measurements.  This is useful for measurements that are only intended to be added by patients or through a third party integration.",
+    "MODIFIABLE_BY_COACHES_DESCRIPTION": "When enabled, this data point type will only be able to be viewed. Coaches will not be able to add or remove the measurements. This is useful for measurements that are only intended to be added by patients or through a third party integration.",
     "MODIFIABLE_BY_PATIENTS": "Modifiable by Patients",
-    "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "When enabled, this data point will only be able to be viewed.  Patients will not be able to add or remove the measurements.  This is useful for measurements that are only intended to be added by coaches or through a third party integration."
+    "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "When enabled, this data point type will only be able to be viewed. Patients will not be able to add or remove the measurements. This is useful for measurements that are only intended to be added by coaches or through a third party integration."
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Starter Guide"

@@ -1,13 +1,10 @@
 import { ChartData, ChartDataSource } from '@app/shared/model'
 import {
-  convertUnitToPreferenceFormat,
-  DataPoint,
+  convertToReadableFormat,
   DataPointKind,
   GetMeasurementDataPointGroupsRequest,
   GetMeasurementDataPointGroupsResponse,
   MeasurementDataPointGroup,
-  MeasurementDataPointMinimalType,
-  MeasurementDataPointTimestamp,
   MinimalDataPointType,
   parseWithSyntheticDataPointTypes,
   SYNTHETIC_TYPES
@@ -18,20 +15,12 @@ import * as moment from 'moment'
 import { select, Store } from '@ngrx/store'
 import { CCRConfig, CCRPalette } from '@app/config'
 import { paletteSelector } from '@app/store/config'
-import { convertToReadableFormat } from '@coachcare/sdk'
 import { ContextService } from '@app/service'
 import { flatMap, groupBy, sortBy, uniqBy } from 'lodash'
 import * as tinycolor from 'tinycolor2'
 import { TranslateService } from '@ngx-translate/core'
-
-interface DataPointEntry {
-  createdAt: MeasurementDataPointTimestamp
-  id: string
-  kind: DataPointKind
-  removedAt?: MeasurementDataPointTimestamp
-  type: MeasurementDataPointMinimalType
-  value: number
-}
+import { generateChartTooltip } from './helpers'
+import { DataPointEntry } from './model'
 
 export class MeasurementChartDataSource extends ChartDataSource<
   MeasurementDataPointGroup,
@@ -111,29 +100,32 @@ export class MeasurementChartDataSource extends ChartDataSource<
     // formats
     let xlabelFormat
     let tooltipFormat
+    let xMaxTicks
 
     switch (this.timeframe) {
       case 'day':
+        xMaxTicks = 26
         xlabelFormat = 'h:mm a'
         tooltipFormat = 'ddd D h:mm a'
         break
-      case 'week':
-        xlabelFormat = 'ddd D'
-        tooltipFormat = 'ddd, MMM D h:mm a'
-        break
       case 'month':
+        xMaxTicks = 31
         xlabelFormat = 'MMM D'
         tooltipFormat = 'MMM D h:mm a'
         break
       case 'year':
+        xMaxTicks = 12
         xlabelFormat = 'MMM YYYY'
         tooltipFormat = 'MMM DD, YYYY h:mm a'
         break
       case 'alltime':
+        xMaxTicks = 18
         xlabelFormat = 'MMM DD, YYYY'
         tooltipFormat = 'MMM DD, YYYY'
         break
+      case 'week':
       default:
+        xMaxTicks = 11
         xlabelFormat = 'ddd D'
         tooltipFormat = 'ddd, MMM D h:mm a'
     }
@@ -187,15 +179,22 @@ export class MeasurementChartDataSource extends ChartDataSource<
 
               const entry = data[tooltipItem.index][0]
 
-              return `${
-                entry.kind === DataPointKind.Regular
-                  ? [this.getTooltipFromDataPoint(entry)]
-                  : entry.sources
-                      .map((source) => this.getTooltipFromDataPoint(source))
-                      .join(' / ')
-              }`
+              return `${generateChartTooltip(
+                entry,
+                this.context.user.measurementPreference,
+                this.translate.currentLang
+              )}`
             }
           }
+        },
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                maxTicksLimit: xMaxTicks
+              }
+            }
+          ]
         }
       },
       legend: true,
@@ -243,19 +242,5 @@ export class MeasurementChartDataSource extends ChartDataSource<
     }
 
     return emptyGroups
-  }
-
-  private getTooltipFromDataPoint(
-    dataPoint: DataPoint<DataPointEntry, MinimalDataPointType>
-  ): string {
-    return `${convertToReadableFormat(
-      dataPoint.value,
-      dataPoint.type,
-      this.context.user.measurementPreference
-    ).toFixed(1)} ${convertUnitToPreferenceFormat(
-      dataPoint.type,
-      this.context.user.measurementPreference,
-      this.translate.currentLang
-    )}`
   }
 }

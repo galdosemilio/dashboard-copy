@@ -11,7 +11,7 @@ export interface NamedSyntheticDataPointType extends SyntheticDataPointType {
 export const SYNTHETIC_DATA_TYPES: NamedSyntheticDataPointType[] = [
   {
     id: SyntheticDataPointTypeId.BloodPressure,
-    sourceTypeIds: ['5', '6'],
+    sourceTypeIds: ['6', '5'],
     name: _('MEASUREMENT.BLOOD_PRESSURE')
   }
 ]

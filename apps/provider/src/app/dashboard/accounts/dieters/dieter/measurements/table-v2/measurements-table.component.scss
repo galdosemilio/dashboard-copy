@@ -21,6 +21,11 @@
       min-height: 32px;
     }
 
+    td:first-of-type,
+    th:first-of-type {
+      border-right: 1px solid rgba(0, 0, 0, 0.22);
+    }
+
     thead {
       font-size: 14px;
 
@@ -37,11 +42,11 @@
     }
 
     .common-cell {
-      min-width: 125px;
+      min-width: 50px;
     }
 
     .wide-cell {
-      min-width: 130px !important;
+      min-width: 60px !important;
 
       ccr-popup-description {
         margin-right: 10px;
@@ -51,11 +56,13 @@
     .date-cell {
       left: 0;
       min-width: 125px;
+      max-width: 125px;
+      width: 125px;
       position: sticky;
     }
 
     .device-cell {
-      min-width: 125px;
+      min-width: 50px;
     }
 
     .row-even {

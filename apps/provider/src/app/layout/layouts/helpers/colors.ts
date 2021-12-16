@@ -41,6 +41,7 @@ export function applyPalette(
     --warn-a26: ${tinycolor(palette.warn).setAlpha(0.26)};
     --contrast: ${palette.contrast};
     --contrast-darken: ${tinycolor(palette.contrast).darken(8)};
+    --contrast-darkest: ${tinycolor(palette.contrast).darken(12)};
     --sidenav: ${palette.sidenav};
     --sidenav-darken: ${tinycolor(palette.sidenav).darken(5)};
     --sidenav-darkest: ${tinycolor(palette.sidenav).darken(8)};
