@@ -43,6 +43,7 @@ import { uniqBy, values } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject, Subscription } from 'rxjs'
 import { VaultDatasource } from '../accounts'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -151,10 +152,9 @@ export class ContentComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((queuedContents) => queuedContents && queuedContents.length))
       .subscribe(async (queuedContents: QueuedContent[]) => {
-        if (queuedContents && queuedContents.length) {
-          this.contentUpload.createContents(queuedContents)
-        }
+        this.contentUpload.createContents(queuedContents)
       })
   }
 
@@ -175,10 +175,9 @@ export class ContentComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((args) => args))
       .subscribe(async (args: ContentUploadTicket) => {
-        if (args) {
-          await this.contentUpload.requestContentCreation(args, false)
-        }
+        await this.contentUpload.requestContentCreation(args, false)
       })
   }
 
@@ -194,10 +193,9 @@ export class ContentComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((args) => args))
       .subscribe(async (args: ContentUploadTicket) => {
-        if (args) {
-          await this.contentUpload.requestContentCreation(args, false)
-        }
+        await this.contentUpload.requestContentCreation(args, false)
       })
   }
 
@@ -229,13 +227,8 @@ export class ContentComponent implements OnDestroy, OnInit {
         width: '90vw'
       })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.datasource.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.datasource.refresh())
   }
 
   async selectOrganization(org: any) {
@@ -262,11 +255,10 @@ export class ContentComponent implements OnDestroy, OnInit {
         this.dialog
           .open(PromptDialog, { data: data })
           .afterClosed()
-          .subscribe((confirm: boolean) => {
-            if (confirm) {
-              this.viewMode = mode
-              this.events.contentSelected.emit()
-            }
+          .pipe(filter((confirm) => confirm))
+          .subscribe(() => {
+            this.viewMode = mode
+            this.events.contentSelected.emit()
           })
       })
     } else {
@@ -405,13 +397,8 @@ export class ContentComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.datasource.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.datasource.refresh())
   }
 
   private deleteContent(content: FileExplorerContent) {
@@ -425,11 +412,10 @@ export class ContentComponent implements OnDestroy, OnInit {
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()
-      .subscribe(async (confirm: boolean) => {
-        if (confirm) {
-          await this.datasource.deleteContent(content.id)
-          this.events.contentDeleted.emit(content)
-        }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
+        await this.datasource.deleteContent(content.id)
+        this.events.contentDeleted.emit(content)
       })
   }
 
@@ -446,10 +432,9 @@ export class ContentComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((event) => event))
       .subscribe((event: ContentMovedEvent) => {
-        if (event) {
-          this.events.moveContent.emit(event)
-        }
+        this.events.moveContent.emit(event)
       })
   }
 
@@ -507,10 +492,9 @@ export class ContentComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .subscribe(async (updatedContent: FileExplorerContent) => {
-        if (updatedContent) {
-          this.events.updateContent.emit(updatedContent)
-        }
-      })
+      .pipe(filter((updatedContent) => updatedContent))
+      .subscribe(async (updatedContent: FileExplorerContent) =>
+        this.events.updateContent.emit(updatedContent)
+      )
   }
 }

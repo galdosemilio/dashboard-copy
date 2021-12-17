@@ -7,6 +7,7 @@ import { _, PromptDialog } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountMeasurementPreferenceType } from '@coachcare/sdk'
 import { MeasurementConfig } from '../measurements.component'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -136,13 +137,14 @@ export class MeasurementTableComponent implements OnDestroy, OnInit {
         }
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(async (confirm: boolean) => {
+      .pipe(
+        untilDestroyed(this),
+        filter((confirm) => confirm)
+      )
+      .subscribe(async () => {
         try {
-          if (confirm) {
-            await this.source.deleteBodyMeasurement({ id: row.id })
-            this.source.refresh()
-          }
+          await this.source.deleteBodyMeasurement({ id: row.id })
+          this.source.refresh()
         } catch (error) {
           this.notify.error(error)
         }
@@ -162,12 +164,11 @@ export class MeasurementTableComponent implements OnDestroy, OnInit {
           panelClass: 'ccr-full-dialog'
         })
         .afterClosed()
-        .pipe(untilDestroyed(this))
-        .subscribe((refresh: boolean) => {
-          if (refresh) {
-            this.source.refresh()
-          }
-        })
+        .pipe(
+          untilDestroyed(this),
+          filter((refresh) => refresh)
+        )
+        .subscribe(() => this.source.refresh())
     }
   }
 

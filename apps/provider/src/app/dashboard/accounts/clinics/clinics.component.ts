@@ -19,7 +19,7 @@ import { generateCSV } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { debounceTime, first } from 'rxjs/operators'
+import { debounceTime, filter, first } from 'rxjs/operators'
 import { CreateClinicDialog } from './dialogs'
 import { ClinicsDatabase, ClinicsDataSource } from './services'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
@@ -102,13 +102,8 @@ export class ClinicsComponent implements OnInit, OnDestroy {
         width: '60vw'
       })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.source.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
   }
 
   public async downloadCSV(): Promise<void> {

@@ -28,6 +28,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountProvider } from '@coachcare/sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { CallControlService } from '@coachcare/common/services'
+import { filter } from 'rxjs/operators'
 
 enum AccountAvailabilityStatus {
   AVAILABLE,
@@ -299,12 +300,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
         }
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (!confirm) {
-          return
-        }
-
-        this.dispatchCallAction(billableService)
-      })
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => this.dispatchCallAction(billableService))
   }
 }

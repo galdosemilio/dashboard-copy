@@ -24,6 +24,7 @@ import {
   PromptDialogData
 } from '@app/shared'
 import { CoachesDataSource } from '../services'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-coaches-table',
@@ -95,20 +96,19 @@ export class CoachesTableComponent implements OnInit {
         this.dialog
           .open(PromptDialog, { data: data })
           .afterClosed()
-          .subscribe((confirm) => {
-            if (confirm) {
-              this.affiliation
-                .disassociate({
-                  account: coach.id,
-                  organization: this.source.args.organization
-                })
-                .then(() => {
-                  this.notifier.success(_('NOTIFY.SUCCESS.COACH_REMOVED'))
-                  // trigger a table refresh
-                  this.source.refresh()
-                })
-                .catch((err) => this.notifier.error(err))
-            }
+          .pipe(filter((confirm) => confirm))
+          .subscribe(() => {
+            this.affiliation
+              .disassociate({
+                account: coach.id,
+                organization: this.source.args.organization
+              })
+              .then(() => {
+                this.notifier.success(_('NOTIFY.SUCCESS.COACH_REMOVED'))
+                // trigger a table refresh
+                this.source.refresh()
+              })
+              .catch((err) => this.notifier.error(err))
           })
       }
     } catch (error) {

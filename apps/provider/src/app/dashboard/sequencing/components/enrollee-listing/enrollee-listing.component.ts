@@ -11,6 +11,7 @@ import { Sequence as SelveraSequenceService } from '@coachcare/sdk'
 import { BulkUnenrollDialog } from '../../dialogs'
 import { Sequence } from '../../models'
 import { EnrolleesDatabase, EnrolleesDataSource } from '../../services'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -92,17 +93,18 @@ export class EnrolleeListingComponent implements OnDestroy, OnInit {
         }
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(async (confirm) => {
-        if (confirm) {
-          await this.seq.createInactiveSeqEnrollment({
-            account: enrollment.account.id,
-            createdBy: this.context.user.id,
-            sequence: enrollment.sequence.id
-          })
-          this.paginator.firstPage()
-          this.source.refresh()
-        }
+      .pipe(
+        untilDestroyed(this),
+        filter((confirm) => confirm)
+      )
+      .subscribe(async () => {
+        await this.seq.createInactiveSeqEnrollment({
+          account: enrollment.account.id,
+          createdBy: this.context.user.id,
+          sequence: enrollment.sequence.id
+        })
+        this.paginator.firstPage()
+        this.source.refresh()
       })
   }
 

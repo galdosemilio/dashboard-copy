@@ -32,6 +32,7 @@ import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
 import { select, Store } from '@ngrx/store'
 import { criteriaSelector, ReportsState } from '../../store'
 import { ReportsCriteria } from '../../services'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -394,13 +395,8 @@ export class CallsComponent implements OnDestroy, OnInit {
     this.dialog
       .open(AddManualInteractionDialog, { width: '60vw' })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.source.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
   }
 
   showRemoveInteractionDialog(interaction: CallHistoryItem): void {
@@ -416,13 +412,8 @@ export class CallsComponent implements OnDestroy, OnInit {
         }
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (!confirm) {
-          return
-        }
-
-        this.removeInteraction(interaction)
-      })
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => this.removeInteraction(interaction))
   }
 
   private async handleDownload$(page: number): Promise<void> {

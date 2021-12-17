@@ -7,6 +7,7 @@ import { ContextService, NotifierService, SelectedAccount } from '@app/service'
 import { _, PromptDialog, RecurringAddDialog } from '@app/shared'
 import { AvailabilityManagementService } from '../../service'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { filter } from 'rxjs/operators'
 
 export interface ScheduleAvailabilityRecurringSegment {
   id: string
@@ -127,25 +128,24 @@ export class ScheduleAvailabilityRecurringComponent implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (confirm) {
-          this.schedule
-            .deleteRecurrentAvailability(segment.id)
-            .then(() => {
-              if (
-                this.segments.filter((s) => s.day === segment.day).length <= 1
-              ) {
-                this.segments.push({
-                  day: segment.day,
-                  account: this.user.id,
-                  ...this.emptySegment
-                })
-              }
-              this.segments = this.segments.filter((s) => s.id !== segment.id)
-              this.sortSegments()
-            })
-            .catch((err) => this.notifier.error(err))
-        }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        this.schedule
+          .deleteRecurrentAvailability(segment.id)
+          .then(() => {
+            if (
+              this.segments.filter((s) => s.day === segment.day).length <= 1
+            ) {
+              this.segments.push({
+                day: segment.day,
+                account: this.user.id,
+                ...this.emptySegment
+              })
+            }
+            this.segments = this.segments.filter((s) => s.id !== segment.id)
+            this.sortSegments()
+          })
+          .catch((err) => this.notifier.error(err))
       })
   }
 
@@ -158,22 +158,21 @@ export class ScheduleAvailabilityRecurringComponent implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (confirm) {
-          this.schedule
-            .deleteAllAvailability(this.user.id)
-            .then(() => {
-              this.segments = []
-              for (let i = 0; i < 7; i++) {
-                this.segments.push({
-                  day: i,
-                  account: this.user.id,
-                  ...this.emptySegment
-                })
-              }
-            })
-            .catch((err) => this.notifier.error(err))
-        }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        this.schedule
+          .deleteAllAvailability(this.user.id)
+          .then(() => {
+            this.segments = []
+            for (let i = 0; i < 7; i++) {
+              this.segments.push({
+                day: i,
+                account: this.user.id,
+                ...this.emptySegment
+              })
+            }
+          })
+          .catch((err) => this.notifier.error(err))
       })
   }
 
@@ -189,16 +188,15 @@ export class ScheduleAvailabilityRecurringComponent implements OnInit {
         }
       })
       .afterClosed()
+      .pipe(filter((recurringAvailable) => recurringAvailable))
       .subscribe((recurringAvailable) => {
-        if (recurringAvailable) {
-          const createdSegment: ScheduleAvailabilityRecurringSegment = {
-            ...recurringAvailable,
-            account: this.user.id,
-            day: recurringAvailable.start.day()
-          }
-          this.segments.push(createdSegment)
-          this.sortSegments()
+        const createdSegment: ScheduleAvailabilityRecurringSegment = {
+          ...recurringAvailable,
+          account: this.user.id,
+          day: recurringAvailable.start.day()
         }
+        this.segments.push(createdSegment)
+        this.sortSegments()
       })
   }
 

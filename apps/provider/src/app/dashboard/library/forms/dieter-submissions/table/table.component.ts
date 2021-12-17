@@ -6,6 +6,7 @@ import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services
 import { FormPDFService, NotifierService } from '@app/service'
 import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-library-dieter-submissions-table',
@@ -54,12 +55,11 @@ export class DieterSubmissionsTableComponent {
         }
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
         try {
-          if (confirm) {
-            await this.source.removeSubmission({ id: formSubmission.id })
-            this.source.refresh()
-          }
+          await this.source.removeSubmission({ id: formSubmission.id })
+          this.source.refresh()
         } catch (error) {
           this.notifier.error(error)
         }

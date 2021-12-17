@@ -22,6 +22,7 @@ import { _ } from '@app/shared/utils'
 import { sortBy, uniqBy } from 'lodash'
 import * as moment from 'moment'
 import { RPMStateEntry, RPMStateTypes } from './models'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-rpm',
@@ -74,15 +75,17 @@ export class RPMComponent implements AfterViewInit, OnInit {
         width: '60vw'
       })
       .afterClosed()
-      .subscribe((closingState) => {
-        if (
-          closingState === 'new_entry' ||
-          closingState === 'remove_entry' ||
-          closingState === true
-        ) {
-          this.rpmStatusChange.emit()
-          this.refresh()
-        }
+      .pipe(
+        filter(
+          (closingState) =>
+            closingState === 'new_entry' ||
+            closingState === 'remove_entry' ||
+            closingState === true
+        )
+      )
+      .subscribe(() => {
+        this.rpmStatusChange.emit()
+        this.refresh()
       })
   }
 

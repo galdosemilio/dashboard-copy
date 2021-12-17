@@ -17,7 +17,7 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { CreateFormRequest, UpdateFormRequest } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { debounceTime } from 'rxjs/operators'
+import { debounceTime, filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -69,17 +69,16 @@ export class FormsComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((args) => args))
       .subscribe(async (args: UpdateFormRequest) => {
-        if (args) {
-          await this.datasource.updateForm(
-            Object.assign(args, {
-              maximumSubmissions: args.maximumSubmissions ? 1 : null,
-              id: form.id
-            }) as UpdateFormRequest
-          )
-          this.notifier.success(_('NOTIFY.SUCCESS.FORM_UPDATED'))
-          this.datasource.refresh()
-        }
+        await this.datasource.updateForm(
+          Object.assign(args, {
+            maximumSubmissions: args.maximumSubmissions ? 1 : null,
+            id: form.id
+          }) as UpdateFormRequest
+        )
+        this.notifier.success(_('NOTIFY.SUCCESS.FORM_UPDATED'))
+        this.datasource.refresh()
       })
   }
 
@@ -102,25 +101,24 @@ export class FormsComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((args) => args))
       .subscribe(async (args: CreateFormRequest) => {
-        if (args) {
-          try {
-            const res = await this.datasource.createForm(
-              Object.assign(args, {
-                maximumSubmissions: args.maximumSubmissions ? 1 : undefined,
-                organization: this.context.organization.id
-              }) as CreateFormRequest
-            )
+        try {
+          const res = await this.datasource.createForm(
+            Object.assign(args, {
+              maximumSubmissions: args.maximumSubmissions ? 1 : undefined,
+              organization: this.context.organization.id
+            }) as CreateFormRequest
+          )
 
-            this.router.navigate([res.id, 'edit'], { relativeTo: this.route })
-            this.notifier.success(_('NOTIFY.SUCCESS.FORM_CREATED'))
-            this.paginator.firstPage()
-            this.datasource.refresh()
-          } catch (error) {
-            this.notifier.error(error)
-            this.paginator.firstPage()
-            this.datasource.refresh()
-          }
+          this.router.navigate([res.id, 'edit'], { relativeTo: this.route })
+          this.notifier.success(_('NOTIFY.SUCCESS.FORM_CREATED'))
+          this.paginator.firstPage()
+          this.datasource.refresh()
+        } catch (error) {
+          this.notifier.error(error)
+          this.paginator.firstPage()
+          this.datasource.refresh()
         }
       })
   }
@@ -134,16 +132,15 @@ export class FormsComponent implements OnDestroy, OnInit {
         }
       })
       .afterClosed()
-      .subscribe(async (confirm: boolean) => {
-        if (confirm) {
-          try {
-            await this.datasource.deleteForm(form)
-            this.notifier.success(_('NOTIFY.SUCCESS.FORM_DELETED'))
-            this.paginator.firstPage()
-            this.datasource.refresh()
-          } catch (error) {
-            this.notifier.error(error)
-          }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
+        try {
+          await this.datasource.deleteForm(form)
+          this.notifier.success(_('NOTIFY.SUCCESS.FORM_DELETED'))
+          this.paginator.firstPage()
+          this.datasource.refresh()
+        } catch (error) {
+          this.notifier.error(error)
         }
       })
   }

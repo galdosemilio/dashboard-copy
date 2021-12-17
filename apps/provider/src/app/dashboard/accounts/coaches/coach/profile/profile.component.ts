@@ -20,6 +20,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Access, AccountProvider, Affiliation } from '@coachcare/sdk'
 import { resolveConfig } from '@app/config/section'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -169,16 +170,17 @@ export class CoachProfileComponent implements BindForm, OnDestroy, OnInit {
         }
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(async (confirm: boolean) => {
+      .pipe(
+        untilDestroyed(this),
+        filter((confirm) => confirm)
+      )
+      .subscribe(async () => {
         try {
-          if (confirm) {
-            this.isLoading = true
-            await this.access.resetPassword({
-              organization: this.context.organizationId,
-              email: account.email || ''
-            })
-          }
+          this.isLoading = true
+          await this.access.resetPassword({
+            organization: this.context.organizationId,
+            email: account.email || ''
+          })
         } catch (error) {
           this.notifier.error(error)
         } finally {

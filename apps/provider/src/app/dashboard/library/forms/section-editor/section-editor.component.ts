@@ -26,6 +26,7 @@ import {
 import { TranslateService } from '@ngx-translate/core'
 import { cloneDeep } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -171,11 +172,10 @@ export class SectionEditorComponent implements BindForm, OnDestroy, OnInit {
         }
       })
       .afterClosed()
-      .subscribe((confirmation: boolean) => {
-        if (confirmation) {
-          this.section.deleted = true
-          this.form.patchValue({ deleted: true })
-        }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        this.section.deleted = true
+        this.form.patchValue({ deleted: true })
       })
   }
 

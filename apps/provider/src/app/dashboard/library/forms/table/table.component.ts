@@ -20,6 +20,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as pdfMake from 'pdfmake'
 
 import { FormCloneDialog, FormCloneDialogData } from '../dialogs'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -74,13 +75,8 @@ export class FormsTableComponent {
     this.dialog
       .open(FormCloneDialog, { data, width: '50vw' })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.datasource.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.datasource.refresh())
   }
 
   onDisplayForm(form: Form): void {

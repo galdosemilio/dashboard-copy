@@ -250,14 +250,15 @@ export class AddressesComponent
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe((res: UserAddress) => {
-        if (res) {
-          this.onCreateAddress({
-            account: this.account,
-            ...res
-          })
-        }
+      .pipe(
+        untilDestroyed(this),
+        filter((address) => address)
+      )
+      .subscribe((address: UserAddress) => {
+        this.onCreateAddress({
+          account: this.account,
+          ...address
+        })
       })
   }
 

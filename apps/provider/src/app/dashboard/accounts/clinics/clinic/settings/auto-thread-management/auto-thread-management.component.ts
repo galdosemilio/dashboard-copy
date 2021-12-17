@@ -10,6 +10,7 @@ import { MatDialog } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { _, PromptDialog, PromptDialogData } from '@app/shared'
 import { CoachSelectDialog } from '@app/shared/dialogs'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'provider-auto-thread-management',
@@ -62,11 +63,8 @@ export class AutoThreadManagementComponent implements OnInit {
         width: '60vw'
       })
       .afterClosed()
+      .pipe(filter((account) => account))
       .subscribe((account: Account) => {
-        if (!account) {
-          return
-        }
-
         this.isLoading = true
 
         this.messagingPreference
@@ -99,19 +97,18 @@ export class AutoThreadManagementComponent implements OnInit {
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (confirm) {
-          this.messagingPreference
-            .deleteThreadAutoParticipant({
-              id: this.messagePreferenceId,
-              account: coach.id
-            })
-            .then(() => {
-              this.notifier.success(_('NOTIFY.SUCCESS.COACH_REMOVED'))
-              this.source.refresh()
-            })
-            .catch((err) => this.notifier.error(err))
-        }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        this.messagingPreference
+          .deleteThreadAutoParticipant({
+            id: this.messagePreferenceId,
+            account: coach.id
+          })
+          .then(() => {
+            this.notifier.success(_('NOTIFY.SUCCESS.COACH_REMOVED'))
+            this.source.refresh()
+          })
+          .catch((err) => this.notifier.error(err))
       })
   }
 }

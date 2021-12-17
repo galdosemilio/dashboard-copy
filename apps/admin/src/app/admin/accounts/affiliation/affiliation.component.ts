@@ -22,6 +22,7 @@ import {
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
 import { Subject } from 'rxjs'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-affiliation',
@@ -98,20 +99,19 @@ export class AffiliationComponent implements OnInit {
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (confirm) {
-          const req: DeleteOrganizationAssociationRequest = {
-            account: this.account.id,
-            organization: org.id
-          }
-          this.affiliation
-            .disassociate(req)
-            .then(() => {
-              this.notifier.success(_('NOTIFY.SUCCESS.ORG_DISOCCIATED'))
-              this.source.refresh({ offset: 0 })
-            })
-            .catch((err) => this.notifier.error(err))
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        const req: DeleteOrganizationAssociationRequest = {
+          account: this.account.id,
+          organization: org.id
         }
+        this.affiliation
+          .disassociate(req)
+          .then(() => {
+            this.notifier.success(_('NOTIFY.SUCCESS.ORG_DISOCCIATED'))
+            this.source.refresh({ offset: 0 })
+          })
+          .catch((err) => this.notifier.error(err))
       })
   }
 }

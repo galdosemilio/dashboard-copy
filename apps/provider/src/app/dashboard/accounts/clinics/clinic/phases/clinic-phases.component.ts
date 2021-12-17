@@ -9,6 +9,7 @@ import { OrgSingleResponse } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { CreatePhaseDialog } from '../../dialogs'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -44,13 +45,8 @@ export class ClinicPhasesComponent implements OnDestroy, OnInit {
     this.dialog
       .open(CreatePhaseDialog, { width: '60vw' })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.source.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
   }
 
   private createDatasource(): void {

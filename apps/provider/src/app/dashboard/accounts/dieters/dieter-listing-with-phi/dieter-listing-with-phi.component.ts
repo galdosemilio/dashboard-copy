@@ -24,7 +24,7 @@ import { _, PackageFilterComponent, unitConversion } from '@app/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { delay } from 'rxjs/operators'
+import { delay, filter } from 'rxjs/operators'
 import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { DieterListingItem } from './../models'
@@ -180,11 +180,8 @@ export class DieterListingWithPhiComponent
           panelClass: 'ccr-full-dialog'
         })
         .afterClosed()
-        .subscribe((agree) => {
-          if (agree) {
-            this.onOpenAccountCreateDialog()
-          }
-        })
+        .pipe(filter((agree) => agree))
+        .subscribe(() => this.onOpenAccountCreateDialog())
     } else {
       this.onOpenAccountCreateDialog()
     }
@@ -201,11 +198,10 @@ export class DieterListingWithPhiComponent
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .subscribe((user) => {
-        if (user) {
-          this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_CREATED'))
-          this.source.refresh()
-        }
+      .pipe(filter((user) => user))
+      .subscribe(() => {
+        this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_CREATED'))
+        this.source.refresh()
       })
   }
 

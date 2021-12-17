@@ -14,6 +14,7 @@ import {
 import { AssociateAllProvidersDialogComponent } from '../dialogs/associate-all-providers/associate-all-providers.dialog'
 import { OrganizationPreference } from '@coachcare/sdk'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -91,13 +92,8 @@ export class OrganizationActiveCampaignComponent implements OnDestroy, OnInit {
         width: '60vw'
       })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.source.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
   }
 
   public onEnrollAllProviders(): void {

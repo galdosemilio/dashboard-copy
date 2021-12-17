@@ -10,6 +10,7 @@ import { NotifierService } from '@app/service'
 import { _, TextInputDialog } from '@app/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { FormAddendumSingle } from '@coachcare/sdk'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-library-form-addendum-table',
@@ -51,14 +52,13 @@ export class FormAddendumTableComponent implements OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((text) => text))
       .subscribe(async (text: string) => {
-        if (text) {
-          await this.source.createFormAddendum({
-            submission: this.submission.id,
-            content: text
-          })
-          this.source.refresh()
-        }
+        await this.source.createFormAddendum({
+          submission: this.submission.id,
+          content: text
+        })
+        this.source.refresh()
       })
   }
 

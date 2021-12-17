@@ -4,6 +4,7 @@ import { MatDialog } from '@coachcare/material'
 import { ContextService, SelectedAccount } from '@app/service'
 import { ScheduleSelectDialog } from '@app/shared/dialogs/schedule-select.dialog'
 import { AccountTypeId } from '@coachcare/sdk'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-select-user',
@@ -52,11 +53,10 @@ export class CcrSelectUserComponent implements OnInit {
         }
       })
       .afterClosed()
+      .pipe(filter((user) => user && this.user.id !== user.id))
       .subscribe((user) => {
-        if (user && this.user.id !== user.id) {
-          this.context.selected = user
-          this.resolveText(user)
-        }
+        this.context.selected = user
+        this.resolveText(user)
       })
   }
 

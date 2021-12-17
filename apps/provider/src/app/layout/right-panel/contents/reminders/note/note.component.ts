@@ -4,6 +4,7 @@ import { ConfigService } from '@app/service'
 import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { LayoutNote } from '../notes-container'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-rightpanel-note',
@@ -40,10 +41,7 @@ export class NoteComponent {
         }
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (confirm) {
-          this.delete.emit(this.note)
-        }
-      })
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => this.delete.emit(this.note))
   }
 }

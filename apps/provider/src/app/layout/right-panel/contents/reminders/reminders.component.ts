@@ -25,7 +25,7 @@ import { find } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { filter, first } from 'rxjs/operators'
 import { Alerts } from '@coachcare/sdk'
 
 @UntilDestroy()
@@ -117,11 +117,10 @@ export class RemindersComponent implements OnInit, OnDestroy {
         formId: this.formId
       }
     })
-    dialog.afterClosed().subscribe((submissionId) => {
-      if (submissionId) {
-        this.notesRefresh$.next(submissionId)
-      }
-    })
+    dialog
+      .afterClosed()
+      .pipe(filter((submissionId) => submissionId))
+      .subscribe((submissionId) => this.notesRefresh$.next(submissionId))
   }
 
   translate() {

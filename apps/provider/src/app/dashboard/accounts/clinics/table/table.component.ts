@@ -13,6 +13,7 @@ import { ClinicsDataSource } from '@app/dashboard/accounts/clinics/services'
 import { ContextService, NotifierService } from '@app/service'
 import { _, PromptDialog, PromptDialogData } from '@app/shared'
 import { Affiliation, OrganizationAccess } from '@coachcare/sdk'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-clinics-table',
@@ -62,21 +63,20 @@ export class ClinicsTableComponent implements OnInit {
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (confirm) {
-          this.affiliation
-            .disassociate({
-              account: this.context.user.id,
-              organization: clinic.organization.id
-            })
-            .then(() => {
-              this.notifier.success(
-                _('NOTIFY.SUCCESS.CLINIC_ASSOCIATION_REMOVED')
-              )
-              this.source.refresh()
-            })
-            .catch((err) => this.notifier.error(err))
-        }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        this.affiliation
+          .disassociate({
+            account: this.context.user.id,
+            organization: clinic.organization.id
+          })
+          .then(() => {
+            this.notifier.success(
+              _('NOTIFY.SUCCESS.CLINIC_ASSOCIATION_REMOVED')
+            )
+            this.source.refresh()
+          })
+          .catch((err) => this.notifier.error(err))
       })
   }
 

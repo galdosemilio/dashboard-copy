@@ -23,6 +23,7 @@ import { find, get } from 'lodash'
 
 import { LOCALES } from '@app/shared/utils'
 import { LocaleSelectDialog } from './dialog'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-form-field-locale',
@@ -167,13 +168,12 @@ export class LocaleFormFieldComponent implements ControlValueAccessor, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
+      .pipe(filter((preferredLocales) => preferredLocales))
       .subscribe((preferredLocales: Array<string>) => {
-        if (preferredLocales) {
-          if (preferredLocales.length) {
-            this.onChange(preferredLocales)
-          } else {
-            this.onChange([])
-          }
+        if (preferredLocales.length) {
+          this.onChange(preferredLocales)
+        } else {
+          this.onChange([])
         }
       })
   }

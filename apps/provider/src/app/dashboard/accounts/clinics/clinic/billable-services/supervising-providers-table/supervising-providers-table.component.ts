@@ -50,13 +50,8 @@ export class ClinicSupervisingProvidersTable implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (!confirm) {
-          return
-        }
-
-        this.removeSupervisingProvider(association)
-      })
+      .pipe((confirm) => confirm)
+      .subscribe(() => this.removeSupervisingProvider(association))
   }
 
   private async removeSupervisingProvider(

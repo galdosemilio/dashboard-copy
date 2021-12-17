@@ -106,11 +106,10 @@ export class CcrAccountAssociationsComponent implements OnInit {
         width: '80vw'
       })
       .afterClosed()
-      .subscribe((reload) => {
-        if (reload) {
-          this.paginator.firstPage()
-          this.source.refresh()
-        }
+      .pipe(filter((reload) => reload))
+      .subscribe(() => {
+        this.paginator.firstPage()
+        this.source.refresh()
       })
   }
 

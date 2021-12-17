@@ -10,7 +10,7 @@ import { _, SelectorOption } from '@coachcare/backend/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { PromptDialog } from '@coachcare/common/dialogs/core'
 import { NotifierService } from '@coachcare/common/services'
-import { debounceTime } from 'rxjs/operators'
+import { debounceTime, filter } from 'rxjs/operators'
 import { ActiveCampaign } from '@coachcare/sdk'
 import { EditActiveCampaignDialogComponent } from '../../dialogs'
 
@@ -86,12 +86,9 @@ export class OrganizationActiveCampaignTableComponent
         width: '60vw'
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
         try {
-          if (!confirm) {
-            return
-          }
-
           await this.activeCampaign.deleteListAssociation({ id: entry.id })
           this.notifier.success(_('NOTIFY.SUCCESS.ACTIVE_CAMPAIGN_DELETED'))
           this.source.refresh()
@@ -108,13 +105,8 @@ export class OrganizationActiveCampaignTableComponent
         width: '60vw'
       })
       .afterClosed()
-      .subscribe((refresh) => {
-        if (!refresh) {
-          return
-        }
-
-        this.source.refresh()
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
   }
 
   private createForm(): void {

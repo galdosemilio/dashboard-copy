@@ -11,6 +11,7 @@ import {
 } from '@coachcare/sdk'
 import { AvailabilityManagementService } from '../../service'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { filter } from 'rxjs/operators'
 
 export type SingleDayAvailabilitySegment = FetchCalendarAvailabilitySegment & {
   startDate: string
@@ -94,23 +95,22 @@ export class ScheduleAvailabilitySingleDayComponent implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (confirm) {
-          const promises = []
-          segment.ids.forEach((i) => {
-            if (segment.isSingle) {
-              promises.push(this.schedule.deleteSingleAvailability(i))
-            }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        const promises = []
+        segment.ids.forEach((i) => {
+          if (segment.isSingle) {
+            promises.push(this.schedule.deleteSingleAvailability(i))
+          }
+        })
+        Promise.all(promises)
+          .then(() => {
+            this.notifier.success(_('NOTIFY.SUCCESS.TIME_BLOCK_DELETED'))
+            this.loadAvailability()
           })
-          Promise.all(promises)
-            .then(() => {
-              this.notifier.success(_('NOTIFY.SUCCESS.TIME_BLOCK_DELETED'))
-              this.loadAvailability()
-            })
-            .catch(() => {
-              this.notifier.error(_('NOTIFY.ERROR.TIME_BLOCK_NOT_DELETED'))
-            })
-        }
+          .catch(() => {
+            this.notifier.error(_('NOTIFY.ERROR.TIME_BLOCK_NOT_DELETED'))
+          })
       })
   }
 
@@ -123,10 +123,7 @@ export class ScheduleAvailabilitySingleDayComponent implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe((singleAvailability) => {
-        if (singleAvailability) {
-          this.loadAvailability()
-        }
-      })
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => this.loadAvailability())
   }
 }

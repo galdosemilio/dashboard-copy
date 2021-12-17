@@ -5,6 +5,7 @@ import { PromptDialog } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Access } from '@coachcare/sdk'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -38,16 +39,17 @@ export class SecurityComponent implements OnDestroy {
         }
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(async (confirm: boolean) => {
+      .pipe(
+        untilDestroyed(this),
+        filter((confirm) => confirm)
+      )
+      .subscribe(async () => {
         try {
-          if (confirm) {
-            this.isLoading = true
-            await this.access.resetPassword({
-              organization: this.context.organizationId,
-              email: account.email || ''
-            })
-          }
+          this.isLoading = true
+          await this.access.resetPassword({
+            organization: this.context.organizationId,
+            email: account.email || ''
+          })
         } catch (error) {
           this.notifier.error(error)
         } finally {

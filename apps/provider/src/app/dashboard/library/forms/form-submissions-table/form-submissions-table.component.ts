@@ -7,6 +7,7 @@ import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services
 import { ContextService, FormPDFService, NotifierService } from '@app/service'
 import { _, PromptDialog, TranslationsObject } from '@app/shared'
 import { AccountProvider } from '@coachcare/sdk'
+import { filter } from 'rxjs/operators'
 @Component({
   selector: 'app-library-form-submissions-table',
   templateUrl: './form-submissions-table.component.html',
@@ -106,12 +107,11 @@ export class FormSubmissionsTableComponent {
         }
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
         try {
-          if (confirm) {
-            await this.source.removeSubmission({ id: formSubmission.id })
-            this.source.refresh()
-          }
+          await this.source.removeSubmission({ id: formSubmission.id })
+          this.source.refresh()
         } catch (error) {
           this.notifier.error(error)
         }

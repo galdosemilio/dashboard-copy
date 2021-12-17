@@ -7,6 +7,7 @@ import { NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { EmailTemplate, OrganizationProvider } from '@coachcare/sdk'
 import { EmailTemplateDialogComponent } from '../dialogs'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -44,12 +45,13 @@ export class EmailTemplateTableComponent implements OnDestroy {
       this.dialog
         .open(PromptDialog, { data: data })
         .afterClosed()
-        .pipe(untilDestroyed(this))
-        .subscribe(async (confirm) => {
-          if (confirm) {
-            await this.organization.deleteEmailTemplate(template.id)
-            this.source.refresh()
-          }
+        .pipe(
+          untilDestroyed(this),
+          filter((confirm) => confirm)
+        )
+        .subscribe(async () => {
+          await this.organization.deleteEmailTemplate(template.id)
+          this.source.refresh()
         })
     } catch (error) {
       this.notify.error(error)
@@ -67,11 +69,10 @@ export class EmailTemplateTableComponent implements OnDestroy {
         width: '60vw'
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe((refresh) => {
-        if (refresh) {
-          this.source.refresh()
-        }
-      })
+      .pipe(
+        untilDestroyed(this),
+        filter((refresh) => refresh)
+      )
+      .subscribe(() => this.source.refresh())
   }
 }

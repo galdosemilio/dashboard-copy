@@ -215,12 +215,9 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
         try {
-          if (!confirm) {
-            return
-          }
-
           this.isMarkingAsRead = true
 
           await this.messaging.markAllMessagesAsViewed({})

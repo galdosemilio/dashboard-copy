@@ -25,6 +25,7 @@ import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
 import { FormAnswer } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable } from 'rxjs'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -238,12 +239,9 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
               }
             })
             .afterClosed()
-            .subscribe(async (confirmation: boolean) => {
-              if (confirmation) {
-                await this.syncSections(
-                  this.form.value.sections.updatedSections
-                )
-              }
+            .pipe(filter((confirm) => confirm))
+            .subscribe(async () => {
+              await this.syncSections(this.form.value.sections.updatedSections)
             })
         }
       }

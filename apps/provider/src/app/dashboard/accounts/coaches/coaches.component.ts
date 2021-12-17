@@ -22,7 +22,7 @@ import {
 import { _ } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { Subject } from 'rxjs'
-import { delay } from 'rxjs/operators'
+import { delay, filter } from 'rxjs/operators'
 import { AccountCreateDialog } from '../dialogs'
 import { CoachesDatabase, CoachesDataSource } from './services'
 import { AccountAccessData } from '@coachcare/sdk'
@@ -150,11 +150,10 @@ export class CoachesComponent implements AfterViewInit, OnInit, OnDestroy {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .subscribe((user) => {
-        if (user) {
-          this.notifier.success(_('NOTIFY.SUCCESS.COACH_CREATED'))
-          this.source.refresh()
-        }
+      .pipe(filter((user) => user))
+      .subscribe(() => {
+        this.notifier.success(_('NOTIFY.SUCCESS.COACH_CREATED'))
+        this.source.refresh()
       })
   }
 

@@ -22,6 +22,7 @@ import {
   CcrOrganizationDialogs,
   OrganizationParams
 } from '@coachcare/common/services/organization'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-organization-tree-page',
@@ -148,11 +149,10 @@ export class CcrOrganizationTreePageComponent implements OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .subscribe((res) => {
-        if (res) {
-          this.database.initialize(this.organization)
-          this.treeControl.expand(this.treeControl.dataNodes[0])
-        }
+      .pipe(filter((res) => res))
+      .subscribe(() => {
+        this.database.initialize(this.organization)
+        this.treeControl.expand(this.treeControl.dataNodes[0])
       })
   }
 

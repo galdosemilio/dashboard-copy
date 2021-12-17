@@ -39,7 +39,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SelectOrganizationDialog } from '@app/shared/dialogs/select-organization'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { Subject } from 'rxjs'
-import { debounceTime } from 'rxjs/operators'
+import { debounceTime, filter } from 'rxjs/operators'
 
 export interface TimeBlock {
   display: string
@@ -250,11 +250,8 @@ export class ScheduleCalendarComponent
           }
         })
         .afterClosed()
-        .subscribe((confirm) => {
-          if (confirm) {
-            this.doDeleteSingle()
-          }
-        })
+        .pipe(filter((confirm) => confirm))
+        .subscribe(() => this.doDeleteSingle())
     }
   }
 
@@ -305,11 +302,8 @@ export class ScheduleCalendarComponent
         width: !this.deviceDetector.isMobile() ? '60vw' : undefined
       })
       .afterClosed()
-      .subscribe((org: OrganizationEntity | null) => {
-        if (!org && org !== null) {
-          return
-        }
-
+      .pipe(filter((org) => org))
+      .subscribe((org: OrganizationEntity) => {
         this.context.selectedClinic = org
       })
   }

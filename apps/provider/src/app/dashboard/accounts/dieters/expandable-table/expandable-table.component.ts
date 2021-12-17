@@ -157,11 +157,10 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .subscribe((user: AccountEditDialogData) => {
-        if (user) {
-          this.notify.success(_('NOTIFY.SUCCESS.PATIENT_UPDATED'))
-          this.source.refresh()
-        }
+      .pipe(filter((user) => user))
+      .subscribe(() => {
+        this.notify.success(_('NOTIFY.SUCCESS.PATIENT_UPDATED'))
+        this.source.refresh()
       })
   }
 

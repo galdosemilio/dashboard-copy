@@ -123,11 +123,8 @@ export class ClinicBillableServicesComponent implements OnInit {
         width: this.deviceDetector.isMobile ? undefined : '60vw'
       })
       .afterClosed()
-      .subscribe((confirm) => {
-        if (!confirm) {
-          return
-        }
-
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
         this.source.forceEmpty = true
         this.source.removeInheritance()
       })

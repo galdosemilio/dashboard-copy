@@ -111,12 +111,11 @@ export class DietersTableComponent implements OnInit, OnDestroy {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .subscribe((user: AccountEditDialogData) => {
-        if (user) {
-          this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_UPDATED'))
-          // trigger a table refresh
-          this.source.refresh()
-        }
+      .pipe(filter((user) => user))
+      .subscribe(() => {
+        this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_UPDATED'))
+        // trigger a table refresh
+        this.source.refresh()
       })
   }
 

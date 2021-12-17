@@ -15,6 +15,7 @@ import { DeleteRecurringMeetingDialog } from '../dialogs/delete-recurring-meetin
 import { ViewMeetingDialog } from '../dialogs/view-meeting'
 import { Meeting } from '@app/shared/model'
 import { MeetingsDataSource } from '../services'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -93,11 +94,8 @@ export class ScheduleListTableComponent implements OnDestroy, OnInit {
       this.dialog
         .open(DeleteRecurringMeetingDialog, { data: { meeting } })
         .afterClosed()
+        .pipe(filter((result) => result))
         .subscribe(async (result: any) => {
-          if (!result) {
-            return
-          }
-
           try {
             if (
               result.deleteMode === 'recurringAfter' ||
@@ -122,15 +120,16 @@ export class ScheduleListTableComponent implements OnDestroy, OnInit {
           }
         })
         .afterClosed()
-        .pipe(untilDestroyed(this))
-        .subscribe(async (confirm) => {
-          if (confirm) {
-            try {
-              await this.schedule.deleteMeeting(meeting.id)
-              this.bus.trigger('schedule.table.refresh')
-            } catch (error) {
-              this.notifier.error(error)
-            }
+        .pipe(
+          untilDestroyed(this),
+          filter((confirm) => confirm)
+        )
+        .subscribe(async () => {
+          try {
+            await this.schedule.deleteMeeting(meeting.id)
+            this.bus.trigger('schedule.table.refresh')
+          } catch (error) {
+            this.notifier.error(error)
           }
         })
     }

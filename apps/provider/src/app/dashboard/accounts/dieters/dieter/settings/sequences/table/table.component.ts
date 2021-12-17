@@ -6,6 +6,7 @@ import { _, PromptDialog } from '@app/shared'
 import { GetAllSeqEnrollmentsResponse, Sequence } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SequenceEnrollmentDataSource } from '../../services'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -37,17 +38,18 @@ export class DieterSequencesTableComponent implements OnDestroy {
         }
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(async (confirm) => {
-        if (confirm) {
-          await this.sequence.createInactiveSeqEnrollment({
-            account: this.context.accountId,
-            createdBy: this.context.user.id,
-            sequence: enrollment.sequence.id
-          })
-          this.paginator.firstPage()
-          this.source.refresh()
-        }
+      .pipe(
+        untilDestroyed(this),
+        filter((confirm) => confirm)
+      )
+      .subscribe(async () => {
+        await this.sequence.createInactiveSeqEnrollment({
+          account: this.context.accountId,
+          createdBy: this.context.user.id,
+          sequence: enrollment.sequence.id
+        })
+        this.paginator.firstPage()
+        this.source.refresh()
       })
   }
 

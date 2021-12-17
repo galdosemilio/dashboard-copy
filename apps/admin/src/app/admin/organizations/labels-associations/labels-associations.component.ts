@@ -29,7 +29,7 @@ import {
   OrganizationParams
 } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { debounceTime } from 'rxjs/operators'
+import { debounceTime, filter } from 'rxjs/operators'
 import { CreateLabelDialogComponent } from '../dialogs'
 
 @UntilDestroy()
@@ -282,12 +282,13 @@ export class LabelsAssociationsComponent implements OnDestroy, OnInit {
 
   public showLabelDialog(): void {
     const dialog = this.dialog.open(CreateLabelDialogComponent)
-    dialog.afterClosed().subscribe((result) => {
-      if (result && result.id) {
+    dialog
+      .afterClosed()
+      .pipe(filter((result) => result && result.id))
+      .subscribe((result) => {
         this.selectedLabelId = result.id
         this.associate()
-      }
-    })
+      })
   }
 
   private createForm(): void {

@@ -7,6 +7,7 @@ import { Sequence as SelveraSequenceService } from '@coachcare/sdk'
 import { DuplicateSequenceDialog } from '../../dialogs'
 import { Sequence } from '../../models'
 import { SequencesDataSource } from '../../services'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-sequencing-sequences-table',
@@ -42,11 +43,8 @@ export class SequencesTableComponent {
         disableClose: true
       })
       .afterClosed()
-      .subscribe((refresh: boolean) => {
-        if (refresh) {
-          this.source.refresh()
-        }
-      })
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
   }
 
   public onRemoveSequence(sequence: Sequence): void {
@@ -59,15 +57,14 @@ export class SequencesTableComponent {
         }
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
-        if (confirm) {
-          await this.sequence.updateSequence({
-            id: sequence.id,
-            isActive: false,
-            organization: this.context.organizationId
-          })
-          this.source.refresh()
-        }
+      .pipe(filter((refresh) => refresh))
+      .subscribe(async () => {
+        await this.sequence.updateSequence({
+          id: sequence.id,
+          isActive: false,
+          organization: this.context.organizationId
+        })
+        this.source.refresh()
       })
   }
 

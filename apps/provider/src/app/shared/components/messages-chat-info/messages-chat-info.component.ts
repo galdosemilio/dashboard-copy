@@ -57,12 +57,9 @@ export class CcrMessagesChatInfoComponent implements OnInit {
             : undefined
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
         try {
-          if (!confirm) {
-            return
-          }
-
           await this.messaging.updateAccountThreadAssociation({
             threadId: this.thread.threadId,
             account: user.id,

@@ -8,6 +8,7 @@ import {
 import { ContextService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { EmailTemplateDialogComponent } from './dialogs'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -47,11 +48,10 @@ export class EmailTemplateComponent implements OnDestroy, OnInit {
         width: '60vw'
       })
       .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe((refresh) => {
-        if (refresh) {
-          this.source.refresh()
-        }
-      })
+      .pipe(
+        untilDestroyed(this),
+        filter((refresh) => refresh)
+      )
+      .subscribe(() => this.source.refresh())
   }
 }

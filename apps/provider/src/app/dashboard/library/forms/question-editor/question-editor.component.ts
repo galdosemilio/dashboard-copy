@@ -21,6 +21,7 @@ import {
 import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { fromEvent } from 'rxjs'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -117,11 +118,10 @@ export class QuestionEditorComponent
         }
       })
       .afterClosed()
-      .subscribe((confirmation: boolean) => {
-        if (confirmation) {
-          this.question.deleted = true
-          this.form.patchValue({ deleted: true })
-        }
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        this.question.deleted = true
+        this.form.patchValue({ deleted: true })
       })
   }
 
