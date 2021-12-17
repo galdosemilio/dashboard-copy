@@ -81,7 +81,7 @@ export class RPMStateEntry {
           supervisingProvider: {
             ...args.rpmState.supervisingProvider,
             firstName:
-              args.rpmState.supervisingProvider.firstName ||
+              args.rpmState.supervisingProvider?.firstName ||
               _('BOARD.INACCESSIBLE_PROVIDER')
           }
         }
