@@ -1,3 +1,32 @@
+# [1.57.0](https://github.com/coachcare/dashboard/compare/v1.56.0...v1.57.0) (2021-12-17)
+
+
+### Bug Fixes
+
+* add maximum upload size limit [FRON-2097] ([b027926](https://github.com/coachcare/dashboard/commit/b0279265dd1a718f65a05cc7d28d6fdfa6daafe8))
+* add min date based on org createdAt for reports control [FRON-2027] ([10a5204](https://github.com/coachcare/dashboard/commit/10a5204621777461a5c5004141f16d214493988e))
+* adjusted sonarcloud security hotspots [FRON-2519] ([6ebf934](https://github.com/coachcare/dashboard/commit/6ebf9346e43a4608cbf4882a99fbee1054ce1f87))
+* daily view in measurement chart [FRON-2458] ([d626853](https://github.com/coachcare/dashboard/commit/d62685395c0c4caa6557038480d0c3403fa3deb3))
+* dashboard logout issue [FRON-2521] ([374e509](https://github.com/coachcare/dashboard/commit/374e5099bbdcf92db0f79ad6e747025722e16b9d))
+* increased throttling values for the test env [FRON-2518] ([c0623cc](https://github.com/coachcare/dashboard/commit/c0623cc50eccbe7f7ea15c43359655b8c29ddf47))
+* measurement management cleanup [FRON-2524] ([65d7025](https://github.com/coachcare/dashboard/commit/65d70256c1025e74dff11e292ad6e4810456a96d))
+* multiple minor adjustments to measurement management [IDEA-1053] ([dc3c332](https://github.com/coachcare/dashboard/commit/dc3c332166f6eade6ca92bce4c8d50079375f1b5))
+* resolve types with undefined label [FRON-2522] ([0b7e64d](https://github.com/coachcare/dashboard/commit/0b7e64df538eb1b87a4302a075f62dcc5db644c9))
+* restored chart point offsetting [FRON-2400] ([dceb58a](https://github.com/coachcare/dashboard/commit/dceb58ac38ecdb2179b71f7dc1f0b181bee4bd55))
+* show error messages for enabled autoenrollment [FRON-2461] ([da0a27d](https://github.com/coachcare/dashboard/commit/da0a27d19306870ea75715e8772b05dab57a7a40))
+* trigger new form submission with MIQ button [FRON-2515] ([903f4f3](https://github.com/coachcare/dashboard/commit/903f4f36897903b4c60db9b3c8903a2d09234053))
+
+
+### Features
+
+* added addendum notice [FRON-2303] ([a14d41e](https://github.com/coachcare/dashboard/commit/a14d41ef83c620955f7dd89b9e8f7369e29cd762))
+* added my progress component to the patient dashboard [FRON-2310] ([f4b10d3](https://github.com/coachcare/dashboard/commit/f4b10d3d7185f113225f4a559d54e54464d56559))
+* added phase history tab [FRON-2470] ([400b263](https://github.com/coachcare/dashboard/commit/400b2636539a6ca0def141a401fb9e5952d81384))
+* added support for distance if steps is present [FRON-2304] ([b7d7113](https://github.com/coachcare/dashboard/commit/b7d7113d00292410ed1e9ee04a0e14946e11f37a))
+* adjusted cypress tests [FRON-2520] ([cd2fcc6](https://github.com/coachcare/dashboard/commit/cd2fcc678deafa16dbb49d712143f01b11195f0e))
+* standalone measurement dynamic rendering [IDEA-271] ([18b5ea7](https://github.com/coachcare/dashboard/commit/18b5ea756b6d93e039ef58e1a29b83f00dea12d4))
+* standalone measurement management [IDEA-271] ([b7b4b46](https://github.com/coachcare/dashboard/commit/b7b4b464aa12545f87a864af80c693bf325098fe))
+
 # [1.56.0](https://github.com/coachcare/dashboard/compare/v1.55.0...v1.56.0) (2021-12-06)
 
 
