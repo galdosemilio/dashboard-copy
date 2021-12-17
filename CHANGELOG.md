@@ -1,3 +1,11 @@
+## [1.57.1](https://github.com/coachcare/dashboard/compare/v1.57.0...v1.57.1) (2021-12-17)
+
+
+### Bug Fixes
+
+* disabled shift set go list view ([cdc2e79](https://github.com/coachcare/dashboard/commit/cdc2e7948434be5fd6f4b0665f40faf45f2d804b))
+* solved an issue causing the rpm toggle to be stuck ([aea02b9](https://github.com/coachcare/dashboard/commit/aea02b93444f60dd9bbc351e9f080e0e3ebde14e))
+
 # [1.57.0](https://github.com/coachcare/dashboard/compare/v1.56.0...v1.57.0) (2021-12-17)
 
 
