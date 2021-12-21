@@ -1,0 +1,8 @@
+<button
+[disabled]="isLoading || !hasRecording"
+[title]="'BOARD.DOWNLOAD_VIDEO_RECORDING' | translate"
+(click)="onClick()"
+mat-icon-button>
+  <mat-icon [class.disabled]="isLoading || !hasRecording">file_download</mat-icon>
+</button>
+

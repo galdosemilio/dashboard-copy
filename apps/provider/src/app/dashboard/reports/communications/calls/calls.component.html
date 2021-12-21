@@ -110,8 +110,12 @@
         <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
         <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxFlex.xs="grow">
             <span>{{'BOARD.ACTIONS' | translate}}</span>
+            <app-call-recording-button
+                *ngIf="showCallRecordingButton"
+                [callId]="row.id">
+            </app-call-recording-button>
             <button
-            *ngIf="row.canBeDeleted"
+            *ngIf="row.canBeDeleted && allowCreation"
             [title]="'GLOBAL.DELETE' | translate"
             (click)="showRemoveInteractionDialog(row)"
             mat-icon-button>

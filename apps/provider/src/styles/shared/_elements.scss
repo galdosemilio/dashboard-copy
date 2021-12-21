@@ -560,6 +560,6 @@ ul.footnotes {
 }
 
 mat-icon.disabled {
-  color: mat-color($ccr-foreground, divider);
+  color: mat-color($ccr-foreground, divider) !important;
   cursor: default !important;
 }

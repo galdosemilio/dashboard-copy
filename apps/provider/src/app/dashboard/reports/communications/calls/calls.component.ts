@@ -2,7 +2,6 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core'
@@ -40,7 +39,7 @@ import { filter } from 'rxjs/operators'
   templateUrl: './calls.component.html',
   styleUrls: ['./calls.component.scss']
 })
-export class CallsComponent implements OnDestroy, OnInit {
+export class CallsComponent implements OnInit {
   @Input() set account(value: string) {
     this._account = value
     this.account$.next(value)
@@ -72,6 +71,7 @@ export class CallsComponent implements OnDestroy, OnInit {
   reportsCriteria?: ReportsCriteria
   downloadLimit = 1000
   downloadData: Array<InteractionSingle[]> = []
+  showCallRecordingButton: boolean
 
   private _account: string
   private account$: Subject<string> = new Subject<string>()
@@ -94,10 +94,10 @@ export class CallsComponent implements OnDestroy, OnInit {
     this.handleDownload$ = this.handleDownload$.bind(this)
   }
 
-  ngOnDestroy() {}
-
-  ngOnInit() {
+  public ngOnInit(): void {
     try {
+      this.resolveRecordingButtonDisplay()
+
       this.source = new CallHistoryDataSource(this.database, this.paginator)
       this.source.addDefault({
         status: 'ended'
@@ -474,10 +474,6 @@ export class CallsComponent implements OnDestroy, OnInit {
         (col) => col !== 'rpmBillable'
       )
     }
-
-    if (!this.allowCreation) {
-      this.shownColumns = this.shownColumns.filter((col) => col !== 'actions')
-    }
   }
 
   private async removeInteraction(interaction: CallHistoryItem): Promise<void> {
@@ -507,5 +503,11 @@ export class CallsComponent implements OnDestroy, OnInit {
     } catch (error) {
       this.notify.error(error)
     }
+  }
+
+  private resolveRecordingButtonDisplay(): void {
+    this.showCallRecordingButton =
+      this.context.organization.preferences?.comms?.recording?.isEnabled ??
+      false
   }
 }
