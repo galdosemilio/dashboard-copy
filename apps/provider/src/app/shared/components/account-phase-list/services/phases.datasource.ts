@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core'
-import { MatPaginator, MatSort } from '@coachcare/material'
+import { MatPaginator } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { TableDataSource } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
 import {
   FetchPackagesSegment,
-  GetAllPackageOrganizationRequest
+  GetAllPackageOrganizationRequest,
+  PackageEnrollmentSegment
 } from '@coachcare/sdk'
-import { find } from 'lodash'
 import { Observable } from 'rxjs'
 import { PhasesDatabase, PackagesAndEnrollments } from './phases.database'
 
@@ -16,10 +16,18 @@ export type PhasesDataSegment = {
   package: FetchPackagesSegment
   inherited: boolean
   status: string
-  enrolled: string | null
-  active: string | null
-  // history: any;
+  enrolled: boolean
+  history: { start: string; end: string }
 }
+
+const DEFAULT_ENROLLMENT_ENTRY: PhasesDataSegment = Object.freeze({
+  id: null,
+  inherited: false,
+  status: _('PHASE.NEVER_ENROLLED'),
+  enrolled: false,
+  history: { start: '', end: '' },
+  package: null
+})
 
 @Injectable()
 export class PhasesDataSource extends TableDataSource<
@@ -27,14 +35,13 @@ export class PhasesDataSource extends TableDataSource<
   PackagesAndEnrollments,
   GetAllPackageOrganizationRequest
 > {
-  enrollments: any[] = []
+  enrollments: PackageEnrollmentSegment[] = []
   showMarker: boolean
 
   constructor(
     protected notify: NotifierService,
     protected database: PhasesDatabase,
-    private paginator?: MatPaginator,
-    private sort?: MatSort
+    private paginator?: MatPaginator
   ) {
     super()
 
@@ -70,39 +77,32 @@ export class PhasesDataSource extends TableDataSource<
       ? this.criteria.offset + result.data.length
       : 0
 
-    const active = find(result.enrollments.data, { isActive: true })
-
     this.enrollments = result.enrollments.data
 
     return result.data.map((pkg) => {
-      const pkgEnrolls = result.enrollments.data.filter(
-        (e) => pkg.id === e.package
-      )
+      const mostRecentEnrollment = this.enrollments
+        .filter((e) => pkg.id === e.package.id)
+        .shift()
 
-      let status = _('PHASE.NEVER_ENROLLED')
-      let enrolled = null
-      for (const e of pkgEnrolls) {
-        if (e.isActive) {
-          enrolled = e.id
-        }
-        status = enrolled
+      let enrollmentStatus = _('PHASE.NEVER_ENROLLED')
+
+      if (mostRecentEnrollment) {
+        enrollmentStatus = mostRecentEnrollment.isActive
           ? _('PHASE.CURRENTLY_ENROLLED')
           : _('PHASE.PREVIOUSLY_ENROLLED')
       }
 
       return {
-        id: active ? active.id : null,
-        package: pkg,
+        ...DEFAULT_ENROLLMENT_ENTRY,
+        id: mostRecentEnrollment?.id ?? '',
         inherited: pkg.organization.id !== this.criteria.organization,
-        status,
-        enrolled,
-        active: active ? active.id : null
-        // history: {
-        //   start: pkgEnrolls.map(p => moment(p.startDate).format('LL')),
-        //   end: pkgEnrolls.map(p => (p.endDate ? moment(p.endDate).format('LL') : '-')),
-        //   actions: pkgEnrolls.map(p => (p.isActive ? false : true)),
-        //   enrollments: pkgEnrolls
-        // }
+        enrolled: mostRecentEnrollment?.isActive ?? false,
+        status: enrollmentStatus,
+        history: {
+          start: mostRecentEnrollment?.enroll.start ?? '',
+          end: mostRecentEnrollment?.enroll.end ?? ''
+        },
+        package: pkg
       }
     })
   }

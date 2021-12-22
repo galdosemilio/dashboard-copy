@@ -14,10 +14,28 @@
         <caption hidden>{{ 'GLOBAL.PHASE_HISTORY' | translate }}</caption>
         <thead>
           <th scope="col">{{ 'GLOBAL.ID' | translate }}</th>
-          <th class="name-column" scope="col">{{ 'BOARD.NAME' | translate }}</th>
+          <th class="name-column" scope="col">
+            <div>
+              <ccr-table-sort-header property="name">
+                <span>{{ 'BOARD.NAME' | translate }}</span>
+              </ccr-table-sort-header>
+            </div>
+          </th>
           <th class="clinic-column" scope="col">{{ 'BOARD.CLINIC' | translate }}</th>
-          <th class="enrollment-column" scope="col">{{ 'BOARD.ENROLLMENT_START' | translate }}</th>
-          <th class="enrollment-column" scope="col">{{ 'BOARD.ENROLLMENT_END' | translate }}</th>
+          <th class="enrollment-column" scope="col">
+            <div>
+              <ccr-table-sort-header property="enrollStart">
+                <span>{{ 'BOARD.ENROLLMENT_START' | translate }}</span>
+              </ccr-table-sort-header>
+            </div>
+          </th>
+          <th class="enrollment-column" scope="col">
+            <div>
+              <ccr-table-sort-header property="enrollEnd">
+                <span>{{ 'BOARD.ENROLLMENT_END' | translate }}</span>
+              </ccr-table-sort-header>
+            </div>
+          </th>
         </thead>
 
         <tbody>

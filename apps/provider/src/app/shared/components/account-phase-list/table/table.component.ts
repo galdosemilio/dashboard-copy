@@ -37,35 +37,34 @@ export class PhasesTableComponent implements AfterViewInit {
     })
   }
 
-  enroll(item: PhasesDataSegment) {
-    this.database
-      .enroll(
+  async enroll(item: PhasesDataSegment) {
+    try {
+      await this.database.enroll(
         item,
         this.source.enrollments.find((enrollment) => enrollment.isActive)
       )
-      .then(() => {
-        this.bus.trigger('phases.assoc.added', item)
-        this.notifier.success(_('NOTIFY.SUCCESS.PACKAGE_ENROLLED'))
-        this.source.refresh()
-      })
-      .catch((err) => {
-        this.notifier.error(err)
-      })
+
+      this.bus.trigger('phases.assoc.added', item)
+      this.notifier.success(_('NOTIFY.SUCCESS.PACKAGE_ENROLLED'))
+      this.source.refresh()
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
-  unenroll(item: PhasesDataSegment) {
-    this.database
-      .unenrollPrompt(item)
-      .then(() => {
-        this.bus.trigger('phases.assoc.removed', item)
-        this.notifier.success(_('NOTIFY.SUCCESS.PACKAGE_UNENROLLED'))
-        this.source.refresh()
-      })
-      .catch((err) => {
-        if (err) {
-          // non-discarded prompt
-          this.notifier.error(err)
-        }
-      })
+  async unenroll(item: PhasesDataSegment) {
+    try {
+      await this.database.unenrollPrompt(item)
+      this.bus.trigger('phases.assoc.removed', item)
+      this.notifier.success(_('NOTIFY.SUCCESS.PACKAGE_UNENROLLED'))
+      this.source.refresh()
+    } catch (error) {
+      if (!error) {
+        return
+      }
+
+      // non-discarded prompt
+      this.notifier.error(error)
+    }
   }
 }

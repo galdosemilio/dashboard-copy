@@ -6,20 +6,22 @@ import { PromptDialog, PromptDialogData } from '@app/shared/dialogs'
 import { CcrDatabase } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
 import {
-  FetchEnrollmentsResponse,
+  Entity,
   FetchPackagesResponse,
   GetAllPackageOrganizationRequest,
   PackageEnrollment,
-  PackageOrganization
+  PackageEnrollmentSegment,
+  PackageOrganization,
+  Pagination
 } from '@coachcare/sdk'
-import { merge } from 'lodash'
 import * as moment from 'moment'
-import { from, Observable } from 'rxjs'
+import { from, iif, Observable, throwError } from 'rxjs'
 
 import { PhasesDataSegment } from './phases.datasource'
+import { mergeMap } from 'rxjs/operators'
 
 export type PackagesAndEnrollments = FetchPackagesResponse & {
-  enrollments: FetchEnrollmentsResponse
+  enrollments: { data: PackageEnrollmentSegment[]; pagination: Pagination }
 }
 
 @Injectable()
@@ -50,7 +52,6 @@ export class PhasesDatabase extends CcrDatabase {
           const enrollmentsPromise = this.enrollment.getAll({
             account: this.context.accountId,
             organization: args.organization,
-            isActive: true,
             offset: 0,
             limit: 'all',
             sort: [{ property: 'enrollStart', dir: 'desc' }]
@@ -65,9 +66,11 @@ export class PhasesDatabase extends CcrDatabase {
             }))
           )
 
-          const enrollments = (await enrollmentsPromise).data.map((data) =>
+          const enrollments: Partial<PackageEnrollmentSegment>[] = (
+            await enrollmentsPromise
+          ).data.map((data) =>
             data
-              ? { ...data, package: data.package.id }
+              ? { ...data }
               : {
                   id: '',
                   isActive: false,
@@ -79,16 +82,11 @@ export class PhasesDatabase extends CcrDatabase {
 
           const phaseHistory = { data: enrollments }
 
-          resolve(
-            merge(
-              {},
-              {
-                data: [...phasePackages],
-                enrollments: phaseHistory,
-                pagination: associationResponse.pagination
-              }
-            )
-          )
+          resolve({
+            data: [...phasePackages],
+            enrollments: phaseHistory,
+            pagination: associationResponse.pagination
+          })
         } catch (error) {
           reject(error)
         }
@@ -96,7 +94,7 @@ export class PhasesDatabase extends CcrDatabase {
     )
   }
 
-  async enroll(item: PhasesDataSegment, old: PhasesDataSegment): Promise<any> {
+  async enroll(item: PhasesDataSegment, old: Entity): Promise<any> {
     const unenrollThenEnroll = resolveConfig(
       'PATIENT_FORM.UNENROLL_THEN_ENROLL',
       this.context.organization
@@ -116,29 +114,30 @@ export class PhasesDatabase extends CcrDatabase {
   }
 
   unenrollPrompt(item: PhasesDataSegment): Promise<void | string> {
-    return new Promise((resolve, reject) => {
-      const data: PromptDialogData = {
-        title: _('PHASE.CONFIRM_UNENROLL'),
-        content: _('PHASE.CONFIRM_UNENROLL_PROMPT'),
-        contentParams: { item: `${item.package.title}` },
-        no: _('GLOBAL.CANCEL'),
-        yes: _('PHASE.UNENROLL')
-      }
+    const data: PromptDialogData = {
+      title: _('PHASE.CONFIRM_UNENROLL'),
+      content: _('PHASE.CONFIRM_UNENROLL_PROMPT'),
+      contentParams: { item: `${item.package.title}` },
+      no: _('GLOBAL.CANCEL'),
+      yes: _('PHASE.UNENROLL')
+    }
 
-      this.dialog
-        .open(PromptDialog, { data: data })
-        .afterClosed()
-        .subscribe((confirm) => {
-          if (confirm) {
-            this.unenroll(item.enrolled).then(resolve).catch(reject)
-          } else {
-            reject()
-          }
-        })
-    })
+    return this.dialog
+      .open(PromptDialog, { data: data })
+      .afterClosed()
+      .pipe(
+        mergeMap((confirm) =>
+          iif(() => confirm, this.unenroll(item), throwError(null))
+        )
+      )
+      .toPromise()
   }
 
-  unenroll(id: string | number): Promise<void | string> {
-    return this.enrollment.update({ id: id.toString(), isActive: false })
+  unenroll(phase: PhasesDataSegment): Promise<void | string> {
+    return this.enrollment.update({
+      id: phase.id.toString(),
+      isActive: false,
+      enroll: { start: phase.history.start, end: moment().toISOString() }
+    })
   }
 }

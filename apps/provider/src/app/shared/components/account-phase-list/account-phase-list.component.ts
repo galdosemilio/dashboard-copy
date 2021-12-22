@@ -44,8 +44,7 @@ export class AccountPhaseListComponent
     )
 
     this.source.addRequired(this.param$, () => ({
-      organization: this.clinic,
-      active: true
+      organization: this.clinic
     }))
 
     // shared organizations
