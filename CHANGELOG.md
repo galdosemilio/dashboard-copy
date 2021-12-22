@@ -1,3 +1,14 @@
+## [1.57.2](https://github.com/coachcare/dashboard/compare/v1.57.1...v1.57.2) (2021-12-22)
+
+
+### Bug Fixes
+
+* add validation error messages [FRON-1700] ([19ee104](https://github.com/coachcare/dashboard/commit/19ee104cdd9114645fcf52f0f90f4a4f52887731))
+* popup for downloadable content for preview [FRON-1605] ([5a76539](https://github.com/coachcare/dashboard/commit/5a765395e5f51065a428ba6e7e0618e6a705b317))
+* removed unused spec files [FRON-2059] ([6cf20d5](https://github.com/coachcare/dashboard/commit/6cf20d592c45d71709d0f4f0d30c431d2ed4c136))
+* resolve types with undefined label [FRON-2522] ([14c8932](https://github.com/coachcare/dashboard/commit/14c8932f1342d8b3228c8ab018ed0ecb8245d669))
+* use rxjs filter for subscribing to events [FRON-2066] ([6dde259](https://github.com/coachcare/dashboard/commit/6dde25970b8c7af6a06c2c359e2f1563d384e62f))
+
 ## [1.57.1](https://github.com/coachcare/dashboard/compare/v1.57.0...v1.57.1) (2021-12-17)
 
 
