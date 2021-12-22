@@ -11,6 +11,7 @@ import {
   ContentFile,
   ContentUpload,
   ContentUploadTicket,
+  EmbeddedContent,
   FileExplorerContent,
   FileExplorerContentMetadata,
   QueuedContent
@@ -110,7 +111,9 @@ export class ContentUploadService {
             name: ticketContent.name,
             description: ticketContent.description,
             isPublic: ticketContent.isPublic,
-            type: ticketContent.type.id,
+            type: ticketContent.type.fetchProperties
+              ? ticketContent.type.fetchProperties().type
+              : ticketContent.type.id,
             metadata: ticketContent.metadata,
             parentId: ticketContent.parentId,
             parent: ticketContent.parentId || ticketContent.parent,
@@ -188,13 +191,13 @@ export class ContentUploadService {
         break
 
       case CONTENT_TYPE_MAP.youtube.code:
-        contentUpload.content = new FileExplorerContent(
+        contentUpload.content = new EmbeddedContent(
           Object.assign(
             { ...content.details },
             {
               metadata: {
                 url: content.url,
-                content: `<iframe src="${content.url}" style="height:100%;width:100%;" allowfullscreen></iframe>`
+                content: `<iframe src="${content.url}" height="100%" width="100%" allowfullscreen></iframe>`
               },
               parentId: content.destination.id
             }
@@ -203,7 +206,7 @@ export class ContentUploadService {
         break
 
       case CONTENT_TYPE_MAP.vimeo.code:
-        contentUpload.content = new FileExplorerContent(
+        contentUpload.content = new EmbeddedContent(
           Object.assign(
             { ...content.details },
             {
@@ -279,9 +282,11 @@ export class ContentUploadService {
         await this.createAsFile(ticket)
         break
       case CONTENT_TYPE_MAP.hyperlink.code:
+        await this.createAsHyperlink(ticket)
+        break
       case CONTENT_TYPE_MAP.youtube.code:
       case CONTENT_TYPE_MAP.vimeo.code:
-        await this.createAsHyperlink(ticket)
+        await this.createAsEmbedded(ticket)
         break
       default:
         await this.createAsDefault(ticket)
@@ -334,16 +339,36 @@ export class ContentUploadService {
     }
   }
 
+  private createAsEmbedded(
+    ticket: ContentUploadTicket
+  ): Promise<FileExplorerContent> {
+    const content = {
+      ...ticket.contentUpload.content,
+      metadata: {
+        ...ticket.contentUpload.content.metadata,
+        mimeType: 'text/html'
+      }
+    }
+
+    ticket.contentUpload.content = content
+    return this.requestContentCreation(ticket).catch(
+      (error) => (this.uploads[ticket.number].error = error)
+    )
+  }
+
   private createAsHyperlink(
     ticket: ContentUploadTicket
   ): Promise<FileExplorerContent> {
-    const ticketContent = ticket.contentUpload.content
-    ticketContent.type = CONTENT_TYPE_MAP.file
-    ticketContent.metadata = Object.assign(
-      { ...ticketContent.metadata },
-      { mimeType: 'text/html' }
-    )
-    ticket.contentUpload.content = ticketContent
+    const content = {
+      ...ticket.contentUpload.content,
+      type: CONTENT_TYPE_MAP.file,
+      metadata: {
+        ...ticket.contentUpload.content.metadata,
+        mimeType: 'text/html'
+      }
+    }
+
+    ticket.contentUpload.content = content
     return this.requestContentCreation(ticket).catch(
       (error) => (this.uploads[ticket.number].error = error)
     )

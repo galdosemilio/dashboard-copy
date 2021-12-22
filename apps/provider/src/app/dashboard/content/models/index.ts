@@ -1,4 +1,5 @@
 export * from './content-copied-event.interface'
+export * from './content-embedded.model'
 export * from './content-file.model'
 export * from './content-moved-event.interface'
 export * from './content-type.map'

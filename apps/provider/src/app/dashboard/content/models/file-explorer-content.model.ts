@@ -59,7 +59,7 @@ export class FileExplorerContent {
         : false
     this.isFolder = args.type ? args.type.code === 'folder' : false
     this.isAdmin = args.isAdmin || false
-    if (this.type.code === 'file') {
+    if (this.type.code === 'file' || this.type.code === 'embedded') {
       if (this.metadata.mimeType === 'text/html') {
         this.type = this.metadata.content
           ? this.metadata.content.includes('vimeo')

@@ -64,7 +64,7 @@ export const CONTENT_TYPE_MAP: { [name: string]: ContentTypeMapItem } = {
     icon: { set: 'fab', name: 'fa-youtube' },
     name: _('LIBRARY.CONTENT.YOUTUBE'),
     fetchProperties: () => ({
-      type: '2',
+      type: '4',
       mimeType: 'text/html'
     })
   },
@@ -74,7 +74,7 @@ export const CONTENT_TYPE_MAP: { [name: string]: ContentTypeMapItem } = {
     icon: { set: 'fab', name: 'fa-vimeo' },
     name: 'Vimeo',
     fetchProperties: () => ({
-      type: '2',
+      type: '4',
       mimeType: 'text/html'
     })
   }
