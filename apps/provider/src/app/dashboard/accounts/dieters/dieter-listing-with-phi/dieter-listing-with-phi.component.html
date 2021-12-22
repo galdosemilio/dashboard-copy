@@ -46,3 +46,12 @@
 </div>
 
 <app-dieters-expandable-table [source]="source" (sorted)="onSorted()"></app-dieters-expandable-table>
+
+<div class="mt-10" fxLayout.xs="column" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="start start">
+  <a class="ccr-highlighted" [routerLink]="['/reports/statistics/activity/weight']">
+    <small>{{ 'REPORTS.WEIGHT_CHANGE_REPORT' | translate }}</small>
+  </a>
+  <a class="ccr-highlighted" [routerLink]="['/reports/overview/enrollments']">
+    <small>{{ 'REPORTS.ENROLLMENTS_TITLE' | translate }}</small>
+  </a>
+</div>
