@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import {
   ContextService,
   EventsService,
@@ -27,6 +27,7 @@ import * as moment from 'moment'
 import { MatDialog } from '@coachcare/material'
 import { filter } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
+import { CcrPaginatorComponent } from '@coachcare/common/components'
 
 @UntilDestroy()
 @Component({
@@ -52,6 +53,12 @@ export class MeasurementsTableV2Component implements OnInit {
   get label(): MeasurementLabelEntry {
     return this._label
   }
+
+  @Input() paginator?: CcrPaginatorComponent
+  @Input() useSnapshot = false
+
+  @Output()
+  sourceRef: EventEmitter<MeasurementDataSourceV2> = new EventEmitter<MeasurementDataSourceV2>()
 
   public columns: MeasurementDataPointType[] = []
   public rows: MeasurementDataPointGroupTableEntry[] = []
@@ -276,7 +283,8 @@ export class MeasurementsTableV2Component implements OnInit {
       recordedAt: {
         start: moment(this.dates.startDate).startOf('day').toISOString(),
         end: moment(this.dates.endDate).endOf('day').toISOString()
-      }
+      },
+      useSnapshot: this.useSnapshot
     }))
     this.source.addRequired(this.context.account$, () => ({
       account: this.context.accountId
@@ -286,6 +294,8 @@ export class MeasurementsTableV2Component implements OnInit {
         .map((type) => type.id)
         .filter((id) => !isNaN(Number(id)))
     }))
+
+    this.setUpPaginator()
 
     this.source
       .connect()
@@ -337,6 +347,25 @@ export class MeasurementsTableV2Component implements OnInit {
     } catch (error) {
       this.notifier.error(error)
     }
+  }
+
+  private setUpPaginator(): void {
+    if (!this.paginator) {
+      return
+    }
+
+    this.source.omitEmptyDays = true
+
+    this.paginator.page
+      .pipe(untilDestroyed(this))
+      .subscribe(($event) => (this.source.pageIndex = $event.pageIndex))
+
+    this.source.addOptional(this.paginator.page, () => ({
+      offset: this.source.pageIndex * this.source.pageSize,
+      limit: this.source.pageSize
+    }))
+
+    this.sourceRef.emit(this.source)
   }
 
   private subscribeToEvents(): void {

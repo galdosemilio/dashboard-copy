@@ -6,9 +6,12 @@ import {
   MeasurementDataPointGroup
 } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
-import { MeasurementDatabaseV2 } from './measurement.database'
+import {
+  GetMeasurementDataPointGroupsRequestWithExtras,
+  MeasurementDatabaseV2
+} from './measurement.database'
 import * as moment from 'moment'
-import { flatMap } from 'lodash'
+import { flatMap, groupBy } from 'lodash'
 import { MeasurementLabelService } from '@app/service'
 
 export const MEASUREMENT_MAX_ENTRIES_PER_DAY = 24
@@ -23,9 +26,10 @@ export interface MeasurementDataPointGroupTableEntry
 export class MeasurementDataSourceV2 extends TableDataSource<
   MeasurementDataPointGroupTableEntry,
   GetMeasurementDataPointGroupsResponse,
-  GetMeasurementDataPointGroupsRequest
+  GetMeasurementDataPointGroupsRequestWithExtras
 > {
   public hasTooMuchForSingleDay = false
+  public omitEmptyDays = false
   public showDistanceNote = false
 
   constructor(
@@ -48,13 +52,20 @@ export class MeasurementDataSourceV2 extends TableDataSource<
   public mapResult(
     response: GetMeasurementDataPointGroupsResponse
   ): MeasurementDataPointGroupTableEntry[] {
+    this.total = response.pagination.next
+      ? response.pagination.next + 1
+      : this.criteria.offset + response.data.length
+
     this.hasTooMuchForSingleDay = false
     this.showDistanceNote = false
 
     const blockedDataPointAssocIds = this.measurementLabel.dataPointTypes
       .filter((assoc) => !assoc.provider.isModifiable)
       .map((assoc) => assoc.type.id)
-    const emptyDateGroups = this.createEmptyDateGroups()
+    const emptyDateGroups = !this.omitEmptyDays
+      ? this.createEmptyDateGroups()
+      : this.createHeaderDateGroups(response.data)
+
     const flat = flatMap(emptyDateGroups, (dateGroup) => {
       let existingGroups = response.data.filter((group) =>
         moment(group.recordedAt.utc).isSame(
@@ -130,5 +141,39 @@ export class MeasurementDataSourceV2 extends TableDataSource<
     }
 
     return emptyGroups
+  }
+
+  private createHeaderDateGroups(
+    entries: MeasurementDataPointGroup[]
+  ): MeasurementDataPointGroupTableEntry[] {
+    return Object.values(
+      groupBy(entries, (entry) =>
+        moment(entry.recordedAt.utc).startOf('day').toISOString()
+      )
+    ).map((entryGroup) => {
+      const currentDate = moment(entryGroup.shift().recordedAt.utc).startOf(
+        'day'
+      )
+
+      return {
+        shouldShowDate: true,
+        account: { id: this.criteria.account },
+        id: 'empty-group',
+        dataPoints: [],
+        createdAt: {
+          local: currentDate.toString(),
+          utc: currentDate.toISOString(),
+          timezone: ''
+        },
+        recordedAt: {
+          local: currentDate.toString(),
+          utc: currentDate.toISOString(),
+          timezone: ''
+        },
+        source: { id: 'local', name: '' },
+        isEmpty: true,
+        canBeDeleted: false
+      }
+    })
   }
 }

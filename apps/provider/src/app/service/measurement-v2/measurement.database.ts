@@ -5,6 +5,12 @@ import {
   GetMeasurementDataPointGroupsResponse,
   MeasurementDataPointProvider
 } from '@coachcare/sdk'
+import * as moment from 'moment'
+
+export interface GetMeasurementDataPointGroupsRequestWithExtras
+  extends GetMeasurementDataPointGroupsRequest {
+  useSnapshot?: boolean
+}
 
 @Injectable()
 export class MeasurementDatabaseV2 extends CcrDatabase {
@@ -13,8 +19,21 @@ export class MeasurementDatabaseV2 extends CcrDatabase {
   }
 
   public async fetch(
-    criteria: GetMeasurementDataPointGroupsRequest
+    criteria: GetMeasurementDataPointGroupsRequestWithExtras
   ): Promise<GetMeasurementDataPointGroupsResponse> {
-    return this.dataPoint.getGroups(criteria)
+    const today = moment().endOf('day')
+    return this.dataPoint.getGroups({
+      ...criteria,
+      recordedAt: criteria.useSnapshot
+        ? {
+            start: today
+              .clone()
+              .subtract(2, 'years')
+              .startOf('year')
+              .toISOString(),
+            end: today.toISOString()
+          }
+        : criteria.recordedAt
+    })
   }
 }

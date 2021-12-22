@@ -6,7 +6,7 @@ export const ShiftSetGoSectionConfig: SectionConfigDetails = {
     SHOW_CLINIC_CREATE_BUTTON_DIRECT: true
   },
   JOURNAL: {
-    ALLOW_MEASUREMENT_LIST_VIEW: false,
+    ALLOW_MEASUREMENT_LIST_VIEW: true,
     HIDDEN_COMPOSITION_COLUMNS: [
       CompositionColumns.EXTRACELLULAR_WATER,
       CompositionColumns.KETONES,

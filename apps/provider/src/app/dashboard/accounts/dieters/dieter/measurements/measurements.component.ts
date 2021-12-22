@@ -18,7 +18,7 @@ import {
   EventsService,
   ExtendedMeasurementLabelEntry,
   MeasurementAggregation,
-  MeasurementLabelService,
+  MeasurementDataSourceV2,
   MeasurementSummaryData,
   MeasurementTimeframe,
   NotifierService,
@@ -66,6 +66,10 @@ export type MeasurementConfig = {
 export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
+
+  @ViewChild('paginatorV2', { static: true })
+  paginatorV2: CcrPaginatorComponent
+
   // controls with their config
   aggregation: MeasurementAggregation
   allowListView = false
@@ -247,6 +251,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     }
   }
   public selectedLabel: MeasurementLabelEntry
+  public sourceV2?: MeasurementDataSourceV2
 
   timeframe = 'week'
   view = 'table'
@@ -258,6 +263,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   additionalColumns: string[] = []
   useNewTable = true
   useNewEndpoint: boolean
+  useSnapshot = false
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020245112-Viewing-a-Patient-s-Measurements'
 
@@ -275,7 +281,6 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     private translator: TranslateService,
     private context: ContextService,
     private bus: EventsService,
-    private measurementLabel: MeasurementLabelService,
     private notifier: NotifierService,
     private database: MeasurementDatabase,
     private store: Store<CCRConfig>
@@ -415,6 +420,8 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
           'JOURNAL.ALLOW_MEASUREMENT_LIST_VIEW',
           this.context.organization
         )
+
+        this.useSnapshot = this.allowListView ?? false
 
         this.filteredColumns = resolveConfig(
           'JOURNAL.HIDDEN_COMPOSITION_COLUMNS',

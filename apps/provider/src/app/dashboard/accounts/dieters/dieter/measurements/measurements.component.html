@@ -38,11 +38,23 @@ fxLayoutGap="25px">
 
 <div [hidden]="view !== 'list'" fxLayout="column" fxLayoutAlign="center end">
   <ccr-paginator fxFlex="nogrow" #paginator
+    [hidden]="useNewTable"
     [inverse]="true"
     [length]="source.total"
     [pageIndex]="source.pageIndex"
     [pageSize]="source.pageSize"
     (page)="source.pageIndex = $event.pageIndex"
+  ></ccr-paginator>
+
+  <ccr-paginator
+    #paginatorV2
+    [hidden]="!useNewTable"
+    [inverse]="true"
+    [length]="sourceV2?.total"
+    [pageIndex]="sourceV2?.pageIndex"
+    [pageSize]="sourceV2?.pageSize"
+    (page)="sourceV2.pageIndex = $event.pageIndex"
+    fxFlex="nogrow"
   ></ccr-paginator>
 </div>
 
@@ -72,14 +84,20 @@ fxLayoutGap="25px">
 
   <ng-container *ngSwitchCase="'list'">
     <app-dieter-measurements-table
-    *ngIf="!useNewTable"
+      *ngIf="!useNewTable"
       [source]="source"
       [columns]="columns"
       [sections]="sections"
       [section]="section"
     ></app-dieter-measurements-table>
 
-    <app-dieter-measurements-table-v2 *ngIf="useNewTable && selectedLabel" [dates]="dates" [label]="selectedLabel">
+    <app-dieter-measurements-table-v2
+    *ngIf="useNewTable && selectedLabel"
+    [dates]="dates"
+    [label]="selectedLabel"
+    [paginator]="paginatorV2"
+    [useSnapshot]="useSnapshot"
+    (sourceRef)="sourceV2 = $event">
     </app-dieter-measurements-table-v2>
   </ng-container>
 
@@ -92,7 +110,10 @@ fxLayoutGap="25px">
       [section]="section"
     ></app-dieter-measurements-table>
 
-    <app-dieter-measurements-table-v2 *ngIf="useNewTable && selectedLabel" [dates]="dates" [label]="selectedLabel">
+    <app-dieter-measurements-table-v2
+    *ngIf="useNewTable && selectedLabel"
+    [dates]="dates"
+    [label]="selectedLabel">
     </app-dieter-measurements-table-v2>
   </ng-container>
 </div>
