@@ -63,7 +63,9 @@ export class MeasurementChartDataSource extends ChartDataSource<
   }
 
   public mapChart(result: MeasurementDataPointGroup[]): ChartData {
-    const data = result.map((entry) =>
+    const data = sortBy(result, (entry) =>
+      moment(entry.createdAt.utc).unix()
+    ).map((entry) =>
       parseWithSyntheticDataPointTypes<DataPointEntry, MinimalDataPointType>(
         entry.dataPoints.map((dataPoint) => ({
           ...dataPoint,
@@ -86,10 +88,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
     )
 
     const groupedData = groupBy(
-      sortBy(
-        uniqBy(flatData, (entry) => entry.id),
-        (entry) => moment(entry.createdAt.utc).unix()
-      ),
+      sortBy(uniqBy(flatData, (entry) => entry.id)),
       (entry) => entry.type.id
     )
 
