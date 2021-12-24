@@ -1,3 +1,16 @@
+# [1.58.0](https://github.com/coachcare/dashboard/compare/v1.57.2...v1.58.0) (2021-12-24)
+
+
+### Bug Fixes
+
+* measurement chart tooltip reversed [FRON-2532] ([a56be71](https://github.com/coachcare/dashboard/commit/a56be7105bc668cf51694bb1876061d9ea1eba62))
+* restored measurement list view [FRON-2531] ([b367713](https://github.com/coachcare/dashboard/commit/b36771361df8b4e104e6994ceef13f583c01f258))
+
+
+### Features
+
+* added support for video call recording [FRON-2299] ([4bd8297](https://github.com/coachcare/dashboard/commit/4bd8297f16a5aacf62182c3784363f3134575c6e))
+
 ## [1.57.2](https://github.com/coachcare/dashboard/compare/v1.57.1...v1.57.2) (2021-12-22)
 
 
