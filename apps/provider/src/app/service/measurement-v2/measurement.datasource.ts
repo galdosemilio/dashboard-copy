@@ -3,7 +3,8 @@ import {
   DataPointTypes,
   GetMeasurementDataPointGroupsRequest,
   GetMeasurementDataPointGroupsResponse,
-  MeasurementDataPointGroup
+  MeasurementDataPointGroup,
+  SortProperty
 } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import {
@@ -13,6 +14,7 @@ import {
 import * as moment from 'moment'
 import { flatMap, groupBy } from 'lodash'
 import { MeasurementLabelService } from '@app/service'
+import { CcrTableSortDirective } from '@app/shared'
 
 export const MEASUREMENT_MAX_ENTRIES_PER_DAY = 24
 
@@ -34,9 +36,21 @@ export class MeasurementDataSourceV2 extends TableDataSource<
 
   constructor(
     protected database: MeasurementDatabaseV2,
-    private measurementLabel: MeasurementLabelService
+    private measurementLabel: MeasurementLabelService,
+    private sort?: CcrTableSortDirective
   ) {
     super()
+
+    if (this.sort) {
+      this.addOptional(this.sort.sortChange, () => ({
+        sort: [
+          {
+            property: this.sort.active || 'recordedAt',
+            dir: this.sort.direction || 'asc'
+          }
+        ] as SortProperty[]
+      }))
+    }
   }
 
   public defaultFetch(): GetMeasurementDataPointGroupsResponse {
@@ -138,6 +152,14 @@ export class MeasurementDataSourceV2 extends TableDataSource<
       })
 
       currentDate = currentDate.add(1, 'day')
+    }
+
+    if (
+      this.criteria.sort &&
+      this.criteria.sort[0]?.property === 'recordedAt' &&
+      this.criteria.sort[0]?.dir === 'desc'
+    ) {
+      emptyGroups.reverse()
     }
 
     return emptyGroups

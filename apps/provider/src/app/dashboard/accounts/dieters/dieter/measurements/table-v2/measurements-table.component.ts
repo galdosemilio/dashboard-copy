@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core'
 import {
   ContextService,
   EventsService,
@@ -9,7 +16,11 @@ import {
   MeasurementLabelService,
   NotifierService
 } from '@app/service'
-import { DateNavigatorOutput, PromptDialog } from '@app/shared'
+import {
+  CcrTableSortDirective,
+  DateNavigatorOutput,
+  PromptDialog
+} from '@app/shared'
 import { _ } from '@app/shared/utils'
 import {
   convertUnitToPreferenceFormat,
@@ -28,6 +39,7 @@ import { MatDialog } from '@coachcare/material'
 import { filter } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { STORAGE_MEASUREMENT_LIST_SORT } from '@app/config'
 
 @UntilDestroy()
 @Component({
@@ -59,6 +71,9 @@ export class MeasurementsTableV2Component implements OnInit {
 
   @Output()
   sourceRef: EventEmitter<MeasurementDataSourceV2> = new EventEmitter<MeasurementDataSourceV2>()
+
+  @ViewChild(CcrTableSortDirective, { static: true })
+  sort: CcrTableSortDirective
 
   public columns: MeasurementDataPointType[] = []
   public rows: MeasurementDataPointGroupTableEntry[] = []
@@ -270,10 +285,29 @@ export class MeasurementsTableV2Component implements OnInit {
       })
   }
 
+  private attemptResolveSort(): void {
+    try {
+      const storageSort = JSON.parse(
+        window.localStorage.getItem(STORAGE_MEASUREMENT_LIST_SORT)
+      )
+
+      if (storageSort) {
+        this.sort.direction = storageSort.dir || 'asc'
+        this.sort.active = storageSort.property || 'recordedAt'
+      }
+    } catch (error) {
+      this.sort.direction = 'asc'
+      this.sort.active = 'recordedAt'
+    }
+  }
+
   private createDataSource(): void {
+    this.attemptResolveSort()
+
     this.source = new MeasurementDataSourceV2(
       this.database,
-      this.measurementLabel
+      this.measurementLabel,
+      this.sort
     )
 
     this.source.addDefault({
@@ -296,6 +330,13 @@ export class MeasurementsTableV2Component implements OnInit {
     }))
 
     this.setUpPaginator()
+
+    this.sort.sortChange.pipe(untilDestroyed(this)).subscribe((res) => {
+      window.localStorage.setItem(
+        STORAGE_MEASUREMENT_LIST_SORT,
+        JSON.stringify(res[0])
+      )
+    })
 
     this.source
       .connect()

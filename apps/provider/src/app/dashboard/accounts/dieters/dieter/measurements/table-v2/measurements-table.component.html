@@ -1,10 +1,14 @@
-<ccr-datasource-overlay *ngIf="columns?.length; else emptyColumns" [source]="source">
+<ccr-datasource-overlay [source]="source">
   <div class="ccr-table ccr-expand-table ccr-table-stats">
     <div class="ccr-expandable-table">
-      <table>
+      <table ccrTableSort>
         <caption hidden>{{ 'GLOBAL.MEASUREMENTS' | translate }}</caption>
         <thead>
-          <th class="date-cell" scope="col">{{ 'GLOBAL.DATE' | translate }}</th>
+          <th class="date-cell" scope="col">
+            <ccr-table-sort-header property="recordedAt">
+              {{ 'GLOBAL.DATE' | translate }}
+            </ccr-table-sort-header>
+          </th>
           <th class="device-cell" scope="col">{{ 'MEASUREMENT.DEVICE' | translate }}</th>
           <th
           *ngFor="let column of columns"
@@ -115,6 +119,9 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="!columns?.length;" fxLayout="row" fxLayoutAlign="center center">
+        <p class="empty-column-notice">{{ 'NOTIFY.ERROR.NO_DATA_POINT_FOR_LABEL' | translate }}</p>
+      </div>
     </div>
     </div>
 </ccr-datasource-overlay>
@@ -140,8 +147,3 @@
   </span>
 </ng-template>
 <ng-template #emptyCell>-</ng-template>
-<ng-template #emptyColumns>
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <p class="empty-column-notice">{{ 'NOTIFY.ERROR.NO_DATA_POINT_FOR_LABEL' | translate }}</p>
-  </div>
-</ng-template>
