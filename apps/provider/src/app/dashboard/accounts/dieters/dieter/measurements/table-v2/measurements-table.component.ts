@@ -40,6 +40,7 @@ import { filter } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { STORAGE_MEASUREMENT_LIST_SORT } from '@app/config'
+import { resolveConfig } from '@app/config/section'
 
 @UntilDestroy()
 @Component({
@@ -303,12 +304,18 @@ export class MeasurementsTableV2Component implements OnInit {
 
   private createDataSource(): void {
     this.attemptResolveSort()
+    const allowListView = resolveConfig(
+      'JOURNAL.ALLOW_MEASUREMENT_LIST_VIEW',
+      this.context.organization
+    )
 
     this.source = new MeasurementDataSourceV2(
       this.database,
       this.measurementLabel,
       this.sort
     )
+
+    this.source.listView = allowListView
 
     this.source.addDefault({
       limit: 'all'

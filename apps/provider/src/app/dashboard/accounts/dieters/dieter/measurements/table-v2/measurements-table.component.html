@@ -50,15 +50,18 @@
             'row-odd': i % 2 === 1
           }">
             <td
-            class="ccr-text-weight-bold date-cell"
-            [class.ccr-text-right]="!row.shouldShowDate"
-            [class.ccr-text-weight-normal]="!row.shouldShowDate">
-              <span>
-                {{ row.recordedAt.utc | amDateFormat:(row.shouldShowDate ? 'ddd MMM D, YYYY' : 'h:mm a') }}
+              class="ccr-text-weight-bold date-cell"
+              [class.ccr-text-right]="row.shouldShowTime"
+            >
+              <span *ngIf="row.shouldShowDate">
+                {{ row.recordedAt.utc | amDateFormat: 'ddd MMM D, YYYY' }}
+              </span>
+              <span *ngIf="row.shouldShowTime" class="ccr-text-weight-normal">
+                {{ row.recordedAt.utc | amDateFormat: 'h:mm a' }}
               </span>
             </td>
             <td class="device-cell">
-              <div *ngIf="!row.shouldShowDate; else emptyCell">
+              <div *ngIf="!row.isEmpty; else emptyCell">
                 <span *ngIf="row.source.name; else emptyCell">{{ row.source.name }}</span>
               </div>
             </td>
@@ -67,7 +70,7 @@
             class="common-cell"
             [ngClass]="{ 'wide-cell': column.id === '12' || column.id === '43' || column.id === '45' }"
             [ngSwitch]="column.id">
-              <div *ngIf="!row.shouldShowDate; else emptyCell">
+              <div *ngIf="!row.isEmpty; else emptyCell">
                 <ng-container *ngSwitchCase="'3'">
                   <ng-container *ngTemplateOutlet="entryWithWeight; context: { row: row, column: column }"></ng-container>
                 </ng-container>

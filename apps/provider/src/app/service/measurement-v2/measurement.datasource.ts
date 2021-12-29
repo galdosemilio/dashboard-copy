@@ -23,6 +23,7 @@ export interface MeasurementDataPointGroupTableEntry
   canBeDeleted?: boolean
   isEmpty?: boolean
   shouldShowDate?: boolean
+  shouldShowTime?: boolean
 }
 
 export class MeasurementDataSourceV2 extends TableDataSource<
@@ -31,6 +32,7 @@ export class MeasurementDataSourceV2 extends TableDataSource<
   GetMeasurementDataPointGroupsRequestWithExtras
 > {
   public hasTooMuchForSingleDay = false
+  public listView = false
   public omitEmptyDays = false
   public showDistanceNote = false
 
@@ -100,18 +102,33 @@ export class MeasurementDataSourceV2 extends TableDataSource<
         )
       }
 
+      if (this.listView) {
+        return existingGroups
+      }
+
       return [dateGroup, ...existingGroups]
     })
       .map((group, idx, groups) => [group, groups[idx - 1]])
       .map(([current, previous]) => {
         const currentDate = moment(current.recordedAt.utc)
-        const shouldShowDate = previous?.recordedAt.utc
-          ? !currentDate.isSame(previous?.recordedAt.utc, 'day')
-          : true
+        const isEmpty = current.id === 'empty-group'
+
+        const shouldShowDate =
+          isEmpty ||
+          this.listView ||
+          (previous?.recordedAt.utc &&
+            !currentDate.isSame(previous?.recordedAt.utc, 'day'))
+
+        const shouldShowTime =
+          !isEmpty ||
+          this.listView ||
+          (previous?.recordedAt.utc &&
+            currentDate.isSame(previous?.recordedAt.utc, 'day'))
+
         const canBeDeleted = current.dataPoints.some(
           (dataPoint) => !blockedDataPointAssocIds.includes(dataPoint.type.id)
         )
-        return { ...current, shouldShowDate, canBeDeleted }
+        return { ...current, shouldShowDate, canBeDeleted, shouldShowTime }
       })
 
     this.showDistanceNote = flat.some((entry) =>
