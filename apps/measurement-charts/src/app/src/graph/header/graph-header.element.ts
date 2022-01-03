@@ -106,17 +106,17 @@ export class GraphHeaderElement extends CcrElement {
       )
 
       min = `${utils.format(
-        (Number(weightMin) / Number(min)) * 100,
+        Number(weightMin) * (Number(min) / 100),
         api.baseData.dataPointTypeId
       )}<span class="unit">${unit}</span> <span class="sub-value">(${min}<span class="unit">${baseUnit}</span>)</span>`
 
       max = `${utils.format(
-        (Number(weightMax) / Number(max)) * 100,
+        Number(weightMax) * (Number(max) / 100),
         api.baseData.dataPointTypeId
       )}<span class="unit">${unit}</span> <span class="sub-value">(${max}<span class="unit">${baseUnit}</span>)</span>`
 
       average = `${utils.format(
-        (Number(weightAverage) / Number(average)) * 100,
+        Number(weightAverage) * (Number(average) / 100),
         api.baseData.dataPointTypeId
       )}<span class="unit">${unit}</span> <span class="sub-value">(${average}<span class="unit">${baseUnit}</span>)</span>`
 
