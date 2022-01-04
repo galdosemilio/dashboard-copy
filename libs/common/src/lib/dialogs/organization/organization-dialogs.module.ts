@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { CcrFormFieldsModule } from '@coachcare/common/components/form/form.module'
 import { CcrMaterialModule } from '@coachcare/material'
+import { TranslateModule } from '@ngx-translate/core'
 import { CcrAddOrganizationDialog } from './add-organization'
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CcrAddOrganizationDialog } from './add-organization'
     FlexLayoutModule,
     ReactiveFormsModule,
     CcrMaterialModule,
-    CcrFormFieldsModule
+    CcrFormFieldsModule,
+    TranslateModule
   ],
   declarations: [CcrAddOrganizationDialog],
   exports: []
