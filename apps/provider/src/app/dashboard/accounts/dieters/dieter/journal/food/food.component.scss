@@ -1,6 +1,5 @@
 @import 'variables';
 
-$tile-height: 140px;
 $circle-limit: 125px;
 
 .average-explainer {
@@ -13,17 +12,7 @@ $circle-limit: 125px;
   width: 100%;
 }
 
-mat-grid-list {
-  padding-bottom: $tile-height !important;
-
-  @media #{$medium-and-down} {
-    padding-bottom: $tile-height * 2 !important;
-  }
-}
-
-mat-grid-tile {
-  padding-top: $tile-height !important;
-
+.food-circle-list {
   div {
     align-items: center;
     display: flex;
@@ -54,18 +43,13 @@ mat-grid-tile {
       width: 20px;
     }
   }
-
-  @media #{$medium-and-down} {
-    &.tile-secondary {
-      margin-top: $tile-height !important;
-    }
-  }
 }
 
 progress-circle {
   margin: 0 auto;
   max-width: $circle-limit;
-  width: 100%;
+  width: $circle-limit;
+  min-width: $circle-limit;
   &.calories {
     width: 65%;
   }

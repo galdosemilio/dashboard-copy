@@ -1,68 +1,52 @@
 <div class="ccr-container">
-  <mat-grid-list [cols]="cols" rowHeight="20px">
-
-    <mat-grid-tile>
-      <div>
-        <progress-circle class="calories"
-          [headertext]="'GRAPH.DAILY_AVG_CALORIES' | translate"
-          [value]="data.calories.avg"
-          [maximumvalue]="data.calories.goal">
-        </progress-circle>
-        &nbsp;
+  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" class="food-circle-list">
+    <div fxFlex>
+      <progress-circle class="calories"
+        [headertext]="'GRAPH.DAILY_AVG_CALORIES' | translate"
+        [value]="data.calories.avg"
+        [maximumvalue]="data.calories.goal">
+      </progress-circle>
+      &nbsp;
+    </div>
+    <div fxFlex>
+      <progress-circle class="protein"
+        [headertext]="'GRAPH.DAILY_AVG_PROTEIN' | translate"
+        [value]="data.protein.avg / 1000"
+        [decimalPlaces]="1"
+        [maximumvalue]="data.protein.goal"
+        [measurementUnit]="'g'">
+      </progress-circle>
+      &nbsp;
+    </div>
+    <div fxFlex>
+      <progress-circle class="carb"
+        [headertext]="'GRAPH.DAILY_AVG_CARB' | translate"
+        [value]="data.carbohydrate.avg / 1000"
+        [decimalPlaces]="1"
+        [maximumvalue]="data.carbohydrate.goal"
+        [measurementUnit]="'g'">
+      </progress-circle>
+      <p class="subtext">{{ 'GRAPH.DAILY_AVG_NET_CARBS' | translate }} <span class="subtext-value">{{ data.netCarbs.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
+      <p class="subtext">{{ 'GRAPH.DAILY_AVG_FIBER' | translate }} <span class="subtext-value">{{ data.fiber.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
+      <p class="subtext">{{ 'GRAPH.DAILY_AVG_SUGAR' | translate }} <span class="subtext-value">{{ data.sugar.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
+    </div>
+    <div fxFlex>
+      <progress-circle class="fat"
+        [headertext]="'GRAPH.DAILY_AVG_FAT' | translate"
+        [value]="data.totalFat.avg / 1000"
+        [decimalPlaces]="1"
+        [maximumvalue]="data.totalFat.goal"
+        [measurementUnit]="'g'">
+      </progress-circle>
+      <p class="subtext">{{ 'GRAPH.DAILY_AVG_S_FAT' | translate }} <span class="subtext-value">{{ data.saturatedFat.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
+    </div>
+    <div fxFlex>
+      <div class="gray-box">
+        <p class="subtext">{{ 'GRAPH.DAILY_AVG_SODIUM' | translate }} <span class="subtext-value">{{ data.sodium.avg | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
+        <p class="subtext">{{ 'GRAPH.DAILY_AVG_CHOLESTEROL' | translate }} <span class="subtext-value">{{ data.cholesterol.avg | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
       </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-      <div>
-        <progress-circle class="protein"
-          [headertext]="'GRAPH.DAILY_AVG_PROTEIN' | translate"
-          [value]="data.protein.avg / 1000"
-          [decimalPlaces]="1"
-          [maximumvalue]="data.protein.goal"
-          [measurementUnit]="'g'">
-        </progress-circle>
-        &nbsp;
-      </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="tile-secondary">
-      <div>
-        <progress-circle class="carb"
-          [headertext]="'GRAPH.DAILY_AVG_CARB' | translate"
-          [value]="data.carbohydrate.avg / 1000"
-          [decimalPlaces]="1"
-          [maximumvalue]="data.carbohydrate.goal"
-          [measurementUnit]="'g'">
-        </progress-circle>
-        <p class="subtext">{{ 'GRAPH.DAILY_AVG_NET_CARBS' | translate }} <span class="subtext-value">{{ data.netCarbs.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
-        <p class="subtext">{{ 'GRAPH.DAILY_AVG_FIBER' | translate }} <span class="subtext-value">{{ data.fiber.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
-        <p class="subtext">{{ 'GRAPH.DAILY_AVG_SUGAR' | translate }} <span class="subtext-value">{{ data.sugar.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
-      </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="tile-secondary">
-      <div>
-        <progress-circle class="fat"
-          [headertext]="'GRAPH.DAILY_AVG_FAT' | translate"
-          [value]="data.totalFat.avg / 1000"
-          [decimalPlaces]="1"
-          [maximumvalue]="data.totalFat.goal"
-          [measurementUnit]="'g'">
-        </progress-circle>
-
-        <p class="subtext">{{ 'GRAPH.DAILY_AVG_S_FAT' | translate }} <span class="subtext-value">{{ data.saturatedFat.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
-
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div>
-        <div class="gray-box">
-          <p class="subtext">{{ 'GRAPH.DAILY_AVG_SODIUM' | translate }} <span class="subtext-value">{{ data.sodium.avg | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
-          <p class="subtext">{{ 'GRAPH.DAILY_AVG_CHOLESTEROL' | translate }} <span class="subtext-value">{{ data.cholesterol.avg | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
-        </div>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>
   <small class="average-explainer">{{ 'GRAPH.DAILY_AVG_NOTICE' | translate }}</small>
 </div>
 

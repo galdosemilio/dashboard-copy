@@ -35,6 +35,7 @@ export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
   netCarbs = 0
   potassium = 0
   sugar = 0
+  addedSugar = 0
   sodium = 0
   ingredients?: Array<FetchAllConsumedMealIngredients>
   vitaminA = 0
@@ -63,6 +64,7 @@ export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
     this.carbohydrate += meal.carbohydrate
     this.sodium += meal.sodium || 0
     this.sugar += meal.sugar
+    this.addedSugar += meal.addedSugar || 0
     this.fiber += meal.fiber
     this.iron += meal.iron || 0
     this.potassium += meal.potassium || 0

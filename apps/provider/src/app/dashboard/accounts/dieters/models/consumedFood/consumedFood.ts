@@ -34,6 +34,7 @@ export class ConsumedFood implements FetchAllSingleConsumedMealResponse {
   serving?: number
   sodium: number
   sugar: number
+  addedSugar: number
   totalFat: number
   transFat: number
   type: string
@@ -73,6 +74,7 @@ export class ConsumedFood implements FetchAllSingleConsumedMealResponse {
     this.saturatedFat = args.summary.saturatedFat || 0
     this.sodium = args.summary.sodium || 0
     this.sugar = args.summary.sugar || 0
+    this.addedSugar = args.summary.addedSugar || 0
     this.totalFat = args.summary.totalFat || 0
     this.type = args.type['description'].toLowerCase()
     this.netCarbs = this.carbohydrate ? this.carbohydrate - this.fiber : 0
