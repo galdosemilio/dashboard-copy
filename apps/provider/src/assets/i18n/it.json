@@ -960,7 +960,7 @@
     "LDL": "LDL",
     "LEAN_MASS": "Massa Magra",
     "MISSING_WEIGHT_NOTE": "Esistono alcune misurazioni per questo periodo di tempo che non può essere visualizzato per questo grafico. Questi valori sono visibili sul <a href=\"{{KEEPtableViewLink}}\">vista tabella</a> solo. Le date per cui esistono queste misure sono:",
-    "MORE_DATA_EXISTS_FOR_DAY": "Esistono più dati ma vengono visualizzate solo le ultime cinque voci per un giorno.",
+    "MORE_DATA_EXISTS_FOR_DAY": "Esistono più dati ma solo 24 voci al giorno sono mostrate per impostazione predefinita.",
     "NECK": "Collo",
     "RESPIRATION_RATE": "Frequenza Respiratoria",
     "RESTFULNESS": "A riposo",

@@ -535,6 +535,18 @@ ul.footnotes {
   color: var(--primary);
 }
 
+.ccr-link {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.disabled {
+    color: var(--text-lighter);
+  }
+}
+
 .ccr-text-bold {
   font-weight: bold;
 }

@@ -111,6 +111,13 @@ export abstract class CcrDataSource<
   }
 
   /**
+   * Returns a frozen copy of the criteria
+   */
+  get _criteria() {
+    return Object.freeze({ ...this.criteria })
+  }
+
+  /**
    * Stream only used to trigger a refresh on the data.
    * Can receive some Criteria overrides for a temporary update.
    * Must be used outside the datasource to prevent infinite loops.

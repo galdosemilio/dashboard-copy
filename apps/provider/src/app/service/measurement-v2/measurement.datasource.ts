@@ -15,13 +15,35 @@ import * as moment from 'moment'
 import { flatMap, groupBy } from 'lodash'
 import { MeasurementLabelService } from '@app/service'
 import { CcrTableSortDirective } from '@app/shared'
+import { measurementTableRowMapper } from './helpers'
 
 export const MEASUREMENT_MAX_ENTRIES_PER_DAY = 24
+export const LOAD_MORE_ROW_BASE = Object.freeze({
+  shouldShowDate: false,
+  isLoadMore: true,
+  account: { id: '' },
+  id: 'empty-group',
+  dataPoints: [],
+  createdAt: {
+    local: '',
+    utc: '',
+    timezone: ''
+  },
+  recordedAt: {
+    local: '',
+    utc: '',
+    timezone: ''
+  },
+  source: { id: 'local', name: '' },
+  isEmpty: true,
+  canBeDeleted: false
+})
 
 export interface MeasurementDataPointGroupTableEntry
   extends MeasurementDataPointGroup {
   canBeDeleted?: boolean
   isEmpty?: boolean
+  isLoadMore?: boolean
   shouldShowDate?: boolean
   shouldShowTime?: boolean
 }
@@ -83,6 +105,7 @@ export class MeasurementDataSourceV2 extends TableDataSource<
       : this.createHeaderDateGroups(response.data)
 
     const flat = flatMap(emptyDateGroups, (dateGroup) => {
+      let hasTooManyEntries = false
       let existingGroups = response.data.filter((group) =>
         moment(group.recordedAt.utc).isSame(
           moment(dateGroup.recordedAt.utc),
@@ -95,6 +118,7 @@ export class MeasurementDataSourceV2 extends TableDataSource<
       }
 
       if (existingGroups.length > MEASUREMENT_MAX_ENTRIES_PER_DAY) {
+        hasTooManyEntries = true
         this.hasTooMuchForSingleDay = true
         existingGroups = existingGroups.slice(
           0,
@@ -106,30 +130,29 @@ export class MeasurementDataSourceV2 extends TableDataSource<
         return existingGroups
       }
 
-      return [dateGroup, ...existingGroups]
+      const allGroups = [dateGroup, ...existingGroups]
+      const lastExistingGroup = existingGroups[existingGroups.length - 1]
+      const loadMoreGroup: MeasurementDataPointGroupTableEntry = {
+        ...LOAD_MORE_ROW_BASE,
+        account: { id: this.criteria.account },
+        createdAt: lastExistingGroup?.createdAt ?? {
+          local: '',
+          utc: '',
+          timezone: ''
+        },
+        recordedAt: lastExistingGroup?.recordedAt ?? {
+          local: '',
+          utc: '',
+          timezone: ''
+        }
+      }
+
+      return hasTooManyEntries ? [...allGroups, loadMoreGroup] : allGroups
     })
       .map((group, idx, groups) => [group, groups[idx - 1]])
-      .map(([current, previous]) => {
-        const currentDate = moment(current.recordedAt.utc)
-        const isEmpty = current.id === 'empty-group'
-
-        const shouldShowDate =
-          isEmpty ||
-          this.listView ||
-          (previous?.recordedAt.utc &&
-            !currentDate.isSame(previous?.recordedAt.utc, 'day'))
-
-        const shouldShowTime =
-          !isEmpty ||
-          this.listView ||
-          (previous?.recordedAt.utc &&
-            currentDate.isSame(previous?.recordedAt.utc, 'day'))
-
-        const canBeDeleted = current.dataPoints.some(
-          (dataPoint) => !blockedDataPointAssocIds.includes(dataPoint.type.id)
-        )
-        return { ...current, shouldShowDate, canBeDeleted, shouldShowTime }
-      })
+      .map(([current, previous]) =>
+        measurementTableRowMapper([current, previous], blockedDataPointAssocIds)
+      )
 
     this.showDistanceNote = flat.some((entry) =>
       entry.dataPoints.some(

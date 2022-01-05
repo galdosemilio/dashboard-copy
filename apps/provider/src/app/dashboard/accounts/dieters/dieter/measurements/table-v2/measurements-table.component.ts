@@ -10,10 +10,12 @@ import {
   ContextService,
   EventsService,
   LanguageService,
+  LOAD_MORE_ROW_BASE,
   MeasurementDatabaseV2,
   MeasurementDataPointGroupTableEntry,
   MeasurementDataSourceV2,
   MeasurementLabelService,
+  MEASUREMENT_MAX_ENTRIES_PER_DAY,
   NotifierService
 } from '@app/service'
 import {
@@ -25,6 +27,7 @@ import { _ } from '@app/shared/utils'
 import {
   convertUnitToPreferenceFormat,
   DataPointTypes,
+  GetMeasurementDataPointGroupsResponse,
   MeasurementDataPointGroup,
   MeasurementDataPointMinimalType,
   MeasurementDataPointProvider,
@@ -41,6 +44,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { STORAGE_MEASUREMENT_LIST_SORT } from '@app/config'
 import { resolveConfig } from '@app/config/section'
+import { measurementTableRowMapper } from '@app/service/measurement-v2/helpers'
 
 @UntilDestroy()
 @Component({
@@ -77,6 +81,7 @@ export class MeasurementsTableV2Component implements OnInit {
   sort: CcrTableSortDirective
 
   public columns: MeasurementDataPointType[] = []
+  public isLoadingMore = false
   public rows: MeasurementDataPointGroupTableEntry[] = []
   public source: MeasurementDataSourceV2
   public visceralFatRatingTooltip = {
@@ -286,6 +291,43 @@ export class MeasurementsTableV2Component implements OnInit {
       })
   }
 
+  public async onLoadMore(
+    row: MeasurementDataPointGroupTableEntry,
+    index: number
+  ): Promise<void> {
+    if (this.isLoadingMore) {
+      return
+    }
+
+    try {
+      this.isLoadingMore = true
+      const recordDate = moment(row.recordedAt.utc)
+      const recordQuery =
+        this.source._criteria.sort[0].dir === 'asc'
+          ? {
+              start: recordDate.add(1, 'ms').toISOString(),
+              end: recordDate.endOf('day').toISOString()
+            }
+          : {
+              end: recordDate.subtract(1, 'ms').toISOString(),
+              start: recordDate.startOf('day').toISOString()
+            }
+
+      const response = await this.database.fetch({
+        ...this.source._criteria,
+        recordedAt: recordQuery,
+        timezone: row.recordedAt.timezone,
+        limit: MEASUREMENT_MAX_ENTRIES_PER_DAY
+      })
+
+      this.rows = this.calculateUpdatedRows(response, index)
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isLoadingMore = false
+    }
+  }
+
   private attemptResolveSort(): void {
     try {
       const storageSort = JSON.parse(
@@ -300,6 +342,50 @@ export class MeasurementsTableV2Component implements OnInit {
       this.sort.direction = 'asc'
       this.sort.active = 'recordedAt'
     }
+  }
+
+  private calculateUpdatedRows(
+    response: GetMeasurementDataPointGroupsResponse,
+    index: number
+  ): MeasurementDataPointGroupTableEntry[] {
+    const entries = response.data
+
+    const blockedDataPointAssocIds = this.measurementLabel.dataPointTypes
+      .filter((assoc) => !assoc.provider.isModifiable)
+      .map((assoc) => assoc.type.id)
+
+    const mappedEntries = entries
+      .map((group, idx, groups) => [group, groups[idx - 1]])
+      .map(([current, previous]) =>
+        measurementTableRowMapper([current, previous], blockedDataPointAssocIds)
+      )
+
+    const lastExistingGroup = mappedEntries.slice().pop()
+
+    const allEntries = response.pagination.next
+      ? [
+          ...mappedEntries,
+          {
+            ...LOAD_MORE_ROW_BASE,
+            account: { id: this.source._criteria.account },
+            createdAt: lastExistingGroup?.createdAt ?? {
+              local: '',
+              utc: '',
+              timezone: ''
+            },
+            recordedAt: lastExistingGroup?.recordedAt ?? {
+              local: '',
+              utc: '',
+              timezone: ''
+            }
+          }
+        ]
+      : mappedEntries
+
+    const updatedRows = this.rows.slice()
+    updatedRows.splice(index, 1, ...allEntries)
+
+    return updatedRows
   }
 
   private createDataSource(): void {

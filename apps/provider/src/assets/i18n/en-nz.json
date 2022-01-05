@@ -960,7 +960,7 @@
     "LDL": "LDL",
     "LEAN_MASS": "Lean Mass",
     "MISSING_WEIGHT_NOTE": "Some measurements exist for this time period that cannot be displayed on this graph. These values are visible on the <a href=\"{{tableViewLink}}\">table view</a> only. The dates for which these measurements exist are:",
-    "MORE_DATA_EXISTS_FOR_DAY": "More data exists but only the last five entries for a day are shown.",
+    "MORE_DATA_EXISTS_FOR_DAY": "More data exists but only 24 entries per day are shown by default.",
     "NECK": "Neck",
     "RESPIRATION_RATE": "Respiration Rate",
     "RESTFULNESS": "Restfulness",
