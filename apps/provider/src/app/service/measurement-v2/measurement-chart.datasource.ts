@@ -64,7 +64,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
 
   public mapChart(result: MeasurementDataPointGroup[]): ChartData {
     const data = sortBy(result, (entry) =>
-      moment(entry.createdAt.utc).unix()
+      moment(entry.recordedAt.utc).unix()
     ).map((entry) =>
       parseWithSyntheticDataPointTypes<DataPointEntry, MinimalDataPointType>(
         entry.dataPoints.map((dataPoint) => ({
