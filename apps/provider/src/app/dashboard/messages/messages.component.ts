@@ -291,6 +291,14 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   }
 
+  removeThread(index: number): void {
+    const removedThread = this.threads[index]
+    this.threads = this.threads.filter(
+      (thread) => thread.threadId !== removedThread.threadId
+    )
+    this.active = 0
+  }
+
   // TODO move to a Directive with Output event
 
   private calculatePoints() {

@@ -89,6 +89,11 @@ import { environment } from './environments/environment'
 export const authenticationToken = new AuthenticationToken()
 export const SDK_HEADERS = new ApiHeaders()
 
+const errorHandlingSettings = {
+  enabled: true,
+  options: { [401]: { enabled: true }, [403]: { enabled: true } }
+}
+
 const generalThrottlingSettings = environment.enableThrottling
   ? environment.ccrApiEnv === 'prod'
     ? { enabled: true, options: { defaultRateLimit: 15 } }
@@ -99,14 +104,16 @@ const avatarApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: true, options: { ttl: { milliseconds: 300000 } } },
   throttling: generalThrottlingSettings,
-  headers: SDK_HEADERS
+  headers: SDK_HEADERS,
+  errorHandling: errorHandlingSettings
 })
 
 const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
   throttling: generalThrottlingSettings,
-  headers: SDK_HEADERS
+  headers: SDK_HEADERS,
+  errorHandling: errorHandlingSettings
 })
 
 const measurementApiService = new ApiService({
@@ -118,7 +125,22 @@ const measurementApiService = new ApiService({
         options: { headers: { enabled: false }, defaultRateLimit: 2 }
       }
     : { enabled: false },
-  headers: SDK_HEADERS
+  headers: SDK_HEADERS,
+  errorHandling: errorHandlingSettings
+})
+
+const messagingApiService = new ApiService({
+  token: authenticationToken,
+  caching: { enabled: false },
+  throttling: generalThrottlingSettings,
+  headers: SDK_HEADERS,
+  errorHandling: {
+    enabled: true,
+    options: {
+      [403]: { enabled: true, type: 'object' },
+      [401]: { enabled: true }
+    }
+  }
 })
 
 avatarApiService.setEnvironment(environment.ccrApiEnv)
@@ -134,6 +156,7 @@ export const SdkApiProviders = [
     provide: measurementApiService,
     useValue: measurementApiService
   },
+  { provide: messagingApiService, useValue: messagingApiService },
   {
     provide: ApiService,
     useValue: generalApiService
@@ -269,7 +292,7 @@ export const SdkApiProviders = [
     deps: [ApiService]
   },
   { provide: MeasurementSleep, useClass: MeasurementSleep, deps: [ApiService] },
-  { provide: Messaging, useClass: Messaging, deps: [ApiService] },
+  { provide: Messaging, useClass: Messaging, deps: [messagingApiService] },
   {
     provide: MessagingPermission,
     useClass: MessagingPermission,

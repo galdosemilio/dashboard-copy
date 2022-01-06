@@ -39,6 +39,7 @@ import { auditTime, takeUntil } from 'rxjs/operators'
 import { MessageRecipient, MessageThread } from './messages.interfaces'
 import { MessageContainer } from '@app/shared/model'
 import { STORAGE_MESSAGE_INPUT_HEIGHT } from '@app/config'
+import { ApiHttpCallError } from '@coachcare/sdk/dist/lib/services'
 
 type MessagesDraftData = { message?: string; patientMessage?: string }
 
@@ -85,6 +86,8 @@ export class CcrMessagesComponent
   gotoProfile = new EventEmitter<MessageRecipient>()
   @Output()
   onBackToUser = new EventEmitter<void>()
+  @Output()
+  removeThread = new EventEmitter<void>()
   @Output()
   toggleChatInfo = new EventEmitter<void>()
 
@@ -493,8 +496,21 @@ export class CcrMessagesComponent
 
           this.scrollMessagesToBottom(false)
         },
-        () => {
+        (error: ApiHttpCallError | string) => {
           this.loading = false
+
+          if (typeof error === 'string') {
+            this.notifier.error(error)
+            return
+          }
+
+          this.notifier.error(error.message)
+
+          if (error.data.code !== 'thread.no-access-to-thread') {
+            return
+          }
+
+          this.removeThread.emit()
         }
       )
   }

@@ -79,6 +79,7 @@
       (gotoProfile)="gotoProfile($event)"
       (toggleChatInfo)="chatInfoEnabled = !chatInfoEnabled"
       (onBackToUser)="isMessageOpen = !isMessageOpen"
+      (removeThread)="removeThread(active)"
       *ngIf="!chatInfoEnabled"
       ></ccr-messages>
 
