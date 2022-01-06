@@ -1,3 +1,21 @@
+# [1.59.0](https://github.com/coachcare/dashboard/compare/v1.58.0...v1.59.0) (2022-01-06)
+
+
+### Bug Fixes
+
+* add reports links to patient listing [FRON-1460] ([50c93b8](https://github.com/coachcare/dashboard/commit/50c93b89e5336ee874ce41750abd520f1300eed1))
+* added sugar to food table [FRON-2398] ([92ac8b5](https://github.com/coachcare/dashboard/commit/92ac8b5590b5a4dd391cba94ee7149120c3da5e4))
+* import TranslateModule into CcrOrganizationDialogsModule [FRON-2535] ([bdb079a](https://github.com/coachcare/dashboard/commit/bdb079ac55fe19edb0ec066b5f756e6f146fc5a4))
+* list view for measurement [FRON-2534] ([d35d256](https://github.com/coachcare/dashboard/commit/d35d2565565bf70485a73614f7263e9412748ce5))
+* make date column of measurements table sortable [FRON-2533] ([71bcfda](https://github.com/coachcare/dashboard/commit/71bcfdaafe90e3dcd56be502e917af6efff2460d))
+* show correct value of body fat and lean mass [FRON-2536] ([9541e46](https://github.com/coachcare/dashboard/commit/9541e461983b8ca5d8de4863c12c05a7952fa4bd))
+
+
+### Features
+
+* added load more feature to measurements table [FRON-2480] ([4ee67d7](https://github.com/coachcare/dashboard/commit/4ee67d7e043a60042fecf8deacbd0b3fa6df4765))
+* use embedded content type [FRON-2145] ([08df3a6](https://github.com/coachcare/dashboard/commit/08df3a6c093c989fd24e2110e4b72b8cfbe0b5df))
+
 # [1.58.0](https://github.com/coachcare/dashboard/compare/v1.57.2...v1.58.0) (2021-12-24)
 
 
