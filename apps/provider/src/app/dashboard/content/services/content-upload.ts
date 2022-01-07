@@ -1,5 +1,6 @@
 import {
   HttpClient,
+  HttpErrorResponse,
   HttpEvent,
   HttpEventType,
   HttpHeaders
@@ -10,6 +11,7 @@ import {
   CONTENT_TYPE_MAP,
   ContentFile,
   ContentUpload,
+  ContentUploadError,
   ContentUploadTicket,
   EmbeddedContent,
   FileExplorerContent,
@@ -262,6 +264,14 @@ export class ContentUploadService {
       }
 
       if (finishedUploads.length >= this.uploads.length) {
+        const failedUploads = this.uploads.filter(
+          (upload) => upload.error && upload.id
+        )
+
+        failedUploads.forEach(
+          (upload) => void this.source.deleteContent(upload.id)
+        )
+
         this.stopUploadProgressInterval()
       }
     }, 800)
@@ -318,19 +328,32 @@ export class ContentUploadService {
         body: ticket.queuedContent.file,
         mimeType: response.mimeType,
         uploadUrl: response.url
-      }).subscribe((event: any) => {
-        switch (event.type) {
-          case HttpEventType.UploadProgress:
-            this.uploads[ticket.number].progress =
-              (event.loaded * 100) / event.total
-            break
-          case HttpEventType.ResponseHeader:
-            if (!event.ok) {
-              throw new Error('Upload failed')
-            }
-            break
+      }).subscribe(
+        (
+          event: HttpEvent<
+            HttpEventType.UploadProgress | HttpEventType.ResponseHeader
+          >
+        ) => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              this.uploads[ticket.number].progress =
+                (event.loaded * 100) / event.total
+              break
+            case HttpEventType.ResponseHeader:
+              if (!event.ok) {
+                throw new ContentUploadError({
+                  message: 'Upload Failed',
+                  response: event
+                })
+              }
+              break
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.uploads[ticket.number].error = error.statusText
+          void this.source.deleteContent(this.uploads[ticket.number].id)
         }
-      })
+      )
     } catch (error) {
       if (ticket.contentUpload.id) {
         void this.requestContentDeletion(ticket.contentUpload.id)
