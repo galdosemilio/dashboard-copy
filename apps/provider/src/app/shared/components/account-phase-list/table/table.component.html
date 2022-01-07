@@ -1,6 +1,6 @@
 <ccr-datasource-overlay class="ccr-table" [source]="source">
 
-  <mat-table [dataSource]="source">
+  <mat-table [dataSource]="source" matSort>
 
     <ng-container cdkColumnDef="id">
       <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.CONTENT.ID' | translate }}</mat-header-cell>
@@ -11,7 +11,9 @@
     </ng-container>
 
     <ng-container cdkColumnDef="title">
-      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.NAME' | translate }}</mat-header-cell>
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header="name">
+          <span>{{ 'BOARD.NAME' | translate }}</span>
+      </mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'BOARD.NAME' | translate }}</span>
         {{ row.package.title }}

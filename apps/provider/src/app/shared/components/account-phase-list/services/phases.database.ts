@@ -45,7 +45,8 @@ export class PhasesDatabase extends CcrDatabase {
             organization: args.organization,
             isActive: true,
             limit: args.limit,
-            offset: args.offset
+            offset: args.offset,
+            sort: args.sort
           })
           const associations = associationResponse.data
 
