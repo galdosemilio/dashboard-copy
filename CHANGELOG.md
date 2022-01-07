@@ -1,3 +1,16 @@
+# [1.60.0](https://github.com/coachcare/dashboard/compare/v1.59.0...v1.60.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* issue when canceling the phase unenroll prompt [FRON-2528] ([f17ddbf](https://github.com/coachcare/dashboard/commit/f17ddbfe4a58a343133fb067a63b8ea75ada4348))
+* sort by recordedAt instead of createdAt [FRON-2538] ([490e009](https://github.com/coachcare/dashboard/commit/490e009c9ff5c9aa2b17323931ad8163a41d7e4e))
+
+
+### Features
+
+* added sorting headers to phase history [FRON-2528] ([e2f1aee](https://github.com/coachcare/dashboard/commit/e2f1aee7c1aba426a6c912c3077a61bd9c38b401))
+
 # [1.59.0](https://github.com/coachcare/dashboard/compare/v1.58.0...v1.59.0) (2022-01-06)
 
 
