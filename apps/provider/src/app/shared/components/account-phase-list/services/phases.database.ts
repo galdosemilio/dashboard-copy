@@ -15,7 +15,7 @@ import {
   Pagination
 } from '@coachcare/sdk'
 import * as moment from 'moment'
-import { from, iif, Observable, throwError } from 'rxjs'
+import { from, Observable, throwError } from 'rxjs'
 
 import { PhasesDataSegment } from './phases.datasource'
 import { mergeMap } from 'rxjs/operators'
@@ -126,9 +126,13 @@ export class PhasesDatabase extends CcrDatabase {
       .open(PromptDialog, { data: data })
       .afterClosed()
       .pipe(
-        mergeMap((confirm) =>
-          iif(() => confirm, this.unenroll(item), throwError(null))
-        )
+        mergeMap((confirm: boolean) => {
+          if (confirm) {
+            return from(this.unenroll(item))
+          }
+
+          return throwError(null)
+        })
       )
       .toPromise()
   }
