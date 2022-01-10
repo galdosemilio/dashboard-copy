@@ -1,3 +1,15 @@
+# [1.61.0](https://github.com/coachcare/dashboard/compare/v1.60.0...v1.61.0) (2022-01-10)
+
+
+### Bug Fixes
+
+* solved list view issues [FRON-2549] ([f7bc845](https://github.com/coachcare/dashboard/commit/f7bc8452eaeec35b4b5492739d641b60b9477dcf))
+
+
+### Features
+
+* added support for phase sorting by name [FRON-1567] ([e6f869e](https://github.com/coachcare/dashboard/commit/e6f869ec612c9eacdd5778c03e2b66ec872827c2))
+
 # [1.60.0](https://github.com/coachcare/dashboard/compare/v1.59.0...v1.60.0) (2022-01-07)
 
 
