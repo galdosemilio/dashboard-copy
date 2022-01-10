@@ -28,7 +28,7 @@ export class MeasurementDatabaseV2 extends CcrDatabase {
         ? {
             start: today
               .clone()
-              .subtract(2, 'years')
+              .subtract(3, 'years')
               .startOf('year')
               .toISOString(),
             end: today.toISOString()

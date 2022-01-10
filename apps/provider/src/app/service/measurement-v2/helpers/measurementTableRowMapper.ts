@@ -2,20 +2,21 @@ import * as moment from 'moment'
 
 export function measurementTableRowMapper(
   [current, previous],
-  blockedDataPointAssocIds: string[]
+  blockedDataPointAssocIds: string[],
+  listView = false
 ) {
   const currentDate = moment(current.recordedAt.utc)
   const isEmpty = current.id === 'empty-group'
 
   const shouldShowDate =
     isEmpty ||
-    this.listView ||
+    listView ||
     (previous?.recordedAt.utc &&
       !currentDate.isSame(previous?.recordedAt.utc, 'day'))
 
   const shouldShowTime =
     !isEmpty ||
-    this.listView ||
+    listView ||
     (previous?.recordedAt.utc &&
       currentDate.isSame(previous?.recordedAt.utc, 'day'))
 

@@ -328,7 +328,7 @@ export class MeasurementsTableV2Component implements OnInit {
     }
   }
 
-  private attemptResolveSort(): void {
+  private attemptResolveSort(listViewEnabled = false): void {
     try {
       const storageSort = JSON.parse(
         window.localStorage.getItem(STORAGE_MEASUREMENT_LIST_SORT)
@@ -337,6 +337,12 @@ export class MeasurementsTableV2Component implements OnInit {
       if (storageSort) {
         this.sort.direction = storageSort.dir || 'asc'
         this.sort.active = storageSort.property || 'recordedAt'
+        return
+      }
+
+      if (listViewEnabled) {
+        this.sort.direction = 'desc'
+        this.sort.active = 'recordedAt'
       }
     } catch (error) {
       this.sort.direction = 'asc'
@@ -357,7 +363,11 @@ export class MeasurementsTableV2Component implements OnInit {
     const mappedEntries = entries
       .map((group, idx, groups) => [group, groups[idx - 1]])
       .map(([current, previous]) =>
-        measurementTableRowMapper([current, previous], blockedDataPointAssocIds)
+        measurementTableRowMapper(
+          [current, previous],
+          blockedDataPointAssocIds,
+          this.source.listView
+        )
       )
 
     const lastExistingGroup = mappedEntries.slice().pop()
@@ -389,11 +399,12 @@ export class MeasurementsTableV2Component implements OnInit {
   }
 
   private createDataSource(): void {
-    this.attemptResolveSort()
     const allowListView = resolveConfig(
       'JOURNAL.ALLOW_MEASUREMENT_LIST_VIEW',
       this.context.organization
     )
+
+    this.attemptResolveSort(allowListView)
 
     this.source = new MeasurementDataSourceV2(
       this.database,

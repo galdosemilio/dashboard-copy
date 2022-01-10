@@ -151,7 +151,11 @@ export class MeasurementDataSourceV2 extends TableDataSource<
     })
       .map((group, idx, groups) => [group, groups[idx - 1]])
       .map(([current, previous]) =>
-        measurementTableRowMapper([current, previous], blockedDataPointAssocIds)
+        measurementTableRowMapper(
+          [current, previous],
+          blockedDataPointAssocIds,
+          this.listView
+        )
       )
 
     this.showDistanceNote = flat.some((entry) =>
