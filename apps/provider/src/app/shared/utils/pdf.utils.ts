@@ -62,13 +62,14 @@ export function calculateElementRow(
 }
 
 export function calculateProgressElementRow(
-  startWeekIndex: number,
-  startYear: number,
-  endYear: number,
+  startDate: moment.Moment,
   measurements: BodyMeasurement[],
   key: string,
   decimals: number = 2
 ): DieterSummaryElement {
+  const startWeekIndex = startDate.week()
+  const startYear = startDate.year()
+
   let element: DieterSummaryElement = {
     beginning: 0,
     changeThisWeek: 0,
@@ -76,8 +77,11 @@ export function calculateProgressElementRow(
     currentWeek: 0,
     lastWeek: 0
   }
+
+  const lastWeekStartDate = startDate.clone().subtract(1, 'week')
+
   const lastWeekIndex = startWeekIndex === 1 ? 52 : startWeekIndex - 1
-  const lastWeekIsInLastYear = lastWeekIndex === 1
+  const lastWeekIsInLastYear = lastWeekStartDate.year() < startDate.year()
 
   const firstMeasurement = measurements.find((meas) => meas[key])
   const currentMeasurement = measurements

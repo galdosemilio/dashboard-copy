@@ -128,7 +128,7 @@ export class ProgressReportPDFDialog implements OnInit {
     )
 
     const account = await this.account.getSingle(this.context.accountId)
-    const weekDate = moment(account.clientData.startedAt || account.createdAt)
+    const weekDate = moment(account.profile?.startedAt || account.createdAt)
       .startOf('week')
       .add(this.form.value.week, 'weeks')
 
@@ -149,7 +149,7 @@ export class ProgressReportPDFDialog implements OnInit {
         'weight'
       ],
       startDate: moment(
-        account.clientData.startedAt || account.createdAt
+        account.profile?.startedAt || account.createdAt
       ).toISOString(),
       endDate: endDate.toISOString(),
       unit: 'day',
@@ -170,13 +170,7 @@ export class ProgressReportPDFDialog implements OnInit {
       weeksOnProtocol: weekDiff
     }
 
-    pdfData = this.calculatePatientPDFData(
-      values,
-      pdfData,
-      startDate.week(),
-      startDate.year(),
-      endDate.year()
-    )
+    pdfData = this.calculatePatientPDFData(values, pdfData, startDate)
 
     const definition = {
       pageSize: 'Letter',
@@ -792,6 +786,7 @@ export class ProgressReportPDFDialog implements OnInit {
         }
       }
     }
+
     pdfMake.createPdf(definition).open()
     this.dialog.close()
   }
@@ -799,111 +794,47 @@ export class ProgressReportPDFDialog implements OnInit {
   private calculatePatientPDFData(
     values: BodyMeasurement[],
     currentObj: DieterSummaryPDFData,
-    startWeekIndex: number = 0,
-    startYear: number,
-    endYear: number
+    startDate: moment.Moment
   ): DieterSummaryPDFData {
     const partialResults: DieterSummaryPDFData = currentObj
 
     // Calculate composition elements
     partialResults.composition = {
-      bmi: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'bmi'
-      ),
+      bmi: calculateProgressElementRow(startDate, values, 'bmi'),
       bodyFatPercentage: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
+        startDate,
         values,
         'bodyFatPercentage'
       ),
-      bodyFat: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'bodyFat'
-      ),
-      leanMass: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'leanMass'
-      ),
+      bodyFat: calculateProgressElementRow(startDate, values, 'bodyFat'),
+      leanMass: calculateProgressElementRow(startDate, values, 'leanMass'),
       visceralFatRating: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
+        startDate,
         values,
         'visceralFatTanita',
         0
       ),
       visceralAdiposeTissue: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
+        startDate,
         values,
         'visceralAdiposeTissue',
         1
       ),
       waterPercentage: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
+        startDate,
         values,
         'waterPercentage'
       ),
-      weight: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'weight'
-      )
+      weight: calculateProgressElementRow(startDate, values, 'weight')
     }
 
     // Calculate measurements elements
     partialResults.measurements = {
-      chest: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'chest'
-      ),
-      arm: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'arm'
-      ),
-      waist: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'waist'
-      ),
-      hips: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'hip'
-      ),
-      thigh: calculateProgressElementRow(
-        startWeekIndex,
-        startYear,
-        endYear,
-        values,
-        'thigh'
-      )
+      chest: calculateProgressElementRow(startDate, values, 'chest'),
+      arm: calculateProgressElementRow(startDate, values, 'arm'),
+      waist: calculateProgressElementRow(startDate, values, 'waist'),
+      hips: calculateProgressElementRow(startDate, values, 'hip'),
+      thigh: calculateProgressElementRow(startDate, values, 'thigh')
     }
 
     partialResults.totalInches = +(
