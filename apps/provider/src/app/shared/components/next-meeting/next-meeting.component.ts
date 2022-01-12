@@ -90,6 +90,7 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
     const today = moment()
     this.dataSource = new MeetingsDataSource(this.database)
     this.dataSource.addDefault({
+      account: this.context.user.id,
       organization: this.context.organization.id,
       range: {
         start: today.toISOString(),
