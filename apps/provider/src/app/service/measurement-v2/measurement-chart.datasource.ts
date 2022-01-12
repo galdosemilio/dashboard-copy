@@ -15,17 +15,19 @@ import * as moment from 'moment'
 import { select, Store } from '@ngrx/store'
 import { CCRConfig, CCRPalette } from '@app/config'
 import { paletteSelector } from '@app/store/config'
-import { ContextService } from '@app/service'
-import { flatMap, groupBy, sortBy, uniqBy } from 'lodash'
+import { ContextService } from '@app/service/context.service'
+import { chain, flatMap, slice, sortBy } from 'lodash'
 import * as tinycolor from 'tinycolor2'
 import { TranslateService } from '@ngx-translate/core'
 import { generateChartTooltip } from './helpers'
+import { MEASUREMENT_MAX_ENTRIES_PER_DAY } from './measurement.datasource'
 import { DataPointEntry } from './model'
 
 export class MeasurementChartDataSource extends ChartDataSource<
   MeasurementDataPointGroup,
   GetMeasurementDataPointGroupsRequest
 > {
+  public hasTooMuchForSingleDay = false
   public type: string
   public timeframe: string
   private headings: string[] = []
@@ -57,15 +59,37 @@ export class MeasurementChartDataSource extends ChartDataSource<
     return from(
       this.database.fetch({
         ...criteria,
+        sort: [{ property: 'recordedAt', dir: 'asc' }],
         type: syntheticData ? syntheticData.sourceTypeIds : [this.type]
       })
     )
   }
 
   public mapChart(result: MeasurementDataPointGroup[]): ChartData {
-    const data = sortBy(result, (entry) =>
+    const sortedResult = sortBy(result, (entry) =>
       moment(entry.recordedAt.utc).unix()
-    ).map((entry) =>
+    )
+
+    /**
+     * Grouping by day and limiting the amount of entries per day
+     */
+    const preprocessedEntries = chain(sortedResult)
+      .groupBy((entry) => moment(entry.createdAt.utc).format('YYYY-MM-DD'))
+      .flatMap((group) => {
+        if (group.length <= MEASUREMENT_MAX_ENTRIES_PER_DAY) {
+          return group
+        }
+
+        this.hasTooMuchForSingleDay = true
+        return slice(group, -MEASUREMENT_MAX_ENTRIES_PER_DAY, group.length)
+      })
+      .value()
+
+    /**
+     * We consider synthetic types (in which the sources can become grouped) and
+     * then we flatten those groups
+     */
+    const dataPoints = preprocessedEntries.map((entry) =>
       parseWithSyntheticDataPointTypes<DataPointEntry, MinimalDataPointType>(
         entry.dataPoints.map((dataPoint) => ({
           ...dataPoint,
@@ -75,26 +99,27 @@ export class MeasurementChartDataSource extends ChartDataSource<
       )
     )
 
-    const flatData = flatMap(
-      data.map((entry) =>
+    const flatDataPoints = chain(dataPoints)
+      .flatMap((dataPointArray) =>
         flatMap(
-          entry.map((dataEntry) =>
-            dataEntry.kind === DataPointKind.Regular
-              ? [dataEntry]
-              : dataEntry.sources
+          dataPointArray.map((dataPointEntry) =>
+            dataPointEntry.kind === DataPointKind.Regular
+              ? [dataPointEntry]
+              : dataPointEntry.sources
           )
         )
       )
-    )
+      .value()
 
-    const groupedData = groupBy(
-      sortBy(uniqBy(flatData, (entry) => entry.id)),
-      (entry) => entry.type.id
-    )
-
-    const sortedResult = sortBy(result, (entry) =>
-      moment(entry.recordedAt.utc).unix()
-    )
+    /**
+     * We group by type ID in order to draw a different line
+     * per each data point type
+     */
+    const groupedDataPoints = chain(flatDataPoints)
+      .uniqBy((entry) => entry.id)
+      .groupBy((entry) => entry.type.id)
+      .toArray()
+      .value()
 
     // formats
     let xlabelFormat
@@ -145,7 +170,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
           backgroundColor: 'transparent'
         }
       ],
-      datasets: Object.values(groupedData).map((group) => ({
+      datasets: groupedDataPoints.map((group) => ({
         data: group.map((entry) => ({
           x: moment(entry.createdAt.utc).startOf('hour').format(xlabelFormat),
           y: convertToReadableFormat(
@@ -172,11 +197,11 @@ export class MeasurementChartDataSource extends ChartDataSource<
                 ? this.headings[tooltipItem[0].index]
                 : '',
             label: (tooltipItem) => {
-              if (!data.length) {
+              if (!dataPoints.length) {
                 return
               }
 
-              const entry = data[tooltipItem.index][0]
+              const entry = dataPoints[tooltipItem.index][0]
 
               return `${generateChartTooltip(
                 entry,

@@ -48,3 +48,7 @@
     [plugins]="plugins"
   ></canvas>
 </ccr-datasource-overlay>
+
+<p class="footnotes" *ngIf="source.hasTooMuchForSingleDay">
+  <em class="ccr-marker">*</em> {{ 'MEASUREMENT.MORE_DATA_EXISTS_FOR_DAY' | translate }}
+</p>
