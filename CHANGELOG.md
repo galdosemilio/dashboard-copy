@@ -1,3 +1,12 @@
+## [1.61.1](https://github.com/coachcare/dashboard/compare/v1.61.0...v1.61.1) (2022-01-12)
+
+
+### Bug Fixes
+
+* **build:** added missing 'repository' property in package.json ([22a5e38](https://github.com/coachcare/dashboard/commit/22a5e388a64c103d4452c9f056e535d50dd462fe))
+* add no floating promises linting rule [FRON-2104] ([bfbf406](https://github.com/coachcare/dashboard/commit/bfbf4064491bbc7af7b10922734f48129e4d4c4a))
+* support for edge cases in the progress report [FRON-2550] ([d272df7](https://github.com/coachcare/dashboard/commit/d272df7049656fcdcf8baecd1f6c549d77be9eee))
+
 # [1.61.0](https://github.com/coachcare/dashboard/compare/v1.60.0...v1.61.0) (2022-01-10)
 
 
