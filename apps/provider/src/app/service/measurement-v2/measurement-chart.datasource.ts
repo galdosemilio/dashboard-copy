@@ -158,6 +158,29 @@ export class MeasurementChartDataSource extends ChartDataSource<
       moment(entry.recordedAt.utc).format(tooltipFormat)
     )
 
+    const startDate = moment(sortedResult[0]?.recordedAt.utc)
+    const endDate = moment(
+      sortedResult[sortedResult.length - 1]?.recordedAt.utc
+    )
+    const tickDuration = Math.round(
+      moment.duration(endDate.diff(startDate)).asDays() / xMaxTicks - 2
+    )
+
+    const emptyGroup = this.createEmptyDateGroups({
+      start:
+        this.timeframe === 'alltime' && sortedResult.length
+          ? moment(sortedResult[0].recordedAt.utc)
+              .subtract(tickDuration, 'day')
+              .toDate()
+          : this.criteria.recordedAt.start,
+      end:
+        this.timeframe === 'alltime' && sortedResult.length
+          ? moment(sortedResult[sortedResult.length - 1].recordedAt.utc)
+              .add(tickDuration, 'day')
+              .toDate()
+          : this.criteria.recordedAt.end
+    })
+
     const chart: ChartData = {
       colors: [
         {
@@ -183,7 +206,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
       })),
       labels: [
         '',
-        ...this.createEmptyDateGroups().map((dateGroup) =>
+        ...emptyGroup.map((dateGroup) =>
           moment(dateGroup.recordedAt.utc).format(xlabelFormat)
         ),
         ''
@@ -234,10 +257,16 @@ export class MeasurementChartDataSource extends ChartDataSource<
     return response.data
   }
 
-  private createEmptyDateGroups(): MeasurementDataPointGroup[] {
+  private createEmptyDateGroups({
+    start,
+    end
+  }: {
+    start: Date | string
+    end: Date | string
+  }): MeasurementDataPointGroup[] {
     const emptyGroups: MeasurementDataPointGroup[] = []
-    const startDate = moment(this.criteria.recordedAt.start)
-    const endDate = moment(this.criteria.recordedAt.end)
+    const startDate = moment(start).startOf('day')
+    const endDate = moment(end).endOf('day')
 
     let currentDate = startDate
 
