@@ -40,6 +40,7 @@ import {
 import { ConsultationFormArgs } from '../consultationFormArgs.interface'
 import { AssociationsDatabase } from '@app/dashboard'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { SelectorOption } from '@coachcare/common/shared'
 
 export type AddConsultationAttendee = MeetingAttendee & {
   accountType?: string
@@ -215,22 +216,23 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
         })
       ).data.map((clinic) => clinic.organization)
 
-      this.clinicOptions = this.clinics.map((clinic) => ({
+      const clinicOptions: SelectorOption[] = this.clinics.map((clinic) => ({
         value: clinic.id,
         viewValue: clinic.name
       }))
 
-      if (!this.clinicOptions.length) {
+      if (!clinicOptions.length) {
+        this.clinicOptions = []
         return
       }
 
-      const contextClinic = this.clinicOptions.find(
+      const contextClinic = clinicOptions.find(
         (clinic) => clinic.value === this.context.organizationId
       )
 
-      this.initialOrgOption = contextClinic
-        ? contextClinic
-        : this.clinicOptions[0]
+      this.initialOrgOption = contextClinic ? contextClinic : clinicOptions[0]
+
+      this.clinicOptions = clinicOptions
     } catch (error) {
       this.notifier.error(error)
     }
