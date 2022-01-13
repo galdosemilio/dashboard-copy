@@ -1,3 +1,15 @@
+# [1.62.0](https://github.com/coachcare/dashboard/compare/v1.61.1...v1.62.0) (2022-01-13)
+
+
+### Bug Fixes
+
+* get upcoming meeting with logged in user [FRON-2552] ([4b05177](https://github.com/coachcare/dashboard/commit/4b05177c5fc6cfb6bfc66c4cc1b5137c455e13cd))
+
+
+### Features
+
+* added error handling on content uploads [FRON-2546] ([93ad9f2](https://github.com/coachcare/dashboard/commit/93ad9f258ed1f55ce5334554879c1231e12bb39c))
+
 ## [1.61.1](https://github.com/coachcare/dashboard/compare/v1.61.0...v1.61.1) (2022-01-12)
 
 
