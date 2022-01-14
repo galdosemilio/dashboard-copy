@@ -104,7 +104,11 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
     { value: 'average', viewValue: _('MEASUREMENT.STEP_AVERAGE') },
     { value: 'distance', viewValue: _('MEASUREMENT.DISTANCE') },
     { value: 'total', viewValue: _('MEASUREMENT.SLEEP') },
-    { value: 'sleepQuality', viewValue: _('MEASUREMENT.RESTFULNESS') }
+    { value: 'sleepQuality', viewValue: _('MEASUREMENT.RESTFULNESS') },
+    { value: 'calories', viewValue: _('MEASUREMENT.CALORIES') },
+    { value: 'protein', viewValue: _('BOARD.PROTEIN') },
+    { value: 'carbohydrates', viewValue: _('MEASUREMENT.CARBS') },
+    { value: 'totalFat', viewValue: _('BOARD.FAT') }
   ]
   measurements: SelectOptions<MeasurementSummaryData> = []
 
