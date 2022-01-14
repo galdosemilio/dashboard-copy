@@ -335,18 +335,20 @@ export class MeasurementsTableV2Component implements OnInit {
       )
 
       if (storageSort) {
-        this.sort.direction = storageSort.dir || 'asc'
-        this.sort.active = storageSort.property || 'recordedAt'
-        return
+        return this.sort.sort$.next(storageSort)
       }
 
       if (listViewEnabled) {
-        this.sort.direction = 'desc'
-        this.sort.active = 'recordedAt'
+        this.sort.sort$.next({
+          dir: 'desc',
+          property: 'recordedAt'
+        })
       }
     } catch (error) {
-      this.sort.direction = 'asc'
-      this.sort.active = 'recordedAt'
+      this.sort.sort$.next({
+        dir: 'asc',
+        property: 'recordedAt'
+      })
     }
   }
 
@@ -436,10 +438,14 @@ export class MeasurementsTableV2Component implements OnInit {
     this.setUpPaginator()
 
     this.sort.sortChange.pipe(untilDestroyed(this)).subscribe((res) => {
-      window.localStorage.setItem(
-        STORAGE_MEASUREMENT_LIST_SORT,
-        JSON.stringify(res[0])
-      )
+      if (res[0]?.dir) {
+        window.localStorage.setItem(
+          STORAGE_MEASUREMENT_LIST_SORT,
+          JSON.stringify(res[0])
+        )
+      } else {
+        window.localStorage.removeItem(STORAGE_MEASUREMENT_LIST_SORT)
+      }
     })
 
     this.source

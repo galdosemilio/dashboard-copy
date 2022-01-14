@@ -13,6 +13,7 @@ import {
   CcrTableSortHeaderComponent
 } from '@app/shared/components/table-sort-header/table-sort-header.component'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 
 @UntilDestroy()
@@ -29,15 +30,37 @@ export class CcrTableSortDirective implements AfterContentInit {
 
   public active?: string
   public direction?: string
+  public sort$: Subject<CcrSort> = new Subject<CcrSort>()
 
   private allSorts: CcrSort[] = []
 
   constructor(public viewContainer: ViewContainerRef) {
     this.onSortChange = this.onSortChange.bind(this)
+    this.sort = this.sort.bind(this)
+    this.sort$
+      .pipe(untilDestroyed(this), debounceTime(200))
+      .subscribe(this.sort)
   }
 
   public ngAfterContentInit(): void {
     this.subscribeToEventEmitters()
+  }
+
+  public sort(sort: CcrSort): void {
+    if (sort.dir === this.direction && sort.property === this.active) {
+      return
+    }
+
+    const header =
+      this.sortHeaders &&
+      this.sortHeaders.find((entry) => entry.property === sort.property)
+
+    if (!header) {
+      return
+    }
+
+    header.direction = sort.dir
+    this.onSortChange(sort)
   }
 
   private onSortChange(sort: CcrSort): void {

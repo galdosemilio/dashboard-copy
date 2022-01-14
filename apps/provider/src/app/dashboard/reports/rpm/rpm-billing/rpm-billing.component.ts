@@ -117,19 +117,32 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     this.createStatusFilterForm()
 
     this.sort.sortChange.pipe(untilDestroyed(this)).subscribe((res) => {
-      window.localStorage.setItem(STORAGE_RPM_BILLING_SORT, JSON.stringify(res))
+      if (!res.direction) {
+        window.localStorage.removeItem(STORAGE_RPM_BILLING_SORT)
+      } else {
+        window.localStorage.setItem(
+          STORAGE_RPM_BILLING_SORT,
+          JSON.stringify(res)
+        )
+      }
     })
-
-    this.sort.direction = 'asc'
-    this.sort.active = 'lastName'
 
     const storageSort = JSON.parse(
       window.localStorage.getItem(STORAGE_RPM_BILLING_SORT)
     )
 
     if (storageSort) {
-      this.sort.direction = storageSort.direction
-      this.sort.active = storageSort.active
+      this.sort.sort({
+        id: storageSort.active,
+        start: storageSort.direction,
+        disableClear: false
+      })
+    } else {
+      this.sort.sort({
+        id: 'lastName',
+        start: 'asc',
+        disableClear: false
+      })
     }
 
     this.source = new RPMBillingDataSource(
