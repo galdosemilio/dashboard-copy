@@ -1,6 +1,6 @@
 import { CcrElement, Tab } from '@chart/model'
 import { api } from '@chart/service/api'
-import { tabService, modalService, eventService } from '@chart/service'
+import { tabService, eventService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 import {
   MeasurementDataPointAggregate,
@@ -10,7 +10,7 @@ import {
 import { DateTime } from 'luxon'
 
 import './list.element.scss'
-import { DataPointChangedEvent, EventType, ListItem } from '@chart/model'
+import { ListItem } from '@chart/model'
 import { groupBy, uniqBy } from 'lodash'
 import * as utils from '@chart/utils'
 import { Subject } from 'rxjs'
@@ -39,7 +39,8 @@ export class ListElement extends CcrElement {
           <div class="loading-bar"><div></div><div></div><div></div><div></div></div>
         </div>
       </div>
-      <div id='list-content'></div>`
+      <div id='list-content'></div>
+      <dashboard-list-details></dashboard-list-details>`
   }
 
   afterViewInit() {
@@ -131,41 +132,6 @@ export class ListElement extends CcrElement {
     document.getElementById('pull-up-refresh').style.height = `${changeY}px`
   }
 
-  async onDeleteDataPoint(item: ListItem) {
-    try {
-      this.loading(true)
-
-      await api.measurementDataPoint.deleteGroup({ id: item.groupId })
-
-      const deletedData = this.data.filter(
-        (t) => t.point.group.id === item.groupId
-      )
-      this.data = this.data.filter((t) => t.point.group.id !== item.groupId)
-
-      if (typeof this.offset === 'number' && this.offset > 0) {
-        this.offset -= 1
-      }
-
-      document.getElementById('list-content').innerText = ''
-      this.addItemToListView(this.data)
-
-      if (deletedData.length > 0) {
-        const event: DataPointChangedEvent = {
-          type: EventType.DATA_POINT_CHANGED,
-          data: deletedData[0]
-        }
-
-        window.ReactNativeWebView?.postMessage(JSON.stringify(event))
-      }
-
-      modalService.close$.next()
-    } catch (err) {
-      this.error(err)
-    } finally {
-      this.loading(false)
-    }
-  }
-
   onScrollList() {
     const content = document.getElementById('list-content')
     const wrapper = document.getElementById('list-wrapper')
@@ -187,7 +153,7 @@ export class ListElement extends CcrElement {
     }
 
     for (const item of list) {
-      const dateMoment = DateTime.fromISO(item.timestamp)
+      const dateMoment = DateTime.fromISO(item.recordedAt)
       const element = document.createElement('div')
       element.className = 'list-item'
 
@@ -195,13 +161,22 @@ export class ListElement extends CcrElement {
       itemElement.className = 'item'
 
       itemElement.innerHTML = `
-        <div class='content'>
-          <p class='value'>${item.name}: ${item.value}
-            ${item.unit}
-          </p>
-          <p>${dateMoment.toFormat('EEE, MMM d, yyyy')}</p>
+        <div class='item-wrap'>
+          <div class='content-left'>
+            <p class='month'>${dateMoment.toFormat('MMM')}</p>
+            <p class='day'>${dateMoment.toFormat('dd')}</p>
+          </div>
+          <div class='comma'></div>
+          <div class='content-right'>
+            <p class='time'>${dateMoment.toFormat('hh:mm a')} ${
+        item.count > 1 ? `& ${item.count - 1} more` : ''
+      }</p>
+            <p class='value'>${item.value} ${item.unit}</p>
+          </div>
+          <div class="arrow-right">
+            <img src='assets/img/arrow-right.svg' />
+          </div>
         </div>
-        <p class="arrow-right">▶</p>
       `
 
       const actionElement = document.createElement('div')
@@ -212,51 +187,10 @@ export class ListElement extends CcrElement {
 
       document.getElementById('list-content').appendChild(element)
 
-      itemElement.addEventListener('click', () => this.openDetails(item))
+      itemElement.addEventListener('click', () =>
+        eventService.trigger('list.details', item)
+      )
     }
-  }
-
-  private openDetails(item: ListItem) {
-    modalService.open$.next({
-      title: translate('DETAILS'),
-      full: true,
-      content: `
-        <div class="detail-view">
-          <div class="detail-item">
-            <p class="detail-title">${item.name}</p>
-            <p class="detail-content">
-              ${item.value}
-              ${item.unit}
-            </p>
-          </div>
-          <div class="detail-item">
-            <p class="detail-title">${translate('DATE')}</p>
-            <p class="detail-content">${DateTime.fromISO(
-              item.timestamp
-            ).toLocaleString(DateTime.DATE_MED)}</p>
-          </div>
-          <div class="detail-item">
-            <p class="detail-title">${translate('CREATED_AT')}</p>
-            <p class="detail-content">${DateTime.fromISO(
-              item.createdAt
-            ).toLocaleString(DateTime.DATETIME_MED)}</p>
-          </div>
-          <div class="detail-item">
-            <p class="detail-title">${translate('SOURCE')}</p>
-            <p class="detail-content">${item.source}</p>
-          </div>
-          <div class="action">
-            <div id="delete-item" class="delete-btn">${translate(
-              'DELETE'
-            )}</div>
-          </div>
-        </div>
-      `
-    })
-
-    document
-      .getElementById('delete-item')
-      .addEventListener('click', () => this.onDeleteDataPoint(item))
   }
 
   private error(msg: string) {
@@ -310,12 +244,17 @@ export class ListElement extends CcrElement {
   }
 
   private getListItems(entries: MeasurementDataPointAggregate[]): ListItem[] {
-    return api.baseData.dataPointTypeId ===
-      DataPointTypes.BLOOD_PRESSURE_GENERAL
-      ? this.getListAsBloodPressure(entries)
-      : api.baseData.isWeightRequired
-      ? this.getListAsWeightRequired(entries)
-      : this.getListAsGeneric(entries)
+    if (
+      api.baseData.dataPointTypeId === DataPointTypes.BLOOD_PRESSURE_GENERAL
+    ) {
+      return this.getListAsBloodPressure(entries)
+    }
+
+    if (api.baseData.isWeightRequired) {
+      return this.getListAsWeightRequired(entries)
+    }
+
+    return this.getListAsGeneric(entries)
   }
 
   private getListAsBloodPressure(
@@ -347,13 +286,16 @@ export class ListElement extends CcrElement {
         .join('/')
 
       list.push({
+        id: dataPoint.point.id,
         groupId,
         name: translate('BLOOD_PRESSURE'),
         value,
         unit,
         source: dataPoint.point.group.source.name,
         timestamp: dataPoint.bucket.timestamp,
-        createdAt: dataPoint.point.group.createdAt.utc
+        createdAt: dataPoint.point.group.createdAt.utc,
+        recordedAt: dataPoint.point.group.recordedAt.utc,
+        count: dataPoint.count
       })
     }
 
@@ -378,13 +320,16 @@ export class ListElement extends CcrElement {
       )
 
       list.push({
+        id: dataPoint.point.id,
         groupId: dataPoint.point.group.id,
         name: dataPoint.point.type.name,
         value,
         unit,
         source: dataPoint.point.group.source.name,
         timestamp: dataPoint.bucket.timestamp,
-        createdAt: dataPoint.point.createdAt.utc
+        createdAt: dataPoint.point.createdAt.utc,
+        recordedAt: dataPoint.point.group.recordedAt.utc,
+        count: dataPoint.count
       })
     }
 
@@ -436,13 +381,16 @@ export class ListElement extends CcrElement {
       )
 
       list.push({
+        id: dataPoint.point.id,
         groupId: dataPoint.point.group.id,
         name: dataPoint.point.type.name,
         value: `${weightValue} ${weightUnit}`,
         unit: `(${value} ${unit})`,
         source: dataPoint.point.group.source.name,
         timestamp: dataPoint.bucket.timestamp,
-        createdAt: dataPoint.point.createdAt.utc
+        createdAt: dataPoint.point.createdAt.utc,
+        recordedAt: dataPoint.point.group.recordedAt.utc,
+        count: dataPoint.count
       })
     }
 

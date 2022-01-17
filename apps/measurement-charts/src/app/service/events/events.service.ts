@@ -14,6 +14,7 @@ type EventString =
   | 'list.refresh'
   | 'list.no-previous-entries'
   | 'list.most-recent-entry'
+  | 'list.details'
 
 interface EventProps {
   name: string
@@ -23,9 +24,8 @@ interface EventProps {
 class EventService {
   private event$: Subject<EventProps> = new Subject<EventProps>()
 
-  public baseDataEvent$: BehaviorSubject<BaseData> = new BehaviorSubject<BaseData>(
-    baseData
-  )
+  public baseDataEvent$: BehaviorSubject<BaseData> =
+    new BehaviorSubject<BaseData>(baseData)
 
   public listen<T>(name: EventString): Observable<T> {
     return this.event$.pipe(

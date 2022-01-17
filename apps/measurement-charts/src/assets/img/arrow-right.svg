@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>arrow/next/darkGray</title>
+    <g id="Progress" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="List-View" transform="translate(-369.000000, -143.000000)" fill="#4A4A4A" fill-rule="nonzero">
+            <g id="arrow/next/darkGray-Copy-2" transform="translate(367.000000, 143.000000)">
+                <path d="M4.85578338,7.85374976 C4.67660169,7.85374976 4.49744212,7.78525836 4.36083212,7.64856353 L0.0619761359,3.34490261 C-0.211487254,3.07113638 -0.211487254,2.62727136 0.0619761359,2.35361589 C0.335328892,2.07996042 0.778614396,2.07996042 1.05209991,2.35361589 L4.85578338,6.16173315 L8.65948897,2.3537488 C8.93295236,2.08009333 9.37619361,2.08009333 9.64952424,2.3537488 C9.92312039,2.62740427 9.92312039,3.07126928 9.64952424,3.34503551 L5.35073463,7.64869644 C5.21405826,7.78541342 5.03489869,7.85374976 4.85578338,7.85374976 Z" id="Shape" transform="translate(4.855800, 5.001062) rotate(-90.000000) translate(-4.855800, -5.001062) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

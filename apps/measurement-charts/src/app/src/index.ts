@@ -1,5 +1,6 @@
 export * from './app.element'
 export * from './graph'
 export * from './list'
+export * from './list-details'
 export * from './nav'
 export * from './modal'

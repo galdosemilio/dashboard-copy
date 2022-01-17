@@ -1,9 +1,12 @@
 export interface ListItem {
-  createdAt: string
+  id: string
   groupId: string
+  createdAt: string
+  recordedAt: string
+  timestamp: string
   name: string
   source: string
-  timestamp: string
   unit?: string
   value: string | number
+  count?: number
 }

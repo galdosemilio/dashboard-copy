@@ -44,18 +44,16 @@ export class GraphElement extends CcrElement {
   private rangeChangeBumper = false
   private resizeChart$: Subject<void> = new Subject<void>()
   private timeframe: Timeframe
-  private visibleLocalRangeChanged$: Subject<
-    Record<string, unknown>
-  > = new Subject<Record<string, unknown>>()
+  private visibleLocalRangeChanged$: Subject<Record<string, unknown>> =
+    new Subject<Record<string, unknown>>()
   private scaleChart$: Subject<void> = new Subject<void>()
   private dataPointTypes: MeasurementDataPointType[]
 
   constructor() {
     super()
     this.resizeChart = this.resizeChart.bind(this)
-    this.onVisibleLogicalRangeChanged = this.onVisibleLogicalRangeChanged.bind(
-      this
-    )
+    this.onVisibleLogicalRangeChanged =
+      this.onVisibleLogicalRangeChanged.bind(this)
     this.scaleChart = this.scaleChart.bind(this)
   }
 
@@ -484,7 +482,8 @@ export class GraphElement extends CcrElement {
           type: undefined,
           value: undefined,
           group: undefined
-        }
+        },
+        count: 0
       })
 
       currentDate = currentDate.plus({ day: 1 })
@@ -493,9 +492,7 @@ export class GraphElement extends CcrElement {
     return emptyGroups
   }
 
-  private getBarSpacingSettings(
-    timeframe: Timeframe
-  ): {
+  private getBarSpacingSettings(timeframe: Timeframe): {
     barSpacing: number
     minBarSpacing: number
   } {
