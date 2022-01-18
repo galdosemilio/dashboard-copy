@@ -291,12 +291,10 @@ export class ContentUploadService {
       case CONTENT_TYPE_MAP.file.code:
         await this.createAsFile(ticket)
         break
-      case CONTENT_TYPE_MAP.hyperlink.code:
-        await this.createAsHyperlink(ticket)
-        break
       case CONTENT_TYPE_MAP.youtube.code:
       case CONTENT_TYPE_MAP.vimeo.code:
-        await this.createAsEmbedded(ticket)
+      case CONTENT_TYPE_MAP.hyperlink.code:
+        await this.createAsHyperlink(ticket)
         break
       default:
         await this.createAsDefault(ticket)
