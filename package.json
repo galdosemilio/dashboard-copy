@@ -145,7 +145,7 @@
     "pdfmake": "^0.1.68",
     "regenerator-runtime": "0.13.7",
     "rxjs": "~6.6.7",
-    "socket.io": "^2.3.0",
+    "socket.io": "^4.4.1",
     "tinycolor2": "^1.4.1",
     "tslib": "^2.2.0",
     "twilio-video": "^2.7.3",
