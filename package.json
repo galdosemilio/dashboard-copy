@@ -55,12 +55,6 @@
       ]
     }
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "yarn affected:lint && yarn format:check"
-    }
-  },
   "scripts": {
     "ng": "nx",
     "nx": "node --max-old-space-size=6144 node_modules/.bin/nx",
@@ -194,7 +188,7 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsdoc": "latest",
     "eslint-plugin-prefer-arrow": "latest",
-    "husky": "4",
+    "husky": "7",
     "jest": "26.4.2",
     "jest-preset-angular": "8.3.1",
     "ng-packagr": "^10.1.2",
