@@ -1,3 +1,20 @@
+# [1.63.0](https://github.com/coachcare/dashboard/compare/v1.62.0...v1.63.0) (2022-01-19)
+
+
+### Bug Fixes
+
+* adjusted form initialization [FRON-2548] ([c64a72a](https://github.com/coachcare/dashboard/commit/c64a72a251b1946e806f337bbbb12ba657cb1273))
+* render graph in first and last entry for all view [FRON-2554] ([d12076a](https://github.com/coachcare/dashboard/commit/d12076af5d8f8b5433ab899126418125f68ca18d))
+* restored food chart view [FRON-2553] ([79167b7](https://github.com/coachcare/dashboard/commit/79167b75efc430f5cfb761ebc0ba6febf087df85))
+* reverted content creation as embedded [FRON-2567] ([d78bb88](https://github.com/coachcare/dashboard/commit/d78bb88a1f3c079f1386f10c4e60786d32d4d295))
+* show correct initial sort arrow in table [FRON-2555] ([aa60095](https://github.com/coachcare/dashboard/commit/aa60095122d0a62e80bf733ac67dd8e179b8697c))
+
+
+### Features
+
+* added automatic thread removal on 403 [FRON-2045] ([2c17e06](https://github.com/coachcare/dashboard/commit/2c17e066acc588b7a270994bfc3d4cff82b6f213))
+* added entry slicing per day [FRON-2538] ([f0e1b36](https://github.com/coachcare/dashboard/commit/f0e1b363896a348a600ebe6e79e98bd34ab86b71))
+
 # [1.62.0](https://github.com/coachcare/dashboard/compare/v1.61.1...v1.62.0) (2022-01-13)
 
 
