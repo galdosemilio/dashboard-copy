@@ -146,6 +146,7 @@ const messagingApiService = new ApiService({
 avatarApiService.setEnvironment(environment.ccrApiEnv)
 generalApiService.setEnvironment(environment.ccrApiEnv)
 measurementApiService.setEnvironment(environment.ccrApiEnv)
+messagingApiService.setEnvironment(environment.ccrApiEnv)
 
 export const SdkApiProviders = [
   {
