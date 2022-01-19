@@ -1,3 +1,10 @@
+## [1.63.1](https://github.com/coachcare/dashboard/compare/v1.63.0...v1.63.1) (2022-01-19)
+
+
+### Bug Fixes
+
+* set environment for the messaging provider [FRON-2045] ([14f0486](https://github.com/coachcare/dashboard/commit/14f048664c35e8602b31952af83ef8e358345e06))
+
 # [1.63.0](https://github.com/coachcare/dashboard/compare/v1.62.0...v1.63.0) (2022-01-19)
 
 
