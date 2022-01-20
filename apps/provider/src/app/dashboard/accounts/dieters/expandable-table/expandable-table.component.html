@@ -6,21 +6,21 @@ class="ccr-table ccr-expand-table ccr-table-stats">
 <div class="ccr-expandable-table-container">
 <div class="ccr-expandable-table">
   <table ccrTableSort>
-    <thead>
+    <thead class="sticky-header">
       <tr>
-        <td class="column-id">
+        <td class="column-id sticky-column">
           <div>
             <span>{{ 'GLOBAL.ID' | translate }}</span>
           </div>
         </td>
-        <td class="column-firstname">
+        <td class="column-firstname sticky-column">
           <div>
             <ccr-table-sort-header property="firstName">
               <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
             </ccr-table-sort-header>
           </div>
         </td>
-        <td class="column-lastname">
+        <td class="column-lastname sticky-column">
           <div>
             <ccr-table-sort-header property="lastName" fxFlex>
               <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
@@ -91,7 +91,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
-        <td class="column-actions">{{ 'BOARD.ACTIONS' | translate }}</td>
+        <td class="column-actions sticky-column sticky-right">{{ 'BOARD.ACTIONS' | translate }}</td>
       </tr>
     </thead>
     <tbody>
@@ -107,7 +107,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       'row-bottom-border': row.level > 1,
       'last-of-group': row.isLastOfGroup
     }">
-      <td class="column-id" [attr.colspan]="row.level >= 1 ? 11 : 1">
+      <td class="column-id sticky-column" [attr.colspan]="row.level >= 1 ? 11 : 1">
         <div
           *ngIf="row.level < 1"
           [ngClass]="{ 'clickable': row.level === 0, 'non-clickable': row.level > 0, 'non-empty': !row.isEmpty && row.level < 2 }"
@@ -131,7 +131,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           (onLoadMore)="onLoadMore($event, i)">
         </app-patient-firstname-cell>
       </td>
-      <td class="column-firstname">
+      <td class="column-firstname sticky-column">
         <app-patient-firstname-cell
           *ngIf="row.level < 1"
           [row]="row"
@@ -140,7 +140,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           (onLoadMore)="onLoadMore($event, i)">
         </app-patient-firstname-cell>
       </td>
-      <td *ngIf="row.level === 0" class="column-lastname">{{ row.lastName }}</td>
+      <td *ngIf="row.level === 0" class="column-lastname sticky-column">{{ row.lastName }}</td>
       <td *ngIf="row.level === 0" class="column-phone">
         <a *ngIf="row.phone"  [href]="'tel:' + row.phone">{{ row.phone }}</a>
       </td>
@@ -201,7 +201,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           </div>
         </div>
       </td>
-      <td class="column-actions">
+      <td class="column-actions sticky-column sticky-right">
         <div *ngIf="row.level === 0">
           <button
           [title]="'BOARD.OPEN_IN_NEW' | translate"

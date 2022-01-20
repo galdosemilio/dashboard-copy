@@ -3,8 +3,8 @@
     <div class="ccr-expandable-table">
       <table ccrTableSort>
         <caption hidden>{{ 'GLOBAL.MEASUREMENTS' | translate }}</caption>
-        <thead>
-          <th class="date-cell" scope="col">
+        <thead class="sticky-header">
+          <th class="date-cell sticky-column" scope="col">
             <ccr-table-sort-header property="recordedAt">
               {{ 'GLOBAL.DATE' | translate }}
             </ccr-table-sort-header>
@@ -36,7 +36,7 @@
               </div>
             </div>
           </th>
-          <th class="actions-cell" scope="col">
+          <th class="actions-cell sticky-column sticky-right" scope="col">
             <div fxLayout="row" fxLayoutAlign="center center">
               {{ 'BOARD.ACTIONS' | translate }}
             </div>
@@ -97,7 +97,7 @@
 
 <ng-template #measurementRow let-row="row">
   <td
-    class="ccr-text-weight-bold date-cell"
+    class="ccr-text-weight-bold date-cell sticky-column"
     [class.ccr-text-right]="row.shouldShowTime">
     <span *ngIf="row.shouldShowDate">
       {{ row.recordedAt.utc | amDateFormat: 'ddd MMM D, YYYY' }}
@@ -159,7 +159,7 @@
     </div>
   </td>
 
-  <td class="actions-cell">
+  <td class="actions-cell sticky-column sticky-right">
     <div fxLayout="row" fxLayoutAlign="center center">
       <mat-icon
       *ngIf="!row.isEmpty"

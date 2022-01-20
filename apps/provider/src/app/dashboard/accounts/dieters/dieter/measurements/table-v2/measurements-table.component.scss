@@ -4,7 +4,9 @@
   display: block;
   max-width: 100%;
   overflow-x: scroll;
+  overflow-y: auto;
   padding-bottom: 25px;
+  max-height: 45vh;
   width: 100%;
 
   table {
@@ -36,9 +38,7 @@
     }
 
     .actions-cell {
-      right: 0;
       min-width: 75px;
-      position: sticky;
     }
 
     .common-cell {
@@ -58,7 +58,6 @@
       min-width: 125px;
       max-width: 125px;
       width: 125px;
-      position: sticky;
     }
 
     .device-cell {

@@ -1,10 +1,10 @@
 @import 'variables';
 
 .ccr-expandable-table {
-  max-height: 100%;
+  max-height: 60vh;
   max-width: 100%;
-  overflow-y: hidden;
-  overflow-x: visible;
+  overflow-y: auto;
+  overflow-x: auto;
 
   &-container {
     max-height: 60vh;
@@ -27,12 +27,38 @@
     background-color: mat-color($ccr-background, header);
     font-weight: 500;
     text-transform: uppercase;
+    &.sticky-header {
+      th,
+      td {
+        background-color: mat-color($ccr-background, header);
+        position: sticky;
+        top: 0;
+        z-index: 2;
+
+        &.sticky-column {
+          z-index: 3 !important;
+        }
+
+        &.sticky-right {
+          right: 0;
+        }
+      }
+    }
   }
 
   thead,
   tbody {
     & > tr > td {
       font-size: 14px;
+
+      &.sticky-column {
+        position: sticky;
+        z-index: 1;
+
+        &.sticky-right {
+          right: 0;
+        }
+      }
     }
   }
 
@@ -40,6 +66,15 @@
     & > tr > td {
       line-height: 36px;
       padding: 0 1em;
+
+      &.sticky-column {
+        position: sticky;
+        z-index: 1;
+
+        &.sticky-right {
+          right: 0;
+        }
+      }
     }
   }
 
