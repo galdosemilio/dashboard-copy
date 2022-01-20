@@ -7,12 +7,7 @@ import {
   ViewChild
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import {
-  MAT_DIALOG_DATA,
-  MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef,
-  MatStepper
-} from '@coachcare/material'
+import { MAT_DIALOG_DATA, MatDialogRef, MatStepper } from '@coachcare/material'
 import {
   CONTENT_TYPE_MAP,
   ContentTypeMapItem,
@@ -34,8 +29,7 @@ const MAXIMUM_UPLOAD_SIZE = 100 * 1000 * 1000 // 100 MB
     {
       provide: BINDFORM_TOKEN,
       useExisting: forwardRef(() => ContentCreateDialog)
-    },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+    }
   ]
 })
 export class ContentCreateDialog implements OnInit, OnDestroy {

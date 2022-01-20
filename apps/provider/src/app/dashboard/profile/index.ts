@@ -18,5 +18,3 @@ export const ProfileComponents = [
 ]
 
 export const UserProfileProviders = []
-
-export const ProfileEntryComponents = [VerifyDeleteMFADialog, VerifyMFADialog]

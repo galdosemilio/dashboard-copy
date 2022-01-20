@@ -1,5 +1,4 @@
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
-
 import { getTestBed } from '@angular/core/testing'
 import {
   BrowserDynamicTestingModule,
@@ -30,3 +29,5 @@ const context = require.context('./', true, /\.spec\.ts$/)
 context.keys().map(context)
 // Finally, start Karma to run the tests.
 __karma__.start()
+
+console.log('is this running?')

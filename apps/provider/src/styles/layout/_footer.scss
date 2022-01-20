@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 app-footer {
   position: fixed;
   bottom: 0;
@@ -20,7 +22,7 @@ app-footer {
     border-top: 1px solid mat-color($ccr-foreground, divider);
   }
   .mat-toolbar-row {
-    font-size: $footer-height / 2;
+    font-size: math.div($footer-height, 2);
     font-weight: normal;
     padding: 0 15px;
   }

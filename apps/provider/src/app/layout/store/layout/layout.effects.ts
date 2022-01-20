@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common'
 import { Inject, Injectable } from '@angular/core'
-import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Action, select, Store } from '@ngrx/store'
 import { Observable, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
@@ -91,22 +91,26 @@ export class LayoutEffects {
   /**
    * Effects
    */
-  @Effect()
-  init$: Observable<Action> = this.actions$.pipe(
-    ofType(layActions.LAYOUT_INIT),
-    switchMap(this.initHandler.bind(this))
+
+  init$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(layActions.LAYOUT_INIT),
+      switchMap(this.initHandler.bind(this))
+    )
   )
 
-  @Effect()
-  resize$: Observable<Action> = this.actions$.pipe(
-    ofType(layActions.LAYOUT_RESIZE),
-    switchMap(this.resizeHandler.bind(this))
+  resize$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(layActions.LAYOUT_RESIZE),
+      switchMap(this.resizeHandler.bind(this))
+    )
   )
 
-  @Effect()
-  close$: Observable<Action> = this.actions$.pipe(
-    ofType(layActions.MENU_CLOSE),
-    map((action) => (action as layActions.CloseMenuFor).payload),
-    switchMap(this.closeMenuForHandler.bind(this))
+  close$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(layActions.MENU_CLOSE),
+      map((action) => (action as layActions.CloseMenuFor).payload),
+      switchMap(this.closeMenuForHandler.bind(this))
+    )
   )
 }

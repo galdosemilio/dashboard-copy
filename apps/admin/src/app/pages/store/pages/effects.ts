@@ -10,7 +10,7 @@ import {
   COOKIE_ROLE,
   CookieService
 } from '@coachcare/common/services'
-import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Action } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
@@ -36,23 +36,27 @@ export class PagesEffects {
   /**
    * Effects
    */
-  @Effect({ dispatch: false })
-  login$: Observable<Action> = this.actions$.pipe(
-    ofType(SessionActions.ActionTypes.LOGIN),
-    tap(async (action: SessionActions.Login) => {
-      const enforceMFA = await this.detectRequiredMFA(action.payload)
-      const payload: AccountSingle = action.payload
-      const role = CcrRolesMap(payload.accountType.id)
-      this.cookie.set(COOKIE_ROLE, role, 1, '/')
-      this.cookie.set(COOKIE_CALL_BROWSERS_MODAL, 'false', 365, '/')
-      this.cookie.set(COOKIE_CALL_DEVICES_MODAL, 'false', 365, '/')
 
-      if (enforceMFA) {
-        void this.router.navigate(['/mfa-setup'])
-      } else {
-        this.auth.login(role)
-      }
-    })
+  login$: Observable<Action> = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SessionActions.ActionTypes.LOGIN),
+        tap(async (action: SessionActions.Login) => {
+          const enforceMFA = await this.detectRequiredMFA(action.payload)
+          const payload: AccountSingle = action.payload
+          const role = CcrRolesMap(payload.accountType.id)
+          this.cookie.set(COOKIE_ROLE, role, 1, '/')
+          this.cookie.set(COOKIE_CALL_BROWSERS_MODAL, 'false', 365, '/')
+          this.cookie.set(COOKIE_CALL_DEVICES_MODAL, 'false', 365, '/')
+
+          if (enforceMFA) {
+            void this.router.navigate(['/mfa-setup'])
+          } else {
+            this.auth.login(role)
+          }
+        })
+      ),
+    { dispatch: false }
   )
 
   private async detectRequiredMFA(

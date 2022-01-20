@@ -1,10 +1,6 @@
 import { Component, forwardRef, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import {
-  MAT_DIALOG_DATA,
-  MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef
-} from '@coachcare/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { Form } from '@app/dashboard/library/forms/models'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 
@@ -17,8 +13,7 @@ import { BindForm, BINDFORM_TOKEN } from '@app/shared'
     {
       provide: BINDFORM_TOKEN,
       useExisting: forwardRef(() => FormEditDialog)
-    },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+    }
   ]
 })
 export class FormEditDialog implements BindForm, OnInit {

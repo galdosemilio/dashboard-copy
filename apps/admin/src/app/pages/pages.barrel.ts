@@ -13,34 +13,12 @@ import { PageSectionComponent } from '@board/pages/shared'
 
 import { ClinicPackagesComponents } from './register/clinic/clinic-packages/clinic-packages.barrel'
 
-import {
-  HeaderComponents,
-  HeaderEntryComponents
-} from './register/clinic/header/header.barrel'
-
-import {
-  InfoDescriptionComponents,
-  InfoDescriptionEntryComponents
-} from './register/clinic/info-description/info-description.barrel'
-
-import {
-  LastStepComponents,
-  LastStepEntryComponents
-} from './register/clinic/last-step/last-step.barrel'
-
-import {
-  RegisterAppleComponents,
-  RegisterAppleEntryComponents
-} from './register/apple/apple.barrel'
-import {
-  ImplementationComponents,
-  ImplementationEntryComponents
-} from './register/implementation/implementation.barrel'
-
-import {
-  PatientPackagesComponents,
-  PatientPackagesEntryComponents
-} from './register/clinic/patient-packages/patient-packages.barrel'
+import { HeaderComponents } from './register/clinic/header/header.barrel'
+import { InfoDescriptionComponents } from './register/clinic/info-description/info-description.barrel'
+import { LastStepComponents } from './register/clinic/last-step/last-step.barrel'
+import { RegisterAppleComponents } from './register/apple/apple.barrel'
+import { ImplementationComponents } from './register/implementation/implementation.barrel'
+import { PatientPackagesComponents } from './register/clinic/patient-packages/patient-packages.barrel'
 
 export {
   LoginPageComponent,
@@ -74,14 +52,4 @@ export const PagesComponents = [
   ...LastStepComponents,
   ...PatientPackagesComponents,
   ...RegisterAppleComponents
-]
-
-export const PagesEntryComponents = [
-  ...ClinicPackagesComponents,
-  ...HeaderEntryComponents,
-  ...InfoDescriptionEntryComponents,
-  ...ImplementationEntryComponents,
-  ...LastStepEntryComponents,
-  ...PatientPackagesEntryComponents,
-  ...RegisterAppleEntryComponents
 ]

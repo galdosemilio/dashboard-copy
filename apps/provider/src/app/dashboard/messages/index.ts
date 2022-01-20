@@ -11,6 +11,4 @@ export const MessagesComponents = [
   MessagesRecipientsComponent
 ]
 
-export const MessagesEntryComponents = []
-
 export const MessagesProviders = [ThreadsDatabase]

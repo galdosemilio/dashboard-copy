@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
 import { AppDataSource } from '@coachcare/backend/model'
 // import { ContextService } from '@coachcare/common/services';
 import { isNull, pickBy } from 'lodash'
@@ -8,10 +7,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-filter-organizations',
-  templateUrl: './organizations.component.html',
-  providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'auto' } }
-  ]
+  templateUrl: './organizations.component.html'
 })
 export class OrganizationsFilterComponent implements OnInit {
   form: FormGroup

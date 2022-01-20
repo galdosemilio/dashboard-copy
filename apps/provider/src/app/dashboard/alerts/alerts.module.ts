@@ -9,7 +9,6 @@ import { AlertsComponents, AlertsProviders } from './'
   imports: [CommonModule, RouterModule, SharedModule],
   exports: AlertsComponents,
   declarations: AlertsComponents,
-  providers: AlertsProviders,
-  entryComponents: []
+  providers: AlertsProviders
 })
 export class AlertsModule {}

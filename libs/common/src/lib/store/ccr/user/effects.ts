@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { AccountProvider, Session } from '@coachcare/sdk'
 import { CcrRolesMap } from '@coachcare/common/shared'
-import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Action } from '@ngrx/store'
 import { defer, from, Observable, of as obsOf } from 'rxjs'
 import { catchError, concatMap, switchMap } from 'rxjs/operators'
@@ -20,35 +20,39 @@ export class UserEffects {
   /**
    * Effects
    */
-  @Effect()
-  init$: Observable<Action> = defer(() => from(this.session.check())).pipe(
-    concatMap((res) => from(this.account.getSingle(res.id))),
-    concatMap((res) => obsOf(new actions.LoadUser(res))),
-    catchError((err) =>
-      obsOf(new SessionActions.SessionLoaded({ loaded: true }))
+
+  init$: Observable<Action> = createEffect(() =>
+    defer(() => from(this.session.check())).pipe(
+      concatMap((res) => from(this.account.getSingle(res.id))),
+      concatMap((res) => obsOf(new actions.LoadUser(res))),
+      catchError((err) =>
+        obsOf(new SessionActions.SessionLoaded({ loaded: true }))
+      )
     )
   )
 
-  @Effect()
-  loadUser$: Observable<Action> = this.actions$.pipe(
-    ofType<actions.LoadUser>(actions.ActionTypes.LOAD),
-    switchMap((action) => {
-      const langs = action.payload.preferredLocales
-      const state: SessionState.State = {
-        language: langs.length ? langs[0] : '',
-        loaded: true,
-        loggedIn: true,
-        account: CcrRolesMap(action.payload.accountType.id)
-      }
-      return obsOf(new SessionActions.SessionLoaded(state))
-    })
+  loadUser$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType<actions.LoadUser>(actions.ActionTypes.LOAD),
+      switchMap((action) => {
+        const langs = action.payload.preferredLocales
+        const state: SessionState.State = {
+          language: langs.length ? langs[0] : '',
+          loaded: true,
+          loggedIn: true,
+          account: CcrRolesMap(action.payload.accountType.id)
+        }
+        return obsOf(new SessionActions.SessionLoaded(state))
+      })
+    )
   )
 
-  @Effect()
-  login$: Observable<Action> = this.actions$.pipe(
-    ofType<SessionActions.Login>(SessionActions.ActionTypes.LOGIN),
-    switchMap((action) => {
-      return obsOf(new actions.UpdateUser(action.payload))
-    })
+  login$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType<SessionActions.Login>(SessionActions.ActionTypes.LOGIN),
+      switchMap((action) => {
+        return obsOf(new actions.UpdateUser(action.payload))
+      })
+    )
   )
 }

@@ -11,11 +11,7 @@ import {
 } from '@coachcare/common/components'
 import { CcrPipesModule } from '@coachcare/common/pipes'
 
-import {
-  AccountsComponents,
-  AccountsEntryComponents,
-  AccountsProviders
-} from './accounts.index'
+import { AccountsComponents, AccountsProviders } from './accounts.index'
 import { routes } from './accounts.routing'
 
 @NgModule({
@@ -31,7 +27,6 @@ import { routes } from './accounts.routing'
     CcrPipesModule
   ],
   declarations: AccountsComponents,
-  entryComponents: AccountsEntryComponents,
   providers: AccountsProviders
 })
 export class AccountsModule {}

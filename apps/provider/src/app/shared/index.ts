@@ -4,7 +4,7 @@ export * from './directives'
 export * from './model'
 export * from './utils'
 
-import { CmpComponents, CmpEntryComponents } from './components'
+import { CmpComponents } from './components'
 import { LoginHistoryDatabase } from './components/login-history'
 import { MeetingsDatabase } from './components/schedule/services'
 import { PackageDatabase } from './components/package-table/services'
@@ -33,8 +33,6 @@ export const Components = [
   ...Directives,
   ...Pipes
 ]
-
-export const EntryComponents = [...CmpEntryComponents, ...Dialogs]
 
 export const Providers = [
   ConfigService,

@@ -22,7 +22,7 @@
         cursor: pointer;
         &:not(.disabled):hover {
           /* TODO configurable gap */
-          background-color: darken(mat-color($background, tools), 5%);
+          background-color: lighten(mat-color($foreground, text), 4%);
         }
       }
       &.disabled {

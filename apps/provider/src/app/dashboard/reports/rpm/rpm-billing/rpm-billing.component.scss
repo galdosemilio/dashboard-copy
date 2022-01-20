@@ -2,7 +2,7 @@
 
 app-reports-rpm-billing {
   $date-highlight-color: saturate(
-    lighten(adjust-hue(mat-color($ccr-background, success), -25%), 20%),
+    lighten(adjust-hue(mat-color($ccr-background, success), -25deg), 20%),
     20%
   );
 

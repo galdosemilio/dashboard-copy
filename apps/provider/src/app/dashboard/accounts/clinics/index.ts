@@ -66,17 +66,6 @@ export const ClinicsComponents = [
   MeasurementLabelFormComponent
 ]
 
-export const ClinicsEntryComponents = [
-  AddDataPointTypeDialog,
-  AddMeasurementLabelDialog,
-  AddSupervisingProviderDialog,
-  AddSequenceAutoenrollmentDialog,
-  CreateClinicDialog,
-  CreatePhaseDialog,
-  CreatePhaseDialog,
-  EditMeasurementLabelDialog
-]
-
 export const ClinicsProviders = [
   CcrOrganizationDialogs,
   ClinicResolver,

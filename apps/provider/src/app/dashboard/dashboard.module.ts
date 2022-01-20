@@ -4,11 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 
 import { SharedModule } from '../shared/shared.module'
-import {
-  DashboardComponents,
-  DashboardEntryComponents,
-  DashboardProviders
-} from './'
+import { DashboardComponents, DashboardProviders } from './'
 import { ClinicsModule } from './accounts/clinics/clinics.module'
 import { CoachesModule } from './accounts/coaches/coaches.module'
 import { DietersModule } from './accounts/dieters/dieters.module'
@@ -39,7 +35,6 @@ import { TestResultsModule } from './test-results/test-results.module'
   ],
   exports: [RouterModule],
   declarations: DashboardComponents,
-  entryComponents: DashboardEntryComponents,
   providers: DashboardProviders
 })
 export class DashboardModule {}

@@ -17,6 +17,4 @@ export const MeasurementsComponents = [
   MeasurementsDataPointsComponent
 ]
 
-export const MeasurementsEntryComponents = [EditDataPointTypeDialog]
-
 export const MeasurementsProviders = [DataPointDatabase]

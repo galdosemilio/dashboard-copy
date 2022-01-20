@@ -1,11 +1,9 @@
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
 import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule, UrlSerializer } from '@angular/router'
 import { AppCommonModule } from '@coachcare/common'
 import { TranslateCatalogs } from '@coachcare/common/services'
 import { MatMomentDateModule } from '@coachcare/datepicker'
-import { NxModule } from '@nrwl/nx'
 import { environment } from '../environments/environment'
 import { AppComponent } from './app.component'
 import { routes } from './app.routing'
@@ -23,21 +21,20 @@ export const catalogs: TranslateCatalogs = {
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    NxModule.forRoot(),
     AppCommonModule.forRoot(environment, projectConfig, catalogs),
     MatMomentDateModule,
     CoachcareSdkModule,
     RouterModule.forRoot(routes, {
-      enableTracing: false, // debugging
-      initialNavigation: 'enabled',
-      paramsInheritanceStrategy: 'always'
+      enableTracing: false,
+      initialNavigation: 'enabledBlocking',
+      paramsInheritanceStrategy: 'always',
+      relativeLinkResolution: 'legacy'
     })
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
     { provide: API_ENVIRONMENT, useValue: environment },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } },
     { provide: UrlSerializer, useClass: PlusSignSerializer }
   ]
 })

@@ -42,7 +42,6 @@ import { MomentModule } from 'ngx-moment'
   ],
   exports: [],
   declarations: WellcoreComponents,
-  entryComponents: [],
   providers: WellcoreProviders
 })
 export class WellcoreModule {}

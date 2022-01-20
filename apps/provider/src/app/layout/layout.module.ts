@@ -11,7 +11,7 @@ import { effects, store } from './store/index'
 
 import { ReportsModule } from '@app/dashboard/reports/reports.module'
 import { CallModule } from '@app/layout/call/call.module'
-import { LayoutComponent, LayoutComponents, LayoutEntryComponents } from './'
+import { LayoutComponent, LayoutComponents } from './'
 
 @NgModule({
   imports: [
@@ -24,7 +24,6 @@ import { LayoutComponent, LayoutComponents, LayoutEntryComponents } from './'
     EffectsModule.forFeature(effects),
     ReportsModule
   ],
-  entryComponents: LayoutEntryComponents,
   exports: [RouterModule, LayoutComponent],
   declarations: LayoutComponents
 })

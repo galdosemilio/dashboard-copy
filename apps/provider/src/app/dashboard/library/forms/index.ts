@@ -103,17 +103,6 @@ export const FormsComponents = [
   ...questionComponents
 ]
 
-export const FormsEntryComponents = [
-  AssignFormDialog,
-  FormCloneDialog,
-  FormCreateDialog,
-  FormEditDialog,
-  FormFillDialog,
-  PatientSelectDialog,
-  ViewAddendumDialog,
-  ...questionComponents
-]
-
 export const FormsProviders = [
   FormAddendumDatabase,
   FormAnswersResolver,

@@ -85,16 +85,6 @@ export const OrganizationComponents = [
   SecurityComponent
 ]
 
-export const OrganizationEntryComponents = [
-  AddOrganizationDialog,
-  AssociateActiveCampaignDialogComponent,
-  AssociateAllProvidersDialogComponent,
-  CreateLabelDialogComponent,
-  EditActiveCampaignDialogComponent,
-  EmailTemplateDialogComponent,
-  EnrollProviderCampaignDialogComponent
-]
-
 export const OrganizationProviders = [
   ActiveCampaignDatabase,
   LabelsOrganizationDatabase,

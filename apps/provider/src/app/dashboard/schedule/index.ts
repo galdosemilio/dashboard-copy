@@ -19,8 +19,6 @@ export const ScheduleComponents = [
   ScheduleMosaicComponent
 ]
 
-export const ScheduleEntryComponents = []
-
 export const ScheduleProviders = [AvailabilityManagementService]
 
 export {

@@ -5,5 +5,3 @@ export const RegisterAppleComponents = [
   ...TranslationsComponents,
   RegisterApplePageComponent
 ]
-
-export const RegisterAppleEntryComponents = [...TranslationsComponents]

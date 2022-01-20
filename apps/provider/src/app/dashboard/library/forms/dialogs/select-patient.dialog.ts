@@ -1,15 +1,12 @@
 import { Component } from '@angular/core'
-import { MAT_LABEL_GLOBAL_OPTIONS, MatDialogRef } from '@coachcare/material'
+import { MatDialogRef } from '@coachcare/material'
 import { AccountAccessData } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-library-patient-select-dialog',
   templateUrl: './select-patient.dialog.html',
   styleUrls: ['./select-patient.dialog.scss'],
-  host: { class: 'ccr-dialog' },
-  providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
-  ]
+  host: { class: 'ccr-dialog' }
 })
 export class PatientSelectDialog {
   constructor(private dialogRef: MatDialogRef<PatientSelectDialog>) {}

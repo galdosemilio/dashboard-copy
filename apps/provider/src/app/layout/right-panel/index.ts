@@ -17,9 +17,4 @@ export const Components = [
   ...RightPanelEntryComponents
 ]
 
-export const EntryComponents = [
-  ...RightPanelEntryComponents,
-  ...RightPanelDialogs
-]
-
 export const Providers = [...RightPanelServices, AssociationsDatabase]

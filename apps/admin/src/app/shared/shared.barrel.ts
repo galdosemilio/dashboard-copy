@@ -19,5 +19,3 @@ export const SharedComponents = [
   QRCodeDisplayDialog,
   UnsupportedBrowserPageComponent
 ]
-
-export const SharedEntryComponents = [QRCodeDisplayDialog]

@@ -187,7 +187,7 @@
       text-transform: uppercase;
 
       &:hover {
-        background-color: darken(mat-color($background, header), 4%);
+        background-color: lighten(mat-color($foreground, text), 4%);
       }
       &.active {
         background-color: var(--primary, mat-color($primary));

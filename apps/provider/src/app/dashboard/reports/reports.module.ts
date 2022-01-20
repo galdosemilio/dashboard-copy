@@ -4,11 +4,7 @@ import { RouterModule } from '@angular/router'
 import { SharedModule } from '@app/shared/shared.module'
 import { StoreModule } from '@ngrx/store'
 
-import {
-  ReportsComponents,
-  ReportsEntryComponents,
-  ReportsProviders
-} from './index'
+import { ReportsComponents, ReportsProviders } from './index'
 import { store } from './store/index'
 
 @NgModule({
@@ -19,7 +15,6 @@ import { store } from './store/index'
     StoreModule.forFeature(store.name, store.reducers, store.config)
   ],
   declarations: ReportsComponents,
-  entryComponents: ReportsEntryComponents,
   exports: ReportsComponents,
   providers: ReportsProviders
 })

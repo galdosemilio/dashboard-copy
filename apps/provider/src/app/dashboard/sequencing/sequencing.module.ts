@@ -12,7 +12,6 @@ import {
   imports: [CommonModule, RouterModule, SharedModule],
   declarations: [...SequencingComponents, ...SequencingEntryComponents],
   exports: [...SequencingComponents, ...SequencingEntryComponents],
-  providers: [...SequencingProviders],
-  entryComponents: [...SequencingEntryComponents]
+  providers: [...SequencingProviders]
 })
 export class SequencingModule {}

@@ -336,6 +336,7 @@ export class MatDatepicker<D> implements OnInit, OnDestroy {
         this.startView = 'clock'
         break
       default:
+        // eslint-disable-next-line no-self-assign
         this.startView = this.startView
     }
 

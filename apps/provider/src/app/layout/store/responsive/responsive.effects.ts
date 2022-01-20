@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common'
 import { Inject, Injectable } from '@angular/core'
-import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Action } from '@ngrx/store'
 import { Observable, of } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
@@ -56,15 +56,18 @@ export class ResponsiveEffects {
   /**
    * Effects
    */
-  @Effect()
-  init$: Observable<Action> = this.actions$.pipe(
-    ofType(layActions.LAYOUT_INIT),
-    switchMap(this.updateHandler.bind(this))
+
+  init$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(layActions.LAYOUT_INIT),
+      switchMap(this.updateHandler.bind(this))
+    )
   )
 
-  @Effect()
-  resize$: Observable<Action> = this.actions$.pipe(
-    ofType(layActions.LAYOUT_RESIZE),
-    switchMap(this.updateHandler.bind(this))
+  resize$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(layActions.LAYOUT_RESIZE),
+      switchMap(this.updateHandler.bind(this))
+    )
   )
 }

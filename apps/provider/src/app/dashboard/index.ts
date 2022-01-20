@@ -8,24 +8,12 @@ export * from './alerts'
 export * from './my-schedule'
 export * from './new-appointment'
 
-import {
-  AccountComponents,
-  AccountEntryComponents,
-  AccountProviders
-} from './accounts'
-import { ContentEntryComponents, ContentProviders } from './content'
-import {
-  LibraryComponents,
-  LibraryEntryComponents,
-  LibraryProviders
-} from './library'
+import { AccountComponents, AccountProviders } from './accounts'
+import { ContentProviders } from './content'
+import { LibraryComponents, LibraryProviders } from './library'
 import { PanelComponents } from './panel'
-import {
-  ProfileComponents,
-  ProfileEntryComponents,
-  UserProfileProviders
-} from './profile'
-import { ResourcesComponents, ResourcesEntryComponents } from './resources'
+import { ProfileComponents, UserProfileProviders } from './profile'
+import { ResourcesComponents } from './resources'
 import { MyScheduleComponents } from './my-schedule'
 import { NewAppointmentComponents } from './new-appointment'
 
@@ -35,16 +23,6 @@ export const DashboardComponents = [
   ...LibraryComponents,
   ...ResourcesComponents,
   ...ProfileComponents,
-  ...MyScheduleComponents,
-  ...NewAppointmentComponents
-]
-
-export const DashboardEntryComponents = [
-  ...AccountEntryComponents,
-  ...ContentEntryComponents,
-  ...LibraryEntryComponents,
-  ...ResourcesEntryComponents,
-  ...ProfileEntryComponents,
   ...MyScheduleComponents,
   ...NewAppointmentComponents
 ]

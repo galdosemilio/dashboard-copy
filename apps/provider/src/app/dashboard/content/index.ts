@@ -76,18 +76,6 @@ export const ContentComponents = [
   YoutubeFormComponent
 ]
 
-export const ContentEntryComponents = [
-  ContentBatchCopyDialog,
-  ContentCreateDialog,
-  ContentEditDialog,
-  ContentMoveDialog,
-  EmbeddedContentViewerComponent,
-  FolderCreateDialog,
-  FormPreviewDialog,
-  InsertFormDialog,
-  PackageSelectDialog
-]
-
 export const ContentProviders = [
   ContentUploadService,
   FileExplorerDatabase,

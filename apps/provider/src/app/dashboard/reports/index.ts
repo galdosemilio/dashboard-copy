@@ -31,5 +31,3 @@ export const ReportsProviders = [
   ReportsDatabase,
   StatisticsDatabase
 ]
-
-export const ReportsEntryComponents = []

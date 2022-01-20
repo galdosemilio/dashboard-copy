@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MAT_LABEL_GLOBAL_OPTIONS, MatDialogRef } from '@coachcare/material'
+import { MatDialogRef } from '@coachcare/material'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 
 @Component({
@@ -12,8 +12,7 @@ import { BindForm, BINDFORM_TOKEN } from '@app/shared'
     {
       provide: BINDFORM_TOKEN,
       useExisting: forwardRef(() => FormCreateDialog)
-    },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+    }
   ]
 })
 export class FormCreateDialog implements BindForm {

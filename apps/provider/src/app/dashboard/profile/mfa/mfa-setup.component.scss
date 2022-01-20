@@ -1,7 +1,7 @@
 @import 'variables';
 
 $active-base-color: saturate(
-  lighten(adjust-hue(mat-color($ccr-background, success), -25%), 10%),
+  lighten(adjust-hue(mat-color($ccr-background, success), -25deg), 10%),
   10%
 );
 

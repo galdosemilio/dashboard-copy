@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import 'variables';
 @import 'shared/directed-styles';
 
@@ -91,7 +92,7 @@ mat-header-row {
     .small-mat-sort {
       .mat-sort-header-button {
         font-size: 12px;
-        min-height: $table-header-height / 2 !important;
+        min-height: math.div($table-header-height, 2) !important;
       }
     }
 

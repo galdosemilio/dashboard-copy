@@ -18,15 +18,10 @@ import {
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators
 } from '@angular/forms'
-import {
-  MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialog,
-  MatStepper
-} from '@coachcare/material'
+import { MatDialog, MatStepper } from '@coachcare/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { resolveConfig } from '@board/pages/config/section.config'
 import { Register } from '@coachcare/sdk'
@@ -57,9 +52,6 @@ import { LastStepComponentProps } from './last-step'
   selector: 'ccr-page-register-clinic',
   templateUrl: './clinic.component.html',
   styleUrls: ['./clinic.component.scss'],
-  providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'never' } }
-  ],
   host: {
     class: 'ccr-page-content'
   }
@@ -370,9 +362,7 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
   onBlockOptionSelect($event: BlockOption): void {
     const targetOrgControl = this.step0.controls['parentOrganizationId']
     targetOrgControl.setValue($event.value)
-    ;(this.step1.get(
-      'organization.parentOrganizationId'
-    ) as FormControl).setValue($event.value)
+    this.step1.get('organization.parentOrganizationId').setValue($event.value)
 
     this.lastStepSetup.onlyFirstParagraph = $event.index === 0 ? true : false
   }
@@ -381,11 +371,9 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
     this.lastStepSetup.clinicPlanMessage = selection.plan
       ? selection.plan.lastStepMessage
       : ''
-    ;(this.step1.get(
-      'organization.parentOrganizationId'
-    ) as FormControl).setValue(
-      selection.plan ? selection.plan.targetParentOrg : ''
-    )
+    this.step1
+      .get('organization.parentOrganizationId')
+      .setValue(selection.plan ? selection.plan.targetParentOrg : '')
   }
 
   changeStep(stepper: MatStepper, step: number) {

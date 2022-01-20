@@ -218,17 +218,3 @@ export const CmpComponents = [
   ViewMeetingDialog,
   ViewAllMeetingsDialog
 ]
-
-export const CmpEntryComponents = [
-  AddAddressDialog,
-  LocaleSelectDialog,
-  LocaleTableComponent,
-  PackageEnrollComponent,
-  PackageSelectorComponent,
-  RPMComponent,
-  DeleteRecurringMeetingDialog,
-  SingleAddDialog,
-  RecurringAddDialog,
-  ViewMeetingDialog,
-  ViewAllMeetingsDialog
-]

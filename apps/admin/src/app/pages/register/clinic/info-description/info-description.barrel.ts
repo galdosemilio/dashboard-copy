@@ -11,9 +11,3 @@ export const InfoDescriptionComponents = [
   InHealthInfoDescriptionComponent,
   ShakeItInfoDescriptionComponent
 ]
-export const InfoDescriptionEntryComponents = [
-  ApolloInfoDescriptionComponent,
-  DefaultInfoDescriptionComponent,
-  InHealthInfoDescriptionComponent,
-  ShakeItInfoDescriptionComponent
-]

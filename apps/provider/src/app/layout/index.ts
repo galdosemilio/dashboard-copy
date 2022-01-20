@@ -30,5 +30,3 @@ export const LayoutComponents = [
   WellcoreLayoutComponent,
   WellcoreRingComponent
 ]
-
-export const LayoutEntryComponents = [HelpComponent]

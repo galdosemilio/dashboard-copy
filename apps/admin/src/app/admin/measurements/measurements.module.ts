@@ -10,7 +10,6 @@ import { TranslateModule } from '@ngx-translate/core'
 import { routes } from './measurements.routing'
 import {
   MeasurementsComponents,
-  MeasurementsEntryComponents,
   MeasurementsProviders
 } from './measurements.barrel'
 
@@ -26,7 +25,6 @@ import {
     SharedModule
   ],
   declarations: MeasurementsComponents,
-  entryComponents: MeasurementsEntryComponents,
   providers: MeasurementsProviders
 })
 export class MeasurementsModule {}

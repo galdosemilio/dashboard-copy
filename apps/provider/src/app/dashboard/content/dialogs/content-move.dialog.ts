@@ -1,9 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MAT_DIALOG_DATA,
-  MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef
-} from '@coachcare/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { FileExplorerContent } from '@app/dashboard/content/models'
 
 interface ContentMoveDialogData {
@@ -16,10 +12,7 @@ interface ContentMoveDialogData {
   selector: 'app-content-move-dialog',
   templateUrl: './content-move.dialog.html',
   styleUrls: ['./content-move.dialog.scss'],
-  host: { class: 'ccr-dialog' },
-  providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
-  ]
+  host: { class: 'ccr-dialog' }
 })
 export class ContentMoveDialog implements OnInit {
   mode: 'digital-library' | 'vault'

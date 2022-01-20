@@ -8,10 +8,7 @@ import { LayoutModule } from '@coachcare/layout'
 import { TranslateModule } from '@ngx-translate/core'
 import { ColorPickerModule } from 'ngx-color-picker'
 
-import {
-  SharedComponents,
-  SharedEntryComponents
-} from '@board/shared/shared.barrel'
+import { SharedComponents } from '@board/shared/shared.barrel'
 import { CcrMaterialModule } from '@coachcare/material'
 import { QRCodeModule } from 'angularx-qrcode'
 
@@ -41,7 +38,6 @@ import { QRCodeModule } from 'angularx-qrcode'
     CcrMaterialModule,
     SharedComponents
   ],
-  declarations: SharedComponents,
-  entryComponents: SharedEntryComponents
+  declarations: SharedComponents
 })
 export class SharedModule {}

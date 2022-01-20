@@ -1,9 +1,7 @@
 import { DieterJournalComponent } from './journal.component'
 
 import { ExerciseComponent, ExerciseTableComponent } from './exercise/'
-import {
-  FoodExpandableTable
-} from './food/expandable-table'
+import { FoodExpandableTable } from './food/expandable-table'
 import { FoodComponent } from './food/food.component'
 import { HydrationComponent } from './hydration/hydration.component'
 import { HydrationTableComponent } from './hydration/table/table.component'
@@ -38,5 +36,3 @@ export const JournalComponents = [
   MetricsChartComponent,
   MetricsTableComponent
 ]
-
-export const JournalEntryComponents = []

@@ -17,50 +17,44 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "parallel": 1
       }
     }
   },
-  "projects": {
-    "provider": {
-      "tags": [],
-      "implicitDependencies": ["material"]
-    },
-    "provider-e2e": {
-      "tags": [],
-      "implicitDependencies": ["provider"]
-    },
-    "admin": {
-      "tags": [],
-      "implicitDependencies": ["common", "backend", "material"]
-    },
-    "admin-e2e": {
-      "tags": [],
-      "implicitDependencies": ["admin"]
-    },
-    "common": {
-      "tags": [],
-      "implicitDependencies": ["backend", "material"]
-    },
-    "layout": {
-      "tags": [],
-      "implicitDependencies": ["material"]
-    },
-    "backend": {
-      "tags": []
-    },
-    "datepicker": {
-      "tags": []
-    },
-    "material": {
-      "tags": []
-    },
-    "measurement-charts": {
-      "tags": []
-    },
-    "measurement-charts-e2e": {
-      "tags": [],
-      "implicitDependencies": ["measurement-charts"]
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics",
+    "warnings": {
+      "typescriptMismatch": false
     }
+  },
+  "defaultProject": "provider",
+  "generators": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/web:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/web:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }

@@ -189,7 +189,7 @@ app-menu-wellcore {
         &:hover {
           background-color: var(--sidenav-darkest);
         }
-        &.active > {
+        &.active {
           background-color: var(--sidenav-darkest);
           color: var(--base, mat-color($ccr-foreground, base));
         }

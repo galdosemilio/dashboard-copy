@@ -5,5 +5,3 @@ export const ImplementationComponents = [
   ...TranslationsComponents,
   RegisterImplementationPageComponent
 ]
-
-export const ImplementationEntryComponents = [...TranslationsComponents]

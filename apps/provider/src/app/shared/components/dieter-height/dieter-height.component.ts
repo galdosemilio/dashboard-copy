@@ -20,7 +20,6 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
 import { ContextService } from '@app/service'
 import { AccountMeasurementPreferenceType } from '@coachcare/sdk'
 import { FEETS } from '@app/shared/utils/units'
@@ -40,8 +39,7 @@ import { FEETS } from '@app/shared/utils/units'
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => HeightFormFieldComponent),
       multi: true
-    },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+    }
   ],
   // eslint-disable-next-line
   host: {

@@ -1,10 +1,6 @@
 import { Component, forwardRef, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import {
-  MAT_DIALOG_DATA,
-  MAT_LABEL_GLOBAL_OPTIONS,
-  MatDialogRef
-} from '@coachcare/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import {
   CONTENT_TYPE_MAP,
   ContentUploadTicket,
@@ -22,8 +18,7 @@ import { BindForm, BINDFORM_TOKEN } from '@app/shared'
     {
       provide: BINDFORM_TOKEN,
       useExisting: forwardRef(() => FolderCreateDialog)
-    },
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+    }
   ]
 })
 export class FolderCreateDialog implements BindForm, OnInit {

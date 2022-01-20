@@ -1,10 +1,8 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node", "jest"],
-    "module": "CommonJS"
+    "types": ["node", "jest"]
   },
-  "files": [],
   "references": [
     {
       "path": "./tsconfig.app.json"

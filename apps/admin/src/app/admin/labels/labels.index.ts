@@ -14,8 +14,6 @@ export const LabelsComponents = [
   LabelsTableComponent
 ]
 
-export const LabelsEntryComponents = []
-
 export const LabelsProviders = [
   LabelResolver,
   LabelsDatabase,

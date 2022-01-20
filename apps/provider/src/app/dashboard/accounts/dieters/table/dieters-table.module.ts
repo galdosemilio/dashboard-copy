@@ -10,7 +10,6 @@ import { DietersTableComponent } from './table.component'
   imports: [CommonModule, RouterModule, SharedModule],
   exports: [DietersTableComponent],
   declarations: [AccountEditDialog, DietersTableComponent],
-  entryComponents: [AccountEditDialog],
   providers: [DietersDatabase]
 })
 export class DietersTableModule {}

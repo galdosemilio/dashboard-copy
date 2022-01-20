@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from '@board/shared/shared.module'
 import { QRCodeModule } from 'angularx-qrcode'
-import { PagesComponents, PagesEntryComponents } from './pages.barrel'
+import { PagesComponents } from './pages.barrel'
 import { PagesProviders } from './pages.providers'
 import { PagesRouting } from './pages.routing'
 import { PagesStoreModule } from './store'
@@ -22,7 +22,6 @@ import { WellcoreModule } from './wellcore/wellcore.module'
   ],
   exports: [RouterModule],
   declarations: PagesComponents,
-  entryComponents: PagesEntryComponents,
   providers: PagesProviders
 })
 export class AppPagesModule {}

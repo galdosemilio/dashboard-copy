@@ -1,3 +1,9 @@
+import 'zone.js'
+import 'zone.js/dist/async-test.js'
+import 'zone.js/dist/proxy.js'
+import 'zone.js/dist/sync-test'
+import 'zone.js/dist/jasmine-patch'
+import 'zone.js/dist/zone-testing'
 import 'jest-preset-angular'
 
 const storageMock = () => {
@@ -35,3 +41,16 @@ Object.defineProperty(document.body.style, 'transform', {
 
 Object.defineProperty(window, 'localStorage', { value: storageMock() })
 Object.defineProperty(window, 'sessionStorage', { value: storageMock() })
+
+import { getTestBed } from '@angular/core/testing'
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from '@angular/platform-browser-dynamic/testing'
+
+getTestBed().resetTestEnvironment()
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting(),
+  { teardown: { destroyAfterEach: false } }
+)

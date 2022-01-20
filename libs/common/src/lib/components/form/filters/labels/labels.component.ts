@@ -1,15 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@coachcare/material'
 import { AppDataSource } from '@coachcare/backend/model'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
 @Component({
   selector: 'ccr-filter-labels',
-  templateUrl: './labels.component.html',
-  providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'auto' } }
-  ]
+  templateUrl: './labels.component.html'
 })
 export class LabelsFilterComponent implements OnInit {
   form: FormGroup

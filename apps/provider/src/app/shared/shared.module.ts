@@ -6,8 +6,6 @@
  * https://github.com/angular/material2/tree/master/src/cdk
  */
 import { A11yModule } from '@angular/cdk/a11y'
-// import { FocusMonitor } from '@angular/cdk/a11y';
-// import { BidiModule } from '@angular/cdk/bidi';
 import { ObserversModule } from '@angular/cdk/observers'
 import { OverlayModule } from '@angular/cdk/overlay'
 import { PlatformModule } from '@angular/cdk/platform'
@@ -25,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { QRCodeModule } from 'angularx-qrcode'
 import { ChartsModule } from 'ng2-charts'
 import { MomentModule } from 'ngx-moment'
-import { Components, EntryComponents, Providers } from './index'
+import { Components, Providers } from './index'
 import { AppLocaleCode, locales } from './utils'
 import {
   CcrFormFieldsModule,
@@ -36,7 +34,12 @@ import { CcrCoreDialogsModule } from '@coachcare/common/dialogs/core'
 // register supported locales
 locales.forEach(async (code: AppLocaleCode) => {
   try {
-    const locale = await import(`@angular/common/locales/${code}.js`)
+    const locale = await import(
+      /* webpackInclude: /(ar-ae|ar-bh|ar-eg|ar-kw|ar-lb|ar-om|ar-sa|da|de|en-au|en-ca|en-gb|en-nz|en|es-cl|es-co|es-mx|es-us|es|fr|he|it|pt-br|pt)\.mjs$/i */
+      /* webpackMode: 'lazy-once' */
+      /* webpackChunkName: 'provider-locales' */
+      `../../../../../node_modules/@angular/common/locales/${code}.mjs`
+    )
     registerLocaleData(locale.default)
   } catch (e) {
     // fail silently
@@ -50,15 +53,12 @@ const SHARED_MODULES = [
   CcrFormFieldsModule,
   CcrUtilityComponentsModule,
   CdkTableModule,
-  // BidiModule,
   ObserversModule,
   OverlayModule,
   PortalModule,
   FlexLayoutModule,
   FormsModule,
   ReactiveFormsModule,
-  // MatButtonToggleModule,
-  // MatCardModule,
   PlatformModule,
   TextFieldModule,
   TranslateModule,
@@ -72,12 +72,7 @@ const SHARED_MODULES = [
 @NgModule({
   imports: [CommonModule, RouterModule, ...SHARED_MODULES],
   declarations: Components,
-  entryComponents: EntryComponents,
   exports: [...Components, ...SHARED_MODULES],
   providers: [...Providers]
-  // providers: [
-  //   MAT_DATEPICKER_SCROLL_STRATEGY_PROVIDER,
-  //   { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
-  // ]
 })
 export class SharedModule {}

@@ -14,7 +14,6 @@ import { TranslateModule } from '@ngx-translate/core'
 import { NgJsonEditorModule } from 'ang-jsoneditor'
 import {
   OrganizationComponents,
-  OrganizationEntryComponents,
   OrganizationProviders
 } from './organizations.index'
 import { routes } from './organizations.routing'
@@ -34,7 +33,6 @@ import { routes } from './organizations.routing'
     SharedModule
   ],
   declarations: OrganizationComponents,
-  entryComponents: OrganizationEntryComponents,
   providers: OrganizationProviders
 })
 export class OrganizationsModule {}

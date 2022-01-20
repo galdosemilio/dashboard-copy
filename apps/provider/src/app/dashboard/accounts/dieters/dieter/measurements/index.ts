@@ -15,5 +15,3 @@ export const MeasurementComponents = [
   MeasurementsTableV2Component,
   MeasurementTabsComponent
 ]
-
-export const MeasurementEntryComponents = []

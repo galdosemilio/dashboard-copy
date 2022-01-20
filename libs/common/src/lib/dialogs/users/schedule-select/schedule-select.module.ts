@@ -26,7 +26,6 @@ import { ScheduleSelectDialog } from './schedule-select.dialog'
     CcrIconsComponentsModule
   ],
   declarations: [ScheduleSelectDialog],
-  entryComponents: [ScheduleSelectDialog],
   exports: [ScheduleSelectDialog]
 })
 export class CcrScheduleSelectModule {}

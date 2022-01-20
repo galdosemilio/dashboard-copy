@@ -65,7 +65,6 @@ import { MatYearsView } from './years-view'
     MatYearView,
     MatYearsView
   ],
-  providers: [MAT_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
-  entryComponents: [MatDatepickerContent]
+  providers: [MAT_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER]
 })
 export class MatDatepickerModule {}

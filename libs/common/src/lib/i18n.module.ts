@@ -19,7 +19,12 @@ import {
 // register supported locales
 locales.forEach(async (code: AppLocaleCode) => {
   try {
-    const locale = await import(`@angular/common/locales/${code}.js`)
+    const locale = await import(
+      /* webpackInclude: /(ar-ae|ar-bh|ar-eg|ar-kw|ar-lb|ar-om|ar-sa|da|de|en-au|en-ca|en-gb|en-nz|en|es-cl|es-co|es-mx|es-us|es|fr|he|it|pt-br|pt)\.mjs$/i */
+      /* webpackMode: 'lazy-once' */
+      /* webpackChunkName: 'common-locales' */
+      `../../../../node_modules/@angular/common/locales/${code}.mjs`
+    )
     registerLocaleData(locale.default)
   } catch (e) {
     console.error(e)

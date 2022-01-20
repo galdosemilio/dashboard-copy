@@ -5,5 +5,6 @@ const routes: Routes = [{ path: '**', redirectTo: '/' }]
 
 export const AppRoutes = RouterModule.forRoot(routes, {
   preloadingStrategy: PreloadAllModules,
-  paramsInheritanceStrategy: 'always'
+  paramsInheritanceStrategy: 'always',
+  relativeLinkResolution: 'legacy'
 })

@@ -24,13 +24,3 @@ export const DialogsComponents = [
   ProgressReportPDFDialog,
   TriggerDetailDialog
 ]
-
-export const DialogsEntryComponents = [
-  AccountCreateDialog,
-  AddAssociationDialog,
-  DoctorPDFDialog,
-  MeasurementDetailDialog,
-  PaymentDisclaimerDialog,
-  ProgressReportPDFDialog,
-  TriggerDetailDialog
-]

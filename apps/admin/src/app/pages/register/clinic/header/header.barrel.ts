@@ -25,16 +25,3 @@ export const HeaderComponents = [
   ShakeItHeaderComponent,
   ShakeItHeaderTitleComponent
 ]
-export const HeaderEntryComponents = [
-  ApolloHeaderComponent,
-  ApolloHeaderTitleComponent,
-  DefaultHeaderComponent,
-  DefaultHeaderTitleComponent,
-  GWLPHeaderComponent,
-  InHealthHeaderComponent,
-  InHealthHeaderTitleComponent,
-  NutrimostHeaderComponent,
-  RobardHeaderComponent,
-  ShakeItHeaderComponent,
-  ShakeItHeaderTitleComponent
-]

@@ -90,7 +90,8 @@ export class MatDatepickerInputEvent<D> {
   exportAs: 'matDatepickerInput'
 })
 export class MatDatepickerInput<D>
-  implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator {
+  implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator
+{
   /** The datepicker that this input is associated with. */
   @Input()
   set matDatepicker(value: MatDatepicker<D>) {
@@ -294,6 +295,7 @@ export class MatDatepickerInput<D>
   ngAfterContentInit() {
     // Update the displayed date when the locale changes.
     this._localeSubscription = this._dateAdapter.localeChanges.subscribe(() => {
+      // eslint-disable-next-line no-self-assign
       this.value = this.value
     })
   }

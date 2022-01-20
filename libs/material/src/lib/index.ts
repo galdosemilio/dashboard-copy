@@ -11,7 +11,6 @@ import {
 } from '@angular/material/slide-toggle'
 import { MatCardModule } from '@angular/material/card'
 import {
-  MAT_LABEL_GLOBAL_OPTIONS,
   MatNativeDateModule,
   MatCommonModule,
   MatRippleModule
@@ -48,7 +47,6 @@ import { MatIcon, MatIconModule, MatIconRegistry } from '@angular/material/icon'
 import { MatInput, MatInputModule } from '@angular/material/input'
 import { MatListItem, MatListModule, MatNavList } from '@angular/material/list'
 import {
-  _MatMenu,
   MatMenu,
   MatMenuItem,
   MatMenuModule,
@@ -100,7 +98,6 @@ export {
   MatChipsModule,
   MatCommonModule,
   MatNativeDateModule,
-  MAT_LABEL_GLOBAL_OPTIONS,
   MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
@@ -127,7 +124,6 @@ export {
   MatListItem,
   MatListModule,
   MatNavList,
-  _MatMenu,
   MatMenu,
   MatMenuItem,
   MatMenuModule,

@@ -15,11 +15,8 @@ import { DieterDashboardComponent } from './dieter/dashboard/dashboard.component
 import { StatDiffComponent } from './dieter/dashboard/stat-diff/stat-diff.component'
 import { StatSingleComponent } from './dieter/dashboard/stat-single/stat-single.component'
 import { DieterComponent } from './dieter/dieter.component'
-import { JournalComponents, JournalEntryComponents } from './dieter/journal'
-import {
-  MeasurementComponents,
-  MeasurementEntryComponents
-} from './dieter/measurements'
+import { JournalComponents } from './dieter/journal'
+import { MeasurementComponents } from './dieter/measurements'
 import { DieterMessagesComponent } from './dieter/messages/messages.component'
 import {
   AssociationsDatabase,
@@ -71,13 +68,6 @@ export const DietersComponents = [
   ...SettingsComponents,
   ...JournalComponents,
   ...MeasurementComponents
-]
-
-export const DietersEntryComponents = [
-  AccountIdentifiersComponent,
-  ...JournalEntryComponents,
-  ...MeasurementEntryComponents,
-  ...SettingsComponents
 ]
 
 export const DietersProviders = [

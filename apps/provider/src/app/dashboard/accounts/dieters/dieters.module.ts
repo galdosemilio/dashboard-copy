@@ -5,7 +5,7 @@ import { DietersTableModule } from '@app/dashboard/accounts/dieters/table/dieter
 import { LibraryFormsModule } from '@app/dashboard/library/forms/forms.module'
 import { ReportsModule } from '@app/dashboard/reports/reports.module'
 import { SharedModule } from '@app/shared/shared.module'
-import { DietersComponents, DietersEntryComponents, DietersProviders } from './'
+import { DietersComponents, DietersProviders } from './'
 
 @NgModule({
   imports: [
@@ -18,7 +18,6 @@ import { DietersComponents, DietersEntryComponents, DietersProviders } from './'
   ],
   exports: DietersComponents,
   declarations: DietersComponents,
-  providers: DietersProviders,
-  entryComponents: DietersEntryComponents
+  providers: DietersProviders
 })
 export class DietersModule {}

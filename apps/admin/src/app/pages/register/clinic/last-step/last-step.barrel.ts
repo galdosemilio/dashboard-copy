@@ -15,11 +15,3 @@ export const LastStepComponents = [
   ITGLastStepComponent,
   ShakeItLastStepComponent
 ]
-export const LastStepEntryComponents = [
-  ApolloLastStepComponent,
-  DefaultLastStepComponent,
-  DefaultReducedLastStepComponent,
-  InHealthLastStepComponent,
-  ITGLastStepComponent,
-  ShakeItLastStepComponent
-]

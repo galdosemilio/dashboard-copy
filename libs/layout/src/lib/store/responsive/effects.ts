@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common'
 import { Inject, Injectable } from '@angular/core'
 import { ConfigService } from '@coachcare/common/services'
 import { AppBreakpoints } from '@coachcare/common/shared'
-import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Action } from '@ngrx/store'
 import { defer, Observable, of as obsOf } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
@@ -26,12 +26,15 @@ export class ResponsiveEffects {
   /**
    * Effects
    */
-  @Effect() init$: Observable<Action> = defer(() => this.updateHandler())
+  init$: Observable<Action> = createEffect(() =>
+    defer(() => this.updateHandler())
+  )
 
-  @Effect()
-  resize$: Observable<Action> = this.actions$.pipe(
-    ofType(layActions.ActionTypes.LAYOUT_RESIZE),
-    switchMap(() => this.updateHandler())
+  resize$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(layActions.ActionTypes.LAYOUT_RESIZE),
+      switchMap(() => this.updateHandler())
+    )
   )
 
   /**

@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router'
 import { DietersTableModule } from '@app/dashboard/accounts/dieters/table/dieters-table.module'
 import { ContentComponents } from '@app/dashboard/content'
 import { SharedModule } from '@app/shared/shared.module'
-import { FormsComponents, FormsEntryComponents, FormsProviders } from './'
+import { FormsComponents, FormsProviders } from './'
 
 @NgModule({
   imports: [
@@ -18,7 +18,6 @@ import { FormsComponents, FormsEntryComponents, FormsProviders } from './'
   ],
   declarations: [...FormsComponents, ...ContentComponents],
   exports: [...FormsComponents, ...ContentComponents],
-  entryComponents: FormsEntryComponents,
   providers: FormsProviders
 })
 export class LibraryFormsModule {}

@@ -25,7 +25,6 @@ import { PromptDialog } from './prompt/prompt.dialog'
     TranslateModule
   ],
   declarations: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog],
-  entryComponents: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog],
   exports: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog]
 })
 export class CcrCoreDialogsModule {}
