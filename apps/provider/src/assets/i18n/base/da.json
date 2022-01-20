@@ -1503,7 +1503,8 @@
       "INTENSE": "Intens",
       "LOW": "Lav",
       "MEDIUM": "Medium",
-      "NONE": "Ingen"
+      "NONE": "Ingen (RMR)",
+      "SEDENTARY": "Stillesiddende"
     },
     "UNITSYS": {
       "METRIC": "Metrisk (km - m - cm - kg - l - km/t)",

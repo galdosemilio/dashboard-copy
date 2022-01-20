@@ -1503,7 +1503,8 @@
       "INTENSE": "حاد",
       "LOW": "منخفض",
       "MEDIUM": "متوسط",
-      "NONE": "ولا واحد"
+      "NONE": "بلا (RMR)",
+      "SEDENTARY": "كسول"
     },
     "UNITSYS": {
       "METRIC": "متري",

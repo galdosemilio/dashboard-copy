@@ -1503,7 +1503,8 @@
       "INTENSE": "Intensiv",
       "LOW": "Niedrig",
       "MEDIUM": "Mittel",
-      "NONE": "Keiner"
+      "NONE": "Keine (RMR)",
+      "SEDENTARY": "Sitzend"
     },
     "UNITSYS": {
       "METRIC": "Metrisch (km - m - cm - kg - l - km/h)",

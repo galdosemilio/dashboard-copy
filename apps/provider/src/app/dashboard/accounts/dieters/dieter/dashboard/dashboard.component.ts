@@ -42,8 +42,8 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   activityLevels = [
-    { value: -1, viewValue: _('MEASUREMENT.BMR') },
-    { value: 0, viewValue: _('SELECTOR.LEVEL.NONE') },
+    { value: -1, viewValue: _('SELECTOR.LEVEL.NONE') },
+    { value: 0, viewValue: _('SELECTOR.LEVEL.SEDENTARY') },
     { value: 2, viewValue: _('SELECTOR.LEVEL.LOW') },
     { value: 4, viewValue: _('SELECTOR.LEVEL.MEDIUM') },
     { value: 7, viewValue: _('SELECTOR.LEVEL.HIGH') },

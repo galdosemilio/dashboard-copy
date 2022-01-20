@@ -1503,7 +1503,8 @@
       "INTENSE": "אינטנסיבי",
       "LOW": "נמוך",
       "MEDIUM": "בינוני",
-      "NONE": "אף אחד"
+      "NONE": "אין (RMR)",
+      "SEDENTARY": "כָּרוּך בִּישִׁיבָה"
     },
     "UNITSYS": {
       "METRIC": "Metric (km - m - cm - kg - l - km/h)",
