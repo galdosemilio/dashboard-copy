@@ -194,7 +194,7 @@
       max-height: calc(100% - 75px);
     }
     button {
-      text-align: left;
+      @include horizontal-align-left();
     }
   }
 }
@@ -209,6 +209,7 @@
   }
   .lang-native-name {
     @include horizontal-margin-right(5px);
+    width: 100%;
   }
 }
 

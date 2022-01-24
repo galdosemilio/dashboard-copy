@@ -45,3 +45,13 @@
 [dir='rtl'] * {
   direction: rtl;
 }
+
+@mixin horizontal-align-left() {
+  body.ltr & {
+    text-align: left;
+  }
+
+  body.rtl & {
+    text-align: right;
+  }
+}

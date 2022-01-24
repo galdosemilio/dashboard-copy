@@ -19,7 +19,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile *ngFor="let country of locale.countries">
-          <button mat-button [disabled]="country.code === lang" (click)="setLocale(country.code)">
+          <button class="lang-native-name" mat-button [disabled]="country.code === lang" (click)="setLocale(country.code)">
             <img [src]="country.flag">
             <span>{{ country.nativeCountry }}</span>
           </button>
