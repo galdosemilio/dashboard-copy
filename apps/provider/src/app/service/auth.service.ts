@@ -5,6 +5,7 @@ import { AccountTypeIds, ApiService } from '@coachcare/sdk'
 import { environment } from '../../environments/environment'
 import { authenticationToken } from '@coachcare/common/sdk.barrel'
 import { debounceTime } from 'rxjs/operators'
+import { resolveHardcodedLoginSite } from './helpers'
 
 @Injectable()
 export class AuthService {
@@ -37,12 +38,16 @@ export class AuthService {
     this.cookie.delete('ccrStatic', '/')
   }
 
-  redirect(loginSite = environment.loginSite): void {
+  redirect(strictLoginSite?: string): void {
     this.remove()
+
+    const resolvedLoginSite = strictLoginSite
+      ? strictLoginSite
+      : resolveHardcodedLoginSite() ?? environment.loginSite
 
     window.localStorage[STORAGE_PROVIDER_ROUTE] = window.location.href
     window.location.href = environment.production
-      ? loginSite
+      ? resolvedLoginSite
       : 'http://localhost:4200'
   }
 }
