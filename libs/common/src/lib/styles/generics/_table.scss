@@ -50,7 +50,7 @@
     mat-table {
       mat-header-row,
       mat-header-row .mat-sort-header-button {
-        background: mat-color($background, header);
+        background: mat-color($ccr-background, header);
         border: 1px solid transparent;
         height: auto;
         min-height: map-get($config, table-header-height);
