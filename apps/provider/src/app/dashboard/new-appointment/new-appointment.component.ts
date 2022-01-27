@@ -1,8 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ContextService } from '@app/service'
-import { TranslationsObject, WELLCORE_PHASE_STATE_MAP, _ } from '@app/shared'
+import {
+  Meeting,
+  TranslationsObject,
+  WELLCORE_PHASE_STATE_MAP,
+  _
+} from '@app/shared'
 import { NotifierService } from '@coachcare/common/services'
 import {
   AccountProvider,
@@ -17,7 +22,7 @@ import {
   Schedule
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { isEqual } from 'lodash'
+import { isEqual, range } from 'lodash'
 import * as moment from 'moment-timezone'
 import { debounceTime } from 'rxjs/operators'
 import { environment } from 'apps/provider/src/environments/environment'
@@ -28,22 +33,62 @@ import { AddressLabelType } from '@coachcare/common/model'
 @Component({
   selector: 'ccr-new-appointment',
   templateUrl: './new-appointment.component.html',
-  styleUrls: ['./new-appointment.component.scss']
+  styleUrls: ['./new-appointment.component.scss'],
+  host: { class: 'wellcore-component' }
 })
-export class NewAppointmentComponent implements OnInit, OnDestroy {
+export class NewAppointmentComponent implements OnInit {
   public form: FormGroup
   public coaches: NamedEntity[] = []
   public timeSlots: MeetingTimeslot[] = []
 
-  public now = moment()
-  public selectedDate = this.now
+  public afternoonSlots: MeetingTimeslot[] = []
+  public eveningSlots: MeetingTimeslot[] = []
   public isLoading = false
+  public maxDate
+  public morningSlots: MeetingTimeslot[] = []
+  public nightSlots: MeetingTimeslot[] = []
+  public now: moment.Moment
+  public selectedDate: moment.Moment
   public selectedSlot: MeetingTimeslot = null
+  public selectedSlotAsMeeting: Meeting = null
 
+  private blockedCalendarDates: string[] = []
   private i18n: TranslationsObject
 
-  get availableCoachesIds() {
+  private get availableCoachesIds() {
     return this.coaches.filter((c) => c.id).map((c) => c.id)
+  }
+
+  private get _morningSlots() {
+    return this.timeSlots.filter(
+      (slot) =>
+        moment(slot.slotStartTime.local).hour() >= 5 &&
+        moment(slot.slotStartTime.local).hour() < 12
+    )
+  }
+
+  private get _afternoonSlots() {
+    return this.timeSlots.filter(
+      (slot) =>
+        moment(slot.slotStartTime.local).hour() >= 12 &&
+        moment(slot.slotStartTime.local).hour() < 17
+    )
+  }
+
+  private get _eveningSlots() {
+    return this.timeSlots.filter(
+      (slot) =>
+        moment(slot.slotStartTime.local).hour() >= 17 &&
+        moment(slot.slotStartTime.local).hour() < 22
+    )
+  }
+
+  private get _nightSlots() {
+    return this.timeSlots.filter(
+      (slot) =>
+        moment(slot.slotStartTime.local).hour() >= 22 ||
+        moment(slot.slotStartTime.local).hour() < 5
+    )
   }
 
   constructor(
@@ -58,141 +103,33 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
     private router: Router,
     private organization: OrganizationProvider
   ) {
+    this.calendarDateFilter = this.calendarDateFilter.bind(this)
+  }
+
+  public async ngOnInit(): Promise<void> {
+    this.now = moment()
+    this.selectedDate = this.now
+    this.maxDate = this.now.clone().add(3, 'months')
+
     this.translate()
     this.translator.onLangChange
       .pipe(untilDestroyed(this))
       .subscribe(() => this.translate())
-  }
 
-  ngOnInit() {
     this.createForm()
-    void this.getCoaches()
+    await this.getCoaches()
+    await this.resolveBlockedCalendarDates(this.now)
+    this.onSelectDate(this.selectedDate)
   }
 
-  ngOnDestroy() {}
-
-  private createForm(): void {
-    this.form = this.builder.group({
-      meetingType: [environment.wellcoreMeetingId, Validators.required],
-      duration: [10, Validators.required],
-      slot: [null, Validators.required],
-      date: [this.now, Validators.required],
-      providerId: ['']
-    })
-
-    this.listenChanges()
+  public calendarDateFilter(date: moment.Moment): boolean {
+    return !this.blockedCalendarDates.some((blockedEntry) =>
+      moment(blockedEntry).isSame(date, 'day')
+    )
   }
 
-  private async getCoaches(): Promise<void> {
-    this.coaches = []
-    this.isLoading = true
-
-    try {
-      const userAddressResponse = await this.addressProvider.getAddressList({
-        account: this.context.user.id,
-        limit: 'all'
-      })
-
-      const billingAddress = userAddressResponse.data.find((item) =>
-        item.labels
-          .map((label) => label.id.toString())
-          .includes(AddressLabelType.BILLING)
-      )
-
-      const wellcoreStatePhaseEntry = Object.values(
-        WELLCORE_PHASE_STATE_MAP
-      ).find((entry) =>
-        entry.states.includes(billingAddress?.stateProvince?.toLowerCase())
-      )
-
-      if (!wellcoreStatePhaseEntry) {
-        return
-      }
-
-      const providersResponse = await this.account.getList({
-        organization: this.context.organizationId,
-        accountType: AccountTypeIds.Provider,
-        limit: 'all',
-        strict: false
-      })
-
-      const newCoaches = providersResponse.data.map((provider) => ({
-        id: provider.id,
-        name: `${provider.firstName} ${provider.lastName}`
-      }))
-
-      for (const coach of newCoaches) {
-        const checkpackageEnrollmentResponse = await this.packageEnrollment.checkPackageEnrollment(
-          {
-            organization: this.context.organizationId,
-            account: coach.id,
-            package:
-              environment.selveraApiEnv === 'test'
-                ? wellcoreStatePhaseEntry.testPhase
-                : wellcoreStatePhaseEntry.prodPhase
-          }
-        )
-
-        if (checkpackageEnrollmentResponse.enrolled) {
-          this.coaches.push(coach)
-        }
-      }
-    } catch (err) {
-      this.notifier.error(err)
-    } finally {
-      this.isLoading = false
-    }
-  }
-
-  private listenChanges(): void {
-    this.form.controls.date.valueChanges
-      .pipe(untilDestroyed(this), debounceTime(500))
-      .subscribe(() => {
-        void this.getTimeSlots()
-      })
-  }
-
-  private async getTimeSlots(): Promise<void> {
-    const value = this.form.value
-
-    if (!value.duration || !value.date) {
-      return
-    }
-
-    try {
-      this.timeSlots = []
-      this.isLoading = true
-
-      const response = await this.schedule.fetchOpenTimeslots({
-        accounts: this.availableCoachesIds,
-        duration: value.duration,
-        start: value.date.startOf('day').toISOString(),
-        end: value.date.clone().endOf('day').toISOString(),
-        overlap: value.duration >= 30 ? 15 : undefined
-      })
-
-      const now = moment()
-      this.timeSlots = response.data.filter((slot) =>
-        moment
-          .tz(slot.slotStartTime.local, slot.slotStartTime.timezone)
-          .isSameOrAfter(now)
-      )
-    } catch (err) {
-      this.notifier.error(err)
-    } finally {
-      this.isLoading = false
-
-      const selectedSlot =
-        value.startDateTime &&
-        this.timeSlots.find(
-          (slot) => slot.slotStartTime.utc === value.startDateTime
-        )
-
-      if (!selectedSlot) {
-        this.form.get('slot').setValue(null)
-        this.selectedSlot = null
-      }
-    }
+  public onMonthChange(date: moment.Moment): void {
+    void this.resolveBlockedCalendarDates(date)
   }
 
   public onSelectDate(date: moment.Moment): void {
@@ -206,6 +143,10 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
       this.form.get('slot').setValue(null)
     } else {
       this.selectedSlot = slot
+      this.selectedSlotAsMeeting = new Meeting({
+        start: { utc: slot.slotStartTime.local },
+        end: { utc: slot.slotStartTime.local }
+      })
       this.form.get('slot').setValue(slot)
     }
   }
@@ -266,6 +207,171 @@ export class NewAppointmentComponent implements OnInit, OnDestroy {
       this.notifier.error(err)
     } finally {
       this.isLoading = false
+    }
+  }
+
+  private createForm(): void {
+    this.form = this.builder.group({
+      meetingType: [environment.wellcoreMeetingId, Validators.required],
+      duration: [10, Validators.required],
+      slot: [null, Validators.required],
+      date: [this.now, Validators.required],
+      providerId: ['']
+    })
+
+    this.listenChanges()
+  }
+
+  private async getCoaches(): Promise<void> {
+    this.coaches = []
+    this.isLoading = true
+
+    try {
+      const userAddressResponse = await this.addressProvider.getAddressList({
+        account: this.context.user.id,
+        limit: 'all'
+      })
+
+      const billingAddress = userAddressResponse.data.find((item) =>
+        item.labels
+          .map((label) => label.id.toString())
+          .includes(AddressLabelType.BILLING)
+      )
+
+      const wellcoreStatePhaseEntry = Object.values(
+        WELLCORE_PHASE_STATE_MAP
+      ).find((entry) =>
+        entry.states.includes(billingAddress?.stateProvince?.toLowerCase())
+      )
+
+      if (!wellcoreStatePhaseEntry) {
+        return
+      }
+
+      const providersResponse = await this.account.getList({
+        organization: this.context.organizationId,
+        accountType: AccountTypeIds.Provider,
+        limit: 'all',
+        strict: false
+      })
+
+      const newCoaches = providersResponse.data.map((provider) => ({
+        id: provider.id,
+        name: `${provider.firstName} ${provider.lastName}`
+      }))
+
+      for (const coach of newCoaches) {
+        const checkpackageEnrollmentResponse =
+          await this.packageEnrollment.checkPackageEnrollment({
+            organization: this.context.organizationId,
+            account: coach.id,
+            package:
+              environment.selveraApiEnv === 'test'
+                ? wellcoreStatePhaseEntry.testPhase
+                : wellcoreStatePhaseEntry.prodPhase
+          })
+
+        if (checkpackageEnrollmentResponse.enrolled) {
+          this.coaches.push(coach)
+        }
+      }
+    } catch (err) {
+      this.notifier.error(err)
+    } finally {
+      this.isLoading = false
+    }
+  }
+
+  private listenChanges(): void {
+    this.form.controls.date.valueChanges
+      .pipe(untilDestroyed(this), debounceTime(500))
+      .subscribe(() => {
+        void this.getTimeSlots()
+      })
+  }
+
+  private async getTimeSlots(): Promise<void> {
+    const value = this.form.value
+
+    if (!value.duration || !value.date) {
+      return
+    }
+
+    try {
+      this.timeSlots = []
+      this.isLoading = true
+
+      const response = await this.schedule.fetchOpenTimeslots({
+        accounts: this.availableCoachesIds,
+        duration: value.duration,
+        start: value.date.startOf('day').toISOString(),
+        end: value.date.clone().endOf('day').toISOString(),
+        overlap: value.duration >= 30 ? 15 : undefined
+      })
+
+      const now = moment()
+      this.timeSlots = response.data.filter((slot) =>
+        moment
+          .tz(slot.slotStartTime.local, slot.slotStartTime.timezone)
+          .isSameOrAfter(now)
+      )
+
+      this.morningSlots = this._morningSlots
+      this.afternoonSlots = this._afternoonSlots
+      this.eveningSlots = this._eveningSlots
+      this.nightSlots = this._nightSlots
+    } catch (err) {
+      this.notifier.error(err)
+    } finally {
+      this.isLoading = false
+
+      const selectedSlot =
+        value.startDateTime &&
+        this.timeSlots.find(
+          (slot) => slot.slotStartTime.utc === value.startDateTime
+        )
+
+      if (!selectedSlot) {
+        this.form.get('slot').setValue(null)
+        this.selectedSlot = null
+      }
+    }
+  }
+
+  private async resolveBlockedCalendarDates(
+    date: moment.Moment
+  ): Promise<void> {
+    try {
+      this.isLoading = true
+      this.blockedCalendarDates = []
+
+      const value = this.form.value
+      const start = date.clone().startOf('month')
+      const end = date.clone().endOf('month')
+
+      const monthTimeslots = await this.schedule.fetchOpenTimeslots({
+        accounts: this.availableCoachesIds,
+        duration: value.duration,
+        start: start.startOf('day').toISOString(),
+        end: end.endOf('day').toISOString(),
+        overlap: value.duration >= 30 ? 15 : undefined
+      })
+
+      const days = end.diff(start, 'days')
+
+      this.blockedCalendarDates = range(0, days)
+        .map((dayAmount) => start.clone().add(dayAmount, 'days').toISOString())
+        .filter(
+          (dateString) =>
+            !monthTimeslots.data.some((entry) =>
+              moment(entry.slotStartTime.local).isSame(dateString, 'day')
+            )
+        )
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isLoading = false
+      this.maxDate = this.now.clone().add(3, 'months')
     }
   }
 

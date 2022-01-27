@@ -264,7 +264,7 @@ export class SidenavComponent implements OnInit {
             icon: 'playlist_add_track'
           },
           {
-            code: SidenavOptions.PROFILE_SETTINGS,
+            code: SidenavOptions.ACCOUNT,
             navName: _('SIDENAV.PROFILE_SETTINGS'),
             route: 'profile',
             navRoute: 'profile',
@@ -430,9 +430,8 @@ export class SidenavComponent implements OnInit {
       return
     }
 
-    this.sidenavItems[resourcesItemIndex].children[
-      updatesSubItemIndex
-    ].badge = this.platformUpdates.notSeenArticleAmount
+    this.sidenavItems[resourcesItemIndex].children[updatesSubItemIndex].badge =
+      this.platformUpdates.notSeenArticleAmount
   }
 
   async updateSections(org: SelectedOrganization): Promise<void> {

@@ -3,35 +3,90 @@
 
 :host {
   height: 100%;
+  border-radius: 14px;
+  padding: 31px 33px;
 
-  .appointment-body {
+  .ccr-title {
+    display: flex;
+    align-items: center !important;
+
+    h2 {
+      font-size: 19px !important;
+      font-weight: 900;
+      color: #020f1e;
+    }
+
+    .mat-icon-button {
+      align-items: center;
+      border: 2px solid;
+      display: flex;
+      height: 20px;
+      justify-content: center;
+      margin-right: 18px;
+      width: 20px;
+
+      .mat-icon {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 20px;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .new-appointment-body {
     overflow: hidden;
     margin-top: 20px;
 
-    .mat-calendar {
+    .new-appointment-calendar {
+      border: 1px solid #a0a0a0;
+      box-sizing: border-box;
+      border-radius: 5px;
+      overflow: hidden;
       width: 100% !important;
       max-width: unset !important;
+      height: 100% !important;
+      max-height: 100% !important;
     }
 
-    .time-slots-wrap {
+    .time-slots-body {
+      border: 1px solid #a0a0a0;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 23px 41px;
       overflow: auto;
 
-      .time-slots {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        column-gap: 20px;
-        row-gap: 10px;
+      .time-slots-wrap {
+        .time-slots-header {
+          color: black;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 52px;
+          text-transform: uppercase;
+          margin-bottom: 7px;
+        }
 
-        .time-slot {
-          cursor: pointer;
-          text-align: center;
-          padding: 5px 0;
-          border: 1px solid gray;
-          border-radius: 5px;
+        .time-slots {
+          display: flex;
+          flex-wrap: wrap;
 
-          &.active {
-            border-color: var(--primary) !important;
-            color: var(--primary) !important;
+          .time-slot {
+            align-items: center;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            height: 40px;
+            justify-content: center;
+            margin-right: 5px;
+            width: 87px;
+            font-size: 14px;
+            color: #2b4259; // need to use variale later
+
+            &.active {
+              border-color: #7bb6e3 !important;
+              color: #7bb6e3;
+            }
           }
         }
       }
@@ -54,37 +109,79 @@
   }
 
   .appointment-actions {
-    margin-top: 20px;
+    margin-top: 22px;
     > div {
-      padding: 20px;
-      border: 1px solid var(--primary);
-      border-radius: 5px;
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      justify-content: center;
+      .selected-slot-container {
+        .selected-slot-calendar {
+          width: 50px;
+          height: 50px;
+          border: 1px solid #7bb6e3;
+          color: #7bb6e3;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          box-sizing: border-box;
+          border-radius: 4px;
+          text-align: center;
 
-      p {
-        text-align: center;
+          .selected-slot-month {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 0;
+          }
+          .selected-slot-day {
+            font-size: 26px;
+            line-height: 26px;
+          }
+        }
+
+        .selected-slot-date-time {
+          font-size: 14px;
+
+          .selected-slot-date {
+            color: #2b4259;
+          }
+          .selected-slot-time {
+            color: #a0a0a0;
+          }
+        }
       }
 
       .ccr-button {
-        padding: 5px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 9px 20px;
+
+        background: #7bb6e3;
+        border-radius: 4px;
+
+        font-weight: bold;
+        font-size: 16px;
+        color: #ffffff;
       }
     }
+  }
+
+  .timeslots-container {
+    max-height: 40vh;
+    overflow-y: auto;
   }
 
   @media ($mat-small) {
     height: unset;
 
-    .appointment-body {
-      overflow: unset;
+    .new-appointment-body {
+      overflow: auto;
 
       .mat-calendar {
         max-height: 470px !important;
       }
 
-      .time-slots-wrap {
+      .time-slots-body {
         overflow: unset;
       }
     }

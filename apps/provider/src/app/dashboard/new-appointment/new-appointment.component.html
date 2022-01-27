@@ -1,56 +1,92 @@
-<div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
-  <h2 fxFlex>
-    {{ 'BOARD.APPOINTMENT_NEW' | translate }}
-  </h2>
-</div>
-<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading">
-  <mat-spinner></mat-spinner>
-</div>
+<section fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+    <button mat-icon-button routerLink="/schedule/mosaic">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <h4 class="title" fxFlex>
+      {{ 'BOARD.APPOINTMENT_NEW' | translate }}
+    </h4>
+  </div>
 
-<div class="appointment-body" fxLayout="column" fxFlex fxLayout.gt-sm="row" fxLayoutAlign=" stretch" fxLayoutGap="20px">
-  <div fxFlex="25%">
-    <form [formGroup]="form" novalidate >
-      <div class="static-field">
-        <label>{{ 'RIGHT_PANEL.MEETING_TYPE' | translate }}</label>
-        <p>{{ 'BOARD.WELLCORE_CONSULTATION' | translate }}</p>
-      </div>
-      <div class="static-field">
-        <label>{{ 'BOARD.DURATION' | translate }}</label>
-        <p>10 {{ 'GLOBAL.MINUTES' | translate }}</p>
-      </div>
-      <div class="static-field">
-        <label>{{ 'BOARD.PREFERRED_PROVIDER' | translate }}</label>
-        <p>{{ 'BOARD.WELLCORE_PROVIDER' | translate }}</p>
-      </div>
-    </form>
+  <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
   </div>
-  <div fxFlex="40%">
-    <mat-calendar
-      [minDate]="now"
-      [selected]="selectedDate"
-      (selectedChange)="onSelectDate($event)"
-      [showActionControls]="false"
-    ></mat-calendar>
-  </div>
-  <div *ngIf="coaches.length; else noCoachesError" fxFlex="35%" class="time-slots-wrap">
-    <div *ngIf="timeSlots.length; else noTimeSlotsError" class="time-slots">
-      <div
-        *ngFor="let slot of timeSlots"
-        (click)="onSelectSlot(slot)"
-        [class]="selectedSlot && slot.slotStartTime.local === selectedSlot.slotStartTime.local ? 'time-slot active' : 'time-slot'">
-        <p>{{ slot.slotStartTime.local | amDateFormat:'hh:mm a' }}</p>
+
+  <div class="new-appointment-body" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutGap="35px">
+    <div fxFlex.gt-sm="50%" fxFlex="100%">
+      <mat-calendar
+        class="new-appointment-calendar"
+        [dateFilter]="calendarDateFilter"
+        [minDate]="now"
+        [maxDate]="maxDate"
+        [selected]="selectedDate"
+        [showActionControls]="false"
+        [showCalendarControls]="false"
+        (monthSelected)="onMonthChange($event)"
+        (selectedChange)="onSelectDate($event)"
+      ></mat-calendar>
+    </div>
+    <div fxFlex.gt-sm="50%" class="time-slots-body">
+      <div *ngIf="coaches.length; else noCoachesError">
+        <div *ngIf="timeSlots.length; else noTimeSlotsError" class="timeslots-container">
+          <div class="time-slots-wrap" *ngIf="morningSlots.length">
+            <div class="time-slots-header">{{ 'BOARD.MORNING' | translate }}</div>
+            <div class="time-slots">
+              <div
+                *ngFor="let slot of morningSlots"
+                (click)="onSelectSlot(slot)"
+                [class]="selectedSlot && slot.slotStartTime.local === selectedSlot.slotStartTime.local ? 'time-slot active' : 'time-slot'">
+                <p>{{ slot.slotStartTime.local | amDateFormat:'hh:mm A' }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="time-slots-wrap" *ngIf="afternoonSlots.length">
+            <div class="time-slots-header">{{ 'BOARD.AFTERNOON' | translate }}</div>
+            <div class="time-slots">
+              <div
+                *ngFor="let slot of afternoonSlots"
+                (click)="onSelectSlot(slot)"
+                [class]="selectedSlot && slot.slotStartTime.local === selectedSlot.slotStartTime.local ? 'time-slot active' : 'time-slot'">
+                <p>{{ slot.slotStartTime.local | amDateFormat:'hh:mm A' }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="time-slots-wrap" *ngIf="eveningSlots.length">
+            <div class="time-slots-header">{{ 'BOARD.EVENING' | translate }}</div>
+            <div class="time-slots">
+              <div
+                *ngFor="let slot of eveningSlots"
+                (click)="onSelectSlot(slot)"
+                [class]="selectedSlot && slot.slotStartTime.local === selectedSlot.slotStartTime.local ? 'time-slot active' : 'time-slot'">
+                <p>{{ slot.slotStartTime.local | amDateFormat:'hh:mm A' }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="time-slots-wrap" *ngIf="nightSlots.length">
+            <div class="time-slots-header">{{ 'BOARD.NIGHT' | translate }}</div>
+            <div class="time-slots">
+              <div
+                *ngFor="let slot of nightSlots"
+                (click)="onSelectSlot(slot)"
+                [class]="selectedSlot && slot.slotStartTime.local === selectedSlot.slotStartTime.local ? 'time-slot active' : 'time-slot'">
+                <p>{{ slot.slotStartTime.local | amDateFormat:'hh:mm A' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="appointment-actions" fxLayout="column" fxLayoutAlign="center end">
-  <div>
-    <p *ngIf="selectedSlot">{{ selectedSlot.slotStartTime.local | amDateFormat:'LLLL' }}</p>
-    <button [disabled]="form.invalid" (click)="onSubmit()" class="ccr-button" color="primary" mat-button>
-      <span>{{ 'BOARD.APPOINTMENT_BOOK' | translate }}</span>
-    </button>
+
+  <div class="appointment-actions" fxLayout="row" fxLayoutAlign="end center">
+    <div fxFlex.gt-sm="50%" fxFlex="100%" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="19px">
+      <ccr-meeting-container *ngIf="selectedSlotAsMeeting" [meeting]="selectedSlotAsMeeting"></ccr-meeting-container>
+      <button [disabled]="form.invalid" (click)="onSubmit()" class="ccr-button" color="primary" mat-button>
+        <span>{{ 'BOARD.CONFIRM' | translate }}</span>
+      </button>
+    </div>
   </div>
-</div>
+</section>
 
 <ng-template #noCoachesError>
   <mat-error class="ccr-text-center">{{ 'NOTIFY.ERROR.NO_COACHES_FOR_STATE' | translate }}</mat-error>

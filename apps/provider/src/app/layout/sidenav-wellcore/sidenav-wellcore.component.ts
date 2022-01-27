@@ -3,8 +3,7 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit,
-  ViewEncapsulation
+  OnInit
 } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
 import { CCRConfig, CCRPalette } from '@app/config'
@@ -35,12 +34,11 @@ export interface SidenavOrg {
 @UntilDestroy()
 @Component({
   selector: 'app-menu-wellcore',
-  templateUrl: './sidenav-wellcore.component.html',
-  styleUrls: ['./sidenav-wellcore.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './sidenav-wellcore.component.html'
 })
 export class SidenavWellcoreComponent
-  implements AfterViewInit, OnInit, OnDestroy {
+  implements AfterViewInit, OnInit, OnDestroy
+{
   @Input()
   isOpened = false
 
@@ -117,7 +115,7 @@ export class SidenavWellcoreComponent
         code: SidenavOptions.DASHBOARD,
         navName: _('GLOBAL.DASHBOARD'),
         navRoute: 'dashboard',
-        icon: 'dashboard',
+        icon: 'grid_view',
         isAllowedForPatients: true
       },
       {
@@ -163,15 +161,6 @@ export class SidenavWellcoreComponent
         ]
       },
       {
-        code: SidenavOptions.DIGITAL_LIBRARY,
-        navName: _('SIDENAV.LIBRARY'),
-        route: 'library',
-        navRoute: 'library',
-        icon: 'folder',
-        isAllowedForPatients: true,
-        badge: 0
-      },
-      {
         code: SidenavOptions.TEST_RESULTS,
         navName: _('SIDENAV.TEST_RESULTS'),
         route: 'test-results',
@@ -181,17 +170,26 @@ export class SidenavWellcoreComponent
         isAllowedForPatients: true
       },
       {
-        code: SidenavOptions.PROFILE_SETTINGS,
-        navName: _('SIDENAV.PROFILE_SETTINGS'),
+        code: SidenavOptions.ACCOUNT,
+        navName: _('SIDENAV.ACCOUNT'),
         route: 'profile',
         navRoute: 'profile',
-        icon: 'person',
+        icon: 'people',
         isAllowedForPatients: true
+      },
+      {
+        code: SidenavOptions.DIGITAL_LIBRARY,
+        navName: _('SIDENAV.LIBRARY'),
+        route: 'library',
+        navRoute: 'library',
+        icon: 'folder',
+        isAllowedForPatients: true,
+        badge: 0
       },
       {
         navName: _('SIDENAV.RESOURCES'),
         route: 'resources',
-        icon: 'help',
+        icon: 'auto_stories',
         navRoute: 'resources',
         isAllowedForPatients: true,
         children: [

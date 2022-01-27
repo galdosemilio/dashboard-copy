@@ -140,6 +140,64 @@
         }
       }
     }
+
+    &.new-appointment-calendar {
+      .mat-calendar-content {
+        padding: 22px;
+        .mat-calendar-heading {
+          padding: 7px 5% 18px;
+
+          .mat-calendar-control-active {
+            color: #000000;
+            font-size: 14px;
+            text-transform: uppercase;
+            text-align: left;
+            order: 1;
+          }
+          .mat-calendar-previous-button {
+            margin-right: 20px;
+            order: 2;
+          }
+          .mat-calendar-next-button {
+            margin-left: 20px;
+            order: 3;
+          }
+        }
+      }
+      .mat-calendar-table {
+        .mat-calendar-body-cell {
+          .mat-calendar-body-cell-background {
+            padding: 30%;
+            margin-left: calc(-30% - 2px);
+            margin-top: -3%;
+          }
+
+          &:hover {
+            span {
+              color: #7bb6e3;
+            }
+            .mat-calendar-body-cell-background {
+              background: transparent;
+              border: 2px solid #7bb6e3;
+              box-sizing: border-box;
+            }
+          }
+          &.mat-calendar-body-active {
+            span {
+              color: #7bb6e3;
+            }
+          }
+          .mat-calendar-body-today {
+            border-width: 2px;
+          }
+          .mat-calendar-body-active {
+            background: transparent;
+            border: 2px solid #7bb6e3;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
   }
 
   @media all and (orientation: portrait) {

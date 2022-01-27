@@ -1,11 +1,8 @@
-<div fxLayout="column">
-  <div class="ccr-heading">
-    <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
-      <h2 fxFlex>
-        {{ 'SIDENAV.DASHBOARD' | translate }}
-      </h2>
-    </div>
+<div fxLayout="column" fxLayoutGap="15px">
+  <div>
+    <ccr-next-meeting></ccr-next-meeting>
   </div>
+
   <div *ngIf="isPatient && !isLoading">
     <p>{{ 'BOARD.WELCOME_WELLCORE' | translate }}</p>
     <ul class="patient-tasks">
@@ -37,10 +34,6 @@
       [label]="selectedLabel">
       </ccr-measurements-chart-v2>
     </div>
-  </div>
-
-  <div>
-    <ccr-next-meeting></ccr-next-meeting>
   </div>
 </div>
 

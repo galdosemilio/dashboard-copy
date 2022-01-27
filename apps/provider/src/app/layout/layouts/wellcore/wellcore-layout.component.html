@@ -12,12 +12,12 @@
   </mat-sidenav>
 
   <div fxLayout="column">
-    <mat-toolbar [color]="palette?.toolbar" fxHide fxShow.xs>
-      <app-topbar [translations]="translations" [selectedLanguage]="lang" [panelEnabled]="layout?.panel.enabled"></app-topbar>
+    <mat-toolbar class="wellcore-toolbar">
+      <wellcore-topbar></wellcore-topbar>
     </mat-toolbar>
 
     <div fxLayout="row">
-      <div fxFlex>
+      <div fxFlex class="wellcore-body">
         <router-outlet>
           <ccr-call-rating *ngIf="showVideoRating"></ccr-call-rating>
         </router-outlet>

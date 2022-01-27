@@ -66,7 +66,8 @@ export type MatCalendarType = 'date' | 'datetime' | 'time'
   preserveWhitespaces: false
 })
 export class MatCalendar<D>
-  implements AfterContentInit, AfterViewChecked, OnChanges, OnDestroy {
+  implements AfterContentInit, AfterViewChecked, OnChanges, OnDestroy
+{
   private _intlChanges: Subscription
 
   /**
@@ -525,6 +526,7 @@ export class MatCalendar<D>
           this.activeDate,
           diff
         )
+        this.monthSelected.emit(this.activeDate)
         break
       case 'clock':
         this.activeDate = this._hourView

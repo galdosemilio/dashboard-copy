@@ -28,7 +28,6 @@ import { sleep } from '@app/shared/utils/async.utils'
 @Component({
   selector: 'ccr-wellcore-layout',
   templateUrl: './wellcore-layout.component.html',
-  styleUrls: ['./wellcore-layout.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class WellcoreLayoutComponent implements AfterViewInit, OnInit {

@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit
+} from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { CCRConfig } from '@app/config'
 import { ContextService, SelectedOrganization } from '@app/service'
@@ -15,7 +21,10 @@ import { FetchSubaccount } from '../store/call'
   styleUrls: ['./org-selector.component.scss']
 })
 export class SidenavOrgSelectorComponent
-  implements AfterViewInit, OnDestroy, OnInit {
+  implements AfterViewInit, OnDestroy, OnInit
+{
+  @Input() fixedImg?: string
+
   public hasMoreThanOneClinic = false
   public isSearchingClinics = false
   public logoSrc = './assets/logo.png'

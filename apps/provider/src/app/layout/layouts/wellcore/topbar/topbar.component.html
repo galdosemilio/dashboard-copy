@@ -1,0 +1,28 @@
+<menu
+  class="menu-bar"
+  fxLayout="row"
+  fxLayout.lt-sm="column"
+  fxLayoutAlign="start center"
+  fxLayoutAlign.lt-sm="start stretch">
+  <div class="main-topbar">
+    <div class="hamburger" (click)="toggleMenu($event)">
+      <div class="slice"></div>
+      <div class="slice"></div>
+      <div class="slice"></div>
+    </div>
+
+    <div class="logo" fxFlex fxHide fxShow.lt-sm fxLayout="row" fxLayoutAlign="center center">
+      <app-sidenav-org-selector fixedImg="assets/img/wellcore/logo.png"></app-sidenav-org-selector>
+    </div>
+
+    <h4 class="title" fxFlex fxHide.lt-sm>{{ title | translate }}</h4>
+
+    <div class="actions-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+      <mat-icon class="clickable" (click)="showLanguagesDialog()">language</mat-icon>
+      <mat-icon class="clickable" (click)="logout()">logout</mat-icon>
+      <ccr-avatar [account]="account.id" class="clickable" routerLink="/profile" size="messages"></ccr-avatar>
+    </div>
+  </div>
+
+  <h4 class="title" fxHide fxShow.lt-sm>{{ title | translate }}</h4>
+</menu>

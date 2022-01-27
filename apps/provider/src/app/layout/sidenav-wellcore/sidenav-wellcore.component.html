@@ -1,17 +1,6 @@
-<app-menu-wellcore-ring blur="20"></app-menu-wellcore-ring>
-<app-menu-wellcore-ring></app-menu-wellcore-ring>
-
 <mat-toolbar>
-  <app-sidenav-org-selector></app-sidenav-org-selector>
+  <app-sidenav-org-selector fixedImg="assets/img/wellcore/logo.png"></app-sidenav-org-selector>
 </mat-toolbar>
-
-<div class="account-info">
-  <div class="user-avatar">
-    <ccr-avatar [account]="context.user.id"></ccr-avatar>
-  </div>
-  <p class="user-name">{{ userName }}</p>
-  <button (click)="logout()" color="accent" mat-button>{{ 'MENU.LOGOUT' | translate }}</button>
-</div>
 
 <mat-sidenav-content data-cy="templateLefthandMenu">
 

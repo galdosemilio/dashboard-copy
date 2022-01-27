@@ -22,6 +22,6 @@ export class SidenavOptions {
   static SCHEDULE_SCHEDULE = 'schedule'
   static STORE = 'store'
   static TEST_RESULTS = 'test_results'
-  static PROFILE_SETTINGS = 'profile_settings'
+  static ACCOUNT = 'profile_settings'
   static NEW_APPOINTMENT = 'new_appointment'
 }

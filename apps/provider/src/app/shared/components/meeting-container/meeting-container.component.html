@@ -1,0 +1,27 @@
+<div
+fxLayout="row"
+fxLayout.lt-md="column"
+fxLayoutAlign="start center"
+fxLayoutAlign.lt-md="start stretch"
+fxLayoutGap="15px">
+  <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+    <div class="date-container">
+      <p class="month">{{ meeting.date | amDateFormat:'MMM' }}</p>
+      <p class="date">{{ meeting.date | amDateFormat:'DD' }}</p>
+    </div>
+
+    <div>
+      <p class="long-date">{{ meeting.date | amDateFormat:'dddd, MMMM DD, YYYY' }}</p>
+      <p class="hour">{{ meeting.date | amDateFormat:'h:mm a' }}</p>
+    </div>
+  </div>
+
+  <button
+  *ngIf="cancellable"
+  [disabled]="disabled"
+  (click)="triggerCancelEvent()"
+  color="accent"
+  mat-stroked-button>
+    {{ 'GLOBAL.CANCEL' | translate }}
+  </button>
+</div>

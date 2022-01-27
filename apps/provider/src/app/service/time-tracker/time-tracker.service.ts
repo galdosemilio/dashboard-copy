@@ -7,13 +7,13 @@ import { AccountProvider } from '@coachcare/sdk'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
+import { RouteUtils } from '@app/shared/helpers'
 
 @UntilDestroy()
 @Injectable()
 export class TimeTrackerService implements OnDestroy {
-  public currentRoute$: BehaviorSubject<TimeTrackerRoute> = new BehaviorSubject<TimeTrackerRoute>(
-    undefined
-  )
+  public currentRoute$: BehaviorSubject<TimeTrackerRoute> =
+    new BehaviorSubject<TimeTrackerRoute>(undefined)
 
   set currentRoute(route: TimeTrackerRoute) {
     this.currentRoute$.next(route)
@@ -179,42 +179,10 @@ export class TimeTrackerService implements OnDestroy {
   }
 
   private resolveTimeTrackerRoute($event: RouterEvent): TimeTrackerRoute {
-    let currentRoute: TimeTrackerRoute
-    let foundRoute: TimeTrackerRoute
-
     const timeTrackerRoutes = Object.values(TIME_TRACKER_ROUTES)
+    const urlSegments = $event.url.split('/').filter((segment) => !!segment)
 
-    while (timeTrackerRoutes.length && !foundRoute) {
-      const urlSegments = $event.url.split('/').filter((segment) => !!segment)
-      currentRoute = timeTrackerRoutes.pop()
-
-      if (urlSegments.length !== currentRoute.routeSegments.length) {
-        continue
-      }
-
-      let urlSegment = urlSegments.shift()
-      let searching = true
-
-      const routeSegments = currentRoute.routeSegments.slice()
-
-      while (routeSegments.length && searching) {
-        const currentSegment = routeSegments.shift()
-        const segmentIndex = urlSegment.indexOf(currentSegment)
-
-        urlSegment = urlSegments.shift()
-
-        if (segmentIndex === -1 && currentSegment !== '*') {
-          searching = false
-          continue
-        }
-
-        if (!routeSegments.length) {
-          foundRoute = currentRoute
-        }
-      }
-    }
-
-    return foundRoute
+    return RouteUtils.findRouteEntry(timeTrackerRoutes, urlSegments)
   }
 
   private async routeEventHandler($event: RouterEvent): Promise<void> {

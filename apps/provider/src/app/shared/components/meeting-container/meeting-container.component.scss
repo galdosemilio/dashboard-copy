@@ -1,0 +1,37 @@
+@import 'variables';
+
+.date-container {
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  min-height: 50px;
+  padding: 3px;
+  min-width: 50px;
+
+  p {
+    margin: 0;
+    text-align: center;
+
+    &.date {
+      font-size: 28px;
+      font-weight: lighter;
+    }
+
+    &.month {
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.hour {
+  color: var(--text-lighter);
+  text-transform: uppercase;
+}
+
+@media #{$medium-and-down} {
+  p {
+    margin: 0;
+  }
+}

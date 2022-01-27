@@ -1,6 +1,5 @@
-<div [class]="'mat-calendar-header mat-calendar-type-' + type">
-
-  <div class="mat-calendar-header-date" *ngIf="showCalendarControls">
+<div [class]="'mat-calendar-header mat-calendar-type-' + type" *ngIf="showCalendarControls">
+  <div class="mat-calendar-header-date">
     <button class="mat-calendar-header-date-year mat-calendar-control"
     [class.mat-calendar-control-active]="view === 'years'"
     [@controlActive]="view === 'years' ? 'active' : ''"

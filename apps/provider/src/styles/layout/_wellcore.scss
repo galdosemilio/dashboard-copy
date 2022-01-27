@@ -1,57 +1,172 @@
-@import '~libs/common/src/lib/styles/variables/colors';
+@import 'variables';
+
+$warning-background-color: #fffaec;
+$warning-outline-color: #ffdb7e;
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: normal;
+  src: url(/assets/wellcore/fonts/inter-regular.woff2) format('woff2');
+}
 
 ccr-wellcore-layout {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+
+  h4.title {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+
   .mat-drawer-content.ng-star-inserted {
     & > div > div {
       height: calc(100% - #{$footer-height});
     }
   }
 
-  .ccr-title {
-    h2 {
-      color: mat-color($wellcore, wellcore-blue);
-      font-family: Roboto, 'Helvetica Neue', sans-serif;
-      font-size: 48px !important;
-      font-weight: bold;
-      margin: 0;
-      text-transform: uppercase;
+  .mat-stroked-button {
+    border-radius: 8px;
+    border-width: 2px;
+    font-size: 16px;
+
+    &.mat-accent .mat-button-ripple {
+      background-color: transparent;
+    }
+  }
+
+  .wellcore-body {
+    background: var(--accent-light);
+
+    button.mat-flat-button {
+      color: white;
+      font-size: 16px;
+    }
+
+    section {
+      background-color: white;
+      border-radius: 14px;
+      padding: 20px 36px;
+
+      &.warning {
+        background-color: $warning-background-color;
+        border: 1px dashed $warning-outline-color;
+      }
+
+      header {
+        border-bottom: 1px solid var(--text-lightest);
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+
+        .title {
+          margin: 7px 0;
+        }
+      }
+
+      .subtitle {
+        font-size: 16px;
+        letter-spacing: 1px;
+        margin: 0;
+        text-transform: uppercase;
+
+        .subtext {
+          font-size: 14px;
+          font-weight: normal;
+          text-transform: none;
+        }
+      }
+    }
+
+    .empty-list-notice {
+      color: var(--text-lighter);
+      margin: 15px 0;
+    }
+  }
+
+  .wellcore-toolbar {
+    background: white !important;
+
+    wellcore-topbar {
+      padding: 0 42px;
+      width: 100%;
+
+      ccr-avatar {
+        div {
+          border-radius: 10%;
+        }
+      }
+
+      h4.title {
+        line-height: 42px;
+      }
+
+      mat-icon {
+        color: var(--text-lighter);
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      menu {
+        padding-inline-start: 0;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        width: 45px;
+
+        .slice {
+          background-color: mat-color($ccr-foreground, text);
+          height: 3px;
+          margin: 3px 0;
+          width: 25px;
+        }
+      }
+
+      .logo {
+        img {
+          height: auto;
+          width: 80%;
+        }
+      }
+
+      .main-topbar {
+        width: 100%;
+      }
     }
   }
 }
 
-.wellcore-component {
-  h2 {
-    color: mat-color($wellcore, wellcore-blue);
-    font-size: 48px;
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  h3 {
-    font-size: 32px;
-    font-weight: lighter;
-    margin: 0;
-  }
-}
-
 .wellcore-sidenav {
-  background: linear-gradient(111.42deg, #1b1c1e 3.64%, #4d6577 93.21%);
+  background: var(--primary);
 
   app-menu-wellcore {
     mat-sidenav-content > mat-nav-list {
+      padding-bottom: 0;
+
       .mat-list-item {
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+
+        .ccr-badge {
+          background-color: var(--accent);
+          color: var(--text);
+          top: 17px;
+        }
+
         i.material-icons {
           position: absolute;
           right: 10px;
         }
 
         .mat-list-item-content {
-          color: mat-color($wellcore, platinum);
-          text-align: center;
+          color: white;
+          text-align: left;
 
-          mat-icon {
-            display: none !important;
-          }
+          text-transform: capitalize;
 
           @media #{$medium-only} {
             mat-icon {
@@ -70,6 +185,7 @@ ccr-wellcore-layout {
           outline: none;
           .mat-list-item-content {
             color: var(--accent);
+            font-weight: bold;
           }
         }
         &.level1 {
@@ -116,6 +232,17 @@ ccr-wellcore-layout {
         }
       }
     }
+
+    .logo {
+      max-width: 100%;
+      max-height: 100%;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .mat-toolbar {
+      background-color: transparent;
+    }
   }
 
   &.open app-menu-wellcore {
@@ -128,6 +255,73 @@ ccr-wellcore-layout {
 
         .user-name {
           font-size: 20px !important;
+        }
+      }
+    }
+  }
+}
+
+@media #{$large-and-up} {
+  ccr-wellcore-layout {
+    mat-sidenav {
+      padding: 0 20px;
+    }
+  }
+}
+
+@media #{$small-and-down} {
+  ccr-wellcore-layout {
+    .mat-drawer {
+      margin-top: 55px;
+
+      &-content.ng-star-inserted {
+        & > div > div {
+          height: calc(100% - 120px);
+        }
+
+        & > div > div > div > :last-child {
+          padding: 25px;
+        }
+      }
+    }
+
+    .wellcore-toolbar {
+      &.mat-toolbar {
+        height: 128px;
+      }
+
+      wellcore-topbar {
+        background-color: var(--primary);
+        padding: 0;
+
+        h4.title {
+          background-color: white;
+          color: var(--text);
+          line-height: 64px;
+          text-align: center;
+          width: 100%;
+        }
+
+        .hamburger {
+          display: flex;
+
+          div.slice {
+            background-color: white;
+          }
+        }
+
+        .main-topbar {
+          color: white;
+          height: 64px;
+          padding: 0 30px;
+
+          .actions-container {
+            margin-top: 3px;
+
+            ccr-avatar {
+              margin-top: 22px;
+            }
+          }
         }
       }
     }

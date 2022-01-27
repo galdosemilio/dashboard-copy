@@ -5,7 +5,7 @@ import { ScheduleAvailabilityRecurringComponent } from './availability/recurring
 import { ScheduleAvailabilityComponent } from './availability/schedule-availability.component'
 import { ScheduleAvailabilitySingleDayComponent } from './availability/single-day/single-day.component'
 import { ScheduleCalendarComponent } from './calendar/schedule-calendar.component'
-import { ScheduleMeetingContainer, ScheduleMosaicComponent } from './mosaic'
+import { ScheduleMosaicComponent } from './mosaic'
 import { ScheduleListComponent } from './list'
 import { AvailabilityManagementService } from './service'
 
@@ -15,7 +15,6 @@ export const ScheduleComponents = [
   ScheduleAvailabilitySingleDayComponent,
   ScheduleCalendarComponent,
   ScheduleListComponent,
-  ScheduleMeetingContainer,
   ScheduleMosaicComponent
 ]
 
@@ -27,6 +26,5 @@ export {
   ScheduleAvailabilitySingleDayComponent,
   ScheduleCalendarComponent,
   ScheduleListComponent,
-  ScheduleMeetingContainer,
   ScheduleMosaicComponent
 }

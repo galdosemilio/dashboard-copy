@@ -14,6 +14,7 @@ import { CcrCallControlComponent } from './call-control/call-control.component'
 import { CcrMeasurementChartV2Component } from './chart-v2'
 import { CcrChildClinicPickerComponent } from './child-clinic-picker'
 import { CcrConnectionStatusComponent } from './connection-status/connection-status.component'
+import { CcrScheduleMeetingContainer } from './meeting-container'
 import { CountrySelectorComponent } from './country-selector'
 // import { CcrDateInputComponent } from '@coachcare/common/components/form/fields/date-input'
 import {
@@ -113,6 +114,7 @@ export {
   CcrTinInputComponent,
   CcrCallControlComponent,
   CcrPermissionFilterComponent,
+  CcrScheduleMeetingContainer,
   CountrySelectorComponent,
   FormSearchComponent,
   HeightFormFieldComponent,
@@ -178,6 +180,7 @@ export const CmpComponents = [
   CcrNextMeetingComponent,
   CcrPageSizeSelectorComponent,
   CcrPermissionFilterComponent,
+  CcrScheduleMeetingContainer,
   CcrSearchSelectorComponent,
   CcrSelectUserComponent,
   CcrTableSortHeaderComponent,
