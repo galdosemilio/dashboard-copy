@@ -61,7 +61,7 @@
               "qs",
               "moment-timezone",
               "moment",
-              "linkify-html",
+              "linkifyjs",
               "@cordobo/qrcode",
               "@coachcare/sdk",
               "@spree/storefront-api-v2-sdk"
@@ -539,7 +539,7 @@
               "qs",
               "moment-timezone",
               "moment",
-              "linkify-html",
+              "linkifyjs",
               "@cordobo/qrcode",
               "twilio-video",
               "ngrx-store-freeze",

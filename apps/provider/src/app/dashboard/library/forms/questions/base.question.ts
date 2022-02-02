@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { FormQuestion } from '@app/dashboard/library/forms/models'
 import { BindForm, BindFormDirective } from '@app/shared/directives'
 import { FormAnswer } from '@coachcare/sdk'
-import * as linkifyHtml from 'linkify-html'
+import * as linkifyHtml from 'linkifyjs/html'
 
 @Injectable()
 export class QuestionDetails {
