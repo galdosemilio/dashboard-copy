@@ -76,10 +76,10 @@
         }
 
         &.row-even {
-          background: mat-color($background, even);
+          background: mat-color($ccr-background, even);
         }
         &.row-odd {
-          background: mat-color($background, odd);
+          background: mat-color($ccr-background, odd);
         }
 
         .edit-icon-container {

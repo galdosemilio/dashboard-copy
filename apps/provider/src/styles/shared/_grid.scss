@@ -2,7 +2,7 @@
 
 .ccr-grid {
   .mat-grid-tile {
-    .mat-figure {
+    &-content {
       padding: 0 15px;
       @media #{$medium-and-down} {
         @include horizontal-padding-left(0px);

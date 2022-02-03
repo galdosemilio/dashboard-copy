@@ -1,7 +1,7 @@
 @mixin ccr-generic-grid($theme, $config) {
   .ccr-grid {
     .mat-grid-tile {
-      .mat-figure {
+      &-content {
         padding: 0 15px;
         @media #{map-get($config, lte-md)} {
           padding-left: 0px;

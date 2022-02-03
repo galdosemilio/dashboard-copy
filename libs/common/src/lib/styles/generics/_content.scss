@@ -122,7 +122,7 @@
   .ccr-filters {
     margin-bottom: 10px;
     padding: 3px 10px 3px 15px;
-    background: mat-color($background, tools);
+    background: mat-color($ccr-background, tools);
     @media #{map-get($config, lte-xs)} {
       margin: 0;
     }
@@ -179,7 +179,7 @@
   .ccr-tabs {
     overflow-x: overlay;
     a {
-      background-color: mat-color($background, header);
+      background-color: mat-color($ccr-background, header);
       color: mat-color($foreground, text);
       padding: 8px 12px;
       text-align: center;
@@ -187,7 +187,7 @@
       text-transform: uppercase;
 
       &:hover {
-        background-color: lighten(mat-color($foreground, text), 4%);
+        background-color: darken(mat-color($ccr-background, header), 4%);
       }
       &.active {
         background-color: var(--primary, mat-color($primary));
