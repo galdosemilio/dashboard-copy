@@ -10,15 +10,19 @@ import {
 } from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms'
 import {
-  Form,
+  ContextService,
+  FormDisplayService,
+  SelectedOrganization
+} from '@app/service'
+import { BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared/directives'
+import { _ } from '@app/shared/utils'
+import {
+  FormSubmission,
   FormQuestion,
   FormSection,
-  FormSubmission,
-  ManagerEvents,
+  Form,
   QUESTION_TYPE_MAP
-} from '@app/dashboard/library/forms/models'
-import { ContextService, SelectedOrganization } from '@app/service'
-import { _, BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared'
+} from '@app/shared/model'
 import {
   AccountAccessData,
   FormAnswer,
@@ -26,9 +30,9 @@ import {
 } from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { FormDisplayService } from '../services'
 import { auditTime, takeUntil } from 'rxjs/operators'
 import * as moment from 'moment'
+import { ManagerEvents } from '../models'
 
 interface ManagerDropEvent {
   index: number
@@ -302,9 +306,8 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
       targetSectionIndex
     ].questions.findIndex((q: FormQuestion) => q.id === question.id)
 
-    const targetQuestion: FormQuestion = this.content.sections[
-      targetSectionIndex
-    ].questions[targetQuestionIndex]
+    const targetQuestion: FormQuestion =
+      this.content.sections[targetSectionIndex].questions[targetQuestionIndex]
 
     Object.keys(targetQuestion).forEach((key: string) => {
       if (updatedQuestion[key] !== undefined) {
@@ -383,12 +386,10 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
           return
         }
 
-        const draggedQuestion: FormQuestion = this.content.sections[
-            draggedSectionIndex
-          ].questions[draggedIndex],
-          droppedQuestion: FormQuestion = this.content.sections[
-            droppedSectionIndex
-          ].questions[droppedIndex]
+        const draggedQuestion: FormQuestion =
+            this.content.sections[draggedSectionIndex].questions[draggedIndex],
+          droppedQuestion: FormQuestion =
+            this.content.sections[droppedSectionIndex].questions[droppedIndex]
 
         const cache: FormQuestion = droppedQuestion
         const indexCache: number = draggedQuestion.sortOrder
@@ -456,9 +457,8 @@ export class FormManagerComponent implements BindForm, OnDestroy, OnInit {
         splicedQuestion.sortOrder =
           sortOrder === Number.NEGATIVE_INFINITY ? 1 : sortOrder + 1
         this.content.sections[targetIndex].questions.push(splicedQuestion)
-        this.content.sections[sourceIndex].questions[
-          draggedIndex
-        ].deleted = true
+        this.content.sections[sourceIndex].questions[draggedIndex].deleted =
+          true
         this.events.removeQuestion.emit(
           this.content.sections[sourceIndex].questions[draggedIndex]
         )

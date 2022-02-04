@@ -1,9 +1,9 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { Form } from '@app/dashboard/library/forms/models'
 import { ContextService, NotifierService } from '@app/service'
-import { BINDFORM_TOKEN } from '@app/shared'
+import { BINDFORM_TOKEN } from '@app/shared/directives'
+import { Form } from '@app/shared/model'
 import { Feedback } from '@coachcare/sdk'
 
 @Component({

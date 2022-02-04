@@ -1,10 +1,14 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core'
-import { Form } from '@app/dashboard/library/forms/models'
-import { ContextService, CurrentAccount, NotifierService } from '@app/service'
+import {
+  ContextService,
+  CurrentAccount,
+  FormDisplayService,
+  NotifierService
+} from '@app/service'
+import { Form } from '@app/shared/model'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@coachcare/material'
 import { Form as FormProvider } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { FormDisplayService } from '../../services'
 
 export interface FormFillDialogData {
   formId: string

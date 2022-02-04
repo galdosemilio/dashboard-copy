@@ -6,8 +6,8 @@ import {
   OnInit
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { FormQuestion, FormSection } from '@app/dashboard/library/forms/models'
-import { BindForm, BINDFORM_TOKEN } from '@app/shared'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
+import { FormQuestion, FormSection } from '@app/shared/model'
 import { FormAnswer } from '@coachcare/sdk'
 
 @Component({

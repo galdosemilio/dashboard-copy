@@ -3,29 +3,29 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { PatientSelectDialog } from '@app/dashboard/library/forms/dialogs'
-import {
-  Form,
-  FormQuestion,
-  FormSection,
-  FormSubmission
-} from '@app/dashboard/library/forms/models'
-import {
-  FormDisplayService,
-  FormsDatabase,
-  FormsDatasource,
-  FormSubmissionsDatabase
-} from '@app/dashboard/library/forms/services'
 import { FormsSyncer } from '@app/dashboard/library/forms/utils'
 import {
   ContextService,
+  FormDisplayService,
+  FormsDatabase,
+  FormSubmissionsDatabase,
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
+import {
+  FormSubmission,
+  Form,
+  FormSection,
+  FormQuestion
+} from '@app/shared/model'
+import { PromptDialog } from '@app/shared/dialogs'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
+import { _ } from '@app/shared/utils'
 import { FormAnswer } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
+import { FormsDatasource } from '../models'
 
 @UntilDestroy()
 @Component({

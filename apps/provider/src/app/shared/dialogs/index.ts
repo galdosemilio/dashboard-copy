@@ -1,6 +1,8 @@
 export * from './account-redirect'
+export * from './add-association'
 export * from './add-manual-interaction'
 export * from './add-recipient'
+export * from './assign-form'
 export * from './call-rating'
 export * from './coach-permissions-dialog'
 export * from './coach-select'
@@ -24,6 +26,8 @@ export * from './remove-patient-meeting'
 import { AccountRedirectDialog } from './account-redirect'
 import { AddManualInteractionDialog } from './add-manual-interaction'
 import { AddRecipientDialog } from './add-recipient'
+import { AddAssociationDialog } from './add-association'
+import { AssignFormDialog } from './assign-form'
 import { CallRatingDialog } from './call-rating/call-rating.dialog'
 import { CoachSelectDialog } from './coach-select'
 import { GestureClosingDialog } from './gesture-closing'
@@ -48,8 +52,10 @@ import { RemovePatientMeetingDialog } from './remove-patient-meeting'
 
 export const Dialogs = [
   AccountRedirectDialog,
+  AddAssociationDialog,
   AddManualInteractionDialog,
   AddRecipientDialog,
+  AssignFormDialog,
   CallRatingDialog,
   CoachPermissionsDialog,
   CoachSelectDialog,

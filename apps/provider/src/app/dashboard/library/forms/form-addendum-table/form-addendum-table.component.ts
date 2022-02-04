@@ -1,13 +1,14 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { ViewAddendumDialog } from '@app/dashboard/library/forms/dialogs'
-import { FormSubmission } from '@app/dashboard/library/forms/models'
 import {
   FormAddendumDatabase,
-  FormAddendumDatasource
-} from '@app/dashboard/library/forms/services'
-import { NotifierService } from '@app/service'
-import { _, TextInputDialog } from '@app/shared'
+  FormAddendumDatasource,
+  NotifierService
+} from '@app/service'
+import { FormSubmission } from '@app/shared/model'
+import { _ } from '@app/shared/utils'
+import { TextInputDialog } from '@app/shared/dialogs'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { FormAddendumSingle } from '@coachcare/sdk'
 import { filter } from 'rxjs/operators'

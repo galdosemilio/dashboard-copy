@@ -849,11 +849,13 @@
       "VIEWMODE_TOGGLE_MESSAGE": "At skifte visningstilstande vil bringe dig videre til din Mit Bibliotek oversigt. Ønsker du at fortsætte?",
       "VIEWMODE_TOGGLE_WARNING": "advarsel",
       "VIEW_CONTENT": "Vis",
-      "VIMEO_LINK": "VImeo Link",
+      "VIMEO_LINK": "Vimeo Link",
+      "VIMEO_VIDEO": "Vimeo video",
       "VISIBLE": "Synlig",
       "VISIBLE_TO_PATIENT": "Synlig for patienten",
       "YOUTUBE": "YouTube",
       "YOUTUBE_LINK": "YouTube Link",
+      "YOUTUBE_VIDEO": "YouTube Video",
       "_TITLE": "Administrer Indholdet"
     },
     "FORMS": {

@@ -5,6 +5,7 @@ import { ApplyFnPipe } from './apply-fn.pipe'
 import { CapitalizePipe } from './capitalize.pipe'
 import { MaxCharsPipe } from './max-chars.pipe'
 import { NumberFormatPipe } from './number-format.pipe'
+import { CcrSanitizePipe } from './sanitize.pipe'
 import { ToOuncesPipe } from './to-ounces.pipe'
 import { UtcPipe } from './utc.pipe'
 
@@ -14,6 +15,7 @@ import { UtcPipe } from './utc.pipe'
     AbsoluteValuePipe,
     ApplyFnPipe,
     CapitalizePipe,
+    CcrSanitizePipe,
     MaxCharsPipe,
     NumberFormatPipe,
     ToOuncesPipe,
@@ -23,6 +25,7 @@ import { UtcPipe } from './utc.pipe'
     AbsoluteValuePipe,
     ApplyFnPipe,
     CapitalizePipe,
+    CcrSanitizePipe,
     MaxCharsPipe,
     NumberFormatPipe,
     ToOuncesPipe,

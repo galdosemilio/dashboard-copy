@@ -1,5 +1,6 @@
-import { Routes } from '@angular/router'
 import { PatientAccountGuard, ProviderAccountGuard } from '@app/service'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 import {
   ScheduleAvailabilityComponent,
   ScheduleAvailabilityRecurringComponent,
@@ -9,7 +10,7 @@ import {
 import { ScheduleListComponent } from './list'
 import { ScheduleMosaicComponent } from './mosaic'
 
-export const ScheduleRoutes: Routes = [
+const routes: Routes = [
   {
     path: 'view',
     component: ScheduleCalendarComponent,
@@ -36,3 +37,9 @@ export const ScheduleRoutes: Routes = [
     canActivate: [PatientAccountGuard]
   }
 ]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ScheduleRoutingModule {}

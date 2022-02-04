@@ -1,5 +1,3 @@
-import { MatMomentDateModule } from '@coachcare/datepicker'
-
 import { AlertIconComponent } from './alert-icon/alert-icon.component'
 import { AddressFormComponent } from './address-form/address-form.component'
 import { AddressesComponent } from './addresses/addresses.component'
@@ -14,7 +12,6 @@ import { CcrChildClinicPickerComponent } from './child-clinic-picker'
 import { CcrConnectionStatusComponent } from './connection-status/connection-status.component'
 import { CcrScheduleMeetingContainer } from './meeting-container'
 import { CountrySelectorComponent } from './country-selector'
-// import { CcrDateInputComponent } from '@coachcare/common/components/form/fields/date-input'
 import {
   DateNavigator,
   DateNavigatorOutput
@@ -79,6 +76,11 @@ import {
 } from './schedule'
 import { CcrPermissionFilterComponent } from './permission-filter'
 import { TranslatedTextInputComponent } from './translated-text-input'
+import { CcrDietersTableComponent } from './dieters-table'
+import {
+  DieterSubmissionsComponent,
+  DieterSubmissionsTableComponent
+} from './dieter-submissions'
 
 export {
   AccountPhaseListComponent,
@@ -96,7 +98,7 @@ export {
   CcrAccountAssociationsComponent,
   CcrChildClinicPickerComponent,
   CcrConnectionStatusComponent,
-  // CcrDateInputComponent,
+  CcrDietersTableComponent,
   CcrImageOptionSelectorComponent,
   CcrLastLoginComponent,
   CcrMeasurementChartV2Component,
@@ -110,6 +112,8 @@ export {
   CcrPermissionFilterComponent,
   CcrScheduleMeetingContainer,
   CountrySelectorComponent,
+  DieterSubmissionsComponent,
+  DieterSubmissionsTableComponent,
   FormSearchComponent,
   HeightFormFieldComponent,
   InlineEditableField,
@@ -131,7 +135,6 @@ export {
   HelpLinkComponent,
   ProgressCircle,
   QuickDateRangeComponent,
-  MatMomentDateModule,
   RPMComponent,
   SequenceSearchComponent,
   TranslatedTextInputComponent,
@@ -163,7 +166,7 @@ export const CmpComponents = [
   CcrChildClinicPickerComponent,
   CcrConnectionStatusComponent,
   CcrCallControlComponent,
-  // CcrDateInputComponent,
+  CcrDietersTableComponent,
   CcrImageOptionSelectorComponent,
   CcrLastLoginComponent,
   CcrMeasurementChartV2Component,
@@ -178,6 +181,8 @@ export const CmpComponents = [
   CcrTimeframeSelectorComponent,
   CcrTinInputComponent,
   CountrySelectorComponent,
+  DieterSubmissionsComponent,
+  DieterSubmissionsTableComponent,
   FormSearchComponent,
   HeightFormFieldComponent,
   InlineEditableField,

@@ -12,17 +12,17 @@ import { MatSort, Sort } from '@coachcare/material'
 import { STORAGE_PATIENTS_PAGINATION } from '@app/config'
 import {
   ContextService,
+  DietersCriteria,
+  DietersDatabase,
+  DietersDataSource,
   EventsService,
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _ } from '@app/shared'
-import { DieterListingItem } from '../models'
+import { DieterListingItem, _ } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { delay } from 'rxjs/operators'
-import { DietersDatabase, DietersDataSource } from '../services'
-import { DietersCriteria } from '../services/dieters.criteria'
 
 @UntilDestroy()
 @Component({
@@ -32,7 +32,8 @@ import { DietersCriteria } from '../services/dieters.criteria'
   encapsulation: ViewEncapsulation.None
 })
 export class DieterListingNoPhiComponent
-  implements AfterViewInit, OnInit, OnDestroy {
+  implements AfterViewInit, OnInit, OnDestroy
+{
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
 

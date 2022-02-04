@@ -2,10 +2,15 @@ import { Component, Input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { MatDialog } from '@coachcare/material'
-import { FormSubmission } from '@app/dashboard/library/forms/models'
-import { FormSubmissionsDatasource } from '@app/dashboard/library/forms/services'
-import { ContextService, FormPDFService, NotifierService } from '@app/service'
-import { _, PromptDialog, TranslationsObject } from '@app/shared'
+import {
+  ContextService,
+  FormPDFService,
+  FormSubmissionsDatasource,
+  NotifierService
+} from '@app/service'
+import { PromptDialog } from '@app/shared/dialogs'
+import { FormSubmission } from '@app/shared/model'
+import { _, TranslationsObject } from '@app/shared/utils'
 import { AccountProvider } from '@coachcare/sdk'
 import { filter } from 'rxjs/operators'
 @Component({

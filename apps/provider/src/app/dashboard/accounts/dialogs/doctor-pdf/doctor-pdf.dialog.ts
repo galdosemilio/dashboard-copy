@@ -4,10 +4,11 @@ import { MatDialogRef } from '@coachcare/material'
 import { CCRConfig } from '@app/config'
 import { resolveConfig } from '@app/config/section'
 import {
+  ContextService,
   FormSubmissionsDatabase,
-  FormSubmissionsDatasource
-} from '@app/dashboard/library/forms/services'
-import { ContextService, NotifierService } from '@app/service'
+  FormSubmissionsDatasource,
+  NotifierService
+} from '@app/service'
 import { imageToDataURL } from '@app/shared'
 import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
@@ -246,14 +247,12 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
         },
         { text: ' ', lineHeight: 2 },
         {
-          text:
-            'Their success is a direct correlation to following the program which is designed to help patients achieve optimal weight loss while treating obesity at its core and addressing metabolic syndrome and insulin resistance. The program involves perfectly designed macro balanced meals and weekly coaching to help with nutrition education and behavior modification for life, not just through weight loss. A certified coach is here to guide your patient through the program with the goal of moving to a completely whole foods diet.',
+          text: 'Their success is a direct correlation to following the program which is designed to help patients achieve optimal weight loss while treating obesity at its core and addressing metabolic syndrome and insulin resistance. The program involves perfectly designed macro balanced meals and weekly coaching to help with nutrition education and behavior modification for life, not just through weight loss. A certified coach is here to guide your patient through the program with the goal of moving to a completely whole foods diet.',
           alignment: 'justify'
         },
         { text: ' ', lineHeight: 2 },
         {
-          text:
-            'We will continue to send you progress reports as your patient moves through the program.',
+          text: 'We will continue to send you progress reports as your patient moves through the program.',
           alignment: 'justify'
         },
         { text: ' ', lineHeight: 2 },

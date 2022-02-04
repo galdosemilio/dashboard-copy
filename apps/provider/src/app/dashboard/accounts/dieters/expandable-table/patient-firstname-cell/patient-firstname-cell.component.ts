@@ -5,7 +5,7 @@ import {
   Input,
   Output
 } from '@angular/core'
-import { DieterListingItem } from '../../models'
+import { DieterListingItem } from '@app/shared'
 
 interface LoadMoreArgs {
   name: string
@@ -20,13 +20,10 @@ interface LoadMoreArgs {
 export class PatientFirstNameCell {
   @Input() row: DieterListingItem
 
-  @Output() onLoadMore: EventEmitter<LoadMoreArgs> = new EventEmitter<
-    LoadMoreArgs
-  >()
-  @Output() showDieter: EventEmitter<DieterListingItem> = new EventEmitter<
-    DieterListingItem
-  >()
-  @Output() toggleRow: EventEmitter<DieterListingItem> = new EventEmitter<
-    DieterListingItem
-  >()
+  @Output() onLoadMore: EventEmitter<LoadMoreArgs> =
+    new EventEmitter<LoadMoreArgs>()
+  @Output() showDieter: EventEmitter<DieterListingItem> =
+    new EventEmitter<DieterListingItem>()
+  @Output() toggleRow: EventEmitter<DieterListingItem> =
+    new EventEmitter<DieterListingItem>()
 }

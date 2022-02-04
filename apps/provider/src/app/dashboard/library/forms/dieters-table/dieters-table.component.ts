@@ -6,8 +6,12 @@ import {
   ViewChild
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { DietersDatabase, DietersDataSource } from '@app/dashboard/accounts'
-import { ContextService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  DietersDatabase,
+  DietersDataSource,
+  NotifierService
+} from '@app/service'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { AccountAccessData } from '@coachcare/sdk'
 import { debounceTime, delay } from 'rxjs/operators'

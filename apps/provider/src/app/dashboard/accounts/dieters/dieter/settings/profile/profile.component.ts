@@ -10,8 +10,12 @@ import { Access, AccountProvider } from '@coachcare/sdk'
 
 import { MatDialog } from '@coachcare/material'
 import { DieterFormComponent } from '@app/dashboard/accounts/dieters/form'
-import { AccountIdentifierSyncer } from '@app/dashboard/accounts/dieters/form/account-identifiers/utils'
-import { ContextService, EventsService, NotifierService } from '@app/service'
+import {
+  AccountIdentifierSyncer,
+  ContextService,
+  EventsService,
+  NotifierService
+} from '@app/service'
 import {
   _,
   BindForm,

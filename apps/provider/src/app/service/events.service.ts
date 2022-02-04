@@ -28,7 +28,7 @@ export type CcrEvent = {
 
 export type CcrEventListener = (data: any) => void
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class EventsService {
   /**
    * Events Bus

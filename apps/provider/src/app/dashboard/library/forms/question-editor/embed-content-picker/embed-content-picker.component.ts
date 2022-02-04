@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import {
   CONTENT_TYPE_MAP,
   FileExplorerContent
-} from '@app/dashboard/content/models'
+} from '@app/dashboard/library/content/models'
 import { Subject } from 'rxjs'
 
 @Component({

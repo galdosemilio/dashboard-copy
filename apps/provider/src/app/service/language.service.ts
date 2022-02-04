@@ -12,7 +12,7 @@ import { EventsService } from './events.service'
 import * as moment from 'moment-timezone'
 import 'moment'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LanguageService {
   public uid: string
   private lang: string

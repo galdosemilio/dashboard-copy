@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { NotifierService } from '@app/service'
-import { FormUtils } from '@app/shared'
 import * as moment from 'moment'
 import { AccountProvider } from '@coachcare/sdk'
 
@@ -28,8 +27,7 @@ export class AccountEditDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: AccountEditDialogData,
     private dialogRef: MatDialogRef<AccountEditDialog>,
     private account: AccountProvider,
-    private notifier: NotifierService,
-    private formUtils: FormUtils
+    private notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -51,23 +49,23 @@ export class AccountEditDialog implements OnInit {
   }
 
   async onSubmit() {
-    if (this.form.valid) {
-      // collect the account data
+    if (this.form.invalid) {
+      return
+    }
+
+    try {
       const data = this.form.value
       const acc = await this.account.getSingle(data.id)
-      // save the account
-      this.account
-        .update({
-          ...data,
-          client: { ...acc.clientData, startedAt: data.startedAt }
-        })
-        .then(() => {
-          // return the result to the caller component
-          this.dialogRef.close(data)
-        })
-        .catch((err) => this.notifier.error(err))
-    } else {
-      this.formUtils.markAsTouched(this.form)
+
+      await this.account.update({
+        ...data,
+        client: { ...acc.clientData, startedAt: data.startedAt }
+      })
+
+      // return the result to the caller component
+      this.dialogRef.close(data)
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 }

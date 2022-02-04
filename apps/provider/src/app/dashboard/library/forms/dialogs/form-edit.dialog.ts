@@ -1,8 +1,8 @@
 import { Component, forwardRef, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-import { Form } from '@app/dashboard/library/forms/models'
-import { BindForm, BINDFORM_TOKEN } from '@app/shared'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
+import { Form } from '@app/shared/model'
 
 @Component({
   selector: 'app-library-form-edit-dialog',

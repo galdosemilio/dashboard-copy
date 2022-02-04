@@ -4,7 +4,7 @@ import { ContextService, NotifierService } from '@app/service'
 import { OrganizationEntity } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { Form as SelveraFormService } from '@coachcare/sdk'
-import { Form } from '../../models'
+import { Form } from '@app/shared/model'
 
 export interface FormCloneDialogData {
   form: Form

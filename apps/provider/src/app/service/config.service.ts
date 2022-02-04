@@ -6,7 +6,7 @@ import { configSelector, InitConfig, UpdateConfig } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { get, set } from 'lodash'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ConfigService {
   /**
    * Config Values

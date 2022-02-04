@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
-import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services'
-import { ContextService, NotifierService } from '@app/service'
-import { _ } from '@app/shared'
+import {
+  ContextService,
+  FormSubmissionsDatabase,
+  NotifierService
+} from '@app/service'
+import { _ } from '@app/shared/utils'
 
 @Injectable()
 export class FormSubmissionsResolver implements Resolve<boolean> {

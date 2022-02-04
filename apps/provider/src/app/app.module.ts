@@ -13,9 +13,9 @@ import { environment } from '../environments/environment'
 import { AppComponent } from './app.component'
 import { AppRoutes } from './app.routing'
 import { LayoutModule } from './layout/layout.module'
-import { MatMomentDateModule, MissingStringsHandler } from './shared'
+import { MissingStringsHandler } from './shared'
 
-import { DatePipe, registerLocaleData } from '@angular/common'
+import { registerLocaleData } from '@angular/common'
 import { EffectsModule } from '@ngrx/effects'
 import {
   RouterStateSerializer,
@@ -32,7 +32,6 @@ import {
 
 import localeEs from '@angular/common/locales/es'
 import { SharedModule } from './shared/shared.module'
-import { CoachcareSdkModule } from '@coachcare/common'
 import { API_ENVIRONMENT } from '@coachcare/common/model'
 
 registerLocaleData(localeEs, 'es')
@@ -40,7 +39,6 @@ registerLocaleData(localeEs, 'es')
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    CoachcareSdkModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -55,28 +53,26 @@ registerLocaleData(localeEs, 'es')
         useClass: MissingStringsHandler
       }
     }),
+    SharedModule,
     LayoutModule,
-    AppRoutes,
-    MatMomentDateModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),
     !environment.production
       ? StoreDevtoolsModule.instrument({ maxAge: 50 })
       : [],
-    SharedModule
+    AppRoutes
   ],
   providers: [
-    DatePipe,
     {
       provide: API_ENVIRONMENT,
       useValue: environment
     },
-    AppProviders(),
     {
       provide: RouterStateSerializer,
       useClass: AppRouterStateSerializer
-    }
+    },
+    ...AppProviders()
   ],
   bootstrap: [AppComponent]
 })

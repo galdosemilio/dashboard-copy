@@ -1,7 +1,8 @@
-import { Routes } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 import { AlertsComponent, AlertsSettingsComponent } from './index'
 
-export const AlertsRoutes: Routes = [
+const routes: Routes = [
   {
     path: '',
     children: [
@@ -16,3 +17,9 @@ export const AlertsRoutes: Routes = [
     ]
   }
 ]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class AlertsRoutingModule {}

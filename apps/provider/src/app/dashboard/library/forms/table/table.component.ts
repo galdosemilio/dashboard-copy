@@ -4,13 +4,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { ContextService } from '@app/service'
-import {
-  Form,
-  FormSection,
-  FormQuestion
-} from '@app/dashboard/library/forms/models'
-import { FormsDatasource } from '@app/dashboard/library/forms/services'
-import { _, TranslationsObject } from '@app/shared'
+import { _, TranslationsObject } from '@app/shared/utils'
+import { Form, FormSection, FormQuestion } from '@app/shared/model'
 import { MatDialog, Sort } from '@coachcare/material'
 import { Form as CcrFormService } from '@coachcare/sdk'
 
@@ -21,6 +16,7 @@ import * as pdfMake from 'pdfmake'
 
 import { FormCloneDialog, FormCloneDialogData } from '../dialogs'
 import { filter } from 'rxjs/operators'
+import { FormsDatasource } from '../models'
 
 @UntilDestroy()
 @Component({

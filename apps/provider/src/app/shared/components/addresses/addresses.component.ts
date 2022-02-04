@@ -6,8 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
-import { UserAddress } from '@app/shared'
-import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
+import { UserAddress } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
 import { AddAddressDialog } from '@app/shared/components/add-address-dialog/add-address.dialog'
 import { MatDialog } from '@coachcare/material'
@@ -44,18 +43,13 @@ export interface LabelOption {
   encapsulation: ViewEncapsulation.None,
   providers: [
     {
-      provide: BINDFORM_TOKEN,
-      useExisting: forwardRef(() => AddressesComponent)
-    },
-    {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => AddressesComponent),
       multi: true
     }
   ]
 })
-export class AddressesComponent
-  implements BindForm, ControlValueAccessor, OnInit {
+export class AddressesComponent implements ControlValueAccessor, OnInit {
   private _account: string
 
   @Input() set account(value: string) {

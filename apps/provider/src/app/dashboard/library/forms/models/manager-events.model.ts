@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core'
-import { CcrDropEvent } from '@app/shared'
-import { FormQuestion } from './question.model'
+import { FormQuestion } from '@app/shared/model'
+import { CcrDropEvent } from '@app/shared/directives'
 
 export class ManagerEvents {
   public addQuestion: EventEmitter<void>

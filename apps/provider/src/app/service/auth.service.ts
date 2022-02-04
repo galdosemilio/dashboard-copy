@@ -7,7 +7,7 @@ import { authenticationToken } from '@coachcare/common/sdk.barrel'
 import { debounceTime } from 'rxjs/operators'
 import { resolveHardcodedLoginSite } from './helpers'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(api: ApiService, private cookie: CookieService) {
     api.onUnauthenticatedError

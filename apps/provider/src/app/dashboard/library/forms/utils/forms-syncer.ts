@@ -2,12 +2,10 @@ import {
   CHANGE_TICKET_ACTIONS,
   CHANGE_TICKET_TYPE,
   ChangeTicket,
-  ChangeTicketDependency,
-  FormQuestion,
-  FormSection,
-  QUESTION_TYPE_MAP
+  ChangeTicketDependency
 } from '@app/dashboard/library/forms/models'
-import { FormsDatasource } from '@app/dashboard/library/forms/services'
+import { FormQuestion, FormSection, QUESTION_TYPE_MAP } from '@app/shared/model'
+import { FormsDatasource } from '../models'
 
 export class FormsSyncer {
   constructor(private source: FormsDatasource) {}

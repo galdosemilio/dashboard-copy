@@ -13,7 +13,7 @@ import {
 } from '@app/layout/store/layout'
 import { FetchInitiatedCalls } from '@app/layout/store/call'
 import { ContextService, EventsService, LanguageService } from '@app/service'
-import { TranslationsObject } from '@app/shared'
+import { TranslationsObject } from '@app/shared/utils'
 import { sleep } from '@app/shared/utils/async.utils'
 import { Conference } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'

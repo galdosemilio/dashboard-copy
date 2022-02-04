@@ -1,0 +1,22 @@
+
+<div [formGroup]="form" fxLayout="row" fxLayoutGap="5%">
+    <div fxLayout="column" fxLayoutGap="3%" [fxFlex]="url ? 'grow' : '100%'">
+      <mat-form-field>
+          <input type="text" matInput formControlName="embedUrl"
+          [placeholder]="'LIBRARY.CONTENT.VIMEO_LINK' | translate"
+          required>
+      </mat-form-field>
+      <mat-error *ngIf="form.controls.embedUrl.hasError('invalidLink')">{{ 'LIBRARY.CONTENT.INVALID_LINK' | translate }}</mat-error>
+
+      <app-content-content-form
+          bindForm="details"
+          [details]="details"
+          [hiddenFields]="['externalVisibility']"
+          [mode]="mode">
+      </app-content-content-form>
+    </div>
+
+    <div *ngIf="url" fxLayout="column" fxLayoutAlign="center center" class="youtube-embed">
+        <iframe [src]="url" [title]="'LIBRARY.CONTENT.VIMEO_VIDEO' | translate" style="border: none;"></iframe>
+    </div>
+  </div>

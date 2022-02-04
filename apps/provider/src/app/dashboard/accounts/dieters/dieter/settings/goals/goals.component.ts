@@ -3,9 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AccountMeasurementPreferenceType, Goal, Goals } from '@coachcare/sdk'
 
 import { ContextService, EventsService, NotifierService } from '@app/service'
-import { _, BindForm, unitConversion, unitConversionDefault } from '@app/shared'
+import {
+  _,
+  BindForm,
+  FormUtils,
+  unitConversion,
+  unitConversionDefault
+} from '@app/shared'
 import { UntilDestroy } from '@ngneat/until-destroy'
-import { FormUtils } from '@coachcare/common/shared'
 import { GoalObject } from '@coachcare/sdk/dist/lib/providers/goal/requests/goalObjectRequest.interface'
 
 @UntilDestroy()
@@ -53,6 +58,7 @@ export class DieterGoalsComponent implements BindForm, OnInit {
     private bus: EventsService,
     private context: ContextService,
     private goal: Goal,
+    private formUtils: FormUtils,
     private notifier: NotifierService
   ) {
     this.measurement = this.context.user.measurementPreference || 'us'
@@ -238,7 +244,7 @@ export class DieterGoalsComponent implements BindForm, OnInit {
 
   public async onSubmit(): Promise<void> {
     if (this.form.invalid) {
-      FormUtils.markAsTouched(this.form)
+      this.formUtils.markAsTouched(this.form)
       return
     }
 

@@ -1,7 +1,8 @@
-import { Routes } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 import { CoachComponent, CoachesComponent, CoachResolver } from './'
 
-export const CoachesRoutes: Routes = [
+const routes: Routes = [
   { path: '', pathMatch: 'full', component: CoachesComponent },
   {
     path: ':id',
@@ -11,3 +12,9 @@ export const CoachesRoutes: Routes = [
     }
   }
 ]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class CoachesRoutingModule {}

@@ -1,16 +1,16 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl } from '@angular/forms'
 import { MatDialog, MatPaginator } from '@coachcare/material'
-import { AddAssociationDialog } from '@app/dashboard/accounts/dialogs/add-association'
+import {
+  AddAssociationDialog,
+  CoachPermissionsDialog,
+  RemoveClinicAssociationDialog
+} from '@app/shared/dialogs'
 import {
   AssociationsDatabase,
   AssociationsDataSource
 } from '@app/dashboard/accounts/dieters/dieter/settings/services/associations'
 import { ContextService, NotifierService } from '@app/service'
-import {
-  CoachPermissionsDialog,
-  RemoveClinicAssociationDialog
-} from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
 import {
   AccountAccessData,

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 
-import { FormSubmissionsDatabase } from '@app/dashboard/library/forms/services'
-import { NotifierService } from '@app/service'
-import { _ } from '@app/shared'
+import { FormSubmissionsDatabase, NotifierService } from '@app/service'
+import { _ } from '@app/shared/utils'
 import { FormSubmissionSingle } from '@coachcare/sdk'
 
 @Injectable()

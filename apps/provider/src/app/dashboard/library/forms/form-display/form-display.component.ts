@@ -1,12 +1,12 @@
 import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Form, FormSubmission } from '@app/dashboard/library/forms/models'
-import { FormDisplayService } from '@app/dashboard/library/forms/services'
-import { _, BindForm, BINDFORM_TOKEN } from '@app/shared'
+import { FormSubmission, Form } from '@app/shared/model'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
+import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
-import { ContextService } from '@app/service'
+import { ContextService, FormDisplayService } from '@app/service'
 
 interface FormDisplayRouteElement {
   type: 'text' | 'form' | 'submission'

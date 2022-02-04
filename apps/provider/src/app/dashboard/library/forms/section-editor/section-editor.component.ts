@@ -9,20 +9,16 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MatSelect, MatSelectChange } from '@coachcare/material'
+import { ManagerEvents } from '@app/dashboard/library/forms/models'
+import { _ } from '@app/shared/utils'
+import { PromptDialog } from '@app/shared/dialogs'
+import { BindForm, BINDFORM_TOKEN, CcrDropEvent } from '@app/shared/directives'
 import {
-  FormQuestion,
-  FormQuestionType,
   FormSection,
-  ManagerEvents,
-  QUESTION_TYPE_MAP
-} from '@app/dashboard/library/forms/models'
-import {
-  _,
-  BindForm,
-  BINDFORM_TOKEN,
-  CcrDropEvent,
-  PromptDialog
-} from '@app/shared'
+  FormQuestion,
+  QUESTION_TYPE_MAP,
+  FormQuestionType
+} from '@app/shared/model'
 import { TranslateService } from '@ngx-translate/core'
 import { cloneDeep } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -72,9 +68,8 @@ export class SectionEditorComponent implements BindForm, OnDestroy, OnInit {
     if (!show) {
       this.form.patchValue({
         title: this.translations['LIBRARY.FORMS.DEFAULT_SECTION_TITLE'],
-        description: this.translations[
-          'LIBRARY.FORMS.DEFAULT_SECTION_DESCRIPTION'
-        ]
+        description:
+          this.translations['LIBRARY.FORMS.DEFAULT_SECTION_DESCRIPTION']
       })
     } else if (this._showHeader !== undefined) {
       this.form.patchValue({

@@ -1,8 +1,8 @@
 import * as moment from 'moment-timezone'
 import { AccountAccessData, OrganizationAccess, Schedule } from '@coachcare/sdk'
-import { DieterListingItem } from '../models/dieterListing'
 import { RemovePatientMeetingDialog } from '@app/shared/dialogs'
 import { MatDialog } from '@coachcare/material'
+import { DieterListingItem } from '@app/shared'
 
 export async function confirmRemoveAssociatedMeetings({
   account,

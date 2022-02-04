@@ -45,11 +45,11 @@
         <a mat-button class="ccr-button" [routerLink]="['/accounts/patients']" *ngIf="canViewAll" data-cy="view-all-patients-button">{{ 'HOME.VIEW_ALL_PATIENTS' | translate }}</a>
       </div>
 
-      <app-dieters-table
+      <ccr-dieters-table
         data-cy="view-lastest-signups"
         [source]="recentsSource"
         [withSorting]="false"
-      ></app-dieters-table>
+      ></ccr-dieters-table>
     </div>
 
   </div>

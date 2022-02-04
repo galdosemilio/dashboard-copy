@@ -8,7 +8,7 @@ interface Log extends Partial<AddLogRequest> {
   data: any
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LoggingService {
   public app: AddLogRequest['app'] = 'ccr-staticProvider'
 

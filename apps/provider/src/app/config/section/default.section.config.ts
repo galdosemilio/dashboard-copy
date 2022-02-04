@@ -1,5 +1,4 @@
 import { AccountIdentifiersComponent } from '@app/dashboard/accounts/dieters/form/account-identifiers/account-identifiers.component'
-import { AccountIdentifiersProps } from '@app/dashboard/accounts/dieters/form/account-identifiers/models'
 import { DefaultLayoutComponent } from '@app/layout/layouts'
 import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component'
 import {
@@ -10,6 +9,7 @@ import {
 } from './consts'
 import { SectionConfigDetails } from './models/section.details'
 import { DefaultDashboardComponent } from '@app/dashboard/panel'
+import { AccountIdentifiersProps } from '@app/shared/model/accountIdentifiers/account-identifiers.props'
 import { _ } from '@app/shared/utils'
 import { DefaultProfileComponent } from '@app/dashboard/profile/layouts'
 import { environment } from '../../../environments/environment'

@@ -6,7 +6,7 @@ import {
 } from '@angular/router'
 import { ContextService } from './context.service'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(private context: ContextService) {}
 

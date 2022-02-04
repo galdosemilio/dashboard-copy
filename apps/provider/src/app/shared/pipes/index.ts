@@ -16,7 +16,6 @@ import {
   UnitConvertFromReadablePipe,
   UnitConvertToReadablePipe
 } from './unit-conversion'
-import { CcrSanitizePipe } from '@coachcare/common/pipes'
 import {
   CcrConvertSecondsToHmsPipe,
   CcrConvertSecondsToMinutesPipe
@@ -32,7 +31,6 @@ export const Pipes = [
   CapitalizePipe,
   CcrBinaryPipe,
   CcrKilobytesPipe,
-  CcrSanitizePipe,
   CcrConvertSecondsToHmsPipe,
   CcrConvertSecondsToMinutesPipe,
   CcrUtcPipe,

@@ -2,10 +2,6 @@ import { chain, fromPairs } from 'lodash'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import {
-  ContentCopiedEvent,
-  FileVaultContent
-} from '@app/dashboard/content/models'
 import { ContextService, NotifierService } from '@app/service'
 import { _, TableDataSource } from '@app/shared'
 import {
@@ -16,11 +12,16 @@ import {
   Entity,
   GetAllVaultContentRequest,
   GetAllVaultContentResponse,
+  GetDownloadUrlResponse,
   GetUploadUrlContentRequest,
   GetUploadUrlContentResponse,
   UpdateVaultContentRequest
 } from '@coachcare/sdk'
 import { VaultDatabase } from './vault.database'
+import {
+  ContentCopiedEvent,
+  FileVaultContent
+} from '@app/dashboard/library/content/models'
 
 interface ExecRequestOpts {
   omitLoading: boolean
@@ -211,7 +212,7 @@ export class VaultDatasource extends TableDataSource<
     return source
   }
 
-  getDownloadUrl(args: Entity): Promise<any> {
+  getDownloadUrl(args: Entity): Promise<GetDownloadUrlResponse> {
     return this.execRequest(this.database.getDownloadUrl(args).toPromise())
   }
 

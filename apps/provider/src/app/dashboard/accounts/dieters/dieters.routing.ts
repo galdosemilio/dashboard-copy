@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router'
+import { RouterModule, Routes } from '@angular/router'
 import {
   DieterComponent,
   DieterDashboardComponent,
@@ -14,8 +14,9 @@ import {
 
 import { DieterListingNoPhiComponent } from './dieter-listing-no-phi/dieter-listing-no-phi.component'
 import { DieterListingWithPhiComponent } from './dieter-listing-with-phi/dieter-listing-with-phi.component'
+import { NgModule } from '@angular/core'
 
-export const DietersRoutes: Routes = [
+const routes: Routes = [
   {
     path: '',
     component: DieterListingWithPhiComponent,
@@ -43,3 +44,9 @@ export const DietersRoutes: Routes = [
     ]
   }
 ]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class DietersRoutingModule {}

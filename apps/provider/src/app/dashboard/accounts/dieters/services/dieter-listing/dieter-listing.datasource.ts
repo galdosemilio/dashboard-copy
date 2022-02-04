@@ -1,4 +1,7 @@
 import {
+  DieterListingItem,
+  DieterListingOrgItem,
+  DieterListingPackageItem,
   ExpandatableTableHeader,
   formatPhoneNumber,
   TableDataSource
@@ -12,11 +15,6 @@ import {
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { from, Observable } from 'rxjs'
-import {
-  DieterListingItem,
-  DieterListingOrgItem,
-  DieterListingPackageItem
-} from '../../models'
 import { DieterListingDatabase } from './dieter-listing.database'
 
 export class DieterListingDataSource extends TableDataSource<

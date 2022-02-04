@@ -33,7 +33,6 @@ import {
   PatientFirstNameCell
 } from './expandable-table'
 import { AccountIdentifiersComponent } from './form/account-identifiers/account-identifiers.component'
-import { AccountIdentifierSyncer } from './form/account-identifiers/utils'
 import { DieterFormComponent } from './form/dieter.component'
 import {
   DieterDataService,
@@ -72,7 +71,6 @@ export const DietersComponents = [
 ]
 
 export const DietersProviders = [
-  AccountIdentifierSyncer,
   AssociationsDatabase,
   DevicesDatabase,
   DieterDataService,

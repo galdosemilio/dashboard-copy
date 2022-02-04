@@ -6,18 +6,16 @@ import {
   FormCreateDialog,
   FormEditDialog
 } from '@app/dashboard/library/forms/dialogs'
-import { Form } from '@app/dashboard/library/forms/models'
-import {
-  FormsDatabase,
-  FormsDatasource
-} from '@app/dashboard/library/forms/services'
-import { ContextService, NotifierService } from '@app/service'
-import { _, PromptDialog } from '@app/shared'
+import { ContextService, FormsDatabase, NotifierService } from '@app/service'
+import { Form } from '@app/shared/model'
+import { _ } from '@app/shared/utils'
+import { PromptDialog } from '@app/shared/dialogs'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { CreateFormRequest, UpdateFormRequest } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime, filter } from 'rxjs/operators'
+import { FormsDatasource } from './models'
 
 @UntilDestroy()
 @Component({

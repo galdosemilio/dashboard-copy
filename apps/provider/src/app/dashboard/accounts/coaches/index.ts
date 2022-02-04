@@ -25,6 +25,4 @@ export const CoachesComponents = [
   CoachScheduleComponent
 ]
 
-export const CoachesEntryComponents = []
-
 export const CoachesProviders = [CoachesDatabase, CoachResolver, MatSort]

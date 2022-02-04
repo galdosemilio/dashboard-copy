@@ -1,0 +1,35 @@
+@import 'shared/directed-styles';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.file-explorer-content {
+  width: 100%;
+
+  &-header {
+    &-icon {
+      font-size: 48px;
+      height: 48px;
+      width: 50px;
+    }
+
+    &-metadata {
+      h4 {
+        margin: 0;
+      }
+    }
+  }
+
+  &-title {
+    margin-top: 15px;
+    @include horizontal-padding-left(8px);
+    text-align: center;
+    word-break: break-all;
+  }
+
+  .created-at {
+    font-size: 14px;
+  }
+}

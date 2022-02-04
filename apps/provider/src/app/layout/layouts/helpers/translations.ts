@@ -1,7 +1,6 @@
 import { CurrentAccount } from '@app/service'
-import { TranslationsObject } from '@app/shared'
+import { _, TranslationsObject } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
-import { _ } from '@app/shared/utils'
 
 export function configViewLangAttrs(
   document: Document,

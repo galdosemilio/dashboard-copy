@@ -18,11 +18,7 @@ import {
 } from './form'
 import { SequenceComponent } from './sequence'
 import { SequencesComponent, SequencesTableComponent } from './sequences'
-import {
-  EnrolleesDatabase,
-  SequenceResolver,
-  SequencesDatabase
-} from './services'
+import { EnrolleesDatabase, SequenceResolver } from './services'
 import { SequenceSyncer } from './utils'
 
 export const SequencingComponents = [
@@ -43,15 +39,8 @@ export const SequencingComponents = [
   StepInputComponent
 ]
 
-export const SequencingEntryComponents = [
-  BulkUnenrollDialog,
-  DuplicateSequenceDialog,
-  MessagePreviewDialog
-]
-
 export const SequencingProviders = [
   EnrolleesDatabase,
-  SequencesDatabase,
   SequenceResolver,
   SequenceSyncer
 ]

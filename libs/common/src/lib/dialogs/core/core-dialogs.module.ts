@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
+import { CcrPipesModule } from '@coachcare/common/pipes'
 import {
   MatButtonModule,
   MatDialogModule,
@@ -22,7 +23,8 @@ import { PromptDialog } from './prompt/prompt.dialog'
     MatDialogModule,
     MatGridListModule,
     MatIconModule,
-    TranslateModule
+    TranslateModule,
+    CcrPipesModule
   ],
   declarations: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog],
   exports: [ConfirmDialog, GridDialog, PromptDialog, LanguagesDialog]

@@ -8,10 +8,6 @@ import {
 import { ActivatedRoute } from '@angular/router'
 
 import {
-  FormSubmissionsDatabase,
-  FormSubmissionsDatasource
-} from '@app/dashboard/library/forms/services'
-import {
   ContextService,
   NotifierService,
   SelectedOrganization
@@ -21,7 +17,11 @@ import { CSVUtils } from '@coachcare/common/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
-import { Form, FormSubmission } from '../models'
+import { Form, FormSubmission } from '@app/shared/model/form'
+import {
+  FormSubmissionsDatabase,
+  FormSubmissionsDatasource
+} from '@app/service/forms'
 
 @UntilDestroy()
 @Component({

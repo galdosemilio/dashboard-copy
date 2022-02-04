@@ -3,6 +3,7 @@ import { APP_INITIALIZER, LOCALE_ID } from '@angular/core'
 import { RouteReuseStrategy } from '@angular/router'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { CookieService } from 'ngx-cookie-service'
+import { APP_CONFIG } from '@coachcare/common/shared'
 import {
   AccountProvider,
   ApiService,
@@ -19,13 +20,13 @@ import {
   AuthGuard,
   AuthService,
   ConferenceGuard,
-  ConfigService,
-  ContextService,
-  EventsService,
+  ConfigService as LocalConfigService,
+  ContextService as LocalContextService,
+  EventsService as LocalEventsService,
   LanguageService,
   ListingPaginationGuard,
   LoggingService,
-  NotifierService,
+  NotifierService as LocalNotifierService,
   PlatformUpdatesService,
   ScheduleDataService,
   TimeTrackerService
@@ -37,11 +38,25 @@ import {
 } from './guards'
 import { WalkthroughService } from './walkthrough'
 import { GestureService } from './gesture'
-import { APP_CONFIG } from '@coachcare/common/shared'
+import { DietersDatabase } from './dieters'
 import { FormPDFService } from './formPDFService'
 import { MessagingService } from './messaging'
 import { MeasurementLabelService } from './measurement-label'
 import { MeasurementDatabaseV2 } from './measurement-v2'
+import {
+  ConfigService,
+  ContextService,
+  EventsService,
+  NotifierService
+} from '@coachcare/common/services'
+import { SequencesDatabase } from './sequences'
+import { AccountIdentifierSyncer } from './account-identifier-syncer'
+import {
+  FormAddendumDatabase,
+  FormDisplayService,
+  FormsDatabase,
+  FormSubmissionsDatabase
+} from './forms'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -90,16 +105,21 @@ export function AppProviders() {
     AuthGuard,
     ConferenceGuard,
     AuthService,
-    ConfigService,
-    ContextService,
+    LocalConfigService,
+    { provide: ConfigService, useExisting: LocalConfigService },
+    LocalContextService,
+    { provide: ContextService, useExisting: LocalContextService },
     CookieService,
-    EventsService,
+    DietersDatabase,
+    LocalEventsService,
+    { provide: EventsService, useExisting: LocalEventsService },
     LanguageService,
+    LocalNotifierService,
     ListingPaginationGuard,
     LoggingService,
     MeasurementLabelService,
     MeasurementDatabaseV2,
-    NotifierService,
+    { provide: NotifierService, useExisting: LocalNotifierService },
     {
       provide: MessagingService,
       deps: [
@@ -114,6 +134,7 @@ export function AppProviders() {
     PatientAccountGuard,
     ProviderAccountGuard,
     PlatformUpdatesService,
+    SequencesDatabase,
     ScheduleDataService,
     TimeTrackerService,
     FormPDFService,
@@ -131,6 +152,13 @@ export function AppProviders() {
     FormUtils,
     ViewUtils,
     WalkthroughService,
-    GestureService
+    GestureService,
+
+    // App-related Services
+    FormAddendumDatabase,
+    FormsDatabase,
+    FormDisplayService,
+    FormSubmissionsDatabase,
+    AccountIdentifierSyncer
   ]
 }

@@ -1,4 +1,3 @@
-export * from './dieter-submissions'
 export * from './form/form.component'
 export * from './forms.component'
 export * from './form-display/form-display.component'
@@ -6,11 +5,6 @@ export * from './form-submissions/form-submissions.component'
 export * from './utils'
 
 import {
-  DieterSubmissionsComponent,
-  DieterSubmissionsTableComponent
-} from './dieter-submissions'
-import {
-  AssignFormDialog,
   FormCloneDialog,
   FormCreateDialog,
   FormEditDialog,
@@ -47,12 +41,6 @@ import {
 } from './questions'
 import { SectionEditorComponent } from './section-editor/section-editor.component'
 import { SectionRendererComponent } from './section-renderer/section-renderer.component'
-import {
-  FormAddendumDatabase,
-  FormDisplayService,
-  FormsDatabase,
-  FormSubmissionsDatabase
-} from './services'
 import { FormsTableComponent } from './table/table.component'
 import {
   FormAnswersResolver,
@@ -76,9 +64,6 @@ const questionComponents = [
 export const FormsComponents = [
   LibraryFormComponent,
   AllowedValuesFormComponent,
-  AssignFormDialog,
-  DieterSubmissionsComponent,
-  DieterSubmissionsTableComponent,
   DietersTableComponent,
   EmbedContentPickerComponent,
   FormAddendumTableComponent,
@@ -104,12 +89,8 @@ export const FormsComponents = [
 ]
 
 export const FormsProviders = [
-  FormAddendumDatabase,
   FormAnswersResolver,
-  FormDisplayService,
   FormEditGuard,
   FormResolver,
-  FormSubmissionsResolver,
-  FormsDatabase,
-  FormSubmissionsDatabase
+  FormSubmissionsResolver
 ]

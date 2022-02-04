@@ -16,9 +16,10 @@ import { CommonModule, registerLocaleData } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { CoachcareSdkModule } from '@coachcare/common'
+import { MatDatepickerModule, MatMomentDateModule } from '@coachcare/datepicker'
 import { CcrMaterialModule } from '@coachcare/material'
 import { RouterModule } from '@angular/router'
-import { MatDatepickerModule } from '@coachcare/datepicker'
 import { TranslateModule } from '@ngx-translate/core'
 import { QRCodeModule } from 'angularx-qrcode'
 import { ChartsModule } from 'ng2-charts'
@@ -30,6 +31,7 @@ import {
   CcrUtilityComponentsModule
 } from '@coachcare/common/components'
 import { CcrCoreDialogsModule } from '@coachcare/common/dialogs/core'
+import { CcrPipesModule } from '@coachcare/common/pipes'
 
 // register supported locales
 locales.forEach(async (code: AppLocaleCode) => {
@@ -52,6 +54,9 @@ const SHARED_MODULES = [
   CcrCoreDialogsModule,
   CcrFormFieldsModule,
   CcrUtilityComponentsModule,
+  CcrPipesModule,
+  CoachcareSdkModule,
+  CommonModule,
   CdkTableModule,
   ObserversModule,
   OverlayModule,
@@ -63,16 +68,18 @@ const SHARED_MODULES = [
   TextFieldModule,
   TranslateModule,
   MatDatepickerModule,
+  MatMomentDateModule,
   MomentModule,
   ChartsModule,
   QRCodeModule,
-  CcrMaterialModule
+  CcrMaterialModule,
+  RouterModule
 ]
 
 @NgModule({
-  imports: [CommonModule, RouterModule, ...SHARED_MODULES],
+  imports: [...SHARED_MODULES],
   declarations: Components,
   exports: [...Components, ...SHARED_MODULES],
-  providers: [...Providers]
+  providers: Providers
 })
 export class SharedModule {}

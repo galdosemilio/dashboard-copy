@@ -14,7 +14,7 @@ import {
   NotifierService,
   ScheduleDataService
 } from '@app/service'
-import { _, FormUtils, TranslationsObject } from '@app/shared'
+import { _, FormUtils, TranslationsObject } from '@app/shared/utils'
 import { AddMeetingRequest, MeetingAttendee } from '@coachcare/sdk'
 
 @Component({

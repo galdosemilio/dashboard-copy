@@ -1,6 +1,6 @@
 import { Directive, Injectable, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { FormQuestion } from '@app/dashboard/library/forms/models'
+import { FormQuestion } from '@app/shared/model'
 import { BindForm, BindFormDirective } from '@app/shared/directives'
 import { FormAnswer } from '@coachcare/sdk'
 import * as linkifyHtml from 'linkifyjs/html'

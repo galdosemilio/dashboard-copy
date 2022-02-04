@@ -850,10 +850,12 @@
       "VIEWMODE_TOGGLE_WARNING": "allarme",
       "VIEW_CONTENT": "Visualizza",
       "VIMEO_LINK": "Link Vimeo",
+      "VIMEO_VIDEO": "Vimeo Video",
       "VISIBLE": "Visibile",
       "VISIBLE_TO_PATIENT": "Visibile al paziente",
       "YOUTUBE": "Youtube",
       "YOUTUBE_LINK": "Link Youtube",
+      "YOUTUBE_VIDEO": "Video Youtube",
       "_TITLE": "Gestisci Contenuto"
     },
     "FORMS": {

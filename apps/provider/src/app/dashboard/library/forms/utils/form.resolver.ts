@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 import { map } from 'rxjs/operators'
 
-import { Form } from '@app/dashboard/library/forms/models'
-import { FormsDatabase } from '@app/dashboard/library/forms/services'
-import { ContextService } from '@app/service'
+import { ContextService, FormsDatabase } from '@app/service'
 import { FormSingle } from '@coachcare/sdk'
+import { Form } from '@app/shared/model'
 
 @Injectable()
 export class FormResolver implements Resolve<Form> {

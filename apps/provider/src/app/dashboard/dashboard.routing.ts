@@ -1,23 +1,17 @@
 import { RouterModule, Routes } from '@angular/router'
-import { FileUploadGuard } from '@app/dashboard/content/services'
 import {
   AuthGuard,
-  ListingPaginationGuard,
   OrphanedAccountGuard,
   PatientAccountGuard,
   ProviderAccountGuard
 } from '@app/service'
-import { LibraryComponent, ProfileComponent } from './'
-import { ClinicsRoutes } from './accounts/clinics/clinics.routing'
-import { CoachesRoutes } from './accounts/coaches/coaches.routing'
-import { DietersRoutes } from './accounts/dieters/dieters.routing'
-import { AlertsRoutes } from './alerts/alerts.routing'
-import { LibraryRoutes } from './library'
-import { NewAppointmentComponent } from './new-appointment'
+import { NewAppointmentComponent } from './schedule'
 import { DashPanelRoutes } from './panel/panel.routing'
-import { ReportsRoutes } from './reports/reports.routing'
+import { ProfileComponent } from './profile'
 import { PlatformUpdatesComponent } from './resources'
-import { SequencingRoutes } from './sequencing/sequencing.routing'
+import { NgModule } from '@angular/core'
+import { LibraryComponent } from './library'
+import { FileUploadGuard } from './library/content/services'
 
 const routes: Routes = [
   {
@@ -27,21 +21,9 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'dashboard', children: DashPanelRoutes },
       {
-        path: 'accounts/patients',
-        children: DietersRoutes,
-        canActivate: [ProviderAccountGuard],
-        canDeactivate: [ListingPaginationGuard]
-      },
-      {
-        path: 'accounts/coaches',
-        children: CoachesRoutes,
-        canActivate: [ProviderAccountGuard],
-        canDeactivate: [ListingPaginationGuard]
-      },
-      {
-        path: 'accounts/clinics',
-        canActivate: [ProviderAccountGuard],
-        children: ClinicsRoutes
+        path: 'accounts',
+        loadChildren: () =>
+          import('./accounts/accounts.module').then((m) => m.AccountsModule)
       },
       {
         path: 'schedule',
@@ -69,17 +51,22 @@ const routes: Routes = [
       },
       {
         path: 'alerts',
-        children: AlertsRoutes,
+        loadChildren: () =>
+          import('./alerts/alerts.module').then((m) => m.AlertsModule),
         canActivate: [ProviderAccountGuard]
       },
       {
         path: 'reports',
-        children: ReportsRoutes,
+        loadChildren: () =>
+          import('./reports/reports.module').then((m) => m.ReportsModule),
         canActivate: [ProviderAccountGuard]
       },
       {
         path: 'sequences',
-        children: SequencingRoutes,
+        loadChildren: () =>
+          import('./sequencing/sequencing.module').then(
+            (m) => m.SequencingModule
+          ),
         canActivate: [ProviderAccountGuard]
       },
       { path: 'profile', component: ProfileComponent },
@@ -87,7 +74,8 @@ const routes: Routes = [
         path: 'library',
         component: LibraryComponent,
         canDeactivate: [FileUploadGuard],
-        children: LibraryRoutes
+        loadChildren: () =>
+          import('./library/library.module').then((m) => m.LibraryModule)
       },
       {
         path: 'resources/platform-updates',
@@ -104,11 +92,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('./ecommerce/ecommerce.module').then((m) => m.EcommerceModule)
       }
-      // { path: 'resources/support', component: SupportComponent },
-      // { path: 'resources/marketing', component: MarketingComponent },
-      // { path: 'resources/faqs', component: FaqsComponent }
     ]
   }
 ]
 
-export const DashboardRoutes = RouterModule.forChild(routes)
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class DashboardRoutingModule {}

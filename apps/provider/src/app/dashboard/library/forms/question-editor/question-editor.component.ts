@@ -11,17 +11,19 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@coachcare/material'
-import { FileExplorerContent } from '@app/dashboard/content/models'
+import { ManagerEvents } from '@app/dashboard/library/forms/models'
+import { _ } from '@app/shared/utils'
+import { PromptDialog } from '@app/shared/dialogs'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
 import {
   FormQuestion,
-  FormQuestionType,
-  ManagerEvents,
-  QUESTION_TYPE_MAP
-} from '@app/dashboard/library/forms/models'
-import { _, BindForm, BINDFORM_TOKEN, PromptDialog } from '@app/shared'
+  QUESTION_TYPE_MAP,
+  FormQuestionType
+} from '@app/shared/model'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { fromEvent } from 'rxjs'
 import { filter } from 'rxjs/operators'
+import { FileExplorerContent } from '../../content/models'
 
 @UntilDestroy()
 @Component({
@@ -37,7 +39,8 @@ import { filter } from 'rxjs/operators'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionEditorComponent
-  implements AfterViewInit, BindForm, OnDestroy, OnInit {
+  implements AfterViewInit, BindForm, OnDestroy, OnInit
+{
   @Input()
   active = true
   @Input()

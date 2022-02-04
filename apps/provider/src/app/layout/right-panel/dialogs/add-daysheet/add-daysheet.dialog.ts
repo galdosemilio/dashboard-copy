@@ -2,14 +2,11 @@ import { AfterViewInit, Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@coachcare/material'
 import { resolveConfig } from '@app/config/section'
-import { Form } from '@app/dashboard/library/forms/models'
-import {
-  FormsDatabase,
-  FormsDatasource
-} from '@app/dashboard/library/forms/services'
-import { ContextService, NotifierService } from '@app/service'
-import { _ } from '@app/shared'
+import { ContextService, FormsDatabase, NotifierService } from '@app/service'
+import { Form } from '@app/shared/model'
+import { _ } from '@app/shared/utils'
 import { AccountAccessData } from '@coachcare/sdk'
+import { FormsDatasource } from '@app/dashboard/library/forms/models'
 
 @Component({
   selector: 'add-daysheet-dialog',
@@ -115,9 +112,12 @@ export class AddDaysheetDialog implements AfterViewInit, OnInit {
         await this.source.readForm({ id: this.formId, full: true })
       )
       this.remoteForm = form
-      this.firstQuestionOptions = form.sections[0].questions[0].allowedValues.slice()
-      this.secondQuestionOptions = form.sections[0].questions[1].allowedValues.slice()
-      this.thirdQuestionOptions = form.sections[0].questions[2].allowedValues.slice()
+      this.firstQuestionOptions =
+        form.sections[0].questions[0].allowedValues.slice()
+      this.secondQuestionOptions =
+        form.sections[0].questions[1].allowedValues.slice()
+      this.thirdQuestionOptions =
+        form.sections[0].questions[2].allowedValues.slice()
       this.questionTitles[0] = form.sections[0].questions[0].title
       this.questionTitles[1] = form.sections[0].questions[1].title
       this.questionTitles[2] = form.sections[0].questions[2].title

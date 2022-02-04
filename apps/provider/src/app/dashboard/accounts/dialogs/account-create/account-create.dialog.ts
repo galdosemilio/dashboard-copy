@@ -9,8 +9,13 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { CoachFormComponent } from '@app/dashboard/accounts/coaches/form'
 import { DieterFormComponent } from '@app/dashboard/accounts/dieters/form'
-import { ContextService, NotifierService } from '@app/service'
-import { BindForm, BINDFORM_TOKEN, FormUtils } from '@app/shared'
+import {
+  AccountIdentifierSyncer,
+  ContextService,
+  NotifierService
+} from '@app/service'
+import { FormUtils } from '@app/shared/utils'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
 import { Package } from '@app/shared/components/package-table'
 import * as moment from 'moment'
 import {
@@ -20,7 +25,6 @@ import {
   Goal,
   PackageEnrollment
 } from '@coachcare/sdk'
-import { AccountIdentifierSyncer } from '../../dieters/form/account-identifiers/utils'
 import { Subject } from 'rxjs'
 
 export interface AccountCreateDialogData {

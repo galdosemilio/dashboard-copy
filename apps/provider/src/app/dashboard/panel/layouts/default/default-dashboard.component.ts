@@ -1,6 +1,4 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
-import { DietersDatabase } from '@app/dashboard/accounts/dieters/services/dieters.database'
-import { DietersDataSource } from '@app/dashboard/accounts/dieters/services/dieters.datasource'
 import { AlertsDatabase, AlertsDataSource } from '@app/dashboard/alerts'
 import {
   ReportsDatabase,
@@ -9,6 +7,8 @@ import {
 import {
   ConfigService,
   ContextService,
+  DietersDatabase,
+  DietersDataSource,
   EventsService,
   NotifierService,
   WalkthroughService

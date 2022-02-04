@@ -19,14 +19,18 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, PackageFilterComponent, unitConversion } from '@app/shared'
+import {
+  _,
+  PackageFilterComponent,
+  unitConversion,
+  DieterListingItem
+} from '@app/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime, delay, filter, take } from 'rxjs/operators'
 import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
-import { DieterListingItem } from './../models'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
 import {
   convertToReadableFormat,

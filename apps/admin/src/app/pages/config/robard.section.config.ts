@@ -1,5 +1,5 @@
 import { RobardHeaderComponent } from '@board/pages/register/clinic/header/robard/robard.header.component'
-import { _ } from '@coachcare/backend/shared'
+import { _ } from '@coachcare/common/shared/utils'
 import { SectionConfigDetails } from './section.config'
 
 export const RobardTestSectionConfig: SectionConfigDetails = {

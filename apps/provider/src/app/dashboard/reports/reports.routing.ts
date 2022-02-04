@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 import {
   ActiveUsersComponent,
   CoachStatsComponent,
@@ -21,7 +22,7 @@ import { CustomReportsComponent } from './custom/custom-reports.component'
 import { RPMReportComponent } from './rpm'
 import { RPMBillingComponent } from './rpm/rpm-billing'
 
-export const ReportsRoutes: Routes = [
+const routes: Routes = [
   {
     path: '',
     component: ReportsComponent
@@ -88,3 +89,9 @@ export const ReportsRoutes: Routes = [
     ]
   }
 ]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ReportsRoutingModule {}

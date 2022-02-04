@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
-import { ContentUploadService } from '@app/dashboard/content/services'
 import { ContextService, EventsService } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
+import { ContentUploadService } from './content/services'
 
 @Component({
   selector: 'app-library',

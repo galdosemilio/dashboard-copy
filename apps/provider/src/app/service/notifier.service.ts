@@ -21,7 +21,7 @@ export interface NotifierOptions {
   data?: any
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NotifierService {
   private duration: number
 

@@ -7,19 +7,17 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-import { Form } from '@app/dashboard/library/forms/models'
-import {
-  FormsDatabase,
-  FormsDatasource
-} from '@app/dashboard/library/forms/services'
 import {
   ContextService,
+  FormsDatabase,
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _ } from '@app/shared'
+import { Form } from '@app/shared/model'
+import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subscription } from 'rxjs'
+import { FormsDatasource } from '@app/dashboard/library/forms/models'
 
 interface AddNoteDialogData {
   formId: string

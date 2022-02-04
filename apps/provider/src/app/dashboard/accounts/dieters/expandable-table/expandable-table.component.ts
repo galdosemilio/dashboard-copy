@@ -17,6 +17,9 @@ import { ContextService, NotifierService } from '@app/service'
 import {
   AccountRedirectDialog,
   CcrTableSortDirective,
+  DieterListingItem,
+  DieterListingOrgItem,
+  DieterListingPackageItem,
   PromptDialog,
   PromptDialogData
 } from '@app/shared'
@@ -36,11 +39,6 @@ import {
   NamedEntity
 } from '@coachcare/sdk'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
-import {
-  DieterListingItem,
-  DieterListingOrgItem,
-  DieterListingPackageItem
-} from '../models'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 import { confirmRemoveAssociatedMeetings } from '@app/dashboard/accounts/dieters/helpers'

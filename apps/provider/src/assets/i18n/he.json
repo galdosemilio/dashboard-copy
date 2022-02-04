@@ -850,10 +850,12 @@
       "VIEWMODE_TOGGLE_WARNING": "אזהרה",
       "VIEW_CONTENT": "תצוגה",
       "VIMEO_LINK": "קישור Vimeo",
+      "VIMEO_VIDEO": "VIMEO וידאו",
       "VISIBLE": "גלוי",
       "VISIBLE_TO_PATIENT": "גלוי למטופל",
       "YOUTUBE": "Youtube",
       "YOUTUBE_LINK": "קישור Youtube",
+      "YOUTUBE_VIDEO": "סרטון יוטיוב",
       "_TITLE": "ניהול תוכן"
     },
     "FORMS": {

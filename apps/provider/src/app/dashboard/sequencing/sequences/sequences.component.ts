@@ -2,12 +2,15 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ClosePanel, OpenPanel, UILayoutState } from '@app/layout/store'
-import { ContextService } from '@app/service'
+import {
+  ContextService,
+  SequencesDatabase,
+  SequencesDataSource
+} from '@app/service'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { SequencesDatabase, SequencesDataSource } from '../services'
 
 @UntilDestroy()
 @Component({

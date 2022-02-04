@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { FileExplorerContent } from '@app/dashboard/content/models'
+import { FileExplorerContent } from '@app/dashboard/library/content/models'
 import { ContextService } from '@app/service'
 import { CcrDatabase } from '@app/shared'
 import {

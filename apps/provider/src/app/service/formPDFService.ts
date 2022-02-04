@@ -5,7 +5,7 @@ import {
   FormQuestion,
   FormSection,
   FormSubmission
-} from '@app/dashboard/library/forms/models'
+} from '@app/shared/model'
 import { _, TranslationsObject } from '@coachcare/common/shared'
 import {
   FormAnswer,
@@ -63,7 +63,7 @@ interface PDFCanvas {
   color?: string
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 @UntilDestroy()
 export class FormPDFService {
   private i18n: TranslationsObject
@@ -85,11 +85,8 @@ export class FormPDFService {
 
   async generatePDF(formSubmission: FormSubmission): Promise<void> {
     try {
-      const {
-        form,
-        submission,
-        organization
-      } = await this.getFormSubmissionData(formSubmission)
+      const { form, submission, organization } =
+        await this.getFormSubmissionData(formSubmission)
 
       await this.generatePdf(form, submission, organization)
     } catch (error) {
@@ -115,9 +112,7 @@ export class FormPDFService {
       .subscribe((translations) => (this.i18n = translations))
   }
 
-  private async getFormSubmissionData(
-    formSubmission: FormSubmission
-  ): Promise<{
+  private async getFormSubmissionData(formSubmission: FormSubmission): Promise<{
     form: Form
     submission: FormSubmissionSingle
     organization: SelectedOrganization

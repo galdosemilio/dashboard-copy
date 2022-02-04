@@ -21,5 +21,3 @@ export const ProfileComponents = [
   VerifyMFADialog,
   ...WellcoreLayoutComponents
 ]
-
-export const UserProfileProviders = []

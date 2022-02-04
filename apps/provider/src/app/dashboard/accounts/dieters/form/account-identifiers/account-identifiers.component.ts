@@ -1,13 +1,16 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ContextService, SelectedOrganization } from '@app/service'
+import {
+  AccountIdentifierSyncer,
+  ContextService,
+  SelectedOrganization
+} from '@app/service'
+import { AccountIdentifier, AccountIdentifiersProps } from '@app/shared/model'
 import {
   BindForm,
   BindFormDirective
 } from '@app/shared/directives/bind-form.directive'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { AccountIdentifier, AccountIdentifiersProps } from './models'
-import { AccountIdentifierSyncer } from './utils'
 
 interface GroupedIdentifiers {
   organization: SelectedOrganization
@@ -21,7 +24,8 @@ interface GroupedIdentifiers {
   styleUrls: ['./account-identifiers.component.scss']
 })
 export class AccountIdentifiersComponent
-  implements BindForm, DoCheck, OnDestroy, OnInit {
+  implements BindForm, DoCheck, OnDestroy, OnInit
+{
   set identifiers(identifiers: AccountIdentifier[]) {
     const groupedIdentifiers: GroupedIdentifiers[] = []
     const countryLocaleCode = this.context.organization.address
@@ -174,16 +178,14 @@ export class AccountIdentifiersComponent
           .pipe(untilDestroyed(this))
           .subscribe((controls) => {
             const form = this.groupedForms[controls.index]
-            let focusedIdentifier = this.groupedFocusedIdentifiers[
-              controls.index
-            ]
+            let focusedIdentifier =
+              this.groupedFocusedIdentifiers[controls.index]
             if (
               !focusedIdentifier ||
               controls.name !== focusedIdentifier.name
             ) {
-              this.groupedFocusedIdentifiers[
-                controls.index
-              ] = this.identifiers.find((idn) => idn.name === controls.name)
+              this.groupedFocusedIdentifiers[controls.index] =
+                this.identifiers.find((idn) => idn.name === controls.name)
               focusedIdentifier = this.groupedFocusedIdentifiers[controls.index]
               form.controls.identifiers.markAsUntouched()
               form.controls.value.markAsUntouched()

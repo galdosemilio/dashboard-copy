@@ -11,7 +11,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { resolveConfig } from '@app/config/section'
 import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
-import { _, BindForm, BINDFORM_TOKEN, getInputFactor, sleep } from '@app/shared'
+import { BindForm, BINDFORM_TOKEN } from '@app/shared/directives'
+import { _, getInputFactor, sleep } from '@app/shared/utils'
+import { AccountIdentifiersProps } from '@app/shared/model'
 import { PackageSelectorProps } from '@app/shared/components/package-selector/models'
 import { Package } from '@app/shared/components/package-table/models/package.model'
 import { PackageDatabase } from '@app/shared/components/package-table/services/package.database'
@@ -28,7 +30,6 @@ import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { AccountProvider, Timezone } from '@coachcare/sdk'
-import { AccountIdentifiersProps } from './account-identifiers/models'
 
 @UntilDestroy()
 @Component({

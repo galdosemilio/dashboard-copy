@@ -30,8 +30,6 @@ export * from './supplement/supplement.database'
 export * from './supplement/supplement.datasource'
 
 export * from './data.service'
-export * from './dieters.database'
-export * from './dieters.datasource'
 
 export * from './dieter.resolver'
 export * from './dieters.resolver'

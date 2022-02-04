@@ -65,7 +65,7 @@ export type SelectedOrganization = OrganizationWithAddress & {
   // disabled?: boolean;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ContextService {
   public isProvider: boolean
   public isPatient: boolean
@@ -170,7 +170,8 @@ export class ContextService {
         let org: SelectedOrganization
 
         if (this.user.preference && this.user.preference.defaultOrganization) {
-          defaultOrganization = this.user.preference.defaultOrganization.toString()
+          defaultOrganization =
+            this.user.preference.defaultOrganization.toString()
           org = await this.getOrg(defaultOrganization)
         }
         if (!org) {
@@ -356,9 +357,8 @@ export class ContextService {
   /**
    * Selected Clinic (mainly used for the Schedule Clinic Selector)
    */
-  selectedClinic$: BehaviorSubject<OrganizationEntity> = new BehaviorSubject<OrganizationEntity>(
-    null
-  )
+  selectedClinic$: BehaviorSubject<OrganizationEntity> =
+    new BehaviorSubject<OrganizationEntity>(null)
 
   set selectedClinic(clinic: OrganizationEntity) {
     this.selectedClinic$.next(clinic)
@@ -554,9 +554,8 @@ export class ContextService {
    * Displayed clinic
    */
 
-  public clinic$: BehaviorSubject<OrgSingleResponse> = new BehaviorSubject<OrgSingleResponse>(
-    null
-  )
+  public clinic$: BehaviorSubject<OrgSingleResponse> =
+    new BehaviorSubject<OrgSingleResponse>(null)
 
   set clinic(clinic: any) {
     this.clinic$.next(clinic)
@@ -571,11 +570,10 @@ export class ContextService {
   ): Promise<CommunicationPreferenceSingle> {
     return new Promise<CommunicationPreferenceSingle>(async (resolve) => {
       try {
-        const communicationPrefs = await this.communicationPrefs.getPreferenceByOrg(
-          {
+        const communicationPrefs =
+          await this.communicationPrefs.getPreferenceByOrg({
             organization: organization.id
-          }
-        )
+          })
         resolve(communicationPrefs)
       } catch (error) {
         resolve(undefined)
@@ -588,11 +586,10 @@ export class ContextService {
   ): Promise<ContentPreferenceSingle> {
     return new Promise<ContentPreferenceSingle>(async (resolve) => {
       try {
-        const fileVaultPrefs = await this.contentPrefs.getContentVaultPreference(
-          {
+        const fileVaultPrefs =
+          await this.contentPrefs.getContentVaultPreference({
             organization: organization.id
-          }
-        )
+          })
         resolve(fileVaultPrefs)
       } catch (error) {
         resolve(undefined)

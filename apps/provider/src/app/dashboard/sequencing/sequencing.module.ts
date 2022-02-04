@@ -1,17 +1,12 @@
-import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { RouterModule } from '@angular/router'
 import { SharedModule } from '@app/shared/shared.module'
-import {
-  SequencingComponents,
-  SequencingEntryComponents,
-  SequencingProviders
-} from './'
+import { SequencingComponents, SequencingProviders } from './'
+import { SequencingRoutingModule } from './sequencing.routing'
 
 @NgModule({
-  imports: [CommonModule, RouterModule, SharedModule],
-  declarations: [...SequencingComponents, ...SequencingEntryComponents],
-  exports: [...SequencingComponents, ...SequencingEntryComponents],
-  providers: [...SequencingProviders]
+  imports: [SharedModule, SequencingRoutingModule],
+  declarations: SequencingComponents,
+  exports: SequencingComponents,
+  providers: SequencingProviders
 })
 export class SequencingModule {}

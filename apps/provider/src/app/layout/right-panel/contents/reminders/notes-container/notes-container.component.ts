@@ -1,17 +1,18 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { resolveConfig } from '@app/config/section'
-import { FormSubmission } from '@app/dashboard/library/forms/models'
 import {
+  ContextService,
   FormSubmissionsDatabase,
-  FormSubmissionsDatasource
-} from '@app/dashboard/library/forms/services'
-import { ContextService, NotifierService } from '@app/service'
+  FormSubmissionsDatasource,
+  NotifierService
+} from '@app/service'
 import { ConsultationListingResponse, NamedEntity } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { FormSubmission as FormSubmissionService } from '@coachcare/sdk'
+import { FormSubmission } from '@app/shared/model'
 
 export interface LayoutNote extends ConsultationListingResponse {
   isDeletable?: boolean
