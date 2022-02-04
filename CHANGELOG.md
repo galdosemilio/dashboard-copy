@@ -1,3 +1,24 @@
+# [1.64.0](https://github.com/coachcare/dashboard/compare/v1.63.1...v1.64.0) (2022-02-04)
+
+
+### Bug Fixes
+
+* add sticky header to ccr table [FRON-2556] ([0505254](https://github.com/coachcare/dashboard/commit/0505254d6ef2eaf99dc66e1b1e2704564dfea5ba))
+* adjust label of BMR options [FRON-2573] ([80952ab](https://github.com/coachcare/dashboard/commit/80952ab0d4cb49dca8bf22a78b3523b5effc6e76))
+* adjusted table scroll and actions alignment [FRON-2590] ([5776d04](https://github.com/coachcare/dashboard/commit/5776d044c609010cfd39df8792cb5b9c18cceaf5))
+* adjusted url redirect resolver [FRON-2585] ([ef82b81](https://github.com/coachcare/dashboard/commit/ef82b81a51f82a988b9fedcf6bf72742fc149b44))
+* background color of header in table [FRON-2583] ([cfcbabd](https://github.com/coachcare/dashboard/commit/cfcbabd0032068221bd3650fceaa8bb17ab48324))
+* minor sass adjustments to project [FRON-2608] ([44cc2a2](https://github.com/coachcare/dashboard/commit/44cc2a2d7967acf28479dad6802f1d4a583bf574))
+* solved language dialog alignment [FRON-2582] ([e5ae4ec](https://github.com/coachcare/dashboard/commit/e5ae4ecc3b750f22b465be03785b391b2a8e8c11))
+* update list view, add item details view [FRON-2440] ([128edb1](https://github.com/coachcare/dashboard/commit/128edb1c368aa993d526ad12622048490a972ed4))
+
+
+### Features
+
+* updated wellcore layout and appointments page [FRON-2577|FRON-2597] ([ad966c0](https://github.com/coachcare/dashboard/commit/ad966c0aeeadc52423650ce0beff8193a7f8c76d))
+* upgraded ng, nx, and material to v13 [FRON-2570] ([0b7b19b](https://github.com/coachcare/dashboard/commit/0b7b19bc06f490723d2bced571191cd47b0dd089))
+* upgraded several minor dependencies [FRON-2587] ([1b72b1c](https://github.com/coachcare/dashboard/commit/1b72b1c1ad591789638e2732719f0d5dcf484f0d))
+
 ## [1.63.1](https://github.com/coachcare/dashboard/compare/v1.63.0...v1.63.1) (2022-01-19)
 
 
