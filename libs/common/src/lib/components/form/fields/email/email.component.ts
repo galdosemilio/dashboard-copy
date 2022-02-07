@@ -46,6 +46,7 @@ import { MatInput } from '@coachcare/material'
 })
 export class EmailFormFieldComponent implements ControlValueAccessor, OnInit {
   @Input() formControlName: string
+  @Input() floatLabel: string = 'always'
   @Input() focus: any
 
   @Input() disabled: any

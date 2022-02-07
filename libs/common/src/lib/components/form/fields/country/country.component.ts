@@ -50,6 +50,7 @@ import { CountryProvider } from '@coachcare/sdk'
 export class CountryFormFieldComponent implements ControlValueAccessor, OnInit {
   @Input() formControlName: string
 
+  @Input() floatLabel: string
   @Input() disabled: any
   @Input() placeholder: string
   @Input() priorityCountries: any[] = []

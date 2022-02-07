@@ -20,26 +20,26 @@
   <div formGroupName="organization">
     <div class="section-header">{{ 'PAGE.REGISTER.STEP1.DEFAULT.CLINIC_INFORMATION' | translate }}</div>
 
-    <mat-form-field>
+    <mat-form-field floatLabel='never'>
       <input matInput formControlName="name" [placeholder]="'GLOBAL.CLINIC_NAME' | translate">
     </mat-form-field>
     <ng-container formGroupName="address">
-      <mat-form-field>
+      <mat-form-field floatLabel='never'>
         <input matInput formControlName="street" [placeholder]="'GLOBAL.STREET_ADDRESS' | translate">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field floatLabel='never'>
         <input matInput formControlName="city" [placeholder]="'GLOBAL.CITY' | translate">
       </mat-form-field>
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0px">
-        <mat-form-field fxFlex="1 1 33%">
+        <mat-form-field floatLabel='never' fxFlex="1 1 33%">
           <input matInput formControlName="state" [placeholder]="'GLOBAL.STATE' | translate">
         </mat-form-field>
 
-        <mat-form-field fxFlex="1 1 33%">
+        <mat-form-field floatLabel='never' fxFlex="1 1 33%">
           <input matInput [ccrNumberOnly]="numericPostalCode" formControlName="postalCode" [placeholder]="'GLOBAL.POSTAL_CODE' | translate">
         </mat-form-field>
 
-        <ccr-form-field-country fxFlex="1 1 33%" formControlName="country" [placeholder]="'GLOBAL.COUNTRY' | translate"></ccr-form-field-country>
+        <ccr-form-field-country floatLabel='never' fxFlex="1 1 33%" formControlName="country" [placeholder]="'GLOBAL.COUNTRY' | translate"></ccr-form-field-country>
       </div>
     </ng-container>
   </div>
@@ -48,20 +48,21 @@
     <div class="section-header">{{ 'PAGE.REGISTER.STEP1.DEFAULT.ACCOUNT_INFORMATION' | translate }}</div>
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="0px">
-      <mat-form-field fxFlex="1 1 auto">
+      <mat-form-field floatLabel='never' fxFlex="1 1 auto">
         <input matInput formControlName="firstName" [placeholder]="'GLOBAL.FIRST_NAME' | translate">
       </mat-form-field>
-      <mat-form-field fxFlex="1 1 auto">
+      <mat-form-field floatLabel='never' fxFlex="1 1 auto">
         <input matInput formControlName="lastName" [placeholder]="'GLOBAL.LAST_NAME' | translate">
       </mat-form-field>
     </div>
 
     <ccr-form-field-email
+      floatLabel='never'
       formControlName="email"
       [placeholder]="'GLOBAL.EMAIL_ADDRESS' | translate"
     ></ccr-form-field-email>
 
-    <mat-form-field>
+    <mat-form-field floatLabel='never'>
       <input matInput ccrNumberOnly formControlName="phone" [placeholder]="'GLOBAL.PHONE_NUMBER' | translate">
     </mat-form-field>
   </div>
