@@ -1,0 +1,101 @@
+<section fxFlex>
+  <header fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+    <h4 class="title" fxFlex>{{ 'BOARD.COMMUNICATION' | translate }}</h4>
+    <button
+      *ngIf="mode === 'readonly'"
+      (click)="setMode('edit')"
+      color="accent"
+      mat-flat-button>
+        {{ 'GLOBAL.EDIT' | translate }}
+    </button>
+  </header>
+
+  <form [formGroup]="form" (submit)="onSubmit()" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accPhoneNumber" fxFlex="30%">{{ 'BOARD.PHONE_NUMBER' | translate }}</label>
+      <input
+        [placeholder]="'BOARD.PHONE_NUMBER' | translate"
+        [readonly]="readonly"
+        formControlName="phoneNumber"
+        fxFlex
+        id="accPhoneNumber"
+        type="tel">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accEmail" fxFlex="30%">{{ 'BOARD.EMAIL' | translate }}</label>
+      <input
+        [placeholder]="'BOARD.EMAIL' | translate"
+        [readonly]="readonly"
+        formControlName="email"
+        fxFlex
+        id="accEmail"
+        type="email">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accHomeAddress" fxFlex="30%">{{ 'BOARD.HOME_ADDRESS' | translate }}</label>
+      <input
+        [placeholder]="'BOARD.HOME_ADDRESS' | translate"
+        [readonly]="readonly"
+        formControlName="address1"
+        fxFlex
+        id="accHomeAddress"
+        type="text">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accCity" fxFlex="30%">{{ 'BOARD.CITY_STATE' | translate }}</label>
+      <input
+      [placeholder]="'BOARD.CITY' | translate"
+      [readonly]="readonly"
+      formControlName="city"
+      fxFlex id="accCity"
+       type="text">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accState" fxFlex="30%">&nbsp;</label>
+      <input
+        [placeholder]="'BOARD.STATE' | translate"
+        [readonly]="readonly"
+        formControlName="state"
+        fxFlex
+        id="accState"
+        type="text">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accZipCode" fxFlex="30%">{{ 'BOARD.ZIPCODE' | translate }}</label>
+      <input
+        [placeholder]="'BOARD.ZIPCODE' | translate"
+        [readonly]="readonly"
+        formControlName="postalCode"
+        fxFlex
+        id="accZipCode"
+        type="text">
+    </div>
+
+    <div *ngIf="mode === 'edit'"  fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+      <button
+      [disabled]="isLoading"
+      (click)="setMode('readonly')"
+      color="accent"
+      mat-button
+      type="button">
+        {{ 'BOARD.DISCARD' | translate }}
+      </button>
+      <button
+        [disabled]="form.invalid || isLoading"
+        color="accent"
+        mat-flat-button
+        type="submit">
+        {{ 'GLOBAL.SAVE' | translate }}
+      </button>
+    </div>
+  </form>
+</section>
+
+<ng-template #emptyEntry>
+  <div class="empty-entry-container">-</div>
+</ng-template>

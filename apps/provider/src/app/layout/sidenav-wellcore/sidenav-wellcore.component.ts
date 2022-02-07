@@ -175,7 +175,18 @@ export class SidenavWellcoreComponent
         route: 'profile',
         navRoute: 'profile',
         icon: 'people',
-        isAllowedForPatients: true
+        isAllowedForPatients: true,
+        children: [
+          {
+            code: SidenavOptions.ACCOUNT_OVERVIEW,
+            navName: _('SIDENAV.OVERVIEW'),
+            navRoute: 'profile',
+            icon: 'analytics',
+            queryParams: { s: 'overview' },
+            isAllowedForPatients: true,
+            isHiddenForProviders: true
+          }
+        ]
       },
       {
         code: SidenavOptions.DIGITAL_LIBRARY,

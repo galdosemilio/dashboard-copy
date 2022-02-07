@@ -1,0 +1,91 @@
+<section fxFlex>
+  <header fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+    <h4 class="title" fxFlex>{{ 'BOARD.PERSONAL_INFO' | translate }}</h4>
+    <button
+      *ngIf="mode === 'readonly'"
+      (click)="setMode('edit')"
+      color="accent"
+      mat-flat-button>
+        {{ 'GLOBAL.EDIT' | translate }}
+    </button>
+  </header>
+
+  <form [formGroup]="form" (submit)="onSubmit()" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accFirstName" fxFlex="30%">{{ 'BOARD.FIRST_NAME' | translate }}</label>
+      <input
+        [placeholder]="'BOARD.FIRST_NAME' | translate"
+        [readonly]="readonly"
+        formControlName="firstName"
+        fxFlex
+        id="accLastName"
+        type="text">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accLastName" fxFlex="30%">{{ 'BOARD.LAST_NAME' | translate }}</label>
+      <input
+        [placeholder]="'BOARD.LAST_NAME' | translate"
+        [readonly]="readonly"
+        formControlName="lastName"
+        fxFlex
+        id="accLastName"
+        type="text">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accBirthdate" fxFlex="30%">{{ 'BOARD.BIRTHDATE' | translate }}</label>
+      <input
+        [placeholder]="'BOARD.BIRTHDATE' | translate"
+        [readonly]="readonly"
+        formControlName="birthdate"
+        fxFlex
+        id="accBirthdate"
+        type="date">
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accHeight" fxFlex="30%">{{ 'BOARD.HEIGHT' | translate }}</label>
+      <ccr-form-field-height
+        [readonly]="readonly"
+        floatLabel="never"
+        formControlName="height"
+        unitStyle="embedded">
+      </ccr-form-field-height>
+    </div>
+
+    <div *ngIf="mode === 'readonly'" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accWeight" fxFlex="30%">{{ 'MEASUREMENT.WEIGHT' | translate }}</label>
+      <input
+        *ngIf="form.value.weight; else emptyEntry"
+        [placeholder]="'MEASUREMENT.WEIGHT' | translate"
+        [readonly]="readonly"
+        formControlName="weight"
+        fxFlex
+        id="accWeight"
+        type="text">
+    </div>
+
+    <div *ngIf="mode === 'edit'"  fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+      <button
+      [disabled]="isLoading"
+      (click)="setMode('readonly')"
+      color="accent"
+      mat-button
+      type="button">
+        {{ 'BOARD.DISCARD' | translate }}
+      </button>
+      <button
+        [disabled]="form.invalid || isLoading"
+        color="accent"
+        mat-flat-button
+        type="submit">
+        {{ 'GLOBAL.SAVE' | translate }}
+      </button>
+    </div>
+  </form>
+</section>
+
+<ng-template #emptyEntry>
+  <div class="empty-entry-container">-</div>
+</ng-template>

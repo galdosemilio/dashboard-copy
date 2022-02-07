@@ -3,6 +3,7 @@ import { SidenavOptions } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 import { WellcoreDashboardComponent } from '@app/dashboard/panel'
 import { PackageEnrollComponent } from '@app/shared/components/package-enroll/package-enroll.component'
+import { WellcoreProfileComponent } from '@app/dashboard/profile/layouts'
 
 export const WellCoreTestSectionConfig: SectionConfigDetails = {
   GLOBAL: {
@@ -12,7 +13,10 @@ export const WellCoreTestSectionConfig: SectionConfigDetails = {
     LAYOUT: {
       component: WellcoreLayoutComponent
     },
-    LOGIN_SITE_URL: 'https://test.my.teamwellcore.com/'
+    LOGIN_SITE_URL: 'https://test.my.teamwellcore.com/',
+    PROFILE: {
+      component: WellcoreProfileComponent
+    }
   },
   SIDENAV: {
     PATIENT_SHOWN_OPTIONS: [SidenavOptions.TEST_RESULTS]
@@ -44,7 +48,10 @@ export const WellCoreProdSectionConfig: SectionConfigDetails = {
     LAYOUT: {
       component: WellcoreLayoutComponent
     },
-    LOGIN_SITE_URL: 'https://my.teamwellcore.com/'
+    LOGIN_SITE_URL: 'https://my.teamwellcore.com/',
+    PROFILE: {
+      component: WellcoreProfileComponent
+    }
   },
   SIDENAV: {
     PATIENT_SHOWN_OPTIONS: [SidenavOptions.TEST_RESULTS]

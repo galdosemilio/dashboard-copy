@@ -1,11 +1,12 @@
 <div
   (click)="editable ? file.click() : null"
+  [class.ccr-size-giant]="size === 'giant'"
   [class.ccr-size-bigger]="size === 'bigger'"
   [class.ccr-size-big]="size === 'big'"
   [class.ccr-size-messages]="size === 'messages'"
 >
   <img #avatar="ccrAvatar" [ccrAvatar]="account">
 
-  <mat-icon>camera_alt</mat-icon>
+  <mat-icon *ngIf="editable">camera_alt</mat-icon>
   <input #file type="file" accept="image/*" style="display: none" (change)="uploadAvatar($event)">
 </div>

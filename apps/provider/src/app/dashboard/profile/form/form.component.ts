@@ -11,13 +11,28 @@ import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { ContextService, CurrentAccount } from '@app/service'
 import { FormUtils, MEASUREMENT_UNITS } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
-import { AccUpdateRequest, TimezoneResponse } from '@coachcare/sdk'
+import { AccUpdateRequest, Gender, TimezoneResponse } from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
 import { Timezone } from '@coachcare/sdk'
+import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 import * as moment from 'moment'
+
+export interface AccountFormProps {
+  birthday: moment.Moment
+  id: string
+  firstName: string
+  lastName: string
+  phone: { phone: string; countryCode: string }
+  email: string
+  gender: Gender
+  height: number
+  timezone: string
+  measurementPreference: UserMeasurementPreferenceType
+  preferredLocales: string[]
+}
 
 @UntilDestroy()
 @Component({

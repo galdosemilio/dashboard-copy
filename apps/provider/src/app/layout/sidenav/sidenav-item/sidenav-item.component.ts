@@ -16,6 +16,7 @@ export interface SidenavItem {
   navRoute?: string
   navLink?: string
   navAction?: string
+  queryParams?: { [key: string]: unknown }
   route?: string
   icon?: string
   isAllowedForPatients?: boolean

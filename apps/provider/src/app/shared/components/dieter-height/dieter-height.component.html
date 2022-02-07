@@ -1,13 +1,13 @@
 <ng-container [formGroup]="form" [ngSwitch]="preference">
 
   <ng-container *ngSwitchCase="'metric'">
-    <mat-form-field class="ccr-align-right">
+    <mat-form-field class="ccr-align-right" [floatLabel]="floatLabel">
       <input matInput type="number"
-      [attr.hidden]="isReadonly ? '' : null"
+      [attr.hidden]="readonly ? '' : null"
       [placeholder]="'BOARD.HEIGHT' | translate"
-      [required]="isRequired"
-      [readonly]="isReadonly"
-      [attr.disabled]="isReadonly ? '' : null"
+      [required]="required"
+      [readonly]="readonly"
+      [attr.disabled]="readonly ? '' : null"
       formControlName="cm"
       (change)="$event.stopPropagation()">
       <span matSuffix>{{ 'height' | unitLabel | translate }}</span>
@@ -17,19 +17,25 @@
   <ng-container *ngSwitchDefault>
     <div fxFlex class="ccr-subgrid" fxLayout="row" fxLayout.xs="column" fxLayoutGap="2%" fxLayoutGap.xs="0" fxLayoutWrap.xs>
       <div fxLayout="row" fxLayoutAlign=" center" fxFlex.gt-xs="49%" fxFlex.xs="grow">
-        <mat-form-field class="ccr-align-right">
-          <mat-select [required]="isRequired" formControlName="ft" [placeholder]="'BOARD.HEIGHT' | translate">
-            <mat-option class="ccr-align-right" *ngFor="let feet of feets" [value]="feet">{{ feet }}</mat-option>
+        <mat-form-field class="ccr-align-right" [floatLabel]="floatLabel">
+          <mat-select [required]="required" formControlName="ft" [placeholder]="'BOARD.HEIGHT' | translate">
+            <mat-option class="ccr-align-right" *ngFor="let feet of feets" [value]="feet">
+              {{ feet }}
+              <span *ngIf="unitStyle === 'embedded'">{{ 'height' | unitLabel | translate }}</span>
+            </mat-option>
           </mat-select>
-          <span matSuffix>{{ 'height' | unitLabel | translate }}</span>
+          <span *ngIf="unitStyle === 'separate'" matSuffix>{{ 'height' | unitLabel | translate }}</span>
         </mat-form-field>
       </div>
       <div fxLayout="row" fxLayoutAlign=" center" fxFlex.gt-xs="49%" fxFlex.xs="grow">
-        <mat-form-field class="ccr-align-right">
-          <mat-select [required]="isRequired" formControlName="in" floatLabel="never">
-            <mat-option class="ccr-align-right" *ngFor="let inch of inches" [value]="inch">{{ inch }}</mat-option>
+        <mat-form-field class="ccr-align-right" [floatLabel]="floatLabel">
+          <mat-select [required]="required" formControlName="in">
+            <mat-option class="ccr-align-right" *ngFor="let inch of inches" [value]="inch">
+              {{ inch }}
+              <span *ngIf="unitStyle === 'embedded'">{{ 'circumference' | unitLabel | translate }}</span>
+            </mat-option>
           </mat-select>
-          <span matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
+          <span *ngIf="unitStyle === 'separate'" matSuffix>{{ 'circumference' | unitLabel | translate }}</span>
         </mat-form-field>
       </div>
     </div>

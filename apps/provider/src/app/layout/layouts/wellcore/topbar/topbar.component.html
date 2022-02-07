@@ -20,7 +20,12 @@
     <div class="actions-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
       <mat-icon class="clickable" (click)="showLanguagesDialog()">language</mat-icon>
       <mat-icon class="clickable" (click)="logout()">logout</mat-icon>
-      <ccr-avatar [account]="account.id" class="clickable" routerLink="/profile" size="messages"></ccr-avatar>
+      <ccr-avatar
+        [account]="account.id"
+        class="clickable wellcore-avatar"
+        routerLink="/profile"
+        size="messages">
+      </ccr-avatar>
     </div>
   </div>
 

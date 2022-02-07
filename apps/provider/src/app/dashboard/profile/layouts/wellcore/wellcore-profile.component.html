@@ -1,0 +1,115 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <section class="main" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="35px">
+    <ccr-avatar
+      [account]="account.id"
+      [editable]="false"
+      class="wellcore-avatar"
+      fxHide.xs
+      size="giant">
+    </ccr-avatar>
+
+    <div
+      fxFlex
+      fxLayout="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.lt-sm="start stretch"
+      fxLayoutGap="10px">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.lt-sm="space-between center"
+        fxLayoutGap="25px">
+        <ccr-avatar
+          [account]="account.id"
+          [editable]="false"
+          class="wellcore-avatar"
+          fxHide
+          fxShow.xs
+          size="messages">
+        </ccr-avatar>
+        <h4 class="title" fxFlex>{{ account.firstName }} {{ account.lastName }}</h4>
+      </div>
+
+      <div
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.lt-sm="space-between center"
+        fxLayoutGap="35px">
+        <p *ngIf="address" class="profile-subtitle">
+          <mat-icon>place</mat-icon>
+          <span>{{ address.city }}, {{address.stateProvince | uppercase}}</span>
+        </p>
+
+        <p class="profile-subtitle">
+          <mat-icon>schedule</mat-icon>
+          <span>{{ 'BOARD.MEMBER_SINCE' | translate:{date: account.createdAt | amDateFormat: 'YYYY'} }}</span>
+        </p>
+      </div>
+
+      <div
+      *ngIf="canSelfSchedule; else noSelfSchedule"
+      fxLayout="row"
+      fxLayout.lt-sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.lt-sm="start stretch"
+      fxLayoutGap="25px">
+        <button
+          *ngIf="!nextMeeting && !pastMeeting"
+          [routerLink]="['/new-appointment']"
+          color="accent"
+          mat-flat-button>
+          {{ 'BOARD.SCHEDULE_APPOINTMENT' | translate }}
+        </button>
+
+        <div
+          *ngIf="nextMeeting"
+          class="appointment-info-container"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px">
+          <h4 class="subtitle">{{ nextMeeting.date | amDateFormat:'MMM D, YYYY' }}</h4>
+          <p class="profile-subtitle">{{ 'BOARD.NEXT_APPOINTMENT' | translate }}</p>
+        </div>
+
+        <div
+          *ngIf="pastMeeting"
+          class="appointment-info-container past"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="5px">
+          <h4 class="subtitle">{{ pastMeeting.date | amDateFormat:'MMM D, YYYY' }}</h4>
+          <p class="profile-subtitle">{{ 'BOARD.LAST_APPOINTMENT' | translate }}</p>
+        </div>
+      </div>
+
+      <mat-tab-group color="accent">
+        <mat-tab [label]="'SIDENAV.OVERVIEW' | translate"></mat-tab>
+      </mat-tab-group>
+    </div>
+  </section>
+
+  <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="space-between stretch"
+    fxLayoutAlign.lt-md="start stretch"
+    fxLayoutGap="15px">
+    <app-account-personal-info [accountId]="account.id" initialMode="readonly" fxFlex></app-account-personal-info>
+    <app-account-contact-info [accountId]="account.id" initialMode="readonly" fxFlex></app-account-contact-info>
+  </div>
+</div>
+
+<ng-template #noSelfSchedule>
+  <section
+    class="warning"
+    fxLayout="row"
+    fxLayout.lt-sm="column"
+    fxLayoutAlign="stretch center"
+    fxLayoutAlign.lt-sm="start start"
+    fxLayoutGap="15px">
+    <h4 class="subtitle" fxFlex>
+      {{ 'GLOBAL.ATTENTION' | translate }}<br>
+      <span class="subtext" [innerHTML]="'BOARD.FINISH_ONBOARDING_TO_SCHEDULE_EMBEDDED' | translate"></span>
+    </h4>
+  </section>
+</ng-template>

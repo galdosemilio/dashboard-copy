@@ -53,37 +53,47 @@ import { FEETS } from '@app/shared/utils/units'
 export class HeightFormFieldComponent implements ControlValueAccessor, OnInit {
   form: FormGroup
 
+  @Input() floatLabel: 'always' | 'never' | 'auto' = 'auto'
   @Input()
   formControlName: string
 
   @Input()
-  disabled: any
+  disabled: boolean
   @Input()
   placeholder: string
   @Input()
-  readonly: any
+  set readonly(readonly: boolean) {
+    this._readonly = readonly
+
+    if (!this.form) {
+      return
+    }
+
+    if (this._readonly) {
+      this.form.disable()
+    } else {
+      this.form.enable()
+    }
+  }
+
+  get readonly(): boolean {
+    return this._readonly
+  }
   @Input()
-  required: any
+  required: boolean
+  @Input()
+  unitStyle: 'embedded' | 'separate' = 'separate'
 
   @Output()
   change = new EventEmitter<number>()
 
   _control: AbstractControl | undefined
+  _readonly: boolean
   value: number
 
   preference: AccountMeasurementPreferenceType
   feets = [3, 4, 5, 6, 7]
   inches = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-
-  get isDisabled() {
-    return this.disabled === '' || this.disabled === true
-  }
-  get isReadonly() {
-    return this.readonly === '' || this.readonly === true
-  }
-  get isRequired() {
-    return this.required === '' || this.required === true
-  }
 
   constructor(
     @Optional()
@@ -121,6 +131,10 @@ export class HeightFormFieldComponent implements ControlValueAccessor, OnInit {
           this.onChange(v)
       }
     })
+
+    if (this.readonly || this.disabled) {
+      this.form.disable()
+    }
   }
 
   propagateChange = (data: any) => {}
@@ -170,7 +184,7 @@ export class HeightFormFieldComponent implements ControlValueAccessor, OnInit {
   }
 
   validate(c: FormControl) {
-    if (this.isRequired && !this.isDisabled) {
+    if (this.required && !this.disabled) {
       if (!c.value) {
         return { ccrFieldHeight: 'required' }
       }

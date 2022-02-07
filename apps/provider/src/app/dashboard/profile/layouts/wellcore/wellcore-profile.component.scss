@@ -1,0 +1,95 @@
+@import 'variables';
+
+app-wellcore-profile {
+  mat {
+    &-ink-bar {
+      width: 64px;
+    }
+
+    &-tab-group {
+      margin-top: 10px;
+    }
+  }
+
+  section {
+    &.main {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  .appointment-info-container {
+    border: 1px solid var(--text-lightest);
+    margin-top: 15px;
+    padding: 15px 45px 15px 15px;
+
+    &.past {
+      color: var(--text-lighter);
+    }
+
+    p {
+      text-transform: capitalize;
+    }
+  }
+
+  .empty-entry-container {
+    font-weight: 300;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  .mat-tab {
+    &-body-wrapper {
+      padding: 0;
+
+      mat-tab-body {
+        display: none;
+      }
+    }
+
+    &-header {
+      border-bottom: none;
+    }
+
+    &-label {
+      min-width: 64px;
+      text-transform: capitalize;
+
+      &:focus {
+        background-color: transparent !important;
+      }
+
+      &-active {
+        color: var(--accent);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .profile-subtitle {
+    align-items: center;
+    color: var(--text-lighter);
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    line-height: 14px;
+    margin-bottom: 0;
+
+    mat-icon {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  @media #{$small-and-down} {
+    app-account-contact-info,
+    app-account-personal-info {
+      section {
+        h4.title {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

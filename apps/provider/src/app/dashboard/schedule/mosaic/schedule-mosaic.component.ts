@@ -94,6 +94,7 @@ export class ScheduleMosaicComponent implements OnDestroy, OnInit {
       })
 
       const nextMeetings = await this.schedule.fetchAllMeeting({
+        account: this.context.user.id,
         limit: 2,
         organization: this.context.organizationId,
         range: {

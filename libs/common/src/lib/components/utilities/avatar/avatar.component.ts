@@ -9,7 +9,7 @@ import { AccountProvider, AvatarSubmitRequest } from '@coachcare/sdk'
 })
 export class CcrAvatarComponent {
   @Input() account: string
-  @Input() size: string
+  @Input() size: 'big' | 'bigger' | 'giant' | 'messages'
 
   @HostBinding('class.ccr-editable')
   @Input()

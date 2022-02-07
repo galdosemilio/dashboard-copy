@@ -27,7 +27,7 @@
 <ng-template #leaf>
 
   <mat-list-item *ngIf="sidenavItem.navRoute" class="mat-list-item {{levelClass}}" (click)="toggleMenu($event)"
-  [routerLink]="sidenavItem.navRoute" routerLinkActive="active">
+  [routerLink]="sidenavItem.navRoute" [queryParams]="sidenavItem.queryParams" routerLinkActive="active">
     <ccr-badge *ngIf="sidenavItem.badge">{{ sidenavItem.badge }}</ccr-badge>
     <ng-container *ngIf="!sidenavItem.fontIcon; else fontIcon">
       <mat-icon *ngIf="sidenavItem.icon !== null">{{ sidenavItem.icon }}</mat-icon>

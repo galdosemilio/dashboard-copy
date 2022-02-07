@@ -11,6 +11,7 @@ import {
 import { SectionConfigDetails } from './models/section.details'
 import { DefaultDashboardComponent } from '@app/dashboard/panel'
 import { _ } from '@app/shared/utils'
+import { DefaultProfileComponent } from '@app/dashboard/profile/layouts'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
@@ -83,7 +84,10 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     LAYOUT: {
       component: DefaultLayoutComponent
     },
-    LOGIN_SITE_URL: 'https://test.dashboard.coachcare.com'
+    LOGIN_SITE_URL: 'https://test.dashboard.coachcare.com',
+    PROFILE: {
+      component: DefaultProfileComponent
+    }
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: false
@@ -154,7 +158,10 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     LAYOUT: {
       component: DefaultLayoutComponent
     },
-    LOGIN_SITE_URL: 'https://dashboard.coachcare.com'
+    LOGIN_SITE_URL: 'https://dashboard.coachcare.com',
+    PROFILE: {
+      component: DefaultProfileComponent
+    }
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: false

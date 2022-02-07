@@ -1,6 +1,16 @@
+@import 'variables';
+
 ccr-form-field-height {
   .mat-form-field,
   .mat-form-field-infix {
     width: 100%;
+  }
+}
+
+@media #{$small-and-down} {
+  ccr-form-field-height {
+    .mat-form-field {
+      margin-bottom: 15px;
+    }
   }
 }

@@ -27,6 +27,11 @@ ccr-avatar {
       width: 56px;
     }
 
+    &.ccr-size-giant {
+      height: 200px;
+      width: 200px;
+    }
+
     &.ccr-size-messages {
       height: 42px;
       width: 42px;
@@ -35,6 +40,8 @@ ccr-avatar {
     img {
       // max-height: 100%; // FIXME this fits the width
       max-width: 100%;
+      height: 100%;
+      width: 100%;
     }
   }
 
