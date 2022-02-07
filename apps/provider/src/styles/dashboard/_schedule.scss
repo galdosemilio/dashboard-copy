@@ -67,7 +67,20 @@
         width: 13.3%;
       }
     }
+    tbody {
+      tr {
+        height: 25px;
+      }
+    }
   }
+  &.day {
+    tbody {
+      tr {
+        height: 50px;
+      }
+    }
+  }
+
   thead {
     display: none;
     vertical-align: middle;
@@ -89,7 +102,6 @@
       overflow: visible;
       width: 100%;
       display: table;
-      height: 25px;
       td {
         position: relative;
         overflow: visible;

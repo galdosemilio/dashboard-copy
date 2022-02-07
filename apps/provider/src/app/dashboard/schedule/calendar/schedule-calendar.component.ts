@@ -57,6 +57,13 @@ interface TimeBlockCell {
 
 type ScheduleCalendarTimeRange = 'month' | 'day' | 'week'
 
+const MEETING_SPACING_SIZE = 1
+const meetingHeightTimeRange = {
+  day: 50,
+  week: 25,
+  month: 100
+}
+
 @UntilDestroy()
 @Component({
   selector: 'app-schedule-calendar',
@@ -64,7 +71,8 @@ type ScheduleCalendarTimeRange = 'month' | 'day' | 'week'
   styleUrls: ['./schedule-calendar.component.scss']
 })
 export class ScheduleCalendarComponent
-  implements OnDestroy, OnInit, AfterViewChecked {
+  implements OnDestroy, OnInit, AfterViewChecked
+{
   @ViewChild('tbody', { static: false }) tbody: ElementRef
   @ViewChildren('trow') rows: Array<ElementRef>
 
@@ -283,7 +291,10 @@ export class ScheduleCalendarComponent
 
   public calculateHeight(meeting: Meeting): number {
     const diff = meeting.endDate.diff(meeting.date, 'minutes')
-    return (diff * 24) / 15
+    return (
+      (diff * meetingHeightTimeRange[this.timerange]) / 15 -
+      MEETING_SPACING_SIZE
+    )
   }
 
   public selectedDate(dates: DateNavigatorOutput): void {
