@@ -20,11 +20,6 @@ export interface DieterSummaryElement {
   lastWeekString?: string
 }
 
-export interface GenerateCSVArgs {
-  content: string
-  filename: string
-}
-
 export function calculateAverageWeeklyLoss(values: any[]): number {
   const valuesCopy = values.map((val) => ({ ...val }))
   const groupedValues = groupBy(valuesCopy, (value: any) =>
@@ -195,20 +190,6 @@ export function imageToDataURL(img: HTMLImageElement): string {
   ctx.drawImage(img, 0, 0)
   const dataURL = canvas.toDataURL('image/png')
   return dataURL
-}
-
-export function generateCSV(args: GenerateCSVArgs): void {
-  const csv = args.content
-  const filename = args.filename.replace(/\W/gi, '_')
-
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-  const link = document.createElement('a')
-  link.href = URL.createObjectURL(blob)
-  link.setAttribute('visibility', 'hidden')
-  link.download = `${filename}.csv`
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
 }
 
 export function getProgressPDFCellColor(value: number, key: string): string {

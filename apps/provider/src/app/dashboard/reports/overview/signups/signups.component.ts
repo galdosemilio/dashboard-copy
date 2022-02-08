@@ -13,9 +13,10 @@ import {
 } from '@app/dashboard/reports/services'
 import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
 import { ConfigService, ContextService, NotifierService } from '@app/service'
-import { generateCSV, ViewUtils } from '@app/shared'
+import { ViewUtils } from '@app/shared'
 import { TimelineUnit } from '@coachcare/sdk'
 import { delay } from 'rxjs/operators'
+import { CSVUtils } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -133,7 +134,7 @@ export class SignupsComponent implements OnInit, AfterViewInit, OnDestroy {
       csv += '\r\n'
     })
 
-    generateCSV({
+    CSVUtils.generateCSV({
       content: csv,
       filename: filename
     })

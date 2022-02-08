@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "account": {
+        "firstName": "John",
+        "id": "3",
+        "lastName": "Doe",
+        "startedAt": {
+          "local": "2017-10-04T07:15:21.284Z",
+          "utc": "2017-10-04T07:15:21.284Z"
+        }
+      },
+      "cohorts": [],
+      "organization": {
+        "id": "1",
+        "name": "test1"
+      }
+    }
+  ],
+  "pagination": {}
+}

@@ -16,8 +16,8 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { generateCSV } from '@app/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { CSVUtils } from '@coachcare/common/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
@@ -164,7 +164,7 @@ export class FormSubmissionsComponent implements OnDestroy, OnInit {
         csv += `\r\n`
       })
 
-      generateCSV({
+      CSVUtils.generateCSV({
         filename: this.title,
         content: csv
       })

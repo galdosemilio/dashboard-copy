@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation
@@ -24,12 +23,13 @@ import { _, PackageFilterComponent, unitConversion } from '@app/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { delay, filter } from 'rxjs/operators'
+import { debounceTime, delay, filter } from 'rxjs/operators'
 import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { DieterListingItem } from './../models'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
 import { convertToReadableFormat, DataPointTypes } from '@coachcare/sdk'
+import { PackageFilter } from '@app/shared/components/package-filter'
 
 @UntilDestroy()
 @Component({
@@ -38,8 +38,7 @@ import { convertToReadableFormat, DataPointTypes } from '@coachcare/sdk'
   styleUrls: ['./dieter-listing-with-phi.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DieterListingWithPhiComponent
-  implements AfterViewInit, OnInit, OnDestroy {
+export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
   @ViewChild(PackageFilterComponent, { static: true })
   packageFilterComp: PackageFilterComponent
 
@@ -51,9 +50,8 @@ export class DieterListingWithPhiComponent
 
   clinic: SelectedOrganization
   csvSeparator = ','
-  packageFilter: any
+  packageFilter?: PackageFilter
   refresh$: Subject<void> = new Subject<void>()
-  packages$: Subject<string[]> = new Subject<string[]>()
   sort: MatSort = new MatSort()
   source: DieterListingDataSource
   totalCount: number
@@ -74,8 +72,6 @@ export class DieterListingWithPhiComponent
   ngAfterViewInit(): void {
     this.recoverPagination()
   }
-
-  ngOnDestroy(): void {}
 
   ngOnInit(): void {
     // this.bus.trigger('organizations.enable-all');
@@ -106,8 +102,10 @@ export class DieterListingWithPhiComponent
     })
 
     this.source.errorHandler = errorHandler
-    this.source.addOptional(this.refresh$, () => ({ ...this.packageFilter }))
-    this.source.addOptional(this.packages$, () => ({}))
+    this.source.addOptional(this.refresh$.pipe(debounceTime(300)), () => ({
+      ...this.packageFilter,
+      pkg: this.packageFilter?.pkg.map((entry) => entry.id)
+    }))
     this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
       this.totalCount = this.source.totalCount || 0
       this.cdr.detectChanges()
@@ -154,7 +152,7 @@ export class DieterListingWithPhiComponent
 
   onPackageFilter(filter): void {
     this.packageFilter = filter
-    this.packages$.next()
+    this.refresh$.next()
   }
 
   onSorted(): void {

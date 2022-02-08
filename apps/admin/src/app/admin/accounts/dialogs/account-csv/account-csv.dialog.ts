@@ -8,7 +8,7 @@ import {
 import { OrganizationAutocompleterComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'
-import { escapeCSVText } from '@coachcare/common/shared'
+import { CSVUtils } from '@coachcare/common/shared'
 
 @Component({
   selector: 'ccr-account-csv-dialog',
@@ -116,7 +116,9 @@ export class AccountCSVDialogComponent implements OnInit {
 
       if (account.organization) {
         csv += `${separator}`
-        csv += `"${escapeCSVText(account.organization.name || '')}"${separator}`
+        csv += `"${CSVUtils.escapeCSVText(
+          account.organization.name || ''
+        )}"${separator}`
         csv += `"${account.organization.id || ''}"`
       }
 

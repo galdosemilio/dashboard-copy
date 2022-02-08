@@ -25,6 +25,9 @@ import { Subject } from 'rxjs'
 import { Cohort } from '@coachcare/sdk'
 import { resolveConfig } from '@app/config/section'
 import { ActivatedRoute, Router } from '@angular/router'
+import { PackageFilter } from '@app/shared/components/package-filter'
+import { CSVUtils } from '@coachcare/common/shared'
+import { debounceTime } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -33,7 +36,8 @@ import { ActivatedRoute, Router } from '@angular/router'
   styleUrls: ['./cohort-weight-loss.component.scss']
 })
 export class CohortWeightLossComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
   @ViewChild(MatSort, { static: true })
@@ -49,6 +53,9 @@ export class CohortWeightLossComponent
 
   // refresh trigger
   refresh$ = new Subject<void>()
+  pkgFilter$ = new Subject<void>()
+
+  private pkgFilter?: PackageFilter
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -92,6 +99,10 @@ export class CohortWeightLossComponent
       endDate: this.data ? moment(this.data.endDate).format('YYYY-MM-DD') : null
     }))
 
+    this.source.addOptional(this.pkgFilter$.pipe(debounceTime(300)), () => ({
+      package: this.pkgFilter?.pkg[0]?.id
+    }))
+
     this.store
       .pipe(untilDestroyed(this), select(criteriaSelector))
       .subscribe((reportsCriteria: ReportsCriteria) => {
@@ -113,15 +124,22 @@ export class CohortWeightLossComponent
     this.source.disconnect()
   }
 
-  downloadCSV() {
-    const criteria = this.source.args
-    criteria.limit = 'all'
-    criteria.offset = 0
-    void this.database.fetchMeasurementCohortReport(criteria).then((res) => {
+  async downloadCSV(): Promise<void> {
+    try {
+      const criteria = this.source.args
+      criteria.limit = 'all'
+      criteria.offset = 0
+      const res = await this.database.fetchMeasurementCohortReport(criteria)
+
       if (!res.data.length) {
-        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+        throw new Error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
-      const filename = `Patient_Cohort_Weight_Loss_Report.csv`
+
+      const filename = `Patient_Cohort_Weight_Loss_Report${
+        this.pkgFilter
+          ? '-Phase_' + CSVUtils.sanitizeFileName(this.pkgFilter?.pkg[0].title)
+          : ''
+      }`
       let csv = ''
       csv += 'Cohort Weight Loss\r\n'
       csv +=
@@ -173,14 +191,18 @@ export class CohortWeightLossComponent
           `"${d.organization.name}"` +
           '\r\n'
       })
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-    })
+
+      CSVUtils.generateCSV({
+        filename,
+        content: csv
+      })
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  public onPackageFilter(filter: PackageFilter): void {
+    this.pkgFilter = filter
+    this.pkgFilter$.next()
   }
 }

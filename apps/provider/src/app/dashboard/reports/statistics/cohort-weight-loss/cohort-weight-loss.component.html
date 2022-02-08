@@ -8,6 +8,15 @@
     [description]="'REPORTS.COHORT_WEIGHT_LOSS_REPORT_DESCRIPTION' | translate"
     ></ccr-popup-description>
   </h3>
+</div>
+
+<div class="ccr-htools" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+  <ccr-package-filter
+    [confirmText]="'BOARD.FILTER' | translate"
+    (change)="onPackageFilter($event);"
+    mode="single"
+    fxFlex>
+  </ccr-package-filter>
 
   <button mat-button class="ccr-align-center"
   [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()">

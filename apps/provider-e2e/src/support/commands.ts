@@ -8,6 +8,7 @@ type ValidOrganization =
   | 'apollo-us'
   | 'wellcore'
   | 'musclewise'
+  | 'idealyou'
 
 declare namespace Cypress {
   interface Chainable<Subject> {
@@ -61,6 +62,9 @@ Cypress.Commands.add('setOrganization', (org: ValidOrganization) => {
       break
     case 'musclewise':
       translatedOrg = 7537
+      break
+    case 'idealyou':
+      translatedOrg = 3235
       break
     default:
       translatedOrg = 1

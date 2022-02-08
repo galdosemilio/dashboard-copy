@@ -15,7 +15,6 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { generateCSV } from '@app/shared'
 import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
@@ -23,6 +22,7 @@ import { debounceTime, filter, first } from 'rxjs/operators'
 import { CreateClinicDialog } from './dialogs'
 import { ClinicsDatabase, ClinicsDataSource } from './services'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
+import { CSVUtils } from '@coachcare/common/shared'
 import { AllOrgPermissions } from '@coachcare/sdk'
 
 @UntilDestroy()
@@ -39,7 +39,8 @@ export class ClinicsComponent implements OnInit, OnDestroy {
   public clinic: SelectedOrganization
   public filterForm: FormGroup
   public permissions?: AllOrgPermissions
-  public permissions$: Subject<AllOrgPermissions> = new Subject<AllOrgPermissions>()
+  public permissions$: Subject<AllOrgPermissions> =
+    new Subject<AllOrgPermissions>()
   public query$: Subject<string> = new Subject<string>()
   public showCreateClinic = false
   public sort: MatSort = new MatSort()
@@ -154,7 +155,7 @@ export class ClinicsComponent implements OnInit, OnDestroy {
         csv += '\r\n'
       })
 
-      generateCSV({
+      CSVUtils.generateCSV({
         content: csv,
         filename: `${this.context.organization.name} Clinic Report`
       })

@@ -1,7 +1,7 @@
 import {
   Component,
   EventEmitter,
-  OnDestroy,
+  Input,
   OnInit,
   Output,
   ViewChild,
@@ -10,12 +10,13 @@ import {
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatMenu } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
+import { _ } from '@app/shared/utils'
 import { PackageData } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { PackageOrganization } from '@coachcare/sdk'
 
-interface PackageFilter {
-  pkg: string[]
+export interface PackageFilter {
+  pkg: PackageData[]
   ['pkg-filter']: 'any' | 'all'
 }
 
@@ -26,7 +27,10 @@ interface PackageFilter {
   styleUrls: ['./package-filter.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class PackageFilterComponent implements OnDestroy, OnInit {
+export class PackageFilterComponent implements OnInit {
+  @Input() mode: 'single' | 'multiple' = 'multiple'
+  @Input() confirmText = _('MENU.SEARCH')
+
   @Output()
   change: EventEmitter<PackageFilter> = new EventEmitter<PackageFilter>()
   @ViewChild('menu', { static: true }) menu: MatMenu
@@ -42,9 +46,7 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
     private packageOrganization: PackageOrganization
   ) {}
 
-  ngOnDestroy(): void {}
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.createForm()
     void this.fetchPackages()
 
@@ -55,17 +57,17 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
     })
   }
 
-  onClickAll(): void {
+  public onClickAll(): void {
     this.form.controls.granularity.setValue('all')
     this.onCloseMenu()
   }
 
-  onClickAny(): void {
+  public onClickAny(): void {
     this.form.controls.granularity.setValue('any')
     this.onCloseMenu()
   }
 
-  onCloseMenu(): void {
+  public onCloseMenu(): void {
     const controls = this.form.value
     const filteredPkgs = this.packages.filter(
       (pkg, index) => controls.packages[index]
@@ -73,20 +75,16 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
 
     this.change.emit({
       ['pkg-filter']: controls.granularity as any,
-      pkg: filteredPkgs.length ? filteredPkgs.map((pkg) => pkg.id) : []
+      pkg: filteredPkgs.length ? filteredPkgs : []
     })
   }
 
-  onDeselectAll(refresh = true): void {
-    Object.keys((this.form.controls.packages as FormArray).controls).forEach(
-      (key) => {
-        ;(this.form.controls.packages as FormArray).controls[key].setValue(
-          false,
-          {
-            emitEvent: false
-          }
-        )
-      }
+  public onDeselectAll(refresh = true): void {
+    Object.values((this.form.controls.packages as FormArray).controls).forEach(
+      (control) =>
+        control.setValue(false, {
+          emitEvent: false
+        })
     )
 
     if (!refresh) {
@@ -96,20 +94,32 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
     this.onCloseMenu()
   }
 
-  onSelectAll(): void {
-    Object.keys((this.form.controls.packages as FormArray).controls).forEach(
-      (key) => {
-        ;(this.form.controls.packages as FormArray).controls[key].setValue(
-          true,
-          {
-            emitEvent: false
-          }
-        )
-      }
+  public onSelectAll(): void {
+    Object.values((this.form.controls.packages as FormArray).controls).forEach(
+      (control) =>
+        control.setValue(true, {
+          emitEvent: false
+        })
     )
   }
 
-  resetFilters(refresh = true): void {
+  public packageClickHandler(index: number): void {
+    if (this.mode === 'multiple') {
+      return
+    }
+
+    const pkgFormArray: FormArray = this.form.get('packages') as FormArray
+
+    pkgFormArray.controls.forEach((arrayControl, idx) => {
+      if (index === idx) {
+        return
+      }
+
+      arrayControl.setValue(false, { emitEvent: false })
+    })
+  }
+
+  public resetFilters(refresh = true): void {
     this.onDeselectAll(refresh)
   }
 
@@ -123,9 +133,9 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
       ).data
 
       const packages = associations.map((association) => association.package)
-      packages.forEach(() =>
-        (this.form.controls.packages as FormArray).push(new FormControl(false))
-      )
+      const pkgsFormArray = this.form.controls.packages as FormArray
+
+      packages.forEach(() => pkgsFormArray.push(new FormControl(false)))
 
       this.packages = packages
     } catch (error) {
@@ -142,22 +152,27 @@ export class PackageFilterComponent implements OnDestroy, OnInit {
 
     this.form.valueChanges.subscribe((controls) => {
       let selectedAmount = 0
-      if (controls.packages && controls.packages.length) {
-        controls.packages.forEach((toggle) => {
-          if (toggle) {
-            ++selectedAmount
-          }
-        })
+
+      if (!controls.packages?.length) {
+        return
       }
+
+      controls.packages.forEach((toggle) => {
+        if (!toggle) {
+          return
+        }
+
+        ++selectedAmount
+      })
+
       this.selectedMoreThanOne = selectedAmount > 1
     })
 
     this.form.controls.toggle.valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((toggle) => {
-        ;(this.form.controls
-          .packages as FormArray).controls.forEach((control) =>
-          control.setValue(toggle)
+        ;(this.form.controls.packages as FormArray).controls.forEach(
+          (control) => control.setValue(toggle)
         )
       })
   }

@@ -5,7 +5,12 @@
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="true" xPosition="before">
 
-    <div class="hint-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div
+        *ngIf="mode === 'multiple'"
+        class="hint-container"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px">
         <mat-checkbox
         (click)="$event.stopPropagation();"
         formControlName="toggle"
@@ -25,7 +30,7 @@
         fxLayoutGap="10px">
             <mat-checkbox
             *ngFor="let package of packages; let i = index;"
-            (click)="$event.stopPropagation();"
+            (click)="packageClickHandler(i); $event.stopPropagation();"
             [formControlName]="i"
             labelPosition="after">
                 {{ package.title }}
@@ -51,7 +56,7 @@
         mat-stroked-button></button>
         <button
         *ngIf="!selectedMoreThanOne"
-        [innerHTML]="'MENU.SEARCH' | translate"
+        [innerHTML]="confirmText | translate"
         (click)="onClickAny();"
         class="quick-select-button"
         color="primary"
