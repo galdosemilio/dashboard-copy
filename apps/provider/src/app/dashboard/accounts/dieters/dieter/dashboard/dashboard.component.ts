@@ -1,17 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatSelect, MatSelectChange } from '@coachcare/material'
-import { Store } from '@ngrx/store'
-import { TranslateService } from '@ngx-translate/core'
 import { DieterDashboardSummary } from '@coachcare/sdk'
-
-import { CCRConfig } from '@app/config'
 import {
-  MeasurementDatabase,
-  MeasurementDataSource
-} from '@app/dashboard/accounts/dieters/services'
-import { ContextService, EventsService, NotifierService } from '@app/service'
+  ContextService,
+  EventsService,
+  MeasurementLabelService,
+  NotifierService
+} from '@app/service'
 import { _ } from '@app/shared'
-import { Subject } from 'rxjs'
+import { TypeGroupEntry } from '@app/shared/components/chart-v2'
 
 @Component({
   selector: 'app-dieter-dashboard',
@@ -19,29 +16,7 @@ import { Subject } from 'rxjs'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DieterDashboardComponent implements OnInit, OnDestroy {
-  currentMeasurement: string
-  isLoading = true
-  metrics: string[] = ['weight', 'bmi', 'bodyFat', 'leanMass', 'steps', 'total']
-  usesNewEndpoint: string[] = ['weight', 'bmi', 'bodyFat', 'leanMass']
-  refresh$: Subject<void> = new Subject<void>()
-  source: MeasurementDataSource | null
-  zendeskLink =
-    'https://coachcare.zendesk.com/hc/en-us/articles/360018829432-Viewing-the-Patient-Dashboard'
-
-  @ViewChild(MatSelect, { static: false })
-  activitySelector: MatSelect
-
-  constructor(
-    private translator: TranslateService,
-    private context: ContextService,
-    private bus: EventsService,
-    private notifier: NotifierService,
-    private database: MeasurementDatabase,
-    private store: Store<CCRConfig>,
-    public data: DieterDashboardSummary
-  ) {}
-
-  activityLevels = [
+  public activityLevels = [
     { value: -1, viewValue: _('SELECTOR.LEVEL.NONE') },
     { value: 0, viewValue: _('SELECTOR.LEVEL.SEDENTARY') },
     { value: 2, viewValue: _('SELECTOR.LEVEL.LOW') },
@@ -49,53 +24,60 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
     { value: 7, viewValue: _('SELECTOR.LEVEL.HIGH') },
     { value: 10, viewValue: _('SELECTOR.LEVEL.INTENSE') }
   ]
+  public typeGroups?: TypeGroupEntry[]
+  public zendeskLink =
+    'https://coachcare.zendesk.com/hc/en-us/articles/360018829432-Viewing-the-Patient-Dashboard'
 
-  ngOnInit() {
+  @ViewChild(MatSelect, { static: false })
+  activitySelector: MatSelect
+
+  constructor(
+    public data: DieterDashboardSummary,
+    private bus: EventsService,
+    private context: ContextService,
+    private measurementLabel: MeasurementLabelService,
+    private notifier: NotifierService
+  ) {}
+
+  public ngOnInit(): void {
+    void this.resolveTypeGroups()
+
     // default level is low
     void this.data.init(this.context.accountId)
-    this.currentMeasurement = this.metrics[0]
-
-    this.currentMeasurement = this.metrics[0]
-
-    this.source = new MeasurementDataSource(
-      this.notifier,
-      this.database,
-      this.translator,
-      this.context,
-      this.store
-    )
-    this.source.addDefault({
-      account: this.context.accountId,
-      useNewEndpoint: true
-    })
-    this.source.addOptional(this.refresh$, () => ({
-      useNewEndpoint: this.usesNewEndpoint.indexOf(this.currentMeasurement) > -1
-    }))
-
-    this.source.addOptional(this.refresh$, () => ({
-      useNewEndpoint: this.usesNewEndpoint.indexOf(this.currentMeasurement) > -1
-    }))
 
     this.bus.trigger('right-panel.component.set', 'reminders')
   }
 
-  ngOnDestroy() {
-    this.source.disconnect()
+  public ngOnDestroy(): void {
     this.bus.trigger('right-panel.component.set', '')
   }
 
-  chartChanged($event) {
-    this.currentMeasurement = $event.measurement
-    this.refresh$.next()
-  }
-
-  setupActivityLevel(): void {
+  public setupActivityLevel(): void {
     if (this.data.haveBMRData) {
       this.activitySelector.open()
     }
   }
 
-  selectActivityLevel(event: MatSelectChange): void {
+  public selectActivityLevel(event: MatSelectChange): void {
     this.data.update(event.value === -1 ? null : event.value)
+  }
+
+  private async resolveTypeGroups(): Promise<void> {
+    try {
+      const labels = await this.measurementLabel.fetchMeasurementLabels()
+      const dataPointTypes = await this.measurementLabel.fetchDataPointTypes()
+
+      this.typeGroups = labels
+        .map((label) => ({
+          id: label.id,
+          name: label.name,
+          types: dataPointTypes
+            .filter((typeEntry) => typeEntry.label.id === label.id)
+            .map((typeEntry) => typeEntry.type)
+        }))
+        .filter((typeGroup) => typeGroup.types.length > 0)
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 }

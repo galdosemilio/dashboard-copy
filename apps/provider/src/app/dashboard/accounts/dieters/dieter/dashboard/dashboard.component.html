@@ -68,36 +68,15 @@
         </mat-form-field>
       </div>
     </ccr-stat-single>
-
-    <!-- TODO update phase information in further tickets -->
-    <!--
-    <div class="stats-big clickable" fxFlex="1 0 100px" fxLayout="column" fxLayoutAlign="space-between">
-      <div class="metric-heading" fxLayoutAlign="center center">
-        <span>{{ 'STATS.PHASE' | translate }} </span>
-      </div>
-      <div class="metric-number phase-name">
-        {{ 'Weight Loss' }}
-      </div>
-      <div class="metric-text">
-        <div>
-          {{ 'Starting date' }}
-        </div>
-        <div>
-          {{ '07/13/2017' }}
-        </div>
-      </div>
-    </div>
-    -->
-  </div>
-
-  <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="data.isLoading">
-    <mat-spinner></mat-spinner>
   </div>
 </div>
 
-<app-dieter-measurements-chart fxLayout="column"
-  [source]="source"
-  [metrics]="metrics"
-  [views]="['week', 'month', 'year', 'alltime']"
-  (change)="chartChanged($event)"
-></app-dieter-measurements-chart>
+<ccr-measurements-chart-v2
+  *ngIf="typeGroups"
+  [embedded]="false"
+  [typeGroups]="typeGroups">
+</ccr-measurements-chart-v2>
+
+<div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="data.isLoading || !typeGroups">
+  <mat-spinner></mat-spinner>
+</div>

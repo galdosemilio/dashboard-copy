@@ -33,6 +33,9 @@ import {
 import { SYNTHETIC_DATA_TYPES } from '@app/dashboard/accounts/dieters/models'
 import { TranslateService } from '@ngx-translate/core'
 import { ChartPluginsOptions } from 'chart.js'
+export interface TypeGroupEntry extends NamedEntity {
+  types: NamedEntity[]
+}
 
 @Component({
   selector: 'ccr-measurements-chart-v2',
@@ -61,6 +64,8 @@ export class CcrMeasurementChartV2Component implements OnInit {
   get label(): MeasurementLabelEntry {
     return this._label
   }
+
+  @Input() typeGroups: TypeGroupEntry[]
 
   @Input()
   timeframe: MeasurementTimeframe = 'week'
@@ -109,9 +114,10 @@ export class CcrMeasurementChartV2Component implements OnInit {
     }
   ]
 
-  private dates$: Subject<DateNavigatorOutput> = new Subject<DateNavigatorOutput>()
+  private dates$: Subject<DateNavigatorOutput> =
+    new Subject<DateNavigatorOutput>()
   private _dates: DateNavigatorOutput
-  private _label: MeasurementLabelEntry
+  private _label?: MeasurementLabelEntry
 
   // views selector
   viewTypes: SelectOptions<MeasurementTimeframe> = [
@@ -135,8 +141,19 @@ export class CcrMeasurementChartV2Component implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.dates = this.dates ?? {
+      current: moment().startOf('day').toISOString(),
+      endDate: moment().endOf('week').toISOString(),
+      startDate: moment().startOf('week').toISOString()
+    }
+
     this.createDataSource()
     this.buildViews([])
+
+    if (this.typeGroups) {
+      this.source.type = this.typeGroups[0]?.types[0]?.id
+      this.refresh()
+    }
   }
 
   public refresh(): void {

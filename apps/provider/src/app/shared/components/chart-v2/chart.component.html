@@ -7,10 +7,20 @@
           <mat-select
           [placeholder]="'BOARD.MEASURE' | translate"
           [(ngModel)]="source.type" (selectionChange)="refresh()">
-            <mat-option *ngFor="let type of types" [value]="type.id"
-            class="ccr-align-center" [class.ccr-embedded]="embedded">
-              {{ type.name | translate | uppercase }}
-            </mat-option>
+            <ng-container *ngIf="types">
+              <mat-option *ngFor="let type of types" [value]="type.id"
+              class="ccr-align-center" [class.ccr-embedded]="embedded">
+                {{ type.name | translate | uppercase }}
+              </mat-option>
+            </ng-container>
+
+            <ng-container *ngIf="typeGroups">
+              <mat-optgroup *ngFor="let group of typeGroups" [label]="group.name">
+                <mat-option *ngFor="let type of group.types" [value]="type.id">
+                  {{ type.name | translate | uppercase }}
+                </mat-option>
+              </mat-optgroup>
+            </ng-container>
           </mat-select>
         </mat-form-field>
 
