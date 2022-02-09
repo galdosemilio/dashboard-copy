@@ -1101,6 +1101,7 @@
       "CONTACTS_NOT_AVAILABLE": "sind derzeit nicht verfügbar",
       "CONTACT_NOT_AVAILABLE": "Zur Zeit nicht erreichbar",
       "DISABLE_AVAILABILITY_MANAGEMENT": "Ihr Anbieterkonto ist mit einem externen Verordnungsverwaltungssystem verknüpft. Daher können Sie die Verfügbarkeit Ihres Zeitplans möglicherweise nicht über dieses Dashboard verwalten. Die Verfügbarkeit wird aus dem Rezeptverwaltungssystem importiert und hier automatisch aktualisiert.",
+      "DOWNLOAD_VIDEO_RECORDING_PERMISSION": "Ihr Konto muss direkt mit der Klinik {{organization}} verknüpft sein und über die Berechtigung „PHI des Patienten + Alle anzeigen“ verfügen, um auf diese Aufzeichnung zugreifen zu können",
       "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Ihr Konto ist nicht berechtigt, auf diese Funktion zugreifen",
       "HUNG_UP": "aufgehangen",
       "MULTIPLE_CSV_FILES": "In jeder Datei werden mehrere CSV-Dateien mit maximal 5000 Patienten heruntergeladen.",

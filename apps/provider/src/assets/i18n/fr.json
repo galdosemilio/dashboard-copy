@@ -1101,6 +1101,7 @@
       "CONTACTS_NOT_AVAILABLE": "sont indisponibles",
       "CONTACT_NOT_AVAILABLE": "est indisponible",
       "DISABLE_AVAILABILITY_MANAGEMENT": "Votre compte fournisseur est associé à un système externe de gestion des prescriptions. En tant que tel, vous ne pouvez pas gérer la disponibilité de votre planning à partir de ce tableau de bord. La disponibilité sera importée du système de gestion des prescriptions et sera automatiquement mise à jour ici.",
+      "DOWNLOAD_VIDEO_RECORDING_PERMISSION": "Votre compte doit être directement associé à la clinique {{organization}} et disposer de l'autorisation « Patient PHI + View All » pour accéder à cet enregistrement",
       "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Votre compte n'a pas l'autorisation d'accéder à cette fonctionnalité",
       "HUNG_UP": "raccrocher",
       "MULTIPLE_CSV_FILES": "Plusieurs fichiers CSV seront téléchargés avec un maximum de 5000 patients dans chaque fichier.",

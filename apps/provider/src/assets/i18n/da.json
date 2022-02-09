@@ -1101,6 +1101,7 @@
       "CONTACTS_NOT_AVAILABLE": "ikke tilgængelig i øjeblikket",
       "CONTACT_NOT_AVAILABLE": "er ikke tilgængelig på nuværende tidspunkt",
       "DISABLE_AVAILABILITY_MANAGEMENT": "Din udbyderkonto er knyttet til et eksternt styringssystem til recept. Som sådan kan du ikke styre din tidsplan tilgængelighed fra dette dashboard. Tilgængelighed importeres fra receptstyringssystemet og opdateres automatisk her.",
+      "DOWNLOAD_VIDEO_RECORDING_PERMISSION": "Din konto skal være direkte knyttet til {{organization}}-klinikken og have \"Patient PHI + Se alle\"-tilladelse for at få adgang til denne optagelse",
       "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "Din konto har ikke tilladelse til at få adgang til denne funktion",
       "HUNG_UP": "lagde på",
       "MULTIPLE_CSV_FILES": "Flere CSV-filer vil blive downloadet med maksimalt 5000 patienter i hver fil.",

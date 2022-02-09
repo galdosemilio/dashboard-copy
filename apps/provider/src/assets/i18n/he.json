@@ -1101,6 +1101,7 @@
       "CONTACTS_NOT_AVAILABLE": "כרגע לא זמינים",
       "CONTACT_NOT_AVAILABLE": "כרגע לא זמין",
       "DISABLE_AVAILABILITY_MANAGEMENT": "חשבון הספק שלך משויך למערכת ניהול מרשם חיצונית. ככזה, אינך יכול לנהל את זמינות לוח הזמנים מלוח המחוונים הזה. הזמינות תייבא ממערכת ניהול המרשמים ותעודכן כאן באופן אוטומטי.",
+      "DOWNLOAD_VIDEO_RECORDING_PERMISSION": "החשבון שלך חייב להיות משויך ישירות למרפאת {{organization}} ובעל הרשאת \"מטופל PHI + הצג הכל\" כדי לגשת להקלטה זו",
       "GENERAL_PERMISSION_ACCESS_NOTIFICATION": "החשבון שלך אין הרשאת גישה לתכונה זו",
       "HUNG_UP": "ניתוק",
       "MULTIPLE_CSV_FILES": "מספר קבצי CSV יורדו עם מקסימום 5000 חולים בכל קובץ.",

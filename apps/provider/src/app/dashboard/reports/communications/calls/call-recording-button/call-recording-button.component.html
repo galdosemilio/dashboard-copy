@@ -1,8 +1,8 @@
 <button
-[disabled]="isLoading || !hasRecording"
-[title]="'BOARD.DOWNLOAD_VIDEO_RECORDING' | translate"
+[disabled]="isLoading || !hasRecording || !hasDownloadPermission"
+[title]="!hasDownloadPermission ? ('NOTIFY.INFO.DOWNLOAD_VIDEO_RECORDING_PERMISSION' | translate:{organization: call.organization.name}) : ('BOARD.DOWNLOAD_VIDEO_RECORDING' | translate)"
 (click)="onClick()"
 mat-icon-button>
-  <mat-icon [class.disabled]="isLoading || !hasRecording">file_download</mat-icon>
+  <mat-icon [class.disabled]="isLoading || !hasRecording || !hasDownloadPermission">file_download</mat-icon>
 </button>
 

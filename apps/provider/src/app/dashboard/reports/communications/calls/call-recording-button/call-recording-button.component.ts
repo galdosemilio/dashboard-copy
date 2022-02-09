@@ -1,27 +1,46 @@
-import { Component, Input } from '@angular/core'
-import { NotifierService } from '@app/service'
+import { Component, Input, OnInit } from '@angular/core'
+import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
 import {
   CallRecordingEntry,
   CompletedCallRecording,
-  Interaction
+  Interaction,
+  InteractionSingle
 } from '@coachcare/sdk'
+import { UntilDestroy } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-call-recording-button',
   templateUrl: './call-recording-button.component.html',
   styleUrls: ['./call-recording-button.component.scss']
 })
-export class CallRecordingButtonComponent {
-  @Input() callId: string
+export class CallRecordingButtonComponent implements OnInit {
+  @Input() call: InteractionSingle
 
+  public hasDownloadPermission = true
   public hasRecording = true
   public isLoading: boolean
 
   constructor(
+    private context: ContextService,
     private interaction: Interaction,
     private notifier: NotifierService
   ) {}
+
+  public async ngOnInit(): Promise<void> {
+    this.hasDownloadPermission =
+      (await this.context.orgHasPerm(
+        this.call.organization.id,
+        'allowClientPhi',
+        true
+      )) &&
+      (await this.context.orgHasPerm(
+        this.call.organization.id,
+        'viewAll',
+        true
+      ))
+  }
 
   public async onClick(): Promise<void> {
     if (this.isLoading || !this.hasRecording) {
@@ -71,7 +90,7 @@ export class CallRecordingButtonComponent {
   > {
     try {
       return (
-        await this.interaction.getCallRecording({ id: this.callId })
+        await this.interaction.getCallRecording({ id: this.call.id })
       ).data.shift()
     } catch (error) {
       return

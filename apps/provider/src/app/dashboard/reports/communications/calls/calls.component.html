@@ -112,7 +112,8 @@
             <span>{{'BOARD.ACTIONS' | translate}}</span>
             <app-call-recording-button
                 *ngIf="showCallRecordingButton"
-                [callId]="row.id">
+                [call]="row"
+            >
             </app-call-recording-button>
             <button
             *ngIf="row.canBeDeleted && allowCreation"
