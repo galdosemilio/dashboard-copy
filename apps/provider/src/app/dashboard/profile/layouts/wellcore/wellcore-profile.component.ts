@@ -5,6 +5,8 @@ import { Meeting } from '@app/shared/model'
 import {
   AccountAddress,
   AddressProvider,
+  OrganizationAccess,
+  OrganizationProvider,
   PackageEnrollment,
   Schedule
 } from '@coachcare/sdk'
@@ -22,18 +24,21 @@ export class WellcoreProfileComponent implements OnInit {
   public address?: AccountAddress
   public canSelfSchedule = false
   public nextMeeting?: Meeting
+  public orgAssociation?: OrganizationAccess
   public pastMeeting?: Meeting
 
   constructor(
     private addressProvider: AddressProvider,
     private context: ContextService,
     private notifier: NotifierService,
+    private organization: OrganizationProvider,
     private packageEnrollment: PackageEnrollment,
     private schedule: Schedule
   ) {}
 
   public ngOnInit(): void {
     this.account = this.context.user
+    void this.fetchCreatedAtStatus()
     void this.fetchMeetings()
     void this.fetchBillingAddress()
     void this.fetchSelfScheduleStatus()
@@ -49,6 +54,25 @@ export class WellcoreProfileComponent implements OnInit {
       })
 
       this.address = billingAddress ?? null
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async fetchCreatedAtStatus(): Promise<void> {
+    try {
+      const { data: orgAssociations } =
+        await this.organization.getAccessibleList({
+          account: this.account.id,
+          query: this.context.organization.name,
+          status: 'active',
+          limit: 'all'
+        })
+
+      this.orgAssociation =
+        orgAssociations.find(
+          (entry) => entry.organization.id === this.context.organizationId
+        ) ?? null
     } catch (error) {
       this.notifier.error(error)
     }

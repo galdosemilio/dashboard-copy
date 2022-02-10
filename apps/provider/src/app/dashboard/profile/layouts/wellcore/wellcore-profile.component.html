@@ -40,9 +40,9 @@
           <span>{{ address.city }}, {{address.stateProvince | uppercase}}</span>
         </p>
 
-        <p class="profile-subtitle">
+        <p *ngIf="orgAssociation" class="profile-subtitle">
           <mat-icon>schedule</mat-icon>
-          <span>{{ 'BOARD.MEMBER_SINCE' | translate:{date: account.createdAt | amDateFormat: 'YYYY'} }}</span>
+          <span>{{ 'BOARD.MEMBER_SINCE' | translate:{date: orgAssociation.associatedAt | amDateFormat: 'YYYY'} }}</span>
         </p>
       </div>
 
