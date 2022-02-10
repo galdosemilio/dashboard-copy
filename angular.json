@@ -514,7 +514,12 @@
             "tsConfig": "apps/provider/tsconfig.app.json",
             "assets": [
               "apps/provider/src/favicon.ico",
-              "apps/provider/src/assets"
+              "apps/provider/src/assets",
+              {
+                "glob": "wellcore/**/*",
+                "input": "libs/layout/src/assets/",
+                "output": "assets"
+              }
             ],
             "styles": [
               "apps/provider/src/styles.scss",
