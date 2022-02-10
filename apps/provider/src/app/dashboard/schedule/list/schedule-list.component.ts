@@ -234,19 +234,31 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
           : undefined
     }))
 
-    this.meetingsSource.addOptional(this.form$, () => ({
-      range: {
-        start: this.form.value.startDate
-          ? this.form.value.startDate.toISOString()
-          : undefined,
-        end: this.form.value.endDate
-          ? this.form.value.endDate.toISOString()
-          : undefined
-      },
-      status: {
-        meeting: this.form.value.meetingStatus
+    this.meetingsSource.addOptional(this.form$, () => {
+      const now = moment()
+      const start = this.form.value.startDate
+        ? now.isSame(this.form.value.startDate, 'day') &&
+          this.form.value.quickSelect === 'upcoming'
+          ? now.toISOString()
+          : this.form.value.startDate.clone().startOf('day').toISOString()
+        : undefined
+      const end = this.form.value.endDate
+        ? now.isSame(this.form.value.endDate, 'day') &&
+          this.form.value.quickSelect === 'past'
+          ? now.toISOString()
+          : this.form.value.endDate.clone().endOf('day').toISOString()
+        : undefined
+
+      return {
+        range: {
+          start,
+          end
+        },
+        status: {
+          meeting: this.form.value.meetingStatus
+        }
       }
-    }))
+    })
 
     this.meetingsSource.addOptional(this.context.organization$, () => ({
       organization: this.selectedClinic?.id
@@ -261,6 +273,7 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
           startDate: moment('2019-01-01', 'YYYY-MM-DD').startOf('day'),
           endDate: moment().add(3, 'months').endOf('month')
         }
+        this.listTable.sort.direction = 'asc'
         break
       case 'past':
         newFormValue = {
@@ -268,7 +281,6 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
           endDate: moment()
         }
         this.listTable.sort.direction = 'desc'
-        this.listTable.sort.sortChange.emit()
         break
       case 'upcoming':
         newFormValue = {
@@ -276,7 +288,6 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
           endDate: moment().add(3, 'months').endOf('month')
         }
         this.listTable.sort.direction = 'asc'
-        this.listTable.sort.sortChange.emit()
         break
       default:
         break

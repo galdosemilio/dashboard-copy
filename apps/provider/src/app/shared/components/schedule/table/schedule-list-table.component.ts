@@ -1,12 +1,15 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog, MatSort } from '@coachcare/material'
 import {
-  ContextService,
   EventsService,
   NotifierService,
   ScheduleDataService
 } from '@app/service'
-import { AttendanceStatusEntry, UpdateAttendanceRequest } from '@coachcare/sdk'
+import {
+  AttendanceStatusEntry,
+  MeetingSort,
+  UpdateAttendanceRequest
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Schedule } from '@coachcare/sdk'
@@ -44,8 +47,7 @@ export class ScheduleListTableComponent implements OnDestroy, OnInit {
     private dataService: ScheduleDataService,
     private dialog: MatDialog,
     private notifier: NotifierService,
-    private schedule: Schedule,
-    private context: ContextService
+    private schedule: Schedule
   ) {}
 
   ngOnDestroy(): void {
@@ -53,18 +55,14 @@ export class ScheduleListTableComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.source.setSorter(
-      this.sort,
-      () =>
-        ({
-          sort: [
-            {
-              property: this.sort.active || 'start',
-              dir: this.sort.direction || 'asc'
-            }
-          ]
-        } as any)
-    )
+    this.source.setSorter(this.sort, () => ({
+      sort: [
+        {
+          property: this.sort.active || 'start',
+          dir: this.sort.direction || 'asc'
+        } as MeetingSort
+      ]
+    }))
 
     this.bus.register('schedule.table.refresh', () => {
       this.source.refresh()
