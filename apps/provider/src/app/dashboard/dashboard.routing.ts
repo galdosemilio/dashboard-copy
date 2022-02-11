@@ -3,7 +3,9 @@ import { FileUploadGuard } from '@app/dashboard/content/services'
 import {
   AuthGuard,
   ListingPaginationGuard,
-  OrphanedAccountGuard
+  OrphanedAccountGuard,
+  PatientAccountGuard,
+  ProviderAccountGuard
 } from '@app/service'
 import { LibraryComponent, ProfileComponent } from './'
 import { ClinicsRoutes } from './accounts/clinics/clinics.routing'
@@ -27,15 +29,18 @@ const routes: Routes = [
       {
         path: 'accounts/patients',
         children: DietersRoutes,
+        canActivate: [ProviderAccountGuard],
         canDeactivate: [ListingPaginationGuard]
       },
       {
         path: 'accounts/coaches',
         children: CoachesRoutes,
+        canActivate: [ProviderAccountGuard],
         canDeactivate: [ListingPaginationGuard]
       },
       {
         path: 'accounts/clinics',
+        canActivate: [ProviderAccountGuard],
         children: ClinicsRoutes
       },
       {
@@ -64,13 +69,19 @@ const routes: Routes = [
       },
       {
         path: 'alerts',
-        children: AlertsRoutes
+        children: AlertsRoutes,
+        canActivate: [ProviderAccountGuard]
       },
       {
         path: 'reports',
-        children: ReportsRoutes
+        children: ReportsRoutes,
+        canActivate: [ProviderAccountGuard]
       },
-      { path: 'sequences', children: SequencingRoutes },
+      {
+        path: 'sequences',
+        children: SequencingRoutes,
+        canActivate: [ProviderAccountGuard]
+      },
       { path: 'profile', component: ProfileComponent },
       {
         path: 'library',
@@ -80,9 +91,14 @@ const routes: Routes = [
       },
       {
         path: 'resources/platform-updates',
-        component: PlatformUpdatesComponent
+        component: PlatformUpdatesComponent,
+        canActivate: [ProviderAccountGuard]
       },
-      { path: 'new-appointment', component: NewAppointmentComponent }
+      {
+        path: 'new-appointment',
+        component: NewAppointmentComponent,
+        canActivate: [PatientAccountGuard]
+      }
       // { path: 'resources/support', component: SupportComponent },
       // { path: 'resources/marketing', component: MarketingComponent },
       // { path: 'resources/faqs', component: FaqsComponent }

@@ -30,7 +30,11 @@ import {
   ScheduleDataService,
   TimeTrackerService
 } from './'
-import { OrphanedAccountGuard } from './guards'
+import {
+  OrphanedAccountGuard,
+  PatientAccountGuard,
+  ProviderAccountGuard
+} from './guards'
 import { WalkthroughService } from './walkthrough'
 import { GestureService } from './gesture'
 import { APP_CONFIG } from '@coachcare/common/shared'
@@ -107,6 +111,8 @@ export function AppProviders() {
       ]
     },
     OrphanedAccountGuard,
+    PatientAccountGuard,
+    ProviderAccountGuard,
     PlatformUpdatesService,
     ScheduleDataService,
     TimeTrackerService,

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router'
+import { PatientAccountGuard, ProviderAccountGuard } from '@app/service'
 import {
   ScheduleAvailabilityComponent,
   ScheduleAvailabilityRecurringComponent,
@@ -11,11 +12,13 @@ import { ScheduleMosaicComponent } from './mosaic'
 export const ScheduleRoutes: Routes = [
   {
     path: 'view',
-    component: ScheduleCalendarComponent
+    component: ScheduleCalendarComponent,
+    canActivate: [ProviderAccountGuard]
   },
   {
     path: 'available',
     component: ScheduleAvailabilityComponent,
+    canActivate: [ProviderAccountGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'recurring' },
       { path: 'recurring', component: ScheduleAvailabilityRecurringComponent },
@@ -24,10 +27,12 @@ export const ScheduleRoutes: Routes = [
   },
   {
     path: 'list',
-    component: ScheduleListComponent
+    component: ScheduleListComponent,
+    canActivate: [ProviderAccountGuard]
   },
   {
     path: 'mosaic',
-    component: ScheduleMosaicComponent
+    component: ScheduleMosaicComponent,
+    canActivate: [PatientAccountGuard]
   }
 ]
