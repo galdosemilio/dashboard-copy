@@ -24,15 +24,15 @@ import { BehaviorSubject, Observable } from 'rxjs'
 
 @Injectable()
 export class ContentUploadService {
-  public contentAdded$: EventEmitter<FileExplorerContent> = new EventEmitter<FileExplorerContent>()
+  public contentAdded$: EventEmitter<FileExplorerContent> =
+    new EventEmitter<FileExplorerContent>()
   public organization: any
   public uploads: ContentUpload[] = []
   public uploads$: BehaviorSubject<ContentUpload[]> = new BehaviorSubject<
     ContentUpload[]
   >([])
-  public visibleUploads$: BehaviorSubject<
-    ContentUpload[]
-  > = new BehaviorSubject<ContentUpload[]>([])
+  public visibleUploads$: BehaviorSubject<ContentUpload[]> =
+    new BehaviorSubject<ContentUpload[]>([])
   public source: FileExplorerDatasource | VaultDatasource
 
   private uploadProgressInterval: any
@@ -102,7 +102,7 @@ export class ContentUploadService {
   ): Promise<FileExplorerContent> {
     return new Promise<FileExplorerContent>(async (resolve, reject) => {
       try {
-        const ticketContent = ticket.contentUpload.content
+        const ticketContent = ticket.contentUpload.content as ContentFile
         const content: FileExplorerContent = await this.source.createContent(
           {
             account: this.context.accountId,
@@ -119,7 +119,10 @@ export class ContentUploadService {
             metadata: ticketContent.metadata,
             parentId: ticketContent.parentId,
             parent: ticketContent.parentId || ticketContent.parent,
-            isVisibleToPatient: ticketContent.isVisibleToPatient
+            isVisibleToPatient: ticketContent.isVisibleToPatient,
+            exportTags: ticketContent.externalVisibility
+              ? [ticketContent.externalVisibility]
+              : []
           },
           { omitLoading: true }
         )
@@ -304,11 +307,10 @@ export class ContentUploadService {
 
   private async createAsFile(ticket: ContentUploadTicket): Promise<void> {
     try {
-      const response: FileExplorerContentMetadata = await this.source.getUploadUrl(
-          {
+      const response: FileExplorerContentMetadata =
+          await this.source.getUploadUrl({
             filename: ticket.contentUpload.content.name
-          }
-        ),
+          }),
         paramIndex = response.url.indexOf('?')
 
       ticket.contentUpload.content.metadata = Object.assign({}, response, {

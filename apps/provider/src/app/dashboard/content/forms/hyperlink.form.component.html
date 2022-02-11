@@ -7,5 +7,10 @@
 
     <mat-error *ngIf="form.controls.url.hasError('invalidUrl')">{{ 'LIBRARY.CONTENT.INVALID_LINK' | translate }}</mat-error>
 
-    <app-content-content-form bindForm="details" [details]="details" [mode]="mode"></app-content-content-form>
+    <app-content-content-form
+        bindForm="details"
+        [details]="details"
+        [hiddenFields]="['externalVisibility']"
+        [mode]="mode">
+    </app-content-content-form>
 </div>

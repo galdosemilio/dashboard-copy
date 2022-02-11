@@ -10,7 +10,12 @@
 <div class="mat-dialog-separator"></div>
 
 <div mat-dialog-content [formGroup]="form">
-    <app-content-content-form bindForm="details" [mode]="mode" (submit)="createFolder()"></app-content-content-form>
+    <app-content-content-form
+      [hiddenFields]="['externalVisibility']"
+      [mode]="mode"
+      (submit)="createFolder()"
+      bindForm="details">
+    </app-content-content-form>
 </div>
 
 <mat-dialog-actions>

@@ -19,7 +19,9 @@
         <app-content-content-form
         *ngSwitchDefault
         [details]="content"
+        [hiddenFields]="content.type.id === '2' ? [] : ['externalVisibility']"
         [mode]="mode"
+        [readonlyFields]="['externalVisibility']"
         bindForm="details"></app-content-content-form>
     </ng-container>
 </mat-dialog-content>

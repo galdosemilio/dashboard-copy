@@ -2,6 +2,7 @@ import {
   ClinicListingConfigDetails,
   JournalConfigDetails,
   GlobalConfigDetails,
+  DigitalLibraryConfigDetails,
   PatientDashboardConfigDetails,
   PatientFormConfigDetails,
   PatientListingConfigDetails,
@@ -24,4 +25,5 @@ export interface SectionConfigDetails {
   COHORT_REPORTS?: CohortReportsDetails
   PATIENT_DASHBOARD?: PatientDashboardConfigDetails
   PROVIDER_PROFILE?: ProviderProfileConfigDetails
+  DIGITAL_LIBRARY?: DigitalLibraryConfigDetails
 }

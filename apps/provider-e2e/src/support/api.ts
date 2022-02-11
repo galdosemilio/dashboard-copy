@@ -590,6 +590,10 @@ const interceptCoreApiCalls = (
     body: {}
   })
 
+  cy.intercept('GET', '/1.0/content/vault?**', {
+    fixture: 'api/filevault/file-vault-contents'
+  })
+
   cy.intercept('POST', '/1.0/sequence/enrollment/bulk', {
     statusCode: 204,
     body: {

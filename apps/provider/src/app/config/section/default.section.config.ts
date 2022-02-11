@@ -91,6 +91,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: false
+  },
+  DIGITAL_LIBRARY: {
+    EXTERNAL_VISIBILITY_OPTIONS_ENABLED: false
   }
 }
 
@@ -165,5 +168,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   },
   PROVIDER_PROFILE: {
     SHOW_PHASE_LISTING: false
+  },
+  DIGITAL_LIBRARY: {
+    EXTERNAL_VISIBILITY_OPTIONS_ENABLED: false
   }
 }

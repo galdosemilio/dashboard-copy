@@ -16,13 +16,51 @@
         <input [placeholder]="'LIBRARY.CONTENT.DESCRIPTION' | translate" matInput formControlName="description" [readonly]="readonlyFields.indexOf('description') > -1">
     </mat-form-field>
 
-    <mat-form-field *ngIf="mode === 'vault'">
+    <ng-container *ngIf="mode === 'vault'">
+    <mat-form-field>
         <mat-select
         [placeholder]="'LIBRARY.CONTENT.PATIENT_VISIBILITY' | translate"
         formControlName="isVisibleToPatient">
             <mat-option *ngFor="let visibility of patientVisibilities" [value]="visibility.value">{{ visibility.name | translate }}</mat-option>
         </mat-select>
     </mat-form-field>
+
+    <ng-container *ngIf="!hiddenFields.includes('externalVisibility')">
+        <mat-form-field>
+            <mat-select
+            [placeholder]="'LIBRARY.CONTENT.EXTERNAL_VISIBILITY' | translate"
+            formControlName="externalVisibility">
+                <mat-option
+                *ngFor="let visibility of externalVisibilities"
+                [value]="visibility.value">
+                    {{ visibility.name | translate }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <ng-container *ngIf="form.controls.externalVisibility?.enabled">
+        <ng-container [ngSwitch]="form.value.externalVisibility">
+            <ng-container *ngSwitchCase="'prescribery'">
+                <p *ngIf="form.controls.externalVisibility?.enabled">
+                    {{ 'LIBRARY.CONTENT.EXTERNAL_VISIBILITY_WARNING' | translate }}
+                </p>
+            </ng-container>
+        </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="form.controls.externalVisibility?.disabled">
+        <ng-container [ngSwitch]="details.externalVisibility">
+            <ng-container *ngSwitchCase="'prescribery'">
+                <p>{{ 'LIBRARY.CONTENT.EXTERNAL_VISIBILITY_WARNING_SHARED_DISABLED' | translate }}</p>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'dashboard'">
+                <p>{{ 'LIBRARY.CONTENT.EXTERNAL_VISIBILITY_WARNING_DASHBOARD_DISABLED' | translate }}</p>
+            </ng-container>
+        </ng-container>
+        </ng-container>
+    </ng-container>
+    </ng-container>
     </div>
 
     <div fxLayout="column" fxLayoutGap="4%">

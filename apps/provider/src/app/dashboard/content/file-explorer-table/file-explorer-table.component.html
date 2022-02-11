@@ -51,20 +51,20 @@
 <ccr-datasource-overlay [inaccessible]="inaccessible" [source]="source" class="ccr-table">
 <div class="ccr-edit-table">
     <mat-table [dataSource]="source" class="ccr-edit-table" matSort>
-        <ng-container cdkColumnDef="selector">
+        <ng-container matColumnDef="selector">
             <mat-header-cell *cdkHeaderCellDef fxFlex="36px">&nbsp;</mat-header-cell>
             <mat-cell *cdkCellDef="let row; let i = index;" fxFlex="36px">
                 <mat-checkbox [checked]="isChecked(row)" (change)="onToggleSelection(row)"></mat-checkbox>
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="index">
+        <ng-container matColumnDef="index">
             <mat-header-cell *cdkHeaderCellDef fxFlex="36px">&nbsp;</mat-header-cell>
             <mat-cell *cdkCellDef="let row; let i = index;" fxFlex="36px">
                 {{ currentPage * paginator.pageSize + (i + 1) }}
             </mat-cell>
         </ng-container>
-        <ng-container cdkColumnDef="icon">
+        <ng-container matColumnDef="icon">
             <mat-header-cell *cdkHeaderCellDef fxFlex="36px">&nbsp;</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxFlex="36px">
                 <mat-icon
@@ -79,9 +79,9 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="name" [formGroup]="form">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'LIBRARY.CONTENT.FOLDER_NAME' | translate }}</mat-header-cell>
-            <mat-cell *cdkCellDef="let row" class="clickable">
+        <ng-container matColumnDef="name" [formGroup]="form">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header fxFlex="185px">{{ 'LIBRARY.CONTENT.FOLDER_NAME' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" class="clickable" fxFlex="185px">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1%">
                     <app-content-file-explorer-inline-editor [required]="true" bindForm="name" [overwriteControl]="true"
                         *ngIf="rowOnEdition.id === row.id && rowOnEdition.prop === 'name'; else nameCell"
@@ -109,9 +109,9 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="description" [formGroup]="form">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.CONTENT.DESCRIPTION' | translate }}</mat-header-cell>
-            <mat-cell *cdkCellDef="let row" class="clickable">
+        <ng-container matColumnDef="description" [formGroup]="form">
+            <mat-header-cell *cdkHeaderCellDef fxFlex="100px">{{ 'LIBRARY.CONTENT.DESCRIPTION' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" class="clickable" fxFlex="100px">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1%">
                     <app-content-file-explorer-inline-editor bindForm="description" [overwriteControl]="true"
                         *ngIf="rowOnEdition.id === row.id && rowOnEdition.prop === 'description'; else descriptionCell"
@@ -131,21 +131,21 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="isVisibleToPatient">
-            <mat-header-cell *cdkHeaderCellDef fxFlex="15%">{{ 'LIBRARY.CONTENT.PATIENT_VISIBILITY' | translate }}</mat-header-cell>
-            <mat-cell *cdkCellDef="let row" fxFlex="15%">
+        <ng-container matColumnDef="isVisibleToPatient">
+            <mat-header-cell *cdkHeaderCellDef fxFlex="10%">{{ 'LIBRARY.CONTENT.PATIENT_VISIBILITY' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxFlex="10%">
                 {{ row.isVisibleToPatient ? ('LIBRARY.CONTENT.VISIBLE' | translate) : ('LIBRARY.CONTENT.HIDDEN' | translate) }}
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="createdAt">
+        <ng-container matColumnDef="createdAt">
             <mat-header-cell *cdkHeaderCellDef fxFlex="15%" mat-sort-header>{{ 'LIBRARY.CONTENT.CREATED' | translate }}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxFlex="15%">
                 {{ row.createdAt | amDateFormat:'ddd, MMM D YYYY' }}
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="availability">
+        <ng-container matColumnDef="availability">
             <mat-header-cell *cdkHeaderCellDef fxFlex="18%">{{ 'LIBRARY.CONTENT.AVAILABILITY' | translate }}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" class="clickable" fxFlex="18%">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1%">
@@ -156,7 +156,14 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="actions">
+        <ng-container matColumnDef="externalVisibility">
+            <mat-header-cell *cdkHeaderCellDef fxFlex>{{ 'LIBRARY.CONTENT.EXTERNAL_VISIBILITY' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row" fxFlex>
+                {{ row.externalVisibilityText | translate }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
             <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayout="row" fxLayoutAlign="center center">
                 <mat-icon *ngIf="isProvider" class="file-icon" fontSet="fas" fontIcon="fa-edit" (click)="onEdit(row); $event.stopPropagation()" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.CONTENT.EDIT_CONTENT_TOOLTIP' | translate"></mat-icon>

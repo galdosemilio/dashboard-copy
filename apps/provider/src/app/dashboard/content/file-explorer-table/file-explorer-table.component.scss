@@ -104,4 +104,8 @@ app-content-file-explorer-table {
   .cdk-column-actions {
     width: 60px;
   }
+
+  mat-cell.cdk-column-externalVisibility {
+    padding: 5px 0;
+  }
 }

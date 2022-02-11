@@ -34,11 +34,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _, PromptDialog } from '@app/shared'
-import {
-  Entity,
-  FetchPackagesSegment,
-  OrganizationEntity
-} from '@coachcare/sdk'
+import { Entity, OrganizationEntity } from '@coachcare/sdk'
 import { uniqBy, values } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject, Subscription } from 'rxjs'
@@ -152,7 +148,7 @@ export class ContentComponent implements OnDestroy, OnInit {
         panelClass: 'ccr-full-dialog'
       })
       .afterClosed()
-      .pipe(filter((queuedContents) => queuedContents && queuedContents.length))
+      .pipe(filter((queuedContents) => queuedContents?.length))
       .subscribe(async (queuedContents: QueuedContent[]) => {
         void this.contentUpload.createContents(queuedContents)
       })
@@ -268,63 +264,64 @@ export class ContentComponent implements OnDestroy, OnInit {
   }
 
   private subscribeToEvents() {
-    this.subscriptions.organizationSubscription = this.context.organization$.subscribe(
-      (org) => {
+    this.subscriptions.organizationSubscription =
+      this.context.organization$.subscribe((org) => {
         this.organization = this.organizationOverride || org
         this.events.resetFiles.emit()
-      }
-    )
-    this.subscriptions.updateContentSubscription = this.events.updateContent.subscribe(
-      async (content: FileExplorerContent) => {
-        try {
-          let updatedContent: FileExplorerContent
-          await this.removeContentPackages(content)
-          if (content.isPublic) {
-            updatedContent = await this.datasource.updateContent({
-              ...content,
-              parent: content.parent || content.parentId,
-              isVisibleToPatient: content.isVisibleToPatient,
-              sortOrder: undefined
-            })
-          } else if (content.packages && content.packages.length) {
-            updatedContent = await this.datasource.updateContent({
-              ...content,
-              parent: content.parent || content.parentId,
-              isVisibleToPatient: content.isVisibleToPatient,
-              sortOrder: undefined
-            })
-
-            while (content.packages.length) {
-              const p: FetchPackagesSegment = content.packages.pop()
-              await this.datasource.createContentPackage({
-                id: content.id,
-                package: p.id
-              })
-            }
-          }
-
-          this.events.contentUpdated.emit(
-            updatedContent ||
-              (await this.datasource.updateContent({
+      })
+    this.subscriptions.updateContentSubscription =
+      this.events.updateContent.subscribe(
+        async (content: FileExplorerContent) => {
+          try {
+            let updatedContent: FileExplorerContent
+            await this.removeContentPackages(content)
+            if (content.isPublic) {
+              updatedContent = await this.datasource.updateContent({
                 ...content,
                 parent: content.parent || content.parentId,
                 isVisibleToPatient: content.isVisibleToPatient,
                 sortOrder: undefined
-              }))
-          )
-        } catch (error) {
-          this.notifier.error(error)
+              })
+            } else if (content.packages && content.packages.length) {
+              updatedContent = await this.datasource.updateContent({
+                ...content,
+                parent: content.parent || content.parentId,
+                isVisibleToPatient: content.isVisibleToPatient,
+                sortOrder: undefined
+              })
+
+              for (const pkg of content.packages) {
+                await this.datasource.createContentPackage({
+                  id: content.id,
+                  package: pkg.id
+                })
+              }
+            }
+
+            this.events.contentUpdated.emit(
+              updatedContent ||
+                (await this.datasource.updateContent({
+                  ...content,
+                  parent: content.parent || content.parentId,
+                  isVisibleToPatient: content.isVisibleToPatient,
+                  sortOrder: undefined
+                }))
+            )
+          } catch (error) {
+            this.notifier.error(error)
+          }
         }
-      }
-    )
-    this.subscriptions.updateContentPromptSubscription = this.events.updateContentPrompt.subscribe(
-      (content: FileExplorerContent) => this.updateContentPrompt(content)
-    )
-    this.subscriptions.deleteContentSubscription = this.events.deleteContent.subscribe(
-      (content: FileExplorerContent) => this.deleteContent(content)
-    )
-    this.subscriptions.moveContentSubscription = this.events.moveContent.subscribe(
-      async (event: ContentMovedEvent) => {
+      )
+    this.subscriptions.updateContentPromptSubscription =
+      this.events.updateContentPrompt.subscribe(
+        (content: FileExplorerContent) => this.updateContentPrompt(content)
+      )
+    this.subscriptions.deleteContentSubscription =
+      this.events.deleteContent.subscribe((content: FileExplorerContent) =>
+        this.deleteContent(content)
+      )
+    this.subscriptions.moveContentSubscription =
+      this.events.moveContent.subscribe(async (event: ContentMovedEvent) => {
         try {
           if (event.content.id !== event.to) {
             const content = Object.assign({}, event.content)
@@ -341,20 +338,23 @@ export class ContentComponent implements OnDestroy, OnInit {
         } catch (error) {
           this.notifier.error(error)
         }
-      }
-    )
-    this.subscriptions.moveContentPromptSubscription = this.events.moveContentPrompt.subscribe(
-      (content: FileExplorerContent) => this.moveContentPrompt(content)
-    )
-    this.subscriptions.contentAddedSubscription = this.contentUpload.contentAdded$.subscribe(
-      (content: FileExplorerContent) => this.events.contentAdded.emit(content)
-    )
-    this.subscriptions.openContentSubscription = this.events.openContent.subscribe(
-      (content: FileExplorerContent) => this.openContent(content)
-    )
-    this.subscriptions.copyContentPrompt = this.events.copyContentPrompt.subscribe(
-      (event: CopyContentPromptEvent) => this.copyContentPrompt(event)
-    )
+      })
+    this.subscriptions.moveContentPromptSubscription =
+      this.events.moveContentPrompt.subscribe((content: FileExplorerContent) =>
+        this.moveContentPrompt(content)
+      )
+    this.subscriptions.contentAddedSubscription =
+      this.contentUpload.contentAdded$.subscribe(
+        (content: FileExplorerContent) => this.events.contentAdded.emit(content)
+      )
+    this.subscriptions.openContentSubscription =
+      this.events.openContent.subscribe((content: FileExplorerContent) =>
+        this.openContent(content)
+      )
+    this.subscriptions.copyContentPrompt =
+      this.events.copyContentPrompt.subscribe((event: CopyContentPromptEvent) =>
+        this.copyContentPrompt(event)
+      )
     this.subscriptions.copyContent = this.events.copyContent.subscribe(
       (event: ContentCopiedEvent) => {
         void this.copyContent(event)
@@ -459,11 +459,10 @@ export class ContentComponent implements OnDestroy, OnInit {
   private removeContentPackages(content: FileExplorerContent): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       try {
-        const contentPackages: Entity[] = await this.datasource.getAllContentPackage(
-          {
+        const contentPackages: Entity[] =
+          await this.datasource.getAllContentPackage({
             id: content.id
-          }
-        )
+          })
 
         while (contentPackages.length) {
           const cP: Entity = contentPackages.pop()

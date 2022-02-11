@@ -1,0 +1,161 @@
+{
+  "data": [
+    {
+      "createdAt": "2019-12-30 06:00:08.976053+00",
+      "description": "Test description",
+      "hasPackageAssociations": false,
+      "id": "1992",
+      "isPublic": true,
+      "metadata": {
+        "id": "10161"
+      },
+      "name": "Test form",
+      "organization": {
+        "id": "4479",
+        "name": "Apollo Endosurgery"
+      },
+      "packages": [],
+      "type": {
+        "code": "form",
+        "description": "Form object",
+        "id": 3
+      },
+      "exportTags": []
+    },
+    {
+      "createdAt": "2019-12-31 15:54:26.863069+00",
+      "description": "Test description",
+      "hasPackageAssociations": false,
+      "id": "1877",
+      "isPublic": true,
+      "metadata": {
+        "url": "https://www.coachcare.com",
+        "mimeType": "text/html"
+      },
+      "name": "Public URL",
+      "organization": {
+        "id": "30",
+        "name": "CoachCare"
+      },
+      "packages": [],
+      "type": {
+        "code": "file",
+        "description": "Uploaded or external file",
+        "id": 2
+      },
+      "exportTags": []
+    },
+    {
+      "createdAt": "2020-01-01 08:14:11.469879+00",
+      "description": "Test description",
+      "hasPackageAssociations": false,
+      "id": "1715",
+      "isPublic": false,
+      "metadata": {},
+      "name": "Private folder",
+      "organization": {
+        "id": "30",
+        "name": "CoachCare"
+      },
+      "packages": [],
+      "type": {
+        "code": "folder",
+        "description": "Basic directory",
+        "id": 1
+      },
+      "exportTags": []
+    },
+    {
+      "createdAt": "2019-12-31 15:54:26.863069+00",
+      "description": "Test description",
+      "hasPackageAssociations": false,
+      "id": "1878",
+      "isPublic": true,
+      "metadata": {
+        "url": "https://www.coachcare.com",
+        "mimeType": "text/html"
+      },
+      "name": "Public URL 1 (local org)",
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "packages": [],
+      "type": {
+        "code": "file",
+        "description": "Uploaded or external file",
+        "id": 2
+      },
+      "exportTags": []
+    },
+    {
+      "createdAt": "2019-12-31 15:54:26.863069+00",
+      "description": "Test description",
+      "hasPackageAssociations": false,
+      "id": "1879",
+      "isPublic": true,
+      "metadata": {
+        "url": "https://www.coachcare.com",
+        "mimeType": "text/html"
+      },
+      "name": "Public URL 2 (local org)",
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "packages": [],
+      "type": {
+        "code": "file",
+        "description": "Uploaded or external file",
+        "id": 2
+      },
+      "exportTags": []
+    },
+    {
+      "createdAt": "2019-12-31 15:54:26.863069+00",
+      "description": "Test description",
+      "hasPackageAssociations": false,
+      "id": "1880",
+      "isPublic": true,
+      "metadata": {
+        "url": "https://www.coachcare.com",
+        "mimeType": "text/html"
+      },
+      "name": "Public URL 3 (local org)",
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "packages": [],
+      "type": {
+        "code": "file",
+        "description": "Uploaded or external file",
+        "id": 2
+      },
+      "exportTags": []
+    },
+    {
+      "createdAt": "2019-12-31 15:54:26.863069+00",
+      "description": "Test File",
+      "hasPackageAssociations": false,
+      "id": "1881",
+      "isPublic": true,
+      "metadata": {
+        "url": "https://www.coachcare.com"
+      },
+      "name": "Test File.png",
+      "organization": {
+        "id": "1",
+        "name": "CoachCare"
+      },
+      "packages": [],
+      "type": {
+        "code": "file",
+        "description": "Uploaded or external file",
+        "id": 2
+      },
+      "exportTags": []
+    }
+  ],
+  "pagination": {}
+}

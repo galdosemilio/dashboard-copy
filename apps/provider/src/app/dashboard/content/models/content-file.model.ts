@@ -9,8 +9,11 @@ import {
 import { FILE_TYPE_MAP } from '@app/dashboard/content/models/file-type.map'
 import { Icon } from '@app/dashboard/content/models/icon.interface'
 import { Package } from '@app/shared/components/package-table'
+import { FileVaultContent } from '.'
 
-export class ContentFile implements Partial<FileExplorerContent> {
+export class ContentFile
+  implements Partial<FileExplorerContent & FileVaultContent>
+{
   public file: File
   public name: string
   public type: ContentTypeMapItem
@@ -24,6 +27,7 @@ export class ContentFile implements Partial<FileExplorerContent> {
   public packages?: Package[]
   public hasPackageAssociations?: boolean
   public isVisibleToPatient?: boolean
+  public externalVisibility?: string
 
   constructor(args: any) {
     this.file = args.file
@@ -52,5 +56,8 @@ export class ContentFile implements Partial<FileExplorerContent> {
     this.packages = args.packages
     this.hasPackageAssociations = args.hasPackageAssociations
     this.isVisibleToPatient = args.isVisibleToPatient
+
+    this.externalVisibility =
+      args.externalVisibility !== 'dashboard' ? args.externalVisibility : null
   }
 }

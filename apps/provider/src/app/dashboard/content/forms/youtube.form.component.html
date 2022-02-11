@@ -8,7 +8,12 @@
 
         <mat-error *ngIf="form.controls.embedUrl.hasError('invalidLink')">{{ 'LIBRARY.CONTENT.INVALID_LINK' | translate }}</mat-error>
 
-        <app-content-content-form bindForm="details" [details]="details" [mode]="mode"></app-content-content-form>
+        <app-content-content-form
+            [details]="details"
+            [hiddenFields]="['externalVisibility']"
+            [mode]="mode"
+            bindForm="details">
+        </app-content-content-form>
     </div>
 
     <div *ngIf="url" fxLayout="column" fxLayoutAlign="center center" class="youtube-embed">

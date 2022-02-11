@@ -30,6 +30,7 @@ import { AccountTypeIds } from '@coachcare/sdk'
 import { FILE_TYPE_MAP } from '@app/dashboard/content/models/file-type.map'
 import { PromptDialog, PromptDialogData } from '@coachcare/common/dialogs/core'
 import { filter } from 'rxjs/operators'
+import { resolveConfig } from '@app/config/section'
 
 export interface FileExplorerRoute {
   content: FileExplorerContent
@@ -51,7 +52,8 @@ export interface FileExplorerRoute {
 })
 export class FileExplorerTableComponent
   extends FileExplorerBase
-  implements BindForm, OnDestroy, OnInit {
+  implements BindForm, OnDestroy, OnInit
+{
   @Input()
   allowInlineEdit = true
   @Input()
@@ -105,6 +107,7 @@ export class FileExplorerTableComponent
     'isVisibleToPatient',
     'createdAt',
     'availability',
+    'externalVisibility',
     'actions'
   ]
 
@@ -401,16 +404,24 @@ export class FileExplorerTableComponent
     if (this.mode === 'vault') {
       filteredColumns = ['availability']
     } else {
-      filteredColumns = ['isVisibleToPatient']
+      filteredColumns = ['isVisibleToPatient', 'externalVisibility']
     }
 
     if (!this.isProvider) {
       filteredColumns = [
         ...filteredColumns,
         'isVisibleToPatient',
+        'externalVisibility',
         'availability',
         'actions'
       ]
+    } else if (
+      !resolveConfig(
+        'DIGITAL_LIBRARY.EXTERNAL_VISIBILITY_OPTIONS_ENABLED',
+        this.context.organization
+      )
+    ) {
+      filteredColumns = [...filteredColumns, 'externalVisibility']
     }
 
     filteredColumns = [...filteredColumns, ...this.hiddenColumns]

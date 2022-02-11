@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators'
 
 import {
   ContentCopiedEvent,
-  FileExplorerContent
+  FileVaultContent
 } from '@app/dashboard/content/models'
 import { ContextService, NotifierService } from '@app/service'
 import { _, TableDataSource } from '@app/shared'
@@ -27,7 +27,7 @@ interface ExecRequestOpts {
 }
 
 export class VaultDatasource extends TableDataSource<
-  FileExplorerContent,
+  FileVaultContent,
   GetAllVaultContentResponse,
   GetAllVaultContentRequest
 > {
@@ -68,7 +68,7 @@ export class VaultDatasource extends TableDataSource<
 
   async mapResult(
     result: GetAllVaultContentResponse
-  ): Promise<FileExplorerContent[]> {
+  ): Promise<FileVaultContent[]> {
     this.total = result.pagination.next
       ? result.pagination.next + 1
       : this.criteria.offset + result.data.length
@@ -94,7 +94,7 @@ export class VaultDatasource extends TableDataSource<
         fileExplorerSortOrder = r.sortOrder
           ? r.sortOrder
           : ++fileExplorerSortOrder
-        return new FileExplorerContent(
+        return new FileVaultContent(
           {
             ...r,
             localSortOrder: localSortOrder,
@@ -128,7 +128,7 @@ export class VaultDatasource extends TableDataSource<
         }
       })
 
-    data.forEach((content: FileExplorerContent, index: number) => {
+    data.forEach((content: FileVaultContent, index: number) => {
       if (content.isForeign && data[index + 1] && !data[index + 1].isForeign) {
         content.isLastForeign = true
       }
@@ -137,14 +137,14 @@ export class VaultDatasource extends TableDataSource<
     return data
   }
 
-  copyContent(args: ContentCopiedEvent): Promise<FileExplorerContent> {
+  copyContent(args: ContentCopiedEvent): Promise<FileVaultContent> {
     return Promise.reject('This action is not supported')
   }
 
   createContent(
     args: CreateVaultContentRequest,
     execRequestOpts: ExecRequestOpts = { omitLoading: false }
-  ): Promise<FileExplorerContent> {
+  ): Promise<FileVaultContent> {
     const opts = {
       organizationId: this.criteria.organization
     }
@@ -156,9 +156,7 @@ export class VaultDatasource extends TableDataSource<
           createdBy: this.context.user.id
         })
         .pipe(
-          map(
-            (content: ContentSingle) => new FileExplorerContent(content, opts)
-          )
+          map((content: ContentSingle) => new FileVaultContent(content, opts))
         )
         .toPromise(),
       execRequestOpts
@@ -175,18 +173,14 @@ export class VaultDatasource extends TableDataSource<
     )
   }
 
-  updateContent(args: UpdateVaultContentRequest): Promise<FileExplorerContent> {
+  updateContent(args: UpdateVaultContentRequest): Promise<FileVaultContent> {
     const opts = {
       organizationId: this.criteria.organization
     }
     return this.execRequest(
       this.database
         .updateContent(args, opts)
-        .pipe(
-          map(
-            (content: FileExplorerContent) => new FileExplorerContent(content)
-          )
-        )
+        .pipe(map((content: FileVaultContent) => new FileVaultContent(content)))
         .toPromise()
     )
   }

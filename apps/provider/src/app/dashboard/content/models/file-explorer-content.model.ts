@@ -16,6 +16,10 @@ export interface FileExplorerContentMetadata {
   content?: string
 }
 
+export interface FileExplorerContentOpts {
+  organizationId?: string
+}
+
 export class FileExplorerContent {
   public checked?: boolean
   public id: string
@@ -40,7 +44,7 @@ export class FileExplorerContent {
   public sortOrder?: number
   public isVisibleToPatient?: boolean
 
-  constructor(args: any, opts?: any) {
+  constructor(args: any, opts?: FileExplorerContentOpts) {
     this.checked = args.checked || false
     this.id = args.id || ''
     this.name = args.name ? args.name : ''
@@ -52,6 +56,7 @@ export class FileExplorerContent {
       CONTENT_TYPE_MAP[args.type ? args.type.code : 'default'],
       args.type
     )
+    this.type.id = this.type.id.toString()
     this.organization = args.organization
     this.isForeign =
       opts && opts.organizationId

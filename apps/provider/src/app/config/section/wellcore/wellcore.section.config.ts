@@ -37,6 +37,9 @@ export const WellCoreTestSectionConfig: SectionConfigDetails = {
     },
     UNENROLL_THEN_ENROLL: false,
     DISABLE_EDIT_BILLING_ADDRESS: true
+  },
+  DIGITAL_LIBRARY: {
+    EXTERNAL_VISIBILITY_OPTIONS_ENABLED: true
   }
 }
 
@@ -72,5 +75,8 @@ export const WellCoreProdSectionConfig: SectionConfigDetails = {
     },
     UNENROLL_THEN_ENROLL: false,
     DISABLE_EDIT_BILLING_ADDRESS: true
+  },
+  DIGITAL_LIBRARY: {
+    EXTERNAL_VISIBILITY_OPTIONS_ENABLED: true
   }
 }

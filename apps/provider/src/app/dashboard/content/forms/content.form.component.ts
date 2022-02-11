@@ -23,6 +23,7 @@ import {
 } from '@app/shared/components/package-table/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { _ } from '@coachcare/backend/shared'
+import { resolveConfig } from '@app/config/section'
 
 @UntilDestroy()
 @Component({
@@ -82,11 +83,29 @@ export class ContentFormComponent implements BindForm, OnInit, OnDestroy {
   }
 
   @Input()
-  readonlyFields: string[] = []
+  set readonlyFields(readonlyFields: string[]) {
+    this._readonlyFields = readonlyFields ?? []
+
+    if (this.form) {
+      Object.values(this.form.controls).forEach((control) => control.enable())
+
+      this._readonlyFields.forEach((readonlyFieldKey) => {
+        this.form.controls[readonlyFieldKey]?.disable()
+      })
+    }
+  }
+
+  get readonlyFields(): string[] {
+    return this._readonlyFields
+  }
 
   @Output()
   submit: EventEmitter<void> = new EventEmitter<void>()
 
+  public externalVisibilities = [
+    { value: 'dashboard', name: _('BOARD.WELLCORE_DASHBOARD_ONLY') },
+    { value: 'prescribery', name: _('BOARD.WELLCORE_DASHBOARD_PRESCRIBERY') }
+  ]
   public form: FormGroup
   public hasPackages: boolean
   public hideFirstSection = false
@@ -115,6 +134,7 @@ export class ContentFormComponent implements BindForm, OnInit, OnDestroy {
 
   private _details: FileExplorerContent
   private _fetchingPackages: boolean
+  private _readonlyFields: string[] = []
   private current: any = {
     name: '',
     availability: ''
@@ -168,6 +188,19 @@ export class ContentFormComponent implements BindForm, OnInit, OnDestroy {
     this.hideFirstSection =
       this.hiddenFields.indexOf('name') !== -1 &&
       this.hiddenFields.indexOf('description') !== -1
+
+    const shouldShowExternalVis =
+      this.context.isProvider &&
+      resolveConfig(
+        'DIGITAL_LIBRARY.EXTERNAL_VISIBILITY_OPTIONS_ENABLED',
+        this.context.organization
+      )
+
+    if (shouldShowExternalVis) {
+      return
+    }
+
+    this.hiddenFields = [...this.hiddenFields, 'externalVisibility']
   }
 
   openPackageDialog(validate = false): void {
@@ -228,7 +261,8 @@ export class ContentFormComponent implements BindForm, OnInit, OnDestroy {
       description: ['', []],
       isPublic: ['', []],
       packages: [undefined],
-      availability: ['', []]
+      availability: ['', []],
+      externalVisibility: ['dashboard', []]
     })
 
     this.form.valueChanges
