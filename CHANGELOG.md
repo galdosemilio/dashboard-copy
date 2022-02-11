@@ -1,3 +1,21 @@
+# [1.65.0](https://github.com/coachcare/dashboard/compare/v1.64.0...v1.65.0) (2022-02-11)
+
+
+### Bug Fixes
+
+* adjusted route for montserrat font [FRON-2619] ([08735b2](https://github.com/coachcare/dashboard/commit/08735b22f4313bf4d4fba9bb15da16065c7bdca7))
+* disable float label in register [FRON-2610] ([46076c2](https://github.com/coachcare/dashboard/commit/46076c26855a51c4c862b5537ffda623a100378b))
+* increase height of day and week calendar view [FRON-2600] ([eaf2665](https://github.com/coachcare/dashboard/commit/eaf26657063ed001429ab241458a0c543d0fccff))
+* member since now shows the association date [FRON-2578] ([87b70a3](https://github.com/coachcare/dashboard/commit/87b70a36c5e6221cae525f8337a96bdf4b93c8e5))
+* upgraded target to es2020 [FRON-2609] ([ab894d2](https://github.com/coachcare/dashboard/commit/ab894d2810986841872690f90d4e5d1f6a2a6eb9))
+
+
+### Features
+
+* added groups to chart select in dashboard [FRON-2557] ([0d01333](https://github.com/coachcare/dashboard/commit/0d013337c1a1b36a183c2d710544984ca25a8107))
+* added package filter to the cohort report [FRON-2601] ([0048f30](https://github.com/coachcare/dashboard/commit/0048f30d567a546b5a3a79f76a469b9c4b298bea))
+* added wellcore patient profile design [FRON-2578] ([8fbe171](https://github.com/coachcare/dashboard/commit/8fbe1712dd6a7ef84b8a4802259ac29b5855ac3f))
+
 # [1.64.0](https://github.com/coachcare/dashboard/compare/v1.63.1...v1.64.0) (2022-02-04)
 
 
