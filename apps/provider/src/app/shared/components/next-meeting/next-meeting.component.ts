@@ -6,15 +6,16 @@ import {
 } from '@app/layout/call/call-waiting-room'
 import { callSelector, CallState } from '@app/layout/store/call'
 import { ContextService, NotifierService } from '@app/service'
-import { Meeting } from '@app/shared'
+import { AttendeeEntity, Meeting } from '@app/shared'
 import {
   MeetingsDatabase,
   MeetingsDataSource
 } from '@app/shared/components/schedule'
 import { MatDialog } from '@coachcare/material'
-import { NamedEntity } from '@coachcare/sdk'
+import { AccountType } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Store } from '@ngrx/store'
+import { sortBy } from 'lodash'
 import * as moment from 'moment'
 import { first } from 'rxjs/operators'
 
@@ -25,7 +26,7 @@ import { first } from 'rxjs/operators'
   styleUrls: ['./next-meeting.component.scss']
 })
 export class CcrNextMeetingComponent implements OnDestroy, OnInit {
-  public attendeeEntities: NamedEntity[] = []
+  public attendeeEntities: AttendeeEntity[] = []
   /**
    * TODO
    * We need to make sure that this variable is false if there's
@@ -127,9 +128,14 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
         .pop()
     ]
 
-    this.attendeeEntities = meeting.attendees.map((attendee) => ({
+    this.attendeeEntities = sortBy(
+      meeting.attendees,
+      (attendee) => attendee.accountType.id,
+      ['desc']
+    ).map((attendee) => ({
       id: attendee.id,
-      name: `${attendee.firstName} ${attendee.lastName[0]}.`
+      isProvider: Number(attendee.accountType.id) === AccountType.Provider,
+      name: `${attendee.firstName} ${attendee.lastName}`
     }))
 
     this.startJoinStatusInterval()

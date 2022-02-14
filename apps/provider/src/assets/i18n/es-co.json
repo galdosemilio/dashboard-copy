@@ -196,6 +196,7 @@
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Mostrar reuniones activas o eliminadas",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Cualquier reunión programada en la plataforma es una reunión \"activa\". Si el entrenador o el paciente eliminan una reunión activa, se convierte en una reunión \"eliminada\". De forma predeterminada, solo las reuniones activas se presentan en esta lista. Las reuniones eliminadas se pueden ver cambiando este menú desplegable a \"Reuniones eliminadas\".",
     "DOB": "FDN",
+    "DOCTOR_NAME": "Dr. {{name}}",
     "DOWNLOAD_PATIENT_REPORT": "Descargar Reporte del Paciente",
     "DOWNLOAD_PATIENT_REPORT_DESCRIPTION": "Descargue un reporte en formato Excel o PDF con datos medición y actividad para este paciente.",
     "DOWNLOAD_REPORT": "Descargar Reporte",

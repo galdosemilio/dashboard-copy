@@ -4,14 +4,20 @@ fxLayout.lt-md="column"
 fxLayoutAlign="start center"
 fxLayoutAlign.lt-md="start stretch"
 fxLayoutGap="15px">
-  <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+  <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="start start" fxLayoutGap="15px">
     <div class="date-container">
       <p class="month">{{ meeting.date | amDateFormat:'MMM' }}</p>
       <p class="date">{{ meeting.date | amDateFormat:'DD' }}</p>
     </div>
 
-    <div>
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="3px">
       <p class="long-date">{{ meeting.date | amDateFormat:'dddd, MMMM DD, YYYY' }}</p>
+      <p class="attendees">
+        <ng-container *ngFor="let entity of attendeeEntities; let i = index">
+          {{ entity.isProvider ? ('BOARD.DOCTOR_NAME' | translate:{ name: entity.name }) : entity.name }}{{ i + 1 < attendeeEntities.length ? ',' : '' }}
+        </ng-container>
+      </p>
+
       <p class="hour">{{ meeting.date | amDateFormat:'h:mm a' }}</p>
     </div>
   </div>

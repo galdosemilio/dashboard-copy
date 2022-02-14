@@ -196,6 +196,7 @@
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Aktive oder gelöschte Besprechungen anzeigen",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Jedes auf der Plattform geplante Meeting ist ein aktives Meeting. Wenn eine aktive Besprechung vom Coach oder Patienten gelöscht wird, wird sie zu einer \"gelöschten\" Besprechung. Standardmäßig werden in dieser Liste nur die aktiven Besprechungen angezeigt. Gelöschte Besprechungen können angezeigt werden, indem Sie diese Dropdown-Liste in \"Gelöschte Besprechungen\" ändern.",
     "DOB": "DOB",
+    "DOCTOR_NAME": "Dr. {{name}}",
     "DOWNLOAD_PATIENT_REPORT": "Download Patientenbericht",
     "DOWNLOAD_PATIENT_REPORT_DESCRIPTION": "Laden Sie einen Bericht in entweder Excel oder PDF-Format mit Mess- und Aktivitätsinformationen für diese Patienten.",
     "DOWNLOAD_REPORT": "Bericht herunterladen",

@@ -196,6 +196,7 @@
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Exibir reuniões ativas ou excluídas",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Any meeting scheduled on the platform is an ‘active’ meeting.  If an active meeting is deleted by the coach or patient, it becomes a 'deleted' meeting.  By default, only the active meetings are presented in this listing.  Deleted meetings can be viewed by changing this dropdown to 'Deleted Meetings'.",
     "DOB": "DOB",
+    "DOCTOR_NAME": "Dr. {{name}}",
     "DOWNLOAD_PATIENT_REPORT": "Download Reportar Paciente",
     "DOWNLOAD_PATIENT_REPORT_DESCRIPTION": "Download de um relatório no formato Excel ou PDF com informações de medição e atividade para este paciente.",
     "DOWNLOAD_REPORT": "Download do Relatório",

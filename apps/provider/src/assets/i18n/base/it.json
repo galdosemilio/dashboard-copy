@@ -196,6 +196,7 @@
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Visualizza riunioni attive o eliminate",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Qualsiasi riunione programmata sulla piattaforma è una riunione \"attiva\". Se una riunione attiva viene eliminata dall'allenatore o dal paziente, diventa una riunione \"eliminata\". Per impostazione predefinita, in questo elenco vengono presentate solo le riunioni attive. Le riunioni eliminate possono essere visualizzate modificando questo menu a discesa in \"Riunioni eliminate\".",
     "DOB": "DOB",
+    "DOCTOR_NAME": "Dott. {{name}}",
     "DOWNLOAD_PATIENT_REPORT": "Scarica Paziente Relazione",
     "DOWNLOAD_PATIENT_REPORT_DESCRIPTION": "Scarica un rapporto sia in Excel o PDF con misurazione e attività di informazione per questo paziente.",
     "DOWNLOAD_REPORT": "Scarica il rapporto",
