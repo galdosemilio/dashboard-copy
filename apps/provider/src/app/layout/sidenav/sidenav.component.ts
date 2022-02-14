@@ -199,7 +199,18 @@ export class SidenavComponent implements OnInit {
             navName: _('SIDENAV.LIBRARY'),
             route: 'library',
             navRoute: 'library',
+            isAllowedForPatients: true,
             icon: 'folder',
+            badge: 0
+          },
+          {
+            code: SidenavOptions.FILE_VAULT,
+            navName: _('SIDENAV.FILE_VAULT'),
+            route: 'file-vault',
+            navRoute: 'file-vault',
+            isAllowedForPatients: true,
+            isHiddenForProviders: true,
+            icon: 'insert_drive_file',
             badge: 0
           },
           {

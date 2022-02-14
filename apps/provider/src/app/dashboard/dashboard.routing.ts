@@ -44,6 +44,13 @@ const routes: Routes = [
           import('./schedule/schedule.module').then((m) => m.ScheduleModule)
       },
       {
+        path: 'file-vault',
+        loadChildren: () =>
+          import('./file-vault/file-vault.module').then(
+            (m) => m.FileVaultModule
+          )
+      },
+      {
         path: 'messages',
         loadChildren: () =>
           import('./messages/messages.module').then((m) => m.MessagesModule)

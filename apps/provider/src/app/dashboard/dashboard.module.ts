@@ -15,6 +15,7 @@ import { LibraryFormsModule } from './library/forms/forms.module'
 import { ReportsModule } from './reports/reports.module'
 import { SequencingModule } from './sequencing/sequencing.module'
 import { TestResultsModule } from './test-results/test-results.module'
+import { FileVaultModule } from './file-vault/file-vault.module'
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { TestResultsModule } from './test-results/test-results.module'
     DietersTableModule,
     DashboardRoutes,
     SequencingModule,
-    TestResultsModule
+    TestResultsModule,
+    FileVaultModule
   ],
   exports: [RouterModule],
   declarations: DashboardComponents,

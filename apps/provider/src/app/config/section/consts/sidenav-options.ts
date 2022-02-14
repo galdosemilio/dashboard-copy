@@ -27,4 +27,5 @@ export class SidenavOptions {
   static TEST_RESULTS = 'test_results'
   static ACCOUNT = 'profile_settings'
   static NEW_APPOINTMENT = 'new_appointment'
+  static FILE_VAULT = 'file_vault'
 }
