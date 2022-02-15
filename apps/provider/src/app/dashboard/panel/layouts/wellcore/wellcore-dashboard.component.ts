@@ -14,6 +14,7 @@ import {
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { environment } from 'apps/provider/src/environments/environment'
+import { MeetingsDatabase } from '@app/shared/components/schedule'
 import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
@@ -26,6 +27,7 @@ import { filter } from 'rxjs/operators'
 export class WellcoreDashboardComponent implements OnInit {
   public dates: DateNavigatorOutput = {}
   public submittedMedicalIntakeForm = false
+  public hasMeeting = false
   public eligibleToSelfSchedule = false
   public isLoading = false
   public isPatient: boolean
@@ -37,6 +39,7 @@ export class WellcoreDashboardComponent implements OnInit {
     private formSubmission: FormSubmission,
     private measurementLabel: MeasurementLabelService,
     private packageEnrollment: PackageEnrollment,
+    private meetingDatabase: MeetingsDatabase,
     private notify: NotifierService
   ) {
     this.isPatient = this.context.user.accountType.id === AccountTypeIds.Client
@@ -56,12 +59,12 @@ export class WellcoreDashboardComponent implements OnInit {
     this.isLoading = true
 
     try {
-      this.submittedMedicalIntakeForm = await this.checkMedicalIntakeFormSubmission(
-        org
-      )
+      this.submittedMedicalIntakeForm =
+        await this.checkMedicalIntakeFormSubmission(org)
       this.eligibleToSelfSchedule = await this.checkSelfSchedulingEligibility(
         org
       )
+      this.hasMeeting = await this.checkHasMeeting(org)
     } catch (err) {
       this.notify.error(err)
     } finally {
@@ -92,6 +95,18 @@ export class WellcoreDashboardComponent implements OnInit {
     })
 
     return res.enrolled
+  }
+
+  private async checkHasMeeting(org: SelectedOrganization): Promise<boolean> {
+    const res = await this.meetingDatabase
+      .fetch({
+        account: this.context.user.id,
+        organization: org.id,
+        limit: 1
+      })
+      .toPromise()
+
+    return res.data.length > 0
   }
 
   private async resolveFirstLabel(): Promise<void> {

@@ -20,9 +20,12 @@
         </button>
       </li>
       <li>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
           <button mat-button routerLink="/new-appointment" [disabled]="!eligibleToSelfSchedule">
             {{ 'BOARD.SCHEDULE_PROVIDER_VIDEO_CONFERENCE_CALL' | translate }}
           </button>
+          <mat-icon *ngIf="hasMeeting">check_circle</mat-icon>
+        </div>
       </li>
     </ul>
 
