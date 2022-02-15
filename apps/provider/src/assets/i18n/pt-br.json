@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "Não tem permissão para criar uma nova conta. Por favor, peça ao administrador da sua clínica as permissões de administrador.",
       "CANNOT_CREATE_MEETING": "A reunião não pode ser criada.",
       "CANNOT_EDIT_MEETING": "Não é possível recuperar todas as informações para editar.",
+      "CANT_LOAD_BACKGROUND_IMG": "Não é possível carregar a imagem de fundo. Aplicando borrão.",
       "CLINIC_EMPTY": "Por favor selecione uma clínica.",
       "DATA_TYPE_IS_REQUIRED": "{{type}} é necessário.",
       "DATE_SHOULD_BE_FUTURE": "A data da reunião deve ser no futuro.",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "Microfone",
     "AUDIO_OUTPUT": "Saída de Áudio",
+    "VIDEO_BACKGROUND": "Fundo de vídeo",
     "VIDEO_INPUT": "Câmarta"
   },
   "VISIBILITY": {

@@ -74,6 +74,8 @@ export interface CallState {
   isAttemptingToReconnect: boolean
   reconnectionBumper: boolean
   participantIsAway: boolean
+  videoBackgroundEnabled: boolean
+  videoBackgroundUrl: string
 }
 
 export const initialRoom: RoomState = {
@@ -130,5 +132,7 @@ export const initialState: CallState = {
   conferencingEnabled: false,
   isAttemptingToReconnect: false,
   reconnectionBumper: false,
-  participantIsAway: false
+  participantIsAway: false,
+  videoBackgroundEnabled: true,
+  videoBackgroundUrl: ''
 }

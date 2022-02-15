@@ -40,6 +40,10 @@ export const WellCoreTestSectionConfig: SectionConfigDetails = {
   },
   DIGITAL_LIBRARY: {
     EXTERNAL_VISIBILITY_OPTIONS_ENABLED: true
+  },
+  COMMUNICATIONS: {
+    ENABLE_CALL_BACKGROUNDS: true,
+    CALL_BACKGROUND_URL: 'assets/img/wellcore/wellcorebackground.jpeg'
   }
 }
 
@@ -78,5 +82,9 @@ export const WellCoreProdSectionConfig: SectionConfigDetails = {
   },
   DIGITAL_LIBRARY: {
     EXTERNAL_VISIBILITY_OPTIONS_ENABLED: true
+  },
+  COMMUNICATIONS: {
+    ENABLE_CALL_BACKGROUNDS: true,
+    CALL_BACKGROUND_URL: 'assets/img/wellcore/wellcorebackground.jpeg'
   }
 }

@@ -94,6 +94,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   },
   DIGITAL_LIBRARY: {
     EXTERNAL_VISIBILITY_OPTIONS_ENABLED: false
+  },
+  COMMUNICATIONS: {
+    ENABLE_CALL_BACKGROUNDS: false
   }
 }
 
@@ -171,5 +174,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   },
   DIGITAL_LIBRARY: {
     EXTERNAL_VISIBILITY_OPTIONS_ENABLED: false
+  },
+  COMMUNICATIONS: {
+    ENABLE_CALL_BACKGROUNDS: false
   }
 }

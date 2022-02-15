@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "Du har ikke tilladelse til at oprette en ny konto. Spørg din klinikadministrator om administratorrettigheder.",
       "CANNOT_CREATE_MEETING": "Mødet kan ikke oprettes.",
       "CANNOT_EDIT_MEETING": "Kan ikke hente al den information, der skal redigeres.",
+      "CANT_LOAD_BACKGROUND_IMG": "Kan ikke indlæse baggrundsbillede. Anvende sløring.",
       "CLINIC_EMPTY": "Vælg venligst en klinik.",
       "DATA_TYPE_IS_REQUIRED": "{{type}} er påkrævet.",
       "DATE_SHOULD_BE_FUTURE": "Mødedatoen skal være i fremtiden.",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "Mikrofon",
     "AUDIO_OUTPUT": "Lydudgang",
+    "VIDEO_BACKGROUND": "Video Baggrund",
     "VIDEO_INPUT": "Kamera"
   },
   "VISIBILITY": {

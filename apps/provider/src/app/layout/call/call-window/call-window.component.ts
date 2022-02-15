@@ -43,7 +43,11 @@ import { auditTime, map, tap } from 'rxjs/operators'
 import * as CallActions from '../../store/call'
 import { TwilioBandwidthService } from '../services/twilio-bandwidth.service'
 import { TwilioService } from '../services/twilio.service'
-import { GestureService } from '@app/service'
+import { ContextService, GestureService } from '@app/service'
+import { resolveConfig } from '@app/config/section'
+import { ApplyVideoBackgroundSetting } from '../../../layout/store/call/call.action'
+import { DeviceDetectorService } from 'ngx-device-detector'
+import { Browser } from '@app/shared'
 
 interface StickyArea {
   x: number
@@ -58,7 +62,9 @@ interface StickyArea {
   templateUrl: './call-window.component.html',
   styleUrls: ['./call-window.component.scss']
 })
-export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CallWindowComponent
+  implements AfterViewInit, OnInit, OnDestroy, AfterViewInit
+{
   public callState: CallState
   public remoteConnectionStatus: ConnectionStatus
   public dragHandleCoords = { x: 150, y: 10 }
@@ -101,13 +107,15 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
   private callWindow: Element
   private currentRemoteVideoState: boolean
   private inactivityTimeout = 60000
-  private inactivityTimeoutInterval: number
+  private inactivityTimeoutInterval
   private inactivityTimeoutActive = false
   private dataTrackTimeout = 4
   private ringingCountdownInterval: any
 
   constructor(
     private cdr: ChangeDetectorRef,
+    private context: ContextService,
+    private deviceDetector: DeviceDetectorService,
     private gesture: GestureService,
     private store: Store<UIState>,
     private translator: TranslateService,
@@ -116,9 +124,8 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
     private twilioBandwidth: TwilioBandwidthService,
     private twilioService: TwilioService
   ) {
-    this.checkRemoteConnectivityStatus = this.checkRemoteConnectivityStatus.bind(
-      this
-    )
+    this.checkRemoteConnectivityStatus =
+      this.checkRemoteConnectivityStatus.bind(this)
     this.moveWindowToPointer = this.moveWindowToPointer.bind(this)
     this.stopFollowingPointer = this.stopFollowingPointer.bind(this)
   }
@@ -197,7 +204,9 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit(): void {
+    this.resolveCallBackgroundSettings()
+
     this.stickies = Array.from(
       document.body.querySelectorAll('.ccr-call-window-sticky')
     )
@@ -216,7 +225,9 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
             enableAudio: this.callState.hasAudioDeviceAccess,
             enableVideo: (storageSettings && storageSettings.video) || false,
             roomName: this.callState.room.name,
-            authenticationToken: this.callState.twilioToken
+            authenticationToken: this.callState.twilioToken,
+            videoBackgroundEnabled: this.callState.videoBackgroundEnabled,
+            videoBackgroundUrl: this.callState.videoBackgroundUrl
           })
         )
         window.localStorage.removeItem(STORAGE_VIDEOCONFERENCE_SETTINGS)
@@ -423,6 +434,31 @@ export class CallWindowComponent implements OnInit, OnDestroy, AfterViewInit {
       `position: absolute; top: ${
         $event.clientY - this.dragHandleCoords.y
       }px; left: ${$event.clientX - this.dragHandleCoords.x}px;`
+    )
+  }
+
+  private resolveCallBackgroundSettings(): void {
+    const shouldShowCallBackground =
+      Browser.isChrome(this.deviceDetector) &&
+      (resolveConfig(
+        'COMMUNICATIONS.ENABLE_CALL_BACKGROUNDS',
+        this.context.organization
+      ) ??
+        false)
+
+    const backgroundUrl: string =
+      resolveConfig(
+        'COMMUNICATIONS.CALL_BACKGROUND_URL',
+        this.context.organization
+      ) ?? 'assets/img/callwallpaper.png'
+
+    this.store.dispatch(
+      shouldShowCallBackground
+        ? new ApplyVideoBackgroundSetting({
+            enabled: this.callState.videoBackgroundEnabled,
+            url: backgroundUrl
+          })
+        : new ApplyVideoBackgroundSetting({ enabled: false })
     )
   }
 

@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "ليس لديك صلاحية لإنشاء حساب جديد. يرجى أن تطلب الصلاحية من مدير عيادتك",
       "CANNOT_CREATE_MEETING": "لا يمكن إنشاء الاجتماع.",
       "CANNOT_EDIT_MEETING": "لا يمكن استرجاع كل المعلومات لتحريرها.",
+      "CANT_LOAD_BACKGROUND_IMG": "لا يمكن تحميل صورة الخلفية. تطبيق طمس.",
       "CLINIC_EMPTY": "يرجى اختيار عيادة",
       "DATA_TYPE_IS_REQUIRED": "{{type}} مطلوب.",
       "DATE_SHOULD_BE_FUTURE": "يجب أن يكون موعد الاجتماع في المستقبل",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "ميكروفون",
     "AUDIO_OUTPUT": "مخرج الصوت",
+    "VIDEO_BACKGROUND": "خلفية الفيديو",
     "VIDEO_INPUT": "الة تصوير"
   },
   "VISIBILITY": {

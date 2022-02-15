@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import {
   AbortCall,
+  ApplyVideoBackgroundSetting,
   DisableCurrentUserCamera,
   DisableCurrentUserMicrophone,
   EnableCurrentUserCamera,
@@ -18,6 +19,10 @@ import { select, Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
+import { Browser, sleep } from '@app/shared'
+import { resolveConfig } from '@app/config/section'
+import { ContextService } from '@app/service'
+import { DeviceDetectorService } from 'ngx-device-detector'
 
 @UntilDestroy()
 @Component({
@@ -27,17 +32,36 @@ import { debounceTime } from 'rxjs/operators'
 })
 export class CallControlsComponent implements OnDestroy, OnInit {
   public callState: CallState
+  public shouldShowCallBackground = false
+  public toggleBackgroundImage$: Subject<void> = new Subject<void>()
   public toggleCamera$: Subject<void> = new Subject<void>()
   public toggleMicrophone$: Subject<void> = new Subject<void>()
   public videoPopupTrigger: Subject<void> = new Subject<void>()
 
-  constructor(private store: Store<UIState>) {
+  constructor(
+    private context: ContextService,
+    private deviceDetector: DeviceDetectorService,
+    private store: Store<UIState>
+  ) {
     this.store
       .pipe(untilDestroyed(this), select(callSelector))
       .subscribe((callState) => (this.callState = callState))
   }
 
   public ngOnInit(): void {
+    this.shouldShowCallBackground =
+      Browser.isChrome(this.deviceDetector) &&
+      (resolveConfig(
+        'COMMUNICATIONS.ENABLE_CALL_BACKGROUNDS',
+        this.context.organization
+      ) ??
+        false)
+
+    this.toggleBackgroundImage$
+      .pipe(untilDestroyed(this), debounceTime(500))
+      .subscribe(() =>
+        this.onToggleBackgroundImage(this.callState.videoBackgroundEnabled)
+      )
     this.toggleCamera$
       .pipe(untilDestroyed(this), debounceTime(500))
       .subscribe(() => {
@@ -74,24 +98,32 @@ export class CallControlsComponent implements OnDestroy, OnInit {
     this.store.dispatch(new HangUp())
   }
 
-  private onToggleMicrophone(isEnabled): void {
-    if (isEnabled) {
-      this.store.dispatch(new DisableCurrentUserMicrophone())
-    } else {
-      this.store.dispatch(new EnableCurrentUserMicrophone())
-    }
+  private async onToggleBackgroundImage(isEnabled): Promise<void> {
+    this.store.dispatch(
+      new ApplyVideoBackgroundSetting({ enabled: !isEnabled })
+    )
+
+    this.store.dispatch(new DisableCurrentUserCamera())
+    await sleep(600)
+    this.store.dispatch(new EnableCurrentUserCamera())
   }
 
-  private onToggleCamera(isEnabled): void {
+  private onToggleCamera(isEnabled: boolean): void {
     if (this.callState.callId === '' || !this.callState.hasVideoDeviceAccess) {
       this.videoPopupTrigger.next()
       return
     }
 
-    if (isEnabled) {
-      this.store.dispatch(new DisableCurrentUserCamera())
-    } else {
-      this.store.dispatch(new EnableCurrentUserCamera())
-    }
+    this.store.dispatch(
+      isEnabled ? new DisableCurrentUserCamera() : new EnableCurrentUserCamera()
+    )
+  }
+
+  private onToggleMicrophone(isEnabled: boolean): void {
+    this.store.dispatch(
+      isEnabled
+        ? new DisableCurrentUserMicrophone()
+        : new EnableCurrentUserMicrophone()
+    )
   }
 }

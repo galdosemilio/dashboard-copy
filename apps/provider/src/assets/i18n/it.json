@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "Non hai il permesso di creare nuovi account. Ti preghiamo di chiedere all'amministratore della tua clinica i permessi da admin.",
       "CANNOT_CREATE_MEETING": "Non è possibile creare l'incontro.",
       "CANNOT_EDIT_MEETING": "Non è possibile recuperare tutte le informazioni da modificare.",
+      "CANT_LOAD_BACKGROUND_IMG": "Impossibile caricare l'immagine di sfondo. Applicazione della sfocatura.",
       "CLINIC_EMPTY": "Ti preghiamo di selezionare una clinica.",
       "DATA_TYPE_IS_REQUIRED": "{{type}} è richiesto.",
       "DATE_SHOULD_BE_FUTURE": "La data dell'incontro deve essere nel futuro.",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "Microfono",
     "AUDIO_OUTPUT": "Uscita Audio",
+    "VIDEO_BACKGROUND": "Sfondo di video",
     "VIDEO_INPUT": "Videocamera"
   },
   "VISIBILITY": {

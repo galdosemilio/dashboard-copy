@@ -31,6 +31,25 @@ fxLayoutGap="15px">
       </mat-form-field>
     </div>
 
+    <div
+    *ngIf="shouldShowCallBackground && callState?.hasVideoDeviceAccess && callState?.videoInputDevices.length"
+    class="input-container"
+    fxLayout="column"
+    fxLayoutAlign="space-between stretch">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <span class="input-label" fxFlex>{{ 'VIDEO.VIDEO_BACKGROUND' | translate }}</span>
+      </div>
+
+      <mat-form-field
+      class="ccr-form-field"
+      floatLabel="never">
+        <mat-select formControlName="videoBackgroundEnabled" [placeholder]="'VIDEO.VIDEO_BACKGROUND' | translate">
+          <mat-option [value]="true">{{ 'GLOBAL.ENABLED' | translate }}</mat-option>
+          <mat-option [value]="false">{{ 'GLOBAL.DISABLED' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <!-- Audio Input Field -->
     <div
     class="input-container"

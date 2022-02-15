@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "אין לך הרשאה ליצירת חשבון חדש. יש לבקש אישורי הרשאות ממנהל המרפאה.",
       "CANNOT_CREATE_MEETING": "לא ניתן ליצור את הפגישה.",
       "CANNOT_EDIT_MEETING": "אין אפשרות לשחזר את כל המידע כדי לערוך.",
+      "CANT_LOAD_BACKGROUND_IMG": "לא ניתן לטעון תמונת רקע. החלת טשטוש.",
       "CLINIC_EMPTY": "יש לבחור מרפאה.",
       "DATA_TYPE_IS_REQUIRED": "{{type}} נדרש.",
       "DATE_SHOULD_BE_FUTURE": "תאריך הפגישה צריך להיות עתידי.",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "מיקרופון",
     "AUDIO_OUTPUT": "פלט שמע",
+    "VIDEO_BACKGROUND": "רקע וידאו",
     "VIDEO_INPUT": "מצלמה"
   },
   "VISIBILITY": {

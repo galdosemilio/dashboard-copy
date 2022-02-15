@@ -519,6 +519,11 @@
                 "glob": "wellcore/**/*",
                 "input": "libs/layout/src/assets/",
                 "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@twilio/video-processors/dist/build",
+                "output": "twilio-video"
               }
             ],
             "styles": [
@@ -547,11 +552,13 @@
               "linkifyjs",
               "@cordobo/qrcode",
               "twilio-video",
+              "@twilio/video-processors",
               "ngrx-store-freeze",
               "chart.js",
               "socket.io-client",
               "pdfmake",
-              "@coachcare/sdk"
+              "@coachcare/sdk",
+              "seedrandom"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

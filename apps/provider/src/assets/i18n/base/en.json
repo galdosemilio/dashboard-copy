@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "You do not have permission to create new account. Please ask your clinic administrator for admin permissions.",
       "CANNOT_CREATE_MEETING": "The meeting cannot be created.",
       "CANNOT_EDIT_MEETING": "Cannot retrieve all the information to edit.",
+      "CANT_LOAD_BACKGROUND_IMG": "Cannot load background image. Applying blur.",
       "CLINIC_EMPTY": "Please select a clinic.",
       "DATA_TYPE_IS_REQUIRED": "{{ type }} is required.",
       "DATE_SHOULD_BE_FUTURE": "Meeting date should be in future.",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "Microphone",
     "AUDIO_OUTPUT": "Audio Output",
+    "VIDEO_BACKGROUND": "Video Background",
     "VIDEO_INPUT": "Camera"
   },
   "VISIBILITY": {

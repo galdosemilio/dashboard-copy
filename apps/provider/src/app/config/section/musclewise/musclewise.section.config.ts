@@ -9,5 +9,9 @@ export const MuscleWiseSectionConfig: SectionConfigDetails = {
     PATIENT_SHOWN_OPTIONS: [SidenavOptions.STORE],
     FETCH_STORE_LINK: true,
     STORE_NAV_NAME: _('SIDENAV.MANAGE_MY_SUBSCRIPTION')
+  },
+  COMMUNICATIONS: {
+    ENABLE_CALL_BACKGROUNDS: true,
+    CALL_BACKGROUND_URL: 'assets/img/musclewise/musclewisebackground.jpeg'
   }
 }

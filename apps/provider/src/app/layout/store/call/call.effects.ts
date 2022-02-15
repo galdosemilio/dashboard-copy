@@ -243,7 +243,9 @@ export class CallEffects {
                 enableAudio: this.callState.hasAudioDeviceAccess,
                 enableVideo: this.callState.isLocalVideoEnabled ?? false,
                 roomName: this.callState.room.name,
-                authenticationToken: this.callState.twilioToken
+                authenticationToken: this.callState.twilioToken,
+                videoBackgroundEnabled: this.callState.videoBackgroundEnabled,
+                videoBackgroundUrl: this.callState.videoBackgroundUrl
               })
             )
           } else if (this.callState.source === Source.OUTBOUND) {
@@ -534,7 +536,12 @@ export class CallEffects {
       this.actions$.pipe(
         ofType(callAction.ENABLE_CURRENT_USER_CAMERA),
         debounceTime(300),
-        tap(() => this.twilioService.enableCamera())
+        tap(() =>
+          this.twilioService.enableCamera({
+            backgroundEnabled: this.callState.videoBackgroundEnabled,
+            backgroundUrl: this.callState.videoBackgroundUrl
+          })
+        )
       ),
     { dispatch: false }
   )
@@ -594,7 +601,11 @@ export class CallEffects {
       this.actions$.pipe(
         ofType(callAction.REINITIALIZE_ROOM),
         debounceTime(300),
-        tap(() => this.twilioService.reinitialize())
+        tap(() =>
+          this.twilioService.reinitialize({
+            videoBackgroundEnabled: this.callState.videoBackgroundEnabled
+          })
+        )
       ),
     { dispatch: false }
   )

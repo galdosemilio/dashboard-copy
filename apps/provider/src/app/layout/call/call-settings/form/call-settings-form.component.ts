@@ -13,6 +13,7 @@ import {
   ApplySelectedAudioDevice,
   ApplySelectedAudioOutputDevice,
   ApplySelectedVideoDevice,
+  ApplyVideoBackgroundSetting,
   callSelector,
   CallState,
   CheckDevices,
@@ -21,11 +22,15 @@ import {
 } from '@app/layout/store/call'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { select, Store } from '@ngrx/store'
-import { DeviceInfo } from 'ngx-device-detector'
+import { DeviceDetectorService, DeviceInfo } from 'ngx-device-detector'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { createLocalVideoTrack, LocalVideoTrack } from 'twilio-video'
 import { BROWSER_TYPES, TwilioService } from '../../services/twilio.service'
+import { resolveConfig } from '@app/config/section'
+import { ContextService, NotifierService } from '@app/service'
+import { CallTrack } from '../../model'
+import { Browser } from '@app/shared'
 
 @UntilDestroy()
 @Component({
@@ -43,6 +48,7 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
   @ViewChild('videoPreview', { static: true }) videoPreview
 
   BROWSER_TYPES = BROWSER_TYPES
+  public callBackgroundUrl: string
   callState: CallState
   canPlaySound = false
   deviceHelpLinks = {
@@ -65,7 +71,8 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
     video: {
       deviceId: '',
       enabled: false,
-      track: undefined
+      track: undefined,
+      backgroundEnabled: true
     },
     audio: {
       deviceId: ''
@@ -77,11 +84,15 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
   }
   testAudioSound
   formValueChangesSub
+  public shouldShowCallBackground = false
 
   private onApply$: Subject<void> = new Subject<void>()
 
   constructor(
     private builder: FormBuilder,
+    private context: ContextService,
+    private deviceDetector: DeviceDetectorService,
+    private notifier: NotifierService,
     private store: Store<UIState>,
     private twilio: TwilioService
   ) {
@@ -102,6 +113,20 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.shouldShowCallBackground =
+      Browser.isChrome(this.deviceDetector) &&
+      (resolveConfig(
+        'COMMUNICATIONS.ENABLE_CALL_BACKGROUNDS',
+        this.context.organization
+      ) ??
+        false)
+
+    this.callBackgroundUrl =
+      resolveConfig(
+        'COMMUNICATIONS.CALL_BACKGROUND_URL',
+        this.context.organization
+      ) || 'assets/img/callwallpaper.png'
+
     // Whenever a media device is added or removed, update the list.
     navigator.mediaDevices.ondevicechange = () => {
       this.store.dispatch(new FetchDevices(false))
@@ -161,13 +186,17 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
     this.form = this.builder.group({
       selectedAudioInputDevice: [],
       selectedVideoInputDevice: [],
+      videoBackgroundEnabled: [true],
       selectedAudioOutputDevice: []
     })
 
     this.formValueChangesSub = this.form.valueChanges
       .pipe(untilDestroyed(this), debounceTime(300))
       .subscribe((controls) => {
-        void this.updateVideoPreview(controls.selectedVideoInputDevice)
+        void this.updateVideoPreview(
+          controls.selectedVideoInputDevice,
+          controls.videoBackgroundEnabled
+        )
         void this.updateAudioPreview(controls.selectedAudioInputDevice)
         this.previewState.audioOutput.deviceId =
           controls.selectedAudioOutputDevice
@@ -177,7 +206,10 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
     this.form.patchValue({
       selectedAudioInputDevice: this.callState.selectedAudioInputDevice,
       selectedVideoInputDevice: this.callState.selectedVideoInputDevice,
-      selectedAudioOutputDevice: this.callState.selectedAudioOutputDevice
+      selectedAudioOutputDevice: this.callState.selectedAudioOutputDevice,
+      videoBackgroundEnabled: this.shouldShowCallBackground
+        ? this.callState.videoBackgroundEnabled
+        : false
     })
   }
 
@@ -202,6 +234,16 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
         new ApplySelectedVideoDevice({
           deviceId: this.form.value.selectedVideoInputDevice,
           closeSettings
+        })
+      )
+    }
+    if (
+      this.callState.videoBackgroundEnabled !==
+      this.form.value.videoBackgroundEnabled
+    ) {
+      this.store.dispatch(
+        new ApplyVideoBackgroundSetting({
+          enabled: this.form.value.videoBackgroundEnabled
         })
       )
     }
@@ -260,23 +302,41 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
     this.previewState.audio.deviceId = deviceId
   }
 
-  private async updateVideoPreview(deviceId: string) {
-    if (!deviceId || this.previewState.video.deviceId === deviceId) {
-      return
-    }
+  private async updateVideoPreview(
+    deviceId: string,
+    backgroundEnabled: boolean
+  ) {
+    try {
+      if (
+        !deviceId ||
+        (this.previewState.video.deviceId === deviceId &&
+          this.previewState.video.backgroundEnabled === backgroundEnabled)
+      ) {
+        return
+      }
 
-    this.previewState.video.deviceId = deviceId
-    this.disableVideoPreview()
-    const track = await createLocalVideoTrack({
-      name: deviceId
-    })
-    const element = track.attach()
-    element.style.width = '100%'
-    element.style.height = 'auto'
-    element.setAttribute('muted', 'true')
-    this.videoPreview.nativeElement.appendChild(element)
-    this.previewState.video.enabled = true
-    this.previewState.video.track = track
-    this.videoTrack$.next(track)
+      this.previewState.video.deviceId = deviceId
+      this.previewState.video.backgroundEnabled = backgroundEnabled
+      this.disableVideoPreview()
+      const track = await createLocalVideoTrack({
+        name: deviceId
+      })
+      const element = track.attach()
+      element.style.width = '100%'
+      element.style.height = 'auto'
+      element.setAttribute('muted', 'true')
+      this.videoPreview.nativeElement.appendChild(element)
+      this.previewState.video.enabled = true
+      this.previewState.video.track = track
+      this.videoTrack$.next(track)
+
+      if (!backgroundEnabled) {
+        return
+      }
+
+      await CallTrack.attachBackgroundToTrack(track, this.callBackgroundUrl)
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 }

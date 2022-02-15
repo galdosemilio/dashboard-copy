@@ -301,8 +301,9 @@ export function callReducer(state = initialState, action: Action): CallState {
         .payload
       return { ...state, selectedAudioInputDevice: selAudioDevice.deviceId }
     case Actions.APPLY_SELECTED_AUDIO_OUTPUT_DEVICE:
-      const selAudioOutputDevice = (action as Actions.ApplySelectedAudioOutputDevice)
-        .payload
+      const selAudioOutputDevice = (
+        action as Actions.ApplySelectedAudioOutputDevice
+      ).payload
       return {
         ...state,
         selectedAudioOutputDevice: selAudioOutputDevice.deviceId
@@ -311,6 +312,13 @@ export function callReducer(state = initialState, action: Action): CallState {
       const selVideoDevice = (action as Actions.ApplySelectedVideoDevice)
         .payload
       return { ...state, selectedVideoInputDevice: selVideoDevice.deviceId }
+    case Actions.APPLY_VIDEO_BACKGROUND_SETTING:
+      const videoBackgroundEnabled = (
+        action as Actions.ApplyVideoBackgroundSetting
+      ).payload.enabled
+      const videoBackgroundUrl = (action as Actions.ApplyVideoBackgroundSetting)
+        .payload.url
+      return { ...state, videoBackgroundEnabled, videoBackgroundUrl }
     case Actions.FETCH_AUDIO_DEVICES_COMPLETE:
       const audioDevices = (action as Actions.FetchAudioDevicesComplete).payload
       return {
@@ -319,8 +327,9 @@ export function callReducer(state = initialState, action: Action): CallState {
         audioInputDevices: audioDevices
       }
     case Actions.FETCH_AUDIO_OUTPUT_DEVICES_COMPLETE:
-      const audioOutputDevices = (action as Actions.FetchAudioOutputDevicesComplete)
-        .payload
+      const audioOutputDevices = (
+        action as Actions.FetchAudioOutputDevicesComplete
+      ).payload
       return {
         ...state,
         selectedAudioOutputDevice: audioOutputDevices[0].deviceId,

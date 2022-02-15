@@ -1,4 +1,5 @@
 export * from './clinic-listing.details'
+export * from './communications.details'
 export * from './journal.details'
 export * from './global.details'
 export * from './library.details'

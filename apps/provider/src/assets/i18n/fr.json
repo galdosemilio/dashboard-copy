@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "Vous n’avez pas l’autorisation pour créer un nouveau compte. Veuillez demander à votre administrateur clinique pour les autorisations administrateur.",
       "CANNOT_CREATE_MEETING": "La réunion ne peut pas être créée.",
       "CANNOT_EDIT_MEETING": "Impossible de retrouver les informations pour éditer.",
+      "CANT_LOAD_BACKGROUND_IMG": "Impossible de charger l'image d'arrière-plan. Appliquer flou.",
       "CLINIC_EMPTY": "Veuillez sélectionner une clinique",
       "DATA_TYPE_IS_REQUIRED": "{{type}} est requis.",
       "DATE_SHOULD_BE_FUTURE": "La date de rencontre doit être dans le futur",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "Microphone",
     "AUDIO_OUTPUT": "Sortie audio",
+    "VIDEO_BACKGROUND": "Fond vidéo",
     "VIDEO_INPUT": "Appareil photo"
   },
   "VISIBILITY": {

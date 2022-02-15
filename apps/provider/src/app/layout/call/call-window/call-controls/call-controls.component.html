@@ -20,6 +20,15 @@
     </ccr-popup-description>
   </button>
 </div>
+<div *ngIf="shouldShowCallBackground" class="call-control" fxLayout="column" fxLayoutAlign="center center">
+  <button
+    [disabled]="!callState.isCameraEnabled"
+    (click)="toggleBackgroundImage$.next()"
+    mat-mini-fab>
+    <mat-icon *ngIf="!callState.videoBackgroundEnabled">image</mat-icon>
+    <mat-icon *ngIf="callState.videoBackgroundEnabled">image_not_supported</mat-icon>
+  </button>
+</div>
 <div class="call-control" xFlex fxLayout="column" fxLayoutAlign="center center">
   <button mat-mini-fab (click)="onOpenCallSettings()"
     [disabled]="callState.callId === ''">

@@ -1062,6 +1062,7 @@
       "CANNOT_CREATE_ACCOUNTS": "Sie haben keine Berechtigung ein neues Konto zu erstellen. Bitte fragen Sie Ihren Klinik-Administrator für die Admin-Berechtigungen.",
       "CANNOT_CREATE_MEETING": "Das Meeting kann nicht erstellt werden.",
       "CANNOT_EDIT_MEETING": "Kann nicht alle die zu bearbeitenden Informationen abrufen.",
+      "CANT_LOAD_BACKGROUND_IMG": "Hintergrundbild kann nicht laden. Auftragen von Unschärfe.",
       "CLINIC_EMPTY": "Bitte wählen Sie eine Klinik.",
       "DATA_TYPE_IS_REQUIRED": "{{type}} ist erforderlich.",
       "DATE_SHOULD_BE_FUTURE": "Das Treffensdatum sollte in Zukunft sein.",
@@ -1772,6 +1773,7 @@
   "VIDEO": {
     "AUDIO_INPUT": "Mikrofon",
     "AUDIO_OUTPUT": "Audioausgang",
+    "VIDEO_BACKGROUND": "Videobahnhintergrund",
     "VIDEO_INPUT": "Kamera"
   },
   "VISIBILITY": {

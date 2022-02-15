@@ -92,6 +92,8 @@ export const APPLY_SELECTED_AUDIO_DEVICE = 'CALL apply selected audio device'
 export const APPLY_SELECTED_AUDIO_OUTPUT_DEVICE =
   'CALL apply selected audio output device'
 export const APPLY_SELECTED_VIDEO_DEVICE = 'CALL apply selected video device'
+export const APPLY_VIDEO_BACKGROUND_SETTING =
+  'CALL apply video background setting'
 export const CLOSE_SETTINGS = 'CALL close settings'
 export const ACCEPT_CALL = 'CALL accept call'
 export const ABORT_CALL = 'CALL abort call'
@@ -493,6 +495,12 @@ export class ApplySelectedAudioOutputDevice implements Action {
   readonly type = APPLY_SELECTED_AUDIO_OUTPUT_DEVICE
 
   constructor(public payload: { deviceId: string; closeSettings: boolean }) {}
+}
+
+export class ApplyVideoBackgroundSetting implements Action {
+  readonly type = APPLY_VIDEO_BACKGROUND_SETTING
+
+  constructor(public payload: { enabled: boolean; url?: string }) {}
 }
 
 export class ApplySelectedVideoDevice implements Action {

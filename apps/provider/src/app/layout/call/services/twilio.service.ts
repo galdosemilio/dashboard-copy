@@ -12,14 +12,17 @@ import {
 
 import { CreateCallTokenRequest, CreateCallTokenResponse } from '@coachcare/sdk'
 
-import { LoggingService } from '@app/service'
+import { LoggingService, NotifierService } from '@app/service'
 import { DeviceDetectorService } from 'ngx-device-detector'
+import { CallTrack } from '../model'
 
 export interface TwilioConfiguration {
   enableAudio: boolean
   enableVideo: boolean
   authenticationToken: string
   roomName: string
+  videoBackgroundEnabled: boolean
+  videoBackgroundUrl: string
 }
 
 export interface ParticipantIdentifier {
@@ -36,6 +39,11 @@ export const BROWSER_TYPES = {
   OPERA: 'opera',
   SAFARI: 'safari',
   UNKNOWN: 'unknown'
+}
+
+interface EnableCameraArgs {
+  backgroundUrl: string
+  backgroundEnabled: boolean
 }
 
 @Injectable()
@@ -79,6 +87,7 @@ export class TwilioService {
     private interaction: Interaction,
     private logging: LoggingService,
     private deviceService: DeviceDetectorService,
+    private notifier: NotifierService,
     private twilioBandwidthService: TwilioBandwidthService
   ) {
     this.onParticipantConnected = this.onParticipantConnected.bind(this)
@@ -149,7 +158,7 @@ export class TwilioService {
         if (this.configuration.enableVideo) {
           this.localVideoTrack = this.getDevicesOfKind(localTracks, 'video')[0]
         }
-        this.attachLocalTracks()
+        this.attachLocalTracks(twilioConfiguration)
         return { status: 'ok' }
       })
     )
@@ -251,7 +260,9 @@ export class TwilioService {
     this.localVideoEnabled = false
   }
 
-  async enableCamera() {
+  async enableCamera(
+    args: EnableCameraArgs = { backgroundEnabled: false, backgroundUrl: '' }
+  ) {
     if (this.currentRoom?.localParticipant === undefined) {
       return
     }
@@ -278,6 +289,12 @@ export class TwilioService {
     const element = track.attach()
     element.style.height = '100%'
     container.appendChild(element)
+
+    if (!args.backgroundEnabled) {
+      return
+    }
+
+    void this.addBackgroundToVideoTrack(track, args.backgroundUrl)
   }
 
   disableMicrophone() {
@@ -355,13 +372,13 @@ export class TwilioService {
     }
   }
 
-  reinitialize() {
-    this.attachLocalTracks()
+  reinitialize(twilioConfiguration: Partial<TwilioConfiguration>) {
+    this.attachLocalTracks(twilioConfiguration)
     this.attachAvailableParticipants()
   }
 
   // attach local (current user) tracks on DOM element
-  attachLocalTracks() {
+  attachLocalTracks(twilioConfiguration: Partial<TwilioConfiguration>) {
     const audioContainer = document.getElementById(
       this.localAudioMediaElementId
     )
@@ -374,6 +391,13 @@ export class TwilioService {
     }
     if (this.localVideoTrack) {
       this.attachTrack({ track: this.localVideoTrack }, videoContainer)
+
+      if (twilioConfiguration.videoBackgroundEnabled) {
+        void this.addBackgroundToVideoTrack(
+          this.localVideoTrack,
+          twilioConfiguration.videoBackgroundUrl
+        )
+      }
     }
   }
 
@@ -605,6 +629,19 @@ export class TwilioService {
     if (this.callEndingAudio) {
       this.callEndingAudio.pause()
       this.callEndingAudio.currentTime = 0
+    }
+  }
+
+  private async addBackgroundToVideoTrack(
+    track,
+    backgroundUrl: string
+  ): Promise<void> {
+    try {
+      const callBackgroundUrl = backgroundUrl || 'assets/img/callwallpaper.png'
+
+      await CallTrack.attachBackgroundToTrack(track, callBackgroundUrl)
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 
