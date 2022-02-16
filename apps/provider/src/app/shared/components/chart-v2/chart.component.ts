@@ -93,7 +93,7 @@ export class CcrMeasurementChartV2Component implements OnInit {
             return
           }
 
-          const chartWidth = metadata.data[0]._xScale.width
+          const chartWidth = metadata.data[0]?._xScale.width ?? 0
           const offset =
             chartWidth / tickSlotAmount / MEASUREMENT_MAX_ENTRIES_PER_DAY
 

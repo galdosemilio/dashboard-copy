@@ -181,6 +181,27 @@ export class MeasurementChartDataSource extends ChartDataSource<
           : this.criteria.recordedAt.end
     })
 
+    const datasets = groupedDataPoints.map((group) => ({
+      data: group.map((entry) => ({
+        x: moment(entry.createdAt.utc).startOf('hour').format(xlabelFormat),
+        y: convertToReadableFormat(
+          entry.value,
+          entry.type,
+          this.context.user.measurementPreference
+        ).toFixed(1)
+      })),
+      lineTension: 0
+    }))
+
+    const yCoords = datasets[0]?.data.map((entry) => Number(entry.y)) ?? []
+
+    let min = Math.min(...yCoords) ?? 0
+    let max = Math.max(...yCoords) ?? 0
+
+    // round to multiples of 10 for > 100
+    min = min > 100 ? Math.round(min / 10) * 10 : min
+    max = max > 100 ? Math.round(max / 10) * 10 : max
+
     const chart: ChartData = {
       colors: [
         {
@@ -193,17 +214,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
           backgroundColor: 'transparent'
         }
       ],
-      datasets: groupedDataPoints.map((group) => ({
-        data: group.map((entry) => ({
-          x: moment(entry.createdAt.utc).startOf('hour').format(xlabelFormat),
-          y: convertToReadableFormat(
-            entry.value,
-            entry.type,
-            this.context.user.measurementPreference
-          ).toFixed(1)
-        })),
-        lineTension: 0
-      })),
+      datasets: datasets,
       labels: [
         '',
         ...emptyGroup.map((dateGroup) =>
@@ -239,6 +250,14 @@ export class MeasurementChartDataSource extends ChartDataSource<
             {
               ticks: {
                 maxTicksLimit: xMaxTicks
+              }
+            }
+          ],
+          yAxes: [
+            {
+              ticks: {
+                min: Math.max(0, Math.round(min - min * 0.1)),
+                max: Math.round(max * 1.1)
               }
             }
           ]
