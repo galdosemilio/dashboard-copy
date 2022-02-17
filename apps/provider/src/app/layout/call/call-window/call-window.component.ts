@@ -224,6 +224,9 @@ export class CallWindowComponent
           new CreateLocalTracks({
             enableAudio: this.callState.hasAudioDeviceAccess,
             enableVideo: (storageSettings && storageSettings.video) || false,
+            videoInputDevice: this.callState.selectedVideoInputDevice,
+            audioInputDevice: this.callState.selectedAudioInputDevice,
+            audioOutputDevice: this.callState.selectedAudioOutputDevice,
             roomName: this.callState.room.name,
             authenticationToken: this.callState.twilioToken,
             videoBackgroundEnabled: this.callState.videoBackgroundEnabled,

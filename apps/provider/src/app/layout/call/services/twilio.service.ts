@@ -19,6 +19,9 @@ import { CallTrack } from '../model'
 export interface TwilioConfiguration {
   enableAudio: boolean
   enableVideo: boolean
+  videoInputDevice?: string
+  audioInputDevice?: string
+  audioOutputDevice?: string
   authenticationToken: string
   roomName: string
   videoBackgroundEnabled: boolean
@@ -142,16 +145,31 @@ export class TwilioService {
     twilioConfiguration: TwilioConfiguration
   ): Observable<any> {
     this.configuration = twilioConfiguration
+    this.selectedAudioInputDevice = twilioConfiguration.audioInputDevice
+    this.selectedAudioOutputDevice = twilioConfiguration.audioOutputDevice
+    this.selectedVideoInputDevice = twilioConfiguration.videoInputDevice
+
     if (this.generatedLocalTracks) {
       return of({ status: 'ok' })
     }
 
     this.generatedLocalTracks = true
 
+    const audioDeviceSetting = this.selectedAudioInputDevice
+      ? {
+          deviceId: this.selectedAudioInputDevice
+        }
+      : true
+    const videoDeviceSetting = this.selectedVideoInputDevice
+      ? {
+          deviceId: this.selectedVideoInputDevice
+        }
+      : true
+
     return from(
       createLocalTracks({
-        audio: twilioConfiguration.enableAudio,
-        video: twilioConfiguration.enableVideo
+        audio: twilioConfiguration.enableAudio ? audioDeviceSetting : false,
+        video: twilioConfiguration.enableVideo ? videoDeviceSetting : false
       }).then((localTracks) => {
         this.localTracks = localTracks
         this.localAudioTrack = this.getDevicesOfKind(localTracks, 'audio')[0]

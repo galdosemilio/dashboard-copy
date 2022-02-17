@@ -323,7 +323,8 @@ export function callReducer(state = initialState, action: Action): CallState {
       const audioDevices = (action as Actions.FetchAudioDevicesComplete).payload
       return {
         ...state,
-        selectedAudioInputDevice: audioDevices[0].deviceId,
+        selectedAudioInputDevice:
+          state.selectedAudioInputDevice || audioDevices[0].deviceId,
         audioInputDevices: audioDevices
       }
     case Actions.FETCH_AUDIO_OUTPUT_DEVICES_COMPLETE:
@@ -332,14 +333,16 @@ export function callReducer(state = initialState, action: Action): CallState {
       ).payload
       return {
         ...state,
-        selectedAudioOutputDevice: audioOutputDevices[0].deviceId,
+        selectedAudioOutputDevice:
+          state.selectedAudioOutputDevice || audioOutputDevices[0].deviceId,
         audioOutputDevices: audioOutputDevices
       }
     case Actions.FETCH_VIDEO_DEVICES_COMPLETE:
       const videoDevices = (action as Actions.FetchVideoDevicesComplete).payload
       return {
         ...state,
-        selectedVideoInputDevice: videoDevices[0].deviceId,
+        selectedVideoInputDevice:
+          state.selectedVideoInputDevice || videoDevices[0].deviceId,
         videoInputDevices: videoDevices
       }
     case Actions.CLOSE_CALLS_BEFORE_INITIATE:

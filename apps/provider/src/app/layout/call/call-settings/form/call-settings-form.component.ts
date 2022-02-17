@@ -319,7 +319,7 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
       this.previewState.video.backgroundEnabled = backgroundEnabled
       this.disableVideoPreview()
       const track = await createLocalVideoTrack({
-        name: deviceId
+        deviceId
       })
       const element = track.attach()
       element.style.width = '100%'

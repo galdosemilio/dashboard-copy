@@ -935,7 +935,7 @@ export class CallEffects {
         tap((payload) => {
           this.notifierService.success(_('NOTIFY.SUCCESS.MICROPHONE_CHANGED'))
           if (this.callState.isMicrophoneEnabled) {
-            this.twilioService.applyMicrophone(payload)
+            this.twilioService.applyMicrophone(payload.deviceId)
           }
 
           if (!payload.closeSettings) {
@@ -956,7 +956,7 @@ export class CallEffects {
         map((action) => (action as any).payload),
         tap((payload) => {
           this.notifierService.success(_('NOTIFY.SUCCESS.SPEAKER_CHANGES'))
-          this.twilioService.applySpeakers(payload)
+          this.twilioService.applySpeakers(payload.deviceId)
         })
       ),
     { dispatch: false }
@@ -971,7 +971,7 @@ export class CallEffects {
         tap((payload) => {
           this.notifierService.success(_('NOTIFY.SUCCESS.CAMERA_CHANGED'))
           if (this.callState.isCameraEnabled) {
-            this.twilioService.applyCamera(payload)
+            this.twilioService.applyCamera(payload.deviceId)
           }
         })
       ),
