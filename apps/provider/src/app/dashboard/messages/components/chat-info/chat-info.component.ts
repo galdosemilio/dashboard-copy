@@ -5,17 +5,24 @@ import { _ } from '@app/shared/utils'
 import { MatDialog } from '@coachcare/material'
 import { AccountTypeIds, Messaging } from '@coachcare/sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
-import { MessageThread } from '../messages/messages.interfaces'
 import { filter } from 'rxjs/operators'
 import { sortBy } from 'lodash'
+import {
+  MessageRecipient,
+  MessagesComponentMode,
+  MessageThread
+} from '../../model'
+import { TranslatePipe } from '@ngx-translate/core'
 
 @Component({
-  selector: 'ccr-messages-chat-info',
-  templateUrl: './messages-chat-info.component.html',
-  styleUrls: ['./messages-chat-info.component.scss'],
-  host: { class: 'ccr-messages' }
+  selector: 'messages-chat-info',
+  templateUrl: './chat-info.component.html',
+  styleUrls: ['./chat-info.component.scss'],
+  host: { class: 'ccr-messages' },
+  providers: [TranslatePipe]
 })
-export class CcrMessagesChatInfoComponent implements OnInit {
+export class MessagesChatInfoComponent implements OnInit {
+  @Input() mode: MessagesComponentMode = 'main'
   @Input() thread: MessageThread
 
   @Output() hideChatInfo: EventEmitter<void> = new EventEmitter<void>()
@@ -28,7 +35,8 @@ export class CcrMessagesChatInfoComponent implements OnInit {
     private deviceDetector: DeviceDetectorService,
     private dialog: MatDialog,
     private messaging: Messaging,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translatePipe: TranslatePipe
   ) {}
 
   public ngOnInit(): void {
@@ -41,13 +49,24 @@ export class CcrMessagesChatInfoComponent implements OnInit {
     this.hideChatInfo.emit()
   }
 
-  public onRemoveUser(user): void {
+  public onRemoveUser(user: MessageRecipient): void {
+    const shouldShowSelfPatientWarning =
+      this.mode === 'patient-profile' && user.id === this.context.accountId
+    const secondaryWarningText = shouldShowSelfPatientWarning
+      ? this.translatePipe.transform(
+          _('BOARD.THREAD_REMOVE_SELF_PATIENT_DESCRIPTION'),
+          { user }
+        )
+      : ''
+
     this.dialog
       .open(PromptDialog, {
         data: {
           title: _('BOARD.THREAD_REMOVE_MEMBER_TITLE'),
-          content: _('BOARD.THREAD_REMOVE_MEMBER_DESCRIPTION'),
-          contentParams: { user },
+          content: `${this.translatePipe.transform(
+            _('BOARD.THREAD_REMOVE_MEMBER_DESCRIPTION'),
+            { user }
+          )}${secondaryWarningText}`,
           yes: _('BOARD.THREAD_REMOVE_MEMBER_TITLE'),
           no: _('GLOBAL.CANCEL')
         },

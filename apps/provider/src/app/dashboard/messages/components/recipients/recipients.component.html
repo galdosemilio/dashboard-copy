@@ -10,7 +10,7 @@
     <mat-option *ngFor="let account of accounts" (onSelectionChange)="selectAccount(account)">
       <span>
         {{ (account.firstName + ' ' + account.lastName) | capitalize }}
-      <i>{{ formatAccountType(account.accountType.id) | translate }}</i>
+      <em>{{ formatAccountType(account.accountType.id) | translate }}</em>
       </span>
       <small>{{ account.email }}</small>
     </mat-option>

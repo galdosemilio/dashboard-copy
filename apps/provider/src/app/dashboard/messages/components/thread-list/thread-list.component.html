@@ -1,0 +1,24 @@
+<mat-nav-list>
+  <ng-container *ngFor="let thread of threads; let index = index">
+  <mat-list-item *ngIf="thread.recipients.length"
+  (click)="selectThread(thread, index)"
+  [class.active]="active === index">
+    <ccr-badge *ngIf="thread.unread">&nbsp;&nbsp;</ccr-badge>
+    <ccr-avatar size="messages" [account]="thread.recipients[0].id" matListIcon></ccr-avatar>
+    <h3 matLine>
+      <ng-container *ngIf="thread.recipients.length === 1; else recipients">
+        {{thread.recipients[0].name}}
+      </ng-container>
+
+      <ng-template #recipients>
+        <ng-container *ngFor="let recipient of thread.recipients; let last = last">
+          {{recipient.shortName}} <ng-container *ngIf="!last">, </ng-container>
+        </ng-container>
+      </ng-template>
+    </h3>
+    <p matLine class="message-lastsend">
+      {{thread.lastMessageSent}}
+    </p>
+  </mat-list-item>
+  </ng-container>
+</mat-nav-list>

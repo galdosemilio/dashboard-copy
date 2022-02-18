@@ -9,6 +9,7 @@ export * from './dieter/journal/journal.component'
 export * from './dieter/measurements/measurements.component'
 export * from './dieter/messages/messages.component'
 
+import { MessagesProviders } from '@app/dashboard/messages'
 import { DieterListingNoPhiComponent } from './dieter-listing-no-phi/dieter-listing-no-phi.component'
 import { DieterListingWithPhiComponent } from './dieter-listing-with-phi/dieter-listing-with-phi.component'
 import { DieterDashboardComponent } from './dieter/dashboard/dashboard.component'
@@ -93,5 +94,6 @@ export const DietersProviders = [
   LevlDatabase,
   SequenceEnrollmentDatabase,
   TriggerHistoryDatabase,
-  VaultDatabase
+  VaultDatabase,
+  ...MessagesProviders
 ]

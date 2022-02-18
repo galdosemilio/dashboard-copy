@@ -9,7 +9,8 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core'
 import {
   ConfigService,
@@ -26,32 +27,34 @@ import {
   GetAllMessagingResponse,
   GetThreadMessagingRequest,
   GetThreadMessagingResponse,
-  Messaging
+  Messaging,
+  MessagingItem
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
-import { MessagingItem } from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
 import { first, last, uniqBy } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, merge, Subject } from 'rxjs'
 import { auditTime, takeUntil } from 'rxjs/operators'
-import { MessageRecipient, MessageThread } from './messages.interfaces'
 import { MessageContainer } from '@app/shared/model'
 import { STORAGE_MESSAGE_INPUT_HEIGHT } from '@app/config'
 import { ApiHttpCallError } from '@coachcare/sdk/dist/lib/services'
+import { MessageRecipient, MessageThread } from '../../model'
 
 type MessagesDraftData = { message?: string; patientMessage?: string }
 
 @UntilDestroy()
 @Component({
-  selector: 'ccr-messages',
-  templateUrl: './messages.component.html',
+  selector: 'messages-chat-messages',
+  templateUrl: './chat-messages.component.html',
   host: { class: 'ccr-messages' },
-  styleUrls: ['./messages.component.scss']
+  styleUrls: ['./chat-messages.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class CcrMessagesComponent
-  implements OnChanges, OnDestroy, OnInit, AfterViewInit {
+export class MessagesChatMessagesComponent
+  implements OnChanges, OnDestroy, OnInit, AfterViewInit
+{
   @ViewChild('messageBody', { static: false })
   private messageContainer: ElementRef
 
@@ -64,6 +67,7 @@ export class CcrMessagesComponent
   dieterId: string
   @Input()
   mode: 'patient' | 'messages' = 'messages'
+  @Input() showBackButton = true
   @Input()
   set thread(thread: MessageThread) {
     this.forceDraftSync$.next()
@@ -352,7 +356,7 @@ export class CcrMessagesComponent
         }
         const latest = first<MessagingItem>(res.data)
         const current = last(this.messages)
-        // FIXME as the backend doesn't retrieve the added ID, this is a workaround
+
         if (
           current.messageId === null &&
           current.content === latest.content &&
@@ -475,7 +479,8 @@ export class CcrMessagesComponent
       .subscribe(
         (res: GetThreadMessagingResponse) => {
           try {
-            this.previousScrollHeight = this.messageContainer.nativeElement.scrollHeight
+            this.previousScrollHeight =
+              this.messageContainer.nativeElement.scrollHeight
           } catch (err) {
             this.previousScrollHeight = 0
           }

@@ -31,7 +31,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      i {
+      i,
+      em {
         font-size: 0.72em;
         font-style: italic;
         @include horizontal-margin-left(5px);

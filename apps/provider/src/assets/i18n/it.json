@@ -386,6 +386,7 @@
     "THREAD_REMOVE_MEMBER": "Rimuovere {{user.firstName}} {{user.lastName}} da Messaggio Discussione",
     "THREAD_REMOVE_MEMBER_DESCRIPTION": "Rimuovere <strong>{{user.firstName}} {{user.lastName}}</strong> da questa discussione messaggio?<br><br>Questo utente non avrà più accesso a questo thread dei messaggi, e non sarà in grado per visualizzare o aggiungere uno dei suoi messaggi. Puoi aggiungerle come membro a questo thread messaggio in qualsiasi momento in futuro, utilizzando il \"Aggiungi membro\" pulsante. In questo modo si concede loro l'accesso a tutti i messaggi precedenti e nuovi in ​​questa discussione, così come la possibilità di aggiungere i messaggi.",
     "THREAD_REMOVE_MEMBER_TITLE": "Rimuovere Gli",
+    "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Si sta visualizzando il profilo del paziente per {{user.firstName}} {{user.lastName}}. Se continui, questa discussione non sarà più visualizzabile su questo profilo del paziente. Se continui, questo thread del messaggio verrà trovato su <a href=\"messages\">Messaggi</a> pagina.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Almeno due membri devono rimanere sul messaggio Discussione {{user.firstName}} {{user.lastName}} non può essere rimosso",
     "THREAD_UNABLE_REMOVE_YOURSELF": "Non è possibile rimuovere da soli",
     "TIME_ZONE": "Fuso Orario",

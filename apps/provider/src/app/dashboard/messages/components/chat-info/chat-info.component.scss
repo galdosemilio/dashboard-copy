@@ -14,12 +14,12 @@ mat-icon {
 .ccr-icon-button {
   margin-top: 15px;
 
-  @media (max-width: $breakpoint-tablet - 1px) {
+  @media #{$medium-and-down} {
     width: 100%;
   }
 }
 
-@media only screen and (min-width: $breakpoint-tablet + 1px) {
+@media #{$medium-and-up} {
   .messages-header {
     padding-bottom: 2px;
     padding-top: 25px;
@@ -27,7 +27,7 @@ mat-icon {
 }
 
 .assoc-with-clinic {
-  @media only screen and (min-width: $breakpoint-tablet + 1px) {
+  @media #{$medium-and-up} {
     left: -3px;
     top: -3px;
     position: relative;
@@ -44,7 +44,7 @@ mat-icon {
   }
 }
 
-@media only screen and (min-width: $breakpoint-tablet + 1px) {
+@media #{$large-and-up} {
   .arrow_back {
     display: none;
   }

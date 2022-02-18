@@ -9,15 +9,18 @@ import {
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/material'
-import { AccountProvider, Messaging } from '@coachcare/sdk'
-
-import { MessageRecipient } from '@app/shared'
-import { AccountAccessData, AccSingleResponse } from '@coachcare/sdk'
+import {
+  AccountAccessData,
+  AccountProvider,
+  AccSingleResponse
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
+import { MessageRecipient } from '../../model'
+import { NotifierService } from '@app/service'
 
 @Component({
-  selector: 'app-messages-recipients',
+  selector: 'messages-recipients',
   templateUrl: 'recipients.component.html',
   encapsulation: ViewEncapsulation.None
 })
@@ -37,7 +40,10 @@ export class MessagesRecipientsComponent implements OnInit {
   public accounts: Array<AccountAccessData>
   public selected: Array<MessageRecipient> = []
 
-  constructor(private account: AccountProvider, private messaging: Messaging) {}
+  constructor(
+    private account: AccountProvider,
+    private notifier: NotifierService
+  ) {}
 
   ngOnInit() {
     this.searchCtrl = new FormControl()
@@ -45,11 +51,9 @@ export class MessagesRecipientsComponent implements OnInit {
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
         if (query) {
-          this.searchAccounts(query)
-        } else {
-          if (this.trigger) {
-            this.trigger.closePanel()
-          }
+          void this.searchAccounts(query)
+        } else if (this.trigger) {
+          this.trigger.closePanel()
         }
       })
   }
@@ -91,8 +95,9 @@ export class MessagesRecipientsComponent implements OnInit {
     this.changed.emit(this.selected)
   }
 
-  private searchAccounts(query: string): void {
-    void this.account.getList({ query }).then((res) => {
+  private async searchAccounts(query: string): Promise<void> {
+    try {
+      const res = await this.account.getList({ query })
       this.accounts = res.data.filter(
         (a) =>
           a.id !== this.current.id &&
@@ -101,6 +106,8 @@ export class MessagesRecipientsComponent implements OnInit {
       if (this.accounts.length > 0) {
         this.trigger.openPanel()
       }
-    })
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 }

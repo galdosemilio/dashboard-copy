@@ -1,13 +1,5 @@
 import { NamedEntity } from '@coachcare/sdk'
-
-export interface MessageRecipient {
-  id: string
-  name: string
-  shortName: string
-  firstName: string
-  lastName: string
-  accountType: string
-}
+import { MessageRecipient } from './message-recipient.interface'
 
 export interface MessageThread {
   threadId?: string

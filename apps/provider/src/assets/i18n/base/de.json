@@ -386,6 +386,7 @@
     "THREAD_REMOVE_MEMBER": "Entfernen Sie {{user.firstName}} {{user.lastName}} von Nachricht Thema",
     "THREAD_REMOVE_MEMBER_DESCRIPTION": "Remove <strong>{{user.firstName}} {{user.lastName}}</strong> von dieser Nachricht Thread?<br><br>Dieser Benutzer wird keinen Zugriff mehr auf diese Nachrichten-Thread, und nicht in der Lage sein, anzuzeigen oder eine ihrer Nachrichten hinzufügen. Sie können unter Verwendung des \"Mitglied hinzufügen\" Taste jederzeit in der Zukunft sich als Mitglied dieser Nachricht Thread hinzufügen. Dadurch wird sie den Zugang zu allen bisherigen und neuen Nachrichten in diesem Thread sowie die Fähigkeit hinzuzufügen Nachrichten zu gewähren.",
     "THREAD_REMOVE_MEMBER_TITLE": "Entfernen Sie Mitglied",
+    "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Sie sehen derzeit das Patientenprofil für {{user.firstname}} {{user.lastname}}. Wenn Sie fortfahren, wird dieser Thread auf diesem Patientenprofil nicht mehr angezeigt. Wenn Sie fortfahren, wird dieser Meldungs-Thread auf der <a href=\"messages\">Meldungen</a> Seite gefunden.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Mindestens zwei Mitglieder auf Nachricht Thema bleiben muss {{user.firstName}} {{user.lastName}} kann nicht entfernt werden",
     "THREAD_UNABLE_REMOVE_YOURSELF": "Sie können sich nicht entfernen",
     "TIME_ZONE": "Zeitzone",

@@ -386,6 +386,7 @@
     "THREAD_REMOVE_MEMBER": "הסר {{user.firstName}} {{user.lastName}} מן רצף הודעות",
     "THREAD_REMOVE_MEMBER_DESCRIPTION": "הסר <strong>{{user.firstName}} {{user.lastName}}</strong> משרשור הודעה זו?<br><br> משתמש זה לא תהיה יותר גישה לעדכונים בנושא זה המסר, ולא יהיה מסוגל כדי להציג או להוסיף כל מסריה. אתה יכול להוסיף אותם בתור חבר חוט הודעה זו בכל עת בעתיד על ידי שימוש \"הוסף חבר\" כפתור. דבר יעניק להם גישה לכל ההודעות הקודמות וחדשות בפתיל הזה, כמו גם את היכולת להוסיף הודעות.",
     "THREAD_REMOVE_MEMBER_TITLE": "הסר חבר",
+    "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>אתה מציג כעת בפרופיל החולה עבור {{user.firstName}} {{user.lastName}}. אם תמשיך, חוט זה כבר לא יהיה נתקל בך בפרופיל המטופל הזה. אם תמשיך, חוט הודעה זה יימצא ב- <a href=\"messages\">הודעות</a> דף.",
     "THREAD_UNABLE_REMOVE_MEMBER": "לפחות שני בנים חייבים להישאר על נושא ההודעה {{user.firstName}} {{user.lastName}} לא ניתן להסירו",
     "THREAD_UNABLE_REMOVE_YOURSELF": "אתה לא יכול להסיר את עצמך",
     "TIME_ZONE": "אזור זמן",

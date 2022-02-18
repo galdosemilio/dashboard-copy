@@ -1,7 +1,7 @@
-<div class="messages-header" *ngIf="thread?.recipients.length" fxFlex="nogrow" fxLayout="row"
+<div class="messages-header" *ngIf="thread?.recipients.length && thread?.threadId" fxFlex="nogrow" fxLayout="row"
   fxLayoutAlign="start center">
   <div fxFlex fxLayoutAlign="start center" fxLayoutGap="5px">
-    <mat-icon (click)="backToUserList()" class='arrow_back'>arrow_back_ios</mat-icon>
+    <mat-icon *ngIf="showBackButton" (click)="backToUserList()" class='arrow_back'>arrow_back_ios</mat-icon>
     <ng-container *ngFor="let recipient of shownRecipients">
       <ccr-avatar [account]="recipient.id" size="messages"></ccr-avatar>
     </ng-container>
@@ -24,22 +24,22 @@
       </ng-template>
     </span>
   </div>
-  <div *ngIf="thread?.recipients.length === 1" fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" fxHide.xs>
+  <div *ngIf="thread?.recipients.length === 1" fxFlex fxLayoutAlign="end center" fxLayoutGap="5px" fxHide.lt-md>
     <ccr-call-control *ngIf="isProvider" [targets]="thread.recipients"></ccr-call-control>
     <a *ngIf="isProvider" mat-button color="primary" class="ccr-icon-button"
       (click)="showProfile(thread.recipients[0])">
       <mat-icon>person_outline</mat-icon>
-      <span fxHide.xs>{{'BOARD.VIEW_PROFILE' | translate}}</span>
+      <span fxHide.lt-md>{{'BOARD.VIEW_PROFILE' | translate}}</span>
     </a>
   </div>
-  <div class="info-button" fxHide.xs fxFlex="nogrow" fxLayout="row" fxLayoutAlign="end center">
+  <div class="info-button" fxHide.lt-md fxFlex="nogrow" fxLayout="row" fxLayoutAlign="end center">
     <button (click)="onToggleChatInfo()" class="ccr-icon-button" color="primary" mat-button>
       <mat-icon class="info-icon">info</mat-icon>
       {{ 'BOARD.THREAD_INFO' | translate }}
     </button>
   </div>
 </div>
-<div class='mobile-messages-icons'>
+<div *ngIf="thread?.threadId" class='mobile-messages-icons'>
   <div>
     <ccr-call-control [targets]="thread?.recipients" [showDisabledIcon]="true"></ccr-call-control>
   </div>
@@ -72,7 +72,7 @@
   </div>
 </div>
 <div class="message-footer-resize">
-  <mat-icon (mousedown)="onResizeStart($event)" class="clickable" fxHide.xs fxHide.sm>expand</mat-icon>
+  <mat-icon (mousedown)="onResizeStart($event)" class="clickable" fxHide.lt-md>expand</mat-icon>
 </div>
 <div class="messages-footer" #messageFooter>
   <textarea
@@ -85,10 +85,10 @@
     [placeholder]="'BOARD.TYPE_YOUR_MESSAGES_HERE' | translate"></textarea>
   <div class="send-button-wrap">
     <button mat-button class="ccr-button" [disabled]="newMessage.length < 1" (click)="sendMessage()">
-      <mat-icon>send</mat-icon> <span fxHide.xs>{{'GLOBAL.SEND' | translate}}</span>
+      <mat-icon>send</mat-icon> <span fxHide.lt-md>{{'GLOBAL.SEND' | translate}}</span>
     </button>
     <ccr-popup-description
-      fxHide.xs
+      fxHide.lt-md
       [title]="'BOARD.MESSAGES_HELP_TITLE' | translate"
       [description]="'BOARD.MESSAGES_HELP_DESCRIPTION' | translate"
       [showIntro]="false"

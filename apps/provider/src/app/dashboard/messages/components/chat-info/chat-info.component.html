@@ -8,7 +8,7 @@
       <div fxLayout="row" fxLayoutAlign="stretch center">
         <span fxFlex>{{ 'BOARD.THREAD_INFO' | translate }}</span>
 
-        <mat-icon class="clickable" fxHide.xs (click)="onHideChatInfo()">clear</mat-icon>
+        <mat-icon class="clickable" fxHide.lt-md (click)="onHideChatInfo()">clear</mat-icon>
       </div>
 
       <div *ngIf="thread.organization" fxLayout="row" fxLayoutAlign="start center" class="assoc-with-clinic">

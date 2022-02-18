@@ -1,0 +1,51 @@
+@import 'variables';
+
+messages-chat-messages {
+  @media #{$large-and-up} {
+    mat-icon.info-icon {
+      margin-top: -2px;
+    }
+
+    .info-button {
+      margin-left: 13px;
+    }
+
+    .arrow_back,
+    .mobile-messages-icons {
+      display: none;
+    }
+  }
+
+  @media #{$medium-and-down} {
+    .arrow_back:hover {
+      cursor: pointer;
+    }
+
+    .ccr-icon-button {
+      border: none !important;
+      width: 100%;
+
+      span.mat-button-wrapper {
+        span:last-child {
+          display: none;
+        }
+      }
+    }
+
+    .mobile-message-top {
+      display: block;
+    }
+    .mobile-messages-icons {
+      background: mat-color($ccr-background, selected);
+      display: flex;
+      justify-content: space-around;
+      min-height: 30px;
+
+      > div {
+        flex-grow: 1;
+        margin: 0 4px;
+        text-align: center;
+      }
+    }
+  }
+}

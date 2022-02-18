@@ -1,3 +1,5 @@
+@import 'variables';
+
 :host {
   height: 100%;
 }
@@ -23,7 +25,7 @@ ccr-messages,
 .unread-button {
   min-height: 30px;
 }
-@media only screen and (max-width: 730px) {
+@media #{$medium-and-down} {
   .messages-content,
   .messages-user-list,
   .ccr-heading {

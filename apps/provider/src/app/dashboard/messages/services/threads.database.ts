@@ -22,7 +22,8 @@ export class ThreadsDatabase extends CcrDatabase {
     return from(
       this.messaging.getAll({
         accounts: accounts,
-        accountsExclusive: args.accountsExclusive ? true : false,
+        accountsExclusive: args.accountsExclusive ?? undefined,
+        accountsInclusive: args.accountsInclusive ?? undefined,
         offset: args.offset ? args.offset : 0,
         limit: args.limit ? args.limit : undefined
       })

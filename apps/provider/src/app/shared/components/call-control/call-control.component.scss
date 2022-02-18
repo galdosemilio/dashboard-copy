@@ -11,7 +11,7 @@ div > button {
   margin-left: 10px !important;
 }
 
-@media only screen and (max-width: $breakpoint-tablet) {
+@media #{$small-and-down} {
   .ccr-icon-button {
     border: none;
   }

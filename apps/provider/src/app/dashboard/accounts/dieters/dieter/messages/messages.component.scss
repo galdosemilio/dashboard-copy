@@ -1,12 +1,17 @@
+@import 'variables';
+
 :host {
-  box-sizing: border-box;
-  display: flex !important;
-  max-height: 100%;
-  place-content: stretch flex-start;
-  align-items: stretch;
-  flex: 1 1 100%;
+  height: 57vh;
 }
 
-ccr-messages {
-  max-height: 60vh;
+@media #{$medium-and-down} {
+  :host {
+    height: 72vh;
+  }
+}
+
+@media #{$small-and-down} {
+  :host {
+    height: 82vh;
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core'
+import { MessageThread } from '@app/dashboard/messages/model'
 import { NotifierService } from '@app/service'
-import { MessageThread } from '@app/shared/components'
 import { AccountTypes } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@coachcare/material'

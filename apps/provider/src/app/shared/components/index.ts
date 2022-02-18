@@ -1,5 +1,3 @@
-export * from './messages/messages.interfaces'
-
 import { MatMomentDateModule } from '@coachcare/datepicker'
 
 import { AlertIconComponent } from './alert-icon/alert-icon.component'
@@ -36,9 +34,7 @@ import {
   LocaleTableComponent
 } from './locale-selector'
 import { LoginHistoryComponent } from './login-history'
-import { CcrMessagesChatInfoComponent } from './messages-chat-info'
 import { CcrMagnitudeInputComponent } from './magnitude-input'
-import { CcrMessagesComponent } from './messages/messages.component'
 import { CcrLastLoginComponent } from './last-login'
 import { CcrMicLevelIndicatorComponent } from './mic-level-indicator'
 import { CcrNextMeetingComponent } from './next-meeting'
@@ -105,7 +101,6 @@ export {
   CcrImageOptionSelectorComponent,
   CcrLastLoginComponent,
   CcrMeasurementChartV2Component,
-  CcrMessagesComponent,
   CcrMicLevelIndicatorComponent,
   CcrSearchSelectorComponent,
   CcrSelectUserComponent,
@@ -174,8 +169,6 @@ export const CmpComponents = [
   CcrLastLoginComponent,
   CcrMagnitudeInputComponent,
   CcrMeasurementChartV2Component,
-  CcrMessagesChatInfoComponent,
-  CcrMessagesComponent,
   CcrMicLevelIndicatorComponent,
   CcrNextMeetingComponent,
   CcrPageSizeSelectorComponent,

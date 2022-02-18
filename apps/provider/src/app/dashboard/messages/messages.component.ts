@@ -1,11 +1,4 @@
-import {
-  AfterContentInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import {
   ConfigService,
@@ -14,9 +7,10 @@ import {
   MessagingService,
   NotifierService
 } from '@app/service'
-import { _, MessageRecipient, MessageThread, PromptDialog } from '@app/shared'
+import { _, PromptDialog } from '@app/shared'
 import { MatDialog } from '@coachcare/material'
 import {
+  AccountAccessData,
   AccountTypeIds,
   AccSingleResponse,
   Messaging,
@@ -24,10 +18,16 @@ import {
 } from '@coachcare/sdk'
 import { findIndex, get, sortBy, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { BehaviorSubject, fromEvent, of, Subject } from 'rxjs'
-import { filter, mergeMap, sampleTime, tap } from 'rxjs/operators'
+import { BehaviorSubject, Subject } from 'rxjs'
+import { filter, tap } from 'rxjs/operators'
 import { AccountProvider } from '@coachcare/sdk'
 import { ThreadsDatabase, ThreadsDataSource } from './services'
+import {
+  MessageRecipient,
+  MessagesComponentMode,
+  MessageThread,
+  SelectMessageThreadEvent
+} from './model'
 
 @UntilDestroy()
 @Component({
@@ -35,7 +35,9 @@ import { ThreadsDatabase, ThreadsDataSource } from './services'
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
+export class MessagesComponent implements OnInit {
+  @Input() mode: MessagesComponentMode = 'main'
+
   public accounts: string[]
   public account$ = new Subject<string[]>() // observable for source
   public active = 0
@@ -64,9 +66,6 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     )
   }
 
-  @ViewChild('scroll', { static: true })
-  scroll: ElementRef
-
   constructor(
     private router: Router,
     private account: AccountProvider,
@@ -84,7 +83,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     this.formatThread = this.formatThread.bind(this)
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     // this.bus.trigger('organizations.disable-all');
     this.bus.trigger('right-panel.deactivate')
 
@@ -127,25 +126,117 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     this.current = this.context.user
     this.isProvider =
       this.context.user.accountType.id === AccountTypeIds.Provider
-    this.selectAccounts()
+    this.selectAccounts(
+      this.mode === 'patient-profile'
+        ? [this.createMessageRecipient(this.context.account)]
+        : []
+    )
 
     this.setRefresh()
     this.resolveUnreadThreads()
   }
 
-  ngAfterContentInit() {
-    const lastPosition = { scrolled: 0 }
-    fromEvent(this.scroll.nativeElement, 'scroll')
-      .pipe(
-        untilDestroyed(this),
-        sampleTime(300),
-        mergeMap((ev: any) => of(this.calculatePoints()))
-      )
-      .subscribe((pos: any) => this.handleScroll(pos, lastPosition))
+  public gotoProfile(account: MessageRecipient): void {
+    if (account.accountType) {
+      void this.router.navigate([this.context.getProfileRoute(account)])
+    } else {
+      this.account
+        .getSingle(account.id)
+        .then((acc: AccSingleResponse) => {
+          void this.router.navigate([this.context.getProfileRoute(acc)])
+        })
+        .catch((err) => {
+          this.notifier.error(err)
+        })
+    }
   }
 
-  ngOnDestroy() {
-    this.source.disconnect()
+  public onReachedEndOfList(): void {
+    if (!this.source.completed && !this.source.isLoading) {
+      // scrolled to the bottom
+      this.pageIndex$.next(this.pageIndex$.getValue() + 1)
+    }
+  }
+
+  public onSelectThread($event: SelectMessageThreadEvent): void {
+    this.active = $event.index
+    this.isMessageOpen = !this.isMessageOpen
+    this.chatInfoEnabled = false
+  }
+
+  public removeThread(index: number): void {
+    const removedThread = this.threads[index]
+    this.threads = this.threads.filter(
+      (thread) => thread.threadId !== removedThread.threadId
+    )
+    this.active = 0
+  }
+
+  public resetThreads(): void {
+    this.threads = []
+    this.active = 0
+    this.pageIndex$.next(0)
+  }
+
+  public selectAccounts(accounts: MessageRecipient[] = []): void {
+    // update the source
+    this.resetThreads()
+    this.source.addDefault({ accountsInclusive: accounts.length > 0 })
+    this.accounts = [this.current.id, ...accounts.map((a) => a.id)]
+    this.account$.next(this.accounts)
+    // update the ccr-messages component
+    this.newThread = {
+      allRecipients: accounts,
+      recipients: accounts
+    }
+  }
+
+  public showMarkUnreadDialog(): void {
+    this.dialog
+      .open(PromptDialog, {
+        data: {
+          title: _('GLOBAL.MESSAGES_MARK_AS_READ'),
+          content: _('GLOBAL.MESSAGES_MARK_AS_READ_DESCRIPTION')
+        }
+      })
+      .afterClosed()
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
+        try {
+          this.isMarkingAsRead = true
+
+          await this.messaging.markAllMessagesAsViewed({})
+
+          void this.messagingService.refreshUnreadCount()
+          this.threads.forEach((thread) => (thread.unread = false))
+
+          this.isMarkingAsRead = false
+
+          this.notifier.success(_('NOTIFY.SUCCESS.THREADS_MARKED_READ'))
+        } catch (error) {
+          console.error(error)
+          this.notifier.error(error)
+        }
+      })
+  }
+
+  public markThreadAsViewed(id: string): void {
+    const thread = this.threads.find((thr) => thr.threadId === id)
+
+    if (thread) {
+      thread.unread = false
+    }
+
+    void this.messagingService.refreshUnreadCount()
+  }
+
+  private createMessageRecipient(account: AccountAccessData): MessageRecipient {
+    return {
+      ...this.context.account,
+      name: `${this.context.account.firstName} ${this.context.account.lastName}`,
+      shortName: `${account.firstName} ${account.lastName[0]}.`,
+      accountType: account.accountType.id
+    }
   }
 
   private setRefresh(): void {
@@ -191,51 +282,7 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   }
 
-  selectAccounts(accounts: MessageRecipient[] = []) {
-    // update the source
-    this.resetThreads()
-    this.source.addDefault({
-      accountsExclusive: accounts.length ? true : false
-    })
-    this.accounts = [this.current.id, ...accounts.map((a) => a.id)]
-    this.account$.next(this.accounts)
-    // update the ccr-messages component
-    this.newThread = {
-      allRecipients: accounts,
-      recipients: accounts
-    }
-  }
-
-  public showMarkUnreadDialog(): void {
-    this.dialog
-      .open(PromptDialog, {
-        data: {
-          title: _('GLOBAL.MESSAGES_MARK_AS_READ'),
-          content: _('GLOBAL.MESSAGES_MARK_AS_READ_DESCRIPTION')
-        }
-      })
-      .afterClosed()
-      .pipe(filter((confirm) => confirm))
-      .subscribe(async () => {
-        try {
-          this.isMarkingAsRead = true
-
-          await this.messaging.markAllMessagesAsViewed({})
-
-          void this.messagingService.refreshUnreadCount()
-          this.threads.forEach((thread) => (thread.unread = false))
-
-          this.isMarkingAsRead = false
-
-          this.notifier.success(_('NOTIFY.SUCCESS.THREADS_MARKED_READ'))
-        } catch (error) {
-          console.error(error)
-          this.notifier.error(error)
-        }
-      })
-  }
-
-  formatThread(t: MessagingThreadSegment): MessageThread {
+  private formatThread(t: MessagingThreadSegment): MessageThread {
     const accounts = sortBy(
       t.account.map((acc) => ({
         id: acc.id,
@@ -261,70 +308,9 @@ export class MessagesComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   }
 
-  viewedThread(id) {
-    this.threads.forEach((v, i, threads) => {
-      if (threads[i].threadId === id) {
-        threads[i].unread = false
-      }
-    })
-    void this.messagingService.refreshUnreadCount()
-  }
-
-  resetThreads() {
-    this.threads = []
-    this.active = 0
-    this.pageIndex$.next(0)
-  }
-
-  gotoProfile(account: MessageRecipient) {
-    if (account.accountType) {
-      void this.router.navigate([this.context.getProfileRoute(account)])
-    } else {
-      this.account
-        .getSingle(account.id)
-        .then((acc: AccSingleResponse) => {
-          void this.router.navigate([this.context.getProfileRoute(acc)])
-        })
-        .catch((err) => {
-          this.notifier.error(err)
-        })
-    }
-  }
-
-  removeThread(index: number): void {
-    const removedThread = this.threads[index]
-    this.threads = this.threads.filter(
-      (thread) => thread.threadId !== removedThread.threadId
-    )
-    this.active = 0
-  }
-
-  // TODO move to a Directive with Output event
-
-  private calculatePoints() {
-    const el = this.scroll.nativeElement
-    return {
-      height: el.offsetHeight,
-      scrolled: el.scrollTop,
-      total: el.scrollHeight
-    }
-  }
-
-  private handleScroll(position, lastPosition) {
-    if (position.height + position.scrolled >= position.total - 50) {
-      if (!this.source.completed && !this.source.isLoading) {
-        // scrolled to the bottom
-        this.pageIndex$.next(this.pageIndex$.getValue() + 1)
-      }
-    }
-    lastPosition.scrolled = position.scrolled
-  }
-
   private resolveUnreadThreads(): void {
-    const {
-      unreadThreadsCount,
-      unreadMessagesCount
-    } = this.messagingService.unreadCount$.getValue()
+    const { unreadThreadsCount, unreadMessagesCount } =
+      this.messagingService.unreadCount$.getValue()
 
     this.hasUnreadThreads = unreadThreadsCount > 0 || unreadMessagesCount > 0
   }

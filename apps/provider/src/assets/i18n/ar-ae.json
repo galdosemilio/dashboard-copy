@@ -386,6 +386,7 @@
     "THREAD_REMOVE_MEMBER": "إزالة {{user.firstName}} {{user.lastName}} من رسالة الموضوع",
     "THREAD_REMOVE_MEMBER_DESCRIPTION": "إزالة <strong>{{user.firstName}} {{user.lastName}}</strong> من هذا الموضوع الرسالة؟ <br><br>وهذا المستخدم لم يعد الحصول على هذا الموضوع رسالة، وسوف لن تكون قادرة لعرض أو إضافة أي من رسائله. تستطيع إضافتها كعضو لهذا الموضوع رسالة في أي وقت في المستقبل باستخدام \"إضافة عضو \" زر. وبذلك سوف يمنحهم الوصول إلى جميع الرسائل السابقة والجديدة في هذا الموضوع وكذلك القدرة على إضافة المشاركات.",
     "THREAD_REMOVE_MEMBER_TITLE": "إزالة الأعضاء",
+    "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br> تقوم حاليا بعرض ملف تعريف المريض حاليا ل {{user.firstname}} {{user.lastname}}. إذا استمرت، فلن يكون هذا الخيط مريحا لك على ملف تعريف المريض هذا. إذا استمرت، سيتم العثور على مؤشر ترابط الرسالة هذه على <a href=\"messages\"> الصفحة</a> الصفحة.",
     "THREAD_UNABLE_REMOVE_MEMBER": "يجب أن اثنين على الأقل من أعضاء تبقى على رسالة الموضوع {{user.firstName}} {{user.lastName}} لا يمكن إزالتها",
     "THREAD_UNABLE_REMOVE_YOURSELF": "لا يمكنك إزالة نفسك",
     "TIME_ZONE": "المنطقة الزمنية",

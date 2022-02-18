@@ -386,6 +386,7 @@
     "THREAD_REMOVE_MEMBER": "Eliminar a {{user.firstName}} {{user.lastName}} del hilo de mensajes",
     "THREAD_REMOVE_MEMBER_DESCRIPTION": "Eliminar a <strong>{{user.firstName}} {{user.lastName}}</strong> de este hilo de mensajes?<br><br>Este usuario no tendrá acceso a este hilo de mensajes, y no podrá ver ni añadir ningún mensaje. Puede añadirlo como un miembro a este hilo de mensajes en cualquier momento usando el botón de \"Añadir Miembro\". Hacerlo le otorgará acceso a todos los mensajes anteriores y nuevos mensajes en este hilo, así como también le permitirá añadir mensajes.",
     "THREAD_REMOVE_MEMBER_TITLE": "Eliminar Miembro",
+    "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Está viendo el perfil de {{user.firstName}} {{user.lastName}}. Si continúa, este hilo no será visible en este perfil. Si continúa, este hilo de mensajes estará disponible en la página de <a href=\"messages\">Mensajes</a>.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Al menos dos miembros deben permanecer en el hilo de mensajes. No se puede eliminar a {{user.firstName}} {{user.lastName}}.",
     "THREAD_UNABLE_REMOVE_YOURSELF": "No puede eliminarse a sí mismo",
     "TIME_ZONE": "Zona Horaria",

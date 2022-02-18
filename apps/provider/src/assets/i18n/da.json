@@ -386,6 +386,7 @@
     "THREAD_REMOVE_MEMBER": "Fjern {{user.firstName}} {{user.lastName}} fra Message Tråd",
     "THREAD_REMOVE_MEMBER_DESCRIPTION": "Fjern <strong>{{user.firstName}} {{user.lastName}}</strong> fra dette budskab tråd?<br><br> Denne bruger vil ikke længere have adgang til denne besked tråd, og vil ikke være i stand at se eller tilføje nogen af ​​dens budskaber. Du kan tilføje dem som en bruger for at denne besked tråd på noget tidspunkt i fremtiden ved hjælp af \"Tilføj medlem\" knappen. Dermed vil give dem adgang til alle tidligere og nye meddelelser i denne tråd, samt evnen til at tilføje meddelelser.",
     "THREAD_REMOVE_MEMBER_TITLE": "Fjern medlem",
+    "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Du ser i øjeblikket patientprofilen for {{user.firstname}} {{user.lastname}}. Hvis du fortsætter, vil denne tråd ikke længere være synlig for dig på denne patientprofil. Hvis du fortsætter, vises denne meddelelsestråd på <a href=\"messages\">-siden</a> side.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Mindst to medlemmer skal forblive på beskedtråd {{user.firstName}} {{user.lastName}} kan ikke fjernes",
     "THREAD_UNABLE_REMOVE_YOURSELF": "Du kan ikke fjerne dig selv",
     "TIME_ZONE": "Tidszone",
