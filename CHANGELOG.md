@@ -1,3 +1,18 @@
+# [1.66.0](https://github.com/coachcare/dashboard/compare/v1.65.0...v1.66.0) (2022-02-18)
+
+
+### Bug Fixes
+
+* improve download call recording [FRON-2604] ([38d939b](https://github.com/coachcare/dashboard/commit/38d939b58029d387a001544272097865757e4363))
+* show check icon in video conference call [FRON-2614] ([714d223](https://github.com/coachcare/dashboard/commit/714d223616b25cd1c00eb47d169bada45129b75c))
+* upcoming and pass meeting issue in meeting list [FRON-2617] ([97490d5](https://github.com/coachcare/dashboard/commit/97490d588bfbc056df0b23e3be8c583285ee651d))
+
+
+### Features
+
+* added external visibility support [FRON-2616] ([5244976](https://github.com/coachcare/dashboard/commit/524497633967f85f681ed6d4020ce3e036e98b7d))
+* allow digital library and file vault in patient account [FRON-2621] ([0b1f1bf](https://github.com/coachcare/dashboard/commit/0b1f1bf420f052a893377140d202a60a03ffd88f))
+
 # [1.65.0](https://github.com/coachcare/dashboard/compare/v1.64.0...v1.65.0) (2022-02-11)
 
 
