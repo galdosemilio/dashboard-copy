@@ -1,3 +1,19 @@
+<div class="ccr-wellcore-form-title">Credit Card Information</div>
+ <form [formGroup]="formGroup" class="ccr-wellcore-form">
+  <div class="ccr-wellcore-stripe">
+    <div class="ccr-wellcore-stripe-field">
+      <ngx-stripe-card
+        [options]="cardOptions"
+        [elementsOptions]="elementsOptions"
+        (change)="onChange($event)"
+      ></ngx-stripe-card>
+    </div>
+    <mat-error *ngIf="stripeErrorMessage">{{ stripeErrorMessage }}</mat-error>
+  </div>
+</form>
+
+<br>
+
 <div class="ccr-wellcore-form-title">Billing Information</div>
 <div class="ccr-wellcore-field-select">
   <mat-checkbox

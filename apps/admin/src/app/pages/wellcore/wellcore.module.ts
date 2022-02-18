@@ -18,6 +18,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { CcrFormFieldsModule } from '@coachcare/common/components'
 import { WellcoreComponents, WellcoreProviders } from './wellcore.barrel'
 import { MomentModule } from 'ngx-moment'
+import { NgxStripeModule } from 'ngx-stripe'
+import { environment } from 'apps/admin/src/environments/environment'
 @NgModule({
   imports: [
     CcrFormFieldsModule,
@@ -38,7 +40,8 @@ import { MomentModule } from 'ngx-moment'
     MatInputModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    MomentModule
+    MomentModule,
+    NgxStripeModule.forRoot(environment.stripeKey)
   ],
   exports: [],
   declarations: WellcoreComponents,

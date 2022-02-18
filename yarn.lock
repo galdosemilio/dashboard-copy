@@ -2999,16 +2999,21 @@
   resolved "https://registry.yarnpkg.com/@sphinxxxx/color-conversion/-/color-conversion-2.2.2.tgz#03ecc29279e3c0c832f6185a5bfa3497858ac8ca"
   integrity sha512-XExJS3cLqgrmNBIP3bBw6+1oQ1ksGjFh0+oClDKFYpCCqx/hlqwWO5KO/S63fzUo67SxI9dMrF0y5T/Ey7h8Zw==
 
-"@spree/storefront-api-v2-sdk@^4.11.0":
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/@spree/storefront-api-v2-sdk/-/storefront-api-v2-sdk-4.11.0.tgz#412a254e45cb2dc28530ac3248d8442dd078ac0c"
-  integrity sha512-PFzIYFQL8D0GMAXb69iABDAJeKbL32G8f6br8H8MM199+yo6nt49ymJHvBmobViqfYk+kTi2awmrGH2+ln7JLg==
+"@spree/storefront-api-v2-sdk@^4.13.1":
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/@spree/storefront-api-v2-sdk/-/storefront-api-v2-sdk-4.13.1.tgz#1b074a5e5cad3174e5fb79eb6f0355c9e089157c"
+  integrity sha512-V+ZWt3bEBb5kbtFlwDmBFcuDTlK0Vm5FsqN9QMU+nTuNy7ypNE7pYp5OqZbQgHwpmGhU3oElIme/e7jmkzMuKw==
   dependencies:
     axios "^0.21.4"
     lodash "^4.17.21"
     qs "^6.10.1"
   optionalDependencies:
     node-fetch "^2.6.1"
+
+"@stripe/stripe-js@^1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.23.0.tgz#62eed14e83c63c3e8c27f14f6b1e6feb8496c867"
+  integrity sha512-+7w4rVs71Fk8/8uzyzQB5GotHSH9mjOjxM3EYDq/3MR3I2ewELHtvWVMOqfS/9WSKCaKv7h7eFLsMZGpK5jApQ==
 
 "@tensorflow-models/body-pix@^2.1.0":
   version "2.2.0"
@@ -11379,6 +11384,13 @@ ngx-moment@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/ngx-moment/-/ngx-moment-6.0.2.tgz#7acba9830746e9c2862d261150f2c8adb20eb4f6"
   integrity sha512-HUvDyoJPZKLA3tc+GMQqDpVyCVT2SPfEiV7/CGj2Dwwsn//JhhQ8eTr+RzKqBzLysrXkCwlzulVVJaJ5A0FJEA==
+  dependencies:
+    tslib "^2.3.0"
+
+ngx-stripe@^13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-stripe/-/ngx-stripe-13.0.0.tgz#d5ed50590447aa74012de4e75ac9bcdafc68b1c8"
+  integrity sha512-SImKvoC/mZZrtzh2UUmxFdkqMLKX2y+BtcvMAPdHD4D7miXWEjCTZeXt8h85mcfy7y1NKKwIipH4CSr9eBzZ4w==
   dependencies:
     tslib "^2.3.0"
 

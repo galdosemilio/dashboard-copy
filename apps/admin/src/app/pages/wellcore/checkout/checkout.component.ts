@@ -16,7 +16,8 @@ import {
   ECOMMERCE_REFRESH_TOKEN,
   EventsService,
   LanguageService,
-  NotifierService
+  NotifierService,
+  STORAGE_ECOMMERCE_ITEM_AMOUNT
 } from '@coachcare/common/services'
 import { MatStepper } from '@coachcare/material'
 import {
@@ -35,6 +36,8 @@ import {
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
+import { RelationType } from '@spree/storefront-api-v2-sdk/types/interfaces/Relationships'
+import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
 import { environment } from 'apps/admin/src/environments/environment'
 import * as moment from 'moment'
 import { STATES_LIST } from '../model'
@@ -63,6 +66,14 @@ export interface CheckoutData {
     city: string
     state: string
     zip: string
+    cardInfo: {
+      expMonth: number
+      expYear: number
+      id: string
+      last4: string
+      token: string
+      type: string
+    }
   }
   shippingInfo?: {
     firstName: string
@@ -92,13 +103,14 @@ export class WellcoreCheckoutComponent implements OnInit {
   public accountId: string
   public accountInfo: FormGroup
   public accountCreated = false
-  public shippingInfo: FormGroup
   public billingInfo: FormGroup
-  public orderReview: FormGroup
-  public orderConfirm: FormGroup
-  public loginInfo: FormGroup
-  public firstStepMode: FirstStepMode = 'signup'
   public checkoutData: CheckoutData = {}
+  public firstStepMode: FirstStepMode = 'signup'
+  public loginInfo: FormGroup
+  public shippingInfo: FormGroup
+  public orderConfirm: FormGroup
+  public orderReview: FormGroup
+  public refreshToken: string
   public useShippingAddress: boolean = true
   public whitelistedStates: string[] = STATES_LIST.filter(
     (state) => state.whitelisted
@@ -107,6 +119,7 @@ export class WellcoreCheckoutComponent implements OnInit {
   private billingAddress: AccountAddress
   private shippingAddress: AccountAddress
   private spree: Client
+  private spreeToken: IOAuthToken
 
   constructor(
     private accountProvider: AccountProvider,
@@ -218,6 +231,8 @@ export class WellcoreCheckoutComponent implements OnInit {
         } else {
           await this.updateBillingAddress()
         }
+
+        await this.processCheckout()
         break
 
       case 3:
@@ -309,7 +324,8 @@ export class WellcoreCheckoutComponent implements OnInit {
       address2: [''],
       city: ['', Validators.required],
       state: ['', [Validators.required, this.validateWhitelistedState]],
-      zip: ['', Validators.required]
+      zip: ['', Validators.required],
+      cardInfo: [null, Validators.required]
     })),
       (this.orderReview = this.fb.group({}))
     this.orderConfirm = this.fb.group({})
@@ -363,6 +379,33 @@ export class WellcoreCheckoutComponent implements OnInit {
         labels: ['1']
       })
 
+      const setBillAddressRes = await this.spree.checkout.orderUpdate(
+        { bearerToken: this.spreeToken.access_token },
+        {
+          order: {
+            bill_address_attributes: {
+              firstname: billingData.firstName,
+              lastname: billingData.lastName,
+              address1: billingData.address1,
+              address2: billingData.address2 || undefined,
+              city: billingData.city,
+              phone: this.checkoutData.accountInfo.phoneNumber,
+              zipcode: billingData.zip,
+              state_name: billingData.state,
+              country_iso: 'US'
+            }
+          }
+        }
+      )
+
+      if (setBillAddressRes.isFail()) {
+        throw new Error(
+          `Spree cannot set billing address. Reason: ${
+            setBillAddressRes.fail().message
+          }`
+        )
+      }
+
       await this.resolveAccountAddresses()
     } catch (error) {
       this.notifier.error(error)
@@ -394,6 +437,33 @@ export class WellcoreCheckoutComponent implements OnInit {
         id: this.accountId,
         timezone: shippingData.timezone
       })
+
+      const setShipAddressRes = await this.spree.checkout.orderUpdate(
+        { bearerToken: this.spreeToken.access_token },
+        {
+          order: {
+            ship_address_attributes: {
+              firstname: shippingData.firstName,
+              lastname: shippingData.lastName,
+              address1: shippingData.address1,
+              address2: shippingData.address2 || undefined,
+              city: shippingData.city,
+              phone: this.checkoutData.accountInfo.phoneNumber,
+              zipcode: shippingData.zip,
+              state_name: shippingData.state,
+              country_iso: 'US'
+            }
+          }
+        }
+      )
+
+      if (setShipAddressRes.isFail()) {
+        throw new Error(
+          `Spree cannot set shipping address. Reason: ${
+            setShipAddressRes.fail().message
+          }`
+        )
+      }
 
       await this.resolveAccountAddresses()
     } catch (error) {
@@ -460,6 +530,69 @@ export class WellcoreCheckoutComponent implements OnInit {
       }
 
       await this.loadSpreeInfo(accountData.email, accountData.password)
+
+      const spreeCartResult = await this.spree.cart.create({
+        bearerToken: this.spreeToken.access_token
+      })
+
+      if (spreeCartResult.isFail()) {
+        throw new Error(
+          `Spree cart creation error. Reason: ${spreeCartResult.fail().message}`
+        )
+      }
+
+      const setEmailRes = await this.spree.checkout.orderUpdate(
+        { bearerToken: this.spreeToken.access_token },
+        { order: { email: accountData.email } }
+      )
+
+      if (setEmailRes.isFail()) {
+        throw new Error(
+          `Spree email set error. Reason: ${setEmailRes.fail().message}`
+        )
+      }
+
+      const spreeProductsResult = await this.spree.products.list({
+        bearerToken: this.spreeToken.access_token
+      })
+
+      if (spreeProductsResult.isFail()) {
+        throw new Error(
+          `Spree product fetching error. Reason: ${
+            spreeProductsResult.fail().message
+          }`
+        )
+      }
+
+      if (spreeProductsResult.success().data.length <= 0) {
+        throw new Error(
+          'Spree product list is empty. Please, contact the administrator and show them this error message.'
+        )
+      }
+
+      const itemAmount =
+        window.localStorage.getItem(STORAGE_ECOMMERCE_ITEM_AMOUNT) || 1
+
+      const spreeItemAddResult = await this.spree.cart.addItem(
+        { bearerToken: this.spreeToken.access_token },
+        {
+          variant_id: (
+            spreeProductsResult.success().data[0].relationships.default_variant
+              .data as RelationType
+          ).id,
+          quantity: +itemAmount
+        }
+      )
+
+      if (spreeItemAddResult.isFail()) {
+        throw new Error(
+          `Spree item adding error. Reason: ${
+            spreeItemAddResult.fail().message
+          }`
+        )
+      }
+
+      window.localStorage.removeItem(STORAGE_ECOMMERCE_ITEM_AMOUNT)
     } catch (error) {
       const addLogRequest: AddLogRequest = {
         app: 'ccr-staticProvider',
@@ -545,6 +678,8 @@ export class WellcoreCheckoutComponent implements OnInit {
       )
     }
 
+    this.spreeToken = spreeToken.success()
+
     this.cookie.set(ECOMMERCE_ACCESS_TOKEN, spreeToken.success().access_token)
     this.cookie.set(ECOMMERCE_REFRESH_TOKEN, spreeToken.success().refresh_token)
 
@@ -578,6 +713,105 @@ export class WellcoreCheckoutComponent implements OnInit {
       country: address.country,
       zip: address.postalCode
     })
+  }
+
+  private async processCheckout(): Promise<void> {
+    try {
+      this.bus.trigger('wellcore.loading.show', true)
+
+      const shippingMethodsResponse = await this.spree.checkout.shippingRates({
+        bearerToken: this.spreeToken.access_token
+      })
+
+      if (shippingMethodsResponse.isFail()) {
+        throw new Error(
+          `Spree shipping rate fetching error. Reason: ${
+            shippingMethodsResponse.fail().message
+          }`
+        )
+      }
+
+      if (shippingMethodsResponse.success().included?.length <= 0) {
+        throw new Error(
+          `Spree shipping rate list is empty. Please, contact the administrator and show them this error message.`
+        )
+      }
+
+      const selectShipMethodRes =
+        await this.spree.checkout.selectShippingMethod(
+          { bearerToken: this.spreeToken.access_token },
+          {
+            shipping_method_id: '1'
+          }
+        )
+
+      if (selectShipMethodRes.isFail()) {
+        throw new Error(
+          `Spree cannot select shipping method. Reason ${
+            selectShipMethodRes.fail().message
+          }`
+        )
+      }
+
+      const paymentMethodsResponse = await this.spree.checkout.paymentMethods({
+        bearerToken: this.spreeToken.access_token
+      })
+
+      if (paymentMethodsResponse.isFail()) {
+        throw new Error(
+          `Spree payment method fetching error. Please, contact the administrator and show them this error message: ${
+            paymentMethodsResponse.fail().message
+          }`
+        )
+      }
+
+      if (paymentMethodsResponse.success().data.length <= 0) {
+        throw new Error(
+          'Spree payment method list is empty. Please, contact the administrator and show them this error message.'
+        )
+      }
+
+      const addPaymentRes = await this.spree.checkout.addPayment(
+        { bearerToken: this.spreeToken.access_token },
+        {
+          payment_method_id: paymentMethodsResponse.success().data[0].id,
+          source_attributes: {
+            gateway_payment_profile_id:
+              this.checkoutData.billingInfo.cardInfo.token,
+            cc_type: this.checkoutData.billingInfo.cardInfo.type,
+            last_digits: this.checkoutData.billingInfo.cardInfo.last4,
+            month: this.checkoutData.billingInfo.cardInfo.expMonth.toString(),
+            year: this.checkoutData.billingInfo.cardInfo.expYear.toString(),
+            name: `${this.checkoutData.accountInfo.firstName} ${this.checkoutData.accountInfo.lastName}`
+          }
+        }
+      )
+
+      if (addPaymentRes.isFail()) {
+        throw new Error(
+          `Spree payment cannot be added. Reason ${
+            addPaymentRes.fail().message
+          }`
+        )
+      }
+
+      const completeCheckoutRes = await this.spree.checkout.complete({
+        bearerToken: this.spreeToken.access_token
+      })
+
+      if (completeCheckoutRes.isFail()) {
+        throw new Error(
+          `Spree order cannot be completed. Reason ${
+            completeCheckoutRes.fail().message
+          }`
+        )
+      }
+    } catch (error) {
+      this.notifier.error(error)
+      throw new Error(error)
+    } finally {
+      this.bus.trigger('wellcore.loading.show', false)
+    }
   }
 
   private async resolveAccountAddresses(): Promise<void> {

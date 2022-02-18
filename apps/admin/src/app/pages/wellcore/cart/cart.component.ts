@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { STORAGE_ECOMMERCE_ITEM_AMOUNT } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()
@@ -32,5 +33,10 @@ export class WellcoreCartComponent implements OnInit {
   private refreshCartTotal(): void {
     const amount: number = this.form.value.amount
     this.cartTotal = amount * this.itemPrice
+
+    window.localStorage.setItem(
+      STORAGE_ECOMMERCE_ITEM_AMOUNT,
+      amount.toString()
+    )
   }
 }
