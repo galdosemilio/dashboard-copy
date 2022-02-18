@@ -34,6 +34,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { MeasurementChartOutput } from './chart/chart.component'
 import { MeasurementLabelEntry } from '@coachcare/sdk'
+import { filter as rxJsFilter } from 'rxjs/operators'
 
 export type MeasurementSections =
   | 'composition'
@@ -336,35 +337,38 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       account: this.context.accountId
     })
 
-    this.source.addOptional(this.refresh$, () => {
-      return {
-        data:
-          this.view === 'table' || this.view === 'list'
-            ? this.data
-            : this.source.getData(),
-        timeframe:
-          this.view !== 'list'
-            ? (this.dates.timeframe as MeasurementTimeframe)
-            : undefined,
-        // aggregation: this.aggregation,
-        startDate:
-          this.view !== 'list'
-            ? moment(this.dates.startDate).toISOString()
-            : undefined,
-        endDate:
-          this.view !== 'list'
-            ? moment(this.dates.endDate).toISOString()
-            : undefined,
-        unit: 'day',
-        useNewEndpoint: this.useNewEndpoint,
-        max: 'all',
-        omitEmptyDays:
-          this.view === 'chart' || this.view === 'list' ? true : false,
-        limitEntries: this.sections[this.section].data.some(
-          (type) => type.limitEntries
-        )
+    this.source.addOptional(
+      this.refresh$.pipe(rxJsFilter(() => this.section === 'food')),
+      () => {
+        return {
+          data:
+            this.view === 'table' || this.view === 'list'
+              ? this.data
+              : this.source.getData(),
+          timeframe:
+            this.view !== 'list'
+              ? (this.dates.timeframe as MeasurementTimeframe)
+              : undefined,
+          // aggregation: this.aggregation,
+          startDate:
+            this.view !== 'list'
+              ? moment(this.dates.startDate).toISOString()
+              : undefined,
+          endDate:
+            this.view !== 'list'
+              ? moment(this.dates.endDate).toISOString()
+              : undefined,
+          unit: 'day',
+          useNewEndpoint: this.useNewEndpoint,
+          max: 'all',
+          omitEmptyDays:
+            this.view === 'chart' || this.view === 'list' ? true : false,
+          limitEntries: this.sections[this.section].data.some(
+            (type) => type.limitEntries
+          )
+        }
       }
-    })
+    )
 
     this.source.addOptional(this.paginator.page, () =>
       this.view === 'list'
@@ -543,7 +547,8 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
 
     this.useNewTable = true
 
-    const labelEntry: ExtendedMeasurementLabelEntry = label as ExtendedMeasurementLabelEntry
+    const labelEntry: ExtendedMeasurementLabelEntry =
+      label as ExtendedMeasurementLabelEntry
 
     this.selectedLabel = labelEntry
     this.section = labelEntry.routeLink
