@@ -71,6 +71,7 @@
     <div [class.messages-content]="!isMessageOpen" fxFlex fxLayout="row" fxLayoutAlign="space-between stretch">
       <ccr-messages
       fxFlex
+      fxLayout="column"
       [account]="current"
       [thread]="threads[active] ? threads[active] : newThread"
       (lastMessageSent)="threads[active] ?  threads[active].lastMessageSent = $event : null"
