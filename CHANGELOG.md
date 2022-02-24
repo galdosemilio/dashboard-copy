@@ -1,3 +1,20 @@
+# [1.67.0](https://github.com/coachcare/dashboard/compare/v1.66.0...v1.67.0) (2022-02-24)
+
+
+### Bug Fixes
+
+* avatar squish issue [FRON-2634] ([cf4b98e](https://github.com/coachcare/dashboard/commit/cf4b98e10ba8c7cd61d2183f311199839cab974f))
+* color of tab button [FRON-2641] ([9eb2473](https://github.com/coachcare/dashboard/commit/9eb247312a516ccf0749082d769ff0e4bb4773e2))
+* display doctors name in appointment details [FRON-2611] ([4c04dad](https://github.com/coachcare/dashboard/commit/4c04dad4db6866f1e2ee2513b6435cc6a6b85f7a))
+* message box style [FRON-2630] ([f3bb160](https://github.com/coachcare/dashboard/commit/f3bb16099698bbaa0cdd5f0c0a2f519657a53188))
+* remove unnecessary body measurement calls [FRON-2632] ([51ab534](https://github.com/coachcare/dashboard/commit/51ab534f4385bb9320771bbf1392b8d3ac7b2ca4))
+
+
+### Features
+
+* add account type guard [FRON-2618] ([c2d2c88](https://github.com/coachcare/dashboard/commit/c2d2c88fce38cb53345f3a464dc5dad2d09cbb24))
+* added min-max calculation for charts [FRON-2627] ([2c211d6](https://github.com/coachcare/dashboard/commit/2c211d6b85dffa71cd304f4a3a1f178c085df1ea))
+
 # [1.66.0](https://github.com/coachcare/dashboard/compare/v1.65.0...v1.66.0) (2022-02-18)
 
 
