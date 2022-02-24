@@ -6,7 +6,7 @@
   overflow-x: scroll;
   overflow-y: auto;
   padding-bottom: 25px;
-  max-height: 45vh;
+  max-height: calc(100vh - 505px);
   width: 100%;
 
   table {

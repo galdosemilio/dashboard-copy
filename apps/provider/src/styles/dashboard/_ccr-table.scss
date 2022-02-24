@@ -1,14 +1,17 @@
 @import 'variables';
 
 .ccr-expandable-table {
-  max-height: 60vh;
   max-width: 100%;
   overflow-y: auto;
   overflow-x: auto;
 
   &-container {
-    max-height: 60vh;
     overflow: auto;
+  }
+
+  &.dieters,
+  &.coaches {
+    max-height: calc(100vh - 320px);
   }
 
   table {
