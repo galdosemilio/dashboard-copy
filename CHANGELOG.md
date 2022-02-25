@@ -1,3 +1,15 @@
+# [1.68.0](https://github.com/coachcare/dashboard/compare/v1.67.0...v1.68.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* solved issue with form insertion [FRON-2661] ([de4cb10](https://github.com/coachcare/dashboard/commit/de4cb103939094ef5ec7dee243e145915f617093))
+
+
+### Features
+
+* enhanced messaging feature on patient profile [FRON-2635] ([61aa46f](https://github.com/coachcare/dashboard/commit/61aa46ffada0e0efdaea7bd2f3635d30f74bb9fe))
+
 # [1.67.0](https://github.com/coachcare/dashboard/compare/v1.66.0...v1.67.0) (2022-02-24)
 
 
