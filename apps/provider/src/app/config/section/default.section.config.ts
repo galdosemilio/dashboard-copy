@@ -75,7 +75,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   },
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: false,
-    SHOW_NEW_APPOINTMENT: false
+    SHOW_NEW_APPOINTMENT: false,
+    ALLOWED_CHART_DATA_POINT_TYPES: null
   },
   GLOBAL: {
     DASHBOARD: {
@@ -155,7 +156,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   },
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: false,
-    SHOW_NEW_APPOINTMENT: false
+    SHOW_NEW_APPOINTMENT: false,
+    ALLOWED_CHART_DATA_POINT_TYPES: null
   },
   GLOBAL: {
     DASHBOARD: {

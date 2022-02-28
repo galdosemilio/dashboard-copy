@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatSelect, MatSelectChange } from '@coachcare/material'
-import { DieterDashboardSummary } from '@coachcare/sdk'
+import { DataPointTypes, DieterDashboardSummary } from '@coachcare/sdk'
 import {
   ContextService,
   EventsService,
@@ -9,6 +9,7 @@ import {
 } from '@app/service'
 import { _ } from '@app/shared'
 import { TypeGroupEntry } from '@app/shared/components/chart-v2'
+import { resolveConfig } from '@app/config/section'
 
 @Component({
   selector: 'app-dieter-dashboard',
@@ -65,7 +66,18 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
   private async resolveTypeGroups(): Promise<void> {
     try {
       const labels = await this.measurementLabel.fetchMeasurementLabels()
-      const dataPointTypes = await this.measurementLabel.fetchDataPointTypes()
+      let dataPointTypes = await this.measurementLabel.fetchDataPointTypes()
+      const allowedDataPointTypes: DataPointTypes[] =
+        resolveConfig(
+          'PATIENT_DASHBOARD.ALLOWED_CHART_DATA_POINT_TYPES',
+          this.context.organization
+        ) ?? []
+
+      if (allowedDataPointTypes?.length > 0) {
+        dataPointTypes = dataPointTypes.filter((dpT) =>
+          allowedDataPointTypes.includes(dpT.type.id as DataPointTypes)
+        )
+      }
 
       this.typeGroups = labels
         .map((label) => ({
