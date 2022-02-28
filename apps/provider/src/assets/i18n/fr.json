@@ -1437,6 +1437,7 @@
     "PATIENT_CONSENT_PROMPT": "Le patient a consenti et le consentement a été enregistré dans mon EHR",
     "PATIENT_HAS_RPM_SESSION": "Ce patient a la session RPM suivante:",
     "PRIMARY_DIAGNOSIS": "Diagnostic Primaire",
+    "PULSE_OXIMETER": "Oxymètre de pouls",
     "RPM_CREATE_FORM_HEADER": "Les conditions suivantes ont été remplies pour ce patient:",
     "RPM_CREATE_NOTICE": "En permettant à ces outils",
     "RPM_CREATE_TITLE": "Surveillance patient à distance ",

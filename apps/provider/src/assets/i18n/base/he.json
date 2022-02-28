@@ -1437,6 +1437,7 @@
     "PATIENT_CONSENT_PROMPT": "המטופל הסכים והסכמה נרשמה ב- EHR שלי",
     "PATIENT_HAS_RPM_SESSION": "יש לחולה זה פגישת סל\"ד הבאה:",
     "PRIMARY_DIAGNOSIS": "אבחון ראשוני",
+    "PULSE_OXIMETER": "דופק Oximeter.",
     "RPM_CREATE_FORM_HEADER": "הדרישות הבאות הושלמו עבור המטופל:",
     "RPM_CREATE_NOTICE": "על ידי הפעלת כלים אלה, תחויב מדי חודש עבור מטופל זה.",
     "RPM_CREATE_TITLE": "ניטור מרחוק למטופל",

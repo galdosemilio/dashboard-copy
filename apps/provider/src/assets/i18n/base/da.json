@@ -1437,6 +1437,7 @@
     "PATIENT_CONSENT_PROMPT": "Patienten har givet samtykke, og samtykke er registreret i min EHR",
     "PATIENT_HAS_RPM_SESSION": "Denne patient har følgende RPM session:",
     "PRIMARY_DIAGNOSIS": "Primær diagnose",
+    "PULSE_OXIMETER": "Pulse Oximeter",
     "RPM_CREATE_FORM_HEADER": "Følgende krav er opfyldt til denne patient:",
     "RPM_CREATE_NOTICE": "Ved at aktivere disse værktøjer",
     "RPM_CREATE_TITLE": "Fjernovervågning af patienten",

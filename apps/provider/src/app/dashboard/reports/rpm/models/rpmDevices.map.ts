@@ -30,6 +30,12 @@ export const RPM_DEVICES: RPMDevice[] = [
     imageSrc: 'assets/img/glucometer.png'
   },
   {
+    id: '4',
+    name: 'Pulse Oximeter',
+    displayName: _('RPM.PULSE_OXIMETER'),
+    imageSrc: 'assets/img/oximeter.png'
+  },
+  {
     id: '-1',
     name: 'None',
     displayName: _('RPM.NONE'),

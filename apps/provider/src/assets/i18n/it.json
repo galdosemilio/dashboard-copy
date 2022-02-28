@@ -1437,6 +1437,7 @@
     "PATIENT_CONSENT_PROMPT": "Il paziente ha acconsentito e il consenso è stato registrato nella mia cartella clinica elettronica",
     "PATIENT_HAS_RPM_SESSION": "Questo paziente ha la seguente sessione di RPM:",
     "PRIMARY_DIAGNOSIS": "Diagnosi Primaria",
+    "PULSE_OXIMETER": "Pulsossimetro",
     "RPM_CREATE_FORM_HEADER": "I seguenti requisiti sono stati completati per questo paziente:",
     "RPM_CREATE_NOTICE": "Abilitando questi strumenti",
     "RPM_CREATE_TITLE": "Monitoraggio Remoto del Paziente",

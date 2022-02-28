@@ -1437,6 +1437,7 @@
     "PATIENT_CONSENT_PROMPT": "Der Patient hat zugestimmt und die Zustimmung wurde in meiner EPA festgehalten",
     "PATIENT_HAS_RPM_SESSION": "Dieser Patient hat die folgende RPM-Sitzung:",
     "PRIMARY_DIAGNOSIS": "Erstdiagnose",
+    "PULSE_OXIMETER": "Pulsoximeter",
     "RPM_CREATE_FORM_HEADER": "Die folgenden Anforderungen wurden für diesen Patienten erfüllt:",
     "RPM_CREATE_NOTICE": "Wenn Sie diese Tools aktivieren, wird Ihnen der Patient monatlich in Rechnung gestellt.",
     "RPM_CREATE_TITLE": "Remote Patient Monitoring (RPM, Patientenfernüberwachung)",
