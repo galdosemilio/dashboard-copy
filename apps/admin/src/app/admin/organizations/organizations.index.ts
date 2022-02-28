@@ -18,10 +18,6 @@ import {
 } from '@coachcare/backend/data'
 import { CcrOrganizationDialogs } from '@coachcare/common/services'
 import {
-  OrganizationActiveCampaignComponent,
-  OrganizationActiveCampaignTableComponent
-} from './active-campaign'
-import {
   AssociateActiveCampaignDialogComponent,
   AssociateAllProvidersDialogComponent,
   CreateLabelDialogComponent,
@@ -74,8 +70,6 @@ export const OrganizationComponents = [
   LabelsAssociationsComponent,
   LabelSelectorComponent,
   MALAComponent,
-  OrganizationActiveCampaignComponent,
-  OrganizationActiveCampaignTableComponent,
   OrganizationsListComponent,
   OrganizationsTableComponent,
   OrganizationsDisplayComponent,

@@ -6,7 +6,6 @@ import {
 } from '@board/services'
 import { CcrOrganizationTreePageComponent } from '@coachcare/common/components'
 
-import { OrganizationActiveCampaignComponent } from './active-campaign'
 import { OrganizationsDisplayComponent } from './display'
 import { EmailTemplateComponent } from './email-template'
 import { OrganizationsFormComponent } from './form'
@@ -61,10 +60,6 @@ export const routes: Routes = [
       {
         path: 'tree',
         component: CcrOrganizationTreePageComponent
-      },
-      {
-        path: 'marketing',
-        component: OrganizationActiveCampaignComponent
       },
       {
         path: 'settings',

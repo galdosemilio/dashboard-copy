@@ -126,8 +126,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
             bccEmails,
             autoEnrollClientLabelId: this.clientPackages.slice(),
             openAssociation: rset.openAssociation,
-            clinicCodeHelp: rset.clinicCodeHelp,
-            useActiveCampaign: rset.useActiveCampaign
+            clinicCodeHelp: rset.clinicCodeHelp
           },
           ['bccEmails']
         )
