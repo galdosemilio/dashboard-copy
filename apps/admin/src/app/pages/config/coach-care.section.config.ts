@@ -8,20 +8,7 @@ export const CoachCareTestSectionConfig: SectionConfigDetails = {
         id: 'virtual_health',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.V_HEALTH_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.V_HEALTH'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'virtual_health_monthly',
-            name: _('GLOBAL.MONTHLY'),
-            price: 425
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'virtual_health_annually',
-            name: _('GLOBAL.ANNUAL'),
-            price: 350
-          }
-        ],
+        billing: [],
         targetParentOrg: '7412',
         type: 'virtualHealth'
       },
@@ -29,18 +16,7 @@ export const CoachCareTestSectionConfig: SectionConfigDetails = {
         id: 'remote_monitoring',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.R_MONITORING_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.R_MONITORING'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'remote_monitoring_monthly',
-            name: _('GLOBAL.MONTHLY')
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'remote_monitoring_annually',
-            name: _('GLOBAL.ANNUAL')
-          }
-        ],
+        billing: [],
         targetParentOrg: '7412',
         type: 'remoteMonitoring'
       },
@@ -48,18 +24,7 @@ export const CoachCareTestSectionConfig: SectionConfigDetails = {
         id: 'health_system',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.H_SYSTEM_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.H_SYSTEM'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'health_system_monthly',
-            name: _('GLOBAL.MONTHLY')
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'health_system_annually',
-            name: _('GLOBAL.ANNUAL')
-          }
-        ],
+        billing: [],
         targetParentOrg: '7412',
         type: 'healthSystem'
       }
@@ -76,20 +41,7 @@ export const CoachCareProdSectionConfig: SectionConfigDetails = {
         id: 'virtual_health',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.V_HEALTH_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.V_HEALTH'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'virtual_health_monthly',
-            name: _('GLOBAL.MONTHLY'),
-            price: 425
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'virtual_health_annually',
-            name: _('GLOBAL.ANNUAL'),
-            price: 350
-          }
-        ],
+        billing: [],
         targetParentOrg: '3637',
         type: 'virtualHealth'
       },
@@ -97,18 +49,7 @@ export const CoachCareProdSectionConfig: SectionConfigDetails = {
         id: 'remote_monitoring',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.R_MONITORING_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.R_MONITORING'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'remote_monitoring_monthly',
-            name: _('GLOBAL.MONTHLY')
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'remote_monitoring_annually',
-            name: _('GLOBAL.ANNUAL')
-          }
-        ],
+        billing: [],
         targetParentOrg: '3637',
         type: 'remoteMonitoring'
       },
@@ -116,18 +57,7 @@ export const CoachCareProdSectionConfig: SectionConfigDetails = {
         id: 'health_system',
         lastStepMessage: _('CLINIC_PLANS.COACH_CARE.H_SYSTEM_LAST_STEP'),
         name: _('CLINIC_PLANS.COACH_CARE.H_SYSTEM'),
-        billing: [
-          {
-            billingPeriod: 'monthly',
-            id: 'health_system_monthly',
-            name: _('GLOBAL.MONTHLY')
-          },
-          {
-            billingPeriod: 'annually',
-            id: 'health_system_annually',
-            name: _('GLOBAL.ANNUAL')
-          }
-        ],
+        billing: [],
         targetParentOrg: '3637',
         type: 'healthSystem'
       }
