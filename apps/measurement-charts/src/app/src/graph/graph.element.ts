@@ -1,7 +1,7 @@
 import './graph.element.scss'
 
 import * as utils from '@chart/utils'
-import { CcrElement, DateRange, Timeframe, baseData } from '../../model'
+import { CcrElement, DateRange, Timeframe } from '../../model'
 import {
   MeasurementDataPointAggregate,
   convertToReadableFormat,
@@ -231,7 +231,7 @@ export class GraphElement extends CcrElement {
           entry.value = convertToReadableFormat(
             newEntry.point.value,
             newEntry.point.type,
-            baseData.metric
+            api.baseData.metric
           )
         } else {
           entry.value = undefined
@@ -375,14 +375,14 @@ export class GraphElement extends CcrElement {
               ? convertToReadableFormat(
                   entry.point.value,
                   entry.point.type,
-                  baseData.metric
+                  api.baseData.metric
                 )
               : undefined,
             weightValue: weightEntry
               ? convertToReadableFormat(
                   weightEntry.point.value,
                   weightEntry.point.type,
-                  baseData.metric
+                  api.baseData.metric
                 )
               : undefined
           }
