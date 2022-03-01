@@ -1574,13 +1574,13 @@
     typescript "2.4.1"
     yargs "8.0.2"
 
-"@coachcare/sdk@^16.7.1":
-  version "16.7.1"
-  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/16.7.1/b612580ad0ced26df6b819634e0d8f1b866dea78ed36bed76f2f8206c55b3194#ea74a79c4b0ba7699097ac168dec825f2728719e"
-  integrity sha512-4G+LQGFH1ZHxz63gCyB6pW4GN3GaJoMpqZm5vT0cJSHY5koo29hv2ATvlNiKNZbqRZb8yoevfPeQCHU/f1ZxwQ==
+"@coachcare/sdk@^16.8.1":
+  version "16.8.1"
+  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/16.8.1/e2f7de40b7220b19a08975e304b9c17142630e2421f658c2e379a01150867b4b#fc5988c92bc7da85071dab79fae807cab1bf7431"
+  integrity sha512-C7+dGB1w18omwP64Lm9aeF4a9I3TdY4qwsqOAMzLjqRe/5ViiuWu34CU20D43sTSWiAOlgQVRtClk85X/yJPBw==
   dependencies:
     "@types/qs" "^6.9.6"
-    "@types/twilio-video" "^2.7.3"
+    "@types/twilio-video" "^2.11.0"
     axios "^0.21.3"
     qs "^6.10.1"
     socket.io-client "^4.0.1"
@@ -3437,10 +3437,12 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.0.tgz#7036640b4e21cc2f259ae826ce843d277dad8cff"
   integrity sha512-RJJrrySY7A8havqpGObOB4W92QXKJo63/jFLLgpvOtsGUqbQZ9Sbgl35KMm1DjC6j7AvmmU2bIno+3IyEaemaw==
 
-"@types/twilio-video@^2.7.3":
-  version "2.7.3"
-  resolved "https://registry.npmjs.org/@types/twilio-video/-/twilio-video-2.7.3.tgz#24a7a8caa97bc536f40d1d02105b84a7fff17fde"
-  integrity sha512-IDqG3hB1GSbtAoMqIV/sOT02hstBhGUrejpNd+1PbKm3tyhO62T2wwd4rFC2A+nKXTY3aC+2FoQwvR68d5j08g==
+"@types/twilio-video@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@types/twilio-video/-/twilio-video-2.11.0.tgz#17e28fde1d48115ff4568b98d5e5ca4f8b3f097a"
+  integrity sha512-0jznWmpWD3v1+bd2D5O0CHaV7/WE6CYFE+lJvIFV1KXkKuAcH2Bieg26VtVsp5IwpB8m5u9TveC8Z4WiFNNGgA==
+  dependencies:
+    twilio-video "*"
 
 "@types/webgl-ext@0.0.30":
   version "0.0.30"
@@ -15787,6 +15789,16 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
+
+twilio-video@*:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/twilio-video/-/twilio-video-2.20.1.tgz#391a311621ccc5d904eaa5b228e6c967edd19763"
+  integrity sha512-fxQeW5gCEt6r6NxsRgA7RgjaytXLjuLKey/Hio1P5Nmqkw6s+c+XHACIOpWhgX4M68FV0i3qwvHCO+YMQVyyrw==
+  dependencies:
+    "@twilio/webrtc" "4.5.2"
+    backoff "^2.5.0"
+    ws "^7.4.6"
+    xmlhttprequest "^1.8.0"
 
 twilio-video@^2.20.0:
   version "2.20.0"

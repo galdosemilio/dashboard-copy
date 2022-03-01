@@ -16,7 +16,7 @@ import {
   Messaging,
   MessagingThreadSegment
 } from '@coachcare/sdk'
-import { findIndex, get, sortBy, uniqBy } from 'lodash'
+import { chain, findIndex, get, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { filter, tap } from 'rxjs/operators'
@@ -283,18 +283,20 @@ export class MessagesComponent implements OnInit {
   }
 
   private formatThread(t: MessagingThreadSegment): MessageThread {
-    const accounts = sortBy(
-      t.account.map((acc) => ({
+    const accounts = chain(t.account)
+      .map((acc) => ({
         id: acc.id,
         name: `${acc.firstName} ${acc.lastName}`,
         shortName: `${acc.firstName} ${acc.lastName[0]}.`,
         firstName: acc.firstName,
         lastName: acc.lastName,
-        accountType: null
-      })),
-      [(acc) => acc.name.toLowerCase()],
-      ['asc']
-    )
+        accountType: acc.type?.id
+      }))
+      .orderBy(
+        [(entry) => entry.accountType, (entry) => entry.name],
+        ['desc', 'asc']
+      )
+      .value()
 
     return {
       threadId: t.threadId,

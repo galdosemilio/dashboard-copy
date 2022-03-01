@@ -32,7 +32,7 @@ import {
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { TranslateService } from '@ngx-translate/core'
-import { first, last, uniqBy } from 'lodash'
+import { chain, first, last, uniqBy } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, merge, Subject } from 'rxjs'
@@ -73,7 +73,14 @@ export class MessagesChatMessagesComponent
     this.forceDraftSync$.next()
     this._thread = thread
     void this.fetchDraft()
-    this.shownRecipients = thread.recipients.slice().splice(0, 3)
+
+    this.shownRecipients = chain(thread.recipients)
+      .orderBy(
+        [(entry) => entry.accountType, (entry) => entry.name],
+        ['desc', 'asc']
+      )
+      .takeRight(3)
+      .value()
   }
 
   get thread(): MessageThread {
