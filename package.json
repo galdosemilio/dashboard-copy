@@ -171,7 +171,7 @@
     "@nrwl/web": "13.8.3",
     "@nrwl/workspace": "13.4.6",
     "@octokit/core": "^3.5.1",
-    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.2.0",
