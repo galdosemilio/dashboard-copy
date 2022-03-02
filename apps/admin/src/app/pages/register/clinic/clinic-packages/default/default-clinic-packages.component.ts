@@ -18,9 +18,7 @@ export class DefaultClinicPackageComponent {
 
   @Output() nextStep = new EventEmitter()
   @Output()
-  selected: EventEmitter<PlanSelectorSelectionEvent> = new EventEmitter<
-    PlanSelectorSelectionEvent
-  >()
+  selected: EventEmitter<PlanSelectorSelectionEvent> = new EventEmitter<PlanSelectorSelectionEvent>()
 
   public clinicPlanSelection: PlanSelectorSelectionEvent
 
@@ -30,7 +28,7 @@ export class DefaultClinicPackageComponent {
     this.clinicPlanSelection = $event
     this.formGroup.patchValue({
       type: $event.plan ? $event.plan.type : '',
-      billingPeriod: $event.billing ? $event.billing.billingPeriod : ''
+      billingPeriod: $event.billing ? $event.billing.billingPeriod : 'annually'
     })
     this.selected.emit(this.clinicPlanSelection)
     this.cdr.detectChanges()
