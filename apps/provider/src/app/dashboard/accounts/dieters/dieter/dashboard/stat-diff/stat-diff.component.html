@@ -29,12 +29,18 @@ fxLayout="column" fxLayoutAlign="space-between">
       [matTooltip]="startingTimestamp ? ('BOARD.MEASUREMENT_RECORDED_ON' | translate:{date: startingTimestamp | amDateFormat:'ddd MMM D YYYY'}) : undefined">
         {{ 'STATS.STARTING' | translate }}:
         {{ starting | number:'1.1-1' }}
+        <ng-container *ngIf="startingPercent">
+          <span class="percent-container">({{ startingPercent | number:'1.1-1' }}%)</span>
+        </ng-container>
       </div>
       <div
       *ngIf="current"
       [matTooltip]="currentTimestamp ? ('BOARD.MEASUREMENT_RECORDED_ON' | translate:{date: currentTimestamp | amDateFormat:'ddd MMM D YYYY'}) : undefined">
         {{ 'STATS.CURRENT' | translate }}:
         {{ current | number:'1.1-1' }}
+        <ng-container *ngIf="currentPercent">
+          <span class="percent-container">({{ currentPercent | number:'1.1-1' }}%)</span>
+        </ng-container>
       </div>
     </div>
   </ng-template>

@@ -20,7 +20,9 @@
       [starting]="data.starting.bodyFat | unitConversion: 'composition'"
       [startingTimestamp]="data.timestamp.starting.bodyFat"
       [current]="data.current.bodyFat | unitConversion: 'composition'"
+      [currentPercent]="data.current.bodyFatPercentage"
       [currentTimestamp]="data.timestamp.current.bodyFat"
+      [startingPercent]="data.starting.bodyFatPercentage"
     ></ccr-stat-diff>
 
     <ccr-stat-diff fxFlex="1 0 100px"
@@ -28,7 +30,9 @@
       [starting]="data.starting.leanMass | unitConversion: 'composition'"
       [startingTimestamp]="data.timestamp.starting.leanMass"
       [current]="data.current.leanMass | unitConversion: 'composition'"
+      [currentPercent]="data.current.leanMassPercentage"
       [currentTimestamp]="data.timestamp.current.leanMass"
+      [startingPercent]="data.starting.leanMassPercentage"
     ></ccr-stat-diff>
 
     <ccr-stat-diff fxFlex="1 0 100px"
@@ -36,7 +40,9 @@
       [starting]="data.starting.waterMass | unitConversion: 'composition'"
       [startingTimestamp]="data.timestamp.starting.waterMass"
       [current]="data.current.waterMass | unitConversion: 'composition'"
+      [currentPercent]="data.current.waterMassPercentage"
       [currentTimestamp]="data.timestamp.current.waterMass"
+      [startingPercent]="data.starting.waterMassPercentage"
     ></ccr-stat-diff>
 
     <ccr-stat-diff fxFlex="1 0 100px"

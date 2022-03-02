@@ -24,7 +24,11 @@ export class StatDiffComponent implements OnChanges, OnInit {
   @Input()
   starting: string
   @Input()
+  startingPercent: string
+  @Input()
   current: string
+  @Input()
+  currentPercent: string
   @Input()
   startingTimestamp?: string
   @Input()
