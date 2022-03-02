@@ -1,3 +1,17 @@
+# [1.69.0](https://github.com/coachcare/dashboard/compare/v1.68.0...v1.69.0) (2022-03-02)
+
+
+### Bug Fixes
+
+* adjusted expandable tables to grow vertically [FRON-2662] ([03b3161](https://github.com/coachcare/dashboard/commit/03b3161f86ae40cdc713cc26f62eb43709309b53))
+* adjusted prices on the registration page [FRON-2656] ([5fb6bca](https://github.com/coachcare/dashboard/commit/5fb6bca6ad9964551633e0c7df4760fa54e740b9))
+* solved issue with empty billingPeriod [FRON-2656] ([b3fabf1](https://github.com/coachcare/dashboard/commit/b3fabf178e972bd44ce4ec59045acb4b1a27ecdf))
+
+
+### Features
+
+* remove marketing tap on admin panel [FRON-2643] ([47d9c72](https://github.com/coachcare/dashboard/commit/47d9c725e83e2754e3c44ca7b0b6e8ceccc2978d))
+
 # [1.68.0](https://github.com/coachcare/dashboard/compare/v1.67.0...v1.68.0) (2022-02-25)
 
 
