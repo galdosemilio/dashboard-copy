@@ -21,6 +21,7 @@ import {
 import { FileExplorerDatasource } from '@app/dashboard/content/services/file-explorer.datasource'
 import { ContextService } from '@app/service'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { filter, map } from 'rxjs/operators'
 
 @Injectable()
 export class ContentUploadService {
@@ -321,39 +322,46 @@ export class ContentUploadService {
         size: ticket.queuedContent.file.size
       })
 
-      ticket.contentUpload.id = (
-        await this.requestContentCreation(ticket, false)
-      ).id
       ticket.contentUpload.subscription = this.requestFileUpload({
         body: ticket.queuedContent.file,
         mimeType: response.mimeType,
         uploadUrl: response.url
-      }).subscribe(
-        (
-          event: HttpEvent<
-            HttpEventType.UploadProgress | HttpEventType.ResponseHeader
-          >
-        ) => {
-          switch (event.type) {
-            case HttpEventType.UploadProgress:
-              this.uploads[ticket.number].progress =
-                (event.loaded * 100) / event.total
-              break
-            case HttpEventType.ResponseHeader:
-              if (!event.ok) {
-                throw new ContentUploadError({
-                  message: 'Upload Failed',
-                  response: event
-                })
+      })
+        .pipe(
+          map(
+            (
+              event: HttpEvent<
+                HttpEventType.UploadProgress | HttpEventType.ResponseHeader
+              >
+            ) => {
+              switch (event.type) {
+                case HttpEventType.UploadProgress:
+                  this.uploads[ticket.number].progress =
+                    (event.loaded * 100) / event.total
+
+                  return event.loaded >= event.total
+
+                case HttpEventType.ResponseHeader:
+                  if (!event.ok) {
+                    throw new ContentUploadError({
+                      message: 'Upload Failed',
+                      response: event
+                    })
+                  }
+                  break
               }
-              break
+
+              return false
+            }
+          ),
+          filter((completed) => completed)
+        )
+        .subscribe(
+          () => void this.onFileUploadCompleted(ticket),
+          (error: HttpErrorResponse) => {
+            this.uploads[ticket.number].error = error.statusText
           }
-        },
-        (error: HttpErrorResponse) => {
-          this.uploads[ticket.number].error = error.statusText
-          void this.source.deleteContent(this.uploads[ticket.number].id)
-        }
-      )
+        )
     } catch (error) {
       if (ticket.contentUpload.id) {
         void this.requestContentDeletion(ticket.contentUpload.id)
@@ -401,6 +409,18 @@ export class ContentUploadService {
     ticket: ContentUploadTicket
   ): Promise<FileExplorerContent> {
     return this.requestContentCreation(ticket)
+  }
+
+  private async onFileUploadCompleted(
+    ticket: ContentUploadTicket
+  ): Promise<void> {
+    try {
+      ticket.contentUpload.id = (
+        await this.requestContentCreation(ticket, false)
+      ).id
+    } catch (error) {
+      this.uploads[ticket.number].error = error
+    }
   }
 
   private requestContentDeletion(id: string): Promise<void> {
