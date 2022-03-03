@@ -32,11 +32,10 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
    * We need to make sure that this variable is false if there's
    * an active call so that we don't clog the app with media sources.
    */
-  public callTargets: string[] = []
-  public canJoinSession = false
   public defaultBillableService = BILLABLE_SERVICES.none
   public isProvider = false
-  public upcomingMeeting?: Meeting
+  public upcomingMeetings: Meeting[] = []
+  public canJoinSession: { [meetingId: string]: boolean } = {}
 
   private dataSource: MeetingsDataSource
   private hasOngoingCall = false
@@ -67,22 +66,26 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
       .subscribe((callState) => (this.hasOngoingCall = callState.isCallStarted))
   }
 
-  public joinSession(): void {
-    this.showCallWaitingRoom()
+  public joinSession(meeting: Meeting): void {
+    this.showCallWaitingRoom(meeting)
   }
 
   private checkJoinStatus(): void {
-    this.canJoinSession = this.hasOngoingCall
-      ? false
-      : this.upcomingMeeting.date
-          .clone()
-          .subtract(15, 'minutes')
-          .isSameOrBefore(moment())
+    this.upcomingMeetings.forEach((meeting) => {
+      this.canJoinSession[meeting.id] = this.hasOngoingCall
+        ? false
+        : meeting.date.clone().subtract(15, 'minutes').isSameOrBefore(moment())
+    })
+
     this.checkMeetingDurationStatus()
   }
 
   private checkMeetingDurationStatus(): void {
-    if (this.upcomingMeeting.endDate.isSameOrBefore(moment())) {
+    const endedMeetings = this.upcomingMeetings.filter((meeting) =>
+      meeting.endDate.isSameOrBefore(moment())
+    )
+
+    if (endedMeetings.length) {
       void this.fetchMeetings()
     }
   }
@@ -97,7 +100,7 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
         start: today.toISOString(),
         end: today.endOf('year').toISOString()
       },
-      limit: 1
+      limit: 3
     })
   }
 
@@ -106,29 +109,41 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
       this.dataSource
         .connect()
         .pipe(first())
-        .subscribe((meetings) =>
-          this.processUpcomingMeeting(meetings.length ? meetings.pop() : null)
-        )
+        .subscribe((meetings) => this.processUpcomingMeetings(meetings))
     } catch (error) {
       this.notifier.error(error)
     }
   }
 
-  private processUpcomingMeeting(meeting: Meeting | null): void {
-    this.upcomingMeeting = meeting
+  private processUpcomingMeetings(meetings: Meeting[]): void {
+    this.upcomingMeetings = meetings
 
-    if (!meeting) {
+    if (!meetings.length) {
       this.stopJoinStatusInterval()
       return
     }
 
-    this.callTargets = [
+    this.startJoinStatusInterval()
+  }
+
+  public isProviderAttendee(attendee): boolean {
+    return Number(attendee.accountType.id) === AccountType.Provider
+  }
+
+  public attendeeName(attendee): string {
+    return `${attendee.firstName} ${attendee.lastName}`
+  }
+
+  public callTargets(meeting: Meeting) {
+    return [
       meeting.attendees
         .filter((attendee) => attendee.id !== this.context.user.id)
         .pop()
     ]
+  }
 
-    this.attendeeEntities = sortBy(
+  private showCallWaitingRoom(meeting: Meeting): void {
+    const attendeeEntities = sortBy(
       meeting.attendees,
       (attendee) => attendee.accountType.id,
       ['desc']
@@ -138,15 +153,11 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
       name: `${attendee.firstName} ${attendee.lastName}`
     }))
 
-    this.startJoinStatusInterval()
-  }
-
-  private showCallWaitingRoom(): void {
     try {
       const data: CcrCallWaitingRoomProps = {
-        attendeeEntities: this.attendeeEntities
+        attendeeEntities
       }
-      this.canJoinSession = false
+      this.canJoinSession[meeting.id] = false
       this.dialog
         .open(CcrCallWaitingRoomComponent, {
           data,
@@ -159,7 +170,7 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
       this.stopJoinStatusInterval()
     } catch (error) {
     } finally {
-      this.canJoinSession = true
+      this.canJoinSession[meeting.id] = true
     }
   }
 

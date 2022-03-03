@@ -1,54 +1,64 @@
 @import 'variables';
 
-.info-container {
+.upcoming-container {
   background-color: mat-color($ccr-background, app-bar);
-  padding: 10px 25px;
-
-  p {
-    margin: 0;
-  }
-
-  .date-segment {
-    background-color: var(--primary);
-    border-radius: 10px;
-    color: white;
-    padding: 5px 10px;
-
-    .day {
-      font-weight: bold;
-      font-size: 18px;
-      text-transform: uppercase;
-    }
-
-    .date {
-      margin-bottom: 2px;
-    }
-
-    .date,
-    .year {
-      font-size: 14px;
-    }
-  }
-
-  .meeting-segment {
-    color: var(--text-lighter);
-
-    .type {
-      color: var(--text);
-      font-weight: 700;
-    }
-  }
-
-  .session-start-cta {
-    color: var(--text-lighter);
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 5px;
-    text-align: center;
-  }
+  padding: 20px 25px 10px;
 
   .upcoming-title {
     font-weight: bold;
     text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .info-container {
+    border-bottom: 1px solid mat-color($ccr-background, status-bar);
+    padding: 10px 0;
+
+    &:last-child {
+      border-bottom: 0px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .date-segment {
+      background-color: var(--primary);
+      border-radius: 10px;
+      color: white;
+      padding: 5px 10px;
+
+      .day {
+        font-weight: bold;
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+
+      .date {
+        margin-bottom: 2px;
+      }
+
+      .date,
+      .year {
+        font-size: 14px;
+      }
+    }
+
+    .meeting-segment {
+      color: var(--text-lighter);
+
+      .type {
+        color: var(--text);
+        font-weight: 700;
+      }
+    }
+
+    .session-start-cta {
+      color: var(--text-lighter);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      text-align: center;
+    }
   }
 }

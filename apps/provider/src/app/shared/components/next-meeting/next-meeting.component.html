@@ -1,61 +1,62 @@
-<div
-*ngIf="upcomingMeeting"
-class="info-container"
-fxLayout="row"
-fxLayout.xs="column"
-fxLayoutAlign="space-between stretch"
-fxLayoutGap="15px">
-  <div fxFlex="22%" fxFlex.sm="35%" fxFlex.md="35%">
-    <div class="upcoming-title" fxFlex fxFlex.xs="60%" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.xs="start center">
-      {{ 'BOARD.UPCOMING_APPOINTMENT' | translate }}
-    </div>
+<div class="upcoming-container" *ngIf="upcomingMeetings.length">
+  <div class="upcoming-title">
+    {{ 'BOARD.UPCOMING_APPOINTMENT' | translate }}
+  </div>
 
-    <div fxFlex="30%" fxFlex.xs>
-      <div class="date-segment" fxLayout="column" fxLayoutAlign="center center">
-        <p class="day">{{ upcomingMeeting.date | amDateFormat:'ddd' }}</p>
-        <p class="date">{{ upcomingMeeting.date | amDateFormat:'MMM D' }}</p>
-        <p class="year">{{ upcomingMeeting.date | amDateFormat:'YYYY' }}</p>
+  <div
+  *ngFor="let meeting of upcomingMeetings"
+  class="info-container"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-between stretch"
+  fxLayoutGap="15px">
+    <div fxFlex="10%" fxFlex.sm="15%" fxFlex.md="15%">
+      <div class="date-segment" fxFlex fxLayout="column" fxLayoutAlign="center center">
+        <p class="day">{{ meeting.date | amDateFormat:'ddd' }}</p>
+        <p class="date">{{ meeting.date | amDateFormat:'MMM D' }}</p>
+        <p class="year">{{ meeting.date | amDateFormat:'YYYY' }}</p>
       </div>
     </div>
-  </div>
 
-  <div fxFlex>
-  <div class="meeting-segment" fxLayout="column" fxLayoutAlign="start start" fxFlex>
-    <p class="type">{{ 'BOARD.APPOINTMENT_TYPE' | translate:{type: upcomingMeeting.type.description} }}</p>
-    <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-      <mat-icon>people</mat-icon>
-      <span
-      *ngFor="let entity of attendeeEntities; let i = index"
-      class="attendee-listing">
-        {{ entity.isProvider ? ('BOARD.DOCTOR_NAME' | translate:{ name: entity.name }) : entity.name }}{{ i + 1 < attendeeEntities.length ? ',' : '' }}
-      </span>
-    </p>
-    <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-      <mat-icon>schedule</mat-icon>
-      <span>{{ upcomingMeeting.date | amDateFormat:'h:mm' }} — {{ upcomingMeeting.endDate | amDateFormat:'h:mm a' }}</span>
-    </p>
-  </div>
+    <div fxFlex fxLayout="row" fxLayout.xs="column">
+    <div class="meeting-segment" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start center" fxFlex>
+      <p class="type">{{ 'BOARD.APPOINTMENT_TYPE' | translate:{type: meeting.type.description} }}</p>
+      <p class="attendee-listing" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+        <span fxHide.xs>
+          <mat-icon>people</mat-icon>
+          &nbsp;
+        </span>
+        <ng-container *ngFor="let attendee of meeting.attendees; let i = index">
+        {{ isProviderAttendee(attendee) ? ('BOARD.DOCTOR_NAME' | translate:{ name: attendeeName(attendee) }) : attendeeName(attendee) }}{{ i + 1 < meeting.attendees.length ? ',' : '' }}
+        </ng-container>
+      </p>
+      <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+        <mat-icon>schedule</mat-icon>
+        <span>{{ meeting.date | amDateFormat:'h:mm' }} — {{ meeting.endDate | amDateFormat:'h:mm a' }}</span>
+      </p>
+    </div>
 
-  <div fxFlex="32%" fxFlex.xs="40%" fxLayout="column" fxLayoutAlign="center stretch">
-    <p class="session-start-cta">{{ 'BOARD.SESSION_STARTS_AT' | translate:{time: (upcomingMeeting.date | amDateFormat:'h:mm a')} }}</p>
-    <button
-      *ngIf="!isProvider"
-      [disabled]="!canJoinSession"
-      (click)="joinSession()"
-      class="ccr-button"
-      color="primary"
-      mat-button>
-      {{ 'BOARD.JOIN_SESSION' | translate }}
-    </button>
+    <div fxFlex="32%" fxFlex.xs="40%" fxLayout="column" fxLayoutAlign="center stretch">
+      <p class="session-start-cta">{{ 'BOARD.SESSION_STARTS_AT' | translate:{time: (meeting.date | amDateFormat:'h:mm a')} }}</p>
+      <button
+        *ngIf="!isProvider"
+        [disabled]="!canJoinSession[meeting.id]"
+        (click)="joinSession(meeting)"
+        class="ccr-button"
+        color="primary"
+        mat-button>
+        {{ 'BOARD.JOIN_SESSION' | translate }}
+      </button>
 
-    <ccr-call-control
-      *ngIf="isProvider"
-      [defaultBillableService]="defaultBillableService"
-      [disabled]="!canJoinSession"
-      [label]="'BOARD.JOIN_SESSION' | translate"
-      [showIcon]="false"
-      [targets]="callTargets"
-    ></ccr-call-control>
-  </div>
+      <ccr-call-control
+        *ngIf="isProvider"
+        [defaultBillableService]="defaultBillableService"
+        [disabled]="!canJoinSession[meeting.id]"
+        [label]="'BOARD.JOIN_SESSION' | translate"
+        [showIcon]="false"
+        [targets]="callTargets(meeting)"
+      ></ccr-call-control>
+    </div>
+    </div>
   </div>
 </div>
