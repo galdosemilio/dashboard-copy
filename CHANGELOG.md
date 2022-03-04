@@ -1,3 +1,10 @@
+# [1.70.0](https://github.com/coachcare/dashboard/compare/v1.69.0...v1.70.0) (2022-03-04)
+
+
+### Features
+
+* added video background support for chrome [FRON-2622] ([54d8cba](https://github.com/coachcare/dashboard/commit/54d8cba6f2bd62236967d4d43e3c44a51fd5b621))
+
 # [1.69.0](https://github.com/coachcare/dashboard/compare/v1.68.0...v1.69.0) (2022-03-02)
 
 
