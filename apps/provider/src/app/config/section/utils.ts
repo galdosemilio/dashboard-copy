@@ -7,7 +7,7 @@ export function resolveConfig(
   organization: SelectedOrganization,
   direct: boolean = false
 ): any {
-  const env: string = environment.selveraApiEnv
+  const env: string = environment.selveraApiEnv === 'prod' ? 'prod' : 'test'
   const path: string[] = organization ? organization.hierarchyPath || [] : []
   let config = {}
   let defaultConfig

@@ -8,7 +8,7 @@ export interface Environment {
   loginSite: string
   production: boolean
   role: string
-  selveraApiEnv: 'ccrDemo' | 'dev' | 'prod' | 'test'
+  selveraApiEnv: 'ccrDemo' | 'dev' | 'prod' | 'test' | 'blueinfy'
   url: string
   awsAssetsUrl: string
   coachcareOrgId: string

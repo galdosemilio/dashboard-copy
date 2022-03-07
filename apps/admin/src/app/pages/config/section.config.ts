@@ -113,7 +113,7 @@ export function resolveConfig(
   orgId: string = environment.defaultOrgId,
   direct: boolean = false
 ): any {
-  const env: string = environment.ccrApiEnv
+  const env: string = environment.ccrApiEnv === 'prod' ? 'prod' : 'test'
   let config
   let defaultConfig
   config = SECTION_CONFIG[env][orgId]

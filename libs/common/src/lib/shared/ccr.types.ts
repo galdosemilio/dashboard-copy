@@ -1,7 +1,7 @@
 /**
  * CCR API Environments
  */
-export type CcrEnv = 'ccrDemo' | 'dev' | 'prod' | 'test'
+export type CcrEnv = 'ccrDemo' | 'dev' | 'prod' | 'test' | 'blueinfy'
 
 /**
  * CCR User Roles

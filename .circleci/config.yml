@@ -84,6 +84,7 @@ jobs:
         enum:
           - test
           - prod
+          - blueinfy
     steps:
       - attach_workspace:
           at: ~/repo
@@ -98,11 +99,61 @@ jobs:
           command: yarn build measurement-charts -c << parameters.mode >> --base-href /measurement-charts/
       - run:
           name: Copy deployment files
-          command: cp appspec.yml ~/repo/dist/apps && cp -r scripts ~/repo/dist/apps
+          command: |
+            mkdir ~/repo/dist/apps/<< parameters.mode>>
+            cp -r ~/repo/dist/apps/admin ~/repo/dist/apps/<< parameters.mode >>/admin
+            cp -r ~/repo/dist/apps/provider ~/repo/dist/apps/<< parameters.mode >>/provider
+            cp -r ~/repo/dist/apps/measurement-charts ~/repo/dist/apps/<< parameters.mode >>/measurement-charts
+            cp appspec.yml ~/repo/dist/apps/<< parameters.mode >>
+            cp -r scripts ~/repo/dist/apps/<< parameters.mode >>
       - persist_to_workspace:
           root: ~/repo
           paths:
             - .
+
+  deploy_on_demand:
+    docker:
+      - image: cimg/python:3.8
+    working_directory: ~/repo/dist/apps
+    parameters:
+      env:
+        type: enum
+        enum:
+          - blueinfy
+    environment:
+      AWS_REGION: us-east-1
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - aws-s3/copy:
+          arguments: --acl public-read --recursive
+          from: ./<< parameters.env>>/admin
+          to: s3://<< parameters.env >>.dashboard.coachcare.com/
+      - aws-s3/sync:
+          arguments: --acl public-read --delete
+          from: ./<< parameters.env>>/admin
+          to: s3://<< parameters.env >>.dashboard.coachcare.com/
+      - aws-s3/copy:
+          arguments: --acl public-read --recursive
+          from: ./<< parameters.env>>/provider
+          to: s3://<< parameters.env >>.dashboard.coachcare.com/provider
+      - aws-s3/sync:
+          arguments: --acl public-read --delete
+          from: ./<< parameters.env>>/provider
+          to: s3://<< parameters.env >>.dashboard.coachcare.com/provider
+      - aws-s3/copy:
+          arguments: --acl public-read --recursive
+          from: ./<< parameters.env>>/measurement-charts
+          to: s3://<< parameters.env >>.dashboard.coachcare.com/measurement-charts
+      - aws-s3/sync:
+          arguments: --acl public-read --delete
+          from: ./<< parameters.env>>/measurement-charts
+          to: s3://<< parameters.env >>.dashboard.coachcare.com/measurement-charts
+      - run:
+          name: Push SumoLogic deployment notification
+          command: |
+            echo "`date` | Site deployment completed for PROJECT: $CIRCLE_PROJECT_REPONAME BRANCH: $CIRCLE_BRANCH COMMIT: $CIRCLE_SHA1 ENV: << parameters.env >> DEPLOYER: $CIRCLE_USERNAME" > sumologic-deployment.log
+            curl -s -X POST -T sumologic-deployment.log "$SUMOLOGIC_COLLECTOR_URL" || { echo 'SumoLogic deployment log upload failed'; exit 0; }
 
   deploy:
     docker:
@@ -121,27 +172,27 @@ jobs:
           at: ~/repo
       - aws-s3/copy:
           arguments: --acl public-read --recursive
-          from: ./admin
+          from: ./<< parameters.env>>/admin
           to: s3://$DEPLOYMENT_BUCKET/
       - aws-s3/sync:
           arguments: --acl public-read --delete
-          from: ./admin
+          from: ./<< parameters.env>>/admin
           to: s3://$DEPLOYMENT_BUCKET/
       - aws-s3/copy:
           arguments: --acl public-read --recursive
-          from: ./provider
+          from: ./<< parameters.env>>/provider
           to: s3://$DEPLOYMENT_BUCKET/provider
       - aws-s3/sync:
           arguments: --acl public-read --delete
-          from: ./provider
+          from: ./<< parameters.env>>/provider
           to: s3://$DEPLOYMENT_BUCKET/provider
       - aws-s3/copy:
           arguments: --acl public-read --recursive
-          from: ./measurement-charts
+          from: ./<< parameters.env>>/measurement-charts
           to: s3://$DEPLOYMENT_BUCKET/measurement-charts
       - aws-s3/sync:
           arguments: --acl public-read --delete
-          from: ./measurement-charts
+          from: ./<< parameters.env>>/measurement-charts
           to: s3://$DEPLOYMENT_BUCKET/measurement-charts
       - run:
           name: Push SumoLogic deployment notification
@@ -307,6 +358,15 @@ workflows:
                 - /dependabot.*/
           requires:
             - affected_test
+      - full_build:
+          mode: blueinfy
+          name: full_blueinfy_build
+          filters:
+            branches:
+              ignore:
+                - /dependabot.*/
+          requires:
+            - affected_test
       - approve_test_deployment:
           type: approval
           filters:
@@ -315,12 +375,29 @@ workflows:
                 - master
           requires:
             - full_test_build
+            - full_blueinfy_build
       - deploy:
           name: deploy_test
           env: test
           requires:
             - approve_test_deployment
           context: dashboard-deployment-test
+      - deploy_on_demand:
+          name: deploy_blueinfy
+          env: blueinfy
+          requires:
+            - approve_test_deployment
+          context: dashboard-deployment-on-demand
+      - deploy_on_demand:
+          name: deploy_blueinfy_master
+          env: blueinfy
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - full_blueinfy_build
+          context: dashboard-deployment-on-demand
       - deploy:
           name: deploy_test_master
           env: test
