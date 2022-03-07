@@ -26,6 +26,9 @@ ccr-wellcore-layout {
   }
 
   ccr-avatar.wellcore-avatar {
+    &.wellcore-avatar-large {
+      margin-bottom: 20px;
+    }
     div {
       border-radius: 10%;
     }
@@ -99,6 +102,7 @@ ccr-wellcore-layout {
         max-width: 100%;
         min-width: 0;
         padding: 0 10px;
+        font-weight: 400 !important;
 
         &:focus {
           outline: 1px solid var(--accent);
@@ -152,7 +156,7 @@ ccr-wellcore-layout {
 
             .mat-select-value {
               font-size: 14px;
-              font-weight: 300;
+              font-weight: 400;
               line-height: 18px;
               text-align: left;
             }

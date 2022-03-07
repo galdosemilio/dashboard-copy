@@ -1,14 +1,15 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="35px">
   <section class="main" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="35px">
     <ccr-avatar
       [account]="account.id"
       [editable]="false"
-      class="wellcore-avatar"
+      class="wellcore-avatar wellcore-avatar-large"
       fxHide.xs
       size="giant">
     </ccr-avatar>
 
     <div
+      class="wellcore-profile-wrap"
       fxFlex
       fxLayout="column"
       fxLayoutAlign="start start"
@@ -49,6 +50,7 @@
       <div
       *ngIf="canSelfSchedule; else noSelfSchedule"
       fxLayout="row"
+      fxFlex
       fxLayout.lt-sm="column"
       fxLayoutAlign="start center"
       fxLayoutAlign.lt-sm="start stretch"
@@ -93,7 +95,7 @@
     fxLayout.lt-md="column"
     fxLayoutAlign="space-between stretch"
     fxLayoutAlign.lt-md="start stretch"
-    fxLayoutGap="15px">
+    fxLayoutGap="35px">
     <app-account-personal-info [accountId]="account.id" initialMode="readonly" fxFlex></app-account-personal-info>
     <app-account-contact-info [accountId]="account.id" initialMode="readonly" fxFlex></app-account-contact-info>
   </div>
@@ -102,6 +104,7 @@
 <ng-template #noSelfSchedule>
   <section
     class="warning"
+    fxFlex
     fxLayout="row"
     fxLayout.lt-sm="column"
     fxLayoutAlign="stretch center"

@@ -153,6 +153,7 @@
             text-transform: uppercase;
             text-align: left;
             order: 1;
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
           }
           .mat-calendar-previous-button {
             margin-right: 20px;
@@ -165,6 +166,7 @@
         }
       }
       .mat-calendar-table {
+        font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
         .mat-calendar-body-cell {
           .mat-calendar-body-cell-background {
             padding: 30%;

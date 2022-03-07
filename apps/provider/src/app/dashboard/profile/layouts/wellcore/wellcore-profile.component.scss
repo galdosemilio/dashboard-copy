@@ -17,6 +17,10 @@ app-wellcore-profile {
     }
   }
 
+  .wellcore-profile-wrap {
+    min-height: 220px;
+  }
+
   .appointment-info-container {
     border: 1px solid var(--text-lightest);
     margin-top: 15px;
