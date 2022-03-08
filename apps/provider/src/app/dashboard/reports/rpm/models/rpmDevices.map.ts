@@ -24,12 +24,6 @@ export const RPM_DEVICES: RPMDevice[] = [
     imageClass: 'bp-cuff'
   },
   {
-    id: '3',
-    name: 'SCAN Smart Glucometer',
-    displayName: _('RPM.GLUCOMETER'),
-    imageSrc: 'assets/img/glucometer.png'
-  },
-  {
     id: '4',
     name: 'Pulse Oximeter',
     displayName: _('RPM.PULSE_OXIMETER'),
