@@ -1,3 +1,10 @@
+# [1.72.0](https://github.com/coachcare/dashboard/compare/v1.71.0...v1.72.0) (2022-03-08)
+
+
+### Features
+
+* added pulse oximeter device [FRON-2664] ([75cc823](https://github.com/coachcare/dashboard/commit/75cc8235eb8dfbf505cbcfaf857a225788ac071e))
+
 # [1.71.0](https://github.com/coachcare/dashboard/compare/v1.70.0...v1.71.0) (2022-03-08)
 
 
