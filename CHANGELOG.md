@@ -1,3 +1,18 @@
+# [1.71.0](https://github.com/coachcare/dashboard/compare/v1.70.0...v1.71.0) (2022-03-08)
+
+
+### Bug Fixes
+
+* enabled messages custom report for inhealth [FRON-2636] ([e0857c8](https://github.com/coachcare/dashboard/commit/e0857c864a07cb6ebcb7d75b0498ac9fbb1bf73f))
+* filtered list of displayed chart types [FRON-2557] ([d5702a3](https://github.com/coachcare/dashboard/commit/d5702a39cb21352709a1e1456abb8b46789f8fd8))
+* incorrect units displayed on temp in chart [MOB-3560] ([56c5bc2](https://github.com/coachcare/dashboard/commit/56c5bc2521a172920874d11f1dfb42d4fdca581d))
+* show patients first in message recipients [FRON-2629] ([c543029](https://github.com/coachcare/dashboard/commit/c5430293b4b03621d7e54ab138f85d3d302e79d3))
+
+
+### Features
+
+* added percentage support [FRON-2646] ([3d738e4](https://github.com/coachcare/dashboard/commit/3d738e4cfd16097938c50ce204324e64c45fc147))
+
 # [1.70.0](https://github.com/coachcare/dashboard/compare/v1.69.0...v1.70.0) (2022-03-04)
 
 
