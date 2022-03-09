@@ -294,6 +294,10 @@ workflows:
     jobs:
       - setup
       - commit_count_check:
+          filters:
+            branches:
+              ignore:
+                - master
           requires:
             - setup
       - format_check:
@@ -416,7 +420,7 @@ workflows:
               only:
                 - master
           requires:
-            - deploy_test_master
+            - affected_test
       - approve_production_deployment:
           filters:
             branches:
