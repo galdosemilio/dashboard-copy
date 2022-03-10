@@ -164,7 +164,7 @@ jobs:
         type: enum
         enum:
           - test
-          - production
+          - prod
     environment:
       AWS_REGION: us-east-1
     steps:
@@ -431,7 +431,7 @@ workflows:
             - full_production_build
       - deploy:
           name: deploy_production
-          env: production
+          env: prod
           filters:
             branches:
               only:
