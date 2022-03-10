@@ -4,7 +4,7 @@ import { Catalog } from '../catalog'
 import { locales } from '../locales'
 
 export function merge() {
-  const base = {}
+  const base: any = {}
 
   // remove the undefined of the base catalogs
   let files = glob.sync(`./apps/admin/src/i18n/base/*.json`)

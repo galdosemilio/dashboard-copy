@@ -1,0 +1,100 @@
+<ccr-datasource-overlay
+[source]="source"
+class="ccr-table ccr-expand-table ccr-table-stats">
+
+<div class="ccr-expandable-table-container">
+<div class="ccr-expandable-table">
+  <table>
+    <caption>{{ 'GLOBAL.MICRONUTRIENTS' | translate }}</caption>
+    <thead class="sticky-header">
+      <tr>
+        <th class="sticky-column column-toggle">&nbsp;</th>
+        <th class="column-date sticky-column">
+          <span>{{ 'GLOBAL.DATE' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.VIT_D' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.SODIUM' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.CALCIUM' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.IRON' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.POTASSIUM' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.VITAMIN_A' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.VITAMIN_B' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.VITAMIN_C' | translate }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr
+    *ngFor="let row of rows; let i = index;"
+    class="level{{row.level}}"
+    [ngClass]="{
+      'row-even': i % 2 === 0,
+      'row-odd': i % 2 === 1,
+      'hidden': row.isHidden,
+      'row-nested': row.level > 0,
+      'row-bottom-border': row.level > 1,
+      'last-of-group': row.isLastOfGroup
+    }">
+      <td class="sticky-column column-toggle">
+        <div *ngIf="row.level === 0" (click)="toggleRow(row)" [ngClass]="{'clickable': row.hasMeals}">
+          <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && !row.isExpanded">keyboard_arrow_down</mat-icon>
+          <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && row.isExpanded">keyboard_arrow_up</mat-icon>
+        </div>
+      </td>
+      <td class="sticky-column column-date">
+        <div *ngIf="row.level === 0">
+          {{ row.consumedDate | amDateFormat:'MMM DD, YYYY' }}
+        </div>
+        <div *ngIf="row.level === 1 && !row.consumedDate">
+          {{ row.type | translate }}
+        </div>
+      </td>
+      <td *ngIf="row.vitaminD; else empty">
+        {{ row.vitaminD / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.sodium; else empty">
+        {{ row.sodium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.calcium; else empty">
+        {{ row.calcium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.iron; else empty">
+        {{ row.iron / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.potassium; else empty">
+        {{ row.potassium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.vitaminA; else empty">
+        {{ row.vitaminA / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.vitaminD; else empty">
+        {{ row.vitaminB / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.vitaminC; else empty">
+        {{ row.vitaminC / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</ccr-datasource-overlay>
+
+<ng-template #empty>
+  <td>-</td>
+</ng-template>

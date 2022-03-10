@@ -613,6 +613,7 @@
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "سيؤدي هذا إلى مسح غير المقروءة عدد الرسائل، ولكن أيضا بتحديد كل الرسائل كما لو كنت قد رأيت منهم. لا يمكن التراجع عن هذا الإجراء.",
     "METRICS": "المقاييس",
     "MFA": "توثيق ذو عاملين",
+    "MICRONUTRIENTS": "مجهري",
     "MINUTES": "الدقائق",
     "MODERATE": "معتدل",
     "MONDAY": "الاثنين",
@@ -702,6 +703,16 @@
     "VIEW_ALL": "عرض الكل",
     "VIEW_ALL_PATIENTS": "عرض جميع المرضى",
     "VIEW_COMPLETE_REPORT": "عرض التقرير الكامل"
+  },
+  "JOURNAL": {
+    "CALCIUM": "كا",
+    "IRON": "في",
+    "POTASSIUM": "ك",
+    "SODIUM": "ناظر",
+    "VITAMIN_A": "Vit A",
+    "VITAMIN_B": "Vit B",
+    "VITAMIN_C": "Vit C",
+    "VIT_D": "Vit D"
   },
   "LAYOUT": {
     "HIPAA": "اتفاقية HIPAA BAA",
@@ -1427,7 +1438,6 @@
     "EXPLANATION": "خاطئة",
     "EXPORT_SUPERBILL": "تصدير Superbill",
     "FACE_TO_FACE_PROMPT": "استشر المريض وجهاً لوجه مع أخصائي رعاية صحية مؤهل في ممارستي خلال الـ 12 شهرًا الماضية",
-    "GLUCOMETER": "SCAN الذكية غلوكمتر",
     "GOALS_SET_PROMPT": "وضع المريض وممارستي أهدافًا محددة لبرنامج RPM الخاص بهذا المريض",
     "LATEST_ELIGIBLE_CLAIM": "أحدث المطالبة التسجيل",
     "MEDICAL_NECESSITY_PROMPT": "تم طلب هذه الخدمة من قبل أخصائي رعاية صحية مؤهل",

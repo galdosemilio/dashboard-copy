@@ -613,6 +613,7 @@
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "Dies wird Ihre Ungelesen-Anzahl löschen, sondern auch alle Nachrichten markieren, als ob Sie sie gesehen haben. Diese Aktion kann nicht rückgängig gemacht werden.",
     "METRICS": "Metriken",
     "MFA": "Zwei-Faktor-Authentifizierung",
+    "MICRONUTRIENTS": "Mikro",
     "MINUTES": "Minuten",
     "MODERATE": "Mäßig",
     "MONDAY": "Montag",
@@ -702,6 +703,16 @@
     "VIEW_ALL": "Alle ansehen",
     "VIEW_ALL_PATIENTS": "Alle Patienten ansehen",
     "VIEW_COMPLETE_REPORT": "Kompletten Bericht einsehen"
+  },
+  "JOURNAL": {
+    "CALCIUM": "Ca",
+    "IRON": "Fe",
+    "POTASSIUM": "K",
+    "SODIUM": "Na",
+    "VITAMIN_A": "Vit A",
+    "VITAMIN_B": "Vit B",
+    "VITAMIN_C": "Vit C",
+    "VIT_D": "Vit D"
   },
   "LAYOUT": {
     "HIPAA": "HIPAA BAA",
@@ -1427,7 +1438,6 @@
     "EXPLANATION": "Erläuterung",
     "EXPORT_SUPERBILL": "Export Superbill",
     "FACE_TO_FACE_PROMPT": "Der Patient hat in den letzten 12 Monaten persönlich eine qualifizierte medizinische Fachkraft in meiner Praxis aufgesucht",
-    "GLUCOMETER": "SCAN Smart-Glucometer",
     "GOALS_SET_PROMPT": "Der Patient und meine Praxis haben spezifische Ziele für das RPM-Programm dieses Patienten festgelegt",
     "LATEST_ELIGIBLE_CLAIM": "Neueste Anspruch Datum",
     "MEDICAL_NECESSITY_PROMPT": "Dieser Service wurde von einer qualifizierten medizinischen Fachkraft bestellt",

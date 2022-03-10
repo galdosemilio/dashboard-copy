@@ -613,6 +613,7 @@
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "This will clear your unread message count, but also mark all messages as if you have seen them. This action cannot be undone.",
     "METRICS": "Metrics",
     "MFA": "Two-factor Authentication",
+    "MICRONUTRIENTS": "Micro",
     "MINUTES": "Minutes",
     "MODERATE": "Moderate",
     "MONDAY": "Monday",
@@ -702,6 +703,16 @@
     "VIEW_ALL": "View All",
     "VIEW_ALL_PATIENTS": "View All Patients",
     "VIEW_COMPLETE_REPORT": "View Complete Report"
+  },
+  "JOURNAL": {
+    "CALCIUM": "Ca",
+    "IRON": "Fe",
+    "POTASSIUM": "K",
+    "SODIUM": "Na",
+    "VITAMIN_A": "Vit A",
+    "VITAMIN_B": "Vit B",
+    "VITAMIN_C": "Vit C",
+    "VIT_D": "Vit D"
   },
   "LAYOUT": {
     "HIPAA": "HIPAA BAA",
@@ -1427,7 +1438,6 @@
     "EXPLANATION": "Explanation",
     "EXPORT_SUPERBILL": "Export Superbill",
     "FACE_TO_FACE_PROMPT": "Patient has consulted face-to-face with a qualified healthcare professional in my practice within the last 12 months",
-    "GLUCOMETER": "SCAN Smart Glucometer",
     "GOALS_SET_PROMPT": "Patient and my practice have set specific goals for this patient’s RPM program",
     "LATEST_ELIGIBLE_CLAIM": "Latest Claim Date",
     "MEDICAL_NECESSITY_PROMPT": "This service has been ordered by a qualified healthcare professional",

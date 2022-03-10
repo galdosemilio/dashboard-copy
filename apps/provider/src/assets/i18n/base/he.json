@@ -613,6 +613,7 @@
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "פעולה זו תנקה כמות ההודעות שלא נקראו שלך, אלא גם לסמן את כל ההודעות כאילו ראית אותם. פעולה זו לא ניתן לבטל.",
     "METRICS": "מדדים",
     "MFA": "אימות דו-גורמי",
+    "MICRONUTRIENTS": "מיקרו",
     "MINUTES": "דקות",
     "MODERATE": "בינוני",
     "MONDAY": "יוֹם שֵׁנִי",
@@ -702,6 +703,16 @@
     "VIEW_ALL": "הצג הכל",
     "VIEW_ALL_PATIENTS": "הצג את כל המטופלים",
     "VIEW_COMPLETE_REPORT": "הצגת דוח מלא"
+  },
+  "JOURNAL": {
+    "CALCIUM": "Ca",
+    "IRON": "Fe",
+    "POTASSIUM": "ק '",
+    "SODIUM": "-",
+    "VITAMIN_A": "Vit A",
+    "VITAMIN_B": "Vit B",
+    "VITAMIN_C": "Vit C",
+    "VIT_D": "Vit D"
   },
   "LAYOUT": {
     "HIPAA": "HIPAA BAA",
@@ -1427,7 +1438,6 @@
     "EXPLANATION": "הֶסבֵּר",
     "EXPORT_SUPERBILL": "ייצוא Superbill",
     "FACE_TO_FACE_PROMPT": "המטופל התייעץ פנים אל פנים עם איש מקצוע רפואי מוסמך בפועל שלי במהלך 12 החודשים האחרונים",
-    "GLUCOMETER": "SCAN חכם Glucometer",
     "GOALS_SET_PROMPT": "המטופל והתרגול שלי הציבו יעדים ספציפיים לתוכנית RPM של החולה הזה",
     "LATEST_ELIGIBLE_CLAIM": "תאריך הטענה האחרון",
     "MEDICAL_NECESSITY_PROMPT": "שירות זה הוזמן על ידי רופא מקצועי מוסמך",

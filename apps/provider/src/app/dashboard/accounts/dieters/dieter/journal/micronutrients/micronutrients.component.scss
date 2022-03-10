@@ -1,0 +1,28 @@
+table {
+  min-width: 100%;
+
+  td,
+  th {
+    text-align: center;
+  }
+
+  .column {
+    &-date {
+      text-align: left;
+    }
+
+    &-toggle {
+      line-height: 12px;
+      max-width: 15px;
+      min-width: 15px;
+      padding: 0;
+      padding-left: 10px;
+    }
+  }
+
+  .level1 {
+    td.column-date {
+      padding-left: 25px;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import {
   ChangeDetectorRef,
   Component,
-  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation
@@ -25,7 +24,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   styleUrls: ['./journal.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DieterJournalComponent implements OnInit, OnDestroy {
+export class DieterJournalComponent implements OnInit {
   private DEFAULT_TIMEFRAME: unitOfTime.DurationConstructor = 'week'
   // controls with their config
   hiddenComponents = []
@@ -37,7 +36,8 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
     'water',
     'exercise',
     'metrics',
-    'pain'
+    'pain',
+    'micronutrients'
   ]
   componentsWithTimeframe = ['exercise']
   component = 'food'
@@ -91,8 +91,6 @@ export class DieterJournalComponent implements OnInit, OnDestroy {
 
     this.bus.trigger('right-panel.component.set', 'reminders')
   }
-
-  ngOnDestroy() {}
 
   get section(): string {
     return this.component

@@ -28,6 +28,9 @@
     <li *ngIf="hiddenComponents.indexOf('metrics') === -1">
       <a mat-button [routerLink]="['.', {s: 'metrics'}]" [class.active]="section === 'metrics'">{{ 'GLOBAL.METRICS' | translate }}</a>
     </li>
+    <li *ngIf="hiddenComponents.indexOf('micronutrients') === -1 && hiddenComponents.indexOf('food') === -1">
+      <a mat-button [routerLink]="['.', {s: 'micronutrients'}]" [class.active]="section === 'micronutrients'">{{ 'GLOBAL.MICRONUTRIENTS' | translate }}</a>
+    </li>
     <!-- <li><a mat-button [routerLink]="['.', {s: 'pain'}]" [class.active]="section === 'pain'">{{ 'GLOBAL.PAIN' | translate }}</a></li> -->
   </ul>
 </div>
@@ -97,5 +100,9 @@
     <app-dieter-journal-pain [dates]="dates"
     ></app-dieter-journal-pain>
 
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'micronutrients'">
+    <app-dieter-journal-micronutrients [dates]="dates"></app-dieter-journal-micronutrients>
   </ng-container>
 </div>

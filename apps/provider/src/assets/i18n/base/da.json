@@ -613,6 +613,7 @@
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "Dette vil rydde din ulæst besked tæller, men også markere alle beskeder, som om du har set dem. Denne handling kan ikke fortrydes.",
     "METRICS": "Metrics",
     "MFA": "Two-factor Authentication",
+    "MICRONUTRIENTS": "Mikro",
     "MINUTES": "Minutter",
     "MODERATE": "Moderat",
     "MONDAY": "Mandag",
@@ -702,6 +703,16 @@
     "VIEW_ALL": "Vis Alle",
     "VIEW_ALL_PATIENTS": "Vis Alle Patienter",
     "VIEW_COMPLETE_REPORT": "Vis Hele Rapporten"
+  },
+  "JOURNAL": {
+    "CALCIUM": "Ca",
+    "IRON": "Fe",
+    "POTASSIUM": "K",
+    "SODIUM": "Na",
+    "VITAMIN_A": "Vit A",
+    "VITAMIN_B": "Vit B",
+    "VITAMIN_C": "Vit C",
+    "VIT_D": "Vit D"
   },
   "LAYOUT": {
     "HIPAA": "HIPAA BAA",
@@ -1427,7 +1438,6 @@
     "EXPLANATION": "Forklaring",
     "EXPORT_SUPERBILL": "Eksport Superbill",
     "FACE_TO_FACE_PROMPT": "Patienten har konsulteret face-to-face med et kvalificeret sundhedspersonale i min praksis inden for de sidste 12 måneder",
-    "GLUCOMETER": "SCAN Smart Glucometer",
     "GOALS_SET_PROMPT": "Patient og min praksis har sat specifikke mål for denne patients RPM-program",
     "LATEST_ELIGIBLE_CLAIM": "Sidste krav Dato",
     "MEDICAL_NECESSITY_PROMPT": "Denne service er bestilt af en kvalificeret sundhedsperson",

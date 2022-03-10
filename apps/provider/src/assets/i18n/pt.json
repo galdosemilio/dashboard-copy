@@ -613,6 +613,7 @@
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "Isto irá limpar a sua contagem de mensagens não lidas, mas também marcar todas as mensagens como se você tê-los visto. Essa ação não pode ser desfeita.",
     "METRICS": "Métricas",
     "MFA": "Autenticação de dois fatores",
+    "MICRONUTRIENTS": "Micro",
     "MINUTES": "Minutos",
     "MODERATE": "Moderado",
     "MONDAY": "Segunda-feira",
@@ -702,6 +703,16 @@
     "VIEW_ALL": "Ver todos",
     "VIEW_ALL_PATIENTS": "Ver todos os pacientes",
     "VIEW_COMPLETE_REPORT": "Ver relatório completo"
+  },
+  "JOURNAL": {
+    "CALCIUM": "Ca",
+    "IRON": "Fe",
+    "POTASSIUM": "K",
+    "SODIUM": "Na",
+    "VITAMIN_A": "Vit A",
+    "VITAMIN_B": "Vit B",
+    "VITAMIN_C": "Vit C",
+    "VIT_D": "Vit D"
   },
   "LAYOUT": {
     "HIPAA": "HIPAA BAA",
@@ -1427,7 +1438,6 @@
     "EXPLANATION": "Explicação",
     "EXPORT_SUPERBILL": "Exportação Superbill",
     "FACE_TO_FACE_PROMPT": "O paciente consultou pessoalmente um profissional de saúde qualificado na minha prática nos últimos 12 meses",
-    "GLUCOMETER": "Smart Scan Glucometer",
     "GOALS_SET_PROMPT": "O paciente e minha clínica estabeleceram metas específicas para o programa de RPM desse paciente",
     "LATEST_ELIGIBLE_CLAIM": "Últimas Reivindicação Data",
     "MEDICAL_NECESSITY_PROMPT": "Este serviço foi encomendado por um profissional de saúde qualificado",

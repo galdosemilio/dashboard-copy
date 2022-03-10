@@ -18,6 +18,10 @@
     position: relative;
     overflow: visible;
     width: 100%;
+
+    caption {
+      display: none;
+    }
   }
 
   table,
@@ -51,6 +55,7 @@
 
   thead,
   tbody {
+    & > tr > th,
     & > tr > td {
       font-size: 14px;
 
@@ -83,6 +88,7 @@
 
   thead {
     & > tr > td,
+    & > tr > th,
     & > th {
       height: 32px;
       padding: 2px 1em;

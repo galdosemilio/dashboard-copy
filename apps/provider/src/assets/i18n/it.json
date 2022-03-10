@@ -613,6 +613,7 @@
     "MESSAGES_MARK_AS_READ_DESCRIPTION": "Questo cancellerà il valore del tuo messaggio non letto, ma anche contrassegnare tutti i messaggi come se li avete visti. Questa azione non può essere annullata.",
     "METRICS": "Metrica",
     "MFA": "Autenticazione a Due Fattori",
+    "MICRONUTRIENTS": "Micro",
     "MINUTES": "Minuti",
     "MODERATE": "Moderato",
     "MONDAY": "Lunedi",
@@ -702,6 +703,16 @@
     "VIEW_ALL": "Visualizza Tutto",
     "VIEW_ALL_PATIENTS": "Visualizza Tutti i Pazienti",
     "VIEW_COMPLETE_REPORT": "Visualizza Rapporto Completo"
+  },
+  "JOURNAL": {
+    "CALCIUM": "Ca",
+    "IRON": "Fe",
+    "POTASSIUM": "K",
+    "SODIUM": "Na",
+    "VITAMIN_A": "Vit A",
+    "VITAMIN_B": "Vit B",
+    "VITAMIN_C": "Vit C",
+    "VIT_D": "Vit D"
   },
   "LAYOUT": {
     "HIPAA": "HIPAA BAA",
@@ -1427,7 +1438,6 @@
     "EXPLANATION": "Spiegazione",
     "EXPORT_SUPERBILL": "Export Superbill",
     "FACE_TO_FACE_PROMPT": "Il paziente ha avuto un consulto faccia a faccia con un operatore sanitario nella mia clinica negli ultimi 12 mesi.",
-    "GLUCOMETER": "SCAN intelligente Glucometer",
     "GOALS_SET_PROMPT": "Il paziente e la mia pratica hanno fissato obiettivi specifici per il programma RPM di questo paziente",
     "LATEST_ELIGIBLE_CLAIM": "Ultime rivendicazione Data",
     "MEDICAL_NECESSITY_PROMPT": "Questo servizio è stato ordinato da un operatore sanitario.",

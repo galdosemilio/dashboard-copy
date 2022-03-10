@@ -15,6 +15,7 @@ import {
 import { PainComponent, PainTableComponent } from './pain'
 import { SupplementsComponent } from './supplement/supplements.component'
 import { SupplementsTableComponent } from './supplement/table/table.component'
+import { MicronutrientsComponent } from './micronutrients'
 
 export const JournalComponents = [
   DieterJournalComponent,
@@ -29,6 +30,7 @@ export const JournalComponents = [
   LevlTableComponent,
   LevlChartComponent,
   MetricsComponent,
+  MicronutrientsComponent,
   PainComponent,
   PainTableComponent,
   SupplementsComponent,
