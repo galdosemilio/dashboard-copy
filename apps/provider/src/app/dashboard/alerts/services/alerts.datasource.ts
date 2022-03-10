@@ -70,15 +70,14 @@ export class AlertsDataSource extends TableDataSource<
         }
         let since: moment.Moment
         const units = this.context.user.measurementPreference
+        const val = value.payload.value
 
         switch (value.type.id) {
           // 1. Weight Regained
           case '1':
-            const val = value.payload.value
             alert.params['value'] = unitConversion(units, 'composition', val)
-            alert.params['unit'] = this.i18n[
-              unitLabel(units, 'composition', val)
-            ]
+            alert.params['unit'] =
+              this.i18n[unitLabel(units, 'composition', val)]
             alert.detail = _('ALERTS.WEIGHT_REGAINED')
             alert.icon = 'trending-up'
             break
@@ -119,9 +118,8 @@ export class AlertsDataSource extends TableDataSource<
                 'composition',
                 weight.delta
               )
-              alert.params['unit'] = this.i18n[
-                unitLabel(units, 'composition', val)
-              ]
+              alert.params['unit'] =
+                this.i18n[unitLabel(units, 'composition', val)]
               alert.detail = _('ALERTS.WEIGHT_REGAINED')
 
               if (alert.params['value'] < 0) {
