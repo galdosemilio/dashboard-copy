@@ -1,3 +1,19 @@
+# [1.73.0](https://github.com/coachcare/dashboard/compare/v1.72.0...v1.73.0) (2022-03-10)
+
+
+### Bug Fixes
+
+* adjusted deploy environment enum ([79b4770](https://github.com/coachcare/dashboard/commit/79b477047fcf8b0e931e6248dbfa6d4756cd61d4))
+* adjusted workflow to improve run time ([82a5674](https://github.com/coachcare/dashboard/commit/82a5674f1316254afb62a29243555edb89fbfcec))
+* removed glucometer from selectable devices [FRON-2679] ([a188f77](https://github.com/coachcare/dashboard/commit/a188f777dc5ae08183f10d27e28a267808c6c188))
+* show multiple meetings in upcoming meeting [FRON-2673] ([bb7e290](https://github.com/coachcare/dashboard/commit/bb7e290e93cb31da6f36598493368a2396bb0c5b))
+* styles for wellcore layout [FRON-2644] ([d615d86](https://github.com/coachcare/dashboard/commit/d615d86abfee0f3b5b260156fc476ac9eed5759c))
+
+
+### Features
+
+* set up blueinfy deployment logic [FRON-2658] ([0c08f63](https://github.com/coachcare/dashboard/commit/0c08f630bac5de1a57893413a09e266ffdffc645))
+
 # [1.72.0](https://github.com/coachcare/dashboard/compare/v1.71.0...v1.72.0) (2022-03-08)
 
 
