@@ -42,7 +42,7 @@ import { environment } from 'apps/admin/src/environments/environment'
 import * as moment from 'moment'
 import { STATES_LIST } from '../model'
 
-const SPREE_EXTERNAL_ID_NAME = 'spree'
+const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
 
 export interface CheckoutData {
   accountInfo?: {
@@ -529,6 +529,13 @@ export class WellcoreCheckoutComponent implements OnInit {
         )
       }
 
+      await this.accountIdentifier.add({
+        account: this.accountId,
+        organization: environment.wellcoreOrgId,
+        name: SPREE_EXTERNAL_ID_NAME,
+        value: spreeAccountResult.success().data.id
+      })
+
       await this.loadSpreeInfo(accountData.email, accountData.password)
 
       const spreeCartResult = await this.spree.cart.create({
@@ -608,8 +615,8 @@ export class WellcoreCheckoutComponent implements OnInit {
         message: `[WELLCORE ONBOARDING] ${error}`
       }
 
-      await this.log.add(addLogRequest)
       this.notifier.error(error)
+      await this.log.add(addLogRequest)
       throw new Error(error)
     } finally {
       this.bus.trigger('wellcore.loading.show', false)
@@ -682,13 +689,6 @@ export class WellcoreCheckoutComponent implements OnInit {
 
     this.cookie.set(ECOMMERCE_ACCESS_TOKEN, spreeToken.success().access_token)
     this.cookie.set(ECOMMERCE_REFRESH_TOKEN, spreeToken.success().refresh_token)
-
-    await this.accountIdentifier.add({
-      account: this.accountId,
-      organization: environment.wellcoreOrgId,
-      name: SPREE_EXTERNAL_ID_NAME,
-      value: email
-    })
   }
 
   private loadBillingAddressIntoForm(address: AccountAddress): void {
