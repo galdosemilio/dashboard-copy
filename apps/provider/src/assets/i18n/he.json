@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "אתה עומד למחוק את '{{ name }} '",
       "DELETE_CONTENT_TOOLTIP": "מחיקת התוכן",
       "DELETE_CONTENT_WARNING_MESSAGE": "האם ברצונך להמשיך?",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "התוכן שאתה מנסה למחוק הוא בירושה. <strong>מחיקת פריט זה תמחק אותו מתוך {{clinic.name}} (ID: {{clinic.id}}). זה יסיר את התוכן של מרפאת האב וכל מרפאות הילד כי יש כיום גישה אליו </strong><br><br> האם אתה בטוח שברצונך להמשיך?",
       "DESCRIPTION": "תיאור",
       "DIFF_CONTENT": "הוספת עוד פריטים",
       "DIFF_OWNER_WARNING": "אין באפשרותך לערוך את המאפיינים של התוכן מאחר שתוכן זה לא שייך למרפאה שלך",

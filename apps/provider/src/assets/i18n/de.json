@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "Sie sind im Begriff zu löschen ‚{{name}}‘",
       "DELETE_CONTENT_TOOLTIP": "Voransicht des Inhalts",
       "DELETE_CONTENT_WARNING_MESSAGE": "Sind Sie sicher, dass Sie fortfahren möchten?",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "Der Inhalt, den Sie zu löschen versuchen, wird vererbt. <strong>Löschen dieses Elements löscht es aus {{clinic.name}} (ID: {{clinic.id}}) klinik. Dadurch entfernen Sie den Inhalt der Elternklinik und aller Kinderkliniken, die derzeit Zugriff auf ihn haben </strong>.<br><br>Sind Sie sicher, dass Sie fortfahren möchten?",
       "DESCRIPTION": "Beschreibung",
       "DIFF_CONTENT": "Fügen Sie weitere Artikel hinzu",
       "DIFF_OWNER_WARNING": "Sie können die Eigenschaften dieses Inhalts nicht bearbeiten, da Ihre Klinik ihn nicht bisitzt",

@@ -33,7 +33,7 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, PromptDialog } from '@app/shared'
+import { _, PromptDialog, Sanitizer } from '@app/shared'
 import { Entity, OrganizationEntity } from '@coachcare/sdk'
 import { uniqBy, values } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -402,13 +402,33 @@ export class ContentComponent implements OnDestroy, OnInit {
   }
 
   private deleteContent(content: FileExplorerContent) {
-    const data = {
+    let data = {
       title: _('LIBRARY.CONTENT.DELETE_CONTENT_TITLE'),
       content: _('LIBRARY.CONTENT.DELETE_CONTENT_WARNING_MESSAGE'),
       titleParams: {
         name: content.name
+      },
+      contentParams: {}
+    }
+
+    if (content.isForeign) {
+      data = {
+        title: _('LIBRARY.CONTENT.DELETE_CONTENT_TITLE'),
+        content: _('LIBRARY.CONTENT.DELETE_FOREIGN_CONTENT_WARNING_MESSAGE'),
+        titleParams: {
+          name: content.name
+        },
+        contentParams: {
+          clinic: {
+            name: Sanitizer.sanitizeTranslationString(
+              content.organization.name
+            ),
+            id: content.organization.id
+          }
+        }
       }
     }
+
     this.dialog
       .open(PromptDialog, { data: data })
       .afterClosed()

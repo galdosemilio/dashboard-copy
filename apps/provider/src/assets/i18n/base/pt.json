@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "Está prestes a eliminar '{{ name }}'",
       "DELETE_CONTENT_TOOLTIP": "Apagar este itém de conteúdo",
       "DELETE_CONTENT_WARNING_MESSAGE": "Tem a certeza que pretende continuar?",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "O conteúdo que você está tentando excluir é herdado. <strong>Excluindo este item irá excluí-lo a partir do {{clinic.name}} (ID: {{clinic.id}}) clínica. Isso irá remover o conteúdo da clínica pai e todas as clínicas filhotas que atualmente têm acesso a ele </strong>.<br><br>Tem certeza de que deseja prosseguir?",
       "DESCRIPTION": "Descrição",
       "DIFF_CONTENT": "Adicionar mais itens",
       "DIFF_OWNER_WARNING": "Não pode editar os dados desta propriedade pois não pertencem à sua clínica",

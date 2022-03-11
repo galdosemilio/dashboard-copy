@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "You're about to delete '{{ name }}'",
       "DELETE_CONTENT_TOOLTIP": "Delete this content item",
       "DELETE_CONTENT_WARNING_MESSAGE": "Are you sure you want to proceed?",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "The content you are trying to delete is inherited. <strong>Deleting this item will delete it from the {{ clinic.name }} (ID: {{ clinic.id }}) clinic. This will remove the content from the parent clinic and all child clinics that currently have access to it</strong>.<br><br>Are you sure you want to proceed?",
       "DESCRIPTION": "Description",
       "DIFF_CONTENT": "Add more items",
       "DIFF_OWNER_WARNING": "You cannot edit this content's properties since your clinic does not own it",

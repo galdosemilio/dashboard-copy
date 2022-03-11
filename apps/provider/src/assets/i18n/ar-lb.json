@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "أنت على وشك حذف '{{name}}'",
       "DELETE_CONTENT_TOOLTIP": "حذف محتوى هذا العنصر",
       "DELETE_CONTENT_WARNING_MESSAGE": "هل أنت واثق برغبتك في المتابعة؟",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "يتم تورث المحتوى الذي تحاول حذفه. <strong>حذف هذا العنصر ستحذفه من {{clinic.name}} (ID: {{clinic.id}). سيؤدي ذلك إلى إزالة المحتوى من العيادة الأصل وجميع العيادات الأطفال التي يمكنهم الوصول إليها حاليا </strong><br><br>هل أنت متأكد من أنك تريد المتابعة؟",
       "DESCRIPTION": "الوصف",
       "DIFF_CONTENT": "أضف عناصر أخرى",
       "DIFF_OWNER_WARNING": "لا يمكنك تعديل التفضيلات الخاصة بهذا المحتوى نظرًا لأن عيادتك لا تملكه",

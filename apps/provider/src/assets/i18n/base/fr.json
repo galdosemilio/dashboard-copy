@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "Vous allez supprimer ((name))",
       "DELETE_CONTENT_TOOLTIP": "Supprimer cet article de contenu",
       "DELETE_CONTENT_WARNING_MESSAGE": "Êtes vous sûr de vouloir continuer?",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "Le contenu que vous essayez de supprimer est hérité. <strong>Suppression de cet élément le supprimera de la clinique {{clinic.name}} (ID: {{clinic.id}}). Cela supprimera le contenu de la clinique mère et toutes les cliniques enfants qui y ont actuellement accès </strong>.<br><br>êtes-vous sûr de vouloir continuer?",
       "DESCRIPTION": "Description",
       "DIFF_CONTENT": "Ajouter d’autres articles",
       "DIFF_OWNER_WARNING": "Vous ne pouvez pas éditer les propriétés de ce contenu car il n’appartient pas à votre clinique",

@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "Stai per eliminare '{{ name }}'",
       "DELETE_CONTENT_TOOLTIP": "Cancella questo articolo contenuto",
       "DELETE_CONTENT_WARNING_MESSAGE": "Sei sicuro di voler procedere?",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "Il contenuto che stai cercando di eliminare è ereditato. <strong>Eliminazione di questa voce Eliminerla dal {{clinic.name}} (ID: {{clinic.id}}) Clinica. Ciò rimuoverà il contenuto della clinica genitore e di tutte le cliniche dei genitori che attualmente hanno accesso ad esso </strong>.<br><br>Sei sicuro di voler procedere?",
       "DESCRIPTION": "Descrizione",
       "DIFF_CONTENT": "Aggiungi altri articoli",
       "DIFF_OWNER_WARNING": "Non puoi modificare le proprietà di questo contenuto dato che la tua clinica non lo possiede",

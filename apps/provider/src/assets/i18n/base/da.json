@@ -750,6 +750,7 @@
       "DELETE_CONTENT_TITLE": "Du er ved at slette '{{name}}'",
       "DELETE_CONTENT_TOOLTIP": "Slet dette element indhold",
       "DELETE_CONTENT_WARNING_MESSAGE": "Er du sikker på at du ønsker at fortsætte?",
+      "DELETE_FOREIGN_CONTENT_WARNING_MESSAGE": "Det indhold, du forsøger at slette, er arvet. <strong>Sletning af dette element vil slette det fra {{clinic.name}} (ID: {{clinic.id}}) clinic. Dette vil fjerne indholdet fra moderklinikken og alle børneeklinikker, der i øjeblikket har adgang til det </strong>.<br><br>Er du sikker på, at du vil fortsætte?",
       "DESCRIPTION": "Beskrivelse",
       "DIFF_CONTENT": "Tilføj flere ting",
       "DIFF_OWNER_WARNING": "Du kan ikke redigere egenskaberne af dette indhold, da din klinik ikke ejer dem",
