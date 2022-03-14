@@ -66,6 +66,20 @@
         type="text">
     </div>
 
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+      <label for="accTimezone" fxFlex="30%">{{ 'BOARD.TIMEZONE' | translate }}</label>
+      <mat-form-field
+        *ngIf="form.value.timezone; else emptyEntry"
+        id="accTimezone"
+        fxFlex>
+        <mat-select
+          [disabled]="readonly"
+          formControlName="timezone">
+          <mat-option *ngFor="let timezone of timezones" [value]="timezone.code">{{ timezone.lang[lang] }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <div *ngIf="mode === 'edit'"  fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
       <button
       [disabled]="isLoading"

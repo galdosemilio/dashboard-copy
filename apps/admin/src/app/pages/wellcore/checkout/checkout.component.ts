@@ -72,6 +72,7 @@ export interface CheckoutData {
     city: string
     state: string
     zip: string
+    timezone: string
   }
 }
 
@@ -298,7 +299,8 @@ export class WellcoreCheckoutComponent implements OnInit {
       address2: [''],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      zip: ['', Validators.required]
+      zip: ['', Validators.required],
+      timezone: ['', [Validators.required]]
     })
     ;(this.billingInfo = this.fb.group({
       firstName: ['', Validators.required],
@@ -386,6 +388,11 @@ export class WellcoreCheckoutComponent implements OnInit {
         stateProvince: shippingData.state,
         country: 'US',
         labels: ['2']
+      })
+
+      await this.accountProvider.update({
+        id: this.accountId,
+        timezone: shippingData.timezone
       })
 
       await this.resolveAccountAddresses()
@@ -761,6 +768,11 @@ export class WellcoreCheckoutComponent implements OnInit {
         address2: shippingData.address2 || null,
         stateProvince: shippingData.state,
         postalCode: shippingData.zip
+      })
+
+      await this.accountProvider.update({
+        id: this.accountId,
+        timezone: shippingData.timezone
       })
 
       await this.resolveAccountAddresses()

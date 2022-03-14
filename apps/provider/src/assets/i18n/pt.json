@@ -389,6 +389,7 @@
     "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Você está visualizando o perfil do paciente para {{user.firstName}} {{user.lastName}}. Se você continuar, este tópico não será mais visualizado para você neste perfil do paciente. Se você continuar, este thread de mensagens será encontrado no <a href=\"messages\">Mensagens</a> página.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Pelo menos dois membros devem permanecer na mensagem Tópico {{user.firstName}} {{user.lastName}} não pode ser removido",
     "THREAD_UNABLE_REMOVE_YOURSELF": "Você não pode remover a si mesmo",
+    "TIMEZONE": "Fuso horário",
     "TIME_ZONE": "Fuso horário",
     "TIN_INVALID": "TIN é inválido. O TIN não serão salvas a menos que um válido é fornecido.",
     "TIN_INVALID_NAV_WARNING": "O TIN atual é inválido e não será salvo. Tem certeza de que deseja sair desta página?",

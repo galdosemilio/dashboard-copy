@@ -389,6 +389,7 @@
     "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>You are currently viewing the patient profile for {{ user.firstName }} {{ user.lastName }}. If you continue, this thread will no longer be viewable to you on this patient profile. If you continue, this message thread will be found on the <a href=\"messages\">Messages</a> page.",
     "THREAD_UNABLE_REMOVE_MEMBER": "At least two members must remain on Message Thread {{ user.firstName }} {{ user.lastName }} cannot be removed",
     "THREAD_UNABLE_REMOVE_YOURSELF": "You can't remove yourself",
+    "TIMEZONE": "Timezone",
     "TIME_ZONE": "Time Zone",
     "TIN_INVALID": "TIN is invalid. The TIN will not be saved unless a valid one is supplied.",
     "TIN_INVALID_NAV_WARNING": "The current TIN is invalid and will not be saved. Are you sure you want to leave this page?",

@@ -389,6 +389,7 @@
     "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Está viendo el perfil de {{user.firstName}} {{user.lastName}}. Si continúa, este hilo no será visible en este perfil. Si continúa, este hilo de mensajes estará disponible en la página de <a href=\"messages\">Mensajes</a>.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Al menos dos miembros deben permanecer en el hilo de mensajes. No se puede eliminar a {{user.firstName}} {{user.lastName}}.",
     "THREAD_UNABLE_REMOVE_YOURSELF": "No puede eliminarse a sí mismo",
+    "TIMEZONE": "Zona horaria",
     "TIME_ZONE": "Zona Horaria",
     "TIN_INVALID": "El TIN no es válido. El TIN no será guardado a menos que se ingrese un valor válido.",
     "TIN_INVALID_NAV_WARNING": "El TIN no es válido y no se guardará ¿Está seguro de que desea abandonar esta página?",

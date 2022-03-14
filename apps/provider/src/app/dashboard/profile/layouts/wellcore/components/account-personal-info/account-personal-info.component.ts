@@ -8,14 +8,18 @@ import {
   convertToReadableFormat,
   convertUnitToPreferenceFormat,
   DataPointTypes,
-  MeasurementDataPointProvider
+  MeasurementDataPointProvider,
+  Timezone,
+  TimezoneResponse
 } from '@coachcare/sdk'
-import { TranslateService } from '@ngx-translate/core'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import { take } from 'rxjs/operators'
 
 type AccountPersonaInfoComponentMode = 'edit' | 'readonly'
 
+@UntilDestroy()
 @Component({
   selector: 'app-account-personal-info',
   templateUrl: './account-personal-info.component.html'
@@ -24,12 +28,13 @@ export class AccountPersonalInfoComponent implements OnInit {
   @Input() accountId: string
   @Input() initialMode: AccountPersonaInfoComponentMode = 'edit'
 
+  public lang: string
   public account: AccSingleResponse
   public form: FormGroup
   public isLoading = false
   public mode: AccountPersonaInfoComponentMode
   public readonly = false
-
+  public timezones: Array<TimezoneResponse> = this.timezone.fetch()
   private initialFormValue: { [key: string]: unknown }
 
   constructor(
@@ -38,11 +43,14 @@ export class AccountPersonalInfoComponent implements OnInit {
     private dataPointGroup: MeasurementDataPointProvider,
     private fb: FormBuilder,
     private notifier: NotifierService,
+    private timezone: Timezone,
     private translate: TranslateService
   ) {}
 
   public async ngOnInit(): Promise<void> {
     try {
+      this.subscribeToLangEvents()
+
       this.setMode(this.initialMode)
       this.createForm()
       await this.fetchAccountData()
@@ -65,6 +73,7 @@ export class AccountPersonalInfoComponent implements OnInit {
         id: this.account.id,
         firstName: values.firstName,
         lastName: values.lastName,
+        timezone: values.timezone,
         profile: {
           ...this.account.profile,
           birthday: values.birthdate,
@@ -73,7 +82,7 @@ export class AccountPersonalInfoComponent implements OnInit {
       })
 
       this.notifier.success(_('NOTIFY.SUCCESS.PROFILE_UPDATED'))
-
+      void this.context.updateUser()
       this.loadInitialFormValue()
       this.setMode('readonly')
     } catch (error) {
@@ -99,6 +108,7 @@ export class AccountPersonalInfoComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       birthdate: ['', Validators.required],
+      timezone: ['', Validators.required],
       height: ['', Validators.required],
       weight: ['']
     })
@@ -167,5 +177,14 @@ export class AccountPersonalInfoComponent implements OnInit {
 
   private loadInitialFormValue(): void {
     this.initialFormValue = { ...this.form.value }
+  }
+
+  private subscribeToLangEvents(): void {
+    this.lang = this.translate.currentLang.split('-')[0]
+    this.translate.onLangChange
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        (event: LangChangeEvent) => (this.lang = event.lang.split('-')[0])
+      )
   }
 }

@@ -389,6 +389,7 @@
     "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>אתה מציג כעת בפרופיל החולה עבור {{user.firstName}} {{user.lastName}}. אם תמשיך, חוט זה כבר לא יהיה נתקל בך בפרופיל המטופל הזה. אם תמשיך, חוט הודעה זה יימצא ב- <a href=\"messages\">הודעות</a> דף.",
     "THREAD_UNABLE_REMOVE_MEMBER": "לפחות שני בנים חייבים להישאר על נושא ההודעה {{user.firstName}} {{user.lastName}} לא ניתן להסירו",
     "THREAD_UNABLE_REMOVE_YOURSELF": "אתה לא יכול להסיר את עצמך",
+    "TIMEZONE": "אזור זמן",
     "TIME_ZONE": "אזור זמן",
     "TIN_INVALID": "הנישום אינו חוקי. הפח לא יישמר אלא אם כן אחד תקף מסופק.",
     "TIN_INVALID_NAV_WARNING": "הפח הנוכחי אינו חוקי ו לא יישמר. האם אתה בטוח שאתה רוצה לצאת מדף זה?",

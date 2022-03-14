@@ -389,6 +389,7 @@
     "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Du ser i øjeblikket patientprofilen for {{user.firstname}} {{user.lastname}}. Hvis du fortsætter, vil denne tråd ikke længere være synlig for dig på denne patientprofil. Hvis du fortsætter, vises denne meddelelsestråd på <a href=\"messages\">-siden</a> side.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Mindst to medlemmer skal forblive på beskedtråd {{user.firstName}} {{user.lastName}} kan ikke fjernes",
     "THREAD_UNABLE_REMOVE_YOURSELF": "Du kan ikke fjerne dig selv",
+    "TIMEZONE": "Tidszone",
     "TIME_ZONE": "Tidszone",
     "TIN_INVALID": "TIN er ugyldig. TIN gemmes ikke, medmindre en gyldig leveres.",
     "TIN_INVALID_NAV_WARNING": "Den nuværende TIN er ugyldigt og vil ikke blive gemt. Er du sikker på du vil forlade denne side?",

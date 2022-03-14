@@ -389,6 +389,7 @@
     "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br>Sie sehen derzeit das Patientenprofil für {{user.firstname}} {{user.lastname}}. Wenn Sie fortfahren, wird dieser Thread auf diesem Patientenprofil nicht mehr angezeigt. Wenn Sie fortfahren, wird dieser Meldungs-Thread auf der <a href=\"messages\">Meldungen</a> Seite gefunden.",
     "THREAD_UNABLE_REMOVE_MEMBER": "Mindestens zwei Mitglieder auf Nachricht Thema bleiben muss {{user.firstName}} {{user.lastName}} kann nicht entfernt werden",
     "THREAD_UNABLE_REMOVE_YOURSELF": "Sie können sich nicht entfernen",
+    "TIMEZONE": "Zeitzone",
     "TIME_ZONE": "Zeitzone",
     "TIN_INVALID": "TIN ist ungültig. Das TIN wird nicht gespeichert werden, wenn ein gültiger geliefert wird.",
     "TIN_INVALID_NAV_WARNING": "Die aktuelle TIN ist ungültig und werden nicht gespeichert. Sind Sie sicher, dass Sie diese Seite verlassen?",

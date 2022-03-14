@@ -389,6 +389,7 @@
     "THREAD_REMOVE_SELF_PATIENT_DESCRIPTION": "<br><br> تقوم حاليا بعرض ملف تعريف المريض حاليا ل {{user.firstname}} {{user.lastname}}. إذا استمرت، فلن يكون هذا الخيط مريحا لك على ملف تعريف المريض هذا. إذا استمرت، سيتم العثور على مؤشر ترابط الرسالة هذه على <a href=\"messages\"> الصفحة</a> الصفحة.",
     "THREAD_UNABLE_REMOVE_MEMBER": "يجب أن اثنين على الأقل من أعضاء تبقى على رسالة الموضوع {{user.firstName}} {{user.lastName}} لا يمكن إزالتها",
     "THREAD_UNABLE_REMOVE_YOURSELF": "لا يمكنك إزالة نفسك",
+    "TIMEZONE": "وحدة زمنية",
     "TIME_ZONE": "المنطقة الزمنية",
     "TIN_INVALID": "تين غير صالح. لن يتم حفظ TIN ما لم يتم توفير واحدة صالح.",
     "TIN_INVALID_NAV_WARNING": "القصدير الحالي غير صالح ولن يتم حفظها. هل أنت متأكد أنك تريد مغادرة هذه الصفحة؟",

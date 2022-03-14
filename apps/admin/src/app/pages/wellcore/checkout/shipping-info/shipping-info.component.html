@@ -79,6 +79,13 @@
       </mat-form-field>
     </div>
     <div class="ccr-wellcore-field">
+      <label class="ccr-wellcore-label">Timezone <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="timezone">
+          <mat-option *ngFor="let timezone of timezones" [value]="timezone.code">{{ timezone.lang[lang] }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get('timezone').getError('required')">Timezone is required</mat-error>
+      </mat-form-field>
     </div>
   </div>
 </form>
