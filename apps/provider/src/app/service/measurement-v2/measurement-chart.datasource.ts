@@ -74,7 +74,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
      * Grouping by day and limiting the amount of entries per day
      */
     const preprocessedEntries = chain(sortedResult)
-      .groupBy((entry) => moment(entry.createdAt.utc).format('YYYY-MM-DD'))
+      .groupBy((entry) => moment(entry.recordedAt.utc).format('YYYY-MM-DD'))
       .flatMap((group) => {
         if (group.length <= MEASUREMENT_MAX_ENTRIES_PER_DAY) {
           return group
