@@ -1,3 +1,17 @@
+# [1.74.0](https://github.com/coachcare/dashboard/compare/v1.73.0...v1.74.0) (2022-03-15)
+
+
+### Bug Fixes
+
+* adjusted alert notification parsing [FRON-2685] ([d973190](https://github.com/coachcare/dashboard/commit/d973190133b55524f4f883b9dafd6c331648683c))
+* adjusted content creation flow [FRON-2659] ([11c1680](https://github.com/coachcare/dashboard/commit/11c16806bb4afd794a5319b8e896768e74fdd668))
+* call settings for switch camera, audio and output [FRON-2625] ([3200090](https://github.com/coachcare/dashboard/commit/3200090eb1a134edf32914943377a5eaa14d3d84))
+
+
+### Features
+
+* added micronutrients page [FRON-2591] ([1bfd11c](https://github.com/coachcare/dashboard/commit/1bfd11c7a017dc2bd4192e3d2a2865ce44cac081))
+
 # [1.73.0](https://github.com/coachcare/dashboard/compare/v1.72.0...v1.73.0) (2022-03-10)
 
 
