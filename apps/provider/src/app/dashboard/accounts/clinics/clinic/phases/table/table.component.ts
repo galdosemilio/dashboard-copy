@@ -6,6 +6,7 @@ import { Package } from '@app/shared/components/package-table'
 import { PackageDatasource } from '@app/shared/components/package-table/services'
 import { _ } from '@app/shared/utils'
 import { PackageOrganization } from '@coachcare/sdk'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-clinic-phases-table',
@@ -36,16 +37,15 @@ export class ClinicPhasesTableComponent {
         data: {
           title: _('BOARD.REMOVE_PHASE_TITLE'),
           content: _('BOARD.REMOVE_PHASE_DESCRIPTION'),
-          contentParams: { phase: row.title }
+          contentParams: {
+            phase: row.title
+          }
         }
       })
       .afterClosed()
-      .subscribe(async (confirm) => {
+      .pipe(filter((confirm) => confirm))
+      .subscribe(async () => {
         try {
-          if (!confirm) {
-            return
-          }
-
           await this.packageOrganization.update({
             id: row.associationId,
             isActive: false

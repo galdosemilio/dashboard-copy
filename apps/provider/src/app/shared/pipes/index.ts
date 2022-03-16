@@ -16,6 +16,7 @@ import {
   UnitConvertFromReadablePipe,
   UnitConvertToReadablePipe
 } from './unit-conversion'
+import { CcrSanitizePipe } from '@coachcare/common/pipes'
 
 export const Pipes = [
   AbsoluteValuePipe,
@@ -23,6 +24,7 @@ export const Pipes = [
   CapitalizePipe,
   CcrBinaryPipe,
   CcrKilobytesPipe,
+  CcrSanitizePipe,
   CcrUtcPipe,
   ExerciseIntensityPipe,
   FractionPipe,

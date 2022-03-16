@@ -5,6 +5,7 @@ import { PromptDialog, SupervisingProvidersDataSource } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { RPM, SupervisingProviderAssociationItem } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { filter } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -50,7 +51,7 @@ export class ClinicSupervisingProvidersTable implements OnInit {
         }
       })
       .afterClosed()
-      .pipe((confirm) => confirm)
+      .pipe(filter((confirm) => confirm))
       .subscribe(() => void this.removeSupervisingProvider(association))
   }
 

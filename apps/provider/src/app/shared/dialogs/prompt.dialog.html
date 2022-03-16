@@ -1,11 +1,11 @@
 <!-- WARNING have to be sure to have translated strings because after the extraction they are empty -->
 <div *ngIf="data.title" matDialogTitle>
-  <div [innerHTML]="data.title | translate: data.titleParams"></div>
+  <div [innerHTML]="data.title | translate: data.titleParams | ccrSanitize"></div>
   <button matDialogClose><mat-icon>cancel</mat-icon></button>
 </div>
 
 <mat-dialog-content>
-  <p [innerHTML]="data.content | translate: data.contentParams"></p>
+  <p [innerHTML]="data.content | translate: data.contentParams | ccrSanitize"></p>
 </mat-dialog-content>
 
 <div mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end stretch" fxLayoutAlign.xs="center stretch">

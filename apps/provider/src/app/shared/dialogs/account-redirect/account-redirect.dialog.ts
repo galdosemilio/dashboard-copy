@@ -45,7 +45,7 @@ export class AccountRedirectDialog implements OnInit {
       void this.router.navigate([
         '/accounts/coaches',
         this.accountId,
-        'profile'
+        { s: 'profile' }
       ])
     }
 

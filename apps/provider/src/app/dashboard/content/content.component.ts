@@ -33,7 +33,7 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, PromptDialog, Sanitizer } from '@app/shared'
+import { _, PromptDialog } from '@app/shared'
 import { Entity, OrganizationEntity } from '@coachcare/sdk'
 import { uniqBy, values } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -420,9 +420,7 @@ export class ContentComponent implements OnDestroy, OnInit {
         },
         contentParams: {
           clinic: {
-            name: Sanitizer.sanitizeTranslationString(
-              content.organization.name
-            ),
+            name: content.organization.name,
             id: content.organization.id
           }
         }

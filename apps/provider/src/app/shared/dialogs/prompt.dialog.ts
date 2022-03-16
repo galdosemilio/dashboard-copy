@@ -1,6 +1,5 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-
 import { _ } from '@app/shared/utils'
 
 export interface PromptDialogData {
@@ -18,25 +17,20 @@ export interface PromptDialogData {
   templateUrl: 'prompt.dialog.html',
   host: { class: 'ccr-dialog' }
 })
-export class PromptDialog {
-  title = ''
-  content = ''
-
+export class PromptDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<PromptDialog>,
     @Inject(MAT_DIALOG_DATA) public data: PromptDialogData
-  ) {
-    // WARNING be sure to have translated strings of the parameters
-    // because after the extraction they are empty
-    this.data = Object.assign(
-      {
-        titleParams: {},
-        contentParams: {},
-        no: _('GLOBAL.NO'),
-        yes: _('GLOBAL.YES'),
-        color: 'warn'
-      },
-      data
-    )
+  ) {}
+
+  public ngOnInit(): void {
+    this.data = {
+      titleParams: {},
+      contentParams: {},
+      no: _('GLOBAL.NO'),
+      yes: _('GLOBAL.YES'),
+      color: 'warn',
+      ...this.data
+    }
   }
 }
