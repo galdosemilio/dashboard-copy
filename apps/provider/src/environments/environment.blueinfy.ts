@@ -11,8 +11,11 @@ export const environment: Environment = {
   url: 'https://blueinfy.dashboard.coachcare.com/provider',
   awsAssetsUrl: 'https://s3.amazonaws.com/dev.assets.cc',
   coachcareOrgId: '1',
+  daysheetsFormId: '3',
+  remindersFormId: '4',
+  physicianFormId: '2',
   wellCoreOrgId: '1',
-  wellcoreMedicalFormId: '15189',
+  wellcoreMedicalFormId: '5',
   wellcoreMeetingId: 22,
   wellcoreEligibleToSelfSchedulePhaseId: '817'
 }

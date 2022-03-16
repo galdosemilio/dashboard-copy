@@ -12,6 +12,7 @@ import { SectionConfigDetails } from './models/section.details'
 import { DefaultDashboardComponent } from '@app/dashboard/panel'
 import { _ } from '@app/shared/utils'
 import { DefaultProfileComponent } from '@app/dashboard/profile/layouts'
+import { environment } from '../../../environments/environment'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
@@ -25,7 +26,7 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     HIDDEN_MEASUREMENT_TABS: [],
     HIDDEN_SETTINGS_TABS: [SettingsTabs.PHASE_HISTORY],
     HIDDEN_TABS: [JournalTabs.METRICS],
-    PHYSICIAN_FORM: '15096',
+    PHYSICIAN_FORM: environment.physicianFormId,
     SHOW_DOCTOR_PDF_BUTTON: false,
     SHOW_PATIENT_PDF_BUTTON: false,
     SHOW_FOOD_MOOD_AND_NOTE: false
@@ -48,10 +49,10 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     SHOW_PATIENT_CREATE_BUTTON: true
   },
   RIGHT_PANEL: {
-    DAYSHEETS_FORM: '15121',
+    DAYSHEETS_FORM: environment.daysheetsFormId,
     SHOW_DAYSHEET_BUTTON: false,
     SHOW_REMINDERS: true,
-    REMINDERS_FORM: '15081'
+    REMINDERS_FORM: environment.remindersFormId
   },
   SIDENAV: {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM],
@@ -113,7 +114,7 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     HIDDEN_MEASUREMENT_TABS: [],
     HIDDEN_SETTINGS_TABS: [SettingsTabs.PHASE_HISTORY],
     HIDDEN_TABS: [JournalTabs.METRICS],
-    PHYSICIAN_FORM: '293',
+    PHYSICIAN_FORM: environment.physicianFormId,
     SHOW_DOCTOR_PDF_BUTTON: false,
     SHOW_PATIENT_PDF_BUTTON: false,
     SHOW_FOOD_MOOD_AND_NOTE: false
@@ -129,10 +130,10 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     SHOW_PATIENT_CREATE_BUTTON: true
   },
   RIGHT_PANEL: {
-    DAYSHEETS_FORM: '238',
+    DAYSHEETS_FORM: environment.daysheetsFormId,
     SHOW_DAYSHEET_BUTTON: false,
     SHOW_REMINDERS: true,
-    REMINDERS_FORM: '172'
+    REMINDERS_FORM: environment.remindersFormId
   },
   SIDENAV: {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM],

@@ -12,6 +12,9 @@ export interface Environment {
   url: string
   awsAssetsUrl: string
   coachcareOrgId: string
+  daysheetsFormId: string
+  remindersFormId: string
+  physicianFormId: string
   wellCoreOrgId: string
   wellcoreMedicalFormId: string
   wellcoreMeetingId: number
