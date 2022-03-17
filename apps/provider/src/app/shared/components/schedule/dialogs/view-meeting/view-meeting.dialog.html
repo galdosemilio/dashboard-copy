@@ -262,6 +262,10 @@
                     <div
                     *ngFor="let attendee of attendees"
                     class="attendee"
+                    [ccrAccountLink]="attendee.account"
+                    [accountType]="attendee.accountType.id"
+                    [allowLinkingBlank]="true"
+                    (onOpen)="close()"
                     fxLayout="row"
                     fxLayoutAlign="start center"
                     fxLayoutGap="10px">
@@ -276,6 +280,7 @@
                             </ng-template>
                             <ccr-attendance-selector
                                 *ngIf="!isFuture"
+                                (click)="$event.stopPropagation()"
                                 [meeting]="meeting"
                                 [attendanceStatus]="attendee.attendance.status"
                                 (change)="attendanceChange(attendee, $event)">

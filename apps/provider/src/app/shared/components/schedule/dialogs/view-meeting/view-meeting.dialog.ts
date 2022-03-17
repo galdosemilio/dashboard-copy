@@ -273,6 +273,10 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     }
   }
 
+  public close(): void {
+    this.dialogRef.close()
+  }
+
   endRepeatChanged(option): void {
     if (option === 'never') {
       this.form.get('endAfter').reset(null)
