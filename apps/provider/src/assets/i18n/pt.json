@@ -708,11 +708,16 @@
   "JOURNAL": {
     "CALCIUM": "Ca",
     "IRON": "Fe",
+    "MAGNESIUM": "Mg",
     "POTASSIUM": "K",
     "SODIUM": "Na",
     "VITAMIN_A": "Vit A",
     "VITAMIN_B": "Vit B",
+    "VITAMIN_B12": "Vit B12",
+    "VITAMIN_B6": "VIT B6",
     "VITAMIN_C": "Vit C",
+    "VITAMIN_E": "Vit E",
+    "VITAMIN_K": "Vit K",
     "VIT_D": "Vit D"
   },
   "LAYOUT": {

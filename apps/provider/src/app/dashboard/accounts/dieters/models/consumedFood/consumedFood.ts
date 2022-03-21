@@ -42,6 +42,11 @@ export class ConsumedFood implements FetchAllSingleConsumedMealResponse {
   vitaminB: number
   vitaminC: number
   vitaminD: number
+  vitaminE: number
+  vitaminK: number
+  vitaminB6: number
+  vitaminB12: number
+  magnesium: number
 
   constructor(args: FoodConsumedSingle) {
     this.polyunsaturatedFat = args.summary.polyunsaturatedFat || 0
@@ -83,5 +88,10 @@ export class ConsumedFood implements FetchAllSingleConsumedMealResponse {
     this.vitaminB = args.summary.vitaminB || 0
     this.vitaminC = args.summary.vitaminC || 0
     this.vitaminD = args.summary.vitaminD || 0
+    this.vitaminE = args.summary.vitaminE || 0
+    this.vitaminK = args.summary.vitaminK || 0
+    this.vitaminB6 = args.summary.vitaminB6 || 0
+    this.vitaminB12 = args.summary.vitaminB12 || 0
+    this.magnesium = args.summary.magnesium || 0
   }
 }

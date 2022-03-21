@@ -42,6 +42,11 @@ export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
   vitaminB = 0
   vitaminC = 0
   vitaminD = 0
+  vitaminE = 0
+  vitaminK = 0
+  vitaminB6 = 0
+  vitaminB12 = 0
+  magnesium = 0
 
   private hasMeals = false
 
@@ -75,6 +80,11 @@ export class FoodDayAmount implements FetchAllSingleConsumedMealResponse {
     this.vitaminB += meal.vitaminB || 0
     this.vitaminC += meal.vitaminC || 0
     this.vitaminD += meal.vitaminD || 0
+    this.vitaminE += meal.vitaminE || 0
+    this.vitaminK += meal.vitaminK || 0
+    this.vitaminB6 += meal.vitaminB6 || 0
+    this.vitaminB12 += meal.vitaminB12 || 0
+    this.magnesium += meal.magnesium || 0
     this.polyunsaturatedFat += meal.polyunsaturatedFat || 0
     this.monounsaturatedFat += meal.monounsaturatedFat || 0
   }

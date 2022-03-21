@@ -1,3 +1,5 @@
+@import 'variables';
+
 table {
   min-width: 100%;
 
@@ -6,15 +8,43 @@ table {
     text-align: center;
   }
 
+  th {
+    &.column-date,
+    &.column-toggle {
+      background-color: mat-color($ccr-background, header);
+    }
+  }
+
+  tr {
+    &.row-even {
+      .column-date,
+      .column-toggle {
+        background: mat-color($ccr-background, even);
+      }
+    }
+
+    &.row-odd {
+      .column-date,
+      .column-toggle {
+        background: mat-color($ccr-background, odd);
+      }
+    }
+  }
+
   .column {
     &-date {
       text-align: left;
+      left: 15px;
+      min-width: 125px;
+      max-width: 125px;
+      width: 125px;
     }
 
     &-toggle {
       line-height: 12px;
       max-width: 15px;
       min-width: 15px;
+      left: 0;
       padding: 0;
       padding-left: 10px;
     }
