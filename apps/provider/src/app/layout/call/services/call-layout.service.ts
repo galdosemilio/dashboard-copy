@@ -72,13 +72,20 @@ export class CallLayoutService implements OnDestroy {
 
     let modal
     if (this.deviceDetector.isDesktop) {
-      modal = this.dialog.open(CallRatingDialog, { width: '30vw' })
+      modal = this.dialog.open(CallRatingDialog, {
+        width: '30vw',
+        disableClose: true
+      })
     } else if (this.deviceDetector.isTablet) {
-      modal = this.dialog.open(CallRatingDialog, { width: '60vw' })
+      modal = this.dialog.open(CallRatingDialog, {
+        width: '60vw',
+        disableClose: true
+      })
     } else {
       modal = this.dialog.open(CallRatingDialog, {
         width: '100vw',
-        panelClass: 'ccr-full-dialog'
+        panelClass: 'ccr-full-dialog',
+        disableClose: true
       })
     }
 

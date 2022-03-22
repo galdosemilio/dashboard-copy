@@ -67,48 +67,6 @@ export class CallRatingDialog implements OnDestroy, OnInit {
           this.remotePeerLogData = {}
         }
       })
-
-    this.dialogRef
-      .backdropClick()
-      .pipe(untilDestroyed(this))
-      .subscribe(() => this.close('backdrop'))
-  }
-
-  public async close(reason?: string): Promise<void> {
-    if (!reason) {
-      this.dialogRef.close()
-      return
-    }
-
-    switch (reason) {
-      case 'closeButton':
-        await this.logging.log({
-          logLevel: 'info',
-          data: {
-            type: 'videoconferencing',
-            functionType: 'videoconferencing-feedback',
-            message: 'client closed modal through button',
-            ...this.userLogData,
-            ...this.remotePeerLogData
-          }
-        })
-        break
-
-      case 'backdrop':
-        await this.logging.log({
-          logLevel: 'info',
-          data: {
-            type: 'videoconferencing',
-            functionType: 'videoconferencing-feedback',
-            message: 'client closed modal through backdrop',
-            ...this.userLogData,
-            ...this.remotePeerLogData
-          }
-        })
-        break
-    }
-
-    this.dialogRef.close()
   }
 
   public markActiveOption(option: CallRatingOption): void {
@@ -148,7 +106,7 @@ export class CallRatingDialog implements OnDestroy, OnInit {
       }
 
       this.notifier.success(_('NOTIFY.SUCCESS.THANK_YOU_FEEDBACK'))
-      void this.close()
+      this.dialogRef.close()
     } catch (error) {
       this.notifier.error(error)
     } finally {
