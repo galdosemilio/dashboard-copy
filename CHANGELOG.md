@@ -1,3 +1,17 @@
+# [1.75.0](https://github.com/coachcare/dashboard/compare/v1.74.0...v1.75.0) (2022-03-22)
+
+
+### Bug Fixes
+
+* add timezone select field to wellcore pages [FRON-2642] ([e401ff4](https://github.com/coachcare/dashboard/commit/e401ff44909f17b465804dbb1967187448d8777c))
+* properly set forms for blueinfy [FRON-2695] ([e2045c2](https://github.com/coachcare/dashboard/commit/e2045c2c68e2e8c725992018ba447936b963e399))
+* sort issue in chart entries [FRON-2675] ([f98b9da](https://github.com/coachcare/dashboard/commit/f98b9dafd160683f1ee37e1e6b47049009db83cc))
+
+
+### Features
+
+* custom message for inherited content deletion [FRON-2684] ([ab6b0b7](https://github.com/coachcare/dashboard/commit/ab6b0b754467c7a255eb1a4434b565cbdfc5d0f4))
+
 # [1.74.0](https://github.com/coachcare/dashboard/compare/v1.73.0...v1.74.0) (2022-03-15)
 
 
