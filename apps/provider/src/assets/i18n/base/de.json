@@ -1097,7 +1097,7 @@
       "MESSAGE_NOT_SEND": "Es gab einen Fehler die Nachricht zu senden. Versuchen SIe bitte nocheinmal.",
       "NOTE_ADDED": "Hinweis kann nicht hinzugefügt werden. Bitte versuchen Sie es später.",
       "NOTHING_TO_EXPORT": "Es gibt keine Daten zu exportieren.",
-      "NO_AVAILABLE_COACHES_FOR_DAY": "Es gibt keine verfügbaren Trainer für den ausgewählten Tag.",
+      "NO_AVAILABLE_COACHES_FOR_DAY": "Für den ausgewählten Tag sind keine Beratungen verfügbar.",
       "NO_COACHES_FOR_STATE": "In Ihrem Bundesstaat gibt es keine verfügbaren Trainer.",
       "NO_COACH_LISTING_PERMISSION": "Sie haben keine entsprechende Berechtigung um die Kontolisten für diese Klinik zu sehen. Bitte fragen Sie Ihren Klinik-Administrator nach ‚Alle Accounts anzeigen‘ oder ‚Admin‘ Berechtigungen.",
       "NO_DATA_POINT_FOR_LABEL": "Es gibt keine Datenpunkttypen zu diesem Label zugeordnet ist.",
