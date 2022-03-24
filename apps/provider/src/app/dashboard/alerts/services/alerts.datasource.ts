@@ -70,7 +70,7 @@ export class AlertsDataSource extends TableDataSource<
         }
         let since: moment.Moment
         const units = this.context.user.measurementPreference
-        const val = value.payload.value
+        const val = value.payload?.value
 
         switch (value.type.id) {
           // 1. Weight Regained

@@ -59,7 +59,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
     }))
     this.source.addOptional(this.refresh$.pipe(debounceTime(300)), () => {
       const k = findIndex(this.alerts, { value: this.alert })
-      console.log({ alerts: this.alerts, alert: this.alert })
+
       return k === 0
         ? {}
         : typeof this.alert === 'string'
