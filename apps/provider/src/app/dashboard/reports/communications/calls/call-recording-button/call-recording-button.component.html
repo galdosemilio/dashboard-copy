@@ -3,6 +3,22 @@
 [title]="!hasDownloadPermission ? ('NOTIFY.INFO.DOWNLOAD_VIDEO_RECORDING_PERMISSION' | translate:{organization: call.organization.name}) : ('BOARD.DOWNLOAD_VIDEO_RECORDING' | translate)"
 (click)="onClick()"
 mat-icon-button>
-  <mat-icon [class.disabled]="isLoading || !hasRecording || !hasDownloadPermission">file_download</mat-icon>
+  <mat-icon
+  [class.disabled]="isLoading || !hasRecording || !hasDownloadPermission"
+  [matTooltip]="tooltip | translate">
+    {{ icon }}
+  </mat-icon>
+</button>
+
+<button
+*ngIf="showRequestSupportBtn"
+[disabled]="hasSentSuppReq"
+(click)="showSupportDialog()"
+mat-icon-button>
+  <mat-icon
+  [class.disabled]="hasSentSuppReq"
+  [matTooltip]="'NOTIFY.ERROR.ERROR_RECORDING_CONTACT_SUPPORT' | translate">
+    email
+  </mat-icon>
 </button>
 
