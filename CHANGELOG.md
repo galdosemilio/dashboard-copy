@@ -1,3 +1,12 @@
+## [1.75.1](https://github.com/coachcare/dashboard/compare/v1.75.0...v1.75.1) (2022-03-24)
+
+
+### Bug Fixes
+
+* added centralized sanitization [FRON-2687] ([e06ff56](https://github.com/coachcare/dashboard/commit/e06ff5681e90880968c61c8f4fc58e54f2cfe55f))
+* make post-call feedback required [FRON-2696] ([90165e1](https://github.com/coachcare/dashboard/commit/90165e1868a26d473cb38b414fad29e3909530fb))
+* show additional micronutrients fields [FRON-2694] ([d0ac020](https://github.com/coachcare/dashboard/commit/d0ac020fffc0702ce5d7ce2701c021ffe083d6b5))
+
 # [1.75.0](https://github.com/coachcare/dashboard/compare/v1.74.0...v1.75.0) (2022-03-22)
 
 
