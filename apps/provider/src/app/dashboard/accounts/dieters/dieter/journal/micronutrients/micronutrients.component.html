@@ -16,13 +16,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           <span>{{ 'JOURNAL.VIT_D' | translate }}</span>
         </th>
         <th>
-          <span>{{ 'JOURNAL.SODIUM' | translate }}</span>
-        </th>
-        <th>
           <span>{{ 'JOURNAL.CALCIUM' | translate }}</span>
-        </th>
-        <th>
-          <span>{{ 'JOURNAL.MAGNESIUM' | translate }}</span>
         </th>
         <th>
           <span>{{ 'JOURNAL.IRON' | translate }}</span>
@@ -31,16 +25,16 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           <span>{{ 'JOURNAL.POTASSIUM' | translate }}</span>
         </th>
         <th>
+          <span>{{ 'JOURNAL.MAGNESIUM' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.SODIUM' | translate }}</span>
+        </th>
+        <th>
           <span>{{ 'JOURNAL.VITAMIN_A' | translate }}</span>
         </th>
         <th>
           <span>{{ 'JOURNAL.VITAMIN_B' | translate }}</span>
-        </th>
-        <th>
-          <span>{{ 'JOURNAL.VITAMIN_B6' | translate }}</span>
-        </th>
-        <th>
-          <span>{{ 'JOURNAL.VITAMIN_B12' | translate }}</span>
         </th>
         <th>
           <span>{{ 'JOURNAL.VITAMIN_C' | translate }}</span>
@@ -50,6 +44,12 @@ class="ccr-table ccr-expand-table ccr-table-stats">
         </th>
         <th>
           <span>{{ 'JOURNAL.VITAMIN_K' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.VITAMIN_B6' | translate }}</span>
+        </th>
+        <th>
+          <span>{{ 'JOURNAL.VITAMIN_B12' | translate }}</span>
         </th>
       </tr>
     </thead>
@@ -82,14 +82,8 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       <td *ngIf="row.vitaminD; else empty">
         {{ row.vitaminD / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
       </td>
-      <td *ngIf="row.sodium; else empty">
-        {{ row.sodium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
-      </td>
       <td *ngIf="row.calcium; else empty">
         {{ row.calcium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
-      </td>
-      <td *ngIf="row.magnesium; else empty">
-        {{ row.magnesium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
       </td>
       <td *ngIf="row.iron; else empty">
         {{ row.iron / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
@@ -97,17 +91,17 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       <td *ngIf="row.potassium; else empty">
         {{ row.potassium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
       </td>
+      <td *ngIf="row.magnesium; else empty">
+        {{ row.magnesium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.sodium; else empty">
+        {{ row.sodium | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
       <td *ngIf="row.vitaminA; else empty">
         {{ row.vitaminA / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
       </td>
       <td *ngIf="row.vitaminB; else empty">
         {{ row.vitaminB / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
-      </td>
-      <td *ngIf="row.vitaminB6; else empty">
-        {{ row.vitaminB6 / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
-      </td>
-      <td *ngIf="row.vitaminB12; else empty">
-        {{ row.vitaminB12 / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
       </td>
       <td *ngIf="row.vitaminC; else empty">
         {{ row.vitaminC / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
@@ -117,6 +111,12 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       </td>
       <td *ngIf="row.vitaminK; else empty">
         {{ row.vitaminK / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.vitaminB6; else empty">
+        {{ row.vitaminB6 / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.MGR' | translate }}</small>
+      </td>
+      <td *ngIf="row.vitaminB12; else empty">
+        {{ row.vitaminB12 / 1000 | number:'1.0-1' }}<small>{{ 'UNIT.UGR' | translate }}</small>
       </td>
     </tr>
     </tbody>
