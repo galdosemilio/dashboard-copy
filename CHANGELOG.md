@@ -1,3 +1,10 @@
+## [1.75.2](https://github.com/coachcare/dashboard/compare/v1.75.1...v1.75.2) (2022-03-25)
+
+
+### Bug Fixes
+
+* solved issue with potentially missing payload [FRON-2685] ([8085dbb](https://github.com/coachcare/dashboard/commit/8085dbb2e6f02b1e236591ebacb451acf55cb92d))
+
 ## [1.75.1](https://github.com/coachcare/dashboard/compare/v1.75.0...v1.75.1) (2022-03-24)
 
 
