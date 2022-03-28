@@ -87,7 +87,7 @@ describe('Dashboard -> Coach Listing', function () {
       .find('mat-table mat-row')
       .as('clinicRows')
 
-    cy.get('@clinicRows').should('have.length', 9)
+    cy.get('@clinicRows').should('have.length', 10)
 
     cy.get('@clinicRows').eq(0).contains('CoachCare')
     cy.get('@clinicRows').eq(1).contains('Center for Medical Weight Loss')
@@ -98,5 +98,6 @@ describe('Dashboard -> Coach Listing', function () {
     cy.get('@clinicRows').eq(6).contains('Apollo US')
     cy.get('@clinicRows').eq(7).contains('Wellcore')
     cy.get('@clinicRows').eq(8).contains('MuscleWise')
+    cy.get('@clinicRows').eq(9).contains('Ideal You')
   })
 })

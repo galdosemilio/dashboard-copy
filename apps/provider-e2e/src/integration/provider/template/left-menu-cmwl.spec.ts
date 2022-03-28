@@ -7,7 +7,7 @@ describe('Lefthand menu (CMWL)', function () {
   })
 
   it('Test custom case: CMWL, all proper links show', function () {
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-menu', {
       timeout: 12000

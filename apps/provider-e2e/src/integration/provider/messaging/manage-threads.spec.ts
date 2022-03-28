@@ -17,7 +17,7 @@ describe('Messages -> Manage Threads', function () {
 
     cy.tick(1000)
 
-    cy.get('ccr-messages-chat-info')
+    cy.get('messages-chat-info')
       .find('button')
       .contains('Add Member')
       .click({ force: true })
@@ -62,7 +62,7 @@ describe('Messages -> Manage Threads', function () {
 
     cy.tick(1000)
 
-    cy.get('ccr-messages-chat-info')
+    cy.get('messages-chat-info')
       .find('mat-icon')
       .contains('delete')
       .eq(0)
@@ -83,9 +83,7 @@ describe('Messages -> Manage Threads', function () {
       expect(xhr.request.body.isActive).to.equal(false)
     })
 
-    cy.get('ccr-messages-chat-info')
-      .find('ccr-user-card')
-      .should('have.length', 2)
+    cy.get('messages-chat-info').find('ccr-user-card').should('have.length', 2)
   })
 
   it('Prevents a provider from removing a member if there are 2 members or less', function () {
@@ -100,7 +98,7 @@ describe('Messages -> Manage Threads', function () {
 
     cy.tick(1000)
 
-    cy.get('ccr-messages-chat-info')
+    cy.get('messages-chat-info')
       .find('mat-icon')
       .contains('delete')
       .should('have.class', 'disabled')

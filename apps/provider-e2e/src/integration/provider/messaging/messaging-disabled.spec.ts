@@ -5,7 +5,7 @@ describe('Organization Messaging Preference', function () {
     cy.setOrganization('ccr')
     standardSetup()
 
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-menu')
       .find('app-sidenav-item')
@@ -21,7 +21,7 @@ describe('Organization Messaging Preference', function () {
     cy.setOrganization('ccr')
     standardSetup()
 
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.intercept(
       'GET',

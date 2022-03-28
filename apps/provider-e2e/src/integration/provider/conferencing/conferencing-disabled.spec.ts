@@ -6,7 +6,7 @@ describe('Organization Conferencing Preference', function () {
     standardSetup()
     cy.visit(`/messages`)
 
-    cy.get('ccr-messages').find('ccr-call-control').should('be.visible')
+    cy.get('app-messages').find('ccr-call-control').should('be.visible')
   })
 
   it('Call button is not available', function () {
@@ -21,6 +21,6 @@ describe('Organization Conferencing Preference', function () {
     })
     cy.visit(`/messages`)
 
-    cy.get('ccr-messages').find('ccr-call-control').should('not.be.visible')
+    cy.get('app-messages').find('ccr-call-control').should('not.be.visible')
   })
 })

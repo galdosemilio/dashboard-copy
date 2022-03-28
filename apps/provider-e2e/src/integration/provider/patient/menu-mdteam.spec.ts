@@ -24,13 +24,14 @@ describe('Patient profile -> more -> submenu (mdteam)', function () {
       .find('a')
       .as('subLinks')
 
-    cy.get('@subLinks').should('have.length', 5)
+    cy.get('@subLinks').should('have.length', 6)
 
     cy.get('@subLinks').eq(0).should('contain', 'Food')
     cy.get('@subLinks').eq(1).should('contain', 'Supplements')
     cy.get('@subLinks').eq(2).should('contain', 'Water')
     cy.get('@subLinks').eq(3).should('contain', 'Exercise')
     cy.get('@subLinks').eq(4).should('contain', 'Metrics')
+    cy.get('@subLinks').eq(5).should('contain', 'Micro')
 
     // A bit of a hack - this component loads very late, but cypress will continue loading the page between spec files.  So, the component loads (and the API call is made) during a gray area where no api stub/intercepts are active.  So, waiting for it to load forces the spec to pass.
     cy.get('app-rpm')

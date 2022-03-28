@@ -526,7 +526,12 @@ describe('Sequences -> new', function () {
 
     cy.tick(1000)
 
-    cy.get('.mat-select-trigger').trigger('click').wait(500)
+    cy.get('mat-dialog-container')
+      .find('mat-form-field')
+      .eq(1)
+      .trigger('click')
+      .wait(300)
+
     cy.get('.mat-option').eq(0).trigger('click')
 
     cy.tick(1000)

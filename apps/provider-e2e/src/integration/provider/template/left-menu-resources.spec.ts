@@ -7,7 +7,7 @@ describe('Lefthand menu (resources link)', function () {
   })
 
   it('By default, resource links are correct', function () {
-    cy.visit('/', {
+    cy.visit('/dashboard', {
       onBeforeLoad(win) {
         cy.stub(win, 'open').as('openWindow')
       }

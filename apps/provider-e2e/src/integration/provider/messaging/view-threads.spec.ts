@@ -1,11 +1,11 @@
 import { standardSetup } from '../../../support'
 
 function assertMessagesFeature(): void {
-  cy.get('app-messages-recipients').find('input').as('searchRecipients')
+  cy.get('messages-recipients').find('input').as('searchRecipients')
 
   cy.get('@searchRecipients').should('have.value', '')
 
-  cy.get('ccr-messages').find('.message-wrap').as('messageContainers')
+  cy.get('app-messages').find('.message-wrap').as('messageContainers')
 
   cy.get('@messageContainers').should('have.length', 2)
 }
@@ -20,14 +20,14 @@ describe('Messages -> basic message page layout is correct', function () {
 
     assertMessagesFeature()
 
-    cy.get('ccr-messages').find('.message-heading').as('timestamps')
+    cy.get('app-messages').find('.message-heading').as('timestamps')
 
     cy.get('@timestamps')
       .eq(0)
       .should('contain', 'Thursday, Dec 19, 2019, 10:00 pm')
     cy.get('@timestamps').eq(1).should('contain', 'in 3 hours')
 
-    cy.get('ccr-messages')
+    cy.get('app-messages')
       .find('.message-wrap')
       .last()
       .find('a')
@@ -43,14 +43,14 @@ describe('Messages -> basic message page layout is correct', function () {
 
     assertMessagesFeature()
 
-    cy.get('ccr-messages').find('.message-heading').as('timestamps')
+    cy.get('app-messages').find('.message-heading').as('timestamps')
 
     cy.get('@timestamps')
       .eq(0)
       .should('contain', 'Friday, Dec 20, 2019, 2:00 pm')
     cy.get('@timestamps').eq(1).should('contain', 'in 3 hours')
 
-    cy.get('ccr-messages')
+    cy.get('app-messages')
       .find('.message-wrap')
       .last()
       .find('a')
@@ -71,13 +71,13 @@ describe('Messages -> basic message page layout is correct', function () {
 
     cy.tick(1000)
 
-    cy.get('ccr-messages-chat-info')
+    cy.get('messages-chat-info')
       .should('contain', 'Thread Information')
       .should('contain', 'Eric Di Bari')
       .should('contain', 'CoachCare')
       .should('contain', 'ID 1')
 
-    cy.get('ccr-messages-chat-info')
+    cy.get('messages-chat-info')
       .find('mat-icon')
       .contains('info')
       .click({ force: true })
@@ -95,14 +95,14 @@ describe('Messages -> basic message page layout is correct', function () {
 
     cy.tick(1000)
 
-    cy.get('ccr-messages-chat-info')
+    cy.get('messages-chat-info')
       .find('mat-icon')
       .contains('clear')
       .click({ force: true })
 
     cy.tick(1000)
 
-    cy.get('ccr-messages-chat-info').should('not.exist')
+    cy.get('messages-chat-info').should('not.exist')
   })
 
   it('Allows marking all threads as read', function () {

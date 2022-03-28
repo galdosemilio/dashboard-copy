@@ -8,7 +8,9 @@ describe('Messaging Feature for Patient Profile', function () {
 
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/messages`)
 
-    cy.get('ccr-messages')
+    cy.wait(1500)
+
+    cy.get('app-messages')
       .find('textarea')
       .should('be.enabled')
       .wait(500)
@@ -17,7 +19,7 @@ describe('Messaging Feature for Patient Profile', function () {
     cy.tick(10000)
 
     cy.wait('@upsertMessageDraft', { timeout: 10000 }).should((xhr) => {
-      expect(xhr.request.body.data.patientMessage).to.equal('this is a test')
+      expect(xhr.request.body.data.message).to.contain('this is a test')
     })
   })
 })

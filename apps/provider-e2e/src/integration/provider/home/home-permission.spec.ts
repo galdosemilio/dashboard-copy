@@ -16,7 +16,7 @@ describe('Validate permissions on homepage', function () {
       ]
     })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('[data-cy="view-all-alert-button"]').should('not.exist')
     cy.get('[data-cy="alert-listing"]').should(
@@ -42,7 +42,7 @@ describe('Validate permissions on homepage', function () {
       ]
     })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('[data-cy="view-all-alert-button"]').should('not.exist')
     cy.get('[data-cy="alert-listing"]').should(
@@ -72,7 +72,7 @@ describe('Validate permissions on homepage', function () {
       ]
     })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('[data-cy="view-all-alert-button"]').should('not.exist')
     cy.get('[data-cy="alert-listing"]').should(
@@ -98,7 +98,7 @@ describe('Validate permissions on homepage', function () {
       ]
     })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('[data-cy="view-all-alert-button"]').should('exist')
     cy.get('[data-cy="alert-listing"]').should('contain', 'Name')
@@ -138,7 +138,7 @@ describe('Validate permissions on homepage', function () {
       ]
     })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('[data-cy="view-all-alert-button"]').should('exist')
     cy.get('[data-cy="alert-listing"]').should('contain', 'Name')

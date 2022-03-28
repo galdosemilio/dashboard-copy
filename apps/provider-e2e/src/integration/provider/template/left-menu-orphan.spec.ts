@@ -4,7 +4,7 @@ describe('Lefthand menu (orphaned provider)', function () {
   it('Links should be visible (org access)', function () {
     cy.setOrganization('ccr')
     standardSetup()
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-menu')
       .find('app-sidenav-item')
@@ -24,7 +24,7 @@ describe('Lefthand menu (orphaned provider)', function () {
       fixture: 'api/general/emptyDataEmptyPagination'
     })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
     cy.get('[data-cy="empty-menu"]').should('exist')
 
     // Adding for Cypress issue where page continues to load after spec is done

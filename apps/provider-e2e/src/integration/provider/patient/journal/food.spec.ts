@@ -7,7 +7,9 @@ describe('Patient profile -> journal -> food', function () {
 
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/journal`)
 
-    cy.get('app-dieter-journal-food').find('mat-grid-tile').as('summaryBoxes')
+    cy.get('app-dieter-journal-food')
+      .find('[cy-data="food-circle"]')
+      .as('summaryBoxes')
     cy.get('@summaryBoxes').should('have.length', 5)
 
     assertElement(cy.get('@summaryBoxes').eq(0), ['CALORIES'])
@@ -22,7 +24,9 @@ describe('Patient profile -> journal -> food', function () {
 
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/journal`)
 
-    cy.get('app-dieter-journal-food').find('mat-grid-tile').as('summaryBoxes')
+    cy.get('app-dieter-journal-food')
+      .find('[cy-data="food-circle"]')
+      .as('summaryBoxes')
     cy.get('@summaryBoxes').should('have.length', 5)
 
     assertElement(cy.get('@summaryBoxes').eq(0), ['300'])
@@ -93,7 +97,9 @@ describe('Patient profile -> journal -> food', function () {
 
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/journal`)
 
-    cy.get('app-dieter-journal-food').find('mat-grid-tile').as('summaryBoxes')
+    cy.get('app-dieter-journal-food')
+      .find('[cy-data="food-circle"]')
+      .as('summaryBoxes')
     cy.get('@summaryBoxes').should('have.length', 5)
 
     assertElement(cy.get('@summaryBoxes').eq(0), ['300'])

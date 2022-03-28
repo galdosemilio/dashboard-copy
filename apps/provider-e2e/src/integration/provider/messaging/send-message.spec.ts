@@ -9,7 +9,7 @@ describe('Messages -> send message', function () {
 
     cy.visit(`/messages`)
 
-    cy.get('ccr-messages')
+    cy.get('app-messages')
       .find('textarea')
       .should('be.enabled')
       .type('this is a test')
@@ -29,9 +29,9 @@ describe('Messages -> send message', function () {
 
     cy.visit(`/messages`)
 
-    cy.get('ccr-messages').find('textarea').type('this is a test')
+    cy.get('app-messages').find('textarea').type('this is a test')
 
-    cy.get('ccr-messages').find('button').contains('Send').trigger('click')
+    cy.get('app-messages').find('button').contains('Send').trigger('click')
 
     assertMessagePostRequest({
       content: 'test',
@@ -47,7 +47,7 @@ describe('Messages -> send message', function () {
 
     cy.visit(`/messages`)
 
-    cy.get('ccr-messages')
+    cy.get('app-messages')
       .find('textarea')
       .should('be.enabled')
       .type('this is a test')
@@ -66,7 +66,7 @@ describe('Messages -> send message', function () {
 
     cy.wait(1500)
 
-    cy.get('ccr-messages')
+    cy.get('app-messages')
       .find('textarea')
       .should('be.enabled')
       .type('this is a test')

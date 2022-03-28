@@ -7,7 +7,7 @@ describe('Account Search in Top Menu', function () {
     cy.intercept('GET', '/2.0/access/organization?**', {
       fixture: 'api/general/emptyDataEmptyPagination'
     })
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-profile')
 
@@ -30,7 +30,7 @@ describe('Account Search in Top Menu', function () {
         }
       ]
     })
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-search').should('exist')
     cy.get('[data-cy="search-disabled"]').should('not.exist')
@@ -54,7 +54,7 @@ describe('Account Search in Top Menu', function () {
         }
       ]
     })
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-search').should('exist')
     cy.get('[data-cy="search-disabled"]').should('not.exist')
@@ -78,7 +78,7 @@ describe('Account Search in Top Menu', function () {
         }
       ]
     })
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-search').should('exist')
     cy.get('[data-cy="search-disabled"]').should('not.exist')
@@ -107,7 +107,7 @@ describe('Account Search in Top Menu', function () {
         }
       ]
     })
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-search').should('exist')
     cy.get('[data-cy="search-disabled"]').should('not.exist')
@@ -131,7 +131,7 @@ describe('Account Search in Top Menu', function () {
         }
       ]
     })
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-search').should('exist')
     cy.get('[data-cy="search-disabled"]').should('not.exist')
@@ -160,7 +160,7 @@ describe('Account Search in Top Menu', function () {
         }
       ]
     })
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-search').should('exist')
     cy.get('[data-cy="search-disabled"]').should('not.exist')

@@ -28,20 +28,24 @@ describe('Coach profile', function () {
       .trigger('click')
       .wait(300)
 
-    cy.get('mat-dialog-container').find('mat-select').trigger('click').wait(300)
+    cy.get('mat-dialog-container')
+      .find('mat-form-field')
+      .eq(1)
+      .trigger('click')
+      .wait(300)
 
     cy.get('.cdk-overlay-container').find('mat-option').as('clinicOptions')
 
-    cy.get('@clinicOptions').eq(0).should('contain', 'No Clinics')
-
-    cy.get('@clinicOptions').eq(1).should('contain', 'CoachCare')
+    cy.get('@clinicOptions').eq(0).should('contain', 'CoachCare')
 
     cy.get('@clinicOptions')
-      .eq(2)
+      .eq(1)
       .should('contain', 'Center for Medical Weight Loss')
 
-    cy.get('@clinicOptions').eq(3).should('contain', 'MDTeam')
+    cy.get('@clinicOptions').eq(2).should('contain', 'MDTeam')
 
-    cy.get('@clinicOptions').eq(4).should('contain', 'inHealth')
+    cy.get('@clinicOptions').eq(3).should('contain', 'inHealth')
+
+    cy.get('@clinicOptions').eq(4).should('contain', 'ShiftSetGo')
   })
 })

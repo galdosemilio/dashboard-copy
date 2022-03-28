@@ -2,7 +2,7 @@ import { standardSetup } from './../../../support'
 
 describe('Ensure orphaned account can not access any page but "profile"', function () {
   it('Orphaned Provider cannot access hompage', function () {
-    access(true, '/')
+    access(true, '/dashboard')
   })
   it('Orphaned Provider cannot access messages', function () {
     access(true, '/messages')

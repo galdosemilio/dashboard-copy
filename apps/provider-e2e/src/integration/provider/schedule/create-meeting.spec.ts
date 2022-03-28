@@ -8,6 +8,10 @@ describe('Schedule -> create meeting', function () {
 
     cy.visit(`/schedule/view`)
 
+    cy.get('.calendar-wrapper').should('exist')
+
+    cy.tick(1000)
+
     cy.get('app-consultation')
       .find('input[data-placeholder="Title"]')
       .type('meeting title')

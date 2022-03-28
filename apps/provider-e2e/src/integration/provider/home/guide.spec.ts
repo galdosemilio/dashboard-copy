@@ -5,7 +5,7 @@ describe('Nickelled guide automatically displays', function () {
     cy.setTimezone('et')
     standardSetup({ startDate: Date.UTC(2015, 1, 12), enableGuides: true })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
     cy.wait(5000)
 
     cy.get('[data-cy="nickelledGuideContainer"]').should('exist')
@@ -15,7 +15,7 @@ describe('Nickelled guide automatically displays', function () {
     cy.setTimezone('et')
     standardSetup({ startDate: Date.UTC(2015, 1, 19), enableGuides: true })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
     cy.wait(5000)
 
     cy.get('[data-cy="nickelledGuideContainer"]').should('not.exist')
@@ -25,7 +25,7 @@ describe('Nickelled guide automatically displays', function () {
     cy.setTimezone('et')
     standardSetup({ startDate: Date.UTC(2015, 1, 12) })
 
-    cy.visit('/')
+    cy.visit('/dashboard')
     cy.wait(5000)
 
     cy.get('[data-cy="nickelledGuideContainer"]').should('not.exist')

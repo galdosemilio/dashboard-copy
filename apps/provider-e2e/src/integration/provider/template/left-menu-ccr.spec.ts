@@ -7,7 +7,7 @@ describe('Lefthand menu (standard)', function () {
   })
 
   it('By default, all proper links show', function () {
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-menu', {
       timeout: 12000
@@ -50,7 +50,7 @@ describe('Lefthand menu (standard)', function () {
   })
 
   it('Hides the Schedule Support Call link if language is different from English', function () {
-    cy.visit('/')
+    cy.visit('/dashboard')
 
     cy.get('app-menu', {
       timeout: 12000
