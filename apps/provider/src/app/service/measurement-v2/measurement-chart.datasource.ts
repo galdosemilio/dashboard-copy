@@ -193,7 +193,9 @@ export class MeasurementChartDataSource extends ChartDataSource<
       lineTension: 0
     }))
 
-    const yCoords = datasets[0]?.data.map((entry) => Number(entry.y)) ?? []
+    const yCoords = flatMap(
+      datasets.map((dataset) => dataset.data.map((entry) => Number(entry.y)))
+    )
 
     let min = Math.min(...yCoords) ?? 0
     let max = Math.max(...yCoords) ?? 0
