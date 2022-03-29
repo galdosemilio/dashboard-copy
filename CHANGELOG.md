@@ -1,3 +1,16 @@
+# [1.76.0](https://github.com/coachcare/dashboard/compare/v1.75.2...v1.76.0) (2022-03-29)
+
+
+### Bug Fixes
+
+* modify word for no coach available [FRON-2612] ([8784008](https://github.com/coachcare/dashboard/commit/8784008d2eea2309bd47b5587bdd9fe770422ef8))
+* order of columns on the micronutrients page [FRON-2701] ([150c87a](https://github.com/coachcare/dashboard/commit/150c87ab70d0f74f717ec5aa150249b70f50b06d))
+
+
+### Features
+
+* enhanced the call download button [FRON-2699] ([767ff91](https://github.com/coachcare/dashboard/commit/767ff916e38fb63f5211310cd6582900596f7e13))
+
 ## [1.75.2](https://github.com/coachcare/dashboard/compare/v1.75.1...v1.75.2) (2022-03-25)
 
 
