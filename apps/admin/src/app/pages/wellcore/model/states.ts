@@ -115,7 +115,8 @@ export const STATES_LIST: WhitelistedSelectorOption[] = [
   },
   {
     viewValue: 'Minnesota',
-    value: 'MN'
+    value: 'MN',
+    whitelisted: true
   },
   {
     viewValue: 'Mississippi',

@@ -54,7 +54,7 @@
       <small>Only men ages 18 years or older are eligible to register for the WellCore program.</small>
     </mat-error>
     <mat-error *ngIf="checkBillingInfoErrors()">
-      <small>Only individuals located in the following states are currently eligible to enroll in WellCore: {{ whitelistedStates.join(',') }}</small>
+      <small>Only individuals located in the following states are currently eligible to enroll in WellCore: {{ whitelistedStates.join(', ') }}</small>
     </mat-error>
     <div
       [hidden]="checkAccountInfoErrors() || checkBillingInfoErrors()"

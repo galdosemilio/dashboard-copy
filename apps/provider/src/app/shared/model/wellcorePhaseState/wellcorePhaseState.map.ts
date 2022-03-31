@@ -16,5 +16,10 @@ export const WELLCORE_PHASE_STATE_MAP: {
     prodPhase: '1528',
     testPhase: '818',
     states: ['texas', 'tx']
+  },
+  minnesota: {
+    prodPhase: '1611',
+    testPhase: '822',
+    states: ['minnesota', 'mn']
   }
 }
