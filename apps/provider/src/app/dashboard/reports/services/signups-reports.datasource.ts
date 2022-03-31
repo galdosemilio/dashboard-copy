@@ -9,6 +9,7 @@ import { ChartData, ChartDataSource } from '@app/shared/model'
 import { _, TranslationsObject, ViewUtils } from '@app/shared/utils'
 import { SignupsTimelineRequest, SignupsTimelineSegment } from '@coachcare/sdk'
 import { ReportsDatabase } from './reports.database'
+import { Sanitizer } from '@coachcare/common/shared'
 
 @UntilDestroy()
 export class SignupsReportsDataSource extends ChartDataSource<
@@ -89,17 +90,19 @@ export class SignupsReportsDataSource extends ChartDataSource<
           mode: 'index',
           displayColors: false,
           callbacks: {
-            title: (tooltipItem, d) => {
+            title: (tooltipItem) => {
               const i = tooltipItem[0].datasetIndex
               const j = tooltipItem[0].index
               return headings[i][j] ? headings[i][j].date : ''
             },
-            label: (tooltipItem, d) => {
+            label: (tooltipItem) => {
               const i = tooltipItem.datasetIndex
               const j = tooltipItem.index
               const value = this.viewUtils.formatNumber(tooltipItem.yLabel)
               return headings[i][j] && value !== '0'
-                ? `${headings[i][j].title}: ${value}`
+                ? Sanitizer.sanitizeTranslationString(
+                    `${headings[i][j].title}: ${value}`
+                  )
                 : ''
             }
           }
@@ -189,9 +192,9 @@ export class SignupsReportsDataSource extends ChartDataSource<
     )
     data.map((s) => obj[s.title].push(s))
 
-    Object.keys(obj).map((e, i) => {
+    Object.keys(obj).forEach((e) => {
       const arr = obj[e]
-      dateArray.map((date) => {
+      dateArray.forEach((date) => {
         if (!find(arr, (o) => o.x === date)) {
           arr.push({ x: date, y: 0, title: '' })
         }

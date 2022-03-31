@@ -7,6 +7,7 @@ import { ChartData, ChartDataSource } from '@app/shared/model'
 import { TranslationsObject, ViewUtils } from '@app/shared/utils'
 import { PatientCountRequest, PatientCountSegment } from '@coachcare/sdk'
 import { ReportsDatabase } from './reports.database'
+import { Sanitizer } from '@coachcare/common/shared'
 
 export class EnrollmentReportsDataSource extends ChartDataSource<
   PatientCountSegment,
@@ -68,17 +69,19 @@ export class EnrollmentReportsDataSource extends ChartDataSource<
         tooltips: {
           mode: 'index',
           callbacks: {
-            title: (tooltipItem, d) => {
+            title: (tooltipItem) => {
               const i = tooltipItem[0].datasetIndex
               const j = tooltipItem[0].index
               return headings[i][j] ? headings[i][j].date : ''
             },
-            label: (tooltipItem, d) => {
+            label: (tooltipItem) => {
               const i = tooltipItem.datasetIndex
               const j = tooltipItem.index
               const value = this.viewUtils.formatNumber(tooltipItem.yLabel)
               return headings[i][j].title
-                ? `${headings[i][j].title}: ${value}`
+                ? Sanitizer.sanitizeTranslationString(
+                    `${headings[i][j].title}: ${value}`
+                  )
                 : null
             }
           }
@@ -174,7 +177,7 @@ export class EnrollmentReportsDataSource extends ChartDataSource<
 
     data.map((s) => obj[s.title].push(s))
 
-    keys(obj).map((e, i) => {
+    keys(obj).map((e) => {
       const arr = obj[e]
       dateArray.map((date) => {
         if (!find(arr, (o) => o.x === date)) {

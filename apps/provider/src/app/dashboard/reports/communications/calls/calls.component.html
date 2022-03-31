@@ -1,4 +1,4 @@
-<p data-cy="callLogClinicNotice" [innerHTML]="'REPORTS.COMMS_CALLS_DESCRIPTION' | translate:{clinic: clinic}"></p>
+<p data-cy="callLogClinicNotice" [innerHTML]="'REPORTS.COMMS_CALLS_DESCRIPTION' | translate:{clinic: clinic} | ccrSanitize"></p>
 
 <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
     <div fxFlex>
