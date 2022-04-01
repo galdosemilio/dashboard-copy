@@ -1,3 +1,16 @@
+# [1.77.0](https://github.com/coachcare/dashboard/compare/v1.76.0...v1.77.0) (2022-04-01)
+
+
+### Bug Fixes
+
+* added sanitization to chart labels [FRON-2718] ([43192d7](https://github.com/coachcare/dashboard/commit/43192d75d94f44b2d884bdd56c631adb7ea69d48))
+* adjusted cypress tests [FRON-2702] ([86ac4a1](https://github.com/coachcare/dashboard/commit/86ac4a1d734b088d2e66be042b0a1771b62fa140))
+
+
+### Features
+
+* add account link directive for open profile [FRON-2692] ([adb9f4d](https://github.com/coachcare/dashboard/commit/adb9f4de140cd60a9facc82008717301826661ac))
+
 # [1.76.0](https://github.com/coachcare/dashboard/compare/v1.75.2...v1.76.0) (2022-03-29)
 
 
