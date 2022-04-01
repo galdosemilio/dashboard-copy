@@ -152,7 +152,7 @@ export class MeasurementTableComponent implements OnDestroy, OnInit {
   }
 
   showMeasurementsModal(row) {
-    if (this.sections[this.section].allowDetail) {
+    if (this.sections[this.section]?.allowDetail) {
       this.dialog
         .open(MeasurementDetailDialog, {
           data: {
@@ -175,7 +175,7 @@ export class MeasurementTableComponent implements OnDestroy, OnInit {
   private refreshColumns(columns: string[]) {
     this._columns = [
       ...columns,
-      ...(this.sections[this.section].allowDetail ? this.appendedColumns : [])
+      ...(this.sections[this.section]?.allowDetail ? this.appendedColumns : [])
     ]
   }
 }

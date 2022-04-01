@@ -1,43 +1,18 @@
 import { Injectable } from '@angular/core'
-import {
-  Food,
-  MeasurementActivity,
-  MeasurementBody,
-  MeasurementSleep
-} from '@coachcare/sdk'
-import { MeasurementCriteria, MeasurementSummaryData } from '@app/service'
-import {
-  ActivitySummaryValues,
-  BodySummaryValues,
-  CcrDatabase,
-  FoodSummaryValues,
-  SleepSummaryValues
-} from '@app/shared'
+import { Food, MeasurementBody } from '@coachcare/sdk'
+import { MeasurementCriteria } from '@app/service'
+import { CcrDatabase, FoodSummaryValues } from '@app/shared'
 import {
   Entity,
-  FetchActivityRequest,
-  FetchActivityResponse,
-  FetchActivitySummaryRequest,
-  FetchActivitySummaryResponse,
   FetchBodyMeasurementRequest,
   FetchBodyMeasurementResponse,
-  FetchBodySummaryResponse,
   FetchSummaryRequest as FetchFoodSummaryRequest,
-  FetchSleepMeasurementRequest,
-  FetchSleepMeasurementResponse,
-  FetchSleepMeasurementSummaryRequest,
-  FetchSleepMeasurementSummaryResponse,
   SummaryDataResponse as FoodSummaryDataResponseSegment
 } from '@coachcare/sdk'
 
 @Injectable()
 export class MeasurementDatabase extends CcrDatabase {
-  constructor(
-    private activity: MeasurementActivity,
-    private body: MeasurementBody,
-    private sleep: MeasurementSleep,
-    private food: Food
-  ) {
+  constructor(private body: MeasurementBody, private food: Food) {
     super()
   }
 
@@ -45,49 +20,10 @@ export class MeasurementDatabase extends CcrDatabase {
     return this.body.deleteBodyMeasurement(args.id)
   }
 
-  fetchActivity(args: FetchActivityRequest): Promise<FetchActivityResponse[]> {
-    // TODO can implement pagination storing a cache and comparing the last request
-    const request: FetchActivityRequest = {
-      account: args.account,
-      startDate: args.startDate,
-      endDate: args.endDate,
-      max: args.max ? args.max : undefined,
-      direction: args.direction ? args.direction : undefined
-    }
-
-    return this.activity.fetchActivity(request)
-  }
-
-  fetchActivitySummary(args: any): Promise<FetchActivitySummaryResponse> {
-    const request: FetchActivitySummaryRequest = {
-      account: args.account,
-      unit: args.unit,
-      start: args.startDate,
-      end: args.endDate ? args.endDate : undefined,
-      limit: args.max ? args.max : undefined
-    }
-
-    return this.activity.fetchSummary(request)
-  }
-
   fetchBodyMeasurement(
     args: FetchBodyMeasurementRequest
   ): Promise<FetchBodyMeasurementResponse> {
     return this.body.fetchBodyMeasurement(args)
-  }
-
-  fetchBodySummary(args: any): Promise<FetchBodySummaryResponse> {
-    const request: any = {
-      account: args.account,
-      data: args.data,
-      unit: args.unit,
-      startDate: args.startDate,
-      endDate: args.endDate ? args.endDate : undefined,
-      max: args.max ? args.max : undefined,
-      aggregation: args.aggregation || 'mostRecent'
-    }
-
-    return this.body.fetchSummary(request)
   }
 
   fetchFoodSummary(args): Promise<FoodSummaryDataResponseSegment[]> {
@@ -102,52 +38,14 @@ export class MeasurementDatabase extends CcrDatabase {
     return this.food.fetchSummary(request)
   }
 
-  fetchSleep(
-    args: FetchSleepMeasurementRequest
-  ): Promise<FetchSleepMeasurementResponse[]> {
-    // TODO can implement pagination storing a cache and comparing the last request
-    const request: FetchSleepMeasurementRequest = {
-      account: args.account,
-      startDate: args.startDate,
-      endDate: args.endDate
-    }
-
-    return this.sleep.fetchSleep(request)
-  }
-
-  fetchSleepSummary(
-    args: FetchSleepMeasurementSummaryRequest
-  ): Promise<FetchSleepMeasurementSummaryResponse> {
-    const request: FetchSleepMeasurementSummaryRequest = {
-      account: args.account,
-      data: args.data,
-      unit: args.unit,
-      startDate: args.startDate,
-      endDate: args.endDate ? args.endDate : undefined,
-      max: args.max ? args.max : undefined
-    }
-
-    return this.sleep.fetchSummary(request)
-  }
-
   fetchAllSummary(args: MeasurementCriteria): Promise<any> {
     // discriminate the required data by api
     const apis = {
-      fetchFoodSummary: [], // result[0] check on datasource
-      fetchActivitySummary: [],
-      fetchBodySummary: [],
-      fetchSleepSummary: []
+      fetchFoodSummary: [] // result[0] check on datasource
     }
     args.data.forEach((data) => {
-      data = this.resolveQuery(data)
       if (FoodSummaryValues.includes(data)) {
         apis.fetchFoodSummary.push(data)
-      } else if (ActivitySummaryValues.includes(data)) {
-        apis.fetchActivitySummary.push(data)
-      } else if (BodySummaryValues.includes(data)) {
-        apis.fetchBodySummary.push(data)
-      } else if (SleepSummaryValues.includes(data)) {
-        apis.fetchSleepSummary.push(data)
       }
     })
 
@@ -162,12 +60,6 @@ export class MeasurementDatabase extends CcrDatabase {
       }
     })
     return Promise.all(promises)
-  }
-
-  resolveQuery(measurement): MeasurementSummaryData {
-    // fields that depends of others
-    // query a different field than the specified one
-    return measurement.toString() === 'leanMass' ? 'bodyFat' : measurement
   }
 
   resolveResult(measurement) {

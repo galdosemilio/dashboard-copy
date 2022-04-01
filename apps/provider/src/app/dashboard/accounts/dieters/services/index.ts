@@ -17,9 +17,7 @@ export * from './hydration/hydration.datasource'
 export * from './levl/levl.database'
 export * from './levl/levl.datasource'
 
-export * from './measurement/activity.datasource'
 export * from './measurement/body.measurement.datasource'
-export * from './measurement/body.summary.datasource'
 export * from './measurement/measurement.database'
 export * from './measurement/measurement.datasource'
 

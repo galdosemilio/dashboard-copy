@@ -13,9 +13,8 @@ export class MeasurementTabsComponent implements OnInit {
   @Input() section = ''
 
   @Output()
-  onSelect: EventEmitter<
-    ExtendedMeasurementLabelEntry | string
-  > = new EventEmitter<ExtendedMeasurementLabelEntry | string>()
+  onSelect: EventEmitter<ExtendedMeasurementLabelEntry | string> =
+    new EventEmitter<ExtendedMeasurementLabelEntry | string>()
 
   public hiddenMeasurementTabs = []
   public measurementLabels: ExtendedMeasurementLabelEntry[] = []
@@ -33,6 +32,11 @@ export class MeasurementTabsComponent implements OnInit {
   private async fetchMeasurementLabels(): Promise<void> {
     const labels = await this.measurementLabel.fetchMeasurementLabels()
     this.measurementLabels = labels
+
+    if (this.section) {
+      this.onSelectTab(this.section)
+      return
+    }
 
     if (!this.measurementLabels.length) {
       if (!this.hiddenMeasurementTabs.includes('food')) {

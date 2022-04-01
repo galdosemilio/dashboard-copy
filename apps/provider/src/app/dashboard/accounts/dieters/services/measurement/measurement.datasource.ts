@@ -206,122 +206,62 @@ export class MeasurementDataSource extends ChartDataSource<
     return from(
       new Promise<APISummaryResponse[]>(async (resolve, reject) => {
         try {
-          let response
-          if (!criteria.useNewEndpoint) {
-            response = await this.database.fetchAllSummary({
-              ...criteria,
-              startDate: moment(criteria.startDate)
-                .startOf('day')
-                .format('YYYY-MM-DD'),
-              endDate: moment(criteria.endDate)
-                .endOf('day')
-                .format('YYYY-MM-DD')
+          if (criteria.useNewEndpoint) {
+            resolve([{ data: [], summary: {} }])
+          }
+
+          const response = await this.database.fetchAllSummary({
+            ...criteria,
+            startDate: moment(criteria.startDate)
+              .startOf('day')
+              .format('YYYY-MM-DD'),
+            endDate: moment(criteria.endDate).endOf('day').format('YYYY-MM-DD')
+          })
+
+          const mergedData = []
+
+          response.forEach((element) => {
+            const array = element.data || element
+            array.forEach((data, index) => {
+              data.date = moment(data.date, 'YYYY-MM-DD').toISOString()
+              mergedData[index] = { ...data, ...mergedData[index] }
             })
+          })
 
-            const mergedData = []
+          const parsedResponse = response.map((element) => {
+            if (element.data) {
+              element.data = mergedData
+            } else {
+              element = mergedData
+            }
 
-            response.forEach((element) => {
-              const array = element.data || element
-              array.forEach((data, index) => {
-                data.date = moment(data.date, 'YYYY-MM-DD').toISOString()
-                mergedData[index] = { ...data, ...mergedData[index] }
-              })
-            })
+            return element
+          })
 
-            response.forEach((element) => {
-              element.data
-                ? (element.data = mergedData)
-                : (element = mergedData)
-            })
-
-            const cleanResponse = response.map((summary) => {
-              if (summary.data) {
-                return {
+          const cleanResponse = parsedResponse.map((summary) =>
+            summary.data
+              ? {
                   summary: summary.summary,
                   data: summary.data.map(
                     (element) =>
                       new BodyMeasurement(element, {
-                        measurementPreference: this.context.user
-                          .measurementPreference,
+                        measurementPreference:
+                          this.context.user.measurementPreference,
                         timeframe: this.criteria.timeframe
                       })
                   )
                 }
-              } else {
-                return summary.map(
+              : summary.map(
                   (element) =>
                     new BodyMeasurement(element, {
-                      measurementPreference: this.context.user
-                        .measurementPreference,
+                      measurementPreference:
+                        this.context.user.measurementPreference,
                       timeframe: this.criteria.timeframe
                     })
                 )
-              }
-            })
-
-            return resolve(cleanResponse)
-          }
-
-          response = await this.database.fetchBodyMeasurement({
-            account: criteria.account,
-            recordedAt:
-              criteria.startDate && criteria.endDate
-                ? {
-                    start: moment(criteria.startDate)
-                      .startOf('day')
-                      .toISOString(),
-                    end: moment(criteria.endDate).endOf('day').toISOString()
-                  }
-                : undefined,
-            limit: criteria.limit || 'all',
-            offset: criteria.offset || 0,
-            includes: criteria.data.map((data) => ({
-              property: data,
-              positiveOnly: false
-            }))
-          })
-
-          this.total = response.pagination.next
-            ? response.pagination.next + 1
-            : this.criteria.offset + response.data.length
-
-          this.hasTooMuchForSingleDay = false
-
-          let result: BodyMeasurement[] = []
-          const cleanMeasurements = response.data.map(
-            (element) =>
-              new BodyMeasurement(element, {
-                measurementPreference: this.context.user.measurementPreference
-              })
           )
 
-          const preprocessedMeasurements: BodyMeasurement[][] = this.preprocessMeasurements(
-            cleanMeasurements
-          )
-
-          result = this.criteria.aggregation
-            ? this.criteria.aggregation.type === 'highest' ||
-              this.criteria.aggregation.type === 'lowest'
-              ? this.processAsHighestOrLowest(
-                  preprocessedMeasurements,
-                  this.criteria.aggregation.type,
-                  this.criteria.aggregation.property
-                )
-              : this.processAll(preprocessedMeasurements)
-            : this.processAll(preprocessedMeasurements)
-
-          if (
-            criteria.inferLastEntry &&
-            result[result.length - 1] &&
-            !result[result.length - 1][this.measurement]
-          ) {
-            result[result.length - 1] = this.inferLastMeasurement(
-              response.data.slice(),
-              response.data[0]
-            )
-          }
-
-          resolve([{ data: result, summary: {} }])
+          return resolve(cleanResponse)
         } catch (error) {
           reject(error)
         }

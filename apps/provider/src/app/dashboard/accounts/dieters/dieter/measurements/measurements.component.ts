@@ -74,111 +74,9 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   // controls with their config
   aggregation: MeasurementAggregation
   allowListView = false
-  components = ['composition', 'circumference', 'energy', 'food', 'vitals']
-  component = 'composition'
+  components = ['food']
+  component = ''
   sections: MeasurementConfig = {
-    composition: {
-      data: [
-        {
-          code: 'weight',
-          displayName: _('MEASUREMENT.WEIGHT')
-        },
-        {
-          code: 'bmi',
-          displayName: _('MEASUREMENT.BMI')
-        },
-        {
-          code: 'visceralFatPercentage',
-          displayName: _('MEASUREMENT.VISCERAL_FAT')
-        },
-        {
-          code: 'visceralFatTanita',
-          displayName: _('MEASUREMENT.VISCERAL_FAT_TANITA.VISCERAL_FAT_TANITA')
-        },
-        {
-          code: 'visceralAdiposeTissue',
-          displayName: _('MEASUREMENT.VISCERAL_ADIP_TISSUE')
-        },
-        { code: 'bodyFat', displayName: _('MEASUREMENT.BODY_FAT') },
-        { code: 'waterPercentage', displayName: _('MEASUREMENT.HYDRATION') },
-        {
-          code: 'extracellularWaterToBodyWater',
-          displayName: _('MEASUREMENT.EXTRACELLULAR_WATER'),
-          dynamic: true
-        },
-        {
-          code: 'totalBodyWater',
-          displayName: _('MEASUREMENT.TOTAL_BODY_WATER'),
-          dynamic: true
-        },
-        {
-          code: 'visceralFatMass',
-          displayName: _('MEASUREMENT.VISCERAL_FAT_MASS'),
-          dynamic: true
-        },
-        {
-          code: 'ketones',
-          displayName: _('MEASUREMENT.KETONES')
-        }
-      ],
-      columns: [
-        'date',
-        'device',
-        'weight',
-        'bmi',
-        'bodyFat',
-        'leanMass',
-        'visceralFatPercentage',
-        'visceralFatTanita',
-        'visceralAdiposeTissue',
-        'waterPercentage',
-        'extracellularWaterToBodyWater',
-        'totalBodyWater',
-        'visceralFatMass',
-        'ketones'
-      ],
-      allowDetail: true,
-      useNewEndpoint: true
-    },
-    circumference: {
-      data: [
-        {
-          code: 'waist',
-          displayName: _('MEASUREMENT.WAIST')
-        },
-        { code: 'arm', displayName: _('MEASUREMENT.ARM') },
-        { code: 'chest', displayName: _('MEASUREMENT.CHEST') },
-        { code: 'hip', displayName: _('MEASUREMENT.HIP') },
-        { code: 'thigh', displayName: _('MEASUREMENT.THIGH') },
-        { code: 'neck', displayName: _('MEASUREMENT.NECK') },
-        { code: 'thorax', displayName: _('MEASUREMENT.THORAX') }
-      ],
-      columns: [
-        'date',
-        'device',
-        'waist',
-        'arm',
-        'chest',
-        'hip',
-        'thigh',
-        'neck',
-        'thorax'
-      ],
-      allowDetail: true,
-      useNewEndpoint: true
-    },
-    energy: {
-      data: [
-        {
-          code: 'steps',
-          displayName: _('MEASUREMENT.STEPS')
-        },
-        { code: 'total', displayName: _('MEASUREMENT.SLEEP') },
-        { code: 'sleepQuality', displayName: _('MEASUREMENT.RESTFULNESS') },
-        { code: 'distance', displayName: _('MEASUREMENT.DISTANCE') }
-      ],
-      columns: ['date', 'steps', 'distance', 'total', 'sleepQuality']
-    },
     food: {
       data: [
         { code: 'calories', displayName: _('MEASUREMENT.CALORIES') },
@@ -187,68 +85,6 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
         { code: 'totalFat', displayName: _('BOARD.FAT') }
       ],
       columns: ['date', 'calories', 'protein', 'carbohydrates', 'totalFat']
-    },
-    vitals: {
-      data: [
-        {
-          code: 'totalCholesterol',
-          displayName: _('MEASUREMENT.TOTAL_CHOLESTEROL')
-        },
-        { code: 'ldl', displayName: _('MEASUREMENT.LDL') },
-        { code: 'hdl', displayName: _('MEASUREMENT.HDL') },
-        { code: 'vldl', displayName: _('MEASUREMENT.VLDL') },
-        { code: 'triglycerides', displayName: _('MEASUREMENT.TRIGLYCERIDES') },
-        {
-          code: 'fastingGlucose',
-          displayName: _('MEASUREMENT.FASTING_GLUCOSE')
-        },
-        { code: 'hba1c', displayName: _('MEASUREMENT.HBA1C') },
-        { code: 'insulin', displayName: '' },
-        { code: 'hsCrp', displayName: _('MEASUREMENT.HSCRP') },
-        { code: 'temperature', displayName: _('MEASUREMENT.TEMPERATURE') },
-        {
-          code: 'respirationRate',
-          displayName: _('MEASUREMENT.RESPIRATION_RATE'),
-          limitEntries: true
-        },
-        {
-          code: 'heartRate',
-          displayName: _('MEASUREMENT.HEART_RATE'),
-          limitEntries: true
-        },
-        {
-          code: 'bloodPressureSystolic',
-          displayName: _('MEASUREMENT.BLOOD_PRESSURE_SYSTOLIC')
-        },
-        {
-          code: 'bloodPressureDiastolic',
-          displayName: _('MEASUREMENT.BLOOD_PRESSURE_DIASTOLIC')
-        },
-        {
-          code: 'bloodOxygenLevel',
-          displayName: _('MEASUREMENT.BLOOD_OXYGEN')
-        },
-        { code: 'insulin', displayName: _('MEASUREMENT.INSULIN') }
-      ],
-      columns: [
-        'date',
-        'device',
-        'heartRate',
-        'bloodPressureString',
-        'totalCholesterol',
-        'ldl',
-        'hdl',
-        'vldl',
-        'triglycerides',
-        'fastingGlucose',
-        'hba1c',
-        'hsCrp',
-        'temperature',
-        'respirationRate',
-        'insulin'
-      ],
-      allowDetail: true,
-      useNewEndpoint: true
     }
   }
   public selectedLabel: MeasurementLabelEntry
@@ -297,10 +133,11 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       this.store
     )
     this.source.result$.pipe(untilDestroyed(this)).subscribe((values) => {
-      const allColumns = this.sections[this.section].columns.slice()
-      const dynamicColumns = this.sections[this.section].data
-        .filter((element) => element.dynamic)
-        .map((element) => element.code)
+      const allColumns = this.sections[this.section]?.columns.slice() ?? []
+      const dynamicColumns =
+        this.sections[this.section]?.data
+          .filter((element) => element.dynamic)
+          .map((element) => element.code) ?? []
       let filteredColumns = []
 
       filteredColumns = allColumns.filter(
@@ -363,7 +200,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
           max: 'all',
           omitEmptyDays:
             this.view === 'chart' || this.view === 'list' ? true : false,
-          limitEntries: this.sections[this.section].data.some(
+          limitEntries: this.sections[this.section]?.data.some(
             (type) => type.limitEntries
           )
         }
@@ -383,10 +220,10 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params: ParamMap) => {
       // TODO add timeframe, date
       const s = params.get('s') as string
-      this.section = this.components.indexOf(s) >= 0 ? s : this.component
+      this.section = this.components.includes(s) ? s : this.component
 
       const v = params.get('v')
-      this.view = ['table', 'chart', 'list'].indexOf(v) >= 0 ? v : this.view
+      this.view = ['table', 'chart', 'list'].includes(v) ? v : this.view
 
       const d = params.get('d')
 
@@ -540,18 +377,19 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
   }
 
   public onSelectTab(label: ExtendedMeasurementLabelEntry | string): void {
+    const labelEntry: ExtendedMeasurementLabelEntry =
+      label as ExtendedMeasurementLabelEntry
+
     if (label === 'energy' || label === 'food') {
+      this.section = label
       this.useNewTable = false
       return
     }
 
-    this.useNewTable = true
-
-    const labelEntry: ExtendedMeasurementLabelEntry =
-      label as ExtendedMeasurementLabelEntry
-
     this.selectedLabel = labelEntry
     this.section = labelEntry.routeLink
+
+    this.useNewTable = true
   }
 
   refreshData(): void {
