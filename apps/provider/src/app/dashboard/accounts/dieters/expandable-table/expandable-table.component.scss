@@ -152,6 +152,14 @@ app-dieters-expandable-table {
         }
       }
     }
+
+    @media #{$medium-and-down} {
+      .column-firstname,
+      .column-lastname {
+        left: inherit !important;
+        z-index: 1 !important;
+      }
+    }
   }
 
   thead {
@@ -167,6 +175,14 @@ app-dieters-expandable-table {
     .column-actions {
       background-color: mat-color($ccr-background, header);
       z-index: 1;
+    }
+
+    @media #{$medium-and-down} {
+      .column-firstname,
+      .column-lastname {
+        left: inherit !important;
+        z-index: 2 !important;
+      }
     }
   }
 
