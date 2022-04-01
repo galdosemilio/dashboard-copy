@@ -102,7 +102,7 @@ describe('Clinics -> Clinic -> Measurements', function () {
       .should('contain', 'Hydration')
       .should('contain', 'oz')
       .should('contain', '1')
-      .should('contain', '1183')
+      .should('contain', '1353')
   })
 
   it('Properly displays the Clinic Measurement Information on Inheritance', function () {

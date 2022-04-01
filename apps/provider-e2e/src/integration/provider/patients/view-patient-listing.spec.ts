@@ -92,6 +92,7 @@ describe('Patient Listing', function () {
     cy.get('thead').find('td').as('headerColumns')
 
     cy.wait('@patientListingGetRequest')
+    cy.wait('@patientListingGetRequest')
 
     for (const sortableHeader of sortableHeaders) {
       cy.get('@headerColumns')
@@ -117,6 +118,7 @@ describe('Patient Listing', function () {
     cy.get('table', { timeout: 10000 })
     cy.tick(10000)
 
+    cy.wait('@patientListingGetRequest')
     cy.wait('@patientListingGetRequest')
 
     cy.get('ccr-page-size-selector').find('select').select('50')

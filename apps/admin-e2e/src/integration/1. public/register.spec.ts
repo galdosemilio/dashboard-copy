@@ -1,7 +1,6 @@
 import { standardSetup } from '../../support'
 
 function assessDisplayedPlan(args: {
-  billingTerm: string
   name: string
   price: number | string
   extras?: string[]
@@ -16,18 +15,6 @@ function assessDisplayedPlan(args: {
 
   cy.get('mat-option').contains(args.name).click({ force: true })
 
-  cy.get('ccr-register-clinic-default-clinic-packages')
-    .find('.mat-select-trigger')
-    .eq(1)
-    .trigger('click', { force: true })
-    .wait(500)
-
-  cy.tick(1000)
-
-  cy.get('mat-option').contains(args.billingTerm).click({ force: true })
-
-  cy.tick(1000)
-
   cy.get(`div.item-list`).contains(args.price)
 }
 
@@ -35,15 +22,10 @@ function assessSelectedPlan(plan: string) {
   cy.get('mat-select').contains(plan)
 }
 
-function assessSelectedTerm(term: string): void {
-  cy.get('mat-select').should('contain', term)
-}
-
 function completeClinicPlans(
   args: {
     plan: string
-    billingTerm: string
-  } = { plan: 'Virtual Health', billingTerm: 'Monthly' }
+  } = { plan: 'Virtual Health' }
 ) {
   cy.get('ccr-register-clinic-default-clinic-packages')
     .find('.mat-select-trigger')
@@ -54,18 +36,6 @@ function completeClinicPlans(
   cy.tick(1000)
 
   cy.get('mat-option').contains(args.plan).click({ force: true })
-
-  cy.tick(1000)
-
-  cy.get('ccr-register-clinic-default-clinic-packages')
-    .find('.mat-select-trigger')
-    .eq(1)
-    .trigger('click', { force: true })
-    .wait(500)
-
-  cy.tick(1000)
-
-  cy.get('mat-option').contains(args.billingTerm).click({ force: true })
 
   cy.tick(1000)
 
@@ -160,25 +130,6 @@ const plans = [
   }
 ]
 
-const billingTerms = [
-  {
-    param: 'monthly',
-    selected: 'Monthly'
-  },
-  {
-    param: 'annually',
-    selected: 'Annual'
-  },
-  {
-    param: 'annual',
-    selected: 'Annual'
-  },
-  {
-    param: '',
-    selected: 'Annual'
-  }
-]
-
 describe('Register New Clinic', function () {
   beforeEach(() => {
     cy.clearCookies()
@@ -206,7 +157,6 @@ describe('Register New Clinic', function () {
       expect(request.body.organization.address.country).to.contain('US')
 
       if (request.body.plan) {
-        expect(request.body.plan.billingPeriod).to.equal('monthly')
         expect(request.body.plan.type).to.equal('virtualHealth')
         expect(request.body.organization.parentOrganizationId).to.equal('7412')
       }
@@ -225,23 +175,6 @@ describe('Register New Clinic', function () {
       cy.wait(1000)
 
       assessSelectedPlan(plan.title)
-    })
-  }
-
-  for (const term of billingTerms) {
-    it(`Allows billing term to be set from the URL: "${term.param}"`, function () {
-      cy.visit(
-        term.param !== ''
-          ? `/register/clinic?billingTerm=${term.param}`
-          : `/register/clinic`
-      )
-
-      completeStep1()
-
-      cy.tick(1000)
-      cy.wait(1000)
-
-      assessSelectedTerm(term.selected)
     })
   }
 
@@ -407,37 +340,31 @@ describe('Register New Clinic', function () {
     cy.wait(1000)
 
     assessDisplayedPlan({
-      billingTerm: 'Monthly',
       name: 'Virtual Health',
       price: 425
     })
 
     assessDisplayedPlan({
-      billingTerm: 'Annual',
       name: 'Virtual Health',
       price: 350
     })
 
     assessDisplayedPlan({
-      billingTerm: 'Monthly',
       name: 'Remote Monitoring',
       price: 'Request Order Form for pricing and terms'
     })
 
     assessDisplayedPlan({
-      billingTerm: 'Annual',
       name: 'Remote Monitoring',
       price: 'Request Order Form for pricing and terms'
     })
 
     assessDisplayedPlan({
-      billingTerm: 'Monthly',
       name: 'Health System',
       price: 'Request Order Form for pricing and terms'
     })
 
     assessDisplayedPlan({
-      billingTerm: 'Annual',
       name: 'Health System',
       price: 'Request Order Form for pricing and terms'
     })
