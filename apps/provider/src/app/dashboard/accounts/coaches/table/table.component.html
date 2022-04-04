@@ -1,6 +1,6 @@
 <ccr-datasource-overlay class="ccr-table" [source]="source" [emptyMsg]="'BOARD.COACHES_EMPTY_LIST' | translate">
 
-  <mat-table [dataSource]="source" matSort (matSortChange)="onSort($event)" [class.notClickable]="!showActions" data-cy="coach-table">
+  <mat-table class="table-card-mobile" [dataSource]="source" matSort (matSortChange)="onSort($event)" [class.notClickable]="!showActions" data-cy="coach-table">
 
     <ng-container cdkColumnDef="id">
       <mat-header-cell *cdkHeaderCellDef>{{'GLOBAL.ID' | translate}}</mat-header-cell>

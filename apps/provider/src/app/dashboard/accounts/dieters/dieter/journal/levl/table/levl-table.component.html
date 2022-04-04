@@ -1,6 +1,6 @@
 <ccr-datasource-overlay class="ccr-table ccr-table-stats" [source]="source">
 
-  <mat-table [dataSource]="source" matSort>
+  <mat-table class="table-card-mobile" [dataSource]="source" matSort>
 
     <ng-container cdkColumnDef="date">
       <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>

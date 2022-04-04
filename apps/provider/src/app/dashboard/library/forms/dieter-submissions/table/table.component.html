@@ -1,5 +1,5 @@
 <div class="ccr-edit-table">
-    <mat-table [dataSource]="source">
+    <mat-table class="table-card-mobile" [dataSource]="source">
         <ng-container cdkColumnDef="formName">
             <mat-header-cell *cdkHeaderCellDef>{{ 'LIBRARY.FORMS.FORM_NAME' | translate }}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">

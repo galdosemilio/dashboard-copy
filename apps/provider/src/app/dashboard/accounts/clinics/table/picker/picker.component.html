@@ -22,7 +22,7 @@
 
 <div class="ccr-table" [class.ccr-loading]="isLoading || source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
 
-  <mat-table #table matSort [dataSource]="clinics" [hidden]="isLoading">
+  <mat-table class="table-card-mobile" #table matSort [dataSource]="clinics" [hidden]="isLoading">
 
     <ng-container cdkColumnDef="actions">
       <mat-header-cell *cdkHeaderCellDef> {{'BOARD.PICK' | translate}} </mat-header-cell>

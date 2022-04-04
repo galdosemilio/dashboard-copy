@@ -13,7 +13,7 @@
 
 
     <div class="ccr-table">
-        <mat-table [dataSource]="source" class="ccr-edit-table">
+        <mat-table class="table-card-mobile" [dataSource]="source" class="ccr-edit-table">
             <ng-container cdkColumnDef="createdAt">
                 <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
                 <mat-cell *cdkCellDef="let row" class="clickable">

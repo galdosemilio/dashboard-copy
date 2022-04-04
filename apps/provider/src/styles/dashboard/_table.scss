@@ -80,11 +80,14 @@ mat-header-row {
   .mat-table {
     min-width: 100%;
 
-    .mat-header-row {
-      @media #{$small-and-down} {
-        display: none;
+    &.table-card-mobile {
+      .mat-header-row {
+        @media #{$small-and-down} {
+          display: none;
+        }
       }
     }
+
     .mat-header-row th:first-of-type {
       background: mat-color($ccr-background, header);
     }
