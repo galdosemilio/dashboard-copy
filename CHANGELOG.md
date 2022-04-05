@@ -1,3 +1,11 @@
+## [1.77.1](https://github.com/coachcare/dashboard/compare/v1.77.0...v1.77.1) (2022-04-05)
+
+
+### Bug Fixes
+
+* added mn to the list of whitelisted states [FRON-2720] ([3a8346f](https://github.com/coachcare/dashboard/commit/3a8346f75e329721317334941960139332ae7710))
+* adjusted min-max limit calculation [FRON-2705] ([8014b89](https://github.com/coachcare/dashboard/commit/8014b896a6bf76cc24758b82e3049f6d29fc17af))
+
 # [1.77.0](https://github.com/coachcare/dashboard/compare/v1.76.0...v1.77.0) (2022-04-01)
 
 
