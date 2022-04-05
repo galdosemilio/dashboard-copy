@@ -1,11 +1,11 @@
 <ccr-datasource-overlay class="ccr-table ccr-expand-table ccr-table-stats" [source]="source">
     <div class="header-row">
-      <div>{{ 'GLOBAL.DATE' | translate }}</div>
-      <div>{{ 'BOARD.CALORIES' | translate }}</div>
-      <div>{{ 'BOARD.PROTEIN' | translate }}</div>
-      <div>{{ 'BOARD.CARB' | translate }}</div>
-      <div>{{ 'BOARD.FAT' | translate }}</div>
-      <div>{{ 'BOARD.OTHERS' | translate }}</div>
+      <div class="header-date">{{ 'GLOBAL.DATE' | translate }}</div>
+      <div class="header-calories">{{ 'BOARD.CALORIES' | translate }}</div>
+      <div class="header-protein">{{ 'BOARD.PROTEIN' | translate }}</div>
+      <div class="header-carb">{{ 'BOARD.CARB' | translate }}</div>
+      <div class="header-fat">{{ 'BOARD.FAT' | translate }}</div>
+      <div class="header-others">{{ 'BOARD.OTHERS' | translate }}</div>
     </div>
     <div *ngFor="let row of rows" class="table-container" [ngClass]="{
       'newday-row': row.level === 0,
@@ -14,17 +14,17 @@
       'hidden': row.level > 0 && row.isHidden,
       'shaded': row.shading === 1
     }">
-      <div *ngIf="row.level === 0" (click)="toggleRow(row)" class="bold" [ngClass]="{'clickable': row.hasMeals}">
+      <div *ngIf="row.level === 0" (click)="toggleRow(row)" class="column-date bold" [ngClass]="{'clickable': row.hasMeals}">
         <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && !row.isExpanded">keyboard_arrow_down</mat-icon>
         <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && row.isExpanded">keyboard_arrow_up</mat-icon>
         {{ row.consumedDate | amDateFormat:'dddd, MMM D' }}
       </div>
-      <div *ngIf="row.level === 1 && !row.consumedDate" (click)="toggleRow(row)" class="bold" [ngClass]="{'clickable': row.hasMeals}">
+      <div *ngIf="row.level === 1 && !row.consumedDate" (click)="toggleRow(row)" class="column-date bold" [ngClass]="{'clickable': row.hasMeals}">
         <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && !row.isExpanded">keyboard_arrow_down</mat-icon>
         <mat-icon aria-hidden="false" aria-label="home icon" *ngIf="row.hasMeals && row.isExpanded">keyboard_arrow_up</mat-icon>
         {{ row.type | translate }}
       </div>
-      <div *ngIf="row.level === 2">
+      <div *ngIf="row.level === 2" class="column-date" >
         <div *ngIf="row.image?.thumbnail" (click)="onOpenThumbnail(row)" class="meal-image-thumbnail" [ngClass]="{'clickable' : row.image.thumbnail !== 'assets/image-placeholder.png'}">
           <img [src]="row.image.thumbnail">
         </div>
@@ -62,12 +62,12 @@
           </small>
         </div>
       </div>
-      <div class="calories">{{ row.calories ? (row.calories | number) : '-' }}</div>
-      <div class="protein">
+      <div class="column-calories">{{ row.calories ? (row.calories | number) : '-' }}</div>
+      <div class="column-protein">
         {{ row.protein ? ((row.protein / 1000).toFixed(0) | number) : '-' }}
         <small *ngIf="row.protein">{{ 'UNIT.G' | translate }}</small>
       </div>
-      <div class="carb">
+      <div class="column-carb">
         <div>
           {{ row.carbohydrate ? ((row.carbohydrate / 1000).toFixed(0) | number) : '-' }}
           <small *ngIf="row.carbohydrate">{{ 'UNIT.G' | translate }}</small>
@@ -96,7 +96,7 @@
           </span>
         </div>
       </div>
-      <div class="fat">
+      <div class="column-fat">
         <div>
           {{ row.totalFat ? ((row.totalFat / 1000).toFixed(0) | number) : '-' }}
           <small *ngIf="row.totalFat">{{ 'UNIT.G' | translate }}</small>
@@ -120,7 +120,7 @@
           </span>
         </div>
       </div>
-      <div class="others">
+      <div class="column-others">
         <div *ngIf="checkOthersContents(row); else empty">
           <span>
             {{ 'BOARD.CHOLESTEROL' | translate }} {{ row.cholesterol | number:'1.0-1' }}

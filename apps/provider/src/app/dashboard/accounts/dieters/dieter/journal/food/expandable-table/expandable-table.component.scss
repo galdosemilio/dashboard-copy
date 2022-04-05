@@ -23,6 +23,21 @@ app-dieter-journal-food-table {
       &.meal-row {
         display: flex;
 
+        .header-date {
+          min-width: 150px;
+        }
+
+        .header-calories,
+        .header-protein {
+          min-width: 80px;
+        }
+
+        .header-carb,
+        .header-fat,
+        .header-others {
+          min-width: 150px;
+        }
+
         .bold {
           font-weight: bold;
         }
@@ -99,9 +114,19 @@ app-dieter-journal-food-table {
         }
       }
 
-      .carb,
-      .fat,
-      .others {
+      .column-date {
+        min-width: 150px;
+      }
+
+      .column-calories,
+      .column-protein {
+        min-width: 80px;
+      }
+
+      .column-carb,
+      .column-fat,
+      .column-others {
+        min-width: 150px;
         > div {
           margin-right: 5px;
         }

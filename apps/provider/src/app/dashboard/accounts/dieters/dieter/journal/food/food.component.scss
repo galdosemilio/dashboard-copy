@@ -13,19 +13,32 @@ $circle-limit: 125px;
 }
 
 .food-circle-list {
-  div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 20px;
+
+  .food-circle {
     align-items: center;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
     width: 100%;
+
+    &.gray-box {
+      justify-content: center;
+      height: 129px;
+      background-color: mat-color($ccr-background, app-bar);
+    }
   }
 
-  .gray-box {
-    justify-content: center;
-    height: 129px;
-    background-color: mat-color($ccr-background, app-bar);
+  @media #{$medium-and-down} {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+    .gray-box {
+      grid-column: 1 / 3;
+    }
   }
 
   .subtext {
