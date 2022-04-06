@@ -34,7 +34,7 @@ table {
   .column {
     &-date {
       text-align: left;
-      left: 15px;
+      left: 38px;
       min-width: 120px;
       max-width: 120px;
       width: 125px;
@@ -42,8 +42,9 @@ table {
 
     &-toggle {
       line-height: 12px;
-      max-width: 20px;
-      min-width: 20px;
+      max-width: 38px;
+      min-width: 38px;
+      box-sizing: border-box;
       left: 0;
       padding: 0;
       padding-left: 10px;
