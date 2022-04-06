@@ -59,7 +59,6 @@
   min-height: 42px;
   padding: 3px 0;
   @media #{$small-and-down} {
-    background: mat-color($ccr-background, tools);
     margin: 0;
     @include horizontal-padding-left(15px);
   }
