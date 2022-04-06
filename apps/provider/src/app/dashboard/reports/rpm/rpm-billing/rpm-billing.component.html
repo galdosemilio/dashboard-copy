@@ -100,255 +100,215 @@
     </div>
 </div>
 
-<ccr-datasource-overlay class="ccr-table" [source]="source">
+<ccr-datasource-overlay
+[emptyMsg]="'BOARD.RPM_ENTRIES_EMPTY_LIST' | translate"
+[source]="source"
+class="ccr-table ccr-expand-table ccr-table-stats">
 
-    <mat-table
-    class="table-card-mobile"
-    [dataSource]="source"
-    matSort
-    matSortActive="anyCodeLastEligibleAt">
-        <ng-container cdkColumnDef="index" [sticky]="true">
-            <mat-header-cell *cdkHeaderCellDef>&nbsp;&nbsp;&nbsp;#</mat-header-cell>
-            <mat-cell *cdkCellDef="let row; let i = index" fxFlex.xs="grow">
-                &nbsp;&nbsp;&nbsp;{{ i + source.criteria.offset + 1 }}
-            </mat-cell>
-        </ng-container>
+<div class="ccr-expandable-table-container">
+<div class="ccr-expandable-table">
+  <table ccrTableSort>
+    <caption hidden>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</caption>
+    <thead [class.sticky-header]="isDesktop">
+        <th class="id-cell" [class.sticky-column]="isDesktop">
+            #
+        </th>
 
-
-        <ng-container cdkColumnDef="firstName" [sticky]="true">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'BOARD.FIRST_NAME' | translate }}</mat-header-cell>
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <th class="first-name-cell" [class.sticky-column]="isDesktop">
+            <ccr-table-sort-header property="firstName">
                 <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
-                <span (click)="openPatientProfile(row)" class="patient-link">{{ row.account.firstName }}</span>
-            </mat-cell>
-        </ng-container>
+            </ccr-table-sort-header>
+        </th>
 
-        <ng-container cdkColumnDef="lastName" [sticky]="true">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ 'BOARD.LAST_NAME' | translate }}</mat-header-cell>
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <th class="last-name-cell" [class.sticky-column]="isDesktop">
+            <ccr-table-sort-header property="lastName">
                 <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
-                <span (click)="openPatientProfile(row)" class="patient-link">{{ row.account.lastName }}</span>
-            </mat-cell>
-        </ng-container>
+            </ccr-table-sort-header>
+        </th>
 
-        <ng-container cdkColumnDef="deviceSupplied" [sticky]="false">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'RPM.DEVICE_TYPE' | translate }}</mat-header-cell>
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
-                <span>{{ 'RPM.DEVICE_TYPE' | translate }}</span>
-                <span>{{ row.device?.displayName | translate }}</span>
-            </mat-cell>
-        </ng-container>
+        <th>
+            {{ 'BOARD.DOB' | translate }}
+        </th>
 
-        <ng-container cdkColumnDef="dob">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.DOB' | translate }}</mat-header-cell>
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
-                <span>{{ 'BOARD.DOB' | translate }}</span>
-                {{ row.account.dateOfBirth | amDateFormat:'MM/DD/YYYY' }}
-            </mat-cell>
-        </ng-container>
+        <th class="device-type-cell">
+            {{ 'RPM.DEVICE_TYPE' | translate }}
+        </th>
 
-        <ng-container cdkColumnDef="status">
-            <mat-header-cell *cdkHeaderCellDef fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                <span class="status-filter-label">{{ 'BOARD.STATUS' | translate }}</span>
-
+        <th class="status-cell">
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+                <p>{{ 'BOARD.STATUS' | translate }}</p>
                 <select (change)="onStatusFilterChange($event)">
                     <option value="all">{{ 'LIBRARY.FORMS.ALL' | translate }}</option>
                     <option selected value="active">{{ 'RPM.STATE.ACTIVE' | translate }}</option>
                     <option value="inactive">{{ 'RPM.STATE.INACTIVE' | translate }}</option>
                 </select>
-            </mat-header-cell>
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxFlex.xs="grow">
-                <span>{{ 'BOARD.STATUS' | translate }}</span>
-                <mat-icon *ngIf="row.rpm.isActive" class="active">
-                    check_circle
-                </mat-icon>
+            </div>
+        </th>
 
-                <mat-icon *ngIf="!row.rpm.isActive">
-                    cancel
-                </mat-icon>
-            </mat-cell>
-        </ng-container>
+        <th class="activation-date-cell">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <ccr-table-sort-header property="startedAt">
+                    <span>{{ 'RPM.ACTIVATION_DATE' | translate }}</span>
+                </ccr-table-sort-header>
+            </div>
+        </th>
 
-        <ng-container cdkColumnDef="activationDate">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header="startedAt" [class.dataset-empty]="!source.result?.length" class="first" fxLayoutAlign="center center">
-                <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                    <small fxLayout="column" fxLayoutAlign="start center">
-                        <span class="all-codes-label">{{ 'RPM.ACTIVATION_DATE' | translate }}</span>
-                    </small>
+        <th *ngFor="let billingEntry of source.result?.[0].billing; let billingIndex = index" class="code-cell">
+            <div style="height: 100%" fxLayout="column" fxLayoutAlign="stretch stretch">
+                <p class="code-title">{{ billingEntry.code === '99458' ? '99458 x1' : billingEntry.code }}</p>
+                <div fxFlex fxLayout="row" fxLayoutAlign="stretch center">
+                    <p class="code-subtitle" fxFlex>{{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}</p>
+                    <p class="code-subtitle" fxFlex>{{ 'RPM.NEXT_CLAIM' | translate }}</p>
                 </div>
-            </mat-header-cell>
-            <mat-cell
-            *cdkCellDef="let row; let rowIndex = index"
-            [class.last]="rowIndex === source.result.length - 1"
-            class="date-highlighted"
-            fxLayoutAlign="center center"
-            fxFlex.xs="grow">
-                <span class="all-codes-label">{{ 'RPM.ACTIVATION_DATE' | translate }}</span>
+            </div>
+        </th>
 
+        <th class="code-cell">
+            <div style="height: 100%" fxLayout="column" fxLayoutAlign="stretch stretch">
+                <p class="code-title">99458 x2</p>
+                <div fxLayout="row" fxLayoutAlign="stretch center">
+                    <p class="code-subtitle" fxFlex>{{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}</p>
+                    <p class="code-subtitle" fxFlex>{{ 'RPM.NEXT_CLAIM' | translate }}</p>
+                </div>
+            </div>
+        </th>
+    </thead>
+
+    <tbody>
+        <tr
+        *ngFor="let row of source.result; let i = index"
+        [ngClass]="{
+            'row-even': i % 2 === 0,
+            'row-odd': i % 2 === 1,
+            'last-row': i === source.result.length - 1
+          }">
+            <td class="id-cell" [class.sticky-column]="isDesktop">
+                {{ i + source.criteria.offset + 1 }}
+            </td>
+
+            <td class="first-name-cell" [class.sticky-column]="isDesktop">
+                <span [accountType]="'3'" [ccrAccountLink]="row.account.id">{{ row.account.firstName }}</span>
+            </td>
+
+            <td class="last-name-cell" [class.sticky-column]="isDesktop">
+                <span [accountType]="'3'" [ccrAccountLink]="row.account.id">{{ row.account.lastName }}</span>
+            </td>
+
+            <td>
+                {{ row.account.dateOfBirth | amDateFormat:'MM/DD/YYYY' }}
+            </td>
+
+            <td class="device-type-cell">
+                {{ row.device?.displayName | translate }}
+            </td>
+
+            <td>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-icon *ngIf="row.rpm.isActive; else inactiveIcon" class="active">
+                        check_circle
+                    </mat-icon>
+                </div>
+            </td>
+
+            <td class="activation-date-cell highlighted-cell">
                 {{ row.rpm.isActive ? (row.rpm.startedAt | amDateFormat:'MM/DD/YYYY' ) : '' }}
-            </mat-cell>
-        </ng-container>
+            </td>
 
-        <ng-container cdkColumnDef="codes">
-            <mat-header-cell *cdkHeaderCellDef>
-            <div *ngIf="source.result && source.result.length">
-            <table class="code-header-table" *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index">
-                <tr class="code-header-item">
-                    <td colSpan="2" style="text-transform: none;">{{ billingEntry.code === '99458' ? '99458 x1' : billingEntry.code }}</td>
-                </tr>
-                <tr>
-                    <td class="latest-eligible">
-                        {{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}
-                    </td>
+            <td *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index" class="code-cell">
+                <div fxLayout="row" fxLayoutAlign="stretch center">
+                    <div class="claim-date-subcell" fxFlex fxLayout="row" fxLayoutAlign="center center">
+                        <span *ngIf="row.rpm.plan; else empty" class="highlighted-cell">
+                            {{ row.billing[billingIndex].eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
+                        </span>
+                        <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
+                    </div>
+                    <div *ngIf="row.rpm.isActive; else empty" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                        <ng-container *ngFor="let codeRequirement of row.billing[billingIndex].eligibility.next?.relatedCodeRequirementsNotMet">
+                            <ccr-rpm-dependency-icon
+                            [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: codeRequirement}"
+                            [size]="40"
+                            [text]="codeRequirement">
+                            </ccr-rpm-dependency-icon>
+                        </ng-container>
 
-                    <td class="next-claim next-claim-header">
-                        {{ 'RPM.NEXT_CLAIM' | translate }}
-                    </td>
-                </tr>
-            </table>
-            <table class="code-header-table">
-                <tr class="code-header-item last">
-                    <td colSpan="2" style="text-transform: none;">99458 x2</td>
-                </tr>
-                <tr>
-                    <td class="latest-eligible">
-                        {{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}
-                    </td>
+                        <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-next-claim">{{ 'GLOBAL.NA' | translate }}</span>
 
-                    <td class="next-claim next-claim-header last">
-                        {{ 'RPM.NEXT_CLAIM' | translate }}
-                    </td>
-                </tr>
-            </table>
-            </div>
-            </mat-header-cell>
-            <mat-cell
-            *cdkCellDef="let row; let rowIndex = index"
-            fxLayoutAlign=" center"
-            fxFlex.xs="grow">
-            <span>{{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}</span>
+                        <ccr-rpm-calendar-icon
+                        *ngIf="row.billing[billingIndex].remainingDays"
+                        [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].remainingDays}"
+                        [size]="40"
+                        text="{{ row.billing[billingIndex].remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
+                        </ccr-rpm-calendar-icon>
 
-            <div *ngIf="source.result && source.result.length">
-            <table
-            *ngFor="let billingEntry of source.result[0].billing; let billingIndex = index" class="code-header-table"
-            [class.last]="rowIndex === source.result.length - 1">
-                <tr>
-                <td class="latest-eligible date-highlighted">
-                    <span *ngIf="row.rpm.plan">
-                        {{ row.billing[billingIndex].eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
-                    </span>
-                    <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
-                </td>
+                        <ccr-rpm-clock-icon
+                        *ngIf="(billingEntry.code !== '99458' || row.billing[billingIndex].eligibility.next?.alreadyEligibleCount < 1) && row.billing[billingIndex].eligibility.next?.monitoring?.remaining"
+                        [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.monitoring.remaining}"
+                        [size]="40"
+                        text="{{ row.billing[billingIndex].eligibility.next?.monitoring.remaining }}{{ row.billing[billingIndex].eligibility.next?.monitoring.units | translate }}">
+                        </ccr-rpm-clock-icon>
 
-                <td *ngIf="!row.rpm.isActive"
-                class="next-claim"
-                fxLayout="row"
-                fxLayoutAlign="center center"
-                fxLayoutGap="10px">&nbsp;</td>
+                        <ccr-rpm-scale-icon
+                        *ngIf="row.billing[billingIndex].eligibility.next?.transmissions?.remaining"
+                        [matTooltip]="'RPM.SCALE_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.transmissions.remaining}"
+                        [size]="40"
+                        text="{{ row.billing[billingIndex].eligibility.next?.transmissions.remaining }}">
+                        </ccr-rpm-scale-icon>
 
-                <td
-                *ngIf="row.rpm.isActive"
-                class="next-claim"
-                fxLayout="row"
-                fxLayoutAlign="center center"
-                fxLayoutGap="10px">
-                &nbsp;
-                <span *ngFor="let codeRequirement of row.billing[billingIndex].eligibility.next?.relatedCodeRequirementsNotMet">
-                    <ccr-rpm-dependency-icon
-                    [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: codeRequirement}"
-                    [size]="40"
-                    [text]="codeRequirement">
-                    </ccr-rpm-dependency-icon>
-                </span>
+                        <ccr-rpm-chat-icon
+                        *ngIf="row.billing[billingIndex].eligibility.next?.liveInteraction?.remaining"
+                        [matTooltip]="'RPM.CHAT_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.liveInteraction.remaining}"
+                        [size]="40"
+                        text="{{ row.billing[billingIndex].eligibility.next?.liveInteraction.remaining }}">
+                        </ccr-rpm-chat-icon>
+                    </div>
+                </div>
+            </td>
 
-                <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-next-claim">{{ 'GLOBAL.NA' | translate }}</span>
+            <td class="code-cell">
+                <div fxLayout="row" fxLayoutAlign="stretch center">
+                    <div class="claim-date-subcell" fxFlex fxLayout="row" fxLayoutAlign="center center">
+                        <span *ngIf="row.rpm.plan && row.billing[3].eligibility.last?.count > 1" class="highlighted-cell">
+                            {{ row.billing[3].eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
+                        </span>
+                        <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
+                    </div>
 
-                <ccr-rpm-calendar-icon
-                *ngIf="row.billing[billingIndex].remainingDays"
-                [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].remainingDays}"
-                [size]="40"
-                text="{{ row.billing[billingIndex].remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
-                </ccr-rpm-calendar-icon>
+                    <div *ngIf="row.rpm.isActive; else empty" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                        <ng-container *ngIf="(row.billing[3].eligibility.next && row.billing[3].eligibility.next.alreadyEligibleCount < 1) || row.billing[3].hasCodeRequirements || row.billing[3].remainingDays">
+                            <ccr-rpm-dependency-icon
+                            [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: '99458 x1'}"
+                            [size]="40"
+                            text="99458 x1">
+                            </ccr-rpm-dependency-icon>
+                        </ng-container>
 
-                <ccr-rpm-clock-icon
-                *ngIf="(billingEntry.code !== '99458' || row.billing[billingIndex].eligibility.next?.alreadyEligibleCount < 1) && row.billing[billingIndex].eligibility.next?.monitoring?.remaining"
-                [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.monitoring.remaining}"
-                [size]="40"
-                text="{{ row.billing[billingIndex].eligibility.next?.monitoring.remaining }}{{ row.billing[billingIndex].eligibility.next?.monitoring.units | translate }}">
-                </ccr-rpm-clock-icon>
+                        <ccr-rpm-calendar-icon
+                        *ngIf="row.billing[3].remainingDays"
+                        [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: row.billing[3].remainingDays}"
+                        [size]="40"
+                        text="{{ row.billing[3].remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
+                        </ccr-rpm-calendar-icon>
 
-                <ccr-rpm-scale-icon
-                *ngIf="row.billing[billingIndex].eligibility.next?.transmissions?.remaining"
-                [matTooltip]="'RPM.SCALE_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.transmissions.remaining}"
-                [size]="40"
-                text="{{ row.billing[billingIndex].eligibility.next?.transmissions.remaining }}">
-                </ccr-rpm-scale-icon>
-
-                <ccr-rpm-chat-icon
-                *ngIf="row.billing[billingIndex].eligibility.next?.liveInteraction?.remaining"
-                [matTooltip]="'RPM.CHAT_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex].eligibility.next?.liveInteraction.remaining}"
-                [size]="40"
-                text="{{ row.billing[billingIndex].eligibility.next?.liveInteraction.remaining }}">
-                </ccr-rpm-chat-icon>
-                </td>
-                </tr>
-            </table>
-
-            <table [class.last]="rowIndex === source.result.length - 1" class="code-header-table">
-                <tr>
-                <td class="latest-eligible date-highlighted">
-                    <span *ngIf="row.rpm.plan && row.billing[3].eligibility.last?.count > 1">
-                        {{ row.billing[3].eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
-                    </span>
-                    <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
-                </td>
-
-                <td *ngIf="!row.rpm.isActive"
-                class="next-claim"
-                fxLayout="row"
-                fxLayoutAlign="center center"
-                fxLayoutGap="10px">&nbsp;</td>
-
-                <td
-                *ngIf="row.rpm.isActive"
-                class="next-claim last"
-                fxLayout="row"
-                fxLayoutAlign="center center"
-                fxLayoutGap="10px">
-                &nbsp;
-                <span *ngIf="(row.billing[3].eligibility.next && row.billing[3].eligibility.next.alreadyEligibleCount < 1) || row.billing[3].hasCodeRequirements || row.billing[3].remainingDays">
-                    <ccr-rpm-dependency-icon
-                    [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: '99458 x1'}"
-                    [size]="40"
-                    text="99458 x1">
-                    </ccr-rpm-dependency-icon>
-                </span>
-
-                <ccr-rpm-calendar-icon
-                *ngIf="row.billing[3].remainingDays"
-                [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: row.billing[3].remainingDays}"
-                [size]="40"
-                text="{{ row.billing[3].remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
-                </ccr-rpm-calendar-icon>
-
-                <ccr-rpm-clock-icon
-                *ngIf="row.billing[3].eligibility.next?.monitoring?.remaining"
-                [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[3].eligibility.next?.monitoring.remaining}"
-                [size]="40"
-                text="{{ row.billing[3].eligibility.next?.alreadyEligibleCount >= 1 ? row.billing[3].eligibility.next?.monitoring.remaining : 20 }}{{ row.billing[3].eligibility.next?.monitoring.units | translate }}">
-                </ccr-rpm-clock-icon>
-                </td>
-                </tr>
-            </table>
-            </div>
-            </mat-cell>
-        </ng-container>
-
-        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
-        <mat-row fxLayoutWrap
-        *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
-        [ngClass]="{ 'row-even': even, 'row-odd': odd }"
-        ></mat-row>
-    </mat-table>
-
+                        <ccr-rpm-clock-icon
+                        *ngIf="row.billing[3].eligibility.next?.monitoring?.remaining"
+                        [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[3].eligibility.next?.monitoring.remaining}"
+                        [size]="40"
+                        text="{{ row.billing[3].eligibility.next?.alreadyEligibleCount >= 1 ? row.billing[3].eligibility.next?.monitoring.remaining : 20 }}{{ row.billing[3].eligibility.next?.monitoring.units | translate }}">
+                        </ccr-rpm-clock-icon>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+</div>
 </ccr-datasource-overlay>
+
+<ng-template #inactiveIcon>
+    <mat-icon>
+        cancel
+    </mat-icon>
+</ng-template>
+
+<ng-template #empty>&nbsp;</ng-template>

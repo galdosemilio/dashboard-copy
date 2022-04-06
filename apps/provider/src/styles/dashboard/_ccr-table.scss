@@ -55,6 +55,7 @@
 
   thead,
   tbody {
+    & > th,
     & > tr > th,
     & > tr > td {
       font-size: 14px;

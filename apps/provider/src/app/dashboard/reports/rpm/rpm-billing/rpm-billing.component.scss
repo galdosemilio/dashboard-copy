@@ -17,14 +17,6 @@ app-reports-rpm-billing {
     box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   }
 
-  mat-table {
-    min-width: 2865px !important;
-
-    @media #{xlarge-and-up} {
-      min-width: 2865px !important;
-    }
-  }
-
   .top-level-accout-label {
     margin-bottom: 0 !important;
   }
@@ -33,203 +25,21 @@ app-reports-rpm-billing {
     margin: 5px 0;
   }
 
-  .all-codes-label {
-    font-size: 12px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    margin-top: 2px;
-
-    @media (min-width: $medium-screen) {
-      font-size: 14px;
-    }
-  }
-
-  .ccr-hint {
-    margin: 0 auto;
-  }
-
-  .ccr-table {
-    overflow-x: scroll;
+  .ccr-expandable-table {
     overflow-y: hidden;
     padding-bottom: 15px;
-    height: 100%;
-    width: 100%;
-
-    &.ccr-empty {
-      select {
-        z-index: 3 !important;
-      }
-    }
-
-    mat-header-cell:first-child {
-      padding-left: 0 !important;
-    }
-
-    .cdk-column-firstName {
-      max-width: 150px;
-      min-width: 150px;
-      z-index: 999;
-    }
-
-    .cdk-column-lastName {
-      max-width: 150px;
-      min-width: 150px;
-      z-index: 999;
-    }
-
-    .cdk-column-codes {
-      max-width: 2000px;
-      min-width: 2000px;
-
-      @media #{$xlarge-and-up} {
-        max-width: 2000px !important;
-        min-width: 2000px !important;
-      }
-    }
-
-    .cdk-column-dob {
-      max-width: 80px;
-      min-width: 80px;
-    }
-
-    .cdk-column-deviceSupplied {
-      max-width: 200px;
-      min-width: 200px;
-    }
-
-    .cdk-column-index {
-      max-width: 40px;
-      min-width: 40px;
-    }
-
-    .cdk-column-status {
-      max-width: 100px;
-      min-width: 100px;
-
-      mat-icon {
-        cursor: default;
-      }
-    }
-
-    .cdk-column-activationDate {
-      border-left: 1px solid mat-color($ccr-foreground, secondary-text);
-      margin-right: 0;
-      max-width: 175px;
-      min-width: 175px;
-
-      &.first {
-        border-top: 1px solid mat-color($ccr-foreground, secondary-text);
-      }
-
-      &.last {
-        border-bottom: 1px solid mat-color($ccr-foreground, secondary-text);
-      }
-    }
-  }
-
-  .code-header-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    display: inline-table;
-    table-layout: fixed !important;
-
-    &.last {
-      border-bottom: 1px solid mat-color($ccr-foreground, secondary-text);
-    }
-  }
-
-  .code-header-table,
-  td,
-  th {
-    .code-header-item {
-      border: 1px solid mat-color($ccr-foreground, secondary-text);
-      border-right: unset;
-      max-width: 350px !important;
-      width: 350px !important;
-
-      & > td {
-        border-top: 1px solid mat-color($ccr-foreground, secondary-text);
-        border-bottom: 1px solid mat-color($ccr-foreground, secondary-text);
-        line-height: 20px;
-        text-align: center;
-      }
-
-      &.last {
-        border-right: 1px solid mat-color($ccr-foreground, secondary-text);
-        border-bottom: 1px solid mat-color($ccr-foreground, secondary-text) !important;
-      }
-    }
-
-    .latest-eligible {
-      border-left: 1px solid mat-color($ccr-foreground, secondary-text);
-      border-right: 1px solid mat-color($ccr-foreground, secondary-text);
-      font-size: 12px;
-      max-width: 150px;
-      min-height: 45px;
-      overflow: hidden;
-      text-align: center;
-      width: 150px;
-
-      &.last {
-        border-bottom: 1px solid mat-color($ccr-foreground, secondary-text);
-      }
-    }
-
-    .next-claim {
-      font-size: 12px;
-      max-width: 235px;
-      min-height: 53px;
-      overflow: hidden;
-      padding: 5px;
-      text-align: center;
-      width: 235px;
-
-      &.last {
-        border-right: 1px solid mat-color($ccr-foreground, secondary-text);
-      }
-
-      &.next-claim-header {
-        padding: 5px 0;
-
-        &.last {
-          width: 234px;
-          max-width: 234px;
-        }
-      }
-    }
-  }
-
-  .count {
-    line-height: 0;
-  }
-
-  .dataset-empty {
-    border-right: 1px solid mat-color($ccr-foreground, secondary-text);
-  }
-
-  .date-highlighted {
-    color: $date-highlight-color;
-    font-size: 14px !important;
-  }
-
-  .ccr-table .mat-table .mat-header-row .mat-sort-header-button {
-    min-height: 20px !important;
   }
 
   .clinic-label {
     margin-top: 5px;
   }
 
+  .count {
+    line-height: 0;
+  }
+
   .minus-margin-bottom .mat-form-field-wrapper {
     bottom: -17px;
-  }
-
-  .no-highlight {
-    color: var(--text) !important;
-  }
-
-  .no-next-claim {
-    font-size: 14px;
   }
 
   .org-search-container {
@@ -241,65 +51,168 @@ app-reports-rpm-billing {
     margin-right: 10px;
   }
 
-  mat-header-cell.cdk-column-firstName,
-  mat-header-cell.cdk-column-lastName,
-  mat-header-cell.cdk-column-index {
-    background: mat-color($ccr-background, header);
-    background-blend-mode: color;
-  }
-
-  .row-odd mat-cell.cdk-column-firstName,
-  .row-odd mat-cell.cdk-column-lastName,
-  .row-odd mat-cell.cdk-column-index {
-    background: mat-color($ccr-background, odd);
-    background-blend-mode: color;
-  }
-
-  .row-even mat-cell.cdk-column-firstName,
-  .row-even mat-cell.cdk-column-lastName,
-  .row-even mat-cell.cdk-column-index {
-    background: mat-color($ccr-background, even);
-    background-blend-mode: color;
-  }
-
-  .row-odd mat-cell.cdk-column-anyCodeLastEligibleAt,
-  .row-odd mat-cell.cdk-column-anyCodeLastEligibleAt {
-    background: mix(mat-color($ccr-background, odd), mat-color($ccr-base, 50));
-  }
-
-  .row-even mat-cell.cdk-column-anyCodeLastEligibleAt,
-  .row-even mat-cell.cdk-column-anyCodeLastEligibleAt {
-    background: mix(mat-color($ccr-background, even), mat-color($ccr-base, 50));
-  }
-
-  .status-filter-label {
-    font-size: 12px;
-  }
-
   .title-icon {
     line-height: 36px;
   }
 
-  mat-cell {
-    min-height: 53px !important;
-  }
-
-  mat-header-cell {
-    height: 46px;
-    min-height: 46px;
-  }
-
-  mat-header-row {
-    border-bottom: none !important;
-  }
-
-  mat-row {
-    border-top: none !important;
-    border-bottom: none !important;
-    padding-left: 0 !important;
-  }
-
   mat-icon.active {
     color: var(--primary);
+  }
+
+  table {
+    td {
+      line-height: 50px !important;
+
+      &.activation-date-cell,
+      &.code-cell {
+        border-left: 1px solid mat-color($ccr-foreground, secondary-text);
+        border-right: 1px solid mat-color($ccr-foreground, secondary-text);
+      }
+    }
+
+    th {
+      font-size: 14px;
+      font-weight: 500;
+
+      .code {
+        &-subtitle {
+          font-size: 12px;
+          line-height: 24px;
+          height: 100%;
+          margin: 0;
+          text-align: center;
+
+          &:first-of-type {
+            border-right: 1px solid mat-color($ccr-foreground, secondary-text);
+          }
+        }
+
+        &-title {
+          border-bottom: 1px solid mat-color($ccr-foreground, secondary-text);
+          height: 24px;
+          line-height: 24px;
+          margin: 0;
+          text-align: center;
+          text-transform: lowercase;
+        }
+      }
+
+      &.activation-date-cell,
+      &.code-cell {
+        border-left: 1px solid mat-color($ccr-foreground, secondary-text);
+        border-right: 1px solid mat-color($ccr-foreground, secondary-text);
+        border-top: 1px solid mat-color($ccr-foreground, secondary-text);
+      }
+
+      &.code-cell {
+        padding: 0;
+      }
+    }
+
+    tr {
+      &.last-row {
+        td {
+          &.activation-date-cell,
+          &.code-cell {
+            border-bottom: 1px solid mat-color($ccr-foreground, secondary-text);
+          }
+        }
+      }
+
+      &.row-even {
+        .id-cell,
+        .first-name-cell,
+        .last-name-cell {
+          background: mat-color($ccr-background, even);
+        }
+      }
+
+      &.row-odd {
+        .id-cell,
+        .first-name-cell,
+        .last-name-cell {
+          background: mat-color($ccr-background, odd);
+        }
+      }
+
+      & > td.first-name-cell,
+      & > td.last-name-cell {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .activation-date-cell {
+      min-width: 175px;
+      text-align: center !important;
+    }
+
+    .code-cell {
+      min-width: 330px;
+
+      ccr-rpm-dependency-icon,
+      ccr-rpm-calendar-icon,
+      ccr-rpm-clock-icon,
+      ccr-rpm-chat-icon,
+      ccr-rpm-scale-icon {
+        height: 42px;
+      }
+
+      ccr-rpm-dependency-icon {
+        padding-top: 5px;
+      }
+    }
+
+    .claim-date-subcell {
+      border-right: 1px solid mat-color($ccr-foreground, secondary-text);
+      height: 50px;
+    }
+
+    .device-type-cell {
+      min-width: 225px;
+    }
+
+    .highlighted-cell {
+      color: $date-highlight-color;
+      font-size: 14px;
+    }
+
+    .id-cell {
+      left: 0;
+      max-width: 25px;
+      min-width: 25px;
+      text-align: center !important;
+    }
+
+    .first-name-cell {
+      left: 53px;
+      max-width: 150px;
+      min-width: 150px;
+    }
+
+    .last-name-cell {
+      left: 231px;
+      max-width: 150px;
+      min-width: 150px;
+    }
+
+    .first-name-cell,
+    .last-name-cell {
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .status-cell {
+      font-size: 12px;
+
+      p {
+        margin: 0;
+        text-align: center;
+      }
+    }
   }
 }

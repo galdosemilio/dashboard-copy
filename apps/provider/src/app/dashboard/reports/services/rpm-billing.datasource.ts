@@ -1,5 +1,4 @@
 import { CcrPaginatorComponent } from '@coachcare/common/components'
-import { MatSort } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { TableDataSource } from '@app/shared/model'
 import {
@@ -21,8 +20,7 @@ export class RPMBillingDataSource extends TableDataSource<
   constructor(
     protected database: ReportsDatabase,
     protected notify: NotifierService,
-    private paginator?: CcrPaginatorComponent,
-    private sort?: MatSort
+    private paginator?: CcrPaginatorComponent
   ) {
     super()
 
@@ -31,19 +29,6 @@ export class RPMBillingDataSource extends TableDataSource<
       this.addOptional(this.paginator.page, () => ({
         limit: this.paginator.pageSize,
         offset: this.paginator.pageIndex * this.paginator.pageSize
-      }))
-    }
-
-    if (this.sort) {
-      this.addOptional(this.sort.sortChange, () => ({
-        sort: [
-          {
-            property:
-              (this.sort.active as 'anyCodeLastEligibleAt') ||
-              'anyCodeLastEligibleAt',
-            dir: this.sort.direction || 'asc'
-          }
-        ]
       }))
     }
   }

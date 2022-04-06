@@ -1,4 +1,6 @@
 import {
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -7,13 +9,11 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
-import { MatDialog, MatSort } from '@coachcare/material'
-import { Router } from '@angular/router'
+import { MatDialog } from '@coachcare/material'
 import { ClosePanel, OpenPanel } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
 import { WalkthroughService } from '@app/service/walkthrough'
 import {
-  AccountTypeId,
   FetchRPMBillingSummaryRequest,
   OrganizationEntity
 } from '@coachcare/sdk'
@@ -42,6 +42,8 @@ import {
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
 import { PromptDialog } from '@app/shared/dialogs'
 import { environment } from 'apps/provider/src/environments/environment'
+import { CcrTableSortDirective } from '@app/shared'
+import { DeviceDetectorService } from 'ngx-device-detector'
 
 @UntilDestroy()
 @Component({
@@ -50,10 +52,13 @@ import { environment } from 'apps/provider/src/environments/environment'
   styleUrls: ['./rpm-billing.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class RPMBillingComponent implements OnDestroy, OnInit {
+export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
-  @ViewChild(MatSort, { static: true }) sort: MatSort
+
+  @ViewChild(CcrTableSortDirective, { static: true })
+  sort: CcrTableSortDirective
+
   @ViewChild(CcrPageSizeSelectorComponent, { static: true })
   pageSizeSelectorComp: CcrPageSizeSelectorComponent
 
@@ -71,34 +76,46 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     asOf: moment().format('YYYY-MM-DD')
   }
   public csvSeparator = ','
+  public defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_RPM_BILLING
+  public isDesktop: boolean
   public isLoading: boolean
+  public isTopLevelAccount = false
+  public rows: RPMStateSummaryEntry[] = []
   public searchForm: FormGroup
   public selectedClinic?: OrganizationEntity
-  public statusFilterForm: FormGroup
   public source: RPMBillingDataSource
+  public statusFilterForm: FormGroup
   public totalCount: number
-  public isTopLevelAccount = false
 
   private refresh$: Subject<void> = new Subject<void>()
 
-  defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_RPM_BILLING
-
   constructor(
+    private cdr: ChangeDetectorRef,
     private context: ContextService,
     private database: ReportsDatabase,
+    private deviceDetector: DeviceDetectorService,
+    private dialog: MatDialog,
     private fb: FormBuilder,
-    private notify: NotifierService,
-    private router: Router,
+    private notifier: NotifierService,
     private store: Store<ReportsState>,
-    private walkthrough: WalkthroughService,
-    private dialog: MatDialog
-  ) {}
+    private walkthrough: WalkthroughService
+  ) {
+    this.sortHandler = this.sortHandler.bind(this)
+  }
 
   public ngOnDestroy(): void {
     this.store.dispatch(new OpenPanel())
+    this.source.unsetSorter()
+  }
+
+  public ngAfterViewInit(): void {
+    this.applyStorageSort()
+    this.cdr.detectChanges()
   }
 
   public ngOnInit(): void {
+    this.isDesktop = this.deviceDetector.isDesktop()
+
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       if (
         org.id === environment.coachcareOrgId ||
@@ -116,94 +133,21 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     this.store.dispatch(new ClosePanel())
     this.createStatusFilterForm()
 
-    this.sort.sortChange.pipe(untilDestroyed(this)).subscribe((res) => {
-      if (!res.direction) {
+    this.sort.sortChange.pipe(untilDestroyed(this)).subscribe(() => {
+      if (!this.sort.direction) {
         window.localStorage.removeItem(STORAGE_RPM_BILLING_SORT)
       } else {
         window.localStorage.setItem(
           STORAGE_RPM_BILLING_SORT,
-          JSON.stringify(res)
+          JSON.stringify({
+            active: this.sort.active,
+            direction: this.sort.direction
+          })
         )
       }
     })
 
-    const storageSort = JSON.parse(
-      window.localStorage.getItem(STORAGE_RPM_BILLING_SORT)
-    )
-
-    if (storageSort) {
-      this.sort.sort({
-        id: storageSort.active,
-        start: storageSort.direction,
-        disableClear: false
-      })
-    } else {
-      this.sort.sort({
-        id: 'lastName',
-        start: 'asc',
-        disableClear: false
-      })
-    }
-
-    this.source = new RPMBillingDataSource(
-      this.database,
-      this.notify,
-      this.paginator,
-      this.sort
-    )
-    this.source.addDefault({ status: 'active' } as any)
-    this.source.addOptional(
-      this.statusFilterForm.controls.status.valueChanges.pipe(
-        debounceTime(100)
-      ),
-      () => ({
-        status: this.statusFilterForm.value.status || 'all'
-      })
-    )
-    this.source.addOptional(
-      this.searchForm.controls.query.valueChanges.pipe(debounceTime(500)),
-      () => ({ query: this.searchForm.value.query || undefined })
-    )
-    this.source.addOptional(this.refresh$, () => {
-      const selectedDate = moment(this.criteria.asOf)
-
-      return {
-        asOf: selectedDate.isSameOrAfter(moment(), 'day')
-          ? undefined
-          : selectedDate.endOf('day').toISOString(),
-
-        organization: this.selectedClinic?.id ?? undefined
-      }
-    })
-
-    this.pageSizeSelectorComp.onPageSizeChange
-      .pipe(untilDestroyed(this))
-      .subscribe((pageSize) => {
-        this.paginator.pageSize = pageSize ?? this.paginator.pageSize
-
-        if (this.paginator.pageIndex === 0) {
-          this.refresh$.next()
-          return
-        }
-
-        this.paginator.firstPage()
-      })
-
-    this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.totalCount = this.source.totalCount ?? 0
-    })
-
-    this.store
-      .pipe(untilDestroyed(this), select(criteriaSelector))
-      .subscribe((reportsCriteria: ReportsCriteria) => {
-        if (!isEmpty(reportsCriteria)) {
-          this.criteria.asOf = reportsCriteria.endDate
-          this.paginator.firstPage()
-          this.refresh$.next()
-        }
-      })
-
-    this.refresh$.next()
+    this.createDataSource()
   }
 
   public clearSearchForm(): void {
@@ -269,7 +213,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       )
 
       if (!res.length) {
-        return this.notify.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+        return this.notifier.error(_('notifier.ERROR.NOTHING_TO_EXPORT'))
       }
       const filename = `RPM_Billing_${moment(criteria.asOf).format(
         'MMM_YYYY'
@@ -454,7 +398,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       link.click()
       document.body.removeChild(link)
     } catch (error) {
-      this.notify.error(error)
+      this.notifier.error(error)
     } finally {
       this.isLoading = false
     }
@@ -476,7 +420,7 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
       link.click()
     } catch (error) {
       console.error(error)
-      this.notify.error(error)
+      this.notifier.error(error)
     } finally {
       this.isLoading = false
     }
@@ -501,13 +445,96 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     }
   }
 
-  public openPatientProfile(rpmStateEntry: RPMStateSummaryEntry): void {
-    void this.router.navigate([
-      this.context.getProfileRoute({
-        ...rpmStateEntry.account,
-        accountType: AccountTypeId.Client
+  private applyStorageSort(): void {
+    try {
+      const storageSort = JSON.parse(
+        window.localStorage.getItem(STORAGE_RPM_BILLING_SORT)
+      )
+
+      if (storageSort) {
+        this.sort.sort({
+          property: storageSort.active,
+          dir: storageSort.direction
+        })
+      } else {
+        this.sort.sort({
+          property: 'lastName',
+          dir: 'asc'
+        })
+      }
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private createDataSource(): void {
+    this.source = new RPMBillingDataSource(
+      this.database,
+      this.notifier,
+      this.paginator
+    )
+    this.source.addDefault({ status: 'active' })
+    this.source.addOptional(
+      this.statusFilterForm.controls.status.valueChanges.pipe(
+        debounceTime(200)
+      ),
+      () => ({
+        status: this.statusFilterForm.value.status || 'all'
       })
-    ])
+    )
+    this.source.addOptional(
+      this.searchForm.controls.query.valueChanges.pipe(debounceTime(500)),
+      () => ({ query: this.searchForm.value.query || undefined })
+    )
+    this.source.addOptional(this.refresh$.pipe(debounceTime(500)), () => {
+      const selectedDate = moment(this.criteria.asOf)
+
+      return {
+        asOf: selectedDate.isSameOrAfter(moment(), 'day')
+          ? undefined
+          : selectedDate.endOf('day').toISOString(),
+
+        organization: this.selectedClinic?.id ?? undefined
+      }
+    })
+
+    this.source.setSorter(this.sort, this.sortHandler)
+
+    this.pageSizeSelectorComp.onPageSizeChange
+      .pipe(debounceTime(300), untilDestroyed(this))
+      .subscribe((pageSize) => {
+        this.paginator.pageSize = pageSize ?? this.paginator.pageSize
+
+        if (this.paginator.pageIndex === 0) {
+          this.refresh$.next()
+          return
+        }
+
+        this.paginator.firstPage()
+      })
+
+    this.source.change$
+      .pipe(untilDestroyed(this))
+      .subscribe(() => (this.totalCount = this.source.totalCount ?? 0))
+
+    this.store
+      .pipe(untilDestroyed(this), select(criteriaSelector))
+      .subscribe((reportsCriteria: ReportsCriteria) => {
+        if (isEmpty(reportsCriteria)) {
+          return
+        }
+
+        this.criteria.asOf = reportsCriteria.endDate
+        this.paginator.firstPage()
+        this.refresh$.next()
+      })
+
+    this.source
+      .connect()
+      .pipe(untilDestroyed(this))
+      .subscribe((values) => {
+        this.rows = values
+      })
   }
 
   private createStatusFilterForm(): void {
@@ -656,5 +683,23 @@ export class RPMBillingComponent implements OnDestroy, OnInit {
     }
 
     return ''
+  }
+
+  private sortHandler(): Partial<FetchRPMBillingSummaryRequest> {
+    return {
+      sort: this.sort.direction
+        ? [
+            {
+              property: this.sort.active || 'firstName',
+              dir: this.sort.direction || 'asc'
+            }
+          ]
+        : [
+            {
+              property: 'firstName',
+              dir: 'asc'
+            }
+          ]
+    } as Partial<FetchRPMBillingSummaryRequest>
   }
 }
