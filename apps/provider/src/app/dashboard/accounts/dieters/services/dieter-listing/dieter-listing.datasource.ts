@@ -7,6 +7,7 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
 import {
   CountedPaginatedResponse,
   FetchPatientListingRequest,
+  MeasurementDataPointSingle,
   PatientListingItem
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
@@ -70,11 +71,19 @@ export class DieterListingDataSource extends TableDataSource<
     )[] = []
 
     response.data.forEach((item) => {
+      const dataPoints: MeasurementDataPointSingle[] =
+        this.criteria.type.reduce((array, current) => {
+          array[current] = item.dataPoints.find(
+            (entry) => entry.type.id === current
+          )
+          return array
+        }, [])
+
       const dieterListingItem = new DieterListingItem({
         ...item.account,
         phone: formatPhoneNumber(item.account.phone),
         weight: item.weight || undefined,
-        dataPoints: item.dataPoints,
+        dataPoints,
         level: 0
       })
       rows.push(dieterListingItem)

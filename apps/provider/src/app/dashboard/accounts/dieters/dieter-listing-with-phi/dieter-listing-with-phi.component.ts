@@ -23,13 +23,19 @@ import { _, PackageFilterComponent, unitConversion } from '@app/shared'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { debounceTime, delay, filter } from 'rxjs/operators'
+import { debounceTime, delay, filter, take } from 'rxjs/operators'
 import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { DieterListingItem } from './../models'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
-import { convertToReadableFormat, DataPointTypes } from '@coachcare/sdk'
+import {
+  convertToReadableFormat,
+  DataPointTypes,
+  NamedEntity
+} from '@coachcare/sdk'
 import { PackageFilter } from '@app/shared/components/package-filter'
+import { TranslateService } from '@ngx-translate/core'
+import { get } from 'lodash'
 
 @UntilDestroy()
 @Component({
@@ -60,13 +66,16 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
   defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_PATIENT_LISTING
   isPatientCreationEnabled = true
 
+  private extraColumns: NamedEntity[] = []
+
   constructor(
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private bus: EventsService,
     private notifier: NotifierService,
-    private database: DieterListingDatabase
+    private database: DieterListingDatabase,
+    private translate: TranslateService
   ) {}
 
   ngAfterViewInit(): void {
@@ -104,7 +113,12 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
     this.source.errorHandler = errorHandler
     this.source.addOptional(this.refresh$.pipe(debounceTime(300)), () => ({
       ...this.packageFilter,
-      pkg: this.packageFilter?.pkg.map((entry) => entry.id)
+      pkg: this.packageFilter?.pkg.map((entry) => entry.id),
+      type: [
+        DataPointTypes.BLOOD_PRESSURE_SYSTOLIC,
+        DataPointTypes.BLOOD_PRESSURE_DIASTOLIC,
+        ...this.extraColumns.map((entry) => entry.id)
+      ]
     }))
     this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
       this.totalCount = this.source.totalCount || 0
@@ -120,6 +134,11 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.clinic = org
+      this.extraColumns =
+        resolveConfig(
+          'PATIENT_LISTING.ADDITIONAL_LISTING_COLUMNS',
+          this.context.organization
+        ) ?? []
       this.source.resetPaginator()
       this.isPatientCreationEnabled =
         this.clinic?.permissions.admin &&
@@ -237,11 +256,21 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
         organization: this.context.organizationId
       }
 
+      const translations =
+        this.translate.translations[this.translate.currentLang]
+
       const rawPreference = this.context.user.measurementPreference
       const weightUnit = rawPreference === 'metric' ? 'kg' : 'lbs'
-      const res = await this.database.fetch(criteria)
 
-      if (!res.data.length) {
+      const temporalSource = new DieterListingDataSource(this.database)
+
+      temporalSource.addDefault(criteria)
+
+      const res = (
+        await temporalSource.connect().pipe(take(1)).toPromise()
+      ).filter((entry) => entry.level === 0)
+
+      if (!res.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
 
@@ -260,6 +289,10 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
         this.csvSeparator +
         'Email' +
         this.csvSeparator +
+        this.extraColumns
+          .map((entry) => get(translations, entry.name) ?? entry.name)
+          .join(this.csvSeparator) +
+        (this.extraColumns.length ? this.csvSeparator : '') +
         'Blood Pressure' +
         this.csvSeparator +
         'Start Weight' +
@@ -305,128 +338,132 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
         'More Phase Enrollments?' +
         '\r\n'
 
-      res.data
-        .map(
-          (element) =>
-            new DieterListingItem({
-              ...element,
-              ...element.account,
-              organizations: element.organizations.data,
-              orgCount: element.organizations.count,
-              packages: element.packages.data,
-              packageCount: element.packages.count
-            })
-        )
-        .forEach((d) => {
-          csv +=
-            `"${d.id}"` +
-            this.csvSeparator +
-            `"${d.firstName}"` +
-            this.csvSeparator +
-            `"${d.lastName}"` +
-            this.csvSeparator +
-            `"${d.phone}"` +
-            this.csvSeparator +
-            `"${d.email}"` +
-            this.csvSeparator +
-            `"${
-              d.dataPoints.length === 2
-                ? `${convertToReadableFormat(
-                    d.dataPoints[1].value,
-                    d.dataPoints[1].type,
+      res.forEach((d: DieterListingItem) => {
+        csv +=
+          `"${d.id}"` +
+          this.csvSeparator +
+          `"${d.firstName}"` +
+          this.csvSeparator +
+          `"${d.lastName}"` +
+          this.csvSeparator +
+          `"${d.phone}"` +
+          this.csvSeparator +
+          `"${d.email}"` +
+          this.csvSeparator +
+          this.extraColumns
+            .map((entry) =>
+              d.dataPoints?.[entry.id].value
+                ? `"${convertToReadableFormat(
+                    d.dataPoints[entry.id].value,
+                    d.dataPoints[entry.id].type,
                     rawPreference
-                  )} / ${convertToReadableFormat(
-                    d.dataPoints[0].value,
-                    d.dataPoints[0].type,
-                    rawPreference
-                  )} ${d.dataPoints[0].type.unit}`
+                  )} ${d.dataPoints[entry.id].type.unit}"`
                 : ''
-            }"` +
-            this.csvSeparator +
-            `"${
-              d.weight
-                ? unitConversion(
-                    rawPreference,
-                    'composition',
-                    d.weight.start.value,
-                    1
-                  ) +
-                  ' ' +
-                  weightUnit
-                : ''
-            }"` +
-            this.csvSeparator +
-            `"${
-              d.weight
-                ? unitConversion(
-                    rawPreference,
-                    'composition',
-                    d.weight.end.value,
-                    1
-                  ) +
-                  ' ' +
-                  weightUnit
-                : ''
-            }"` +
-            this.csvSeparator +
-            `"${
-              d.weight && d.weight.change
-                ? unitConversion(
-                    rawPreference,
-                    'composition',
-                    d.weight.change.value,
-                    1
-                  ) +
-                  ' ' +
-                  weightUnit
-                : ''
-            }"` +
-            this.csvSeparator +
-            `"${
-              d.weight && d.weight.change
-                ? d.weight.change.percent + ' ' + '%'
-                : ''
-            }"` +
-            this.csvSeparator +
-            `"${moment(d.startedAt).format('YYYY-MM-DD')}"` +
-            this.csvSeparator +
-            `"${
-              d.weight ? moment(d.weight.start.date).format('YYYY-MM-DD') : ''
-            }"` +
-            this.csvSeparator +
-            `"${
-              d.weight ? moment(d.weight.end.date).format('YYYY-MM-DD') : ''
-            }"` +
-            this.csvSeparator +
-            `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[0] ? d.organizations[0].name : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[1] ? d.organizations[1].id : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[1] ? d.organizations[1].name : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[2] ? d.organizations[2].id : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[2] ? d.organizations[2].name : ''}"` +
-            this.csvSeparator +
-            `"${d.orgCount > 3 ? 'Yes' : 'No'}"` +
-            this.csvSeparator +
-            `"${d.packages[0] ? d.packages[0].id : ''}"` +
-            this.csvSeparator +
-            `"${d.packages[0] ? d.packages[0].name : ''}"` +
-            this.csvSeparator +
-            `"${d.packages[1] ? d.packages[1].id : ''}"` +
-            this.csvSeparator +
-            `"${d.packages[1] ? d.packages[1].name : ''}"` +
-            this.csvSeparator +
-            `"${d.packages[2] ? d.packages[2].id : ''}"` +
-            this.csvSeparator +
-            `"${d.packages[2] ? d.packages[2].name : ''}"` +
-            this.csvSeparator +
-            `"${d.packageCount > 3 ? 'Yes' : 'No'}"` +
-            '\r\n'
-        })
+            )
+            .join(this.csvSeparator) +
+          (this.extraColumns.length ? this.csvSeparator : '') +
+          `"${
+            d.dataPoints?.[DataPointTypes.BLOOD_PRESSURE_SYSTOLIC] &&
+            d.dataPoints?.[DataPointTypes.BLOOD_PRESSURE_DIASTOLIC]
+              ? `${convertToReadableFormat(
+                  d.dataPoints[DataPointTypes.BLOOD_PRESSURE_SYSTOLIC].value,
+                  d.dataPoints[DataPointTypes.BLOOD_PRESSURE_SYSTOLIC].type,
+                  rawPreference
+                )} / ${convertToReadableFormat(
+                  d.dataPoints[DataPointTypes.BLOOD_PRESSURE_DIASTOLIC].value,
+                  d.dataPoints[DataPointTypes.BLOOD_PRESSURE_DIASTOLIC].type,
+                  rawPreference
+                )} ${
+                  d.dataPoints[DataPointTypes.BLOOD_PRESSURE_DIASTOLIC].type
+                    .unit
+                }`
+              : ''
+          }"` +
+          this.csvSeparator +
+          `"${
+            d.weight
+              ? unitConversion(
+                  rawPreference,
+                  'composition',
+                  d.weight.start.value,
+                  1
+                ) +
+                ' ' +
+                weightUnit
+              : ''
+          }"` +
+          this.csvSeparator +
+          `"${
+            d.weight
+              ? unitConversion(
+                  rawPreference,
+                  'composition',
+                  d.weight.end.value,
+                  1
+                ) +
+                ' ' +
+                weightUnit
+              : ''
+          }"` +
+          this.csvSeparator +
+          `"${
+            d.weight && d.weight.change
+              ? unitConversion(
+                  rawPreference,
+                  'composition',
+                  d.weight.change.value,
+                  1
+                ) +
+                ' ' +
+                weightUnit
+              : ''
+          }"` +
+          this.csvSeparator +
+          `"${
+            d.weight && d.weight.change
+              ? d.weight.change.percent + ' ' + '%'
+              : ''
+          }"` +
+          this.csvSeparator +
+          `"${moment(d.startedAt).format('YYYY-MM-DD')}"` +
+          this.csvSeparator +
+          `"${
+            d.weight ? moment(d.weight.start.date).format('YYYY-MM-DD') : ''
+          }"` +
+          this.csvSeparator +
+          `"${
+            d.weight ? moment(d.weight.end.date).format('YYYY-MM-DD') : ''
+          }"` +
+          this.csvSeparator +
+          `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
+          this.csvSeparator +
+          `"${d.organizations[0] ? d.organizations[0].name : ''}"` +
+          this.csvSeparator +
+          `"${d.organizations[1] ? d.organizations[1].id : ''}"` +
+          this.csvSeparator +
+          `"${d.organizations[1] ? d.organizations[1].name : ''}"` +
+          this.csvSeparator +
+          `"${d.organizations[2] ? d.organizations[2].id : ''}"` +
+          this.csvSeparator +
+          `"${d.organizations[2] ? d.organizations[2].name : ''}"` +
+          this.csvSeparator +
+          `"${d.orgCount > 3 ? 'Yes' : 'No'}"` +
+          this.csvSeparator +
+          `"${d.packages[0] ? d.packages[0].id : ''}"` +
+          this.csvSeparator +
+          `"${d.packages[0] ? d.packages[0].name : ''}"` +
+          this.csvSeparator +
+          `"${d.packages[1] ? d.packages[1].id : ''}"` +
+          this.csvSeparator +
+          `"${d.packages[1] ? d.packages[1].name : ''}"` +
+          this.csvSeparator +
+          `"${d.packages[2] ? d.packages[2].id : ''}"` +
+          this.csvSeparator +
+          `"${d.packages[2] ? d.packages[2].name : ''}"` +
+          this.csvSeparator +
+          `"${d.packageCount > 3 ? 'Yes' : 'No'}"` +
+          '\r\n'
+      })
       const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
       const link = document.createElement('a')
       link.href = URL.createObjectURL(blob)

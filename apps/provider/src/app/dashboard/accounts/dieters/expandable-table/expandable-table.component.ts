@@ -32,7 +32,8 @@ import {
   convertToReadableFormat,
   DataPointTypes,
   Schedule,
-  OrganizationAccess
+  OrganizationAccess,
+  NamedEntity
 } from '@coachcare/sdk'
 import { AccountEditDialog, AccountEditDialogData } from '../../dialogs'
 import {
@@ -44,6 +45,7 @@ import { DieterListingDatabase, DieterListingDataSource } from '../services'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 import { confirmRemoveAssociatedMeetings } from '@app/dashboard/accounts/dieters/helpers'
 import { filter } from 'rxjs/operators'
+import { resolveConfig } from '@app/config/section'
 
 @UntilDestroy()
 @Component({
@@ -60,6 +62,7 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   @ViewChild(CcrTableSortDirective, { static: true })
   sort: CcrTableSortDirective
 
+  extraColumns: NamedEntity[] = []
   measurementPreference: UserMeasurementPreferenceType
   rows: any
   hasAdmin = false
@@ -114,6 +117,11 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.hasAdmin = org && org.permissions ? org.permissions.admin : false
+      this.extraColumns =
+        resolveConfig(
+          'PATIENT_LISTING.ADDITIONAL_LISTING_COLUMNS',
+          this.context.organization
+        ) ?? []
     })
 
     this.sort.sortChange.pipe(untilDestroyed(this)).subscribe(() => {

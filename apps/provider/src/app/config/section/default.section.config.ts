@@ -46,7 +46,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     DISABLE_EDIT_BILLING_ADDRESS: false
   },
   PATIENT_LISTING: {
-    SHOW_PATIENT_CREATE_BUTTON: true
+    SHOW_PATIENT_CREATE_BUTTON: true,
+    ADDITIONAL_LISTING_COLUMNS: []
   },
   RIGHT_PANEL: {
     DAYSHEETS_FORM: environment.daysheetsFormId,
@@ -127,7 +128,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     DISABLE_EDIT_BILLING_ADDRESS: false
   },
   PATIENT_LISTING: {
-    SHOW_PATIENT_CREATE_BUTTON: true
+    SHOW_PATIENT_CREATE_BUTTON: true,
+    ADDITIONAL_LISTING_COLUMNS: []
   },
   RIGHT_PANEL: {
     DAYSHEETS_FORM: environment.daysheetsFormId,

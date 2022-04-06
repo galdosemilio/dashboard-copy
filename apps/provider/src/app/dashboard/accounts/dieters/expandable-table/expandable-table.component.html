@@ -30,6 +30,11 @@ class="ccr-table ccr-expand-table ccr-table-stats">
         <td class="column-phone">
           <span>{{ 'BOARD.PHONE_NUMBER' | translate }}</span>
         </td>
+        <td *ngFor="let extraColumn of extraColumns" class="column-extra">
+          <div>
+            <span>{{ extraColumn.name | translate }}</span>
+          </div>
+        </td>
         <td class="column-bloodpressure">
           <div>
             <ccr-table-sort-header property="metric.value">
@@ -144,10 +149,18 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       <td *ngIf="row.level === 0" class="column-phone">
         <a *ngIf="row.phone"  [href]="'tel:' + row.phone">{{ row.phone }}</a>
       </td>
+      <ng-container *ngIf="row.level === 0">
+        <td *ngFor="let extraColumn of extraColumns" class="column-extra">
+          <div *ngIf="row.dataPoints?.[extraColumn.id]; else empty">
+            {{ convertToReadableFormat(row.dataPoints[extraColumn.id].value, row.dataPoints[extraColumn.id].type, measurementPreference) }}
+            {{ row.dataPoints[extraColumn.id].type.unit }}
+          </div>
+        </td>
+      </ng-container>
       <td *ngIf="row.level === 0" class="column-bloodpressure">
-        <div *ngIf="row.dataPoints?.length === 2; else empty">
-          {{ convertToReadableFormat(row.dataPoints[1].value, row.dataPoints[1].type, measurementPreference) }} / {{ convertToReadableFormat(row.dataPoints[0].value, row.dataPoints[0].type, measurementPreference) }}
-          {{ row.dataPoints[0].type.unit }}
+        <div *ngIf="row.dataPoints?.['5'] && row.dataPoints?.['6']; else empty">
+          {{ convertToReadableFormat(row.dataPoints['6'].value, row.dataPoints['6'].type, measurementPreference) }} / {{ convertToReadableFormat(row.dataPoints['5'].value, row.dataPoints['5'].type, measurementPreference) }}
+          {{ row.dataPoints['5'].type.unit }}
         </div>
       </td>
       <td *ngIf="row.level === 0" class="column-currentweight">
