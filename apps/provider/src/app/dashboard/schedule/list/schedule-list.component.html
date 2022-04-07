@@ -5,9 +5,9 @@
 </div>
 
 <div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
-  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="35px">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="35px" fxLayoutGap.xs="15px">
   <!-- search bar filter -->
-  <div fxFlex="grow" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <div fxFlex="grow" fxFill fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
       <div>
           <ccr-organization-search
           *ngIf="!selectedClinic"

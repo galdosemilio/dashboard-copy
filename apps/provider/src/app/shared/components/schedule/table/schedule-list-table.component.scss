@@ -23,10 +23,38 @@ mat-cell {
 
   &.cdk-column-date {
     min-width: 125px !important;
+
+    .time {
+      display: none;
+    }
+  }
+
+  .attendance {
+    padding-left: 16px;
   }
 }
 
 .attendance-editor {
   margin: 10px 0;
-  padding-left: 25px;
+  padding-left: 16px;
+}
+
+@media #{$medium-only} {
+  mat-header-cell {
+    &.cdk-column-time {
+      display: none;
+    }
+  }
+
+  mat-cell {
+    &.cdk-column-date {
+      .time {
+        display: block;
+      }
+    }
+
+    &.cdk-column-time {
+      display: none !important;
+    }
+  }
 }
