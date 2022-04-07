@@ -32,21 +32,13 @@ export class CcrAccountLinkDirective implements OnInit {
 
   @HostListener('click', ['$event'])
   public clickEvent(): void {
-    const prefixUrl = environment.production ? '/provider' : ''
-
     switch (this.accountType) {
       case AccountTypeId.Client:
-        void this.router.navigate([
-          `${prefixUrl}/accounts/patients`,
-          this.accountId
-        ])
+        void this.router.navigate([`/accounts/patients`, this.accountId])
         this.onOpen.emit()
         break
       case AccountTypeId.Provider:
-        void this.router.navigate([
-          `${prefixUrl}/accounts/coaches`,
-          this.accountId
-        ])
+        void this.router.navigate([`/accounts/coaches`, this.accountId])
         this.onOpen.emit()
         break
       default:
@@ -84,14 +76,21 @@ export class CcrAccountLinkDirective implements OnInit {
 
   private onOpenLink(event: Event): void {
     event.stopPropagation()
+    const prefixUrl = environment.production ? '/provider' : ''
     const origin = window.location.origin
 
     switch (this.accountType) {
       case AccountTypeId.Client:
-        window.open(`${origin}/accounts/patients/${this.accountId}`, '_blank')
+        window.open(
+          `${origin}${prefixUrl}/accounts/patients/${this.accountId}`,
+          '_blank'
+        )
         break
       case AccountTypeId.Provider:
-        window.open(`${origin}/accounts/coaches/${this.accountId}`, '_blank')
+        window.open(
+          `${origin}${prefixUrl}/accounts/coaches/${this.accountId}`,
+          '_blank'
+        )
         break
       default:
         break
