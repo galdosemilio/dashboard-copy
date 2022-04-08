@@ -1,3 +1,10 @@
+## [1.78.1](https://github.com/coachcare/dashboard/compare/v1.78.0...v1.78.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* issue with list view [FRON-2734] ([849a81a](https://github.com/coachcare/dashboard/commit/849a81aa79dcb7c2c6301532783f648aec131123))
+
 # [1.78.0](https://github.com/coachcare/dashboard/compare/v1.77.1...v1.78.0) (2022-04-08)
 
 
