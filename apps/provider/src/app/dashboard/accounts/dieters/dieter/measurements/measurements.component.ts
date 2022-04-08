@@ -236,7 +236,10 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
         })
       }
 
-      if (this.view === 'list' && !this.sections[this.section].useNewEndpoint) {
+      if (
+        this.view === 'list' &&
+        !this.sections[this.section]?.useNewEndpoint
+      ) {
         this.view = 'table'
       }
 
@@ -249,6 +252,8 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       ) {
         this.view = 'list'
       }
+
+      this.cdr.detectChanges()
     })
 
     this.cdr.detectChanges()
@@ -318,7 +323,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     this.data = sectionsTarget
       ? sectionsTarget.data.map((data) => data.code)
       : []
-    this.useNewEndpoint = sectionsTarget ? sectionsTarget.useNewEndpoint : false
+    this.useNewEndpoint = sectionsTarget ? sectionsTarget.useNewEndpoint : true
     this.columns = sectionsTarget ? sectionsTarget.columns : []
     this.chartColumns = sectionsTarget ? sectionsTarget.columns : []
 
@@ -339,6 +344,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     }
     this.refresh$.next('measurements.section')
     this.bus.trigger('add-measurement.section.change', { value: target })
+    this.cdr.detectChanges()
   }
 
   toggleView(mode?: string) {
