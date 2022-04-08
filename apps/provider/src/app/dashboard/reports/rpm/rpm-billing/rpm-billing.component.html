@@ -222,7 +222,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
                         </span>
                         <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
                     </div>
-                    <div *ngIf="row.rpm.isActive; else empty" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <div *ngIf="row.rpm.isActive; else emptyDiv" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
                         <ng-container *ngFor="let codeRequirement of row.billing[billingIndex].eligibility.next?.relatedCodeRequirementsNotMet">
                             <ccr-rpm-dependency-icon
                             [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: codeRequirement}"
@@ -273,7 +273,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
                         <span *ngIf="!row.rpm.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
                     </div>
 
-                    <div *ngIf="row.rpm.isActive; else empty" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <div *ngIf="row.rpm.isActive; else emptyDiv" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
                         <ng-container *ngIf="(row.billing[3].eligibility.next && row.billing[3].eligibility.next.alreadyEligibleCount < 1) || row.billing[3].hasCodeRequirements || row.billing[3].remainingDays">
                             <ccr-rpm-dependency-icon
                             [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: '99458 x1'}"
@@ -312,3 +312,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
 </ng-template>
 
 <ng-template #empty>&nbsp;</ng-template>
+
+<ng-template #emptyDiv>
+    <div fxFlex>&nbsp;</div>
+</ng-template>
