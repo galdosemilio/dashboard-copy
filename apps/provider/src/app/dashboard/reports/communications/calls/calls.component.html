@@ -1,24 +1,25 @@
 <p data-cy="callLogClinicNotice" [innerHTML]="'REPORTS.COMMS_CALLS_DESCRIPTION' | translate:{clinic: clinic} | ccrSanitize"></p>
 
-<div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">
-    <div fxFlex>
-        <button
-        *ngIf="allowCreation"
-        (click)="showAddInteractionDialog()"
-        mat-button
-        class="ccr-icon-button"
-        color="primary">
-            <mat-icon>add</mat-icon>
-            {{ 'REPORTS.CREATE_MANUAL_INTERACTION' | translate }}
+<div class="ccr-htools" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end end">
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex>
+            <button
+            *ngIf="allowCreation"
+            (click)="showAddInteractionDialog()"
+            mat-button
+            class="ccr-icon-button"
+            color="primary">
+                <mat-icon>add</mat-icon>
+                {{ 'REPORTS.CREATE_MANUAL_INTERACTION' | translate }}
+            </button>
+        </div>
+
+        <button mat-button fxFlex="nogrow" class="ccr-align-center"
+        [disabled]="!source.isLoaded || source.isEmpty || isLoading" (click)="downloadCSV()">
+          {{ 'REPORTS.EXPORT_CSV' | translate }}
+          <mat-icon>file_download</mat-icon>
         </button>
     </div>
-
-    <button mat-button fxFlex="nogrow" class="ccr-align-center"
-    [disabled]="!source.isLoaded || source.isEmpty || isLoading" (click)="downloadCSV()">
-      {{ 'REPORTS.EXPORT_CSV' | translate }}
-      <mat-icon>file_download</mat-icon>
-    </button>
-
     <ccr-paginator fxFlex="nogrow" #paginator
         [length]="source.total"
         [pageIndex]="source.pageIndex"
@@ -108,7 +109,7 @@
 
         <ng-container cdkColumnDef="actions">
         <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
-        <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxFlex.xs="grow">
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs="start center" fxFlex.xs="grow">
             <span>{{'BOARD.ACTIONS' | translate}}</span>
             <app-call-recording-button
                 *ngIf="showCallRecordingButton"

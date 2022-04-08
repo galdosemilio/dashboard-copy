@@ -167,26 +167,6 @@ mat-header-row {
           flex: 0 0 48%;
         }
       }
-
-      &.cdk-column-actions {
-        > button {
-          color: mat-color($ccr-foreground, table-actions);
-          display: inline-block;
-          @media #{$small-and-down} {
-            display: none;
-          }
-        }
-        > span {
-          cursor: pointer;
-          display: none;
-          letter-spacing: 0.2em;
-          text-decoration: underline;
-          text-transform: none;
-          @media #{$small-and-down} {
-            display: inline-block;
-          }
-        }
-      }
     }
 
     mat-header-cell,
