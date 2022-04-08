@@ -1,3 +1,10 @@
+## [1.78.2](https://github.com/coachcare/dashboard/compare/v1.78.1...v1.78.2) (2022-04-08)
+
+
+### Bug Fixes
+
+* restored new endpoint body measurement fetching [FRON-2734] ([800157f](https://github.com/coachcare/dashboard/commit/800157fede553fb132d5cef849c36d298215baa7))
+
 ## [1.78.1](https://github.com/coachcare/dashboard/compare/v1.78.0...v1.78.1) (2022-04-08)
 
 
