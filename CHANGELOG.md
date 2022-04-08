@@ -1,3 +1,26 @@
+# [1.78.0](https://github.com/coachcare/dashboard/compare/v1.77.1...v1.78.0) (2022-04-08)
+
+
+### Bug Fixes
+
+* added support for production environments [FRON-2692] ([cb9544f](https://github.com/coachcare/dashboard/commit/cb9544f969c523130ceb46687fdcff71206f5fd8))
+* adjust size of toggle row [FRON-2711] ([9d6465c](https://github.com/coachcare/dashboard/commit/9d6465ced1fec86d43f6e7b5e4a979c78ae2d7c3))
+* adjust styles for table and date picker [FRON-2709] ([1afe0b2](https://github.com/coachcare/dashboard/commit/1afe0b2c7692c54f746d9bf072dec9b0d624a40f))
+* adjusted cypress tests [FRON-2702] ([19ab6bc](https://github.com/coachcare/dashboard/commit/19ab6bcfbb95668439ef269e54223d1a06e4d45b))
+* adjusted new tab linking [FRON-2692] ([45af281](https://github.com/coachcare/dashboard/commit/45af2813ae4216f63a9fd2c8f7bc8f6eb03942d9))
+* prevented body measurement fetching [FRON-2722] ([79dd8dd](https://github.com/coachcare/dashboard/commit/79dd8dd3e9996cde20ddded1bc9102e892fa05bc))
+* remove background in pagination [FRON-2710] ([d3e4934](https://github.com/coachcare/dashboard/commit/d3e4934969fe5ebaeac5c0f6ec6aa101ca21d52b))
+* responsive for food journal page [FRON-2707] ([8ba4e5a](https://github.com/coachcare/dashboard/commit/8ba4e5a8f56efdba104fb61733b9785fb1049bee))
+* responsive patient table on tablet [FRON-2703] ([02ca286](https://github.com/coachcare/dashboard/commit/02ca2868ded70e5df0817793bb6fbbd08f27799d))
+* schedule list page responsive [FRON-2715] ([a62682a](https://github.com/coachcare/dashboard/commit/a62682a76833d1b423787c9cc58bb0e3241ea23a))
+* solved issue with inactive rpm entries [FRON-2073] ([c89241b](https://github.com/coachcare/dashboard/commit/c89241b8ca9239e87338d83dc6d2f74e786db00e))
+
+
+### Features
+
+* custom extra columns to the pat listing [FRON-2725] ([c5ec4b1](https://github.com/coachcare/dashboard/commit/c5ec4b11e636d640494f81a9a489ac5552f6e49e))
+* reworked rpm billing report [FRON-2073] ([9b1a4ac](https://github.com/coachcare/dashboard/commit/9b1a4acfbfc57f2cd19e3f193c9d2bac788e0bf8))
+
 ## [1.77.1](https://github.com/coachcare/dashboard/compare/v1.77.0...v1.77.1) (2022-04-05)
 
 
