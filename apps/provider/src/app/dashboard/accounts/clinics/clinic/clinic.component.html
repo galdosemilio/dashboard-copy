@@ -11,104 +11,103 @@
             <h2>{{ clinic?.name | capitalize }}</h2>
         </div>
     </div>
+</div>
+<div
+class="ccr-tabs"
+fxFlex="nogrow"
+fxLayout="row"
+fxLayoutAlign=" stretch"
+data-cy="clinicMenu">
+    <a
+    [class.active]="section === 'info'"
+    [routerLink]="['.', { s: 'info' }]"
+    ccrLinkActive="active"
+    fxFlex
+    fxLayoutAlign="center center">
+    {{ 'BOARD.CLINIC_INFORMATION' | translate }}
+    </a>
 
-    <div
-    class="ccr-tabs"
-    fxFlex="nogrow"
-    fxLayout="row"
-    fxLayoutAlign=" stretch"
-    data-cy="clinicMenu">
-        <a
-        [class.active]="section === 'info'"
-        [routerLink]="['.', { s: 'info' }]"
-        ccrLinkActive="active"
-        fxFlex
-        fxLayoutAlign="center center">
-        {{ 'BOARD.CLINIC_INFORMATION' | translate }}
-        </a>
+    <a
+    [class.active]="section === 'hierarchy'"
+    [routerLink]="['.', { s: 'hierarchy' }]"
+    ccrLinkActive="active"
+    fxFlex
+    fxLayoutAlign="center center">
+    {{ 'GLOBAL.HIERARCHY' | translate }}
+    </a>
 
-        <a
-        [class.active]="section === 'hierarchy'"
-        [routerLink]="['.', { s: 'hierarchy' }]"
-        ccrLinkActive="active"
-        fxFlex
-        fxLayoutAlign="center center">
-        {{ 'GLOBAL.HIERARCHY' | translate }}
-        </a>
+    <a
+    [class.active]="section === 'billable-services'"
+    [routerLink]="['.', { s: 'billable-services' }]"
+    ccrLinkActive="active"
+    fxFlex
+    fxLayoutAlign="center center">
+    {{ 'BOARD.CLINIC_BILLABLE_SERVICES' | translate }}
+    </a>
 
-        <a
-        [class.active]="section === 'billable-services'"
-        [routerLink]="['.', { s: 'billable-services' }]"
-        ccrLinkActive="active"
-        fxFlex
-        fxLayoutAlign="center center">
-        {{ 'BOARD.CLINIC_BILLABLE_SERVICES' | translate }}
-        </a>
+    <a
+    [class.active]="section === 'auto-enrollment'"
+    [routerLink]="['.', { s: 'auto-enrollment' }]"
+    ccrLinkActive="active"
+    fxFlex
+    fxLayoutAlign="center center">
+    {{ 'BOARD.CLINIC_AUTOMATIC_ENROLLMENT' | translate }}
+    </a>
 
-        <a
-        [class.active]="section === 'auto-enrollment'"
-        [routerLink]="['.', { s: 'auto-enrollment' }]"
-        ccrLinkActive="active"
-        fxFlex
-        fxLayoutAlign="center center">
-        {{ 'BOARD.CLINIC_AUTOMATIC_ENROLLMENT' | translate }}
-        </a>
+    <a
+    [class.active]="section === 'measurements'"
+    [routerLink]="['.', { s: 'measurements' }]"
+    ccrLinkActive="active"
+    fxFlex
+    fxLayoutAlign="center center">
+    {{ 'GLOBAL.MEASUREMENTS' | translate }}
+    </a>
 
-        <a
-        [class.active]="section === 'measurements'"
-        [routerLink]="['.', { s: 'measurements' }]"
-        ccrLinkActive="active"
-        fxFlex
-        fxLayoutAlign="center center">
-        {{ 'GLOBAL.MEASUREMENTS' | translate }}
-        </a>
+    <a
+    [class.active]="section === 'phases'"
+    [routerLink]="['.', { s: 'phases' }]"
+    ccrLinkActive="active"
+    fxFlex
+    fxLayoutAlign="center center">
+    {{ 'GLOBAL.PHASES_LABELS' | translate }}
+    </a>
 
-        <a
-        [class.active]="section === 'phases'"
-        [routerLink]="['.', { s: 'phases' }]"
-        ccrLinkActive="active"
-        fxFlex
-        fxLayoutAlign="center center">
-        {{ 'GLOBAL.PHASES_LABELS' | translate }}
-        </a>
+    <a
+    [class.active]="section === 'settings'"
+    [routerLink]="['.', { s: 'settings' }]"
+    ccrLinkActive="active"
+    fxFlex
+    fxLayoutAlign="center center">
+    {{ 'GLOBAL.SETTINGS' | translate }}
+    </a>
+</div>
 
-        <a
-        [class.active]="section === 'settings'"
-        [routerLink]="['.', { s: 'settings' }]"
-        ccrLinkActive="active"
-        fxFlex
-        fxLayoutAlign="center center">
-        {{ 'GLOBAL.SETTINGS' | translate }}
-        </a>
+<div class="ccr-subcomponent" [ngSwitch]="section">
+    <div *ngSwitchCase="'info'">
+        <app-clinic-info [clinic]="clinic"></app-clinic-info>
     </div>
 
-    <div class="ccr-subcomponent" [ngSwitch]="section">
-        <div *ngSwitchCase="'info'">
-            <app-clinic-info [clinic]="clinic"></app-clinic-info>
-        </div>
+    <div *ngSwitchCase="'hierarchy'">
+        <ccr-organization-tree-page [organization]="clinic" [readonly]="true"></ccr-organization-tree-page>
+    </div>
 
-        <div *ngSwitchCase="'hierarchy'">
-            <ccr-organization-tree-page [organization]="clinic" [readonly]="true"></ccr-organization-tree-page>
-        </div>
+    <div *ngSwitchCase="'billable-services'">
+        <app-clinic-billable-services></app-clinic-billable-services>
+    </div>
 
-        <div *ngSwitchCase="'billable-services'">
-            <app-clinic-billable-services></app-clinic-billable-services>
-        </div>
+    <div *ngSwitchCase="'measurements'">
+        <app-clinic-measurements></app-clinic-measurements>
+    </div>
 
-        <div *ngSwitchCase="'measurements'">
-            <app-clinic-measurements></app-clinic-measurements>
-        </div>
+    <div *ngSwitchCase="'phases'">
+        <app-clinic-phases></app-clinic-phases>
+    </div>
 
-        <div *ngSwitchCase="'phases'">
-            <app-clinic-phases></app-clinic-phases>
-        </div>
+    <div *ngSwitchCase="'auto-enrollment'">
+        <app-clinic-sequence-auto-enrollment></app-clinic-sequence-auto-enrollment>
+    </div>
 
-        <div *ngSwitchCase="'auto-enrollment'">
-            <app-clinic-sequence-auto-enrollment></app-clinic-sequence-auto-enrollment>
-        </div>
-
-        <div *ngSwitchCase="'settings'">
-            <app-clinic-settings></app-clinic-settings>
-        </div>
+    <div *ngSwitchCase="'settings'">
+        <app-clinic-settings></app-clinic-settings>
     </div>
 </div>
