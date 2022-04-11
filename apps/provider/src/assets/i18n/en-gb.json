@@ -325,6 +325,7 @@
     "REMOVE": "Remove",
     "REMOVE_PHASE_DESCRIPTION": "Are you sure you want to remove the phase {{ phase }}?",
     "REMOVE_PHASE_TITLE": "Remove Phase",
+    "RPM_ENTRIES_EMPTY_LIST": "There are no RPM entries that match the current search criteria",
     "SAT_FAT": "Sat. Fat",
     "SAVE_CLINIC": "Save Clinic",
     "SCHEDULE_APPOINTMENT": "Schedule Appointment",
@@ -974,8 +975,6 @@
     "ARM": "Arm",
     "BLOOD_OXYGEN": "Blood oxygen",
     "BLOOD_PRESSURE": "Blood Pressure",
-    "BLOOD_PRESSURE_DIASTOLIC": "Diastolic Blood Pressure",
-    "BLOOD_PRESSURE_SYSTOLIC": "Systolic Blood Pressure",
     "BMI": "BMI",
     "BMR": "BMR",
     "BODY_FAT": "Body Fat",
@@ -987,7 +986,6 @@
     "DEVICE": "Device",
     "DISTANCE": "Distance",
     "DISTANCE_NOTE": "Distance values estimated based on steps",
-    "EXTRACELLULAR_WATER": "Extracellular Water",
     "FASTING_GLUCOSE": "Fasting Glucose",
     "HBA1C": "HbA1c",
     "HDL": "HDL",
@@ -995,13 +993,10 @@
     "HIP": "Hip",
     "HSCRP": "HSCRP",
     "HYDRATION": "Hydration",
-    "INSULIN": "Insulin",
-    "KETONES": "Ketones",
     "LDL": "LDL",
     "LEAN_MASS": "Lean Mass",
     "MISSING_WEIGHT_NOTE": "Some measurements exist for this time period that cannot be displayed on this graph. These values are visible on the <a href=\"{{tableViewLink}}\">table view</a> only. The dates for which these measurements exist are:",
     "MORE_DATA_EXISTS_FOR_DAY": "More data exists but only 24 entries per day are shown by default.",
-    "NECK": "Neck",
     "RESPIRATION_RATE": "Respiration Rate",
     "RESTFULNESS": "Restfulness",
     "SLEEP": "Sleep",
@@ -1010,14 +1005,11 @@
     "TABLE_SUMMARY_HINT": "Most recent measurement",
     "TEMPERATURE": "Body Temperature",
     "THIGH": "Thigh",
-    "THORAX": "Thorax",
-    "TOTAL_BODY_WATER": "Total Body Water",
     "TOTAL_CHOLESTEROL": "Total Cholesterol",
     "TRIGLYCERIDES": "Triglycerides",
     "VISCERAL_ADIP_TISSUE": "Visceral Adipose Tissue Volume",
     "VISCERAL_ADIP_TISSUE_ABOUT": "The volume of visceral fat stored in an individual’s body, measured in milliliters or liters.  This measurement is calculated only from third party devices, and is not currently recorded from the Balance Smart Scale that connects directly a patients mobile app.",
     "VISCERAL_FAT": "Visceral Fat (Percentage)",
-    "VISCERAL_FAT_MASS": "Visceral Fat Mass",
     "VISCERAL_FAT_PERCENTAGE_ABOUT": "The percentage of an individual’s total bodyfat that is visceral fat.  This measurement is calculated only from third party devices, and is not currently recorded from the Balance Smart Scale that connects directly a patients mobile app.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
@@ -1176,6 +1168,7 @@
       "LABEL_SORTED_SUCCESSFULLY": "Category sorted successfully.",
       "MANUAL_INTERACTION_CREATED": "Manual communication successfully created.",
       "MEASUREMENT_ADDED": "Measurement successfully added.",
+      "MEASUREMENT_DELETED": "Measurement successfully deleted.",
       "MEASUREMENT_LABEL_CREATED": "Category successfully created.",
       "MEASUREMENT_LABEL_DELETED": "Category successfully deleted.",
       "MEASUREMENT_LABEL_UPDATED": "Category successfully updated.",
@@ -1817,5 +1810,10 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Starter Guide"
+  },
+  "notifier": {
+    "ERROR": {
+      "NOTHING_TO_EXPORT": ""
+    }
   }
 }

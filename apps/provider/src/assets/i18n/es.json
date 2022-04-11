@@ -325,6 +325,7 @@
     "REMOVE": "Borrar",
     "REMOVE_PHASE_DESCRIPTION": "¿Está seguro de querer eliminar la fase {{phase}}?",
     "REMOVE_PHASE_TITLE": "Eliminar Fase",
+    "RPM_ENTRIES_EMPTY_LIST": "No hay registros de RPM que coincidan con el criterio de búsqueda",
     "SAT_FAT": "Grasa Sat.",
     "SAVE_CLINIC": "Guardar Clínica",
     "SCHEDULE_APPOINTMENT": "Programar Reunión",
@@ -974,8 +975,6 @@
     "ARM": "Brazo",
     "BLOOD_OXYGEN": "Oxigeno en sangre",
     "BLOOD_PRESSURE": "Presión Sanguínea",
-    "BLOOD_PRESSURE_DIASTOLIC": "Pres. Sang. Diastólica",
-    "BLOOD_PRESSURE_SYSTOLIC": "Pres. Sang. Sistólica",
     "BMI": "IMC",
     "BMR": "TMB",
     "BODY_FAT": "Grasa Corporal",
@@ -987,7 +986,6 @@
     "DEVICE": "Dispositivo",
     "DISTANCE": "Distancia",
     "DISTANCE_NOTE": "Valores de distancia estimados desde los pasos totales",
-    "EXTRACELLULAR_WATER": "Agua Extracelular",
     "FASTING_GLUCOSE": "Glucosa Alta",
     "HBA1C": "HbA1c",
     "HDL": "HDL",
@@ -995,13 +993,10 @@
     "HIP": "Cadera",
     "HSCRP": "HSCRP",
     "HYDRATION": "Hidratación",
-    "INSULIN": "Insulina",
-    "KETONES": "Cetonas",
     "LDL": "LDL",
     "LEAN_MASS": "Masa Magra",
     "MISSING_WEIGHT_NOTE": "Existen medidas para este período que no pueden ser mostradas en el gráfico. Estos valores solamente son visibles en la <a href=\"{{tableViewLink}}\">vista de table</a>. Las fechas para las cuales existen estas medidas son:",
     "MORE_DATA_EXISTS_FOR_DAY": "Existen más datos pero, por defecto, sólo se muestran 24 medidas por día.",
-    "NECK": "Cuello",
     "RESPIRATION_RATE": "Ritmo respiratorio",
     "RESTFULNESS": "Reposo",
     "SLEEP": "Sueño",
@@ -1010,14 +1005,11 @@
     "TABLE_SUMMARY_HINT": "Medida más reciente",
     "TEMPERATURE": "Temperatura Corporal",
     "THIGH": "Muslo",
-    "THORAX": "Tórax",
-    "TOTAL_BODY_WATER": "Agua Corporal Total",
     "TOTAL_CHOLESTEROL": "Colesterol Total",
     "TRIGLYCERIDES": "Triglicéridos",
     "VISCERAL_ADIP_TISSUE": "Volumen de Tejido Adiposo",
     "VISCERAL_ADIP_TISSUE_ABOUT": "El volumen de grasa visceral almacenada en el cuerpo de una persona, medido en mililitros o litros. Esta medición se calcula solo a partir de dispositivos de terceros y actualmente no se registra en la balanza inteligente Balance que conecta directamente la aplicación móvil de un paciente.",
     "VISCERAL_FAT": "Grasa Visceral (Porcentaje)",
-    "VISCERAL_FAT_MASS": "Masa de Grasa Visceral",
     "VISCERAL_FAT_PERCENTAGE_ABOUT": "El porcentaje de grasa corporal total de un individuo que es grasa visceral. Esta medición se calcula solo a partir de dispositivos de terceros y actualmente no se registra en la balanza inteligente Balance que conecta directamente la aplicación móvil de un paciente.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
@@ -1176,6 +1168,7 @@
       "LABEL_SORTED_SUCCESSFULLY": "Categoría organizada satisfactoriamente.",
       "MANUAL_INTERACTION_CREATED": "Comunicación manual creada satisfactoriamente.",
       "MEASUREMENT_ADDED": "Medida añadida exitosamente.",
+      "MEASUREMENT_DELETED": "Medida eliminada exitosamente.",
       "MEASUREMENT_LABEL_CREATED": "Categoría creada satisfactoriamente.",
       "MEASUREMENT_LABEL_DELETED": "Categoría eliminada satisfactoriamente.",
       "MEASUREMENT_LABEL_UPDATED": "Categoría actualizada satisfactoriamente.",
@@ -1817,5 +1810,10 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Guía de Inicio"
+  },
+  "notifier": {
+    "ERROR": {
+      "NOTHING_TO_EXPORT": ""
+    }
   }
 }

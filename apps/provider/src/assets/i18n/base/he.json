@@ -325,6 +325,7 @@
     "REMOVE": "הסרה",
     "REMOVE_PHASE_DESCRIPTION": "האם אתה בטוח שברצונך להסיר את שלב {{phase}}?",
     "REMOVE_PHASE_TITLE": "הסר שלב",
+    "RPM_ENTRIES_EMPTY_LIST": "אין ערכי RPM המתאימים לקריטריוני החיפוש הנוכחיים",
     "SAT_FAT": "שומן רווי",
     "SAVE_CLINIC": "שמור קליניקה",
     "SCHEDULE_APPOINTMENT": "קבע פגישה",
@@ -974,8 +975,6 @@
     "ARM": "זרוע",
     "BLOOD_OXYGEN": "חמצן בדם",
     "BLOOD_PRESSURE": "לחץ דם",
-    "BLOOD_PRESSURE_DIASTOLIC": "לחץ הדם הדיאסטולי",
-    "BLOOD_PRESSURE_SYSTOLIC": "לחץ דם סיסטולי",
     "BMI": "BMI",
     "BMR": "BMR",
     "BODY_FAT": "שומן גוף",
@@ -987,7 +986,6 @@
     "DEVICE": "מכשיר",
     "DISTANCE": "מרחק",
     "DISTANCE_NOTE": "ערכי מרחק משוערים על בסיס הצעדים",
-    "EXTRACELLULAR_WATER": "מים חוץ תאיים",
     "FASTING_GLUCOSE": "רמת גלוקוז בצום",
     "HBA1C": "HbA1c",
     "HDL": "HDL",
@@ -995,13 +993,10 @@
     "HIP": "מפרק הירך",
     "HSCRP": "HSCRP",
     "HYDRATION": "התייבשות",
-    "INSULIN": "אינסולין",
-    "KETONES": "קטונים",
     "LDL": "LDL",
     "LEAN_MASS": "מסת גוף רזה",
     "MISSING_WEIGHT_NOTE": "מדידות מסוימות להתקיים במשך תקופה הפעם כי לא ניתן להציג עבור הגרף הזה. ערכים אלה גלויים על <a href=\"{{KEEPtableViewLink}}\">תצוגת טבלה</a> בלבד. המועדים בהם מדידות אלה קיימים הם:",
     "MORE_DATA_EXISTS_FOR_DAY": "נתונים נוספים קיימים אך רק 24 רשומות ביום מוצגות כברירת מחדל.",
-    "NECK": "צוואר",
     "RESPIRATION_RATE": "קצב נשימה",
     "RESTFULNESS": "נינוחות",
     "SLEEP": "שינה",
@@ -1010,14 +1005,11 @@
     "TABLE_SUMMARY_HINT": "המדידה האחרונה",
     "TEMPERATURE": "טמפרטורת הגוף",
     "THIGH": "ירך",
-    "THORAX": "טורקס",
-    "TOTAL_BODY_WATER": "סך כל המים בגוף",
     "TOTAL_CHOLESTEROL": "כולסטרול כללי",
     "TRIGLYCERIDES": "טריגליצרידים",
     "VISCERAL_ADIP_TISSUE": "נפח רקמות שומן בקרקפת",
     "VISCERAL_ADIP_TISSUE_ABOUT": "נפח השומן הקרביים המאוחסן בגופו של הפרט, נמדד במיליליטר או ליטר. מדידה זו מחושבת רק ממכשירים של צד שלישי, והיא אינה מוקלטת כיום מתוך סולם האיזון החכם המחבר ישירות אפליקציה לנייד של מטופלים.",
     "VISCERAL_FAT": "שומן בטן (אחוז)",
-    "VISCERAL_FAT_MASS": "מסת שומן קרבית",
     "VISCERAL_FAT_PERCENTAGE_ABOUT": "אחוז סך שומן הגוף של הפרט שהוא שומן קרביים. מדידה זו מחושבת רק ממכשירים של צד שלישי, והיא אינה מוקלטת כיום מתוך סולם האיזון החכם המחבר ישירות אפליקציה לנייד של מטופלים.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
@@ -1176,6 +1168,7 @@
       "LABEL_SORTED_SUCCESSFULLY": "קטגוריה מסודרת בהצלחה.",
       "MANUAL_INTERACTION_CREATED": "תקשורת ידנית נוצרה בהצלחה.",
       "MEASUREMENT_ADDED": "נוסף מדד בהצלחה.",
+      "MEASUREMENT_DELETED": "המדידה נמחקה בהצלחה.",
       "MEASUREMENT_LABEL_CREATED": "קטגוריה נוצרה בהצלחה.",
       "MEASUREMENT_LABEL_DELETED": "קטגוריה נמחקה בהצלחה.",
       "MEASUREMENT_LABEL_UPDATED": "הקטגוריה מעודכנת בהצלחה.",
@@ -1817,5 +1810,10 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "מדריך למתחילים"
+  },
+  "notifier": {
+    "ERROR": {
+      "NOTHING_TO_EXPORT": ""
+    }
   }
 }

@@ -25,10 +25,12 @@ import {
   convertFromReadableFormat,
   convertToReadableFormat,
   convertUnitToPreferenceFormat,
+  getNXTSTIMMap,
   MeasurementDataPointProvider,
   MeasurementDataPointType,
   MeasurementDataPointTypeAssociation,
-  MeasurementLabelEntry
+  MeasurementLabelEntry,
+  NXTSTIMMapEntry
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as moment from 'moment'
@@ -83,9 +85,8 @@ export class AddMeasurementsV2Component implements OnInit {
     private notifier: NotifierService,
     private translate: TranslateService
   ) {
-    this.dataTypeDependencyValidator = this.dataTypeDependencyValidator.bind(
-      this
-    )
+    this.dataTypeDependencyValidator =
+      this.dataTypeDependencyValidator.bind(this)
   }
 
   public ngOnInit(): void {
@@ -129,6 +130,11 @@ export class AddMeasurementsV2Component implements OnInit {
       this.context.user.measurementPreference,
       this.translate.currentLang
     )
+  }
+
+  public resolveNXTSTIMMap(type: MeasurementDataPointType): NXTSTIMMapEntry[] {
+    const foundMap = getNXTSTIMMap(type)
+    return foundMap ? Object.values(foundMap) : []
   }
 
   public getWeightProportion(controlIndex: number): string {

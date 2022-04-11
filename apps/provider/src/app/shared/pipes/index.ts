@@ -14,9 +14,14 @@ import { UnitConversionPipe } from './unit-conversion.pipe'
 import { UnitLabelPipe } from './unit-label.pipe'
 import {
   UnitConvertFromReadablePipe,
-  UnitConvertToReadablePipe
+  UnitConvertToReadablePipe,
+  UnitMapToRedablePipe
 } from './unit-conversion'
 import { CcrSanitizePipe } from '@coachcare/common/pipes'
+import {
+  CcrConvertSecondsToHmsPipe,
+  CcrConvertSecondsToMinutesPipe
+} from './time-conversion'
 
 export const Pipes = [
   AbsoluteValuePipe,
@@ -25,6 +30,8 @@ export const Pipes = [
   CcrBinaryPipe,
   CcrKilobytesPipe,
   CcrSanitizePipe,
+  CcrConvertSecondsToHmsPipe,
+  CcrConvertSecondsToMinutesPipe,
   CcrUtcPipe,
   ExerciseIntensityPipe,
   FractionPipe,
@@ -35,5 +42,6 @@ export const Pipes = [
   UnitConversionPipe,
   UnitConvertFromReadablePipe,
   UnitConvertToReadablePipe,
-  UnitLabelPipe
+  UnitLabelPipe,
+  UnitMapToRedablePipe
 ]

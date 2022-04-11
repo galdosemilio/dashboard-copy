@@ -53,6 +53,14 @@
       }
     }
 
+    .very-wide-cell {
+      min-width: 165px !important;
+
+      ccr-popup-description {
+        margin-right: 10px;
+      }
+    }
+
     .date-cell {
       left: 0;
       min-width: 125px;

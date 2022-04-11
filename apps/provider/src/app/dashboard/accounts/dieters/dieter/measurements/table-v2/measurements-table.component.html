@@ -12,7 +12,15 @@
           <th class="device-cell" scope="col">{{ 'MEASUREMENT.DEVICE' | translate }}</th>
           <th
           *ngFor="let column of columns"
-          [ngClass]="{ 'wide-cell': column.id === '12' || column.id === '43' || column.id === '45' }"
+          [ngClass]="{ 'wide-cell':
+                          column.id === '12' ||
+                          column.id === '43' ||
+                          column.id === '45',
+                        'very-wide-cell':
+                          column.id === '55' ||
+                          column.id === '56' ||
+                          column.id === '57'
+                      }"
           class="common-cell"
           scope="col">
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" scope="col">
@@ -116,7 +124,15 @@
   <td
   *ngFor="let column of columns"
   class="common-cell"
-  [ngClass]="{ 'wide-cell': column.id === '12' || column.id === '43' || column.id === '45' }"
+  [ngClass]="{ 'wide-cell':
+                  column.id === '12' ||
+                  column.id === '43' ||
+                  column.id === '45',
+                'very-wide-cell':
+                  column.id === '55' ||
+                  column.id === '56' ||
+                  column.id === '57'
+              }"
   [ngSwitch]="column.id">
     <div *ngIf="!row.isEmpty; else emptyCell">
       <ng-container *ngSwitchCase="'3'">
@@ -143,7 +159,25 @@
 
       <ng-container *ngSwitchCase="'48'">
         <span *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
-          {{ convertToHms(getGroupValue(row, column.id)) }} <span>{{ 'UNIT.HOURS' | translate }}</span>
+          {{ getGroupValue(row, column.id) | convertToHms }} <span>{{ 'UNIT.HOURS' | translate }}</span>
+        </span>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'55'">
+        <ng-container *ngTemplateOutlet="mappedEntry; context: { row: row, column: column }"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'56'">
+        <ng-container *ngTemplateOutlet="mappedEntry; context: { row: row, column: column }"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'57'">
+        <ng-container *ngTemplateOutlet="mappedEntry; context: { row: row, column: column }"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'58'">
+        <span *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
+          {{ getGroupValue(row, column.id) | convertToMinutes:2 }} <span>{{ 'GLOBAL.MINUTES' | translate }}</span>
         </span>
       </ng-container>
 
@@ -168,4 +202,10 @@
       class="clickable">delete</mat-icon>
     </div>
   </td>
+</ng-template>
+
+<ng-template #mappedEntry let-row="row" let-column="column">
+  <span *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
+    {{ getGroupValue(row, column.id) | unitMapToReadable:getGroupType(row, column.id) }}
+  </span>
 </ng-template>

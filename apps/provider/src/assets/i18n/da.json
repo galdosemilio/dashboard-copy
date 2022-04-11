@@ -325,6 +325,7 @@
     "REMOVE": "Fjern",
     "REMOVE_PHASE_DESCRIPTION": "Er du sikker på du ønsker at fjerne fasen {{phase}}?",
     "REMOVE_PHASE_TITLE": "Fjern fase",
+    "RPM_ENTRIES_EMPTY_LIST": "Der er ingen RPM-poster, der matcher de nuværende søgekriterier",
     "SAT_FAT": "Sat. Fedt",
     "SAVE_CLINIC": "Gem klinik",
     "SCHEDULE_APPOINTMENT": "Planlægning af udnævnelse",
@@ -974,8 +975,6 @@
     "ARM": "Arm",
     "BLOOD_OXYGEN": "Blod ilt",
     "BLOOD_PRESSURE": "Blodtryk",
-    "BLOOD_PRESSURE_DIASTOLIC": "Diastolisk blodtryk",
-    "BLOOD_PRESSURE_SYSTOLIC": "Systolisk blodtryk",
     "BMI": "BMI",
     "BMR": "BMR",
     "BODY_FAT": "Kropsfedt",
@@ -987,7 +986,6 @@
     "DEVICE": "Enhed",
     "DISTANCE": "Afstand",
     "DISTANCE_NOTE": "Afstandsværdier vurderet ud fra skridt",
-    "EXTRACELLULAR_WATER": "Ekstracellulært vand",
     "FASTING_GLUCOSE": "Fasteglukose",
     "HBA1C": "HbA1c",
     "HDL": "HDL",
@@ -995,13 +993,10 @@
     "HIP": "Hofte",
     "HSCRP": "HSCRP",
     "HYDRATION": "Hydrering",
-    "INSULIN": "Insulin",
-    "KETONES": "Ketoner",
     "LDL": "LDL",
     "LEAN_MASS": "Mager Masse",
     "MISSING_WEIGHT_NOTE": "Nogle målinger findes for denne tidsperiode, der ikke kan vises for denne graf. Disse værdier er synlige på <a href=\"{{KEEPtableViewLink}}\">tabelvisning</a> kun. Datoerne for der findes disse målinger er:",
     "MORE_DATA_EXISTS_FOR_DAY": "Flere data eksisterer, men kun 24 poster pr. Dag vises som standard.",
-    "NECK": "Nakke",
     "RESPIRATION_RATE": "Respirationshastighed",
     "RESTFULNESS": "Komfort",
     "SLEEP": "Sove",
@@ -1010,14 +1005,11 @@
     "TABLE_SUMMARY_HINT": "Seneste måling",
     "TEMPERATURE": "Kropstemperatur",
     "THIGH": "Lår",
-    "THORAX": "Thorax",
-    "TOTAL_BODY_WATER": "Samlet kropsvand",
     "TOTAL_CHOLESTEROL": "Samlet Kolesterol",
     "TRIGLYCERIDES": "Triglycerider",
     "VISCERAL_ADIP_TISSUE": "Visceral fedtvolumen",
     "VISCERAL_ADIP_TISSUE_ABOUT": "Mængden af visceralt fedt lagret i en persons krop målt i milliliter eller liter. Denne måling beregnes kun fra tredjepartsenheder og registreres i øjeblikket ikke fra Balance Smart Scale, der forbinder direkte en patients mobilapp.",
     "VISCERAL_FAT": "Visceralt fedt (Procentdel)",
-    "VISCERAL_FAT_MASS": "Visceral fedtmasse",
     "VISCERAL_FAT_PERCENTAGE_ABOUT": "Procentdelen af den enkeltes samlede kropsfedt, der er visceralt fedt. Denne måling beregnes kun fra tredjepartsenheder og registreres i øjeblikket ikke fra Balance Smart Scale, der forbinder direkte en patients mobilapp.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
@@ -1176,6 +1168,7 @@
       "LABEL_SORTED_SUCCESSFULLY": "Kategori sorteret med succes.",
       "MANUAL_INTERACTION_CREATED": "Manuel kommunikation oprettet.",
       "MEASUREMENT_ADDED": "Mål tilføjet med succes.",
+      "MEASUREMENT_DELETED": "Måling af succesfuldt slettet.",
       "MEASUREMENT_LABEL_CREATED": "Kategori med succes oprettet.",
       "MEASUREMENT_LABEL_DELETED": "Katory slutet slartet.",
       "MEASUREMENT_LABEL_UPDATED": "Kategori med succes opdateret.",
@@ -1817,5 +1810,10 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Startvejledning"
+  },
+  "notifier": {
+    "ERROR": {
+      "NOTHING_TO_EXPORT": ""
+    }
   }
 }

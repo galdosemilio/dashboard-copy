@@ -166,7 +166,8 @@ export class MeasurementsTableV2Component implements OnInit {
 
   private _dates: DateNavigatorOutput
   private _label: MeasurementLabelEntry
-  private dates$: Subject<DateNavigatorOutput> = new Subject<DateNavigatorOutput>()
+  private dates$: Subject<DateNavigatorOutput> =
+    new Subject<DateNavigatorOutput>()
   private columns$: Subject<void> = new Subject<void>()
 
   constructor(
@@ -186,12 +187,6 @@ export class MeasurementsTableV2Component implements OnInit {
     void this.refreshColumns()
     this.createDataSource()
     this.subscribeToEvents()
-  }
-
-  public convertToHms(seconds: number): string {
-    const hours = Math.floor(seconds / 3600)
-    const minutes = Math.floor((seconds % 3600) / 60)
-    return `${hours}:${('00' + minutes).substr(-2, 2)}`
   }
 
   public getDistanceUnit(): string {
@@ -463,7 +458,7 @@ export class MeasurementsTableV2Component implements OnInit {
   ): Promise<void> {
     try {
       await this.dataPoint.deleteGroup({ id: group.id })
-      this.notifier.success('Measurement deleted successfully')
+      this.notifier.success(_('NOTIFY.SUCCESS.MEASUREMENT_DELETED'))
       this.source.refresh()
     } catch (error) {
       this.notifier.error(error)
@@ -472,9 +467,8 @@ export class MeasurementsTableV2Component implements OnInit {
 
   private async refreshColumns(): Promise<void> {
     try {
-      const associations = await this.measurementLabel.resolveLabelDataPointTypes(
-        this.label
-      )
+      const associations =
+        await this.measurementLabel.resolveLabelDataPointTypes(this.label)
 
       this.columns = associations.map((assoc) => assoc.type)
 

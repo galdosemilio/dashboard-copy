@@ -325,6 +325,7 @@
     "REMOVE": "إزالة",
     "REMOVE_PHASE_DESCRIPTION": "هل أنت متأكد أنك تريد إزالة مرحلة {{phase}}؟",
     "REMOVE_PHASE_TITLE": "إزالة المرحلة",
+    "RPM_ENTRIES_EMPTY_LIST": "لا توجد إدخالات RPM التي تتطابق مع معايير البحث الحالية",
     "SAT_FAT": "الدهون المشبعة",
     "SAVE_CLINIC": "حفظ العيادة",
     "SCHEDULE_APPOINTMENT": "جدولة موعد",
@@ -974,8 +975,6 @@
     "ARM": "ذراع",
     "BLOOD_OXYGEN": "أكسجين الدم",
     "BLOOD_PRESSURE": "ضغط الدم",
-    "BLOOD_PRESSURE_DIASTOLIC": "ضغط الدم الانبساطي",
-    "BLOOD_PRESSURE_SYSTOLIC": "ضغط الدم الانقباضي",
     "BMI": "BMI",
     "BMR": "BMR",
     "BODY_FAT": "نسبة الدهون في الجسم",
@@ -987,7 +986,6 @@
     "DEVICE": "جهاز",
     "DISTANCE": "المسافة",
     "DISTANCE_NOTE": "يتم تقدير المسافة اعتمادً على الخطوات",
-    "EXTRACELLULAR_WATER": "المياه خارج الخلية",
     "FASTING_GLUCOSE": "سكر الصوم",
     "HBA1C": "نسبة HbA1c",
     "HDL": "HDL",
@@ -995,13 +993,10 @@
     "HIP": "الفخذ",
     "HSCRP": "HSCRP",
     "HYDRATION": "نسبة الماء",
-    "INSULIN": "الأنسولين",
-    "KETONES": "الكيتونات",
     "LDL": "LDL",
     "LEAN_MASS": "الكتلة",
     "MISSING_WEIGHT_NOTE": "توجد بعض القياسات لهذه الفترة الزمنية التي لا يمكن عرضها لهذا الرسم البياني. هذه القيم هي واضحة على <a href=\"{{tableViewLink}}\">عرض جدول</a> فقط. مواعيد التي توجد هذه القياسات هي:",
     "MORE_DATA_EXISTS_FOR_DAY": "يوجد المزيد من البيانات ولكن يتم عرض فقط 24 إدخال في اليوم بشكل افتراضي.",
-    "NECK": "رقبه",
     "RESPIRATION_RATE": "معدل التنفس",
     "RESTFULNESS": "الاسترخاء",
     "SLEEP": "النوم",
@@ -1010,14 +1005,11 @@
     "TABLE_SUMMARY_HINT": "أحدث قياس",
     "TEMPERATURE": "درجة حرارة الجسم",
     "THIGH": "الفخذ",
-    "THORAX": "صدر",
-    "TOTAL_BODY_WATER": "مجموع الماء في الجسم",
     "TOTAL_CHOLESTEROL": "إجمالي الكوليسترول",
     "TRIGLYCERIDES": "الدهون الثلاثية",
     "VISCERAL_ADIP_TISSUE": "حجم الأنسجة الدهنية الحشوية",
     "VISCERAL_ADIP_TISSUE_ABOUT": "حجم الدهون الحشوية المخزنة في جسم الفرد ، وتقاس بالملليترات أو اللترات. يتم حساب هذا القياس فقط من أجهزة الجهات الخارجية ، ولا يتم تسجيله حاليًا من الميزان الذكي الميزان الذي يربط مباشرة بتطبيق الهاتف المحمول الخاص بالمرضى.",
     "VISCERAL_FAT": "الدهون الحشوية (النسبة المئوية)",
-    "VISCERAL_FAT_MASS": "كتلة الدهون الحشوية",
     "VISCERAL_FAT_PERCENTAGE_ABOUT": "النسبة المئوية للدهون الحشوية من إجمالي دهون الجسم. يتم حساب هذا القياس فقط من أجهزة الجهات الخارجية ، ولا يتم تسجيله حاليًا من الميزان الذكي الميزان الذي يربط مباشرة بتطبيق الهاتف المحمول الخاص بالمرضى.",
     "VISCERAL_FAT_TANITA": {
       "TOOLTIP": {
@@ -1176,6 +1168,7 @@
       "LABEL_SORTED_SUCCESSFULLY": "الفئة مرتبة بنجاح.",
       "MANUAL_INTERACTION_CREATED": "الاتصال اليدوي إنشاء بنجاح.",
       "MEASUREMENT_ADDED": "تم إضافة القياسات بنجاح",
+      "MEASUREMENT_DELETED": "تم حذف القياس بنجاح.",
       "MEASUREMENT_LABEL_CREATED": "الفئة التي تم إنشاؤها بنجاح.",
       "MEASUREMENT_LABEL_DELETED": "تم حذف الفئة بنجاح.",
       "MEASUREMENT_LABEL_UPDATED": "تم تحديث الفئة بنجاح.",
@@ -1817,5 +1810,10 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "دليل المبتدئين"
+  },
+  "notifier": {
+    "ERROR": {
+      "NOTHING_TO_EXPORT": ""
+    }
   }
 }
