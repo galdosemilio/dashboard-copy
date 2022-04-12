@@ -47,7 +47,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     dateLocale: string
   ) {
     super()
-    this.setLocale(dateLocale || moment.locale())
+    this.setLocale(dateLocale.toLowerCase() || moment.locale())
   }
 
   setLocale(locale: string) {
