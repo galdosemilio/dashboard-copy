@@ -26,6 +26,7 @@ import { Store } from '@ngrx/store'
 import { CCRConfig } from '@app/config'
 import { filter, merge, uniqBy } from 'lodash'
 import {
+  DataPointTypes,
   MeasurementDataPointMinimalType,
   MeasurementLabelEntry,
   NamedEntity
@@ -116,6 +117,11 @@ export class CcrMeasurementChartV2Component implements OnInit {
 
   private dates$: Subject<DateNavigatorOutput> =
     new Subject<DateNavigatorOutput>()
+  private readonly forbiddenDataTypes: DataPointTypes[] = [
+    DataPointTypes.NXTSTIM_PROFILE_TYPE,
+    DataPointTypes.NXTSTIM_PROGRAM,
+    DataPointTypes.NXTSTIM_BODY_LOCATION
+  ]
   private _dates: DateNavigatorOutput
   private _label?: MeasurementLabelEntry
 
@@ -224,7 +230,12 @@ export class CcrMeasurementChartV2Component implements OnInit {
         await this.measurementLabel.resolveLabelDataPointTypes(this.label)
       ).map((assoc) => assoc.type)
 
-      if (!types.length) {
+      const filteredTypes = types.filter(
+        (dataType) =>
+          !this.forbiddenDataTypes.includes(dataType.id as DataPointTypes)
+      )
+
+      if (!filteredTypes.length) {
         if (this.source) {
           this.source.type = ''
         }
@@ -233,10 +244,10 @@ export class CcrMeasurementChartV2Component implements OnInit {
       }
 
       if (this.source) {
-        this.source.type = types[0].id
+        this.source.type = filteredTypes[0].id
       }
 
-      this.types = this.parseWithSyntheticTypes(types)
+      this.types = this.parseWithSyntheticTypes(filteredTypes)
       this.refresh()
     } catch (error) {
       this.notifier.error(error)

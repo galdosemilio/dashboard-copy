@@ -56,12 +56,12 @@ export class AddMeasurementsV2Component implements OnInit {
     {
       id: '1',
       displayName: _('GLOBAL.MINUTES'),
-      magnitude: 60
+      magnitude: 1
     },
     {
       id: '2',
       displayName: _('UNIT.HOURS'),
-      magnitude: 360
+      magnitude: 60
     }
   ]
   public measurementForm: FormArray

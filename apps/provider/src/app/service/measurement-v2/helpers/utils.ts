@@ -16,9 +16,11 @@ export function getTooltipFromDataPoint(
     dataPoint.value,
     dataPoint.type,
     measurementPreference
-  ).toFixed(1)} ${convertUnitToPreferenceFormat(
-    dataPoint.type,
-    measurementPreference,
-    lang
-  )}`
+  ).toFixed(1)} ${
+    convertUnitToPreferenceFormat(
+      dataPoint.type,
+      measurementPreference,
+      lang
+    ) ?? ''
+  }`
 }
