@@ -69,6 +69,12 @@ export class DeviceSyncComponent implements OnInit {
 
   private async fetchDevices(): Promise<void> {
     try {
+      if (!this.accountId) {
+        this.services = []
+        this.createForms()
+        return
+      }
+
       const response = await this.authentication.lastActivity(this.accountId)
       this.services = response.data
 
