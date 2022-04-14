@@ -1,3 +1,19 @@
+# [1.79.0](https://github.com/coachcare/dashboard/compare/v1.78.2...v1.79.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* clinics page not showing at all on mobiles [FRON-2714] ([5815702](https://github.com/coachcare/dashboard/commit/5815702385f5b2c099173d7f98f307b1c53b2aa3))
+* removed mapped types from the chart view [FRON-2726] ([2987516](https://github.com/coachcare/dashboard/commit/29875168ca1c9a8ef026aa6625127e752fdb3aa2))
+* solved an issue with moment localization ([cb1cf14](https://github.com/coachcare/dashboard/commit/cb1cf14b1eb880b0846f072a192424cf9e8aa8a8))
+
+
+### Features
+
+* added account identifier creation [FRON-2626] ([4b6a8fe](https://github.com/coachcare/dashboard/commit/4b6a8fe82a6ceacaa31a45480e34e1f51da3135a))
+* added support for nxtstim data types [FRON-2726] ([c66e9ff](https://github.com/coachcare/dashboard/commit/c66e9fff5cffafe746314e7b3c345306c7761a96))
+* integrated spree to checkout process [FRON-2624] ([3263faa](https://github.com/coachcare/dashboard/commit/3263faaed66c07954da1aebdf86e0f2a4ce0b9ae))
+
 ## [1.78.2](https://github.com/coachcare/dashboard/compare/v1.78.1...v1.78.2) (2022-04-08)
 
 
