@@ -1204,6 +1204,8 @@
       "PROFILE_UPDATED": "Profil mis à jour.",
       "RPM_PREF_REMOVED": "Préférence RPM supprimés.",
       "RPM_PREF_UPDATED": "Préférence RPM mis à jour avec succès.",
+      "SENT_PASSWORD_RESET": "Réinitialiser le mot de passe e-mail envoyé.",
+      "SENT_PASSWORD_RESET_EMAIL": "E-mail de réinitialisation du mot de passe envoyé. Merci de consulter vos emails.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "Séquence autoenrollment supprimé avec succès.",
       "SEQUENCE_SAVED": "Séquence enregistrée avec succès.",
       "SEQUENCE_SETTINGS_UPDATED": "Paramètres de séquence mis à jour.",

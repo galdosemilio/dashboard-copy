@@ -181,6 +181,7 @@ export class CoachProfileComponent implements BindForm, OnDestroy, OnInit {
             organization: this.context.organizationId,
             email: account.email || ''
           })
+          this.notifier.success(_('NOTIFY.SUCCESS.SENT_PASSWORD_RESET'))
         } catch (error) {
           this.notifier.error(error)
         } finally {

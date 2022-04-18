@@ -1204,6 +1204,8 @@
       "PROFILE_UPDATED": "הפרופיל עודכן.",
       "RPM_PREF_REMOVED": "העדפת סל\"ד הוסרה בהצלחה.",
       "RPM_PREF_UPDATED": "העדפת סל\"ד עודכנה בהצלחה.",
+      "SENT_PASSWORD_RESET": "איפוס סיסמה שנשלח.",
+      "SENT_PASSWORD_RESET_EMAIL": "דוא\"ל איפוס סיסמה נשלח. אנא בדוק את המייל שלך.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "הרשמה אוטומטית רצף הוסר בהצלחה.",
       "SEQUENCE_SAVED": "הרצף נשמר בהצלחה.",
       "SEQUENCE_SETTINGS_UPDATED": "הגדרות רצף עודכנו בהצלחה.",

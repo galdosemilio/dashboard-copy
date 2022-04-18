@@ -1204,6 +1204,8 @@
       "PROFILE_UPDATED": "Perfil atualizado.",
       "RPM_PREF_REMOVED": "Preferência RPM removido com sucesso.",
       "RPM_PREF_UPDATED": "Preferência RPM atualizado com sucesso.",
+      "SENT_PASSWORD_RESET": "Redefinir a senha e -mail enviado.",
+      "SENT_PASSWORD_RESET_EMAIL": "Email de redefinição de senha enviado. Por favor verifique seu email.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "registro automático sequência removida com sucesso.",
       "SEQUENCE_SAVED": "Sequência guardada com sucesso.",
       "SEQUENCE_SETTINGS_UPDATED": "Configurações seqüência atualizada com sucesso.",

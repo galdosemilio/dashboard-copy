@@ -1204,6 +1204,8 @@
       "PROFILE_UPDATED": "تم تحديث الملف الشخصي",
       "RPM_PREF_REMOVED": "RPM تفضيل إزالة بنجاح.",
       "RPM_PREF_UPDATED": "RPM تفضيل تحديث بنجاح.",
+      "SENT_PASSWORD_RESET": "إرسال كلمة المرور عبر البريد الإلكتروني المرسلة.",
+      "SENT_PASSWORD_RESET_EMAIL": "تم إرسال بريد إلكتروني لإعادة تعيين كلمة المرور. تفقد بريدك الالكتروني من فضلك.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "تسلسل الانتساب التلقائي إزالة بنجاح.",
       "SEQUENCE_SAVED": "تم حفظ التسلسل بنجاح.",
       "SEQUENCE_SETTINGS_UPDATED": "ضبط تسلسل تجديد بنجاح.",

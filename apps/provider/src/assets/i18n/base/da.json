@@ -1204,6 +1204,8 @@
       "PROFILE_UPDATED": "Profil opdateret.",
       "RPM_PREF_REMOVED": "RPM præference fjernet.",
       "RPM_PREF_UPDATED": "RPM præference opdateret.",
+      "SENT_PASSWORD_RESET": "Nulstilling af adgangskode sendt.",
+      "SENT_PASSWORD_RESET_EMAIL": "E-mail til nulstilling af adgangskode sendt. Tjek venligst din email.",
       "SEQUENCE_AUTOENROLLMENT_REMOVED": "Sekvens autoenrollment fjernet.",
       "SEQUENCE_SAVED": "Sekvens gemt med succes.",
       "SEQUENCE_SETTINGS_UPDATED": "Sequence indstillinger opdateret.",

@@ -116,6 +116,7 @@ export class DieterProfileComponent implements BindForm, OnDestroy, OnInit {
             organization: this.context.organizationId,
             email: dieter.email || ''
           })
+          this.notifier.success(_('NOTIFY.SUCCESS.SENT_PASSWORD_RESET'))
         } catch (error) {
           this.notifier.error(error)
         } finally {
