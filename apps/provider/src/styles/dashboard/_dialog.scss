@@ -39,7 +39,6 @@
 }
 .cdk-overlay-pane:not(.mat-datepicker-dialog) {
   @media #{$small-and-down} {
-    max-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
   }

@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "Associated at",
     "AVAILABLE": "Available",
     "BACK_LIST": "Back to List",
+    "BILLING_ADDRESS": "Billing Address",
     "BIRTHDATE": "Birthdate",
     "BOUNDS": "Bounds",
     "CALCIUM": "Calcium",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "Enrollment Window",
     "EVENING": "Evening",
     "EVERY_DAYWEEK": "Every {{ day }}",
+    "EXPIRATION_DATE": "Expiration Date",
     "FAT": "Fat",
     "FIBER": "Fiber",
     "FILL_PHYSICIAN_FORM": "Please, complete a Primary Care Physician Form.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "On day {{ day }} of every month",
     "OPEN_IN_NEW": "Open in New Tab",
     "OPTIONAL": "Optional",
+    "ORDER_SUMMARY": "Order Summary",
     "OTHERS": "Others",
     "PATIENT_CALL_EXPLANATION": "You may receive incoming video conference calls from your coach or provider on this dashboard. A notification will be displayed on the screen when an incoming call is received, from which you can answer the call.",
     "PATIENT_DASHBOARD_WELCOME": "Welcome, {{ name }}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "The call cannot be completed. The patient has never logged in to their mobile app, so they will not be able to receive an incoming call.  Once the patient has logged in, please retry the call.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "Patient Availability is Uncertain",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "This call is unlikely to be successful. The patient you are attempting to call is logged into a different mobile app than the selected clinic from the upper left corner.",
+    "PAYMENT_METHOD": "Payment Method",
     "PERSONAL_INFO": "Personal Info",
     "PHONE": "Phone",
     "PHONE_NUMBER": "Phone Number",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "Send Password Reset Link",
     "SEND_PASSWORD_RESET_CONTENT": "Do you want to send a password reset email to <strong><a href=\"mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>?",
     "SESSION_STARTS_AT": "Session Starts at {{ time }}",
+    "SHIPPING": "Shipping",
+    "SHIPPING_ADDRESS": "Shipping Address",
     "SINGLE_DAY": "Single Day",
     "SINGLE_DAY_AVAILABILITY": "Single-day availability",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Enter availability to see clients for specific dates. This is a good way to set your schedule if you work different hours each week. IMPORTANT NOTE: You may not schedule a one-time block of availability if you already have set a recurring availability for that time.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "Submit Support Request",
     "SUGAR": "Sugar",
     "SURE_WANT_TO_CONTINUE": "Are you sure you want to continue?",
+    "TAX": "Tax",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Select a single patient or coach to add to this message thread.<br><br>Once added, this account will have access to view <strong>all</strong> existing and new messages in this message thread. Further, they will be able to add new messages to the thread.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associated with <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Thread Information",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "Automatically add selected coaches to all message threads in this clinic"
     },
     "BACK": "Back",
+    "BUY": "Buy",
     "CANCEL": "Cancel",
     "CASCADING": "Cascading",
     "CLINICS": "Clinics",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "selected microphone changed",
       "NOTE_ADDED": "Note successfully added.",
       "NOTE_DELETED": "Note successfully deleted.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "Order completed successfully.",
       "PACKAGE_ENROLLED": "Phase enrolled.",
       "PACKAGE_UNENROLLED": "Phase unenrolled.",
       "PATIENT_CREATED": "Patient successfully created.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Starter Guide"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

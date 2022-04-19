@@ -1,0 +1,32 @@
+<div
+fxLayout="row"
+fxLayout.xs="column"
+fxLayoutAlign="space-between stretch"
+fxLayoutAlign.xs="start stretch"
+fxLayoutGap="15px">
+  <div *ngIf="showImage" class="product-image" [style.background-image]="'url(' + imageBaseUrl + product.imageUrl + ')'">
+    &nbsp;
+  </div>
+
+  <div
+  fxFlex
+  fxLayout="column"
+  fxLayoutAlign="center start"
+  fxLayoutAlign.xs="center stretch"
+  fxLayoutGap="10px">
+    <h4 [class.ccr-text-left]="!showImage">{{ product.name }}</h4>
+    <p *ngIf="product.description" [class.ccr-text-left]="!showImage">{{ product.description }}</p>
+  </div>
+
+  <div *ngIf="canBuy"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutAlign.xs="center stretch">
+    <button
+    (click)="showBuyProductDialog()"
+    color="accent"
+    mat-flat-button>
+      {{ 'GLOBAL.BUY' | translate }}
+    </button>
+  </div>
+</div>

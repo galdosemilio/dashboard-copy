@@ -98,6 +98,11 @@ const routes: Routes = [
         path: 'new-appointment',
         component: NewAppointmentComponent,
         canActivate: [PatientAccountGuard]
+      },
+      {
+        path: 'store',
+        loadChildren: () =>
+          import('./ecommerce/ecommerce.module').then((m) => m.EcommerceModule)
       }
       // { path: 'resources/support', component: SupportComponent },
       // { path: 'resources/marketing', component: MarketingComponent },

@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "المرتبطة في",
     "AVAILABLE": "متاح",
     "BACK_LIST": "عودة إلى القائمة",
+    "BILLING_ADDRESS": "عنوان وصول الفواتير",
     "BIRTHDATE": "تاريخ الولادة",
     "BOUNDS": "حدود",
     "CALCIUM": "الكالسيوم",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "نافذة التسجيل",
     "EVENING": "المغرب",
     "EVERY_DAYWEEK": "كل {{day}}",
+    "EXPIRATION_DATE": "تاريخ الإنتهاء",
     "FAT": "الدهون",
     "FIBER": "الأساسية",
     "FILL_PHYSICIAN_FORM": "من فضلك ، أكمل نموذج طبيب الرعاية الأولية.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "في يوم {{day}} من كل شهر",
     "OPEN_IN_NEW": "فتح في علامة تبويب جديدة",
     "OPTIONAL": "اختياري",
+    "ORDER_SUMMARY": "ملخص الطلب",
     "OTHERS": "آحرون",
     "PATIENT_CALL_EXPLANATION": "قد تتلقى مكالمات فيديو فيديو واردة من مدربك أو مزودك على لوحة القيادة هذه. سيتم عرض إشعار على الشاشة عند استلام مكالمة واردة، يمكنك من خلالها الإجابة على المكالمة.",
     "PATIENT_DASHBOARD_WELCOME": "مرحبا، {{name}}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "لا يمكن إتمام المكالمة. لم يسجل المريض الدخول إلى تطبيق الهاتف المحمول أبدًا ، لذلك لن يتمكن من تلقي مكالمة واردة. بمجرد تسجيل دخول المريض ، يرجى إعادة المحاولة.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "توفر المريض غير مؤكد",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "من غير المحتمل أن تكون هذه المكالمة ناجحة. يتم تسجيل دخول المريض الذي تحاول الاتصال به إلى تطبيق جوال مختلف عن العيادة المحددة من الزاوية اليسرى العليا.",
+    "PAYMENT_METHOD": "طريقة الدفع او السداد",
     "PERSONAL_INFO": "معلومات شخصية",
     "PHONE": "الهاتف",
     "PHONE_NUMBER": "رقم الهاتف",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "إرسال رابط إعادة تعيين كلمة المرور",
     "SEND_PASSWORD_RESET_CONTENT": "هل ترغب في إرسال بريد إلكتروني لإعادة تعيين كلمة المرور إلى <strong><a href=mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>؟\"",
     "SESSION_STARTS_AT": "تبدأ الجلسة في {{time}}",
+    "SHIPPING": "شحن",
+    "SHIPPING_ADDRESS": "عنوان الشحن",
     "SINGLE_DAY": "يوم واحد",
     "SINGLE_DAY_AVAILABILITY": "الإتاحة في اليوم الواحد",
     "SINGLE_DAY_AVAILABILITY_NOTE": "أدخل التوفر لرؤية العملاء لتواريخ محددة. هذه طريقة جيدة لتعيين جدولك إذا كنت تعمل ساعات مختلفة كل أسبوع. ملاحظة مهمة: لا يجوز لك تحديد موعد لمرة واحدة من التوافر إذا كنت قد قمت بالفعل بتعيين توفر متكرر لذلك الوقت.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "تقديم طلب الدعم",
     "SUGAR": "السكر",
     "SURE_WANT_TO_CONTINUE": "هل أنت متأكد أنك تريد المتابعة؟",
+    "TAX": "ضريبة",
     "THREAD_ADD_MEMBER_DESCRIPTION": "حدد مريض واحد أو مدرب لإضافة لهذا الموضوع الرسالة.<br><br>مرة واحدة وأضاف، أن هذا الحساب الحصول على عرض <strong>جميع</strong> القائمة والجديدة الرسائل في هذا الموضوع الرسالة. وعلاوة على ذلك، فإنها سوف تكون قادرة على إضافة رسائل جديدة إلى الموضوع.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "كاتب المرتبطة <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "معلومات الموضوع",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "إضافة تلقائيا المدربين المحدد إلى كل المواضيع الرسالة في هذه العيادة"
     },
     "BACK": "خلف",
+    "BUY": "يشتري",
     "CANCEL": "إلغاء",
     "CASCADING": "متتالية",
     "CLINICS": "العيادات",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "تغيير المايكروفون المحدد",
       "NOTE_ADDED": "تم إضافة الملاحظة بنجاح",
       "NOTE_DELETED": "تم حذف الملاحظة بنجاح.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "اكتمل الطلب بنجاح.",
       "PACKAGE_ENROLLED": "تم تسجيل الحزمة",
       "PACKAGE_UNENROLLED": "تم إلغاء تسجيل الحزمة",
       "PATIENT_CREATED": "تم إنشاء ملف المريض",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "دليل المبتدئين"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

@@ -11,7 +11,8 @@ $warning-outline-color: #ffdb7e;
     url('/provider/assets/wellcore/fonts/montserrat.ttf') format('ttf');
 }
 
-ccr-wellcore-layout {
+ccr-wellcore-layout,
+.force-wellcore-layout {
   font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
 
   a {
@@ -436,7 +437,7 @@ ccr-wellcore-layout {
 
     .wellcore-toolbar {
       &.mat-toolbar {
-        height: 128px;
+        height: 100px;
       }
 
       wellcore-topbar {

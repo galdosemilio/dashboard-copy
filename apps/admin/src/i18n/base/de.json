@@ -87,6 +87,7 @@
         "NO_LABEL_ASSOCIATIONS": "Dieser Organisation sind keine Phasen zugeordnet",
         "SPLASH_HINT": "Splash-Updates werden nach 24 Stunden sichtbar"
       },
+      "STORE_URL": "Shop URL",
       "TITLE": "Kliniken"
     },
     "SYNC": "Sync",

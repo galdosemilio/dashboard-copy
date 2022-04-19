@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "משויך ב",
     "AVAILABLE": "זמינות",
     "BACK_LIST": "חזרה לרשימה",
+    "BILLING_ADDRESS": "כתובת לחיוב",
     "BIRTHDATE": "תאריך לידה",
     "BOUNDS": "חסמים",
     "CALCIUM": "סִידָן",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "חלון הרשמה",
     "EVENING": "עֶרֶב",
     "EVERY_DAYWEEK": "כל {{day}}",
+    "EXPIRATION_DATE": "תאריך תפוגה",
     "FAT": "שומן",
     "FIBER": "סיבים",
     "FILL_PHYSICIAN_FORM": "אנא מלא טופס רופא ראשוני.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "ביום {{day}} בכל חודש",
     "OPEN_IN_NEW": "פתח בכרטיסייה חדשה",
     "OPTIONAL": "אופציונלי",
+    "ORDER_SUMMARY": "סיכום הזמנה",
     "OTHERS": "אחרים",
     "PATIENT_CALL_EXPLANATION": "ייתכן שתקבל שיחות ועידת וידאו נכנסות מהמאמן או מהספק שלך על לוח המחוונים. הודעה תוצג על המסך כאשר מתקבלת שיחה נכנסת, שממנו תוכל לענות לשיחה.",
     "PATIENT_DASHBOARD_WELCOME": "ברוכים הבאים, {{name}}}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "לא ניתן להשלים את השיחה. המטופל מעולם לא התחבר ליישום הנייד שלו, כך שהוא לא יוכל לקבל שיחה נכנסת. לאחר שהמטופל התחבר, אנא נסה שוב את השיחה.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "זמינות המטופל אינה ודאית",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "סביר להניח שקריאה זו לא תצליח. המטופל שאליו אתה מנסה להתקשר נכנס לאפליקציה סלולרית שונה מהמרפאה שנבחרה בפינה השמאלית העליונה.",
+    "PAYMENT_METHOD": "אמצעי תשלום",
     "PERSONAL_INFO": "מידע אישי",
     "PHONE": "טלפון",
     "PHONE_NUMBER": "מספר טלפון",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "שלח קישור לאיפוס סיסמה",
     "SEND_PASSWORD_RESET_CONTENT": "האם ברצונך לשלוח הודעת אימייל לאיפוס סיסמה אל <strong><a href=mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>?\"",
     "SESSION_STARTS_AT": "הפגישה מתחילה ב {{time}}",
+    "SHIPPING": "משלוח",
+    "SHIPPING_ADDRESS": "כתובת למשלוח",
     "SINGLE_DAY": "יום אחד",
     "SINGLE_DAY_AVAILABILITY": "זמינות יומית",
     "SINGLE_DAY_AVAILABILITY_NOTE": "הכנס זמינות כדי לראות לקוחות עבור תאריכים ספציפיים. זוהי דרך טובה לקבוע את לוח הזמנים שלך אם אתה עובד שעות שונות בכל שבוע. הערה חשובה: אינך רשאי לתזמן חסימת זמינות חד פעמית אם כבר הגדרת זמינות חוזרת לזמן זה.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "שלח בקשת תמיכה",
     "SUGAR": "סוכר",
     "SURE_WANT_TO_CONTINUE": "האם אתה בטוח שאתה רוצה להמשיך?",
+    "TAX": "מַס",
     "THREAD_ADD_MEMBER_DESCRIPTION": "בחר חולה או מאמן יחיד להוסיף חוט הודעה זו.<br><br>לאחר הוספה, יהיה גישה לחשבון זה כדי להציג <strong>כל ההודעות</strong> קיימות וחדשות בפתיל הודעה זו. יתר על כן, הם יוכלו להוסיף הודעות חדשות על החוט.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "מפרסם הקשורים <strong>{{name}} (מזהה {{id}})</strong>",
     "THREAD_INFO": "מידע Thread",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "הוספה אוטומטית של המאמנים שנבחרו לכל הודעה הנושאים בקליניקה זו"
     },
     "BACK": "חזור",
+    "BUY": "לִקְנוֹת",
     "CANCEL": "ביטול",
     "CASCADING": "מדורגים",
     "CLINICS": "מרפאות",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "המיקרופון שנבחר השתנה",
       "NOTE_ADDED": "נוספה הערה בהצלחה.",
       "NOTE_DELETED": "ההערה נמחקה בהצלחה.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "ההזמנה הושלמה בהצלחה.",
       "PACKAGE_ENROLLED": "נרשמה חבילה.",
       "PACKAGE_UNENROLLED": "לא נרשמה חבילה.",
       "PATIENT_CREATED": "נוצר מטופל בהצלחה.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "מדריך למתחילים"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

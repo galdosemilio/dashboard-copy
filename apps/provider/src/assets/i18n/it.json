@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "Associato a",
     "AVAILABLE": "Disponibile",
     "BACK_LIST": "Torna all'Elenco",
+    "BILLING_ADDRESS": "Indirizzo di Fatturazione",
     "BIRTHDATE": "Data di nascita",
     "BOUNDS": "Misura",
     "CALCIUM": "Calcio",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "Finestra di registrazione",
     "EVENING": "Sera",
     "EVERY_DAYWEEK": "Ogni {{day}}",
+    "EXPIRATION_DATE": "Data di scadenza",
     "FAT": "Grassi",
     "FIBER": "Fibre",
     "FILL_PHYSICIAN_FORM": "Si prega di compilare un modulo medico di assistenza primaria.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "Il giorno {{day}} di ogni mese",
     "OPEN_IN_NEW": "Apri in una nuova scheda",
     "OPTIONAL": "Opzionale",
+    "ORDER_SUMMARY": "Riepilogo dell'ordine",
     "OTHERS": "Altri",
     "PATIENT_CALL_EXPLANATION": "È possibile ricevere chiamate di videoconferenza in entrata dal tuo allenatore o fornitore su questa dashboard. Una notifica verrà visualizzata sullo schermo quando viene ricevuta una chiamata in entrata, da cui è possibile rispondere alla chiamata.",
     "PATIENT_DASHBOARD_WELCOME": "Benvenuto, {{name}}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "La chiamata non può essere completata. Il paziente non ha mai effettuato l'accesso alla propria app mobile, quindi non sarà in grado di ricevere una chiamata in arrivo. Una volta che il paziente ha effettuato l'accesso, ripetere la chiamata.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "La disponibilità del paziente è incerta",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "È improbabile che questa chiamata abbia successo. Il paziente che si sta tentando di chiamare è connesso a un'app mobile diversa dalla clinica selezionata dall'angolo in alto a sinistra.",
+    "PAYMENT_METHOD": "Metodo di pagamento",
     "PERSONAL_INFO": "Informazioni personali",
     "PHONE": "Telefono",
     "PHONE_NUMBER": "Numero di telefono",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "Invia Link di Reset Password",
     "SEND_PASSWORD_RESET_CONTENT": "Vuoi inviare un'e-mail di reset della password a <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong>?",
     "SESSION_STARTS_AT": "La sessione inizia a {{time}}",
+    "SHIPPING": "Spedizione",
+    "SHIPPING_ADDRESS": "indirizzo di spedizione",
     "SINGLE_DAY": "Unico Giorno",
     "SINGLE_DAY_AVAILABILITY": "Disponibilità unica",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Inserisci la disponibilità per vedere i clienti per le specifiche date. Questo è un buon modo per impostare il tuo programma se lavori in orari diversi ogni settimana. NOTA IMPORTANTE: Non puoi programmare un blocco unico di disponibilità se hai già impostato una disponibilità ricorrente per quell'orario.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "Invia richiesta di supporto",
     "SUGAR": "Zuccheri",
     "SURE_WANT_TO_CONTINUE": "Sei sicuro di voler continuare?",
+    "TAX": "Imposta",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Selezionare un singolo paziente o pullman per aggiungere a questo thread di messaggi.<br><br> Una volta aggiunto, questo account avrà accesso a vista <strong>tutti</strong> messaggi esistenti e nuovi in ​​questo thread di messaggi. Inoltre, essi saranno in grado di aggiungere nuovi messaggi al thread.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associato <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informazioni Discussione",
@@ -552,6 +559,7 @@
       "DESCRIPTION": ""
     },
     "BACK": "Indietro",
+    "BUY": "Acquistare",
     "CANCEL": "Annulla",
     "CASCADING": "A Cascata",
     "CLINICS": "Cliniche",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "microfono selezionato cambiato",
       "NOTE_ADDED": "Nota aggiunta con successo.",
       "NOTE_DELETED": "Nota eliminata correttamente.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "Ordine completato con successo.",
       "PACKAGE_ENROLLED": "Pacchetto registrato.",
       "PACKAGE_UNENROLLED": "Pacchetto non registrato.",
       "PATIENT_CREATED": "Paziente creato con successo.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Guida introduttiva"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

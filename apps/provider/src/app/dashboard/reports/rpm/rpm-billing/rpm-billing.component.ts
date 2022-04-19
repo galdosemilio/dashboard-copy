@@ -213,7 +213,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       )
 
       if (!res.length) {
-        return this.notifier.error(_('notifier.ERROR.NOTHING_TO_EXPORT'))
+        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
       const filename = `RPM_Billing_${moment(criteria.asOf).format(
         'MMM_YYYY'

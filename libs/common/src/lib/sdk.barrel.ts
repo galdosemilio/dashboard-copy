@@ -80,7 +80,9 @@ import {
   Zendesk,
   MeasurementPreferenceProvider,
   MeasurementLabelProvider,
-  MeasurementDataPointTypeProvider
+  MeasurementDataPointTypeProvider,
+  SpreeProvider,
+  EcommerceProvider
 } from '@coachcare/sdk'
 
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
@@ -211,6 +213,11 @@ export const SdkApiProviders = [
   // { provide: Consultation, useClass: Consultation, deps: [ApiService] },
   { provide: CountryProvider, useClass: CountryProvider, deps: [ApiService] },
   { provide: Device, useClass: Device, deps: [ApiService] },
+  {
+    provide: EcommerceProvider,
+    useClass: EcommerceProvider,
+    deps: [ApiService]
+  },
   { provide: Exercise, useClass: Exercise, deps: [ApiService] },
   {
     provide: ExerciseAssociation,
@@ -346,6 +353,7 @@ export const SdkApiProviders = [
   { provide: Schedule, useClass: Schedule, deps: [ApiService] },
   { provide: Sequence, useClass: Sequence, deps: [ApiService] },
   { provide: Session, useClass: Session, deps: [ApiService] },
+  { provide: SpreeProvider, useClass: SpreeProvider, deps: [ApiService] },
   { provide: Supplement, useClass: Supplement, deps: [ApiService] },
   { provide: Timezone, useClass: Timezone, deps: [ApiService] },
   { provide: User, useClass: User, deps: [ApiService] },

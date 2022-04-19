@@ -615,7 +615,8 @@
               "socket.io-client",
               "pdfmake",
               "@coachcare/sdk",
-              "seedrandom"
+              "seedrandom",
+              "@spree/storefront-api-v2-sdk"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

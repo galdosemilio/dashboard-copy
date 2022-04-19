@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "associé à",
     "AVAILABLE": "Disponible",
     "BACK_LIST": "Retour à la liste",
+    "BILLING_ADDRESS": "Adresse de facturation",
     "BIRTHDATE": "Date de naissance",
     "BOUNDS": "Bornes",
     "CALCIUM": "Calcium",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "Fenêtre d'inscription",
     "EVENING": "Soir",
     "EVERY_DAYWEEK": "Chaque {{day}}",
+    "EXPIRATION_DATE": "Date d'expiration",
     "FAT": "Gras",
     "FIBER": "Fibre",
     "FILL_PHYSICIAN_FORM": "Veuillez remplir un formulaire de médecin de premier recours.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "Le jour {{day}} de chaque mois",
     "OPEN_IN_NEW": "Ouvrir dans un nouvel onglet",
     "OPTIONAL": "Facultatif",
+    "ORDER_SUMMARY": "Récapitulatif de la commande",
     "OTHERS": "Autres",
     "PATIENT_CALL_EXPLANATION": "Vous pouvez recevoir des appels de vidéoconférence entrants depuis votre entraîneur ou votre fournisseur sur ce tableau de bord. Une notification sera affichée à l'écran lorsqu'un appel entrant est reçu, à partir duquel vous pouvez répondre à l'appel.",
     "PATIENT_DASHBOARD_WELCOME": "Bienvenue, {{name}}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "L'appel ne peut pas être terminé. Le patient ne s'est jamais connecté à son application mobile, il ne pourra donc pas recevoir d'appel entrant. Une fois le patient connecté, veuillez réessayer.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "La disponibilité des patients est incertaine",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "Il est peu probable que cet appel aboutisse. Le patient que vous essayez d'appeler est connecté à une application mobile différente de la clinique sélectionnée dans le coin supérieur gauche.",
+    "PAYMENT_METHOD": "Mode de paiement",
     "PERSONAL_INFO": "Informations Personnelles",
     "PHONE": "Téléphone",
     "PHONE_NUMBER": "Numéro de téléphone",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "Envoyer le lien de réinitialisation du mot de passe",
     "SEND_PASSWORD_RESET_CONTENT": "Do you want to send a password reset email to <strong><a href=\"mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>?",
     "SESSION_STARTS_AT": "La session commence à {{time}}",
+    "SHIPPING": "Expédition",
+    "SHIPPING_ADDRESS": "Adresse de livraison",
     "SINGLE_DAY": "Une journée",
     "SINGLE_DAY_AVAILABILITY": "Disponibilité d’un jour",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Entrez la disponibilité pour voir les clients pour les dates spécifiques. Ceci est une bonne façon de définir votre calendrier si vous travaillez à des heures différentes chaque semaine. REMARQUE IMPORTANTE: Vous ne pouvez pas programmer un bloc unique de disponibilité si vous avez déjà défini une disponibilité récurrente pour ce moment-là.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "Soumettre la demande d'assistance",
     "SUGAR": "Sucre",
     "SURE_WANT_TO_CONTINUE": "Es-tu sur de vouloir continuer?",
+    "TAX": "Impôt",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Sélectionnez un seul patient ou l'entraîneur d'ajouter à ce fil de message.<br><br>Une fois ajouté, ce compte aura accès à la vue <strong>tous</strong> messages existants et nouveaux dans ce fil de message. De plus, ils seront en mesure d'ajouter de nouveaux messages sur le fil.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associé à <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informations du fil",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "Ajouter automatiquement les entraîneurs sélectionnés à tous les fils de message dans cette clinique"
     },
     "BACK": "Retour",
+    "BUY": "Acheter",
     "CANCEL": "Annuler",
     "CASCADING": "En cascade",
     "CLINICS": "Cliniques",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "Changement de microphone",
       "NOTE_ADDED": "Note ajoutée avec succès.",
       "NOTE_DELETED": "Note supprimée avec succès.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "Ordre terminé avec succès.",
       "PACKAGE_ENROLLED": "Ensemble inscrit",
       "PACKAGE_UNENROLLED": "Ensemble désinscrit",
       "PATIENT_CREATED": "Patient créé avec succès.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Guide de démarrage"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

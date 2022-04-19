@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "Asociado el",
     "AVAILABLE": "Disponible",
     "BACK_LIST": "Volver al Listado",
+    "BILLING_ADDRESS": "Dirección de Facturación",
     "BIRTHDATE": "Fecha de Nacimiento",
     "BOUNDS": "Límites",
     "CALCIUM": "Calcio",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "Ventana de inscripción",
     "EVENING": "Noche",
     "EVERY_DAYWEEK": "Cada {{day}}",
+    "EXPIRATION_DATE": "Fecha de Expiración",
     "FAT": "Grasa",
     "FIBER": "Fibra",
     "FILL_PHYSICIAN_FORM": "Por favor, complete un Formulario de Médico de Cuidados Primarios.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "El día {{day}} de cada mes",
     "OPEN_IN_NEW": "Abrir en una Pestaña Nueva",
     "OPTIONAL": "Opcional",
+    "ORDER_SUMMARY": "Resumen de la Orden",
     "OTHERS": "Otros",
     "PATIENT_CALL_EXPLANATION": "Puede recibir llamadas de videoconferencia de su asesor o proveedor en este tablero. Una notificación aparecerá en la pantalla cuando se reciba una llamada y desde ella puede contestar.",
     "PATIENT_DASHBOARD_WELCOME": "Bienvenido, {{ name }}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "La llamada no puede ser realizada. El paciente nunca ha iniciado sesión desde la aplicación móvil, de forma que no podrá recibir llamadas. Una vez que el paciente haya iniciado sesión, reintente la llamada.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "Paciente posiblemente no Disponible",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "Es improbable que esta llamada tenga éxito. El paciente al que está intentando llamar ha iniciado sesión en una aplicación móvil de una clínica diferente a la clínica seleccionada en la esquina superior izquierda.",
+    "PAYMENT_METHOD": "Método de Pago",
     "PERSONAL_INFO": "Info Personal",
     "PHONE": "Teléfono",
     "PHONE_NUMBER": "Número de Teléfono",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "Enviar Enlace de Restablecimiento de Contraseña",
     "SEND_PASSWORD_RESET_CONTENT": "¿Quiere enviar un email de restablecimiento de contraseña a <strong><a href=\"mailto:{{ email }}\">{{ email }}</a></strong>?",
     "SESSION_STARTS_AT": "La sesión comienza a las {{time}}",
+    "SHIPPING": "Envío",
+    "SHIPPING_ADDRESS": "Dirección de Envío",
     "SINGLE_DAY": "Individual",
     "SINGLE_DAY_AVAILABILITY": "Disponibilidad Individual",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Proporcione la disponibilidad para ver clientes en fechas específicas. Esta es una buena manera de establecer su horario si trabaja en horas diferentes cada semana. NOTA IMPORTANTE: No puede programar un bloque de disponibilidad de un día si ya hay una disponibilidad periódica para esa hora.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "Enviar Solicitud de Soporte",
     "SUGAR": "Azúcar",
     "SURE_WANT_TO_CONTINUE": "¿Está seguro de querer continuar?",
+    "TAX": "Impuestos",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Seleccione un paciente o un asesor para añadirlo a este hilo de mensajes.<br><br>Una vez que se añada, dicha cuenta tendrá acceso para ver <strong>todos</strong> los mensajes existentes y futuros. También, serán capaces de añadir mensajes al hilo.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Hilo asociado a <strong>{{ name }} (ID {{id}})</strong>",
     "THREAD_INFO": "Información del Hilo",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "Añadir automáticamente los asesores seleccionados a todas las cadenas de mensajes en esta clínica"
     },
     "BACK": "Atrás",
+    "BUY": "Comprar",
     "CANCEL": "Cancelar",
     "CASCADING": "Cascada",
     "CLINICS": "Clínicas",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "el micrófono seleccionado ha cambiado ",
       "NOTE_ADDED": "Nota añadida correctamente.",
       "NOTE_DELETED": "Nota eliminada correctamente.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "Orden completada satisfactoriamente.",
       "PACKAGE_ENROLLED": "Inscripción exitosa.",
       "PACKAGE_UNENROLLED": "Desinscripción realizada correctamente.",
       "PATIENT_CREATED": "Paciente creado satisfactoriamente.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Guía de Inicio"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

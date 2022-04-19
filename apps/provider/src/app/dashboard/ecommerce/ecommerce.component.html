@@ -1,0 +1,5 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <section *ngFor="let product of products">
+    <app-ecommerce-product [product]="product" [tokenRes]="tokenRes"></app-ecommerce-product>
+  </section>
+</div>

@@ -1,0 +1,88 @@
+<div matDialogTitle>
+  <div>
+    <span>{{ 'BOARD.ORDER_SUMMARY' | translate}}</span>
+  </div>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <div *ngIf="orderSummary; else spinner" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+      <app-ecommerce-product
+      [canBuy]="false"
+      [product]="product"
+      [showImage]="!isMobile"
+      [tokenRes]="tokenRes"
+      fxFlex>
+      </app-ecommerce-product>
+      <p class="price-label" fxFlex="25%">{{ product.price | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <p class="item-label" fxFlex>{{ 'BOARD.SHIPPING' | translate }}</p>
+      <p class="price-label" fxFlex="25%">{{ orderSummary.shippingCost | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <p class="item-label" fxFlex>{{ 'BOARD.TAX' | translate }}</p>
+      <p class="price-label" fxFlex="25%">{{ orderSummary.tax | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <p class="item-label" fxFlex>{{ 'REPORTS.TOTAL' | translate }}</p>
+      <p class="price-label total" fxFlex="25%">{{ orderSummary.total | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+    </div>
+
+    <hr>
+
+    <div>
+      <p class="item-label subtitle">{{ 'BOARD.SHIPPING_ADDRESS' | translate }}</p>
+      <p>{{ orderSummary.shippingAddress.name }}</p>
+      <p>{{ orderSummary.shippingAddress.address1 }}</p>
+      <p>{{ orderSummary.shippingAddress.address2 }}</p>
+      <p>{{ orderSummary.shippingAddress.city }}, {{ orderSummary.shippingAddress.stateProvince }}, {{ orderSummary.shippingAddress.postalCode }}</p>
+      <p>{{ orderSummary.shippingAddress.country.name }}</p>
+    </div>
+
+    <br>
+
+    <div>
+      <p class="item-label subtitle">{{ 'BOARD.BILLING_ADDRESS' | translate }}</p>
+      <p>{{ orderSummary.billingAddress.name }}</p>
+      <p>{{ orderSummary.billingAddress.address1 }}</p>
+      <p>{{ orderSummary.billingAddress.address2 }}</p>
+      <p>{{ orderSummary.billingAddress.city }}, {{ orderSummary.billingAddress.stateProvince }}, {{ orderSummary.billingAddress.postalCode }}</p>
+      <p>{{ orderSummary.billingAddress.country.name }}</p>
+    </div>
+
+    <br>
+
+    <div>
+      <p class="item-label subtitle">{{ 'BOARD.PAYMENT_METHOD' | translate }}</p>
+      <p>{{ orderSummary.paymentMethod.attributes.name }}</p>
+      <p>************{{ orderSummary.paymentMethod.attributes.last_digits }}</p>
+      <p>{{ 'BOARD.EXPIRATION_DATE' | translate }}: {{ orderSummary.paymentMethod.attributes.month }} / {{ orderSummary.paymentMethod.attributes.year }}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="wellcore-body" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px">
+  <button
+  [disabled]="!orderSummary || isLoading"
+  (click)="completeOrder()"
+  color="accent"
+  mat-flat-button>{{ 'BOARD.CONFIRM' | translate }}</button>
+
+  <button
+  [disabled]="!orderSummary || isLoading"
+  (click)="cancelOrder()"
+  color="accent"
+  mat-stroked-button>{{ 'GLOBAL.CANCEL' | translate }}</button>
+</mat-dialog-actions>
+
+<ng-template #spinner>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [diameter]="48" [strokeWidth]="4"></mat-spinner>
+  </div>
+</ng-template>

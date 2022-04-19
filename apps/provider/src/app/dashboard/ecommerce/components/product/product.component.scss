@@ -1,0 +1,29 @@
+@import 'variables';
+
+h4 {
+  font-size: 18px;
+  margin: 0;
+}
+
+p {
+  font-style: italic;
+}
+
+.product-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  width: 100px;
+}
+
+@media #{$small-and-down} {
+  h4,
+  p {
+    text-align: center;
+  }
+
+  .product-image {
+    margin: auto;
+  }
+}

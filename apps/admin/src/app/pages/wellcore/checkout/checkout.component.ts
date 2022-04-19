@@ -32,7 +32,8 @@ import {
   DeviceTypeIds,
   Logging,
   Register,
-  Session
+  Session,
+  SpreeProvider
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
@@ -41,6 +42,7 @@ import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token
 import { environment } from 'apps/admin/src/environments/environment'
 import * as moment from 'moment'
 import { STATES_LIST } from '../model'
+import { WellcoreBillingInfoComponent } from './billing-info'
 
 const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
 
@@ -96,6 +98,9 @@ type FirstStepMode = 'signup' | 'login'
   styleUrls: ['./checkout.component.scss']
 })
 export class WellcoreCheckoutComponent implements OnInit {
+  @ViewChild(WellcoreBillingInfoComponent)
+  billingInfoComponent: WellcoreBillingInfoComponent
+
   @ViewChild('stepper', { static: true })
   stepper: MatStepper
 
@@ -133,7 +138,8 @@ export class WellcoreCheckoutComponent implements OnInit {
     private notifier: NotifierService,
     private register: Register,
     private router: Router,
-    private session: Session
+    private session: Session,
+    private spreeProvider: SpreeProvider
   ) {
     this.validateAge = this.validateAge.bind(this)
     this.validateEmailMatches = this.validateEmailMatches.bind(this)
@@ -687,6 +693,11 @@ export class WellcoreCheckoutComponent implements OnInit {
 
     this.spreeToken = spreeToken.success()
 
+    this.spreeProvider.setBaseApiOptions({
+      baseUrl: environment.wellcoreEcommerceHost,
+      headers: { Authorization: `Bearer ${spreeToken.success().access_token}` }
+    })
+
     this.cookie.set(ECOMMERCE_ACCESS_TOKEN, spreeToken.success().access_token)
     this.cookie.set(ECOMMERCE_REFRESH_TOKEN, spreeToken.success().refresh_token)
   }
@@ -796,6 +807,14 @@ export class WellcoreCheckoutComponent implements OnInit {
           }`
         )
       }
+
+      await this.billingInfoComponent.onChange({ complete: true })
+
+      this.billingInfo.updateValueAndValidity()
+
+      await this.spreeProvider.createCreditCard({
+        credit_card: { token: this.checkoutData.billingInfo.cardInfo.token }
+      })
 
       const completeCheckoutRes = await this.spree.checkout.complete({
         bearerToken: this.spreeToken.access_token

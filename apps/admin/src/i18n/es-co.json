@@ -87,6 +87,7 @@
         "NO_LABEL_ASSOCIATIONS": "No hay fases asociadas a esta organización",
         "SPLASH_HINT": "Actualizaciónes de splash serán visibles después de 24 horas"
       },
+      "STORE_URL": "URL de la Tienda",
       "TITLE": "Clínicas"
     },
     "SYNC": "Sincronizar",

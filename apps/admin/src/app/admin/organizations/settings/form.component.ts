@@ -58,7 +58,8 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
   readonly = false
   reactiveControls = ['security']
   splashUrl: string | undefined
-  section: 'core' | 'visual' | 'mala' | 'features' | 'security' = 'core'
+  section: 'core' | 'visual' | 'mala' | 'features' | 'security' | 'ecommerce' =
+    'core'
 
   private firstLoadPassed = false
 
@@ -100,7 +101,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
           ? this.splashUrl.split('/').pop()
           : ''
         // reformat the preferences to fill the form
-        const { mala, appIds, ...rset } = prefs
+        const { mala, appIds, storeUrl, ...rset } = prefs
         onboarding = rset.onboarding
         this.clientPackages =
           onboarding && onboarding.client ? [...onboarding.client.packages] : []
@@ -144,6 +145,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
 
         this.initialAdminPreference = FormUtils.pruneEmpty({
           appIds,
+          storeUrl,
           mala: {
             androidBundleId,
             appName,

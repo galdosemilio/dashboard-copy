@@ -87,6 +87,7 @@
         "NO_LABEL_ASSOCIATIONS": "There are no phases associated with this organization",
         "SPLASH_HINT": "Splash updates will be visible after 24 hours"
       },
+      "STORE_URL": "Store URL",
       "TITLE": "Clinics"
     },
     "SYNC": "Sync",

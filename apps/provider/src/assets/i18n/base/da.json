@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "Associeret ved",
     "AVAILABLE": "Tilgængelig",
     "BACK_LIST": "Tilbage til Liste",
+    "BILLING_ADDRESS": "Betalingsadresse",
     "BIRTHDATE": "Fødselsdato",
     "BOUNDS": "Bounds",
     "CALCIUM": "Kalk",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "Tilmeldingsvindue",
     "EVENING": "Aften",
     "EVERY_DAYWEEK": "Hver {{day}}",
+    "EXPIRATION_DATE": "Udløbsdato",
     "FAT": "Fedt",
     "FIBER": "Fiber",
     "FILL_PHYSICIAN_FORM": "Udfyld venligst en formular til primærpleje.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "På dag {{day}} i hver måned",
     "OPEN_IN_NEW": "Åbn i ny fane",
     "OPTIONAL": "Valgfri",
+    "ORDER_SUMMARY": "Bestillingsoversigt",
     "OTHERS": "Andre",
     "PATIENT_CALL_EXPLANATION": "Du kan modtage indgående videokonferenceopkald fra din træner eller udbyder på dette dashboard. En meddelelse vises på skærmen, når et indgående opkald er modtaget, hvorfra du kan besvare opkaldet.",
     "PATIENT_DASHBOARD_WELCOME": "Velkommen, {{name}}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "Opkaldet kan ikke afsluttes. Patienten har aldrig logget ind på deres mobilapp, så de vil ikke være i stand til at modtage et indgående opkald. Når patienten er logget ind, prøv venligst opkaldet igen.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "Patienttilgængelighed er usikker",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "Det er usandsynligt, at dette opkald vil få succes. Patienten, du forsøger at ringe til, er logget på en anden mobilapp end den valgte klinik fra øverste venstre hjørne.",
+    "PAYMENT_METHOD": "Betalingsmetode",
     "PERSONAL_INFO": "Personlig information",
     "PHONE": "Telefon",
     "PHONE_NUMBER": "Telefonnummer",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "Send link til nulstilling af adgangskode",
     "SEND_PASSWORD_RESET_CONTENT": "Ønsker du at sende en email til nulstilling af en adgangskode til <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong>?",
     "SESSION_STARTS_AT": "Session starter på {{time}}",
+    "SHIPPING": "Forsendelse",
+    "SHIPPING_ADDRESS": "Forsendelsesadresse",
     "SINGLE_DAY": "En dag",
     "SINGLE_DAY_AVAILABILITY": "Enkelt-dag tilgængelighed",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Indtast tilgængelighed for at se klienter for bestemte datoer. Dette er en god måde at indstille din tidsplan, hvis du arbejder forskellige timer hver uge. VIGTIG NOTE: Du planlægger muligvis ikke en engangsblok af tilgængelighed, hvis du allerede har indstillet en tilbagevendende tilgængelighed for det tidspunkt.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "Indsend Support Request.",
     "SUGAR": "Sukker",
     "SURE_WANT_TO_CONTINUE": "Er du sikker på du vil fortsætte?",
+    "TAX": "Skat",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Vælg en enkelt patient eller træner for at tilføje denne besked tråd.<br><br> Når den er tilføjet, vil denne konto har adgang til visning <strong>alle</strong> eksisterende og nye meddelelser i denne besked tråd. Endvidere vil de være i stand til at tilføje nye meddelelser til tråden.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Tråd, er forbundet med <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Tråd Information",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "Tilføj automatisk udvalgte trænere til alle beskedtråde i denne klinik"
     },
     "BACK": "Tilbage",
+    "BUY": "Købe",
     "CANCEL": "Annuller",
     "CASCADING": "Rækkefølger",
     "CLINICS": "Klinikker",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "valgte mikrofon ændret",
       "NOTE_ADDED": "Note tilføjet med succes.",
       "NOTE_DELETED": "Bemærk slettet.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "Bestilling afsluttet med succes.",
       "PACKAGE_ENROLLED": "Pakke indskrevet.",
       "PACKAGE_UNENROLLED": "Pakke frameldt.",
       "PATIENT_CREATED": "Patient oprettet med succes.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Startvejledning"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

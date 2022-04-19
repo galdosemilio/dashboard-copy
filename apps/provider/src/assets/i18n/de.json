@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "Verbunden mit",
     "AVAILABLE": "Verfügbar",
     "BACK_LIST": "Zurück zur Liste",
+    "BILLING_ADDRESS": "Rechnungsadresse",
     "BIRTHDATE": "Geburtstag",
     "BOUNDS": "Bounds",
     "CALCIUM": "Kalzium",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "Anmeldefenster",
     "EVENING": "Abend",
     "EVERY_DAYWEEK": "Jeder {{day}}",
+    "EXPIRATION_DATE": "Haltbarkeitsdatum",
     "FAT": "Fett",
     "FIBER": "Ballaststoffe",
     "FILL_PHYSICIAN_FORM": "Bitte füllen Sie ein Formular für einen Hausarzt aus.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "Am Tag {{day}} eines jeden Monats",
     "OPEN_IN_NEW": "in neuem Tab öffnen ",
     "OPTIONAL": "Optional",
+    "ORDER_SUMMARY": "Bestellübersicht",
     "OTHERS": "Andere",
     "PATIENT_CALL_EXPLANATION": "Sie erhalten möglicherweise eingehende Videokonferenzen von Ihrem Coach oder Anbieter in diesem Dashboard. Eine Benachrichtigung wird auf dem Bildschirm angezeigt, wenn ein eingehender Anruf empfangen wird, von dem Sie den Anruf beantworten können.",
     "PATIENT_DASHBOARD_WELCOME": "Willkommen, {{name}}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "Der Anruf kann nicht abgeschlossen werden. Der Patient hat sich noch nie bei seiner mobilen App angemeldet, sodass er keinen eingehenden Anruf erhalten kann. Sobald sich der Patient angemeldet hat, wiederholen Sie den Anruf.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "Die Verfügbarkeit des Patienten ist ungewiss",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "Es ist unwahrscheinlich, dass dieser Anruf erfolgreich ist. Der Patient, den Sie anrufen möchten, ist in einer anderen mobilen App als der ausgewählten Klinik in der oberen linken Ecke angemeldet.",
+    "PAYMENT_METHOD": "Bezahlverfahren",
     "PERSONAL_INFO": "Persönliche Informationen",
     "PHONE": "Telefon",
     "PHONE_NUMBER": "Telefonnummer",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "Link zum Zurücksetzen des Passwortes senden",
     "SEND_PASSWORD_RESET_CONTENT": "Möchten Sie eine E-Mail zum Zurücksetzen des Passwortes an <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong> senden?",
     "SESSION_STARTS_AT": "Sitzung beginnt bei {{time}}",
+    "SHIPPING": "Versand",
+    "SHIPPING_ADDRESS": "Lieferanschrift",
     "SINGLE_DAY": "Einzeltag",
     "SINGLE_DAY_AVAILABILITY": "Ein-Tages-Verfügbarkeit",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Tragen Sie Ihre Verfügbarkeit ein, um Klienten zu bestimmten Terminen zu sehen. Dies ist eine gute Möglichkeit, Ihren Terminplan festzulegen, wenn Sie jede Woche zu unterschiedlichen Zeiten arbeiten. WICHTIGER HINWEIS: Sie dürfen keinen einmalig verfügbaren Zeitblock einplanen, wenn Sie für diesen Zeitraum bereits eine wiederkehrende Verfügbarkeit festgelegt haben.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "Supportanfrage einreichen",
     "SUGAR": "Zucker",
     "SURE_WANT_TO_CONTINUE": "Sind Sie sicher, dass Sie fortfahren wollen?",
+    "TAX": "Steuer",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Wählen Sie einen einzelnen Patienten oder Trainer zu dieser Nachricht Thread hinzuzufügen.<br><br> Nach dem Hinzufügen dieses Konto Zugriff auf Blick <strong>alle</strong> bestehende und neue Nachrichten in diesem Nachrichtenthread. Des Weiteren werden sie neue Nachrichten an den Thread hinzufügen können.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Gewinde im Zusammenhang mit <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Themen-Informationen",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "Automatisch ausgewählten Trainer auf alle Nachrichten-Threads in dieser Klinik hinzufügen"
     },
     "BACK": "Zurück",
+    "BUY": "Besorgen",
     "CANCEL": "Stornieren",
     "CASCADING": "Kaskardierend",
     "CLINICS": "Kliniken",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "ausgewähltes Mikrofon geändert",
       "NOTE_ADDED": "Hinweis hinzugefügt.",
       "NOTE_DELETED": "Hinweis erfolgreich gelöscht.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "Auftrag erfolgreich abgeschlossen.",
       "PACKAGE_ENROLLED": "Paket eingeschrieben.",
       "PACKAGE_UNENROLLED": "Paket abgemeldet.",
       "PATIENT_CREATED": "Patient erfolgreich erstellt.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Starter-Anleitung"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

@@ -3,6 +3,7 @@
   <li data-cy="org-settings-menu-visual" (click)="section = 'visual'" [ngClass]="{'selected': section === 'visual'}">Visual</li>
   <li data-cy="org-settings-menu-mala" (click)="section = 'mala'" [ngClass]="{'selected': section === 'mala'}">MALA</li>
   <li data-cy="org-settings-menu-features" (click)="section = 'features'" [ngClass]="{'selected': section === 'features'}">Features</li>
+  <li data-cy="org-settings-menu-features" (click)="section = 'ecommerce'" [ngClass]="{'selected': section === 'ecommerce'}">{{ 'GLOBAL.ECOMMERCE' | translate }}</li>
   <li data-cy="org-settings-menu-security" (click)="section = 'security'" [ngClass]="{'selected': section === 'security'}">Security</li>
 </ul>
 
@@ -81,6 +82,13 @@
       <h3>{{ 'GLOBAL.SECURITY' | translate }}</h3>
       <div>
         <ccr-organizations-security [orgId]="id"></ccr-organizations-security>
+      </div>
+    </div>
+
+    <div class="ccr-panel" [hidden]="section !== 'ecommerce'">
+      <h3>{{ 'GLOBAL.ECOMMERCE' | translate }}</h3>
+      <div class="ccr-grid" fxLayout="column">
+        <ccr-organizations-ecommerce [orgId]="id" [prefs]="initialAdminPreference"></ccr-organizations-ecommerce>
       </div>
     </div>
 

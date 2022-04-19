@@ -44,6 +44,7 @@ import {
   LabelSelectorComponent,
   MALAComponent,
   MFAInputComponent,
+  OrganizationsEcommerceComponent,
   OrganizationsSettingsComponent,
   SecurityComponent
 } from './settings'
@@ -70,6 +71,7 @@ export const OrganizationComponents = [
   LabelsAssociationsComponent,
   LabelSelectorComponent,
   MALAComponent,
+  OrganizationsEcommerceComponent,
   OrganizationsListComponent,
   OrganizationsTableComponent,
   OrganizationsDisplayComponent,

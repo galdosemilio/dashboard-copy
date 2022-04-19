@@ -87,6 +87,7 @@
         "NO_LABEL_ASSOCIATIONS": "Non ci sono fasi associate a questa organizzazione",
         "SPLASH_HINT": "Gli aggiornamenti Splash saranno visibili dopo 24 ore"
       },
+      "STORE_URL": "URL del negozio",
       "TITLE": "Cliniche"
     },
     "SYNC": "Sync",

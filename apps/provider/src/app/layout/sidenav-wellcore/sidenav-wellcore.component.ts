@@ -1,30 +1,20 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit
-} from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
-import { CCRConfig, CCRPalette } from '@app/config'
+import { CCRConfig } from '@app/config'
 import { SidenavOptions } from '@app/config/section/consts'
 import { FetchSubaccount } from '@app/layout/store/call/call.action'
 import {
-  AuthService,
   ContextService,
   MessagingService,
   SelectedOrganization
 } from '@app/service'
 import { _ } from '@app/shared'
-import { configSelector } from '@app/store/config'
-import { select, Store } from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { findIndex, get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SidenavItem } from '../sidenav/sidenav-item/sidenav-item.component'
-import { User } from '@coachcare/sdk'
 import { filter } from 'rxjs/operators'
-import { resolveConfig } from '@app/config/section'
 
 export interface SidenavOrg {
   id: string
@@ -36,80 +26,48 @@ export interface SidenavOrg {
   selector: 'app-menu-wellcore',
   templateUrl: './sidenav-wellcore.component.html'
 })
-export class SidenavWellcoreComponent
-  implements AfterViewInit, OnInit, OnDestroy
-{
+export class SidenavWellcoreComponent implements OnInit {
   @Input()
   isOpened = false
 
-  _this: SidenavWellcoreComponent = this
-  sidenavItems: SidenavItem[] = []
+  public _this: SidenavWellcoreComponent = this
+  public route: string
+  public sidenavItems: SidenavItem[] = []
 
-  logoSrc = './assets/wellcore-logo.png'
-  palette: CCRPalette
-  route: string
-
-  organization: SelectedOrganization
-  userName: string
   private currentLang: string
   private isProvider = false
+  private hasStoreLink = false
 
   constructor(
-    router: Router,
-    public context: ContextService,
-    private auth: AuthService,
+    private context: ContextService,
     private messaging: MessagingService,
+    private router: Router,
     private store: Store<CCRConfig>,
-    private translate: TranslateService,
-    private user: User
+    private translate: TranslateService
   ) {
     this.updateUnread = this.updateUnread.bind(this)
+  }
 
-    this.store
-      .pipe(select(configSelector))
-      .subscribe((conf) => (this.palette = conf.palette))
-
-    router.events
+  public ngOnInit(): void {
+    this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
         this.route = event.url.split('/')[1]
         this.updateNavigation()
       })
-  }
 
-  ngAfterViewInit() {}
-
-  ngOnDestroy(): void {}
-
-  ngOnInit() {
-    const user = this.context.user
-    this.userName = user.firstName + ' ' + user.lastName
     this.currentLang = this.translate.currentLang
     this.isProvider = this.context.isProvider
+    this.hasStoreLink = !!this.context.organization.preferences.storeUrl
 
     this.initNavigation()
     this.filterSideNavItems()
-
-    this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
-      this.currentLang = this.translate.currentLang
-      this.updateContactLinks()
-    })
-
-    this.context.organization$.subscribe((org) => {
-      this.organization = org
-      this.updateSections(org)
-      this.updateContactLinks()
-    })
-
-    // listen event to refresh unread
-    this.messaging.unreadCount$
-      .pipe(untilDestroyed(this))
-      .subscribe(this.updateUnread)
+    this.subscribeToEvents()
 
     this.store.dispatch(new FetchSubaccount(this.context.organizationId))
   }
 
-  initNavigation() {
+  private initNavigation(): void {
     this.sidenavItems = [
       {
         code: SidenavOptions.DASHBOARD,
@@ -219,22 +177,27 @@ export class SidenavWellcoreComponent
             icon: 'email'
           }
         ]
+      },
+      {
+        navName: _('SIDENAV.STORE'),
+        route: 'store',
+        icon: 'shopping_cart',
+        navRoute: 'store',
+        isAllowedForPatients: false,
+        isHiddenForProviders: true
       }
     ]
 
     this.updateUnread()
   }
 
-  public async logout(): Promise<void> {
-    const loginSite = resolveConfig(
-      'GLOBAL.LOGIN_SITE_URL',
-      this.context.organization
+  private filterSideNavItems(): void {
+    // Apply Store link filter
+    const storeSidenavItem = this.sidenavItems.find(
+      (item) => item.navRoute === 'store'
     )
-    await this.user.logout()
-    this.auth.redirect(loginSite)
-  }
+    storeSidenavItem.isAllowedForPatients = this.hasStoreLink
 
-  private filterSideNavItems() {
     this.sidenavItems = this.sidenavItems.filter((item) => {
       return this.isProvider
         ? !item.isHiddenForProviders
@@ -249,6 +212,23 @@ export class SidenavWellcoreComponent
           : childItem.isAllowedForPatients
       })
     }))
+  }
+
+  private subscribeToEvents(): void {
+    this.translate.onLangChange.pipe(untilDestroyed(this)).subscribe(() => {
+      this.currentLang = this.translate.currentLang
+      this.updateContactLinks()
+    })
+
+    this.context.organization$.subscribe((org) => {
+      this.updateSections(org)
+      this.updateContactLinks()
+    })
+
+    // listen event to refresh unread
+    this.messaging.unreadCount$
+      .pipe(untilDestroyed(this))
+      .subscribe(this.updateUnread)
   }
 
   private updateContactLinks(): void {
@@ -295,7 +275,7 @@ export class SidenavWellcoreComponent
     }
   }
 
-  updateNavigation() {
+  private updateNavigation(): void {
     this.sidenavItems = this.sidenavItems.map((item) => {
       if (this.route === item.route && !item.expanded) {
         item.expanded = true

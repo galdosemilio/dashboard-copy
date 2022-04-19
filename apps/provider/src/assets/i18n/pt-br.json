@@ -89,6 +89,7 @@
     "ASSOCIATED_AT": "Associado a",
     "AVAILABLE": "Disponibilidade",
     "BACK_LIST": "Voltar à lista",
+    "BILLING_ADDRESS": "Endereço de Cobrança",
     "BIRTHDATE": "Data de nascimento",
     "BOUNDS": "Bounds",
     "CALCIUM": "Cálcio",
@@ -211,6 +212,7 @@
     "ENROLLMENT_WINDOW": "Janela de inscrição",
     "EVENING": "Tarde",
     "EVERY_DAYWEEK": "Cada {{day}}",
+    "EXPIRATION_DATE": "Data de Validade",
     "FAT": "Gordura",
     "FIBER": "Fibra",
     "FILL_PHYSICIAN_FORM": "Por favor, preencha um Formulário de Médico de Cuidados Primários.",
@@ -293,6 +295,7 @@
     "ON_DAY_X_EVERY_MONTH": "No dia {{day}} de cada mês",
     "OPEN_IN_NEW": "Open in New Tab",
     "OPTIONAL": "Opcional",
+    "ORDER_SUMMARY": "Resumo do Pedido",
     "OTHERS": "Outros",
     "PATIENT_CALL_EXPLANATION": "Você pode receber chamadas de conferência de vídeo recebidas em seu treinador ou provedor neste painel. Uma notificação será exibida na tela quando uma chamada recebida é recebida, a partir da qual você pode atender a chamada.",
     "PATIENT_DASHBOARD_WELCOME": "Bem-vindo, {{name}}",
@@ -306,6 +309,7 @@
     "PATIENT_UNAVAILABLE_DESCRIPTION": "A chamada não pode ser concluída. O paciente nunca fez login no aplicativo móvel e, portanto, não poderá receber uma chamada. Depois que o paciente estiver conectado, tente novamente a ligação.",
     "PATIENT_UNCERTAIN_AVAILABILITY": "A disponibilidade do paciente é incerta",
     "PATIENT_UNCERTAIN_AVAILABILITY_DESCRIPTION": "É improvável que esta chamada seja bem-sucedida. O paciente que você está tentando ligar está conectado a um aplicativo móvel diferente da clínica selecionada no canto superior esquerdo.",
+    "PAYMENT_METHOD": "Forma de Pagamento",
     "PERSONAL_INFO": "Informação pessoal",
     "PHONE": "Telefone",
     "PHONE_NUMBER": "Número de telefone",
@@ -366,6 +370,8 @@
     "SEND_PASSWORD_RESET": "Enviar Link para Redefinir a Palavra-passe",
     "SEND_PASSWORD_RESET_CONTENT": "Deseja enviar um e-mail de redefinição de palavra-passe para <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong>?",
     "SESSION_STARTS_AT": "Sessão começa no {{time}}",
+    "SHIPPING": "Envio",
+    "SHIPPING_ADDRESS": "Endereço para Envio",
     "SINGLE_DAY": "Dia Único",
     "SINGLE_DAY_AVAILABILITY": "Disponibilidade de um único dia",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Insira a disponibilidade para ver os clientes para datas específicas. Esta é uma boa maneira de definir o seu horário se trabalhar horas diferentes a cada semana. NOTA IMPORTANTE: Não pode programar um bloco de disponibilidade único se já tiver definido uma disponibilidade recorrente para esse horário.",
@@ -381,6 +387,7 @@
     "SUBMIT_SUPPORT_REQUEST": "Enviar pedido de suporte",
     "SUGAR": "Açúcar",
     "SURE_WANT_TO_CONTINUE": "Você tem certeza que quer continuar?",
+    "TAX": "Imposto",
     "THREAD_ADD_MEMBER_DESCRIPTION": "Selecione um único paciente ou treinador para adicionar a este tópico de mensagem.<br><br> Uma vez adicionado, esta conta terá acesso a vista <strong>todas</strong> mensagens existentes e novos neste segmento de mensagem. Além disso, eles serão capazes de adicionar novas mensagens para o segmento.",
     "THREAD_ASSOCIATED_WITH_CLINIC": "Thread associado <strong>{{name}} (ID {{id}})</strong>",
     "THREAD_INFO": "Informações fio",
@@ -552,6 +559,7 @@
       "DESCRIPTION": "Adicionar automaticamente treinadores selecionados para os tópicos de mensagens nesta clínica"
     },
     "BACK": "Voltar",
+    "BUY": "Comprar",
     "CANCEL": "Cancelar",
     "CASCADING": "Em cascata",
     "CLINICS": "Clínicas",
@@ -1183,6 +1191,7 @@
       "MICROPHONE_CHANGED": "microfone selecionado mudado",
       "NOTE_ADDED": "Nota adicionada com sucesso.",
       "NOTE_DELETED": "Nota excluída com sucesso.",
+      "ORDER_COMPLETED_SUCCESSFULLY": "Ordem completada com sucesso.",
       "PACKAGE_ENROLLED": "Pacote subscrito.",
       "PACKAGE_UNENROLLED": "Pacote não subscrito.",
       "PATIENT_CREATED": "Paciente criado com sucesso.",
@@ -1810,10 +1819,5 @@
   },
   "WALKTHROUGH": {
     "STARTER_GUIDE": "Guia de Iniciação"
-  },
-  "notifier": {
-    "ERROR": {
-      "NOTHING_TO_EXPORT": ""
-    }
   }
 }

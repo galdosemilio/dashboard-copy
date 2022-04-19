@@ -87,6 +87,7 @@
         "NO_LABEL_ASSOCIATIONS": "Der er ingen faser forbundet med denne organisation",
         "SPLASH_HINT": "Splash opdateringer vil være synlige efter 24 timer"
       },
+      "STORE_URL": "Store URL",
       "TITLE": "Klinikker"
     },
     "SYNC": "Synkronisere",
