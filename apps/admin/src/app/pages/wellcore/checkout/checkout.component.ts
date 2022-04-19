@@ -741,7 +741,9 @@ export class WellcoreCheckoutComponent implements OnInit {
         await this.spree.checkout.selectShippingMethod(
           { bearerToken: this.spreeToken.access_token },
           {
-            shipping_method_id: '1'
+            shipping_method_id:
+              shippingMethodsResponse.success().included[0]?.attributes
+                .shipping_method_id
           }
         )
 
