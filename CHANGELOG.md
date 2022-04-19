@@ -1,3 +1,10 @@
+## [1.79.1](https://github.com/coachcare/dashboard/compare/v1.79.0...v1.79.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* solved issue with shipping method selection ([512097d](https://github.com/coachcare/dashboard/commit/512097d5d9d2d97afe579382452c89928c399d2f))
+
 # [1.79.0](https://github.com/coachcare/dashboard/compare/v1.78.2...v1.79.0) (2022-04-14)
 
 
