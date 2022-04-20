@@ -38,6 +38,7 @@
       <mat-step>
         <div class="step-container">
           <ccr-wellcore-billing-info
+          [cardName]="checkoutData.accountInfo?.firstName + ' ' + checkoutData.accountInfo?.lastName"
           [useShippingAddress]="useShippingAddress"
           (onChangeUseShippingAddress)="onChangeUseShippingAddress($event)"
           [formGroup]="billingInfo"

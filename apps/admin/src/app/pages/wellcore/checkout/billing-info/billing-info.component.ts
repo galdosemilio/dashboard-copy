@@ -18,6 +18,7 @@ import { StripeCardComponent, StripeService } from 'ngx-stripe'
   templateUrl: './billing-info.component.html'
 })
 export class WellcoreBillingInfoComponent {
+  @Input() cardName: string
   @Input() formGroup: FormGroup
   @Input() useShippingAddress: boolean
 
@@ -55,7 +56,7 @@ export class WellcoreBillingInfoComponent {
       }
 
       const response = await this.stripeService
-        .createToken(this.cardComponent.element, { name: 'somename' })
+        .createToken(this.cardComponent.element, { name: this.cardName })
         .toPromise()
 
       this.formGroup.patchValue({
