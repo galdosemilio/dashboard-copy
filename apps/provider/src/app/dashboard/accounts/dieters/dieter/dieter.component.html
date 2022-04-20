@@ -1,4 +1,4 @@
-<div class="ccr-heading" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+<div class="mb-10" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
   <div class="ccr-title" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
     <h2>
       {{ 'GLOBAL.PATIENTS' | translate }}
@@ -29,10 +29,12 @@
 
   <div
   fxLayout="row"
-  fxLayout.xs="column"
+  fxLayout.lt-md="column"
   fxLayoutAlign="space-between stretch"
   fxLayoutGap="10px"
-  fxLayoutGap.xs="10px">
+  fxLayoutGap.lt-md="20px"
+  fxLayoutGap.lt-md="20px"
+  >
     <div class="ccr-name" fxFlex="auto" fxLayout="row" fxLayoutAlign="start">
       <ccr-avatar size="bigger" [account]="dieter?.id"></ccr-avatar>
       <div fxLayout="column" fxLayoutAlign="center start">
@@ -45,26 +47,28 @@
         </ccr-last-login>
       </div>
     </div>
-    <div fxFlex="nogrow" fxFlex.xs="grow"
-    fxLayout="row" fxLayout.xs="column"
-    fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
-      <ccr-call-control [targets]="[ dieter ]"></ccr-call-control>
-      <ccr-help-link [link]="callUserZendeskLink"></ccr-help-link>
-    </div>
-    <div fxFlex="nogrow" fxFlex.xs="grow"
-    fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
-    fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
-      <button class="ccr-icon-button" color="primary" mat-button (click)="openPatientRpmReportDialog()">
-        <mat-icon
-        class="clickable">file_download</mat-icon>
+    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch" fxLayoutAlign.lt-md="start center">
+      <div fxFlex="nogrow"
+      fxLayout="row"
+      fxLayoutAlign="end end" fxLayoutAlign.lt-md="center center">
+        <ccr-call-control [targets]="[ dieter ]"></ccr-call-control>
+        <ccr-help-link [link]="callUserZendeskLink"></ccr-help-link>
+      </div>
+      <div fxFlex="nogrow" fxFlex.xs="grow"
+      fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+      fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
+        <button class="ccr-icon-button" color="primary" mat-button (click)="openPatientRpmReportDialog()">
+          <mat-icon
+          class="clickable">file_download</mat-icon>
 
-        {{ 'BOARD.DOWNLOAD_REPORT' | translate }}
-    </button>
-    </div>
-    <div *ngIf="showRPM" fxFlex="nogrow" fxFlex.xs="grow"
-    fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
-    fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
-      <app-rpm (rpmStatusChange)="resolvePatientRPMStatus()"></app-rpm>
+          {{ 'BOARD.DOWNLOAD_REPORT' | translate }}
+      </button>
+      </div>
+      <div *ngIf="showRPM" fxFlex="nogrow" fxFlex.xs="grow"
+      fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+      fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
+        <app-rpm (rpmStatusChange)="resolvePatientRPMStatus()"></app-rpm>
+      </div>
     </div>
   </div>
 
