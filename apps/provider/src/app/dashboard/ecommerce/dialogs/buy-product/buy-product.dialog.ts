@@ -184,7 +184,8 @@ export class BuyProductDialog implements OnInit {
 
   private async setAddresses(token: string): Promise<void> {
     try {
-      const [billFirstName, billLastName] = this.billingAddress.name.split(' ')
+      const [billFirstName, ...billLastName] =
+        this.billingAddress.name.split(' ')
 
       const billAddressRes = await this.spree.checkout.orderUpdate(
         { bearerToken: token },
@@ -192,7 +193,7 @@ export class BuyProductDialog implements OnInit {
           order: {
             bill_address_attributes: {
               firstname: billFirstName,
-              lastname: billLastName,
+              lastname: billLastName.join(' '),
               address1: this.billingAddress.address1,
               address2: this.billingAddress.address2 || undefined,
               city: this.billingAddress.city,

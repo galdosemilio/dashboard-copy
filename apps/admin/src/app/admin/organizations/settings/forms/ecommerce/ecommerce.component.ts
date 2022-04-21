@@ -2,7 +2,10 @@ import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NotifierService } from '@coachcare/common/services'
 import { _ } from '@coachcare/backend/shared'
-import { OrganizationPreference } from '@coachcare/sdk'
+import {
+  OrganizationPreference,
+  OrganizationPreferenceSingle
+} from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime } from 'rxjs/operators'
 
@@ -13,7 +16,7 @@ import { debounceTime } from 'rxjs/operators'
 })
 export class OrganizationsEcommerceComponent implements OnInit {
   @Input() orgId: string
-  @Input() prefs?: any
+  @Input() prefs?: OrganizationPreferenceSingle
 
   public form: FormGroup
 
