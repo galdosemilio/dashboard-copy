@@ -1,3 +1,4 @@
+import { Entity } from '@coachcare/sdk'
 import { JsonApiDocument } from '@spree/storefront-api-v2-sdk/types/interfaces/JsonApi'
 import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
 
@@ -13,6 +14,25 @@ export class EcommerceProduct {
     this.name = args.attributes.name ?? ''
     this.description = args.attributes.description ?? ''
     this.price = Number(args.attributes.price) ?? 0
-    this.imageUrl = included?.length ? included[0].attributes.original_url : ''
+    this.imageUrl = this.resolveImageUrl(args, included ?? [])
+  }
+
+  private resolveImageUrl(
+    args: ProductAttr,
+    included?: JsonApiDocument[]
+  ): string {
+    const images = args.relationships.images?.data as Entity[]
+
+    if (images.length === 0) {
+      return ''
+    }
+
+    const imageId = images[0].id
+    const imageEntry = included.find(
+      (includedEntry) =>
+        includedEntry.type === 'image' && includedEntry.id === imageId
+    )
+
+    return imageEntry?.attributes.original_url ?? ''
   }
 }
