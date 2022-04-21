@@ -1,3 +1,15 @@
+# [1.80.0](https://github.com/coachcare/dashboard/compare/v1.79.1...v1.80.0) (2022-04-21)
+
+
+### Bug Fixes
+
+* solved card name issue ([a2635a2](https://github.com/coachcare/dashboard/commit/a2635a24c0f88b68f2d31c31c362715b418a4bbb))
+
+
+### Features
+
+* added credit card creation on checkout and store in provider site [FRON-2746] [FRON-2747] ([746b6bf](https://github.com/coachcare/dashboard/commit/746b6bfd55ce6fec5ae936b4c23212b9967eeaf0))
+
 ## [1.79.1](https://github.com/coachcare/dashboard/compare/v1.79.0...v1.79.1) (2022-04-19)
 
 
