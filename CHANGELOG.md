@@ -1,3 +1,10 @@
+## [1.80.1](https://github.com/coachcare/dashboard/compare/v1.80.0...v1.80.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* solved a bug that caused duplicated product images [FRON-2747] ([5c45d4e](https://github.com/coachcare/dashboard/commit/5c45d4e80926d16fbc85212a7ba83345005ce032))
+
 # [1.80.0](https://github.com/coachcare/dashboard/compare/v1.79.1...v1.80.0) (2022-04-21)
 
 
