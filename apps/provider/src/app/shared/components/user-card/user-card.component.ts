@@ -69,8 +69,8 @@ export class UserCardComponent implements OnInit {
 
     if (openNewTab) {
       const newRelativeUrl = this.router.createUrlTree(route)
-      const baseUrl = window.location.href.replace(this.router.url, '')
-      window.open(baseUrl + newRelativeUrl, '_blank')
+
+      window.open(newRelativeUrl.toString(), '_blank')
     } else {
       void this.router.navigate(route)
     }
