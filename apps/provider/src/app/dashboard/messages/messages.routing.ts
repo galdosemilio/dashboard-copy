@@ -3,7 +3,7 @@ import { MessagesComponent } from './'
 
 export const MessagesRoutes: Routes = [
   {
-    path: '',
+    path: 'messages',
     component: MessagesComponent
   }
 ]
