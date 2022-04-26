@@ -14,14 +14,17 @@ import { UnitConversionPipe } from './unit-conversion.pipe'
 import { UnitLabelPipe } from './unit-label.pipe'
 import {
   UnitConvertFromReadablePipe,
-  UnitConvertToReadablePipe,
-  UnitMapToRedablePipe
+  UnitConvertToReadablePipe
 } from './unit-conversion'
 import { CcrSanitizePipe } from '@coachcare/common/pipes'
 import {
   CcrConvertSecondsToHmsPipe,
   CcrConvertSecondsToMinutesPipe
 } from './time-conversion'
+import {
+  MetadataConvertToReadablePipe,
+  MetadataTitleConvertToReadablePipe
+} from './metadata-conversion'
 
 export const Pipes = [
   AbsoluteValuePipe,
@@ -36,12 +39,13 @@ export const Pipes = [
   ExerciseIntensityPipe,
   FractionPipe,
   MaxCharsPipe,
+  MetadataConvertToReadablePipe,
+  MetadataTitleConvertToReadablePipe,
   MinutesToHoursPipe,
   NumberFormatPipe,
   NumberToWeekdayPipe,
   UnitConversionPipe,
   UnitConvertFromReadablePipe,
   UnitConvertToReadablePipe,
-  UnitLabelPipe,
-  UnitMapToRedablePipe
+  UnitLabelPipe
 ]

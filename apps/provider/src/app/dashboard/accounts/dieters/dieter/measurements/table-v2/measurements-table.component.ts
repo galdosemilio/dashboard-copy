@@ -83,6 +83,7 @@ export class MeasurementsTableV2Component implements OnInit {
   public columns: MeasurementDataPointType[] = []
   public isLoadingMore = false
   public rows: MeasurementDataPointGroupTableEntry[] = []
+  public shouldShowMetadata = false
   public source: MeasurementDataSourceV2
   public visceralFatRatingTooltip = {
     title: {
@@ -448,6 +449,7 @@ export class MeasurementsTableV2Component implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((groups) => {
         this.rows = groups
+        this.shouldShowMetadata = groups.some((group) => group.metadata)
       })
 
     this.dates$.next(this.dates)

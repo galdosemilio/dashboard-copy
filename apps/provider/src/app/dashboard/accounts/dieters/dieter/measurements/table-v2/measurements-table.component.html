@@ -10,6 +10,7 @@
             </ccr-table-sort-header>
           </th>
           <th class="device-cell" scope="col">{{ 'MEASUREMENT.DEVICE' | translate }}</th>
+          <th *ngIf="shouldShowMetadata" class="metadata-cell" scope="col">{{ 'MEASUREMENT.METADATA' | translate }}</th>
           <th
           *ngFor="let column of columns"
           [ngClass]="{ 'wide-cell':
@@ -121,6 +122,17 @@
     </div>
   </td>
 
+  <td *ngIf="shouldShowMetadata" class="metadata-cell">
+    <div *ngIf="row.metadata; else emptyCell">
+      <ul *ngFor="let prop of (row.metadata | keyvalue)">
+        <li *ngFor="let childProp of (row.metadata[prop.key] | keyvalue)">
+          {{ prop.key | metadataTitleConvertToReadable:childProp.key | translate }}:
+          {{ row.metadata[prop.key][childProp.key] | metadataConvertToReadable:prop.key:childProp.key | translate }}
+        </li>
+      </ul>
+    </div>
+  </td>
+
   <td
   *ngFor="let column of columns"
   class="common-cell"
@@ -163,21 +175,9 @@
         </span>
       </ng-container>
 
-      <ng-container *ngSwitchCase="'55'">
-        <ng-container *ngTemplateOutlet="mappedEntry; context: { row: row, column: column }"></ng-container>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'56'">
-        <ng-container *ngTemplateOutlet="mappedEntry; context: { row: row, column: column }"></ng-container>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'57'">
-        <ng-container *ngTemplateOutlet="mappedEntry; context: { row: row, column: column }"></ng-container>
-      </ng-container>
-
       <ng-container *ngSwitchCase="'58'">
         <span *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
-          {{ getGroupValue(row, column.id) | convertToMinutes:2 }} <span>{{ 'GLOBAL.MINUTES' | translate }}</span>
+          {{ getGroupValue(row, column.id) }} <span>{{ 'GLOBAL.MINUTES' | translate | lowercase }}</span>
         </span>
       </ng-container>
 
@@ -202,10 +202,4 @@
       class="clickable">delete</mat-icon>
     </div>
   </td>
-</ng-template>
-
-<ng-template #mappedEntry let-row="row" let-column="column">
-  <span *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
-    {{ getGroupValue(row, column.id) | unitMapToReadable:getGroupType(row, column.id) }}
-  </span>
 </ng-template>

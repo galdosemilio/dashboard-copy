@@ -45,6 +45,16 @@
       min-width: 50px;
     }
 
+    .metadata-cell {
+      min-width: 225px;
+
+      ul {
+        line-height: 24px;
+        margin-block-start: 0;
+        padding-inline-start: 15px;
+      }
+    }
+
     .wide-cell {
       min-width: 60px !important;
 

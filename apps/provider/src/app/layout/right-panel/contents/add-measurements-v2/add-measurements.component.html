@@ -75,18 +75,6 @@
             </ccr-magnitude-input>
           </div>
 
-          <div *ngSwitchCase="'55'">
-            <ng-container *ngTemplateOutlet="selectInput; context: { form: measurementForm, i: i, assoc: assoc }"></ng-container>
-          </div>
-
-          <div *ngSwitchCase="'56'">
-            <ng-container *ngTemplateOutlet="selectInput; context: { form: measurementForm, i: i, assoc: assoc }"></ng-container>
-          </div>
-
-          <div *ngSwitchCase="'57'">
-            <ng-container *ngTemplateOutlet="selectInput; context: { form: measurementForm, i: i, assoc: assoc }"></ng-container>
-          </div>
-
           <div *ngSwitchCase="'58'">
             <ccr-magnitude-input
               [formControlName]="i"
@@ -109,6 +97,21 @@
             </mat-form-field>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div
+    *ngIf="metadataForm"
+    [formGroup]="metadataForm"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="10px">
+      <div *ngFor="let metadataProp of metadataEntries; let i = index;" fxFlex>
+        <mat-form-field fxFlex>
+          <mat-select [formControlName]="i" [placeholder]="metadataProp.displayName | translate" required>
+            <mat-option *ngFor="let option of metadataProp.options" [value]="option.value">{{ option.viewValue | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
 
@@ -139,17 +142,3 @@
     </div>
   </form>
 </div>
-
-<ng-template #selectInput let-form="form" let-assoc="assoc" let-i="i">
-  <mat-form-field [formGroup]="form" fxFlex>
-    <mat-select
-    [formControlName]="i"
-    [placeholder]="assoc.type.name">
-      <mat-option
-      *ngFor="let entry of resolveNXTSTIMMap(assoc.type)"
-      [value]="entry.id">
-        {{ entry.id | unitMapToReadable:assoc.type }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</ng-template>

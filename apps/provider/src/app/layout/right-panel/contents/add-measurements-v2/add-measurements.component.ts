@@ -25,12 +25,10 @@ import {
   convertFromReadableFormat,
   convertToReadableFormat,
   convertUnitToPreferenceFormat,
-  getNXTSTIMMap,
   MeasurementDataPointProvider,
   MeasurementDataPointType,
   MeasurementDataPointTypeAssociation,
-  MeasurementLabelEntry,
-  NXTSTIMMapEntry
+  MeasurementLabelEntry
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as moment from 'moment'
@@ -39,6 +37,11 @@ import { DATA_TYPE_INPUT_PROPS } from './model'
 import { AddDaysheetDialog, AddNoteDialog } from '../../dialogs'
 import { debounceTime } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
+import {
+  MeasurementMetadataProp,
+  MEASUREMENT_METADATA_MAP
+} from '@app/shared/model/measurementMetadata'
+import { chain, intersection, set } from 'lodash'
 
 @UntilDestroy()
 @Component({
@@ -65,6 +68,8 @@ export class AddMeasurementsV2Component implements OnInit {
     }
   ]
   public measurementForm: FormArray
+  public metadataForm: FormArray
+  public metadataEntries: MeasurementMetadataProp[] = []
   public notesRefresh$: Subject<string> = new Subject<string>()
   public oldForm: FormGroup
   public shouldShowDaysheetButton: boolean
@@ -130,11 +135,6 @@ export class AddMeasurementsV2Component implements OnInit {
       this.context.user.measurementPreference,
       this.translate.currentLang
     )
-  }
-
-  public resolveNXTSTIMMap(type: MeasurementDataPointType): NXTSTIMMapEntry[] {
-    const foundMap = getNXTSTIMMap(type)
-    return foundMap ? Object.values(foundMap) : []
   }
 
   public getWeightProportion(controlIndex: number): string {
@@ -261,6 +261,12 @@ export class AddMeasurementsV2Component implements OnInit {
     )
   }
 
+  private createMetadataForm(metadataProps: MeasurementMetadataProp[]): void {
+    this.metadataForm = this.fb.array(
+      metadataProps.map(() => new FormControl('', [Validators.required]))
+    )
+  }
+
   private convertFormValue(values: number[]): number[] {
     return values.map((value, idx) =>
       value
@@ -310,6 +316,7 @@ export class AddMeasurementsV2Component implements OnInit {
   private async processWithNewFramework(): Promise<void> {
     try {
       const formValue = this.measurementForm.value
+      const metadataFormValue = this.metadataForm.value
       const convertedFormValue = this.convertFormValue(formValue)
       let date: moment.Moment = moment(this.labelsForm.value.date.toISOString())
       const now = moment()
@@ -350,6 +357,12 @@ export class AddMeasurementsV2Component implements OnInit {
             source: '3'
           }
 
+          if (metadataFormValue.length > 0) {
+            metadataFormValue.forEach((value, idx) =>
+              set(payload, this.metadataEntries[idx].payloadRoute, value)
+            )
+          }
+
           if (usesUpsert) {
             await this.dataPoint.upsertGroupDataPoint(payload)
           } else {
@@ -383,7 +396,20 @@ export class AddMeasurementsV2Component implements OnInit {
         label
       )
 
-      this.createMeasurementForm(this.typesAssoc.map((assoc) => assoc.type))
+      const assocTypes = this.typesAssoc.map((assoc) => assoc.type)
+      const assocTypeIds = assocTypes.map((assoc) => assoc.id)
+
+      this.metadataEntries = chain(
+        Object.values(MEASUREMENT_METADATA_MAP).filter(
+          (mapEntry) =>
+            intersection(mapEntry.dataPointTypes, assocTypeIds).length > 0
+        )
+      )
+        .flatMap((mapEntry) => [...mapEntry.properties])
+        .value()
+
+      this.createMeasurementForm(assocTypes)
+      this.createMetadataForm(this.metadataEntries)
     } catch (error) {
       this.notifier.error(error)
     }
