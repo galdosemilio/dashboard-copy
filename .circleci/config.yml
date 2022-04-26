@@ -379,6 +379,13 @@ workflows:
                 - master
           requires:
             - full_test_build
+      - approve_blueinfy_deployment:
+          type: approval
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
             - full_blueinfy_build
       - deploy:
           name: deploy_test
@@ -390,7 +397,7 @@ workflows:
           name: deploy_blueinfy
           env: blueinfy
           requires:
-            - approve_test_deployment
+            - approve_blueinfy_deployment
           context: dashboard-deployment-on-demand
       - deploy_on_demand:
           name: deploy_blueinfy_master
