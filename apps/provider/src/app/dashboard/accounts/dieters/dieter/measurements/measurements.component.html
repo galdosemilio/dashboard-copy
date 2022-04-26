@@ -7,7 +7,11 @@
 
 <div class="ccr-container-mini" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>
   <div fxFlex="79%">
-    <app-dieter-measurements-tabs [section]="section" (onSelect)="onSelectTab($event)"></app-dieter-measurements-tabs>
+    <app-dieter-measurements-tabs
+    [hiddenMeasurementTabs]="hiddenMeasurementTabs"
+    [section]="section"
+    (onSelect)="onSelectTab($event)">
+    </app-dieter-measurements-tabs>
   </div>
 
   <div fxFlex="20%" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutAlign.xs="center stretch" fxLayoutWrap.xs>

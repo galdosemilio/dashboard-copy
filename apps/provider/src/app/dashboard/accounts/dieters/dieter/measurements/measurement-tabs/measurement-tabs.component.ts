@@ -10,13 +10,13 @@ import {
   styleUrls: ['./measurement-tabs.component.scss']
 })
 export class MeasurementTabsComponent implements OnInit {
+  @Input() hiddenMeasurementTabs = []
   @Input() section = ''
 
   @Output()
   onSelect: EventEmitter<ExtendedMeasurementLabelEntry | string> =
     new EventEmitter<ExtendedMeasurementLabelEntry | string>()
 
-  public hiddenMeasurementTabs = []
   public measurementLabels: ExtendedMeasurementLabelEntry[] = []
 
   constructor(private measurementLabel: MeasurementLabelService) {}

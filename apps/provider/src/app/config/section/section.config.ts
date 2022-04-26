@@ -53,6 +53,7 @@ import {
   WellCoreTestSectionConfig
 } from './wellcore'
 import { GardenStatePainSectionConfig } from './garden-state'
+import { NXTSTIMSectionConfig } from './nxtstim'
 
 export interface SectionConfigObject {
   component: any
@@ -98,6 +99,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7535']: WellCoreTestSectionConfig,
     ['7536']: HernriedSectionConfig,
     ['7537']: MuscleWiseSectionConfig,
+    ['7546']: NXTSTIMSectionConfig,
     ['7554']: GardenStatePainSectionConfig
   },
   prod: {
@@ -124,6 +126,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6891']: WellCoreProdSectionConfig,
     ['6475']: HernriedSectionConfig,
     ['6916']: MuscleWiseSectionConfig,
-    ['7032']: GardenStatePainSectionConfig
+    ['7032']: GardenStatePainSectionConfig,
+    ['7074']: NXTSTIMSectionConfig
   }
 }
