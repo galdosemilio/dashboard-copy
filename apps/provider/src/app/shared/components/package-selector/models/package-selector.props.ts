@@ -3,12 +3,14 @@ import { Subject } from 'rxjs'
 import { PackageSelectorElement } from './package.interface'
 
 export class PackageSelectorProps extends SectionProps {
-  forcePackageSelection?: boolean
-  packages?: PackageSelectorElement[]
-  trackerPackage?: PackageSelectorElement
+  public forcePackageChoiceId?: string
+  public forcePackageSelection?: boolean
+  public packages?: PackageSelectorElement[]
+  public trackerPackage?: PackageSelectorElement
 
   constructor(args: PackageSelectorProps) {
     super()
+    this.forcePackageChoiceId = args.forcePackageChoiceId
     this.forcePackageSelection = args.forcePackageSelection
     this.packages = args.packages || []
     this.trackerPackage = args.trackerPackage

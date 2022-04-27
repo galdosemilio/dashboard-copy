@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, SkipSelf } from '@angular/core'
+import { Component, OnInit, SkipSelf } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import {
   BindForm,
@@ -11,14 +11,16 @@ import { PackageSelectorElement, PackageSelectorProps } from './models'
   styleUrls: ['./package-selector.component.scss'],
   templateUrl: './package-selector.component.html'
 })
-export class PackageSelectorComponent implements BindForm, OnDestroy, OnInit {
-  disabled = false
-  form: FormGroup
-  hasSelectedPackages = false
-  packages: PackageSelectorElement[] = []
-  readonly = false
-  required = false
-  trackerPackage: PackageSelectorElement = {
+export class PackageSelectorComponent implements BindForm, OnInit {
+  public disabled = false
+  public forcePackageChoiceId: string
+  public forcePackageSelection: boolean
+  public form: FormGroup
+  public hasSelectedPackages = false
+  public packages: PackageSelectorElement[] = []
+  public readonly = false
+  public required = false
+  public trackerPackage: PackageSelectorElement = {
     value: ''
   }
 
@@ -43,9 +45,7 @@ export class PackageSelectorComponent implements BindForm, OnDestroy, OnInit {
     private props: PackageSelectorProps
   ) {}
 
-  ngOnDestroy() {}
-
-  ngOnInit() {
+  public ngOnInit(): void {
     this.form = this.builder.group({
       value: [[]]
     })
@@ -53,12 +53,18 @@ export class PackageSelectorComponent implements BindForm, OnDestroy, OnInit {
 
     this.packages = this.props.packages
     this.trackerPackage = this.props.trackerPackage
+    this.forcePackageChoiceId = this.props.forcePackageChoiceId
+    this.forcePackageSelection = this.props.forcePackageSelection
     this.props.events.forcePackageSelection.next(
       this.props.forcePackageSelection
     )
+
+    if (this.forcePackageChoiceId) {
+      this.onClickPackage(this.forcePackageChoiceId)
+    }
   }
 
-  addTrackerPackage(): void {
+  public addTrackerPackage(): void {
     const packages = this.value
     const index =
       packages && packages.length
@@ -73,7 +79,7 @@ export class PackageSelectorComponent implements BindForm, OnDestroy, OnInit {
         : [...(packages || []), this.trackerPackage.value]
   }
 
-  onClickPackage(value: string): void {
+  public onClickPackage(value: string): void {
     const packages = this.value
     let cache = packages || []
     cache = cache.filter(

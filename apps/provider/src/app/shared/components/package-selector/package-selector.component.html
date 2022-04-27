@@ -1,4 +1,4 @@
-<div class="package-selector">
+<div *ngIf="!forcePackageChoiceId || forcePackageSelection" class="package-selector">
   <p class="packages-header">
     {{ 'SECTION.DEFAULT.PACKAGE_SELECT.SELECT_PACKAGE' | translate }}
   </p>
@@ -54,5 +54,4 @@
       <span><b>{{ 'SECTION.DEFAULT.PACKAGE_SELECT.ACTIVITY_TRACKER' | translate }}</b></span>
     </div>
   </div>
-
 </div>
