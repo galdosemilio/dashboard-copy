@@ -1,0 +1,27 @@
+:host {
+  border: 1px solid var(--primary);
+  padding: 15px;
+}
+
+h4 {
+  font-size: 18px !important;
+  margin: 0;
+  text-align: left !important;
+}
+
+.description {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.price {
+  font-size: 24px;
+}
+
+.product-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  width: 100px;
+}

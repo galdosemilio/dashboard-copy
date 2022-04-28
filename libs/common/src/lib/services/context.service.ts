@@ -220,7 +220,8 @@ export class ContextService {
                     this.user.preference &&
                     this.user.preference.defaultOrganization
                   ) {
-                    defaultOrganization = this.user.preference.defaultOrganization.toString()
+                    defaultOrganization =
+                      this.user.preference.defaultOrganization.toString()
                     org = this.resolveDefaultOrg(defaultOrganization)
                   } else {
                     org = this.resolveDefaultOrg()
@@ -460,7 +461,8 @@ export class ContextService {
             new OrgPrefActions.UpdatePrefs({
               displayName: prefs.displayName,
               assets: prefs.assets,
-              mala: prefs.mala
+              mala: prefs.mala,
+              storeUrl: prefs.storeUrl
             })
           )
           this._organizationId = id

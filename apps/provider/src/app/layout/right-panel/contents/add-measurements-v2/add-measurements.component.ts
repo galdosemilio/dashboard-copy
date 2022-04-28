@@ -18,7 +18,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { _ } from '@app/shared'
-import { CcrMagnitudeEntry } from '@app/shared/components/magnitude-input'
+import { CcrMagnitudeEntry } from '@coachcare/common/components'
 import { MatDialog } from '@coachcare/material'
 import {
   AccountProvider,

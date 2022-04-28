@@ -2,8 +2,18 @@ import { Injectable } from '@angular/core'
 import { remove } from 'lodash'
 import { BehaviorSubject } from 'rxjs'
 
+export type CcrEventType =
+  | 'boot'
+  | 'checkout.redirection.start'
+  | 'checkout.loading.show'
+  | 'right-panel.component.set'
+  | 'right-panel.deactivate'
+  | 'system.timer'
+  | 'user.avatar'
+  | 'user.data'
+
 export interface AppEvent {
-  name: string
+  name: CcrEventType
   data?: any
 }
 
@@ -33,11 +43,11 @@ export class EventsService {
     }, 30000)
   }
 
-  trigger(name: string, data: any = null): void {
+  trigger(name: CcrEventType, data: any = null): void {
     this.bu$.next({ name, data })
   }
 
-  register(name: string, listener: AppEventListener): void {
+  register(name: CcrEventType, listener: AppEventListener): void {
     // initialize the listeners
     if (!this.listeners[name]) {
       this.listeners[name] = []
@@ -46,7 +56,7 @@ export class EventsService {
     this.listeners[name].push(listener)
   }
 
-  unlisten(name: string, listener: AppEventListener): void {
+  unlisten(name: CcrEventType, listener: AppEventListener): void {
     if (!this.listeners[name] || !this.listeners[name].length) {
       return
     }
@@ -54,7 +64,7 @@ export class EventsService {
     remove(this.listeners[name], (f) => f.toString() === listener.toString())
   }
 
-  unregister(name: string): void {
+  unregister(name: CcrEventType): void {
     if (!this.listeners[name]) {
       this.listeners[name] = []
     }

@@ -1,0 +1,13 @@
+<div [formGroup]="form" fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="10px">
+  <mat-form-field [appearance]="appearance">
+    <input [placeholder]="label | translate" formControlName="value" matInput type="number" min="0">
+  </mat-form-field>
+
+  <mat-form-field [appearance]="appearance">
+    <mat-select formControlName="magnitude">
+      <mat-option *ngFor="let magnitude of magnitudes" [value]="magnitude.id">
+        {{ magnitude.displayName | translate | lowercase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

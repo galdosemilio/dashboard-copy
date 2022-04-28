@@ -2,7 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ContextService, NotifierService } from '@app/service'
 import { _ } from '@app/shared/utils'
-import { AddressLabelType } from '@coachcare/common/model'
+import {
+  AddressLabelType,
+  EcommerceProduct,
+  OrderSummary
+} from '@coachcare/common/model'
 import {
   AccountAddress,
   AddressProvider,
@@ -12,7 +16,6 @@ import {
 } from '@coachcare/sdk'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
-import { EcommerceProduct, OrderSummary } from '../../model'
 
 interface BuyProductDialogProps {
   product: EcommerceProduct

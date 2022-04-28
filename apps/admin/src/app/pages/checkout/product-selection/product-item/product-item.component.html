@@ -1,0 +1,20 @@
+<div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="30px">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <mat-checkbox [disabled]="disabled" (change)="onValueChanges($event)"></mat-checkbox>
+  </div>
+
+  <div
+  *ngIf="imageBaseUrl"
+  class="product-image"
+  [style.background-image]="'url(' + imageBaseUrl + product.imageUrl + ')'">
+    &nbsp;
+  </div>
+
+  <div fxFlex fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+    <h4 fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+      <span fxFlex>{{ product.name }}</span>
+      <span class="price">{{ product.price | currency:'USD':'symbol':'1.0-0':'en-US' }}</span>
+    </h4>
+    <p *ngIf="product.description" [innerHtml]="product.description | ccrSanitize" class="description"></p>
+  </div>
+</div>

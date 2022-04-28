@@ -1,0 +1,123 @@
+<div
+  class="checkout"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutAlign.sm="start stretch"
+  fxLayoutAlign.xs="start stretch"
+  fxLayoutGap="50px"
+  fxLayoutGap.sm="25px"
+  fxLayoutAlign.xs="start stretch">
+  <div class="logo-wrapper">
+    <img [src]="logoUrl" alt="Clinic Logo">
+  </div>
+
+  <mat-horizontal-stepper
+  #stepper
+  [formGroup]="checkoutForm"
+  (selectionChange)="onStepChange($event)"
+  fxFlex
+  linear>
+    <mat-step
+    *ngIf="!hiddenSteps.includes('account_create')"
+    [stepControl]="firstStepMode === 'signup' ? checkoutForm.get('account') : loginInfo"
+    data-name="account_create">
+      <ccr-checkout-account-info
+        [accountCreated]="!!account"
+        [additionalConsentButtons]="additionalConsentButtons"
+        [hasStoreUrl]="hasStoreUrl"
+        [hidden]="firstStepMode === 'login'"
+        [spree]="spree"
+        [spreeToken]="spreeToken"
+        [storeUrl]="storeUrl"
+        formControlName="account">
+      </ccr-checkout-account-info>
+
+      <ccr-checkout-login
+        [formGroup]="loginInfo"
+        [hidden]="firstStepMode === 'signup'">
+      </ccr-checkout-login>
+    </mat-step>
+
+    <mat-step
+    *ngIf="!hiddenSteps.includes('shipping_info')"
+    [stepControl]="checkoutForm.get('shipping')"
+    data-name="shipping_info">
+      <ccr-checkout-shipping-info
+      [accountInfo]="checkoutData.accountInfo"
+      [hasStoreUrl]="hasStoreUrl"
+      [spree]="spree"
+      [spreeToken]="spreeToken"
+      [shippingAddress]="shippingAddress"
+      formControlName="shipping">
+      </ccr-checkout-shipping-info>
+    </mat-step>
+
+    <mat-step
+    *ngIf="!hiddenSteps.includes('billing_info')"
+    [stepControl]="checkoutForm.get('billing')"
+    data-name="billing_info">
+      <ccr-checkout-billing-info
+      [accountInfo]="checkoutData.accountInfo"
+      [allowCreditCard]="!hiddenSteps.includes('payment')"
+      [cardName]="checkoutData.accountInfo?.firstName + ' ' + checkoutData.accountInfo?.lastName"
+      [hasStoreUrl]="hasStoreUrl"
+      [spree]="spree"
+      [spreeToken]="spreeToken"
+      (onChangeUseShippingAddress)="onChangeUseShippingAddress($event)"
+      formControlName="billing"
+      ></ccr-checkout-billing-info>
+    </mat-step>
+
+    <mat-step
+    *ngIf="hasStoreUrl && !hiddenSteps.includes('payment') && !hiddenSteps.includes('billing_info')"
+    [stepControl]="checkoutForm.get('products')"
+    data-name="product_selection">
+      <ccr-checkout-product-selection
+      *ngIf="spree && spreeToken"
+      formControlName="products"
+      [spreeClient]="spree"
+      [spreeToken]="spreeToken">
+      </ccr-checkout-product-selection>
+    </mat-step>
+
+    <mat-step *ngIf="hasStoreUrl && !hiddenSteps.includes('payment') && !hiddenSteps.includes('billing_info')" data-name="order_review">
+      <ccr-checkout-order-review
+      *ngIf="orderDetails"
+      [orderDetails]="orderDetails"
+      [products]="selectedProducts">
+      </ccr-checkout-order-review>
+    </mat-step>
+
+    <mat-step *ngIf="!hiddenSteps.includes('order_confirm')" data-name="order_confirm">
+      <ccr-checkout-order-confirm></ccr-checkout-order-confirm>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+  <div
+    class="ccr-form-actions"
+    fxLayout="row"
+    fxLayoutAlign="stretch center">
+      <div *ngIf="showBackButton || firstStepMode === 'login'" fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <button
+        (click)="prevStep()"
+        class="ccr-button"
+        mat-flat-button>
+          {{ 'GLOBAL.BACK' | translate }}
+        </button>
+      </div>
+
+      <p
+      *ngIf="stepper.selectedIndex === 0 && firstStepMode === 'signup' && !account"
+      class="login-link">
+        {{ 'CHECKOUT.HAVE_NOT_FINISHED_ONBOARDING' | translate }} <a (click)="changeFirstStepMode('login');refreshNextStepLabel()">{{ 'CHECKOUT.CONTINUE_YOUR_REGISTRATION' | translate }}</a>
+      </p>
+
+      <div *ngIf="showNextButton" fxFlex fxLayout="row" fxLayoutAlign="end center">
+        <button mat-flat-button class="ccr-button" color="accent" (click)="nextStep()">{{ nextStepLabel | translate }}</button>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="showSpinner" class="checkout-loading-indicator">
+  <mat-spinner></mat-spinner>
+</div>

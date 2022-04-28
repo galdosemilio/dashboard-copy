@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { ContextService } from '@app/service'
+import { EcommerceProduct } from '@coachcare/common/model'
 import { EcommerceCreateTokenResponse } from '@coachcare/sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { BuyProductDialog } from '../../dialogs'
-import { EcommerceProduct } from '../../model'
 
 @Component({
   selector: 'app-ecommerce-product',

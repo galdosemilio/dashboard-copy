@@ -1554,13 +1554,9 @@
   },
   "SECTION": {
     "APOLLO_US": {
-      "ACCOUNT_IDENTIFIERS": {
-        "PO_NUMBER": "PO Number"
-      },
       "PACKAGE_SELECT": {
         "APOLLO_COACHING_SERVICES": "Apollo Coaching Services",
         "BODY_COMPOSITION_SCALE": "Body Composition Scale",
-        "COACH_PLUS": "Care Plus",
         "COACH_PLUS_SERVICE": "Care Plus with Apollo Coaching Service",
         "MOBILE_APP": "Mobile App"
       }

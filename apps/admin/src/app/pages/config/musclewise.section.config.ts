@@ -1,5 +1,6 @@
 import { _ } from '@coachcare/common/shared'
 import { AccountTypeIds } from '@coachcare/sdk'
+import { MuscleWiseOrderConfirmComponent } from '../checkout'
 import { SectionConfigDetails } from './section.config'
 
 export const MuscleWiseSectionConfig: SectionConfigDetails = {
@@ -15,5 +16,9 @@ export const MuscleWiseSectionConfig: SectionConfigDetails = {
         }
       ]
     }
+  },
+  CHECKOUT: {
+    ORDER_CONFIRM: MuscleWiseOrderConfirmComponent,
+    SHOW_REDIRECT_BUTTON: false
   }
 }

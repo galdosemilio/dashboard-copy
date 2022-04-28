@@ -7,10 +7,11 @@ import { CcrFormFieldsModule } from '@coachcare/common/components'
 import { LayoutModule } from '@coachcare/layout'
 import { TranslateModule } from '@ngx-translate/core'
 import { ColorPickerModule } from 'ngx-color-picker'
-
 import { SharedComponents } from '@board/shared/shared.barrel'
 import { CcrMaterialModule } from '@coachcare/material'
 import { QRCodeModule } from 'angularx-qrcode'
+import { MatMomentDateModule } from '@coachcare/datepicker'
+import { MomentModule } from 'ngx-moment'
 
 @NgModule({
   imports: [
@@ -19,6 +20,8 @@ import { QRCodeModule } from 'angularx-qrcode'
     FlexLayoutModule,
     FormsModule,
     LayoutModule,
+    MatMomentDateModule,
+    MomentModule,
     ReactiveFormsModule,
     TranslateModule.forChild(),
     AppCommonModule.forChild(),
@@ -33,10 +36,11 @@ import { QRCodeModule } from 'angularx-qrcode'
     ReactiveFormsModule,
     TranslateModule,
     AppCommonModule,
+    MomentModule,
     CcrFormFieldsModule,
     ColorPickerModule,
     CcrMaterialModule,
-    SharedComponents
+    ...SharedComponents
   ],
   declarations: SharedComponents
 })

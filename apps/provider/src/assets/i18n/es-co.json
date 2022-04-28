@@ -1554,13 +1554,9 @@
   },
   "SECTION": {
     "APOLLO_US": {
-      "ACCOUNT_IDENTIFIERS": {
-        "PO_NUMBER": "Número de Factura"
-      },
       "PACKAGE_SELECT": {
         "APOLLO_COACHING_SERVICES": "Servicios de Apollo Coach",
         "BODY_COMPOSITION_SCALE": "Báscula de Composición corporal",
-        "COACH_PLUS": "Care Plus",
         "COACH_PLUS_SERVICE": "Care Plus con Apollo Coaching Service",
         "MOBILE_APP": "Aplicación movil"
       }

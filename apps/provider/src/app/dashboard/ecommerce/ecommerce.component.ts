@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
+import { EcommerceProduct } from '@coachcare/common/model'
 import { EcommerceCreateTokenResponse, EcommerceProvider } from '@coachcare/sdk'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
-import { EcommerceProduct } from './model'
 
 @Component({
   selector: 'app-ecommerce',

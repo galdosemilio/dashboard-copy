@@ -1,0 +1,24 @@
+ccr-checkout-account-info {
+  mat-checkbox {
+    .mat-checkbox-layout {
+      display: inline;
+
+      .mat-checkbox-label {
+        line-height: 150%;
+        white-space: normal;
+      }
+    }
+  }
+
+  ccr-form-field-consent {
+    margin-left: 0 !important;
+  }
+
+  .ccr-checkout-field-select {
+    margin-bottom: 15px;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+  }
+}

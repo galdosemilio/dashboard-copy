@@ -5,6 +5,7 @@ import { PackagePriceItem } from '../register/clinic/clinic-packages/model'
 import { ApolloIntSectionConfig } from './apollo-int.section.config'
 import { ApolloUSSectionConfig } from './apollo-us.section.config'
 import { BariatricAdvantageSectionConfig } from './bariatric-adv.section.config'
+import { BlueskySectionConfig } from './bluesky.section.config'
 import {
   CoachCareProdSectionConfig,
   CoachCareTestSectionConfig
@@ -59,9 +60,15 @@ export interface RegisterFirstStepDetails {
   PRIORITY_COUNTRY?: Array<string>
 }
 
+export interface CheckoutDetails {
+  ORDER_CONFIRM: any
+  SHOW_REDIRECT_BUTTON?: boolean
+}
+
 export interface SectionConfigDetails {
   REGISTER?: RegisterConfigDetails
   LOGIN?: LoginConfigDetails
+  CHECKOUT?: CheckoutDetails
 }
 
 export interface SectionConfigItem {
@@ -89,7 +96,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7016']: RobardTestSectionConfig,
     ['5748']: ShakeItSectionConfig,
     ['7535']: WellCoreSectionConfig,
-    ['7537']: MuscleWiseSectionConfig
+    ['7537']: MuscleWiseSectionConfig,
+    ['7555']: BlueskySectionConfig
   },
   prod: {
     ['5341']: ApolloIntSectionConfig,

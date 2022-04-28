@@ -1,0 +1,14 @@
+<div
+*ngIf="form"
+[formGroup]="form"
+fxLayout="column"
+fxLayoutAlign="start stretch"
+fxLayoutGap="15px">
+  <div class="ccr-form-title">{{ 'CHECKOUT.PRODUCT_SELECTION' | translate }}</div>
+
+  <ccr-checkout-product-item
+  *ngFor="let product of products; let i = index"
+  [formControlName]="i"
+  [product]="product">
+  </ccr-checkout-product-item>
+</div>

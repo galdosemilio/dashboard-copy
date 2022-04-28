@@ -1,0 +1,138 @@
+@import 'variables';
+
+ccr-checkout {
+  padding-bottom: 25px;
+
+  .checkout-loading-indicator {
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+
+    mat-spinner {
+      margin: calc(50vh - 50px) calc(50vw - 50px);
+
+      circle {
+        stroke: white;
+      }
+    }
+  }
+
+  .checkout {
+    margin-top: 15px;
+
+    &-subtitle {
+      font-family: 'Inter Light', sans-serif;
+      font-size: 36px;
+      font-weight: lighter;
+      margin-bottom: 0;
+    }
+
+    .mat-stepper-horizontal {
+      background-color: transparent;
+
+      .step-container {
+        margin-top: 50px;
+
+        .step-header {
+          font-weight: 200;
+          font-size: 40px;
+          color: linear-gradient(
+              112.99deg,
+              rgba(141, 189, 216, 0.6) 22.93%,
+              rgba(255, 255, 255, 0) 89.69%
+            ),
+            linear-gradient(0deg, #ffffff, #ffffff);
+          line-height: 48px;
+        }
+      }
+    }
+
+    .login-link {
+      margin-top: 10px;
+
+      a {
+        color: var(--primary);
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    &-title {
+      font-family: 'Trade Gothic Bold Condensed', sans-serif;
+      font-size: 100px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .ccr-form-actions {
+      margin: 0 25px;
+    }
+
+    .ccr-form-title {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .ccr-stripe-field {
+      border: 1px solid var(--accent);
+      padding: 10px;
+    }
+
+    .ccr-checkout-field {
+      display: flex;
+      width: 100%;
+    }
+
+    .ccr-checkout-form {
+      mat-select {
+        .mat-select-arrow-wrapper {
+          .mat-select-arrow {
+            margin-top: 10px;
+          }
+        }
+      }
+
+      .mat-form-field-infix {
+        padding-top: 0;
+      }
+
+      .mat-form-field-suffix {
+        border: 0;
+      }
+    }
+
+    .ccr-checkout-label {
+      min-width: 122px;
+      padding-top: 15px;
+      width: 122px;
+    }
+
+    .logo-wrapper {
+      & > img {
+        height: 150px;
+        display: block;
+        margin: auto;
+        max-width: 100%;
+      }
+    }
+
+    .mat-form-field-infix {
+      padding: 0.5em 0;
+    }
+
+    .mat-horizontal-stepper-header {
+      pointer-events: none !important;
+    }
+
+    .mat-step-label {
+      display: none !important;
+    }
+
+    .hide-header .mat-horizontal-stepper-header-container {
+      display: none !important;
+    }
+  }
+}

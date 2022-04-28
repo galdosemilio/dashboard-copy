@@ -19,6 +19,7 @@ import { LastStepComponents } from './register/clinic/last-step/last-step.barrel
 import { RegisterAppleComponents } from './register/apple/apple.barrel'
 import { ImplementationComponents } from './register/implementation/implementation.barrel'
 import { PatientPackagesComponents } from './register/clinic/patient-packages/patient-packages.barrel'
+import { CheckoutComponents } from './checkout/checkout.barrel'
 
 export {
   LoginPageComponent,
@@ -46,6 +47,7 @@ export const PagesComponents = [
   RegisterClinicPageComponent,
   RegisterClinicInfoPageComponent,
   RegisterClinicPaymentPageComponent,
+  ...CheckoutComponents,
   ...HeaderComponents,
   ...InfoDescriptionComponents,
   ...ImplementationComponents,

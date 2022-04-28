@@ -13,6 +13,7 @@ import { AccountAutocompleterComponent } from './autocompleters/account/account.
 import { OrganizationAutocompleterComponent } from './autocompleters/organization/organization.component'
 import {
   CcrDateInputComponent,
+  CcrMagnitudeInputComponent,
   FeatureToggleInputComponent,
   GenderInputComponent,
   OptionBlockFieldComponent,
@@ -50,6 +51,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
   declarations: [
     // fields
     CcrDateInputComponent,
+    CcrMagnitudeInputComponent,
     ColorFormFieldComponent,
     ConsentFormFieldComponent,
     CountryFormFieldComponent,
@@ -77,6 +79,7 @@ import { OrganizationsFilterComponent } from './filters/organizations/organizati
   exports: [
     // fields
     CcrDateInputComponent,
+    CcrMagnitudeInputComponent,
     ColorFormFieldComponent,
     ConsentFormFieldComponent,
     CountryFormFieldComponent,

@@ -1554,13 +1554,9 @@
   },
   "SECTION": {
     "APOLLO_US": {
-      "ACCOUNT_IDENTIFIERS": {
-        "PO_NUMBER": "رقم طلب الشراء"
-      },
       "PACKAGE_SELECT": {
         "APOLLO_COACHING_SERVICES": "خدمات التدريب أبولو",
         "BODY_COMPOSITION_SCALE": "مقياس تكوين الجسم",
-        "COACH_PLUS": "العناية بلس",
         "COACH_PLUS_SERVICE": "رعاية بلس مع خدمة تدريب أبولو",
         "MOBILE_APP": "تطبيق الجوال"
       }

@@ -3,6 +3,7 @@ import { NotFoundPageComponent } from './not-found/not-found.component'
 import { PhoneInputComponent } from './phone-input'
 import { QRCodeDisplayDialog } from './dialogs'
 import { UnsupportedBrowserPageComponent } from './unsupported-browser/unsupported-browser.component'
+import { CcrSanitizePipe } from '@coachcare/common/pipes'
 
 export {
   MFACodeInputComponent,
@@ -17,5 +18,6 @@ export const SharedComponents = [
   NotFoundPageComponent,
   PhoneInputComponent,
   QRCodeDisplayDialog,
-  UnsupportedBrowserPageComponent
+  UnsupportedBrowserPageComponent,
+  CcrSanitizePipe
 ]

@@ -1,0 +1,91 @@
+<div class="ccr-form-title">{{ 'CHECKOUT.SHIPPING_INFORMATION' | translate }}</div>
+<form class="ccr-checkout-form" [formGroup]="form">
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px"
+  >
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.FIRST_NAME' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="firstName">
+        <mat-error *ngIf="form.get('firstName').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.LAST_NAME' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="lastName">
+        <mat-error *ngIf="form.get('lastName').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="ccr-checkout-field">
+    <label class="ccr-checkout-label">{{ 'CHECKOUT.ADDRESS_LINE_1' | translate }} <span>*</span></label>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="address1">
+      <mat-error *ngIf="form.get('address1').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="ccr-checkout-field">
+    <label class="ccr-checkout-label">{{ 'CHECKOUT.ADDRESS_LINE_2' | translate }}</label>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="address2">
+    </mat-form-field>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px"
+  >
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.CITY' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="city">
+        <mat-error *ngIf="form.get('city').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.STATE' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <mat-select
+        formControlName="state">
+          <mat-option *ngFor="let state of states" [value]="state.value">{{ state.viewValue }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('state').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px"
+  >
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.POSTAL_CODE' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="zip">
+        <mat-error *ngIf="form.get('zip').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.TIMEZONE' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="timezone">
+          <mat-option *ngFor="let timezone of timezones" [value]="timezone.code">{{ timezone.lang[lang] }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('timezone').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

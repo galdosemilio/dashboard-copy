@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { NotifierService } from '@coachcare/common/services'
 import { _ } from '@coachcare/backend/shared'
 import {
@@ -34,7 +34,7 @@ export class OrganizationsEcommerceComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      spreeUrl: [this.prefs.storeUrl ?? '', [Validators.required]]
+      spreeUrl: [this.prefs.storeUrl ?? '', []]
     })
 
     this.form.valueChanges
@@ -52,7 +52,7 @@ export class OrganizationsEcommerceComponent implements OnInit {
 
       await this.organizationPref.updateAdminPreference({
         id: this.orgId,
-        storeUrl: formValues.spreeUrl
+        storeUrl: formValues.spreeUrl || null
       })
 
       this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))

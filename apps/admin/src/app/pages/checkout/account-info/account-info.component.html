@@ -1,0 +1,146 @@
+<div class="ccr-form-title">{{ 'PAGE.REGISTER.STEP1.DEFAULT.ACCOUNT_INFORMATION' | translate }}</div>
+<form class="ccr-checkout-form" [formGroup]="form">
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px">
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.FIRST_NAME' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="firstName">
+        <mat-error *ngIf="form.get('firstName').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.LAST_NAME' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="lastName">
+        <mat-error *ngIf="form.get('lastName').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="10px">
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.EMAIL_ADDRESS' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <input [readonly]="accountCreated" matInput formControlName="email">
+        <mat-error *ngIf="form.get('email').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="form.get('email').getError('email')">{{ 'GLOBAL.FIELD_INVALID' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.CONFIRM_EMAIL_ADDRESS' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <input [readonly]="accountCreated" matInput formControlName="emailConfirmation">
+        <mat-error *ngIf="form.get('email').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="form.get('email').getError('email')">{{ 'GLOBAL.FIELD_INVALID' | translate }}</mat-error>
+        <mat-error *ngIf="form.get('emailConfirmation').getError('wrongMatch')">{{ 'GLOBAL.EMAIL_NOT_MATCH' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="10px">
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.PASSWORD' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <input [readonly]="accountCreated" type="password" matInput formControlName="password">
+        <mat-error *ngIf="form.get('password').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="form.get('password').getError('minlength')">{{ 'NOTIFY.ERROR.MIN_CHARS' | translate:{ min: 8 } }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.CONFIRM_PASSWORD' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <input [readonly]="accountCreated" type="password" matInput formControlName="passwordConfirmation">
+        <mat-error *ngIf="form.get('passwordConfirmation').getError('wrongMatch')">{{ 'FIELD.PASSWORD.BOTH_MATCH' | translate }}</mat-error>
+        <mat-error *ngIf="form.get('passwordConfirmation').getError('minlength')">{{ 'NOTIFY.ERROR.MIN_CHARS' | translate:{ min: 8 } }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px">
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.PHONE_NUMBER' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="phoneNumber">
+        <mat-error *ngIf="form.get('phoneNumber').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'BOARD.DATE_OF_BIRTH' | translate }}</label>
+      <ccr-date-input
+      appearance="outline"
+      [errorMessage]="'GLOBAL.FIELD_INVALID' | translate"
+      formControlName="birthday"
+      fxFlex
+      placeholder="">
+      </ccr-date-input>
+    </div>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="0px">
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.HEIGHT' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <mat-select
+        formControlName="height">
+          <mat-option *ngFor="let height of heights" [value]="height.value">{{ height.viewValue }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('height').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field" fxFlex>
+      <label class="ccr-checkout-label">{{ 'GLOBAL.GENDER' | translate }}</label>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="gender">
+          <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.viewValue | translate }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('gender').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="ccr-checkout-field-select">
+    <ccr-form-field-consent formControlName="agreements"></ccr-form-field-consent>
+    <mat-error *ngIf="form.get('agreements').touched && form.get('agreements').getError('required')">
+      {{ 'GLOBAL.FIELD_REQUIRED' | translate }}
+    </mat-error>
+  </div>
+
+  <div
+  *ngFor="let consentButton of additionalConsentButtons; let i = index;"
+  [formGroup]="additionalConsentForm"
+  class="ccr-checkout-field-select mat-form-field">
+    <mat-checkbox
+    [class.mat-form-field-invalid]="additionalConsentForm.controls[i].touched && additionalConsentForm.controls[i].getError('required')"
+    [formControlName]="i">
+      {{ consentButton.text }} <a *ngFor="let link of consentButton.links" [href]="link.url">{{ link.text }}</a>
+    </mat-checkbox>
+    <mat-error *ngIf="additionalConsentForm.controls[i].touched && additionalConsentForm.controls[i].getError('required')">
+      {{ 'GLOBAL.FIELD_REQUIRED' | translate }}
+    </mat-error>
+  </div>
+</form>

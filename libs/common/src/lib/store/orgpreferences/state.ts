@@ -7,6 +7,7 @@ export interface State extends Partial<OrganizationPreferenceSingle> {
     logoUrl: string
     color: AppPalette
   }
+  storeUrl: string
 }
 
 export const initialState: State = {
@@ -14,5 +15,6 @@ export const initialState: State = {
   assets: {
     logoUrl: '/assets/logo.png',
     color: Palette
-  }
+  },
+  storeUrl: ''
 } as State

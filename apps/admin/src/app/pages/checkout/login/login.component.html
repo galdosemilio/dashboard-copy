@@ -1,0 +1,27 @@
+<div class="ccr-form-title">{{ 'CHECKOUT.CONTINUE_REGISTRATION' | translate }}</div>
+<form class="ccr-checkout-form" [formGroup]="formGroup">
+  <p>{{ 'CHECKOUT.LOG_INTO_ACCOUNT_AND_CONTINUE' | translate }}</p>
+  <div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutAlign.sm="start stretch"
+    fxLayoutGap="50px"
+    fxLayoutGap.sm="10px">
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.EMAIL_ADDRESS' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="email">
+        <mat-error *ngIf="formGroup.get('email').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="formGroup.get('email').getError('email')">{{ 'GLOBAL.FIELD_INVALID' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="ccr-checkout-field">
+      <label class="ccr-checkout-label">{{ 'GLOBAL.PASSWORD' | translate }} <span>*</span></label>
+      <mat-form-field appearance="outline">
+        <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="formGroup.get('password').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

@@ -34,7 +34,6 @@ import {
   LocaleTableComponent
 } from './locale-selector'
 import { LoginHistoryComponent } from './login-history'
-import { CcrMagnitudeInputComponent } from './magnitude-input'
 import { CcrLastLoginComponent } from './last-login'
 import { CcrMicLevelIndicatorComponent } from './mic-level-indicator'
 import { CcrNextMeetingComponent } from './next-meeting'
@@ -167,7 +166,6 @@ export const CmpComponents = [
   // CcrDateInputComponent,
   CcrImageOptionSelectorComponent,
   CcrLastLoginComponent,
-  CcrMagnitudeInputComponent,
   CcrMeasurementChartV2Component,
   CcrMicLevelIndicatorComponent,
   CcrNextMeetingComponent,

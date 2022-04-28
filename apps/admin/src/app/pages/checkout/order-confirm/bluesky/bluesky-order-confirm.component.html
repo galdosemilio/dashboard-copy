@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="25px">
+  <div fxFlex="75%">
+    <div class="ccr-form-title">Almost Done!</div>
+
+    <p>You have successfully signed up for Virtual Health Service from Blue Sky MD. Your one-year membership starts today on {{ today | amDateFormat:'MM/DD/YYYY' }} and will renew on {{ inOneYear | amDateFormat:'MM/DD/YYYY' }}.</p>
+    <p>To start using your membership and schedule your first virtual visit, please download Blue Sky MD mobile app.</p>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="25px">
+      <a *ngIf="iosLink" [href]="iosLink" target="_blank">
+        <img [src]="iosButtonLink" alt="App Store Button" class="badge-button">
+      </a>
+      <a *ngIf="androidLink" [href]="androidLink" target="_blank">
+        <img *ngIf="androidLink" [src]="androidButtonLink" alt="Google Play Button" class="badge-button">
+      </a>
+    </div>
+  </div>
+
+  <div fxFlex fxHide.xs>
+    <img class="screenshot-img" src="./assets/checkout/bluesky-app.png" alt="BlueSky App Screenshot">
+  </div>
+</div>

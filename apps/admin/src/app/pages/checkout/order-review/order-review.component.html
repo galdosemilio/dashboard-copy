@@ -1,0 +1,26 @@
+<div class="ccr-form-title">{{ 'CHECKOUT.ORDER_DETAILS' | translate }}</div>
+
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+  <p *ngFor="let product of products">
+    <span fxFlex>{{ product.name }}</span>
+    <span fxFlex="25%" class="price">{{ product.price | currency:'USD':'symbol':'1.0-2':'en-US' }}</span>
+  </p>
+
+  <p>
+    <span fxFlex>{{ 'GLOBAL.SHIPPING' | translate }}</span>
+    <span fxFlex="25%" class="price">{{ orderDetails.attributes.ship_total | currency:'USD':'symbol':'1.0-2':'en-US' }}</span>
+  </p>
+
+  <p>
+    <span fxFlex>{{ 'GLOBAL.TAX' | translate }}</span>
+    <span fxFlex="25%" class="price">{{ orderDetails.attributes.tax_total | currency:'USD':'symbol':'1.0-2':'en-US' }}</span>
+  </p>
+
+  <hr>
+
+  <p>
+    <span fxFlex>{{ 'GLOBAL.TOTAL' | translate }}</span>
+    <span fxFlex="25%" class="price">{{ orderDetails.attributes.total | currency:'USD':'symbol':'1.0-2':'en-US' }}</span>
+  </p>
+</div>
+
