@@ -25,11 +25,7 @@ import * as moment from 'moment'
 import { Store } from '@ngrx/store'
 import { CCRConfig } from '@app/config'
 import { filter, merge, uniqBy } from 'lodash'
-import {
-  MeasurementDataPointMinimalType,
-  MeasurementLabelEntry,
-  NamedEntity
-} from '@coachcare/sdk'
+import { MeasurementLabelEntry, NamedEntity } from '@coachcare/sdk'
 import { SYNTHETIC_DATA_TYPES } from '@app/dashboard/accounts/dieters/models'
 import { TranslateService } from '@ngx-translate/core'
 import { ChartPluginsOptions } from 'chart.js'
@@ -65,7 +61,16 @@ export class CcrMeasurementChartV2Component implements OnInit {
     return this._label
   }
 
-  @Input() typeGroups: TypeGroupEntry[]
+  @Input() set typeGroups(groups: TypeGroupEntry[]) {
+    this._typeGroups = groups.map((group: TypeGroupEntry) => {
+      group.types = this.parseWithSyntheticTypes(group.types)
+      return group
+    })
+  }
+
+  get typeGroups(): TypeGroupEntry[] {
+    return this._typeGroups
+  }
 
   @Input()
   timeframe: MeasurementTimeframe = 'week'
@@ -118,6 +123,7 @@ export class CcrMeasurementChartV2Component implements OnInit {
     new Subject<DateNavigatorOutput>()
   private _dates: DateNavigatorOutput
   private _label?: MeasurementLabelEntry
+  private _typeGroups?: TypeGroupEntry[]
 
   // views selector
   viewTypes: SelectOptions<MeasurementTimeframe> = [
@@ -243,9 +249,7 @@ export class CcrMeasurementChartV2Component implements OnInit {
     }
   }
 
-  private parseWithSyntheticTypes(
-    types: MeasurementDataPointMinimalType[]
-  ): NamedEntity[] {
+  private parseWithSyntheticTypes(types: NamedEntity[]): NamedEntity[] {
     return uniqBy(
       types.map((type) => ({
         id: type.id,
