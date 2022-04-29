@@ -1,3 +1,17 @@
+## [1.80.2](https://github.com/coachcare/dashboard/compare/v1.80.1...v1.80.2) (2022-04-29)
+
+
+### Bug Fixes
+
+* adjusted chat info linking ([4633b78](https://github.com/coachcare/dashboard/commit/4633b785dac2cfa21c90eddf8c77ce2a7f24dcea))
+* default route [FRON-2751] ([909cd17](https://github.com/coachcare/dashboard/commit/909cd17e5ee4441c88e6743cfbe21a01134055a6))
+* disabled food measurements for NXTSTIM [FRON-2757] ([6fb2de5](https://github.com/coachcare/dashboard/commit/6fb2de5687cca3902cd1a705e840fc7020a1d7d4))
+* notification after sent email for reset password [FRON-2745] ([8bcd4ea](https://github.com/coachcare/dashboard/commit/8bcd4eaeac75d7f2abd5f11bf6e1858dddd3f944))
+* patient communications page responsiveness [FRON-2713] ([a21d013](https://github.com/coachcare/dashboard/commit/a21d0137040e02363cfe4500c97be629933184e4))
+* patient dashboard page responsiveness [FRON-2706] ([8647056](https://github.com/coachcare/dashboard/commit/8647056464d5b90f85fcec1744d60674f4311504))
+* separated blueinfy and test deployments [FRON-2752] ([eff3e31](https://github.com/coachcare/dashboard/commit/eff3e317320d427e58997ac8bafbe9317e820772))
+* solved multi-word last name issue [FRON-2747] ([133b441](https://github.com/coachcare/dashboard/commit/133b441c103df25a3a9eb7256a4066d749f8e066))
+
 ## [1.80.1](https://github.com/coachcare/dashboard/compare/v1.80.0...v1.80.1) (2022-04-21)
 
 
