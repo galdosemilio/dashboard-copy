@@ -1,3 +1,10 @@
+## [1.80.3](https://github.com/coachcare/dashboard/compare/v1.80.2...v1.80.3) (2022-04-30)
+
+
+### Bug Fixes
+
+* added fallbacks for missing page size ([d07d31d](https://github.com/coachcare/dashboard/commit/d07d31d788ed399ca23add70d65987d41b720d8d))
+
 ## [1.80.2](https://github.com/coachcare/dashboard/compare/v1.80.1...v1.80.2) (2022-04-29)
 
 
