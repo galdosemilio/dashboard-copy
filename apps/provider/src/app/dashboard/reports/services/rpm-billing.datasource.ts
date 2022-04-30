@@ -28,7 +28,7 @@ export class RPMBillingDataSource extends TableDataSource<
     if (this.paginator) {
       this.addOptional(this.paginator.page, () => ({
         limit: this.paginator.pageSize,
-        offset: this.paginator.pageIndex * this.paginator.pageSize
+        offset: this.paginator.pageIndex * (this.paginator.pageSize ?? 50)
       }))
     }
   }
