@@ -1,3 +1,10 @@
+## [1.80.4](https://github.com/coachcare/dashboard/compare/v1.80.3...v1.80.4) (2022-04-30)
+
+
+### Bug Fixes
+
+* solved issue with empty result [FRON-2769] ([c83ed9b](https://github.com/coachcare/dashboard/commit/c83ed9b2b61865aafb91118a548ffd4bb7727d06))
+
 ## [1.80.3](https://github.com/coachcare/dashboard/compare/v1.80.2...v1.80.3) (2022-04-30)
 
 
