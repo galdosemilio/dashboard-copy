@@ -1,3 +1,16 @@
+# [1.81.0](https://github.com/coachcare/dashboard/compare/v1.80.4...v1.81.0) (2022-05-02)
+
+
+### Bug Fixes
+
+* removed external id and pkg sel from apollo [FRON-2761] ([3a83b4e](https://github.com/coachcare/dashboard/commit/3a83b4efe24199f86d7b945a032d873a44c0616a))
+* solved issue with acc creation on the admin panel [FRON-2727] ([a5e07ef](https://github.com/coachcare/dashboard/commit/a5e07ef2f1182621e64431787c8966ac86be2244))
+
+
+### Features
+
+* added support for nxtstim metadata [FRON-2726] ([179d5df](https://github.com/coachcare/dashboard/commit/179d5df05cba53f3ac1d6d0e6a6c68409ed1fc8e))
+
 ## [1.80.4](https://github.com/coachcare/dashboard/compare/v1.80.3...v1.80.4) (2022-04-30)
 
 
