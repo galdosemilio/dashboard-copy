@@ -58,6 +58,7 @@ interface TimeBlockCell {
 type ScheduleCalendarTimeRange = 'month' | 'day' | 'week'
 
 const MEETING_SPACING_SIZE = 1
+const DEFAULT_BLOCK_DURATION = 15
 const meetingHeightTimeRange = {
   day: 50,
   week: 25,
@@ -285,14 +286,14 @@ export class ScheduleCalendarComponent
   }
 
   public calculateTop(meeting: Meeting): number {
-    const minutes = meeting.date.minutes() % 15
-    return (minutes * 100) / 15
+    const minutes = meeting.date.minutes() % DEFAULT_BLOCK_DURATION
+    return (minutes * 100) / DEFAULT_BLOCK_DURATION
   }
 
   public calculateHeight(meeting: Meeting): number {
     const diff = meeting.endDate.diff(meeting.date, 'minutes')
     return (
-      (diff * meetingHeightTimeRange[this.timerange]) / 15 -
+      (diff * meetingHeightTimeRange[this.timerange]) / DEFAULT_BLOCK_DURATION -
       MEETING_SPACING_SIZE
     )
   }
@@ -370,7 +371,8 @@ export class ScheduleCalendarComponent
     startDate = startDate.subtract(dayDiff, 'days')
     endDate = endDate.subtract(dayDiff, 'days')
 
-    const blockDuration = this.timerange === 'month' ? 24 * 60 * 7 : 15
+    const blockDuration =
+      this.timerange === 'month' ? 24 * 60 * 7 : DEFAULT_BLOCK_DURATION
     const cellCount = this.timerange === 'day' ? 1 : 7
 
     while (true) {
@@ -389,7 +391,8 @@ export class ScheduleCalendarComponent
 
       const cells: TimeBlockCell[] = range(cellCount).map((i) => {
         const cellTime = moment(time).add(i, 'day')
-        const cellDuration = this.timerange === 'month' ? 24 * 60 : 15
+        const cellDuration =
+          this.timerange === 'month' ? 24 * 60 : DEFAULT_BLOCK_DURATION
 
         return {
           isToday: this.isToday(today, cellTime),
@@ -411,7 +414,7 @@ export class ScheduleCalendarComponent
                   return (
                     targetTime.isBetween(startTime, endTime, null, '[]') &&
                     targetTime
-                      .add(15, 'minutes')
+                      .add(DEFAULT_BLOCK_DURATION, 'minutes')
                       .isBetween(startTime, endTime, null, '[]')
                   )
                 }),
