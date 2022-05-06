@@ -1,3 +1,10 @@
+## [1.81.1](https://github.com/coachcare/dashboard/compare/v1.81.0...v1.81.1) (2022-05-06)
+
+
+### Bug Fixes
+
+* extracted block time, made meeting template repeatable ([312624f](https://github.com/coachcare/dashboard/commit/312624fff0e748be7f077bae18059e9038c959d0))
+
 # [1.81.0](https://github.com/coachcare/dashboard/compare/v1.80.4...v1.81.0) (2022-05-02)
 
 
