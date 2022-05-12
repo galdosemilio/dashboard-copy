@@ -834,7 +834,7 @@ export class CheckoutComponent implements OnInit {
       this.additionalConsentButtons =
         (pref.mala.custom as MALACustomData).links.additionalConsent?.map(
           (entry) => ({
-            text: entry.linkedText as string,
+            text: entry.text as string,
             links: entry.links as AdditionalConsentButtonEntry['links']
           })
         ) ?? []
