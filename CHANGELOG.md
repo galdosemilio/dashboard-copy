@@ -1,3 +1,10 @@
+## [1.81.2](https://github.com/coachcare/dashboard/compare/v1.81.1...v1.81.2) (2022-05-12)
+
+
+### Bug Fixes
+
+* only show one blood pressure chart option [FRON-2740] ([fe6f464](https://github.com/coachcare/dashboard/commit/fe6f46462b8e6ad1fbaf648ad21d7785960d1914))
+
 ## [1.81.1](https://github.com/coachcare/dashboard/compare/v1.81.0...v1.81.1) (2022-05-06)
 
 
