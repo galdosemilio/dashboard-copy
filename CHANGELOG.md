@@ -1,3 +1,15 @@
+# [1.82.0](https://github.com/coachcare/dashboard/compare/v1.81.2...v1.82.0) (2022-05-12)
+
+
+### Bug Fixes
+
+* converts from minutes instead of seconds [FRON-2786] ([3ce572f](https://github.com/coachcare/dashboard/commit/3ce572fd1b05ca6ac77cb06458efa7b2841bb910))
+
+
+### Features
+
+* added patient self-register and checkout process [FRON-2737] ([0fe7b42](https://github.com/coachcare/dashboard/commit/0fe7b4217a1c2e0ad6643edd6e4e5866a8a7ccad))
+
 ## [1.81.2](https://github.com/coachcare/dashboard/compare/v1.81.1...v1.81.2) (2022-05-12)
 
 
