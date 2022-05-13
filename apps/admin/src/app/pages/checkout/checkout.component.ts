@@ -54,7 +54,6 @@ import {
   CheckoutShippingInfo,
   CheckoutShippingInfoComponent
 } from './shipping-info'
-import * as linkifyHtml from 'linkifyjs/html'
 
 export interface CheckoutData {
   accountInfo?: CheckoutAccountInfo
@@ -834,10 +833,18 @@ export class CheckoutComponent implements OnInit {
       this.hasStoreUrl = !!pref.storeUrl
       this.additionalConsentButtons =
         (pref.mala.custom as MALACustomData).links.additionalConsent?.map(
-          (entry) => ({
-            text: linkifyHtml(entry.linkedText as string, { target: '_blank' }),
-            links: entry.links as AdditionalConsentButtonEntry['links']
-          })
+          (entry) => {
+            const entryLinks =
+              entry.links as AdditionalConsentButtonEntry['links']
+
+            return {
+              text: this.removeLinksFromText(
+                entry.linkedText as string,
+                entryLinks.map((entryLink) => entryLink.url)
+              ),
+              links: entryLinks
+            }
+          }
         ) ?? []
     })
   }
@@ -854,5 +861,9 @@ export class CheckoutComponent implements OnInit {
 
       this.showSpinner = true
     })
+  }
+
+  private removeLinksFromText(text: string, links: string[]): string {
+    return links.reduce((cleanText, link) => cleanText.replace(link, ''), text)
   }
 }
