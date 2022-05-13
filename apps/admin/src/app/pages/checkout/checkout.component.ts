@@ -54,6 +54,7 @@ import {
   CheckoutShippingInfo,
   CheckoutShippingInfoComponent
 } from './shipping-info'
+import * as linkifyHtml from 'linkifyjs/html'
 
 export interface CheckoutData {
   accountInfo?: CheckoutAccountInfo
@@ -834,7 +835,7 @@ export class CheckoutComponent implements OnInit {
       this.additionalConsentButtons =
         (pref.mala.custom as MALACustomData).links.additionalConsent?.map(
           (entry) => ({
-            text: entry.text as string,
+            text: linkifyHtml(entry.linkedText as string, { target: '_blank' }),
             links: entry.links as AdditionalConsentButtonEntry['links']
           })
         ) ?? []
