@@ -1,3 +1,11 @@
+## [1.82.1](https://github.com/coachcare/dashboard/compare/v1.82.0...v1.82.1) (2022-05-13)
+
+
+### Bug Fixes
+
+* text from consent is now linkified [FRON-2758] ([450da49](https://github.com/coachcare/dashboard/commit/450da49fce265eb0c50cb11e1dabbff945f20f12))
+* we now use 'text' instead of 'linkedText' [FRON-2758] ([b67037b](https://github.com/coachcare/dashboard/commit/b67037b25e36d569455e70ff8bc5274d4779d72b))
+
 # [1.82.0](https://github.com/coachcare/dashboard/compare/v1.81.2...v1.82.0) (2022-05-12)
 
 
