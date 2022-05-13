@@ -19,6 +19,11 @@ app-dieters-expandable-table {
         min-width: 100px !important;
       }
 
+      &-extra {
+        max-width: 200px !important;
+        min-width: 100px !important;
+      }
+
       &-firstname,
       &-id,
       &-lastname {
