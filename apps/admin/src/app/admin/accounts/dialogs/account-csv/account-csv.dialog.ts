@@ -8,7 +8,7 @@ import {
 import { OrganizationAutocompleterComponent } from '@coachcare/common/components'
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'
-import { CSVUtils } from '@coachcare/common/shared'
+import { CSV } from '@coachcare/common/shared'
 
 @Component({
   selector: 'ccr-account-csv-dialog',
@@ -49,14 +49,7 @@ export class AccountCSVDialogComponent implements OnInit {
       const date = moment().format('YYYY-MM-DD')
       const filename = `Provider_List_${date}.csv`
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      CSV.toFile({ content: csv, filename })
     } catch (error) {
       this.notify.error(error)
     } finally {
@@ -116,7 +109,7 @@ export class AccountCSVDialogComponent implements OnInit {
 
       if (account.organization) {
         csv += `${separator}`
-        csv += `"${CSVUtils.escapeCSVText(
+        csv += `"${CSV.escapeCSVText(
           account.organization.name || ''
         )}"${separator}`
         csv += `"${account.organization.id || ''}"`

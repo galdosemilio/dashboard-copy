@@ -22,6 +22,7 @@ import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
+import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -30,7 +31,8 @@ import { Subject } from 'rxjs'
   styleUrls: ['./weight-change.component.scss']
 })
 export class WeightChangeTableComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
   @ViewChild(MatSort, { static: true })
@@ -155,14 +157,8 @@ export class WeightChangeTableComponent
           d.organization.name +
           '\r\n'
       })
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+
+      CSV.toFile({ content: csv, filename })
     })
   }
 }

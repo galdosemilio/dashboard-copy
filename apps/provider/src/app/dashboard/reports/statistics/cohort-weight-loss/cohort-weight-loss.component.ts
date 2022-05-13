@@ -26,7 +26,7 @@ import { Cohort } from '@coachcare/sdk'
 import { resolveConfig } from '@app/config/section'
 import { ActivatedRoute, Router } from '@angular/router'
 import { PackageFilter } from '@app/shared/components/package-filter'
-import { CSVUtils } from '@coachcare/common/shared'
+import { CSV } from '@coachcare/common/shared'
 import { debounceTime } from 'rxjs/operators'
 
 @UntilDestroy()
@@ -137,7 +137,7 @@ export class CohortWeightLossComponent
 
       const filename = `Patient_Cohort_Weight_Loss_Report${
         this.pkgFilter
-          ? '-Phase_' + CSVUtils.sanitizeFileName(this.pkgFilter?.pkg[0].title)
+          ? '-Phase_' + CSV.sanitizeFileName(this.pkgFilter?.pkg[0].title)
           : ''
       }`
       let csv = ''
@@ -192,7 +192,7 @@ export class CohortWeightLossComponent
           '\r\n'
       })
 
-      CSVUtils.generateCSV({
+      CSV.toFile({
         filename,
         content: csv
       })

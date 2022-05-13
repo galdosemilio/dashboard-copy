@@ -7,6 +7,7 @@ import {
   Reports
 } from '@coachcare/sdk'
 import { environment } from '../../../../../environments/environment'
+import { CSV } from '@coachcare/common/shared'
 
 @Component({
   selector: 'ccr-report-list',
@@ -41,14 +42,7 @@ export class ReportsListComponent implements OnInit {
       const csv = this.generateCSV(response as OrganizationActivityAggregate[])
       const filename = `Inactive_Clinics_${this.startDate}_to_${this.endDate}.csv`
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      CSV.toFile({ content: csv, filename })
     } catch (error) {
       this.notify.error(error)
     } finally {

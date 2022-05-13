@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ContextService, SelectedOrganization } from '@app/service'
-import { CSVUtils } from '@coachcare/common/shared'
+import { CSV } from '@coachcare/common/shared'
 import { Messaging } from '@coachcare/sdk'
 import * as moment from 'moment'
 
@@ -54,7 +54,7 @@ export class MessageActivityReportComponent implements OnInit {
       csv += '\r\n'
     })
 
-    CSVUtils.generateCSV({
+    CSV.toFile({
       filename: `Message Activity - ${this.organization.name} (ID ${this.organization.id})`,
       content: csv
     })

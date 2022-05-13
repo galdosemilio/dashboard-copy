@@ -32,6 +32,7 @@ import { select, Store } from '@ngrx/store'
 import { criteriaSelector, ReportsState } from '../../store'
 import { ReportsCriteria } from '../../services'
 import { filter } from 'rxjs/operators'
+import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -231,14 +232,7 @@ export class CallsComponent implements OnInit {
         csv += `\r\n`
       })
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      CSV.toFile({ content: csv, filename })
     })
 
     this.downloadCompleted$.next()

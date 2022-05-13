@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NotifierService } from '@coachcare/common/services'
-import { CSVUtils } from '@coachcare/common/shared'
+import { CSV } from '@coachcare/common/shared'
 import { NamedEntity, Reports } from '@coachcare/sdk'
 import { environment } from '../../../../../environments/environment'
 import * as moment from 'moment'
@@ -129,7 +129,7 @@ export class EcommerceReportComponent implements OnInit {
         csv += `\r\n`
       })
 
-      CSVUtils.generateCSV({
+      CSV.toFile({
         content: csv,
         filename: 'Internal Ecommerce Report'
       })

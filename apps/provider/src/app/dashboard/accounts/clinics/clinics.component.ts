@@ -22,7 +22,7 @@ import { debounceTime, filter, first } from 'rxjs/operators'
 import { CreateClinicDialog } from './dialogs'
 import { ClinicsDatabase, ClinicsDataSource } from './services'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
-import { CSVUtils } from '@coachcare/common/shared'
+import { CSV } from '@coachcare/common/shared'
 import { AllOrgPermissions } from '@coachcare/sdk'
 
 @UntilDestroy()
@@ -155,7 +155,7 @@ export class ClinicsComponent implements OnInit, OnDestroy {
         csv += '\r\n'
       })
 
-      CSVUtils.generateCSV({
+      CSV.toFile({
         content: csv,
         filename: `${this.context.organization.name} Clinic Report`
       })

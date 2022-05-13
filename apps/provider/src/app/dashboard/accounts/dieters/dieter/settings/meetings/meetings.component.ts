@@ -14,6 +14,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { OrganizationEntity } from '@coachcare/sdk'
+import { CSV } from '@coachcare/common/shared'
 
 type QuickSelectOption = 'past' | 'upcoming' | 'all'
 
@@ -149,14 +150,7 @@ export class DieterMeetingsComponent implements OnDestroy, OnInit {
         csv += '\r\n'
       })
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      CSV.toFile({ content: csv, filename })
     } catch (error) {
       this.notifier.error(error)
     } finally {

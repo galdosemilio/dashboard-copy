@@ -16,7 +16,7 @@ import { ConfigService, ContextService, NotifierService } from '@app/service'
 import { ViewUtils } from '@app/shared'
 import { TimelineUnit } from '@coachcare/sdk'
 import { delay } from 'rxjs/operators'
-import { CSVUtils } from '@coachcare/common/shared'
+import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -134,7 +134,7 @@ export class SignupsComponent implements OnInit, AfterViewInit, OnDestroy {
       csv += '\r\n'
     })
 
-    CSVUtils.generateCSV({
+    CSV.toFile({
       content: csv,
       filename: filename
     })

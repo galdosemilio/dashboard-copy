@@ -44,6 +44,7 @@ import { PromptDialog } from '@app/shared/dialogs'
 import { environment } from 'apps/provider/src/environments/environment'
 import { CcrTableSortDirective } from '@app/shared'
 import { DeviceDetectorService } from 'ngx-device-detector'
+import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -389,14 +390,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         `\r\n"${currentAsOf.format('dddd, MMM D, YYYY HH:mm:ss A [GMT]Z')}"` +
         this.csvSeparator
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      CSV.toFile({ content: csv, filename })
     } catch (error) {
       this.notifier.error(error)
     } finally {

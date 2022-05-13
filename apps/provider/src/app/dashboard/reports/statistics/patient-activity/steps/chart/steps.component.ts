@@ -15,6 +15,7 @@ import {
 import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
 import { ConfigService, ContextService, NotifierService } from '@app/service'
 import { _, ChartData, TranslationsObject } from '@app/shared'
+import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -207,14 +208,8 @@ export class StepsChartComponent implements OnInit, OnDestroy {
         }
         csv += '\r\n'
       })
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+
+      CSV.toFile({ content: csv, filename })
     })
   }
 }

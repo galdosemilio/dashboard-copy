@@ -23,6 +23,7 @@ import { DieterListingItem, _ } from '@app/shared'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { delay } from 'rxjs/operators'
+import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -207,14 +208,7 @@ export class DieterListingNoPhiComponent
             '\r\n'
         })
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      CSV.toFile({ content: csv, filename })
       return Promise.resolve()
     } catch (error) {
       this.notifier.error(error)

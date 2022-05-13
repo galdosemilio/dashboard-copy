@@ -40,6 +40,7 @@ import {
 import { PackageFilter } from '@app/shared/components/package-filter'
 import { TranslateService } from '@ngx-translate/core'
 import { get } from 'lodash'
+import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -468,14 +469,8 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           `"${d.packageCount > 3 ? 'Yes' : 'No'}"` +
           '\r\n'
       })
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf8;' })
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.setAttribute('visibility', 'hidden')
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+
+      CSV.toFile({ content: csv, filename })
       return Promise.resolve()
     } catch (error) {
       this.notifier.error(error)
