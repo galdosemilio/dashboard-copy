@@ -45,6 +45,8 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { STORAGE_MEASUREMENT_LIST_SORT } from '@app/config'
 import { resolveConfig } from '@app/config/section'
 import { measurementTableRowMapper } from '@app/service/measurement-v2/helpers'
+import { MEASUREMENT_METADATA_MAP } from '@app/shared/model/measurementMetadata'
+import { intersection } from 'lodash'
 
 @UntilDestroy()
 @Component({
@@ -449,7 +451,11 @@ export class MeasurementsTableV2Component implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((groups) => {
         this.rows = groups
-        this.shouldShowMetadata = groups.some((group) => group.metadata)
+        this.shouldShowMetadata =
+          intersection(
+            MEASUREMENT_METADATA_MAP.nxtstim.dataPointTypes,
+            this.source._criteria.type
+          ).length > 0
       })
 
     this.dates$.next(this.dates)
