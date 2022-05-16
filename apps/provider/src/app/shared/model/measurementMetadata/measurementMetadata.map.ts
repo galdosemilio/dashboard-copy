@@ -151,212 +151,212 @@ export const MEASUREMENT_METADATA_MAP: Record<
           {
             value: {
               id: '1',
-              name: 'Pain alleviation 1'
+              name: 'General Pain Relief'
             },
-            viewValue: _('MEASUREMENT.PAIN_ALLEVIATION_1')
+            viewValue: _('MEASUREMENT.GENERAL_PAIN_RELIEF')
           },
           {
             value: {
               id: '2',
-              name: 'Pain alleviation 2'
+              name: 'Advanced Pain Relief'
             },
-            viewValue: _('MEASUREMENT.PAIN_ALLEVIATION_2')
+            viewValue: _('MEASUREMENT.ADVANCED_PAIN_RELIEF')
           },
           {
             value: {
               id: '3',
-              name: 'Joint pain alleviation'
+              name: 'Mixed Frequency'
             },
-            viewValue: _('MEASUREMENT.JOINT_PAIN_ALLEVIATION')
+            viewValue: _('MEASUREMENT.MIXED_FREQUENCY')
           },
           {
             value: {
               id: '4',
-              name: 'Acute pain alleviation'
+              name: 'Deep Stimulus - Basic'
             },
-            viewValue: _('MEASUREMENT.ACUTE_PAIN_ALLEVIATION')
+            viewValue: _('MEASUREMENT.DEEP_STIMULUS_BASIC')
           },
           {
             value: {
               id: '5',
-              name: 'Very acute pain alleviation'
+              name: 'Deep Stimulus - Advanced'
             },
-            viewValue: _('MEASUREMENT.VERY_ACUTE_PAIN_ALLEVIATION')
+            viewValue: _('MEASUREMENT.DEEP_STIMULUS_ADVANCED')
           },
           {
             value: {
               id: '6',
-              name: 'Endorphin stimulation'
+              name: 'Pain Block'
             },
-            viewValue: _('MEASUREMENT.ENDORPHIN_STIMULATION')
+            viewValue: _('MEASUREMENT.PAIN_BLOCK')
           },
           {
             value: {
               id: '7',
-              name: 'Chronic pain alleviation 1'
+              name: 'Thorough Stimulus - Mild'
             },
-            viewValue: _('MEASUREMENT.CHRONIC_PAIN_ALLEVIATION_1')
+            viewValue: _('MEASUREMENT.THOROUGH_STIMULUS_MILD')
           },
           {
             value: {
               id: '8',
-              name: 'Chronic pain alleviation 2'
+              name: 'Thorough Stimulus - Moderate'
             },
-            viewValue: _('MEASUREMENT.CHRONIC_PAIN_ALLEVIATION_2')
+            viewValue: _('MEASUREMENT.THOROUGH_STIMULUS_MODERATE')
           },
           {
             value: {
               id: '9',
-              name: 'Chronic pain alleviation 3'
+              name: 'Thorough Stimulus - Advanced'
             },
-            viewValue: _('MEASUREMENT.CHRONIC_PAIN_ALLEVIATION_3')
+            viewValue: _('MEASUREMENT.THOROUGH_STIMULUS_ADVANCED')
           },
           {
             value: {
               id: '10',
-              name: 'Pounding away pain'
+              name: 'Pain Relief Massage - Pounding'
             },
-            viewValue: _('MEASUREMENT.POUNDING_AWAY_PAIN')
+            viewValue: _('MEASUREMENT.PAIN_RELIEF_MASSAGE_POUNDING')
           },
           {
             value: {
               id: '11',
-              name: 'Rubbing and pummeling'
+              name: 'Pain Relief Massage - Combination of rubbing and pounding'
             },
-            viewValue: _('MEASUREMENT.RUBBING_AND_PUMMELING')
+            viewValue: _('MEASUREMENT.PAIN_RELIEF_MASSAGE_RUBBING_POUNDING')
           },
           {
             value: {
               id: '12',
-              name: 'Muscle stress alleviation 1'
+              name: 'Deep Burst - Basic'
             },
-            viewValue: _('MEASUREMENT.MUSCLE_STRESS_ALLEVIATION_1')
+            viewValue: _('MEASUREMENT.DEEP_BURST_BASIC')
           },
           {
             value: {
               id: '13',
-              name: 'Muscle stress relief 2'
+              name: 'Deep Burst - Advanced'
             },
-            viewValue: _('MEASUREMENT.MUSCLE_STRESS_RELIEF_2')
+            viewValue: _('MEASUREMENT.DEEP_BURST_ADVANCED')
           },
           {
             value: {
               id: '14',
-              name: 'Muscle loss alleviation 1'
+              name: 'Muscle Stimulation Flux - Basic'
             },
-            viewValue: _('MEASUREMENT.MUSCLE_LOSS_ALLEVIATION_1')
+            viewValue: _('MEASUREMENT.MUSCLE_STIMULATION_FLUX_BASIC')
           },
           {
             value: {
               id: '15',
-              name: 'Muscle loss alleviation 2'
+              name: 'Muscle Stimulation Flux - Advanced'
             },
-            viewValue: _('MEASUREMENT.MUSCLE_LOSS_ALLEVIATION_2')
+            viewValue: _('MEASUREMENT.MUSCLE_STIMULATION_FLUX_ADVANCED')
           },
           {
             value: {
               id: '16',
-              name: 'Muscle pull/tear'
+              name: 'Sore Muscle Massage'
             },
-            viewValue: _('MEASUREMENT.MUSCLE_PULL_TEAR')
+            viewValue: _('MEASUREMENT.SORE_MUSCLE_MASSAGE')
           },
           {
             value: {
               id: '17',
-              name: 'Muscle loosening'
+              name: 'Muscle Stimulation Bounce'
             },
-            viewValue: _('MEASUREMENT.MUSCLE_LOOSENING')
+            viewValue: _('MEASUREMENT.MUSCLE_STIMULATION_BOUNCE')
           },
           {
             value: {
               id: '18',
-              name: 'Cervical pain'
+              name: 'Back of Neck Pain Relief'
             },
-            viewValue: _('MEASUREMENT.CERVICAL_PAIN')
+            viewValue: _('MEASUREMENT.BACK_OF_NECK_PAIN_RELIEF')
           },
           {
             value: {
               id: '19',
-              name: 'Back pain'
+              name: 'Back Pain Relief'
             },
-            viewValue: _('MEASUREMENT.BACK_PAIN')
+            viewValue: _('MEASUREMENT.BACK_PAIN_RELIEF')
           },
           {
             value: {
               id: '20',
-              name: 'Muscle cramp avoidance'
+              name: 'Muscle Stimulation Pulse'
             },
-            viewValue: _('MEASUREMENT.MUSCLE_CRAMP_AVOIDANCE')
+            viewValue: _('MEASUREMENT.MUSCLE_STIMULATION_PULSE')
           },
           {
             value: {
               id: '21',
-              name: 'Arterial inadequacy'
+              name: 'Lower Leg Muscle Stimulation Flow - Basic'
             },
-            viewValue: _('MEASUREMENT.ARTERIAL_INADEQUACY')
+            viewValue: _('MEASUREMENT.LOWER_LEG_MUSCLE_STIMULATION_BASIC')
           },
           {
             value: {
               id: '22',
-              name: 'Venous inadequacy'
+              name: 'Lower Leg Muscle Stimulation Flow - Advanced'
             },
-            viewValue: _('MEASUREMENT.VENOUS_INADEQUACY')
+            viewValue: _('MEASUREMENT.LOWER_LEG_MUSCLE_STIMULATION_ADVANCED')
           },
           {
             value: {
               id: '23',
-              name: 'Beginner strength building'
+              name: 'Muscle Strengthening - Basic'
             },
-            viewValue: _('MEASUREMENT.BEGINNER_STRENGTH_BUILDING')
+            viewValue: _('MEASUREMENT.MUSCLE_STRENGTHENING_BASIC')
           },
           {
             value: {
               id: '24',
-              name: 'Intermediate strength building'
+              name: 'Muscle Strengthening - Intermediate'
             },
-            viewValue: _('MEASUREMENT.INTERMEDIATE_STRENGTH_BUILDING')
+            viewValue: _('MEASUREMENT.MUSCLE_STRENGTHENING_INTERMEDIATE')
           },
           {
             value: {
               id: '25',
-              name: 'Advanced strength building'
+              name: 'Muscle Strengthening - Advanced'
             },
-            viewValue: _('MEASUREMENT.ADVANCED_STRENGTH_BUILDING')
+            viewValue: _('MEASUREMENT.MUSCLE_STRENGTHENING_ADVANCED')
           },
           {
             value: {
               id: '26',
-              name: 'Beginner endurance building'
+              name: 'Improve Muscle Performance & Endurance - Basic'
             },
-            viewValue: _('MEASUREMENT.BEGINNER_ENDURANCE_BUILDING')
+            viewValue: _('MEASUREMENT.IMPROV_MUSCLE_PERF_END_BASIC')
           },
           {
             value: {
               id: '27',
-              name: 'Intermediate endurance building'
+              name: 'Improve Muscle Performance & Endurance - Intermediate'
             },
-            viewValue: _('MEASUREMENT.INTERMEDIATE_ENDURANCE_BUILDING')
+            viewValue: _('MEASUREMENT.IMPROV_MUSCLE_PERF_END_INTERMEDIATE')
           },
           {
             value: {
               id: '28',
-              name: 'Advanced endurance building'
+              name: 'Improve Muscle Performance & Endurance - Advanced'
             },
-            viewValue: _('MEASUREMENT.ADVANCED_ENDURANCE_BUILDING')
+            viewValue: _('MEASUREMENT.IMPROV_MUSCLE_PERF_END_ADVANCED')
           },
           {
             value: {
               id: '29',
-              name: 'Thorough relaxation'
+              name: 'Complete Massage'
             },
-            viewValue: _('MEASUREMENT.THOROUGH_RELAXATION')
+            viewValue: _('MEASUREMENT.COMPLETE_MASSAGE')
           },
           {
             value: {
               id: '30',
-              name: 'Stress-free massage'
+              name: 'Muscle Stimulation Wave'
             },
-            viewValue: _('MEASUREMENT.STRESS_FREE_MASSAGE')
+            viewValue: _('MEASUREMENT.MUSCLE_STIMULATION_WAVE')
           }
         ]
       },

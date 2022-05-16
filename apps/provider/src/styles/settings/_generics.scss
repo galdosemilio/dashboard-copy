@@ -231,6 +231,9 @@ input[readonly] {
 
 .mat-option {
   background-color: mat-color($ccr-background, background);
+  white-space: unset !important;
+  line-height: unset !important;
+
   &.ccr-align-right {
     text-align: right;
   }
