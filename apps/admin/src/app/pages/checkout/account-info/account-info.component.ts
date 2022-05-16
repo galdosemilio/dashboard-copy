@@ -44,6 +44,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { environment } from '../../../../environments/environment'
 import { range, uniqBy } from 'lodash'
 import * as moment from 'moment'
+import { DeviceDetectorService } from 'ngx-device-detector'
+import * as owasp from 'owasp-password-strength-test'
 import { filter } from 'rxjs/operators'
 import { Client } from '@spree/storefront-api-v2-sdk'
 import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
@@ -106,11 +108,13 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
   public account: AccSingleResponse
   public additionalConsentForm: FormArray
   public form: FormGroup
+  public isMobileDevice: boolean
   public genders: SelectorOption[] = [
     { value: 'male', viewValue: _('SELECTOR.GENDER.MALE') },
     { value: 'female', viewValue: _('SELECTOR.GENDER.FEMALE') }
   ]
   public heights: SelectorOption[] = []
+  public shouldShowPassHint = false
   public startDate = new Date(1960, 0, 1)
 
   private _additionalConsentButtons: AdditionalConsentButtonEntry[] = []
@@ -123,6 +127,7 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
     private bus: EventsService,
     private cookie: CookieService,
     private context: ContextService,
+    private deviceDetector: DeviceDetectorService,
     private fb: FormBuilder,
     private lang: LanguageService,
     private log: Logging,
@@ -130,9 +135,12 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
     private register: Register,
     private spreeProvider: SpreeProvider,
     private user: User
-  ) {}
+  ) {
+    this.validatePassword = this.validatePassword.bind(this)
+  }
 
   public ngOnInit(): void {
+    this.isMobileDevice = this.deviceDetector.isMobile()
     this.createForm()
     this.generateHeights()
     this.subscribeToFormEvents()
@@ -141,6 +149,14 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
   public markAllAsTouched(): void {
     this.form.markAllAsTouched()
     this.additionalConsentForm.markAllAsTouched()
+  }
+
+  public onBlurPasswordField(): void {
+    this.shouldShowPassHint = false
+  }
+
+  public onFocusPasswordField(): void {
+    this.shouldShowPassHint = true
   }
 
   public registerOnChange(fn): void {
@@ -208,14 +224,10 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
           this.validateFieldMatches('email')
         ]
       ],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, this.validatePassword]],
       passwordConfirmation: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          this.validateFieldMatches('password')
-        ]
+        [Validators.required, this.validateFieldMatches('password')]
       ],
       phoneNumber: ['', Validators.required],
       gender: ['', [Validators.required]],
@@ -224,6 +236,13 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
       birthday: ['', [Validators.required]],
       agreements: [false, [Validators.requiredTrue]]
     })
+
+    this.form
+      .get('password')
+      .valueChanges.pipe(untilDestroyed(this))
+      .subscribe(() =>
+        this.form.get('passwordConfirmation').updateValueAndValidity()
+      )
   }
 
   private async createUserAccount(): Promise<void> {
@@ -404,7 +423,9 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
       .subscribe((value) =>
         this.form
           .get('heightDisplayValue')
-          .setValue(this.heights.find((height) => height.value === value).value)
+          .setValue(
+            this.heights.find((height) => height.value === value)?.value
+          )
       )
   }
 
@@ -435,5 +456,43 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
         ? null
         : { wrongMatch: true }
     }
+  }
+
+  private validatePassword(
+    control: AbstractControl
+  ): Record<string, boolean> | null {
+    const password = control.value
+
+    owasp.config({ minLength: 8 })
+
+    const result = owasp.test(password)
+
+    const validationResult = {}
+
+    if (result.failedTests.includes(0)) {
+      validationResult['minLength'] = true
+    }
+
+    if (result.failedTests.includes(3)) {
+      validationResult['lowercaseLetter'] = true
+    }
+
+    if (result.failedTests.includes(4)) {
+      validationResult['uppercaseLetter'] = true
+    }
+
+    if (result.failedTests.includes(5)) {
+      validationResult['oneNumber'] = true
+    }
+
+    if (result.failedTests.includes(6)) {
+      validationResult['specialChar'] = true
+    }
+
+    if (result.failedTests.includes(2)) {
+      validationResult['hasNoSequences'] = true
+    }
+
+    return Object.keys(validationResult).length > 0 ? validationResult : null
   }
 }

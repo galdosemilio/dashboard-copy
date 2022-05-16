@@ -1,6 +1,8 @@
 /* Layout Map */
 
-$ccr-vars: (font-family: map-get($ccr-typography, font-family));
+$ccr-vars: (
+  font-family: map-get($ccr-typography, font-family)
+);
 
 /* Layout Map */
 
@@ -17,7 +19,8 @@ $ccr-layout: (
 );
 
 /* Responsive Config */
-
+// Extra extra small screen
+$xxs-max: 400px !default;
 // Extra small screen
 $xs-max: 600px !default;
 // Small screen / tablet
@@ -37,10 +40,18 @@ $ccr-rwd: (
   sm-max: $sm-max,
   md-max: $md-max,
   lg-max: $lg-max,
-  sm-min: ($xs-max + 1),
-  md-min: ($sm-max + 1),
-  lg-min: ($md-max + 1),
-  xl-min: ($lg-max + 1),
+  sm-min: (
+    $xs-max + 1
+  ),
+  md-min: (
+    $sm-max + 1
+  ),
+  lg-min: (
+    $md-max + 1
+  ),
+  xl-min: (
+    $lg-max + 1
+  ),
   gte-sm: 'only screen and (min-width : #{$sm-min})',
   gte-md: 'only screen and (min-width : #{$md-min})',
   gte-lg: 'only screen and (min-width : #{$lg-min})',

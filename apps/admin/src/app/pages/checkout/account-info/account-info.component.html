@@ -2,11 +2,11 @@
 <form class="ccr-checkout-form" [formGroup]="form">
   <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="0px">
+    fxLayoutGap.lt-md="0px">
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.FIRST_NAME' | translate }}</label>
       <mat-form-field appearance="outline">
@@ -24,15 +24,15 @@
   </div>
   <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="10px">
+    fxLayoutGap.lt-md="10px">
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.EMAIL_ADDRESS' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input [readonly]="accountCreated" matInput formControlName="email">
+        <input [readonly]="accountCreated" matInput formControlName="email" type="email">
         <mat-error *ngIf="form.get('email').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
         <mat-error *ngIf="form.get('email').getError('email')">{{ 'GLOBAL.FIELD_INVALID' | translate }}</mat-error>
       </mat-form-field>
@@ -40,7 +40,7 @@
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.CONFIRM_EMAIL_ADDRESS' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input [readonly]="accountCreated" matInput formControlName="emailConfirmation">
+        <input [readonly]="accountCreated" matInput formControlName="emailConfirmation" type="email">
         <mat-error *ngIf="form.get('email').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
         <mat-error *ngIf="form.get('email').getError('email')">{{ 'GLOBAL.FIELD_INVALID' | translate }}</mat-error>
         <mat-error *ngIf="form.get('emailConfirmation').getError('wrongMatch')">{{ 'GLOBAL.EMAIL_NOT_MATCH' | translate }}</mat-error>
@@ -49,39 +49,83 @@
   </div>
   <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="10px">
+    fxLayoutGap.lt-md="10px">
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.PASSWORD' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input [readonly]="accountCreated" type="password" matInput formControlName="password">
+        <input
+        [readonly]="accountCreated"
+        (blur)="onBlurPasswordField()"
+        (focus)="onFocusPasswordField()"
+        type="password"
+        matInput
+        formControlName="password">
         <mat-error *ngIf="form.get('password').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
-        <mat-error *ngIf="form.get('password').getError('minlength')">{{ 'NOTIFY.ERROR.MIN_CHARS' | translate:{ min: 8 } }}</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.CONFIRM_PASSWORD' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input [readonly]="accountCreated" type="password" matInput formControlName="passwordConfirmation">
-        <mat-error *ngIf="form.get('passwordConfirmation').getError('wrongMatch')">{{ 'FIELD.PASSWORD.BOTH_MATCH' | translate }}</mat-error>
-        <mat-error *ngIf="form.get('passwordConfirmation').getError('minlength')">{{ 'NOTIFY.ERROR.MIN_CHARS' | translate:{ min: 8 } }}</mat-error>
+        <input
+        [readonly]="accountCreated"
+        (blur)="onBlurPasswordField()"
+        (focus)="onFocusPasswordField()"
+        formControlName="passwordConfirmation"
+        matInput
+        type="password" >
+        <mat-error *ngIf="form.get('passwordConfirmation').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
   </div>
   <div
+  *ngIf="shouldShowPassHint && (form.get('password').invalid || form.get('passwordConfirmation').invalid)"
+  class="password-requirements-container">
+    <p class="title">{{ 'FIELD.PASSWORD.REQUIREMENTS' | translate }}</p>
+    <hr>
+    <p class="item">
+      <mat-icon *ngIf="form.get('password').getError('minLength'); else checkIcon">close</mat-icon>
+      <span>{{ 'NOTIFY.ERROR.MIN_CHARS' | translate:{ min: 8 } }}</span>
+    </p>
+    <p class="item">
+      <mat-icon *ngIf="form.get('password').getError('lowercaseLetter'); else checkIcon">close</mat-icon>
+      <span>{{ 'FIELD.PASSWORD.ONE_LOWERCASE_LETTER' | translate }}</span>
+    </p>
+    <p class="item">
+      <mat-icon *ngIf="form.get('password').getError('uppercaseLetter'); else checkIcon">close</mat-icon>
+      <span>{{ 'FIELD.PASSWORD.ONE_UPPERCASE_LETTER' | translate }}</span>
+    </p>
+    <p class="item">
+      <mat-icon *ngIf="form.get('password').getError('oneNumber'); else checkIcon">close</mat-icon>
+      <span>{{ 'FIELD.PASSWORD.ONE_NUMBER' | translate }}</span>
+    </p>
+    <p class="item">
+      <mat-icon *ngIf="form.get('password').getError('specialChar'); else checkIcon">close</mat-icon>
+      <span>{{ 'FIELD.PASSWORD.ONE_SPECIAL_CHARACTER' | translate }}</span>
+    </p>
+    <p class="item">
+      <mat-icon *ngIf="form.get('password').getError('hasNoSequences'); else checkIcon">close</mat-icon>
+      <span>{{ 'FIELD.PASSWORD.HAS_NO_SEQUENCES' | translate }}</span>
+    </p>
+    <p class="item">
+      <mat-icon *ngIf="form.get('passwordConfirmation').getError('wrongMatch') || form.get('password').getError('wrongMatch'); else checkIcon">close</mat-icon>
+      <span>{{ 'FIELD.PASSWORD.BOTH_MATCH' | translate }}</span>
+    </p>
+  </div>
+  <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="0px">
+    fxLayoutGap.lt-md="0px">
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.PHONE_NUMBER' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="phoneNumber">
+        <input matInput formControlName="phoneNumber" type="tel">
         <mat-error *ngIf="form.get('phoneNumber').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
@@ -98,27 +142,34 @@
   </div>
   <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="0px">
+    fxLayoutGap.lt-md="0px">
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.HEIGHT' | translate }}</label>
       <mat-form-field appearance="outline">
-        <mat-select
-        formControlName="height">
+        <mat-select *ngIf="!isMobileDevice" formControlName="height">
           <mat-option *ngFor="let height of heights" [value]="height.value">{{ height.viewValue }}</mat-option>
         </mat-select>
+
+        <select *ngIf="isMobileDevice" matNativeControl formControlName="height">
+          <option *ngFor="let height of heights" [value]="height.value">{{ height.viewValue }}</option>
+        </select>
         <mat-error *ngIf="form.get('height').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.GENDER' | translate }}</label>
       <mat-form-field appearance="outline">
-        <mat-select formControlName="gender">
+        <mat-select *ngIf="!isMobileDevice" formControlName="gender">
           <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.viewValue | translate }}</mat-option>
         </mat-select>
+
+        <select *ngIf="isMobileDevice" matNativeControl formControlName="gender">
+          <option *ngFor="let gender of genders" [value]="gender.value">{{ gender.viewValue | translate }}</option>
+        </select>
         <mat-error *ngIf="form.get('gender').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
@@ -144,3 +195,7 @@
     </mat-error>
   </div>
 </form>
+
+<ng-template #checkIcon>
+  <mat-icon class="valid">check</mat-icon>
+</ng-template>

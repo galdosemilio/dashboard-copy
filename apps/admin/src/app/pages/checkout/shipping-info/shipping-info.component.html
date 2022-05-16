@@ -2,12 +2,11 @@
 <form class="ccr-checkout-form" [formGroup]="form">
   <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="0px"
-  >
+    fxLayoutGap.lt-md="0px">
     <div class="ccr-checkout-field">
       <label class="ccr-checkout-label">{{ 'GLOBAL.FIRST_NAME' | translate }} <span>*</span></label>
       <mat-form-field appearance="outline">
@@ -38,12 +37,11 @@
   </div>
   <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="0px"
-  >
+    fxLayoutGap.lt-md="0px">
     <div class="ccr-checkout-field">
       <label class="ccr-checkout-label">{{ 'GLOBAL.CITY' | translate }} <span>*</span></label>
       <mat-form-field appearance="outline">
@@ -55,9 +53,14 @@
       <label class="ccr-checkout-label">{{ 'GLOBAL.STATE' | translate }} <span>*</span></label>
       <mat-form-field appearance="outline">
         <mat-select
+        *ngIf="!isMobileDevice"
         formControlName="state">
           <mat-option *ngFor="let state of states" [value]="state.value">{{ state.viewValue }}</mat-option>
         </mat-select>
+
+        <select *ngIf="isMobileDevice" formControlName="state" matNativeControl>
+          <option *ngFor="let state of states" [value]="state.value">{{ state.viewValue }}</option>
+        </select>
         <mat-error *ngIf="form.get('state').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
@@ -65,12 +68,11 @@
   </div>
   <div
     fxLayout="row"
-    fxLayout.sm="column"
+    fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
-    fxLayoutAlign.sm="start stretch"
+    fxLayoutAlign.lt-md="start stretch"
     fxLayoutGap="50px"
-    fxLayoutGap.sm="0px"
-  >
+    fxLayoutGap.lt-md="0px">
     <div class="ccr-checkout-field">
       <label class="ccr-checkout-label">{{ 'GLOBAL.POSTAL_CODE' | translate }} <span>*</span></label>
       <mat-form-field appearance="outline">
@@ -81,9 +83,13 @@
     <div class="ccr-checkout-field">
       <label class="ccr-checkout-label">{{ 'GLOBAL.TIMEZONE' | translate }} <span>*</span></label>
       <mat-form-field appearance="outline">
-        <mat-select formControlName="timezone">
+        <mat-select *ngIf="!isMobileDevice" formControlName="timezone">
           <mat-option *ngFor="let timezone of timezones" [value]="timezone.code">{{ timezone.lang[lang] }}</mat-option>
         </mat-select>
+
+        <select *ngIf="isMobileDevice" matNativeControl formControlName="timezone">
+          <option *ngFor="let timezone of timezones" [value]="timezone.code">{{ timezone.lang[lang] }}</option>
+        </select>
         <mat-error *ngIf="form.get('timezone').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>

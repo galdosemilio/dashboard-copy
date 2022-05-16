@@ -28,6 +28,7 @@ import { Client } from '@spree/storefront-api-v2-sdk'
 import { EventsService, NotifierService } from '@coachcare/common/services'
 import { CheckoutAccountInfo } from '../account-info'
 import { AddressLabelType } from '@coachcare/common/model'
+import { DeviceDetectorService } from 'ngx-device-detector'
 
 export interface CheckoutBillingInfo {
   firstName: string
@@ -83,6 +84,7 @@ export class CheckoutBillingInfoComponent
   @ViewChild(StripeCardComponent) cardComponent: StripeCardComponent
 
   public form: FormGroup
+  public isMobileDevice: boolean
   public stripeErrorMessage?: string
   public useShippingAddress = true
 
@@ -93,6 +95,7 @@ export class CheckoutBillingInfoComponent
   constructor(
     private addressProvider: AddressProvider,
     private bus: EventsService,
+    private deviceDetector: DeviceDetectorService,
     private fb: FormBuilder,
     private notifier: NotifierService,
     private org: AppStoreFacade,
@@ -118,6 +121,8 @@ export class CheckoutBillingInfoComponent
   public states: WhitelistedSelectorOption[] = STATES_LIST
 
   public ngOnInit(): void {
+    this.isMobileDevice = this.deviceDetector.isMobile()
+
     this.createForm()
     this.subscribeToPrefs()
     this.onChangeAddressOption(true)

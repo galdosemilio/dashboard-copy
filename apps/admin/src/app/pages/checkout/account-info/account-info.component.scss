@@ -1,3 +1,5 @@
+@import 'variables';
+
 ccr-checkout-account-info {
   mat-checkbox {
     .mat-checkbox-layout {
@@ -20,5 +22,56 @@ ccr-checkout-account-info {
 
   .mat-form-field {
     font-size: 14px;
+  }
+
+  .password-requirements-container {
+    background-color: mat-color($ccr-background, app-bar);
+    padding: 20px;
+    position: absolute;
+    width: calc(100vw - 43.5vw);
+    z-index: 10;
+
+    hr {
+      margin-bottom: 25px;
+    }
+
+    p {
+      &.item {
+        mat-icon,
+        span {
+          vertical-align: middle;
+        }
+
+        mat-icon {
+          color: darken(mat-color($ccr-foreground, error), 10%);
+          font-size: 20px;
+          font-weight: bold;
+          line-height: 24px;
+          margin-right: 10px;
+          text-align: center;
+
+          &.valid {
+            color: darken(mat-color($ccr-foreground, success), 10%);
+          }
+        }
+      }
+
+      &.title {
+        font-size: 18px;
+        margin: 0;
+      }
+    }
+  }
+
+  @media (max-width: $md-max) {
+    .password-requirements-container {
+      width: calc(100vw - 130px);
+    }
+  }
+
+  @media (max-width: $xs-max) {
+    .password-requirements-container {
+      width: calc(100vw - 130px);
+    }
   }
 }

@@ -19,6 +19,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { TranslateService } from '@ngx-translate/core'
 import { Client } from '@spree/storefront-api-v2-sdk'
 import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
+import { DeviceDetectorService } from 'ngx-device-detector'
 import { STATES_LIST, WhitelistedSelectorOption } from '../../shared/model'
 import { CheckoutAccountInfo } from '../account-info'
 
@@ -55,6 +56,7 @@ export class CheckoutShippingInfoComponent
   @Input() spreeToken: IOAuthToken
 
   public form: FormGroup
+  public isMobileDevice: boolean
   public lang: string
   public states: WhitelistedSelectorOption[] = STATES_LIST
   public timezones: Array<TimezoneResponse> = this.timezone.fetch()
@@ -66,6 +68,7 @@ export class CheckoutShippingInfoComponent
     private accountProvider: AccountProvider,
     private addressProvider: AddressProvider,
     private bus: EventsService,
+    private deviceDetector: DeviceDetectorService,
     private fb: FormBuilder,
     private notifier: NotifierService,
     private timezone: Timezone,
@@ -73,6 +76,7 @@ export class CheckoutShippingInfoComponent
   ) {}
 
   public ngOnInit(): void {
+    this.isMobileDevice = this.deviceDetector.isMobile()
     this.lang = this.translate.currentLang.split('-')[0]
     this.createForm()
   }

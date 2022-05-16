@@ -135,4 +135,29 @@ ccr-checkout {
       display: none !important;
     }
   }
+
+  @media (max-width: $xs-max) {
+    .checkout {
+      ccr-date-input {
+        mat-form-field.mat-form-field {
+          width: 86.5%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $xxs-max) {
+    .checkout {
+      ccr-date-input {
+        mat-form-field.mat-form-field {
+          width: 85%;
+        }
+      }
+
+      .ccr-checkout-label {
+        min-width: 100px;
+        width: 100px;
+      }
+    }
+  }
 }
