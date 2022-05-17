@@ -1,3 +1,17 @@
+# [1.83.0](https://github.com/coachcare/dashboard/compare/v1.82.1...v1.83.0) (2022-05-17)
+
+
+### Bug Fixes
+
+* adjusted program translations [FRON-2793] ([1eadea0](https://github.com/coachcare/dashboard/commit/1eadea04dd765c897dc098e3b05a293c38ffb086))
+* metadata now appears even if there are no entries [FRON-2771] ([25a5576](https://github.com/coachcare/dashboard/commit/25a55760c15649057289d71d4e7cae3f4894cc5d))
+* removed explicit links from text [FRON-2758] ([4e05cdb](https://github.com/coachcare/dashboard/commit/4e05cdbf66624c12a01a0b79f6c49e9b9cc55563))
+
+
+### Features
+
+* added pulse to alaska premier [FRON-2767] ([9e03f76](https://github.com/coachcare/dashboard/commit/9e03f760cdd1951b7c94a054aca10357d0f725e1))
+
 ## [1.82.1](https://github.com/coachcare/dashboard/compare/v1.82.0...v1.82.1) (2022-05-13)
 
 
