@@ -1,3 +1,10 @@
+# [1.84.0](https://github.com/coachcare/dashboard/compare/v1.83.0...v1.84.0) (2022-05-18)
+
+
+### Features
+
+* added password validation dialog [FRON-2794] ([e97c63e](https://github.com/coachcare/dashboard/commit/e97c63e3c4bcf6f732c7b648eccd9ed6a99a48f7))
+
 # [1.83.0](https://github.com/coachcare/dashboard/compare/v1.82.1...v1.83.0) (2022-05-17)
 
 
