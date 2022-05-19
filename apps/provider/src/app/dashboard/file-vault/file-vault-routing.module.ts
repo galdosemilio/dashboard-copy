@@ -1,9 +1,16 @@
-import { Routes } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 import { FileVaultComponent } from '.'
 
-export const FileVaultRoutes: Routes = [
+const routes: Routes = [
   {
-    path: 'file-vault',
+    path: '',
     component: FileVaultComponent
   }
 ]
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class FileVaultRoutingModule {}

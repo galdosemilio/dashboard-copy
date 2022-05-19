@@ -4,7 +4,7 @@ import { MessagesComponent } from './'
 
 const routes: Routes = [
   {
-    path: 'messages',
+    path: '',
     component: MessagesComponent
   }
 ]
