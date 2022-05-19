@@ -279,7 +279,7 @@ export class CheckoutComponent implements OnInit {
           address1: '',
           address2: '',
           city: '',
-          state: '',
+          state: this.checkoutForm.get('shipping').value.state ?? '',
           zip: ''
         }
 

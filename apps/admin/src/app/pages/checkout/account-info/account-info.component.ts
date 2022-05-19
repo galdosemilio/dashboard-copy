@@ -141,8 +141,8 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
 
   public ngOnInit(): void {
     this.isMobileDevice = this.deviceDetector.isMobile()
-    this.createForm()
     this.generateHeights()
+    this.createForm()
     this.subscribeToFormEvents()
   }
 
@@ -230,8 +230,11 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
         [Validators.required, this.validateFieldMatches('password')]
       ],
       phoneNumber: ['', Validators.required],
-      gender: ['', [Validators.required]],
-      height: ['', Validators.required],
+      gender: [this.isMobileDevice ? 'male' : '', [Validators.required]],
+      height: [
+        this.isMobileDevice ? this.heights[0].value : '',
+        Validators.required
+      ],
       heightDisplayValue: [''],
       birthday: ['', [Validators.required]],
       agreements: [false, [Validators.requiredTrue]]

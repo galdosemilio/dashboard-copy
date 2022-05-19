@@ -74,4 +74,16 @@ ccr-checkout-account-info {
       width: calc(100vw - 130px);
     }
   }
+
+  @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+    .gap-container {
+      & > div:not(:last-child) {
+        margin-bottom: 50px !important;
+
+        ccr-date-input {
+          margin-top: 30px;
+        }
+      }
+    }
+  }
 }

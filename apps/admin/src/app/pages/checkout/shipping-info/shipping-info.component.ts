@@ -128,9 +128,15 @@ export class CheckoutShippingInfoComponent
       address1: ['', Validators.required],
       address2: [''],
       city: ['', Validators.required],
-      state: ['', Validators.required],
+      state: [
+        this.isMobileDevice ? this.states[0].value : '',
+        Validators.required
+      ],
       zip: ['', Validators.required],
-      timezone: ['', [Validators.required]]
+      timezone: [
+        this.isMobileDevice ? this.timezones[0].code : '',
+        [Validators.required]
+      ]
     })
 
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((controls) => {

@@ -1,6 +1,7 @@
 <div class="ccr-form-title">{{ 'PAGE.REGISTER.STEP1.DEFAULT.ACCOUNT_INFORMATION' | translate }}</div>
-<form class="ccr-checkout-form" [formGroup]="form">
+<form class="ccr-checkout-form gap-container" [formGroup]="form">
   <div
+    class="gap-container"
     fxLayout="row"
     fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
@@ -10,19 +11,20 @@
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.FIRST_NAME' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="firstName">
+        <input matInput formControlName="firstName" name="name">
         <mat-error *ngIf="form.get('firstName').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.LAST_NAME' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="lastName">
+        <input matInput formControlName="lastName" name="lastname">
         <mat-error *ngIf="form.get('lastName').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
   </div>
   <div
+    class="gap-container"
     fxLayout="row"
     fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
@@ -32,7 +34,7 @@
     <div class="ccr-checkout-field" fxFlex>
       <label class="ccr-checkout-label">{{ 'GLOBAL.EMAIL_ADDRESS' | translate }}</label>
       <mat-form-field appearance="outline">
-        <input [readonly]="accountCreated" matInput formControlName="email" type="email">
+        <input [readonly]="accountCreated" matInput name="email" formControlName="email" type="email">
         <mat-error *ngIf="form.get('email').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
         <mat-error *ngIf="form.get('email').getError('email')">{{ 'GLOBAL.FIELD_INVALID' | translate }}</mat-error>
       </mat-form-field>
@@ -48,6 +50,7 @@
     </div>
   </div>
   <div
+    class="gap-container"
     fxLayout="row"
     fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
@@ -63,6 +66,7 @@
         (focus)="onFocusPasswordField()"
         type="password"
         matInput
+        name="password"
         formControlName="password">
         <mat-error *ngIf="form.get('password').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
@@ -116,6 +120,7 @@
     </p>
   </div>
   <div
+    class="gap-container"
     fxLayout="row"
     fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
@@ -141,6 +146,7 @@
     </div>
   </div>
   <div
+    class="gap-container"
     fxLayout="row"
     fxLayout.lt-md="column"
     fxLayoutAlign="space-between start"
@@ -167,13 +173,15 @@
           <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.viewValue | translate }}</mat-option>
         </mat-select>
 
-        <select *ngIf="isMobileDevice" matNativeControl formControlName="gender">
+        <select *ngIf="isMobileDevice" matNativeControl name="gender" formControlName="gender">
           <option *ngFor="let gender of genders" [value]="gender.value">{{ gender.viewValue | translate }}</option>
         </select>
         <mat-error *ngIf="form.get('gender').getError('required')">{{ 'GLOBAL.FIELD_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </div>
   </div>
+
+  <div>
   <div class="ccr-checkout-field-select">
     <ccr-form-field-consent formControlName="agreements"></ccr-form-field-consent>
     <mat-error *ngIf="form.get('agreements').touched && form.get('agreements').getError('required')">
@@ -193,6 +201,7 @@
     <mat-error *ngIf="additionalConsentForm.controls[i].touched && additionalConsentForm.controls[i].getError('required')">
       {{ 'GLOBAL.FIELD_REQUIRED' | translate }}
     </mat-error>
+  </div>
   </div>
 </form>
 

@@ -83,8 +83,24 @@ export class CheckoutBillingInfoComponent
 
   @ViewChild(StripeCardComponent) cardComponent: StripeCardComponent
 
+  public cardOptions: StripeCardElementOptions = {
+    style: {
+      base: {
+        iconColor: '#666EE8',
+        color: '#FFFFFF',
+        fontWeight: '300',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '18px',
+        '::placeholder': {
+          color: '#CFD7E0'
+        }
+      }
+    }
+  }
+  public elementsOptions: StripeElementsOptions = { locale: 'en' }
   public form: FormGroup
   public isMobileDevice: boolean
+  public states: WhitelistedSelectorOption[] = STATES_LIST
   public stripeErrorMessage?: string
   public useShippingAddress = true
 
@@ -101,24 +117,6 @@ export class CheckoutBillingInfoComponent
     private org: AppStoreFacade,
     private stripeService: StripeService
   ) {}
-
-  public cardOptions: StripeCardElementOptions = {
-    style: {
-      base: {
-        iconColor: '#666EE8',
-        color: '#FFFFFF',
-        fontWeight: '300',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: '18px',
-        '::placeholder': {
-          color: '#CFD7E0'
-        }
-      }
-    }
-  }
-  public elementsOptions: StripeElementsOptions = { locale: 'en' }
-
-  public states: WhitelistedSelectorOption[] = STATES_LIST
 
   public ngOnInit(): void {
     this.isMobileDevice = this.deviceDetector.isMobile()
@@ -282,7 +280,10 @@ export class CheckoutBillingInfoComponent
       address1: ['', Validators.required],
       address2: [''],
       city: ['', Validators.required],
-      state: ['', [Validators.required]],
+      state: [
+        this.isMobileDevice ? this.states[0].value : '',
+        [Validators.required]
+      ],
       zip: ['', Validators.required],
       cardInfo: [null]
     })
