@@ -1,3 +1,18 @@
+# [1.85.0](https://github.com/coachcare/dashboard/compare/v1.84.0...v1.85.0) (2022-05-19)
+
+
+### Bug Fixes
+
+* hid store in nxtstim [FRON-2800] ([4385b08](https://github.com/coachcare/dashboard/commit/4385b08296f4e2615d0750865aa642a3fdff928a))
+* qol improvs to the self-register process [FRON-2799] ([aa13721](https://github.com/coachcare/dashboard/commit/aa13721cdfcba931245a647ac6db5ab93e2ee9da))
+* sanitized csv contents on the whole project [FRON-2787] ([e870500](https://github.com/coachcare/dashboard/commit/e8705009c21a95ceb50782572bdeec3f710db1d1))
+* solved issue with file vault routing ([79c8467](https://github.com/coachcare/dashboard/commit/79c8467b92b2ef4f0dd475ed6e659a5d769e3e0b))
+
+
+### Features
+
+* restructured provider and admin projects [FRON-2578] ([c161797](https://github.com/coachcare/dashboard/commit/c161797bc3ff95a272ed7ba944dbc37a52733b6e))
+
 # [1.84.0](https://github.com/coachcare/dashboard/compare/v1.83.0...v1.84.0) (2022-05-18)
 
 
