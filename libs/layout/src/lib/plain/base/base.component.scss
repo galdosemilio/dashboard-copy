@@ -106,17 +106,31 @@
       user-select: none;
     }
     .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       background-position: center bottom;
       top: 0;
 
       .page-header-caption {
-        background: #504c4a;
-        opacity: 0.75;
+        background: rgba(80, 76, 74, 0.75);
+        padding: 0 20px;
+        min-width: 80%;
       }
+
+      &-subsection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        padding: 0 25px 25px 25px;
+        width: 100%;
+      }
+
       .page-header-caption,
       img,
       h2 {
-        position: absolute;
         height: 42px;
         left: 40%;
         right: 0;
@@ -128,11 +142,14 @@
         line-height: 50px;
         left: 42%;
         margin: 0;
-        text-align: left;
+        text-align: center;
       }
       img {
         left: auto;
+        height: 50px;
         right: 61%;
+        width: auto;
+        max-width: 80%;
       }
 
       height: $header-height-xs;
@@ -153,6 +170,20 @@
         h2 {
           font-size: 36px;
           line-height: 66px;
+          text-align: left;
+        }
+
+        .page-header-subsection {
+          flex-direction: row;
+        }
+
+        .page-header-caption {
+          min-width: 45%;
+        }
+
+        img {
+          height: 100px;
+          max-width: 45%;
         }
       }
       @media (min-width: $md-min) {
