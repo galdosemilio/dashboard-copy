@@ -6,7 +6,7 @@
       <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'GLOBAL.DATE' | translate }}</span>
-        {{ row.date | amDateFormat:'dddd, MMM D' }}
+        {{ row.bucket.timestamp | amDateFormat:'dddd, MMM D' }}
       </mat-cell>
     </ng-container>
 
@@ -14,7 +14,7 @@
       <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACETONEPPM' | translate }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'BOARD.ACETONEPPM' | translate }}</span>
-        {{ (row.acetonePpm / 100).toFixed(2) }}
+        <span *ngIf="row.id !== 'empty-group'; else empty">{{ row.point.value.toFixed(2) }}</span>
       </mat-cell>
     </ng-container>
 
@@ -30,3 +30,5 @@
 <ccr-paginator #paginator
   [length]="source?.total" [pageIndex]="0" [pageSize]="20"
 ></ccr-paginator>
+
+<ng-template #empty>-</ng-template>

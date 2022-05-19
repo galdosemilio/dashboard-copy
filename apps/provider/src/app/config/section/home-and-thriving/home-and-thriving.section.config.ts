@@ -7,7 +7,7 @@ export const HomeAndThrivingSectionConfig: SectionConfigDetails = {
   },
   JOURNAL: {
     HIDDEN_SETTINGS_TABS: [],
-    ADDITIONAL_VITALS_COLUMNS: ['bloodOxygenLevel']
+    ADDITIONAL_VITALS_COLUMNS: []
   },
   PATIENT_DASHBOARD: {
     ALLOWED_CHART_DATA_POINT_TYPES: [

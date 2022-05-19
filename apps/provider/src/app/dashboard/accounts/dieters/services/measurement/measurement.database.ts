@@ -1,29 +1,16 @@
 import { Injectable } from '@angular/core'
-import { Food, MeasurementBody } from '@coachcare/sdk'
+import { Food } from '@coachcare/sdk'
 import { MeasurementCriteria } from '@app/service'
 import { CcrDatabase, FoodSummaryValues } from '@app/shared'
 import {
-  Entity,
-  FetchBodyMeasurementRequest,
-  FetchBodyMeasurementResponse,
   FetchSummaryRequest as FetchFoodSummaryRequest,
   SummaryDataResponse as FoodSummaryDataResponseSegment
 } from '@coachcare/sdk'
 
 @Injectable()
 export class MeasurementDatabase extends CcrDatabase {
-  constructor(private body: MeasurementBody, private food: Food) {
+  constructor(private food: Food) {
     super()
-  }
-
-  deleteBodyMeasurement(args: Entity): Promise<void> {
-    return this.body.deleteBodyMeasurement(args.id)
-  }
-
-  fetchBodyMeasurement(
-    args: FetchBodyMeasurementRequest
-  ): Promise<FetchBodyMeasurementResponse> {
-    return this.body.fetchBodyMeasurement(args)
   }
 
   fetchFoodSummary(args): Promise<FoodSummaryDataResponseSegment[]> {

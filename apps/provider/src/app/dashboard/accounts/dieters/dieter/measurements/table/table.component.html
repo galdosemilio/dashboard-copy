@@ -83,18 +83,6 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="actions" [stickyEnd]="true">
-      <th mat-header-cell *matHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</th>
-      <td mat-cell *matCellDef="let row" class="action-icon">
-        <div [class.hidden]="row.isHeader || row.isEmpty">
-          <mat-icon
-          [ngClass]="{ 'disabled': !row.device, 'clickable': row.device }"
-          [matTooltip]="'MEASUREMENT.DELETE' | translate"
-          (click)="deleteBodyMeasurement(row)">delete</mat-icon>
-        </div>
-      </td>
-    </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row
       *matRowDef="let row; columns: columns; let even = even; let odd = odd;"

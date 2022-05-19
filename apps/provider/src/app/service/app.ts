@@ -8,7 +8,7 @@ import {
   AccountProvider,
   ApiService,
   Goal,
-  MeasurementBody,
+  MeasurementDataPointProvider,
   Messaging
 } from '@coachcare/sdk'
 import { DieterDashboardSummary } from '@coachcare/sdk'
@@ -57,6 +57,7 @@ import {
   FormsDatabase,
   FormSubmissionsDatabase
 } from './forms'
+import { MeasurementAggregatesDatabase } from './measurement-aggregates'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -67,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
  */
 export function ccrDieterDashboardSummaryFactory(
   account: AccountProvider,
-  measurementBody: MeasurementBody,
+  measurementBody: MeasurementDataPointProvider,
   goal: Goal
 ) {
   return new DieterDashboardSummary(account, measurementBody, goal)
@@ -86,7 +87,7 @@ export function AppProviders() {
     {
       provide: DieterDashboardSummary,
       useFactory: ccrDieterDashboardSummaryFactory,
-      deps: [AccountProvider, MeasurementBody, Goal]
+      deps: [AccountProvider, MeasurementDataPointProvider, Goal]
     },
     // angular providers
     {
@@ -119,6 +120,7 @@ export function AppProviders() {
     LoggingService,
     MeasurementLabelService,
     MeasurementDatabaseV2,
+    MeasurementAggregatesDatabase,
     { provide: NotifierService, useExisting: LocalNotifierService },
     {
       provide: MessagingService,

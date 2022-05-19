@@ -1,10 +1,10 @@
 import { TableDataSource } from '@app/shared/model'
 import {
   DataPointTypes,
+  GenericSortProperty,
   GetMeasurementDataPointGroupsRequest,
   GetMeasurementDataPointGroupsResponse,
-  MeasurementDataPointGroup,
-  SortProperty
+  MeasurementDataPointGroup
 } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import {
@@ -72,7 +72,7 @@ export class MeasurementDataSourceV2 extends TableDataSource<
             property: this.sort.active || 'recordedAt',
             dir: this.sort.direction || 'asc'
           }
-        ] as SortProperty[]
+        ] as GenericSortProperty<'recordedAt'>[]
       }))
     }
   }

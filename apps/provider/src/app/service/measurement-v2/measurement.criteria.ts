@@ -1,42 +1,15 @@
 import {
-  ActivitySummaryData,
-  ActivitySummaryUnit,
-  BodySummaryData,
-  BodySummaryDataResponseSegment,
-  BodySummaryUnit,
   SummaryDataOption as FoodSummaryData,
-  SummaryDataResponse as FoodSummaryDataResponseSegment,
-  SleepSummaryData,
-  SleepSummaryUnit,
-  SummaryActivityResponseSegment,
-  SummarySleepMeasurementResponseSegment
+  SummaryDataResponse as FoodSummaryDataResponseSegment
 } from '@coachcare/sdk'
 
 export type MeasurementTimeframe = 'alltime' | 'year' | 'month' | 'week' | 'day'
 
-export type MeasurementSummaryUnit =
-  | ActivitySummaryUnit
-  | BodySummaryUnit
-  | SleepSummaryUnit
+export type MeasurementSummaryUnit = 'day' | 'week' | 'month'
 
-export type MeasurementSummaryData =
-  | ActivitySummaryData
-  | BodySummaryData
-  | FoodSummaryData
-  | SleepSummaryData
-  | 'leanMass'
-  | 'date'
-  | 'bloodPressureString'
-  | 'extracellularWaterToBodyWater'
-  | 'totalBodyWater'
-  | 'visceralAdiposeTissue'
-  | 'visceralFatMass'
-  | 'ketones'
+export type MeasurementSummaryData = FoodSummaryData | 'date'
 
-export type MeasurementSummarySegment = SummaryActivityResponseSegment &
-  BodySummaryDataResponseSegment &
-  SummarySleepMeasurementResponseSegment &
-  FoodSummaryDataResponseSegment
+export type MeasurementSummarySegment = FoodSummaryDataResponseSegment
 
 export type MeasurementAggregation =
   | 'mostRecent'

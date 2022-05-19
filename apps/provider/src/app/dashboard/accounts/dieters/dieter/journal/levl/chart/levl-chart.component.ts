@@ -1,56 +1,63 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { merge } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject } from 'rxjs'
-
 import {
-  LevlDatabase,
-  LevlDataSource
-} from '@app/dashboard/accounts/dieters/services'
-import { ConfigService, ContextService, NotifierService } from '@app/service'
+  ConfigService,
+  ContextService,
+  MeasurementChartDataSource,
+  MeasurementDatabaseV2
+} from '@app/service'
 import { ChartData, DateNavigatorOutput } from '@app/shared'
+import { Store } from '@ngrx/store'
+import { CCRConfig } from '@app/config'
+import { DataPointTypes } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
   selector: 'app-levl-chart',
   templateUrl: './levl-chart.component.html',
-  styleUrls: ['./levl-chart.component.scss'],
   host: { class: 'ccr-chart' }
 })
-export class LevlChartComponent implements OnInit, OnDestroy {
-  @Input()
-  source: LevlDataSource | null
+export class LevlChartComponent implements OnInit {
   @Input()
   set dates(dates: DateNavigatorOutput) {
     this.date$.next(dates)
   }
-  date$ = new BehaviorSubject<DateNavigatorOutput>({})
-  chart: ChartData
+
+  public chart: ChartData
+  public source: MeasurementChartDataSource
+
+  private date$ = new BehaviorSubject<DateNavigatorOutput>({})
 
   constructor(
     private context: ContextService,
     private config: ConfigService,
-    private notifier: NotifierService,
-    private database: LevlDatabase,
+    private database: MeasurementDatabaseV2,
+    private store: Store<CCRConfig>,
     private translator: TranslateService
   ) {}
 
-  ngOnInit() {
-    this.source = new LevlDataSource(
-      this.notifier,
+  public ngOnInit(): void {
+    this.source = new MeasurementChartDataSource(
       this.database,
+      this.store,
+      this.context,
       this.translator
     )
+
+    this.source.type = DataPointTypes.ACETONE
 
     this.source.addRequired(this.date$, () => {
       const dates = this.date$.getValue()
       return {
         account: this.context.accountId,
-        data: ['acetonePpm'],
-        startDate: dates.startDate,
-        endDate: dates.endDate,
-        unit: 'day'
+        type: [DataPointTypes.ACETONE],
+        recordedAt: {
+          start: dates.startDate,
+          end: dates.endDate
+        }
       }
     })
 
@@ -64,9 +71,5 @@ export class LevlChartComponent implements OnInit, OnDestroy {
           merge(this.chart, this.config.get('chart').factory('line'), chart)
         }, 50)
       })
-  }
-
-  ngOnDestroy() {
-    this.source.disconnect()
   }
 }

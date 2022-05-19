@@ -1,21 +1,16 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@coachcare/material'
-import { MeasurementDetailDialog } from '@app/dashboard/accounts/dialogs'
+import { Component, Input, OnInit } from '@angular/core'
 import { MeasurementDataSource } from '@app/dashboard/accounts/dieters/services'
-import { ContextService, NotifierService } from '@app/service'
-import { _, PromptDialog } from '@app/shared'
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { ContextService } from '@app/service'
+import { _ } from '@app/shared'
 import { AccountMeasurementPreferenceType } from '@coachcare/sdk'
 import { MeasurementConfig } from '../measurements.component'
-import { filter } from 'rxjs/operators'
 
-@UntilDestroy()
 @Component({
   selector: 'app-dieter-measurements-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class MeasurementTableComponent implements OnDestroy, OnInit {
+export class MeasurementTableComponent implements OnInit {
   @Input()
   set columns(columns: string[]) {
     setTimeout(() => this.refreshColumns(columns))
@@ -112,64 +107,10 @@ export class MeasurementTableComponent implements OnDestroy, OnInit {
     ]
   }
 
-  constructor(
-    private context: ContextService,
-    private dialog: MatDialog,
-    private notify: NotifierService
-  ) {}
+  constructor(private context: ContextService) {}
 
-  ngOnDestroy() {}
-
-  ngOnInit() {
+  public ngOnInit(): void {
     this.measurementPreference = this.context.user.measurementPreference
-  }
-
-  deleteBodyMeasurement(row) {
-    if (!row.device) {
-      return
-    }
-
-    this.dialog
-      .open(PromptDialog, {
-        data: {
-          title: _('MEASUREMENT.DELETE'),
-          content: _('MEASUREMENT.DELETE_CONTENT')
-        }
-      })
-      .afterClosed()
-      .pipe(
-        untilDestroyed(this),
-        filter((confirm) => confirm)
-      )
-      .subscribe(async () => {
-        try {
-          await this.source.deleteBodyMeasurement({ id: row.id })
-          this.source.refresh()
-        } catch (error) {
-          this.notify.error(error)
-        }
-      })
-  }
-
-  showMeasurementsModal(row) {
-    if (this.sections[this.section]?.allowDetail) {
-      this.dialog
-        .open(MeasurementDetailDialog, {
-          data: {
-            account: this.context.accountId,
-            row: row,
-            section: this.section,
-            sections: this.sections
-          },
-          panelClass: 'ccr-full-dialog'
-        })
-        .afterClosed()
-        .pipe(
-          untilDestroyed(this),
-          filter((refresh) => refresh)
-        )
-        .subscribe(() => this.source.refresh())
-    }
   }
 
   private refreshColumns(columns: string[]) {

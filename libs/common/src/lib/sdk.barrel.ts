@@ -5,7 +5,6 @@ import {
   AccountPassword,
   AccountPreference,
   AccountProvider,
-  ActiveCampaign,
   AddressProvider,
   Affiliation,
   Alerts,
@@ -50,10 +49,7 @@ import {
   Logging,
   MALA,
   MFA,
-  MeasurementActivity,
-  MeasurementBody,
   MeasurementDataPointProvider,
-  MeasurementSleep,
   Messaging,
   MessagingPermission,
   MessagingPreference,
@@ -66,7 +62,6 @@ import {
   Package,
   PackageEnrollment,
   PackageOrganization,
-  PainTracking,
   Phase,
   RPM,
   Register,
@@ -190,7 +185,6 @@ export const SdkApiProviders = [
     useClass: AccountPreference,
     deps: [ApiService]
   },
-  { provide: ActiveCampaign, useClass: ActiveCampaign, deps: [ApiService] },
   { provide: AddressProvider, useClass: AddressProvider, deps: [ApiService] },
   { provide: Authentication, useClass: Authentication, deps: [ApiService] },
   { provide: Affiliation, useClass: Affiliation, deps: [ApiService] },
@@ -259,26 +253,10 @@ export const SdkApiProviders = [
   { provide: Logging, useClass: Logging, deps: [ApiService] },
   { provide: MALA, useClass: MALA, deps: [ApiService] },
   {
-    provide: MeasurementActivity,
-    useClass: MeasurementActivity,
-    deps: [measurementApiService]
-  },
-  {
-    provide: MeasurementBody,
-    useClass: MeasurementBody,
-    deps: [measurementApiService]
-  },
-  {
     provide: MeasurementDataPointProvider,
     useClass: MeasurementDataPointProvider,
     deps: [measurementApiService]
   },
-  {
-    provide: MeasurementSleep,
-    useClass: MeasurementSleep,
-    deps: [measurementApiService]
-  },
-  { provide: MeasurementBody, useClass: MeasurementBody, deps: [ApiService] },
   {
     provide: MeasurementDataPointProvider,
     useClass: MeasurementDataPointProvider,
@@ -299,7 +277,6 @@ export const SdkApiProviders = [
     useClass: MeasurementLabelProvider,
     deps: [ApiService]
   },
-  { provide: MeasurementSleep, useClass: MeasurementSleep, deps: [ApiService] },
   { provide: Messaging, useClass: Messaging, deps: [messagingApiService] },
   {
     provide: MessagingPermission,
@@ -345,7 +322,6 @@ export const SdkApiProviders = [
     useClass: PackageOrganization,
     deps: [ApiService]
   },
-  { provide: PainTracking, useClass: PainTracking, deps: [ApiService] },
   { provide: Phase, useClass: Phase, deps: [ApiService] },
   { provide: Register, useClass: Register, deps: [ApiService] },
   { provide: Reports, useClass: Reports, deps: [ApiService] },

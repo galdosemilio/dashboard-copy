@@ -96,15 +96,6 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
 
   // measurements selector
   measurementTypes: SelectOptions<MeasurementSummaryData> = [
-    { value: 'weight', viewValue: _('MEASUREMENT.WEIGHT') },
-    { value: 'bmi', viewValue: _('MEASUREMENT.BMI') },
-    { value: 'bodyFat', viewValue: _('MEASUREMENT.BODY_FAT') },
-    { value: 'leanMass', viewValue: _('MEASUREMENT.LEAN_MASS') },
-    { value: 'steps', viewValue: _('MEASUREMENT.STEPS') },
-    { value: 'average', viewValue: _('MEASUREMENT.STEP_AVERAGE') },
-    { value: 'distance', viewValue: _('MEASUREMENT.DISTANCE') },
-    { value: 'total', viewValue: _('MEASUREMENT.SLEEP') },
-    { value: 'sleepQuality', viewValue: _('MEASUREMENT.RESTFULNESS') },
     { value: 'calories', viewValue: _('MEASUREMENT.CALORIES') },
     { value: 'protein', viewValue: _('BOARD.PROTEIN') },
     { value: 'carbohydrates', viewValue: _('MEASUREMENT.CARBS') },
@@ -154,7 +145,7 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
             unit = 'month'
         }
         return {
-          data: this.source.getData(),
+          data: [this.source.measurement],
           // aggregation: this.aggregation,
           timeframe: this.dates.timeframe as MeasurementTimeframe,
           startDate: moment(this.dates.startDate).format('YYYY-MM-DD'),

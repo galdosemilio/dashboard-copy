@@ -1,6 +1,5 @@
 import { AlertsDatabase } from '@app/dashboard'
 import { ConsultationsDataService } from './consultations-data.service'
-import { MeasurementsDataService } from './measurements-data.service'
 import { NotificationsDataService } from './notifications-data.service'
 import {
   PhaseEnrollmentDatabase,
@@ -9,7 +8,6 @@ import {
 
 export {
   ConsultationsDataService,
-  MeasurementsDataService,
   NotificationsDataService,
   PhaseEnrollmentDatabase,
   PhaseEnrollmentDataSource
@@ -18,7 +16,6 @@ export {
 export const RightPanelServices = [
   AlertsDatabase,
   ConsultationsDataService,
-  MeasurementsDataService,
   NotificationsDataService,
   PhaseEnrollmentDatabase
 ]

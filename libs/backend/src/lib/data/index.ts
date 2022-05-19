@@ -1,6 +1,5 @@
 export * from './accounts/index'
 export * from './data-point'
-export * from './active-campaign'
 export * from './email-templates'
 export * from './labels/index'
 export * from './labels-organization/index'

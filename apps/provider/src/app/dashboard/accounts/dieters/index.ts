@@ -35,7 +35,6 @@ import {
 import { AccountIdentifiersComponent } from './form/account-identifiers/account-identifiers.component'
 import { DieterFormComponent } from './form/dieter.component'
 import {
-  DieterDataService,
   DieterListingDatabase,
   DieterResolver,
   DietersGuard,
@@ -45,8 +44,6 @@ import {
   FoodKeyDatabase,
   GoalsResolver,
   HydrationDatabase,
-  LevlDatabase,
-  LevlDataSource,
   MeasurementDatabase,
   MetricsDatabase,
   PainDatabase,
@@ -73,7 +70,6 @@ export const DietersComponents = [
 export const DietersProviders = [
   AssociationsDatabase,
   DevicesDatabase,
-  DieterDataService,
   DieterListingDatabase,
   DieterResolver,
   DietersGuard,
@@ -83,13 +79,11 @@ export const DietersProviders = [
   FoodKeyDatabase,
   GoalsResolver,
   HydrationDatabase,
-  LevlDataSource,
   MeasurementDatabase,
   MetricsDatabase,
   PainDatabase,
   PhaseEnrollmentDatabase,
   SupplementDatabase,
-  LevlDatabase,
   SequenceEnrollmentDatabase,
   TriggerHistoryDatabase,
   VaultDatabase,

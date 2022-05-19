@@ -1,10 +1,15 @@
-import { BodyMeasurement } from '@app/dashboard/accounts/dieters/models/measurement/bodyMeasurement'
+import {
+  convertToReadableFormat,
+  DataPointTypes,
+  MeasurementDataPointSummaryEntry
+} from '@coachcare/sdk'
+import { DataPoint } from '@coachcare/sdk/dist/lib/providers/measurement/dataPoint/entities/dataPoint'
+import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 import * as moment from 'moment'
-import { groupBy } from './generic.utils'
 
 export interface DieterSummaryElement {
   beginning: number
-  begginingMeasurement?: BodyMeasurement
+  beginningMeasurement?: DataPoint
   beginningString?: string
   changeThisWeek: number
   changeThisWeekString?: string
@@ -13,58 +18,21 @@ export interface DieterSummaryElement {
   cumulativeChangeString?: string
   cumulativeChangeCellColor?: string
   currentWeek: number
-  currentWeekMeasurement?: BodyMeasurement
+  currentWeekMeasurement?: DataPoint
   currentWeekString?: string
   lastWeek: number
-  lastWeekMeasurement?: BodyMeasurement
+  lastWeekMeasurement?: DataPoint
   lastWeekString?: string
-}
-
-export function calculateAverageWeeklyLoss(values: any[]): number {
-  const valuesCopy = values.map((val) => ({ ...val }))
-  const groupedValues = groupBy(valuesCopy, (value: any) =>
-    moment(value.date).week()
-  )
-
-  let average = 0
-
-  const weekAmount = groupedValues.length
-
-  groupedValues.forEach((week) => {
-    const weight = calculateElementRow(
-      { first: week[0], last: week[week.length - 1] },
-      'weight'
-    )
-    average += weight.change
-  })
-
-  average = average / weekAmount
-
-  return isNaN(+average) ? 0 : +average.toFixed(2)
-}
-
-export function calculateElementRow(
-  meas: { first: any; last: any },
-  key: string
-) {
-  const elementChange = +meas.last[key] - +meas.first[key]
-
-  return {
-    start: +(meas.first[key] ? meas.first[key] : 0).toFixed(2),
-    current: +(meas.last[key] ? meas.last[key] : 0).toFixed(2),
-    change: +(elementChange ? elementChange : 0).toFixed(2)
-  }
 }
 
 export function calculateProgressElementRow(
   startDate: moment.Moment,
-  measurements: BodyMeasurement[],
-  key: string,
+  allTimeSummary: MeasurementDataPointSummaryEntry[],
+  currentWeekSummary: MeasurementDataPointSummaryEntry[],
+  type: DataPointTypes,
+  measPref: UserMeasurementPreferenceType,
   decimals: number = 2
 ): DieterSummaryElement {
-  const startWeekIndex = startDate.week()
-  const startYear = startDate.year()
-
   let element: DieterSummaryElement = {
     beginning: 0,
     changeThisWeek: 0,
@@ -73,67 +41,51 @@ export function calculateProgressElementRow(
     lastWeek: 0
   }
 
-  const lastWeekStartDate = startDate.clone().subtract(1, 'week')
+  const firstMeasurement =
+    allTimeSummary.find((aggregate) => aggregate.first.type.id === type)
+      ?.first ?? null
 
-  const lastWeekIndex = startWeekIndex === 1 ? 52 : startWeekIndex - 1
-  const lastWeekIsInLastYear = lastWeekStartDate.year() < startDate.year()
+  const currentMeasurement =
+    currentWeekSummary.find((aggregate) => aggregate.type.id === type)?.last ??
+    null
 
-  const firstMeasurement = measurements.find((meas) => meas[key])
-  const currentMeasurement = measurements
-    .slice()
-    .reverse()
-    .find((meas) => {
-      const measDate = moment(meas.date)
+  const mostRecentMeasurement =
+    allTimeSummary.find((aggregate) => aggregate.last.type.id === type)?.last ??
+    null
 
-      return (
-        meas[key] &&
-        measDate.week() === startWeekIndex &&
-        measDate.year() === startYear
-      )
-    })
-
-  const groupedMeasurements = groupBy(measurements, (meas) =>
-    moment(meas.date).week()
-  )
-
-  const mostRecentMeasurement = measurements
-    .slice()
-    .reverse()
-    .find((meas) => meas[key])
-
-  const pertinentYear = lastWeekIsInLastYear ? startYear - 1 : startYear
-
-  let lastWeekMeasurement = groupedMeasurements.find((group) => {
-    const pertinentGroupElement = group.find((el) =>
-      lastWeekIsInLastYear
-        ? moment(el.date).year() === pertinentYear ||
-          moment(el.date).year() === startYear
-        : moment(el.date).year() === pertinentYear
-    )
-
-    if (pertinentGroupElement) {
-      const groupDate = moment(pertinentGroupElement.date)
-
-      return (
-        groupDate.week() === lastWeekIndex &&
-        (lastWeekIsInLastYear
-          ? groupDate.year() === pertinentYear || groupDate.year() === startYear
-          : groupDate.weekYear() === pertinentYear)
-      )
-    } else {
-      return false
-    }
-  })
-
-  if (lastWeekMeasurement && lastWeekMeasurement.length) {
-    lastWeekMeasurement = lastWeekMeasurement
-      .reverse()
-      .find((meas) => meas[key])
+  const lastWeekDateRange = {
+    start: startDate.clone().subtract(1, 'week'),
+    end: startDate.clone().subtract(1, 'millisecond')
   }
 
-  element.beginning = firstMeasurement ? firstMeasurement[key] || 0 : null
-  element.lastWeek = lastWeekMeasurement ? lastWeekMeasurement[key] : null
-  element.currentWeek = currentMeasurement ? currentMeasurement[key] || 0 : null
+  const currentWeekTypeSum =
+    currentWeekSummary.filter((entry) => entry.type.id === type).shift() ?? null
+
+  const lastWeekMeasurement = currentWeekTypeSum
+    ? moment(currentWeekTypeSum.last.createdAt.utc).isSame(
+        lastWeekDateRange.start,
+        'week'
+      )
+      ? currentWeekTypeSum.last
+      : moment(currentWeekTypeSum.first.createdAt.utc).isSame(
+          lastWeekDateRange.end,
+          'week'
+        )
+      ? currentWeekTypeSum.first
+      : null
+    : null
+
+  const measType = firstMeasurement?.type
+
+  element.beginning = firstMeasurement
+    ? convertToReadableFormat(firstMeasurement.value, measType, measPref) || 0
+    : null
+  element.lastWeek = lastWeekMeasurement
+    ? convertToReadableFormat(lastWeekMeasurement.value, measType, measPref)
+    : null
+  element.currentWeek = currentMeasurement
+    ? convertToReadableFormat(currentMeasurement.value, measType, measPref) || 0
+    : null
   element.changeThisWeek =
     element.currentWeek && element.lastWeek
       ? element.currentWeek - element.lastWeek
@@ -143,11 +95,15 @@ export function calculateProgressElementRow(
     ? element.currentWeek
       ? element.currentWeek - element.beginning
       : mostRecentMeasurement
-      ? (mostRecentMeasurement[key] || 0) - element.beginning
+      ? convertToReadableFormat(
+          mostRecentMeasurement.value || 0,
+          measType,
+          measPref
+        ) - element.beginning
       : null
     : null
 
-  element.begginingMeasurement = firstMeasurement || null
+  element.beginningMeasurement = firstMeasurement || null
   element.currentWeekMeasurement = currentMeasurement || null
   element.lastWeekMeasurement = lastWeekMeasurement || null
 
@@ -161,7 +117,7 @@ export function calculateProgressElementRow(
         : '-',
     changeThisWeekCellColor: getProgressPDFCellColor(
       element.changeThisWeek || 0,
-      key
+      type
     ),
     cumulativeChangeString:
       element.cumulativeChange !== null
@@ -169,7 +125,77 @@ export function calculateProgressElementRow(
         : '-',
     cumulativeChangeCellColor: getProgressPDFCellColor(
       element.cumulativeChange || 0,
-      key
+      type
+    ),
+    currentWeekString:
+      element.currentWeek !== null
+        ? element.currentWeek.toFixed(decimals)
+        : '-',
+    lastWeekString:
+      element.lastWeek !== null ? element.lastWeek.toFixed(decimals) : '-'
+  }
+
+  return element
+}
+
+export function calculateRowBasedOnWeight(
+  weightSummary: DieterSummaryElement,
+  otherSummary: DieterSummaryElement,
+  elementType: 'bodyFat' | 'leanMass',
+  decimals: number = 2
+): DieterSummaryElement {
+  let element: DieterSummaryElement = {
+    beginning: 0,
+    changeThisWeek: 0,
+    cumulativeChange: 0,
+    currentWeek: 0,
+    lastWeek: 0
+  }
+  element.beginning =
+    weightSummary.beginning !== null && otherSummary.beginning !== null
+      ? weightSummary.beginning * (otherSummary.beginning / 100)
+      : null
+
+  element.lastWeek =
+    weightSummary.lastWeek !== null && otherSummary.lastWeek !== null
+      ? weightSummary.lastWeek * (otherSummary.lastWeek / 100)
+      : null
+
+  element.currentWeek =
+    weightSummary.currentWeek !== null && otherSummary.currentWeek !== null
+      ? weightSummary.currentWeek * (otherSummary.currentWeek / 100)
+      : null
+
+  element.changeThisWeek =
+    weightSummary.changeThisWeek !== null &&
+    otherSummary.changeThisWeek !== null
+      ? weightSummary.changeThisWeek * (otherSummary.changeThisWeek / 100)
+      : null
+
+  element.cumulativeChange =
+    weightSummary.cumulativeChange !== null && otherSummary.cumulativeChange
+      ? weightSummary.cumulativeChange * (otherSummary.cumulativeChange / 100)
+      : null
+
+  element = {
+    ...element,
+    beginningString:
+      element.beginning !== null ? element.beginning.toFixed(decimals) : '-',
+    changeThisWeekString:
+      element.changeThisWeek !== null
+        ? element.changeThisWeek.toFixed(decimals)
+        : '-',
+    changeThisWeekCellColor: getProgressPDFCellColor(
+      element.changeThisWeek || 0,
+      elementType
+    ),
+    cumulativeChangeString:
+      element.cumulativeChange !== null
+        ? element.cumulativeChange.toFixed(decimals)
+        : '-',
+    cumulativeChangeCellColor: getProgressPDFCellColor(
+      element.cumulativeChange || 0,
+      elementType
     ),
     currentWeekString:
       element.currentWeek !== null
@@ -192,29 +218,37 @@ export function imageToDataURL(img: HTMLImageElement): string {
   return dataURL
 }
 
-export function getProgressPDFCellColor(value: number, key: string): string {
+export function getProgressPDFCellColor(
+  value: number,
+  type:
+    | DataPointTypes
+    | 'totalInchesChange'
+    | 'totalWeightChange'
+    | 'leanMass'
+    | 'bodyFat'
+): string {
   let color = 'transparent'
 
   if (value === 0) {
     return '#edd51c'
   }
 
-  switch (key) {
-    case 'waterPercentage':
+  switch (type) {
+    case DataPointTypes.WATER_PERCENTAGE:
     case 'bodyFat':
-    case 'bodyFatPercentage':
-    case 'weight':
+    case DataPointTypes.BODY_FAT_PERCENTAGE:
+    case DataPointTypes.WEIGHT:
     case 'totalWeightChange':
     case 'totalInchesChange':
-    case 'chest':
-    case 'arm':
-    case 'waist':
-    case 'thigh':
-    case 'hip':
-    case 'bmi':
-    case 'visceralFatPercentage':
-    case 'visceralAdiposeTissue':
-    case 'visceralFatTanita':
+    case DataPointTypes.CHEST_CIRCUMFERENCE:
+    case DataPointTypes.ARM_CIRCUMFERENCE:
+    case DataPointTypes.WAIST_CIRCUMFERENCE:
+    case DataPointTypes.THIGH_CIRCUMFERENCE:
+    case DataPointTypes.HIP_CIRCUMFERENCE:
+    case DataPointTypes.BMI:
+    case DataPointTypes.VISCERAL_FAT_PERCENTAGE:
+    case DataPointTypes.VISCERAL_ADIPOSE_TISSUE:
+    case DataPointTypes.VISCERAL_FAT_TANITA:
       color = value > 0 ? '#de123e' : '#0bde51'
       break
 

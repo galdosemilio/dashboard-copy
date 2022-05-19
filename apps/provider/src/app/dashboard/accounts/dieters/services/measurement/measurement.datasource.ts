@@ -2,8 +2,6 @@ import { CCRConfig, CCRPalette } from '@app/config'
 import {
   ContextService,
   NotifierService,
-  MEASUREMENT_MAX_ENTRIES_PER_DAY,
-  MeasurementAggregation,
   MeasurementCriteria,
   MeasurementSummaryData,
   MeasurementSummarySegment
@@ -18,11 +16,10 @@ import {
   unitConversion,
   unitLabel
 } from '@app/shared'
-import { Entity, FetchBodyMeasurementDataResponse } from '@coachcare/sdk'
 import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
-import { isArray, merge, uniqBy } from 'lodash'
+import { isArray, merge } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, Subject } from 'rxjs'
@@ -39,7 +36,6 @@ export class MeasurementDataSource extends ChartDataSource<
   measurement: MeasurementSummaryData
   missingWeightDates: string[] = []
   palette: CCRPalette
-  requiresWeight: MeasurementSummaryData[] = ['bodyFat', 'leanMass']
 
   distanceNote: Array<boolean> = []
   result$: Subject<any> = new Subject<any>()
@@ -198,79 +194,11 @@ export class MeasurementDataSource extends ChartDataSource<
     return [{ data: [] }]
   }
 
-  deleteBodyMeasurement(args: Entity): Promise<void> {
-    return this.database.deleteBodyMeasurement(args)
-  }
-
   fetch(criteria): Observable<Array<APISummaryResponse>> {
     return from(
       new Promise<APISummaryResponse[]>(async (resolve, reject) => {
         try {
-          let response
-
-          if (criteria.useNewEndpoint) {
-            response = await this.database.fetchBodyMeasurement({
-              account: criteria.account,
-              recordedAt:
-                criteria.startDate && criteria.endDate
-                  ? {
-                      start: moment(criteria.startDate)
-                        .startOf('day')
-                        .toISOString(),
-                      end: moment(criteria.endDate).endOf('day').toISOString()
-                    }
-                  : undefined,
-              limit: criteria.limit || 'all',
-              offset: criteria.offset || 0,
-              includes: criteria.data.map((data) => ({
-                property: data,
-                positiveOnly: false
-              }))
-            })
-
-            this.total = response.pagination.next
-              ? response.pagination.next + 1
-              : this.criteria.offset + response.data.length
-
-            this.hasTooMuchForSingleDay = false
-
-            let result: BodyMeasurement[] = []
-            const cleanMeasurements = response.data.map(
-              (element) =>
-                new BodyMeasurement(element, {
-                  measurementPreference: this.context.user.measurementPreference
-                })
-            )
-
-            const preprocessedMeasurements: BodyMeasurement[][] =
-              this.preprocessMeasurements(cleanMeasurements)
-
-            result = this.criteria.aggregation
-              ? this.criteria.aggregation.type === 'highest' ||
-                this.criteria.aggregation.type === 'lowest'
-                ? this.processAsHighestOrLowest(
-                    preprocessedMeasurements,
-                    this.criteria.aggregation.type,
-                    this.criteria.aggregation.property
-                  )
-                : this.processAll(preprocessedMeasurements)
-              : this.processAll(preprocessedMeasurements)
-
-            if (
-              criteria.inferLastEntry &&
-              result[result.length - 1] &&
-              !result[result.length - 1][this.measurement]
-            ) {
-              result[result.length - 1] = this.inferLastMeasurement(
-                response.data.slice(),
-                response.data[0]
-              )
-            }
-
-            return resolve([{ data: result, summary: {} }])
-          }
-
-          response = await this.database.fetchAllSummary({
+          const response = await this.database.fetchAllSummary({
             ...criteria,
             startDate: moment(criteria.startDate)
               .startOf('day')
@@ -401,16 +329,6 @@ export class MeasurementDataSource extends ChartDataSource<
 
     if (!result || !result.length) {
       return this.defaultChart()
-    }
-
-    if (this.requiresWeight.indexOf(this.measurement) > -1) {
-      this.hasMissingWeight = result.some((element) => !element.weight)
-      this.missingWeightDates = uniqBy(
-        result
-          .filter((element) => !element.weight)
-          .map((element) => element.date),
-        (element) => element.split('T')[0]
-      )
     }
 
     const linePoints =
@@ -585,170 +503,6 @@ export class MeasurementDataSource extends ChartDataSource<
     return chart
   }
 
-  getData(): Array<MeasurementSummaryData> {
-    switch (this.measurement) {
-      case 'bloodPressureString':
-        return ['bloodPressureSystolic', 'bloodPressureDiastolic']
-      case 'distance':
-        return ['distance', 'steps']
-      case 'bodyFat':
-      case 'leanMass':
-        return ['bodyFat', 'weight']
-      default:
-        return [this.measurement]
-    }
-  }
-
-  getField(field: string): string | string[] {
-    switch (field) {
-      case 'bloodPressureString':
-        return ['bloodPressureSystolic', 'bloodPressureDiastolic']
-      default:
-        return field
-    }
-  }
-
-  private preprocessMeasurements(
-    measurements: BodyMeasurement[]
-  ): BodyMeasurement[][] {
-    const groupedMeasurements: BodyMeasurement[][] = this.groupBy(
-      measurements,
-      (measurement) => moment(measurement.recordedAt).format('YYYY-MM-DD')
-    )
-
-    const preprocessedMeasurements = this.criteria.limitEntries
-      ? groupedMeasurements.map((group) => {
-          if (group.length > 5) {
-            this.hasTooMuchForSingleDay = true
-            group = group.slice(0, MEASUREMENT_MAX_ENTRIES_PER_DAY)
-          }
-
-          return group
-        })
-      : groupedMeasurements
-
-    if (!this.criteria.omitEmptyDays && this.criteria.timeframe !== 'alltime') {
-      this.addEmptyDays(preprocessedMeasurements)
-    } else if (!this.criteria.startDate && !this.criteria.endDate) {
-      this.addHeaderDays(preprocessedMeasurements)
-    }
-    preprocessedMeasurements.sort((a, b) =>
-      a[0].recordedAt < b[0].recordedAt ? -1 : 1
-    )
-
-    preprocessedMeasurements.forEach((preprocessed, index) => {
-      if (preprocessed.length > 1) {
-        preprocessed.sort((a, b) =>
-          a.recordedAt < b.recordedAt
-            ? -1
-            : a.recordedAt > b.recordedAt
-            ? 1
-            : a.id < b.id
-            ? -1
-            : 1
-        )
-      }
-
-      preprocessed[0].even = index % 2 === 0
-      preprocessed[0].odd = !preprocessed[0].even
-
-      preprocessed.forEach((element) => {
-        element.usesNewAPI = true
-        element.odd = preprocessed[0].odd
-        element.even = preprocessed[0].even
-      })
-    })
-    return preprocessedMeasurements
-  }
-
-  private processAll(
-    preprocessedMeasurements: BodyMeasurement[][]
-  ): BodyMeasurement[] {
-    const mostRecentResults: BodyMeasurement[] = []
-
-    preprocessedMeasurements.forEach((day: BodyMeasurement[]) => {
-      day.forEach((measurement) => {
-        mostRecentResults.push(measurement)
-      })
-    })
-
-    return mostRecentResults
-  }
-
-  private processAsHighestOrLowest(
-    preprocessedMeasurements: BodyMeasurement[][],
-    dir: MeasurementAggregation,
-    property: string
-  ): BodyMeasurement[] {
-    const highestOrLowest: BodyMeasurement[] = []
-
-    preprocessedMeasurements.forEach((day: BodyMeasurement[]) => {
-      const sortedByProperty = day.sort((prev, next) => {
-        if (prev[property] > next[property]) {
-          return 1
-        } else if (prev[property] < next[property]) {
-          return -1
-        } else {
-          return 0
-        }
-      })
-
-      if (dir === 'highest') {
-        highestOrLowest.push(sortedByProperty.pop())
-      } else {
-        highestOrLowest.push(sortedByProperty.shift())
-      }
-    })
-
-    return highestOrLowest
-  }
-
-  private addEmptyDays(groupedDays: BodyMeasurement[][]) {
-    let endDate = moment(this.args.endDate)
-    const emptyMeasurement = new BodyMeasurement({})
-
-    if (endDate.isAfter(moment(), 'day')) {
-      endDate = endDate.add(1, 'day')
-    }
-
-    for (
-      let currentDate = moment(this.args.startDate).startOf('day');
-      currentDate <= endDate;
-      currentDate = currentDate.add(1, 'day')
-    ) {
-      const currentFormattedDate = currentDate.toISOString()
-      const groupIndex = groupedDays.findIndex(
-        (day) =>
-          day[0].recordedAt.split('T')[0] === currentFormattedDate.split('T')[0]
-      )
-      const emptyMeasurementItem = { ...emptyMeasurement }
-      emptyMeasurementItem.recordedAt = currentFormattedDate
-      emptyMeasurementItem.date = emptyMeasurementItem.recordedAt
-      emptyMeasurementItem.isEmpty = true
-      if (groupIndex === -1) {
-        groupedDays.push([emptyMeasurementItem])
-      } else {
-        emptyMeasurementItem.isHeader = true
-        groupedDays[groupIndex].splice(0, 0, emptyMeasurementItem)
-      }
-    }
-  }
-
-  private addHeaderDays(groupedDays: BodyMeasurement[][]) {
-    const emptyMeasurement = new BodyMeasurement({})
-
-    groupedDays.forEach((dayGroup: BodyMeasurement[]) => {
-      const emptyMeasurementItem = { ...emptyMeasurement }
-      emptyMeasurementItem.recordedAt = moment(dayGroup[0].recordedAt)
-        .startOf('day')
-        .toISOString()
-      emptyMeasurementItem.date = emptyMeasurementItem.recordedAt
-      emptyMeasurementItem.isEmpty = true
-      emptyMeasurementItem.isHeader = true
-      dayGroup.splice(0, 0, emptyMeasurementItem)
-    })
-  }
-
   private generatePlaceholderLabels(
     results: any[],
     labelFormat: string
@@ -774,14 +528,13 @@ export class MeasurementDataSource extends ChartDataSource<
     labelFormat: string,
     field: string
   ) {
-    const cleanField = this.getField(field)
     const resultArray = []
     results = [...results]
 
-    if (Array.isArray(cleanField)) {
+    if (Array.isArray(field)) {
       results.forEach((result) => {
         const resultCache = []
-        cleanField.forEach((f) => {
+        field.forEach((f) => {
           const value = this.formatters[this.measurement]
             ? this.formatters[this.measurement][1](result[f])
             : result[f].toFixed(1)
@@ -816,47 +569,5 @@ export class MeasurementDataSource extends ChartDataSource<
     }
 
     return resultArray
-  }
-
-  private groupBy(array, groupBy) {
-    const groups = {}
-    array.forEach((item) => {
-      const groupName = JSON.stringify(groupBy(item))
-      groups[groupName] = groups[groupName] || []
-      groups[groupName].push(item)
-    })
-
-    return Object.keys(groups).map((group) => {
-      return groups[group]
-    })
-  }
-
-  private inferLastMeasurement(
-    result: BodyMeasurement[],
-    originalResult: FetchBodyMeasurementDataResponse
-  ): BodyMeasurement {
-    let props = this.getData()
-    const inferredProps = {}
-
-    while (result.length && props.length) {
-      const resultItem = result.shift()
-
-      const iterationProps = props.slice()
-
-      iterationProps.forEach((prop, index) => {
-        inferredProps[prop] = resultItem[prop] || undefined
-
-        if (inferredProps[prop]) {
-          props = props.filter((propItem, propIndex) => propIndex !== index)
-        }
-      })
-    }
-
-    return new BodyMeasurement(
-      { ...originalResult, ...inferredProps },
-      {
-        measurementPreference: this.context.user.measurementPreference
-      }
-    )
   }
 }

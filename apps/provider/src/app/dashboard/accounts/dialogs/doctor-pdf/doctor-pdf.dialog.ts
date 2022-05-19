@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@coachcare/material'
 import { CCRConfig } from '@app/config'
@@ -12,24 +12,24 @@ import {
 import { imageToDataURL } from '@app/shared'
 import { paletteSelector } from '@app/store/config'
 import { select, Store } from '@ngrx/store'
-import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as pdfMake from 'pdfmake'
 import { first } from 'rxjs/operators'
 import {
   AccountProvider,
+  convertToReadableFormat,
+  DataPointTypes,
   DieterDashboardSummary,
+  FormSubmissionSingle,
+  MeasurementDataPointProvider,
+  MeasurementDataPointSummaryEntry,
   OrganizationProvider
 } from '@coachcare/sdk'
-import { BodyMeasurement } from '../../dieters/models/measurement/bodyMeasurement'
-import {
-  MeasurementDatabase,
-  MeasurementDataSource
-} from '../../dieters/services'
+import { DataPoint } from '@coachcare/sdk/dist/lib/providers/measurement/dataPoint/entities/dataPoint'
 
 interface PDFElement {
-  startEntry?: BodyMeasurement
+  startEntry?: DataPoint
   start: number
   current: number
   change: number
@@ -96,7 +96,7 @@ interface DoctorPDFData {
   styleUrls: ['./doctor-pdf.dialog.scss'],
   host: { class: 'ccr-dialog' }
 })
-export class DoctorPDFDialog implements OnDestroy, OnInit {
+export class DoctorPDFDialog implements OnInit {
   form: FormGroup
   formId = ''
   isLoading: boolean
@@ -113,14 +113,11 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
     private database: FormSubmissionsDatabase,
     private dialog: MatDialogRef<DoctorPDFDialog>,
     private fb: FormBuilder,
-    private measurementDatabase: MeasurementDatabase,
+    private dataPointProvider: MeasurementDataPointProvider,
     private notify: NotifierService,
     private organization: OrganizationProvider,
-    private store: Store<CCRConfig>,
-    private translate: TranslateService
+    private store: Store<CCRConfig>
   ) {}
-
-  ngOnDestroy(): void {}
 
   async ngOnInit() {
     this.formId = resolveConfig(
@@ -148,32 +145,29 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
       this.context.organizationId
     )
 
-    const measurementSource = new MeasurementDataSource(
-      this.notify,
-      this.measurementDatabase,
-      this.translate,
-      this.context,
-      this.store
-    )
-
-    measurementSource.addDefault({
-      account: this.context.accountId,
-      data: ['weight', 'bmi', 'bodyFat'],
-      startDate: moment(
-        patient.clientData.startedAt || patient.createdAt
-      ).toISOString(),
-      endDate: moment().toISOString(),
-      unit: 'day',
-      useNewEndpoint: true,
-      max: 'all',
-      omitEmptyDays: true
-    })
-
-    const values = await measurementSource.connect().pipe(first()).toPromise()
+    const values = (
+      await this.dataPointProvider.getSummary({
+        account: this.context.accountId,
+        type: [
+          DataPointTypes.WEIGHT,
+          DataPointTypes.BMI,
+          DataPointTypes.BODY_FAT_PERCENTAGE
+        ],
+        recordedAt: {
+          start: moment(
+            patient.profile?.startedAt || patient.createdAt
+          ).toISOString(),
+          end: moment().toISOString()
+        }
+      })
+    ).data
 
     const pdfData: DoctorPDFData = {
-      bmi: this.calculateRowValue(values, 'bmi'),
-      bodyFat: this.calculateRowValue(values, 'bodyFatPercentage'),
+      bmi: this.calculateRowValue(values, DataPointTypes.BMI),
+      bodyFat: this.calculateRowValue(
+        values,
+        DataPointTypes.BODY_FAT_PERCENTAGE
+      ),
       date: moment().format('MM/DD/YYYY'),
       dateRange: {
         start: moment(patient.clientData.startedAt || patient.createdAt).format(
@@ -188,7 +182,7 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
       provider: {
         name: `${this.selectedProvider.firstName} ${this.selectedProvider.lastName}`
       },
-      weight: this.calculateRowValue(values, 'weight')
+      weight: this.calculateRowValue(values, DataPointTypes.WEIGHT)
     }
 
     pdfData.weeks = Math.abs(
@@ -276,7 +270,7 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
                 { text: 'Date', bold: true },
                 `${
                   pdfData.weight.startEntry
-                    ? moment(pdfData.weight.startEntry.date).format(
+                    ? moment(pdfData.weight.startEntry.createdAt.utc).format(
                         'MM/DD/YYYY'
                       )
                     : pdfData.dateRange.start
@@ -296,14 +290,14 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
                   text: `${pdfData.bodyFat.start} %`,
                   fillColor: this.calculateRowFill(
                     pdfData.bodyFat.start,
-                    'bodyFatPercentage'
+                    DataPointTypes.BODY_FAT_PERCENTAGE
                   )
                 },
                 {
                   text: `${pdfData.bodyFat.current} %`,
                   fillColor: this.calculateRowFill(
                     pdfData.bodyFat.current,
-                    'bodyFatPercentage'
+                    DataPointTypes.BODY_FAT_PERCENTAGE
                   )
                 },
                 `${pdfData.bodyFat.change} %`
@@ -312,11 +306,17 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
                 { text: 'BMI', bold: true },
                 {
                   text: `${pdfData.bmi.start.toFixed(2)}`,
-                  fillColor: this.calculateRowFill(pdfData.bmi.start, 'bmi')
+                  fillColor: this.calculateRowFill(
+                    pdfData.bmi.start,
+                    DataPointTypes.BMI
+                  )
                 },
                 {
                   text: `${pdfData.bmi.current.toFixed(2)}`,
-                  fillColor: this.calculateRowFill(pdfData.bmi.current, 'bmi')
+                  fillColor: this.calculateRowFill(
+                    pdfData.bmi.current,
+                    DataPointTypes.BMI
+                  )
                 },
                 `${pdfData.bmi.change.toFixed(2)}`
               ]
@@ -430,33 +430,41 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
   }
 
   private calculateRowValue(
-    values: BodyMeasurement[],
-    property: 'weight' | 'bmi' | 'bodyFatPercentage'
+    values: MeasurementDataPointSummaryEntry[],
+    type: DataPointTypes
   ): PDFElement {
     const valuesCopy = values.slice()
     let change = 0
 
-    const startObject = valuesCopy.find((entry) => entry[property])
-    const currentObject = valuesCopy.reverse().find((entry) => entry[property])
+    const summary = valuesCopy.find((entry) => entry.type.id === type) ?? null
 
-    const start: number = startObject ? startObject[property] : 0
-    const current: number = currentObject ? currentObject[property] : 0
+    const start: number = convertToReadableFormat(
+      summary.first.value || 0,
+      summary.type,
+      this.context.user.measurementPreference
+    )
+    const current: number = convertToReadableFormat(
+      summary.last.value || 0,
+      summary.type,
+      this.context.user.measurementPreference
+    )
 
     if (start && current) {
-      change = current - start
+      change = convertToReadableFormat(
+        summary.change.value || 0,
+        summary.type,
+        this.context.user.measurementPreference
+      )
     }
 
-    return { startEntry: startObject, start, current, change }
+    return { startEntry: summary.first, start, current, change }
   }
 
-  private calculateRowFill(
-    value: number,
-    property: 'bmi' | 'bodyFatPercentage'
-  ): string {
+  private calculateRowFill(value: number, type: DataPointTypes): string {
     let color: string
     value = +value
-    switch (property) {
-      case 'bmi':
+    switch (type) {
+      case DataPointTypes.BMI:
         if (value <= 24.9) {
           color = '#0bde51'
         } else if (value > 24.9 && value <= 29.9) {
@@ -466,7 +474,7 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
         }
         break
 
-      case 'bodyFatPercentage':
+      case DataPointTypes.BODY_FAT_PERCENTAGE:
         if (value <= 17.9) {
           color = '#0bde51'
         } else if (value > 17.9 && value <= 24.9) {
@@ -501,7 +509,7 @@ export class DoctorPDFDialog implements OnDestroy, OnInit {
     })
   }
 
-  private resolveProviders(answers: any[]): PDFProvider[] {
+  private resolveProviders(answers: FormSubmissionSingle[]): PDFProvider[] {
     const providers = []
 
     answers.forEach((answerObj) => {

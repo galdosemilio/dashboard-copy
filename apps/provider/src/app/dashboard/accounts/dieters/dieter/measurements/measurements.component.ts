@@ -178,10 +178,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
       this.refresh$.pipe(rxJsFilter(() => this.section === 'food')),
       () => {
         return {
-          data:
-            this.view === 'table' || this.view === 'list'
-              ? this.data
-              : this.source.getData(),
+          data: this.data,
           timeframe:
             this.view !== 'list'
               ? (this.dates.timeframe as MeasurementTimeframe)

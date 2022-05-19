@@ -14,10 +14,6 @@ export * from './foodKey/foodKey.datasource'
 export * from './hydration/hydration.database'
 export * from './hydration/hydration.datasource'
 
-export * from './levl/levl.database'
-export * from './levl/levl.datasource'
-
-export * from './measurement/body.measurement.datasource'
 export * from './measurement/measurement.database'
 export * from './measurement/measurement.datasource'
 
@@ -28,8 +24,6 @@ export * from './pain/pain.datasource'
 
 export * from './supplement/supplement.database'
 export * from './supplement/supplement.datasource'
-
-export * from './data.service'
 
 export * from './dieter.resolver'
 export * from './dieters.resolver'

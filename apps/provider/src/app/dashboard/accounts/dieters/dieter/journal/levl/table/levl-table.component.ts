@@ -1,50 +1,47 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject } from 'rxjs'
-
 import {
-  LevlDatabase,
-  LevlDataSource
-} from '@app/dashboard/accounts/dieters/services'
-import { ContextService, NotifierService } from '@app/service'
+  ContextService,
+  MeasurementAggregatesDatabase,
+  MeasurementAggregatesDataSource
+} from '@app/service'
 import { DateNavigatorOutput } from '@app/shared'
+import { DataPointTypes, MeasurementSource } from '@coachcare/sdk'
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-levl-table',
-  templateUrl: './levl-table.component.html',
-  styleUrls: ['./levl-table.component.scss']
+  templateUrl: './levl-table.component.html'
 })
 export class LevlTableComponent implements OnInit {
+  @Input() columns = ['date', 'acetonePpm']
   @Input()
   set dates(dates: DateNavigatorOutput) {
     this.date$.next(dates)
   }
-  @Input() columns = ['date', 'acetonePpm']
-  @Input() source: LevlDataSource
 
-  date$ = new BehaviorSubject<DateNavigatorOutput>({})
+  public source: MeasurementAggregatesDataSource
+
+  private date$ = new BehaviorSubject<DateNavigatorOutput>({})
 
   constructor(
     private context: ContextService,
-    private notifier: NotifierService,
-    private database: LevlDatabase,
-    private translator: TranslateService
+    private database: MeasurementAggregatesDatabase
   ) {}
 
-  ngOnInit() {
-    this.source = new LevlDataSource(
-      this.notifier,
-      this.database,
-      this.translator
-    )
+  public ngOnInit(): void {
+    this.source = new MeasurementAggregatesDataSource(this.database)
 
     this.source.addRequired(this.date$, () => {
       const dates = this.date$.getValue()
       return {
         account: this.context.accountId,
-        data: ['acetonePpm'],
-        startDate: dates.startDate,
-        endDate: dates.endDate,
+        type: [DataPointTypes.ACETONE],
+        recordedAt: {
+          start: moment(dates.startDate).startOf('day').toISOString(),
+          end: moment(dates.endDate).endOf('day').toISOString()
+        },
+        source: [MeasurementSource.LEVL],
         unit: 'day'
       }
     })

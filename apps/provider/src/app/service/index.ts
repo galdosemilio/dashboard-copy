@@ -1,6 +1,7 @@
 export * from './account-identifier-syncer'
 export * from './auth.guard'
 export * from './conference.guard'
+export * from './measurement-aggregates'
 export * from './measurement-label'
 export * from './measurement-v2'
 

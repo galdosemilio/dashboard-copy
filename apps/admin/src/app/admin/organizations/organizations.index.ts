@@ -12,18 +12,11 @@ import {
   OrganizationRoutes
 } from '@board/services'
 import {
-  ActiveCampaignDatabase,
   LabelsOrganizationDatabase,
   OrganizationsDatabase
 } from '@coachcare/backend/data'
 import { CcrOrganizationDialogs } from '@coachcare/common/services'
-import {
-  AssociateActiveCampaignDialogComponent,
-  AssociateAllProvidersDialogComponent,
-  CreateLabelDialogComponent,
-  EditActiveCampaignDialogComponent,
-  EnrollProviderCampaignDialogComponent
-} from './dialogs'
+import { CreateLabelDialogComponent } from './dialogs'
 import { OrganizationsDisplayComponent } from './display'
 import {
   EmailTemplateComponent,
@@ -54,18 +47,14 @@ import {
 export const OrganizationComponents = [
   AddOrganizationDialog,
   AppIdsComponent,
-  AssociateActiveCampaignDialogComponent,
-  AssociateAllProvidersDialogComponent,
   BasicInfoComponent,
   BCCInputComponent,
   CcoAddressesComponent,
   ColorsComponent,
   CreateLabelDialogComponent,
-  EditActiveCampaignDialogComponent,
   EmailTemplateComponent,
   EmailTemplateDialogComponent,
   EmailTemplateTableComponent,
-  EnrollProviderCampaignDialogComponent,
   FeaturesComponent,
   ImagesComponent,
   LabelsAssociationsComponent,
@@ -82,9 +71,7 @@ export const OrganizationComponents = [
 ]
 
 export const OrganizationProviders = [
-  ActiveCampaignDatabase,
   LabelsOrganizationDatabase,
-
   OrganizationsDatabase,
   CcrOrganizationDialogs,
   OrganizationFeaturePreferenceResolver,
