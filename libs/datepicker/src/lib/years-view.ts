@@ -266,9 +266,9 @@ export class MatYearsView<D> implements AfterContentInit, OnDestroy {
   }
 
   _handleScroll(position, lastPosition) {
-    if (position.scrolled === 0 && lastPosition.scrolled > 0) {
+    if (position.scrolled <= 5 && lastPosition.scrolled > 0) {
       this._populateYears(false)
-    } else if (position.height + position.scrolled === position.total) {
+    } else if (position.height + position.scrolled === position.total - 5) {
       this._populateYears(true)
     }
     lastPosition.scrolled = position.scrolled
