@@ -1,3 +1,12 @@
+## [1.85.1](https://github.com/coachcare/dashboard/compare/v1.85.0...v1.85.1) (2022-05-20)
+
+
+### Bug Fixes
+
+* adjusted header sizing issue [FRON-2797] ([1b0ed1f](https://github.com/coachcare/dashboard/commit/1b0ed1f94037697f6fa1660beff93cead77906d7))
+* adjusted threshold of year loading [FRON-2801] ([a512a95](https://github.com/coachcare/dashboard/commit/a512a9553575cdb8af650b339fbd03c381f30fbf))
+* solved issue with form preview [FRON-2802] ([5d83f09](https://github.com/coachcare/dashboard/commit/5d83f0969419cdf431f8729571f023e6db190a78))
+
 # [1.85.0](https://github.com/coachcare/dashboard/compare/v1.84.0...v1.85.0) (2022-05-19)
 
 
