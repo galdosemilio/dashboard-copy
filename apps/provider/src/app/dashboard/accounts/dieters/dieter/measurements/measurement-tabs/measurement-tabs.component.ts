@@ -3,7 +3,9 @@ import {
   ExtendedMeasurementLabelEntry,
   MeasurementLabelService
 } from '@app/service'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-measurements-tabs',
   templateUrl: './measurement-tabs.component.html',
@@ -19,10 +21,14 @@ export class MeasurementTabsComponent implements OnInit {
 
   public measurementLabels: ExtendedMeasurementLabelEntry[] = []
 
-  constructor(private measurementLabel: MeasurementLabelService) {}
+  constructor(private measurementLabel: MeasurementLabelService) {
+    this.fetchMeasurementLabels = this.fetchMeasurementLabels.bind(this)
+  }
 
   public ngOnInit(): void {
-    void this.fetchMeasurementLabels()
+    this.measurementLabel.loaded$
+      .pipe(untilDestroyed(this))
+      .subscribe(this.fetchMeasurementLabels)
   }
 
   public onSelectTab(label: ExtendedMeasurementLabelEntry | string): void {
@@ -33,8 +39,12 @@ export class MeasurementTabsComponent implements OnInit {
     const labels = await this.measurementLabel.fetchMeasurementLabels()
     this.measurementLabels = labels
 
-    if (this.section) {
-      this.onSelectTab(this.section)
+    const matchingLabel = this.section
+      ? labels.find((label) => label.name.toLowerCase())
+      : null
+
+    if (matchingLabel) {
+      this.onSelectTab(matchingLabel)
       return
     }
 

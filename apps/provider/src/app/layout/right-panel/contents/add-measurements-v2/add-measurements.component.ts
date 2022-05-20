@@ -92,12 +92,17 @@ export class AddMeasurementsV2Component implements OnInit {
   ) {
     this.dataTypeDependencyValidator =
       this.dataTypeDependencyValidator.bind(this)
+
+    this.resolveLabels = this.resolveLabels.bind(this)
   }
 
   public ngOnInit(): void {
     this.createLabelsForm()
     this.createOldForm()
-    void this.resolveLabels()
+
+    this.measurementLabel.loaded$
+      .pipe(untilDestroyed(this))
+      .subscribe(this.resolveLabels)
 
     this.context.organization$
       .pipe(untilDestroyed(this))
@@ -113,7 +118,6 @@ export class AddMeasurementsV2Component implements OnInit {
         )
         this.shouldShowDaysheetButton = !!shouldShowDaysheetButton
 
-        void this.resolveLabels()
         this.resolveHiddenMeasurementTabs(organization)
       })
 

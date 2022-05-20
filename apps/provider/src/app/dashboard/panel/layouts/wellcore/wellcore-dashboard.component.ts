@@ -42,12 +42,15 @@ export class WellcoreDashboardComponent implements OnInit {
     private meetingDatabase: MeetingsDatabase,
     private notify: NotifierService
   ) {
+    this.resolveFirstLabel = this.resolveFirstLabel.bind(this)
     this.isPatient = this.context.user.accountType.id === AccountTypeIds.Client
     this.medicalIntakeFormLink = `/library/forms/${environment.wellcoreMedicalFormId}/dieter-submissions`
   }
 
   public ngOnInit(): void {
-    void this.resolveFirstLabel()
+    this.measurementLabel.loaded$
+      .pipe(untilDestroyed(this))
+      .subscribe(this.resolveFirstLabel)
 
     this.context.organization$
       .pipe(untilDestroyed(this))

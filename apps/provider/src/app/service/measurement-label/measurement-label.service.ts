@@ -7,6 +7,8 @@ import {
   MeasurementPreferenceProvider
 } from '@coachcare/sdk'
 import { MeasurementPreferenceEntry } from '@coachcare/sdk/dist/lib/providers/measurement/preference'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { concatMap, first, shareReplay } from 'rxjs/operators'
 import { ContextService } from '../context.service'
 import { NotifierService } from '../notifier.service'
 
@@ -20,9 +22,13 @@ export class MeasurementLabelService {
   // this service holds the information about the measurement labels and data point types
   public dataPointTypes: MeasurementDataPointTypeAssociation[] = []
   public measurementLabels: ExtendedMeasurementLabelEntry[] = []
+  public loaded$: Observable<unknown>
 
+  private dataPointTypes$: Observable<MeasurementDataPointTypeAssociation[]>
   private inheritsPreference = false
+  private measurementLabels$: Observable<ExtendedMeasurementLabelEntry[]>
   private measurementPref?: MeasurementPreferenceEntry
+  private refresh$: BehaviorSubject<void> = new BehaviorSubject<void>(null)
 
   constructor(
     private context: ContextService,
@@ -32,39 +38,33 @@ export class MeasurementLabelService {
     private notifier: NotifierService
   ) {
     this.context.organization$.subscribe(() => this.markCacheAsStale())
+
+    this.requestDataPointTypes = this.requestDataPointTypes.bind(this)
+    this.requestMeasurementLabels = this.requestMeasurementLabels.bind(this)
+
+    this.measurementLabels$ = this.refresh$.pipe(
+      concatMap(() => this.requestMeasurementLabels()),
+      shareReplay(1)
+    )
+
+    this.dataPointTypes$ = this.measurementLabels$.pipe(
+      concatMap(() => this.requestDataPointTypes()),
+      shareReplay(1)
+    )
+
+    this.loaded$ = this.dataPointTypes$
   }
 
   public async init(): Promise<void> {
     await this.fetchMeasurementPreference()
-    void this.fetchMeasurementLabels()
-    void this.fetchDataPointTypes()
+    this.refresh$.next()
   }
 
   public async fetchDataPointTypes(): Promise<
     MeasurementDataPointTypeAssociation[]
   > {
     try {
-      if (this.dataPointTypes.length) {
-        return this.dataPointTypes.slice()
-      }
-
-      await this.refreshMeasurementPref()
-
-      const response = await this.dataPointType.getAssociations({
-        limit: 'all',
-        status: 'active'
-      })
-
-      this.dataPointTypes = this.inheritsPreference
-        ? response.data.filter(
-            (assoc) =>
-              assoc.organization.id === this.measurementPref.organization.id
-          )
-        : response.data.filter(
-            (assoc) => assoc.organization.id === this.context.organization.id
-          )
-
-      return this.dataPointTypes.slice()
+      return await this.dataPointTypes$.pipe(first()).toPromise()
     } catch (error) {
       this.notifier.error(error)
     }
@@ -74,35 +74,7 @@ export class MeasurementLabelService {
     ExtendedMeasurementLabelEntry[]
   > {
     try {
-      if (this.measurementLabels.length) {
-        return this.measurementLabels.slice()
-      }
-
-      await this.refreshMeasurementPref()
-
-      const response = await this.measurementLabel.getAll({
-        localeMode: 'matching',
-        organization: this.context.organizationId,
-        limit: 'all',
-        status: 'active'
-      })
-
-      const data = this.inheritsPreference
-        ? response.data.filter(
-            (entry) =>
-              entry.organization.id === this.measurementPref.organization.id
-          )
-        : response.data.filter(
-            (entry) => entry.organization.id === this.context.organization.id
-          )
-
-      this.measurementLabels = data.map((label) => ({
-        ...label,
-        routeLink: encodeURIComponent(
-          label.name.replace(/\s/gi, '-').toLowerCase()
-        )
-      }))
-      return this.measurementLabels.slice()
+      return await this.measurementLabels$.pipe(first()).toPromise()
     } catch (error) {
       this.notifier.error(error)
     }
@@ -112,6 +84,7 @@ export class MeasurementLabelService {
     this.inheritsPreference = false
     this.measurementLabels = []
     this.dataPointTypes = []
+    this.refresh$.next()
   }
 
   public async resolveLabelDataPointTypes(
@@ -158,5 +131,58 @@ export class MeasurementLabelService {
     } catch (error) {
       this.notifier.error(error)
     }
+  }
+
+  private async requestDataPointTypes(): Promise<
+    MeasurementDataPointTypeAssociation[]
+  > {
+    await this.refreshMeasurementPref()
+
+    const response = await this.dataPointType.getAssociations({
+      limit: 'all',
+      status: 'active'
+    })
+
+    this.dataPointTypes = this.inheritsPreference
+      ? response.data.filter(
+          (assoc) =>
+            assoc.organization.id === this.measurementPref.organization.id
+        )
+      : response.data.filter(
+          (assoc) => assoc.organization.id === this.context.organization.id
+        )
+
+    return this.dataPointTypes.slice()
+  }
+
+  private async requestMeasurementLabels(): Promise<
+    ExtendedMeasurementLabelEntry[]
+  > {
+    await this.refreshMeasurementPref()
+
+    const response = await this.measurementLabel.getAll({
+      localeMode: 'matching',
+      organization: this.context.organizationId,
+      limit: 'all',
+      status: 'active'
+    })
+
+    const data = this.inheritsPreference
+      ? response.data.filter(
+          (entry) =>
+            entry.organization.id === this.measurementPref.organization.id
+        )
+      : response.data.filter(
+          (entry) => entry.organization.id === this.context.organization.id
+        )
+
+    this.measurementLabels = data.map((label) => ({
+      ...label,
+      routeLink: encodeURIComponent(
+        label.name.replace(/\s/gi, '-').toLowerCase()
+      )
+    }))
+
+    return this.measurementLabels
   }
 }

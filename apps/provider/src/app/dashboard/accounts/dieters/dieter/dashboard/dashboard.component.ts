@@ -10,7 +10,9 @@ import {
 import { _ } from '@app/shared'
 import { TypeGroupEntry } from '@app/shared/components/chart-v2'
 import { resolveConfig } from '@app/config/section'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-dieter-dashboard',
   templateUrl: './dashboard.component.html',
@@ -38,10 +40,14 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
     private context: ContextService,
     private measurementLabel: MeasurementLabelService,
     private notifier: NotifierService
-  ) {}
+  ) {
+    this.resolveTypeGroups = this.resolveTypeGroups.bind(this)
+  }
 
   public ngOnInit(): void {
-    void this.resolveTypeGroups()
+    this.measurementLabel.loaded$
+      .pipe(untilDestroyed(this))
+      .subscribe(this.resolveTypeGroups)
 
     // default level is low
     void this.data.init(this.context.accountId)

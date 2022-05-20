@@ -386,7 +386,7 @@ export class DieterMeasurementsComponent implements OnInit, OnDestroy {
     const labelEntry: ExtendedMeasurementLabelEntry =
       label as ExtendedMeasurementLabelEntry
 
-    if (label === 'energy' || label === 'food') {
+    if (label === 'food') {
       this.section = label
       this.useNewTable = false
       return
