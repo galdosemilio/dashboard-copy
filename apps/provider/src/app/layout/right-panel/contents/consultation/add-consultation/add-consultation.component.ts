@@ -60,6 +60,7 @@ interface AttendeesOrganigation {
 export class AddConsultationComponent implements OnDestroy, OnInit {
   form: FormGroup
   formSubmitted = false
+  initialDate: moment.Moment
   initialOrgOption: SelectOption<string>
   editing = 0
   clinicChangeSubscription: Subscription
@@ -111,6 +112,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   ) {}
 
   ngOnInit() {
+    this.initialDate = this.formUtils.getInitialDate().startOf('day')
     this.initForm()
     void this.fetchOrganizations()
 
@@ -143,13 +145,11 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   }
 
   initForm(): void {
-    const initial = this.formUtils.getInitialDate()
-
     this.form = this.builder.group(
       {
         title: [null, Validators.required],
-        date: initial,
-        startTime: [initial, Validators.required],
+        date: [this.initialDate, Validators.required],
+        startTime: [this.formUtils.getInitialDate(), Validators.required],
         duration: [null, Validators.required],
         clinic: [null, Validators.required],
         meetingTypeId: [null, Validators.required],
@@ -331,14 +331,14 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
   }
 
   validateForm(control: AbstractControl) {
+    const date = control.get('date').value
     const startTime = control.get('startTime').value
-    if (startTime) {
-      if (startTime.isBefore(moment(), 'minutes')) {
-        return { validateMeetingTime: _('NOTIFY.ERROR.DATE_SHOULD_BE_FUTURE') }
-      } else {
-        return null
-      }
-    }
+
+    const now = moment()
+
+    return date?.isBefore(now, 'day') || startTime?.isBefore(now, 'minutes')
+      ? { validateMeetingTime: _('NOTIFY.ERROR.DATE_SHOULD_BE_FUTURE') }
+      : null
   }
 
   validateLocation(control: AbstractControl) {

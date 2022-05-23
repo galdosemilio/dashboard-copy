@@ -43,7 +43,7 @@
 
       <mat-form-field>
         <input matInput formControlName="date" readonly="true" (click)="picker.open()"
-        [min]="now" [matDatepicker]="picker" [placeholder]="'GLOBAL.DATE' | translate">
+        [min]="initialDate" [matDatepicker]="picker" [placeholder]="'GLOBAL.DATE' | translate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker type="date" #picker></mat-datepicker>
       </mat-form-field>
