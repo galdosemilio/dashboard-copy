@@ -53,7 +53,7 @@ export class InsertFormDialog implements BindForm, OnInit {
   }
 
   closeDialog() {
-    const details = this.form.value.details
+    const details = this.form.getRawValue().details
     this.dialogRef.close({
       contentUpload: {
         content: new FileExplorerContent({
