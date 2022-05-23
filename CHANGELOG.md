@@ -1,3 +1,10 @@
+## [1.85.2](https://github.com/coachcare/dashboard/compare/v1.85.1...v1.85.2) (2022-05-23)
+
+
+### Bug Fixes
+
+* solved an issue with form insertion [FRON-2808] ([74171c5](https://github.com/coachcare/dashboard/commit/74171c5195abbfd592a31d102b466c3f5cb099d0))
+
 ## [1.85.1](https://github.com/coachcare/dashboard/compare/v1.85.0...v1.85.1) (2022-05-20)
 
 
