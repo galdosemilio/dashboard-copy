@@ -27,6 +27,12 @@ export const RPM_DEVICES: RPMDevice[] = [
     sortOrder: 2
   },
   {
+    id: '3',
+    name: 'SCAN Smart Glucometer',
+    displayName: _('RPM.SCAN_SMART_GLUCOMETER'),
+    imageSrc: 'assets/img/glucometer.png'
+  },
+  {
     id: '4',
     name: 'Pulse Oximeter',
     displayName: _('RPM.PULSE_OXIMETER'),

@@ -1520,6 +1520,7 @@
     "RPM_WILL_BE_ENABLED_TOMORROW": "Die RPM-Folge der Pflege wird morgen aktiviert",
     "SCALE": "BALANCE Smart-Skala",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} Tage mehr Geräteübertragung erforderlich",
+    "SCAN_SMART_GLUCOMETER": "SCAN Sie Smart Glucometer",
     "SECONDARY_DIAGNOSIS": "Nebendiagnose (Optional)",
     "SELECT_ORGANIZATION_DESCRIPTION": "Standardmäßig wird dieser Bericht zeigt nun den RPM-Abrechnungsstatus aller Patienten auf die Sie Zugriff haben, unabhängig von der Klinik von der oberen linken Ecke des Bildschirms ausgewählt. eine Klinik in diesem Bereich wird nur filtert die nur Patienten zu zeigen, die Auflistung, die RPM von innerhalb oder unterhalb der ausgewählten Klinik aktiviert haben.",
     "STATE": {

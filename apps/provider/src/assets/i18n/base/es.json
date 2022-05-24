@@ -1520,6 +1520,7 @@
     "RPM_WILL_BE_ENABLED_TOMORROW": "Mañana se habilitará el episodio de atención RPM",
     "SCALE": "BALANCE Balanza Inteligente",
     "SCALE_ICON_DESCRIPTION": "Se necesitan {{ amount }} días más de transmisiones",
+    "SCAN_SMART_GLUCOMETER": "SCAN Glucómetro Inteligente",
     "SECONDARY_DIAGNOSIS": "Diagnóstico Secundario (Optional)",
     "SELECT_ORGANIZATION_DESCRIPTION": "Por defecto, este reporte ahora mostrará el estado de RPM de todos los pacientes a los cuales tenga acceso, independientemente de la clínica seleccionada en la esquina superior izquierda de la pantalla. Seleccionar una clínica en este campo filtrará el listado y mostrará el estado de los pacientes que tengan RPM activado en esa clínica o sus subclínicas.",
     "STATE": {

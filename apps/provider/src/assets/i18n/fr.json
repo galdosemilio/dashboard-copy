@@ -1520,6 +1520,7 @@
     "RPM_WILL_BE_ENABLED_TOMORROW": "L'épisode de soins RPM sera activé demain",
     "SCALE": "BALANCE intelligent échelle",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} jours de transmission d'appareils supplémentaires nécessaires",
+    "SCAN_SMART_GLUCOMETER": "SCAN le glucomission intelligente",
     "SECONDARY_DIAGNOSIS": "Diagnostic secondaire (Facultatif)",
     "SELECT_ORGANIZATION_DESCRIPTION": "Par défaut, ce rapport affiche maintenant l'état de facturation RPM de tous les patients auxquels vous avez accès, quelle que soit la clinique choisie dans le coin supérieur gauche de l'écran. La sélection d'une clinique dans ce domaine filtrera l'annonce pour afficher uniquement les patients qui ont activé RPM à l'intérieur ou en dessous de la clinique choisie.",
     "STATE": {
