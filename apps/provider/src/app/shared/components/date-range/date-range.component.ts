@@ -24,6 +24,8 @@ export interface FixedPeriod {
   startDate?: string
 }
 
+type CalendarView = 'week' | 'month' | 'year' | 'years'
+
 @Component({
   selector: 'date-range-navigator',
   templateUrl: 'date-range.component.html'
@@ -59,7 +61,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   @Input() min?: string
 
   @Input() fixedPeriod: FixedPeriod
-  @Input() set startView(value: 'week' | 'month' | 'year' | 'years') {
+  @Input() set startView(value: CalendarView) {
     this._startView = value
 
     switch (value) {
@@ -82,6 +84,8 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
     return this._startView
   }
 
+  @Input() endView: CalendarView = 'month'
+
   @Output() selectedDate = new EventEmitter<DateRangeNavigatorOutput>()
 
   public _start = moment().startOf('day').subtract(1, 'week').add(1, 'day')
@@ -94,7 +98,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   public _maxReached = false
   public _dateFormat: string
 
-  private _startView: 'week' | 'month' | 'year' | 'years' = 'month'
+  private _startView: CalendarView = 'month'
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -168,7 +172,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   }
 
   onSelectMonth(input: 'start' | 'end', $event: moment.Moment): void {
-    if (this.startView !== 'year') {
+    if (this.endView !== 'year') {
       return
     }
 
@@ -186,7 +190,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   }
 
   onSelectYear(input: 'start' | 'end', $event: moment.Moment): void {
-    if (this.startView !== 'years') {
+    if (this.endView !== 'years') {
       return
     }
 

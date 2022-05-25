@@ -10,8 +10,8 @@ import {
   FormSubmissionsResolver,
   LibraryFormComponent
 } from '@app/dashboard/library/forms'
-import { DieterSubmissionsComponent } from '@app/shared'
 import { ContentComponent } from './content'
+import { DieterSubmissionsComponent } from './forms/dieter-submissions'
 
 const routes = [
   {

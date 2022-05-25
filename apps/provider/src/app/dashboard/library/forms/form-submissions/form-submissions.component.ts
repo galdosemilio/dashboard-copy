@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core'
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 
 import {
@@ -28,7 +22,7 @@ import {
   selector: 'app-library-form-submissions',
   templateUrl: './form-submissions.component.html'
 })
-export class FormSubmissionsComponent implements OnDestroy, OnInit {
+export class FormSubmissionsComponent implements OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
 
@@ -58,8 +52,6 @@ export class FormSubmissionsComponent implements OnDestroy, OnInit {
       this.title = data.form.name
     })
   }
-
-  public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
     this.source = new FormSubmissionsDatasource(this.database, this.paginator)

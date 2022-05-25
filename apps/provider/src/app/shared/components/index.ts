@@ -77,10 +77,6 @@ import {
 import { CcrPermissionFilterComponent } from './permission-filter'
 import { TranslatedTextInputComponent } from './translated-text-input'
 import { CcrDietersTableComponent } from './dieters-table'
-import {
-  DieterSubmissionsComponent,
-  DieterSubmissionsTableComponent
-} from './dieter-submissions'
 
 export {
   AccountPhaseListComponent,
@@ -112,8 +108,6 @@ export {
   CcrPermissionFilterComponent,
   CcrScheduleMeetingContainer,
   CountrySelectorComponent,
-  DieterSubmissionsComponent,
-  DieterSubmissionsTableComponent,
   FormSearchComponent,
   HeightFormFieldComponent,
   InlineEditableField,
@@ -181,8 +175,6 @@ export const CmpComponents = [
   CcrTimeframeSelectorComponent,
   CcrTinInputComponent,
   CountrySelectorComponent,
-  DieterSubmissionsComponent,
-  DieterSubmissionsTableComponent,
   FormSearchComponent,
   HeightFormFieldComponent,
   InlineEditableField,

@@ -18,7 +18,7 @@ describe('Dashboard -> Digital Library -> Forms -> Form -> Form Submission', fun
 
     cy.tick(10000)
 
-    cy.get('app-dieters-table').find('mat-row').first().click()
+    cy.get('ccr-dieters-table').find('mat-row').first().click()
 
     cy.tick(10000)
 
@@ -93,7 +93,7 @@ describe('Dashboard -> Digital Library -> Forms -> Form -> Form Submission', fun
 
     cy.tick(10000)
 
-    cy.get('app-dieters-table').find('mat-row').first().click()
+    cy.get('ccr-dieters-table').find('mat-row').first().click()
 
     cy.tick(10000)
 

@@ -12,6 +12,10 @@ import {
   PatientSelectDialog,
   ViewAddendumDialog
 } from '@app/dashboard/library/forms/dialogs'
+import {
+  DieterSubmissionsComponent,
+  DieterSubmissionsTableComponent
+} from './dieter-submissions'
 import { DietersTableComponent } from './dieters-table/dieters-table.component'
 import { FormAddendumTableComponent } from './form-addendum-table/form-addendum-table.component'
 import { FormDisplayComponent } from './form-display/form-display.component'
@@ -65,6 +69,8 @@ export const FormsComponents = [
   LibraryFormComponent,
   AllowedValuesFormComponent,
   DietersTableComponent,
+  DieterSubmissionsComponent,
+  DieterSubmissionsTableComponent,
   EmbedContentPickerComponent,
   FormAddendumTableComponent,
   FormCloneDialog,

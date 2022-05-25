@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { LibraryContentModule } from '@app/dashboard/library/content/content.module'
+import { LibraryFormsModule } from '@app/dashboard/library/forms/forms.module'
 import { MessagesModule } from '@app/dashboard/messages/messages.module'
 import { ReportsModule } from '@app/dashboard/reports/reports.module'
 import { SharedModule } from '@app/shared/shared.module'
@@ -12,7 +13,8 @@ import { DietersRoutingModule } from './dieters.routing'
     ReportsModule,
     MessagesModule,
     LibraryContentModule,
-    SharedModule
+    SharedModule,
+    LibraryFormsModule
   ],
   exports: DietersComponents,
   declarations: DietersComponents,
