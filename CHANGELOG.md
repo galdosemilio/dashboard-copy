@@ -1,3 +1,12 @@
+## [1.85.3](https://github.com/coachcare/dashboard/compare/v1.85.2...v1.85.3) (2022-05-25)
+
+
+### Bug Fixes
+
+* solved issue with meeting creation [FRON-2595] ([5c2e5e8](https://github.com/coachcare/dashboard/commit/5c2e5e801e3e7b1d4f776785962f21b91922f63e))
+* solved issues with form feature [FRON-2812] ([9ef363c](https://github.com/coachcare/dashboard/commit/9ef363c04dbc3eef89f2f2aa027e839517ed0893))
+* used rxjs for measurement label management [FRON-2802] ([b77ea9b](https://github.com/coachcare/dashboard/commit/b77ea9b49343214e06beb99600b35bce0f40f1e8))
+
 ## [1.85.2](https://github.com/coachcare/dashboard/compare/v1.85.1...v1.85.2) (2022-05-23)
 
 
