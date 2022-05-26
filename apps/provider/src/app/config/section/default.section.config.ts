@@ -100,6 +100,9 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   },
   COMMUNICATIONS: {
     ENABLE_CALL_BACKGROUNDS: false
+  },
+  RPM: {
+    ADDITIONAL_DEVICES: []
   }
 }
 
@@ -182,5 +185,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   },
   COMMUNICATIONS: {
     ENABLE_CALL_BACKGROUNDS: false
+  },
+  RPM: {
+    ADDITIONAL_DEVICES: []
   }
 }

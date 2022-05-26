@@ -22,7 +22,7 @@ import {
   SupervisingProvidersDatabase,
   SupervisingProvidersDataSource
 } from '../services'
-import { RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
+import { RPMDevice, RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
 import { ContextService, NotifierService } from '@app/service'
 import { ImageOptionSelectorItem } from '@app/shared/components/image-option-selector'
 import { _, SelectOption } from '@app/shared/utils'
@@ -61,6 +61,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   public selectedClinic?: OrganizationAccess
   public supervisingProviderOptions: SelectOption<string>[] = []
 
+  private additionalRpmDevices: RPMDevice[] = []
   private supervisingProvidersDataSource: SupervisingProvidersDataSource
 
   constructor(
@@ -205,12 +206,24 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   }
 
   private resolveDevices(): void {
-    this.rpmDevices = Object.values(RPM_DEVICES).map((device) => ({
-      value: device.id,
-      viewValue: device.displayName,
-      imageSrc: device.imageSrc,
-      imageClass: device.imageClass || ''
-    }))
+    this.rpmDevices = [
+      ...Object.values(RPM_DEVICES),
+      ...this.additionalRpmDevices
+    ]
+      .map((device) => ({
+        value: device.id,
+        viewValue: device.displayName,
+        imageSrc: device.imageSrc,
+        imageClass: device.imageClass || '',
+        sortOrder: device.sortOrder
+      }))
+      .sort((prev, next) =>
+        prev.sortOrder === -1
+          ? 1
+          : next.sortOrder === -1
+          ? -1
+          : prev.sortOrder - next.sortOrder
+      )
 
     if (this.allowNoDeviceOption) {
       return
@@ -231,10 +244,20 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
         'RPM.ALLOW_NO_DEVICE_SELECTION',
         orgSingle
       )
+
+      const additionalDevicesSetting = resolveConfig(
+        'RPM.ADDITIONAL_DEVICES',
+        orgSingle
+      )
+
       this.allowNoDeviceOption =
         typeof deviceSelectorSetting === 'object'
           ? false
           : deviceSelectorSetting
+
+      this.additionalRpmDevices = Array.isArray(additionalDevicesSetting)
+        ? additionalDevicesSetting
+        : []
 
       this.resolveDevices()
     } catch (error) {
@@ -278,8 +301,9 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   }
 
   private verifySupervisingProviderSelection(): void {
-    const currentSelection = this.form.get('setup').get('supervisingProvider')
-      .value
+    const currentSelection = this.form
+      .get('setup')
+      .get('supervisingProvider').value
 
     if (!currentSelection) {
       return
