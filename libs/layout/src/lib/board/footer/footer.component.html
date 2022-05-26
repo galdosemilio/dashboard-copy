@@ -3,19 +3,19 @@
     {{ clinicName }}
   </li>
   <li>
-    <a href="{{ 'LINK.TERMS_OF_SERVICE' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>
+    <a href="{{ linkTerms || 'LINK.TERMS_OF_SERVICE' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>
 
     <span class="text-separator">|</span>
 
-    <a href="{{ 'LINK.PRIVACY_POLICY' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
+    <a href="{{ linkPrivacy || 'LINK.PRIVACY_POLICY' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
 
     <span class="text-separator">|</span>
 
-    <a href="{{ 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>
+    <a href="{{ linkHipaa || 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>
 
     <span class="text-separator">|</span>
 
-    <a href="{{ 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MSA' | translate }}</a>
+    <a href="{{ linkMsa || 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MSA' | translate }}</a>
 
     <span class="text-separator">|</span>
 
