@@ -547,7 +547,7 @@ export class AddConsultationComponent implements OnDestroy, OnInit {
             }
           }
 
-          addMeetingRequest.skipConflictCheck = !data.allowConflictMeetings
+          addMeetingRequest.skipConflictCheck = data.allowConflictMeetings
         }
 
         if (this.editing) {
