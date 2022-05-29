@@ -16,10 +16,6 @@ import * as moment from 'moment'
 import { flatMap, groupBy } from 'lodash'
 import { CcrTableSortDirective } from '@app/shared'
 import { measurementTableRowMapper } from './helpers'
-import { Store } from '@ngrx/store'
-import { selectDataTypes } from '@app/store/measurement-label'
-import { untilDestroyed } from '@ngneat/until-destroy'
-import { AppState } from '@app/store/state'
 
 export const MEASUREMENT_MAX_ENTRIES_PER_DAY = 24
 export const LOAD_MORE_ROW_BASE = Object.freeze({
