@@ -12,10 +12,8 @@ import {
   ContextService,
   MeasurementChartDataSource,
   MeasurementDatabaseV2,
-  MeasurementLabelService,
   MEASUREMENT_MAX_ENTRIES_PER_DAY,
-  MeasurementTimeframe,
-  NotifierService
+  MeasurementTimeframe
 } from '@app/service'
 import { ChartData } from '@app/shared/model'
 import { DateNavigatorOutput } from '@app/shared/components'
@@ -23,16 +21,23 @@ import { SelectOptions, _ } from '@app/shared/utils'
 import { Subject } from 'rxjs'
 import * as moment from 'moment'
 import { Store } from '@ngrx/store'
-import { CCRConfig } from '@app/config'
 import { filter, merge, uniqBy } from 'lodash'
-import { MeasurementLabelEntry, NamedEntity } from '@coachcare/sdk'
+import {
+  MeasurementDataPointTypeAssociation,
+  MeasurementLabelEntry,
+  NamedEntity
+} from '@coachcare/sdk'
 import { SYNTHETIC_DATA_TYPES } from '@app/dashboard/accounts/dieters/models'
 import { TranslateService } from '@ngx-translate/core'
 import { ChartPluginsOptions } from 'chart.js'
+import { AppState } from '@app/store/state'
+import { selectCurrentLabelTypes } from '@app/store/measurement-label'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 export interface TypeGroupEntry extends NamedEntity {
   types: NamedEntity[]
 }
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-measurements-chart-v2',
   templateUrl: './chart.component.html',
@@ -54,7 +59,6 @@ export class CcrMeasurementChartV2Component implements OnInit {
 
   @Input() set label(label: MeasurementLabelEntry) {
     this._label = label
-    void this.resolveTypes()
   }
 
   get label(): MeasurementLabelEntry {
@@ -140,11 +144,11 @@ export class CcrMeasurementChartV2Component implements OnInit {
     private config: ConfigService,
     private context: ContextService,
     private database: MeasurementDatabaseV2,
-    private measurementLabel: MeasurementLabelService,
-    private notifier: NotifierService,
-    private store: Store<CCRConfig>,
+    private store: Store<AppState>,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.resolveTypes = this.resolveTypes.bind(this)
+  }
 
   public ngOnInit(): void {
     this.dates = this.dates ?? {
@@ -160,6 +164,11 @@ export class CcrMeasurementChartV2Component implements OnInit {
       this.source.type = this.typeGroups[0]?.types[0]?.id
       this.refresh()
     }
+
+    this.store
+      .select(selectCurrentLabelTypes)
+      .pipe(untilDestroyed(this))
+      .subscribe(this.resolveTypes)
   }
 
   public refresh(): void {
@@ -219,34 +228,25 @@ export class CcrMeasurementChartV2Component implements OnInit {
     this.dates$.next(this.dates)
   }
 
-  private async resolveTypes(): Promise<void> {
-    try {
-      if (!this.label) {
-        this.types = []
-        return
-      }
+  private resolveTypes(
+    typeAssocs: MeasurementDataPointTypeAssociation[]
+  ): void {
+    const types = typeAssocs.map((assoc) => assoc.type)
 
-      const types = (
-        await this.measurementLabel.resolveLabelDataPointTypes(this.label)
-      ).map((assoc) => assoc.type)
-
-      if (!types.length) {
-        if (this.source) {
-          this.source.type = ''
-        }
-        this.types = []
-        return
-      }
-
+    if (!types.length) {
       if (this.source) {
-        this.source.type = types[0].id
+        this.source.type = ''
       }
-
-      this.types = this.parseWithSyntheticTypes(types)
-      this.refresh()
-    } catch (error) {
-      this.notifier.error(error)
+      this.types = []
+      return
     }
+
+    if (this.source) {
+      this.source.type = types[0].id
+    }
+
+    this.types = this.parseWithSyntheticTypes(types)
+    this.refresh()
   }
 
   private parseWithSyntheticTypes(types: NamedEntity[]): NamedEntity[] {

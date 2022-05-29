@@ -14,7 +14,6 @@ import {
   MeasurementDatabaseV2,
   MeasurementDataPointGroupTableEntry,
   MeasurementDataSourceV2,
-  MeasurementLabelService,
   MEASUREMENT_MAX_ENTRIES_PER_DAY,
   NotifierService
 } from '@app/service'
@@ -32,6 +31,7 @@ import {
   MeasurementDataPointMinimalType,
   MeasurementDataPointProvider,
   MeasurementDataPointType,
+  MeasurementDataPointTypeAssociation,
   MeasurementLabelEntry,
   MeasurementUnitConversions
 } from '@coachcare/sdk'
@@ -47,6 +47,13 @@ import { resolveConfig } from '@app/config/section'
 import { measurementTableRowMapper } from '@app/service/measurement-v2/helpers'
 import { MEASUREMENT_METADATA_MAP } from '@app/shared/model/measurementMetadata'
 import { intersection } from 'lodash'
+import { Store } from '@ngrx/store'
+import { AppState } from '@app/store/state'
+import {
+  MeasurementLabelActions,
+  selectCurrentLabelTypes,
+  selectDataTypes
+} from '@app/store/measurement-label'
 
 @UntilDestroy()
 @Component({
@@ -66,7 +73,7 @@ export class MeasurementsTableV2Component implements OnInit {
 
   @Input() set label(label: MeasurementLabelEntry) {
     this._label = label
-    void this.refreshColumns()
+    this.store.dispatch(MeasurementLabelActions.SelectLabel({ label }))
   }
 
   get label(): MeasurementLabelEntry {
@@ -172,6 +179,7 @@ export class MeasurementsTableV2Component implements OnInit {
   private dates$: Subject<DateNavigatorOutput> =
     new Subject<DateNavigatorOutput>()
   private columns$: Subject<void> = new Subject<void>()
+  private dataPointTypes: MeasurementDataPointTypeAssociation[]
 
   constructor(
     private bus: EventsService,
@@ -180,16 +188,30 @@ export class MeasurementsTableV2Component implements OnInit {
     private dataPoint: MeasurementDataPointProvider,
     private dialog: MatDialog,
     private language: LanguageService,
-    private measurementLabel: MeasurementLabelService,
     private notifier: NotifierService,
+    private store: Store<AppState>,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.refreshColumns = this.refreshColumns.bind(this)
+  }
 
   public ngOnInit(): void {
     this.visceralFatRatingTooltip.dir = this.language.getDir()
-    void this.refreshColumns()
     this.createDataSource()
     this.subscribeToEvents()
+
+    this.store
+      .select(selectDataTypes)
+      .pipe(untilDestroyed(this))
+      .subscribe((types) => {
+        this.dataPointTypes = types
+        this.source.dataPointTypes = types
+      })
+
+    this.store
+      .select(selectCurrentLabelTypes)
+      .pipe(untilDestroyed(this))
+      .subscribe(this.refreshColumns)
   }
 
   public getDistanceUnit(): string {
@@ -356,7 +378,7 @@ export class MeasurementsTableV2Component implements OnInit {
   ): MeasurementDataPointGroupTableEntry[] {
     const entries = response.data
 
-    const blockedDataPointAssocIds = this.measurementLabel.dataPointTypes
+    const blockedDataPointAssocIds = this.dataPointTypes
       .filter((assoc) => !assoc.provider.isModifiable)
       .map((assoc) => assoc.type.id)
 
@@ -406,11 +428,7 @@ export class MeasurementsTableV2Component implements OnInit {
 
     this.attemptResolveSort(allowListView)
 
-    this.source = new MeasurementDataSourceV2(
-      this.database,
-      this.measurementLabel,
-      this.sort
-    )
+    this.source = new MeasurementDataSourceV2(this.database, this.sort)
 
     this.source.listView = allowListView
 
@@ -473,11 +491,10 @@ export class MeasurementsTableV2Component implements OnInit {
     }
   }
 
-  private async refreshColumns(): Promise<void> {
+  private async refreshColumns(
+    associations: MeasurementDataPointTypeAssociation[]
+  ): Promise<void> {
     try {
-      const associations =
-        await this.measurementLabel.resolveLabelDataPointTypes(this.label)
-
       this.columns = associations.map((assoc) => assoc.type)
 
       const stepIndex = this.columns.findIndex(

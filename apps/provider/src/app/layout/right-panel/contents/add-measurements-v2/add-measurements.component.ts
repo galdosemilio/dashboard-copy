@@ -13,7 +13,6 @@ import { resolveConfig } from '@app/config/section'
 import {
   ContextService,
   EventsService,
-  MeasurementLabelService,
   NotifierService,
   SelectedOrganization
 } from '@app/service'
@@ -44,6 +43,14 @@ import {
   MEASUREMENT_METADATA_MAP
 } from '@app/shared/model/measurementMetadata'
 import { chain, intersection, set } from 'lodash'
+import { Store } from '@ngrx/store'
+import { AppState } from '@app/store/state'
+import {
+  MeasurementLabelActions,
+  selectCurrentLabel,
+  selectCurrentLabelTypes,
+  selectMeasurementLabels
+} from '@app/store/measurement-label'
 
 enum Span {
   INSTANT = '1',
@@ -98,23 +105,42 @@ export class AddMeasurementsV2Component implements OnInit {
     private dataPoint: MeasurementDataPointProvider,
     private dialog: MatDialog,
     private fb: FormBuilder,
-    private measurementLabel: MeasurementLabelService,
     private notifier: NotifierService,
+    private store: Store<AppState>,
     private translate: TranslateService
   ) {
     this.dataTypeDependencyValidator =
       this.dataTypeDependencyValidator.bind(this)
 
-    this.resolveLabels = this.resolveLabels.bind(this)
+    this.refreshLabels = this.refreshLabels.bind(this)
+    this.refreshTypes = this.refreshTypes.bind(this)
   }
 
   public ngOnInit(): void {
     this.createLabelsForm()
     this.createOldForm()
 
-    this.measurementLabel.loaded$
+    this.store
+      .select(selectMeasurementLabels)
       .pipe(untilDestroyed(this))
-      .subscribe(this.resolveLabels)
+      .subscribe(this.refreshLabels)
+
+    this.store
+      .select(selectCurrentLabelTypes)
+      .pipe(untilDestroyed(this))
+      .subscribe(this.refreshTypes)
+
+    this.store
+      .select(selectCurrentLabel)
+      .pipe(untilDestroyed(this))
+      .subscribe((label) =>
+        this.labelsForm.patchValue(
+          {
+            label: (label as MeasurementLabelEntry).id ?? label
+          },
+          { emitEvent: false }
+        )
+      )
 
     this.context.organization$
       .pipe(untilDestroyed(this))
@@ -267,7 +293,9 @@ export class AddMeasurementsV2Component implements OnInit {
           return
         }
 
-        void this.refreshTypes(foundLabel)
+        this.store.dispatch(
+          MeasurementLabelActions.SelectLabel({ label: foundLabel })
+        )
       })
   }
 
@@ -276,7 +304,7 @@ export class AddMeasurementsV2Component implements OnInit {
       energy: []
     })
 
-    this.oldForm.valueChanges.subscribe((value) => {
+    this.oldForm.valueChanges.subscribe(() => {
       if (this.oldForm.invalid) {
         return
       }
@@ -464,11 +492,11 @@ export class AddMeasurementsV2Component implements OnInit {
     }
   }
 
-  private async refreshTypes(label: MeasurementLabelEntry): Promise<void> {
+  private async refreshTypes(
+    types: MeasurementDataPointTypeAssociation[]
+  ): Promise<void> {
     try {
-      this.typesAssoc = await this.measurementLabel.resolveLabelDataPointTypes(
-        label
-      )
+      this.typesAssoc = types
 
       const assocTypes = this.typesAssoc.map((assoc) => assoc.type)
       const assocTypeIds = assocTypes.map((assoc) => assoc.id)
@@ -501,9 +529,9 @@ export class AddMeasurementsV2Component implements OnInit {
     this.labelsForm.reset({ date: moment(), label })
   }
 
-  private async resolveLabels(): Promise<void> {
+  private async refreshLabels(labels: MeasurementLabelEntry[]): Promise<void> {
     try {
-      this.labels = await this.measurementLabel.fetchMeasurementLabels()
+      this.labels = labels
 
       if (!this.labels.length) {
         return

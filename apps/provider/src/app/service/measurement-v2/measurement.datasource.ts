@@ -4,7 +4,8 @@ import {
   GenericSortProperty,
   GetMeasurementDataPointGroupsRequest,
   GetMeasurementDataPointGroupsResponse,
-  MeasurementDataPointGroup
+  MeasurementDataPointGroup,
+  MeasurementDataPointTypeAssociation
 } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import {
@@ -13,9 +14,12 @@ import {
 } from './measurement.database'
 import * as moment from 'moment'
 import { flatMap, groupBy } from 'lodash'
-import { MeasurementLabelService } from '@app/service'
 import { CcrTableSortDirective } from '@app/shared'
 import { measurementTableRowMapper } from './helpers'
+import { Store } from '@ngrx/store'
+import { selectDataTypes } from '@app/store/measurement-label'
+import { untilDestroyed } from '@ngneat/until-destroy'
+import { AppState } from '@app/store/state'
 
 export const MEASUREMENT_MAX_ENTRIES_PER_DAY = 24
 export const LOAD_MORE_ROW_BASE = Object.freeze({
@@ -53,6 +57,7 @@ export class MeasurementDataSourceV2 extends TableDataSource<
   GetMeasurementDataPointGroupsResponse,
   GetMeasurementDataPointGroupsRequestWithExtras
 > {
+  public dataPointTypes: MeasurementDataPointTypeAssociation[] = []
   public hasTooMuchForSingleDay = false
   public listView = false
   public omitEmptyDays = false
@@ -60,7 +65,6 @@ export class MeasurementDataSourceV2 extends TableDataSource<
 
   constructor(
     protected database: MeasurementDatabaseV2,
-    private measurementLabel: MeasurementLabelService,
     private sort?: CcrTableSortDirective
   ) {
     super()
@@ -97,9 +101,10 @@ export class MeasurementDataSourceV2 extends TableDataSource<
     this.hasTooMuchForSingleDay = false
     this.showDistanceNote = false
 
-    const blockedDataPointAssocIds = this.measurementLabel.dataPointTypes
+    const blockedDataPointAssocIds = this.dataPointTypes
       .filter((assoc) => !assoc.provider.isModifiable)
       .map((assoc) => assoc.type.id)
+
     const emptyDateGroups = !this.omitEmptyDays
       ? this.createEmptyDateGroups()
       : this.createHeaderDateGroups(response.data)

@@ -16,7 +16,6 @@ import {
 import {
   ContextService,
   EventsService,
-  ExtendedMeasurementLabelEntry,
   MeasurementAggregation,
   MeasurementDataSourceV2,
   MeasurementSummaryData,
@@ -24,7 +23,11 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _, DateNavigatorOutput } from '@app/shared'
+import {
+  _,
+  ExtendedMeasurementLabelEntry,
+  DateNavigatorOutput
+} from '@app/shared'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'

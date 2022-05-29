@@ -22,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { generateChartTooltip } from './helpers'
 import { MEASUREMENT_MAX_ENTRIES_PER_DAY } from './measurement.datasource'
 import { DataPointEntry } from './model'
+import { AppState } from '@app/store/state'
 
 export class MeasurementChartDataSource extends ChartDataSource<
   MeasurementDataPointGroup,
@@ -35,7 +36,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
 
   constructor(
     protected database: MeasurementDatabaseV2,
-    private store: Store<CCRConfig>,
+    private store: Store<AppState>,
     private context: ContextService,
     private translate: TranslateService
   ) {

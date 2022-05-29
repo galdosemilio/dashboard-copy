@@ -1,9 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { ExtendedMeasurementLabelEntry } from '@app/shared/model'
 import {
-  ExtendedMeasurementLabelEntry,
-  MeasurementLabelService
-} from '@app/service'
+  MeasurementLabelActions,
+  selectMeasurementLabels
+} from '@app/store/measurement-label'
+import { AppState } from '@app/store/state'
+import { MeasurementLabelEntry } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { Store } from '@ngrx/store'
 
 @UntilDestroy()
 @Component({
@@ -21,22 +25,27 @@ export class MeasurementTabsComponent implements OnInit {
 
   public measurementLabels: ExtendedMeasurementLabelEntry[] = []
 
-  constructor(private measurementLabel: MeasurementLabelService) {
-    this.fetchMeasurementLabels = this.fetchMeasurementLabels.bind(this)
+  constructor(private store: Store<AppState>) {
+    this.setMeasurementLabels = this.setMeasurementLabels.bind(this)
   }
 
   public ngOnInit(): void {
-    this.measurementLabel.loaded$
+    this.store
+      .select(selectMeasurementLabels)
       .pipe(untilDestroyed(this))
-      .subscribe(this.fetchMeasurementLabels)
+      .subscribe(this.setMeasurementLabels)
   }
 
-  public onSelectTab(label: ExtendedMeasurementLabelEntry | string): void {
+  public onSelectTab(label: ExtendedMeasurementLabelEntry | 'food'): void {
     this.onSelect.emit(label)
+    this.store.dispatch(
+      MeasurementLabelActions.SelectLabel({
+        label: label as MeasurementLabelEntry | 'food'
+      })
+    )
   }
 
-  private async fetchMeasurementLabels(): Promise<void> {
-    const labels = await this.measurementLabel.fetchMeasurementLabels()
+  private setMeasurementLabels(labels: ExtendedMeasurementLabelEntry[]): void {
     this.measurementLabels = labels
 
     const matchingLabel = this.section

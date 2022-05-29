@@ -1,16 +1,17 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatSelect, MatSelectChange } from '@coachcare/material'
 import { DataPointTypes, DieterDashboardSummary } from '@coachcare/sdk'
-import {
-  ContextService,
-  EventsService,
-  MeasurementLabelService,
-  NotifierService
-} from '@app/service'
+import { ContextService, EventsService, NotifierService } from '@app/service'
 import { _ } from '@app/shared'
 import { TypeGroupEntry } from '@app/shared/components/chart-v2'
 import { resolveConfig } from '@app/config/section'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { Store } from '@ngrx/store'
+import { AppState } from '@app/store/state'
+import {
+  MeasLabelFeatureState,
+  measLabelSelector
+} from '@app/store/measurement-label'
 
 @UntilDestroy()
 @Component({
@@ -38,14 +39,15 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
     public data: DieterDashboardSummary,
     private bus: EventsService,
     private context: ContextService,
-    private measurementLabel: MeasurementLabelService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private store: Store<AppState>
   ) {
     this.resolveTypeGroups = this.resolveTypeGroups.bind(this)
   }
 
   public ngOnInit(): void {
-    this.measurementLabel.loaded$
+    this.store
+      .select(measLabelSelector)
       .pipe(untilDestroyed(this))
       .subscribe(this.resolveTypeGroups)
 
@@ -69,10 +71,11 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
     this.data.update(event.value === -1 ? null : event.value)
   }
 
-  private async resolveTypeGroups(): Promise<void> {
+  private async resolveTypeGroups(state: MeasLabelFeatureState): Promise<void> {
     try {
-      const labels = await this.measurementLabel.fetchMeasurementLabels()
-      let dataPointTypes = await this.measurementLabel.fetchDataPointTypes()
+      const labels = state.measurementLabels
+      let dataPointTypes = state.dataPointTypes
+
       const allowedDataPointTypes: DataPointTypes[] =
         resolveConfig(
           'PATIENT_DASHBOARD.ALLOWED_CHART_DATA_POINT_TYPES',

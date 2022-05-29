@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import {
   ContextService,
-  MeasurementLabelService,
   NotifierService,
   SelectedOrganization
 } from '@app/service'
@@ -16,6 +15,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { environment } from 'apps/provider/src/environments/environment'
 import { MeetingsDatabase } from '@app/shared/components/schedule'
 import { filter } from 'rxjs/operators'
+import { Store } from '@ngrx/store'
+import { AppState } from '@app/store/state'
+import { selectMeasurementLabels } from '@app/store/measurement-label'
 
 @UntilDestroy()
 @Component({
@@ -37,20 +39,20 @@ export class WellcoreDashboardComponent implements OnInit {
   constructor(
     private context: ContextService,
     private formSubmission: FormSubmission,
-    private measurementLabel: MeasurementLabelService,
     private packageEnrollment: PackageEnrollment,
     private meetingDatabase: MeetingsDatabase,
-    private notify: NotifierService
+    private notify: NotifierService,
+    private store: Store<AppState>
   ) {
-    this.resolveFirstLabel = this.resolveFirstLabel.bind(this)
     this.isPatient = this.context.user.accountType.id === AccountTypeIds.Client
     this.medicalIntakeFormLink = `/library/forms/${environment.wellcoreMedicalFormId}/dieter-submissions`
   }
 
   public ngOnInit(): void {
-    this.measurementLabel.loaded$
+    this.store
+      .select(selectMeasurementLabels)
       .pipe(untilDestroyed(this))
-      .subscribe(this.resolveFirstLabel)
+      .subscribe((labels) => (this.selectedLabel = labels[0]))
 
     this.context.organization$
       .pipe(untilDestroyed(this))
@@ -110,13 +112,5 @@ export class WellcoreDashboardComponent implements OnInit {
       .toPromise()
 
     return res.data.length > 0
-  }
-
-  private async resolveFirstLabel(): Promise<void> {
-    const firstLabel = (
-      await this.measurementLabel.fetchMeasurementLabels()
-    ).shift()
-
-    this.selectedLabel = firstLabel
   }
 }

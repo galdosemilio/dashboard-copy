@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import {
-  ContextService,
-  MeasurementLabelService,
-  NotifierService
-} from '@app/service'
+import { ContextService, NotifierService } from '@app/service'
 import { _, sleep } from '@app/shared/utils'
+import { MeasurementLabelActions } from '@app/store/measurement-label'
+import { AppState } from '@app/store/state'
 import { MatDialog } from '@coachcare/material'
 import {
   MeasurementDataPointTypeAssociation,
@@ -15,6 +13,7 @@ import {
 } from '@coachcare/sdk'
 import { MeasurementPreferenceEntry } from '@coachcare/sdk/dist/lib/providers/measurement/preference'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { Store } from '@ngrx/store'
 import { debounceTime, filter } from 'rxjs/operators'
 import {
   AddDataPointTypeDialog,
@@ -61,10 +60,10 @@ export class ClinicMeasurementsComponent implements OnInit {
     private database: MeasurementLabelDatabase,
     private dialog: MatDialog,
     private fb: FormBuilder,
-    private measurementLabel: MeasurementLabelService,
     private measurementPreference: MeasurementPreferenceProvider,
     private notifier: NotifierService,
-    private organization: OrganizationProvider
+    private organization: OrganizationProvider,
+    private store: Store<AppState>
   ) {}
 
   public ngOnInit(): void {
@@ -103,7 +102,7 @@ export class ClinicMeasurementsComponent implements OnInit {
       .subscribe(() => {
         void this.fetchMeasurementPreference()
         this.source.refresh()
-        this.measurementLabel.markCacheAsStale()
+        this.store.dispatch(MeasurementLabelActions.RefreshLabelsAndTypes())
       })
   }
 
@@ -123,7 +122,7 @@ export class ClinicMeasurementsComponent implements OnInit {
       .pipe(filter((refresh) => refresh))
       .subscribe(() => {
         this.source.refresh()
-        this.measurementLabel.markCacheAsStale()
+        this.store.dispatch(MeasurementLabelActions.RefreshLabelsAndTypes())
       })
   }
 

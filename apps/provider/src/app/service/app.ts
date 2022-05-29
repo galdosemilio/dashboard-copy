@@ -41,7 +41,6 @@ import { GestureService } from './gesture'
 import { DietersDatabase } from './dieters'
 import { FormPDFService } from './formPDFService'
 import { MessagingService } from './messaging'
-import { MeasurementLabelService } from './measurement-label'
 import { MeasurementDatabaseV2 } from './measurement-v2'
 import {
   ConfigService,
@@ -118,7 +117,6 @@ export function AppProviders() {
     LocalNotifierService,
     ListingPaginationGuard,
     LoggingService,
-    MeasurementLabelService,
     MeasurementDatabaseV2,
     MeasurementAggregatesDatabase,
     { provide: NotifierService, useExisting: LocalNotifierService },
