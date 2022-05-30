@@ -128,8 +128,8 @@ export class MeasurementLabelsEffects implements OnInitEffects {
     }))
   }
 
-  private async fetchMeasurementPreference(): Promise<MeasurementPreferenceEntry> {
-    return await this.preferenceProvider.getSingleMatching({
+  private fetchMeasurementPreference(): Promise<MeasurementPreferenceEntry> {
+    return this.preferenceProvider.getSingleMatching({
       organization: this.context.organizationId,
       status: 'active'
     })
