@@ -15,7 +15,7 @@ import { forkJoin, from } from 'rxjs'
 import { debounceTime, map, mergeMap, switchMap } from 'rxjs/operators'
 import { AppState } from '../state'
 import { MeasurementLabelActions } from './measurement-label.actions'
-import { measLabelSelector } from './measurement-label.selector'
+import { measurementLabelSelector } from './measurement-label.selector'
 import { MeasLabelFeatureState } from './measurement-label.state'
 
 @UntilDestroy()
@@ -32,7 +32,7 @@ export class MeasurementLabelsEffects implements OnInitEffects {
     private store: Store<AppState>
   ) {
     this.store
-      .select(measLabelSelector)
+      .select(measurementLabelSelector)
       .subscribe((state) => (this.state = state))
   }
 

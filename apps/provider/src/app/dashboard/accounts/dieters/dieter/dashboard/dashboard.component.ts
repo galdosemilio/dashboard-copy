@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store'
 import { AppState } from '@app/store/state'
 import {
   MeasLabelFeatureState,
-  measLabelSelector
+  measurementLabelSelector
 } from '@app/store/measurement-label'
 
 @UntilDestroy()
@@ -47,7 +47,7 @@ export class DieterDashboardComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.store
-      .select(measLabelSelector)
+      .select(measurementLabelSelector)
       .pipe(untilDestroyed(this))
       .subscribe(this.resolveTypeGroups)
 

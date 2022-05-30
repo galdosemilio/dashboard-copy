@@ -3,30 +3,31 @@ import { createSelector } from '@ngrx/store'
 import { AppState } from '../state'
 import { MeasLabelFeatureState } from './measurement-label.state'
 
-export const measLabelSelector = (state: AppState) => state.measurementLabels
+export const measurementLabelSelector = (state: AppState) =>
+  state.measurementLabels
 
 export const selectMeasLabelFeature = createSelector(
-  measLabelSelector,
+  measurementLabelSelector,
   (state: MeasLabelFeatureState) => state
 )
 
 export const selectDataTypes = createSelector(
-  measLabelSelector,
+  measurementLabelSelector,
   (state: MeasLabelFeatureState) => state.dataPointTypes
 )
 
 export const selectMeasurementLabels = createSelector(
-  measLabelSelector,
+  measurementLabelSelector,
   (state: MeasLabelFeatureState) => state.measurementLabels
 )
 
 export const selectCurrentLabel = createSelector(
-  measLabelSelector,
+  measurementLabelSelector,
   (state: MeasLabelFeatureState) => state.selectedLabel
 )
 
 export const selectCurrentLabelTypes = createSelector(
-  measLabelSelector,
+  measurementLabelSelector,
   (state: MeasLabelFeatureState) =>
     state.selectedLabel && typeof state.selectedLabel === 'object'
       ? state.dataPointTypes.filter(
