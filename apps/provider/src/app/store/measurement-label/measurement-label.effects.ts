@@ -91,7 +91,7 @@ export class MeasurementLabelsEffects implements OnInitEffects {
       status: 'active'
     })
 
-    const dataPointTypes = this.state.preferenceIsInherited
+    return this.state.preferenceIsInherited
       ? response.data.filter(
           (assoc) =>
             assoc.organization.id === this.state.preference.organization.id
@@ -99,8 +99,6 @@ export class MeasurementLabelsEffects implements OnInitEffects {
       : response.data.filter(
           (assoc) => assoc.organization.id === this.context.organization.id
         )
-
-    return dataPointTypes
   }
 
   private async fetchMeasurementLabels(): Promise<
@@ -122,22 +120,18 @@ export class MeasurementLabelsEffects implements OnInitEffects {
           (entry) => entry.organization.id === this.context.organization.id
         )
 
-    const labels = data.map((label) => ({
+    return data.map((label) => ({
       ...label,
       routeLink: encodeURIComponent(
         label.name.replace(/\s/gi, '-').toLowerCase()
       )
     }))
-
-    return labels
   }
 
   private async fetchMeasurementPreference(): Promise<MeasurementPreferenceEntry> {
-    const pref = await this.preferenceProvider.getSingleMatching({
+    return await this.preferenceProvider.getSingleMatching({
       organization: this.context.organizationId,
       status: 'active'
     })
-
-    return pref
   }
 }
