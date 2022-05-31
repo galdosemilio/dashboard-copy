@@ -27,20 +27,10 @@
     },
     "NO_ASSOCIATED_SERVICES": "No associated services",
     "ORGS": {
-      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Active Campaign Association Status",
-      "ACTIVE_CAMPAIGN_LISTS": "Active Campaign Lists",
-      "ASSOC_ACTIVE_CAMPAIGN": "Associate Active Campaign",
-      "ASSOC_ALL_PROVIDERS": "Retroactively enroll all providers at or below this clinic",
-      "ASSOC_ALL_PROVIDERS_CURRENT": "Enrolling provider {{ provider }}...",
-      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "The following providers presented errors when attempting to enroll them:",
-      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "All providers enrolled successfully",
-      "ASSOC_ALL_PROVIDERS_WARNING": "You're about to enroll ALL the providers from this clinic and its subclinics; this operation can take a while to complete, are you sure you want to continue?",
-      "ASSOC_PROVIDER_CAMPAIGN": "Retroactively enroll one provider",
       "BASE_PRICING": "Base Pricing",
       "CHURN_DATE": "Churn Date",
       "CREATE_NEW": "Create Clinic",
       "DOWNLOAD_QR_CODE": "Download QR Code",
-      "EDIT_ACTIVE_CAMPAIGN": "Edit Active Campaign List Association",
       "EMAIL_TEMPLATE_INHERITED": "This template is available through a parent clinic. It can only be edited or deleted through the clinic that owns it.",
       "ENTITY": "Entity",
       "IS_BILLABLE": "Is Billable?",
@@ -55,8 +45,6 @@
       "RENEWAL_DATE": "Renewal Date",
       "RPM_NON_PATIENT_PRICING": "Per NonRPM Patient Pricing",
       "RPM_PATIENT_PRICING": "RPM Patient Pricing",
-      "SELECTED_PROVIDER": "Selected Provider: {{ provider }}",
-      "SELECT_PROVIDER": "Select Provider",
       "SETTINGS": {
         "ANDROID_BUNDLE_ID": "Android Bundle ID",
         "APPID": "Application IDs",
@@ -170,7 +158,6 @@
     "AND": "and",
     "ANDROID_APP_ID": "Android App ID",
     "APP_STORE": "App Store",
-    "ASSOCIATE": "Associate",
     "AS_OF": "As of",
     "AUTO_ENROLL_CLIENT": "Auto-enroll Client on Association",
     "AUTO_THREAD_PARTICIPATION": "Automatic Thread Participation",
@@ -210,7 +197,6 @@
     "EMAIL_NOT_MATCH": "Email does not Match",
     "EMAIL_TEMPLATES": "Email Templates",
     "ENABLED": "Enabled",
-    "ENROLL": "Enroll",
     "ERROR": "Error!",
     "FEATURES": "Features",
     "FIELD_INVALID": "Field Invalid",
@@ -266,7 +252,6 @@
     "REMOVE_ENROLLMENTS_ON_ASSOC": "Remove Patient Enrollments on Association",
     "REQUEST_RESET": "Reset Password",
     "RESET_PASSWORD": "Reset Password",
-    "RETRY": "Retry",
     "RPM": "RPM",
     "SAVE": "Save",
     "SAVE_PASSWORD": "Save Password",
@@ -407,8 +392,6 @@
       "ACC_CREATED": "Account created",
       "ACC_DEACTIVATED": "Account deactivated",
       "ACC_UPDATED": "Account updated",
-      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "Active Campaign List association created successfully.",
-      "ACTIVE_CAMPAIGN_UPDATED": "Active Campaign List association updated successfully.",
       "CHECK_RESET_EMAIL": "If we find an account associated with the email address you've entered, we will email you a password reset email in the next few minutes. If you don't receive an email, be sure to check your spam folder, or try other email addresses you may have used for your account.",
       "CLINIC_REMOVED": "Clinic removed",
       "EMAIL_TEMPLATE_SAVED": "Email template saved successfully.",
@@ -428,7 +411,6 @@
       "PERM_UPDATED": "Permission updated",
       "PHASE_UPDATED": "Phase updated successfully.",
       "PHONE_NUMBER_UPDATED": "Phone number successfully updated.",
-      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider successfully associated to Active Campaign List.",
       "SERVICE_SYNC_SUCCESS": "Service synced successfully.",
       "SETTINGS_UPDATED": "Settings Updated"
     }
@@ -546,6 +528,9 @@
         },
         "ITG": {
           "CONFIRMATION": "Congratulations! Your organization has been successfully registered. An implementation specialist will be in touch with you shortly to schedule live training if desired."
+        },
+        "NXTSTIM": {
+          "EMAIL_CONFIRMATION": "You will receive an e-mail shortly with a link to activate your dashboard administrator account, set your password, and login. Additionally, you will receive a separate e-mail confirmation with your clinic information. Your account manager will also reach out to introduce themselves, schedule training, and finalize your device order."
         },
         "SHAKEIT": {
           "ALL_DONE": "<strong>All Done!<strong>",

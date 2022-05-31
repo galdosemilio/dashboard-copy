@@ -27,20 +27,10 @@
     },
     "NO_ASSOCIATED_SERVICES": "Non ci sono servizi associati",
     "ORGS": {
-      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Attivo Stato Associazione campagna",
-      "ACTIVE_CAMPAIGN_LISTS": "Liste campagna attiva",
-      "ASSOC_ACTIVE_CAMPAIGN": "Associate Active Campaign",
-      "ASSOC_ALL_PROVIDERS": "Retroattivamente iscriversi tutti i fornitori pari o inferiore a questa clinica",
-      "ASSOC_ALL_PROVIDERS_CURRENT": "Iscrivendosi fornitore {{provider}} ...",
-      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "I seguenti fornitori presentati errori quando si tenta di iscriversi loro:",
-      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "Tutti i fornitori iscritti con successo",
-      "ASSOC_ALL_PROVIDERS_WARNING": "Stai per iscriversi tutti i fornitori di questa clinica; questa operazione può richiedere del tempo per completare, sei sicuro di voler continuare?",
-      "ASSOC_PROVIDER_CAMPAIGN": "Retroattivamente iscriversi un provider",
       "BASE_PRICING": "Prezzi Base",
       "CHURN_DATE": "Churn Data",
       "CREATE_NEW": "Crea Clinica",
       "DOWNLOAD_QR_CODE": "Scarica il codice QR",
-      "EDIT_ACTIVE_CAMPAIGN": "Modifica Active Campaign Lista Association",
       "EMAIL_TEMPLATE_INHERITED": "Questo modello è disponibile attraverso una clinica genitore. Può essere modificato o eliminato solo attraverso la clinica che lo possiede.",
       "ENTITY": "Entità",
       "IS_BILLABLE": "È fatturabile?",
@@ -55,8 +45,6 @@
       "RENEWAL_DATE": "Data di Rinnovo",
       "RPM_NON_PATIENT_PRICING": "Per NonRPM Prezzi paziente",
       "RPM_PATIENT_PRICING": "RPM Prezzi Paziente",
-      "SELECTED_PROVIDER": "Provider selezionato: {{provider}}",
-      "SELECT_PROVIDER": "Selezione fornitore",
       "SETTINGS": {
         "ANDROID_BUNDLE_ID": "ID Pacchetto Android",
         "APPID": "ID Iscrizioni",
@@ -170,7 +158,6 @@
     "AND": "e",
     "ANDROID_APP_ID": "Android App ID",
     "APP_STORE": "App Store",
-    "ASSOCIATE": "Socio",
     "AS_OF": "Come di",
     "AUTO_ENROLL_CLIENT": "Registrazione automatica del client sull'associazione",
     "AUTO_THREAD_PARTICIPATION": "Partecipazione automatico Discussione",
@@ -210,7 +197,6 @@
     "EMAIL_NOT_MATCH": "L'Email non corrisponde",
     "EMAIL_TEMPLATES": "",
     "ENABLED": "Abilitato",
-    "ENROLL": "Iscriversi",
     "ERROR": "Errore!",
     "FEATURES": "Caratteristiche",
     "FIELD_INVALID": "Campo non valido",
@@ -266,7 +252,6 @@
     "REMOVE_ENROLLMENTS_ON_ASSOC": "Rimuovere le iscrizioni ai pazienti in associazione",
     "REQUEST_RESET": "Resetta password",
     "RESET_PASSWORD": "Resetta password",
-    "RETRY": "Riprova",
     "RPM": "RPM",
     "SAVE": "Salva",
     "SAVE_PASSWORD": "Salva Password",
@@ -407,8 +392,6 @@
       "ACC_CREATED": "Account creato",
       "ACC_DEACTIVATED": "Account disattivato",
       "ACC_UPDATED": "Account aggiornato",
-      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "Attivo Elenco associazione Campaign creato con successo.",
-      "ACTIVE_CAMPAIGN_UPDATED": "Attivo Elenco associazione Campaign aggiornato con successo.",
       "CHECK_RESET_EMAIL": "Se troviamo un account associato all'indirizzo e-mail che hai inserito, ti invieremo una e-mail di reset della password dopo pochi minuti. Se non avessi ricevuto l'e-mail, assicurati di controllare la cartella spam, o provare altri indirizzi e-mail che avresti potuto utilizzare per il tuo account.",
       "CLINIC_REMOVED": "Clinica Eliminata",
       "EMAIL_TEMPLATE_SAVED": "",
@@ -428,7 +411,6 @@
       "PERM_UPDATED": "Permesso aggiornato",
       "PHASE_UPDATED": "Fase aggiornata con successo.",
       "PHONE_NUMBER_UPDATED": "Numero di telefono aggiornato con successo.",
-      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider associato con successo alla lista Active Campaign.",
       "SERVICE_SYNC_SUCCESS": "Servizio sincronizzato con successo.",
       "SETTINGS_UPDATED": "Impostazioni aggiornate"
     }
@@ -546,6 +528,9 @@
         },
         "ITG": {
           "CONFIRMATION": "Congratulazioni! La sua organizzazione è stata registrata con successo. Uno specialista dell'implementazione la contatterà a breve per programmare sessioni di formazione live se desidera."
+        },
+        "NXTSTIM": {
+          "EMAIL_CONFIRMATION": "Riceverai un'e-mail a breve con un link per attivare l'account amministratore Dashboard, impostare la password e accedere. Inoltre, riceverai una conferma e-mail separata con le informazioni sulla clinica. Il tuo account manager si contatterà anche per presentarsi, pianificare la formazione e finalizzare l'ordine del dispositivo."
         },
         "SHAKEIT": {
           "ALL_DONE": "<strong>Fatto!<strong>",

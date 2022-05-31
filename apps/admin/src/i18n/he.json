@@ -27,20 +27,10 @@
     },
     "NO_ASSOCIATED_SERVICES": "אין שירותים הקשורים",
     "ORGS": {
-      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "סטטוס קמפיין האגודה Active",
-      "ACTIVE_CAMPAIGN_LISTS": "רשימות קמפיין פעילות",
-      "ASSOC_ACTIVE_CAMPAIGN": "מבצע עמית פעיל",
-      "ASSOC_ALL_PROVIDERS": "למפרע לרשום כל ספקי או מתחת מרפאה זו",
-      "ASSOC_ALL_PROVIDERS_CURRENT": "ספק הרשמת {{provider}} ...",
-      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "ספקי הבאים מוצגים שגיאות כאשר מנסים לרשום אותם:",
-      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "כל ספקי נרשם בהצלחה",
-      "ASSOC_ALL_PROVIDERS_WARNING": "אתה עומד לרשום את כל ספקים ממרפאת זו; פעולה זו עשויה לארוך זמן מה להשלים, אתה בטוח שאתה רוצה להמשיך?",
-      "ASSOC_PROVIDER_CAMPAIGN": "למפרע להירשם ספק אחד",
       "BASE_PRICING": "תמחור Base",
       "CHURN_DATE": "תאריך נטישה",
       "CREATE_NEW": "יצירת מרפאה",
       "DOWNLOAD_QR_CODE": "הורד QR Code",
-      "EDIT_ACTIVE_CAMPAIGN": "האגודה רשימת ערוך קמפיין פעיל",
       "EMAIL_TEMPLATE_INHERITED": "תבנית זו זמינה דרך מרפאת הורה. ניתן לערוך אותו או למחוק רק דרך המרפאה שהכלי שלו.",
       "ENTITY": "יֵשׁוּת",
       "IS_BILLABLE": "האם לחיוב?",
@@ -55,8 +45,6 @@
       "RENEWAL_DATE": "תאריך חידוש",
       "RPM_NON_PATIENT_PRICING": "לפי תמחור חולה NonRPM",
       "RPM_PATIENT_PRICING": "תמחור חולה סל\"ד",
-      "SELECTED_PROVIDER": "ספק נבחר: {{provider}}",
-      "SELECT_PROVIDER": "ספק בחר",
       "SETTINGS": {
         "ANDROID_BUNDLE_ID": "Android Bundle ID",
         "APPID": "מזהה אפליקציה",
@@ -170,7 +158,6 @@
     "AND": "ו",
     "ANDROID_APP_ID": "Android App ID",
     "APP_STORE": "חנות אפליקציות",
-    "ASSOCIATE": "חָבֵר",
     "AS_OF": "החל מ",
     "AUTO_ENROLL_CLIENT": "הרשמה אוטומטית של לקוח לאיגוד",
     "AUTO_THREAD_PARTICIPATION": "השתתפות אשכול אוטומטית",
@@ -210,7 +197,6 @@
     "EMAIL_NOT_MATCH": "הדוא\"ל אינו תואם",
     "EMAIL_TEMPLATES": "תבניות אימייל",
     "ENABLED": "מופעל",
-    "ENROLL": "לְהִרָשֵׁם",
     "ERROR": "שגיאה",
     "FEATURES": "מאפיינים",
     "FIELD_INVALID": "שדה לא חוקי",
@@ -266,7 +252,6 @@
     "REMOVE_ENROLLMENTS_ON_ASSOC": "הסר את ההרשמה לחולים על האגודה",
     "REQUEST_RESET": "איפוס סיסמה",
     "RESET_PASSWORD": "איפוס סיסמה",
-    "RETRY": "נסה שוב",
     "RPM": "סל\"ד",
     "SAVE": "שמירה",
     "SAVE_PASSWORD": "שמירת סיסמה",
@@ -407,8 +392,6 @@
       "ACC_CREATED": "החשבון נוצר",
       "ACC_DEACTIVATED": "החשבון הושבת",
       "ACC_UPDATED": "החשבון עודכן",
-      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "העמותה המבצע רשימת פעילים שנוצרה בהצלחה.",
-      "ACTIVE_CAMPAIGN_UPDATED": "העמותה המבצע רשימת Active עודכנה בהצלחה.",
       "CHECK_RESET_EMAIL": "אם נמצא חשבון המשויך לכתובת האימייל שהזנת, נשלח אליך בדוא\"ל הודעת איפוס סיסמה בדקות הקרובות. אם אינך מקבל דוא\"ל, הקפד לבדוק את תיקיית דואר הזבל שלך, או נסה כתובות דוא\"ל אחרות שבהן השתמשת עבור החשבון שלך.",
       "CLINIC_REMOVED": "המרפאה הוסרה",
       "EMAIL_TEMPLATE_SAVED": "תבנית דוא\"ל נשמרה בהצלחה.",
@@ -428,7 +411,6 @@
       "PERM_UPDATED": "ההרשאה עודכנה",
       "PHASE_UPDATED": "השלב עודכן בהצלחה.",
       "PHONE_NUMBER_UPDATED": "מספר הטלפון עודכן בהצלחה.",
-      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "ספק קשור בהצלחה לרשימת קמפיין פעילה.",
       "SERVICE_SYNC_SUCCESS": "שירות מסונכרן בהצלחה.",
       "SETTINGS_UPDATED": "ההגדרות עודכנו"
     }
@@ -546,6 +528,9 @@
         },
         "ITG": {
           "CONFIRMATION": "מזל טוב! הארגון שלך נרשם בהצלחה. מומחה יישום יהיה איתך בקשר כדי לתזמן אימונים בשידור חי אם תרצה."
+        },
+        "NXTSTIM": {
+          "EMAIL_CONFIRMATION": "תקבל דואר אלקטרוני בקרוב עם קישור להפעלת חשבון מנהל לוח המחוונים שלך, הגדרת הסיסמה שלך והתחברות. בנוסף, תקבל אישור דואר אלקטרוני נפרד עם פרטי המרפאה שלך. מנהל החשבון שלך יושיט יד גם להציג את עצמם, לתזמן הכשרה ולסיים את הזמנת המכשיר שלך."
         },
         "SHAKEIT": {
           "ALL_DONE": "<strong>הכל בוצע!<strong>",

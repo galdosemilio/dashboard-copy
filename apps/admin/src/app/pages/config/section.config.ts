@@ -17,6 +17,7 @@ import { InHealthSectionConfig } from './inhealth.section.config'
 import { ITGSectionConfig } from './itg.section.config'
 import { MuscleWiseSectionConfig } from './musclewise.section.config'
 import { NutrimostSectionConfig } from './nutrimost.section.config'
+import { NXTSTIMSectionConfig } from './nxtstim.section.config'
 import {
   RobardProdSectionConfig,
   RobardTestSectionConfig
@@ -97,6 +98,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['5748']: ShakeItSectionConfig,
     ['7535']: WellCoreSectionConfig,
     ['7537']: MuscleWiseSectionConfig,
+    ['7546']: NXTSTIMSectionConfig,
     ['7555']: BlueskySectionConfig
   },
   prod: {
@@ -112,7 +114,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['4118']: RobardProdSectionConfig,
     ['4156']: ShakeItSectionConfig,
     ['6916']: MuscleWiseSectionConfig,
-    ['6891']: WellCoreSectionConfig
+    ['6891']: WellCoreSectionConfig,
+    ['7074']: NXTSTIMSectionConfig
   }
 }
 

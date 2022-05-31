@@ -27,20 +27,10 @@
     },
     "NO_ASSOCIATED_SERVICES": "لا الخدمات المرتبطة بها",
     "ORGS": {
-      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "مركز جمعية حملة نشطة",
-      "ACTIVE_CAMPAIGN_LISTS": "قوائم حملة نشطة",
-      "ASSOC_ACTIVE_CAMPAIGN": "حملة نشطة المنتسبين",
-      "ASSOC_ALL_PROVIDERS": "تسجيل بأثر رجعي جميع مقدمي عند أو أقل من هذه العيادة",
-      "ASSOC_ALL_PROVIDERS_CURRENT": "تسجيل مزود {{provider}} ...",
-      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "قدم مقدمي الأخطاء التالية عند محاولة إلحاقهم:",
-      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "التحق جميع مقدمي بنجاح",
-      "ASSOC_ALL_PROVIDERS_WARNING": "كنت على وشك الالتحاق ALL مقدمي من هذه العيادة. هذه العملية يمكن أن تستغرق بعض الوقت لإكمال، هل أنت متأكد من أنك تريد المتابعة؟",
-      "ASSOC_PROVIDER_CAMPAIGN": "تسجيل بأثر رجعي مزود واحد",
       "BASE_PRICING": "التسعير قاعدة",
       "CHURN_DATE": "زبد التسجيل",
       "CREATE_NEW": "إنشاء عيادة",
       "DOWNLOAD_QR_CODE": "تحميل رمز الاستجابة السريعة",
-      "EDIT_ACTIVE_CAMPAIGN": "تحرير الحملة النشطة جمعية قائمة",
       "EMAIL_TEMPLATE_INHERITED": "هذا القالب هو متاح من خلال عيادة الأم. لا يمكن إلا أن تعدل أو تحذف من خلال العيادة التي تملك ذلك.",
       "ENTITY": "شخصية",
       "IS_BILLABLE": "غير فوترة؟",
@@ -55,8 +45,6 @@
       "RENEWAL_DATE": "تاريخ التجديد",
       "RPM_NON_PATIENT_PRICING": "في NonRPM التسعير المرضى",
       "RPM_PATIENT_PRICING": "RPM التسعير المريض",
-      "SELECTED_PROVIDER": "مزود المختارة: {{provider}}",
-      "SELECT_PROVIDER": "حدد مزود",
       "SETTINGS": {
         "ANDROID_BUNDLE_ID": "Android Bundle ID",
         "APPID": "Application IDs",
@@ -170,7 +158,6 @@
     "AND": "and",
     "ANDROID_APP_ID": "الروبوت معرف التطبيق",
     "APP_STORE": "متجر التطبيقات",
-    "ASSOCIATE": "مساعد",
     "AS_OF": "اعتبارا من",
     "AUTO_ENROLL_CLIENT": "لصناعة السيارات في تسجيل العميل على جمعية",
     "AUTO_THREAD_PARTICIPATION": "التلقائي المشاركة الموضوع",
@@ -210,7 +197,6 @@
     "EMAIL_NOT_MATCH": "البريد الإلكتروني لا يتطابق",
     "EMAIL_TEMPLATES": "قوالب البريد الإلكتروني",
     "ENABLED": "تمكين",
-    "ENROLL": "يتسجل، يلتحق",
     "ERROR": "خطأ",
     "FEATURES": "المميزات",
     "FIELD_INVALID": "حقل غير صالح",
@@ -266,7 +252,6 @@
     "REMOVE_ENROLLMENTS_ON_ASSOC": "إزالة التسجيل المريض على الجمعيات",
     "REQUEST_RESET": "إعادة تعيين كلمة المرور",
     "RESET_PASSWORD": "إعادة تعيين كلمة المرور",
-    "RETRY": "إعادة المحاولة",
     "RPM": "RPM",
     "SAVE": "حفظ",
     "SAVE_PASSWORD": "حفظ كلمة المرور",
@@ -407,8 +392,6 @@
       "ACC_CREATED": "Account created",
       "ACC_DEACTIVATED": "Account deactivated",
       "ACC_UPDATED": "Account updated",
-      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "خلقت جمعية قائمة حملة نشطة بنجاح.",
-      "ACTIVE_CAMPAIGN_UPDATED": "جمعية قائمة حملة نشطة تجديد بنجاح.",
       "CHECK_RESET_EMAIL": "إذا وجدنا حسابًا مرتبطًا بعنوان البريد الإلكتروني الذي أدخلته ، فسنرسل إليك رسالة بريد إلكتروني لإعادة تعيين كلمة المرور في الدقائق القليلة القادمة. إذا لم تستلم بريدًا إلكترونيًا ، فتأكد من التحقق من مجلد البريد العشوائي ، أو جرب عناوين البريد الإلكتروني الأخرى التي قد تكون استخدمتها لحسابك.",
       "CLINIC_REMOVED": "تمّ إزالة العيادة",
       "EMAIL_TEMPLATE_SAVED": "تم حفظ قالب البريد الإلكتروني بنجاح.",
@@ -428,7 +411,6 @@
       "PERM_UPDATED": "Permission updated",
       "PHASE_UPDATED": "تم تحديث المرحلة بنجاح.",
       "PHONE_NUMBER_UPDATED": "تم تحديث رقم الهاتف بنجاح.",
-      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "مزود المرتبطة بنجاح إلى قائمة الحملة النشطة.",
       "SERVICE_SYNC_SUCCESS": "خدمة مزامنة بنجاح.",
       "SETTINGS_UPDATED": "Settings Updated"
     }
@@ -546,6 +528,9 @@
         },
         "ITG": {
           "CONFIRMATION": "تهانينا! تم تسجيل مؤسستك بنجاح. سيقوم أخصائي تنفيذ بالتواصل معك قريبًا لجدولة التدريب المباشر حسب الرغبة."
+        },
+        "NXTSTIM": {
+          "EMAIL_CONFIRMATION": "ستتلقى رسالة بريد إلكتروني قريبًا باستخدام رابط لتنشيط حساب مسؤول لوحة القيادة ، وتعيين كلمة المرور الخاصة بك ، وتسجيل الدخول. بالإضافة إلى ذلك ، ستتلقى تأكيدًا منفصلاً للبريد الإلكتروني مع معلومات العيادة الخاصة بك. سيتواصل مدير حسابك أيضًا لتقديم أنفسهم ، وجدولة التدريب ، ووضع اللمسات الأخيرة على طلب جهازك."
         },
         "SHAKEIT": {
           "ALL_DONE": "<strong>كله تمام!<strong>",

@@ -27,20 +27,10 @@
     },
     "NO_ASSOCIATED_SERVICES": "Keine zugehörigen Dienste",
     "ORGS": {
-      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Aktive Kampagne Verband-Status",
-      "ACTIVE_CAMPAIGN_LISTS": "Aktive Kampagnenlisten",
-      "ASSOC_ACTIVE_CAMPAIGN": "Associate aktive Kampagne",
-      "ASSOC_ALL_PROVIDERS": "Einschreiben nachträglich alle Anbieter an oder diese Klinik unter",
-      "ASSOC_ALL_PROVIDERS_CURRENT": "Einschreiben Anbieter {{provider}} ...",
-      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "Folgende Anbieter Fehler angezeigt, wenn sie zu einzuschreiben versuchen:",
-      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "Alle Anbieter eingeschrieben erfolgreich",
-      "ASSOC_ALL_PROVIDERS_WARNING": "Sie sind über alle Anbieter aus dieser Klinik einzuschreiben; dieser Vorgang kann eine Weile dauern, sind Sie sicher, dass Sie weitermachen?",
-      "ASSOC_PROVIDER_CAMPAIGN": "Einschreiben rückwirkend einen Anbieter",
       "BASE_PRICING": "Basispreise",
       "CHURN_DATE": "Churn Datum",
       "CREATE_NEW": "Klinik erstellen",
       "DOWNLOAD_QR_CODE": "Herunterladen QR-Code",
-      "EDIT_ACTIVE_CAMPAIGN": "Bearbeiten Aktive Kampagne Liste Verband",
       "EMAIL_TEMPLATE_INHERITED": "Diese Vorlage ist durch eine übergeordnete Klinik zur Verfügung. Es kann nur durch die Klinik bearbeitet oder gelöscht werden, die es besitzt.",
       "ENTITY": "Entität",
       "IS_BILLABLE": "Ist abrechenbare?",
@@ -55,8 +45,6 @@
       "RENEWAL_DATE": "Verlängerungsdatum",
       "RPM_NON_PATIENT_PRICING": "Per NonRPM Patient Pricing",
       "RPM_PATIENT_PRICING": "RPM Patient Preise",
-      "SELECTED_PROVIDER": "Ausgewählte Anbieter: {{provider}}",
-      "SELECT_PROVIDER": "Wählen Sie Provider",
       "SETTINGS": {
         "ANDROID_BUNDLE_ID": "Android Bundle ID",
         "APPID": "Anwendungs-IDs",
@@ -170,7 +158,6 @@
     "AND": "und",
     "ANDROID_APP_ID": "Android App-ID",
     "APP_STORE": "App Store",
-    "ASSOCIATE": "Assoziieren",
     "AS_OF": "Ab",
     "AUTO_ENROLL_CLIENT": "Client bei Zuordnung automatisch registrieren",
     "AUTO_THREAD_PARTICIPATION": "Automatische Gewinde-Teilnahme",
@@ -210,7 +197,6 @@
     "EMAIL_NOT_MATCH": "Email stimmt nicht überein",
     "EMAIL_TEMPLATES": "",
     "ENABLED": "aktiviert",
-    "ENROLL": "Einschreiben",
     "ERROR": "Error!",
     "FEATURES": "Eigenschaften",
     "FIELD_INVALID": "Feld ungültig",
@@ -266,7 +252,6 @@
     "REMOVE_ENROLLMENTS_ON_ASSOC": "Entfernen Sie die Anmeldungen des Patienten in Verbindung",
     "REQUEST_RESET": "Passwort zurücksetzen",
     "RESET_PASSWORD": "Passwort zurücksetzen",
-    "RETRY": "Wiederholen",
     "RPM": "RPM",
     "SAVE": "sparen",
     "SAVE_PASSWORD": "Passwort speichern",
@@ -407,8 +392,6 @@
       "ACC_CREATED": "Account erstellt",
       "ACC_DEACTIVATED": "Konto deaktiviert",
       "ACC_UPDATED": "Konto aktualisiert",
-      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "Aktive Kampagne Liste Verein erfolgreich erstellt.",
-      "ACTIVE_CAMPAIGN_UPDATED": "Aktive Kampagne Liste Verein erfolgreich aktualisiert.",
       "CHECK_RESET_EMAIL": "Wenn wir ein Konto finden, das mit der von Ihnen eingegebenen E-Mail-Adresse verknüpft ist, senden wir Ihnen in den nächsten Minuten eine E-Mail zum Zurücksetzen des Passwortes zu. Wenn Sie keine E-Mail erhalten haben, überprüfen Sie unbedingt Ihren Spam-Ordner oder versuchen Sie es mit anderen E-Mail-Adressen, die Sie möglicherweise für Ihr Konto verwendet haben.",
       "CLINIC_REMOVED": "Klinik entfernt",
       "EMAIL_TEMPLATE_SAVED": "",
@@ -428,7 +411,6 @@
       "PERM_UPDATED": "Berechtigungen aktualisiert",
       "PHASE_UPDATED": "Phase erfolgreich aktualisiert.",
       "PHONE_NUMBER_UPDATED": "Telefonnummer erfolgreich aktualisiert.",
-      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider erfolgreich aktive Kampagne Liste zugeordnet.",
       "SERVICE_SYNC_SUCCESS": "Service erfolgreich synchronisiert.",
       "SETTINGS_UPDATED": "Einstellungen aktualisiert"
     }
@@ -546,6 +528,9 @@
         },
         "ITG": {
           "CONFIRMATION": "Herzlichen Glückwunsch! Die Registrierung Ihrer Organisation war erfolgreich. Ein Implementierungsspezialist wird sich in Kürze mit Ihnen in Verbindung setzen, um auf Wunsch ein Live-Training zu vereinbaren."
+        },
+        "NXTSTIM": {
+          "EMAIL_CONFIRMATION": "Sie erhalten in Kürze eine E-Mail mit einem Link, um Ihr Dashboard-Administratorkonto zu aktivieren, Ihr Passwort festzulegen und sich anzumelden. Darüber hinaus erhalten Sie mit Ihren Klinikinformationen eine separate E-Mail-Bestätigung. Ihr Account Manager wendet sich auch darauf vor, sich vorzustellen, das Training zu planen und Ihre Gerätereihenfolge abzuschließen."
         },
         "SHAKEIT": {
           "ALL_DONE": "<Strong>Fertig!<Strong>",

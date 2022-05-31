@@ -27,20 +27,10 @@
     },
     "NO_ASSOCIATED_SERVICES": "Ingen tilknyttede tjenester",
     "ORGS": {
-      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Aktiv kampagne Association status",
-      "ACTIVE_CAMPAIGN_LISTS": "Aktive kampagnelisterne",
-      "ASSOC_ACTIVE_CAMPAIGN": "Associate aktiv kampagne",
-      "ASSOC_ALL_PROVIDERS": "Med tilbagevirkende kraft tilmelde alle udbydere på eller under denne klinik",
-      "ASSOC_ALL_PROVIDERS_CURRENT": "Tilmelding udbyder {{provider}} ...",
-      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "Følgende udbydere præsenterede fejl, når du forsøger at tilmelde dem:",
-      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "Alle udbydere tilmeldt med succes",
-      "ASSOC_ALL_PROVIDERS_WARNING": "Du er ved at tilmelde ALLE udbydere fra denne klinik; denne operation kan tage et stykke tid at gennemføre, er du sikker på at du vil fortsætte?",
-      "ASSOC_PROVIDER_CAMPAIGN": "Tilbagevirkende kraft tilmelde én udbyder",
       "BASE_PRICING": "Base Pricing",
       "CHURN_DATE": "Churn Dato",
       "CREATE_NEW": "Opret Klinik",
       "DOWNLOAD_QR_CODE": "Hent QR Code",
-      "EDIT_ACTIVE_CAMPAIGN": "Rediger aktiv kampagne liste Association",
       "EMAIL_TEMPLATE_INHERITED": "Denne skabelon er tilgængelig via en forælder klinik. Det kan kun redigeres eller slettes gennem klinikken, der ejer det.",
       "ENTITY": "Enhed",
       "IS_BILLABLE": "Er faktureres?",
@@ -55,8 +45,6 @@
       "RENEWAL_DATE": "Fornyelse Dato",
       "RPM_NON_PATIENT_PRICING": "Per NonRPM Patient Pricing",
       "RPM_PATIENT_PRICING": "RPM Patient Pricing",
-      "SELECTED_PROVIDER": "Valgt Provider: {{provider}}",
-      "SELECT_PROVIDER": "Vælg Provider",
       "SETTINGS": {
         "ANDROID_BUNDLE_ID": "Android Bundle ID",
         "APPID": "Applikation ID ‘er",
@@ -170,7 +158,6 @@
     "AND": "og",
     "ANDROID_APP_ID": "Android App-id",
     "APP_STORE": "App butik",
-    "ASSOCIATE": "Associate",
     "AS_OF": "Fra",
     "AUTO_ENROLL_CLIENT": "Tilmeld klient automatisk ved associering",
     "AUTO_THREAD_PARTICIPATION": "Automatisk Tråd Deltagelse",
@@ -210,7 +197,6 @@
     "EMAIL_NOT_MATCH": "E-mail adresserne er ikke ens",
     "EMAIL_TEMPLATES": "E-mail-skabeloner",
     "ENABLED": "Aktiveret",
-    "ENROLL": "Indskrive",
     "ERROR": "Fejl!",
     "FEATURES": "Funktioner",
     "FIELD_INVALID": "Felt ugyldigt",
@@ -266,7 +252,6 @@
     "REMOVE_ENROLLMENTS_ON_ASSOC": "Fjern patientens tilmeldinger på forening",
     "REQUEST_RESET": "Nulstil Adgangskode",
     "RESET_PASSWORD": "Nulstil Adgangskode",
-    "RETRY": "Prøve igen",
     "RPM": "RPM",
     "SAVE": "Gem",
     "SAVE_PASSWORD": "Gem Adgangskode",
@@ -407,8 +392,6 @@
       "ACC_CREATED": "Konto oprettet",
       "ACC_DEACTIVATED": "Konto deaktiveret",
       "ACC_UPDATED": "Konto opdateret",
-      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "Aktiv Kampagne Liste forening oprettet.",
-      "ACTIVE_CAMPAIGN_UPDATED": "Aktiv Kampagne Liste forening opdateret.",
       "CHECK_RESET_EMAIL": "Hvis vi finder en konto tilknyttet den email-adresse, du har indtastet, sender vi dig en email til e-mail til adgangskode igen i løbet af de næste par minutter. Hvis du ikke modtager en e-mail, skal du kontrollere din spammappe eller prøve andre e-mailadresser, du muligvis har brugt til din konto.",
       "CLINIC_REMOVED": "Klinik fjernet",
       "EMAIL_TEMPLATE_SAVED": "E-mail-skabelon er gemt.",
@@ -428,7 +411,6 @@
       "PERM_UPDATED": "Tilladelse opdateret",
       "PHASE_UPDATED": "Fase blev opdateret.",
       "PHONE_NUMBER_UPDATED": "Telefonnummer opdateret.",
-      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Provider held forbundet til aktiv kampagne List.",
       "SERVICE_SYNC_SUCCESS": "Tjeneste synkroniseret med succes.",
       "SETTINGS_UPDATED": "Indstillinger opdateret"
     }
@@ -546,6 +528,9 @@
         },
         "ITG": {
           "CONFIRMATION": "Tillykke! Din organisation er blevet registreret. En implementeringsspecialist vil snart være i kontakt med dig for at planlægge live træning, hvis det ønskes."
+        },
+        "NXTSTIM": {
+          "EMAIL_CONFIRMATION": "Du modtager snart en e-mail med et link til at aktivere din dashboard-administratorkonto, indstille din adgangskode og login. Derudover modtager du en separat e-mail-bekræftelse med dine kliniske oplysninger. Din kontoadministrator vil også nå ud til at introducere sig selv, planlægge træning og afslutte din enhedsordre."
         },
         "SHAKEIT": {
           "ALL_DONE": "<strong>Helt færdig!<strong>",

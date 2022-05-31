@@ -27,20 +27,10 @@
     },
     "NO_ASSOCIATED_SERVICES": "No hay servicios asociados",
     "ORGS": {
-      "ACTIVE_CAMPAIGN_ASSOC_STATUS": "Estado de Asociación de Active Campaign",
-      "ACTIVE_CAMPAIGN_LISTS": "Listas de Active Campaign",
-      "ASSOC_ACTIVE_CAMPAIGN": "Asociar Lista de Active Campaign",
-      "ASSOC_ALL_PROVIDERS": "Enrolar retroactivamente a todos los proveedores en o debajo de esta clínica",
-      "ASSOC_ALL_PROVIDERS_CURRENT": "Enrolando proveedor {{ provider }}...",
-      "ASSOC_ALL_PROVIDERS_RESULTS_ERRORS": "Los siguientes proveedores presentaron errores al intentar enrolarlos:",
-      "ASSOC_ALL_PROVIDERS_SUCCESSFULLY": "Todos los proveedores enrolados con éxito",
-      "ASSOC_ALL_PROVIDERS_WARNING": "Está a punto de inscribir a todos los proveedores de esta clínica y sus subclínicas; esta operación puede tardar un tiempo en completarse, ¿está seguro de que desea continuar?",
-      "ASSOC_PROVIDER_CAMPAIGN": "Enrolar retroactivamente a un proveedor",
       "BASE_PRICING": "Precio Base",
       "CHURN_DATE": "Fecha de Término",
       "CREATE_NEW": "Crear Clínica",
       "DOWNLOAD_QR_CODE": "Descargar Código QR",
-      "EDIT_ACTIVE_CAMPAIGN": "Editar Asociación a Lista de Active Campaign",
       "EMAIL_TEMPLATE_INHERITED": "Esta plantilla está disponible a través de una clínica superior. Sólo puede ser editada o eliminada desde la clínica que la posee.",
       "ENTITY": "Entidad",
       "IS_BILLABLE": "¿Es Facturable?",
@@ -55,8 +45,6 @@
       "RENEWAL_DATE": "Fecha de Renovación",
       "RPM_NON_PATIENT_PRICING": "Precio por Paciente NoRPM",
       "RPM_PATIENT_PRICING": "Precio de Paciente RPM",
-      "SELECTED_PROVIDER": "Proveedor seleccionado: {{provider}}",
-      "SELECT_PROVIDER": "Seleccione Proveedor",
       "SETTINGS": {
         "ANDROID_BUNDLE_ID": "Android Bundle ID",
         "APPID": "ID de las Aplicaciones",
@@ -170,7 +158,6 @@
     "AND": "y",
     "ANDROID_APP_ID": "ID de App de Android",
     "APP_STORE": "App Store",
-    "ASSOCIATE": "Asociar",
     "AS_OF": "A partir de",
     "AUTO_ENROLL_CLIENT": "Enrolar Cliente Automáticamente",
     "AUTO_THREAD_PARTICIPATION": "Participación Automática en Hilos",
@@ -210,7 +197,6 @@
     "EMAIL_NOT_MATCH": "Correo Electrónico no Coincide",
     "EMAIL_TEMPLATES": "Plantillas de Email",
     "ENABLED": "Habilitado",
-    "ENROLL": "Enrolar",
     "ERROR": "Error!",
     "FEATURES": "Características",
     "FIELD_INVALID": "Campo Inválido",
@@ -266,7 +252,6 @@
     "REMOVE_ENROLLMENTS_ON_ASSOC": "Eliminar Enrolamientos de Pacientes al Asociar",
     "REQUEST_RESET": "Cambiar Contraseña",
     "RESET_PASSWORD": "Restablecer Contraseña",
-    "RETRY": "Reintentar",
     "RPM": "RPM",
     "SAVE": "Guardar",
     "SAVE_PASSWORD": "Grabar Contraseña",
@@ -407,8 +392,6 @@
       "ACC_CREATED": "Cuenta creada",
       "ACC_DEACTIVATED": "Cuenta desactivada",
       "ACC_UPDATED": "Cuenta actualizada",
-      "ACTIVE_CAMPAIGN_LIST_ASSOCIATION_CREATED": "Asociación a lista de Active Campaign creada satisfactoriamente.",
-      "ACTIVE_CAMPAIGN_UPDATED": "Asociación a lista de Active Campaign actualizada satisfactoriamente.",
       "CHECK_RESET_EMAIL": "Si encontramos una cuenta asociada al correo electrónico que ingresó, le enviaremos un correo para restablecer su contraseña en los próximos minutos. Si no recibe un correo, revise la carpeta de Spam o bien intente otras direcciones de correo electrónico que pudiese haber usado para su cuenta.",
       "CLINIC_REMOVED": "Clínica eliminada",
       "EMAIL_TEMPLATE_SAVED": "Se ha guardado la plantilla satisfactoriamente.",
@@ -428,7 +411,6 @@
       "PERM_UPDATED": "Permiso actualizado",
       "PHASE_UPDATED": "Fase actualizada satisfactoriamente.",
       "PHONE_NUMBER_UPDATED": "Número de teléfono actualizado exitosamente.",
-      "PROVIDER_ASSOCIATED_ACTIVE_CAMPAIGN_LIST": "Proveedor satisfactoriamente asociado a lista de Active Campaign",
       "SERVICE_SYNC_SUCCESS": "Servicio sincronizado satisfactoriamente.",
       "SETTINGS_UPDATED": "Configuración actualizada"
     }
@@ -546,6 +528,9 @@
         },
         "ITG": {
           "CONFIRMATION": "¡Felicitaciones! Su organización ha sido registrada satisfactoriamente. Un especialista de implementación se pondrá en contacto con usted en breve para agente un entrenamiento en vivo, si así lo desea."
+        },
+        "NXTSTIM": {
+          "EMAIL_CONFIRMATION": "Recibirá un correo electrónico en breve con un enlace para activar su cuenta de administrador, configurar su contraseña e iniciar sesión en el panel. Además, recibirá una confirmación por correo electrónico por separado con la información de su clínica. El administrador de su cuenta también se presentará, coordinará el entrenamiento, y completará su orden de dispositivos."
         },
         "SHAKEIT": {
           "ALL_DONE": "<strong>¡Todo Listo!<strong>",

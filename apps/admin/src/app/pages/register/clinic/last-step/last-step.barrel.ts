@@ -6,6 +6,7 @@ import {
   ITGLastStepComponent,
   ShakeItLastStepComponent
 } from './'
+import { NXTSTIMLastStepComponent } from './nxtstim'
 
 export const LastStepComponents = [
   ApolloLastStepComponent,
@@ -13,5 +14,6 @@ export const LastStepComponents = [
   DefaultReducedLastStepComponent,
   InHealthLastStepComponent,
   ITGLastStepComponent,
+  NXTSTIMLastStepComponent,
   ShakeItLastStepComponent
 ]

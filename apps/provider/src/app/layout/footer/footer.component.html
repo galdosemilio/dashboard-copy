@@ -8,17 +8,17 @@
     </strong>
 
     <ul>
-      <li>
-        <a href="{{ linkTerms || 'https://www.coachcare.com/terms/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TOS' | translate }}</a>
+      <li *ngIf="linkTerms">
+        <a href="{{ linkTerms }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TOS' | translate }}</a>
       </li>
-      <li>
-        <a href="{{ linkPrivacy || 'https://www.coachcare.com/privacy/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
+      <li *ngIf="linkPrivacy">
+        <a href="{{ linkPrivacy }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
       </li>
-      <li>
-        <a href="{{ linkHipaa || 'https://www.coachcare.com/hipaa/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>
+      <li *ngIf="linkHipaa">
+        <a href="{{ linkHipaa }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>
       </li>
-      <li>
-        <a href="{{ linkMsa || 'https://www.coachcare.com/agreement/' }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MSA' | translate }}</a>
+      <li *ngIf="linkMsa">
+        <a href="{{ linkMsa }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MSA' | translate }}</a>
       </li>
     </ul>
 
