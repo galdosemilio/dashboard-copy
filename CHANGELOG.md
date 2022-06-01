@@ -1,3 +1,17 @@
+# [1.86.0](https://github.com/coachcare/dashboard/compare/v1.85.3...v1.86.0) (2022-06-01)
+
+
+### Bug Fixes
+
+* footer links now react to mala settings [FRON-2797] ([4bda1a5](https://github.com/coachcare/dashboard/commit/4bda1a51acbd89b56ffc9a2509e2d82273980218))
+* removed unnecessary providers [FRON-2733] ([f086174](https://github.com/coachcare/dashboard/commit/f08617464f1686caac829f2c814dbc0aa1cf766e))
+
+
+### Features
+
+* added custom nxtstim last step and made footer links dynamic [FRON-2797] ([c91f98e](https://github.com/coachcare/dashboard/commit/c91f98e9c47fba51721b5a04fb65acdd6c95418f))
+* added ecoai device [FRON-2770] ([62577c1](https://github.com/coachcare/dashboard/commit/62577c1338268fa40c0f3d64ba3f8dd124284866))
+
 ## [1.85.3](https://github.com/coachcare/dashboard/compare/v1.85.2...v1.85.3) (2022-05-25)
 
 
