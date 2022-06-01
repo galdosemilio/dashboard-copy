@@ -975,6 +975,12 @@
     },
     "_TITLE": "Digitalt Bibliotek"
   },
+  "LINK": {
+    "HIPAA": "https://www.coachcare.com/hipaa/",
+    "MSA": "https://www.coachcare.com/agreement/",
+    "PRIVACY": "https://www.coachcare.com/privacy/",
+    "TERMS": "https://www.coachcare.com/terms/"
+  },
   "MEASUREMENT": {
     "ABDOMEN": "Mave",
     "ADVANCED_PAIN_RELIEF": "Avanceret smertelindring",

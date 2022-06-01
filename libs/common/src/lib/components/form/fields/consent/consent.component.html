@@ -15,13 +15,13 @@
 
 <ng-template #provider>
   <span *ngIf="clinicMsa"><a href="{{ clinicMsa.link | translate }}" target="_blank" rel="noopener noreferrer">{{ clinicMsa.label | translate }}</a>, </span>
-  <a href="{{ linkMsa || 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MASTER_SUBSCRIPTION_AGREEMENT' | translate }}</a>,
-  <a href="{{ linkTerms || ('LINK.TERMS_OF_SERVICE' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>,
-  <a href="{{ linkPrivacy || ('LINK.PRIVACY_POLICY' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
+  <a *ngIf="linkMsa !== ''" href="{{ linkMsa || 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.MASTER_SUBSCRIPTION_AGREEMENT' | translate }}</a>,
+  <a *ngIf="linkTerms !== ''" href="{{ linkTerms || ('LINK.TERMS_OF_SERVICE' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}</a>,
+  <a *ngIf="linkPrivacy !== ''" href="{{ linkPrivacy || ('LINK.PRIVACY_POLICY' | translate) }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.PRIVACY_POLICY' | translate }}</a>
   {{ 'GLOBAL.AND' | translate }}
-  <a href="{{ linkHipaa || 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>.
+  <a *ngIf="linkHipaa !== ''" href="{{ linkHipaa || 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.HIPAA' | translate }}</a>.
   <!-- For clinic registration and password update -->
   {{ 'FIELD.CONSENT.TEXT_GDPR' | translate }}
-  <a href="{{ linkDpa || 'LINK.DPA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.DPA' | translate }}</a>.
+  <a *ngIf="linkDpa !== ''" href="{{ linkDpa || 'LINK.DPA' | translate }}" target="_blank" rel="noopener noreferrer">{{ 'LAYOUT.DPA' | translate }}</a>.
 </ng-template>
 

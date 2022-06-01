@@ -975,6 +975,12 @@
     },
     "_TITLE": "Livraria Digital"
   },
+  "LINK": {
+    "HIPAA": "https://www.coachcare.com/hipaa/",
+    "MSA": "https://www.coachcare.com/agreement/",
+    "PRIVACY": "https://www.coachcare.com/privacy/",
+    "TERMS": "https://www.coachcare.com/terms/"
+  },
   "MEASUREMENT": {
     "ABDOMEN": "Abdômen",
     "ADVANCED_PAIN_RELIEF": "Alívio avançado da dor",

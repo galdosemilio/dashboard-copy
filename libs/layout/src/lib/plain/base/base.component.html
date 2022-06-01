@@ -29,31 +29,31 @@
             {{ 'LAYOUT.CONTACT_US' | translate }}
           </a>
           <span class="text-separator">|</span>
-          <a *ngIf="linkTerms" href="{{ linkTerms }}" target="_blank" rel="noopener noreferrer">
+          <a *ngIf="linkTerms !== ''" href="{{ linkTerms || 'LINK.TERMS_OF_SERVICE' | translate }}" target="_blank" rel="noopener noreferrer">
             {{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}
           </a>
         </div>
         <span *ngIf="linkTerms" class="text-separator" fxShow fxHide.xs>|</span>
         <div>
-          <ng-container *ngIf="linkPrivacy">
-            <a href="{{ linkPrivacy }}" target="_blank" rel="noopener noreferrer">
+          <ng-container *ngIf="linkPrivacy !== ''">
+            <a href="{{ linkPrivacy || 'LINK.PRIVACY_POLICY' | translate }}" target="_blank" rel="noopener noreferrer">
               {{ 'LAYOUT.PRIVACY_POLICY' | translate }}
             </a>
             <span class="text-separator">|</span>
           </ng-container>
-          <ng-container *ngIf="linkHipaa">
-            <a href="{{ linkHipaa }}" target="_blank" rel="noopener noreferrer">
+          <ng-container *ngIf="linkHipaa !== ''">
+            <a href="{{ linkHipaa || 'LINK.HIPAA' | translate }}" target="_blank" rel="noopener noreferrer">
               {{ 'LAYOUT.HIPAA' | translate }}
             </a>
             <span class="text-separator">|</span>
           </ng-container>
-          <ng-container *ngIf="linkMsa">
-            <a href="{{ linkMsa }}" target="_blank" rel="noopener noreferrer">
+          <ng-container *ngIf="linkMsa !== ''">
+            <a href="{{ linkMsa || 'LINK.MSA' | translate }}" target="_blank" rel="noopener noreferrer">
               {{ 'LAYOUT.MSA' | translate }}
             </a>
             <span class="text-separator">|</span>
           </ng-container>
-          <a *ngIf="linkDpa" href="{{ linkDpa }}" target="_blank" rel="noopener noreferrer">
+          <a *ngIf="linkDpa !== ''" href="{{ linkDpa || 'LINK.DPA' | translate }}" target="_blank" rel="noopener noreferrer">
             {{ 'LAYOUT.DPA' | translate }}
           </a>
         </div>
