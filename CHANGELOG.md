@@ -1,3 +1,10 @@
+## [1.86.2](https://github.com/coachcare/dashboard/compare/v1.86.1...v1.86.2) (2022-06-02)
+
+
+### Bug Fixes
+
+* link terms separator appears if omitted ([054d8c3](https://github.com/coachcare/dashboard/commit/054d8c3510bce74d14a090f60a7acb6367cb4bfe))
+
 ## [1.86.1](https://github.com/coachcare/dashboard/compare/v1.86.0...v1.86.1) (2022-06-02)
 
 
