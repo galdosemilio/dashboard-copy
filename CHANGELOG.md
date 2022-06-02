@@ -1,3 +1,11 @@
+## [1.86.1](https://github.com/coachcare/dashboard/compare/v1.86.0...v1.86.1) (2022-06-02)
+
+
+### Bug Fixes
+
+* adjusted dynamic footer behavior [FRON-2797] ([e057954](https://github.com/coachcare/dashboard/commit/e05795461a43b8398a5dcda52b494dcd5810d279))
+* adjusted wrongly inverted expression [FRON-2814] ([f536761](https://github.com/coachcare/dashboard/commit/f536761d9ccf6e533851755a11009524cc8fc7f2))
+
 # [1.86.0](https://github.com/coachcare/dashboard/compare/v1.85.3...v1.86.0) (2022-06-01)
 
 
