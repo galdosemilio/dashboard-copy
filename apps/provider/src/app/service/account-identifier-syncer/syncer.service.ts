@@ -110,7 +110,7 @@ export class AccountIdentifierSyncer {
     return new Promise<void>(async (resolve, reject) => {
       try {
         if (!identifiers?.length) {
-          return
+          return resolve()
         }
 
         const dirtyIdentifiers = identifiers.filter(

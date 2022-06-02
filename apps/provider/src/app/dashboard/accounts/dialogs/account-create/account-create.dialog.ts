@@ -44,11 +44,10 @@ export interface AccountCreateDialogData {
   ]
 })
 export class AccountCreateDialog implements BindForm, OnInit {
-  form: FormGroup
-  temp: {}
-  zendeskLink = ''
-  markAsTouched$: Subject<void> = new Subject<void>()
-  private organization: any
+  public form: FormGroup
+  public markAsTouched$: Subject<void> = new Subject<void>()
+  public temp: {}
+  public zendeskLink = ''
 
   constructor(
     private accIdentifierSyncer: AccountIdentifierSyncer,
@@ -63,33 +62,31 @@ export class AccountCreateDialog implements BindForm, OnInit {
     private formUtils: FormUtils,
     private packageEnrollment: PackageEnrollment,
     private addressProvider: AddressProvider
-  ) {
-    this.data = data ? data : {}
+  ) {}
+
+  public ngOnInit(): void {
+    this.data = this.data ?? {}
 
     this.zendeskLink =
-      data.accountType === 'coach'
+      this.data.accountType === 'coach'
         ? 'https://coachcare.zendesk.com/hc/en-us/articles/360019620832-Setting-the-Coach-Permissions'
         : ''
-  }
 
-  ngOnInit() {
-    this.organization = this.context.organization
     this.createForm()
   }
 
-  createForm() {
-    this.form = this.builder.group({
-      accountType: 'dieter'
-    })
-    this.form.patchValue(this.data)
-  }
-
-  onTypeChange(values) {
+  public onTypeChange(values): void {
     this.temp = Object.assign({}, this.temp, values)
   }
 
-  onSubmit() {
-    if (this.form.valid) {
+  public async onSubmit(): Promise<void> {
+    try {
+      if (this.form.invalid) {
+        this.formUtils.markAsTouched(this.form)
+        this.markAsTouched$.next()
+        return
+      }
+
       // collect and format the account data
       const type = this.data.accountType
         ? this.data.accountType
@@ -125,97 +122,77 @@ export class AccountCreateDialog implements BindForm, OnInit {
           }
           break
       }
+
       // save the account
-      this.account
-        .add(data)
-        .then(async (response) => {
-          data.id = response.id
+      const response = await this.account.add(data)
+      let selectedClinics = []
+      data.id = response.id
 
-          // save associations
-          switch (type) {
-            case 'dieter':
-              await this.enrollAccToPkgs({
-                account: data.id,
-                packages: Array.isArray(data.packages) ? data.packages : []
-              })
-              await this.syncIdentifiers({
-                identifiers: data.identifiers,
-                account: data.id
-              })
-              await this.updateGoals({ account: data.id, goals: goals })
-              break
-            case 'coach':
-              // coach associations with its permissions
-              clinics
-                .filter((c) => c.picked)
-                .forEach((c) => {
-                  this.affiliation
-                    .associate({
-                      account: data.id,
-                      organization: c.clinicId
-                    })
-                    .then(() => {
-                      void this.affiliation.update({
-                        account: data.id,
-                        organization: c.clinicId,
-                        permissions: {
-                          viewAll: c.accessall,
-                          admin: c.admin,
-                          allowClientPhi: c.allowClientPhi || undefined
-                        }
-                      })
-                    })
-                    .catch((err) => this.notifier.error(err))
-                })
-              break
+      // save associations
+      switch (type) {
+        case 'dieter':
+          await this.enrollAccToPkgs({
+            account: data.id,
+            packages: Array.isArray(data.packages) ? data.packages : []
+          })
+
+          await this.syncIdentifiers({
+            identifiers: data.identifiers,
+            account: data.id
+          })
+          await this.updateGoals({ account: data.id, goals: goals })
+          break
+        case 'coach':
+          // coach associations with its permissions
+          selectedClinics = clinics.filter((c) => c.picked)
+
+          for (const clinic of selectedClinics) {
+            await this.affiliation.associate({
+              account: data.id,
+              organization: clinic.clinicId
+            })
+
+            await this.affiliation.update({
+              account: data.id,
+              organization: clinic.clinicId,
+              permissions: {
+                viewAll: clinic.accessall,
+                admin: clinic.admin,
+                allowClientPhi: clinic.allowClientPhi || undefined
+              }
+            })
           }
 
-          if (data.addresses?.length) {
-            for (const address of data.addresses) {
-              await this.addressProvider.createAddress({
-                account: data.id,
-                address1: address.address1,
-                address2: address.address2 || undefined,
-                city: address.city,
-                country: address.country,
-                labels: address.labels,
-                postalCode: address.postalCode,
-                stateProvince: address.stateProvince
-              })
-            }
-          }
-          // return the result to the caller component
-          this.dialogRef.close(data)
-        })
-        .catch((err) => this.notifier.error(err))
-    } else {
-      this.formUtils.markAsTouched(this.form)
-      this.markAsTouched$.next()
+          break
+      }
+
+      if (data.addresses?.length) {
+        for (const address of data.addresses) {
+          await this.addressProvider.createAddress({
+            account: data.id,
+            address1: address.address1,
+            address2: address.address2 || undefined,
+            city: address.city,
+            country: address.country,
+            labels: address.labels,
+            postalCode: address.postalCode,
+            stateProvince: address.stateProvince
+          })
+        }
+      }
+
+      // return the result to the caller component
+      this.dialogRef.close(data)
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 
-  private associateAccToOrg(args: any): Promise<void> {
-    return new Promise<void>(async (resolve, reject) => {
-      try {
-        await this.affiliation.associate({
-          account: args.account,
-          organization: args.organization
-        })
-        resolve()
-      } catch (error) {
-        this.notifier.error(error, {
-          log: true,
-          data: {
-            type: 'account-create',
-            functionType: 'associateAccToOrg',
-            account: args.account,
-            organization: args.organization,
-            message: 'failed to associate account to organization'
-          }
-        })
-        reject(error)
-      }
+  private createForm(): void {
+    this.form = this.builder.group({
+      accountType: 'dieter'
     })
+    this.form.patchValue(this.data)
   }
 
   private enrollAccToPkgs(args: any): Promise<void> {
