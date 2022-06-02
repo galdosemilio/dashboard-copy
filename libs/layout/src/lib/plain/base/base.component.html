@@ -33,7 +33,7 @@
             {{ 'LAYOUT.TERMS_OF_SERVICE' | translate }}
           </a>
         </div>
-        <span *ngIf="linkTerms" class="text-separator" fxShow fxHide.xs>|</span>
+        <span *ngIf="linkTerms !== ''" class="text-separator" fxShow fxHide.xs>|</span>
         <div>
           <ng-container *ngIf="linkPrivacy !== ''">
             <a href="{{ linkPrivacy || 'LINK.PRIVACY_POLICY' | translate }}" target="_blank" rel="noopener noreferrer">
