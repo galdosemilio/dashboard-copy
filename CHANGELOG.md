@@ -1,3 +1,11 @@
+## [1.86.3](https://github.com/coachcare/dashboard/compare/v1.86.2...v1.86.3) (2022-06-03)
+
+
+### Bug Fixes
+
+* separated instant and date requests [FRON-2820] ([29d88c2](https://github.com/coachcare/dashboard/commit/29d88c2b1da643ff8b9faa6c5dfdd3c9bb1658c5))
+* solved issue with account creation [FRON-2819] ([139a021](https://github.com/coachcare/dashboard/commit/139a0213ec8161013e490509b6f5aad1347c005a))
+
 ## [1.86.2](https://github.com/coachcare/dashboard/compare/v1.86.1...v1.86.2) (2022-06-02)
 
 
