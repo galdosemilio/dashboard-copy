@@ -25,10 +25,12 @@ import {
   convertFromReadableFormat,
   convertToReadableFormat,
   convertUnitToPreferenceFormat,
+  CreateMeasurementDataPointGroup,
   MeasurementDataPointProvider,
   MeasurementDataPointType,
   MeasurementDataPointTypeAssociation,
-  MeasurementLabelEntry
+  MeasurementLabelEntry,
+  MeasurementSource
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as moment from 'moment'
@@ -41,7 +43,12 @@ import {
   MeasurementMetadataProp,
   MEASUREMENT_METADATA_MAP
 } from '@app/shared/model/measurementMetadata'
-import { chain, intersection, set } from 'lodash'
+import { chain, groupBy, intersection, set } from 'lodash'
+
+enum Span {
+  INSTANT = '1',
+  DATE = '2'
+}
 
 @UntilDestroy()
 @Component({
@@ -190,6 +197,56 @@ export class AddMeasurementsV2Component implements OnInit {
     })
   }
 
+  private async attemptToAddMeasurement(
+    payload: CreateMeasurementDataPointGroup,
+    upsert: boolean
+  ): Promise<void> {
+    let date: moment.Moment = moment(payload.recordedAt)
+    const now = moment()
+
+    let savedMeasurement: boolean
+    let attempts
+    let error: string
+
+    if (date.isBefore(now, 'day')) {
+      attempts = 0
+      date.set('hour', 23)
+      date.set('minute', 59)
+      date.set('second', 0)
+    } else {
+      attempts = this.maxAddAttempts
+      date = now
+    }
+
+    do {
+      try {
+        error = ''
+        if (upsert) {
+          await this.dataPoint.upsertGroupDataPoint({
+            ...payload,
+            recordedAt: date.toISOString()
+          })
+        } else {
+          await this.dataPoint.createGroup({
+            ...payload,
+            recordedAt: date.toISOString()
+          })
+        }
+
+        savedMeasurement = true
+      } catch (err) {
+        error = err
+        date = date.clone().add(1, 'second')
+      } finally {
+        ++attempts
+      }
+    } while (!savedMeasurement && attempts < this.maxAddAttempts)
+
+    if (error) {
+      throw new Error(error)
+    }
+  }
+
   private createLabelsForm(): void {
     this.labelsForm = this.fb.group({
       label: [],
@@ -271,6 +328,38 @@ export class AddMeasurementsV2Component implements OnInit {
     )
   }
 
+  private createPayload(
+    types: MeasurementDataPointTypeAssociation[],
+    formValue,
+    metadataFormValue
+  ): CreateMeasurementDataPointGroup {
+    const date: moment.Moment = moment(this.labelsForm.value.date.toISOString())
+
+    const payload = {
+      account: this.context.accountId,
+      dataPoints: types
+        .map((typeAssoc, idx) =>
+          formValue[idx]
+            ? {
+                type: typeAssoc.type.id,
+                value: formValue[idx]
+              }
+            : null
+        )
+        .filter((dataPoint) => dataPoint !== null),
+      recordedAt: date.toISOString(),
+      source: MeasurementSource.MANUAL
+    }
+
+    if (metadataFormValue.length > 0) {
+      metadataFormValue.forEach((value, idx) =>
+        set(payload, this.metadataEntries[idx].payloadRoute, value)
+      )
+    }
+
+    return payload
+  }
+
   private convertFormValue(values: number[]): number[] {
     return values.map((value, idx) =>
       value
@@ -322,68 +411,32 @@ export class AddMeasurementsV2Component implements OnInit {
       const formValue = this.measurementForm.value
       const metadataFormValue = this.metadataForm.value
       const convertedFormValue = this.convertFormValue(formValue)
-      let date: moment.Moment = moment(this.labelsForm.value.date.toISOString())
-      const now = moment()
-      const usesUpsert = this.typesAssoc.some(
-        (typeAssoc) => typeAssoc.type.span.id === '2'
+
+      const groupedAssocs = groupBy(
+        this.typesAssoc,
+        (assoc) => assoc.type.span.id
       )
 
-      let savedMeasurement: boolean
-      let attempts
-      let error: string
+      const dateTypesAssoc = groupedAssocs[Span.DATE] ?? []
+      const instantTypesAssoc = groupedAssocs[Span.INSTANT] ?? []
 
-      if (date.isBefore(now, 'day')) {
-        attempts = 0
-        date.set('hour', 23)
-        date.set('minute', 59)
-        date.set('second', 0)
-      } else {
-        attempts = this.maxAddAttempts
-        date = now
+      const instantPayload = this.createPayload(
+        instantTypesAssoc,
+        convertedFormValue,
+        metadataFormValue
+      )
+      const datePayload = this.createPayload(
+        dateTypesAssoc,
+        convertedFormValue,
+        metadataFormValue
+      )
+
+      if (instantTypesAssoc.length) {
+        await this.attemptToAddMeasurement(instantPayload, false)
       }
 
-      do {
-        try {
-          error = ''
-          const payload = {
-            account: this.context.accountId,
-            dataPoints: this.typesAssoc
-              .map((typeAssoc, idx) =>
-                convertedFormValue[idx]
-                  ? {
-                      type: typeAssoc.type.id,
-                      value: convertedFormValue[idx]
-                    }
-                  : null
-              )
-              .filter((dataPoint) => dataPoint !== null),
-            recordedAt: date.toISOString(),
-            source: '3'
-          }
-
-          if (metadataFormValue.length > 0) {
-            metadataFormValue.forEach((value, idx) =>
-              set(payload, this.metadataEntries[idx].payloadRoute, value)
-            )
-          }
-
-          if (usesUpsert) {
-            await this.dataPoint.upsertGroupDataPoint(payload)
-          } else {
-            await this.dataPoint.createGroup(payload)
-          }
-
-          savedMeasurement = true
-        } catch (err) {
-          error = err
-          date = date.clone().add(1, 'second')
-        } finally {
-          ++attempts
-        }
-      } while (!savedMeasurement && attempts < this.maxAddAttempts)
-
-      if (error) {
-        throw new Error(error)
+      if (dateTypesAssoc.length) {
+        await this.attemptToAddMeasurement(datePayload, true)
       }
 
       this.notifier.success(_('NOTIFY.SUCCESS.MEASUREMENT_ADDED'))
