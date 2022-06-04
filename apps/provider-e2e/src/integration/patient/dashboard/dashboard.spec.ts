@@ -15,20 +15,10 @@ describe('Patient Dashboard', function () {
       .should('contain', 'Upcoming')
       .should('contain', 'Appointment')
       .should('contain', 'Initial 1 on 1 meeting Appointment')
-      .should('contain', 'Tue')
-      .should('contain', 'Dec 31')
-      .should('contain', '2019')
-      .should('contain', '10:00')
-      .should('contain', '10:30 pm')
-  })
-
-  it('Loads properly for WellCore', function () {
-    cy.setOrganization('wellcore')
-    standardSetup({ mode: 'client' })
-
-    cy.visit('/dashboard')
-
-    // @TODO: update this check once the dashboard has been confirmed
-    cy.get('app-wellcore-dashboard').should('exist')
+      .should('contain', 'Wed')
+      .should('contain', 'Jan 1')
+      .should('contain', '2020')
+      .should('contain', '12:00')
+      .should('contain', '12:30 am')
   })
 })

@@ -92,9 +92,9 @@ describe('Clinics -> Clinic -> Measurements', function () {
       .eq(10)
       .should('contain', '24')
       .should('contain', 'Sleep')
-      .should('contain', 's')
+      .should('contain', 'minutes')
       .should('contain', '1')
-      .should('contain', '86400')
+      .should('contain', '1440')
 
     cy.get('@dataTypeRows')
       .eq(11)

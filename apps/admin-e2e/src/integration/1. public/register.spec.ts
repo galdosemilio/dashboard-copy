@@ -136,6 +136,11 @@ describe('Register New Clinic', function () {
     cy.setTimezone('et')
     standardSetup(false)
 
+    cy.intercept('HEAD', '2.0/account?**', {
+      statusCode: 404,
+      body: {}
+    })
+
     cy.intercept('POST', '3.0/ccr/register', (request) => {
       expect(request.body.account.firstName).to.contain('Eric')
       expect(request.body.account.lastName).to.contain('Di Bari')
@@ -341,12 +346,12 @@ describe('Register New Clinic', function () {
 
     assessDisplayedPlan({
       name: 'Virtual Health',
-      price: 425
+      price: 'Request Order Form for pricing and terms'
     })
 
     assessDisplayedPlan({
       name: 'Virtual Health',
-      price: 350
+      price: 'Request Order Form for pricing and terms'
     })
 
     assessDisplayedPlan({

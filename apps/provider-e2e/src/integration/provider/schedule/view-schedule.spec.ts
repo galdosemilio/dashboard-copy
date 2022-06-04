@@ -2,7 +2,7 @@ import { standardSetup } from '../../../support'
 import { assertMeeting, selectDate, setViewMode } from './utils'
 
 describe('Schedule -> view', function () {
-  it.only('Schedule shows properly in ET (New York)', function () {
+  it('Schedule shows properly in ET (New York)', function () {
     cy.setTimezone('et')
     standardSetup()
 
@@ -10,7 +10,7 @@ describe('Schedule -> view', function () {
 
     cy.get('.calendar-wrapper').should('exist')
 
-    cy.tick(1000)
+    cy.tick(10000)
 
     // Main buttons
     cy.get('.calendar-wrapper').find('th').as('calendarHeaders')
@@ -53,6 +53,10 @@ describe('Schedule -> view', function () {
     standardSetup()
 
     cy.visit(`/schedule/view`)
+
+    cy.get('.calendar-wrapper').should('exist')
+
+    cy.tick(10000)
 
     // Main buttons
     cy.get('.calendar-wrapper').find('th').as('calendarHeaders')

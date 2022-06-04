@@ -14,7 +14,7 @@ describe('Lefthand menu (resources link)', function () {
     })
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('app-dieters-table')
+    cy.get('ccr-dieters-table')
 
     cy.get('app-menu').find('app-sidenav-item').not('.hidden').as('menuLinks')
 

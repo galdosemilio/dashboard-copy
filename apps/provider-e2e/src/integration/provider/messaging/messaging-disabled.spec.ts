@@ -14,7 +14,7 @@ describe('Organization Messaging Preference', function () {
       .should('have.length', 1)
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('app-dieters-table')
+    cy.get('ccr-dieters-table')
   })
 
   it('Messaging is hidden in menu', function () {
@@ -36,6 +36,6 @@ describe('Organization Messaging Preference', function () {
       .should('have.length', 0)
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('app-dieters-table')
+    cy.get('ccr-dieters-table')
   })
 })

@@ -2,7 +2,7 @@ import { standardSetup } from '../../../support'
 import { createClinic } from './utils'
 
 describe('Dashboard -> Clinics', function () {
-  it.only('Creates a new clinic', function () {
+  it('Creates a new clinic', function () {
     cy.setOrganization('inhealth')
     standardSetup()
     cy.visit(`/accounts/clinics`)

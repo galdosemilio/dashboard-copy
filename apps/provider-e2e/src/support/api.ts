@@ -60,16 +60,15 @@ const interceptCoreApiCalls = (
     data.id = Cypress.env('organizationId')
     data.content.enabled = Cypress.env('organizationId') === 1 ? true : false
 
-    cy.intercept(
-      'GET',
-      `/4.0/organization/${Cypress.env('organizationId')}/preference**`,
-      { body: data }
-    )
-
     cy.intercept('GET', `/4.0/organization/undefined/preference**`, {
       body: data
     })
   })
+
+  cy.intercept('GET', `/4.0/organization/*/preference**`, {
+    fixture: 'api/organization/getMala'
+  })
+
   cy.fixture('api/sequence/getOrgPreference').then((data) => {
     data.id = Cypress.env('organizationId')
     data.isActive = Cypress.env('organizationId') === 1 ? true : false
@@ -179,12 +178,6 @@ const interceptCoreApiCalls = (
     fixture: fetchOverride('/2.0/message/unread', 'api/message/getUnreadNone')
   })
   cy.intercept('GET', '/3.0/conference/video/call**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
-  // cy.intercept('GET', '/1.0/conference/subaccount**', {
-  //   fixture: 'api/general/emptyData'
-  // })
-  cy.intercept('GET', '/4.0/meeting**', {
     fixture: 'api/general/emptyDataEmptyPagination'
   })
   cy.intercept('GET', '/2.0/message/thread?**', {

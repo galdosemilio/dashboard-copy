@@ -39,7 +39,7 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
 
   private dataSource: MeetingsDataSource
   private hasOngoingCall = false
-  private joinStatusInterval?: number = null
+  private joinStatusInterval? = null
 
   constructor(
     private context: ContextService,
@@ -127,7 +127,7 @@ export class CcrNextMeetingComponent implements OnDestroy, OnInit {
   }
 
   public isProviderAttendee(attendee): boolean {
-    return Number(attendee.accountType.id) === AccountType.Provider
+    return Number(attendee.accountType?.id) === AccountType.Provider
   }
 
   public attendeeName(attendee): string {

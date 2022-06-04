@@ -14,7 +14,7 @@ describe('Lefthand menu (orphaned provider)', function () {
     cy.get('[data-cy="empty-menu"]').should('not.exist')
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('app-dieters-table')
+    cy.get('ccr-dieters-table')
   })
 
   it('No links should be visible (no org access)', function () {

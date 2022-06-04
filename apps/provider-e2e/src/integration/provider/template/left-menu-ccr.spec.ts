@@ -44,7 +44,7 @@ describe('Lefthand menu (standard)', function () {
     cy.get('@menuLinks').eq(24).should('contain', 'FAQ & Support Guides')
 
     // Adding for Cypress issue where page continues to load after spec is done
-    cy.get('app-dieters-table', {
+    cy.get('ccr-dieters-table', {
       timeout: 12000
     })
   })

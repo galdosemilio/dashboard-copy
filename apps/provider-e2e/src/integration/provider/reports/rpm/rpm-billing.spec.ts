@@ -9,7 +9,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.tick(100)
 
-    cy.get('mat-table', { timeout: 10000 }).find('mat-row').as('rpmBillingRows')
+    cy.get('table', { timeout: 10000 }).find('tr').as('rpmBillingRows')
 
     cy.get('@rpmBillingRows').should('have.length', 5)
 
@@ -18,11 +18,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
       .should('contain', 'Eric')
       .should('contain', 'Di Bari')
 
-    cy.get('@rpmBillingRows')
-      .eq(4)
-      .find('mat-cell')
-      .eq(7)
-      .should('contain', '1')
+    cy.get('@rpmBillingRows').eq(4).find('td').eq(7).should('contain', '1')
 
     cy.get('@rpmBillingRows')
       .eq(3)
@@ -31,8 +27,8 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.get('@rpmBillingRows')
       .eq(3)
-      .find('mat-cell')
-      .eq(7)
+      .find('td')
+      .eq(9)
       .should('contain', '20m')
       .should('contain', '1')
 
@@ -59,7 +55,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.visit(`/reports/rpm/billing`)
 
     cy.tick(100)
-    cy.get('mat-table', { timeout: 10000 }).find('mat-row').as('rpmBillingRows')
+    cy.get('table', { timeout: 10000 }).find('tr').as('rpmBillingRows')
 
     cy.get('@rpmBillingRows').should('have.length', 5)
 
@@ -68,11 +64,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
       .should('contain', 'Eric')
       .should('contain', 'Di Bari')
 
-    cy.get('@rpmBillingRows')
-      .eq(4)
-      .find('mat-cell')
-      .eq(7)
-      .should('contain', '1')
+    cy.get('@rpmBillingRows').eq(4).find('td').eq(7).should('contain', '1')
 
     cy.get('@rpmBillingRows')
       .eq(3)
@@ -81,8 +73,8 @@ describe('Reports -> RPM -> RPM Billing', function () {
 
     cy.get('@rpmBillingRows')
       .eq(3)
-      .find('mat-cell')
-      .eq(7)
+      .find('td')
+      .eq(9)
       .should('contain', '20m')
       .should('contain', '1')
 
@@ -108,18 +100,11 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.visit(`/reports/rpm/billing`)
 
     cy.tick(100)
-    cy.get('mat-table', { timeout: 10000 }).find('mat-row').as('rpmBillingRows')
+    cy.get('table', { timeout: 10000 }).find('tr').as('rpmBillingRows')
 
     cy.get('@rpmBillingRows').should('have.length', 5)
 
-    cy.get('@rpmBillingRows')
-      .eq(1)
-      .find('mat-cell')
-      .eq(7)
-      .find('table')
-      .eq(3)
-      .find('tr')
-      .should('contain', '99457')
+    cy.get('table').find('th').eq(9).should('contain', '99457')
   })
 
   it('Shows the total count underneath the title', function () {
@@ -129,7 +114,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.visit(`/reports/rpm/billing`)
 
     cy.tick(100)
-    cy.get('mat-table', { timeout: 10000 }).find('mat-row').as('rpmBillingRows')
+    cy.get('table', { timeout: 10000 }).find('tr').as('rpmBillingRows')
 
     cy.get('app-reports-rpm-billing').find('h3').should('contain', '5 Patients')
   })
@@ -148,7 +133,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.visit(`/reports/rpm/billing`)
 
     cy.tick(100)
-    cy.get('mat-table', { timeout: 10000 }).find('mat-row')
+    cy.get('table', { timeout: 10000 }).find('tr')
 
     cy.get('app-reports-rpm-billing')
       .find('button')
@@ -172,7 +157,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.visit(`/reports/rpm/billing`)
 
     cy.tick(100)
-    cy.get('mat-table', { timeout: 10000 }).find('mat-row')
+    cy.get('table', { timeout: 10000 }).find('tr')
 
     cy.get('app-reports-rpm-billing')
       .find('button')
@@ -196,7 +181,7 @@ describe('Reports -> RPM -> RPM Billing', function () {
     cy.visit(`/reports/rpm/billing`)
 
     cy.tick(100)
-    cy.get('mat-table', { timeout: 10000 }).find('mat-row')
+    cy.get('table', { timeout: 10000 }).find('tr')
 
     cy.get('app-reports-rpm-billing')
       .find('button')
