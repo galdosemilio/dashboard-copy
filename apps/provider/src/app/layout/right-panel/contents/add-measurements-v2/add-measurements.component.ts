@@ -43,11 +43,16 @@ import {
   MeasurementMetadataProp,
   MEASUREMENT_METADATA_MAP
 } from '@app/shared/model/measurementMetadata'
-import { chain, groupBy, intersection, set } from 'lodash'
+import { chain, intersection, set } from 'lodash'
 
 enum Span {
   INSTANT = '1',
   DATE = '2'
+}
+
+interface DataPointTypeAssociationWithIndex {
+  index: number
+  assoc: MeasurementDataPointTypeAssociation
 }
 
 @UntilDestroy()
@@ -329,7 +334,7 @@ export class AddMeasurementsV2Component implements OnInit {
   }
 
   private createPayload(
-    types: MeasurementDataPointTypeAssociation[],
+    types: DataPointTypeAssociationWithIndex[],
     formValue,
     metadataFormValue
   ): CreateMeasurementDataPointGroup {
@@ -338,11 +343,11 @@ export class AddMeasurementsV2Component implements OnInit {
     const payload = {
       account: this.context.accountId,
       dataPoints: types
-        .map((typeAssoc, idx) =>
-          formValue[idx]
+        .map((typeAssocEntry) =>
+          formValue[typeAssocEntry.index]
             ? {
-                type: typeAssoc.type.id,
-                value: formValue[idx]
+                type: typeAssocEntry.assoc.type.id,
+                value: formValue[typeAssocEntry.index]
               }
             : null
         )
@@ -412,13 +417,25 @@ export class AddMeasurementsV2Component implements OnInit {
       const metadataFormValue = this.metadataForm.value
       const convertedFormValue = this.convertFormValue(formValue)
 
-      const groupedAssocs = groupBy(
-        this.typesAssoc,
-        (assoc) => assoc.type.span.id
+      const { dateTypesAssoc, instantTypesAssoc } = this.typesAssoc.reduce(
+        (typesAcc, assoc, index) =>
+          assoc.type.span.id === Span.DATE
+            ? {
+                dateTypesAssoc: [...typesAcc.dateTypesAssoc, { assoc, index }],
+                instantTypesAssoc: typesAcc.instantTypesAssoc
+              }
+            : {
+                dateTypesAssoc: typesAcc.dateTypesAssoc,
+                instantTypesAssoc: [
+                  ...typesAcc.instantTypesAssoc,
+                  { assoc, index }
+                ]
+              },
+        {
+          dateTypesAssoc: [] as DataPointTypeAssociationWithIndex[],
+          instantTypesAssoc: [] as DataPointTypeAssociationWithIndex[]
+        }
       )
-
-      const dateTypesAssoc = groupedAssocs[Span.DATE] ?? []
-      const instantTypesAssoc = groupedAssocs[Span.INSTANT] ?? []
 
       const instantPayload = this.createPayload(
         instantTypesAssoc,
@@ -431,11 +448,11 @@ export class AddMeasurementsV2Component implements OnInit {
         metadataFormValue
       )
 
-      if (instantTypesAssoc.length) {
+      if (instantPayload.dataPoints.length) {
         await this.attemptToAddMeasurement(instantPayload, false)
       }
 
-      if (dateTypesAssoc.length) {
+      if (datePayload.dataPoints.length) {
         await this.attemptToAddMeasurement(datePayload, true)
       }
 
