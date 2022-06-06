@@ -1,3 +1,10 @@
+## [1.86.4](https://github.com/coachcare/dashboard/compare/v1.86.3...v1.86.4) (2022-06-06)
+
+
+### Bug Fixes
+
+* solved issue with date and instant measurements ([560eb6c](https://github.com/coachcare/dashboard/commit/560eb6ce17dcbafc8c6aa8232904840cbce794df))
+
 ## [1.86.3](https://github.com/coachcare/dashboard/compare/v1.86.2...v1.86.3) (2022-06-03)
 
 
