@@ -27,7 +27,7 @@ locales.forEach(async (code: AppLocaleCode) => {
     )
     registerLocaleData(locale.default)
   } catch (e) {
-    console.error(e)
+    console.warn(e)
   }
 })
 

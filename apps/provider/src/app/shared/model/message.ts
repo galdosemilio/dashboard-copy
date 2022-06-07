@@ -1,5 +1,5 @@
 import { MessagingAccount, MessagingItem } from '@coachcare/sdk'
-import * as linkifyHtml from 'linkifyjs/html'
+import linkifyHtml from 'linkify-html'
 
 export class MessageContainer implements MessagingItem {
   public messageId: string

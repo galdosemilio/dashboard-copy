@@ -131,6 +131,7 @@
     "document-register-element": "1.13.1",
     "jsoneditor": "^9.5.7",
     "lightweight-charts": "^3.5.0",
+    "linkify-html": "^3.0.5",
     "linkifyjs": "^3.0.5",
     "lodash": "^4.17.21",
     "luxon": "^1.27.0",
