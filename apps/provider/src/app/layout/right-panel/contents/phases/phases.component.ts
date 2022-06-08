@@ -25,6 +25,7 @@ export class PhasesComponent implements OnDestroy, OnInit {
 
   private enrollmentsNext: number
   private enrollmentsScroll$: Subject<void> = new Subject<void>()
+  private scrollOffset = 5
 
   constructor(
     private context: ContextService,
@@ -89,8 +90,9 @@ export class PhasesComponent implements OnDestroy, OnInit {
   }
 
   private onPhaseAdded(phase: PhasesDataSegment): void {
-    const phaseHierarchyPath = (phase.package
-      .organization as OrganizationDetailed).hierarchyPath
+    const phaseHierarchyPath = (
+      phase.package.organization as OrganizationDetailed
+    ).hierarchyPath
 
     if (
       intersectionBy(
@@ -118,8 +120,9 @@ export class PhasesComponent implements OnDestroy, OnInit {
   }
 
   private onPhaseRemoved(phase: PhasesDataSegment): void {
-    const phaseHierarchyPath = (phase.package
-      .organization as OrganizationDetailed).hierarchyPath
+    const phaseHierarchyPath = (
+      phase.package.organization as OrganizationDetailed
+    ).hierarchyPath
 
     if (
       intersectionBy(
@@ -141,7 +144,8 @@ export class PhasesComponent implements OnDestroy, OnInit {
     if (
       !this.source.isLoading &&
       this.enrollmentsNext &&
-      target.offsetHeight + target.scrollTop >= target.scrollHeight
+      target.offsetHeight + target.scrollTop >=
+        target.scrollHeight - this.scrollOffset
     ) {
       this.enrollmentsScroll$.next()
     }
