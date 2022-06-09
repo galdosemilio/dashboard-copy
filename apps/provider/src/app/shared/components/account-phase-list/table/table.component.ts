@@ -63,16 +63,22 @@ export class PhasesTableComponent implements AfterViewInit, OnDestroy, OnInit {
 
   public async enroll(item: PhasesDataSegment) {
     try {
-      await this.database.enroll(
-        item,
-        this.source.enrollments.find((enrollment) => enrollment.isActive)
-      )
-
+      this.source.isLoading = true
+      this.source.change$.next()
+      await this.database.enroll(item)
       this.bus.trigger('phases.assoc.added', item)
       this.notifier.success(_('NOTIFY.SUCCESS.PACKAGE_ENROLLED'))
       this.source.refresh()
     } catch (error) {
       this.notifier.error(error)
+
+      /**
+       * We only hide the loading indicator here
+       * because on success the refresh logic takes care
+       * of it.
+       */
+      this.source.isLoading = false
+      this.source.change$.next()
     }
   }
 

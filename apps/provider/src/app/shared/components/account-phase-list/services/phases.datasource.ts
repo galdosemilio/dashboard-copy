@@ -2,32 +2,13 @@ import { Injectable } from '@angular/core'
 import { MatPaginator } from '@coachcare/material'
 import { NotifierService } from '@app/service'
 import { TableDataSource } from '@app/shared/model'
-import { _ } from '@app/shared/utils'
 import {
-  FetchPackagesSegment,
   GetAllPackageOrganizationRequest,
   PackageEnrollmentSegment
 } from '@coachcare/sdk'
 import { Observable } from 'rxjs'
 import { PhasesDatabase, PackagesAndEnrollments } from './phases.database'
-
-export type PhasesDataSegment = {
-  id: string | null
-  package: FetchPackagesSegment
-  inherited: boolean
-  status: string
-  enrolled: boolean
-  history: { start: string; end: string }
-}
-
-const DEFAULT_ENROLLMENT_ENTRY: PhasesDataSegment = Object.freeze({
-  id: null,
-  inherited: false,
-  status: _('PHASE.NEVER_ENROLLED'),
-  enrolled: false,
-  history: { start: '', end: '' },
-  package: null
-})
+import { PhasesDataSegment, Phase } from './utils'
 
 @Injectable()
 export class PhasesDataSource extends TableDataSource<
@@ -84,26 +65,11 @@ export class PhasesDataSource extends TableDataSource<
         .filter((e) => pkg.id === e.package.id)
         .shift()
 
-      let enrollmentStatus = _('PHASE.NEVER_ENROLLED')
-
-      if (mostRecentEnrollment) {
-        enrollmentStatus = mostRecentEnrollment.isActive
-          ? _('PHASE.CURRENTLY_ENROLLED')
-          : _('PHASE.PREVIOUSLY_ENROLLED')
-      }
-
-      return {
-        ...DEFAULT_ENROLLMENT_ENTRY,
-        id: mostRecentEnrollment?.id ?? '',
-        inherited: pkg.organization.id !== this.criteria.organization,
-        enrolled: mostRecentEnrollment?.isActive ?? false,
-        status: enrollmentStatus,
-        history: {
-          start: mostRecentEnrollment?.enroll.start ?? '',
-          end: mostRecentEnrollment?.enroll.end ?? ''
-        },
-        package: pkg
-      }
+      return Phase.createPhaseDataSegment(
+        pkg,
+        mostRecentEnrollment,
+        this.criteria.organization
+      )
     })
   }
 

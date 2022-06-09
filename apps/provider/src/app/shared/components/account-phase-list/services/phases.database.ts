@@ -6,7 +6,6 @@ import { PromptDialog, PromptDialogData } from '@app/shared/dialogs'
 import { CcrDatabase } from '@app/shared/model'
 import { _ } from '@app/shared/utils'
 import {
-  Entity,
   FetchPackagesResponse,
   GetAllPackageOrganizationRequest,
   PackageEnrollment,
@@ -16,9 +15,9 @@ import {
 } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { from, Observable, throwError } from 'rxjs'
-
-import { PhasesDataSegment } from './phases.datasource'
 import { mergeMap } from 'rxjs/operators'
+import { PhasesDataSegment } from './utils'
+import { uniqBy } from 'lodash'
 
 export type PackagesAndEnrollments = FetchPackagesResponse & {
   enrollments: { data: PackageEnrollmentSegment[]; pagination: Pagination }
@@ -95,14 +94,14 @@ export class PhasesDatabase extends CcrDatabase {
     )
   }
 
-  async enroll(item: PhasesDataSegment, old: Entity): Promise<any> {
+  async enroll(item: PhasesDataSegment): Promise<any> {
     const unenrollThenEnroll = resolveConfig(
       'PATIENT_FORM.UNENROLL_THEN_ENROLL',
       this.context.organization
     )
 
-    if (unenrollThenEnroll && old) {
-      await this.enrollment.delete({ id: old.id })
+    if (unenrollThenEnroll) {
+      await this.unenrollAll()
     }
 
     return this.enrollment.create({
@@ -138,11 +137,31 @@ export class PhasesDatabase extends CcrDatabase {
       .toPromise()
   }
 
-  unenroll(phase: PhasesDataSegment): Promise<void | string> {
+  unenroll(phase: Partial<PhasesDataSegment>): Promise<void | string> {
     return this.enrollment.update({
       id: phase.id.toString(),
       isActive: false,
       enroll: { start: phase.history.start, end: moment().toISOString() }
     })
+  }
+
+  private async unenrollAll(): Promise<void> {
+    const result = await this.fetch({
+      limit: 'all',
+      offset: 0,
+      organization: this.context.organizationId
+    }).toPromise()
+
+    const activeEnrollments = uniqBy(
+      result.enrollments.data.filter((enrollment) => enrollment.isActive),
+      (enrollment) => enrollment.package.id
+    )
+
+    for (const enrollment of activeEnrollments) {
+      await this.unenroll({
+        id: enrollment.id,
+        history: enrollment.enroll
+      })
+    }
   }
 }
