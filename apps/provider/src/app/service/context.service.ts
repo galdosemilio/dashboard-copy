@@ -90,6 +90,9 @@ export class ContextService {
   ) {
     // this.bus.register('organizations.disable-all', this.disableAll.bind(this));
     // this.bus.register('organizations.enable-all', this.enableAll.bind(this));
+    this.lang.lang$.pipe().subscribe(() => {
+      void this.updateUser()
+    })
   }
 
   init() {

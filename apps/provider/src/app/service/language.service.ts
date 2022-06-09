@@ -11,12 +11,14 @@ import { EventsService } from './events.service'
 
 import * as moment from 'moment-timezone'
 import 'moment'
+import { Subject } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
   public uid: string
   private lang: string
   private langs: Array<string>
+  public lang$: Subject<string> = new Subject<string>()
 
   constructor(
     private api: ApiService,
@@ -93,7 +95,9 @@ export class LanguageService {
           id: this.uid,
           preferredLocales: [language]
         })
-        .then(() => {})
+        .then(() => {
+          this.lang$.next(language)
+        })
     }
   }
 
