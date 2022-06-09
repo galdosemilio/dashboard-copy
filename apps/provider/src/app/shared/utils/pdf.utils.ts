@@ -167,14 +167,13 @@ export function calculateRowBasedOnWeight(
       : null
 
   element.changeThisWeek =
-    weightSummary.changeThisWeek !== null &&
-    otherSummary.changeThisWeek !== null
-      ? weightSummary.changeThisWeek * (otherSummary.changeThisWeek / 100)
+    element.currentWeek !== null && element.lastWeek !== null
+      ? element.currentWeek - element.lastWeek
       : null
 
   element.cumulativeChange =
-    weightSummary.cumulativeChange !== null && otherSummary.cumulativeChange
-      ? weightSummary.cumulativeChange * (otherSummary.cumulativeChange / 100)
+    element.beginning !== null && element.currentWeek !== null
+      ? element.currentWeek - element.beginning
       : null
 
   element = {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@coachcare/material'
 import { CCRConfig } from '@app/config'
@@ -66,8 +66,6 @@ interface YearWeekOption {
   host: { class: 'ccr-dialog' }
 })
 export class ProgressReportPDFDialog implements OnInit {
-  @ViewChild('chartCanvas', { static: false }) canvas
-
   acc: AccSingleResponse
   chart: ChartData
   form: FormGroup

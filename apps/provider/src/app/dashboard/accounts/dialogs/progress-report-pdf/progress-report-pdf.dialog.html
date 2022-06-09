@@ -1,15 +1,3 @@
-<div class="chart-container">
-    <canvas *ngIf="chart" baseChart #chartCanvas
-    width="300" height="300"
-    [chartType]="chart.type"
-    [datasets]="chart.datasets"
-    [labels]="chart.labels"
-    [options]="chart.options"
-    [legend]="chart.legend"
-    [colors]="chart.colors"
-  ></canvas>
-</div>
-
 <div matDialogTitle>
     <div>
         <span>{{ 'BOARD.PROGRESS_REPORT' | translate }}</span>
