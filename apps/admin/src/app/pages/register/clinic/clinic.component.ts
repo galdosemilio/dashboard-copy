@@ -230,6 +230,11 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
           ? false
           : true
 
+      const queryPlan =
+        params.hasOwnProperty('plan') && params.plan !== undefined
+          ? params.plan
+          : undefined
+
       if (cookieLang) {
         this.store.changeLang(cookieLang)
       } else if (queryLang) {
@@ -242,6 +247,14 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
             },
             panelClass: 'ccr-lang-dialog'
           })
+        })
+      }
+
+      if (queryPlan) {
+        this.showClinicPackagesStep = false
+        this.plan.patchValue({
+          type: queryPlan,
+          billingPeriod: 'annually'
         })
       }
     })
