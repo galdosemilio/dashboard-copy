@@ -206,7 +206,7 @@
     "postcss-preset-env": "^6.7.0",
     "postcss-url": "^10.1.1",
     "prettier": "2.6.2",
-    "semantic-release": "^17.4.2",
+    "semantic-release": "^19.0.3",
     "terser": "^5.11.0",
     "ts-jest": "27.0.5",
     "ts-node": "10.6.0",
