@@ -15,7 +15,8 @@ import { CoachcareSdkModule } from '../../../../libs/common/src/lib/sdk.module'
 // last ones overwrite the first
 export const catalogs: TranslateCatalogs = {
   // common: './assets/i18n/common/${ lang }.json',
-  dashboard: './assets/i18n/admin/${ lang }.json'
+  dashboard: './assets/i18n/admin/${ lang }.json',
+  storefront: './assets/i18n/storefront/${ lang }.json'
 }
 
 @NgModule({

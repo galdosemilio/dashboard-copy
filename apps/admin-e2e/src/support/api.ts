@@ -51,6 +51,19 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '2.0/account?accountType=3&offset=0&limit=10', {
     fixture: 'api/account/patientsList'
   })
+  cy.intercept('GET', '1.0/account/*/address?*', {
+    fixture: 'api/account/accountAddress'
+  })
+  cy.intercept('PATCH', '1.0/account/*/address/*', {
+    statusCode: 204,
+    body: {}
+  }).as('apiCallUpdateAddress')
+  cy.intercept('GET', '2.0/account/*/external-identifier?*', {
+    fixture: 'api/account/externalIdentifier'
+  })
+  cy.intercept('POST', '1.0/ecommerce/login/token', {
+    fixture: 'api/account/ecommerceLogin'
+  })
   cy.intercept('GET', '2.0/country?**', { fixture: 'api/countries' })
   cy.intercept('GET', '2.0/organization/?**', {
     fixture: 'api/organization/organizationList'
@@ -63,6 +76,10 @@ const interceptCoreApiCalls = (
     fixture: '../../../admin/src/i18n/en.json'
   })
   cy.intercept('GET', '4.0/organization/**/preference/assets?id=*', {
+    fixture: 'api/organization'
+  }).as('apiCallOrgPreference')
+
+  cy.intercept('GET', '4.0/organization/**/preference?id=*', {
     fixture: 'api/organization'
   }).as('apiCallOrgPreference')
 

@@ -1,0 +1,134 @@
+@import 'variables';
+
+:host {
+  color: var(--text);
+  > * {
+    box-sizing: border-box;
+  }
+
+  .product-img {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 80%;
+    }
+  }
+
+  .mat-expansion-panel {
+    box-shadow: none;
+  }
+
+  .mat-expansion-panel-header {
+    padding: 0;
+    padding-right: 10px;
+    height: 30px;
+
+    &.mat-expanded {
+      height: 30px;
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    .mat-expansion-panel-header-title {
+      font-size: 16px;
+      color: var(--text);
+    }
+  }
+
+  .mat-expansion-panel-content {
+    background-color: red;
+
+    .mat-expansion-panel-body {
+      padding: 0px;
+    }
+  }
+
+  .price-wrap {
+    .price-title {
+      text-transform: uppercase;
+      width: 100px;
+      margin: 0;
+    }
+
+    .price {
+      color: var(--primary);
+      font-size: 25px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .qty-wrap {
+      display: flex;
+      align-items: center;
+
+      p {
+        margin: 0px 20px;
+        font-size: 18px;
+      }
+
+      button {
+        background: transparent;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        border: 1px solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .mat-icon {
+          height: 18px;
+          width: 18px;
+          font-size: 18px;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+
+  .flavors-wrap {
+    .flavor-title {
+      text-transform: uppercase;
+      width: 100px;
+      margin: 0;
+    }
+
+    .flavors {
+      .flavor {
+        border: 1px solid #666;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 3px 5px;
+
+        &.selected {
+          border-color: var(--primary);
+          color: var(--primary);
+        }
+      }
+    }
+  }
+
+  .ccr-button {
+    background-color: var(--primary);
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: white;
+    border: 0;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mat-icon {
+      margin-right: 10px;
+    }
+  }
+}
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+  font-size: 15px;
+  color: var(--text);
+}

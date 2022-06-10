@@ -1,0 +1,30 @@
+<div *ngIf="cart">
+  <div fxLayout="row" class="header">
+    <p>{{ 'GLOBAL.SHOPPING_CART' | translate }}</p>
+    <p>></p>
+    <p>{{ 'GLOBAL.CHECK_OUT' | translate }}</p>
+    <p>></p>
+    <p class="selected">{{ 'GLOBAL.ORDER_COMPLETE' | translate }}</p>
+  </div>
+  <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="100px">
+    <div fxFlex>
+      <h2>{{ 'GLOBAL.THANK_YOU_FOR_ORDER' | translate }}</h2>
+      <p>{{ 'GLOBAL.TOTAL' | translate }} {{ cart.attributes.display_total }}</p>
+      <div class="order-complete-icon">
+        <mat-icon>
+          shopping_cart
+        </mat-icon>
+        <div class="check">
+          <mat-icon>
+            check_circle
+          </mat-icon>
+        </div>
+      </div>
+      <p>{{ 'GLOBAL.WE_WILL_BE_IN_TOUCH_DESCRIPTION' | translate }}</p>
+      <p>{{ 'GLOBAL.CONTACT_CUSTOMER_SERVICE_DESCRIPTION' | translate }}</p>
+    </div>
+    <button mat-button class="ccr-button" routerLink="../../product" queryParamsHandling="merge">
+      {{ 'GLOBAL.GO_TO_MY_ORDERS' | translate }}
+    </button>
+  </div>
+</div>

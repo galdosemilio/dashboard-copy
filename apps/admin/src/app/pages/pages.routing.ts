@@ -29,6 +29,13 @@ import { CheckoutComponent } from './checkout'
 
 const routes: Routes = [
   {
+    path: 'storefront',
+    loadChildren: () =>
+      import('@coachcare/storefront/storefront.module').then(
+        (m) => m.StorefrontModule
+      )
+  },
+  {
     path: '',
     component: PlainLayout,
     children: [

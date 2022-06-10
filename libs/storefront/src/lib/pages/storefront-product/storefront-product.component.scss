@@ -1,0 +1,206 @@
+@import 'variables';
+
+:host {
+  box-sizing: border-box;
+
+  .storefront-banner {
+    padding: 40px;
+    height: 200px;
+    background: var(--primary-lighten);
+    background: url('https://cdn.coachcare.com/corporate/Other/ecommerce-general-background.jpg')
+      no-repeat center right;
+    background-size: cover;
+
+    h2 {
+      font-size: 36px;
+      font-weight: 500;
+    }
+
+    p {
+      width: 50%;
+    }
+  }
+
+  .header {
+    padding: 5px 40px;
+    background-color: var(--contrast-darken);
+
+    .nav {
+      display: flex;
+      align-items: center;
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        margin-right: 5px;
+        font-weight: bold;
+      }
+
+      .nav-item-all {
+        cursor: pointer;
+        font-weight: normal;
+
+        .mat-icon {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .search-item-input {
+      border: 1px solid;
+      border-radius: 15px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      width: 300px;
+
+      input {
+        background: transparent;
+        border: 0;
+        width: 100%;
+        outline: none;
+        padding-left: 5px;
+      }
+    }
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .product-container {
+    padding: 10px 40px;
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 20px;
+      column-gap: 20px;
+
+      .category {
+        border: 1px solid;
+        display: flex;
+        cursor: pointer;
+        padding: 20px 10px;
+
+        img {
+          margin-right: 10px;
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      row-gap: 30px;
+      column-gap: 30px;
+
+      .product {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid;
+        text-align: center;
+        padding: 20px;
+        cursor: pointer;
+
+        .product-img {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+
+          img {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: $md-max) {
+    .product-container {
+      .products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+
+  @media (max-width: $sm-max) {
+    .product-container {
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  @media (max-width: $xs-max) {
+    .storefront-banner {
+      display: none;
+    }
+    .header {
+      padding: 0;
+      background-color: var(--contrast-darken);
+
+      .nav {
+        order: 2;
+        width: 100%;
+        background: var(--accent);
+        height: 40px;
+        padding: 0 20px;
+      }
+      .search-wrap {
+        box-sizing: border-box;
+        width: 100%;
+        order: 1;
+        padding: 10px 20px;
+
+        .search-item-input {
+          box-sizing: border-box;
+          width: 100%;
+        }
+      }
+    }
+
+    .product-container {
+      padding: 0px 20px;
+
+      .categories {
+        display: block;
+
+        .category {
+          border: 0px;
+          border-bottom: 2px solid var(--contrast-darken);
+        }
+      }
+
+      .products {
+        display: block;
+
+        .product {
+          border: 0px;
+          border-bottom: 2px solid var(--contrast-darken);
+          flex-direction: row;
+
+          .product-img {
+            flex: none;
+            width: 80px;
+            height: 80px;
+
+            img {
+              width: 80px;
+              height: auto;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -29,7 +29,9 @@
       "@coachcare/datepicker": ["libs/datepicker/src/index.ts"],
       "@coachcare/layout": ["libs/layout/src/index.ts"],
       "@coachcare/layout/*": ["libs/layout/src/lib/*"],
-      "@coachcare/material": ["libs/material/src/index.ts"]
+      "@coachcare/material": ["libs/material/src/index.ts"],
+      "@coachcare/storefront": ["libs/storefront/src/index.ts"],
+      "@coachcare/storefront/*": ["libs/storefront/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,24 @@
+<div class="ccr-storefront">
+  <div class="storefront-loading" *ngIf="isLoading"></div>
+  <div *ngIf="!isLoading" fxLayout="column">
+    <mat-toolbar>
+      <div class="logo" routerLink="../storefront" queryParamsHandling="merge">
+        <img [src]="logoUrl" alt="logo">
+      </div>
+      <p routerLink="../storefront" queryParamsHandling="merge" class="title">{{ 'GLOBAL.STORE' | translate }}</p>
+      <a mat-icon-button class="cart" routerLink="./order" queryParamsHandling="merge">
+        <mat-icon [matBadge]="itemCount" matBadgeColor="primary">
+          shopping_cart
+        </mat-icon>
+      </a>
+    </mat-toolbar>
+    <div fxLayout="row">
+      <div *ngIf="error" fxFlex>
+        <p class="error" [innerHTML]="error | translate"></p>
+      </div>
+      <div *ngIf="!error" fxFlex>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

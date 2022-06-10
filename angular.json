@@ -40,6 +40,11 @@
                 "glob": "*.json",
                 "input": "apps/admin/src/i18n/",
                 "output": "assets/i18n/admin/"
+              },
+              {
+                "glob": "*.json",
+                "input": "libs/storefront/src/assets/i18n/",
+                "output": "assets/i18n/storefront/"
               }
             ],
             "styles": ["apps/admin/src/styles.scss"],
@@ -47,7 +52,8 @@
               "includePaths": [
                 "libs/common/src/lib/styles",
                 "libs/common/src/lib",
-                "libs/datepicker/src/lib"
+                "libs/datepicker/src/lib",
+                "libs/storefront/src/lib"
               ]
             },
             "scripts": [],
@@ -84,6 +90,10 @@
                 {
                   "replace": "libs/common/src/lib/environments/environment.ts",
                   "with": "libs/common/src/lib/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/storefront/src/lib/environments/environment.ts",
+                  "with": "libs/storefront/src/lib/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -116,6 +126,10 @@
                 {
                   "replace": "libs/common/src/lib/environments/environment.ts",
                   "with": "libs/common/src/lib/environments/environment.test.ts"
+                },
+                {
+                  "replace": "libs/storefront/src/lib/environments/environment.ts",
+                  "with": "libs/storefront/src/lib/environments/environment.test.ts"
                 }
               ],
               "optimization": true,
@@ -148,6 +162,10 @@
                 {
                   "replace": "libs/common/src/lib/environments/environment.ts",
                   "with": "libs/common/src/lib/environments/environment.blueinfy.ts"
+                },
+                {
+                  "replace": "libs/storefront/src/lib/environments/environment.ts",
+                  "with": "libs/storefront/src/lib/environments/environment.blueinfy.ts"
                 }
               ],
               "optimization": true,
@@ -212,7 +230,7 @@
         }
       },
       "tags": [],
-      "implicitDependencies": ["common", "backend", "material"]
+      "implicitDependencies": ["common", "backend", "material", "storefront"]
     },
     "admin-e2e": {
       "root": "apps/admin-e2e",
@@ -581,6 +599,11 @@
                 "glob": "**/*",
                 "input": "node_modules/@twilio/video-processors/dist/build",
                 "output": "twilio-video"
+              },
+              {
+                "glob": "*.json",
+                "input": "libs/storefront/src/assets/i18n/",
+                "output": "assets/i18n/storefront/"
               }
             ],
             "styles": [
@@ -636,6 +659,10 @@
                 {
                   "replace": "libs/common/src/lib/environments/environment.ts",
                   "with": "libs/common/src/lib/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/storefront/src/lib/environments/environment.ts",
+                  "with": "libs/storefront/src/lib/environments/environment.prod.ts"
                 }
               ],
               "index": {
@@ -672,6 +699,10 @@
                 {
                   "replace": "libs/common/src/lib/environments/environment.ts",
                   "with": "libs/common/src/lib/environments/environment.test.ts"
+                },
+                {
+                  "replace": "libs/storefront/src/lib/environments/environment.ts",
+                  "with": "libs/storefront/src/lib/environments/environment.test.ts"
                 }
               ],
               "index": {
@@ -704,6 +735,10 @@
                 {
                   "replace": "libs/common/src/lib/environments/environment.ts",
                   "with": "libs/common/src/lib/environments/environment.e2e.ts"
+                },
+                {
+                  "replace": "libs/storefront/src/lib/environments/environment.ts",
+                  "with": "libs/storefront/src/lib/environments/environment.e2e.ts"
                 }
               ],
               "outputHashing": "all",
@@ -733,6 +768,10 @@
                 {
                   "replace": "libs/common/src/lib/environments/environment.ts",
                   "with": "libs/common/src/lib/environments/environment.blueinfy.ts"
+                },
+                {
+                  "replace": "libs/storefront/src/lib/environments/environment.ts",
+                  "with": "libs/storefront/src/lib/environments/environment.blueinfy.ts"
                 }
               ],
               "index": {
@@ -846,6 +885,39 @@
       },
       "tags": [],
       "implicitDependencies": ["provider"]
+    },
+    "storefront": {
+      "projectType": "library",
+      "root": "libs/storefront",
+      "sourceRoot": "libs/storefront/src",
+      "prefix": "dashboard",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/storefront/**/*.ts",
+              "libs/storefront/**/*.html"
+            ]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/storefront/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/storefront"]
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "tags": [],
+      "implicitDependencies": []
     }
   }
 }

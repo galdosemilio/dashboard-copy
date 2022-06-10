@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http'
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core'
 import { RouteReuseStrategy } from '@angular/router'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { CookieService } from 'ngx-cookie-service'
 import { APP_CONFIG } from '@coachcare/common/shared'
 import {
@@ -13,7 +11,7 @@ import {
 } from '@coachcare/sdk'
 import { DieterDashboardSummary } from '@coachcare/sdk'
 
-import { CCR_CONFIG, Config } from '@app/config'
+import { catalogs, CCR_CONFIG, Config } from '@app/config'
 import { FormUtils, ViewUtils } from '@app/shared/utils'
 import { AppRouteReuseStrategy } from '@app/store/router/reuse/custom.strategy'
 import {
@@ -46,6 +44,7 @@ import {
   ConfigService,
   ContextService,
   EventsService,
+  I18N_CATALOGS,
   NotifierService
 } from '@coachcare/common/services'
 import { SequencesDatabase } from './sequences'
@@ -57,10 +56,6 @@ import {
   FormSubmissionsDatabase
 } from './forms'
 import { MeasurementAggregatesDatabase } from './measurement-aggregates'
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json')
-}
 
 /**
  * Processors Factories
@@ -82,6 +77,11 @@ export function onAppInit(context: ContextService) {
 
 export function AppProviders() {
   return [
+    {
+      provide: I18N_CATALOGS,
+      useValue: catalogs,
+      multi: false
+    },
     // api processors
     {
       provide: DieterDashboardSummary,

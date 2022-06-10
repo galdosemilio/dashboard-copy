@@ -1,0 +1,139 @@
+<div fxLayout="row" class="header">
+  <p>{{ 'GLOBAL.SHOPPING_CART' | translate }}</p>
+  <p>></p>
+  <p class="selected">{{ 'GLOBAL.CHECK_OUT' | translate }}</p>
+  <p>></p>
+  <p>{{ 'GLOBAL.ORDER_COMPLETE' | translate }}</p>
+</div>
+<div fxLayout.gt-sm="row" fxLayout="column" *ngIf="cart" class="container" fxLayoutGap="30px">
+  <div fxFlex>
+    <h2>{{ 'GLOBAL.CHECK_OUT' | translate }}</h2>
+    <div fxLayout="column"  fxLayoutGap="25px">
+      <div fxLayout="column" fxLayoutAlign="center center" class="item">
+        <div cy-data="cart-items"  fxFill fxLayout="row" fxLayoutAlign="space-between start">
+          <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+            <mat-icon>shopping_cart</mat-icon>
+            <div>{{ 'GLOBAL.SHOPPING_CART_ITEMS' | translate: {items: cart.lineItems.length} }}</div>
+          </div>
+          <button mat-icon-button routerLink="../cart" queryParamsHandling="merge">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center start" class="cart-items-wrap">
+          <div *ngFor="let lineItem of cart.lineItems" class="cart-item">
+            <div class="item-image">
+              <img [src]="lineItem.images[0]" alt="cart item" />
+            </div>
+            <div class="qty-wrap">
+              <p>{{ lineItem.attributes.quantity }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div cy-data="shipping-address" fxLayout="column" fxLayoutAlign="center center" class="item">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between start">
+          <div fxLayout="row" fxLayoutGap="15px">
+            <mat-icon>contacts</mat-icon>
+            <div>{{ 'GLOBAL.SHIPPING_ADDRESS' | translate }}</div>
+          </div>
+          <button mat-icon-button (click)="openChangeShippingAddress()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="cart.shippingAddress; else noInfo">
+          <p cy-data="shipping-address-name">{{ cart.shippingAddress.attributes.firstname }} {{ cart.shippingAddress.attributes.lastname }}</p>
+          <p cy-data="shipping-address-street">{{ cart.shippingAddress.attributes.address1 }} {{ cart.shippingAddress.attributes.address2 }}</p>
+          <p cy-data="shipping-address-city-state">{{ cart.shippingAddress.attributes.city }}, {{ cart.shippingAddress.attributes.state_code }} {{ cart.shippingAddress.attributes.zipcode }}</p>
+        </div>
+      </div>
+      <div cy-data="shipping-method" fxLayout="column" fxLayoutAlign="center center" class="item" fxLayoutGap="15px">
+        <div fxFill fxLayout="row" fxLayoutAlign="start start">
+          <div fxLayout="row" fxLayoutGap="15px">
+            <mat-icon>local_shipping</mat-icon>
+            <div>{{ 'GLOBAL.SHIPPING_METHOD' | translate }}</div>
+          </div>
+        </div>
+        <div fxFill fxLayout="column" fxLayoutAlign="center center">
+          <div class="shipping-rate" *ngIf="shippingRates.length; else noInfo" >
+            <mat-select [(value)]="cart.shppingRateId" (selectionChange)="onSelectShippingRate($event.value)">
+              <mat-option *ngFor="let rate of shippingRates" [value]="rate.id">{{ rate.name }}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <div cy-data="payment-method" fxLayout="column" fxLayoutAlign="center center"  class="item">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between start">
+          <div fxLayout="row" fxLayoutGap="15px">
+            <mat-icon>credit_card</mat-icon>
+            <div>{{ 'GLOBAL.PAYMENT_METHOD' | translate }}</div>
+          </div>
+          <button mat-icon-button (click)="openPaymentMethod()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="cart.creditCard; else noInfo">
+          <p cy-data="payment-method-name">{{ cart.creditCard.attributes.name }}</p>
+          <p cy-data="payment-method-card-number">***{{ cart.creditCard.attributes.last_digits }}</p>
+          <p cy-data="payment-method-card-expires">{{ 'GLOBAL.EXPIRES' | translate }} {{ cart.creditCard.attributes.month }} / {{ cart.creditCard.attributes.year }}</p>
+        </div>
+      </div>
+      <div cy-data="billing-address" fxLayout="column" fxLayoutAlign="center center" class="item">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between start">
+          <div fxLayout="row" fxLayoutGap="15px">
+            <mat-icon>contacts</mat-icon>
+            <div>{{ 'GLOBAL.BILLING_ADDRESS' | translate }}</div>
+          </div>
+          <button mat-icon-button (click)="openChangeBillingAddress()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="cart.billingAddress; else noInfo">
+          <p cy-data="billing-address-name">{{ cart.billingAddress.attributes.firstname }} {{ cart.billingAddress.attributes.lastname }}</p>
+          <p cy-data="billing-address-street">{{ cart.billingAddress.attributes.address1 }} {{ cart.billingAddress.attributes.address2 }}</p>
+          <p cy-data="billing-address-city-state">{{ cart.billingAddress.attributes.city }}, {{ cart.billingAddress.attributes.state_code }} {{ cart.billingAddress.attributes.zipcode }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxFlex.gt-sm="400px" fxLayout="column" fxLayoutGap="20px">
+    <div class="order-total">
+      <h2>{{ 'GLOBAL.SUMMARY' | translate }}</h2>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <p>{{ 'GLOBAL.SUBTOTAL' | translate }}</p>
+        <p>{{ cart.attributes.display_item_total }}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <p>{{ 'GLOBAL.SHIPPING' | translate }}</p>
+        <p>{{ cart.attributes.display_ship_total }}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <p>{{ 'GLOBAL.TAX' | translate }}</p>
+        <p>{{ cart.attributes.display_tax_total }}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <h2>{{ 'GLOBAL.TOTAL' | translate }}</h2>
+        <h2>{{ cart.attributes.display_total }}</h2>
+      </div>
+    </div>
+    <button
+      mat-button
+      [disabled]="!cart.lineItems.length ||
+        !cart.shippingAddress ||
+        !cart.billingAddress ||
+        !cart.shppingRateId ||
+        !cart.creditCard"
+      class="ccr-button"
+      cy-data="place-button"
+      (click)="onCompleteOrder()"
+    >{{ 'GLOBAL.PLACE_ORDER' | translate }}</button>
+  </div>
+</div>
+<ng-template #noInfo>
+  <div class="no-info"><mat-icon>error</mat-icon> {{ 'GLOBAL.NO_INFORMATION' | translate }}</div>
+</ng-template>
+
+<div class="loading" *ngIf="isLoading">
+  <mat-spinner>
+    <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+  </mat-spinner>
+</div>

@@ -1,0 +1,66 @@
+<div matDialogTitle>
+  <div>
+      <span>{{ title | translate }}</span>
+  </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+<mat-dialog-content>
+<div fxLayout="column" fxLayoutAlign="center stretch">
+  <div class="mt-20" [formGroup]="form">
+    <mat-grid-list class="ccr-grid" cols="1" rowHeight="70px">
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput required formControlName="address1"
+          [placeholder]="'GLOBAL.ADDRESS_LINE_ONE' | translate">
+          <mat-error *ngIf="form.get('address1').getError('required')">{{ 'ERROR.ADDRESS_LINE_ONE_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput formControlName="address2"
+          [placeholder]="'GLOBAL.ADDRESS_LINE_TWO' | translate">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput required formControlName="city"
+          [placeholder]="'GLOBAL.CITY' | translate">
+          <mat-error *ngIf="form.get('city').getError('required')">{{ 'ERROR.ADDRESS_CITY_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput required formControlName="stateProvince"
+          [placeholder]="'GLOBAL.STATE' | translate">
+          <mat-error *ngIf="form.get('stateProvince').getError('required')">{{ 'ERROR.ADDRESS_STATE_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <input matInput required formControlName="postalCode"
+          [placeholder]="'GLOBAL.POSTAL_CODE' | translate">
+          <mat-error *ngIf="form.get('postalCode').getError('required')">{{ 'ERROR.ADDRESS_POSTAL_CODE_REQUIRED' | translate }}</mat-error>
+
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div fxFlex>
+          <ccr-form-field-country
+            formControlName="country"
+            required [readonly]="readonly"
+            [placeholder]="'GLOBAL.COUNTRY' | translate"
+            ></ccr-form-field-country>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+  (click)="onSubmit()"
+  class="ccr-button"
+  mat-button>{{ 'GLOBAL.SUBMIT' | translate }}</button>
+  <button class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CANCEL' | translate }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,72 @@
+@import 'variables';
+
+:host {
+  .header {
+    padding: 20px 30px;
+    background-color: #e3e3e3;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      text-align: center;
+      margin: 0px 5px;
+
+      &.selected {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .container {
+    padding: 30px 50px;
+    text-align: center;
+
+    h2 {
+      text-transform: uppercase;
+    }
+
+    .order-complete-icon {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+
+      .mat-icon {
+        font-size: 60px;
+        width: 60px;
+        height: 60px;
+        color: var(--primary);
+      }
+
+      .check {
+        position: absolute;
+        top: 18px;
+
+        .mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          color: var(--primary);
+          background-color: white;
+          border-radius: 22px;
+        }
+      }
+    }
+  }
+
+  .ccr-button {
+    border-radius: 20px;
+    border: 2px solid var(--primary);
+  }
+
+  @media (max-width: $xs-max) {
+    .container {
+      padding: 10px;
+    }
+  }
+}

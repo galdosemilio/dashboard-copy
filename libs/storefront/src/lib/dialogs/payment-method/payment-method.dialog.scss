@@ -1,0 +1,26 @@
+@import 'variables';
+
+:host {
+  color: var(--text);
+
+  .ccr-button {
+    background-color: var(--primary);
+    padding: 0 20px;
+    border-radius: 20px;
+    color: white;
+    border: 0;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mat-icon {
+      margin-right: 10px;
+    }
+  }
+
+  .error {
+    margin-top: 20px;
+    text-align: center;
+  }
+}

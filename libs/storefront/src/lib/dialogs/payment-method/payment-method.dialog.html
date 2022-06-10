@@ -1,0 +1,26 @@
+<div matDialogTitle>
+  <div>
+      <span>{{ 'GLOBAL.PAYMENT_METHOD' | translate }}</span>
+  </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+<mat-dialog-content>
+  <ngx-stripe-card
+    [options]="cardOptions"
+    [elementsOptions]="elementsOptions"
+    (change)="onChange($event)"
+    style="margin: 15px 0;"
+  ></ngx-stripe-card>
+
+  <div *ngIf="errorMessage" class="error" fxLayout="column" fxLayoutAlign="center center">
+    <mat-error>{{ errorMessage }}</mat-error>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+  (click)="onSubmit()"
+  class="ccr-button"
+  mat-button>{{ 'GLOBAL.ADD' | translate }}</button>
+  <button class="ccr-button" mat-button matDialogClose>{{ 'GLOBAL.CANCEL' | translate }}</button>
+</mat-dialog-actions>

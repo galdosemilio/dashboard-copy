@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": "392",
+    "type": "user",
+    "attributes": {
+      "email": "abc@test.com",
+      "public_metadata": {},
+      "store_credits": 0,
+      "completed_orders": 0
+    },
+    "relationships": {
+      "default_billing_address": { "data": null },
+      "default_shipping_address": { "data": null }
+    }
+  }
+}

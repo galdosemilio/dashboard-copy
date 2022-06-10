@@ -4,7 +4,7 @@ import {
   TranslateLoader,
   TranslateModule
 } from '@ngx-translate/core'
-import { AppProviders, HttpLoaderFactory } from './service/app'
+import { AppProviders } from './service/app'
 
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
@@ -33,6 +33,10 @@ import {
 import localeEs from '@angular/common/locales/es'
 import { SharedModule } from './shared/shared.module'
 import { API_ENVIRONMENT } from '@coachcare/common/model'
+import {
+  I18N_CATALOGS,
+  TranslateLoaderFactory
+} from '@coachcare/common/services'
 
 registerLocaleData(localeEs, 'es')
 
@@ -45,8 +49,8 @@ registerLocaleData(localeEs, 'es')
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+        useFactory: TranslateLoaderFactory,
+        deps: [HttpClient, I18N_CATALOGS]
       },
       missingTranslationHandler: {
         provide: MissingTranslationHandler,

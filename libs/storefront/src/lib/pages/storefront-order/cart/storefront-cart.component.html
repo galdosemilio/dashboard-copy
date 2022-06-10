@@ -1,0 +1,68 @@
+<div fxLayout="row" class="header">
+  <p class="selected">{{ 'GLOBAL.SHOPPING_CART' | translate }}</p>
+  <p>></p>
+  <p>{{ 'GLOBAL.CHECK_OUT' | translate }}</p>
+  <p>></p>
+  <p>{{ 'GLOBAL.ORDER_COMPLETE' | translate }}</p>
+</div>
+<div fxLayout.gt-sm="row" fxLayout="column" *ngIf="cart" class="container" fxLayoutGap="30px">
+  <div fxFlex>
+    <h2>{{ 'GLOBAL.SHOPPING_CART' | translate }}</h2>
+    <div *ngFor="let lineItem of cart.lineItems" class="cart-item" fxLayout="row">
+      <div class="item-image">
+        <img [src]="lineItem.images[0]" alt="cart item" />
+      </div>
+      <div fxFlex>
+        <h4>{{ lineItem.attributes.name }}</h4>
+        <p>{{ lineItem.attributes.options_text }}</p>
+        <p>{{ lineItem.attributes.display_price }}</p>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <div class="qty-wrap">
+          <button [disabled]="!canChangeQuantity(lineItem)"  mat-icon-button (click)="onChangeQuantity(lineItem.id, lineItem.attributes.quantity - 1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p>{{ lineItem.attributes.quantity }}</p>
+          <button mat-icon-button (click)="onChangeQuantity(lineItem.id, lineItem.attributes.quantity + 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <button cy-data="remove-item-button" mat-button (click)="onRemoveItem(lineItem.id)">{{ 'GLOBAL.REMOVE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+  <div fxFlex.gt-sm="400px" fxLayout="column" fxLayoutGap="20px">
+    <div class="order-total">
+      <h2>{{ 'GLOBAL.SUMMARY' | translate }}</h2>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <p>{{ 'GLOBAL.SUBTOTAL' | translate }}</p>
+        <p>{{ cart.attributes.display_item_total }}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <p>{{ 'GLOBAL.SHIPPING' | translate }}</p>
+        <p>{{ cart.attributes.display_ship_total }}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <p>{{ 'GLOBAL.TAX' | translate }}</p>
+        <p>{{ cart.attributes.display_tax_total }}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <h2>{{ 'GLOBAL.TOTAL' | translate }}</h2>
+        <h2>{{ cart.attributes.display_total }}</h2>
+      </div>
+    </div>
+    <button
+      mat-button
+      class="ccr-button"
+      cy-data="checkout-button"
+      routerLink="../checkout"
+      queryParamsHandling="merge"
+      [disabled]="!cart.lineItems.length"
+    >{{ 'GLOBAL.CHECK_OUT' | translate }}</button>
+  </div>
+</div>
+<div class="loading" *ngIf="isLoading">
+  <mat-spinner>
+    <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+  </mat-spinner>
+</div>

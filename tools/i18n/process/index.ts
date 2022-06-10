@@ -21,6 +21,13 @@ export function merge() {
     base[`provider.${catalog.code}`] = catalog
   }
 
+  files = glob.sync(`./libs/storefront/src/assets/i18n/base/*.json`)
+  for (const srcFile of files) {
+    const catalog = new Catalog(srcFile)
+    catalog.cleanup().save()
+    base[`storefront.${catalog.code}`] = catalog
+  }
+
   // for each locale, check customizations and merge with the base
   for (const locale of locales) {
     const loc = locale.toLowerCase()
@@ -42,6 +49,15 @@ export function merge() {
     }
 
     catalog.srcFile = `./apps/provider/src/assets/i18n/${loc}.json`
+    catalog.save()
+
+    catalog = new Catalog(`./libs/storefront/src/assets/i18n/${loc}.json`)
+
+    if (base.hasOwnProperty(`storefront.${parent}`)) {
+      catalog.union(base[`storefront.${parent}`])
+    }
+
+    catalog.srcFile = `./libs/storefront/src/assets/i18n/${loc}.json`
     catalog.save()
   }
 }

@@ -1,0 +1,65 @@
+{
+  "data": [
+    {
+      "id": "423",
+      "type": "shipment",
+      "attributes": {
+        "number": "H93015583332",
+        "final_price": "0.0",
+        "display_final_price": "$0.00",
+        "state": "pending",
+        "shipped_at": null,
+        "tracking_url": null,
+        "public_metadata": {},
+        "free": true
+      },
+      "relationships": {
+        "shipping_rates": {
+          "data": [
+            { "id": "522", "type": "shipping_rate" },
+            { "id": "523", "type": "shipping_rate" }
+          ]
+        },
+        "selected_shipping_rate": {
+          "data": { "id": "522", "type": "shipping_rate" }
+        },
+        "stock_location": { "data": { "id": "1", "type": "stock_location" } }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "522",
+      "type": "shipping_rate",
+      "attributes": {
+        "name": "Free shipping",
+        "selected": true,
+        "final_price": "0.0",
+        "display_final_price": "$0.00",
+        "cost": "0.0",
+        "display_cost": "$0.00",
+        "tax_amount": "0.0",
+        "display_tax_amount": "$0.00",
+        "shipping_method_id": 1,
+        "free": true
+      }
+    },
+    {
+      "id": "523",
+      "type": "shipping_rate",
+      "attributes": {
+        "name": "Optifast Flat Rate Shipping",
+        "selected": false,
+        "final_price": "0.0",
+        "display_final_price": "$0.00",
+        "cost": "7.95",
+        "display_cost": "$7.95 (+ $0.56 General)",
+        "tax_amount": "0.56",
+        "display_tax_amount": "$0.56",
+        "shipping_method_id": 3,
+        "free": true
+      }
+    },
+    { "id": "1", "type": "stock_location", "attributes": { "name": "default" } }
+  ]
+}

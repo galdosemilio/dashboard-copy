@@ -1,0 +1,224 @@
+{
+  "data": [
+    {
+      "id": "11",
+      "type": "taxon",
+      "attributes": {
+        "name": "Supplements",
+        "pretty_name": "Food Categories -\u003e Supplements",
+        "permalink": "food-categories/supplements",
+        "seo_title": "Supplements",
+        "description": "",
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "left": 16,
+        "right": 17,
+        "position": 0,
+        "depth": 1,
+        "updated_at": "2022-06-30T12:16:34.650-05:00",
+        "public_metadata": {},
+        "is_root": false,
+        "is_child": true,
+        "is_leaf": true
+      },
+      "relationships": {
+        "parent": { "data": { "id": "7", "type": "taxon" } },
+        "taxonomy": { "data": { "id": "5", "type": "taxonomy" } },
+        "children": { "data": [] },
+        "image": { "data": null }
+      }
+    },
+    {
+      "id": "10",
+      "type": "taxon",
+      "attributes": {
+        "name": "Shake Mixes",
+        "pretty_name": "Food Categories -\u003e Shake Mixes",
+        "permalink": "food-categories/shake-mixes",
+        "seo_title": "Shake Mixes",
+        "description": "",
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "left": 14,
+        "right": 15,
+        "position": 0,
+        "depth": 1,
+        "updated_at": "2022-07-01T09:35:40.269-05:00",
+        "public_metadata": {},
+        "is_root": false,
+        "is_child": true,
+        "is_leaf": true
+      },
+      "relationships": {
+        "parent": { "data": { "id": "7", "type": "taxon" } },
+        "taxonomy": { "data": { "id": "5", "type": "taxonomy" } },
+        "children": { "data": [] },
+        "image": { "data": null }
+      }
+    },
+    {
+      "id": "8",
+      "type": "taxon",
+      "attributes": {
+        "name": "Bars",
+        "pretty_name": "Food Categories -\u003e Bars",
+        "permalink": "food-categories/bars",
+        "seo_title": "Bars",
+        "description": "\u003cp\u003eThese are some great bars!\u0026nbsp; You would really like them!\u003c/p\u003e",
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "left": 10,
+        "right": 11,
+        "position": 0,
+        "depth": 1,
+        "updated_at": "2022-07-01T09:49:50.568-05:00",
+        "public_metadata": {},
+        "is_root": false,
+        "is_child": true,
+        "is_leaf": true
+      },
+      "relationships": {
+        "parent": { "data": { "id": "7", "type": "taxon" } },
+        "taxonomy": { "data": { "id": "5", "type": "taxonomy" } },
+        "children": { "data": [] },
+        "image": { "data": { "id": "148", "type": "taxon_image" } }
+      }
+    },
+    {
+      "id": "9",
+      "type": "taxon",
+      "attributes": {
+        "name": "Soups",
+        "pretty_name": "Food Categories -\u003e Soups",
+        "permalink": "food-categories/soups",
+        "seo_title": "Soups",
+        "description": "",
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "left": 12,
+        "right": 13,
+        "position": 0,
+        "depth": 1,
+        "updated_at": "2022-07-04T02:28:38.686-05:00",
+        "public_metadata": {},
+        "is_root": false,
+        "is_child": true,
+        "is_leaf": true
+      },
+      "relationships": {
+        "parent": { "data": { "id": "7", "type": "taxon" } },
+        "taxonomy": { "data": { "id": "5", "type": "taxonomy" } },
+        "children": { "data": [] },
+        "image": { "data": null }
+      }
+    },
+    {
+      "id": "7",
+      "type": "taxon",
+      "attributes": {
+        "name": "Food Categories",
+        "pretty_name": "Food Categories",
+        "permalink": "food-categories",
+        "seo_title": "Food Categories",
+        "description": "",
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "left": 9,
+        "right": 22,
+        "position": 0,
+        "depth": 0,
+        "updated_at": "2022-07-04T02:28:38.686-05:00",
+        "public_metadata": {},
+        "is_root": true,
+        "is_child": false,
+        "is_leaf": false
+      },
+      "relationships": {
+        "parent": { "data": null },
+        "taxonomy": { "data": { "id": "5", "type": "taxonomy" } },
+        "children": {
+          "data": [
+            { "id": "8", "type": "taxon" },
+            { "id": "9", "type": "taxon" },
+            { "id": "10", "type": "taxon" },
+            { "id": "11", "type": "taxon" },
+            { "id": "12", "type": "taxon" },
+            { "id": "13", "type": "taxon" }
+          ]
+        },
+        "image": { "data": { "id": "149", "type": "taxon_image" } }
+      }
+    },
+    {
+      "id": "12",
+      "type": "taxon",
+      "attributes": {
+        "name": "Shakes",
+        "pretty_name": "Food Categories -\u003e Shakes",
+        "permalink": "food-categories/shakes",
+        "seo_title": "Shakes",
+        "description": null,
+        "meta_title": null,
+        "meta_description": null,
+        "meta_keywords": null,
+        "left": 18,
+        "right": 19,
+        "position": 0,
+        "depth": 1,
+        "updated_at": "2022-05-31T10:58:35.660-05:00",
+        "public_metadata": {},
+        "is_root": false,
+        "is_child": true,
+        "is_leaf": true
+      },
+      "relationships": {
+        "parent": { "data": { "id": "7", "type": "taxon" } },
+        "taxonomy": { "data": { "id": "5", "type": "taxonomy" } },
+        "children": { "data": [] },
+        "image": { "data": null }
+      }
+    },
+    {
+      "id": "13",
+      "type": "taxon",
+      "attributes": {
+        "name": "Post Bariatric",
+        "pretty_name": "Food Categories -\u003e Post Bariatric",
+        "permalink": "food-categories/post-bariatric",
+        "seo_title": "Post Bariatric",
+        "description": null,
+        "meta_title": null,
+        "meta_description": null,
+        "meta_keywords": null,
+        "left": 20,
+        "right": 21,
+        "position": 0,
+        "depth": 1,
+        "updated_at": "2022-05-31T11:53:58.342-05:00",
+        "public_metadata": {},
+        "is_root": false,
+        "is_child": true,
+        "is_leaf": true
+      },
+      "relationships": {
+        "parent": { "data": { "id": "7", "type": "taxon" } },
+        "taxonomy": { "data": { "id": "5", "type": "taxonomy" } },
+        "children": { "data": [] },
+        "image": { "data": null }
+      }
+    }
+  ],
+  "meta": { "count": 7, "total_count": 7, "total_pages": 1 },
+  "links": {
+    "self": "https://optifast-test.ecommerce.coachcare.com/api/v2/storefront/taxons?filter%5Bname%5D=",
+    "next": "https://optifast-test.ecommerce.coachcare.com/api/v2/storefront/taxons?filter%5Bname%5D=\u0026page=1",
+    "prev": "https://optifast-test.ecommerce.coachcare.com/api/v2/storefront/taxons?filter%5Bname%5D=\u0026page=1",
+    "last": "https://optifast-test.ecommerce.coachcare.com/api/v2/storefront/taxons?filter%5Bname%5D=\u0026page=1",
+    "first": "https://optifast-test.ecommerce.coachcare.com/api/v2/storefront/taxons?filter%5Bname%5D=\u0026page=1"
+  }
+}

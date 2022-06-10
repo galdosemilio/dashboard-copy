@@ -1,0 +1,54 @@
+
+<div fxLayout="column">
+  <div class="storefront-banner">
+    <h2>{{ 'GLOBAL.BANNER_TITLE' | translate }}</h2>
+    <p>{{ 'GLOBAL.BANNER_DESCRIPTION' | translate }}</p>
+  </div>
+  <div class="header" fxLayout.xs="column" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center" class="nav">
+      <div class="nav-item nav-item-all" (click)="onClearSelectedCategory()">
+        <mat-icon>list</mat-icon>
+        <span>{{ 'GLOBAL.ALL' | translate }}</span>
+      </div>
+      <div class="nav-item" *ngIf="selectedCategory">
+        <mat-icon >navigate_next</mat-icon>
+        <span>{{ selectedCategory.attributes.name }}</span>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <div class="search-item-input">
+        <mat-icon>search</mat-icon>
+        <input
+          type="text" class="search-box"
+          [placeholder]="'GLOBAL.SEARCH_ITEMS' | translate"
+          (ngModelChange)="this.search$.next($event)"
+          [(ngModel)]="search"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="loading" *ngIf="isLoading">
+    <mat-spinner>
+      <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+    </mat-spinner>
+  </div>
+  <div class="product-container"  *ngIf="!isLoading">
+    <div class="products" *ngIf="selectedCategory">
+      <div class="product" *ngFor="let product of products" (click)="onSelectProduct(product)">
+        <div class="product-img">
+          <img [src]="product.images[0]" alt="product" />
+        </div>
+        <p>{{ product.attributes.name }}</p>
+      </div>
+    </div>
+    <div class="categories" *ngIf="!selectedCategory">
+      <div class="category" *ngFor="let category of categories" (click)="onSelectCategory(category)">
+        <img [src]="category.images?.length ? category.image[0] : 'https://cdn.coachcare.com/corporate/Other/ecommerce-product-placeholder.png'" alt=""/>
+        <div class="category-content">
+          <p>{{ category.attributes.name }}</p>
+          <p [innerHTML]="category.attributes.description"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

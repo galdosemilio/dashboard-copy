@@ -1,3 +1,4 @@
+import { TranslateCatalogs } from '@coachcare/common/services'
 import { AppConfig } from './app.config'
 import { ChartConfig } from './chart.config'
 import {
@@ -34,4 +35,9 @@ export const Config: CCRConfig = {
     bg_bar: '#ffffff',
     sidenav: '#dedede'
   }
+}
+
+export const catalogs: TranslateCatalogs = {
+  dashboard: './assets/i18n/${ lang }.json',
+  storefront: './assets/i18n/storefront/${ lang }.json'
 }
