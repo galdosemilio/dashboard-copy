@@ -273,7 +273,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
 
       const res = (
         await temporalSource.connect().pipe(take(1)).toPromise()
-      ).filter((entry) => entry.level === 0)
+      ).filter((entry) => entry.level === 0 && !entry.isHidden)
 
       if (!res.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
