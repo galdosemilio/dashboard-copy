@@ -1,3 +1,19 @@
+# [1.87.0](https://github.com/coachcare/dashboard/compare/v1.86.4...v1.87.0) (2022-06-16)
+
+
+### Bug Fixes
+
+* adjusted cypress tests ([421f91c](https://github.com/coachcare/dashboard/commit/421f91cae9a6a8888eef3daeea2ecac7773d5286))
+* adjusted lean mass and fat mass calculation [FRON-2834] ([b9fd8fc](https://github.com/coachcare/dashboard/commit/b9fd8fc20e37e30f80905aee7e563eedb48ec71f))
+* adjusted some minor boot up issues ([7f3a848](https://github.com/coachcare/dashboard/commit/7f3a8486fdb334e092b66175059246165ac8fe3b))
+* disabled preloading for provider site [FRON-2795] ([283b474](https://github.com/coachcare/dashboard/commit/283b4744bb9ec860a25748bd63590202cf660e65))
+* infinite scroll for phases [FRON-2821] ([92b02ce](https://github.com/coachcare/dashboard/commit/92b02ce7ddcd2ebd126cbde4e4ceed1335e56b57))
+
+
+### Features
+
+* updated README.md file ([8c86f3b](https://github.com/coachcare/dashboard/commit/8c86f3be7c0ac32fac23014e36cb8996639dc065))
+
 ## [1.86.4](https://github.com/coachcare/dashboard/compare/v1.86.3...v1.86.4) (2022-06-06)
 
 
