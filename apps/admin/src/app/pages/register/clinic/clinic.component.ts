@@ -230,10 +230,7 @@ export class RegisterClinicPageComponent implements OnDestroy, OnInit {
           ? false
           : true
 
-      const queryPlan =
-        params.hasOwnProperty('plan') && params.plan !== undefined
-          ? params.plan
-          : undefined
+      const queryPlan = 'plan' in params ? params.plan : undefined
 
       if (cookieLang) {
         this.store.changeLang(cookieLang)
