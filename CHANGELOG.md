@@ -1,3 +1,13 @@
+## [1.87.1](https://github.com/coachcare/dashboard/compare/v1.87.0...v1.87.1) (2022-06-23)
+
+
+### Bug Fixes
+
+* add parameter to skip plan selection page [FRON-2816] ([3448ed6](https://github.com/coachcare/dashboard/commit/3448ed6ab2420f5680f87ef2b42df1da82f3778f))
+* check plan in params ([46e0e6f](https://github.com/coachcare/dashboard/commit/46e0e6fc5829a5e815f940d550085cf57cfdbdd5))
+* language reverts [FRON-2782] ([20ac7d8](https://github.com/coachcare/dashboard/commit/20ac7d8fb1940e40f92e204e858898d8cb0da298))
+* restored scan smart glucometer [FRON-2807] ([37b7aa3](https://github.com/coachcare/dashboard/commit/37b7aa36d07fbd0d11d5e12920e29e4fb1101370))
+
 # [1.87.0](https://github.com/coachcare/dashboard/compare/v1.86.4...v1.87.0) (2022-06-16)
 
 
