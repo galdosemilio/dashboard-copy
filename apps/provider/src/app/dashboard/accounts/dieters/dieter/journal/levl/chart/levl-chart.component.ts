@@ -11,8 +11,8 @@ import {
 } from '@app/service'
 import { ChartData, DateNavigatorOutput } from '@app/shared'
 import { Store } from '@ngrx/store'
-import { CCRConfig } from '@app/config'
 import { DataPointTypes } from '@coachcare/sdk'
+import { AppState } from '@app/store/state'
 
 @UntilDestroy()
 @Component({
@@ -35,7 +35,7 @@ export class LevlChartComponent implements OnInit {
     private context: ContextService,
     private config: ConfigService,
     private database: MeasurementDatabaseV2,
-    private store: Store<CCRConfig>,
+    private store: Store<AppState>,
     private translator: TranslateService
   ) {}
 
