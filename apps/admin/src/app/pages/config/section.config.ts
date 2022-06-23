@@ -33,7 +33,7 @@ export interface LoginConfigDetails {
 export interface CustomCheckboxConfig {
   text: string
   fieldName: string
-  links?: { text: string; url: string }[]
+  links?: { text: string; url: string; classes?: string }[]
   supportedAccTypes: AccountTypeIds[]
 }
 
@@ -52,6 +52,7 @@ export interface RegisterConfigDetails {
   CLINIC_MSA?: boolean
   CLINIC_MSA_LINK?: string
   CLINIC_MSA_LINK_LABEL?: string
+  CUSTOM_FOOTER_TEXT?: string
   SELF_REGISTER?: boolean
 }
 

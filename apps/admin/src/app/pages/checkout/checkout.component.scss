@@ -102,6 +102,16 @@ ccr-checkout {
       .mat-form-field-suffix {
         border: 0;
       }
+
+      .big-footer {
+        font-size: 19px;
+        margin-top: 30px;
+
+        a {
+          color: var(--primary);
+          text-decoration: underline;
+        }
+      }
     }
 
     .ccr-checkout-label {

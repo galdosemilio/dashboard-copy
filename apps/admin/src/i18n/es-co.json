@@ -604,6 +604,7 @@
     "PASSWORD_UPDATE": {
       "HT_NEWSLETTER_CHECKBOX": "Al marcar esta casilla y seleccionar Grabar Contraseña, acepto recibir el correo digital de Healthy Transformations el cual puede incluir novedades y promociones sobre los programas y productos.",
       "MW_CUSTOM_CHECKBOX": "Al marcar esta casilla, confirmo que atiendo y puedo cumplir con los requerimientos y restricciones del programa.",
+      "MW_CUSTOM_FOOTER": "Si tiene alguna pregunta relacionada con la salud o el programa y desea que un entrenador se comunique con usted antes de completar su registro, haga clic aquí: <a href=\"https://musclewise.com/contact/\">contáctanos</a>",
       "MW_CUSTOM_LINK": "Requerimientos y Restricciones del Programa."
     },
     "STEP1": {

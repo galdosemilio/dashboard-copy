@@ -40,10 +40,12 @@ import {
   SpreeProvider,
   User
 } from '@coachcare/sdk'
+import { TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { environment } from '../../../../environments/environment'
 import { range, uniqBy } from 'lodash'
 import * as moment from 'moment'
+import { resolveConfig } from '../../config/section.config'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import * as owasp from 'owasp-password-strength-test'
 import { filter } from 'rxjs/operators'
@@ -55,9 +57,8 @@ const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
 
 export interface AdditionalConsentButtonEntry {
   text: string
-  links: { text: string; url: string }[]
+  links: { text: string; url: string; class?: string }[]
 }
-
 export interface CheckoutAccountInfo {
   id?: string
   firstName: string
@@ -107,6 +108,8 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
 
   public account: AccSingleResponse
   public additionalConsentForm: FormArray
+  public customFooterText: string
+  public customFooterTextKey: string | null
   public form: FormGroup
   public isMobileDevice: boolean
   public genders: SelectorOption[] = [
@@ -134,6 +137,7 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
     private notifier: NotifierService,
     private register: Register,
     private spreeProvider: SpreeProvider,
+    private translate: TranslateService,
     private user: User
   ) {
     this.validatePassword = this.validatePassword.bind(this)
@@ -144,6 +148,10 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
     this.generateHeights()
     this.createForm()
     this.subscribeToFormEvents()
+    this.updateCustomFooterText()
+    this.translate.onLangChange
+      .pipe(untilDestroyed(this))
+      .subscribe(() => this.updateCustomFooterText())
   }
 
   public markAllAsTouched(): void {
@@ -430,6 +438,25 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
             this.heights.find((height) => height.value === value)?.value
           )
       )
+  }
+
+  private updateCustomFooterText(): void {
+    if (this.customFooterTextKey === undefined) {
+      this.customFooterTextKey =
+        resolveConfig(
+          'REGISTER.CUSTOM_FOOTER_TEXT',
+          this.context.organizationId
+        ) ?? null
+    }
+
+    if (typeof this.customFooterTextKey !== 'string') {
+      return
+    }
+
+    this.translate
+      .get(this.customFooterTextKey)
+      .pipe(untilDestroyed(this))
+      .subscribe((translation: string) => (this.customFooterText = translation))
   }
 
   private async updateUserAccount(): Promise<void> {

@@ -604,6 +604,7 @@
     "PASSWORD_UPDATE": {
       "HT_NEWSLETTER_CHECKBOX": "Selezionando questa casella e selezionando Salva password, accetto di ricevere l'e-mail digitale della trasformazione sana che può includere aggiornamenti e promozioni del programma e del prodotto.",
       "MW_CUSTOM_CHECKBOX": "Controllando questa casella, confermo di soddisfare e posso rispettare i requisiti del programma e le restrizioni.",
+      "MW_CUSTOM_FOOTER": "Se hai domande relative alla salute o al programma e desideri che un allenatore ti contatti prima di completare la registrazione, fai clic qui: <a href=\"https://musclewise.com/contact/\">Contattaci</a>",
       "MW_CUSTOM_LINK": "Requisiti e restrizioni del programma."
     },
     "STEP1": {

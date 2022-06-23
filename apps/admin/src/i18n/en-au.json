@@ -603,7 +603,8 @@
     },
     "PASSWORD_UPDATE": {
       "HT_NEWSLETTER_CHECKBOX": "By checking this box and selecting Save Password, I agree to receive the Healthy Transformation digital email that may include program and product updates and promotions.",
-      "MW_CUSTOM_CHECKBOX": "By checking this box, I confirm that I meet and can comply with the program requirements and restrictions.",
+      "MW_CUSTOM_CHECKBOX": "By checking this box, I confirm that I meet and can comply with the program requirements and restrictions.  Click here for: ",
+      "MW_CUSTOM_FOOTER": "If you have any health or program related questions and would like a coach to contact you prior to completing your registration please click here: <a href=\"https://musclewise.com/contact/\">Contact Us</a>",
       "MW_CUSTOM_LINK": "Program Requirements and Restrictions."
     },
     "STEP1": {

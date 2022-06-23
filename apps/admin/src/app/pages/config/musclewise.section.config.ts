@@ -15,7 +15,8 @@ export const MuscleWiseSectionConfig: SectionConfigDetails = {
           url: 'http://www.musclewise.com/programaccessiblity'
         }
       ]
-    }
+    },
+    CUSTOM_FOOTER_TEXT: _('REGISTER.PASSWORD_UPDATE.MW_CUSTOM_FOOTER')
   },
   CHECKOUT: {
     ORDER_CONFIRM: MuscleWiseOrderConfirmComponent,

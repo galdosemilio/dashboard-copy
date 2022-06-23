@@ -18,6 +18,14 @@ ccr-checkout-account-info {
 
   .ccr-checkout-field-select {
     margin-bottom: 15px;
+
+    a.bold {
+      font-weight: bold;
+    }
+
+    a.underline {
+      text-decoration: underline;
+    }
   }
 
   .mat-form-field {

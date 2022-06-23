@@ -196,13 +196,14 @@
     <mat-checkbox
     [class.mat-form-field-invalid]="additionalConsentForm.controls[i].touched && additionalConsentForm.controls[i].getError('required')"
     [formControlName]="i">
-      {{ consentButton.text }} <a *ngFor="let link of consentButton.links" [href]="link.url">{{ link.text }}</a>
+      {{ consentButton.text }} <a *ngFor="let link of consentButton.links" [href]="link.url" [class]="link.classes">{{ link.text }}</a>
     </mat-checkbox>
     <mat-error *ngIf="additionalConsentForm.controls[i].touched && additionalConsentForm.controls[i].getError('required')">
       {{ 'GLOBAL.FIELD_REQUIRED' | translate }}
     </mat-error>
   </div>
   </div>
+  <p class="big-footer" *ngIf="customFooterText" [innerHtml]="customFooterText"></p>
 </form>
 
 <ng-template #checkIcon>
