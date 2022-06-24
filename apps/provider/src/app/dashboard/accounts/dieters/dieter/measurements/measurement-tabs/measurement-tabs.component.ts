@@ -6,7 +6,6 @@ import {
   selectMeasurementLabels
 } from '@app/store/measurement-label'
 import { AppState } from '@app/store/state'
-import { MeasurementLabelEntry } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Store } from '@ngrx/store'
 
