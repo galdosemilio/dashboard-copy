@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ExtendedMeasurementLabelEntry } from '@app/shared/model'
 import {
   MeasurementLabelActions,
+  selectCurrentLabel,
   selectMeasurementLabels
 } from '@app/store/measurement-label'
 import { AppState } from '@app/store/state'
@@ -34,13 +35,23 @@ export class MeasurementTabsComponent implements OnInit {
       .select(selectMeasurementLabels)
       .pipe(untilDestroyed(this))
       .subscribe(this.setMeasurementLabels)
+
+    this.store
+      .select(selectCurrentLabel)
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        (label) =>
+          (this.section =
+            (label as ExtendedMeasurementLabelEntry).routeLink ??
+            (label as 'food'))
+      )
   }
 
   public onSelectTab(label: ExtendedMeasurementLabelEntry | 'food'): void {
     this.onSelect.emit(label)
     this.store.dispatch(
       MeasurementLabelActions.SelectLabel({
-        label: label as MeasurementLabelEntry | 'food'
+        label: label as ExtendedMeasurementLabelEntry | 'food'
       })
     )
   }

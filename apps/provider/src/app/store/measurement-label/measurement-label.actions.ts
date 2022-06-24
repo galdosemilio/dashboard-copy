@@ -1,8 +1,5 @@
 import { ExtendedMeasurementLabelEntry } from '@app/shared/model'
-import {
-  MeasurementDataPointTypeAssociation,
-  MeasurementLabelEntry
-} from '@coachcare/sdk'
+import { MeasurementDataPointTypeAssociation } from '@coachcare/sdk'
 import { MeasurementPreferenceEntry } from '@coachcare/sdk/dist/lib/providers/measurement/preference'
 import { createAction, props } from '@ngrx/store'
 
@@ -16,7 +13,7 @@ const RefreshLabelsAndTypes = createAction(
 
 const SelectLabel = createAction(
   '[MEASUREMENT LABEL] Select Label',
-  props<{ label: MeasurementLabelEntry | 'food' }>()
+  props<{ label: ExtendedMeasurementLabelEntry | 'food' }>()
 )
 
 const SetLabelsAndTypes = createAction(

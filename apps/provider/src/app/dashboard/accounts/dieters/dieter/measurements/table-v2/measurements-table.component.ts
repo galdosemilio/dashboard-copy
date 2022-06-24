@@ -20,6 +20,7 @@ import {
 import {
   CcrTableSortDirective,
   DateNavigatorOutput,
+  ExtendedMeasurementLabelEntry,
   PromptDialog
 } from '@app/shared'
 import { _ } from '@app/shared/utils'
@@ -32,7 +33,6 @@ import {
   MeasurementDataPointProvider,
   MeasurementDataPointType,
   MeasurementDataPointTypeAssociation,
-  MeasurementLabelEntry,
   MeasurementUnitConversions
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -71,12 +71,12 @@ export class MeasurementsTableV2Component implements OnInit {
     return this._dates
   }
 
-  @Input() set label(label: MeasurementLabelEntry) {
+  @Input() set label(label: ExtendedMeasurementLabelEntry) {
     this._label = label
     this.store.dispatch(MeasurementLabelActions.SelectLabel({ label }))
   }
 
-  get label(): MeasurementLabelEntry {
+  get label(): ExtendedMeasurementLabelEntry {
     return this._label
   }
 
@@ -175,7 +175,7 @@ export class MeasurementsTableV2Component implements OnInit {
   }
 
   private _dates: DateNavigatorOutput
-  private _label: MeasurementLabelEntry
+  private _label: ExtendedMeasurementLabelEntry
   private dates$: Subject<DateNavigatorOutput> =
     new Subject<DateNavigatorOutput>()
   private columns$: Subject<void> = new Subject<void>()

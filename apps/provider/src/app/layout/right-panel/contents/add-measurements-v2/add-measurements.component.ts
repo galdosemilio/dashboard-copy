@@ -16,7 +16,7 @@ import {
   NotifierService,
   SelectedOrganization
 } from '@app/service'
-import { _ } from '@app/shared'
+import { ExtendedMeasurementLabelEntry, _ } from '@app/shared'
 import { CcrMagnitudeEntry } from '@coachcare/common/components'
 import { MatDialog } from '@coachcare/material'
 import {
@@ -72,7 +72,7 @@ interface DataPointTypeAssociationWithIndex {
 export class AddMeasurementsV2Component implements OnInit {
   public dataTypeInputProps = DATA_TYPE_INPUT_PROPS
   public hiddenMeasurementTabs: string[] = []
-  public labels: MeasurementLabelEntry[] = []
+  public labels: ExtendedMeasurementLabelEntry[] = []
   public labelsForm: FormGroup
   public magnitudes: CcrMagnitudeEntry[] = [
     {
@@ -529,7 +529,9 @@ export class AddMeasurementsV2Component implements OnInit {
     this.labelsForm.reset({ date: moment(), label })
   }
 
-  private async refreshLabels(labels: MeasurementLabelEntry[]): Promise<void> {
+  private async refreshLabels(
+    labels: ExtendedMeasurementLabelEntry[]
+  ): Promise<void> {
     try {
       this.labels = labels
 
