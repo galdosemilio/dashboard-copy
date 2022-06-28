@@ -1,3 +1,18 @@
+# [1.88.0](https://github.com/coachcare/dashboard/compare/v1.87.1...v1.88.0) (2022-06-28)
+
+
+### Bug Fixes
+
+* adjusted ngrx label store types ([9f0e041](https://github.com/coachcare/dashboard/commit/9f0e041c8faef0ce7f6e219db15066b7142dfcea))
+* adjusted provider ([f1c069c](https://github.com/coachcare/dashboard/commit/f1c069c37a67467c90d7308fd791f0e415668748))
+* removed code smells ([8562283](https://github.com/coachcare/dashboard/commit/856228347750a925d959d290d9239fdd7a18444d))
+
+
+### Features
+
+* musclewise registration page updates ([c63da7e](https://github.com/coachcare/dashboard/commit/c63da7e138cdb24cf87158ea6558ddec3abe78db))
+* refactored measurement label service to use store ([c7aafe8](https://github.com/coachcare/dashboard/commit/c7aafe88f7f2f8d9e6fe65077a1662159bf11ca2))
+
 ## [1.87.1](https://github.com/coachcare/dashboard/compare/v1.87.0...v1.87.1) (2022-06-23)
 
 
