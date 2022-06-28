@@ -163,6 +163,7 @@ export class CcrMeasurementChartV2Component implements OnInit {
     if (this.typeGroups) {
       this.source.type = this.typeGroups[0]?.types[0]?.id
       this.refresh()
+      return
     }
 
     this.store
