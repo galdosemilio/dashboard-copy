@@ -1,3 +1,16 @@
+# [1.89.0](https://github.com/coachcare/dashboard/compare/v1.88.0...v1.89.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* solved an issue with the chart selector options ([618bf01](https://github.com/coachcare/dashboard/commit/618bf019818698ea166306fa458e4ef608e2fbf6))
+* unexplained correction for patient CSV export ([266733f](https://github.com/coachcare/dashboard/commit/266733f3e598993aaa8e0f4f50bc95978b0a031d))
+
+
+### Features
+
+* added data threshold alert support [FRON-2852] ([0905a4e](https://github.com/coachcare/dashboard/commit/0905a4eb7307213598c8a6fa742263c56203989b))
+
 # [1.88.0](https://github.com/coachcare/dashboard/compare/v1.87.1...v1.88.0) (2022-06-28)
 
 
