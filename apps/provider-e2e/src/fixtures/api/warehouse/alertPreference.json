@@ -69,7 +69,11 @@
     },
     {
       "id": "612",
-      "type": { "id": "2", "code": "inactivity", "description": "Inactivity alert" },
+      "type": {
+        "id": "2",
+        "code": "inactivity",
+        "description": "Inactivity alert"
+      },
       "organization": {
         "id": "30",
         "preference": {
@@ -81,7 +85,11 @@
     },
     {
       "id": "613",
-      "type": { "id": "2", "code": "inactivity", "description": "Inactivity alert" },
+      "type": {
+        "id": "2",
+        "code": "inactivity",
+        "description": "Inactivity alert"
+      },
       "organization": {
         "id": "30",
         "preference": {
@@ -93,11 +101,55 @@
     },
     {
       "id": "614",
-      "type": { "id": "2", "code": "inactivity", "description": "Inactivity alert" },
+      "type": {
+        "id": "2",
+        "code": "inactivity",
+        "description": "Inactivity alert"
+      },
       "organization": {
         "id": "30",
         "preference": {
           "options": { "weight-logging": { "period": "3 days" } },
+          "isActive": true
+        }
+      },
+      "packages": []
+    },
+    {
+      "id": "627",
+      "type": {
+        "id": "4",
+        "code": "data-point-threshold",
+        "description": "Data point threshold alert"
+      },
+      "organization": {
+        "id": "1",
+        "preference": {
+          "options": {
+            "analysis": { "period": "1 hour" },
+            "dataPoint": { "type": { "id": "1" }, "value": 110230 },
+            "direction": "above"
+          },
+          "isActive": true
+        }
+      },
+      "packages": []
+    },
+    {
+      "id": "627",
+      "type": {
+        "id": "4",
+        "code": "data-point-threshold",
+        "description": "Data point threshold alert"
+      },
+      "organization": {
+        "id": "30",
+        "preference": {
+          "options": {
+            "analysis": { "period": "1 hour" },
+            "dataPoint": { "type": { "id": "4" }, "value": 110230 },
+            "direction": "above"
+          },
           "isActive": true
         }
       },

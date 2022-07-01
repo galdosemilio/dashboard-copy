@@ -12,7 +12,12 @@ import {
   unitConversion,
   unitLabel
 } from '@app/shared/utils'
-import { AlertNotificationResponse, NotificationRequest } from '@coachcare/sdk'
+import {
+  AlertNotificationResponse,
+  AlertsGenericPayload,
+  AlertsWeightRegainedPayload,
+  NotificationRequest
+} from '@coachcare/sdk'
 import { AlertNotification } from '../models'
 import { AlertsDatabase } from './alerts.database'
 
@@ -55,7 +60,7 @@ export class AlertsDataSource extends TableDataSource<
     return this.database.fetchNotifications(criteria)
   }
 
-  mapResult(result: AlertNotificationResponse): any {
+  mapResult(result: AlertNotificationResponse): AlertNotification[] {
     this.total = result.pagination.next
       ? result.pagination.next + 1
       : this.criteria.offset + result.data.length
@@ -66,14 +71,15 @@ export class AlertsDataSource extends TableDataSource<
         const alert = {
           detail: '',
           icon: '',
-          params: {}
+          params: {},
+          payload: {}
         }
         let since: moment.Moment
         const units = this.context.user.measurementPreference
-        const val = value.payload?.value
+        const val: number = (value.payload as AlertsWeightRegainedPayload)
+          ?.value
 
         switch (value.type.id) {
-          // 1. Weight Regained
           case '1':
             alert.params['value'] = unitConversion(units, 'composition', val)
             alert.params['unit'] =
@@ -82,11 +88,13 @@ export class AlertsDataSource extends TableDataSource<
             alert.icon = 'trending-up'
             break
 
-          // 2. Meal logging
           case '2':
             since =
-              value.payload && value.payload.lastMeasurement
-                ? moment(value.payload.lastMeasurement)
+              value.payload &&
+              (value.payload as AlertsGenericPayload).lastMeasurement
+                ? moment(
+                    (value.payload as AlertsGenericPayload).lastMeasurement
+                  )
                 : undefined
             alert.params['date'] =
               since !== undefined ? since.to(now) : undefined
@@ -97,26 +105,23 @@ export class AlertsDataSource extends TableDataSource<
             alert.icon = 'food'
             break
 
-          // 3. Tracker Syncing
           case '3':
             alert.detail = _('ALERTS.TRACKER_SYNCING')
             alert.icon = 'tracker'
             break
 
-          // 4. Weight Logging
           case '4':
             alert.detail = _('ALERTS.WEIGHT_LOGGING')
             alert.icon = 'scale'
             break
 
-          // 5. Weight Threshold
           case '5':
-            if (value.payload.weight !== undefined) {
-              const weight = value.payload.weight
+            if ((value.payload as AlertsGenericPayload).weight !== undefined) {
+              const weight = (value.payload as AlertsGenericPayload).weight
               alert.params['value'] = unitConversion(
                 units,
                 'composition',
-                weight.delta
+                (weight as { delta: number }).delta
               )
               alert.params['unit'] =
                 this.i18n[unitLabel(units, 'composition', val)]
@@ -129,6 +134,12 @@ export class AlertsDataSource extends TableDataSource<
 
               alert.icon = 'weight-thresh'
             }
+            break
+
+          case '6':
+            alert.icon = 'circle_notifications'
+            alert.detail = _('ALERTS.TYPES.DATA_THRESHOLD_ALERT')
+            alert.payload = value.payload
             break
 
           default:

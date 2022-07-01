@@ -1,15 +1,32 @@
 {
   "ALERTS": {
+    "ABOVE": "Au dessus",
     "ACTIVE_ALERTS": "alertes actives pour {{name}}",
+    "ADD_NEW_DATA_THRESHOLD_ALERT": "Ajouter une nouvelle alerte seuil",
     "ALERT_NOTIFICATIONS": "Notifications",
+    "ALERT_VALUE": "Valeur d'alerte",
     "ASSOCIATION_WARNING": "Votre compte a un accès limité aux notifications",
     "ASSOCIATION_WARNING_EXPLANATION": "Votre compte a accès à certains patients par une association clinique <i> en cascade </ i>. Cependant, vous ne verrez que des notifications d'alerte pour les patients auxquels vous avez accès à travers une association clinique <i> directe </ i>. Vous devez être associé directement à la même clinique que le patient pour voir les notifications d'alerte pour ce patient. Pour plus d'informations ou d'aide s'il vous plaît <a target=\"_blank\" href=\"https://coachcare.zendesk.com/hc/en-us/requests/new\" rel=\"noopener de support de contact </a>.",
+    "BELOW": "Dessous",
     "DAILY": "Quotidien",
+    "DATA_THRESHOLD_ALERT_HINT": "Générer une notification chaque {{ period }} lorsque {{ type }} <strong>{{ directionPrefix }} {{ value }}{{ unit }}.</strong>",
+    "DATA_THRESHOLD_NOTIFICATION_HINT": "<strong>{{ value }}{{ unit }}</strong> {{ diff }}{{ unit }} {{ directionPrefix }} {{ limit }}{{ unit }} au seuil",
+    "DELETE_ALERT": "Supprimer",
+    "DELETE_ALERT_DESCRIPTION": "Êtes-vous sûr de vouloir supprimer cette alerte?<br><br><strong>Cette action ne peut pas être annulée.</strong>",
+    "EDIT_DATA_THRESHOLD_ALERT": "Modifier l'alerte de seuil",
+    "EXCEEDS": "Dépasse",
+    "INHERITED_ALERT_FOOTNOTE": "Cette alerte est héritée d'une clinique parentale.",
+    "IS_BELOW": "Est inférieure à",
     "MEAL_LOGGING": "Aucun repas enregistré depuis [[date]]",
     "MEAL_LOGGING_NO_SINCE": "Aucun repas enregistré",
+    "METRIC_TO_ALERT": "Métrique pour alerter",
+    "REFRESH_TIME_PERIOD": "Actualiser la période de temps",
+    "REFRESH_TIME_PERIOD_DESCRIPTION": "La fréquence à laquelle ces alertes seront générées. Par exemple: «1 jour» signifie que les alertes seront générées toutes les 24 heures.",
     "SPAN_END": "Seulement à la fin de la période",
     "TRACKER_SYNCING": "Aucune mesure de suivi",
     "TYPES": {
+      "DATA_THRESHOLD_ALERT": "Alerte seuil",
+      "DATA_THRESHOLD_ALERT_DESCRIPTION": "Cette alerte peut être configurée pour être activée en fonction d'un type de données, d'une limite supérieure ou inférieure et d'une période de rafraîchissement.",
       "INACTIVITY_MEAL_LOGGING": "Inactivité des repas",
       "INACTIVITY_MEAL_LOGGING_DESCRIPTION": "This alert is generated when a patient does not have a recorded meal for the consecutive number of days selected. Alerts are generated up to twice per week, on Tuesday and Friday.<br /><br />Example: the alert setting is 5 days. An alert is created twice per week when the patient does not have a recorded meal for 5 consecutive days.",
       "INACTIVITY_TRACKER_SYNCING": "Inactivité du suivi",
@@ -20,7 +37,7 @@
       "WEIGHT_REGAINED_THRESHOLD_DESCRIPTION": "This alert is generated when a patient's weight meets or exceeds their lowest recorded weight by the selected number of pounds/kilograms. Alerts are generated daily.<br /><br />Example: a patient's lowest recorded weight in the system is 150 pounds, and the alert setting is 10 pounds. An alert is created each day when the patient has a weight of 160 pounds or more.",
       "WEIGHT_THRESHOLD_DAYSPAN": "Nombre de jours",
       "WEIGHT_THRESHOLD_DAYSPAN_DESCRIPTION": "Le nombre de jours pour examiner le changement de poids.",
-      "WEIGHT_THRESHOLD_HEADER": "Seuil de poids",
+      "WEIGHT_THRESHOLD_HEADER": "Seuil de poids hérité",
       "WEIGHT_THRESHOLD_HEADER_DESCRIPTION": "Cette alerte est générée lorsque le poids du patient se trouve en dehors du seuil pré-définit pour un certain nombre de jours. <br /> <br /> Exemple 1 : Soyez alerté si le patient gagne du poids sur une période de 5 jours. Réglez la “Fenêtre de prise de poids” sur 0 et le “Nombre de jours” sur 5 pour générer une alerte si le patient termine une période de 5 jours avec un poids supérieur à celui enregistré au départ.  <br /> <br /> Exemple 2 : Soyez alerté si le patient fluctue de plus de 5 pounds sur une période de deux semaines. Réglez ‘Fenêtre de prise de poids” et “Fenêtre de perte de poids” sur 3 pounds et le “Nombre de jours” sur 14 pour générer une alerte si un patient termine une période de 14 jours avec un poids supérieur ou inférieur de 3 pounds ou plus.",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT": "Mesures quotidiennes exigées",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT_DESCRIPTION": "If a weight measurement is required for each day of the day span period.  If this is set to 'No', then at least two separate days must have a recorded weight.  Otherwise, the alert notification will only be generated if every day has a recorded weight.<br><br>Example 1: The Weight Threshold Alert has a Day Span of '5 days', and 'Require Daily Measurement' set to 'Yes'.  A patient must have a recorded weight for each of the 5 days in order for an alert notification to be potentially generated.<br><br>Example 2: The Weight Threshold Alert has a Day Span of '5 days', and 'Require Daily Measurement' set to 'No'.A patient must have a recorded weight on at least two separate days of the alert in order for an alert notification to be potentially generated.",
@@ -534,6 +551,7 @@
   },
   "GLOBAL": {
     "ABOUT": "À propos",
+    "ABOVE": "Au dessus",
     "ACTIVE": "Actif",
     "ACTIVITY_TYPE": "TYPE D’ACTIVITÉ",
     "ADD": "Ajouter",
@@ -559,6 +577,7 @@
       "DESCRIPTION": "Ajouter automatiquement les entraîneurs sélectionnés à tous les fils de message dans cette clinique"
     },
     "BACK": "Retour",
+    "BELOW": "Dessous",
     "BUY": "Acheter",
     "CANCEL": "Annuler",
     "CASCADING": "En cascade",
@@ -713,6 +732,11 @@
     "VIEW_ALL": "Voir tout",
     "VIEW_ALL_PATIENTS": "Voir tous les patients",
     "VIEW_COMPLETE_REPORT": "Voir le rapport complet"
+  },
+  "INTERVALS": {
+    "1_DAY": "1 jour",
+    "1_HOUR": "1 heure",
+    "1_WEEK": "1 semaine"
   },
   "JOURNAL": {
     "CALCIUM": "Ca",
@@ -1187,6 +1211,9 @@
       "NO_SUPPLEMENTS_FOUND": "Aucun supplément définit pour cette organisation."
     },
     "SUCCESS": {
+      "ALERT_CREATED": "Alerte créée avec succès.",
+      "ALERT_DELETED": "Alerte supprimée avec succès.",
+      "ALERT_UPDATED": "Alerte mise à jour avec succès.",
       "APPOINTMENT_BOOKED": "Votre rendez-vous pris !",
       "ASSOCIATION_CREATED": "Association créée avec succès.",
       "ASSOCIATION_UPDATED": "Association mise à jour.",

@@ -1,3 +1,7 @@
-:host>* {
+:host > * {
   vertical-align: sub;
+}
+
+mat-icon {
+  color: var(--primary);
 }

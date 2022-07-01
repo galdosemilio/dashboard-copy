@@ -11,7 +11,16 @@
 
   <div class="item-heading no-margin-bottom">
     <ccr-alert-icon [icon]="alert.icon" [size]="18"></ccr-alert-icon>
-    <span>{{ alert.detail | translate: alert.params }}</span>
+
+    <ng-container [ngSwitch]="alert.code">
+      <ng-container *ngSwitchCase="'data-point-threshold'">
+        <span [innerHTML]="alert.payload | dataThresholdNotifHint | async"></span>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        {{ alert.detail | translate: alert.params }}
+      </ng-container>
+    </ng-container>
   </div>
   <div class="item-body">
     <small *ngIf="alert.texts" class="alert-type">{{ alert.texts?.title | translate }}<br></small>

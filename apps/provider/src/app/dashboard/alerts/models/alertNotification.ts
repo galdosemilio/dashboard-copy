@@ -1,3 +1,9 @@
+import {
+  AccountCoreData,
+  AlertNotification as SDKAlertNotification,
+  AlertNotificationPayload
+} from '@coachcare/sdk'
+
 export class AlertNotification {
   public alertCode: string
   public alertDescription: string
@@ -6,18 +12,20 @@ export class AlertNotification {
   public groupId: string
   public icon: string
   public id: string
-  public params: any
-  public triggeredBy: any
+  public params: Record<string, unknown>
+  public payload: AlertNotificationPayload
+  public triggeredBy: Partial<AccountCoreData>
 
-  constructor(args: any) {
+  constructor(args: Partial<SDKAlertNotification> & Record<string, unknown>) {
     this.alertCode = AlertNotification.calculateAlertTypeCode(args.type.id)
     this.alertDescription = args.type.description || ''
     this.createdAt = args.createdAt || ''
-    this.detail = args.detail || ''
+    this.detail = (args.detail as string) || ''
     this.groupId = args.groupId || ''
-    this.icon = args.icon
+    this.icon = args.icon as string
     this.id = args.id || ''
-    this.params = args.params
+    this.params = args.params as Record<string, unknown>
+    this.payload = args.payload
     this.triggeredBy = args.triggeredBy
   }
 
@@ -40,6 +48,8 @@ export class AlertNotification {
       case '5':
         typeCode = 'weight-threshold'
         break
+      case '6':
+        typeCode = 'data-point-threshold'
     }
 
     return typeCode

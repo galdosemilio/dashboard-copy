@@ -1,15 +1,32 @@
 {
   "ALERTS": {
+    "ABOVE": "Over",
     "ACTIVE_ALERTS": "Aktive alarmer for {{name}}",
+    "ADD_NEW_DATA_THRESHOLD_ALERT": "Tilføj ny tærskelalarm",
     "ALERT_NOTIFICATIONS": "Advarselsmeddelelser",
+    "ALERT_VALUE": "Alarmværdi",
     "ASSOCIATION_WARNING": "Din konto har begrænset adgang til advarselsmeddelelser",
     "ASSOCIATION_WARNING_EXPLANATION": "Din konto har adgang til nogle patienter gennem en <i> cascading </ i> klinik forening. Imidlertid",
+    "BELOW": "Under",
     "DAILY": "Daglig",
+    "DATA_THRESHOLD_ALERT_HINT": "Generere en anmeldelse hver {{ period }} når {{ type }} <strong>{{ directionPrefix }} {{ value }}{{ unit }}.</strong>",
+    "DATA_THRESHOLD_NOTIFICATION_HINT": "<strong>{{ value }}{{ unit }}</strong> {{ diff }}{{ unit }} {{ directionPrefix }} {{ limit }}{{ unit }} grænseværdi",
+    "DELETE_ALERT": "Slet alarm",
+    "DELETE_ALERT_DESCRIPTION": "Er du sikker på, at du vil slette denne alarm?<br><br><strong>Denne handling kan ikke fortrydes.</strong>",
+    "EDIT_DATA_THRESHOLD_ALERT": "Rediger tærskelalarm",
+    "EXCEEDS": "Overstiger",
+    "INHERITED_ALERT_FOOTNOTE": "Denne advarsel er arvet fra en forældreklinik.",
+    "IS_BELOW": "Er nedenfor",
     "MEAL_LOGGING": "Ingen måltider registreret siden den {{date}}",
     "MEAL_LOGGING_NO_SINCE": "Ingen registrerede måltider",
+    "METRIC_TO_ALERT": "Metrisk at advare om",
+    "REFRESH_TIME_PERIOD": "Opdater tidsperiode",
+    "REFRESH_TIME_PERIOD_DESCRIPTION": "Den hyppighed, hvormed disse alarmer genereres. For eksempel: ”1 dag” betyder, at alarmerne genereres hver 24. time.",
     "SPAN_END": "Kun ved periodens udgang",
     "TRACKER_SYNCING": "Ingen tracker måling",
     "TYPES": {
+      "DATA_THRESHOLD_ALERT": "Tærskeladvarsel",
+      "DATA_THRESHOLD_ALERT_DESCRIPTION": "Denne alarm kan konfigureres til at blive aktiveret baseret på en datatype, en øvre eller nedre grænse og en opdateringsperiode.",
       "INACTIVITY_MEAL_LOGGING": "Måltid Inaktivitet",
       "INACTIVITY_MEAL_LOGGING_DESCRIPTION": "Denne alarm genereres, når en patient ikke har et registreret måltid i det efterfølgende antal dage, der er valgt. Alarmer genereres op til to gange om ugen",
       "INACTIVITY_TRACKER_SYNCING": "Tracker Inaktivitet",
@@ -20,7 +37,7 @@
       "WEIGHT_REGAINED_THRESHOLD_DESCRIPTION": "Denne alarm genereres, når en patients vægt opfylder eller overskrider deres laveste registrerede vægt med det valgte antal pund/kg. Der genereres advarsler dagligt. <br /><br /> Eksempel: En patients lavest registrerede vægt i systemet er 150 pund",
       "WEIGHT_THRESHOLD_DAYSPAN": "Dagspænd",
       "WEIGHT_THRESHOLD_DAYSPAN_DESCRIPTION": "Antallet af dage, der skal undersøges for vægtændring.",
-      "WEIGHT_THRESHOLD_HEADER": "Vægtgrænse",
+      "WEIGHT_THRESHOLD_HEADER": "Ældre vægtgrænse",
       "WEIGHT_THRESHOLD_HEADER_DESCRIPTION": "Denne advarsel genereres, når en patients vægt falder uden for en foruddefineret tærskel over et vist antal dage <br> Eksempel 1:. Blive advaret, hvis en patient gevinster enhver vægt over en 5 dages periode. Sæt en 'Gain Window' af 0 pounds og en 'Day Span' på 5 dage til at generere en advarsel, hvis patienten afsluttes en periode på 5 dage på en højere vægt så de begyndte <br> Eksempel 2:. Blive advaret, hvis en patienten svinger mere end 5 pounds i løbet af en periode på to uger. Sæt en 'Gain Window' og 'Tab Window' af 3 pounds og en 'Day Span' på 14 dage til at generere en alarm, hvis en patient ender en 14 dages periode med en ændring på mere end 3 pounds i begge retninger.",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT": "Kræver daglig måling",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT_DESCRIPTION": "Hvis en vægtmåling er påkrævet for hver dag af dag span periode. Hvis dette er sat til 'Nej'",
@@ -534,6 +551,7 @@
   },
   "GLOBAL": {
     "ABOUT": "Om",
+    "ABOVE": "Over",
     "ACTIVE": "Aktiv",
     "ACTIVITY_TYPE": "Aktivitetstype",
     "ADD": "Tilføje",
@@ -559,6 +577,7 @@
       "DESCRIPTION": "Tilføj automatisk udvalgte trænere til alle beskedtråde i denne klinik"
     },
     "BACK": "Tilbage",
+    "BELOW": "Under",
     "BUY": "Købe",
     "CANCEL": "Annuller",
     "CASCADING": "Rækkefølger",
@@ -713,6 +732,11 @@
     "VIEW_ALL": "Vis Alle",
     "VIEW_ALL_PATIENTS": "Vis Alle Patienter",
     "VIEW_COMPLETE_REPORT": "Vis Hele Rapporten"
+  },
+  "INTERVALS": {
+    "1_DAY": "1 dag",
+    "1_HOUR": "1 time",
+    "1_WEEK": "En uge"
   },
   "JOURNAL": {
     "CALCIUM": "Ca",
@@ -1187,6 +1211,9 @@
       "NO_SUPPLEMENTS_FOUND": "Der er ikke fastsat nogen kosttilskud for denne organisation."
     },
     "SUCCESS": {
+      "ALERT_CREATED": "Alert oprettet med succes.",
+      "ALERT_DELETED": "Alert slettet med succes.",
+      "ALERT_UPDATED": "Alert opdateret med succes.",
       "APPOINTMENT_BOOKED": "Din aftale er reserveret!",
       "ASSOCIATION_CREATED": "Association oprettet med succes.",
       "ASSOCIATION_UPDATED": "Association opdateret med succes.",

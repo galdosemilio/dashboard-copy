@@ -1,15 +1,32 @@
 {
   "ALERTS": {
+    "ABOVE": "Acima de",
     "ACTIVE_ALERTS": "Ativar os alertas para {{name}}",
+    "ADD_NEW_DATA_THRESHOLD_ALERT": "Adicione um novo alerta de limite",
     "ALERT_NOTIFICATIONS": "Alerta de notificações",
+    "ALERT_VALUE": "Valor de alerta",
     "ASSOCIATION_WARNING": "A sua conta tem acesso limitado aos alerta de notificações",
     "ASSOCIATION_WARNING_EXPLANATION": "A sua conta tem acesso a alguns pacientes através de uma associação clínica <i>cascading</i>.  No entanto",
+    "BELOW": "Abaixo de",
     "DAILY": "Diariamente",
+    "DATA_THRESHOLD_ALERT_HINT": "Gere uma notificação a cada {{ period }} quando {{ type }} <strong>{{ directionPrefix }} {{ value }}{{ unit }}.</strong>",
+    "DATA_THRESHOLD_NOTIFICATION_HINT": "<strong>{{ value }}{{ unit }}</strong> {{ diff }}{{ unit }} {{ directionPrefix }} {{ limit }}{{ unit }} limite",
+    "DELETE_ALERT": "Exclua alerta",
+    "DELETE_ALERT_DESCRIPTION": "Tem certeza de que deseja excluir este alerta?",
+    "EDIT_DATA_THRESHOLD_ALERT": "Alerta de limiar de edição",
+    "EXCEEDS": "Excede",
+    "INHERITED_ALERT_FOOTNOTE": "Este alerta é herdado de uma clínica pai.",
+    "IS_BELOW": "Está abaixo",
     "MEAL_LOGGING": "Sem refeições introduzidas desde {{date}}",
     "MEAL_LOGGING_NO_SINCE": "Sem refeições introduzidas",
+    "METRIC_TO_ALERT": "Métrica para alertar",
+    "REFRESH_TIME_PERIOD": "Atualizar período de tempo",
+    "REFRESH_TIME_PERIOD_DESCRIPTION": "A frequência em que esses alertas serão gerados. Por exemplo: \"1 dia\" significa que os alertas serão gerados a cada 24 horas.",
     "SPAN_END": "Somente no final do período",
     "TRACKER_SYNCING": "Sem registos",
     "TYPES": {
+      "DATA_THRESHOLD_ALERT": "Alerta de limiar",
+      "DATA_THRESHOLD_ALERT_DESCRIPTION": "Este alerta pode ser configurado para ser ativado com base em um tipo de dados, um limite superior ou inferior e um período de atualização.",
       "INACTIVITY_MEAL_LOGGING": "Inatividade de refeições",
       "INACTIVITY_MEAL_LOGGING_DESCRIPTION": "Este alerta é gerado quando um paciente não tem uma refeição gravada para o número consecutivo de dias selecionados.  Os alertas são gerados até duas vezes por semana ",
       "INACTIVITY_TRACKER_SYNCING": "Inatividade de rastreador",
@@ -20,7 +37,7 @@
       "WEIGHT_REGAINED_THRESHOLD_DESCRIPTION": "Este alerta é gerado quando o peso de um paciente atinge ou excede o seu peso mais baixo registado pelo número selecionado de libras/quilogramas. Os alertas são gerados diariamente.<br /><br />Exemplo: o peso mais baixo registado  de um paciente no sistema é de 150 libras",
       "WEIGHT_THRESHOLD_DAYSPAN": "Duração do dia",
       "WEIGHT_THRESHOLD_DAYSPAN_DESCRIPTION": "O número de dias para examinar a mudança de peso.",
-      "WEIGHT_THRESHOLD_HEADER": "Limite de Peso",
+      "WEIGHT_THRESHOLD_HEADER": "Limiar de peso herdado",
       "WEIGHT_THRESHOLD_HEADER_DESCRIPTION": "Esse alerta é gerado quando o peso de um paciente fica fora de um limite predefinido durante um determinado número de dias.<br><br>Exemplo 1: Ser alertado se um paciente ganhar algum peso durante um período de 5 dias. Defina uma \"Janela de Ganho\" de 0 libras e um \"Intervalo de Dias\" de 5 dias para gerar um alerta se o paciente terminar um período de 5 dias com um peso superior ao que começou.<br><br>Exemplo 2: Ser alertado se um paciente flutuar mais de 5 libras durante um período de duas semanas.  Defina uma \"Janela de Ganho\" e uma \"Janela de Perda\" de 3 libras e um \"Intervalo de Dias\" de 14 dias para gerar um alerta se um paciente terminar um período de 14 dias com uma mudança de mais de 3 libras em qualquer direção.",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT": "Exigir medição diária",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT_DESCRIPTION": "Se for necessária uma medição de peso para cada dia do período definido.  Se este valor for definido para 'Não'",
@@ -534,6 +551,7 @@
   },
   "GLOBAL": {
     "ABOUT": "Sobre",
+    "ABOVE": "Acima de",
     "ACTIVE": "Ativo",
     "ACTIVITY_TYPE": "Tipo de atividade",
     "ADD": "Adicionar",
@@ -559,6 +577,7 @@
       "DESCRIPTION": "Adicionar automaticamente treinadores selecionados para os tópicos de mensagens nesta clínica"
     },
     "BACK": "Voltar",
+    "BELOW": "Abaixo de",
     "BUY": "Comprar",
     "CANCEL": "Cancelar",
     "CASCADING": "Em cascata",
@@ -713,6 +732,11 @@
     "VIEW_ALL": "Ver todos",
     "VIEW_ALL_PATIENTS": "Ver todos os pacientes",
     "VIEW_COMPLETE_REPORT": "Ver relatório completo"
+  },
+  "INTERVALS": {
+    "1_DAY": "1 dia",
+    "1_HOUR": "1 hora",
+    "1_WEEK": "1 semana"
   },
   "JOURNAL": {
     "CALCIUM": "Ca",
@@ -1187,6 +1211,9 @@
       "NO_SUPPLEMENTS_FOUND": "Nenhum suplemento está definido para esta organização."
     },
     "SUCCESS": {
+      "ALERT_CREATED": "Alerta criado com sucesso.",
+      "ALERT_DELETED": "Alerta excluído com sucesso.",
+      "ALERT_UPDATED": "Alerta atualizado com sucesso.",
       "APPOINTMENT_BOOKED": "Sua consulta marcada!",
       "ASSOCIATION_CREATED": "Associação criada com sucesso.",
       "ASSOCIATION_UPDATED": "Associação atualizada com sucesso.",

@@ -4,6 +4,7 @@ import { TrackerIconComponent } from '@app/shared/icons/tracker-icon/tracker-ico
 import { TrendingUpIconComponent } from '@app/shared/icons/trending-up-icon/trending-up-icon.component'
 import { DismissAllIconComponent } from './dismiss-all/dismiss-all.component'
 import { DismissOneIconComponent } from './dismiss-one/dismiss-one.component'
+import { EnterIconComponent } from './enter/enter.icon'
 import { MoveFolderIconComponent } from './move-folder-icon/move-folder-icon.component'
 import { PoorConnectionIconComponent } from './poor-connection'
 import { RPMCalendarIconComponent } from './rpm-calendar'
@@ -19,6 +20,7 @@ import { WeightThreshIconComponent } from './weight-thresh-icon/weight-thresh-ic
 export {
   DismissOneIconComponent,
   DismissAllIconComponent,
+  EnterIconComponent,
   FoodIconComponent,
   MoveFolderIconComponent,
   PoorConnectionIconComponent,
@@ -39,6 +41,7 @@ export {
 export const IconComponents = [
   DismissOneIconComponent,
   DismissAllIconComponent,
+  EnterIconComponent,
   FoodIconComponent,
   MoveFolderIconComponent,
   PoorConnectionIconComponent,

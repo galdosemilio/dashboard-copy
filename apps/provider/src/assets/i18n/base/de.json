@@ -1,15 +1,32 @@
 {
   "ALERTS": {
+    "ABOVE": "Über",
     "ACTIVE_ALERTS": "Aktive Benachrichtigung für {{name}}",
+    "ADD_NEW_DATA_THRESHOLD_ALERT": "Fügen Sie neue Schwellenwertalarm hinzu",
     "ALERT_NOTIFICATIONS": "Warnmeldungen",
+    "ALERT_VALUE": "Alarmwert",
     "ASSOCIATION_WARNING": "Ihr Konto hat nur beschränkten Zugriff auf Warnmeldungen",
     "ASSOCIATION_WARNING_EXPLANATION": "Ihr Konto hat über eine <i> kaskadierende </ i> Klinikverbindung Zugriff auf einige Patienten. Es werden jedoch nur Warnmeldungen für Patienten angezeigt, auf die Sie über eine <i> direkte </ i> Klinikverbindung Zugriff haben. Sie müssen direkt derselben Klinik wie der Patient zugeordnet sein, um Warnmeldungen für diesen Patienten zu sehen. Für weitere Informationen oder Unterstützung <a href='https://coachcare.zendesk.com/hc/en-us/requests/new' target='_blank' rel='noopener noreferrer'>wenden Sie sich bitte an den Support</a>.",
+    "BELOW": "Unter",
     "DAILY": "Täglich",
+    "DATA_THRESHOLD_ALERT_HINT": "Generate a notification every {{ period }} when {{ type }} <strong>{{ directionPrefix }} {{ value }}{{ unit }}.</strong>",
+    "DATA_THRESHOLD_NOTIFICATION_HINT": "<strong>{{ value }}{{ unit }}</strong> {{ diff }}{{ unit }} {{ directionPrefix }} {{ limit }}{{ unit }} schwelle",
+    "DELETE_ALERT": "Alarm löschen",
+    "DELETE_ALERT_DESCRIPTION": "Sind Sie sicher, dass Sie diese Warnung löschen möchten?",
+    "EDIT_DATA_THRESHOLD_ALERT": "Schwellenwertalarm bearbeiten",
+    "EXCEEDS": "Überschreitet",
+    "INHERITED_ALERT_FOOTNOTE": "Diese Warnung wird von einer Elternklinik geerbt.",
+    "IS_BELOW": "Ist unterhalb",
     "MEAL_LOGGING": "Keine Mahlzeiten aufgezeichnet seit {{date}}",
     "MEAL_LOGGING_NO_SINCE": "Keine Mahlzeiten aufgezeichnet",
+    "METRIC_TO_ALERT": "Metrisch auf alarmieren",
+    "REFRESH_TIME_PERIOD": "Zeitraum Aktualisieren",
+    "REFRESH_TIME_PERIOD_DESCRIPTION": "Die Frequenz, bei der diese Warnungen erzeugt werden. Zum Beispiel: \"1 Tag\" bedeutet, dass die Warnungen alle 24 Stunden generiert werden.",
     "SPAN_END": "Nur zum Ende einer Periode",
     "TRACKER_SYNCING": "Keine Trackermessung",
     "TYPES": {
+      "DATA_THRESHOLD_ALERT": "Schwellenwerbung",
+      "DATA_THRESHOLD_ALERT_DESCRIPTION": "Diese Warnung kann so konfiguriert werden, dass sie basierend auf einem Datentyp, einer oberen oder unteren Grenze und einer Aktualisierungszeit aktiviert werden.",
       "INACTIVITY_MEAL_LOGGING": "Mahlzeiten-Inaktivität",
       "INACTIVITY_MEAL_LOGGING_DESCRIPTION": "Diese Warnung wird generiert, wenn ein Patient für die fortlaufend ausgewählte Anzahl von Tagen keine Mahlzeit aufgezeichnet hat. Warnungen werden bis zu zweimal pro Woche, dienstags und freitags, generiert. <br /> <br /> Beispiel: Die Warnungseinstellung beträgt 5 Tage. Eine Warnung wird zweimal pro Woche erstellt, wenn der Patient an 5 aufeinanderfolgenden Tagen keine Mahlzeit aufzeichnet.",
       "INACTIVITY_TRACKER_SYNCING": "Tracker-Inaktivität",
@@ -20,7 +37,7 @@
       "WEIGHT_REGAINED_THRESHOLD_DESCRIPTION": "Diese Warnung wird generiert, wenn ein Patient sein niedrigstes aufgezeichnetes Gewicht erreicht oder um die ausgewählte Anzahl an Pfund/Kilogramm überschreitet. Warnmeldungen werden täglich generiert.<br /><br />Beispiel: Das niedrigste aufgezeichnete Gewicht eines Patienten im System beträgt 150 Pfund und die Warneinstellung 10 Pfund. Eine Warnung wird jeden Tag erstellt, wenn der Patient ein Gewicht von 160 Pfund oder mehr hat.",
       "WEIGHT_THRESHOLD_DAYSPAN": "Zeitfenster",
       "WEIGHT_THRESHOLD_DAYSPAN_DESCRIPTION": "Die Anzahl der Tage, für die Gewichtsänderungen untersucht werden sollen.",
-      "WEIGHT_THRESHOLD_HEADER": "Gewichtsgrenze",
+      "WEIGHT_THRESHOLD_HEADER": "Legacy Gewichtsschwelle",
       "WEIGHT_THRESHOLD_HEADER_DESCRIPTION": "Diese Warnung wird generiert, wenn das Gewicht eines Patienten über eine bestimmte Anzahl von Tagen hinweg außerhalb vordefinierter Grenzen liegt. Beispiel 1: Lassen Sie sich benachrichtigen, wenn ein Patient über einen Zeitraum von 5 Tagen an Gewicht zunimmt. Stellen Sie dazu ein 'Zunahmefenster' von 0 Pfund und ein 'Zeitfenster' von 5 Tagen ein, sodass eine Warnung generiert wird, wenn der Patient am Ende einer 5-Tage-Periode ein höheres Gewicht hat als am Anfang. Beispiel 2: Lassen Sie sich benachrichtigen, wenn das Gewicht des Patienten über einen Zeitraum von zwei Wochen um mehr als 5 Pfund schwankt. Stellen Sie ein 'Zunahmefenster' und ein 'Abnahmefenster' von 3 Pfund sowie ein 'Zeitfenster' von 14 Tagen ein, sodass eine Warnung generiert wird, wenn bei einem Patienten am Ende einer 14-Tage-Periode eine Gewichtsänderung von mehr als 3 Pfund nach oben oder nach unten vorliegt .",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT": "Tägliche Messung erforderlich",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT_DESCRIPTION": "Wenn für jeden Tag des Zeitfensters eine Gewichtsmessung erforderlich ist. Ist dies auf 'Nein' gesetzt, muss an mindestens zwei verschiedenen Tagen das Gewicht aufgezeichnet werden. Andernfalls wird die Warnmeldung nur generiert, wenn für jeden Tag ein Gewicht aufgezeichnet wurde. <br><br>Beispiel 1: Für die Warnung bezüglich der Gewichtsgrenze ist ein Zeitfenster von '5 Tagen' eingestellt und 'Tägliche Messung erforderlich' ist auf 'Ja' gesetzt. Ein Patient muss an jedem der 5 Tage sein Gewicht aufzeichnen, damit gegebenenfalls eine Warnmeldung generiert wird. Beispiel 2: Für die Warnung bezüglich der Gewichtsgrenze ist ein Zeitfenster von '5 Tagen' eingestellt und 'Tägliche Messung erforderlich' ist auf 'Nein' gesetzt. Ein Patient muss an mindestens zwei verschiedenen Tagen innerhalb des Zeitfensters sein Gewicht aufzeichnen, damit gegebenenfalls eine Warnmeldung generiert wird.",
@@ -534,6 +551,7 @@
   },
   "GLOBAL": {
     "ABOUT": "Über",
+    "ABOVE": "Über",
     "ACTIVE": "Aktiv",
     "ACTIVITY_TYPE": "Sportart",
     "ADD": "Hinzufügen",
@@ -559,6 +577,7 @@
       "DESCRIPTION": "Automatisch ausgewählten Trainer auf alle Nachrichten-Threads in dieser Klinik hinzufügen"
     },
     "BACK": "Zurück",
+    "BELOW": "Unter",
     "BUY": "Besorgen",
     "CANCEL": "Stornieren",
     "CASCADING": "Kaskardierend",
@@ -713,6 +732,11 @@
     "VIEW_ALL": "Alle ansehen",
     "VIEW_ALL_PATIENTS": "Alle Patienten ansehen",
     "VIEW_COMPLETE_REPORT": "Kompletten Bericht einsehen"
+  },
+  "INTERVALS": {
+    "1_DAY": "1 Tag",
+    "1_HOUR": "1 Stunde",
+    "1_WEEK": "1 Woche"
   },
   "JOURNAL": {
     "CALCIUM": "Ca",
@@ -1187,6 +1211,9 @@
       "NO_SUPPLEMENTS_FOUND": "Für diese Organisation definiert sind keine Ergänzungen geplant."
     },
     "SUCCESS": {
+      "ALERT_CREATED": "Alarm erfolgreich erstellt.",
+      "ALERT_DELETED": "Alarms erfolgreich gelöscht.",
+      "ALERT_UPDATED": "Alarm erfolgreich aktualisiert.",
       "APPOINTMENT_BOOKED": "Ihr Termin gebucht!",
       "ASSOCIATION_CREATED": "Verbindung erfolgreich erstellt",
       "ASSOCIATION_UPDATED": "Verbindung erfolgreich aktualisiert",

@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 
 import {
   AlertTypesDataSource,
   AlertTypesPreference
 } from '@app/dashboard/alerts/services'
 import { ContextService, NotifierService } from '@app/service'
+import { PromptDialog } from '@app/shared'
 import { _, SelectOptions, uxPoundsToGrams } from '@app/shared/utils'
 import {
   AlertOrgPreference,
@@ -12,6 +14,9 @@ import {
   UpdateOrgAlertPreferenceRequest
 } from '@coachcare/sdk'
 import { Alerts } from '@coachcare/sdk'
+import { DeviceDetectorService } from 'ngx-device-detector'
+import { filter } from 'rxjs/operators'
+import { AlertDataThresholdDialog } from '../../dialogs'
 
 @Component({
   selector: 'app-alert-types-table',
@@ -22,7 +27,7 @@ export class AlertTypesTableComponent implements OnInit {
   @Input()
   source: AlertTypesDataSource
   @Input()
-  columns = ['enabled', 'title', 'settings']
+  columns = ['enabled', 'title', 'settings', 'actions']
 
   inactivityDays = [
     { value: '1 day', viewValue: 1 },
@@ -111,6 +116,8 @@ export class AlertTypesTableComponent implements OnInit {
   constructor(
     private alerts: Alerts,
     private context: ContextService,
+    private deviceDetector: DeviceDetectorService,
+    private dialog: MatDialog,
     private notifier: NotifierService
   ) {}
 
@@ -134,7 +141,7 @@ export class AlertTypesTableComponent implements OnInit {
     }
   }
 
-  onActiveChange(row): void {
+  onActiveChange(row: AlertTypesPreference): void {
     switch (row.typeCode) {
       case 'inactivity':
         return this.updateInactivity(row)
@@ -154,7 +161,48 @@ export class AlertTypesTableComponent implements OnInit {
           }
         })
         return this.updateWeightThreshold(row)
+      case 'data-point-threshold':
+        void this.updateCustomAlertPreference(row)
+        break
     }
+  }
+
+  public openDataThresholdDialog(row?: AlertTypesPreference): void {
+    if (row?.isInherited) {
+      return
+    }
+
+    this.dialog
+      .open(AlertDataThresholdDialog, {
+        data: {
+          preference: row,
+          mode: row ? 'edit' : 'create'
+        },
+        width: !this.deviceDetector.isMobile() ? '60vw' : undefined
+      })
+      .afterClosed()
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
+  }
+
+  /**
+   * This function can only be used to delete DataPointThreshold and MissingDataPoint alerts
+   */
+  public openDeleteAlertDialog(row: AlertTypesPreference): void {
+    if (row.isInherited) {
+      return
+    }
+
+    this.dialog
+      .open(PromptDialog, {
+        data: {
+          title: _('ALERTS.DELETE_ALERT'),
+          content: _('ALERTS.DELETE_ALERT_DESCRIPTION')
+        }
+      })
+      .afterClosed()
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => this.deleteAlertPreference(row))
   }
 
   updateInactivity(current: AlertTypesPreference): void {
@@ -236,7 +284,7 @@ export class AlertTypesTableComponent implements OnInit {
       this.alerts
         .updateOrgAlertPreference(req)
         .then(() => {
-          // this.notifier.success(_('NOTIFY.SUCCESS.ALERT_PREFERENCE'));
+          this.notifier.success(_('NOTIFY.SUCCESS.ALERT_UPDATED'))
         })
         .catch((err) => this.notifier.error(err))
     } else {
@@ -249,9 +297,45 @@ export class AlertTypesTableComponent implements OnInit {
         .createOrgAlertPreference(req)
         .then((id) => {
           this.source.prefIds[row.typeCode] = id
-          // this.notifier.success(_('NOTIFY.SUCCESS.ALERT_PREFERENCE'));
+          this.notifier.success(_('NOTIFY.SUCCESS.ALERT_CREATED'))
         })
         .catch((err) => this.notifier.error(err))
+    }
+  }
+
+  /**
+   * Logic to specifically update Custom Alerts
+   */
+  private async updateCustomAlertPreference(
+    row: AlertTypesPreference
+  ): Promise<void> {
+    try {
+      await this.alerts.updateOrgAlertPreference({
+        id: row.value.id,
+        preference: {
+          isActive: row.isActive,
+          options: row.value.organization.preference.options
+        }
+      })
+
+      this.notifier.success(_('NOTIFY.SUCCESS.ALERT_UPDATED'))
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  /**
+   * This function can only be used to delete DataPointThreshold and MissingDataPoint alerts
+   */
+  private async deleteAlertPreference(
+    row: AlertTypesPreference
+  ): Promise<void> {
+    try {
+      await this.alerts.deleteOrgAlertPreference(row.value.id)
+      this.notifier.success(_('NOTIFY.SUCCESS.ALERT_DELETED'))
+      this.source.refresh()
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 }

@@ -5,6 +5,7 @@
       "sortOrder": 2,
       "type": {
         "id": "6",
+        "alertSelection": { "enabled": true },
         "name": "Blood pressure - systolic",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "mmHg", "display": "mmHg" },
@@ -31,6 +32,7 @@
       "sortOrder": 3,
       "type": {
         "id": "7",
+        "alertSelection": { "enabled": true },
         "name": "Heart rate",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "bpm", "display": "bpm" },
@@ -57,6 +59,7 @@
       "sortOrder": 15,
       "type": {
         "id": "46",
+        "alertSelection": { "enabled": true },
         "name": "BMI",
         "span": { "id": "1", "name": "Instant" },
         "bound": { "lower": 1, "upper": 200001 },
@@ -86,6 +89,7 @@
       "sortOrder": 16,
       "type": {
         "id": "3",
+        "alertSelection": { "enabled": true },
         "name": "Body fat",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "%", "display": "%" },
@@ -116,6 +120,7 @@
       "sortOrder": 18,
       "type": {
         "id": "1",
+        "alertSelection": { "enabled": true },
         "name": "Weight",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "g", "display": "g" },
@@ -147,6 +152,7 @@
       "type": {
         "id": "4",
         "name": "Fat mass weight",
+        "alertSelection": { "enabled": true },
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "g", "display": "g" },
         "bound": { "lower": 1, "upper": 750001 },
@@ -176,6 +182,7 @@
       "sortOrder": 21,
       "type": {
         "id": "8",
+        "alertSelection": { "enabled": true },
         "name": "Blood oxygen level",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "%", "display": "%" },
@@ -206,6 +213,7 @@
       "sortOrder": 22,
       "type": {
         "id": "15",
+        "alertSelection": { "enabled": true },
         "name": "Arm circumference",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "mm", "display": "mm" },
@@ -235,6 +243,7 @@
       "id": "5",
       "type": {
         "id": "5",
+        "alertSelection": { "enabled": true },
         "name": "Blood pressure - diastolic",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "mmHg", "display": "mmHg" },
@@ -260,6 +269,7 @@
       "id": "16",
       "type": {
         "id": "9",
+        "alertSelection": { "enabled": true },
         "name": "Bone weight",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "g", "display": "g" },
@@ -290,6 +300,7 @@
       "id": "20",
       "type": {
         "id": "12",
+        "alertSelection": { "enabled": true },
         "name": "Visceral fat percentage",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "%", "display": "%" },
@@ -315,6 +326,7 @@
       "id": "26",
       "type": {
         "id": "27",
+        "alertSelection": { "enabled": true },
         "name": "HBA1c",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "%", "display": "%" },
@@ -344,6 +356,7 @@
       "id": "8",
       "type": {
         "id": "31",
+        "alertSelection": { "enabled": true },
         "name": "Temperature",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "C", "display": "C" },
@@ -369,6 +382,7 @@
       "id": "21",
       "type": {
         "id": "43",
+        "alertSelection": { "enabled": true },
         "name": "Visceral fat - Tanita",
         "span": { "id": "1", "name": "Instant" },
         "bound": { "lower": 1, "upper": 61 },
@@ -393,6 +407,7 @@
       "id": "22",
       "type": {
         "id": "45",
+        "alertSelection": { "enabled": true },
         "name": "Visceral adipose tissue",
         "span": { "id": "1", "name": "Instant" },
         "unit": { "symbol": "ml", "display": "ml" },
@@ -418,6 +433,7 @@
       "id": "23",
       "type": {
         "id": "47",
+        "alertSelection": { "enabled": true },
         "name": "Steps",
         "span": { "id": "2", "name": "Date" },
         "bound": { "lower": 1, "upper": 100000 },
@@ -467,6 +483,7 @@
       "id": "25",
       "type": {
         "id": "49",
+        "alertSelection": { "enabled": true },
         "name": "Hydration",
         "span": { "id": "2", "name": "Date" },
         "unit": { "symbol": "ml", "display": "ml" },

@@ -24,10 +24,19 @@ import {
   MetadataConvertToReadablePipe,
   MetadataTitleConvertToReadablePipe
 } from './metadata-conversion'
+import {
+  DataThresholdAlertHintPipe,
+  DataThresholdNotificationHintPipe
+} from './alert-hint'
+import { DataTypeNamePipe } from './data-types'
+import { OrganizationNamePipe } from './organization'
 
 export const Pipes = [
   AbsoluteValuePipe,
   AccountTypePipe,
+  DataThresholdAlertHintPipe,
+  DataThresholdNotificationHintPipe,
+  DataTypeNamePipe,
   CapitalizePipe,
   CcrBinaryPipe,
   CcrKilobytesPipe,
@@ -42,6 +51,7 @@ export const Pipes = [
   MinutesToHoursPipe,
   NumberFormatPipe,
   NumberToWeekdayPipe,
+  OrganizationNamePipe,
   UnitConversionPipe,
   UnitConvertFromReadablePipe,
   UnitConvertToReadablePipe,

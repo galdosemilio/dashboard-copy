@@ -1,15 +1,32 @@
 {
   "ALERTS": {
+    "ABOVE": "Above",
     "ACTIVE_ALERTS": "Active alerts for {{name}}",
+    "ADD_NEW_DATA_THRESHOLD_ALERT": "Add New Threshold Alert",
     "ALERT_NOTIFICATIONS": "Alert Notifications",
+    "ALERT_VALUE": "Alert Value",
     "ASSOCIATION_WARNING": "Your account has limited access to alert notifications",
     "ASSOCIATION_WARNING_EXPLANATION": "Your account has access to some patients through a <i>cascading</i> clinic association.  However, you will only see alert notifications for patients to which you have access to through a <i>direct</i> clinic association.  You must be associated directly to the same clinic as the patient to see alert notifications for that patient. For more information or assistance please <a href=\"https://coachcare.zendesk.com/hc/en-us/requests/new\" target=\"_blank\" rel=\"noopener noreferrer\">contact support</a>.",
+    "BELOW": "Below",
     "DAILY": "Daily",
+    "DATA_THRESHOLD_ALERT_HINT": "Generate a notification every {{ period }} when {{ type }} <strong>{{ directionPrefix }} {{ value }}{{ unit }}.</strong>",
+    "DATA_THRESHOLD_NOTIFICATION_HINT": "<strong>{{ value }}{{ unit }}</strong> {{ diff }}{{ unit }} {{ directionPrefix }} {{ limit }}{{ unit }} threshold",
+    "DELETE_ALERT": "Delete Alert",
+    "DELETE_ALERT_DESCRIPTION": "Are you sure you want to delete this alert?<br><br><strong>This action cannot be undone.</strong>",
+    "EDIT_DATA_THRESHOLD_ALERT": "Edit Threshold Alert",
+    "EXCEEDS": "Exceeds",
+    "INHERITED_ALERT_FOOTNOTE": "This alert is inherited from a parent clinic.",
+    "IS_BELOW": "Is below",
     "MEAL_LOGGING": "No meals logged since {{date}}",
     "MEAL_LOGGING_NO_SINCE": "No meals logged",
+    "METRIC_TO_ALERT": "Metric to Alert On",
+    "REFRESH_TIME_PERIOD": "Refresh Time Period",
+    "REFRESH_TIME_PERIOD_DESCRIPTION": "The frequency at which these alerts will be generated. For example: \"1 day\" means that the alerts will be generated every 24 hours.",
     "SPAN_END": "Only at end of period",
     "TRACKER_SYNCING": "No tracker measurement",
     "TYPES": {
+      "DATA_THRESHOLD_ALERT": "Threshold Alert",
+      "DATA_THRESHOLD_ALERT_DESCRIPTION": "This alert can be configured to be activated based on a data type, an upper or lower limit, and a refresh period.",
       "INACTIVITY_MEAL_LOGGING": "Meal Inactivity",
       "INACTIVITY_MEAL_LOGGING_DESCRIPTION": "This alert is generated when a patient does not have a recorded meal for the consecutive number of days selected. Alerts are generated up to twice per week, on Tuesday and Friday.<br /><br />Example: the alert setting is 5 days. An alert is created twice per week when the patient does not have a recorded meal for 5 consecutive days.",
       "INACTIVITY_TRACKER_SYNCING": "Tracker Inactivity",
@@ -20,7 +37,7 @@
       "WEIGHT_REGAINED_THRESHOLD_DESCRIPTION": "This alert is generated when a patient's weight meets or exceeds their lowest recorded weight by the selected number of pounds/kilograms. Alerts are generated daily.<br /><br />Example: a patient's lowest recorded weight in the system is 150 pounds, and the alert setting is 10 pounds. An alert is created each day when the patient has a weight of 160 pounds or more.",
       "WEIGHT_THRESHOLD_DAYSPAN": "Day Span",
       "WEIGHT_THRESHOLD_DAYSPAN_DESCRIPTION": "The number of days to examine for weight change.",
-      "WEIGHT_THRESHOLD_HEADER": "Weight Threshold",
+      "WEIGHT_THRESHOLD_HEADER": "Legacy Weight Threshold",
       "WEIGHT_THRESHOLD_HEADER_DESCRIPTION": "This alert is generated when a patient's weight falls outside of a pre-defined threshold over a certain number of days.<br><br>Example 1: Be alerted if a patient gains any weight over a 5 days period. Set a 'Gain Window' of 0 pounds and a 'Day Span' of 5 days to generate an alert if patient ends a 5 day period at a higher weight then they began.<br><br>Example 2: Be alerted if a patient fluctuates more than 5 pounds over a two week period.  Set a 'Gain Window' and 'Loss Window' of 3 pounds and a 'Day Span' of 14 days to generate an alert if a patient ends a 14 day period with a change of more than 3 pounds in either direction.",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT": "Require Daily Measurement",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT_DESCRIPTION": "If a weight measurement is required for each day of the day span period.  If this is set to 'No', then at least two separate days must have a recorded weight.  Otherwise, the alert notification will only be generated if every day has a recorded weight.<br><br>Example 1: The Weight Threshold Alert has a Day Span of '5 days', and 'Require Daily Measurement' set to 'Yes'.  A patient must have a recorded weight for each of the 5 days in order for an alert notification to be potentially generated.<br><br>Example 2: The Weight Threshold Alert has a Day Span of '5 days', and 'Require Daily Measurement' set to 'No'.A patient must have a recorded weight on at least two separate days of the alert in order for an alert notification to be potentially generated.",
@@ -534,6 +551,7 @@
   },
   "GLOBAL": {
     "ABOUT": "About",
+    "ABOVE": "Above",
     "ACTIVE": "Active",
     "ACTIVITY_TYPE": "Activity Type",
     "ADD": "Add",
@@ -559,6 +577,7 @@
       "DESCRIPTION": "Automatically add selected coaches to all message threads in this clinic"
     },
     "BACK": "Back",
+    "BELOW": "Below",
     "BUY": "Buy",
     "CANCEL": "Cancel",
     "CASCADING": "Cascading",
@@ -713,6 +732,11 @@
     "VIEW_ALL": "View All",
     "VIEW_ALL_PATIENTS": "View All Patients",
     "VIEW_COMPLETE_REPORT": "View Complete Report"
+  },
+  "INTERVALS": {
+    "1_DAY": "1 day",
+    "1_HOUR": "1 hour",
+    "1_WEEK": "1 week"
   },
   "JOURNAL": {
     "CALCIUM": "Ca",
@@ -1187,6 +1211,9 @@
       "NO_SUPPLEMENTS_FOUND": "No supplements are defined for this clinic."
     },
     "SUCCESS": {
+      "ALERT_CREATED": "Alert created successfully.",
+      "ALERT_DELETED": "Alert deleted successfully.",
+      "ALERT_UPDATED": "Alert updated successfully.",
       "APPOINTMENT_BOOKED": "Your Appointment Booked!",
       "ASSOCIATION_CREATED": "Association created successfully.",
       "ASSOCIATION_UPDATED": "Association updated successfully.",

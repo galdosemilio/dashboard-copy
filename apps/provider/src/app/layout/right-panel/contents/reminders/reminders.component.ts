@@ -17,6 +17,8 @@ import { _, TranslationsObject, unitConversion, unitLabel } from '@app/shared'
 import {
   AccountTypeIds,
   AlertNotification,
+  AlertsGenericPayload,
+  AlertsWeightRegainedPayload,
   FetchAllMeetingRequest,
   NotificationRequest
 } from '@coachcare/sdk'
@@ -27,6 +29,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { filter, first } from 'rxjs/operators'
 import { Alerts } from '@coachcare/sdk'
+import { Store } from '@ngrx/store'
+import { AppState } from '@app/store/state'
 
 @UntilDestroy()
 @Component({
@@ -59,6 +63,7 @@ export class RemindersComponent implements OnInit, OnDestroy {
     private dataService: NotificationsDataService,
     private dialog: MatDialog,
     private notifier: NotifierService,
+    private store: Store<AppState>,
     private translator: TranslateService
   ) {
     this.translate()
@@ -134,7 +139,8 @@ export class RemindersComponent implements OnInit, OnDestroy {
       const source = new AlertTypesDataSource(
         this.notifier,
         this.alertsDatabase,
-        this.context
+        this.context,
+        this.store
       )
       source.addDefault({
         organization: this.context.organizationId,
@@ -229,11 +235,10 @@ export class RemindersComponent implements OnInit, OnDestroy {
           switch (value.type.code) {
             // 1. Weight Regained
             case 'weight-regained':
-              const val = value.payload.value
+              const val = (value.payload as AlertsWeightRegainedPayload).value
               alert.params['value'] = unitConversion(units, 'composition', val)
-              alert.params['unit'] = this.i18n[
-                unitLabel(units, 'composition', val)
-              ]
+              alert.params['unit'] =
+                this.i18n[unitLabel(units, 'composition', val)]
               alert.detail = _('ALERTS.WEIGHT_REGAINED')
               alert.icon = 'trending-up'
               break
@@ -241,8 +246,11 @@ export class RemindersComponent implements OnInit, OnDestroy {
             // 2. Meal logging
             case 'meal-logging':
               const since =
-                value.payload && value.payload.lastMeasurement
-                  ? moment(value.payload.lastMeasurement)
+                value.payload &&
+                (value.payload as AlertsGenericPayload).lastMeasurement
+                  ? moment(
+                      (value.payload as AlertsGenericPayload).lastMeasurement
+                    )
                   : undefined
               alert.params['date'] =
                 since !== undefined ? since.to(now) : undefined
@@ -266,16 +274,17 @@ export class RemindersComponent implements OnInit, OnDestroy {
               break
 
             case 'weight-threshold':
-              if (value.payload.weight !== undefined) {
-                const weight = value.payload.weight
+              if (
+                (value.payload as AlertsGenericPayload).weight !== undefined
+              ) {
+                const weight = (value.payload as AlertsGenericPayload).weight
                 alert.params['value'] = unitConversion(
                   units,
                   'composition',
-                  weight.delta
+                  (weight as { delta: number }).delta
                 )
-                alert.params['unit'] = this.i18n[
-                  unitLabel(units, 'composition', val)
-                ]
+                alert.params['unit'] =
+                  this.i18n[unitLabel(units, 'composition', val)]
                 alert.detail = _('ALERTS.WEIGHT_REGAINED')
 
                 if (alert.params['value'] < 0) {
@@ -285,6 +294,12 @@ export class RemindersComponent implements OnInit, OnDestroy {
 
                 alert.icon = 'weight-thresh'
               }
+              break
+
+            case 'data-point-threshold':
+              alert.icon = 'circle_notifications'
+              alert.detail = _('ALERTS.TYPES.DATA_THRESHOLD_ALERT')
+              alert.payload = value.payload
               break
           }
 

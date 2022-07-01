@@ -433,7 +433,7 @@ const interceptCoreApiCalls = (
     fixture: 'api/general/emptyArray'
   })
   cy.intercept('GET', '/1.0/notification?**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
+    fixture: 'api/alert/notifications'
   })
   cy.intercept('GET', '/3.0/warehouse/rpm/state/billing-summary?**', {
     fixture: fetchOverride(
@@ -474,6 +474,16 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/2.0/warehouse/alert/preference**', {
     fixture: 'api/warehouse/alertPreference'
   })
+  cy.intercept('POST', '/2.0/warehouse/alert/preference', {
+    statusCode: 201,
+    body: { id: '1' }
+  }).as('createAlertPreferenceRequest')
+  cy.intercept('PATCH', '/2.0/warehouse/alert/preference/**', {
+    statusCode: 200
+  }).as('patchAlertPreferenceRequest')
+  cy.intercept('DELETE', '/2.0/warehouse/alert/preference/**', {
+    statusCode: 200
+  }).as('deleteAlertPreferenceRequest')
 
   cy.intercept('GET', '/1.0/content/form/submission?**', {
     fixture: fetchOverride(

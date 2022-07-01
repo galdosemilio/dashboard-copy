@@ -1,0 +1,140 @@
+<div matDialogTitle>
+  <div>
+      <mat-icon>add_circle_outline</mat-icon>
+      <span [ngSwitch]="mode">
+        <ng-container *ngSwitchCase="'create'">
+          {{ 'ALERTS.ADD_NEW_DATA_THRESHOLD_ALERT' | translate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'edit'">
+          {{ 'ALERTS.EDIT_DATA_THRESHOLD_ALERT' | translate }}
+        </ng-container>
+      </span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+    <button
+    [disabled]="form.invalid || isLoading"
+    (click)="submit()"
+    class="ccr-icon-button"
+    color="primary"
+    mat-button>
+      <mat-icon>check</mat-icon>
+      {{ 'GLOBAL.SAVE' | translate }}
+    </button>
+    <button
+    [disabled]="isLoading"
+    (click)="closeDialog()"
+    class="ccr-icon-button"
+    mat-button>
+      <mat-icon>close</mat-icon>
+      {{ 'GLOBAL.CANCEL' | translate }}
+    </button>
+  </div>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content [formGroup]="form">
+  <ng-container *ngIf="typeGroups; else spinner">
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="20px">
+        <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
+          <mat-label>{{ 'ALERTS.METRIC_TO_ALERT' | translate }}</mat-label>
+          <mat-form-field fxFlex>
+            <mat-select formControlName="dataType">
+              <ng-container *ngIf="typeGroups">
+                <mat-optgroup *ngFor="let group of typeGroups" [label]="group.name">
+                  <mat-option *ngFor="let type of group.types" [value]="type.id">
+                    {{ type.name | translate | capitalize }}
+                  </mat-option>
+                </mat-optgroup>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
+          <mat-label>
+            {{ 'ALERTS.REFRESH_TIME_PERIOD' | translate }}
+            <ccr-popup-description
+              [title]="'ALERTS.REFRESH_TIME_PERIOD' | translate"
+              [description]="'ALERTS.REFRESH_TIME_PERIOD_DESCRIPTION' | translate">
+            </ccr-popup-description>
+          </mat-label>
+          <mat-form-field fxFlex>
+            <mat-select formControlName="refreshPeriod">
+              <mat-option *ngFor="let period of refreshTimePeriods" [value]="period.value">{{ period.viewValue | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="20px">
+        <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
+          <mat-label>
+            {{ 'ALERTS.ALERT_VALUE' | translate }}
+          </mat-label>
+
+          <div fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="15px">
+            <div fxLayout="column" fxFlex="50%">
+              <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="15px">
+                <mat-radio-group formControlName="isAbove">
+                  <mat-radio-button [value]="true">{{ 'GLOBAL.ABOVE' | translate }}</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field floatLabel="never">
+                  <input
+                  [wholeNumber]="true"
+                  numberOnly
+                  formControlName="aboveMagnitude"
+                  matInput
+                  type="number">
+                  <span matSuffix>{{ selectedDataTypeUnit }}</span>
+                  <mat-error *ngIf="form.get('aboveMagnitude').hasError('min')">{{ 'NOTIFY.ERROR.VALUE_TOO_LOW' | translate }}</mat-error>
+                  <mat-error *ngIf="form.get('aboveMagnitude').hasError('max')">{{ 'NOTIFY.ERROR.VALUE_TOO_HIGH' | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="15px">
+                <mat-radio-group formControlName="isBelow">
+                  <mat-radio-button [value]="true">{{ 'GLOBAL.BELOW' | translate }}</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field floatLabel="never">
+                  <input
+                  [wholeNumber]="true"
+                  numberOnly
+                  formControlName="belowMagnitude"
+                  matInput
+                  type="number">
+                  <span matSuffix>{{ selectedDataTypeUnit }}</span>
+                  <mat-error *ngIf="form.get('belowMagnitude').hasError('min')">{{ 'NOTIFY.ERROR.VALUE_TOO_LOW' | translate }}</mat-error>
+                  <mat-error *ngIf="form.get('belowMagnitude').hasError('max')">{{ 'NOTIFY.ERROR.VALUE_TOO_HIGH' | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+      *ngIf="form.value.aboveMagnitude || form.value.belowMagnitude"
+      fxLayout="row"
+      fxLayoutAlign="stretch center"
+      fxLayoutGap="15px">
+        <ccr-enter-icon [size]="32"></ccr-enter-icon>
+
+        <div
+          *ngIf="currentAlertPreference"
+          [innerHTML]="currentAlertPreference | dataThresholdAlertHint | async"
+          class="feature-disabled"
+          fxFlex>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</mat-dialog-content>
+
+<ng-template #spinner>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [diameter]="48" [strokeWidth]="4"></mat-spinner>
+  </div>
+</ng-template>

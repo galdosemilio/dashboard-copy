@@ -1,13 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Alerts } from '@coachcare/sdk'
-
 import { ContextService, NotifierService } from '@app/service'
 import {
+  Alerts,
   NotificationToggleRequest,
   ToggleGroupAlertsRequest
 } from '@coachcare/sdk'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { first } from 'rxjs/operators'
 import { AlertNotification } from '../models'
 import {
@@ -16,6 +15,8 @@ import {
   AlertTypesDataSource,
   AlertTypesPreference
 } from '../services'
+import { Store } from '@ngrx/store'
+import { AppState } from '@app/store/state'
 
 @UntilDestroy()
 @Component({
@@ -23,7 +24,7 @@ import {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class AlertsTableComponent implements OnDestroy, OnInit {
+export class AlertsTableComponent implements OnInit {
   @Input()
   columns = ['name', 'type', 'notice', 'date', 'actions']
   @Input()
@@ -38,7 +39,8 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
     private alerts: Alerts,
     private alertsDatabase: AlertsDatabase,
     private context: ContextService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
@@ -49,8 +51,6 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
       void this.fetchAlertTypes()
     })
   }
-
-  ngOnDestroy() {}
 
   public getAlertTypeName(alertNotification: AlertNotification): string {
     const foundAlertType = this.alertTypes.find(
@@ -112,7 +112,8 @@ export class AlertsTableComponent implements OnDestroy, OnInit {
       const source = new AlertTypesDataSource(
         this.notifier,
         this.alertsDatabase,
-        this.context
+        this.context,
+        this.store
       )
       source.addDefault({
         organization: this.context.organizationId,

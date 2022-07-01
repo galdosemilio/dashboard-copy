@@ -25,7 +25,8 @@ export class AlertsComponent implements OnInit, OnDestroy {
     { viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined },
     { viewValue: _('REPORTS.TYPE_MEASUREMENTS'), value: '1' },
     { viewValue: _('REPORTS.TYPE_INACTIVITY'), value: 2 },
-    { viewValue: _('REPORTS.TYPE_WEIGHT_THRESHOLD'), value: '5' }
+    { viewValue: _('REPORTS.TYPE_WEIGHT_THRESHOLD'), value: '5' },
+    { viewValue: _('ALERTS.TYPES.DATA_THRESHOLD_ALERT'), value: '6' }
   ]
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020577952-Viewing-Notifications-in-the-Dashboard'

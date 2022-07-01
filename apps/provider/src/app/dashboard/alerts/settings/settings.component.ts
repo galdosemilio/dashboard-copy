@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-
 import {
   AlertsDatabase,
   AlertTypesDataSource
 } from '@app/dashboard/alerts/services'
 import { ContextService, EventsService, NotifierService } from '@app/service'
+import { AppState } from '@app/store/state'
 import { OrganizationWithAddress } from '@coachcare/sdk'
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'app-alerts-settings',
@@ -22,8 +23,9 @@ export class AlertsSettingsComponent implements OnDestroy, OnInit {
   constructor(
     private context: ContextService,
     private bus: EventsService,
+    private database: AlertsDatabase,
     private notifier: NotifierService,
-    private database: AlertsDatabase
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,8 @@ export class AlertsSettingsComponent implements OnDestroy, OnInit {
     this.source = new AlertTypesDataSource(
       this.notifier,
       this.database,
-      this.context
+      this.context,
+      this.store
     )
 
     this.source.addRequired(this.context.organization$, () => ({

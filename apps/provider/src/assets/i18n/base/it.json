@@ -1,15 +1,32 @@
 {
   "ALERTS": {
+    "ABOVE": "Sopra",
     "ACTIVE_ALERTS": "Avvisi attivi per {{name}}",
+    "ADD_NEW_DATA_THRESHOLD_ALERT": "Aggiungi un nuovo avviso di soglia",
     "ALERT_NOTIFICATIONS": "Notifiche di Avviso",
+    "ALERT_VALUE": "Valore di allerta",
     "ASSOCIATION_WARNING": "Il tuo account ha accesso limitato alle notifiche di avviso",
     "ASSOCIATION_WARNING_EXPLANATION": "Il tuo account ha accesso ad alcuni pazienti attraverso un'associazione clinica <i>a cascata</i>. Tuttavia",
+    "BELOW": "Sotto",
     "DAILY": "Giornaliero",
+    "DATA_THRESHOLD_ALERT_HINT": "Generare una notifica ogni {{ period }} quando {{ type }} <strong>{{ directionPrefix }} {{ value }}{{ unit }}.</strong>",
+    "DATA_THRESHOLD_NOTIFICATION_HINT": "<strong>{{ value }}{{ unit }}</strong> {{ diff }}{{ unit }} {{ directionPrefix }} {{ limit }}{{ unit }} soglia",
+    "DELETE_ALERT": "Elimina avviso",
+    "DELETE_ALERT_DESCRIPTION": "Sei sicuro di voler eliminare questo avviso?<br><br><strong>Questa azione non può essere annullata.</strong>",
+    "EDIT_DATA_THRESHOLD_ALERT": "Modifica avviso di soglia",
+    "EXCEEDS": "Supera",
+    "INHERITED_ALERT_FOOTNOTE": "Questo avviso è ereditato da una clinica madre.",
+    "IS_BELOW": "È sotto",
     "MEAL_LOGGING": "Nessun pasto inserito dal {{date}}",
     "MEAL_LOGGING_NO_SINCE": "Nessun pasto inserito",
+    "METRIC_TO_ALERT": "Metrica da avvisare",
+    "REFRESH_TIME_PERIOD": "Rifrespardio periodo di tempo",
+    "REFRESH_TIME_PERIOD_DESCRIPTION": "La frequenza in cui verranno generati questi avvisi. Ad esempio: \"1 giorno\" significa che gli avvisi verranno generati ogni 24 ore.",
     "SPAN_END": "Solo alla fine del periodo",
     "TRACKER_SYNCING": "Nessuna misurazione tracciata",
     "TYPES": {
+      "DATA_THRESHOLD_ALERT": "Avviso di soglia",
+      "DATA_THRESHOLD_ALERT_DESCRIPTION": "Questo avviso può essere configurato per essere attivato in base a un tipo di dati, un limite superiore o inferiore e un periodo di aggiornamento.",
       "INACTIVITY_MEAL_LOGGING": "Pasti Inattivi",
       "INACTIVITY_MEAL_LOGGING_DESCRIPTION": "Questo avviso è generato quando un paziente non ha un pasto registrato per il numero consecutivo di giorni selezionati. Gli avvisi sono generati fino a due volte a settimana",
       "INACTIVITY_TRACKER_SYNCING": "Activity Tracker",
@@ -20,7 +37,7 @@
       "WEIGHT_REGAINED_THRESHOLD_DESCRIPTION": "Questo avviso è generato quando il peso di un paziente corrisponde o eccede il peso più basso registrato per il numero di libbre/chili selezionato. Gli avvisi sono generati quotidianamente.<br /><br />Esempio: il peso più basso registrato da un paziente nel sistema è di 150 libbre",
       "WEIGHT_THRESHOLD_DAYSPAN": "Arco di Giorni",
       "WEIGHT_THRESHOLD_DAYSPAN_DESCRIPTION": "Il numero di giorni da esaminare per il cambiamento di peso.",
-      "WEIGHT_THRESHOLD_HEADER": "Soglia di Peso",
+      "WEIGHT_THRESHOLD_HEADER": "Soglia di peso legacy",
       "WEIGHT_THRESHOLD_HEADER_DESCRIPTION": "Questo avviso viene generato quando il peso di un paziente esce da una soglia predefinita nel corso di un certo numero di giorni.<br><br>Esempio 1: Essere avvisati se un paziente prende peso in un periodo di 5 giorni. Imposta una 'Finestra di Aumento' di 0 chili e un 'Arco di Giorni' di 5 giorni per generare un avviso se il paziente conclude un periodo di 5 giorni con un peso superiore a quello iniziale.<br><br>Esempio 2: Essere avvisati se un paziente oscilla di oltre 5 chili nel corso di un periodo di due settimane. Imposta una 'Finestra di Aumento' e 'Finestra di Perdita' di 3 chili e un 'Arco di Giorni' di 14 giorni per generare un avviso se un paziente si conclude un periodo di 14 giorni con un cambiamento di più di 3 chili in entrambe le direzioni.",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT": "Richiedere Misurazioni Giornaliere",
       "WEIGHT_THRESHOLD_REQUIREDAILYMEASUREMENT_DESCRIPTION": "Se è necessaria una misurazione del peso ogni giorno dell'arco di giorni. Se questo è impostato su 'No'",
@@ -534,6 +551,7 @@
   },
   "GLOBAL": {
     "ABOUT": "Info",
+    "ABOVE": "Sopra",
     "ACTIVE": "Attivo",
     "ACTIVITY_TYPE": "Tipo di Attività",
     "ADD": "Inserisci",
@@ -559,6 +577,7 @@
       "DESCRIPTION": ""
     },
     "BACK": "Indietro",
+    "BELOW": "Sotto",
     "BUY": "Acquistare",
     "CANCEL": "Annulla",
     "CASCADING": "A Cascata",
@@ -713,6 +732,11 @@
     "VIEW_ALL": "Visualizza Tutto",
     "VIEW_ALL_PATIENTS": "Visualizza Tutti i Pazienti",
     "VIEW_COMPLETE_REPORT": "Visualizza Rapporto Completo"
+  },
+  "INTERVALS": {
+    "1_DAY": "1 giorno",
+    "1_HOUR": "1 ora",
+    "1_WEEK": "1 settimana"
   },
   "JOURNAL": {
     "CALCIUM": "Ca",
@@ -1187,6 +1211,9 @@
       "NO_SUPPLEMENTS_FOUND": "Nessuna integrazione è stata definita per questa organizzazione."
     },
     "SUCCESS": {
+      "ALERT_CREATED": "Avviso creato correttamente.",
+      "ALERT_DELETED": "Avviso eliminato con successo.",
+      "ALERT_UPDATED": "Avviso aggiornato correttamente.",
       "APPOINTMENT_BOOKED": "Il tuo appuntamento prenotato!",
       "ASSOCIATION_CREATED": "Associazione creata con successo.",
       "ASSOCIATION_UPDATED": "Associazione aggiornata con successo.",

@@ -14,6 +14,11 @@
       "id": "3",
       "description": "Weight threshold alert",
       "code": "weight-threshold"
+    },
+    {
+      "id": "4",
+      "code": "data-point-threshold",
+      "description": "Data point threshold alert"
     }
   ],
   "pagination": {}

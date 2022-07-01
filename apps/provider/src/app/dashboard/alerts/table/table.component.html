@@ -19,8 +19,17 @@
       <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.ALERT_TYPE' | translate }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'REPORTS.ALERT_TYPE' | translate }}</span>
-        <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
-        {{ getAlertTypeName(row) | translate }}
+        <ng-container [ngSwitch]="row.alertCode">
+          <ng-container *ngSwitchCase="'data-point-threshold'">
+            <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
+            {{ getAlertTypeName(row) | translate }} - {{ row.payload.dataPoint.type | dataTypeName | async }}
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
+            {{ getAlertTypeName(row) | translate }}
+          </ng-container>
+        </ng-container>
       </mat-cell>
     </ng-container>
 
@@ -28,7 +37,15 @@
       <mat-header-cell *cdkHeaderCellDef>{{ 'REPORTS.ALERT_NOTICE' | translate }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'REPORTS.ALERT_NOTICE' | translate }}</span>
-        {{ row.detail | translate: row.params }}
+        <ng-container [ngSwitch]="row.alertCode">
+          <ng-container *ngSwitchCase="'data-point-threshold'">
+            <span [innerHTML]="row.payload | dataThresholdNotifHint | async"></span>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            {{ row.detail | translate: row.params }}
+          </ng-container>
+        </ng-container>
       </mat-cell>
     </ng-container>
 

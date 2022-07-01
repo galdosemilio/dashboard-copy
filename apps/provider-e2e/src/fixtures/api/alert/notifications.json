@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "id": "751937",
+      "organization": {
+        "id": "1",
+        "name": "Selvera",
+        "shortcode": "selvera",
+        "hierarchyPath": ["1", "30"]
+      },
+      "recipient": {
+        "id": "7304",
+        "firstName": "Lascario",
+        "lastName": "Pacheco",
+        "email": "lascariopacheco@coachcare.com",
+        "accountTypeId": "2"
+      },
+      "type": {
+        "id": "2",
+        "description": "Meal logging",
+        "category": { "id": "2", "name": "Inactivity alert" }
+      },
+      "triggeredBy": {
+        "id": "7955",
+        "firstName": "Lascario",
+        "lastName": "Pacheco",
+        "email": "lascariopacheco@coachcare.com",
+        "accountTypeId": "3"
+      },
+      "groupId": "751937",
+      "viewed": false,
+      "createdAt": "2019-06-28T08:00:03.493Z"
+    },
+    {
+      "id": "750657",
+      "organization": {
+        "id": "1",
+        "name": "Selvera",
+        "shortcode": "selvera",
+        "hierarchyPath": ["1", "30"]
+      },
+      "recipient": {
+        "id": "7304",
+        "firstName": "Lascario",
+        "lastName": "Pacheco",
+        "email": "lascariopacheco@coachcare.com",
+        "accountTypeId": "2"
+      },
+      "type": {
+        "id": "6",
+        "description": "Data point threshold alert",
+        "category": { "id": "4", "name": "Data point threshold alert" }
+      },
+      "payload": {
+        "options": {
+          "alert": { "preference": { "id": "631", "isOverridden": false } },
+          "analysis": { "period": "01:00:00" },
+          "threshold": { "value": 25670, "direction": "above" }
+        },
+        "dataPoint": {
+          "id": 898212,
+          "type": { "id": 3, "name": "Body fat" },
+          "group": { "id": 9590 },
+          "value": 38600
+        }
+      },
+      "triggeredBy": {
+        "id": "1029",
+        "firstName": "Eric",
+        "lastName": "Di Bari",
+        "email": "eric@coachcare.com",
+        "accountTypeId": "3"
+      },
+      "groupId": "750657",
+      "viewed": false,
+      "createdAt": "2019-06-26T00:24:00.517Z"
+    }
+  ],
+  "pagination": { "next": 12 }
+}

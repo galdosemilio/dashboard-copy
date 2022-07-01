@@ -187,6 +187,53 @@
   }
 }
 
+.ccr-dialog-v2 {
+  ccr-popup-description {
+    mat-icon {
+      font-size: 28px;
+      height: 10px;
+      margin-top: -24px;
+    }
+  }
+
+  mat-checkbox {
+    .mat-checkbox-inner-container {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  mat-label {
+    height: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  mat-radio-button {
+    .mat-radio-inner-circle {
+      height: 34px;
+      left: -7px;
+      top: -7px;
+      width: 34px;
+    }
+  }
+
+  .mat-dialog-content {
+    margin-bottom: 0;
+  }
+
+  .mat-dialog-separator {
+    height: 1px;
+    background-color: var(--text-lighter);
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .mat-form-field-underline {
+    background-color: var(--text-lightest);
+  }
+}
+
 .ccr-plain {
   .mat-dialog-content {
     @media #{$small-and-down} {

@@ -2,23 +2,32 @@ import { Injectable } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
 import { TableDataSource } from '@app/shared/model'
 import { _, uxAproximateGrams, uxPoundsToGrams } from '@app/shared/utils'
+import { selectDataTypes } from '@app/store/measurement-label'
+import { AppState } from '@app/store/state'
 import {
   AlertPreferenceResponse,
+  AlertsDataPointThresholdOptions,
+  AlertTypeId,
   AlertTypesResponse,
-  FetchAlertPreferenceRequest
+  FetchAlertPreferenceRequest,
+  MeasurementDataPointTypeAssociation,
+  NamedEntity
 } from '@coachcare/sdk'
+import { Store } from '@ngrx/store'
 import { filter, fromPairs } from 'lodash'
 import * as moment from 'moment'
 import { from, Observable } from 'rxjs'
+import { take } from 'rxjs/operators'
 import { AlertsDatabase } from './alerts.database'
 
 export interface AlertTypesPreference {
   typeCode: string
-  typeId: number
+  typeId: AlertTypeId
   icon: string
   option: string
   value: any
   isActive: boolean
+  isInherited?: boolean
   texts?: { [field: string]: string }
   overrideVisibility?: boolean
   isVisible?: boolean
@@ -29,52 +38,73 @@ export interface AlertTypesPreference {
 @Injectable()
 export class AlertTypesDataSource extends TableDataSource<
   AlertTypesPreference,
-  [AlertPreferenceResponse, AlertTypesResponse],
+  [
+    AlertPreferenceResponse,
+    AlertTypesResponse,
+    MeasurementDataPointTypeAssociation[]
+  ],
   FetchAlertPreferenceRequest
 > {
+  hasInheritedAlert = false
   prefIds: { [code: string]: string }
 
   constructor(
     protected notify: NotifierService,
     protected database: AlertsDatabase,
-    protected context: ContextService
+    protected context: ContextService,
+    protected store: Store<AppState>
   ) {
     super()
   }
 
   disconnect() {}
 
-  defaultFetch(): [AlertPreferenceResponse, AlertTypesResponse] {
-    return [
-      { data: [], pagination: {} },
-      { data: [], pagination: {} }
-    ]
+  defaultFetch(): [
+    AlertPreferenceResponse,
+    AlertTypesResponse,
+    MeasurementDataPointTypeAssociation[]
+  ] {
+    return [{ data: [], pagination: {} }, { data: [], pagination: {} }, []]
   }
 
   fetch(
     criteria: FetchAlertPreferenceRequest
-  ): Observable<[AlertPreferenceResponse, AlertTypesResponse]> {
+  ): Observable<
+    [
+      AlertPreferenceResponse,
+      AlertTypesResponse,
+      MeasurementDataPointTypeAssociation[]
+    ]
+  > {
     return from(
       Promise.all([
         this.database.fetchAlertPreference(criteria),
-        this.database.fetchAlertTypes()
+        this.database.fetchAlertTypes(),
+        this.store.select(selectDataTypes).pipe(take(1)).toPromise()
       ])
     )
   }
 
   mapResult(
-    result: [AlertPreferenceResponse, AlertTypesResponse]
+    result: [
+      AlertPreferenceResponse,
+      AlertTypesResponse,
+      MeasurementDataPointTypeAssociation[]
+    ]
   ): Array<AlertTypesPreference> {
-    this.total = result[0].pagination.next
-      ? result[0].pagination.next + 1
+    const [alertPreferences, alertTypes, dataTypeAssocs] = result
+
+    this.total = alertPreferences.pagination.next
+      ? alertPreferences.pagination.next + 1
       : this.criteria.offset + result[0].data.length
 
     let options: Array<AlertTypesPreference> = []
-    const types = fromPairs(result[1].data.map((v) => [v.code, v.id]))
+    const types = fromPairs(alertTypes.data.map((v) => [v.code, v.id]))
+    const dataTypes = dataTypeAssocs.map((assoc) => assoc.type)
 
     const unit = this.context.user.measurementPreference
 
-    // hardcoded existing options to list the unactive too
+    // hardcoded existing options to list the inactive too
     options.push({
       typeCode: 'weight-regained',
       typeId: types['weight-regained'],
@@ -178,7 +208,7 @@ export class AlertTypesDataSource extends TableDataSource<
     })
 
     this.prefIds = {}
-    result[0].data.map((v) => {
+    alertPreferences.data.map((v) => {
       // update id
       if (v.organization.id === this.criteria.organization) {
         this.prefIds[v.type.code] = v.id.toString()
@@ -239,6 +269,85 @@ export class AlertTypesDataSource extends TableDataSource<
       }
       return p
     })
+
+    /**
+     * Data Point Threshold Alert Setup
+     */
+    const dataPointThresholdAlerts = alertPreferences.data.filter(
+      (preference) => preference.type.id === AlertTypeId.DATA_POINT_THRESHOLD
+    )
+
+    options = [
+      ...options,
+      ...dataPointThresholdAlerts
+        .map((alert) => {
+          const prefDataType = (
+            alert.organization.preference
+              .options as AlertsDataPointThresholdOptions
+          ).dataPoint.type
+
+          ;(
+            alert.organization.preference
+              .options as AlertsDataPointThresholdOptions
+          ).dataPoint.type =
+            dataTypes.find((type) => type.id === prefDataType.id) ??
+            prefDataType
+
+          return {
+            icon: 'circle_notifications',
+            isActive: alert.organization.preference.isActive,
+            isInherited: alert.organization.id !== this.context.organizationId,
+            option: '',
+            texts: {
+              title: _('ALERTS.TYPES.DATA_THRESHOLD_ALERT'),
+              description: _('ALERTS.TYPES.DATA_THRESHOLD_ALERT_DESCRIPTION')
+            },
+            typeCode: alert.type.code,
+            typeId: alert.type.id,
+            value: alert
+          }
+        })
+        .sort((prevAlert, currAlert) => {
+          const prevTypeName = (
+            (
+              prevAlert.value.organization.preference
+                .options as AlertsDataPointThresholdOptions
+            ).dataPoint.type as NamedEntity
+          ).name
+          const currTypeName = (
+            (
+              currAlert.value.organization.preference
+                .options as AlertsDataPointThresholdOptions
+            ).dataPoint.type as NamedEntity
+          ).name
+
+          if (prevTypeName < currTypeName) {
+            return -1
+          } else if (prevTypeName > currTypeName) {
+            return 1
+          }
+
+          return 0
+        })
+    ]
+
+    // We add this at the end to allow users to create new alerts
+    options = [
+      ...options,
+      {
+        typeCode: 'add-data-threshold',
+        typeId: AlertTypeId.DATA_POINT_THRESHOLD,
+        icon: 'add_alert',
+        option: '',
+        value: '',
+        isActive: true,
+        texts: {
+          title: _('ALERTS.ADD_NEW_DATA_THRESHOLD_ALERT')
+        }
+      }
+    ]
+
+    this.hasInheritedAlert = options.some((opt) => opt.isInherited)
 
     return options
   }
