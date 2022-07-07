@@ -182,6 +182,6 @@ describe('Dashboard -> Alerts', function () {
       .eq(1)
       .should('contain', 'Threshold Alert')
       .should('contain', 'Body fat')
-      .should('contain', '13% above 26% threshold (39%)')
+      .should('contain', '39% 13% above 26% threshold')
   })
 })

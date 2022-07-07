@@ -2,12 +2,17 @@
 
 ccr-alert-icon {
   @include horizontal-margin-right(4px);
+  width: 26px;
 }
 
 .alert-type {
   margin-bottom: 5px;
   position: relative;
   top: -5px;
+}
+
+.item-body {
+  padding-left: 25px !important;
 }
 
 .no-margin-bottom {

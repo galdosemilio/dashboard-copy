@@ -300,6 +300,7 @@ export class RemindersComponent implements OnInit, OnDestroy {
               alert.icon = 'circle_notifications'
               alert.detail = _('ALERTS.TYPES.DATA_THRESHOLD_ALERT')
               alert.payload = value.payload
+              alert.texts.titleSuffix = alert.payload.dataPoint.type.name
               break
           }
 

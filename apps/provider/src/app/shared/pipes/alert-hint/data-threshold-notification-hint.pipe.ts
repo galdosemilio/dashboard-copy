@@ -71,7 +71,7 @@ export class DataThresholdNotificationHintPipe implements PipeTransform {
         return this.translate.get('ALERTS.DATA_THRESHOLD_NOTIFICATION_HINT', {
           diff: Math.round(diff),
           directionPrefix: directionPrefix.toLowerCase(),
-          unit,
+          unit: unit ?? '', // some data types don't have unit
           limit: Math.round(readableThreshold),
           value: Math.round(readableValue)
         })

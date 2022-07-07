@@ -9,7 +9,10 @@
     (click)="onDismissAll(alert)" size="16"
   ></ccr-icon-dismiss-all>
 
-  <div class="item-heading no-margin-bottom">
+  <div
+  class="item-heading no-margin-bottom"
+  fxLayout="row"
+  fxLayoutAlign="start start">
     <ccr-alert-icon [icon]="alert.icon" [size]="18"></ccr-alert-icon>
 
     <ng-container [ngSwitch]="alert.code">
@@ -18,12 +21,15 @@
       </ng-container>
 
       <ng-container *ngSwitchDefault>
-        {{ alert.detail | translate: alert.params }}
+        <span>{{ alert.detail | translate: alert.params }}</span>
       </ng-container>
     </ng-container>
   </div>
   <div class="item-body">
-    <small *ngIf="alert.texts" class="alert-type">{{ alert.texts?.title | translate }}<br></small>
+    <small *ngIf="alert.texts" class="alert-type">
+      {{ alert.texts?.title | translate }}<span *ngIf="alert.texts?.titleSuffix"> - {{ alert.texts.titleSuffix | translate }}</span>
+      <br>
+    </small>
     <span>{{ alert.createdAt | ccrUtc | amTimeAgo }}</span>
   </div>
 </div>
