@@ -143,7 +143,31 @@ export class ProgressReportPDFDialog implements OnInit {
           start: moment(account.profile?.startedAt || account.createdAt)
             .startOf('day')
             .toISOString(),
-          end: endDate.endOf('day').toISOString()
+          end: endDate.clone().endOf('day').toISOString()
+        }
+      })
+    ).data
+
+    const lastWeekSummary = (
+      await this.measurement.getSummary({
+        account: this.context.accountId,
+        type: [
+          DataPointTypes.WEIGHT,
+          DataPointTypes.BMI,
+          DataPointTypes.BODY_FAT_PERCENTAGE,
+          DataPointTypes.WAIST_CIRCUMFERENCE,
+          DataPointTypes.ARM_CIRCUMFERENCE,
+          DataPointTypes.CHEST_CIRCUMFERENCE,
+          DataPointTypes.HIP_CIRCUMFERENCE,
+          DataPointTypes.THIGH_CIRCUMFERENCE,
+          DataPointTypes.VISCERAL_FAT_TANITA,
+          DataPointTypes.WATER_PERCENTAGE,
+          DataPointTypes.LEAN_MASS_PERCENT,
+          DataPointTypes.VISCERAL_ADIPOSE_TISSUE
+        ],
+        recordedAt: {
+          start: startDate.clone().subtract(1, 'week').toISOString(),
+          end: weekDate.clone().endOf('week').subtract(1, 'week').toISOString()
         }
       })
     ).data
@@ -166,8 +190,8 @@ export class ProgressReportPDFDialog implements OnInit {
           DataPointTypes.VISCERAL_ADIPOSE_TISSUE
         ],
         recordedAt: {
-          start: startDate.clone().subtract(1, 'week').toISOString(),
-          end: endDate.endOf('day').toISOString()
+          start: startDate.toISOString(),
+          end: endDate.clone().endOf('day').toISOString()
         }
       })
     ).data
@@ -184,9 +208,9 @@ export class ProgressReportPDFDialog implements OnInit {
 
     pdfData = this.calculatePatientPDFData(
       allTimeSummary,
+      lastWeekSummary,
       currentWeekSummary,
-      pdfData,
-      startDate
+      pdfData
     )
 
     const definition = {
@@ -253,24 +277,24 @@ export class ProgressReportPDFDialog implements OnInit {
                 `${
                   pdfData.composition.weight.beginningMeasurement
                     ? moment(
-                        pdfData.composition.weight.beginningMeasurement
-                          .createdAt.utc
+                        pdfData.composition.weight.beginningMeasurement.group
+                          .recordedAt.utc
                       ).format('MM/DD/YYYY')
                     : '-'
                 }`,
                 `${
                   pdfData.composition.weight.lastWeekMeasurement
                     ? moment(
-                        pdfData.composition.weight.lastWeekMeasurement.createdAt
-                          .utc
+                        pdfData.composition.weight.lastWeekMeasurement.group
+                          .recordedAt.utc
                       ).format('MM/DD/YYYY')
                     : '-'
                 }`,
                 `${
                   pdfData.composition.weight.currentWeekMeasurement
                     ? moment(
-                        pdfData.composition.weight.currentWeekMeasurement
-                          .createdAt.utc
+                        pdfData.composition.weight.currentWeekMeasurement.group
+                          .recordedAt.utc
                       ).format('MM/DD/YYYY')
                     : '-'
                 }`,
@@ -813,61 +837,61 @@ export class ProgressReportPDFDialog implements OnInit {
 
   private calculatePatientPDFData(
     allTimeSummary: MeasurementDataPointSummaryEntry[],
+    lastWeekSummary: MeasurementDataPointSummaryEntry[],
     currentWeekSummary: MeasurementDataPointSummaryEntry[],
-    currentObj: DieterSummaryPDFData,
-    startDate: moment.Moment
+    currentObj: DieterSummaryPDFData
   ): DieterSummaryPDFData {
     const partialResults: DieterSummaryPDFData = currentObj
 
     // Calculate composition elements
     partialResults.composition = {
       bmi: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.BMI,
         this.context.user.measurementPreference
       ),
       bodyFatPercentage: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.BODY_FAT_PERCENTAGE,
         this.context.user.measurementPreference
       ),
       leanMassPercentage: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.LEAN_MASS_PERCENT,
         this.context.user.measurementPreference
       ),
       visceralFatRating: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.VISCERAL_FAT_TANITA,
         this.context.user.measurementPreference,
         0
       ),
       visceralAdiposeTissue: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.VISCERAL_ADIPOSE_TISSUE,
         this.context.user.measurementPreference,
         1
       ),
       waterPercentage: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.WATER_PERCENTAGE,
         this.context.user.measurementPreference
       ),
       weight: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.WEIGHT,
         this.context.user.measurementPreference
@@ -889,36 +913,36 @@ export class ProgressReportPDFDialog implements OnInit {
     // Calculate measurements elements
     partialResults.measurements = {
       chest: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.CHEST_CIRCUMFERENCE,
         this.context.user.measurementPreference
       ),
       arm: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.ARM_CIRCUMFERENCE,
         this.context.user.measurementPreference
       ),
       waist: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.WAIST_CIRCUMFERENCE,
         this.context.user.measurementPreference
       ),
       hips: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.HIP_CIRCUMFERENCE,
         this.context.user.measurementPreference
       ),
       thigh: calculateProgressElementRow(
-        startDate,
         allTimeSummary,
+        lastWeekSummary,
         currentWeekSummary,
         DataPointTypes.THIGH_CIRCUMFERENCE,
         this.context.user.measurementPreference

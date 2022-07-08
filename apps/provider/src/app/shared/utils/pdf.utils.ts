@@ -5,7 +5,6 @@ import {
 } from '@coachcare/sdk'
 import { DataPoint } from '@coachcare/sdk/dist/lib/providers/measurement/dataPoint/entities/dataPoint'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
-import * as moment from 'moment'
 
 export interface DieterSummaryElement {
   beginning: number
@@ -26,8 +25,8 @@ export interface DieterSummaryElement {
 }
 
 export function calculateProgressElementRow(
-  startDate: moment.Moment,
   allTimeSummary: MeasurementDataPointSummaryEntry[],
+  lastWeekSummary: MeasurementDataPointSummaryEntry[],
   currentWeekSummary: MeasurementDataPointSummaryEntry[],
   type: DataPointTypes,
   measPref: UserMeasurementPreferenceType,
@@ -45,7 +44,7 @@ export function calculateProgressElementRow(
     allTimeSummary.find((aggregate) => aggregate.first.type.id === type)
       ?.first ?? null
 
-  const currentMeasurement =
+  const currentWeekMeasurement =
     currentWeekSummary.find((aggregate) => aggregate.type.id === type)?.last ??
     null
 
@@ -53,27 +52,9 @@ export function calculateProgressElementRow(
     allTimeSummary.find((aggregate) => aggregate.last.type.id === type)?.last ??
     null
 
-  const lastWeekDateRange = {
-    start: startDate.clone().subtract(1, 'week'),
-    end: startDate.clone().subtract(1, 'millisecond')
-  }
-
-  const currentWeekTypeSum =
-    currentWeekSummary.filter((entry) => entry.type.id === type).shift() ?? null
-
-  const lastWeekMeasurement = currentWeekTypeSum
-    ? moment(currentWeekTypeSum.last.createdAt.utc).isSame(
-        lastWeekDateRange.start,
-        'week'
-      )
-      ? currentWeekTypeSum.last
-      : moment(currentWeekTypeSum.first.createdAt.utc).isSame(
-          lastWeekDateRange.end,
-          'week'
-        )
-      ? currentWeekTypeSum.first
-      : null
-    : null
+  const lastWeekMeasurement =
+    lastWeekSummary.find((aggregate) => aggregate.type.id === type)?.last ??
+    null
 
   const measType = firstMeasurement?.type
 
@@ -83,8 +64,12 @@ export function calculateProgressElementRow(
   element.lastWeek = lastWeekMeasurement
     ? convertToReadableFormat(lastWeekMeasurement.value, measType, measPref)
     : null
-  element.currentWeek = currentMeasurement
-    ? convertToReadableFormat(currentMeasurement.value, measType, measPref) || 0
+  element.currentWeek = currentWeekMeasurement
+    ? convertToReadableFormat(
+        currentWeekMeasurement.value,
+        measType,
+        measPref
+      ) || 0
     : null
   element.changeThisWeek =
     element.currentWeek && element.lastWeek
@@ -104,7 +89,7 @@ export function calculateProgressElementRow(
     : null
 
   element.beginningMeasurement = firstMeasurement || null
-  element.currentWeekMeasurement = currentMeasurement || null
+  element.currentWeekMeasurement = currentWeekMeasurement || null
   element.lastWeekMeasurement = lastWeekMeasurement || null
 
   element = {

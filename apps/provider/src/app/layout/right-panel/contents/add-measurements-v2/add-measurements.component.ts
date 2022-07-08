@@ -284,10 +284,11 @@ export class AddMeasurementsV2Component implements OnInit {
       date: [moment(), Validators.required]
     })
 
-    this.labelsForm.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe(async (controls) => {
-        const foundLabel = this.labels?.find((lab) => lab.id === controls.label)
+    this.labelsForm
+      .get('label')
+      .valueChanges.pipe(untilDestroyed(this))
+      .subscribe((label) => {
+        const foundLabel = this.labels?.find((lab) => lab.id === label)
 
         if (!foundLabel) {
           return
