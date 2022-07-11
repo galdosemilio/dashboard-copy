@@ -213,7 +213,7 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
     })
   }
 
-  onApply() {
+  async onApply() {
     const closeSettings = this.mode === 'settings-modal'
     if (
       this.callState.selectedAudioInputDevice !==
@@ -243,7 +243,8 @@ export class CcrCallSettingsFormComponent implements OnDestroy, OnInit {
     ) {
       this.store.dispatch(
         new ApplyVideoBackgroundSetting({
-          enabled: this.form.value.videoBackgroundEnabled
+          enabled: this.form.value.videoBackgroundEnabled,
+          url: this.callBackgroundUrl
         })
       )
     }

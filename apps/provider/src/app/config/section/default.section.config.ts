@@ -100,7 +100,8 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     EXTERNAL_VISIBILITY_OPTIONS_ENABLED: false
   },
   COMMUNICATIONS: {
-    ENABLE_CALL_BACKGROUNDS: false
+    ENABLE_CALL_BACKGROUNDS: true,
+    CALL_BACKGROUND_URL: 'assets/img/musclewise/musclewisebackground.jpeg'
   },
   RPM: {
     AVAILABLE_DEVICES: RPM_DEVICES
@@ -185,7 +186,8 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     EXTERNAL_VISIBILITY_OPTIONS_ENABLED: false
   },
   COMMUNICATIONS: {
-    ENABLE_CALL_BACKGROUNDS: false
+    ENABLE_CALL_BACKGROUNDS: true,
+    CALL_BACKGROUND_URL: 'assets/img/musclewise/musclewisebackground.jpeg'
   },
   RPM: {
     AVAILABLE_DEVICES: RPM_DEVICES

@@ -19,7 +19,7 @@ import { select, Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
-import { Browser, sleep } from '@app/shared'
+import { Browser } from '@app/shared'
 import { resolveConfig } from '@app/config/section'
 import { ContextService } from '@app/service'
 import { DeviceDetectorService } from 'ngx-device-detector'
@@ -37,6 +37,7 @@ export class CallControlsComponent implements OnDestroy, OnInit {
   public toggleCamera$: Subject<void> = new Subject<void>()
   public toggleMicrophone$: Subject<void> = new Subject<void>()
   public videoPopupTrigger: Subject<void> = new Subject<void>()
+  public callBackgroundUrl: string
 
   constructor(
     private context: ContextService,
@@ -56,6 +57,12 @@ export class CallControlsComponent implements OnDestroy, OnInit {
         this.context.organization
       ) ??
         false)
+
+    this.callBackgroundUrl =
+      resolveConfig(
+        'COMMUNICATIONS.CALL_BACKGROUND_URL',
+        this.context.organization
+      ) || 'assets/img/callwallpaper.png'
 
     this.toggleBackgroundImage$
       .pipe(untilDestroyed(this), debounceTime(500))
@@ -100,12 +107,11 @@ export class CallControlsComponent implements OnDestroy, OnInit {
 
   private async onToggleBackgroundImage(isEnabled): Promise<void> {
     this.store.dispatch(
-      new ApplyVideoBackgroundSetting({ enabled: !isEnabled })
+      new ApplyVideoBackgroundSetting({
+        enabled: !isEnabled,
+        url: this.callBackgroundUrl
+      })
     )
-
-    this.store.dispatch(new DisableCurrentUserCamera())
-    await sleep(600)
-    this.store.dispatch(new EnableCurrentUserCamera())
   }
 
   private onToggleCamera(isEnabled: boolean): void {

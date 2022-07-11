@@ -290,6 +290,7 @@ export class TwilioService {
     const track = await createLocalVideoTrack({
       deviceId: this.selectedVideoInputDevice
     })
+
     await this.currentRoom.localParticipant.publishTrack(track)
 
     if (!this.localVideoEnabled) {
@@ -303,16 +304,34 @@ export class TwilioService {
     }
 
     this.localVideoTrack = track
+
     const container = document.getElementById(this.localVideoMediaElementId)
-    const element = track.attach()
+    const element = this.localVideoTrack.attach()
     element.style.height = '100%'
     container.appendChild(element)
 
-    if (!args.backgroundEnabled) {
+    await this.applyVideoBackground(args.backgroundEnabled, args.backgroundUrl)
+  }
+
+  async applyVideoBackground(
+    backgroundEnabled: boolean,
+    backgroundUrl?: string
+  ) {
+    if (!this.localVideoTrack) {
       return
     }
 
-    void this.addBackgroundToVideoTrack(track, args.backgroundUrl)
+    if (this.localVideoTrack.processor) {
+      await this.localVideoTrack.removeProcessor(this.localVideoTrack.processor)
+    }
+
+    if (backgroundEnabled) {
+      await this.addBackgroundToVideoTrack(this.localVideoTrack, backgroundUrl)
+      await this.currentRoom.localParticipant.unpublishTrack(
+        this.localVideoTrack
+      )
+      await this.currentRoom.localParticipant.publishTrack(this.localVideoTrack)
+    }
   }
 
   disableMicrophone() {
@@ -409,13 +428,6 @@ export class TwilioService {
     }
     if (this.localVideoTrack) {
       this.attachTrack({ track: this.localVideoTrack }, videoContainer)
-
-      if (twilioConfiguration.videoBackgroundEnabled) {
-        void this.addBackgroundToVideoTrack(
-          this.localVideoTrack,
-          twilioConfiguration.videoBackgroundUrl
-        )
-      }
     }
   }
 

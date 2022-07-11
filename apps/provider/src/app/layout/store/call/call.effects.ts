@@ -556,6 +556,21 @@ export class CallEffects {
     { dispatch: false }
   )
 
+  applyVideoBackgroundSettings$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(callAction.APPLY_VIDEO_BACKGROUND_SETTING),
+        debounceTime(300),
+        tap(() =>
+          this.twilioService.applyVideoBackground(
+            this.callState.videoBackgroundEnabled,
+            this.callState.videoBackgroundUrl
+          )
+        )
+      ),
+    { dispatch: false }
+  )
+
   enableCurrentUserMicrophone$ = createEffect(
     () =>
       this.actions$.pipe(
