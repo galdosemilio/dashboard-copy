@@ -8,6 +8,7 @@ import { _ } from '@app/shared/utils'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { AlertsDatabase, AlertsDataSource } from './services'
 import { debounceTime } from 'rxjs/operators'
+import { NotificationRequest } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-reports-alerts',
@@ -28,6 +29,20 @@ export class AlertsComponent implements OnInit, OnDestroy {
     { viewValue: _('REPORTS.TYPE_WEIGHT_THRESHOLD'), value: '5' },
     { viewValue: _('ALERTS.TYPES.DATA_THRESHOLD_ALERT'), value: '6' }
   ]
+
+  rpmStatus: 'active' | 'inactive'
+  rpmStatusList = [
+    { viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined },
+    {
+      viewValue: _('REPORTS.PATIENTS_CURRENTLY_ENROLLED_IN_RPM'),
+      value: 'active'
+    },
+    {
+      viewValue: _('REPORTS.PATIENTS_NOT_CURRENTLY_ENROLLED_IN_RPM'),
+      value: 'inactive'
+    }
+  ]
+
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020577952-Viewing-Notifications-in-the-Dashboard'
 
@@ -61,11 +76,18 @@ export class AlertsComponent implements OnInit, OnDestroy {
     this.source.addOptional(this.refresh$.pipe(debounceTime(300)), () => {
       const k = findIndex(this.alerts, { value: this.alert })
 
-      return k === 0
-        ? {}
-        : typeof this.alert === 'string'
-        ? { type: this.alert }
-        : { category: this.alert }
+      const query: Partial<NotificationRequest> =
+        k === 0
+          ? {}
+          : typeof this.alert === 'string'
+          ? { type: this.alert }
+          : { category: this.alert }
+
+      if (this.rpmStatus) {
+        query.rpm = this.rpmStatus
+      }
+
+      return query
     })
     this.source.addOptional(this.context.organization$, () => ({
       organization: this.context.organizationId,

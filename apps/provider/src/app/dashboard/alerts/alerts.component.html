@@ -10,7 +10,7 @@
 
 <div fxLayout="row" fxLayoutWrap fxLayoutGap="2%" fxLayoutGap.xs="0" class="ccr-alerts">
 
-  <mat-form-field fxFlex="25%" fxFlex.xs="grow" floatLabel="never" class="ccr-filter">
+  <mat-form-field fxFlex="20%" fxFlex.xs="grow" floatLabel="never" class="ccr-filter">
     <mat-select [disableOptionCentering]="true" [(ngModel)]="alert" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_ALERTS' | translate">
       <mat-option *ngFor="let alert of alerts" [value]="alert.value">
         {{ alert.viewValue | translate | uppercase }}
@@ -18,6 +18,13 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field fxFlex="20%" fxFlex.xs="grow" floatLabel="never" class="ccr-filter">
+    <mat-select [disableOptionCentering]="true" [(ngModel)]="rpmStatus" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_BY_RPM_STATUS' | translate">
+      <mat-option *ngFor="let rpmStatusItem of rpmStatusList" [value]="rpmStatusItem.value">
+        {{ rpmStatusItem.viewValue | translate | uppercase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
 <app-alert-info></app-alert-info>
