@@ -34,9 +34,7 @@ export class PackageSelectDialog implements OnInit {
     if (this.data.packages && this.data.packages.length) {
       const allPackages = await this.database
         .fetch({
-          organization: this.data.content.organization
-            ? this.data.content.organization.id
-            : this.context.organizationId,
+          organization: this.context.organizationId,
           isActive: true
         })
         .toPromise()
@@ -46,17 +44,16 @@ export class PackageSelectDialog implements OnInit {
         const existingPackageAssociation = allPackages.data.find(
           (pkg) => pkg.package.id === p.id
         )
-        packages.push(
-          new Package({
-            ...(existingPackageAssociation
-              ? {
-                  ...existingPackageAssociation,
-                  ...existingPackageAssociation.package
-                }
-              : {}),
-            checked: true
-          })
-        )
+
+        if (existingPackageAssociation) {
+          packages.push(
+            new Package({
+              ...existingPackageAssociation,
+              ...existingPackageAssociation.package,
+              checked: true
+            })
+          )
+        }
       }
       this.contentPackages = packages
     }
