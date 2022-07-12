@@ -1440,7 +1440,7 @@
     "NON_DELETABLE_INTERACTIONS": "Nur manuell hinzugefügt Kommunikationen von dem aktuellen Monat können geändert oder gelöscht werden.",
     "PATIENTS": "Patienten",
     "PATIENTS_CURRENTLY_ENROLLED_IN_RPM": "Patienten, die derzeit in RPM eingeschrieben sind",
-    "PATIENTS_NOT_CURRENTLY_ENROLLED_IN_RPM": "Patienten, die derzeit nicht in RPM eingeschrieben sind",
+    "PATIENTS_NOT_CURRENTLY_ENROLLED_IN_RPM": "Patienten, die zuvor in RPM eingeschrieben waren",
     "PATIENT_ACTIVITY": "Patientenaktivität",
     "PATIENT_DEMOGRAPHICS": "Patientendaten",
     "PATIENT_STATISTICS": "Patientenstatistiken",

@@ -1440,7 +1440,7 @@
     "NON_DELETABLE_INTERACTIONS": "الاتصالات فقط إضافتها يدويا من الشهر الحالي يمكن تعديلها أو حذفها.",
     "PATIENTS": "المرضى",
     "PATIENTS_CURRENTLY_ENROLLED_IN_RPM": "المرضى المسجلين حاليا في RPM",
-    "PATIENTS_NOT_CURRENTLY_ENROLLED_IN_RPM": "المرضى غير المسجلين حاليًا في RPM",
+    "PATIENTS_NOT_CURRENTLY_ENROLLED_IN_RPM": "المرضى المسجلين سابقًا في RPM",
     "PATIENT_ACTIVITY": "نشاط المريض",
     "PATIENT_DEMOGRAPHICS": "ديموغرافيات المرضى",
     "PATIENT_STATISTICS": "إحصاءات المريض",
