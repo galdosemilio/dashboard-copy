@@ -1,3 +1,17 @@
+# [1.90.0](https://github.com/coachcare/dashboard/compare/v1.89.0...v1.90.0) (2022-07-13)
+
+
+### Bug Fixes
+
+* add RPM status filter to alert notification listing [FRON-2867] ([94716b3](https://github.com/coachcare/dashboard/commit/94716b3d719f6da3d7ac86ee52fa2012d9356f17))
+* correct RPM filter wording ([7505ebe](https://github.com/coachcare/dashboard/commit/7505ebe32fe8469d7e77b71fc4d5f254345f0066))
+* issue with progress report and entries added to previous dates [FRON-2856] ([b21c9fa](https://github.com/coachcare/dashboard/commit/b21c9faf74fd21feaeed1af0d635a0ad0d5a7152))
+
+
+### Features
+
+* added alert type to notification entry on the right panel [FRON-2863] ([1b08917](https://github.com/coachcare/dashboard/commit/1b0891726cf0e97688ed4c4909ec9f4cb90b6ed4))
+
 # [1.89.0](https://github.com/coachcare/dashboard/compare/v1.88.0...v1.89.0) (2022-07-01)
 
 
