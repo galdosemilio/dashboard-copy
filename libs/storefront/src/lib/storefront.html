@@ -7,7 +7,7 @@
       </div>
       <p routerLink="../storefront" queryParamsHandling="merge" class="title">{{ 'GLOBAL.STORE' | translate }}</p>
       <a mat-icon-button class="cart" routerLink="./order" queryParamsHandling="merge">
-        <mat-icon [matBadge]="itemCount" matBadgeColor="primary">
+        <mat-icon [matBadge]="itemCount" [matBadgeHidden]="itemCount === 0" matBadgeColor="primary">
           shopping_cart
         </mat-icon>
       </a>
