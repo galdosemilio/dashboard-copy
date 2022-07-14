@@ -313,7 +313,11 @@ export class StorefrontService {
       include: cartIncludeFields
     })
 
-    this.parseCartResult(res)
+    if (res.isFail()) {
+      throw new Error(res.fail().message)
+    }
+
+    await this.loadSpreeCart()
   }
 
   public async getShippingRates() {
