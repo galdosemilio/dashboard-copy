@@ -30,7 +30,10 @@
       </mat-grid-tile>
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput required formControlName="stateProvince"
+          <mat-select *ngIf="isUnitedStates" required formControlName="stateProvince">
+            <mat-option *ngFor="let state of states" [value]="state.value">{{ state.displayValue }}</mat-option>
+          </mat-select>
+          <input *ngIf="!isUnitedStates" matInput required formControlName="stateProvince"
           [placeholder]="'GLOBAL.STATE' | translate">
           <mat-error *ngIf="form.get('stateProvince').getError('required')">{{ 'ERROR.ADDRESS_STATE_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
