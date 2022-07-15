@@ -1,0 +1,12 @@
+<div matDialogTitle>
+  <div>
+    <span matDialogTitle [innerHTML]="'GLOBAL.ITEM_ADDED_TO_CART' | translate"></span>
+  </div>
+</div>
+
+<mat-dialog-content>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <button class="ccr-button" mat-button (click)="goToPage('category')">{{ 'GLOBAL.CONTINUE_SHOPPING' | translate }}</button>
+    <button class="ccr-button" mat-button (click)="goToPage('cart')"><mat-icon>shopping_cart</mat-icon>{{ 'GLOBAL.GO_TO_CART' | translate }}</button>
+  </div>
+</mat-dialog-content>

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { ActivatedRoute, Router } from '@angular/router'
 import { NotifierService } from '@coachcare/common/services'
-import { StorefrontProductDialog } from '@coachcare/storefront/dialogs'
+import {
+  StorefrontProductDialog,
+  StorefrontShoppingPromptDialog
+} from '@coachcare/storefront/dialogs'
 import {
   StorefrontCategory,
   StorefrontProduct,
@@ -28,7 +32,9 @@ export class StorefrontProductComponent implements OnInit {
   constructor(
     private storefront: StorefrontService,
     private notifier: NotifierService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -106,7 +112,30 @@ export class StorefrontProductComponent implements OnInit {
       this.notifier.error(err)
     } finally {
       this.isLoading = false
+      this.showShoppingPrompt()
     }
+  }
+
+  private showShoppingPrompt() {
+    this.dialog
+      .open(StorefrontShoppingPromptDialog, {
+        width: '60vw',
+        maxWidth: '500px'
+      })
+      .afterClosed()
+      .pipe(filter((res) => res))
+      .subscribe((res: 'cart' | 'category') => {
+        if (res === 'cart') {
+          return this.router.navigate(['../order/cart'], {
+            relativeTo: this.route,
+            queryParamsHandling: 'merge'
+          })
+        }
+
+        if (res === 'category') {
+          return this.onClearSelectedCategory()
+        }
+      })
   }
 
   public onClearSelectedCategory() {

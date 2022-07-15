@@ -2,7 +2,8 @@ import { APP_INITIALIZER } from '@angular/core'
 import {
   StorefrontAddressDialog,
   StorefrontPaymentMethodDialog,
-  StorefrontProductDialog
+  StorefrontProductDialog,
+  StorefrontShoppingPromptDialog
 } from './dialogs'
 import {
   StorefrontCartComponent,
@@ -18,6 +19,7 @@ export const StorefrontComponents = [
   StorefrontAddressDialog,
   StorefrontProductDialog,
   StorefrontPaymentMethodDialog,
+  StorefrontShoppingPromptDialog,
   Storefront,
   StorefrontProductComponent,
   StorefrontOrderComponent,
