@@ -13,6 +13,7 @@ import { AccountIdentifiersProps } from '@app/shared/model/accountIdentifiers/ac
 import { _ } from '@app/shared/utils'
 import { DefaultProfileComponent } from '@app/dashboard/profile/layouts'
 import { environment } from '../../../environments/environment'
+import { RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
@@ -102,7 +103,7 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
     ENABLE_CALL_BACKGROUNDS: false
   },
   RPM: {
-    ADDITIONAL_DEVICES: []
+    AVAILABLE_DEVICES: RPM_DEVICES
   }
 }
 
@@ -187,6 +188,6 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
     ENABLE_CALL_BACKGROUNDS: false
   },
   RPM: {
-    ADDITIONAL_DEVICES: []
+    AVAILABLE_DEVICES: RPM_DEVICES
   }
 }

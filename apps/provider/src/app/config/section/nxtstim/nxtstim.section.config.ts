@@ -10,7 +10,7 @@ export const NXTSTIMSectionConfig: SectionConfigDetails = {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM, SidenavOptions.STORE]
   },
   RPM: {
-    ADDITIONAL_DEVICES: [
+    AVAILABLE_DEVICES: [
       {
         id: '5',
         name: 'NXTSTIM EcoAI',

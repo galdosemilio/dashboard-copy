@@ -61,7 +61,6 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   public selectedClinic?: OrganizationAccess
   public supervisingProviderOptions: SelectOption<string>[] = []
 
-  private additionalRpmDevices: RPMDevice[] = []
   private supervisingProvidersDataSource: SupervisingProvidersDataSource
 
   constructor(
@@ -205,11 +204,8 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  private resolveDevices(): void {
-    this.rpmDevices = [
-      ...Object.values(RPM_DEVICES),
-      ...this.additionalRpmDevices
-    ]
+  private resolveDevices(devices: RPMDevice[]): void {
+    this.rpmDevices = devices
       .map((device) => ({
         value: device.id,
         viewValue: device.displayName,
@@ -245,8 +241,8 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
         orgSingle
       )
 
-      const additionalDevicesSetting = resolveConfig(
-        'RPM.ADDITIONAL_DEVICES',
+      const availableDevicesSetting = resolveConfig(
+        'RPM.AVAILABLE_DEVICES',
         orgSingle
       )
 
@@ -255,11 +251,11 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
           ? false
           : deviceSelectorSetting
 
-      this.additionalRpmDevices = Array.isArray(additionalDevicesSetting)
-        ? additionalDevicesSetting
-        : []
+      const availableRpmDevices = Array.isArray(availableDevicesSetting)
+        ? availableDevicesSetting
+        : RPM_DEVICES
 
-      this.resolveDevices()
+      this.resolveDevices(availableRpmDevices)
     } catch (error) {
       this.notify.error(error)
     }
