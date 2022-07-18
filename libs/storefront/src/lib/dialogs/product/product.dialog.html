@@ -6,13 +6,13 @@
 </div>
 
 <mat-dialog-content>
-  <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutGap="30px">
-    <div fxFlex>
+  <div fxFlex fxLayout.gt-sm="row" fxLayout="column" fxLayoutGap="30px">
+    <div fxFlex fxLayout="row" fxLayoutAlign="center center">
       <div class="product-img">
         <img [src]="product.images[0]" alt="product" />
       </div>
     </div>
-    <div fxFlex fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayoutGap="20px">
       <div fxFlex fxLayout="column" fxLayoutGap="20px">
         <h3>{{ product.attributes.name }}</h3>
         <mat-expansion-panel>

@@ -2,6 +2,15 @@
 
 :host {
   color: var(--text);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .mat-dialog-content {
+    flex: 1;
+    max-height: initial;
+    margin-bottom: 0px;
+  }
 
   .ccr-button {
     background-color: var(--primary);
