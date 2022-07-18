@@ -84,7 +84,6 @@ jobs:
         enum:
           - test
           - prod
-          - blueinfy
     steps:
       - attach_workspace:
           at: ~/repo
@@ -110,50 +109,6 @@ jobs:
           root: ~/repo
           paths:
             - .
-
-  deploy_on_demand:
-    docker:
-      - image: cimg/python:3.8
-    working_directory: ~/repo/dist/apps
-    parameters:
-      env:
-        type: enum
-        enum:
-          - blueinfy
-    environment:
-      AWS_REGION: us-east-1
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - aws-s3/copy:
-          arguments: --acl public-read --recursive
-          from: ./<< parameters.env>>/admin
-          to: s3://<< parameters.env >>.dashboard.coachcare.com/
-      - aws-s3/sync:
-          arguments: --acl public-read --delete
-          from: ./<< parameters.env>>/admin
-          to: s3://<< parameters.env >>.dashboard.coachcare.com/
-      - aws-s3/copy:
-          arguments: --acl public-read --recursive
-          from: ./<< parameters.env>>/provider
-          to: s3://<< parameters.env >>.dashboard.coachcare.com/provider
-      - aws-s3/sync:
-          arguments: --acl public-read --delete
-          from: ./<< parameters.env>>/provider
-          to: s3://<< parameters.env >>.dashboard.coachcare.com/provider
-      - aws-s3/copy:
-          arguments: --acl public-read --recursive
-          from: ./<< parameters.env>>/measurement-charts
-          to: s3://<< parameters.env >>.dashboard.coachcare.com/measurement-charts
-      - aws-s3/sync:
-          arguments: --acl public-read --delete
-          from: ./<< parameters.env>>/measurement-charts
-          to: s3://<< parameters.env >>.dashboard.coachcare.com/measurement-charts
-      - run:
-          name: Push SumoLogic deployment notification
-          command: |
-            echo "`date` | Site deployment completed for PROJECT: $CIRCLE_PROJECT_REPONAME BRANCH: $CIRCLE_BRANCH COMMIT: $CIRCLE_SHA1 ENV: << parameters.env >> DEPLOYER: $CIRCLE_USERNAME" > sumologic-deployment.log
-            curl -s -X POST -T sumologic-deployment.log "$SUMOLOGIC_COLLECTOR_URL" || { echo 'SumoLogic deployment log upload failed'; exit 0; }
 
   deploy:
     docker:
@@ -362,15 +317,6 @@ workflows:
                 - /dependabot.*/
           requires:
             - affected_test
-      - full_build:
-          mode: blueinfy
-          name: full_blueinfy_build
-          filters:
-            branches:
-              ignore:
-                - /dependabot.*/
-          requires:
-            - affected_test
       - approve_test_deployment:
           type: approval
           filters:
@@ -379,36 +325,12 @@ workflows:
                 - master
           requires:
             - full_test_build
-      - approve_blueinfy_deployment:
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - master
-          requires:
-            - full_blueinfy_build
       - deploy:
           name: deploy_test
           env: test
           requires:
             - approve_test_deployment
           context: dashboard-deployment-test
-      - deploy_on_demand:
-          name: deploy_blueinfy
-          env: blueinfy
-          requires:
-            - approve_blueinfy_deployment
-          context: dashboard-deployment-on-demand
-      - deploy_on_demand:
-          name: deploy_blueinfy_master
-          env: blueinfy
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - full_blueinfy_build
-          context: dashboard-deployment-on-demand
       - deploy:
           name: deploy_test_master
           env: test
