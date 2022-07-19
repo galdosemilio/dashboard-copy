@@ -329,7 +329,10 @@ export class StorefrontService {
 
     const data = res.success()
 
-    const shipment = data.data[0]
+    const shipment = data.data.find(
+      (item) =>
+        (item.relationships.selected_shipping_rate?.data as RelationType)?.id
+    )
     const shippingRateIds =
       (shipment?.relationships.shipping_rates.data as RelationType[]).map(
         (entry) => entry.id
@@ -429,7 +432,11 @@ export class StorefrontService {
       (item) => item.type === 'address' && item.id === billingAddressId
     )
 
-    const shipment = entry.included.find((item) => item.type === 'shipment')
+    const shipment = entry.included.find(
+      (item) =>
+        item.type === 'shipment' &&
+        item.relationships?.selected_shipping_rate?.data?.id
+    )
 
     const paymentMethod = entry.included.find(
       (item) => item.type === 'payment_method'
@@ -446,7 +453,7 @@ export class StorefrontService {
       paymentMethod,
       creditCard,
       shipmentId: shipment?.id,
-      shppingRateId: shipment?.relationships.selected_shipping_rate?.data.id,
+      shppingRateId: shipment?.relationships.selected_shipping_rate?.data?.id,
       isComplete: data.attributes.state === 'complete'
     }
 

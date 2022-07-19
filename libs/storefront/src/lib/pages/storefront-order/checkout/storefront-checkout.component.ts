@@ -93,6 +93,7 @@ export class StorefrontCheckoutComponent implements OnInit {
       )
 
       await this.setAddresses()
+      await this.getShippingRates()
     } catch (err) {
       this.notifier.error(err)
     } finally {
