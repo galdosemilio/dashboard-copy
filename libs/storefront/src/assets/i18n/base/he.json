@@ -5,10 +5,10 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "יש להזין מיקוד",
     "ADDRESS_STATE_REQUIRED": "מדינה/פרובינציה נדרשת",
     "PAYMENT_METHOD_NOT_FOUND": "אמצעי התשלום לא נמצא, אנא צור קשר עם מנהל המערכת.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "חשבון חנות כבר קיים עבור כתובת האימייל שלך, אך הוא אינו מחובר כהלכה. אנא <a href='mailto:support@coachcare.com'>צור קשר עם צוות התמיכה שלנו</a> לקבלת סיוע.",
-    "STORE_NOT_AVAILABLE": "החנות אינה זמינה בארגון זה."
+    "SPREE_ACCOUNT_ALREDAY_EXISTS": "חשבון חנות כבר קיים עבור כתובת האימייל שלך, אך הוא אינו מחובר כהלכה. אנא <a href='mailto:support@coachcare.com'>צור קשר עם צוות התמיכה שלנו</a> לקבלת סיוע."
   },
   "GLOBAL": {
+    "ACTIONS": "פעולות",
     "ADD": "לְהוֹסִיף",
     "ADDRESS_LINE_ONE": "שורת כתובת 1",
     "ADDRESS_LINE_TWO": "שורת כתובת 2",
@@ -18,24 +18,38 @@
     "BANNER_TITLE": "ירידה במשקל לרווחים בריאותיים",
     "BILLING_ADDRESS": "כתובת לחיוב",
     "CANCEL": "ביטול",
+    "CART": "עֲגָלָה",
     "CHECK_OUT": "לבדוק",
     "CITY": "עיר",
+    "CLOSE": "סגירה",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "אם יש משהו נוסף שתרצה לדעת, אל תהסס לפנות לשירות הלקוחות",
     "CONTINUE_SHOPPING": "המשך בקניות",
     "COUNTRY": "מדינה",
+    "DATE": "תאריך",
+    "DEFAULT": "בְּרִירַת מֶחדָל",
+    "DELETE": "מחיקה",
+    "DELETE_PAYMENT_METHOD": "מחיקת אמצעי תשלום.",
+    "DELETE_PAYMENT_METHOD_DESCRIPTION": "האם אתה בטוח שברצונך למחוק את שיטת התשלום ************{{last4}}?<br><br><strong>פעולה זו לא ניתן לבטל.</strong>",
     "DESCRIPTION": "תיאור",
-    "EXPIRES": "יפוג",
+    "EXPIRES": "{{date}} :יפוג",
     "GO_TO_CART": "לך לעגלה",
     "GO_TO_MY_ORDERS": "עבור אל ההזמנות שלי",
+    "ID": "ID",
     "ITEM_ADDED_TO_CART": "פריט נוסף לעגלה",
     "ITEM_DETAILS": "פרטי הפריט",
     "NO_INFORMATION": "אין מידע תיעוד. הוסף עכשיו >",
+    "ORDER_HISTORY": "היסטוריית הזמנות",
+    "ORDER_SUMMARY": "סיכום הזמנה",
+    "PAYMENT_MANAGEMENT": "ניהול תשלומים",
     "PAYMENT_METHOD": "אמצעי תשלום",
     "PLACE_ORDER": "בצע הזמנה",
     "POSTAL_CODE": "מיקוד",
     "PRICE": "מחיר",
+    "PRIMARY": "יְסוֹדִי",
     "REMOVE": "לְהַסִיר",
     "SEARCH_ITEMS": "התחל להקליד פריטי חיפוש",
+    "SET_PAYMENT_METHOD_AS_DEFAULT": "הגדרת אמצעי תשלום כברירת מחדל",
+    "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "האם אתה בטוח שברצונך להגדיר את שיטת התשלום ************{{last4}} כמו ברירת המחדל?",
     "SHIPPING": "משלוח",
     "SHIPPING_ADDRESS": "כתובת למשלוח",
     "SHIPPING_METHOD": "שיטת משלוח",
@@ -49,6 +63,17 @@
     "TAX": "מַס",
     "THANK_YOU_FOR_ORDER": "תודה על הזמנתך!",
     "TOTAL": "סך הכל",
+    "VIEW_ORDER_DETAILS": "צפה בפרטי הזמנה",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "נהיה בקשר שוב עם פרטי משלוח ומעקב ברגע שההזמנה שלך תצא מהמחסן שלנו עליה, לא נוכל לשנות דבר כולל הפריטים או כתובת המשלוח."
+  },
+  "NOTIFY": {
+    "ERROR": {
+      "NO_PAYMENT_METHODS": "אין שיטות תשלום."
+    },
+    "SUCCESS": {
+      "PAYMENT_METHOD_CREATED": "שיטת התשלום שנוצרה בהצלחה.",
+      "PAYMENT_METHOD_DELETED": "שיטת התשלום נמחקה בהצלחה.",
+      "PAYMENT_METHOD_UPDATE": "שיטת התשלום מעודכנת בהצלחה."
+    }
   }
 }

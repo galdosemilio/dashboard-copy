@@ -61,13 +61,13 @@
             <div>{{ 'GLOBAL.PAYMENT_METHOD' | translate }}</div>
           </div>
           <button mat-icon-button (click)="openPaymentMethod()">
-            <mat-icon>edit</mat-icon>
+            <mat-icon>add</mat-icon>
           </button>
         </div>
-        <div *ngIf="cart.creditCard; else noInfo">
-          <p cy-data="payment-method-name">{{ cart.creditCard.attributes.name }}</p>
-          <p cy-data="payment-method-card-number">***{{ cart.creditCard.attributes.last_digits }}</p>
-          <p cy-data="payment-method-card-expires">{{ 'GLOBAL.EXPIRES' | translate }} {{ cart.creditCard.attributes.month }} / {{ cart.creditCard.attributes.year }}</p>
+        <div class="payment-method" *ngIf="creditCardList.length && cart.creditCard; else noInfo">
+          <mat-select [(value)]="cart.creditCard.id" (selectionChange)="onSelectCreditCard($event.value)">
+            <mat-option *ngFor="let creditCard of creditCardList" [value]="creditCard.id">{{ creditCard.name }}</mat-option>
+          </mat-select>
         </div>
       </div>
       <div cy-data="billing-address" fxLayout="column" fxLayoutAlign="center center" class="item">

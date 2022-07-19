@@ -1,0 +1,9 @@
+@import 'variables';
+
+.payment-methods {
+  padding: 30px 50px;
+
+  @media (max-width: $xs-max) {
+    padding: 10px;
+  }
+}

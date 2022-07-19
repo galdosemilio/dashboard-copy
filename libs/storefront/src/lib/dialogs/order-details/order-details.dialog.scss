@@ -1,0 +1,33 @@
+hr {
+  border-color: var(--bg-panel);
+  margin-bottom: 25px !important;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.item-label {
+  font-weight: bold;
+  margin: 0;
+
+  &.subtitle {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+}
+
+.product-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  width: 100px;
+}
+
+.price-label {
+  font-size: 24px;
+  text-align: right;
+
+  &.total {
+    font-weight: bold;
+  }
+}

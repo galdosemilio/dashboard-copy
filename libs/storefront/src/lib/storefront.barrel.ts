@@ -1,38 +1,55 @@
 import { APP_INITIALIZER } from '@angular/core'
-import { StorefrontCategoryIconComponent } from './components'
+import {
+  StorefrontPaymentMethodEntryComponent,
+  StorefrontCategoryIconComponent
+} from './components'
 import {
   StorefrontAddressDialog,
+  StorefrontOrderDetailsDialog,
   StorefrontPaymentMethodDialog,
   StorefrontProductDialog,
   StorefrontShoppingPromptDialog
 } from './dialogs'
 import {
+  StorefrontOrderHistoryPageComponent,
   StorefrontCartComponent,
   StorefrontCheckoutComponent,
   StorefrontOrderCompleteComponent,
   StorefrontOrderComponent,
   StorefrontProductComponent
 } from './pages'
-import { StorefrontService, StorefrontUserService } from './services'
+import { StorefrontPaymentManagementPageComponent } from './pages/payment-management'
+import {
+  StorefrontOrdersDatabase,
+  StorefrontPaymentMethodsDatabase,
+  StorefrontService,
+  StorefrontUserService
+} from './services'
 import { Storefront } from './storefront'
 
 export const StorefrontComponents = [
+  StorefrontOrderHistoryPageComponent,
+  StorefrontPaymentManagementPageComponent,
   StorefrontAddressDialog,
   StorefrontProductDialog,
   StorefrontPaymentMethodDialog,
   StorefrontShoppingPromptDialog,
+  StorefrontOrderDetailsDialog,
   Storefront,
   StorefrontProductComponent,
   StorefrontOrderComponent,
   StorefrontCartComponent,
   StorefrontCheckoutComponent,
   StorefrontOrderCompleteComponent,
+  StorefrontPaymentMethodEntryComponent,
   StorefrontCategoryIconComponent
 ]
 
 export const StorefrontProviders = [
   StorefrontService,
   StorefrontUserService,
+  StorefrontOrdersDatabase,
+  StorefrontPaymentMethodsDatabase,
   {
     provide: APP_INITIALIZER,
     useFactory: onAppInit,

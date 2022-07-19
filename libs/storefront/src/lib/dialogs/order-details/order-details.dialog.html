@@ -1,0 +1,107 @@
+<div matDialogTitle>
+  <div>
+    <span>{{ 'GLOBAL.ORDER_SUMMARY' | translate}}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <ng-container *ngIf="order; else spinner">
+    <h3 fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="15px">
+      <span fxFlex>{{ 'GLOBAL.ID' | translate }}: {{ order.id }}</span>
+      <span>{{ 'GLOBAL.DATE' | translate }}: {{ order.createdAt | amDateFormat:'ddd, MMM D YYYY h:mm a' }}</span>
+    </h3>
+
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+      <div
+      *ngFor="let product of order.products"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="10px">
+        <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="space-between stretch"
+        fxLayoutAlign.xs="start stretch"
+        fxLayoutGap="15px">
+          <div class="product-image" [style.background-image]="'url(' + product.imageUrl + ')'">
+            &nbsp;
+          </div>
+
+          <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center start"
+          fxLayoutAlign.xs="center stretch"
+          fxLayoutGap="10px">
+            <h4>{{ product.name }}</h4>
+            <p *ngIf="product.description" [class.ccr-text-left]="!showImage">{{ product.description }}</p>
+          </div>
+        </div>
+        <p class="price-label" fxFlex="25%">{{ product.price | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <p class="item-label" fxFlex>{{ 'GLOBAL.SHIPPING' | translate }}</p>
+        <p class="price-label" fxFlex="25%">{{ order.shippingCost | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <p class="item-label" fxFlex>{{ 'GLOBAL.TAX' | translate }}</p>
+        <p class="price-label" fxFlex="25%">{{ order.tax | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <p class="item-label" fxFlex>{{ 'GLOBAL.TOTAL' | translate }}</p>
+        <p class="price-label total" fxFlex="25%">{{ order.total | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+      </div>
+
+      <hr>
+
+      <div fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="15px">
+        <div fxFlex>
+          <p class="item-label subtitle">{{ 'GLOBAL.SHIPPING_ADDRESS' | translate }}</p>
+          <p>{{ order.shippingAddress.name }}</p>
+          <p>{{ order.shippingAddress.address1 }}</p>
+          <p>{{ order.shippingAddress.address2 }}</p>
+          <p>{{ order.shippingAddress.city }}, {{ order.shippingAddress.stateProvince }}, {{ order.shippingAddress.postalCode }}</p>
+          <p>{{ order.shippingAddress.country.name }}</p>
+        </div>
+
+        <div fxFlex>
+          <p class="item-label subtitle">{{ 'GLOBAL.BILLING_ADDRESS' | translate }}</p>
+          <p>{{ order.billingAddress.name }}</p>
+          <p>{{ order.billingAddress.address1 }}</p>
+          <p>{{ order.billingAddress.address2 }}</p>
+          <p>{{ order.billingAddress.city }}, {{ order.billingAddress.stateProvince }}, {{ order.billingAddress.postalCode }}</p>
+          <p>{{ order.billingAddress.country.name }}</p>
+        </div>
+      </div>
+
+      <br>
+
+      <div *ngIf="order.paymentMethod">
+        <p class="item-label subtitle">{{ 'GLOBAL.PAYMENT_METHOD' | translate }}</p>
+        <p>{{ order.paymentMethod.attributes.name }}</p>
+        <p>************{{ order.paymentMethod.attributes.last_digits }}</p>
+        <p>{{ 'GLOBAL.EXPIRES' | translate:{ date: order.paymentMethod.attributes.month + '/' + order.paymentMethod.attributes.year } }}</p>
+      </div>
+    </div>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+  class="ccr-button"
+  color="accent"
+  matDialogClose
+  mat-button>{{ 'GLOBAL.CLOSE' | translate }}</button>
+</mat-dialog-actions>
+
+<ng-template #spinner>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="6" diameter="48"></mat-spinner>
+  </div>
+</ng-template>

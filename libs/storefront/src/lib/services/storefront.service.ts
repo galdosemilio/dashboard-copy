@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core'
 import {
   AccountIdentifier,
   EcommerceProvider,
-  NamedEntity
+  NamedEntity,
+  SpreeProvider
 } from '@coachcare/sdk'
 
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
@@ -19,7 +20,10 @@ import {
   IOrderResult,
   OrderAttr
 } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
-import { OrderUpdate } from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
+import {
+  AddPayment,
+  OrderUpdate
+} from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
 
 export interface StorefrontVariant {
   id: string
@@ -93,7 +97,7 @@ const cartIncludeFields =
 export class StorefrontService {
   private spree: Client
   private spreeToken: IToken
-  private storeUrl: string
+  public storeUrl: string
   public cart: StorefrontCart
 
   public cart$ = new BehaviorSubject<StorefrontCart | null>(null)
@@ -103,6 +107,7 @@ export class StorefrontService {
   constructor(
     private accountIdentifier: AccountIdentifier,
     private ecommerce: EcommerceProvider,
+    private spreeProvider: SpreeProvider,
     public storefrontUserService: StorefrontUserService
   ) {}
 
@@ -122,6 +127,15 @@ export class StorefrontService {
 
       await this.loadSpreeAccount()
       await this.loadSpreeCart()
+
+      this.spreeProvider.setBaseApiOptions(
+        {
+          baseUrl: this.storeUrl,
+          headers: { Authorization: `Bearer ${this.spreeToken.bearerToken}` }
+        },
+        true
+      )
+
       this.initialized$.next(true)
     } catch (err) {
       this.error$.next(err)
@@ -361,6 +375,25 @@ export class StorefrontService {
     this.parseCartResult(res)
   }
 
+  public async addPayment(params: AddPayment) {
+    const res = await this.spree.checkout.addPayment(this.spreeToken, {
+      ...params,
+      include: cartIncludeFields
+    })
+
+    this.parseCartResult(res)
+  }
+
+  public async getCreditCards() {
+    const res = await this.spree.account.creditCardsList(this.spreeToken)
+
+    if (res.isFail()) {
+      throw new Error(res.fail().message)
+    }
+
+    return res.success().data
+  }
+
   public async checkoutComplete() {
     const res = await this.spree.checkout.complete(this.spreeToken, {
       include: cartIncludeFields
@@ -442,7 +475,7 @@ export class StorefrontService {
     const paymentMethod = entry.included.find(
       (item) => item.type === 'payment_method'
     )
-    const creditCard = entry.included.find(
+    const creditCards = entry.included.filter(
       (item) => item.type === 'credit_card'
     )
 
@@ -452,7 +485,7 @@ export class StorefrontService {
       shippingAddress,
       billingAddress,
       paymentMethod,
-      creditCard,
+      creditCard: creditCards[creditCards.length - 1],
       shipmentId: shipment?.id,
       shppingRateId: shipment?.relationships.selected_shipping_rate?.data?.id,
       isComplete: data.attributes.state === 'complete'

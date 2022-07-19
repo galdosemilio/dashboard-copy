@@ -1,0 +1,40 @@
+<div
+fxLayout="row"
+fxLayout.lt-sm="column"
+fxLayoutAlign="space-between center"
+fxLayoutAlign.lt-sm="start stretch"
+fxLayoutGap="15px">
+  <div fxFlex fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="5px">
+    <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span>{{ paymentMethod.name }}</span>
+      <small *ngIf="paymentMethod.isDefault">{{ 'GLOBAL.PRIMARY' | translate }}</small>
+    </p>
+
+    <div fxLayout="row" fxLayoutAlign="start space-between" fxLayoutGap="15px">
+      <div class="type-container" fxFlex>&nbsp;</div>
+      <div class="info" fxFlex="90%" fxFlex.lt-md="75%" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+        <p>****{{ paymentMethod.last4Digits }}</p>
+        <p>{{ 'GLOBAL.EXPIRES' | translate:{date: paymentMethod.expMonth + '/' + paymentMethod.expYear} }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="21%" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px">
+    <button
+    [disabled]="disabled"
+    (click)="onSetDefault.emit(paymentMethod)"
+    class="ccr-button"
+    color="primary"
+    mat-button>
+        {{ 'GLOBAL.DEFAULT' | translate }}
+    </button>
+    <button
+    [disabled]="disabled"
+    (click)="onDelete.emit(paymentMethod)"
+    class="ccr-button gray"
+    color="primary"
+    mat-flat-button>
+        {{ 'GLOBAL.DELETE' | translate }}
+    </button>
+  </div>
+</div>

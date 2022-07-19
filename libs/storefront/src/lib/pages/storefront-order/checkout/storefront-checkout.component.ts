@@ -6,7 +6,12 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { filter, first } from 'rxjs/operators'
 import { CurrentAccount, NotifierService } from '@coachcare/common/services'
-import { AccountAddress, AddressProvider, NamedEntity } from '@coachcare/sdk'
+import {
+  AccountAddress,
+  AddressProvider,
+  NamedEntity,
+  SpreeProvider
+} from '@coachcare/sdk'
 import { AddressLabelType } from '@coachcare/common/model'
 import { MatDialog } from '@angular/material/dialog'
 import {
@@ -17,6 +22,7 @@ import { _ } from '@coachcare/common/shared'
 import { Token } from '@stripe/stripe-js'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OrderUpdate } from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
+import { StripeService } from 'ngx-stripe'
 
 @UntilDestroy()
 @Component({
@@ -31,6 +37,7 @@ export class StorefrontCheckoutComponent implements OnInit {
   public shippingAddress: AccountAddress
   public billingAddress: AccountAddress
   public shippingRates: NamedEntity[] = []
+  public creditCardList: NamedEntity[] = []
 
   constructor(
     private storefront: StorefrontService,
@@ -38,7 +45,9 @@ export class StorefrontCheckoutComponent implements OnInit {
     private addressProvider: AddressProvider,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spree: SpreeProvider,
+    private stripeService: StripeService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +64,7 @@ export class StorefrontCheckoutComponent implements OnInit {
             queryParamsHandling: 'merge'
           })
         }
-        this.processCheckout()
+        void this.processCheckout()
       })
 
     this.storefront.cart$
@@ -66,14 +75,17 @@ export class StorefrontCheckoutComponent implements OnInit {
       .subscribe((res) => (this.cart = res))
   }
 
-  private processCheckout() {
+  private async processCheckout() {
     this.user = this.storefront.storefrontUserService.user
-    void this.resolveAccountAddresses()
+    this.isLoading = true
+
+    await this.resolveAccountAddresses()
+    await this.resolvePaymentMethod()
+
+    this.isLoading = false
   }
 
   public async resolveAccountAddresses() {
-    this.isLoading = true
-
     try {
       const response = await this.addressProvider.getAddressList({
         account: this.user.id,
@@ -96,8 +108,29 @@ export class StorefrontCheckoutComponent implements OnInit {
       await this.getShippingRates()
     } catch (err) {
       this.notifier.error(err)
-    } finally {
-      this.isLoading = false
+    }
+  }
+
+  public async resolvePaymentMethod() {
+    try {
+      const res = await this.spree.getCreditCards()
+
+      const creditCards = res.credit_cards.filter((item) => item.source_id)
+
+      this.creditCardList = creditCards.map((item) => ({
+        id: item.source_id.toString(),
+        name: `${item.brand} ***${item.last4} ${item.exp_month}/${item.exp_year}`
+      }))
+
+      const defaultCard =
+        creditCards.find((item) => item.default_source) ||
+        creditCards[creditCards.length - 1]
+
+      if (!this.cart.creditCard && defaultCard) {
+        await this.onSelectCreditCard(defaultCard.source_id.toString())
+      }
+    } catch (err) {
+      this.notifier.error(err)
     }
   }
 
@@ -149,11 +182,33 @@ export class StorefrontCheckoutComponent implements OnInit {
     }
   }
 
+  public async onSelectCreditCard(sourceId: string) {
+    this.isLoading = true
+
+    try {
+      const paymentMethods = await this.storefront.getPaymentMethods()
+      const paymentMethod = paymentMethods.data[0]
+
+      if (!paymentMethod) {
+        throw new Error(_('ERROR.PAYMENT_METHOD_NOT_FOUND'))
+      }
+
+      await this.storefront.addPayment({
+        payment_method_id: paymentMethod.id,
+        source_id: sourceId
+      })
+    } catch (err) {
+      this.notifier.error(err)
+    } finally {
+      this.isLoading = false
+    }
+  }
+
   public openPaymentMethod() {
     this.dialog
       .open(StorefrontPaymentMethodDialog, {
         width: '60vw',
-        maxWidth: '800px'
+        maxWidth: '500px'
       })
       .afterClosed()
       .pipe(filter((token) => token))
@@ -188,6 +243,17 @@ export class StorefrontCheckoutComponent implements OnInit {
           ]
         }
       })
+
+      const confirmData = await this.spree.getPaymentConfirmationIntentData()
+      const confirmCardPaymentResponse = await this.stripeService
+        .confirmCardPayment(confirmData.client_secret)
+        .toPromise()
+
+      await this.spree.verifyPaymentConfirmationIntentResponse({
+        response: confirmCardPaymentResponse
+      })
+
+      await this.resolvePaymentMethod()
     } catch (err) {
       this.notifier.error(err)
     } finally {

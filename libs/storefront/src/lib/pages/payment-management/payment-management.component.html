@@ -1,0 +1,34 @@
+<div class="payment-methods">
+  <section *ngIf="source" class="scrollable" fxFlex>
+    <header fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+      <h2>{{ 'GLOBAL.PAYMENT_MANAGEMENT' | translate }}</h2>
+      <button
+      [disabled]="source.isLoading"
+      (click)="showAddPaymentMethodDialog()"
+      class="ccr-button"
+      color="primary"
+      mat-button>
+        {{ 'GLOBAL.ADD' | translate }}
+    </button>
+    </header>
+    <div
+    *ngIf="entries.length > 0; else empty"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="20px">
+      <storefront-payment-method-entry
+        *ngFor="let entry of entries"
+        [disabled]="disabled"
+        [paymentMethod]="entry"
+        (onDelete)="showDeletePaymentMethodDialog($event)"
+        (onSetDefault)="showSetDefaultDialog($event)">
+      </storefront-payment-method-entry>
+    </div>
+  </section>
+
+  <ng-template #empty>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <small>{{ 'NOTIFY.ERROR.NO_PAYMENT_METHODS' | translate }}</small>
+    </div>
+  </ng-template>
+</div>

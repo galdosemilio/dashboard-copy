@@ -5,10 +5,10 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "Postnummer er påkrævet",
     "ADDRESS_STATE_REQUIRED": "Stat/provins er påkrævet",
     "PAYMENT_METHOD_NOT_FOUND": "Betalingsmetode ikke fundet, kontakt venligst admin.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "Der findes allerede en butikskonto for din e-mailadresse, men den er ikke korrekt forbundet. Venligst <a href='mailto:support@coachcare.com'>kontakt vores supportteam</a> for at få hjælp.",
-    "STORE_NOT_AVAILABLE": "Butik er ikke tilgængelig i denne organisation."
+    "SPREE_ACCOUNT_ALREDAY_EXISTS": "Der findes allerede en butikskonto for din e-mailadresse, men den er ikke korrekt forbundet. Venligst <a href='mailto:support@coachcare.com'>kontakt vores supportteam</a> for at få hjælp."
   },
   "GLOBAL": {
+    "ACTIONS": "Handlinger",
     "ADD": "Tilføje",
     "ADDRESS_LINE_ONE": "Adresse linie 1",
     "ADDRESS_LINE_TWO": "Adresselinje 2",
@@ -18,24 +18,38 @@
     "BANNER_TITLE": "Vægttab for helbredsgevinster",
     "BILLING_ADDRESS": "Betalingsadresse",
     "CANCEL": "Annuller",
+    "CART": "Vogn",
     "CHECK_OUT": "Checkout",
     "CITY": "By",
+    "CLOSE": "Luk",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Hvis der er andet, du gerne vil vide, er du velkommen til at kontakte kundeservice",
     "CONTINUE_SHOPPING": "Fortsætte med at handle",
     "COUNTRY": "Land",
+    "DATE": "Dato",
+    "DEFAULT": "Standard",
+    "DELETE": "Slet",
+    "DELETE_PAYMENT_METHOD": "Slet betalingsmetode",
+    "DELETE_PAYMENT_METHOD_DESCRIPTION": "Er du sikker på, at du vil slette betalingsmetoden ************{{last4}}?.<br><br><strong>Denne handling kan ikke fortrydes.</strong>",
     "DESCRIPTION": "Beskrivelse",
-    "EXPIRES": "Udløber",
+    "EXPIRES": "Udløber: {{date}}",
     "GO_TO_CART": "Gå til indkøbsvogn",
     "GO_TO_MY_ORDERS": "Gå til Mine ordrer",
+    "ID": "ID",
     "ITEM_ADDED_TO_CART": "Vare tilføjet til kurv",
     "ITEM_DETAILS": "Varedetaljer",
     "NO_INFORMATION": "Ingen registreringsoplysninger. Tilføj nu >",
+    "ORDER_HISTORY": "ordre historik",
+    "ORDER_SUMMARY": "Bestillingsoversigt",
+    "PAYMENT_MANAGEMENT": "Betalingsstyring",
     "PAYMENT_METHOD": "Betalingsmetode",
     "PLACE_ORDER": "Angiv bestilling",
     "POSTAL_CODE": "Postnummer",
     "PRICE": "Pris",
+    "PRIMARY": "Primær",
     "REMOVE": "Fjerne",
     "SEARCH_ITEMS": "Begynd at skrive søgeelementer",
+    "SET_PAYMENT_METHOD_AS_DEFAULT": "Indstil betalingsmetode som standard",
+    "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "Er du sikker på, at du vil indstille betalingsmetoden ************{{last4}} som standard en?",
     "SHIPPING": "Forsendelse",
     "SHIPPING_ADDRESS": "Forsendelsesadresse",
     "SHIPPING_METHOD": "Fragtmetode",
@@ -49,6 +63,17 @@
     "TAX": "Skat",
     "THANK_YOU_FOR_ORDER": "Tak for din ordre!",
     "TOTAL": "i alt",
+    "VIEW_ORDER_DETAILS": "Se ordre detaljer",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Vi vil kontakte os igen med leverings- og sporingsdetaljer, så snart din ordre forlader vores lager på den, vi er ikke i stand til at ændre noget, herunder varerne eller leveringsadressen."
+  },
+  "NOTIFY": {
+    "ERROR": {
+      "NO_PAYMENT_METHODS": "Der er ingen betalingsmetoder."
+    },
+    "SUCCESS": {
+      "PAYMENT_METHOD_CREATED": "Betalingsmetode oprettet med succes.",
+      "PAYMENT_METHOD_DELETED": "Betalingsmetode slettes med succes.",
+      "PAYMENT_METHOD_UPDATE": "Betalingsmetode opdateres med succes."
+    }
   }
 }

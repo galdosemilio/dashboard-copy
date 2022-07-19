@@ -1,0 +1,45 @@
+
+<div class="order-history">
+  <h2>{{ 'GLOBAL.ORDER_HISTORY' | translate }}</h2>
+  <div class="ccr-table" [class.ccr-loading]="source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
+    <mat-table [dataSource]="source" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">ID</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          {{ row.id }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          {{ row.createdAt | amDateFormat:'ddd, MMM D YYYY h:mm a' }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.TOTAL' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
+          {{ row.total | currency:'USD':'symbol':'1.0-2':'en-US' }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.ACTIONS' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let row"
+        fxLayoutAlign="end center" fxLayoutAlign.xs=" center" fxFlex.xs="100%">
+
+        <mat-icon
+          (click)="openOrderDetailsDialog(row)"
+          class="clickable"
+          [matTooltip]="'GLOBAL.VIEW_ORDER_DETAILS' | translate">
+            open_in_new
+        </mat-icon>
+
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row fxLayout="row wrap"
+      *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+      ></mat-row>
+    </mat-table>
+  </div>
+</div>

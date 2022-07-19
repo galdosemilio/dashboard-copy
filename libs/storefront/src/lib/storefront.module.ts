@@ -28,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CcrFormFieldsModule } from '@coachcare/common/components'
 import { MatInputModule } from '@angular/material/input'
 import { environment } from './environments/environment'
+import { MatTableModule } from '@angular/material/table'
 
 @NgModule({
   imports: [
@@ -46,6 +47,8 @@ import { environment } from './environments/environment'
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatTableModule,
+    MatToolbarModule,
     ReactiveFormsModule,
     CcrFormFieldsModule,
     FormsModule,

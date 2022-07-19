@@ -1,0 +1,15 @@
+@import 'variables';
+
+.order-history {
+  padding: 30px 50px;
+
+  .ccr-table {
+    .mat-column-id {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: $xs-max) {
+    padding: 10px;
+  }
+}

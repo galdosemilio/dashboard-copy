@@ -5,8 +5,10 @@ import {
   StorefrontCheckoutComponent,
   StorefrontOrderComponent,
   StorefrontProductComponent,
-  StorefrontOrderCompleteComponent
+  StorefrontOrderCompleteComponent,
+  StorefrontOrderHistoryPageComponent
 } from './pages'
+import { StorefrontPaymentManagementPageComponent } from './pages/payment-management'
 import { Storefront } from './storefront'
 
 const routes: Routes = [
@@ -17,6 +19,11 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'product'
+      },
+      { path: 'order-history', component: StorefrontOrderHistoryPageComponent },
+      {
+        path: 'payment-management',
+        component: StorefrontPaymentManagementPageComponent
       },
       {
         path: 'product',

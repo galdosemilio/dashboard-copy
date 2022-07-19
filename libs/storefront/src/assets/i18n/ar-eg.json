@@ -5,10 +5,10 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "الرمز البريدي مطلوب",
     "ADDRESS_STATE_REQUIRED": "الولاية / المقاطعة مطلوبة",
     "PAYMENT_METHOD_NOT_FOUND": "طريقة الدفع غير موجودة ، يرجى الاتصال بالمسؤول.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "حساب المتجر موجود بالفعل لعنوان بريدك الإلكتروني ، لكنه غير متصل بشكل صحيح. يرجى <a href='mailto:support@coachcare.com'> الاتصال بفريق الدعم </a> للحصول على المساعدة.",
-    "STORE_NOT_AVAILABLE": "المتجر غير متوفر في هذه المنظمة."
+    "SPREE_ACCOUNT_ALREDAY_EXISTS": "حساب المتجر موجود بالفعل لعنوان بريدك الإلكتروني ، لكنه غير متصل بشكل صحيح. يرجى <a href='mailto:support@coachcare.com'> الاتصال بفريق الدعم </a> للحصول على المساعدة."
   },
   "GLOBAL": {
+    "ACTIONS": "الإجراءات",
     "ADD": "يضيف",
     "ADDRESS_LINE_ONE": "العنوان السطر 1",
     "ADDRESS_LINE_TWO": "سطر العنوان 2",
@@ -18,24 +18,38 @@
     "BANNER_TITLE": "فقدان الوزن من أجل مكاسب صحية",
     "BILLING_ADDRESS": "عنوان وصول الفواتير",
     "CANCEL": "إلغاء",
+    "CART": "عربة التسوق",
     "CHECK_OUT": "الدفع",
     "CITY": "المدينة",
+    "CLOSE": "قريب",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "إذا كان هناك أي شيء آخر تود معرفته ، فلا تتردد في الاتصال بخدمة العملاء",
     "CONTINUE_SHOPPING": "مواصلة التسوق",
     "COUNTRY": "الدولة",
+    "DATE": "التاريخ",
+    "DEFAULT": "تقصير",
+    "DELETE": "حذف",
+    "DELETE_PAYMENT_METHOD": "حذف طريقة الدفع",
+    "DELETE_PAYMENT_METHOD_DESCRIPTION": "هل أنت متأكد أنك تريد حذف طريقة الدفع ************{{last4}}؟.<br><br><strong>لا يمكن التراجع عن هذا الإجراء.</strong>",
     "DESCRIPTION": "وصف",
-    "EXPIRES": "تنتهي",
+    "EXPIRES": "{{date}} :تنتهي",
     "GO_TO_CART": "اذهب إلى عربة التسوق",
     "GO_TO_MY_ORDERS": "اذهب إلى طلباتي",
+    "ID": "ID",
     "ITEM_ADDED_TO_CART": "تمت إضافة العنصر إلى عربة التسوق",
     "ITEM_DETAILS": "تفاصيل العنصر",
     "NO_INFORMATION": "لا توجد معلومات سجل. أضف الآن>",
+    "ORDER_HISTORY": "تاريخ الطلب",
+    "ORDER_SUMMARY": "ملخص الطلب",
+    "PAYMENT_MANAGEMENT": "إدارة الدفع",
     "PAYMENT_METHOD": "طريقة الدفع او السداد",
     "PLACE_ORDER": "مكان الامر",
     "POSTAL_CODE": "الرمز البريدي",
     "PRICE": "سعر",
+    "PRIMARY": "خبرات",
     "REMOVE": "إزالة",
     "SEARCH_ITEMS": "ابدأ في كتابة عناصر البحث",
+    "SET_PAYMENT_METHOD_AS_DEFAULT": "تعيين طريقة الدفع الافتراضي",
+    "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "هل أنت متأكد من أنك تريد تعيين طريقة الدفع ************{{last4}} كواحد افتراضي؟",
     "SHIPPING": "شحن",
     "SHIPPING_ADDRESS": "عنوان الشحن",
     "SHIPPING_METHOD": "طريقة الشحن",
@@ -49,6 +63,17 @@
     "TAX": "ضريبة",
     "THANK_YOU_FOR_ORDER": "شكرا لطلبك!",
     "TOTAL": "المجموع",
+    "VIEW_ORDER_DETAILS": "معاينة تفاصيل الطلب",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "سنكون على اتصال مرة أخرى بتفاصيل التسليم والتتبع بمجرد أن يغادر طلبك مستودعاتنا ، لا يمكننا تغيير أي شيء بما في ذلك العناصر أو عنوان التسليم."
+  },
+  "NOTIFY": {
+    "ERROR": {
+      "NO_PAYMENT_METHODS": "لا توجد طرق الدفع."
+    },
+    "SUCCESS": {
+      "PAYMENT_METHOD_CREATED": "طريقة الدفع التي تم إنشاؤها بنجاح.",
+      "PAYMENT_METHOD_DELETED": "طريقة الدفع المحذوفة بنجاح.",
+      "PAYMENT_METHOD_UPDATE": "طريقة الدفع المحدثة بنجاح."
+    }
   }
 }

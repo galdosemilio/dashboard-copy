@@ -9,12 +9,16 @@ export class EcommerceProduct {
   public description: string
   public price: number
 
-  constructor(args: ProductAttr, included?: JsonApiDocument[]) {
+  constructor(
+    args: ProductAttr,
+    included?: JsonApiDocument[],
+    storeUrl: string = ''
+  ) {
     this.id = args.id
     this.name = args.attributes.name ?? ''
     this.description = args.attributes.description ?? ''
     this.price = Number(args.attributes.price) ?? 0
-    this.imageUrl = this.resolveImageUrl(args, included ?? [])
+    this.imageUrl = storeUrl + this.resolveImageUrl(args, included ?? [])
   }
 
   private resolveImageUrl(

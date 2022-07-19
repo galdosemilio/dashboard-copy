@@ -5,10 +5,10 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "Le code postal est requis",
     "ADDRESS_STATE_REQUIRED": "État/Province est requis",
     "PAYMENT_METHOD_NOT_FOUND": "Mode de paiement introuvable, veuillez contacter l'administrateur.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "Un compte de magasin existe déjà pour votre adresse e-mail, mais il n'est pas correctement connecté. Veuillez <a href='mailto:support@coachcare.com'>contacter notre équipe d'assistance</a> pour obtenir de l'aide.",
-    "STORE_NOT_AVAILABLE": "Le magasin n'est pas disponible dans cette organisation."
+    "SPREE_ACCOUNT_ALREDAY_EXISTS": "Un compte de magasin existe déjà pour votre adresse e-mail, mais il n'est pas correctement connecté. Veuillez <a href='mailto:support@coachcare.com'>contacter notre équipe d'assistance</a> pour obtenir de l'aide."
   },
   "GLOBAL": {
+    "ACTIONS": "Actions",
     "ADD": "Ajouter",
     "ADDRESS_LINE_ONE": "Adresse Ligne 1",
     "ADDRESS_LINE_TWO": "Adresse Ligne 2",
@@ -18,24 +18,38 @@
     "BANNER_TITLE": "Perte de poids pour des gains de santé",
     "BILLING_ADDRESS": "Adresse de facturation",
     "CANCEL": "Annuler",
+    "CART": "Chariot",
     "CHECK_OUT": "Vérifier",
     "CITY": "Ville",
+    "CLOSE": "Fermer",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "S'il y a autre chose que vous aimeriez savoir, n'hésitez pas à contacter le service client",
     "CONTINUE_SHOPPING": "Continuer vos achats",
     "COUNTRY": "Pays",
+    "DATE": "Date",
+    "DEFAULT": "Défaut",
+    "DELETE": "Supprimer",
+    "DELETE_PAYMENT_METHOD": "Supprimer la méthode de paiement",
+    "DELETE_PAYMENT_METHOD_DESCRIPTION": "Êtes-vous sûr de vouloir supprimer la méthode de paiement *************{{last4}}?.<br><br><strong>Cette action ne peut pas être annulée.</strong>",
     "DESCRIPTION": "La description",
-    "EXPIRES": "Expire",
+    "EXPIRES": "Expire: {{date}}",
     "GO_TO_CART": "Aller au panier",
     "GO_TO_MY_ORDERS": "Ir a Mis pedidos",
+    "ID": "ID",
     "ITEM_ADDED_TO_CART": "Article ajouté au panier",
     "ITEM_DETAILS": "Détails de l'article",
     "NO_INFORMATION": "Aucune information d'enregistrement. Ajouter maintenant >",
+    "ORDER_HISTORY": "Historique des commandes",
+    "ORDER_SUMMARY": "Récapitulatif de la commande",
+    "PAYMENT_MANAGEMENT": "Gestion des paiements",
     "PAYMENT_METHOD": "Mode de paiement",
     "PLACE_ORDER": "Passer la commande",
     "POSTAL_CODE": "Code postal",
     "PRICE": "Prix",
+    "PRIMARY": "Primaire",
     "REMOVE": "Retirer",
     "SEARCH_ITEMS": "Commencez à saisir les éléments de recherche",
+    "SET_PAYMENT_METHOD_AS_DEFAULT": "Définir la méthode de paiement par défaut",
+    "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "Êtes-vous sûr de vouloir définir la méthode de paiement ************{{last4}} comme par défaut?",
     "SHIPPING": "Expédition",
     "SHIPPING_ADDRESS": "Adresse de livraison",
     "SHIPPING_METHOD": "Mode de livraison",
@@ -49,6 +63,17 @@
     "TAX": "Impôt",
     "THANK_YOU_FOR_ORDER": "¡Gracias por su orden!",
     "TOTAL": "Total",
+    "VIEW_ORDER_DETAILS": "Voir d'autres détails",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Nos pondremos en contacto nuevamente con los detalles de entrega y seguimiento tan pronto como su pedido salga de nuestro almacén, no podemos cambiar nada, incluidos los artículos o la dirección de entrega."
+  },
+  "NOTIFY": {
+    "ERROR": {
+      "NO_PAYMENT_METHODS": "Il n'y a pas de méthodes de paiement."
+    },
+    "SUCCESS": {
+      "PAYMENT_METHOD_CREATED": "Méthode de paiement créé avec succès.",
+      "PAYMENT_METHOD_DELETED": "Méthode de paiement supprimé avec succès.",
+      "PAYMENT_METHOD_UPDATE": "Méthode de paiement mis à jour avec succès."
+    }
   }
 }
