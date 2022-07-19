@@ -388,7 +388,8 @@ export const MEASUREMENT_METADATA_MAP: Record<
             value: 'complete',
             viewValue: _('MEASUREMENT.COMPLETE')
           },
-          { value: 'partial', viewValue: _('MEASUREMENT.PARTIAL') }
+          { value: 'partial', viewValue: _('MEASUREMENT.PARTIAL') },
+          { value: 'offline', viewValue: _('MEASUREMENT.OFFLINE') }
         ]
       }
     ]
