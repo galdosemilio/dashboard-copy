@@ -1,10 +1,3 @@
-<div fxLayout="row" class="header">
-  <p>{{ 'GLOBAL.SHOPPING_CART' | translate }}</p>
-  <p>></p>
-  <p class="selected">{{ 'GLOBAL.CHECK_OUT' | translate }}</p>
-  <p>></p>
-  <p>{{ 'GLOBAL.ORDER_COMPLETE' | translate }}</p>
-</div>
 <div fxLayout.gt-sm="row" fxLayout="column" *ngIf="cart" class="container" fxLayoutGap="30px">
   <div fxFlex>
     <h2>{{ 'GLOBAL.CHECK_OUT' | translate }}</h2>

@@ -1,22 +1,6 @@
 @import 'variables';
 
 :host {
-  .header {
-    padding: 20px 30px;
-    background-color: #e3e3e3;
-    align-items: center;
-    justify-content: center;
-
-    p {
-      text-align: center;
-      margin: 0px 5px;
-
-      &.selected {
-        font-weight: bold;
-      }
-    }
-  }
-
   .container {
     padding: 30px 50px;
     text-align: center;
