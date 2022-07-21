@@ -88,10 +88,13 @@
         padding: 20px 10px;
 
         img {
-          margin-right: 10px;
           width: 80px;
           height: 80px;
-          object-fit: cover;
+          object-fit: contain;
+        }
+
+        .category-content {
+          margin-left: 10px;
         }
       }
     }

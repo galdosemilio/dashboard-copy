@@ -43,7 +43,7 @@
     </div>
     <div class="categories" *ngIf="!selectedCategory">
       <div class="category" *ngFor="let category of categories" (click)="onSelectCategory(category)">
-        <img [src]="category.images?.length ? category.image[0] : 'https://cdn.coachcare.com/corporate/Other/ecommerce-product-placeholder.png'" alt=""/>
+        <img *ngIf="category.images?.length; else noCategoryImage" [src]="category.images[0]" alt=""/>
         <div class="category-content">
           <p>{{ category.attributes.name }}</p>
           <p [innerHTML]="category.attributes.description"></p>
@@ -52,3 +52,6 @@
     </div>
   </div>
 </div>
+<ng-template #noCategoryImage>
+  <storefront-icon-category size="80" [fill]="primaryColor"></storefront-icon-category>
+</ng-template>

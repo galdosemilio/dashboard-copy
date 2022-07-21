@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute, Router } from '@angular/router'
+import { CCRState } from '@coachcare/backend/store'
 import { NotifierService } from '@coachcare/common/services'
+import { OrgPrefSelectors } from '@coachcare/common/store'
 import {
   StorefrontProductDialog,
   StorefrontShoppingPromptDialog
@@ -12,6 +14,7 @@ import {
   StorefrontService
 } from '@coachcare/storefront/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { select, Store } from '@ngrx/store'
 import { Subject } from 'rxjs'
 import { debounceTime, filter } from 'rxjs/operators'
 
@@ -28,14 +31,28 @@ export class StorefrontProductComponent implements OnInit {
   public products: StorefrontProduct[] = []
   public selectedCategory: StorefrontCategory
   public isLoading: boolean = false
+  public primaryColor: string
 
   constructor(
     private storefront: StorefrontService,
     private notifier: NotifierService,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private store: Store<CCRState.State>
+  ) {
+    this.store
+      .pipe(
+        untilDestroyed(this),
+        select(OrgPrefSelectors.selectOrgPref),
+        filter((pref) => !!pref)
+      )
+      .subscribe((pref) => {
+        const palette = pref.assets.color
+        this.primaryColor =
+          palette.theme === 'accent' ? palette.accent : palette.primary
+      })
+  }
 
   ngOnInit(): void {
     void this.getCategories()

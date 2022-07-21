@@ -1,4 +1,5 @@
 import { APP_INITIALIZER } from '@angular/core'
+import { StorefrontCategoryIconComponent } from './components'
 import {
   StorefrontAddressDialog,
   StorefrontPaymentMethodDialog,
@@ -25,7 +26,8 @@ export const StorefrontComponents = [
   StorefrontOrderComponent,
   StorefrontCartComponent,
   StorefrontCheckoutComponent,
-  StorefrontOrderCompleteComponent
+  StorefrontOrderCompleteComponent,
+  StorefrontCategoryIconComponent
 ]
 
 export const StorefrontProviders = [

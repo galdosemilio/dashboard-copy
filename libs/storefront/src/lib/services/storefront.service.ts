@@ -186,6 +186,7 @@ export class StorefrontService {
 
   public async getCategories(name?: string): Promise<StorefrontCategory[]> {
     const res = await this.spree.taxons.list({
+      include: 'image',
       filter: {
         name
       }
@@ -464,6 +465,19 @@ export class StorefrontService {
     entry: ProductAttr | TaxonAttr,
     included: JsonApiDocument[] = []
   ) {
+    if (entry.relationships.image?.data) {
+      const imageUrl = included.find(
+        (item) =>
+          item.id === (entry.relationships.image?.data as RelationType).id
+      )?.attributes.original_url
+
+      if (imageUrl) {
+        return [this.storeUrl + imageUrl]
+      }
+
+      return []
+    }
+
     return (entry.relationships.images?.data as RelationType[])
       .map((productImage) => {
         const imageUrl = included.find((item) => item.id === productImage.id)
