@@ -82,9 +82,25 @@ import {
 
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
 import { environment } from './environments/environment'
+import { Environment } from './environments/environment.interface'
 
 export const authenticationToken = new AuthenticationToken()
 export const SDK_HEADERS = new ApiHeaders()
+
+export const resolveApiUrl = (
+  env: Environment,
+  origin: string
+): string | undefined => {
+  const whiteListHost = env.hostWhitelist?.find((entry) =>
+    origin?.endsWith(entry)
+  )
+
+  if (whiteListHost && origin?.includes('dashboard.')) {
+    return `${origin.replace('dashboard.', 'api.')}/`
+  }
+}
+
+const baseUrl = resolveApiUrl(environment, window.location.origin)
 
 const errorHandlingSettings = {
   enabled: true,
@@ -140,10 +156,10 @@ const messagingApiService = new ApiService({
   }
 })
 
-avatarApiService.setEnvironment(environment.ccrApiEnv)
-generalApiService.setEnvironment(environment.ccrApiEnv)
-measurementApiService.setEnvironment(environment.ccrApiEnv)
-messagingApiService.setEnvironment(environment.ccrApiEnv)
+avatarApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
+generalApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
+measurementApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
+messagingApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
 
 export const SdkApiProviders = [
   {
