@@ -90,17 +90,32 @@ export const SDK_HEADERS = new ApiHeaders()
 export const resolveApiUrl = (
   env: Environment,
   origin: string
-): string | undefined => {
+): {
+  apiUrl: string
+  cookieDomain: string
+} => {
   const whiteListHost = env.hostWhitelist?.find((entry) =>
     origin?.endsWith(entry)
   )
 
   if (whiteListHost && origin?.includes('dashboard.')) {
-    return `${origin.replace('dashboard.', 'api.')}/`
+    const apiUrl = `${origin.replace('dashboard.', 'api.')}/`
+    const cookieDomain = parseUrl(apiUrl)?.host
+
+    return {
+      apiUrl,
+      cookieDomain
+    }
   }
 }
 
-const baseUrl = resolveApiUrl(environment, window.location.origin)
+const parseUrl = (url) => {
+  try {
+    return new URL(url)
+  } catch (err) {
+    //
+  }
+}
 
 const errorHandlingSettings = {
   enabled: true,
@@ -156,10 +171,19 @@ const messagingApiService = new ApiService({
   }
 })
 
-avatarApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
-generalApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
-measurementApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
-messagingApiService.setEnvironment(environment.ccrApiEnv, baseUrl)
+const apiUrlData = resolveApiUrl(environment, window.location.origin)
+
+avatarApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
+generalApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
+measurementApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
+messagingApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
+
+if (apiUrlData?.cookieDomain) {
+  avatarApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
+  generalApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
+  measurementApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
+  messagingApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
+}
 
 export const SdkApiProviders = [
   {

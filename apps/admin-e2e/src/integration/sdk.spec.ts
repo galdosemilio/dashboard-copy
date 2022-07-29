@@ -11,11 +11,13 @@ describe('Dynamically resolving API URL', () => {
   const withOverride = [
     {
       origin: 'https://test.dashboard.example.com',
-      apiUrl: 'https://test.api.example.com/'
+      apiUrl: 'https://test.api.example.com/',
+      cookieDomain: 'test.api.example.com'
     },
     {
       origin: 'http://dashboard.example.com',
-      apiUrl: 'http://api.example.com/'
+      apiUrl: 'http://api.example.com/',
+      cookieDomain: 'api.example.com'
     }
   ]
 
@@ -23,9 +25,11 @@ describe('Dynamically resolving API URL', () => {
 
   for (const item of withOverride) {
     it(`should resolve the URL to a matching domain for dashboard white list origin: ${item.origin}`, () => {
-      const apiUrl = resolveApiUrl(config, item.origin)
+      const serviceBaseData = resolveApiUrl(config, item.origin)
 
-      expect(apiUrl).to.equal(item.apiUrl)
+      expect(serviceBaseData).to.be.exist
+      expect(serviceBaseData.apiUrl).to.equal(item.apiUrl)
+      expect(serviceBaseData.cookieDomain).to.equal(item.cookieDomain)
     })
   }
 

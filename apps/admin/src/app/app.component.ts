@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { SDK_HEADERS } from '@coachcare/common/sdk.barrel'
 
 @Component({
   selector: 'ccr-root',
@@ -11,9 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // clear headers on start-up
-    SDK_HEADERS.values = {}
-
     if (window.navigator.userAgent.match(/(MSIE|Trident)/)) {
       void this.router.navigate(['/unsupported-browser'])
     }
