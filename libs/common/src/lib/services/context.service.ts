@@ -40,7 +40,7 @@ export type SelectedOrganization = Partial<OrgEntity> & {
   preferences?: OrganizationPreferenceSingle
 }
 
-const wellcoreBaseUrl = 'my.teamwellcore.com'
+const nxtstimBaseUrl = 'nxtstim.com'
 
 /**
  * Context Service
@@ -64,10 +64,10 @@ export class ContextService {
   init() {
     return (): Promise<any> => {
       // Fetch baseOrgId from URL params
-      const isWellCoreUrl = window.location.host.includes(wellcoreBaseUrl)
+      const isNxtstimUrl = window.location.host.endsWith(nxtstimBaseUrl)
       let urlParams = this.resolveUrlParams()
-      let baseOrgId = isWellCoreUrl
-        ? this.environment.wellcoreOrgId
+      let baseOrgId = isNxtstimUrl
+        ? this.environment.nxtstimOrgId
         : urlParams.baseOrg
         ? urlParams.baseOrg || null
         : null

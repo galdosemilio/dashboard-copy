@@ -11,7 +11,5 @@ export const environment: AppEnvironment = {
   cdn: 'https://cdn.coachcare.com',
   url: 'https://dashboard.coachcare.com',
   defaultOrgId: '3637',
-  wellcoreOrgId: '6891',
-  wellcoreUrl: 'https://my.teamwellcore.com',
-  wellcoreEcommerceHost: 'https://wellcore.ecommerce.coachcare.com'
+  nxtstimOrgId: '7074'
 }

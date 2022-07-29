@@ -11,9 +11,7 @@ export const environment: AppEnvironment = {
   cdn: 'https://d3vngy9ttk2wws.cloudfront.net',
   url: 'http://localhost:4200',
   defaultOrgId: '30',
-  wellcoreOrgId: '7535',
-  wellcoreUrl: 'https://test.my.teamwellcore.com',
-  wellcoreEcommerceHost: 'https://wellcore-test.ecommerce.coachcare.com'
+  nxtstimOrgId: '7546'
 }
 
 /*

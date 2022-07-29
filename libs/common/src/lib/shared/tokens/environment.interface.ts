@@ -20,7 +20,5 @@ export interface AppEnvironment extends ApiEnvironment {
   cdn: string
   url: string
   defaultOrgId: string
-  wellcoreOrgId: string
-  wellcoreUrl: string
-  wellcoreEcommerceHost: string
+  nxtstimOrgId: string
 }
