@@ -112,8 +112,7 @@ export class StorefrontProductComponent implements OnInit {
     this.dialog
       .open(StorefrontProductDialog, {
         data: productDetails,
-        width: '60vw',
-        maxWidth: '800px'
+        width: '800px'
       })
       .afterClosed()
       .pipe(filter((res) => res))

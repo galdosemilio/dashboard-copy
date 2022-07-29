@@ -1,11 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import {
-  StorefrontOptionValue,
   StorefrontProduct,
   StorefrontProductOption,
   StorefrontVariant
 } from '@coachcare/storefront/services'
+import {
+  NgxGalleryAnimation,
+  NgxGalleryImage,
+  NgxGalleryImageSize,
+  NgxGalleryOptions
+} from '@kolkov/ngx-gallery'
 import { UntilDestroy } from '@ngneat/until-destroy'
 
 @UntilDestroy()
@@ -20,6 +25,17 @@ export class StorefrontProductDialog implements OnInit {
   public selectedVariant: StorefrontVariant
   public defaultVariant: StorefrontVariant
   public options: StorefrontProductOption[] = []
+  public galleryOptions: NgxGalleryOptions[] = [
+    {
+      width: '400px',
+      height: '400px',
+      thumbnailsColumns: 4,
+      imageAnimation: NgxGalleryAnimation.Slide,
+      imageSize: NgxGalleryImageSize.Contain,
+      thumbnailSize: NgxGalleryImageSize.Contain
+    }
+  ]
+  public productImages: NgxGalleryImage[] = []
 
   public quantity = 1
 
@@ -34,7 +50,9 @@ export class StorefrontProductDialog implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: StorefrontProduct,
     private dialogRef: MatDialogRef<{ id: string; quantity: number }>
-  ) {}
+  ) {
+    dialogRef.disableClose = true
+  }
 
   ngOnInit(): void {
     this.product = this.data
@@ -42,6 +60,12 @@ export class StorefrontProductDialog implements OnInit {
     this.defaultVariant = this.data.variants.find(
       (variant) => variant.is_master
     )
+    this.productImages = this.product.images.map((image) => ({
+      small: image,
+      medium: image,
+      big: image
+    }))
+
     this.setSelectedVariant()
   }
 
@@ -61,8 +85,8 @@ export class StorefrontProductDialog implements OnInit {
     this.quantity = quantity
   }
 
-  public onSelectOption(index: number, option: StorefrontOptionValue) {
-    this.options[index].selected = option.id
+  public onSelectOption(index: number, value: string) {
+    this.options[index].selected = value
     this.setSelectedVariant()
   }
 

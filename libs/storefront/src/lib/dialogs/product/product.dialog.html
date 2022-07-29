@@ -8,9 +8,7 @@
 <mat-dialog-content>
   <div fxFlex fxLayout.gt-sm="row" fxLayout="column" fxLayoutGap="30px">
     <div fxFlex fxLayout="row" fxLayoutAlign="center center">
-      <div class="product-img">
-        <img [src]="product.images[0]" alt="product" />
-      </div>
+      <ngx-gallery [options]="galleryOptions" [images]="productImages" class="product-images"></ngx-gallery>
     </div>
     <div fxLayout="column" fxLayoutGap="20px">
       <div fxFlex fxLayout="column" fxLayoutGap="20px">
@@ -25,28 +23,25 @@
         </mat-expansion-panel>
         <div class="price-wrap" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" >
           <p class="price-title">{{ 'GLOBAL.PRICE' | translate }}</p>
-          <p class="price">{{ productPrice }}</p>
-          <div class="qty-wrap">
-            <button mat-icon-button (click)="onChangeQuantity(quantity - 1)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <p class="qty">{{ quantity }}</p>
-            <button mat-icon-button (click)="onChangeQuantity(quantity + 1)">
-              <mat-icon>add</mat-icon>
-            </button>
+          <div fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+            <p class="price">{{ productPrice }}</p>
+            <div class="qty-wrap">
+              <button mat-icon-button (click)="onChangeQuantity(quantity - 1)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <p class="qty">{{ quantity }}</p>
+              <button mat-icon-button (click)="onChangeQuantity(quantity + 1)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
         <div *ngFor="let option of options; let i = index" class="flavors-wrap" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
           <p class="flavor-title">{{ option.name }}</p>
           <div class="flavors" fxFlex fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
-            <div
-              class="flavor"
-              [class.selected]="option.selected === value.id"
-              *ngFor="let value of option.values"
-              (click)="onSelectOption(i, value)"
-            >
-              {{ value.name }}
-            </div>
+            <mat-select [(value)]="option.selected" (selectionChange)="onSelectOption(i, $event.value)">
+              <mat-option *ngFor="let value of option.values" [value]="value.id">{{ value.name }}</mat-option>
+            </mat-select>
           </div>
         </div>
       </div>

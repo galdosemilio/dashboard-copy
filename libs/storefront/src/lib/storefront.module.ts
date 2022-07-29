@@ -8,6 +8,8 @@ import { MomentModule } from 'ngx-moment'
 import { TranslateModule } from '@ngx-translate/core'
 import { CoachcareSdkModule } from '@coachcare/common'
 
+import { NgxGalleryModule } from '@kolkov/ngx-gallery'
+
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
@@ -49,6 +51,7 @@ import { environment } from './environments/environment'
     FormsModule,
     RouterModule,
     MomentModule,
+    NgxGalleryModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     StorefrontRoutingModule,
     TranslateModule.forChild()
