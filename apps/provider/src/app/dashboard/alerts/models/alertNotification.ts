@@ -50,6 +50,10 @@ export class AlertNotification {
         break
       case '6':
         typeCode = 'data-point-threshold'
+        break
+      case '7':
+        typeCode = 'missing-data-point'
+        break
     }
 
     return typeCode

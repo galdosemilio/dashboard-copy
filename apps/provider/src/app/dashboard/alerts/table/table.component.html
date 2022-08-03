@@ -20,9 +20,12 @@
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'REPORTS.ALERT_TYPE' | translate }}</span>
         <ng-container [ngSwitch]="row.alertCode">
+          <ng-container *ngSwitchCase="'missing-data-point'">
+            <ng-container *ngTemplateOutlet="dataPointAlertRow; context:{row}"></ng-container>
+          </ng-container>
+
           <ng-container *ngSwitchCase="'data-point-threshold'">
-            <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
-            {{ getAlertTypeName(row) | translate }} - {{ row.payload.dataPoint.type | dataTypeName | async }}
+            <ng-container *ngTemplateOutlet="dataPointAlertRow; context:{row}"></ng-container>
           </ng-container>
 
           <ng-container *ngSwitchDefault>
@@ -38,6 +41,10 @@
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
         <span>{{ 'REPORTS.ALERT_NOTICE' | translate }}</span>
         <ng-container [ngSwitch]="row.alertCode">
+          <ng-container *ngSwitchCase="'missing-data-point'">
+            <span [innerHTML]="row.payload | dataPointMissingNotifHint | async"></span>
+          </ng-container>
+
           <ng-container *ngSwitchCase="'data-point-threshold'">
             <span [innerHTML]="row.payload | dataThresholdNotifHint | async"></span>
           </ng-container>
@@ -90,3 +97,8 @@
   </mat-table>
 
 </ccr-datasource-overlay>
+
+<ng-template #dataPointAlertRow let-row="row">
+  <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
+  {{ getAlertTypeName(row) | translate }} - {{ row.payload.dataPoint.type | dataTypeName | async }}
+</ng-template>

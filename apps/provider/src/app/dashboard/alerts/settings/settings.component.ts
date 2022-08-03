@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import {
   AlertsDatabase,
   AlertTypesDataSource
@@ -7,6 +8,9 @@ import { ContextService, EventsService, NotifierService } from '@app/service'
 import { AppState } from '@app/store/state'
 import { OrganizationWithAddress } from '@coachcare/sdk'
 import { Store } from '@ngrx/store'
+import { DeviceDetectorService } from 'ngx-device-detector'
+import { filter } from 'rxjs/operators'
+import { AlertDataThresholdDialog } from '../dialogs'
 
 @Component({
   selector: 'app-alerts-settings',
@@ -14,22 +18,23 @@ import { Store } from '@ngrx/store'
   styleUrls: ['./settings.component.scss']
 })
 export class AlertsSettingsComponent implements OnDestroy, OnInit {
-  source: AlertTypesDataSource
+  public clinic: Partial<OrganizationWithAddress> = {}
+  public source: AlertTypesDataSource
 
-  clinic: Partial<OrganizationWithAddress> = {}
-  zendeskLink =
+  public zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020232251-Setting-up-Patient-Alerts'
 
   constructor(
     private context: ContextService,
     private bus: EventsService,
     private database: AlertsDatabase,
+    private deviceDetector: DeviceDetectorService,
+    private dialog: MatDialog,
     private notifier: NotifierService,
     private store: Store<AppState>
   ) {}
 
-  ngOnInit() {
-    // this.bus.trigger('organizations.disable-all');
+  public ngOnInit(): void {
     this.bus.trigger('right-panel.deactivate')
 
     this.context.organization$.subscribe(() => {
@@ -48,7 +53,21 @@ export class AlertsSettingsComponent implements OnDestroy, OnInit {
     }))
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.source.disconnect()
+  }
+
+  public openAlertDialog(): void {
+    this.dialog
+      .open(AlertDataThresholdDialog, {
+        data: {
+          preference: null,
+          mode: 'create'
+        },
+        width: !this.deviceDetector.isMobile() ? '60vw' : undefined
+      })
+      .afterClosed()
+      .pipe(filter((refresh) => refresh))
+      .subscribe(() => this.source.refresh())
   }
 }

@@ -271,15 +271,17 @@ export class AlertTypesDataSource extends TableDataSource<
     })
 
     /**
-     * Data Point Threshold Alert Setup
+     * Data Point Threshold and Data Point Missing Alerts
      */
-    const dataPointThresholdAlerts = alertPreferences.data.filter(
-      (preference) => preference.type.id === AlertTypeId.DATA_POINT_THRESHOLD
+    const dataPointAlerts = alertPreferences.data.filter(
+      (preference) =>
+        preference.type.id === AlertTypeId.DATA_POINT_THRESHOLD ||
+        preference.type.id === AlertTypeId.DATA_POINT_MISSING
     )
 
     options = [
       ...options,
-      ...dataPointThresholdAlerts
+      ...dataPointAlerts
         .map((alert) => {
           const prefDataType = (
             alert.organization.preference
@@ -294,13 +296,22 @@ export class AlertTypesDataSource extends TableDataSource<
             prefDataType
 
           return {
-            icon: 'circle_notifications',
+            icon:
+              alert.type.id === AlertTypeId.DATA_POINT_THRESHOLD
+                ? 'circle_notifications'
+                : 'missing-data',
             isActive: alert.organization.preference.isActive,
             isInherited: alert.organization.id !== this.context.organizationId,
             option: '',
             texts: {
-              title: _('ALERTS.TYPES.DATA_THRESHOLD_ALERT'),
-              description: _('ALERTS.TYPES.DATA_THRESHOLD_ALERT_DESCRIPTION')
+              title:
+                alert.type.id === AlertTypeId.DATA_POINT_THRESHOLD
+                  ? _('ALERTS.TYPES.DATA_THRESHOLD_ALERT')
+                  : _('ALERTS.TYPES.MISSING_DATA_ALERT'),
+              description:
+                alert.type.id === AlertTypeId.DATA_POINT_THRESHOLD
+                  ? _('ALERTS.TYPES.DATA_THRESHOLD_ALERT_DESCRIPTION')
+                  : _('ALERTS.TYPES.MISSING_DATA_ALERT_DESCRIPTION')
             },
             typeCode: alert.type.code,
             typeId: alert.type.id,
@@ -329,22 +340,6 @@ export class AlertTypesDataSource extends TableDataSource<
 
           return 0
         })
-    ]
-
-    // We add this at the end to allow users to create new alerts
-    options = [
-      ...options,
-      {
-        typeCode: 'add-data-threshold',
-        typeId: AlertTypeId.DATA_POINT_THRESHOLD,
-        icon: 'add_alert',
-        option: '',
-        value: '',
-        isActive: true,
-        texts: {
-          title: _('ALERTS.ADD_NEW_DATA_THRESHOLD_ALERT')
-        }
-      }
     ]
 
     this.hasInheritedAlert = options.some((opt) => opt.isInherited)

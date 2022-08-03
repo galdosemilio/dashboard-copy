@@ -74,6 +74,54 @@
       "groupId": "750657",
       "viewed": false,
       "createdAt": "2019-06-26T00:24:00.517Z"
+    },
+    {
+      "id": "3",
+      "recipient": {
+        "id": "2",
+        "email": "jsmith@none.com",
+        "lastName": "Smith",
+        "firstName": "Jane",
+        "accountTypeId": "2"
+      },
+      "organization": {
+        "id": "2",
+        "name": "Super-Clinic",
+        "shortcode": "sc",
+        "hierarchyPath": ["2", "1"]
+      },
+      "type": {
+        "id": "7",
+        "description": "Missing data point alert"
+      },
+      "payload": {
+        "dataPoint": {
+          "type": {
+            "id": "7",
+            "name": "Heart rate"
+          }
+        },
+        "options": {
+          "alert": {
+            "definition": {
+              "id": "2871",
+              "isOverridden": false
+            }
+          },
+          "analysis": {
+            "period": "3 days"
+          }
+        }
+      },
+      "triggeredBy": {
+        "id": "1",
+        "email": "jdoe@none.com",
+        "lastName": "Doe",
+        "firstName": "John",
+        "accountTypeId": "3"
+      },
+      "viewed": true,
+      "createdAt": "2018-02-14T15:21:11.000Z"
     }
   ],
   "pagination": { "next": 12 }

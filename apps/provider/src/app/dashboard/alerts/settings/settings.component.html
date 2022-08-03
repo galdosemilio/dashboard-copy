@@ -1,10 +1,15 @@
 <div class="ccr-heading">
-  <div class="ccr-title" fxLayout="row" fxLayoutAlign=" end">
+  <div class="ccr-title" fxLayout="row" fxLayoutAlign="end center">
     <h2 fxFlex>
       {{ 'ALERTS.ACTIVE_ALERTS' | translate: clinic }}
 
       <ccr-help-link [link]="zendeskLink"></ccr-help-link>
     </h2>
+
+    <button (click)="openAlertDialog()" class="ccr-icon-button" color="primary" mat-button>
+      <mat-icon>add</mat-icon>
+      {{ 'ALERTS.ADD_NEW_ALERT' | translate }}
+    </button>
   </div>
 </div>
 

@@ -302,6 +302,13 @@ export class RemindersComponent implements OnInit, OnDestroy {
               alert.payload = value.payload
               alert.texts.titleSuffix = alert.payload.dataPoint.type.name
               break
+
+            case 'missing-data-point':
+              alert.icon = 'missing-data'
+              alert.detail = _('ALERTS.TYPES.MISSING_DATA_ALERT')
+              alert.payload = value.payload
+              alert.texts.titleSuffix = alert.payload.dataPoint.type.name
+              break
           }
 
           this.alerts.push(alert)

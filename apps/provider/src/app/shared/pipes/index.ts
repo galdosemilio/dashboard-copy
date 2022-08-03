@@ -25,6 +25,8 @@ import {
   MetadataTitleConvertToReadablePipe
 } from './metadata-conversion'
 import {
+  DataPointMissingAlertHint,
+  DataPointMissingNotificationHintPipe,
   DataThresholdAlertHintPipe,
   DataThresholdNotificationHintPipe
 } from './alert-hint'
@@ -34,6 +36,8 @@ import { OrganizationNamePipe } from './organization'
 export const Pipes = [
   AbsoluteValuePipe,
   AccountTypePipe,
+  DataPointMissingAlertHint,
+  DataPointMissingNotificationHintPipe,
   DataThresholdAlertHintPipe,
   DataThresholdNotificationHintPipe,
   DataTypeNamePipe,

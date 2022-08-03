@@ -1,4 +1,5 @@
 import { standardSetup } from '../../../support'
+import { selectOption } from '../../helpers'
 
 function assertDefaultAlerts(): void {
   cy.tick(10000)
@@ -22,7 +23,7 @@ describe('Dashboard -> Alerts', function () {
 
     cy.get('[data-cy="alert-title"]').as('alertTitles')
 
-    cy.get('@alertTitles').should('have.length', 13)
+    cy.get('@alertTitles').should('have.length', 14)
     assertDefaultAlerts()
   })
 
@@ -33,7 +34,7 @@ describe('Dashboard -> Alerts', function () {
 
     cy.get('[data-cy="alert-title"]').as('alertTitles')
 
-    cy.get('@alertTitles').should('have.length', 13)
+    cy.get('@alertTitles').should('have.length', 14)
     assertDefaultAlerts()
   })
 
@@ -44,7 +45,7 @@ describe('Dashboard -> Alerts', function () {
 
     cy.get('[data-cy="alert-title"]').as('alertTitles')
 
-    cy.get('@alertTitles').should('have.length', 13)
+    cy.get('@alertTitles').should('have.length', 14)
     assertDefaultAlerts()
   })
 
@@ -55,7 +56,7 @@ describe('Dashboard -> Alerts', function () {
 
     cy.get('[data-cy="alert-title"]').as('alertTitles')
 
-    cy.get('@alertTitles').should('have.length', 13)
+    cy.get('@alertTitles').should('have.length', 14)
     assertDefaultAlerts()
   })
 
@@ -64,7 +65,10 @@ describe('Dashboard -> Alerts', function () {
     standardSetup()
     cy.visit(`/alerts/settings`)
 
-    cy.get('span.title-text').contains('Add New Threshold Alert').click()
+    cy.get('app-alerts-settings')
+      .find('button')
+      .contains('Add New Alert')
+      .click()
 
     cy.tick(1000)
 
@@ -145,7 +149,89 @@ describe('Dashboard -> Alerts', function () {
     })
   })
 
-  it('Should delete a Data Threshold Alert', function () {
+  it('Should create a Data Point Missing Alert', function () {
+    cy.setOrganization('ccr')
+    standardSetup()
+    cy.visit(`/alerts/settings`)
+
+    cy.get('app-alerts-settings')
+      .find('button')
+      .contains('Add New Alert')
+      .click()
+
+    cy.tick(1000)
+
+    selectOption(
+      cy.get('mat-dialog-container').find('mat-select').eq(0),
+      'Missing Data Alert'
+    )
+
+    cy.get('mat-dialog-container').find('button').contains('Save').click()
+
+    cy.tick(1000)
+
+    cy.wait('@createAlertPreferenceRequest').should((xhr) => {
+      expect(xhr.request.body).to.deep.equal({
+        alertType: '5',
+        organization: '1',
+        preference: {
+          isActive: true,
+          options: {
+            analysis: {
+              period: '1 day'
+            },
+            dataPoint: {
+              type: { id: '46' }
+            }
+          }
+        }
+      })
+    })
+  })
+
+  it('Should update a Data Point Missing Alert', function () {
+    cy.setOrganization('ccr')
+    standardSetup()
+    cy.visit(`/alerts/settings`)
+
+    cy.get('[data-cy="alert-title"]')
+      .contains('Missing Data Alert')
+      .eq(0)
+      .parent()
+      .parent()
+      .parent()
+      .find('mat-icon')
+      .contains('edit')
+      .click()
+
+    cy.get('mat-dialog-container').find('mat-spinner').tick(10000)
+
+    cy.get('mat-dialog-container')
+      .find('button')
+      .contains('Save')
+      .parent()
+      .should('not.have.class', 'mat-button-disabled')
+      .click()
+
+    cy.wait('@patchAlertPreferenceRequest').should((xhr) => {
+      expect(xhr.request.body).to.deep.equal({
+        id: '647',
+        preference: {
+          isActive: true,
+          options: {
+            analysis: {
+              period: '2 days'
+            },
+            dataPoint: {
+              type: { id: '1' }
+            }
+          }
+        }
+      })
+    })
+  })
+
+  it('Should delete a Data Point Alert', function () {
     cy.setOrganization('ccr')
     standardSetup()
     cy.visit(`/alerts/settings`)
@@ -183,5 +269,10 @@ describe('Dashboard -> Alerts', function () {
       .should('contain', 'Threshold Alert')
       .should('contain', 'Body fat')
       .should('contain', '39% 13% above 26% threshold')
+    cy.get('@notifRows')
+      .eq(2)
+      .should('contain', 'Missing Data Alert')
+      .should('contain', 'Heart rate')
+      .should('contain', 'No data in the previous 3 days')
   })
 })

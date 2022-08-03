@@ -3,11 +3,11 @@
       <mat-icon>add_circle_outline</mat-icon>
       <span [ngSwitch]="mode">
         <ng-container *ngSwitchCase="'create'">
-          {{ 'ALERTS.ADD_NEW_DATA_THRESHOLD_ALERT' | translate }}
+          {{ 'ALERTS.ADD_NEW_ALERT' | translate }}
         </ng-container>
 
         <ng-container *ngSwitchCase="'edit'">
-          {{ 'ALERTS.EDIT_DATA_THRESHOLD_ALERT' | translate }}
+          {{ 'ALERTS.EDIT_ALERT' | translate }}
         </ng-container>
       </span>
   </div>
@@ -37,6 +37,15 @@
 <mat-dialog-content [formGroup]="form">
   <ng-container *ngIf="typeGroups; else spinner">
     <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+      <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
+        <mat-label>{{ 'REPORTS.ALERT_TYPE' | translate }}</mat-label>
+        <mat-form-field fxFlex>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let option of alertTypeOptions" [value]="option.value">{{ option.viewValue | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <div fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="20px">
         <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
           <mat-label>{{ 'ALERTS.METRIC_TO_ALERT' | translate }}</mat-label>
@@ -55,21 +64,41 @@
 
         <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
           <mat-label>
-            {{ 'ALERTS.REFRESH_TIME_PERIOD' | translate }}
-            <ccr-popup-description
-              [title]="'ALERTS.REFRESH_TIME_PERIOD' | translate"
-              [description]="'ALERTS.REFRESH_TIME_PERIOD_DESCRIPTION' | translate">
-            </ccr-popup-description>
+            <ng-container [ngSwitch]="form.get('type').value">
+              <ng-container *ngSwitchCase="'5'">
+                {{ 'ALERTS.MISSING_DATA_TIME_PERIOD' | translate }}
+
+                <ccr-popup-description
+                [title]="'ALERTS.MISSING_DATA_TIME_PERIOD' | translate"
+                [description]="'ALERTS.MISSING_DATA_TIME_PERIOD_DESCRIPTION' | translate">
+                </ccr-popup-description>
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>
+                {{ 'ALERTS.REFRESH_TIME_PERIOD' | translate }}
+
+                <ccr-popup-description
+                [title]="'ALERTS.REFRESH_TIME_PERIOD' | translate"
+                [description]="'ALERTS.REFRESH_TIME_PERIOD_DESCRIPTION' | translate">
+                </ccr-popup-description>
+              </ng-container>
+            </ng-container>
           </mat-label>
           <mat-form-field fxFlex>
-            <mat-select formControlName="refreshPeriod">
-              <mat-option *ngFor="let period of refreshTimePeriods" [value]="period.value">{{ period.viewValue | translate }}</mat-option>
-            </mat-select>
+            <ng-container [ngSwitch]="form.get('type').value">
+              <mat-select *ngSwitchCase="'5'" formControlName="refreshPeriod">
+                <mat-option *ngFor="let period of missingDataRefreshTimePeriods" [value]="period.value">{{ period.viewValue | translate }}</mat-option>
+              </mat-select>
+
+              <mat-select *ngSwitchDefault formControlName="refreshPeriod">
+                <mat-option *ngFor="let period of refreshTimePeriods" [value]="period.value">{{ period.viewValue | translate }}</mat-option>
+              </mat-select>
+            </ng-container>
           </mat-form-field>
         </div>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="20px">
+      <div *ngIf="form.get('type').value === '4'" fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="20px">
         <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
           <mat-label>
             {{ 'ALERTS.ALERT_VALUE' | translate }}
@@ -116,18 +145,27 @@
       </div>
 
       <div
-      *ngIf="form.value.aboveMagnitude || form.value.belowMagnitude"
+      *ngIf="currentAlertPreference?.type.id === '5' || form.value.aboveMagnitude || form.value.belowMagnitude"
       fxLayout="row"
       fxLayoutAlign="stretch center"
       fxLayoutGap="15px">
         <ccr-enter-icon [size]="32"></ccr-enter-icon>
 
-        <div
-          *ngIf="currentAlertPreference"
-          [innerHTML]="currentAlertPreference | dataThresholdAlertHint | async"
-          class="feature-disabled"
-          fxFlex>
-        </div>
+        <ng-container *ngIf="currentAlertPreference" [ngSwitch]="currentAlertPreference.type.id">
+          <div
+            *ngSwitchCase="'5'"
+            [innerHTML]="currentAlertPreference | dataPointMissingAlertHint | async"
+            class="feature-disabled"
+            fxFlex>
+          </div>
+
+          <div
+            *ngSwitchDefault
+            [innerHTML]="currentAlertPreference | dataThresholdAlertHint | async"
+            class="feature-disabled"
+            fxFlex>
+          </div>
+        </ng-container>
       </div>
     </div>
   </ng-container>

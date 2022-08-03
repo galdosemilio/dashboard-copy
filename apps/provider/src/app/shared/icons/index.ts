@@ -5,6 +5,7 @@ import { TrendingUpIconComponent } from '@app/shared/icons/trending-up-icon/tren
 import { DismissAllIconComponent } from './dismiss-all/dismiss-all.component'
 import { DismissOneIconComponent } from './dismiss-one/dismiss-one.component'
 import { EnterIconComponent } from './enter/enter.icon'
+import { MissingDataIconComponent } from './missing-data'
 import { MoveFolderIconComponent } from './move-folder-icon/move-folder-icon.component'
 import { PoorConnectionIconComponent } from './poor-connection'
 import { RPMCalendarIconComponent } from './rpm-calendar'
@@ -22,6 +23,7 @@ export {
   DismissAllIconComponent,
   EnterIconComponent,
   FoodIconComponent,
+  MissingDataIconComponent,
   MoveFolderIconComponent,
   PoorConnectionIconComponent,
   RPMCalendarIconComponent,
@@ -43,6 +45,7 @@ export const IconComponents = [
   DismissAllIconComponent,
   EnterIconComponent,
   FoodIconComponent,
+  MissingDataIconComponent,
   MoveFolderIconComponent,
   PoorConnectionIconComponent,
   RPMCalendarIconComponent,

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ContextService, NotifierService } from '@app/service'
@@ -8,6 +8,7 @@ import { TypeGroupEntry } from '@app/shared/components/chart-v2'
 import {
   AlertPreference,
   Alerts,
+  AlertsDataPointMissingOptions,
   AlertsDataPointThresholdOptions,
   AlertTypeId,
   convertFromReadableFormat,
@@ -24,6 +25,7 @@ import { AppState } from '@app/store/state'
 import { Store } from '@ngrx/store'
 import { selectMeasLabelFeature } from '@app/store/measurement-label'
 import { ExtendedMeasurementLabelEntry } from '@app/shared/model/measurements'
+import { TranslateService } from '@ngx-translate/core'
 
 type AlertDataThresholdDialogMode = 'create' | 'edit'
 
@@ -37,11 +39,23 @@ interface AlertDataThresholdDialogProps {
   selector: 'app-alert-data-threshold-dialog',
   templateUrl: './data-threshold.dialog.html',
   styleUrls: ['./data-threshold.dialog.scss'],
-  host: { class: 'ccr-dialog ccr-dialog-v2' }
+  host: { class: 'ccr-dialog ccr-dialog-v2' },
+  encapsulation: ViewEncapsulation.None
 })
 export class AlertDataThresholdDialog {
+  public readonly alertTypeOptions: SelectOption<string>[] = [
+    {
+      value: AlertTypeId.DATA_POINT_THRESHOLD,
+      viewValue: _('ALERTS.TYPES.DATA_THRESHOLD_ALERT')
+    },
+    {
+      value: AlertTypeId.DATA_POINT_MISSING,
+      viewValue: _('ALERTS.TYPES.MISSING_DATA_ALERT')
+    }
+  ]
   public form: FormGroup
   public isLoading: boolean
+  public missingDataRefreshTimePeriods: SelectOption<string>[] = []
   public mode: AlertDataThresholdDialogMode
   public typeGroups?: TypeGroupEntry[]
   public readonly refreshTimePeriods: SelectOption<string>[] =
@@ -65,7 +79,8 @@ export class AlertDataThresholdDialog {
     private dialogRef: MatDialogRef<AlertDataThresholdDialog>,
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private translateService: TranslateService
   ) {
     this.patchForm = this.patchForm.bind(this)
     this.resolveTypeGroups = this.resolveTypeGroups.bind(this)
@@ -75,6 +90,7 @@ export class AlertDataThresholdDialog {
   public ngOnInit(): void {
     this.mode = this.data.mode ?? 'create'
 
+    void this.createMissDataRefreshTimePeriods()
     this.createForm()
 
     this.store
@@ -120,6 +136,10 @@ export class AlertDataThresholdDialog {
   private createForm(): void {
     this.form = this.fb.group(
       {
+        type: [
+          this.alertTypeOptions[0].value,
+          this.mode === 'create' ? Validators.required : []
+        ],
         dataType: ['', Validators.required],
         refreshPeriod: ['', Validators.required],
         isBelow: [false],
@@ -129,6 +149,40 @@ export class AlertDataThresholdDialog {
       },
       { validators: [this.validateForm] }
     )
+
+    this.form
+      .get('type')
+      .valueChanges.pipe(untilDestroyed(this))
+      .subscribe((type) => {
+        this.currentAlertPreference = null
+
+        /**
+         * We default to the first time period of the array
+         * if when the type change occurs, we don't have the
+         * currently-selected period as a valid option.
+         *
+         */
+        const isValidOption =
+          type === AlertTypeId.DATA_POINT_THRESHOLD
+            ? ALERT_REFRESH_TIME_PERIODS.some(
+                (option) => option.value === this.form.value.refreshPeriod
+              )
+            : this.missingDataRefreshTimePeriods.some(
+                (option) => option.value === this.form.value.refreshPeriod
+              )
+
+        if (isValidOption) {
+          return
+        }
+
+        this.form
+          .get('refreshPeriod')
+          .setValue(
+            type === AlertTypeId.DATA_POINT_THRESHOLD
+              ? ALERT_REFRESH_TIME_PERIODS[0].value
+              : this.missingDataRefreshTimePeriods[0].value
+          )
+      })
 
     this.form
       .get('dataType')
@@ -205,7 +259,8 @@ export class AlertDataThresholdDialog {
               isActive:
                 existingPref?.value.organization.preference.isActive ?? true
             }
-          }
+          },
+          type: existingPref?.value.type ?? { id: controls.type }
         }
       })
 
@@ -216,27 +271,59 @@ export class AlertDataThresholdDialog {
   private async createPreference(): Promise<void> {
     const formValue = this.form.value
 
-    await this.alerts.createOrgAlertPreference({
-      organization: this.context.organizationId,
-      alertType: AlertTypeId.DATA_POINT_THRESHOLD,
-      preference: {
-        options: {
-          analysis: { period: formValue.refreshPeriod },
-          dataPoint: {
-            type: { id: formValue.dataType },
-            value: convertFromReadableFormat(
-              formValue.isAbove
-                ? formValue.aboveMagnitude
-                : formValue.belowMagnitude,
-              this.selectedDataType,
-              this.context.user.measurementPreference
-            )
-          },
-          direction: formValue.isAbove ? 'above' : 'below'
-        },
-        isActive: true
-      }
-    })
+    const createPayload =
+      formValue.type === AlertTypeId.DATA_POINT_THRESHOLD
+        ? {
+            organization: this.context.organizationId,
+            alertType: formValue.type,
+            preference: {
+              options: {
+                analysis: { period: formValue.refreshPeriod },
+                dataPoint: {
+                  type: { id: formValue.dataType },
+                  value: convertFromReadableFormat(
+                    formValue.isAbove
+                      ? formValue.aboveMagnitude
+                      : formValue.belowMagnitude,
+                    this.selectedDataType,
+                    this.context.user.measurementPreference
+                  )
+                },
+                direction: formValue.isAbove ? 'above' : 'below'
+              } as AlertsDataPointThresholdOptions,
+              isActive: true
+            }
+          }
+        : {
+            organization: this.context.organizationId,
+            alertType: formValue.type,
+            preference: {
+              options: {
+                analysis: { period: formValue.refreshPeriod },
+                dataPoint: {
+                  type: { id: formValue.dataType }
+                }
+              } as AlertsDataPointMissingOptions,
+              isActive: true
+            }
+          }
+
+    await this.alerts.createOrgAlertPreference(createPayload)
+  }
+
+  private async createMissDataRefreshTimePeriods(): Promise<void> {
+    const translations = await this.translateService
+      .get(['GLOBAL.DAY', 'UNIT.DAYS'])
+      .toPromise()
+
+    this.missingDataRefreshTimePeriods = new Array(30)
+      .fill(0)
+      .map((_day, index) => ({
+        value: `${index + 1} ${index === 0 ? 'day' : 'days'}`,
+        viewValue: `${index + 1} ${
+          index === 0 ? translations['GLOBAL.DAY'] : translations['UNIT.DAYS']
+        }`.toLowerCase()
+      }))
   }
 
   private patchForm(): void {
@@ -245,7 +332,10 @@ export class AlertDataThresholdDialog {
       .options as AlertsDataPointThresholdOptions
     const prefDirection = prefOptions.direction
 
-    this.form.patchValue({ dataType: prefOptions.dataPoint.type.id })
+    this.form.patchValue({
+      dataType: prefOptions.dataPoint.type.id,
+      type: value.type.id
+    })
 
     this.form.updateValueAndValidity()
 
@@ -264,6 +354,8 @@ export class AlertDataThresholdDialog {
     this.form
       .get(prefDirection === 'above' ? 'isAbove' : 'isBelow')
       .setValue(true)
+
+    this.form.get('type').disable()
   }
 
   private async resolveTypeGroups(
@@ -307,33 +399,52 @@ export class AlertDataThresholdDialog {
   }
 
   private async updatePreference(): Promise<void> {
-    const formValue = this.form.value
+    const formValue = this.form.getRawValue()
 
-    await this.alerts.updateOrgAlertPreference({
-      id: this.currentAlertPreference.id,
-      preference: {
-        options: {
-          analysis: { period: formValue.refreshPeriod },
-          dataPoint: {
-            type: { id: formValue.dataType },
-            value: convertFromReadableFormat(
-              formValue.isAbove
-                ? formValue.aboveMagnitude
-                : formValue.belowMagnitude,
-              this.selectedDataType,
-              this.context.user.measurementPreference
-            )
-          },
-          direction: formValue.isAbove ? 'above' : 'below'
-        },
-        isActive: this.currentAlertPreference.organization.preference.isActive
-      }
-    })
+    const updatePayload =
+      formValue.type === AlertTypeId.DATA_POINT_THRESHOLD
+        ? {
+            id: this.currentAlertPreference.id,
+            preference: {
+              options: {
+                analysis: { period: formValue.refreshPeriod },
+                dataPoint: {
+                  type: { id: formValue.dataType },
+                  value: convertFromReadableFormat(
+                    formValue.isAbove
+                      ? formValue.aboveMagnitude
+                      : formValue.belowMagnitude,
+                    this.selectedDataType,
+                    this.context.user.measurementPreference
+                  )
+                },
+                direction: formValue.isAbove ? 'above' : 'below'
+              } as AlertsDataPointThresholdOptions,
+              isActive:
+                this.currentAlertPreference.organization.preference.isActive
+            }
+          }
+        : {
+            id: this.currentAlertPreference.id,
+            preference: {
+              options: {
+                analysis: { period: formValue.refreshPeriod },
+                dataPoint: {
+                  type: { id: formValue.dataType }
+                }
+              } as AlertsDataPointMissingOptions,
+              isActive:
+                this.currentAlertPreference.organization.preference.isActive
+            }
+          }
+
+    await this.alerts.updateOrgAlertPreference(updatePayload)
   }
 
   private validateForm(form: FormGroup): { missingDataError: boolean } | null {
-    const formValue = form.value
+    const formValue = form.getRawValue()
     const isValid =
+      formValue.type === AlertTypeId.DATA_POINT_MISSING ||
       (formValue.isBelow && formValue.belowMagnitude) ||
       (formValue.isAbove && formValue.aboveMagnitude)
 
@@ -343,7 +454,10 @@ export class AlertDataThresholdDialog {
   private validateMagnitudeField(
     control: FormControl
   ): { min: boolean } | { max: boolean } | null {
-    if (!this.selectedDataType) {
+    if (
+      !this.selectedDataType ||
+      this.form.get('type').value === AlertTypeId.DATA_POINT_MISSING
+    ) {
       return null
     }
 

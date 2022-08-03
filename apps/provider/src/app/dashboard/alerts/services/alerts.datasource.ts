@@ -142,6 +142,12 @@ export class AlertsDataSource extends TableDataSource<
             alert.payload = value.payload
             break
 
+          case '7':
+            alert.icon = 'missing-data'
+            alert.detail = _('ALERTS.TYPES.MISSING_DATA_ALERT')
+            alert.payload = value.payload
+            break
+
           default:
             return
         }

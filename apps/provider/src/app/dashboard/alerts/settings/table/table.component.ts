@@ -162,6 +162,7 @@ export class AlertTypesTableComponent implements OnInit {
         })
         return this.updateWeightThreshold(row)
       case 'data-point-threshold':
+      case 'missing-data-point':
         void this.updateCustomAlertPreference(row)
         break
     }

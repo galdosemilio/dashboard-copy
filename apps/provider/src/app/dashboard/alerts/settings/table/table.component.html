@@ -5,24 +5,22 @@
     <ng-container cdkColumnDef="enabled">
       <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.ENABLE' | translate }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
-        <ng-container *ngIf="row.typeCode !== 'add-data-threshold'">
-          <ccr-popup-description
-            [title]="row.texts.title | translate"
-            [description]="row.texts.description | translate">
-          </ccr-popup-description>
+        <ccr-popup-description
+          [title]="row.texts.title | translate"
+          [description]="row.texts.description | translate">
+        </ccr-popup-description>
 
-          <mat-checkbox
-          *ngIf="!row.hideCheckbox"
-          [disabled]="row.isInherited"
-          [(ngModel)]="row.isActive"
-          (change)="onActiveChange(row)"
-          name="isActive">
-            <span class="xs-label">
-              <ng-container *ngIf="row.isActive">{{ 'GLOBAL.ENABLED' | translate }}</ng-container>
-              <ng-container *ngIf="!row.isActive">{{ 'GLOBAL.DISABLED' | translate }}</ng-container>
-            </span>
-          </mat-checkbox>
-        </ng-container>
+        <mat-checkbox
+        *ngIf="!row.hideCheckbox"
+        [disabled]="row.isInherited"
+        [(ngModel)]="row.isActive"
+        (change)="onActiveChange(row)"
+        name="isActive">
+          <span class="xs-label">
+            <ng-container *ngIf="row.isActive">{{ 'GLOBAL.ENABLED' | translate }}</ng-container>
+            <ng-container *ngIf="!row.isActive">{{ 'GLOBAL.DISABLED' | translate }}</ng-container>
+          </span>
+        </mat-checkbox>
       </mat-cell>
     </ng-container>
 
@@ -32,21 +30,12 @@
         <span>{{ 'GLOBAL.TITLE' | translate }}</span>
 
         <ng-container [ngSwitch]="row.typeCode">
-          <ng-container *ngSwitchCase="'add-data-threshold'">
-            <ccr-alert-icon (click)="openDataThresholdDialog()" [icon]="row.icon"></ccr-alert-icon>
-            <span (click)="openDataThresholdDialog()" class="title-text ccr-link">{{ 'ALERTS.ADD_NEW_DATA_THRESHOLD_ALERT' | translate }}</span>
+          <ng-container *ngSwitchCase="'data-point-threshold'">
+            <ng-container *ngTemplateOutlet="dataPointAlertRow; context:{row}"></ng-container>
           </ng-container>
 
-          <ng-container *ngSwitchCase="'data-point-threshold'">
-            <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
-            <div class="title-text" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
-              <span data-cy="alert-title">
-                {{ row.texts.title | translate }} - {{ row.value.organization.preference.options.dataPoint.type | dataTypeName | async }}<em *ngIf="row.isInherited" class="ccr-marker">*</em>
-              </span>
-              <small *ngIf="row.isInherited">
-                {{ 'LIBRARY.CONTENT.FROM' | translate:{organization: ( row.value.organization | organizationName | async )} }}
-              </small>
-            </div>
+          <ng-container *ngSwitchCase="'missing-data-point'">
+            <ng-container *ngTemplateOutlet="dataPointAlertRow; context:{row}"></ng-container>
           </ng-container>
 
           <ng-container *ngSwitchDefault>
@@ -157,7 +146,7 @@
     <ng-container cdkColumnDef="actions">
       <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACTIONS' | translate }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-        <ng-container *ngIf="row.typeCode === 'data-point-threshold'">
+        <ng-container *ngIf="row.typeCode === 'data-point-threshold' || row.typeCode === 'missing-data-point'">
           <mat-icon [class.disabled]="row.isInherited" (click)="openDataThresholdDialog(row)">edit</mat-icon>
           <mat-icon [class.disabled]="row.isInherited" (click)="openDeleteAlertDialog(row)">delete</mat-icon>
         </ng-container>
@@ -177,3 +166,15 @@
 <small *ngIf="source.hasInheritedAlert">
   <em class="ccr-marker">*</em> {{ 'ALERTS.INHERITED_ALERT_FOOTNOTE' | translate }}
 </small>
+
+<ng-template #dataPointAlertRow let-row="row">
+  <ccr-alert-icon [icon]="row.icon"></ccr-alert-icon>
+  <div class="title-text" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+    <span data-cy="alert-title">
+      {{ row.texts.title | translate }} - {{ row.value.organization.preference.options.dataPoint.type | dataTypeName | async }}<em *ngIf="row.isInherited" class="ccr-marker">*</em>
+    </span>
+    <small *ngIf="row.isInherited">
+      {{ 'LIBRARY.CONTENT.FROM' | translate:{organization: ( row.value.organization | organizationName | async )} }}
+    </small>
+  </div>
+</ng-template>

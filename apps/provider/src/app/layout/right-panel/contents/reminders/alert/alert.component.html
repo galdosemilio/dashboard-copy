@@ -16,6 +16,10 @@
     <ccr-alert-icon [icon]="alert.icon" [size]="18"></ccr-alert-icon>
 
     <ng-container [ngSwitch]="alert.code">
+      <ng-container *ngSwitchCase="'missing-data-point'">
+        <span [innerHTML]="alert.payload | dataPointMissingNotifHint | async"></span>
+      </ng-container>
+
       <ng-container *ngSwitchCase="'data-point-threshold'">
         <span [innerHTML]="alert.payload | dataThresholdNotifHint | async"></span>
       </ng-container>

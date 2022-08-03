@@ -154,6 +154,29 @@
         }
       },
       "packages": []
+    },
+    {
+      "id": "647",
+      "type": {
+        "id": "5",
+        "code": "missing-data-point",
+        "description": "Missing data point alert"
+      },
+      "organization": {
+        "id": "1",
+        "preference": {
+          "options": {
+            "analysis": { "period": "2 days" },
+            "dataPoint": {
+              "type": { "id": "1" },
+              "value": null
+            },
+            "direction": null
+          },
+          "isActive": true
+        }
+      },
+      "packages": []
     }
   ],
   "pagination": {}
