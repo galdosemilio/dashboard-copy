@@ -34,5 +34,5 @@ export const selectCurrentLabelTypes = createSelector(
           (type) =>
             type.label.id === (state.selectedLabel as MeasurementLabelEntry).id
         )
-      : state.dataPointTypes
+      : []
 )
