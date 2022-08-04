@@ -202,7 +202,7 @@
                 {{ 'BOARD.SCHEDULE_DELETE_AFTER' | translate }}
             </mat-radio-button>
         </mat-radio-group>
-        <ccr-date-input [min]="today" [placeholder]="'GLOBAL.DATE' | translate" formControlName="after"></ccr-date-input>
+        <ccr-date-input *ngIf="deleteRecurringForm.value.deleteMode === 'recurringAfter'" [min]="today" [placeholder]="'GLOBAL.DATE' | translate" formControlName="after"></ccr-date-input>
     </div>
     <div *ngSwitchDefault>
         <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">

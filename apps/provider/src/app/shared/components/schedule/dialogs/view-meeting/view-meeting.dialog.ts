@@ -38,6 +38,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { AccountProvider, OrganizationProvider, Schedule } from '@coachcare/sdk'
 import { Meeting } from '@app/shared/model'
+import { determineRecurringDeleteTimestamp } from '../../recurring-delete-after'
 
 type ViewMeetingDialogEditMode = 'single' | 'recurring'
 
@@ -261,7 +262,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
             await this.doDeleteRecurring()
             break
           case 'recurringAfter':
-            await this.doDeleteRecurring(true)
+            await this.doDeleteRecurring()
             break
         }
       } else {
@@ -494,12 +495,16 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     })
   }
 
-  private async doDeleteRecurring(readForm: boolean = false) {
+  private async doDeleteRecurring() {
     try {
-      const after = moment(this.deleteRecurringForm.value.after).startOf('day')
+      const formValue = this.deleteRecurringForm.value
+      const after = determineRecurringDeleteTimestamp(
+        moment(formValue.after).startOf('day'),
+        formValue.deleteMode
+      )
       await this.schedule.deleteRecurringMeeting({
         id: this.meeting.id,
-        after: readForm ? after.toISOString() : undefined
+        after: after?.toISOString()
       })
       this.notify.success(_('NOTIFY.SUCCESS.MEETING_RECURRING_DELETED'))
       this.bus.trigger('schedule.table.refresh')

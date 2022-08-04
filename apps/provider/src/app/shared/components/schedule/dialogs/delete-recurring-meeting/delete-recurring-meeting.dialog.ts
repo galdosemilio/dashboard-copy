@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { DeleteRecurringMeetingRequest } from '@coachcare/sdk'
 import * as moment from 'moment'
 import { Meeting } from '@app/shared/model'
+import { determineRecurringDeleteTimestamp } from '../../recurring-delete-after'
 
 interface DeleteRecurringMeetingDialogProps {
   meeting: Meeting
@@ -33,14 +34,16 @@ export class DeleteRecurringMeetingDialog implements OnInit {
 
   public onSubmit(): void {
     const formValue = this.form.value
+    const after = determineRecurringDeleteTimestamp(
+      moment(formValue.after).startOf('day'),
+      formValue.deleteMode
+    )
+
     this.dialogRef.close({
       deleteMode: formValue.deleteMode,
       query: {
         id: this.meeting.id,
-        after:
-          formValue.deleteMode === 'recurringAfter'
-            ? moment(formValue.after).startOf('day').toISOString()
-            : undefined
+        after: after?.toISOString()
       } as DeleteRecurringMeetingRequest
     })
   }
