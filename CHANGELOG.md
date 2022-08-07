@@ -1,3 +1,32 @@
+# [1.91.0](https://github.com/coachcare/dashboard/compare/v1.90.0...v1.91.0) (2022-08-07)
+
+
+### Bug Fixes
+
+* add available_devices variable in RPM setup [FRON-2846] ([f14cecc](https://github.com/coachcare/dashboard/commit/f14cecc5b636611e66e093b43b6ba7098f7a55c7))
+* add product images gallary [FRON-2899] ([980b7d5](https://github.com/coachcare/dashboard/commit/980b7d5254eba1a67d89d8d9493716f42a379071))
+* add shopping prompt [FRON-2889] ([5aeffcd](https://github.com/coachcare/dashboard/commit/5aeffcd5de6180d0bb5815b1e1baab4c39b5f4fc))
+* add state dropdown for us [FRON-2887] ([c76f48a](https://github.com/coachcare/dashboard/commit/c76f48ad5f0559066738c24548f0b5137171b01a))
+* adjust NXTSTIM metadata validation ([1bf6e30](https://github.com/coachcare/dashboard/commit/1bf6e300b9df7d164c830ac64a674e19e3be2264))
+* corrected typo ([a707d39](https://github.com/coachcare/dashboard/commit/a707d3962e1e7a56e9eed659267c5fd2acda5517))
+* do not sent address2 with blank [FRON-2878] ([f388c24](https://github.com/coachcare/dashboard/commit/f388c24ae3ddb8271b26a8c2429eec6849728bf6))
+* get shipping rates [FRON-2896] ([aeb3cdc](https://github.com/coachcare/dashboard/commit/aeb3cdc0e753b360636d179495f2244c0bbcb92f))
+* hide badge on shopping cart icon with zero [FRON-2882] ([10701fc](https://github.com/coachcare/dashboard/commit/10701fc8db79608da93c51bf2bb9fc7f706331c8))
+* reload cart after remove item [FRON-2885] ([8de09ae](https://github.com/coachcare/dashboard/commit/8de09ae797422af746de184724997de25cea2455))
+* remove unused readonly property [FRON-2888] ([77934cd](https://github.com/coachcare/dashboard/commit/77934cd7cfbc308f73df81183234860f5cb0bec7))
+* removes blueinfy environment [FRON-2822] ([a2838eb](https://github.com/coachcare/dashboard/commit/a2838eb9f14268e53539126d4058a819c830671a))
+* set NXSTIM org as selected organization if NXSTIM url [FRON-2909] ([d73ea43](https://github.com/coachcare/dashboard/commit/d73ea433a02ae6e4bccb6d3fe39d551e3382e71b))
+* set specific api host when the dashboard with whitelist [FRON-2874] ([3dab8ac](https://github.com/coachcare/dashboard/commit/3dab8acc55dc485da7781f4f0aaf36f3ee32d6dd))
+* show category image [FRON-2903] ([bf42bc0](https://github.com/coachcare/dashboard/commit/bf42bc0812d49ba02810908164f27a1c3b784eb6))
+* show selected packages with by phase [FRON-2867] ([4387c90](https://github.com/coachcare/dashboard/commit/4387c900a737469381709af01d9d2d2bbde53707))
+* styles for modals on mobile [FRON-2893] ([7cd820f](https://github.com/coachcare/dashboard/commit/7cd820ffed817cff1e3a7a108bc5c89a90a5506c))
+* various style and small adjustments to store [FRON-2905] ([ec23780](https://github.com/coachcare/dashboard/commit/ec23780c9da72ec7fd25ff4b112c92e404716999))
+
+
+### Features
+
+* shopping experience [FRON-2843] ([bbbfda1](https://github.com/coachcare/dashboard/commit/bbbfda11858e6b4a6cff35d3aef53da4126a2abd))
+
 # [1.90.0](https://github.com/coachcare/dashboard/compare/v1.89.0...v1.90.0) (2022-07-13)
 
 
