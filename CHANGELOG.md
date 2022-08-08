@@ -1,3 +1,10 @@
+## [1.91.1](https://github.com/coachcare/dashboard/compare/v1.91.0...v1.91.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* set cookie domain on non-coachcare api url [FRON-2908] ([0c84aa9](https://github.com/coachcare/dashboard/commit/0c84aa953b80fe64d71c96f7b76755f05804c5e3))
+
 # [1.91.0](https://github.com/coachcare/dashboard/compare/v1.90.0...v1.91.0) (2022-08-07)
 
 
