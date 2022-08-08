@@ -1424,6 +1424,7 @@
     "EXPORT_REPORT": "Rapport d'exportation",
     "FEMALE": "Femme",
     "FILTER_ALERTS": "Filtrer par alertes",
+    "FILTER_BY_PHASE": "Filtrer par phases",
     "FILTER_BY_RPM_STATUS": "Filtrer par statut RPM",
     "FILTER_DEMOGRAGPHICS": "Filtrer par démographie",
     "GENDER": "Genre",

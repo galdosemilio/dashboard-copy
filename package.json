@@ -112,7 +112,7 @@
     "@angular/platform-browser": "13.1.3",
     "@angular/platform-browser-dynamic": "13.1.3",
     "@angular/router": "13.1.3",
-    "@coachcare/sdk": "^20.0.2",
+    "@coachcare/sdk": "^21.1.0",
     "@kolkov/ngx-gallery": "^2.0.1",
     "@ngneat/until-destroy": "^9.0.0",
     "@ngrx/effects": "13.0.2",

@@ -8,9 +8,9 @@
   </div>
 </div>
 
-<div fxLayout="row" fxLayoutWrap fxLayoutGap="2%" fxLayoutGap.xs="0" class="ccr-alerts">
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutWrap fxLayoutGap="20px" class="ccr-alerts">
 
-  <mat-form-field fxFlex="20%" fxFlex.xs="grow" floatLabel="never" class="ccr-filter">
+  <mat-form-field fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
     <mat-select [disableOptionCentering]="true" [(ngModel)]="alert" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_ALERTS' | translate">
       <mat-option *ngFor="let alert of alerts" [value]="alert.value">
         {{ alert.viewValue | translate | uppercase }}
@@ -18,7 +18,15 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field fxFlex="20%" fxFlex.xs="grow" floatLabel="never" class="ccr-filter">
+  <mat-form-field fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
+    <mat-select [disableOptionCentering]="true" [(ngModel)]="package" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_BY_PHASE' | translate">
+      <mat-option *ngFor="let packageItem of packages" [value]="packageItem.value">
+        {{ packageItem.viewValue | translate | uppercase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
     <mat-select [disableOptionCentering]="true" [(ngModel)]="rpmStatus" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_BY_RPM_STATUS' | translate">
       <mat-option *ngFor="let rpmStatusItem of rpmStatusList" [value]="rpmStatusItem.value">
         {{ rpmStatusItem.viewValue | translate | uppercase }}

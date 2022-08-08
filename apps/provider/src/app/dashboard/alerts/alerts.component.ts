@@ -4,12 +4,14 @@ import { findIndex } from 'lodash'
 import { Subject } from 'rxjs'
 
 import { ContextService, EventsService, NotifierService } from '@app/service'
-import { _ } from '@app/shared/utils'
+import { SelectOption, _ } from '@app/shared/utils'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { AlertsDatabase, AlertsDataSource } from './services'
 import { debounceTime } from 'rxjs/operators'
-import { NotificationRequest } from '@coachcare/sdk'
+import { NotificationRequest, Package } from '@coachcare/sdk'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'app-reports-alerts',
   templateUrl: './alerts.component.html',
@@ -43,6 +45,9 @@ export class AlertsComponent implements OnInit, OnDestroy {
     }
   ]
 
+  package: number
+  packages: SelectOption<number>[] = []
+
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020577952-Viewing-Notifications-in-the-Dashboard'
 
@@ -51,7 +56,8 @@ export class AlertsComponent implements OnInit, OnDestroy {
     private context: ContextService,
     private bus: EventsService,
     private notifier: NotifierService,
-    private database: AlertsDatabase
+    private database: AlertsDatabase,
+    private packageService: Package
   ) {}
 
   // refresh chart trigger
@@ -87,6 +93,10 @@ export class AlertsComponent implements OnInit, OnDestroy {
         query.rpm = this.rpmStatus
       }
 
+      if (this.package) {
+        query.package = this.package
+      }
+
       return query
     })
     this.source.addOptional(this.context.organization$, () => ({
@@ -97,6 +107,34 @@ export class AlertsComponent implements OnInit, OnDestroy {
       limit: this.paginator.pageSize || 12,
       offset: this.paginator.pageIndex * (this.paginator.pageSize || 12)
     }))
+
+    this.context.organization$
+      .pipe(untilDestroyed(this))
+      .subscribe(() => this.resolvePackages())
+  }
+
+  private async resolvePackages() {
+    this.package = null
+    this.refresh()
+    this.packages = [{ viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined }]
+
+    try {
+      const res = await this.packageService.getAll({
+        isActive: true,
+        limit: 'all',
+        offset: 0
+      })
+
+      this.packages = [
+        ...this.packages,
+        ...res.data.map((entry) => ({
+          viewValue: entry.title,
+          value: Number(entry.id)
+        }))
+      ]
+    } catch (err) {
+      this.notifier.error(err)
+    }
   }
 
   ngOnDestroy() {

@@ -1424,6 +1424,7 @@
     "EXPORT_REPORT": "تقرير التصدير",
     "FEMALE": "أنثى",
     "FILTER_ALERTS": "فرز وفق التنبيهات",
+    "FILTER_BY_PHASE": "تصفية حسب المرحلة",
     "FILTER_BY_RPM_STATUS": "تصفية حسب حالة RPM",
     "FILTER_DEMOGRAGPHICS": "فرز وفق الديموغرافيات",
     "GENDER": "الجنس",
