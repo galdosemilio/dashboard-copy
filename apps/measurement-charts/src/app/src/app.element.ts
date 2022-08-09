@@ -47,9 +47,17 @@ export class AppElement extends HTMLElement {
         baseData.metric,
       view: (params.get('view') as Tab) || Tab.LIST,
       colors: {
-        primary: params.get('primary-color') || baseData.colors.primary,
-        accent: params.get('accent-color') || baseData.colors.accent,
-        text: params.get('text-color') || baseData.colors.text
+        // we send # as %23, but for some reason % is converting as %25 again.
+        // it's temporary solution until we fix it on mobile end.
+        primary:
+          params.get('primary-color')?.replace('%2523', '#') ||
+          baseData.colors.primary,
+        accent:
+          params.get('accent-color')?.replace('%2523', '#') ||
+          baseData.colors.accent,
+        text:
+          params.get('text-color')?.replace('%2523', '#') ||
+          baseData.colors.text
       },
       dataPointTypes: [],
       sourceId: params.get('sourceId') || undefined
