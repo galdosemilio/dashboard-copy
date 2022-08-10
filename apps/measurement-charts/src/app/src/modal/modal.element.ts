@@ -1,8 +1,6 @@
 import { CcrElement, Modal } from '@chart/model'
 import { modalService } from '@chart/service'
 
-import './modal.element.scss'
-
 export class ModalElement extends CcrElement {
   afterViewInit(): void {
     this.subscriptions.push(

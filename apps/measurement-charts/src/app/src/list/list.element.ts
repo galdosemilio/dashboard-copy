@@ -9,7 +9,6 @@ import {
 } from '@coachcare/sdk'
 import { DateTime } from 'luxon'
 
-import './list.element.scss'
 import { ListItem } from '@chart/model'
 import { groupBy, orderBy, uniqBy } from 'lodash'
 import * as utils from '@chart/utils'

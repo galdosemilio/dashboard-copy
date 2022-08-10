@@ -3,8 +3,6 @@ import { eventService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 import { NamedEntity } from '@coachcare/sdk'
 
-import './source-selector.element.scss'
-
 export class SourceSelectorElement extends CcrElement {
   private sourceId = '-1'
 

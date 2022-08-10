@@ -63,6 +63,7 @@
         "DISPLAY_NAME": "Display Name",
         "EDIT_INHERITED": "تحرير التفضيلات الموروثة",
         "EMPTY_BCC_EMAILS": "لا توجد رسائل بريد إلكتروني خفية تم إعدادها لهذه المؤسسة.",
+        "FAVICON_HINT": "ستكون تحديثات الأيقونة المفضلة مرئية بعد 24 ساعة",
         "FIREBASE_PROJECT_NAME": "Firebase Project Name",
         "ICON_HINT": "Icon updates will be visible after 24 hours",
         "IMAGES": "Images",

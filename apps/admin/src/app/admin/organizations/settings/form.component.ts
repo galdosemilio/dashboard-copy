@@ -60,6 +60,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
   readonly = false
   reactiveControls = ['security']
   splashUrl: string | undefined
+  faviconUrl: string | undefined
   section:
     | 'core'
     | 'visual'
@@ -102,11 +103,15 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
         this.logoUrl = prefs.assets ? prefs.assets.logoUrl : undefined
         this.splashUrl = prefs.assets ? prefs.assets.splashUrl : undefined
         this.iconUrl = prefs.assets ? prefs.assets.iconUrl : undefined
+        this.faviconUrl = prefs.assets ? prefs.assets.faviconUrl : undefined
 
         const logoFilename = this.logoUrl ? this.logoUrl.split('/').pop() : ''
         const iconFilename = this.iconUrl ? this.iconUrl.split('/').pop() : ''
         const splashFilename = this.splashUrl
           ? this.splashUrl.split('/').pop()
+          : ''
+        const faviconFilename = this.faviconUrl
+          ? this.faviconUrl.split('/').pop()
           : ''
         // reformat the preferences to fill the form
         const { mala, appIds, storeUrl, ...rset } = prefs
@@ -129,8 +134,10 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
             logoUrl: this.logoUrl,
             splashUrl: this.splashUrl,
             iconUrl: this.iconUrl,
+            faviconUrl: this.faviconUrl,
             iconFilename,
             splashFilename,
+            faviconFilename,
             color: prefs.assets ? prefs.assets.color : {},
             bccEmails,
             autoEnrollClientLabelId: this.clientPackages.slice(),

@@ -2,8 +2,6 @@ import { CcrElement, Timeframe } from '@chart/model'
 import { eventService } from '@chart/service'
 import { translate } from '@chart/service/i18n'
 
-import './timeframe-selector.element.scss'
-
 export class TimeframeSelectorElement extends CcrElement {
   private selectorItems: HTMLDivElement[] = []
 

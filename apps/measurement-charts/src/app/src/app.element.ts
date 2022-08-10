@@ -1,10 +1,10 @@
-import './app.element.scss'
-
 import { baseData, BaseData, Tab, Timeframe, requiredWeightIds } from '../model'
 import { api } from '../service/api'
 import { eventService, tabService } from '@chart/service'
 import { DateTime, Settings as LuxonSettings } from 'luxon'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
+import { updateFavIcon } from '@coachcare/common/shared/utils/favicon.utils'
+
 import {
   DataPointTypes,
   MeasurementDataPointType,
@@ -36,6 +36,7 @@ export class AppElement extends HTMLElement {
 
     const data: BaseData = {
       dataPointTypeId,
+      orgId: params.get('orgId'),
       token: params.get('token'),
       accountId: params.get('accountId') || undefined,
       locale: params.get('locale') || baseData.locale,
@@ -116,6 +117,22 @@ export class AppElement extends HTMLElement {
 
     tabService.selectedTab$.next(data.view)
     eventService.baseDataEvent$.next(data)
+
+    void this.resolveFavIcon(data.orgId)
+  }
+
+  private async resolveFavIcon(orgId?: string) {
+    if (!orgId) {
+      return
+    }
+
+    const prefs = await api.organization.getPreferences(orgId, true)
+
+    if (!prefs?.assets?.faviconUrl) {
+      return
+    }
+
+    updateFavIcon(prefs.assets.faviconUrl)
   }
 
   private setColorPattern() {

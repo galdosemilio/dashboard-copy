@@ -12,6 +12,7 @@ import { CurrentSpreeStore, StorefrontService } from './services'
 import { User } from '@coachcare/sdk'
 import { AuthService } from '@coachcare/common/services'
 import { NavigationEnd, Router } from '@angular/router'
+import { updateFavIcon } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -58,6 +59,8 @@ export class Storefront implements OnInit {
           palette.theme === 'accent' ? palette.accent : palette.primary
         const accent =
           palette.theme === 'accent' ? palette.primary : palette.accent
+
+        updateFavIcon(pref.assets.faviconUrl)
 
         this.renderer.setAttribute(
           this.document.body,

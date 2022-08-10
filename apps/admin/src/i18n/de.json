@@ -63,6 +63,7 @@
         "DISPLAY_NAME": "Anzeigename",
         "EDIT_INHERITED": "Voreinstellungen bearbeiten",
         "EMPTY_BCC_EMAILS": "",
+        "FAVICON_HINT": "Favicon-Updates werden nach 24 Stunden sichtbar",
         "FIREBASE_PROJECT_NAME": "Firebase-Projektname",
         "ICON_HINT": "Icon-Updates werden nach 24 Stunden sichtbar",
         "IMAGES": "Bilder",

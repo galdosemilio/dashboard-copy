@@ -383,12 +383,17 @@
     },
     "measurement-charts": {
       "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "apps/measurement-charts",
       "sourceRoot": "apps/measurement-charts/src",
+      "prefix": "measurement-charts",
       "architect": {
         "build": {
-          "builder": "@nrwl/web:webpack",
-          "outputs": ["{options.outputPath}"],
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/apps/measurement-charts",
             "index": "apps/measurement-charts/src/index.html",
@@ -400,7 +405,14 @@
               "apps/measurement-charts/src/assets"
             ],
             "styles": ["apps/measurement-charts/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "aot": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "prod": {
@@ -435,7 +447,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -450,13 +461,13 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/web:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "measurement-charts:build"
+            "browserTarget": "measurement-charts:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "measurement-charts:build:production"
+              "browserTarget": "measurement-charts:build:production"
             }
           }
         },
@@ -476,7 +487,8 @@
           }
         }
       },
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["common", "backend", "material", "storefront"]
     },
     "measurement-charts-e2e": {
       "root": "apps/measurement-charts-e2e",

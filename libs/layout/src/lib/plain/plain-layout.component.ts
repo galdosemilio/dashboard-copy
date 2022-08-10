@@ -6,7 +6,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { Subscription } from 'rxjs'
 import * as tinycolor from 'tinycolor2'
 
-import { AppPalette } from '@coachcare/common/shared'
+import { AppPalette, updateFavIcon } from '@coachcare/common/shared'
 import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
 
 @Component({
@@ -41,6 +41,8 @@ export class PlainLayout implements OnInit, OnDestroy {
           palette.theme === 'accent' ? palette.accent : palette.primary
         const accent =
           palette.theme === 'accent' ? palette.primary : palette.accent
+
+        updateFavIcon(pref.assets.faviconUrl)
 
         this.renderer.setAttribute(
           this.document.body,

@@ -1,8 +1,6 @@
 import { CcrElement, Tab } from '@chart/model'
 import { tabService } from '@chart/service'
 
-import './nav.element.scss'
-
 export class NavElement extends CcrElement {
   afterViewInit(): void {
     this.subscriptions.push(

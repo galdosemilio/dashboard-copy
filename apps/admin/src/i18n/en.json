@@ -63,6 +63,7 @@
         "DISPLAY_NAME": "Display Name",
         "EDIT_INHERITED": "Edit Inherited Preferences",
         "EMPTY_BCC_EMAILS": "There are no BCC emails set up for this organization.",
+        "FAVICON_HINT": "Favicon updates will be visible after 24 hours",
         "FIREBASE_PROJECT_NAME": "Firebase Project Name",
         "ICON_HINT": "Icon updates will be visible after 24 hours",
         "IMAGES": "Images",

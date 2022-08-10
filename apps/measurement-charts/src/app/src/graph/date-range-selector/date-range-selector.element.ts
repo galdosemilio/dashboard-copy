@@ -5,8 +5,6 @@ import { MeasurementDataPointAggregate } from '@coachcare/sdk'
 import { DateTime } from 'luxon'
 import { filter } from 'rxjs/operators'
 
-import './date-range-selector.element.scss'
-
 export class DateRangeSelectorElement extends CcrElement {
   private dateRange: DateRange = { start: '', end: '' }
   private hasMostRecentEntry = false

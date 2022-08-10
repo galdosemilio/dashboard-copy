@@ -33,7 +33,6 @@
     <div class="ccr-panel" [hidden]="section !== 'visual'" data-cy="org-settings-section-images">
       <h3>{{ 'ADMIN.ORGS.SETTINGS.IMAGES' | translate }}</h3>
         <ccr-organizations-images
-          [colSpan]="colSpan"
           [orgId]="id"
           [prefs]="initialPreference">
         </ccr-organizations-images>

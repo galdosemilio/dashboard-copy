@@ -63,6 +63,7 @@
         "DISPLAY_NAME": "Vis Navn",
         "EDIT_INHERITED": "Rediger arvede indstillinger",
         "EMPTY_BCC_EMAILS": "Der er ingen BCC-e-mails konfigureret til denne organisation.",
+        "FAVICON_HINT": "Favicon-opdateringer vil være synlige efter 24 timer",
         "FIREBASE_PROJECT_NAME": "Firebase Project Name",
         "ICON_HINT": "Icon opdateringer vil være synlige efter 24 timer",
         "IMAGES": "Images",

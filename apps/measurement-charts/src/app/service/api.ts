@@ -3,7 +3,8 @@ import {
   ApiService,
   AuthenticationToken,
   MeasurementDataPointProvider,
-  MeasurementDataPointTypeProvider
+  MeasurementDataPointTypeProvider,
+  OrganizationProvider
 } from '@coachcare/sdk'
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
 import { Environment } from '@coachcare/sdk/dist/lib/config'
@@ -13,6 +14,7 @@ export class Api {
   public baseData: BaseData = baseData
   public readonly measurementDataPoint: MeasurementDataPointProvider
   public readonly measurementDataPointType: MeasurementDataPointTypeProvider
+  public readonly organization: OrganizationProvider
 
   public apiService: ApiService
   public token: AuthenticationToken
@@ -29,6 +31,7 @@ export class Api {
     this.measurementDataPointType = new MeasurementDataPointTypeProvider(
       this.apiService
     )
+    this.organization = new OrganizationProvider(this.apiService)
   }
 
   public appendBaseData(data: Partial<BaseData>): void {

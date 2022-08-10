@@ -63,6 +63,7 @@
         "DISPLAY_NAME": "Nombre Público",
         "EDIT_INHERITED": "Editar Preferencias Heredadas",
         "EMPTY_BCC_EMAILS": "No hay direcciones de CCO configuradas para esta organización.",
+        "FAVICON_HINT": "Las actualizaciones de Favicon serán visibles después de 24 horas",
         "FIREBASE_PROJECT_NAME": "Firebase Project Name",
         "ICON_HINT": "Actualizaciónes de icon serán visibles después de 24 horas",
         "IMAGES": "Images",

@@ -63,6 +63,7 @@
         "DISPLAY_NAME": "שם תצוגה",
         "EDIT_INHERITED": "ערוך העדפות בירושה",
         "EMPTY_BCC_EMAILS": "לא מוגדרים דוא\"ל של BCC לארגון זה.",
+        "FAVICON_HINT": "עדכוני Favicon יהיו גלויים לאחר 24 שעות",
         "FIREBASE_PROJECT_NAME": "Firebase Project Name",
         "ICON_HINT": "Icon updates will be visible after 24 hours",
         "IMAGES": "Images",

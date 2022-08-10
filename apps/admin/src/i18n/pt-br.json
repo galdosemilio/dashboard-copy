@@ -63,6 +63,7 @@
         "DISPLAY_NAME": "Nome a mostrar",
         "EDIT_INHERITED": "Editar Preferências Herdadas",
         "EMPTY_BCC_EMAILS": "",
+        "FAVICON_HINT": "As atualizações de favicon ficarão visíveis após 24 horas",
         "FIREBASE_PROJECT_NAME": "Nome do Projeto Firebase",
         "ICON_HINT": "Atualizações de ícones serão visíveis após 24 horas",
         "IMAGES": "imagens",

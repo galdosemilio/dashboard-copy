@@ -3,7 +3,7 @@ import { eventService } from '@chart/service'
 import { api } from '@chart/service/api'
 import { GraphEntry } from '../graph.element'
 import * as utils from '@chart/utils'
-import './graph-header.element.scss'
+
 import { DataPointTypes } from '@coachcare/sdk'
 export class GraphHeaderElement extends CcrElement {
   render() {

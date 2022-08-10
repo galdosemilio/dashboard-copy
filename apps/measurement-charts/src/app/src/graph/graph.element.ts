@@ -1,5 +1,3 @@
-import './graph.element.scss'
-
 import * as utils from '@chart/utils'
 import { CcrElement, DateRange, Timeframe } from '../../model'
 import {

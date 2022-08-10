@@ -30,6 +30,7 @@ export interface BaseData {
   dataPointTypes: MeasurementDataPointType[]
   sourceId?: string
   isWeightRequired?: boolean
+  orgId?: string
 }
 
 export const baseData: BaseData = {

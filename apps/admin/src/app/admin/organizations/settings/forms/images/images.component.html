@@ -32,11 +32,22 @@
         <mat-hint>{{ 'ADMIN.ORGS.SETTINGS.SPLASH_HINT' | translate }}</mat-hint>
       </ccr-logo>
     </mat-grid-tile>
+    <mat-grid-tile>
+      <ccr-logo #logo fxFlex="nogrow" size="form"
+        [id]="orgId"
+        [url]="faviconUrl"
+        name="favicon"
+        fileName="faviconFilename"
+        [editable]="orgId"
+        (change)="updateLogo('faviconUrl', $event)">
+        <mat-hint>{{ 'ADMIN.ORGS.SETTINGS.FAVICON_HINT' | translate }}</mat-hint>
+      </ccr-logo>
+    </mat-grid-tile>
   </mat-grid-list>
 </div>
 
 <div class="ccr-grid" fxLayout="column">
-  <mat-grid-list [cols]="3" [formGroup]="form" rowHeight="80px">
+  <mat-grid-list [cols]="colSpan" [formGroup]="form" rowHeight="80px">
     <mat-grid-tile>
       <mat-form-field class="readonly">
         <input matInput
@@ -57,6 +68,14 @@
       <mat-form-field class="readonly">
         <input matInput
         formControlName="splashFilename"
+        readonly>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="readonly">
+        <input matInput
+        formControlName="faviconFilename"
         readonly>
       </mat-form-field>
     </mat-grid-tile>

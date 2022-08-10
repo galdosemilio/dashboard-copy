@@ -10,7 +10,6 @@ import { DateTime } from 'luxon'
 import * as utils from '@chart/utils'
 import { debounceTime } from 'rxjs'
 
-import './list-details.element.scss'
 import { translate } from '@chart/service/i18n'
 
 export class ListDetailsElement extends CcrElement {

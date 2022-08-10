@@ -2,8 +2,6 @@ import { CcrElement, Tab } from '@chart/model'
 import { translate } from '@chart/service/i18n'
 import { tabService } from '@chart/service'
 
-import './nav-item.element.scss'
-
 interface NavItemElementAttrs {
   link: Tab
   name: string

@@ -16,6 +16,7 @@ import {
   Sequence,
   User
 } from '@coachcare/sdk'
+import { updateFavIcon } from '@coachcare/common/shared'
 
 import { CCRConfig, CCRPalette, Palette } from '@app/config'
 import { InitLayout } from '@app/layout/store/layout'
@@ -297,6 +298,7 @@ export class ContextService {
       // organization.preferences.sequences = { enabled: true };
 
       this.updateColors(organization.assets.color || {})
+      updateFavIcon(organization.assets?.faviconUrl)
 
       if (organization.id) {
         // stores this org as default

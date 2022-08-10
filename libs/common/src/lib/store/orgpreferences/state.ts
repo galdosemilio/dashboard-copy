@@ -6,6 +6,9 @@ export interface State extends Partial<OrganizationPreferenceSingle> {
   assets: {
     logoUrl: string
     color: AppPalette
+    faviconUrl?: string
+    iconUrl?: string
+    splashUrl?: string
   }
   storeUrl: string
 }

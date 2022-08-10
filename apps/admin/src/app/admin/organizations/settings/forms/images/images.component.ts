@@ -12,14 +12,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   styleUrls: ['./images.component.scss']
 })
 export class ImagesComponent implements OnDestroy, OnInit {
-  @Input() colSpan: number
   @Input() orgId: string
   @Input() prefs: any
 
+  public colSpan = 4
   public form: FormGroup
   public iconUrl: string | undefined
   public logoUrl: string | undefined
   public splashUrl: string | undefined
+  public faviconUrl: string | undefined
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +36,7 @@ export class ImagesComponent implements OnDestroy, OnInit {
     this.iconUrl = this.prefs.iconUrl
     this.logoUrl = this.prefs.logoUrl
     this.splashUrl = this.prefs.splashUrl
+    this.faviconUrl = this.prefs.faviconUrl
   }
 
   public updateLogo(name: string, data: any): void {
@@ -47,7 +49,8 @@ export class ImagesComponent implements OnDestroy, OnInit {
       logoBaseUrl: ['', Validators.required],
       logoFilename: [''],
       iconFilename: [''],
-      splashFilename: ['']
+      splashFilename: [''],
+      faviconFilename: ['']
     })
 
     this.form.patchValue(this.prefs)
@@ -69,7 +72,8 @@ export class ImagesComponent implements OnDestroy, OnInit {
         logoBaseUrl: formValue.logoBaseUrl,
         logoFilename: formValue.logoFilename,
         iconFilename: formValue.iconFilename,
-        splashFilename: formValue.splashFilename
+        splashFilename: formValue.splashFilename,
+        faviconFilename: formValue.faviconFilename
       })
       this.notifier.success(_('NOTIFY.SUCCESS.SETTINGS_UPDATED'))
       this.form.patchValue({ logoBaseUrl: '' })
