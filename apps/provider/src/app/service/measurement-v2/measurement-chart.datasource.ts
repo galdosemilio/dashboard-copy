@@ -20,7 +20,10 @@ import { chain, flatMap, slice, sortBy } from 'lodash'
 import * as tinycolor from 'tinycolor2'
 import { TranslateService } from '@ngx-translate/core'
 import { generateChartTooltip } from './helpers'
-import { MEASUREMENT_MAX_ENTRIES_PER_DAY } from './measurement.datasource'
+import {
+  MEASUREMENT_MAX_ENTRIES_PER_DAY,
+  MEASUREMENT_MAX_ENTRIES_PER_DAY_DAY_CHART_VIEW_ONLY
+} from './measurement.datasource'
 import { DataPointEntry } from './model'
 import { AppState } from '@app/store/state'
 
@@ -74,15 +77,20 @@ export class MeasurementChartDataSource extends ChartDataSource<
     /**
      * Grouping by day and limiting the amount of entries per day
      */
+    const measurementMaxEntriesPerDay =
+      this.timeframe === 'day'
+        ? MEASUREMENT_MAX_ENTRIES_PER_DAY_DAY_CHART_VIEW_ONLY
+        : MEASUREMENT_MAX_ENTRIES_PER_DAY
+
     const preprocessedEntries = chain(sortedResult)
       .groupBy((entry) => moment(entry.recordedAt.utc).format('YYYY-MM-DD'))
       .flatMap((group) => {
-        if (group.length <= MEASUREMENT_MAX_ENTRIES_PER_DAY) {
+        if (group.length <= measurementMaxEntriesPerDay) {
           return group
         }
 
         this.hasTooMuchForSingleDay = true
-        return slice(group, -MEASUREMENT_MAX_ENTRIES_PER_DAY, group.length)
+        return slice(group, -measurementMaxEntriesPerDay, group.length)
       })
       .value()
 
@@ -155,13 +163,13 @@ export class MeasurementChartDataSource extends ChartDataSource<
         tooltipFormat = 'ddd, MMM D h:mm a'
     }
 
-    this.headings = sortedResult.map((entry) =>
+    this.headings = preprocessedEntries.map((entry) =>
       moment(entry.recordedAt.utc).format(tooltipFormat)
     )
 
-    const startDate = moment(sortedResult[0]?.recordedAt.utc)
+    const startDate = moment(preprocessedEntries[0]?.recordedAt.utc)
     const endDate = moment(
-      sortedResult[sortedResult.length - 1]?.recordedAt.utc
+      preprocessedEntries[preprocessedEntries.length - 1]?.recordedAt.utc
     )
     const tickDuration = Math.round(
       moment.duration(endDate.diff(startDate)).asDays() / xMaxTicks - 2
@@ -169,14 +177,16 @@ export class MeasurementChartDataSource extends ChartDataSource<
 
     const emptyGroup = this.createEmptyDateGroups({
       start:
-        this.timeframe === 'alltime' && sortedResult.length
-          ? moment(sortedResult[0].recordedAt.utc)
+        this.timeframe === 'alltime' && preprocessedEntries.length
+          ? moment(preprocessedEntries[0].recordedAt.utc)
               .subtract(tickDuration, 'day')
               .toDate()
           : this.criteria.recordedAt.start,
       end:
-        this.timeframe === 'alltime' && sortedResult.length
-          ? moment(sortedResult[sortedResult.length - 1].recordedAt.utc)
+        this.timeframe === 'alltime' && preprocessedEntries.length
+          ? moment(
+              preprocessedEntries[preprocessedEntries.length - 1].recordedAt.utc
+            )
               .add(tickDuration, 'day')
               .toDate()
           : this.criteria.recordedAt.end

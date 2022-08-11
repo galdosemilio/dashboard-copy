@@ -15,7 +15,8 @@ import {
   MEASUREMENT_MAX_ENTRIES_PER_DAY,
   MeasurementAggregation,
   MeasurementSummaryData,
-  MeasurementTimeframe
+  MeasurementTimeframe,
+  MEASUREMENT_MAX_ENTRIES_PER_DAY_DAY_CHART_VIEW_ONLY
 } from '@app/service'
 import { _, ChartData, DateNavigatorOutput, SelectOptions } from '@app/shared'
 import { filter, merge } from 'lodash'
@@ -65,6 +66,10 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         const tickSlotAmount = this.timeframe === 'week' ? 8 : 31
+        const measurementMaxEntriesPerDay =
+          this.timeframe === 'day'
+            ? MEASUREMENT_MAX_ENTRIES_PER_DAY_DAY_CHART_VIEW_ONLY
+            : MEASUREMENT_MAX_ENTRIES_PER_DAY
 
         chart.config.data.datasets.forEach((dataset) => {
           const metadata: ChartData = Object.values(dataset._meta)[0]
@@ -75,7 +80,7 @@ export class MeasurementChartComponent implements OnInit, OnChanges, OnDestroy {
 
           const chartWidth = metadata.data[0]?._xScale.width ?? 0
           const offset =
-            chartWidth / tickSlotAmount / MEASUREMENT_MAX_ENTRIES_PER_DAY
+            chartWidth / tickSlotAmount / measurementMaxEntriesPerDay
 
           let previousDate = ''
           let cumulativeOffset = 0

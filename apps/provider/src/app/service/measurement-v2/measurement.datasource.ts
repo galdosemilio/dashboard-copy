@@ -18,6 +18,7 @@ import { CcrTableSortDirective } from '@app/shared'
 import { measurementTableRowMapper } from './helpers'
 
 export const MEASUREMENT_MAX_ENTRIES_PER_DAY = 24
+export const MEASUREMENT_MAX_ENTRIES_PER_DAY_DAY_CHART_VIEW_ONLY = 100
 export const LOAD_MORE_ROW_BASE = Object.freeze({
   shouldShowDate: false,
   isLoadMore: true,
