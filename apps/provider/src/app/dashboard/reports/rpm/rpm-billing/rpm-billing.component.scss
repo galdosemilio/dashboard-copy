@@ -136,7 +136,8 @@ app-reports-rpm-billing {
       }
 
       & > td.first-name-cell,
-      & > td.last-name-cell {
+      & > td.last-name-cell,
+      & > td.supervising-provider-cell {
         &:hover {
           text-decoration: underline;
         }
@@ -195,6 +196,9 @@ app-reports-rpm-billing {
         margin-left: 5px;
         cursor: pointer;
       }
+    }
+    .supervising-provider-cell {
+      min-width: 200px;
     }
 
     .highlighted-cell {

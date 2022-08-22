@@ -255,6 +255,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.csvSeparator +
         'Secondary Diagnosis' +
         this.csvSeparator +
+        'Supervising Provider' +
+        this.csvSeparator +
         'Organization ID' +
         this.csvSeparator +
         'Organization Name' +
@@ -312,6 +314,12 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           `"${entry.rpm?.diagnosis?.primary || ''}"` +
           this.csvSeparator +
           `"${entry.rpm?.diagnosis?.secondary || ''}"` +
+          this.csvSeparator +
+          `"${
+            entry.rpm?.supervisingProvider
+              ? `${entry.rpm?.supervisingProvider.firstName} ${entry.rpm?.supervisingProvider.lastName}`
+              : ''
+          }"` +
           this.csvSeparator +
           `"${entry.organization.id}"` +
           this.csvSeparator +

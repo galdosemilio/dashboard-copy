@@ -142,6 +142,10 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             {{ 'RPM.SECONDARY_DIAGNOSIS' | translate }}
         </th>
 
+        <th class="supervising-provider-cell">
+            {{ 'GLOBAL.SUPERVISING_PROVIDER' | translate }}
+        </th>
+
         <th class="status-cell">
             <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
                 <p>{{ 'BOARD.STATUS' | translate }}</p>
@@ -216,6 +220,12 @@ class="ccr-table ccr-expand-table ccr-table-stats">
 
             <td class="diagnosis-cell">
                 <ccr-expandable-text *ngIf="row.rpm?.diagnosis?.secondary" [text]="row.rpm.diagnosis.secondary"></ccr-expandable-text>
+            </td>
+
+            <td class="supervising-provider-cell">
+                <span *ngIf="row.rpm?.supervisingProvider" [accountType]="'3'" [ccrAccountLink]="row.rpm.supervisingProvider.id">
+                    {{ row.rpm.supervisingProvider.firstName }} {{ row.rpm.supervisingProvider.lastName }}
+                </span>
             </td>
 
             <td>
