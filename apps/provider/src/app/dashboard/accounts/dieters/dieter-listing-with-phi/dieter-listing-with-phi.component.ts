@@ -267,7 +267,11 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
       const rawPreference = this.context.user.measurementPreference
       const weightUnit = rawPreference === 'metric' ? 'kg' : 'lbs'
 
-      const temporalSource = new DieterListingDataSource(this.database)
+      const temporalSource = new DieterListingDataSource(
+        this.database,
+        undefined,
+        false
+      )
 
       temporalSource.addDefault(criteria)
 

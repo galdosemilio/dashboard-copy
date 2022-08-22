@@ -29,7 +29,8 @@ export class DieterListingDataSource extends TableDataSource<
 
   constructor(
     protected database: DieterListingDatabase,
-    private paginator?: CcrPaginatorComponent
+    private paginator?: CcrPaginatorComponent,
+    private addTableHeaders: boolean = true
   ) {
     super()
 
@@ -95,7 +96,10 @@ export class DieterListingDataSource extends TableDataSource<
           isHidden: true
         }
 
-        dieterListingItem.organizations.push(organizationsHeader as any)
+        if (this.addTableHeaders) {
+          dieterListingItem.organizations.push(organizationsHeader as any)
+        }
+
         dieterListingItem.orgCount = item.organizations.data.length
 
         item.organizations.data.forEach((org) => {
@@ -134,7 +138,10 @@ export class DieterListingDataSource extends TableDataSource<
           isHidden: true
         }
 
-        dieterListingItem.packages.push(packagesHeader as any)
+        if (this.addTableHeaders) {
+          dieterListingItem.packages.push(packagesHeader as any)
+        }
+
         dieterListingItem.packageCount = item.packages.data.length
 
         item.packages.data.forEach((pkg) => {
