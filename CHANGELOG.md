@@ -1,3 +1,10 @@
+## [1.92.1](https://github.com/coachcare/dashboard/compare/v1.92.0...v1.92.1) (2022-08-25)
+
+
+### Bug Fixes
+
+* removed default video background ([2e848b4](https://github.com/coachcare/dashboard/commit/2e848b476a6bf5ba84e6da89b7bdfc3ce9ec9482))
+
 # [1.92.0](https://github.com/coachcare/dashboard/compare/v1.91.1...v1.92.0) (2022-08-25)
 
 
