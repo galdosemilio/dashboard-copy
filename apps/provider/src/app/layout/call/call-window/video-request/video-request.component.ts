@@ -18,7 +18,7 @@ import { Subject, timer } from 'rxjs'
   styleUrls: ['./video-request.component.scss']
 })
 export class CallVideoRequestComponent implements OnDestroy, OnInit {
-  callPollInterval: number
+  callPollInterval: any
   callState: CallState
   acceptedCall = false
   audioPopupTrigger: Subject<void> = new Subject<void>()

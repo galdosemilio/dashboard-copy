@@ -3,7 +3,7 @@ import { createLocalAudioTrack, LocalAudioTrack } from 'twilio-video'
 
 export interface MicLevelIndicatorState {
   analyser?: AnalyserNode
-  analyserInterval?: number
+  analyserInterval?: any
   microphone?: MediaStreamAudioSourceNode
   track?: LocalAudioTrack
 }

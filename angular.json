@@ -70,7 +70,10 @@
               "linkifyjs",
               "@cordobo/qrcode",
               "@coachcare/sdk",
-              "@spree/storefront-api-v2-sdk"
+              "@spree/storefront-api-v2-sdk",
+              "jsoneditor",
+              "owasp-password-strength-test",
+              "long"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -589,7 +592,10 @@
               "pdfmake",
               "@coachcare/sdk",
               "seedrandom",
-              "@spree/storefront-api-v2-sdk"
+              "@spree/storefront-api-v2-sdk",
+              "jsoneditor",
+              "owasp-password-strength-test",
+              "long"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

@@ -35,7 +35,7 @@ const routes: Routes = [
       account: DieterResolver
     },
     children: [
-      { path: '', redirectTo: 'dashboard' },
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'dashboard', component: DieterDashboardComponent },
       { path: 'settings', component: DieterSettingsComponent },
       { path: 'journal', component: DieterJournalComponent },

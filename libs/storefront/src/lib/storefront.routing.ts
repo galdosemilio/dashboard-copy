@@ -18,6 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        pathMatch: 'full',
         redirectTo: 'product'
       },
       { path: 'order-history', component: StorefrontOrderHistoryPageComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            pathMatch: 'full',
             redirectTo: 'cart'
           },
           {

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { RouterModule, RunGuardsAndResolvers } from '@angular/router'
+import { RouterModule, Routes, RunGuardsAndResolvers } from '@angular/router'
 import {
   FormAnswersResolver,
   FormDisplayComponent,
@@ -13,7 +13,7 @@ import {
 import { ContentComponent } from './content'
 import { DieterSubmissionsComponent } from './forms/dieter-submissions'
 
-const routes = [
+const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
