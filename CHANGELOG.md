@@ -1,3 +1,21 @@
+# [1.92.0](https://github.com/coachcare/dashboard/compare/v1.91.1...v1.92.0) (2022-08-25)
+
+
+### Bug Fixes
+
+* adjusted unenroll then enroll behavior [FRON-2830] ([53f9419](https://github.com/coachcare/dashboard/commit/53f9419b4045bf4572fdf4f4e694bf62fcc0c81b))
+* convert encoded url for color [FRON-2913] ([7c9b39a](https://github.com/coachcare/dashboard/commit/7c9b39aa03578a18ca946c27b0e4afa9e9a58a0d))
+* delete recurring meeting [FRON-2860] ([39b6721](https://github.com/coachcare/dashboard/commit/39b6721df014aea34c9a178cd1fb44ada0c26d17))
+* export patient listings [FRON-2912] ([1b21d92](https://github.com/coachcare/dashboard/commit/1b21d922d780bafd92be4cddc64771cbe867d7ad))
+* fetch data point API call is failing food tab [FRON-2892] ([4b8d893](https://github.com/coachcare/dashboard/commit/4b8d893749390ae0fa54a3666beb746dce28a16d))
+* measurement chart view [FRON-2910] ([39a55aa](https://github.com/coachcare/dashboard/commit/39a55aa60ea4994e758c4164b7ce186f8ed5f277))
+* toggle video conference background [FRON-2870] ([77561a0](https://github.com/coachcare/dashboard/commit/77561a078f004d62f2f4420d9a732e124d59716a))
+
+
+### Features
+
+* add phase for alert notification listing [FRON-2855] ([7741675](https://github.com/coachcare/dashboard/commit/774167516c5bf81bad53b8d4d0d01d70507ef6fd))
+
 ## [1.91.1](https://github.com/coachcare/dashboard/compare/v1.91.0...v1.91.1) (2022-08-08)
 
 
