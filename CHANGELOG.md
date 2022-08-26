@@ -1,3 +1,10 @@
+# [1.93.0](https://github.com/coachcare/dashboard/compare/v1.92.1...v1.93.0) (2022-08-26)
+
+
+### Features
+
+* added data point missing alert support on creation and edition [FRON-2809] ([2a66ed4](https://github.com/coachcare/dashboard/commit/2a66ed42388572467b9d0a04ebe7ebec96eb6d9c))
+
 ## [1.92.1](https://github.com/coachcare/dashboard/compare/v1.92.0...v1.92.1) (2022-08-25)
 
 
