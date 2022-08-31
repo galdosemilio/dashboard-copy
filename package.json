@@ -138,7 +138,7 @@
     "lodash": "^4.17.21",
     "luxon": "^1.27.0",
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.33",
+    "moment-timezone": "^0.5.35",
     "ng2-charts": "^2.4.2",
     "ngrx-store-freeze": "^0.2.4",
     "ngx-color-picker": "^12.0.1",
