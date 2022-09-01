@@ -57,7 +57,7 @@ export class MetricsChartComponent implements OnDestroy, OnInit {
     { value: 'alltime', viewValue: _('SELECTOR.VIEWBY.ALL_TIME') }
   ]
 
-  private refresh$ = new Subject<any>()
+  private refresh$ = new Subject<boolean | void>()
 
   constructor(private cdr: ChangeDetectorRef, private config: ConfigService) {}
 

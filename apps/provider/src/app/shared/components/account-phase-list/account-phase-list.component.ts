@@ -17,12 +17,13 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
   styleUrls: ['./account-phase-list.component.scss']
 })
 export class AccountPhaseListComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChild(CcrPaginatorComponent, { static: true })
   paginator: CcrPaginatorComponent
 
   source: PhasesDataSource
-  param$ = new Subject<any>()
+  param$ = new Subject<void>()
 
   clinics = [] // available options
   clinic // selected value

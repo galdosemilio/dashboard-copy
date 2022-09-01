@@ -8,7 +8,7 @@ import { NotifierService } from './notifier.service'
 export class CallControlService {
   billableServices$ = new Subject<BillableService[]>()
 
-  private getBillableServices$ = new Subject()
+  private getBillableServices$ = new Subject<void>()
   private billableServices: BillableService[] = []
 
   constructor(

@@ -127,7 +127,7 @@ export abstract class CcrDataSource<
   /**
    * Output Emitter to refresh the UI.
    */
-  change$ = new Subject<any>()
+  change$ = new Subject<void>()
 
   /**
    * Disconnect observable.
@@ -277,9 +277,11 @@ export abstract class CcrDataSource<
     }
 
     // merge all the getters outputs
-    this.criteria = (values.length > 1
-      ? values.reduce((a, b) => Object.assign({}, a, b))
-      : values[0]) as C
+    this.criteria = (
+      values.length > 1
+        ? values.reduce((a, b) => Object.assign({}, a, b))
+        : values[0]
+    ) as C
 
     // TODO implement Observable of criteria, and trigger on distinct
     return this.criteria.doReload && this.isLoaded

@@ -76,7 +76,7 @@ export abstract class AppDataSource<
   /**
    * Output Emitter to refresh the UI.
    */
-  change$ = new Subject<any>()
+  change$ = new Subject<void>()
 
   /**
    * Disconnect observable.
@@ -264,9 +264,11 @@ export abstract class AppDataSource<
     }
 
     // merge all the getters outputs
-    this.criteria = (values.length > 1
-      ? values.reduce((a: any, b: any) => ({ ...a, ...b }))
-      : values[0]) as C
+    this.criteria = (
+      values.length > 1
+        ? values.reduce((a: any, b: any) => ({ ...a, ...b }))
+        : values[0]
+    ) as C
 
     // TODO implement Observable of criteria, and trigger on distinct
     return this.criteria.doReload && this.isLoaded

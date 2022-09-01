@@ -90,7 +90,7 @@ export class FileExplorerTableComponent
       this.paginator.pageIndex = 0
     }
 
-    this.paginator.page.next()
+    this.paginator.page.next(this.paginator)
   }
 
   get paginationEnabled(): boolean {

@@ -67,13 +67,13 @@ export class OrganizationSearchComponent implements OnInit {
   @Input() suffixIcon?: string
 
   @Output()
-  onSelect: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()
+  onSelect: Subject<OrganizationEntity | void> = new Subject<OrganizationEntity | void>()
   @Output()
   filteredOrgs: Subject<OrganizationEntity[]> = new Subject<
     OrganizationEntity[]
   >()
   @Output()
-  select: Subject<OrganizationEntity> = new Subject<OrganizationEntity>()
+  select: Subject<OrganizationEntity | void> = new Subject<OrganizationEntity | void>()
 
   @ViewChild(MatAutocompleteTrigger, { static: false })
   trigger: MatAutocompleteTrigger

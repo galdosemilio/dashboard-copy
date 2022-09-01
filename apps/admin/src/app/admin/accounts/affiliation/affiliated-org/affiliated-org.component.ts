@@ -34,7 +34,7 @@ export class AffiliatedOrgComponent implements OnInit {
 
   @ViewChild(CcrPaginatorComponent, { static: false })
   paginator: CcrPaginatorComponent
-  refresh$ = new Subject<any>()
+  refresh$ = new Subject<void>()
 
   constructor(
     private route: ActivatedRoute,

@@ -41,7 +41,7 @@ export class ClinicsComponent implements OnInit, OnDestroy {
   public permissions?: AllOrgPermissions
   public permissions$: Subject<AllOrgPermissions> =
     new Subject<AllOrgPermissions>()
-  public query$: Subject<string> = new Subject<string>()
+  public query$: Subject<string | void> = new Subject<string>()
   public showCreateClinic = false
   public sort: MatSort = new MatSort()
   public source: ClinicsDataSource | null

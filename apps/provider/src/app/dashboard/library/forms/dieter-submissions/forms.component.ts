@@ -87,7 +87,9 @@ export class DieterSubmissionsComponent implements OnInit {
   get formFilter(): string {
     return this._formFilter
   }
-  private formFilterChange$: Subject<string> = new Subject<string>()
+  private formFilterChange$: Subject<string | void> = new Subject<
+    string | void
+  >()
   private formId: string
   private _selectedForm: Form
   private autoAssignForm: boolean

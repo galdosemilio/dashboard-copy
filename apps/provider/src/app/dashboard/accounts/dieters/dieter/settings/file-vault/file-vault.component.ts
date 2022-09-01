@@ -22,7 +22,7 @@ export class DieterFileVaultComponent implements OnInit {
   source: VaultDatasource
   status: 'loading' | 'file-vault' | 'select-org' = 'loading'
 
-  private singleOrg$: Subject<string> = new Subject<string>()
+  private singleOrg$: Subject<string | void> = new Subject<string>()
 
   constructor(
     private associationsDatabase: AssociationsDatabase,

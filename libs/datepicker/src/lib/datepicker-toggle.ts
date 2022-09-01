@@ -15,13 +15,14 @@ import {
   Component,
   ContentChild,
   Directive,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core'
-import { merge, of as obsOf, Subscription } from 'rxjs'
+import { merge, Subscription } from 'rxjs'
 import { MatDatepicker } from './datepicker'
 import { MatDatepickerIntl } from './datepicker-intl'
 
@@ -49,7 +50,8 @@ export class MatDatepickerToggleIcon {}
   preserveWhitespaces: false
 })
 export class MatDatepickerToggle<D>
-  implements AfterContentInit, OnChanges, OnDestroy {
+  implements AfterContentInit, OnChanges, OnDestroy
+{
   private _stateChanges = Subscription.EMPTY
 
   /** Datepicker instance that the button will toggle. */
@@ -111,16 +113,16 @@ export class MatDatepickerToggle<D>
   private _watchStateChanges() {
     const datepickerDisabled = this.datepicker
       ? this.datepicker._disabledChange
-      : obsOf()
+      : new EventEmitter()
 
     const inputDisabled =
       this.datepicker && this.datepicker._datepickerInput
         ? this.datepicker._datepickerInput._disabledChange
-        : obsOf()
+        : new EventEmitter()
 
     const datepickerToggled = this.datepicker
       ? merge(this.datepicker.openedStream, this.datepicker.closedStream)
-      : obsOf()
+      : new EventEmitter()
 
     this._stateChanges.unsubscribe()
     this._stateChanges = merge(

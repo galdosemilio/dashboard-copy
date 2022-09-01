@@ -16,7 +16,7 @@ import { Form } from '@app/shared/model'
 })
 export class FormSearchComponent implements OnDestroy, OnInit {
   @Output()
-  change: Subject<string> = new Subject<string>()
+  change: Subject<string | void> = new Subject<string | void>()
 
   form: FormGroup
   forms: any[]
