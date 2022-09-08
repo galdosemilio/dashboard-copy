@@ -76,7 +76,9 @@ export class AppElement extends HTMLElement {
     )
 
     if (syntheticType) {
-      dataPointTypeIds = syntheticType.sourceTypeIds
+      dataPointTypeIds = syntheticType.sourceTypeIds.sort((sourceId) =>
+        sourceId === DataPointTypes.BLOOD_PRESSURE_SYSTOLIC ? -1 : 1
+      )
     }
 
     const isRequiredWeight = requiredWeightIds.some((requiredWeightId) =>

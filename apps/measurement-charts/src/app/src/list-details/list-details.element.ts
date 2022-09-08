@@ -171,6 +171,9 @@ export class ListDetailsElement extends CcrElement {
         const dataPoint = group.dataPoints[0]
         const unit = utils.unit(dataPoint.type, api.baseData.metric)
         const value = group.dataPoints
+          .sort((entry) =>
+            entry.type.id === DataPointTypes.BLOOD_PRESSURE_SYSTOLIC ? -1 : 1
+          )
           .map((t) =>
             utils.format(
               convertToReadableFormat(t.value, t.type, api.baseData.metric),
