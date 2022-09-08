@@ -41,7 +41,7 @@ export class VimeoFormComponent implements BindForm {
   private _details: FileExplorerContent
   private embedUrl: string
   private pattern: RegExp =
-    /(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i
+    /(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)\/*([a-z0-9]+)?/i
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -90,7 +90,9 @@ export class VimeoFormComponent implements BindForm {
       }
 
       this.url = this.domSanitizer.bypassSecurityTrustResourceUrl(
-        `https://player.vimeo.com/video/${params.id}`
+        `https://player.vimeo.com/video/${params.id}${
+          params.hash ? '?h=' + params.hash : ''
+        }`
       )
       this.form.patchValue({
         url: this.url.changingThisBreaksApplicationSecurity
@@ -102,10 +104,11 @@ export class VimeoFormComponent implements BindForm {
     }
   }
 
-  private processAsDefault(url: string): { id: string } {
+  private processAsDefault(url: string): { id: string; hash?: string } {
     const parsed = url.match(this.pattern)
     return {
-      id: parsed[1]
+      id: parsed[1],
+      hash: parsed[2]
     }
   }
 }
