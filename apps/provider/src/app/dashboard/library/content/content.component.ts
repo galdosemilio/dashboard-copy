@@ -504,9 +504,14 @@ export class ContentComponent implements OnDestroy, OnInit {
   private async updateContentPrompt(
     content: FileExplorerContent
   ): Promise<void> {
-    const packages: Entity[] = await this.datasource.getAllContentPackage({
-      id: content.id
-    })
+    let packages: Entity[] = []
+
+    if (content.hasPackageAssociations) {
+      packages = await this.datasource.getAllContentPackage({
+        id: content.id
+      })
+    }
+
     this.dialog
       .open(ContentEditDialog, {
         autoFocus: false,

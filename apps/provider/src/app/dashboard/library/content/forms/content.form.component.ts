@@ -14,16 +14,13 @@ import {
   FileExplorerContent,
   FileExplorerContentAvailability
 } from '@app/dashboard/library/content/models'
-import { ContextService } from '@app/service'
+import { ContextService, NotifierService } from '@app/service'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { Package } from '@app/shared/components/package-table'
-import {
-  PackageDatabase,
-  PackageDatasource
-} from '@app/shared/components/package-table/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { _ } from '@coachcare/backend/shared'
 import { resolveConfig } from '@app/config/section/utils'
+import { PackageOrganization, PackageOrganizationSingle } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -109,11 +106,10 @@ export class ContentFormComponent implements BindForm, OnInit {
     { value: 'prescribery', name: _('BOARD.WELLCORE_DASHBOARD_PRESCRIBERY') }
   ]
   public form: FormGroup
-  public hasPackages: boolean
   public hideFirstSection = false
   public organization: any
-  public packages: Package[] = []
   public shownPackages: Package[] = []
+  public morePackages: boolean = false
   public patientVisibilities = [
     { value: false, name: _('LIBRARY.CONTENT.HIDDEN_FROM_PATIENT') },
     { value: true, name: _('LIBRARY.CONTENT.VISIBLE_TO_PATIENT') }
@@ -141,31 +137,23 @@ export class ContentFormComponent implements BindForm, OnInit {
     name: '',
     availability: ''
   }
-  private source: PackageDatasource
 
   constructor(
     private context: ContextService,
-    private database: PackageDatabase,
+    private packageOrganization: PackageOrganization,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private notifier: NotifierService
   ) {
     this.organization = this.context.organization
-    this.source = new PackageDatasource(this.context, this.database)
-    this.source
-      .connect()
-      .pipe(untilDestroyed(this))
-      .subscribe((packages: Package[]) => {
-        this.hasPackages = packages.length > 0
-        this.packages = packages
-        this.fetchingPackages = false
 
-        this.refreshShownPackages()
-      })
     this.createForm()
     this.fetchingPackages = true
   }
 
   ngOnInit(): void {
+    void this.refreshShownPackages()
+
     this.form.controls.isPublic.setValidators(
       this.mode !== 'vault' ? Validators.required : []
     )
@@ -234,7 +222,7 @@ export class ContentFormComponent implements BindForm, OnInit {
           }
         }
 
-        this.refreshShownPackages()
+        void this.refreshShownPackages()
       })
   }
 
@@ -311,15 +299,32 @@ export class ContentFormComponent implements BindForm, OnInit {
       })
   }
 
-  private refreshShownPackages(): void {
-    if (
-      this.form &&
-      this.form.value.packages &&
-      this.form.value.packages.length
-    ) {
-      this.shownPackages = this.packages.filter(
-        (pkg) => !!this.form.value.packages.find((p) => p.id === pkg.id)
+  private async refreshShownPackages(): Promise<void> {
+    if (!this.form.value.packages?.length) {
+      return
+    }
+
+    try {
+      const res = await this.packageOrganization.getAll({
+        organization: this.organization.id,
+        isActive: true,
+        package: this.form.value.packages.map((entry) => entry.id),
+        limit: 10
+      })
+
+      const packages = res.data.map(
+        (r: PackageOrganizationSingle) =>
+          new Package(r.package, r, {
+            organizationId: this.organization.id
+          })
       )
+
+      this.shownPackages = packages
+      this.morePackages = res.pagination.next === undefined ? false : true
+    } catch (err) {
+      this.notifier.error(err)
+    } finally {
+      this.fetchingPackages = false
     }
   }
 }

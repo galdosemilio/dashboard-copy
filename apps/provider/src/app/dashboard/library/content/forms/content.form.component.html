@@ -96,7 +96,7 @@
 
             <div fxLayout="column" fxLayoutGap="3px">
                 <div fxLayout="row" fxLayoutGap="5px">
-                    <mat-radio-button [value]="2" [disabled]="!hasPackages || readonlyFields.indexOf('availability') > -1" (click)="openPackageDialog(true)">
+                    <mat-radio-button [value]="2" [disabled]="readonlyFields.indexOf('availability') > -1" (click)="openPackageDialog(true)">
                         <div fxLayout="column">
                         <span>{{ 'LIBRARY.CONTENT.BY_PACKAGE' | translate }}</span>
 
@@ -111,6 +111,9 @@
 
                 <small class="text-secondary" *ngFor="let shownPackage of shownPackages">
                     • ({{ 'LIBRARY.CONTENT.ID' | translate }} {{ shownPackage.id }}) {{ shownPackage.title }}
+                </small>
+                <small class="text-secondary" *ngIf="morePackages">
+                    • {{ 'GLOBAL.MORE' | translate }}...
                 </small>
             </div>
         </div>
