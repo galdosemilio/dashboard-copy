@@ -3,12 +3,17 @@ import { TranslateService } from '@ngx-translate/core'
 import { findIndex } from 'lodash'
 import { Subject } from 'rxjs'
 
-import { ContextService, EventsService, NotifierService } from '@app/service'
+import {
+  ContextService,
+  EventsService,
+  NotifierService,
+  SelectedOrganization
+} from '@app/service'
 import { SelectOption, _ } from '@app/shared/utils'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { AlertsDatabase, AlertsDataSource } from './services'
 import { debounceTime } from 'rxjs/operators'
-import { NotificationRequest, Package } from '@coachcare/sdk'
+import { NotificationRequest, PackageOrganization } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()
@@ -58,7 +63,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
     private bus: EventsService,
     private notifier: NotifierService,
     private database: AlertsDatabase,
-    private packageService: Package
+    private packageOrganization: PackageOrganization
   ) {}
 
   // refresh chart trigger
@@ -111,26 +116,26 @@ export class AlertsComponent implements OnInit, OnDestroy {
 
     this.context.organization$
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.resolvePackages())
+      .subscribe((org) => this.resolvePackages(org))
   }
 
-  private async resolvePackages() {
+  private async resolvePackages(org: SelectedOrganization) {
     this.package = null
     this.refresh()
     this.packages = [{ viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined }]
 
     try {
-      const res = await this.packageService.getAll({
+      const res = await this.packageOrganization.getAll({
+        organization: org.id,
         isActive: true,
-        limit: 'all',
-        offset: 0
+        limit: 'all'
       })
 
       this.packages = [
         ...this.packages,
         ...res.data.map((entry) => ({
-          viewValue: entry.title,
-          value: Number(entry.id)
+          viewValue: entry.package.title,
+          value: Number(entry.package.id)
         }))
       ]
     } catch (err) {
