@@ -1,17 +1,23 @@
+import { Meeting } from '@app/shared/model'
 import * as moment from 'moment'
 import { determineRecurringDeleteTimestamp } from './recurring-delete-after'
 
+const meeting = {
+  time: moment().add(3, 'day')
+} as Meeting
+
 describe('Determine Recurring Delete Timestamp', function () {
   describe('1. recurring', function () {
-    it('should return 1 mins after timestamp from now', function () {
+    it('should return meeting timestamp', function () {
       const now = moment()
       const res = determineRecurringDeleteTimestamp(
+        meeting,
         now.clone().add(2, 'day'),
         'recurring',
         now
       )
 
-      expect(res.diff(now, 'minute')).toEqual(1)
+      expect(meeting.time.diff(res, 'second')).toEqual(1)
     })
   })
 
@@ -19,6 +25,7 @@ describe('Determine Recurring Delete Timestamp', function () {
     it('should return the meeting timestamp if the meeting is set in the future', function () {
       const deleteAfter = moment().add(2, 'day')
       const res = determineRecurringDeleteTimestamp(
+        meeting,
         deleteAfter,
         'recurringAfter'
       )
@@ -30,6 +37,7 @@ describe('Determine Recurring Delete Timestamp', function () {
       const now = moment()
       const deleteAfter = now.clone().startOf('day')
       const res = determineRecurringDeleteTimestamp(
+        meeting,
         deleteAfter,
         'recurringAfter'
       )

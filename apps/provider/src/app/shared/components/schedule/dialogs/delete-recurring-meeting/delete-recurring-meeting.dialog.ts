@@ -35,7 +35,8 @@ export class DeleteRecurringMeetingDialog implements OnInit {
   public onSubmit(): void {
     const formValue = this.form.value
     const after = determineRecurringDeleteTimestamp(
-      moment(formValue.after).startOf('day'),
+      this.meeting,
+      formValue.after.clone().startOf('day'),
       formValue.deleteMode
     )
 

@@ -499,6 +499,7 @@ export class ViewMeetingDialog implements OnDestroy, OnInit {
     try {
       const formValue = this.deleteRecurringForm.value
       const after = determineRecurringDeleteTimestamp(
+        this.meeting,
         moment(formValue.after).startOf('day'),
         formValue.deleteMode
       )
