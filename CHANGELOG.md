@@ -1,3 +1,10 @@
+## [1.93.2](https://github.com/coachcare/dashboard/compare/v1.93.1...v1.93.2) (2022-09-15)
+
+
+### Bug Fixes
+
+* show only selected org phase list [FRON-2939] ([c6c0369](https://github.com/coachcare/dashboard/commit/c6c036909ef943da4d23b7a32ab3cce74686f0ef))
+
 ## [1.93.1](https://github.com/coachcare/dashboard/compare/v1.93.0...v1.93.1) (2022-09-15)
 
 
