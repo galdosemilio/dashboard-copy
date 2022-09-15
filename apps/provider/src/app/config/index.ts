@@ -26,6 +26,8 @@ export {
 
 export * from './cookies.config'
 
+export * from './content.config'
+
 export const Config: CCRConfig = {
   app: AppConfig,
   chart: ChartConfig,

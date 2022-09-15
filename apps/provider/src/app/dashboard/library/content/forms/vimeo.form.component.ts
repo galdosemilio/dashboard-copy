@@ -5,7 +5,7 @@ import { FileExplorerContent } from '@app/dashboard/library/content/models'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { debounceTime } from 'rxjs/operators'
 import { LoggingService } from '@app/service/logging.service'
-
+import { VIMEO_REGEX } from '@app/config'
 interface FormEmbedControl {
   embedUrl?: string
 }
@@ -40,8 +40,7 @@ export class VimeoFormComponent implements BindForm {
 
   private _details: FileExplorerContent
   private embedUrl: string
-  private pattern: RegExp =
-    /(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)\/*([a-z0-9]+)?/i
+  private pattern: RegExp = VIMEO_REGEX
 
   constructor(
     private domSanitizer: DomSanitizer,
