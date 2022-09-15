@@ -11,7 +11,7 @@ import { DateTime } from 'luxon'
 
 import './list.element.scss'
 import { ListItem } from '@chart/model'
-import { groupBy, uniqBy } from 'lodash'
+import { groupBy, orderBy, uniqBy } from 'lodash'
 import * as utils from '@chart/utils'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
@@ -145,7 +145,8 @@ export class ListElement extends CcrElement {
   }
 
   private addItemToListView(entries: MeasurementDataPointAggregate[]) {
-    const list = this.getListItems(entries)
+    const data = this.getListItems(entries)
+    const list = orderBy(data, ['recordedAt'], ['desc'])
 
     if (list.length === 0 && this.firstTime) {
       this.showEmptyListError()
