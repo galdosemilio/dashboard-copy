@@ -1,3 +1,11 @@
+## [1.93.1](https://github.com/coachcare/dashboard/compare/v1.93.0...v1.93.1) (2022-09-15)
+
+
+### Bug Fixes
+
+* show BP measurement [FRON-2929] ([e283e6d](https://github.com/coachcare/dashboard/commit/e283e6daf7ac0756d6eeaed698d359d7e51b5038))
+* vimeo hash in private video URL [FRON-2938] ([89b7b9b](https://github.com/coachcare/dashboard/commit/89b7b9b8685c9f33e9e047e1abbeeeecfb3affee))
+
 # [1.93.0](https://github.com/coachcare/dashboard/compare/v1.92.1...v1.93.0) (2022-08-26)
 
 
