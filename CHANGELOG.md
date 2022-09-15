@@ -1,3 +1,10 @@
+## [1.93.3](https://github.com/coachcare/dashboard/compare/v1.93.2...v1.93.3) (2022-09-15)
+
+
+### Bug Fixes
+
+* regex for parse vimeo id and hash [FRON-2938] ([f230ce0](https://github.com/coachcare/dashboard/commit/f230ce075c18b7dc4bc2b58c862e088d72c7d446))
+
 ## [1.93.2](https://github.com/coachcare/dashboard/compare/v1.93.1...v1.93.2) (2022-09-15)
 
 
