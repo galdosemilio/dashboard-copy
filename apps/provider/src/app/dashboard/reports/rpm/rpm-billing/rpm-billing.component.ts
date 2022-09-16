@@ -18,9 +18,10 @@ import { ContextService, NotifierService } from '@app/service'
 import { WalkthroughService } from '@app/service/walkthrough'
 import {
   FetchRPMBillingSummaryRequest,
-  OrganizationEntity
+  OrganizationEntity,
+  PackageOrganization
 } from '@coachcare/sdk'
-import { _ } from '@app/shared/utils'
+import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
 import { get, isEmpty } from 'lodash'
 import * as moment from 'moment'
@@ -96,8 +97,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public source: RPMBillingDataSource
   public statusFilterForm: FormGroup
   public totalCount: number
+  public packages: SelectOption<number>[] = []
 
   private refresh$: Subject<void> = new Subject<void>()
+  private selectedClinic$ = new Subject<OrganizationEntity | null>()
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -108,7 +111,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     private fb: FormBuilder,
     private notifier: NotifierService,
     private store: Store<ReportsState>,
-    private walkthrough: WalkthroughService
+    private walkthrough: WalkthroughService,
+    private packageOrganization: PackageOrganization
   ) {
     this.sortHandler = this.sortHandler.bind(this)
   }
@@ -126,19 +130,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.isDesktop = this.deviceDetector.isDesktop()
-
-    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
-      if (
-        org.id === environment.coachcareOrgId ||
-        org.hierarchyPath.toString().includes(environment.coachcareOrgId)
-      ) {
-        // coachcare only
-        this.onSelectClinic(org)
-        this.isTopLevelAccount = true
-      } else {
-        this.isTopLevelAccount = false
-      }
-    })
 
     this.walkthrough.checkGuideState('rpm')
     this.store.dispatch(new ClosePanel())
@@ -159,10 +150,31 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     })
 
     this.createDataSource()
+
+    this.selectedClinic$.pipe(untilDestroyed(this)).subscribe((clinic) => {
+      this.selectedClinic = clinic
+      this.searchForm.patchValue({
+        package: null
+      })
+      void this.resolvePackages(clinic)
+      this.refresh()
+    })
+
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
+      if (org.id === environment.coachcareOrgId) {
+        // coachcare only
+        this.selectedClinic$.next(org)
+        this.isTopLevelAccount = true
+      } else {
+        this.isTopLevelAccount = false
+      }
+    })
   }
 
-  public clearSearchForm(): void {
-    this.searchForm.reset()
+  public clearSearchQuery(): void {
+    this.searchForm.patchValue({
+      query: ''
+    })
   }
 
   public download(superBillDownload: boolean = false): Promise<void> {
@@ -439,21 +451,44 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       link.download = `${rawFileName.replace(/\W/gi, '')}.xlsx`
       link.click()
     } catch (error) {
-      console.error(error)
       this.notifier.error(error)
     } finally {
       this.isLoading = false
     }
   }
 
+  private async resolvePackages(clinic: OrganizationEntity) {
+    this.packages = [{ viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined }]
+
+    if (!clinic) {
+      return
+    }
+
+    try {
+      const res = await this.packageOrganization.getAll({
+        organization: clinic.id,
+        isActive: true,
+        limit: 'all'
+      })
+
+      this.packages = [
+        ...this.packages,
+        ...res.data.map((entry) => ({
+          viewValue: entry.package.title,
+          value: Number(entry.package.id)
+        }))
+      ]
+    } catch (err) {
+      this.notifier.error(err)
+    }
+  }
+
   public onRemoveClinic(): void {
-    this.selectedClinic = null
-    this.refresh$.next()
+    this.selectedClinic$.next(null)
   }
 
   public onSelectClinic(clinic: OrganizationEntity): void {
-    this.selectedClinic = clinic
-    this.refresh$.next()
+    this.selectedClinic$.next(clinic)
   }
 
   public onStatusFilterChange($event: Event): void {
@@ -502,10 +537,11 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         status: this.statusFilterForm.value.status || 'all'
       })
     )
-    this.source.addOptional(
-      this.searchForm.controls.query.valueChanges.pipe(debounceTime(500)),
-      () => ({ query: this.searchForm.value.query || undefined })
-    )
+
+    this.searchForm.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(() => this.refresh())
+
     this.source.addOptional(this.refresh$.pipe(debounceTime(500)), () => {
       const selectedDate = moment(this.criteria.asOf)
 
@@ -514,7 +550,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           ? undefined
           : selectedDate.endOf('day').toISOString(),
 
-        organization: this.selectedClinic?.id ?? undefined
+        organization: this.selectedClinic?.id ?? undefined,
+        query: this.searchForm.value.query || undefined,
+        package: this.searchForm.value.package || undefined
       }
     })
 
@@ -525,12 +563,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       .subscribe((pageSize) => {
         this.paginator.pageSize = pageSize ?? this.paginator.pageSize
 
-        if (this.paginator.pageIndex === 0) {
-          this.refresh$.next()
-          return
-        }
-
-        this.paginator.firstPage()
+        this.refresh()
       })
 
     this.source.change$
@@ -570,7 +603,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   private createStatusFilterForm(): void {
     this.statusFilterForm = this.fb.group({ status: ['active'] })
-    this.searchForm = this.fb.group({ query: [''] })
+    this.searchForm = this.fb.group({
+      query: [''],
+      package: ['']
+    })
   }
 
   private getRPMBillingEntryContent(
@@ -810,5 +846,14 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     }, 0)
 
     this.tableContainer.nativeElement.scrollTo({ left: scrollTo })
+  }
+
+  private refresh(): void {
+    if (this.paginator.pageIndex === 0) {
+      this.refresh$.next()
+      return
+    }
+
+    this.paginator.firstPage()
   }
 }

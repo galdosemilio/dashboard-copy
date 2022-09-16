@@ -13,7 +13,7 @@
         </div>
         <small class="top-level-accout-label" *ngIf="isTopLevelAccount">{{ 'REPORTS.RPM_BILLING_TOP_LEVEL_ACCOUNT' | translate }}</small>
         <div fxFlex fxLayout="column" fxLayoutAlign="end stretch">
-            <div class="org-search-container" fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+            <div class="org-search-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutAlign.gt-md="stretch center" fxLayoutGap="20px">
                 <div fxFlex fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
                     <ccr-organization-search fxFlex
                     *ngIf="!selectedClinic"
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div fxFlex="35%" fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px">
+                <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px">
                     <button
                     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
                     (click)="download()"
@@ -59,10 +59,9 @@
                 </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="stretch end" fxLayoutGap="10px">
-                <div fxFlex>
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutAlign.gt-md="stretch end" fxLayoutGap="20px">
+                <div fxFlex fxLayout="row" fxLayoutAlign="stretch end" fxLayoutGap="20px" [formGroup]="searchForm">
                     <mat-form-field
-                    [formGroup]="searchForm"
                     fxFlex
                     class="minus-margin-bottom">
                         <mat-icon class="prefix-icon" matPrefix>person</mat-icon>
@@ -73,15 +72,21 @@
                         type="text">
                         <mat-icon
                         *ngIf="searchForm?.value.query"
-                        (click)="clearSearchForm()"
+                        (click)="clearSearchQuery()"
                         class="clickable"
                         matSuffix>cancel</mat-icon>
                     </mat-form-field>
+
+                    <mat-form-field *ngIf="selectedClinic" fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
+                        <mat-select [disableOptionCentering]="true" formControlName="package" [placeholder]="'REPORTS.FILTER_BY_PHASE' | translate">
+                            <mat-option *ngFor="let packageItem of packages" [value]="packageItem.value">
+                            {{ packageItem.viewValue | translate | uppercase }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
 
-                <div fxFlex="6.5%">&nbsp;</div>
-
-                <div fxFlex="35%" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
                     <ccr-page-size-selector
                         [defaultPageSize]="50"
                         [defaultPageSizeStorageKey]="defaultPageSizeStorageKey"
@@ -98,12 +103,12 @@
             </div>
         </div>
     </div>
-</div>
+  </div>
 
-<ccr-datasource-overlay
-[emptyMsg]="'BOARD.RPM_ENTRIES_EMPTY_LIST' | translate"
-[source]="source"
-class="ccr-table ccr-expand-table ccr-table-stats">
+  <ccr-datasource-overlay
+  [emptyMsg]="'BOARD.RPM_ENTRIES_EMPTY_LIST' | translate"
+  [source]="source"
+  class="ccr-table ccr-expand-table ccr-table-stats">
 
 <div class="ccr-expandable-table-container">
 <div class="ccr-expandable-table" #container (scroll)="onScroll()">
