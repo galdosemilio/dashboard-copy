@@ -251,6 +251,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.csvSeparator +
         'Device Type' +
         this.csvSeparator +
+        'Primary Diagnosis' +
+        this.csvSeparator +
+        'Secondary Diagnosis' +
+        this.csvSeparator +
         'Organization ID' +
         this.csvSeparator +
         'Organization Name' +
@@ -304,6 +308,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           `"${moment(entry.account.dateOfBirth).format('MM/DD/YYYY')}"` +
           this.csvSeparator +
           `"${entry.device.name}"` +
+          this.csvSeparator +
+          `"${entry.rpm?.diagnosis?.primary || ''}"` +
+          this.csvSeparator +
+          `"${entry.rpm?.diagnosis?.secondary || ''}"` +
           this.csvSeparator +
           `"${entry.organization.id}"` +
           this.csvSeparator +

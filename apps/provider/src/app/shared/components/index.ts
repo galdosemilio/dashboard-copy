@@ -77,6 +77,7 @@ import {
 import { CcrPermissionFilterComponent } from './permission-filter'
 import { TranslatedTextInputComponent } from './translated-text-input'
 import { CcrDietersTableComponent } from './dieters-table'
+import { ExpandableTextComponent } from './expandable-text'
 
 export {
   AccountPhaseListComponent,
@@ -142,7 +143,8 @@ export {
   ViewMeetingDialog,
   ViewAllMeetingsDialog,
   MeetingsDataSource,
-  MeetingsDatabase
+  MeetingsDatabase,
+  ExpandableTextComponent
 }
 
 export const CmpComponents = [
@@ -207,5 +209,6 @@ export const CmpComponents = [
   SingleAddDialog,
   RecurringAddDialog,
   ViewMeetingDialog,
-  ViewAllMeetingsDialog
+  ViewAllMeetingsDialog,
+  ExpandableTextComponent
 ]

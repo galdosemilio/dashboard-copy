@@ -1,0 +1,10 @@
+
+<div
+class="expandable-text"
+[class.expanded]="isExpanded"
+>
+  {{ renderedText | translate }}
+  <mat-icon (click)="toggleExpand()" *ngIf="text.length > maxLength">
+    {{ isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+  </mat-icon>
+</div>

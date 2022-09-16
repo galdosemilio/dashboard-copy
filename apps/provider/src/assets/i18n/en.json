@@ -1559,7 +1559,8 @@
     "SCALE": "BALANCE Smart Scale",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} days more of device transmissions needed",
     "SCAN_SMART_GLUCOMETER": "SCAN Smart Glucometer",
-    "SECONDARY_DIAGNOSIS": "Secondary Diagnosis (Optional)",
+    "SECONDARY_DIAGNOSIS": "Secondary Diagnosis",
+    "SECONDARY_DIAGNOSIS_OPTIONAL": "Secondary Diagnosis (Optional)",
     "SELECT_ORGANIZATION_DESCRIPTION": "By default, this report will now display the RPM billing status of all patients to which you have access, regardless of the clinic selected from the upper left of the screen.  Selecting a clinic in this field will filter the listing to show only patients which have RPM activated from within or below the selected clinic.",
     "STATE": {
       "ACTIVE": "Active",

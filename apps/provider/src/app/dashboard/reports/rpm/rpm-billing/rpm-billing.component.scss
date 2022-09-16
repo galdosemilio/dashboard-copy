@@ -173,6 +173,30 @@ app-reports-rpm-billing {
       min-width: 225px;
     }
 
+    .diagnosis-cell {
+      max-width: 225px;
+      min-width: 225px;
+
+      .diagnosis-ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        line-height: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &.expanded {
+          white-space: normal;
+          word-break: break-all;
+        }
+      }
+
+      .mat-icon {
+        margin-left: 5px;
+        cursor: pointer;
+      }
+    }
+
     .highlighted-cell {
       color: $date-highlight-color;
       font-size: 14px;

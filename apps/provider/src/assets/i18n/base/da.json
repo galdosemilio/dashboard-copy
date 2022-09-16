@@ -1559,7 +1559,8 @@
     "SCALE": "BALANCE Smart Scale",
     "SCALE_ICON_DESCRIPTION": "{{ amount }} dage mere af enhedsoverførsler er nødvendige",
     "SCAN_SMART_GLUCOMETER": "SCAN Smart Glucometer",
-    "SECONDARY_DIAGNOSIS": "Bidiagnose (valgfri)",
+    "SECONDARY_DIAGNOSIS": "Sekundær diagnose",
+    "SECONDARY_DIAGNOSIS_OPTIONAL": "Bidiagnose (valgfri)",
     "SELECT_ORGANIZATION_DESCRIPTION": "Som standard vil denne rapport nu vise RPM fakturering status for alle patienter, som du har adgang til, uanset den valgte fra det øverste venstre hjørne af skærmen klinik. Valg af en klinik i dette område vil filtrere notering til kun at vise patienter, som har RPM aktiveres indefra eller under den valgte klinik.",
     "STATE": {
       "ACTIVE": "Aktiv",

@@ -1,0 +1,18 @@
+.expandable-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &.expanded {
+    white-space: normal;
+    word-break: break-all;
+  }
+
+  .mat-icon {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+}

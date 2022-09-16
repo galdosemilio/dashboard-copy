@@ -1559,7 +1559,8 @@
     "SCALE": "Equilíbrio inteligente Scale",
     "SCALE_ICON_DESCRIPTION": "São necessários {{ amount }} dias mais transmissões de dispositivos",
     "SCAN_SMART_GLUCOMETER": "SCAN o glicômetro inteligente",
-    "SECONDARY_DIAGNOSIS": "Diagnóstico Secundário (Opcional)",
+    "SECONDARY_DIAGNOSIS": "Diagnóstico Secundário",
+    "SECONDARY_DIAGNOSIS_OPTIONAL": "Diagnóstico Secundário (Opcional)",
     "SELECT_ORGANIZATION_DESCRIPTION": "Por padrão, este relatório irá agora mostrar o status de RPM faturamento de todos os pacientes aos quais você tem acesso, independentemente da clínica selecionado a partir do canto superior esquerdo da tela. Selecionando uma clínica neste campo irá filtrar a lista para mostrar apenas os pacientes que têm RPM ativada de dentro ou abaixo da clínica selecionada.",
     "STATE": {
       "ACTIVE": "Ativo",
