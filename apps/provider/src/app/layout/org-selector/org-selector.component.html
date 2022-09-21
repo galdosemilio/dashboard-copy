@@ -1,5 +1,5 @@
 <div fxFlexFill>
-  <button [disabled]="!hasMoreThanOneClinic" mat-button class="topnav-logo" [matMenuTriggerFor]="orgs" (menuOpened)="menuOpened()" (menuClosed)="menuClosed$.next()">
+  <button [disabled]="!hasMoreThanOneClinic" mat-button class="topnav-logo" [matMenuTriggerFor]="orgs" (menuOpened)="menuOpened()" (menuClosed)="menuClosed$.next($event)">
     <img [attr.src]="fixedImg ?? logoSrc" />
     <i *ngIf="hasMoreThanOneClinic && !fixedImg" class="material-icons"></i>
   </button>
