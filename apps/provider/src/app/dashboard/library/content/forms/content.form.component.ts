@@ -114,24 +114,9 @@ export class ContentFormComponent implements BindForm, OnInit {
     { value: false, name: _('LIBRARY.CONTENT.HIDDEN_FROM_PATIENT') },
     { value: true, name: _('LIBRARY.CONTENT.VISIBLE_TO_PATIENT') }
   ]
-  public set fetchingPackages(fP: boolean) {
-    this._fetchingPackages = fP
-    if (fP) {
-      if (this.form.controls) {
-        this.form.controls.availability.disable()
-      }
-    } else {
-      if (this.form.controls) {
-        this.form.controls.availability.enable()
-      }
-    }
-  }
-  public get fetchingPackages(): boolean {
-    return this._fetchingPackages
-  }
 
   private _details: FileExplorerContent
-  private _fetchingPackages: boolean
+  public fetchingPackages: boolean
   private _readonlyFields: string[] = []
   private current: any = {
     name: '',
@@ -145,13 +130,14 @@ export class ContentFormComponent implements BindForm, OnInit {
     private formBuilder: FormBuilder,
     private notifier: NotifierService
   ) {
-    this.organization = this.context.organization
-
     this.createForm()
-    this.fetchingPackages = true
   }
 
   ngOnInit(): void {
+    this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
+      this.organization = org
+    })
+
     void this.refreshShownPackages()
 
     this.form.controls.isPublic.setValidators(
@@ -191,11 +177,7 @@ export class ContentFormComponent implements BindForm, OnInit {
     this.hiddenFields = [...this.hiddenFields, 'externalVisibility']
   }
 
-  openPackageDialog(validate = false): void {
-    if (validate && this.form.value.availability !== 2) {
-      return
-    }
-
+  openPackageDialog(): void {
     this.dialog
       .open(PackageSelectDialog, {
         autoFocus: false,
@@ -214,6 +196,8 @@ export class ContentFormComponent implements BindForm, OnInit {
             this.form.patchValue({ packages: packages })
           } else {
             this.form.patchValue({ availability: '', packages: undefined })
+            this.shownPackages = []
+            this.morePackages = false
           }
         } else {
           const formPackages: Package[] = this.form.value.packages
@@ -259,6 +243,7 @@ export class ContentFormComponent implements BindForm, OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((values: any) => {
         const patchValue: any = {}
+        let isChangedAvailability = false
 
         if (values.availability !== this.current.availability) {
           switch (values.availability) {
@@ -272,15 +257,20 @@ export class ContentFormComponent implements BindForm, OnInit {
 
             case 2:
               patchValue.isPublic = false
-              if (this.current.availability !== undefined) {
-                this.openPackageDialog()
-              }
               break
+          }
+
+          if (this.current.availability) {
+            isChangedAvailability = true
           }
 
           this.current.availability = values.availability
           if (values.availability !== 2 && values.packages) {
             patchValue.packages = undefined
+            this.shownPackages = []
+            this.morePackages = false
+          } else if (values.availability === 2 && this.details?.packages) {
+            patchValue.packages = this.details?.packages
           }
         }
 
@@ -296,6 +286,10 @@ export class ContentFormComponent implements BindForm, OnInit {
         if (Object.keys(patchValue).length) {
           this.form.patchValue(patchValue)
         }
+
+        if (isChangedAvailability && this.current.availability === 2) {
+          this.openPackageDialog()
+        }
       })
   }
 
@@ -303,6 +297,8 @@ export class ContentFormComponent implements BindForm, OnInit {
     if (!this.form.value.packages?.length) {
       return
     }
+
+    this.fetchingPackages = true
 
     try {
       const res = await this.packageOrganization.getAll({

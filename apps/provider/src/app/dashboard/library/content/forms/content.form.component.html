@@ -73,7 +73,7 @@
         </strong>
         <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
             <div fxLayout="row" fxLayoutGap="5px">
-                <mat-radio-button [value]="0" [disabled]="readonlyFields.indexOf('availability') > -1">
+                <mat-radio-button [value]="0" [disabled]="readonlyFields.indexOf('availability') > -1 || fetchingPackages">
                     {{ 'LIBRARY.CONTENT.PUBLIC' | translate }}
                 </mat-radio-button>
 
@@ -84,7 +84,7 @@
             </div>
 
             <div fxLayout="row" fxLayoutGap="5px">
-                <mat-radio-button [value]="1" [disabled]="readonlyFields.indexOf('availability') > -1">
+                <mat-radio-button [value]="1" [disabled]="readonlyFields.indexOf('availability') > -1 || fetchingPackages">
                     {{ 'LIBRARY.CONTENT.PRIVATE' | translate }}
                 </mat-radio-button>
 
@@ -96,7 +96,7 @@
 
             <div fxLayout="column" fxLayoutGap="3px">
                 <div fxLayout="row" fxLayoutGap="5px">
-                    <mat-radio-button [value]="2" [disabled]="readonlyFields.indexOf('availability') > -1" (click)="openPackageDialog(true)">
+                    <mat-radio-button [value]="2" [disabled]="readonlyFields.indexOf('availability') > -1 || fetchingPackages" (click)="openPackageDialog()">
                         <div fxLayout="column">
                         <span>{{ 'LIBRARY.CONTENT.BY_PACKAGE' | translate }}</span>
 
