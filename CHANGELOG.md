@@ -1,3 +1,21 @@
+# [1.94.0](https://github.com/coachcare/dashboard/compare/v1.93.3...v1.94.0) (2022-09-23)
+
+
+### Bug Fixes
+
+* allow alerts to use decimal points [FRON-2915] ([73e9584](https://github.com/coachcare/dashboard/commit/73e95848e0df9d6b9ea3b6d69edc98fa424c5e61))
+* availability is disabled on the add content modal [FRON-2952] ([289d911](https://github.com/coachcare/dashboard/commit/289d911485f344532937b68ed3cf3321153d40ca))
+* blood pressure sorting issue [FRON-2948] ([125aca1](https://github.com/coachcare/dashboard/commit/125aca177f7e4bf0ece94b53448778375be9878f))
+* fetch necessary packages to display listing on digital library [FRON-2945] ([e50ee01](https://github.com/coachcare/dashboard/commit/e50ee015e4f6f8f984885e70ccce6eb39b56bdc2))
+* org selector ([65d73db](https://github.com/coachcare/dashboard/commit/65d73db2a205c33340d73ffcd78a4d90b06cda0e))
+
+
+### Features
+
+* add card management and order history page [FRON-2894] ([df363db](https://github.com/coachcare/dashboard/commit/df363dba3a034a6bf6bd35c73393056962196736))
+* add diagnosis fields to RPM billing report [FRON-2914] ([59781f3](https://github.com/coachcare/dashboard/commit/59781f3af3f0768cba612c967a7f361da3357eea))
+* add supervising provider column to rpm report [FRON-2916] ([c6dcbab](https://github.com/coachcare/dashboard/commit/c6dcbab597cb08a26f04767decba858225e8ca8e))
+
 ## [1.93.3](https://github.com/coachcare/dashboard/compare/v1.93.2...v1.93.3) (2022-09-15)
 
 
