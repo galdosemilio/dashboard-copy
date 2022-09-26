@@ -70,6 +70,7 @@ import {
   Sequence,
   Session,
   Supplement,
+  Task,
   Timezone,
   User,
   Zendesk,
@@ -371,6 +372,7 @@ export const SdkApiProviders = [
   { provide: Session, useClass: Session, deps: [ApiService] },
   { provide: SpreeProvider, useClass: SpreeProvider, deps: [ApiService] },
   { provide: Supplement, useClass: Supplement, deps: [ApiService] },
+  { provide: Task, useClass: Task, deps: [ApiService] },
   { provide: Timezone, useClass: Timezone, deps: [ApiService] },
   { provide: User, useClass: User, deps: [ApiService] },
   { provide: Zendesk, useClass: Zendesk, deps: [ApiService] }

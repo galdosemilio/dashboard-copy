@@ -1,0 +1,62 @@
+
+<div matDialogTitle>
+  <div>
+    <mat-icon>add_circle_outline</mat-icon>
+    <span>{{'REPORTS.CREATE_NEW_PATIENT_REPORT' | translate}}</span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <p>{{'REPORTS.CREATE_NEW_PATIENT_REPORT_DESCRIPTION' | translate}}</p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div fxLayout="column" fxLayoutGap="20px">
+      <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="30px">
+        <ccr-organization-search
+          (onSelect)="onSelectClinic($event)"
+          [allowSearchbarReset]="true"
+          fxFlex
+        >
+        </ccr-organization-search>
+        <mat-form-field>
+            <input matInput
+            formControlName="name"
+            required
+            [placeholder]="'BOARD.REPORT_NAME' | translate">
+        </mat-form-field>
+      </div>
+      <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="30px">
+        <div fxFlex>
+            <ccr-date-input [max]="form.value.endDate" [placeholder]="'BOARD.START_DATE' | translate" formControlName="startDate" fxFlex></ccr-date-input>
+        </div>
+        <div fxFlex>
+            <ccr-date-input [min]="form.value.startDate" [placeholder]="'BOARD.END_DATE' | translate" formControlName="endDate" fxFlex></ccr-date-input>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <mat-label>{{ 'GLOBAL.FORMAT' | translate }}</mat-label>
+
+      <mat-radio-group formControlName="format" fxLayout="row" fxLayouAlign="start center" fxLayoutGap="15px">
+          <mat-radio-button value="pdf" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+              <mat-icon fontSet="fas" fontIcon="fa-file-pdf"></mat-icon>
+              {{ 'GLOBAL.PDF' | translate }}
+          </mat-radio-button>
+          <mat-radio-button value="excel" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+              <mat-icon fontSet="fas" fontIcon="fa-file-excel"></mat-icon>
+              {{ 'GLOBAL.EXCEL' | translate }}
+          </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div fxFill fxLayout="row" fxLayoutAlign="center center">
+    <button mat-button color="primary" class="ccr-icon-button" (click)="onSubmit()">
+      <mat-icon>check</mat-icon> {{'REPORTS.GENERATE_PATIENT_REPORT' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>

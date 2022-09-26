@@ -9,17 +9,10 @@
         <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['billing']">
         {{ 'REPORTS.RPM_BILLING_TITLE' | translate }}
         </a>
+        <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['patient-bulk-reports']">
+        {{ 'REPORTS.PATIENT_BULK_REPORTS' | translate }}
+        </a>
     </div>
-
-    <app-report-controls
-        [allowNavigation]="false"
-        [discrete]="false"
-        [range]="false"
-        dayDateFormat="dddd, MMMM D, YYYY"
-        timeframe="day">
-    </app-report-controls>
-
-
     <div class="ccr-subcomponent">
         <router-outlet></router-outlet>
     </div>

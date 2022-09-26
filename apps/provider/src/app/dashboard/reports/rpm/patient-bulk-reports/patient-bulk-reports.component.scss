@@ -1,0 +1,21 @@
+@import 'variables';
+
+app-patient-bulk-reports {
+  .bulk-report-heading {
+    margin-bottom: 20px;
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0px;
+
+      .mat-form-field-underline {
+        bottom: 0;
+      }
+    }
+  }
+
+  .download-link {
+    color: var(--primary);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

@@ -14,13 +14,15 @@ import { ReportsComponent } from './reports.component'
 import { RPMComponents } from './rpm'
 import { StatisticsComponents } from './statistics'
 
-import { ReportsDatabase, StatisticsDatabase } from './services'
+import { ReportsDatabase, StatisticsDatabase, TaskDatabase } from './services'
+import { ReportsDialogComponents } from './dialogs'
 
 export const ReportsComponents = [
   ...CommunicationsComponents,
   ...ControlsComponents,
   ...CustomReportsComponents,
   ...RPMComponents,
+  ...ReportsDialogComponents,
   ...StatisticsComponents,
   ...OverviewComponents,
   ReportsComponent
@@ -29,5 +31,6 @@ export const ReportsComponents = [
 export const ReportsProviders = [
   ...CommunicationsProviders,
   ReportsDatabase,
-  StatisticsDatabase
+  StatisticsDatabase,
+  TaskDatabase
 ]

@@ -21,6 +21,7 @@ import { MessageActivityReportComponent } from './custom'
 import { CustomReportsComponent } from './custom/custom-reports.component'
 import { RPMReportComponent } from './rpm'
 import { RPMBillingComponent } from './rpm/rpm-billing'
+import { PatientBulkReportsComponent } from './rpm/patient-bulk-reports'
 
 const routes: Routes = [
   {
@@ -77,7 +78,8 @@ const routes: Routes = [
     component: RPMReportComponent,
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'billing' },
-      { path: 'billing', component: RPMBillingComponent }
+      { path: 'billing', component: RPMBillingComponent },
+      { path: 'patient-bulk-reports', component: PatientBulkReportsComponent }
     ]
   },
   {

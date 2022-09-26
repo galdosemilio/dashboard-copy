@@ -1,0 +1,109 @@
+<div class="bulk-report-heading">
+    <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+        <p>{{ 'REPORTS.PATIENT_BULK_REPORTS_DESCRIPTION' | translate }}</p>
+        <div fxFlex fxLayout="column" fxLayoutAlign="end stretch" fxLayoutGap="20px">
+            <div fxLayout="row" fxLayoutAlign="end center">
+                <a
+                    mat-button color="primary" class="ccr-icon-button"
+                    fxFlex="nogrow" (click)="createDialog()"
+                >
+                <mat-icon>add</mat-icon>
+                <span>{{ 'REPORTS.NEW_PATIENT_REPORT' | translate }}</span>
+                </a>
+            </div>
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="stretch end" fxLayoutGap="20px">
+                <mat-form-field fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
+                    <mat-select [disableOptionCentering]="true" [(ngModel)]="status" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_STATUS' | translate">
+                      <mat-option *ngFor="let statusItem of statusList" [value]="statusItem.value">
+                        {{ statusItem.viewValue | translate | uppercase }}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <ccr-organization-search
+                    fxFlex fxFlex.gt-md="450px"
+                    (onSelect)="onSelectClinic($event)"
+                    [allowSearchbarReset]="true"
+                    prefixIcon="business">
+                </ccr-organization-search>
+
+                <div fxFlex fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                    <ccr-page-size-selector
+                        [defaultPageSize]="50"
+                        [disabled]="!source.isLoaded"
+                    ></ccr-page-size-selector>
+
+                    <ccr-paginator fxFlex="nogrow" #paginator
+                    [length]="source.total"
+                    [pageIndex]="source.pageIndex"
+                    [pageSize]="source.pageSize"
+                    (page)="source.pageIndex = $event.pageIndex"
+                    ></ccr-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ccr-datasource-overlay
+[emptyMsg]="'BOARD.PATIENT_BULK_REPORTS_ENTRIES_EMPTY_LIST' | translate"
+[source]="source"
+class="ccr-table ccr-expand-table ccr-table-stats">
+
+<div class="ccr-expandable-table-container">
+<div class="ccr-expandable-table">
+  <table ccrTableSort>
+    <caption hidden>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</caption>
+    <thead [class.sticky-header]="isDesktop">
+        <th class="id-cell" [class.sticky-column]="isDesktop">
+            #
+        </th>
+
+        <th>
+            <span>{{ 'BOARD.STATUS' | translate }}</span>
+        </th>
+
+        <th>
+            <span>{{ 'BOARD.REPORT_NAME' | translate }}</span>
+        </th>
+
+        <th>
+            {{ 'BOARD.CLINIC_NAME' | translate }}
+        </th>
+
+        <th>
+            {{ 'RPM.TIME_GENERATED' | translate }}
+        </th>
+
+        <th>
+            {{ 'RPM.NUMBER_OF_RECORDS' | translate }}
+        </th>
+    </thead>
+
+    <tbody>
+        <tr
+        *ngFor="let row of rows; let i = index"
+        [ngClass]="{
+            'row-even': i % 2 === 0,
+            'row-odd': i % 2 === 1,
+            'last-row': i === rows - 1
+          }">
+            <td class="id-cell" [class.sticky-column]="isDesktop">
+                {{ i + source.criteria.offset + 1 }}
+            </td>
+            <td>
+                <a class="download-link" *ngIf="row.status.name === 'Succeeded'" (click)="downloadReport(row)">{{ 'GLOBAL.DOWNLOAD' | translate }}</a>
+                <span *ngIf="row.status.name !== 'Succeeded'">{{ row.status.name }}</span>
+            </td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.organization.name + ' (' + row.organization.id + ')' }}</td>
+            <td><span *ngIf="row.completedAt; else empty">{{ row.completedAt | amDateFormat:'MM/DD/YYYY, h:mm A' }}</span></td>
+            <td><span *ngIf="row.progress?.file?.count; else empty">{{ row.progress.file.count }}</span></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</ccr-datasource-overlay>
+
+<ng-template #empty>{{ 'GLOBAL.NA' | translate }}</ng-template>
