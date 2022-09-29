@@ -1016,8 +1016,10 @@
     "ADVANCED_PAIN_RELIEF": "Avanceret smertelindring",
     "AGGREGATIONS": {
       "AVERAGE": "Gennemsnit",
+      "MOST_COMMON": "Mest almindelig",
       "MOST_RECENT": "Seneste",
-      "OLDEST": "Ældste"
+      "OLDEST": "Ældste",
+      "TOTAL": "i alt"
     },
     "ANKLE": "Ankel",
     "BACK": "Tilbage",
@@ -1831,11 +1833,16 @@
     "ACTIVITY_LEVEL": "Aktivitetsniveau",
     "BMI_CHANGE": "BMI Ændring",
     "BODYFAT_CHANGE": "Kropsfedt Ændring",
+    "BODY_LOCATION": "Kropsplacering",
+    "CURE_INTENSITY": "Hærdningsintensitet",
     "CURRENT": "Nuværende",
     "LEANMASS_CHANGE": "Mager Masse Ændring",
+    "NO_DATA": "Ingen data",
     "NO_MEASUREMENTS": "Ikke nok målinger",
     "NO_RECENT_DATA": "Ingen Nylig Data",
+    "PROGRAM": "Program",
     "STARTING": "Starter",
+    "TREATMENT_DURATION": "Behandlingens varighed",
     "WATERMASS_CHANGE": "Vandmasse Ændring",
     "WEIGHT_CHANGE": "Vægtændring",
     "WEIGHT_CHANGE_PERCENT": "Vægtændring (%)"
@@ -1856,6 +1863,7 @@
     "GRAMS": "gram",
     "HOUR": "time",
     "HOURS": "timer",
+    "HRS": "timer",
     "IN": "in",
     "INCHES": "tommer",
     "KG": "kg",

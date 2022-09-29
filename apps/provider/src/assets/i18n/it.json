@@ -1016,8 +1016,10 @@
     "ADVANCED_PAIN_RELIEF": "Sollievo dal dolore avanzato",
     "AGGREGATIONS": {
       "AVERAGE": "Media",
+      "MOST_COMMON": "Il più comune",
       "MOST_RECENT": "Più Recente",
-      "OLDEST": "Più Vecchio"
+      "OLDEST": "Più Vecchio",
+      "TOTAL": "Totale"
     },
     "ANKLE": "Caviglia",
     "BACK": "Di ritorno",
@@ -1831,11 +1833,16 @@
     "ACTIVITY_LEVEL": "Livello di Attività",
     "BMI_CHANGE": "Cambiamento nell'IMC",
     "BODYFAT_CHANGE": "Cambiamento nel Grasso Corporeo",
+    "BODY_LOCATION": "Posizione del corpo",
+    "CURE_INTENSITY": "Intensità di cura",
     "CURRENT": "Attuale",
     "LEANMASS_CHANGE": "Cambiamento nella Massa Magra",
+    "NO_DATA": "Nessun dato",
     "NO_MEASUREMENTS": "Misurazioni non sufficienti",
     "NO_RECENT_DATA": "Nessun Dato Recente",
+    "PROGRAM": "Programma",
     "STARTING": "Inizio",
+    "TREATMENT_DURATION": "Durata del trattamento",
     "WATERMASS_CHANGE": "Cambiamento nella Massa Liquida",
     "WEIGHT_CHANGE": "Cambiamento di Peso",
     "WEIGHT_CHANGE_PERCENT": "Variazione di peso (%)"
@@ -1856,6 +1863,7 @@
     "GRAMS": "grammi",
     "HOUR": "ora",
     "HOURS": "ore",
+    "HRS": "ore",
     "IN": "in",
     "INCHES": "pollici",
     "KG": "kg",

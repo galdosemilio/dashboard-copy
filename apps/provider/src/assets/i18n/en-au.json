@@ -1016,8 +1016,10 @@
     "ADVANCED_PAIN_RELIEF": "Advanced Pain Relief",
     "AGGREGATIONS": {
       "AVERAGE": "Average",
+      "MOST_COMMON": "Most Common",
       "MOST_RECENT": "Most Recent",
-      "OLDEST": "Oldest"
+      "OLDEST": "Oldest",
+      "TOTAL": "Total"
     },
     "ANKLE": "Ankle",
     "BACK": "Back",
@@ -1831,11 +1833,16 @@
     "ACTIVITY_LEVEL": "Activity Level",
     "BMI_CHANGE": "BMI Change",
     "BODYFAT_CHANGE": "Body Fat Change",
+    "BODY_LOCATION": "Body Location",
+    "CURE_INTENSITY": "Cure Intensity",
     "CURRENT": "Current",
     "LEANMASS_CHANGE": "Lean Mass Change",
+    "NO_DATA": "No Data",
     "NO_MEASUREMENTS": "Not enough measurements",
     "NO_RECENT_DATA": "No Recent Data",
+    "PROGRAM": "Program",
     "STARTING": "Starting",
+    "TREATMENT_DURATION": "Treatment Duration",
     "WATERMASS_CHANGE": "Water Mass Change",
     "WEIGHT_CHANGE": "Weight Change",
     "WEIGHT_CHANGE_PERCENT": "Weight Change (%)"
@@ -1856,6 +1863,7 @@
     "GRAMS": "grams",
     "HOUR": "hour",
     "HOURS": "hours",
+    "HRS": "hrs",
     "IN": "in",
     "INCHES": "inches",
     "KG": "kg",

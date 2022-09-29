@@ -12,9 +12,7 @@ export * from './dieter/messages/messages.component'
 import { MessagesProviders } from '@app/dashboard/messages'
 import { DieterListingNoPhiComponent } from './dieter-listing-no-phi/dieter-listing-no-phi.component'
 import { DieterListingWithPhiComponent } from './dieter-listing-with-phi/dieter-listing-with-phi.component'
-import { DieterDashboardComponent } from './dieter/dashboard/dashboard.component'
-import { StatDiffComponent } from './dieter/dashboard/stat-diff/stat-diff.component'
-import { StatSingleComponent } from './dieter/dashboard/stat-single/stat-single.component'
+import { DieterDashboardComponents } from './dieter/dashboard'
 import { DieterComponent } from './dieter/dieter.component'
 import { JournalComponents } from './dieter/journal'
 import { MeasurementComponents } from './dieter/measurements'
@@ -52,11 +50,8 @@ import {
 
 export const DietersComponents = [
   DietersExpandableTableComponent,
-  StatDiffComponent,
-  StatSingleComponent,
   DieterComponent,
   DieterFormComponent,
-  DieterDashboardComponent,
   DieterListingNoPhiComponent,
   DieterListingWithPhiComponent,
   DieterMessagesComponent,
@@ -64,7 +59,8 @@ export const DietersComponents = [
   PatientFirstNameCell,
   ...SettingsComponents,
   ...JournalComponents,
-  ...MeasurementComponents
+  ...MeasurementComponents,
+  ...DieterDashboardComponents
 ]
 
 export const DietersProviders = [

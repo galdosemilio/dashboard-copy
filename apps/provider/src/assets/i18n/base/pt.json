@@ -1016,8 +1016,10 @@
     "ADVANCED_PAIN_RELIEF": "Alívio avançado da dor",
     "AGGREGATIONS": {
       "AVERAGE": "Média",
+      "MOST_COMMON": "Mais comum",
       "MOST_RECENT": "Mais Recente",
-      "OLDEST": "Mais Antigo"
+      "OLDEST": "Mais Antigo",
+      "TOTAL": "Total"
     },
     "ANKLE": "Tornozelo",
     "BACK": "Costas",
@@ -1831,11 +1833,16 @@
     "ACTIVITY_LEVEL": "Nível de Atividade",
     "BMI_CHANGE": "Alteração no IMC",
     "BODYFAT_CHANGE": "Alterações na Gordura Corpural",
+    "BODY_LOCATION": "Localização do corpo",
+    "CURE_INTENSITY": "Intensidade de cura",
     "CURRENT": "Atual",
     "LEANMASS_CHANGE": "Alterações na Massa Magra",
+    "NO_DATA": "Sem dados",
     "NO_MEASUREMENTS": "Sem medidas suficientes",
     "NO_RECENT_DATA": "Sem dados recentes",
+    "PROGRAM": "Programa",
     "STARTING": "Iniciando",
+    "TREATMENT_DURATION": "Duração do tratamento",
     "WATERMASS_CHANGE": "Variação da Massa de Água",
     "WEIGHT_CHANGE": "Variação de peso",
     "WEIGHT_CHANGE_PERCENT": "Mudança de peso (%)"
@@ -1856,6 +1863,7 @@
     "GRAMS": "gramas",
     "HOUR": "hora",
     "HOURS": "horas",
+    "HRS": "horas",
     "IN": "in",
     "INCHES": "polegadas",
     "KG": "kg",

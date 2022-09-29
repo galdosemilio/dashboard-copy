@@ -1016,8 +1016,10 @@
     "ADVANCED_PAIN_RELIEF": "הקלה מתקדמת בכאב",
     "AGGREGATIONS": {
       "AVERAGE": "ממוצע",
+      "MOST_COMMON": "הכי נפוץ",
       "MOST_RECENT": "הכי עדכני",
-      "OLDEST": "הוותיק ביותר"
+      "OLDEST": "הוותיק ביותר",
+      "TOTAL": "סך הכל"
     },
     "ANKLE": "קרסול",
     "BACK": "חזור",
@@ -1831,11 +1833,16 @@
     "ACTIVITY_LEVEL": "רמת הפעילות",
     "BMI_CHANGE": "שינוי ה-BMI",
     "BODYFAT_CHANGE": "שינוי שומן הגוף",
+    "BODY_LOCATION": "מיקום הגוף",
+    "CURE_INTENSITY": "עוצמת ריפוי",
     "CURRENT": "נוכחי",
     "LEANMASS_CHANGE": "שינוי מסת גוף רזה",
+    "NO_DATA": "אין מידע",
     "NO_MEASUREMENTS": "אין מספיק מדדים",
     "NO_RECENT_DATA": "אין נתונים עדכניים",
+    "PROGRAM": "תכנית",
     "STARTING": "התחלה",
+    "TREATMENT_DURATION": "משך הטיפול",
     "WATERMASS_CHANGE": "שינוי מסת מים",
     "WEIGHT_CHANGE": "שינוי משקל",
     "WEIGHT_CHANGE_PERCENT": "שינוי משקל (%)"
@@ -1856,6 +1863,7 @@
     "GRAMS": "גרמים",
     "HOUR": "שעה",
     "HOURS": "שעות",
+    "HRS": "שעות",
     "IN": "אינץ'",
     "INCHES": "אינץ'",
     "KG": "ק\"ג",

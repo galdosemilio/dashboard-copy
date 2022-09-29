@@ -1,6 +1,7 @@
 import { MeasurementTabs, SidenavOptions } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 import { _ } from '@app/shared/utils'
+import { NxtstimDieterSummaryBoxesComponent } from '@app/dashboard/accounts/dieters/dieter/dashboard'
 
 export const NXTSTIMSectionConfig: SectionConfigDetails = {
   JOURNAL: {
@@ -8,6 +9,11 @@ export const NXTSTIMSectionConfig: SectionConfigDetails = {
   },
   SIDENAV: {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM, SidenavOptions.STORE]
+  },
+  PATIENT_DASHBOARD: {
+    SUMMARY_BOXES: {
+      component: NxtstimDieterSummaryBoxesComponent
+    }
   },
   RPM: {
     AVAILABLE_DEVICES: [

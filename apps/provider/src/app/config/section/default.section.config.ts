@@ -14,6 +14,7 @@ import { _ } from '@app/shared/utils'
 import { DefaultProfileComponent } from '@app/dashboard/profile/layouts'
 import { environment } from '../../../environments/environment'
 import { RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
+import { DefaultDieterSummaryBoxesComponent } from '@app/dashboard/accounts/dieters/dieter/dashboard'
 
 export const DefaultTestSectionConfig: SectionConfigDetails = {
   CLINIC_LISTING: {
@@ -79,7 +80,10 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: false,
     SHOW_NEW_APPOINTMENT: false,
-    ALLOWED_CHART_DATA_POINT_TYPES: null
+    ALLOWED_CHART_DATA_POINT_TYPES: null,
+    SUMMARY_BOXES: {
+      component: DefaultDieterSummaryBoxesComponent
+    }
   },
   GLOBAL: {
     DASHBOARD: {
@@ -164,7 +168,10 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: false,
     SHOW_NEW_APPOINTMENT: false,
-    ALLOWED_CHART_DATA_POINT_TYPES: null
+    ALLOWED_CHART_DATA_POINT_TYPES: null,
+    SUMMARY_BOXES: {
+      component: DefaultDieterSummaryBoxesComponent
+    }
   },
   GLOBAL: {
     DASHBOARD: {

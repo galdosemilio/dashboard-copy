@@ -1,0 +1,70 @@
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px" flexLayoutAlign="start center" fxLayoutAlign.gt-sm="stretch center">
+  <p fxFlex class="ccr-hint lowercase">
+    {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.PATIENT' | translate }} {{ 'GLOBAL.DASHBOARD' | translate }}
+    <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+  </p>
+  <mat-form-field fxFill fxFlex fxFlex.gt-sm="200px" floatPlaceholder="never">
+    <mat-select [(ngModel)]="timeRange" (selectionChange)="refresh()">
+      <mat-option *ngFor="let option of timeRangeOptions" [value]="option.value">{{ option.displayValue | translate }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="10px">
+  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
+    <div fxFlex class="stats-big">
+      <h4>{{ 'STATS.BODY_LOCATION' | translate }}</h4>
+      <div fxFlex *ngIf="!isLoading; else loading">
+        <div *ngIf="bodyLocationSummary; else noData">
+          <h2>{{ bodyLocationSummary?.value?.name }}</h2>
+          <p>{{ 'MEASUREMENT.AGGREGATIONS.MOST_COMMON' | translate }}</p>
+        </div>
+      </div>
+    </div>
+    <div fxFlex class="stats-big">
+      <h4>{{ 'STATS.PROGRAM' | translate }}</h4>
+      <div fxFlex *ngIf="!isLoading; else loading">
+        <div *ngIf="programSummary; else noData">
+          <h2>{{ programSummary?.value?.name }}</h2>
+          <p>{{ 'MEASUREMENT.AGGREGATIONS.MOST_COMMON' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
+    <div fxFlex class="stats-big">
+      <h4>{{ 'STATS.CURE_INTENSITY' | translate }}</h4>
+      <div fxFlex *ngIf="!isLoading; else loading">
+        <div *ngIf="cureIntensitySummary; else noData">
+          <h2>{{ cureIntensitySummary?.value | number:'1.0-1' }}</h2>
+          <p>{{ 'MEASUREMENT.AGGREGATIONS.AVERAGE' | translate }}</p>
+        </div>
+      </div>
+    </div>
+    <div fxFlex class="stats-big">
+      <h4>{{ 'STATS.TREATMENT_DURATION' | translate }}</h4>
+      <div fxFlex *ngIf="!isLoading; else loading">
+        <div *ngIf="sessionDurationSummary; else noData">
+          <h2>
+            {{ (sessionDurationSummary.value > 60 ? sessionDurationSummary.value / 60 : sessionDurationSummary.value) | number:'1.0-1' }}
+            {{ sessionDurationSummary.value > 60 ? ('UNIT.HRS' | translate) : ('UNIT.MINS' | translate) }}
+          </h2>
+          <p>{{ 'MEASUREMENT.AGGREGATIONS.TOTAL' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #noData>
+  <div fxFlex fxLayoutAlign="center center">
+    <p><em>{{ 'STATS.NO_DATA' | translate }}</em></p>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div fxFlex fxLayoutAlign="center center">
+    <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+  </div>
+</ng-template>

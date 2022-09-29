@@ -5,7 +5,8 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "Le code postal est requis",
     "ADDRESS_STATE_REQUIRED": "État/Province est requis",
     "PAYMENT_METHOD_NOT_FOUND": "Mode de paiement introuvable, veuillez contacter l'administrateur.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "Un compte de magasin existe déjà pour votre adresse e-mail, mais il n'est pas correctement connecté. Veuillez <a href='mailto:support@coachcare.com'>contacter notre équipe d'assistance</a> pour obtenir de l'aide."
+    "SPREE_ACCOUNT_ALREDAY_EXISTS": "Un compte de magasin existe déjà pour votre adresse e-mail, mais il n'est pas correctement connecté. Veuillez <a href='mailto:support@coachcare.com'>contacter notre équipe d'assistance</a> pour obtenir de l'aide.",
+    "STORE_NOT_AVAILABLE": ""
   },
   "GLOBAL": {
     "ACTIONS": "Actions",

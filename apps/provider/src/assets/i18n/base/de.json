@@ -1016,8 +1016,10 @@
     "ADVANCED_PAIN_RELIEF": "Erweiterte Schmerzlinderung",
     "AGGREGATIONS": {
       "AVERAGE": "Durchschnitt",
+      "MOST_COMMON": "Am gebräuchlichsten",
       "MOST_RECENT": "Neueste",
-      "OLDEST": "Älteste"
+      "OLDEST": "Älteste",
+      "TOTAL": "Gesamt"
     },
     "ANKLE": "Knöchel",
     "BACK": "Zurück",
@@ -1831,11 +1833,16 @@
     "ACTIVITY_LEVEL": "Aktivitätslevel",
     "BMI_CHANGE": "BMI Veränderung",
     "BODYFAT_CHANGE": "Körperfettänderung",
+    "BODY_LOCATION": "Körperstelle",
+    "CURE_INTENSITY": "Heilungsintensität",
     "CURRENT": "Aktuell",
     "LEANMASS_CHANGE": "Magermassenänderung",
+    "NO_DATA": "Keine Daten",
     "NO_MEASUREMENTS": "Nicht genügend Messungen",
     "NO_RECENT_DATA": "Keine aktuellen Daten",
+    "PROGRAM": "Programm",
     "STARTING": "Beginnend",
+    "TREATMENT_DURATION": "Behandlungsdauer",
     "WATERMASS_CHANGE": "Wassermassenänderung",
     "WEIGHT_CHANGE": "Gewichtsänderung",
     "WEIGHT_CHANGE_PERCENT": "Gewichtsänderung (%)"
@@ -1856,6 +1863,7 @@
     "GRAMS": "Gramm",
     "HOUR": "Stunde",
     "HOURS": "Stunden",
+    "HRS": "Std",
     "IN": "Zoll",
     "INCHES": "Zoll",
     "KG": "kg",

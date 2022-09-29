@@ -1016,8 +1016,10 @@
     "ADVANCED_PAIN_RELIEF": "تخفيف الألم المتقدم",
     "AGGREGATIONS": {
       "AVERAGE": "معدل",
+      "MOST_COMMON": "الاكثر انتشارا",
       "MOST_RECENT": "الأحدث",
-      "OLDEST": "أقدم"
+      "OLDEST": "أقدم",
+      "TOTAL": "المجموع"
     },
     "ANKLE": "كاحل",
     "BACK": "خلف",
@@ -1831,11 +1833,16 @@
     "ACTIVITY_LEVEL": "مستوى النشاط",
     "BMI_CHANGE": "التغير في BMI",
     "BODYFAT_CHANGE": "التغير في دهون الجسم",
+    "BODY_LOCATION": "موقع الجسم",
+    "CURE_INTENSITY": "علاج كثافة",
     "CURRENT": "الحالي",
     "LEANMASS_CHANGE": "التغير في الكتلة",
+    "NO_DATA": "لايوجد بيانات",
     "NO_MEASUREMENTS": "لا تتوفر قياسات كافية",
     "NO_RECENT_DATA": "لا تتوفر بيانات حديثة",
+    "PROGRAM": "برنامج",
     "STARTING": "البداية",
+    "TREATMENT_DURATION": "مدة العلاج",
     "WATERMASS_CHANGE": "التغير في كتلة الماء",
     "WEIGHT_CHANGE": "التغير في الوزن",
     "WEIGHT_CHANGE_PERCENT": "تغير الوزن (٪)"
@@ -1856,6 +1863,7 @@
     "GRAMS": "غرامات",
     "HOUR": "ساعة",
     "HOURS": "ساعات",
+    "HRS": "ساعة",
     "IN": "إنش",
     "INCHES": "إنش",
     "KG": "كج",
