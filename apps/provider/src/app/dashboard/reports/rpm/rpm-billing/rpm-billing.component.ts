@@ -2,9 +2,12 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
+  QueryList,
   ViewChild,
+  ViewChildren,
   ViewEncapsulation
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
@@ -37,6 +40,8 @@ import {
 } from '../models'
 import {
   STORAGE_PAGE_SIZE_RPM_BILLING,
+  STORAGE_RPM_BILLING_COLUMN_INDEX,
+  STORAGE_RPM_BILLING_PAGINATION,
   STORAGE_RPM_BILLING_SORT
 } from '@app/config'
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
@@ -62,6 +67,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @ViewChild(CcrPageSizeSelectorComponent, { static: true })
   pageSizeSelectorComp: CcrPageSizeSelectorComponent
+
+  @ViewChild('container') tableContainer: ElementRef
+
+  @ViewChildren('columns') tableColumns: QueryList<ElementRef>
 
   public columns: string[] = [
     'index',
@@ -110,6 +119,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   public ngAfterViewInit(): void {
+    this.recoverPagination()
     this.applyStorageSort()
     this.cdr.detectChanges()
   }
@@ -511,7 +521,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     this.source.setSorter(this.sort, this.sortHandler)
 
     this.pageSizeSelectorComp.onPageSizeChange
-      .pipe(debounceTime(300), untilDestroyed(this))
+      .pipe(untilDestroyed(this))
       .subscribe((pageSize) => {
         this.paginator.pageSize = pageSize ?? this.paginator.pageSize
 
@@ -541,10 +551,21 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.source
       .connect()
-      .pipe(untilDestroyed(this))
+      .pipe(untilDestroyed(this), debounceTime(200))
       .subscribe((values) => {
         this.rows = values
+        this.scrollToColumnIndex()
       })
+
+    this.paginator.page.pipe(untilDestroyed(this)).subscribe((page) => {
+      window.localStorage.setItem(
+        STORAGE_RPM_BILLING_PAGINATION,
+        JSON.stringify({
+          page: page.pageIndex,
+          organization: this.context.organizationId
+        })
+      )
+    })
   }
 
   private createStatusFilterForm(): void {
@@ -711,5 +732,83 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
             }
           ]
     } as Partial<FetchRPMBillingSummaryRequest>
+  }
+
+  private recoverPagination(): void {
+    const rawPagination = window.localStorage.getItem(
+      STORAGE_RPM_BILLING_PAGINATION
+    )
+
+    if (!rawPagination) {
+      return
+    }
+
+    const pagination = JSON.parse(rawPagination)
+
+    if (pagination.organization === this.context.organizationId) {
+      this.paginator.pageIndex = pagination.page
+      this.source.pageIndex = pagination.page
+      this.cdr.detectChanges()
+      this.refresh$.next()
+    } else {
+      window.localStorage.removeItem(STORAGE_RPM_BILLING_PAGINATION)
+    }
+  }
+
+  public onScroll(): void {
+    const columnIndex = this.getColumnIndexByScroll(
+      this.tableContainer.nativeElement.scrollLeft
+    )
+
+    window.localStorage.setItem(
+      STORAGE_RPM_BILLING_COLUMN_INDEX,
+      columnIndex.toString()
+    )
+  }
+
+  private getColumnIndexByScroll(scroll: number): number {
+    let lastPosition = 0
+
+    for (let i = 0; i < this.tableColumns.length; i += 1) {
+      const column = this.tableColumns.get(i)
+
+      if (column.nativeElement.classList.contains('sticky-column')) {
+        continue
+      }
+
+      const elementPosition = lastPosition + column.nativeElement.clientWidth
+
+      if (lastPosition <= scroll && scroll < elementPosition) {
+        return i
+      }
+
+      lastPosition += column.nativeElement.clientWidth
+    }
+
+    return 0
+  }
+
+  private scrollToColumnIndex() {
+    const columnIndexRaw = window.localStorage.getItem(
+      STORAGE_RPM_BILLING_COLUMN_INDEX
+    )
+
+    if (!columnIndexRaw) {
+      return
+    }
+
+    const columnIndex = parseInt(columnIndexRaw, 10)
+
+    const tableColumns = this.tableColumns.toArray().slice(0, columnIndex)
+
+    const scrollTo = tableColumns.reduce((width, column) => {
+      if (column.nativeElement.classList.contains('sticky-column')) {
+        return width
+      }
+
+      return width + column.nativeElement.clientWidth
+    }, 0)
+
+    this.tableContainer.nativeElement.scrollTo({ left: scrollTo })
   }
 }

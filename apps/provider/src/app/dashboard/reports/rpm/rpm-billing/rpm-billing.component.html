@@ -106,47 +106,47 @@
 class="ccr-table ccr-expand-table ccr-table-stats">
 
 <div class="ccr-expandable-table-container">
-<div class="ccr-expandable-table">
+<div class="ccr-expandable-table" #container (scroll)="onScroll()">
   <table ccrTableSort>
     <caption hidden>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</caption>
     <thead [class.sticky-header]="isDesktop">
-        <th class="id-cell" [class.sticky-column]="isDesktop">
+        <th #columns class="id-cell" [class.sticky-column]="isDesktop">
             #
         </th>
 
-        <th class="first-name-cell" [class.sticky-column]="isDesktop">
+        <th #columns class="first-name-cell" [class.sticky-column]="isDesktop">
             <ccr-table-sort-header property="firstName">
                 <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
             </ccr-table-sort-header>
         </th>
 
-        <th class="last-name-cell" [class.sticky-column]="isDesktop">
+        <th #columns class="last-name-cell" [class.sticky-column]="isDesktop">
             <ccr-table-sort-header property="lastName">
                 <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
             </ccr-table-sort-header>
         </th>
 
-        <th>
+        <th #columns>
             {{ 'BOARD.DOB' | translate }}
         </th>
 
-        <th class="device-type-cell">
+        <th #columns class="device-type-cell">
             {{ 'RPM.DEVICE_TYPE' | translate }}
         </th>
 
-        <th class="diagnosis-cell">
+        <th #columns class="diagnosis-cell">
             {{ 'RPM.PRIMARY_DIAGNOSIS' | translate }}
         </th>
 
-        <th class="diagnosis-cell">
+        <th #columns class="diagnosis-cell">
             {{ 'RPM.SECONDARY_DIAGNOSIS' | translate }}
         </th>
 
-        <th class="supervising-provider-cell">
+        <th #columns class="supervising-provider-cell">
             {{ 'GLOBAL.SUPERVISING_PROVIDER' | translate }}
         </th>
 
-        <th class="status-cell">
+        <th #columns class="status-cell">
             <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
                 <p>{{ 'BOARD.STATUS' | translate }}</p>
                 <select (change)="onStatusFilterChange($event)">
@@ -157,7 +157,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </div>
         </th>
 
-        <th class="activation-date-cell">
+        <th #columns class="activation-date-cell">
             <div fxLayout="row" fxLayoutAlign="center center">
                 <ccr-table-sort-header property="startedAt">
                     <span>{{ 'RPM.ACTIVATION_DATE' | translate }}</span>
@@ -165,7 +165,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </div>
         </th>
 
-        <th *ngFor="let billingEntry of source.result?.[0]?.billing; let billingIndex = index" class="code-cell">
+        <th #columns *ngFor="let billingEntry of source.result?.[0]?.billing; let billingIndex = index" class="code-cell">
             <div style="height: 100%" fxLayout="column" fxLayoutAlign="stretch stretch">
                 <p class="code-title">{{ billingEntry.code === '99458' ? '99458 x1' : billingEntry.code }}</p>
                 <div fxFlex fxLayout="row" fxLayoutAlign="stretch center">
@@ -175,7 +175,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </div>
         </th>
 
-        <th class="code-cell">
+        <th #columns class="code-cell">
             <div style="height: 100%" fxLayout="column" fxLayoutAlign="stretch stretch">
                 <p class="code-title">99458 x2</p>
                 <div fxLayout="row" fxLayoutAlign="stretch center">
