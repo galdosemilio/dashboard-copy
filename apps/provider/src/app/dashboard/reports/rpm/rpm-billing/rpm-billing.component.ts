@@ -230,7 +230,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
       csv += `"As of: ${currentAsOf.format('MMM D, YYYY')}"${this.csvSeparator}`
 
-      csv += ',,,,,,,,'
+      csv += ',,,,,,,,,,,'
 
       csv += `"99453"${this.csvSeparator}"99453"${this.csvSeparator}`
       csv += `"99454"${this.csvSeparator}"99454"${this.csvSeparator}`
