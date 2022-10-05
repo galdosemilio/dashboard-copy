@@ -1,3 +1,15 @@
+# [1.95.0](https://github.com/coachcare/dashboard/compare/v1.94.0...v1.95.0) (2022-10-05)
+
+
+### Bug Fixes
+
+* rpm report csv export column issue [FRON-2962] ([e934fa9](https://github.com/coachcare/dashboard/commit/e934fa92781e602b9e6dbe654b61926fca6248e0))
+
+
+### Features
+
+* show NXTSTIM summary boxes on patient profile [FRON-2956] ([67e20ce](https://github.com/coachcare/dashboard/commit/67e20ce2297837b1cceb50bb0364582e28cc19ef))
+
 # [1.94.0](https://github.com/coachcare/dashboard/compare/v1.93.3...v1.94.0) (2022-09-23)
 
 
