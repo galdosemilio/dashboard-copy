@@ -1,8 +1,10 @@
 
 <div fxLayout="column">
-  <div class="storefront-banner">
-    <h2>{{ 'GLOBAL.BANNER_TITLE' | translate }}</h2>
-    <p>{{ 'GLOBAL.BANNER_DESCRIPTION' | translate }}</p>
+  <div class="storefront-banner" [style.background-image]="heroImageUrl">
+    <h2 *ngIf="currentStore?.title; else defaultTitle">{{ currentStore.title }}</h2>
+    <ng-template #defaultTitle>{{ 'GLOBAL.BANNER_TITLE' | translate }}</ng-template>
+    <p *ngIf="currentStore?.description; else defaultDescription">{{ currentStore.description }}</p>
+    <ng-template #defaultDescription>{{ 'GLOBAL.BANNER_DESCRIPTION' | translate }}</ng-template>
   </div>
   <div class="header" fxLayout.xs="column" fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center" class="nav">

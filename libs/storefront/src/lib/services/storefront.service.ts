@@ -5,7 +5,6 @@ import {
   NamedEntity,
   SpreeProvider
 } from '@coachcare/sdk'
-
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 import { BehaviorSubject } from 'rxjs'
 import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
@@ -65,6 +64,12 @@ export interface StorefrontProduct extends ProductAttr {
   options: StorefrontProductOption[]
 }
 
+export interface CurrentSpreeStore {
+  title: string
+  description: string
+  heroImage: string
+}
+
 export interface StorefrontCategory extends TaxonAttr {
   images: string[]
 }
@@ -89,6 +94,38 @@ interface SpreeError {
   message: string
 }
 
+interface StoreSettingsEntry {
+  digital_asset_authorized_clicks?: number
+  digital_asset_authorized_days?: number
+  digital_asset_link_expire_time?: number
+  limit_digital_download_count?: boolean
+  limit_digital_download_days?: boolean
+}
+
+interface SpreeStore {
+  address?: string
+  contact_phone?: string
+  customer_support_email?: string
+  default?: boolean
+  default_country_id?: string
+  default_currency?: string
+  default_locale?: string
+  description?: string
+  facebook?: string
+  favicon_path?: string
+  hero_image?: string
+  instagram?: string
+  meta_description?: string
+  meta_keywords?: string
+  name?: string
+  seo_title?: string
+  settings?: StoreSettingsEntry
+  supported_currencies?: string
+  supported_locales?: string
+  twitter?: string
+  url?: string
+}
+
 const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
 const cartIncludeFields =
   'line_items,variants,variants.images,variants.product,variants.product.images,billing_address,shipping_address,user,payments,payments.payment_method,payments.source,shipments,promotions'
@@ -100,6 +137,7 @@ export class StorefrontService {
   public storeUrl: string
   public cart: StorefrontCart
 
+  public store$ = new BehaviorSubject<SpreeStore | null>(null)
   public cart$ = new BehaviorSubject<StorefrontCart | null>(null)
   public initialized$ = new BehaviorSubject<boolean>(false)
   public error$ = new BehaviorSubject<Error | null>(null)
@@ -135,6 +173,7 @@ export class StorefrontService {
         },
         true
       )
+      await this.loadSpreeStore()
 
       this.initialized$.next(true)
     } catch (err) {
@@ -289,6 +328,12 @@ export class StorefrontService {
     })
 
     this.parseCartResult(res, true)
+  }
+
+  private async loadSpreeStore() {
+    const res = await this.spreeProvider.getCurrentStore()
+
+    this.store$.next(res['data']['attributes'])
   }
 
   private async createCart() {

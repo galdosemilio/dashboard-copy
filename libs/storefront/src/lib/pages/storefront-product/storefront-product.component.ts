@@ -11,7 +11,8 @@ import {
 import {
   StorefrontCategory,
   StorefrontProduct,
-  StorefrontService
+  StorefrontService,
+  CurrentSpreeStore
 } from '@coachcare/storefront/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { select, Store } from '@ngrx/store'
@@ -32,6 +33,13 @@ export class StorefrontProductComponent implements OnInit {
   public selectedCategory: StorefrontCategory
   public isLoading: boolean = false
   public primaryColor: string
+  public currentStore: CurrentSpreeStore
+
+  public get heroImageUrl(): string | undefined {
+    if (this.currentStore.heroImage) {
+      return `url('${this.currentStore.heroImage}')`
+    }
+  }
 
   constructor(
     private storefront: StorefrontService,
@@ -51,6 +59,20 @@ export class StorefrontProductComponent implements OnInit {
         const palette = pref.assets.color
         this.primaryColor =
           palette.theme === 'accent' ? palette.accent : palette.primary
+      })
+    this.storefront.store$
+      .pipe(
+        untilDestroyed(this),
+        filter((s) => !!s)
+      )
+      .subscribe((s) => {
+        this.currentStore = {
+          title: s.name,
+          description: s.description,
+          heroImage: s.hero_image
+            ? `${this.storefront.storeUrl + s.hero_image}`
+            : 'https://cdn.coachcare.com/corporate/Other/ecommerce-general-background.jpg'
+        }
       })
   }
 
