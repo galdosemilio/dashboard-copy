@@ -207,12 +207,10 @@ function verifyDeleteApiCall(option: Option): void {
 
   switch (option) {
     case 'schedule-delete-after':
-      url = `https://test.api.coachcare.com/2.0/meeting/recurring/18073?after=${encodeURIComponent(
-        '2019-12-31T05:00:00.000Z'
-      )}`
-      break
     case 'schedule-delete-this-and-future':
-      url = 'https://test.api.coachcare.com/2.0/meeting/recurring/18073'
+      url = `https://test.api.coachcare.com/2.0/meeting/recurring/18073?after=${encodeURIComponent(
+        '2020-01-01'
+      )}`
       break
     case 'schedule-delete-this-meeting':
       url = 'https://test.api.coachcare.com/2.0/meeting/single/18073'
@@ -221,5 +219,5 @@ function verifyDeleteApiCall(option: Option): void {
 
   cy.tick(1000)
 
-  cy.wait('@deleteMeeting').its('request.url').should('equal', url)
+  cy.wait('@deleteMeeting').its('request.url').should('contain', url)
 }

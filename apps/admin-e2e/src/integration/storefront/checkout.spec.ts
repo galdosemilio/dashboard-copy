@@ -25,15 +25,7 @@ describe('Loading Storefront product dialog', function () {
 
     cy.get('[cy-data="shipping-method"]').contains('Free shipping - $0.00')
 
-    cy.get('[cy-data="payment-method"]')
-      .find('[cy-data="payment-method-name"]')
-      .contains('Zhang Xin')
-    cy.get('[cy-data="payment-method"]')
-      .find('[cy-data="payment-method-card-number"]')
-      .contains('***4242')
-    cy.get('[cy-data="payment-method"]')
-      .find('[cy-data="payment-method-card-expires"]')
-      .contains('4 / 2024')
+    cy.get('[cy-data="payment-method"]').contains('Visa ***4242 4/2024')
 
     cy.get('[cy-data="billing-address"]')
       .find('[cy-data="billing-address-name"]')

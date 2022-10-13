@@ -71,8 +71,19 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
+      - when:
+          condition:
+            equal: ['e2e', << parameters.command >>]
+          steps:
+            - run:
+                name: Installing Cypress ad-hoc
+                command: ./node_modules/.bin/cypress install
+            - run:
+                name: Sound card default config
+                command: echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
       - run:
           name: Execute affected - << parameters.command >>
+          no_output_timeout: 30m
           command: yarn affected:<<parameters.command>> --base=<< parameters.base >> <<# parameters.exclude >> --exclude=<< parameters.exclude >> <</ parameters.exclude >>
 
   full_build:
@@ -211,7 +222,7 @@ jobs:
           command: echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
       - run:
           name: Running affected e2e
-          command: yarn run cy-serve:provider
+          command: yarn run cy-serve:provider -c e2e
     parallelism: 5
 
   admin_e2e_parallel:

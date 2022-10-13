@@ -7,7 +7,7 @@ describe('Patient Integrations Page', () => {
     standardSetup()
   })
 
-  it.only('Allows force-syncing a device', () => {
+  it('Allows force-syncing a device', () => {
     cy.visit(`/admin/accounts/patients/${Cypress.env('patientId')}`)
 
     syncThirdPartyService(0, 'google')

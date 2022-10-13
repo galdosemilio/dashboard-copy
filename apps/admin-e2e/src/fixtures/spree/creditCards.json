@@ -1,0 +1,18 @@
+{
+  "credit_cards": [
+    {
+      "id": "card_1LsSLtEikseGOL6laNFqUFzA",
+      "brand": "Visa",
+      "default_source": true,
+      "source_id": 247,
+      "cvc_check": "pass",
+      "dynamic_last4": null,
+      "exp_month": 4,
+      "exp_year": 2024,
+      "fingerprint": "wPLnF1IBi6ZCxxJD",
+      "funding": "credit",
+      "last4": "4242",
+      "country": "US"
+    }
+  ]
+}

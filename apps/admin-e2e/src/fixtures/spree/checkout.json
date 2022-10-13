@@ -395,7 +395,7 @@
       }
     },
     {
-      "id": "191",
+      "id": "247",
       "type": "credit_card",
       "attributes": {
         "cc_type": "card",
@@ -425,7 +425,7 @@
         "public_metadata": {}
       },
       "relationships": {
-        "source": { "data": { "id": "191", "type": "credit_card" } },
+        "source": { "data": { "id": "247", "type": "credit_card" } },
         "payment_method": { "data": { "id": "2", "type": "payment_method" } }
       }
     },

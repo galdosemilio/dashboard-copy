@@ -45,7 +45,7 @@ describe('routes guard', () => {
     cy.setOrganization('ccr')
     standardSetup({ mode: 'client' })
 
-    cy.visit('/accounts/patients')
+    cy.visit('/accounts/alerts')
 
     assertRedirection()
   })

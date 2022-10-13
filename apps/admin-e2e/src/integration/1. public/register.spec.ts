@@ -18,10 +18,6 @@ function assessDisplayedPlan(args: {
   cy.get(`div.item-list`).contains(args.price)
 }
 
-function assessSelectedPlan(plan: string) {
-  cy.get('mat-select').contains(plan)
-}
-
 function completeClinicPlans(
   args: {
     plan: string
@@ -171,15 +167,17 @@ describe('Register New Clinic', function () {
   })
 
   for (const plan of plans) {
-    it(`Allows plan to be set from the URL: ${plan.param}`, function () {
+    it(`Allows plan to be set from the URL: ${plan.param} and hide plan step`, function () {
       cy.visit(`/register/clinic?plan=${plan.param}`)
 
+      cy.get('mat-horizontal-stepper')
+        .find('mat-step-header')
+        .should('have.length', 3)
       completeStep1()
 
-      cy.tick(1000)
-      cy.wait(1000)
-
-      assessSelectedPlan(plan.title)
+      cy.get('ccr-page-register-clinic-payment')
+        .find('#payment-form')
+        .contains('Billing Information')
     })
   }
 

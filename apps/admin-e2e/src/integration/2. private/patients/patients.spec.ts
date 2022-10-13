@@ -56,7 +56,10 @@ describe('Patients Listing Page', () => {
 
     cy.get('button.mat-icon-button', { timeout: 10000 }).eq(0).click()
 
-    cy.get('button.ccr-icon-button', { timeout: 10000 }).eq(0).click()
+    cy.get('.ccr-action-buttons')
+      .get('[cy-data="edit-button"]', { timeout: 10000 })
+      .eq(0)
+      .click()
 
     cy.get('simple-snack-bar', { timeout: 10000 }).should(
       'contain',

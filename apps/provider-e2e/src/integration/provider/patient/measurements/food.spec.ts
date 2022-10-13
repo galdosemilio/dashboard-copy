@@ -6,7 +6,7 @@ describe('Patient profile -> measurements -> food', function () {
 
     cy.visit(`/accounts/patients/${Cypress.env('clientId')}/measurements`)
 
-    cy.get('app-dieter-measurements-tabs').find('li').should('have.length', 4)
+    cy.get('app-dieter-measurements-tabs').find('li').should('have.length', 1)
 
     cy.get('app-dieter-measurements-tabs').find('li').contains('Food').click()
 

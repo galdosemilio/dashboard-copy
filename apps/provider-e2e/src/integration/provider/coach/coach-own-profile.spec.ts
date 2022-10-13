@@ -31,7 +31,7 @@ describe('Dashboard -> Coach Own Profile', function () {
     cy.get('app-profile').find('button').contains('Save').click({ force: true })
 
     cy.wait('@accountPatchRequest').should((xhr) => {
-      expect(xhr.request.body.defaultOrganization).to.equal('7242')
+      expect(xhr.request.body.defaultOrganization).to.equal('1')
     })
 
     cy.wait('@accountPatchRequest').should((xhr) => {

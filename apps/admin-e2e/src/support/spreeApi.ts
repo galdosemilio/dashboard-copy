@@ -59,6 +59,10 @@ const interceptSpreeApiCalls = (): void => {
       data: []
     }
   })
+
+  cy.intercept('GET', 'api/v2/storefront/stripe/credit_cards', {
+    fixture: 'spree/creditCards'
+  })
 }
 
 export { interceptSpreeApiCalls }
