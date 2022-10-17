@@ -6,7 +6,7 @@
     "ADDRESS_STATE_REQUIRED": "State/Province is required",
     "PAYMENT_METHOD_NOT_FOUND": "Payment method not found, please contact admin.",
     "SPREE_ACCOUNT_ALREDAY_EXISTS": "A store account already exists for your email address, but it is not properly connected.  Please <a href='mailto:support@coachcare.com'>contact our support team</a> for assistance.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "Store not available"
   },
   "GLOBAL": {
     "ACTIONS": "Actions",
@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Address Line 2",
     "ADD_TO_CART": "Add to Cart",
     "ALL": "All",
+    "BACK_TO_STORE": "Back to store",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Weight Loss for Health Gains",
     "BILLING_ADDRESS": "Billing Address",
@@ -22,6 +23,7 @@
     "CART": "Cart",
     "CHECK_OUT": "Checkout",
     "CITY": "City",
+    "CLEAR_SEARCH": "Clear search",
     "CLOSE": "Close",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "If there's anything else you would like to know, feel free to contact Customer Service",
     "CONTINUE_SHOPPING": "Continue Shopping",
@@ -32,6 +34,7 @@
     "DELETE_PAYMENT_METHOD": "Delete Payment Method",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Are you sure you want to delete the payment method ************{{last4}}?.<br><br><strong>This action cannot be undone.</strong>",
     "DESCRIPTION": "Description",
+    "EMPTY_CART": "Your cart is empty",
     "EXPIRES": "Expires: {{date}}",
     "GO_TO_CART": "Go to Cart",
     "GO_TO_MY_ORDERS": "Go to My Orders",
@@ -39,6 +42,7 @@
     "ITEM_ADDED_TO_CART": "Item Added to Cart",
     "ITEM_DETAILS": "Item Details",
     "NO_INFORMATION": "No record info. Add now >",
+    "NO_SEARCH_RESULTS": "No Search Results",
     "ORDER_HISTORY": "Order History",
     "ORDER_SUMMARY": "Order Summary",
     "PAYMENT_MANAGEMENT": "Payment Management",

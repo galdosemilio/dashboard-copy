@@ -6,7 +6,7 @@
     "ADDRESS_STATE_REQUIRED": "Stato/Provincia è obbligatorio",
     "PAYMENT_METHOD_NOT_FOUND": "Metodo di pagamento non trovato, contattare l'amministratore.",
     "SPREE_ACCOUNT_ALREDAY_EXISTS": "Esiste già un account negozio per il tuo indirizzo email, ma non è collegato correttamente. Per favore <a href='mailto:support@coachcare.com'>contatta il nostro team di supporto</a> per assistenza.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "negozio non disponibile"
   },
   "GLOBAL": {
     "ACTIONS": "Azioni",
@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Indirizzo Linea 2",
     "ADD_TO_CART": "Aggiungi al carrello",
     "ALL": "Tutto",
+    "BACK_TO_STORE": "Torna al negozio",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Perdita di peso per guadagni di salute",
     "BILLING_ADDRESS": "Indirizzo Di Fatturazione",
@@ -22,6 +23,7 @@
     "CART": "Carrello",
     "CHECK_OUT": "Guardare",
     "CITY": "Città",
+    "CLEAR_SEARCH": "Cancella ricerca",
     "CLOSE": "Chiudi",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Se c'è qualcos'altro che vorresti sapere, non esitare a contattare il Servizio Clienti",
     "CONTINUE_SHOPPING": "Continua a fare acquisti",
@@ -32,6 +34,7 @@
     "DELETE_PAYMENT_METHOD": "Elimina-metodo-di pagamento",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Sei sicuro di voler eliminare il metodo di pagamento **************{{last4}}?<br><br><strong>Questa azione non può essere annullata.</strong>",
     "DESCRIPTION": "Descrizione",
+    "EMPTY_CART": "il tuo carrello è vuoto",
     "EXPIRES": "Scade: {{date}}",
     "GO_TO_CART": "Vai al carrello",
     "GO_TO_MY_ORDERS": "Vai a I miei ordini",
@@ -39,6 +42,7 @@
     "ITEM_ADDED_TO_CART": "Articolo aggiunto al carrello",
     "ITEM_DETAILS": "Dettagli dell'articolo",
     "NO_INFORMATION": "Nessuna informazione sul record. Aggiungi ora >",
+    "NO_SEARCH_RESULTS": "nessun risultato trovato",
     "ORDER_HISTORY": "Cronologia ordini",
     "ORDER_SUMMARY": "Riepilogo dell'ordine",
     "PAYMENT_MANAGEMENT": "Gestione dei pagamenti",

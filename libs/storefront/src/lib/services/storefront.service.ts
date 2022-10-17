@@ -264,7 +264,7 @@ export class StorefrontService {
   }
 
   public async getProducts(
-    taxonId: string,
+    taxonId?: string,
     name?: string
   ): Promise<StorefrontProduct[]> {
     const res = await this.spree.products.list(undefined, {

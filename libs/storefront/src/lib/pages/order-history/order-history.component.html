@@ -1,8 +1,8 @@
 
 <div class="order-history">
   <h2>{{ 'GLOBAL.ORDER_HISTORY' | translate }}</h2>
-  <div class="ccr-table" [class.ccr-loading]="source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
-    <mat-table [dataSource]="source" matSort>
+  <div class="ccr-table">
+    <mat-table [dataSource]="orders" matSort matSortActive="date" matSortDirection="desc">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">ID</mat-header-cell>
         <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
@@ -10,7 +10,7 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex.xs="100%">{{ 'GLOBAL.DATE' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="100%">
           {{ row.createdAt | amDateFormat:'ddd, MMM D YYYY h:mm a' }}
         </mat-cell>
@@ -41,5 +41,7 @@
       [ngClass]="{ 'row-even': even, 'row-odd': odd }"
       ></mat-row>
     </mat-table>
+    <storefront-loading [isLoading]="isLoading" [withOverlay]="true"></storefront-loading>
+    <mat-paginator [length]="totalCount" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="perPage"></mat-paginator>
   </div>
 </div>

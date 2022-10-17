@@ -1,6 +1,30 @@
 @import 'variables';
 
 :host {
+  .no-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 0;
+
+    .mat-icon {
+      font-size: 100px;
+      width: 100px;
+      height: 100px;
+    }
+
+    h3 {
+      font-size: 36px;
+      font-weight: 500;
+      margin-top: 20px;
+    }
+
+    a {
+      cursor: pointer;
+    }
+  }
+
   .cart-item {
     display: flex;
     border-bottom: 1px solid #e3e3e3;
@@ -82,18 +106,6 @@
 
   .ccr-button[disabled] {
     background-color: rgba(0, 0, 0, 0.12);
-  }
-
-  .loading {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.7);
   }
 
   @media (max-width: $xs-max) {

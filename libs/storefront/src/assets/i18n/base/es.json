@@ -6,7 +6,7 @@
     "ADDRESS_STATE_REQUIRED": "Se requiere estado / provincia",
     "PAYMENT_METHOD_NOT_FOUND": "No se encontró el método de pago, comuníquese con el administrador.",
     "SPREE_ACCOUNT_ALREDAY_EXISTS": "Ya existe una cuenta de la tienda para su dirección de correo electrónico, pero no está conectada correctamente. <a href='mailto:support@coachcare.com'>comuníquese con nuestro equipo de soporte</a> para obtener ayuda.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "Tienda no disponible"
   },
   "GLOBAL": {
     "ACTIONS": "Acciones",
@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Dirección Línea 2",
     "ADD_TO_CART": "Añadir al carrito",
     "ALL": "Todos",
+    "BACK_TO_STORE": "Regresar a tienda",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Pérdida de peso para ganancias de salud",
     "BILLING_ADDRESS": "Dirección de Envio",
@@ -22,6 +23,7 @@
     "CART": "Carro",
     "CHECK_OUT": "Verificar",
     "CITY": "Ciudad",
+    "CLEAR_SEARCH": "Borrar búsqueda",
     "CLOSE": "Cerrar",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Si hay algo más que le gustaría saber, no dude en contactar el Servicio de Atención al Cliente",
     "CONTINUE_SHOPPING": "Seguir comprando",
@@ -32,6 +34,7 @@
     "DELETE_PAYMENT_METHOD": "Borrar Método de Pago",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "¿Está seguro de querer eliminar el método de pago ************{{last4}}?<br><br><strong>Esta acción no se puede deshacer.</strong>",
     "DESCRIPTION": "Descripción",
+    "EMPTY_CART": "Tu carrito esta vacío",
     "EXPIRES": "Caduca: {{date}}",
     "GO_TO_CART": "Ir al carrito",
     "GO_TO_MY_ORDERS": "Ir a Mis pedidos",
@@ -39,6 +42,7 @@
     "ITEM_ADDED_TO_CART": "Artículo agregado al carrito",
     "ITEM_DETAILS": "detalles del artículo",
     "NO_INFORMATION": "Sin información de registro. Añadir ahora >",
+    "NO_SEARCH_RESULTS": "Sin resultados de búsqueda",
     "ORDER_HISTORY": "Historial de pedidos",
     "ORDER_SUMMARY": "Resumen de la Orden",
     "PAYMENT_MANAGEMENT": "Gestión de pagos",

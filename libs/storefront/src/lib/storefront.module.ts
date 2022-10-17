@@ -29,6 +29,9 @@ import { CcrFormFieldsModule } from '@coachcare/common/components'
 import { MatInputModule } from '@angular/material/input'
 import { environment } from './environments/environment'
 import { MatTableModule } from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSortModule } from '@angular/material/sort'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   imports: [
@@ -48,6 +51,9 @@ import { MatTableModule } from '@angular/material/table'
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTooltipModule,
     MatToolbarModule,
     ReactiveFormsModule,
     CcrFormFieldsModule,

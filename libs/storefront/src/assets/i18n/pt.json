@@ -6,7 +6,7 @@
     "ADDRESS_STATE_REQUIRED": "Estado / província é obrigatório",
     "PAYMENT_METHOD_NOT_FOUND": "Método de pagamento não encontrado, entre em contato com o administrador.",
     "SPREE_ACCOUNT_ALREDAY_EXISTS": "Já existe uma conta de loja para o seu endereço de e-mail, mas não está conectada corretamente. Por favor, <a href='mailto:support@coachcare.com'/>entre em contato com nossa equipe de suporte</a> para obter assistência.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "loja não disponível"
   },
   "GLOBAL": {
     "ACTIONS": "Ações",
@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Endereço Linha 1",
     "ADD_TO_CART": "Adicionar ao carrinho",
     "ALL": "Tutto",
+    "BACK_TO_STORE": "Voltar para a loja",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Perdita di peso per guadagni di salute",
     "BILLING_ADDRESS": "endereço de cobrança",
@@ -22,6 +23,7 @@
     "CART": "Carrinho",
     "CHECK_OUT": "Confira",
     "CITY": "Cidade",
+    "CLEAR_SEARCH": "Limpar pesquisa",
     "CLOSE": "Fechar",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Se houver mais alguma coisa que você gostaria de saber, sinta-se à vontade para entrar em contato com o Atendimento ao Cliente",
     "CONTINUE_SHOPPING": "Continue comprando",
@@ -32,6 +34,7 @@
     "DELETE_PAYMENT_METHOD": "Excluir método de pagamento",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Tem certeza de que deseja excluir o método de pagamento ************{{last4}}?.<br><br><strong>Esta ação não pode ser desfeita.</strong>",
     "DESCRIPTION": "Descrição",
+    "EMPTY_CART": "Seu carrinho está vazio",
     "EXPIRES": "Expira: {{date}}",
     "GO_TO_CART": "Ir para o carrinho",
     "GO_TO_MY_ORDERS": "Ir para meus pedidos",
@@ -39,6 +42,7 @@
     "ITEM_ADDED_TO_CART": "Item adicionado ao carrinho",
     "ITEM_DETAILS": "Detalhes do item",
     "NO_INFORMATION": "Sem informações de registro. Adicionar agora >",
+    "NO_SEARCH_RESULTS": "Nenhum resultado de pesquisa",
     "ORDER_HISTORY": "Histórico de pedidos",
     "ORDER_SUMMARY": "Resumo do Pedido",
     "PAYMENT_MANAGEMENT": "Gestão de Pagamentos",

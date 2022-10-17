@@ -8,6 +8,6 @@ export class StorefrontOrdersDatabase {
   public fetch(): Promise<{
     data: OrderEntry[]
   }> {
-    return this.spree.getOrders()
+    return this.spree.getOrders({})
   }
 }

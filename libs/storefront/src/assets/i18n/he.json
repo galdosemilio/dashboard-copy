@@ -6,7 +6,7 @@
     "ADDRESS_STATE_REQUIRED": "מדינה/פרובינציה נדרשת",
     "PAYMENT_METHOD_NOT_FOUND": "אמצעי התשלום לא נמצא, אנא צור קשר עם מנהל המערכת.",
     "SPREE_ACCOUNT_ALREDAY_EXISTS": "חשבון חנות כבר קיים עבור כתובת האימייל שלך, אך הוא אינו מחובר כהלכה. אנא <a href='mailto:support@coachcare.com'>צור קשר עם צוות התמיכה שלנו</a> לקבלת סיוע.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "חנות לא זמינה"
   },
   "GLOBAL": {
     "ACTIONS": "פעולות",
@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "שורת כתובת 2",
     "ADD_TO_CART": "הוסף לעגלה",
     "ALL": "את כל",
+    "BACK_TO_STORE": "חזור לחנות",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "ירידה במשקל לרווחים בריאותיים",
     "BILLING_ADDRESS": "כתובת לחיוב",
@@ -22,6 +23,7 @@
     "CART": "עֲגָלָה",
     "CHECK_OUT": "לבדוק",
     "CITY": "עיר",
+    "CLEAR_SEARCH": "חיפוש נקי",
     "CLOSE": "סגירה",
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "אם יש משהו נוסף שתרצה לדעת, אל תהסס לפנות לשירות הלקוחות",
     "CONTINUE_SHOPPING": "המשך בקניות",
@@ -32,6 +34,7 @@
     "DELETE_PAYMENT_METHOD": "מחיקת אמצעי תשלום.",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "האם אתה בטוח שברצונך למחוק את שיטת התשלום ************{{last4}}?<br><br><strong>פעולה זו לא ניתן לבטל.</strong>",
     "DESCRIPTION": "תיאור",
+    "EMPTY_CART": "העגלה שלך ריקה",
     "EXPIRES": "{{date}} :יפוג",
     "GO_TO_CART": "לך לעגלה",
     "GO_TO_MY_ORDERS": "עבור אל ההזמנות שלי",
@@ -39,6 +42,7 @@
     "ITEM_ADDED_TO_CART": "פריט נוסף לעגלה",
     "ITEM_DETAILS": "פרטי הפריט",
     "NO_INFORMATION": "אין מידע תיעוד. הוסף עכשיו >",
+    "NO_SEARCH_RESULTS": "אין תוצאות חיפוש",
     "ORDER_HISTORY": "היסטוריית הזמנות",
     "ORDER_SUMMARY": "סיכום הזמנה",
     "PAYMENT_MANAGEMENT": "ניהול תשלומים",

@@ -125,8 +125,10 @@
   <div class="no-info"><mat-icon>error</mat-icon> {{ 'GLOBAL.NO_INFORMATION' | translate }}</div>
 </ng-template>
 
-<div class="loading" *ngIf="isLoading">
-  <mat-spinner>
-    <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
-  </mat-spinner>
+<storefront-loading [isLoading]="isLoading" [withOverlay]="true"></storefront-loading>
+
+<div class="no-cart" *ngIf="!cart && !isLoading">
+  <mat-icon>shopping_cart</mat-icon>
+  <h3>{{ 'GLOBAL.EMPTY_CART' | translate }}</h3>
+  <a routerLink="../../../storefront/product">{{ 'GLOBAL.BACK_TO_STORE' | translate }}</a>
 </div>

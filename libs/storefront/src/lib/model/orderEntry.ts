@@ -12,6 +12,11 @@ import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Produ
 
 export class StorefrontOrdersResponse {
   data: OrderEntry[]
+  meta?: {
+    count: number
+    total_count: number
+    total_pages: number
+  }
 }
 
 export class StorefrontOrderEntry {

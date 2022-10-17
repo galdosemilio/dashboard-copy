@@ -1,6 +1,7 @@
 
 <div fxLayout="column">
   <div class="storefront-banner" [style.background-image]="heroImageUrl">
+    <div class="storefront-banner-overlay"></div>
     <h2 *ngIf="currentStore?.title; else defaultTitle">{{ currentStore.title }}</h2>
     <ng-template #defaultTitle>{{ 'GLOBAL.BANNER_TITLE' | translate }}</ng-template>
     <p *ngIf="currentStore?.description; else defaultDescription">{{ currentStore.description }}</p>
@@ -23,19 +24,21 @@
         <input
           type="text" class="search-box"
           [placeholder]="'GLOBAL.SEARCH_ITEMS' | translate"
-          (ngModelChange)="this.search$.next($event)"
-          [(ngModel)]="search"
+          (input)="this.search$.next(searchInput.value)"
+          #searchInput
         >
+        <mat-icon *ngIf="search.length" (click)="onClearSearch()">cancel</mat-icon>
       </div>
     </div>
   </div>
-  <div class="loading" *ngIf="isLoading">
-    <mat-spinner>
-      <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
-    </mat-spinner>
-  </div>
+  <storefront-loading [isLoading]="isLoading"></storefront-loading>
   <div class="product-container"  *ngIf="!isLoading">
-    <div class="products" *ngIf="selectedCategory">
+    <div class="no-results" *ngIf="displayNoResults">
+      <mat-icon>search</mat-icon>
+      <h3>{{ 'GLOBAL.NO_SEARCH_RESULTS' | translate }}</h3>
+      <a (click)="onClearSearch()">{{ 'GLOBAL.CLEAR_SEARCH' | translate }}</a>
+    </div>
+    <div class="products" *ngIf="products.length">
       <div class="product" *ngFor="let product of products" (click)="onSelectProduct(product)">
         <div class="product-img">
           <img [src]="product.images[0]" alt="product" />
@@ -43,7 +46,7 @@
         <p>{{ product.attributes.name }}</p>
       </div>
     </div>
-    <div class="categories" *ngIf="!selectedCategory">
+    <div class="categories" *ngIf="displayCategories">
       <div class="category" *ngFor="let category of categories" (click)="onSelectCategory(category)">
         <img *ngIf="category.images?.length; else noCategoryImage" [src]="category.images[0]" alt=""/>
         <div class="category-content">

@@ -25,19 +25,22 @@ export class StorefrontProductDialog implements OnInit {
   public selectedVariant: StorefrontVariant
   public defaultVariant: StorefrontVariant
   public options: StorefrontProductOption[] = []
-  public galleryOptions: NgxGalleryOptions[] = [
-    {
-      width: '400px',
-      height: '400px',
-      thumbnailsColumns: 4,
-      imageAnimation: NgxGalleryAnimation.Slide,
-      imageSize: NgxGalleryImageSize.Contain,
-      thumbnailSize: NgxGalleryImageSize.Contain
-    }
-  ]
   public productImages: NgxGalleryImage[] = []
-
   public quantity = 1
+  public get galleryOptions(): NgxGalleryOptions[] {
+    return [
+      {
+        width: '400px',
+        height: '400px',
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        imageSize: NgxGalleryImageSize.Contain,
+        thumbnailSize: NgxGalleryImageSize.Contain,
+        imageArrows: this.productImages.length > 1,
+        thumbnails: this.productImages.length > 1
+      }
+    ]
+  }
 
   get productPrice(): string {
     if (this.selectedVariant) {

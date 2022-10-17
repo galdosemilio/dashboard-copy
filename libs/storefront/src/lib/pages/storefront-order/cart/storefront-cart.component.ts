@@ -29,7 +29,9 @@ export class StorefrontCartComponent implements OnInit {
         untilDestroyed(this),
         filter((cart) => !!cart)
       )
-      .subscribe((cart) => (this.cart = cart))
+      .subscribe((cart) => {
+        this.cart = cart?.isComplete ? null : cart
+      })
   }
 
   public async onChangeQuantity(itemId: string, quantity: number) {

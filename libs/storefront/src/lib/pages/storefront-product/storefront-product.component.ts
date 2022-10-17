@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CCRState } from '@coachcare/backend/store'
@@ -41,6 +41,16 @@ export class StorefrontProductComponent implements OnInit {
     }
   }
 
+  public get displayCategories(): boolean {
+    return !this.products.length && !this.search.length
+  }
+
+  public get displayNoResults(): boolean {
+    return !this.products.length && !!this.search.length
+  }
+
+  @ViewChild('searchInput') searchInput: ElementRef
+
   constructor(
     private storefront: StorefrontService,
     private notifier: NotifierService,
@@ -79,13 +89,19 @@ export class StorefrontProductComponent implements OnInit {
   ngOnInit(): void {
     void this.getCategories()
 
-    this.search$.pipe(untilDestroyed(this), debounceTime(400)).subscribe(() => {
-      if (this.selectedCategory) {
-        void this.getProducts()
-      } else {
-        void this.getCategories()
-      }
-    })
+    this.search$
+      .pipe(untilDestroyed(this), debounceTime(500))
+      .subscribe((value: string) => {
+        if (value.length) {
+          this.search = value
+          void this.getProducts()
+        } else {
+          this.products = []
+          this.searchInput.nativeElement.value = ''
+          this.search = ''
+          this.selectedCategory = null
+        }
+      })
   }
 
   private async getCategories() {
@@ -102,17 +118,12 @@ export class StorefrontProductComponent implements OnInit {
   }
 
   private async getProducts() {
-    this.products = []
-
-    if (!this.selectedCategory) {
-      return
-    }
-
     this.isLoading = true
+    this.products = []
 
     try {
       this.products = await this.storefront.getProducts(
-        this.selectedCategory.id,
+        this.selectedCategory?.id,
         this.search
       )
     } catch (err) {
@@ -123,7 +134,7 @@ export class StorefrontProductComponent implements OnInit {
   }
 
   public onSelectCategory(category: StorefrontCategory) {
-    this.search = ''
+    this.searchInput.nativeElement.value = ''
     this.selectedCategory = category
     void this.getProducts()
   }
@@ -178,7 +189,15 @@ export class StorefrontProductComponent implements OnInit {
 
   public onClearSelectedCategory() {
     this.search = ''
+    this.searchInput.nativeElement.value = ''
     this.selectedCategory = null
+    this.products = []
     void this.getCategories()
+  }
+
+  public onClearSearch() {
+    this.search = ''
+    this.products = []
+    this.searchInput.nativeElement.value = ''
   }
 }
