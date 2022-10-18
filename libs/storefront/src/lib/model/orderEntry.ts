@@ -20,7 +20,7 @@ export class StorefrontOrdersResponse {
 }
 
 export class StorefrontOrderEntry {
-  public createdAt: string
+  public completedAt: string
   public billingAddress?: AccountAddress
   public id: string
   public paymentMethod: Partial<SpreeCreditCardEntry>
@@ -53,7 +53,7 @@ export class StorefrontOrderEntry {
     this.id = args.attributes.number
     this.tax = +args.attributes.tax_total
     this.total = +args.attributes.total
-    this.createdAt = args.attributes.created_at.toString()
+    this.completedAt = args.attributes.completed_at?.toString()
     this.billingAddress = this.getAddressFromIncluded(
       (args.relationships.billing_address.data as Entity).id,
       included

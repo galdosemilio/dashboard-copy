@@ -11,7 +11,7 @@
   <ng-container *ngIf="order; else spinner">
     <h3 fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="15px">
       <span fxFlex>{{ 'GLOBAL.ID' | translate }}: {{ order.id }}</span>
-      <span>{{ 'GLOBAL.DATE' | translate }}: {{ order.createdAt | amDateFormat:'ddd, MMM D YYYY h:mm a' }}</span>
+      <span>{{ 'GLOBAL.DATE' | translate }}: {{ order.completedAt | amDateFormat:'ddd, MMM D YYYY h:mm a' }}</span>
     </h3>
 
     <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
