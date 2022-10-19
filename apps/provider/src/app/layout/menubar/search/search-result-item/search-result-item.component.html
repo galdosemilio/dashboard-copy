@@ -2,6 +2,7 @@
   <div fxFlex>
     {{ account.firstName + ' ' + account.lastName }}
     <i>{{ formatAccountType(account.accountType.id) | translate }}</i>
+    <small class="account-id">{{ 'GLOBAL.ID' | translate }}: {{ account.id }}</small>
   </div>
   <small fxFlex>{{ account.email }}</small>
 </div>

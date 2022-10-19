@@ -1125,7 +1125,8 @@
     "HELP": "مساعدة",
     "LANGUAGE": "لغة",
     "LOGOUT": "تسجيل الخروج",
-    "SEARCH": "بحث"
+    "SEARCH": "بحث",
+    "SEARCH_BY_NAME_EMAIL_OR_ACCOUNT_ID": "ابحث بالاسم أو البريد الإلكتروني أو معرف الحساب"
   },
   "MOMENTJS": {
     "LASWEEK": "[الماضي] dddd",

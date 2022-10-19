@@ -60,7 +60,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
         if (query) {
-          this.searchAccounts(query)
+          void this.searchAccounts(query)
         } else {
           this.trigger.closePanel()
         }
@@ -97,18 +97,34 @@ export class SearchComponent implements OnDestroy, OnInit {
     }
   }
 
-  private searchAccounts(query: string): void {
+  private async searchAccounts(query: string): Promise<void> {
     const request: AccListRequest = {
       query
     }
-    this.account
-      .getList(request)
-      .then((res) => {
-        this.accounts = res.data
-        if (this.accounts.length > 0) {
-          this.trigger.openPanel()
+
+    try {
+      const res = await this.account.getList(request)
+      this.accounts = res.data
+
+      if (/^\d+$/.test(query)) {
+        const singleAccount = await this.account
+          .getSingle(query)
+          .then((res) => res)
+          .catch(() => null)
+
+        if (
+          singleAccount &&
+          !this.accounts.find((entry) => entry.id === singleAccount.id)
+        ) {
+          this.accounts.splice(0, 0, singleAccount)
         }
-      })
-      .catch((err) => this.notifier.error(err))
+      }
+
+      if (this.accounts.length > 0) {
+        this.trigger.openPanel()
+      }
+    } catch (err) {
+      this.notifier.error(err)
+    }
   }
 }

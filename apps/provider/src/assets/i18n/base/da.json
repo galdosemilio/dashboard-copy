@@ -1125,7 +1125,8 @@
     "HELP": "Hjælp",
     "LANGUAGE": "Sprog",
     "LOGOUT": "Log ud",
-    "SEARCH": "Søg"
+    "SEARCH": "Søg",
+    "SEARCH_BY_NAME_EMAIL_OR_ACCOUNT_ID": "Søg efter navn, e-mail eller konto-id"
   },
   "MOMENTJS": {
     "LASWEEK": "[Last] dddd",

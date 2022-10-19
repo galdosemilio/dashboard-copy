@@ -1125,7 +1125,8 @@
     "HELP": "Hilfe",
     "LANGUAGE": "Sprache",
     "LOGOUT": "Ausloggen",
-    "SEARCH": "Suche"
+    "SEARCH": "Suche",
+    "SEARCH_BY_NAME_EMAIL_OR_ACCOUNT_ID": "Suchen Sie nach Name, E-Mail oder Konto-ID"
   },
   "MOMENTJS": {
     "LASWEEK": "[Last] dddd",
