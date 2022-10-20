@@ -108,6 +108,7 @@
         <h2>{{ cart.attributes.display_total }}</h2>
       </div>
     </div>
+    <storefront-notice *ngIf="shippingDescription" [message]="shippingDescription"></storefront-notice>
     <button
       mat-button
       [disabled]="!cart.lineItems.length ||

@@ -1,0 +1,9 @@
+.notice {
+  display: flex;
+  align-items: center;
+
+  .mat-icon {
+    color: var(--primary-lighten);
+    margin-right: 10px;
+  }
+}

@@ -18,6 +18,10 @@ export class StorefrontCartComponent implements OnInit {
   public cart: StorefrontCart
   public isLoading = false
 
+  public get shippingDescription(): string {
+    return this.cart?.shipment?.attributes?.public_metadata?.description || ''
+  }
+
   constructor(
     private storefront: StorefrontService,
     private notifier: NotifierService

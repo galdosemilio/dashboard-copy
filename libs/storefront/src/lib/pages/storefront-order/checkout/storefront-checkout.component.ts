@@ -39,6 +39,10 @@ export class StorefrontCheckoutComponent implements OnInit {
   public shippingRates: NamedEntity[] = []
   public creditCardList: NamedEntity[] = []
 
+  public get shippingDescription(): string {
+    return this.cart?.shipment?.attributes?.public_metadata?.description || ''
+  }
+
   constructor(
     private storefront: StorefrontService,
     private notifier: NotifierService,

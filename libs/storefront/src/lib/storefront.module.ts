@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatCardModule } from '@angular/material/card'
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCardModule,
     MatTooltipModule,
     MatToolbarModule,
     ReactiveFormsModule,

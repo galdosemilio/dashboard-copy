@@ -84,6 +84,7 @@ export interface StorefrontCart extends OrderAttr {
   billingAddress?: JsonApiDocument
   paymentMethod?: JsonApiDocument
   creditCard?: JsonApiDocument
+  shipment?: JsonApiDocument
   shipmentId?: string
   shppingRateId?: string
   isComplete?: boolean
@@ -532,6 +533,7 @@ export class StorefrontService {
       paymentMethod,
       creditCard: creditCards[creditCards.length - 1],
       shipmentId: shipment?.id,
+      shipment,
       shppingRateId: shipment?.relationships.selected_shipping_rate?.data?.id,
       isComplete: data.attributes.state === 'complete'
     }
