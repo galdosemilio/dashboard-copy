@@ -25,7 +25,7 @@
         <small class="top-level-accout-label" *ngIf="isTopLevelAccount">{{ 'REPORTS.RPM_BILLING_TOP_LEVEL_ACCOUNT' | translate }}</small>
         <div fxFlex fxLayout="column" fxLayoutAlign="end stretch">
             <div class="org-search-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutAlign.gt-md="stretch center" fxLayoutGap="20px">
-                <div fxFlex fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+                <div fxFlex fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px" fxFlexOrder="1" fxFlexOrder.lt-md="2">
                     <ccr-organization-search fxFlex
                     *ngIf="!selectedClinic"
                     (onSelect)="onSelectClinic($event)"
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px">
+                <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px" fxFlexOrder="2" fxFlexOrder.lt-md="1">
                     <button
                     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
                     (click)="download()"
@@ -71,7 +71,7 @@
             </div>
 
             <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutAlign.gt-md="stretch end" fxLayoutGap="20px">
-                <div fxFlex fxLayout="row" fxLayoutAlign="stretch end" fxLayoutGap="20px" [formGroup]="searchForm">
+                <div fxFlex fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="stretch end" fxLayoutAlign.lt-lg="start stretch" fxLayoutGap="20px" [formGroup]="searchForm">
                     <mat-form-field
                     fxFlex
                     class="minus-margin-bottom">
@@ -88,7 +88,31 @@
                         matSuffix>cancel</mat-icon>
                     </mat-form-field>
 
-                    <mat-form-field *ngIf="selectedClinic" fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
+                    <mat-form-field fxFlex class="minus-margin-bottom">
+                        <mat-icon class="prefix-icon" matPrefix>person</mat-icon>
+                        <input
+                            [placeholder]="'REPORTS.FILTER_BY_SUPERVISING_PROVIDER_NAME' | translate"
+                            matInput
+                            type="text"
+                            [formControl]="supervisingProviderControl"
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" class="autocomplete-regular">
+                          <mat-option
+                            *ngFor="let supervisingProvider of supervisingProviders"
+                            [value]="supervisingProvider.viewValue | translate"
+                            (onSelectionChange)="onSelectSupervisingProvider(supervisingProvider)"
+                        >
+                            {{ supervisingProvider.viewValue | translate }}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <mat-icon
+                        *ngIf="selectedSupervisingProvider"
+                        (click)="onCleanSupervisingProvider()"
+                        class="clickable"
+                        matSuffix>cancel</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="selectedClinic" fxFlex floatLabel="never" class="ccr-filter">
                         <mat-select [disableOptionCentering]="true" formControlName="package" [placeholder]="'REPORTS.FILTER_BY_PHASE' | translate">
                             <mat-option *ngFor="let packageItem of packages" [value]="packageItem.value">
                             {{ packageItem.viewValue | translate | uppercase }}
@@ -96,20 +120,21 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+                <div fxLayout="column" fxLayoutAlign="end end">
+                    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                        <ccr-page-size-selector
+                            [defaultPageSize]="50"
+                            [defaultPageSizeStorageKey]="defaultPageSizeStorageKey"
+                            [disabled]="!source.isLoaded"
+                        ></ccr-page-size-selector>
 
-                <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                    <ccr-page-size-selector
-                        [defaultPageSize]="50"
-                        [defaultPageSizeStorageKey]="defaultPageSizeStorageKey"
-                        [disabled]="!source.isLoaded"
-                    ></ccr-page-size-selector>
-
-                    <ccr-paginator fxFlex="nogrow" #paginator
-                    [length]="source.total"
-                    [pageIndex]="source.pageIndex"
-                    [pageSize]="source.pageSize"
-                    (page)="source.pageIndex = $event.pageIndex"
-                    ></ccr-paginator>
+                        <ccr-paginator fxFlex="nogrow" #paginator
+                        [length]="source.total"
+                        [pageIndex]="source.pageIndex"
+                        [pageSize]="source.pageSize"
+                        (page)="source.pageIndex = $event.pageIndex"
+                        ></ccr-paginator>
+                    </div>
                 </div>
             </div>
         </div>

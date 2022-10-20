@@ -47,6 +47,14 @@
       }
     }
   }
+
+  &.autocomplete-regular {
+    mat-option {
+      .mat-option-text {
+        height: auto;
+      }
+    }
+  }
 }
 
 app-search {

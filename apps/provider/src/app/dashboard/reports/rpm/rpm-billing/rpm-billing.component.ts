@@ -10,7 +10,7 @@ import {
   ViewChildren,
   ViewEncapsulation
 } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog } from '@coachcare/material'
 import { ClosePanel, OpenPanel } from '@app/layout/store'
@@ -21,7 +21,8 @@ import {
   OrganizationEntity,
   PackageOrganization,
   Timezone,
-  TimezoneResponse
+  TimezoneResponse,
+  RPM
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
@@ -84,6 +85,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @ViewChildren('columns') tableColumns: QueryList<ElementRef>
 
+  public supervisingProviderControl = new FormControl()
+
   public columns: string[] = [
     'index',
     'firstName',
@@ -111,6 +114,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public selectedStatus: string
   public timezoneName: string
   private storageFilter: StorageFilter
+  public supervisingProviders: SelectOption<number>[] = []
+  public selectedSupervisingProvider: SelectOption<number>
 
   private timezones: Array<TimezoneResponse> = this.timezone.fetch()
   private refresh$: Subject<void> = new Subject<void>()
@@ -128,7 +133,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     private walkthrough: WalkthroughService,
     private packageOrganization: PackageOrganization,
     private timezone: Timezone,
-    private translator: TranslateService
+    private translator: TranslateService,
+    private rpm: RPM
   ) {
     this.sortHandler = this.sortHandler.bind(this)
   }
@@ -190,6 +196,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       this.searchForm.patchValue({
         package: null
       })
+      this.supervisingProviderControl.setValue('')
+      this.selectedSupervisingProvider = null
       void this.resolvePackages(clinic)
       this.refresh()
     })
@@ -545,12 +553,53 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
+  private async resolveSupervisingProviders() {
+    this.supervisingProviders = []
+
+    if (!this.supervisingProviderControl.value) {
+      if (this.selectedSupervisingProvider) {
+        this.onCleanSupervisingProvider()
+      }
+      return
+    }
+
+    try {
+      const res = this.rpm.getSupervisingProviders({
+        organization: this.selectedClinic?.id || environment.coachcareOrgId,
+        query: this.supervisingProviderControl.value || undefined
+      })
+
+      this.supervisingProviders = [
+        ...this.supervisingProviders,
+        ...(await res).data.map((entry) => ({
+          viewValue: `${entry.account.firstName} ${entry.account.lastName}`,
+          value: +entry.account.id
+        }))
+      ]
+    } catch (err) {
+      this.notifier.error(err)
+    }
+  }
+
   public onRemoveClinic(): void {
     this.selectedClinic$.next(null)
   }
 
   public onSelectClinic(clinic: OrganizationEntity): void {
     this.selectedClinic$.next(clinic)
+  }
+
+  public onSelectSupervisingProvider(
+    supervisingProvider: SelectOption<number>
+  ): void {
+    this.selectedSupervisingProvider = supervisingProvider
+    this.refresh()
+  }
+
+  public onCleanSupervisingProvider(): void {
+    this.selectedSupervisingProvider = null
+    this.supervisingProviderControl.setValue('')
+    this.refresh()
   }
 
   public onStatusFilterChange($event: Event): void {
@@ -607,6 +656,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       this.refresh()
     })
 
+    this.supervisingProviderControl.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(() => this.resolveSupervisingProviders())
+
     this.source.addOptional(this.refresh$.pipe(debounceTime(500)), () => {
       const selectedDate = moment(this.criteria.asOf)
 
@@ -618,7 +671,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         organization: this.selectedClinic?.id ?? undefined,
         query: this.searchForm.value.query || undefined,
         package: this.searchForm.value.package || undefined,
-        status: this.searchForm.value.status || 'all'
+        status: this.searchForm.value.status || 'all',
+        supervisingProvider:
+          this.selectedSupervisingProvider?.value || undefined
       }
     })
 

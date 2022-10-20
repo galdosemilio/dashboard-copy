@@ -1443,6 +1443,7 @@
     "FILTER_ALERTS": "Filtrer Efter Advarsler",
     "FILTER_BY_PHASE": "Filtrer efter fase",
     "FILTER_BY_RPM_STATUS": "Filtrer efter RPM-status",
+    "FILTER_BY_SUPERVISING_PROVIDER_NAME": "Filtrer efter tilsynsførende udbyders navn",
     "FILTER_DEMOGRAGPHICS": "Filtrer efter Demografi",
     "FILTER_STATUS": "Filtrer efter status",
     "GENDER": "Køn",

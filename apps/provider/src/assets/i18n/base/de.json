@@ -1443,6 +1443,7 @@
     "FILTER_ALERTS": "Filter nach Benachrichtigungen",
     "FILTER_BY_PHASE": "Nach Phase filtern",
     "FILTER_BY_RPM_STATUS": "Nach RPM-Status filtern",
+    "FILTER_BY_SUPERVISING_PROVIDER_NAME": "Filtern Sie nach dem Namen des überwachenden Anbieters",
     "FILTER_DEMOGRAGPHICS": "Filter nach Demographie",
     "FILTER_STATUS": "Nach Status filtern",
     "GENDER": "Geschlecht",

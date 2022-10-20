@@ -1443,6 +1443,7 @@
     "FILTER_ALERTS": "סינון על-ידי התראות",
     "FILTER_BY_PHASE": "סינון לפי שלב",
     "FILTER_BY_RPM_STATUS": "סינון לפי סטטוס סלד",
+    "FILTER_BY_SUPERVISING_PROVIDER_NAME": "סינון לפי שם הספק המפקח",
     "FILTER_DEMOGRAGPHICS": "סינון לפי מיקום",
     "FILTER_STATUS": "סינון לפי סטטוס",
     "GENDER": "מין",

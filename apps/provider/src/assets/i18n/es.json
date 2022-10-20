@@ -1443,6 +1443,7 @@
     "FILTER_ALERTS": "Filtrar por Alertas",
     "FILTER_BY_PHASE": "Filtrar por Fase",
     "FILTER_BY_RPM_STATUS": "Filtrar por estado de RPM",
+    "FILTER_BY_SUPERVISING_PROVIDER_NAME": "Filtrar por nombre del proveedor supervisor",
     "FILTER_DEMOGRAGPHICS": "Filtrar por Demografía",
     "FILTER_STATUS": "Filtrar por estado",
     "GENDER": "Género",

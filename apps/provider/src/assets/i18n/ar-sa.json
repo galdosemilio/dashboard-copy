@@ -1443,6 +1443,7 @@
     "FILTER_ALERTS": "فرز وفق التنبيهات",
     "FILTER_BY_PHASE": "تصفية حسب المرحلة",
     "FILTER_BY_RPM_STATUS": "تصفية حسب حالة RPM",
+    "FILTER_BY_SUPERVISING_PROVIDER_NAME": "التصفية حسب اسم المزود المشرف",
     "FILTER_DEMOGRAGPHICS": "فرز وفق الديموغرافيات",
     "FILTER_STATUS": "تصفية حسب الحالة",
     "GENDER": "الجنس",
