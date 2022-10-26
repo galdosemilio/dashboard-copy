@@ -5,7 +5,7 @@ import { APP_CONFIG } from '@coachcare/common/shared'
 import {
   AccountProvider,
   ApiService,
-  Goal,
+  GoalV2,
   MeasurementDataPointProvider,
   Messaging
 } from '@coachcare/sdk'
@@ -63,9 +63,9 @@ import { MeasurementAggregatesDatabase } from './measurement-aggregates'
 export function ccrDieterDashboardSummaryFactory(
   account: AccountProvider,
   measurementBody: MeasurementDataPointProvider,
-  goal: Goal
+  goalV2: GoalV2
 ) {
-  return new DieterDashboardSummary(account, measurementBody, goal)
+  return new DieterDashboardSummary(account, measurementBody, goalV2)
 }
 
 // /**
@@ -86,7 +86,7 @@ export function AppProviders() {
     {
       provide: DieterDashboardSummary,
       useFactory: ccrDieterDashboardSummaryFactory,
-      deps: [AccountProvider, MeasurementDataPointProvider, Goal]
+      deps: [AccountProvider, MeasurementDataPointProvider, GoalV2]
     },
     // angular providers
     {

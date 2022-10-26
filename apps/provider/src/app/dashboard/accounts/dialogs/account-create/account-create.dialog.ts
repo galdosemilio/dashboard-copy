@@ -22,7 +22,7 @@ import {
   AccountProvider,
   AddressProvider,
   Affiliation,
-  Goal,
+  GoalV2,
   PackageEnrollment
 } from '@coachcare/sdk'
 import { Subject } from 'rxjs'
@@ -56,7 +56,7 @@ export class AccountCreateDialog implements BindForm, OnInit {
     @Inject(MAT_DIALOG_DATA) public data: AccountCreateDialogData,
     private dialogRef: MatDialogRef<AccountCreateDialog>,
     private account: AccountProvider,
-    private goal: Goal,
+    private goalV2: GoalV2,
     private affiliation: Affiliation,
     private notifier: NotifierService,
     private formUtils: FormUtils,
@@ -140,7 +140,7 @@ export class AccountCreateDialog implements BindForm, OnInit {
             identifiers: data.identifiers,
             account: data.id
           })
-          await this.updateGoals({ account: data.id, goals: goals })
+          await this.createGoals({ account: data.id, goals: goals })
           break
         case 'coach':
           // coach associations with its permissions
@@ -234,12 +234,12 @@ export class AccountCreateDialog implements BindForm, OnInit {
     })
   }
 
-  private updateGoals(args: any): Promise<void> {
+  private createGoals(args: any): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       try {
-        await this.goal.update({
+        await this.goalV2.create({
           account: args.account,
-          goal: args.goals
+          goals: args.goals
         })
         resolve()
       } catch (error) {
@@ -247,7 +247,7 @@ export class AccountCreateDialog implements BindForm, OnInit {
           log: true,
           data: {
             type: 'account-create',
-            functionType: 'updateGoals',
+            functionType: 'createGoals',
             account: args.account,
             goals: args.goals,
             message: 'failed to update account goals'

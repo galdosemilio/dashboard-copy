@@ -21,6 +21,7 @@ import { ccrPhoneValidator } from '@app/shared/components/phone-input'
 import {
   AccountMeasurementPreferenceType,
   AccSingleResponse,
+  GoalTypeId,
   TimezoneResponse
 } from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
@@ -301,7 +302,7 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
     const goals = []
     if (data.hasOwnProperty('weightGoal')) {
       goals.push({
-        goal: 'weight',
+        type: GoalTypeId.weight,
         quantity: Math.round(
           data.weightGoal * getInputFactor(pref, 'composition')
         ) // to grams

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { AccountMeasurementPreferenceType, Goal, Goals } from '@coachcare/sdk'
+import {
+  AccountMeasurementPreferenceType,
+  GoalV2,
+  GoalCreate,
+  GoalEntity,
+  GoalTypeId
+} from '@coachcare/sdk'
 
 import { ContextService, EventsService, NotifierService } from '@app/service'
 import {
@@ -11,7 +17,20 @@ import {
   unitConversionDefault
 } from '@app/shared'
 import { UntilDestroy } from '@ngneat/until-destroy'
-import { GoalObject } from '@coachcare/sdk/dist/lib/providers/goal/requests/goalObjectRequest.interface'
+import {
+  CreateGoalRequest,
+  UpdateGoalRequest
+} from '@coachcare/sdk/dist/lib/providers/goal2/requests'
+
+interface Goals {
+  calorie: number
+  weight: number
+  dailyHydration: number
+  weeklyExercise: number
+  dailySleep: number
+  dailyStep: number
+  triggerWeight: number
+}
 
 @UntilDestroy()
 @Component({
@@ -52,12 +71,13 @@ export class DieterGoalsComponent implements BindForm, OnInit {
     calorie: 2000,
     triggerWeight: 0
   }
+  private goals: GoalEntity[] = []
 
   constructor(
     private builder: FormBuilder,
     private bus: EventsService,
     private context: ContextService,
-    private goal: Goal,
+    private goalV2: GoalV2,
     private formUtils: FormUtils,
     private notifier: NotifierService
   ) {
@@ -218,16 +238,30 @@ export class DieterGoalsComponent implements BindForm, OnInit {
     this.isLoading = true
 
     try {
-      const res = await this.goal.fetch({ account: `${this.dieterId}` })
+      const res = await this.goalV2.fetch({ account: `${this.dieterId}` })
+      this.goals = res.data
 
       const data: Goals = {
-        calorie: res.goal.calorie,
-        dailyHydration: res.goal.dailyHydration,
-        dailySleep: res.goal.dailySleep,
-        dailyStep: res.goal.dailyStep,
-        weeklyExercise: res.goal.weeklyExercise,
-        weight: res.goal.weight,
-        triggerWeight: res.goal.triggerWeight
+        calorie: this.goals.find(
+          (entry) => entry.type.id === GoalTypeId.calorie
+        )?.quantity,
+        dailyHydration: this.goals.find(
+          (entry) => entry.type.id === GoalTypeId.dailyHydration
+        )?.quantity,
+        dailySleep: this.goals.find(
+          (entry) => entry.type.id === GoalTypeId.dailySleep
+        )?.quantity,
+        dailyStep: this.goals.find(
+          (entry) => entry.type.id === GoalTypeId.dailyStep
+        )?.quantity,
+        weeklyExercise: this.goals.find(
+          (entry) => entry.type.id === GoalTypeId.weeklyExercise
+        )?.quantity,
+        weight: this.goals.find((entry) => entry.type.id === GoalTypeId.weight)
+          ?.quantity,
+        triggerWeight: this.goals.find(
+          (entry) => entry.type.id === GoalTypeId.triggerWeight
+        )?.quantity
       }
 
       const goals = this.convertToRead(data)
@@ -248,24 +282,63 @@ export class DieterGoalsComponent implements BindForm, OnInit {
       return
     }
 
-    const formValue = this.form.value
-    const goals = this.convertToDefault(formValue)
-    const data = Object.entries(goals).map(
-      ([key, value]) => ({ goal: key, quantity: value } as GoalObject)
-    )
-
     this.isLoading = true
 
     try {
-      await this.goal.update({
-        account: `${this.dieterId}`,
-        goal: data
-      })
-      this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_GOALS_UPDATED'))
+      const formValue = this.form.value
+      const goals = this.convertToDefault(formValue)
+      const createGoals: GoalCreate[] = []
+      let hasChangedGoals = false
+
+      for (const [key, value] of Object.entries(goals)) {
+        const existingGoal = this.goals.find((entry) => entry.type.code === key)
+
+        if (!existingGoal && value) {
+          createGoals.push({
+            type: GoalTypeId[key],
+            quantity: value
+          })
+          hasChangedGoals = true
+        } else if (existingGoal.quantity !== value) {
+          await this.updateGoal({
+            id: existingGoal.id,
+            quantity: value
+          })
+          hasChangedGoals = true
+        }
+      }
+
+      if (createGoals.length) {
+        await this.createGoals({
+          account: this.dieterId.toString(),
+          goals: createGoals
+        })
+      }
+
+      if (hasChangedGoals) {
+        await this.loadGoals()
+        this.notifier.success(_('NOTIFY.SUCCESS.PATIENT_GOALS_UPDATED'))
+      }
     } catch (err) {
       this.notifier.error(err)
     } finally {
       this.isLoading = false
+    }
+  }
+
+  private async createGoals(request: CreateGoalRequest) {
+    try {
+      await this.goalV2.create(request)
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async updateGoal(request: UpdateGoalRequest) {
+    try {
+      await this.goalV2.update(request)
+    } catch (error) {
+      this.notifier.error(error)
     }
   }
 }

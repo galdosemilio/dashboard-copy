@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
-import { Goal } from '@coachcare/sdk'
-
-import { FetchGoalResponse } from '@coachcare/sdk'
+import { GoalV2 } from '@coachcare/sdk'
+import { FetchGoalResponse } from '@coachcare/sdk/dist/lib/providers/goal2/responses'
 
 @Injectable()
 export class GoalsResolver implements Resolve<FetchGoalResponse> {
-  constructor(private goal: Goal) {}
+  constructor(private goalV2: GoalV2) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<FetchGoalResponse> {
-    return this.goal.fetch({ account: route.params['id'] })
+    return this.goalV2.fetch({ account: route.params['id'] })
   }
 }

@@ -42,7 +42,7 @@ import {
   FormQuestionType,
   FormSection,
   FormSubmission,
-  Goal,
+  GoalV2,
   Hydration,
   Idealshape,
   Interaction,
@@ -287,7 +287,7 @@ export const SdkApiProviders = [
     deps: [ApiService]
   },
   { provide: FormSubmission, useClass: FormSubmission, deps: [ApiService] },
-  { provide: Goal, useClass: Goal, deps: [ApiService] },
+  { provide: GoalV2, useClass: GoalV2, deps: [ApiService] },
   { provide: Hydration, useClass: Hydration, deps: [ApiService] },
   { provide: Idealshape, useClass: Idealshape, deps: [ApiService] },
   { provide: Interaction, useClass: Interaction, deps: [ApiService] },
