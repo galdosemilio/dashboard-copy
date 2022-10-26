@@ -1,3 +1,20 @@
+# [1.96.0](https://github.com/coachcare/dashboard/compare/v1.95.0...v1.96.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* show correct date of order [FRON-2973] ([c923103](https://github.com/coachcare/dashboard/commit/c923103d995c4273953adecccbaf79d4c9965047))
+
+
+### Features
+
+* add shipping description to storefront checkout page ([bae29cd](https://github.com/coachcare/dashboard/commit/bae29cd274e1bbff30391b49d4f288b3b6d6ad45))
+* allow provider lookup account by id [FRON-2965] ([4a200ea](https://github.com/coachcare/dashboard/commit/4a200ea064e0131668bc1762c6bf8389ac7002d6))
+* expose phase filter on RPM billing report [FRON-2921] ([62450d7](https://github.com/coachcare/dashboard/commit/62450d72d2cc0a05d27c19f02f465320f315cff8))
+* load hero image, title, and description from Spree ([467016a](https://github.com/coachcare/dashboard/commit/467016a4af7830eee1249791732b71a7f1878d35))
+* maintain horizontal scroll position and pagination on rpm report [FRON-2953] ([4702991](https://github.com/coachcare/dashboard/commit/470299105d3b58614e302eee2936eb4fe795583b))
+* various ecommerce frontend updates ([d2f1992](https://github.com/coachcare/dashboard/commit/d2f19921776b60d9def15f761e100559987cc585))
+
 # [1.95.0](https://github.com/coachcare/dashboard/compare/v1.94.0...v1.95.0) (2022-10-05)
 
 
