@@ -5,6 +5,7 @@ import {
   AppEnvironment,
   CcrRol
 } from '@coachcare/common/shared'
+import { ApiService } from '@coachcare/sdk'
 import { authenticationToken } from '../sdk.barrel'
 import { STORAGE_ADMIN_URL, STORAGE_PROVIDER_URL } from './cookie.service'
 
@@ -15,7 +16,8 @@ import { STORAGE_ADMIN_URL, STORAGE_PROVIDER_URL } from './cookie.service'
 export class AuthService {
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
-    private router: Router
+    private router: Router,
+    private api: ApiService
   ) {
     // FIXME implement the unauthenticated listener
     // api.onUnauthenticatedError.subscribe(() => this.redirect());
@@ -24,15 +26,17 @@ export class AuthService {
   login(role: CcrRol) {
     // TODO v7 get the requested Angular route and pass it to the login
     if (role === 'provider' || role === 'client') {
-      const providerReturnURL = window.localStorage.getItem(
-        STORAGE_PROVIDER_URL
-      )
+      const providerReturnURL =
+        window.localStorage.getItem(STORAGE_PROVIDER_URL)
       window.localStorage.removeItem(STORAGE_PROVIDER_URL)
       // temporary redirect to ccr-staticProvider
       location.href =
         providerReturnURL ||
         (!this.environment.production ? 'http://localhost:4201' : '/provider')
     } else {
+      this.api.appendHeaders({
+        organization: null
+      })
       const adminReturnUrl = window.localStorage.getItem(STORAGE_ADMIN_URL)
       window.localStorage.removeItem(STORAGE_ADMIN_URL)
       if (adminReturnUrl) {
