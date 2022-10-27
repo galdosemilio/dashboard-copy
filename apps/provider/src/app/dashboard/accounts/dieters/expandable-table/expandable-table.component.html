@@ -30,6 +30,9 @@ class="ccr-table ccr-expand-table ccr-table-stats">
         <td class="column-phone">
           <span>{{ 'BOARD.PHONE_NUMBER' | translate }}</span>
         </td>
+        <td class="column-dob">
+          <span>{{ 'BOARD.BIRTHDAY' | translate }}</span>
+        </td>
         <td *ngFor="let extraColumn of extraColumns" class="column-extra">
           <div>
             <span>{{ extraColumn.name | translate }}</span>
@@ -148,6 +151,9 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       <td *ngIf="row.level === 0" class="column-lastname sticky-column">{{ row.lastName }}</td>
       <td *ngIf="row.level === 0" class="column-phone">
         <a *ngIf="row.phone"  [href]="'tel:' + row.phone">{{ row.phone }}</a>
+      </td>
+      <td *ngIf="row.level === 0" class="column-dob">
+        <span *ngIf="row.dateOfBirth; else empty">{{ row.dateOfBirth | amDateFormat:'MMM D, YYYY' }}</span>
       </td>
       <ng-container *ngIf="row.level === 0">
         <td *ngFor="let extraColumn of extraColumns" class="column-extra">

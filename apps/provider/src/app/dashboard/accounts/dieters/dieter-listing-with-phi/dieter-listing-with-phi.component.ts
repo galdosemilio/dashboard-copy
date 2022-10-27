@@ -296,6 +296,8 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
         this.csvSeparator +
         'Phone Number' +
         this.csvSeparator +
+        'Birthday' +
+        this.csvSeparator +
         'Email' +
         this.csvSeparator +
         this.extraColumns
@@ -356,6 +358,10 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           `"${d.lastName}"` +
           this.csvSeparator +
           `"${d.phone}"` +
+          this.csvSeparator +
+          `"${
+            d.dateOfBirth ? moment(d.dateOfBirth).format('YYYY-MM-DD') : ''
+          }"` +
           this.csvSeparator +
           `"${d.email}"` +
           this.csvSeparator +

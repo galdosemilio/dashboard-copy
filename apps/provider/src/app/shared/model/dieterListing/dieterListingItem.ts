@@ -12,6 +12,7 @@ export class DieterListingItem implements ExpandableTableItem {
   isExpanded: boolean
   isHidden: boolean
   isLastOfGroup: boolean
+  dateOfBirth?: Date
   firstName: string
   lastName: string
   phone: string
@@ -79,6 +80,10 @@ export class DieterListingItem implements ExpandableTableItem {
       this.totalDays = Math.abs(
         moment(this.startedAt.split('T')[0]).diff(moment(), 'days')
       )
+    }
+
+    if (args.dateOfBirth) {
+      this.dateOfBirth = moment(args.dateOfBirth).toDate()
     }
   }
 }
