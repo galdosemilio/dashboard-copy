@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { OrganizationEntity } from '@coachcare/sdk'
 import { FormUtils } from '@coachcare/common/shared'
 import { TaskDatabase } from '../../services'
-import { NotifierService } from '@app/service'
+import { ContextService, NotifierService } from '@app/service'
 
 @Component({
   selector: 'app-create-patient-bulk-report-dialog',
@@ -17,6 +17,7 @@ export class CreatePatientBulkReportDialog implements OnInit {
   form: FormGroup
 
   constructor(
+    private context: ContextService,
     private dialogRef: MatDialogRef<CreatePatientBulkReportDialog>,
     private database: TaskDatabase,
     private fb: FormBuilder,
@@ -66,7 +67,8 @@ export class CreatePatientBulkReportDialog implements OnInit {
         parameters: {
           start: formValue.startDate.startOf('day').toISOString(),
           end: formValue.endDate.endOf('day').toISOString(),
-          format: [formValue.format]
+          format: [formValue.format],
+          measurementPreference: this.context.user.measurementPreference ?? 'us'
         }
       })
 
