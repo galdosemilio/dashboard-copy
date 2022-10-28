@@ -41,6 +41,7 @@ import {
 } from '../models'
 import {
   STORAGE_PAGE_SIZE_RPM_BILLING,
+  STORAGE_PRM_BILLING_FILTER,
   STORAGE_RPM_BILLING_COLUMN_INDEX,
   STORAGE_RPM_BILLING_PAGINATION,
   STORAGE_RPM_BILLING_SORT
@@ -51,6 +52,13 @@ import { environment } from 'apps/provider/src/environments/environment'
 import { CcrTableSortDirective } from '@app/shared'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { CSV } from '@coachcare/common/shared'
+
+interface StorageFilter {
+  selectedClinicId?: string
+  package?: number
+  query?: string
+  status?: string
+}
 
 @UntilDestroy()
 @Component({
@@ -95,9 +103,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public searchForm: FormGroup
   public selectedClinic?: OrganizationEntity
   public source: RPMBillingDataSource
-  public statusFilterForm: FormGroup
   public totalCount: number
   public packages: SelectOption<number>[] = []
+  public selectedStatus: string
+  private storageFilter: StorageFilter
 
   private refresh$: Subject<void> = new Subject<void>()
   private selectedClinic$ = new Subject<OrganizationEntity | null>()
@@ -130,6 +139,12 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.isDesktop = this.deviceDetector.isDesktop()
+    const storageFilterString = localStorage.getItem(STORAGE_PRM_BILLING_FILTER)
+
+    if (storageFilterString) {
+      this.storageFilter = JSON.parse(storageFilterString)
+      this.selectedStatus = this.storageFilter.status
+    }
 
     this.walkthrough.checkGuideState('rpm')
     this.store.dispatch(new ClosePanel())
@@ -161,7 +176,16 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     })
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
-      if (org.id === environment.coachcareOrgId) {
+      const selectedClinic =
+        this.storageFilter &&
+        this.context.organizations.find(
+          (entry) => entry.id === this.storageFilter.selectedClinicId
+        )
+
+      if (selectedClinic) {
+        this.selectedClinic = selectedClinic
+        void this.resolvePackages(selectedClinic)
+      } else if (org.id === environment.coachcareOrgId) {
         // coachcare only
         this.selectedClinic$.next(org)
         this.isTopLevelAccount = true
@@ -478,6 +502,17 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           value: Number(entry.package.id)
         }))
       ]
+
+      const packageValue = this.searchForm.value?.package
+      const selectedPackage = this.packages.find(
+        (entry) => entry.value === packageValue
+      )
+
+      if (packageValue && !selectedPackage) {
+        this.searchForm.patchValue({
+          package: null
+        })
+      }
     } catch (err) {
       this.notifier.error(err)
     }
@@ -494,9 +529,11 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public onStatusFilterChange($event: Event): void {
     if ($event.type === 'change') {
       this.paginator.firstPage()
-      this.statusFilterForm.controls.status.setValue(
-        ($event.target as HTMLSelectElement).value
-      )
+      const status = ($event.target as HTMLSelectElement).value
+      this.selectedStatus = status
+      this.searchForm.patchValue({
+        status
+      })
     }
   }
 
@@ -529,18 +566,19 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       this.paginator
     )
     this.source.addDefault({ status: 'active' })
-    this.source.addOptional(
-      this.statusFilterForm.controls.status.valueChanges.pipe(
-        debounceTime(200)
-      ),
-      () => ({
-        status: this.statusFilterForm.value.status || 'all'
-      })
-    )
 
-    this.searchForm.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe(() => this.refresh())
+    this.searchForm.valueChanges.pipe(debounceTime(500)).subscribe(() => {
+      const values = this.searchForm.value
+
+      localStorage.setItem(
+        STORAGE_PRM_BILLING_FILTER,
+        JSON.stringify({
+          selectedClinicId: this.selectedClinic?.id,
+          ...values
+        })
+      )
+      this.refresh()
+    })
 
     this.source.addOptional(this.refresh$.pipe(debounceTime(500)), () => {
       const selectedDate = moment(this.criteria.asOf)
@@ -552,7 +590,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
         organization: this.selectedClinic?.id ?? undefined,
         query: this.searchForm.value.query || undefined,
-        package: this.searchForm.value.package || undefined
+        package: this.searchForm.value.package || undefined,
+        status: this.searchForm.value.status || 'all'
       }
     })
 
@@ -602,10 +641,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private createStatusFilterForm(): void {
-    this.statusFilterForm = this.fb.group({ status: ['active'] })
     this.searchForm = this.fb.group({
-      query: [''],
-      package: ['']
+      query: [this.storageFilter?.query ?? ''],
+      package: [this.storageFilter?.package ?? ''],
+      status: [this.storageFilter?.status ?? 'active']
     })
   }
 

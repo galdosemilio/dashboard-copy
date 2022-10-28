@@ -163,9 +163,9 @@
             <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
                 <p>{{ 'BOARD.STATUS' | translate }}</p>
                 <select (change)="onStatusFilterChange($event)">
-                    <option value="all">{{ 'LIBRARY.FORMS.ALL' | translate }}</option>
-                    <option selected value="active">{{ 'RPM.STATE.ACTIVE' | translate }}</option>
-                    <option value="inactive">{{ 'RPM.STATE.INACTIVE' | translate }}</option>
+                    <option [selected]="selectedStatus === 'all'" value="all">{{ 'LIBRARY.FORMS.ALL' | translate }}</option>
+                    <option [selected]="selectedStatus === 'active'" value="active">{{ 'RPM.STATE.ACTIVE' | translate }}</option>
+                    <option [selected]="selectedStatus === 'inactive'" value="inactive">{{ 'RPM.STATE.INACTIVE' | translate }}</option>
                 </select>
             </div>
         </th>
