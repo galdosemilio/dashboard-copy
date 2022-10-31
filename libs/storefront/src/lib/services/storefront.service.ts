@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import {
   AccountIdentifier,
   EcommerceProvider,
@@ -23,6 +23,7 @@ import {
   AddPayment,
   OrderUpdate
 } from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
+import { AppEnvironment, APP_ENVIRONMENT } from '@coachcare/common/shared'
 
 export interface StorefrontVariant {
   id: string
@@ -127,7 +128,7 @@ interface SpreeStore {
   url?: string
 }
 
-const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
+export const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
 const cartIncludeFields =
   'line_items,variants,variants.images,variants.product,variants.product.images,billing_address,shipping_address,user,payments,payments.payment_method,payments.source,shipments,promotions'
 
@@ -144,6 +145,7 @@ export class StorefrontService {
   public error$ = new BehaviorSubject<Error | null>(null)
 
   constructor(
+    @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
     private accountIdentifier: AccountIdentifier,
     private ecommerce: EcommerceProvider,
     private spreeProvider: SpreeProvider,
@@ -154,11 +156,11 @@ export class StorefrontService {
     try {
       await this.storefrontUserService.init()
 
-      if (!this.storefrontUserService.preferences?.storeUrl) {
-        throw new Error(_('ERROR.STORE_NOT_AVAILABLE'))
+      if (!this.storefrontUserService.user) {
+        return
       }
 
-      this.storeUrl = this.storefrontUserService.preferences.storeUrl
+      this.storeUrl = this.storefrontUserService.storeUrl
 
       this.spree = makeClient({
         host: this.storeUrl
@@ -185,7 +187,7 @@ export class StorefrontService {
   private async loadSpreeAccount() {
     const accountIdentifiers = await this.accountIdentifier.fetchAll({
       account: this.storefrontUserService.user.id,
-      organization: this.storefrontUserService.orgId
+      organization: this.environment.defaultOrgId
     })
 
     const spreeAccountIdentifier = accountIdentifiers.data.find(
@@ -217,7 +219,7 @@ export class StorefrontService {
 
     await this.accountIdentifier.add({
       account: this.storefrontUserService.user.id,
-      organization: this.storefrontUserService.orgId,
+      organization: this.environment.defaultOrgId,
       name: SPREE_EXTERNAL_ID_NAME,
       value: spreeAccountResult.success().data.id
     })
@@ -228,7 +230,7 @@ export class StorefrontService {
   private async refreshSpreeAccessToken() {
     const spreeAccessTokenResponse = await this.ecommerce.createToken({
       account: this.storefrontUserService.user.id,
-      organization: this.storefrontUserService.orgId
+      organization: this.environment.defaultOrgId
     })
 
     if (spreeAccessTokenResponse?.token) {
