@@ -1,3 +1,17 @@
+# [1.97.0](https://github.com/coachcare/dashboard/compare/v1.96.0...v1.97.0) (2022-11-01)
+
+
+### Bug Fixes
+
+* bulk download text and measurement preference FRON-2924 ([5a947a5](https://github.com/coachcare/dashboard/commit/5a947a51510a1eee85bbead96d8cc1dacf3a7ab4))
+* remove organization header in admin login ([69501ec](https://github.com/coachcare/dashboard/commit/69501ec759baa1e269f07053d88128111d42a0c1))
+
+
+### Features
+
+* add patient bulk reports [FRON-2924] ([857c4a2](https://github.com/coachcare/dashboard/commit/857c4a201bef9e2a91e676442166d1568d26adbd))
+* show birthday field in patient table [FRON-2976] ([943a26a](https://github.com/coachcare/dashboard/commit/943a26a0a72f80ba323119a0791816badb839b1e))
+
 # [1.96.0](https://github.com/coachcare/dashboard/compare/v1.95.0...v1.96.0) (2022-10-26)
 
 
