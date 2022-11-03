@@ -12,7 +12,6 @@ import {
   ContextService,
   MeasurementChartDataSource,
   MeasurementDatabaseV2,
-  MEASUREMENT_MAX_ENTRIES_PER_DAY,
   MeasurementTimeframe
 } from '@app/service'
 import { ChartData } from '@app/shared/model'
@@ -92,33 +91,6 @@ export class CcrMeasurementChartV2Component implements OnInit {
         if (this.timeframe === 'year' || this.timeframe === 'alltime') {
           return
         }
-
-        const tickSlotAmount = this.timeframe === 'week' ? 8 : 31
-
-        chart.config.data.datasets.forEach((dataset) => {
-          const metadata: ChartData = Object.values(dataset._meta)[0]
-
-          if (!metadata) {
-            return
-          }
-
-          const chartWidth = metadata.data[0]?._xScale.width ?? 0
-          const offset =
-            chartWidth / tickSlotAmount / MEASUREMENT_MAX_ENTRIES_PER_DAY
-
-          let previousDate = ''
-          let cumulativeOffset = 0
-
-          metadata.data.forEach((entry, index) => {
-            const dataEntry = dataset.data[index]
-            const isSameDate = previousDate.includes(dataEntry.x)
-
-            cumulativeOffset = isSameDate ? cumulativeOffset + offset : 0
-            entry._model.x += cumulativeOffset
-
-            previousDate = dataEntry.x
-          })
-        })
       }
     }
   ]

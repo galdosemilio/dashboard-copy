@@ -130,21 +130,32 @@ export class MeasurementChartDataSource extends ChartDataSource<
       .toArray()
       .value()
 
+    const startDate = moment(preprocessedEntries[0]?.recordedAt.utc)
+    const endDate = moment(
+      preprocessedEntries[preprocessedEntries.length - 1]?.recordedAt.utc
+    )
+
     // formats
     let xlabelFormat
     let tooltipFormat
     let xMaxTicks
+    let tickDuration
+    let tickDurationUnit
 
     switch (this.timeframe) {
       case 'day':
         xMaxTicks = 26
         xlabelFormat = 'h:mm a'
         tooltipFormat = 'ddd D h:mm a'
+        tickDuration = 1
+        tickDurationUnit = 'hour'
         break
       case 'month':
         xMaxTicks = 31
         xlabelFormat = 'MMM D'
         tooltipFormat = 'MMM D h:mm a'
+        tickDuration = 1
+        tickDurationUnit = 'day'
         break
       case 'threeMonths':
         xMaxTicks = 12
@@ -160,51 +171,55 @@ export class MeasurementChartDataSource extends ChartDataSource<
         xMaxTicks = 12
         xlabelFormat = 'MMM YYYY'
         tooltipFormat = 'MMM DD, YYYY h:mm a'
+        tickDuration = 1
+        tickDurationUnit = 'month'
         break
       case 'alltime':
         xMaxTicks = 18
         xlabelFormat = 'MMM DD, YYYY'
         tooltipFormat = 'MMM DD, YYYY'
+        tickDuration = Math.round(
+          moment.duration(endDate.diff(startDate)).asDays() / xMaxTicks - 2
+        )
+        tickDurationUnit = 'day'
         break
       case 'week':
       default:
         xMaxTicks = 11
         xlabelFormat = 'ddd D'
         tooltipFormat = 'ddd, MMM D h:mm a'
+        tickDuration = 1
+        tickDurationUnit = 'day'
     }
 
     this.headings = preprocessedEntries.map((entry) =>
       moment(entry.recordedAt.utc).format(tooltipFormat)
     )
 
-    const startDate = moment(preprocessedEntries[0]?.recordedAt.utc)
-    const endDate = moment(
-      preprocessedEntries[preprocessedEntries.length - 1]?.recordedAt.utc
-    )
-    const tickDuration = Math.round(
-      moment.duration(endDate.diff(startDate)).asDays() / xMaxTicks - 2
-    )
-
     const emptyGroup = this.createEmptyDateGroups({
       start:
         this.timeframe === 'alltime' && preprocessedEntries.length
           ? moment(preprocessedEntries[0].recordedAt.utc)
-              .subtract(tickDuration, 'day')
+              .subtract(tickDuration, tickDurationUnit)
               .toDate()
-          : this.criteria.recordedAt.start,
+          : moment(this.criteria.recordedAt.start)
+              .subtract(tickDuration, tickDurationUnit)
+              .toDate(),
       end:
         this.timeframe === 'alltime' && preprocessedEntries.length
           ? moment(
               preprocessedEntries[preprocessedEntries.length - 1].recordedAt.utc
             )
-              .add(tickDuration, 'day')
+              .add(tickDuration, tickDurationUnit)
               .toDate()
-          : this.criteria.recordedAt.end
+          : moment(this.criteria.recordedAt.end)
+              .add(tickDuration, tickDurationUnit)
+              .toDate()
     })
 
     const datasets = groupedDataPoints.map((group) => ({
       data: group.map((entry) => ({
-        x: moment(entry.createdAt.utc).startOf('hour').format(xlabelFormat),
+        t: moment(entry.createdAt.utc).toDate(),
         y: convertToReadableFormat(
           entry.value,
           entry.type,
@@ -239,11 +254,9 @@ export class MeasurementChartDataSource extends ChartDataSource<
       ],
       datasets: datasets,
       labels: [
-        '',
         ...emptyGroup.map((dateGroup) =>
-          moment(dateGroup.recordedAt.utc).format(xlabelFormat)
-        ),
-        ''
+          moment(dateGroup.recordedAt.utc).toDate()
+        )
       ],
       options: {
         tooltips: {
@@ -257,9 +270,7 @@ export class MeasurementChartDataSource extends ChartDataSource<
               if (!dataPoints.length) {
                 return
               }
-
               const entry = dataPoints[tooltipItem.index][0]
-
               return `${generateChartTooltip(
                 entry,
                 this.context.user.measurementPreference,
@@ -271,6 +282,14 @@ export class MeasurementChartDataSource extends ChartDataSource<
         scales: {
           xAxes: [
             {
+              type: 'time',
+              time: {
+                parser: 'YYYY-MM-DD HH:mm:ss',
+                unit: tickDurationUnit,
+                displayFormats: {
+                  [tickDurationUnit]: xlabelFormat
+                }
+              },
               ticks: {
                 maxTicksLimit: xMaxTicks
               }
@@ -307,8 +326,13 @@ export class MeasurementChartDataSource extends ChartDataSource<
     end: Date | string
   }): MeasurementDataPointGroup[] {
     const emptyGroups: MeasurementDataPointGroup[] = []
-    const startDate = moment(start).startOf('day')
-    const endDate = moment(end).endOf('day')
+    const startDate = moment(start)
+    const endDate = moment(end)
+
+    if (this.timeframe !== 'day') {
+      startDate.startOf('day')
+      endDate.endOf('day')
+    }
 
     let currentDate = startDate
 
