@@ -622,6 +622,8 @@
     "ERROR": "Erreur",
     "EXCEL": "Excel",
     "EXERCISE": "Exercice",
+    "FILE": "Dossier",
+    "FILES": "Des dossiers",
     "FILE_VAULT": "Coffre fort",
     "FILE_VAULT_ABOUT": "À propos du coffre-fort de fichiers",
     "FILE_VAULT_SELECT_CLINIC": "Sélectionnez la clinique pour afficher le coffre-fort de fichiers",

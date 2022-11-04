@@ -622,6 +622,8 @@
     "ERROR": "Erro",
     "EXCEL": "Excel",
     "EXERCISE": "Exercício",
+    "FILE": "Arquivo",
+    "FILES": "Arquivos",
     "FILE_VAULT": "Cofre de Arquivos",
     "FILE_VAULT_ABOUT": "Sobre o cofre de arquivos",
     "FILE_VAULT_SELECT_CLINIC": "Selecione a clínica para visualizar o Cofre de Arquivos",

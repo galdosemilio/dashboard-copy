@@ -622,6 +622,8 @@
     "ERROR": "Error",
     "EXCEL": "Excel",
     "EXERCISE": "Sport",
+    "FILE": "Datei",
+    "FILES": "Dateien",
     "FILE_VAULT": "Datentresor",
     "FILE_VAULT_ABOUT": "Informationen zum File Vault",
     "FILE_VAULT_SELECT_CLINIC": "Wählen Sie die Klinik aus, um File Vault anzuzeigen",

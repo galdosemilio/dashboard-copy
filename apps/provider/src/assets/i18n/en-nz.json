@@ -622,6 +622,8 @@
     "ERROR": "Error",
     "EXCEL": "Excel",
     "EXERCISE": "Exercise",
+    "FILE": "File",
+    "FILES": "Files",
     "FILE_VAULT": "File Vault",
     "FILE_VAULT_ABOUT": "About the File Vault",
     "FILE_VAULT_SELECT_CLINIC": "Select clinic to view File Vault",

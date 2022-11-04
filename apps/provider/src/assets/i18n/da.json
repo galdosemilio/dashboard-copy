@@ -622,6 +622,8 @@
     "ERROR": "Fejl",
     "EXCEL": "Excel",
     "EXERCISE": "Øvelse",
+    "FILE": "Fil",
+    "FILES": "Filer",
     "FILE_VAULT": "Filhvelv",
     "FILE_VAULT_ABOUT": "Om filhvelvet",
     "FILE_VAULT_SELECT_CLINIC": "Vælg klinik for at se File Vault",

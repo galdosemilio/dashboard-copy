@@ -191,7 +191,7 @@ export class PatientBulkReportsComponent
       const artifacts = await this.database.fetchTaskArtifacts(task.id)
 
       for (const artifact of artifacts) {
-        window.open(artifact.url, '__blank')
+        window.open(artifact.url)
       }
     } catch (err) {
       this.notifier.error(err)

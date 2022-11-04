@@ -622,6 +622,8 @@
     "ERROR": "Error",
     "EXCEL": "Excel",
     "EXERCISE": "Ejercicio",
+    "FILE": "Expediente",
+    "FILES": "Archivos",
     "FILE_VAULT": "Archivos",
     "FILE_VAULT_ABOUT": "Acerca de los Archivos",
     "FILE_VAULT_SELECT_CLINIC": "Seleccione una clínica para ver los Archivos",

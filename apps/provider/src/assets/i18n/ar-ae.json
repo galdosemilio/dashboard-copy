@@ -622,6 +622,8 @@
     "ERROR": "خطأ",
     "EXCEL": "تفوق",
     "EXERCISE": "تمرين",
+    "FILE": "ملف",
+    "FILES": "الملفات",
     "FILE_VAULT": "قبو ملف",
     "FILE_VAULT_ABOUT": "حول ملف المدفن",
     "FILE_VAULT_SELECT_CLINIC": "حدد عيادة لعرض ملف المدفن",
