@@ -99,6 +99,8 @@ export interface StorefrontCart extends OrderAttr {
 interface SpreeError {
   serverResponse?: { status?: number }
   message: string
+  errors?: { [key: string]: { [key: string]: string[] } }
+  summary?: string
 }
 
 interface StoreSettingsEntry {
@@ -153,7 +155,7 @@ export class StorefrontService {
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
     private accountIdentifier: AccountIdentifier,
     private ecommerce: EcommerceProvider,
-    private spreeProvider: SpreeProvider,
+    public spreeProvider: SpreeProvider,
     public storefrontUserService: StorefrontUserService
   ) {}
 
@@ -470,8 +472,8 @@ export class StorefrontService {
       if (silentFail) {
         return
       }
-
-      throw new Error(res.fail().message)
+      const error = res.fail() as SpreeError
+      throw error
     }
 
     const entry = res.success()

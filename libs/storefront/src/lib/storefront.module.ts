@@ -33,6 +33,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCardModule } from '@angular/material/card'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import { MatCardModule } from '@angular/material/card'
     MatCardModule,
     MatTooltipModule,
     MatToolbarModule,
+    MatAutocompleteModule,
     ReactiveFormsModule,
     CcrFormFieldsModule,
     FormsModule,

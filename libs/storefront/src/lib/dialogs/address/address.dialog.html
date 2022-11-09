@@ -5,59 +5,87 @@
     <button matDialogClose><mat-icon>cancel</mat-icon></button>
 </div>
 <mat-dialog-content>
-<div fxLayout="column" fxLayoutAlign="center stretch">
-  <div class="mt-20" [formGroup]="form">
-    <mat-grid-list class="ccr-grid" cols="1" rowHeight="70px">
-      <mat-grid-tile>
-        <mat-form-field>
-          <input matInput required formControlName="address1"
-          [placeholder]="'GLOBAL.ADDRESS_LINE_ONE' | translate">
-          <mat-error *ngIf="form.get('address1').getError('required')">{{ 'ERROR.ADDRESS_LINE_ONE_REQUIRED' | translate }}</mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field>
-          <input matInput formControlName="address2"
-          [placeholder]="'GLOBAL.ADDRESS_LINE_TWO' | translate">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field>
-          <input matInput required formControlName="city"
-          [placeholder]="'GLOBAL.CITY' | translate">
-          <mat-error *ngIf="form.get('city').getError('required')">{{ 'ERROR.ADDRESS_CITY_REQUIRED' | translate }}</mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field>
-          <mat-select *ngIf="isUnitedStates" required formControlName="stateProvince">
-            <mat-option *ngFor="let state of states" [value]="state.value">{{ state.displayValue }}</mat-option>
-          </mat-select>
-          <input *ngIf="!isUnitedStates" matInput required formControlName="stateProvince"
-          [placeholder]="'GLOBAL.STATE' | translate">
-          <mat-error *ngIf="form.get('stateProvince').getError('required')">{{ 'ERROR.ADDRESS_STATE_REQUIRED' | translate }}</mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field>
-          <input matInput required formControlName="postalCode"
-          [placeholder]="'GLOBAL.POSTAL_CODE' | translate">
-          <mat-error *ngIf="form.get('postalCode').getError('required')">{{ 'ERROR.ADDRESS_POSTAL_CODE_REQUIRED' | translate }}</mat-error>
+  <mat-spinner *ngIf="isLoading && invalidAddress" [diameter]="50" style="margin: 0 auto;"></mat-spinner>
+  <div *ngIf="!invalidAddress && !isLoading" fxLayout="column" fxLayoutAlign="center stretch">
+    <div class="mt-20" [formGroup]="form">
+      <mat-grid-list class="ccr-grid" cols="1" rowHeight="70px">
+        <mat-grid-tile>
+          <mat-form-field>
+            <input autocomplete="nope" matInput required [matAutocomplete]="auto" formControlName="address1"
+            [placeholder]="'GLOBAL.ADDRESS_LINE_ONE' | translate">
+            <mat-autocomplete (optionSelected)='selectSmartyAddress($event.option.value)' #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                {{option.street_line}}, {{option.city}}, {{option.state}}, {{option.zipcode}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="form.get('address1').getError('required')">{{ 'ERROR.ADDRESS_LINE_ONE_REQUIRED' | translate }}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput formControlName="address2"
+            [placeholder]="'GLOBAL.ADDRESS_LINE_TWO' | translate">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput required formControlName="city"
+            [placeholder]="'GLOBAL.CITY' | translate">
+            <mat-error *ngIf="form.get('city').getError('required')">{{ 'ERROR.ADDRESS_CITY_REQUIRED' | translate }}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-select *ngIf="isUnitedStates" required formControlName="stateProvince">
+              <mat-option *ngFor="let state of states" [value]="state.value">{{ state.displayValue }}</mat-option>
+            </mat-select>
+            <input *ngIf="!isUnitedStates" matInput required formControlName="stateProvince"
+            [placeholder]="'GLOBAL.STATE' | translate">
+            <mat-error *ngIf="form.get('stateProvince').getError('required')">{{ 'ERROR.ADDRESS_STATE_REQUIRED' | translate }}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput required formControlName="postalCode"
+            [placeholder]="'GLOBAL.POSTAL_CODE' | translate">
+            <mat-error *ngIf="form.get('postalCode').getError('required')">{{ 'ERROR.ADDRESS_POSTAL_CODE_REQUIRED' | translate }}</mat-error>
 
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div fxFlex>
-          <ccr-form-field-country
-            formControlName="country"
-            required
-            [placeholder]="'GLOBAL.COUNTRY' | translate"
-            ></ccr-form-field-country>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div fxFlex>
+            <ccr-form-field-country
+              formControlName="country"
+              required
+              [placeholder]="'GLOBAL.COUNTRY' | translate"
+              ></ccr-form-field-country>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
   </div>
-</div>
+  <div *ngIf="invalidAddress && !isLoading">
+    <h4 *ngIf="filteredOptions.length > 0; else noSuggestions">{{ 'GLOBAL.NOT_FOUND_ADDRESS_SUGGESTIONS' | translate }}</h4>
+    <ng-template #noSuggestions><h4>{{ 'GLOBAL.NOT_FOUND_ADDRESS' | translate }}</h4></ng-template>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'GLOBAL.STREET_ADDRESS' | translate }}</mat-label>
+      <input type="text"
+        [placeholder]="'GLOBAL.BEGIN_TYPING_ADDRESS' | translate"
+        matInput
+        [formControl]="autocomplete"
+        [matAutocomplete]="auto"
+        #inputAutoComplete
+      >
+      <mat-autocomplete (optionSelected)='selectSmartyAddress($event.option.value)' #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions" [value]="option">
+          {{option.street_line}}, {{option.city}}, {{option.state}}, {{option.zipcode}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <a href="javascript:void(0)" (click)="resetError($event)">{{ 'GLOBAL.CANT_FIND_ADDRESS' | translate }}</a>
+    </div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>

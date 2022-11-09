@@ -23,6 +23,9 @@ import { Token } from '@stripe/stripe-js'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OrderUpdate } from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
 import { StripeService } from 'ngx-stripe'
+import { IAddress } from '@spree/storefront-api-v2-sdk/types/interfaces/attributes/Address'
+
+type SpreeAddress = IAddress & { validate_address: boolean }
 
 @UntilDestroy()
 @Component({
@@ -38,6 +41,7 @@ export class StorefrontCheckoutComponent implements OnInit {
   public billingAddress: AccountAddress
   public shippingRates: NamedEntity[] = []
   public creditCardList: NamedEntity[] = []
+  public errors: { [key: string]: { [key: string]: string[] } } = {}
 
   public get shippingDescription(): string {
     return this.cart?.shipment?.attributes?.public_metadata?.description || ''
@@ -45,6 +49,17 @@ export class StorefrontCheckoutComponent implements OnInit {
 
   public get totalMeals(): number {
     return this.cart?.lineItems?.reduce((acc, item) => acc + item.meals, 0)
+  }
+
+  public get hasPoBoxError(): boolean {
+    return (
+      this.cart?.shipment?.attributes?.public_metadata?.validate_po_box &&
+      this.cart?.shippingAddress?.attributes?.address_type === 'po_box'
+    )
+  }
+
+  public get hasErrors(): boolean {
+    return Object.keys(this.errors).length > 0 || this.hasPoBoxError
   }
 
   constructor(
@@ -94,6 +109,7 @@ export class StorefrontCheckoutComponent implements OnInit {
   }
 
   public async resolveAccountAddresses() {
+    this.isLoading = true
     try {
       const response = await this.addressProvider.getAddressList({
         account: this.user.id,
@@ -111,11 +127,12 @@ export class StorefrontCheckoutComponent implements OnInit {
           (label) => label.id === AddressLabelType.BILLING
         )
       )
-
       await this.setAddresses()
       await this.getShippingRates()
     } catch (err) {
       this.notifier.error(err)
+    } finally {
+      this.isLoading = false
     }
   }
 
@@ -165,8 +182,9 @@ export class StorefrontCheckoutComponent implements OnInit {
         city: this.shippingAddress.city,
         zipcode: this.shippingAddress.postalCode,
         state_name: this.shippingAddress.stateProvince,
-        country_iso: this.shippingAddress.country.id
-      }
+        country_iso: this.shippingAddress.country.id,
+        validate_address: false
+      } as SpreeAddress
     }
 
     if (this.billingAddress) {
@@ -179,14 +197,17 @@ export class StorefrontCheckoutComponent implements OnInit {
         city: this.billingAddress.city,
         zipcode: this.billingAddress.postalCode,
         state_name: this.billingAddress.stateProvince,
-        country_iso: this.billingAddress.country.id
-      }
+        country_iso: this.billingAddress.country.id,
+        validate_address: false
+      } as SpreeAddress
     }
 
     try {
+      this.errors = {}
       await this.storefront.checkout(data)
     } catch (err) {
-      this.notifier.error(err)
+      this.errors = err.errors
+      this.notifier.error(err.summary)
     }
   }
 
@@ -274,16 +295,18 @@ export class StorefrontCheckoutComponent implements OnInit {
       .open(StorefrontAddressDialog, {
         data: {
           title: _('GLOBAL.SHIPPING_ADDRESS'),
-          address: this.shippingAddress
+          address: this.shippingAddress,
+          otherAddress: this.shippingAddress,
+          invalidAddress: this.errors.hasOwnProperty('ship_address'),
+          label: AddressLabelType.SHIPPING,
+          user: this.user
         },
         width: '60vw',
         maxWidth: '800px'
       })
       .afterClosed()
       .pipe(filter((address) => address))
-      .subscribe((address) =>
-        this.createOrUpdateAddress(address, AddressLabelType.SHIPPING)
-      )
+      .subscribe(() => this.resolveAccountAddresses())
   }
 
   public async onSelectShippingRate(rateId: string) {
@@ -312,62 +335,17 @@ export class StorefrontCheckoutComponent implements OnInit {
       .open(StorefrontAddressDialog, {
         data: {
           title: _('GLOBAL.BILLING_ADDRESS'),
-          address: this.billingAddress
+          address: this.billingAddress,
+          otherAddress: this.shippingAddress,
+          label: AddressLabelType.BILLING,
+          user: this.user
         },
         width: '60vw',
         maxWidth: '800px'
       })
       .afterClosed()
       .pipe(filter((address) => address))
-      .subscribe((address) =>
-        this.createOrUpdateAddress(address, AddressLabelType.BILLING)
-      )
-  }
-
-  private async createOrUpdateAddress(address, label: AddressLabelType) {
-    this.isLoading = true
-    const targetAddress =
-      label === AddressLabelType.SHIPPING
-        ? this.shippingAddress
-        : this.billingAddress
-    const otherAddress =
-      label === AddressLabelType.SHIPPING
-        ? this.billingAddress
-        : this.shippingAddress
-    try {
-      if (targetAddress && targetAddress.id !== otherAddress?.id) {
-        await this.addressProvider.updateAddress({
-          account: this.user.id,
-          id: targetAddress.id,
-          name: `${this.user.firstName} ${this.user.lastName}`,
-          address1: address.address1,
-          address2: address.address2 ?? null,
-          city: address.city,
-          stateProvince: address.stateProvince,
-          country: address.country,
-          postalCode: address.postalCode,
-          labels: [label]
-        })
-      } else {
-        await this.addressProvider.createAddress({
-          account: this.user.id,
-          name: `${this.user.firstName} ${this.user.lastName}`,
-          address1: address.address1,
-          address2: address.address2 ?? undefined,
-          city: address.city,
-          stateProvince: address.stateProvince,
-          country: address.country,
-          postalCode: address.postalCode,
-          labels: [label]
-        })
-      }
-
-      await this.resolveAccountAddresses()
-    } catch (err) {
-      this.notifier.error(err)
-    } finally {
-      this.isLoading = false
-    }
+      .subscribe(() => this.resolveAccountAddresses())
   }
 
   public async onCompleteOrder() {

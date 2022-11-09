@@ -1,14 +1,36 @@
-import { Component, Inject, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import {
+  Component,
+  Inject,
+  OnInit,
+  AfterViewInit,
+  ViewChild
+} from '@angular/core'
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { AddressLabelType } from '@coachcare/common/model'
+import { CurrentAccount } from '@coachcare/common/services'
 import { FormUtils } from '@coachcare/common/shared'
-import { AccountAddress } from '@coachcare/sdk'
+import { AccountAddress, AddressProvider, SmartyAddress } from '@coachcare/sdk'
+import { StorefrontService } from '@coachcare/storefront/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { filter } from 'rxjs/operators'
+import { merge } from 'rxjs'
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  startWith,
+  switchMap
+} from 'rxjs/operators'
 
 export interface StoreFrontAddressData {
   title: string
   address?: AccountAddress
+  otherAddress?: AccountAddress
+  invalidAddress?: boolean
+  label?: string
+  user?: CurrentAccount
 }
 
 const stateList = [
@@ -269,10 +291,17 @@ const stateList = [
   host: { class: 'ccr-dialog' },
   styleUrls: ['./address.dialog.scss']
 })
-export class StorefrontAddressDialog implements OnInit {
+export class StorefrontAddressDialog implements OnInit, AfterViewInit {
   public title: string
   public form: FormGroup
+  public invalidAddress: boolean
   public states = stateList
+  public autocomplete = new FormControl('')
+  public autocompleteOptions: string[] = []
+  public filteredOptions: SmartyAddress[] = []
+  public isLoading: boolean = false
+
+  @ViewChild(MatAutocompleteTrigger) inputAutoComplete: MatAutocompleteTrigger
 
   get isUnitedStates() {
     return this.form?.value.country === 'US'
@@ -281,16 +310,45 @@ export class StorefrontAddressDialog implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: StoreFrontAddressData,
     private dialogRef: MatDialogRef<{ id: string; qty: number }>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private storefront: StorefrontService,
+    private addressProvider: AddressProvider
   ) {}
 
   ngOnInit(): void {
     this.createForm()
     this.title = this.data.title
+    this.invalidAddress = !!this.data.invalidAddress
+    this.isLoading = this.invalidAddress
 
     if (this.data.address) {
       this.patchValues(this.data.address)
     }
+
+    merge(
+      this.autocomplete.valueChanges,
+      this.form.get('address1').valueChanges
+    )
+      .pipe(
+        startWith(null),
+        debounceTime(200),
+        distinctUntilChanged(),
+        switchMap((val) => {
+          return this.storefront.spreeProvider.getSuggestedAddresses({
+            search: val || ''
+          })
+        }),
+        map((res) => res.data)
+      )
+      .subscribe((addresses) => {
+        this.isLoading = false
+        if (addresses.length > 0) {
+          this.filteredOptions = addresses
+          setTimeout(() => {
+            this.inputAutoComplete.openPanel()
+          }, 0)
+        }
+      })
 
     this.form
       .get('country')
@@ -309,6 +367,32 @@ export class StorefrontAddressDialog implements OnInit {
           })
         }
       })
+  }
+
+  ngAfterViewInit(): void {
+    if (this.invalidAddress) {
+      this.autocomplete.setValue(this.data.address.address1)
+    }
+  }
+
+  public resetError(e: Event) {
+    e.preventDefault()
+    this.invalidAddress = false
+  }
+
+  public selectSmartyAddress(address: SmartyAddress) {
+    this.form.patchValue(
+      {
+        address1: address.street_line,
+        address2: address.secondary,
+        city: address.city,
+        stateProvince: address.state,
+        country: this.data.address.country?.id,
+        postalCode: address.zipcode
+      },
+      { emitEvent: false }
+    )
+    this.invalidAddress = false
   }
 
   private patchValues(address: AccountAddress) {
@@ -339,6 +423,53 @@ export class StorefrontAddressDialog implements OnInit {
       return
     }
 
-    this.dialogRef.close(this.form.value)
+    const address = this.form.value
+
+    try {
+      if (
+        this.data.address &&
+        this.data.address.id !== this.data.otherAddress?.id
+      ) {
+        await this.addressProvider.updateAddress({
+          account: this.data.user.id,
+          id: this.data.address.id,
+          name: `${this.data.user.firstName} ${this.data.user.lastName}`,
+          address1: address.address1,
+          address2: address.address2 ?? null,
+          city: address.city,
+          stateProvince: address.stateProvince,
+          country: address.country,
+          postalCode: address.postalCode,
+          labels: [this.data.label],
+          verification:
+            this.data.label === AddressLabelType.SHIPPING
+              ? 'enabled'
+              : 'disabled'
+        })
+      } else {
+        await this.addressProvider.createAddress({
+          account: this.data.user.id,
+          name: `${this.data.user.firstName} ${this.data.user.lastName}`,
+          address1: address.address1,
+          address2: address.address2 ?? undefined,
+          city: address.city,
+          stateProvince: address.stateProvince,
+          country: address.country,
+          postalCode: address.postalCode,
+          labels: [this.data.label],
+          verification:
+            this.data.label === AddressLabelType.SHIPPING
+              ? 'enabled'
+              : 'disabled'
+        })
+      }
+      this.dialogRef.close(address)
+    } catch (err) {
+      this.autocomplete.setValue(address.address1)
+      this.invalidAddress = true
+      setTimeout(() => {
+        this.inputAutoComplete.openPanel()
+      }, 0)
+    }
   }
 }
