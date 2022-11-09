@@ -134,6 +134,8 @@ export class CcrMeasurementChartV2Component implements OnInit {
     { value: 'day', viewValue: _('SELECTOR.VIEWBY.DAY') },
     { value: 'week', viewValue: _('SELECTOR.VIEWBY.WEEK') },
     { value: 'month', viewValue: _('SELECTOR.VIEWBY.MONTH') },
+    { value: 'threeMonths', viewValue: _('SELECTOR.VIEWBY.THREE_MONTHS') },
+    { value: 'sixMonths', viewValue: _('SELECTOR.VIEWBY.SIX_MONTHS') },
     { value: 'year', viewValue: _('SELECTOR.VIEWBY.YEAR') },
     { value: 'alltime', viewValue: _('SELECTOR.VIEWBY.ALL_TIME') }
   ]

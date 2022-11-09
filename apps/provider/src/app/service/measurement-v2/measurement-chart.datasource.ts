@@ -146,6 +146,16 @@ export class MeasurementChartDataSource extends ChartDataSource<
         xlabelFormat = 'MMM D'
         tooltipFormat = 'MMM D h:mm a'
         break
+      case 'threeMonths':
+        xMaxTicks = 12
+        xlabelFormat = 'MMM DD, YYYY'
+        tooltipFormat = 'MMM DD, YYYY h:mm a'
+        break
+      case 'sixMonths':
+        xMaxTicks = 12
+        xlabelFormat = 'MMM DD, YYYY'
+        tooltipFormat = 'MMM DD, YYYY h:mm a'
+        break
       case 'year':
         xMaxTicks = 12
         xlabelFormat = 'MMM YYYY'

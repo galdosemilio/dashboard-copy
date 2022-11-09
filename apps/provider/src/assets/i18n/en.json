@@ -1667,6 +1667,8 @@
       "DAY_L": "VIEW BY DAY",
       "MONTH": "MONTH",
       "MONTH_L": "VIEW BY MONTH",
+      "SIX_MONTHS": "6 MONTHS",
+      "THREE_MONTHS": "3 MONTHS",
       "WEEK": "WEEK",
       "WEEK_L": "VIEW BY WEEK",
       "YEAR": "YEAR",

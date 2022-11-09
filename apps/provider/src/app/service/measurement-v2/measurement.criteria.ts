@@ -3,7 +3,14 @@ import {
   SummaryDataResponse as FoodSummaryDataResponseSegment
 } from '@coachcare/sdk'
 
-export type MeasurementTimeframe = 'alltime' | 'year' | 'month' | 'week' | 'day'
+export type MeasurementTimeframe =
+  | 'alltime'
+  | 'year'
+  | 'threeMonths'
+  | 'sixMonths'
+  | 'month'
+  | 'week'
+  | 'day'
 
 export type MeasurementSummaryUnit = 'day' | 'week' | 'month'
 

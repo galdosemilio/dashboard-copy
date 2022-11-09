@@ -30,15 +30,47 @@ export class DateNavigator implements OnChanges {
   @Input() discrete = false
   @Input() showTimeframeSelector = false
   @Input() timeframe: unitOfTime.DurationConstructor = 'day'
+
+  get _timeframe() {
+    switch (this.timeframe.toString()) {
+      case 'alltime':
+        return {
+          duration: 1,
+          unit: 'year' as unitOfTime.DurationConstructor
+        }
+
+      case 'sixMonths':
+        return {
+          duration: 6,
+          unit: 'month' as unitOfTime.DurationConstructor
+        }
+
+      case 'threeMonths':
+        return {
+          duration: 6,
+          unit: 'month' as unitOfTime.DurationConstructor
+        }
+
+      default:
+        return {
+          duration: 1,
+          unit: this.timeframe
+        }
+    }
+  }
+
   @Input()
   set date(date: string) {
     this._current = moment(date)
     this._start =
       this.direction === 'backward'
-        ? moment(this._current).subtract(1, this.timeframe)
+        ? moment(this._current).subtract(
+            this._timeframe.duration,
+            this._timeframe.unit
+          )
         : moment(this._current)
-            .startOf(this.timeframe)
-            .add(1, this.timeframe)
+            .startOf(this._timeframe.unit)
+            .add(this._timeframe.duration, this._timeframe.unit)
             .subtract(1, 'day')
             .endOf('day')
   }
@@ -47,7 +79,7 @@ export class DateNavigator implements OnChanges {
     this._limit =
       max === true ? moment() : max ? moment(max) : moment('2500-01-01')
 
-    if (this._current.isSameOrBefore(this._limit, this.timeframe)) {
+    if (this._current.isSameOrBefore(this._limit, this._timeframe.unit)) {
       return
     }
 
@@ -90,8 +122,8 @@ export class DateNavigator implements OnChanges {
     }
 
     next
-      ? this._current.add(1, this.timeframe)
-      : this._current.subtract(1, this.timeframe)
+      ? this._current.add(this._timeframe.duration, this._timeframe.unit)
+      : this._current.subtract(this._timeframe.duration, this._timeframe.unit)
 
     this.processAndEmit()
   }
@@ -120,22 +152,24 @@ export class DateNavigator implements OnChanges {
 
     this._start =
       this.direction === 'backward'
-        ? moment(this._current).subtract(1, this.timeframe).add(1, 'days')
-        : moment(this._current).startOf(this.timeframe)
+        ? moment(this._current)
+            .subtract(this._timeframe.duration, this._timeframe.unit)
+            .add(1, 'days')
+        : moment(this._current).startOf(this._timeframe.unit)
     const end =
       this.direction === 'backward'
         ? this.discrete
-          ? moment(this._current).endOf(this.timeframe)
+          ? moment(this._current).endOf(this._timeframe.unit)
           : moment(this._current)
         : this.discrete
-        ? moment(this._current).endOf(this.timeframe)
-        : moment(this._current).endOf(this.timeframe)
+        ? moment(this._current).endOf(this._timeframe.unit)
+        : moment(this._current).endOf(this._timeframe.unit)
 
     this._start = this.discrete
-      ? moment(end).startOf(this.timeframe)
+      ? moment(end).startOf(this._timeframe.unit)
       : this._start
 
-    switch (this.timeframe) {
+    switch (this._timeframe.unit) {
       case 'day':
         this._range = this.dayDateFormat
           ? `${this._start.format(this.dayDateFormat)}`
@@ -160,7 +194,10 @@ export class DateNavigator implements OnChanges {
         break
     }
 
-    const next = moment(this._start).add(1, this.timeframe)
+    const next = moment(this._start).add(
+      this._timeframe.duration,
+      this._timeframe.unit
+    )
     const major = moment.max(next, this._limit).format('YYYY-MM-DD')
     this._maxReached = major !== this._limit.format('YYYY-MM-DD')
 
