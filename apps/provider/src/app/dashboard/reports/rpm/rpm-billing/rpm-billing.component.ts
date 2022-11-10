@@ -19,7 +19,9 @@ import { WalkthroughService } from '@app/service/walkthrough'
 import {
   FetchRPMBillingSummaryRequest,
   OrganizationEntity,
-  PackageOrganization
+  PackageOrganization,
+  Timezone,
+  TimezoneResponse
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
@@ -52,6 +54,7 @@ import { environment } from 'apps/provider/src/environments/environment'
 import { CcrTableSortDirective } from '@app/shared'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { CSV } from '@coachcare/common/shared'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 
 interface StorageFilter {
   selectedClinicId?: string
@@ -106,8 +109,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public totalCount: number
   public packages: SelectOption<number>[] = []
   public selectedStatus: string
+  public timezoneName: string
   private storageFilter: StorageFilter
 
+  private timezones: Array<TimezoneResponse> = this.timezone.fetch()
   private refresh$: Subject<void> = new Subject<void>()
   private selectedClinic$ = new Subject<OrganizationEntity | null>()
 
@@ -121,7 +126,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     private notifier: NotifierService,
     private store: Store<ReportsState>,
     private walkthrough: WalkthroughService,
-    private packageOrganization: PackageOrganization
+    private packageOrganization: PackageOrganization,
+    private timezone: Timezone,
+    private translator: TranslateService
   ) {
     this.sortHandler = this.sortHandler.bind(this)
   }
@@ -146,6 +153,18 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       this.selectedStatus = this.storageFilter.status
     }
 
+    // get the current lang
+    const lang = this.translator.currentLang.split('-')[0]
+    this.timezoneName = this.timezones.find(
+      (entry) => entry.code === this.context.user.timezone
+    )?.lang[lang]
+
+    this.translator.onLangChange.subscribe((event: LangChangeEvent) => {
+      const lang = event.lang.split('-')[0]
+      this.timezoneName = this.timezones.find(
+        (entry) => entry.code === this.context.user.timezone
+      )?.lang[lang]
+    })
     this.walkthrough.checkGuideState('rpm')
     this.store.dispatch(new ClosePanel())
     this.createStatusFilterForm()
@@ -285,6 +304,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       csv += `"99458 x2"${this.csvSeparator}"99458 x2"`
 
       csv += '\r\n'
+
+      if (this.timezoneName) {
+        csv += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,\r\n`
+      }
 
       csv +=
         'ID' +

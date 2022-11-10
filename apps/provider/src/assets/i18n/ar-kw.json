@@ -1447,6 +1447,7 @@
     "FILTER_STATUS": "تصفية حسب الحالة",
     "GENDER": "الجنس",
     "GENDER_DESCRIPTION": "يظهر هذا المخطط نسب المرضى من جميع الأجناسفي العيادة خلال الفترة المحددة",
+    "GENERATED_IN": "تم إنشاؤه في {{timezone}}",
     "GENERATE_PATIENT_REPORT": "إنشاء تقرير المريض",
     "HOURS_SLEPT": "عدد ساعات النوم",
     "INACTIVE_CLIENTS": "المرضى غير النشطين",

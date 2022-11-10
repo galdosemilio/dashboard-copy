@@ -1447,6 +1447,7 @@
     "FILTER_STATUS": "סינון לפי סטטוס",
     "GENDER": "מין",
     "GENDER_DESCRIPTION": "תרשים זה מציג את אחוז התפלגות המטופלים במרפאה לפי מין במהלך תקופת הזמן שנבחרה.",
+    "GENERATED_IN": "נוצר ב-{{ timezone }}",
     "GENERATE_PATIENT_REPORT": "הפקת דוח מטופל",
     "HOURS_SLEPT": "שעות שינה",
     "INACTIVE_CLIENTS": "מטופלים לא פעילים",

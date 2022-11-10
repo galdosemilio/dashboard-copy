@@ -1447,6 +1447,7 @@
     "FILTER_STATUS": "Nach Status filtern",
     "GENDER": "Geschlecht",
     "GENDER_DESCRIPTION": "Diese Grafik zeigt den Prozentsatz aller Patienten in der Klinik im Hinblick auf Geschlechter während der ausgewählten Zeitdauer an.",
+    "GENERATED_IN": "Generiert in {{ timezone }}",
     "GENERATE_PATIENT_REPORT": "Patientenbericht erstellen",
     "HOURS_SLEPT": "Stunden geschlafen",
     "INACTIVE_CLIENTS": "Inaktive Patienten",

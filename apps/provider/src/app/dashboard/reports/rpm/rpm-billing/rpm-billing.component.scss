@@ -36,6 +36,10 @@ app-reports-rpm-billing {
 
   .count {
     line-height: 0;
+
+    i {
+      font-weight: 400;
+    }
   }
 
   .minus-margin-bottom .mat-form-field-wrapper {

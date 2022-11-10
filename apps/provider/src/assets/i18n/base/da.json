@@ -1447,6 +1447,7 @@
     "FILTER_STATUS": "Filtrer efter status",
     "GENDER": "Køn",
     "GENDER_DESCRIPTION": "Dette diagram viser procentdelen af ​​alle patienters køn i klinikken i den valgte tidsperiode.",
+    "GENERATED_IN": "Genereret i {{ timezone }}",
     "GENERATE_PATIENT_REPORT": "Opret ny patientrapport",
     "HOURS_SLEPT": "Sovende Timer",
     "INACTIVE_CLIENTS": "Inaktive Patienter",

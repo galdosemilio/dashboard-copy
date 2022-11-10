@@ -1447,6 +1447,7 @@
     "FILTER_STATUS": "Filtrar por estado",
     "GENDER": "Género",
     "GENDER_DESCRIPTION": "Esta gráfica muestra el porcentaje por género de todos los pacientes en la clínica durante el período de tiempo seleccionado.",
+    "GENERATED_IN": "Generado en {{ timezone }}",
     "GENERATE_PATIENT_REPORT": "Generar informe de paciente",
     "HOURS_SLEPT": "Horas Dormidas",
     "INACTIVE_CLIENTS": "Pacientes Inactivos",
