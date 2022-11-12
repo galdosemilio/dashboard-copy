@@ -5,6 +5,9 @@
       <div class="logo" routerLink="../storefront" queryParamsHandling="merge">
         <img [src]="logoUrl" alt="logo">
       </div>
+      <a *ngIf="companyUrl" mat-button [href]="companyUrl" target="_blank">
+        {{ companyUrlLabel || companyUrl }}
+      </a>
       <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center end" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutGap.xs="0px">
         <div fxFlex fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxFlexOrder="1" fxFlexOrder.xs="2">
           <a mat-button routerLink="../storefront">

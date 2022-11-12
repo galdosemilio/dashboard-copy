@@ -66,9 +66,13 @@ export interface StorefrontProduct extends ProductAttr {
 }
 
 export interface CurrentSpreeStore extends SpreeStore {
-  title: string
-  description: string
-  heroImage: string
+  title?: string
+  description?: string
+  hero_image?: string
+  public_metadata?: {
+    company_url: string
+    company_url_label: string
+  }
 }
 
 export interface StorefrontCategory extends TaxonAttr {

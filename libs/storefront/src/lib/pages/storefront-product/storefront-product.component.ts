@@ -36,8 +36,8 @@ export class StorefrontProductComponent implements OnInit {
   public currentStore: CurrentSpreeStore
 
   public get heroImageUrl(): string | undefined {
-    if (this.currentStore.heroImage) {
-      return `url('${this.currentStore.heroImage}')`
+    if (this.currentStore.hero_image) {
+      return `url('${this.currentStore.hero_image}')`
     }
   }
 
@@ -79,7 +79,7 @@ export class StorefrontProductComponent implements OnInit {
         this.currentStore = {
           title: s.name,
           description: s.description,
-          heroImage: s.hero_image
+          hero_image: s.hero_image
             ? `${this.storefront.storeUrl + s.hero_image}`
             : 'https://cdn.coachcare.com/corporate/Other/ecommerce-general-background.jpg'
         }

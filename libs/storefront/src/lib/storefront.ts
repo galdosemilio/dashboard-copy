@@ -7,9 +7,8 @@ import { filter } from 'rxjs/operators'
 
 import { CCRState } from '@coachcare/backend/store'
 import { OrgPrefSelectors } from '@coachcare/common/store'
-import { ContextService } from '@coachcare/common/services'
 
-import { StorefrontService } from './services'
+import { CurrentSpreeStore, StorefrontService } from './services'
 
 @UntilDestroy()
 @Component({
@@ -18,17 +17,25 @@ import { StorefrontService } from './services'
   styleUrls: ['./storefront.scss']
 })
 export class Storefront implements OnInit {
+  public currentStore: CurrentSpreeStore
   public logoUrl: string
   public isLoading = true
   public error: string
   public itemCount = 0
 
+  public get companyUrl(): string {
+    return this.currentStore?.public_metadata?.company_url
+  }
+
+  public get companyUrlLabel(): string {
+    return this.currentStore?.public_metadata?.company_url_label
+  }
+
   constructor(
     @Inject(DOCUMENT) private document: any,
     private storefront: StorefrontService,
     private store: Store<CCRState.State>,
-    private renderer: Renderer2,
-    private context: ContextService
+    private renderer: Renderer2
   ) {
     this.store
       .pipe(
@@ -120,6 +127,14 @@ export class Storefront implements OnInit {
       )
       .subscribe((cart) => {
         this.itemCount = cart.isComplete ? 0 : cart.lineItems.length
+      })
+    this.storefront.store$
+      .pipe(
+        untilDestroyed(this),
+        filter((store) => !!store)
+      )
+      .subscribe((store) => {
+        this.currentStore = store
       })
   }
 
