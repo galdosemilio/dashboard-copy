@@ -65,7 +65,7 @@ export interface StorefrontProduct extends ProductAttr {
   options: StorefrontProductOption[]
 }
 
-export interface CurrentSpreeStore {
+export interface CurrentSpreeStore extends SpreeStore {
   title: string
   description: string
   heroImage: string
@@ -76,6 +76,7 @@ export interface StorefrontCategory extends TaxonAttr {
 }
 
 export interface StorefrontCartLineItem extends JsonApiDocument {
+  meals: number
   images: string[]
 }
 
@@ -485,12 +486,18 @@ export class StorefrontService {
             item.id === variant?.relationships.product?.data.id
         )
 
+        const meals =
+          product && product.attributes.public_metadata?.meals
+            ? parseInt(product.attributes.public_metadata.meals)
+            : 0
+
         const images = product
           ? this.getSpreeImages(product, entry.included)
           : []
 
         return {
           ...lineItem,
+          meals: meals * lineItem.attributes.quantity,
           images
         }
       })

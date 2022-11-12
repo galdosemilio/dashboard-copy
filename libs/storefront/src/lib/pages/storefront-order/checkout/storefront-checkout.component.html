@@ -3,7 +3,7 @@
     <h2>{{ 'GLOBAL.CHECK_OUT' | translate }}</h2>
     <div fxLayout="column"  fxLayoutGap="25px">
       <div fxLayout="column" fxLayoutAlign="center center" class="item">
-        <div cy-data="cart-items"  fxFill fxLayout="row" fxLayoutAlign="space-between start">
+        <div cy-data="cart-items" fxFill fxLayout="row" fxLayoutAlign="space-between start">
           <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
             <mat-icon>shopping_cart</mat-icon>
             <div>{{ 'GLOBAL.SHOPPING_CART_ITEMS' | translate: {items: cart.lineItems.length} }}</div>
@@ -11,6 +11,9 @@
           <button mat-icon-button routerLink="../cart" queryParamsHandling="merge">
             <mat-icon>edit</mat-icon>
           </button>
+        </div>
+        <div *ngIf="totalMeals" class="meals" fxFill fxLayout="row" fxLayoutAlign="space-between start">
+          Total Number of Meals: {{ totalMeals }}
         </div>
         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center start" class="cart-items-wrap">
           <div *ngFor="let lineItem of cart.lineItems" class="cart-item">

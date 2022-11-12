@@ -43,6 +43,10 @@ export class StorefrontCheckoutComponent implements OnInit {
     return this.cart?.shipment?.attributes?.public_metadata?.description || ''
   }
 
+  public get totalMeals(): number {
+    return this.cart?.lineItems?.reduce((acc, item) => acc + item.meals, 0)
+  }
+
   constructor(
     private storefront: StorefrontService,
     private notifier: NotifierService,
