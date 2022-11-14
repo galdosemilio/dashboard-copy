@@ -1,4 +1,4 @@
-<mat-card *ngIf="!serverError">
+<mat-card *ngIf="!serverError && isValidResetCode">
   <mat-card-header>
     <h2 mat-card-title *ngIf="formType === 'create'">{{ 'GLOBAL.SET_PASSWORD' | translate }}</h2>
     <h2 mat-card-title *ngIf="formType !== 'create'">{{ 'GLOBAL.RESET_PASSWORD' | translate }}</h2>

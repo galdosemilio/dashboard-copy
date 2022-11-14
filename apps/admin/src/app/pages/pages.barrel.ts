@@ -5,6 +5,7 @@ import { MFASetupPageComponent } from '@board/pages/mfa-setup'
 import { PasswordResetPageComponent } from '@board/pages/password/reset/reset.component'
 import { PasswordUpdatePageComponent } from '@board/pages/password/update/update.component'
 import { RegisterApplePageComponent } from '@board/pages/register/apple/apple.component'
+import { ResetPasswordInvalidDialog } from '@board/pages/password/dialogs'
 import { RegisterClinicPageComponent } from '@board/pages/register/clinic/clinic.component'
 import { RegisterClinicInfoPageComponent } from '@board/pages/register/clinic/info/info.component'
 import { RegisterClinicPaymentPageComponent } from '@board/pages/register/clinic/payment/payment.component'
@@ -43,6 +44,7 @@ export const PagesComponents = [
   PageSectionComponent,
   PasswordResetPageComponent,
   PasswordUpdatePageComponent,
+  ResetPasswordInvalidDialog,
   RegisterApplePageComponent,
   RegisterClinicPageComponent,
   RegisterClinicInfoPageComponent,

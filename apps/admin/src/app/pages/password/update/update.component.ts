@@ -24,7 +24,10 @@ import {
   resolveConfig
 } from '@board/pages/config/section.config'
 import { ClinicMsaProps } from '@coachcare/common/components'
+import { ResetPasswordInvalidDialog } from '../dialogs'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
+@UntilDestroy()
 @Component({
   selector: 'ccr-page-password-update',
   templateUrl: './update.component.html',
@@ -52,6 +55,7 @@ export class PasswordUpdatePageComponent implements OnInit {
   isProcessing = false
   mfaForm: FormGroup
   mode: MFACodeInputMode = 'default'
+  isValidResetCode = false
 
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
@@ -79,9 +83,14 @@ export class PasswordUpdatePageComponent implements OnInit {
       this.accountType = params.accountType
       this.consentRequired = params.consentRequired
       this.formType = params.type === 'create' ? 'create' : 'update'
+      const email = params.email || ''
+      const code = params.code || ''
+
+      void this.resetPasswordCheck(email, code)
+
       this.form.patchValue({
-        email: params.email || '',
-        code: params.code || '',
+        email,
+        code,
         consent: this.consentRequired ? false : undefined
       })
 
@@ -94,6 +103,44 @@ export class PasswordUpdatePageComponent implements OnInit {
         )
       }
     })
+  }
+
+  async resetPasswordCheck(email: string, code: string) {
+    try {
+      await this.password.resetPasswordTest({
+        email,
+        code
+      })
+
+      this.isValidResetCode = true
+    } catch (error) {
+      if (error.status !== 403) {
+        return this.dialog.open(ConfirmDialog, {
+          data: {
+            title: _('GLOBAL.ERROR'),
+            content: error.data?.message || _('GLOBAL.ERROR')
+          }
+        })
+      }
+
+      return this.dialog
+        .open(ResetPasswordInvalidDialog, {
+          data: {
+            email
+          },
+          maxWidth: '500px'
+        })
+        .afterClosed()
+        .pipe(untilDestroyed(this))
+        .subscribe(() => {
+          void this.router.navigate(
+            ['/'],
+            this.accountType
+              ? { queryParams: { accountType: this.accountType } }
+              : undefined
+          )
+        })
+    }
   }
 
   async onSubmit() {
@@ -201,7 +248,7 @@ export class PasswordUpdatePageComponent implements OnInit {
     )
 
     if (
-      !clinicCustomCheckboxConfig?.supportedAccTypes.includes(
+      !clinicCustomCheckboxConfig?.supportedAccTypes?.includes(
         this.accountType as AccountTypeIds
       )
     ) {
