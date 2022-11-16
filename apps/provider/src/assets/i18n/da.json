@@ -1696,6 +1696,8 @@
     "CONTENT": "Indhold",
     "CREATED_AT": "Oprettet den",
     "CURRENT_USER": "Aktuelt valgte bruger",
+    "DEEP_LINK": "Deep Link",
+    "DEEP_LINK_ABOUT": "Når en meddelelse åbnes af brugeren på deres enhed, vil indstilling af et dybt link automatisk bringe dem til denne specifikke side eller sektion af appen. Det nuværende udvalg af dybe links er begrænset og vil blive udvidet over tid. Standardhandlingen, hvis du ikke indstiller et dybt link, vil bringe brugeren til appens startside.",
     "DELAYS": {
       "10_DAYS": "10 dages forsinkelse",
       "11_DAYS": "11 dages forsinkelse",
@@ -1763,6 +1765,7 @@
     "MESSAGE_DELETED_PROMPT": "Beskeden blev slettet",
     "NOTIF_TOO_LONG_WARNING": "Notifikationsmeddelelse overskrider den anbefalede maksimale længde.",
     "NO_ADMIN_ORG": "Du har ikke administratortilladelser til denne klinik.",
+    "NO_DEEP_LINK": "Ingen dyb link",
     "NO_PACKAGES": "Der er ingen faser til rådighed for denne organisation.",
     "NO_SEQUENCES": "Ingen sekvenser",
     "ORG_AND_CHILDREN": "{{ org }} og dets {{ childAmount }} børneklinikker",

@@ -1696,6 +1696,8 @@
     "CONTENT": "Content",
     "CREATED_AT": "Created At",
     "CURRENT_USER": "Currently Selected User",
+    "DEEP_LINK": "Deep Link",
+    "DEEP_LINK_ABOUT": "When a notification is swiped opened by the user on their device, setting a Deep Link will automatically bring them to this specific page or section of the app.  The current selection of Deep Links is limited, and will be expanded over time.  The default action if not setting a Deep Link will bring the user to the app homepage.",
     "DELAYS": {
       "10_DAYS": "10 days delay",
       "11_DAYS": "11 days delay",
@@ -1763,6 +1765,7 @@
     "MESSAGE_DELETED_PROMPT": "Message deleted",
     "NOTIF_TOO_LONG_WARNING": "Notification message exceeds the recommended maximum length.",
     "NO_ADMIN_ORG": "You don't have admin permissions for this clinic.",
+    "NO_DEEP_LINK": "No Deep Link",
     "NO_PACKAGES": "There are no Phases available for this clinic.",
     "NO_SEQUENCES": "No Sequences",
     "ORG_AND_CHILDREN": "Includes all patients in the <strong>{{ org }}</strong> clinic and <strong>{{ childAmount }}</strong> child clinic(s)",

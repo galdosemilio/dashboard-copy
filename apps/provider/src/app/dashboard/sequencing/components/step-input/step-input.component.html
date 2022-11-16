@@ -15,6 +15,7 @@ class="step-input-container">
             <div *ngIf="i < maxPageIndex && i >= minPageIndex" [formGroupName]="i">
                 <sequencing-message-input
                 [blocked]="blocked"
+                [deepLinkTypes]="deepLinkTypes"
                 [hardBlocked]="hardBlocked"
                 [markAsTouched]="markAsTouched"
                 formControlName="message"></sequencing-message-input>

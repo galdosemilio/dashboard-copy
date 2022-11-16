@@ -34,6 +34,7 @@ import {
   StepDelays
 } from '../../models'
 import { Transition } from '../../models/sequence-transition'
+import { DeepLinkType } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -54,7 +55,8 @@ import { Transition } from '../../models/sequence-transition'
   ]
 })
 export class SequencingFormComponent
-  implements ControlValueAccessor, OnDestroy, OnInit {
+  implements ControlValueAccessor, OnDestroy, OnInit
+{
   @Input() set blocked(blocked: boolean) {
     this._blocked = blocked
 
@@ -86,6 +88,7 @@ export class SequencingFormComponent
   }
 
   @Input() sequence: Sequence
+  @Input() deepLinkTypes: Array<DeepLinkType>
 
   @Output() loadFinished: EventEmitter<void> = new EventEmitter<void>()
 

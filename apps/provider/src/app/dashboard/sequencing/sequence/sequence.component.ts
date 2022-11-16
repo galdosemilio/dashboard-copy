@@ -15,7 +15,10 @@ import { Store } from '@ngrx/store'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject, Subscription } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
-import { Sequence as SelveraSequenceService } from '@coachcare/sdk'
+import {
+  DeepLinkType,
+  Sequence as SelveraSequenceService
+} from '@coachcare/sdk'
 import { SequencingFormComponent } from '../form'
 import { Sequence } from '../models'
 import { SequenceSyncer } from '../utils'
@@ -41,7 +44,7 @@ export class SequenceComponent implements OnDestroy, OnInit {
   isLoading: boolean
   section: SequenceComponentSection = 'edit'
   sequence: Sequence
-
+  deepLinkTypes: DeepLinkType[] = []
   markAsTouched$: Subject<void> = new Subject<void>()
 
   private formSubscription: Subscription
@@ -79,6 +82,7 @@ export class SequenceComponent implements OnDestroy, OnInit {
     this.form = this.fb.group({ sequence: [null, Validators.required] })
     this.subscribeToForm()
     this.fetchResolvedData()
+    void this.fetchDeepLinkTypes()
     void this.fetchAdminPermissions()
   }
 
@@ -181,6 +185,16 @@ export class SequenceComponent implements OnDestroy, OnInit {
       this.enabledAutoenrollment =
         this.sequence?.autoenrollment?.enabled || false
     })
+  }
+
+  private async fetchDeepLinkTypes(): Promise<void> {
+    this.deepLinkTypes = []
+    try {
+      const res = await this.seq.getDeepLinkTypes()
+      this.deepLinkTypes = res.data
+    } catch (error) {
+      this.notify.error(error)
+    }
   }
 
   private subscribeToForm(): void {

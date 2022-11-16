@@ -79,7 +79,8 @@ export class Transition implements SequenceTransition {
               trigger.payload.message || trigger.payload.content || undefined,
             content:
               trigger.payload.message || trigger.payload.content || undefined,
-            package: trigger.payload.package || undefined
+            package: trigger.payload.package || undefined,
+            deepLink: trigger.payload.deepLink || undefined
           }
         : {},
       syncState: {

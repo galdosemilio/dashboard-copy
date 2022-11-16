@@ -15,6 +15,7 @@ import {
   NG_VALUE_ACCESSOR,
   Validators
 } from '@angular/forms'
+import { DeepLinkType } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
@@ -41,7 +42,8 @@ import {
   ]
 })
 export class StepInputComponent
-  implements ControlValueAccessor, OnDestroy, OnInit {
+  implements ControlValueAccessor, OnDestroy, OnInit
+{
   @Input()
   set blocked(blocked: boolean) {
     this._blocked = blocked
@@ -79,6 +81,7 @@ export class StepInputComponent
   @Input() isSelected = true
   @Input() markAsTouched: Subject<void>
   @Input() single = false
+  @Input() deepLinkTypes: Array<DeepLinkType>
 
   @Output() deleted: EventEmitter<void> = new EventEmitter<void>()
   @Output() recalcDelays: EventEmitter<void> = new EventEmitter<void>()

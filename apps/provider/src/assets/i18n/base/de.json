@@ -1696,6 +1696,8 @@
     "CONTENT": "Inhalt",
     "CREATED_AT": "Erstellt am",
     "CURRENT_USER": "Derzeit ausgewählter Benutzer",
+    "DEEP_LINK": "Tiefenlink",
+    "DEEP_LINK_ABOUT": "Wenn eine Benachrichtigung vom Benutzer auf seinem Gerät geöffnet wird, bringt ihn das Setzen eines Deep Links automatisch zu dieser bestimmten Seite oder diesem Abschnitt der App. Die aktuelle Auswahl an Deep Links ist begrenzt und wird im Laufe der Zeit erweitert. Die Standardaktion, wenn kein Deep Link festgelegt wird, bringt den Benutzer zur App-Homepage.",
     "DELAYS": {
       "10_DAYS": "10 Tage Verzögerung",
       "11_DAYS": "11 Tage Verzögerung",
@@ -1763,6 +1765,7 @@
     "MESSAGE_DELETED_PROMPT": "Nachricht gelöscht",
     "NOTIF_TOO_LONG_WARNING": "Benachrichtigung überschreitet die empfohlene maximale Länge.",
     "NO_ADMIN_ORG": "Sie haben keine Administratorrechte für diese Klinik.",
+    "NO_DEEP_LINK": "Kein Deeplink",
     "NO_PACKAGES": "Es gibt keine Phasen für diese Organisation zur Verfügung.",
     "NO_SEQUENCES": "Keine Sequenzen",
     "ORG_AND_CHILDREN": "{{ org }} und seine {{ childAmount }} kinderkliniken",

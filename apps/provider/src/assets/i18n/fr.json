@@ -1696,6 +1696,8 @@
     "CONTENT": "Contenu",
     "CREATED_AT": "Créé à",
     "CURRENT_USER": "Utilisateur sélectionné",
+    "DEEP_LINK": "Lien profond",
+    "DEEP_LINK_ABOUT": "Lorsqu'une notification est ouverte par l'utilisateur sur son appareil, la définition d'un lien profond l'amènera automatiquement à cette page ou section spécifique de l'application. La sélection actuelle de liens profonds est limitée et sera élargie au fil du temps. Si vous ne définissez pas de lien profond, l'action par défaut amènera l'utilisateur à la page d'accueil de l'application.",
     "DELAYS": {
       "10_DAYS": "Délais de 10 jours",
       "11_DAYS": "Délais de 11 jours",
@@ -1763,6 +1765,7 @@
     "MESSAGE_DELETED_PROMPT": "Message supprimé",
     "NOTIF_TOO_LONG_WARNING": "Un message de notification dépasse la longueur maximale recommandée.",
     "NO_ADMIN_ORG": "Vous ne disposez pas des autorisations d'administrateur pour cette clinique.",
+    "NO_DEEP_LINK": "Pas de lien profond",
     "NO_PACKAGES": "Il n'y a pas les phases disponibles pour cette Organisation.",
     "NO_SEQUENCES": "Aucune séquence",
     "ORG_AND_CHILDREN": "{{ org }} et ses {{ childAmount }} cliniques pour enfants",

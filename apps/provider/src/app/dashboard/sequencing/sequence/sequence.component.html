@@ -74,6 +74,7 @@ fxLayoutAlign=" stretch">
             <div [formGroup]="form">
                 <sequencing-form
                 [sequence]="sequence"
+                [deepLinkTypes]="deepLinkTypes"
                 [blocked]="hasEnrollees || !isAdmin || hardBlocked || enabledAutoenrollment"
                 [hardBlocked]="!isAdmin || hardBlocked"
                 (loadFinished)="onFormLoadFinish$.emit()"

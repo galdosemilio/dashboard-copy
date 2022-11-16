@@ -74,6 +74,7 @@ interface MessagePayloadItem {
     package: string
     subject: string
     text: string
+    deepLink?: string
   }
   language?: string
   stepId?: string
@@ -137,9 +138,8 @@ export class SequenceSyncer {
 
         let messageTickets = []
         let sequenceStepResponse
-        const sequenceStepTickets: SyncerTicket[] = this.resolveTickets(
-          formValue
-        )
+        const sequenceStepTickets: SyncerTicket[] =
+          this.resolveTickets(formValue)
         let transitionTickets: SyncerTicket[] = []
 
         sequenceStepResponse = await this.processTicket(
@@ -147,9 +147,8 @@ export class SequenceSyncer {
         )
 
         let structureResponses = []
-        const structureTickets = this.resolveStructureTickets(
-          sequenceStepResponse
-        )
+        const structureTickets =
+          this.resolveStructureTickets(sequenceStepResponse)
 
         structureResponses = await bufferedRequests(
           structureTickets.map((ticket) => this.processTicket(ticket))
@@ -182,31 +181,37 @@ export class SequenceSyncer {
 
         structureResponses.forEach((structureResponse) => {
           if (structureResponse.action === 'no-action') {
-            updatedStructureResponse.response.transitions = updatedStructureResponse.response.transitions.filter(
-              (t) => t.id !== structureResponse.response.id
-            )
-            updatedStructureResponse.response.steps = updatedStructureResponse.response.steps.filter(
-              (s) =>
-                s.step.name === 'root' ||
-                s.step.id !== structureResponse.response.to.id
-            )
-            updatedStructureResponse.children = updatedStructureResponse.children.filter(
-              (c) => c.response.id !== structureResponse.response.to.id
-            )
+            updatedStructureResponse.response.transitions =
+              updatedStructureResponse.response.transitions.filter(
+                (t) => t.id !== structureResponse.response.id
+              )
+            updatedStructureResponse.response.steps =
+              updatedStructureResponse.response.steps.filter(
+                (s) =>
+                  s.step.name === 'root' ||
+                  s.step.id !== structureResponse.response.to.id
+              )
+            updatedStructureResponse.children =
+              updatedStructureResponse.children.filter(
+                (c) => c.response.id !== structureResponse.response.to.id
+              )
 
-            updatedFormValue.sequence.steps = updatedFormValue.sequence.steps.filter(
-              (s) =>
-                s.step.name === 'root' ||
-                s.step.id !== structureResponse.response.to.id
-            )
+            updatedFormValue.sequence.steps =
+              updatedFormValue.sequence.steps.filter(
+                (s) =>
+                  s.step.name === 'root' ||
+                  s.step.id !== structureResponse.response.to.id
+              )
 
-            updatedFormValue.sequence.transitions = updatedFormValue.sequence.transitions.filter(
-              (t) => t.id !== structureResponse.response.id
-            )
+            updatedFormValue.sequence.transitions =
+              updatedFormValue.sequence.transitions.filter(
+                (t) => t.id !== structureResponse.response.id
+              )
           } else if (structureResponse.action === 'create') {
-            const affectedTransitionIndex = updatedStructureResponse.response.transitions.findIndex(
-              (t) => t.from.id === structureResponse.response.transition.from
-            )
+            const affectedTransitionIndex =
+              updatedStructureResponse.response.transitions.findIndex(
+                (t) => t.from.id === structureResponse.response.transition.from
+              )
 
             if (affectedTransitionIndex > -1) {
               updatedStructureResponse.response.transitions[
@@ -511,7 +516,7 @@ export class SequenceSyncer {
       const messageObject: any = message
       if (Array.isArray(message.message)) {
         const firstMessage =
-          message.message[0] || ((message.message as any) as MessagePayloadItem)
+          message.message[0] || (message.message as any as MessagePayloadItem)
         const dominantAction = this.detectDominantAction(firstMessage.syncState)
         return {
           action:
@@ -925,7 +930,10 @@ export class SequenceSyncer {
                 header: message.content.header || undefined,
                 subject: message.content.subject || undefined,
                 title:
-                  message.content.subject || message.content.header || undefined
+                  message.content.subject ||
+                  message.content.header ||
+                  undefined,
+                deepLink: message.content.deepLink || undefined
               } as any
             })
             break
@@ -961,7 +969,10 @@ export class SequenceSyncer {
                 header: message.content.header || undefined,
                 subject: message.content.subject || undefined,
                 title:
-                  message.content.subject || message.content.header || undefined
+                  message.content.subject ||
+                  message.content.header ||
+                  undefined,
+                deepLink: message.content.deepLink || undefined
               } as any
             })
             break
@@ -1003,7 +1014,10 @@ export class SequenceSyncer {
                 header: message.content.header || undefined,
                 subject: message.content.subject || undefined,
                 title:
-                  message.content.subject || message.content.header || undefined
+                  message.content.subject ||
+                  message.content.header ||
+                  undefined,
+                deepLink: message.content.deepLink || undefined
               }
             })
             break

@@ -1696,6 +1696,8 @@
     "CONTENT": "Conteúdo",
     "CREATED_AT": "Criado em",
     "CURRENT_USER": "Utilizador Selecionado Atualmente",
+    "DEEP_LINK": "Link profundo",
+    "DEEP_LINK_ABOUT": "Quando uma notificação é aberta pelo usuário em seu dispositivo, a configuração de um Deep Link os levará automaticamente a esta página ou seção específica do aplicativo. A seleção atual de Deep Links é limitada e será expandida com o tempo. A ação padrão, se não definir um Deep Link, levará o usuário à página inicial do aplicativo.",
     "DELAYS": {
       "10_DAYS": "10 dias de atraso",
       "11_DAYS": "11 dias de atraso",
@@ -1763,6 +1765,7 @@
     "MESSAGE_DELETED_PROMPT": "Mensagem apagada",
     "NOTIF_TOO_LONG_WARNING": "Mensagem de notificação excede o comprimento máximo recomendado.",
     "NO_ADMIN_ORG": "Você não tem permissões de administrador para esta clínica.",
+    "NO_DEEP_LINK": "Nenhum link profundo",
     "NO_PACKAGES": "Não há Fases disponíveis para esta Organização.",
     "NO_SEQUENCES": "Sem Sequências",
     "ORG_AND_CHILDREN": "{{ org }} e suas {{ childAmount }} clínicas para crianças",

@@ -126,6 +126,7 @@
         fxLayoutGap="10px">
             <sequencing-step-input
             *ngIf="activeStep === i"
+            [deepLinkTypes]="deepLinkTypes"
             [blocked]="(blocked && form.value.steps[i].step?.syncState?.inServer)"
             [firstStep]="true"
             [hardBlocked]="hardBlocked"

@@ -32,7 +32,8 @@ import { Subject } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationFormComponent
-  implements ControlValueAccessor, OnDestroy, OnInit {
+  implements ControlValueAccessor, OnDestroy, OnInit
+{
   @Input() markAsTouched: Subject<void>
 
   @Input('isDisabled') set disabled(disabled: boolean) {
@@ -95,7 +96,8 @@ export class NotificationFormComponent
   private createForm(): void {
     this.form = this.fb.group({
       header: ['', Validators.required],
-      text: ['', Validators.required]
+      text: ['', Validators.required],
+      deepLink: ['']
     })
 
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((controls) => {

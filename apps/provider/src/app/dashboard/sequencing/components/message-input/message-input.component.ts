@@ -26,6 +26,7 @@ import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { MessagePreviewDialog } from '../../dialogs/message-preview'
 import { MessageType, MessageTypes } from '../../models'
+import { DeepLinkType } from '@coachcare/sdk'
 
 @UntilDestroy()
 @Component({
@@ -42,7 +43,8 @@ import { MessageType, MessageTypes } from '../../models'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageInputComponent
-  implements ControlValueAccessor, OnDestroy, OnInit {
+  implements ControlValueAccessor, OnDestroy, OnInit
+{
   @Input()
   set blocked(blocked: boolean) {
     this._blocked = blocked
@@ -53,6 +55,7 @@ export class MessageInputComponent
   }
 
   @Input() markAsTouched: Subject<void>
+  @Input() deepLinkTypes: Array<DeepLinkType>
 
   @Input()
   set hardBlocked(hardBlocked: boolean) {
@@ -177,6 +180,10 @@ export class MessageInputComponent
       this.form.patchValue({
         id: this.message.id,
         content: this.message.payload || this.message.content,
+        deepLink:
+          this.message.payload?.deepLink ||
+          this.message.content?.deepLink ||
+          '',
         type: this.message.type.id || this.message.type,
         syncState: this.message.syncState
       })
@@ -215,6 +222,7 @@ export class MessageInputComponent
       id: '',
       allowTranslations: [null],
       content: [null, Validators.required],
+      deepLink: [''],
       syncState: [
         {
           deleted: false,
@@ -238,6 +246,7 @@ export class MessageInputComponent
       id: [''],
       language: ['', Validators.required],
       content: [null, Validators.required],
+      deepLink: [''],
       syncState: [
         {
           deleted: false,
@@ -262,6 +271,7 @@ export class MessageInputComponent
 
   private disableForm(): void {
     this.form.controls.content.disable({ emitEvent: false })
+    this.form.controls.deepLink.disable({ emitEvent: false })
     this.form.controls.type.disable({ emitEvent: false })
     this.form.controls.allowTranslations.disable({ emitEvent: false })
     this.addLangForm.controls.language.disable({ emitEvent: false })
@@ -270,6 +280,7 @@ export class MessageInputComponent
 
   private enableForm(): void {
     this.form.controls.content.enable({ emitEvent: false })
+    this.form.controls.deepLink.enable({ emitEvent: false })
     this.form.controls.type.enable({ emitEvent: false })
     this.form.controls.allowTranslations.enable({ emitEvent: false })
     this.addLangForm.controls.language.enable({ emitEvent: false })
@@ -300,13 +311,18 @@ export class MessageInputComponent
     this.form.valueChanges
       .pipe(untilDestroyed(this), debounceTime(50))
       .subscribe((controls) => {
+        const type = controls.type || this.message.type.id || this.message.type
+
         this.propagateChange(
           this.form.valid || controls.syncState.deleted
             ? {
                 id: controls.id,
-                content: controls.content,
+                content: {
+                  ...controls.content,
+                  deepLink: type === '2' ? controls.deepLink : undefined
+                },
                 syncState: { ...controls.syncState, edited: true },
-                type: controls.type || this.message.type.id || this.message.type
+                type
               }
             : null
         )
@@ -355,18 +371,21 @@ export class MessageInputComponent
             this.translations[index] = control.language
           })
         }
-
+        const type =
+          this.form.value.type || (this.message ? this.message.type.id : '')
         this.propagateChange(
           this.translationForm.valid
             ? controls.map((c) => ({
                 ...c,
+                content: {
+                  ...c.content,
+                  deepLink: type === '2' ? this.form.value.deepLink : undefined
+                },
                 syncState: this.form.value.syncState
                   ? { ...this.form.value.syncState, ...c.syncState }
                   : c.syncState,
                 id: this.form.value.id || (this.message ? this.message.id : ''),
-                type:
-                  this.form.value.type ||
-                  (this.message ? this.message.type.id : '')
+                type
               }))
             : null
         )

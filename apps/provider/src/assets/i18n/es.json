@@ -1696,6 +1696,8 @@
     "CONTENT": "Contenido",
     "CREATED_AT": "Fecha de Creación",
     "CURRENT_USER": "Usuario Seleccionado",
+    "DEEP_LINK": "Enlace profundo",
+    "DEEP_LINK_ABOUT": "Cuando el usuario abre una notificación en su dispositivo, configurar un enlace profundo lo llevará automáticamente a esta página o sección específica de la aplicación. La selección actual de Deep Links es limitada y se ampliará con el tiempo. La acción predeterminada, si no se establece un enlace profundo, llevará al usuario a la página de inicio de la aplicación.",
     "DELAYS": {
       "10_DAYS": "Retraso de 10 días",
       "11_DAYS": "Retraso de 11 días",
@@ -1763,6 +1765,7 @@
     "MESSAGE_DELETED_PROMPT": "Mensaje borrado",
     "NOTIF_TOO_LONG_WARNING": "El texto de la notificación excede la longitud máxima recomendada.",
     "NO_ADMIN_ORG": "No tiene permisos de administrador para esta clínica.",
+    "NO_DEEP_LINK": "Sin enlace profundo",
     "NO_PACKAGES": "No hay Fases disponibles para esta Organización.",
     "NO_SEQUENCES": "Sin secuencias",
     "ORG_AND_CHILDREN": "{{ org }} y sus {{ childAmount }} clínicas descendientes",

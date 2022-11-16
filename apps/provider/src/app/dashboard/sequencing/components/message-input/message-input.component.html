@@ -15,63 +15,75 @@
 
 <div *ngIf="!form.value?.syncState?.deleted" [formGroup]="form" class="section">
     <div class="message" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
-    <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-form-field class="ccr-form-field">
-            <mat-select formControlName="type">
-                <mat-optgroup *ngIf="messageTypes && messageTypes.length" [label]="'SEQUENCING.MESSAGE' | translate">
-                    <mat-option
-                    *ngFor="let type of messageTypes"
-                    [value]="type.id">{{ type.displayName | translate }}</mat-option>
-                </mat-optgroup>
-                <mat-optgroup *ngIf="actionTypes && actionTypes.length" [label]="'SEQUENCING.OTHER' | translate">
-                    <mat-option
-                    *ngFor="let type of actionTypes"
-                    [value]="type.id">{{ type.displayName | translate }}</mat-option>
-                </mat-optgroup>
-            </mat-select>
-        </mat-form-field>
-        <mat-icon *ngIf="messageType?.preview" (click)="onShowMessagePreview()" class="clickable preview-icon">help_outline</mat-icon>
-        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px" fxFlex="69%">
-            <mat-slide-toggle
-            formControlName="allowTranslations"
-            labelPosition="before">{{ 'SEQUENCING.TRANSLATIONS' | translate }}</mat-slide-toggle>
-            <mat-icon (click)="onDeleteMessage()" class="clickable">delete</mat-icon>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ccr-form-field">
+                <mat-select formControlName="type">
+                    <mat-optgroup *ngIf="messageTypes && messageTypes.length" [label]="'SEQUENCING.MESSAGE' | translate">
+                        <mat-option
+                        *ngFor="let type of messageTypes"
+                        [value]="type.id">{{ type.displayName | translate }}</mat-option>
+                    </mat-optgroup>
+                    <mat-optgroup *ngIf="actionTypes && actionTypes.length" [label]="'SEQUENCING.OTHER' | translate">
+                        <mat-option
+                        *ngFor="let type of actionTypes"
+                        [value]="type.id">{{ type.displayName | translate }}</mat-option>
+                    </mat-optgroup>
+                </mat-select>
+            </mat-form-field>
+            <mat-icon *ngIf="messageType?.preview" (click)="onShowMessagePreview()" class="clickable preview-icon">help_outline</mat-icon>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px" fxFlex="69%">
+                <mat-slide-toggle
+                formControlName="allowTranslations"
+                labelPosition="before">{{ 'SEQUENCING.TRANSLATIONS' | translate }}</mat-slide-toggle>
+                <mat-icon (click)="onDeleteMessage()" class="clickable">delete</mat-icon>
+            </div>
         </div>
-    </div>
 
-    <div *ngIf="!allowTranslations else withTranslations">
-        <div *ngIf="messageType" [ngSwitch]="messageType?.id">
-            <div *ngSwitchCase="'5'">
-                <sequencing-package-form
-                [isDisabled]="hardBlocked"
-                [markAsTouched]="markAsTouched"
-                formControlName="content"></sequencing-package-form>
-            </div>
-            <div *ngSwitchCase="'4'">
-                <sequencing-package-form
-                [markAsTouched]="markAsTouched"
-                formControlName="content"></sequencing-package-form>
-            </div>
-            <div *ngSwitchCase="'3'">
-                <sequencing-sms-form
-                [isDisabled]="hardBlocked"
-                [markAsTouched]="markAsTouched"
-                formControlName="content"></sequencing-sms-form>
-            </div>
-            <div *ngSwitchCase="'2'">
-                <sequencing-notification-form
-                [isDisabled]="hardBlocked"
-                [markAsTouched]="markAsTouched"
-                formControlName="content"></sequencing-notification-form>
-            </div>
-            <div *ngSwitchCase="'1'">
-                <sequencing-email-form
-                [isDisabled]="hardBlocked"
-                [markAsTouched]="markAsTouched"
-                formControlName="content"></sequencing-email-form>
+        <div *ngIf="!allowTranslations else withTranslations">
+            <div *ngIf="messageType" [ngSwitch]="messageType?.id">
+                <div *ngSwitchCase="'5'">
+                    <sequencing-package-form
+                    [isDisabled]="hardBlocked"
+                    [markAsTouched]="markAsTouched"
+                    formControlName="content"></sequencing-package-form>
+                </div>
+                <div *ngSwitchCase="'4'">
+                    <sequencing-package-form
+                    [markAsTouched]="markAsTouched"
+                    formControlName="content"></sequencing-package-form>
+                </div>
+                <div *ngSwitchCase="'3'">
+                    <sequencing-sms-form
+                    [isDisabled]="hardBlocked"
+                    [markAsTouched]="markAsTouched"
+                    formControlName="content"></sequencing-sms-form>
+                </div>
+                <div *ngSwitchCase="'2'">
+                    <sequencing-notification-form
+                    [isDisabled]="hardBlocked"
+                    [markAsTouched]="markAsTouched"
+                    formControlName="content"></sequencing-notification-form>
+                </div>
+                <div *ngSwitchCase="'1'">
+                    <sequencing-email-form
+                    [isDisabled]="hardBlocked"
+                    [markAsTouched]="markAsTouched"
+                    formControlName="content"></sequencing-email-form>
+                </div>
             </div>
         </div>
-    </div>
+        <div *ngIf="messageType?.id === '2'" fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+            <mat-form-field class="ccr-form-field" fxFlex="31%">
+                <mat-select formControlName="deepLink">
+                    <mat-option value="">{{ 'SEQUENCING.NO_DEEP_LINK' | translate }}</mat-option>
+                    <mat-option *ngFor="let deepLinkType of deepLinkTypes" [value]="deepLinkType.key">{{ deepLinkType.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <ccr-popup-description
+                [title]="'SEQUENCING.DEEP_LINK' | translate"
+                [description]="'SEQUENCING.DEEP_LINK_ABOUT' | translate"
+            ></ccr-popup-description>
+        </div>
     </div>
 </div>
 
