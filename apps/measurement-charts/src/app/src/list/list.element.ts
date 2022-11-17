@@ -61,6 +61,13 @@ export class ListElement extends CcrElement {
         }
       })
     )
+
+    eventService
+      .listen('list.details-deleted')
+      .pipe(debounceTime(500))
+      .subscribe(() => {
+        this.refresh()
+      })
   }
 
   private pullToRefreshList(element: HTMLElement): void {

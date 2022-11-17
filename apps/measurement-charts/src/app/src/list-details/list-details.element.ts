@@ -8,6 +8,7 @@ import {
 } from '@coachcare/sdk'
 import { DateTime } from 'luxon'
 import * as utils from '@chart/utils'
+import { debounceTime } from 'rxjs'
 
 import './list-details.element.scss'
 import { translate } from '@chart/service/i18n'
@@ -52,13 +53,22 @@ export class ListDetailsElement extends CcrElement {
 
   afterViewInit() {
     eventService.listen<ListItem>('list.details').subscribe(this.onOpenDetails)
-    const backButton = document.getElementById('list-detail-back-btn')
-
-    if (backButton) {
-      backButton.addEventListener('click', () => {
-        document.getElementById('list-details').className = ''
+    eventService
+      .listen('list.details-deleted')
+      .pipe(debounceTime(500))
+      .subscribe(() => {
+        if (this.groupData.length > 1) {
+          document.getElementById('list-detail-items').innerText = ''
+          void this.fetchMeasurementData()
+        }
       })
-    }
+    document
+      .getElementById('list-detail-back-btn')
+      .addEventListener('click', () => this.goBack())
+  }
+
+  private goBack() {
+    document.getElementById('list-details').className = ''
   }
 
   private renderItems(): void {
@@ -125,9 +135,19 @@ export class ListDetailsElement extends CcrElement {
     this.loading(true)
 
     try {
-      await api.measurementDataPoint.delete({ id: item.id })
-      document.getElementById('list-detail-items').innerText = ''
-      await this.fetchMeasurementData()
+      if (
+        api.baseData.dataPointTypeId === DataPointTypes.BLOOD_PRESSURE_GENERAL
+      ) {
+        await api.measurementDataPoint.deleteGroup({ id: item.groupId })
+      } else {
+        await api.measurementDataPoint.delete({ id: item.id })
+      }
+
+      if (this.groupData.length === 1) {
+        this.goBack()
+      }
+
+      eventService.trigger('list.details-deleted')
     } catch (err) {
       this.error(err)
     } finally {

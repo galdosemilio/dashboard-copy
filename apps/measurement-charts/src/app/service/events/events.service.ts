@@ -15,6 +15,7 @@ type EventString =
   | 'list.no-previous-entries'
   | 'list.most-recent-entry'
   | 'list.details'
+  | 'list.details-deleted'
 
 interface EventProps {
   name: string
