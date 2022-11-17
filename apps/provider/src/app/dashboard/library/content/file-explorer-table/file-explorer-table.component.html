@@ -174,6 +174,12 @@
                 <mat-icon  *ngIf="isProvider && mode !== 'vault'" class="file-icon" (click)="onCopy(row)" [class.disabled]="!row.isAdmin" [matTooltip]="'LIBRARY.CONTENT.CLONE_CONTENT' | translate">content_copy</mat-icon>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="id">
+            <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.ID' | translate }}</mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+                {{ row.id }}
+            </mat-cell>
+        </ng-container>
 
         <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
         <mat-row fxLayoutWrap

@@ -105,6 +105,12 @@ app-content-file-explorer-table {
     width: 60px;
   }
 
+  .cdk-column-id {
+    width: fit-content;
+    min-width: fit-content;
+    max-width: fit-content;
+  }
+
   mat-cell.cdk-column-externalVisibility {
     padding: 5px 0;
   }

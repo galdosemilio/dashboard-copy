@@ -108,7 +108,8 @@ export class FileExplorerTableComponent
     'createdAt',
     'availability',
     'externalVisibility',
-    'actions'
+    'actions',
+    'id'
   ]
 
   public columns = [
@@ -118,7 +119,8 @@ export class FileExplorerTableComponent
     'description',
     'createdAt',
     'availability',
-    'actions'
+    'actions',
+    'id'
   ]
   public form: FormGroup
   public isProvider: boolean
@@ -413,7 +415,8 @@ export class FileExplorerTableComponent
         'isVisibleToPatient',
         'externalVisibility',
         'availability',
-        'actions'
+        'actions',
+        'id'
       ]
     } else if (
       !resolveConfig(
