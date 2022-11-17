@@ -1132,7 +1132,7 @@
     "LANGUAGE": "لغة",
     "LOGOUT": "تسجيل الخروج",
     "SEARCH": "بحث",
-    "SEARCH_BY_NAME_EMAIL_OR_ACCOUNT_ID": "ابحث بالاسم أو البريد الإلكتروني أو معرف الحساب"
+    "SEARCH_BY_NAME_EMAIL_PHONE_ACCOUNT_ID": "ابحث بالاسم أو البريد الإلكتروني أو الهاتف أو معرف الحساب"
   },
   "MOMENTJS": {
     "LASWEEK": "[الماضي] dddd",

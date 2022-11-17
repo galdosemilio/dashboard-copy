@@ -1132,7 +1132,7 @@
     "LANGUAGE": "Lingua",
     "LOGOUT": "Esci",
     "SEARCH": "Cerca",
-    "SEARCH_BY_NAME_EMAIL_OR_ACCOUNT_ID": "Cerca per nome, e-mail o ID account"
+    "SEARCH_BY_NAME_EMAIL_PHONE_ACCOUNT_ID": "Cerca per nome, e-mail, telefono o ID account"
   },
   "MOMENTJS": {
     "LASWEEK": "dddd [scorso]",

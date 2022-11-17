@@ -1132,7 +1132,7 @@
     "LANGUAGE": "Langue",
     "LOGOUT": "Déconnexion",
     "SEARCH": "Recherche",
-    "SEARCH_BY_NAME_EMAIL_OR_ACCOUNT_ID": "Rechercher par nom, e-mail ou ID de compte"
+    "SEARCH_BY_NAME_EMAIL_PHONE_ACCOUNT_ID": "Rechercher par nom, e-mail, téléphone ou numéro de compte"
   },
   "MOMENTJS": {
     "LASWEEK": "(Dernier) dddd",

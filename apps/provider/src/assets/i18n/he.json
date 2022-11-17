@@ -1132,7 +1132,7 @@
     "LANGUAGE": "שפה",
     "LOGOUT": "התנתקות",
     "SEARCH": "חיפוש",
-    "SEARCH_BY_NAME_EMAIL_OR_ACCOUNT_ID": "חפש לפי שם, דוא\"ל או מזהה חשבון"
+    "SEARCH_BY_NAME_EMAIL_PHONE_ACCOUNT_ID": "חפש לפי שם, דוא\"ל, טלפון או מזהה חשבון"
   },
   "MOMENTJS": {
     "LASWEEK": "[אחרון] dddd",
