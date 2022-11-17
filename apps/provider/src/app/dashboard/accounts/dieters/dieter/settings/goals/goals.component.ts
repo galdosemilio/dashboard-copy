@@ -299,7 +299,7 @@ export class DieterGoalsComponent implements BindForm, OnInit {
             quantity: value
           })
           hasChangedGoals = true
-        } else if (existingGoal.quantity !== value) {
+        } else if (existingGoal && existingGoal.quantity !== value) {
           await this.updateGoal({
             id: existingGoal.id,
             quantity: value
