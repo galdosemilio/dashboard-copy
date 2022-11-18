@@ -68,6 +68,7 @@
     "TAX": "Imposta",
     "THANK_YOU_FOR_ORDER": "Grazie per il vostro ordine!",
     "TOTAL": "Totale",
+    "TOTAL_MEALS": "Numero totale di pasti: {{ total }}",
     "VIEW_ORDER_DETAILS": "Visualizza i dettagli dell'ordine",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Ci metteremo in contatto di nuovo con i dettagli di consegna e tracciabilità non appena il tuo ordine lascerà il nostro magazzino, non siamo in grado di modificare nulla, inclusi gli articoli o l'indirizzo di consegna."
   },

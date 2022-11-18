@@ -68,6 +68,7 @@
     "TAX": "Imposto",
     "THANK_YOU_FOR_ORDER": "Obrigado pelo seu pedido!",
     "TOTAL": "Total",
+    "TOTAL_MEALS": "Número total de refeições: {{ total }}",
     "VIEW_ORDER_DETAILS": "Exibir detalhes do pedido",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Entraremos em contato novamente com os detalhes de entrega e rastreamento assim que seu pedido sair do nosso depósito, não podemos alterar nada, incluindo os itens ou o endereço de entrega."
   },

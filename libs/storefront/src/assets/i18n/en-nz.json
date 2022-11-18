@@ -68,6 +68,7 @@
     "TAX": "Tax",
     "THANK_YOU_FOR_ORDER": "Thank you for your order!",
     "TOTAL": "Total",
+    "TOTAL_MEALS": "Total Number of Meals: {{ total }}",
     "VIEW_ORDER_DETAILS": "View Order Details",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "We will be in touch again with delivery and tracking details as soon as your order leaves our warehouse on it, we are not able to change anything including the items or delivery address."
   },

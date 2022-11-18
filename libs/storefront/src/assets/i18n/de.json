@@ -68,6 +68,7 @@
     "TAX": "Steuer",
     "THANK_YOU_FOR_ORDER": "Vielen Dank für Ihren Auftrag!",
     "TOTAL": "Gesamt",
+    "TOTAL_MEALS": "Gesamtzahl der Mahlzeiten: {{ total }}",
     "VIEW_ORDER_DETAILS": "Bestell Details ansehen",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Sobald Ihre Bestellung unser Lager verlässt, werden wir Sie erneut mit Liefer- und Sendungsverfolgungsdetails kontaktieren. Wir können nichts ändern, einschließlich der Artikel oder der Lieferadresse."
   },

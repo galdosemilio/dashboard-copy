@@ -68,6 +68,7 @@
     "TAX": "Impôt",
     "THANK_YOU_FOR_ORDER": "¡Gracias por su orden!",
     "TOTAL": "Total",
+    "TOTAL_MEALS": "Nombre total de repas : {{ total }}",
     "VIEW_ORDER_DETAILS": "Voir d'autres détails",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Nos pondremos en contacto nuevamente con los detalles de entrega y seguimiento tan pronto como su pedido salga de nuestro almacén, no podemos cambiar nada, incluidos los artículos o la dirección de entrega."
   },

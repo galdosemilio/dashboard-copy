@@ -68,6 +68,7 @@
     "TAX": "Skat",
     "THANK_YOU_FOR_ORDER": "Tak for din ordre!",
     "TOTAL": "i alt",
+    "TOTAL_MEALS": "Samlet antal måltider: {{ total }}",
     "VIEW_ORDER_DETAILS": "Se ordre detaljer",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Vi vil kontakte os igen med leverings- og sporingsdetaljer, så snart din ordre forlader vores lager på den, vi er ikke i stand til at ændre noget, herunder varerne eller leveringsadressen."
   },

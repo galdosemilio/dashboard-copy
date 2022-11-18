@@ -13,7 +13,7 @@
           </button>
         </div>
         <div *ngIf="totalMeals" class="meals" fxFill fxLayout="row" fxLayoutAlign="space-between start">
-          Total Number of Meals: {{ totalMeals }}
+          <div>{{ 'GLOBAL.TOTAL_MEALS' | translate: {total: totalMeals} }}</div>
         </div>
         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center start" class="cart-items-wrap">
           <div *ngFor="let lineItem of cart.lineItems" class="cart-item">
