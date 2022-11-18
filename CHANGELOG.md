@@ -1,3 +1,19 @@
+# [1.98.0](https://github.com/coachcare/dashboard/compare/v1.97.0...v1.98.0) (2022-11-18)
+
+
+### Bug Fixes
+
+* authentication flow for store frontend ([7f33ce4](https://github.com/coachcare/dashboard/commit/7f33ce403308b2b5be45a4ea720d6df8abb2882c))
+* download multiple files for rpm patient report [FRON-2981] ([6d393e6](https://github.com/coachcare/dashboard/commit/6d393e6853e7ae06ef12dbedb38cf21ca67c7386))
+* save goals in patient profile [FRON-2949] ([215f853](https://github.com/coachcare/dashboard/commit/215f8535023b6670b8cc6fd16c1b5fd0ac45bc43))
+
+
+### Features
+
+* add optional link to company website in storefront header ([b349850](https://github.com/coachcare/dashboard/commit/b349850ad620dc63fadc8516e205262e012185fd))
+* show the number of meals on the checkout page ([406cb74](https://github.com/coachcare/dashboard/commit/406cb74010994909db65c6916e90d10bb48e77dc))
+* use goal v2 endpoints [FRON-2949] ([82b4505](https://github.com/coachcare/dashboard/commit/82b4505f68e6c84a312e4809c652a730c55efb6d))
+
 # [1.97.0](https://github.com/coachcare/dashboard/compare/v1.96.0...v1.97.0) (2022-11-01)
 
 
