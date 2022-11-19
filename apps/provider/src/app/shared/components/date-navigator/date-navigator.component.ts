@@ -47,7 +47,7 @@ export class DateNavigator implements OnChanges {
 
       case 'threeMonths':
         return {
-          duration: 6,
+          duration: 3,
           unit: 'month' as unitOfTime.DurationConstructor
         }
 
