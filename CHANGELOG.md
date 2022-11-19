@@ -1,3 +1,16 @@
+# [1.100.0](https://github.com/coachcare/dashboard/compare/v1.99.0...v1.100.0) (2022-11-19)
+
+
+### Bug Fixes
+
+* correct 3 month selector ([87bf9a3](https://github.com/coachcare/dashboard/commit/87bf9a3ba81e1a1a8aa30ca5c4d76277cb1cedb7))
+
+
+### Features
+
+* add i18n translations for meals checkout text ([86aa2ba](https://github.com/coachcare/dashboard/commit/86aa2ba0a63ea65a0fc5947d291c0f9e298e192c))
+* retain all rpm billing report filters [FRON-2975] ([13d7709](https://github.com/coachcare/dashboard/commit/13d77095fb72dff36ab689bf87fdf83819427d3f))
+
 # [1.99.0](https://github.com/coachcare/dashboard/compare/v1.98.0...v1.99.0) (2022-11-19)
 
 
