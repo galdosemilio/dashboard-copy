@@ -124,6 +124,7 @@ app-reports-rpm-billing {
       }
 
       &.row-even {
+        .open-in-new-tab-cell,
         .id-cell,
         .first-name-cell,
         .last-name-cell {
@@ -132,6 +133,7 @@ app-reports-rpm-billing {
       }
 
       &.row-odd {
+        .open-in-new-tab-cell,
         .id-cell,
         .first-name-cell,
         .last-name-cell {
@@ -210,21 +212,32 @@ app-reports-rpm-billing {
       font-size: 14px;
     }
 
-    .id-cell {
+    .open-in-new-tab-cell {
       left: 0;
+      max-width: 25px;
+      min-width: 25px;
+      text-align: center !important;
+
+      .mat-icon {
+        color: mat-color($ccr-foreground, icon);
+      }
+    }
+
+    .id-cell {
+      left: 53px;
       max-width: 25px;
       min-width: 25px;
       text-align: center !important;
     }
 
     .first-name-cell {
-      left: 53px;
+      left: 106px;
       max-width: 150px;
       min-width: 150px;
     }
 
     .last-name-cell {
-      left: 231px;
+      left: 284px;
       max-width: 150px;
       min-width: 150px;
     }

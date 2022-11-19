@@ -504,6 +504,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
+  public openPatientInNewTab(patientId: string): void {
+    window.open(`./accounts/patients/${patientId}`, '_blank')
+  }
+
   private async resolvePackages(clinic: OrganizationEntity) {
     this.packages = [{ viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined }]
 

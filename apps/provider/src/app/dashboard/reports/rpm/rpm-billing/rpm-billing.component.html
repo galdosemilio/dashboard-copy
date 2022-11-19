@@ -126,6 +126,7 @@
   <table ccrTableSort>
     <caption hidden>{{ 'REPORTS.RPM_BILLING_TITLE' | translate }}</caption>
     <thead [class.sticky-header]="isDesktop">
+        <th #columns class="open-in-new-tab-cell" [class.sticky-column]="isDesktop"></th>
         <th #columns class="id-cell" [class.sticky-column]="isDesktop">
             #
         </th>
@@ -210,6 +211,14 @@
             'row-odd': i % 2 === 1,
             'last-row': i === source.result.length - 1
           }">
+            <td class="open-in-new-tab-cell" [class.sticky-column]="isDesktop">
+                <button
+                [title]="'BOARD.OPEN_IN_NEW' | translate"
+                (click)="openPatientInNewTab(row.account.id)"
+                mat-icon-button>
+                    <mat-icon>open_in_new</mat-icon>
+                </button>
+            </td>
             <td class="id-cell" [class.sticky-column]="isDesktop">
                 {{ i + source.criteria.offset + 1 }}
             </td>
