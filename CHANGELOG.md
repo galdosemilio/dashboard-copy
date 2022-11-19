@@ -1,3 +1,16 @@
+# [1.99.0](https://github.com/coachcare/dashboard/compare/v1.98.0...v1.99.0) (2022-11-19)
+
+
+### Bug Fixes
+
+* add content id to digital library [FRON-2986] ([606f73a](https://github.com/coachcare/dashboard/commit/606f73a98dbd828278ce62a6e86310df0d778f83))
+* update account search placeholder [FRON-2987] ([8de6587](https://github.com/coachcare/dashboard/commit/8de6587409fe1183ea95765a30de9516295b71f2))
+
+
+### Features
+
+* add a three and six month time selection option [FRON-2968] ([01e659d](https://github.com/coachcare/dashboard/commit/01e659ded23f8311002ba53460b0dfefae676a9c))
+
 # [1.98.0](https://github.com/coachcare/dashboard/compare/v1.97.0...v1.98.0) (2022-11-18)
 
 
