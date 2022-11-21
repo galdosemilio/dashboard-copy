@@ -15,6 +15,7 @@ import {
   Entity,
   FetchTasksRequest,
   OrganizationEntity,
+  TaskArtifact,
   TaskEntity,
   TaskProgress,
   TaskStatus
@@ -32,6 +33,7 @@ import { TaskDatabase } from '../../services/task.database'
 import { TaskDataSource } from '../../services/task.datasource'
 import { MatDialog } from '@angular/material/dialog'
 import { CreatePatientBulkReportDialog } from '../../dialogs'
+import { DateTime } from 'luxon'
 
 interface TaskNotification {
   task: Entity
@@ -47,7 +49,10 @@ interface TaskStatusNotification extends TaskNotification {
     to: TaskStatus
   }
 }
-
+interface CachedArtifact extends TaskArtifact {
+  expiration: DateTime
+  fileNumber: number
+}
 @UntilDestroy()
 @Component({
   selector: 'app-patient-bulk-reports',
@@ -77,6 +82,7 @@ export class PatientBulkReportsComponent
   public statusList = []
 
   private refresh$: Subject<void> = new Subject<void>()
+  private cachedArtifacts = new Map<string, CachedArtifact[]>()
 
   constructor(
     private api: ApiService,
@@ -186,13 +192,51 @@ export class PatientBulkReportsComponent
       })
   }
 
-  public async downloadReport(task: TaskEntity): Promise<void> {
+  public async downloadReport(
+    task: TaskEntity,
+    entryNumber: number
+  ): Promise<void> {
     try {
-      const artifacts = await this.database.fetchTaskArtifacts(task.id)
+      await this.loadArtifactsLocally(task.id)
+      const artifactUrl = this.cachedArtifacts
+        .get(task.id)
+        ?.find((e) => e.fileNumber === entryNumber)?.url
 
-      for (const artifact of artifacts) {
-        window.open(artifact.url)
+      if (!artifactUrl) {
+        throw new Error('Report link invalid.  File cannot be downloaded.')
       }
+
+      window.open(artifactUrl)
+    } catch (err) {
+      this.notifier.error(err)
+    }
+  }
+
+  // Cache artifact signed URLs locally
+  private async loadArtifactsLocally(taskId: string): Promise<void> {
+    try {
+      const now = DateTime.now()
+
+      // if the artifact exists AND is not expired
+      if (this.cachedArtifacts.get(taskId)?.[0]?.expiration > now) {
+        return
+      }
+
+      // else: fetch fresh artifacts, load signed URLs into cachedArtifacts with an expiration time and taskID
+      // We aren't removing the expired artifacts for other task IDs, but that's an unnecessary step, as they would be refreshed in the case where they are explicitly attempted to be downloaded
+      this.cachedArtifacts.set(
+        taskId,
+        (await this.database.fetchTaskArtifacts(taskId)).map(
+          (artifact, index) => {
+            return {
+              ...artifact,
+              expiration: now.plus({ minutes: 55 }),
+              taskId,
+              fileNumber: index
+            }
+          }
+        )
+      )
     } catch (err) {
       this.notifier.error(err)
     }
