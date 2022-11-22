@@ -9,6 +9,7 @@ import {
   GetListOrganizationResponse,
   OrganizationProvider,
   Package,
+  PackageSingle,
   UpdatePackageRequest
 } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
@@ -29,6 +30,10 @@ export class LabelsDatabase extends AppDatabase {
 
   update(args: UpdatePackageRequest): Promise<void> {
     return this.pkg.update(args)
+  }
+
+  getSingle(id: string): Promise<PackageSingle> {
+    return this.pkg.getSingle({ id })
   }
 
   list(

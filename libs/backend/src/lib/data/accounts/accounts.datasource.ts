@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { SearchDataSource } from '@coachcare/backend/model'
 import {
   AccountFullData,
+  AccountSingle,
   GetAllAccountRequest,
   GetAllAccountResponse
 } from '@coachcare/sdk'
@@ -41,6 +42,10 @@ export class AccountsDataSource extends SearchDataSource<
     this.refresh({ query, limit })
   }
 
+  getSingle(id: string): Promise<AccountSingle> {
+    return this.database.getSingle(id)
+  }
+
   mapResult(result: GetAllAccountResponse): Array<AccountFullData> {
     // pagination handling
     this.total = result.pagination.next
@@ -54,12 +59,17 @@ export class AccountsDataSource extends SearchDataSource<
 
   mapSearch(result: Array<AccountFullData>): Array<AutocompleterOption> {
     // search handling
-    return result.map((acc: AccountFullData) => ({
+    return result.map((acc: AccountFullData) => this.mapSingle(acc))
+  }
+
+  mapSingle(acc: AccountFullData): AutocompleterOption {
+    return {
+      id: acc.id,
       value: this.getRoute(acc),
       viewValue: `${acc.firstName} ${acc.lastName}`,
       viewSubvalue: this.getType(acc),
       viewNote: acc.email
-    }))
+    }
   }
 
   private getRoute(account: AccountFullData) {

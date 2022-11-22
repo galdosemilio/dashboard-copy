@@ -3,6 +3,7 @@ import { SearchDataSource } from '@coachcare/backend/model'
 import {
   OrgEntityExtended,
   OrgListSegment,
+  OrgSingleResponse,
   PagedResponse
 } from '@coachcare/sdk'
 import { _, AutocompleterOption } from '@coachcare/backend/shared'
@@ -56,6 +57,10 @@ export class OrganizationsDataSource extends SearchDataSource<
     }
   }
 
+  getSingle(id: string): Promise<OrgSingleResponse> {
+    return this.database.single(id)
+  }
+
   mapResult(result: PagedResponse<OrgEntityExtended>): Array<OrgEntityExtended>
   mapResult(result: PagedResponse<OrgListSegment>): Array<GetListSegment>
   mapResult(result) {
@@ -82,6 +87,7 @@ export class OrganizationsDataSource extends SearchDataSource<
     // search handling
     if (this.criteria.isAdmin) {
       return result.map((org: OrgEntityExtended) => ({
+        id: org.id,
         value: this.getRoute(org.id),
         viewValue: `${org.name}`,
         viewSubvalue: _('GLOBAL.ORGANIZATION'),
@@ -89,11 +95,22 @@ export class OrganizationsDataSource extends SearchDataSource<
       }))
     } else {
       return result.map((org: GetListSegment) => ({
+        id: org.id,
         value: this.getRoute(org.id),
         viewValue: `${org.name}`,
         viewSubvalue: _('GLOBAL.ORGANIZATION'),
         viewNote: org.shortcode
       }))
+    }
+  }
+
+  mapSingle(org: OrgEntityExtended | GetListSegment): AutocompleterOption {
+    return {
+      id: org.id,
+      value: this.getRoute(org.id),
+      viewValue: `${org.name}`,
+      viewSubvalue: _('GLOBAL.ORGANIZATION'),
+      viewNote: org.shortcode
     }
   }
 

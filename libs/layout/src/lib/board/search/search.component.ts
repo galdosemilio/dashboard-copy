@@ -10,7 +10,7 @@ import {
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@coachcare/material'
 import { Router } from '@angular/router'
-import { AppDataSource, SearchDataSource } from '@coachcare/backend/model'
+import { SearchDataSource } from '@coachcare/backend/model'
 import { AutocompleterOption } from '@coachcare/backend/shared'
 import { ConfigService } from '@coachcare/common/services'
 import { APP_SEARCH_SOURCE } from '@coachcare/common/shared'
@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
     private config: ConfigService,
     @Optional()
     @Inject(APP_SEARCH_SOURCE)
-    private datasources: Array<AppDataSource<any, any, any>>
+    private datasources: Array<SearchDataSource<any, any, any>>
   ) {
     this.isDisabled = !isArray(datasources)
     this.fill = this.isDisabled
@@ -77,16 +77,25 @@ export class SearchComponent implements OnInit {
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((query) => {
         typeof query === 'string'
-          ? this.search(query)
+          ? void this.search(query)
           : this.trigger.closePanel()
       })
   }
 
-  private search(query: string): void {
+  private async search(query: string): Promise<void> {
     this.results = []
-    this.datasources.forEach((datasource: SearchDataSource<any, any, any>) => {
-      datasource.search(query, 5)
-    })
+    for (const datasource of this.datasources) {
+      if (!/^\d+$/.test(query)) {
+        datasource.search(query, 5)
+        continue
+      }
+
+      try {
+        const singleData = await datasource.getSingle(query)
+        this.results.push(datasource.mapSingle(singleData))
+        this.displayResults(this.results)
+      } catch (error) {}
+    }
   }
 
   private displayResults(all: Array<AutocompleterOption>) {

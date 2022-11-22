@@ -18,7 +18,15 @@ export abstract class SearchDataSource<T, R, C> extends TableDataSource<
     return this.connect().pipe(map(this.mapSearch.bind(this)))
   }
 
+  attachSingle(): Observable<AutocompleterOption> {
+    return this.connect().pipe(map(this.mapSingle.bind(this)))
+  }
+
   abstract search(query: string, limit: number): void
 
   abstract mapSearch(result: T[]): Array<AutocompleterOption>
+
+  abstract getSingle(id: string): Promise<T>
+
+  abstract mapSingle(result: T): AutocompleterOption
 }

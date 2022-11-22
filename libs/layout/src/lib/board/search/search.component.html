@@ -11,6 +11,7 @@
       <p matLine *ngIf="result">
         {{ result.viewValue }}
         <span *ngIf="result.viewSubvalue">{{ result.viewSubvalue | translate }}</span>
+        <small class="account-id">{{ 'GLOBAL.ID' | translate }}: {{ result.id }}</small>
       </p>
       <p matLine *ngIf="result && result.viewNote">{{ result.viewNote | translate }}</p>
     </mat-option>

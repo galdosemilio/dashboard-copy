@@ -10,6 +10,7 @@ export interface SelectorOption {
 }
 
 export interface AutocompleterOption extends SelectorOption {
+  id: string
   viewNote?: any
 }
 

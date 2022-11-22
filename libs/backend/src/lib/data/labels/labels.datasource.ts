@@ -35,6 +35,10 @@ export class LabelsDataSource extends SearchDataSource<
     this.refresh({ limit })
   }
 
+  getSingle(id: string) {
+    return this.database.getSingle(id)
+  }
+
   mapResult(result: GetAllPackageResponse): Array<PackageSingle> {
     // pagination handling
     this.total = result.pagination.next
@@ -48,11 +52,16 @@ export class LabelsDataSource extends SearchDataSource<
 
   mapSearch(result: Array<PackageSingle>): Array<AutocompleterOption> {
     // search handling
-    return result.map((pkg) => ({
+    return result.map((pkg) => this.mapSingle(pkg))
+  }
+
+  mapSingle(pkg: PackageSingle): AutocompleterOption {
+    return {
+      id: pkg.id,
       value: this.getRoute(pkg),
       viewValue: `${pkg.title}`,
       viewSubvalue: _('GLOBAL.LABEL')
-    }))
+    }
   }
 
   private getRoute(pkg) {
