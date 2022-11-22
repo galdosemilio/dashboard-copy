@@ -1,28 +1,29 @@
 {
-   "id": "1",
-   "displayName": "CoachCare",
-   "appIds": {},
-   "assets": {
-      "logoUrl": "https://d3vngy9ttk2wws.cloudfront.net/30_logo.png",
-      "iconUrl": "https://d3vngy9ttk2wws.cloudfront.net/ccr_icon.png",
-      "splashUrl": "https://d3vngy9ttk2wws.cloudfront.net/ccr_splash.png",
-      "faviconUrl": "https://d3vngy9ttk2wws.cloudfront.net/ccr_favicon.png",
-      "color": {}
-   },
-   "mala": {},
-   "food": {
-      "mode": [
-         {
-            "id": "1",
-            "description": "Meal",
-            "isActive": true
-         }
-      ]
-   },
-   "conference": {
-      "enabled": false
-   },
-   "content": {
-      "enabled": true
-   }
+  "id": "1",
+  "displayName": "CoachCare",
+  "appIds": {},
+  "storeUrl": "http://test.ecommerce.coachcare.com",
+  "assets": {
+    "logoUrl": "https://d3vngy9ttk2wws.cloudfront.net/30_logo.png",
+    "iconUrl": "https://d3vngy9ttk2wws.cloudfront.net/ccr_icon.png",
+    "splashUrl": "https://d3vngy9ttk2wws.cloudfront.net/ccr_splash.png",
+    "faviconUrl": "https://d3vngy9ttk2wws.cloudfront.net/ccr_favicon.png",
+    "color": {}
+  },
+  "mala": {},
+  "food": {
+    "mode": [
+      {
+        "id": "1",
+        "description": "Meal",
+        "isActive": true
+      }
+    ]
+  },
+  "conference": {
+    "enabled": false
+  },
+  "content": {
+    "enabled": true
+  }
 }

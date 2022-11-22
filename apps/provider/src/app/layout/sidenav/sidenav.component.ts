@@ -19,6 +19,7 @@ import { findIndex, get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountTypeIds, Authentication } from '@coachcare/sdk'
 import { SidenavItem } from './sidenav-item/sidenav-item.component'
+import { environment } from '../../../environments/environment'
 
 export interface SidenavOrg {
   id: string
@@ -44,6 +45,8 @@ export class SidenavComponent implements OnInit {
 
   private currentLang: string
   private readonly DEFAULT_STORE_LINK = 'https://store.coachcare.com/'
+  static readonly whitelistedHosts: RegExp =
+    /coachcare.local|ecommerce.coachcare/i
   private isOrphaned: boolean
   private isProvider = false
 
@@ -286,11 +289,9 @@ export class SidenavComponent implements OnInit {
           {
             code: SidenavOptions.STORE,
             navName: this.getStoreNavName(),
-            navLink: this.DEFAULT_STORE_LINK,
+            navLink: this.getStoreNavUrl(),
             icon: 'shopping_cart',
-            isAllowedForPatients: true,
-            shouldFetchNavLink: true,
-            getNavLink: this.fetchStoreLink
+            isAllowedForPatients: true
           },
           {
             badge: 10,
@@ -464,6 +465,7 @@ export class SidenavComponent implements OnInit {
 
     const enabled = get(org, 'preferences.content.enabled', false)
     const rpmEnabled = get(org, 'preferences.rpm.isActive', false)
+    const storeUrl = get(org, 'preferences.storeUrl')
     const rpmElementIndex = this.sidenavItems.findIndex(
       (item) =>
         item.children &&
@@ -476,6 +478,9 @@ export class SidenavComponent implements OnInit {
     const messagingEnabled = get(org, 'preferences.messaging.isActive', false)
     const messagingElementIndex = this.sidenavItems.findIndex(
       (item) => item.navName === _('SIDENAV.MESSAGES')
+    )
+    const storeElementIndex = this.sidenavItems.findIndex(
+      (item) => item.navName === this.getStoreNavName()
     )
     const commsEnabled = get(
       org,
@@ -503,6 +508,11 @@ export class SidenavComponent implements OnInit {
     this.sidenavItems[idx] = {
       ...this.sidenavItems[idx],
       cssClass: enabled ? '' : 'hidden'
+    }
+    this.sidenavItems[storeElementIndex] = {
+      ...this.sidenavItems[storeElementIndex],
+      cssClass: this.validStore(storeUrl) ? '' : 'hidden',
+      code: this.validStore(storeUrl) ? '' : SidenavOptions.STORE
     }
 
     if (rpmElementIndex > -1 && !rpmEnabled) {
@@ -592,6 +602,15 @@ export class SidenavComponent implements OnInit {
     return storeName || _('SIDENAV.STORE')
   }
 
+  private getStoreNavUrl(): string {
+    const storeUrl = get(this.context.organization, 'preferences.storeUrl')
+    if (this.validStore(storeUrl)) {
+      return `${environment.loginSite}/storefront?baseOrg=${this.context.organization.id}`
+    }
+
+    return this.DEFAULT_STORE_LINK
+  }
+
   private async fetchStoreLink(): Promise<string> {
     try {
       const shouldFetch = resolveConfig(
@@ -628,5 +647,9 @@ export class SidenavComponent implements OnInit {
           : childItem.isAllowedForPatients
       })
     }))
+  }
+
+  private validStore(storeUrl) {
+    return !!storeUrl && SidenavComponent.whitelistedHosts.test(storeUrl)
   }
 }
