@@ -1,3 +1,12 @@
+# [1.101.0](https://github.com/coachcare/dashboard/compare/v1.100.0...v1.101.0) (2022-11-22)
+
+
+### Features
+
+* add open in tab to rpm report ([94932b7](https://github.com/coachcare/dashboard/commit/94932b71aa5d8aed22a9da064c36acb430dca69c))
+* add shipping address validations ([13e25ca](https://github.com/coachcare/dashboard/commit/13e25cad9b6a30f2741c6d34dced76f776268812))
+* add timezone to rpm reports [FRON-2984] ([f6515dc](https://github.com/coachcare/dashboard/commit/f6515dc0db778710cfb7b60b023e7a04ca6793b6))
+
 # [1.100.0](https://github.com/coachcare/dashboard/compare/v1.99.0...v1.100.0) (2022-11-19)
 
 
