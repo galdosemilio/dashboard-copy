@@ -8,6 +8,7 @@ import { filter, first } from 'rxjs/operators'
 import { CurrentAccount, NotifierService } from '@coachcare/common/services'
 import {
   AccountAddress,
+  AddressTypeId,
   AddressProvider,
   NamedEntity,
   SpreeProvider
@@ -53,8 +54,10 @@ export class StorefrontCheckoutComponent implements OnInit {
 
   public get hasPoBoxError(): boolean {
     return (
-      this.cart?.shipment?.attributes?.public_metadata?.validate_po_box &&
-      this.cart?.shippingAddress?.attributes?.address_type === 'po_box'
+      (this.cart?.shipment?.attributes?.public_metadata?.validate_po_box &&
+        this.cart?.shippingAddress?.attributes?.address_type === 'po_box') ||
+      (this.cart?.shipment?.attributes?.public_metadata?.validate_po_box &&
+        this.shippingAddress?.type.id == AddressTypeId.POBox)
     )
   }
 
@@ -108,7 +111,7 @@ export class StorefrontCheckoutComponent implements OnInit {
     this.isLoading = false
   }
 
-  public async resolveAccountAddresses() {
+  public async resolveAccountAddresses(validateAddress: boolean = true) {
     this.isLoading = true
     try {
       const response = await this.addressProvider.getAddressList({
@@ -127,7 +130,7 @@ export class StorefrontCheckoutComponent implements OnInit {
           (label) => label.id === AddressLabelType.BILLING
         )
       )
-      await this.setAddresses()
+      await this.setAddresses(validateAddress)
       await this.getShippingRates()
     } catch (err) {
       this.notifier.error(err)
@@ -163,7 +166,7 @@ export class StorefrontCheckoutComponent implements OnInit {
     this.shippingRates = await this.storefront.getShippingRates()
   }
 
-  private async setAddresses() {
+  private async setAddresses(validateAddress: boolean = true) {
     if (!this.shippingAddress && !this.billingAddress) {
       return
     }
@@ -183,7 +186,7 @@ export class StorefrontCheckoutComponent implements OnInit {
         zipcode: this.shippingAddress.postalCode,
         state_name: this.shippingAddress.stateProvince,
         country_iso: this.shippingAddress.country.id,
-        validate_address: false
+        validate_address: validateAddress
       } as SpreeAddress
     }
 
@@ -306,7 +309,7 @@ export class StorefrontCheckoutComponent implements OnInit {
       })
       .afterClosed()
       .pipe(filter((address) => address))
-      .subscribe(() => this.resolveAccountAddresses())
+      .subscribe(() => this.resolveAccountAddresses(false))
   }
 
   public async onSelectShippingRate(rateId: string) {
@@ -345,7 +348,7 @@ export class StorefrontCheckoutComponent implements OnInit {
       })
       .afterClosed()
       .pipe(filter((address) => address))
-      .subscribe(() => this.resolveAccountAddresses())
+      .subscribe(() => this.resolveAccountAddresses(false))
   }
 
   public async onCompleteOrder() {

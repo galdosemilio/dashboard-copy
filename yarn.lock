@@ -1605,10 +1605,10 @@
     typescript "2.4.1"
     yargs "8.0.2"
 
-"@coachcare/sdk@^22.4.1":
-  version "22.4.1"
-  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/22.4.1/0d2d23afe0ec06692f359e67fe8dc8ca43e6f68e#0d2d23afe0ec06692f359e67fe8dc8ca43e6f68e"
-  integrity sha512-y2zr5aQ3xFplGG03oPO8SoE0dbctM7Tp2nUUsT7W3/6s5nLCVkmFaIeN1U63P8IrAfSX/rS4wOgHq7aL93oUwA==
+"@coachcare/sdk@^22.6.0":
+  version "22.6.0"
+  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/22.6.0/86fd9ff41ad3fb163db4e449b6c1189bc71bd839#86fd9ff41ad3fb163db4e449b6c1189bc71bd839"
+  integrity sha512-8ofMDZxUdlrwq+qR8KXnidWcCFew8BrURVyAMJlWgS4enEQSypyozZLlpB11DxWlOi8Kr2e9vcUxJTvX98E9Vw==
   dependencies:
     "@types/qs" "^6.9.6"
     "@types/twilio-video" "^2.11.0"
