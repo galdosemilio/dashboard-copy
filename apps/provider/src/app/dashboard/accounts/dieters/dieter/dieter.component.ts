@@ -3,7 +3,7 @@ import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { resolveConfig } from '@app/config/section'
 import { ContextService, NotifierService } from '@app/service'
-import { RPMPatientReportDialog } from '@app/shared'
+import { RPMPatientReportDialog, _ } from '@app/shared'
 import {
   AccountProvider,
   AccSingleResponse,
@@ -29,6 +29,8 @@ export class DieterComponent implements OnDestroy, OnInit {
   public showMessaging: boolean
   public showPatientPDFButton: boolean
   public showRPM: boolean
+  public timezoneOffset: number
+  public timezoneOffsetText: string
   public callUserZendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360019778772-Video-Conferencing-with-a-Patient'
 
@@ -54,7 +56,7 @@ export class DieterComponent implements OnDestroy, OnInit {
 
     this.context.account$
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.resolvePatientRPMStatus())
+      .subscribe(() => this.resolvePatient())
 
     this.context.organization$
       .pipe(untilDestroyed(this))
@@ -111,6 +113,34 @@ export class DieterComponent implements OnDestroy, OnInit {
       this.patientIsForeign = accountOrgsInHierarchy.length <= 0
     } catch (error) {
       this.notifier.error(error)
+    }
+  }
+
+  private resolvePatient() {
+    this.checkPatientTimezone()
+    void this.resolvePatientRPMStatus()
+  }
+
+  private checkPatientTimezone() {
+    if (!this.context.account?.timezone || !this.context.user?.timezone) {
+      this.timezoneOffset = 0
+    }
+    const now = moment.utc().unix()
+    const offset =
+      (moment.tz.zone(this.context.user.timezone).utcOffset(now) -
+        moment.tz.zone(this.context.account.timezone).utcOffset(now)) /
+      60
+
+    this.timezoneOffset = Math.abs(offset)
+
+    if (offset > 0) {
+      this.timezoneOffsetText =
+        this.timezoneOffset > 1 ? _('BOARD.HOURS_AHEAD') : _('BOARD.HOUR_AHEAD')
+    } else {
+      this.timezoneOffsetText =
+        this.timezoneOffset > 1
+          ? _('BOARD.HOURS_BEHIND')
+          : _('BOARD.HOUR_BEHIND')
     }
   }
 

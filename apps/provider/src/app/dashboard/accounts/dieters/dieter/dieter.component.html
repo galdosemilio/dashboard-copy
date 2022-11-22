@@ -79,6 +79,10 @@
     ></ccr-popup-description>
     <p>{{ 'BOARD.FOREIGN_PATIENT_SHORT' | translate }}</p>
   </div>
+  <div *ngIf="timezoneOffset > 0" class="feature-disabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <mat-icon>watch_later</mat-icon>
+    <p>{{ 'BOARD.PATIENT_TIMEZONE_OFFSET_SHORT' | translate: { time: (timezoneOffsetText | translate: { hour: timezoneOffset }) } }}</p>
+  </div>
 </div>
 
 <div class="ccr-tabs" fxFlex="nogrow" fxLayout="row" fxLayoutAlign=" stretch">
