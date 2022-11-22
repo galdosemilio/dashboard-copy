@@ -22,14 +22,26 @@ export class ListDetailsElement extends CcrElement {
   }
 
   render() {
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    const hideDisplayHeaderWithBackButton = urlParams.get(
+      'hideDisplayHeaderWithBackButton'
+    )
+
     this.innerHTML = `
       <div id="list-details">
-        <div class='list-detail-header'>
-          <div id='list-detail-back-btn' class='list-detail-back-btn'>
-            <img src='assets/img/arrow-right.svg' />
-          </div>
-          <p id='list-detail-title' class='list-detail-title'></p>
-        </div>
+        ${
+          hideDisplayHeaderWithBackButton == 'true'
+            ? ''
+            : `
+            <div class="list-detail-header">
+              <div id="list-detail-back-btn" class="list-detail-back-btn">
+                <img src="assets/img/arrow-right.svg" />
+              </div>
+              <p id="list-detail-title" class="list-detail-title"></p>
+            </div>
+          `
+        }
         <div id='list-detail-date' class='list-detail-date'></div>
         <div class='list-detail-content'>
           <div id='list-detail-items' class='list-detail-items'></div>
@@ -40,12 +52,13 @@ export class ListDetailsElement extends CcrElement {
 
   afterViewInit() {
     eventService.listen<ListItem>('list.details').subscribe(this.onOpenDetails)
+    const backButton = document.getElementById('list-detail-back-btn')
 
-    document
-      .getElementById('list-detail-back-btn')
-      .addEventListener('click', () => {
+    if (backButton) {
+      backButton.addEventListener('click', () => {
         document.getElementById('list-details').className = ''
       })
+    }
   }
 
   private renderItems(): void {
@@ -83,9 +96,10 @@ export class ListDetailsElement extends CcrElement {
   private onOpenDetails(item: ListItem): void {
     this.listItem = item
     document.getElementById('list-details').className = 'open'
-    document.getElementById('list-detail-title').innerText = `${
-      item.name
-    } ${translate('DETAILS')}`
+    const listDetailTitle = document.getElementById('list-detail-title')
+    if (listDetailTitle) {
+      listDetailTitle.innerText = `${item.name} ${translate('DETAILS')}`
+    }
     document.getElementById('list-detail-items').innerText = ''
 
     const dateMoment = DateTime.fromISO(item.recordedAt)
