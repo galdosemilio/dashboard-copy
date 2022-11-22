@@ -9,6 +9,8 @@ import { CCRState } from '@coachcare/backend/store'
 import { OrgPrefSelectors } from '@coachcare/common/store'
 
 import { CurrentSpreeStore, StorefrontService } from './services'
+import { User } from '@coachcare/sdk'
+import { AuthService } from '@coachcare/common/services'
 
 @UntilDestroy()
 @Component({
@@ -35,7 +37,9 @@ export class Storefront implements OnInit {
     @Inject(DOCUMENT) private document: any,
     private storefront: StorefrontService,
     private store: Store<CCRState.State>,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private user: User,
+    private auth: AuthService
   ) {
     this.store
       .pipe(
@@ -136,6 +140,11 @@ export class Storefront implements OnInit {
       .subscribe((store) => {
         this.currentStore = store
       })
+  }
+
+  public async logout() {
+    await this.user.logout()
+    this.auth.logout()
   }
 
   private getContrast(color: string) {

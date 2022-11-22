@@ -19,6 +19,9 @@
           <a mat-button routerLink="./payment-management">
             {{ 'GLOBAL.PAYMENT_MANAGEMENT' | translate }}
           </a>
+          <button mat-button (click)="logout()">
+            {{ 'MENU.LOGOUT' | translate }}
+          </button>
         </div>
         <a mat-icon-button class="cart" routerLink="./order" queryParamsHandling="merge" fxFlexOrder="2" fxFlexOrder.xs="1">
           {{ 'GLOBAL.CART' | translate }}
