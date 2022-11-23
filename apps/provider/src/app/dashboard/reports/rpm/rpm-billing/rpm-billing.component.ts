@@ -62,6 +62,7 @@ interface StorageFilter {
   package?: number
   query?: string
   status?: string
+  supervisingProvider?: SelectOption<number>
 }
 
 @UntilDestroy()
@@ -120,6 +121,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   private timezones: Array<TimezoneResponse> = this.timezone.fetch()
   private refresh$: Subject<void> = new Subject<void>()
   private selectedClinic$ = new Subject<OrganizationEntity | null>()
+  private selectedSupervisingProvider$ =
+    new Subject<SelectOption<number> | null>()
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -157,6 +160,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     if (storageFilterString) {
       this.storageFilter = JSON.parse(storageFilterString)
       this.selectedStatus = this.storageFilter.status
+      this.selectedSupervisingProvider = this.storageFilter.supervisingProvider
+      this.supervisingProviderControl.setValue(
+        this.selectedSupervisingProvider?.viewValue
+      )
     }
 
     // get the current lang
@@ -196,11 +203,29 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       this.searchForm.patchValue({
         package: null
       })
-      this.supervisingProviderControl.setValue('')
-      this.selectedSupervisingProvider = null
+      this.selectedSupervisingProvider$.next(null)
       void this.resolvePackages(clinic)
       this.refresh()
     })
+
+    this.selectedSupervisingProvider$
+      .pipe(untilDestroyed(this))
+      .subscribe((supervisingProvider) => {
+        this.selectedSupervisingProvider = supervisingProvider
+
+        if (!supervisingProvider) {
+          this.supervisingProviderControl.setValue('')
+        }
+
+        window.localStorage.setItem(
+          STORAGE_PRM_BILLING_FILTER,
+          JSON.stringify({
+            ...this.searchForm.value,
+            selectedClinicId: this.selectedClinic?.id,
+            supervisingProvider
+          })
+        )
+      })
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       const selectedClinic =
@@ -592,13 +617,13 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public onSelectSupervisingProvider(
     supervisingProvider: SelectOption<number>
   ): void {
-    this.selectedSupervisingProvider = supervisingProvider
+    this.selectedSupervisingProvider$.next(supervisingProvider)
+
     this.refresh()
   }
 
   public onCleanSupervisingProvider(): void {
-    this.selectedSupervisingProvider = null
-    this.supervisingProviderControl.setValue('')
+    this.selectedSupervisingProvider$.next(null)
     this.refresh()
   }
 
