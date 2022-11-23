@@ -13,7 +13,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { DateNavigator, DateNavigatorOutput } from '@app/shared'
-import { Authentication, FetchGoalResponse } from '@coachcare/sdk'
+import { Authentication, GoalTypeId } from '@coachcare/sdk'
 import { unitOfTime } from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
@@ -42,7 +42,7 @@ export class DieterJournalComponent implements OnInit {
   componentsWithTimeframe = ['exercise']
   component = 'food'
   timeframe: unitOfTime.DurationConstructor = this.DEFAULT_TIMEFRAME
-  goals: FetchGoalResponse
+  dailyHydrationGoal = 0
   dates: DateNavigatorOutput = {}
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020505591-Viewing-a-Patient-Journal'
@@ -80,7 +80,10 @@ export class DieterJournalComponent implements OnInit {
     })
 
     void this.route.parent.data.forEach((data: any) => {
-      this.goals = data.goals
+      this.dailyHydrationGoal =
+        data.goals?.data.find(
+          (entry) => entry.type.id === GoalTypeId.dailyHydration
+        )?.quantity || 0
     })
 
     // component initialization
