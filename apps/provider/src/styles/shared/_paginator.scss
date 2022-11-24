@@ -4,6 +4,14 @@ ccr-paginator {
   white-space: nowrap;
   // width: 100%;
 
+  .offset-selector {
+    font-size: 14px;
+
+    &.hide {
+      display: none;
+    }
+  }
+
   @media #{$small-and-down} {
     button {
       min-width: 40px !important;

@@ -92,9 +92,7 @@ export class WeightChangeDataSource extends ChartDataSource<
       return []
     }
 
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     return result.data
   }

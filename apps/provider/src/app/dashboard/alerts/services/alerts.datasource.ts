@@ -61,9 +61,7 @@ export class AlertsDataSource extends TableDataSource<
   }
 
   mapResult(result: AlertNotificationResponse): AlertNotification[] {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     const now = moment()
     return result.data

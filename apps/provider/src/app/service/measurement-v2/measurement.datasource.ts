@@ -91,9 +91,7 @@ export class MeasurementDataSourceV2 extends TableDataSource<
   public mapResult(
     response: GetMeasurementDataPointGroupsResponse
   ): MeasurementDataPointGroupTableEntry[] {
-    this.total = response.pagination.next
-      ? response.pagination.next + 1
-      : this.criteria.offset + response.data.length
+    this.total = this.getTotal(response)
 
     this.hasTooMuchForSingleDay = false
     this.showDistanceNote = false

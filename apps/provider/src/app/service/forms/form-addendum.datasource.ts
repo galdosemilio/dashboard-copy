@@ -51,9 +51,8 @@ export class FormAddendumDatasource extends TableDataSource<
   }
 
   mapResult(response: GetAllFormAddendumResponse): any {
-    this.total = response.pagination.next
-      ? response.pagination.next + 1
-      : this.criteria.offset + response.data.length
+    this.total = this.getTotal(response as any)
+
     return response.data
   }
 

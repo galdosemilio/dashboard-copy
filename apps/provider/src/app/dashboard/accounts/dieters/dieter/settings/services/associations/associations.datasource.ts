@@ -37,9 +37,7 @@ export class AssociationsDataSource extends TableDataSource<
   }
 
   async mapResult(result: OrgAccessResponse): Promise<OrganizationAccess[]> {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : (this.criteria.offset as number) + result.data.length
+    this.total = this.getTotal(result)
 
     const cleanResultData = []
 

@@ -51,9 +51,7 @@ export class RPMBillingDataSource extends TableDataSource<
     result: PagedResponse<RPMStateSummaryItem>
   ): Array<RPMStateSummaryEntry> {
     // pagination handling
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     this.totalCount = result.pagination.totalCount ?? 0
 

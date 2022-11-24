@@ -1,6 +1,21 @@
 
-<div *ngIf="!inverse" class="pagination">
-  <button mat-button type="button"
+<div class="pagination">
+  <button
+    *ngIf="inverse"
+    mat-button
+    type="button"
+    class="mat-paginator-navigation-previous"
+    (click)="nextPage()"
+    [attr.aria-label]="_intl.nextPageLabel"
+    [disabled]="!hasNextPage()">
+
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    <span>{{'GLOBAL.PREVIOUS' | translate}}</span>
+  </button>
+  <button
+    *ngIf="!inverse"
+    mat-button
+    type="button"
     class="mat-paginator-navigation-previous"
     (click)="previousPage()"
     [attr.aria-label]="_intl.previousPageLabel"
@@ -10,33 +25,31 @@
     <span>{{'GLOBAL.PREVIOUS' | translate}}</span>
   </button>
 
-  <button mat-button type="button"
-    class="mat-paginator-navigation-next"
-    (click)="nextPage()"
-    [attr.aria-label]="_intl.nextPageLabel"
-    [disabled]="disabled || !hasNextPage()">
+  <select class="offset-selector" [class.hide]="pages === 0 || !showOffsetSelector" #pageOffsetSelect [disabled]="disabled" (change)="onSelect($event)">
+    <option *ngFor="let option of [].constructor(pages); let i = index" [value]="i">{{ i + 1 }} / {{ pageSize }}</option>
+  </select>
 
-    <span>{{'GLOBAL.NEXT' | translate}}</span>
-    <mat-icon>keyboard_arrow_right</mat-icon>
-  </button>
-</div>
-
-<div *ngIf="inverse">
-  <button mat-button type="button"
-    class="mat-paginator-navigation-previous"
-    (click)="nextPage()"
-    [attr.aria-label]="_intl.nextPageLabel"
-    [disabled]="!hasNextPage()">
-
-    <mat-icon>keyboard_arrow_left</mat-icon>
-    <span>{{'GLOBAL.PREVIOUS' | translate}}</span>
-  </button>
-
-  <button mat-button type="button"
+  <button
+    *ngIf="inverse"
+    mat-button
+    type="button"
     class="mat-paginator-navigation-next"
     (click)="previousPage()"
     [attr.aria-label]="_intl.previousPageLabel"
     [disabled]="!hasPreviousPage()">
+
+    <span>{{'GLOBAL.NEXT' | translate}}</span>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+
+  <button
+    *ngIf="!inverse"
+    mat-button
+    type="button"
+    class="mat-paginator-navigation-next"
+    (click)="nextPage()"
+    [attr.aria-label]="_intl.nextPageLabel"
+    [disabled]="disabled || !hasNextPage()">
 
     <span>{{'GLOBAL.NEXT' | translate}}</span>
     <mat-icon>keyboard_arrow_right</mat-icon>

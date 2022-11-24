@@ -49,9 +49,7 @@ export class PackageDatasource extends TableDataSource<
   }
 
   mapResult(result: GetAllPackageOrganizationResponse): Package[] {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     const resultArray: PackageAssociation[] = result.data || []
     const mappedResult = resultArray.map(

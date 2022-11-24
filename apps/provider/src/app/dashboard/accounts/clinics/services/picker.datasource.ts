@@ -82,9 +82,7 @@ export class ClinicPickerDataSource extends TableDataSource<
     const data = result[1] || result[0]
 
     // pagination handling
-    this.total = data.pagination.next
-      ? data.pagination.next + 1
-      : this.criteria.offset + data.data.length
+    this.total = this.getTotal(data)
 
     if (result[1]) {
       return result[0].data.concat(result[1].data.filter((v) => !v.isDirect))

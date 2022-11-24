@@ -46,9 +46,7 @@ export class SequenceAutoEnrollmentsDataSource extends TableDataSource<
   public mapResult(
     response: PagedResponse<GetSequenceResponseWithExtras>
   ): any {
-    this.total = response.pagination.next
-      ? response.pagination.next + 1
-      : this.criteria.offset + response.data.length
+    this.total = this.getTotal(response)
 
     return response.data
   }

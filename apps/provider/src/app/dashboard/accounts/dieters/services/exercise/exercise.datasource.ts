@@ -36,9 +36,7 @@ export class ExerciseDataSource extends TableDataSource<
   }
 
   mapResult(result: GetAllExerciseResponse): ExerciseData[] {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
     return result.data.map((r) => new ExerciseData(r))
   }
 }

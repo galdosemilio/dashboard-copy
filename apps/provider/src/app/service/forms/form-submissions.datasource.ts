@@ -44,9 +44,7 @@ export class FormSubmissionsDatasource extends TableDataSource<
   }
 
   mapResult(response: GetAllFormSubmissionResponse): Promise<FormSubmission[]> {
-    this.total = response.pagination.next
-      ? response.pagination.next + 1
-      : this.criteria.offset + response.data.length
+    this.total = this.getTotal(response as any)
 
     this.next = response.pagination.next || 0
     return Promise.all(

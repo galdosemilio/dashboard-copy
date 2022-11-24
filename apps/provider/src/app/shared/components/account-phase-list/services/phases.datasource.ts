@@ -52,11 +52,7 @@ export class PhasesDataSource extends TableDataSource<
   }
 
   mapResult(result: PackagesAndEnrollments): Array<PhasesDataSegment> {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset !== undefined
-      ? this.criteria.offset + result.data.length
-      : 0
+    this.total = this.getTotal(result)
 
     this.enrollments = result.enrollments.data
 

@@ -42,9 +42,7 @@ export class TaskDataSource extends TableDataSource<
 
   mapResult(result: FetchTasksResponse): Array<TaskEntity> {
     // pagination handling
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     this.totalCount = result.pagination.totalCount ?? 0
 

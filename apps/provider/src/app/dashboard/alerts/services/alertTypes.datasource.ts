@@ -94,9 +94,10 @@ export class AlertTypesDataSource extends TableDataSource<
   ): Array<AlertTypesPreference> {
     const [alertPreferences, alertTypes, dataTypeAssocs] = result
 
-    this.total = alertPreferences.pagination.next
-      ? alertPreferences.pagination.next + 1
-      : this.criteria.offset + result[0].data.length
+    this.total = this.getTotal({
+      pagination: alertPreferences.pagination,
+      data: result[0].data
+    })
 
     let options: Array<AlertTypesPreference> = []
     const types = fromPairs(alertTypes.data.map((v) => [v.code, v.id]))

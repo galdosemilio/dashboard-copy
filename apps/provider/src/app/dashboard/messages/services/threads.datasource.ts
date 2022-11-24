@@ -43,9 +43,7 @@ export class ThreadsDataSource extends TableDataSource<
 
   mapResult(result: GetAllMessagingResponse): Array<MessagingThreadSegment> {
     // pagination handling
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     this.completed = !result.pagination.next
 

@@ -39,9 +39,8 @@ export class SequenceEnrollmentDataSource extends TableDataSource<
   mapResult(
     result: PagedResponse<GetAllSeqEnrollmentsResponse>
   ): GetAllSeqEnrollmentsResponse[] {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : (this.criteria.offset as number) + result.data.length
+    this.total = this.getTotal(result)
+
     return result.data
   }
 }

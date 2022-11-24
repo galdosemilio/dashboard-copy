@@ -171,9 +171,7 @@ export class FormsDatasource
   }
 
   mapResult(response: GetAllFormResponse): Form[] {
-    this.total = response.pagination.next
-      ? response.pagination.next + 1
-      : this.criteria.offset + response.data.length
+    this.total = this.getTotal(response as any)
 
     return (
       this.notesFormId

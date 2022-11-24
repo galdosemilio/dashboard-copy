@@ -75,9 +75,7 @@ export class CohortWeightLossDataSource extends TableDataSource<
     result: MeasurementCohortReportResponse
   ): Array<MeasurementCohortSegment> {
     // pagination handling
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     return result.data
   }

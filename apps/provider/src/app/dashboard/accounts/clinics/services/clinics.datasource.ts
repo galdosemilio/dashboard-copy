@@ -59,9 +59,7 @@ export class ClinicsDataSource extends TableDataSource<
   mapResult(result: OrgAccessResponse): Array<OrganizationAccess> {
     this.totalCount = result.pagination.totalCount
     // pagination handling
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     return result.data
   }

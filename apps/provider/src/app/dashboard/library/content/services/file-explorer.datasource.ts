@@ -70,9 +70,7 @@ export class FileExplorerDatasource extends TableDataSource<
   async mapResult(
     result: GetAllContentResponse
   ): Promise<FileExplorerContent[]> {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result as any)
 
     this.next = result.pagination.next
 

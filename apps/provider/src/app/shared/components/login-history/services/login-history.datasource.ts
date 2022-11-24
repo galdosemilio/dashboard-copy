@@ -44,9 +44,7 @@ export class LoginHistoryDataSource extends TableDataSource<
   }
 
   mapResult(result: PagedResponse<LoginHistoryItem>): LoginHistoryItem[] {
-    this.total = result.pagination.next
-      ? result.pagination.next + 1
-      : this.criteria.offset + result.data.length
+    this.total = this.getTotal(result)
 
     return result.data
   }
