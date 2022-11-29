@@ -36,7 +36,7 @@ export class ExerciseDataSource extends TableDataSource<
   }
 
   mapResult(result: GetAllExerciseResponse): ExerciseData[] {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
     return result.data.map((r) => new ExerciseData(r))
   }
 }

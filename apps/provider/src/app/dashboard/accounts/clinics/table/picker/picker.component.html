@@ -11,10 +11,7 @@
   </ng-container>
 
   <ccr-paginator fxFlex="nogrow" #paginator
-    [length]="source.total"
-    [pageSize]="source.pageSize"
-    [pageIndex]="source.pageIndex"
-    (page)="source.pageIndex = $event.pageIndex"
+  [source]="source"
   ></ccr-paginator>
 </div>
 

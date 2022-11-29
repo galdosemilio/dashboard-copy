@@ -42,7 +42,7 @@ export class PainDataSource extends TableDataSource<
 
   mapResult(result: GetAllPainResponse): PainData[] {
     // pagination update
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     // group the registries per date in the datasource
     const rows: Array<PainData> = []

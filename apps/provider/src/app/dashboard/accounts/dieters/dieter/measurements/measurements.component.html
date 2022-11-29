@@ -44,20 +44,14 @@ fxLayoutGap="25px">
   <ccr-paginator fxFlex="nogrow" #paginator
     [hidden]="useNewTable"
     [inverse]="true"
-    [length]="source.total"
-    [pageIndex]="source.pageIndex"
-    [pageSize]="source.pageSize"
-    (page)="source.pageIndex = $event.pageIndex"
+    [source]="source"
   ></ccr-paginator>
 
   <ccr-paginator
     #paginatorV2
     [hidden]="!useNewTable"
     [inverse]="true"
-    [length]="sourceV2?.total"
-    [pageIndex]="sourceV2?.pageIndex"
-    [pageSize]="sourceV2?.pageSize"
-    (page)="sourceV2.pageIndex = $event.pageIndex"
+    [source]="sourceV2"
     fxFlex="nogrow"
   ></ccr-paginator>
 </div>

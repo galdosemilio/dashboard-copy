@@ -34,9 +34,7 @@
   <div fxLayout="row" fxLayoutAlign="end center">
     <ccr-paginator fxFlex="nogrow" #paginator
     [disabled]="!paginationEnabled"
-    [length]="source.total"
-    [pageIndex]="source.pageIndex"
-    [pageSize]="source.pageSize"
+    [source]="source"
     (page)="setPage($event)"
     ></ccr-paginator>
   </div>

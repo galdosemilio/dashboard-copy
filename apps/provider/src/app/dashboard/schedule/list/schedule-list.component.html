@@ -95,12 +95,7 @@
           <mat-icon>file_download</mat-icon>
       </button>
 
-      <ccr-paginator fxFlex="nogrow" #paginator
-          [length]="meetingsSource.total"
-          [pageIndex]="meetingsSource.pageIndex"
-          [pageSize]="meetingsSource.pageSize"
-          (page)="meetingsSource.pageIndex = $event.pageIndex"
-      ></ccr-paginator>
+      <ccr-paginator fxFlex="nogrow" #paginator [source]="meetingsSource"></ccr-paginator>
   </div>
 
   <!-- table -->

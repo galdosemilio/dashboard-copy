@@ -37,7 +37,7 @@ export class AssociationsDataSource extends TableDataSource<
   }
 
   async mapResult(result: OrgAccessResponse): Promise<OrganizationAccess[]> {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     const cleanResultData = []
 

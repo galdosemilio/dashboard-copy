@@ -58,7 +58,7 @@ export class DietersDataSource extends TableDataSource<
 
   mapResult(result: AccListResponse): Array<AccountAccessData> {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     if (result.data.length === 0) {
       return []

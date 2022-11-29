@@ -14,4 +14,4 @@
 <app-phases-table [source]="source"></app-phases-table>
 
 <!-- NOTE: packages have a fixed limit of 10 -->
-<ccr-paginator #paginator [length]="source.total" [pageIndex]="0" [pageSize]="10"></ccr-paginator>
+<ccr-paginator #paginator [source]="source"></ccr-paginator>

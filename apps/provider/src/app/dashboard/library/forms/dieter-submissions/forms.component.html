@@ -41,10 +41,7 @@
         ></ccr-popup-description>
 
         <ccr-paginator fxFlex="nogrow" #paginator
-        [length]="source.total"
-        [pageIndex]="source.pageIndex"
-        [pageSize]="source.pageSize"
-        (page)="source.pageIndex = $event.pageIndex"
+            [source]="source"
         ></ccr-paginator>
     </div>
 

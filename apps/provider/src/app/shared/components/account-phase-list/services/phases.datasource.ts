@@ -52,7 +52,7 @@ export class PhasesDataSource extends TableDataSource<
   }
 
   mapResult(result: PackagesAndEnrollments): Array<PhasesDataSegment> {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     this.enrollments = result.enrollments.data
 

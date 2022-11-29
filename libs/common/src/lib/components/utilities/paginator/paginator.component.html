@@ -25,8 +25,8 @@
     <span>{{'GLOBAL.PREVIOUS' | translate}}</span>
   </button>
 
-  <select class="offset-selector" [class.hide]="pages === 0 || !showOffsetSelector" #pageOffsetSelect [disabled]="disabled" (change)="onSelect($event)">
-    <option *ngFor="let option of [].constructor(pages); let i = index" [value]="i">{{ i + 1 }} / {{ pageSize }}</option>
+  <select class="offset-selector" [class.hide]="!showOffsetSelector" #pageOffsetSelect [disabled]="disabled" (change)="onSelect($event)">
+    <option *ngFor="let option of [].constructor(totalCountPages); let i = index" [value]="i">{{ i + 1 }} / {{ totalCountPages }}</option>
   </select>
 
   <button

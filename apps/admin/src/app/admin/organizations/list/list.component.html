@@ -15,11 +15,7 @@
       [source]="source"
     ></ccr-filter-organizations>
 
-    <ccr-paginator fxFlex="initial" fxFlexFill #paginator
-      [length]="source.total"
-      [pageIndex]="0"
-      [pageSize]="10"
-    ></ccr-paginator>
+    <ccr-paginator fxFlex="initial" fxFlexFill #paginator [source]="source"></ccr-paginator>
   </div>
 </div>
 

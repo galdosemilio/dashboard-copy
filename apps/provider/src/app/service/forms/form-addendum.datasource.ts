@@ -51,7 +51,7 @@ export class FormAddendumDatasource extends TableDataSource<
   }
 
   mapResult(response: GetAllFormAddendumResponse): any {
-    this.total = this.getTotal(response as any)
+    this.getTotal(response as any)
 
     return response.data
   }

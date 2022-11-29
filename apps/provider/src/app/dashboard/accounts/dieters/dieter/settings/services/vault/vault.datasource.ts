@@ -70,7 +70,7 @@ export class VaultDatasource extends TableDataSource<
   async mapResult(
     result: GetAllVaultContentResponse
   ): Promise<FileVaultContent[]> {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     this.next = result.pagination.next
 

@@ -40,7 +40,7 @@ export class MeetingsDataSource extends TableDataSource<
   }
 
   mapResult(result: FetchAllMeetingResponse): any[] | Promise<any[]> {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
     return result.data.map((element) => new Meeting(element, this.meetingTypes))
   }
 }

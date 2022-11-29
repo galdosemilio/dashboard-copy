@@ -40,7 +40,7 @@ export class PhaseEnrollmentDataSource extends TableDataSource<
   mapResult(
     result: GetAllPackageEnrollmentResponse
   ): PackageEnrollmentSegment[] {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

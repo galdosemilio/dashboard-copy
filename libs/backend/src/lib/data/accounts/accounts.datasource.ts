@@ -48,7 +48,7 @@ export class AccountsDataSource extends SearchDataSource<
 
   mapResult(result: GetAllAccountResponse): Array<AccountFullData> {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

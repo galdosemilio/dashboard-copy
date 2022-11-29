@@ -57,11 +57,6 @@
 
 </ccr-datasource-overlay>
 
-<ccr-paginator #paginator
-[length]="source.total"
-[pageIndex]="source.pageIndex"
-[pageSize]="source.pageSize"
-(page)="source.pageIndex = $event.pageIndex"
-></ccr-paginator>
+<ccr-paginator #paginator [source]="source"></ccr-paginator>
 
 <ng-template #empty>-</ng-template>

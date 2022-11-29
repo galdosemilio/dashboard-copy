@@ -65,7 +65,7 @@ export class SleepDataSource extends ChartDataSource<
       return []
     }
 
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

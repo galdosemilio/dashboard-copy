@@ -53,7 +53,7 @@ export class SupervisingProvidersDataSource extends TableDataSource<
   public mapResult(
     response: PagedResponse<SupervisingProviderAssociationItem>
   ): SupervisingProviderAssociationItem[] {
-    this.total = this.getTotal(response)
+    this.getTotal(response)
 
     this.isInherited = response.data.some(
       (supervisingProvider) =>

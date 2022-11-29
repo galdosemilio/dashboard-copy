@@ -59,7 +59,7 @@ export class DieterListingDataSource extends TableDataSource<
   ): (DieterListingItem | DieterListingOrgItem | DieterListingPackageItem)[] {
     this.totalCount = response.pagination.totalCount
 
-    this.total = this.getTotal(response as any)
+    this.getTotal(response as any)
 
     const rows: (
       | DieterListingItem

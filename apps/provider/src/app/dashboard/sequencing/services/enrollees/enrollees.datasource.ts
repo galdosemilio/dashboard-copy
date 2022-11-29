@@ -41,7 +41,7 @@ export class EnrolleesDataSource extends TableDataSource<
     result: PagedResponse<GetAllSeqEnrollmentsResponse>
   ): GetAllSeqEnrollmentsResponse[] {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

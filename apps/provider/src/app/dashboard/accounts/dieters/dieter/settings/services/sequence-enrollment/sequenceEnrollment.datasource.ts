@@ -39,7 +39,7 @@ export class SequenceEnrollmentDataSource extends TableDataSource<
   mapResult(
     result: PagedResponse<GetAllSeqEnrollmentsResponse>
   ): GetAllSeqEnrollmentsResponse[] {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

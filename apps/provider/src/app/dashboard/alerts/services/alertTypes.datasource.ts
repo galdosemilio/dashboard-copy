@@ -94,7 +94,7 @@ export class AlertTypesDataSource extends TableDataSource<
   ): Array<AlertTypesPreference> {
     const [alertPreferences, alertTypes, dataTypeAssocs] = result
 
-    this.total = this.getTotal({
+    this.getTotal({
       pagination: alertPreferences.pagination,
       data: result[0].data
     })

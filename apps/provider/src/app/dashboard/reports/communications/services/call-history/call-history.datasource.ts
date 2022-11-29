@@ -42,7 +42,7 @@ export class CallHistoryDataSource extends TableDataSource<
   }
 
   mapResult(response: PagedResponse<InteractionSingle>): CallHistoryItem[] {
-    this.total = this.getTotal(response as any)
+    this.getTotal(response as any)
 
     const mappedResponse = response.data
       .reverse()

@@ -44,7 +44,7 @@ export class LoginHistoryDataSource extends TableDataSource<
   }
 
   mapResult(result: PagedResponse<LoginHistoryItem>): LoginHistoryItem[] {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

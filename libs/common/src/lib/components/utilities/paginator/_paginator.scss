@@ -19,6 +19,14 @@
       color: mat-color($foreground, text) !important;
     }
 
+    .offset-selector {
+      font-size: 14px;
+
+      &.hide {
+        display: none;
+      }
+    }
+
     @media #{map-get($config, lte-xs)} {
       button {
         min-width: 40px !important;

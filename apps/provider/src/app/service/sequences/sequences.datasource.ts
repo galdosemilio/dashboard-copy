@@ -40,7 +40,7 @@ export class SequencesDataSource extends TableDataSource<
 
   mapResult(result: PagedResponse<GetSequenceResponse>): any[] {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data.map((r) => new Sequence(r))
   }

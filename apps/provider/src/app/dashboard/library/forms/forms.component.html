@@ -30,10 +30,7 @@
     </mat-form-field>
 
     <ccr-paginator fxFlex="nogrow" #paginator
-    [length]="datasource.total"
-    [pageIndex]="datasource.pageIndex"
-    [pageSize]="datasource.pageSize"
-    (page)="datasource.pageIndex = $event.pageIndex"
+      [source]="datasource"
     ></ccr-paginator>
   </div>
 </div>

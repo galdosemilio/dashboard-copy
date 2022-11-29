@@ -6,12 +6,7 @@
         </a>
     </div>
     <div fxFlex fxLayout="row" fxLayoutAlign="end center">
-        <ccr-paginator fxFlex="nogrow" #paginator
-        [length]="source.total"
-        [pageIndex]="source.pageIndex"
-        [pageSize]="source.pageSize"
-        (page)="source.pageIndex = $event.pageIndex"
-        ></ccr-paginator>
+        <ccr-paginator fxFlex="nogrow" #paginator [source]="source"></ccr-paginator>
     </div>
 </div>
 

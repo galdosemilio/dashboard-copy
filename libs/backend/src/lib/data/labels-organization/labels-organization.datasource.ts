@@ -37,7 +37,7 @@ export class LabelsOrganizationDataSource extends TableDataSource<
     response: GetAllPackageOrganizationResponse
   ): PackageAssociationElement[] {
     // pagination handling
-    this.total = this.getTotal(response)
+    this.getTotal(response)
 
     const result: PackageAssociationElement[] = response.data.map(
       (element) => ({

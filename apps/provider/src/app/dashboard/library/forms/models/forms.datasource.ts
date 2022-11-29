@@ -171,7 +171,7 @@ export class FormsDatasource
   }
 
   mapResult(response: GetAllFormResponse): Form[] {
-    this.total = this.getTotal(response as any)
+    this.getTotal(response as any)
 
     return (
       this.notesFormId

@@ -31,7 +31,7 @@ export class AffiliationAccountsDataSource extends TableDataSource<
 
   mapResult(result: GetListAccountResponse): any {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

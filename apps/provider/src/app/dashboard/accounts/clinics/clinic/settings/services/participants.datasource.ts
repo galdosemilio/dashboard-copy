@@ -47,7 +47,7 @@ export class ParticipantsDataSource extends TableDataSource<
     result: GetOrgAutoThreadParticipantListingResponse
   ): Array<AutoThreadParticipant> {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     for (const t of result.data) {
       t.createdAt = moment(t.createdAt).format('dddd, MMM D, YYYY')

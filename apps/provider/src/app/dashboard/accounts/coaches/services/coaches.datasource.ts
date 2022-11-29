@@ -62,7 +62,7 @@ export class CoachesDataSource extends TableDataSource<
     this.totalCount = result.pagination.totalCount
 
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data.map((v) => ({
       ...v,

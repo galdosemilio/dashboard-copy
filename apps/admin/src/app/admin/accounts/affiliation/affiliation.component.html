@@ -32,8 +32,4 @@
   </mat-accordion>
 </ccr-datasource-overlay>
 
-<ccr-paginator fxFlex #paginator
-  [length]="source.total"
-  [pageIndex]="0"
-  [pageSize]="10"
-></ccr-paginator>
+<ccr-paginator fxFlex #paginator [source]="source"></ccr-paginator>

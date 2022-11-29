@@ -92,7 +92,7 @@ export class WeightChangeDataSource extends ChartDataSource<
       return []
     }
 
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

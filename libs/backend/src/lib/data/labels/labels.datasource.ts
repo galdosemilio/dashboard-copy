@@ -41,7 +41,7 @@ export class LabelsDataSource extends SearchDataSource<
 
   mapResult(result: GetAllPackageResponse): Array<PackageSingle> {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

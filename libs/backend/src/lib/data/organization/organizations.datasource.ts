@@ -65,7 +65,7 @@ export class OrganizationsDataSource extends SearchDataSource<
   mapResult(result: PagedResponse<OrgListSegment>): Array<GetListSegment>
   mapResult(result) {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     if (!this.criteria.isAdmin) {
       return result.data.map((segment: OrgListSegment) => ({

@@ -38,6 +38,7 @@ export class AlertsDataSource extends TableDataSource<
   ) {
     super()
 
+    this.pageSize = 12
     this.translate()
     this.translator.onLangChange
       .pipe(untilDestroyed(this, 'disconnect'))
@@ -61,7 +62,7 @@ export class AlertsDataSource extends TableDataSource<
   }
 
   mapResult(result: AlertNotificationResponse): AlertNotification[] {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     const now = moment()
     return result.data

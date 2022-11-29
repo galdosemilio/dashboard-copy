@@ -1,10 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
   <div fxLayout="row" fxLayoutAlign="end center">
-    <ccr-paginator fxFlex #paginator
-    [length]="source.total"
-    [pageIndex]="0"
-    [pageSize]="10"
-    ></ccr-paginator>
+    <ccr-paginator fxFlex #paginator [source]="source"></ccr-paginator>
   </div>
 </div>
 

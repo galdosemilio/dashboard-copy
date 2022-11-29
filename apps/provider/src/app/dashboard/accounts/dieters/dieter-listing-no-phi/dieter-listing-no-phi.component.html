@@ -12,10 +12,7 @@
       </button>
 
       <ccr-paginator fxFlex="nogrow" #paginator
-        [length]="dietersSource.total"
-        [pageIndex]="dietersSource.pageIndex"
-        [pageSize]="dietersSource.pageSize"
-        (page)="dietersSource.pageIndex = $event.pageIndex"
+        [source]="dietersSource"
       ></ccr-paginator>
     </div>
   </div>

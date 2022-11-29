@@ -91,7 +91,7 @@ export class MeasurementDataSourceV2 extends TableDataSource<
   public mapResult(
     response: GetMeasurementDataPointGroupsResponse
   ): MeasurementDataPointGroupTableEntry[] {
-    this.total = this.getTotal(response)
+    this.getTotal(response)
 
     this.hasTooMuchForSingleDay = false
     this.showDistanceNote = false

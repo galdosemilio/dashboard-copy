@@ -15,8 +15,6 @@ export class RPMBillingDataSource extends TableDataSource<
   PagedResponse<RPMStateSummaryItem>,
   FetchRPMBillingSummaryRequest
 > {
-  public totalCount?: number
-
   constructor(
     protected database: ReportsDatabase,
     protected notify: NotifierService,
@@ -51,9 +49,7 @@ export class RPMBillingDataSource extends TableDataSource<
     result: PagedResponse<RPMStateSummaryItem>
   ): Array<RPMStateSummaryEntry> {
     // pagination handling
-    this.total = this.getTotal(result)
-
-    this.totalCount = result.pagination.totalCount ?? 0
+    this.getTotal(result)
 
     if (!result || !result.data.length) {
       return []

@@ -31,7 +31,7 @@ export class EmailTemplatesDataSource extends TableDataSource<
 
   mapResult(result: PagedResponse<SelveraEmailTemplate>): EmailTemplate[] {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     const mappedResult = result.data.map(
       (element) =>

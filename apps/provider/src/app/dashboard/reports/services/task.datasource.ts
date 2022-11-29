@@ -14,8 +14,6 @@ export class TaskDataSource extends TableDataSource<
   FetchTasksResponse,
   FetchTasksRequest
 > {
-  public totalCount?: number
-
   constructor(
     protected database: TaskDatabase,
     protected notify: NotifierService,
@@ -42,7 +40,7 @@ export class TaskDataSource extends TableDataSource<
 
   mapResult(result: FetchTasksResponse): Array<TaskEntity> {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     this.totalCount = result.pagination.totalCount ?? 0
 

@@ -30,7 +30,7 @@ export class DataPointDataSource extends TableDataSource<
     result: GetMeasurementDataPointTypesResponse
   ): MeasurementDataPointType[] {
     // pagination handling
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     return result.data
   }

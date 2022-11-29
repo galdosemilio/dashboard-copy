@@ -1,12 +1,17 @@
 import { PagedResponse } from '@coachcare/sdk'
 import { CcrDataSource } from './generic.datasource'
 
+interface PaginatedRequest {
+  offset?: number
+}
+
 export abstract class TableDataSource<T, R, C> extends CcrDataSource<T, R, C> {
   /**
    * Used to calculate the pagination length.
    * Updated on the mapResult method according to the response data.
    */
   public total = 0
+  public totalCount = 0
   public pageIndex = 0
   public pageSize = 10
 
@@ -15,22 +20,17 @@ export abstract class TableDataSource<T, R, C> extends CcrDataSource<T, R, C> {
     this.pageIndex = 0
   }
 
-  public getTotal(result: unknown): number {
-    const response = result as PagedResponse<R>
-
+  public getTotal(response: PagedResponse<unknown>) {
     if (response.pagination.totalCount) {
-      return response.pagination.totalCount
+      this.total = response.pagination.totalCount
+      this.totalCount = response.pagination.totalCount
+
+      return
     }
 
-    if (response.pagination?.next) {
-      /**
-       * Set total as next + data.length if it's not available totalCount
-       * B/C MatPaginator requires set total for pagination
-       * If we don't have total, hasNextPage() is false in MatPaginator and next button will disabled
-       */
-      return response.pagination.next + response.data.length
-    }
-
-    return response.data.length
+    this.total = response.pagination?.next
+      ? response.pagination.next + response.data.length
+      : ((this.criteria as PaginatedRequest)?.offset ?? 0) +
+        response.data.length
   }
 }

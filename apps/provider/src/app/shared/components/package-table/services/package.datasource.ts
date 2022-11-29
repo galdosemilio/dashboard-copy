@@ -49,7 +49,7 @@ export class PackageDatasource extends TableDataSource<
   }
 
   mapResult(result: GetAllPackageOrganizationResponse): Package[] {
-    this.total = this.getTotal(result)
+    this.getTotal(result)
 
     const resultArray: PackageAssociation[] = result.data || []
     const mappedResult = resultArray.map(

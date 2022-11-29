@@ -25,12 +25,7 @@
     type="text">
   </mat-form-field>
 
-  <ccr-paginator fxFlex="nogrow" #paginator
-  [length]="source.total"
-  [pageIndex]="source.pageIndex"
-  [pageSize]="source.pageSize"
-  (page)="source.pageIndex = $event.pageIndex"
-  ></ccr-paginator>
+  <ccr-paginator fxFlex="nogrow" #paginator [source]="source"></ccr-paginator>
 </div>
 
 <app-sequencing-sequences-table [source]="source"></app-sequencing-sequences-table>
