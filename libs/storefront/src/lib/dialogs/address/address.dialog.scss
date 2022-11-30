@@ -28,3 +28,7 @@
     }
   }
 }
+
+::ng-deep .mat-select-panel-wrap {
+  max-width: fit-content;
+}

@@ -36,6 +36,7 @@
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-form-field>
+            <mat-label>{{ 'GLOBAL.STATE' | translate }}</mat-label>
             <mat-select *ngIf="isUnitedStates" required formControlName="stateProvince">
               <mat-option *ngFor="let state of states" [value]="state.value">{{ state.displayValue }}</mat-option>
             </mat-select>
