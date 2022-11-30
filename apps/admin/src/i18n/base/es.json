@@ -101,10 +101,12 @@
     "CREATE_ACCOUNT": "Crear Cuenta",
     "CREDIT_CARD_INFORMATION": "Información de Tarjeta de Crédito",
     "GO_TO_PATIENT_DASHBOARD": "Ir al Tablero del Paciente",
+    "GO_TO_STORE": "Ir a la tienda",
     "HAVE_NOT_FINISHED_ONBOARDING": "Si ha comenzado pero no completado su registro, por favor",
     "LOG_INTO_ACCOUNT_AND_CONTINUE": "Inicie sesión en su cuenta para continuar con su registro",
     "ORDER_DETAILS": "Detalles de la Orden",
     "PRODUCT_SELECTION": "Selección de Producto",
+    "REGISTRATION_COMPLETE": "Registro completo",
     "REVIEW_ORDER": "Revisar Orden",
     "SHIPPING_INFORMATION": "Información de Envío"
   },

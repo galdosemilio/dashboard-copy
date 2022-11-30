@@ -101,10 +101,12 @@
     "CREATE_ACCOUNT": "Opret konto",
     "CREDIT_CARD_INFORMATION": "Kreditkortoplysninger",
     "GO_TO_PATIENT_DASHBOARD": "Gå til patientens instrumentbræt",
+    "GO_TO_STORE": "Gå til butik",
     "HAVE_NOT_FINISHED_ONBOARDING": "Hvis du allerede er startet, men ikke har afsluttet din onboarding, tak",
     "LOG_INTO_ACCOUNT_AND_CONTINUE": "Log ind på din konto for at fortsætte din registrering",
     "ORDER_DETAILS": "Ordre detaljer",
     "PRODUCT_SELECTION": "Produktudvælgelse",
+    "REGISTRATION_COMPLETE": "Tilmelding gennemført",
     "REVIEW_ORDER": "Gennemgangsordre",
     "SHIPPING_INFORMATION": "Forsendelsesinformation"
   },

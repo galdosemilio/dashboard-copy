@@ -101,10 +101,12 @@
     "CREATE_ACCOUNT": "Benutzerkonto anlegen",
     "CREDIT_CARD_INFORMATION": "Kreditkarteninformation",
     "GO_TO_PATIENT_DASHBOARD": "Gehen Sie zum Patienten Dashboard",
+    "GO_TO_STORE": "Zum Laden gehen",
     "HAVE_NOT_FINISHED_ONBOARDING": "Wenn Sie bereits angefangen haben, aber Ihr Onboarding nicht fertiggestellt haben, bitte",
     "LOG_INTO_ACCOUNT_AND_CONTINUE": "Melden Sie sich in Ihrem Konto an, um Ihre Registrierung fortzusetzen",
     "ORDER_DETAILS": "Bestelldetails",
     "PRODUCT_SELECTION": "Produktauswahl",
+    "REGISTRATION_COMPLETE": "Registrierung abgeschlossen",
     "REVIEW_ORDER": "Überprüfungsreihenfolge",
     "SHIPPING_INFORMATION": "Versandinformationen"
   },

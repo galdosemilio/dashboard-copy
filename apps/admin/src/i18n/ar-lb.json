@@ -101,10 +101,12 @@
     "CREATE_ACCOUNT": "إنشاء حساب",
     "CREDIT_CARD_INFORMATION": "معلومات بطاقة الائتمان",
     "GO_TO_PATIENT_DASHBOARD": "اذهب إلى لوحة معلومات المريض",
+    "GO_TO_STORE": "اذهب إلى المتجر",
     "HAVE_NOT_FINISHED_ONBOARDING": "إذا كنت قد بدأت بالفعل ولكن لم تكمل على متن الطائرة ، من فضلك",
     "LOG_INTO_ACCOUNT_AND_CONTINUE": "قم بتسجيل الدخول إلى حسابك لمواصلة التسجيل الخاص بك",
     "ORDER_DETAILS": "تفاصيل الطلب",
     "PRODUCT_SELECTION": "اختيار المنتج",
+    "REGISTRATION_COMPLETE": "اكتمل التسجيل",
     "REVIEW_ORDER": "مراجعة أمر",
     "SHIPPING_INFORMATION": "معلومات الشحن"
   },

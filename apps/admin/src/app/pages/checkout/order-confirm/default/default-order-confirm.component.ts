@@ -13,9 +13,10 @@ export class DefaultOrderConfirmComponent implements OnInit {
   }
 
   private subscribeToEvents(): void {
-    this.bus.register(
-      'checkout.redirection.start',
-      () => (window.location.href = window.location.origin)
-    )
+    this.bus.register('checkout.redirection.start', (data) => {
+      window.location.href = `${window.location.origin}/${
+        data.actionButtonType === 'storefront' ? 'storefront' : 'provider'
+      }`
+    })
   }
 }

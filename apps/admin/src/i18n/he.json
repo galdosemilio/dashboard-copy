@@ -101,10 +101,12 @@
     "CREATE_ACCOUNT": "צור חשבון",
     "CREDIT_CARD_INFORMATION": "פרטי כרטיס אשראי",
     "GO_TO_PATIENT_DASHBOARD": "עבור אל לוח המחוונים של המטופל",
+    "GO_TO_STORE": "לך לחנות",
     "HAVE_NOT_FINISHED_ONBOARDING": "אם כבר התחלת אבל לא השלמת את ההשתנה שלך, בבקשה",
     "LOG_INTO_ACCOUNT_AND_CONTINUE": "היכנס לחשבונך כדי להמשיך ברישום שלך",
     "ORDER_DETAILS": "פרטי הזמנה",
     "PRODUCT_SELECTION": "בחירת מוצרים",
+    "REGISTRATION_COMPLETE": "הרשמה הושלמה",
     "REVIEW_ORDER": "סקור הזמנה",
     "SHIPPING_INFORMATION": "פרטי משלוח"
   },

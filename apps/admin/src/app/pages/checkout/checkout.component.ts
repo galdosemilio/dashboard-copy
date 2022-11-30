@@ -83,6 +83,8 @@ type StepName =
 
 type StepState = 'required' | 'hidden'
 
+type ActionButtonType = 'dashboard' | 'storefront'
+
 @UntilDestroy()
 @Component({
   selector: 'ccr-checkout',
@@ -127,6 +129,7 @@ export class CheckoutComponent implements OnInit {
   public spree: Client
   public spreeToken: IOAuthToken
   public useShippingAddress: boolean = true
+  public actionButtonType: ActionButtonType = 'dashboard'
 
   constructor(
     private accountProvider: AccountProvider,
@@ -178,7 +181,10 @@ export class CheckoutComponent implements OnInit {
         this.nextStepLabel = _('CHECKOUT.COMPLETE_ORDER')
         break
       case 'order_confirm':
-        this.nextStepLabel = _('CHECKOUT.GO_TO_PATIENT_DASHBOARD')
+        this.nextStepLabel =
+          this.actionButtonType === 'dashboard'
+            ? _('CHECKOUT.GO_TO_PATIENT_DASHBOARD')
+            : _('CHECKOUT.GO_TO_STORE')
         break
       default:
         this.nextStepLabel = _('GLOBAL.NEXT')
@@ -795,7 +801,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   private async startRedirection(): Promise<void> {
-    this.bus.trigger('checkout.redirection.start')
+    this.bus.trigger('checkout.redirection.start', {
+      actionButtonType: this.actionButtonType
+    })
   }
 
   private subscribeToRouteEvents(): void {
@@ -815,6 +823,10 @@ export class CheckoutComponent implements OnInit {
       }
 
       this.hiddenSteps = hiddenSteps
+      this.actionButtonType =
+        (params.actionButtonType as ActionButtonType) === 'storefront'
+          ? 'storefront'
+          : 'dashboard'
     })
   }
 
