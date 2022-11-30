@@ -59,7 +59,7 @@
     "PRICE": "Pris",
     "PRIMARY": "Primær",
     "REMOVE": "Fjerne",
-    "SEARCH_ITEMS": "Begynd at skrive søgeelementer",
+    "SEARCH_ITEMS": "Begynd at skrive for at søge efter produkter",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "Indstil betalingsmetode som standard",
     "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "Er du sikker på, at du vil indstille betalingsmetoden ************{{last4}} som standard en?",
     "SHIPPING": "Forsendelse",

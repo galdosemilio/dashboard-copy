@@ -59,7 +59,7 @@
     "PRICE": "Price",
     "PRIMARY": "Primary",
     "REMOVE": "Remove",
-    "SEARCH_ITEMS": "Start typing search items ",
+    "SEARCH_ITEMS": "Start typing to search products",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "Set Payment Method as Default",
     "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "Are you sure you want to set the payment method ************{{ last4 }} as the default one?",
     "SHIPPING": "Shipping",

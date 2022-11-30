@@ -59,7 +59,7 @@
     "PRICE": "Preis",
     "PRIMARY": "Primär",
     "REMOVE": "Entfernen",
-    "SEARCH_ITEMS": "Beginnen Sie mit der Eingabe von Suchbegriffen",
+    "SEARCH_ITEMS": "Beginnen Sie mit der Eingabe, um nach Produkten zu suchen",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "Geben Sie die Zahlungsmethode als Standard fest",
     "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "Sind Sie sicher, dass Sie die Zahlungsmethode ************{{last4}} als Standard einstellen möchten?",
     "SHIPPING": "Versand",

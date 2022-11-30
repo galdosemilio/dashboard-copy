@@ -59,7 +59,7 @@
     "PRICE": "Precio",
     "PRIMARY": "Primario",
     "REMOVE": "Remover",
-    "SEARCH_ITEMS": "Comience a escribir elementos de búsqueda",
+    "SEARCH_ITEMS": "Comience a escribir para buscar productos",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "Establecer Método de Pago como Primario",
     "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "¿Está seguro de querer fijar el método de pago ************{{last4}} como el primario?",
     "SHIPPING": "Transporte",

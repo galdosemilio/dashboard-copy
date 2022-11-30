@@ -59,7 +59,7 @@
     "PRICE": "מחיר",
     "PRIMARY": "יְסוֹדִי",
     "REMOVE": "לְהַסִיר",
-    "SEARCH_ITEMS": "התחל להקליד פריטי חיפוש",
+    "SEARCH_ITEMS": "התחל להקליד כדי לחפש מוצרים",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "הגדרת אמצעי תשלום כברירת מחדל",
     "SET_PAYMENT_METHOD_AS_DEFAULT_DESCRIPTION": "האם אתה בטוח שברצונך להגדיר את שיטת התשלום ************{{last4}} כמו ברירת המחדל?",
     "SHIPPING": "משלוח",
