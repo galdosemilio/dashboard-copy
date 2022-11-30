@@ -66,7 +66,7 @@
     "SHIPPING_ADDRESS": "Shipping Address",
     "SHIPPING_METHOD": "Shipping Method",
     "SHOPPING_CART": "Shopping Cart",
-    "SHOPPING_CART_ITEMS": "Shopping Cart ({{items}} Items)",
+    "SHOPPING_CART_ITEMS": "Shopping Cart ({{items}} Total Items)",
     "STATE": "State",
     "STORE": "Store",
     "STREET_ADDRESS": "Street Address",
@@ -77,6 +77,7 @@
     "THANK_YOU_FOR_ORDER": "Thank you for your order!",
     "TOTAL": "Total",
     "TOTAL_MEALS": "Total Number of Meals: {{ total }}",
+    "TOTAL_PRODUCTS": "Total Number of Products: {{ total }}",
     "VIEW_ORDER_DETAILS": "View Order Details",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "We will be in touch again with delivery and tracking details as soon as your order leaves our warehouse on it, we are not able to change anything including the items or delivery address."
   },

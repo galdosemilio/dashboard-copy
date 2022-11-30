@@ -66,7 +66,7 @@
     "SHIPPING_ADDRESS": "כתובת למשלוח",
     "SHIPPING_METHOD": "שיטת משלוח",
     "SHOPPING_CART": "עגלת קניות",
-    "SHOPPING_CART_ITEMS": "עגלת קניות ({{items}} פריטים)",
+    "SHOPPING_CART_ITEMS": "עגלת קניות ({{items}} סהכ פריטים)",
     "STATE": "מדינה",
     "STORE": "חנות",
     "STREET_ADDRESS": "כתובת רחוב",
@@ -77,6 +77,7 @@
     "THANK_YOU_FOR_ORDER": "תודה על הזמנתך!",
     "TOTAL": "סך הכל",
     "TOTAL_MEALS": "מספר כולל של ארוחות: {{ total }}",
+    "TOTAL_PRODUCTS": "מספר סהכ של מוצרים: {{ total }}",
     "VIEW_ORDER_DETAILS": "צפה בפרטי הזמנה",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "נהיה בקשר שוב עם פרטי משלוח ומעקב ברגע שההזמנה שלך תצא מהמחסן שלנו עליה, לא נוכל לשנות דבר כולל הפריטים או כתובת המשלוח."
   },

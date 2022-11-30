@@ -6,13 +6,16 @@
         <div cy-data="cart-items" fxFill fxLayout="row" fxLayoutAlign="space-between start">
           <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
             <mat-icon>shopping_cart</mat-icon>
-            <div>{{ 'GLOBAL.SHOPPING_CART_ITEMS' | translate: {items: cart.lineItems.length} }}</div>
+            <div>{{ 'GLOBAL.SHOPPING_CART_ITEMS' | translate: {items: totalItems} }}</div>
           </div>
           <button mat-icon-button routerLink="../cart" queryParamsHandling="merge">
             <mat-icon>edit</mat-icon>
           </button>
         </div>
-        <div *ngIf="totalMeals" class="meals" fxFill fxLayout="row" fxLayoutAlign="space-between start">
+        <div class="totals" fxFill fxLayout="row" fxLayoutAlign="space-between start">
+          <div>{{ 'GLOBAL.TOTAL_PRODUCTS' | translate: {total: cart.lineItems.length} }}</div>
+        </div>
+        <div *ngIf="totalMeals" class="totals" fxFill fxLayout="row" fxLayoutAlign="space-between start">
           <div>{{ 'GLOBAL.TOTAL_MEALS' | translate: {total: totalMeals} }}</div>
         </div>
         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center start" class="cart-items-wrap">

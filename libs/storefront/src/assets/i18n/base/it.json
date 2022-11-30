@@ -66,7 +66,7 @@
     "SHIPPING_ADDRESS": "Indirizzo di spedizione",
     "SHIPPING_METHOD": "metodo di spedizione",
     "SHOPPING_CART": "Carrello della spesa",
-    "SHOPPING_CART_ITEMS": "Carrello ({{items}} articoli)",
+    "SHOPPING_CART_ITEMS": "Carrello ({{items}} totale articoli)",
     "STATE": "Stato",
     "STORE": "Negozio",
     "STREET_ADDRESS": "Indirizzo",
@@ -77,6 +77,7 @@
     "THANK_YOU_FOR_ORDER": "Grazie per il vostro ordine!",
     "TOTAL": "Totale",
     "TOTAL_MEALS": "Numero totale di pasti: {{ total }}",
+    "TOTAL_PRODUCTS": "Numero totale di prodotti: {{ total }}",
     "VIEW_ORDER_DETAILS": "Visualizza i dettagli dell'ordine",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Ci metteremo in contatto di nuovo con i dettagli di consegna e tracciabilità non appena il tuo ordine lascerà il nostro magazzino, non siamo in grado di modificare nulla, inclusi gli articoli o l'indirizzo di consegna."
   },

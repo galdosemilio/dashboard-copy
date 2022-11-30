@@ -52,6 +52,15 @@ export class StorefrontCheckoutComponent implements OnInit {
     return this.cart?.lineItems?.reduce((acc, item) => acc + item.meals, 0)
   }
 
+  public get totalItems(): number {
+    return (
+      this.cart?.lineItems?.reduce(
+        (acc, item) => acc + item.attributes.quantity,
+        0
+      ) ?? 0
+    )
+  }
+
   public get hasPoBoxError(): boolean {
     return (
       (this.cart?.shipment?.attributes?.public_metadata?.validate_po_box &&

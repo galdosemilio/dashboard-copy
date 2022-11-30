@@ -66,7 +66,7 @@
     "SHIPPING_ADDRESS": "Forsendelsesadresse",
     "SHIPPING_METHOD": "Fragtmetode",
     "SHOPPING_CART": "Indkøbskurv",
-    "SHOPPING_CART_ITEMS": "Indkøbskurv ({{items}} varer)",
+    "SHOPPING_CART_ITEMS": "Indkøbskurv ({{items}} samlede varer)",
     "STATE": "Region",
     "STORE": "butik",
     "STREET_ADDRESS": "Vejnavn",
@@ -77,6 +77,7 @@
     "THANK_YOU_FOR_ORDER": "Tak for din ordre!",
     "TOTAL": "i alt",
     "TOTAL_MEALS": "Samlet antal måltider: {{ total }}",
+    "TOTAL_PRODUCTS": "Samlet antal produkter: {{ total }}",
     "VIEW_ORDER_DETAILS": "Se ordre detaljer",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Vi vil kontakte os igen med leverings- og sporingsdetaljer, så snart din ordre forlader vores lager på den, vi er ikke i stand til at ændre noget, herunder varerne eller leveringsadressen."
   },
