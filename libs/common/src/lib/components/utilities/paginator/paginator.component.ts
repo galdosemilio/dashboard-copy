@@ -25,7 +25,9 @@ export class CcrPaginatorComponent extends MatPaginator {
   private _totalCount = 0
 
   get totalCountPages() {
-    return Math.ceil(this._totalCount / this.pageSize)
+    return this.pageSize && this._totalCount
+      ? Math.ceil(this._totalCount / this.pageSize)
+      : 0
   }
 
   ngOnInit() {
