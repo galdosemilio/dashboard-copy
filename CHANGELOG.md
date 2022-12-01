@@ -1,3 +1,16 @@
+# [1.104.0](https://github.com/coachcare/dashboard/compare/v1.103.0...v1.104.0) (2022-12-01)
+
+
+### Bug Fixes
+
+* get total count pages [FRON-3008] ([5f0b698](https://github.com/coachcare/dashboard/commit/5f0b69857ac8a06a9e13d1eb6e109491c35191b4))
+* measurement chart for timestamp [FRON-2954] ([cb151e7](https://github.com/coachcare/dashboard/commit/cb151e7d23bb7a985ba9741d740e8c4c92deddb1))
+
+
+### Features
+
+* enhance success message on patient checkout self register ([6806b57](https://github.com/coachcare/dashboard/commit/6806b579dec23153cf7ea906719a327c22a8e7ed))
+
 # [1.103.0](https://github.com/coachcare/dashboard/compare/v1.102.0...v1.103.0) (2022-12-01)
 
 
