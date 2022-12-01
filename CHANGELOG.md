@@ -1,3 +1,22 @@
+# [1.103.0](https://github.com/coachcare/dashboard/compare/v1.102.0...v1.103.0) (2022-12-01)
+
+
+### Bug Fixes
+
+* address state select mobile style, add state label for storefront ([b592375](https://github.com/coachcare/dashboard/commit/b59237544421c0045d2d91649b2d3fb224e0d8e1))
+* bug on po box validation for storefront ([38eca6b](https://github.com/coachcare/dashboard/commit/38eca6bee91c308f46e05c60ed71622e45beae55))
+* store supervising provider option on rpm report [FRON-2999] ([cd7c152](https://github.com/coachcare/dashboard/commit/cd7c1528f8e4be7e9d8f818757aad05714af004d))
+* update paginator component ([852abb1](https://github.com/coachcare/dashboard/commit/852abb1cbeedfe92be59a9ab8600327793c3e12a))
+
+
+### Features
+
+* add a dashboard link to the store [FRON-2880] ([8b035b6](https://github.com/coachcare/dashboard/commit/8b035b69d4c57f84eda37f54a97d87d07a01c1a0))
+* add menu/logout link items to storefront page [FRON-2886] ([13ccffd](https://github.com/coachcare/dashboard/commit/13ccffd8222c6ccc04f9eab53d14e019c4ea2038))
+* add page offset selector [FRON-2991] ([c913101](https://github.com/coachcare/dashboard/commit/c91310147f34a21ae9bb930ca0edfbbee321c1a3))
+* adjust placeholder on storefront search input ([ab7e3a7](https://github.com/coachcare/dashboard/commit/ab7e3a7a9c6d0449bb3d76819dc2588f7debe7c9))
+* display total number of products and items on storefront checkout ([6924d0a](https://github.com/coachcare/dashboard/commit/6924d0ae633638e46ff7fcb6b5c3d72ff396b3ba))
+
 # [1.102.0](https://github.com/coachcare/dashboard/compare/v1.101.0...v1.102.0) (2022-11-23)
 
 
