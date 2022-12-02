@@ -167,11 +167,15 @@ export class StorefrontCheckoutComponent implements OnInit {
         await this.onSelectCreditCard(defaultCard.source_id.toString())
       }
     } catch (err) {
-      this.notifier.error(err)
+      this.notifier.error(err?.response?.data?.message ?? err)
     }
   }
 
   private async getShippingRates() {
+    if (!this.shippingAddress) {
+      return
+    }
+
     this.shippingRates = await this.storefront.getShippingRates()
   }
 
