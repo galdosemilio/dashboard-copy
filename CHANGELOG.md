@@ -1,3 +1,12 @@
+## [1.104.1](https://github.com/coachcare/dashboard/compare/v1.104.0...v1.104.1) (2022-12-06)
+
+
+### Bug Fixes
+
+* improve reset password check [FRON-2827] ([209cf89](https://github.com/coachcare/dashboard/commit/209cf898727a4f5708ab843855980ce2677f71a3))
+* refresh list after delete data point from details [FRON-2961] ([496e375](https://github.com/coachcare/dashboard/commit/496e375728ae264dbb24aa6022a72f42ca94d167))
+* storefront checkout errors ([d526007](https://github.com/coachcare/dashboard/commit/d5260078984f3ebc23bcf7869660b81b02489716))
+
 # [1.104.0](https://github.com/coachcare/dashboard/compare/v1.103.0...v1.104.0) (2022-12-01)
 
 
