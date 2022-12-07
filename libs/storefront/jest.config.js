@@ -14,8 +14,7 @@ module.exports = {
     'jest-preset-angular/build/serializers/html-comment'
   ],
   transform: {
-    '^.+\\.(ts|js|html)$': 'ts-jest',
-    '^.+.(ts|mjs|js|html)$': 'jest-preset-angular'
+    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular'
   },
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   testMatch: ['**/+(*.)+(spec).+(ts|js)?(x)'],

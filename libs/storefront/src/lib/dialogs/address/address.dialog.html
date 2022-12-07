@@ -11,7 +11,7 @@
       <mat-grid-list class="ccr-grid" cols="1" rowHeight="70px">
         <mat-grid-tile>
           <mat-form-field>
-            <input autocomplete="nope" matInput required [matAutocomplete]="auto" formControlName="address1"
+            <input data-testid="address1" autocomplete="nope" matInput required [matAutocomplete]="auto" formControlName="address1"
             [placeholder]="'GLOBAL.ADDRESS_LINE_ONE' | translate">
             <mat-autocomplete (optionSelected)='selectSmartyAddress($event.option.value)' #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions" [value]="option">
@@ -29,7 +29,7 @@
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-form-field>
-            <input matInput required formControlName="city"
+            <input data-testid="city" matInput required formControlName="city"
             [placeholder]="'GLOBAL.CITY' | translate">
             <mat-error *ngIf="form.get('city').getError('required')">{{ 'ERROR.ADDRESS_CITY_REQUIRED' | translate }}</mat-error>
           </mat-form-field>
@@ -37,7 +37,7 @@
         <mat-grid-tile>
           <mat-form-field>
             <mat-label>{{ 'GLOBAL.STATE' | translate }}</mat-label>
-            <mat-select *ngIf="isUnitedStates" required formControlName="stateProvince">
+            <mat-select data-testid="state" *ngIf="isUnitedStates" required formControlName="stateProvince">
               <mat-option *ngFor="let state of states" [value]="state.value">{{ state.displayValue }}</mat-option>
             </mat-select>
             <input *ngIf="!isUnitedStates" matInput required formControlName="stateProvince"
@@ -47,7 +47,7 @@
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-form-field>
-            <input matInput required formControlName="postalCode"
+            <input data-testid="postalCode" matInput required formControlName="postalCode"
             [placeholder]="'GLOBAL.POSTAL_CODE' | translate">
             <mat-error *ngIf="form.get('postalCode').getError('required')">{{ 'ERROR.ADDRESS_POSTAL_CODE_REQUIRED' | translate }}</mat-error>
 
@@ -57,6 +57,7 @@
           <div fxFlex>
             <ccr-form-field-country
               formControlName="country"
+              data-testid="country"
               required
               [placeholder]="'GLOBAL.COUNTRY' | translate"
               ></ccr-form-field-country>
