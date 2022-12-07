@@ -59,10 +59,13 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   },
   SIDENAV: {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM],
-    PATIENT_HIDDEN_OPTIONS: [SidenavOptions.TEST_RESULTS, SidenavOptions.STORE],
+    PATIENT_HIDDEN_OPTIONS: [
+      SidenavOptions.TEST_RESULTS,
+      SidenavOptions.STORE_COACHCARE
+    ],
     PATIENT_SHOWN_OPTIONS: [],
-    FETCH_STORE_LINK: false,
-    STORE_NAV_NAME: _('SIDENAV.STORE')
+    STORE_CLINIC_USES_SHOPIFY: false,
+    STORE_CLINIC_NAV_NAME: _('SIDENAV.STORE')
   },
   COHORT_REPORTS: {
     SHOW_COHORT_WEIGHT_LOSS_REPORT: false,
@@ -147,10 +150,13 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   },
   SIDENAV: {
     HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM],
-    PATIENT_HIDDEN_OPTIONS: [SidenavOptions.TEST_RESULTS, SidenavOptions.STORE],
+    PATIENT_HIDDEN_OPTIONS: [
+      SidenavOptions.TEST_RESULTS,
+      SidenavOptions.STORE_COACHCARE
+    ],
     PATIENT_SHOWN_OPTIONS: [],
-    FETCH_STORE_LINK: false,
-    STORE_NAV_NAME: _('SIDENAV.STORE')
+    STORE_CLINIC_USES_SHOPIFY: false,
+    STORE_CLINIC_NAV_NAME: _('SIDENAV.STORE')
   },
   COHORT_REPORTS: {
     SHOW_COHORT_WEIGHT_LOSS_REPORT: false,

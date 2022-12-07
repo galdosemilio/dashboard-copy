@@ -5,6 +5,6 @@ export interface SidenavDetails {
   SHOWN_OPTIONS?: SidenavOptions[]
   PATIENT_HIDDEN_OPTIONS?: SidenavOptions[]
   PATIENT_SHOWN_OPTIONS?: SidenavOptions[]
-  FETCH_STORE_LINK?: boolean
-  STORE_NAV_NAME?: string
+  STORE_CLINIC_USES_SHOPIFY?: boolean
+  STORE_CLINIC_NAV_NAME?: string
 }

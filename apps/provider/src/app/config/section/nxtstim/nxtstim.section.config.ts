@@ -8,7 +8,10 @@ export const NXTSTIMSectionConfig: SectionConfigDetails = {
     HIDDEN_MEASUREMENT_TABS: [MeasurementTabs.FOOD]
   },
   SIDENAV: {
-    HIDDEN_OPTIONS: [SidenavOptions.REPORT_CUSTOM, SidenavOptions.STORE]
+    HIDDEN_OPTIONS: [
+      SidenavOptions.REPORT_CUSTOM,
+      SidenavOptions.STORE_COACHCARE
+    ]
   },
   PATIENT_DASHBOARD: {
     SUMMARY_BOXES: {

@@ -784,6 +784,10 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '1.0/warehouse/measurement/cohort/listing**', {
     fixture: 'api/warehouse/cohortListing'
   }).as('getCohortListingRequest')
+
+  cy.intercept('POST', '1.0/authentication/shopify', {
+    fixture: 'api/shopify/shopify-url'
+  }).as('shopifyAuthentication')
 }
 
 const seti18n = (): void => {

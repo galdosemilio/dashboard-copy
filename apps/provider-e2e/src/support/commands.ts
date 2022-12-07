@@ -1,15 +1,4 @@
-type ValidOrganization =
-  | 'cmwl'
-  | 'ccr'
-  | 'mdteam'
-  | 'inhealth'
-  | 'shiftsetgo'
-  | 'apollo-italy'
-  | 'apollo-us'
-  | 'wellcore'
-  | 'musclewise'
-  | 'idealyou'
-
+import { ValidOrganization } from './organizations'
 declare namespace Cypress {
   interface Chainable<Subject> {
     setTimezone(value: string): Chainable<void>

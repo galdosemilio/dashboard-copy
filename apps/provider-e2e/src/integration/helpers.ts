@@ -1,3 +1,6 @@
+import { standardSetup } from '../support'
+import { ValidOrganization } from '../support/organizations'
+
 export function assertElement(element, contains: string[]): void {
   contains.forEach((requiredString) =>
     element.should('contain', requiredString)
@@ -16,4 +19,27 @@ export function selectOption(selectorElement, optionName: string): void {
 
   cy.get('.mat-option').contains(optionName).trigger('click')
   cy.tick(1000)
+}
+
+export function setupEcommerceLeftNavMenu(
+  clinic: ValidOrganization,
+  clinicStore: boolean,
+  accountType?: 'client' | 'provider'
+) {
+  cy.fixture('api/organization/getMala').then((malaFixture) => {
+    cy.setOrganization(clinic)
+    standardSetup({ mode: accountType ?? 'provider' })
+
+    if (!clinicStore) {
+      delete malaFixture.storeUrl
+    }
+
+    cy.intercept('GET', `/4.0/organization/*/preference**`, malaFixture)
+
+    cy.visit('/dashboard')
+
+    cy.window().then((win) => {
+      cy.stub(win, 'open').as('open')
+    })
+  })
 }

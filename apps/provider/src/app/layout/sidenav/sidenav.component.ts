@@ -61,7 +61,7 @@ export class SidenavComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.getStoreNavName = this.getStoreNavName.bind(this)
-    this.fetchStoreLink = this.fetchStoreLink.bind(this)
+    this.fetchClinicStoreLink = this.fetchClinicStoreLink.bind(this)
     this.updateUnread = this.updateUnread.bind(this)
 
     this.store
@@ -286,12 +286,29 @@ export class SidenavComponent implements OnInit {
             isAllowedForPatients: true,
             isHiddenForProviders: true
           },
+          // Used for CoachCare Store, intended for providers only
+          // Link name is not customizable
+          // Visibility is determined by section config
           {
-            code: SidenavOptions.STORE,
-            navName: this.getStoreNavName(),
-            navLink: this.getStoreNavUrl(),
+            code: SidenavOptions.STORE_COACHCARE,
+            navName: _('SIDENAV.STORE'),
+            navLink: this.DEFAULT_STORE_LINK,
             icon: 'shopping_cart',
-            isAllowedForPatients: true
+            isAllowedForPatients: false
+          },
+          // Used for clinic Store
+          // Link name is customizable
+          // Link (and order of precedence) is either
+          //   Shopify store (boolean set in section config, but full URL resolved in API call) - for patients only
+          //   Store URL (almost certainly a spree store) - for providers and patients
+          {
+            code: SidenavOptions.STORE_CLINIC,
+            navName: this.getStoreNavName(),
+            navLink: this.DEFAULT_STORE_LINK,
+            icon: 'shopping_cart',
+            isAllowedForPatients: true,
+            shouldFetchNavLink: true,
+            getNavLink: this.fetchClinicStoreLink
           },
           {
             badge: 10,
@@ -465,7 +482,16 @@ export class SidenavComponent implements OnInit {
 
     const enabled = get(org, 'preferences.content.enabled', false)
     const rpmEnabled = get(org, 'preferences.rpm.isActive', false)
-    const storeUrl = get(org, 'preferences.storeUrl')
+    const clinicStoreSet =
+      (!this.isProvider &&
+        resolveConfig(
+          'SIDENAV.STORE_CLINIC_USES_SHOPIFY',
+          this.context.organization
+        )) ||
+      get(org, 'preferences.storeUrl')
+        ? true
+        : false
+
     const rpmElementIndex = this.sidenavItems.findIndex(
       (item) =>
         item.children &&
@@ -479,9 +505,11 @@ export class SidenavComponent implements OnInit {
     const messagingElementIndex = this.sidenavItems.findIndex(
       (item) => item.navName === _('SIDENAV.MESSAGES')
     )
-    const storeElementIndex = this.sidenavItems.findIndex(
-      (item) => item.navName === this.getStoreNavName()
+
+    const storeClinicElementIndex = this.sidenavItems.findIndex(
+      (item) => item.code === SidenavOptions.STORE_CLINIC
     )
+
     const commsEnabled = get(
       org,
       'preferences.comms.videoConferencing.isEnabled',
@@ -509,10 +537,10 @@ export class SidenavComponent implements OnInit {
       ...this.sidenavItems[idx],
       cssClass: enabled ? '' : 'hidden'
     }
-    this.sidenavItems[storeElementIndex] = {
-      ...this.sidenavItems[storeElementIndex],
-      cssClass: this.validStore(storeUrl) ? '' : 'hidden',
-      code: this.validStore(storeUrl) ? '' : SidenavOptions.STORE
+
+    this.sidenavItems[storeClinicElementIndex] = {
+      ...this.sidenavItems[storeClinicElementIndex],
+      cssClass: clinicStoreSet ? '' : 'hidden'
     }
 
     if (rpmElementIndex > -1 && !rpmEnabled) {
@@ -558,6 +586,7 @@ export class SidenavComponent implements OnInit {
     ) {
       hiddenOptions.forEach((option) => {
         let existingChildrenIndex = -1
+
         const existingItem = this.sidenavItems.find(
           (item) =>
             (item.code === option && !item.cssClass) ||
@@ -595,40 +624,38 @@ export class SidenavComponent implements OnInit {
 
   private getStoreNavName(): string {
     const storeName = resolveConfig(
-      'SIDENAV.STORE_NAV_NAME',
+      'SIDENAV.STORE_CLINIC_NAV_NAME',
       this.context.organization
     )
 
     return storeName || _('SIDENAV.STORE')
   }
 
-  private getStoreNavUrl(): string {
-    const storeUrl = get(this.context.organization, 'preferences.storeUrl')
-    if (this.validStore(storeUrl)) {
-      return `${environment.loginSite}/storefront?baseOrg=${this.context.organization.id}`
-    }
-
-    return this.DEFAULT_STORE_LINK
-  }
-
-  private async fetchStoreLink(): Promise<string> {
+  private async fetchClinicStoreLink(): Promise<string> {
     try {
-      const shouldFetch = resolveConfig(
-        'SIDENAV.FETCH_STORE_LINK',
+      const useShopifyStoreLink = resolveConfig(
+        'SIDENAV.STORE_CLINIC_USES_SHOPIFY',
         this.context.organization
       )
+      const storeUrl = get(this.context.organization, 'preferences.storeUrl')
 
-      if (!shouldFetch || this.isProvider) {
-        return this.DEFAULT_STORE_LINK
+      // First attempt shopify link (if not provider)
+      if (!this.isProvider && useShopifyStoreLink) {
+        const response = await this.authentication.shopify({
+          organization: this.context.organizationId
+        })
+        return response.url
+
+        // Then attempt to use storeurl (likely spree)
+      } else if (this.validStore(storeUrl)) {
+        return `${environment.loginSite}/storefront?baseOrg=${this.context.organization.id}`
+
+        // Spree store invalid, no redirect
+      } else {
+        return 'Error accessing store'
       }
-
-      const response = await this.authentication.shopify({
-        organization: this.context.organizationId
-      })
-      return response.url
     } catch (error) {
       this.notifier.error(error)
-      return this.DEFAULT_STORE_LINK
     }
   }
 

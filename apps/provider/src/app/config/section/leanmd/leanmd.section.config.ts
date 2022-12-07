@@ -10,6 +10,9 @@ export const LeanMDSectionConfig: SectionConfigDetails = {
     UNENROLL_THEN_ENROLL: true
   },
   SIDENAV: {
-    HIDDEN_OPTIONS: [SidenavOptions.STORE, SidenavOptions.REPORT_CUSTOM]
+    HIDDEN_OPTIONS: [
+      SidenavOptions.STORE_COACHCARE,
+      SidenavOptions.REPORT_CUSTOM
+    ]
   }
 }
