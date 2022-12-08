@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@angular/core'
 import {
   AccountIdentifier,
   EcommerceProvider,
-  NamedEntity,
   SpreeProvider
 } from '@coachcare/sdk'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
@@ -24,6 +23,7 @@ import {
   OrderUpdate
 } from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
 import { AppEnvironment, APP_ENVIRONMENT } from '@coachcare/common/shared'
+import { ShippingRate } from '../pages'
 
 export interface StorefrontVariant {
   id: string
@@ -390,6 +390,18 @@ export class StorefrontService {
     await this.loadSpreeCart()
   }
 
+  public async advance() {
+    const res = await this.spree.checkout.advance(this.spreeToken, {
+      include: cartIncludeFields
+    })
+
+    if (res.isFail()) {
+      throw new Error(res.fail().message)
+    }
+
+    this.parseCartResult(res)
+  }
+
   public async getShippingRates() {
     const res = await this.spree.checkout.shippingRates(this.spreeToken)
 
@@ -408,15 +420,19 @@ export class StorefrontService {
         (entry) => entry.id
       ) || []
 
-    const shippingRates: NamedEntity[] = data.included
+    const shippingRates: ShippingRate[] = data.included
       .filter(
         (entry) =>
           entry.type === 'shipping_rate' && shippingRateIds.includes(entry.id)
       )
       .map((entry) => ({
         id: entry.id,
-        name: `${entry.attributes.name} - ${entry.attributes.display_cost}`
+        name: `${entry.attributes.name} - ${entry.attributes.display_cost}`,
+        shipping_method_id: entry.attributes.shipping_method_id,
+        shipment: shipment.id
       }))
+
+    await this.loadSpreeCart()
 
     return shippingRates
   }

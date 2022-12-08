@@ -27,6 +27,10 @@ import { StripeService } from 'ngx-stripe'
 import { IAddress } from '@spree/storefront-api-v2-sdk/types/interfaces/attributes/Address'
 
 type SpreeAddress = IAddress & { validate_address: boolean }
+export type ShippingRate = NamedEntity & {
+  shipping_method_id: string
+  shipment: string
+}
 
 @UntilDestroy()
 @Component({
@@ -38,9 +42,11 @@ export class StorefrontCheckoutComponent implements OnInit {
   public cart: StorefrontCart
   public isLoading = false
   public user: CurrentAccount
+  public paymentMethodId: string
+  public creditCardId: string
   public shippingAddress: AccountAddress
   public billingAddress: AccountAddress
-  public shippingRates: NamedEntity[] = []
+  public shippingRates: ShippingRate[] = []
   public creditCardList: NamedEntity[] = []
   public errors: { [key: string]: { [key: string]: string[] } } = {}
 
@@ -115,6 +121,7 @@ export class StorefrontCheckoutComponent implements OnInit {
     this.isLoading = true
 
     await this.resolveAccountAddresses()
+    await this.getFirstPaymentMethod()
     await this.resolvePaymentMethod()
 
     this.isLoading = false
@@ -164,89 +171,17 @@ export class StorefrontCheckoutComponent implements OnInit {
         creditCards[creditCards.length - 1]
 
       if (!this.cart.creditCard && defaultCard) {
-        await this.onSelectCreditCard(defaultCard.source_id.toString())
+        this.onSelectCreditCard(defaultCard.source_id.toString())
+      } else if (this.cart.creditCard) {
+        this.onSelectCreditCard(this.cart.creditCard.id.toString())
       }
     } catch (err) {
       this.notifier.error(err?.response?.data?.message ?? err)
     }
   }
 
-  private async getShippingRates() {
-    if (!this.shippingAddress) {
-      return
-    }
-
-    this.shippingRates = await this.storefront.getShippingRates()
-  }
-
-  private async setAddresses(validateAddress: boolean = true) {
-    if (!this.shippingAddress && !this.billingAddress) {
-      return
-    }
-
-    const data: OrderUpdate = {
-      order: {}
-    }
-
-    if (this.shippingAddress) {
-      data.order.ship_address_attributes = {
-        firstname: this.user.firstName,
-        lastname: this.user.lastName,
-        phone: this.user.phone,
-        address1: this.shippingAddress.address1,
-        address2: this.shippingAddress.address2,
-        city: this.shippingAddress.city,
-        zipcode: this.shippingAddress.postalCode,
-        state_name: this.shippingAddress.stateProvince,
-        country_iso: this.shippingAddress.country.id,
-        validate_address: validateAddress
-      } as SpreeAddress
-    }
-
-    if (this.billingAddress) {
-      data.order.bill_address_attributes = {
-        firstname: this.user.firstName,
-        lastname: this.user.lastName,
-        phone: this.user.phone,
-        address1: this.billingAddress.address1,
-        address2: this.billingAddress.address2,
-        city: this.billingAddress.city,
-        zipcode: this.billingAddress.postalCode,
-        state_name: this.billingAddress.stateProvince,
-        country_iso: this.billingAddress.country.id,
-        validate_address: false
-      } as SpreeAddress
-    }
-
-    try {
-      this.errors = {}
-      await this.storefront.checkout(data)
-    } catch (err) {
-      this.errors = err.errors
-      this.notifier.error(err.summary)
-    }
-  }
-
-  public async onSelectCreditCard(sourceId: string) {
-    this.isLoading = true
-
-    try {
-      const paymentMethods = await this.storefront.getPaymentMethods()
-      const paymentMethod = paymentMethods.data[0]
-
-      if (!paymentMethod) {
-        throw new Error(_('ERROR.PAYMENT_METHOD_NOT_FOUND'))
-      }
-
-      await this.storefront.addPayment({
-        payment_method_id: paymentMethod.id,
-        source_id: sourceId
-      })
-    } catch (err) {
-      this.notifier.error(err)
-    } finally {
-      this.isLoading = false
-    }
+  public onSelectCreditCard(creditCardId: string) {
+    this.creditCardId = creditCardId
   }
 
   public openPaymentMethod() {
@@ -326,19 +261,22 @@ export class StorefrontCheckoutComponent implements OnInit {
   }
 
   public async onSelectShippingRate(rateId: string) {
+    const selectedShippingRate: ShippingRate = this.shippingRates.find(
+      (s) => s.id === rateId
+    )
     this.isLoading = true
-
     try {
       await this.storefront.checkout({
         order: {
           shipments_attributes: [
             {
-              id: this.cart.shipmentId,
+              id: selectedShippingRate.shipment,
               selected_shipping_rate_id: rateId
             }
           ]
         }
       })
+      await this.storefront.advance()
     } catch (err) {
       this.notifier.error(err)
     } finally {
@@ -368,11 +306,90 @@ export class StorefrontCheckoutComponent implements OnInit {
     this.isLoading = true
 
     try {
+      await this.storefront.addPayment({
+        payment_method_id: this.paymentMethodId,
+        source_id: this.creditCardId
+      })
       await this.storefront.checkoutComplete()
       await this.router.navigate(['../complete'], {
         relativeTo: this.route,
         queryParamsHandling: 'merge'
       })
+    } catch (err) {
+      this.notifier.error(err)
+    } finally {
+      this.isLoading = false
+    }
+  }
+
+  private async getShippingRates() {
+    if (!this.shippingAddress) {
+      return
+    }
+
+    this.shippingRates = await this.storefront.getShippingRates()
+  }
+
+  private async setAddresses(validateAddress: boolean = true) {
+    if (!this.shippingAddress && !this.billingAddress) {
+      return
+    }
+
+    const data: OrderUpdate = {
+      order: {}
+    }
+
+    if (this.shippingAddress) {
+      data.order.ship_address_attributes = {
+        firstname: this.user.firstName,
+        lastname: this.user.lastName,
+        phone: this.user.phone,
+        address1: this.shippingAddress.address1,
+        address2: this.shippingAddress.address2,
+        city: this.shippingAddress.city,
+        zipcode: this.shippingAddress.postalCode,
+        state_name: this.shippingAddress.stateProvince,
+        country_iso: this.shippingAddress.country.id,
+        validate_address: validateAddress
+      } as SpreeAddress
+    }
+
+    if (this.billingAddress) {
+      data.order.bill_address_attributes = {
+        firstname: this.user.firstName,
+        lastname: this.user.lastName,
+        phone: this.user.phone,
+        address1: this.billingAddress.address1,
+        address2: this.billingAddress.address2,
+        city: this.billingAddress.city,
+        zipcode: this.billingAddress.postalCode,
+        state_name: this.billingAddress.stateProvince,
+        country_iso: this.billingAddress.country.id,
+        validate_address: false
+      } as SpreeAddress
+    }
+
+    try {
+      this.errors = {}
+      await this.storefront.checkout(data)
+    } catch (err) {
+      this.errors = err.errors
+      this.notifier.error(err.summary)
+    }
+  }
+
+  private async getFirstPaymentMethod() {
+    this.isLoading = true
+
+    try {
+      const paymentMethods = await this.storefront.getPaymentMethods()
+      const paymentMethod = paymentMethods.data[0]
+
+      if (!paymentMethod) {
+        throw new Error(_('ERROR.PAYMENT_METHOD_NOT_FOUND'))
+      }
+
+      this.paymentMethodId = paymentMethod.id
     } catch (err) {
       this.notifier.error(err)
     } finally {

@@ -74,8 +74,8 @@
             <mat-icon>add</mat-icon>
           </button>
         </div>
-        <div class="payment-method" *ngIf="creditCardList.length && cart.creditCard; else noInfo">
-          <mat-select [(value)]="cart.creditCard.id" (selectionChange)="onSelectCreditCard($event.value)">
+        <div class="payment-method" *ngIf="creditCardList.length && creditCardId; else noInfo">
+          <mat-select [(value)]="creditCardId" (selectionChange)="onSelectCreditCard($event.value)">
             <mat-option *ngFor="let creditCard of creditCardList" [value]="creditCard.id">{{ creditCard.name }}</mat-option>
           </mat-select>
         </div>
@@ -126,7 +126,7 @@
         !cart.shippingAddress ||
         !cart.billingAddress ||
         !cart.shppingRateId ||
-        !cart.creditCard ||
+        !creditCardId ||
         hasErrors"
       class="ccr-button"
       cy-data="place-button"
