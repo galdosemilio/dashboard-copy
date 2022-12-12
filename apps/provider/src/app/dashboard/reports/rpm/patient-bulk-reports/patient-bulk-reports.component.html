@@ -87,12 +87,15 @@ class="ccr-table ccr-expand-table ccr-table-stats">
                 {{ i + source.criteria.offset + 1 }}
             </td>
             <td>
-                <span *ngIf="row.status.name === 'Succeeded'">
+                <span *ngIf="row.status.id === Status.Succeeded">
                     <a class="download-link" *ngFor="let link of [].constructor(row.progress.artifact.count); let r = index" (click)="downloadReport(row, r)">
                         {{ 'GLOBAL.DOWNLOAD' | translate }} {{ 'GLOBAL.FILE' | translate }} ({{ r + 1 }}/{{ row.progress.artifact.count }})<br>
                     </a>
                 </span>
-                <span *ngIf="row.status.name !== 'Succeeded'">{{ row.status.name }}</span>
+                <span fxLayout="row" fxLayoutAlign="start center" *ngIf="row.status.id !== Status.Succeeded">
+                    {{ row.status.name }}
+                    <mat-icon *ngIf="row.status.id === Status.Failed && row.status.message" class="status-failed-icon" [matTooltip]="row.status.message">error</mat-icon>
+                </span>
             </td>
             <td>{{ row.name }}</td>
             <td>{{ row.organization.name + ' (' + row.organization.id + ')' }}</td>

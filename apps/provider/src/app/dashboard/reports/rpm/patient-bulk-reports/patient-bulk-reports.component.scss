@@ -18,4 +18,13 @@ app-patient-bulk-reports {
     cursor: pointer;
     text-decoration: underline;
   }
+
+  .status-failed-icon {
+    color: var(--primary);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    margin-left: 5px;
+  }
 }

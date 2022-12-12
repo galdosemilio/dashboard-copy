@@ -49,10 +49,22 @@ interface TaskStatusNotification extends TaskNotification {
     to: TaskStatus
   }
 }
+
 interface CachedArtifact extends TaskArtifact {
   expiration: DateTime
   fileNumber: number
 }
+
+enum Status {
+  Queued = '1',
+  Running = '2',
+  Pending_Cancelation = '3',
+  Canceled = '4',
+  Failed = '5',
+  Succeeded = '6',
+  Expired = '7'
+}
+
 @UntilDestroy()
 @Component({
   selector: 'app-patient-bulk-reports',
@@ -80,6 +92,7 @@ export class PatientBulkReportsComponent
   public source: TaskDataSource
   public status: number
   public statusList = []
+  public Status = Status
 
   private refresh$: Subject<void> = new Subject<void>()
   private cachedArtifacts = new Map<string, CachedArtifact[]>()
