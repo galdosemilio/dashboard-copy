@@ -1,3 +1,11 @@
+## [1.104.2](https://github.com/coachcare/dashboard/compare/v1.104.1...v1.104.2) (2022-12-14)
+
+
+### Bug Fixes
+
+* correct store sidenav and add tests ([ddcc3ab](https://github.com/coachcare/dashboard/commit/ddcc3ab4357352a4e054e3ff44f0dc63ce3026af))
+* payment credit-owed issue ([6eb6b70](https://github.com/coachcare/dashboard/commit/6eb6b700289948fd31ede54050c1d68473a68dc1))
+
 ## [1.104.1](https://github.com/coachcare/dashboard/compare/v1.104.0...v1.104.1) (2022-12-06)
 
 
