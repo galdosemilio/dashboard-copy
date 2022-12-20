@@ -21,6 +21,10 @@ const interceptSpreeApiCalls = (): void => {
     fixture: 'spree/createAccount'
   })
 
+  cy.intercept('GET', 'api/v2/storefront/store', {
+    fixture: 'spree/store'
+  })
+
   cy.intercept('POST', 'api/v2/storefront/cart', {
     fixture: 'spree/createCart'
   }).as('spreeCallCreateCart')

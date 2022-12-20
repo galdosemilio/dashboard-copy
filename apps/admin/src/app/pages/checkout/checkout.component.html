@@ -111,7 +111,7 @@
       </p>
 
       <div *ngIf="showNextButton" fxFlex fxLayout="row" fxLayoutAlign="end center">
-        <button mat-flat-button class="ccr-button" color="accent" (click)="nextStep()">{{ nextStepLabel | translate }}</button>
+        <button mat-flat-button cy-data="next-button" class="ccr-button" color="accent" (click)="nextStep()">{{ nextStepLabel | translate }}</button>
       </div>
   </div>
 </div>

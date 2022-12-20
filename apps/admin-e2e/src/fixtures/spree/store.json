@@ -1,0 +1,50 @@
+{
+  "data": {
+    "id": "1",
+    "type": "store",
+    "attributes": {
+      "name": "CoachCare Store",
+      "url": "test.ecommerce.coachcare.com",
+      "meta_description": "",
+      "meta_keywords": "",
+      "seo_title": "",
+      "default_currency": "USD",
+      "default": true,
+      "supported_currencies": "USD",
+      "facebook": "CoachCareNYC",
+      "twitter": "coachcarenyc",
+      "instagram": "",
+      "default_locale": "en",
+      "customer_support_email": "support@coachcare.com",
+      "default_country_id": 11,
+      "description": "CoachCare provides software and connected device product to improve patient outcomes for clinics",
+      "address": "New York, NY - Austin, TX",
+      "contact_phone": "",
+      "supported_locales": "en",
+      "settings": {
+        "limit_digital_download_count": true,
+        "limit_digital_download_days": true,
+        "digital_asset_authorized_clicks": 5,
+        "digital_asset_authorized_days": 7,
+        "digital_asset_link_expire_time": 300
+      },
+      "favicon_path": null,
+      "public_metadata": {},
+      "hero_image": ""
+    },
+    "relationships": {
+      "menus": {
+        "data": []
+      },
+      "cms_pages": {
+        "data": []
+      },
+      "default_country": {
+        "data": {
+          "id": "11",
+          "type": "country"
+        }
+      }
+    }
+  }
+}

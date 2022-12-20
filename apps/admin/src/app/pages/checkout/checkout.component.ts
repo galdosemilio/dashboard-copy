@@ -844,7 +844,7 @@ export class CheckoutComponent implements OnInit {
       this.storeUrl = pref.storeUrl ?? ''
       this.hasStoreUrl = !!pref.storeUrl
       this.additionalConsentButtons =
-        (pref.mala.custom as MALACustomData).links.additionalConsent?.map(
+        (pref.mala.custom as MALACustomData)?.links?.additionalConsent?.map(
           (entry) => {
             const entryLinks =
               entry.links as AdditionalConsentButtonEntry['links']

@@ -319,7 +319,7 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
 
       await this.accountIdentifier.add({
         account: this.account.id,
-        organization: this.context.organizationId,
+        organization: environment.defaultOrgId,
         name: SPREE_EXTERNAL_ID_NAME,
         value: spreeAccountResult.success().data.id
       })

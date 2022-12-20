@@ -6,18 +6,35 @@
       "address1": "250 King St",
       "stateProvince": "CA",
       "city": "San Francisco",
-      "country": { "id": "US", "name": "United States" },
+      "country": {
+        "id": "US",
+        "name": "United States"
+      },
       "postalCode": "94107",
-      "labels": [{ "id": "2", "name": "Shipping" }]
+      "labels": [
+        {
+          "id": "2",
+          "name": "Shipping"
+        }
+      ]
     },
     {
       "id": "153",
+      "name": "Zhang Xin",
       "address1": "4200 Leeland St",
       "stateProvince": "TX",
       "city": "Houston",
-      "country": { "id": "US", "name": "United States" },
+      "country": {
+        "id": "US",
+        "name": "United States"
+      },
       "postalCode": "77023",
-      "labels": [{ "id": "1", "name": "Billing" }]
+      "labels": [
+        {
+          "id": "1",
+          "name": "Billing"
+        }
+      ]
     }
   ],
   "pagination": {}

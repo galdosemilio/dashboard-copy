@@ -30,6 +30,25 @@ const interceptCoreApiCalls = (
     })
   }
 
+  cy.intercept('POST', '2.0/logout', {
+    status: 204,
+    body: {}
+  })
+
+  cy.intercept('POST', '2.0/logging', {
+    status: 200,
+    body: {}
+  })
+
+  cy.intercept('POST', '2.0/client/register', {
+    status: 200,
+    body: { id: Cypress.env('patientId') }
+  })
+
+  cy.intercept('GET', '2.0/access/organization', {
+    fixture: 'api/organization/organizationAccessList'
+  })
+
   cy.fixture(`api/account/getSingle`).then((data) => {
     data.preference.defaultOrganization = Cypress.env('organizationId')
     data.timezone = Cypress.env('timezone')
@@ -59,6 +78,9 @@ const interceptCoreApiCalls = (
     body: {}
   }).as('apiCallUpdateAddress')
   cy.intercept('GET', '2.0/account/*/external-identifier?*', {
+    fixture: 'api/account/externalIdentifier'
+  })
+  cy.intercept('POST', '2.0/account/*/external-identifier', {
     fixture: 'api/account/externalIdentifier'
   })
   cy.intercept('POST', '1.0/ecommerce/login/token', {

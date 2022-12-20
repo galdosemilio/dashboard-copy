@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "createdAt": "2017-10-04T14:10:10.759Z",
+      "hierarchyPath": ["30"],
+      "id": "30",
+      "isActive": true,
+      "name": "0000 Test IP Clinic (SD)",
+      "shortcode": "ip_000001"
+    },
+    {
+      "createdAt": "2017-05-12T18:00:07.116Z",
+      "hierarchyPath": ["44"],
+      "id": "44",
+      "isActive": true,
+      "name": "0005 - Pharmasave #005 /Pharmasave",
+      "shortcode": "ip_102303"
+    },
+    {
+      "createdAt": "2018-01-25T19:45:44.496Z",
+      "hierarchyPath": ["4036", "1", "30"],
+      "id": "4036",
+      "isActive": true,
+      "name": "000 AA Org",
+      "shortcode": "5"
+    }
+  ],
+  "pagination": {
+    "totalCount": 3
+  }
+}
