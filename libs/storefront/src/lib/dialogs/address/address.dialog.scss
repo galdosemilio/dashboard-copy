@@ -32,3 +32,9 @@
 ::ng-deep .mat-select-panel-wrap {
   max-width: fit-content;
 }
+
+::ng-deep {
+  .cdk-overlay-pane {
+    transform: unset !important;
+  }
+}
