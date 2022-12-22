@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Verbände",
+    "EXTERNAL_IDENTIFIERS": "Externe Kennungen",
     "INTEGRATIONS": "Service Sync",
     "LOGS": {
       "_TITLE": "Logs"
@@ -155,6 +156,8 @@
     "ACTIONS": "Aktionen",
     "ACTIVATE": "Aktivieren",
     "ACTIVE": "Aktiv",
+    "ADD": "Addieren",
+    "ADD_EXTERNAL_IDENTIFIER": "Externe Kennung hinzufügen",
     "ADD_LANGUAGE": "Sprache hinzufügen",
     "ALL": "Alles",
     "AND": "und",
@@ -187,6 +190,8 @@
     "DASHBOARD": "Übersichtstafel",
     "DEACTIVATE": "Deaktivieren",
     "DELETE": "",
+    "DELETE_EXTERNAL_IDENTIFIER": "Externe Kennung löschen",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "Möchten Sie die externe Kennung wirklich löschen?",
     "DESCRIPTION": "Beschreibung",
     "DIGITAL_LIBRARY": "Digitale Bibliothek",
     "DISABLED": "Deaktiviert",
@@ -289,6 +294,7 @@
     "UPDATE": "Aktualisieren",
     "UPDATE_EMAIL_TEMPLATE": "",
     "UPLOAD_IN_PROGRESS": "Hochladen läuft",
+    "VALUE": "Wert",
     "VERIFICATION_CODE": "Bestätigungscode",
     "VIDEOCONFERENCE": "Videokonferenz",
     "VIDEOCONFERENCE_RECORDING": "Videokonferenzaufzeichnung",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "Der Upload ist fehlgeschlagen, bitte versuchen Sie es erneut.",
       "DATA_TYPE_IS_REQUIRED": "{{ type }} ist erforderlich",
       "EMAIL_ALREADY_REGISTERED": "Die E-Mail Adresse ist bereits registriert.",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "Keine resultierenden externen Kennungen",
       "EMPTY_USER_LISTING": "Keine resultierenden Nutzer",
       "FILL_THE_FORM": "Bitte füllen Sie alle Felder aus, bevor Sie fortfahren.",
       "INVALID_EMAIL": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",

@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associações",
+    "EXTERNAL_IDENTIFIERS": "Identificadores Externos",
     "INTEGRATIONS": "Serviço de Sincronização",
     "LOGS": {
       "_TITLE": "Entradas"
@@ -155,6 +156,8 @@
     "ACTIONS": "Ações",
     "ACTIVATE": "Ativar",
     "ACTIVE": "Ativo",
+    "ADD": "Adicionar",
+    "ADD_EXTERNAL_IDENTIFIER": "Adicionar identificador externo",
     "ADD_LANGUAGE": "Adicionar idioma",
     "ALL": "Tudo",
     "AND": "e",
@@ -187,6 +190,8 @@
     "DASHBOARD": "Painel de Controle",
     "DEACTIVATE": "Desativar",
     "DELETE": "",
+    "DELETE_EXTERNAL_IDENTIFIER": "Excluir identificador externo",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "Tem certeza de que deseja excluir o identificador externo?",
     "DESCRIPTION": "Descrição",
     "DIGITAL_LIBRARY": "Livraria Digital",
     "DISABLED": "Desativado",
@@ -289,6 +294,7 @@
     "UPDATE": "Atualizar",
     "UPDATE_EMAIL_TEMPLATE": "",
     "UPLOAD_IN_PROGRESS": "Atualização em Progresso",
+    "VALUE": "Valor",
     "VERIFICATION_CODE": "Código de verificação",
     "VIDEOCONFERENCE": "Videoconferência",
     "VIDEOCONFERENCE_RECORDING": "Gravação de videoconferência",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "O upload falhou, por favor tente novamente.",
       "DATA_TYPE_IS_REQUIRED": "{{type}} é obrigatório",
       "EMAIL_ALREADY_REGISTERED": "Este email já se encontra registado.",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "Nenhum identificador externo resultante",
       "EMPTY_USER_LISTING": "Nenhum utilizador resultante",
       "FILL_THE_FORM": "Por favor complete todos os campos antes de continuar.",
       "INVALID_EMAIL": "Por favor introduza um ederenço de email válido.",

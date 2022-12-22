@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Foreninger",
+    "EXTERNAL_IDENTIFIERS": "Eksterne identifikatorer",
     "INTEGRATIONS": "Tjeneste Sync",
     "LOGS": {
       "_TITLE": "Logfiler"
@@ -155,6 +156,8 @@
     "ACTIONS": "Handlinger",
     "ACTIVATE": "Aktiver",
     "ACTIVE": "Aktiv",
+    "ADD": "Tilføje",
+    "ADD_EXTERNAL_IDENTIFIER": "Tilføj ekstern identifikator",
     "ADD_LANGUAGE": "Tilføj sprog",
     "ALL": "Alle",
     "AND": "og",
@@ -187,6 +190,8 @@
     "DASHBOARD": "Kontrolpanel",
     "DEACTIVATE": "Deaktivér",
     "DELETE": "Slet",
+    "DELETE_EXTERNAL_IDENTIFIER": "Slet ekstern identifikator",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "Er du sikker på, at du vil slette ekstern identifikator?",
     "DESCRIPTION": "Beskrivelse",
     "DIGITAL_LIBRARY": "Digital Library",
     "DISABLED": "Handicappet",
@@ -289,6 +294,7 @@
     "UPDATE": "Opdater",
     "UPDATE_EMAIL_TEMPLATE": "Opdater e-mail-skabelon",
     "UPLOAD_IN_PROGRESS": "Upload i Gang",
+    "VALUE": "Værdi",
     "VERIFICATION_CODE": "Verifikationskode",
     "VIDEOCONFERENCE": "Video konference",
     "VIDEOCONFERENCE_RECORDING": "Videokonferenceoptagelse",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "Upload mislykkedes, prøv venligst igen.",
       "DATA_TYPE_IS_REQUIRED": "{{ type }} er påkrævet",
       "EMAIL_ALREADY_REGISTERED": "Denne E-mail Adresse er allerede registreret.",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "Ingen resulterende eksterne identifikatorer",
       "EMPTY_USER_LISTING": "Ingen resulterende brugere",
       "FILL_THE_FORM": "Udfyld venligst alle felter, inden du fortsætter.",
       "INVALID_EMAIL": "Indtast venligst en gyldig e-mailadresse.",

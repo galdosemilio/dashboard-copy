@@ -8,6 +8,7 @@ import {
   AccountsListComponent,
   AffiliationComponent
 } from './accounts.index'
+import { ExternalIdentifiersComponent } from './external-identifiers'
 
 export const routes: Routes = [
   {
@@ -83,11 +84,15 @@ export function getAccountChildren(accountType: AccountTypeId): Routes {
         {
           path: 'orgs',
           component: AffiliationComponent
-        }
+        },
         // {
         //   path: 'logs',
         //   component: LogsListComponent
         // }
+        {
+          path: 'external-identifiers',
+          component: ExternalIdentifiersComponent
+        }
       ]
     }
   ]

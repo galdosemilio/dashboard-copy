@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associazioni",
+    "EXTERNAL_IDENTIFIERS": "Identificatori esterni",
     "INTEGRATIONS": "Servizio di Sincronizzazione",
     "LOGS": {
       "_TITLE": "Accessi"
@@ -155,6 +156,8 @@
     "ACTIONS": "Azioni",
     "ACTIVATE": "Attiva",
     "ACTIVE": "Attivo",
+    "ADD": "Aggiungere",
+    "ADD_EXTERNAL_IDENTIFIER": "Aggiungi identificatore esterno",
     "ADD_LANGUAGE": "Aggiungi lingua",
     "ALL": "Tutti",
     "AND": "e",
@@ -187,6 +190,8 @@
     "DASHBOARD": "Cruscotto",
     "DEACTIVATE": "Disattiva",
     "DELETE": "",
+    "DELETE_EXTERNAL_IDENTIFIER": "Elimina identificatore esterno",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "Sei sicuro di voler eliminare l'identificatore esterno?",
     "DESCRIPTION": "Descrizione",
     "DIGITAL_LIBRARY": "Biblioteca Digitale",
     "DISABLED": "Disabilitato",
@@ -289,6 +294,7 @@
     "UPDATE": "Aggiorna",
     "UPDATE_EMAIL_TEMPLATE": "",
     "UPLOAD_IN_PROGRESS": "Caricamento in Corso",
+    "VALUE": "Valore",
     "VERIFICATION_CODE": "Codice di Verifica",
     "VIDEOCONFERENCE": "Video conferenza",
     "VIDEOCONFERENCE_RECORDING": "Registrazione della videoconferenza",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "Caricamento fallito, ti preghiamo di riprovare.",
       "DATA_TYPE_IS_REQUIRED": "{{ type }} è obbligatorio",
       "EMAIL_ALREADY_REGISTERED": "L'Indirizzo E-mail è già registrato.",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "Nessun identificatore esterno risultante",
       "EMPTY_USER_LISTING": "Non risultano utenti",
       "FILL_THE_FORM": "Ti preghiamo di completare tutti i campi prima di continuare.",
       "INVALID_EMAIL": "Ti preghiamo di inserire un indirizzo e-mail valido.",

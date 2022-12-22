@@ -4,7 +4,12 @@ export * from './affiliation'
 export * from './list'
 
 import { AccountDialogs, AccountResolver, AccountRoutes } from '@board/services'
-import { AccountsDatabase, AccountsDataSource } from '@coachcare/backend/data'
+import {
+  AccountsDatabase,
+  AccountsDataSource,
+  ExternalIdentifiersDatabase,
+  ExternalIdentifiersDataSource
+} from '@coachcare/backend/data'
 import { AffiliationAccountsDatabase } from '@coachcare/backend/data'
 import { AccountComponent } from './account'
 import {
@@ -12,7 +17,11 @@ import {
   AffiliatedOrgComponent,
   AffiliationComponent
 } from './affiliation'
-import { AccountCSVDialogComponent } from './dialogs'
+import {
+  AccountCSVDialogComponent,
+  AddExternalIdentifierDialogComponent
+} from './dialogs'
+import { ExternalIdentifiersComponent } from './external-identifiers'
 import { AccountFormComponent, DeviceSyncComponent } from './form'
 import { AccountsListComponent, AccountsTableComponent } from './list'
 
@@ -25,10 +34,15 @@ export const AccountsComponents = [
   AffiliatedAccountsTableComponent,
   AffiliationComponent,
   AffiliatedOrgComponent,
-  DeviceSyncComponent
+  DeviceSyncComponent,
+  AddExternalIdentifierDialogComponent,
+  ExternalIdentifiersComponent
 ]
 
-export const AccountsEntryComponents = [AccountCSVDialogComponent]
+export const AccountsEntryComponents = [
+  AccountCSVDialogComponent,
+  AddExternalIdentifierDialogComponent
+]
 
 export const AccountsProviders = [
   AccountsDatabase,
@@ -36,5 +50,7 @@ export const AccountsProviders = [
   AccountRoutes,
   AccountDialogs,
   AccountsDataSource,
-  AffiliationAccountsDatabase
+  AffiliationAccountsDatabase,
+  ExternalIdentifiersDataSource,
+  ExternalIdentifiersDatabase
 ]

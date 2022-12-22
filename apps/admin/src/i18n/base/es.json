@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Asociaciones",
+    "EXTERNAL_IDENTIFIERS": "Identificadores externos",
     "INTEGRATIONS": "Integraciones",
     "LOGS": {
       "_TITLE": "Logs"
@@ -155,6 +156,8 @@
     "ACTIONS": "Acciones",
     "ACTIVATE": "Activar",
     "ACTIVE": "Activo",
+    "ADD": "Ajouter",
+    "ADD_EXTERNAL_IDENTIFIER": "Agregar identificador externo",
     "ADD_LANGUAGE": "Añadir Idioma",
     "ALL": "Todas",
     "AND": "y",
@@ -187,6 +190,8 @@
     "DASHBOARD": "Tablero",
     "DEACTIVATE": "Desactivar",
     "DELETE": "Eliminar",
+    "DELETE_EXTERNAL_IDENTIFIER": "Eliminar identificador externo",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "¿Está seguro de que desea eliminar el identificador externo?",
     "DESCRIPTION": "Descripción",
     "DIGITAL_LIBRARY": "Biblioteca Digital",
     "DISABLED": "Deshabilitado",
@@ -289,6 +294,7 @@
     "UPDATE": "Actualizar",
     "UPDATE_EMAIL_TEMPLATE": "Actualizar Plantilla de Email",
     "UPLOAD_IN_PROGRESS": "Carga en Progreso",
+    "VALUE": "Valor",
     "VERIFICATION_CODE": "Código de Verificación",
     "VIDEOCONFERENCE": "Videoconferencia",
     "VIDEOCONFERENCE_RECORDING": "Grabación de Videoconferencia",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "Hubo un error en la carga, por favor intente de nuevo.",
       "DATA_TYPE_IS_REQUIRED": "{{type}} es obligatorio",
       "EMAIL_ALREADY_REGISTERED": "El correo electrónico ya está registrado.",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "No hay identificadores externos resultantes",
       "EMPTY_USER_LISTING": "No hay resultados",
       "FILL_THE_FORM": "Por favor complete todos los campos antes de continuar.",
       "INVALID_EMAIL": "Por favor proporcione un correo electrónico válido",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { AccountSingle } from '@coachcare/sdk'
+import { AccountSingle, AccountTypeId } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-accounts-account',
@@ -11,6 +11,7 @@ export class AccountComponent implements OnInit {
   accountType: string
   id: string
   item: AccountSingle
+  AccountTypeId = AccountTypeId
 
   constructor(private route: ActivatedRoute) {}
 

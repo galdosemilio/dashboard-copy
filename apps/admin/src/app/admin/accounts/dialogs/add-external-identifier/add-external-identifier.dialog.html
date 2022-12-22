@@ -1,0 +1,67 @@
+<div matDialogTitle>
+  <div>
+    <span matDialogTitle [innerHTML]="'GLOBAL.ADD_EXTERNAL_IDENTIFIER' | translate"></span>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<mat-dialog-content>
+  <form [formGroup]="form" novalidate>
+    <mat-form-field>
+      <input matInput type="text" #trigger
+        [formControl]="autocomplete"
+        [matAutocomplete]="auto"
+        [required]="true"
+        [placeholder]="'GLOBAL.ORGANIZATION' | translate"
+        (blur)="onBlurOrg()"
+        (change)="$event.stopPropagation()">
+      <mat-error *ngIf="form.get('organization').getError('required')">
+        {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.ORGANIZATION' | translate } }}
+      </mat-error>
+      <mat-autocomplete #auto="matAutocomplete"
+      [displayWith]="displayFn.bind(this)">
+        <mat-option *ngFor="let organization of organizations" [value]="organization">
+          <p matLine>{{ organization.viewValue }}</p>
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-icon *ngIf="hasSelected"
+        class="ccr-remove"
+        [matTooltip]="tooltip"
+        (click)="removeOrg()"
+        matSuffix>cancel</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+      formControlName="name"
+      required
+      [placeholder]="'GLOBAL.NAME' | translate">
+      <mat-error *ngIf="form.get('name').getError('required')">
+        {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.NAME' | translate } }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+      formControlName="value"
+      required
+      [placeholder]="'GLOBAL.VALUE' | translate">
+      <mat-error *ngIf="form.get('value').getError('required')">
+        {{ 'NOTIFY.ERROR.DATA_TYPE_IS_REQUIRED' | translate:{type: 'GLOBAL.VALUE' | translate } }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+  (click)="onSubmit()"
+  mat-button
+  class="ccr-button">
+    <span>
+      {{ 'GLOBAL.ADD' | translate }}
+    </span>
+  </button>
+</mat-dialog-actions>

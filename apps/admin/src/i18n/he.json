@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "משוייכים",
+    "EXTERNAL_IDENTIFIERS": "מזהים חיצוניים",
     "INTEGRATIONS": "Sync שירות",
     "LOGS": {
       "_TITLE": "רישומי"
@@ -155,6 +156,8 @@
     "ACTIONS": "פעולות",
     "ACTIVATE": "פעיל",
     "ACTIVE": "פָּעִיל",
+    "ADD": "לְהוֹסִיף",
+    "ADD_EXTERNAL_IDENTIFIER": "הוסף מזהה חיצוני",
     "ADD_LANGUAGE": "הוספת שפה",
     "ALL": "את כל",
     "AND": "ו",
@@ -187,6 +190,8 @@
     "DASHBOARD": "לוח בקרה",
     "DEACTIVATE": "לא פעיל",
     "DELETE": "מחק",
+    "DELETE_EXTERNAL_IDENTIFIER": "מחק מזהה חיצוני",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "האם אתה בטוח שברצונך למחוק מזהה חיצוני?",
     "DESCRIPTION": "תיאור",
     "DIGITAL_LIBRARY": "ספרייה דיגיטלית",
     "DISABLED": "נכים",
@@ -289,6 +294,7 @@
     "UPDATE": "עדכון",
     "UPDATE_EMAIL_TEMPLATE": "עדכן תבנית דוא\"ל",
     "UPLOAD_IN_PROGRESS": "ההעלאה מתבצעת",
+    "VALUE": "ערך",
     "VERIFICATION_CODE": "קוד אימות",
     "VIDEOCONFERENCE": "ועידת וידיאו",
     "VIDEOCONFERENCE_RECORDING": "VideoConference הקלטה",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "ההעלאה נכשלה, יש לנסות שוב.",
       "DATA_TYPE_IS_REQUIRED": "נדרש {{ type }}",
       "EMAIL_ALREADY_REGISTERED": "כתובת האימייל כבר רשומה במערכת.",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "אין מזהים חיצוניים שנוצרו",
       "EMPTY_USER_LISTING": "אין תוצאות משתמשים",
       "FILL_THE_FORM": "יש למלא את כל השדות לפני שממשיכים.",
       "INVALID_EMAIL": "יש להזין כתובת מייל חוקית.",

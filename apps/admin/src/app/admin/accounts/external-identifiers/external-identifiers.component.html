@@ -1,0 +1,67 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center" fxLayoutGap="10px">
+    <a mat-button color="primary" class="ccr-icon-button"
+    fxFlex="0 0 auto" fxFlex.xs="100%" (click)="onShowAddDialog()">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'GLOBAL.CREATE' | translate }}</span>
+    </a>
+  </div>
+</div>
+<div class="ccr-table" [class.ccr-loading]="source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
+  <mat-table [dataSource]="source">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">ID</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+    >
+        {{ row.id }}
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="organization">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.ORGANIZATION' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.organization.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.NAME' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="value">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.VALUE' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.value }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.ACTIONS' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign="end center" fxLayoutAlign.xs=" center" fxFlex.xs="100%">
+        <span (click)="onShowDeleteConfirm(row)">{{ 'GLOBAL.DELETE' | translate }}</span>
+        <button (click)="onShowDeleteConfirm(row)" mat-icon-button [title]="'GLOBAL.DEACTIVATE' | translate"><mat-icon>delete</mat-icon></button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayout="row wrap"
+    *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+  <ccr-table-overlay [source]="source" [emptyMsg]="'NOTIFY.ERROR.EMPTY_EXTERNAL_IDENTIFIERS' | translate"></ccr-table-overlay>
+</div>

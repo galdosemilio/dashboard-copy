@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associations",
+    "EXTERNAL_IDENTIFIERS": "Identifiants externes",
     "INTEGRATIONS": "Sync service",
     "LOGS": {
       "_TITLE": "Connexions"
@@ -155,6 +156,8 @@
     "ACTIONS": "Actions",
     "ACTIVATE": "Activer",
     "ACTIVE": "Actif",
+    "ADD": "",
+    "ADD_EXTERNAL_IDENTIFIER": "Ajouter un identifiant externe",
     "ADD_LANGUAGE": "Ajouter une langue",
     "ALL": "Tout",
     "AND": "et",
@@ -187,6 +190,8 @@
     "DASHBOARD": "Tableau de bord",
     "DEACTIVATE": "Désactiver",
     "DELETE": "",
+    "DELETE_EXTERNAL_IDENTIFIER": "Supprimer l'identifiant externe",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "Voulez-vous vraiment supprimer l'identifiant externe ?",
     "DESCRIPTION": "La description",
     "DIGITAL_LIBRARY": "Bibliothèque digitale",
     "DISABLED": "Désactivé",
@@ -289,6 +294,7 @@
     "UPDATE": "Mise à jour",
     "UPDATE_EMAIL_TEMPLATE": "",
     "UPLOAD_IN_PROGRESS": "Mise à jour en cours",
+    "VALUE": "Évaluer",
     "VERIFICATION_CODE": "Code de vérification",
     "VIDEOCONFERENCE": "Conférence vidéo",
     "VIDEOCONFERENCE_RECORDING": "Enregistrement de vidéoconférence",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "Le téléchargement a échoué, veuillez réessayer",
       "DATA_TYPE_IS_REQUIRED": "{{ type }} est requis",
       "EMAIL_ALREADY_REGISTERED": "L’adresse mail est déjà enregistrée",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "Aucun identifiant externe résultant",
       "EMPTY_USER_LISTING": "Aucun résultat d’utilisateurs",
       "FILL_THE_FORM": "Veuillez compléter tous les champs avant de continuer",
       "INVALID_EMAIL": "Veuillez entrer une adresse mail valide",

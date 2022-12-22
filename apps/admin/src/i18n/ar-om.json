@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associations",
+    "EXTERNAL_IDENTIFIERS": "المعرفات الخارجية",
     "INTEGRATIONS": "خدمة مزامنة",
     "LOGS": {
       "_TITLE": "Logs"
@@ -155,6 +156,8 @@
     "ACTIONS": "إجراءات",
     "ACTIVATE": "Activate",
     "ACTIVE": "نشيط",
+    "ADD": "يضيف",
+    "ADD_EXTERNAL_IDENTIFIER": "أضف معرف خارجي",
     "ADD_LANGUAGE": "إضافة لغة",
     "ALL": "الكل",
     "AND": "and",
@@ -187,6 +190,8 @@
     "DASHBOARD": "لوحة التحكم",
     "DEACTIVATE": "تعطيل",
     "DELETE": "حذف",
+    "DELETE_EXTERNAL_IDENTIFIER": "حذف المعرف الخارجي",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "هل أنت متأكد أنك تريد حذف المعرف الخارجي؟",
     "DESCRIPTION": "وصف",
     "DIGITAL_LIBRARY": "المكتبة الرقمية",
     "DISABLED": "معاق",
@@ -289,6 +294,7 @@
     "UPDATE": "تحديث",
     "UPDATE_EMAIL_TEMPLATE": "تحديث قالب البريد الإلكتروني",
     "UPLOAD_IN_PROGRESS": "Upload in Progress",
+    "VALUE": "قيمة",
     "VERIFICATION_CODE": "شيفرة التأكيد",
     "VIDEOCONFERENCE": "مؤتمر عبر الفيديو",
     "VIDEOCONFERENCE_RECORDING": "تسجيل الفيديو تسجيل",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "لقد فشل التحميل، يُرجى إعادة المحاولة",
       "DATA_TYPE_IS_REQUIRED": "{{type}} مطلوب",
       "EMAIL_ALREADY_REGISTERED": "عنوان البريد الإلكتروني مسجل بالفعل",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "لا توجد معرفات خارجية ناتجة",
       "EMPTY_USER_LISTING": "No resulting users",
       "FILL_THE_FORM": "يُرجى إكمال جميع الحقول قبل المتابعة",
       "INVALID_EMAIL": "يُرجى إدخال عنوان بريد إلكتروني صالح",

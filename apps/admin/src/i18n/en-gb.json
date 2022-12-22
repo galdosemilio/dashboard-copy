@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associations",
+    "EXTERNAL_IDENTIFIERS": "External Identifiers",
     "INTEGRATIONS": "Service Sync",
     "LOGS": {
       "_TITLE": "Logs"
@@ -155,6 +156,8 @@
     "ACTIONS": "Actions",
     "ACTIVATE": "Activate",
     "ACTIVE": "Active",
+    "ADD": "Add",
+    "ADD_EXTERNAL_IDENTIFIER": "Add External Identifier",
     "ADD_LANGUAGE": "Add Language",
     "ALL": "All",
     "AND": "and",
@@ -187,6 +190,8 @@
     "DASHBOARD": "Dashboard",
     "DEACTIVATE": "Deactivate",
     "DELETE": "Delete",
+    "DELETE_EXTERNAL_IDENTIFIER": "Delete External Identifier",
+    "DELETE_EXTERNAL_IDENTIFIER_PROMPT": "Are you sure you want to delete external identifier?",
     "DESCRIPTION": "Description",
     "DIGITAL_LIBRARY": "Digital Library",
     "DISABLED": "Disabled",
@@ -289,6 +294,7 @@
     "UPDATE": "Update",
     "UPDATE_EMAIL_TEMPLATE": "Update Email Template",
     "UPLOAD_IN_PROGRESS": "Upload in Progress",
+    "VALUE": "Value",
     "VERIFICATION_CODE": "Verification Code",
     "VIDEOCONFERENCE": "Videoconference",
     "VIDEOCONFERENCE_RECORDING": "Videoconference Recording",
@@ -363,6 +369,7 @@
       "AVATAR_UPLOAD_FAILED": "The upload failed, please try again.",
       "DATA_TYPE_IS_REQUIRED": "{{ type }} is required",
       "EMAIL_ALREADY_REGISTERED": "The Email Address is already registered.",
+      "EMPTY_EXTERNAL_IDENTIFIERS": "No resulting external identifiers",
       "EMPTY_USER_LISTING": "No resulting users",
       "FILL_THE_FORM": "Please complete all fields before continuing.",
       "INVALID_EMAIL": "Please enter a valid email address.",
