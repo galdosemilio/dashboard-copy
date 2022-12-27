@@ -19,7 +19,7 @@
             <ccr-address-form
             [markAsTouched]="markAsTouched"
             [mode]="account ? 'edit' : 'create'"
-            [readonly]="isBillingAddressReadonly && userAddresses[i]?.labels.includes(billingAddressLabelId)"
+            [readonly]="!!account"
             [types]="labelOptions"
             formControlName="address"
             required></ccr-address-form>

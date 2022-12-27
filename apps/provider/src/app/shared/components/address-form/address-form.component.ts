@@ -6,12 +6,14 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  ViewChild
 } from '@angular/core'
 import {
   AbstractControl,
   ControlValueAccessor,
   FormBuilder,
+  FormControl,
   FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -19,10 +21,12 @@ import {
   Validator,
   Validators
 } from '@angular/forms'
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { UserAddress } from '@app/shared'
+import { AddressProvider, AddressSuggestion } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import { debounceTime } from 'rxjs/operators'
+import { debounceTime, filter, map, switchMap } from 'rxjs/operators'
 import { LabelOption } from '../addresses/addresses.component'
 
 @UntilDestroy()
@@ -44,7 +48,8 @@ import { LabelOption } from '../addresses/addresses.component'
   ]
 })
 export class AddressFormComponent
-  implements ControlValueAccessor, OnInit, OnDestroy, Validator {
+  implements ControlValueAccessor, OnInit, OnDestroy, Validator
+{
   form: FormGroup
 
   @Input() types: LabelOption[] = []
@@ -55,11 +60,42 @@ export class AddressFormComponent
 
   @Output() changeAddress = new EventEmitter<any>()
 
-  constructor(private builder: FormBuilder, private cdr: ChangeDetectorRef) {}
+  public autocomplete = new FormControl('')
+  public addressSuggestion: Array<AddressSuggestion> = []
+
+  @ViewChild(MatAutocompleteTrigger) inputAutoComplete: MatAutocompleteTrigger
+
+  constructor(
+    private builder: FormBuilder,
+    private cdr: ChangeDetectorRef,
+    private address: AddressProvider
+  ) {}
 
   public ngOnInit() {
     // setup the FormGroup
     this.createForm()
+
+    if (this.mode === 'create') {
+      this.form
+        .get('address1')
+        .valueChanges.pipe(
+          debounceTime(500),
+          untilDestroyed(this),
+          filter((val) => !!val && typeof val === 'string'),
+          switchMap((val) => {
+            return this.address.getAddressSuggestion({
+              query: val || ''
+            })
+          }),
+          map((res) => res.data)
+        )
+        .subscribe((addresses) => {
+          if (addresses.length > 0) {
+            this.addressSuggestion = addresses
+            this.inputAutoComplete.openPanel()
+          }
+        })
+    }
   }
 
   public ngOnDestroy(): void {}
@@ -106,7 +142,11 @@ export class AddressFormComponent
     }
 
     this.form.valueChanges
-      .pipe(untilDestroyed(this), debounceTime(500))
+      .pipe(
+        untilDestroyed(this),
+        debounceTime(500),
+        filter((controls) => typeof controls?.address1 === 'string')
+      )
       .subscribe((controls) => {
         this.onChange(controls)
       })
@@ -164,5 +204,20 @@ export class AddressFormComponent
     }
 
     return errors
+  }
+
+  public selectAutoSuggestion(address: AddressSuggestion) {
+    this.form.patchValue(
+      {
+        address1: address.address1,
+        address2: '',
+        city: address.city,
+        stateProvince: address.stateProvince,
+        postalCode: address.postalCode
+      },
+      { emitEvent: false }
+    )
+
+    this.onChange(this.form.value)
   }
 }

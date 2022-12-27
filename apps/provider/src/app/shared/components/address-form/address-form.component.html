@@ -12,8 +12,13 @@
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-form-field>
-        <input matInput required formControlName="address1"
+        <input autocomplete="nope" matInput required [matAutocomplete]="auto" formControlName="address1"
         [placeholder]="'BOARD.ADDRESS_LINE_ONE' | translate">
+        <mat-autocomplete (optionSelected)='selectAutoSuggestion($event.option.value)' #auto="matAutocomplete">
+          <mat-option *ngFor="let option of addressSuggestion" [value]="option">
+            {{option.address1}}, {{option.city}}, {{option.stateProvince}}, {{option.postalCode}}
+          </mat-option>
+        </mat-autocomplete>
         <mat-error *ngIf="form.get('address1').getError('required')">{{ 'NOTIFY.ERROR.ADDRESS_LINE_ONE_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
     </mat-grid-tile>
