@@ -31,6 +31,10 @@
         <p>{{ 'GLOBAL.SUBTOTAL' | translate }}</p>
         <p>{{ cart.attributes.display_item_total }}</p>
       </div>
+      <div fxLayout="row" *ngIf="totalDiscount" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <p>{{ 'GLOBAL.DISCOUNT' | translate }}</p>
+        <p>{{ totalDiscount }}</p>
+      </div>
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
         <h2>{{ 'GLOBAL.TOTAL' | translate }}</h2>
         <h2>{{ cart.attributes.display_total }}</h2>

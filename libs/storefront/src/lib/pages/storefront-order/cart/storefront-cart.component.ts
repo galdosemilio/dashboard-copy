@@ -22,6 +22,12 @@ export class StorefrontCartComponent implements OnInit {
     return this.cart?.shipment?.attributes?.public_metadata?.description || ''
   }
 
+  public get totalDiscount(): string | null {
+    return this.cart?.attributes?.adjustment_total === '0.0'
+      ? null
+      : this.cart?.attributes?.display_adjustment_total
+  }
+
   constructor(
     private storefront: StorefrontService,
     private notifier: NotifierService

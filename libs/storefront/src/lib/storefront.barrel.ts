@@ -3,7 +3,8 @@ import {
   StorefrontPaymentMethodEntryComponent,
   StorefrontCategoryIconComponent,
   StorefrontLoadingComponent,
-  StorefrontNoticeComponent
+  StorefrontNoticeComponent,
+  StorefrontDiscountFormComponent
 } from './components'
 import {
   StorefrontAddressDialog,
@@ -46,7 +47,8 @@ export const StorefrontComponents = [
   StorefrontPaymentMethodEntryComponent,
   StorefrontCategoryIconComponent,
   StorefrontLoadingComponent,
-  StorefrontNoticeComponent
+  StorefrontNoticeComponent,
+  StorefrontDiscountFormComponent
 ]
 
 export const StorefrontProviders = [

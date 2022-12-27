@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Adresse Ligne 2",
     "ADD_TO_CART": "Ajouter au chariot",
     "ALL": "Tout",
+    "APPLY": "Appliquer",
     "BACK_TO_STORE": "Retour au magasin",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Perte de poids pour des gains de santé",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "S'il y a autre chose que vous aimeriez savoir, n'hésitez pas à contacter le service client",
     "CONTINUE_SHOPPING": "Continuer vos achats",
     "COUNTRY": "Pays",
+    "COUPON_CODE": "Code promo",
     "DATE": "Date",
     "DEFAULT": "Défaut",
     "DELETE": "Supprimer",
     "DELETE_PAYMENT_METHOD": "Supprimer la méthode de paiement",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Êtes-vous sûr de vouloir supprimer la méthode de paiement *************{{last4}}?.<br><br><strong>Cette action ne peut pas être annulée.</strong>",
     "DESCRIPTION": "La description",
+    "DISCOUNT": "Remise",
     "EMPTY_CART": "Votre panier est vide",
     "EXPIRES": "Expire: {{date}}",
     "GO_TO_CART": "Aller au panier",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "Nombre total de produits: {{ total }}",
     "VIEW_ORDER_DETAILS": "Voir d'autres détails",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Nos pondremos en contacto nuevamente con los detalles de entrega y seguimiento tan pronto como su pedido salga de nuestro almacén, no podemos cambiar nada, incluidos los artículos o la dirección de entrega."
+  },
+  "MENU": {
+    "LOGOUT": "Se déconnecter"
   },
   "NOTIFY": {
     "ERROR": {

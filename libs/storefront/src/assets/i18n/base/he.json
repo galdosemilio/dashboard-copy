@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "שורת כתובת 2",
     "ADD_TO_CART": "הוסף לעגלה",
     "ALL": "את כל",
+    "APPLY": "להגיש מועמדות",
     "BACK_TO_STORE": "חזור לחנות",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "ירידה במשקל לרווחים בריאותיים",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "אם יש משהו נוסף שתרצה לדעת, אל תהסס לפנות לשירות הלקוחות",
     "CONTINUE_SHOPPING": "המשך בקניות",
     "COUNTRY": "מדינה",
+    "COUPON_CODE": "קוד קופון",
     "DATE": "תאריך",
     "DEFAULT": "בְּרִירַת מֶחדָל",
     "DELETE": "מחיקה",
     "DELETE_PAYMENT_METHOD": "מחיקת אמצעי תשלום.",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "האם אתה בטוח שברצונך למחוק את שיטת התשלום ************{{last4}}?<br><br><strong>פעולה זו לא ניתן לבטל.</strong>",
     "DESCRIPTION": "תיאור",
+    "DISCOUNT": "הנחה",
     "EMPTY_CART": "העגלה שלך ריקה",
     "EXPIRES": "{{date}} :יפוג",
     "GO_TO_CART": "לך לעגלה",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "מספר סהכ של מוצרים: {{ total }}",
     "VIEW_ORDER_DETAILS": "צפה בפרטי הזמנה",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "נהיה בקשר שוב עם פרטי משלוח ומעקב ברגע שההזמנה שלך תצא מהמחסן שלנו עליה, לא נוכל לשנות דבר כולל הפריטים או כתובת המשלוח."
+  },
+  "MENU": {
+    "LOGOUT": "להתנתק"
   },
   "NOTIFY": {
     "ERROR": {

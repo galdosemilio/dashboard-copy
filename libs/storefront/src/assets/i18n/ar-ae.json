@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "سطر العنوان 2",
     "ADD_TO_CART": "أضف إلى السلة",
     "ALL": "الجميع",
+    "APPLY": "تطبيق",
     "BACK_TO_STORE": "عودة للمخزن",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "فقدان الوزن من أجل مكاسب صحية",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "إذا كان هناك أي شيء آخر تود معرفته ، فلا تتردد في الاتصال بخدمة العملاء",
     "CONTINUE_SHOPPING": "مواصلة التسوق",
     "COUNTRY": "الدولة",
+    "COUPON_CODE": "رمز الكوبون",
     "DATE": "التاريخ",
     "DEFAULT": "تقصير",
     "DELETE": "حذف",
     "DELETE_PAYMENT_METHOD": "حذف طريقة الدفع",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "هل أنت متأكد أنك تريد حذف طريقة الدفع ************{{last4}}؟.<br><br><strong>لا يمكن التراجع عن هذا الإجراء.</strong>",
     "DESCRIPTION": "وصف",
+    "DISCOUNT": "تخفيض",
     "EMPTY_CART": "عربة التسوق فارغة",
     "EXPIRES": "{{date}} :تنتهي",
     "GO_TO_CART": "اذهب إلى عربة التسوق",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "إجمالي عدد المنتجات: {{total}}",
     "VIEW_ORDER_DETAILS": "معاينة تفاصيل الطلب",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "سنكون على اتصال مرة أخرى بتفاصيل التسليم والتتبع بمجرد أن يغادر طلبك مستودعاتنا ، لا يمكننا تغيير أي شيء بما في ذلك العناصر أو عنوان التسليم."
+  },
+  "MENU": {
+    "LOGOUT": "تسجيل خروج"
   },
   "NOTIFY": {
     "ERROR": {

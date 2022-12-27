@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Dirección Línea 2",
     "ADD_TO_CART": "Añadir al carrito",
     "ALL": "Todos",
+    "APPLY": "Solicitar",
     "BACK_TO_STORE": "Regresar a tienda",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Pérdida de peso para ganancias de salud",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Si hay algo más que le gustaría saber, no dude en contactar el Servicio de Atención al Cliente",
     "CONTINUE_SHOPPING": "Seguir comprando",
     "COUNTRY": "País",
+    "COUPON_CODE": "Código promocional",
     "DATE": "Fecha",
     "DEFAULT": "Primario",
     "DELETE": "Borrar",
     "DELETE_PAYMENT_METHOD": "Borrar Método de Pago",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "¿Está seguro de querer eliminar el método de pago ************{{last4}}?<br><br><strong>Esta acción no se puede deshacer.</strong>",
     "DESCRIPTION": "Descripción",
+    "DISCOUNT": "Descuento",
     "EMPTY_CART": "Tu carrito esta vacío",
     "EXPIRES": "Caduca: {{date}}",
     "GO_TO_CART": "Ir al carrito",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "Número total de productos: {{ total }}",
     "VIEW_ORDER_DETAILS": "Ver Detalles de la Orden",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Nos pondremos en contacto nuevamente con los detalles de entrega y seguimiento tan pronto como su pedido salga de nuestro almacén, no podemos cambiar nada, incluidos los artículos o la dirección de entrega."
+  },
+  "MENU": {
+    "LOGOUT": "Cerrar sesión"
   },
   "NOTIFY": {
     "ERROR": {

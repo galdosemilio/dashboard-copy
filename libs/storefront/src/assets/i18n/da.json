@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Adresselinje 2",
     "ADD_TO_CART": "Tilføj til kurv",
     "ALL": "Alle",
+    "APPLY": "ansøge",
     "BACK_TO_STORE": "Tilbage til butikken",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Vægttab for helbredsgevinster",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Hvis der er andet, du gerne vil vide, er du velkommen til at kontakte kundeservice",
     "CONTINUE_SHOPPING": "Fortsætte med at handle",
     "COUNTRY": "Land",
+    "COUPON_CODE": "Kuponkode",
     "DATE": "Dato",
     "DEFAULT": "Standard",
     "DELETE": "Slet",
     "DELETE_PAYMENT_METHOD": "Slet betalingsmetode",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Er du sikker på, at du vil slette betalingsmetoden ************{{last4}}?.<br><br><strong>Denne handling kan ikke fortrydes.</strong>",
     "DESCRIPTION": "Beskrivelse",
+    "DISCOUNT": "Rabat",
     "EMPTY_CART": "din vogn er tom",
     "EXPIRES": "Udløber: {{date}}",
     "GO_TO_CART": "Gå til indkøbsvogn",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "Samlet antal produkter: {{ total }}",
     "VIEW_ORDER_DETAILS": "Se ordre detaljer",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Vi vil kontakte os igen med leverings- og sporingsdetaljer, så snart din ordre forlader vores lager på den, vi er ikke i stand til at ændre noget, herunder varerne eller leveringsadressen."
+  },
+  "MENU": {
+    "LOGOUT": "Log ud"
   },
   "NOTIFY": {
     "ERROR": {

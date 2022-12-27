@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Endereço Linha 1",
     "ADD_TO_CART": "Adicionar ao carrinho",
     "ALL": "Tutto",
+    "APPLY": "Aplicar",
     "BACK_TO_STORE": "Voltar para a loja",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Perdita di peso per guadagni di salute",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Se houver mais alguma coisa que você gostaria de saber, sinta-se à vontade para entrar em contato com o Atendimento ao Cliente",
     "CONTINUE_SHOPPING": "Continue comprando",
     "COUNTRY": "País",
+    "COUPON_CODE": "Código do cupom",
     "DATE": "Data",
     "DEFAULT": "Predefinição",
     "DELETE": "Apagar",
     "DELETE_PAYMENT_METHOD": "Excluir método de pagamento",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Tem certeza de que deseja excluir o método de pagamento ************{{last4}}?.<br><br><strong>Esta ação não pode ser desfeita.</strong>",
     "DESCRIPTION": "Descrição",
+    "DISCOUNT": "Desconto",
     "EMPTY_CART": "Seu carrinho está vazio",
     "EXPIRES": "Expira: {{date}}",
     "GO_TO_CART": "Ir para o carrinho",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "Número total de produtos: {{ total }}",
     "VIEW_ORDER_DETAILS": "Exibir detalhes do pedido",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Entraremos em contato novamente com os detalhes de entrega e rastreamento assim que seu pedido sair do nosso depósito, não podemos alterar nada, incluindo os itens ou o endereço de entrega."
+  },
+  "MENU": {
+    "LOGOUT": "Sair"
   },
   "NOTIFY": {
     "ERROR": {

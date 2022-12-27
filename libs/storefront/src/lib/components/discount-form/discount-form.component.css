@@ -1,0 +1,12 @@
+button {
+  height: 56px;
+  padding: 0 10px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}
+
+::ng-deep .mat-form-field-suffix {
+  margin-top: -20px;
+}

@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Address Line 2",
     "ADD_TO_CART": "Add to Cart",
     "ALL": "All",
+    "APPLY": "Apply",
     "BACK_TO_STORE": "Back to store",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Weight Loss for Health Gains",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "If there's anything else you would like to know, feel free to contact Customer Service",
     "CONTINUE_SHOPPING": "Continue Shopping",
     "COUNTRY": "Country",
+    "COUPON_CODE": "Coupon Code",
     "DATE": "Date",
     "DEFAULT": "Default",
     "DELETE": "Delete",
     "DELETE_PAYMENT_METHOD": "Delete Payment Method",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Are you sure you want to delete the payment method ************{{last4}}?.<br><br><strong>This action cannot be undone.</strong>",
     "DESCRIPTION": "Description",
+    "DISCOUNT": "Discount",
     "EMPTY_CART": "Your cart is empty",
     "EXPIRES": "Expires: {{date}}",
     "GO_TO_CART": "Go to Cart",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "Total Number of Products: {{ total }}",
     "VIEW_ORDER_DETAILS": "View Order Details",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "We will be in touch again with delivery and tracking details as soon as your order leaves our warehouse on it, we are not able to change anything including the items or delivery address."
+  },
+  "MENU": {
+    "LOGOUT": "Logout"
   },
   "NOTIFY": {
     "ERROR": {

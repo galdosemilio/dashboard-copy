@@ -15,6 +15,7 @@
     "ADDRESS_LINE_TWO": "Anschrift Zeile 2",
     "ADD_TO_CART": "in den Warenkorb legen",
     "ALL": "Alle",
+    "APPLY": "Anwenden",
     "BACK_TO_STORE": "Zurück zum Laden",
     "BANNER_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "BANNER_TITLE": "Gewichtsverlust für Gesundheitsgewinne",
@@ -30,12 +31,14 @@
     "CONTACT_CUSTOMER_SERVICE_DESCRIPTION": "Wenn Sie noch etwas wissen möchten, wenden Sie sich bitte an den Kundendienst",
     "CONTINUE_SHOPPING": "Mit dem Einkaufen fortfahren",
     "COUNTRY": "Land",
+    "COUPON_CODE": "Gutscheincode",
     "DATE": "Datum",
     "DEFAULT": "Standard",
     "DELETE": "Löschen",
     "DELETE_PAYMENT_METHOD": "Zahlungsmethode löschen",
     "DELETE_PAYMENT_METHOD_DESCRIPTION": "Möchten Sie sicher, dass Sie die Zahlungsmethode löschen möchten *************{{last4}}?<br><br><strong>Diese Aktion kann nicht rückgängig gemacht werden.</strong>",
     "DESCRIPTION": "Beschreibung",
+    "DISCOUNT": "Rabatt",
     "EMPTY_CART": "Ihr Warenkorb ist leer",
     "EXPIRES": "Läuft ab: {{date}}",
     "GO_TO_CART": "Zum Einkaufskorb gehen",
@@ -80,6 +83,9 @@
     "TOTAL_PRODUCTS": "Gesamtzahl der Produkte: {{ total }}",
     "VIEW_ORDER_DETAILS": "Bestell Details ansehen",
     "WE_WILL_BE_IN_TOUCH_DESCRIPTION": "Sobald Ihre Bestellung unser Lager verlässt, werden wir Sie erneut mit Liefer- und Sendungsverfolgungsdetails kontaktieren. Wir können nichts ändern, einschließlich der Artikel oder der Lieferadresse."
+  },
+  "MENU": {
+    "LOGOUT": "Ausloggen"
   },
   "NOTIFY": {
     "ERROR": {

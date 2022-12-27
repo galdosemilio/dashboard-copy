@@ -1,0 +1,10 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'GLOBAL.COUPON_CODE' | translate }}</mat-label>
+    <input matInput #input [formControl]="discountInput" [readonly]="!!couponCode">
+    <button *ngIf="!!couponCode" matSuffix mat-icon-button aria-label="Remove" (click)="onRemoveCouponCode(couponCode)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button *ngIf="!couponCode" mat-stroked-button color="primary" (click)="onApplyCouponCode()">{{ 'GLOBAL.APPLY' | translate }}</button>
+</div>

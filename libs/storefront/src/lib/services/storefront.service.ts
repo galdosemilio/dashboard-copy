@@ -84,6 +84,18 @@ export interface StorefrontCartLineItem extends JsonApiDocument {
   images: string[]
 }
 
+export interface StorefrontPromotion {
+  id: string
+  type: string
+  attributes: {
+    amount: string
+    code: string
+    description: string
+    display_amount: string
+    name: string
+  }
+}
+
 export interface StorefrontCart extends OrderAttr {
   lineItems: StorefrontCartLineItem[]
   shippingAddress?: JsonApiDocument
@@ -94,6 +106,7 @@ export interface StorefrontCart extends OrderAttr {
   shipmentId?: string
   shppingRateId?: string
   isComplete?: boolean
+  promotion?: StorefrontPromotion
 }
 
 interface SpreeError {
@@ -390,6 +403,23 @@ export class StorefrontService {
     await this.loadSpreeCart()
   }
 
+  public async applyCouponCode(code: string) {
+    const res = await this.spree.cart.applyCouponCode(this.spreeToken, {
+      coupon_code: code,
+      include: cartIncludeFields
+    })
+
+    this.parseCartResult(res)
+  }
+
+  public async removeCouponCode(code: string) {
+    const res = await this.spree.cart.removeCouponCode(this.spreeToken, code, {
+      include: cartIncludeFields
+    })
+
+    this.parseCartResult(res)
+  }
+
   public async advance() {
     const res = await this.spree.checkout.advance(this.spreeToken, {
       include: cartIncludeFields
@@ -552,6 +582,7 @@ export class StorefrontService {
     const paymentMethod = entry.included.find(
       (item) => item.type === 'payment_method'
     )
+    const promotion = entry.included.find((item) => item.type === 'promotion')
     const creditCards = entry.included.filter(
       (item) => item.type === 'credit_card'
     )
@@ -566,7 +597,8 @@ export class StorefrontService {
       shipmentId: shipment?.id,
       shipment,
       shppingRateId: shipment?.relationships.selected_shipping_rate?.data?.id,
-      isComplete: data.attributes.state === 'complete'
+      isComplete: data.attributes.state === 'complete',
+      promotion
     }
 
     this.cart$.next(this.cart)
