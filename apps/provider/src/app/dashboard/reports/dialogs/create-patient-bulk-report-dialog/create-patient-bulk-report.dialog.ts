@@ -68,6 +68,7 @@ export class CreatePatientBulkReportDialog implements OnInit {
           start: formValue.startDate.startOf('day').toISOString(),
           end: formValue.endDate.endOf('day').toISOString(),
           format: [formValue.format],
+          status: 'active',
           measurementPreference: this.context.user.measurementPreference ?? 'us'
         }
       })
