@@ -121,6 +121,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
 
     .mat-icon {
       margin-right: 10px;

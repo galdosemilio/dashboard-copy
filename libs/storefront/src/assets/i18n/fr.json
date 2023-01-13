@@ -9,6 +9,7 @@
     "STORE_NOT_AVAILABLE": ""
   },
   "GLOBAL": {
+    "ACCOUNT": "Compte",
     "ACTIONS": "Actions",
     "ADD": "Ajouter",
     "ADDRESS_LINE_ONE": "Adresse Ligne 1",
@@ -49,6 +50,7 @@
     "INVALID_SHIPPING_ADDRESS": "L'adresse de livraison n'est pas valide, veuillez vérifier l'exactitude - des adresses incorrectes peuvent entraîner des retards ou des colis perdus.",
     "ITEM_ADDED_TO_CART": "Article ajouté au panier",
     "ITEM_DETAILS": "Détails de l'article",
+    "MANAGE_SUBSCRIPTION": "Gérer l'abonnement",
     "NOT_FOUND_ADDRESS": "L'adresse saisie est introuvable. Veuillez rechercher à nouveau l'adresse.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "L'adresse saisie est introuvable. Veuillez choisir parmi les suggestions suivantes.",
     "NO_INFORMATION": "Aucune information d'enregistrement. Ajouter maintenant >",
@@ -74,6 +76,7 @@
     "STORE": "Magasin",
     "STREET_ADDRESS": "Adresse de rue",
     "SUBMIT": "Soumettre",
+    "SUBSCRIBE": "S'abonner",
     "SUBTOTAL": "Total",
     "SUMMARY": "Sommaire",
     "TAX": "Impôt",

@@ -1,0 +1,6 @@
+<button *ngIf="!subscribed && planId" mat-button color="primary" [disabled]="isLoading" (click)="onSubscribe()">
+  {{ 'GLOBAL.SUBSCRIBE' | translate }}
+</button>
+<button *ngIf="subscribed" mat-button color="primary" [disabled]="isLoading" (click)="onManageSubscription()">
+  {{ 'GLOBAL.MANAGE_SUBSCRIPTION' | translate }}
+</button>

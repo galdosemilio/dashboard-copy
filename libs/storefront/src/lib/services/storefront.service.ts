@@ -24,6 +24,7 @@ import {
 } from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
 import { AppEnvironment, APP_ENVIRONMENT } from '@coachcare/common/shared'
 import { ShippingRate } from '../pages'
+import { SpreeSubscription } from '@coachcare/sdk/dist/lib/providers/spree/responses/getSubscription.response'
 
 export interface StorefrontVariant {
   id: string
@@ -43,6 +44,9 @@ export interface StorefrontVariant {
   weight: string
   width: boolean
   optionValues: string[]
+  public_metadata?: {
+    subscription_id?: string
+  }
 }
 
 export interface StorefrontOptionValue {
@@ -59,10 +63,15 @@ export interface StorefrontProductOption {
   values: StorefrontOptionValue[]
 }
 
-export interface StorefrontProduct extends ProductAttr {
+export interface StorefrontProduct extends Omit<ProductAttr, 'attributes'> {
   images: string[]
   variants: StorefrontVariant[]
   options: StorefrontProductOption[]
+  attributes: ProductAttr['attributes'] & {
+    public_metadata?: {
+      subscription_id?: string
+    }
+  }
 }
 
 export interface CurrentSpreeStore extends SpreeStore {
@@ -70,8 +79,9 @@ export interface CurrentSpreeStore extends SpreeStore {
   description?: string
   hero_image?: string
   public_metadata?: {
-    company_url: string
-    company_url_label: string
+    company_url?: string
+    company_url_label?: string
+    subscription_id?: string
   }
 }
 
@@ -146,6 +156,11 @@ interface SpreeStore {
   supported_locales?: string
   twitter?: string
   url?: string
+  public_metadata?: {
+    company_url?: string
+    company_url_label?: string
+    subscription_id?: string
+  }
 }
 
 export const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
@@ -161,6 +176,7 @@ export class StorefrontService {
 
   public store$ = new BehaviorSubject<SpreeStore | null>(null)
   public cart$ = new BehaviorSubject<StorefrontCart | null>(null)
+  public subscriptions$ = new BehaviorSubject<SpreeSubscription[]>([])
   public initialized$ = new BehaviorSubject<boolean>(false)
   public error$ = new BehaviorSubject<Error | null>(null)
 
@@ -197,6 +213,8 @@ export class StorefrontService {
         true
       )
       await this.loadSpreeStore()
+
+      await this.getSubscriptions()
 
       this.initialized$.next(true)
     } catch (err) {
@@ -512,6 +530,37 @@ export class StorefrontService {
     }
 
     return res.success()
+  }
+
+  public async createStripeCheckoutSubscription(
+    planId: string,
+    returnUrl: string
+  ): Promise<{ url: string }> {
+    const res = await this.spreeProvider.createStripeCheckoutSubscription({
+      plan: planId,
+      return_url: returnUrl
+    })
+    return { url: res.url }
+  }
+
+  public async createStripeCustomerPortal(
+    returnUrl: string
+  ): Promise<{ url: string }> {
+    const res = await this.spreeProvider.createStripeCustomerPortal({
+      return_url: returnUrl
+    })
+    return { url: res.url }
+  }
+
+  private async getSubscriptions(): Promise<SpreeSubscription[]> {
+    try {
+      const res = await this.spreeProvider.getSubscriptions()
+      this.subscriptions$.next(res)
+      return res
+    } catch (e) {
+      console.error(e)
+      throw new Error(e.message)
+    }
   }
 
   private parseCartResult(res: IOrderResult, silentFail = false) {

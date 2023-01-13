@@ -9,6 +9,7 @@
     "STORE_NOT_AVAILABLE": "חנות לא זמינה"
   },
   "GLOBAL": {
+    "ACCOUNT": "חֶשְׁבּוֹן",
     "ACTIONS": "פעולות",
     "ADD": "לְהוֹסִיף",
     "ADDRESS_LINE_ONE": "שורת כתובת 1",
@@ -49,6 +50,7 @@
     "INVALID_SHIPPING_ADDRESS": "כתובת המשלוח אינה חוקית, אנא בדוק את הדיוק - כתובות שגויות עלולות להוביל לעיכובים או לאיבוד חבילות.",
     "ITEM_ADDED_TO_CART": "פריט נוסף לעגלה",
     "ITEM_DETAILS": "פרטי הפריט",
+    "MANAGE_SUBSCRIPTION": "ניהול מנוי",
     "NOT_FOUND_ADDRESS": "הכתובת שהוזנה לא נמצאה. אנא חפש שוב את הכתובת.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "הכתובת שהוזנה לא נמצאה. אנא בחר מבין ההצעות הבאות.",
     "NO_INFORMATION": "אין מידע תיעוד. הוסף עכשיו >",
@@ -74,6 +76,7 @@
     "STORE": "חנות",
     "STREET_ADDRESS": "כתובת רחוב",
     "SUBMIT": "שלח",
+    "SUBSCRIBE": "הירשם",
     "SUBTOTAL": "סכום משנה",
     "SUMMARY": "סיכום",
     "TAX": "מַס",

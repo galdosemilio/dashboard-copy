@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import {
   StorefrontProduct,
   StorefrontProductOption,
+  StorefrontService,
   StorefrontVariant
 } from '@coachcare/storefront/services'
 import {
@@ -11,7 +12,7 @@ import {
   NgxGalleryImageSize,
   NgxGalleryOptions
 } from '@kolkov/ngx-gallery'
-import { UntilDestroy } from '@ngneat/until-destroy'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 @UntilDestroy()
 @Component({
@@ -27,6 +28,9 @@ export class StorefrontProductDialog implements OnInit {
   public options: StorefrontProductOption[] = []
   public productImages: NgxGalleryImage[] = []
   public quantity = 1
+  public planId: string
+  public subscribed = false
+  public isLoading = false
   public get galleryOptions(): NgxGalleryOptions[] {
     return [
       {
@@ -52,7 +56,8 @@ export class StorefrontProductDialog implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: StorefrontProduct,
-    private dialogRef: MatDialogRef<{ id: string; quantity: number }>
+    private dialogRef: MatDialogRef<{ id: string; quantity: number }>,
+    private storefront: StorefrontService
   ) {
     dialogRef.disableClose = true
   }
@@ -68,6 +73,14 @@ export class StorefrontProductDialog implements OnInit {
       medium: image,
       big: image
     }))
+    this.storefront.subscriptions$
+      .pipe(untilDestroyed(this))
+      .subscribe((subs) => {
+        this.planId = this.product.attributes?.public_metadata?.subscription_id
+        this.subscribed = subs.some((sub) => {
+          return sub.processorPlan === this.planId
+        })
+      })
 
     this.setSelectedVariant()
   }
@@ -96,5 +109,22 @@ export class StorefrontProductDialog implements OnInit {
   public async addItemToCart() {
     const variantId = this.selectedVariant?.id || this.defaultVariant?.id
     this.dialogRef.close({ id: variantId, quantity: this.quantity })
+  }
+
+  public async onSubscribe() {
+    this.isLoading = true
+    const response = await this.storefront.createStripeCheckoutSubscription(
+      this.planId,
+      `${window.location.origin}/storefront`
+    )
+    window.location.href = response.url
+  }
+
+  public async onManageSubscription() {
+    this.isLoading = true
+    const response = await this.storefront.createStripeCustomerPortal(
+      `${window.location.origin}/storefront`
+    )
+    window.location.href = response.url
   }
 }

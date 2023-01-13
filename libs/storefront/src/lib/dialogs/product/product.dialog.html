@@ -25,7 +25,7 @@
           <p class="price-title">{{ 'GLOBAL.PRICE' | translate }}</p>
           <div fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
             <p class="price">{{ productPrice }}</p>
-            <div class="qty-wrap">
+            <div class="qty-wrap" *ngIf="!planId">
               <button mat-icon-button (click)="onChangeQuantity(quantity - 1)">
                 <mat-icon>remove</mat-icon>
               </button>
@@ -45,7 +45,13 @@
           </div>
         </div>
       </div>
-      <button class="ccr-button" (click)="addItemToCart()"><mat-icon>shopping_cart</mat-icon>{{ 'GLOBAL.ADD_TO_CART' | translate }}</button>
+      <button class="ccr-button" *ngIf="!planId" (click)="addItemToCart()"><mat-icon>shopping_cart</mat-icon>{{ 'GLOBAL.ADD_TO_CART' | translate }}</button>
+      <button class="ccr-button" *ngIf="planId && !subscribed" [disabled]="isLoading" (click)="onSubscribe()">
+        {{ 'GLOBAL.SUBSCRIBE' | translate }}
+      </button>
+      <button class="ccr-button" *ngIf="planId && subscribed" [disabled]="isLoading" (click)="onManageSubscription()">
+        {{ 'GLOBAL.MANAGE_SUBSCRIPTION' | translate }}
+      </button>
     </div>
   </div>
 </mat-dialog-content>

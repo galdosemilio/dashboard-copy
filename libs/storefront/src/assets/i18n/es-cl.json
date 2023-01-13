@@ -9,6 +9,7 @@
     "STORE_NOT_AVAILABLE": "Tienda no disponible"
   },
   "GLOBAL": {
+    "ACCOUNT": "Cuenta",
     "ACTIONS": "Acciones",
     "ADD": "Añadir",
     "ADDRESS_LINE_ONE": "Dirección Línea 1",
@@ -49,6 +50,7 @@
     "INVALID_SHIPPING_ADDRESS": "La dirección de envío no es válida. Verifique la precisión; las direcciones incorrectas pueden provocar demoras o paquetes perdidos.",
     "ITEM_ADDED_TO_CART": "Artículo agregado al carrito",
     "ITEM_DETAILS": "detalles del artículo",
+    "MANAGE_SUBSCRIPTION": "Administrar suscripción",
     "NOT_FOUND_ADDRESS": "No se pudo encontrar la dirección ingresada. Vuelva a buscar la dirección.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "No se pudo encontrar la dirección ingresada. Seleccione entre las siguientes sugerencias.",
     "NO_INFORMATION": "Sin información de registro. Añadir ahora >",
@@ -74,6 +76,7 @@
     "STORE": "Tienda",
     "STREET_ADDRESS": "Dirección",
     "SUBMIT": "Enviar",
+    "SUBSCRIBE": "Suscribirse",
     "SUBTOTAL": "Total parcial",
     "SUMMARY": "Resumen",
     "TAX": "Impuesto",

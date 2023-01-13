@@ -10,25 +10,31 @@
       </a>
       <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center end" fxLayoutAlign="end center" fxLayoutGap="15px" fxLayoutGap.xs="0px">
         <div fxFlex fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxFlexOrder="1" fxFlexOrder.xs="2">
+          <storefront-subscribe-button></storefront-subscribe-button>
           <a mat-button routerLink="../storefront">
             {{ 'GLOBAL.STORE' | translate }}
           </a>
-          <a mat-button routerLink="./order-history">
-            {{ 'GLOBAL.ORDER_HISTORY' | translate }}
-          </a>
-          <a mat-button routerLink="./payment-management">
-            {{ 'GLOBAL.PAYMENT_MANAGEMENT' | translate }}
-          </a>
-          <button mat-button (click)="logout()">
-            {{ 'MENU.LOGOUT' | translate }}
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            {{ 'GLOBAL.ACCOUNT' | translate }}
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="./order-history">
+              {{ 'GLOBAL.ORDER_HISTORY' | translate }}
+            </button>
+            <button mat-menu-item routerLink="./payment-management">
+              {{ 'GLOBAL.PAYMENT_MANAGEMENT' | translate }}
+            </button>
+            <button mat-menu-item (click)="logout()">
+              {{ 'MENU.LOGOUT' | translate }}
+            </button>
+          </mat-menu>
+          <a mat-icon-button class="cart" routerLink="./order" queryParamsHandling="merge" fxFlexOrder="2" fxFlexOrder.xs="1">
+            {{ 'GLOBAL.CART' | translate }}
+            <mat-icon [matBadge]="itemCount" [matBadgeHidden]="itemCount === 0" matBadgeColor="primary">
+              shopping_cart
+            </mat-icon>
+          </a>
         </div>
-        <a mat-icon-button class="cart" routerLink="./order" queryParamsHandling="merge" fxFlexOrder="2" fxFlexOrder.xs="1">
-          {{ 'GLOBAL.CART' | translate }}
-          <mat-icon [matBadge]="itemCount" [matBadgeHidden]="itemCount === 0" matBadgeColor="primary">
-            shopping_cart
-          </mat-icon>
-        </a>
       </div>
     </mat-toolbar>
     <div fxLayout="row">

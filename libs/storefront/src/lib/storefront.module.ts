@@ -34,6 +34,7 @@ import { MatSortModule } from '@angular/material/sort'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCardModule } from '@angular/material/card'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatMenuModule } from '@angular/material/menu'
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatCardModule,
     MatTooltipModule,
     MatToolbarModule,
+    MatMenuModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
     CcrFormFieldsModule,

@@ -9,6 +9,7 @@
     "STORE_NOT_AVAILABLE": ""
   },
   "GLOBAL": {
+    "ACCOUNT": "Konto",
     "ACTIONS": "Handlinger",
     "ADD": "Tilføje",
     "ADDRESS_LINE_ONE": "Adresse linie 1",
@@ -49,6 +50,7 @@
     "INVALID_SHIPPING_ADDRESS": "Forsendelsesadressen er ugyldig. Tjek venligst for nøjagtighed - forkerte adresser kan føre til forsinkelser eller mistede pakker.",
     "ITEM_ADDED_TO_CART": "Vare tilføjet til kurv",
     "ITEM_DETAILS": "Varedetaljer",
+    "MANAGE_SUBSCRIPTION": "Administrer abonnement",
     "NOT_FOUND_ADDRESS": "Den indtastede adresse kunne ikke findes. Søg venligst efter adressen igen.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "Den indtastede adresse kunne ikke findes. Vælg venligst blandt følgende forslag.",
     "NO_INFORMATION": "Ingen registreringsoplysninger. Tilføj nu >",
@@ -74,6 +76,7 @@
     "STORE": "butik",
     "STREET_ADDRESS": "Vejnavn",
     "SUBMIT": "Indsend",
+    "SUBSCRIBE": "Abonner",
     "SUBTOTAL": "Subtotal",
     "SUMMARY": "Resumé",
     "TAX": "Skat",

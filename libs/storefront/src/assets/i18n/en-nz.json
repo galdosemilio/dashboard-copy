@@ -9,6 +9,7 @@
     "STORE_NOT_AVAILABLE": "Store not available"
   },
   "GLOBAL": {
+    "ACCOUNT": "Account",
     "ACTIONS": "Actions",
     "ADD": "Add",
     "ADDRESS_LINE_ONE": "Address Line 1",
@@ -49,6 +50,7 @@
     "INVALID_SHIPPING_ADDRESS": "Shipping address did not pass automatic validation. Please check for accuracy - incorrect addresses may lead to delays or lost packages.",
     "ITEM_ADDED_TO_CART": "Item Added to Cart",
     "ITEM_DETAILS": "Item Details",
+    "MANAGE_SUBSCRIPTION": "Manage Subscription",
     "NOT_FOUND_ADDRESS": "The entered addressed could not be found. Please search for the address again.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "The entered addressed could not be found. Please select from the following suggestions.",
     "NO_INFORMATION": "No record info. Add now >",
@@ -74,6 +76,7 @@
     "STORE": "Store",
     "STREET_ADDRESS": "Street Address",
     "SUBMIT": "Submit",
+    "SUBSCRIBE": "Subscribe",
     "SUBTOTAL": "Subtotal",
     "SUMMARY": "Summary",
     "TAX": "Tax",
