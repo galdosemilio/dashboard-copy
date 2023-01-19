@@ -1,3 +1,16 @@
+# [1.105.0](https://github.com/coachcare/dashboard/compare/v1.104.2...v1.105.0) (2023-01-19)
+
+
+### Bug Fixes
+
+* bug state listing chopped off in Mobile browser ([949acff](https://github.com/coachcare/dashboard/commit/949acff115d8a18a58f87f60293eff8c0cd68c85))
+* error loading storefront on first attempt after account register ([d04a50d](https://github.com/coachcare/dashboard/commit/d04a50d88873d4de64a05096c9e6fbcd250db765))
+
+
+### Features
+
+* expose discount code entry and display on the storefront ([edf2dbd](https://github.com/coachcare/dashboard/commit/edf2dbdc6f2dd6d8c657221f5665387f5c4a2568))
+
 ## [1.104.2](https://github.com/coachcare/dashboard/compare/v1.104.1...v1.104.2) (2022-12-14)
 
 
