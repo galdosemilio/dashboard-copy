@@ -1,3 +1,10 @@
+## [1.105.1](https://github.com/coachcare/dashboard/compare/v1.105.0...v1.105.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* issue with shipping total on checkout ([d84997b](https://github.com/coachcare/dashboard/commit/d84997b107be25fccc434529ab8b50eccacd5600))
+
 # [1.105.0](https://github.com/coachcare/dashboard/compare/v1.104.2...v1.105.0) (2023-01-19)
 
 
