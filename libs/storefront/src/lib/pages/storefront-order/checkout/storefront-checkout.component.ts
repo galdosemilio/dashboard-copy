@@ -30,6 +30,7 @@ type SpreeAddress = IAddress & { validate_address: boolean }
 export type ShippingRate = NamedEntity & {
   shipping_method_id: string
   shipment: string
+  selected: boolean
 }
 
 @UntilDestroy()
@@ -204,18 +205,11 @@ export class StorefrontCheckoutComponent implements OnInit {
     this.isLoading = true
 
     try {
-      const paymentMethods = await this.storefront.getPaymentMethods()
-      const paymentMethod = paymentMethods.data[0]
-
-      if (!paymentMethod) {
-        throw new Error(_('ERROR.PAYMENT_METHOD_NOT_FOUND'))
-      }
-
       await this.storefront.checkout({
         order: {
           payments_attributes: [
             {
-              payment_method_id: paymentMethod.id,
+              payment_method_id: this.paymentMethodId,
               source_attributes: {
                 gateway_payment_profile_id: token.id,
                 cc_type: token.type,
@@ -333,6 +327,8 @@ export class StorefrontCheckoutComponent implements OnInit {
     }
 
     this.shippingRates = await this.storefront.getShippingRates()
+    const selected = this.shippingRates.find((s) => s.selected)
+    await this.onSelectShippingRate(selected.id)
   }
 
   private async setAddresses(validateAddress: boolean = true) {

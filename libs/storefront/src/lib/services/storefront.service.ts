@@ -459,7 +459,8 @@ export class StorefrontService {
         id: entry.id,
         name: `${entry.attributes.name} - ${entry.attributes.display_cost}`,
         shipping_method_id: entry.attributes.shipping_method_id,
-        shipment: shipment.id
+        shipment: shipment.id,
+        selected: entry.attributes.selected
       }))
 
     await this.loadSpreeCart()

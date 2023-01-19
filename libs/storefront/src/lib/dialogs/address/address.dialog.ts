@@ -387,7 +387,6 @@ export class StorefrontAddressDialog implements OnInit, AfterViewInit {
         address2: address.secondary,
         city: address.city,
         stateProvince: address.state,
-        country: this.data.address.country?.id,
         postalCode: address.zipcode
       },
       { emitEvent: false }
