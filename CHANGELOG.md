@@ -1,3 +1,10 @@
+## [1.105.2](https://github.com/coachcare/dashboard/compare/v1.105.1...v1.105.2) (2023-01-20)
+
+
+### Bug Fixes
+
+* double payments bug on storefront checkout ([3d92184](https://github.com/coachcare/dashboard/commit/3d92184f294110b1fa44127c83ac5324f75b39b5))
+
 ## [1.105.1](https://github.com/coachcare/dashboard/compare/v1.105.0...v1.105.1) (2023-01-19)
 
 
