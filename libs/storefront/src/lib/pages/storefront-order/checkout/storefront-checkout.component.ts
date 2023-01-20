@@ -11,7 +11,8 @@ import {
   AddressTypeId,
   AddressProvider,
   NamedEntity,
-  SpreeProvider
+  SpreeProvider,
+  SpreeCreditCardEntry
 } from '@coachcare/sdk'
 import { AddressLabelType } from '@coachcare/common/model'
 import { MatDialog } from '@angular/material/dialog'
@@ -198,7 +199,33 @@ export class StorefrontCheckoutComponent implements OnInit {
       })
       .afterClosed()
       .pipe(filter((token) => token))
-      .subscribe((token) => this.addPaymentMethod(token))
+      .subscribe((token) => this.addCreditCard(token))
+  }
+
+  public async addCreditCard(token: Token) {
+    this.isLoading = true
+
+    try {
+      const creditCard = (await this.spree.createCreditCard({
+        credit_card: { token: token.id }
+      })) as unknown as SpreeCreditCardEntry
+      const res = await this.spree.getCreditCards()
+
+      const creditCards = res.credit_cards.filter((item) => item.source_id)
+
+      this.creditCardList = creditCards.map((item) => ({
+        id: item.source_id.toString(),
+        name: `${item.brand} ***${item.last4} ${item.exp_month}/${item.exp_year}`
+      }))
+
+      const selectedCreditCard = creditCards.find((c) => c.id == creditCard.id)
+
+      this.creditCardId = selectedCreditCard.source_id.toString()
+    } catch (err) {
+      this.notifier.error(err)
+    } finally {
+      this.isLoading = false
+    }
   }
 
   public async addPaymentMethod(token: Token) {
