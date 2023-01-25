@@ -1,3 +1,11 @@
+## [1.105.3](https://github.com/coachcare/dashboard/compare/v1.105.2...v1.105.3) (2023-01-25)
+
+
+### Bug Fixes
+
+* autocomplete address bug ([17fb50b](https://github.com/coachcare/dashboard/commit/17fb50b353fc6c9fde3d77375293e5949fcd6642))
+* create task with active status only [FRON-3017] ([1d30ea4](https://github.com/coachcare/dashboard/commit/1d30ea4cebbe0693b80f51def911c7785e28abd8))
+
 ## [1.105.2](https://github.com/coachcare/dashboard/compare/v1.105.1...v1.105.2) (2023-01-20)
 
 
