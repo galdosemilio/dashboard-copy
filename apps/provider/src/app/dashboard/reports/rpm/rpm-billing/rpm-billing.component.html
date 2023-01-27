@@ -53,15 +53,23 @@
                 <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px" fxFlexOrder="2" fxFlexOrder.lt-md="1">
                     <button
                     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
-                    (click)="download()"
+                    (click)="download('billing')"
                     mat-button class="ccr-align-center">
-                        {{ 'REPORTS.EXPORT_REPORT' | translate }}
+                        {{ 'REPORTS.EXPORT_BILLING_REPORT' | translate }}
                         <mat-icon>file_download</mat-icon>
                     </button>
 
                     <button
                     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
-                    (click)="download(true)"
+                    (click)="download('monitoring')"
+                    mat-button class="ccr-align-center">
+                        {{ 'REPORTS.EXPORT_MONITORING_REPORT' | translate }}
+                        <mat-icon>file_download</mat-icon>
+                    </button>
+
+                    <button
+                    [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
+                    (click)="download('superbill')"
                     mat-button class="ccr-align-center">
                         {{ 'RPM.EXPORT_SUPERBILL' | translate }}
                         <mat-icon>file_download</mat-icon>

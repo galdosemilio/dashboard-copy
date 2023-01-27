@@ -8,6 +8,8 @@ import {
   EnrollmentTimelineRequest,
   EnrollmentTimelineSegment,
   FetchRPMBillingSummaryRequest,
+  FetchRPMMonthlyBillingSummaryRequest,
+  FetchRPMMonthlyBillingSummaryResponse,
   PagedResponse,
   PatientCountRequest,
   PatientCountSegment,
@@ -102,5 +104,11 @@ export class ReportsDatabase extends CcrDatabase {
     args: FetchRPMBillingSummaryRequest
   ): Promise<Blob> {
     return this.reports.fetchRPMSuperbill(args)
+  }
+
+  public fetchRpmMonthlyBillingReport(
+    args: FetchRPMMonthlyBillingSummaryRequest
+  ): Promise<FetchRPMMonthlyBillingSummaryResponse> {
+    return this.reports.fetchRPMMonthlyBillingSummary(args)
   }
 }

@@ -25,11 +25,11 @@ import {
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
-import { get, isEmpty } from 'lodash'
+import { chain, get, isEmpty } from 'lodash'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Subject } from 'rxjs'
-import { debounceTime, filter } from 'rxjs/operators'
+import { firstValueFrom, Subject } from 'rxjs'
+import { debounceTime, filter, map } from 'rxjs/operators'
 import {
   ReportsCriteria,
   ReportsDatabase,
@@ -56,6 +56,7 @@ import { DeviceDetectorService } from 'ngx-device-detector'
 import { CSV } from '@coachcare/common/shared'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { RPMStateEntry } from '@app/shared/components/rpm/models'
+
 interface StorageFilter {
   selectedClinicId?: string
   package?: number
@@ -250,42 +251,63 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     })
   }
 
-  public download(superBillDownload: boolean = false): Promise<void> {
+  public async download(
+    reportType: 'superbill' | 'monitoring' | 'billing'
+  ): Promise<void> {
     const criteria = this.source.args
+    // If the user does not proceed with the download after the not-last-day-of-month warning, stop
+    // Continue if they accept the warning or the billing report is selected (specific day does not matter)
+    if (
+      reportType !== 'billing' &&
+      !(await this.presentDaySelectionWarning(criteria.asOf))
+    ) {
+      return
+    }
 
+    switch (reportType) {
+      case 'superbill':
+        return this.downloadSuperbillReport()
+
+      case 'monitoring':
+        return this.downloadMonitoringReport()
+
+      case 'billing':
+        return this.downloadBillingReport()
+    }
+  }
+
+  // If the selected day if not today OR the last day of a month, present warning that report may be incomplete
+  // Return true if warning not needed OR if user selected to continue
+  // Return false if user was presented warning and chose to not continue
+  private async presentDaySelectionWarning(asOf: string): Promise<boolean> {
     const now = moment()
-    const currentAsOf = moment(criteria.asOf).isSameOrAfter(now, 'day')
+    const currentAsOf = moment(asOf).isSameOrAfter(now, 'day')
       ? now
-      : moment(criteria.asOf).endOf('day')
+      : moment(asOf).endOf('day')
 
     if (
       currentAsOf.isSame(now, 'day') ||
       currentAsOf.isSame(currentAsOf.clone().endOf('month'), 'day')
     ) {
-      return superBillDownload
-        ? this.downloadSuperbill()
-        : this.downloadRPMBill()
+      return true
     }
 
-    this.dialog
-      .open(PromptDialog, {
-        data: {
-          title: _('REPORTS.RPM_BILLING_DOWNLOAD_CONFIRM'),
-          content: _('REPORTS.RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT'),
-          yes: _('BOARD.DOWNLOAD_REPORT'),
-          no: _('GLOBAL.CANCEL')
-        }
-      })
-      .afterClosed()
-      .pipe(filter((res) => res))
-      .subscribe(() => {
-        superBillDownload
-          ? void this.downloadSuperbill()
-          : void this.downloadRPMBill()
-      })
+    return firstValueFrom(
+      this.dialog
+        .open(PromptDialog, {
+          data: {
+            title: _('REPORTS.RPM_BILLING_DOWNLOAD_CONFIRM'),
+            content: _('REPORTS.RPM_BILLING_DOWNLOAD_CONFIRM_ABOUT'),
+            yes: _('BOARD.DOWNLOAD_REPORT'),
+            no: _('GLOBAL.CANCEL')
+          }
+        })
+        .afterClosed()
+        .pipe(map((res) => res === true))
+    )
   }
 
-  public async downloadRPMBill(): Promise<void> {
+  private async downloadMonitoringReport(): Promise<void> {
     try {
       this.isLoading = true
       const criteria = this.source.args
@@ -311,9 +333,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       if (!res.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
-      const filename = `RPM_Billing_${moment(criteria.asOf).format(
-        'MMM_YYYY'
-      )}.csv`
+      const filename = `RPM_${moment(criteria.asOf).format('MMM_YYYY')}.csv`
       let csv = ''
 
       const currentAsOf = moment(this.criteria.asOf).isSameOrAfter(
@@ -513,7 +533,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  public async downloadSuperbill(): Promise<void> {
+  private async downloadSuperbillReport(): Promise<void> {
     try {
       this.isLoading = true
       const data = await this.source.fetchSuperbill({
@@ -527,6 +547,177 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       link.href = window.URL.createObjectURL(blob)
       link.download = `${rawFileName.replace(/\W/gi, '')}.xlsx`
       link.click()
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isLoading = false
+    }
+  }
+
+  private async downloadBillingReport(): Promise<void> {
+    try {
+      this.isLoading = true
+
+      const asOfDate = this.criteria.asOf
+        ? moment(this.criteria.asOf).startOf('month').format('YYYY-MM-DD')
+        : moment().startOf('month').format('YYYY-MM-DD')
+
+      const response = await this.database.fetchRpmMonthlyBillingReport({
+        ...this.source.args,
+        date: asOfDate,
+        limit: 'all',
+        offset: 0
+      })
+
+      const data = response.data
+
+      if (!data.length) {
+        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+      }
+
+      const filename = `RPM_BILLING_${moment(asOfDate).format('MMM_YYYY')}.csv`
+
+      let csv = ''
+
+      const currentAsOf = moment(asOfDate)
+
+      csv += `"As of: ${currentAsOf.format('MMM, YYYY')}"${this.csvSeparator}`
+      csv += ',,,,,,,,,,'
+      csv += `"99453"${this.csvSeparator}`
+      csv += `"99454 x1"${this.csvSeparator}`
+      csv += `"99454 x2"${this.csvSeparator}`
+      csv += `"99457"${this.csvSeparator}`
+      csv += `"99458 x1"${this.csvSeparator}`
+      csv += `"99458 x2"`
+      csv += '\r\n'
+
+      if (this.timezoneName) {
+        csv += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,\r\n`
+      }
+
+      csv +=
+        'ID' +
+        this.csvSeparator +
+        'First Name' +
+        this.csvSeparator +
+        'Last Name' +
+        this.csvSeparator +
+        'Date of Birth' +
+        this.csvSeparator +
+        'Device Type' +
+        this.csvSeparator +
+        'Primary Diagnosis' +
+        this.csvSeparator +
+        'Secondary Diagnosis' +
+        this.csvSeparator +
+        'Supervising Provider' +
+        this.csvSeparator +
+        'Organization ID' +
+        this.csvSeparator +
+        'Organization Name' +
+        this.csvSeparator +
+        'Activation Date' +
+        this.csvSeparator +
+        'Claim Date' +
+        this.csvSeparator +
+        'Claim Date' +
+        this.csvSeparator +
+        'Claim Date' +
+        this.csvSeparator +
+        'Claim Date' +
+        this.csvSeparator +
+        'Claim Date' +
+        this.csvSeparator +
+        'Claim Date' +
+        '\r\n'
+
+      for (const entry of data) {
+        const eligibilityGroup = chain(entry.eligibility)
+          .groupBy('code')
+          .value()
+
+        csv +=
+          `"${entry.account.id}"` +
+          this.csvSeparator +
+          `"${entry.account.firstName}"` +
+          this.csvSeparator +
+          `"${entry.account.lastName}"` +
+          this.csvSeparator +
+          `"${moment(entry.account.dateOfBirth).format('MM/DD/YYYY')}"` +
+          this.csvSeparator +
+          `"${entry.state?.billable?.plan?.name || ''}"` +
+          this.csvSeparator +
+          `"${entry.state?.billable?.diagnosis?.primary || ''}"` +
+          this.csvSeparator +
+          `"${entry.state?.billable?.diagnosis?.secondary || ''}"` +
+          this.csvSeparator +
+          `"${
+            entry.state?.billable?.supervisingProvider
+              ? `${entry.state.billable.supervisingProvider.firstName} ${entry.state.billable.supervisingProvider.lastName}`
+              : ''
+          }"` +
+          this.csvSeparator +
+          `"${entry.organization?.preference?.id || ''}"` +
+          this.csvSeparator +
+          `"${entry.organization?.preference?.name || ''}"` +
+          this.csvSeparator +
+          `"${
+            entry.state?.billable?.isActive
+              ? moment(entry.state.billable.startedAt).format('MM/DD/YYYY')
+              : 'No'
+          }"` +
+          this.csvSeparator +
+          `"${
+            eligibilityGroup['99453']?.length
+              ? moment(eligibilityGroup['99453'][0].eligibleAt).format(
+                  'MM/DD/YYYY'
+                )
+              : 'N/A'
+          }"` +
+          this.csvSeparator +
+          `"${
+            eligibilityGroup['99454']?.length
+              ? moment(eligibilityGroup['99454'][0].eligibleAt).format(
+                  'MM/DD/YYYY'
+                )
+              : 'N/A'
+          }"` +
+          this.csvSeparator +
+          `"${
+            eligibilityGroup['99454']?.length > 1
+              ? moment(eligibilityGroup['99454'][1].eligibleAt).format(
+                  'MM/DD/YYYY'
+                )
+              : 'N/A'
+          }"` +
+          this.csvSeparator +
+          `"${
+            eligibilityGroup['99457']?.length
+              ? moment(eligibilityGroup['99457'][0].eligibleAt).format(
+                  'MM/DD/YYYY'
+                )
+              : 'N/A'
+          }"` +
+          this.csvSeparator +
+          `"${
+            eligibilityGroup['99458']?.length
+              ? moment(eligibilityGroup['99458'][0].eligibleAt).format(
+                  'MM/DD/YYYY'
+                )
+              : 'N/A'
+          }"` +
+          this.csvSeparator +
+          `"${
+            eligibilityGroup['99458']?.length > 1
+              ? moment(eligibilityGroup['99458'][1].eligibleAt).format(
+                  'MM/DD/YYYY'
+                )
+              : 'N/A'
+          } "`
+        csv += '\r\n'
+      }
+
+      CSV.toFile({ content: csv, filename })
     } catch (error) {
       this.notifier.error(error)
     } finally {
