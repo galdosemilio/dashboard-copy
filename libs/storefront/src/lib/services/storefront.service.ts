@@ -615,7 +615,9 @@ export class StorefrontService {
           item.id === (entry.relationships.image?.data as RelationType).id
       )?.attributes.original_url
 
-      if (imageUrl) {
+      if (imageUrl?.startsWith('http')) {
+        return [imageUrl]
+      } else if (imageUrl) {
         return [this.storeUrl + imageUrl]
       }
 
@@ -626,7 +628,9 @@ export class StorefrontService {
       .map((productImage) => {
         const imageUrl = included.find((item) => item.id === productImage.id)
           ?.attributes.original_url
-        if (imageUrl) {
+        if (imageUrl?.startsWith('http')) {
+          return imageUrl
+        } else if (imageUrl) {
           return this.storeUrl + imageUrl
         }
       })
