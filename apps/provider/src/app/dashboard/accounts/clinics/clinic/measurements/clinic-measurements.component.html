@@ -50,6 +50,17 @@
             <mat-icon>add</mat-icon>
             {{ 'BOARD.CLINIC_ADD_DATA_POINT_TYPE' | translate }}
           </button>
+          <button *ngIf="!isCoachcareOrg" [disabled]="inheritedClinic || !isAdmin"
+          mat-button type="button" color="primary"
+          class="ccr-icon-button" (click)="showCloneTemplateConfirmDialog()">
+            <mat-icon>content_copy</mat-icon>
+            {{ 'BOARD.CLONE_DEFAULT_TEMPLATE' | translate }}
+          </button>
+          <button *ngIf="currentMeasurementPref" [disabled]="inheritedClinic || !isAdmin"
+          mat-button type="button" color="primary"
+          class="ccr-icon-button" (click)="showClearTemplateConfirmDialog()">
+            {{ 'BOARD.CLEAR_TEMPLATE' | translate }}
+          </button>
           <div fxFlex fxLayout="row" fxLayoutAlign="end center">
             <button [disabled]="inheritedClinic || !isAdmin"
             mat-button type="button" color="primary"

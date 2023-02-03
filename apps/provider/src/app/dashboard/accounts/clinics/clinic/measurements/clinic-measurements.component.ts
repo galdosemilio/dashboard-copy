@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ContextService, NotifierService } from '@app/service'
+import { PromptDialog } from '@app/shared'
 import { _, sleep } from '@app/shared/utils'
 import { MeasurementLabelActions } from '@app/store/measurement-label'
 import { AppState } from '@app/store/state'
@@ -14,6 +15,7 @@ import {
 import { MeasurementPreferenceEntry } from '@coachcare/sdk/dist/lib/providers/measurement/preference'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Store } from '@ngrx/store'
+import { environment } from 'apps/provider/src/environments/environment'
 import { debounceTime, filter } from 'rxjs/operators'
 import {
   AddDataPointTypeDialog,
@@ -39,6 +41,7 @@ export class ClinicMeasurementsComponent implements OnInit {
   public form: FormGroup
   public ignoreFormChanges = true
   public inheritedClinic?: NamedEntity
+  public isCoachcareOrg = false
   public isAdmin = false
   public reordering = false
   public source: MeasurementLabelDataSource
@@ -71,6 +74,7 @@ export class ClinicMeasurementsComponent implements OnInit {
     this.createSource()
     void this.resolveAdminPerm()
     void this.fetchMeasurementPreference()
+    this.isCoachcareOrg = this.context.clinic.id === environment.coachcareOrgId
   }
 
   public toggleMeasurementLabelReordering(): void {
@@ -269,6 +273,69 @@ export class ClinicMeasurementsComponent implements OnInit {
         this.context.clinic.id,
         'admin'
       )
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  public showCloneTemplateConfirmDialog() {
+    this.dialog
+      .open(PromptDialog, {
+        data: {
+          title: _('BOARD.CLONE_DEFAULT_TEMPLATE'),
+          content: _('BOARD.CLONE_DEFAULT_TEMPLATE_PROMPT'),
+          yes: _('BOARD.CONFIRM'),
+          no: _('GLOBAL.CANCEL')
+        }
+      })
+      .afterClosed()
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => this.cloneTemplate())
+  }
+
+  public showClearTemplateConfirmDialog() {
+    this.dialog
+      .open(PromptDialog, {
+        data: {
+          title: _('BOARD.CLEAR_TEMPLATE'),
+          content: _('BOARD.CLEAR_TEMPLATE_PROMPT'),
+          yes: _('BOARD.CONFIRM'),
+          no: _('GLOBAL.CANCEL')
+        }
+      })
+      .afterClosed()
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => this.clearTemplate())
+  }
+
+  private async cloneTemplate() {
+    try {
+      await this.measurementPreference.cloneTemplate({
+        source: {
+          organization: environment.coachcareOrgId
+        },
+        target: {
+          organization: this.context.clinic.id
+        }
+      })
+
+      this.source.refresh()
+
+      this.notifier.success(_('NOTIFY.SUCCESS.CLONED_MEASUREMENT_TEMPLATE'))
+    } catch (error) {
+      this.notifier.error(error)
+    }
+  }
+
+  private async clearTemplate() {
+    try {
+      await this.measurementPreference.deleteTemplate({
+        id: this.context.clinic.id
+      })
+
+      this.source.refresh()
+
+      this.notifier.success(_('NOTIFY.SUCCESS.CLEARED_MEASUREMENT_TEMPLATE'))
     } catch (error) {
       this.notifier.error(error)
     }
