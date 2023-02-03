@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core'
 import { TableDataSource } from '@coachcare/backend/model'
 import { MatPaginator } from '@coachcare/material'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { debounceTime, Subject } from 'rxjs'
+import { debounceTime, Subject, Subscription } from 'rxjs'
 
 @UntilDestroy()
 @Component({
@@ -19,10 +19,20 @@ export class CcrPaginatorComponent extends MatPaginator {
     this.totalCount$.next(value)
   }
 
-  @Input() source: TableDataSource<unknown, unknown, unknown>
+  @Input() set source(value: TableDataSource<unknown, unknown, unknown>) {
+    this._source = value
+    this.source$.next(value)
+  }
+
+  get source() {
+    return this._source
+  }
 
   private totalCount$ = new Subject<number>()
+  private source$ = new Subject<TableDataSource<unknown, unknown, unknown>>()
   private _totalCount = 0
+  private _source: TableDataSource<unknown, unknown, unknown>
+  private sourceChangeSub: Subscription
 
   get totalCountPages() {
     return this.pageSize && this._totalCount
@@ -31,17 +41,11 @@ export class CcrPaginatorComponent extends MatPaginator {
   }
 
   ngOnInit() {
-    if (this.source) {
-      this.totalCount = this.source.totalCount
-      this.pageIndex = this.source.pageIndex ?? 0
-      this.pageSize = this.source.pageSize ?? 10
-      this.length = this.source.total
+    this.source$.pipe(untilDestroyed(this), debounceTime(200)).subscribe(() => {
+      this.onSubscribeSource()
+    })
 
-      this.source.change$.pipe(untilDestroyed(this)).subscribe(() => {
-        this.length = this.source.total ?? 0
-        this.totalCount = this.source.totalCount ?? 0
-      })
-    }
+    this.onSubscribeSource()
 
     this.page.pipe(untilDestroyed(this)).subscribe((e) => {
       this.select.nativeElement.value = e.pageIndex
@@ -57,6 +61,28 @@ export class CcrPaginatorComponent extends MatPaginator {
         this.select.nativeElement.value = this.pageIndex
         this._totalCount = value ?? 0
         this.showOffsetSelector = this._totalCount > 0
+      })
+  }
+
+  private onSubscribeSource() {
+    if (this.sourceChangeSub) {
+      this.sourceChangeSub.unsubscribe()
+    }
+
+    if (!this.source) {
+      return
+    }
+
+    this.totalCount = this.source.totalCount
+    this.pageIndex = this.source.pageIndex ?? 0
+    this.pageSize = this.source.pageSize ?? 10
+    this.length = this.source.total
+
+    this.sourceChangeSub = this.source.change$
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.length = this.source.total ?? 0
+        this.totalCount = this.source.totalCount ?? 0
       })
   }
 
