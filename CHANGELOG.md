@@ -1,3 +1,18 @@
+# [1.106.0](https://github.com/coachcare/dashboard/compare/v1.105.3...v1.106.0) (2023-02-07)
+
+
+### Bug Fixes
+
+* product images not loading in store ([e5a7ad9](https://github.com/coachcare/dashboard/commit/e5a7ad9f4ef3c31037914ef20519ee97489a40ec))
+* readonly for external identifiers [FRON-2995] ([21b386c](https://github.com/coachcare/dashboard/commit/21b386c087c9456618b61694558d5612c3de2ae2))
+* refactor paginator for data source changes [FRON-3038] ([6086f52](https://github.com/coachcare/dashboard/commit/6086f52f4d14c43937c38b6ea7edc1ee4255cd94))
+
+
+### Features
+
+* add clone and clear measurement preferences [FRON-2873] ([121975b](https://github.com/coachcare/dashboard/commit/121975b58c7267991e0f34ce51a851aca6352f3a))
+* validation to shipping address save or update [FRON-2971] ([6de81cd](https://github.com/coachcare/dashboard/commit/6de81cdedc8da4340614d2b07d6073c034bf0bbd))
+
 ## [1.105.3](https://github.com/coachcare/dashboard/compare/v1.105.2...v1.105.3) (2023-01-25)
 
 
