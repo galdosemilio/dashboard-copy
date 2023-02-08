@@ -267,6 +267,9 @@
             </td>
 
             <td class="supervising-provider-cell">
+                <mat-icon data-cy="rpm-billing-report-change-supervising-provider" *ngIf="row.rpm?.isActive && row.rpm?.supervisingProvider" (click)="onChangeSupervisingProvider(row)">
+                    edit
+                </mat-icon>
                 <span *ngIf="row.rpm?.supervisingProvider" [accountType]="'3'" [ccrAccountLink]="row.rpm.supervisingProvider.id">
                     {{ row.rpm.supervisingProvider.firstName }} {{ row.rpm.supervisingProvider.lastName }}
                 </span>

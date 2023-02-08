@@ -1,3 +1,5 @@
+import { selectAutocompleteOption } from '../../../helpers'
+
 export function openRPMDialog() {
   cy.get('mat-slide-toggle:not(.mat-disabled)').trigger('click', {
     force: true
@@ -128,4 +130,47 @@ export function attemptToEnableRpm() {
   cy.get('button').contains('Enable RPM').click({ force: true })
 
   cy.tick(1000)
+}
+
+export function confirmSupervisingProviderName(coachName: string): void {
+  cy.get('[data-cy="current-supervising-provider-container"]')
+    .should('contain', coachName)
+    .should('contain', 'Current Supervising Provider')
+}
+
+export function confirmMessageNoSupervisingProvidersAvailable(
+  openDialog: Function
+): void {
+  cy.intercept('GET', '1.0/rpm/supervising-provider?**', {
+    data: [],
+    pagination: {}
+  })
+
+  openDialog()
+
+  cy.get('[data-cy="change-supervising-provider-none-available"]').should(
+    'contain',
+    'does not have any available Supervising Providers. The clinic administrator must add at least one Supervising Provider in the Clinic Settings before RPM can be enabled for this clinic.'
+  )
+}
+
+export function confirmPayloadOnSupervisingProviderUpdate(): void {
+  cy.get('ccr-search-selector').find('button').eq(0).trigger('click')
+  cy.get('ccr-search-selector').find('input').type('e')
+  cy.tick(10000)
+  cy.wait(1000)
+  selectAutocompleteOption(0)
+
+  cy.get('[data-cy="new-supervising-provider-explanation"]').type(
+    'This is a test'
+  )
+
+  cy.get('[data-cy="change-supervising-provider-save-changes-button"]').trigger(
+    'click'
+  )
+
+  cy.wait('@setNewSupervisingProvider').should((xhr) => {
+    expect(xhr.request.body.account).to.contain('7357')
+    expect(xhr.request.body.note).to.equal('This is a test')
+  })
 }

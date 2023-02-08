@@ -51,11 +51,11 @@ import {
 import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-selector'
 import { PromptDialog } from '@app/shared/dialogs'
 import { environment } from 'apps/provider/src/environments/environment'
-import { CcrTableSortDirective } from '@app/shared'
+import { CcrTableSortDirective, RPMStatusDialog } from '@app/shared'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { CSV } from '@coachcare/common/shared'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
-
+import { RPMStateEntry } from '@app/shared/components/rpm/models'
 interface StorageFilter {
   selectedClinicId?: string
   package?: number
@@ -998,5 +998,33 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     this.paginator.firstPage()
+  }
+
+  public onChangeSupervisingProvider(summary: RPMStateSummaryEntry) {
+    const rpmEntry = new RPMStateEntry({
+      rpmState: {
+        ...summary.rpm,
+        account: summary.account,
+        organization: summary.organization
+      }
+    })
+
+    this.dialog
+      .open(RPMStatusDialog, {
+        data: {
+          accessibleOrganizations: [],
+          inaccessibleOrganizations: [],
+          mostRecentEntry: rpmEntry,
+          initialStatus: 'edit_supervising_provider',
+          closeAfterChange: true
+        },
+        width: '60vw'
+      })
+      .afterClosed()
+      .pipe(filter((entry) => entry?.rpmState?.supervisingProvider))
+      .subscribe((entry: RPMStateEntry) => {
+        summary.rpm.supervisingProvider = entry.rpmState.supervisingProvider
+        this.source.updateItem(summary)
+      })
   }
 }

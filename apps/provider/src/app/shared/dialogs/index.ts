@@ -42,7 +42,11 @@ import { ScheduleSelectDialog } from './schedule-select.dialog'
 import { SelectOrganizationDialog } from './select-organization'
 import { TextInputDialog } from './text-input.dialog'
 import { ViewImageDialog } from './view-image'
-import { RPMEditFormComponent, RPMEntryCardComponent } from './rpm-status'
+import {
+  RPMEditFormComponent,
+  RPMEntryCardComponent,
+  RPMSupervisingProviderEditFormComponent
+} from './rpm-status'
 import { RemoveClinicAssociationDialog } from './remove-clinic-association'
 import { CoachPermissionsDialog } from './coach-permissions-dialog'
 import { MultipleFilesDownloadDialog } from './multiple-files-download'
@@ -77,5 +81,6 @@ export const Dialogs = [
 export const Components = [
   RPMEditFormComponent,
   RPMEnableFormComponent,
-  RPMEntryCardComponent
+  RPMEntryCardComponent,
+  RPMSupervisingProviderEditFormComponent
 ]

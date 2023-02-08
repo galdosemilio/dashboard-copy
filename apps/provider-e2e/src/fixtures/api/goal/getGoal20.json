@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "id": "42",
+      "quantity": 89000,
+      "type": {
+        "id": "1",
+        "name": "Weight goal",
+        "code": "weight"
+      }
+    }
+  ],
+  "pagination": {}
+}

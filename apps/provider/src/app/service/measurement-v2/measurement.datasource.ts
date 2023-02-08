@@ -144,7 +144,8 @@ export class MeasurementDataSourceV2 extends TableDataSource<
           local: '',
           utc: '',
           timezone: ''
-        }
+        },
+        labels: lastExistingGroup.labels
       }
 
       return hasTooManyEntries ? [...allGroups, loadMoreGroup] : allGroups
@@ -192,7 +193,8 @@ export class MeasurementDataSourceV2 extends TableDataSource<
         },
         source: { id: 'local', name: '' },
         isEmpty: true,
-        canBeDeleted: false
+        canBeDeleted: false,
+        labels: []
       })
 
       currentDate = currentDate.add(1, 'day')
@@ -238,7 +240,8 @@ export class MeasurementDataSourceV2 extends TableDataSource<
         },
         source: { id: 'local', name: '' },
         isEmpty: true,
-        canBeDeleted: false
+        canBeDeleted: false,
+        labels: []
       }
     })
   }

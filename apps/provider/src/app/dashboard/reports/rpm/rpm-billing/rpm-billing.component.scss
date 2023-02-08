@@ -144,8 +144,10 @@ app-reports-rpm-billing {
       & > td.first-name-cell,
       & > td.last-name-cell,
       & > td.supervising-provider-cell {
-        &:hover {
-          text-decoration: underline;
+        span {
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -205,6 +207,14 @@ app-reports-rpm-billing {
     }
     .supervising-provider-cell {
       min-width: 200px;
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        margin-right: 5px;
+        cursor: pointer;
+        font-size: 20px;
+      }
     }
 
     .highlighted-cell {

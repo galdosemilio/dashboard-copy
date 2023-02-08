@@ -390,12 +390,6 @@ export function saveSequence(): void {
   cy.tick(10000)
 }
 
-export function selectAutocompleteOption(index: number): void {
-  cy.get('mat-option').eq(index).click({ force: true })
-
-  cy.tick(1000)
-}
-
 export function selectEnrollmentStep(index: number): void {
   cy.get('mat-dialog-container')
     .find('mat-select[ng-reflect-placeholder="Starting Step"]')

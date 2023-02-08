@@ -20,14 +20,21 @@ import {
   RPMEntryAgeStatus
 } from './rpm-edit-form'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { sortBy } from 'lodash'
+
+type DialogStatus =
+  | 'has_entry'
+  | 'new_entry'
+  | 'about'
+  | 'edit_supervising_provider'
 
 export interface RPMStatusDialogData {
   accessibleOrganizations: OrganizationAccess[]
   inaccessibleOrganizations: OrganizationAccess[]
   mostRecentEntry: RPMStateEntry
+  initialStatus?: DialogStatus
+  closeAfterChange?: boolean
 }
-
-type DialogStatus = 'has_entry' | 'new_entry' | 'about'
 
 @UntilDestroy()
 @Component({
@@ -56,6 +63,7 @@ export class RPMStatusDialog implements OnInit {
   public status: DialogStatus
   public statusCache: DialogStatus
   public updatedEntry: boolean
+  public closeAfterChange: boolean = false
 
   deactivationReasons: RPMReason[] = []
   requiresDeactivationNote = false
@@ -183,6 +191,40 @@ export class RPMStatusDialog implements OnInit {
     }
   }
 
+  public async updateSupervisingProvider(): Promise<void> {
+    try {
+      const formValue = this.form.get('editSupervisingProvider').value
+
+      await this.rpm.updateSupervisingProvider(this.rpmEntry.rpmState.id, {
+        account: formValue.account,
+        note: formValue.note
+      })
+
+      const response = await this.rpm.getList({
+        account: this.rpmEntry.rpmState.account.id,
+        organization: this.rpmEntry.organization.id,
+        limit: 'all',
+        offset: 0
+      })
+
+      this.rpmEntry = new RPMStateEntry({
+        rpmState: sortBy(response.data, (entry) =>
+          moment(entry.createdAt)
+        ).pop()
+      })
+
+      this.notify.success(_('NOTIFY.SUCCESS.UPDATED_RPM'))
+
+      if (this.closeAfterChange) {
+        this.dialogRef.close(this.rpmEntry)
+      } else {
+        this.status = 'has_entry'
+      }
+    } catch (error) {
+      this.notify.error(error)
+    }
+  }
+
   private async calculateEntryAge(): Promise<void> {
     try {
       if (!this.rpmEntry) {
@@ -218,7 +260,8 @@ export class RPMStatusDialog implements OnInit {
       hadFaceToFace: [false, Validators.requiredTrue],
       goalsSet: [false, Validators.requiredTrue],
       deviceSupplied: ['', Validators.required],
-      editEntry: [null, Validators.required]
+      editEntry: [null, Validators.required],
+      editSupervisingProvider: [null, Validators.required]
     })
 
     this.deactivateRpmForm = this.fb.group({
@@ -271,7 +314,13 @@ export class RPMStatusDialog implements OnInit {
     this.inaccessibleOrganizations = this.data.inaccessibleOrganizations
     this.entryIsActive = this.rpmEntry ? this.rpmEntry.isActive : false
     this.entryPending = this.rpmEntry ? this.rpmEntry.pending : undefined
-    this.status = this.rpmEntry ? 'has_entry' : 'new_entry'
+    this.status = this.data.initialStatus
+      ? this.data.initialStatus
+      : this.rpmEntry
+      ? 'has_entry'
+      : 'new_entry'
+    this.closeAfterChange = this.data.closeAfterChange ?? false
+
     if (this.accessibleOrganizations && this.accessibleOrganizations.length) {
       this.form.patchValue({
         organization: this.accessibleOrganizations[0].organization.id

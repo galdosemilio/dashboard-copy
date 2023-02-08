@@ -130,7 +130,7 @@ export class CcrSearchSelectorComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.queryCtrl = new FormControl({})
+    this.queryCtrl = new FormControl('')
 
     this.queryCtrl.valueChanges
       .pipe(

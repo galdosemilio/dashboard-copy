@@ -21,6 +21,12 @@ export function selectOption(selectorElement, optionName: string): void {
   cy.tick(1000)
 }
 
+export function selectAutocompleteOption(index: number): void {
+  cy.get('mat-option').eq(index).click({ force: true })
+
+  cy.tick(1000)
+}
+
 export function setupEcommerceLeftNavMenu(
   clinic: ValidOrganization,
   clinicStore: boolean,

@@ -351,7 +351,8 @@ export class MeasurementChartDataSource extends ChartDataSource<
           utc: currentDate.toISOString(),
           timezone: ''
         },
-        source: { id: 'local', name: 'local' }
+        source: { id: 'local', name: 'local' },
+        labels: []
       })
 
       currentDate = currentDate.add(

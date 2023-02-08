@@ -318,6 +318,7 @@ const interceptCoreApiCalls = (
     fixture: 'api/general/emptyObject'
   })
   cy.intercept('GET', '/1.0/goal?account=**', { fixture: 'api/goal/getGoal' })
+  cy.intercept('GET', '/2.0/goal?account=**', { fixture: 'api/goal/getGoal20' })
   cy.intercept('PUT', '/1.0/goal', {
     statusCode: 204,
     body: {}
@@ -536,6 +537,11 @@ const interceptCoreApiCalls = (
     fixture: 'api/general/emptyData'
   }).as('rpmStatePostRequest')
 
+  cy.intercept('POST', '/1.0/rpm/state/**/supervising-provider', {
+    statusCode: 200,
+    body: { id: '1' }
+  }).as('setNewSupervisingProvider')
+
   cy.intercept('GET', '/1.0/rpm/individual-summary**', {
     statusCode: 200,
     body: {}
@@ -686,7 +692,7 @@ const interceptCoreApiCalls = (
     body: {}
   }).as('supervisingProviderDeleteRequest')
 
-  cy.intercept('GET', '1.0/rpm/state/1/diagnosis/audit?**', {
+  cy.intercept('GET', '1.0/rpm/state/**/diagnosis/audit?**', {
     fixture: fetchOverride(
       '1.0/rpm/state/1/diagnosis/audit?**',
       'api/general/emptyDataEmptyPagination'

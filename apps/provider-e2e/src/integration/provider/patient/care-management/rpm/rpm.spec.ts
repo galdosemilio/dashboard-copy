@@ -1,4 +1,4 @@
-import { standardSetup } from './../../../../support'
+import { standardSetup } from '../../../../../support'
 import {
   attemptToDisableRpm,
   attemptToDownloadPatientReport,
@@ -6,7 +6,7 @@ import {
   attemptToEnableRpm,
   openRPMDialog,
   openRPMReportDialog
-} from './utils'
+} from '../../dashboard/utils'
 
 describe('Patient profile -> dashboard -> rpm', function () {
   beforeEach(() => {

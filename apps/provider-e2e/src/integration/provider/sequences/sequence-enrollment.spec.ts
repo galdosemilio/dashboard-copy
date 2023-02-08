@@ -4,9 +4,9 @@ import {
   assertSequenceBulkOrganizationEnrollmentRequest,
   attemptBulkEnrollPatients,
   attemptEnrollPatients,
-  selectAutocompleteOption,
   selectEnrollmentStep
 } from './helpers'
+import { selectAutocompleteOption } from '../../helpers'
 
 describe('Sequence -> View -> Enrollments', function () {
   it('Properly enrolls a bunch of patients', function () {

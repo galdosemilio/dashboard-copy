@@ -1,0 +1,49 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <h4
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px">
+    <span>{{ 'RPM.CHANGE_SUPERVISING_PROVIDER' | translate }}</span>
+  </h4>
+  <div *ngIf="rpmEntry.rpmState.supervisingProvider" data-cy="current-supervising-provider-container">
+    <p class="notice performed-by">{{ 'RPM.CURRENT_SUPERVISING_PROVIDER' | translate }}</p>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <div class="user-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+          <div>
+              <ccr-avatar size="bigger" [account]="rpmEntry.rpmState.supervisingProvider.id"></ccr-avatar>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px">
+              <p>{{ rpmEntry.rpmState.supervisingProvider.firstName | translate }} {{ rpmEntry.rpmState.supervisingProvider.lastName }}</p>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div
+  data-cy="change-supervising-provider-selection-container"
+  [formGroup]="form"
+  class="agreement-form"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="15px">
+    <ccr-search-selector
+      *ngIf="supervisingProviderOptions?.length"
+      [placeholder]="'RPM.NEW_SUPERVISING_PROVIDER' | translate"
+      [options]="supervisingProviderOptions"
+      (optionSelected)="onSupervisingProviderSelected($event)">
+    </ccr-search-selector>
+
+    <p
+      data-cy="change-supervising-provider-none-available"
+      *ngIf="!supervisingProvidersDataSource?.isLoading && !supervisingProviderOptions?.length"
+      [innerHTML]="'RPM.NO_SUPERVISING_PROVIDER_WARNING' | translate:{clinic: rpmEntry.organization}"
+      class="highlighted">
+    </p>
+
+    <mat-form-field
+    *ngIf="supervisingProviderOptions?.length"
+    class="example-full-width">
+      <mat-label>{{ 'RPM.EXPLANATION' | translate }}</mat-label>
+      <textarea formControlName="note" matInput data-cy="new-supervising-provider-explanation"></textarea>
+    </mat-form-field>
+  </div>
+</div>

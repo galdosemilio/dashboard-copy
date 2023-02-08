@@ -15,6 +15,7 @@
     <div [ngSwitch]="status">
     <div *ngSwitchCase="'has_entry'" [formGroup]="form">
         <app-dialog-rpm-entry-card
+            *ngIf="client"
             [accessibleOrganizations]="accessibleOrganizations"
             [canDisableRPM]="canDisableRPM"
             [client]="client"
@@ -42,6 +43,13 @@
             [showModeToggle]="false"
             formControlName="editEntry">
         </app-dialog-rpm-edit-form>
+    </div>
+
+    <div *ngSwitchCase="'edit_supervising_provider'" [formGroup]="form">
+        <app-dialog-rpm-supervising-provider-edit-form
+            [rpmEntry]="rpmEntry"
+            formControlName="editSupervisingProvider">
+        </app-dialog-rpm-supervising-provider-edit-form>
     </div>
 
 
@@ -109,6 +117,26 @@
             mat-button>{{ 'GLOBAL.BACK' | translate }}</button>
         </div>
 
+        <div *ngSwitchCase="'edit_supervising_provider'">
+            <button
+            data-cy="change-supervising-provider-save-changes-button"
+            [disabled]="form.get('editSupervisingProvider').invalid"
+            (click)="updateSupervisingProvider()"
+            class="ccr-button"
+            color="primary"
+            mat-button>{{ 'LIBRARY.CONTENT.SAVE_CHANGES' | translate }}</button>
+
+            <button
+            (click)="cancelEdition()"
+            class="ccr-button"
+            *ngIf="!closeAfterChange"
+            mat-button>{{ 'GLOBAL.BACK' | translate }}</button>
+
+            <button *ngIf="closeAfterChange" class="ccr-button" mat-button matDialogClose>
+                {{ 'GLOBAL.CLOSE' | translate }}
+            </button>
+        </div>
+
         <div *ngSwitchCase="'new_entry'" fxLayoutAlign="center center">
             <button
             *ngIf="currentStepperStep < 2"
@@ -157,9 +185,17 @@
             mat-button>{{ 'RPM.ENABLE_RPM' | translate }}</button>
 
             <button
+            data-cy="change-supervising-provider-button"
+            *ngIf="entryIsActive"
+            (click)="status = 'edit_supervising_provider'"
+            class="ccr-button"
+            color="primary"
+            mat-button>{{ 'RPM.CHANGE_SUPERVISING_PROVIDER' | translate }}</button>
+
+            <button
             *ngIf="entryIsActive"
             (click)="status = 'edit_entry'"
-            [disabled]="entryAge === 'after24Edited' || !accessibleOrganizations.length || !accessibleOrganizations.length"
+            [disabled]="entryAge === 'after24Edited' || !accessibleOrganizations.length"
             class="ccr-button"
             color="primary"
             mat-button>{{ 'RPM.EDIT_DIAGNOSIS' | translate }}</button>

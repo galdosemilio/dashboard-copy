@@ -45,6 +45,14 @@ export class RPMBillingDataSource extends TableDataSource<
     return this.database.fetchRPMSuperbillReport(criteria)
   }
 
+  updateItem(data: RPMStateSummaryEntry) {
+    const index = this._result.findIndex((entry) => entry.id === data.id)
+
+    if (index > -1) {
+      this._result[index] = data
+    }
+  }
+
   mapResult(
     result: PagedResponse<RPMStateSummaryItem>
   ): Array<RPMStateSummaryEntry> {

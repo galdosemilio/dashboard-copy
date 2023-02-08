@@ -61,7 +61,9 @@ export class RPMComponent implements AfterViewInit, OnInit {
     void this.refresh()
   }
 
-  openStatusDialog() {
+  async openStatusDialog() {
+    await this.refresh()
+
     this.dialog
       .open(RPMStatusDialog, {
         data: {
@@ -128,9 +130,10 @@ export class RPMComponent implements AfterViewInit, OnInit {
       })
 
       if (this.mostRecentEntry.rpmState.createdBy) {
-        this.mostRecentEntry.rpmState.createdBy = await this.resolveCreatedByAccount(
-          this.mostRecentEntry.rpmState.createdBy.id
-        )
+        this.mostRecentEntry.rpmState.createdBy =
+          await this.resolveCreatedByAccount(
+            this.mostRecentEntry.rpmState.createdBy.id
+          )
       }
 
       const permissionPromises = accessibleOrgs.map((org) =>

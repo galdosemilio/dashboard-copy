@@ -1,8 +1,10 @@
 import { ValidOrganization } from './organizations'
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    setTimezone(value: string): Chainable<void>
-    setOrganization(value: ValidOrganization): Chainable<void>
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      setTimezone(value: string): Chainable<void>
+      setOrganization(value: ValidOrganization): Chainable<void>
+    }
   }
 }
 

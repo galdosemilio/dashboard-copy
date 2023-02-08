@@ -69,7 +69,13 @@
       ],
       "anyCodeLastEligibleAt": "2020-06-07T22:18:22.147Z",
       "rpm": {
+        "id": "27",
         "isActive": true,
+        "supervisingProvider": {
+          "firstName": "Mary",
+          "id": "2",
+          "lastName": "Jane"
+        },
         "changedAt": "2019-06-13T22:18:22.147+00:00",
         "conditions": {
           "hasMedicalNecessity": true,
@@ -156,6 +162,11 @@
       "anyCodeLastEligibleAt": "2020-06-22T14:10:17.992Z",
       "rpm": {
         "isActive": true,
+        "supervisingProvider": {
+          "firstName": "Mary",
+          "id": "2",
+          "lastName": "Jane"
+        },
         "changedAt": "2019-05-29T14:10:17.992+00:00",
         "conditions": {
           "hasMedicalNecessity": true,
@@ -239,6 +250,11 @@
       ],
       "rpm": {
         "isActive": true,
+        "supervisingProvider": {
+          "firstName": "Mary",
+          "id": "2",
+          "lastName": "Jane"
+        },
         "changedAt": "2020-06-23T17:14:48.495+00:00",
         "conditions": {
           "hasMedicalNecessity": true,
@@ -310,6 +326,11 @@
       ],
       "rpm": {
         "isActive": true,
+        "supervisingProvider": {
+          "firstName": "Mary",
+          "id": "2",
+          "lastName": "Jane"
+        },
         "changedAt": "2020-06-24T20:50:39.857+00:00",
         "conditions": {
           "hasMedicalNecessity": true,
@@ -390,6 +411,11 @@
       ],
       "rpm": {
         "isActive": true,
+        "supervisingProvider": {
+          "firstName": "Mary",
+          "id": "2",
+          "lastName": "Jane"
+        },
         "changedAt": "2020-06-30T18:09:49.052+00:00",
         "conditions": {
           "hasMedicalNecessity": true,
