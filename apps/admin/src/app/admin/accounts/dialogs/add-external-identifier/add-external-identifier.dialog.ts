@@ -1,9 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import {
-  AccountSingle,
-  GetListOrganizationRequest,
-  OrganizationProvider
-} from '@coachcare/sdk'
+import { AccountSingle, OrganizationProvider } from '@coachcare/sdk'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
@@ -103,17 +99,21 @@ export class AddExternalIdentifierDialogComponent implements OnInit {
       return []
     }
 
-    const res = await this.organization.getAccessibleList({
-      user: this.account.id,
-      query,
+    const res = await this.organization.getAll({
+      name: query,
       status: 'active',
-      strict: false,
-      limit: 5
-    } as GetListOrganizationRequest)
+      limit: 5,
+      sort: [
+        {
+          property: 'name',
+          dir: 'asc'
+        }
+      ]
+    })
 
-    return res.data.map((c) => ({
-      value: c.organization.id,
-      viewValue: `${c.organization.name}`
+    return res.data.map((entry) => ({
+      value: entry.id,
+      viewValue: entry.name
     }))
   }
 
