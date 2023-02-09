@@ -1933,8 +1933,5 @@
     "MODIFIABLE_BY_COACHES_DESCRIPTION": "Quando ativado, este ponto de dados só poderá ser visualizado. Os treinadores não poderão adicionar ou remover as medições. Isso é útil para medições que devem ser adicionadas apenas por pacientes ou por meio de uma integração de terceiros.",
     "MODIFIABLE_BY_PATIENTS": "Modificável por pacientes",
     "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "Quando ativado, este ponto de dados só poderá ser visualizado. Os pacientes não poderão adicionar ou remover as medições. Isso é útil para medições que devem ser adicionadas apenas por treinadores ou por meio de uma integração de terceiros."
-  },
-  "WALKTHROUGH": {
-    "STARTER_GUIDE": "Guia de Iniciação"
   }
 }

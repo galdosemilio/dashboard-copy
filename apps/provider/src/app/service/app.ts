@@ -34,7 +34,6 @@ import {
   PatientAccountGuard,
   ProviderAccountGuard
 } from './guards'
-import { WalkthroughService } from './walkthrough'
 import { GestureService } from './gesture'
 import { DietersDatabase } from './dieters'
 import { FormPDFService } from './formPDFService'
@@ -151,7 +150,6 @@ export function AppProviders() {
     // view helpers
     FormUtils,
     ViewUtils,
-    WalkthroughService,
     GestureService,
 
     // App-related Services

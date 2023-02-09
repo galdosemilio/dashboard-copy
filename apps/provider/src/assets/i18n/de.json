@@ -1933,8 +1933,5 @@
     "MODIFIABLE_BY_COACHES_DESCRIPTION": "Wenn aktiviert, kann dieser Datenpunkt nur angezeigt werden. Trainer können die Messungen nicht hinzufügen oder entfernen. Dies ist nützlich für Messungen, die nur von Patienten oder durch eine Drittanbieterintegration hinzugefügt werden sollen.",
     "MODIFIABLE_BY_PATIENTS": "Von Patienten modifizierbar",
     "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "Wenn aktiviert, kann dieser Datenpunkt nur angezeigt werden. Patienten können die Messungen nicht hinzufügen oder entfernen. Dies ist nützlich für Messungen, die nur von Trainern oder durch eine Drittanbieter-Integration hinzugefügt werden sollen."
-  },
-  "WALKTHROUGH": {
-    "STARTER_GUIDE": "Starter-Anleitung"
   }
 }

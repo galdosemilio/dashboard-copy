@@ -1933,8 +1933,5 @@
     "MODIFIABLE_BY_COACHES_DESCRIPTION": "Lorsqu'il est activé, ce point de données ne pourra être affiché que. Les entraîneurs ne pourront pas ajouter ou supprimer les mesures. Ceci est utile pour les mesures qui sont uniquement destinées à être ajoutées par les patients ou via une intégration tierce.",
     "MODIFIABLE_BY_PATIENTS": "Modifiable par des patients",
     "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "Lorsqu'il est activé, ce point de données ne pourra être affiché que. Les patients ne pourront pas ajouter ou supprimer les mesures. Ceci est utile pour les mesures qui sont uniquement destinées à être ajoutées par les entraîneurs ou via une intégration tierce."
-  },
-  "WALKTHROUGH": {
-    "STARTER_GUIDE": "Guide de démarrage"
   }
 }

@@ -51,7 +51,6 @@ import { SequenceSearchComponent } from './sequence-search'
 import { CcrTimeframeSelectorComponent } from './timeframe-selector/timeframe-selector.component'
 import { UserCardComponent } from './user-card'
 import { UserSearchComponent } from './user-search'
-import { WalkthroughComponent } from './walkthrough'
 import { CcrImageOptionSelectorComponent } from './image-option-selector'
 import { CcrTableSortHeaderComponent } from './table-sort-header'
 import { CcrSearchSelectorComponent } from './search-selector'
@@ -135,7 +134,6 @@ export {
   TranslatedTextInputComponent,
   UserCardComponent,
   UserSearchComponent,
-  WalkthroughComponent,
   ScheduleListTableComponent,
   DeleteRecurringMeetingDialog,
   SingleAddDialog,
@@ -202,7 +200,6 @@ export const CmpComponents = [
   SequenceSearchComponent,
   UserCardComponent,
   UserSearchComponent,
-  WalkthroughComponent,
   ScheduleListTableComponent,
   TranslatedTextInputComponent,
   DeleteRecurringMeetingDialog,

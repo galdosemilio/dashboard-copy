@@ -6,20 +6,6 @@
     max-width: 90vw;
   }
 }
-.cdk-overlay-pane.ccr-walkthrough-dialog {
-  max-width: 100vw !important;
-
-  .mat-dialog-content {
-    max-height: 100% !important;
-    overflow: auto;
-  }
-
-  @media #{$small-and-down} {
-    height: 100vh !important;
-    max-width: 100vw !important;
-    width: 100vw !important;
-  }
-}
 .cdk-overlay-pane.ccr-full-dialog {
   max-width: 850px !important;
   @media #{$small-and-down} {

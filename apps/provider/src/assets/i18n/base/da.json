@@ -1933,8 +1933,5 @@
     "MODIFIABLE_BY_COACHES_DESCRIPTION": "Når det er aktiveret, vil dette datapunkt kun kunne ses. Trænere vil ikke kunne tilføje eller fjerne målingerne. Dette er nyttigt til målinger, der kun er beregnet til at tilføjes af patienter eller gennem en tredjepartsintegration.",
     "MODIFIABLE_BY_PATIENTS": "Modificerbar af patienter",
     "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "Når det er aktiveret, vil dette datapunkt kun kunne ses. Patienter kan ikke tilføje eller fjerne målingerne. Dette er nyttigt til målinger, der kun er beregnet til at tilføjes af trænere eller gennem en tredjepartsintegration."
-  },
-  "WALKTHROUGH": {
-    "STARTER_GUIDE": "Startvejledning"
   }
 }

@@ -10,8 +10,7 @@ import {
   DietersDatabase,
   DietersDataSource,
   EventsService,
-  NotifierService,
-  WalkthroughService
+  NotifierService
 } from '@app/service'
 import { _, ViewUtils } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -50,15 +49,13 @@ export class DefaultDashboardComponent implements OnDestroy, OnInit {
     private context: ContextService,
     private bus: EventsService,
     private translator: TranslateService,
-    private viewUtils: ViewUtils,
-    private walkthrough: WalkthroughService
+    private viewUtils: ViewUtils
   ) {}
 
   ngOnInit() {
     this.isProvider =
       this.context.user.accountType.id === AccountTypeIds.Provider
     this.currentUser = this.context.user
-    this.walkthrough.checkGuideState('dashboard')
     this.bus.trigger('right-panel.component.set', 'notifications')
 
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {

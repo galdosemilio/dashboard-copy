@@ -15,7 +15,6 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog } from '@coachcare/material'
 import { ClosePanel, OpenPanel } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
-import { WalkthroughService } from '@app/service/walkthrough'
 import {
   FetchRPMBillingSummaryRequest,
   OrganizationEntity,
@@ -133,7 +132,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     private fb: FormBuilder,
     private notifier: NotifierService,
     private store: Store<ReportsState>,
-    private walkthrough: WalkthroughService,
     private packageOrganization: PackageOrganization,
     private timezone: Timezone,
     private translator: TranslateService,
@@ -178,7 +176,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         (entry) => entry.code === this.context.user.timezone
       )?.lang[lang]
     })
-    this.walkthrough.checkGuideState('rpm')
     this.store.dispatch(new ClosePanel())
     this.createStatusFilterForm()
 

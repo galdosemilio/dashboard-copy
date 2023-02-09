@@ -19,7 +19,6 @@ export * from './rpm-status'
 export * from './schedule-select.dialog'
 export * from './text-input.dialog'
 export * from './view-image'
-export * from './walkthrough'
 export * from './multiple-files-download'
 export * from './remove-patient-meeting'
 
@@ -43,7 +42,6 @@ import { ScheduleSelectDialog } from './schedule-select.dialog'
 import { SelectOrganizationDialog } from './select-organization'
 import { TextInputDialog } from './text-input.dialog'
 import { ViewImageDialog } from './view-image'
-import { WalkthroughDialog } from './walkthrough'
 import { RPMEditFormComponent, RPMEntryCardComponent } from './rpm-status'
 import { RemoveClinicAssociationDialog } from './remove-clinic-association'
 import { CoachPermissionsDialog } from './coach-permissions-dialog'
@@ -72,7 +70,6 @@ export const Dialogs = [
   SelectOrganizationDialog,
   TextInputDialog,
   ViewImageDialog,
-  WalkthroughDialog,
   MultipleFilesDownloadDialog,
   RemovePatientMeetingDialog
 ]

@@ -19,7 +19,6 @@
                         <em *ngIf="timezoneName">{{ 'REPORTS.GENERATED_IN' | translate:{timezone: timezoneName} }}</em>
                     </small>
                 </div>
-                <ccr-walkthrough [autoClose]="false" guide="rpm"></ccr-walkthrough>
             </h3>
         </div>
         <small class="top-level-accout-label" *ngIf="isTopLevelAccount">{{ 'REPORTS.RPM_BILLING_TOP_LEVEL_ACCOUNT' | translate }}</small>

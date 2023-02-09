@@ -1933,8 +1933,5 @@
     "MODIFIABLE_BY_COACHES_DESCRIPTION": "When enabled, this data point type will only be able to be viewed. Coaches will not be able to add or remove the measurements. This is useful for measurements that are only intended to be added by patients or through a third party integration.",
     "MODIFIABLE_BY_PATIENTS": "Modifiable by Patients",
     "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "When enabled, this data point type will only be able to be viewed. Patients will not be able to add or remove the measurements. This is useful for measurements that are only intended to be added by coaches or through a third party integration."
-  },
-  "WALKTHROUGH": {
-    "STARTER_GUIDE": "Starter Guide"
   }
 }

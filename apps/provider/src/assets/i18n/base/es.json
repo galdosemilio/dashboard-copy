@@ -1933,8 +1933,5 @@
     "MODIFIABLE_BY_COACHES_DESCRIPTION": "Cuando está habilitado, este punto de datos solo se podrá ver. Los entrenadores no podrán agregar ni quitar las medidas. Esto es útil para las mediciones que solo deben agregar los pacientes o mediante la integración de un tercero.",
     "MODIFIABLE_BY_PATIENTS": "Modificable por los Pacientes",
     "MODIFIABLE_BY_PATIENTS_DESCRIPTION": "Cuando está habilitado, este punto de datos solo se podrá ver. Los pacientes no podrán agregar ni eliminar las medidas. Esto es útil para las mediciones que solo deben agregar los entrenadores o mediante la integración de un tercero."
-  },
-  "WALKTHROUGH": {
-    "STARTER_GUIDE": "Guía de Inicio"
   }
 }
