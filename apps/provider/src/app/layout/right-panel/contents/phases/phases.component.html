@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-    <div *ngIf="enrollments?.length; else noEnrollments" class="scrollable-v">
+    <div *ngIf="enrollments?.length; else noEnrollments" (scroll)="onScroll$.next($event)" class="scrollable-v">
         <ul [class.force-scroll]="source?.next">
             <li *ngFor="let enrollment of enrollments">
                 <span>
@@ -8,7 +8,7 @@
             </li>
         </ul>
 
-        <div *ngIf="source.isLoading" class="mat-spinner-container">
+        <div *ngIf="isLoading" class="mat-spinner-container">
             <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
         </div>
     </div>
@@ -17,8 +17,8 @@
         <mat-icon>settings</mat-icon>
         {{ 'RIGHT_PANEL.MANAGE_PHASES' | translate }}
     </button>
-</div>
+  </div>
 
-<ng-template #noEnrollments>
+  <ng-template #noEnrollments>
     <p>{{ 'NOTIFY.ERROR.NO_PHASE_ENROLLMENTS' | translate }}</p>
-</ng-template>
+  </ng-template>

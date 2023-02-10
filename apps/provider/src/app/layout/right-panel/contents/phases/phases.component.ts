@@ -1,17 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { PhasesDataSegment } from '@app/shared'
-import { ContextService, EventsService } from '@app/service'
-import { OrganizationDetailed, PackageEnrollmentSegment } from '@coachcare/sdk'
-import { chain, intersectionBy, sortBy } from 'lodash'
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { merge } from 'rxjs'
-import { debounceTime } from 'rxjs/operators'
+import { ContextService, EventsService, NotifierService } from '@app/service'
 import {
-  PhaseEnrollmentDatabase,
-  PhaseEnrollmentDataSource
-} from '../../services'
-import * as moment from 'moment'
+  OrganizationDetailed,
+  PackageEnrollment,
+  PackageEnrollmentSegment
+} from '@coachcare/sdk'
+import { intersectionBy, uniqBy } from 'lodash'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { merge, Subject } from 'rxjs'
+import { debounceTime } from 'rxjs/operators'
 
 @UntilDestroy()
 @Component({
@@ -21,16 +20,23 @@ import * as moment from 'moment'
 })
 export class PhasesComponent implements OnDestroy, OnInit {
   public enrollments: PackageEnrollmentSegment[] = []
-  public source: PhaseEnrollmentDataSource
+  public onScroll$: Subject<any> = new Subject<any>()
+  public isLoading = false
+
+  private enrollmentsNext: number = 0
+  private scrollOffset = 5
+  private enrollmentsScroll$: Subject<void> = new Subject<void>()
 
   constructor(
     private context: ContextService,
-    private database: PhaseEnrollmentDatabase,
+    private enrollment: PackageEnrollment,
     private bus: EventsService,
+    private notify: NotifierService,
     private router: Router
   ) {
     this.onPhaseAdded = this.onPhaseAdded.bind(this)
     this.onPhaseRemoved = this.onPhaseRemoved.bind(this)
+    this.onScroll = this.onScroll.bind(this)
   }
 
   public ngOnDestroy(): void {
@@ -42,8 +48,15 @@ export class PhasesComponent implements OnDestroy, OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(() => this.resetListing())
 
-    this.createSource()
     this.subscribeToBus()
+    this.subscribeToScroll()
+
+    this.enrollmentsScroll$
+      .pipe(untilDestroyed(this), debounceTime(200))
+      .subscribe(() => this.getEnabledEnrollment())
+    merge(this.context.organization$, this.context.account$)
+      .pipe((untilDestroyed(this), debounceTime(200)))
+      .subscribe(() => this.refresh())
   }
 
   public goToPhaseManagement(): void {
@@ -53,35 +66,27 @@ export class PhasesComponent implements OnDestroy, OnInit {
     ])
   }
 
-  private createSource(): void {
-    this.source = new PhaseEnrollmentDataSource(this.database)
-    this.source.addDefault({ limit: 'all' })
-
-    this.source.addRequired(
-      this.context.organization$.pipe(debounceTime(200)),
-      () => ({
-        organization: this.context.organizationId
+  private async getEnabledEnrollment() {
+    this.isLoading = true
+    try {
+      const response = await this.enrollment.getLatestEnrollments({
+        organization: this.context.organizationId,
+        account: this.context.accountId,
+        offset: this.enrollmentsNext,
+        limit: 5,
+        isActive: true
       })
-    )
-    this.source.addRequired(
-      this.context.account$.pipe(debounceTime(200)),
-      () => ({
-        account: this.context.accountId
-      })
-    )
 
-    this.source.connect().subscribe((values) => {
-      this.enrollments = chain(values)
-        .groupBy('package.id')
-        .map(
-          (entries) =>
-            sortBy(entries, (entry) =>
-              moment(entry.enroll.start).unix()
-            ).reverse()[0]
-        )
-        .filter((entry) => entry.isActive)
-        .value()
-    })
+      this.enrollments = uniqBy(
+        [...this.enrollments, ...response.data],
+        'package.id'
+      )
+      this.enrollmentsNext = response.pagination.next
+    } catch (err) {
+      this.notify.error(err)
+    } finally {
+      this.isLoading = false
+    }
   }
 
   private onPhaseAdded(phase: PhasesDataSegment): void {
@@ -134,8 +139,21 @@ export class PhasesComponent implements OnDestroy, OnInit {
     )
   }
 
+  private onScroll($event): void {
+    const target = $event.target as HTMLElement
+    if (
+      !this.isLoading &&
+      this.enrollmentsNext &&
+      target.offsetHeight + target.scrollTop >=
+        target.scrollHeight - this.scrollOffset
+    ) {
+      this.enrollmentsScroll$.next()
+    }
+  }
+
   private resetListing(): void {
     this.enrollments = []
+    this.enrollmentsNext = 0
   }
 
   private subscribeToBus(): void {
@@ -143,8 +161,20 @@ export class PhasesComponent implements OnDestroy, OnInit {
     this.bus.register('phases.assoc.removed', this.onPhaseRemoved)
   }
 
+  private subscribeToScroll(): void {
+    this.onScroll$
+      .pipe(debounceTime(100), untilDestroyed(this))
+      .subscribe(this.onScroll)
+  }
+
   private unsubscribeFromBus(): void {
     this.bus.unregister('phases.assoc.added')
     this.bus.unregister('phases.assoc.removed')
+  }
+
+  private refresh() {
+    this.enrollments = []
+    this.enrollmentsNext = 0
+    this.enrollmentsScroll$.next()
   }
 }
