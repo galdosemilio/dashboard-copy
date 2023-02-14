@@ -1,6 +1,5 @@
 import {
   Access,
-  AccountAvatar,
   AccountIdentifier,
   AccountPassword,
   AccountPreference,
@@ -129,14 +128,6 @@ const generalThrottlingSettings = environment.enableThrottling
     : { enabled: true, options: { defaultRateLimit: 10 } }
   : { enabled: false }
 
-const avatarApiService = new ApiService({
-  token: authenticationToken,
-  caching: { enabled: true, options: { ttl: { milliseconds: 300000 } } },
-  throttling: generalThrottlingSettings,
-  headers: SDK_HEADERS,
-  errorHandling: errorHandlingSettings
-})
-
 const generalApiService = new ApiService({
   token: authenticationToken,
   caching: { enabled: false },
@@ -174,23 +165,17 @@ const messagingApiService = new ApiService({
 
 const apiUrlData = resolveApiUrl(environment, window.location.origin)
 
-avatarApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
 generalApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
 measurementApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
 messagingApiService.setEnvironment(environment.ccrApiEnv, apiUrlData?.apiUrl)
 
 if (apiUrlData?.cookieDomain) {
-  avatarApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
   generalApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
   measurementApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
   messagingApiService.appendHeaders({ cookieDomain: apiUrlData.cookieDomain })
 }
 
 export const SdkApiProviders = [
-  {
-    provide: avatarApiService,
-    useValue: avatarApiService
-  },
   {
     provide: measurementApiService,
     useValue: measurementApiService
@@ -210,7 +195,6 @@ export const SdkApiProviders = [
     useClass: Access,
     deps: [ApiService]
   },
-  { provide: AccountAvatar, useClass: AccountAvatar, deps: [avatarApiService] },
   {
     provide: AccountIdentifier,
     useClass: AccountIdentifier,

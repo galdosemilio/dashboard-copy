@@ -5,7 +5,7 @@ import {
   Input,
   OnInit
 } from '@angular/core'
-import { AccountAvatar } from '@coachcare/sdk'
+import { AccountProvider } from '@coachcare/sdk'
 import { EventsService } from '../services'
 import { sleep } from '../shared'
 
@@ -34,7 +34,7 @@ export class CcrAvatarDirective implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private bus: EventsService,
-    private accountAvatar: AccountAvatar
+    private account: AccountProvider
   ) {}
 
   public ngOnInit(): void {
@@ -54,16 +54,14 @@ export class CcrAvatarDirective implements OnInit {
       // we wait for a while after uploading it
       await sleep(2000)
 
-      const newSrc =
-        (this.accountId &&
-          (
-            await this.accountAvatar.get({
-              id: this.accountId
-            })
-          ).url) ||
-        this.default
+      if (!this.accountId) {
+        this.setSrc(this.default)
+        return
+      }
 
-      this.setSrc(`${newSrc}`)
+      const avatar = await this.account.getAvatar(this.accountId)
+
+      this.setSrc(avatar?.url ?? this.default)
     } catch (error) {
       this.onError()
     }
