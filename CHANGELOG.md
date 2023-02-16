@@ -1,3 +1,19 @@
+# [1.107.0](https://github.com/coachcare/dashboard/compare/v1.106.0...v1.107.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* displaying enrolled phases [FRON-3035] ([5bef440](https://github.com/coachcare/dashboard/commit/5bef4405be35b98571218f461ef2863f30e81ffa))
+* get latest active enrollment [FRON-3035] ([bd62872](https://github.com/coachcare/dashboard/commit/bd62872959b6abcdfb3cc6a9d5cd083b4db08317))
+* remove nickelled videos and prompts from the dashboard [FRON-3044] ([8b9bcdc](https://github.com/coachcare/dashboard/commit/8b9bcdcc6513eedf0259377f2eae77edd9301b64))
+* show rpm bulk report error [FRON-3009] ([5e72ec2](https://github.com/coachcare/dashboard/commit/5e72ec274acebaf7b2e563e2ec16ea2b7bbb2200))
+
+
+### Features
+
+* allow supervising provider to be modifiable on active rpm session [FRON-3041] ([8a356e9](https://github.com/coachcare/dashboard/commit/8a356e92a868a0179d65d4417f60a6e9762aa7e8))
+* expose external identifiers on the admin site [FRON-3000] ([d7ba4dd](https://github.com/coachcare/dashboard/commit/d7ba4dd9aba06057ef6d0b0de3f084eb53b9c734))
+
 # [1.106.0](https://github.com/coachcare/dashboard/compare/v1.105.3...v1.106.0) (2023-02-07)
 
 
