@@ -15,6 +15,8 @@ export class RPMBillingDataSource extends TableDataSource<
   PagedResponse<RPMStateSummaryItem>,
   FetchRPMBillingSummaryRequest
 > {
+  timeoutCheckCount: number = 5
+
   constructor(
     protected database: ReportsDatabase,
     protected notify: NotifierService,

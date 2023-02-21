@@ -60,6 +60,7 @@ export abstract class CcrDataSource<
   isLoading = true
   isEmpty = true
   startWithNull = true
+  timeoutCheckCount = 3
 
   /**
    * Error messages handling.
@@ -313,14 +314,14 @@ export abstract class CcrDataSource<
           // delay/timeout timer
           timer(5000, 10000).pipe(
             takeUntil(query),
-            take(3) // 5s, 15s, 25s
+            take(this.timeoutCheckCount) // 5s, 15s, 25s
           )
         ).pipe(
-          take(3),
+          take(this.timeoutCheckCount),
           // delay check
           tap((pos) => {
             if (typeof pos === 'number') {
-              if (pos < 2) {
+              if (pos < this.timeoutCheckCount - 1) {
                 this.loadingMsg = !pos ? this.waitMsg : this.delayMsg
               } else {
                 this.addError(this.timeoutMsg)
