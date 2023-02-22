@@ -7,7 +7,7 @@
   top: 0;
 
   background: mat-color($ccr-background, overlay);
-  z-index: 1;
+  z-index: 3;
 
   > div {
     color: var(--primary);
