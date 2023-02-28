@@ -5,6 +5,49 @@ ccr-page-password-update {
     margin-bottom: 6px;
   }
 
+  .logo {
+    max-height: 100px;
+    max-width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .badge-button {
+    height: 42px;
+    width: auto;
+
+    &-wrapper-lg-and-up {
+      margin-top: 15px;
+    }
+  }
+
+  @media (max-width: $md-max) {
+    .badge-button {
+      &-wrapper-lg-and-up {
+        display: none !important;
+      }
+    }
+  }
+
+  @media (min-width: $lg-min) {
+    .badge-button {
+      &-wrapper-md-and-down {
+        display: none !important;
+      }
+    }
+  }
+
+  @media only screen and (min-width: $lg-min) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+    .badge-button {
+      &-wrapper-lg-and-up {
+        display: none !important;
+      }
+
+      &-wrapper-md-and-down {
+        display: flex !important;
+      }
+    }
+  }
+
   .custom-checkbox {
     display: block;
     font-size: 14px;

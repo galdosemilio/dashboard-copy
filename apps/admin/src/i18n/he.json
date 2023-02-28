@@ -277,6 +277,8 @@
     "SEQUENCES": "רצפים",
     "SETTINGS": "הגדרות",
     "SET_PASSWORD": "יצירת סיסמה",
+    "SET_PASSWORD_SUCCESS": "הסיסמה שלך מוגדרת!",
+    "SET_PASSWORD_SUCCESS_DESCRIPTION": "הורד את האפליקציה והיכנס עם הסיסמה החדשה שלך כדי להתחיל את המסע שלך!",
     "SHIPPING": "משלוח",
     "SHORT_CODE": "קיצורים",
     "SIGN_IN": "להתחבר",

@@ -277,6 +277,8 @@
     "SEQUENCES": "Sequenzen",
     "SETTINGS": "Einstellungen",
     "SET_PASSWORD": "Passwort erstellen",
+    "SET_PASSWORD_SUCCESS": "Ihr Passwort ist gesetzt!",
+    "SET_PASSWORD_SUCCESS_DESCRIPTION": "Laden Sie die App herunter und melden Sie sich mit Ihrem neuen Passwort an, um Ihre Reise zu beginnen!",
     "SHIPPING": "Versand",
     "SHORT_CODE": "Kurzcode",
     "SIGN_IN": "Einloggen",

@@ -277,6 +277,8 @@
     "SEQUENCES": "Sequências",
     "SETTINGS": "definiões",
     "SET_PASSWORD": "Criar senha",
+    "SET_PASSWORD_SUCCESS": "Sua senha está definida!",
+    "SET_PASSWORD_SUCCESS_DESCRIPTION": "Baixe o aplicativo e faça login com sua nova senha para iniciar sua jornada!",
     "SHIPPING": "Envio",
     "SHORT_CODE": "Abreviatura",
     "SIGN_IN": "Entrar",

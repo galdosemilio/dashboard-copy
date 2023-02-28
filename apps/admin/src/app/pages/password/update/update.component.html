@@ -1,4 +1,6 @@
-<mat-card *ngIf="!serverError && isValidResetCode">
+<img class="logo" alt="logo" [src]="logoUrl" />
+
+<mat-card *ngIf="!serverError && isValidResetCode && !isPatientPasswordCreated">
   <mat-card-header>
     <h2 mat-card-title *ngIf="formType === 'create'">{{ 'GLOBAL.SET_PASSWORD' | translate }}</h2>
     <h2 mat-card-title *ngIf="formType !== 'create'">{{ 'GLOBAL.RESET_PASSWORD' | translate }}</h2>
@@ -52,6 +54,29 @@
         (reset)="setMode('default')"
         (submit)="onSubmitMFA()"
         ccrBindForm="code"></ccr-mfa-code-input>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="isPatientPasswordCreated">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'GLOBAL.SET_PASSWORD_SUCCESS' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'GLOBAL.SET_PASSWORD_SUCCESS_DESCRIPTION' | translate }}</p>
+    <div fxLayout="row" fxLayoutAlign="space-around center" [class]="wrapperClass">
+      <div *ngIf="iosLink" fxLayout="column" fxLayoutAlign="space-around center">
+        <a [href]="iosLink" target="_blank">
+          <img class="badge-button" alt="iosLink" [src]="iosButtonLink">
+        </a>
+        <qrcode [qrdata]="iosLink" [width]="160" [level]="'M'"></qrcode>
+      </div>
+      <div *ngIf="androidLink" fxLayout="column" fxLayoutAlign="space-around center">
+        <a [href]="androidLink" target="_blank">
+          <img class="badge-button" alt="androidLink" [src]="androidButtonLink">
+        </a>
+        <qrcode [qrdata]="androidLink" [width]="160" [level]="'M'"></qrcode>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

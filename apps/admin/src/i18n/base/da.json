@@ -277,6 +277,8 @@
     "SEQUENCES": "Sekvenser",
     "SETTINGS": "Indstillinger",
     "SET_PASSWORD": "Opret Adgangskode",
+    "SET_PASSWORD_SUCCESS": "Din adgangskode er indstillet!",
+    "SET_PASSWORD_SUCCESS_DESCRIPTION": "Download appen og log ind med din nye adgangskode for at starte din rejse!",
     "SHIPPING": "Forsendelse",
     "SHORT_CODE": "Forvalgskode",
     "SIGN_IN": "Log ind",

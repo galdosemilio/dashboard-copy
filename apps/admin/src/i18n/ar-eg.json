@@ -277,6 +277,8 @@
     "SEQUENCES": "متواليات",
     "SETTINGS": "Settings",
     "SET_PASSWORD": "إنشاء كلمة مرور",
+    "SET_PASSWORD_SUCCESS": "تم تعيين كلمة المرور الخاصة بك!",
+    "SET_PASSWORD_SUCCESS_DESCRIPTION": "قم بتنزيل التطبيق وقم بتسجيل الدخول باستخدام كلمة المرور الجديدة لبدء رحلتك!",
     "SHIPPING": "شحن",
     "SHORT_CODE": "رقم مختصر",
     "SIGN_IN": "تسجيل الدخول",

@@ -277,6 +277,8 @@
     "SEQUENCES": "Séquences",
     "SETTINGS": "Paramètres",
     "SET_PASSWORD": "Créer un mot de passe",
+    "SET_PASSWORD_SUCCESS": "Votre mot de passe est défini !",
+    "SET_PASSWORD_SUCCESS_DESCRIPTION": "Téléchargez l'application et connectez-vous avec votre nouveau mot de passe pour commencer votre voyage !",
     "SHIPPING": "Expédition",
     "SHORT_CODE": "Raccourci",
     "SIGN_IN": "S'identifier",

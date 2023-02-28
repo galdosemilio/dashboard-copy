@@ -12,6 +12,7 @@ import { MFACodeInputMode } from '@board/shared/mfa-code-input'
 import {
   AccountPassword,
   AccountTypeIds,
+  MobileApp,
   UpdateAccountPasswordResponse
 } from '@coachcare/sdk'
 import { _, FormUtils } from '@coachcare/backend/shared'
@@ -26,6 +27,9 @@ import {
 import { ClinicMsaProps } from '@coachcare/common/components'
 import { ResetPasswordInvalidDialog } from '../dialogs'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { TranslateService } from '@ngx-translate/core'
+import { select, Store } from '@ngrx/store'
+import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
 
 @UntilDestroy()
 @Component({
@@ -56,6 +60,12 @@ export class PasswordUpdatePageComponent implements OnInit {
   mfaForm: FormGroup
   mode: MFACodeInputMode = 'default'
   isValidResetCode = false
+  isPatientPasswordCreated = false
+  androidLink: string
+  androidButtonLink: string
+  iosLink: string
+  iosButtonLink: string
+  logoUrl: string
 
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
@@ -65,7 +75,10 @@ export class PasswordUpdatePageComponent implements OnInit {
     private notify: NotifierService,
     private password: AccountPassword,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private mobileApp: MobileApp,
+    private translate: TranslateService,
+    private store: Store<OrgPrefState.State>
   ) {}
 
   ngOnInit() {
@@ -79,6 +92,13 @@ export class PasswordUpdatePageComponent implements OnInit {
     })
     this.mfaForm = this.builder.group({})
 
+    this.store
+      .pipe(select(OrgPrefSelectors.selectAssets))
+      .subscribe((assets) => {
+        this.logoUrl =
+          assets && assets.logoUrl ? assets.logoUrl : '/assets/logo.png'
+      })
+
     this.route.queryParams.subscribe((params: any) => {
       this.accountType = params.accountType
       this.consentRequired = params.consentRequired
@@ -87,6 +107,10 @@ export class PasswordUpdatePageComponent implements OnInit {
       const code = params.code || ''
 
       void this.resetPasswordCheck(email, code)
+      this.resolveBadgeLinks(
+        this.translate.currentLang.split('-')[0].toLowerCase()
+      )
+      void this.resolveMobileAppRedirects()
 
       this.form.patchValue({
         email,
@@ -105,6 +129,29 @@ export class PasswordUpdatePageComponent implements OnInit {
     })
   }
 
+  private async resolveMobileAppRedirects() {
+    try {
+      this.androidLink = (
+        await this.mobileApp.getAndroidRedirect({
+          id: this.context.organizationId || ''
+        })
+      ).redirect
+    } catch (error) {}
+
+    try {
+      this.iosLink = (
+        await this.mobileApp.getiOsRedirect({
+          id: this.context.organizationId || ''
+        })
+      ).redirect
+    } catch (error) {}
+  }
+
+  private resolveBadgeLinks(lang: string) {
+    this.androidButtonLink = `/assets/badges/${lang}-play-store-badge.png`
+    this.iosButtonLink = `/assets/badges/${lang}-app-store-badge.png`
+  }
+
   async resetPasswordCheck(email: string, code: string) {
     try {
       await this.password.resetPasswordTest({
@@ -114,6 +161,7 @@ export class PasswordUpdatePageComponent implements OnInit {
 
       this.isValidResetCode = true
     } catch (error) {
+      this.isValidResetCode = false
       if (error.status !== 403) {
         return this.dialog.open(ConfirmDialog, {
           data: {
@@ -161,6 +209,11 @@ export class PasswordUpdatePageComponent implements OnInit {
 
         if (response && response.mfa) {
           this.detectMFA(response)
+        } else if (
+          this.accountType === AccountTypeIds.Client &&
+          this.formType === 'create'
+        ) {
+          this.isPatientPasswordCreated = true
         } else {
           this.showSuccessDialog()
         }
