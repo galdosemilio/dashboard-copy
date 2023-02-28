@@ -1195,6 +1195,7 @@
       "PARTICIPANTS_EMPTY": "Ti preghiamo di selezionare almeno un partecipante.",
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} non fa parte della clinica selezionata \"{{clinicName}}\". Ciò potrebbe comportare problemi di visibilità, in cui altri partecipanti alla riunione potrebbero non vederli elencati come partecipanti a questa riunione.",
       "REPEAT_EMPTY": "Ti preghiamo di selezionare un'opzione ripetuta.",
+      "REQUIRED_ORG_FOR_DOWNLOAD_BILLING_REPORT": "L'input \"Seleziona Clinica\" non può essere vuoto. Seleziona una clinica prima di scaricare questo rapporto",
       "RETRIEVING_MEETING_TYPES": "L'organizzazione selezionata non ha tipi di incontri. Ti preghiamo di contattare il tuo amministratore.",
       "RPM_NOT_ENABLED_CLINIC": "RPM non è abilitato per la clinica {{clinic.name}}. Si prega di selezionare una clinica diversa.",
       "SCHEDULE_CONFLICT": "{{name}} ha un conflitto di programmazione.",

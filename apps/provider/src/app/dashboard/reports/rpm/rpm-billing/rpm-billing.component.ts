@@ -687,12 +687,20 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     try {
       this.isLoading = true
 
+      if (!this.source.args.organization && !this.isTopLevelAccount) {
+        throw new Error(
+          _('NOTIFY.ERROR.REQUIRED_ORG_FOR_DOWNLOAD_BILLING_REPORT')
+        )
+      }
+
       const asOfDate = this.criteria.asOf
         ? moment(this.criteria.asOf).startOf('month').format('YYYY-MM-DD')
         : moment().startOf('month').format('YYYY-MM-DD')
 
       const response = await this.database.fetchRpmMonthlyBillingReport({
         ...this.source.args,
+        organization:
+          this.source.args.organization ?? environment.coachcareOrgId,
         date: asOfDate,
         limit: 'all',
         offset: 0

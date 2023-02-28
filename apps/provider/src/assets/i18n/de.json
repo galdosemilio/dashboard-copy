@@ -1195,6 +1195,7 @@
       "PARTICIPANTS_EMPTY": "Bitte wählen Sie mindestens einen Teilnehmer.",
       "PARTICIPANT_VISIBILITY_ERROR": "{{firstName}} {{lastName}} ist nicht Teil der ausgewählten Klinik \"{{clinicName}}\". Dies kann zu Sichtbarkeitsproblemen führen, bei denen andere Besprechungsteilnehmer sie möglicherweise nicht als Teilnehmer in dieser Besprechung aufgeführt sehen.",
       "REPEAT_EMPTY": "Bitte wählen Sie eine Wiederholungsoption.",
+      "REQUIRED_ORG_FOR_DOWNLOAD_BILLING_REPORT": "Die Eingabe \"Klinik auswählen\" darf nicht leer sein. Bitte wählen Sie eine Klinik aus, bevor Sie diesen Bericht herunterladen",
       "RETRIEVING_MEETING_TYPES": "Die ausgewählte Organisation hat keine Meeting-Typen. Bitte kontaktieren Sie Ihren Administrator.",
       "RPM_NOT_ENABLED_CLINIC": "RPM ist nicht für die Klinik aktiviert, {{clinic.name}}. Bitte wählen Sie eine andere Klinik aus.",
       "SCHEDULE_CONFLICT": "{{name}} hat einen Konflikt im Zeitplan.",
