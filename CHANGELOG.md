@@ -1,3 +1,18 @@
+# [1.108.0](https://github.com/coachcare/dashboard/compare/v1.107.0...v1.108.0) (2023-02-28)
+
+
+### Bug Fixes
+
+* allow search all orgs for external identifier [FRON-3000] ([94f30b5](https://github.com/coachcare/dashboard/commit/94f30b5b1040e0599f4dfe66d200ad38b7d617bf))
+* increase timeout for fetching rpm billing FRON-3053 ([3ca45c9](https://github.com/coachcare/dashboard/commit/3ca45c9aafd67a1de7a7ac604c25cceaa721f869))
+* show loading spinner when rpm report is retrieved [FRON-3052] ([dc3770f](https://github.com/coachcare/dashboard/commit/dc3770fbdd18225b05e6b895188964f9d37abeef))
+
+
+### Features
+
+* add monthly rpm billing report download [FRON-3015] ([39b5ba1](https://github.com/coachcare/dashboard/commit/39b5ba1e7bf8df866b8a119fcc2e58e92360ec81))
+* use v3 endpoints for avatar [FRON-3051] ([5b054c7](https://github.com/coachcare/dashboard/commit/5b054c727a9bb77ba907f09bd47e2b7de9d42e82))
+
 # [1.107.0](https://github.com/coachcare/dashboard/compare/v1.106.0...v1.107.0) (2023-02-16)
 
 
