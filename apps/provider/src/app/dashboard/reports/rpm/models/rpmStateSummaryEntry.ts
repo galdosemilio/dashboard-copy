@@ -1,6 +1,7 @@
 import {
   AccountData,
   ActiveRPMItem,
+  ExternalIdentifier,
   InactiveRPMItem,
   OrganizationWithoutShortcode,
   RPMStateSummaryBillingItem,
@@ -35,6 +36,7 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
   device: RPMDevice
   remainingDays: number
   rpm: ActiveRPMItem | InactiveRPMItem
+  externalIdentifiers: ExternalIdentifier[]
 
   constructor(
     args: any,
@@ -94,6 +96,7 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
         ? moment(args.rpm.educationProvidedAt).format('MM/DD/YYYY')
         : 'No'
     }
+    this.externalIdentifiers = args.externalIdentifiers
 
     const devices = Object.values(RPM_DEVICES)
 

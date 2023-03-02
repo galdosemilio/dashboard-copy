@@ -25,7 +25,7 @@ import {
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
-import { chain, get, isEmpty } from 'lodash'
+import { chain, times, get, isEmpty, countBy } from 'lodash'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { firstValueFrom, Subject } from 'rxjs'
@@ -336,6 +336,21 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       const filename = `RPM_${moment(criteria.asOf).format('MMM_YYYY')}.csv`
       let csv = ''
 
+      const externalIdentifierNames = chain(res)
+        .map((entry) =>
+          chain(entry.externalIdentifiers || []).groupBy((entry) => entry.name)
+        )
+        .reduce((obj, entry) => {
+          for (const [key, value] of Object.entries(entry)) {
+            if (!obj[key] || obj[key] < value.length) {
+              obj[key] = value.length
+            }
+          }
+          return obj
+        }, {})
+        .flatMap((count, key) => times(count, () => key))
+        .valueOf()
+
       const currentAsOf = moment(this.criteria.asOf).isSameOrAfter(
         moment(),
         'day'
@@ -343,23 +358,23 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         ? moment()
         : moment(this.criteria.asOf).endOf('day')
 
-      csv += `"As of: ${currentAsOf.format('MMM D, YYYY')}"${this.csvSeparator}`
+      let firstRow = `"As of: ${currentAsOf.format('MMM D, YYYY')}"${
+        this.csvSeparator
+      }`
 
-      csv += ',,,,,,,,,,,'
+      firstRow += ',,,,,,,,,,,'
+      firstRow += `"99453"${this.csvSeparator}"99453"${this.csvSeparator}`
+      firstRow += `"99454"${this.csvSeparator}"99454"${this.csvSeparator}`
+      firstRow += `"99457"${this.csvSeparator}"99457"${this.csvSeparator}`
+      firstRow += `"99458 x1"${this.csvSeparator}"99458 x1"${this.csvSeparator}`
+      firstRow += `"99458 x2"${this.csvSeparator}"99458 x2"`
 
-      csv += `"99453"${this.csvSeparator}"99453"${this.csvSeparator}`
-      csv += `"99454"${this.csvSeparator}"99454"${this.csvSeparator}`
-      csv += `"99457"${this.csvSeparator}"99457"${this.csvSeparator}`
-      csv += `"99458 x1"${this.csvSeparator}"99458 x1"${this.csvSeparator}`
-      csv += `"99458 x2"${this.csvSeparator}"99458 x2"`
-
-      csv += '\r\n'
-
+      let secondRow = ''
       if (this.timezoneName) {
-        csv += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,\r\n`
+        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,,,,,,`
       }
 
-      csv +=
+      let headers =
         'ID' +
         this.csvSeparator +
         'First Name' +
@@ -395,13 +410,13 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           return
         }
 
-        csv += `"Latest Claim Date"` + this.csvSeparator
-        csv += `"Next Claim Requirements"`
+        headers += `"Latest Claim Date"` + this.csvSeparator
+        headers += `"Next Claim Requirements"`
 
         // We iterate through the column map properties to set ADDITIONAL cells per code.
         // This is code currently doesn't run as we were asked to remove any additional cells.
         columnMap.forEach((columnInfo, index, columns) => {
-          csv +=
+          headers +=
             `"${columnInfo.column}"` +
             (index + 1 === columns.length ? '' : this.csvSeparator)
         })
@@ -409,17 +424,46 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         // If we're on the last one the codes [99458], we add an additional couple cells.
         // This is because 99458 was split into two column groups: 99458 x1 and 99458 x2.
         if (billingEntryIndex === res[0].billing.length - 1) {
-          csv += `${this.csvSeparator}"Latest Claim Date"` + this.csvSeparator
-          csv += `"Next Claim Requirements"`
-          csv += '\r\n'
+          headers +=
+            `${this.csvSeparator}"Latest Claim Date"` + this.csvSeparator
+          headers += `"Next Claim Requirements"`
         } else {
-          csv += this.csvSeparator
+          headers += this.csvSeparator
         }
       })
 
+      if (externalIdentifierNames.length > 0) {
+        firstRow += this.csvSeparator
+        headers += this.csvSeparator
+        if (secondRow) {
+          secondRow += this.csvSeparator
+        }
+      }
+
+      externalIdentifierNames.forEach((entry, index) => {
+        if (secondRow) {
+          firstRow += ',,'
+          secondRow += ',Identifier,'
+        } else {
+          firstRow += ',Identifier,'
+        }
+
+        headers += 'ID,Name,Value'
+
+        if (index + 1 !== externalIdentifierNames.length) {
+          firstRow += this.csvSeparator
+          headers += this.csvSeparator
+          if (secondRow) {
+            secondRow += this.csvSeparator
+          }
+        }
+      })
+
+      let dataRows = ''
+
       // We just go through each row and fill the cells
       res.forEach((entry) => {
-        csv +=
+        dataRows +=
           `"${entry.account.id}"` +
           this.csvSeparator +
           `"${entry.account.firstName}"` +
@@ -458,9 +502,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         entry.billing
           .filter((billingEntry) => billingEntry.code !== '99458')
           .forEach((billingEntry) => {
-            csv += this.getRPMBillingEntryContent(billingEntry, entry)
+            dataRows += this.getRPMBillingEntryContent(billingEntry, entry)
 
-            csv += this.csvSeparator
+            dataRows += this.csvSeparator
           })
 
         // This is where we start handling 99458 [x1 and x2] manually
@@ -468,12 +512,12 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
         // 99458 x1 [yeah, I know it's equivalent to letting the generic logic handle it but
         // but I separated it for readability]
-        csv += this.getRPMBillingEntryContent(lastCodeEntry, entry)
+        dataRows += this.getRPMBillingEntryContent(lastCodeEntry, entry)
 
-        csv += this.csvSeparator
+        dataRows += this.csvSeparator
 
         // 99458 x2
-        csv += `"${
+        dataRows += `"${
           lastCodeEntry.eligibility.last?.count > 1
             ? moment(lastCodeEntry.eligibility.last.timestamp).format(
                 'MM/DD/YYYY'
@@ -481,10 +525,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
             : 'N/A'
         }"${this.csvSeparator}`
 
-        csv += `"`
+        dataRows += `"`
 
         if (!lastCodeEntry.eligibility.next) {
-          csv += 'N/A"\r\n'
+          dataRows += 'N/A"\r\n'
           return
         }
 
@@ -493,24 +537,24 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           !lastCodeEntry.hasCodeRequirements &&
           !lastCodeEntry.remainingDays
 
-        csv += `${
+        dataRows += `${
           !previousConditionsMet ? '99458 x1 requirements not satisfied' : ''
         }`
 
         // Showing/hiding the semicolon here requires evaluation.
         if (lastCodeEntry.remainingDays) {
           if (!previousConditionsMet) {
-            csv += `; `
+            dataRows += `; `
           }
 
-          csv += `${lastCodeEntry.remainingDays} more calendar days; `
+          dataRows += `${lastCodeEntry.remainingDays} more calendar days; `
         }
 
         // Since all that 99458 x2 requires aside from days an 99458 x1 is monitoring
         // time, we check for the remaining time that 99458 code reports.
         // The remaining time reported by the code 99458 is only related to 99458 x2
         // when the previous iteration of 99458 [99458 x1] has been completed.
-        csv += lastCodeEntry.eligibility.next?.monitoring?.remaining
+        dataRows += lastCodeEntry.eligibility.next?.monitoring?.remaining
           ? `${
               !lastCodeEntry.remainingDays && !previousConditionsMet ? '; ' : ''
             }${this.getRemainingMetricString(
@@ -518,9 +562,47 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
               'monitoring'
             )}`
           : ''
-        csv += '"\r\n'
+        dataRows += '"'
+
+        if (externalIdentifierNames.length > 0) {
+          dataRows += this.csvSeparator
+          const externalIdentifierNameGroup = countBy(externalIdentifierNames)
+          const entries = Object.entries(externalIdentifierNameGroup)
+          entries.forEach(([name, count], eIndex) => {
+            const externalIdentifiers =
+              entry.externalIdentifiers?.filter((item) => item.name === name) ||
+              []
+
+            times(count, (index) => {
+              const externalIdentifier = externalIdentifiers[index]
+
+              if (externalIdentifier) {
+                dataRows += externalIdentifier.id + this.csvSeparator
+                dataRows += externalIdentifier.name + this.csvSeparator
+                dataRows += externalIdentifier.value
+              } else {
+                dataRows += ',,'
+              }
+
+              if (
+                index + 1 !== externalIdentifierNames.length &&
+                eIndex + 1 !== entries.length
+              ) {
+                dataRows += this.csvSeparator
+              }
+            })
+          })
+        }
+
+        dataRows += '\r\n'
       })
 
+      csv += firstRow + '\r\n'
+      if (secondRow) {
+        csv += secondRow + '\r\n'
+      }
+      csv += headers + '\r\n'
+      csv += dataRows
       csv +=
         `\r\n"${currentAsOf.format('dddd, MMM D, YYYY HH:mm:ss A [GMT]Z')}"` +
         this.csvSeparator
