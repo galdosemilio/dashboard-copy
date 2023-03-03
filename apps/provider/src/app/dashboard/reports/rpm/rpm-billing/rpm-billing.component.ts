@@ -338,7 +338,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
       const externalIdentifierNames = chain(res)
         .map((entry) =>
-          chain(entry.externalIdentifiers || []).groupBy((entry) => entry.name)
+          chain(entry.externalIdentifiers || [])
+            .groupBy((entry) => entry.name)
+            .valueOf()
         )
         .reduce((obj, entry) => {
           for (const [key, value] of Object.entries(entry)) {
