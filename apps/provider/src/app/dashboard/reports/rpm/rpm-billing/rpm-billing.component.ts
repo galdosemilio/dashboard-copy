@@ -739,9 +739,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
               : ''
           }"` +
           this.csvSeparator +
-          `"${entry.organization?.preference?.id || ''}"` +
+          `"${entry.organization?.rpm?.id || ''}"` +
           this.csvSeparator +
-          `"${entry.organization?.preference?.name || ''}"` +
+          `"${entry.organization?.rpm?.name || ''}"` +
           this.csvSeparator +
           `"${
             entry.state?.billable?.isActive
