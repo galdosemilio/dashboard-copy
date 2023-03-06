@@ -1171,20 +1171,17 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private sortHandler(): Partial<FetchRPMBillingSummaryRequest> {
+    if (!this.sort.direction || !this.sort.active) {
+      return
+    }
+
     return {
-      sort: this.sort.direction
-        ? [
-            {
-              property: this.sort.active || 'firstName',
-              dir: this.sort.direction || 'asc'
-            }
-          ]
-        : [
-            {
-              property: 'firstName',
-              dir: 'asc'
-            }
-          ]
+      sort: [
+        {
+          property: this.sort.active,
+          dir: this.sort.direction
+        }
+      ]
     } as Partial<FetchRPMBillingSummaryRequest>
   }
 

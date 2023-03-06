@@ -162,9 +162,7 @@
         </th>
 
         <th #columns class="first-name-cell" [class.sticky-column]="isDesktop">
-            <ccr-table-sort-header property="firstName">
-                <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
-            </ccr-table-sort-header>
+            {{ 'BOARD.FIRST_NAME' | translate }}
         </th>
 
         <th #columns class="last-name-cell" [class.sticky-column]="isDesktop">
