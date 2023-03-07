@@ -1,3 +1,13 @@
+## [1.108.1](https://github.com/coachcare/dashboard/compare/v1.108.0...v1.108.1) (2023-03-07)
+
+
+### Bug Fixes
+
+* add external identifier columns to rpm monitoring report [FRON-3033] ([f0295fe](https://github.com/coachcare/dashboard/commit/f0295fe8174f33e516f52b40879be408e6f102dd))
+* missing value of for chain [FRON-3033] ([3ead788](https://github.com/coachcare/dashboard/commit/3ead788bbb4f416a747f502b53a6dba4cdf03370))
+* rpm billing table sort [FRON-3058] ([b6ca9be](https://github.com/coachcare/dashboard/commit/b6ca9be9c4a0eea23a231cc19ecc78e7aad8eb65))
+* show correct org name and id in billing report [FRON-3055] ([f9003db](https://github.com/coachcare/dashboard/commit/f9003db0ec840ea2341ae52010eb043ee4aa8b2a))
+
 # [1.108.0](https://github.com/coachcare/dashboard/compare/v1.107.0...v1.108.0) (2023-02-28)
 
 
