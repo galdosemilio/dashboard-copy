@@ -6,4 +6,5 @@ export interface PatientDashboardConfigDetails {
   SHOW_NEW_APPOINTMENT?: boolean
   ALLOWED_CHART_DATA_POINT_TYPES?: DataPointTypes[] | null
   SUMMARY_BOXES?: SectionConfigObject
+  SHOW_EXERCISE_MODERATE_TOTAL?: boolean
 }

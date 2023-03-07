@@ -1,4 +1,17 @@
 <div class="ccr-container">
+    <div *ngIf="showTotalModerate" class="total-exercise" flexLayout="row" fxLayoutAlign.xs="center stretch" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <div class="total-exercise-item">
+            <p>
+                {{ 'GLOBAL.TOTAL_TIME_MINUTE' | translate }}
+            </p>
+            <p class="total-value">
+                {{ totalModerateTime | number:'1.1-1' }}
+            </p>
+            <p>
+                {{ 'GLOBAL.MODERATE' | translate }}
+            </p>
+        </div>
+    </div>
     <app-dieter-journal-exercise-table [source]="source"></app-dieter-journal-exercise-table>
 
     <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center">

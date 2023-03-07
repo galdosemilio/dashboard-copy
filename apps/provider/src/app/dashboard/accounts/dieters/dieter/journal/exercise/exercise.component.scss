@@ -1,0 +1,25 @@
+@import 'styles/variables';
+
+.total-exercise {
+  margin-bottom: 10px;
+
+  .total-exercise-item {
+    border: 2px solid mat-color($ccr-foreground, dividers);
+    border-radius: 5px;
+    padding: 10px 20px;
+    position: relative;
+    user-select: none;
+
+    p {
+      margin-bottom: 10px;
+
+      &.total-value {
+        color: var(--primary);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

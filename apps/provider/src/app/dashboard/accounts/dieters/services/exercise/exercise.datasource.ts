@@ -19,10 +19,8 @@ export class ExerciseDataSource extends TableDataSource<
     super()
     if (this.paginator) {
       this.addOptional(this.paginator.page, () => ({
-        limit: this.paginator.pageSize || this.pageSize,
-        offset:
-          (this.paginator.pageIndex || this.pageIndex) *
-          (this.paginator.pageSize || this.pageSize)
+        offset: this.pageIndex * this.pageSize,
+        limit: this.pageSize
       }))
     }
   }
