@@ -1545,6 +1545,7 @@
     "24H_AGE_NOTICE": "מושב סל\"ד זה כבר עבר עריכה פעם אחרי 24 שעות. זה לא יכול להיות שונה שוב.",
     "ABOUT_RPM": "זה מחליף ניטור מרחוק המטופל (RPM) שירותים כי כעת reimbursable על ידי Medicare ו רבים מסחריים payors. תוכל להפעיל את הכלי לאלף הופעות עבור מטופל זה כאן, או ליצור קשר עם <a href=mailto:sales@coachcare.com\"> sales@coachcare.com </a> לקבלת מידע נוסף. הינכם מתבקשים לשים לב כי תשלום נוסף עבור שירותים אלה.\"",
     "ACTIVATION_DATE": "תאריך ההפעלה",
+    "ACTIVITY_TRACKER": "מעקב אחר פעילות",
     "ALREADY_ELIGIBLE": "כבר כשיר",
     "BP_CUFF": "לחץ דם BEAT קאף",
     "CALENDAR_ICON_DESCRIPTION": "עוד {{ amount }} יום צריך לחלוף",

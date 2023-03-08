@@ -1545,6 +1545,7 @@
     "24H_AGE_NOTICE": "Questa sessione RPM è già stato modificato una volta dopo 24 ore. Esso non può essere modificato di nuovo.",
     "ABOUT_RPM": "Questo alterna i servizi di monitoraggio in remoto del paziente (MRP), ora rimborsabile da Medicare e altri servizi a pagamento. Puoi attivare MRP per questo paziente qui",
     "ACTIVATION_DATE": "Data di attivazione",
+    "ACTIVITY_TRACKER": "Rilevatore di attività",
     "ALREADY_ELIGIBLE": "Già ammissibili",
     "BP_CUFF": "Pressione sanguigna polsino Beat",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} giorni in più devono trascorrere",

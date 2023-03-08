@@ -55,6 +55,7 @@ import {
 import { GardenStatePainSectionConfig } from './garden-state'
 import { NXTSTIMSectionConfig } from './nxtstim'
 import { AlaskaPremierSectionConfig } from './alaska-premier'
+import { WakeForestSectionConfig } from './wake-forest'
 
 export interface SectionConfigObject {
   component: any
@@ -130,6 +131,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6916']: MuscleWiseSectionConfig,
     ['7032']: GardenStatePainSectionConfig,
     ['7074']: NXTSTIMSectionConfig,
-    ['7080']: AlaskaPremierSectionConfig
+    ['7080']: AlaskaPremierSectionConfig,
+    ['7227']: WakeForestSectionConfig
   }
 }

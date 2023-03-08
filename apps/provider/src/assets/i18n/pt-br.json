@@ -1545,6 +1545,7 @@
     "24H_AGE_NOTICE": "Esta sessão RPM já foi editado uma vez após 24 horas. Ele não pode ser modificado novamente.",
     "ABOUT_RPM": "Estes toggles fazem o monitoramento remoto dos pacientes (RPM) que agora são reembolsáveis pela Medicare e por muitos financiadores comerciais. Pode ativar as RPM para este paciente aqui",
     "ACTIVATION_DATE": "Ativação Data",
+    "ACTIVITY_TRACKER": "Rastreador de atividades",
     "ALREADY_ELIGIBLE": "Já elegíveis",
     "BP_CUFF": "Pressão BATIDA Sangue Cuff",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} dias mais precisam decorrer",

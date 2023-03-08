@@ -1545,6 +1545,7 @@
     "24H_AGE_NOTICE": "Cette session RPM a déjà été modifié une fois après 24 heures. Il ne peut pas être modifiée à nouveau.",
     "ABOUT_RPM": "Taux de graisse viscérale)",
     "ACTIVATION_DATE": "Date d'activation",
+    "ACTIVITY_TRACKER": "Suivi d'activité",
     "ALREADY_ELIGIBLE": "Déjà admissible",
     "BP_CUFF": "Boutons de manchette de tension artérielle BATTRE",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} jours de plus doivent s'écouler",

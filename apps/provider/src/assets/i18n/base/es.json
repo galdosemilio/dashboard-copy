@@ -1545,6 +1545,7 @@
     "24H_AGE_NOTICE": "Esta sesión de RPM ha estado activa durante más de 24 horas. Sólo puede ser editada una vez.",
     "ABOUT_RPM": "Permite configurar los servicios de monitoreo remoto de pacientes (RPM, por sus siglas en inglés) los cuales ahora son reembolsables por Medicare y muchos pagadores comerciales. Puede activar RPM aquí, o contactar a <a href=\"mailto:sales@coachcare.com\">sales@coachcare.com</a> para obtener más información. Tenga en cuenta que hay un cargo adicional por estos servicios.",
     "ACTIVATION_DATE": "Fecha de Activación",
+    "ACTIVITY_TRACKER": "Rastreador de actividad",
     "ALREADY_ELIGIBLE": "Elegible",
     "BP_CUFF": "BEAT Brazalete de Presión Sanguínea",
     "CALENDAR_ICON_DESCRIPTION": "Tienen que transcurrir {{ amount }} días más",
