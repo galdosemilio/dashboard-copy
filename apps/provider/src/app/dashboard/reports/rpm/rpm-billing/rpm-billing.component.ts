@@ -21,7 +21,8 @@ import {
   PackageOrganization,
   Timezone,
   TimezoneResponse,
-  RPM
+  RPM,
+  ExternalIdentifier
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
@@ -56,6 +57,7 @@ import { DeviceDetectorService } from 'ngx-device-detector'
 import { CSV } from '@coachcare/common/shared'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { RPMStateEntry } from '@app/shared/components/rpm/models'
+import { RPMMonthlySummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchRPMMonthlyBillingSummaryResponse.interface'
 
 interface StorageFilter {
   selectedClinicId?: string
@@ -307,6 +309,105 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     )
   }
 
+  private getExternalIdentifierNames(
+    data: Array<RPMStateSummaryEntry | RPMMonthlySummaryItem>
+  ): string[] {
+    return chain(data)
+      .map((entry) =>
+        chain(entry.externalIdentifiers || [])
+          .groupBy((entry) => entry.name)
+          .valueOf()
+      )
+      .reduce((obj, entry) => {
+        for (const [key, value] of Object.entries(entry)) {
+          if (!obj[key] || obj[key] < value.length) {
+            obj[key] = value.length
+          }
+        }
+        return obj
+      }, {})
+      .flatMap((count, key) => times(count, () => key))
+      .valueOf()
+  }
+
+  private addExternalIdentifierHeaders(
+    externalIdentifierNames: string[],
+    headers: string,
+    firstRow: string,
+    secondRow?: string
+  ) {
+    if (externalIdentifierNames.length > 0) {
+      firstRow += this.csvSeparator
+      headers += this.csvSeparator
+      if (secondRow) {
+        secondRow += this.csvSeparator
+      }
+    }
+
+    externalIdentifierNames.forEach((entry, index) => {
+      if (secondRow) {
+        firstRow += ',,'
+        secondRow += ',Identifier,'
+      } else {
+        firstRow += ',Identifier,'
+      }
+
+      headers += 'ID,Name,Value'
+
+      if (index + 1 !== externalIdentifierNames.length) {
+        firstRow += this.csvSeparator
+        headers += this.csvSeparator
+        if (secondRow) {
+          secondRow += this.csvSeparator
+        }
+      }
+    })
+
+    return {
+      firstRow,
+      secondRow,
+      headers
+    }
+  }
+
+  private addExternalIdentifierValues(
+    externalIdentifierNames: string[],
+    externalIdentifiers: ExternalIdentifier[]
+  ) {
+    if (externalIdentifierNames.length === 0) {
+      return ''
+    }
+
+    let values = this.csvSeparator
+    const externalIdentifierNameGroup = countBy(externalIdentifierNames)
+    const entries = Object.entries(externalIdentifierNameGroup)
+    entries.forEach(([name, count], eIndex) => {
+      const filteredExternalIdentifiers =
+        externalIdentifiers?.filter((item) => item.name === name) || []
+
+      times(count, (index) => {
+        const externalIdentifier = filteredExternalIdentifiers[index]
+
+        if (externalIdentifier) {
+          values += externalIdentifier.id + this.csvSeparator
+          values += externalIdentifier.name + this.csvSeparator
+          values += externalIdentifier.value
+        } else {
+          values += ',,'
+        }
+
+        if (
+          index + 1 !== externalIdentifierNames.length &&
+          eIndex + 1 !== entries.length
+        ) {
+          values += this.csvSeparator
+        }
+      })
+    })
+
+    return values
+  }
+
   private async downloadMonitoringReport(): Promise<void> {
     try {
       this.isLoading = true
@@ -336,22 +437,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       const filename = `RPM_${moment(criteria.asOf).format('MMM_YYYY')}.csv`
       let csv = ''
 
-      const externalIdentifierNames = chain(res)
-        .map((entry) =>
-          chain(entry.externalIdentifiers || [])
-            .groupBy((entry) => entry.name)
-            .valueOf()
-        )
-        .reduce((obj, entry) => {
-          for (const [key, value] of Object.entries(entry)) {
-            if (!obj[key] || obj[key] < value.length) {
-              obj[key] = value.length
-            }
-          }
-          return obj
-        }, {})
-        .flatMap((count, key) => times(count, () => key))
-        .valueOf()
+      const externalIdentifierNames = this.getExternalIdentifierNames(res)
 
       const currentAsOf = moment(this.criteria.asOf).isSameOrAfter(
         moment(),
@@ -434,32 +520,16 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         }
       })
 
-      if (externalIdentifierNames.length > 0) {
-        firstRow += this.csvSeparator
-        headers += this.csvSeparator
-        if (secondRow) {
-          secondRow += this.csvSeparator
-        }
-      }
+      const headerData = this.addExternalIdentifierHeaders(
+        externalIdentifierNames,
+        headers,
+        firstRow,
+        secondRow
+      )
 
-      externalIdentifierNames.forEach((entry, index) => {
-        if (secondRow) {
-          firstRow += ',,'
-          secondRow += ',Identifier,'
-        } else {
-          firstRow += ',Identifier,'
-        }
-
-        headers += 'ID,Name,Value'
-
-        if (index + 1 !== externalIdentifierNames.length) {
-          firstRow += this.csvSeparator
-          headers += this.csvSeparator
-          if (secondRow) {
-            secondRow += this.csvSeparator
-          }
-        }
-      })
+      firstRow = headerData.firstRow
+      secondRow = headerData.secondRow
+      headers = headerData.headers
 
       let dataRows = ''
 
@@ -566,35 +636,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           : ''
         dataRows += '"'
 
-        if (externalIdentifierNames.length > 0) {
-          dataRows += this.csvSeparator
-          const externalIdentifierNameGroup = countBy(externalIdentifierNames)
-          const entries = Object.entries(externalIdentifierNameGroup)
-          entries.forEach(([name, count], eIndex) => {
-            const externalIdentifiers =
-              entry.externalIdentifiers?.filter((item) => item.name === name) ||
-              []
-
-            times(count, (index) => {
-              const externalIdentifier = externalIdentifiers[index]
-
-              if (externalIdentifier) {
-                dataRows += externalIdentifier.id + this.csvSeparator
-                dataRows += externalIdentifier.name + this.csvSeparator
-                dataRows += externalIdentifier.value
-              } else {
-                dataRows += ',,'
-              }
-
-              if (
-                index + 1 !== externalIdentifierNames.length &&
-                eIndex + 1 !== entries.length
-              ) {
-                dataRows += this.csvSeparator
-              }
-            })
-          })
-        }
+        dataRows += this.addExternalIdentifierValues(
+          externalIdentifierNames,
+          entry.externalIdentifiers
+        )
 
         dataRows += '\r\n'
       })
@@ -659,27 +704,31 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
 
+      const externalIdentifierNames = this.getExternalIdentifierNames(data)
+
       const filename = `RPM_BILLING_${moment(asOfDate).format('MMM_YYYY')}.csv`
 
       let csv = ''
 
       const currentAsOf = moment(asOfDate)
 
-      csv += `"As of: ${currentAsOf.format('MMM, YYYY')}"${this.csvSeparator}`
-      csv += ',,,,,,,,,,'
-      csv += `"99453"${this.csvSeparator}`
-      csv += `"99454 x1"${this.csvSeparator}`
-      csv += `"99454 x2"${this.csvSeparator}`
-      csv += `"99457"${this.csvSeparator}`
-      csv += `"99458 x1"${this.csvSeparator}`
-      csv += `"99458 x2"`
-      csv += '\r\n'
+      let firstRow = `"As of: ${currentAsOf.format('MMM, YYYY')}"${
+        this.csvSeparator
+      }`
+      firstRow += ',,,,,,,,,,'
+      firstRow += `"99453"${this.csvSeparator}`
+      firstRow += `"99454 x1"${this.csvSeparator}`
+      firstRow += `"99454 x2"${this.csvSeparator}`
+      firstRow += `"99457"${this.csvSeparator}`
+      firstRow += `"99458 x1"${this.csvSeparator}`
+      firstRow += `"99458 x2"`
 
+      let secondRow = ''
       if (this.timezoneName) {
-        csv += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,\r\n`
+        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,`
       }
 
-      csv +=
+      let headers =
         'ID' +
         this.csvSeparator +
         'First Name' +
@@ -712,15 +761,27 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.csvSeparator +
         'Claim Date' +
         this.csvSeparator +
-        'Claim Date' +
-        '\r\n'
+        'Claim Date'
+
+      const headerData = this.addExternalIdentifierHeaders(
+        externalIdentifierNames,
+        headers,
+        firstRow,
+        secondRow
+      )
+
+      firstRow = headerData.firstRow
+      secondRow = headerData.secondRow
+      headers = headerData.headers
+
+      let dataRows = ''
 
       for (const entry of data) {
         const eligibilityGroup = chain(entry.eligibility)
           .groupBy('code')
           .value()
 
-        csv +=
+        dataRows +=
           `"${entry.account.id}"` +
           this.csvSeparator +
           `"${entry.account.firstName}"` +
@@ -798,8 +859,21 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
                 )
               : 'N/A'
           } "`
-        csv += '\r\n'
+
+        dataRows += this.addExternalIdentifierValues(
+          externalIdentifierNames,
+          entry.externalIdentifiers
+        )
+
+        dataRows += '\r\n'
       }
+
+      csv += firstRow + '\r\n'
+      if (secondRow) {
+        csv += secondRow + '\r\n'
+      }
+      csv += headers + '\r\n'
+      csv += dataRows
 
       CSV.toFile({ content: csv, filename })
     } catch (error) {
