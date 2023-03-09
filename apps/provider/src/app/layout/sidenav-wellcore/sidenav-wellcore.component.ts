@@ -163,13 +163,6 @@ export class SidenavWellcoreComponent implements OnInit {
         isAllowedForPatients: true,
         children: [
           {
-            code: SidenavOptions.RESOURCES_SCHEDULE_SUPPORT_CALL,
-            navName: _('SIDENAV.SCHEDULE_SUPPORT_CALL'),
-            navLink: 'https://calendly.com/coachcarekjm/supportcall',
-            isAllowedForPatients: true,
-            icon: 'add_ic_call'
-          },
-          {
             code: SidenavOptions.RESOURCES_CONTACT,
             navName: _('SIDENAV.CONTACT_SUPPORT'),
             navLink: `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${this.currentLang}`,
@@ -247,13 +240,6 @@ export class SidenavWellcoreComponent implements OnInit {
         )) > -1
     )
 
-    const idxSupportCallChild =
-      idxProviderContact >= 0 && this.sidenavItems.length > 0
-        ? this.sidenavItems[idxProviderContact].children.findIndex(
-            (child) => child.navName === _('SIDENAV.SCHEDULE_SUPPORT_CALL')
-          )
-        : -1
-
     if (idxProviderContact > -1) {
       if (idxProviderContactChild > -1) {
         this.sidenavItems[idxProviderContact].children[
@@ -261,16 +247,6 @@ export class SidenavWellcoreComponent implements OnInit {
         ].navLink = providerContactLink
           ? providerContactLink
           : `https://coachcare.zendesk.com/hc/en-us/requests/new?lang=${baseLang}`
-      }
-
-      if (idxSupportCallChild > -1) {
-        this.sidenavItems[idxProviderContact].children[idxSupportCallChild] = {
-          ...this.sidenavItems[idxProviderContact].children[
-            idxSupportCallChild
-          ],
-          cssClass:
-            this.translate.currentLang.split('-')[0] === 'en' ? '' : 'hidden'
-        }
       }
     }
   }
