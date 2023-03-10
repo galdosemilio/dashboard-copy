@@ -1,3 +1,17 @@
+# [1.109.0](https://github.com/coachcare/dashboard/compare/v1.108.1...v1.109.0) (2023-03-10)
+
+
+### Bug Fixes
+
+* add external identifiers to billing report [FRON-3033] ([9b6436d](https://github.com/coachcare/dashboard/commit/9b6436d4707baab39a74d45fb670e087796aa532))
+* remove schedule a call and rename email support [FRON-3061] ([0b30b24](https://github.com/coachcare/dashboard/commit/0b30b248196f3ca44117da1fc2ee71f94d370098))
+
+
+### Features
+
+* add activity tracker to devices for wake forest [FRON-3060] ([526c230](https://github.com/coachcare/dashboard/commit/526c230ea25663b9d72db3675784fada006f2a80))
+* show mobile link and qr code for patient reset password [FRON-3029] ([d4cba07](https://github.com/coachcare/dashboard/commit/d4cba072ee0e4c2c13feb87b2d53a380dd0b4fd6))
+
 ## [1.108.1](https://github.com/coachcare/dashboard/compare/v1.108.0...v1.108.1) (2023-03-07)
 
 
