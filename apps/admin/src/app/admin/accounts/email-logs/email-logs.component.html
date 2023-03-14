@@ -1,0 +1,94 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center" fxLayoutGap="10px">
+    <mat-form-field width="300" [class.readonly]="isReadonly">
+      <mat-select
+      placeholder="{{ 'GLOBAL.SENDGRID_ACCOUNT' | translate }}"
+      [(value)]="sendgrid"
+      (selectionChange)="onChangeSendGrid()"
+      (change)="$event.stopPropagation()">
+        <mat-option *ngFor="let option of sendgridList" [value]="option.id">
+          {{ option.name | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxFlex></div>
+  </div>
+</div>
+<div *ngIf="deliverabilityIssues.length > 0" style="margin-bottom: 20px;">
+  <p>{{ 'GLOBAL.USER_HAS_DELIVERABILITY_ISSUES' | translate }}</p>
+  <ul>
+    <li *ngFor="let issue of deliverabilityIssues">{{ 'GLOBAL.DELIVERABILITY_ISSUE' | translate:{type: issue.type} }}</li>
+  </ul>
+  <div>
+    <a mat-button color="primary" class="ccr-button"
+    fxFlex="0 0 auto" fxFlex.xs="100%" (click)="onClearDeliverabilityIssues()">
+      <span>{{ 'GLOBAL.REMOVE_FROM_BOUNCE_OR_BLOCK_LIST' | translate }}</span>
+    </a>
+  </div>
+</div>
+<div class="ccr-table" [class.ccr-loading]="source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
+  <mat-table [dataSource]="source">
+    <ng-container matColumnDef="updatedAt">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.SENT' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+    >
+        {{ row.updatedAt | amDateFormat:'MMM D YYYY, HH:mm' }}
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="from">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.FROM' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.from }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="to">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.TO' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.to }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subject">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.SUBJECT' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.subject }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.STATUS' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.status }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="count">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.OPEN_COUNT' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+      fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.open?.count }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayout="row wrap"
+    *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+  <ccr-table-overlay [source]="source" [emptyMsg]="'NOTIFY.ERROR.EMPTY_EMAIL_LOGS' | translate"></ccr-table-overlay>
+</div>

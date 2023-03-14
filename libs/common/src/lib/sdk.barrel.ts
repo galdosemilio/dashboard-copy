@@ -19,6 +19,7 @@ import {
   ContentPreference,
   CountryProvider,
   Device,
+  EmailProvider,
   Exercise,
   ExerciseAssociation,
   ExerciseType,
@@ -237,6 +238,7 @@ export const SdkApiProviders = [
     useClass: EcommerceProvider,
     deps: [ApiService]
   },
+  { provide: EmailProvider, useClass: EmailProvider, deps: [ApiService] },
   { provide: Exercise, useClass: Exercise, deps: [ApiService] },
   {
     provide: ExerciseAssociation,

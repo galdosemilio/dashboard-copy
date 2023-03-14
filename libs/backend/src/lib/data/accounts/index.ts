@@ -1,4 +1,5 @@
 export * from './accounts.database'
 export * from './accounts.datasource'
 export * from './affiliation/index'
+export * from './email-logs'
 export * from './external-identifiers/index'

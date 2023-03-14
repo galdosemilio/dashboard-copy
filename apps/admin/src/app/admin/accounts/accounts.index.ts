@@ -7,6 +7,8 @@ import { AccountDialogs, AccountResolver, AccountRoutes } from '@board/services'
 import {
   AccountsDatabase,
   AccountsDataSource,
+  EmailLogsDatabase,
+  EmailLogsDataSource,
   ExternalIdentifiersDatabase,
   ExternalIdentifiersDataSource
 } from '@coachcare/backend/data'
@@ -21,6 +23,7 @@ import {
   AccountCSVDialogComponent,
   AddExternalIdentifierDialogComponent
 } from './dialogs'
+import { EmailLogsComponent } from './email-logs'
 import { ExternalIdentifiersComponent } from './external-identifiers'
 import { AccountFormComponent, DeviceSyncComponent } from './form'
 import { AccountsListComponent, AccountsTableComponent } from './list'
@@ -36,7 +39,8 @@ export const AccountsComponents = [
   AffiliatedOrgComponent,
   DeviceSyncComponent,
   AddExternalIdentifierDialogComponent,
-  ExternalIdentifiersComponent
+  ExternalIdentifiersComponent,
+  EmailLogsComponent
 ]
 
 export const AccountsEntryComponents = [
@@ -51,6 +55,8 @@ export const AccountsProviders = [
   AccountDialogs,
   AccountsDataSource,
   AffiliationAccountsDatabase,
+  EmailLogsDataSource,
+  EmailLogsDatabase,
   ExternalIdentifiersDataSource,
   ExternalIdentifiersDatabase
 ]
