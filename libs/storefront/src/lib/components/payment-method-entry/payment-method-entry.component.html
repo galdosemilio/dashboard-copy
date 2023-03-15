@@ -11,7 +11,7 @@ fxLayoutGap="15px">
     </p>
 
     <div fxLayout="row" fxLayoutAlign="start space-between" fxLayoutGap="15px">
-      <div class="type-container" fxFlex>&nbsp;</div>
+      <img [src]="brandImage" [alt]="paymentMethod.type" (error)="defaultPaymentMethod($event)">
       <div class="info" fxFlex="90%" fxFlex.lt-md="75%" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
         <p>****{{ paymentMethod.last4Digits }}</p>
         <p>{{ 'GLOBAL.EXPIRES' | translate:{date: paymentMethod.expMonth + '/' + paymentMethod.expYear} }}</p>

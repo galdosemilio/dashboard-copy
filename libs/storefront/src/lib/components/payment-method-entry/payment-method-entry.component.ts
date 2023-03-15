@@ -22,4 +22,15 @@ export class StorefrontPaymentMethodEntryComponent {
     new EventEmitter<StorefrontPaymentMethod>()
   @Output() onSetDefault: EventEmitter<StorefrontPaymentMethod> =
     new EventEmitter<StorefrontPaymentMethod>()
+
+  get brandImage() {
+    return `https://cdn.coachcare.com/corporate/credit-card-logos/${this.paymentMethod.type
+      .split(' ')
+      .join('_')}.png`
+  }
+
+  defaultPaymentMethod(event) {
+    event.target.src =
+      'https://cdn.coachcare.com/corporate/credit-card-logos/default.png'
+  }
 }
