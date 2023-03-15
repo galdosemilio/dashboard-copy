@@ -3,4 +3,5 @@ export interface RightPanelDetails {
   REMINDERS_FORM?: string
   SHOW_REMINDERS?: boolean
   SHOW_DAYSHEET_BUTTON?: boolean
+  FORCE_CLINIC_ASSOCIATION_ON_NOTE_CREATION?: string
 }

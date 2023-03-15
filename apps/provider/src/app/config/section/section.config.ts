@@ -56,6 +56,10 @@ import { GardenStatePainSectionConfig } from './garden-state'
 import { NXTSTIMSectionConfig } from './nxtstim'
 import { AlaskaPremierSectionConfig } from './alaska-premier'
 import { WakeForestSectionConfig } from './wake-forest'
+import {
+  DonnaKrechOnlineProdSectionConfig,
+  DonnaKrechOnlineTestSectionConfig
+} from './donna-krech-online'
 
 export interface SectionConfigObject {
   component: any
@@ -103,7 +107,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7537']: MuscleWiseSectionConfig,
     ['7546']: NXTSTIMSectionConfig,
     ['7554']: GardenStatePainSectionConfig,
-    ['7556']: AlaskaPremierSectionConfig
+    ['7556']: AlaskaPremierSectionConfig,
+    ['7614']: DonnaKrechOnlineTestSectionConfig
   },
   prod: {
     ['4050']: LeanMDSectionConfig,
@@ -116,6 +121,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['4156']: ShakeItProdSectionConfig,
     ['6375']: ApolloInternationalDemoClinicSectionConfig,
     ['5329']: ApolloUSProdSectionConfig,
+    ['5336']: DonnaKrechOnlineProdSectionConfig,
     ['5341']: ApolloInternationalSectionConfig,
     ['5544']: IdealYouProdSectionConfig,
     ['6504']: ApolloUSClinicsProdSectionConfig,

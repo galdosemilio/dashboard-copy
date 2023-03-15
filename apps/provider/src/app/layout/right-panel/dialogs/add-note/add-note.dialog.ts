@@ -18,6 +18,7 @@ import { _ } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subscription } from 'rxjs'
 import { FormsDatasource } from '@app/dashboard/library/forms/models'
+import { resolveConfig } from '@app/config/section'
 
 interface AddNoteDialogData {
   formId: string
@@ -44,7 +45,8 @@ export class AddNoteDialog implements OnDestroy, OnInit {
     private context: ContextService,
     private dialogRef: MatDialogRef<AddNoteDialog>,
     private forms: FormsDatabase,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    protected database: FormsDatabase
   ) {}
 
   async ngOnInit() {
@@ -66,7 +68,7 @@ export class AddNoteDialog implements OnDestroy, OnInit {
 
     this.selectedClinicSubscription = this.context.organization$
       .pipe(untilDestroyed(this))
-      .subscribe((organization) => (this.selectedClinic = organization))
+      .subscribe((organization) => this.resolveOrganization(organization))
   }
 
   ngOnDestroy(): void {
@@ -77,6 +79,22 @@ export class AddNoteDialog implements OnDestroy, OnInit {
     this.form = this.builder.group({
       internalNote: ['', Validators.required]
     })
+  }
+
+  async resolveOrganization(org: SelectedOrganization) {
+    const forceClinicAssociationOnNoteCreation = resolveConfig(
+      'RIGHT_PANEL.FORCE_CLINIC_ASSOCIATION_ON_NOTE_CREATION',
+      org
+    )
+
+    if (forceClinicAssociationOnNoteCreation) {
+      this.selectedClinic =
+        this.context.organizations.find(
+          (entry) => entry.id === forceClinicAssociationOnNoteCreation
+        ) ?? org
+    } else {
+      this.selectedClinic = org
+    }
   }
 
   async onSubmit() {
@@ -91,7 +109,8 @@ export class AddNoteDialog implements OnDestroy, OnInit {
             question: this.remoteForm.sections[0].questions[0].id,
             response: { value: formData.internalNote }
           }
-        ]
+        ],
+        organization: this.selectedClinic.id
       })
 
       this.resetForm()

@@ -106,7 +106,7 @@ export class FormsDatasource
       this.database
         .createFormSubmission({
           ...args,
-          organization: this.context.organizationId
+          organization: args.organization ?? this.context.organizationId
         })
         .toPromise()
     )
