@@ -1,3 +1,15 @@
+# [1.110.0](https://github.com/coachcare/dashboard/compare/v1.109.0...v1.110.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* remove readonly property ([1d131a8](https://github.com/coachcare/dashboard/commit/1d131a8bebeaea391ffb856159606ed9087a5977))
+
+
+### Features
+
+* add email logs to profile on admin [FRON-3016] ([2d78dad](https://github.com/coachcare/dashboard/commit/2d78dad5dd900653c16920681206b28629c0cf15))
+
 # [1.109.0](https://github.com/coachcare/dashboard/compare/v1.108.1...v1.109.0) (2023-03-10)
 
 
