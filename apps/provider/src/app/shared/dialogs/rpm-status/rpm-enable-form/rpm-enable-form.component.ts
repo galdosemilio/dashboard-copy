@@ -27,7 +27,11 @@ import { ContextService, NotifierService } from '@app/service'
 import { ImageOptionSelectorItem } from '@app/shared/components/image-option-selector'
 import { _, SelectOption } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { OrganizationAccess, RPM } from '@coachcare/sdk'
+import {
+  CareManagementPreference,
+  CareManagementServiceTypeId,
+  OrganizationAccess
+} from '@coachcare/sdk'
 import { MatStepper } from '@coachcare/material'
 import { auditTime } from 'rxjs/operators'
 import { Subject } from 'rxjs'
@@ -68,7 +72,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
     private database: SupervisingProvidersDatabase,
     private fb: FormBuilder,
     private notify: NotifierService,
-    private rpm: RPM
+    private carePreference: CareManagementPreference
   ) {
     this.validateRPMPreference = this.validateRPMPreference.bind(this)
   }
@@ -281,9 +285,12 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
 
       this.blockFormError = ''
 
-      const pref = await this.rpm.getRPMPreferenceByOrg({
-        organization: control.value
+      const res = await this.carePreference.getAllCareManagementPreferences({
+        organization: control.value,
+        serviceType: CareManagementServiceTypeId.RPM
       })
+
+      const pref = res.data[0]
 
       if (pref.isActive) {
         return null

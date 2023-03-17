@@ -10,6 +10,7 @@ import {
   ApiService,
   Authentication,
   AuthenticationToken,
+  CareManagementPreference,
   CCRBlacklist,
   Chart,
   CommunicationPreference,
@@ -215,6 +216,11 @@ export const SdkApiProviders = [
   { provide: Authentication, useClass: Authentication, deps: [ApiService] },
   { provide: Affiliation, useClass: Affiliation, deps: [ApiService] },
   { provide: Alerts, useClass: Alerts, deps: [ApiService] },
+  {
+    provide: CareManagementPreference,
+    useClass: CareManagementPreference,
+    deps: [ApiService]
+  },
   { provide: CCRBlacklist, useClass: CCRBlacklist, deps: [ApiService] },
   { provide: Chart, useClass: Chart, deps: [ApiService] },
   {

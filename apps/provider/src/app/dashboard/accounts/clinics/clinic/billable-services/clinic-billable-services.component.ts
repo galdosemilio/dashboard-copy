@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
 import {
+  CareManagementOrganizationPreference,
+  CareManagementPreference,
+  CareManagementServiceTypeId,
   NamedEntity,
   OrganizationProvider,
-  RPM,
-  RPMPreferenceSingle
+  RPM
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -32,12 +34,13 @@ export class ClinicBillableServicesComponent implements OnInit {
   public isAdmin = false
   public prefClinic: NamedEntity = { name: 'Test Name', id: '1' }
   public isInherited = true
-  public rpmPref?: RPMPreferenceSingle
+  public rpmPref?: CareManagementOrganizationPreference
   public source: SupervisingProvidersDataSource
 
   private rpmPrefUpdateBlock = true
 
   constructor(
+    private carePreference: CareManagementPreference,
     private context: ContextService,
     private database: SupervisingProvidersDatabase,
     private deviceDetector: DeviceDetectorService,
@@ -86,7 +89,10 @@ export class ClinicBillableServicesComponent implements OnInit {
         .pipe(filter((confirm) => confirm))
         .subscribe(() => {
           this.rpmPrefUpdateBlock = true
-          this.form.patchValue({ tin: '' })
+          this.form.patchValue({
+            tin: '',
+            deviceSetupNotification: true
+          })
           this.rpmPrefUpdateBlock = false
           void this.syncPreference()
         })
@@ -149,22 +155,25 @@ export class ClinicBillableServicesComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       tin: ['', Validators.required],
+      deviceSetupNotification: [null],
       isInherited: [false]
     })
 
     this.form.controls.tin.valueChanges
       .pipe(
+        filter(() => !this.rpmPrefUpdateBlock && !this.form.invalid),
+        debounceTime(200),
+        untilDestroyed(this)
+      )
+      .subscribe(() => void this.syncPreference())
+
+    this.form.controls.deviceSetupNotification.valueChanges
+      .pipe(
         filter(() => !this.rpmPrefUpdateBlock),
         debounceTime(200),
         untilDestroyed(this)
       )
-      .subscribe(() => {
-        if (this.form.invalid) {
-          return
-        }
-
-        void this.syncPreference()
-      })
+      .subscribe(() => void this.syncPreference())
 
     this.form.controls.isInherited.valueChanges
       .pipe(
@@ -176,9 +185,10 @@ export class ClinicBillableServicesComponent implements OnInit {
         if (isInherited) {
           this.showInheritPromptDialog()
         } else {
-          await this.rpm.createRPMPreference({
+          await this.carePreference.createCareManagementPreference({
             organization: this.context.clinic.id,
-            isActive: true
+            isActive: true,
+            serviceType: CareManagementServiceTypeId.RPM
           })
 
           this.rpmPrefUpdateBlock = true
@@ -195,7 +205,7 @@ export class ClinicBillableServicesComponent implements OnInit {
   private async removeRPMPreference(): Promise<void> {
     try {
       this.rpmPrefUpdateBlock = true
-      await this.rpm.deleteRPMPreference({ id: this.rpmPref.id })
+      await this.carePreference.deleteCareManagementPreference(this.rpmPref.id)
       this.notifier.success(_('NOTIFY.SUCCESS.RPM_PREF_REMOVED'))
       await this.resolveRPMPreference()
       this.rpmPrefUpdateBlock = false
@@ -217,17 +227,20 @@ export class ClinicBillableServicesComponent implements OnInit {
 
   private async resolveRPMPreference(): Promise<void> {
     try {
-      const foundPreference = await this.rpm.getRPMPreferenceByOrg({
-        organization: this.context.clinic.id
+      const res = await this.carePreference.getAllCareManagementPreferences({
+        organization: this.context.clinic.id,
+        serviceType: CareManagementServiceTypeId.RPM
       })
 
-      this.rpmPref = foundPreference
+      this.rpmPref = res.data[0]
 
       await this.resolvePrefProps(this.rpmPref)
 
       this.form.patchValue(
         {
-          tin: foundPreference.taxIdentificationNumber ?? '',
+          tin: this.rpmPref?.taxIdentificationNumber ?? '',
+          deviceSetupNotification:
+            this.rpmPref?.deviceSetupNotification === 'enabled',
           isInherited: this.isInherited
         },
         { emitEvent: false }
@@ -237,7 +250,7 @@ export class ClinicBillableServicesComponent implements OnInit {
     } catch (error) {
       this.rpmPref = null
       this.form.patchValue(
-        { tin: '', isInherited: false },
+        { tin: '', deviceSetupNotification: true, isInherited: false },
         { emitEvent: false }
       )
       this.rpmPrefUpdateBlock = false
@@ -246,7 +259,9 @@ export class ClinicBillableServicesComponent implements OnInit {
     }
   }
 
-  private async resolvePrefProps(pref: RPMPreferenceSingle): Promise<void> {
+  private async resolvePrefProps(
+    pref: CareManagementOrganizationPreference
+  ): Promise<void> {
     try {
       this.isInherited = pref.organization.id !== this.context.clinic.id
       this.prefClinic = await this.organization.getSingle(pref.organization.id)
@@ -273,7 +288,9 @@ export class ClinicBillableServicesComponent implements OnInit {
           return
         }
 
-        await this.rpm.deleteRPMPreference({ id: this.rpmPref.id })
+        await this.carePreference.deleteCareManagementPreference(
+          this.rpmPref.id
+        )
         void this.resolveRPMPreference()
       })
   }
@@ -281,24 +298,35 @@ export class ClinicBillableServicesComponent implements OnInit {
   private async syncPreference(): Promise<void> {
     try {
       const formValue = this.form.value
+
+      const taxIdentificationNumber = this.isTinValid()
+        ? formValue.tin
+        : undefined
+      const deviceSetupNotification =
+        formValue.deviceSetupNotification === true ? 'enabled' : 'disabled'
+
       let entity
       if (!this.rpmPref || this.isInherited) {
-        entity = await this.rpm.createRPMPreference({
+        entity = await this.carePreference.createCareManagementPreference({
           organization: this.context.clinic.id,
           isActive: true,
-          taxIdentificationNumber: formValue.tin ?? undefined
+          serviceType: CareManagementServiceTypeId.RPM,
+          taxIdentificationNumber,
+          deviceSetupNotification
         })
       } else {
-        await this.rpm.updateRPMPreference({
+        await this.carePreference.updateCareManagementPreference({
           id: this.rpmPref.id,
           isActive: this.rpmPref.isActive,
-          taxIdentificationNumber: formValue.tin ?? null
+          taxIdentificationNumber,
+          deviceSetupNotification
         })
       }
 
-      this.rpmPref = await this.rpm.getRPMPreference(
-        entity ?? { id: this.rpmPref.id }
-      )
+      this.rpmPref =
+        await this.carePreference.getCareManagementPreferenceSingle(
+          entity?.id ?? this.rpmPref.id
+        )
 
       await this.resolvePrefProps(this.rpmPref)
 

@@ -4,12 +4,14 @@ import { findIndex, isEmpty, merge, pickBy } from 'lodash'
 import { BehaviorSubject } from 'rxjs'
 import {
   AccountProvider,
+  CareManagementOrganizationPreference,
+  CareManagementPreference,
+  CareManagementServiceTypeId,
   CommunicationPreference,
   ContentPreference,
   MessagingPreference,
   OrganizationEntity,
   OrganizationProvider,
-  RPM,
   Sequence,
   User
 } from '@coachcare/sdk'
@@ -31,8 +33,7 @@ import {
   OrganizationPreferences,
   OrganizationWithAddress,
   OrgPreferencesResponse,
-  OrgSingleResponse,
-  RPMPreferenceSingle
+  OrgSingleResponse
 } from '@coachcare/sdk'
 import { UpdatePalette } from '@app/store/config'
 import { AuthService } from './auth.service'
@@ -47,7 +48,7 @@ interface CcrOrgPreferencesResponse extends OrgPreferencesResponse {
   comms: CommunicationPreferenceSingle
   fileVault: ContentPreferenceSingle
   messaging: MessagingOrgPreference
-  rpm: RPMPreferenceSingle
+  rpm: CareManagementOrganizationPreference
   sequences: GetSeqOrgPreferenceResponse
 }
 
@@ -78,6 +79,7 @@ export class ContextService {
     private accservice: AccountProvider,
     private communicationPrefs: CommunicationPreference,
     private contentPrefs: ContentPreference,
+    private carePreference: CareManagementPreference,
     private messagingPrefs: MessagingPreference,
     private orgservice: OrganizationProvider,
     private profile: User,
@@ -85,7 +87,6 @@ export class ContextService {
     private config: ConfigService,
     private bus: EventsService,
     private lang: LanguageService,
-    private rpm: RPM,
     private sequence: Sequence,
     private schedule: ScheduleDataService
   ) {
@@ -625,19 +626,20 @@ export class ContextService {
     })
   }
 
-  private resolveRPMOrgPreference(
+  private async resolveRPMOrgPreference(
     organization: SelectedOrganization
-  ): Promise<RPMPreferenceSingle> {
-    return new Promise<RPMPreferenceSingle>(async (resolve) => {
-      try {
-        const rpmPrefs = await this.rpm.getRPMPreferenceByOrg({
-          organization: organization.id
-        })
-        resolve(rpmPrefs)
-      } catch (error) {
-        resolve(undefined)
-      }
-    })
+  ): Promise<CareManagementOrganizationPreference> {
+    try {
+      const res = await this.carePreference.getAllCareManagementPreferences({
+        organization: organization.id,
+        serviceType: CareManagementServiceTypeId.RPM
+      })
+
+      const rpmPrefs = res.data[0]
+      return rpmPrefs
+    } catch (error) {
+      return
+    }
   }
 
   private resolveSeqOrgPreference(

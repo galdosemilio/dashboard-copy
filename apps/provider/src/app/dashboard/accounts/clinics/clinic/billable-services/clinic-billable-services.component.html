@@ -2,76 +2,74 @@
   <p>{{ 'BOARD.CLINIC_BILLABLE_SERVICES_DESC' | translate }}</p>
 
   <div class="ccr-content">
-    <div class="ccr-panel">
+    <div class="ccr-panel" fxLayout="column">
       <h3>{{ 'GLOBAL.SETTINGS' | translate }}</h3>
-      <div class="ccr-grid" fxLayout="column">
-        <mat-grid-list [cols]="colSpan" rowHeight="80px">
-          <mat-grid-tile [colspan]="colSpan">
-            <div fxLayout="column" fxLayoutAlign="start start">
-              <ccr-tin-input
-              [isClearable]="!!rpmPref"
-              [isInherited]="isInherited"
-              [readonly]="!isAdmin"
-              (onClearTin)="showClearTinDialog()"
-              formControlName="tin"></ccr-tin-input>
-              <p *ngIf="isInherited" class="tin-notice">
-                <small>{{ 'BOARD.CLINIC_TIN_INHERITED_FROM' | translate:{clinic: prefClinic} }}</small>
-              </p>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
+      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+        <ccr-tin-input
+        [isClearable]="!!rpmPref"
+        [isInherited]="isInherited"
+        [readonly]="!isAdmin"
+        (onClearTin)="showClearTinDialog()"
+        formControlName="tin"
+        fxFill
+        ></ccr-tin-input>
+        <p *ngIf="isInherited" class="tin-notice">
+          <small>{{ 'BOARD.CLINIC_TIN_INHERITED_FROM' | translate:{clinic: prefClinic} }}</small>
+        </p>
+
+        <ccr-feature-toggle-input
+          [inheritable]="false"
+          [label]="'GLOBAL.SEND_DEVICE_SETUP_EMAIL' | translate"
+          [readonly]="!isAdmin"
+          formControlName="deviceSetupNotification"
+          fxFill></ccr-feature-toggle-input
+        >
       </div>
     </div>
   </div>
 
   <div class="ccr-content">
-    <div class="ccr-panel">
+    <div class="ccr-panel" fxLayout="column">
       <h3>{{ 'BOARD.CLINIC_SUPERVISING_PROVIDERS' | translate }}</h3>
       <p>{{ 'BOARD.CLINIC_SUPERVISING_PROVIDERS_DESC' | translate }}</p>
-      <div class="ccr-grid" fxLayout="column">
-        <mat-grid-list [cols]="colSpan">
-          <mat-grid-tile [colspan]="colSpan">
-            <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
-              <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                <div fxFlex fxLayout="start center">
-                  <button
-                    *ngIf="!source.isInherited"
-                    [disabled]="!isAdmin"
-                    (click)="showAddProviderDialog()"
-                    mat-button
-                    fxFlex="nogrow"
-                    class="ccr-icon-button"
-                    color="primary"
-                    fxHide.xs>
-                    <mat-icon>add</mat-icon>
-                    {{ 'GLOBAL.ADD_COACH' | translate }}
-                  </button>
+      <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
+        <div class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <div fxFlex fxLayout="start center">
+            <button
+              *ngIf="!source.isInherited"
+              [disabled]="!isAdmin"
+              (click)="showAddProviderDialog()"
+              mat-button
+              fxFlex="nogrow"
+              class="ccr-icon-button"
+              color="primary"
+              fxHide.xs>
+              <mat-icon>add</mat-icon>
+              {{ 'GLOBAL.ADD_COACH' | translate }}
+            </button>
 
-                  <div *ngIf="source.isInherited" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                    <mat-icon
-                    [class.disabled]="!isAdmin"
-                    (click)="showProviderInheritanceDialog()"
-                    class="clickable">delete</mat-icon>
+            <div *ngIf="source.isInherited" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-icon
+              [class.disabled]="!isAdmin"
+              (click)="showProviderInheritanceDialog()"
+              class="clickable">delete</mat-icon>
 
-                    <small
-                      [innerHTML]="'BOARD.CLINIC_SUPERVISING_PROVIDERS_INHERITED' | translate:{clinic: source.inheritedClinic}"
-                      fxFlex="50%">
-                    </small>
-                  </div>
-                </div>
-
-                <ccr-paginator fxFlex="nogrow" #paginator
-                  [source]="source"
-                ></ccr-paginator>
-              </div>
-
-              <clinic-supervising-providers-table
-                [source]="source"
-                fxFlex>
-              </clinic-supervising-providers-table>
+              <small
+                [innerHTML]="'BOARD.CLINIC_SUPERVISING_PROVIDERS_INHERITED' | translate:{clinic: source.inheritedClinic}"
+                fxFlex="50%">
+              </small>
             </div>
-          </mat-grid-tile>
-        </mat-grid-list>
+          </div>
+
+          <ccr-paginator fxFlex="nogrow" #paginator
+            [source]="source"
+          ></ccr-paginator>
+        </div>
+
+        <clinic-supervising-providers-table
+          [source]="source"
+          fxFlex>
+        </clinic-supervising-providers-table>
       </div>
     </div>
   </div>

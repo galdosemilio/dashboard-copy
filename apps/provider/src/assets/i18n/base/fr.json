@@ -709,6 +709,7 @@
     "SELECT_LANGUAGE": "Choisir la langue",
     "SELECT_WEEK": "Sélectionnez la semaine",
     "SEND": "Envoyer",
+    "SEND_DEVICE_SETUP_EMAIL": "Envoyer un e-mail de configuration de périphérique",
     "SEQUENCE": "Séquence",
     "SEQUENCES": "Séquence",
     "SETTINGS": "Paramètres",

@@ -1,12 +1,12 @@
 import {
+  CareManagementPreference,
   CommunicationPreferenceSingle,
   ContentPreferenceSingle,
   GetSeqOrgPreferenceResponse,
   MessagingPreferenceSingle,
   OrganizationPreferenceSingle,
   OrganizationSingle,
-  OrgSchedulePreferencesResponse,
-  RPMPreferenceSingle
+  OrgSchedulePreferencesResponse
 } from '@coachcare/sdk'
 
 export interface OrganizationFeaturePrefs {
@@ -19,7 +19,7 @@ export interface OrganizationFeaturePrefs {
   fileVaultPrefs: ContentPreferenceSingle
   messagingPrefs: MessagingPreferenceSingle
   onboarding: any
-  rpmPrefs: RPMPreferenceSingle
+  rpmPrefs: CareManagementPreference
   sequencePrefs: GetSeqOrgPreferenceResponse
   schedulePrefs: OrgSchedulePreferencesResponse
 }

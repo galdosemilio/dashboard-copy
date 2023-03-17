@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 import { OrganizationFeaturePrefs } from '@coachcare/common/services'
 import {
+  CareManagementPreference,
   CommunicationPreference,
   CommunicationPreferenceSingle,
   ContentPreference,
   ContentPreferenceSingle,
   Entity,
-  GetRPMPreferenceByOrgRequest,
   GetSeqOrgPreferenceByOrg,
   GetSeqOrgPreferenceResponse,
   GetSingleCommunicationPreferenceRequest,
@@ -18,20 +18,22 @@ import {
   OrganizationProvider,
   OrgGetSchedulePreferenceRequest,
   OrgSchedulePreferencesResponse,
-  RPM,
-  RPMPreferenceSingle,
-  Sequence
+  CareManagementOrganizationPreference,
+  Sequence,
+  GetAllCareManagementPreferencesRequest,
+  CareManagementServiceTypeId
 } from '@coachcare/sdk'
 
 @Injectable()
 export class OrganizationFeaturePreferenceResolver
-  implements Resolve<OrganizationFeaturePrefs> {
+  implements Resolve<OrganizationFeaturePrefs>
+{
   constructor(
     private communicationPref: CommunicationPreference,
     private contentPref: ContentPreference,
     private messagingPref: MessagingPreference,
     private organization: OrganizationProvider,
-    private rpm: RPM,
+    private carePreference: CareManagementPreference,
     private sequence: Sequence
   ) {}
 
@@ -39,13 +41,17 @@ export class OrganizationFeaturePreferenceResolver
     return new Promise<any>(async (resolve) => {
       try {
         const id = route.paramMap.get('id') as string
+
         const featurePreferences = await Promise.all([
           this.resolveContentPreference({ organization: id }),
           this.resolveAssociationPreference({ id }),
           this.resolveMessagingPreference({ organization: id }),
           this.resolveCommunicationPreference({ organization: id }),
           this.resolveSequencesPreference({ organization: id }),
-          this.resolveRPMPreference({ organization: id }),
+          this.resolveRPMPreference({
+            organization: id,
+            serviceType: CareManagementServiceTypeId.RPM
+          }),
           this.resolveFileVaultPreference({ organization: id }),
           this.resolveSchedulePreference({ organization: id })
         ])
@@ -138,16 +144,14 @@ export class OrganizationFeaturePreferenceResolver
     })
   }
 
-  private resolveRPMPreference(
-    request: GetRPMPreferenceByOrgRequest
-  ): Promise<RPMPreferenceSingle> {
-    return new Promise<RPMPreferenceSingle>(async (resolve) => {
-      try {
-        resolve(await this.rpm.getRPMPreferenceByOrg(request))
-      } catch (error) {
-        resolve(undefined)
-      }
-    })
+  private async resolveRPMPreference(
+    request: GetAllCareManagementPreferencesRequest
+  ): Promise<CareManagementOrganizationPreference> {
+    const res = await this.carePreference.getAllCareManagementPreferences(
+      request
+    )
+
+    return res.data[0]
   }
 
   private resolveSequencesPreference(

@@ -6,11 +6,12 @@ import {
   MessagingPreference,
   OrganizationProvider,
   OrganizationPreference,
-  RPM,
   Sequence,
   NamedEntity,
   AccountTypeIds,
-  Entity
+  Entity,
+  CareManagementPreference,
+  CareManagementServiceTypeId
 } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
@@ -120,7 +121,7 @@ export class FeaturesComponent implements OnDestroy, OnInit {
     private notifier: NotifierService,
     private organization: OrganizationProvider,
     private organizationPreference: OrganizationPreference,
-    private rpm: RPM,
+    private carePreference: CareManagementPreference,
     private sequence: Sequence
   ) {}
 
@@ -269,17 +270,18 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         this.featurePrefs.rpmPrefs &&
           this.featurePrefs.rpmPrefs.organization.id === this.orgId
           ? formValue.rpm === null
-            ? this.rpm.deleteRPMPreference({
-                id: this.featurePrefs.rpmPrefs.id
-              })
-            : this.rpm.updateRPMPreference({
+            ? this.carePreference.deleteCareManagementPreference(
+                this.featurePrefs.rpmPrefs.id
+              )
+            : this.carePreference.updateCareManagementPreference({
                 id: this.featurePrefs.rpmPrefs.id,
                 isActive: formValue.rpm
               })
           : formValue.rpm !== null
-          ? this.rpm.createRPMPreference({
+          ? this.carePreference.createCareManagementPreference({
               organization: this.orgId || '',
-              isActive: formValue.rpm
+              isActive: formValue.rpm,
+              serviceType: CareManagementServiceTypeId.RPM
             })
           : Promise.resolve()
       )
