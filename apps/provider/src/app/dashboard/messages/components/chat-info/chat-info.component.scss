@@ -2,12 +2,16 @@
 
 mat-icon {
   &.delete-button {
-    margin-top: -5px;
+    margin-top: 1px;
 
     &.disabled {
       color: var(--text-lightest);
       cursor: default;
     }
+  }
+
+  &.chat-button {
+    margin-top: 3px;
   }
 }
 
@@ -19,10 +23,34 @@ mat-icon {
   }
 }
 
+.messages-body {
+  .recipient-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 10px;
+    column-gap: 30px;
+
+    .recipient-item {
+      padding: 10px 0;
+      height: 100%;
+      border-bottom: 2px solid mat-color($ccr-foreground, dividers);
+      align-items: center;
+    }
+  }
+}
+
 @media #{$medium-and-up} {
   .messages-header {
     padding-bottom: 2px;
     padding-top: 25px;
+  }
+}
+
+@media #{$small-and-down} {
+  .messages-body {
+    .recipient-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }
 

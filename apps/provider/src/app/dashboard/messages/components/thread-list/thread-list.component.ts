@@ -21,12 +21,11 @@ import { MessageThread, SelectMessageThreadEvent } from '../../model'
 })
 export class MessagesThreadListComponent implements AfterContentInit {
   @Input() threads: MessageThread[] = []
+  @Input() active = 0
 
   @Output() onReachedEndOfList: EventEmitter<void> = new EventEmitter<void>()
   @Output() onSelectThread: EventEmitter<SelectMessageThreadEvent> =
     new EventEmitter<SelectMessageThreadEvent>()
-
-  public active = 0
 
   constructor(private elementRef: ElementRef) {}
 
@@ -42,7 +41,6 @@ export class MessagesThreadListComponent implements AfterContentInit {
   }
 
   public selectThread(thread: MessageThread, index: number): void {
-    this.active = index
     this.onSelectThread.emit({ thread, index })
   }
 

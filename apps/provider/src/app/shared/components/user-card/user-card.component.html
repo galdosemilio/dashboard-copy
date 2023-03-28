@@ -16,6 +16,7 @@ fxLayoutGap="10px">
             <small
             [class.patient-link]="allowUserLinking"
             (click)="onGoToUserProfile(user)"
+            [fxFlex]="fullWidth"
             >
                 {{ user.firstName }} {{ user.lastName }}
 

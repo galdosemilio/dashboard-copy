@@ -30,6 +30,9 @@ export class MessagesRecipientsComponent implements OnInit {
   @Input()
   total: number
 
+  @Input()
+  accounts: Array<MessageRecipient> = []
+
   @Output()
   changed = new EventEmitter<MessageRecipient[]>()
 
@@ -37,8 +40,7 @@ export class MessagesRecipientsComponent implements OnInit {
   trigger: MatAutocompleteTrigger
 
   public searchCtrl: FormControl
-  public accounts: Array<AccountAccessData>
-  public selected: Array<MessageRecipient> = []
+  public searchedAccounts: Array<AccountAccessData>
 
   constructor(
     private account: AccountProvider,
@@ -70,10 +72,10 @@ export class MessagesRecipientsComponent implements OnInit {
 
   selectAccount(account: AccountAccessData): void {
     if (
-      !this.selected.some((a) => a.id === account.id) &&
+      !this.accounts.some((a) => a.id === account.id) &&
       account.id !== this.current.id
     ) {
-      this.selected.push({
+      this.accounts.push({
         id: account.id,
         name: `${account.firstName} ${account.lastName}`,
         shortName: `${account.firstName} ${account.lastName[0]}.`,
@@ -83,27 +85,27 @@ export class MessagesRecipientsComponent implements OnInit {
       })
       this.emitChanged()
     }
-    this.accounts = []
+    this.searchedAccounts = []
   }
 
   removeAccount(account: AccountAccessData): void {
-    this.selected = this.selected.filter((a) => a.id !== account.id)
+    this.accounts = this.accounts.filter((a) => a.id !== account.id)
     this.emitChanged()
   }
 
   private emitChanged() {
-    this.changed.emit(this.selected)
+    this.changed.emit(this.accounts)
   }
 
   private async searchAccounts(query: string): Promise<void> {
     try {
       const res = await this.account.getList({ query })
-      this.accounts = res.data.filter(
+      this.searchedAccounts = res.data.filter(
         (a) =>
           a.id !== this.current.id &&
-          !this.selected.some((sa) => sa.id === a.id)
+          !this.accounts.some((sa) => sa.id === a.id)
       )
-      if (this.accounts.length > 0) {
+      if (this.searchedAccounts.length > 0) {
         this.trigger.openPanel()
       }
     } catch (error) {

@@ -190,6 +190,7 @@
     "CONNECTED": "Tilknyttet",
     "CONTACT_INFO": "Kontakt information",
     "COUNTRY": "Land",
+    "CREATE_NEW_THREAD_WITH_MEMBER": "Opret ny meddelelsestråd med {{ bruger.fornavn }} {{ bruger.efternavn }}",
     "CURRENT_WEIGHT": "Nuværende vægt",
     "CURRENT_WEIGHT_DATE": "Aktuel vægt dato",
     "DAILY_CALORIES_GOAL": "Mål for daglige kalorier",

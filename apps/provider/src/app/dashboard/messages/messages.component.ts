@@ -16,7 +16,7 @@ import {
   Messaging,
   MessagingThreadSegment
 } from '@coachcare/sdk'
-import { chain, findIndex, get, uniqBy } from 'lodash'
+import { chain, findIndex, get, isEqual, sortBy, uniqBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { filter, tap } from 'rxjs/operators'
@@ -38,8 +38,8 @@ import {
 export class MessagesComponent implements OnInit {
   @Input() mode: MessagesComponentMode = 'main'
 
-  public accounts: string[]
-  public account$ = new Subject<string[]>() // observable for source
+  public accounts: MessageRecipient[]
+  public account$ = new Subject<MessageRecipient[]>() // observable for source
   public active = 0
   public chatInfoEnabled = false
   public current: AccSingleResponse
@@ -61,7 +61,7 @@ export class MessagesComponent implements OnInit {
       this.current &&
       this.isProvider &&
       this.threads.length === 0 &&
-      this.accounts.length > 1 &&
+      this.accounts.length > 0 &&
       !this.source?.isLoading
     )
   }
@@ -96,7 +96,7 @@ export class MessagesComponent implements OnInit {
     // setup defaults
     this.source.addDefault({ accountsExclusive: false })
     this.source.addRequired(this.account$, () => ({
-      accounts: this.accounts
+      accounts: this.resolveAccountIds()
     }))
     this.source.addRequired(this.pageIndex$, () => ({
       offset: this.pageIndex$.getValue() * this.pageSize,
@@ -111,6 +111,16 @@ export class MessagesComponent implements OnInit {
           this.threads.concat(res.map(this.formatThread)),
           'threadId'
         )
+        if (this.accounts.length > 0) {
+          this.active = this.threads.findIndex((thread) =>
+            isEqual(
+              sortBy(thread.allRecipients.map((item) => item.id)),
+              this.resolveAccountIds()
+            )
+          )
+        } else {
+          this.active = 0
+        }
       })
 
     this.context.organization$
@@ -182,7 +192,7 @@ export class MessagesComponent implements OnInit {
     // update the source
     this.resetThreads()
     this.source.addDefault({ accountsInclusive: accounts.length > 0 })
-    this.accounts = [this.current.id, ...accounts.map((a) => a.id)]
+    this.accounts = accounts
     this.account$.next(this.accounts)
     // update the ccr-messages component
     this.newThread = {
@@ -315,5 +325,17 @@ export class MessagesComponent implements OnInit {
       this.messagingService.unreadCount$.getValue()
 
     this.hasUnreadThreads = unreadThreadsCount > 0 || unreadMessagesCount > 0
+  }
+
+  public onCreateNewThread(user: MessageRecipient) {
+    this.chatInfoEnabled = false
+    this.selectAccounts([user])
+  }
+
+  private resolveAccountIds() {
+    return sortBy([
+      this.current.id,
+      ...this.accounts.map((account) => account.id)
+    ])
   }
 }

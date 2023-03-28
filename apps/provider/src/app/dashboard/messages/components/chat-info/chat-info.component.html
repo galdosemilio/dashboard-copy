@@ -27,38 +27,50 @@
   <p>{{ 'BOARD.THREAD_MEMBER_LIST' | translate }}</p>
 
   <div fxLayout="column" fxLayoutGap="10px">
-      <div *ngFor="let user of thread?.allRecipients" fxLayout="row" fxLayoutAlign="stretch center">
-      <ccr-user-card
-      fxFlex
-      [allowUserLinking]="isProvider"
-      [allowUserLinkingBlank]="isProvider"
-      [showCallButton]="isProvider && user.id !== currentUser.id"
-      [showRemoveButton]="false"
-      [user]="user"></ccr-user-card>
+    <div class="recipient-list">
+      <div *ngFor="let user of thread?.allRecipients" class="recipient-item">
+        <ccr-user-card
+          fxFlex
+          [allowUserLinking]="isProvider"
+          [allowUserLinkingBlank]="isProvider"
+          [showCallButton]="isProvider && user.id !== currentUser.id"
+          [showRemoveButton]="false"
+          [user]="user"
+          [fullWidth]="true"
+        ></ccr-user-card>
 
-      <div *ngIf="isProvider && user.id !== currentUser.id">
-        <mat-icon
-        *ngIf="thread?.allRecipients.length > 2"
-        [matTooltip]="'BOARD.THREAD_REMOVE_MEMBER' | translate:{user: user}"
-        (click)="onRemoveUser(user)"
-        class="clickable delete-button">
-          delete
-        </mat-icon>
+        <div *ngIf="isProvider && user.id !== currentUser.id" fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="4px">
+          <mat-icon
+          *ngIf="thread?.allRecipients.length > 2"
+          [matTooltip]="'BOARD.CREATE_NEW_THREAD_WITH_MEMBER' | translate:{user: user}"
+          (click)="onCreateNewThread(user)"
+          class="clickable chat-button">
+            chat
+          </mat-icon>
+
+          <mat-icon
+          *ngIf="thread?.allRecipients.length > 2"
+          [matTooltip]="'BOARD.THREAD_REMOVE_MEMBER' | translate:{user: user}"
+          (click)="onRemoveUser(user)"
+          class="clickable delete-button">
+            delete
+          </mat-icon>
+
+          <mat-icon
+          *ngIf="thread?.allRecipients.length <= 2"
+          [matTooltip]="'BOARD.THREAD_UNABLE_REMOVE_MEMBER' | translate:{user: user}"
+          class="delete-button disabled">
+            delete
+          </mat-icon>
+        </div>
 
         <mat-icon
-        *ngIf="thread?.allRecipients.length <= 2"
-        [matTooltip]="'BOARD.THREAD_UNABLE_REMOVE_MEMBER' | translate:{user: user}"
+        *ngIf="isProvider && user.id === currentUser.id"
+        [matTooltip]="'BOARD.THREAD_UNABLE_REMOVE_YOURSELF' | translate"
         class="delete-button disabled">
           delete
         </mat-icon>
       </div>
-
-      <mat-icon
-      *ngIf="isProvider && user.id === currentUser.id"
-      [matTooltip]="'BOARD.THREAD_UNABLE_REMOVE_YOURSELF' | translate"
-      class="delete-button disabled">
-        delete
-      </mat-icon>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center">

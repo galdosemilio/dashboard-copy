@@ -24,6 +24,7 @@
 
       <messages-recipients
         *ngIf="mode === 'main' && current && isProvider"
+        [accounts]="accounts"
         [current]="current"
         [total]="source?.total"
         (changed)="selectAccounts($event)">
@@ -39,6 +40,7 @@
 
       <messages-thread-list
         [threads]="threads"
+        [active]="active"
         (onReachedEndOfList)="onReachedEndOfList()"
         (onSelectThread)="onSelectThread($event)">
       </messages-thread-list>
@@ -70,6 +72,7 @@
       [mode]="mode"
       [thread]="threads[active] ? threads[active] : newThread"
       (hideChatInfo)="chatInfoEnabled = false"
+      (newThread)="onCreateNewThread($event)"
       fxFlex="100%">
       </messages-chat-info>
     </div>

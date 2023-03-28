@@ -190,6 +190,7 @@
     "CONNECTED": "Connecté",
     "CONTACT_INFO": "Informations de contact",
     "COUNTRY": "Pays",
+    "CREATE_NEW_THREAD_WITH_MEMBER": "Créez un nouveau fil de discussion avec {{ user.firstName }} {{ user.lastName }}",
     "CURRENT_WEIGHT": "Poids actuel",
     "CURRENT_WEIGHT_DATE": "Date de pondération actuelle",
     "DAILY_CALORIES_GOAL": "Objectif de calories quotidiennes",

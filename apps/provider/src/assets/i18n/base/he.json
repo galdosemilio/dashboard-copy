@@ -190,6 +190,7 @@
     "CONNECTED": "מחובר",
     "CONTACT_INFO": "פרטי התקשרות",
     "COUNTRY": "מדינה",
+    "CREATE_NEW_THREAD_WITH_MEMBER": "צור שרשור הודעה חדש עם {{ user.firstName }} {{ user.lastName }}",
     "CURRENT_WEIGHT": "משקל נוכחי",
     "CURRENT_WEIGHT_DATE": "תאריך משקל נוכחי",
     "DAILY_CALORIES_GOAL": "יעד קלוריות יומי",

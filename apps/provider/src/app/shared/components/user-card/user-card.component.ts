@@ -19,6 +19,8 @@ export class UserCardComponent implements OnInit {
   showCallButton = false
   @Input()
   showRemoveButton = true
+  @Input()
+  fullWidth = false
 
   @Output()
   remove: Subject<string> = new Subject<string>()

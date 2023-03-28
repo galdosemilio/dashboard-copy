@@ -25,7 +25,8 @@ export class MessagesChatInfoComponent implements OnInit {
   @Input() mode: MessagesComponentMode = 'main'
   @Input() thread: MessageThread
 
-  @Output() hideChatInfo: EventEmitter<void> = new EventEmitter<void>()
+  @Output() hideChatInfo = new EventEmitter<void>()
+  @Output() newThread = new EventEmitter<MessageRecipient>()
 
   public currentUser
   public isProvider = false
@@ -47,6 +48,10 @@ export class MessagesChatInfoComponent implements OnInit {
 
   public onHideChatInfo(): void {
     this.hideChatInfo.emit()
+  }
+
+  public onCreateNewThread(user: MessageRecipient): void {
+    this.newThread.emit(user)
   }
 
   public onRemoveUser(user: MessageRecipient): void {

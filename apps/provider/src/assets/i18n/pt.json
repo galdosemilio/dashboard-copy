@@ -190,6 +190,7 @@
     "CONNECTED": "Conectado",
     "CONTACT_INFO": "Informações de Contato",
     "COUNTRY": "País",
+    "CREATE_NEW_THREAD_WITH_MEMBER": "Crie um novo tópico de mensagens com {{ user.firstName }} {{ user.lastName }}",
     "CURRENT_WEIGHT": "Peso atual",
     "CURRENT_WEIGHT_DATE": "Data atual do peso",
     "DAILY_CALORIES_GOAL": "Meta de calorias diárias",

@@ -190,6 +190,7 @@
     "CONNECTED": "Connected",
     "CONTACT_INFO": "Contact Information",
     "COUNTRY": "Country",
+    "CREATE_NEW_THREAD_WITH_MEMBER": "Create new message thread with {{ user.firstName }} {{ user.lastName }}",
     "CURRENT_WEIGHT": "Current Weight",
     "CURRENT_WEIGHT_DATE": "Current Weight Date",
     "DAILY_CALORIES_GOAL": "Daily Calories Goal",
