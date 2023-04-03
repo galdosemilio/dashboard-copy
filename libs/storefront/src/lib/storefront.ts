@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common'
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core'
+import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import * as tinycolor from 'tinycolor2'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -11,6 +11,7 @@ import { OrgPrefSelectors } from '@coachcare/common/store'
 import { CurrentSpreeStore, StorefrontService } from './services'
 import { User } from '@coachcare/sdk'
 import { AuthService } from '@coachcare/common/services'
+import { NavigationEnd, Router } from '@angular/router'
 
 @UntilDestroy()
 @Component({
@@ -33,13 +34,16 @@ export class Storefront implements OnInit {
     return this.currentStore?.public_metadata?.company_url_label
   }
 
+  @ViewChild('sidebar') sidebar
+
   constructor(
     @Inject(DOCUMENT) private document: any,
     private storefront: StorefrontService,
     private store: Store<CCRState.State>,
     private renderer: Renderer2,
     private user: User,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.store
       .pipe(
@@ -100,6 +104,16 @@ export class Storefront implements OnInit {
           --disabled: ${palette.disabled};
           `
         )
+      })
+    this.router.events
+      .pipe(
+        untilDestroyed(this),
+        filter(
+          (event) => event instanceof NavigationEnd && this.sidebar?.opened
+        )
+      )
+      .subscribe(() => {
+        this.sidebar.close()
       })
   }
 

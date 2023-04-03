@@ -58,6 +58,15 @@
     width: 100%;
   }
 
+  .mobile-menu-icon {
+    display: none;
+  }
+
+  .mobile-menu {
+    text-align: center;
+    padding: 20px 0;
+  }
+
   @media (max-width: $xs-max) {
     .mat-toolbar {
       background: transparent;
@@ -65,6 +74,14 @@
 
       .logo {
         display: none;
+      }
+
+      .mobile-menu-icon {
+        display: block;
+      }
+
+      .hide-xs {
+        display: none !important;
       }
 
       a {

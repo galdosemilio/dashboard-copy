@@ -35,6 +35,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCardModule } from '@angular/material/card'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatMenuModule } from '@angular/material/menu'
+import { MatSidenavModule } from '@angular/material/sidenav'
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { MatMenuModule } from '@angular/material/menu'
     MatToolbarModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatSidenavModule,
     ReactiveFormsModule,
     CcrFormFieldsModule,
     FormsModule,
