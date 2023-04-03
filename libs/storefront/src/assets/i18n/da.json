@@ -54,6 +54,7 @@
     "NOT_FOUND_ADDRESS": "Den indtastede adresse kunne ikke findes. Søg venligst efter adressen igen.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "Den indtastede adresse kunne ikke findes. Vælg venligst blandt følgende forslag.",
     "NO_INFORMATION": "Ingen registreringsoplysninger. Tilføj nu >",
+    "NO_PRODUCTS_RESULTS": "Ingen produkter fundet",
     "NO_SEARCH_RESULTS": "Ingen søgeresultater",
     "ORDER_HISTORY": "ordre historik",
     "ORDER_SUMMARY": "Bestillingsoversigt",

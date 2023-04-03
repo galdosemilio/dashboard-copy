@@ -54,6 +54,7 @@
     "NOT_FOUND_ADDRESS": "No se pudo encontrar la dirección ingresada. Vuelva a buscar la dirección.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "No se pudo encontrar la dirección ingresada. Seleccione entre las siguientes sugerencias.",
     "NO_INFORMATION": "Sin información de registro. Añadir ahora >",
+    "NO_PRODUCTS_RESULTS": "No se encontraron productos",
     "NO_SEARCH_RESULTS": "Sin resultados de búsqueda",
     "ORDER_HISTORY": "Historial de pedidos",
     "ORDER_SUMMARY": "Resumen de la Orden",

@@ -54,6 +54,7 @@
     "NOT_FOUND_ADDRESS": "L'adresse saisie est introuvable. Veuillez rechercher à nouveau l'adresse.",
     "NOT_FOUND_ADDRESS_SUGGESTIONS": "L'adresse saisie est introuvable. Veuillez choisir parmi les suggestions suivantes.",
     "NO_INFORMATION": "Aucune information d'enregistrement. Ajouter maintenant >",
+    "NO_PRODUCTS_RESULTS": "Aucun produit trouvé",
     "NO_SEARCH_RESULTS": "Aucun résultat trouvé",
     "ORDER_HISTORY": "Historique des commandes",
     "ORDER_SUMMARY": "Récapitulatif de la commande",

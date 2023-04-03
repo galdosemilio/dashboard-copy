@@ -42,7 +42,9 @@ export class StorefrontProductComponent implements OnInit {
   }
 
   public get displayCategories(): boolean {
-    return !this.products.length && !this.search.length
+    return (
+      !this.products.length && !this.search.length && this.categories.length > 1
+    )
   }
 
   public get displayNoResults(): boolean {
@@ -110,6 +112,12 @@ export class StorefrontProductComponent implements OnInit {
 
     try {
       this.categories = await this.storefront.getCategories(this.search)
+      if (this.categories.length > 1) {
+        return
+      } else if (this.categories.length === 1) {
+        this.selectedCategory = this.categories[0]
+      }
+      void this.getProducts()
     } catch (err) {
       this.notifier.error(err)
     } finally {
