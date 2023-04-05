@@ -796,7 +796,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           this.csvSeparator +
           `"${entry.account.lastName}"` +
           this.csvSeparator +
-          `"${moment(entry.account.dateOfBirth).format('MM/DD/YYYY')}"` +
+          `"${moment.utc(entry.account.dateOfBirth).format('MM/DD/YYYY')}"` +
           this.csvSeparator +
           `"${entry.state?.billable?.plan?.name || ''}"` +
           this.csvSeparator +
