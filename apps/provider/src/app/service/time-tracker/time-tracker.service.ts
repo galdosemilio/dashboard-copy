@@ -2,12 +2,15 @@ import { Injectable, OnDestroy } from '@angular/core'
 import { NavigationStart, Router, RouterEvent } from '@angular/router'
 import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, merge } from 'rxjs'
 import { AccountProvider } from '@coachcare/sdk'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
 import { RouteUtils } from '@app/shared/helpers'
+import { uniq } from 'lodash'
+
+const RPM_TAG = 'rpm'
 
 @UntilDestroy()
 @Injectable()
@@ -39,7 +42,7 @@ export class TimeTrackerService implements OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(this.routeEventHandler)
     void this.commitStashedTime()
-    this.context.organization$
+    merge(this.context.organization$, this.context.accountRpmEntry$)
       .pipe(untilDestroyed(this))
       .subscribe(async () => {
         try {
@@ -85,13 +88,29 @@ export class TimeTrackerService implements OnDestroy {
     this.trackingTimeStart = new Date()
   }
 
+  private getTags(route: TimeTrackerRoute) {
+    const params = this.calculateParams(route)
+
+    const tags = [...route.tags, ...params]
+
+    if (
+      route.useAccount &&
+      this.context.accountRpmEntry?.isActive &&
+      this.context.organization.preferences?.rpm?.isActive
+    ) {
+      tags.push(RPM_TAG)
+    }
+
+    return uniq(tags)
+  }
+
   public stashTime(): void {
     if (!this.currentRoute || !this.trackingTimeStart) {
       return
     }
 
     const route = this.currentRoute
-    const params = this.calculateParams(route)
+    const tags = this.getTags(route)
 
     const payload = {
       account: route.useAccount ? this.context.accountId : undefined,
@@ -103,7 +122,7 @@ export class TimeTrackerService implements OnDestroy {
       },
       organization: this.currentOrganization.id,
       source: 'dashboard',
-      tags: [...route.tags, ...params]
+      tags
     }
 
     window.localStorage.setItem(
@@ -114,8 +133,7 @@ export class TimeTrackerService implements OnDestroy {
 
   private async commitTime(route: TimeTrackerRoute): Promise<void> {
     try {
-      const params: string[] = this.calculateParams(route)
-
+      const tags = this.getTags(route)
       await this.account.addActivityEvent({
         account: route.useAccount ? this.context.accountId : undefined,
         interaction: {
@@ -126,7 +144,7 @@ export class TimeTrackerService implements OnDestroy {
         },
         organization: this.currentOrganization.id,
         source: 'dashboard',
-        tags: [...route.tags, ...params]
+        tags
       })
 
       this.trackingTimeStart = undefined

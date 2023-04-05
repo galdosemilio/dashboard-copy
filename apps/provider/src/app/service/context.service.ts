@@ -41,6 +41,7 @@ import { EventsService } from './events.service'
 import { LanguageService } from './language.service'
 import { MeetingTypeWithColor, ScheduleDataService } from './schedule'
 import { ApiService } from '@coachcare/sdk'
+import { RPMStateEntry } from '@app/shared/components/rpm/models'
 
 interface CcrOrgPreferencesResponse extends OrgPreferencesResponse {
   comms: CommunicationPreferenceSingle
@@ -507,6 +508,7 @@ export class ContextService {
    * Displayed AccountProvider
    */
   account$ = new BehaviorSubject<AccountAccessData>(null)
+  accountRpmEntry$ = new BehaviorSubject<RPMStateEntry>(null)
 
   accountOrg$ = merge(this.organization$, this.account$)
   accountOrg: string
@@ -526,6 +528,14 @@ export class ContextService {
   get accountOrgs(): Array<AccountAccessOrganization> {
     const account = this.account$.getValue()
     return account ? account.organizations : []
+  }
+
+  get accountRpmEntry() {
+    return this.accountRpmEntry$.getValue()
+  }
+
+  set accountRpmEntry(entry: RPMStateEntry) {
+    this.accountRpmEntry$.next(entry)
   }
 
   _updateAccountOrg() {

@@ -136,6 +136,8 @@ export class RPMComponent implements AfterViewInit, OnInit {
           )
       }
 
+      this.context.accountRpmEntry = this.mostRecentEntry
+
       const permissionPromises = accessibleOrgs.map((org) =>
         this.resolveOrgPermissions(org)
       )
