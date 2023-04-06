@@ -24,14 +24,14 @@ import { TranslateService } from '@ngx-translate/core'
 import { get, isEmpty, unionBy } from 'lodash'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Subject } from 'rxjs'
+import { Subject, merge } from 'rxjs'
+import { filter } from 'rxjs/operators'
 import { Interaction, InteractionSingle } from '@coachcare/sdk'
 import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models'
 import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
 import { select, Store } from '@ngrx/store'
 import { criteriaSelector, ReportsState } from '../../store'
 import { ReportsCriteria } from '../../services'
-import { filter } from 'rxjs/operators'
 import { CSV } from '@coachcare/common/shared'
 
 @UntilDestroy()
@@ -103,10 +103,19 @@ export class CallsComponent implements OnInit {
       this.source.addDefault({
         status: 'ended'
       })
-      this.source.addRequired(this.context.organization$, () => ({
-        organization: this.context.organizationId
+
+      const subscription = merge([
+        this.context.organization$,
+        this.account$
+      ]).pipe(
+        untilDestroyed(this),
+        filter(() => !!(this.context.organizationId && this.account))
+      )
+
+      this.source.addRequired(subscription, () => ({
+        organization: this.context.organizationId,
+        account: this.account
       }))
-      this.source.addOptional(this.account$, () => ({ account: this.account }))
 
       this.source.addOptional(this.refresh$, () => {
         return this.reportsCriteria
