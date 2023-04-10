@@ -282,6 +282,7 @@ export class RPMStatusDialog implements OnInit {
         this.deactivateRpmForm.controls.note.setValidators(
           this.requiresDeactivationNote ? Validators.required : []
         )
+        this.deactivateRpmForm.controls.note.updateValueAndValidity()
       })
   }
 
@@ -298,10 +299,6 @@ export class RPMStatusDialog implements OnInit {
       if (!this.deactivationReasons.length) {
         return
       }
-
-      this.deactivateRpmForm.patchValue({
-        deactivationReason: this.deactivationReasons[0].id
-      })
     } catch (error) {
       this.notify.error(error)
     }
