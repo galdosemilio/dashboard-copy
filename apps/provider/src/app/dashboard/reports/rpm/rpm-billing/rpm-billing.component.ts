@@ -723,7 +723,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       let firstRow = `"As of: ${currentAsOf.format('MMM, YYYY')}"${
         this.csvSeparator
       }`
-      firstRow += ',,,,,,,,,,'
+      firstRow += ',,,,,,,,,,,'
       firstRow += `"99453"${this.csvSeparator}`
       firstRow += `"99454 x1"${this.csvSeparator}`
       firstRow += `"99454 x2"${this.csvSeparator}`
@@ -733,7 +733,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
       let secondRow = ''
       if (this.timezoneName) {
-        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,`
+        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,,`
       }
 
       let headers =
@@ -756,6 +756,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         'Organization ID' +
         this.csvSeparator +
         'Organization Name' +
+        this.csvSeparator +
+        'Status' +
         this.csvSeparator +
         'Activation Date' +
         this.csvSeparator +
@@ -813,6 +815,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           `"${entry.organization?.rpm?.id || ''}"` +
           this.csvSeparator +
           `"${entry.organization?.rpm?.name || ''}"` +
+          this.csvSeparator +
+          `"${entry.state?.current?.isActive ? 'Active' : 'Inactive'}"` +
           this.csvSeparator +
           `"${
             entry.state?.billable?.isActive
