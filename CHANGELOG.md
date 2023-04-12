@@ -1,3 +1,19 @@
+# [1.112.0](https://github.com/coachcare/dashboard/compare/v1.111.0...v1.112.0) (2023-04-12)
+
+
+### Bug Fixes
+
+* add status column to billing report csv [FRON-3078] ([8f7eb51](https://github.com/coachcare/dashboard/commit/8f7eb5159ec6a148b2509ba99370d598b90d39b2))
+* dob issue in download billing report [FRON-3075] ([85ee22f](https://github.com/coachcare/dashboard/commit/85ee22fffa6b12735591f7fabb71083495358a97))
+* get call histories for patient [FRON-3074] ([e1df3fa](https://github.com/coachcare/dashboard/commit/e1df3fa44aed7503f8820dd2e1cefdbe82e13049))
+
+
+### Features
+
+* add rpm tag to user activity [FRON-3071] ([0bb805e](https://github.com/coachcare/dashboard/commit/0bb805eac48160cf976761ebea16c03f45f80baf))
+* add sidenav mobile menu for storefront ([2634da4](https://github.com/coachcare/dashboard/commit/2634da4dd5081984f4a70402adc8eb4a7d0e24d2))
+* display storefront products with one or zero categories ([137daef](https://github.com/coachcare/dashboard/commit/137daef74de45e0f4efcf53a3d543baa90283ded))
+
 # [1.111.0](https://github.com/coachcare/dashboard/compare/v1.110.0...v1.111.0) (2023-03-29)
 
 
