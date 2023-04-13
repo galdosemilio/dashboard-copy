@@ -81,7 +81,7 @@
 
     <ng-container *ngSwitchCase="'communications'">
       <br>
-      <app-reports-calls [account]="profile.id" [listenToReportCriteria]="false"></app-reports-calls>
+      <app-reports-calls [account]="profile.id" [requiredAccount]="true" [listenToReportCriteria]="false"></app-reports-calls>
     </ng-container>
 
     <ng-container *ngSwitchCase="'login-history'">

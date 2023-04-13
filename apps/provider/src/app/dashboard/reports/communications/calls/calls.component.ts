@@ -52,6 +52,7 @@ export class CallsComponent implements OnInit {
 
   @Input() allowCreation = false
   @Input() listenToReportCriteria = true
+  @Input() requiredAccount = false
 
   @ViewChild(CcrPaginatorComponent, { static: true }) paginator
 
@@ -104,12 +105,19 @@ export class CallsComponent implements OnInit {
         status: 'ended'
       })
 
-      const subscription = merge([
-        this.context.organization$,
-        this.account$
-      ]).pipe(
+      const subscriptions: Subject<unknown>[] = [this.context.organization$]
+
+      if (this.requiredAccount) {
+        subscriptions.push(this.account$)
+      }
+
+      const subscription = merge(subscriptions).pipe(
         untilDestroyed(this),
-        filter(() => !!(this.context.organizationId && this.account))
+        filter(() =>
+          this.requiredAccount
+            ? !!(this.context.organizationId && this.account)
+            : !!this.context.organizationId
+        )
       )
 
       this.source.addRequired(subscription, () => ({
