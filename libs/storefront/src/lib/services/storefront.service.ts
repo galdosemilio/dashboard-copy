@@ -1,9 +1,5 @@
 import { Inject, Injectable } from '@angular/core'
-import {
-  AccountIdentifier,
-  EcommerceProvider,
-  SpreeProvider
-} from '@coachcare/sdk'
+import { EcommerceProvider, SpreeProvider } from '@coachcare/sdk'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 import { BehaviorSubject } from 'rxjs'
 import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
@@ -11,7 +7,6 @@ import { RelationType } from '@spree/storefront-api-v2-sdk/types/interfaces/Rela
 import { TaxonAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Taxon'
 import { JsonApiDocument } from '@spree/storefront-api-v2-sdk/types/interfaces/JsonApi'
 import { orderBy } from 'lodash'
-import { _ } from '@coachcare/backend/shared'
 import { StorefrontUserService } from './storefront-user.service'
 import { IToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
 import {
@@ -182,7 +177,6 @@ export class StorefrontService {
 
   constructor(
     @Inject(APP_ENVIRONMENT) private environment: AppEnvironment,
-    private accountIdentifier: AccountIdentifier,
     private ecommerce: EcommerceProvider,
     public spreeProvider: SpreeProvider,
     public storefrontUserService: StorefrontUserService
@@ -223,46 +217,18 @@ export class StorefrontService {
   }
 
   private async loadSpreeAccount() {
-    const accountIdentifiers = await this.accountIdentifier.fetchAll({
-      account: this.storefrontUserService.user.id,
-      organization: this.environment.defaultOrgId
-    })
-
-    const spreeAccountIdentifier = accountIdentifiers.data.find(
-      (entry) => entry.name === SPREE_EXTERNAL_ID_NAME
-    )
-
-    if (spreeAccountIdentifier?.id && spreeAccountIdentifier?.isActive) {
-      return this.refreshSpreeAccessToken()
-    }
-
-    const password = this.generateRandomPassword()
-    const spreeAccountResult = await this.spree.account.create({
-      user: {
-        email: this.storefrontUserService.user.email,
-        password: password,
-        password_confirmation: password
+    try {
+      await this.ecommerce.createExternalIdentifier({
+        account: this.storefrontUserService.user.id
+      })
+      await this.refreshSpreeAccessToken()
+    } catch (err) {
+      if (err?.data?.code.includes('.conflict')) {
+        await this.refreshSpreeAccessToken()
+        return
       }
-    })
-
-    if (spreeAccountResult.isFail()) {
-      const error = spreeAccountResult.fail() as SpreeError
-
-      if (error.serverResponse?.status === 422) {
-        throw new Error(_('ERROR.SPREE_ACCOUNT_ALREDAY_EXISTS'))
-      }
-
-      throw new Error(error.message)
+      throw new Error(err?.data?.message)
     }
-
-    await this.accountIdentifier.add({
-      account: this.storefrontUserService.user.id,
-      organization: this.environment.defaultOrgId,
-      name: SPREE_EXTERNAL_ID_NAME,
-      value: spreeAccountResult.success().data.id
-    })
-
-    await this.refreshSpreeAccessToken()
   }
 
   private async refreshSpreeAccessToken() {

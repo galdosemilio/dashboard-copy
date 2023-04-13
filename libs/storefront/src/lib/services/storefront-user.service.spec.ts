@@ -1,9 +1,7 @@
 import { StorefrontUserService } from './storefront-user.service'
 import {
-  AccountIdentifier,
   AccSingleResponse,
   ApiService,
-  FetchAllIdentifiersResponse,
   GetAssetsOrganizationPreferenceResponse,
   OrgAccessResponse,
   OrganizationPreference,
@@ -25,7 +23,6 @@ describe('StorefrontUserService', () => {
   let organizationPreference: OrganizationPreference
   let organizationProvider: OrganizationProvider
   let translate: TranslateService
-  let accountIdentifier: AccountIdentifier
   let store: Store<CCRState.State>
 
   beforeEach(() => {
@@ -84,24 +81,6 @@ describe('StorefrontUserService', () => {
     })
     translate = MockService(TranslateService)
     store = MockService(Store)
-    accountIdentifier = MockService(AccountIdentifier, {
-      fetchAll: () => <Promise<FetchAllIdentifiersResponse>>Promise.resolve({
-          data: [
-            {
-              id: '1121',
-              account: {
-                id: '8641'
-              },
-              organization: {
-                id: '7571'
-              },
-              name: 'Spree ID',
-              value: '410',
-              isActive: true
-            }
-          ]
-        })
-    })
 
     service = new StorefrontUserService(
       {
@@ -122,7 +101,6 @@ describe('StorefrontUserService', () => {
       router,
       organizationPreference,
       organizationProvider,
-      accountIdentifier,
       MockService(User, {
         get: () => <Promise<AccSingleResponse>>Promise.resolve({
             id: '1'
@@ -141,53 +119,6 @@ describe('StorefrontUserService', () => {
       expect(service.user).toEqual({
         id: '1'
       })
-      expect(service.accountIdentifier.id).toEqual('1121')
-    })
-
-    describe('Spree account without account identifier on defaultOrg', () => {
-      it('should create an account identifier under default org', async () => {
-        accountIdentifier.fetchAll = jest
-          .fn()
-          .mockResolvedValue({
-            data: [
-              {
-                id: '1121',
-                account: {
-                  id: '8641'
-                },
-                organization: {
-                  id: '7571'
-                },
-                name: 'Spree ID',
-                value: '410',
-                isActive: true
-              }
-            ]
-          })
-          .mockResolvedValueOnce({ data: [] })
-        accountIdentifier.add = jest.fn().mockResolvedValue({ id: '1122' })
-
-        await service.init()
-
-        expect(accountIdentifier.add).toBeCalledTimes(1)
-        expect(accountIdentifier.add).toBeCalledWith({
-          account: '1',
-          name: 'Spree ID',
-          organization: '30',
-          value: '410'
-        })
-      })
-
-      it('should work with no spree account found', async () => {
-        accountIdentifier.fetchAll = jest.fn().mockResolvedValue({
-          data: []
-        })
-        accountIdentifier.add = jest.fn().mockResolvedValue({ id: '1122' })
-
-        await service.init()
-
-        expect(accountIdentifier.add).toBeCalledTimes(0)
-      })
     })
 
     describe('Access to organization denied', () => {
@@ -201,28 +132,7 @@ describe('StorefrontUserService', () => {
 
         await expect(async () => {
           await service.init()
-        }).rejects.toThrow('Error: Access to organization denied.')
-      })
-
-      it('should redirect if there are organizations fallback', async () => {
-        organizationPreference.getSingle = jest
-          .fn()
-          .mockRejectedValue('Access to organization denied.')
-        organizationProvider.getAccessibleList = jest.fn().mockResolvedValue({
-          data: [
-            {
-              id: '1',
-              organization: {
-                id: '7575'
-              }
-            }
-          ]
-        })
-
-        await service.init()
-
-        expect(window.location.replace).toHaveBeenCalledTimes(1)
-        expect(window.location.replace).toHaveBeenCalledWith('/?baseOrg=7575')
+        }).rejects.toThrow('Access to organization denied.')
       })
     })
 
@@ -260,7 +170,7 @@ describe('StorefrontUserService', () => {
 
         await expect(async () => {
           await service.init()
-        }).rejects.toThrow('Error: Store not available')
+        }).rejects.toThrow('Store not available')
       })
     })
   })

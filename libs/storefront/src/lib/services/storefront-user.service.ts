@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import {
-  AccountIdentifier,
   ApiService,
   Identifier,
   OrganizationPreference,
@@ -26,8 +25,6 @@ import {
   takeWhile,
   tap,
   last,
-  catchError,
-  throwError,
   forkJoin,
   iif,
   concatMap,
@@ -38,7 +35,6 @@ import {
 import { AppEnvironment, APP_ENVIRONMENT } from '@coachcare/common/shared'
 import { _ } from '@coachcare/backend/shared'
 import { TranslateService } from '@ngx-translate/core'
-import { SPREE_EXTERNAL_ID_NAME } from './storefront.service'
 
 @Injectable()
 export class StorefrontUserService {
@@ -57,7 +53,6 @@ export class StorefrontUserService {
     private router: Router,
     private orgPreference: OrganizationPreference,
     private orgProvider: OrganizationProvider,
-    private accountIdentifierService: AccountIdentifier,
     private profile: User,
     private session: Session,
     private translate: TranslateService
@@ -122,65 +117,6 @@ export class StorefrontUserService {
       switchMap(() => this.profile.get()),
       tap((user) => {
         this.user = user
-      }),
-      switchMap((user) =>
-        this.accountIdentifierService.fetchAll({
-          account: user.id,
-          organization: this.environment.defaultOrgId
-        })
-      ),
-      switchMap((accountIdentifierService) =>
-        iif(
-          () => !!accountIdentifierService.data.length,
-          of(accountIdentifierService.data),
-          this.getDefaultAccountIdentifier$
-        )
-      ),
-      tap((data) => {
-        if (data[0]?.value) {
-          this.accountIdentifier = data[0]
-        }
-      }),
-      catchError((err) =>
-        iif(
-          () => err == 'Access to organization denied.',
-          this.getAccessibleOrg$,
-          throwError(() => new Error(err))
-        )
-      )
-    )
-  }
-
-  private get getDefaultAccountIdentifier$() {
-    return from(this.getAccessibleList$).pipe(
-      switchMap((res) => from(res.data.map((org) => org.organization.id))),
-      concatMap((id) =>
-        this.accountIdentifierService.fetchAll({
-          account: this.user.id,
-          organization: id
-        })
-      ),
-      map((res) =>
-        res.data?.find(
-          (identifier) =>
-            identifier.name === SPREE_EXTERNAL_ID_NAME && identifier.value
-        )
-      ),
-      takeWhile((identifier) => !identifier, true),
-      last(),
-      map((res) => iif(() => !res, EMPTY, this.addAccountIdentifier$(res)))
-    )
-  }
-
-  private addAccountIdentifier$(res) {
-    if (!res) return EMPTY
-
-    return of(
-      this.accountIdentifierService.add({
-        account: this.user.id,
-        organization: this.environment.defaultOrgId,
-        name: SPREE_EXTERNAL_ID_NAME,
-        value: res?.value
       })
     )
   }
@@ -203,21 +139,6 @@ export class StorefrontUserService {
       }),
       map((message) => {
         throw message
-      })
-    )
-  }
-
-  private get getAccessibleOrg$() {
-    return from(this.getAccessibleList$).pipe(
-      map((res) => {
-        if (res.data.length) {
-          const params = new URLSearchParams()
-          params.set('baseOrg', res.data[0].organization.id)
-          location.replace(`${location.pathname}?${params}`)
-          return EMPTY
-        }
-
-        throw new Error('Access to organization denied.')
       })
     )
   }
