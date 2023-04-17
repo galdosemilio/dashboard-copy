@@ -152,6 +152,13 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     this.recoverPagination()
     this.applyStorageSort()
     this.cdr.detectChanges()
+    this.source
+      .connect()
+      .pipe(untilDestroyed(this), debounceTime(200))
+      .subscribe((values) => {
+        this.rows = values
+        this.scrollToColumnIndex()
+      })
   }
 
   public ngOnInit(): void {
@@ -1084,14 +1091,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.criteria.asOf = reportsCriteria.endDate
         this.paginator.firstPage()
         this.refresh$.next()
-      })
-
-    this.source
-      .connect()
-      .pipe(untilDestroyed(this), debounceTime(200))
-      .subscribe((values) => {
-        this.rows = values
-        this.scrollToColumnIndex()
       })
 
     this.paginator.page.pipe(untilDestroyed(this)).subscribe((page) => {
