@@ -17,6 +17,7 @@ import {
 import { _, FormUtils } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
 import {
+  CareManagementFeaturePref,
   NotifierService,
   OrganizationFeaturePrefs,
   OrganizationParams
@@ -48,6 +49,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
   editorOptions: JsonEditorOptions
   form: FormGroup
   featurePrefs: OrganizationFeaturePrefs
+  carePrefs: CareManagementFeaturePref[]
   iconUrl: string | undefined
   id: string | undefined
   initialPreference: any
@@ -58,8 +60,14 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
   readonly = false
   reactiveControls = ['security']
   splashUrl: string | undefined
-  section: 'core' | 'visual' | 'mala' | 'features' | 'security' | 'ecommerce' =
-    'core'
+  section:
+    | 'core'
+    | 'visual'
+    | 'mala'
+    | 'features'
+    | 'security'
+    | 'ecommerce'
+    | 'care-management' = 'core'
 
   private firstLoadPassed = false
 
@@ -167,6 +175,7 @@ export class OrganizationsSettingsComponent implements OnDestroy, OnInit {
         this.featurePrefs = { ...featurePrefs, onboarding } as any
       }
 
+      this.carePrefs = data.carePrefs ?? []
       this.readonly = false
       this.editorOptions.modes = ['code', 'text', 'tree'] // set all allowed modes
       this.editorOptions.mode = 'tree' // set only one mode

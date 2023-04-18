@@ -8,6 +8,7 @@ import {
   OrganizationSingle,
   OrgSchedulePreferencesResponse
 } from '@coachcare/sdk'
+import { CareManagementFeaturePref } from './care-management.types'
 
 export interface OrganizationFeaturePrefs {
   associationPrefs: {
@@ -28,6 +29,7 @@ export interface OrganizationResolved {
   org?: OrganizationSingle
   featurePrefs?: OrganizationFeaturePrefs
   prefs?: OrganizationPreferenceSingle
+  carePrefs?: CareManagementFeaturePref[]
 }
 
 export interface OrganizationParams extends OrganizationResolved {

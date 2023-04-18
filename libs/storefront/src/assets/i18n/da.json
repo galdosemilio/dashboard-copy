@@ -5,7 +5,6 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "Postnummer er påkrævet",
     "ADDRESS_STATE_REQUIRED": "Stat/provins er påkrævet",
     "PAYMENT_METHOD_NOT_FOUND": "Betalingsmetode ikke fundet, kontakt venligst admin.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "Der findes allerede en butikskonto for din e-mailadresse, men den er ikke korrekt forbundet. Venligst <a href='mailto:support@coachcare.com'>kontakt vores supportteam</a> for at få hjælp.",
     "STORE_NOT_AVAILABLE": ""
   },
   "GLOBAL": {

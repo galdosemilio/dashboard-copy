@@ -11,6 +11,7 @@ import {
   Authentication,
   AuthenticationToken,
   CareManagementPreference,
+  CareManagementProvider,
   CCRBlacklist,
   Chart,
   CommunicationPreference,
@@ -219,6 +220,11 @@ export const SdkApiProviders = [
   {
     provide: CareManagementPreference,
     useClass: CareManagementPreference,
+    deps: [ApiService]
+  },
+  {
+    provide: CareManagementProvider,
+    useClass: CareManagementProvider,
     deps: [ApiService]
   },
   { provide: CCRBlacklist, useClass: CCRBlacklist, deps: [ApiService] },

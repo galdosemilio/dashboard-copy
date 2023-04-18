@@ -5,7 +5,6 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "الرمز البريدي مطلوب",
     "ADDRESS_STATE_REQUIRED": "الولاية / المقاطعة مطلوبة",
     "PAYMENT_METHOD_NOT_FOUND": "طريقة الدفع غير موجودة ، يرجى الاتصال بالمسؤول.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "حساب المتجر موجود بالفعل لعنوان بريدك الإلكتروني ، لكنه غير متصل بشكل صحيح. يرجى <a href='mailto:support@coachcare.com'> الاتصال بفريق الدعم </a> للحصول على المساعدة.",
     "STORE_NOT_AVAILABLE": ""
   },
   "GLOBAL": {

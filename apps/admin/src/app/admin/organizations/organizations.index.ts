@@ -6,6 +6,7 @@ export * from './settings'
 
 import {
   AddOrganizationDialog,
+  CareManagementPreferencesResolver,
   OrganizationFeaturePreferenceResolver,
   OrganizationPreferenceResolver,
   OrganizationResolver,
@@ -30,6 +31,7 @@ import {
   AppIdsComponent,
   BasicInfoComponent,
   BCCInputComponent,
+  CarePreferenceComponent,
   CcoAddressesComponent,
   ColorsComponent,
   FeaturesComponent,
@@ -49,6 +51,7 @@ export const OrganizationComponents = [
   AppIdsComponent,
   BasicInfoComponent,
   BCCInputComponent,
+  CarePreferenceComponent,
   CcoAddressesComponent,
   ColorsComponent,
   CreateLabelDialogComponent,
@@ -71,6 +74,7 @@ export const OrganizationComponents = [
 ]
 
 export const OrganizationProviders = [
+  CareManagementPreferencesResolver,
   LabelsOrganizationDatabase,
   OrganizationsDatabase,
   CcrOrganizationDialogs,

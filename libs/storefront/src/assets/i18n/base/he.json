@@ -5,7 +5,6 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "יש להזין מיקוד",
     "ADDRESS_STATE_REQUIRED": "מדינה/פרובינציה נדרשת",
     "PAYMENT_METHOD_NOT_FOUND": "אמצעי התשלום לא נמצא, אנא צור קשר עם מנהל המערכת.",
-    "SPREE_ACCOUNT_ALREDAY_EXISTS": "חשבון חנות כבר קיים עבור כתובת האימייל שלך, אך הוא אינו מחובר כהלכה. אנא <a href='mailto:support@coachcare.com'>צור קשר עם צוות התמיכה שלנו</a> לקבלת סיוע.",
     "STORE_NOT_AVAILABLE": "חנות לא זמינה"
   },
   "GLOBAL": {

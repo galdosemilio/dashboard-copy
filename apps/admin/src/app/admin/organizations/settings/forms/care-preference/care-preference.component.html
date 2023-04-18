@@ -1,0 +1,19 @@
+<mat-grid-list [cols]="1" [formGroup]="form" rowHeight="70px">
+  <div fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <mat-select fxFlex="300px" formControlName="active">
+        <mat-option [value]="true">{{ 'GLOBAL.ENABLED' | translate }}</mat-option>
+        <mat-option [value]="false">{{ 'GLOBAL.DISABLED' | translate }}</mat-option>
+        <mat-option [value]="'inherit'">{{ 'GLOBAL.INHERIT' | translate }}</mat-option>
+      </mat-select>
+      <div fxFlex>
+        <p *ngIf="inheritedOrg">{{ 'GLOBAL.INHERITED_FROM' | translate:{org: inheritedOrg} }}</p>
+      </div>
+    </div>
+    <div [hidden]="!pref.preference?.isActive">
+      <mat-slide-toggle
+        formControlName="deviceSetupNotification"
+      >{{ 'GLOBAL.DEVICE_SETUP_NOTIFICATION' | translate }}</mat-slide-toggle>
+    </div>
+  </div>
+</mat-grid-list>

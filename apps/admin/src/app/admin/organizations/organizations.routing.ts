@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router'
 import {
+  CareManagementPreferencesResolver,
   OrganizationFeaturePreferenceResolver,
   OrganizationPreferenceResolver,
   OrganizationResolver
@@ -65,7 +66,8 @@ export const routes: Routes = [
         path: 'settings',
         resolve: {
           prefs: OrganizationPreferenceResolver,
-          featurePrefs: OrganizationFeaturePreferenceResolver
+          featurePrefs: OrganizationFeaturePreferenceResolver,
+          carePrefs: CareManagementPreferencesResolver
         },
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         children: [

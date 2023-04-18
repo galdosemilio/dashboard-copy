@@ -9,9 +9,7 @@ import {
   Sequence,
   NamedEntity,
   AccountTypeIds,
-  Entity,
-  CareManagementPreference,
-  CareManagementServiceTypeId
+  Entity
 } from '@coachcare/sdk'
 import { _ } from '@coachcare/backend/shared'
 import { BINDFORM_TOKEN } from '@coachcare/common/directives'
@@ -76,10 +74,6 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       isInheritable: true,
       prefRoute: 'sequencePrefs'
     },
-    rpm: {
-      isInheritable: true,
-      prefRoute: 'rpmPrefs'
-    },
     fileVault: {
       isInheritable: true,
       prefRoute: 'fileVaultPrefs'
@@ -121,7 +115,6 @@ export class FeaturesComponent implements OnDestroy, OnInit {
     private notifier: NotifierService,
     private organization: OrganizationProvider,
     private organizationPreference: OrganizationPreference,
-    private carePreference: CareManagementPreference,
     private sequence: Sequence
   ) {}
 
@@ -267,26 +260,6 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       )
 
       promises.push(
-        this.featurePrefs.rpmPrefs &&
-          this.featurePrefs.rpmPrefs.organization.id === this.orgId
-          ? formValue.rpm === null
-            ? this.carePreference.deleteCareManagementPreference(
-                this.featurePrefs.rpmPrefs.id
-              )
-            : this.carePreference.updateCareManagementPreference({
-                id: this.featurePrefs.rpmPrefs.id,
-                isActive: formValue.rpm
-              })
-          : formValue.rpm !== null
-          ? this.carePreference.createCareManagementPreference({
-              organization: this.orgId || '',
-              isActive: formValue.rpm,
-              serviceType: CareManagementServiceTypeId.RPM
-            })
-          : Promise.resolve()
-      )
-
-      promises.push(
         this.featurePrefs.schedulePrefs &&
           this.featurePrefs.schedulePrefs.id === this.orgId
           ? formValue.schedule === null
@@ -361,15 +334,10 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         promiseValues[6],
         'communicationPrefs'
       )
-      this.refreshFeaturePrefsObject(
-        formValue.rpm,
-        promiseValues[7],
-        'rpmPrefs'
-      )
 
       this.refreshFeaturePrefsObject(
         formValue.schedule,
-        promiseValues[8],
+        promiseValues[7],
         'schedulePrefs'
       )
 
@@ -391,7 +359,6 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       openAddProvider: [null],
       patientAutoUnenroll: [null],
       removeEnrollmentsOnAssoc: [null],
-      rpm: [null],
       sequences: [null],
       useAutoThreadParticipation: [null],
       videoconference: [null],
@@ -432,11 +399,6 @@ export class FeaturesComponent implements OnDestroy, OnInit {
         removeEnrollmentsOnAssoc:
           this.featurePrefs.associationPrefs.removeEnrollmentsOnAssociation ??
           false,
-        rpm:
-          this.featurePrefs.rpmPrefs &&
-          this.featurePrefs.rpmPrefs.organization.id === this.orgId
-            ? this.featurePrefs.rpmPrefs.isActive
-            : null,
         sequences:
           this.featurePrefs.sequencePrefs &&
           this.featurePrefs.sequencePrefs.organization.id === this.orgId

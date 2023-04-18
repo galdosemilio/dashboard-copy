@@ -79,15 +79,6 @@
 
   <mat-grid-tile>
     <ccr-feature-toggle-input
-    data-cy="org-settings-section-features-rpm"
-    [inheritable]="featureSettings.rpm.isInheritable"
-    [label]="'GLOBAL.RPM' | translate"
-    [subLabel]="(featureSettings.rpm.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.rpm.inheritedFrom}"
-    formControlName="rpm"></ccr-feature-toggle-input>
-  </mat-grid-tile>
-
-  <mat-grid-tile>
-    <ccr-feature-toggle-input
     data-cy="org-settings-section-features-filevault"
     [inheritable]="featureSettings.fileVault.isInheritable"
     [subLabel]="(featureSettings.fileVault.inheritedFrom ? 'GLOBAL.INHERITED_FROM' : '') | translate:{org: featureSettings.fileVault.inheritedFrom}"

@@ -1,3 +1,4 @@
+export * from './care-management-preference.resolver'
 export * from './organization.resolver'
 export * from './organization-feature-preference.resolver'
 export * from './organization-preference.resolver'
