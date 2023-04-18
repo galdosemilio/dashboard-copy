@@ -1,3 +1,16 @@
+# [1.113.0](https://github.com/coachcare/dashboard/compare/v1.112.0...v1.113.0) (2023-04-18)
+
+
+### Bug Fixes
+
+* fix duplicate requests for monitoring report [FRON-3085] ([e35b73a](https://github.com/coachcare/dashboard/commit/e35b73aad45692f8ac28dea694307c6b98f4e2bd))
+* fix loading communication report [FRON-3080] ([93a9993](https://github.com/coachcare/dashboard/commit/93a9993a2d04fb0a507d210e7c7f26d49051e865))
+
+
+### Features
+
+* add ability to create new 1-1 message [FRON-3057] ([04607a2](https://github.com/coachcare/dashboard/commit/04607a2a4b872b00584b3cba3f229d3eb80b0b32))
+
 # [1.112.0](https://github.com/coachcare/dashboard/compare/v1.111.0...v1.112.0) (2023-04-12)
 
 
