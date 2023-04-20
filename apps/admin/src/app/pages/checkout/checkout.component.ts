@@ -123,13 +123,13 @@ export class CheckoutComponent implements OnInit {
   public shippingAddress: AccountAddress
   public showBackButton = false
   public showNextButton = true
-  public showRedirectButton = true
   public showSpinner = false
   public storeUrl: string
   public spree: Client
   public spreeToken: IOAuthToken
   public useShippingAddress: boolean = true
   public actionButtonType: ActionButtonType = 'dashboard'
+  private automaticShopifyRedirect = false
 
   constructor(
     private accountProvider: AccountProvider,
@@ -153,7 +153,7 @@ export class CheckoutComponent implements OnInit {
     this.subscribeToRouteEvents()
     this.subscribeToPrefs()
     this.subscribeToBusEvents()
-    this.resolveRedirectButtonState()
+    this.resolveAutomaticShopifyRedirect()
   }
 
   public changeFirstStepMode(mode: FirstStepMode): void {
@@ -307,7 +307,7 @@ export class CheckoutComponent implements OnInit {
 
       case 'order_confirm':
         this.showBackButton = false
-        this.showNextButton = this.showRedirectButton
+        this.showNextButton = !this.automaticShopifyRedirect
         break
 
       case 'shipping_info':
@@ -790,14 +790,12 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  private resolveRedirectButtonState(): void {
-    const showRedirectButton =
+  private resolveAutomaticShopifyRedirect(): void {
+    this.automaticShopifyRedirect =
       resolveConfig(
-        'CHECKOUT.SHOW_REDIRECT_BUTTON',
+        'CHECKOUT.AUTOMATIC_SHOPIFY_REDIRECT',
         this.context.organizationId
-      ) ?? true
-
-    this.showRedirectButton = showRedirectButton
+      ) ?? false
   }
 
   private async startRedirection(): Promise<void> {

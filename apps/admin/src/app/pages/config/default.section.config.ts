@@ -4,7 +4,6 @@ import {
 } from '@board/pages/register/clinic/header'
 import { DefaultInfoDescriptionComponent } from '@board/pages/register/clinic/info-description'
 import { DefaultLastStepComponent } from '@board/pages/register/clinic/last-step/default/default.last-step.component'
-import { DefaultOrderConfirmComponent } from '../checkout'
 import { SectionConfigDetails } from './section.config'
 
 export const DefaultSectionConfig: SectionConfigDetails = {
@@ -22,7 +21,6 @@ export const DefaultSectionConfig: SectionConfigDetails = {
     USE_COOKIE_BASED_SESSION: true
   },
   CHECKOUT: {
-    ORDER_CONFIRM: DefaultOrderConfirmComponent,
-    SHOW_REDIRECT_BUTTON: true
+    AUTOMATIC_SHOPIFY_REDIRECT: false
   }
 }

@@ -5,7 +5,6 @@ import { PackagePriceItem } from '../register/clinic/clinic-packages/model'
 import { ApolloIntSectionConfig } from './apollo-int.section.config'
 import { ApolloUSSectionConfig } from './apollo-us.section.config'
 import { BariatricAdvantageSectionConfig } from './bariatric-adv.section.config'
-import { BlueskySectionConfig } from './bluesky.section.config'
 import {
   CoachCareProdSectionConfig,
   CoachCareTestSectionConfig
@@ -24,6 +23,7 @@ import {
 } from './robard.section.config'
 import { ShakeItSectionConfig } from './shake-it.section.config'
 import { WellCoreSectionConfig } from './wellcore.section.config'
+import { BeSlimSectionConfig } from './be-slim.section.config'
 
 export interface LoginConfigDetails {
   SHOW_REGISTER_NEW_COMPANY: boolean
@@ -63,8 +63,7 @@ export interface RegisterFirstStepDetails {
 }
 
 export interface CheckoutDetails {
-  ORDER_CONFIRM: any
-  SHOW_REDIRECT_BUTTON?: boolean
+  AUTOMATIC_SHOPIFY_REDIRECT?: boolean
 }
 
 export interface SectionConfigDetails {
@@ -100,7 +99,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7535']: WellCoreSectionConfig,
     ['7537']: MuscleWiseSectionConfig,
     ['7546']: NXTSTIMSectionConfig,
-    ['7555']: BlueskySectionConfig
+    ['7618']: BeSlimSectionConfig
   },
   prod: {
     ['5341']: ApolloIntSectionConfig,
@@ -116,7 +115,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['4156']: ShakeItSectionConfig,
     ['6916']: MuscleWiseSectionConfig,
     ['6891']: WellCoreSectionConfig,
-    ['7074']: NXTSTIMSectionConfig
+    ['7074']: NXTSTIMSectionConfig,
+    ['7267']: BeSlimSectionConfig
   }
 }
 
