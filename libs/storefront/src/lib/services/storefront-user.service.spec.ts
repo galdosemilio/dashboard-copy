@@ -5,7 +5,6 @@ import {
   GetAssetsOrganizationPreferenceResponse,
   OrgAccessResponse,
   OrganizationPreference,
-  OrganizationPreferenceSingle,
   OrganizationProvider,
   Session,
   User
@@ -33,15 +32,6 @@ describe('StorefrontUserService', () => {
     })
     router = MockService(Router)
     organizationPreference = MockService(OrganizationPreference, {
-      getSingle: () =>
-        Promise.resolve({
-          id: '7576',
-          storeUrl: 'test.ecommerce.coachcare.com',
-          displayName: 'Coachcare',
-          assets: {},
-          food: {},
-          mala: {}
-        }) as Promise<OrganizationPreferenceSingle>,
       getAssets: () =>
         Promise.resolve({
           id: '7576',
@@ -123,7 +113,7 @@ describe('StorefrontUserService', () => {
 
     describe('Access to organization denied', () => {
       it('should throw error if no organizations fallback', async () => {
-        organizationPreference.getSingle = jest
+        organizationPreference.getAssets = jest
           .fn()
           .mockRejectedValue('Access to organization denied.')
         organizationProvider.getAccessibleList = jest
@@ -138,7 +128,7 @@ describe('StorefrontUserService', () => {
 
     describe('Invalid store url', () => {
       it('should redirect to store with url set', async () => {
-        organizationPreference.getSingle = jest
+        organizationPreference.getAssets = jest
           .fn()
           .mockResolvedValue({
             id: '7575',
@@ -157,7 +147,7 @@ describe('StorefrontUserService', () => {
 
       it('should throw error if no store url configured', async () => {
         translate.get = jest.fn().mockResolvedValue('Store not available')
-        organizationPreference.getSingle = jest
+        organizationPreference.getAssets = jest
           .fn()
           .mockResolvedValue({
             id: '7575',

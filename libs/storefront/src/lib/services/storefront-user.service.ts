@@ -2,9 +2,9 @@ import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import {
   ApiService,
+  GetAssetsOrganizationPreferenceResponse,
   Identifier,
   OrganizationPreference,
-  OrganizationPreferenceSingle,
   OrganizationProvider,
   Session,
   User
@@ -25,7 +25,6 @@ import {
   takeWhile,
   tap,
   last,
-  forkJoin,
   iif,
   concatMap,
   EMPTY,
@@ -39,7 +38,7 @@ import { TranslateService } from '@ngx-translate/core'
 @Injectable()
 export class StorefrontUserService {
   public user: CurrentAccount
-  public preferences: OrganizationPreferenceSingle
+  public preferences: GetAssetsOrganizationPreferenceResponse
   public orgId: string
   public storeUrl: string
   public accountIdentifier: Identifier
@@ -87,29 +86,27 @@ export class StorefrontUserService {
   }
 
   private loadUserData() {
-    return forkJoin({
-      orgAssets: this.orgPreference.getAssets({
+    return from(
+      this.orgPreference.getAssets({
         id: this.orgId,
         mala: true
-      }),
-      orgPreference: this.orgPreference.getSingle({ id: this.orgId })
-    }).pipe(
-      tap(({ orgAssets, orgPreference }) => {
-        this.storeUrl = orgPreference.storeUrl
+      })
+    ).pipe(
+      tap((orgAssets: GetAssetsOrganizationPreferenceResponse) => {
+        this.storeUrl = orgAssets.storeUrl
         this.preferences = {
+          id: orgAssets.id,
           displayName: orgAssets.displayName,
           assets: orgAssets.assets,
           mala: orgAssets.mala,
-          storeUrl: orgAssets.storeUrl,
-          ...orgPreference
+          storeUrl: orgAssets.storeUrl
         }
         this.store.dispatch(new OrgPrefActions.UpdatePrefs(this.preferences))
       }),
-      switchMap(({ orgAssets, orgPreference }) =>
+      switchMap((orgAssets) =>
         iif(
-          () =>
-            orgPreference.storeUrl && this.validStore(orgPreference.storeUrl),
-          of({ orgAssets, orgPreference }),
+          () => orgAssets.storeUrl && this.validStore(orgAssets.storeUrl),
+          of(orgAssets),
           this.getValidStoreUrl$
         )
       ),
@@ -124,7 +121,12 @@ export class StorefrontUserService {
   private get getValidStoreUrl$() {
     return from(this.getAccessibleList$).pipe(
       switchMap((res) => from(res.data.map((org) => org.organization.id))),
-      concatMap((id) => this.orgPreference.getSingle({ id })),
+      concatMap((id) =>
+        this.orgPreference.getAssets({
+          id,
+          mala: true
+        })
+      ),
       takeWhile(({ storeUrl }) => !this.validStore(storeUrl), true),
       last(),
       switchMap(({ id, storeUrl }) => {
