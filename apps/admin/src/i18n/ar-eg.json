@@ -226,7 +226,7 @@
     "INCLUDE_INACTIVE": "Include Inactive",
     "INFORMATION": "معلومات",
     "INHERIT": "يرث",
-    "INHERITED_FROM": "ورثت من العيادة مع معرف {{org.id}}",
+    "INHERITED_FROM": "موروث من العيادة {{ org.name }} (المعرف: {{ org.id }})",
     "IOS_APP_ID": "iOS معرف التطبيق",
     "LABEL": "مرحلة",
     "LANGUAGE": "لغة",

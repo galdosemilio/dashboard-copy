@@ -226,7 +226,7 @@
     "INCLUDE_INACTIVE": "Inaktive mitbeachten",
     "INFORMATION": "Information",
     "INHERIT": "Übernehmen",
-    "INHERITED_FROM": "Von der Klinik mit ID {{org.id}} geerbt",
+    "INHERITED_FROM": "Von der Klinik {{ org.name }} (ID: {{ org.id }}) geerbt",
     "IOS_APP_ID": "iOS App-ID",
     "LABEL": "Label",
     "LANGUAGE": "Sprache",
