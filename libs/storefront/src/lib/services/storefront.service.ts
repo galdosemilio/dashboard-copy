@@ -233,8 +233,7 @@ export class StorefrontService {
 
   private async refreshSpreeAccessToken() {
     const spreeAccessTokenResponse = await this.ecommerce.createToken({
-      account: this.storefrontUserService.user.id,
-      organization: this.environment.defaultOrgId
+      account: this.storefrontUserService.user.id
     })
 
     if (spreeAccessTokenResponse?.token) {
