@@ -121,7 +121,9 @@ export class StorefrontProductComponent implements OnInit {
     } catch (err) {
       this.notifier.error(err)
     } finally {
-      this.isLoading = false
+      if (!this.selectedCategory) {
+        this.isLoading = false
+      }
     }
   }
 
