@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associations",
+    "CARE_MANAGEMENT": "إدارة الرعاية",
     "EMAIL_LOG": "سجل البريد الإلكتروني",
     "EXTERNAL_IDENTIFIERS": "المعرفات الخارجية",
     "INTEGRATIONS": "خدمة مزامنة",

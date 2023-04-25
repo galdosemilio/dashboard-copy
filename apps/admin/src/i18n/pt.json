@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Associações",
+    "CARE_MANAGEMENT": "Gerenciamento de cuidados",
     "EMAIL_LOG": "Registro de e-mail",
     "EXTERNAL_IDENTIFIERS": "Identificadores Externos",
     "INTEGRATIONS": "Serviço de Sincronização",

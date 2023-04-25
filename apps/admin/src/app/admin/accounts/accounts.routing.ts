@@ -10,6 +10,7 @@ import {
 } from './accounts.index'
 import { ExternalIdentifiersComponent } from './external-identifiers'
 import { EmailLogsComponent } from './email-logs'
+import { AccountCareManagementComponent } from './account-care-management'
 
 export const routes: Routes = [
   {
@@ -90,6 +91,10 @@ export function getAccountChildren(accountType: AccountTypeId): Routes {
         //   path: 'logs',
         //   component: LogsListComponent
         // }
+        {
+          path: 'care-management',
+          component: AccountCareManagementComponent
+        },
         {
           path: 'external-identifiers',
           component: ExternalIdentifiersComponent

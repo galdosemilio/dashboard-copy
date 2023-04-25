@@ -1559,7 +1559,6 @@
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minuten mehr Überwachung erforderlich",
     "CURRENT_SUPERVISING_PROVIDER": "Aktueller überwachender Anbieter",
     "DEACTIVATE_PROMPT_CONTENT": "Möchten Sie das RPM für diesen Patienten wirklich deaktivieren?<br/><br/><strong>Die Abrechnung für diesen Patienten wird bis Ende des Monats fortgesetzt.</strong>",
-    "DEACTIVATION_REASON": "Deaktivierungsgrund",
     "DEPENDENCY_ICON_DESCRIPTION": "{{code}} -krav er ikke opfyldt",
     "DEVICE_TYPE": "Gerätetyp",
     "DISABLED_BY": "RPM deaktiviert durch",

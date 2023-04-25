@@ -27,6 +27,7 @@ import { EmailLogsComponent } from './email-logs'
 import { ExternalIdentifiersComponent } from './external-identifiers'
 import { AccountFormComponent, DeviceSyncComponent } from './form'
 import { AccountsListComponent, AccountsTableComponent } from './list'
+import { AccountCareManagementComponent } from './account-care-management'
 
 export const AccountsComponents = [
   AccountComponent,
@@ -34,6 +35,7 @@ export const AccountsComponents = [
   AccountFormComponent,
   AccountsListComponent,
   AccountsTableComponent,
+  AccountCareManagementComponent,
   AffiliatedAccountsTableComponent,
   AffiliationComponent,
   AffiliatedOrgComponent,

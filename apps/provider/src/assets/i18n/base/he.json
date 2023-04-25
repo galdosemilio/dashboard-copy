@@ -1559,7 +1559,6 @@
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} דקות נוספות של ניטור נדרשות",
     "CURRENT_SUPERVISING_PROVIDER": "ספק פיקוח נוכחי",
     "DEACTIVATE_PROMPT_CONTENT": "האם אתה בטוח שברצונך להשבית הכנסה לאלף הופעות עבור חולה זה? <br/><br/><strong> תמשיך לחייב אותך עבור החולה עד סוף החודש. </ strong>",
-    "DEACTIVATION_REASON": "סיבה לביטול ההפעלה",
     "DEPENDENCY_ICON_DESCRIPTION": "דרישות {{code}} אינן עומדות",
     "DEVICE_TYPE": "סוג מכשיר",
     "DISABLED_BY": "סל\"ד כברירה",

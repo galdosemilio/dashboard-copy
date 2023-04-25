@@ -1559,7 +1559,6 @@
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} دقيقة من المراقبة المطلوبة",
     "CURRENT_SUPERVISING_PROVIDER": "مقدم الإشراف الحالي",
     "DEACTIVATE_PROMPT_CONTENT": "هل تريد بالتأكيد تعطيل دورة في الدقيقة لهذا المريض؟ <br/><br/><strong> ستستمر في تلقي الفاتورة لهذا المريض حتى نهاية الشهر. </ strong>",
-    "DEACTIVATION_REASON": "سبب التعطيل",
     "DEPENDENCY_ICON_DESCRIPTION": "متطلبات {{code}} غير مستوفاة",
     "DEVICE_TYPE": "نوع الجهاز",
     "DISABLED_BY": "RPM تعطيلها من قبل",

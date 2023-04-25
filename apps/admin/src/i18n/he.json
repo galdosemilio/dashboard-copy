@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "משוייכים",
+    "CARE_MANAGEMENT": "ניהול טיפול",
     "EMAIL_LOG": "יומן דוא\"ל",
     "EXTERNAL_IDENTIFIERS": "מזהים חיצוניים",
     "INTEGRATIONS": "Sync שירות",

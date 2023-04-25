@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Foreninger",
+    "CARE_MANAGEMENT": "Plejeledelse",
     "EMAIL_LOG": "E-mail-log",
     "EXTERNAL_IDENTIFIERS": "Eksterne identifikatorer",
     "INTEGRATIONS": "Tjeneste Sync",

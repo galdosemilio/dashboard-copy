@@ -1559,7 +1559,6 @@
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minutes de surveillance supplémentaires nécessaires",
     "CURRENT_SUPERVISING_PROVIDER": "Fournisseur superviseur actuel",
     "DEACTIVATE_PROMPT_CONTENT": "Êtes-vous sûr de vouloir désactiver RPM pour ce patient? <br/> <strong> Vous continuerez à être facturé pour ce patient jusqu'à la fin du mois. </ Strong>",
-    "DEACTIVATION_REASON": "Motif de désactivation",
     "DEPENDENCY_ICON_DESCRIPTION": "{{code}} exigences non satisfaites",
     "DEVICE_TYPE": "Type d'appareil",
     "DISABLED_BY": "RPM désactivé par",

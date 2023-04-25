@@ -1,0 +1,18 @@
+<mat-card>
+  <div *ngFor="let serviceType of serviceTypes; let i = index;">
+    <div fxLayout="row" fxLayoutAlign="start center" style="margin: 10px 0;">
+      <div fxFlex>{{ serviceType.type.name }}</div>
+      <mat-slide-toggle
+        [checked]="serviceType.isActive"
+        [disabled]="isLoading"
+        labelPosition="before"
+        (toggleChange)="onChange(serviceType)"
+      >
+    </mat-slide-toggle>
+    </div>
+    <mat-divider *ngIf="i !== serviceTypes.length - 1" [inset]="true"></mat-divider>
+  </div>
+  <div fxLayoutAlign="center center" [class.ccr-overlay]="serviceTypes.length > 0" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+</mat-card>

@@ -1559,7 +1559,6 @@
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minutes more of monitoring needed",
     "CURRENT_SUPERVISING_PROVIDER": "Current Supervising Provider",
     "DEACTIVATE_PROMPT_CONTENT": "Are you sure you want to disable RPM for this patient?<br/><br/><strong>You will continue to be billed for this patient through the end of the month.</strong>",
-    "DEACTIVATION_REASON": "Deactivation Reason",
     "DEPENDENCY_ICON_DESCRIPTION": "{{ code }} requirements not satisfied",
     "DEVICE_TYPE": "Device Type",
     "DISABLED_BY": "RPM disabled by",

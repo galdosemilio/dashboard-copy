@@ -1559,7 +1559,6 @@
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minutter mere af overvågningen er nødvendig",
     "CURRENT_SUPERVISING_PROVIDER": "Nuværende tilsynsførende udbyder",
     "DEACTIVATE_PROMPT_CONTENT": "Er du sikker på, at du vil deaktivere RPM for denne patient?<br/><br/><strong>Du vil fortsat blive faktureret for denne patient gennem slutningen af måneden.</strong>",
-    "DEACTIVATION_REASON": "Deaktivering Årsag",
     "DEPENDENCY_ICON_DESCRIPTION": "Kravene til kode {{code}} skal være opfyldt, før denne kode er berettiget til fakturering",
     "DEVICE_TYPE": "Enhedstype",
     "DISABLED_BY": "RPM deaktiveret af",

@@ -1559,7 +1559,6 @@
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minuti di monitoraggio in più",
     "CURRENT_SUPERVISING_PROVIDER": "Attuale fornitore di supervisione",
     "DEACTIVATE_PROMPT_CONTENT": "Sei sicuro di voler disattivare il MRP per questo paziente?<br/><br/><strong>Continuerai a pagare per questo paziente fino alla fine del mese.</strong>",
-    "DEACTIVATION_REASON": "Motivo di disattivazione",
     "DEPENDENCY_ICON_DESCRIPTION": "{{code}} requisiti non soddisfatti",
     "DEVICE_TYPE": "Tipo di Dispositivo",
     "DISABLED_BY": "RPM disabilitato",

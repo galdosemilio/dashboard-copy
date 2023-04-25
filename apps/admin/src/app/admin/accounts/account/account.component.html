@@ -13,6 +13,7 @@
   <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['data']">{{ 'GLOBAL.PROFILE' | translate }}</a>
   <!-- TODO routing restriction for Admins -->
   <a *ngIf="accountType !== AccountTypeId.Admin" fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['orgs']">{{ 'ADMIN.ASSOCIATIONS' | translate }}</a>
+  <a *ngIf="accountType === AccountTypeId.Provider" fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['care-management']">{{ 'ADMIN.CARE_MANAGEMENT' | translate }}</a>
   <!-- <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['logs']">{{ 'ADMIN.LOGS._TITLE' | translate }}</a> -->
   <a *ngIf="accountType !== AccountTypeId.Admin" fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['external-identifiers']">{{ 'ADMIN.EXTERNAL_IDENTIFIERS' | translate }}</a>
   <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['email-log']">{{ 'ADMIN.EMAIL_LOG' | translate }}</a>

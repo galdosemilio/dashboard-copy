@@ -15,6 +15,7 @@
   },
   "ADMIN": {
     "ASSOCIATIONS": "Verbände",
+    "CARE_MANAGEMENT": "Pflege-Management",
     "EMAIL_LOG": "E-Mail-Protokoll",
     "EXTERNAL_IDENTIFIERS": "Externe Kennungen",
     "INTEGRATIONS": "Service Sync",
