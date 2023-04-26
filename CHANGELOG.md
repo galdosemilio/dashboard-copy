@@ -1,3 +1,21 @@
+# [1.114.0](https://github.com/coachcare/dashboard/compare/v1.113.0...v1.114.0) (2023-04-26)
+
+
+### Bug Fixes
+
+* change deactivation reason option to radio [FRON-3076] ([19d27db](https://github.com/coachcare/dashboard/commit/19d27dba1e276f1ae112cec9728b2b2585944744))
+* change inherited from text on settings -> care management ([e58d840](https://github.com/coachcare/dashboard/commit/e58d8405c6f04b0f6ede0301d089025a5dba30f6))
+* fetch organization preference and store info from mala endpoint ([07da5d1](https://github.com/coachcare/dashboard/commit/07da5d1ecc0a7924d0a226df4a7f7cc840f583e2))
+* modify workflow functionality to create the spree account and set the external identifier ([7d80753](https://github.com/coachcare/dashboard/commit/7d80753763c042039ae86cd353a0f1a6aba64b51))
+* remove required organization property from ecommerce token call ([9bb8f51](https://github.com/coachcare/dashboard/commit/9bb8f51a93d4e9b2505f92d8b09f3d2c4f422110))
+
+
+### Features
+
+* add care management org preferences [FRON-3084] ([a94f6ef](https://github.com/coachcare/dashboard/commit/a94f6ef4fbb3b14bd4bdc4a53ada314d3f2ccc01))
+* add shopify redirect for be slim [FRON-3088] ([97491e1](https://github.com/coachcare/dashboard/commit/97491e16d0247a99d06a39a4ba3976d1a76b3e5f))
+* replace rpm preference to care management preference ([6c8daab](https://github.com/coachcare/dashboard/commit/6c8daab059bb07ca4ccf2e6479c4a1341dde64a5))
+
 # [1.113.0](https://github.com/coachcare/dashboard/compare/v1.112.0...v1.113.0) (2023-04-18)
 
 
