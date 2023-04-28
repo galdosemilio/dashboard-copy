@@ -1,67 +1,166 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   OnInit,
-  Output,
-  ViewChild,
   ViewEncapsulation
 } from '@angular/core'
-import { MatDialog, MatSlideToggle } from '@coachcare/material'
-import { ContextService } from '@app/service'
+import { MatDialog } from '@coachcare/material'
+import {
+  ContextService,
+  NotifierService,
+  SelectedOrganization
+} from '@app/service'
 import { RPMStatusDialog } from '@app/shared/dialogs'
 import {
   AccountProvider,
   AccSingleResponse,
   OrganizationProvider,
   OrganizationAccess,
-  RPM
+  CareManagementState,
+  CareManagementStateEntity
 } from '@coachcare/sdk'
-import { _ } from '@app/shared/utils'
-import { sortBy, uniqBy } from 'lodash'
+import { SelectOption, _ } from '@app/shared/utils'
+import { flatMap, sortBy, uniqBy } from 'lodash'
 import * as moment from 'moment'
-import { RPMStateEntry, RPMStateTypes } from './models'
-import { filter } from 'rxjs/operators'
+import { RPMStateEntry } from './models'
+import { debounceTime, filter } from 'rxjs/operators'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { STORAGE_CARE_MANAGEMENT_SERVICE_TYPE } from '@app/config'
 
+@UntilDestroy()
 @Component({
   selector: 'app-rpm',
   templateUrl: './rpm.component.html',
   styleUrls: ['./rpm.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class RPMComponent implements AfterViewInit, OnInit {
-  @Output() rpmStatusChange: EventEmitter<void> = new EventEmitter<void>()
-
-  @ViewChild(MatSlideToggle, { static: false }) toggle: MatSlideToggle
-
+export class RPMComponent implements OnInit {
+  form: FormGroup
   accessibleOrganizations: OrganizationAccess[] = []
   inaccessibleOrganizations: OrganizationAccess[] = []
-  mostRecentEdition: RPMStateEntry
   mostRecentEntry: RPMStateEntry
+  activeCareManagmeentSessions: CareManagementStateEntity[] = []
   isLoading = false
   rpmEntries: RPMStateEntry[] = []
+  serviceType: string
+  serviceTypes: SelectOption<string>[] = []
+  activeCareEntries: RPMStateEntry[] = []
 
   constructor(
     private account: AccountProvider,
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private dialog: MatDialog,
+    private notifier: NotifierService,
+    private builder: FormBuilder,
     private organization: OrganizationProvider,
-    private rpm: RPM
+    private careManagementState: CareManagementState
   ) {}
 
-  ngAfterViewInit() {
-    this.toggle.defaults = {
-      disableToggleValue: true
+  async ngOnInit() {
+    this.createForm()
+
+    this.context.organization$
+      .pipe(untilDestroyed(this))
+      .subscribe((organization) => {
+        void this.resolveServiceTypes(organization)
+      })
+
+    this.form.controls.serviceType.valueChanges
+      .pipe(untilDestroyed(this), debounceTime(300))
+      .subscribe(() => {
+        this.serviceType = this.form.value.serviceType
+        this.context.activeCareManagementService =
+          this.context.accessibleCareManagementServiceTypes.find(
+            (entity) => entity.id === this.serviceType
+          )
+        localStorage.setItem(
+          STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
+          this.serviceType
+        )
+      })
+  }
+
+  private createForm() {
+    this.form = this.builder.group({
+      serviceType: []
+    })
+  }
+
+  private async resolveServiceTypes(organization: SelectedOrganization) {
+    this.isLoading = true
+
+    try {
+      // Populate appropriate service types into the dropdown
+
+      // populate listing of active care management sessions for patient
+      const activeCareManagementSessions = (
+        await this.careManagementState.getList({
+          account: this.context.accountId,
+          organization: this.context.organization.id,
+          status: 'active'
+        })
+      ).data
+
+      // filter by listing of care management service types accessible to authenticated provider
+      const accessibleAndActiveServiceTypes =
+        this.context.accessibleCareManagementServiceTypes
+          .filter((accessibleServiceType) => {
+            return activeCareManagementSessions.some(
+              (activeSession) =>
+                activeSession.serviceType.id === accessibleServiceType.id
+            )
+          })
+          .map((e) => {
+            return {
+              value: e.id,
+              viewValue: e.name
+            }
+          })
+
+      // Show either listing of active and accessible care management sessions, or select "No Program"
+
+      this.serviceTypes = accessibleAndActiveServiceTypes.length
+        ? accessibleAndActiveServiceTypes
+        : [
+            {
+              value: '',
+              viewValue: _('GLOBAL.NO_PROGRAM')
+            }
+          ]
+
+      const storageServiceType = localStorage.getItem(
+        STORAGE_CARE_MANAGEMENT_SERVICE_TYPE
+      )
+
+      // If the saved service type matches an active session - use that, else - take first option from listing
+      const loadedServiceType = accessibleAndActiveServiceTypes.find(
+        (e) => e.value === storageServiceType
+      )
+        ? storageServiceType
+        : this.serviceTypes[0].value
+
+      this.form.patchValue({
+        serviceType: loadedServiceType
+      })
+
+      localStorage.setItem(
+        STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
+        loadedServiceType
+      )
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isLoading = false
     }
   }
 
-  async ngOnInit() {
-    void this.refresh()
-  }
-
   async openStatusDialog() {
+    if (this.isLoading) {
+      return
+    }
+
     await this.refresh()
 
     this.dialog
@@ -69,25 +168,15 @@ export class RPMComponent implements AfterViewInit, OnInit {
         data: {
           accessibleOrganizations: this.accessibleOrganizations,
           inaccessibleOrganizations: this.inaccessibleOrganizations,
-          mostRecentEntry:
-            this.mostRecentEntry.rpmState.status !== RPMStateTypes.neverActive
-              ? this.mostRecentEntry
-              : undefined
+          careEntries: this.rpmEntries,
+          activeCareEntries: this.activeCareEntries
         },
         width: '60vw'
       })
       .afterClosed()
-      .pipe(
-        filter(
-          (closingState) =>
-            closingState === 'new_entry' ||
-            closingState === 'remove_entry' ||
-            closingState === true
-        )
-      )
+      .pipe(filter((changed) => changed === true))
       .subscribe(() => {
-        this.rpmStatusChange.emit()
-        void this.refresh()
+        void this.resolveServiceTypes(this.context.organization)
       })
   }
 
@@ -102,29 +191,31 @@ export class RPMComponent implements AfterViewInit, OnInit {
         })
       ).data
 
-      const promises = []
+      const accessibleCareServices =
+        this.context.accessibleCareManagementServiceTypes.slice()
 
-      accessibleOrgs.forEach((org) =>
-        promises.push(
-          this.rpm.getList({
-            account: this.context.accountId,
-            organization: org.organization.id,
-            limit: 'all',
-            offset: 0
-          })
+      const promises = flatMap(
+        accessibleCareServices.map((careService) =>
+          accessibleOrgs.map((org) =>
+            this.careManagementState.getList({
+              account: this.context.accountId,
+              organization: org.organization.id,
+              serviceType: careService.id,
+              limit: 'all',
+              offset: 0
+            })
+          )
         )
       )
 
       const responses = await Promise.all(promises)
-      let allEntries = []
-
-      responses.forEach((response) => {
-        response.data.forEach((entry) => {
-          allEntries.push(entry)
-        })
-      })
+      let allEntries = flatMap(responses.map((response) => [...response.data]))
 
       allEntries = uniqBy(allEntries, 'id')
+      this.rpmEntries = allEntries
+        .slice()
+        .map((entry) => new RPMStateEntry({ rpmState: entry }))
+      this.activeCareEntries = this.rpmEntries.filter((entry) => entry.isActive)
       this.mostRecentEntry = new RPMStateEntry({
         rpmState: sortBy(allEntries, (entry) => moment(entry.createdAt)).pop()
       })
@@ -135,8 +226,6 @@ export class RPMComponent implements AfterViewInit, OnInit {
             this.mostRecentEntry.rpmState.createdBy.id
           )
       }
-
-      this.context.accountRpmEntry = this.mostRecentEntry
 
       const permissionPromises = accessibleOrgs.map((org) =>
         this.resolveOrgPermissions(org)
@@ -158,6 +247,7 @@ export class RPMComponent implements AfterViewInit, OnInit {
       this.isLoading = false
       this.cdr.detectChanges()
     } catch (error) {
+      console.error(error)
       this.isLoading = false
     }
   }

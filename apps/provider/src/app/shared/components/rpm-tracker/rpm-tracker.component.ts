@@ -1,30 +1,41 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core'
 import { ReportsDatabase } from '@app/dashboard/reports/services/reports.database'
 import {
+  CareManagementService,
   ContextService,
   GestureService,
   NotifierService,
   TimeTrackerService
 } from '@app/service'
-import {
-  AccountAccessData,
-  RPMStateSummaryBillingItem,
-  RPMStateSummaryItem
-} from '@coachcare/sdk'
+import { AccountAccessData, CareManagementState } from '@coachcare/sdk'
 import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { RPM } from '@coachcare/sdk'
-import { TRACKABLE_RPM_CODES, TrackableRPMCodeEntry } from './model'
+import { TrackableBillableCode } from './model'
 import { debounceTime, filter } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog'
 import { GestureClosingDialog } from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
-import { merge } from 'rxjs'
+import { Subject, merge } from 'rxjs'
 import { RPMStateEntry } from '../rpm/models'
+import {
+  CareManagementStateSummaryItem,
+  CareManagementSnapshotBillingItem
+} from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 
 interface CodeAndTracking {
-  trackableCode: TrackableRPMCodeEntry
-  billingItem: RPMStateSummaryBillingItem
+  trackableCode: TrackableBillableCode
+  billingItem: CareManagementSnapshotBillingItem
 }
 
 type TimerUnavailableError = 'no-tracking' | 'active-tomorrow' | 'active-6am'
@@ -36,6 +47,30 @@ type TimerUnavailableError = 'no-tracking' | 'active-tomorrow' | 'active-6am'
   styleUrls: ['./rpm-tracker.component.scss']
 })
 export class RPMTrackerComponent implements OnDestroy, OnInit {
+  @ViewChild('toggleButton') toggleButton: ElementRef
+  @ViewChild('statusPanel') statusPanel: ElementRef
+
+  @HostListener('document:click', ['$event'])
+  checkClick($event): void {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.showStatusPanel = false
+    }
+  }
+
+  @Input()
+  set serviceType(_serviceType: string) {
+    this._serviceType = _serviceType
+    this.serviceType$.next(_serviceType)
+  }
+
+  get serviceType(): string {
+    return this._serviceType
+  }
+
+  @Output() openSettings: EventEmitter<void> = new EventEmitter<void>()
+
+  private _serviceType: string
+  private serviceType$ = new Subject<string>()
   public account: AccountAccessData
   public currentCodeAndTracking: CodeAndTracking
   public currentCodeString: string
@@ -45,7 +80,8 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   public showTimer = false
   public timerDisplay = '00:00'
   public timeTrackingComplete = false
-  public timerUnavailableError: TimerUnavailableError = 'no-tracking'
+  public timerUnavailableError?: TimerUnavailableError = 'no-tracking'
+  public loading = false
 
   private set iterationAmount(amount: number) {
     this._iterationAmount = amount > 0 ? amount : 0
@@ -76,17 +112,31 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     const minutes = Math.floor(hoursResidue / 60)
     const secs = hoursResidue % 60
 
-    this.timerDisplay = `${minutes
+    this.timerDisplay = `${minutes.toString().padStart(2, '0')}:${secs
       .toString()
-      .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+      .padStart(2, '0')}`
   }
 
   private get seconds(): number {
     return this._seconds
   }
 
+  public get requiredIterationSecondsDisplay() {
+    if (this.timerUnavailableError === 'active-tomorrow') {
+      return '00:00'
+    }
+
+    const hoursResidue = (this.requiredIterationSeconds || 0) % 3600
+    const minutes = Math.floor(hoursResidue / 60)
+    const secs = hoursResidue % 60
+
+    return `${minutes.toString().padStart(2, '0')}:${secs
+      .toString()
+      .padStart(2, '0')}`
+  }
+
   private _iterationAmount = 0
-  private requiredIterationSeconds = 1200
+  private requiredIterationSeconds = 0
   private _seconds = 0
   private timerInterval
 
@@ -95,13 +145,16 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     private context: ContextService,
     private database: ReportsDatabase,
     private dialog: MatDialog,
+    private elementRef: ElementRef,
     private gesture: GestureService,
     private notifier: NotifierService,
-    private rpm: RPM,
-    private timeTracker: TimeTrackerService
+    private careManagementState: CareManagementState,
+    private timeTracker: TimeTrackerService,
+    private careManagementService: CareManagementService
   ) {
     this.timerHandler = this.timerHandler.bind(this)
-    this.resolveAccountRPMStatus = this.resolveAccountRPMStatus.bind(this)
+    this.resolveAccountCareSessionStatus =
+      this.resolveAccountCareSessionStatus.bind(this)
   }
 
   public ngOnDestroy(): void {}
@@ -115,8 +168,12 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       )
       .subscribe(() => {
         this.account = this.context.account
-        void this.resolveAccountRPMStatus(this.account)
+        void this.resolveAccountCareSessionStatus(this.account)
       })
+
+    this.serviceType$
+      .pipe(debounceTime(100))
+      .subscribe(() => this.resolveAccountCareSessionStatus(this.account))
 
     this.gesture.userIdle$
       .pipe(
@@ -126,11 +183,11 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       .subscribe(() => this.showUserIdleDialog())
   }
 
-  public onForceClosePanel(): void {
-    this.showStatusPanel = false
-  }
-
   public toggleRPMStatusPanel(): void {
+    if (this.loading) {
+      return
+    }
+
     this.showStatusPanel = !this.showStatusPanel
   }
 
@@ -147,7 +204,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
       this.pauseTimer()
       await this.timeTracker.forceCommit()
-      void this.resolveAccountRPMStatus(this.account)
+      void this.resolveAccountCareSessionStatus(this.account)
     } catch (error) {
       this.notifier.error(error)
     }
@@ -162,18 +219,22 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     delete this.timerInterval
   }
 
-  private async resolveAccountRPMStatus(
+  private async resolveAccountCareSessionStatus(
     account: AccountAccessData
   ): Promise<void> {
     try {
-      if (!account) {
+      if (!account || !this.serviceType) {
         return
       }
-
+      this.loading = true
       this.timeTrackingComplete = false
+      this.currentCodeString = ''
+      this.requiredIterationSeconds = 0
+      this.timerUnavailableError = undefined
 
-      const response = await this.rpm.getList({
+      const response = await this.careManagementState.getList({
         organization: this.context.organizationId,
+        serviceType: this.serviceType,
         account: account.id,
         limit: 1,
         offset: 0
@@ -199,15 +260,20 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       }
     } catch (error) {
       this.notifier.error(error)
+      this.timerUnavailableError = 'no-tracking'
+    } finally {
+      this.loading = false
     }
   }
 
   private resolveCurrentRPMBillingCode(
-    stateSummaryItem: RPMStateSummaryItem
+    stateSummaryItem: CareManagementStateSummaryItem
   ): CodeAndTracking {
-    const trackableCodes = Object.values(TRACKABLE_RPM_CODES)
-    let billingItem: RPMStateSummaryBillingItem
-    let trackableCode: TrackableRPMCodeEntry
+    const trackableCodes: TrackableBillableCode[] = Object.values(
+      this.careManagementService.trackableCptCodes[this.serviceType]
+    )
+    let billingItem: CareManagementSnapshotBillingItem
+    let trackableCode: TrackableBillableCode
 
     trackableCodes.some((trackCode) => {
       const trackCodeOverride = trackCode.displayedCode || trackCode.code
@@ -226,8 +292,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       )
 
       if (
-        !foundCodeInEntry ||
-        !foundCodeInEntry.eligibility.next ||
+        !foundCodeInEntry?.eligibility.next ||
         (requiredSeconds && trackedSeconds && trackedSeconds >= requiredSeconds)
       ) {
         return
@@ -255,11 +320,13 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         return
       }
 
-      const response = await this.database.fetchRPMBillingReport({
+      const response = await this.database.fetchCareManagementBillingSnapshot({
         account: account.id,
         organization: this.context.organizationId,
+        serviceType: this.serviceType,
         limit: 1,
-        offset: 0
+        offset: 0,
+        status: 'all'
       })
 
       if (!response.data.length) {
@@ -301,6 +368,9 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   private resolveTimerStartTime(codeAndTracking: CodeAndTracking): void {
     switch (codeAndTracking.trackableCode.code) {
       case '99458':
+      case '98981':
+      case '99439':
+      case '99427':
         this.iterationAmount = get(
           codeAndTracking,
           'billingItem.eligibility.next.alreadyEligibleCount',
@@ -323,6 +393,12 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       case '99453':
       case '99454':
       case '99457':
+      case '98975':
+      case '98977':
+      case '98980':
+      case '99490':
+      case '99426':
+      case '99484':
         this.iterationAmount = 0
         this.seconds = get(
           codeAndTracking,
@@ -355,7 +431,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         })
         .afterClosed()
         .subscribe(() => {
-          void this.resolveAccountRPMStatus(this.account)
+          void this.resolveAccountCareSessionStatus(this.account)
           this.timeTracker.resetTrackingTimeStart()
         })
     } catch (error) {
@@ -391,5 +467,10 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     void this.handleSecondPassing()
 
     this.cdr.detectChanges()
+  }
+
+  public onOpenSettings(): void {
+    this.showStatusPanel = false
+    this.openSettings.emit()
   }
 }

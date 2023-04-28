@@ -8,6 +8,10 @@ import { Component, Input } from '@angular/core'
 export class RPMCalendarIconComponent {
   @Input()
   text = ''
+
   @Input()
   size = 24
+
+  @Input()
+  completed = false
 }

@@ -1,5 +1,8 @@
 import { SelectedOrganization } from '@app/service'
-import { RPMState as SelveraRPMState } from '@coachcare/sdk'
+import {
+  CareManagementServiceType,
+  RPMState as SelveraRPMState
+} from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 interface RPMEntryStatus {
@@ -49,7 +52,8 @@ export class RPMStateEntry {
   isActive: boolean
   pending?: RPMStateEntryPendingStatus
   organization: SelectedOrganization
-  rpmState: RPMState
+  rpmState: RPMState // @TODO: add 'serviceType' property in the SDK
+  serviceType: CareManagementServiceType
 
   constructor(args: any, opts: any = {}) {
     const now = moment()
@@ -69,6 +73,7 @@ export class RPMStateEntry {
     this.organization = args.rpmState
       ? args.rpmState.organization
       : args.organization || {}
+    this.serviceType = args.rpmState?.serviceType ?? {}
     this.rpmState = args.rpmState
       ? {
           ...args.rpmState,

@@ -11,4 +11,7 @@ export class RPMDependencyIconComponent {
 
   @Input()
   text = ''
+
+  @Input()
+  completed = false
 }

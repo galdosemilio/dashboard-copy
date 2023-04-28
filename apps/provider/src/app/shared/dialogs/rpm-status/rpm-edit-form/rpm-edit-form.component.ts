@@ -8,6 +8,7 @@ import {
 } from '@angular/forms'
 import { RPMStateEntry } from '@app/shared/components/rpm/models'
 import { FormUtils, sleep } from '@app/shared/utils'
+import { CareManagementServiceTypeId } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 export type RPMEntryAgeStatus = 'before24' | 'after24' | 'after24Edited'
@@ -49,6 +50,10 @@ export class RPMEditFormComponent implements ControlValueAccessor, OnInit {
   @Input() rpmEntry: RPMStateEntry
   @Input() showModeToggle = true
 
+  get isRequiredSecondaryDiagnosis() {
+    return this.rpmEntry.serviceType?.id === CareManagementServiceTypeId.CCM
+  }
+
   public form: FormGroup
 
   private _entryAge: RPMEntryAgeStatus
@@ -77,7 +82,11 @@ export class RPMEditFormComponent implements ControlValueAccessor, OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       primaryDiagnosis: ['', Validators.required],
-      secondaryDiagnosis: [''],
+      secondaryDiagnosis: [
+        '',
+        this.isRequiredSecondaryDiagnosis ? Validators.required : []
+      ],
+      otherDiagnosis: [''],
       note: [
         '',
         this.entryAge === 'after24' && this.mode !== 'readonly'

@@ -34,7 +34,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   ]
 })
 export class CcrDateInputComponent
-  implements ControlValueAccessor, DoCheck, OnDestroy, OnInit {
+  implements ControlValueAccessor, DoCheck, OnDestroy, OnInit
+{
   @Input() allowsEmpty = false
   @Input() appearance?: string
   @Input() errorMessage?: string
@@ -45,6 +46,7 @@ export class CcrDateInputComponent
   @Input() placeholder: string = _('BOARD.DATE_OF_BIRTH')
   @Input() readonly = false
   @Input() required = true
+  @Input() hint?: string
   @ViewChild('textInput', { static: true }) textInput
   @ViewChild('datepickerInput', { static: true }) datepickerInput
 

@@ -1,25 +1,27 @@
 import { CcrPaginatorComponent } from '@coachcare/common/components'
-import { NotifierService } from '@app/service'
+import { NotifierService, CareManagementService } from '@app/service'
 import { TableDataSource } from '@app/shared/model'
 import {
-  FetchRPMBillingSummaryRequest,
-  PagedResponse,
-  RPMStateSummaryItem
+  FetchCareManagementBillingMonthRequest,
+  FetchCareManagementBillingSnapshotRequest,
+  FetchCareManagementBillingSnapshotResponse
 } from '@coachcare/sdk'
-import { from, Observable } from 'rxjs'
-import { RPM_CODE_COLUMNS, RPMStateSummaryEntry } from '../rpm/models'
+import { from, Observable, of } from 'rxjs'
+import { RPMStateSummaryEntry } from '../rpm/models'
 import { ReportsDatabase } from './reports.database'
+import { CareManagementStateSummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 
 export class RPMBillingDataSource extends TableDataSource<
-  RPMStateSummaryEntry,
-  PagedResponse<RPMStateSummaryItem>,
-  FetchRPMBillingSummaryRequest
+  CareManagementStateSummaryItem,
+  FetchCareManagementBillingSnapshotResponse,
+  FetchCareManagementBillingSnapshotRequest
 > {
   timeoutCheckCount: number = 5
 
   constructor(
     protected database: ReportsDatabase,
     protected notify: NotifierService,
+    protected careManagementService: CareManagementService,
     private paginator?: CcrPaginatorComponent
   ) {
     super()
@@ -33,49 +35,66 @@ export class RPMBillingDataSource extends TableDataSource<
     }
   }
 
-  defaultFetch(): PagedResponse<RPMStateSummaryItem> {
+  defaultFetch(): FetchCareManagementBillingSnapshotResponse {
     return { data: [], pagination: {} }
   }
 
   fetch(
-    criteria: FetchRPMBillingSummaryRequest
-  ): Observable<PagedResponse<RPMStateSummaryItem>> {
-    return from(this.database.fetchRPMBillingReport(criteria))
+    criteria: FetchCareManagementBillingSnapshotRequest
+  ): Observable<FetchCareManagementBillingSnapshotResponse> {
+    return criteria.organization
+      ? from(this.database.fetchCareManagementBillingSnapshot(criteria))
+      : of(this.defaultFetch())
   }
 
-  fetchSuperbill(criteria: FetchRPMBillingSummaryRequest): Promise<any> {
+  fetchSuperbill(
+    criteria: FetchCareManagementBillingMonthRequest
+  ): Promise<any> {
     return this.database.fetchRPMSuperbillReport(criteria)
   }
 
-  updateItem(data: RPMStateSummaryEntry) {
-    const index = this._result.findIndex((entry) => entry.id === data.id)
+  updateItem(data: CareManagementStateSummaryItem) {
+    const index = this._result.findIndex(
+      (entry) => entry.account.id === data.account.id
+    )
 
     if (index > -1) {
       this._result[index] = data
     }
   }
 
-  mapResult(
-    result: PagedResponse<RPMStateSummaryItem>
-  ): Array<RPMStateSummaryEntry> {
+  async mapResult(
+    result: FetchCareManagementBillingSnapshotResponse
+  ): Promise<CareManagementStateSummaryItem[]> {
     // pagination handling
     this.getTotal(result)
 
-    if (!result || !result.data.length) {
+    if (!result?.data?.length) {
       return []
     }
 
-    const allBillings = Object.keys(RPM_CODE_COLUMNS).map(
-      (key) =>
-        ({
-          code: key,
-          eligibility: {}
-        } as any)
-    )
+    const allBillings = this.careManagementService.billingCodes
+      .filter(
+        (code) => code.serviceType.id === result.data[0].state.serviceType.id
+      )
+      .map((code) => ({
+        code: code.value,
+        eligibility: {}
+      }))
+
+    const trackableCodes =
+      this.careManagementService.trackableCptCodes[
+        result.data[0].state.serviceType.id
+      ] || {}
 
     return result.data.map(
       (element) =>
-        new RPMStateSummaryEntry(element, allBillings, this.criteria.asOf)
+        new RPMStateSummaryEntry(
+          element,
+          allBillings,
+          trackableCodes,
+          this.criteria.asOf
+        )
     )
   }
 }

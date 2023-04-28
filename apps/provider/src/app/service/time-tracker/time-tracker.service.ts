@@ -10,8 +10,6 @@ import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
 import { RouteUtils } from '@app/shared/helpers'
 import { uniq } from 'lodash'
 
-const RPM_TAG = 'rpm'
-
 @UntilDestroy()
 @Injectable()
 export class TimeTrackerService implements OnDestroy {
@@ -42,7 +40,7 @@ export class TimeTrackerService implements OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(this.routeEventHandler)
     void this.commitStashedTime()
-    merge(this.context.organization$, this.context.accountRpmEntry$)
+    merge(this.context.organization$, this.context.activeCareManagementService$)
       .pipe(untilDestroyed(this))
       .subscribe(async () => {
         try {
@@ -93,12 +91,8 @@ export class TimeTrackerService implements OnDestroy {
 
     const tags = [...route.tags, ...params]
 
-    if (
-      route.useAccount &&
-      this.context.accountRpmEntry?.isActive &&
-      this.context.organization.preferences?.rpm?.isActive
-    ) {
-      tags.push(RPM_TAG)
+    if (route.useAccount && this.context.activeCareManagementService) {
+      tags.push(this.context.activeCareManagementService.tag)
     }
 
     return uniq(tags)

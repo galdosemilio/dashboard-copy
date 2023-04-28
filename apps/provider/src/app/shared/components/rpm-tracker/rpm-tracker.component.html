@@ -1,84 +1,19 @@
-<div *ngIf="showTimer" fxFlex fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-        <button (click)="toggleRPMStatusPanel()" mat-button>
-            <div fxLayout="column">
-                <div
-                *ngIf="!timeTrackingComplete"
-                fxLayout="row"
-                fxLayoutGap="5px"
-                fxLayoutAlign="end center">
-                    <span class="timer">{{ timerDisplay }}</span>
-                    <mat-icon>query_builder</mat-icon>
-                </div>
-
-                <div *ngIf="timeTrackingComplete">
-                    <span class="timer">{{ 'RPM.TIME_TRACKING_COMPLETE' | translate }}</span>
-                </div>
-
-                <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
-                    <div
-                    *ngFor="let codeDep of currentCodeAndTracking?.trackableCode.deps"
-                    fxLayout="row"
-                    fxLayoutGap="7px"
-                    fxLayoutAlign="end center">
-                        <span>{{ codeDep }}</span>
-                        <span class="iteration-count perm-success">
-                            <span>
-                                <mat-icon>check</mat-icon>
-                            </span>
-                        </span>
-                    </div>
-
-                    <div
-                    *ngFor="let iterationNumber of iterationAmountArray; let i = index"
-                    [hidden]="currentIteration < i"
-                    fxLayout="row"
-                    fxLayoutGap="7px"
-                    fxLayoutAlign="end center">
-                        <span>
-                            {{ currentCodeString }}
-                            <small *ngIf="currentCodeAndTracking?.trackableCode.maxEligibleAmount > 1">(x{{ i + 1 }})</small>
-                        </span>
-                        <span class="iteration-count perm-success">
-                            <span *ngIf="iterationAmount > i">
-                                <mat-icon>check</mat-icon>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </button>
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" (click)="toggleRPMStatusPanel()">
+    <mat-spinner *ngIf="loading" diameter="24" strokeWidth="3"></mat-spinner>
+    <div class="current-code" *ngIf="!loading && currentCodeString">
+        {{ currentCodeString }}
     </div>
+    <span class="timer"><strong>{{ timerDisplay }}</strong> / {{ requiredIterationSecondsDisplay }}</span>
+    <div class="info-icon" #toggleButton></div>
 </div>
 
-<div *ngIf="!showTimer" fxFlex fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-        <button (click)="toggleRPMStatusPanel()" mat-button>
-            <div
-            [ngSwitch]="timerUnavailableError"
-            class="no-tracking-notice"
-            fxLayout="row"
-            fxLayoutGap="5px"
-            fxLayoutAlign="start center">
-                <div *ngSwitchDefault fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                    <span class="timer">{{ 'GLOBAL.NO_TRACKING' | translate }}</span>
-                    <mat-icon>query_builder</mat-icon>
-                </div>
-
-                <div *ngSwitchCase="'active-tomorrow'" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                    <span class="timer">{{ 'RPM.TIME_TRACKER_TOMORROW' | translate }}</span>
-                    <mat-icon>query_builder</mat-icon>
-                </div>
-
-                <div *ngSwitchCase="'active-6am'" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                    <span class="timer">{{ 'RPM.TIME_TRACKER_6AM' | translate }}</span>
-                    <mat-icon>query_builder</mat-icon>
-                </div>
-            </div>
-        </button>
+<div #statusPanel>
+    <div *ngIf="showStatusPanel" class="rpm-status-panel-container">
+        <app-rpm-status-panel
+            [account]="account"
+            [serviceType]="serviceType"
+            [trackingStartsTomorrow]="this.timerUnavailableError === 'active-tomorrow'"
+            (openSettings)="onOpenSettings()"
+        ></app-rpm-status-panel>
     </div>
-</div>
-
-<div *ngIf="showStatusPanel" class="rpm-status-panel-container">
-    <app-rpm-status-panel [account]="account" (forceClose)="onForceClosePanel()"></app-rpm-status-panel>
 </div>

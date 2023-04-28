@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core'
-import { Reports } from '@coachcare/sdk'
+import {
+  FetchCareManagementBillingCodesRequest,
+  FetchCareManagementBillingCodesResponse,
+  FetchCareManagementBillingMonthRequest,
+  FetchCareManagementBillingMonthResponse,
+  FetchCareManagementBillingSnapshotRequest,
+  FetchCareManagementBillingSnapshotResponse,
+  Reports
+} from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared/model'
 import {
@@ -100,15 +108,39 @@ export class ReportsDatabase extends CcrDatabase {
     return this.reports.fetchRPMBillingSummary(args)
   }
 
+  public fetchCareManagementBillingMonthReport(
+    args: FetchCareManagementBillingMonthRequest
+  ): Promise<FetchCareManagementBillingMonthResponse> {
+    return this.reports.fetchCareManagementBillingMonth(args)
+  }
+
+  public fetchCareManagementBillingSnapshot(
+    args: FetchCareManagementBillingSnapshotRequest
+  ): Promise<FetchCareManagementBillingSnapshotResponse> {
+    return this.reports.fetchCareManagementBillingSnapshot(args)
+  }
+
   public fetchRPMSuperbillReport(
-    args: FetchRPMBillingSummaryRequest
+    args: FetchCareManagementBillingMonthRequest
   ): Promise<Blob> {
-    return this.reports.fetchRPMSuperbill(args)
+    return this.reports.fetchCareManagementSuperbill(args)
   }
 
   public fetchRpmMonthlyBillingReport(
     args: FetchRPMMonthlyBillingSummaryRequest
   ): Promise<FetchRPMMonthlyBillingSummaryResponse> {
     return this.reports.fetchRPMMonthlyBillingSummary(args)
+  }
+
+  public fetchCareManagementMonthlyBillingReport(
+    args: FetchCareManagementBillingMonthRequest
+  ): Promise<FetchCareManagementBillingMonthResponse> {
+    return this.reports.fetchCareManagementBillingMonth(args)
+  }
+
+  public fetchCareManagementBillingCodes(
+    args: FetchCareManagementBillingCodesRequest
+  ): Promise<FetchCareManagementBillingCodesResponse> {
+    return this.reports.fetchCareManagementBillingCodes(args)
   }
 }

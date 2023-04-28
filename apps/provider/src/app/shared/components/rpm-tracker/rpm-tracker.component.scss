@@ -1,55 +1,65 @@
 @import 'variables';
 
 :host {
-  border: 1px solid var(--primary);
-  border-radius: 5px;
-  color: var(--primary);
+  color: var(--text);
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 button {
   padding: 10px 10px 10px 10px;
 }
 
-.iteration-count {
-  color: lighten(mat-color($ccr-background, success), 20%);
-  text-align: center;
-  width: 23px;
-
-  mat-icon {
-    line-height: 15px;
-    font-size: 12px;
-    height: 12px;
-    position: relative;
-    top: 0.1px;
-    width: 12px;
-  }
-}
-
-.no-tracking-notice {
-  margin-top: 10px !important;
-}
-
 .rpm-status-panel-container {
   background-color: white;
-  margin-right: 64px;
   position: absolute;
-  top: 96px;
-  right: -20px;
+  right: -25px;
   z-index: 9999;
 }
 
 .timer {
   line-height: 24px;
   position: relative;
-  top: -5px;
+}
+
+.current-code {
+  border: 1px solid var(--text);
+  padding: 6px 15px;
 }
 
 mat-icon {
-  left: 3px;
-  position: relative;
-  top: -5px;
+  color: var(--primary);
+  cursor: pointer;
 }
 
 span {
   line-height: 5px;
+}
+
+div {
+  position: relative;
+
+  > .info-icon {
+    background-color: #fff;
+    border: 1px solid var(--primary);
+    border-radius: 3px;
+    height: 15px;
+    position: absolute;
+    right: -10px;
+    width: 15px;
+
+    &::after {
+      color: var(--primary);
+      content: 'i';
+      font-size: 0.8em;
+      font-weight: bold;
+      height: 100%;
+      left: 0;
+      line-height: 15px;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+    }
+  }
 }

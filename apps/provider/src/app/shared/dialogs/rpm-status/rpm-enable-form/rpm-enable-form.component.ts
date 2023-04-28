@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -35,6 +36,12 @@ import {
 import { MatStepper } from '@coachcare/material'
 import { auditTime } from 'rxjs/operators'
 import { Subject } from 'rxjs'
+import { CareServiceType } from '@app/shared/model/careService'
+
+export interface CareServiceEnableFormStepperInfo {
+  current: number
+  count: number
+}
 
 @UntilDestroy()
 @Component({
@@ -53,13 +60,20 @@ import { Subject } from 'rxjs'
 export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   @Input() accessibleOrganizations: OrganizationAccess[] = []
   @Input() nextStep$?: Subject<void>
+  @Input() type: CareServiceType
 
-  @Output() enableFormStep: EventEmitter<number> = new EventEmitter<number>()
+  @Output() enableFormStep: EventEmitter<CareServiceEnableFormStepperInfo> =
+    new EventEmitter<CareServiceEnableFormStepperInfo>()
 
   @ViewChild('stepper', { static: true }) stepper: MatStepper
 
+  get isRequiredSecondaryDiagnosis() {
+    return this.type.serviceType.id === CareManagementServiceTypeId.CCM
+  }
+
   public allowNoDeviceOption = false
   public form: FormGroup
+  public isTopLevelUser: boolean
   public blockFormError?: string
   public rpmDevices: ImageOptionSelectorItem[] = []
   public selectedClinic?: OrganizationAccess
@@ -68,6 +82,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   private supervisingProvidersDataSource: SupervisingProvidersDataSource
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private context: ContextService,
     private database: SupervisingProvidersDatabase,
     private fb: FormBuilder,
@@ -82,13 +97,30 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
     this.createSupervisingProvidersDataSource()
     this.resolveAccessibleOrgsData()
     this.subscribeToNextStep()
+    this.isTopLevelUser = this.context.user.isTopLevel ?? false
+  }
+
+  public ngAfterViewInit(): void {
+    this.enableFormStep.emit({
+      current: 0,
+      count: this.stepper.steps.length
+    })
   }
 
   public onSupervisingProviderSelected(option: SelectOption<string>): void {
+    const supProvider = this.supervisingProviderOptions.find(
+      (opt) => opt.value === option.value
+    )
+
     this.form
       .get('setup')
       .get('supervisingProvider')
       .setValue(option?.value ?? '')
+
+    this.form
+      .get('setup')
+      .get('supProviderName')
+      .setValue(supProvider.viewValue)
   }
 
   public registerOnChange(fn: any): void {
@@ -100,7 +132,10 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   }
 
   public stepperChange($event: any): void {
-    this.enableFormStep.emit($event.selectedIndex)
+    this.enableFormStep.emit({
+      current: $event.selectedIndex,
+      count: this.stepper.steps.length
+    })
     this.form.updateValueAndValidity()
   }
 
@@ -111,8 +146,14 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
       setup: this.fb.group({
         organization: ['', Validators.required, this.validateRPMPreference],
         supervisingProvider: ['', Validators.required],
+        supProviderName: [''],
         primaryDiagnosis: ['', Validators.required],
-        secondaryDiagnosis: ['']
+        secondaryDiagnosis: [
+          '',
+          this.isRequiredSecondaryDiagnosis ? Validators.required : []
+        ],
+        otherDiagnosis: [''],
+        startDate: ['']
       }),
       agreement: this.fb.group({
         patientConsented: [false, Validators.requiredTrue],
@@ -120,7 +161,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
         hadFaceToFace: [false, Validators.requiredTrue],
         goalsSet: [false, Validators.requiredTrue]
       }),
-      deviceSupplied: ['', Validators.required]
+      deviceSupplied: ['', this.type.deviceSetup ? Validators.required : []]
     })
 
     this.form.valueChanges
@@ -200,7 +241,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
   private propagateChange(data: any): void {}
 
   private resolveAccessibleOrgsData(): void {
-    if (this.accessibleOrganizations && this.accessibleOrganizations.length) {
+    if (this.accessibleOrganizations?.length) {
       this.form
         .get('setup')
         .get('organization')
@@ -287,7 +328,7 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
 
       const res = await this.carePreference.getAllCareManagementPreferences({
         organization: control.value,
-        serviceType: CareManagementServiceTypeId.RPM
+        serviceType: this.type.serviceType.id
       })
 
       const pref = res.data[0]
@@ -300,6 +341,8 @@ export class RPMEnableFormComponent implements ControlValueAccessor, OnInit {
       return { invalidRPMPref: true }
     } catch (error) {
       this.notify.error(error)
+    } finally {
+      this.cdr.detectChanges()
     }
   }
 

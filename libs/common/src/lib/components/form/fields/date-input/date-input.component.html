@@ -30,5 +30,6 @@
         <mat-datepicker-toggle matSuffix [for]="pickerBirth" [hidden]="readonly"></mat-datepicker-toggle>
         <mat-datepicker #pickerBirth [disabled]="readonly" startView="years"></mat-datepicker>
         <mat-error *ngIf="errorMessage && form.touched && form.invalid">{{ errorMessage | translate }}</mat-error>
+        <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
     </mat-form-field>
 </div>

@@ -11,4 +11,7 @@ export class RPMChatIconComponent {
 
   @Input()
   text = ''
+
+  @Input()
+  completed = false
 }

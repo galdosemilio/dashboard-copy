@@ -1,11 +1,25 @@
-<svg width="33px" height="37px" viewBox="0 0 33 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Reports" transform="translate(-1276.000000, -426.000000)" fill="#D0021B">
-            <g id="Group-10" transform="translate(1276.000000, 426.000000)">
-                <path d="M27.84375,37 L5.15625,37 C2.314125,37 0,35.27025 0,33.1458333 L0,3.85416667 C0,1.72975 2.314125,0 5.15625,0 L27.84375,0 C30.685875,0 33,1.72975 33,3.85416667 L33,10.0208333 C33,10.4463333 32.538,10.7916667 31.96875,10.7916667 C31.3995,10.7916667 30.9375,10.4463333 30.9375,10.0208333 L30.9375,3.85416667 C30.9375,2.57920833 29.5494375,1.54166667 27.84375,1.54166667 L5.15625,1.54166667 C3.4505625,1.54166667 2.0625,2.57920833 2.0625,3.85416667 L2.0625,33.1458333 C2.0625,34.4207917 3.4505625,35.4583333 5.15625,35.4583333 L27.84375,35.4583333 C29.5494375,35.4583333 30.9375,34.4207917 30.9375,33.1458333 L30.9375,26.9791667 C30.9375,26.5536667 31.3995,26.2083333 31.96875,26.2083333 C32.538,26.2083333 33,26.5536667 33,26.9791667 L33,33.1458333 C33,35.27025 30.685875,37 27.84375,37 Z" id="Path" fill-rule="nonzero"></path>
-                <polygon id="Path" points="17.4435349 7 20 9.55629803 18.556131 11 16 8.44386903 13.4435349 11 12 9.55629803 14.556131 7 12.0001671 4.4443702 13.443702 3 15.9996659 5.55613097 18.5557969 3.00033411 19.9996659 4.44386903"></polygon>
-                <text x="4" y="23" font-family="Roboto, sans-serif" font-size="10">{{ text }}</text>
+<svg *ngIf="!completed" width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>incomplete code</title>
+    <g id="RPM" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="incomplete-code">
+            <rect id="Rectangle" stroke="#777777" stroke-width="3" x="1.5" y="8.5" width="43" height="36" rx="8"></rect>
+            <g id="exit" transform="translate(14.000000, 0.000000)">
+                <path d="M9.5,0 C4.25305952,0 0,4.25396429 0,9.5 C0,14.7469405 4.25305952,19 9.5,19 C14.7460357,19 19,14.7469405 19,9.5 C19,4.25396429 14.7460357,0 9.5,0 Z" id="Shape" fill="#777777" fill-rule="nonzero"></path>
+                <polygon id="Path" fill="#FFFFFF" points="11.4549643 9.5 14.9163571 12.9611667 12.9613929 14.9159048 9.50045238 11.4549643 6.03905952 14.9159048 4.08454762 12.9611667 7.5454881 9.5 4.08477381 6.0397381 6.03928571 4.08409524 9.5 7.54503571 12.9609405 4.08454762 14.9159048 6.03905952"></polygon>
+                <text x="-5" y="31" font-family="Roboto, sans-serif" font-size="10">{{ text }}</text>
             </g>
+        </g>
+    </g>
+</svg>
+
+<svg *ngIf="completed" class="completed" width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>completed code</title>
+    <g id="RPM" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="completed-code">
+            <rect id="Rectangle-Copy-20" stroke="#F16862" stroke-width="3" x="1.5" y="8.5" width="43" height="36" rx="8"></rect>
+            <path d="M23.5,19 C28.7383422,19 33,14.7383422 33,9.5 C33,4.26165778 28.7383422,0 23.5,0 C18.2616578,0 14,4.26165778 14,9.5 C14,14.7383422 18.2616578,19 23.5,19 Z" id="Path" fill="#F16862"></path>
+            <polygon id="Path-3" fill="#FDFDFD" fill-rule="nonzero" transform="translate(23.373217, 8.179321) rotate(-45.000000) translate(-23.373217, -8.179321) " points="18.1909937 4.49575243 21.1908274 4.5273413 21.1442947 8.86254687 28.6330173 8.86288986 28.6330173 11.8628899 18.1134162 11.8628899 18.1293778 10.3470954"></polygon>
+            <text x="9" y="31" font-family="Roboto, sans-serif" font-size="10">{{ text }}</text>
         </g>
     </g>
 </svg>

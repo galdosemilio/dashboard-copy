@@ -13,6 +13,7 @@ import { OverviewComponents } from './overview'
 import { ReportsComponent } from './reports.component'
 import { RPMComponents } from './rpm'
 import { StatisticsComponents } from './statistics'
+import { SelectorsComponents } from './service-type-selector'
 
 import { ReportsDatabase, StatisticsDatabase, TaskDatabase } from './services'
 import { ReportsDialogComponents } from './dialogs'
@@ -25,6 +26,7 @@ export const ReportsComponents = [
   ...ReportsDialogComponents,
   ...StatisticsComponents,
   ...OverviewComponents,
+  ...SelectorsComponents,
   ReportsComponent
 ]
 

@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "9188"
+      },
+      "createdAt": "2023-05-01T16:32:21.713Z",
+      "id": "be007cc8-8cfa-40e9-9097-bb56abe50b8b",
+      "serviceType": {
+        "id": "3",
+        "name": "RTM",
+        "tag": "rtm"
+      },
+      "status": "active"
+    },
+    {
+      "account": {
+        "id": "9188"
+      },
+      "createdAt": "2023-05-01T17:02:43.496Z",
+      "id": "d29aad86-fcb7-40c9-ad84-35ae0f5b4e0c",
+      "serviceType": {
+        "id": "5",
+        "name": "BHI",
+        "tag": "bhi"
+      },
+      "status": "active"
+    },
+    {
+      "account": {
+        "id": "9188"
+      },
+      "createdAt": "2023-04-28T17:47:00.769Z",
+      "id": "a0719452-835e-4835-a5a1-9c285319f58d",
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm"
+      },
+      "status": "active"
+    },
+    {
+      "account": {
+        "id": "9188"
+      },
+      "createdAt": "2023-04-28T21:42:34.421Z",
+      "id": "b5edb440-e624-484a-bf2f-540916b37567",
+      "serviceType": {
+        "id": "2",
+        "name": "CCM",
+        "tag": "ccm"
+      },
+      "status": "active"
+    },
+    {
+      "account": {
+        "id": "9188"
+      },
+      "createdAt": "2023-04-28T21:42:34.421Z",
+      "id": "b5edb440-e624-484a-bf2f-540916b37569",
+      "serviceType": {
+        "id": "4",
+        "name": "PCM",
+        "tag": "ccm"
+      },
+      "status": "active"
+    }
+  ],
+  "pagination": {}
+}

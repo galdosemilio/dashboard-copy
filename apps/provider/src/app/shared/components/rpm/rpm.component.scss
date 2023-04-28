@@ -1,40 +1,25 @@
 @import 'variables';
 
-$toggle-base-color: saturate(
-  lighten(adjust-hue(mat-color($ccr-background, success), -25deg), 10%),
-  10%
-);
-
 app-rpm {
-  button.ccr-icon-button {
-    padding: 0 15px 0 10px !important;
-  }
+  background-color: var(--primary-lighten);
+  padding: 3px 10px;
 
-  .rpm-state {
-    &-container {
-      border: 1px solid var(--bg-panel, mat-color($ccr-background, chart));
-      margin: 15px 0;
-      padding: 15px;
-      width: 100%;
+  mat-select {
+    border: 1px solid #000;
 
-      h3 {
-        margin-top: 0;
+    &.no-tracking {
+      .mat-select-trigger {
+        background: transparent !important;
       }
     }
-  }
 
-  div,
-  div > button {
-    width: 100%;
-  }
+    .mat-select-trigger {
+      background: #fff !important;
+      height: auto !important;
 
-  .mat-slide-toggle.mat-checked {
-    .mat-slide-toggle-bar {
-      background-color: lighten($toggle-base-color, 20%) !important;
-    }
-
-    .mat-slide-toggle-thumb {
-      background-color: $toggle-base-color !important;
+      .mat-select-value {
+        line-height: 30px !important;
+      }
     }
   }
 }

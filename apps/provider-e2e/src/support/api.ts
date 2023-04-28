@@ -436,6 +436,18 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/1.0/notification?**', {
     fixture: 'api/alert/notifications'
   })
+  cy.intercept('GET', '/1.0/warehouse/care-management/billing/snapshot**', {
+    fixture: fetchOverride(
+      '/1.0/warehouse/care-management/billing/snapshot**',
+      'api/warehouse/getBillingSnapshot'
+    )
+  })
+  cy.intercept('GET', '/1.0/warehouse/care-management/billing/code**', {
+    fixture: 'api/warehouse/getBillingCodes'
+  })
+  cy.intercept('GET', '/1.0/care-management/service-type**', {
+    fixture: 'api/warehouse/getServiceTypes'
+  })
   cy.intercept('GET', '/3.0/warehouse/rpm/state/billing-summary?**', {
     fixture: fetchOverride(
       '/3.0/warehouse/rpm/state/billing-summary?**',
@@ -794,6 +806,14 @@ const interceptCoreApiCalls = (
   cy.intercept('POST', '1.0/authentication/shopify', {
     fixture: 'api/shopify/shopify-url'
   }).as('shopifyAuthentication')
+
+  cy.intercept('GET', '/1.0/care-management/preference/organization**', {
+    fixture: 'api/care-management/getPreferenceOrganization'
+  })
+
+  cy.intercept('GET', '/1.0/care-management/service-type/account**', {
+    fixture: 'api/care-management/getServiceTypeAccount'
+  })
 }
 
 const seti18n = (): void => {

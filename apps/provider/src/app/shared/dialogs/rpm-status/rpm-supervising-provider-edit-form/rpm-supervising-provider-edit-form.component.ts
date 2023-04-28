@@ -1,4 +1,10 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  Input,
+  OnInit
+} from '@angular/core'
 import {
   ControlValueAccessor,
   FormBuilder,
@@ -36,6 +42,7 @@ export class RPMSupervisingProviderEditFormComponent
   public supervisingProvidersDataSource: SupervisingProvidersDataSource
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
     private formUtils: FormUtils,
     private database: SupervisingProvidersDatabase
@@ -63,6 +70,7 @@ export class RPMSupervisingProviderEditFormComponent
   private createForm(): void {
     this.form = this.fb.group({
       account: ['', Validators.required],
+      name: [''],
       note: ['', Validators.required]
     })
 
@@ -97,6 +105,7 @@ export class RPMSupervisingProviderEditFormComponent
           )
 
         this.verifySupervisingProviderSelection()
+        this.cdr.markForCheck()
       })
   }
 
@@ -124,5 +133,6 @@ export class RPMSupervisingProviderEditFormComponent
 
   public onSupervisingProviderSelected(option: SelectOption<string>): void {
     this.form.get('account').setValue(option?.value ?? '')
+    this.form.get('name').setValue(option?.viewValue ?? '')
   }
 }

@@ -1,28 +1,29 @@
 <div>
   <div *ngIf="entryIsActive">
     <p class="notice entry" *ngIf="entryPending">
-        {{ entryPending === 'same-day' ? ('RPM.RPM_WILL_BE_ENABLED_AT_6_AM' | translate) : ('RPM.RPM_WILL_BE_ENABLED_TOMORROW' | translate) }}
+        {{ entryPending === 'same-day' ? ('CARE_SERVICES.SERVICE_WILL_BE_ENABLED_AT_6_AM' | translate:{service: serviceName}) : ('CARE_SERVICES.SERVICE_WILL_BE_ENABLED_TOMORROW' | translate:{service: serviceName}) }}
     </p>
     <p class="notice entry" *ngIf="!entryPending">
-        {{ 'RPM.RPM_ENABLED' | translate:{
+        {{ 'CARE_SERVICES.SERVICE_ENABLED' | translate:{
             patient: client.firstName + ' ' + client.lastName,
             date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
-            clinic: rpmEntry.organization }
+            clinic: rpmEntry.organization, service: serviceName }
         }}
     </p>
     <div *ngIf="!canDisableRPM">
-        <p>{{ 'RPM.EDIT_NOT_ALLOWED_FOR_CLINIC' | translate:{org: rpmEntry.organization.name} }}</p>
+        <p>{{ 'CARE_SERVICES.SERVICE_NOT_ALLOWED_FOR_CLINIC' | translate:{org: rpmEntry.organization.name, service: serviceName} }}</p>
     </div>
   </div>
 
   <div *ngIf="!entryIsActive">
     <p class="notice entry">
-        {{ 'RPM.RPM_DISABLED' | translate:{
+        {{ 'CARE_SERVICES.SERVICE_DISABLED' | translate:{
             patient: client.firstName + ' ' + client.lastName,
-            date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY' }  }}
+            date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
+            service: serviceName | translate }  }}
     </p>
     <div *ngIf="!accessibleOrganizations || !accessibleOrganizations.length">
-        <p>{{ 'RPM.EDIT_NOT_ALLOWED' | translate }}</p>
+        <p>{{ 'CARE_SERVICES.SERVICE_EDIT_NOT_ALLOWED' | translate }}</p>
         <ul>
             <li *ngFor="let organization of inaccessibleOrganizations">{{ organization.organization.name }}</li>
         </ul>

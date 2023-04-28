@@ -8,8 +8,7 @@ import {
   AccountProvider,
   AccSingleResponse,
   DieterDashboardSummary,
-  OrganizationProvider,
-  RPM
+  OrganizationProvider
 } from '@coachcare/sdk'
 import { get, intersectionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -23,12 +22,11 @@ import * as moment from 'moment'
 })
 export class DieterComponent implements OnDestroy, OnInit {
   public dieter: AccSingleResponse
-  public hasRPMEnabled: boolean
   public patientIsForeign: boolean
   public showDoctorPDFButton: boolean
   public showMessaging: boolean
   public showPatientPDFButton: boolean
-  public showRPM: boolean
+  public showCareManagement: boolean
   public timezoneOffset: number
   public timezoneOffsetText: string
   public callUserZendeskLink =
@@ -41,8 +39,7 @@ export class DieterComponent implements OnDestroy, OnInit {
     private dialog: MatDialog,
     private notifier: NotifierService,
     private organization: OrganizationProvider,
-    private route: ActivatedRoute,
-    private rpm: RPM
+    private route: ActivatedRoute
   ) {}
 
   public ngOnDestroy(): void {}
@@ -70,14 +67,15 @@ export class DieterComponent implements OnDestroy, OnInit {
           'preferences.messaging.isActive',
           false
         )
-        this.showRPM = get(organization, 'preferences.rpm.isActive', false)
+        this.showCareManagement =
+          !!this.context.accessibleCareManagementServiceTypes.length
+
         this.showPatientPDFButton = resolveConfig(
           'JOURNAL.SHOW_PATIENT_PDF_BUTTON',
           organization
         )
 
         void this.resolvePatientForeigness()
-        void this.resolvePatientRPMStatus()
       })
   }
 
@@ -118,7 +116,6 @@ export class DieterComponent implements OnDestroy, OnInit {
 
   private resolvePatient() {
     this.checkPatientTimezone()
-    void this.resolvePatientRPMStatus()
   }
 
   private checkPatientTimezone() {
@@ -141,26 +138,6 @@ export class DieterComponent implements OnDestroy, OnInit {
         this.timezoneOffset > 1
           ? _('BOARD.HOURS_BEHIND')
           : _('BOARD.HOUR_BEHIND')
-    }
-  }
-
-  private async resolvePatientRPMStatus(): Promise<void> {
-    try {
-      const rpmEntries = await this.rpm.getList({
-        account: this.context.accountId,
-        organization: this.context.organizationId,
-        offset: 0,
-        limit: 1
-      })
-
-      if (!rpmEntries.data.length) {
-        this.hasRPMEnabled = false
-        return
-      }
-
-      this.hasRPMEnabled = rpmEntries.data.shift().isActive || false
-    } catch (error) {
-      this.notifier.error(error)
     }
   }
 

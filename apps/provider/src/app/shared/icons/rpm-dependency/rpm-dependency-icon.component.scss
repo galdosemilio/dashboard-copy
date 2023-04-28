@@ -9,12 +9,24 @@ p {
 
 svg {
   g {
-    fill: var(--primary) !important;
-    stroke: var(--primary) !important;
+    text {
+      fill: var(--text);
+      stroke: var(--text);
+    }
+  }
+
+  &.completed {
+    rect {
+      stroke: var(--primary) !important;
+    }
+
+    path {
+      fill: var(--primary) !important;
+    }
 
     text {
-      fill: var(--text) !important;
-      stroke: var(--text) !important;
+      fill: var(--primary) !important;
+      stroke: var(--primary) !important;
     }
   }
 }

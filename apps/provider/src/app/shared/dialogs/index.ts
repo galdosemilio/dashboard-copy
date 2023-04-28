@@ -43,6 +43,7 @@ import { SelectOrganizationDialog } from './select-organization'
 import { TextInputDialog } from './text-input.dialog'
 import { ViewImageDialog } from './view-image'
 import {
+  CareManagementCardComponent,
   RPMEditFormComponent,
   RPMEntryCardComponent,
   RPMSupervisingProviderEditFormComponent
@@ -82,5 +83,6 @@ export const Components = [
   RPMEditFormComponent,
   RPMEnableFormComponent,
   RPMEntryCardComponent,
-  RPMSupervisingProviderEditFormComponent
+  RPMSupervisingProviderEditFormComponent,
+  CareManagementCardComponent
 ]

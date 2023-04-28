@@ -14,19 +14,25 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatDialog } from '@coachcare/material'
 import { ClosePanel, OpenPanel } from '@app/layout/store'
-import { ContextService, NotifierService } from '@app/service'
 import {
-  FetchRPMBillingSummaryRequest,
+  CareManagementService,
+  ContextService,
+  NotifierService
+} from '@app/service'
+import {
   OrganizationEntity,
   PackageOrganization,
   Timezone,
   TimezoneResponse,
   RPM,
-  ExternalIdentifier
+  ExternalIdentifier,
+  FetchCareManagementBillingSnapshotRequest,
+  CareManagementServiceType
+  // CareManagementServiceType
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
-import { chain, times, get, isEmpty, countBy } from 'lodash'
+import { chain, times, isEmpty, countBy } from 'lodash'
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { firstValueFrom, Subject } from 'rxjs'
@@ -37,12 +43,9 @@ import {
   RPMBillingDataSource
 } from '../../services'
 import { criteriaSelector, ReportsState } from '../../store'
+import { RPM_SINGLE_TIME_CODES, RPMStateSummaryEntry } from '../models'
 import {
-  RPM_CODE_COLUMNS,
-  RPM_SINGLE_TIME_CODES,
-  RPMStateSummaryEntry
-} from '../models'
-import {
+  STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
   STORAGE_PAGE_SIZE_RPM_BILLING,
   STORAGE_PRM_BILLING_FILTER,
   STORAGE_RPM_BILLING_COLUMN_INDEX,
@@ -58,6 +61,8 @@ import { CSV } from '@coachcare/common/shared'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { RPMStateEntry } from '@app/shared/components/rpm/models'
 import { RPMMonthlySummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchRPMMonthlyBillingSummaryResponse.interface'
+import { CareManagementStateSummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
+import { CareManagementBillingMonthItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingMonthResponse.interface'
 
 interface StorageFilter {
   selectedClinicId?: string
@@ -100,7 +105,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     'activationDate',
     'codes'
   ]
-  public criteria: Partial<FetchRPMBillingSummaryRequest> = {
+  public criteria: Partial<FetchCareManagementBillingSnapshotRequest> = {
     asOf: moment().format('YYYY-MM-DD')
   }
   public csvSeparator = ','
@@ -108,17 +113,19 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public isDesktop: boolean
   public isLoading: boolean
   public isTopLevelAccount = false
-  public rows: RPMStateSummaryEntry[] = []
+  public rows: CareManagementStateSummaryItem[] = []
   public searchForm: FormGroup
   public selectedClinic?: OrganizationEntity
   public source: RPMBillingDataSource
-  public totalCount: number
+  public totalCount: number = 0
   public packages: SelectOption<number>[] = []
   public selectedStatus: string
   public timezoneName: string
   private storageFilter: StorageFilter
   public supervisingProviders: SelectOption<number>[] = []
   public selectedSupervisingProvider: SelectOption<number>
+  public selectedServiceTypeId: string = this.getServiceTypeFromStorage()
+  public selectedServiceType: CareManagementServiceType
 
   private timezones: Array<TimezoneResponse> = this.timezone.fetch()
   private refresh$: Subject<void> = new Subject<void>()
@@ -138,7 +145,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     private packageOrganization: PackageOrganization,
     private timezone: Timezone,
     private translator: TranslateService,
-    private rpm: RPM
+    private rpm: RPM,
+    private careManagementService: CareManagementService
   ) {
     this.sortHandler = this.sortHandler.bind(this)
   }
@@ -167,8 +175,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
     if (storageFilterString) {
       this.storageFilter = JSON.parse(storageFilterString)
-      this.selectedStatus = this.storageFilter.status
-      this.selectedSupervisingProvider = this.storageFilter.supervisingProvider
+      this.selectedStatus = this.storageFilter?.status
+      this.selectedSupervisingProvider = this.storageFilter?.supervisingProvider
       this.supervisingProviderControl.setValue(
         this.selectedSupervisingProvider?.viewValue
       )
@@ -276,13 +284,20 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     switch (reportType) {
       case 'superbill':
         return this.downloadSuperbillReport()
-
       case 'monitoring':
         return this.downloadMonitoringReport()
-
       case 'billing':
         return this.downloadBillingReport()
     }
+  }
+
+  public onServiceTypeChange(event: string): void {
+    this.selectedServiceTypeId = event
+    this.selectedServiceType =
+      this.context.user.careManagementServiceTypes.find(
+        (entry) => entry.id === event
+      )
+    this.refresh()
   }
 
   // If the selected day if not today OR the last day of a month, present warning that report may be incomplete
@@ -317,7 +332,11 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private getExternalIdentifierNames(
-    data: Array<RPMStateSummaryEntry | RPMMonthlySummaryItem>
+    data: Array<
+      | RPMStateSummaryEntry
+      | RPMMonthlySummaryItem
+      | CareManagementBillingMonthItem
+    >
   ): string[] {
     return chain(data)
       .map((entry) =>
@@ -419,29 +438,41 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     try {
       this.isLoading = true
       const criteria = this.source.args
-      const rawResponse = await this.database.fetchRPMBillingReport({
-        ...criteria,
-        limit: 'all',
-        offset: 0
-      })
+      const rawResponse =
+        await this.database.fetchCareManagementBillingSnapshot({
+          ...criteria,
+          limit: 'all',
+          offset: 0
+        })
 
-      const allBillings = Object.keys(RPM_CODE_COLUMNS).map(
-        (key) =>
-          ({
-            code: key,
-            eligibility: {}
-          } as any)
-      )
+      const allBillings = this.careManagementService.billingCodes
+        .filter((code) => code.serviceType.id === this.selectedServiceTypeId)
+        .map(
+          (key) =>
+            ({
+              code: key.value,
+              eligibility: {}
+            } as any)
+        )
 
       const res: RPMStateSummaryEntry[] = rawResponse.data.map(
         (element) =>
-          new RPMStateSummaryEntry(element, allBillings, this.criteria.asOf)
+          new RPMStateSummaryEntry(
+            element,
+            allBillings,
+            this.careManagementService.trackableCptCodes[
+              this.selectedServiceTypeId
+            ],
+            this.criteria.asOf
+          )
       )
 
       if (!res.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
-      const filename = `RPM_${moment(criteria.asOf).format('MMM_YYYY')}.csv`
+      const filename = `${this.selectedServiceType.name}_${moment(
+        criteria.asOf
+      ).format('MMM_YYYY')}.csv`
       let csv = ''
 
       const externalIdentifierNames = this.getExternalIdentifierNames(res)
@@ -458,11 +489,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       }`
 
       firstRow += ',,,,,,,,,,,'
-      firstRow += `"99453"${this.csvSeparator}"99453"${this.csvSeparator}`
-      firstRow += `"99454"${this.csvSeparator}"99454"${this.csvSeparator}`
-      firstRow += `"99457"${this.csvSeparator}"99457"${this.csvSeparator}`
-      firstRow += `"99458 x1"${this.csvSeparator}"99458 x1"${this.csvSeparator}`
-      firstRow += `"99458 x2"${this.csvSeparator}"99458 x2"`
+      res[0].billing.forEach((billingCode) => {
+        firstRow += `"${billingCode.code}"${this.csvSeparator}"${billingCode.code}"${this.csvSeparator}`
+      })
 
       let secondRow = ''
       if (this.timezoneName) {
@@ -496,35 +525,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.csvSeparator
 
       // We iterate through each billing entry code to set up the headers
-      res[0].billing.forEach((billingEntry, billingEntryIndex) => {
-        const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
-
-        // If the column map for the code is not found, it means we don't support the code.
-        // We avoid working with it for stability purposes. This has never happened, though.
-        if (!columnMap) {
-          return
-        }
-
+      res[0].billing.forEach(() => {
         headers += `"Latest Claim Date"` + this.csvSeparator
         headers += `"Next Claim Requirements"`
-
-        // We iterate through the column map properties to set ADDITIONAL cells per code.
-        // This is code currently doesn't run as we were asked to remove any additional cells.
-        columnMap.forEach((columnInfo, index, columns) => {
-          headers +=
-            `"${columnInfo.column}"` +
-            (index + 1 === columns.length ? '' : this.csvSeparator)
-        })
-
-        // If we're on the last one the codes [99458], we add an additional couple cells.
-        // This is because 99458 was split into two column groups: 99458 x1 and 99458 x2.
-        if (billingEntryIndex === res[0].billing.length - 1) {
-          headers +=
-            `${this.csvSeparator}"Latest Claim Date"` + this.csvSeparator
-          headers += `"Next Claim Requirements"`
-        } else {
-          headers += this.csvSeparator
-        }
+        headers += this.csvSeparator
       })
 
       const headerData = this.addExternalIdentifierHeaders(
@@ -553,13 +557,17 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           this.csvSeparator +
           `"${entry.device.name}"` +
           this.csvSeparator +
-          `"${entry.rpm?.diagnosis?.primary || ''}"` +
-          this.csvSeparator +
-          `"${entry.rpm?.diagnosis?.secondary || ''}"` +
+          `"${
+            (entry.state?.isActive && entry.state?.diagnosis?.primary) || ''
+          }"` +
           this.csvSeparator +
           `"${
-            entry.rpm?.supervisingProvider
-              ? `${entry.rpm?.supervisingProvider.firstName} ${entry.rpm?.supervisingProvider.lastName}`
+            (entry.state?.isActive && entry.state?.diagnosis?.secondary) || ''
+          }"` +
+          this.csvSeparator +
+          `"${
+            entry.state?.isActive && entry.state?.supervisingProvider
+              ? `${entry.state?.supervisingProvider.firstName} ${entry.state?.supervisingProvider.lastName}`
               : ''
           }"` +
           this.csvSeparator +
@@ -567,81 +575,22 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           this.csvSeparator +
           `"${entry.organization.name}"` +
           this.csvSeparator +
-          `"${entry.rpm.isActive ? 'Active' : 'Inactive'}"` +
+          `"${entry.state?.isActive ? 'Active' : 'Inactive'}"` +
           this.csvSeparator +
           `"${
-            entry.rpm.isActive
-              ? moment(entry.rpm.startedAt).format('MM/DD/YYYY')
+            entry.state?.isActive
+              ? moment(entry.state.startedAt).format('MM/DD/YYYY')
               : 'No'
           }"` +
           this.csvSeparator
 
         // We avoid letting the generic logic render the 99458's data since
         // that code is now a special case and is handled manually.
-        entry.billing
-          .filter((billingEntry) => billingEntry.code !== '99458')
-          .forEach((billingEntry) => {
-            dataRows += this.getRPMBillingEntryContent(billingEntry, entry)
+        entry.billing.forEach((billingEntry) => {
+          dataRows += this.getRPMBillingEntryContent(billingEntry, entry)
 
-            dataRows += this.csvSeparator
-          })
-
-        // This is where we start handling 99458 [x1 and x2] manually
-        const lastCodeEntry = entry.billing[3]
-
-        // 99458 x1 [yeah, I know it's equivalent to letting the generic logic handle it but
-        // but I separated it for readability]
-        dataRows += this.getRPMBillingEntryContent(lastCodeEntry, entry)
-
-        dataRows += this.csvSeparator
-
-        // 99458 x2
-        dataRows += `"${
-          lastCodeEntry.eligibility.last?.count > 1
-            ? moment(lastCodeEntry.eligibility.last.timestamp).format(
-                'MM/DD/YYYY'
-              )
-            : 'N/A'
-        }"${this.csvSeparator}`
-
-        dataRows += `"`
-
-        if (!lastCodeEntry.eligibility.next) {
-          dataRows += 'N/A"\r\n'
-          return
-        }
-
-        const previousConditionsMet =
-          lastCodeEntry.eligibility.next?.alreadyEligibleCount >= 1 &&
-          !lastCodeEntry.hasCodeRequirements &&
-          !lastCodeEntry.remainingDays
-
-        dataRows += `${
-          !previousConditionsMet ? '99458 x1 requirements not satisfied' : ''
-        }`
-
-        // Showing/hiding the semicolon here requires evaluation.
-        if (lastCodeEntry.remainingDays) {
-          if (!previousConditionsMet) {
-            dataRows += `; `
-          }
-
-          dataRows += `${lastCodeEntry.remainingDays} more calendar days; `
-        }
-
-        // Since all that 99458 x2 requires aside from days an 99458 x1 is monitoring
-        // time, we check for the remaining time that 99458 code reports.
-        // The remaining time reported by the code 99458 is only related to 99458 x2
-        // when the previous iteration of 99458 [99458 x1] has been completed.
-        dataRows += lastCodeEntry.eligibility.next?.monitoring?.remaining
-          ? `${
-              !lastCodeEntry.remainingDays && !previousConditionsMet ? '; ' : ''
-            }${this.getRemainingMetricString(
-              lastCodeEntry.eligibility.next?.monitoring?.remaining ?? 0,
-              'monitoring'
-            )}`
-          : ''
-        dataRows += '"'
+          dataRows += this.csvSeparator
+        })
 
         dataRows += this.addExternalIdentifierValues(
           externalIdentifierNames,
@@ -672,14 +621,21 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   private async downloadSuperbillReport(): Promise<void> {
     try {
       this.isLoading = true
+
+      const asOfDate = this.criteria.asOf
+        ? moment(this.criteria.asOf).startOf('month').format('YYYY-MM-DD')
+        : moment().startOf('month').format('YYYY-MM-DD')
+
       const data = await this.source.fetchSuperbill({
         ...this.source.args,
+        organization: this.context.organization.id,
+        date: asOfDate,
         limit: 'all',
         offset: 0
       })
       const blob = new Blob([data])
       const link = document.createElement('a')
-      const rawFileName = `${this.context.organization.name}__RPM_Superbill`
+      const rawFileName = `${this.context.organization.name}__${this.selectedServiceType.name}_Superbill`
       link.href = window.URL.createObjectURL(blob)
       link.download = `${rawFileName.replace(/\W/gi, '')}.xlsx`
       link.click()
@@ -704,14 +660,15 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         ? moment(this.criteria.asOf).startOf('month').format('YYYY-MM-DD')
         : moment().startOf('month').format('YYYY-MM-DD')
 
-      const response = await this.database.fetchRpmMonthlyBillingReport({
-        ...this.source.args,
-        organization:
-          this.source.args.organization ?? environment.coachcareOrgId,
-        date: asOfDate,
-        limit: 'all',
-        offset: 0
-      })
+      const response =
+        await this.database.fetchCareManagementMonthlyBillingReport({
+          ...this.source.args,
+          organization:
+            this.source.args.organization ?? environment.coachcareOrgId,
+          date: asOfDate,
+          limit: 'all',
+          offset: 0
+        })
 
       const data = response.data
 
@@ -721,7 +678,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
       const externalIdentifierNames = this.getExternalIdentifierNames(data)
 
-      const filename = `RPM_BILLING_${moment(asOfDate).format('MMM_YYYY')}.csv`
+      const filename = `${this.selectedServiceType.name}_BILLING_${moment(
+        asOfDate
+      ).format('MMM_YYYY')}.csv`
 
       let csv = ''
 
@@ -731,12 +690,17 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.csvSeparator
       }`
       firstRow += ',,,,,,,,,,,'
-      firstRow += `"99453"${this.csvSeparator}`
-      firstRow += `"99454 x1"${this.csvSeparator}`
-      firstRow += `"99454 x2"${this.csvSeparator}`
-      firstRow += `"99457"${this.csvSeparator}`
-      firstRow += `"99458 x1"${this.csvSeparator}`
-      firstRow += `"99458 x2"`
+      const codes = this.careManagementService.billingCodes.filter(
+        (billingCode) => {
+          return billingCode.serviceType.id === this.selectedServiceType.id
+        }
+      )
+      codes.forEach((billingCode) => {
+        firstRow += `"${billingCode.value}"${this.csvSeparator}`
+        if (billingCode.type === 'addon') {
+          firstRow += `"${billingCode.value} (2)"${this.csvSeparator}`
+        }
+      })
 
       let secondRow = ''
       if (this.timezoneName) {
@@ -767,18 +731,15 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         'Status' +
         this.csvSeparator +
         'Activation Date' +
-        this.csvSeparator +
-        'Claim Date' +
-        this.csvSeparator +
-        'Claim Date' +
-        this.csvSeparator +
-        'Claim Date' +
-        this.csvSeparator +
-        'Claim Date' +
-        this.csvSeparator +
-        'Claim Date' +
-        this.csvSeparator +
-        'Claim Date'
+        this.csvSeparator
+
+      codes.forEach((billingCode) => {
+        headers += `"Claim Date"${this.csvSeparator}`
+
+        if (billingCode.type === 'addon') {
+          headers += `"Claim Date"${this.csvSeparator}`
+        }
+      })
 
       const headerData = this.addExternalIdentifierHeaders(
         externalIdentifierNames,
@@ -819,9 +780,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
               : ''
           }"` +
           this.csvSeparator +
-          `"${entry.organization?.rpm?.id || ''}"` +
+          `"${entry.organization?.careManagement?.id || ''}"` +
           this.csvSeparator +
-          `"${entry.organization?.rpm?.name || ''}"` +
+          `"${entry.organization?.careManagement?.name || ''}"` +
           this.csvSeparator +
           `"${entry.state?.current?.isActive ? 'Active' : 'Inactive'}"` +
           this.csvSeparator +
@@ -829,55 +790,29 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
             entry.state?.billable?.isActive
               ? moment(entry.state.billable.startedAt).format('MM/DD/YYYY')
               : 'No'
-          }"` +
-          this.csvSeparator +
-          `"${
-            eligibilityGroup['99453']?.length
-              ? moment(eligibilityGroup['99453'][0].eligibleAt).format(
-                  'MM/DD/YYYY'
-                )
-              : 'N/A'
-          }"` +
-          this.csvSeparator +
-          `"${
-            eligibilityGroup['99454']?.length
-              ? moment(eligibilityGroup['99454'][0].eligibleAt).format(
-                  'MM/DD/YYYY'
-                )
-              : 'N/A'
-          }"` +
-          this.csvSeparator +
-          `"${
-            eligibilityGroup['99454']?.length > 1
-              ? moment(eligibilityGroup['99454'][1].eligibleAt).format(
-                  'MM/DD/YYYY'
-                )
-              : 'N/A'
-          }"` +
-          this.csvSeparator +
-          `"${
-            eligibilityGroup['99457']?.length
-              ? moment(eligibilityGroup['99457'][0].eligibleAt).format(
-                  'MM/DD/YYYY'
-                )
-              : 'N/A'
-          }"` +
-          this.csvSeparator +
-          `"${
-            eligibilityGroup['99458']?.length
-              ? moment(eligibilityGroup['99458'][0].eligibleAt).format(
-                  'MM/DD/YYYY'
-                )
-              : 'N/A'
-          }"` +
-          this.csvSeparator +
-          `"${
-            eligibilityGroup['99458']?.length > 1
-              ? moment(eligibilityGroup['99458'][1].eligibleAt).format(
-                  'MM/DD/YYYY'
-                )
-              : 'N/A'
-          } "`
+          }"`
+
+        codes.forEach((billingCode) => {
+          dataRows += this.csvSeparator
+          if (eligibilityGroup[billingCode.value]?.length) {
+            dataRows += `"${moment(
+              eligibilityGroup[billingCode.value][0].eligibleAt
+            ).format('MM/DD/YYYY')}"`
+          } else {
+            dataRows += `"N/A"`
+          }
+
+          if (billingCode.type === 'addon') {
+            dataRows += this.csvSeparator
+            if (eligibilityGroup[billingCode.value]?.length) {
+              dataRows += `"${moment(
+                eligibilityGroup[billingCode.value][1].eligibleAt
+              ).format('MM/DD/YYYY')}"`
+            } else {
+              dataRows += `"N/A"`
+            }
+          }
+        })
 
         dataRows += this.addExternalIdentifierValues(
           externalIdentifierNames,
@@ -904,6 +839,26 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   public openPatientInNewTab(patientId: string): void {
     window.open(`./accounts/patients/${patientId}`, '_blank')
+  }
+
+  private getServiceTypeFromStorage(): string {
+    try {
+      const serviceType = window.localStorage.getItem(
+        STORAGE_CARE_MANAGEMENT_SERVICE_TYPE
+      )
+      if (!serviceType) {
+        throw new Error('No service type in storage')
+      }
+
+      this.selectedServiceTypeId = serviceType
+      this.selectedServiceType =
+        this.context.user.careManagementServiceTypes.find(
+          (entry) => entry.id === serviceType
+        )
+      return serviceType
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   private async resolvePackages(clinic: OrganizationEntity) {
@@ -1029,6 +984,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     this.source = new RPMBillingDataSource(
       this.database,
       this.notifier,
+      this.careManagementService,
       this.paginator
     )
     this.source.addDefault({ status: 'active' })
@@ -1062,6 +1018,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         query: this.searchForm.value.query || undefined,
         package: this.searchForm.value.package || undefined,
         status: this.searchForm.value.status || 'all',
+        user: this.context.user.id,
+        serviceType: this.selectedServiceTypeId,
         supervisingProvider:
           this.selectedSupervisingProvider?.value || undefined
       }
@@ -1117,12 +1075,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     entry: RPMStateSummaryEntry
   ): string {
     let csv = ''
-    const columnMap = RPM_CODE_COLUMNS[billingEntry.code]
-
-    if (!columnMap) {
-      return
-    }
-
     // Latest Eligibility
     csv +=
       `"${
@@ -1134,7 +1086,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     // Next Eligibility
     if (
       !billingEntry.eligibility.next ||
-      !entry.rpm.isActive ||
+      !entry.state?.isActive ||
       (billingEntry.code === '99458' &&
         (billingEntry.eligibility.next?.alreadyEligibleCount ?? 0) >= 1 &&
         !billingEntry.remainingDays)
@@ -1220,23 +1172,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       })
     }
 
-    // The column map handles ADDITIONAL cells. Since we were asked to remove these,
-    // they're currently deactivated and this portion of the code doesn't do anything.
-    columnMap.forEach((columnInfo, index, columns) => {
-      const shownValue = columnInfo.inParent
-        ? get(entry, columnInfo.route)
-        : get(billingEntry, columnInfo.route)
-
-      csv +=
-        `"${
-          entry.device.id === '-1' && columnInfo.defaultNoPlan
-            ? columnInfo.defaultNoPlan
-            : shownValue !== null && shownValue !== undefined
-            ? shownValue
-            : columnInfo.default
-        }"` + (index + 1 === columns.length ? '' : this.csvSeparator)
-    })
-
     return csv
   }
 
@@ -1255,19 +1190,17 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     return ''
   }
 
-  private sortHandler(): Partial<FetchRPMBillingSummaryRequest> {
+  private sortHandler(): Partial<FetchCareManagementBillingSnapshotRequest> {
     if (!this.sort.direction || !this.sort.active) {
       return
     }
 
     return {
-      sort: [
-        {
-          property: this.sort.active,
-          dir: this.sort.direction
-        }
-      ]
-    } as Partial<FetchRPMBillingSummaryRequest>
+      sort: {
+        property: this.sort.active,
+        dir: this.sort.direction
+      }
+    } as Partial<FetchCareManagementBillingSnapshotRequest>
   }
 
   private recoverPagination(): void {
@@ -1357,10 +1290,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     this.paginator.firstPage()
   }
 
-  public onChangeSupervisingProvider(summary: RPMStateSummaryEntry) {
+  public onChangeSupervisingProvider(summary: any) {
     const rpmEntry = new RPMStateEntry({
       rpmState: {
-        ...summary.rpm,
+        ...summary.state,
         account: summary.account,
         organization: summary.organization
       }

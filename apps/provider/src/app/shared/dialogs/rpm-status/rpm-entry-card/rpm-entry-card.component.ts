@@ -18,4 +18,8 @@ export class RPMEntryCardComponent {
   @Input() entryPending: RPMStateEntryPendingStatus
   @Input() inaccessibleOrganizations: OrganizationAccess[]
   @Input() rpmEntry: RPMStateEntry
+
+  get serviceName(): string {
+    return (this.rpmEntry.rpmState as any).serviceType.name // @TODO: remove the 'any' once the property has been added to the SDK
+  }
 }

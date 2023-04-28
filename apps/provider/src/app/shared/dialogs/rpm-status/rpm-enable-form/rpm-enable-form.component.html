@@ -33,14 +33,29 @@
         class="highlighted">
         </p>
 
+        <div *ngIf="isTopLevelUser">
+          <ccr-date-input
+            [hidden]="!supervisingProviderOptions?.length"
+            [placeholder]="'BOARD.START_DATE' | translate"
+            [required]="false"
+            [hint]="form?.get('setup')?.value?.startDate ? '' : 'RPM.DEFAULT_START_DATE_DESCRIPTION' | translate"
+            formControlName="startDate">
+          </ccr-date-input>
+        </div>
+
         <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
           <mat-label>{{ 'RPM.PRIMARY_DIAGNOSIS' | translate }}</mat-label>
           <textarea formControlName="primaryDiagnosis" matInput></textarea>
         </mat-form-field>
 
         <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
-          <mat-label>{{ 'RPM.SECONDARY_DIAGNOSIS_OPTIONAL' | translate }}</mat-label>
+          <mat-label>{{ isRequiredSecondaryDiagnosis ? ('RPM.SECONDARY_DIAGNOSIS' | translate) : ('RPM.SECONDARY_DIAGNOSIS_OPTIONAL' | translate) }}</mat-label>
           <textarea formControlName="secondaryDiagnosis" matInput></textarea>
+        </mat-form-field>
+
+        <mat-form-field [hidden]="!supervisingProviderOptions?.length" class="example-full-width">
+          <mat-label>{{ 'CARE_SERVICES.INSURANCE_INFORMATION' | translate }}</mat-label>
+          <textarea formControlName="otherDiagnosis" matInput></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -65,7 +80,7 @@
     </div>
   </mat-step>
 
-  <mat-step [stepControl]="form.get('deviceSupplied')">
+  <mat-step *ngIf="type.deviceSetup" [stepControl]="form.get('deviceSupplied')">
     <div
     [formGroup]="form"
     class="device-prompt-container"

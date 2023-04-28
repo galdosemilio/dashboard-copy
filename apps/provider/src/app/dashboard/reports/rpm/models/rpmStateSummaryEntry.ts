@@ -1,15 +1,19 @@
 import {
   AccountData,
-  ActiveRPMItem,
   ExternalIdentifier,
-  InactiveRPMItem,
   OrganizationWithoutShortcode,
-  RPMStateSummaryBillingItem,
-  RPMStateSummaryItem
+  RPMStateSummaryBillingItem
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
 import { RPM_DEVICES, RPMDevice } from './rpmDevices.map'
+import { TrackableBillableCode } from '@app/shared/components/rpm-tracker/model'
+import { cloneDeep, get, set } from 'lodash'
+import {
+  CareManagementSnapshotBillingItem,
+  CareManagementStateSummaryItem,
+  CareManagementStateSummaryItemState
+} from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 
 const MONITORING_PERIOD_SECONDS = 1200
 const MAX_99458_MINUTES = 40
@@ -26,8 +30,8 @@ interface RPMStateSummaryBilling extends RPMStateSummaryBillingItem {
   remainingDays: number
 }
 
-export class RPMStateSummaryEntry implements RPMStateSummaryItem {
-  account: AccountData
+export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
+  account: AccountData & { timezone: string }
   anyCodeLastEligibleAt: string
   billing: RPMStateSummaryBilling[]
   changedAt: string
@@ -35,12 +39,13 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
   organization: OrganizationWithoutShortcode
   device: RPMDevice
   remainingDays: number
-  rpm: ActiveRPMItem | InactiveRPMItem
+  state: CareManagementStateSummaryItemState
   externalIdentifiers: ExternalIdentifier[]
 
   constructor(
     args: any,
-    allBillings: RPMStateSummaryBillingItem[],
+    allBillings: CareManagementSnapshotBillingItem[],
+    trackableCodes: Record<string, TrackableBillableCode> = {},
     asOf?: string
   ) {
     this.account = args.account
@@ -49,20 +54,92 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
       (bill) => ({ code: bill.code, eligibility: {} } as any)
     )
 
+    let additionalIndex = 0
+
     args.billing.forEach((billing) => {
       const allBillingsIndex = allBillings.findIndex(
         (bill) => bill.code === billing.code
       )
+      const billingsIndex = allBillingsIndex + additionalIndex
+      const trackableCode = trackableCodes[billing.code]
 
-      this.billing[allBillingsIndex] = {
-        ...billing,
-        eligibility: {
-          ...billing.eligibility,
-          next: this.calculateNextObject(billing.eligibility.next)
-        },
-        remainingDays:
-          billing.eligibility.next &&
-          billing.eligibility.next.earliestEligibleAt
+      if (trackableCode?.deps?.length) {
+        set(billing, 'eligibility.next.deps', trackableCode.deps)
+      }
+
+      if (trackableCode?.maxEligibleAmount > 1) {
+        for (
+          let index = 0;
+          index < trackableCode.maxEligibleAmount;
+          index += 1
+        ) {
+          const copiedBill = cloneDeep(billing)
+          const metStep = get(
+            copiedBill,
+            'eligibility.next.alreadyEligibleCount',
+            0
+          )
+
+          if (index > 0) {
+            set(copiedBill, 'eligibility.next.deps', [billing.code])
+          }
+
+          if (metStep > index) {
+            const monitoringRequired =
+              copiedBill.eligibility?.next?.monitoring?.total?.seconds?.required
+            const liveInteractionRequired =
+              copiedBill.eligibility?.next?.liveInteraction?.required
+
+            if (monitoringRequired) {
+              set(
+                copiedBill,
+                'eligibility.next.monitoring.total.seconds.tracked',
+                monitoringRequired
+              )
+            }
+
+            if (liveInteractionRequired) {
+              set(
+                copiedBill,
+                'copiedBill.eligibility.next.liveInteraction.required',
+                liveInteractionRequired
+              )
+            }
+
+            set(
+              copiedBill,
+              'eligibility.next.relatedCodeRequirementsNotMet',
+              []
+            )
+          }
+
+          copiedBill.code = `${copiedBill.code} (${index + 1})`
+          this.billing[billingsIndex + index] = {
+            ...copiedBill,
+            eligibility: {
+              ...copiedBill.eligibility,
+              next: this.calculateNextObject(copiedBill.eligibility.next)
+            },
+            remainingDays: copiedBill?.eligibility?.next?.earliestEligibleAt
+              ? Math.abs(
+                  moment(copiedBill.eligibility.next.earliestEligibleAt).diff(
+                    moment(asOf).startOf('day'),
+                    'days'
+                  )
+                )
+              : 0
+          }
+
+          additionalIndex += 1
+        }
+      } else {
+        this.billing[billingsIndex] = {
+          ...billing,
+          eligibility: {
+            ...billing.eligibility,
+            next: this.calculateNextObject(billing.eligibility.next)
+          },
+          remainingDays: billing?.eligibility?.next?.earliestEligibleAt
             ? Math.abs(
                 moment(billing.eligibility.next.earliestEligibleAt).diff(
                   moment(asOf).startOf('day'),
@@ -70,50 +147,48 @@ export class RPMStateSummaryEntry implements RPMStateSummaryItem {
                 )
               )
             : 0
+        }
       }
 
       this.billing.forEach((billingEntry) => {
         billingEntry.hasCodeRequirements =
-          billingEntry.eligibility.next &&
-          billingEntry.eligibility.next.relatedCodeRequirementsNotMet &&
-          billingEntry.eligibility.next.relatedCodeRequirementsNotMet.length > 0
-
-        billingEntry.hasClaims =
-          billingEntry.eligibility.last &&
-          billingEntry.eligibility.last.count > 0
+          (billingEntry.eligibility.next?.relatedCodeRequirementsNotMet
+            ?.length ?? 0) > 0
+        billingEntry.hasClaims = billingEntry?.eligibility?.last?.count > 0
       })
     })
 
     this.changedAt = args.changedAt
     this.id = args.account.id
     this.organization = args.organization
-    this.rpm = {
-      ...args.rpm,
-      deviceProvidedAtFormatted: args.rpm.deviceProvidedAt
-        ? moment(args.rpm.deviceProvidedAt).format('MM/DD/YYYY')
+
+    this.state = {
+      ...args.state,
+      deviceProvidedAtFormatted: args.state.deviceProvidedAt
+        ? moment(args.state.deviceProvidedAt).format('MM/DD/YYYY')
         : 'No',
-      educationProvidedAtFormatted: args.rpm.educationProvidedAt
-        ? moment(args.rpm.educationProvidedAt).format('MM/DD/YYYY')
+      educationProvidedAtFormatted: args.state.educationProvidedAt
+        ? moment(args.state.educationProvidedAt).format('MM/DD/YYYY')
         : 'No'
     }
     this.externalIdentifiers = args.externalIdentifiers
 
     const devices = Object.values(RPM_DEVICES)
 
-    if (!args.rpm.plan) {
+    if (!args.state.plan) {
       this.device = devices.find((device) => device.id === '-1')
       return
     }
 
     const foundPlanDevice = devices.find((device) =>
-      args.rpm.plan ? device.id === args.rpm.plan.id : false
+      args.state.plan ? device.id === args.state.plan.id : false
     )
 
     if (!foundPlanDevice) {
       this.device = {
         id: '-1',
-        name: args.rpm.plan.name,
-        displayName: args.rpm.plan.name
+        name: args.state.plan.name,
+        displayName: args.state.plan.name
       }
       return
     }

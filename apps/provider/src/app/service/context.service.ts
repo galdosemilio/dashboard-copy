@@ -6,6 +6,7 @@ import {
   AccountProvider,
   CareManagementOrganizationPreference,
   CareManagementPreference,
+  CareManagementServiceType,
   CareManagementServiceTypeId,
   CommunicationPreference,
   ContentPreference,
@@ -25,6 +26,7 @@ import {
   AccountTypeIds,
   AccPreferencesResponse,
   AccSingleResponse,
+  CareManagementProvider,
   CommunicationPreferenceSingle,
   ContentPreferenceSingle,
   GetSeqOrgPreferenceResponse,
@@ -42,9 +44,10 @@ import { EventsService } from './events.service'
 import { LanguageService } from './language.service'
 import { MeetingTypeWithColor, ScheduleDataService } from './schedule'
 import { ApiService } from '@coachcare/sdk'
-import { RPMStateEntry } from '@app/shared/components/rpm/models'
+import { environment } from '../../environments/environment'
 
 interface CcrOrgPreferencesResponse extends OrgPreferencesResponse {
+  careManagement: Array<CareManagementOrganizationPreference>
   comms: CommunicationPreferenceSingle
   fileVault: ContentPreferenceSingle
   messaging: MessagingOrgPreference
@@ -54,6 +57,8 @@ interface CcrOrgPreferencesResponse extends OrgPreferencesResponse {
 
 export type CurrentAccount = AccSingleResponse & {
   preferences?: AccPreferencesResponse
+  careManagementServiceTypes?: CareManagementServiceType[]
+  isTopLevel?: boolean
 }
 export type SelectedAccount = AccSingleResponse
 export type SelectedOrganization = OrganizationWithAddress & {
@@ -79,6 +84,7 @@ export class ContextService {
     private accservice: AccountProvider,
     private communicationPrefs: CommunicationPreference,
     private contentPrefs: ContentPreference,
+    private careManagement: CareManagementProvider,
     private carePreference: CareManagementPreference,
     private messagingPrefs: MessagingPreference,
     private orgservice: OrganizationProvider,
@@ -126,6 +132,33 @@ export class ContextService {
         this.isProvider = this.user.accountType.id === AccountTypeIds.Provider
         this.isPatient = this.user.accountType.id === AccountTypeIds.Client
 
+        // load accessible list of care management service types
+        if (this.isProvider) {
+          try {
+            // fetch all service types in the system
+            const allServiceTypesRes =
+              await this.careManagement.getServiceTypes()
+            // fetch all service types exposed to authenticated provider
+            const accountServiceTypeRes =
+              await this.careManagement.getAccountServiceTypes({
+                account: this.user.id,
+                status: 'all'
+              })
+
+            // generate ID listing of service types explicilty inactive for authenticated user, and remove from base listing
+            this.user.careManagementServiceTypes =
+              allServiceTypesRes.data.filter(
+                (e) =>
+                  !accountServiceTypeRes.data
+                    .filter((item) => item.status === 'inactive')
+                    .map((item) => item.serviceType.id)
+                    .includes(e.id)
+              )
+          } catch (e) {
+            console.error('Unable to fetch accessible service types', e)
+          }
+        }
+
         // check if associated to organizations
         try {
           const orgs = await this.orgservice.getAccessibleList({
@@ -138,6 +171,9 @@ export class ContextService {
             permissions: o.permissions,
             isDirect: o.isDirect
           }))
+          this.user.isTopLevel = this.organizations.some(
+            (org) => org.id === environment.coachcareOrgId && org.isDirect
+          )
         } catch (e) {
           console.error('No organizations associated!')
           this.updateColors({
@@ -174,7 +210,7 @@ export class ContextService {
         let defaultOrganization: string
         let org: SelectedOrganization
 
-        if (this.user.preference && this.user.preference.defaultOrganization) {
+        if (this.user.preference?.defaultOrganization) {
           defaultOrganization =
             this.user.preference.defaultOrganization.toString()
           org = await this.getOrg(defaultOrganization)
@@ -244,7 +280,11 @@ export class ContextService {
       const messagingPrefs = await this.resolveMessagingPreference(organization)
       const fileVaultPrefs = await this.resolveFileVaultPreference(organization)
       const rpmPrefs = await this.resolveRPMOrgPreference(organization)
+      const careManagementPrefs = await this.resolveCareManagementPreference(
+        organization
+      )
 
+      organization.preferences.careManagement = careManagementPrefs
       organization.preferences.rpm = rpmPrefs
       organization.preferences.sequences = seqOrgPrefs
       organization.preferences.comms = commsPrefs
@@ -493,7 +533,7 @@ export class ContextService {
   }
   async orgHasContent() {
     const prefs = await this.getPreferences()
-    return prefs ? prefs.content && prefs.content.enabled : false
+    return prefs ? prefs?.content?.enabled : false
   }
   async orgHasPerm(
     id: string,
@@ -509,7 +549,9 @@ export class ContextService {
    * Displayed AccountProvider
    */
   account$ = new BehaviorSubject<AccountAccessData>(null)
-  accountRpmEntry$ = new BehaviorSubject<RPMStateEntry>(null)
+  activeCareManagementService$ = new BehaviorSubject<CareManagementServiceType>(
+    null
+  )
 
   accountOrg$ = merge(this.organization$, this.account$)
   accountOrg: string
@@ -531,12 +573,12 @@ export class ContextService {
     return account ? account.organizations : []
   }
 
-  get accountRpmEntry() {
-    return this.accountRpmEntry$.getValue()
+  get activeCareManagementService() {
+    return this.activeCareManagementService$.getValue()
   }
 
-  set accountRpmEntry(entry: RPMStateEntry) {
-    this.accountRpmEntry$.next(entry)
+  set activeCareManagementService(entry: CareManagementServiceType) {
+    this.activeCareManagementService$.next(entry)
   }
 
   _updateAccountOrg() {
@@ -577,6 +619,24 @@ export class ContextService {
 
   get clinic(): any {
     return this.clinic$.getValue()
+  }
+
+  get accessibleCareManagementServiceTypes(): Array<CareManagementServiceType> {
+    // compile listing of active service types accessible to selected org
+    const selectedOrgServiceTypes = [
+      ...this.organization.preferences.careManagement
+        .filter((e) => e.isActive)
+        .map((e) => e.serviceType)
+    ]
+
+    // Allow service types to be selected that are available to the selected organization AND exposed to authenticated provider
+    return [
+      ...this.user.careManagementServiceTypes.filter((userServiceType) =>
+        selectedOrgServiceTypes.find(
+          (orgServiceType) => orgServiceType.id === userServiceType.id
+        )
+      )
+    ]
   }
 
   private resolveCommsPreference(
@@ -624,6 +684,22 @@ export class ContextService {
         resolve(undefined)
       }
     })
+  }
+
+  private async resolveCareManagementPreference(
+    organization: SelectedOrganization
+  ): Promise<Array<CareManagementOrganizationPreference>> {
+    try {
+      const res = await this.carePreference.getAllCareManagementPreferences({
+        organization: organization.id
+      })
+
+      const careManagementPrefs = res.data
+      return careManagementPrefs
+    } catch (error) {
+      console.error(error)
+      return
+    }
   }
 
   private async resolveRPMOrgPreference(

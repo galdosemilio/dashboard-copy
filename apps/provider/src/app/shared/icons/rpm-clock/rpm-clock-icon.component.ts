@@ -11,4 +11,7 @@ export class RPMClockIconComponent {
 
   @Input()
   text = ''
+
+  @Input()
+  completed = false
 }

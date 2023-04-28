@@ -1,20 +1,19 @@
 import {
   ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   OnInit,
   Output
 } from '@angular/core'
-import {
-  RPM_CODE_COLUMNS,
-  RPMStateSummaryEntry
-} from '@app/dashboard/reports/rpm/models'
+import { RPMStateSummaryEntry } from '@app/dashboard/reports/rpm/models'
 import { ReportsDatabase } from '@app/dashboard/reports/services/reports.database'
-import { ContextService, NotifierService } from '@app/service'
-import { AccountAccessData } from '@coachcare/sdk'
+import {
+  CareManagementService,
+  ContextService,
+  NotifierService
+} from '@app/service'
+import { AccountAccessData, RPMStateSummaryBillingItem } from '@coachcare/sdk'
 import * as moment from 'moment'
 
 @Component({
@@ -23,18 +22,10 @@ import * as moment from 'moment'
   styleUrls: ['./rpm-status-panel.component.scss']
 })
 export class RPMStatusPanelComponent implements OnInit {
-  @HostListener('document:click', ['$event'])
-  checkClick($event: any): void {
-    if (
-      this.status === 'ready' &&
-      !this.elementRef.nativeElement.contains($event.target)
-    ) {
-      this.forceClose.next()
-    }
-  }
-
+  @Input() serviceType: string
+  @Input() trackingStartsTomorrow: boolean
   @Input() account: AccountAccessData
-  @Output() forceClose: EventEmitter<void> = new EventEmitter<void>()
+  @Output() openSettings: EventEmitter<void> = new EventEmitter<void>()
 
   public rpmStateSummary: RPMStateSummaryEntry
   public status: 'loading' | 'ready' = 'loading'
@@ -43,8 +34,8 @@ export class RPMStatusPanelComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private database: ReportsDatabase,
-    private elementRef: ElementRef,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private careManagementService: CareManagementService
   ) {}
 
   public ngOnInit(): void {
@@ -55,39 +46,70 @@ export class RPMStatusPanelComponent implements OnInit {
     void this.fetchRPMBillingStatus()
   }
 
+  public getStatus(): 'active' | 'begins-tomorrow' | 'inactive' {
+    if (this.rpmStateSummary && !this.trackingStartsTomorrow) {
+      return 'active'
+    } else if (!this.rpmStateSummary && this.trackingStartsTomorrow) {
+      return 'begins-tomorrow'
+    } else {
+      return 'inactive'
+    }
+  }
+
   private async fetchRPMBillingStatus(): Promise<void> {
+    if (this.trackingStartsTomorrow || !this.serviceType) {
+      this.status = 'ready'
+      return
+    }
+
     try {
       this.status = 'loading'
-      const response = await this.database.fetchRPMBillingReport({
+
+      const response = await this.database.fetchCareManagementBillingSnapshot({
         account: this.account.id,
         organization: this.context.organizationId,
+        serviceType: this.serviceType,
         limit: 1,
-        offset: 0
+        offset: 0,
+        status: 'all'
       })
 
-      if (!response.data.length) {
-        return
-      }
-
-      const allBillings = Object.keys(RPM_CODE_COLUMNS).map(
-        (key) =>
-          ({
-            code: key,
+      if (response.data.length) {
+        const allBillings = this.careManagementService.billingCodes
+          .filter(
+            (billingCode) => billingCode.serviceType.id === this.serviceType
+          )
+          .map((billingCode) => ({
+            code: billingCode.value,
             eligibility: {}
-          } as any)
-      )
-
-      this.rpmStateSummary = new RPMStateSummaryEntry(
-        response.data[0],
-        allBillings,
-        moment().toISOString()
-      )
-
-      this.status = 'ready'
-
-      this.cdr.detectChanges()
+          }))
+        this.rpmStateSummary = new RPMStateSummaryEntry(
+          response.data[0],
+          allBillings,
+          this.careManagementService.trackableCptCodes[this.serviceType],
+          moment().toISOString()
+        )
+      }
     } catch (error) {
       this.notifier.error(error)
+    } finally {
+      this.status = 'ready'
+      this.cdr.detectChanges()
     }
+  }
+
+  public onOpenSettings() {
+    this.openSettings.emit()
+  }
+
+  public isMetDepsRequirement(
+    entry: RPMStateSummaryBillingItem['eligibility'],
+    code: string
+  ) {
+    if (!entry.next?.relatedCodeRequirementsNotMet) {
+      return
+    }
+
+    return !entry.next.relatedCodeRequirementsNotMet.includes(code)
   }
 }

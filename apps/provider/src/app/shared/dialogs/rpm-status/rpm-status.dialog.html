@@ -1,11 +1,11 @@
 <div matDialogTitle>
     <div>
-        <span>
-        <span>{{ 'RPM.RPM_CREATE_TITLE' | translate }}</span>
-        <mat-icon class="rpm-help-icon" (click)="showAboutPage()">help_outline</mat-icon>
+        <span fxLayout="row" fxLayoutAlign="start center">
+            <span>{{ 'CARE_SERVICES.CARE_MANAGEMENT' | translate }}<ng-container *ngIf="status === 'new_entry'"> - {{ 'CARE_SERVICES.ACTIVATE_SERVICE' | translate:{service: newEntryType.serviceType.name | translate} }}</ng-container></span>
+            <mat-icon class="rpm-help-icon" (click)="showAboutPage()">help_outline</mat-icon>
         </span>
     </div>
-    <button class="matdialogclose" [matDialogClose]="updatedEntry"><mat-icon>cancel</mat-icon></button>
+    <button class="matdialogclose" matDialogClose><mat-icon>cancel</mat-icon></button>
 </div>
 
 
@@ -13,16 +13,69 @@
 
 <mat-dialog-content>
     <div [ngSwitch]="status">
-    <div *ngSwitchCase="'has_entry'" [formGroup]="form">
+    <div *ngSwitchCase="'initial'" [formGroup]="form">
+        <h3 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+            <mat-icon color="primary">check_circle</mat-icon>
+            <span>{{ 'CARE_SERVICES.ACTIVE_SESSIONS' | translate }}</span>
+        </h3>
+        <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="25px">
+            <app-dialog-care-mgmt-card
+                *ngFor="let type of careServiceTypes"
+                [canEnableCareEntry]="canEnableCareService"
+                [careServiceType]="type"
+                [careEntry]="getCareEntry(type.serviceType.id)"
+                [hasConflict]="hasConflict(type.serviceType.id)"
+                (addCareEntry)="onAddCareEntry($event)"
+                (inspectCareEntry)="onInspectCareEntry($event)">
+            </app-dialog-care-mgmt-card>
+        </div>
+        <h3 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+            <mat-icon color="text">schedule</mat-icon>
+            <span>{{ 'CARE_SERVICES.PAST_SESSIONS' | translate }}</span>
+        </h3>
+        <div class="ccr-expandable-table v2">
+            <table>
+                <caption hidden>{{ 'CARE_SERVICES.PAST_SESSIONS' | translate }}</caption>
+                <thead>
+                    <th>{{ 'MEASUREMENT.PROGRAM' | translate }}</th>
+                    <th>{{ 'BOARD.START_DATE' | translate }}</th>
+                    <th>{{ 'BOARD.END_DATE' | translate }}</th>
+                    <th>{{ 'CARE_SERVICES.DISABLED_BY' | translate }}</th>
+                    <th class="ccr-text-center">{{ 'BOARD.DETAILS' | translate }}</th>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let entry of inactiveCareEntries">
+                        <td>{{ entry.rpmState.serviceType.name }}</td>
+                        <td>{{ entry.rpmState.startedAt | amDateFormat:'MM/DD/YYYY' }}</td>
+                        <td>{{ entry.rpmState.createdAt | amDateFormat:'MM/DD/YYYY' }}</td>
+                        <td>{{ entry.rpmState.createdBy.firstName }} {{ entry.rpmState.createdBy.lastName }}</td>
+                        <td class="ccr-text-center">
+                            <button
+                            [disableRipple]="true"
+                            (click)="onInspectCareEntry(entry)"
+                            class="inspect-button"
+                            mat-icon-button
+                            color="text">
+                            <mat-icon fontSet="material-icons-outlined">navigate_next</mat-icon>
+                          </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'view_session'" [formGroup]="form">
         <app-dialog-rpm-entry-card
-            *ngIf="client"
-            [accessibleOrganizations]="accessibleOrganizations"
-            [canDisableRPM]="canDisableRPM"
-            [client]="client"
-            [entryIsActive]="entryIsActive"
-            [entryPending]="entryPending"
-            [inaccessibleOrganizations]="inaccessibleOrganizations"
-            [rpmEntry]="rpmEntry">
+        *ngIf="client"
+        [accessibleOrganizations]="accessibleOrganizations"
+        [canDisableRPM]="canDisableRPM"
+        [client]="client"
+        [entryIsActive]="entryIsActive"
+        [entryPending]="entryPending"
+        [inaccessibleOrganizations]="inaccessibleOrganizations"
+        [rpmEntry]="rpmEntry">
         </app-dialog-rpm-entry-card>
 
         <br>
@@ -58,12 +111,13 @@
             formControlName="enableForm"
             [accessibleOrganizations]="accessibleOrganizations"
             [nextStep$]="nextStep$"
+            [type]="newEntryType"
             (enableFormStep)="onEnableFormStepChange($event)">
         </app-dialog-rpm-enable-form>
     </div>
 
     <div *ngSwitchCase="'remove_entry'" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="30px">
-        <p class="notice remove-entry" [innerHTML]="'RPM.DEACTIVATE_PROMPT_CONTENT' | translate"></p>
+        <p class="notice remove-entry" [innerHTML]="'CARE_SERVICES.DEACTIVATE_SERVICE_PROMPT_CONTENT' | translate:{service:rpmEntry.rpmState.serviceType.name}"></p>
 
         <div [formGroup]="deactivateRpmForm" fxLayout="row" fxLayoutAlign="center center">
             <div fxFlex="60%" fxLayout="column" fxLayoutGap="10px">
@@ -98,7 +152,7 @@
             mat-button>{{ 'GLOBAL.YES' | translate }}</button>
 
             <button
-            (click)="status = 'has_entry'"
+            (click)="goBack()"
             class="ccr-button"
             mat-button>{{ 'GLOBAL.NO' | translate }}</button>
         </div>
@@ -139,7 +193,7 @@
 
         <div *ngSwitchCase="'new_entry'" fxLayoutAlign="center center">
             <button
-            *ngIf="currentStepperStep < 2"
+            *ngIf="currentStepperStep < stepperStepLength"
             [disabled]="form.get('enableForm').invalid"
             (click)="nextStep$.next()"
             class="ccr-button"
@@ -147,24 +201,21 @@
             mat-button>{{ 'GLOBAL.NEXT' | translate }}</button>
 
             <button
-            *ngIf="currentStepperStep === 2"
+            *ngIf="currentStepperStep === stepperStepLength"
             (click)="enableRPM()"
             [disabled]="form.get('enableForm').invalid"
             class="ccr-button"
             color="primary"
-            mat-button>{{ 'RPM.ENABLE_RPM' | translate }}</button>
+            mat-button>{{ 'CARE_SERVICES.ENABLE_SERVICE' | translate:{service: newEntryType.serviceType.name | translate} }}</button>
 
-            <button
-            class="ccr-button"
-            mat-button
-            matDialogClose>
-                {{ 'GLOBAL.CLOSE' | translate }}
+            <button (click)="goBack()" class="ccr-button" mat-button>
+                {{ 'GLOBAL.BACK' | translate }}
             </button>
         </div>
 
         <div *ngSwitchCase="'about'">
             <button
-            (click)="status = statusCache"
+            (click)="goBack()"
             class="ccr-button"
             mat-button>
                 {{ 'GLOBAL.BACK' | translate }}
@@ -172,18 +223,18 @@
         </div>
 
         <div *ngSwitchCase="'new_entry'" fxLayoutAlign="start center">
-            <span class="mt-20 mb-10" *ngIf="currentStepperStep === 2">{{ 'RPM.RPM_WILL_BE_ENABLED_TOMORROW' | translate }}</span>
+            <span class="mt-20 mb-10" *ngIf="currentStepperStep === stepperStepLength">
+                {{ 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_TOMORROW' | translate:{service: newEntryType.serviceType.name | translate} }}
+            </span>
         </div>
 
-        <div *ngSwitchDefault>
-            <button
-            *ngIf="!entryIsActive"
-            (click)="statusCache = status; status === 'new_entry' ? enableRPM() : status = 'new_entry'"
-            [disabled]="(!accessibleOrganizations || !accessibleOrganizations.length) || (status === 'new_entry' && form.invalid)"
-            class="ccr-button"
-            color="primary"
-            mat-button>{{ 'RPM.ENABLE_RPM' | translate }}</button>
+        <div *ngSwitchCase="'initial'">
+            <button class="ccr-button" mat-button matDialogClose>
+                {{ 'GLOBAL.CLOSE' | translate }}
+            </button>
+        </div>
 
+        <div *ngSwitchCase="'view_session'">
             <button
             data-cy="change-supervising-provider-button"
             *ngIf="entryIsActive"
@@ -206,9 +257,15 @@
             (click)="status = 'remove_entry'"
             class="ccr-button"
             color="primary"
-            mat-button>{{ 'RPM.DISABLE_RPM' | translate }}</button>
+            mat-button>{{ 'CARE_SERVICES.DISABLE_SERVICE' | translate:{service: rpmEntry.rpmState.serviceType.name} }}</button>
 
-            <button class="ccr-button" mat-button [matDialogClose]="updatedEntry">
+            <button (click)="goBack()" class="ccr-button" mat-button>
+                {{ 'GLOBAL.BACK' | translate }}
+            </button>
+        </div>
+
+        <div *ngSwitchDefault>
+            <button class="ccr-button" mat-button matDialogClose>
                 {{ 'GLOBAL.CLOSE' | translate }}
             </button>
         </div>

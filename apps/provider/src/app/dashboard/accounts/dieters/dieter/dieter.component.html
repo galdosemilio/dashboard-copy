@@ -9,14 +9,6 @@
     <a *ngIf="showPatientPDFButton" color="primary" class="ccr-button" mat-button (click)="onShowProgressPDFModal()">
       {{ 'BOARD.PROGRESS_REPORT' | translate }}
     </a>
-    <div
-      *ngIf="hasRPMEnabled"
-      fxFlex
-      fxHide.xs
-      fxLayout="row"
-      fxLayoutAlign="end stretch">
-      <app-rpm-tracker></app-rpm-tracker>
-    </div>
     <a
     *ngIf="showDoctorPDFButton"
     color="primary"
@@ -64,10 +56,10 @@
           {{ 'BOARD.DOWNLOAD_REPORT' | translate }}
       </button>
       </div>
-      <div *ngIf="showRPM" fxFlex="nogrow" fxFlex.xs="grow"
+      <div *ngIf="showCareManagement" fxFlex="nogrow" fxFlex.xs="grow"
       fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
       fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
-        <app-rpm (rpmStatusChange)="resolvePatientRPMStatus()"></app-rpm>
+        <app-rpm></app-rpm>
       </div>
     </div>
   </div>

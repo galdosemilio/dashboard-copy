@@ -6,31 +6,40 @@ mat-spinner {
 
 p {
   font-weight: bold;
-  margin: 10px 0 5px 0 !important;
+  margin: 0 !important;
+  white-space: nowrap;
+}
 
-  &.code {
-    &-title {
-      text-align: center;
-    }
-  }
+.no-program {
+  text-align: center;
+}
+
+.code {
+  align-items: center;
+  color: #504c4a;
+  display: flex;
+  justify-content: left;
 }
 
 .already-eligible-notice {
-  color: lighten(mat-color($ccr-background, success), 20%);
-  padding: 5px 0;
-
   & > mat-icon {
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 45px;
+    line-height: 45px;
+    width: 45px;
+    height: 45px;
+    color: var(--primary) !important;
   }
 }
 
 .code-container {
-  border-bottom: 1px solid mat-color($ccr-contrast, 900);
-  padding-bottom: 10px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding: 10px 0;
 
-  &:last-of-type {
-    border-bottom: none !important;
+  border-bottom: 1px solid mat-color($ccr-contrast, 900);
+  > :first-child {
+    width: 70px;
   }
 }
 
@@ -48,5 +57,5 @@ p {
   color: var(--text);
   font-size: 14px;
   padding: 10px;
-  width: 225px;
+  width: 370px;
 }

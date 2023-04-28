@@ -9,12 +9,15 @@ p {
 
 svg {
   g {
-    fill: var(--primary) !important;
-    stroke: var(--primary) !important;
-
     text {
       fill: var(--text) !important;
       stroke: var(--text) !important;
+    }
+  }
+
+  &.completed {
+    path {
+      fill: var(--primary) !important;
     }
   }
 }

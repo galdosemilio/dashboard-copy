@@ -1,0 +1,148 @@
+{
+  "data": [
+    {
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm",
+        "status": "active"
+      },
+      "value": "99453",
+      "coverage": "device-setup-education",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm",
+        "status": "active"
+      },
+      "value": "99454",
+      "coverage": "device-readings",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm",
+        "status": "active"
+      },
+      "value": "99457",
+      "coverage": "monitoring",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm",
+        "status": "active"
+      },
+      "value": "99458",
+      "coverage": "monitoring",
+      "type": "addon"
+    },
+    {
+      "serviceType": {
+        "id": "2",
+        "name": "CCM",
+        "tag": "ccm",
+        "status": "active"
+      },
+      "value": "99490",
+      "coverage": "monitoring",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "2",
+        "name": "CCM",
+        "tag": "ccm",
+        "status": "active"
+      },
+      "value": "99439",
+      "coverage": "monitoring",
+      "type": "addon"
+    },
+    {
+      "serviceType": {
+        "id": "3",
+        "name": "RTM",
+        "tag": "rtm",
+        "status": "active"
+      },
+      "value": "98975",
+      "coverage": "device-setup-education",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "3",
+        "name": "RTM",
+        "tag": "rtm",
+        "status": "active"
+      },
+      "value": "98977",
+      "coverage": "device-readings",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "3",
+        "name": "RTM",
+        "tag": "rtm",
+        "status": "active"
+      },
+      "value": "98980",
+      "coverage": "monitoring",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "3",
+        "name": "RTM",
+        "tag": "rtm",
+        "status": "active"
+      },
+      "value": "98981",
+      "coverage": "monitoring",
+      "type": "addon"
+    },
+    {
+      "serviceType": {
+        "id": "4",
+        "name": "PCM",
+        "tag": "pcm",
+        "status": "active"
+      },
+      "value": "99426",
+      "coverage": "monitoring",
+      "type": "standalone"
+    },
+    {
+      "serviceType": {
+        "id": "4",
+        "name": "PCM",
+        "tag": "pcm",
+        "status": "active"
+      },
+      "value": "99427",
+      "coverage": "monitoring",
+      "type": "addon"
+    },
+    {
+      "serviceType": {
+        "id": "5",
+        "name": "BHI",
+        "tag": "bhi",
+        "status": "active"
+      },
+      "value": "99484",
+      "coverage": "monitoring",
+      "type": "standalone"
+    }
+  ],
+  "pagination": {}
+}

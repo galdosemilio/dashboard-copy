@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "RPM",
+      "tag": "rpm"
+    },
+    {
+      "id": "2",
+      "name": "CCM",
+      "tag": "ccm"
+    },
+    {
+      "id": "3",
+      "name": "RTM",
+      "tag": "rtm"
+    },
+    {
+      "id": "4",
+      "name": "PCM",
+      "tag": "pcm"
+    },
+    {
+      "id": "5",
+      "name": "BHI",
+      "tag": "bhi"
+    }
+  ],
+  "pagination": {}
+}

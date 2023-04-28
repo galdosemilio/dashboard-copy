@@ -83,7 +83,6 @@ export class AccountCareManagementComponent implements OnInit {
 
   public onChange(serviceType: AccountServiceType) {
     const value = !serviceType.isActive
-    console.log(serviceType.association)
     if (serviceType.association) {
       void this.updateAssociation(serviceType, value)
     } else {

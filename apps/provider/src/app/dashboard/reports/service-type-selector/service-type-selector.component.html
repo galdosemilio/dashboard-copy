@@ -1,0 +1,9 @@
+<div fxLayout="column" *ngIf="serviceTypes.length" fxLayoutAlign="start stretch" class="select-wrapper">
+  <mat-form-field floatLabel="always">
+    <mat-select (selectionChange)="onServiceTypeChange($event)" [(value)]="selectedServiceType">
+      <mat-option *ngFor="let service of serviceTypes" [value]="service.id">
+        {{ service.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

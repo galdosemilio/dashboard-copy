@@ -1,9 +1,11 @@
-<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-    <mat-slide-toggle
-    [checked]="mostRecentEntry?.isActive"
-    [disabled]="isLoading"
-    [labelPosition]="'before'"
-    (click)="openStatusDialog()">
-        {{ 'RPM.RPM_STATUS' | translate }}
-    </mat-slide-toggle>
+<div class="care-management-state" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" [formGroup]="form">
+    <mat-form-field fxFlex floatLabel="never" class="ccr-filter">
+        <mat-select [disableOptionCentering]="true" formControlName="serviceType" [ngClass]="{'no-tracking': !serviceType}">
+            <mat-option *ngFor="let serviceType of serviceTypes" [value]="serviceType.value">
+            {{ serviceType.viewValue === 'RPM' ? 'RPM' : serviceType.viewValue | translate | uppercase }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-spinner *ngIf="isLoading" diameter="24" strokeWidth="3"></mat-spinner>
+    <app-rpm-tracker [serviceType]="serviceType" (openSettings)="openStatusDialog()"></app-rpm-tracker>
 </div>
