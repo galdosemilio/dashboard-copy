@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} enabled by",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "You do not have access to edit the {{service}} status for this patient since you do not have administrative privileges for their clinic ({{ org }})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "The {{service}} episode of care will be enabled at 6am",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "The {{service}} episode of care will be enabled immediately",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "The {{service}} episode of care will be enabled tomorrow",
     "SUPERVISOR": "Supervisor"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "The recording was not properly processed for downloading. Click to attempt to create a downloadable version.",
     "CALL_RECORDING_PROCESS_ERROR": "An error appears to have occurred when attempting to process or download this recording. Would you like to submit a support ticket for assistance to retrieve this recording?",
     "CLEAR_FILTER": "Clear Filter",
+    "CLINIC_PATIENT_CODE": "Clinic patient code",
     "COACH_STATISTICS": "Coach Statistics",
     "COACH_STATISTICS_DESCRIPTION": "This report shows the number of active coaches associated with the clinic during each date in the selected time period.  Each bar shown on the chart may contain the same coaches.  For example, if you had the three coaches in your clinic during January and the same three coaches in your clinic during Feburary, you will see three for each month.",
     "COHORT_WEIGHT_LOSS": "Cohort Weight Loss",

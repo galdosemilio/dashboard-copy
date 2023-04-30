@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} activé par",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Vous n'avez pas accès à la modification du statut {{service}} pour ce patient car vous n'avez pas de privilèges administratifs pour leur clinique ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "L'épisode {{service}} sera activé à 6h du matin",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "L'épisode de soins {{service}} sera activé immédiatement",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "L'épisode {{service}} de Care sera activé demain",
     "SUPERVISOR": "Superviseur"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "L'enregistrement n'a pas été correctement traité pour le téléchargement. Cliquez pour tenter de créer une version téléchargeable.",
     "CALL_RECORDING_PROCESS_ERROR": "Une erreur semble avoir eu lieu lors de la tentative de traitement ou de téléchargement de cet enregistrement. Souhaitez-vous soumettre un ticket de support pour obtenir de l'aide pour récupérer cet enregistrement?",
     "CLEAR_FILTER": "Effacer les filtres",
+    "CLINIC_PATIENT_CODE": "Code patient de la clinique",
     "COACH_STATISTICS": "Statistiques des coach",
     "COACH_STATISTICS_DESCRIPTION": "Ce rapport indique le nombre d'entraîneurs actifs associés à la clinique au cours de chaque jour dans la période sélectionnée. Chaque barre figurant sur le tableau peut contenir les mêmes entraîneurs. Par exemple, si vous aviez les trois entraîneurs dans votre clinique au cours de Janvier et les mêmes trois entraîneurs dans votre clinique pendant Février, vous verrez trois pour chaque mois.",
     "COHORT_WEIGHT_LOSS": "Perte de poids cohorte",

@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} aktiveret af",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Du har ikke adgang til at redigere {{service}} status for denne patient, da du ikke har administrative privilegier for deres klinik ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "Episoden af ​​Care {{service}}.",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "{{service}}-episoden af pleje vil blive aktiveret med det samme",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "Episoden af ​​Care {{service}}.",
     "SUPERVISOR": "Tilsynsførende"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "Optagelsen blev ikke behandlet korrekt til download. Klik for at forsøge at oprette en downloadbar version.",
     "CALL_RECORDING_PROCESS_ERROR": "Der vises en fejl ved at have fundet sted, når du forsøger at behandle eller downloade denne optagelse. Vil du gerne sende en supportbillet til hjælp for at hente denne optagelse?",
     "CLEAR_FILTER": "Ryd Filter",
+    "CLINIC_PATIENT_CODE": "Klinik patientkode",
     "COACH_STATISTICS": "Træner Statistik",
     "COACH_STATISTICS_DESCRIPTION": "Denne rapport viser antallet af aktive træner, som er forbundet til klinikken under hver dato i den valgte tidsperiode.  Hver søjle vist på diagrammet kan muligvis indeholde de samme træner. F.eks. hvis du havde de tre trænere i din klinik i januar og de samme tre trænere i din klinik i februar måned, vil du se tre for hver måned.",
     "COHORT_WEIGHT_LOSS": "Kohorte Vægttab",

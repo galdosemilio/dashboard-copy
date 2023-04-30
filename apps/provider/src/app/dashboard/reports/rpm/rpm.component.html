@@ -10,7 +10,10 @@
         {{ 'REPORTS.RPM_BILLING_TITLE' | translate }}
         </a>
         <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['patient-bulk-reports']">
-        {{ 'REPORTS.PATIENT_BULK_REPORTS' | translate }}
+            {{ 'REPORTS.PATIENT_BULK_REPORTS' | translate }}
+        </a>
+        <a fxFlex fxLayoutAlign="center center" routerLinkActive="active" [routerLink]="['clinic-patient-code']" *ngIf="showClinicPatientCodeReportLink">
+            {{ 'REPORTS.CLINIC_PATIENT_CODE' | translate }}
         </a>
     </div>
     <div class="ccr-subcomponent">

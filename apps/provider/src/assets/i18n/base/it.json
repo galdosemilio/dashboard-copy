@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} abilitato da",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Non hai accesso per modificare lo stato {{service}} per questo paziente poiché non si dispone di privilegi amministrativi per la loro clinica ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "L'episodio di {{service}} sarà abilitato alle 6am",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "L'episodio di assistenza {{service}} verrà attivato immediatamente",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "L'episodio di {{service}} sarà abilitato domani",
     "SUPERVISOR": "Supervisore"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "La registrazione non è stata elaborata correttamente per il download. Clicca per tentare di creare una versione scaricabile.",
     "CALL_RECORDING_PROCESS_ERROR": "Si è verificato un errore durante il tentativo di elaborare o scaricare questa registrazione. Ti piacerebbe presentare un biglietto di supporto per l'assistenza per recuperare questa registrazione?",
     "CLEAR_FILTER": "Rimuovi Filtro",
+    "CLINIC_PATIENT_CODE": "Codice paziente clinica",
     "COACH_STATISTICS": "Statistiche Coach",
     "COACH_STATISTICS_DESCRIPTION": "Questo resoconto mostra il numero di coach attivi associati alla clinica in ogni data del periodo di tempo selezionato. Ogni barra mostrata nel grafico può contenere gli stessi coach. Ad esempio",
     "COHORT_WEIGHT_LOSS": "Perdita di peso coorte",

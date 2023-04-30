@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} ativado por",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Não tem acesso para editar o estado do {{service}} para este paciente pois não tem privilégios administrativos para sua clínica ({{ org }})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "O episódio de {{service}} do cuidado será ativado às 6h",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "O episódio de atendimento {{service}} será ativado imediatamente",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "O episódio de {{service}} do cuidado será ativado amanhã",
     "SUPERVISOR": "Supervisor"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "A gravação não foi processada corretamente para download. Clique para tentar criar uma versão para download.",
     "CALL_RECORDING_PROCESS_ERROR": "Um erro parece ter ocorrido ao tentar processar ou baixar esta gravação. Você gostaria de enviar um ticket de suporte para obter assistência para recuperar essa gravação?",
     "CLEAR_FILTER": "Limpar Filtro",
+    "CLINIC_PATIENT_CODE": "Código do paciente da clínica",
     "COACH_STATISTICS": "Estatísticas do treinador",
     "COACH_STATISTICS_DESCRIPTION": "Este relatório mostra o número de treinadores ativos associados à clínica durante cada data do período de tempo selecionado.  Cada barra mostrada no gráfico pode conter os mesmos treinadores.  Por exemplo",
     "COHORT_WEIGHT_LOSS": "Perda de Peso coorte",

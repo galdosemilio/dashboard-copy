@@ -23,6 +23,7 @@ import { RPMReportComponent } from './rpm'
 import { RPMBillingComponent } from './rpm/rpm-billing'
 import { PatientBulkReportsComponent } from './rpm/patient-bulk-reports'
 import { SharpReportComponent } from './statistics/sharp-report'
+import { ClinicPatientCodeComponent } from './rpm/clinic-patient-code'
 
 const routes: Routes = [
   {
@@ -81,6 +82,7 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'billing' },
       { path: 'billing', component: RPMBillingComponent },
+      { path: 'clinic-patient-code', component: ClinicPatientCodeComponent },
       { path: 'patient-bulk-reports', component: PatientBulkReportsComponent }
     ]
   },

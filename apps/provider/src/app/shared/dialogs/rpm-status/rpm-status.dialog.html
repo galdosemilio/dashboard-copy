@@ -223,8 +223,11 @@
         </div>
 
         <div *ngSwitchCase="'new_entry'" fxLayoutAlign="start center">
-            <span class="mt-20 mb-10" *ngIf="currentStepperStep === stepperStepLength">
-                {{ (shouldStartImmediately ? 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_IMMEDIATELY' : 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_TOMORROW') | translate:{service: newEntryType.serviceType.name | translate} }}
+            <span class="mt-20 mb-10" *ngIf="currentStepperStep === stepperStepLength && shouldStartImmediately">
+                {{ 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_IMMEDIATELY' | translate:{service: newEntryType.serviceType.name | translate} }}
+            </span>
+            <span class="mt-20 mb-10" *ngIf="currentStepperStep === stepperStepLength && !shouldStartImmediately">
+                {{ 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_TOMORROW' | translate:{service: newEntryType.serviceType.name | translate} }}
             </span>
         </div>
 

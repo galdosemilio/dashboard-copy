@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} aktiviert durch",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Sie haben keinen Zugriff, um den Status {{service}} für diesen Patienten zu bearbeiten, da Sie keine administrativen Berechtigungen für ihre Klinik haben ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "Die {{service}} -Pode von Care wird um 6 Uhr morgens aktiviert",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "Die Pflegeepisode {{service}} wird sofort aktiviert",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "Die {{service}} -Spolsters von Care wird morgen aktiviert",
     "SUPERVISOR": "Aufsicht"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "Die Aufnahme wurde nicht ordnungsgemäß zum Herunterladen verarbeitet. Klicken Sie hier, um eine herunterladbare Version zu erstellen.",
     "CALL_RECORDING_PROCESS_ERROR": "Bei dem Versuch, diese Aufnahme zu verarbeiten oder herunterzuladen, wird ein Fehler aufgetreten sein. Möchten Sie ein Support-Ticket einreichen, um diese Aufnahme abzurufen?",
     "CLEAR_FILTER": "Filter zurücksetzen",
+    "CLINIC_PATIENT_CODE": "Patientencode der Klinik",
     "COACH_STATISTICS": "Trainerstatistiken",
     "COACH_STATISTICS_DESCRIPTION": "Dieser Bericht zeigt die Anzahl der aktiven Trainer der Klinik zu jedem Zeitpunkt in der ausgewählten Zeitperiode. Jeder Balken des Diagramms kann die gleichen Trainer enthalten. Wenn Sie z.B. drei Trainer im Januar in Ihrer Klinik und die gleichen drei Trainer im Februar in Ihrer Klinik hatten, sehen Sie eine 3 für jeden Monat.",
     "COHORT_WEIGHT_LOSS": "Cohort Weight Loss",

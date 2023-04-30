@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} habilitado por",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "No tiene acceso para editar el estado de {{service}} de este paciente ya que no tiene privilegios de administrador para su clínica ({{ org }})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "El episodio de atención {{service}} se habilitará a las 6 a.m.",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "El {{servicio}} episodio de atención se habilitará de inmediato",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "Mañana se habilitará el episodio de atención {{service}}",
     "SUPERVISOR": "Supervisor"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "La grabación no se pudo procesar apropiadamente. Haga click aquí para intentar crear una versión descargable.",
     "CALL_RECORDING_PROCESS_ERROR": "Parece que ha ocurrido un error cuando se intentaba procesar o descargar esta grabación ¿Le gustaría enviar un tíquet de soporte para obtener asistencia relacionada con esta grabación?",
     "CLEAR_FILTER": "Sin Filtro",
+    "CLINIC_PATIENT_CODE": "Código de paciente de la clínica",
     "COACH_STATISTICS": "Estadísticas del Asesor",
     "COACH_STATISTICS_DESCRIPTION": "Este reporte muestra el número de asesores activos asociados con la clínica en cada fecha durante el periodo de tiempo seleccionado. Cada columna que se muestra en la gráfica puede contener los mismos asesores. Por ejemplo, si tenía tres asesores en su clínica durante el mes de Enero y los mismos tres asesores en Febrero, verá a los tres por cada mes.",
     "COHORT_WEIGHT_LOSS": "Pérdida de Peso por Cohortes",

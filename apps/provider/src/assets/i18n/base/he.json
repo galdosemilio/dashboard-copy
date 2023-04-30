@@ -563,6 +563,7 @@
     "SERVICE_ENABLED_BY": "{{service}} מופעל על ידי",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "אין לך גישה לערוך את הסטטוס {{service}} עבור מטופל זה מכיוון שאין לך הרשאות ניהול עבור המרפאה שלהם ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "פרק הטיפול {{service}} יופעל בשעה 06:00",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "פרק הטיפול של {{service}} יופעל באופן מיידי",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "פרק הטיפול {{service}} יופעל מחר",
     "SUPERVISOR": "מְפַקֵחַ"
   },
@@ -1460,6 +1461,7 @@
     "CALL_RECORDING_FAILED_CLICK_RETRY": "ההקלטה לא היתה מעובדת כראוי להורדה. לחץ כדי לנסות ליצור גרסה להורדה.",
     "CALL_RECORDING_PROCESS_ERROR": "נראה שגיאה התרחשה בעת ניסיון לעבד או להוריד את ההקלטה הזו. האם ברצונך לשלוח כרטיס תמיכה לסיוע כדי לאחזר את ההקלטה הזו?",
     "CLEAR_FILTER": "נקה מסנן",
+    "CLINIC_PATIENT_CODE": "קוד מטופל במרפאה",
     "COACH_STATISTICS": "סטטיסטיקת מאמן",
     "COACH_STATISTICS_DESCRIPTION": "דוח זה מציג את מספר המאמנים הפעילים המשוייכים למרפאה בתאריכים נבחרים.  כל עמודה בתרשים עשויה להכיל את אותם המאמנים. לדוגמה, אם היו שלושה מאמנים במרפאה במהלך חודש ינואר ואותם שלושה מאמנים היו גם בחודש פברואר, תראה שלוש עמודות עבור כל חודש.",
     "COHORT_WEIGHT_LOSS": "הפסד Cohort משקל",
