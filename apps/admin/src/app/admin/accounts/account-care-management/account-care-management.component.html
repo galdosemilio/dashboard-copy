@@ -1,6 +1,6 @@
 <mat-card>
   <div *ngFor="let serviceType of serviceTypes; let i = index;">
-    <div fxLayout="row" fxLayoutAlign="start center" style="margin: 10px 0;">
+    <div fxLayout="row" fxLayoutAlign="start center" style="margin: 10px 0;" [attr.data-cy]="'coach-care-pref-option-' + serviceType.type.tag">
       <div fxFlex>{{ serviceType.type.name }}</div>
       <mat-slide-toggle
         [checked]="serviceType.isActive"

@@ -1,6 +1,6 @@
 <mat-grid-list [cols]="1" [formGroup]="form" rowHeight="70px">
   <div fxLayout="column" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" data-cy="care-preference-active-option">
       <mat-select fxFlex="300px" formControlName="active">
         <mat-option [value]="true">{{ 'GLOBAL.ENABLED' | translate }}</mat-option>
         <mat-option [value]="false">{{ 'GLOBAL.DISABLED' | translate }}</mat-option>
@@ -10,7 +10,7 @@
         <p *ngIf="inheritedOrg">{{ 'GLOBAL.INHERITED_FROM' | translate:{org: inheritedOrg} }}</p>
       </div>
     </div>
-    <div [hidden]="!pref.preference?.isActive">
+    <div [hidden]="!pref.preference?.isActive" data-cy="care-preference-device-setup-notification">
       <mat-slide-toggle
         formControlName="deviceSetupNotification"
       >{{ 'GLOBAL.DEVICE_SETUP_NOTIFICATION' | translate }}</mat-slide-toggle>

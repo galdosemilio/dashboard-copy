@@ -282,6 +282,43 @@ const interceptCoreApiCalls = (
     status: 204,
     response: {}
   }).as('healthkitSyncPutRequest')
+
+  cy.intercept('GET', '1.0/care-management/service-type', {
+    fixture: 'api/care-management/serviceTypes'
+  })
+
+  cy.intercept('GET', '1.0/care-management/preference/organization?**', {
+    fixture: 'api/care-management/orgPreferences'
+  })
+
+  cy.intercept('PATCH', `/1.0/care-management/preference/organization/*`, {
+    statusCode: 204,
+    response: {}
+  }).as('updateOrgCarePreference')
+
+  cy.intercept('DELETE', `/1.0/care-management/preference/organization/*`, {
+    statusCode: 204,
+    response: {}
+  }).as('deleteOrgCarePreference')
+
+  cy.intercept('POST', `/1.0/care-management/preference/organization`, {
+    statusCode: 200,
+    response: {}
+  }).as('createOrgCarePreference')
+
+  cy.intercept('GET', '1.0/care-management/service-type/account?account=**', {
+    fixture: 'api/care-management/coachPreferences'
+  })
+
+  cy.intercept('POST', '/1.0/care-management/service-type/account', {
+    statusCode: 200,
+    response: {}
+  }).as('createCoachCarePreference')
+
+  cy.intercept('PATCH', '/1.0/care-management/service-type/account/*', {
+    statusCode: 200,
+    response: {}
+  }).as('updateCoachCarePreference')
 }
 
 const seti18n = (): void => {

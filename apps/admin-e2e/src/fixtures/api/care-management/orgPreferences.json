@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "id": "92",
+      "organization": {
+        "id": "3378",
+        "name": "0000 - Test - IP Clinic (SD)"
+      },
+      "isActive": true,
+      "serviceType": { "id": "1", "name": "RPM", "tag": "rpm" },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled"
+    },
+    {
+      "id": "108",
+      "organization": {
+        "id": "3378",
+        "name": "0000 - Test - IP Clinic (SD)"
+      },
+      "isActive": true,
+      "serviceType": { "id": "2", "name": "CCM", "tag": "ccm" },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "disabled"
+    },
+    {
+      "id": "109",
+      "organization": {
+        "id": "3378",
+        "name": "0000 - Test - IP Clinic (SD)"
+      },
+      "isActive": false,
+      "serviceType": { "id": "3", "name": "RTM", "tag": "rtm" },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled"
+    },
+    {
+      "id": "110",
+      "organization": {
+        "id": "3377",
+        "name": "0001 - Parent - IP Clinic (SD)"
+      },
+      "isActive": true,
+      "serviceType": { "id": "4", "name": "PCM", "tag": "pcm" },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled"
+    }
+  ]
+}

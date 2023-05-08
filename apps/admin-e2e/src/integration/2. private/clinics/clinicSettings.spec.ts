@@ -5,7 +5,8 @@ enum Sections {
   visual = 'visual',
   mala = 'mala',
   features = 'features',
-  security = 'security'
+  security = 'security',
+  care = 'care'
 }
 
 interface Subsection {
@@ -41,6 +42,10 @@ const subSections: Array<Subsection> = [
   {
     section: Sections.mala,
     selector: 'org-settings-section-json'
+  },
+  {
+    section: Sections.care,
+    selector: 'org-settings-section-care'
   },
   {
     section: Sections.features,
@@ -194,6 +199,166 @@ describe('Clinic Settings', () => {
       .should('contain', 'null')
   })
 
+  it('Care Management section data display appropriately', () => {
+    cy.get(`[data-cy="org-settings-menu-care"]`).click()
+
+    // RPM enabled and deviceSetupNotification enabled
+    cy.get('[data-cy="org-settings-section-care-rpm"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .should('contain', 'Enabled')
+
+    cy.get('[data-cy="org-settings-section-care-rpm"]')
+      .find('[data-cy="care-preference-device-setup-notification"]')
+      .find('.mat-slide-toggle-input')
+      .should('be.checked')
+
+    // CCM enabled and deviceSetupNotification disabled
+    cy.get('[data-cy="org-settings-section-care-ccm"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .should('contain', 'Enabled')
+
+    cy.get('[data-cy="org-settings-section-care-ccm"]')
+      .find('[data-cy="care-preference-device-setup-notification"]')
+      .find('.mat-slide-toggle-input')
+      .should('not.be.checked')
+
+    // RTM disabled
+    cy.get('[data-cy="org-settings-section-care-rtm"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .should('contain', 'Disabled')
+
+    cy.get('[data-cy="org-settings-section-care-rtm"]')
+      .find('[data-cy="care-preference-device-setup-notification"]')
+      .find('.mat-slide-toggle-input')
+      .scrollIntoView()
+      .should('not.be.visible')
+
+    // PCM inherit from parent org
+    cy.get('[data-cy="org-settings-section-care-pcm"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .should('contain', 'Inherit')
+
+    cy.get('[data-cy="org-settings-section-care-pcm"]')
+      .find('[data-cy="care-preference-device-setup-notification"]')
+      .find('.mat-slide-toggle-input')
+      .should('be.disabled')
+
+    // BHI no preference (Inherit)
+    cy.get('[data-cy="org-settings-section-care-bhi"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .should('contain', 'Inherit')
+
+    cy.get('[data-cy="org-settings-section-care-bhi"]')
+      .find('[data-cy="care-preference-device-setup-notification"]')
+      .find('.mat-slide-toggle-input')
+      .scrollIntoView()
+      .should('not.be.visible')
+  })
+
+  it('Care Management update preferences', () => {
+    cy.get(`[data-cy="org-settings-menu-care"]`).click()
+
+    // Create care preference
+    cy.get('[data-cy="org-settings-section-care-bhi"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .eq(0)
+      .trigger('click')
+      .wait(500)
+
+    cy.get('.mat-select-panel')
+      .find('mat-option')
+      .contains('Enabled')
+      .trigger('click')
+      .trigger('blur', { force: true })
+      .wait(500)
+
+    cy.tick(1000)
+
+    cy.wait('@createOrgCarePreference').should((xhr) => {
+      expect(xhr.response.statusCode).to.equal(200)
+      expect(xhr.request.body.isActive).to.equal(true)
+      expect(xhr.request.body.deviceSetupNotification).to.equal('enabled')
+    })
+
+    // Disable care preference
+    cy.get('[data-cy="org-settings-section-care-rpm"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .eq(0)
+      .trigger('click')
+      .wait(500)
+
+    cy.get('.mat-select-panel')
+      .find('mat-option')
+      .contains('Disabled')
+      .trigger('click')
+      .trigger('blur', { force: true })
+      .wait(500)
+
+    cy.tick(1000)
+
+    cy.wait('@updateOrgCarePreference').should((xhr) => {
+      expect(xhr.response.statusCode).to.equal(204)
+      expect(xhr.request.body.isActive).to.equal(false)
+      expect(xhr.request.body.deviceSetupNotification).to.equal('enabled')
+    })
+
+    // Inherit care preference
+    cy.get('[data-cy="org-settings-section-care-rpm"]')
+      .find('[data-cy="care-preference-active-option"]')
+      .find('.mat-select')
+      .eq(0)
+      .trigger('click')
+      .wait(500)
+
+    cy.get('.mat-select-panel')
+      .find('mat-option')
+      .contains('Inherit')
+      .trigger('click')
+      .trigger('blur', { force: true })
+      .wait(500)
+
+    cy.tick(1000)
+
+    cy.wait('@deleteOrgCarePreference').should((xhr) => {
+      expect(xhr.response.statusCode).to.equal(204)
+    })
+
+    // Enable device setup notification
+    cy.get('[data-cy="org-settings-section-care-ccm"]')
+      .find('[data-cy="care-preference-device-setup-notification"]')
+      .find('.mat-slide-toggle-input')
+      .click({ force: true })
+
+    cy.tick(10000)
+
+    cy.wait('@updateOrgCarePreference').should((xhr) => {
+      expect(xhr.response.statusCode).to.equal(204)
+      expect(xhr.request.body.isActive).to.equal(true)
+      expect(xhr.request.body.deviceSetupNotification).to.equal('enabled')
+    })
+
+    // Disable device setup notification
+    cy.get('[data-cy="org-settings-section-care-rpm"]')
+      .find('[data-cy="care-preference-device-setup-notification"]')
+      .find('.mat-slide-toggle-input')
+      .click({ force: true })
+
+    cy.tick(10000)
+
+    cy.wait('@updateOrgCarePreference').should((xhr) => {
+      expect(xhr.response.statusCode).to.equal(204)
+      expect(xhr.request.body.isActive).to.equal(true)
+      expect(xhr.request.body.deviceSetupNotification).to.equal('disabled')
+    })
+  })
+
   it('Features section data display appropriately', () => {
     cy.get(`[data-cy="org-settings-menu-features"]`).click()
 
@@ -222,10 +387,6 @@ describe('Clinic Settings', () => {
       .should('not.be.checked')
 
     cy.get('[data-cy="org-settings-section-features-sequences"]')
-      .find('.mat-select')
-      .should('contain', 'Enabled')
-
-    cy.get('[data-cy="org-settings-section-features-rpm"]')
       .find('.mat-select')
       .should('contain', 'Enabled')
 

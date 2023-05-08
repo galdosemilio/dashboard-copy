@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "account": { "id": "5560" },
+      "createdAt": "2023-05-08T16:10:14.494Z",
+      "id": "8b65e92e-6d2f-4da1-985b-7b5a9dea7758",
+      "serviceType": { "id": "1", "name": "RPM", "tag": "rpm" },
+      "status": "active"
+    },
+    {
+      "account": { "id": "5560" },
+      "createdAt": "2023-05-08T16:10:16.996Z",
+      "id": "f4d5cb98-8e9d-4e28-92b6-e489d7ec8465",
+      "serviceType": { "id": "2", "name": "CCM", "tag": "ccm" },
+      "status": "inactive"
+    }
+  ],
+  "pagination": {}
+}
