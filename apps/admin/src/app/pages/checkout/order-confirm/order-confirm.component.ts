@@ -28,7 +28,7 @@ export class CheckoutOrderConfirmComponent implements OnInit {
     this.bus.register('checkout.redirection.start', this.onRedirect)
   }
 
-  private async onRedirect(data) {
+  private async onRedirect(data): Promise<void> {
     let url = `${window.location.origin}/${
       data.actionButtonType === 'storefront' ? 'storefront' : 'provider'
     }`
