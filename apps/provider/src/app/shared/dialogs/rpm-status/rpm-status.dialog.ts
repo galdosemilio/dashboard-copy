@@ -327,11 +327,9 @@ export class RPMStatusDialog implements OnInit {
       await this.careManagementState.upsertCareManagementStateDiagnosis({
         id: this.rpmEntry.rpmState.id,
         primary: formValue.primaryDiagnosis,
-        secondary: formValue.secondaryDiagnosis
-          ? formValue.secondaryDiagnosis
-          : undefined,
-        other: formValue.otherDiagnosis ?? undefined,
-        note: formValue.note ? formValue.note : undefined
+        secondary: formValue.secondaryDiagnosis || undefined,
+        other: formValue.otherDiagnosis || undefined,
+        note: formValue.note || undefined
       })
 
       this.entryAge =
