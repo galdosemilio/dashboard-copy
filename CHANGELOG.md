@@ -1,3 +1,17 @@
+# [1.115.0](https://github.com/coachcare/dashboard/compare/v1.114.0...v1.115.0) (2023-05-15)
+
+
+### Bug Fixes
+
+* aesthetic issues on storefront ([4c6afaa](https://github.com/coachcare/dashboard/commit/4c6afaad6e091d1f05f1014ee9a4c23de6878359))
+* define checkout function return type ([1f3c985](https://github.com/coachcare/dashboard/commit/1f3c98543f75c9f8570db9b17a61c7ba287617b5))
+
+
+### Features
+
+* add admin site care management plan type whitelist for provider profile [FRON-3091] ([ec5954b](https://github.com/coachcare/dashboard/commit/ec5954b6e329b44fe4c896887ae7a9e402636730))
+* add service type to patient profile for care management [FRON-3089] ([61ab96c](https://github.com/coachcare/dashboard/commit/61ab96c79e41063d6b18b61e359b103b8903f961))
+
 # [1.114.0](https://github.com/coachcare/dashboard/compare/v1.113.0...v1.114.0) (2023-04-26)
 
 
