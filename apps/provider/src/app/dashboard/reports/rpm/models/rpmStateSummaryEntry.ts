@@ -54,13 +54,14 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
       (bill) => ({ code: bill.code, eligibility: {} } as any)
     )
 
-    let additionalIndex = 0
+    let billingsIndex = 0
+    allBillings.forEach((bill) => {
+      const billing = args.billing.find((entry) => entry.code === bill.code)
 
-    args.billing.forEach((billing) => {
-      const allBillingsIndex = allBillings.findIndex(
-        (bill) => bill.code === billing.code
-      )
-      const billingsIndex = allBillingsIndex + additionalIndex
+      if (!billing) {
+        return
+      }
+
       const trackableCode = trackableCodes[billing.code]
 
       if (trackableCode?.deps?.length) {
@@ -79,10 +80,6 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
             'eligibility.next.alreadyEligibleCount',
             0
           )
-
-          if (index > 0) {
-            set(copiedBill, 'eligibility.next.deps', [billing.code])
-          }
 
           if (metStep > index) {
             const monitoringRequired =
@@ -111,10 +108,15 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
               'eligibility.next.relatedCodeRequirementsNotMet',
               []
             )
+          } else if (index > 0) {
+            set(copiedBill, 'eligibility.next.deps', [billing.code])
+            set(copiedBill, 'eligibility.next.relatedCodeRequirementsNotMet', [
+              billing.code
+            ])
           }
 
           copiedBill.code = `${copiedBill.code} (${index + 1})`
-          this.billing[billingsIndex + index] = {
+          this.billing[billingsIndex] = {
             ...copiedBill,
             eligibility: {
               ...copiedBill.eligibility,
@@ -130,7 +132,7 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
               : 0
           }
 
-          additionalIndex += 1
+          billingsIndex += 1
         }
       } else {
         this.billing[billingsIndex] = {
@@ -148,6 +150,8 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
               )
             : 0
         }
+
+        billingsIndex += 1
       }
 
       this.billing.forEach((billingEntry) => {

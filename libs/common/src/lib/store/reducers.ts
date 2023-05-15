@@ -2,7 +2,7 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store'
 import { storeFreeze } from 'ngrx-store-freeze'
 // import { logger } from './logger';
 import { orgPrefReducer } from './orgpreferences/reducer'
-import { routerReducer } from './router/reducer'
+import { routerReducer } from '@ngrx/router-store'
 import { AppState } from './state'
 
 export const reducers: ActionReducerMap<AppState> = {
