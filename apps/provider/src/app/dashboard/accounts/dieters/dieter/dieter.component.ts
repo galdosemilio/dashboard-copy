@@ -70,6 +70,15 @@ export class DieterComponent implements OnDestroy, OnInit {
         this.showCareManagement =
           !!this.context.accessibleCareManagementServiceTypes.length
 
+        if (
+          this.context.activeCareManagementService &&
+          !this.context.accessibleCareManagementServiceTypes.find(
+            (entry) => entry.id == this.context.activeCareManagementService.id
+          )
+        ) {
+          this.context.activeCareManagementService = undefined
+        }
+
         this.showPatientPDFButton = resolveConfig(
           'JOURNAL.SHOW_PATIENT_PDF_BUTTON',
           organization
