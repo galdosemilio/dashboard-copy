@@ -62,7 +62,7 @@
             *ngIf="rpmStateSummary"
             class="ccr-button"
             color="primary"
-            (click)="onRefresh()"
+            (click)="onRefresh(); $event.stopPropagation()"
             mat-button>{{ 'GLOBAL.REFRESH' | translate }}</button>
             <button
             class="ccr-button"

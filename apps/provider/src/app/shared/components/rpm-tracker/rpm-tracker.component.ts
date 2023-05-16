@@ -52,7 +52,10 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
   @HostListener('document:click', ['$event'])
   checkClick($event): void {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
+    if (
+      $event.target !== this.toggleButton.nativeElement &&
+      !this.statusPanel.nativeElement.contains($event.target)
+    ) {
       this.showStatusPanel = false
     }
   }
