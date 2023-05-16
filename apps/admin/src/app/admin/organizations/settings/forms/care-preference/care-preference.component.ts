@@ -58,9 +58,8 @@ export class CarePreferenceComponent implements OnInit {
 
   private async onSubmit() {
     const { active, deviceSetupNotification } = this.form.value
-    const deviceSetupNotificationValue = deviceSetupNotification
-      ? 'enabled'
-      : 'disabled'
+    const deviceSetupNotificationValue =
+      deviceSetupNotification === false ? 'disabled' : 'enabled'
 
     try {
       if (active === 'inherit') {
