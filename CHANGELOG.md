@@ -1,3 +1,11 @@
+## [1.115.1](https://github.com/coachcare/dashboard/compare/v1.115.0...v1.115.1) (2023-05-16)
+
+
+### Bug Fixes
+
+* fix updating diagnosis [FRON-3134] ([77cfd76](https://github.com/coachcare/dashboard/commit/77cfd76d9347ac69361d6e126f26e9fdcf8a724f))
+* remove active service type with org changes [FRON-3130] ([f153f07](https://github.com/coachcare/dashboard/commit/f153f077506960cc1e0b29477991ecfc0631c944))
+
 # [1.115.0](https://github.com/coachcare/dashboard/compare/v1.114.0...v1.115.0) (2023-05-15)
 
 
