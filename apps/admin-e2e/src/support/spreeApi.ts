@@ -52,6 +52,13 @@ const interceptSpreeApiCalls = (): void => {
   cy.intercept('PATCH', 'api/v2/storefront/checkout/complete', {
     fixture: 'spree/placeOrder'
   }).as('spreeCallPlaceOrder')
+
+  cy.intercept('GET', 'api/v2/storefront/stripe/subscriptions', {
+    statusCode: 200,
+    body: {
+      data: []
+    }
+  })
 }
 
 export { interceptSpreeApiCalls }

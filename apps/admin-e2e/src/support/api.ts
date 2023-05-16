@@ -86,6 +86,9 @@ const interceptCoreApiCalls = (
   cy.intercept('POST', '1.0/ecommerce/login/token', {
     fixture: 'api/account/ecommerceLogin'
   })
+  cy.intercept('POST', '1.0/authentication/shopify', {
+    statusCode: 401
+  })
   cy.intercept('GET', '2.0/country?**', { fixture: 'api/countries' })
   cy.intercept('GET', '2.0/organization/?**', {
     fixture: 'api/organization/organizationList'
@@ -252,6 +255,10 @@ const interceptCoreApiCalls = (
     statusCoe: 204,
     response: {}
   }).as('organizationTemplatePatchRequest')
+
+  cy.intercept('POST', '/1.0/ecommerce/external-identifier', {
+    statusCode: 201
+  })
 
   cy.route(
     'GET',

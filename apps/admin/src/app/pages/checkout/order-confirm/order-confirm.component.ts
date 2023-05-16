@@ -25,7 +25,11 @@ export class CheckoutOrderConfirmComponent implements OnInit {
   }
 
   private subscribeToEvents(): void {
-    this.bus.register('checkout.redirection.start', this.onRedirect)
+    this.bus.register('checkout.redirection.start', (data) => {
+      void (async () => {
+        await this.onRedirect(data)
+      })()
+    })
   }
 
   private async onRedirect(data): Promise<void> {
