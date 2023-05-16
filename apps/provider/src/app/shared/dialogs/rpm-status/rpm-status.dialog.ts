@@ -152,7 +152,6 @@ export class RPMStatusDialog implements OnInit {
     this.createForms()
     this.resolveDialogData()
     void this.fetchDeactivationReasons()
-    void this.calculateEntryAge()
 
     this.dialogRef
       .beforeClosed()
@@ -304,14 +303,19 @@ export class RPMStatusDialog implements OnInit {
     this.stepperStepLength = stepperChangeInfo.count - 1
   }
 
-  public onInspectCareEntry(entry: RPMStateEntry): void {
-    this.rpmEntry = entry
-    this.status = 'view_session'
+  public async onInspectCareEntry(entry: RPMStateEntry): Promise<void> {
+    try {
+      this.rpmEntry = entry
+      this.status = 'view_session'
+      await this.calculateEntryAge()
 
-    if (this.entryIsActive) {
-      this.refreshDiagnosisForm()
+      if (this.entryIsActive) {
+        this.refreshDiagnosisForm()
+      }
+      this.cdr.markForCheck()
+    } catch (err) {
+      this.notify.error(err)
     }
-    this.cdr.markForCheck()
   }
 
   public showAboutPage(): void {
