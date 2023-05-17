@@ -1,3 +1,13 @@
+## [1.115.2](https://github.com/coachcare/dashboard/compare/v1.115.1...v1.115.2) (2023-05-17)
+
+
+### Bug Fixes
+
+* calculate entry age for edit diagnosis [FRON-3136] ([d6816db](https://github.com/coachcare/dashboard/commit/d6816db39cb6a91d1b97ff9dca7f46f13da25d6a))
+* enable device setup notification as default [FRON-3131] ([7698dc9](https://github.com/coachcare/dashboard/commit/7698dc90157d7c8019fac5f2171bdd20dea62223))
+* fix care management panel hidden issue with refresh button [FRON-3133] ([9a2f9fd](https://github.com/coachcare/dashboard/commit/9a2f9fde072f304cc81a65c2aa38d64952c42750))
+* show correct cpt code for ccm [FRON-3127] ([7e5e41a](https://github.com/coachcare/dashboard/commit/7e5e41ad71050783a3064efe8d64188b24d3185c))
+
 ## [1.115.1](https://github.com/coachcare/dashboard/compare/v1.115.0...v1.115.1) (2023-05-16)
 
 
