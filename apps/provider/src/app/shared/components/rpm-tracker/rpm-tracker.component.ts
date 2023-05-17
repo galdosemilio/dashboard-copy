@@ -369,54 +369,42 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   }
 
   private resolveTimerStartTime(codeAndTracking: CodeAndTracking): void {
-    switch (codeAndTracking.trackableCode.code) {
-      case '99458':
-      case '98981':
-      case '99439':
-      case '99427':
-        this.iterationAmount = get(
+    if (!codeAndTracking?.trackableCode) {
+      this.iterationAmount = 0
+      this.seconds = 0
+
+      return
+    }
+
+    if (codeAndTracking.trackableCode.maxEligibleAmount >= 2) {
+      this.iterationAmount = get(
+        codeAndTracking,
+        'billingItem.eligibility.next.alreadyEligibleCount',
+        codeAndTracking.trackableCode.maxEligibleAmount
+      )
+      this.seconds = get(
+        codeAndTracking,
+        'billingItem.eligibility.next.monitoring.total.seconds.tracked',
+        get(
           codeAndTracking,
-          'billingItem.eligibility.next.alreadyEligibleCount',
-          codeAndTracking.trackableCode.maxEligibleAmount
+          'billingItem.eligibility.next.monitoring.total.seconds.elapsed',
+          1200
         )
-        this.seconds = get(
-          codeAndTracking,
-          'billingItem.eligibility.next.monitoring.total.seconds.tracked',
-          get(
-            codeAndTracking,
-            'billingItem.eligibility.next.monitoring.total.seconds.elapsed',
-            1200
-          )
-        )
+      )
 
-        this.seconds = Math.min(this.seconds, this.requiredIterationSeconds)
+      this.seconds = Math.min(this.seconds, this.requiredIterationSeconds)
 
-        break
+      return
+    }
 
-      case '99453':
-      case '99454':
-      case '99457':
-      case '98975':
-      case '98977':
-      case '98980':
-      case '99490':
-      case '99426':
-      case '99484':
-        this.iterationAmount = 0
-        this.seconds = get(
-          codeAndTracking,
-          'billingItem.eligibility.next.monitoring.total.seconds.tracked'
-        )
+    this.iterationAmount = 0
+    this.seconds = get(
+      codeAndTracking,
+      'billingItem.eligibility.next.monitoring.total.seconds.tracked'
+    )
 
-        if (this.seconds >= this.requiredIterationSeconds) {
-          ++this.iterationAmount
-        }
-        break
-
-      default:
-        this.iterationAmount = 0
-        this.seconds = 0
-        break
+    if (this.seconds >= this.requiredIterationSeconds) {
+      ++this.iterationAmount
     }
   }
 
