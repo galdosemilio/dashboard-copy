@@ -15,7 +15,7 @@
                     <span *ngFor="let codeRequirement of billingEntry.eligibility.next?.deps">
                         <ccr-rpm-dependency-icon
                         [matTooltip]="isMetDepsRequirement(billingEntry, codeRequirement) ? '' : ('RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: codeRequirement})"
-                        [size]="40"
+                        [size]="45"
                         [completed]="isMetDepsRequirement(billingEntry, codeRequirement)"
                         [text]="codeRequirement">
                         </ccr-rpm-dependency-icon>
@@ -25,7 +25,7 @@
                     <ccr-rpm-calendar-icon
                     *ngIf="billingEntry.eligibility?.next?.earliestEligibleAt"
                     [matTooltip]="billingEntry.remainingDays ? ('RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: billingEntry.remainingDays}) : ''"
-                    [size]="40"
+                    [size]="45"
                     [completed]="billingEntry.remainingDays === 0"
                     text="{{ billingEntry.remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
                     </ccr-rpm-calendar-icon>
@@ -34,7 +34,7 @@
                     <ccr-rpm-clock-icon
                     *ngIf="billingEntry.eligibility.next?.monitoring?.total?.seconds?.required"
                     [matTooltip]="billingEntry.eligibility.next?.monitoring.remaining ? ('RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: billingEntry.eligibility.next?.monitoring.remaining}) : ''"
-                    [size]="40"
+                    [size]="45"
                     [completed]="billingEntry.eligibility.next?.monitoring.remaining === 0"
                     text="{{ billingEntry.eligibility.next?.monitoring.remaining }}{{ billingEntry.eligibility.next?.monitoring.units | translate }}">
                     </ccr-rpm-clock-icon>
@@ -44,7 +44,7 @@
                     *ngIf="billingEntry.eligibility.next?.liveInteraction?.required"
                     [matTooltip]="billingEntry.eligibility.next?.liveInteraction.remaining ? ('RPM.CHAT_ICON_DESCRIPTION' | translate:{amount: billingEntry.eligibility.next?.liveInteraction.remaining}) : ''"
                     [completed]="billingEntry.eligibility.next?.liveInteraction.remaining === 0"
-                    [size]="40"
+                    [size]="45"
                     text="{{ billingEntry.eligibility.next?.liveInteraction.remaining }}">
                     </ccr-rpm-chat-icon>
                 </div>
