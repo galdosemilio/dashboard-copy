@@ -129,6 +129,10 @@ export class RPMStatusDialog implements OnInit {
     )
   }
 
+  get shouldStartImmediately() {
+    return this.newEntryType.serviceType.id === '5' // hard coded for BHI, we need to get it from server
+  }
+
   private _currentStatus: DialogStatus = 'initial'
   private _statusCache: DialogStatus[] = []
 

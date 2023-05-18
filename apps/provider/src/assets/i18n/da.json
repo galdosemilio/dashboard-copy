@@ -559,6 +559,7 @@
     "SERVICE_ENABLED_BY": "{{service}} aktiveret af",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Du har ikke adgang til at redigere {{service}} status for denne patient, da du ikke har administrative privilegier for deres klinik ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "Episoden af ​​Care {{service}}.",
+    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "{{service}}-episoden af pleje vil blive aktiveret med det samme",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "Episoden af ​​Care {{service}}.",
     "SUPERVISOR": "Tilsynsførende"
   },
