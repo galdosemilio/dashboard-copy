@@ -24,7 +24,7 @@ import {
   SupervisingProvidersDataSource
 } from '../services'
 import { RPMDevice, RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
-import { ContextService, NotifierService } from '@app/service'
+import { CareServiceType, ContextService, NotifierService } from '@app/service'
 import { ImageOptionSelectorItem } from '@app/shared/components/image-option-selector'
 import { _, SelectOption } from '@app/shared/utils'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -36,7 +36,6 @@ import {
 import { MatStepper } from '@coachcare/material'
 import { auditTime } from 'rxjs/operators'
 import { Subject } from 'rxjs'
-import { CareServiceType } from '@app/shared/model/careService'
 
 export interface CareServiceEnableFormStepperInfo {
   current: number

@@ -8,7 +8,12 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
-import { ContextService, NotifierService } from '@app/service'
+import {
+  CareManagementService,
+  CareServiceType,
+  ContextService,
+  NotifierService
+} from '@app/service'
 import {
   RPMStateEntry,
   RPMStateEntryPendingStatus
@@ -27,11 +32,6 @@ import {
   RPMEntryAgeStatus
 } from './rpm-edit-form'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import {
-  CARE_SERVICE_TYPES_MAP,
-  CareServiceTag,
-  CareServiceType
-} from '@app/shared/model/careService'
 import { CareServiceEnableFormStepperInfo } from './rpm-enable-form'
 import { isEqual } from 'lodash'
 
@@ -143,15 +143,17 @@ export class RPMStatusDialog implements OnInit {
     private dialogRef: MatDialogRef<RPMStatusDialog>,
     private fb: FormBuilder,
     private notify: NotifierService,
-    private careManagementState: CareManagementState
+    private careManagementState: CareManagementState,
+    private careManagementService: CareManagementService
   ) {}
 
   public ngOnInit(): void {
-    this.careServiceTypes = Object.values(CARE_SERVICE_TYPES_MAP).filter(
-      (service) =>
-        this.context.accessibleCareManagementServiceTypes.some(
-          (accessServ) => accessServ.id === service.serviceType.id
-        )
+    this.careServiceTypes = Object.values(
+      this.careManagementService.serviceTypeMap
+    ).filter((service) =>
+      this.context.accessibleCareManagementServiceTypes.some(
+        (accessServ) => accessServ.id === service.serviceType.id
+      )
     )
     this.createForms()
     this.resolveDialogData()
@@ -174,7 +176,7 @@ export class RPMStatusDialog implements OnInit {
 
   hasConflict(id: string): boolean {
     const careService =
-      Object.values(CARE_SERVICE_TYPES_MAP).find(
+      Object.values(this.careManagementService.serviceTypeMap).find(
         (service) => service.serviceType.id === id
       ) ?? null
 
@@ -184,9 +186,7 @@ export class RPMStatusDialog implements OnInit {
 
     return careService.conflicts?.length > 0
       ? this.activeCareEntries.some((entry) =>
-          careService.conflicts.includes(
-            entry.serviceType.tag as CareServiceTag
-          )
+          careService.conflicts.includes(entry.serviceType.id)
         )
       : false
   }

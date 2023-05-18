@@ -6,11 +6,8 @@ import {
   Input,
   Output
 } from '@angular/core'
+import { CareManagementService, CareServiceType } from '@app/service'
 import { RPMStateEntry } from '@app/shared/components/rpm/models'
-import {
-  CARE_SERVICE_TYPES_MAP,
-  CareServiceType
-} from '@app/shared/model/careService'
 import { TranslateService } from '@ngx-translate/core'
 import { first } from 'rxjs'
 
@@ -20,14 +17,14 @@ import { first } from 'rxjs'
     <div fxLayout="column" fxLayoutAlign="start stretch" class="card">
       <!-- Header section -->
       <div fxLayout="row" fxLayoutAlign="stretch center" class="card-header">
-        <div fxFlex>{{ careServiceType.serviceType.name | translate }}</div>
+        <div fxFlex>{{ careServiceType.serviceType.name }}</div>
 
         <div *ngIf="hasConflict" class="conflict-container" fxFlex="50%">
           {{
             'CARE_SERVICES.SERVICE_ACTIVATION_CONFLICT_ERROR'
               | translate
                 : {
-                    name: careServiceType.serviceType.name | translate,
+                    name: careServiceType.serviceType.name,
                     conflictServices: conflictingTypesWithSlash
                   }
           }}
@@ -182,23 +179,24 @@ export class CareManagementCardComponent {
       return ''
     }
 
-    return Object.values(CARE_SERVICE_TYPES_MAP)
+    return Object.values(this.careManagementService.serviceTypeMap)
       .filter((type) =>
-        this.careServiceType.conflicts.includes(type.serviceType.tag)
+        this.careServiceType.conflicts.includes(type.serviceType.id)
       )
-      .map((type) => this.translations[type.serviceType.name])
+      .map((type) => type.serviceType.name)
       .join('/')
   }
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private careManagementService: CareManagementService
   ) {}
 
   ngOnInit(): void {
     this.translate
       .get(
-        Object.values(CARE_SERVICE_TYPES_MAP).map(
+        Object.values(this.careManagementService.serviceTypeMap).map(
           (type) => type.serviceType.name
         )
       )

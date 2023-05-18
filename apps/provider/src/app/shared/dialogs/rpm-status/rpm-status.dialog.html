@@ -1,7 +1,7 @@
 <div matDialogTitle>
     <div>
         <span fxLayout="row" fxLayoutAlign="start center">
-            <span>{{ 'CARE_SERVICES.CARE_MANAGEMENT' | translate }}<ng-container *ngIf="status === 'new_entry'"> - {{ 'CARE_SERVICES.ACTIVATE_SERVICE' | translate:{service: newEntryType.serviceType.name | translate} }}</ng-container></span>
+            <span>{{ 'CARE_SERVICES.CARE_MANAGEMENT' | translate }}<ng-container *ngIf="status === 'new_entry'"> - {{ 'CARE_SERVICES.ACTIVATE_SERVICE' | translate:{service: newEntryType.serviceType.name} }}</ng-container></span>
             <mat-icon class="rpm-help-icon" (click)="showAboutPage()">help_outline</mat-icon>
         </span>
     </div>

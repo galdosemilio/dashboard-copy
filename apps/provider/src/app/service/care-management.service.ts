@@ -1,58 +1,113 @@
 import { Injectable } from '@angular/core'
 import { TrackableBillableCode } from '@app/shared/components/rpm-tracker/model'
+import { NotifierService } from '@coachcare/common/services'
 import {
+  BillingCode,
+  CareManagementProvider,
+  CareManagementServiceType,
   FetchCareManagementBillingCodesRequest,
-  FetchCareManagementBillingCodesResponse,
   Reports
 } from '@coachcare/sdk'
 import moment from 'moment'
-import { from } from 'rxjs'
+
+export interface CareServiceType {
+  serviceType: CareManagementServiceType
+  conflicts?: string[] // tags of conflicting care services
+  deviceSetup?: boolean
+}
+
+const serviceTypeConflictsMap: Record<string, string[]> = {
+  '1': ['3'],
+  '2': ['4'],
+  '3': ['1'],
+  '4': ['2']
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CareManagementService {
-  public billingCodes: FetchCareManagementBillingCodesResponse['data'] = []
+  public billingCodes: BillingCode[] = []
   public trackableCptCodes: Partial<TrackableBillableCode> = {}
+  public serviceTypes: CareManagementServiceType[] = []
+  public serviceTypeMap: Record<string, CareServiceType> = {}
 
-  constructor(private reports: Reports) {
-    from(
-      this.fetchCareManagementBillingCodes({
-        asOf: moment().format('YYYY-MM-DD')
-      })
-    ).subscribe((response: FetchCareManagementBillingCodesResponse) => {
-      this.billingCodes = response.data
-      this.trackableCptCodes = this.billingCodes.reduce((memo, code) => {
-        if (code.coverage !== 'monitoring') {
-          return memo
-        }
-
-        const deps = Object.keys(memo[code.serviceType.id] ?? {}) ?? []
-
-        memo[code.serviceType.id] = {
-          ...memo[code.serviceType.id],
-          ...{
-            [code.value]: {
-              code: code.value,
-              deps,
-              maxEligibleAmount: code.type === 'addon' ? 2 : 1,
-              requiresTimeTracking: true
-            }
-          }
-        }
-
-        return memo
-      }, {})
-    })
+  constructor(
+    private reports: Reports,
+    private careManagement: CareManagementProvider,
+    private notify: NotifierService
+  ) {
+    void this.resolveData()
   }
 
-  private fetchCareManagementBillingCodes(
-    args: FetchCareManagementBillingCodesRequest
-  ): Promise<FetchCareManagementBillingCodesResponse> {
+  private async resolveData(): Promise<void> {
+    this.billingCodes = await this.fetchCareManagementBillingCodes({
+      asOf: moment().format('YYYY-MM-DD')
+    })
+
+    this.trackableCptCodes = this.billingCodes.reduce((memo, code) => {
+      if (code.coverage !== 'monitoring') {
+        return memo
+      }
+
+      const deps = Object.keys(memo[code.serviceType.id] ?? {}) ?? []
+
+      memo[code.serviceType.id] = {
+        ...memo[code.serviceType.id],
+        ...{
+          [code.value]: {
+            code: code.value,
+            deps,
+            maxEligibleAmount: code.requirements?.maxIterations ?? 1,
+            requiresTimeTracking: true
+          }
+        }
+      }
+
+      return memo
+    }, {})
+
+    this.serviceTypes = await this.fetchCareManagementServiceTypes()
+
+    for (const serviceType of this.serviceTypes) {
+      const deviceSetupEducationCode = this.billingCodes.find(
+        (code) =>
+          code.serviceType.id === serviceType.id &&
+          code.coverage === 'device-setup-education'
+      )
+      this.serviceTypeMap[serviceType.id] = {
+        serviceType,
+        deviceSetup: deviceSetupEducationCode ? true : false,
+        conflicts: serviceTypeConflictsMap[serviceType.id] ?? []
+      }
+    }
+  }
+
+  private async fetchCareManagementServiceTypes(): Promise<
+    Array<CareManagementServiceType>
+  > {
     try {
-      return this.reports.fetchCareManagementBillingCodes(args)
-    } catch (error) {
-      console.error(error)
+      const res = await this.careManagement.getServiceTypes()
+
+      return res.data
+    } catch (err) {
+      this.notify.error(err)
+
+      return []
+    }
+  }
+
+  private async fetchCareManagementBillingCodes(
+    args: FetchCareManagementBillingCodesRequest
+  ): Promise<Array<BillingCode>> {
+    try {
+      const res = await this.reports.fetchCareManagementBillingCodes(args)
+
+      return res.data
+    } catch (err) {
+      this.notify.error(err)
+
+      return []
     }
   }
 }
