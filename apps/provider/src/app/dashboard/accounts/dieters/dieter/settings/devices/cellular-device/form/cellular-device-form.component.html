@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="connected_devices-form" novalidate>
+    <select name="devices" formControlName="type">
+      <option
+        *ngFor="let device of devices"
+        [value]="device.id"
+      >
+        {{ device.name }}
+      </option>
+    </select>
+
+    <input
+      matInput
+      formControlName="identifier"
+      type="string"
+      placeholder="{{'BOARD.ADD_DEVICE' | translate}}"
+    >
+
+    <button
+      [disabled]="form.invalid"
+      [ngClass]="{'has-value': form.get('identifier').value?.length}"
+    >
+      {{'GLOBAL.SAVE' | translate}}
+    </button>
+</form>

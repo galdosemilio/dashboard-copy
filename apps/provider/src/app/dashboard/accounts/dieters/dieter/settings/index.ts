@@ -1,5 +1,7 @@
 export { DeviceStatusComponent } from './devices/device-status.component'
 export { DevicesTableComponent } from './devices/table/table.component'
+export { CellularDeviceTableComponent } from './devices/cellular-device/table/cellular-device-table.component'
+export { CellularDeviceFormComponent } from './devices/cellular-device/form/cellular-device-form.component'
 export * from './file-vault'
 export { DieterProfileComponent } from './profile/profile.component'
 export { DieterSettingsComponent } from './settings.component'
@@ -21,6 +23,8 @@ import { DieterSettingsComponent } from './settings.component'
 import { DieterMeetingsComponent } from './meetings'
 import { DieterGoalsComponent } from './goals/goals.component'
 import { DieterPhaseHistoryComponent } from './phase-history'
+import { CellularDeviceTableComponent } from './devices/cellular-device/table/cellular-device-table.component'
+import { CellularDeviceFormComponent } from './devices/cellular-device/form/cellular-device-form.component'
 
 export const SettingsComponents = [
   DieterFileVaultComponent,
@@ -32,5 +36,7 @@ export const SettingsComponents = [
   DieterSequencesTableComponent,
   DieterSettingsComponent,
   DevicesTableComponent,
-  DieterGoalsComponent
+  DieterGoalsComponent,
+  CellularDeviceTableComponent,
+  CellularDeviceFormComponent
 ]

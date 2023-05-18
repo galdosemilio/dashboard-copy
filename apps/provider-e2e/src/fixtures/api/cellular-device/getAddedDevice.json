@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "17",
+      "device": {
+        "identifier": "1234800",
+        "type": {
+          "id": 2,
+          "name": "BodyTrace blood pressure cuff (BT-105)"
+        }
+      },
+      "account": {
+        "id": 6344
+      },
+      "createdAt": "2023-05-12T13:48:17.811Z"
+    }
+  ],
+  "pagination": {}
+}

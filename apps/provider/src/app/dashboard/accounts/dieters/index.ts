@@ -24,7 +24,9 @@ import {
   SequenceEnrollmentDatabase,
   SettingsComponents,
   TriggerHistoryDatabase,
-  VaultDatabase
+  VaultDatabase,
+  CellularDeviceDatabase,
+  CellularDeviceDataSource
 } from './dieter/settings'
 import {
   DietersExpandableTableComponent,
@@ -83,5 +85,7 @@ export const DietersProviders = [
   SequenceEnrollmentDatabase,
   TriggerHistoryDatabase,
   VaultDatabase,
+  CellularDeviceDatabase,
+  CellularDeviceDataSource,
   ...MessagesProviders
 ]

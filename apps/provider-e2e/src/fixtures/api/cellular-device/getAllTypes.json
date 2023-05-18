@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "BodyTrace scale (BT-005)",
+      "status": "active",
+      "createdAt": "2023-05-12T11:06:35.252Z"
+    },
+    {
+      "id": "2",
+      "name": "BodyTrace blood pressure cuff (BT-105)",
+      "status": "active",
+      "createdAt": "2023-05-12T11:06:43.349Z"
+    }
+  ],
+  "pagination": {}
+}

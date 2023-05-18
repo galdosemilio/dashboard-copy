@@ -1,0 +1,86 @@
+.connected_devices,
+.third_party_devices-title {
+  margin: 30px 0 10px;
+
+  div {
+    & > mat-icon {
+      margin-right: 5px;
+    }
+
+    & > p {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.connected_devices {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > div {
+    min-width: 30%;
+
+    mat-icon {
+      color: var(--primary);
+    }
+  }
+}
+
+.connected_devices-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid grey;
+
+  & select {
+    background: lightgray;
+    border: none;
+    padding: 2px;
+    width: 220px;
+    color: mat-color($ccr-foreground, text);
+  }
+
+  & button {
+    border: none;
+    padding: 5px 20px;
+    background: lightgrey;
+    color: white;
+  }
+
+  & input {
+    padding-left: 10px;
+    width: 30%;
+  }
+}
+
+.has-value {
+  background: var(--primary) !important;
+  cursor: pointer;
+}
+
+@media (max-width: $md-max) {
+  .connected_devices {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .connected_devices > div {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: $xs-max) {
+  .connected_devices {
+    align-items: stretch;
+  }
+
+  .connected_devices-form {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .connected_devices-form > * {
+    width: 100% !important;
+  }
+}
