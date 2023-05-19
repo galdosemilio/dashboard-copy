@@ -60,6 +60,7 @@ import {
   DonnaKrechOnlineProdSectionConfig,
   DonnaKrechOnlineTestSectionConfig
 } from './donna-krech-online'
+import { SharpProdSectionConfig, SharpTestSectionConfig } from './sharp'
 
 export interface SectionConfigObject {
   component: any
@@ -84,6 +85,7 @@ export const SECTION_CONFIG: SectionConfig = {
   },
   test: {
     ['3235']: IdealYouTestSectionConfig,
+    ['3328']: SharpTestSectionConfig,
     ['3381']: LeanMDSectionConfig,
     ['4479']: ApolloEndosurgeryTestSectionConfig,
     ['5748']: ShakeItTestSectionConfig,
@@ -138,6 +140,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7032']: GardenStatePainSectionConfig,
     ['7074']: NXTSTIMSectionConfig,
     ['7080']: AlaskaPremierSectionConfig,
-    ['7227']: WakeForestSectionConfig
+    ['7227']: WakeForestSectionConfig,
+    ['7277']: SharpProdSectionConfig
   }
 }

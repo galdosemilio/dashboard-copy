@@ -11,7 +11,8 @@ import {
   RPMDetails,
   SidenavDetails,
   CohortReportsDetails,
-  ProviderProfileConfigDetails
+  ProviderProfileConfigDetails,
+  CustomReportsDetails
 } from './'
 
 export interface SectionConfigDetails {
@@ -28,4 +29,5 @@ export interface SectionConfigDetails {
   PATIENT_DASHBOARD?: PatientDashboardConfigDetails
   PROVIDER_PROFILE?: ProviderProfileConfigDetails
   DIGITAL_LIBRARY?: DigitalLibraryConfigDetails
+  CUSTOM_REPORTS?: CustomReportsDetails
 }

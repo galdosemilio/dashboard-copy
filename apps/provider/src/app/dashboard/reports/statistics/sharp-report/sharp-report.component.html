@@ -1,0 +1,105 @@
+<div class="report-heading">
+  <mat-icon>show_chart</mat-icon>
+  <h3>
+    {{ 'REPORTS.SHARP_CUSTOM_REPORT' | translate }}
+  </h3>
+</div>
+
+<div class="ccr-htools" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+  <ccr-package-filter
+    [confirmText]="'BOARD.FILTER' | translate"
+    (change)="onPackageFilter($event);"
+    mode="single"
+    fxFlex>
+  </ccr-package-filter>
+
+  <button mat-button class="ccr-align-center"
+  [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSVReport()">
+    {{ 'REPORTS.EXPORT_CSV' | translate }}
+    <mat-icon>file_download</mat-icon>
+  </button>
+</div>
+
+<ccr-datasource-overlay class="ccr-table" [source]="source">
+
+  <mat-table class="table-card-mobile" [dataSource]="source">
+
+    <ng-container cdkColumnDef="id">
+      <mat-header-cell *cdkHeaderCellDef>#</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" class="patient-link"
+      [routerLink]="'/accounts/patients/' + row.id">
+        <span>#</span>
+        {{ row.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="firstName">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.FIRST_NAME' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" class="patient-link"
+      [routerLink]="'/accounts/patients/' + row.id">
+        <span>{{ 'BOARD.FIRST_NAME' | translate }}</span>
+        {{ row.firstName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="lastName">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.LAST_NAME' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow" class="patient-link"
+      [routerLink]="'/accounts/patients/' + row.id">
+        <span>{{ 'BOARD.LAST_NAME' | translate }}</span>
+        {{ row.lastName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="dateOfBirth">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.DOB' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.DOB' | translate }}</span>
+        {{ row.dateOfBirth | amDateFormat:'MM/DD/YYYY' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="kcalTotalSum">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.KCAL' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.KCAL' | translate }}</span>
+        {{ row.kcalTotalSum }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="exerciseMinutesTotalSum">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.EXERCISE_MINUTES' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.EXERCISE_MINUTES' | translate }}</span>
+        {{ row.exerciseMinutesTotalSum }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="mealReplacementTotalSum">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.MEAL_REPLACEMENT' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.MEAL_REPLACEMENT' | translate }}</span>
+        {{ row.mealReplacementTotalSum }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="vegetablesFruitsTotalSum">
+      <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.VEGETABLES_FRUITS' | translate }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row" fxLayoutAlign=" center" fxFlex.xs="grow">
+        <span>{{ 'BOARD.VEGETABLES_FRUITS' | translate }}</span>
+        {{ row.vegetablesFruitsTotalSum }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayoutWrap
+      *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+      [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+</ccr-datasource-overlay>
+
+<ccr-paginator #paginator [source]="source"></ccr-paginator>
+
+<ng-template #empty>-</ng-template>

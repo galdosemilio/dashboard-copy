@@ -22,6 +22,7 @@ import { CustomReportsComponent } from './custom/custom-reports.component'
 import { RPMReportComponent } from './rpm'
 import { RPMBillingComponent } from './rpm/rpm-billing'
 import { PatientBulkReportsComponent } from './rpm/patient-bulk-reports'
+import { SharpReportComponent } from './statistics/sharp-report'
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: 'patient', component: PatientStatsComponent },
       { path: 'coach', component: CoachStatsComponent },
       { path: 'cohort', component: CohortWeightLossComponent },
+      { path: 'sharp', component: SharpReportComponent },
       {
         path: 'activity',
         component: PatientActivityComponent,

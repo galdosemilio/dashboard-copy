@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Reports } from '@coachcare/sdk'
+import { FetchSharpReportRequest, Reports } from '@coachcare/sdk'
 
 import { CcrDatabase } from '@app/shared/model'
 import {
@@ -20,6 +20,7 @@ import {
   WeightChangeRequest,
   WeightChangeResponse
 } from '@coachcare/sdk'
+import { FetchSharpReportResponse } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchSharpReportResponse.interface'
 
 @Injectable()
 export class StatisticsDatabase extends CcrDatabase {
@@ -69,5 +70,11 @@ export class StatisticsDatabase extends CcrDatabase {
     args: MeasurementCohortReportRequest
   ): Promise<MeasurementCohortReportResponse> {
     return this.reports.fetchMeasurementCohortReport(args)
+  }
+
+  fetchSharpReport(
+    args: FetchSharpReportRequest
+  ): Promise<FetchSharpReportResponse> {
+    return this.reports.fetchSharpReport(args)
   }
 }

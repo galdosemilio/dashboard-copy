@@ -9,11 +9,13 @@ import { PatientActvityComponents } from './patient-activity'
 import { PatientStatsComponents } from './patient-stats'
 import { StatisticsComponent } from './statistics.component'
 import { CohortWeightLossComponent } from './cohort-weight-loss'
+import { SharpReportComponent } from './sharp-report'
 
 export const StatisticsComponents = [
   ...CoachComponents,
   ...PatientActvityComponents,
   ...PatientStatsComponents,
+  SharpReportComponent,
   StatisticsComponent,
   CohortWeightLossComponent
 ]

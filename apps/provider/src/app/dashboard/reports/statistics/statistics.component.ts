@@ -14,6 +14,7 @@ import { resolveConfig } from '@app/config/section'
 export class StatisticsComponent implements OnInit {
   showReportControls = true
   showCohortWeightLossReport = false
+  showSharpReport = false
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360020083952-Viewing-the-Reports-Statistics'
 
@@ -39,6 +40,10 @@ export class StatisticsComponent implements OnInit {
     this.context.organization$.pipe(untilDestroyed(this)).subscribe((org) => {
       this.showCohortWeightLossReport = resolveConfig(
         'COHORT_REPORTS.SHOW_COHORT_WEIGHT_LOSS_REPORT',
+        org
+      )
+      this.showSharpReport = resolveConfig(
+        'CUSTOM_REPORTS.SHOW_SHARP_REPORT',
         org
       )
     })
