@@ -27,7 +27,8 @@ import {
   RPM,
   ExternalIdentifier,
   FetchCareManagementBillingSnapshotRequest,
-  CareManagementServiceType
+  CareManagementServiceType,
+  RPMStateSummaryBillingItem
   // CareManagementServiceType
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
@@ -1316,5 +1317,16 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         summary.rpm.supervisingProvider = entry.rpmState.supervisingProvider
         this.source.updateItem(summary)
       })
+  }
+
+  public isMetDepsRequirement(
+    entry: RPMStateSummaryBillingItem['eligibility'],
+    code: string
+  ) {
+    if (!entry.next?.relatedCodeRequirementsNotMet) {
+      return
+    }
+
+    return !entry.next.relatedCodeRequirementsNotMet.includes(code)
   }
 }

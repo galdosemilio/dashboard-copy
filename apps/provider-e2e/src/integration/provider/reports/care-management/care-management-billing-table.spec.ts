@@ -1,43 +1,32 @@
 import { standardSetup } from '../../../../support'
+import { getRpmBillingRows } from '../../../../support/care-management'
 
-describe('Reports -> RPM -> Care Management Billing', function () {
-  const getRpmBillingRows = ({
-    selectedClinicId = '1',
-    getTable = true,
-    serviceType = {
-      id: '1',
-      name: 'RPM',
-      code: 'rpm'
-    }
-  } = {}) => {
-    setSelectedClinicToStorage(selectedClinicId)
-    setCareManagementServiceTypeToStorage(serviceType)
-    cy.visit(`/reports/rpm/billing`)
-    cy.tick(100)
-    if (getTable) {
-      cy.get('table', { timeout: 10000 }).find('tr').as('rpmBillingRows')
-    }
-  }
-  const setCareManagementServiceTypeToStorage = (serviceType) => {
-    window.localStorage.setItem('ccrCareManagementServiceType', serviceType.id)
+const billingCodes = {
+  '1': ['99453', '99454', '99457', '99458 (1)', '99458 (2)'],
+  '2': ['99490', '99439 (1)', '99439 (2)'],
+  '3': ['98975', '98977', '98980', '98981 (1)', '98981 (2)'],
+  '4': ['99426', '99427 (1)', '99427 (2)'],
+  '5': ['99484']
+}
+
+const checkBillingCodes = (serviceTypeId: string) => {
+  const codes = billingCodes[serviceTypeId]
+  if (!codes) {
+    return
   }
 
-  const setSelectedClinicToStorage = (selectedClinicId) => {
-    window.localStorage.setItem(
-      'ccrRPMBillingsFilter',
-      JSON.stringify({
-        selectedClinicId
-      })
-    )
+  for (let i = 0; i < codes.length; i += 1) {
+    cy.get('@codeCells').eq(i).should('contain', codes[i])
   }
+}
 
+describe('Reports -> RPM -> Care Management Billing Table', function () {
   beforeEach(() => {
     cy.setTimezone('et')
   })
 
   it('Table shows RPM billing data with proper names: no pagination', function () {
     standardSetup()
-
     getRpmBillingRows()
 
     cy.get('@rpmBillingRows').should('have.length', 5)
@@ -63,13 +52,7 @@ describe('Reports -> RPM -> Care Management Billing', function () {
 
     cy.get('[data-cy="device-type-heading"]').should('contain', 'Device Type')
 
-    cy.get('table').find('.code-cell').as('codeCells')
-
-    cy.get('@codeCells').eq(0).should('contain', '99453')
-    cy.get('@codeCells').eq(1).should('contain', '99454')
-    cy.get('@codeCells').eq(2).should('contain', '99457')
-    cy.get('@codeCells').eq(3).should('contain', '99458 (1)')
-    cy.get('@codeCells').eq(4).should('contain', '99458 (2)')
+    checkBillingCodes('1')
 
     cy.get('ccr-paginator')
       .find('button[aria-label="Previous page"][disabled="true"]')
@@ -97,15 +80,8 @@ describe('Reports -> RPM -> Care Management Billing', function () {
       }
     })
 
+    checkBillingCodes('2')
     cy.get('table').find('th').eq(5).should('contain', 'Device Type')
-    cy.get('table').find('.code-cell').as('codeCells')
-
-    cy.get('@codeCells').eq(0).should('contain', '98975')
-    cy.get('@codeCells').eq(1).should('contain', '98977')
-    cy.get('@codeCells').eq(2).should('contain', '98980')
-    cy.get('@codeCells').eq(3).should('contain', '98981 (1)')
-    cy.get('@codeCells').eq(4).should('contain', '98981 (2)')
-
     cy.get('@rpmBillingRows').should('have.length', 5)
   })
 
@@ -127,13 +103,9 @@ describe('Reports -> RPM -> Care Management Billing', function () {
       }
     })
 
+    checkBillingCodes('2')
+
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
-    cy.get('table').find('.code-cell').as('codeCells')
-
-    cy.get('@codeCells').eq(0).should('contain', '99490')
-    cy.get('@codeCells').eq(1).should('contain', '99439 (1)')
-    cy.get('@codeCells').eq(2).should('contain', '99439 (2)')
-
     cy.get('@rpmBillingRows').should('have.length', 1)
   })
 
@@ -155,11 +127,9 @@ describe('Reports -> RPM -> Care Management Billing', function () {
       }
     })
 
+    checkBillingCodes('5')
+
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
-    cy.get('table').find('.code-cell').as('codeCells')
-
-    cy.get('@codeCells').eq(0).should('contain', '99484')
-
     cy.get('@rpmBillingRows').should('have.length', 2)
   })
 
@@ -181,13 +151,8 @@ describe('Reports -> RPM -> Care Management Billing', function () {
       }
     })
 
+    checkBillingCodes('4')
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
-    cy.get('table').find('.code-cell').as('codeCells')
-
-    cy.get('@codeCells').eq(0).should('contain', '99426')
-    cy.get('@codeCells').eq(1).should('contain', '99427 (1)')
-    cy.get('@codeCells').eq(2).should('contain', '99427 (2)')
-
     cy.get('@rpmBillingRows').should('have.length', 1)
   })
 
@@ -230,9 +195,6 @@ describe('Reports -> RPM -> Care Management Billing', function () {
     })
 
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
-    cy.get('table').find('.code-cell').as('codeCells')
-
-    cy.get('@codeCells').eq(0).should('contain', '99490')
-    cy.get('@codeCells').eq(1).should('contain', '99439')
+    checkBillingCodes('2')
   })
 })

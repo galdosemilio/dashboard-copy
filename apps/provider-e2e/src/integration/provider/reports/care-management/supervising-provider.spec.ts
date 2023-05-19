@@ -1,4 +1,4 @@
-import { standardSetup } from './../../../../support'
+import { standardSetup } from '../../../../support'
 import {
   confirmMessageNoSupervisingProvidersAvailable,
   confirmSupervisingProviderName,

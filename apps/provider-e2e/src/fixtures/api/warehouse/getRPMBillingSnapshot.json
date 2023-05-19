@@ -17,25 +17,9 @@
         {
           "code": "99453",
           "eligibility": {
-            "next": {
-              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
-              "transmissions": {
-                "distinctDates": {
-                  "required": 16,
-                  "count": 1
-                },
-                "measurements": {
-                  "automated": {
-                    "count": 0
-                  },
-                  "manual": {
-                    "count": 0
-                  }
-                },
-                "notification": {
-                  "count": 1
-                }
-              }
+            "last": {
+              "timestamp": "2020-11-16T18:05:00.000Z",
+              "count": 1
             }
           }
         },
@@ -43,7 +27,7 @@
           "code": "99454",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
@@ -68,7 +52,7 @@
           "code": "99457",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
               "monitoring": {
                 "total": {
                   "seconds": {
@@ -185,25 +169,9 @@
         {
           "code": "99453",
           "eligibility": {
-            "next": {
-              "earliestEligibleAt": "2023-05-28T04:00:00.000Z",
-              "transmissions": {
-                "distinctDates": {
-                  "required": 16,
-                  "count": 0
-                },
-                "measurements": {
-                  "automated": {
-                    "count": 0
-                  },
-                  "manual": {
-                    "count": 0
-                  }
-                },
-                "notification": {
-                  "count": 0
-                }
-              }
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 0
             }
           }
         },
@@ -211,11 +179,11 @@
           "code": "99454",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-28T04:00:00.000Z",
+              "earliestEligibleAt": "2020-02-01T05:00:00.000Z",
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
-                  "count": 0
+                  "count": 2
                 },
                 "measurements": {
                   "automated": {
@@ -226,7 +194,7 @@
                   }
                 },
                 "notification": {
-                  "count": 0
+                  "count": 1
                 }
               }
             }
@@ -236,13 +204,13 @@
           "code": "99457",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "earliestEligibleAt": "2020-02-01T05:00:00.000Z",
               "monitoring": {
                 "total": {
                   "seconds": {
-                    "tracked": 0,
+                    "tracked": 600,
                     "required": 1200,
-                    "elapsed": 0
+                    "elapsed": 600
                   }
                 },
                 "automated": {
@@ -351,25 +319,9 @@
         {
           "code": "99453",
           "eligibility": {
-            "next": {
-              "earliestEligibleAt": "2023-05-27T04:00:00.000Z",
-              "transmissions": {
-                "distinctDates": {
-                  "required": 16,
-                  "count": 5
-                },
-                "measurements": {
-                  "automated": {
-                    "count": 0
-                  },
-                  "manual": {
-                    "count": 0
-                  }
-                },
-                "notification": {
-                  "count": 5
-                }
-              }
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-08:00",
+              "count": 0
             }
           }
         },
@@ -377,11 +329,11 @@
           "code": "99454",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-27T04:00:00.000Z",
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
-                  "count": 5
+                  "count": 17
                 },
                 "measurements": {
                   "automated": {
@@ -392,7 +344,7 @@
                   }
                 },
                 "notification": {
-                  "count": 5
+                  "count": 1
                 }
               }
             }
@@ -402,13 +354,13 @@
           "code": "99457",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "earliestEligibleAt": "2020-01-27T05:00:00.000Z",
               "monitoring": {
                 "total": {
                   "seconds": {
-                    "tracked": 0,
+                    "tracked": 600,
                     "required": 1200,
-                    "elapsed": 0
+                    "elapsed": 600
                   }
                 },
                 "automated": {
@@ -423,7 +375,7 @@
                 }
               },
               "liveInteraction": {
-                "count": 0,
+                "count": 1,
                 "required": 1
               }
             }
@@ -519,11 +471,11 @@
           "code": "99453",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-15T04:00:00.000Z",
+              "earliestEligibleAt": "2020-01-24T04:00:00.000Z",
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
-                  "count": 17
+                  "count": 11
                 },
                 "measurements": {
                   "automated": {
@@ -543,12 +495,16 @@
         {
           "code": "99454",
           "eligibility": {
+            "last": {
+              "timestamp": "2020-01-01T00:00:00-04:00",
+              "count": 1
+            },
             "next": {
-              "earliestEligibleAt": "2023-05-15T04:00:00.000Z",
+              "earliestEligibleAt": "2020-01-17T00:00:00-04:00",
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
-                  "count": 17
+                  "count": 30
                 },
                 "measurements": {
                   "automated": {
@@ -559,7 +515,7 @@
                   }
                 },
                 "notification": {
-                  "count": 17
+                  "count": 30
                 }
               }
             }
@@ -568,14 +524,18 @@
         {
           "code": "99457",
           "eligibility": {
+            "last": {
+              "timestamp": "2020-01-01T04:00:00Z",
+              "count": 1
+            },
             "next": {
-              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "earliestEligibleAt": "2020-02-01T04:00:00Z",
               "monitoring": {
                 "total": {
                   "seconds": {
-                    "tracked": 0,
+                    "tracked": 1499,
                     "required": 1200,
-                    "elapsed": 0
+                    "elapsed": 1232
                   }
                 },
                 "automated": {
@@ -590,7 +550,7 @@
                 }
               },
               "liveInteraction": {
-                "count": 0,
+                "count": 1,
                 "required": 1
               }
             }
@@ -686,7 +646,7 @@
           "code": "99453",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2023-05-06T11:15:00.000Z",
+              "earliestEligibleAt": "2020-01-01T11:15:00.000Z",
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
@@ -710,12 +670,16 @@
         {
           "code": "99454",
           "eligibility": {
+            "last": {
+              "timestamp": "2020-01-01T00:00:00-05:00",
+              "count": 1
+            },
             "next": {
-              "earliestEligibleAt": "2023-05-06T11:15:00.000Z",
+              "earliestEligibleAt": "2020-01-02T00:00:00-04:00",
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
-                  "count": 25
+                  "count": 30
                 },
                 "measurements": {
                   "automated": {
@@ -726,7 +690,7 @@
                   }
                 },
                 "notification": {
-                  "count": 25
+                  "count": 30
                 }
               }
             }
@@ -735,14 +699,18 @@
         {
           "code": "99457",
           "eligibility": {
+            "last": {
+              "timestamp": "2020-01-01T04:00:00Z",
+              "count": 1
+            },
             "next": {
-              "earliestEligibleAt": "2023-05-30T11:15:00.000Z",
+              "earliestEligibleAt": "2020-01-01T04:00:00Z",
               "monitoring": {
                 "total": {
                   "seconds": {
-                    "tracked": 0,
+                    "tracked": 1499,
                     "required": 1200,
-                    "elapsed": 0
+                    "elapsed": 1232
                   }
                 },
                 "automated": {
@@ -757,7 +725,7 @@
                 }
               },
               "liveInteraction": {
-                "count": 0,
+                "count": 1,
                 "required": 1
               }
             }
