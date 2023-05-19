@@ -1,3 +1,14 @@
+## [1.115.3](https://github.com/coachcare/dashboard/compare/v1.115.2...v1.115.3) (2023-05-19)
+
+
+### Bug Fixes
+
+* remove hard coded cpt codes [FRON-3123] ([8930f48](https://github.com/coachcare/dashboard/commit/8930f48d7bd533594fd83e5cf11d3091f0a9a117))
+* remove thunk titles in icons [FRON-3138] ([02f5d94](https://github.com/coachcare/dashboard/commit/02f5d940d5b620bebee45ccda9f919548b8d58b2))
+* show text start immediately for enable bhi [FRON-3141] ([f4835b8](https://github.com/coachcare/dashboard/commit/f4835b805785f8657c8cc40af855eadf92ca74f6))
+* sonarcloud issue with checkout ([82a560e](https://github.com/coachcare/dashboard/commit/82a560ecd61506b5fcb56a970a2298c964422a19))
+* support size for new care icons [FRON-3129] ([cb1a420](https://github.com/coachcare/dashboard/commit/cb1a4202bdc0298b80f77acda6165abfb84d4608))
+
 ## [1.115.2](https://github.com/coachcare/dashboard/compare/v1.115.1...v1.115.2) (2023-05-17)
 
 
