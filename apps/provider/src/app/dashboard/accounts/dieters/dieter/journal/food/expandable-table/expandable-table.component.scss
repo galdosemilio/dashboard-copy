@@ -25,16 +25,25 @@ app-dieter-journal-food-table {
 
         .header-date {
           min-width: 150px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
 
         .header-calories,
         .header-protein {
+          display: flex;
+          justify-content: end;
+          align-items: center;
           min-width: 80px;
         }
 
         .header-carb,
         .header-fat,
         .header-others {
+          display: flex;
+          justify-content: end;
+          align-items: center;
           min-width: 150px;
         }
 

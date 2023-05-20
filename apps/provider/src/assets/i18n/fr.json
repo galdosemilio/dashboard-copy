@@ -411,6 +411,7 @@
     "SESSION_STARTS_AT": "La session commence à {{time}}",
     "SHIPPING": "Expédition",
     "SHIPPING_ADDRESS": "Adresse de livraison",
+    "SHOW_ALL": "Afficher tout",
     "SINGLE_DAY": "Une journée",
     "SINGLE_DAY_AVAILABILITY": "Disponibilité d’un jour",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Entrez la disponibilité pour voir les clients pour les dates spécifiques. Ceci est une bonne façon de définir votre calendrier si vous travaillez à des heures différentes chaque semaine. REMARQUE IMPORTANTE: Vous ne pouvez pas programmer un bloc unique de disponibilité si vous avez déjà défini une disponibilité récurrente pour ce moment-là.",

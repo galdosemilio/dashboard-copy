@@ -411,6 +411,7 @@
     "SESSION_STARTS_AT": "Sitzung beginnt bei {{time}}",
     "SHIPPING": "Versand",
     "SHIPPING_ADDRESS": "Lieferanschrift",
+    "SHOW_ALL": "Alle anzeigen",
     "SINGLE_DAY": "Einzeltag",
     "SINGLE_DAY_AVAILABILITY": "Ein-Tages-Verfügbarkeit",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Tragen Sie Ihre Verfügbarkeit ein, um Klienten zu bestimmten Terminen zu sehen. Dies ist eine gute Möglichkeit, Ihren Terminplan festzulegen, wenn Sie jede Woche zu unterschiedlichen Zeiten arbeiten. WICHTIGER HINWEIS: Sie dürfen keinen einmalig verfügbaren Zeitblock einplanen, wenn Sie für diesen Zeitraum bereits eine wiederkehrende Verfügbarkeit festgelegt haben.",

@@ -16,6 +16,7 @@ import { ViewImageDialog } from '@app/shared/dialogs'
 import { FoodMeal } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { resolveConfig } from '@app/config/section'
+import { STORAGE_JORNAL_FOOD_SHOW_ALL } from '@app/config'
 
 enum MOOD_COLORS {
   SAD = '#F16961',
@@ -54,6 +55,8 @@ export class FoodExpandableTable implements OnInit {
 
   public rows: FoodDayAmount[] = []
   public showFoodMoodAndNote = false
+  public showAll: boolean
+  public isLoading = false
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -69,11 +72,24 @@ export class FoodExpandableTable implements OnInit {
     this.source
       .connect()
       .pipe(untilDestroyed(this))
-      .subscribe((rows) => {
+      .subscribe(async (rows) => {
         this.rows = []
         this.cdr.detectChanges()
 
         this.rows = this.cleanData(rows)
+        try {
+          this.showAll =
+            window.localStorage.getItem(STORAGE_JORNAL_FOOD_SHOW_ALL) === 'true'
+              ? true
+              : false
+
+          if (this.showAll) {
+            await this.onShowAll(this.showAll)
+          }
+        } catch (e) {
+          this.showAll = false
+        }
+
         this.cdr.detectChanges()
       })
 
@@ -138,6 +154,26 @@ export class FoodExpandableTable implements OnInit {
     })
   }
 
+  public async onShowAll(showAll: boolean) {
+    window.localStorage.setItem(
+      STORAGE_JORNAL_FOOD_SHOW_ALL,
+      showAll.toString()
+    )
+    this.showAll = showAll
+    this.isLoading = true
+
+    try {
+      const rows = this.rows.filter((row) => this.showAll || row.level === 0)
+      for (const row of rows) {
+        await this.toggleRow(row)
+      }
+    } catch (error) {
+      this.notify.error(error)
+    } finally {
+      this.isLoading = false
+    }
+  }
+
   async toggleRow(row: FoodDayAmount) {
     if (row.level > 1) return
 
@@ -175,8 +211,8 @@ export class FoodExpandableTable implements OnInit {
 
     switch (row.level) {
       case 0:
-        this.rows.forEach((t, index) => {
-          if (index < startIndex || index > endIndex) return
+        for (const [index, t] of this.rows.entries()) {
+          if (index < startIndex || index > endIndex) continue
 
           if (t.level === 1 && row.isExpanded) {
             t.isExpanded = false
@@ -185,19 +221,18 @@ export class FoodExpandableTable implements OnInit {
             t.isExpanded = false
             t.isHidden = true
           }
-        })
+        }
         break
 
       case 1:
-        this.rows.forEach((t, index) => {
-          if (index < startIndex || index > endIndex) return
-
-          void this.fetchAndLoadServings(row.meals.filter((m) => m.id))
+        for (const [index, t] of this.rows.entries()) {
+          if (index < startIndex || index > endIndex) continue
 
           if (t.level === 2) {
             t.isHidden = row.isExpanded ? false : true
           }
-        })
+        }
+        await this.fetchAndLoadServings(row.meals.filter((m) => m.id))
         break
     }
   }

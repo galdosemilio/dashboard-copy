@@ -20,3 +20,4 @@ export const STORAGE_MESSAGE_INPUT_HEIGHT = 'ccrMessageInputHeight'
 export const STORAGE_MEASUREMENT_LIST_SORT = 'ccrMeasurementListSort'
 export const STORAGE_CARE_MANAGEMENT_SERVICE_TYPE =
   'ccrCareManagementServiceType'
+export const STORAGE_JORNAL_FOOD_SHOW_ALL = 'ccrJournalFoodShowAll'

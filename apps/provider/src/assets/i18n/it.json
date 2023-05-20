@@ -411,6 +411,7 @@
     "SESSION_STARTS_AT": "La sessione inizia a {{time}}",
     "SHIPPING": "Spedizione",
     "SHIPPING_ADDRESS": "indirizzo di spedizione",
+    "SHOW_ALL": "Mostra tutto",
     "SINGLE_DAY": "Unico Giorno",
     "SINGLE_DAY_AVAILABILITY": "Disponibilità unica",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Inserisci la disponibilità per vedere i clienti per le specifiche date. Questo è un buon modo per impostare il tuo programma se lavori in orari diversi ogni settimana. NOTA IMPORTANTE: Non puoi programmare un blocco unico di disponibilità se hai già impostato una disponibilità ricorrente per quell'orario.",

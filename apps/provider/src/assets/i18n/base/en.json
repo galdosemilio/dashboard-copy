@@ -411,6 +411,7 @@
     "SESSION_STARTS_AT": "Session Starts at {{ time }}",
     "SHIPPING": "Shipping",
     "SHIPPING_ADDRESS": "Shipping Address",
+    "SHOW_ALL": "Show All",
     "SINGLE_DAY": "Single Day",
     "SINGLE_DAY_AVAILABILITY": "Single-day availability",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Enter availability to see clients for specific dates. This is a good way to set your schedule if you work different hours each week. IMPORTANT NOTE: You may not schedule a one-time block of availability if you already have set a recurring availability for that time.",

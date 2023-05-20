@@ -411,6 +411,7 @@
     "SESSION_STARTS_AT": "Session starter på {{time}}",
     "SHIPPING": "Forsendelse",
     "SHIPPING_ADDRESS": "Forsendelsesadresse",
+    "SHOW_ALL": "Vis alt",
     "SINGLE_DAY": "En dag",
     "SINGLE_DAY_AVAILABILITY": "Enkelt-dag tilgængelighed",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Indtast tilgængelighed for at se klienter for bestemte datoer. Dette er en god måde at indstille din tidsplan, hvis du arbejder forskellige timer hver uge. VIGTIG NOTE: Du planlægger muligvis ikke en engangsblok af tilgængelighed, hvis du allerede har indstillet en tilbagevendende tilgængelighed for det tidspunkt.",

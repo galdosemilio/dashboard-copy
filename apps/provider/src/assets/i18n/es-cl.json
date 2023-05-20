@@ -411,6 +411,7 @@
     "SESSION_STARTS_AT": "La sesión comienza a las {{time}}",
     "SHIPPING": "Envío",
     "SHIPPING_ADDRESS": "Dirección de Envío",
+    "SHOW_ALL": "Mostrar todos",
     "SINGLE_DAY": "Individual",
     "SINGLE_DAY_AVAILABILITY": "Disponibilidad Individual",
     "SINGLE_DAY_AVAILABILITY_NOTE": "Proporcione la disponibilidad para ver clientes en fechas específicas. Esta es una buena manera de establecer su horario si trabaja en horas diferentes cada semana. NOTA IMPORTANTE: No puede programar un bloque de disponibilidad de un día si ya hay una disponibilidad periódica para esa hora.",

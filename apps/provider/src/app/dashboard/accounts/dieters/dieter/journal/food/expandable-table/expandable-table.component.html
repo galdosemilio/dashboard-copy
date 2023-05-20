@@ -1,6 +1,9 @@
 <ccr-datasource-overlay class="ccr-table ccr-expand-table ccr-table-stats" [source]="source">
     <div class="header-row">
-      <div class="header-date">{{ 'GLOBAL.DATE' | translate }}</div>
+      <div class="header-date">
+        {{ 'GLOBAL.DATE' | translate }}
+        <mat-slide-toggle [checked]="showAll" [disabled]="isLoading" (toggleChange)="onShowAll(!showAll)" labelPosition="before">{{ 'BOARD.SHOW_ALL' | translate }}</mat-slide-toggle>
+      </div>
       <div class="header-calories">{{ 'BOARD.CALORIES' | translate }}</div>
       <div class="header-protein">{{ 'BOARD.PROTEIN' | translate }}</div>
       <div class="header-carb">{{ 'BOARD.CARB' | translate }}</div>
