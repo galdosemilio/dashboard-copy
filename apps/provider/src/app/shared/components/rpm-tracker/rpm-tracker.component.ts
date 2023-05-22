@@ -275,10 +275,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     const trackableCodes: TrackableBillableCode[] = Object.values(
       this.careManagementService.trackableCptCodes[this.serviceType]
     )
-    let billingItem: CareManagementSnapshotBillingItem
-    let trackableCode: TrackableBillableCode
-
-    trackableCodes.some((trackCode) => {
+    const trackableCode = trackableCodes.find((trackCode) => {
       const trackCodeOverride = trackCode.displayedCode || trackCode.code
 
       const foundCodeInEntry = stateSummaryItem.billing.find(
@@ -298,21 +295,27 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         !foundCodeInEntry?.eligibility.next ||
         (requiredSeconds && trackedSeconds && trackedSeconds >= requiredSeconds)
       ) {
-        return
+        return false
       }
 
-      billingItem = foundCodeInEntry
-      trackableCode = trackCode
       return true
     })
 
-    if (!billingItem) {
-      billingItem =
-        stateSummaryItem.billing[stateSummaryItem.billing.length - 1]
-      trackableCode = trackableCodes[1]
+    const trackCodeOverride =
+      trackableCode?.displayedCode || trackableCode?.code
+    const billingItem = stateSummaryItem.billing.find(
+      (billingEntry) => billingEntry.code === trackCodeOverride
+    )
+
+    if (billingItem) {
+      return { billingItem, trackableCode }
     }
 
-    return { billingItem, trackableCode }
+    return {
+      billingItem:
+        stateSummaryItem.billing[stateSummaryItem.billing.length - 1],
+      trackableCode: trackableCodes[1]
+    }
   }
 
   private async resolveRPMBillingStatus(
@@ -363,7 +366,6 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         }
       }
     } catch (error) {
-      console.error(error)
       this.notifier.error(error)
     }
   }
