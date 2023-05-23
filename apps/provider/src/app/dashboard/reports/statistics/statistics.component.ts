@@ -43,7 +43,7 @@ export class StatisticsComponent implements OnInit {
         org
       )
       this.showSharpReport = resolveConfig(
-        'CUSTOM_REPORTS.SHOW_SHARP_REPORT',
+        'CUSTOM_REPORTS.SHARP_CUSTOM_REPORT',
         org
       )
     })
