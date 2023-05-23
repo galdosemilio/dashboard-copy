@@ -95,13 +95,17 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       isInheritable: false,
       prefRoute: 'scheduleIsPrimary'
     },
-    scheduleAddressDisplayProviders: {
+    scheduleEnabledProviders: {
       isInheritable: false,
-      prefRoute: 'scheduleAddressDisplayProviders'
+      prefRoute: 'scheduleEnabledProviders'
     },
-    scheduleAddressDisplayPatients: {
+    scheduleEnabledPatients: {
       isInheritable: false,
-      prefRoute: 'scheduleAddressDisplayPatients'
+      prefRoute: 'scheduleEnabledPatients'
+    },
+    scheduleAddressEnabled: {
+      isInheritable: false,
+      prefRoute: 'scheduleAddressEnabled'
     }
   }
 
@@ -259,6 +263,16 @@ export class FeaturesComponent implements OnDestroy, OnInit {
             })) || Promise.resolve()
       )
 
+      const scheduleDisabled = []
+
+      if (!formValue.scheduleEnabledProviders) {
+        scheduleDisabled.push(AccountTypeIds.Provider)
+      }
+
+      if (!formValue.scheduleEnabledPatients) {
+        scheduleDisabled.push(AccountTypeIds.Client)
+      }
+
       promises.push(
         this.featurePrefs.schedulePrefs &&
           this.featurePrefs.schedulePrefs.id === this.orgId
@@ -266,46 +280,22 @@ export class FeaturesComponent implements OnDestroy, OnInit {
             ? this.organization.deleteSchedulePreference(this.orgId)
             : this.organization.updateSchedulePreference({
                 organization: this.orgId,
-                disabledFor:
-                  (!formValue.scheduleAddressDisplayProviders &&
-                    !formValue.scheduleAddressDisplayPatients) ||
-                  (formValue.scheduleAddressDisplayProviders &&
-                    formValue.scheduleAddressDisplayPatients)
-                    ? []
-                    : formValue.scheduleAddressDisplayProviders
-                    ? [AccountTypeIds.Client]
-                    : [AccountTypeIds.Provider],
+                disabledFor: scheduleDisabled,
                 isPrimary: formValue.scheduleIsPrimary,
                 address: {
                   display: {
-                    enabled:
-                      formValue.scheduleAddressDisplayProviders ||
-                      formValue.scheduleAddressDisplayPatients
-                        ? true
-                        : false
+                    enabled: formValue.scheduleAddressEnabled
                   }
                 }
               })
           : formValue.schedule !== null
           ? this.organization.createSchedulePreference({
               organization: this.orgId,
-              disabledFor:
-                (!formValue.scheduleAddressDisplayProviders &&
-                  !formValue.scheduleAddressDisplayPatients) ||
-                (formValue.scheduleAddressDisplayProviders &&
-                  formValue.scheduleAddressDisplayPatients)
-                  ? []
-                  : formValue.scheduleAddressDisplayProviders
-                  ? [AccountTypeIds.Client]
-                  : [AccountTypeIds.Provider],
+              disabledFor: scheduleDisabled,
               isPrimary: formValue.scheduleIsPrimary,
               address: {
                 display: {
-                  enabled:
-                    formValue.scheduleAddressDisplayProviders ||
-                    formValue.scheduleAddressDisplayPatients
-                      ? true
-                      : false
+                  enabled: formValue.scheduleAddressEnabled
                 }
               }
             })
@@ -365,8 +355,9 @@ export class FeaturesComponent implements OnDestroy, OnInit {
       videoconferenceRecording: [null],
       schedule: [null],
       scheduleIsPrimary: [null],
-      scheduleAddressDisplayProviders: [null],
-      scheduleAddressDisplayPatients: [null]
+      scheduleEnabledProviders: [null],
+      scheduleEnabledPatients: [null],
+      scheduleAddressEnabled: [null]
     })
 
     if (this.featurePrefs) {
@@ -432,27 +423,29 @@ export class FeaturesComponent implements OnDestroy, OnInit {
           this.featurePrefs.schedulePrefs.id === this.orgId
             ? this.featurePrefs.schedulePrefs.isPrimary
             : true,
-        scheduleAddressDisplayProviders:
+        scheduleEnabledProviders:
           this.featurePrefs.schedulePrefs &&
           this.featurePrefs.schedulePrefs.id === this.orgId
-            ? this.featurePrefs.schedulePrefs.disabledFor &&
-              this.featurePrefs.schedulePrefs.disabledFor.includes(
+            ? this.featurePrefs.schedulePrefs.disabledFor?.includes(
                 AccountTypeIds.Provider
               )
               ? false
-              : this.featurePrefs.schedulePrefs.address?.display?.enabled ??
-                true
+              : true
             : true,
-        scheduleAddressDisplayPatients:
+        scheduleEnabledPatients:
           this.featurePrefs.schedulePrefs &&
           this.featurePrefs.schedulePrefs.id === this.orgId
-            ? this.featurePrefs.schedulePrefs.disabledFor &&
-              this.featurePrefs.schedulePrefs.disabledFor.includes(
+            ? this.featurePrefs.schedulePrefs.disabledFor?.includes(
                 AccountTypeIds.Client
               )
               ? false
-              : this.featurePrefs.schedulePrefs.address?.display?.enabled ??
-                true
+              : true
+            : true,
+        scheduleAddressEnabled:
+          this.featurePrefs.schedulePrefs &&
+          this.featurePrefs.schedulePrefs.id === this.orgId
+            ? this.featurePrefs.schedulePrefs?.address?.display?.enabled ??
+              false
             : true
       })
     }

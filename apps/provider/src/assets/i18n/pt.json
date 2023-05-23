@@ -563,7 +563,6 @@
     "SERVICE_ENABLED_BY": "{{service}} ativado por",
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Não tem acesso para editar o estado do {{service}} para este paciente pois não tem privilégios administrativos para sua clínica ({{ org }})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "O episódio de {{service}} do cuidado será ativado às 6h",
-    "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "O episódio de atendimento {{service}} será ativado imediatamente",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "O episódio de {{service}} do cuidado será ativado amanhã",
     "SUPERVISOR": "Supervisor"
   },
