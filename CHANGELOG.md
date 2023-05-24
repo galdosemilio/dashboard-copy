@@ -1,3 +1,17 @@
+# [1.116.0](https://github.com/coachcare/dashboard/compare/v1.115.3...v1.116.0) (2023-05-24)
+
+
+### Bug Fixes
+
+* bug with sharp report tab ([4b6c8eb](https://github.com/coachcare/dashboard/commit/4b6c8eba0e8fb225081d405fbf0f5f36cc19acc8))
+* clean up resolve current billing code [FRON-3125] ([e22d431](https://github.com/coachcare/dashboard/commit/e22d431232e46359768f38d170cd97a23f1401b6))
+* remove register new company link on Be Slim login page ([3e20752](https://github.com/coachcare/dashboard/commit/3e20752790e13191e3526b789189b36e50a6ec66))
+
+
+### Features
+
+* add sharp custom report ([fb18dcc](https://github.com/coachcare/dashboard/commit/fb18dcca0839564b9bbd969dc05f786d6ec54588))
+
 ## [1.115.3](https://github.com/coachcare/dashboard/compare/v1.115.2...v1.115.3) (2023-05-19)
 
 
