@@ -4,6 +4,7 @@ import { FetchSharpReportRequest } from '@coachcare/sdk'
 import { from, Observable } from 'rxjs'
 import { StatisticsDatabase } from './statistics.database'
 import {
+  DataAggregate,
   FetchSharpReportResponse,
   SharpReportItem
 } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchSharpReportResponse.interface'
@@ -49,6 +50,22 @@ export class SharpReportDataSource extends TableDataSource<
     return from(this.database.fetchSharpReport(criteria))
   }
 
+  getAggregatesValue(entry?: DataAggregate) {
+    if (!entry) {
+      return 0
+    }
+
+    if (typeof entry.key === 'string') {
+      return entry.value
+    }
+
+    if (entry.key?.type?.multiplier) {
+      return parseFloat((entry.value / entry.key.type.multiplier).toFixed(1))
+    }
+
+    return entry.value
+  }
+
   mapResult(result: FetchSharpReportResponse): Array<SharpReportItemSummary> {
     // pagination handling
     this.getTotal(result)
@@ -56,25 +73,28 @@ export class SharpReportDataSource extends TableDataSource<
     return result.data.map((item) => {
       return {
         ...item,
-        kcalTotalSum:
-          item.aggregates.find((aggregate) => aggregate.key == 'kcal')?.value ??
-          0,
-        exerciseMinutesTotalSum:
+        kcalTotalSum: this.getAggregatesValue(
+          item.aggregates.find((aggregate) => aggregate.key == 'kcal')
+        ),
+        exerciseMinutesTotalSum: this.getAggregatesValue(
           item.aggregates.find(
             (aggregate) => aggregate.key == 'exercise-minutes'
-          )?.value ?? 0,
-        mealReplacementTotalSum:
+          )
+        ),
+        mealReplacementTotalSum: this.getAggregatesValue(
           item.aggregates.find(
             (aggregate) =>
               typeof aggregate.key == 'object' &&
               aggregate.key.type.id == MEAL_REPLACEMENT_ID
-          )?.value ?? 0,
-        vegetablesFruitsTotalSum:
+          )
+        ),
+        vegetablesFruitsTotalSum: this.getAggregatesValue(
           item.aggregates.find(
             (aggregate) =>
               typeof aggregate.key == 'object' &&
               aggregate.key.type.id == VEGETABLES_FRUITS_ID
-          )?.value ?? 0
+          )
+        )
       }
     })
   }

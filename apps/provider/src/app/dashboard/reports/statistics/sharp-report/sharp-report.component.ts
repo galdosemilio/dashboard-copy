@@ -158,25 +158,28 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
         .map((item) => {
           return {
             ...item,
-            kcalTotalSum:
+            kcalTotalSum: this.source.getAggregatesValue(
               item.aggregates.find((aggregate) => aggregate.key == 'kcal')
-                ?.value ?? 0,
-            exerciseMinutesTotalSum:
+            ),
+            exerciseMinutesTotalSum: this.source.getAggregatesValue(
               item.aggregates.find(
                 (aggregate) => aggregate.key == 'exercise-minutes'
-              )?.value ?? 0,
-            mealReplacementTotalSum:
+              )
+            ),
+            mealReplacementTotalSum: this.source.getAggregatesValue(
               item.aggregates.find(
                 (aggregate) =>
                   typeof aggregate.key == 'object' &&
                   aggregate.key.type.id == MEAL_REPLACEMENT_ID
-              )?.value ?? 0,
-            vegetablesFruitsTotalSum:
+              )
+            ),
+            vegetablesFruitsTotalSum: this.source.getAggregatesValue(
               item.aggregates.find(
                 (aggregate) =>
                   typeof aggregate.key == 'object' &&
                   aggregate.key.type.id == VEGETABLES_FRUITS_ID
-              )?.value ?? 0
+              )
+            )
           }
         })
         .forEach((d) => {
