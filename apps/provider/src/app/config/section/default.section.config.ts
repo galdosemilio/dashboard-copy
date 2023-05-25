@@ -174,6 +174,9 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
       { days: 7 * 52, gracePeriod: 21 }
     ]
   },
+  CUSTOM_REPORTS: {
+    SHARP_CUSTOM_REPORT: false
+  },
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: false,
     SHOW_NEW_APPOINTMENT: false,
