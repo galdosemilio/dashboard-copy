@@ -1,3 +1,11 @@
+## [1.116.1](https://github.com/coachcare/dashboard/compare/v1.116.0...v1.116.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* adjust scheduling preferences on admin site [FRON-3145] ([7c5c84b](https://github.com/coachcare/dashboard/commit/7c5c84bc58077ad504c2cc277e9b00d63b1b2e21))
+* set vegetable and fruit multiplier for sharp report [FRON-3147] ([ea59aeb](https://github.com/coachcare/dashboard/commit/ea59aeb884f3df2f4f47491f26853ff12a540023))
+
 # [1.116.0](https://github.com/coachcare/dashboard/compare/v1.115.3...v1.116.0) (2023-05-24)
 
 
