@@ -227,7 +227,6 @@
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "הצג פגישות פעילות או שנמחקו",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "כל פגישה שנקבעה בפלטפורמה היא פגישה 'פעילה'. אם פגישה פעילה נמחקת על ידי המאמן או המטופל, היא הופכת לפגישה 'נמחקה'. כברירת מחדל, רק הפגישות הפעילות מוצגות ברשימה זו. ניתן לצפות בפגישות שנמחקו על ידי שינוי נפתח זה ל'פגישות שנמחקו '.",
     "DOB": "DOB",
-    "DOCTOR_NAME": "ד\"ר {{name}}",
     "DOWNLOAD_PATIENT_REPORT": "דווח חולה להורדה",
     "DOWNLOAD_PATIENT_REPORT_DESCRIPTION": "הורדת דוח באחת Excel או פורמט PDF עם מידע המדידה ופעילות עבור המטופל הזה.",
     "DOWNLOAD_REPORT": "הורד דוח",

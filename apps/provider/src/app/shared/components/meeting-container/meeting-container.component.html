@@ -14,7 +14,7 @@ fxLayoutGap="15px">
       <p class="long-date">{{ meeting.date | amDateFormat:'dddd, MMMM DD, YYYY' }}</p>
       <p class="attendees">
         <ng-container *ngFor="let entity of attendeeEntities; let i = index">
-          {{ entity.isProvider ? ('BOARD.DOCTOR_NAME' | translate:{ name: entity.name }) : entity.name }}{{ i + 1 < attendeeEntities.length ? ',' : '' }}
+        {{ entity.name }}{{ i + 1 < attendeeEntities.length ? ',' : '' }}
         </ng-container>
       </p>
 

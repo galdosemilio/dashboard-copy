@@ -27,7 +27,7 @@
           &nbsp;
         </span>
         <ng-container *ngFor="let attendee of meeting.attendees; let i = index">
-        {{ isProviderAttendee(attendee) ? ('BOARD.DOCTOR_NAME' | translate:{ name: attendeeName(attendee) }) : attendeeName(attendee) }}{{ i + 1 < meeting.attendees.length ? ',' : '' }}
+        {{ attendeeName(attendee) }}{{ i + 1 < meeting.attendees.length ? ',' : '' }}
         </ng-container>
       </p>
       <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">

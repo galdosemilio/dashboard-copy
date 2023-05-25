@@ -227,7 +227,6 @@
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS": "Vis aktive eller slettede møder",
     "DISPLAY_ACTIVE_OR_DELETED_MEETINGS_ABOUNT": "Ethvert møde, der er planlagt på platformen, er et 'aktivt' møde. Hvis et aktivt møde slettes af træneren eller patienten, bliver det et 'slettet' møde. Som standard er kun de aktive møder præsenteret i denne liste. Slettede møder kan ses ved at ændre denne rullemenu til 'Slettede møder'.",
     "DOB": "DOB",
-    "DOCTOR_NAME": "Dr. {{name}}",
     "DOWNLOAD_PATIENT_REPORT": "Hent Patient Rapport",
     "DOWNLOAD_PATIENT_REPORT_DESCRIPTION": "Download en rapport i enten Excel eller PDF-format med måling og aktivitet oplysninger for denne patient.",
     "DOWNLOAD_REPORT": "Download rapport",
