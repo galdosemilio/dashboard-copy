@@ -6,13 +6,15 @@ import {
 } from '@angular/core'
 import {
   BillingCode,
+  CareManagementServiceType,
   FetchCareManagementBillingSnapshotRequest
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { ReportsDatabase } from '../../services'
+import { _ } from '@app/shared/utils'
 import { environment } from 'apps/provider/src/environments/environment'
 import * as moment from 'moment'
-import { flatten, uniq, uniqBy } from 'lodash'
+import { flatten, orderBy, uniq, uniqBy } from 'lodash'
 import {
   CareManagementSnapshotBillingItem,
   CareManagementStateSummaryItem,
@@ -21,6 +23,8 @@ import {
 import { ClinicPatientCodeDataSource } from '../../services/clinic-patient-code-report.datasource'
 import { Subject, debounceTime } from 'rxjs'
 import { NotifierService } from '@app/service'
+import { CSV } from '@coachcare/common/shared'
+import { Sort } from '@angular/material/sort'
 
 type SatisfiedCount = number | SatisfiedCount99457 | SatisfiedCount99458
 
@@ -60,6 +64,21 @@ interface PatientCodeRecord {
   willBeEligibleThisMonth: SatisfiedCount
 }
 
+type CsvRow = Record<
+  string,
+  {
+    organization: { id: string; name: string }
+    patientsUniqueCount: number
+    codes: Record<
+      number,
+      {
+        uniqueRPMEpisodesOfCare: number
+        codes: Record<string, SatisfiedCount[]>
+      }
+    >
+  }
+>
+
 @UntilDestroy()
 @Component({
   selector: 'app-reports-rpm-clinic-patient-code',
@@ -78,6 +97,7 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     private notifier: NotifierService
   ) {}
 
+  public csvSeparator = ','
   public tableData: ClinicPatientCodeEntry[]
   public reportData: ClinicPatientCodeReport[]
   public headings: string[] = []
@@ -102,8 +122,8 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     this.billingCodes = billingCodesResponse.data
 
     this.refresh$.pipe(debounceTime(500)).subscribe(() => {
-      this.setHeadings()
-      this.refreshData()
+      this.headings = this.setHeadings(this.serviceType)
+      this.tableData = this.refreshData(this.serviceType)
     })
   }
 
@@ -112,9 +132,9 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
       .connect()
       .pipe(untilDestroyed(this), debounceTime(500))
       .subscribe((data) => {
-        this.setHeadings()
         this.rawData = data
-        this.refreshData()
+        this.headings = this.setHeadings(this.serviceType)
+        this.tableData = this.refreshData(this.serviceType)
       })
   }
 
@@ -123,18 +143,117 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     this.refresh$.next()
   }
 
-  public downloadCSV(): void {}
+  public sortData(sort: Sort) {
+    if (!sort.active || sort.direction === '') {
+      this.tableData = this.refreshData(this.serviceType)
+      return
+    }
 
-  private refreshData(): void {
-    this.compileUniqueClinics()
-    const patientCodes = this.flattenPatientCodes()
-    this.setEligibilityPerPatientCode(patientCodes)
-    this.setCodesPerClinic()
+    this.tableData = orderBy(
+      this.refreshData(this.serviceType),
+      (item) => {
+        switch (sort.active) {
+          case 'id':
+            return item.organization.id
+          case 'name':
+            return item.organization.name
+          default:
+            return item.uniqueRPMEpisodesOfCare
+        }
+      },
+      [sort.direction]
+    )
   }
 
-  private setHeadings(): void {
-    this.headings = this.billingCodes
-      .filter((e) => e.serviceType.id === this.serviceType)
+  public downloadCSV(): void {
+    if (!this.rawData.length) {
+      return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+    }
+
+    const filename = `clinic-patient-code-report-${moment().format(
+      'YYYY-MM-DD'
+    )}.csv`
+
+    let csv = ''
+    let headers =
+      'ID' +
+      this.csvSeparator +
+      'Name' +
+      this.csvSeparator +
+      'Unique Patients' +
+      this.csvSeparator
+
+    for (const serviceType of this.serviceTypes()) {
+      headers += `${serviceType.name} Unique Episodes of Care${this.csvSeparator}`
+      for (const heading of this.setHeadings(serviceType.id)) {
+        headers += `${heading}${this.csvSeparator}`
+      }
+    }
+
+    const data: CsvRow = {}
+
+    for (const serviceType of this.serviceTypes()) {
+      for (const row of this.refreshData(serviceType.id, false)) {
+        data[row.organization.id] = {
+          organization: row.organization,
+          patientsUniqueCount: row.patientsUniqueCount,
+          codes: {
+            ...data[row.organization.id]?.codes,
+            [serviceType.id]: {
+              uniqueRPMEpisodesOfCare: row.uniqueRPMEpisodesOfCare,
+              codes: row.codes
+            }
+          }
+        }
+      }
+    }
+
+    csv += headers + '\n'
+
+    for (const row of orderBy(
+      Object.values(data),
+      (item) => item.patientsUniqueCount,
+      ['desc']
+    )) {
+      csv += `${row.organization.id}${this.csvSeparator}`
+      csv += `${row.organization.name.replace(',', '')}${this.csvSeparator}`
+      csv += `${row.patientsUniqueCount}${this.csvSeparator}`
+      for (const serviceType of this.serviceTypes()) {
+        const uniqueRPMEpisodesOfCare =
+          row.codes[serviceType.id]?.uniqueRPMEpisodesOfCare
+        csv += `${uniqueRPMEpisodesOfCare}${this.csvSeparator}`
+        for (const code of row.codes[serviceType.id].codes) {
+          csv += `${uniqueRPMEpisodesOfCare - code.satisfiedCount}${
+            this.csvSeparator
+          }`
+        }
+      }
+      csv += '\n'
+    }
+
+    CSV.toFile({ content: csv, filename })
+  }
+
+  private refreshData(
+    serviceType: string,
+    filterZero: boolean = true
+  ): ClinicPatientCodeEntry[] {
+    const reportData = this.compileUniqueClinics(serviceType)
+    const patientCodes = this.flattenPatientCodes()
+    this.setEligibilityPerPatientCode(patientCodes, reportData)
+
+    if (filterZero) {
+      return this.setCodesPerClinic(reportData).filter(
+        (item) => item.uniqueRPMEpisodesOfCare > 0
+      )
+    }
+
+    return this.setCodesPerClinic(reportData)
+  }
+
+  private setHeadings(serviceType: string): string[] {
+    return this.billingCodes
+      .filter((e) => e.serviceType.id === serviceType)
       .reduce((acc, item) => {
         if (
           item.coverage == 'monitoring' &&
@@ -159,13 +278,18 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
       }, [])
   }
 
-  private compileUniqueClinics(): void {
-    const uniqueOrgs = uniqBy(
-      this.rawData.map((e) => e.organization),
+  private serviceTypes(): CareManagementServiceType[] {
+    return uniqBy(
+      this.billingCodes.map((e) => e.serviceType),
       'id'
     )
+  }
 
-    this.reportData = uniqueOrgs.map((org) => {
+  private compileUniqueClinics(serviceType: string): ClinicPatientCodeReport[] {
+    return uniqBy(
+      this.rawData.map((e) => e.organization),
+      'id'
+    ).map((org) => {
       return {
         organization: {
           id: org.id,
@@ -182,10 +306,10 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
         uniqueRPMEpisodesOfCare: this.rawData.filter(
           (e) =>
             e.organization.hierarchyPath.includes(org.id) &&
-            e.state.serviceType.id === this.serviceType
+            e.state.serviceType.id === serviceType
         ).length,
         codes: this.billingCodes
-          .filter((e) => e.serviceType.id === this.serviceType)
+          .filter((e) => e.serviceType.id === serviceType)
           .reduce((acc, item) => {
             if (
               item.coverage == 'monitoring' &&
@@ -241,9 +365,10 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
   }
 
   private setEligibilityPerPatientCode(
-    patientCodes: PatientCodeRecord[]
+    patientCodes: PatientCodeRecord[],
+    reportData: ClinicPatientCodeReport[]
   ): void {
-    for (const orgRecord of this.reportData) {
+    for (const orgRecord of reportData) {
       for (const cptCodeRecord of orgRecord.codes) {
         let satisfiedCount
 
@@ -317,9 +442,9 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     ).length
   }
 
-  private setCodesPerClinic(): void {
-    this.tableData = this.reportData
-      .map((e) => {
+  private setCodesPerClinic(reportData): ClinicPatientCodeEntry[] {
+    return orderBy(
+      reportData.map((e) => {
         return {
           organization: e.organization,
           patientsUniqueCount: e.patientsUniqueCount,
@@ -369,14 +494,10 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
             return acc
           }, [])
         }
-      })
-      .sort((a, b) => {
-        return a.uniqueRPMEpisodesOfCare === b.uniqueRPMEpisodesOfCare
-          ? 0
-          : a.uniqueRPMEpisodesOfCare < b.uniqueRPMEpisodesOfCare
-          ? 1
-          : -1
-      })
+      }),
+      (item) => item.uniqueRPMEpisodesOfCare,
+      ['desc']
+    )
   }
 
   private willBeEligible(

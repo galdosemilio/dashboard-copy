@@ -5,13 +5,13 @@
       <app-service-type-selector (serviceTypeChange)="onServiceTypeChange($event)"></app-service-type-selector>
     </div>
   </div>
-  <!-- <button
+  <button
     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
     (click)="downloadCSV()"
     mat-button class="ccr-align-center">
       {{ 'REPORTS.EXPORT_CSV' | translate }}
       <mat-icon>file_download</mat-icon>
-  </button> -->
+  </button>
 </div>
 <p>Listing of current non billable CPT codes.</p>
 <ccr-datasource-overlay
@@ -23,13 +23,12 @@
   </div>
   <div class="ccr-table ccr-expand-table ccr-table-stats">
     <div class="ccr-expandable-table">
-      <table>
+      <table matSort matSortActive="uniqueRPMEpisodesOfCare" matSortDirection="desc" (matSortChange)="sortData($event)">
         <caption hidden>{{ 'REPORTS.CLINIC_PATIENT_CODE' | translate }}</caption>
         <thead>
-          <th>ID</th>
-          <th>Name</th>
-          <!-- <th>Unique Patients</th> -->
-          <th>Episodes of Care</th>
+          <th mat-sort-header="id">ID</th>
+          <th mat-sort-header="name">Name</th>
+          <th mat-sort-header="uniqueRPMEpisodesOfCare">Episodes of Care</th>
           <th *ngFor="let heading of headings">{{ heading }}</th>
         </thead>
         <tbody>
@@ -43,9 +42,10 @@
           >
             <td>{{ org.organization.id }}</td>
             <td>{{ org.organization.name }}</td>
-            <!-- <td>{{ org.patientsUniqueCount }}</td> -->
             <td>{{ org.uniqueRPMEpisodesOfCare }}</td>
-            <td *ngFor="let code of org.codes">{{ org.uniqueRPMEpisodesOfCare - code.satisfiedCount }}</td>
+            <td *ngFor="let code of org.codes">
+              {{ org.uniqueRPMEpisodesOfCare - code.satisfiedCount }}
+            </td>
           </tr>
         </tbody>
       </table>
