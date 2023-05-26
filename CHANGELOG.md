@@ -1,3 +1,17 @@
+# [1.117.0](https://github.com/coachcare/dashboard/compare/v1.116.1...v1.117.0) (2023-05-26)
+
+
+### Bug Fixes
+
+* bug with sharp button report on prod ([b883689](https://github.com/coachcare/dashboard/commit/b883689493eb504354d60621455628c567c6d0cc))
+* remove dr name from meeting provider ([cc8dc59](https://github.com/coachcare/dashboard/commit/cc8dc59235a3764cdc0a84f2d505093ac85de66d))
+
+
+### Features
+
+* add clinic patient code report ([1ae8b8d](https://github.com/coachcare/dashboard/commit/1ae8b8de4e0f53882f4ce33db90d32c72f361e52))
+* add show all toggle for journal -> foods tab ([4fc41fe](https://github.com/coachcare/dashboard/commit/4fc41fe0bd1366f8c855ca4f40f54b8f6720a677))
+
 ## [1.116.1](https://github.com/coachcare/dashboard/compare/v1.116.0...v1.116.1) (2023-05-25)
 
 
