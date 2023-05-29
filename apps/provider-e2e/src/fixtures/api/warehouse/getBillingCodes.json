@@ -31,7 +31,12 @@
       },
       "value": "99457",
       "coverage": "monitoring",
-      "type": "standalone"
+      "type": "standalone",
+      "requirements": {
+        "requiredLiveInteractionCount": 1,
+        "maxIterations": 1,
+        "time": { "minutes": 20 }
+      }
     },
     {
       "serviceType": {
@@ -42,7 +47,12 @@
       },
       "value": "99458",
       "coverage": "monitoring",
-      "type": "addon"
+      "type": "addon",
+      "requirements": {
+        "dependsOn": "99457",
+        "maxIterations": 2,
+        "time": { "minutes": 20 }
+      }
     },
     {
       "serviceType": {
@@ -53,7 +63,12 @@
       },
       "value": "99490",
       "coverage": "monitoring",
-      "type": "standalone"
+      "type": "standalone",
+      "requirements": {
+        "requiredLiveInteractionCount": 0,
+        "maxIterations": 1,
+        "time": { "minutes": 20 }
+      }
     },
     {
       "serviceType": {
@@ -64,7 +79,12 @@
       },
       "value": "99439",
       "coverage": "monitoring",
-      "type": "addon"
+      "type": "addon",
+      "requirements": {
+        "dependsOn": "99490",
+        "maxIterations": 2,
+        "time": { "minutes": 20 }
+      }
     },
     {
       "serviceType": {
@@ -97,7 +117,12 @@
       },
       "value": "98980",
       "coverage": "monitoring",
-      "type": "standalone"
+      "type": "standalone",
+      "requirements": {
+        "requiredLiveInteractionCount": 1,
+        "maxIterations": 1,
+        "time": { "minutes": 20 }
+      }
     },
     {
       "serviceType": {
@@ -108,7 +133,12 @@
       },
       "value": "98981",
       "coverage": "monitoring",
-      "type": "addon"
+      "type": "addon",
+      "requirements": {
+        "dependsOn": "98980",
+        "maxIterations": 2,
+        "time": { "minutes": 20 }
+      }
     },
     {
       "serviceType": {
@@ -119,7 +149,12 @@
       },
       "value": "99426",
       "coverage": "monitoring",
-      "type": "standalone"
+      "type": "standalone",
+      "requirements": {
+        "requiredLiveInteractionCount": 0,
+        "maxIterations": 1,
+        "time": { "minutes": 30 }
+      }
     },
     {
       "serviceType": {
@@ -130,7 +165,12 @@
       },
       "value": "99427",
       "coverage": "monitoring",
-      "type": "addon"
+      "type": "addon",
+      "requirements": {
+        "dependsOn": "99426",
+        "maxIterations": 2,
+        "time": { "minutes": 30 }
+      }
     },
     {
       "serviceType": {
@@ -141,7 +181,12 @@
       },
       "value": "99484",
       "coverage": "monitoring",
-      "type": "standalone"
+      "type": "standalone",
+      "requirements": {
+        "requiredLiveInteractionCount": 0,
+        "maxIterations": 1,
+        "time": { "minutes": 20 }
+      }
     }
   ],
   "pagination": {}

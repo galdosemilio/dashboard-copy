@@ -1,4 +1,4 @@
-<div class="care-management-state" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" [formGroup]="form">
+<div cy-data="care-management-state" class="care-management-state" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" [formGroup]="form">
     <mat-form-field fxFlex floatLabel="never" class="ccr-filter">
         <mat-select [disableOptionCentering]="true" formControlName="serviceType" [ngClass]="{'no-tracking': !serviceType}">
             <mat-option *ngFor="let serviceType of serviceTypes" [value]="serviceType.value">

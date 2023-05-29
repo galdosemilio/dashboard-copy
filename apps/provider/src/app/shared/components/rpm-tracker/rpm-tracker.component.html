@@ -4,7 +4,7 @@
         {{ currentCodeString }}
     </div>
     <span class="timer"><strong>{{ timerDisplay }}</strong> / {{ requiredIterationSecondsDisplay }}</span>
-    <div class="info-icon" #toggleButton></div>
+    <div cy-data="open-status-button" class="info-icon" #toggleButton></div>
 </div>
 
 <div #statusPanel>

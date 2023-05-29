@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "id": "71",
+      "organization": {
+        "id": "30",
+        "name": "CoachCare"
+      },
+      "isActive": false,
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm"
+      },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled",
+      "taxIdentificationNumber": "98-7654321"
+    },
+    {
+      "id": "88",
+      "organization": {
+        "id": "30",
+        "name": "CoachCare"
+      },
+      "isActive": false,
+      "serviceType": {
+        "id": "2",
+        "name": "CCM",
+        "tag": "ccm"
+      },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled"
+    },
+    {
+      "id": "89",
+      "organization": {
+        "id": "30",
+        "name": "CoachCare"
+      },
+      "isActive": false,
+      "serviceType": {
+        "id": "3",
+        "name": "RTM",
+        "tag": "rtm"
+      },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled"
+    },
+    {
+      "id": "90",
+      "organization": {
+        "id": "30",
+        "name": "CoachCare"
+      },
+      "isActive": false,
+      "serviceType": {
+        "id": "4",
+        "name": "PCM",
+        "tag": "pcm"
+      },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled"
+    },
+    {
+      "id": "102",
+      "organization": {
+        "id": "30",
+        "name": "CoachCare"
+      },
+      "isActive": false,
+      "serviceType": {
+        "id": "5",
+        "name": "BHI",
+        "tag": "bhi"
+      },
+      "isSubscriptionTarget": false,
+      "deviceSetupNotification": "enabled"
+    }
+  ]
+}

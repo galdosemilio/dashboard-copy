@@ -1,451 +1,330 @@
 import { standardSetup } from '../../../../../support'
-import {
-  attemptToDisableRpm,
-  attemptToDownloadPatientReport,
-  attemptToEditRPM,
-  attemptToEnableRpm,
-  openRPMDialog,
-  openRPMReportDialog
-} from '../../dashboard/utils'
+const STORAGE_CARE_MANAGEMENT_SERVICE_TYPE = 'ccrCareManagementServiceType'
+
+const serviceTypeList = [
+  {
+    serviceType: {
+      id: '1',
+      name: 'RPM',
+      tag: 'rpm'
+    },
+    billingCodes: ['99453', '99454', '99457', '99458 (1)', '99458 (2)']
+  },
+  {
+    serviceType: {
+      id: '2',
+      name: 'CCM',
+      tag: 'ccm'
+    },
+    billingCodes: ['99490', '99439 (1)', '99439 (2)']
+  },
+  {
+    serviceType: {
+      id: '3',
+      name: 'RTM',
+      tag: 'rtm'
+    },
+    billingCodes: ['98975', '98977', '98980', '98981 (1)', '98981 (2)']
+  },
+  {
+    serviceType: {
+      id: '4',
+      name: 'PCM',
+      tag: 'pcm'
+    },
+    billingCodes: ['99426', '99427 (1)', '99427 (2)']
+  },
+  {
+    serviceType: {
+      id: '5',
+      name: 'BHI',
+      tag: 'bhi'
+    },
+    billingCodes: ['99484']
+  }
+]
 
 describe('Patient profile -> dashboard -> rpm', function () {
   beforeEach(() => {
     cy.setOrganization('mdteam')
-    cy.setTimezone('et')
   })
 
-  it('Shows inaccessible provider properly', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
+  describe('visibility', () => {
+    it('should show care management state', () => {
+      standardSetup()
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]').should('exist')
+    })
+
+    it('should not show with authenticated provider has no active service types enabled', () => {
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/care-management/service-type/account?**',
+            fixture: 'api/care-management/getInActiveServiceTypeAccount'
+          }
+        ]
+      })
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]').should('not.exist')
+    })
+
+    it('should not show with currently-selected clinic context has no active service types', () => {
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/care-management/preference/organization?**',
+            fixture: 'api/care-management/getInActivePreferenceOrganization'
+          }
+        ]
+      })
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]').should('not.exist')
+    })
+
+    it('should not show with the authenticated provider has some active service types enabled that do not overlap/are shared by the currently-select clinic context', () => {
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/care-management/preference/organization?**',
+            fixture: 'api/general/emptyDataEmptyPagination'
+          }
+        ]
+      })
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]').should('not.exist')
+    })
+  })
+
+  describe('selection', () => {
+    it('should select first one by default and set session', () => {
+      localStorage.removeItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+
+      standardSetup()
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]')
+        .find('mat-select')
+        .should('contain', 'RPM')
+        .then(() => {
+          expect(
+            window.localStorage.getItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+          ).to.equal('1')
+        })
+    })
+
+    it('should select first one by default if the session exists but not available', () => {
+      window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '5')
+
+      standardSetup()
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]')
+        .find('mat-select')
+        .should('contain', 'RPM')
+        .then(() => {
+          expect(
+            window.localStorage.getItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+          ).to.equal('1')
+        })
+    })
+
+    it('should select with available session', () => {
+      window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '2')
+
+      standardSetup()
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]')
+        .find('mat-select')
+        .should('contain', 'CCM')
+        .then(() => {
+          expect(
+            window.localStorage.getItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+          ).to.equal('2')
+        })
+    })
+
+    it('should show no program', () => {
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/care-management/state?**',
+            fixture: 'api/general/emptyDataEmptyPagination'
+          }
+        ]
+      })
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+      cy.get('.ccr-dashboard')
+
+      cy.wait(1000)
+      cy.get('[cy-data="care-management-state"]')
+        .find('mat-select')
+        .should('contain', '')
+    })
+  })
+
+  describe('timeTracking', () => {
+    it('should set select care service type in event', () => {
+      window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '1')
+
+      standardSetup()
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]')
+        .find('mat-select')
+        .should('contain', 'RPM')
+
+      cy.tick(10000)
+
+      cy.get('.ccr-tabs').find('a').eq(1).click()
+
+      cy.wait('@accountActivityPostRequest')
+      cy.wait('@accountActivityPostRequest').should((xhr) => {
+        expect(xhr.response.statusCode).to.equal(201)
+        expect(xhr.request.body.tags.includes('rpm')).to.equal(true)
+      })
+    })
+  })
+
+  describe('Activation modal', () => {
+    it('should show care only service types that allowed in both authenticated user and selected org', () => {
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/care-management/preference/organization?**',
+            fixture:
+              'api/care-management/getPartialActivePreferenceOrganization'
+          }
+        ]
+      })
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="open-status-button"]').click()
+      cy.get('[cy-data="program_setting_button"]').click()
+
+      cy.get('app-dialog-care-mgmt-card').should('have.length', 2)
+      cy.get('app-dialog-care-mgmt-card').eq(0).contains('RPM')
+      cy.get('app-dialog-care-mgmt-card').eq(1).contains('CCM')
+    })
+
+    it.skip('should enable new episode', () => {
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/care-management/state?**',
+            fixture: 'api/general/emptyDataEmptyPagination'
+          }
+        ]
+      })
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="open-status-button"]').click()
+      cy.get('[cy-data="program_setting_button"]').click()
+
+      cy.get('mat-dialog-container')
+        .find('app-dialog-care-mgmt-card')
+        .eq(0)
+        .find('.add-button')
+        .should('exist')
+        .click()
+
+      cy.get('mat-dialog-container')
+        .find('textarea')
+        .should('be.enabled')
+        .eq(0)
+        .type('test primary diagnosis', { force: true })
+        .trigger('blur')
+        .trigger('change')
+
+      cy.get('mat-dialog-container')
+        .find('button')
+        .contains('Next')
+        .click({ force: true })
+
+      cy.get('mat-dialog-container')
+        .find('.mat-checkbox-inner-container')
+        .click({ force: true, multiple: true })
+
+      cy.get('mat-dialog-container')
+        .find('button')
+        .contains('Next')
+        .click({ force: true })
+
+      cy.get('mat-dialog-container')
+        .find('.image-option')
+        .eq(0)
+        .click({ force: true })
+
+      cy.get('button').contains('Enable RPM').click({ force: true })
+    })
+  })
+
+  describe('Billing codes', () => {
+    for (const entry of serviceTypeList) {
+      it(`${entry.serviceType.name}: show correct billable codes`, () => {
+        window.localStorage.setItem(
+          STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
+          entry.serviceType.id
+        )
+
+        standardSetup({
+          apiOverrides: [
+            {
+              url: '/1.0/warehouse/care-management/billing/snapshot**',
+              fixture: `api/warehouse/get${entry.serviceType.name}BillingSnapshot`
+            },
+            {
+              url: '/1.0/care-management/state?**',
+              fixture: `api/care-management/getAllCareStates`
+            }
+          ]
+        })
+
+        cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+        cy.get('.ccr-dashboard')
+        cy.get('[cy-data="care-management-state"]')
+          .find('mat-select')
+          .should('contain', entry.serviceType.name)
+
+        cy.wait('@careManagementStates')
+        cy.tick(1000)
+        cy.wait(1000)
+        cy.get('[cy-data="open-status-button"]').click({ force: true })
+        cy.get('app-rpm-status-panel')
+          .find('.code-container')
+          .as('billingCodeRow')
+
+        for (let i = 0; i < entry.billingCodes.length; i += 1) {
+          cy.get('@billingCodeRow')
+            .eq(i)
+            .find('.code')
+            .should('contain', entry.billingCodes[i])
         }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    cy.intercept('GET', `/2.0/account/${Cypress.env('providerId')}`, {
-      statusCode: 403,
-      body: {}
-    })
-
-    openRPMDialog()
-
-    cy.get('mat-dialog-container').should('contain', 'Inaccessible Coach')
-    cy.wait(5000)
-  })
-
-  it('Allows RPM enabling', function () {
-    standardSetup()
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    cy.wait(1000)
-
-    openRPMDialog()
-    attemptToEnableRpm()
-
-    cy.wait('@rpmStatePostRequest').should((xhr) => {
-      expect(xhr.request.body.account).to.equal('3')
-      expect(xhr.request.body.isActive).to.equal(true)
-      expect(xhr.request.body.organization).to.equal('1')
-      Object.values(xhr.request.body.conditions).forEach((condition) =>
-        expect(condition).to.equal(true)
-      )
-    })
-
-    cy.wait(5000)
-  })
-
-  it('Allows RPM disabling', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    openRPMDialog()
-    attemptToDisableRpm()
-
-    cy.wait('@rpmStatePostRequest').should((xhr) => {
-      expect(xhr.request.body.account).to.equal('3')
-      expect(xhr.request.body.isActive).to.equal(false)
-      expect(xhr.request.body.organization).to.equal('1')
-    })
-
-    cy.wait(5000)
-  })
-
-  it('Requests a note if the selected deactivation reason requires it', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    openRPMDialog()
-    attemptToDisableRpm('Other', 'test note')
-
-    cy.wait('@rpmStatePostRequest').should((xhr) => {
-      expect(xhr.request.body.account).to.equal('3')
-      expect(xhr.request.body.isActive).to.equal(false)
-      expect(xhr.request.body.organization).to.equal('1')
-      expect(xhr.request.body.note).to.equal('test note')
-    })
-
-    cy.wait(5000)
-  })
-
-  it('Properly fetches the RPM report (Excel)', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    cy.wait(3000)
-
-    openRPMReportDialog()
-    attemptToDownloadPatientReport('Excel')
-
-    cy.wait('@rpmIndividualSummaryRequest').should((xhr) => {
-      expect(xhr.request.headers.accept).to.equal(
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      )
-    })
-  })
-
-  it('Properly fetches the RPM report (PDF)', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    cy.wait(3000)
-
-    openRPMReportDialog()
-    attemptToDownloadPatientReport('PDF')
-
-    cy.wait('@rpmIndividualSummaryRequest').should((xhr) => {
-      expect(xhr.request.headers.accept).to.equal('application/pdf')
-    })
-  })
-
-  it('The RPM download button is shown if RPM has never been enabled', function () {
-    standardSetup()
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    cy.get('button').contains('Download Report').should('exist')
-    cy.wait(2000)
-  })
-
-  it(`Shouldn't show the tracker if RPM is not enabled`, function () {
-    standardSetup()
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', {
-      timeout: 30000
-    })
-
-    cy.get('app-rpm-tracker').should('not.exist')
-    cy.wait(2000)
-  })
-
-  it("Should show NO TRACKING if the current code doesn't require monitoring time", function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    cy.get('app-rpm-tracker').should('contain', 'No Tracking').wait(3000)
-  })
-
-  it('Should track time if the current code requires monitoring time', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        },
-        {
-          url: '/3.0/warehouse/rpm/state/billing-summary?**',
-          fixture: 'api/warehouse/getRPMBillingOn99457'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    cy.wait(4000)
-
-    cy.tick(10000)
-
-    cy.get('app-rpm-tracker').should('not.contain', 'No Tracking')
-    cy.get('app-rpm-tracker').should('contain', '00:')
-    cy.get('app-rpm-tracker').should('contain', '99457')
-  })
-
-  it('Attempts to commit the tracked time when the 20-minute span is completed for 99457', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        },
-        {
-          url: '/3.0/warehouse/rpm/state/billing-summary?**',
-          fixture: 'api/warehouse/getRPMBillingOn99458'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    cy.wait(4000)
-
-    cy.tick(10000)
-
-    cy.get('app-rpm-tracker').should('not.contain', 'No Tracking')
-    cy.get('app-rpm-tracker').should('contain', '19:50')
-    cy.get('app-rpm-tracker').should('contain', '99457')
-    cy.get('app-rpm-tracker').should('contain', '99458')
-    cy.get('app-rpm-tracker').find('mat-icon').should('have.length', 3)
-
-    cy.tick(20000)
-
-    cy.wait('@accountActivityPostRequest')
-    cy.wait(2000)
-  })
-
-  it('Shows that the time monitoring is completed when all time has passed', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        },
-        {
-          url: '/3.0/warehouse/rpm/state/billing-summary?**',
-          fixture: 'api/warehouse/getRPMBillingComplete'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    cy.wait(4000)
-
-    cy.tick(10000)
-
-    cy.get('app-rpm-tracker').should('not.contain', 'No Tracking')
-    cy.get('app-rpm-tracker').should('contain', 'Time Monitoring Complete')
-  })
-
-  it('Properly shows the RPM status on the panel', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    cy.tick(10000)
-
-    cy.wait(3000)
-
-    cy.get('app-rpm-tracker').find('button').click({ force: true })
-
-    cy.tick(1000)
-
-    cy.get('app-rpm-status-panel').should('contain', 'Eligible')
-    cy.get('app-rpm-status-panel').should('contain', '189d')
-    cy.get('app-rpm-status-panel').should('contain', '20m')
-    cy.get('app-rpm-status-panel').should('contain', '1')
-  })
-
-  it('Shows the inactivity dialog after 15 minutes of inactivity pass, attempts to save the time and is hidden when there is a gesture', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: 'api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    cy.tick(10000)
-
-    cy.wait(3000)
-
-    cy.tick(900000)
-
-    cy.wait('@accountActivityPostRequest')
-
-    cy.get('mat-dialog-container').should('contain', 'Time Tracking')
-
-    cy.get('.ccr-dashboard').click({ force: true })
-    cy.tick(1000)
-
-    cy.get('mat-dialog-container').should('not.exist')
-  })
-
-  it('Allows a provider to edit the RPM entry during the first 24 hours', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: '/api/rpm/rpmStateEnabledBefore24'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    openRPMDialog()
-    attemptToEditRPM()
-
-    cy.wait('@rpmDiagnosisPutRequest').should((xhr) => {
-      expect(xhr.request.body.id).to.equal('1')
-      expect(xhr.request.body.primary).to.equal('edited primary diagnosis')
-      expect(xhr.request.body.secondary).to.equal('edited secondary diagnosis')
-    })
-  })
-
-  it('Allows the provider to edit the entry ONCE after 24 hours have passed', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: '/api/rpm/rpmStateEnabledEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    openRPMDialog()
-
-    attemptToEditRPM('some explanation')
-
-    cy.wait('@rpmDiagnosisPutRequest').should((xhr) => {
-      expect(xhr.request.body.id).to.equal('1')
-      expect(xhr.request.body.primary).to.equal('edited primary diagnosis')
-      expect(xhr.request.body.secondary).to.equal('edited secondary diagnosis')
-      expect(xhr.request.body.note).to.equal('some explanation')
-    })
-
-    cy.get('mat-dialog-container')
-      .find('button')
-      .contains('Edit Diagnosis')
-      .parent()
-      .should('have.attr', 'disabled')
-  })
-
-  it('Prevents users from editing the RPM entry if more than 24 hours passed and there is already an edition to the field', function () {
-    standardSetup({
-      apiOverrides: [
-        {
-          url: '/1.0/rpm/state**',
-          fixture: '/api/rpm/rpmStateEnabledEntries'
-        },
-        {
-          url: '1.0/rpm/state/1/diagnosis/audit?**',
-          fixture: '/api/rpm/rpmDiagnosisAuditEntries'
-        }
-      ]
-    })
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('.ccr-dashboard', { timeout: 12000 })
-
-    openRPMDialog()
-
-    cy.get('mat-dialog-container')
-      .find('button')
-      .contains('Edit Diagnosis')
-      .parent()
-      .should('have.attr', 'disabled')
+      })
+    }
   })
 })
