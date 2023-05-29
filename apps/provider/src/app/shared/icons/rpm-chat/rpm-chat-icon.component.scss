@@ -7,8 +7,14 @@ svg {
   }
 
   &.completed {
-    path {
-      fill: var(--primary) !important;
+    g {
+      path {
+        fill: var(--primary) !important;
+      }
+
+      polyline {
+        stroke: var(--primary) !important;
+      }
     }
   }
 }

@@ -14,4 +14,16 @@ svg {
       stroke: var(--text) !important;
     }
   }
+
+  &.completed {
+    g {
+      path {
+        fill: var(--primary) !important;
+      }
+
+      polyline {
+        stroke: var(--primary) !important;
+      }
+    }
+  }
 }
