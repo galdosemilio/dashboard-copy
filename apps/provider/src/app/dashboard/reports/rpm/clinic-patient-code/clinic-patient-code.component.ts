@@ -24,6 +24,7 @@ import { ClinicPatientCodeDataSource } from '../../services/clinic-patient-code-
 import { Subject, debounceTime } from 'rxjs'
 import { NotifierService } from '@app/service'
 import { CSV } from '@coachcare/common/shared'
+import { ContextService } from '@coachcare/common/services'
 import { Sort } from '@angular/material/sort'
 
 type SatisfiedCount = number | SatisfiedCount99457 | SatisfiedCount99458
@@ -93,6 +94,7 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
   public source: ClinicPatientCodeDataSource
 
   constructor(
+    private context: ContextService,
     private database: ReportsDatabase,
     private notifier: NotifierService
   ) {}
@@ -109,8 +111,8 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
   private startOfNextMonth = moment()
     .add(1, 'month')
     .startOf('month')
-    .format('YYYY-MM-DD')
-
+    .tz(this.context.user.timezone)
+    .toISOString()
   public async ngOnInit(): Promise<void> {
     this.source = new ClinicPatientCodeDataSource(this.database, this.notifier)
     this.source.addDefault({ status: 'active', limit: 'all', offset: 0 })
