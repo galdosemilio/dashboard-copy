@@ -97,7 +97,7 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
     }))
 
     this.source.addOptional(this.pkgFilter$.pipe(debounceTime(300)), () => ({
-      packages: [this.pkgFilter?.pkg[0]?.id]
+      packages: this.pkgFilter?.pkg?.map((entry) => entry.id)
     }))
 
     this.store

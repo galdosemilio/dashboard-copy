@@ -8,8 +8,8 @@
 <div class="ccr-htools" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
   <ccr-package-filter
     [confirmText]="'BOARD.FILTER' | translate"
+    [filter]="['any']"
     (change)="onPackageFilter($event);"
-    mode="single"
     fxFlex>
   </ccr-package-filter>
 

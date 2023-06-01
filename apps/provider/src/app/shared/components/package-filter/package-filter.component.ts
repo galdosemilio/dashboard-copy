@@ -15,9 +15,11 @@ import { PackageData } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { PackageOrganization } from '@coachcare/sdk'
 
+export type PackageFilterType = 'any' | 'all'
+
 export interface PackageFilter {
   pkg: PackageData[]
-  ['pkg-filter']: 'any' | 'all'
+  ['pkg-filter']: PackageFilterType
 }
 
 @UntilDestroy()
@@ -30,6 +32,7 @@ export interface PackageFilter {
 export class PackageFilterComponent implements OnInit {
   @Input() mode: 'single' | 'multiple' = 'multiple'
   @Input() confirmText = _('MENU.SEARCH')
+  @Input() filter: PackageFilterType[] = ['all', 'any']
 
   @Output()
   change: EventEmitter<PackageFilter> = new EventEmitter<PackageFilter>()
@@ -38,6 +41,14 @@ export class PackageFilterComponent implements OnInit {
   form: FormGroup
   selectedMoreThanOne = false
   packages: PackageData[] = []
+
+  get isAllowedAny() {
+    return this.filter.includes('any')
+  }
+
+  get isAllowedAll() {
+    return this.filter.includes('all')
+  }
 
   constructor(
     private context: ContextService,

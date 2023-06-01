@@ -41,14 +41,14 @@
 
     <div (click)="onCloseMenu();" class="action-button-container" fxLayout="column" fxLayoutAlign="start stretch">
         <button
-        *ngIf="selectedMoreThanOne"
+        *ngIf="selectedMoreThanOne && isAllowedAny"
         [innerHTML]="'BOARD.ANY_PACKAGES' | translate"
         (click)="onClickAny();"
         class="quick-select-button"
         color="primary"
         mat-stroked-button></button>
         <button
-        *ngIf="selectedMoreThanOne"
+        *ngIf="selectedMoreThanOne && isAllowedAll"
         [innerHTML]="'BOARD.ALL_PACKAGES' | translate"
         (click)="onClickAll();"
         class="quick-select-button"
