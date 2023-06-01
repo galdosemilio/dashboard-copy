@@ -14,6 +14,8 @@ export class ClinicPatientCodeDataSource extends TableDataSource<
   FetchCareManagementBillingSnapshotResponse,
   FetchCareManagementBillingSnapshotRequest
 > {
+  timeoutCheckCount: number = 5
+
   constructor(
     protected database: ReportsDatabase,
     protected notify: NotifierService,

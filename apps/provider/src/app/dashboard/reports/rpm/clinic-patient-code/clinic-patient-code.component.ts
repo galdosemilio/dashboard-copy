@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  AfterViewInit
-} from '@angular/core'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import {
   BillingCode,
   CareManagementServiceType,
@@ -17,15 +12,15 @@ import * as moment from 'moment'
 import { flatten, orderBy, uniq, uniqBy } from 'lodash'
 import {
   CareManagementSnapshotBillingItem,
-  CareManagementStateSummaryItem,
   FetchCareManagementBillingSnapshotResponse
 } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 import { ClinicPatientCodeDataSource } from '../../services/clinic-patient-code-report.datasource'
-import { Subject, debounceTime } from 'rxjs'
+import { debounceTime } from 'rxjs'
 import { NotifierService } from '@app/service'
 import { CSV } from '@coachcare/common/shared'
 import { ContextService } from '@coachcare/common/services'
 import { Sort } from '@angular/material/sort'
+import { FormBuilder, FormGroup } from '@angular/forms'
 
 type SatisfiedCount = number | SatisfiedCount99457 | SatisfiedCount99458
 
@@ -86,15 +81,16 @@ type CsvRow = Record<
   templateUrl: './clinic-patient-code.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
+export class ClinicPatientCodeComponent implements OnInit {
+  public form: FormGroup
   public criteria: Partial<FetchCareManagementBillingSnapshotRequest> = {
     organization: environment.coachcareOrgId
   }
-  public rows: CareManagementStateSummaryItem[] = []
   public source: ClinicPatientCodeDataSource
 
   constructor(
     private context: ContextService,
+    private builder: FormBuilder,
     private database: ReportsDatabase,
     private notifier: NotifierService
   ) {}
@@ -106,53 +102,77 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
   public serviceType: string
   public billingCodes: BillingCode[]
   public isLoading: boolean = false
-  private refresh$: Subject<void> = new Subject<void>()
-  private rawData: FetchCareManagementBillingSnapshotResponse['data']
+  public asOfMax = moment().endOf('day')
+  private rows: FetchCareManagementBillingSnapshotResponse['data'] = []
   private startOfNextMonth = moment()
     .add(1, 'month')
     .startOf('month')
     .tz(this.context.user.timezone)
     .toISOString()
-  public async ngOnInit(): Promise<void> {
+
+  public ngOnInit(): void {
+    this.form = this.builder.group({
+      asOf: [moment()],
+      serviceType: [null]
+    })
+
     this.source = new ClinicPatientCodeDataSource(this.database, this.notifier)
     this.source.addDefault({ status: 'active', limit: 'all', offset: 0 })
-    const billingCodesResponse =
-      await this.database.fetchCareManagementBillingCodes({
-        asOf: moment().format('YYYY-MM-DD')
+    this.source.addRequired(
+      this.form.valueChanges.pipe(debounceTime(500)),
+      () => ({
+        asOf: this.form.value.asOf.format('YYYY-MM-DD'),
+        serviceType: this.form.value.serviceType || undefined
+      })
+    )
+    this.form.controls.asOf.valueChanges
+      .pipe(debounceTime(500), untilDestroyed(this))
+      .subscribe(() => {
+        this.startOfNextMonth = this.form.value.asOf
+          .clone()
+          .add(1, 'month')
+          .startOf('month')
+          .tz(this.context.user.timezone)
+          .toISOString()
+
+        void this.refreshDataWithBillingCodesChange()
       })
 
-    this.billingCodes = billingCodesResponse.data
-
-    this.refresh$.pipe(debounceTime(500)).subscribe(() => {
-      this.headings = this.setHeadings(this.serviceType)
-      this.tableData = this.refreshData(this.serviceType)
-    })
-  }
-
-  public ngAfterViewInit(): void {
     this.source
       .connect()
       .pipe(untilDestroyed(this), debounceTime(500))
       .subscribe((data) => {
-        this.rawData = data
+        this.rows = data
         this.headings = this.setHeadings(this.serviceType)
-        this.tableData = this.refreshData(this.serviceType)
+        this.tableData = this.refreshData(this.serviceType, this.rows)
       })
+  }
+
+  private async resolveBillingCodes() {
+    const asOf = this.form.value.asOf ?? moment()
+    const billingCodesResponse =
+      await this.database.fetchCareManagementBillingCodes({
+        asOf: asOf.format('YYYY-MM-DD')
+      })
+
+    this.billingCodes = billingCodesResponse.data
   }
 
   public async onServiceTypeChange(serviceType: string): Promise<void> {
     this.serviceType = serviceType
-    this.refresh$.next()
+    this.form.patchValue({
+      serviceType
+    })
   }
 
   public sortData(sort: Sort) {
     if (!sort.active || sort.direction === '') {
-      this.tableData = this.refreshData(this.serviceType)
+      this.tableData = this.refreshData(this.serviceType, this.rows)
       return
     }
 
     this.tableData = orderBy(
-      this.refreshData(this.serviceType),
+      this.refreshData(this.serviceType, this.rows),
       (item) => {
         switch (sort.active) {
           case 'id':
@@ -167,81 +187,106 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     )
   }
 
-  public downloadCSV(): void {
-    if (!this.rawData.length) {
-      return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+  private async refreshDataWithBillingCodesChange() {
+    try {
+      await this.resolveBillingCodes()
+      this.refreshData(this.serviceType, this.rows)
+    } catch (err) {
+      this.notifier.error(err)
     }
+  }
 
-    const filename = `clinic-patient-code-report-${moment().format(
-      'YYYY-MM-DD'
-    )}.csv`
+  public async downloadCSV(): Promise<void> {
+    try {
+      this.isLoading = true
+      const res = await this.database.fetchCareManagementBillingSnapshot({
+        status: 'active',
+        limit: 'all',
+        offset: 0,
+        asOf: this.form.value.asOf.format('YYYY-MM-DD')
+      })
 
-    let csv = ''
-    let headers =
-      'ID' +
-      this.csvSeparator +
-      'Name' +
-      this.csvSeparator +
-      'Unique Patients' +
-      this.csvSeparator
-
-    for (const serviceType of this.serviceTypes()) {
-      headers += `${serviceType.name} Unique Episodes of Care${this.csvSeparator}`
-      for (const heading of this.setHeadings(serviceType.id)) {
-        headers += `${heading}${this.csvSeparator}`
+      if (!res.data) {
+        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
-    }
 
-    const data: CsvRow = {}
+      const filename = `clinic-patient-code-report-${moment().format(
+        'YYYY-MM-DD'
+      )}.csv`
 
-    for (const serviceType of this.serviceTypes()) {
-      for (const row of this.refreshData(serviceType.id, false)) {
-        data[row.organization.id] = {
-          organization: row.organization,
-          patientsUniqueCount: row.patientsUniqueCount,
-          codes: {
-            ...data[row.organization.id]?.codes,
-            [serviceType.id]: {
-              uniqueRPMEpisodesOfCare: row.uniqueRPMEpisodesOfCare,
-              codes: row.codes
+      let csv = ''
+      let headers =
+        'ID' +
+        this.csvSeparator +
+        'Name' +
+        this.csvSeparator +
+        'Unique Patients' +
+        this.csvSeparator
+
+      for (const serviceType of this.serviceTypes()) {
+        headers += `${serviceType.name} Unique Episodes of Care${this.csvSeparator}`
+        for (const heading of this.setHeadings(serviceType.id)) {
+          headers += `${heading}${this.csvSeparator}`
+        }
+      }
+
+      const data: CsvRow = {}
+
+      for (const serviceType of this.serviceTypes()) {
+        for (const row of this.refreshData(serviceType.id, res.data, false)) {
+          data[row.organization.id] = {
+            organization: row.organization,
+            patientsUniqueCount: row.patientsUniqueCount,
+            codes: {
+              ...data[row.organization.id]?.codes,
+              [serviceType.id]: {
+                uniqueRPMEpisodesOfCare: row.uniqueRPMEpisodesOfCare,
+                codes: row.codes
+              }
             }
           }
         }
       }
-    }
 
-    csv += headers + '\n'
+      csv += headers + '\n'
 
-    for (const row of orderBy(
-      Object.values(data),
-      (item) => item.patientsUniqueCount,
-      ['desc']
-    )) {
-      csv += `${row.organization.id}${this.csvSeparator}`
-      csv += `${row.organization.name.replace(',', '')}${this.csvSeparator}`
-      csv += `${row.patientsUniqueCount}${this.csvSeparator}`
-      for (const serviceType of this.serviceTypes()) {
-        const uniqueRPMEpisodesOfCare =
-          row.codes[serviceType.id]?.uniqueRPMEpisodesOfCare
-        csv += `${uniqueRPMEpisodesOfCare}${this.csvSeparator}`
-        for (const code of row.codes[serviceType.id].codes) {
-          csv += `${uniqueRPMEpisodesOfCare - code.satisfiedCount}${
-            this.csvSeparator
-          }`
+      for (const row of orderBy(
+        Object.values(data),
+        (item) => item.patientsUniqueCount,
+        ['desc']
+      )) {
+        csv += `${row.organization.id}${this.csvSeparator}`
+        csv += `${row.organization.name.replace(',', '')}${this.csvSeparator}`
+        csv += `${row.patientsUniqueCount}${this.csvSeparator}`
+        for (const serviceType of this.serviceTypes()) {
+          const uniqueRPMEpisodesOfCare =
+            row.codes[serviceType.id]?.uniqueRPMEpisodesOfCare
+          csv += `${uniqueRPMEpisodesOfCare}${this.csvSeparator}`
+          for (const code of row.codes[serviceType.id].codes) {
+            csv += `${uniqueRPMEpisodesOfCare - code.satisfiedCount}${
+              this.csvSeparator
+            }`
+          }
         }
+        csv += '\n'
       }
-      csv += '\n'
-    }
 
-    CSV.toFile({ content: csv, filename })
+      CSV.toFile({ content: csv, filename })
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isLoading = false
+    }
   }
 
   private refreshData(
     serviceType: string,
+    data: FetchCareManagementBillingSnapshotResponse['data'],
     filterZero: boolean = true
   ): ClinicPatientCodeEntry[] {
-    const reportData = this.compileUniqueClinics(serviceType)
-    const patientCodes = this.flattenPatientCodes()
+    this.setHeadings(serviceType)
+    const reportData = this.compileUniqueClinics(serviceType, data)
+    const patientCodes = this.flattenPatientCodes(data)
     this.setEligibilityPerPatientCode(patientCodes, reportData)
 
     if (filterZero) {
@@ -287,9 +332,12 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     )
   }
 
-  private compileUniqueClinics(serviceType: string): ClinicPatientCodeReport[] {
+  private compileUniqueClinics(
+    serviceType: string,
+    data: FetchCareManagementBillingSnapshotResponse['data']
+  ): ClinicPatientCodeReport[] {
     return uniqBy(
-      this.rawData.map((e) => e.organization),
+      data.map((e) => e.organization),
       'id'
     ).map((org) => {
       return {
@@ -300,12 +348,12 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
         },
         //  with unique patient count
         patientsUniqueCount: uniq(
-          this.rawData
+          data
             .filter((e) => e.organization.hierarchyPath.includes(org.id))
             .map((e) => e.account.id)
         ).length,
         // @TODO should we remove possible unique patients or episodes of care that can't be satisfied this month?  Perhaps make a separate count for them?
-        uniqueRPMEpisodesOfCare: this.rawData.filter(
+        uniqueRPMEpisodesOfCare: data.filter(
           (e) =>
             e.organization.hierarchyPath.includes(org.id) &&
             e.state.serviceType.id === serviceType
@@ -350,9 +398,11 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     })
   }
 
-  private flattenPatientCodes(): PatientCodeRecord[] {
+  private flattenPatientCodes(
+    data: FetchCareManagementBillingSnapshotResponse['data']
+  ): PatientCodeRecord[] {
     return flatten(
-      this.rawData.map((e) => {
+      data.map((e) => {
         const flattenedCodes = e.billing.map((billingReport) => {
           return {
             orgHierarchy: e.organization.hierarchyPath,
@@ -508,6 +558,10 @@ export class ClinicPatientCodeComponent implements OnInit, AfterViewInit {
     const billingCode = this.billingCodes.find(
       (e) => e.value === billingEntry.code
     )
+
+    if (!billingCode) {
+      return 0
+    }
 
     if (
       billingEntry.eligibility?.next?.earliestEligibleAt === undefined ||

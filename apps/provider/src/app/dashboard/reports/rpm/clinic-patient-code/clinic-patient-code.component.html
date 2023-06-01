@@ -1,9 +1,16 @@
 <div fxLayout="row" fxLayoutAlign="space-between start">
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <mat-icon class="title-icon" [style.margin]="'8px 8px 0 0'" >receipt</mat-icon>
-    <div>
+  <div fxLayout="row" fxLayoutAlign="start center" [formGroup]="form">
+    <mat-icon class="title-icon" [style.margin]="'-10px 8px 0 0'" >receipt</mat-icon>
+    <div [style.margin]="'6px 8px 0 0'">
       <app-service-type-selector (serviceTypeChange)="onServiceTypeChange($event)"></app-service-type-selector>
     </div>
+    <ccr-date-input
+      formControlName="asOf"
+      placeholder=""
+      [required]="false"
+      [max]="asOfMax"
+    >
+    </ccr-date-input>
   </div>
   <button
     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
