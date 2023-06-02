@@ -24,10 +24,11 @@ export type RPMMetricType =
   | 'liveInteraction'
   | 'relatedCodeRequirementsNotMet'
 
-interface RPMStateSummaryBilling extends RPMStateSummaryBillingItem {
+export interface RPMStateSummaryBilling extends RPMStateSummaryBillingItem {
   hasClaims: boolean
   hasCodeRequirements: boolean
   remainingDays: number
+  trackableCode: TrackableBillableCode
 }
 
 export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
@@ -63,6 +64,8 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
       }
 
       const trackableCode = trackableCodes[billing.code]
+
+      billing.trackableCode = trackableCode
 
       if (trackableCode?.deps?.length) {
         set(billing, 'eligibility.next.deps', trackableCode.deps)

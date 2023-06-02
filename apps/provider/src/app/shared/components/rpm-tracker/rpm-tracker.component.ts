@@ -10,6 +10,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core'
+import * as moment from 'moment'
 import { ReportsDatabase } from '@app/dashboard/reports/services/reports.database'
 import {
   CareManagementService,
@@ -19,24 +20,18 @@ import {
   TimeTrackerService
 } from '@app/service'
 import { AccountAccessData, CareManagementState } from '@coachcare/sdk'
-import { get } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { TrackableBillableCode } from './model'
 import { debounceTime, filter } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog'
 import { GestureClosingDialog } from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
 import { Subject, merge } from 'rxjs'
 import { RPMStateEntry } from '../rpm/models'
+import { CareManagementStateSummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 import {
-  CareManagementStateSummaryItem,
-  CareManagementSnapshotBillingItem
-} from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
-
-interface CodeAndTracking {
-  trackableCode: TrackableBillableCode
-  billingItem: CareManagementSnapshotBillingItem
-}
+  RPMStateSummaryBilling,
+  RPMStateSummaryEntry
+} from '@app/dashboard/reports/rpm/models'
 
 type TimerUnavailableError = 'no-tracking' | 'active-tomorrow' | 'active-6am'
 
@@ -75,7 +70,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   private _serviceType: string
   private serviceType$ = new Subject<string>()
   public account: AccountAccessData
-  public currentCodeAndTracking: CodeAndTracking
+  public currentBillingItem: RPMStateSummaryBilling
   public currentCodeString: string
   public currentIteration = 1
   public iterationAmountArray: string[] = []
@@ -90,16 +85,16 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     this._iterationAmount = amount > 0 ? amount : 0
     this._iterationAmount = Math.min(
       this._iterationAmount,
-      this.currentCodeAndTracking.trackableCode.maxEligibleAmount
+      this.currentBillingItem.trackableCode.maxEligibleAmount
     )
     this.iterationAmountArray = new Array(
       Math.min(
         this._iterationAmount + 1,
-        this.currentCodeAndTracking.trackableCode.maxEligibleAmount
+        this.currentBillingItem.trackableCode.maxEligibleAmount
       )
     ).fill('')
     this.currentIteration = Math.min(
-      this.currentCodeAndTracking.trackableCode.maxEligibleAmount,
+      this.currentBillingItem.trackableCode.maxEligibleAmount,
       this._iterationAmount + 1
     )
   }
@@ -202,7 +197,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
       this.iterationAmount = Math.min(
         this.iterationAmount + 1,
-        this.currentCodeAndTracking.trackableCode.maxEligibleAmount
+        this.currentBillingItem.trackableCode.maxEligibleAmount
       )
 
       this.pauseTimer()
@@ -271,51 +266,35 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
   private resolveCurrentRPMBillingCode(
     stateSummaryItem: CareManagementStateSummaryItem
-  ): CodeAndTracking {
-    const trackableCodes: TrackableBillableCode[] = Object.values(
-      this.careManagementService.trackableCptCodes[this.serviceType]
-    )
-    const trackableCode = trackableCodes.find((trackCode) => {
-      const trackCodeOverride = trackCode.displayedCode || trackCode.code
-
-      const foundCodeInEntry = stateSummaryItem.billing.find(
-        (billingEntry) => billingEntry.code === trackCodeOverride
-      )
-
-      const requiredSeconds = get(
-        foundCodeInEntry,
-        'eligibility.next.monitoring.total.seconds.required'
-      )
-      const trackedSeconds = get(
-        foundCodeInEntry,
-        'eligibility.next.monitoring.total.seconds.tracked'
-      )
-
-      if (
-        !foundCodeInEntry?.eligibility.next ||
-        (requiredSeconds && trackedSeconds && trackedSeconds >= requiredSeconds)
-      ) {
-        return false
-      }
-
-      return true
-    })
-
-    const trackCodeOverride =
-      trackableCode?.displayedCode || trackableCode?.code
-    const billingItem = stateSummaryItem.billing.find(
-      (billingEntry) => billingEntry.code === trackCodeOverride
+  ): RPMStateSummaryBilling {
+    const allBillings = this.careManagementService.billingCodes
+      .filter((billingCode) => billingCode.serviceType.id === this.serviceType)
+      .map((billingCode) => ({
+        code: billingCode.value,
+        eligibility: {}
+      }))
+    const rpmStateSummary = new RPMStateSummaryEntry(
+      stateSummaryItem,
+      allBillings,
+      this.careManagementService.trackableCptCodes[this.serviceType],
+      moment().toISOString()
     )
 
-    if (billingItem) {
-      return { billingItem, trackableCode }
-    }
+    return (
+      rpmStateSummary.billing.find((billingEntry) => {
+        const requiredSeconds =
+          billingEntry.eligibility.next?.monitoring?.total?.seconds?.required
+        const trackedSeconds =
+          billingEntry.eligibility.next?.monitoring?.total?.seconds?.tracked
 
-    return {
-      billingItem:
-        stateSummaryItem.billing[stateSummaryItem.billing.length - 1],
-      trackableCode: trackableCodes[1]
-    }
+        return (
+          billingEntry?.eligibility.next &&
+          (!requiredSeconds ||
+            !trackedSeconds ||
+            trackedSeconds < requiredSeconds)
+        )
+      }) || rpmStateSummary.billing[rpmStateSummary.billing.length - 1]
+    )
   }
 
   private async resolveRPMBillingStatus(
@@ -340,21 +319,16 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       }
 
       const rpmBillingReportEntry = response.data.shift()
-      this.currentCodeAndTracking = this.resolveCurrentRPMBillingCode(
+      this.currentBillingItem = this.resolveCurrentRPMBillingCode(
         rpmBillingReportEntry
       )
       this.requiredIterationSeconds =
-        get(
-          this.currentCodeAndTracking,
-          'billingItem.eligibility.next.monitoring.total.seconds.required'
-        ) || 1200
+        this.currentBillingItem?.eligibility?.next?.monitoring?.total?.seconds
+          ?.required || 120
+      this.currentCodeString = this.currentBillingItem.code
 
-      this.currentCodeString =
-        this.currentCodeAndTracking.trackableCode.displayedCode ||
-        this.currentCodeAndTracking.trackableCode.code
-
-      if (this.currentCodeAndTracking.trackableCode.requiresTimeTracking) {
-        this.resolveTimerStartTime(this.currentCodeAndTracking)
+      if (this.currentBillingItem.trackableCode.requiresTimeTracking) {
+        this.resolveTimerStartTime()
 
         this.showTimer = true
         this.cdr.detectChanges()
@@ -370,41 +344,32 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     }
   }
 
-  private resolveTimerStartTime(codeAndTracking: CodeAndTracking): void {
-    if (!codeAndTracking?.trackableCode) {
+  private resolveTimerStartTime(): void {
+    if (!this.currentBillingItem?.trackableCode) {
       this.iterationAmount = 0
       this.seconds = 0
 
       return
     }
 
-    if (codeAndTracking.trackableCode.maxEligibleAmount >= 2) {
-      this.iterationAmount = get(
-        codeAndTracking,
-        'billingItem.eligibility.next.alreadyEligibleCount',
-        codeAndTracking.trackableCode.maxEligibleAmount
-      )
-      this.seconds = get(
-        codeAndTracking,
-        'billingItem.eligibility.next.monitoring.total.seconds.tracked',
-        get(
-          codeAndTracking,
-          'billingItem.eligibility.next.monitoring.total.seconds.elapsed',
-          1200
-        )
-      )
-
+    if (this.currentBillingItem.trackableCode.maxEligibleAmount >= 2) {
+      this.iterationAmount =
+        this.currentBillingItem.eligibility.next?.alreadyEligibleCount ||
+        this.currentBillingItem.trackableCode.maxEligibleAmount
+      this.seconds =
+        this.currentBillingItem.eligibility.next?.monitoring?.total?.seconds
+          ?.tracked ||
+        this.currentBillingItem.eligibility.next?.monitoring?.total?.seconds
+          ?.elapsed ||
+        120
       this.seconds = Math.min(this.seconds, this.requiredIterationSeconds)
 
       return
     }
 
     this.iterationAmount = 0
-    this.seconds = get(
-      codeAndTracking,
-      'billingItem.eligibility.next.monitoring.total.seconds.tracked'
-    )
-
+    this.seconds =
+      this.currentBillingItem.eligibility.next?.monitoring?.total?.seconds?.tracked
     if (this.seconds >= this.requiredIterationSeconds) {
       ++this.iterationAmount
     }
