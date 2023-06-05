@@ -86,6 +86,7 @@ export const DefaultTestSectionConfig: SectionConfigDetails = {
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: false,
     SHOW_NEW_APPOINTMENT: false,
+    SHOW_EXERCISE_MODERATE_TOTAL: false,
     ALLOWED_CHART_DATA_POINT_TYPES: null,
     SUMMARY_BOXES: {
       component: DefaultDieterSummaryBoxesComponent
@@ -180,6 +181,7 @@ export const DefaultProdSectionConfig: SectionConfigDetails = {
   PATIENT_DASHBOARD: {
     SHOW_MY_SCHEDULE: false,
     SHOW_NEW_APPOINTMENT: false,
+    SHOW_EXERCISE_MODERATE_TOTAL: false,
     ALLOWED_CHART_DATA_POINT_TYPES: null,
     SUMMARY_BOXES: {
       component: DefaultDieterSummaryBoxesComponent
