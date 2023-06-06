@@ -280,8 +280,12 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       moment().toISOString()
     )
 
+    const trackableBillings = rpmStateSummary.billing.filter(
+      (entry) => entry.trackableCode
+    )
+
     return (
-      rpmStateSummary.billing.find((billingEntry) => {
+      trackableBillings.find((billingEntry) => {
         const requiredSeconds =
           billingEntry.eligibility.next?.monitoring?.total?.seconds?.required
         const trackedSeconds =
@@ -293,7 +297,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
             !trackedSeconds ||
             trackedSeconds < requiredSeconds)
         )
-      }) || rpmStateSummary.billing[rpmStateSummary.billing.length - 1]
+      }) || trackableBillings[trackableBillings.length - 1]
     )
   }
 
