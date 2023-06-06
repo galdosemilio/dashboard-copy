@@ -1,3 +1,11 @@
+## [1.118.1](https://github.com/coachcare/dashboard/compare/v1.118.0...v1.118.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* add date selector to clinic patient code report [FRON-3154] ([6f9e8b8](https://github.com/coachcare/dashboard/commit/6f9e8b8732d76480ee6df997a44f906fea4d84cc))
+* fix get trackable billing in tracker [FRON-3167] ([bbf18c7](https://github.com/coachcare/dashboard/commit/bbf18c7fec4d7edb5cf0626dab1e1b5761c936c8))
+
 # [1.118.0](https://github.com/coachcare/dashboard/compare/v1.117.0...v1.118.0) (2023-06-06)
 
 
