@@ -1,3 +1,21 @@
+# [1.118.0](https://github.com/coachcare/dashboard/compare/v1.117.0...v1.118.0) (2023-06-06)
+
+
+### Bug Fixes
+
+* allow multiple selection phases on sharp [FRON-3148] ([425059c](https://github.com/coachcare/dashboard/commit/425059c4c75172bc7fce8c6604b323dd05587a2e))
+* respect time offset for report ([d249eaa](https://github.com/coachcare/dashboard/commit/d249eaa26a6bc018837ef849b92bad5f0d33ef67))
+* set default option for show moderate total [FRON-3056] ([c9ab902](https://github.com/coachcare/dashboard/commit/c9ab9025060815d323be38d3450a6c6bf6a8db4f))
+* show correct tracking billing code on patient profile [FRON-3158] ([65360a3](https://github.com/coachcare/dashboard/commit/65360a3e378dede01950d7ec598bcad268950a3f))
+* update completed icons color to primary [FRON-3149] ([914ca37](https://github.com/coachcare/dashboard/commit/914ca373f776fb985828cf1b5d73b5941161b8d3))
+
+
+### Features
+
+* add export csv and sorting to clinic patient code report ([8e15cc0](https://github.com/coachcare/dashboard/commit/8e15cc0297610b5f79f18581ce8ebde442d996cf))
+* adding cellular device management for ([95af9b8](https://github.com/coachcare/dashboard/commit/95af9b8becdb4dd69176d2a131b6e5d063a39b3a))
+* show total moderate exercise time [FRON-3056] ([661c771](https://github.com/coachcare/dashboard/commit/661c7716614f2fcdded141b32fa6304f5176c306))
+
 # [1.117.0](https://github.com/coachcare/dashboard/compare/v1.116.1...v1.117.0) (2023-05-26)
 
 
