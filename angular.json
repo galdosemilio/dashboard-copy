@@ -201,7 +201,7 @@
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/admin-e2e/cypress.json",
+            "cypressConfig": "apps/admin-e2e/cypress.config.js",
             "tsConfig": "apps/admin-e2e/tsconfig.e2e.json",
             "devServerTarget": "admin:serve"
           },
@@ -486,7 +486,7 @@
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/measurement-charts-e2e/cypress.json",
+            "cypressConfig": "apps/measurement-charts-e2e/cypress.config.js",
             "tsConfig": "apps/measurement-charts-e2e/tsconfig.e2e.json",
             "devServerTarget": "measurement-charts:serve"
           },
@@ -755,7 +755,7 @@
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/provider-e2e/cypress.json",
+            "cypressConfig": "apps/provider-e2e/cypress.config.js",
             "tsConfig": "apps/provider-e2e/tsconfig.e2e.json",
             "devServerTarget": "provider:serve"
           },
