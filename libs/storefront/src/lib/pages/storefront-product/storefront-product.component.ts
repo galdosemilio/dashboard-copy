@@ -19,6 +19,9 @@ import { select, Store } from '@ngrx/store'
 import { Subject } from 'rxjs'
 import { debounceTime, filter } from 'rxjs/operators'
 
+const DEFAULT_HERO_IMAGE =
+  'https://cdn.coachcare.com/corporate/Other/ecommerce-general-background.jpg'
+
 @UntilDestroy()
 @Component({
   selector: 'app-storefront-product',
@@ -28,17 +31,21 @@ import { debounceTime, filter } from 'rxjs/operators'
 export class StorefrontProductComponent implements OnInit {
   public search: string = ''
   public search$ = new Subject<string>()
+  public selectedCategory$ = new Subject<StorefrontCategory>()
   public categories: StorefrontCategory[] = []
   public products: StorefrontProduct[] = []
   public selectedCategory: StorefrontCategory
   public isLoading: boolean = false
   public primaryColor: string
   public currentStore: CurrentSpreeStore
+  public defaultHeroImage: string
 
-  public get heroImageUrl(): string | undefined {
+  public get heroImageUrl(): string {
     if (this.currentStore.hero_image) {
       return `url('${this.currentStore.hero_image}')`
     }
+
+    return `url('${DEFAULT_HERO_IMAGE}')`
   }
 
   public get displayCategories(): boolean {
@@ -78,14 +85,19 @@ export class StorefrontProductComponent implements OnInit {
         filter((s) => !!s)
       )
       .subscribe((s) => {
+        this.defaultHeroImage = s.hero_image
+          ? `${this.storefront.storeUrl + s.hero_image}`
+          : DEFAULT_HERO_IMAGE
         this.currentStore = {
           title: s.name,
           description: s.description,
-          hero_image: s.hero_image
-            ? `${this.storefront.storeUrl + s.hero_image}`
-            : 'https://cdn.coachcare.com/corporate/Other/ecommerce-general-background.jpg'
+          hero_image: this.defaultHeroImage
         }
       })
+
+    this.selectedCategory$.pipe(untilDestroyed(this)).subscribe((c) => {
+      this.currentStore.hero_image = c?.images?.[0] ?? this.defaultHeroImage
+    })
   }
 
   ngOnInit(): void {
@@ -101,6 +113,7 @@ export class StorefrontProductComponent implements OnInit {
           this.products = []
           this.searchInput.nativeElement.value = ''
           this.search = ''
+          this.selectedCategory$.next(null)
           this.selectedCategory = null
         }
       })
@@ -115,6 +128,7 @@ export class StorefrontProductComponent implements OnInit {
       if (this.categories.length > 1) {
         return
       } else if (this.categories.length === 1) {
+        this.selectedCategory$.next(this.categories[0])
         this.selectedCategory = this.categories[0]
       }
       void this.getProducts()
@@ -145,6 +159,7 @@ export class StorefrontProductComponent implements OnInit {
 
   public onSelectCategory(category: StorefrontCategory) {
     this.searchInput.nativeElement.value = ''
+    this.selectedCategory$.next(category)
     this.selectedCategory = category
     void this.getProducts()
   }
@@ -200,6 +215,7 @@ export class StorefrontProductComponent implements OnInit {
   public onClearSelectedCategory() {
     this.search = ''
     this.searchInput.nativeElement.value = ''
+    this.selectedCategory$.next(null)
     this.selectedCategory = null
     this.products = []
     void this.getCategories()
