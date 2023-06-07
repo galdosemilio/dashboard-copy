@@ -1,3 +1,11 @@
+## [1.118.2](https://github.com/coachcare/dashboard/compare/v1.118.1...v1.118.2) (2023-06-07)
+
+
+### Bug Fixes
+
+* delete recurring meeting [FRON-2860] ([7602d6e](https://github.com/coachcare/dashboard/commit/7602d6eaf569ee51246bcbf2fb5265e930c6d630))
+* remove hard coded service types [FRON-3124] ([6185b1c](https://github.com/coachcare/dashboard/commit/6185b1c52a0581ec27c05919e3292869753c17d8))
+
 ## [1.118.1](https://github.com/coachcare/dashboard/compare/v1.118.0...v1.118.1) (2023-06-06)
 
 
