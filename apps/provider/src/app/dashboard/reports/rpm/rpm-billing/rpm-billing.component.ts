@@ -27,9 +27,7 @@ import {
   RPM,
   ExternalIdentifier,
   FetchCareManagementBillingSnapshotRequest,
-  CareManagementServiceType,
-  RPMStateSummaryBillingItem
-  // CareManagementServiceType
+  CareManagementServiceType
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
@@ -44,7 +42,11 @@ import {
   RPMBillingDataSource
 } from '../../services'
 import { criteriaSelector, ReportsState } from '../../store'
-import { RPM_SINGLE_TIME_CODES, RPMStateSummaryEntry } from '../models'
+import {
+  RPM_SINGLE_TIME_CODES,
+  RPMStateSummaryBilling,
+  RPMStateSummaryEntry
+} from '../models'
 import {
   STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
   STORAGE_PAGE_SIZE_RPM_BILLING,
@@ -133,6 +135,20 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   private selectedClinic$ = new Subject<OrganizationEntity | null>()
   private selectedSupervisingProvider$ =
     new Subject<SelectOption<number> | null>()
+
+  get cptCodes() {
+    return chain(this.careManagementService.billingCodes)
+      .filter((entry) => entry.serviceType.id === this.selectedServiceTypeId)
+      .flatMap((entry) => {
+        const iterations = entry.requirements?.maxIterations ?? 1
+        return new Array(iterations)
+          .fill(entry.value)
+          .map((code, index) =>
+            iterations > 1 ? `${code} (${index + 1})` : code
+          )
+      })
+      .valueOf()
+  }
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -422,14 +438,14 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         } else {
           values += ',,'
         }
-
-        if (
-          index + 1 !== externalIdentifierNames.length &&
-          eIndex + 1 !== entries.length
-        ) {
+        if (index + 1 !== count) {
           values += this.csvSeparator
         }
       })
+
+      if (eIndex + 1 !== entries.length) {
+        values += this.csvSeparator
+      }
     })
 
     return values
@@ -490,14 +506,21 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       }`
 
       firstRow += ',,,,,,,,,,,'
-      res[0].billing.forEach((billingCode) => {
-        firstRow += `"${billingCode.code}"${this.csvSeparator}"${billingCode.code}"${this.csvSeparator}`
-      })
 
       let secondRow = ''
       if (this.timezoneName) {
-        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,,,,,,`
+        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,`
       }
+
+      this.cptCodes.forEach((billingCode, index) => {
+        firstRow += `"${billingCode}"${this.csvSeparator}"${billingCode}"${
+          index === this.cptCodes.length - 1 ? '' : this.csvSeparator
+        }`
+
+        if (secondRow) {
+          secondRow += this.csvSeparator + this.csvSeparator
+        }
+      })
 
       let headers =
         'ID' +
@@ -526,10 +549,12 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.csvSeparator
 
       // We iterate through each billing entry code to set up the headers
-      res[0].billing.forEach(() => {
+      this.cptCodes.forEach((code, index) => {
         headers += `"Latest Claim Date"` + this.csvSeparator
         headers += `"Next Claim Requirements"`
-        headers += this.csvSeparator
+        if (index !== this.cptCodes.length - 1) {
+          headers += this.csvSeparator
+        }
       })
 
       const headerData = this.addExternalIdentifierHeaders(
@@ -585,12 +610,19 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           }"` +
           this.csvSeparator
 
-        // We avoid letting the generic logic render the 99458's data since
-        // that code is now a special case and is handled manually.
-        entry.billing.forEach((billingEntry) => {
-          dataRows += this.getRPMBillingEntryContent(billingEntry, entry)
+        this.cptCodes.forEach((code, index) => {
+          const billingEntry = entry.billing.find(
+            (billing) => billing.code === code
+          )
+          if (billingEntry) {
+            dataRows += this.getRPMBillingEntryContent(billingEntry, entry)
+          } else {
+            dataRows += 'N/A' + this.csvSeparator + 'N/A'
+          }
 
-          dataRows += this.csvSeparator
+          if (index !== this.cptCodes.length - 1) {
+            dataRows += this.csvSeparator
+          }
         })
 
         dataRows += this.addExternalIdentifierValues(
@@ -691,22 +723,21 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         this.csvSeparator
       }`
       firstRow += ',,,,,,,,,,,'
-      const codes = this.careManagementService.billingCodes.filter(
-        (billingCode) => {
-          return billingCode.serviceType.id === this.selectedServiceType.id
-        }
-      )
-      codes.forEach((billingCode) => {
-        firstRow += `"${billingCode.value}"${this.csvSeparator}`
-        if (billingCode.type === 'addon') {
-          firstRow += `"${billingCode.value} (2)"${this.csvSeparator}`
-        }
-      })
 
       let secondRow = ''
       if (this.timezoneName) {
-        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,,,,,,,`
+        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,`
       }
+
+      this.cptCodes.forEach((code, index) => {
+        firstRow += `"${code}"${
+          index === this.cptCodes.length - 1 ? '' : this.csvSeparator
+        }`
+
+        if (secondRow) {
+          secondRow += this.csvSeparator
+        }
+      })
 
       let headers =
         'ID' +
@@ -734,12 +765,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         'Activation Date' +
         this.csvSeparator
 
-      codes.forEach((billingCode) => {
-        headers += `"Claim Date"${this.csvSeparator}`
-
-        if (billingCode.type === 'addon') {
-          headers += `"Claim Date"${this.csvSeparator}`
-        }
+      this.cptCodes.forEach((billingCode, index) => {
+        headers += `"Claim Date"${
+          index === this.cptCodes.length - 1 ? '' : this.csvSeparator
+        }`
       })
 
       const headerData = this.addExternalIdentifierHeaders(
@@ -791,27 +820,20 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
             entry.state?.billable?.isActive
               ? moment(entry.state.billable.startedAt).format('MM/DD/YYYY')
               : 'No'
-          }"`
+          }"` +
+          this.csvSeparator
 
-        codes.forEach((billingCode) => {
-          dataRows += this.csvSeparator
-          if (eligibilityGroup[billingCode.value]?.length) {
+        this.cptCodes.forEach((billingCode, index) => {
+          if (eligibilityGroup[billingCode]?.length) {
             dataRows += `"${moment(
-              eligibilityGroup[billingCode.value][0].eligibleAt
+              eligibilityGroup[billingCode][0].eligibleAt
             ).format('MM/DD/YYYY')}"`
           } else {
             dataRows += `"N/A"`
           }
 
-          if (billingCode.type === 'addon') {
+          if (index !== this.cptCodes.length - 1) {
             dataRows += this.csvSeparator
-            if (eligibilityGroup[billingCode.value]?.length) {
-              dataRows += `"${moment(
-                eligibilityGroup[billingCode.value][1].eligibleAt
-              ).format('MM/DD/YYYY')}"`
-            } else {
-              dataRows += `"N/A"`
-            }
           }
         })
 
@@ -1319,14 +1341,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       })
   }
 
-  public isMetDepsRequirement(
-    entry: RPMStateSummaryBillingItem['eligibility'],
-    code: string
-  ) {
-    if (!entry.next?.relatedCodeRequirementsNotMet) {
-      return
-    }
-
-    return !entry.next.relatedCodeRequirementsNotMet.includes(code)
+  public findBilling(
+    billings: RPMStateSummaryBilling[],
+    code
+  ): RPMStateSummaryBilling {
+    return billings.find((billing) => billing.code === code)
   }
 }

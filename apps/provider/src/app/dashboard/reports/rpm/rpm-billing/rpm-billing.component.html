@@ -212,9 +212,9 @@
             </div>
         </th>
 
-        <th #columns *ngFor="let billingEntry of source.result?.[0]?.billing; let billingIndex = index" class="code-cell">
+        <th #columns *ngFor="let cptCode of cptCodes" class="code-cell">
             <div style="height: 100%" fxLayout="column" fxLayoutAlign="stretch stretch">
-                <p class="code-title">{{ billingEntry.code }}</p>
+                <p class="code-title">{{ cptCode }}</p>
                 <div fxFlex fxLayout="row" fxLayoutAlign="stretch center">
                     <p class="code-subtitle" fxFlex>{{ 'RPM.LATEST_ELIGIBLE_CLAIM' | translate }}</p>
                     <p class="code-subtitle" fxFlex>{{ 'RPM.NEXT_CLAIM' | translate }}</p>
@@ -287,16 +287,16 @@
                 {{ row.state.isActive ? (row.state.startedAt | amDateFormat:'MM/DD/YYYY' ) : '' }}
             </td>
 
-            <td *ngFor="let billingEntry of source.result?.[0]?.billing; let billingIndex = index" class="code-cell">
+            <td *ngFor="let cptCode of cptCodes; let billingIndex = index" class="code-cell">
                 <div fxLayout="row" fxLayoutAlign="stretch center">
                     <div class="claim-date-subcell" fxFlex fxLayout="row" fxLayoutAlign="center center" data-cy="cpt-code-claim-date">
                         <span *ngIf="row.state.plan; else empty" class="highlighted-cell">
-                            {{ row.billing[billingIndex]?.eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
+                            {{ findBilling(row.billing, cptCode)?.eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
                         </span>
                         <span *ngIf="!row.state.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
                     </div>
                     <div *ngIf="row.state.isActive; else emptyDiv" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" data-cy="cpt-code-next-claim-requirements">
-                        <ng-container *ngFor="let codeRequirement of row.billing[billingIndex]?.eligibility.next?.relatedCodeRequirementsNotMet">
+                        <ng-container *ngFor="let codeRequirement of findBilling(row.billing, cptCode)?.eligibility.next?.relatedCodeRequirementsNotMet">
                             <ccr-rpm-dependency-icon
                             [matTooltip]="'RPM.DEPENDENCY_ICON_DESCRIPTION' | translate:{code: codeRequirement}"
                             [size]="40"
@@ -307,31 +307,31 @@
                         <span *ngIf="!row.state.plan && billingIndex < 2" class="no-next-claim">{{ 'GLOBAL.NA' | translate }}</span>
 
                         <ccr-rpm-calendar-icon
-                        *ngIf="row.billing[billingIndex]?.remainingDays"
-                        [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex]?.remainingDays}"
+                        *ngIf="findBilling(row.billing, cptCode)?.remainingDays"
+                        [matTooltip]="'RPM.CALENDAR_ICON_DESCRIPTION' | translate:{amount: findBilling(row.billing, cptCode)?.remainingDays}"
                         [size]="40"
-                        text="{{ row.billing[billingIndex].remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
+                        text="{{ findBilling(row.billing, cptCode).remainingDays }}{{ 'UNIT.DAY_CONDENSED' | translate }}">
                         </ccr-rpm-calendar-icon>
 
                         <ccr-rpm-clock-icon
-                        *ngIf="row.billing[billingIndex]?.eligibility.next?.monitoring?.remaining"
-                        [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex]?.eligibility.next?.monitoring.remaining}"
+                        *ngIf="findBilling(row.billing, cptCode)?.eligibility.next?.monitoring?.remaining"
+                        [matTooltip]="'RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: findBilling(row.billing, cptCode)?.eligibility.next?.monitoring.remaining}"
                         [size]="40"
-                        text="{{ row.billing[billingIndex]?.eligibility.next?.monitoring.remaining }}{{ row.billing[billingIndex]?.eligibility.next?.monitoring.units | translate }}">
+                        text="{{ findBilling(row.billing, cptCode)?.eligibility.next?.monitoring.remaining }}{{ findBilling(row.billing, cptCode)?.eligibility.next?.monitoring.units | translate }}">
                         </ccr-rpm-clock-icon>
 
                         <ccr-rpm-scale-icon
-                        *ngIf="row.billing[billingIndex]?.eligibility.next?.transmissions?.remaining"
-                        [matTooltip]="'RPM.SCALE_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex]?.eligibility.next?.transmissions.remaining}"
+                        *ngIf="findBilling(row.billing, cptCode)?.eligibility.next?.transmissions?.remaining"
+                        [matTooltip]="'RPM.SCALE_ICON_DESCRIPTION' | translate:{amount: findBilling(row.billing, cptCode)?.eligibility.next?.transmissions.remaining}"
                         [size]="40"
-                        text="{{ row.billing[billingIndex]?.eligibility.next?.transmissions.remaining }}">
+                        text="{{ findBilling(row.billing, cptCode)?.eligibility.next?.transmissions.remaining }}">
                         </ccr-rpm-scale-icon>
 
                         <ccr-rpm-chat-icon
-                        *ngIf="row.billing[billingIndex]?.eligibility.next?.liveInteraction?.remaining"
-                        [matTooltip]="'RPM.CHAT_ICON_DESCRIPTION' | translate:{amount: row.billing[billingIndex]?.eligibility.next?.liveInteraction.remaining}"
+                        *ngIf="findBilling(row.billing, cptCode)?.eligibility.next?.liveInteraction?.remaining"
+                        [matTooltip]="'RPM.CHAT_ICON_DESCRIPTION' | translate:{amount: findBilling(row.billing, cptCode)?.eligibility.next?.liveInteraction.remaining}"
                         [size]="40"
-                        text="{{ row.billing[billingIndex]?.eligibility.next?.liveInteraction.remaining }}">
+                        text="{{ findBilling(row.billing, cptCode)?.eligibility.next?.liveInteraction.remaining }}">
                         </ccr-rpm-chat-icon>
                     </div>
                 </div>
