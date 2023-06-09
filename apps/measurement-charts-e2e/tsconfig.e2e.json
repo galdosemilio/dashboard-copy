@@ -1,9 +1,10 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "sourceMap": false,
     "outDir": "../../dist/out-tsc",
     "allowJs": true,
+    "target": "es5",
+    "lib": ["es5", "dom"],
     "types": ["cypress", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.js"]

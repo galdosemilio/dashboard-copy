@@ -13,7 +13,6 @@ const standardSetup = (
   apiOverrides?: ApiOverrideEntry[]
 ): void => {
   cy.log('Init standard setup')
-  cy.server()
 
   const auth = authenticated === false ? false : true
 

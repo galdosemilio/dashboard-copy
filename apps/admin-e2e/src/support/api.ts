@@ -260,7 +260,7 @@ const interceptCoreApiCalls = (
     statusCode: 201
   })
 
-  cy.route(
+  cy.intercept(
     'GET',
     '/2.0/measurement/device/sync?**',
     fetchOverride(
@@ -269,17 +269,13 @@ const interceptCoreApiCalls = (
     )
   )
 
-  cy.route({
-    method: 'POST',
-    url: '/2.0/measurement/device/sync',
-    status: 204,
+  cy.intercept('POST', '/2.0/measurement/device/sync', {
+    statusCode: 201,
     response: {}
   }).as('deviceSyncPostRequest')
 
-  cy.route({
-    method: 'PUT',
-    url: '/2.0/measurement/device/sync/healthkit',
-    status: 204,
+  cy.intercept('PUT', '/2.0/measurement/device/sync/healthkit', {
+    statusCode: 201,
     response: {}
   }).as('healthkitSyncPutRequest')
 
