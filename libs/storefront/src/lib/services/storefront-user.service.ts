@@ -35,6 +35,11 @@ import { AppEnvironment, APP_ENVIRONMENT } from '@coachcare/common/shared'
 import { _ } from '@coachcare/backend/shared'
 import { TranslateService } from '@ngx-translate/core'
 
+const customStore = {
+  orgs: ['3328', '7277', '7283', '7282'],
+  url: 'https://sharp.myclinicshop.com/'
+}
+
 @Injectable()
 export class StorefrontUserService {
   public user: CurrentAccount
@@ -61,6 +66,11 @@ export class StorefrontUserService {
     const params = new URLSearchParams(location.search)
     const token = params.get('token')
     this.orgId = params.get('baseOrg')
+
+    if (customStore.orgs.includes(this.orgId)) {
+      window.location.href = customStore.url
+      return
+    }
 
     const loggedIn = await this.isLoggedIn()
 
