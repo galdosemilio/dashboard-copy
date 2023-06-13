@@ -1,3 +1,18 @@
+# [1.119.0](https://github.com/coachcare/dashboard/compare/v1.118.2...v1.119.0) (2023-06-13)
+
+
+### Bug Fixes
+
+* add sharp custom store url [FRON-3173] ([8c5b4be](https://github.com/coachcare/dashboard/commit/8c5b4be3a02c5e2472ebc123a5fb8d30abb19f8c))
+* allow favicon to be defined for org [FRON-2895] ([b9aa866](https://github.com/coachcare/dashboard/commit/b9aa8666ae0dce6b106f0806b9820cd68c5d0d1a))
+* e2e tests [FRON-2964] ([46ef570](https://github.com/coachcare/dashboard/commit/46ef57017991db69710107f44554ae334fdd6247))
+* fix build measurement-charts [FRON-3168] ([433a1ac](https://github.com/coachcare/dashboard/commit/433a1acf27fe5b14063ea3d57b6eadd2f3d8cd2d))
+
+
+### Features
+
+* display taxonomy image on selected category action ([4c4accf](https://github.com/coachcare/dashboard/commit/4c4accf0ca219d430e56118de6dc92efd07cbf4f))
+
 ## [1.118.2](https://github.com/coachcare/dashboard/compare/v1.118.1...v1.118.2) (2023-06-07)
 
 
