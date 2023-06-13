@@ -625,10 +625,8 @@ export class SidenavComponent implements OnInit {
         // Then attempt to use storeurl (likely spree)
       } else if (this.validStore(storeUrl)) {
         return `${environment.loginSite}/storefront?baseOrg=${this.context.organization.id}`
-
-        // Spree store invalid, no redirect
-      } else {
-        return 'Error accessing store'
+      } else if (this.validUrl(storeUrl)) {
+        return storeUrl
       }
     } catch (error) {
       this.notifier.error(error)
@@ -654,5 +652,15 @@ export class SidenavComponent implements OnInit {
 
   private validStore(storeUrl) {
     return !!storeUrl && SidenavComponent.whitelistedHosts.test(storeUrl)
+  }
+
+  private validUrl(url: string): boolean {
+    try {
+      new URL(url)
+
+      return true
+    } catch (err) {
+      return false
+    }
   }
 }
