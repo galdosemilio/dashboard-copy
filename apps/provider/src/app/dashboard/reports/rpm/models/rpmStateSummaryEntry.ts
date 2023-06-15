@@ -89,7 +89,27 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
           const liveInteractionRequired =
             copiedBill.eligibility?.next?.liveInteraction?.required
 
-          if (metStep > index) {
+          if (index > metStep) {
+            set(copiedBill, 'eligibility.next.deps', [billing.code])
+            set(copiedBill, 'eligibility.next.relatedCodeRequirementsNotMet', [
+              billing.code
+            ])
+            if (monitoringRequired) {
+              set(
+                copiedBill,
+                'eligibility.next.monitoring.total.seconds.tracked',
+                0
+              )
+            }
+
+            if (liveInteractionRequired) {
+              set(
+                copiedBill,
+                'copiedBill.eligibility.next.liveInteraction.required',
+                0
+              )
+            }
+          } else if (index < metStep) {
             if (monitoringRequired) {
               set(
                 copiedBill,
@@ -111,26 +131,6 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
               'eligibility.next.relatedCodeRequirementsNotMet',
               []
             )
-          } else if (index > 0) {
-            set(copiedBill, 'eligibility.next.deps', [billing.code])
-            set(copiedBill, 'eligibility.next.relatedCodeRequirementsNotMet', [
-              billing.code
-            ])
-            if (monitoringRequired) {
-              set(
-                copiedBill,
-                'eligibility.next.monitoring.total.seconds.tracked',
-                0
-              )
-            }
-
-            if (liveInteractionRequired) {
-              set(
-                copiedBill,
-                'copiedBill.eligibility.next.liveInteraction.required',
-                0
-              )
-            }
           }
 
           copiedBill.code = `${copiedBill.code} (${index + 1})`

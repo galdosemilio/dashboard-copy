@@ -1,0 +1,445 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6708",
+        "firstName": "A",
+        "lastName": "A",
+        "dateOfBirth": "1993-04-25",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "7048",
+        "name": "CoachCare Clinic Test",
+        "hierarchyPath": ["7048", "31", "30"]
+      },
+      "billing": [
+        {
+          "code": "99439",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99490"]
+            }
+          }
+        },
+        {
+          "code": "99490",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 0
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "739",
+        "changedAt": "2020-02-01T15:11:07.174+00:00",
+        "preference": {
+          "id": "31",
+          "name": "CoachCare Clinic Test NY",
+          "hierarchyPath": ["31", "30"]
+        },
+        "startedAt": "2020-02-01T04:00:00+00:00",
+        "serviceType": {
+          "id": "2",
+          "name": "CCM",
+          "tag": "ccm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": false,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2020-02-01T04:00:00+00:00",
+        "educationProvidedAt": "2020-02-01T04:00:00+00:00",
+        "deviceProvidedAt": "2020-02-01T04:00:00+00:00",
+        "supervisingProvider": {
+          "id": "6",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "diagnosis": {
+          "primary": "test",
+          "secondary": "testasdsd"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "6738",
+        "firstName": "A",
+        "lastName": "A",
+        "dateOfBirth": "1971-03-26",
+        "timezone": "Pacific/Tongatapu"
+      },
+      "organization": {
+        "id": "6997",
+        "name": "Coachcare FRON-740",
+        "hierarchyPath": ["6997", "31", "30"]
+      },
+      "billing": [
+        {
+          "code": "99439",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T11:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 300,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": []
+            }
+          }
+        },
+        {
+          "code": "99490",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T11:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 0
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "741",
+        "changedAt": "2020-02-01T09:35:22.379+00:00",
+        "preference": {
+          "id": "31",
+          "name": "CoachCare Clinic Test NY",
+          "hierarchyPath": ["31", "30"]
+        },
+        "startedAt": "2020-02-01T04:00:00+00:00",
+        "serviceType": {
+          "id": "2",
+          "name": "CCM",
+          "tag": "ccm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": false,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2020-02-01T04:00:00+00:00",
+        "educationProvidedAt": "2020-02-01T04:00:00+00:00",
+        "deviceProvidedAt": "2020-02-01T04:00:00+00:00",
+        "supervisingProvider": {
+          "id": "6",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "diagnosis": {
+          "primary": "test",
+          "secondary": "test2 qwqwqwqwwq"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "7255",
+        "firstName": "An underage patient",
+        "lastName": "An underage patient",
+        "dateOfBirth": "2001-03-12",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
+      "billing": [
+        {
+          "code": "99439",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "alreadyEligibleCount": 1,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 600,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": []
+            }
+          }
+        },
+        {
+          "code": "99490",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 0
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "716",
+        "changedAt": "2020-02-01T16:46:06.186+00:00",
+        "startedAt": "2020-02-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "2",
+          "name": "CCM",
+          "tag": "ccm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": false,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2020-02-01T10:00:00+00:00",
+        "educationProvidedAt": "2020-02-01T10:00:00+00:00",
+        "deviceProvidedAt": "2020-02-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "560",
+          "firstName": "Jeffrey",
+          "lastName": "Drakos"
+        },
+        "diagnosis": {
+          "primary": "test",
+          "secondary": "test"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "7470",
+        "firstName": "Zhang",
+        "lastName": "Apr 14, 2021",
+        "dateOfBirth": "1994-07-22",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
+      "billing": [
+        {
+          "code": "99439",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": []
+            }
+          }
+        },
+        {
+          "code": "99490",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 0
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "701",
+        "changedAt": "2020-02-01T17:13:33.678+00:00",
+        "startedAt": "2020-02-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "2",
+          "name": "CCM",
+          "tag": "ccm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": false,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2020-02-01T10:00:00+00:00",
+        "educationProvidedAt": "22020-02-01T10:00:00+00:00",
+        "deviceProvidedAt": "2020-02-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "560",
+          "firstName": "Jeffrey",
+          "lastName": "Drakos"
+        },
+        "diagnosis": {
+          "primary": "sdd",
+          "secondary": "sdd"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "totalCount": 4
+  }
+}
