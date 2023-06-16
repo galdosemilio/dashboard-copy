@@ -12,19 +12,18 @@ describe('Dashboard -> Patients -> Patient -> More -> Devices', function () {
       fixture: 'api/cellular-device/getAllTypes'
     }).as('getTypes')
 
-    // it looks like i need to wait for some core api's to load (eg. /meeting/type/organization/)
-    // before i could test for @getTypes
-    // otherwise it is always in timeout
-    // any better way to do this?
-    cy.wait(40000)
     cy.wait('@getTypes')
 
     cy.get('select[name="devices"]').within(() => {
       cy.get('option').should('have.length', 2)
-      cy.get('option').eq(0).should('have.text', 'BodyTrace scale (BT-005)')
+      cy.get('option')
+        .eq(0)
+        .contains('BodyTrace scale (BT-005)')
+        .should('exist')
       cy.get('option')
         .eq(1)
-        .should('have.text', 'BodyTrace blood pressure cuff (BT-105)')
+        .contains('BodyTrace blood pressure cuff (BT-105)')
+        .should('exist')
     })
   })
 
@@ -67,6 +66,7 @@ describe('Dashboard -> Patients -> Patient -> More -> Devices', function () {
       .eq(0)
       .should('contain', 'BodyTrace blood pressure cuff (BT-105)')
       .should('contain', '1234800')
+      .find('button#delete-btn')
       .find('mat-icon')
       .should('exist')
       .should('have.text', 'delete')

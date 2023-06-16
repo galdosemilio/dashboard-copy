@@ -80,6 +80,7 @@ import {
   MeasurementPreferenceProvider,
   MeasurementLabelProvider,
   MeasurementDataPointTypeProvider,
+  MeasurementBodytraceSyncProvider,
   SpreeProvider,
   EcommerceProvider
 } from '@coachcare/sdk'
@@ -320,6 +321,11 @@ export const SdkApiProviders = [
   {
     provide: MeasurementLabelProvider,
     useClass: MeasurementLabelProvider,
+    deps: [ApiService]
+  },
+  {
+    provide: MeasurementBodytraceSyncProvider,
+    useClass: MeasurementBodytraceSyncProvider,
     deps: [ApiService]
   },
   { provide: Messaging, useClass: Messaging, deps: [messagingApiService] },

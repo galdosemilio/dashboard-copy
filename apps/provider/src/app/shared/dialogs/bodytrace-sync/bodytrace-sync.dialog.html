@@ -1,0 +1,42 @@
+<div matDialogTitle class="sync_form-title">
+  <div>
+    <mat-icon>sync</mat-icon>
+    <h2 mat-dialog-title>{{'BOARD.SYNC_TITLE' | translate}}</h2>
+  </div>
+  <button matDialogClose><mat-icon>cancel</mat-icon></button>
+</div>
+
+<div class="mat-dialog-separator"></div>
+
+<div mat-dialog-content>
+  <p>{{'BOARD.SYNC_DESCRIPTION' | translate}}</p>
+
+  <form [formGroup]="dateRangeForm" class="sync_form">
+    <mat-form-field>
+      <mat-label>{{'BOARD.DURATION' | translate}}</mat-label>
+      <mat-select formControlName="duration" (selectionChange)="setDuration($event.value)">
+        <mat-option *ngFor="let durationOption of durationOptions" [value]="durationOption">
+          {{ durationOption.label | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{'BOARD.FROM_DATE' | translate}}</mat-label>
+      <input matInput [matDatepicker]="fromDatePicker" formControlName="fromDate" (dateChange)="setRange($event.value)">
+      <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromDatePicker ></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions class="sync_form-actions">
+  <button mat-button color="primary" class="ccr-icon-button" (click)="onSync()">
+    <mat-icon>check</mat-icon> {{'BOARD.SYNC' | translate}}
+  </button>
+
+  <button mat-button class="ccr-icon-button" matDialogClose>
+    <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+  </button>
+</div>
+

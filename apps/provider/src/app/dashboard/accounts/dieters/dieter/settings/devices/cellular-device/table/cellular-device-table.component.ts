@@ -3,6 +3,8 @@ import { CellularDeviceDataSource } from '../../../services/cellular-device/cell
 import { CellularDeviceDatabase } from '../../../services'
 import { ContextService } from '@app/service'
 import { AccountCellularDevice } from '@coachcare/sdk'
+import { MatDialog } from '@coachcare/material'
+import { BodytraceSyncDialog } from '@app/shared'
 
 @Component({
   selector: 'app-cellular-device-table',
@@ -20,7 +22,8 @@ export class CellularDeviceTableComponent implements OnInit {
 
   constructor(
     private context: ContextService,
-    private database: CellularDeviceDatabase
+    private database: CellularDeviceDatabase,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -39,5 +42,11 @@ export class CellularDeviceTableComponent implements OnInit {
 
     await this.database.remove(req)
     this.source.refresh()
+  }
+
+  public showDialog(row: AccountCellularDevice): void {
+    this.dialog.open(BodytraceSyncDialog, {
+      data: { id: row.id }
+    })
   }
 }

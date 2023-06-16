@@ -9,9 +9,9 @@
 <ccr-datasource-overlay class="ccr-table" [source]="source">
     <mat-table class="table-card-mobile" [dataSource]="source">
         <ng-container cdkColumnDef="device_type">
-            <mat-header-cell *cdkHeaderCellDef fxFlex="40%">{{ 'BOARD.DEVICE_TYPE' | translate }}</mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef fxFlex="35%">{{ 'BOARD.DEVICE_TYPE' | translate }}</mat-header-cell>
 
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxFlex="40%" fxFlex.xs="grow">
+            <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxFlex="35%" fxFlex.xs="grow">
                 <span>{{ 'BOARD.DEVICE_TYPE' | translate }}</span>
                 <span [innerHTML]=" row.identifier | translate "></span>
                 <div>{{ row.device.type.name }}</div>
@@ -19,9 +19,9 @@
         </ng-container>
 
         <ng-container cdkColumnDef="device_number">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.DEVICE_NUMBER' | translate }}</mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef >{{ 'BOARD.DEVICE_NUMBER' | translate }}</mat-header-cell>
 
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxFlex.xs="grow">
+            <mat-cell *cdkCellDef="let row" fxFlex.xs="grow">
                 <span>{{ 'BOARD.DEVICE_NUMBER' | translate }}</span>
                 <span [innerHTML]=" row.identifier | translate "></span>
                 <div>{{ row.device.identifier }}</div>
@@ -29,9 +29,19 @@
         </ng-container>
 
         <ng-container cdkColumnDef="account">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.ACCOUNT' | translate }}</mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef
+                fxLayoutAlign="center center"
+                fxLayoutAlign.xs="start center"
+                fxFlex="10%">
+                {{ 'BOARD.ACCOUNT' | translate }}
+            </mat-header-cell>
 
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxFlex.xs="grow">
+            <mat-cell *cdkCellDef="let row"
+                fxLayoutAlign="center center"
+                fxLayoutAlign.xs="start center"
+                fxFlex="10%"
+                fxFlex.xs="grow"
+            >
                 <span>{{ 'BOARD.ACCOUNT' | translate }}</span>
                 <span [innerHTML]=" row.title | translate "></span>
                 <div>{{ row.account.id }}</div>
@@ -39,9 +49,20 @@
         </ng-container>
 
         <ng-container cdkColumnDef="createdAt">
-            <mat-header-cell *cdkHeaderCellDef>{{ 'BOARD.TIME_ADDED' | translate }}</mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef
+                fxLayoutAlign="center center"
+                fxLayoutAlign.xs="start center"
+                fxFlex="25%"
+            >
+                {{ 'BOARD.TIME_ADDED' | translate }}
+            </mat-header-cell>
 
-            <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxFlex.xs="grow">
+            <mat-cell *cdkCellDef="let row"
+                fxLayoutAlign="center center"
+                fxLayoutAlign.xs="start center"
+                fxFlex="25%"
+                fxFlex.xs="grow"
+            >
                 <span>{{ 'BOARD.TIME_ADDED' | translate }}</span>
                 <span [innerHTML]=" row.title | translate "></span>
                 <div>{{ row.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</div>
@@ -51,10 +72,13 @@
         <ng-container cdkColumnDef="actions">
             <mat-header-cell *cdkHeaderCellDef>{{'BOARD.ACTIONS' | translate}}</mat-header-cell>
             <mat-cell *cdkCellDef="let row" fxLayoutAlign="center center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
-                <span>{{ 'BOARD.ACTIONS' | translate }}</span>
-                <span [innerHTML]=" row.title | translate "></span>
+              <span>{{ 'BOARD.ACTIONS' | translate }}</span>
+              <span [innerHTML]=" row.title | translate "></span>
               <button id="delete-btn" mat-icon-button title="{{'BOARD.REMOVE' | translate}}" (click)="onRemove(row)">
                 <mat-icon>delete</mat-icon>
+              </button>
+              <button id="sync-btn" mat-icon-button title="{{'BOARD.SYNC' | translate}}" (click)="showDialog(row)">
+                <mat-icon>sync</mat-icon>
               </button>
             </mat-cell>
         </ng-container>

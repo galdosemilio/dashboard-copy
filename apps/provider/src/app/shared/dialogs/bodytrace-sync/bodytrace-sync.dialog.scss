@@ -1,0 +1,51 @@
+@import 'styles/variables';
+
+.sync_form,
+.sync_form-title,
+.sync_form-title div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sync_form-title {
+  mat-icon {
+    margin-right: 5px;
+    font-weight: bold;
+  }
+
+  h2 {
+    padding: 0;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+}
+
+.sync_form > * {
+  max-width: 45%;
+}
+
+.sync_form-actions {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: $sm-max) {
+  .sync_form {
+    flex-direction: column;
+  }
+
+  .sync_form > * {
+    width: 100%;
+  }
+
+  .sync-form_description {
+    font-size: 14px;
+    text-align: justify;
+  }
+}

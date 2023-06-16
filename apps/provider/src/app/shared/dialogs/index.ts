@@ -21,6 +21,7 @@ export * from './text-input.dialog'
 export * from './view-image'
 export * from './multiple-files-download'
 export * from './remove-patient-meeting'
+export * from './bodytrace-sync'
 
 import { AccountRedirectDialog } from './account-redirect'
 import { AddManualInteractionDialog } from './add-manual-interaction'
@@ -52,6 +53,7 @@ import { RemoveClinicAssociationDialog } from './remove-clinic-association'
 import { CoachPermissionsDialog } from './coach-permissions-dialog'
 import { MultipleFilesDownloadDialog } from './multiple-files-download'
 import { RemovePatientMeetingDialog } from './remove-patient-meeting'
+import { BodytraceSyncDialog } from './bodytrace-sync'
 
 export const Dialogs = [
   AccountRedirectDialog,
@@ -76,7 +78,8 @@ export const Dialogs = [
   TextInputDialog,
   ViewImageDialog,
   MultipleFilesDownloadDialog,
-  RemovePatientMeetingDialog
+  RemovePatientMeetingDialog,
+  BodytraceSyncDialog
 ]
 
 export const Components = [
