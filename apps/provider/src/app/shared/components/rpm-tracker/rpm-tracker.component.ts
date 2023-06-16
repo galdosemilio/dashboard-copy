@@ -341,6 +341,8 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
           this.startTimer()
         } else {
           this.timeTrackingComplete = true
+          this.seconds = 0
+          this.requiredIterationSeconds = 0
         }
       }
     } catch (error) {
