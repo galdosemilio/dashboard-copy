@@ -266,7 +266,7 @@
     "FINISH_ONBOARDING_TO_SCHEDULE_EMBEDDED": "Please finish <a href=\"./dashboard\">Onboarding</a> to schedule appointments",
     "FIRST_NAME": "First Name",
     "FOREIGN_PATIENT_DESCRIPTION": "The clinic selected in the upper left corner of the dashboard impacts the displayed design and features. The patient you are viewing is not associated at or below the selected clinic; as such, certain features or data may be unexpectedly hidden or shown based on the selected clinic's settings. You may view the clinics to which this patient is associated in the More -> Clinics tab.",
-    "FOREIGN_PATIENT_SHORT": "This patient is not associated to the selected clinic. Some features or settings may not display correctly.",
+    "FOREIGN_PATIENT_SHORT": "This patient is not associated to the selected clinic.  You may switch clinics to access all features and settings.",
     "FOREIGN_PATIENT_TITLE": "Foreign Patients",
     "FORMS": "Forms",
     "FREQUENCY": "Frequency",

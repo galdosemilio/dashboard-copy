@@ -266,7 +266,7 @@
     "FINISH_ONBOARDING_TO_SCHEDULE_EMBEDDED": "Bitte beenden Sie den <a href=\"./dashboard\">Onboarding</a>, um Termine zu vereinbaren",
     "FIRST_NAME": "Vorname",
     "FOREIGN_PATIENT_DESCRIPTION": "Die in der oberen linken Ecke des Dashboards ausgewählte Klinik wirkt sich auf das angezeigte Design und die Funktionen aus. Der Patient, den Sie anzeigen, ist nicht in oder unter der ausgewählten Klinik zugeordnet. Daher können bestimmte Funktionen oder Daten aufgrund der Einstellungen der ausgewählten Klinik unerwartet ausgeblendet oder angezeigt werden. Sie können die Kliniken, denen dieser Patient zugeordnet ist, auf der Registerkarte Mehr -> Kliniken anzeigen.",
-    "FOREIGN_PATIENT_SHORT": "Dieser Patient ist nicht mit der ausgewählten Klinik verbunden. Einige Funktionen oder Einstellungen werden möglicherweise nicht richtig angezeigt.",
+    "FOREIGN_PATIENT_SHORT": "Dieser Patient ist nicht mit der ausgewählten Klinik verknüpft. Sie können die Klinik wechseln, um auf alle Funktionen und Einstellungen zuzugreifen.",
     "FOREIGN_PATIENT_TITLE": "Ausländische Patienten",
     "FORMS": "Formen",
     "FREQUENCY": "Frequenz",

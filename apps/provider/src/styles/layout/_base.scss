@@ -9,22 +9,6 @@ app-root:empty::after {
   width: 100%;
 }
 
-.feature-disabled {
-  background-color: var(--primary-lighten);
-  padding: 10px 10px;
-
-  & > mat-icon {
-    color: var(--primary);
-  }
-
-  & > ccr-popup-description {
-    & > mat-icon.mat-icon {
-      color: var(--primary);
-      line-height: 22px;
-    }
-  }
-}
-
 .mat-drawer-content.ng-star-inserted {
   @media #{$medium-only} {
     @include horizontal-margin-left(80px !important);

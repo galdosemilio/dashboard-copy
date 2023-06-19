@@ -1,3 +1,37 @@
+@import 'variables';
+
 .manual-time-enabled {
   color: var(--primary);
+}
+
+.feature-disabled {
+  background-color: var(--primary-lighten);
+  padding: 10px 10px;
+
+  .mat-icon {
+    color: var(--primary);
+  }
+
+  & > ccr-popup-description {
+    & > mat-icon.mat-icon {
+      color: var(--primary);
+      line-height: 22px;
+    }
+  }
+}
+
+.org-selector {
+  .mat-select {
+    border: 1px solid #000;
+    max-width: 250px;
+
+    .mat-select-trigger {
+      background: #fff !important;
+      height: auto !important;
+
+      .mat-select-value {
+        line-height: 30px !important;
+      }
+    }
+  }
 }

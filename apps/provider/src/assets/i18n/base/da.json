@@ -266,7 +266,7 @@
     "FINISH_ONBOARDING_TO_SCHEDULE_EMBEDDED": "Venligst afslutte <a href=\"./dashboard\">Onboarding</a> for at planlægge aftaler",
     "FIRST_NAME": "Fornavn",
     "FOREIGN_PATIENT_DESCRIPTION": "Den klinik, der er valgt i øverste venstre hjørne af instrumentbrættet, påvirker det viste design og funktioner. Patienten, du ser, er ikke tilknyttet eller under den valgte klinik; som sådan kan visse funktioner eller data blive uventet skjult eller vist på baggrund af den valgte kliniks indstillinger. Du kan se de klinikker, som denne patient er knyttet til under fanen Mere -> Klinikker.",
-    "FOREIGN_PATIENT_SHORT": "Denne patient er ikke tilknyttet den valgte klinik. Nogle funktioner eller indstillinger vises muligvis ikke korrekt.",
+    "FOREIGN_PATIENT_SHORT": "Denne patient er ikke tilknyttet den valgte klinik. Du kan skifte klinik for at få adgang til alle funktioner og indstillinger.",
     "FOREIGN_PATIENT_TITLE": "Udenlandske patienter",
     "FORMS": "Formularer",
     "FREQUENCY": "Frekvens",

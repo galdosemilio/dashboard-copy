@@ -62,12 +62,28 @@
     </div>
   </div>
 
-  <div *ngIf="patientIsForeign" class="feature-disabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" data-cy="patientAssociationMessage">
-    <ccr-popup-description
-    [title]="'BOARD.FOREIGN_PATIENT_TITLE' | translate"
-    [description]="'BOARD.FOREIGN_PATIENT_DESCRIPTION' | translate"
-    ></ccr-popup-description>
-    <p>{{ 'BOARD.FOREIGN_PATIENT_SHORT' | translate }}</p>
+  <div *ngIf="patientIsForeign" class="feature-disabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" data-cy="patientAssociationMessage" [formGroup]="form">
+    <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <ccr-popup-description
+        [title]="'BOARD.FOREIGN_PATIENT_TITLE' | translate"
+        [description]="'BOARD.FOREIGN_PATIENT_DESCRIPTION' | translate"
+        ></ccr-popup-description>
+      <p>{{ 'BOARD.FOREIGN_PATIENT_SHORT' | translate }}</p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" >
+      <mat-form-field fxFlex floatLabel="never" class="ccr-filter org-selector">
+        <mat-select [disableOptionCentering]="true" formControlName="organization">
+            <mat-option *ngFor="let org of organizations" [value]="org.id">
+            {{ org.name }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-spinner *ngIf="isSwitchingOrg" diameter="24" strokeWidth="3"></mat-spinner>
+      <button [disabled]="isSwitchingOrg" class="ccr-button" color="primary" mat-button (click)="onSwitchOrganization()">
+        {{ 'BOARD.CONFIRM' | translate }}
+    </button>
+    </div>
+
   </div>
   <div *ngIf="timezoneOffset > 0" class="feature-disabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
     <mat-icon>watch_later</mat-icon>

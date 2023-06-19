@@ -266,7 +266,7 @@
     "FINISH_ONBOARDING_TO_SCHEDULE_EMBEDDED": "Por favor, complete el <a href=\"./dashboard\">Registro</a> para programar reuniones",
     "FIRST_NAME": "Nombres",
     "FOREIGN_PATIENT_DESCRIPTION": "La clínica seleccionada en la esquina superior izquierda del tablero impacta el diseño y características presentadas. El paciente que está observando no se encuentra asociado a la clínica seleccionada ni a sus descendientes; dado esto, ciertas características o datos pueden ocultarse o presentarse de forma inesperada respetando las configuraciones de la clínica seleccionada. Puede ver a cuáles clínicas está asociado este paciente yendo a la pestaña de Más -> Clínicas.",
-    "FOREIGN_PATIENT_SHORT": "Este paciente no está asociado a la clínica seleccionada. Algunas características o configuraciones pueden no mostrarse correctamente.",
+    "FOREIGN_PATIENT_SHORT": "Este paciente no está asociado a la clínica seleccionada. Puede cambiar de clínica para acceder a todas las funciones y configuraciones.",
     "FOREIGN_PATIENT_TITLE": "Pacientes Foráneos",
     "FORMS": "Formularios",
     "FREQUENCY": "Frecuencia",

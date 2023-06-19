@@ -266,7 +266,7 @@
     "FINISH_ONBOARDING_TO_SCHEDULE_EMBEDDED": "Por favor, termine <a href=\"./dashboard\">Integralmente</a> para agendar compromissos",
     "FIRST_NAME": "Primeiro nome",
     "FOREIGN_PATIENT_DESCRIPTION": "A clínica selecionada no canto superior esquerdo do painel afeta o design e os recursos exibidos. O paciente que você está vendo não está associado na clínica ou abaixo dela; assim, certos recursos ou dados podem ser ocultados ou exibidos inesperadamente com base nas configurações da clínica selecionada. Você pode visualizar as clínicas às quais esse paciente está associado na guia Mais -> Clínicas.",
-    "FOREIGN_PATIENT_SHORT": "Este paciente não está associado à clínica selecionada. Alguns recursos ou configurações podem não ser exibidos corretamente.",
+    "FOREIGN_PATIENT_SHORT": "Este paciente não está associado à clínica selecionada. Você pode mudar de clínica para acessar todos os recursos e configurações.",
     "FOREIGN_PATIENT_TITLE": "Pacientes estrangeiros",
     "FORMS": "Formulários",
     "FREQUENCY": "Frequência",

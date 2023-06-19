@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { MatDialog } from '@coachcare/material'
 import { ActivatedRoute } from '@angular/router'
 import { resolveConfig } from '@app/config/section'
 import { ContextService, NotifierService } from '@app/service'
 import { RPMPatientReportDialog, _ } from '@app/shared'
 import {
+  AccountAccessOrganization,
   AccountProvider,
   AccSingleResponse,
   DieterDashboardSummary,
@@ -14,14 +15,20 @@ import { get, intersectionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { DoctorPDFDialog, ProgressReportPDFDialog } from '../../dialogs'
 import * as moment from 'moment'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { CCRConfig } from '@app/config'
+import { Store } from '@ngrx/store'
+import { FetchSubaccount } from '@app/layout/store/call'
 
 @UntilDestroy()
 @Component({
   selector: 'app-dieter',
   templateUrl: './dieter.component.html',
-  styleUrls: ['./dieter.component.scss']
+  styleUrls: ['./dieter.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DieterComponent implements OnDestroy, OnInit {
+  public form: FormGroup
   public dieter: AccSingleResponse
   public patientIsForeign: boolean
   public showDoctorPDFButton: boolean
@@ -31,22 +38,27 @@ export class DieterComponent implements OnDestroy, OnInit {
   public automatedTimeTracking: boolean = true
   public timezoneOffset: number
   public timezoneOffsetText: string
+  public organizations: AccountAccessOrganization[] = []
   public callUserZendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360019778772-Video-Conferencing-with-a-Patient'
+  public isSwitchingOrg = false
 
   constructor(
     private account: AccountProvider,
+    private builder: FormBuilder,
     private context: ContextService,
     private data: DieterDashboardSummary,
     private dialog: MatDialog,
     private notifier: NotifierService,
     private organization: OrganizationProvider,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<CCRConfig>
   ) {}
 
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
+    this.createForm()
     void this.sendWarmupNotification()
     void this.data.init(this.context.accountId)
     void this.route.data.forEach((data: any) => {
@@ -66,6 +78,7 @@ export class DieterComponent implements OnDestroy, OnInit {
     this.context.organization$
       .pipe(untilDestroyed(this))
       .subscribe((organization) => {
+        this.isSwitchingOrg = false
         this.showDoctorPDFButton = resolveConfig(
           'JOURNAL.SHOW_DOCTOR_PDF_BUTTON',
           organization
@@ -96,6 +109,12 @@ export class DieterComponent implements OnDestroy, OnInit {
       })
   }
 
+  private createForm() {
+    this.form = this.builder.group({
+      organization: []
+    })
+  }
+
   public openPatientRpmReportDialog(): void {
     this.dialog.open(RPMPatientReportDialog, { width: '50vw' })
   }
@@ -117,15 +136,21 @@ export class DieterComponent implements OnDestroy, OnInit {
         })
       ).data
 
-      const accountOrgs = this.context.account.organizations
+      this.organizations = this.context.account.organizations
 
       const accountOrgsInHierarchy = intersectionBy(
         [this.context.organization, ...descendants],
-        accountOrgs,
+        this.organizations,
         'id'
       )
 
       this.patientIsForeign = accountOrgsInHierarchy.length <= 0
+
+      if (this.patientIsForeign) {
+        this.form.patchValue({
+          organization: this.organizations[0].id
+        })
+      }
     } catch (error) {
       this.notifier.error(error)
     }
@@ -172,5 +197,16 @@ export class DieterComponent implements OnDestroy, OnInit {
     } catch (error) {
       this.notifier.error(error)
     }
+  }
+
+  public onSwitchOrganization(value) {
+    const organizationId = this.form.value.organization
+    if (this.context.organizationId === organizationId) {
+      return
+    }
+
+    this.context.organizationId = organizationId
+    this.store.dispatch(new FetchSubaccount(organizationId))
+    this.isSwitchingOrg = true
   }
 }
