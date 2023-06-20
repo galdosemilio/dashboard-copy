@@ -32,7 +32,7 @@
                 </div>
                 <div>
                     <ccr-rpm-clock-icon
-                    *ngIf="billingEntry.eligibility.next?.monitoring?.total?.seconds?.required"
+                    *ngIf="billingEntry.eligibility.next?.monitoring"
                     [matTooltip]="billingEntry.eligibility.next?.monitoring.remaining ? ('RPM.CLOCK_ICON_DESCRIPTION' | translate:{amount: billingEntry.eligibility.next?.monitoring.remaining}) : ''"
                     [size]="45"
                     [completed]="billingEntry.eligibility.next?.monitoring.remaining === 0"

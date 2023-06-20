@@ -1,0 +1,159 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6154",
+        "firstName": "Lascario",
+        "lastName": "Pacheco",
+        "dateOfBirth": "1994-06-10",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "7556",
+        "name": "Alaska Premier Health - Parent Org",
+        "hierarchyPath": ["7556", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-11-16T18:05:00.000Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 1
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "alreadyEligibleCount": 1,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": []
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "606",
+        "changedAt": "2023-05-01T03:49:05.376+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2023-05-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-05-01T10:00:00+00:00",
+        "educationProvidedAt": "2023-05-01T10:00:00+00:00",
+        "deviceProvidedAt": "2023-05-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "2852",
+          "firstName": "Lascario",
+          "lastName": "Pacheco Arrieta"
+        },
+        "diagnosis": {
+          "primary": "Primary Diagnosis 123",
+          "secondary": "Secondary Diagnosis 123",
+          "other": "Insurance Information 12345"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "totalCount": 1
+  }
+}

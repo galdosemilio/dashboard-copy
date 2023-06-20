@@ -44,6 +44,64 @@ const serviceTypeList = [
   }
 ]
 
+const testCurrentCTPCode = ({
+  snapshot,
+  code,
+  isCompleted
+}: {
+  snapshot: string
+  code: string
+  isCompleted?: boolean
+}) => {
+  window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '1')
+
+  standardSetup({
+    apiOverrides: [
+      {
+        url: '/1.0/warehouse/care-management/billing/snapshot**',
+        fixture: `api/warehouse/${snapshot}`
+      },
+      {
+        url: '/1.0/care-management/state?**',
+        fixture: `api/care-management/getAllCareStates`
+      }
+    ]
+  })
+
+  cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+  cy.get('.ccr-dashboard')
+  cy.get('[cy-data="care-management-state"]')
+    .find('mat-select')
+    .should('contain', 'RPM')
+
+  cy.wait('@careManagementStates')
+  cy.tick(1000)
+  cy.wait(1000)
+
+  if (isCompleted) {
+    cy.get('[cy-data="care-management-state"]')
+      .find('.current-code')
+      .should('not.exist')
+
+    cy.get('[cy-data="care-management-state"]')
+      .find('.rpm-status-completed-icon')
+      .should('exist')
+
+    cy.get('[cy-data="care-management-state"]')
+      .find('.timer')
+      .should('contain', '00:00 / 00:00')
+  } else {
+    cy.get('[cy-data="care-management-state"]')
+      .find('.current-code')
+      .should('contain', code)
+
+    cy.get('[cy-data="care-management-state"]')
+      .find('.timer')
+      .should('contain', '00:00 / 20:00')
+  }
+}
+
 describe('Patient profile -> dashboard -> rpm', function () {
   beforeEach(() => {
     cy.setOrganization('mdteam')
@@ -201,6 +259,39 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.wait('@accountActivityPostRequest').should((xhr) => {
         expect(xhr.response.statusCode).to.equal(201)
         expect(xhr.request.body.tags.includes('rpm')).to.equal(true)
+      })
+    })
+
+    describe.only('Current active CTP code', () => {
+      describe('RPM', () => {
+        it('should show 99457', () => {
+          testCurrentCTPCode({
+            snapshot: 'getRPMBillingSnapshotSingle',
+            code: '99457'
+          })
+        })
+
+        it('should show 99458 (1)', () => {
+          testCurrentCTPCode({
+            snapshot: 'getRPMBillingSnapshotSingleComplete99458-1',
+            code: '99458 (2)'
+          })
+        })
+
+        it('should show 99458 (2)', () => {
+          testCurrentCTPCode({
+            snapshot: 'getRPMBillingSnapshotSingleComplete99457',
+            code: '99458 (1)'
+          })
+        })
+
+        it('should show as completed', () => {
+          testCurrentCTPCode({
+            snapshot: 'getRPMBillingSnapshotSingleComplete99458-2',
+            code: 'completed',
+            isCompleted: true
+          })
+        })
       })
     })
   })

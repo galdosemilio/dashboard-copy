@@ -72,36 +72,12 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   public account: AccountAccessData
   public currentBillingItem: RPMStateSummaryBilling
   public currentCodeString: string
-  public currentIteration = 1
-  public iterationAmountArray: string[] = []
   public showStatusPanel = false
   public showTimer = false
   public timerDisplay = '00:00'
   public timeTrackingComplete = false
   public timerUnavailableError?: TimerUnavailableError = 'no-tracking'
   public loading = false
-
-  private set iterationAmount(amount: number) {
-    this._iterationAmount = amount > 0 ? amount : 0
-    this._iterationAmount = Math.min(
-      this._iterationAmount,
-      this.currentBillingItem.trackableCode.maxEligibleAmount
-    )
-    this.iterationAmountArray = new Array(
-      Math.min(
-        this._iterationAmount + 1,
-        this.currentBillingItem.trackableCode.maxEligibleAmount
-      )
-    ).fill('')
-    this.currentIteration = Math.min(
-      this.currentBillingItem.trackableCode.maxEligibleAmount,
-      this._iterationAmount + 1
-    )
-  }
-
-  private get iterationAmount(): number {
-    return this._iterationAmount
-  }
 
   private set seconds(seconds: number) {
     this._seconds = seconds || 0
@@ -195,11 +171,6 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         return
       }
 
-      this.iterationAmount = Math.min(
-        this.iterationAmount + 1,
-        this.currentBillingItem.trackableCode.maxEligibleAmount
-      )
-
       this.pauseTimer()
       await this.timeTracker.forceCommit()
       void this.resolveAccountCareSessionStatus(this.account)
@@ -292,10 +263,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
           billingEntry.eligibility.next?.monitoring?.total?.seconds?.tracked
 
         return (
-          billingEntry?.eligibility.next &&
-          (!requiredSeconds ||
-            !trackedSeconds ||
-            trackedSeconds < requiredSeconds)
+          billingEntry?.eligibility.next && trackedSeconds < requiredSeconds
         )
       }) || trackableBillings[trackableBillings.length - 1]
     )
@@ -327,8 +295,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         rpmBillingReportEntry
       )
       this.requiredIterationSeconds =
-        this.currentBillingItem?.eligibility?.next?.monitoring?.total?.seconds
-          ?.required || 120
+        this.currentBillingItem?.eligibility?.next?.monitoring?.total?.seconds?.required
       this.currentCodeString = this.currentBillingItem.code
 
       if (this.currentBillingItem.trackableCode.requiresTimeTracking) {
@@ -352,33 +319,13 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
   private resolveTimerStartTime(): void {
     if (!this.currentBillingItem?.trackableCode) {
-      this.iterationAmount = 0
       this.seconds = 0
 
       return
     }
 
-    if (this.currentBillingItem.trackableCode.maxEligibleAmount >= 2) {
-      this.iterationAmount =
-        this.currentBillingItem.eligibility.next?.alreadyEligibleCount ||
-        this.currentBillingItem.trackableCode.maxEligibleAmount
-      this.seconds =
-        this.currentBillingItem.eligibility.next?.monitoring?.total?.seconds
-          ?.tracked ||
-        this.currentBillingItem.eligibility.next?.monitoring?.total?.seconds
-          ?.elapsed ||
-        120
-      this.seconds = Math.min(this.seconds, this.requiredIterationSeconds)
-
-      return
-    }
-
-    this.iterationAmount = 0
     this.seconds =
       this.currentBillingItem.eligibility.next?.monitoring?.total?.seconds?.tracked
-    if (this.seconds >= this.requiredIterationSeconds) {
-      ++this.iterationAmount
-    }
   }
 
   private async showUserIdleDialog(): Promise<void> {
