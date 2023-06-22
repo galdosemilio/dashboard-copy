@@ -6,11 +6,7 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core'
-import {
-  AppBreakpoints,
-  STORAGE_COACHES_PAGINATION,
-  STORAGE_PATIENTS_PAGINATION
-} from '@app/config'
+import { AppBreakpoints, STORAGE_COACHES_PAGINATION } from '@app/config'
 import { CloseMenuFor, ResizeLayout, UIState } from '@app/layout/store'
 import {
   ConfigService,
@@ -84,7 +80,6 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   private clearAccountsPaginationCache(): void {
-    window.localStorage.removeItem(STORAGE_PATIENTS_PAGINATION)
     window.localStorage.removeItem(STORAGE_COACHES_PAGINATION)
   }
 

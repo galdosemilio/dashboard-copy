@@ -35,7 +35,7 @@ import {
   ProviderAccountGuard
 } from './guards'
 import { GestureService } from './gesture'
-import { DietersDatabase } from './dieters'
+import { DietersDatabase, DietersService } from './dieters'
 import { FormPDFService } from './formPDFService'
 import { MessagingService } from './messaging'
 import { MeasurementDatabaseV2 } from './measurement-v2'
@@ -110,6 +110,7 @@ export function AppProviders() {
     { provide: ContextService, useExisting: LocalContextService },
     CookieService,
     DietersDatabase,
+    DietersService,
     LocalEventsService,
     { provide: EventsService, useExisting: LocalEventsService },
     LanguageService,

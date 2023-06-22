@@ -21,7 +21,7 @@
   </div>
 
   <div class="ccr-htools" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center" fxLayoutAlign.xs="space-between center">
-    <ccr-package-filter (change)="onPackageFilter($event);" fxFlex></ccr-package-filter>
+    <ccr-package-filter [initialPackages]="initialPackages" (change)="onPackageFilter($event);" fxFlex></ccr-package-filter>
 
     <button mat-button fxFlex="nogrow" class="ccr-align-center"
     [disabled]="!source.isLoaded || source.isEmpty" (click)="downloadCSV()" fxHide.xs
@@ -32,7 +32,6 @@
 
     <ccr-page-size-selector
       defaultPageSize="10"
-      [defaultPageSizeStorageKey]="defaultPageSizeStorageKey"
       [disabled]="!source.isLoaded"
     ></ccr-page-size-selector>
 

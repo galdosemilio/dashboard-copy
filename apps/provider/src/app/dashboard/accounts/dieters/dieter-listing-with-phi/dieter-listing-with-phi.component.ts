@@ -7,14 +7,11 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
-import { MatDialog, MatSort } from '@coachcare/material'
-import {
-  STORAGE_PAGE_SIZE_PATIENT_LISTING,
-  STORAGE_PATIENTS_PAGINATION
-} from '@app/config'
+import { MatDialog } from '@coachcare/material'
 import { resolveConfig } from '@app/config/section'
 import {
   ContextService,
+  DietersService,
   EventsService,
   NotifierService,
   SelectedOrganization
@@ -35,12 +32,21 @@ import { CcrPageSizeSelectorComponent } from '@app/shared/components/page-size-s
 import {
   convertToReadableFormat,
   DataPointTypes,
-  NamedEntity
+  NamedEntity,
+  PackageData
 } from '@coachcare/sdk'
 import { PackageFilter } from '@app/shared/components/package-filter'
 import { TranslateService } from '@ngx-translate/core'
 import { get } from 'lodash'
 import { CSV } from '@coachcare/common/shared'
+
+export interface PatientsFilters {
+  page?: number
+  pageSize?: number
+  expires?: Date
+  organization?: string
+  packages?: PackageFilter
+}
 
 @UntilDestroy()
 @Component({
@@ -63,13 +69,12 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
   csvSeparator = ','
   packageFilter?: PackageFilter
   refresh$: Subject<void> = new Subject<void>()
-  sort: MatSort = new MatSort()
   source: DieterListingDataSource
   totalCount: number
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360019923251-Adding-a-Patient'
-  defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_PATIENT_LISTING
   isPatientCreationEnabled = true
+  initialPackages: PackageData[] = []
 
   private extraColumns: NamedEntity[] = []
 
@@ -80,11 +85,20 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
     private bus: EventsService,
     private notifier: NotifierService,
     private database: DieterListingDatabase,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dieters: DietersService
   ) {}
 
   ngAfterViewInit(): void {
-    this.recoverPagination()
+    this.recoverFilters()
+    this.pageSizeSelectorComp.onPageSizeChange
+      .pipe(untilDestroyed(this))
+      .subscribe((pageSize) => {
+        this.dieters.storeFilters({
+          pageSize,
+          organization: this.context.organizationId
+        })
+      })
   }
 
   ngOnInit(): void {
@@ -164,18 +178,19 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
       })
 
     this.paginator.page.pipe(untilDestroyed(this)).subscribe((page) => {
-      window.localStorage.setItem(
-        STORAGE_PATIENTS_PAGINATION,
-        JSON.stringify({
-          page: page.pageIndex,
-          organization: this.context.organizationId
-        })
-      )
+      this.dieters.storeFilters({
+        page: page.pageIndex,
+        organization: this.context.organizationId
+      })
     })
   }
 
   onPackageFilter(filter): void {
     this.packageFilter = filter
+    this.dieters.storeFilters({
+      packages: this.packageFilter,
+      organization: this.context.organizationId
+    })
     this.refresh$.next()
   }
 
@@ -486,21 +501,22 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
     }
   }
 
-  private recoverPagination(): void {
-    const rawPagination = window.localStorage.getItem(
-      STORAGE_PATIENTS_PAGINATION
-    )
-    if (rawPagination) {
-      const pagination = JSON.parse(rawPagination)
+  private recoverFilters(): void {
+    const filters = this.dieters.recoverFilters()
 
-      if (pagination.organization === this.context.organizationId) {
-        this.paginator.pageIndex = pagination.page
-        this.source.pageIndex = pagination.page
-        this.cdr.detectChanges()
-        this.refresh$.next()
-      } else {
-        window.localStorage.removeItem(STORAGE_PATIENTS_PAGINATION)
-      }
+    if (!filters) {
+      return
     }
+
+    const pageSize = Number(filters.pageSize || 10)
+    const page = Number(filters.page || 0)
+    this.pageSizeSelectorComp.pageSize = pageSize
+    this.paginator.pageIndex = page
+    this.source.pageIndex = page
+    this.source.pageSize = pageSize
+    this.packageFilter = filters.packages
+    this.initialPackages = filters.packages?.pkg ?? []
+    this.cdr.detectChanges()
+    this.refresh$.next()
   }
 }

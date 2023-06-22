@@ -33,11 +33,15 @@ export class CcrPaginatorComponent extends MatPaginator {
   private _totalCount = 0
   private _source: TableDataSource<unknown, unknown, unknown>
   private sourceChangeSub: Subscription
+  private defaultPage$ = new Subject<number>()
 
   get totalCountPages() {
-    return this.pageSize && this._totalCount
-      ? Math.ceil(this._totalCount / this.pageSize)
-      : 0
+    const pages =
+      this.pageSize && this._totalCount
+        ? Math.ceil(this._totalCount / this.pageSize)
+        : 0
+
+    return pages
   }
 
   ngOnInit() {
@@ -55,10 +59,16 @@ export class CcrPaginatorComponent extends MatPaginator {
       }
     })
 
+    this.defaultPage$
+      .pipe(untilDestroyed(this), debounceTime(200))
+      .subscribe((page) => {
+        this.select.nativeElement.value = page
+      })
+
     this.totalCount$
       .pipe(untilDestroyed(this), debounceTime(500))
       .subscribe((value) => {
-        this.select.nativeElement.value = this.pageIndex
+        this.defaultPage$.next(this.pageIndex)
         this._totalCount = value ?? 0
         this.showOffsetSelector = this._totalCount > 0
       })

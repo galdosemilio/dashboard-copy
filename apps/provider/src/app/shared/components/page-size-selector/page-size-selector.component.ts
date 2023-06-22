@@ -24,6 +24,11 @@ export class CcrPageSizeSelectorComponent implements AfterViewInit {
 
   @Output() onPageSizeChange: EventEmitter<number> = new EventEmitter<number>()
 
+  set pageSize(size) {
+    this.select.nativeElement.value = size
+    this.onSelect({ target: { value: size } })
+  }
+
   public pageSizes: number[] = [10, 25, 50]
   public selectedPageSize?: number
 
@@ -40,8 +45,7 @@ export class CcrPageSizeSelectorComponent implements AfterViewInit {
       }
     }
 
-    this.select.nativeElement.value = pageSize
-    this.onSelect({ target: { value: pageSize } })
+    this.pageSize = pageSize
   }
 
   public onSelect($event): void {

@@ -9,12 +9,12 @@ import {
 } from '@angular/core'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort, Sort } from '@coachcare/material'
-import { STORAGE_PATIENTS_PAGINATION } from '@app/config'
 import {
   ContextService,
   DietersCriteria,
   DietersDatabase,
   DietersDataSource,
+  DietersService,
   EventsService,
   NotifierService,
   SelectedOrganization
@@ -49,11 +49,12 @@ export class DieterListingNoPhiComponent
     private context: ContextService,
     private bus: EventsService,
     private notifier: NotifierService,
-    private database: DietersDatabase
+    private database: DietersDatabase,
+    private dieters: DietersService
   ) {}
 
   ngAfterViewInit(): void {
-    this.recoverPagination()
+    this.recoverFilters()
   }
 
   ngOnInit() {
@@ -101,13 +102,10 @@ export class DieterListingNoPhiComponent
     })
 
     this.paginator.page.pipe(untilDestroyed(this)).subscribe((page) => {
-      window.localStorage.setItem(
-        STORAGE_PATIENTS_PAGINATION,
-        JSON.stringify({
-          page: page.pageIndex,
-          organization: this.context.organizationId
-        })
-      )
+      this.dieters.storeFilters({
+        page: page.pageIndex,
+        organization: this.context.organizationId
+      })
     })
   }
 
@@ -221,21 +219,16 @@ export class DieterListingNoPhiComponent
     this.sort.sortChange.emit(sort)
   }
 
-  private recoverPagination(): void {
-    const rawPagination = window.localStorage.getItem(
-      STORAGE_PATIENTS_PAGINATION
-    )
-    if (rawPagination) {
-      const pagination = JSON.parse(rawPagination)
+  private recoverFilters(): void {
+    const filters = this.dieters.recoverFilters()
 
-      if (pagination.organization === this.context.organizationId) {
-        this.paginator.pageIndex = pagination.page
-        this.dietersSource.pageIndex = pagination.page
-        this.cdr.detectChanges()
-        this.refresh$.next()
-      } else {
-        window.localStorage.removeItem(STORAGE_PATIENTS_PAGINATION)
-      }
+    if (!filters) {
+      return
     }
+
+    this.paginator.pageIndex = filters.page
+    this.dietersSource.pageIndex = filters.page
+    this.cdr.detectChanges()
+    this.refresh$.next()
   }
 }
