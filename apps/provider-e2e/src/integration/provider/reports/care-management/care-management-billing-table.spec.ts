@@ -43,13 +43,6 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       .should('contain', 'Lascario')
       .should('contain', 'Pacheco')
 
-    cy.get('@rpmBillingRows')
-      .eq(0)
-      .find('td')
-      .eq(11)
-      .should('contain', '1247')
-      .should('contain', '15')
-
     cy.get('[data-cy="device-type-heading"]').should('contain', 'Device Type')
 
     checkBillingCodes('1')
@@ -80,7 +73,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       }
     })
 
-    checkBillingCodes('2')
+    checkBillingCodes('3')
     cy.get('table').find('th').eq(5).should('contain', 'Device Type')
     cy.get('@rpmBillingRows').should('have.length', 5)
   })

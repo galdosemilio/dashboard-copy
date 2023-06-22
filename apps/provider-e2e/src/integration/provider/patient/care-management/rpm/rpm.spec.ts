@@ -262,7 +262,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
       })
     })
 
-    describe.only('Current active CTP code', () => {
+    describe('Current active CTP code', () => {
       describe('RPM', () => {
         it('should show 99457', () => {
           testCurrentCTPCode({
@@ -319,7 +319,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.get('app-dialog-care-mgmt-card').eq(1).contains('CCM')
     })
 
-    it.skip('should enable new episode', () => {
+    it('should enable new episode', () => {
       standardSetup({
         apiOverrides: [
           {
@@ -349,6 +349,8 @@ describe('Patient profile -> dashboard -> rpm', function () {
         .type('test primary diagnosis', { force: true })
         .trigger('blur')
         .trigger('change')
+
+      cy.tick(1000)
 
       cy.get('mat-dialog-container')
         .find('button')

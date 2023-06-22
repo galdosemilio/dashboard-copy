@@ -1,0 +1,53 @@
+{
+  "data": [
+    {
+      "id": "8",
+      "description": "Discontinued - patient request",
+      "isActive": true,
+      "requiresNote": false,
+      "appliesToStateInStatus": "inactive"
+    },
+    {
+      "id": "9",
+      "description": "Patient insurance coverage changed",
+      "isActive": true,
+      "requiresNote": false,
+      "appliesToStateInStatus": "inactive"
+    },
+    {
+      "id": "2",
+      "description": "Patient not compliant",
+      "isActive": true,
+      "requiresNote": false,
+      "appliesToStateInStatus": "inactive"
+    },
+    {
+      "id": "1",
+      "description": "Patient reached the goal",
+      "isActive": true,
+      "requiresNote": false,
+      "appliesToStateInStatus": "inactive"
+    },
+    {
+      "id": "3",
+      "description": "Provider discontinued",
+      "isActive": true,
+      "requiresNote": false,
+      "appliesToStateInStatus": "inactive"
+    },
+    {
+      "id": "4",
+      "description": "User error",
+      "isActive": true,
+      "requiresNote": false,
+      "appliesToStateInStatus": "inactive"
+    },
+    {
+      "id": "10",
+      "description": "Other",
+      "isActive": true,
+      "requiresNote": true
+    }
+  ],
+  "pagination": {}
+}

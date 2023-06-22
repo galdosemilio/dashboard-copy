@@ -821,6 +821,13 @@ const interceptCoreApiCalls = (
     )
   })
 
+  cy.intercept('GET', '/1.0/care-management/state/reason?**', {
+    fixture: fetchOverride(
+      '/1.0/care-management/state/reason?**',
+      'api/care-management/getDeactivationReasons'
+    )
+  })
+
   cy.intercept('GET', '/1.0/care-management/state?**', {
     fixture: fetchOverride(
       '/1.0/care-management/state?**',

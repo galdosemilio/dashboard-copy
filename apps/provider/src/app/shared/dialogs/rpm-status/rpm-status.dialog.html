@@ -206,7 +206,7 @@
             [disabled]="form.get('enableForm').invalid"
             class="ccr-button"
             color="primary"
-            mat-button>{{ 'CARE_SERVICES.ENABLE_SERVICE' | translate:{service: newEntryType.serviceType.name | translate} }}</button>
+            mat-button>{{ 'CARE_SERVICES.ENABLE_SERVICE' | translate:{service: newEntryType.serviceType.name} }}</button>
 
             <button (click)="goBack()" class="ccr-button" mat-button>
                 {{ 'GLOBAL.BACK' | translate }}
@@ -224,10 +224,10 @@
 
         <div *ngSwitchCase="'new_entry'" fxLayoutAlign="start center">
             <span class="mt-20 mb-10" *ngIf="currentStepperStep === stepperStepLength && shouldStartImmediately">
-                {{ 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_IMMEDIATELY' | translate:{service: newEntryType.serviceType.name | translate} }}
+                {{ 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_IMMEDIATELY' | translate:{service: newEntryType.serviceType.name} }}
             </span>
             <span class="mt-20 mb-10" *ngIf="currentStepperStep === stepperStepLength && !shouldStartImmediately">
-                {{ 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_TOMORROW' | translate:{service: newEntryType.serviceType.name | translate} }}
+                {{ 'CARE_SERVICES.SERVICE_WILL_BE_ENABLED_TOMORROW' | translate:{service: newEntryType.serviceType.name} }}
             </span>
         </div>
 
