@@ -1,3 +1,21 @@
+# [1.120.0](https://github.com/coachcare/dashboard/compare/v1.119.0...v1.120.0) (2023-06-23)
+
+
+### Bug Fixes
+
+* 2 minute time tracker issue [FRON-3185] ([2e204cf](https://github.com/coachcare/dashboard/commit/2e204cf932196f40722650316880a108690a6dcb))
+* allow non-spree store links [FRON-3172] ([53b3812](https://github.com/coachcare/dashboard/commit/53b38122fbfa83fc95f3431ad4096bdf3bd3f395))
+* cpt columns in rpm reports [FRON-3171] ([bd89fad](https://github.com/coachcare/dashboard/commit/bd89fad021ee6f27c5d9f474344280abb49848bf))
+* fix monitoring and liveInteraction in second iteration [FRON-3144] ([c694790](https://github.com/coachcare/dashboard/commit/c6947902ee7e74ca39d1f1937dcc319ebc1c8e89))
+* fix rpm state summary entry and test for ccm cpt codes [FRON-3181] ([f960358](https://github.com/coachcare/dashboard/commit/f960358ae8d10a1c207b3c9737c596753c6fe2c8))
+* show check mark when time tracking completed [FRON-3165] ([5c3d2b8](https://github.com/coachcare/dashboard/commit/5c3d2b817439c1022265e886fdf421a5da8f7382))
+* test corrections ([3e2259f](https://github.com/coachcare/dashboard/commit/3e2259f7b9e266580c9076d219c6a1917040bdea))
+
+
+### Features
+
+* adding bodytrace sync options ([baa01d6](https://github.com/coachcare/dashboard/commit/baa01d697e48a08ef60932806c646eb930c02677))
+
 # [1.119.0](https://github.com/coachcare/dashboard/compare/v1.118.2...v1.119.0) (2023-06-13)
 
 
