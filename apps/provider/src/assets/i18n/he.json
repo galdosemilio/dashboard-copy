@@ -1723,6 +1723,7 @@
     "ADD_RECIPIENTS": "הרשמו",
     "ADD_STEP": "הוסף שלב",
     "ALL_ORG_PATIENTS": "כל החולים במרפאה",
+    "ALL_PATIENTS_PHASES": "כל החולים בשלבים נבחרים",
     "ASSOC_WITH": "משויך לקליניקה <strong>{{org}}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "הרשמה גורפת",
     "BULK_REMOVE_RECIPIENTS": "ביטול רישום גורף",

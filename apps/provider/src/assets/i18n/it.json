@@ -1723,6 +1723,7 @@
     "ADD_RECIPIENTS": "Iscriversi",
     "ADD_STEP": "Aggiungi Step",
     "ALL_ORG_PATIENTS": "Tutti i pazienti in clinica",
+    "ALL_PATIENTS_PHASES": "Tutti i pazienti nelle fasi selezionate",
     "ASSOC_WITH": "Associato alla clinica <strong>{{org}}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "Iscrizione in blocco",
     "BULK_REMOVE_RECIPIENTS": "Annullamento in blocco",

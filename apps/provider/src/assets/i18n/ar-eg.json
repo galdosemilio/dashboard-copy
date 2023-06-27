@@ -1723,6 +1723,7 @@
     "ADD_RECIPIENTS": "يتسجل، يلتحق",
     "ADD_STEP": "أضف خطوة",
     "ALL_ORG_PATIENTS": "جميع المرضى في العيادة",
+    "ALL_PATIENTS_PHASES": "جميع المرضى في المرحلة (المراحل) المحددة",
     "ASSOC_WITH": "مرتبط بالعيادة <strong>{{org}}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "تسجيل بالجملة",
     "BULK_REMOVE_RECIPIENTS": "معظم إلغاء التسجيل",

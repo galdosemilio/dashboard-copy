@@ -1723,6 +1723,7 @@
     "ADD_RECIPIENTS": "Añadir Destinatarios",
     "ADD_STEP": "Añadir Paso",
     "ALL_ORG_PATIENTS": "Todos los pacientes de una clínica",
+    "ALL_PATIENTS_PHASES": "Todos los pacientes en fase(s) seleccionado(s)",
     "ASSOC_WITH": "Asociada con la clínica <strong>{{ org }}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "Añadir Múltiples Destinatarios",
     "BULK_REMOVE_RECIPIENTS": "Remover Múltiples Destinatarios",

@@ -1723,6 +1723,7 @@
     "ADD_RECIPIENTS": "Teilnehmer hinzufügen",
     "ADD_STEP": "Schritt hinzufügen",
     "ALL_ORG_PATIENTS": "Alle Patienten in der Klinik",
+    "ALL_PATIENTS_PHASES": "Alle Patienten in ausgewählten Phasen",
     "ASSOC_WITH": "Verbunden mit der Klinik <strong>{{org}}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "Massenregistrierung",
     "BULK_REMOVE_RECIPIENTS": "Bulk Unenroll",

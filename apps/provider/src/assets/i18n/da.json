@@ -1723,6 +1723,7 @@
     "ADD_RECIPIENTS": "Indskrive",
     "ADD_STEP": "Tilføj trin",
     "ALL_ORG_PATIENTS": "Alle patienter i klinikken",
+    "ALL_PATIENTS_PHASES": "Alle patienter i udvalgte fase(r)",
     "ASSOC_WITH": "Tilknyttet klinik <strong>{{org}}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "Bulk tilmelding",
     "BULK_REMOVE_RECIPIENTS": "Bulk Unenroll",

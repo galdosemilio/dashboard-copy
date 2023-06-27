@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import {
   Sequence,
@@ -18,6 +18,8 @@ import {
   AccountAccessData,
   OrganizationEntity,
   OrganizationProvider,
+  PackageAssociation,
+  PackageOrganization,
   Sequence as SelveraSequenceService
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
@@ -76,6 +78,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   public today: moment.Moment = moment()
   public isFirstStepImmediateProcess = false
   public firstStepDate: Date
+  public packagesControl = new FormControl([])
+  public packages: PackageAssociation[] = []
 
   private _sequence: Sequence
   private delayAcc: moment.Moment
@@ -90,7 +94,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     private fb: FormBuilder,
     private notify: NotifierService,
     private organization: OrganizationProvider,
-    private seq: SelveraSequenceService
+    private seq: SelveraSequenceService,
+    private packageOrganization: PackageOrganization
   ) {}
 
   public ngOnDestroy(): void {}
@@ -125,6 +130,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     if (typeof $event === 'object' && $event.id) {
       this.selectedOrg = $event
       void this.fetchOrgChildren(this.selectedOrg.id)
+      void this.fetchOrgPackages(this.selectedOrg.id)
     }
   }
 
@@ -164,7 +170,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
         executeAt: {
           local: moment(this.executeAt).format(this.executeAtFormat)
         },
-        transition: transition.id
+        transition: transition.id,
+        packages: this.packagesControl.value.map((p) => p.package.id)
       })
 
       this.bulkEnrollProgress = this.calculateProgress(
@@ -227,6 +234,14 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     } catch (error) {
       this.notify.error(_('NOTIFY.ERROR.SEQUENCING_NO_ENROLLED'))
     }
+  }
+
+  public onPackageRemoved(packageRecord): void {
+    const packages = this.packagesControl.value.filter(
+      (p) => p.package.id !== packageRecord.package.id
+    )
+
+    this.packagesControl.setValue(packages)
   }
 
   private calcDelayedDate(
@@ -299,6 +314,19 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     }
   }
 
+  private async fetchOrgPackages(orgId: string): Promise<void> {
+    try {
+      const response = await this.packageOrganization.getAll({
+        organization: orgId,
+        offset: 0,
+        limit: 'all'
+      })
+      this.packages = response.data
+    } catch (error) {
+      this.notify.error(error)
+    }
+  }
+
   private lockDialog(): void {
     this.dialog.disableClose = true
   }
@@ -330,9 +358,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     const firstStepDateMoment = moment(this.steps[0].date)
 
     this.firstStepDate = firstStepDateMoment.toDate()
-    this.isFirstStepImmediateProcess = firstStepDateMoment.isSameOrBefore(
-      startDateMoment
-    )
+    this.isFirstStepImmediateProcess =
+      firstStepDateMoment.isSameOrBefore(startDateMoment)
 
     delete this.delayAcc
   }

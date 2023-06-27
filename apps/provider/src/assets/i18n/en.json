@@ -1739,6 +1739,7 @@
     "ADD_RECIPIENTS": "Enroll",
     "ADD_STEP": "Add Step",
     "ALL_ORG_PATIENTS": "All patients in clinic",
+    "ALL_PATIENTS_PHASES": "All patients in selected phase(s)",
     "ASSOC_WITH": "Associated with clinic <strong>{{ org }}</strong> (ID {{ orgId}})",
     "BULK_ENROLL": "Bulk Enroll",
     "BULK_REMOVE_RECIPIENTS": "Bulk Unenroll",
