@@ -10,7 +10,7 @@ import {
   AccountProvider,
   AccountRef,
   AccSingleResponse,
-  RPM
+  CareManagementState
 } from '@coachcare/sdk'
 
 export interface RemoveClinicAssociationDialogProps {
@@ -34,7 +34,7 @@ export class RemoveClinicAssociationDialog implements OnInit {
     private context: ContextService,
     @Inject(MAT_DIALOG_DATA) private data: RemoveClinicAssociationDialogProps,
     private notifier: NotifierService,
-    private rpm: RPM
+    private careManagementState: CareManagementState
   ) {}
 
   public ngOnInit(): void {
@@ -44,7 +44,7 @@ export class RemoveClinicAssociationDialog implements OnInit {
 
   private async resolveRPMEntry(): Promise<void> {
     try {
-      const response = await this.rpm.getList({
+      const response = await this.careManagementState.getList({
         account: this.context.accountId,
         organization: this.data.organizationId,
         limit: 1,
