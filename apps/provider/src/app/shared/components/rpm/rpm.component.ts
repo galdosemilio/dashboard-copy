@@ -26,7 +26,7 @@ import { RPMStateEntry } from './models'
 import { debounceTime, filter } from 'rxjs/operators'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { STORAGE_CARE_MANAGEMENT_SERVICE_TYPE } from '@app/config'
+import { STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE } from '@app/config'
 
 @UntilDestroy()
 @Component({
@@ -76,7 +76,7 @@ export class RPMComponent implements OnInit {
             (entity) => entity.id === this.serviceType
           )
         localStorage.setItem(
-          STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
+          STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
           this.serviceType
         )
       })
@@ -131,7 +131,7 @@ export class RPMComponent implements OnInit {
           ]
 
       const storageServiceType = localStorage.getItem(
-        STORAGE_CARE_MANAGEMENT_SERVICE_TYPE
+        STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
       )
 
       // If the saved service type matches an active session - use that, else - take first option from listing
@@ -146,7 +146,7 @@ export class RPMComponent implements OnInit {
       })
 
       localStorage.setItem(
-        STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
+        STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
         loadedServiceType
       )
     } catch (error) {

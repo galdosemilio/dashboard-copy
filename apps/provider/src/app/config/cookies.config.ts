@@ -18,6 +18,8 @@ export const STORAGE_RPM_BILLING_COLUMN_INDEX = 'ccrRPMBillingsColumnIndex'
 export const STORAGE_PAGE_SIZE_RPM_BILLING = 'ccrDefaultPageSizeRPMBillings'
 export const STORAGE_MESSAGE_INPUT_HEIGHT = 'ccrMessageInputHeight'
 export const STORAGE_MEASUREMENT_LIST_SORT = 'ccrMeasurementListSort'
+export const STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE =
+  'ccrActiveCareManagementServiceType'
 export const STORAGE_CARE_MANAGEMENT_SERVICE_TYPE =
   'ccrCareManagementServiceType'
 export const STORAGE_JORNAL_FOOD_SHOW_ALL = 'ccrJournalFoodShowAll'

@@ -1,5 +1,6 @@
 import { standardSetup } from '../../../../../support'
-const STORAGE_CARE_MANAGEMENT_SERVICE_TYPE = 'ccrCareManagementServiceType'
+const STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE =
+  'ccrActiveCareManagementServiceType'
 
 const serviceTypeList = [
   {
@@ -53,7 +54,7 @@ const testCurrentCTPCode = ({
   code: string
   isCompleted?: boolean
 }) => {
-  window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '1')
+  window.localStorage.setItem(STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE, '1')
 
   standardSetup({
     apiOverrides: [
@@ -165,7 +166,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
   describe('selection', () => {
     it('should select first one by default and set session', () => {
-      localStorage.removeItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+      localStorage.removeItem(STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE)
 
       standardSetup()
 
@@ -177,13 +178,18 @@ describe('Patient profile -> dashboard -> rpm', function () {
         .should('contain', 'RPM')
         .then(() => {
           expect(
-            window.localStorage.getItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+            window.localStorage.getItem(
+              STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
+            )
           ).to.equal('1')
         })
     })
 
     it('should select first one by default if the session exists but not available', () => {
-      window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '5')
+      window.localStorage.setItem(
+        STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
+        '5'
+      )
 
       standardSetup()
 
@@ -195,13 +201,18 @@ describe('Patient profile -> dashboard -> rpm', function () {
         .should('contain', 'RPM')
         .then(() => {
           expect(
-            window.localStorage.getItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+            window.localStorage.getItem(
+              STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
+            )
           ).to.equal('1')
         })
     })
 
     it('should select with available session', () => {
-      window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '2')
+      window.localStorage.setItem(
+        STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
+        '2'
+      )
 
       standardSetup()
 
@@ -213,7 +224,9 @@ describe('Patient profile -> dashboard -> rpm', function () {
         .should('contain', 'CCM')
         .then(() => {
           expect(
-            window.localStorage.getItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
+            window.localStorage.getItem(
+              STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
+            )
           ).to.equal('2')
         })
     })
@@ -240,7 +253,10 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
   describe('timeTracking', () => {
     it('should set select care service type in event', () => {
-      window.localStorage.setItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE, '1')
+      window.localStorage.setItem(
+        STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
+        '1'
+      )
 
       standardSetup()
 
@@ -379,7 +395,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     for (const entry of serviceTypeList) {
       it(`${entry.serviceType.name}: show correct billable codes`, () => {
         window.localStorage.setItem(
-          STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
+          STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
           entry.serviceType.id
         )
 
