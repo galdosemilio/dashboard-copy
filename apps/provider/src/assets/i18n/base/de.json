@@ -419,6 +419,7 @@
     "SELECT_SCHEDULE": "Wählen Sie einen Terminplan",
     "SEND_PASSWORD_RESET": "Link zum Zurücksetzen des Passwortes senden",
     "SEND_PASSWORD_RESET_CONTENT": "Möchten Sie eine E-Mail zum Zurücksetzen des Passwortes an <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong> senden?",
+    "SERVICE_TYPE": "Servicetyp",
     "SESSION_STARTS_AT": "Sitzung beginnt bei {{time}}",
     "SHIPPING": "Versand",
     "SHIPPING_ADDRESS": "Lieferanschrift",

@@ -419,6 +419,7 @@
     "SELECT_SCHEDULE": "בחירת לוח זמנים",
     "SEND_PASSWORD_RESET": "שלח קישור לאיפוס סיסמה",
     "SEND_PASSWORD_RESET_CONTENT": "האם ברצונך לשלוח הודעת אימייל לאיפוס סיסמה אל <strong><a href=mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>?\"",
+    "SERVICE_TYPE": "סוג שירות",
     "SESSION_STARTS_AT": "הפגישה מתחילה ב {{time}}",
     "SHIPPING": "משלוח",
     "SHIPPING_ADDRESS": "כתובת למשלוח",

@@ -419,6 +419,7 @@
     "SELECT_SCHEDULE": "Selecione o calendário",
     "SEND_PASSWORD_RESET": "Enviar Link para Redefinir a Palavra-passe",
     "SEND_PASSWORD_RESET_CONTENT": "Deseja enviar um e-mail de redefinição de palavra-passe para <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong>?",
+    "SERVICE_TYPE": "Tipo de serviço",
     "SESSION_STARTS_AT": "Sessão começa no {{time}}",
     "SHIPPING": "Envio",
     "SHIPPING_ADDRESS": "Endereço para Envio",

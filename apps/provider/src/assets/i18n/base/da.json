@@ -419,6 +419,7 @@
     "SELECT_SCHEDULE": "Vælg Skema",
     "SEND_PASSWORD_RESET": "Send link til nulstilling af adgangskode",
     "SEND_PASSWORD_RESET_CONTENT": "Ønsker du at sende en email til nulstilling af en adgangskode til <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong>?",
+    "SERVICE_TYPE": "Servicetype",
     "SESSION_STARTS_AT": "Session starter på {{time}}",
     "SHIPPING": "Forsendelse",
     "SHIPPING_ADDRESS": "Forsendelsesadresse",

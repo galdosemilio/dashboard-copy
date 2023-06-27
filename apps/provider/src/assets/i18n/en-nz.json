@@ -419,6 +419,7 @@
     "SELECT_SCHEDULE": "Select Schedule",
     "SEND_PASSWORD_RESET": "Send Password Reset Link",
     "SEND_PASSWORD_RESET_CONTENT": "Do you want to send a password reset email to <strong><a href=\"mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>?",
+    "SERVICE_TYPE": "Service Type",
     "SESSION_STARTS_AT": "Session Starts at {{ time }}",
     "SHIPPING": "Shipping",
     "SHIPPING_ADDRESS": "Shipping Address",

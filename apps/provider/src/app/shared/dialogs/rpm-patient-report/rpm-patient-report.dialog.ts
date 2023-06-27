@@ -2,9 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@coachcare/material'
 import { ContextService, NotifierService } from '@app/service'
-import { AccountProvider, AccSingleResponse, RPM } from '@coachcare/sdk'
+import {
+  AccountProvider,
+  AccSingleResponse,
+  CareManagementProvider,
+  CareManagementState
+} from '@coachcare/sdk'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { SelectOption } from '@app/shared/utils'
+import { STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE } from '@app/config'
 
 interface RPMSession {
   end?: string
@@ -25,6 +32,7 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
   public form: FormGroup
   public maxDate: moment.Moment = moment()
   public minEndDate: moment.Moment
+  public serviceTypes: SelectOption<string>[] = []
   public rpmSessions: {
     organization: any
     data: RPMSession[]
@@ -37,18 +45,23 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
     private dialogRef: MatDialogRef<RPMPatientReportDialog>,
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private rpm: RPM
+    private careManagement: CareManagementProvider,
+    private careManagementState: CareManagementState
   ) {}
 
   public ngOnDestroy(): void {}
 
   public ngOnInit(): void {
     this.createForm()
-    void this.fetchAccountData()
+    void this.resolveData()
   }
 
   public async onDownloadReport(): Promise<void> {
     try {
+      if (this.form.invalid) {
+        return
+      }
+
       this.status = 'downloading'
       const formValue = this.form.value
       const dateRange = {
@@ -67,7 +80,8 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
         account: this.account.id,
         organization: this.context.organization.id,
         start: dateRange.start,
-        end: dateRange.end
+        end: dateRange.end,
+        serviceType: formValue.serviceType || undefined
       }
 
       let data
@@ -75,12 +89,12 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
 
       switch (format) {
         case 'pdf':
-          data = await this.rpm.getPatientRPMReportAsPDF(request)
+          data = await this.careManagement.getIndividualSummaryAsPDF(request)
           fileFormat = 'pdf'
           break
 
         case 'excel':
-          data = await this.rpm.getPatientRPMReportAsExcel(request)
+          data = await this.careManagement.getIndividualSummaryAsExcel(request)
           fileFormat = 'xlsx'
           break
       }
@@ -91,7 +105,10 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
 
       const blob = new Blob([data])
       const link = document.createElement('a')
-      const rawFileName = `${this.account.firstName}_${this.account.lastName}_RPM_Report`
+      const serviceName =
+        this.serviceTypes.find((item) => item.value === formValue.serviceType)
+          ?.viewValue || 'RPM'
+      const rawFileName = `${this.account.firstName}_${this.account.lastName}_${serviceName}_Report`
       link.href = window.URL.createObjectURL(blob)
       link.download = `${rawFileName.replace(/\W/gi, '')}.${fileFormat}`
       link.click()
@@ -110,6 +127,7 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
     this.form = this.fb.group({
       endDate: [lastMonth.clone().endOf('month'), Validators.required],
       format: ['pdf'],
+      serviceType: [''],
       startDate: [lastMonth.clone().startOf('month'), Validators.required]
     })
 
@@ -120,13 +138,52 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
       })
   }
 
-  private async fetchAccountData(): Promise<void> {
+  private async resolveData(): Promise<void> {
     try {
       this.account = await this.accountService.getSingle(this.context.accountId)
+      await this.resolveServiceTypes()
     } catch (error) {
       this.notifier.error(error)
     } finally {
       this.status = 'ready'
     }
+  }
+
+  private async resolveServiceTypes(): Promise<void> {
+    const activeCareManagementStates = (
+      await this.careManagementState.getList({
+        account: this.context.accountId,
+        organization: this.context.organization.id,
+        status: 'active'
+      })
+    ).data
+
+    this.serviceTypes = this.context.accessibleCareManagementServiceTypes
+      .filter((accessibleServiceType) => {
+        return activeCareManagementStates.some(
+          (activeSession) =>
+            activeSession.serviceType.id === accessibleServiceType.id
+        )
+      })
+      .map((e) => {
+        return {
+          value: e.id,
+          viewValue: e.name
+        }
+      })
+
+    const storageServiceType = localStorage.getItem(
+      STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
+    )
+
+    const loadedServiceType = this.serviceTypes.find(
+      (e) => e.value === storageServiceType
+    )
+      ? storageServiceType
+      : this.serviceTypes[0]?.value
+
+    this.form.patchValue({
+      serviceType: loadedServiceType
+    })
   }
 }

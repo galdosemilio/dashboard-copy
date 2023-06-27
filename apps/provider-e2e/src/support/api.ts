@@ -905,6 +905,13 @@ const interceptCoreApiCalls = (
   cy.intercept('POST', '/1.0/measurement/bodytrace/sync', {
     statusCode: 204
   }).as('bodytraceSync')
+
+  cy.intercept('GET', '/1.0/care-management/individual-summary?**', {
+    fixture: fetchOverride(
+      '/1.0/care-management/individual-summary?**',
+      'api/general/emptyDataEmptyPagination'
+    )
+  }).as('downloadCareManagementReports')
 }
 
 const seti18n = (): void => {

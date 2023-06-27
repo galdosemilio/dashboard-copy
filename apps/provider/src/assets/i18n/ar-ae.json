@@ -419,6 +419,7 @@
     "SELECT_SCHEDULE": "اختر الجدول",
     "SEND_PASSWORD_RESET": "إرسال رابط إعادة تعيين كلمة المرور",
     "SEND_PASSWORD_RESET_CONTENT": "هل ترغب في إرسال بريد إلكتروني لإعادة تعيين كلمة المرور إلى <strong><a href=mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>؟\"",
+    "SERVICE_TYPE": "نوع الخدمة",
     "SESSION_STARTS_AT": "تبدأ الجلسة في {{time}}",
     "SHIPPING": "شحن",
     "SHIPPING_ADDRESS": "عنوان الشحن",

@@ -419,6 +419,7 @@
     "SELECT_SCHEDULE": "Calendario de",
     "SEND_PASSWORD_RESET": "Enviar Enlace de Restablecimiento de Contraseña",
     "SEND_PASSWORD_RESET_CONTENT": "¿Quiere enviar un email de restablecimiento de contraseña a <strong><a href=\"mailto:{{ email }}\">{{ email }}</a></strong>?",
+    "SERVICE_TYPE": "Tipo de servicio",
     "SESSION_STARTS_AT": "La sesión comienza a las {{time}}",
     "SHIPPING": "Envío",
     "SHIPPING_ADDRESS": "Dirección de Envío",
