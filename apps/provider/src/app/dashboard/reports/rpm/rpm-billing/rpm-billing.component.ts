@@ -24,10 +24,10 @@ import {
   PackageOrganization,
   Timezone,
   TimezoneResponse,
-  RPM,
   ExternalIdentifier,
   FetchCareManagementBillingSnapshotRequest,
-  CareManagementServiceType
+  CareManagementServiceType,
+  CareManagementState
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
@@ -162,7 +162,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     private packageOrganization: PackageOrganization,
     private timezone: Timezone,
     private translator: TranslateService,
-    private rpm: RPM,
+    private careManagementState: CareManagementState,
     private careManagementService: CareManagementService
   ) {
     this.sortHandler = this.sortHandler.bind(this)
@@ -932,7 +932,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     try {
-      const res = this.rpm.getSupervisingProviders({
+      const res = this.careManagementState.getSupervisingProviders({
         organization: this.selectedClinic?.id || environment.coachcareOrgId,
         query: this.supervisingProviderControl.value || undefined
       })

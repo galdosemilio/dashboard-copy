@@ -3,7 +3,10 @@ import { MatDialog } from '@angular/material/dialog'
 import { ContextService, NotifierService } from '@app/service'
 import { PromptDialog, SupervisingProvidersDataSource } from '@app/shared'
 import { _ } from '@app/shared/utils'
-import { RPM, SupervisingProviderAssociationItem } from '@coachcare/sdk'
+import {
+  CareManagementState,
+  SupervisingProviderAssociationItem
+} from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { filter } from 'rxjs/operators'
 
@@ -24,7 +27,7 @@ export class ClinicSupervisingProvidersTable implements OnInit {
     private context: ContextService,
     private dialog: MatDialog,
     private notifier: NotifierService,
-    private rpm: RPM
+    private careManagementState: CareManagementState
   ) {}
 
   public ngOnInit(): void {
@@ -59,7 +62,7 @@ export class ClinicSupervisingProvidersTable implements OnInit {
     association: SupervisingProviderAssociationItem
   ): Promise<void> {
     try {
-      await this.rpm.removeSupervisingProvider({
+      await this.careManagementState.removeSupervisingProvider({
         id: association.id
       })
       this.notifier.success(_('NOTIFY.SUCCESS.SUPERVISING_PROVIDER_REMOVED'))

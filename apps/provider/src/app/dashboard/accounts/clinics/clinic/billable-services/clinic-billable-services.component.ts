@@ -4,9 +4,9 @@ import {
   CareManagementOrganizationPreference,
   CareManagementPreference,
   CareManagementServiceTypeId,
+  CareManagementState,
   NamedEntity,
-  OrganizationProvider,
-  RPM
+  OrganizationProvider
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -40,6 +40,7 @@ export class ClinicBillableServicesComponent implements OnInit {
   private rpmPrefUpdateBlock = true
 
   constructor(
+    private careManagementState: CareManagementState,
     private carePreference: CareManagementPreference,
     private context: ContextService,
     private database: SupervisingProvidersDatabase,
@@ -47,8 +48,7 @@ export class ClinicBillableServicesComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private notifier: NotifierService,
-    private organization: OrganizationProvider,
-    private rpm: RPM
+    private organization: OrganizationProvider
   ) {}
 
   public ngOnInit(): void {
@@ -138,7 +138,7 @@ export class ClinicBillableServicesComponent implements OnInit {
 
   private async addSupervisingProvider(account): Promise<void> {
     try {
-      await this.rpm.addSupervisingProvider({
+      await this.careManagementState.addSupervisingProvider({
         account: account.id,
         organization: this.context.clinic.id
       })
