@@ -1779,6 +1779,7 @@
     "ENROLLEES": "Inscrits",
     "ENROLLEES_EMPTY_LIST": "Aucun inscrit pour cette séquence",
     "ENROLLMENTS_EMPTY_LIST": "Aucune inscription pour le patient dans cette séquence",
+    "EXECUTE_AT": "Exécuter à",
     "FORCE_EMAIL_BRANDING": "Force de l'image de marque e-mail",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "Ce contrôle des paramètres si l'image de marque sur les e-mails envoyés à partir de cette séquence utiliser le nom clinique, le logo et les couleurs de la clinique qui a été sélectionnée lorsque la séquence a été créée.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "Les e-mails envoyés à partir de cette séquence utiliseront toujours le nom de la clinique, le logo et les couleurs pour le {{clinicName}} (ID {{clinicId}}) clinique.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "Message",
     "MESSAGE_DELETED_PROMPT": "Message supprimé",
+    "MESSAGE_LOG": "Journal des messages",
     "NOTIF_TOO_LONG_WARNING": "Un message de notification dépasse la longueur maximale recommandée.",
     "NO_ADMIN_ORG": "Vous ne disposez pas des autorisations d'administrateur pour cette clinique.",
     "NO_DEEP_LINK": "Pas de lien profond",
@@ -1820,6 +1822,7 @@
     "OTHER": "Autre",
     "PACKAGE_ENROLLMENT": "La phase d'inscription",
     "PICK_SEQ_TO_ADD": "Sélectionnez ou rechercher une séquence pour pouvoir ajouter les inscriptions à elle.",
+    "PREVIOUSLY_SENT": "Envoyé précédemment",
     "PROCESSING_BULK_ENROLLMENT": "Traitement pour la clinique {{ org }}",
     "RECIPIENTS": "Inscrit",
     "REMOVE_SEQUENCE_CONTENT": "Etes-vous sûr de vouloir supprimer la séquence {{name}}? Aucun message pour cette séquence seront livrés après il est supprimé.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "modèle Exemple",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Ceci est un exemple de l'endroit où sera placé le texte de chaque champ dans le message reçu par le patient.",
     "TRANSLATIONS": "Traductions",
-    "TRIGGER_HISTORY": "Historique des messages",
     "TRIGGER_HISTORY_EMPTY_LIST": "L’historique des messages est vide pour cette inscription",
     "TYPE": "Type",
     "UNDO": "Annuler",
-    "UNENROLL_RECIPIENTS": "Désinscription des patients"
+    "UNENROLL_RECIPIENTS": "Désinscription des patients",
+    "UPCOMING": "A venir"
   },
   "SHARED": {
     "ORGS": {

@@ -1779,6 +1779,7 @@
     "ENROLLEES": "נרשמים",
     "ENROLLEES_EMPTY_LIST": "אין רשומות לרצף זה.",
     "ENROLLMENTS_EMPTY_LIST": "ברצף זה אין הרשמות לחולה.",
+    "EXECUTE_AT": "לבצע ב",
     "FORCE_EMAIL_BRANDING": "מיתוג דוא\"ל חיל",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "שולטת בהגדרות זה אם המיתוג על הודעות דוא\"ל שנשלחו משימוש רצף זה המרפאה שם, הלוגו והצבעים מהמרפאה כי נבחרה כאשר רצף נוצרה.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "הודעות דוא\"ל שנשלחו מ- רצף זה תמיד ישתמש בשם מרפאה, לוגו, וצבעים עבור {{clinicName}} (מזהה {{clinicId}}) במרפאה.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "הודעה",
     "MESSAGE_DELETED_PROMPT": "הודעה נמחקה",
+    "MESSAGE_LOG": "יומן הודעות",
     "NOTIF_TOO_LONG_WARNING": "הודעה הודעה חורגת מהאורך המקסימלי המומלץ.",
     "NO_ADMIN_ORG": "אין לך הרשאות מנהל עבור מרפאה זו.",
     "NO_DEEP_LINK": "אין קישור עמוק",
@@ -1820,6 +1822,7 @@
     "OTHER": "אחר",
     "PACKAGE_ENROLLMENT": "הרשמה לשלב",
     "PICK_SEQ_TO_ADD": "בחר או חפש ברצף כדי שתוכל להוסיף הרשמות אליו.",
+    "PREVIOUSLY_SENT": "נשלח בעבר",
     "PROCESSING_BULK_ENROLLMENT": "עיבוד עבור מרפאת {{ org }}",
     "RECIPIENTS": "נמענים",
     "REMOVE_SEQUENCE_CONTENT": "האם אתה בטוח שברצונך למחוק את הרצף {{ name }}? לא יימסרו הודעות עבור רצף זה לאחר שנמחקו.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "דוגמה לתבנית",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "זו דוגמה למקום בו הטקסט מכל שדה יוכנס להודעה שקיבל המטופל.",
     "TRANSLATIONS": "תרגומים",
-    "TRIGGER_HISTORY": "היסטוריית הודעות",
     "TRIGGER_HISTORY_EMPTY_LIST": "היסטוריית ההודעות ריקה להרשמה זו.",
     "TYPE": "סוג",
     "UNDO": "לבטל",
-    "UNENROLL_RECIPIENTS": "בטל רישום של חולים"
+    "UNENROLL_RECIPIENTS": "בטל רישום של חולים",
+    "UPCOMING": "בקרוב"
   },
   "SHARED": {
     "ORGS": {

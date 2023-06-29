@@ -136,6 +136,14 @@ const interceptCoreApiCalls = (
     }
   })
 
+  cy.intercept('GET', '/1.0/sequence/trigger/history?**', {
+    fixture: 'api/sequence/getTriggers'
+  })
+
+  cy.intercept('GET', '/1.0/sequence/transition/pending?**', {
+    fixture: 'api/sequence/getPendingTransitions'
+  })
+
   cy.intercept('POST', `/1.0/sequence/transition`, {
     statusCode: 200,
     body: {

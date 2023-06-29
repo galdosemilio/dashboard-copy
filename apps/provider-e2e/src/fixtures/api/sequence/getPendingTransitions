@@ -1,0 +1,429 @@
+{
+    "data": [
+        {
+            "id": "5102",
+            "from": {
+                "id": "3194"
+            },
+            "to": {
+                "id": "3195"
+            },
+            "delay": "200 days 06:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:10:11.340Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2023-12-08T05:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": [
+                {
+                    "id": "3466",
+                    "type": {
+                        "id": "3",
+                        "name": "SMS message"
+                    },
+                    "payload": {
+                        "content": "Hellow",
+                        "message": "Hellow"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                },
+                {
+                    "id": "3467",
+                    "type": {
+                        "id": "1",
+                        "name": "E-mail"
+                    },
+                    "payload": {
+                        "title": "Test email",
+                        "header": "Email",
+                        "content": "Email",
+                        "message": "Email",
+                        "subject": "Test email"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                }
+            ]
+        },
+        {
+            "id": "5105",
+            "from": {
+                "id": "3195"
+            },
+            "to": {
+                "id": "3197"
+            },
+            "delay": "20 days 09:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:19:11.081Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2023-12-28T14:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": []
+        },
+        {
+            "id": "5108",
+            "from": {
+                "id": "3197"
+            },
+            "to": {
+                "id": "3192"
+            },
+            "delay": "15:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:19:11.969Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2023-12-29T05:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": []
+        },
+        {
+            "id": "5104",
+            "from": {
+                "id": "3192"
+            },
+            "to": {
+                "id": "3194"
+            },
+            "delay": "1 day 01:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:19:11.052Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2023-12-30T06:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": [
+                {
+                    "id": "3464",
+                    "type": {
+                        "id": "2",
+                        "name": "Push notification"
+                    },
+                    "payload": {
+                        "title": "Test",
+                        "header": "Test",
+                        "content": "Hello",
+                        "message": "Hello"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                }
+            ]
+        },
+        {
+            "id": "5102",
+            "from": {
+                "id": "3194"
+            },
+            "to": {
+                "id": "3195"
+            },
+            "delay": "200 days 06:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:10:11.340Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2024-07-17T12:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": [
+                {
+                    "id": "3466",
+                    "type": {
+                        "id": "3",
+                        "name": "SMS message"
+                    },
+                    "payload": {
+                        "content": "Hellow",
+                        "message": "Hellow"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                },
+                {
+                    "id": "3467",
+                    "type": {
+                        "id": "1",
+                        "name": "E-mail"
+                    },
+                    "payload": {
+                        "title": "Test email",
+                        "header": "Email",
+                        "content": "Email",
+                        "message": "Email",
+                        "subject": "Test email"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                }
+            ]
+        },
+        {
+            "id": "5105",
+            "from": {
+                "id": "3195"
+            },
+            "to": {
+                "id": "3197"
+            },
+            "delay": "20 days 09:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:19:11.081Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2024-08-06T21:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": []
+        },
+        {
+            "id": "5108",
+            "from": {
+                "id": "3197"
+            },
+            "to": {
+                "id": "3192"
+            },
+            "delay": "15:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:19:11.969Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2024-08-07T12:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": []
+        },
+        {
+            "id": "5104",
+            "from": {
+                "id": "3192"
+            },
+            "to": {
+                "id": "3194"
+            },
+            "delay": "1 day 01:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:19:11.052Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2024-08-08T13:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": [
+                {
+                    "id": "3464",
+                    "type": {
+                        "id": "2",
+                        "name": "Push notification"
+                    },
+                    "payload": {
+                        "title": "Test",
+                        "header": "Test",
+                        "content": "Hello",
+                        "message": "Hello"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                }
+            ]
+        },
+        {
+            "id": "5102",
+            "from": {
+                "id": "3194"
+            },
+            "to": {
+                "id": "3195"
+            },
+            "delay": "200 days 06:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:10:11.340Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2025-02-24T19:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": [
+                {
+                    "id": "3466",
+                    "type": {
+                        "id": "3",
+                        "name": "SMS message"
+                    },
+                    "payload": {
+                        "content": "Hellow",
+                        "message": "Hellow"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                },
+                {
+                    "id": "3467",
+                    "type": {
+                        "id": "1",
+                        "name": "E-mail"
+                    },
+                    "payload": {
+                        "title": "Test email",
+                        "header": "Email",
+                        "content": "Email",
+                        "message": "Email",
+                        "subject": "Test email"
+                    },
+                    "isActive": true,
+                    "localizations": []
+                }
+            ]
+        },
+        {
+            "id": "5105",
+            "from": {
+                "id": "3195"
+            },
+            "to": {
+                "id": "3197"
+            },
+            "delay": "20 days 09:00:00",
+            "createdBy": {
+                "id": "2852"
+            },
+            "createdAt": "2021-02-18T16:19:11.081Z",
+            "sequence": {
+                "id": "11425",
+                "name": "100 day sequence",
+                "organization": {
+                    "id": "30"
+                }
+            },
+            "organization": {
+                "id": "30"
+            },
+            "account": {
+                "id": "6"
+            },
+            "transitionAt": "2025-03-17T04:00:00.000Z",
+            "timezone": "America/New_York",
+            "triggers": []
+        }
+    ],
+    "pagination": {
+        "next": 10
+    }
+}

@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "trigger": {
+        "id": 3460,
+        "createdAt": "2022-11-23T13:49:52.746779+00:00",
+        "updatedAt": "2023-06-26T13:31:19.102015+00:00",
+        "isActive": false,
+        "type": {
+          "id": 2,
+          "name": "Push notification"
+        }
+      },
+      "payload": {
+        "title": "Test",
+        "header": "Test",
+        "content": "Testsddd",
+        "message": "Testsddd",
+        "deepLink": "mycoachcare://appointment"
+      },
+      "account": {
+        "id": 6
+      },
+      "organization": {
+        "id": 30
+      },
+      "createdAt": "2023-01-26 19:00:00.824197+00",
+      "sequence": {
+        "id": "11425",
+        "organization": {
+          "id": "30"
+        }
+      }
+    }
+  ],
+  "pagination": {}
+}

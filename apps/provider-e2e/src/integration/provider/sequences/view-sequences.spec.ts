@@ -286,6 +286,36 @@ describe('Sequences -> view', function () {
       expect(xhr.request.body.enrollment).to.equal(null)
     })
   })
+
+  it.only('Clinic shows properly sequence enrollments message logs', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/sequences/sequence/${Cypress.env('sequenceId')}`)
+
+    cy.tick(10000)
+
+    cy.get('[data-cy="sequence-button-enrollees"]').click()
+    cy.contains('search').click()
+    cy.get('[aria-label="Previously Sent"]').click()
+
+    cy.get('mat-table mat-row')
+      .eq(1)
+      .should('contain', 'Push notification')
+      .should('contain', 'Test')
+
+    cy.get('[aria-label="Upcoming"]').click()
+
+    cy.get('mat-table mat-row')
+      .eq(1)
+      .should('contain', 'SMS message')
+      .should('contain', 'Hellow')
+
+    cy.get('mat-table mat-row')
+      .eq(2)
+      .should('contain', 'E-mail')
+      .should('contain', 'Test email')
+  })
 })
 
 function assertStepStructure(): void {

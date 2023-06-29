@@ -1779,6 +1779,7 @@
     "ENROLLEES": "Enrollees",
     "ENROLLEES_EMPTY_LIST": "There are no enrollees for this sequence.",
     "ENROLLMENTS_EMPTY_LIST": "There are no enrollments for the patient in this sequence.",
+    "EXECUTE_AT": "Execute At",
     "FORCE_EMAIL_BRANDING": "Force Email Branding",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "This settings controls if the branding on the emails sent from this sequence use the clinic name, logo and colors from the clinic that was selected when the sequence was created.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "Emails sent out from this sequence will always use the clinic name, logo, and colors for the {{clinicName}} (ID {{clinicId}}) clinic.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "Message",
     "MESSAGE_DELETED_PROMPT": "Message deleted",
+    "MESSAGE_LOG": "Message Log",
     "NOTIF_TOO_LONG_WARNING": "Notification message exceeds the recommended maximum length.",
     "NO_ADMIN_ORG": "You don't have admin permissions for this clinic.",
     "NO_DEEP_LINK": "No Deep Link",
@@ -1820,6 +1822,7 @@
     "OTHER": "Other",
     "PACKAGE_ENROLLMENT": "Phase Enrollment",
     "PICK_SEQ_TO_ADD": "Select or search a Sequence to be able to add enrollments to it.",
+    "PREVIOUSLY_SENT": "Previously Sent",
     "PROCESSING_BULK_ENROLLMENT": "Processing for {{ org }} clinic",
     "RECIPIENTS": "Enrollee",
     "REMOVE_SEQUENCE_CONTENT": "Are you sure you want to delete the sequence {{ name }}? No messages for this sequence will be delivered after it is deleted.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "Template Example",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "This is an example of where the text from each field will be placed into the message received by the patient.",
     "TRANSLATIONS": "Translations",
-    "TRIGGER_HISTORY": "Message History",
     "TRIGGER_HISTORY_EMPTY_LIST": "Message history is empty for this enrollment.",
     "TYPE": "Type",
     "UNDO": "Undo",
-    "UNENROLL_RECIPIENTS": "Unenroll Patients"
+    "UNENROLL_RECIPIENTS": "Unenroll Patients",
+    "UPCOMING": "Upcoming"
   },
   "SHARED": {
     "ORGS": {

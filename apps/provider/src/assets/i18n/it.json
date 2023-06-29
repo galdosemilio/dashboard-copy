@@ -1779,6 +1779,7 @@
     "ENROLLEES": "Iscritti",
     "ENROLLEES_EMPTY_LIST": "Non ci sono iscritti per questa sequenza.",
     "ENROLLMENTS_EMPTY_LIST": "Non ci sono iscrizioni per il paziente in questa sequenza.",
+    "EXECUTE_AT": "Eseguire a",
     "FORCE_EMAIL_BRANDING": "Forza Email Branding",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "Questa impostazione controlla se il marchio sulle email inviate da questo uso sequenza clinica nome, il logo ei colori dalla clinica che è stata selezionata al momento della creazione della sequenza.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "Messaggi di posta elettronica inviati da questa sequenza sempre utilizzerà il nome clinica, logo e colori per la {{clinicName}} (ID {{clinicId}}) clinica.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "Messaggio",
     "MESSAGE_DELETED_PROMPT": "Messaggio cancellato",
+    "MESSAGE_LOG": "Registro dei messaggi",
     "NOTIF_TOO_LONG_WARNING": "Messaggio di notifica supera la lunghezza massima consigliata.",
     "NO_ADMIN_ORG": "Non hai i permessi di amministratore per questa clinica.",
     "NO_DEEP_LINK": "Nessun collegamento diretto",
@@ -1820,6 +1822,7 @@
     "OTHER": "Altro",
     "PACKAGE_ENROLLMENT": "fase di iscrizione",
     "PICK_SEQ_TO_ADD": "Selezionare o cercare una sequenza di essere in grado di aggiungere iscrizioni ad essa.",
+    "PREVIOUSLY_SENT": "Precedentemente inviato",
     "PROCESSING_BULK_ENROLLMENT": "Elaborazione per {{ org }} clinica",
     "RECIPIENTS": "Iscritto",
     "REMOVE_SEQUENCE_CONTENT": "Sei sicuro di voler cancellare la successione {{nome}}? Nessun messaggio per questa sequenza saranno consegnati dopo che è stato cancellato.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "Esempio di Modello",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Questo è un esempio di dove sarà posizionato il testo di ogni campo nel messaggio ricevuto dal paziente.",
     "TRANSLATIONS": "Traduzioni",
-    "TRIGGER_HISTORY": "Cronologia Messaggi",
     "TRIGGER_HISTORY_EMPTY_LIST": "La cronologia messaggi è vuota per questa iscrizione.",
     "TYPE": "Tipo di Attività",
     "UNDO": "Disfare",
-    "UNENROLL_RECIPIENTS": "Iscrivere i pazienti"
+    "UNENROLL_RECIPIENTS": "Iscrivere i pazienti",
+    "UPCOMING": "In arrivo"
   },
   "SHARED": {
     "ORGS": {

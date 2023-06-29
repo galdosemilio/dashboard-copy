@@ -1779,6 +1779,7 @@
     "ENROLLEES": "Destinatarios",
     "ENROLLEES_EMPTY_LIST": "No hay destinatarios para esta secuencia.",
     "ENROLLMENTS_EMPTY_LIST": "No hay enrolamientos para este paciente en esta secuencia.",
+    "EXECUTE_AT": "Ejecutar en",
     "FORCE_EMAIL_BRANDING": "Forzar la Marca de los Emails",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "Esta configuración permite determinar si los correos electrónicos enviados desde esta sencuencia usarán el nombre, el logo y los colores de la clínica seleccionada cuando se creó esta secuencia.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "Los correos electrónicos enviados desde esta secuencia siempre usarán el nombre de la clínica, el logo, y los colores de la clínica {{clinicName}} (ID {{clinicId}})",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "Mensaje",
     "MESSAGE_DELETED_PROMPT": "Mensaje borrado",
+    "MESSAGE_LOG": "Registro de mensajes",
     "NOTIF_TOO_LONG_WARNING": "El texto de la notificación excede la longitud máxima recomendada.",
     "NO_ADMIN_ORG": "No tiene permisos de administrador para esta clínica.",
     "NO_DEEP_LINK": "Sin enlace profundo",
@@ -1820,6 +1822,7 @@
     "OTHER": "Otro",
     "PACKAGE_ENROLLMENT": "Inscripción a Fase",
     "PICK_SEQ_TO_ADD": "Busque o seleccione una Secuencia para poder añadir enrolamientos a la misma.",
+    "PREVIOUSLY_SENT": "Enviado previamente",
     "PROCESSING_BULK_ENROLLMENT": "Procesando para {{ org }} clínica",
     "RECIPIENTS": "Destinatarios",
     "REMOVE_SEQUENCE_CONTENT": "¿Está seguro de querer eliminar la secuencia {{ name }}? No se enviarán más mensajes de esta secuencia en cuanto se elimine.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "Plantilla de Ejemplo",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Esto es un ejemplo de dónde se ubicará el texto de cada campo en el mensaje recibido por el paciente.",
     "TRANSLATIONS": "Traducciones",
-    "TRIGGER_HISTORY": "Historial de Mensajes",
     "TRIGGER_HISTORY_EMPTY_LIST": "El historial de mensajes está vacío para este enrolamiento",
     "TYPE": "Tipo",
     "UNDO": "Deshacer",
-    "UNENROLL_RECIPIENTS": "Remover Destinatarios"
+    "UNENROLL_RECIPIENTS": "Remover Destinatarios",
+    "UPCOMING": "Próximo"
   },
   "SHARED": {
     "ORGS": {

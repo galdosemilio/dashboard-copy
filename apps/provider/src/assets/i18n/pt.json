@@ -1779,6 +1779,7 @@
     "ENROLLEES": "Inscritos",
     "ENROLLEES_EMPTY_LIST": "Não existe inscritos nesta Sequência",
     "ENROLLMENTS_EMPTY_LIST": "Não existe inscrições para o paciente nesta lista.",
+    "EXECUTE_AT": "Executar em",
     "FORCE_EMAIL_BRANDING": "Força-mail de Branding",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "Esta configuração controla se a marca sobre os e-mails enviados a partir deste uso sequência da clínica nome, logotipo e cores da clínica que foi selecionado quando a seqüência foi criado.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "E-mails enviados a partir desta seqüência será sempre usar o nome clínica, logotipo e cores para o {{clinicName}} (ID {{clinicId}}) clínica.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "Mensagem",
     "MESSAGE_DELETED_PROMPT": "Mensagem apagada",
+    "MESSAGE_LOG": "Registro de mensagens",
     "NOTIF_TOO_LONG_WARNING": "Mensagem de notificação excede o comprimento máximo recomendado.",
     "NO_ADMIN_ORG": "Você não tem permissões de administrador para esta clínica.",
     "NO_DEEP_LINK": "Nenhum link profundo",
@@ -1820,6 +1822,7 @@
     "OTHER": "De outros",
     "PACKAGE_ENROLLMENT": "fase Inscrição",
     "PICK_SEQ_TO_ADD": "Selecionar ou procurar uma seqüência para ser capaz de adicionar inscrições a ela.",
+    "PREVIOUSLY_SENT": "Enviado anteriormente",
     "PROCESSING_BULK_ENROLLMENT": "Processamento para clínica {{ org }}",
     "RECIPIENTS": "Inscritos",
     "REMOVE_SEQUENCE_CONTENT": "Tem certeza de que deseja apagar a sequência {{name}}? Nenhuma mensagem para esta sequência será entregue depois de ser eliminado.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "Template de Exemplo",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Este é um exemplo de onde o texto de cada campo será colocado na mensagem recebida pelo paciente.",
     "TRANSLATIONS": "Traduções",
-    "TRIGGER_HISTORY": "Histórico de Mensagens",
     "TRIGGER_HISTORY_EMPTY_LIST": "O histórico de mensagens está vazio para esta inscrição.",
     "TYPE": "Tipo",
     "UNDO": "Desfazer",
-    "UNENROLL_RECIPIENTS": "Cancelar a inscrição de pacientes"
+    "UNENROLL_RECIPIENTS": "Cancelar a inscrição de pacientes",
+    "UPCOMING": "Por vir"
   },
   "SHARED": {
     "ORGS": {

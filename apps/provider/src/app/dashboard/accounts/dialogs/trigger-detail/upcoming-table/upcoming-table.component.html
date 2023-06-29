@@ -1,0 +1,70 @@
+
+<div
+fxLayout="column"
+fxLayoutAlign="start stretch"
+fxLayoutGap="10px">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <ccr-paginator fxFlex="nogrow" #paginator
+        [source]="source"
+        ></ccr-paginator>
+    </div>
+
+    <div>
+        <ccr-datasource-overlay
+        [emptyMsg]="'SEQUENCING.TRIGGER_HISTORY_EMPTY_LIST' | translate"
+        [source]="source"
+        class="ccr-table">
+            <mat-table [dataSource]="source">
+                <ng-container cdkColumnDef="type">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.TYPE' | translate }}</mat-header-cell>
+                <mat-cell
+                *cdkCellDef="let row"
+                fxLayoutAlign="start center"
+                fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+                    {{ row.trigger?.type?.name }}
+                </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="createdAt">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.EXECUTE_AT' | translate }}</mat-header-cell>
+                <mat-cell
+                *cdkCellDef="let row"
+                fxLayoutAlign="start center"
+                fxLayoutAlign.xs=" center"
+                fxFlex.xs="grow">
+                    {{ row.transitionAt | amDateFormat:'ddd, MMM D YYYY' }}
+                </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="createdAtHour">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.HOUR' | translate }}</mat-header-cell>
+                <mat-cell
+                *cdkCellDef="let row"
+                fxLayoutAlign="start center"
+                fxLayoutAlign.xs=" center"
+                fxFlex.xs="grow">
+                    {{ row.transitionAt | amDateFormat:'h:mm a' }}
+                </mat-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="content">
+                <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.CONTENT' | translate }}</mat-header-cell>
+                <mat-cell
+                *cdkCellDef="let row"
+                fxLayoutAlign="start center"
+                fxLayoutAlign.xs=" center"
+                fxFlex.xs="grow">
+                    {{ row?.trigger?.payload?.title || row?.trigger?.payload?.subject || row?.trigger?.payload?.message || row?.trigger?.payload?.header || row?.trigger?.payload?.content }}
+                </mat-cell>
+                </ng-container>
+
+                <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+                <mat-row fxLayoutWrap
+                    *cdkRowDef="let row; columns: columns; let even = even; let odd = odd"
+                    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+                    class="clickable"
+                ></mat-row>
+            </mat-table>
+        </ccr-datasource-overlay>
+    </div>
+</div>

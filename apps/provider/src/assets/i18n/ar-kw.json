@@ -1779,6 +1779,7 @@
     "ENROLLEES": "المسجلات",
     "ENROLLEES_EMPTY_LIST": "لا توجد مسجلات لهذا التسلسل.",
     "ENROLLMENTS_EMPTY_LIST": "لا توجد تسجيلات للمريض في هذا التسلسل.",
+    "EXECUTE_AT": "تنفيذ في",
     "FORCE_EMAIL_BRANDING": "قوة العلامة التجارية البريد الإلكتروني",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "هذه الإعدادات الضوابط إذا كانت العلامة التجارية على رسائل البريد الإلكتروني المرسلة من هذا الاستخدام تسلسل العيادة اسم والشعار والألوان من العيادة التي تم تحديدها عندما تم إنشاء التسلسل.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "ورسائل البريد الإلكتروني المرسلة الخروج من هذا التسلسل دائما استخدام اسم العيادة، والشعار، والألوان ل {{clinicName}} (ID {{clinicId}}) عيادة.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "رسالة",
     "MESSAGE_DELETED_PROMPT": "الرسالة مسحت",
+    "MESSAGE_LOG": "سجل الرسائل",
     "NOTIF_TOO_LONG_WARNING": "تجاوز رسالة إعلام طول الحد الأقصى الموصى به.",
     "NO_ADMIN_ORG": "ليس لديك أذونات المشرف لهذه العيادة.",
     "NO_DEEP_LINK": "لا يوجد رابط عميق",
@@ -1820,6 +1822,7 @@
     "OTHER": "آخر",
     "PACKAGE_ENROLLMENT": "Phase Enrollment",
     "PICK_SEQ_TO_ADD": "حدد أو ابحث في تسلسل لتتمكن من إضافة تسجيلات إليه.",
+    "PREVIOUSLY_SENT": "أرسلت سابقا",
     "PROCESSING_BULK_ENROLLMENT": "تجهيز لعيادة {{org}}",
     "RECIPIENTS": "المستفيدين",
     "REMOVE_SEQUENCE_CONTENT": "هل أنت متأكد من أنك تريد حذف التسلسل {{ name }}؟ لن يتم تسليم أي رسائل لهذا التسلسل بعد حذفه.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "مثال على القالب",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "هذا مثال على المكان الذي سيتم فيه وضع النص من كل حقل في الرسالة التي تلقاها المريض.",
     "TRANSLATIONS": "متواليات",
-    "TRIGGER_HISTORY": "تاريخ الرسالة",
     "TRIGGER_HISTORY_EMPTY_LIST": "سجل الرسائل فارغ لهذا التسجيل.",
     "TYPE": "نوع",
     "UNDO": "الغاء التحميل",
-    "UNENROLL_RECIPIENTS": "إلغاء تسجيل المرضى"
+    "UNENROLL_RECIPIENTS": "إلغاء تسجيل المرضى",
+    "UPCOMING": "القادمة"
   },
   "SHARED": {
     "ORGS": {

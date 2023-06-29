@@ -11,6 +11,8 @@ import { DoctorPDFDialog } from './doctor-pdf'
 import { PaymentDisclaimerDialog } from './payment-disclaimer/payment-disclaimer.dialog'
 import { ProgressReportPDFDialog } from './progress-report-pdf'
 import { TriggerDetailDialog } from './trigger-detail'
+import { PreviousTableComponent } from './trigger-detail/previous-table/previous-table.component'
+import { UpcomingTableComponent } from './trigger-detail/upcoming-table/upcoming-table.component'
 
 export const DialogsComponents = [
   AccountCreateDialog,
@@ -18,5 +20,7 @@ export const DialogsComponents = [
   DoctorPDFDialog,
   PaymentDisclaimerDialog,
   ProgressReportPDFDialog,
-  TriggerDetailDialog
+  TriggerDetailDialog,
+  PreviousTableComponent,
+  UpcomingTableComponent
 ]

@@ -26,7 +26,8 @@ import {
   TriggerHistoryDatabase,
   VaultDatabase,
   CellularDeviceDatabase,
-  CellularDeviceDataSource
+  CellularDeviceDataSource,
+  UpcomingTransitionsDatabase
 } from './dieter/settings'
 import {
   DietersExpandableTableComponent,
@@ -87,5 +88,6 @@ export const DietersProviders = [
   VaultDatabase,
   CellularDeviceDatabase,
   CellularDeviceDataSource,
+  UpcomingTransitionsDatabase,
   ...MessagesProviders
 ]

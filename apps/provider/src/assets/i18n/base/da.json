@@ -1779,6 +1779,7 @@
     "ENROLLEES": "Deltagere",
     "ENROLLEES_EMPTY_LIST": "Der er ingen deltagere til denne sekvens.",
     "ENROLLMENTS_EMPTY_LIST": "Der er ingen tilmeldinger for patienten i denne sekvens.",
+    "EXECUTE_AT": "udføre kl",
     "FORCE_EMAIL_BRANDING": "Kraft Email Branding",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "Denne indstilling styrer, om branding på de e-mails sendt fra denne sekvens brug klinikken navn, logo og farver fra klinikken, der blev valgt, da sekvensen blev oprettet.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "E-mails, der sendes ud fra denne sekvens, vil altid bruge klinik navn, logo og farver til {{clinicName}} (id {{clinicId}}) klinik.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "Besked",
     "MESSAGE_DELETED_PROMPT": "Beskeden blev slettet",
+    "MESSAGE_LOG": "Meddelelseslog",
     "NOTIF_TOO_LONG_WARNING": "Notifikationsmeddelelse overskrider den anbefalede maksimale længde.",
     "NO_ADMIN_ORG": "Du har ikke administratortilladelser til denne klinik.",
     "NO_DEEP_LINK": "Ingen dyb link",
@@ -1820,6 +1822,7 @@
     "OTHER": "Andet",
     "PACKAGE_ENROLLMENT": "Fase tilmelding",
     "PICK_SEQ_TO_ADD": "Vælg eller søg i en rækkefølge for at kunne tilføje tilmeldinger til den.",
+    "PREVIOUSLY_SENT": "Tidligere sendt",
     "PROCESSING_BULK_ENROLLMENT": "Behandler for {{ org }} klinik",
     "RECIPIENTS": "Deltager",
     "REMOVE_SEQUENCE_CONTENT": "Er du sikker på, at du vil slette sekvensen {{ name }}? Ingen meddelelser til denne sekvens leveres, når den er slettet.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "Eksempel på skabelon",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Dette er et eksempel på, hvor teksten fra hvert felt placeres i den meddelelse, som patienten modtager.",
     "TRANSLATIONS": "Oversættelser",
-    "TRIGGER_HISTORY": "Meddelelseshistorik",
     "TRIGGER_HISTORY_EMPTY_LIST": "Meddelelseshistorikken er tom for denne tilmelding.",
     "TYPE": "Type",
     "UNDO": "Fortryd",
-    "UNENROLL_RECIPIENTS": "Fjern patienter"
+    "UNENROLL_RECIPIENTS": "Fjern patienter",
+    "UPCOMING": "Kommende"
   },
   "SHARED": {
     "ORGS": {

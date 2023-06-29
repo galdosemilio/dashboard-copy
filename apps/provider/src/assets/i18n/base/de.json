@@ -1779,6 +1779,7 @@
     "ENROLLEES": "Teilnehmer",
     "ENROLLEES_EMPTY_LIST": "Es gibt keine Teilnehmer für diese Sequenz.",
     "ENROLLMENTS_EMPTY_LIST": "Es gibt keine Anmeldungen für den Patienten in dieser Sequenz.",
+    "EXECUTE_AT": "Ausführen bei",
     "FORCE_EMAIL_BRANDING": "Kraft E-Mail-Branding",
     "FORCE_EMAIL_BRANDING_DESCRIPTION": "Diese Einstellung steuert, ob das Branding auf den E-Mail von dieser Sequenz Verwendung die Klinik Namen, das Logo und Farben aus der Klinik geschickt, die ausgewählt wurde, wenn die Sequenz erstellt wurde.",
     "FORCE_EMAIL_BRANDING_SUBTEXT": "E-Mails von dieser Sequenz ausgesendet werden immer die Klinik Namen, das Logo verwenden, und Farben für die {{clinicName}} (ID {{clinicId}}) Klinik.",
@@ -1811,6 +1812,7 @@
     },
     "MESSAGE": "Nachricht",
     "MESSAGE_DELETED_PROMPT": "Nachricht gelöscht",
+    "MESSAGE_LOG": "Nachrichtenprotokoll",
     "NOTIF_TOO_LONG_WARNING": "Benachrichtigung überschreitet die empfohlene maximale Länge.",
     "NO_ADMIN_ORG": "Sie haben keine Administratorrechte für diese Klinik.",
     "NO_DEEP_LINK": "Kein Deeplink",
@@ -1820,6 +1822,7 @@
     "OTHER": "Andere",
     "PACKAGE_ENROLLMENT": "Phase Enrollment",
     "PICK_SEQ_TO_ADD": "Wählen oder eine Sequenz suchen können Einschreibungen, um es hinzuzufügen.",
+    "PREVIOUSLY_SENT": "Zuvor gesendet",
     "PROCESSING_BULK_ENROLLMENT": "Verarbeitung für die Klinik {{ org }}",
     "RECIPIENTS": "Teilnehmer",
     "REMOVE_SEQUENCE_CONTENT": "Sind Sie sicher, dass Sie die Sequenz löschen {{name}}? Keine Nachrichten für diese Sequenz wird geliefert, nachdem er gelöscht wird.",
@@ -1847,11 +1850,11 @@
     "TEMPLATE_EXAMPLE": "Template-Beispiel",
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Hier sehen Sie ein Beispiel dafür, wo die Texte aus den jeweiligen Feldern in die Nachricht eingefügt werden, die der Patient erhält.",
     "TRANSLATIONS": "Übersetzungen",
-    "TRIGGER_HISTORY": "Nachrichtenverlauf",
     "TRIGGER_HISTORY_EMPTY_LIST": "Der Nachrichtenverlauf für diese Anmeldung ist leer.",
     "TYPE": "Typ",
     "UNDO": "Rückgängig machen",
-    "UNENROLL_RECIPIENTS": "Patienten abmelden"
+    "UNENROLL_RECIPIENTS": "Patienten abmelden",
+    "UPCOMING": "Bevorstehende"
   },
   "SHARED": {
     "ORGS": {
