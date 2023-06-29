@@ -24,13 +24,6 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 
 type SatisfiedCount = number | SatisfiedCount99457 | SatisfiedCount99458
 
-interface ClinicPatientCodeEntry {
-  organization: { id: string; name: string }
-  patientsUniqueCount: number
-  uniqueRPMEpisodesOfCare: number
-  codes: SatisfiedCount[]
-}
-
 interface SatisfiedCount99457 {
   liveInteraction: number
   monitoringTime: number
@@ -49,13 +42,13 @@ interface ClinicPatientCodeReportCode {
 
 interface ClinicPatientCodeReport {
   uniqueRPMEpisodesOfCare: number
-  organization: { id: string; name: string; hierarchyPath: string[] }
+  organization: { id: string; name: string }
   patientsUniqueCount: number
   codes: ClinicPatientCodeReportCode[]
 }
 
 interface PatientCodeRecord {
-  orgHierarchy: string[]
+  organizationId: string
   cptCode: string
   willBeEligibleThisMonth: SatisfiedCount
 }
@@ -96,7 +89,7 @@ export class ClinicPatientCodeComponent implements OnInit {
   ) {}
 
   public csvSeparator = ','
-  public tableData: ClinicPatientCodeEntry[]
+  public tableData: ClinicPatientCodeReport[]
   public reportData: ClinicPatientCodeReport[]
   public headings: string[] = []
   public serviceType: string
@@ -266,6 +259,7 @@ export class ClinicPatientCodeComponent implements OnInit {
             csv += `${uniqueRPMEpisodesOfCare - code.satisfiedCount}${
               this.csvSeparator
             }`
+            csv += `${code.satisfiedCount}${this.csvSeparator}`
           }
         }
         csv += '\n'
@@ -283,7 +277,7 @@ export class ClinicPatientCodeComponent implements OnInit {
     serviceType: string,
     data: FetchCareManagementBillingSnapshotResponse['data'],
     filterZero: boolean = true
-  ): ClinicPatientCodeEntry[] {
+  ): ClinicPatientCodeReport[] {
     this.setHeadings(serviceType)
     const reportData = this.compileUniqueClinics(serviceType, data)
     const patientCodes = this.flattenPatientCodes(data)
@@ -306,21 +300,26 @@ export class ClinicPatientCodeComponent implements OnInit {
           item.coverage == 'monitoring' &&
           item.requirements?.requiredLiveInteractionCount
         ) {
-          acc.push(`${item.value} Live Interaction`)
+          acc.push(`${item.value} Live Interaction unsatisfied`)
+          acc.push(`${item.value} Live Interaction satisfied`)
         }
         if (
           item.coverage == 'monitoring' &&
           item.requirements?.maxIterations == 1
         ) {
-          acc.push(`${item.value} Monitoring Time`)
+          acc.push(`${item.value} Monitoring Time unsatisfied`)
+          acc.push(`${item.value} Monitoring Time satisfied`)
           return acc
         }
         if (item.type == 'addon' && item.requirements?.maxIterations > 1) {
-          acc.push(`${item.value} X1`)
-          acc.push(`${item.value} X2`)
+          acc.push(`${item.value} X1 unsatisfied`)
+          acc.push(`${item.value} X1 satisfied`)
+          acc.push(`${item.value} X2 unsatisfied`)
+          acc.push(`${item.value} X2 satisfied`)
           return acc
         }
-        acc.push(item.value)
+        acc.push(`${item.value} unsatisfied`)
+        acc.push(`${item.value} satisfied`)
         return acc
       }, [])
   }
@@ -343,19 +342,18 @@ export class ClinicPatientCodeComponent implements OnInit {
       return {
         organization: {
           id: org.id,
-          name: org.name,
-          hierarchyPath: org.hierarchyPath
+          name: org.name
         },
         //  with unique patient count
         patientsUniqueCount: uniq(
           data
-            .filter((e) => e.organization.hierarchyPath.includes(org.id))
+            .filter((e) => e.organization.id === org.id)
             .map((e) => e.account.id)
         ).length,
         // @TODO should we remove possible unique patients or episodes of care that can't be satisfied this month?  Perhaps make a separate count for them?
         uniqueRPMEpisodesOfCare: data.filter(
           (e) =>
-            e.organization.hierarchyPath.includes(org.id) &&
+            e.organization.id === org.id &&
             e.state.serviceType.id === serviceType
         ).length,
         codes: this.billingCodes
@@ -405,7 +403,7 @@ export class ClinicPatientCodeComponent implements OnInit {
       data.map((e) => {
         const flattenedCodes = e.billing.map((billingReport) => {
           return {
-            orgHierarchy: e.organization.hierarchyPath,
+            organizationId: e.organization.id,
             cptCode: billingReport.code,
             willBeEligibleThisMonth: this.willBeEligible(billingReport)
           }
@@ -486,7 +484,7 @@ export class ClinicPatientCodeComponent implements OnInit {
   ): number {
     return patientCodes.filter(
       (e) =>
-        e.orgHierarchy.includes(orgId) &&
+        e.organizationId === orgId &&
         cptCode === e.cptCode &&
         (eligibilityKey
           ? e.willBeEligibleThisMonth[eligibilityKey]
@@ -494,8 +492,8 @@ export class ClinicPatientCodeComponent implements OnInit {
     ).length
   }
 
-  private setCodesPerClinic(reportData): ClinicPatientCodeEntry[] {
-    return orderBy(
+  private setCodesPerClinic(reportData): ClinicPatientCodeReport[] {
+    const result: ClinicPatientCodeReport[] = orderBy(
       reportData.map((e) => {
         return {
           organization: e.organization,
@@ -550,6 +548,38 @@ export class ClinicPatientCodeComponent implements OnInit {
       (item) => item.uniqueRPMEpisodesOfCare,
       ['desc']
     )
+
+    const sum = result.reduce(
+      (total: ClinicPatientCodeReport, entry) => {
+        total.uniqueRPMEpisodesOfCare += entry.uniqueRPMEpisodesOfCare
+        total.patientsUniqueCount += entry.patientsUniqueCount
+
+        entry.codes.forEach((code, index) => {
+          if (!total.codes[index]) {
+            total.codes[index] = {
+              ...code
+            }
+          } else {
+            const totalCodes = total.codes.slice()
+            ;(totalCodes[index].satisfiedCount as number) +=
+              code.satisfiedCount as number
+            total.codes = totalCodes
+          }
+        })
+
+        return total
+      },
+      {
+        uniqueRPMEpisodesOfCare: 0,
+        organization: { id: '-', name: 'Sum' },
+        patientsUniqueCount: 0,
+        codes: []
+      }
+    )
+
+    result.splice(0, 0, sum)
+
+    return result
   }
 
   private willBeEligible(

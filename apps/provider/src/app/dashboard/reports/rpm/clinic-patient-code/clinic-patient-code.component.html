@@ -50,9 +50,14 @@
             <td>{{ org.organization.id }}</td>
             <td>{{ org.organization.name }}</td>
             <td>{{ org.uniqueRPMEpisodesOfCare }}</td>
-            <td *ngFor="let code of org.codes">
-              {{ org.uniqueRPMEpisodesOfCare - code.satisfiedCount }}
-            </td>
+            <ng-container *ngFor="let code of org.codes">
+              <td>
+                {{ org.uniqueRPMEpisodesOfCare - code.satisfiedCount }}
+              </td>
+              <td>
+                {{ code.satisfiedCount }}
+              </td>
+            </ng-container>
           </tr>
         </tbody>
       </table>
