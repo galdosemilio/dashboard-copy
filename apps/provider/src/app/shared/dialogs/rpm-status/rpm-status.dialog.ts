@@ -49,6 +49,7 @@ export interface RPMStatusDialogData {
   closeAfterChange?: boolean
   careEntries: RPMStateEntry[]
   activeCareEntries: RPMStateEntry[]
+  rpmEntry?: RPMStateEntry
 }
 
 @UntilDestroy()
@@ -488,6 +489,8 @@ export class RPMStatusDialog implements OnInit {
     this.client = this.context.account
     this.activeCareEntries = this.data.activeCareEntries ?? []
     this.careEntries = this.data.careEntries ?? []
+    this.status = this.data.initialStatus ?? 'initial'
+    this.rpmEntry = this.data.rpmEntry
     this.accessibleOrganizations = this.data.accessibleOrganizations
     this.inaccessibleOrganizations = this.data.inaccessibleOrganizations
     this.entryPending = this.rpmEntry ? this.rpmEntry.pending : undefined

@@ -62,6 +62,7 @@ import { RPMMonthlySummaryItem } from '@coachcare/sdk/dist/lib/providers/reports
 import { CareManagementStateSummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 import { CareManagementBillingMonthItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingMonthResponse.interface'
 import { CareManagementPermissionsService } from '@app/service/care-management-permissions.service'
+import { RPMStateEntry } from '@app/shared/components/rpm/models'
 
 interface StorageFilter {
   selectedClinicId?: string
@@ -1196,6 +1197,14 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       summary.account.id,
       this.selectedClinic?.id
     )
+    const rpmEntry = new RPMStateEntry({
+      rpmState: {
+        ...summary.state,
+        account: summary.account,
+        organization: summary.organization
+      }
+    })
+
     const careEntries = this.careManagementPermissions.careEntries
 
     const activeCareEntries = this.careManagementPermissions.activeCareEntries
@@ -1209,6 +1218,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           accessibleOrganizations: permissions,
           inaccessibleOrganizations: restrictions,
           careEntries,
+          rpmEntry,
           activeCareEntries,
           initialStatus: 'edit_supervising_provider',
           closeAfterChange: true

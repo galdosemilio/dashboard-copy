@@ -27,7 +27,7 @@ describe('Reports -> RPM -> RPM Billing -> Change Supervising Provider', functio
 
   it('Change provider modal is shown on edit icon click', function () {
     openDialogToChangeProvider()
-    confirmSupervisingProviderName('Eric Di Bari')
+    confirmSupervisingProviderName('Lascario Pacheco Arrieta')
   })
 
   it('Proper message is shown when no supervising providers are available to change to', function () {
@@ -55,6 +55,4 @@ function openDialogToChangeProvider(): void {
   cy.get('[data-cy="rpm-billing-report-change-supervising-provider"]')
     .eq(0)
     .trigger('click')
-  cy.get('app-dialog-care-mgmt-card').eq(0).find('button').click()
-  cy.get('[data-cy="change-supervising-provider-button"]').click()
 }
