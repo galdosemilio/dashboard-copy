@@ -65,7 +65,7 @@
             >
                 <span>{{ 'BOARD.TIME_ADDED' | translate }}</span>
                 <span [innerHTML]=" row.title | translate "></span>
-                <div>{{ row.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</div>
+                <div>{{ row.createdAt | date: 'MM/dd/YYYY hh:mm a' }}</div>
             </mat-cell>
         </ng-container>
 
