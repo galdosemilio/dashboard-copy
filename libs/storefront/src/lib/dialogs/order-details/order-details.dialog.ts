@@ -3,8 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { NotifierService } from '@coachcare/common/services'
 import { SpreeProvider } from '@coachcare/sdk'
 import { StorefrontService } from '@coachcare/storefront/services'
-import { JsonApiDocument } from '@spree/storefront-api-v2-sdk/types/interfaces/JsonApi'
-import { OrderAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
+import { JsonApiDocument, OrderAttr } from '@spree/storefront-api-v2-sdk'
 import { StorefrontOrderEntry } from '../../model'
 
 interface StorefrontOrderDetailsDialogProps {

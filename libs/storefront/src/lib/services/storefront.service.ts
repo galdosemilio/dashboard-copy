@@ -1,22 +1,22 @@
 import { Inject, Injectable } from '@angular/core'
 import { EcommerceProvider, SpreeProvider } from '@coachcare/sdk'
-import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
-import { BehaviorSubject } from 'rxjs'
-import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
-import { RelationType } from '@spree/storefront-api-v2-sdk/types/interfaces/Relationships'
-import { TaxonAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Taxon'
-import { JsonApiDocument } from '@spree/storefront-api-v2-sdk/types/interfaces/JsonApi'
-import { orderBy } from 'lodash'
-import { StorefrontUserService } from './storefront-user.service'
-import { IToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
+import createAxiosFetcher from '@spree/axios-fetcher'
 import {
+  Client,
+  makeClient,
+  ProductAttr,
+  RelationType,
+  TaxonAttr,
+  JsonApiDocument,
+  IToken,
   IOrderResult,
-  OrderAttr
-} from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
-import {
+  OrderAttr,
   AddPayment,
   OrderUpdate
-} from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
+} from '@spree/storefront-api-v2-sdk'
+import { BehaviorSubject } from 'rxjs'
+import { orderBy } from 'lodash'
+import { StorefrontUserService } from './storefront-user.service'
 import { AppEnvironment, APP_ENVIRONMENT } from '@coachcare/common/shared'
 import { ShippingRate } from '../pages'
 import { SpreeSubscription } from '@coachcare/sdk/dist/lib/providers/spree/responses/getSubscription.response'
@@ -199,7 +199,8 @@ export class StorefrontService {
       this.storeUrl = this.storefrontUserService.storeUrl
 
       this.spree = makeClient({
-        host: this.storeUrl
+        host: this.storeUrl,
+        createFetcher: createAxiosFetcher
       })
 
       await this.loadSpreeAccount()

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
 import { EcommerceProduct } from '@coachcare/common/model'
 import { EcommerceCreateTokenResponse, EcommerceProvider } from '@coachcare/sdk'
+import createAxiosFetcher from '@spree/axios-fetcher'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 
 @Component({
@@ -33,7 +34,10 @@ export class EcommerceComponent implements OnInit {
   }
 
   private createSpreeClient(storeUrl: string): void {
-    this.spree = makeClient({ host: storeUrl })
+    this.spree = makeClient({
+      host: storeUrl,
+      createFetcher: createAxiosFetcher
+    })
   }
 
   private async fetchProducts(): Promise<void> {

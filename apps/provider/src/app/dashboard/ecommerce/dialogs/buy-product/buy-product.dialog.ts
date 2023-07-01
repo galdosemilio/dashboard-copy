@@ -14,6 +14,7 @@ import {
   SpreeCreditCardEntry,
   SpreeProvider
 } from '@coachcare/sdk'
+import createAxiosFetcher from '@spree/axios-fetcher'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 import { DeviceDetectorService } from 'ngx-device-detector'
 
@@ -138,7 +139,8 @@ export class BuyProductDialog implements OnInit {
 
   private createSpreeClient(): void {
     this.spree = makeClient({
-      host: this.context.organization.preferences?.storeUrl
+      host: this.context.organization.preferences?.storeUrl,
+      createFetcher: createAxiosFetcher
     })
   }
 

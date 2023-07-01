@@ -5,10 +5,12 @@ import {
   OrderEntry,
   SpreeCreditCardEntry
 } from '@coachcare/sdk'
-import { AccountAddressAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Account'
-import { JsonApiDocument } from '@spree/storefront-api-v2-sdk/types/interfaces/JsonApi'
-import { OrderAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
-import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
+import {
+  JsonApiDocument,
+  AccountAddressAttr,
+  OrderAttr,
+  ProductAttr
+} from '@spree/storefront-api-v2-sdk'
 
 export class StorefrontOrdersResponse {
   data: OrderEntry[]

@@ -31,8 +31,8 @@ import {
   SpreeProvider
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
-import { OrderAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
+import createAxiosFetcher from '@spree/axios-fetcher'
+import { Client, makeClient, OrderAttr } from '@spree/storefront-api-v2-sdk'
 import { environment } from 'apps/admin/src/environments/environment'
 import { get } from 'lodash'
 import * as moment from 'moment'
@@ -806,7 +806,8 @@ export class CheckoutComponent implements OnInit {
           : '/assets/logo.png'
 
       this.spree = makeClient({
-        host: pref.storeUrl
+        host: pref.storeUrl,
+        createFetcher: createAxiosFetcher
       })
 
       this.storeUrl = pref.storeUrl ?? ''

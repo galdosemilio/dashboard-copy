@@ -1,6 +1,5 @@
 import { Entity } from '@coachcare/sdk'
-import { JsonApiDocument } from '@spree/storefront-api-v2-sdk/types/interfaces/JsonApi'
-import { ProductAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Product'
+import { ProductAttr, JsonApiDocument } from '@spree/storefront-api-v2-sdk'
 
 export class EcommerceProduct {
   public id: string

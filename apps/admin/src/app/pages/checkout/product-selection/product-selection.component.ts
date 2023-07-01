@@ -9,8 +9,7 @@ import {
 import { EcommerceProduct } from '@coachcare/common/model'
 import { NotifierService } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { Client } from '@spree/storefront-api-v2-sdk'
-import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
+import { Client, IOAuthToken } from '@spree/storefront-api-v2-sdk'
 import { debounceTime } from 'rxjs/operators'
 
 @UntilDestroy()

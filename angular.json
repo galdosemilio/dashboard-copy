@@ -73,7 +73,8 @@
               "@spree/storefront-api-v2-sdk",
               "jsoneditor",
               "owasp-password-strength-test",
-              "long"
+              "long",
+              "@spree/axios-fetcher"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -595,7 +596,8 @@
               "@spree/storefront-api-v2-sdk",
               "jsoneditor",
               "owasp-password-strength-test",
-              "long"
+              "long",
+              "@spree/axios-fetcher"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
