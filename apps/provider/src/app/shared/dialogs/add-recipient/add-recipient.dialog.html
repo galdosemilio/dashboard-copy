@@ -56,7 +56,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab *ngIf="allowBulkEnrollment" [label]="'SEQUENCING.ALL_ORG_PATIENTS' | translate">
+        <mat-tab *ngIf="allowBulkEnrollment" [aria-label]="'SEQUENCING.ALL_ORG_PATIENTS' | translate" [label]="'SEQUENCING.ALL_ORG_PATIENTS' | translate">
             <ccr-organization-search
             data-cy="sequence-enroll-search-orgs"
             [showEmptyOption]="false"
@@ -64,10 +64,10 @@
             (select)="onOrgSelect($event)">
             </ccr-organization-search>
 
-            <small *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
+            <small data-cy="sequence-org-child" *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
         </mat-tab>
 
-        <mat-tab *ngIf="allowBulkEnrollment" [label]="'SEQUENCING.ALL_PATIENTS_PHASES' | translate">
+        <mat-tab *ngIf="allowBulkEnrollment" [aria-label]="'SEQUENCING.ALL_PATIENTS_PHASES' | translate" [label]="'SEQUENCING.ALL_PATIENTS_PHASES' | translate">
             <ccr-organization-search
             data-cy="sequence-enroll-search-orgs"
             [showEmptyOption]="false"
@@ -75,11 +75,11 @@
             (select)="onOrgSelect($event)">
             </ccr-organization-search>
 
-            <small *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
+            <small data-cy="sequence-org-child" *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
 
             <mat-form-field *ngIf="selectedOrg && packages">
                 <mat-label>{{ 'GLOBAL.PACKAGES' | translate }}</mat-label>
-                <mat-select [formControl]="packagesControl" multiple>
+                <mat-select data-cy="sequence-package-select" [formControl]="packagesControl" multiple>
 
                   <mat-select-trigger>
                     <mat-chip-list>

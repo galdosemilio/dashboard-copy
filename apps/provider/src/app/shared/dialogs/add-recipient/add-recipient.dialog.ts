@@ -126,11 +126,12 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     this.recipients = [...(this.recipients || []), recipient]
   }
 
-  public onOrgSelect($event: OrganizationEntity): void {
+  public async onOrgSelect($event: OrganizationEntity): Promise<void> {
     if (typeof $event === 'object' && $event.id) {
+      this.packagesControl.setValue([])
       this.selectedOrg = $event
-      void this.fetchOrgChildren(this.selectedOrg.id)
-      void this.fetchOrgPackages(this.selectedOrg.id)
+      await this.fetchOrgChildren(this.selectedOrg.id)
+      await this.fetchOrgPackages(this.selectedOrg.id)
     }
   }
 
@@ -162,17 +163,12 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       this.currentOrg = this.selectedOrg
       this.state = 'processing'
 
-      await this.seq.createBulkOrganizationSeqEnrollments({
-        organization: this.currentOrg.id,
-        targetOrganization:
-          this.data.sequence.enrollment?.organization.id ?? this.currentOrg.id,
-        sequence: this.data.sequence.id,
-        executeAt: {
-          local: moment(this.executeAt).format(this.executeAtFormat)
-        },
-        transition: transition.id,
-        packages: this.packagesControl.value.map((p) => p.package.id)
-      })
+      await this.seq.createBulkOrganizationSeqEnrollments(
+        this.bulkDataRequest({
+          org: this.currentOrg,
+          transition
+        })
+      )
 
       this.bulkEnrollProgress = this.calculateProgress(
         ++completedOrgs,
@@ -181,18 +177,13 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       this.cdr.detectChanges()
 
       while (orgChildren.length) {
-        this.currentOrg = orgChildren.shift()
-        await this.seq.createBulkOrganizationSeqEnrollments({
-          organization: this.currentOrg.id,
-          targetOrganization:
-            this.data.sequence.enrollment?.organization.id ??
-            this.currentOrg.id,
-          sequence: this.data.sequence.id,
-          executeAt: {
-            local: moment(this.executeAt).format(this.executeAtFormat)
-          },
-          transition: transition.id
-        })
+        const org = orgChildren.shift()
+        await this.seq.createBulkOrganizationSeqEnrollments(
+          this.bulkDataRequest({
+            org,
+            transition
+          })
+        )
         this.bulkEnrollProgress = this.calculateProgress(
           ++completedOrgs,
           orgAmount
@@ -242,6 +233,31 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     )
 
     this.packagesControl.setValue(packages)
+  }
+
+  private bulkDataRequest({ org, transition }): {
+    organization: string
+    targetOrganization: string
+    sequence: string
+    executeAt: {
+      local: string
+    }
+    transition: string
+    packages?: string[]
+  } {
+    const { value: packages } = this.packagesControl
+    return {
+      organization: org.id,
+      targetOrganization:
+        this.data.sequence.enrollment?.organization.id ?? org.id,
+      sequence: this.data.sequence.id,
+      executeAt: {
+        local: moment(this.executeAt).format(this.executeAtFormat)
+      },
+      transition: transition.id,
+      packages:
+        packages.length > 0 ? packages.map((p) => p.package.id) : undefined
+    }
   }
 
   private calcDelayedDate(

@@ -5,9 +5,9 @@ interface ApiOverrideEntry {
 
 let overrides: ApiOverrideEntry[] = []
 
-function fetchOverride(url: string, fixture: string): string {
+function fetchOverride(url: string, fixture: string): string | undefined {
   return overrides.find((e) => e.url === url)
-    ? overrides.find((e) => e.url === url).fixture
+    ? overrides.find((e) => e.url === url)?.fixture
     : fixture
 }
 
@@ -54,7 +54,7 @@ const interceptCoreApiCalls = (
     fixture: 'api/organization/getSingle'
   })
   cy.intercept('GET', '/2.0/organization/*/descendants**', {
-    fixture: 'api/organization/getAll'
+    fixture: 'api/organization/getDescendants'
   })
   cy.fixture('api/organization/getMala').then((data) => {
     data.id = Cypress.env('organizationId')
@@ -147,6 +147,17 @@ const interceptCoreApiCalls = (
     statusCode: 204,
     body: {}
   })
+
+  cy.intercept(
+    'GET',
+    `/1.0/sequence/trigger/push-notification/deep-link/type`,
+    {
+      fixture: fetchOverride(
+        '/1.0/sequence/trigger/push-notification/deep-link/type',
+        'api/sequence/getTriggerDeepLink'
+      )
+    }
+  )
 
   cy.intercept('PATCH', `/1.0/sequence/trigger/**`, {
     statusCode: 204,

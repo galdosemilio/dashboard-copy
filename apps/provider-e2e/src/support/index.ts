@@ -18,7 +18,7 @@ export interface StandardSetupOptions {
 const standardSetup = (opts: StandardSetupOptions = {}): void => {
   cy.log('Init standard setup')
 
-  setSystemDate(opts.startDate ?? null)
+  setSystemDate(opts.startDate ?? undefined)
   seti18n()
   setGuideStorage(!opts.enableGuides)
 
