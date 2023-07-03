@@ -129,24 +129,20 @@ describe('Clinic Settings', () => {
       .invoke('val')
       .should('contain', 'android-app')
 
-    cy.get('[data-cy="org-setting-mala-appname"]')
-      .invoke('val')
-      .should('contain', 'CoachCare')
-    cy.get('[data-cy="org-setting-mala-iosbundleid"]')
-      .invoke('val')
-      .should('contain', 'com.coachcare.coachcareionic')
-    cy.get('[data-cy="org-setting-mala-androidbundleid"]')
-      .invoke('val')
-      .should('contain', 'com.coachcare.coachcareionic.android')
-    cy.get('[data-cy="org-setting-mala-firebaseprojectname"]')
-      .invoke('val')
-      .should('contain', 'production')
-    cy.get('[data-cy="org-setting-mala-appstoreconnectteamid"]')
-      .invoke('val')
-      .should('contain', '1239712973')
-    cy.get('[data-cy="org-setting-mala-developerportalteamid"]')
-      .invoke('val')
-      .should('contain', 'wfe9h023ry')
+    const malaConfigs = {
+      appname: 'CoachCare',
+      iosbundleid: 'com.coachcare.coachcareionic',
+      androidbundleid: 'com.coachcare.coachcareionic.android',
+      firebaseprojectname: 'production',
+      appstoreconnectteamid: '1239712973',
+      developerportalteamid: 'wfe9h023ry'
+    }
+
+    for (const config of Object(malaConfigs)) {
+      cy.get(`[data-cy="org-setting-mala-${config}"]`)
+        .invoke('val')
+        .should('contain', malaConfigs[config])
+    }
 
     cy.get('ccr-form-field-translated-text')
       .find('input[type="text"]')

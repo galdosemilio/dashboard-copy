@@ -1,4 +1,5 @@
 import { standardSetup } from '../../../../../support'
+import { ApiOverrideEntry } from '../../../../../support/api'
 const STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE =
   'ccrActiveCareManagementServiceType'
 
@@ -110,79 +111,41 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
   describe('visibility', () => {
     it('should show care management state', () => {
-      standardSetup()
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-      cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]').should('exist')
+      checkVisibility(true)
     })
 
     it('should not show with authenticated provider has no active service types enabled', () => {
-      standardSetup({
-        apiOverrides: [
-          {
-            url: '/1.0/care-management/service-type/account?**',
-            fixture: 'api/care-management/getInActiveServiceTypeAccount'
-          }
-        ]
-      })
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-      cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]').should('not.exist')
+      checkVisibility(false, [
+        {
+          url: '/1.0/care-management/service-type/account?**',
+          fixture: 'api/care-management/getInActiveServiceTypeAccount'
+        }
+      ])
     })
 
     it('should not show with currently-selected clinic context has no active service types', () => {
-      standardSetup({
-        apiOverrides: [
-          {
-            url: '/1.0/care-management/preference/organization?**',
-            fixture: 'api/care-management/getInActivePreferenceOrganization'
-          }
-        ]
-      })
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-      cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]').should('not.exist')
+      checkVisibility(false, [
+        {
+          url: '/1.0/care-management/preference/organization?**',
+          fixture: 'api/care-management/getInActivePreferenceOrganization'
+        }
+      ])
     })
 
     it('should not show with the authenticated provider has some active service types enabled that do not overlap/are shared by the currently-select clinic context', () => {
-      standardSetup({
-        apiOverrides: [
-          {
-            url: '/1.0/care-management/preference/organization?**',
-            fixture: 'api/general/emptyDataEmptyPagination'
-          }
-        ]
-      })
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-      cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]').should('not.exist')
+      checkVisibility(false, [
+        {
+          url: '/1.0/care-management/preference/organization?**',
+          fixture: 'api/general/emptyDataEmptyPagination'
+        }
+      ])
     })
   })
 
   describe('selection', () => {
     it('should select first one by default and set session', () => {
       localStorage.removeItem(STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE)
-
-      standardSetup()
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-      cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]')
-        .find('mat-select')
-        .should('contain', 'RPM')
-        .then(() => {
-          expect(
-            window.localStorage.getItem(
-              STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
-            )
-          ).to.equal('1')
-        })
+      checkServiceSelection({ id: '1', name: 'RPM' })
     })
 
     it('should select first one by default if the session exists but not available', () => {
@@ -190,22 +153,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
         STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
         '5'
       )
-
-      standardSetup()
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-      cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]')
-        .find('mat-select')
-        .should('contain', 'RPM')
-        .then(() => {
-          expect(
-            window.localStorage.getItem(
-              STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
-            )
-          ).to.equal('1')
-        })
+      checkServiceSelection({ id: '1', name: 'RPM' })
     })
 
     it('should select with available session', () => {
@@ -214,40 +162,11 @@ describe('Patient profile -> dashboard -> rpm', function () {
         '2'
       )
 
-      standardSetup()
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-      cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]')
-        .find('mat-select')
-        .should('contain', 'CCM')
-        .then(() => {
-          expect(
-            window.localStorage.getItem(
-              STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
-            )
-          ).to.equal('2')
-        })
+      checkServiceSelection({ id: '2', name: 'CCM' })
     })
 
     it('should show no program', () => {
-      standardSetup({
-        apiOverrides: [
-          {
-            url: '/1.0/care-management/state?**',
-            fixture: 'api/general/emptyDataEmptyPagination'
-          }
-        ]
-      })
-
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-      cy.get('.ccr-dashboard')
-
-      cy.wait(1000)
-      cy.get('[cy-data="care-management-state"]')
-        .find('mat-select')
-        .should('contain', '')
+      checkServiceSelection()
     })
   })
 
@@ -437,3 +356,38 @@ describe('Patient profile -> dashboard -> rpm', function () {
     }
   })
 })
+
+function checkVisibility(visible: boolean, apiOverrides?: ApiOverrideEntry[]) {
+  standardSetup({ apiOverrides })
+
+  cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+  cy.get('.ccr-dashboard')
+  cy.get('[cy-data="care-management-state"]').should(
+    visible ? 'exist' : 'not.exist'
+  )
+}
+
+function checkServiceSelection(serviceType?: { id: string; name: string }) {
+  standardSetup()
+
+  cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+  cy.get('.ccr-dashboard')
+
+  if (serviceType) {
+    cy.get('[cy-data="care-management-state"]')
+      .find('mat-select')
+      .should('contain', serviceType.name)
+      .then(() => {
+        expect(
+          window.localStorage.getItem(
+            STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE
+          )
+        ).to.equal(serviceType.id)
+      })
+  } else {
+    cy.wait(1000)
+    cy.get('[cy-data="care-management-state"]')
+      .find('mat-select')
+      .should('contain', '')
+  }
+}

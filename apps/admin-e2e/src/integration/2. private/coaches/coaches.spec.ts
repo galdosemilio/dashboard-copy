@@ -1,4 +1,23 @@
 import { standardSetup } from '../../../support'
+import { checkAccountList, checkForEditAndDeleteAccount } from '../../helper'
+
+const coaches = [
+  {
+    id: '5606',
+    name: '1030 232323',
+    email: '232323_sss@grr.la'
+  },
+  {
+    id: '5608',
+    name: '1048 dsdsd',
+    email: 'sdsds@grr.la'
+  },
+  {
+    id: '6777',
+    name: '11111111111aaaaakajnsdkajnkjnd askdjnakjnajd',
+    email: 'dkansdkjasnd@gmail.com'
+  }
+]
 
 describe('Coach Listing Page', () => {
   beforeEach(() => {
@@ -7,63 +26,14 @@ describe('Coach Listing Page', () => {
   })
 
   it('Coach Listing', () => {
-    cy.visit('/admin/accounts/coaches')
-
-    cy.get('ccr-accounts-table', { timeout: 10000 })
-      .find('mat-row')
-      .as('coachRows')
-
-    cy.get('@coachRows').should('have.length', 3)
-
-    cy.get('@coachRows')
-      .eq(0)
-      .should('contain', '5606')
-      .should('contain', '1030 232323')
-      .should('contain', '232323_sss@grr.la')
-
-    cy.get('@coachRows')
-      .eq(1)
-      .should('contain', '5608')
-      .should('contain', '1048 dsdsd')
-      .should('contain', 'sdsds@grr.la')
-
-    cy.get('@coachRows')
-      .eq(2)
-      .should('contain', '6777')
-      .should('contain', '11111111111aaaaakajnsdkajnkjnd askdjnakjnajd')
-      .should('contain', 'dkansdkjasnd@gmail.com')
+    checkAccountList('/admin/accounts/coaches', coaches)
   })
 
   it('Coach Deletion', () => {
-    cy.visit('/admin/accounts/coaches')
-
-    cy.get('ccr-accounts-table', { timeout: 10000 })
-
-    cy.get('button.mat-icon-button', { timeout: 10000 }).eq(1).click()
-
-    cy.get('button.ccr-button', { timeout: 10000 }).eq(0).click()
-
-    cy.get('simple-snack-bar', { timeout: 10000 }).should(
-      'contain',
-      'Account deactivated'
-    )
+    checkForEditAndDeleteAccount('/admin/accounts/coaches', 'delete')
   })
 
   it('Coach Edition', () => {
-    cy.visit('/admin/accounts/coaches')
-
-    cy.get('ccr-accounts-table', { timeout: 10000 })
-
-    cy.get('button.mat-icon-button', { timeout: 10000 }).eq(0).click()
-
-    cy.get('.ccr-action-buttons')
-      .get('[cy-data="edit-button"]', { timeout: 10000 })
-      .eq(0)
-      .click()
-
-    cy.get('simple-snack-bar', { timeout: 10000 }).should(
-      'contain',
-      'Account updated'
-    )
+    checkForEditAndDeleteAccount('/admin/accounts/coaches', 'edit')
   })
 })

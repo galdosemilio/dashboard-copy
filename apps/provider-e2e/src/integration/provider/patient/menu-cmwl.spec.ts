@@ -1,4 +1,5 @@
 import { standardSetup } from '../../../support'
+import { checkList } from '../../helpers'
 
 describe('Patient profile -> more -> submenu (cmwl)', function () {
   before(() => {
@@ -15,12 +16,14 @@ describe('Patient profile -> more -> submenu (cmwl)', function () {
     })
       .find('a')
       .as('menuLinks')
-    cy.get('@menuLinks').should('have.length', 5)
-    cy.get('@menuLinks').eq(0).should('contain', 'Dashboard')
-    cy.get('@menuLinks').eq(1).should('contain', 'Journal')
-    cy.get('@menuLinks').eq(2).should('contain', 'Measurements')
-    cy.get('@menuLinks').eq(3).should('contain', 'Messages')
-    cy.get('@menuLinks').eq(4).should('contain', 'More')
+
+    checkList('@menuLinks', [
+      'Dashboard',
+      'Journal',
+      'Measurements',
+      'Messages',
+      'More'
+    ])
 
     // Journal buttons
     cy.get('@menuLinks').eq(1).click()
@@ -30,29 +33,29 @@ describe('Patient profile -> more -> submenu (cmwl)', function () {
       .find('a')
       .as('subLinks')
 
-    cy.get('@subLinks').should('have.length', 5)
-
-    cy.get('@subLinks').eq(0).should('contain', 'Food')
-    cy.get('@subLinks').eq(1).should('contain', 'Supplements')
-    cy.get('@subLinks').eq(2).should('contain', 'Water')
-    cy.get('@subLinks').eq(3).should('contain', 'Exercise')
-    cy.get('@subLinks').eq(4).should('contain', 'Micro')
+    checkList('@subLinks', [
+      'Food',
+      'Supplements',
+      'Water',
+      'Exercise',
+      'Micro'
+    ])
 
     // More button
     cy.get('@menuLinks').eq(4).click()
-
-    cy.get('@subLinks').should('have.length', 11)
-    cy.get('@subLinks').eq(0).should('contain', 'Profile')
-    cy.get('@subLinks').eq(1).should('contain', 'Addresses')
-    cy.get('@subLinks').eq(2).should('contain', 'Phases')
-    cy.get('@subLinks').eq(3).should('contain', 'Devices')
-    cy.get('@subLinks').eq(4).should('contain', 'Forms')
-    cy.get('@subLinks').eq(5).should('contain', 'Communications')
-    cy.get('@subLinks').eq(6).should('contain', 'Clinics')
-    cy.get('@subLinks').eq(7).should('contain', 'File Vault')
-    cy.get('@subLinks').eq(8).should('contain', 'Login History')
-    cy.get('@subLinks').eq(9).should('contain', 'Meetings')
-    cy.get('@subLinks').eq(10).should('contain', 'Goals')
+    checkList('@subLinks', [
+      'Profile',
+      'Addresses',
+      'Phases',
+      'Devices',
+      'Forms',
+      'Communications',
+      'Clinics',
+      'File Vault',
+      'Login History',
+      'Meetings',
+      'Goals'
+    ])
 
     // A bit of a hack - this component loads very late, but cypress will continue loading the page between spec files.  So, the component loads (and the API call is made) during a gray area where no api stub/intercepts are active.  So, waiting for it to load forces the spec to pass.
     cy.get('app-rpm')

@@ -7,8 +7,6 @@ describe('Sequences -> enrollment and unenrollment', function () {
 
     cy.visit(`/sequences/sequence/${Cypress.env('sequenceId')}`)
 
-    cy.tick(10000)
-
     cy.get('[data-cy="sequence-button-enrollees"]').click()
     cy.get('[data-cy="sequence-enroll"]').click()
 
@@ -16,15 +14,11 @@ describe('Sequences -> enrollment and unenrollment', function () {
       .its('request.url')
       .should('include', 'ancestor=999')
 
-    cy.tick(10000)
-
     cy.get('[data-cy="sequence-enroll-search-patients"]')
       .wait(500)
       .find('[data-cy="user-search-input"]')
       .wait(500)
       .type('eric')
-
-    cy.tick(10000)
 
     cy.wait('@api-access_account')
       .its('request.url')

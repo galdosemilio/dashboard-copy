@@ -1,5 +1,11 @@
 import { standardSetup } from '../../../support'
 
+const checkToggle = (dataCy: string, checked: boolean) => {
+  cy.get(`[data-cy="${dataCy}"]`)
+    .find('.mat-slide-toggle-input')
+    .should(checked ? 'be.checked' : 'not.be.checked')
+}
+
 describe('Coach Settings Page', () => {
   beforeEach(() => {
     cy.setTimezone('et')
@@ -34,49 +40,33 @@ describe('Coach Settings Page', () => {
 
       cy.get('@coachSettingTabs').eq(2).click()
 
-      cy.get('[data-cy="coach-care-pref-option-rpm"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
+      const careTags = {
+        rpm: true,
+        ccm: true,
+        rtm: true,
+        pcm: true,
+        bhi: true
+      }
 
-      cy.get('[data-cy="coach-care-pref-option-ccm"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
-
-      cy.get('[data-cy="coach-care-pref-option-rtm"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
-
-      cy.get('[data-cy="coach-care-pref-option-pcm"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
-
-      cy.get('[data-cy="coach-care-pref-option-bhi"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
+      for (const tag of Object.keys(careTags)) {
+        checkToggle(`coach-care-pref-option-${tag}`, careTags[tag])
+      }
     })
 
     it('should mixed enable/disable with preferences', () => {
       cy.get('@coachSettingTabs').eq(2).click()
 
-      cy.get('[data-cy="coach-care-pref-option-rpm"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
+      const careTags = {
+        rpm: true,
+        ccm: false,
+        rtm: true,
+        pcm: true,
+        bhi: true
+      }
 
-      cy.get('[data-cy="coach-care-pref-option-ccm"]')
-        .find('.mat-slide-toggle-input')
-        .should('not.be.checked')
-
-      cy.get('[data-cy="coach-care-pref-option-rtm"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
-
-      cy.get('[data-cy="coach-care-pref-option-pcm"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
-
-      cy.get('[data-cy="coach-care-pref-option-bhi"]')
-        .find('.mat-slide-toggle-input')
-        .should('be.checked')
+      for (const tag of Object.keys(careTags)) {
+        checkToggle(`coach-care-pref-option-${tag}`, careTags[tag])
+      }
     })
 
     it('should create disabled preference', () => {
@@ -90,45 +80,28 @@ describe('Coach Settings Page', () => {
         expect(xhr.response.statusCode).to.equal(200)
         expect(xhr.request.body.serviceType).to.equal('4')
         expect(xhr.request.body.status).to.equal('inactive')
-
-        cy.get('[data-cy="coach-care-pref-option-pcm"]')
-          .find('.mat-slide-toggle-input')
-          .should('not.be.checked')
       })
     })
 
     it('should enable preference', () => {
-      cy.get('@coachSettingTabs').eq(2).click()
-
-      cy.get('[data-cy="coach-care-pref-option-ccm"]')
-        .find('.mat-slide-toggle-input')
-        .click({ force: true })
-
-      cy.wait('@updateCoachCarePreference').should((xhr) => {
-        expect(xhr.response.statusCode).to.equal(200)
-        expect(xhr.request.body.status).to.equal('active')
-
-        cy.get('[data-cy="coach-care-pref-option-ccm"]')
-          .find('.mat-slide-toggle-input')
-          .should('be.checked')
-      })
+      checkEnableDisablePreference('coach-care-pref-option-ccm', true)
     })
 
     it('should disable preference', () => {
-      cy.get('@coachSettingTabs').eq(2).click()
-
-      cy.get('[data-cy="coach-care-pref-option-rpm"]')
-        .find('.mat-slide-toggle-input')
-        .click({ force: true })
-
-      cy.wait('@updateCoachCarePreference').should((xhr) => {
-        expect(xhr.response.statusCode).to.equal(200)
-        expect(xhr.request.body.status).to.equal('inactive')
-
-        cy.get('[data-cy="coach-care-pref-option-rpm"]')
-          .find('.mat-slide-toggle-input')
-          .should('not.be.checked')
-      })
+      checkEnableDisablePreference('coach-care-pref-option-rpm', false)
     })
   })
 })
+
+const checkEnableDisablePreference = (dataCy: string, enable: boolean) => {
+  cy.get('@coachSettingTabs').eq(2).click()
+
+  cy.get(`[data-cy="${dataCy}"]`)
+    .find('.mat-slide-toggle-input')
+    .click({ force: true })
+
+  cy.wait('@updateCoachCarePreference').should((xhr) => {
+    expect(xhr.response.statusCode).to.equal(200)
+    expect(xhr.request.body.status).to.equal(enable ? 'active' : 'inactive')
+  })
+}

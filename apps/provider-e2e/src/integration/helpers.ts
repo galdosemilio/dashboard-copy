@@ -49,3 +49,11 @@ export function setupEcommerceLeftNavMenu(
     })
   })
 }
+
+export function checkList(linkName: string, menuNames: string[]) {
+  cy.get(linkName).should('have.length', menuNames.length)
+
+  for (let i = 0; i < menuNames.length; i += 1) {
+    cy.get(linkName).eq(i).should('contain', menuNames[i])
+  }
+}
