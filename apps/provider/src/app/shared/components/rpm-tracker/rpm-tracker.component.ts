@@ -200,6 +200,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       this.currentCodeString = ''
       this.requiredIterationSeconds = 0
       this.timerUnavailableError = undefined
+      this.stopTimer()
 
       const response = await this.careManagementState.getList({
         organization: this.context.organizationId,

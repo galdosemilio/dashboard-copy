@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core'
 import { NavigationStart, Router, RouterEvent } from '@angular/router'
 import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { BehaviorSubject, merge } from 'rxjs'
+import { BehaviorSubject, debounceTime, merge } from 'rxjs'
 import { AccountProvider } from '@coachcare/sdk'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
@@ -24,6 +24,8 @@ export class TimeTrackerService implements OnDestroy {
     return this.currentRoute$.getValue()
   }
 
+  activeCareManagementServiceTag: string
+
   private currentOrganization: SelectedOrganization
   private trackingTimeStart: Date
 
@@ -40,6 +42,13 @@ export class TimeTrackerService implements OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(this.routeEventHandler)
     void this.commitStashedTime()
+
+    this.context.activeCareManagementService$
+      .pipe(untilDestroyed(this), debounceTime(500))
+      .subscribe((serviceType) => {
+        this.activeCareManagementServiceTag = serviceType?.tag
+      })
+
     merge(this.context.organization$, this.context.activeCareManagementService$)
       .pipe(untilDestroyed(this))
       .subscribe(async () => {
@@ -91,8 +100,8 @@ export class TimeTrackerService implements OnDestroy {
 
     const tags = [...route.tags, ...params]
 
-    if (route.useAccount && this.context.activeCareManagementService) {
-      tags.push(this.context.activeCareManagementService.tag)
+    if (route.useAccount && this.activeCareManagementServiceTag) {
+      tags.push(this.activeCareManagementServiceTag)
     }
 
     return uniq(tags)

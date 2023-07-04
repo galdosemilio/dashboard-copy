@@ -177,7 +177,48 @@ describe('Patient profile -> dashboard -> rpm', function () {
         '1'
       )
 
-      standardSetup()
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/warehouse/care-management/billing/snapshot**',
+            fixture: `api/warehouse/getRPMBillingSnapshot`
+          }
+        ]
+      })
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]')
+        .find('mat-select')
+        .should('contain', 'RPM')
+
+      cy.get('.ccr-tabs').find('a').eq(1).click()
+
+      cy.tick(10000)
+
+      cy.wait('@accountActivityPostRequest')
+      cy.wait('@accountActivityPostRequest')
+      cy.wait('@accountActivityPostRequest').should((xhr) => {
+        expect(xhr.response.statusCode).to.equal(201)
+        expect(xhr.request.body.tags.includes('rpm')).to.equal(false)
+      })
+    })
+
+    it('should send previous code when switching service type', () => {
+      window.localStorage.setItem(
+        STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
+        '1'
+      )
+
+      standardSetup({
+        apiOverrides: [
+          {
+            url: '/1.0/warehouse/care-management/billing/snapshot**',
+            fixture: `api/warehouse/getCCMBillingSnapshot`
+          }
+        ]
+      })
 
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
@@ -188,44 +229,67 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
       cy.tick(10000)
 
-      cy.get('.ccr-tabs').find('a').eq(1).click()
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="care-management-state"]')
+        .find('mat-select')
+        .eq(0)
+        .trigger('click')
+        .wait(500)
 
+      cy.get('.mat-select-panel')
+        .find('mat-option')
+        .contains('CCM')
+        .trigger('click')
+        .trigger('blur', { force: true })
+        .wait(500)
+
+      cy.tick(10000)
+
+      cy.wait('@accountActivityPostRequest')
       cy.wait('@accountActivityPostRequest')
       cy.wait('@accountActivityPostRequest').should((xhr) => {
         expect(xhr.response.statusCode).to.equal(201)
         expect(xhr.request.body.tags.includes('rpm')).to.equal(true)
       })
+
+      cy.get('[cy-data="care-management-state"]')
+        .find('.current-code')
+        .should('contain', 99490)
+
+      cy.get('[cy-data="care-management-state"]')
+        .find('.timer')
+        .should('contain', '10:00 / 20:00')
     })
+  })
 
-    describe('Current active CTP code', () => {
-      describe('RPM', () => {
-        it('should show 99457', () => {
-          testCurrentCTPCode({
-            snapshot: 'getRPMBillingSnapshotSingle',
-            code: '99457'
-          })
+  describe('Current active CTP code', () => {
+    describe('RPM', () => {
+      it('should show 99457', () => {
+        testCurrentCTPCode({
+          snapshot: 'getRPMBillingSnapshotSingle',
+          code: '99457'
         })
+      })
 
-        it('should show 99458 (1)', () => {
-          testCurrentCTPCode({
-            snapshot: 'getRPMBillingSnapshotSingleComplete99458-1',
-            code: '99458 (2)'
-          })
+      it('should show 99458 (1)', () => {
+        testCurrentCTPCode({
+          snapshot: 'getRPMBillingSnapshotSingleComplete99457',
+          code: '99458 (1)'
         })
+      })
 
-        it('should show 99458 (2)', () => {
-          testCurrentCTPCode({
-            snapshot: 'getRPMBillingSnapshotSingleComplete99457',
-            code: '99458 (1)'
-          })
+      it('should show 99458 (2)', () => {
+        testCurrentCTPCode({
+          snapshot: 'getRPMBillingSnapshotSingleComplete99458-1',
+          code: '99458 (2)'
         })
+      })
 
-        it('should show as completed', () => {
-          testCurrentCTPCode({
-            snapshot: 'getRPMBillingSnapshotSingleComplete99458-2',
-            code: 'completed',
-            isCompleted: true
-          })
+      it('should show as completed', () => {
+        testCurrentCTPCode({
+          snapshot: 'getRPMBillingSnapshotSingleComplete99458-2',
+          code: 'completed',
+          isCompleted: true
         })
       })
     })

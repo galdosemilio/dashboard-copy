@@ -35,6 +35,25 @@
                 "notification": {
                   "count": 1
                 }
+              },
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 600,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
               }
             }
           }
@@ -44,6 +63,25 @@
           "eligibility": {
             "next": {
               "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
               "transmissions": {
                 "distinctDates": {
                   "required": 16,
