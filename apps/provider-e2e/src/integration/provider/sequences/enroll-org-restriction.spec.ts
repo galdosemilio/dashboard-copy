@@ -20,6 +20,8 @@ describe('Sequences -> enrollment and unenrollment', function () {
       .wait(500)
       .type('eric')
 
+    cy.tick(10000)
+
     cy.wait('@api-access_account')
       .its('request.url')
       .should('include', 'organization=999')
