@@ -8,6 +8,21 @@
         "email": "eric.dibari1@gmail.com",
         "startedAt": "2019-06-21T23:55:53.231+00:00"
       },
+      "weight": {
+        "first": {
+          "id": "53655622",
+          "value": 78652,
+          "recordedAt": {
+            "utc": "2022-06-02T00:27:45.111+00:00",
+            "local": "2022-06-01T20:27:45.111",
+            "timezone": "America/New_York"
+          }
+        },
+        "change": {
+          "value": -7257,
+          "percentage": -9.23
+        }
+      },
       "dataPoints": [],
       "organizations": {
         "count": 1,
@@ -32,6 +47,17 @@
         "email": "eric.dibari2@gmail.com",
         "startedAt": "2019-06-21T00:02:53.231+00:00"
       },
+      "weight": {
+        "first": {
+          "id": "53655622",
+          "value": 78652,
+          "recordedAt": {
+            "utc": "2022-06-02T00:27:45.111+00:00",
+            "local": "2022-06-01T20:27:45.111",
+            "timezone": "America/New_York"
+          }
+        }
+      },
       "dataPoints": [],
       "organizations": {
         "count": 1,
@@ -55,6 +81,21 @@
         "lastName": "Di Bari3",
         "email": "eric.dibari3@gmail.com",
         "startedAt": "2019-03-11T15:59:47.063+00:00"
+      },
+      "weight": {
+        "last": {
+          "id": "53655622",
+          "value": 78652,
+          "recordedAt": {
+            "utc": "2022-06-02T00:27:45.111+00:00",
+            "local": "2022-06-01T20:27:45.111",
+            "timezone": "America/New_York"
+          }
+        },
+        "change": {
+          "value": -7257,
+          "percentage": -9.23
+        }
       },
       "dataPoints": [],
       "organizations": {

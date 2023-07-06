@@ -132,4 +132,20 @@ describe('Patient Listing', function () {
       )
     })
   })
+
+  it.only('Properly exports csv report', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/accounts/patients`)
+
+    cy.get('table', { timeout: 10000 })
+    cy.clock().tick(10000)
+
+    cy.get('[data-cy="download-csv-button"]').click()
+
+    cy.readFile(
+      `${Cypress.config('downloadsFolder')}/CoachCare_Patient_List_csv.csv`
+    )
+  })
 })

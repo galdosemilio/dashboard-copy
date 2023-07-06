@@ -396,7 +396,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           }"` +
           this.csvSeparator +
           `"${
-            d.weight
+            d.weight?.start
               ? unitConversion(
                   rawPreference,
                   'composition',
@@ -409,7 +409,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           }"` +
           this.csvSeparator +
           `"${
-            d.weight
+            d.weight?.end
               ? unitConversion(
                   rawPreference,
                   'composition',
@@ -422,7 +422,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           }"` +
           this.csvSeparator +
           `"${
-            d.weight && d.weight.change
+            d.weight?.change
               ? unitConversion(
                   rawPreference,
                   'composition',
@@ -434,20 +434,18 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
               : ''
           }"` +
           this.csvSeparator +
-          `"${
-            d.weight && d.weight.change
-              ? d.weight.change.percent + ' ' + '%'
-              : ''
-          }"` +
+          `"${d.weight?.change ? d.weight.change.percent + ' ' + '%' : ''}"` +
           this.csvSeparator +
           `"${moment(d.startedAt).format('YYYY-MM-DD')}"` +
           this.csvSeparator +
           `"${
-            d.weight ? moment(d.weight.start.date).format('YYYY-MM-DD') : ''
+            d.weight?.start
+              ? moment(d.weight.start.date).format('YYYY-MM-DD')
+              : ''
           }"` +
           this.csvSeparator +
           `"${
-            d.weight ? moment(d.weight.end.date).format('YYYY-MM-DD') : ''
+            d.weight?.end ? moment(d.weight.end.date).format('YYYY-MM-DD') : ''
           }"` +
           this.csvSeparator +
           `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
