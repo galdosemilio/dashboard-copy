@@ -59,7 +59,10 @@ const interceptCoreApiCalls = (
   })
 
   cy.intercept('GET', `2.0/account/${Cypress.env('patientId')}`, {
-    fixture: 'api/account/patientSingle'
+    fixture: fetchOverride(
+      `2.0/account/${Cypress.env('patientId')}`,
+      'api/account/patientSingle'
+    )
   })
   cy.intercept('GET', `2.0/account/${Cypress.env('providerId')}`, {
     fixture: 'api/account/coachSingle'
@@ -184,6 +187,10 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '1.0/mfa/preference/section', {
     fixture: 'api/mfa/getSections'
   })
+  cy.intercept('GET', '1.0/mfa?**', {
+    statysCode: 200,
+    body: {}
+  })
   cy.intercept('GET', '2.0/package/organization?**', {
     fixture: 'api/package/fetchAll'
   })
@@ -260,14 +267,12 @@ const interceptCoreApiCalls = (
     statusCode: 201
   })
 
-  cy.intercept(
-    'GET',
-    '/2.0/measurement/device/sync?**',
-    fetchOverride(
-      '/2.0/measurement/device/sync?**',
-      'fixture:/api/measurement/syncDevices'
+  cy.intercept('GET', '2.0/measurement/device/sync?**', {
+    fixture: fetchOverride(
+      '2.0/measurement/device/sync?**',
+      'api/measurement/syncDevices'
     )
-  )
+  })
 
   cy.intercept('POST', '/2.0/measurement/device/sync', {
     statusCode: 201,

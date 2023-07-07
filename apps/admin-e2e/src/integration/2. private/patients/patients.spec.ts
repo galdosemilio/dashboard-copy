@@ -20,20 +20,33 @@ const patients = [
 ]
 
 describe('Patients Listing Page', () => {
-  beforeEach(() => {
+  describe('CRUD', () => {
+    beforeEach(() => {
+      cy.setTimezone('et')
+      standardSetup()
+    })
+
+    it('Patient Listing', () => {
+      checkAccountList('/admin/accounts/patients', patients)
+    })
+
+    it('Patient Deletion', () => {
+      checkForEditAndDeleteAccount('/admin/accounts/patients', 'delete')
+    })
+
+    it('Patient Editing', () => {
+      checkForEditAndDeleteAccount('/admin/accounts/patients', 'edit')
+    })
+  })
+
+  it('Patient Editing without countryCode', () => {
     cy.setTimezone('et')
-    standardSetup()
-  })
-
-  it('Patient Listing', () => {
-    checkAccountList('/admin/accounts/patients', patients)
-  })
-
-  it('Patient Deletion', () => {
-    checkForEditAndDeleteAccount('/admin/accounts/patients', 'delete')
-  })
-
-  it('Patient Editing', () => {
+    standardSetup(true, undefined, [
+      {
+        url: `2.0/account/${Cypress.env('patientId')}`,
+        fixture: '/api/account/patientSingleWithoutCountryCode'
+      }
+    ])
     checkForEditAndDeleteAccount('/admin/accounts/patients', 'edit')
   })
 })

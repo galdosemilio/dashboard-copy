@@ -37,7 +37,7 @@ export class AccountFormComponent implements OnInit {
   ngOnInit() {
     // route parameters
     this.route.data.subscribe((data: AccountParams) => {
-      this.accountType = (data.accountType as any) as AccountTypeIds // MERGETODO: CHECK THIS TYPE!!!
+      this.accountType = data.accountType as any as AccountTypeIds // MERGETODO: CHECK THIS TYPE!!!
       if (data.account) {
         this.item = data.account
       }
@@ -60,6 +60,10 @@ export class AccountFormComponent implements OnInit {
             phone: this.item.phone,
             countryCode: this.item.countryCode
           }
+        }
+
+        if (!this.item.phone.countryCode) {
+          this.item.phone.countryCode = '+1'
         }
 
         this.form.patchValue(this.item)
