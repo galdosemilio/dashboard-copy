@@ -1,3 +1,21 @@
+# [1.121.0](https://github.com/coachcare/dashboard/compare/v1.120.0...v1.121.0) (2023-07-07)
+
+
+### Bug Fixes
+
+* add organization info to billing report csv [FRON-3209] ([95a744d](https://github.com/coachcare/dashboard/commit/95a744d0603ecbb189b8d32a12d01ae788d2e52a))
+* adjust date display for bodytrace device sync time ([97df3df](https://github.com/coachcare/dashboard/commit/97df3dfd281ff5ef265966b24e45ed6eea162478))
+* bug on sequence enrollment by phase ([461b83c](https://github.com/coachcare/dashboard/commit/461b83cb973b1b537a7616db78567e2fc968cb55))
+* enroll-org-restriction spec ([008ada6](https://github.com/coachcare/dashboard/commit/008ada6ceb25ec3e694e24cdb8d17fba37d77e97))
+* remove duplicate lines [FRON-3204] ([18005eb](https://github.com/coachcare/dashboard/commit/18005eb1c1fe72b402e1222ae8c2bda10a76dd0b))
+* use different storage key for active care service type [FRON-3190] ([26fab35](https://github.com/coachcare/dashboard/commit/26fab3549b0c7f169756c4a0bc9f659655438dfd))
+
+
+### Features
+
+* add sum row to clinic patient code [FRON-3157] ([0304d8f](https://github.com/coachcare/dashboard/commit/0304d8f92f0606efc89289f9e41d9c06d5d2918f))
+* allow sequence enrollment by phase ([5af9b94](https://github.com/coachcare/dashboard/commit/5af9b94c2736fbf4f51caf48a207cfeb5315711a))
+
 # [1.120.0](https://github.com/coachcare/dashboard/compare/v1.119.0...v1.120.0) (2023-06-23)
 
 
