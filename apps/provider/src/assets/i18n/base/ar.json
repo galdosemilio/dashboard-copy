@@ -193,6 +193,8 @@
     "CONTACT_INFO": "معلومات للتواصل",
     "COUNTRY": "بلد",
     "CREATE_NEW_THREAD_WITH_MEMBER": "إنشاء سلسلة رسائل جديدة مع {{user.firstName}} {{user.lastName}}",
+    "CURRENT_BMI": "مؤشر كتلة الجسم الحالي",
+    "CURRENT_BMI_DATE": "تاريخ مؤشر كتلة الجسم الحالي",
     "CURRENT_WEIGHT": "الوزن الحالي",
     "CURRENT_WEIGHT_DATE": "تاريخ الوزن الحالي",
     "DAILY_CALORIES_GOAL": "هدف السعرات الحرارية اليومية",

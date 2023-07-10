@@ -107,6 +107,16 @@ class="ccr-table ccr-expand-table ccr-table-stats">
             </ccr-table-sort-header>
           </div>
         </td>
+        <td *ngIf="showCurrentBmiColumns" class="column-currentbmidate">
+          <div>
+            <span>{{ 'BOARD.CURRENT_BMI_DATE' | translate }}</span>
+          </div>
+        </td>
+        <td *ngIf="showCurrentBmiColumns" class="column-currentbmi">
+          <div>
+            <span>{{ 'BOARD.CURRENT_BMI' | translate }}</span>
+          </div>
+        </td>
         <td class="column-actions sticky-column sticky-right">{{ 'BOARD.ACTIONS' | translate }}</td>
       </tr>
     </thead>
@@ -231,6 +241,18 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           [ngTemplateOutlet]="row.weight?.change?.percent ? weightpercent : empty"
           [ngTemplateOutletContext]="{weightPercent: row.weight?.change?.percent}"></ng-container>
           </div>
+        </div>
+      </td>
+      <td *ngIf="showCurrentBmiColumns && row.level === 0" class="column-currentbmidate">
+        <div>
+          <ng-container
+          [ngTemplateOutlet]="row.dataPoints?.['46'] ? datereg : empty"
+          [ngTemplateOutletContext]="{date: row.dataPoints?.['46']?.recordedAt.local}"></ng-container>
+        </div>
+      </td>
+      <td *ngIf="showCurrentBmiColumns && row.level === 0" class="column-currentbmi">
+        <div *ngIf="row.dataPoints?.['46'] && row.dataPoints?.['46']; else empty">
+          {{ convertToReadableFormat(row.dataPoints['46'].value, row.dataPoints['46'].type, measurementPreference) }}
         </div>
       </td>
       <td class="column-actions sticky-column sticky-right">

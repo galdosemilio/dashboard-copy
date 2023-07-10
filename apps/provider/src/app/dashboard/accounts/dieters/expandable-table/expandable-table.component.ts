@@ -65,6 +65,7 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
   measurementPreference: UserMeasurementPreferenceType
   rows: any
   hasAdmin = false
+  showCurrentBmiColumns = false
 
   constructor(
     private account: AccountProvider,
@@ -121,6 +122,11 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
           'PATIENT_LISTING.ADDITIONAL_LISTING_COLUMNS',
           this.context.organization
         ) ?? []
+      this.showCurrentBmiColumns =
+        resolveConfig(
+          'PATIENT_LISTING.SHOW_CURRENT_BMI',
+          this.context.organization
+        ) ?? false
     })
 
     this.sort.sortChange.pipe(untilDestroyed(this)).subscribe(() => {

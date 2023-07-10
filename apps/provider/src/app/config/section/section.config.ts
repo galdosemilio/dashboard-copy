@@ -62,6 +62,7 @@ import {
 } from './donna-krech-online'
 import { SharpProdSectionConfig, SharpTestSectionConfig } from './sharp'
 import { OptionsMedicalWeightLossSectionConfig } from './options-medical-weight-loss'
+import { BonsSecourMercySectionConfig } from './bons-secour'
 
 export interface SectionConfigObject {
   component: any
@@ -111,7 +112,8 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7546']: NXTSTIMSectionConfig,
     ['7554']: GardenStatePainSectionConfig,
     ['7556']: AlaskaPremierSectionConfig,
-    ['7614']: DonnaKrechOnlineTestSectionConfig
+    ['7614']: DonnaKrechOnlineTestSectionConfig,
+    ['7623']: BonsSecourMercySectionConfig
   },
   prod: {
     ['4050']: LeanMDSectionConfig,
@@ -143,6 +145,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7080']: AlaskaPremierSectionConfig,
     ['7227']: WakeForestSectionConfig,
     ['7277']: SharpProdSectionConfig,
-    ['7327']: OptionsMedicalWeightLossSectionConfig
+    ['7327']: OptionsMedicalWeightLossSectionConfig,
+    ['7233']: BonsSecourMercySectionConfig
   }
 }

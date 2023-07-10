@@ -193,6 +193,8 @@
     "CONTACT_INFO": "Kontakt Informationen",
     "COUNTRY": "Land",
     "CREATE_NEW_THREAD_WITH_MEMBER": "Neuen Nachrichten-Thread erstellen mit {{ user.firstName }} {{ user.lastName }}",
+    "CURRENT_BMI": "Aktueller BMI",
+    "CURRENT_BMI_DATE": "Aktueller BMI -Datum",
     "CURRENT_WEIGHT": "Aktuelles Gewicht",
     "CURRENT_WEIGHT_DATE": "Aktuelles Gewichtsdatum",
     "DAILY_CALORIES_GOAL": "Tägliches Kalorienziel",

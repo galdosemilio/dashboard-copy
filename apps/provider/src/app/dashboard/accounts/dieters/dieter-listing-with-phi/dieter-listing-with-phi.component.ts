@@ -75,6 +75,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
     'https://coachcare.zendesk.com/hc/en-us/articles/360019923251-Adding-a-Patient'
   isPatientCreationEnabled = true
   initialPackages: PackageData[] = []
+  showCurrentBmiColumns = false
 
   private extraColumns: NamedEntity[] = []
 
@@ -136,6 +137,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
       type: [
         DataPointTypes.BLOOD_PRESSURE_SYSTOLIC,
         DataPointTypes.BLOOD_PRESSURE_DIASTOLIC,
+        ...(this.showCurrentBmiColumns ? [DataPointTypes.BMI] : []),
         ...this.extraColumns.map((entry) => entry.id)
       ]
     }))
@@ -162,6 +164,11 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
       this.isPatientCreationEnabled =
         this.clinic?.permissions.admin &&
         resolveConfig('PATIENT_LISTING.SHOW_PATIENT_CREATE_BUTTON', org)
+      this.showCurrentBmiColumns =
+        resolveConfig(
+          'PATIENT_LISTING.SHOW_CURRENT_BMI',
+          this.context.organization
+        ) ?? []
     })
 
     this.pageSizeSelectorComp.onPageSizeChange
@@ -335,6 +342,9 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
         this.csvSeparator +
         'Current Weight Date' +
         this.csvSeparator +
+        (this.showCurrentBmiColumns
+          ? `Current BMI Date${this.csvSeparator}Current BMI${this.csvSeparator}`
+          : '') +
         'Organization ID (1)' +
         this.csvSeparator +
         'Organization Name (1)' +
@@ -463,6 +473,8 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
             d.weight?.end ? moment(d.weight.end.date).format('YYYY-MM-DD') : ''
           }"` +
           this.csvSeparator +
+          this.generateCurrentBmiColumns(d, rawPreference) +
+          this.csvSeparator +
           `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
           this.csvSeparator +
           `"${d.organizations[0] ? d.organizations[0].name : ''}"` +
@@ -518,5 +530,34 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
     this.initialPackages = filters.packages?.pkg ?? []
     this.cdr.detectChanges()
     this.refresh$.next()
+  }
+
+  private generateCurrentBmiColumns(
+    d: DieterListingItem,
+    rawPreference
+  ): string {
+    if (!this.showCurrentBmiColumns) {
+      return ''
+    }
+
+    return (
+      `"${
+        d.dataPoints[DataPointTypes.BMI]
+          ? moment(d.dataPoints[DataPointTypes.BMI].recordedAt.local).format(
+              'YYYY-MM-DD'
+            )
+          : ''
+      }"` +
+      this.csvSeparator +
+      `"${
+        d.dataPoints[DataPointTypes.BMI]
+          ? convertToReadableFormat(
+              d.dataPoints[DataPointTypes.BMI].value,
+              d.dataPoints[DataPointTypes.BMI].type,
+              rawPreference
+            ).toFixed()
+          : ''
+      }"`
+    )
   }
 }
