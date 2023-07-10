@@ -11,7 +11,7 @@ import {
 import { _ } from '@app/shared/utils'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { debounceTime, filter } from 'rxjs/operators'
+import { debounceTime, filter, tap } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog'
 import { AddSupervisingProviderDialog } from '../../dialogs'
 import {
@@ -161,6 +161,9 @@ export class ClinicBillableServicesComponent implements OnInit {
 
     this.form.controls.tin.valueChanges
       .pipe(
+        tap(() => {
+          this.form.updateValueAndValidity()
+        }),
         filter(() => !this.rpmPrefUpdateBlock && !this.form.invalid),
         debounceTime(200),
         untilDestroyed(this)

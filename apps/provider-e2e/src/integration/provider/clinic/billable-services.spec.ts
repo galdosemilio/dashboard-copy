@@ -23,7 +23,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
     cy.get('input[data-placeholder="##-#######"]').should(
       'have.value',
-      '987654321'
+      '98-7654321'
     )
     cy.get('app-clinic-billable-services').should(
       'contain',
@@ -42,6 +42,21 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
   it('Should properly display own billable services settings', function () {
     standardSetup()
+    cy.intercept('GET', '/1.0/care-management/preference/organization?**', {
+      statusCode: 200,
+      body: {
+        data: [
+          {
+            id: '1',
+            organization: {
+              id: '1'
+            },
+            taxIdentificationNumber: '123456789',
+            isActive: true
+          }
+        ]
+      }
+    })
 
     cy.visit(`/accounts/clinics/${Cypress.env('clinicId')};s=billable-services`)
 
@@ -182,7 +197,14 @@ describe('Clinics -> Clinic -> Billable Services', function () {
   })
 
   it('Should allow a provider to change its own TIN', function () {
-    standardSetup()
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/care-management/preference/organization?**',
+          fixture: 'api/care-management/getPreferenceOrganizationWithoutTIN'
+        }
+      ]
+    })
 
     cy.visit(`/accounts/clinics/${Cypress.env('clinicId')};s=billable-services`)
 
@@ -194,7 +216,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
     cy.tick(1000)
 
-    cy.wait('@rpmPreferencePatchRequest').should((xhr) => {
+    cy.wait('@careManagementPreferencePatchRequest').should((xhr) => {
       expect(xhr.request.body.taxIdentificationNumber).to.equal('98-7654321')
     })
   })
@@ -254,14 +276,21 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
     cy.tick(1000)
 
-    cy.wait('@rpmPreferencePostRequest').should((xhr) => {
+    cy.wait('@careManagementPreferencePostRequest').should((xhr) => {
       expect(xhr.request.body.organization).to.equal('1')
       expect(xhr.request.body.isActive).to.equal(true)
     })
   })
 
   it('Should allow a provider to move from an own TIN to an inherited TIN', function () {
-    standardSetup()
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/care-management/preference/organization?**',
+          fixture: 'api/care-management/getPreferenceOrganizationWithoutTIN'
+        }
+      ]
+    })
 
     cy.visit(`/accounts/clinics/${Cypress.env('clinicId')};s=billable-services`)
 
@@ -282,7 +311,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
     cy.tick(1000)
 
-    cy.wait('@rpmPreferenceDeleteRequest').should((xhr) => {
+    cy.wait('@careManagementPreferenceDeleteRequest').should((xhr) => {
       expect(xhr.request.url).to.contain('1')
     })
   })

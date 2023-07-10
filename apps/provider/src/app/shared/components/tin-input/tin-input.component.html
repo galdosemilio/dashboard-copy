@@ -6,6 +6,7 @@
   [readonly]="readonly || isInherited"
   [wholeNumber]="true"
   formControlName="tin"
+  [maxlength]="this.maskFormat.length"
   numberOnly
   matInput
   type="text">

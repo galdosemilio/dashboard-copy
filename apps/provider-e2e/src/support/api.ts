@@ -825,6 +825,26 @@ const interceptCoreApiCalls = (
     )
   })
 
+  cy.intercept('GET', '/1.0/care-management/preference/organization/**', {
+    statusCode: 200,
+    body: {}
+  }).as('careManagementPreferenceGetRequest')
+
+  cy.intercept('POST', '/1.0/care-management/preference/organization', {
+    statusCode: 204,
+    body: {}
+  }).as('careManagementPreferencePostRequest')
+
+  cy.intercept('PATCH', '/1.0/care-management/preference/organization/**', {
+    statusCode: 204,
+    body: {}
+  }).as('careManagementPreferencePatchRequest')
+
+  cy.intercept('DELETE', '/1.0/care-management/preference/organization/**', {
+    statusCode: 204,
+    body: {}
+  }).as('careManagementPreferenceDeleteRequest')
+
   cy.intercept('GET', '/1.0/care-management/service-type/account?**', {
     fixture: fetchOverride(
       '/1.0/care-management/service-type/account?**',
