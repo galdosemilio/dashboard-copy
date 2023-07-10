@@ -11,7 +11,11 @@ import {
   ReportsCriteria,
   StatisticsDatabase
 } from '@app/dashboard/reports/services'
-import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
+import {
+  criteriaSelector,
+  ReportsState,
+  UpdateControls
+} from '@app/dashboard/reports/store'
 import { ContextService, NotifierService } from '@app/service'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { select, Store } from '@ngrx/store'
@@ -30,6 +34,13 @@ import {
   SharpReportDataSource,
   VEGETABLES_FRUITS_ID
 } from '../../services/sharp-report.datasource'
+import { STORAGE_SHARP_CUSTOM_REPORT_FILTERS } from '@app/config'
+import { PackageData } from '@coachcare/sdk'
+
+interface SharpCustomReportFilters extends ReportsCriteria {
+  organization?: string
+  packages?: PackageFilter
+}
 
 @UntilDestroy()
 @Component({
@@ -61,6 +72,7 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
   // refresh trigger
   refresh$ = new Subject<void>()
   pkgFilter$ = new Subject<void>()
+  initialPackages: PackageData[] = []
 
   private pkgFilter?: PackageFilter
 
@@ -84,6 +96,8 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
       void this.router.navigate(['.'], { relativeTo: this.activeRoute.parent })
     }
 
+    this.recoverFilters()
+
     this.source = new SharpReportDataSource(this.database, this.paginator)
 
     this.source.addRequired(this.refresh$, () => ({
@@ -104,6 +118,7 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(untilDestroyed(this), select(criteriaSelector))
       .subscribe((criteria: ReportsCriteria) => {
         if (!isEmpty(criteria)) {
+          this.storeFilters(criteria)
           this.data = criteria
           this.refresh$.next()
         }
@@ -212,6 +227,70 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public onPackageFilter(filter: PackageFilter): void {
     this.pkgFilter = filter
+    this.storeFilters({
+      packages: this.pkgFilter,
+      organization: this.context.organizationId
+    })
     this.pkgFilter$.next()
+  }
+
+  private recoverFilters() {
+    const rawFilters = window.localStorage.getItem(
+      STORAGE_SHARP_CUSTOM_REPORT_FILTERS
+    )
+
+    if (!rawFilters) {
+      return
+    }
+
+    const filters: SharpCustomReportFilters = JSON.parse(rawFilters)
+
+    if (this.context.organizationId !== filters.organization) {
+      window.localStorage.removeItem(STORAGE_SHARP_CUSTOM_REPORT_FILTERS)
+
+      return
+    }
+
+    if (filters.packages) {
+      this.pkgFilter = filters.packages
+      this.initialPackages = filters.packages?.pkg
+    }
+
+    if (filters.startDate) {
+      this.store.dispatch(
+        new UpdateControls({
+          criteria: {
+            organization: filters.organization,
+            startDate: filters.startDate,
+            endDate: filters.endDate,
+            timeframe: filters.timeframe,
+            diff: filters.diff
+          }
+        })
+      )
+    }
+  }
+
+  private storeFilters(data: SharpCustomReportFilters): void {
+    const rawPagination = window.localStorage.getItem(
+      STORAGE_SHARP_CUSTOM_REPORT_FILTERS
+    )
+
+    const originalFilters: SharpCustomReportFilters = rawPagination
+      ? JSON.parse(rawPagination)
+      : {}
+
+    const filters =
+      originalFilters.organization === data.organization
+        ? {
+            ...originalFilters,
+            ...data
+          }
+        : data
+
+    window.localStorage.setItem(
+      STORAGE_SHARP_CUSTOM_REPORT_FILTERS,
+      JSON.stringify(filters)
+    )
   }
 }

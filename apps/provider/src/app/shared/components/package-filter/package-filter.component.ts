@@ -33,6 +33,7 @@ export class PackageFilterComponent implements OnInit {
   @Input() mode: 'single' | 'multiple' = 'multiple'
   @Input() confirmText = _('MENU.SEARCH')
   @Input() filter: PackageFilterType[] = ['all', 'any']
+  @Input() initialPackages: PackageData[] = []
 
   @Output()
   change: EventEmitter<PackageFilter> = new EventEmitter<PackageFilter>()
@@ -146,7 +147,15 @@ export class PackageFilterComponent implements OnInit {
       const packages = associations.map((association) => association.package)
       const pkgsFormArray = this.form.controls.packages as FormArray
 
-      packages.forEach(() => pkgsFormArray.push(new FormControl(false)))
+      packages.forEach((p) =>
+        pkgsFormArray.push(
+          new FormControl(
+            this.initialPackages.find((entry) => entry.id === p.id)
+              ? true
+              : false
+          )
+        )
+      )
 
       this.packages = packages
     } catch (error) {

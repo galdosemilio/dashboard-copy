@@ -7,7 +7,11 @@ import {
 } from '@angular/core'
 import { RouterState } from '@angular/router'
 import { ReportsCriteria } from '@app/dashboard/reports/services'
-import { ReportsState, UpdateControls } from '@app/dashboard/reports/store'
+import {
+  ReportsState,
+  UpdateControls,
+  criteriaSelector
+} from '@app/dashboard/reports/store'
 import { ContextService } from '@app/service'
 import { DateNavigatorOutput } from '@app/shared'
 import { FixedPeriod } from '@app/shared/components/date-range/date-range.component'
@@ -15,6 +19,7 @@ import { routerSelector } from '@app/store/router'
 import { select, Store } from '@ngrx/store'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { isEmpty } from 'lodash'
 
 interface StartPeriod {
   endDate?: string
@@ -36,10 +41,17 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
   discrete = false
   @Input()
   range = true
-  @Input()
-  timeframe = 'week'
+
+  @Input() set timeframe(value: string) {
+    this._timeframe = value || 'week'
+  }
+
+  get timeframe() {
+    return this._timeframe
+  }
+
+  _timeframe = 'week'
   clinic: string
-  dates: DateNavigatorOutput = {}
   fixedPeriod: FixedPeriod
   startPeriod: StartPeriod = {}
   startView: 'week' | 'month' | 'year' | 'years' = 'month'
@@ -87,13 +99,30 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
         }
       })
 
+    this.reports
+      .pipe(untilDestroyed(this), select(criteriaSelector))
+      .subscribe((criteria: ReportsCriteria) => {
+        if (!isEmpty(criteria)) {
+          this.startPeriod = {
+            startDate: criteria.startDate,
+            endDate: criteria.endDate
+          }
+          this._timeframe = criteria.timeframe
+          this.cdr.detectChanges()
+        }
+      })
+
     this.cdr.detectChanges()
   }
 
   ngOnDestroy() {}
 
   updateDates(dates: DateNavigatorOutput) {
-    this.dates = dates
+    this.timeframe = dates.timeframe
+    this.startPeriod = {
+      startDate: dates.startDate,
+      endDate: dates.endDate
+    }
     this.updateSelector()
   }
 
@@ -103,12 +132,17 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
   }
 
   updateSelector() {
-    if (this.clinic && this.dates.endDate) {
+    if (this.clinic && this.startPeriod.endDate) {
       const criteria: ReportsCriteria = {
         organization: this.clinic,
-        startDate: this.dates.startDate,
-        endDate: this.dates.endDate,
-        diff: moment(this.dates.endDate).diff(this.dates.startDate, 'days') + 1
+        startDate: this.startPeriod.startDate,
+        endDate: this.startPeriod.endDate,
+        timeframe: this.timeframe,
+        diff:
+          moment(this.startPeriod.endDate).diff(
+            this.startPeriod.startDate,
+            'days'
+          ) + 1
       }
       this.reports.dispatch(new UpdateControls({ criteria }))
     }

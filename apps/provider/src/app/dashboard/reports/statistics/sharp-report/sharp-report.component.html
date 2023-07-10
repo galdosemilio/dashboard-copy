@@ -9,6 +9,7 @@
   <ccr-package-filter
     [confirmText]="'BOARD.FILTER' | translate"
     [filter]="['any']"
+    [initialPackages]="initialPackages"
     (change)="onPackageFilter($event);"
     fxFlex>
   </ccr-package-filter>

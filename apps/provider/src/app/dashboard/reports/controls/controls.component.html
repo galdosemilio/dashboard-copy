@@ -7,6 +7,7 @@
     [start]="startPeriod?.startDate"
     [end]="startPeriod?.endDate"
     [min]="minDate"
+    [timeframe]="timeframe"
     (selectedDate)="updateDates($event)"></date-range-navigator>
     <date-navigator
     *ngIf="!range"

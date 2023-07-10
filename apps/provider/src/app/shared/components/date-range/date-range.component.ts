@@ -15,6 +15,7 @@ import { unitOfTime } from 'moment'
 import * as moment from 'moment-timezone'
 
 export interface DateRangeNavigatorOutput {
+  timeframe?: string
   startDate?: string
   endDate?: string
 }
@@ -61,22 +62,35 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   @Input() min?: string
 
   @Input() fixedPeriod: FixedPeriod
+
+  @Input() endView: CalendarView = 'month'
+
+  @Input() set timeframe(value: string) {
+    this._timeframe = value
+  }
+
+  get timeframe() {
+    return this._timeframe
+  }
+
   @Input() set startView(value: CalendarView) {
     this._startView = value
 
-    switch (value) {
-      case 'month':
-        this.quickTimeframe = 'this-month'
-        break
-      case 'week':
-        this.quickTimeframe = 'last-7-days'
-        break
-      case 'year':
-        this.quickTimeframe = 'last-12-months'
-        break
-      case 'years':
-        this.quickTimeframe = 'all-time'
-        break
+    if (this._timeframe) {
+      switch (value) {
+        case 'month':
+          this._timeframe = 'this-month'
+          break
+        case 'week':
+          this._timeframe = 'last-7-days'
+          break
+        case 'year':
+          this._timeframe = 'last-12-months'
+          break
+        case 'years':
+          this._timeframe = 'all-time'
+          break
+      }
     }
   }
 
@@ -84,13 +98,11 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
     return this._startView
   }
 
-  @Input() endView: CalendarView = 'month'
-
   @Output() selectedDate = new EventEmitter<DateRangeNavigatorOutput>()
 
   public _start = moment().startOf('day').subtract(1, 'week').add(1, 'day')
   public _end = moment()
-  quickTimeframe: string
+  private _timeframe: string
 
   public _maxDiff = moment.duration(1, 'year')
   public _limit = moment()
@@ -136,6 +148,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   onQuickSelect(dateRange): void {
     this._start = moment(dateRange.start)
     this._end = moment(dateRange.end)
+    this._timeframe = dateRange.timeframe
     this.processAndEmit()
   }
 
@@ -256,6 +269,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
     this.cdr.detectChanges()
 
     this.selectedDate.emit({
+      timeframe: this._timeframe,
       startDate: this._start.format('YYYY-MM-DD'),
       endDate: this._end.format('YYYY-MM-DD')
     })

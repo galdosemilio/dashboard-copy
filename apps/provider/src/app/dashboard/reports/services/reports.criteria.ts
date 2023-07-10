@@ -19,4 +19,5 @@ export interface ReportsCriteria {
   limit?: any
   // control util
   diff?: number
+  timeframe?: string
 }

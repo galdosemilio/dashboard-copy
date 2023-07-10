@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
 interface DateRange {
+  timeframe?: string
   start: string
   end: string
 }
@@ -231,7 +232,10 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
         (opt) => controls.range === opt.value
       )
       if (selectedOption) {
-        this.select.emit(selectedOption.generator())
+        this.select.emit({
+          ...selectedOption.generator(),
+          timeframe: this.form.value.range
+        })
       }
     })
   }
@@ -241,7 +245,9 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
     if (existingTimeframe && existingTimeframe.value !== this._timeframe) {
       if (this.form) {
         this._timeframe = value
-        this.form.controls.range.setValue(existingTimeframe.value)
+        this.form.controls.range.setValue(existingTimeframe.value, {
+          emitEvent: false
+        })
       }
     }
   }

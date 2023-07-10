@@ -23,3 +23,4 @@ export const STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE =
 export const STORAGE_CARE_MANAGEMENT_SERVICE_TYPE =
   'ccrCareManagementServiceType'
 export const STORAGE_JORNAL_FOOD_SHOW_ALL = 'ccrJournalFoodShowAll'
+export const STORAGE_SHARP_CUSTOM_REPORT_FILTERS = 'ccrSharpCustomReportFilters'
