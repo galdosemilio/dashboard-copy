@@ -3,7 +3,7 @@
 
   <div class="container" fxFlex="75%">
     <mat-grid-list cols="6" rowHeight="30px">
-      <mat-grid-tile [colspan]="1" (click)="changeDate(false)">
+      <mat-grid-tile [colspan]="1" (click)="changeDate(false)" data-cy="date-ranger-picker-left-click">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </mat-grid-tile>
 
@@ -25,7 +25,7 @@
             <mat-datepicker-toggle
               *ngIf="!fixedPeriod?.startDate"
               [for]="pickerStart"></mat-datepicker-toggle>
-            <span (click)="pickerStart.open()">
+            <span (click)="pickerStart.open()" data-cy="date-range-picker-start">
               {{ _start.format(_dateFormat) }}
             </span>
           </div>
@@ -38,7 +38,7 @@
               [min]="_start"
               [max]="_limit"
               (dateChange)="pickEnd($event.value)"/>
-            <span (click)="pickerEnd.open()">
+            <span (click)="pickerEnd.open()" data-cy="date-range-picker-end">
               {{ _end.format(_dateFormat) }}
             </span>
             <mat-datepicker-toggle
@@ -58,7 +58,7 @@
       <mat-grid-tile
         [colspan]="1"
         (click)="changeDate(true)"
-        [class.disabled]="_maxReached">
+        [class.disabled]="_maxReached" data-cy="date-ranger-picker-right-click">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </mat-grid-tile>
     </mat-grid-list>

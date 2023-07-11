@@ -20,6 +20,7 @@ export type CcrEventType =
   | 'system.timer'
   | 'user.data'
   | 'videoconferencing.ratingWindow.setState'
+  | 'reports.controls'
 
 export type CcrEvent = {
   name: CcrEventType

@@ -9,5 +9,6 @@ type ValidOrganization =
   | 'wellcore'
   | 'musclewise'
   | 'idealyou'
+  | 'sharp'
 
 export { ValidOrganization }

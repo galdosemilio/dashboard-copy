@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "firstName": "Bob",
+      "lastName": "Miller",
+      "dateOfBirth": "1974-02-26",
+      "organization": {
+        "id": "3328",
+        "hierarchyPath": ["3328", "1"],
+        "name": "Sharp Rees-Stealy Center for Health Management"
+      },
+      "aggregates": [
+        {
+          "key": "exercise-minutes",
+          "type": "sum",
+          "value": "278"
+        },
+        {
+          "key": {
+            "type": {
+              "id": "1",
+              "name": "Meal replacement",
+              "multiplier": 1
+            }
+          },
+          "type": "sum",
+          "value": "14"
+        },
+        {
+          "key": {
+            "type": {
+              "id": "1",
+              "name": "Vegetables & fruits",
+              "multiplier": 10
+            }
+          },
+          "type": "sum",
+          "value": "600"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "firstName": "Suzie",
+      "lastName": "Quibble",
+      "dateOfBirth": "1981-09-08",
+      "organization": {
+        "id": "3328",
+        "hierarchyPath": ["3328", "1"],
+        "name": "Sharp Rees-Stealy Center for Health Management"
+      },
+      "aggregates": []
+    }
+  ],
+  "pagination": {
+    "next": 25
+  }
+}

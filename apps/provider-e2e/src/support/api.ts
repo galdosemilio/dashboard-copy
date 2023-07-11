@@ -865,6 +865,13 @@ const interceptCoreApiCalls = (
       'api/care-management/getCareStates'
     )
   }).as('careManagementStates')
+
+  cy.intercept('GET', '/1.0/tenant/sharp/report/range-aggregate?**', {
+    fixture: fetchOverride(
+      '/1.0/tenant/sharp/report/range-aggregate?**',
+      'api/warehouse/getSharpCustomReport'
+    )
+  })
 }
 
 const seti18n = (): void => {

@@ -1,12 +1,29 @@
 import { standardSetup } from '../../../../support'
 
 describe('Reports -> Communications -> Interactions', function () {
-  it('Shows call history for selected organization in ET', function () {
+  beforeEach(() => {
     cy.setTimezone('et')
     standardSetup()
 
     cy.visit(`/reports/communications/communications`)
+  })
 
+  it('Time range selector shows this month and correct start and end dates by default, and show previous month correctly when clicked', function () {
+    cy.get('app-quick-date-range').contains('This Month')
+    cy.get('[data-cy="date-range-picker-start"]').contains('1 Dec 2019')
+    cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
+
+    cy.tick(1000)
+
+    cy.get('[data-cy="date-ranger-picker-left-click"]').trigger('click')
+
+    cy.tick(1000)
+
+    cy.get('[data-cy="date-range-picker-start"]').contains('1 Nov 2019')
+    cy.get('[data-cy="date-range-picker-end"]').contains('30 Nov 2019')
+  })
+
+  it('Shows call history for selected organization in ET', function () {
     cy.get('[data-cy="callLogClinicNotice"]').should(
       'contain',
       'CoachCare (ID: 1)'
@@ -40,11 +57,6 @@ describe('Reports -> Communications -> Interactions', function () {
   })
 
   it('Should show the addendum', function () {
-    cy.setTimezone('et')
-    standardSetup()
-
-    cy.visit(`/reports/communications/communications`)
-
     cy.get('mat-table').get('mat-row').as('interactionRows')
 
     cy.get('@interactionRows').should('have.length', 3)

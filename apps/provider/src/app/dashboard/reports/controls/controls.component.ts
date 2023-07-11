@@ -7,12 +7,8 @@ import {
 } from '@angular/core'
 import { RouterState } from '@angular/router'
 import { ReportsCriteria } from '@app/dashboard/reports/services'
-import {
-  ReportsState,
-  UpdateControls,
-  criteriaSelector
-} from '@app/dashboard/reports/store'
-import { ContextService } from '@app/service'
+import { ReportsState, UpdateControls } from '@app/dashboard/reports/store'
+import { ContextService, EventsService } from '@app/service'
 import { DateNavigatorOutput } from '@app/shared'
 import { FixedPeriod } from '@app/shared/components/date-range/date-range.component'
 import { routerSelector } from '@app/store/router'
@@ -42,10 +38,6 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
   @Input()
   range = true
 
-  @Input() set timeframe(value: string) {
-    this._timeframe = value || 'week'
-  }
-
   get timeframe() {
     return this._timeframe
   }
@@ -61,7 +53,8 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private reports: Store<ReportsState>,
-    private route: Store<RouterState>
+    private route: Store<RouterState>,
+    private bus: EventsService
   ) {}
 
   ngOnInit() {
@@ -77,48 +70,65 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
       .subscribe((route) => {
         switch (route.state.url) {
           case '/reports/overview/active':
-            this.startView = 'year'
+            this._timeframe = 'last-12-months'
             this.startPeriod = {
-              endDate: moment().format(),
+              endDate: moment().format('YYYY-MM-DD'),
               startDate: moment()
                 .subtract(12, 'months')
                 .startOf('month')
-                .format()
+                .format('YYYY-MM-DD')
             }
             break
           case '/reports/communications/communications':
-            this.startView = 'month'
+            this._timeframe = 'this-month'
             this.startPeriod = {
-              endDate: moment().startOf('month').format(),
-              startDate: moment().endOf('month').format()
+              endDate: moment().endOf('month').format('YYYY-MM-DD'),
+              startDate: moment().startOf('month').format('YYYY-MM-DD')
             }
             break
+          case '/reports/rpm/billing':
+            this._timeframe = 'day'
+            break
           default:
-            this.startView = 'week'
-            delete this.fixedPeriod
+            if (this.range) {
+              this._timeframe = 'last-7-days'
+              this.startPeriod = {
+                startDate: moment()
+                  .startOf('day')
+                  .subtract(7, 'days')
+                  .format('YYYY-MM-DD'),
+                endDate: moment().endOf('day').format('YYYY-MM-DD')
+              }
+              delete this.fixedPeriod
+            } else {
+              this._timeframe = 'week'
+            }
         }
       })
 
-    this.reports
-      .pipe(untilDestroyed(this), select(criteriaSelector))
-      .subscribe((criteria: ReportsCriteria) => {
-        if (!isEmpty(criteria)) {
-          this.startPeriod = {
-            startDate: criteria.startDate,
-            endDate: criteria.endDate
-          }
-          this._timeframe = criteria.timeframe
-          this.cdr.detectChanges()
-        }
-      })
+    this.bus.register('reports.controls', this.initControls.bind(this))
 
     this.cdr.detectChanges()
   }
 
   ngOnDestroy() {}
 
+  initControls(criteria: ReportsCriteria) {
+    if (isEmpty(criteria)) {
+      return
+    }
+
+    this.startPeriod = {
+      startDate: criteria.startDate,
+      endDate: criteria.endDate
+    }
+    this._timeframe = criteria.timeframe
+    this.updateSelector()
+    this.cdr.detectChanges()
+  }
+
   updateDates(dates: DateNavigatorOutput) {
-    this.timeframe = dates.timeframe
+    this._timeframe = dates.timeframe
     this.startPeriod = {
       startDate: dates.startDate,
       endDate: dates.endDate
@@ -137,13 +147,14 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
         organization: this.clinic,
         startDate: this.startPeriod.startDate,
         endDate: this.startPeriod.endDate,
-        timeframe: this.timeframe,
+        timeframe: this._timeframe,
         diff:
           moment(this.startPeriod.endDate).diff(
             this.startPeriod.startDate,
             'days'
           ) + 1
       }
+
       this.reports.dispatch(new UpdateControls({ criteria }))
     }
   }

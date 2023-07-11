@@ -25,6 +25,13 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
     cy.setTimezone('et')
   })
 
+  it('Date selector shows as expected', function () {
+    standardSetup()
+    cy.visit(`/reports/rpm/billing`)
+    cy.tick(1000)
+    cy.get('app-report-controls').contains('Tuesday, December 31, 2019')
+  })
+
   it('Table shows RPM billing data with proper names: no pagination', function () {
     standardSetup()
     getRpmBillingRows()

@@ -57,6 +57,9 @@ Cypress.Commands.add('setOrganization', (org: ValidOrganization) => {
     case 'idealyou':
       translatedOrg = 3235
       break
+    case 'sharp':
+      translatedOrg = 3328
+      break
     default:
       translatedOrg = 1
   }

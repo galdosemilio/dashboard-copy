@@ -11,12 +11,8 @@ import {
   ReportsCriteria,
   StatisticsDatabase
 } from '@app/dashboard/reports/services'
-import {
-  criteriaSelector,
-  ReportsState,
-  UpdateControls
-} from '@app/dashboard/reports/store'
-import { ContextService, NotifierService } from '@app/service'
+import { criteriaSelector, ReportsState } from '@app/dashboard/reports/store'
+import { ContextService, EventsService, NotifierService } from '@app/service'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { select, Store } from '@ngrx/store'
 import { _ } from '@app/shared'
@@ -83,7 +79,8 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
     private activeRoute: ActivatedRoute,
     private notifier: NotifierService,
     private database: StatisticsDatabase,
-    private store: Store<ReportsState>
+    private store: Store<ReportsState>,
+    private bus: EventsService
   ) {}
 
   ngOnInit() {
@@ -257,17 +254,13 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (filters.startDate) {
-      this.store.dispatch(
-        new UpdateControls({
-          criteria: {
-            organization: filters.organization,
-            startDate: filters.startDate,
-            endDate: filters.endDate,
-            timeframe: filters.timeframe,
-            diff: filters.diff
-          }
-        })
-      )
+      this.bus.trigger('reports.controls', {
+        organization: filters.organization,
+        startDate: filters.startDate,
+        endDate: filters.endDate,
+        timeframe: filters.timeframe,
+        diff: filters.diff
+      })
     }
   }
 

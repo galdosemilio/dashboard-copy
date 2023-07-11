@@ -66,32 +66,31 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   @Input() endView: CalendarView = 'month'
 
   @Input() set timeframe(value: string) {
-    this._timeframe = value
+    switch (value) {
+      case 'month':
+        this._timeframe = 'this-month'
+        this._startView = 'month'
+        break
+      case 'week':
+        this._timeframe = 'last-7-days'
+        this._startView = 'week'
+        break
+      case 'year':
+        this._timeframe = 'last-12-months'
+        this._startView = 'year'
+        break
+      case 'years':
+        this._timeframe = 'all-time'
+        this._startView = 'years'
+        break
+      default:
+        this._timeframe = value
+        this._startView = 'month'
+    }
   }
 
   get timeframe() {
     return this._timeframe
-  }
-
-  @Input() set startView(value: CalendarView) {
-    this._startView = value
-
-    if (this._timeframe) {
-      switch (value) {
-        case 'month':
-          this._timeframe = 'this-month'
-          break
-        case 'week':
-          this._timeframe = 'last-7-days'
-          break
-        case 'year':
-          this._timeframe = 'last-12-months'
-          break
-        case 'years':
-          this._timeframe = 'all-time'
-          break
-      }
-    }
   }
 
   get startView() {
