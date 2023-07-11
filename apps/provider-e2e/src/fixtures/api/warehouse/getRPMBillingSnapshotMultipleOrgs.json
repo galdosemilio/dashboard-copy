@@ -1,0 +1,3261 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "250668",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "2",
+        "name": "Selvera",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-27T08:28:00.005Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-22T08:24:00.022Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-22T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 31
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3891
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-04-30T08:24:00.017Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2751
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3891
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-22T08:24:00.022Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T17:06:53.538Z"
+      },
+      "state": {
+        "id": "8010",
+        "changedAt": "2022-05-27T18:20:37.804+00:00",
+        "preference": {
+          "id": "1",
+          "name": "Coachcare",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2022-05-28T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-28T10:00:00+00:00",
+        "educationProvidedAt": "2022-05-28T10:00:00+00:00",
+        "deviceProvidedAt": "2022-05-28T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "254948",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "1",
+        "name": "Coachcare",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-07-18T08:12:00.013Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-13T08:24:00.013Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-13T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 10
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3680
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-04-30T08:24:00.017Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2540
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3680
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-13T08:24:00.013Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T17:54:21.354Z"
+      },
+      "state": {
+        "id": "8270",
+        "changedAt": "2022-06-17T15:50:14.152+00:00",
+        "preference": {
+          "id": "1",
+          "name": "Coachcare",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2022-06-18T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-06-18T14:00:00+00:00",
+        "educationProvidedAt": "2022-06-18T14:00:00+00:00",
+        "deviceProvidedAt": "2022-06-18T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "274005",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "2",
+        "name": "Selvera",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-11-03T08:20:00.023Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-01T08:00:00.011Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-01T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:00:00.029Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 4089
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T21:52:00.012Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2949
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 4089
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-01T08:00:00.011Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T18:24:03.284Z"
+      },
+      "state": {
+        "id": "10163",
+        "changedAt": "2022-10-03T15:20:16.806+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-10-04T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-10-04T14:00:00+00:00",
+        "educationProvidedAt": "2022-10-04T14:00:00+00:00",
+        "deviceProvidedAt": "2022-10-04T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "e66.9"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "252004",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "3",
+        "name": "Optifast",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-07-04T08:28:00.007Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-30T08:00:00.044Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-29T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:00:00.029Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3595
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:24:00.021Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2455
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3595
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-05-31T08:00:00.029Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T18:46:36.385Z"
+      },
+      "state": {
+        "id": "8092",
+        "changedAt": "2022-06-03T18:07:40.292+00:00",
+        "preference": {
+          "id": "1",
+          "name": "Coachcare",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2022-06-04T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-06-04T14:00:00+00:00",
+        "educationProvidedAt": "2022-06-04T14:00:00+00:00",
+        "deviceProvidedAt": "2022-06-04T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "249518",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "1",
+        "name": "Coachcare",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-06-23T08:16:00.012Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-18T08:24:00.004Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-18T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 32
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3743
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:24:00.021Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2603
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3743
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-18T08:24:00.004Z",
+      "monitoring": {
+        "lastActivity": "2023-06-13T14:00:40.959Z"
+      },
+      "state": {
+        "id": "1",
+        "changedAt": "2022-05-23T22:08:49.216+00:00",
+        "preference": {
+          "id": "1",
+          "name": "Coachcare",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-05-24T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-24T14:00:00+00:00",
+        "educationProvidedAt": "2022-05-24T14:00:00+00:00",
+        "deviceProvidedAt": "2022-05-24T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "Morbid Obesity"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "249078",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "2",
+        "name": "Optifast",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-06-20T08:16:00.013Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-15T08:24:00.016Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-15T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 2
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3810
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2670
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3810
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-15T08:24:00.016Z",
+      "monitoring": {
+        "lastActivity": "2023-06-27T21:52:37.560Z"
+      },
+      "state": {
+        "id": "7937",
+        "changedAt": "2022-05-21T01:16:24.483+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-05-21T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-21T14:00:00+00:00",
+        "educationProvidedAt": "2022-05-21T14:00:00+00:00",
+        "deviceProvidedAt": "2022-05-21T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "235291",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "Morbid Obesity",
+          "secondary": "Unspecified Essential Hypertension"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "243267",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "7041",
+        "name": "Alaska Premier Health - RPM",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-05-26T08:28:00.023Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-20T08:24:00.028Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-20T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 1
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3542
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:24:00.021Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2402
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3542
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-20T08:24:00.028Z",
+      "monitoring": {
+        "lastActivity": "2023-06-28T13:57:34.509Z"
+      },
+      "state": {
+        "id": "7597",
+        "changedAt": "2022-04-25T20:18:10.891+00:00",
+        "preference": {
+          "id": "1",
+          "name": "Coachcare",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-04-26T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-04-26T14:00:00+00:00",
+        "educationProvidedAt": "2022-04-26T14:00:00+00:00",
+        "deviceProvidedAt": "2022-04-26T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "268386",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "1",
+        "name": "Coachcare",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-10-02T08:04:00.011Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-30T08:00:00.044Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-29T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 5
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:00:00.029Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3599
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:00:00.029Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2459
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3599
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-05-31T08:00:00.029Z",
+      "monitoring": {
+        "lastActivity": "2023-06-13T13:27:53.686Z"
+      },
+      "state": {
+        "id": "9545",
+        "changedAt": "2022-09-01T14:48:11.469+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-09-02T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-09-02T14:00:00+00:00",
+        "educationProvidedAt": "2022-09-02T14:00:00+00:00",
+        "deviceProvidedAt": "2022-09-02T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "235293",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "e66.01"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "247982",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "3",
+        "name": "Optifast",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-06-24T08:16:00.010Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-19T08:24:00.029Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-19T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-04-30T08:24:00.017Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 324,
+                    "required": 1200,
+                    "elapsed": 324
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 324
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-04-30T08:24:00.017Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 324
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-19T08:24:00.029Z",
+      "monitoring": {
+        "lastActivity": "2023-06-28T21:46:17.218Z"
+      },
+      "state": {
+        "id": "7976",
+        "changedAt": "2022-05-24T23:11:03.232+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-05-25T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-25T14:00:00+00:00",
+        "educationProvidedAt": "2022-05-25T14:00:00+00:00",
+        "deviceProvidedAt": "2022-05-25T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "235291",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "239444",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "1",
+        "name": "Coachcare",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-05-15T08:24:00.071Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-09T08:24:00.033Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-09T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 5
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 31
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 2640
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 1,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 300,
+                    "required": 1200,
+                    "elapsed": 1500
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 2640
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-09T08:24:00.033Z",
+      "monitoring": {
+        "lastActivity": "2023-06-28T14:26:00.616Z"
+      },
+      "state": {
+        "id": "7464",
+        "changedAt": "2022-04-14T17:56:48.579+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-04-15T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-04-15T10:00:00+00:00",
+        "educationProvidedAt": "2022-04-15T10:00:00+00:00",
+        "deviceProvidedAt": "2022-04-15T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "Z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "273678",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "3",
+        "name": "Optifast",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-11-03T08:20:00.023Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-01T08:00:00.011Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-01T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T21:52:00.012Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3540
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-02-28T09:28:00.014Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2400
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3540
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-01T08:00:00.011Z",
+      "monitoring": {
+        "lastActivity": "2023-06-18T17:41:13.601Z"
+      },
+      "state": {
+        "id": "10160",
+        "changedAt": "2022-10-03T14:23:40.464+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-10-04T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-10-04T14:00:00+00:00",
+        "educationProvidedAt": "2022-10-04T14:00:00+00:00",
+        "deviceProvidedAt": "2022-10-04T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "235291",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "E66.01"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "276256",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "1",
+        "name": "Coachcare",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-11-13T09:24:00.018Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-11T08:00:00.044Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-11T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:00:00.022Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 336,
+                    "required": 1200,
+                    "elapsed": 336
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 336
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T17:36:00.015Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 336
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-11T08:00:00.044Z",
+      "monitoring": {
+        "lastActivity": "2023-06-28T21:47:25.076Z"
+      },
+      "state": {
+        "id": "10460",
+        "changedAt": "2022-10-13T21:09:39.631+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-10-14T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-10-14T14:00:00+00:00",
+        "educationProvidedAt": "2022-10-14T14:00:00+00:00",
+        "deviceProvidedAt": "2022-10-14T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "235291",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "e66.9"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "242880",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "2",
+        "name": "Selvera",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-05-23T08:24:00.017Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-17T08:24:00.008Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-17T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-04-30T08:24:00.017Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 213,
+                    "required": 1200,
+                    "elapsed": 213
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 213
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:24:00.021Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 213
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-17T08:24:00.008Z",
+      "monitoring": {
+        "lastActivity": "2023-06-28T21:47:52.455Z"
+      },
+      "state": {
+        "id": "7587",
+        "changedAt": "2022-04-22T23:14:23.674+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-04-23T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-04-23T14:00:00+00:00",
+        "educationProvidedAt": "2022-04-23T14:00:00+00:00",
+        "deviceProvidedAt": "2022-04-23T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "235291",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "239965",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "7041",
+        "name": "Alaska Premier Health - RPM",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-05-12T08:24:00.007Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-06T08:24:00.004Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-06T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 2
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 10245
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 9105
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 10245
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-06T08:24:00.004Z",
+      "monitoring": {
+        "lastActivity": "2023-06-22T22:20:14.586Z"
+      },
+      "state": {
+        "id": "7419",
+        "changedAt": "2022-04-11T19:41:13.083+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-04-12T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-04-12T14:00:00+00:00",
+        "educationProvidedAt": "2022-04-12T14:00:00+00:00",
+        "deviceProvidedAt": "2022-04-12T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "Z71.3",
+          "secondary": "E66.01"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "249446",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "2",
+        "name": "Selvera",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-06-23T08:16:00.012Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-18T08:24:00.004Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-18T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 7
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 32
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3725
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:24:00.021Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2585
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3725
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-18T08:24:00.004Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T09:32:07.781Z"
+      },
+      "state": {
+        "id": "7960",
+        "changedAt": "2022-05-23T19:16:02.343+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-05-24T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-24T14:00:00+00:00",
+        "educationProvidedAt": "2022-05-24T14:00:00+00:00",
+        "deviceProvidedAt": "2022-05-24T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "235291",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "Overweight",
+          "secondary": "Hypertension"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "251989",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "7041",
+        "name": "Alaska Premier Health - RPM",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-07-04T08:12:00.014Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-30T08:00:00.044Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-29T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 3
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 31
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:00:00.029Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3558
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:24:00.021Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2418
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3558
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-05-31T08:00:00.029Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T09:54:22.480Z"
+      },
+      "state": {
+        "id": "8091",
+        "changedAt": "2022-06-03T16:44:19.911+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-06-04T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-06-04T14:00:00+00:00",
+        "educationProvidedAt": "2022-06-04T14:00:00+00:00",
+        "deviceProvidedAt": "2022-06-04T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "257735",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "7041",
+        "name": "Alaska Premier Health - RPM",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-07-31T08:00:00.024Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-26T08:12:00.013Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-26T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 24335
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T08:24:00.021Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 23195
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 24335
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-26T08:12:00.013Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T16:01:12.150Z"
+      },
+      "state": {
+        "id": "8449",
+        "changedAt": "2022-06-30T15:37:22.815+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-07-01T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-07-01T14:00:00+00:00",
+        "educationProvidedAt": "2022-07-01T14:00:00+00:00",
+        "deviceProvidedAt": "2022-07-01T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "256984",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "2",
+        "name": "Selvera",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-07-28T08:20:00.028Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-23T20:00:00.000Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-23T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3629
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T08:24:00.023Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2489
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3629
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-23T20:00:00.000Z",
+      "monitoring": {
+        "lastActivity": "2023-06-15T18:55:39.130Z"
+      },
+      "state": {
+        "id": "8376",
+        "changedAt": "2022-06-27T18:47:23.202+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2022-06-28T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-06-28T14:00:00+00:00",
+        "educationProvidedAt": "2022-06-28T14:00:00+00:00",
+        "deviceProvidedAt": "2022-06-28T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "144733",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "7041",
+        "name": "Alaska Premier Health - RPM",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-06-23T08:16:00.012Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-18T08:12:00.007Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-18T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 1
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-04-30T08:12:00.043Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3618
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T17:48:00.031Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T08:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2478
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3618
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-18T08:12:00.007Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T16:33:02.080Z"
+      },
+      "state": {
+        "id": "7961",
+        "changedAt": "2022-05-23T20:06:41.968+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-05-24T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-24T14:00:00+00:00",
+        "educationProvidedAt": "2022-05-24T14:00:00+00:00",
+        "deviceProvidedAt": "2022-05-24T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "248683",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Denver"
+      },
+      "organization": {
+        "id": "7041",
+        "name": "Alaska Premier Health - RPM",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2022-06-19T08:16:00.005Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-14T06:16:00.010Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-14T06:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-05-31T06:16:00.019Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T06:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 1200
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3811
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-03-31T06:16:00.015Z",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2023-06-30T06:00:00.000Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "elapsed": 2671
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 3811
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-14T06:16:00.010Z",
+      "monitoring": {
+        "lastActivity": "2023-06-18T10:50:04.393Z"
+      },
+      "state": {
+        "id": "7912",
+        "changedAt": "2022-05-19T20:11:51.334+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2022-05-20T14:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-20T14:00:00+00:00",
+        "educationProvidedAt": "2022-05-20T14:00:00+00:00",
+        "deviceProvidedAt": "2022-05-20T14:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "totalCount": 20
+  }
+}

@@ -15,6 +15,7 @@
   <button
     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
     (click)="downloadCSV()"
+    data-cy="download-csv-button"
     mat-button class="ccr-align-center">
       {{ 'REPORTS.EXPORT_CSV' | translate }}
       <mat-icon>file_download</mat-icon>
@@ -38,7 +39,7 @@
           <th mat-sort-header="uniqueRPMEpisodesOfCare">Episodes of Care</th>
           <th *ngFor="let heading of headings">{{ heading }}</th>
         </thead>
-        <tbody>
+        <tbody data-cy="clinic-patient-code-report-table">
           <tr
             *ngFor="let org of tableData; let i = index"
             [ngClass]="{

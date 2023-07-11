@@ -15,7 +15,7 @@ import {
   FetchCareManagementBillingSnapshotResponse
 } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 import { ClinicPatientCodeDataSource } from '../../services/clinic-patient-code-report.datasource'
-import { debounceTime } from 'rxjs'
+import { Subject, debounceTime } from 'rxjs'
 import { NotifierService } from '@app/service'
 import { CSV } from '@coachcare/common/shared'
 import { ContextService } from '@coachcare/common/services'
@@ -27,6 +27,7 @@ type SatisfiedCount = number | SatisfiedCount99457 | SatisfiedCount99458
 interface SatisfiedCount99457 {
   liveInteraction: number
   monitoringTime: number
+  total: number
 }
 
 interface SatisfiedCount99458 {
@@ -93,10 +94,15 @@ export class ClinicPatientCodeComponent implements OnInit {
   public reportData: ClinicPatientCodeReport[]
   public headings: string[] = []
   public serviceType: string
-  public billingCodes: BillingCode[]
+  public billingCodes: BillingCode[] = []
   public isLoading: boolean = false
   public asOfMax = moment().endOf('day')
   private rows: FetchCareManagementBillingSnapshotResponse['data'] = []
+  private refresh$: Subject<void> = new Subject()
+  private startOfThisMonth = moment()
+    .startOf('month')
+    .tz(this.context.user.timezone)
+    .toISOString()
   private startOfNextMonth = moment()
     .add(1, 'month')
     .startOf('month')
@@ -115,7 +121,8 @@ export class ClinicPatientCodeComponent implements OnInit {
       this.form.valueChanges.pipe(debounceTime(500)),
       () => ({
         asOf: this.form.value.asOf.format('YYYY-MM-DD'),
-        serviceType: this.form.value.serviceType || undefined
+        serviceType: this.form.value.serviceType || undefined,
+        organization: environment.coachcareOrgId
       })
     )
     this.form.controls.asOf.valueChanges
@@ -127,18 +134,27 @@ export class ClinicPatientCodeComponent implements OnInit {
           .startOf('month')
           .tz(this.context.user.timezone)
           .toISOString()
+        this.startOfThisMonth = this.form.value.asOf
+          .clone()
+          .startOf('month')
+          .tz(this.context.user.timezone)
+          .toISOString()
 
         void this.refreshDataWithBillingCodesChange()
       })
 
     this.source
       .connect()
-      .pipe(untilDestroyed(this), debounceTime(500))
+      .pipe(untilDestroyed(this))
       .subscribe((data) => {
         this.rows = data
-        this.headings = this.setHeadings(this.serviceType)
-        this.tableData = this.refreshData(this.serviceType, this.rows)
+        this.refresh$.next()
       })
+
+    this.refresh$.pipe(untilDestroyed(this)).subscribe(() => {
+      this.headings = this.setHeadings(this.serviceType)
+      this.tableData = this.refreshData(this.serviceType, this.rows)
+    })
   }
 
   private async resolveBillingCodes() {
@@ -149,6 +165,7 @@ export class ClinicPatientCodeComponent implements OnInit {
       })
 
     this.billingCodes = billingCodesResponse.data
+    this.refresh$.next()
   }
 
   public async onServiceTypeChange(serviceType: string): Promise<void> {
@@ -282,7 +299,6 @@ export class ClinicPatientCodeComponent implements OnInit {
     const reportData = this.compileUniqueClinics(serviceType, data)
     const patientCodes = this.flattenPatientCodes(data)
     this.setEligibilityPerPatientCode(patientCodes, reportData)
-
     if (filterZero) {
       return this.setCodesPerClinic(reportData).filter(
         (item) => item.uniqueRPMEpisodesOfCare > 0
@@ -296,21 +312,20 @@ export class ClinicPatientCodeComponent implements OnInit {
     return this.billingCodes
       .filter((e) => e.serviceType.id === serviceType)
       .reduce((acc, item) => {
-        if (
-          item.coverage == 'monitoring' &&
-          item.requirements?.requiredLiveInteractionCount
-        ) {
-          acc.push(`${item.value} Live Interaction unsatisfied`)
-          acc.push(`${item.value} Live Interaction satisfied`)
+        if (item.coverage == 'monitoring') {
+          if (item.requirements?.maxIterations == 1) {
+            acc.push(`${item.value} Monitoring Time unsatisfied`)
+            acc.push(`${item.value} Monitoring Time satisfied`)
+          }
+          if (item.requirements?.requiredLiveInteractionCount) {
+            acc.push(`${item.value} Live Interaction unsatisfied`)
+            acc.push(`${item.value} Live Interaction satisfied`)
+          }
+          if (item.requirements?.requiredLiveInteractionCount < 1) {
+            return acc
+          }
         }
-        if (
-          item.coverage == 'monitoring' &&
-          item.requirements?.maxIterations == 1
-        ) {
-          acc.push(`${item.value} Monitoring Time unsatisfied`)
-          acc.push(`${item.value} Monitoring Time satisfied`)
-          return acc
-        }
+
         if (item.type == 'addon' && item.requirements?.maxIterations > 1) {
           acc.push(`${item.value} X1 unsatisfied`)
           acc.push(`${item.value} X1 satisfied`)
@@ -368,7 +383,8 @@ export class ClinicPatientCodeComponent implements OnInit {
                 cptCode: item.value,
                 satisfiedCount: {
                   liveInteraction: 0,
-                  monitoringTime: 0
+                  monitoringTime: 0,
+                  total: 0
                 }
               })
               return acc
@@ -438,6 +454,12 @@ export class ClinicPatientCodeComponent implements OnInit {
               orgRecord.organization.id,
               cptCodeRecord.cptCode,
               'monitoringTime'
+            ),
+            total: this.filterPatientCodes(
+              patientCodes,
+              orgRecord.organization.id,
+              cptCodeRecord.cptCode,
+              'total'
             )
           }
         } else if (
@@ -480,6 +502,7 @@ export class ClinicPatientCodeComponent implements OnInit {
       | 'monitoringTime'
       | 'iteration1'
       | 'iteration2'
+      | 'total'
       | null
   ): number {
     return patientCodes.filter(
@@ -508,6 +531,15 @@ export class ClinicPatientCodeComponent implements OnInit {
 
             if (
               typeof item.satisfiedCount == 'object' &&
+              'monitoringTime' in item.satisfiedCount
+            ) {
+              acc.push({
+                satisfiedCount: item.satisfiedCount.monitoringTime
+              })
+            }
+
+            if (
+              typeof item.satisfiedCount == 'object' &&
               'liveInteraction' in item.satisfiedCount
             ) {
               acc.push({
@@ -517,10 +549,10 @@ export class ClinicPatientCodeComponent implements OnInit {
 
             if (
               typeof item.satisfiedCount == 'object' &&
-              'monitoringTime' in item.satisfiedCount
+              'total' in item.satisfiedCount
             ) {
               acc.push({
-                satisfiedCount: item.satisfiedCount.monitoringTime
+                satisfiedCount: item.satisfiedCount.total
               })
             }
             if (
@@ -593,9 +625,25 @@ export class ClinicPatientCodeComponent implements OnInit {
       return 0
     }
 
+    // Get count of eligible previous billing iterations for this code if it occurred within the existing month
+    const lastEligibilityValidForThisMonth =
+      moment(billingEntry.eligibility?.last?.timestamp).isBetween(
+        this.startOfThisMonth,
+        this.startOfNextMonth
+      ) && billingEntry.eligibility?.last?.count > 0
+        ? billingEntry.eligibility.last.count
+        : 0
+
+    // If this code was never billable in the past OR if this code was not or will not be billable anytime during the currently-selected calendar month
     if (
-      billingEntry.eligibility?.next?.earliestEligibleAt === undefined ||
-      billingEntry.eligibility.next.earliestEligibleAt > this.startOfNextMonth
+      [
+        billingEntry.eligibility?.next?.earliestEligibleAt,
+        billingEntry.eligibility?.last?.timestamp
+      ].every(
+        (e) =>
+          e === undefined ||
+          !moment(e).isBetween(this.startOfThisMonth, this.startOfNextMonth)
+      )
     ) {
       return 0
     } else if (
@@ -604,13 +652,25 @@ export class ClinicPatientCodeComponent implements OnInit {
     ) {
       return {
         liveInteraction:
-          billingEntry.eligibility.next.liveInteraction.count >=
-          billingEntry.eligibility.next.liveInteraction.required
+          lastEligibilityValidForThisMonth > 0 ||
+          billingEntry.eligibility?.next?.liveInteraction?.count >=
+            billingEntry.eligibility?.next?.liveInteraction?.required
             ? 1
             : 0,
         monitoringTime:
-          billingEntry.eligibility.next.monitoring.total.seconds.tracked >=
-          billingEntry.eligibility.next.monitoring.total.seconds.required
+          lastEligibilityValidForThisMonth > 0 ||
+          billingEntry.eligibility?.next?.monitoring?.total?.seconds?.tracked >=
+            billingEntry.eligibility?.next?.monitoring?.total?.seconds?.required
+            ? 1
+            : 0,
+        total:
+          lastEligibilityValidForThisMonth > 0 ||
+          (billingEntry.eligibility?.next?.liveInteraction?.count >=
+            billingEntry.eligibility?.next?.liveInteraction?.required &&
+            billingEntry.eligibility?.next?.monitoring?.total?.seconds
+              ?.tracked >=
+              billingEntry.eligibility?.next?.monitoring?.total?.seconds
+                ?.required)
             ? 1
             : 0
       }
@@ -618,11 +678,22 @@ export class ClinicPatientCodeComponent implements OnInit {
       billingCode.type === 'addon' &&
       billingCode.requirements?.maxIterations > 1
     ) {
-      return {
-        iteration1:
-          billingEntry.eligibility.next.alreadyEligibleCount > 0 ? 1 : 0,
-        iteration2:
+      let iteration1 = 0
+      let iteration2 = 0
+
+      if (billingEntry.eligibility?.next?.alreadyEligibleCount) {
+        iteration1 =
+          billingEntry.eligibility.next.alreadyEligibleCount > 0 ? 1 : 0
+        iteration2 =
           billingEntry.eligibility.next.alreadyEligibleCount > 1 ? 1 : 0
+      } else if (lastEligibilityValidForThisMonth > 0) {
+        iteration1 = lastEligibilityValidForThisMonth > 0 ? 1 : 0
+        iteration2 = lastEligibilityValidForThisMonth > 1 ? 1 : 0
+      }
+
+      return {
+        iteration1,
+        iteration2
       }
     } else {
       return 1

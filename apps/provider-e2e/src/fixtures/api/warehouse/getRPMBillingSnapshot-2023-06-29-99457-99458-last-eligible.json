@@ -1,0 +1,122 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "250668",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/Juneau"
+      },
+      "organization": {
+        "id": "7041",
+        "name": "Alaska Premier Health - RPM",
+        "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-27T08:28:00.005Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-22T08:24:00.022Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2023-07-22T08:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 31
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-06-02T08:24:00.023Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "last": {
+              "timestamp": "2023-04-30T08:24:00.017Z",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "anyCodeLastEligibleAt": "2023-06-22T08:24:00.022Z",
+      "monitoring": {
+        "lastActivity": "2023-06-19T17:06:53.538Z"
+      },
+      "state": {
+        "id": "8010",
+        "changedAt": "2022-05-27T18:20:37.804+00:00",
+        "preference": {
+          "id": "7041",
+          "name": "Alaska Premier Health - RPM",
+          "hierarchyPath": ["7041", "7080", "7078", "4066", "3637"]
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2022-05-28T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2022-05-28T10:00:00+00:00",
+        "educationProvidedAt": "2022-05-28T10:00:00+00:00",
+        "deviceProvidedAt": "2022-05-28T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "239147",
+          "firstName": "firstName",
+          "lastName": "lastName"
+        },
+        "diagnosis": {
+          "primary": "z71.3"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "totalCount": 1
+  }
+}

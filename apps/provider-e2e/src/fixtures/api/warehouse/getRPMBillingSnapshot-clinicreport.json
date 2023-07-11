@@ -1,0 +1,810 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6154",
+        "firstName": "Lascario",
+        "lastName": "Pacheco",
+        "dateOfBirth": "1994-06-10",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "1",
+        "name": "CoachCare",
+        "hierarchyPath": ["1"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-11-16T18:05:00.000Z",
+              "count": 1
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-01T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 1
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-01T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "606",
+        "changedAt": "2023-05-01T03:49:05.376+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2023-05-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-05-01T10:00:00+00:00",
+        "educationProvidedAt": "2023-05-01T10:00:00+00:00",
+        "deviceProvidedAt": "2023-05-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "2852",
+          "firstName": "Lascario",
+          "lastName": "Pacheco Arrieta"
+        },
+        "diagnosis": {
+          "primary": "Primary Diagnosis 123",
+          "secondary": "Secondary Diagnosis 123",
+          "other": "Insurance Information 12345"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "7474",
+        "firstName": "Zhang",
+        "lastName": "123",
+        "dateOfBirth": "1984-11-22",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "6955",
+        "name": "Center for Medical Weight Loss",
+        "hierarchyPath": ["1", "6955"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-01-01T00:00:00-04:00",
+              "count": 0
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-01T05:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 2
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-01T05:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 600,
+                    "required": 1200,
+                    "elapsed": 600
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "636",
+        "changedAt": "2023-05-01T14:23:04.144+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2023-04-28T14:10:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-04-28T14:10:00+00:00",
+        "educationProvidedAt": "2023-04-28T14:10:00+00:00",
+        "deviceProvidedAt": "2023-04-28T14:10:00+00:00",
+        "supervisingProvider": {
+          "id": "560",
+          "firstName": "Jeffrey",
+          "lastName": "Drakos"
+        },
+        "diagnosis": {
+          "primary": "Test"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "9333",
+        "firstName": "Eric",
+        "lastName": "Di Bari",
+        "dateOfBirth": "2000-01-01",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "6955",
+        "name": "Center for Medical Weight Loss",
+        "hierarchyPath": ["1", "6955"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-01-01T00:00:00-08:00",
+              "count": 0
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-01T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 17
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2019-12-27T05:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 600,
+                    "required": 1200,
+                    "elapsed": 600
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "602",
+        "changedAt": "2023-04-26T09:42:15.485+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2023-04-27T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-04-27T10:00:00+00:00",
+        "educationProvidedAt": "2023-04-27T10:00:00+00:00",
+        "deviceProvidedAt": "2023-04-27T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "6",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "diagnosis": {
+          "primary": "test",
+          "secondary": "test"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "7226",
+        "firstName": "0000 0000 - Eric Clinic",
+        "lastName": "Patient",
+        "dateOfBirth": "2004-02-19",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "6955",
+        "name": "Center for Medical Weight Loss",
+        "hierarchyPath": ["1", "6955"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2019-12-24T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 11
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 17
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2019-12-01T00:00:00-04:00",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2019-12-17T00:00:00-04:00",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2019-12-01T04:00:00Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2020-01-01T04:00:00Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1499,
+                    "required": 1200,
+                    "elapsed": 1232
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2023-05-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "597",
+        "changedAt": "2023-04-14T09:20:46.642+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "4",
+          "name": "Blood oxygen saturation"
+        },
+        "startedAt": "2023-04-15T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-04-15T10:00:00+00:00",
+        "educationProvidedAt": "2023-04-15T10:00:00+00:00",
+        "deviceProvidedAt": "2023-04-15T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "560",
+          "firstName": "Jeffrey",
+          "lastName": "Drakos"
+        },
+        "diagnosis": {
+          "primary": "test",
+          "secondary": "test 2"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "6737",
+        "firstName": "A",
+        "lastName": "A",
+        "dateOfBirth": "1993-04-26",
+        "timezone": "Pacific/Chatham"
+      },
+      "organization": {
+        "id": "7384",
+        "name": "MDTeam",
+        "hierarchyPath": ["1", "7384"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2019-12-01T11:15:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 25
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 25
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "last": {
+              "timestamp": "2019-12-01T00:00:00-05:00",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2019-12-02T00:00:00-04:00",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 30
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 30
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "last": {
+              "timestamp": "2019-12-01T04:00:00Z",
+              "count": 1
+            },
+            "next": {
+              "earliestEligibleAt": "2019-12-01T04:00:00Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1499,
+                    "required": 1200,
+                    "elapsed": 1232
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 1,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2023-05-30T11:15:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "596",
+        "changedAt": "2023-04-05T15:54:37.636+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "4",
+          "name": "Blood oxygen saturation"
+        },
+        "startedAt": "2023-04-06T17:15:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-04-06T17:15:00+00:00",
+        "educationProvidedAt": "2023-04-06T17:15:00+00:00",
+        "deviceProvidedAt": "2023-04-06T17:15:00+00:00",
+        "supervisingProvider": {
+          "id": "6",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "diagnosis": {
+          "primary": "see",
+          "secondary": "wee"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "totalCount": 5
+  }
+}
