@@ -1,3 +1,13 @@
+## [1.121.1](https://github.com/coachcare/dashboard/compare/v1.121.0...v1.121.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* csv patient export not working [FRON-3211] ([20175bb](https://github.com/coachcare/dashboard/commit/20175bbba0663f8313705a35270c2f9f277826ee))
+* remove custom Sharp storefront redirect [FRON-3214] ([f2372d1](https://github.com/coachcare/dashboard/commit/f2372d14a347862a9aa4c2c3a97a91506d4b49f9))
+* tin not updating on dashboard for org issue [FRON-3213] ([01b1eee](https://github.com/coachcare/dashboard/commit/01b1eee6a5a5f0e0319b645edbd3e6c9cbe1c12c))
+* validation fails silently when editing profile on admin site due to phone country code [FRON-3188] ([cc2db4c](https://github.com/coachcare/dashboard/commit/cc2db4c6e3cdfe291101c9a7a39576a366129d8f))
+
 # [1.121.0](https://github.com/coachcare/dashboard/compare/v1.120.0...v1.121.0) (2023-07-07)
 
 
