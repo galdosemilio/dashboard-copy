@@ -345,6 +345,7 @@
     "OPTIONAL": "Opzionale",
     "ORDER_SUMMARY": "Riepilogo dell'ordine",
     "OTHERS": "Altri",
+    "PATIENTS_EMPTY_LIST": "Non esistono pazienti corrispondenti.",
     "PATIENT_BULK_REPORTS_ENTRIES_EMPTY_LIST": "Non ci sono voci di rapporti collettivi di pazienti che corrispondono ai criteri di ricerca correnti",
     "PATIENT_CALL_EXPLANATION": "È possibile ricevere chiamate di videoconferenza in entrata dal tuo allenatore o fornitore su questa dashboard. Una notifica verrà visualizzata sullo schermo quando viene ricevuta una chiamata in entrata, da cui è possibile rispondere alla chiamata.",
     "PATIENT_DASHBOARD_WELCOME": "Benvenuto, {{name}}",

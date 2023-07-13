@@ -345,6 +345,7 @@
     "OPTIONAL": "Valgfri",
     "ORDER_SUMMARY": "Bestillingsoversigt",
     "OTHERS": "Andre",
+    "PATIENTS_EMPTY_LIST": "Der findes ingen matchende patienter.",
     "PATIENT_BULK_REPORTS_ENTRIES_EMPTY_LIST": "Der er ingen patientmasserapporter, der matcher de aktuelle søgekriterier",
     "PATIENT_CALL_EXPLANATION": "Du kan modtage indgående videokonferenceopkald fra din træner eller udbyder på dette dashboard. En meddelelse vises på skærmen, når et indgående opkald er modtaget, hvorfra du kan besvare opkaldet.",
     "PATIENT_DASHBOARD_WELCOME": "Velkommen, {{name}}",

@@ -197,4 +197,24 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
     checkBillingCodes('2')
   })
+
+  it('Handles empty results', function () {
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/warehouse/care-management/billing/snapshot**',
+          fixture: 'api/warehouse/getEmptyBillingSnapshot'
+        }
+      ]
+    })
+
+    getRpmBillingRows({
+      getTable: false
+    })
+
+    cy.get('[data-cy="datasource-overlay-error"]').should(
+      'contain',
+      'No matching patients exist.'
+    )
+  })
 })

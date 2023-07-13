@@ -345,6 +345,7 @@
     "OPTIONAL": "Facultatif",
     "ORDER_SUMMARY": "Récapitulatif de la commande",
     "OTHERS": "Autres",
+    "PATIENTS_EMPTY_LIST": "Aucun patient correspondant n'existe.",
     "PATIENT_BULK_REPORTS_ENTRIES_EMPTY_LIST": "Il n'y a pas d'entrées de rapports groupés de patients qui correspondent aux critères de recherche actuels",
     "PATIENT_CALL_EXPLANATION": "Vous pouvez recevoir des appels de vidéoconférence entrants depuis votre entraîneur ou votre fournisseur sur ce tableau de bord. Une notification sera affichée à l'écran lorsqu'un appel entrant est reçu, à partir duquel vous pouvez répondre à l'appel.",
     "PATIENT_DASHBOARD_WELCOME": "Bienvenue, {{name}}",

@@ -6,7 +6,7 @@
   <mat-spinner *ngIf="!inaccessible && source.isLoading"></mat-spinner>
   <div *ngIf="!inaccessible && source.isLoading && source.loadingMsg">{{ source.loadingMsg | translate }}</div>
 
-  <div class="ccr-errors" *ngIf="!inaccessible && showErrors && !source.isLoading && source.hasErrors()">
+  <div class="ccr-errors" data-cy="datasource-overlay-error" *ngIf="!inaccessible && showErrors && !source.isLoading && source.hasErrors()">
     <span *ngFor="let error of source.getErrors()">{{ error | translate }}</span>
   </div>
 

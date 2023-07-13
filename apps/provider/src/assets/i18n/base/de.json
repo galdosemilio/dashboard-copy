@@ -345,6 +345,7 @@
     "OPTIONAL": "Optional",
     "ORDER_SUMMARY": "Bestellübersicht",
     "OTHERS": "Andere",
+    "PATIENTS_EMPTY_LIST": "Es sind keine passenden Patienten vorhanden.",
     "PATIENT_BULK_REPORTS_ENTRIES_EMPTY_LIST": "Es gibt keine Patienten-Massenberichte, die den aktuellen Suchkriterien entsprechen",
     "PATIENT_CALL_EXPLANATION": "Sie erhalten möglicherweise eingehende Videokonferenzen von Ihrem Coach oder Anbieter in diesem Dashboard. Eine Benachrichtigung wird auf dem Bildschirm angezeigt, wenn ein eingehender Anruf empfangen wird, von dem Sie den Anruf beantworten können.",
     "PATIENT_DASHBOARD_WELCOME": "Willkommen, {{name}}",

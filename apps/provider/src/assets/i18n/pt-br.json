@@ -345,6 +345,7 @@
     "OPTIONAL": "Opcional",
     "ORDER_SUMMARY": "Resumo do Pedido",
     "OTHERS": "Outros",
+    "PATIENTS_EMPTY_LIST": "Não existem pacientes correspondentes.",
     "PATIENT_BULK_REPORTS_ENTRIES_EMPTY_LIST": "Não há entradas de relatórios em massa de pacientes que correspondam aos critérios de pesquisa atuais",
     "PATIENT_CALL_EXPLANATION": "Você pode receber chamadas de conferência de vídeo recebidas em seu treinador ou provedor neste painel. Uma notificação será exibida na tela quando uma chamada recebida é recebida, a partir da qual você pode atender a chamada.",
     "PATIENT_DASHBOARD_WELCOME": "Bem-vindo, {{name}}",

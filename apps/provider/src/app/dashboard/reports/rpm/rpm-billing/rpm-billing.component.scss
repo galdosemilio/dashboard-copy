@@ -21,6 +21,14 @@ app-reports-rpm-billing {
     margin-bottom: 0 !important;
   }
 
+  .relative {
+    position: relative;
+  }
+
+  .z-index-10 {
+    z-index: 10;
+  }
+
   small {
     margin: 5px 0;
   }

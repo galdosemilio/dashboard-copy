@@ -146,11 +146,11 @@
   </div>
 
   <ccr-datasource-overlay
-  [emptyMsg]="(selectedClinic ? 'BOARD.RPM_ENTRIES_EMPTY_LIST' : 'NOTIFY.ERROR.CLINIC_EMPTY') | translate:{serviceType: selectedServiceType?.name}"
+  [emptyMsg]="selectedClinic ? ('BOARD.PATIENTS_EMPTY_LIST' | translate) : ('NOTIFY.ERROR.CLINIC_EMPTY' | translate:{serviceType: selectedServiceType?.name})"
   [source]="source"
   class="ccr-table ccr-expand-table ccr-table-stats">
 
-<div class="ccr-expandable-table-container">
+<div class="ccr-expandable-table-container relative z-index-10">
 <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
 </div>

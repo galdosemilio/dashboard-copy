@@ -345,6 +345,7 @@
     "OPTIONAL": "Optional",
     "ORDER_SUMMARY": "Order Summary",
     "OTHERS": "Others",
+    "PATIENTS_EMPTY_LIST": "No matching patients exist.",
     "PATIENT_BULK_REPORTS_ENTRIES_EMPTY_LIST": "There are no patient bulk reports entries that match the current search criteria",
     "PATIENT_CALL_EXPLANATION": "You may receive incoming video conference calls from your coach or provider on this dashboard. A notification will be displayed on the screen when an incoming call is received, from which you can answer the call.",
     "PATIENT_DASHBOARD_WELCOME": "Welcome, {{ name }}",

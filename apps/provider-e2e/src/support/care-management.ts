@@ -13,8 +13,8 @@ export const getRpmBillingRows = ({
   cy.tick(100)
   if (getTable) {
     cy.get('table', { timeout: 10000 }).find('tr').as('rpmBillingRows')
+    cy.get('table').find('.code-cell').as('codeCells')
   }
-  cy.get('table').find('.code-cell').as('codeCells')
 }
 
 export const setCareManagementServiceTypeToStorage = (serviceType) => {
