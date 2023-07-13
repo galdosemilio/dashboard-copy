@@ -436,16 +436,24 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           this.csvSeparator +
           `"${d.weight?.change ? d.weight.change.percent + ' ' + '%' : ''}"` +
           this.csvSeparator +
-          `"${moment(d.startedAt).format('YYYY-MM-DD')}"` +
+          `"${moment(d.startedAt)
+            .tz(this.context.user.timezone)
+            .format('YYYY-MM-DD')}"` +
           this.csvSeparator +
           `"${
             d.weight?.start
-              ? moment(d.weight.start.date).format('YYYY-MM-DD')
+              ? moment(d.weight.start.date)
+                  .tz(this.context.user.timezone)
+                  .format('YYYY-MM-DD')
               : ''
           }"` +
           this.csvSeparator +
           `"${
-            d.weight?.end ? moment(d.weight.end.date).format('YYYY-MM-DD') : ''
+            d.weight?.end
+              ? moment(d.weight.end.date)
+                  .tz(this.context.user.timezone)
+                  .format('YYYY-MM-DD')
+              : ''
           }"` +
           this.csvSeparator +
           `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
