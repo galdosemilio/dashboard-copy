@@ -367,7 +367,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           this.csvSeparator +
           this.extraColumns
             .map((entry) =>
-              d.dataPoints?.[entry.id].value
+              d.dataPoints?.[entry.id]?.value
                 ? `"${convertToReadableFormat(
                     d.dataPoints[entry.id].value,
                     d.dataPoints[entry.id].type,
@@ -481,6 +481,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
       CSV.toFile({ content: csv, filename })
       return Promise.resolve()
     } catch (error) {
+      console.error(error)
       this.notifier.error(error)
     }
   }

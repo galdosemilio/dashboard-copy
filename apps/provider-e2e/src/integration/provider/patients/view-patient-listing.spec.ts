@@ -133,7 +133,7 @@ describe('Patient Listing', function () {
     })
   })
 
-  it.only('Properly exports csv report', function () {
+  it('Properly exports csv report', function () {
     cy.setTimezone('et')
     standardSetup()
 
