@@ -51,7 +51,11 @@ describe('Reports -> User Statistics -> Sharp Custom Report', function () {
     checkStartAndEndDates()
   })
 
-  it('Sharp custom report retains date selections between page refresh', function () {
+  it.only('Sharp custom report retains date selections between page refres, and arrow is not deactivated', function () {
+    cy.get('[data-cy="date-ranger-picker-right-click"]').should(
+      'have.class',
+      'disabled'
+    )
     cy.get('[data-cy="date-ranger-picker-left-click"]').trigger('click')
 
     checkStartAndEndDates()
@@ -59,6 +63,11 @@ describe('Reports -> User Statistics -> Sharp Custom Report', function () {
     cy.reload()
 
     checkStartAndEndDates()
+
+    cy.get('[data-cy="date-ranger-picker-right-click"]').should(
+      'not.have.class',
+      'disabled'
+    )
   })
 })
 

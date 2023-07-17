@@ -47,6 +47,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   set end(date: undefined | string | moment.Moment) {
     if (date) {
       this._end = moment(date)
+      this._maxReached = this._end.isSameOrAfter(this._limit)
     }
   }
   @Input()
