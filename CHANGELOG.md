@@ -1,3 +1,16 @@
+# [1.122.0](https://github.com/coachcare/dashboard/compare/v1.121.1...v1.122.0) (2023-07-17)
+
+
+### Bug Fixes
+
+* fix report controls date range navigator ([f2a86b3](https://github.com/coachcare/dashboard/commit/f2a86b343d0a3eb02365bf4c3f4a9f92da18bd0e))
+
+
+### Features
+
+* correct clinic code report logic ([f64d46a](https://github.com/coachcare/dashboard/commit/f64d46ab8524d12e020384891ce56f1a3694fa2e))
+* retain filters of sharp report to local storage [FRON-3198] ([b31292e](https://github.com/coachcare/dashboard/commit/b31292ec03b00a476bbfd18e8cb8c5cec713a6dd))
+
 ## [1.121.1](https://github.com/coachcare/dashboard/compare/v1.121.0...v1.121.1) (2023-07-12)
 
 
