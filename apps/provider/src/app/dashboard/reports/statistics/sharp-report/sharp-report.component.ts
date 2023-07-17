@@ -101,9 +101,11 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
       organization: this.data ? this.data.organization : null,
       range: {
         start: this.data
-          ? moment(this.data.startDate).format('YYYY-MM-DD')
+          ? moment(this.data.startDate).startOf('day').toISOString()
           : null,
-        end: this.data ? moment(this.data.endDate).format('YYYY-MM-DD') : null
+        end: this.data
+          ? moment(this.data.endDate).endOf('day').toISOString()
+          : null
       }
     }))
 
