@@ -47,6 +47,21 @@ const serviceTypeList = [
   }
 ]
 
+const activeRPMSessionDate = 'June 8, 2023'
+const activeCCMSessionDate = 'May 16, 2023'
+const passedRPMSession = {
+  serviceType: 'RPM',
+  startDate: '06/03/2023',
+  endDate: '06/05/2023',
+  disabledBy: 'Zhang Xin'
+}
+const passedCCMSession = {
+  serviceType: 'CCM',
+  startDate: '05/07/2023',
+  endDate: '05/10/2023',
+  disabledBy: 'Zhang Xin'
+}
+
 const testCurrentCTPCode = ({
   snapshot,
   code,
@@ -461,11 +476,73 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.get('app-dialog-care-mgmt-card').eq(1).contains('CCM')
     })
 
+    it('should show active sessions and not show passed sessions with only multiple service types active sessions', () => {
+      checkActivePassedSessions({
+        fixture: 'careManagementActive',
+        activeSessionsDate: [activeRPMSessionDate, activeCCMSessionDate]
+      })
+    })
+
+    it('should not show active sessions and show passed sessions with only multiple service types inactive sessions', () => {
+      checkActivePassedSessions({
+        fixture: 'careManagementInActive',
+        passedSessions: [passedRPMSession, passedCCMSession]
+      })
+    })
+
+    it('should not show active sessions and show passed sessions with only single service type inactive sessions', () => {
+      checkActivePassedSessions({
+        fixture: 'careManagementRPMInActive',
+        passedSessions: [
+          passedRPMSession,
+          {
+            serviceType: 'RPM',
+            startDate: '06/03/2023',
+            endDate: '06/03/2023',
+            disabledBy: 'Zhang Xin'
+          }
+        ]
+      })
+    })
+
+    it('should show active sessions and show passed sessions with single service type with both active/inactive sessions', () => {
+      checkActivePassedSessions({
+        fixture: 'careManagementRPMActive',
+        activeSessionsDate: [activeRPMSessionDate],
+        passedSessions: [passedRPMSession]
+      })
+    })
+
+    it('should show active sessions and show passed sessions with  multiple service types active/inactive sessions', () => {
+      checkActivePassedSessions({
+        fixture: 'careManagementDefault',
+        activeSessionsDate: [activeRPMSessionDate, activeCCMSessionDate],
+        passedSessions: [passedRPMSession, passedCCMSession]
+      })
+    })
+
+    it('should show disabled details', () => {
+      standardSetup()
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+      cy.get('.ccr-dashboard')
+      cy.get('[cy-data="open-status-button"]').click()
+      cy.get('[cy-data="program_setting_button"]').click()
+
+      cy.get('table').find('tbody tr').as('passedSessions')
+      cy.get('@passedSessions').eq(0).find('td').eq(4).find('mat-icon').click()
+
+      cy.get('mat-dialog-content').contains(
+        'Eric Di Bari has had RPM disabled since Mon, Jun 5 2023'
+      )
+    })
+
     it('should enable new episode', () => {
       standardSetup({
         apiOverrides: [
           {
-            url: '/1.0/care-management/state?**',
+            url: '/1.0/care-management/state/audit**',
             fixture: 'api/general/emptyDataEmptyPagination'
           }
         ]
@@ -601,5 +678,78 @@ function checkServiceSelection(serviceType?: { id: string; name: string }) {
     cy.get('[data-cy="care-management-state"]')
       .find('mat-select')
       .should('contain', '')
+  }
+}
+
+function checkActivePassedSessions({
+  fixture,
+  activeSessionsDate,
+  passedSessions
+}: {
+  fixture: string
+  activeSessionsDate?: string[]
+  passedSessions?: {
+    serviceType: string
+    startDate: string
+    endDate: string
+    disabledBy: string
+  }[]
+}) {
+  standardSetup({
+    apiOverrides: [
+      {
+        url: '/1.0/care-management/state/audit**',
+        fixture: `api/care-management/state-audit/${fixture}`
+      }
+    ]
+  })
+
+  cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+  cy.get('.ccr-dashboard')
+  cy.get('[cy-data="open-status-button"]').click()
+  cy.get('[cy-data="program_setting_button"]').click()
+
+  if (activeSessionsDate) {
+    activeSessionsDate.forEach((date, index) => {
+      cy.get('app-dialog-care-mgmt-card')
+        .eq(index)
+        .find('.start-date')
+        .contains(date)
+    })
+  } else {
+    cy.get('app-dialog-care-mgmt-card')
+      .eq(0)
+      .find('.start-date')
+      .should('not.exist')
+  }
+
+  if (passedSessions) {
+    cy.get('table').find('tbody tr').as('passedSessions')
+    cy.get('@passedSessions').should('have.length', passedSessions.length)
+    passedSessions.forEach((session, index) => {
+      cy.get('@passedSessions')
+        .eq(index)
+        .find('td')
+        .eq(0)
+        .contains(session.serviceType)
+      cy.get('@passedSessions')
+        .eq(index)
+        .find('td')
+        .eq(1)
+        .contains(session.startDate)
+      cy.get('@passedSessions')
+        .eq(index)
+        .find('td')
+        .eq(2)
+        .contains(session.endDate)
+      cy.get('@passedSessions')
+        .eq(index)
+        .find('td')
+        .eq(3)
+        .contains(session.disabledBy)
+    })
+  } else {
+    cy.get('table').find('tbody tr').should('not.exist')
   }
 }

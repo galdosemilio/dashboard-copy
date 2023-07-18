@@ -7,7 +7,7 @@ import {
   OrganizationAccess,
   OrganizationProvider
 } from '@coachcare/sdk'
-import { flatMap, sortBy, uniqBy } from 'lodash'
+import { chain, sortBy } from 'lodash'
 import { RPMStateEntry } from '@app/shared/components/rpm/models'
 import { _ } from '@coachcare/backend/shared'
 import moment from 'moment'
@@ -36,31 +36,41 @@ export class CareManagementPermissionsService {
       })
     ).data
 
+    const highestOrgId = accessibleOrgs[0].organization.hierarchyPath
+      .slice()
+      .pop()
+
     const accessibleCareServices =
       this.context.accessibleCareManagementServiceTypes.slice()
 
-    const promises = flatMap(
-      accessibleCareServices.map((careService) =>
-        accessibleOrgs.map((org) =>
-          this.careManagementState.getList({
-            account: accountId,
-            organization: org.organization.id,
-            serviceType: careService.id,
-            limit: 'all',
-            offset: 0
-          })
-        )
-      )
+    const accessibleCareServiceIds = accessibleCareServices.map(
+      (service) => service.id
     )
 
-    const responses = await Promise.all(promises)
-    let allEntries = flatMap(responses.map((response) => [...response.data]))
+    const response = await this.careManagementState.getAuditList({
+      account: this.context.accountId,
+      organization: highestOrgId,
+      limit: 50,
+      offset: 0
+    })
 
-    allEntries = uniqBy(allEntries, 'id')
+    const allEntries = chain(response.data)
+      .filter((entry) =>
+        accessibleCareServiceIds.includes(entry.serviceType.id)
+      )
+      .reverse()
+      .valueOf()
+
     this.careEntries = allEntries
       .slice()
       .map((entry) => new RPMStateEntry({ rpmState: entry }))
-    this.activeCareEntries = this.careEntries.filter((entry) => entry.isActive)
+
+    this.activeCareEntries = chain(this.careEntries)
+      .groupBy((entry) => entry.serviceType.id)
+      .map((entries) => entries[0])
+      .filter((entry) => entry?.isActive)
+      .valueOf()
+
     this.mostRecentEntry = new RPMStateEntry({
       rpmState: sortBy(allEntries, (entry) => moment(entry.createdAt)).pop()
     })

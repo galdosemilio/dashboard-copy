@@ -45,7 +45,7 @@
                 </thead>
 
                 <tbody>
-                    <tr *ngFor="let entry of inactiveCareEntries">
+                    <tr *ngFor="let entry of pastCareEntries">
                         <td>{{ entry.rpmState.serviceType.name }}</td>
                         <td>{{ entry.rpmState.startedAt | amDateFormat:'MM/DD/YYYY' }}</td>
                         <td>{{ entry.rpmState.createdAt | amDateFormat:'MM/DD/YYYY' }}</td>

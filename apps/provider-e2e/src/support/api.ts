@@ -483,6 +483,12 @@ const interceptCoreApiCalls = (
       'api/warehouse/getRPMBillingSnapshot'
     )
   }).as('careManagementBillingSnapshot')
+  cy.intercept('GET', '/1.0/care-management/state/audit**', {
+    fixture: fetchOverride(
+      '/1.0/care-management/state/audit**',
+      'api/care-management/state-audit/careManagementDefault'
+    )
+  }).as('careManagementStateAudit')
   cy.intercept('GET', '/1.0/warehouse/care-management/billing/code**', {
     fixture: 'api/warehouse/getBillingCodes'
   })

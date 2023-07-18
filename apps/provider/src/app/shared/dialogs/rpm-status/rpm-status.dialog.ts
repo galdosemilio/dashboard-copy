@@ -33,7 +33,7 @@ import {
 } from './rpm-edit-form'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { CareServiceEnableFormStepperInfo } from './rpm-enable-form'
-import { isEqual } from 'lodash'
+import { chain, isEqual } from 'lodash'
 
 type DialogStatus =
   | 'initial'
@@ -75,6 +75,7 @@ export class RPMStatusDialog implements OnInit {
   public rpmEntry: RPMStateEntry
   public updatedEntry: boolean
   public closeAfterChange: boolean = false
+  public pastCareEntries: RPMStateEntry[] = []
 
   deactivationReasons: RPMReason[] = []
   requiresDeactivationNote = false
@@ -99,10 +100,6 @@ export class RPMStatusDialog implements OnInit {
 
   get canEnableCareService(): boolean {
     return this.accessibleOrganizations.length > 0
-  }
-
-  get inactiveCareEntries(): RPMStateEntry[] {
-    return this.careEntries.filter((entry) => !entry.isActive)
   }
 
   get entryIsActive(): boolean {
@@ -489,8 +486,8 @@ export class RPMStatusDialog implements OnInit {
 
   private resolveDialogData(): void {
     this.client = this.context.account
-    this.activeCareEntries = this.data.activeCareEntries
-    this.careEntries = this.data.careEntries.slice().reverse()
+    this.activeCareEntries = this.data.activeCareEntries ?? []
+    this.careEntries = this.data.careEntries ?? []
     this.accessibleOrganizations = this.data.accessibleOrganizations
     this.inaccessibleOrganizations = this.data.inaccessibleOrganizations
     this.entryPending = this.rpmEntry ? this.rpmEntry.pending : undefined
@@ -501,5 +498,32 @@ export class RPMStatusDialog implements OnInit {
         organization: this.accessibleOrganizations[0].organization.id
       })
     }
+
+    this.pastCareEntries = chain(this.careEntries)
+      .map((entry, index) => ({ entry, index }))
+      .filter(({ entry }) => !entry.isActive)
+      .flatMap(({ entry, index }) => {
+        const activeEntry = this.careEntries.find(
+          (item, index2) =>
+            item.isActive &&
+            item.serviceType.id === entry.serviceType.id &&
+            index2 > index
+        )
+
+        if (!activeEntry) {
+          return []
+        }
+
+        return [
+          {
+            ...entry,
+            rpmState: {
+              ...entry.rpmState,
+              startedAt: activeEntry.rpmState.startedAt
+            }
+          }
+        ]
+      })
+      .valueOf()
   }
 }

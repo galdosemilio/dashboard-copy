@@ -20,7 +20,7 @@
         {{ 'CARE_SERVICES.SERVICE_DISABLED' | translate:{
             patient: client.firstName + ' ' + client.lastName,
             date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
-            service: serviceName | translate }  }}
+            service: serviceName }  }}
     </p>
     <div *ngIf="!accessibleOrganizations || !accessibleOrganizations.length">
         <p>{{ 'CARE_SERVICES.SERVICE_EDIT_NOT_ALLOWED' | translate }}</p>

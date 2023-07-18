@@ -1,0 +1,213 @@
+{
+  "data": [
+    {
+      "id": "96",
+      "account": {
+        "id": "7402"
+      },
+      "createdBy": {
+        "id": "7386",
+        "firstName": "Zhang",
+        "lastName": "Xin",
+        "email": "zhang@coachcare.com"
+      },
+      "organization": {
+        "id": "31",
+        "name": "CoachCare Clinic Test NY",
+        "hierarchyPath": ["31", "30"],
+        "timezone": "America/New_York"
+      },
+      "isActive": false,
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm"
+      },
+      "conditions": {
+        "patientConsented": true,
+        "hasMedicalNecessity": true,
+        "hadFaceToFace": true,
+        "receivedDevice": true,
+        "goalsSet": true
+      },
+      "trigger": "manual",
+      "createdAt": "2023-06-05T13:16:54.182+00:00",
+      "startedAt": "2023-06-04T12:00:00+00:00",
+      "plan": {
+        "id": "2",
+        "name": "Blood pressure",
+        "isActive": true,
+        "device": {
+          "name": "BEAT Blood Pressure Cuff"
+        },
+        "dataPointTypes": [
+          {
+            "id": "5"
+          },
+          {
+            "id": "6"
+          },
+          {
+            "id": "71"
+          }
+        ]
+      },
+      "supervisingProvider": {
+        "id": "6",
+        "firstName": "Eric",
+        "lastName": "Di Bari"
+      },
+      "diagnosis": {
+        "primary": "Test"
+      }
+    },
+    {
+      "id": "95",
+      "account": {
+        "id": "7402"
+      },
+      "createdBy": {
+        "id": "7386",
+        "firstName": "Zhang",
+        "lastName": "Xin",
+        "email": "zhang@coachcare.com"
+      },
+      "organization": {
+        "id": "31",
+        "name": "CoachCare Clinic Test NY",
+        "hierarchyPath": ["31", "30"],
+        "timezone": "America/New_York"
+      },
+      "isActive": true,
+      "serviceType": {
+        "id": "1",
+        "name": "RPM",
+        "tag": "rpm"
+      },
+      "conditions": {
+        "patientConsented": true,
+        "hasMedicalNecessity": true,
+        "hadFaceToFace": true,
+        "receivedDevice": true,
+        "goalsSet": true
+      },
+      "trigger": "manual",
+      "createdAt": "2023-06-02T13:16:54.182+00:00",
+      "startedAt": "2023-06-03T12:00:00+00:00",
+      "plan": {
+        "id": "2",
+        "name": "Blood pressure",
+        "isActive": true,
+        "device": {
+          "name": "BEAT Blood Pressure Cuff"
+        },
+        "dataPointTypes": [
+          {
+            "id": "5"
+          },
+          {
+            "id": "6"
+          },
+          {
+            "id": "71"
+          }
+        ]
+      },
+      "supervisingProvider": {
+        "id": "6",
+        "firstName": "Eric",
+        "lastName": "Di Bari"
+      },
+      "diagnosis": {
+        "primary": "Test"
+      }
+    },
+    {
+      "id": "98",
+      "account": {
+        "id": "7402"
+      },
+      "createdBy": {
+        "id": "7386",
+        "firstName": "Zhang",
+        "lastName": "Xin",
+        "email": "zhang@coachcare.com"
+      },
+      "organization": {
+        "id": "31",
+        "name": "CoachCare Clinic Test NY",
+        "hierarchyPath": ["31", "30"],
+        "timezone": "America/New_York"
+      },
+      "isActive": false,
+      "serviceType": {
+        "id": "2",
+        "name": "CCM",
+        "tag": "ccm"
+      },
+      "conditions": {
+        "patientConsented": true,
+        "hasMedicalNecessity": true,
+        "hadFaceToFace": true,
+        "receivedDevice": false,
+        "goalsSet": true
+      },
+      "trigger": "manual",
+      "createdAt": "2023-05-10T13:47:34.003+00:00",
+      "startedAt": "2023-05-07T12:00:00+00:00",
+      "supervisingProvider": {
+        "id": "6",
+        "firstName": "Eric",
+        "lastName": "Di Bari"
+      },
+      "diagnosis": {
+        "primary": "Test",
+        "secondary": "test"
+      }
+    },
+    {
+      "id": "97",
+      "account": {
+        "id": "7402"
+      },
+      "createdBy": {
+        "id": "7386",
+        "firstName": "Zhang",
+        "lastName": "Xin",
+        "email": "zhang@coachcare.com"
+      },
+      "organization": {
+        "id": "31",
+        "name": "CoachCare Clinic Test NY",
+        "hierarchyPath": ["31", "30"],
+        "timezone": "America/New_York"
+      },
+      "isActive": true,
+      "serviceType": {
+        "id": "2",
+        "name": "CCM",
+        "tag": "ccm"
+      },
+      "conditions": {
+        "patientConsented": true,
+        "hasMedicalNecessity": true,
+        "hadFaceToFace": true,
+        "receivedDevice": false,
+        "goalsSet": true
+      },
+      "trigger": "manual",
+      "createdAt": "2023-05-08T13:47:34.003+00:00",
+      "startedAt": "2023-05-07T12:00:00+00:00",
+      "supervisingProvider": {
+        "id": "6",
+        "firstName": "Eric",
+        "lastName": "Di Bari"
+      },
+      "diagnosis": {
+        "primary": "Test",
+        "secondary": "test"
+      }
+    }
+  ],
+  "pagination": {}
+}

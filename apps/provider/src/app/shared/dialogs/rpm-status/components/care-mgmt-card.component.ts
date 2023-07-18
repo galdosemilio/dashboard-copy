@@ -71,7 +71,7 @@ import { first } from 'rxjs'
             fxLayoutGap="10px"
           >
             <label fxFlex="27%">{{ 'BOARD.START_DATE' | translate }}</label>
-            <span>{{
+            <span class="start-date">{{
               careEntry.rpmState.startedAt | amDateFormat: 'MMMM D, YYYY'
             }}</span>
           </div>

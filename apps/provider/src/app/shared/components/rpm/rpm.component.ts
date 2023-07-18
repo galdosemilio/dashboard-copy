@@ -11,11 +11,7 @@ import {
   SelectedOrganization
 } from '@app/service'
 import { RPMStatusDialog } from '@app/shared/dialogs'
-import {
-  OrganizationAccess,
-  CareManagementState,
-  CareManagementStateEntity
-} from '@coachcare/sdk'
+import { OrganizationAccess, CareManagementState } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { RPMStateEntry } from './models'
 import { filter } from 'rxjs/operators'
@@ -35,8 +31,6 @@ export class RPMComponent implements OnInit {
   form: FormGroup
   accessibleOrganizations: OrganizationAccess[] = []
   inaccessibleOrganizations: OrganizationAccess[] = []
-  mostRecentEntry: RPMStateEntry
-  activeCareManagmeentSessions: CareManagementStateEntity[] = []
   isLoading = false
   rpmEntries: RPMStateEntry[] = []
   serviceType: string
