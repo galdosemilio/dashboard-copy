@@ -9,9 +9,12 @@ import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
 import { RouteUtils } from '@app/shared/helpers'
 import { uniq } from 'lodash'
+import { _ } from '@coachcare/backend/shared'
 
 @UntilDestroy()
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TimeTrackerService implements OnDestroy {
   public currentRoute$: BehaviorSubject<TimeTrackerRoute> =
     new BehaviorSubject<TimeTrackerRoute>(undefined)
@@ -28,6 +31,7 @@ export class TimeTrackerService implements OnDestroy {
 
   private currentOrganization: SelectedOrganization
   private trackingTimeStart: Date
+  private automatedTimeTracking: boolean = true
 
   constructor(
     private account: AccountProvider,
@@ -38,6 +42,9 @@ export class TimeTrackerService implements OnDestroy {
     this.routeEventHandler = this.routeEventHandler.bind(this)
     this.forceCommit = this.forceCommit.bind(this)
     this.currentOrganization = this.context.organization
+    this.context.automatedTimeTracking$.subscribe((value) => {
+      this.automatedTimeTracking = value
+    })
     this.router.events
       .pipe(untilDestroyed(this))
       .subscribe(this.routeEventHandler)
@@ -87,6 +94,33 @@ export class TimeTrackerService implements OnDestroy {
     }
   }
 
+  public async manualCommit(startTime: Date, endTime: Date): Promise<void> {
+    if (!this.currentRoute || !startTime || !endTime) {
+      return
+    }
+
+    try {
+      const tags = this.getTags(this.currentRoute)
+      await this.account.addActivityEvent({
+        account: this.currentRoute.useAccount
+          ? this.context.accountId
+          : undefined,
+        interaction: {
+          time: {
+            end: endTime.toISOString(),
+            start: startTime.toISOString()
+          }
+        },
+        organization: this.currentOrganization.id,
+        source: 'dashboard',
+        tags
+      })
+      this.notifier.success(_('NOTIFY.SUCCESS.MANUAL_TIME_ADDED'))
+    } catch (error) {
+      this.notifier.error(_('NOTIFY.ERROR.MANUAL_TIME_ADD_FAILED'))
+    }
+  }
+
   public getCurrentRounte(): TimeTrackerRoute {
     return this.currentRoute
   }
@@ -100,8 +134,16 @@ export class TimeTrackerService implements OnDestroy {
 
     const tags = [...route.tags, ...params]
 
-    if (route.useAccount && this.activeCareManagementServiceTag) {
-      tags.push(this.activeCareManagementServiceTag)
+    if (
+      route.useAccount &&
+      this.context.activeCareManagementService &&
+      this.automatedTimeTracking
+    ) {
+      tags.push(this.context.activeCareManagementService.tag)
+    }
+
+    if (!this.automatedTimeTracking) {
+      tags.push('manual-entry')
     }
 
     return uniq(tags)

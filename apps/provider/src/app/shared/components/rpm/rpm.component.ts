@@ -18,7 +18,7 @@ import {
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { RPMStateEntry } from './models'
-import { debounceTime, filter } from 'rxjs/operators'
+import { filter } from 'rxjs/operators'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE } from '@app/config'
@@ -63,9 +63,9 @@ export class RPMComponent implements OnInit {
       })
 
     this.form.controls.serviceType.valueChanges
-      .pipe(untilDestroyed(this), debounceTime(300))
-      .subscribe(() => {
-        this.serviceType = this.form.value.serviceType
+      .pipe(untilDestroyed(this))
+      .subscribe((serviceType) => {
+        this.serviceType = serviceType
         this.context.activeCareManagementService =
           this.context.accessibleCareManagementServiceTypes.find(
             (entity) => entity.id === this.serviceType
@@ -135,7 +135,6 @@ export class RPMComponent implements OnInit {
       )
         ? storageServiceType
         : this.serviceTypes[0].value
-
       this.form.patchValue({
         serviceType: loadedServiceType
       })

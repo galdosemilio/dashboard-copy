@@ -6,15 +6,23 @@ import {
   OnInit,
   Output
 } from '@angular/core'
+import {
+  AbstractControl,
+  FormBuilder,
+  ValidationErrors,
+  ValidatorFn
+} from '@angular/forms'
 import { RPMStateSummaryEntry } from '@app/dashboard/reports/rpm/models'
 import { ReportsDatabase } from '@app/dashboard/reports/services/reports.database'
 import {
   CareManagementService,
   ContextService,
-  NotifierService
+  NotifierService,
+  TimeTrackerService
 } from '@app/service'
 import { AccountAccessData, RPMStateSummaryBillingItem } from '@coachcare/sdk'
 import * as moment from 'moment'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-rpm-status-panel',
@@ -22,24 +30,63 @@ import * as moment from 'moment'
   styleUrls: ['./rpm-status-panel.component.scss']
 })
 export class RPMStatusPanelComponent implements OnInit {
-  @Input() serviceType: string
+  @Input()
+  set serviceType(_serviceType: string) {
+    this._serviceType = _serviceType
+    this.serviceType$.next(_serviceType)
+  }
+
+  get serviceType(): string {
+    return this._serviceType
+  }
   @Input() trackingStartsTomorrow: boolean
   @Input() account: AccountAccessData
   @Output() openSettings: EventEmitter<void> = new EventEmitter<void>()
+  @Output() closePanel: EventEmitter<void> = new EventEmitter<void>()
 
   public rpmStateSummary: RPMStateSummaryEntry
   public status: 'loading' | 'ready' = 'loading'
+  public minutes = Array.from({ length: 60 }, (_, i) => i)
+  public seconds = Array.from({ length: 12 }, (_, i) => i * 5)
+  public showManualTime = false
+  public automatedTimeTracking = true
+  public addTimeForm = this.formBuilder.group(
+    {
+      minutes: [0],
+      seconds: [0]
+    },
+    {
+      validators: this.validateMinutesAndSeconds()
+    }
+  )
+  public get serviceTypeLabel(): string {
+    return this.serviceType
+      ? this.context.user.careManagementServiceTypes.find(
+          (type) => type.id === this.serviceType
+        )?.name
+      : ''
+  }
+  private _serviceType: string
+  private serviceType$ = new Subject<string>()
 
   constructor(
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private database: ReportsDatabase,
     private notifier: NotifierService,
-    private careManagementService: CareManagementService
+    private careManagementService: CareManagementService,
+    private timeTracker: TimeTrackerService,
+    private formBuilder: FormBuilder
   ) {}
 
   public ngOnInit(): void {
     this.onRefresh()
+    this.serviceType$.subscribe(() => {
+      this.onRefresh()
+    })
+    this.context.automatedTimeTracking$.subscribe((value) => {
+      this.automatedTimeTracking = value
+    })
   }
 
   public onRefresh(): void {
@@ -54,6 +101,33 @@ export class RPMStatusPanelComponent implements OnInit {
     } else {
       return 'inactive'
     }
+  }
+
+  public async addManualTime(): Promise<void> {
+    const seconds = moment.duration({
+      minutes: Number(this.addTimeForm.value.minutes),
+      seconds: Number(this.addTimeForm.value.seconds)
+    })
+
+    const now = moment()
+    const endTime = now.toDate()
+    const startTime = moment(now).subtract(seconds).toDate()
+
+    try {
+      await this.timeTracker.manualCommit(startTime, endTime)
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.closePanel.emit()
+    }
+  }
+
+  public toggleManualTime(): void {
+    this.addTimeForm.reset({
+      minutes: 0,
+      seconds: 0
+    })
+    this.showManualTime = !this.showManualTime
   }
 
   private async fetchRPMBillingStatus(): Promise<void> {
@@ -111,5 +185,14 @@ export class RPMStatusPanelComponent implements OnInit {
     }
 
     return !entry.next.relatedCodeRequirementsNotMet.includes(code)
+  }
+
+  private validateMinutesAndSeconds(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const minutes = control.get('minutes').value
+      const seconds = control.get('seconds').value
+      const invalid = minutes === 0 && seconds === 0
+      return invalid ? { invalid: true } : null
+    }
   }
 }

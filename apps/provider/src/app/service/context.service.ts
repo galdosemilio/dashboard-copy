@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { findIndex, isEmpty, merge, pickBy } from 'lodash'
-import { BehaviorSubject } from 'rxjs'
+import { findIndex, get, isEmpty, merge, pickBy } from 'lodash'
+import { BehaviorSubject, combineLatest, filter } from 'rxjs'
 import {
   AccountProvider,
   CareManagementOrganizationPreference,
@@ -102,6 +102,18 @@ export class ContextService {
     this.lang.lang$.pipe().subscribe(() => {
       void this.updateUser()
     })
+
+    combineLatest([this.organization$, this.activeCareManagementService$])
+      .pipe(filter(([org, serviceType]) => !!org && !!serviceType))
+      .subscribe(([org, serviceType]) => {
+        const careManagementPrefs = get(org, 'preferences.careManagement', [])
+        const serviceTypePrefs = careManagementPrefs.find(
+          (entry) => entry.serviceType.id === serviceType?.id
+        )
+        this.automatedTimeTracking$.next(
+          serviceTypePrefs?.automatedTimeTracking === 'enabled'
+        )
+      })
   }
 
   init() {
@@ -424,6 +436,7 @@ export class ContextService {
    * Current OrganizationProvider
    */
   organization$ = new BehaviorSubject<SelectedOrganization>(null)
+  automatedTimeTracking$ = new BehaviorSubject<boolean>(true)
 
   set organization(organization: SelectedOrganization) {
     void this.updateOrganization(organization)

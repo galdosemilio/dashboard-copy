@@ -18,7 +18,8 @@ import * as moment from 'moment'
 @UntilDestroy()
 @Component({
   selector: 'app-dieter',
-  templateUrl: './dieter.component.html'
+  templateUrl: './dieter.component.html',
+  styleUrls: ['./dieter.component.scss']
 })
 export class DieterComponent implements OnDestroy, OnInit {
   public dieter: AccSingleResponse
@@ -27,6 +28,7 @@ export class DieterComponent implements OnDestroy, OnInit {
   public showMessaging: boolean
   public showPatientPDFButton: boolean
   public showCareManagement: boolean
+  public automatedTimeTracking: boolean = true
   public timezoneOffset: number
   public timezoneOffsetText: string
   public callUserZendeskLink =
@@ -54,6 +56,12 @@ export class DieterComponent implements OnDestroy, OnInit {
     this.context.account$
       .pipe(untilDestroyed(this))
       .subscribe(() => this.resolvePatient())
+
+    this.context.automatedTimeTracking$
+      .pipe(untilDestroyed(this))
+      .subscribe((automatedTimeTracking) => {
+        this.automatedTimeTracking = automatedTimeTracking
+      })
 
     this.context.organization$
       .pipe(untilDestroyed(this))

@@ -15,6 +15,7 @@
             [serviceType]="serviceType"
             [trackingStartsTomorrow]="this.timerUnavailableError === 'active-tomorrow'"
             (openSettings)="onOpenSettings()"
+            (closePanel)="onCloseStatusPanel()"
         ></app-rpm-status-panel>
     </div>
 </div>

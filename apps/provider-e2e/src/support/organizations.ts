@@ -10,5 +10,6 @@ type ValidOrganization =
   | 'musclewise'
   | 'idealyou'
   | 'sharp'
+  | 'chap'
 
 export { ValidOrganization }

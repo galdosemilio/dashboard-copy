@@ -3,7 +3,37 @@
         <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
     </div>
     <ng-template #displayTracking [ngSwitch]="getStatus()">
-        <div *ngSwitchCase="'active'">
+        <div [formGroup]="addTimeForm" *ngSwitchCase="'active'" fxLayout="column">
+            <div *ngIf="showManualTime" fxFlex class="mb-10" fxLayout="row" fxLayout.xs="column" fxLayoutGap="2%" fxLayoutGap.xs="0" fxLayoutWrap.xs>
+                <div fxLayout="row" fxLayoutAlign=" center" fxFlex.gt-xs="49%" fxFlex.xs="grow">
+                  <mat-form-field class="ccr-align-right" [floatLabel]="floatLabel">
+                    <mat-select [required]="required" formControlName="minutes">
+                      <mat-option class="ccr-align-right" *ngFor="let minute of minutes" [value]="minute">
+                        {{ minute }}
+                      </mat-option>
+                    </mat-select>
+                    <span matSuffix>{{ 'GLOBAL.MINUTES' | translate | lowercase }}</span>
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign=" center" fxFlex.gt-xs="49%" fxFlex.xs="grow">
+                  <mat-form-field class="ccr-align-right" [floatLabel]="floatLabel">
+                    <mat-select [required]="required" formControlName="seconds">
+                      <mat-option class="ccr-align-right" *ngFor="let second of seconds" [value]="second">
+                        {{ second }}
+                      </mat-option>
+                    </mat-select>
+                    <span matSuffix>{{ 'GLOBAL.SECONDS' | translate | lowercase }}</span>
+                  </mat-form-field>
+                </div>
+            </div>
+            <div *ngIf="showManualTime" fxLayout="row" class="add-time-btn-container">
+                <button
+                    class="ccr-button mx-auto"
+                    color="primary"
+                    [disabled]="addTimeForm.invalid"
+                    (click)="addManualTime()"
+                    mat-button>{{ 'GLOBAL.ADD_TIME' | translate: { serviceType: serviceTypeLabel } }}</button>
+            </div>
             <div *ngFor="let billingEntry of rpmStateSummary?.billing" class="code-container">
                 <div class="code"><p>{{ billingEntry.code }}</p></div>
                 <div>
@@ -54,9 +84,8 @@
             {{ 'RPM.EPISODE_WILL_BE_ENABLED_TOMORROW' | translate }}
         </div>
         <div *ngSwitchCase="'inactive'" class="no-program">
-            This patient is not activated for time tracking. Go to Program Settings to manage and activate care programs
+           This patient is not activated for time tracking. Go to Program Settings to manage and activate care programs
         </div>
-
         <div class="mt-10" fxLayout="row" fxLayoutAlign="space-around center">
             <button
             *ngIf="rpmStateSummary"
@@ -70,6 +99,12 @@
             (click)="onOpenSettings()"
             data-cy="program_setting_button"
             mat-button>{{ 'GLOBAL.PROGRAM_SETTINGS' | translate }}</button>
+            <button
+            *ngIf="getStatus() === 'active' && !automaticCareManagementTimeTracking"
+            class="ccr-button"
+            color="primary"
+            (click)="toggleManualTime()"
+            mat-button>{{ showManualTime ? ('GLOBAL.CANCEL' | translate) : ('GLOBAL.ADD_TIME' | translate: { serviceType: serviceTypeLabel }) }}</button>
         </div>
     </ng-template>
 </div>

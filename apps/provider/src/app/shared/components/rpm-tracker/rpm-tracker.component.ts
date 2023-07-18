@@ -25,7 +25,7 @@ import { debounceTime, filter } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog'
 import { GestureClosingDialog } from '@app/shared/dialogs'
 import { _ } from '@app/shared/utils'
-import { Subject, merge } from 'rxjs'
+import { Subject, combineLatest, merge } from 'rxjs'
 import { RPMStateEntry } from '../rpm/models'
 import { CareManagementStateSummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 import {
@@ -49,7 +49,10 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   checkClick($event): void {
     if (
       $event.target !== this.toggleButton.nativeElement &&
-      !this.statusPanel.nativeElement.contains($event.target)
+      !this.statusPanel.nativeElement.contains($event.target) &&
+      !$event.target.matches('mat-option') &&
+      !$event.target.matches('.mat-option-text') &&
+      !$event.target.matches('.cdk-overlay-backdrop')
     ) {
       this.showStatusPanel = false
     }
@@ -69,6 +72,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
   private _serviceType: string
   private serviceType$ = new Subject<string>()
+  public automatedTimeTracking = true
   public account: AccountAccessData
   public currentBillingItem: RPMStateSummaryBilling
   public currentCodeString: string
@@ -109,7 +113,6 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       .padStart(2, '0')}`
   }
 
-  private _iterationAmount = 0
   private requiredIterationSeconds = 0
   private _seconds = 0
   private timerInterval
@@ -119,12 +122,11 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     private context: ContextService,
     private database: ReportsDatabase,
     private dialog: MatDialog,
-    private elementRef: ElementRef,
     private gesture: GestureService,
     private notifier: NotifierService,
     private careManagementState: CareManagementState,
-    private timeTracker: TimeTrackerService,
-    private careManagementService: CareManagementService
+    private careManagementService: CareManagementService,
+    private timeTracker: TimeTrackerService
   ) {
     this.timerHandler = this.timerHandler.bind(this)
     this.resolveAccountCareSessionStatus =
@@ -145,14 +147,22 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         void this.resolveAccountCareSessionStatus(this.account)
       })
 
+    this.context.automatedTimeTracking$
+      .pipe(untilDestroyed(this))
+      .subscribe((automatedTimeTracking) => {
+        this.automatedTimeTracking = automatedTimeTracking
+      })
+
     this.serviceType$
       .pipe(debounceTime(100))
       .subscribe(() => this.resolveAccountCareSessionStatus(this.account))
 
-    this.gesture.userIdle$
+    combineLatest([this.gesture.userIdle$, this.context.automatedTimeTracking$])
       .pipe(
         untilDestroyed(this),
-        filter((idle) => idle)
+        filter(
+          ([idle, automatedTimeTracking]) => automatedTimeTracking && !!idle
+        )
       )
       .subscribe(() => this.showUserIdleDialog())
   }
@@ -195,7 +205,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     account: AccountAccessData
   ): Promise<void> {
     try {
-      if (!account || !this.serviceType) {
+      if (!account || !this.serviceType || !this.automatedTimeTracking) {
         return
       }
       this.loading = true
@@ -391,6 +401,10 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     void this.handleSecondPassing()
 
     this.cdr.detectChanges()
+  }
+
+  public onCloseStatusPanel(): void {
+    this.showStatusPanel = false
   }
 
   public onOpenSettings(): void {

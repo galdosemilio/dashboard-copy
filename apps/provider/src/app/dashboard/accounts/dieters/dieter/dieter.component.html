@@ -54,8 +54,9 @@
       </button>
       </div>
       <div *ngIf="showCareManagement" fxFlex="nogrow" fxFlex.xs="grow"
-      fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+      fxLayout="column" fxLayout.xs="column" fxLayoutGap="10px"
       fxLayoutAlign="end end" fxLayoutAlign.lt-md="start">
+        <small data-cy="manual-time-enabled-notice" *ngIf="!automatedTimeTracking" class="manual-time-enabled">{{ "GLOBAL.AUTOMATIC_TIME_TRACKING_PAUSED" | translate }}</small>
         <app-rpm></app-rpm>
       </div>
     </div>

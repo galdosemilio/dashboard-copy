@@ -10,6 +10,7 @@ import { AppBreakpoints, STORAGE_COACHES_PAGINATION } from '@app/config'
 import { CloseMenuFor, ResizeLayout, UIState } from '@app/layout/store'
 import {
   ConfigService,
+  ContextService,
   GestureService,
   MessagingService,
   TimeTrackerService
@@ -41,6 +42,7 @@ export class AppComponent implements OnDestroy, OnInit {
   private globalKey = 'GLOBAL'
 
   constructor(
+    private context: ContextService,
     private callLayout: CallLayoutService,
     private intl: MatDatepickerIntl,
     private gesture: GestureService,
