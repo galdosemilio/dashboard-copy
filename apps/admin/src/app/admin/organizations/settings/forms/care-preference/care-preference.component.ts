@@ -57,9 +57,12 @@ export class CarePreferenceComponent implements OnInit {
   }
 
   private async onSubmit() {
-    const { active, deviceSetupNotification } = this.form.value
+    const { active, deviceSetupNotification, automatedTimeTracking } =
+      this.form.value
     const deviceSetupNotificationValue =
       deviceSetupNotification === false ? 'disabled' : 'enabled'
+    const automatedTimeTrackingValue =
+      automatedTimeTracking === false ? 'disabled' : 'enabled'
 
     try {
       if (active === 'inherit') {
@@ -82,13 +85,15 @@ export class CarePreferenceComponent implements OnInit {
             organization: this.orgId,
             isActive: active,
             serviceType: this.pref.serviceType.id,
-            deviceSetupNotification: deviceSetupNotificationValue
+            deviceSetupNotification: deviceSetupNotificationValue,
+            automatedTimeTracking: automatedTimeTrackingValue
           })
         } else {
           await this.carePreference.updateCareManagementPreference({
             id: this.pref.preference.id,
             isActive: active,
-            deviceSetupNotification: deviceSetupNotificationValue
+            deviceSetupNotification: deviceSetupNotificationValue,
+            automatedTimeTracking: automatedTimeTrackingValue
           })
         }
       }
@@ -116,7 +121,8 @@ export class CarePreferenceComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       active: ['inherit'],
-      deviceSetupNotification: [true]
+      deviceSetupNotification: [true],
+      automatedTimeTracking: [true]
     })
   }
 
@@ -134,6 +140,9 @@ export class CarePreferenceComponent implements OnInit {
             : 'inherit',
         deviceSetupNotification: this.pref.preference?.deviceSetupNotification
           ? this.pref.preference?.deviceSetupNotification === 'enabled'
+          : true,
+        automatedTimeTracking: this.pref.preference?.automatedTimeTracking
+          ? this.pref.preference?.automatedTimeTracking === 'enabled'
           : true
       },
       { emitEvent: false }

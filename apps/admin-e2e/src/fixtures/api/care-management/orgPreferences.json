@@ -9,7 +9,8 @@
       "isActive": true,
       "serviceType": { "id": "1", "name": "RPM", "tag": "rpm" },
       "isSubscriptionTarget": false,
-      "deviceSetupNotification": "enabled"
+      "deviceSetupNotification": "enabled",
+      "automatedTimeTracking": "enabled"
     },
     {
       "id": "108",
@@ -20,7 +21,8 @@
       "isActive": true,
       "serviceType": { "id": "2", "name": "CCM", "tag": "ccm" },
       "isSubscriptionTarget": false,
-      "deviceSetupNotification": "disabled"
+      "deviceSetupNotification": "disabled",
+      "automatedTimeTracking": "disabled"
     },
     {
       "id": "109",
@@ -31,7 +33,8 @@
       "isActive": false,
       "serviceType": { "id": "3", "name": "RTM", "tag": "rtm" },
       "isSubscriptionTarget": false,
-      "deviceSetupNotification": "enabled"
+      "deviceSetupNotification": "enabled",
+      "automatedTimeTracking": "enabled"
     },
     {
       "id": "110",
@@ -42,7 +45,8 @@
       "isActive": true,
       "serviceType": { "id": "4", "name": "PCM", "tag": "pcm" },
       "isSubscriptionTarget": false,
-      "deviceSetupNotification": "enabled"
+      "deviceSetupNotification": "enabled",
+      "automatedTimeTracking": "enabled"
     }
   ]
 }

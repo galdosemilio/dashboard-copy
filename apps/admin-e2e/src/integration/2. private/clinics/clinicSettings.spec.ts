@@ -1,4 +1,10 @@
 import { standardSetup } from '../../../support'
+import {
+  verifyActiveOption,
+  verifyDeviceSetupNotification,
+  verifyAutomaticTimeTracking,
+  selectActiveOption
+} from './utils'
 
 enum Sections {
   core = 'core',
@@ -138,7 +144,7 @@ describe('Clinic Settings', () => {
       developerportalteamid: 'wfe9h023ry'
     }
 
-    for (const config of Object(malaConfigs)) {
+    for (const config of Object.keys(malaConfigs)) {
       cy.get(`[data-cy="org-setting-mala-${config}"]`)
         .invoke('val')
         .should('contain', malaConfigs[config])
@@ -198,83 +204,34 @@ describe('Clinic Settings', () => {
   it('Care Management section data display appropriately', () => {
     cy.get(`[data-cy="org-settings-menu-care"]`).click()
 
-    // RPM enabled and deviceSetupNotification enabled
-    cy.get('[data-cy="org-settings-section-care-rpm"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .should('contain', 'Enabled')
-
-    cy.get('[data-cy="org-settings-section-care-rpm"]')
-      .find('[data-cy="care-preference-device-setup-notification"]')
-      .find('.mat-slide-toggle-input')
-      .should('be.checked')
+    // RPM enabled and deviceSetupNotification enabled and automaticTimeTracking enabled
+    verifyActiveOption('rpm', 'Enabled')
+    verifyDeviceSetupNotification('rpm', 'be.checked')
+    verifyAutomaticTimeTracking('rpm', 'Enabled')
 
     // CCM enabled and deviceSetupNotification disabled
-    cy.get('[data-cy="org-settings-section-care-ccm"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .should('contain', 'Enabled')
-
-    cy.get('[data-cy="org-settings-section-care-ccm"]')
-      .find('[data-cy="care-preference-device-setup-notification"]')
-      .find('.mat-slide-toggle-input')
-      .should('not.be.checked')
+    verifyActiveOption('ccm', 'Enabled')
+    verifyDeviceSetupNotification('ccm', 'not.be.checked')
+    verifyAutomaticTimeTracking('ccm', 'Disabled')
 
     // RTM disabled
-    cy.get('[data-cy="org-settings-section-care-rtm"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .should('contain', 'Disabled')
-
-    cy.get('[data-cy="org-settings-section-care-rtm"]')
-      .find('[data-cy="care-preference-device-setup-notification"]')
-      .find('.mat-slide-toggle-input')
-      .scrollIntoView()
-      .should('not.be.visible')
+    verifyActiveOption('rtm', 'Disabled')
+    verifyDeviceSetupNotification('rtm', 'not.be.visible')
 
     // PCM inherit from parent org
-    cy.get('[data-cy="org-settings-section-care-pcm"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .should('contain', 'Inherit')
-
-    cy.get('[data-cy="org-settings-section-care-pcm"]')
-      .find('[data-cy="care-preference-device-setup-notification"]')
-      .find('.mat-slide-toggle-input')
-      .should('be.disabled')
+    verifyActiveOption('pcm', 'Inherit')
+    verifyDeviceSetupNotification('pcm', 'be.disabled')
 
     // BHI no preference (Inherit)
-    cy.get('[data-cy="org-settings-section-care-bhi"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .should('contain', 'Inherit')
-
-    cy.get('[data-cy="org-settings-section-care-bhi"]')
-      .find('[data-cy="care-preference-device-setup-notification"]')
-      .find('.mat-slide-toggle-input')
-      .scrollIntoView()
-      .should('not.be.visible')
+    verifyActiveOption('bhi', 'Inherit')
+    verifyDeviceSetupNotification('bhi', 'not.be.visible')
   })
 
   it('Care Management update preferences', () => {
     cy.get(`[data-cy="org-settings-menu-care"]`).click()
 
     // Create care preference
-    cy.get('[data-cy="org-settings-section-care-bhi"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .eq(0)
-      .trigger('click')
-      .wait(500)
-
-    cy.get('.mat-select-panel')
-      .find('mat-option')
-      .contains('Enabled')
-      .trigger('click')
-      .trigger('blur', { force: true })
-      .wait(500)
-
-    cy.tick(1000)
+    selectActiveOption('bhi', 'Enabled')
 
     cy.wait('@createOrgCarePreference').should((xhr) => {
       expect(xhr.response.statusCode).to.equal(200)
@@ -283,21 +240,7 @@ describe('Clinic Settings', () => {
     })
 
     // Disable care preference
-    cy.get('[data-cy="org-settings-section-care-rpm"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .eq(0)
-      .trigger('click')
-      .wait(500)
-
-    cy.get('.mat-select-panel')
-      .find('mat-option')
-      .contains('Disabled')
-      .trigger('click')
-      .trigger('blur', { force: true })
-      .wait(500)
-
-    cy.tick(1000)
+    selectActiveOption('rpm', 'Disabled')
 
     cy.wait('@updateOrgCarePreference').should((xhr) => {
       expect(xhr.response.statusCode).to.equal(204)
@@ -306,21 +249,7 @@ describe('Clinic Settings', () => {
     })
 
     // Inherit care preference
-    cy.get('[data-cy="org-settings-section-care-rpm"]')
-      .find('[data-cy="care-preference-active-option"]')
-      .find('.mat-select')
-      .eq(0)
-      .trigger('click')
-      .wait(500)
-
-    cy.get('.mat-select-panel')
-      .find('mat-option')
-      .contains('Inherit')
-      .trigger('click')
-      .trigger('blur', { force: true })
-      .wait(500)
-
-    cy.tick(1000)
+    selectActiveOption('rpm', 'Inherit')
 
     cy.wait('@deleteOrgCarePreference').should((xhr) => {
       expect(xhr.response.statusCode).to.equal(204)
@@ -352,6 +281,32 @@ describe('Clinic Settings', () => {
       expect(xhr.response.statusCode).to.equal(204)
       expect(xhr.request.body.isActive).to.equal(true)
       expect(xhr.request.body.deviceSetupNotification).to.equal('disabled')
+    })
+  })
+
+  it('should update automatic time tracking preference', () => {
+    cy.get(`[data-cy="org-settings-menu-care"]`).click()
+
+    cy.get('[data-cy="org-settings-section-care-rpm"]')
+      .find('[data-cy="care-preference-automated-time-tracking-option"]')
+      .find('.mat-select')
+      .eq(0)
+      .trigger('click')
+      .wait(500)
+
+    cy.get('.mat-select-panel')
+      .find('mat-option')
+      .contains('Disabled')
+      .trigger('click')
+      .trigger('blur', { force: true })
+      .wait(500)
+
+    cy.tick(1000)
+
+    cy.wait('@updateOrgCarePreference').should((xhr) => {
+      expect(xhr.response.statusCode).to.equal(204)
+      expect(xhr.request.body.isActive).to.equal(true)
+      expect(xhr.request.body.automatedTimeTracking).to.equal('disabled')
     })
   })
 

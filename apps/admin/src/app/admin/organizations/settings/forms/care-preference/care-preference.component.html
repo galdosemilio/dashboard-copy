@@ -1,4 +1,4 @@
-<mat-grid-list [cols]="1" [formGroup]="form" rowHeight="70px">
+<mat-grid-list [cols]="1" [formGroup]="form">
   <div fxLayout="column" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" data-cy="care-preference-active-option">
       <mat-select fxFlex="300px" formControlName="active">
@@ -14,6 +14,15 @@
       <mat-slide-toggle
         formControlName="deviceSetupNotification"
       >{{ 'GLOBAL.DEVICE_SETUP_NOTIFICATION' | translate }}</mat-slide-toggle>
+    </div>
+    <div [hidden]="!pref.preference?.isActive" data-cy="care-preference-automated-time-tracking-option">
+      <mat-form-field fxFlex="300px">
+        <mat-label>{{ 'GLOBAL.AUTOMATIC_TIME_TRACKING' | translate }}</mat-label>
+        <mat-select formControlName="automatedTimeTracking" >
+          <mat-option [value]="true">{{ 'GLOBAL.ENABLED' | translate }}</mat-option>
+          <mat-option [value]="false">{{ 'GLOBAL.DISABLED' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
 </mat-grid-list>
