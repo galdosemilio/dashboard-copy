@@ -1,12 +1,15 @@
 version: 2.1
 
-orbs:
-  aws-s3: circleci/aws-s3@2.0.0
-
-defaults: &defaults
+default: &default
   working_directory: ~/repo
   docker:
-    - image: cypress/browsers:node14.17.0-chrome88-ff89
+    - image: cimg/node:lts
+  resource_class: medium
+
+cypress: &cypress
+  working_directory: ~/repo
+  docker:
+    - image: cypress/browsers:latest
       environment:
         TZ: 'America/New_York'
   resource_class: large
@@ -33,10 +36,10 @@ npm_dependency_installation: &npm_dependency_installation
     if [ $attempts -ge 5 ]; then
         exit 5
     fi
-dependency_cache_key: &dependency_cache_key dependency-cache-{{ checksum "yarn.lock" }}
+dependency_cache_key: &dependency_cache_key dependency-cache-v1-{{ checksum "yarn.lock" }}
 jobs:
   setup:
-    <<: *defaults
+    <<: *default
     steps:
       - checkout
       - run: *yarn_auth
@@ -53,7 +56,7 @@ jobs:
             - .
 
   execute_affected:
-    <<: *defaults
+    <<: *cypress
     parameters:
       command:
         type: enum
@@ -87,7 +90,8 @@ jobs:
           command: yarn affected:<<parameters.command>> --base=<< parameters.base >> <<# parameters.exclude >> --exclude=<< parameters.exclude >> <</ parameters.exclude >>
 
   full_build:
-    <<: *defaults
+    <<: *default
+    resource_class: large
     parameters:
       mode:
         description: Bundle build mode
@@ -123,7 +127,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/python:3.8
+      - image: amazon/aws-cli:latest
     working_directory: ~/repo/dist/apps
     parameters:
       env:
@@ -134,40 +138,20 @@ jobs:
     environment:
       AWS_REGION: us-east-1
     steps:
+      - run:
+          name: Install tar utility
+          command: yum install -y tar gzip
       - attach_workspace:
           at: ~/repo
-      - aws-s3/copy:
-          arguments: --acl public-read --recursive
-          from: ./<< parameters.env>>/admin
-          to: s3://$DEPLOYMENT_BUCKET/
-      - aws-s3/sync:
-          arguments: --acl public-read --delete
-          from: ./<< parameters.env>>/admin
-          to: s3://$DEPLOYMENT_BUCKET/
-      - aws-s3/copy:
-          arguments: --acl public-read --recursive
-          from: ./<< parameters.env>>/provider
-          to: s3://$DEPLOYMENT_BUCKET/provider
-      - aws-s3/sync:
-          arguments: --acl public-read --delete
-          from: ./<< parameters.env>>/provider
-          to: s3://$DEPLOYMENT_BUCKET/provider
-      - aws-s3/copy:
-          arguments: --acl public-read --recursive
-          from: ./<< parameters.env>>/measurement-charts
-          to: s3://$DEPLOYMENT_BUCKET/measurement-charts
-      - aws-s3/sync:
-          arguments: --acl public-read --delete
-          from: ./<< parameters.env>>/measurement-charts
-          to: s3://$DEPLOYMENT_BUCKET/measurement-charts
-      - run:
-          name: Push SumoLogic deployment notification
-          command: |
-            echo "`date` | Site deployment completed for PROJECT: $CIRCLE_PROJECT_REPONAME BRANCH: $CIRCLE_BRANCH COMMIT: $CIRCLE_SHA1 ENV: << parameters.env >> DEPLOYER: $CIRCLE_USERNAME" > sumologic-deployment.log
-            curl -s -X POST -T sumologic-deployment.log "$SUMOLOGIC_COLLECTOR_URL" || { echo 'SumoLogic deployment log upload failed'; exit 0; }
+      - run: aws s3 cp ./<< parameters.env>>/admin s3://$DEPLOYMENT_BUCKET/ --acl public-read --recursive
+      - run: aws s3 sync ./<< parameters.env>>/admin s3://$DEPLOYMENT_BUCKET/ --acl public-read --delete
+      - run: aws s3 cp ./<< parameters.env>>/provider s3://$DEPLOYMENT_BUCKET/provider --acl public-read --recursive
+      - run: aws s3 sync ./<< parameters.env>>/provider s3://$DEPLOYMENT_BUCKET/provider --acl public-read --delete
+      - run: aws s3 cp ./<< parameters.env>>/measurement-charts s3://$DEPLOYMENT_BUCKET/measurement-charts --acl public-read --recursive
+      - run: aws s3 sync ./<< parameters.env>>/measurement-charts s3://$DEPLOYMENT_BUCKET/measurement-charts --acl public-read --delete
 
   format_check:
-    <<: *defaults
+    <<: *default
     steps:
       - attach_workspace:
           at: ~/repo
@@ -190,7 +174,7 @@ jobs:
             fi
 
   publish_release:
-    <<: *defaults
+    <<: *default
     steps:
       - attach_workspace:
           at: ~/repo
@@ -210,7 +194,7 @@ jobs:
           command: npx semantic-release
 
   provider_e2e_parallel:
-    <<: *defaults
+    <<: *cypress
     steps:
       - attach_workspace:
           at: ~/repo
@@ -226,7 +210,7 @@ jobs:
     parallelism: 5
 
   admin_e2e_parallel:
-    <<: *defaults
+    <<: *cypress
     steps:
       - attach_workspace:
           at: ~/repo
@@ -242,7 +226,7 @@ jobs:
     parallelism: 3
 
   commit_count_check:
-    <<: *defaults
+    <<: *default
     steps:
       - attach_workspace:
           at: ~/repo
