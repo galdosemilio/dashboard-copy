@@ -11,7 +11,7 @@
                 <span>{{ 'REPORTS.NEW_PATIENT_REPORT' | translate }}</span>
                 </a>
             </div>
-            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="stretch end" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutAlign.gt-sm="stretch end" fxLayoutGap="20px">
                 <mat-form-field fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
                     <mat-select [disableOptionCentering]="true" [(ngModel)]="status" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_STATUS' | translate">
                       <mat-option *ngFor="let statusItem of statusList" [value]="statusItem.value">

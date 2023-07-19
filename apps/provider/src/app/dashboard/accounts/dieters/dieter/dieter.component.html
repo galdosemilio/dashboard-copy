@@ -20,12 +20,9 @@
   </div>
 
   <div
-  fxLayout="row"
-  fxLayout.lt-md="column"
+  fxLayout="row wrap"
   fxLayoutAlign="space-between stretch"
   fxLayoutGap="10px"
-  fxLayoutGap.lt-md="20px"
-  fxLayoutGap.lt-md="20px"
   >
     <div class="ccr-name" fxFlex="auto" fxLayout="row" fxLayoutAlign="start">
       <ccr-avatar size="bigger" [account]="dieter?.id"></ccr-avatar>
@@ -39,7 +36,7 @@
         </ccr-last-login>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch" fxLayoutAlign.lt-md="start center">
+    <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="end stretch" fxLayoutAlign.lt-sm="start stretch">
       <div fxFlex="nogrow"
       fxLayout="row"
       fxLayoutAlign="end end" fxLayoutAlign.lt-md="center center">

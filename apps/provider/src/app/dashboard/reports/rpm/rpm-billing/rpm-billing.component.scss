@@ -43,7 +43,9 @@ app-reports-rpm-billing {
   }
 
   .count {
-    line-height: 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
 
     i {
       font-weight: 400;

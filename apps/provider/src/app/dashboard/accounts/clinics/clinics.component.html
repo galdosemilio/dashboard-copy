@@ -16,27 +16,30 @@
     </a>
   </div>
 
-  <div [formGroup]="filterForm" class="ccr-htools" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-    <ccr-permission-filter (onChange)="filterByPermissions($event)" fxFlex="nogrow"></ccr-permission-filter>
+  <div [formGroup]="filterForm" class="ccr-htools" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center stretch" fxLayoutAlign.gt-sm="stretch center" fxLayoutGap="10px">
+    <div fxFlex fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+      <ccr-permission-filter (onChange)="filterByPermissions($event)" fxFlex="nogrow"></ccr-permission-filter>
 
-    <mat-form-field fxFlex>
-      <input
-      [placeholder]="'BOARD.SEARCH_CLINIC' | translate"
-      formControlName="query"
-      matInput
-      type="text">
-    </mat-form-field>
+      <mat-form-field fxFlex>
+        <input
+        [placeholder]="'BOARD.SEARCH_CLINIC' | translate"
+        formControlName="query"
+        matInput
+        type="text">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+      <button mat-button fxFlex="nogrow" class="ccr-align-center"
+        [disabled]="!source.isLoaded || source.isEmpty || source.isLoading" (click)="downloadCSV()" fxHide.xs
+        data-cy="download-csv-button">
+          {{ 'REPORTS.EXPORT_CSV' | translate }}
+          <mat-icon>file_download</mat-icon>
+        </button>
 
-    <button mat-button fxFlex="nogrow" class="ccr-align-center"
-    [disabled]="!source.isLoaded || source.isEmpty || source.isLoading" (click)="downloadCSV()" fxHide.xs
-    data-cy="download-csv-button">
-      {{ 'REPORTS.EXPORT_CSV' | translate }}
-      <mat-icon>file_download</mat-icon>
-    </button>
-
-    <ccr-paginator fxFlex="nogrow" #paginator
-      [source]="source"
-    ></ccr-paginator>
+        <ccr-paginator fxFlex="nogrow" #paginator
+          [source]="source"
+        ></ccr-paginator>
+    </div>
   </div>
 </div>
 

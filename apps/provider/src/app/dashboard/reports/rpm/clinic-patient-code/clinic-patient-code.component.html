@@ -1,16 +1,26 @@
-<div fxLayout="row" fxLayoutAlign="space-between start">
-  <div fxLayout="row" fxLayoutAlign="start center" [formGroup]="form">
-    <mat-icon class="title-icon" [style.margin]="'-10px 8px 0 0'" >receipt</mat-icon>
-    <div [style.margin]="'6px 8px 0 0'">
-      <app-service-type-selector (serviceTypeChange)="onServiceTypeChange($event)"></app-service-type-selector>
+<div class="report-heading">
+  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutAlign.gt-sm="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center" [formGroup]="form">
+      <mat-icon class="title-icon" [style.margin]="'-10px 8px 0 0'" >receipt</mat-icon>
+      <div [style.margin]="'6px 8px 0 0'">
+        <app-service-type-selector (serviceTypeChange)="onServiceTypeChange($event)"></app-service-type-selector>
+      </div>
+      <ccr-date-input
+        formControlName="asOf"
+        placeholder=""
+        [required]="false"
+        [max]="asOfMax"
+      >
+      </ccr-date-input>
     </div>
-    <ccr-date-input
-      formControlName="asOf"
-      placeholder=""
-      [required]="false"
-      [max]="asOfMax"
-    >
-    </ccr-date-input>
+    <button
+      [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
+      (click)="downloadCSV()"
+      mat-button
+      mat-button class="ccr-align-center">
+        {{ 'REPORTS.EXPORT_CSV' | translate }}
+        <mat-icon>file_download</mat-icon>
+    </button>
   </div>
   <button
     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"

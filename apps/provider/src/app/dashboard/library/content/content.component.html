@@ -8,7 +8,7 @@
     <div fxLayout="row" fxLayout.xs="column"
         fxLayoutAlign="start" fxLayoutAlign.xs="stretch"
         fxLayoutWrap.xs fxLayoutGap="10px">
-        <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="3%" fxLayoutAlign="start">
+        <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="3%" fxLayoutAlign="start" fxLayoutAlign.xs="stretch">
             <ccr-organization-search
                 *ngIf="mode === 'vault'"
                 [account]="isProvider ? context.accountId : context.user.id"
@@ -19,7 +19,7 @@
                 (select)="selectOrganization($event)">
             </ccr-organization-search>
 
-            <div *ngIf="isProvider" fxFlex fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="start">
+            <div *ngIf="isProvider" fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="3%" fxLayoutAlign="start" fxLayoutAlign.xs="stretch">
             <mat-form-field class="ccr-filter" floatLabel="never" fxFlex="nogrow">
                 <mat-select
                 [placeholder]="'LIBRARY.CONTENT.TYPE_FILTER' | translate"
@@ -48,7 +48,9 @@
             fxFlex
             fxFlex.xs="1 1 100%"
             fxLayoutAlign="end center"
-            fxLayoutAlign.xs="center"
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutAlign.xs="stretch"
             fxLayoutGap="7px">
             <!-- this is temporally removed because of FRON-677 -->
             <!-- <div class="ccr-button-group">
@@ -61,60 +63,64 @@
                     <mat-icon>view_module</mat-icon>
                 </a>
             </div> -->
-            <button
-            (click)="createFolder()"
-            [disabled]="!organization || !(organization.permissions?.admin)"
-            class="ccr-icon-button"
-            color="primary"
-            fxFlex="0 0 auto"
-            mat-button>
-                <mat-icon>add</mat-icon>
-                <span>{{ 'LIBRARY.CONTENT.NEW_FOLDER' | translate }}</span>
-            </button>
-            <button
-            (click)="createContent()"
-            [disabled]="!organization || !(organization.permissions?.admin)"
-            class="ccr-icon-button"
-            color="primary"
-            fxFlex="0 0 auto"
-            mat-button
-            data-cy="add-content-button">
-                <mat-icon>add</mat-icon>
-                <span>{{ 'LIBRARY.CONTENT.ADD_CONTENT' | translate }}</span>
-            </button>
-            <button
-            *ngIf="mode === 'digital-library'"
-            (click)="insertForm()"
-            [disabled]="!organization || !(organization.permissions?.admin)"
-            class="ccr-icon-button"
-            color="primary"
-            fxFlex="0 0 auto"
-            mat-button>
-                <mat-icon>add</mat-icon>
-                <span>{{ 'LIBRARY.CONTENT.INSERT_FORM' | translate }}</span>
-            </button>
-            <button
-            *ngIf="mode === 'digital-library'"
-            (click)="openBatchCloneDialog()"
-            [disabled]="!organization || !(organization.permissions?.admin)"
-            class="ccr-icon-button"
-            color="primary"
-            fxFlex="0 0 auto"
-            mat-button>
-                <mat-icon>content_copy</mat-icon>
-                <span>{{ 'LIBRARY.CONTENT.CLONE_CONTENT' | translate }}</span>
-            </button>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="7px">
+                <button
+                (click)="createFolder()"
+                [disabled]="!organization || !(organization.permissions?.admin)"
+                class="ccr-icon-button"
+                color="primary"
+                fxFlex
+                mat-button>
+                    <mat-icon>add</mat-icon>
+                    <span>{{ 'LIBRARY.CONTENT.NEW_FOLDER' | translate }}</span>
+                </button>
+                <button
+                (click)="createContent()"
+                [disabled]="!organization || !(organization.permissions?.admin)"
+                class="ccr-icon-button"
+                color="primary"
+                fxFlex
+                mat-button
+                data-cy="add-content-button">
+                    <mat-icon>add</mat-icon>
+                    <span>{{ 'LIBRARY.CONTENT.ADD_CONTENT' | translate }}</span>
+                </button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="7px">
+                <button
+                    *ngIf="mode === 'digital-library'"
+                    (click)="insertForm()"
+                    [disabled]="!organization || !(organization.permissions?.admin)"
+                    class="ccr-icon-button"
+                    color="primary"
+                    fxFlex
+                    mat-button>
+                        <mat-icon>add</mat-icon>
+                        <span>{{ 'LIBRARY.CONTENT.INSERT_FORM' | translate }}</span>
+                    </button>
+                    <button
+                    *ngIf="mode === 'digital-library'"
+                    (click)="openBatchCloneDialog()"
+                    [disabled]="!organization || !(organization.permissions?.admin)"
+                    class="ccr-icon-button"
+                    color="primary"
+                    fxFlex
+                    mat-button>
+                        <mat-icon>content_copy</mat-icon>
+                        <span>{{ 'LIBRARY.CONTENT.CLONE_CONTENT' | translate }}</span>
+                    </button>
 
-            <ccr-help-link
-            *ngIf="organization && organization.permissions?.admin"
-            [link]="cloneContentZendeskLink"></ccr-help-link>
+                    <ccr-help-link
+                    *ngIf="organization && organization.permissions?.admin"
+                    [link]="cloneContentZendeskLink"></ccr-help-link>
 
-            <ccr-popup-description
-            *ngIf="!organization || !(organization.permissions?.admin)"
-            [title]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS_TITLE' | translate"
-            [description]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS' | translate:{organization: organization.name}"
-            [showIntro]="false"
-            ></ccr-popup-description>
+                    <ccr-popup-description
+                    *ngIf="!organization || !(organization.permissions?.admin)"
+                    [title]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS_TITLE' | translate"
+                    [description]="'LIBRARY.CONTENT.NO_ADMIN_ACCESS' | translate:{organization: organization.name}"
+                    [showIntro]="false"
+                    ></ccr-popup-description>
+            </div>
             </div>
         </div>
 
@@ -122,6 +128,7 @@
             <div
             fxFlex
             fxFlex.xs="1 1 100%"
+
             fxLayoutAlign="end center"
             fxLayoutAlign.xs="center"
             fxLayoutGap="7px">

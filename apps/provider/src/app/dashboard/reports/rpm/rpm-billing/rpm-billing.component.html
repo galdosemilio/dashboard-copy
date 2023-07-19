@@ -7,22 +7,15 @@
 </app-report-controls>
 
 <div class="report-heading">
-    <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-        <div fxLayout="row" fxLayout="start center">
+    <div fxFlex fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px" fxLayoutGap.gt-sm="15px">
+        <div fxLayout="row" fxLayout="start center" fxLayoutGap="10px">
             <mat-icon class="title-icon">receipt</mat-icon>
-
-            <h3 fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
-                    <div>
-                        <app-service-type-selector (serviceTypeChange)="onServiceTypeChange($event)"></app-service-type-selector>
-                    </div>
-                    <small class="count" *ngIf="totalCount"><strong>{{ totalCount }}</strong>
-                        {{ 'GLOBAL.PATIENTS' | translate }}
-                        <em *ngIf="timezoneName">{{ 'REPORTS.GENERATED_IN' | translate:{timezone: timezoneName} }}</em>
-                    </small>
-                </div>
-            </h3>
+            <app-service-type-selector (serviceTypeChange)="onServiceTypeChange($event)"></app-service-type-selector>
         </div>
+        <small class="count" *ngIf="totalCount"><strong>{{ totalCount }}</strong>
+            {{ 'GLOBAL.PATIENTS' | translate }}
+            <em *ngIf="timezoneName">{{ 'REPORTS.GENERATED_IN' | translate:{timezone: timezoneName} }}</em>
+        </small>
         <small class="top-level-accout-label" *ngIf="isTopLevelAccount">{{ 'REPORTS.RPM_BILLING_TOP_LEVEL_ACCOUNT' | translate }}</small>
         <div fxFlex fxLayout="column" fxLayoutAlign="end stretch">
             <div class="org-search-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutAlign.gt-md="stretch center" fxLayoutGap="20px">
@@ -52,7 +45,7 @@
                     </div>
                 </div>
 
-                <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10px" fxFlexOrder="2" fxFlexOrder.lt-md="1">
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutAlign.gt-sm="end start" fxLayoutGap="10px" fxFlexOrder="2" fxFlexOrder.lt-md="1">
                     <button
                     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
                     (click)="download('billing')"
