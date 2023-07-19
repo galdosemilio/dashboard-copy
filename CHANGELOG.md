@@ -1,3 +1,12 @@
+## [1.122.1](https://github.com/coachcare/dashboard/compare/v1.122.0...v1.122.1) (2023-07-19)
+
+
+### Bug Fixes
+
+* billing report status dropdown inactive not clickable, add missing i18n [FRON-3220] ([b586816](https://github.com/coachcare/dashboard/commit/b586816104332a2b460e7f72b9120af224b1501d))
+* send timestamp instead of date for sharp report [FRON-3224] ([04cbac6](https://github.com/coachcare/dashboard/commit/04cbac6862115e9abd419567760edeb8f77a4472))
+* try to fix and debug patient csv bug [FRON-3211] ([d47db5c](https://github.com/coachcare/dashboard/commit/d47db5c2a24a8be75192603f56c6c2c5ed81c484))
+
 # [1.122.0](https://github.com/coachcare/dashboard/compare/v1.121.1...v1.122.0) (2023-07-17)
 
 
