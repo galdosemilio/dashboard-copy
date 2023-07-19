@@ -14,8 +14,6 @@ describe('Patient Integrations Page', () => {
 
     syncThirdPartyService(1, 'fitbit')
 
-    syncThirdPartyService(2, 'levl')
-
     syncThirdPartyService(3, 'healthkit')
   })
 

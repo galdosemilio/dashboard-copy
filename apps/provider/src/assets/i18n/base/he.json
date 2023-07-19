@@ -69,7 +69,6 @@
     "ACCOUNT": "חֶשְׁבּוֹן",
     "ACC_MULTI_ASSOCIATION": "",
     "ACC_REMOVED_MEETINGS": "למטופל {{firstName}} {{lastName}} מתוכננות פגישות בעתיד במרפאה זו. אם תמשיך ותסיר את המטופל מהמרפאה, כל הפגישות העתידיות יבוטלו אוטומטית.<br><br>הפגישות שיוסרו הן:",
-    "ACETONEPPM": "אצטון (חלקים למיליון)",
     "ACTION": "פעולה",
     "ACTIONS": "פעולות",
     "ADDED_SUGAR": "תוספת סוכר",
@@ -601,9 +600,6 @@
     "HEALTHKIT": {
       "FOOTNOTE": "אפליקציית Healthkit והלוגו שלה הם סימנים מסחריים של Apple Inc. רשומים בארצות הברית. ומדינות נוספות.",
       "TITLE": "HealthKit"
-    },
-    "LEVL": {
-      "TITLE": "Levl"
     }
   },
   "FOOD": {

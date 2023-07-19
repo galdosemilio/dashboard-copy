@@ -10,9 +10,6 @@
     <li *ngIf="hiddenComponents.indexOf('food') === -1">
       <a mat-button [routerLink]="['.', {s: 'food'}]" [class.active]="section === 'food'">{{ 'GLOBAL.FOOD' | translate }}</a>
     </li>
-    <li *ngIf="hasLevl && hiddenComponents.indexOf('levl') === -1">
-      <a mat-button [routerLink]="['.', {s: 'levl'}]" [class.active]="section === 'levl'">{{ 'LEVL' }}</a>
-    </li>
     <li *ngIf="hasFoodKeys && hiddenComponents.indexOf('keys') === -1">
       <a mat-button [routerLink]="['.', {s: 'keys'}]" [class.active]="section === 'keys'">{{ 'GLOBAL.FOOD_KEYS' | translate }}</a>
     </li>
@@ -50,13 +47,6 @@
     <app-dieter-journal-food
       [dates]="dates"
     ></app-dieter-journal-food>
-
-  </ng-container>
-  <ng-container *ngSwitchCase="'levl'">
-
-    <app-dieter-journal-levl
-      [dates]="dates"
-    ></app-dieter-journal-levl>
 
   </ng-container>
   <ng-container *ngSwitchCase="'keys'">

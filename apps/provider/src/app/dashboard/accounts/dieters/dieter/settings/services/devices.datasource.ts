@@ -71,9 +71,6 @@ export class DevicesDataSource extends TableDataSource<
         this.footnotes.push(_('DEVICE.HEALTHKIT.FOOTNOTE'))
         return _('DEVICE.HEALTHKIT.TITLE')
       }
-      case 'levl': {
-        return _('DEVICE.LEVL.TITLE')
-      }
     }
     return service
   }
@@ -82,8 +79,7 @@ export class DevicesDataSource extends TableDataSource<
     const services = {
       fitbit: 'Fitbit',
       google: 'GoogleFit',
-      healthkit: 'HealthKit',
-      levl: 'Levl'
+      healthkit: 'HealthKit'
     }
     return services[title] ? services[title] : title
   }

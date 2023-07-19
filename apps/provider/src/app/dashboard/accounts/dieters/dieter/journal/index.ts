@@ -6,7 +6,6 @@ import { FoodComponent } from './food/food.component'
 import { HydrationComponent } from './hydration/hydration.component'
 import { HydrationTableComponent } from './hydration/table/table.component'
 import { FoodKeysComponent } from './keys/keys.component'
-import { LevlChartComponent, LevlComponent, LevlTableComponent } from './levl'
 import {
   MetricsChartComponent,
   MetricsComponent,
@@ -26,9 +25,6 @@ export const JournalComponents = [
   FoodKeysComponent,
   HydrationComponent,
   HydrationTableComponent,
-  LevlComponent,
-  LevlTableComponent,
-  LevlChartComponent,
   MetricsComponent,
   MicronutrientsComponent,
   PainComponent,

@@ -15,13 +15,6 @@
       "lastSyncedAt": "2020-04-09T08:30:00.945Z"
     },
     {
-      "id": "8",
-      "service": "levl",
-      "title": "Levl",
-      "description": "Levl data",
-      "lastSyncedAt": "2018-07-25T14:30:04.033Z"
-    },
-    {
       "id": "9",
       "service": "healthkit",
       "title": "HealthKit",

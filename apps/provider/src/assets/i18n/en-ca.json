@@ -69,7 +69,6 @@
     "ACCOUNT": "Account",
     "ACC_MULTI_ASSOCIATION": "This account is associated with one or more clinics other than the selected clinic.<br><br>Please use the <strong>associations</strong> listing to remove the account from the desired clinic.",
     "ACC_REMOVED_MEETINGS": "The patient {{firstName}} {{lastName}} has meetings scheduled in the future within this clinic.  If you continue and remove the patient from the clinic, all future meetings will be cancelled automatically.<br><br>The meetings that will be removed are:",
-    "ACETONEPPM": "Acetone (parts per million)",
     "ACTION": "Action",
     "ACTIONS": "Actions",
     "ADDED_SUGAR": "Added Sugar",
@@ -601,9 +600,6 @@
     "HEALTHKIT": {
       "FOOTNOTE": "Apple Healthkit and any associated logos are trademarks of Apple Inc., registered in the U.S. and other countries.",
       "TITLE": "HealthKit"
-    },
-    "LEVL": {
-      "TITLE": "Levl"
     }
   },
   "FOOD": {

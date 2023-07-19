@@ -9,9 +9,7 @@
           "url": "/account/:id/avatar"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -70,9 +68,7 @@
           "url": "/account/password-reset"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "email": {
             "type": "String",
@@ -93,9 +89,7 @@
           "url": "/account/password-reset/update"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "email": {
             "type": "String",
@@ -137,10 +131,7 @@
           "url": "/account/:id/preference"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -175,11 +166,7 @@
           "url": "/account/:id/preference"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAdmin",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAdmin", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -217,11 +204,7 @@
           "url": "/account/:id/preference"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAdmin",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAdmin", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -260,9 +243,7 @@
           "url": "/account"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "email": {
             "type": "String",
@@ -278,9 +259,7 @@
           "url": "/account/:id/activity"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -306,11 +285,7 @@
           "url": "/account"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "title": {
             "type": "AccountTitleId",
@@ -405,9 +380,7 @@
           "url": "/account/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAdmin"
-        ],
+        "permissions": ["OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -504,9 +477,7 @@
           "url": "/account"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "query": {
             "type": "String",
@@ -672,9 +643,7 @@
           "url": "/account/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess"
-        ],
+        "permissions": ["OrgAccess"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -815,10 +784,7 @@
           "url": "/account-type"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiSuccess": {
           "data": {
             "type": "AccountTypeDesc[]",
@@ -849,10 +815,7 @@
           "url": "/account-title"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiSuccess": {
           "data": {
             "type": "AccountTitle[]",
@@ -879,12 +842,7 @@
           "url": "/access/account"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "Client",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "Client", "OrgAccess"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -1055,9 +1013,7 @@
           "url": "/client/register"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -1173,9 +1129,7 @@
           "url": "/ccr/register"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "account": {
             "type": "Object",
@@ -1347,9 +1301,7 @@
           "url": "/login"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "email": {
             "type": "String",
@@ -1389,10 +1341,7 @@
           "url": "/logout/all"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Client"
-        ],
+        "permissions": ["Admin", "Client"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -1457,9 +1406,7 @@
           "url": "/app/ios/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -1482,9 +1429,7 @@
           "url": "/app/android/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -1509,10 +1454,7 @@
           "url": "/notification/mobile-push/client"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -1543,11 +1485,7 @@
           "url": "/notification/mobile-push/client"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Admin", "Provider", "Client"],
         "apiParam": {
           "token": {
             "type": "String",
@@ -1605,9 +1543,7 @@
           "url": "/notification/mobile-push/client/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -1651,11 +1587,7 @@
           "url": "/notification/mobile-push/client/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Admin", "Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -1705,31 +1637,6 @@
         },
         "hasResponse": true
       },
-      "AuthLevl": {
-        "description": "Authenticates Levl user",
-        "src": "web-gateway/app/authentication/route.ts",
-        "api": {
-          "method": "POST",
-          "url": "/authentication/levl"
-        },
-        "version": "1.0",
-        "apiParam": {
-          "email": {
-            "type": "String",
-            "description": "Email address of Levl account"
-          },
-          "password": {
-            "type": "String",
-            "description": "Password of the Levl account. This password is not stored but passed through to Levl. Only resulting auth token is stored."
-          }
-        },
-        "apiSuccess": {
-          "success": {
-            "type": "void",
-            "code": "204"
-          }
-        }
-      },
       "AuthHealthkit": {
         "description": "Creates an entry to indicate that Apple HealthKit is connected for authenticated account. Accessible only to clients",
         "src": "web-gateway/app/authentication/route.ts",
@@ -1738,9 +1645,7 @@
           "url": "/authentication/healthkit"
         },
         "version": "1.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiSuccess": {
           "success": {
             "type": "void",
@@ -1770,7 +1675,7 @@
               "service": {
                 "type": "AuthServiceName",
                 "description": "Denotes the service for which authentication was delegated",
-                "values": "'fitbit' | 'google' | 'levl' | 'healthkit'"
+                "values": "'fitbit' | 'google' | 'healthkit'"
               },
               "token": {
                 "type": "AuthToken",
@@ -1804,7 +1709,7 @@
           "service": {
             "type": "String",
             "description": "A service to which the authentication should be revoked",
-            "values": "'fitbit' | 'google' | 'levl' | 'healthkit'"
+            "values": "'fitbit' | 'google' | 'healthkit'"
           }
         },
         "apiSuccess": {
@@ -1929,9 +1834,7 @@
           "url": "/measurement/device/sync/healthkit"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "syncDate": {
             "type": "String",
@@ -1954,9 +1857,7 @@
           "url": "/measurement/device/sync"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "service": {
             "type": "String",
@@ -2032,9 +1933,7 @@
           "url": "/ccr/blacklist"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ]
+        "permissions": ["Client"]
       }
     }
   },
@@ -2048,11 +1947,7 @@
           "url": "/conference/billing"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -2182,11 +2077,7 @@
           "url": "/conference/subaccount/:id/key"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -2208,11 +2099,7 @@
           "url": "/conference/subaccount/"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -2332,11 +2219,7 @@
           "url": "/conference/subaccount/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -2360,10 +2243,7 @@
           "url": "/conference/video/token"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "callId": {
             "type": "String",
@@ -2385,10 +2265,7 @@
           "url": "/conference/video/call/event"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "callId": {
             "type": "Bigint",
@@ -2415,10 +2292,7 @@
           "url": "/conference/video/call"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "room": {
             "type": "String",
@@ -2448,10 +2322,7 @@
           "url": "/conference/video/call/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Cliebt"
-        ],
+        "permissions": ["Provider", "Cliebt"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -2506,10 +2377,7 @@
           "url": "/conference/video/call/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -2592,10 +2460,7 @@
           "url": "/conference/video/call"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -2699,10 +2564,7 @@
           "url": "/consent"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAdmin",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAdmin", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -2840,10 +2702,7 @@
           "url": "/consent"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAdmin",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAdmin", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -2883,9 +2742,7 @@
           "url": "/consent/tos"
         },
         "version": "1.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -2958,9 +2815,7 @@
           "url": "/consent/tos/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3023,9 +2878,7 @@
           "url": "/consent/tos"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "meta": {
             "type": "Object",
@@ -3087,9 +2940,7 @@
           "url": "/content/view"
         },
         "version": "1.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -3248,11 +3099,7 @@
           "url": "/content"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -3415,10 +3262,7 @@
           "url": "/content/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3501,10 +3345,7 @@
           "url": "/content/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3526,11 +3367,7 @@
           "url": "/content/"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -3582,10 +3419,7 @@
           "url": "/content/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3627,10 +3461,7 @@
           "url": "/content/upload"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "filename": {
             "type": "String",
@@ -3661,10 +3492,7 @@
           "url": "/content/type"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiSuccess": {
           "data": {
             "type": "ContentType[]",
@@ -3697,10 +3525,7 @@
           "url": "/content/:id/package"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3729,10 +3554,7 @@
           "url": "/content/:id/package/:package"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3758,10 +3580,7 @@
           "url": "/content/:id/package/:package"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3789,11 +3608,7 @@
           "url": "/content/preference"
         },
         "version": "1.0",
-        "permissions": [
-          "Client",
-          "Provider",
-          "OrgAssociation"
-        ],
+        "permissions": ["Client", "Provider", "OrgAssociation"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -3826,11 +3641,7 @@
           "url": "/content/preference/:organization"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -3856,11 +3667,7 @@
           "url": "/content/preference/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -3886,11 +3693,7 @@
           "url": "/content/form/addendum"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Client", "OrgAssociation"],
         "apiParam": {
           "submission": {
             "type": "Bigint",
@@ -3917,11 +3720,7 @@
           "url": "/content/form/addendum/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Client", "OrgAssociation"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4000,11 +3799,7 @@
           "url": "/content/form/addendum"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Client", "OrgAssociation"],
         "apiParam": {
           "submission": {
             "type": "Bigint",
@@ -4118,11 +3913,7 @@
           "url": "/content/form"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "name": {
             "type": "String",
@@ -4164,9 +3955,7 @@
           "url": "/content/form"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAssociation"
-        ],
+        "permissions": ["OrgAssociation"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -4399,10 +4188,7 @@
           "url": "/content/form/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin"
-        ],
+        "permissions": ["Provider", "Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4444,10 +4230,7 @@
           "url": "/content/form/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin"
-        ],
+        "permissions": ["Provider", "Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4471,9 +4254,7 @@
           "url": "/content/form/question-type"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4515,9 +4296,7 @@
           "url": "/content/form/question-type/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4555,10 +4334,7 @@
           "url": "/content/form/question-type"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin"
-        ],
+        "permissions": ["Provider", "Admin"],
         "apiParam": {
           "query": {
             "type": "String",
@@ -4639,10 +4415,7 @@
           "url": "/content/form/question-type/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin"
-        ],
+        "permissions": ["Provider", "Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4683,11 +4456,7 @@
           "url": "/content/form/question"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "section": {
             "type": "Bigint",
@@ -4738,11 +4507,7 @@
           "url": "/content/form/question"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAssociation"],
         "apiParam": {
           "section": {
             "type": "String",
@@ -4840,11 +4605,7 @@
           "url": "/content/form/question/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAssociation"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4924,11 +4685,7 @@
           "url": "/content/form/question/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4955,11 +4712,7 @@
           "url": "/content/form/question/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -4983,11 +4736,7 @@
           "url": "/content/form/section"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAssociation"],
         "apiParam": {
           "form": {
             "type": "Bigint",
@@ -5056,11 +4805,7 @@
           "url": "/content/form/section/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAssociation"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -5111,11 +4856,7 @@
           "url": "/content/form/section"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "form": {
             "type": "Bigint",
@@ -5151,11 +4892,7 @@
           "url": "/content/form/section/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -5192,11 +4929,7 @@
           "url": "/content/form/section/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -5220,11 +4953,7 @@
           "url": "/content/form/submission"
         },
         "version": "1.0",
-        "permissions": [
-          "Client",
-          "Provider",
-          "OrgAssociation"
-        ],
+        "permissions": ["Client", "Provider", "OrgAssociation"],
         "apiParam": {
           "form": {
             "type": "Bigint",
@@ -5352,11 +5081,7 @@
           "url": "/content/form/submission/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Client",
-          "Provider",
-          "OrgAssociation"
-        ],
+        "permissions": ["Client", "Provider", "OrgAssociation"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -5489,11 +5214,7 @@
           "url": "/content/form/submission"
         },
         "version": "1.0",
-        "permissions": [
-          "Client",
-          "Provider",
-          "OrgAssociation"
-        ],
+        "permissions": ["Client", "Provider", "OrgAssociation"],
         "apiParam": {
           "form": {
             "type": "Bigint",
@@ -5549,9 +5270,7 @@
           "url": "/country"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "query": {
             "type": "String",
@@ -5616,9 +5335,7 @@
           "url": "/feedback"
         },
         "version": "1.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "description": {
             "type": "String",
@@ -5670,12 +5387,7 @@
           "url": "/food/consumed"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -5917,12 +5629,7 @@
           "url": "/food/consumed/frequent"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -6136,12 +5843,7 @@
           "url": "/food/consumed/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -6329,12 +6031,7 @@
           "url": "/food/consumed"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -6377,12 +6074,7 @@
           "url": "/food/consumed/new"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -6483,12 +6175,7 @@
           "url": "/food/consumed/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -6631,12 +6318,7 @@
           "url": "/food/favorite"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -6724,12 +6406,7 @@
           "url": "/food/favorite/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -6888,12 +6565,7 @@
           "url": "/food/favorite"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -6919,12 +6591,7 @@
           "url": "/food/favorite/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -6948,9 +6615,7 @@
           "url": "/food/ingredient/local/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -6978,9 +6643,7 @@
           "url": "/food/ingredient/local/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -7011,9 +6674,7 @@
           "url": "/food/ingredient/local/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -7884,9 +7545,7 @@
           "url": "/food/key/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -7919,9 +7578,7 @@
           "url": "/food/key/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -7957,9 +7614,7 @@
           "url": "/food/key/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -7987,9 +7642,7 @@
           "url": "/food/meal/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -8017,9 +7670,7 @@
           "url": "/food/meal/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -8050,9 +7701,7 @@
           "url": "/food/meal/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -8080,10 +7729,7 @@
           "url": "/food/meal"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -8795,10 +8441,7 @@
           "url": "/food/meal"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "name": {
             "type": "String",
@@ -8901,9 +8544,7 @@
           "url": "/food/meal/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -8990,11 +8631,7 @@
           "url": "/food/meal/organization"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "mealId": {
             "type": "Bigint",
@@ -9021,11 +8658,7 @@
           "url": "/food/meal/organization/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9060,11 +8693,7 @@
           "url": "/food/meal/organization"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9084,11 +8713,7 @@
           "url": "/food/meal/organization"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9106,9 +8731,7 @@
           "url": "/food/meal-plan/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9136,9 +8759,7 @@
           "url": "/food/meal-plan/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9169,9 +8790,7 @@
           "url": "/food/meal-plan/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9199,9 +8818,7 @@
           "url": "/food/meal-plan/type/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9229,9 +8846,7 @@
           "url": "/food/meal-plan/type/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9262,9 +8877,7 @@
           "url": "/food/meal-plan/type/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9457,11 +9070,7 @@
           "url": "/food/preference"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -9485,11 +9094,7 @@
           "url": "/food/preference"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -9513,11 +9118,7 @@
           "url": "/food/preference"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -9539,9 +9140,7 @@
           "url": "/food/serving/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -9579,9 +9178,7 @@
           "url": "/food/serving/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -9622,9 +9219,7 @@
           "url": "/food/serving/:id/locale/:locale"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -9819,9 +9414,7 @@
           "url": "/food/serving"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "description": {
             "type": "String",
@@ -9965,9 +9558,7 @@
           "url": "/food/serving/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10114,9 +9705,7 @@
           "url": "/food/serving/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10142,10 +9731,7 @@
           "url": "/key/account"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "keyOrganizationId": {
             "type": "Bigint",
@@ -10178,10 +9764,7 @@
           "url": "/key/account/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10208,10 +9791,7 @@
           "url": "/key/account/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10276,10 +9856,7 @@
           "url": "/key/account"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -10370,10 +9947,7 @@
           "url": "/key/account/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10397,12 +9971,7 @@
           "url": "/key/consumed"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -10566,10 +10135,7 @@
           "url": "/key/consumed/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10679,9 +10245,7 @@
           "url": "/key/consumed"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "keyOrganization": {
             "type": "Bigint",
@@ -10723,9 +10287,7 @@
           "url": "/key/consumed/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10758,9 +10320,7 @@
           "url": "/key/consumed/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10778,9 +10338,7 @@
           "url": "/key"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "name": {
             "type": "String",
@@ -10854,9 +10412,7 @@
           "url": "/key"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "name": {
             "type": "String",
@@ -10883,9 +10439,7 @@
           "url": "/key"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10924,10 +10478,7 @@
           "url": "/key/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "OrgAdmin"],
         "apiParam": {
           "key": {
             "type": "Bigint",
@@ -10960,10 +10511,7 @@
           "url": "/key/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -10995,10 +10543,7 @@
           "url": "/key/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -11051,10 +10596,7 @@
           "url": "/key/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11132,10 +10674,7 @@
           "url": "/key/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -11161,12 +10700,7 @@
           "url": "/nutrition/summary"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "data": {
             "type": "String[]",
@@ -11372,10 +10906,7 @@
           "url": "/goal"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11427,10 +10958,7 @@
           "url": "/goal"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11461,9 +10989,7 @@
           "url": "/goal/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -11483,9 +11009,7 @@
           "url": "/goal/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -11505,10 +11029,7 @@
           "url": "/hydration"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11537,10 +11058,7 @@
           "url": "/hydration"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11569,10 +11087,7 @@
           "url": "/hydration"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11593,10 +11108,7 @@
           "url": "/hydration"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11641,10 +11153,7 @@
           "url": "/hydration/summary"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11743,12 +11252,7 @@
           "url": "/measurement/activity/summary"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11891,12 +11395,7 @@
           "url": "/measurement/activity/history"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -11943,12 +11442,7 @@
           "url": "/measurement/activity"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -12050,12 +11544,7 @@
           "url": "/measurement/activity/detailed"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -12098,12 +11587,7 @@
           "url": "/measurement/activity"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -12178,12 +11662,7 @@
           "url": "/measurement/activity"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -12209,12 +11688,7 @@
           "url": "/measurement/activity/detailed"
         },
         "version": "1.0",
-        "permissions": [
-          "Client",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Client", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -12252,12 +11726,7 @@
           "url": "/measurement/body/"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -12438,12 +11907,7 @@
           "url": "/measurement/body"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -12549,12 +12013,7 @@
           "method": "GET",
           "url": "/measurement/body/sampled"
         },
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "version": "2.0",
         "apiParam": {
           "account": {
@@ -12616,12 +12075,7 @@
           "url": "/measurement/body/summary"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -12728,12 +12182,7 @@
           "url": "/measurement/body/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -12765,12 +12214,7 @@
           "url": "/measurement/body/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -12794,12 +12238,7 @@
           "url": "/measurement/sleep/summary"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -12896,12 +12335,7 @@
           "url": "/measurement/sleep"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -12997,12 +12431,7 @@
           "url": "/measurement/sleep/detailed"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -13112,12 +12541,7 @@
           "url": "/measurement/sleep"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "clientId": {
             "type": "Bigint",
@@ -13173,10 +12597,7 @@
           "url": "/measurement/exercise/association"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "OrgAdmin"],
         "apiParam": {
           "exerciseType": {
             "type": "Bigint",
@@ -13207,10 +12628,7 @@
           "url": "/measurement/exercise/association"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "OrgAdmin"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -13291,9 +12709,7 @@
           "url": "/measurement/exercise/association/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider"
-        ],
+        "permissions": ["Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13333,9 +12749,7 @@
           "url": "/measurement/exercise/association/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider"
-        ],
+        "permissions": ["Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13366,9 +12780,7 @@
           "url": "/measurement/exercise/association/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider"
-        ],
+        "permissions": ["Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13392,9 +12804,7 @@
           "url": "/measurement/exercise"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -13439,9 +12849,7 @@
           "url": "/measurement/exercise/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13488,12 +12896,7 @@
           "url": "/measurement/exercise"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -13619,12 +13022,7 @@
           "url": "/measurement/exercise/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13700,9 +13098,7 @@
           "url": "/measurement/exercise/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13726,9 +13122,7 @@
           "url": "/measurement/exercise/type"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "name": {
             "type": "String",
@@ -13756,9 +13150,7 @@
           "url": "/measurement/exercise/type/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13795,10 +13187,7 @@
           "url": "/measurement/exercise/type/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -13834,10 +13223,7 @@
           "url": "/measurement/exercise/type"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "query": {
             "type": "String",
@@ -13908,9 +13294,7 @@
           "url": "/measurement/idealshape/leaderboard"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiSuccess": {
           "leaderboard": {
             "type": "LeaderboardItem[]",
@@ -13991,10 +13375,7 @@
           "url": "/message"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "threadId": {
             "type": "Bigint",
@@ -14036,10 +13417,7 @@
           "url": "/message/thread"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "accounts": {
             "type": "Bigint[]",
@@ -14159,10 +13537,7 @@
           "url": "/message/thread/:threadId"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "threadId": {
             "type": "String",
@@ -14261,10 +13636,7 @@
           "url": "/message/unread"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiSuccess": {
           "unreadThreadsCount": {
             "type": "Integer",
@@ -14289,10 +13661,7 @@
           "url": "/message/thread"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "subject": {
             "type": "String",
@@ -14329,10 +13698,7 @@
           "url": "/message/thread/:threadId/:account"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "threadId": {
             "type": "Bigint",
@@ -14364,10 +13730,7 @@
           "url": "/message/permission"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -14394,10 +13757,7 @@
           "url": "/message/permission"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "accounts": {
             "type": "Bigint[]",
@@ -14423,10 +13783,7 @@
           "url": "/message/permission/:threadId/:account"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "threadId": {
             "type": "Bigint",
@@ -14456,12 +13813,7 @@
           "url": "/note/consultation"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "content": {
             "type": "String",
@@ -14520,12 +13872,7 @@
           "url": "/note/consultation"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -14645,12 +13992,7 @@
           "url": "/note/consultation/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -14673,12 +14015,7 @@
           "url": "/note/consultation/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -14740,12 +14077,7 @@
           "url": "/note/consultation/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -14763,12 +14095,7 @@
           "url": "/note/general"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "content": {
             "type": "String",
@@ -14807,12 +14134,7 @@
           "url": "/note/general"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -14914,12 +14236,7 @@
           "url": "/note/general/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -14970,12 +14287,7 @@
           "url": "/note/general/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -15017,12 +14329,7 @@
           "url": "/note/general/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -15042,10 +14349,7 @@
           "url": "/notification"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -15260,9 +14564,7 @@
           "url": "/notification/viewed/group/:groupId"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider"
-        ],
+        "permissions": ["Provider"],
         "apiParam": {
           "groupId": {
             "type": "String",
@@ -15292,10 +14594,7 @@
           "url": "/notification/viewed/:notificationId/:account"
         },
         "version": "1.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -15325,11 +14624,7 @@
           "url": "/warehouse/alert/type"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "limit": {
             "type": "PageSize",
@@ -15392,11 +14687,7 @@
           "url": "/warehouse/alert/preference"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -15526,12 +14817,7 @@
           "url": "/warehouse/alert/preference"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -15572,12 +14858,7 @@
           "url": "/warehouse/alert/preference/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin", "OrgAccess"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -15613,12 +14894,7 @@
           "url": "/warehouse/alert/preference/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin", "OrgAccess"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -15642,12 +14918,7 @@
           "url": "/warehouse/alert/preference/:id/account"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin", "OrgAccess"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -15687,12 +14958,7 @@
           "url": "/warehouse/alert/preference/:id/account/:account"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin", "OrgAccess"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -15722,11 +14988,7 @@
           "url": "/access/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -15923,11 +15185,7 @@
           "url": "/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "name": {
             "type": "String",
@@ -16042,11 +15300,7 @@
           "url": "/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -16161,9 +15415,7 @@
           "url": "/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -16186,9 +15438,7 @@
           "url": "/organization/"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "name": {
             "type": "String",
@@ -16422,9 +15672,7 @@
           "url": "/organization/:id/descendants"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -16500,12 +15748,7 @@
           "url": "/assignment"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAssignment",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAssignment", "OrgAdmin"],
         "apiParam": {
           "client": {
             "type": "Bigint",
@@ -16535,12 +15778,7 @@
           "url": "/assignment/:client/:provider/:organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAssignment",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAssignment", "OrgAdmin"],
         "apiParam": {
           "client": {
             "type": "Bigint",
@@ -16572,11 +15810,7 @@
           "url": "/association"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -16625,11 +15859,7 @@
           "url": "/association/:account/:organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -16682,11 +15912,7 @@
           "url": "/association/:account/:organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -16714,11 +15940,7 @@
           "url": "/organization/:id/preference/asset"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -16872,9 +16094,7 @@
           "url": "/organization/:id/preference/assets"
         },
         "version": "3.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -16944,11 +16164,7 @@
           "url": "/organization/:id/preference"
         },
         "version": "3.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17029,11 +16245,7 @@
           "url": "/organization/:id/preference"
         },
         "version": "3.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17118,10 +16330,7 @@
           "url": "/package"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "isActive": {
             "type": "Boolean",
@@ -17219,11 +16428,7 @@
           "url": "/package/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Admin", "Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17286,9 +16491,7 @@
           "url": "/package"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "title": {
             "type": "String",
@@ -17321,9 +16524,7 @@
           "url": "/package/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17367,11 +16568,7 @@
           "url": "/package/enrollment"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Client", "OrgAssociation"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -17514,11 +16711,7 @@
           "url": "/package/enrollment/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAssociation"
-        ],
+        "permissions": ["Provider", "Client", "OrgAssociation"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17590,11 +16783,7 @@
           "url": "/package/enrollment"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Client", "OrgAdmin"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -17637,11 +16826,7 @@
           "url": "/package/enrollment/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAdmin"
-        ],
+        "permissions": ["Provider", "Client", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17684,10 +16869,7 @@
           "url": "/package/enrollment/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17711,11 +16893,7 @@
           "url": "/package/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAssociation"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAssociation"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -17818,11 +16996,7 @@
           "url": "/package/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAssociation"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAssociation"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -17908,11 +17082,7 @@
           "url": "/package/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "package": {
             "type": "Bigint",
@@ -17945,11 +17115,7 @@
           "url": "/package/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -17981,10 +17147,7 @@
           "url": "/package/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -18010,9 +17173,7 @@
           "url": "/package/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -18044,9 +17205,7 @@
           "url": "/package/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -18081,9 +17240,7 @@
           "url": "/package/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -18111,9 +17268,7 @@
           "url": "/supplement/:id/locale/:locale"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -18144,9 +17299,7 @@
           "method": "PUT",
           "url": "/supplement/:id/locale/:locale"
         },
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "version": "2.0",
         "apiParam": {
           "id": {
@@ -18181,9 +17334,7 @@
           "method": "DELETE",
           "url": "/supplement/:id/locale/:locale"
         },
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "version": "2.0",
         "apiParam": {
           "id": {
@@ -18214,9 +17365,7 @@
           "url": "/pain-tracking/history"
         },
         "version": "1.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "account": {
             "type": "String",
@@ -18279,12 +17428,7 @@
           "url": "/pain-tracking/history"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiSuccess": {
           "pagination": {
             "type": "Pagination",
@@ -18418,12 +17562,7 @@
           "url": "/pain-tracking/history/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -18516,9 +17655,7 @@
           "url": "/pain-tracking/history/:id"
         },
         "version": "1.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -18540,9 +17677,7 @@
           "url": "/pain-tracking/history"
         },
         "version": "1.0",
-        "permissions": [
-          "Client"
-        ],
+        "permissions": ["Client"],
         "apiParam": {
           "id": {
             "type": "String",
@@ -18610,9 +17745,7 @@
           "url": "/meeting/attendee"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess"
-        ],
+        "permissions": ["OrgAccess"],
         "apiParam": {
           "meetingId": {
             "type": "Bigint",
@@ -18656,12 +17789,7 @@
           "url": "/attendance"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "meetingId": {
             "type": "Bigint",
@@ -18686,10 +17814,7 @@
           "url": "/meeting/:meetingId/attendee/:account"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "meetingId": {
             "type": "Bigint",
@@ -18709,10 +17834,7 @@
           "url": "/meeting/:meetingId/attendee/:account/recurring"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "meetingId": {
             "type": "Bigint",
@@ -19245,12 +18367,7 @@
           "url": "/meeting/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -19363,9 +18480,7 @@
           "url": "/meeting/quick/:token"
         },
         "version": "2.0",
-        "permissions": [
-          "Public"
-        ],
+        "permissions": ["Public"],
         "apiParam": {
           "token": {
             "type": "String",
@@ -19381,12 +18496,7 @@
           "url": "/meeting/recurring/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -19448,11 +18558,7 @@
           "url": "/meeting/type/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "typeId": {
             "type": "Bigint",
@@ -19476,11 +18582,7 @@
           "url": "/meeting/type/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "typeId": {
             "type": "Bigint",
@@ -19504,11 +18606,7 @@
           "url": "/meeting/type/:typeId/organization/:organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAdmin"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAdmin"],
         "apiParam": {
           "typeId": {
             "type": "Bigint",
@@ -19530,9 +18628,7 @@
           "url": "/meeting/type"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "code": {
             "type": "String",
@@ -19559,9 +18655,7 @@
           "url": "/meeting/type/:typeId"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "typeId": {
             "type": "Bigint",
@@ -19598,9 +18692,7 @@
           "url": "/meeting/type/:typeId"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "typeId": {
             "type": "Bigint",
@@ -19722,10 +18814,7 @@
           "url": "/available"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "provider": {
             "type": "Bigint",
@@ -19775,10 +18864,7 @@
           "url": "/available/match"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "providers": {
             "type": "Bigint[]",
@@ -19810,10 +18896,7 @@
           "url": "/available/calendar"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "providers": {
             "type": "Bigint[]",
@@ -19878,10 +18961,7 @@
           "url": "/available/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -19924,10 +19004,7 @@
           "url": "/available"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "provider": {
             "type": "Bigint",
@@ -19967,10 +19044,7 @@
           "url": "/available/single"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "provider": {
             "type": "String",
@@ -20002,10 +19076,7 @@
           "url": "/available/timezone"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "timezones": {
             "type": "AvailabilityTimezone[]",
@@ -20031,10 +19102,7 @@
           "url": "/available/single/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20050,10 +19118,7 @@
           "url": "/available/account/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20069,10 +19134,7 @@
           "url": "/available/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider"
-        ],
+        "permissions": ["Admin", "Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20117,9 +19179,7 @@
           "url": "/schedule/preferences/:id"
         },
         "version": "3.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20146,9 +19206,7 @@
           "url": "/schedule/preferences/:id"
         },
         "version": "3.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20172,9 +19230,7 @@
           "url": "/schedule/reporting"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiSuccess": {
           "success": {
             "description": "CSV string of all meetings by account",
@@ -20193,10 +19249,7 @@
           "url": "/scheduler"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "accounts": {
             "type": "Bigint[]",
@@ -20275,9 +19328,7 @@
           "url": "/schedule/summary"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess"
-        ],
+        "permissions": ["OrgAccess"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -20392,12 +19443,7 @@
           "url": "/supplement/account/organization/"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "supplementOrganization": {
             "type": "Bigint",
@@ -20438,11 +19484,7 @@
           "url": "/supplement/account/organization/"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "supplementOrganization": {
             "type": "Bigint",
@@ -20475,11 +19517,7 @@
           "url": "/supplement/account/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20506,11 +19544,7 @@
           "url": "/supplement/account/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20534,12 +19568,7 @@
           "url": "/supplement/consumption"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -20622,12 +19651,7 @@
           "url": "/supplement/consumption"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -20670,12 +19694,7 @@
           "url": "/supplement/consumption/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20701,12 +19720,7 @@
           "url": "/supplement/consumption/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20730,9 +19744,7 @@
           "url": "/supplement"
         },
         "version": "3.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "query": {
             "type": "String",
@@ -20828,9 +19840,7 @@
           "url": "/supplement"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "fullName": {
             "type": "String",
@@ -20864,9 +19874,7 @@
           "url": "/supplement/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin"
-        ],
+        "permissions": ["Admin"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -20903,12 +19911,7 @@
           "url": "/supplement/summary"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Provider", "Client", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "account": {
             "type": "Bigint",
@@ -20981,10 +19984,7 @@
           "url": "/supplement/organization"
         },
         "version": "3.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -21078,10 +20078,7 @@
           "url": "/supplement/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Client"
-        ],
+        "permissions": ["Provider", "Client"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -21152,9 +20149,7 @@
           "url": "/supplement/organization"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider"
-        ],
+        "permissions": ["Provider"],
         "apiParam": {
           "supplement": {
             "type": "Bigint",
@@ -21192,9 +20187,7 @@
           "url": "/supplement/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider"
-        ],
+        "permissions": ["Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -21226,9 +20219,7 @@
           "url": "/supplement/organization/:id"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider"
-        ],
+        "permissions": ["Provider"],
         "apiParam": {
           "id": {
             "type": "Bigint",
@@ -21254,9 +20245,7 @@
           "url": "/system"
         },
         "version": "1.0",
-        "permissions": [
-          "Public"
-        ]
+        "permissions": ["Public"]
       }
     }
   },
@@ -21270,9 +20259,7 @@
           "url": "/warehouse/login/inactivity"
         },
         "version": "2.0",
-        "permissions": [
-          "OrgAccess"
-        ],
+        "permissions": ["OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -21398,11 +20385,7 @@
           "url": "/warehouse/demographics/age"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organizationHierarchy": {
             "type": "Bigint[]",
@@ -21476,11 +20459,7 @@
           "url": "/warehouse/demographics/gender"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organizationHierarchy": {
             "type": "Bigint[]",
@@ -21558,11 +20537,7 @@
           "url": "/warehouse/enrollment/patient-count"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -21606,12 +20581,7 @@
           "url": "/warehouse/weight/change"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -21761,12 +20731,7 @@
           "url": "/warehouse/step/activity/level"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -21945,12 +20910,7 @@
           "url": "/warehouse/sleep/basic"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -22120,12 +21080,7 @@
           "url": "/warehouse/measurement/body-composition"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess",
-          "OrgClientPHI"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess", "OrgClientPHI"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -22190,11 +21145,7 @@
           "url": "/warehouse/organization/activity"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -22293,11 +21244,7 @@
           "url": "/warehouse/organization/activity/feature"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -22374,11 +21321,7 @@
           "url": "/warehouse/organization/sign-ups/timeline"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -22453,11 +21396,7 @@
           "url": "/warehouse/organization/sign-ups/list"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -22607,11 +21546,7 @@
           "url": "/warehouse/organization/sign-ups"
         },
         "version": "2.0",
-        "permissions": [
-          "Admin",
-          "Provider",
-          "OrgAccess"
-        ],
+        "permissions": ["Admin", "Provider", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",
@@ -22669,11 +21604,7 @@
           "url": "/warehouse/provider/count"
         },
         "version": "2.0",
-        "permissions": [
-          "Provider",
-          "Admin",
-          "OrgAccess"
-        ],
+        "permissions": ["Provider", "Admin", "OrgAccess"],
         "apiParam": {
           "organization": {
             "type": "Bigint",

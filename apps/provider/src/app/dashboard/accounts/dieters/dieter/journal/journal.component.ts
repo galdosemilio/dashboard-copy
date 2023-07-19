@@ -30,7 +30,6 @@ export class DieterJournalComponent implements OnInit {
   hiddenComponents = []
   components = [
     'food',
-    'levl',
     'keys',
     'supplements',
     'water',
@@ -69,15 +68,6 @@ export class DieterJournalComponent implements OnInit {
         this.hiddenComponents = Object.keys(config).length ? config.slice() : []
       })
     this.hasFoodKeys = await this.context.orgHasFoodMode('Key-based')
-
-    // TODO move to resolver and manage the component access
-    void this.authentication.available(this.context.accountId).then((res) => {
-      this.hasLevl = res.data.filter(
-        (v) => v.service === 'levl' && typeof v.token !== 'undefined'
-      ).length
-        ? true
-        : false
-    })
 
     void this.route.parent.data.forEach((data: any) => {
       this.dailyHydrationGoal =

@@ -56,7 +56,6 @@
     "External-Auth": {
       "AuthFitbit": "GET 1.0 /authentication/fitbit",
       "AuthGoogle": "GET 1.0 /authentication/google",
-      "AuthLevl": "POST 1.0 /authentication/levl",
       "AuthHealthkit": "POST 1.0 /authentication/healthkit",
       "GetAvailableTokens": "GET 1.0 /authentication/:account",
       "Revoke": "DELETE 1.0 /authentication/:account/:service",

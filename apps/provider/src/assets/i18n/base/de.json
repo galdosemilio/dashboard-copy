@@ -69,7 +69,6 @@
     "ACCOUNT": "Konto",
     "ACC_MULTI_ASSOCIATION": "Dieses Konto wird mit einem oder mehreren Kliniken verbunden sind andere als die ausgewählte Klinik. <br> Bitte verwenden Sie die <strong> Verbände </ strong> Auflistung das Konto aus der gewünschten Klinik zu entfernen.",
     "ACC_REMOVED_MEETINGS": "Der Patient {{firstName}} {{lastName}} hat für die Zukunft geplante Treffen in dieser Klinik. Wenn Sie fortfahren und den Patienten aus der Klinik entfernen, werden alle zukünftigen Besprechungen automatisch abgesagt.<br><br>Folgende Besprechungen werden entfernt:",
-    "ACETONEPPM": "Acetone (parts per million)",
     "ACTION": "Action",
     "ACTIONS": "Aktionen",
     "ADDED_SUGAR": "Zucker hinzugefügt",
@@ -601,9 +600,6 @@
     "HEALTHKIT": {
       "FOOTNOTE": "Apple Healthkit und alle zugehörigen Logos sind Marken von Apple Inc.",
       "TITLE": "HealthKit"
-    },
-    "LEVL": {
-      "TITLE": "Levl"
     }
   },
   "FOOD": {

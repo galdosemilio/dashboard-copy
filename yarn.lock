@@ -1617,15 +1617,15 @@
     typescript "2.4.1"
     yargs "8.0.2"
 
-"@coachcare/sdk@^24.13.0":
-  version "24.13.0"
-  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/24.13.0/cef40ec907a95e119495efbfcd7c8e0a5d585336#cef40ec907a95e119495efbfcd7c8e0a5d585336"
-  integrity sha512-bXnCJoMlPplIBI/L1Q9aILahM+yC1S4N1A3A+qqdoTD10Sw0SDAYurjeBtgt6j3ow/fRcch4BlGXgkZBnDx9RA==
+"@coachcare/sdk@^25.0.0":
+  version "25.0.0"
+  resolved "https://npm.pkg.github.com/download/@coachcare/sdk/25.0.0/9e6138c9686aaa1f69cf02ae1026be494155bd3f#9e6138c9686aaa1f69cf02ae1026be494155bd3f"
+  integrity sha512-o/FoW06Jl0WvpgREZSSmaGQCD6Ps9YiiSnNrLbB6bnLwbCyfedGe419g6yFRSJS684IxZB6yIpCMZppzijar8w==
   dependencies:
-    "@types/qs" "^6.9.6"
+    "@types/qs" "^6.9.7"
     "@types/twilio-video" "^2.11.0"
     axios "^0.27.2"
-    qs "^6.10.1"
+    qs "^6.11.1"
     socket.io-client "^4.0.1"
 
 "@colors/colors@1.5.0":
@@ -3773,15 +3773,10 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.4.3.tgz#a3c65525b91fca7da00ab1a3ac2b5a2a4afbffbf"
   integrity sha512-QzSuZMBuG5u8HqYz01qtMdg/Jfctlnvj1z/lYnIDXs/golxw0fxtRAHd9KrzjR7Yxz1qVeI00o0kiO3PmVdJ9w==
 
-"@types/qs@*":
+"@types/qs@*", "@types/qs@^6.9.7":
   version "6.9.7"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
-
-"@types/qs@^6.9.6":
-  version "6.9.6"
-  resolved "https://registry.npmjs.org/@types/qs/-/qs-6.9.6.tgz#df9c3c8b31a247ec315e6996566be3171df4b3b1"
-  integrity sha512-0/HnwIfW4ki2D8L8c9GVcG5I72s9jP5GSLVF0VIXDW00kmIpA6O33G7a8n59Tmh7Nz0WUC3rSb7PTY/sdW2JzA==
 
 "@types/range-parser@*":
   version "1.2.4"
@@ -13664,6 +13659,13 @@ qs@6.11.0, qs@^6.10.1, qs@^6.4.0:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
   integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
+  dependencies:
+    side-channel "^1.0.4"
+
+qs@^6.11.1:
+  version "6.11.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.2.tgz#64bea51f12c1f5da1bc01496f48ffcff7c69d7d9"
+  integrity sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==
   dependencies:
     side-channel "^1.0.4"
 
