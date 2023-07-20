@@ -63,6 +63,28 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       .should('have.length', 1)
   })
 
+  it('should properly preserve the paginated page when clicking on patient link', function () {
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/warehouse/care-management/billing/snapshot**',
+          fixture: 'api/warehouse/getRPMBillingSnapshot-2023-07-01'
+        }
+      ]
+    })
+
+    getRpmBillingRows()
+    cy.get('[data-cy="page-size-selector"]').select('10')
+    cy.wait('@careManagementBillingSnapshot')
+    cy.tick(1000)
+    cy.get('button[aria-label="Next page"]').click()
+    cy.get('@rpmBillingRows').eq(0).find('.first-name-cell span').click()
+    cy.go('back')
+    getRpmBillingRows()
+
+    cy.get('@rpmBillingRows').eq(0).find('.id-cell').should('contain', '11')
+  })
+
   it('Table shows RTM billing data with proper names: no pagination', function () {
     standardSetup({
       apiOverrides: [
@@ -162,7 +184,9 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
     getRpmBillingRows()
 
     cy.get('@rpmBillingRows').should('have.length', 5)
-    cy.get('app-reports-rpm-billing').find('h3').should('contain', '5 Patients')
+    cy.get('app-reports-rpm-billing')
+      .find('.count')
+      .should('contain', '5 Patients')
   })
 
   it('Shows error message for no selected clinic', function () {

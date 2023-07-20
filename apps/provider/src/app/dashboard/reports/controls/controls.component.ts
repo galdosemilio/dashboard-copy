@@ -68,6 +68,10 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
     this.route
       .pipe(untilDestroyed(this), select(routerSelector))
       .subscribe((route) => {
+        if (!route.state.url.startsWith('/reports')) {
+          return
+        }
+
         switch (route.state.url) {
           case '/reports/overview/active':
             this._timeframe = 'last-12-months'
