@@ -374,6 +374,65 @@ describe('Patient profile -> dashboard -> rpm', function () {
           })
       })
     })
+
+    describe('Time tracker syncing', () => {
+      it('Posts an event when a route is traversed', () => {
+        standardSetup()
+
+        cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+        cy.tick(60000)
+
+        cy.get('.ccr-tabs').find('a').eq(1).click()
+
+        cy.wait('@accountActivityPostRequest')
+        cy.wait('@accountActivityPostRequest').should((xhr) => {
+          expect(xhr.response.statusCode).to.equal(201)
+        })
+      })
+
+      it('Consistently post events when traversing multiple routes in a short span of time', () => {
+        standardSetup()
+
+        cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+        cy.tick(250)
+
+        cy.get('.ccr-tabs').find('a').eq(1).click()
+
+        cy.tick(250)
+
+        cy.get('.ccr-tabs').find('a').eq(0).click()
+
+        cy.tick(250)
+
+        cy.get('.ccr-tabs').find('a').eq(1).click()
+
+        cy.tick(250)
+
+        cy.get('.ccr-tabs').find('a').eq(0).click()
+
+        const startTimes = []
+
+        cy.wait('@accountActivityPostRequest')
+        cy.wait('@accountActivityPostRequest').should((xhr) =>
+          startTimes.push(xhr.request.body.interaction.time.start)
+        )
+        cy.wait('@accountActivityPostRequest').should((xhr) =>
+          startTimes.push(xhr.request.body.interaction.time.start)
+        )
+        cy.wait('@accountActivityPostRequest').should((xhr) =>
+          startTimes.push(xhr.request.body.interaction.time.start)
+        )
+        cy.wait('@accountActivityPostRequest').should((xhr) =>
+          startTimes.push(xhr.request.body.interaction.time.start)
+        )
+
+        expect(
+          startTimes.filter((item, index) => startTimes.indexOf(item) !== index)
+        ).to.have.length(0)
+      })
+    })
   })
 
   describe('Activation modal', () => {

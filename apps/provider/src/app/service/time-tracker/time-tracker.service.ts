@@ -2,8 +2,8 @@ import { Injectable, OnDestroy } from '@angular/core'
 import { NavigationStart, Router, RouterEvent } from '@angular/router'
 import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { BehaviorSubject, debounceTime, merge } from 'rxjs'
-import { AccountProvider } from '@coachcare/sdk'
+import { BehaviorSubject, Subject, filter, merge, debounceTime } from 'rxjs'
+import { AccountActivityEvent, AccountProvider } from '@coachcare/sdk'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
@@ -29,6 +29,9 @@ export class TimeTrackerService implements OnDestroy {
 
   activeCareManagementServiceTag: string
 
+  private eventQueue: AccountActivityEvent[] = []
+  private eventQueueTrigger$: Subject<void> = new Subject<void>()
+  private isPostingQueue = false
   private currentOrganization: SelectedOrganization
   private trackingTimeStart: Date
   private automatedTimeTracking: boolean = true
@@ -41,13 +44,27 @@ export class TimeTrackerService implements OnDestroy {
   ) {
     this.routeEventHandler = this.routeEventHandler.bind(this)
     this.forceCommit = this.forceCommit.bind(this)
+    this.postEventQueue = this.postEventQueue.bind(this)
+
     this.currentOrganization = this.context.organization
     this.context.automatedTimeTracking$.subscribe((value) => {
       this.automatedTimeTracking = value
     })
+
+    // Queue post trigger listener
+    this.eventQueueTrigger$
+      .pipe(
+        untilDestroyed(this),
+        filter(() => !this.isPostingQueue)
+      )
+      .subscribe(this.postEventQueue)
+
+    // Router change listener
     this.router.events
       .pipe(untilDestroyed(this))
       .subscribe(this.routeEventHandler)
+
+    // Stashed time committer function call
     void this.commitStashedTime()
 
     this.context.activeCareManagementService$
@@ -56,6 +73,7 @@ export class TimeTrackerService implements OnDestroy {
         this.activeCareManagementServiceTag = serviceType?.tag
       })
 
+    // Organization change listener
     merge(this.context.organization$, this.context.activeCareManagementService$)
       .pipe(untilDestroyed(this))
       .subscribe(async () => {
@@ -157,18 +175,21 @@ export class TimeTrackerService implements OnDestroy {
     const route = this.currentRoute
     const tags = this.getTags(route)
 
-    const payload = {
-      account: route.useAccount ? this.context.accountId : undefined,
-      interaction: {
-        time: {
-          end: new Date().toISOString(),
-          start: this.trackingTimeStart.toISOString()
-        }
-      },
-      organization: this.currentOrganization.id,
-      source: 'dashboard',
-      tags
-    }
+    const payload = [
+      ...this.eventQueue,
+      {
+        account: route.useAccount ? this.context.accountId : undefined,
+        interaction: {
+          time: {
+            end: new Date().toISOString(),
+            start: this.trackingTimeStart.toISOString()
+          }
+        },
+        organization: this.currentOrganization.id,
+        source: 'dashboard',
+        tags
+      }
+    ]
 
     window.localStorage.setItem(
       STORAGE_TIME_TRACKER_STASH,
@@ -179,7 +200,8 @@ export class TimeTrackerService implements OnDestroy {
   private async commitTime(route: TimeTrackerRoute): Promise<void> {
     try {
       const tags = this.getTags(route)
-      await this.account.addActivityEvent({
+
+      this.eventQueue.push({
         account: route.useAccount ? this.context.accountId : undefined,
         interaction: {
           time: {
@@ -191,6 +213,8 @@ export class TimeTrackerService implements OnDestroy {
         source: 'dashboard',
         tags
       })
+
+      this.eventQueueTrigger$.next()
 
       this.trackingTimeStart = undefined
     } catch (error) {
@@ -208,7 +232,15 @@ export class TimeTrackerService implements OnDestroy {
         return
       }
 
-      await this.account.addActivityEvent(stash)
+      // We need to support the old stash which is only an object
+      const isArray = Array.isArray(stash)
+
+      if (isArray) {
+        this.eventQueue = [...this.eventQueue, ...stash]
+        this.eventQueueTrigger$.next()
+      } else {
+        await this.account.addActivityEvent(stash)
+      }
 
       window.localStorage.removeItem(STORAGE_TIME_TRACKER_STASH)
     } catch (error) {
@@ -239,6 +271,37 @@ export class TimeTrackerService implements OnDestroy {
     }
 
     return params
+  }
+
+  private async postEventQueue(): Promise<void> {
+    if (this.isPostingQueue) {
+      return
+    }
+
+    try {
+      const MAX_ATTEMPTS = 3
+
+      while (this.eventQueue.length > 0) {
+        const currEvent = this.eventQueue.shift()
+        let attempts = MAX_ATTEMPTS
+
+        // If we go beyond 3 attempts with the same payload we drop it, sadly :(
+        // it might mean the data is corrupt
+        while (attempts > 0) {
+          try {
+            await this.account.addActivityEvent(currEvent)
+            attempts = 0 // We succeeded so we don't keep on trying
+          } catch (error) {
+            --attempts
+            this.notifier.error(error)
+          }
+        }
+      }
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isPostingQueue = false
+    }
   }
 
   private resolveTimeTrackerRoute($event: RouterEvent): TimeTrackerRoute {
