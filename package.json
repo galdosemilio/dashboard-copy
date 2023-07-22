@@ -58,6 +58,7 @@
   "scripts": {
     "ng": "nx",
     "nx": "node --max-old-space-size=6144 node_modules/.bin/nx",
+    "prepare": "npx husky install",
     "start": "node --max-old-space-size=6144 node_modules/.bin/nx serve",
     "start:admin": "node --max-old-space-size=6144 node_modules/.bin/nx serve admin --port 4200",
     "start:provider": "node --max-old-space-size=6144 node_modules/.bin/nx serve provider --port 4201",
