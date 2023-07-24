@@ -1,3 +1,19 @@
+# [1.123.0](https://github.com/coachcare/dashboard/compare/v1.122.1...v1.123.0) (2023-07-24)
+
+
+### Bug Fixes
+
+* bug preserving pagination on billing report [FRON-3237] ([02db4ce](https://github.com/coachcare/dashboard/commit/02db4ce31fa5dc7472579d32ddc78d112297f7bc))
+* date range next arrow issue [FRON-3230] ([373c4b6](https://github.com/coachcare/dashboard/commit/373c4b633baede4ec2636d829c689ee770608522))
+* fix layouts for mobile ([cdd51fd](https://github.com/coachcare/dashboard/commit/cdd51fdd9eeedb3c9c08e3796f80b31b2043e0be))
+* replace deprecated supervising-provider endpoints [FRON-3193] ([eb800ac](https://github.com/coachcare/dashboard/commit/eb800ac5ff3e34d870bbcd33ce6e3a770491ee99))
+* use care management state endpoint [FRON-3191] ([cb56f3d](https://github.com/coachcare/dashboard/commit/cb56f3dea08f3fdfd34b09314e8642f2efbfa774))
+
+
+### Features
+
+* add automatic time tracking preference to care management settings ([e81705e](https://github.com/coachcare/dashboard/commit/e81705e0e55dbd266b8528019741edb4c2ab924f))
+
 ## [1.122.1](https://github.com/coachcare/dashboard/compare/v1.122.0...v1.122.1) (2023-07-19)
 
 
