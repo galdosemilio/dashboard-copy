@@ -213,7 +213,8 @@ export class ClinicPatientCodeComponent implements OnInit {
         status: 'active',
         limit: 'all',
         offset: 0,
-        asOf: this.form.value.asOf.format('YYYY-MM-DD')
+        asOf: this.form.value.asOf.format('YYYY-MM-DD'),
+        organization: environment.coachcareOrgId
       })
 
       if (!res.data) {

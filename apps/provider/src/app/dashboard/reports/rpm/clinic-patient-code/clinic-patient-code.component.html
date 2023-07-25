@@ -16,20 +16,12 @@
     <button
       [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
       (click)="downloadCSV()"
-      mat-button
+      data-cy="download-csv-button"
       mat-button class="ccr-align-center">
         {{ 'REPORTS.EXPORT_CSV' | translate }}
         <mat-icon>file_download</mat-icon>
     </button>
   </div>
-  <button
-    [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
-    (click)="downloadCSV()"
-    data-cy="download-csv-button"
-    mat-button class="ccr-align-center">
-      {{ 'REPORTS.EXPORT_CSV' | translate }}
-      <mat-icon>file_download</mat-icon>
-  </button>
 </div>
 <p>Listing of current non billable CPT codes.</p>
 <ccr-datasource-overlay
