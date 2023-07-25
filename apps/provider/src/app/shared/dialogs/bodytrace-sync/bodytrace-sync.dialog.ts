@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MeasurementBodytraceSyncProvider, SyncRequest } from '@coachcare/sdk'
-import { MAT_DIALOG_DATA } from '@coachcare/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@coachcare/material'
 import { _ } from '@coachcare/backend/shared'
 import * as moment from 'moment'
+import { NotifierService } from '@coachcare/common/services'
 
 interface Duration {
   label: string
@@ -33,6 +34,8 @@ export class BodytraceSyncDialog implements OnInit {
 
   constructor(
     private measurmentBodytrace: MeasurementBodytraceSyncProvider,
+    private notifier: NotifierService,
+    private dialogRef: MatDialogRef<BodytraceSyncDialog>,
     @Inject(MAT_DIALOG_DATA) public data: BodytraceSyncDialogData
   ) {}
 
@@ -41,7 +44,10 @@ export class BodytraceSyncDialog implements OnInit {
   }
 
   public setDuration(duration: Duration) {
+    const fromDate = moment().subtract(duration.value, 'hours')
     this.selectedDuration = duration.value
+    this.dateRangeForm.get('fromDate').setValue(fromDate)
+    this.setRange(fromDate.toDate())
   }
 
   public setRange(selectedDate: Date | null) {
@@ -60,13 +66,21 @@ export class BodytraceSyncDialog implements OnInit {
       }
 
       await this.measurmentBodytrace.sync(payload)
-    } catch (error) {}
+      this.notifier.success(_('NOTIFY.SUCCESS.MANUAL_SYNC'))
+      this.dialogRef.close()
+    } catch (error) {
+      console.error(error)
+      this.notifier.error(_('NOTIFY.ERROR.MANUAL_SYNC'))
+    }
   }
 
   private createForm() {
+    const fromDate = moment().subtract(2, 'weeks')
     this.dateRangeForm = new FormGroup({
-      fromDate: new FormControl(null, Validators.required),
-      duration: new FormControl(null, Validators.required)
+      fromDate: new FormControl(fromDate, Validators.required),
+      duration: new FormControl(this.durationOptions[3], Validators.required)
     })
+    this.fromDate = fromDate.startOf('day')
+    this.endDate = moment().startOf('day')
   }
 }

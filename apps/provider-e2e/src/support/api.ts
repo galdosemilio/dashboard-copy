@@ -880,6 +880,18 @@ const interceptCoreApiCalls = (
       'api/warehouse/getSharpCustomReport'
     )
   })
+
+  cy.intercept('GET', '/1.0/cellular-device/type', {
+    fixture: 'api/cellular-device/getAllTypes'
+  }).as('getTypes')
+
+  cy.intercept('GET', '/1.0/account/**/cellular-device', {
+    fixture: 'api/cellular-device/getAddedDevice'
+  }).as('getAddedDevice')
+
+  cy.intercept('POST', '/1.0/measurement/bodytrace/sync', {
+    statusCode: 204
+  }).as('bodytraceSync')
 }
 
 const seti18n = (): void => {

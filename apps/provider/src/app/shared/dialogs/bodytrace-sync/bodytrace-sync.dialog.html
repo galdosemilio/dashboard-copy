@@ -21,7 +21,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field data-cy="bodytrace-from-date">
       <mat-label>{{'BOARD.FROM_DATE' | translate}}</mat-label>
       <input matInput [matDatepicker]="fromDatePicker" formControlName="fromDate" (dateChange)="setRange($event.value)">
       <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
