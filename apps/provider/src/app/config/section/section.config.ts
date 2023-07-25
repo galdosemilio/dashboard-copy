@@ -61,6 +61,7 @@ import {
   DonnaKrechOnlineTestSectionConfig
 } from './donna-krech-online'
 import { SharpProdSectionConfig, SharpTestSectionConfig } from './sharp'
+import { OptionsMedicalWeightLossSectionConfig } from './options-medical-weight-loss'
 
 export interface SectionConfigObject {
   component: any
@@ -141,6 +142,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7074']: NXTSTIMSectionConfig,
     ['7080']: AlaskaPremierSectionConfig,
     ['7227']: WakeForestSectionConfig,
-    ['7277']: SharpProdSectionConfig
+    ['7277']: SharpProdSectionConfig,
+    ['7327']: OptionsMedicalWeightLossSectionConfig
   }
 }
