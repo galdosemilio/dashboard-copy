@@ -47,7 +47,24 @@ export class QuickDateRangeComponent implements OnDestroy, OnInit {
   form: FormGroup
   options: QuickSelectOption[] = [
     {
-      displayValue: _('QUICK_RANGES.LAST_SEVEN_DAYS'),
+      displayValue: _('QUICK_RANGES.WEEK'),
+      value: 'week',
+      generator: () =>
+        this.format
+          ? {
+              start: moment()
+                .startOf('day')
+                .subtract(6, 'days')
+                .format(this.format),
+              end: moment().endOf('day').format(this.format)
+            }
+          : {
+              start: moment().startOf('day').subtract(6, 'days').toISOString(),
+              end: moment().endOf('day').toISOString()
+            }
+    },
+    {
+      displayValue: _('QUICK_RANGES.LAST_SEVEN_DAYS_AND_TODAY'),
       value: 'last-7-days',
       generator: () =>
         this.format

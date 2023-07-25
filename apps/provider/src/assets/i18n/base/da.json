@@ -1433,14 +1433,15 @@
   },
   "QUICK_RANGES": {
     "ALL_TIME": "Hele tiden",
-    "LAST_MONTH": "Sidste Måned",
-    "LAST_SEVEN_DAYS": "Sidste 7 Dage",
-    "LAST_THREE_MONTHS": "Sidste 3 Måneder",
-    "LAST_TWELVE_MONTHS": "Seneste 12 Måneder",
-    "LAST_WEEK": "Sidste Uge",
-    "THIS_MONTH": "Denne Måned",
-    "THIS_WEEK": "Denne Uge",
-    "THIS_YEAR": "Dette år"
+    "LAST_MONTH": "Sidste måned",
+    "LAST_SEVEN_DAYS_AND_TODAY": "Sidste 7 hele dage plus i dag",
+    "LAST_THREE_MONTHS": "Sidste tre måneder",
+    "LAST_TWELVE_MONTHS": "Sidste 12 måneder",
+    "LAST_WEEK": "Sidste uge",
+    "THIS_MONTH": "Denne måned",
+    "THIS_WEEK": "Denne uge",
+    "THIS_YEAR": "Dette år",
+    "WEEK": "Uge"
   },
   "REPORTS": {
     "ACTIVE_CLIENTS": "Aktive Patienter",

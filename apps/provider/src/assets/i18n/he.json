@@ -1433,14 +1433,15 @@
   },
   "QUICK_RANGES": {
     "ALL_TIME": "כל הזמן",
-    "LAST_MONTH": "",
-    "LAST_SEVEN_DAYS": "",
-    "LAST_THREE_MONTHS": "",
-    "LAST_TWELVE_MONTHS": "",
-    "LAST_WEEK": "",
-    "THIS_MONTH": "",
-    "THIS_WEEK": "",
-    "THIS_YEAR": ""
+    "LAST_MONTH": "חודש שעבר",
+    "LAST_SEVEN_DAYS_AND_TODAY": "7 ימים מלאים אחרונים פלוס היום",
+    "LAST_THREE_MONTHS": "שלושת החודשים האחרונים",
+    "LAST_TWELVE_MONTHS": "12 החודשים האחרונים",
+    "LAST_WEEK": "שבוע שעבר",
+    "THIS_MONTH": "החודש",
+    "THIS_WEEK": "השבוע",
+    "THIS_YEAR": "השנה",
+    "WEEK": "שָׁבוּעַ"
   },
   "REPORTS": {
     "ACTIVE_CLIENTS": "מטופלים פעילים",

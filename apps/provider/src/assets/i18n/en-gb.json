@@ -1434,13 +1434,14 @@
   "QUICK_RANGES": {
     "ALL_TIME": "All Time",
     "LAST_MONTH": "Last Month",
-    "LAST_SEVEN_DAYS": "Last 7 Days",
+    "LAST_SEVEN_DAYS_AND_TODAY": "Last 7 Full Days plus Today",
     "LAST_THREE_MONTHS": "Last Three Months",
     "LAST_TWELVE_MONTHS": "Last 12 Months",
     "LAST_WEEK": "Last Week",
     "THIS_MONTH": "This Month",
     "THIS_WEEK": "This Week",
-    "THIS_YEAR": "This Year"
+    "THIS_YEAR": "This Year",
+    "WEEK": "Week"
   },
   "REPORTS": {
     "ACTIVE_CLIENTS": "Active Patients",

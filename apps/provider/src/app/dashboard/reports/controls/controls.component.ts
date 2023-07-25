@@ -94,18 +94,16 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
             this._timeframe = 'day'
             break
           default:
+            this._timeframe = 'week'
             if (this.range) {
-              this._timeframe = 'last-7-days'
               this.startPeriod = {
                 startDate: moment()
                   .startOf('day')
-                  .subtract(7, 'days')
+                  .subtract(6, 'days')
                   .format('YYYY-MM-DD'),
                 endDate: moment().endOf('day').format('YYYY-MM-DD')
               }
               delete this.fixedPeriod
-            } else {
-              this._timeframe = 'week'
             }
         }
       })

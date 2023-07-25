@@ -1433,14 +1433,15 @@
   },
   "QUICK_RANGES": {
     "ALL_TIME": "Tout le temps",
-    "LAST_MONTH": "Le Mois Dernier",
-    "LAST_SEVEN_DAYS": "Les 7 Derniers Jours",
-    "LAST_THREE_MONTHS": "3 Derniers Mois",
-    "LAST_TWELVE_MONTHS": "12 Derniers Mois",
-    "LAST_WEEK": "La Semaine Dernière",
-    "THIS_MONTH": "Ce Mois-ci",
-    "THIS_WEEK": "Cette Semaine",
-    "THIS_YEAR": "Cette Année"
+    "LAST_MONTH": "Le mois dernier",
+    "LAST_SEVEN_DAYS_AND_TODAY": "7 derniers jours complets plus aujourd'hui",
+    "LAST_THREE_MONTHS": "Trois derniers mois",
+    "LAST_TWELVE_MONTHS": "12 derniers mois",
+    "LAST_WEEK": "La semaine dernière",
+    "THIS_MONTH": "Ce mois-ci",
+    "THIS_WEEK": "Cette semaine",
+    "THIS_YEAR": "Cette année",
+    "WEEK": "Semaine"
   },
   "REPORTS": {
     "ACTIVE_CLIENTS": "Patients actifs",

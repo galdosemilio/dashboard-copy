@@ -2,7 +2,8 @@ import { standardSetup } from '../../../support'
 
 interface DateRangeOption {
   option:
-    | 'Last 7 Days'
+    | 'Week'
+    | 'Last 7 Full Days plus Today'
     | 'This Week'
     | 'Last Week'
     | 'This Month'
@@ -19,7 +20,12 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
   it('Date range selector shows correct start and end dates when changes', function () {
     const dateRanges: Array<DateRangeOption> = [
       {
-        option: 'Last 7 Days',
+        option: 'Week',
+        start: '25 Dec 2019',
+        end: '31 Dec 2019'
+      },
+      {
+        option: 'Last 7 Full Days plus Today',
         start: '24 Dec 2019',
         end: '31 Dec 2019'
       },
@@ -68,7 +74,7 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.log('Overview -> Patient Signups should be "Last 7 Days"')
+    cy.log('Overview -> Patient Signups should be "Week"')
     cy.visit(`/reports/overview/signups`)
 
     cy.wrap(dateRanges).each((rangeOption: DateRangeOption) => {
@@ -84,10 +90,10 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
     cy.setTimezone('et')
     standardSetup()
 
-    cy.log('Overview -> Patient Signups should be "Last 7 Days"')
+    cy.log('Overview -> Patient Signups should be "Week"')
     cy.visit(`/reports/overview/signups`)
-    cy.get('app-quick-date-range').should('contain', 'Last 7 Days')
-    cy.get('[data-cy="date-range-picker-start"]').contains('24 Dec 2019')
+    cy.get('app-quick-date-range').should('contain', 'Week')
+    cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
 
     cy.log('Overview -> Active Users should be "Last 12 Months"')
@@ -97,13 +103,13 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
     cy.get('[data-cy="date-range-picker-start"]').contains('1 Dec 2018')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
 
-    cy.log('User Statistics -> Patient Statistics should be "Last 7 Days"')
+    cy.log('User Statistics -> Patient Statistics should be "Week"')
     cy.get('app-sidenav-item').contains('Reports').click()
     cy.tick(1000)
     cy.get('app-sidenav-item').contains('User Statistics').click()
     cy.tick(1000)
-    cy.get('app-quick-date-range').should('contain', 'Last 7 Days')
-    cy.get('[data-cy="date-range-picker-start"]').contains('24 Dec 2019')
+    cy.get('app-quick-date-range').should('contain', 'Week')
+    cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
 
     cy.log('Communications should be "This Month"')
@@ -119,11 +125,11 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
     standardSetup()
 
     cy.log(
-      'Overview -> Patient Signups should be "Last 7 Days", then change to "Last Month"'
+      'Overview -> Patient Signups should be "Week", then change to "Last Month"'
     )
     cy.visit(`/reports/overview/signups`)
-    cy.get('app-quick-date-range').should('contain', 'Last 7 Days')
-    cy.get('[data-cy="date-range-picker-start"]').contains('24 Dec 2019')
+    cy.get('app-quick-date-range').should('contain', 'Week')
+    cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
     changeDateRange('Last Month')
     cy.tick(1000)
@@ -146,29 +152,30 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
 
     cy.log(
-      'Overview -> Patient Phase Enrollment should be "Last 7 Days", then change to "This Year"'
+      'Overview -> Patient Phase Enrollment should be "Week", then change to "This Year"'
     )
     cy.get('app-reports-overview')
       .find('a')
       .contains('Patient Phase Enrollment')
       .click()
     cy.tick(1000)
-    cy.get('app-quick-date-range').should('contain', 'Last 7 Days')
-    cy.get('[data-cy="date-range-picker-start"]').contains('24 Dec 2019')
+    cy.get('app-quick-date-range').should('contain', 'Week')
+    cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
 
-    cy.log('Overview -> Patient Signups should be "Last 7 Days"')
+    cy.log('Overview -> Patient Signups should be "Week"')
     cy.get('app-reports-overview').find('a').contains('Patient Signups').click()
     cy.tick(1000)
-    cy.get('app-quick-date-range').should('contain', 'Last 7 Days')
-    cy.get('[data-cy="date-range-picker-start"]').contains('24 Dec 2019')
+    cy.get('app-quick-date-range').should('contain', 'Week')
+    cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
   })
 })
 
 function changeDateRange(
   changeTo:
-    | 'Last 7 Days'
+    | 'Week'
+    | 'Last 7 Full Days plus Today'
     | 'This Week'
     | 'Last Week'
     | 'This Month'

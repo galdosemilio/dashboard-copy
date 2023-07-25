@@ -1433,14 +1433,15 @@
   },
   "QUICK_RANGES": {
     "ALL_TIME": "كل الوقت",
-    "LAST_MONTH": "",
-    "LAST_SEVEN_DAYS": "",
-    "LAST_THREE_MONTHS": "",
-    "LAST_TWELVE_MONTHS": "",
-    "LAST_WEEK": "",
-    "THIS_MONTH": "",
-    "THIS_WEEK": "",
-    "THIS_YEAR": ""
+    "LAST_MONTH": "الشهر الماضي",
+    "LAST_SEVEN_DAYS_AND_TODAY": "آخر 7 أيام كاملة بالإضافة إلى اليوم",
+    "LAST_THREE_MONTHS": "الثلاثة اشهر الاخيرة",
+    "LAST_TWELVE_MONTHS": "آخر 12 شهرًا",
+    "LAST_WEEK": "الأسبوع الماضي",
+    "THIS_MONTH": "هذا الشهر",
+    "THIS_WEEK": "هذا الاسبوع",
+    "THIS_YEAR": "هذا العام",
+    "WEEK": "أسبوع"
   },
   "REPORTS": {
     "ACTIVE_CLIENTS": "المرضى النشطين",

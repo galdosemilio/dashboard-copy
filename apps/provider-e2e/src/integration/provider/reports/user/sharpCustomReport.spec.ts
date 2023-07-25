@@ -9,9 +9,9 @@ describe('Reports -> User Statistics -> Sharp Custom Report', function () {
     cy.visit(`/reports/statistics/sharp`)
   })
 
-  it('Time range selector shows "Last 7 Days" with correct start and end dates by default', function () {
-    cy.get('app-quick-date-range').should('contain', 'Last 7 Days')
-    cy.get('[data-cy="date-range-picker-start"]').contains('24 Dec 2019')
+  it('Time range selector shows "Week" with correct start and end dates by default', function () {
+    cy.get('app-quick-date-range').should('contain', 'Week')
+    cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
   })
   it('Sharp custom report header row shows correctly', function () {
@@ -51,7 +51,7 @@ describe('Reports -> User Statistics -> Sharp Custom Report', function () {
     checkStartAndEndDates()
   })
 
-  it.only('Sharp custom report retains date selections between page refres, and arrow is not deactivated', function () {
+  it('Sharp custom report retains date selections between page refres, and arrow is not deactivated', function () {
     cy.get('[data-cy="date-ranger-picker-right-click"]').should(
       'have.class',
       'disabled'
@@ -68,12 +68,29 @@ describe('Reports -> User Statistics -> Sharp Custom Report', function () {
       'not.have.class',
       'disabled'
     )
+
+    selectRange('This Month', '1 Dec 2019', '31 Dec 2019')
+    selectRange('Week', '25 Dec 2019', '31 Dec 2019')
   })
 })
+
+function selectRange(range: 'Week' | 'This Month', start: string, end: string) {
+  cy.get('app-quick-date-range').click()
+  cy.tick(1000)
+
+  cy.get('.mat-select-panel-wrap')
+    .find('mat-option')
+    .contains(range)
+    .trigger('click', { force: true })
+    .wait(500)
+
+  cy.get('[data-cy="date-range-picker-start"]').contains(start)
+  cy.get('[data-cy="date-range-picker-end"]').contains(end)
+}
 
 function checkStartAndEndDates(): void {
   cy.tick(1000)
 
-  cy.get('[data-cy="date-range-picker-start"]').contains('17 Dec 2019')
+  cy.get('[data-cy="date-range-picker-start"]').contains('18 Dec 2019')
   cy.get('[data-cy="date-range-picker-end"]').contains('24 Dec 2019')
 }

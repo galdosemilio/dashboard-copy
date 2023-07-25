@@ -1432,15 +1432,16 @@
     }
   },
   "QUICK_RANGES": {
-    "ALL_TIME": "Allzeit",
-    "LAST_MONTH": "Im Vergangenen Monat",
-    "LAST_SEVEN_DAYS": "Letzten 7 Tage",
-    "LAST_THREE_MONTHS": "Die Letzten 3 Monate",
+    "ALL_TIME": "Alle Zeit",
+    "LAST_MONTH": "Im vergangenen Monat",
+    "LAST_SEVEN_DAYS_AND_TODAY": "Letzte 7 volle Tage plus Heute",
+    "LAST_THREE_MONTHS": "Letzte drei Monate",
     "LAST_TWELVE_MONTHS": "Letzte 12 Monate",
     "LAST_WEEK": "Letzte Woche",
     "THIS_MONTH": "Diesen Monat",
     "THIS_WEEK": "Diese Woche",
-    "THIS_YEAR": "Dieses Jahr"
+    "THIS_YEAR": "Dieses Jahr",
+    "WEEK": "Woche"
   },
   "REPORTS": {
     "ACTIVE_CLIENTS": "aktive Patienten",

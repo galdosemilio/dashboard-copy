@@ -73,7 +73,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
         this._startView = 'month'
         break
       case 'week':
-        this._timeframe = 'last-7-days'
+        this._timeframe = 'week'
         this._startView = 'week'
         break
       case 'year':
@@ -141,6 +141,9 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   }
 
   get interval(): [number, unitOfTime.DurationConstructor] {
+    if (this.timeframe === 'week') {
+      return [7, 'days']
+    }
     const diff = moment(this._end).diff(this._start, 'days')
     return diff >= 28 ? [1, 'month'] : [diff, 'days']
   }
