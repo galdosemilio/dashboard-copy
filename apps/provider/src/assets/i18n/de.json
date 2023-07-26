@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Hier sehen Sie ein Beispiel dafür, wo die Texte aus den jeweiligen Feldern in die Nachricht eingefügt werden, die der Patient erhält.",
     "TRANSLATIONS": "Übersetzungen",
     "TRIGGER_HISTORY_EMPTY_LIST": "Der Nachrichtenverlauf für diese Anmeldung ist leer.",
+    "TRIGGER_PENDING_EMPTY_LIST": "Für diese Registrierung stehen keine Aktionen an.",
     "TYPE": "Typ",
     "UNDO": "Rückgängig machen",
     "UNENROLL_RECIPIENTS": "Patienten abmelden",

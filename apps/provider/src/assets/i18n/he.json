@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "זו דוגמה למקום בו הטקסט מכל שדה יוכנס להודעה שקיבל המטופל.",
     "TRANSLATIONS": "תרגומים",
     "TRIGGER_HISTORY_EMPTY_LIST": "היסטוריית ההודעות ריקה להרשמה זו.",
+    "TRIGGER_PENDING_EMPTY_LIST": "אין פעולות בקרוב עבור ההרשמה הזו.",
     "TYPE": "סוג",
     "UNDO": "לבטל",
     "UNENROLL_RECIPIENTS": "בטל רישום של חולים",

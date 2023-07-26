@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Este é um exemplo de onde o texto de cada campo será colocado na mensagem recebida pelo paciente.",
     "TRANSLATIONS": "Traduções",
     "TRIGGER_HISTORY_EMPTY_LIST": "O histórico de mensagens está vazio para esta inscrição.",
+    "TRIGGER_PENDING_EMPTY_LIST": "Nenhuma ação futura para esta inscrição.",
     "TYPE": "Tipo",
     "UNDO": "Desfazer",
     "UNENROLL_RECIPIENTS": "Cancelar a inscrição de pacientes",

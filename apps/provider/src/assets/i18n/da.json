@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Dette er et eksempel på, hvor teksten fra hvert felt placeres i den meddelelse, som patienten modtager.",
     "TRANSLATIONS": "Oversættelser",
     "TRIGGER_HISTORY_EMPTY_LIST": "Meddelelseshistorikken er tom for denne tilmelding.",
+    "TRIGGER_PENDING_EMPTY_LIST": "Ingen kommende handlinger for denne tilmelding.",
     "TYPE": "Type",
     "UNDO": "Fortryd",
     "UNENROLL_RECIPIENTS": "Fjern patienter",

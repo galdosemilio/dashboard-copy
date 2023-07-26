@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Questo è un esempio di dove sarà posizionato il testo di ogni campo nel messaggio ricevuto dal paziente.",
     "TRANSLATIONS": "Traduzioni",
     "TRIGGER_HISTORY_EMPTY_LIST": "La cronologia messaggi è vuota per questa iscrizione.",
+    "TRIGGER_PENDING_EMPTY_LIST": "Nessuna azione imminente per questa registrazione.",
     "TYPE": "Tipo di Attività",
     "UNDO": "Disfare",
     "UNENROLL_RECIPIENTS": "Iscrivere i pazienti",

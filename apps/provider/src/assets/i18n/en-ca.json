@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "This is an example of where the text from each field will be placed into the message received by the patient.",
     "TRANSLATIONS": "Translations",
     "TRIGGER_HISTORY_EMPTY_LIST": "Message history is empty for this enrollment.",
+    "TRIGGER_PENDING_EMPTY_LIST": "No upcoming actions for this enrollment.",
     "TYPE": "Type",
     "UNDO": "Undo",
     "UNENROLL_RECIPIENTS": "Unenroll Patients",

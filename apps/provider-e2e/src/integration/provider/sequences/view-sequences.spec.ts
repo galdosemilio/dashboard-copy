@@ -287,7 +287,7 @@ describe('Sequences -> view', function () {
     })
   })
 
-  it.only('Clinic shows properly sequence enrollments message logs', function () {
+  it('Clinic shows properly sequence enrollments message logs', function () {
     cy.setTimezone('et')
     standardSetup()
 
@@ -315,6 +315,32 @@ describe('Sequences -> view', function () {
       .eq(2)
       .should('contain', 'E-mail')
       .should('contain', 'Test email')
+  })
+
+  it('Should display blank slate when no upcoming messages', function () {
+    cy.setTimezone('et')
+    standardSetup()
+
+    cy.visit(`/sequences/sequence/${Cypress.env('sequenceId')}`)
+
+    cy.tick(10000)
+
+    cy.intercept('GET', '/1.0/sequence/transition/pending?**', {
+      statusCode: 200,
+      body: {
+        data: []
+      }
+    })
+
+    cy.get('[data-cy="sequence-button-enrollees"]').click()
+    cy.contains('search').click()
+
+    cy.get('[aria-label="Upcoming"]').click()
+
+    cy.get('[data-cy="datasource-overlay-error"]').should(
+      'have.text',
+      'No upcoming actions for this enrollment.'
+    )
   })
 })
 

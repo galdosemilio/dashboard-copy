@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Esto es un ejemplo de dónde se ubicará el texto de cada campo en el mensaje recibido por el paciente.",
     "TRANSLATIONS": "Traducciones",
     "TRIGGER_HISTORY_EMPTY_LIST": "El historial de mensajes está vacío para este enrolamiento",
+    "TRIGGER_PENDING_EMPTY_LIST": "No hay próximas acciones para esta inscripción.",
     "TYPE": "Tipo",
     "UNDO": "Deshacer",
     "UNENROLL_RECIPIENTS": "Remover Destinatarios",

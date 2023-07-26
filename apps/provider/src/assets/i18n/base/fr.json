@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "Ceci est un exemple de l'endroit où sera placé le texte de chaque champ dans le message reçu par le patient.",
     "TRANSLATIONS": "Traductions",
     "TRIGGER_HISTORY_EMPTY_LIST": "L’historique des messages est vide pour cette inscription",
+    "TRIGGER_PENDING_EMPTY_LIST": "Aucune action à venir pour cette inscription.",
     "TYPE": "Type",
     "UNDO": "Annuler",
     "UNENROLL_RECIPIENTS": "Désinscription des patients",

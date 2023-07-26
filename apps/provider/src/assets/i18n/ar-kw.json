@@ -1851,6 +1851,7 @@
     "TEMPLATE_EXAMPLE_DESCRIPTION": "هذا مثال على المكان الذي سيتم فيه وضع النص من كل حقل في الرسالة التي تلقاها المريض.",
     "TRANSLATIONS": "متواليات",
     "TRIGGER_HISTORY_EMPTY_LIST": "سجل الرسائل فارغ لهذا التسجيل.",
+    "TRIGGER_PENDING_EMPTY_LIST": "لا توجد إجراءات قادمة لهذا التسجيل.",
     "TYPE": "نوع",
     "UNDO": "الغاء التحميل",
     "UNENROLL_RECIPIENTS": "إلغاء تسجيل المرضى",
