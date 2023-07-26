@@ -138,6 +138,45 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
       })
   }
 
+  bloodPressureClasses(
+    diastolic?: number,
+    systolic?: number
+  ): { [key: string]: boolean } {
+    const defaultClasses = { 'column-bloodpressure': true }
+
+    if (!diastolic || !systolic) {
+      return defaultClasses
+    }
+
+    let additionalClass
+
+    if (systolic > 180 || diastolic > 120) {
+      additionalClass = 'ccr-blood-pressure-hypertensive-crisis'
+    } else if (systolic > 139 || diastolic > 89) {
+      additionalClass = 'ccr-blood-pressure-hypertension-stage-2'
+    } else if (
+      (systolic >= 130 && systolic <= 139) ||
+      (diastolic >= 80 && diastolic <= 89)
+    ) {
+      additionalClass = 'ccr-blood-pressure-hypertension-stage-1'
+    } else if (systolic < 90 || diastolic < 60) {
+      additionalClass = 'ccr-blood-pressure-hypotensive'
+    } else if (systolic >= 120 && systolic <= 129 && diastolic <= 79) {
+      additionalClass = 'ccr-blood-pressure-elevated'
+    } else if (
+      systolic >= 90 &&
+      systolic <= 119 &&
+      diastolic >= 60 &&
+      diastolic <= 79
+    ) {
+      additionalClass = 'ccr-blood-pressure-normal'
+    }
+
+    return additionalClass
+      ? { ...defaultClasses, [additionalClass]: true }
+      : defaultClasses
+  }
+
   convertToReadableFormat(
     value: number,
     type: MeasurementDataPointMinimalType,

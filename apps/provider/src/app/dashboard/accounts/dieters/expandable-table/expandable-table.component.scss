@@ -232,4 +232,30 @@ app-dieters-expandable-table {
       content: '• ';
     }
   }
+
+  .ccr-blood-pressure-hypotensive {
+    background-color: #b8cce4;
+  }
+
+  .ccr-blood-pressure-normal {
+    background-color: #a6ce39;
+  }
+
+  .ccr-blood-pressure-elevated {
+    background-color: #ffec00;
+  }
+
+  .ccr-blood-pressure-hypertension-stage-1 {
+    background-color: #ffb601;
+  }
+
+  .ccr-blood-pressure-hypertension-stage-2 {
+    background-color: #bb3a02;
+    color: white;
+  }
+
+  .ccr-blood-pressure-hypertensive-crisis {
+    background-color: #990612;
+    color: white;
+  }
 }

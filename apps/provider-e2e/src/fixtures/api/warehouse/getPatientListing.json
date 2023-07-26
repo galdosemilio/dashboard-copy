@@ -23,7 +23,46 @@
           "percentage": -9.23
         }
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 59,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 89,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -58,7 +97,46 @@
           }
         }
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 78,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 119,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -97,7 +175,46 @@
           "percentage": -9.23
         }
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 78,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 121,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -121,7 +238,46 @@
         "email": "eric.dibari4@gmail.com",
         "startedAt": "2019-03-18T06:57:37.244+00:00"
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 81,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 131,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -145,7 +301,46 @@
         "email": "eric.dibari5@gmail.com",
         "startedAt": "2019-11-22T19:13:27.288+00:00"
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 90,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 140,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -169,7 +364,46 @@
         "email": "eric.dibari6@gmail.com",
         "startedAt": "2019-07-03T21:14:24.498+00:00"
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 121,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 181,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -193,7 +427,46 @@
         "email": "eric.dibari7@gmail.com",
         "startedAt": "2019-08-13T03:40:52.065+00:00"
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 89,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 89,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -217,7 +490,46 @@
         "email": "eric.dibari8@gmail.com",
         "startedAt": "2018-12-14T18:34:23.569+00:00"
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 79,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 140,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
@@ -241,7 +553,46 @@
         "email": "eric.dibari9@gmail.com",
         "startedAt": "2019-08-16T17:57:33.23+00:00"
       },
-      "dataPoints": [],
+      "dataPoints": [
+        {
+          "id": "4297863",
+          "type": {
+            "id": "5",
+            "name": "Blood pressure - diastolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 89,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        },
+        {
+          "id": "4297862",
+          "type": {
+            "id": "6",
+            "name": "Blood pressure - systolic",
+            "unit": "mmHg",
+            "multiplier": 1,
+            "span": {
+              "id": "1",
+              "name": "Instant"
+            }
+          },
+          "value": 181,
+          "recordedAt": {
+            "utc": "2022-03-25T20:26:53.246+00:00",
+            "local": "2022-03-25T15:26:53.246",
+            "timezone": "America/Chicago"
+          }
+        }
+      ],
       "organizations": {
         "count": 1,
         "data": [
