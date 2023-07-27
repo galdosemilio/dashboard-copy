@@ -58,10 +58,10 @@ import { CcrTableSortDirective, RPMStatusDialog } from '@app/shared'
 import { DeviceDetectorService } from 'ngx-device-detector'
 import { CSV } from '@coachcare/common/shared'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
-import { RPMStateEntry } from '@app/shared/components/rpm/models'
 import { RPMMonthlySummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchRPMMonthlyBillingSummaryResponse.interface'
 import { CareManagementStateSummaryItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingSnapshotResponse.interface'
 import { CareManagementBillingMonthItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingMonthResponse.interface'
+import { CareManagementPermissionsService } from '@app/service/care-management-permissions.service'
 
 interface StorageFilter {
   selectedClinicId?: string
@@ -159,7 +159,8 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     private timezone: Timezone,
     private translator: TranslateService,
     private careManagementState: CareManagementState,
-    private careManagementService: CareManagementService
+    private careManagementService: CareManagementService,
+    private careManagementPermissions: CareManagementPermissionsService
   ) {
     this.sortHandler = this.sortHandler.bind(this)
   }
@@ -1304,31 +1305,35 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     this.paginator.firstPage()
   }
 
-  public onChangeSupervisingProvider(summary: any) {
-    const rpmEntry = new RPMStateEntry({
-      rpmState: {
-        ...summary.state,
-        account: summary.account,
-        organization: summary.organization
-      }
-    })
+  public async onChangeSupervisingProvider(summary: RPMStateSummaryEntry) {
+    await this.careManagementPermissions.init(summary.account.id)
+    const careEntries = this.careManagementPermissions.careEntries
+
+    const activeCareEntries = this.careManagementPermissions.activeCareEntries
+
+    const permissions = this.careManagementPermissions.permissions
+    const restrictions = this.careManagementPermissions.restrictions
 
     this.dialog
       .open(RPMStatusDialog, {
         data: {
-          accessibleOrganizations: [],
-          inaccessibleOrganizations: [],
-          mostRecentEntry: rpmEntry,
+          accessibleOrganizations: permissions,
+          inaccessibleOrganizations: restrictions,
+          careEntries,
+          activeCareEntries,
           initialStatus: 'edit_supervising_provider',
           closeAfterChange: true
         },
         width: '60vw'
       })
       .afterClosed()
-      .pipe(filter((entry) => entry?.rpmState?.supervisingProvider))
-      .subscribe((entry: RPMStateEntry) => {
-        summary.rpm.supervisingProvider = entry.rpmState.supervisingProvider
-        this.source.updateItem(summary)
+      .pipe(filter(({ rpmEntry }) => rpmEntry?.rpmState?.supervisingProvider))
+      .subscribe(({ rpmEntry }) => {
+        if (summary.state.isActive) {
+          summary.state.supervisingProvider =
+            rpmEntry.rpmState.supervisingProvider
+          this.source.updateItem(summary)
+        }
       })
   }
 

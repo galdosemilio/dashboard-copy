@@ -74,7 +74,7 @@ const testCurrentCTPCode = ({
   cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
   cy.get('.ccr-dashboard')
-  cy.get('[cy-data="care-management-state"]')
+  cy.get('[data-cy="care-management-state"]')
     .find('mat-select')
     .should('contain', 'RPM')
 
@@ -83,23 +83,23 @@ const testCurrentCTPCode = ({
   cy.wait(1000)
 
   if (isCompleted) {
-    cy.get('[cy-data="care-management-state"]')
+    cy.get('[data-cy="care-management-state"]')
       .find('.current-code')
       .should('not.exist')
 
-    cy.get('[cy-data="care-management-state"]')
+    cy.get('[data-cy="care-management-state"]')
       .find('.rpm-status-completed-icon')
       .should('exist')
 
-    cy.get('[cy-data="care-management-state"]')
+    cy.get('[data-cy="care-management-state"]')
       .find('.timer')
       .should('contain', '00:00 / 00:00')
   } else {
-    cy.get('[cy-data="care-management-state"]')
+    cy.get('[data-cy="care-management-state"]')
       .find('.current-code')
       .should('contain', code)
 
-    cy.get('[cy-data="care-management-state"]')
+    cy.get('[data-cy="care-management-state"]')
       .find('.timer')
       .should('contain', '00:00 / 20:00')
   }
@@ -224,7 +224,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.get('.ccr-dashboard')
-      cy.get('[cy-data="care-management-state"]')
+      cy.get('[data-cy="care-management-state"]')
         .find('mat-select')
         .should('contain', 'RPM')
 
@@ -399,8 +399,8 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.get('.ccr-dashboard')
-      cy.get('[cy-data="open-status-button"]').click()
-      cy.get('[cy-data="program_setting_button"]').click()
+      cy.get('[data-cy="open-status-button"]').click()
+      cy.get('[data-cy="program_setting_button"]').click()
 
       cy.get('app-dialog-care-mgmt-card').should('have.length', 2)
       cy.get('app-dialog-care-mgmt-card').eq(0).contains('RPM')
@@ -420,8 +420,8 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.get('.ccr-dashboard')
-      cy.get('[cy-data="open-status-button"]').click()
-      cy.get('[cy-data="program_setting_button"]').click()
+      cy.get('[data-cy="open-status-button"]').click()
+      cy.get('[data-cy="program_setting_button"]').click()
 
       cy.get('mat-dialog-container')
         .find('app-dialog-care-mgmt-card')
@@ -460,6 +460,11 @@ describe('Patient profile -> dashboard -> rpm', function () {
         .click({ force: true })
 
       cy.get('button').contains('Enable RPM').click({ force: true })
+
+      cy.get('.mat-snack-bar-container').should(
+        'have.text',
+        'The care service has been successfully enabled for this patient.'
+      )
     })
   })
 
@@ -487,14 +492,14 @@ describe('Patient profile -> dashboard -> rpm', function () {
         cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
         cy.get('.ccr-dashboard')
-        cy.get('[cy-data="care-management-state"]')
+        cy.get('[data-cy="care-management-state"]')
           .find('mat-select')
           .should('contain', entry.serviceType.name)
 
         cy.wait('@careManagementStates')
         cy.tick(1000)
         cy.wait(1000)
-        cy.get('[cy-data="open-status-button"]').click({ force: true })
+        cy.get('[data-cy="open-status-button"]').click({ force: true })
         cy.get('app-rpm-status-panel')
           .find('.code-container')
           .as('billingCodeRow')
@@ -515,7 +520,7 @@ function checkVisibility(visible: boolean, apiOverrides?: ApiOverrideEntry[]) {
 
   cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
   cy.get('.ccr-dashboard')
-  cy.get('[cy-data="care-management-state"]').should(
+  cy.get('[data-cy="care-management-state"]').should(
     visible ? 'exist' : 'not.exist'
   )
 }
@@ -527,7 +532,7 @@ function checkServiceSelection(serviceType?: { id: string; name: string }) {
   cy.get('.ccr-dashboard')
 
   if (serviceType) {
-    cy.get('[cy-data="care-management-state"]')
+    cy.get('[data-cy="care-management-state"]')
       .find('mat-select')
       .should('contain', serviceType.name)
       .then(() => {
@@ -539,7 +544,7 @@ function checkServiceSelection(serviceType?: { id: string; name: string }) {
       })
   } else {
     cy.wait(1000)
-    cy.get('[cy-data="care-management-state"]')
+    cy.get('[data-cy="care-management-state"]')
       .find('mat-select')
       .should('contain', '')
   }

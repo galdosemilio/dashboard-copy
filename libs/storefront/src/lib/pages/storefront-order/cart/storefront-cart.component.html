@@ -20,7 +20,7 @@
             <mat-icon>add</mat-icon>
           </button>
         </div>
-        <button cy-data="remove-item-button" mat-button (click)="onRemoveItem(lineItem.id)">{{ 'GLOBAL.REMOVE' | translate }}</button>
+        <button data-cy="remove-item-button" mat-button (click)="onRemoveItem(lineItem.id)">{{ 'GLOBAL.REMOVE' | translate }}</button>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
     <button
       mat-button
       class="ccr-button"
-      cy-data="checkout-button"
+      data-cy="checkout-button"
       routerLink="../checkout"
       queryParamsHandling="merge"
       [disabled]="!cart.lineItems.length"

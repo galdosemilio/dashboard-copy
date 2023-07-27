@@ -1,9 +1,9 @@
 import { selectAutocompleteOption } from '../../../helpers'
 
 export function openRPMDialog() {
-  cy.get('mat-slide-toggle:not(.mat-disabled)').trigger('click', {
-    force: true
-  })
+  cy.get('[data-cy="open-status-button"]').click()
+  cy.get('[data-cy="program_setting_button"]').click()
+  cy.get('app-dialog-care-mgmt-card').eq(0).find('button').click()
   cy.tick(1000)
 }
 
@@ -141,7 +141,7 @@ export function confirmSupervisingProviderName(coachName: string): void {
 export function confirmMessageNoSupervisingProvidersAvailable(
   openDialog: Function
 ): void {
-  cy.intercept('GET', '1.0/rpm/supervising-provider?**', {
+  cy.intercept('GET', '/1.0/care-management/supervising-provider?**', {
     data: [],
     pagination: {}
   })
@@ -155,10 +155,9 @@ export function confirmMessageNoSupervisingProvidersAvailable(
 }
 
 export function confirmPayloadOnSupervisingProviderUpdate(): void {
-  cy.get('ccr-search-selector').find('button').eq(0).trigger('click')
-  cy.get('ccr-search-selector').find('input').type('e')
+  cy.get('ccr-search-selector').eq(0).trigger('click')
+  cy.get('ccr-search-selector').find('input').type('test')
   cy.tick(10000)
-  cy.wait(1000)
   selectAutocompleteOption(0)
 
   cy.get('[data-cy="new-supervising-provider-explanation"]').type(
@@ -169,8 +168,13 @@ export function confirmPayloadOnSupervisingProviderUpdate(): void {
     'click'
   )
 
-  cy.wait('@setNewSupervisingProvider').should((xhr) => {
+  cy.wait('@careManagementSupervisingProviderPostRequest').should((xhr) => {
     expect(xhr.request.body.account).to.contain('7357')
     expect(xhr.request.body.note).to.equal('This is a test')
   })
+
+  cy.get('snack-bar-container').should(
+    'have.text',
+    'RPM preference updated successfully.'
+  )
 }

@@ -27,7 +27,7 @@ describe('Loading Storefront product dialog', function () {
   })
 
   it('should remove item', function () {
-    cy.get('.cart-item').eq(0).find('[cy-data="remove-item-button"]').click()
+    cy.get('.cart-item').eq(0).find('[data-cy="remove-item-button"]').click()
 
     cy.wait('@spreeCallRemoveItem').should((xhr) => {
       expect(xhr.request.url).to.contain(
@@ -38,7 +38,7 @@ describe('Loading Storefront product dialog', function () {
   })
 
   it('should goto checkout page', function () {
-    cy.get('[cy-data="checkout-button"]').click()
+    cy.get('[data-cy="checkout-button"]').click()
     cy.url().should('include', '/storefront/order/checkout')
   })
 })

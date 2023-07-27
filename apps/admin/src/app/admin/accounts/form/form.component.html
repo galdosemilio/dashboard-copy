@@ -191,7 +191,7 @@
 
     <button *ngIf="!readonly && id"
     mat-button type="button" color="primary"
-    class="ccr-icon-button" (click)="onUpdate()" cy-data="edit-button">
+    class="ccr-icon-button" (click)="onUpdate()" data-cy="edit-button">
       <mat-icon>save</mat-icon>
       {{ 'GLOBAL.UPDATE' | translate }}
     </button>

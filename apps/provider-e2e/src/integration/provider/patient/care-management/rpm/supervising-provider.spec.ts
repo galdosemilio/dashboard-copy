@@ -27,7 +27,7 @@ describe('Patient profile -> rpm -> Change Supervising Provider state', function
 
   it('Correct supervising provider is shown', function () {
     openDialogToChangeProvider()
-    confirmSupervisingProviderName('Inaccessible Coach')
+    confirmSupervisingProviderName('Eric Di Bari')
   })
 
   it('Proper message is shown when no supervising providers are available to change to', function () {

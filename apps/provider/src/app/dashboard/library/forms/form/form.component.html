@@ -11,10 +11,10 @@
       <button *ngIf="allowAccountChange && invalidAccount" mat-button color="primary" class="ccr-button" (click)="selectDieter()">
         {{ 'LIBRARY.FORMS.CHOOSE_ANOTHER_PATIENT' | translate }}
       </button>
-      <button cy-data="form-submission-patient-yes" *ngIf="!invalidAccount" (click)="selectDieter()" mat-button color="primary" class="ccr-button">
+      <button data-cy="form-submission-patient-yes" *ngIf="!invalidAccount" (click)="selectDieter()" mat-button color="primary" class="ccr-button">
           {{ 'GLOBAL.YES' | translate }}
       </button>
-      <button cy-data="form-submission-patient-no" *ngIf="!invalidAccount" mat-button class="ccr-button" (click)="account = undefined">
+      <button data-cy="form-submission-patient-no" *ngIf="!invalidAccount" mat-button class="ccr-button" (click)="account = undefined">
         {{ 'GLOBAL.NO' | translate }}
       </button>
     </div>

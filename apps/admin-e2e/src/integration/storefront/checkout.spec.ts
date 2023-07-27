@@ -13,38 +13,38 @@ describe('Loading Storefront product dialog', function () {
   it('should load checkout page', function () {
     cy.get('.cart-items-wrap').find('.cart-item').should('have.length', 1)
 
-    cy.get('[cy-data="shipping-address"]')
-      .find('[cy-data="shipping-address-name"]')
+    cy.get('[data-cy="shipping-address"]')
+      .find('[data-cy="shipping-address-name"]')
       .contains('Admin Coachcare')
-    cy.get('[cy-data="shipping-address"]')
-      .find('[cy-data="shipping-address-street"]')
+    cy.get('[data-cy="shipping-address"]')
+      .find('[data-cy="shipping-address-street"]')
       .contains('250 King St')
-    cy.get('[cy-data="shipping-address"]')
-      .find('[cy-data="shipping-address-city-state"]')
+    cy.get('[data-cy="shipping-address"]')
+      .find('[data-cy="shipping-address-city-state"]')
       .contains('San Francisco, CA 94107')
 
-    cy.get('[cy-data="shipping-method"]').contains('Free shipping - $0.00')
+    cy.get('[data-cy="shipping-method"]').contains('Free shipping - $0.00')
 
-    cy.get('[cy-data="payment-method"]').contains('Visa ***4242 4/2024')
+    cy.get('[data-cy="payment-method"]').contains('Visa ***4242 4/2024')
 
-    cy.get('[cy-data="billing-address"]')
-      .find('[cy-data="billing-address-name"]')
+    cy.get('[data-cy="billing-address"]')
+      .find('[data-cy="billing-address-name"]')
       .contains('Admin Coachcare')
-    cy.get('[cy-data="billing-address"]')
-      .find('[cy-data="billing-address-street"]')
+    cy.get('[data-cy="billing-address"]')
+      .find('[data-cy="billing-address-street"]')
       .contains('4200 Leeland St')
-    cy.get('[cy-data="billing-address"]')
-      .find('[cy-data="billing-address-city-state"]')
+    cy.get('[data-cy="billing-address"]')
+      .find('[data-cy="billing-address-city-state"]')
       .contains('Houston, TX 77023')
   })
 
   it('should go to cart page', function () {
-    cy.get('[cy-data="cart-items"]').find('button').click()
+    cy.get('[data-cy="cart-items"]').find('button').click()
     cy.url().should('include', '/storefront/order/cart')
   })
 
   it('should update shipping address', function () {
-    cy.get('[cy-data="shipping-address"]').find('button').click()
+    cy.get('[data-cy="shipping-address"]').find('button').click()
 
     cy.get('ccr-storefront-address-dialog').should('have.length', 1)
     cy.get('input[data-placeholder="Address Line 2"]').type('#12')
@@ -58,7 +58,7 @@ describe('Loading Storefront product dialog', function () {
   })
 
   it('should update billing address', function () {
-    cy.get('[cy-data="billing-address"]').find('button').click()
+    cy.get('[data-cy="billing-address"]').find('button').click()
 
     cy.get('ccr-storefront-address-dialog').should('have.length', 1)
     cy.get('input[data-placeholder="Address Line 2"]').type('#12')
@@ -72,7 +72,7 @@ describe('Loading Storefront product dialog', function () {
   })
 
   it('should place an order', function () {
-    cy.get('[cy-data="place-button"]').click()
+    cy.get('[data-cy="place-button"]').click()
 
     cy.wait('@spreeCallPlaceOrder').should((xhr) => {
       expect(xhr.request.url).to.contain(`api/v2/storefront/checkout/complete`)

@@ -162,7 +162,12 @@ export class RPMStatusDialog implements OnInit {
     this.dialogRef
       .beforeClosed()
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.dialogRef.close(this.isChangedCareEntries))
+      .subscribe(() => {
+        this.dialogRef.close({
+          rpmEntry: this.rpmEntry,
+          isChangedCareEntries: this.isChangedCareEntries
+        })
+      })
   }
 
   getCareEntry(id: string): RPMStateEntry | null {

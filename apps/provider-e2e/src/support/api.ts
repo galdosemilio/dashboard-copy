@@ -336,6 +336,9 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/2.0/package/enrollment?**', {
     fixture: 'api/package/getEnrollments1'
   })
+  cy.intercept('GET', '/2.0/package/enrollment/latest?**', {
+    fixture: 'api/package/getEnrollments1'
+  })
   cy.intercept('GET', '/2.0/package/organization?**', {
     fixture: 'api/package/getPackages'
   })
@@ -886,6 +889,24 @@ const interceptCoreApiCalls = (
       'api/care-management/getCareStates'
     )
   }).as('careManagementStates')
+
+  cy.intercept('GET', '/1.0/care-management/supervising-provider?**', {
+    fixture: 'api/care-management/getSupervisingProvider'
+  })
+
+  cy.intercept('POST', '/1.0/care-management/state', {
+    statusCode: 200,
+    body: {}
+  })
+
+  cy.intercept('GET', '/1.0/care-management/state/**/diagnosis/audit?**', {
+    fixture: 'api/rpm/rpmStateAuditEntries.json'
+  })
+
+  cy.intercept('POST', '/1.0/care-management/state/**/supervising-provider', {
+    statusCode: 200,
+    body: {}
+  }).as('careManagementSupervisingProviderPostRequest')
 
   cy.intercept('GET', '/1.0/tenant/sharp/report/range-aggregate?**', {
     fixture: fetchOverride(

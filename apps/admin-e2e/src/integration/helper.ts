@@ -14,7 +14,7 @@ export const checkForEditAndDeleteAccount = (
     cy.get('button.ccr-button', { timeout: 10000 }).eq(0).click()
   } else {
     cy.get('.ccr-action-buttons')
-      .get('[cy-data="edit-button"]', { timeout: 10000 })
+      .get('[data-cy="edit-button"]', { timeout: 10000 })
       .eq(0)
       .click()
   }

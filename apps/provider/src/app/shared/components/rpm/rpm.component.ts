@@ -12,21 +12,17 @@ import {
 } from '@app/service'
 import { RPMStatusDialog } from '@app/shared/dialogs'
 import {
-  AccountProvider,
-  AccSingleResponse,
-  OrganizationProvider,
   OrganizationAccess,
   CareManagementState,
   CareManagementStateEntity
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
-import { flatMap, sortBy, uniqBy } from 'lodash'
-import * as moment from 'moment'
 import { RPMStateEntry } from './models'
 import { debounceTime, filter } from 'rxjs/operators'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE } from '@app/config'
+import { CareManagementPermissionsService } from '@app/service/care-management-permissions.service'
 
 @UntilDestroy()
 @Component({
@@ -48,14 +44,13 @@ export class RPMComponent implements OnInit {
   activeCareEntries: RPMStateEntry[] = []
 
   constructor(
-    private account: AccountProvider,
     private cdr: ChangeDetectorRef,
     private context: ContextService,
     private dialog: MatDialog,
     private notifier: NotifierService,
     private builder: FormBuilder,
-    private organization: OrganizationProvider,
-    private careManagementState: CareManagementState
+    private careManagementState: CareManagementState,
+    private careManagementPermissions: CareManagementPermissionsService
   ) {}
 
   async ngOnInit() {
@@ -174,7 +169,7 @@ export class RPMComponent implements OnInit {
         width: '60vw'
       })
       .afterClosed()
-      .pipe(filter((changed) => changed === true))
+      .pipe(filter(({ isChangedCareEntries }) => isChangedCareEntries === true))
       .subscribe(() => {
         void this.resolveServiceTypes(this.context.organization)
       })
@@ -183,66 +178,14 @@ export class RPMComponent implements OnInit {
   private async refresh() {
     try {
       this.isLoading = true
-      const accessibleOrgs = (
-        await this.organization.getAccessibleList({
-          account: this.context.accountId,
-          limit: 'all',
-          offset: 0
-        })
-      ).data
+      await this.careManagementPermissions.init(this.context.accountId)
+      this.rpmEntries = this.careManagementPermissions.careEntries
 
-      const accessibleCareServices =
-        this.context.accessibleCareManagementServiceTypes.slice()
+      this.activeCareEntries = this.careManagementPermissions.activeCareEntries
 
-      const promises = flatMap(
-        accessibleCareServices.map((careService) =>
-          accessibleOrgs.map((org) =>
-            this.careManagementState.getList({
-              account: this.context.accountId,
-              organization: org.organization.id,
-              serviceType: careService.id,
-              limit: 'all',
-              offset: 0
-            })
-          )
-        )
-      )
-
-      const responses = await Promise.all(promises)
-      let allEntries = flatMap(responses.map((response) => [...response.data]))
-
-      allEntries = uniqBy(allEntries, 'id')
-      this.rpmEntries = allEntries
-        .slice()
-        .map((entry) => new RPMStateEntry({ rpmState: entry }))
-      this.activeCareEntries = this.rpmEntries.filter((entry) => entry.isActive)
-      this.mostRecentEntry = new RPMStateEntry({
-        rpmState: sortBy(allEntries, (entry) => moment(entry.createdAt)).pop()
-      })
-
-      if (this.mostRecentEntry.rpmState.createdBy) {
-        this.mostRecentEntry.rpmState.createdBy =
-          await this.resolveCreatedByAccount(
-            this.mostRecentEntry.rpmState.createdBy.id
-          )
-      }
-
-      const permissionPromises = accessibleOrgs.map((org) =>
-        this.resolveOrgPermissions(org)
-      )
-      const restrictionPromises = accessibleOrgs.map((org) =>
-        this.resolveOrgPermissions(org, false)
-      )
-
-      const permissions = (await Promise.all(permissionPromises)).filter(
-        (org) => !!org
-      )
-      const restrictions = (await Promise.all(restrictionPromises)).filter(
-        (org) => !!org
-      )
-
-      this.accessibleOrganizations = permissions
-      this.inaccessibleOrganizations = restrictions
+      this.accessibleOrganizations = this.careManagementPermissions.permissions
+      this.inaccessibleOrganizations =
+        this.careManagementPermissions.restrictions
 
       this.isLoading = false
       this.cdr.detectChanges()
@@ -250,47 +193,5 @@ export class RPMComponent implements OnInit {
       console.error(error)
       this.isLoading = false
     }
-  }
-
-  private async resolveCreatedByAccount(
-    id: string
-  ): Promise<AccSingleResponse> {
-    try {
-      return await this.account.getSingle(id)
-    } catch (error) {
-      return {
-        id: '',
-        accountType: undefined,
-        firstName: _('BOARD.INACCESSIBLE_PROVIDER'),
-        lastName: '',
-        email: '',
-        preferredLocales: [],
-        preference: {},
-        createdAt: '',
-        isActive: true,
-        measurementPreference: 'metric',
-        timezone: '',
-        phone: '',
-        countryCode: '',
-        phoneType: 'ios'
-      }
-    }
-  }
-
-  private async resolveOrgPermissions(
-    organization,
-    positivePermission: boolean = true
-  ) {
-    return (await this.context.orgHasPerm(
-      organization.organization.id,
-      'admin',
-      false
-    ))
-      ? positivePermission
-        ? organization
-        : undefined
-      : positivePermission
-      ? undefined
-      : organization
   }
 }

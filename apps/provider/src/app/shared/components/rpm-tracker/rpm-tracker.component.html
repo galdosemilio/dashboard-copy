@@ -5,7 +5,7 @@
     </div>
     <mat-icon *ngIf="timeTrackingComplete" class="rpm-status-completed-icon">check_circle_outline</mat-icon>
     <span class="timer"><strong>{{ timerDisplay }}</strong> / {{ requiredIterationSecondsDisplay }}</span>
-    <div cy-data="open-status-button" class="info-icon" #toggleButton></div>
+    <div data-cy="open-status-button" class="info-icon" #toggleButton></div>
 </div>
 
 <div #statusPanel>

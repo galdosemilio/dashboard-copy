@@ -14,7 +14,7 @@ describe('Dashboard -> Digital Library -> Forms -> Form -> Form Submission', fun
 
     cy.visit(`/library/forms/${Cypress.env('formId')}/fill`)
 
-    cy.get('[cy-data="form-submission-patient-yes"]').click()
+    cy.get('[data-cy="form-submission-patient-yes"]').click()
 
     cy.tick(10000)
 
@@ -89,7 +89,7 @@ describe('Dashboard -> Digital Library -> Forms -> Form -> Form Submission', fun
 
     cy.visit(`/library/forms/${Cypress.env('formId')}/fill`)
 
-    cy.get('[cy-data="form-submission-patient-yes"]').click()
+    cy.get('[data-cy="form-submission-patient-yes"]').click()
 
     cy.tick(10000)
 

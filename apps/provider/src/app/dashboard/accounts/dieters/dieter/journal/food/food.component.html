@@ -1,13 +1,13 @@
 <div class="ccr-container">
   <div class="food-circle-list">
-    <div class="food-circle" cy-data="food-circle">
+    <div class="food-circle" data-cy="food-circle">
       <progress-circle class="calories"
         [headertext]="'GRAPH.DAILY_AVG_CALORIES' | translate"
         [value]="data.calories.avg"
         [maximumvalue]="data.calories.goal">
       </progress-circle>
     </div>
-    <div class="food-circle" cy-data="food-circle">
+    <div class="food-circle" data-cy="food-circle">
       <progress-circle class="protein"
         [headertext]="'GRAPH.DAILY_AVG_PROTEIN' | translate"
         [value]="data.protein.avg / 1000"
@@ -16,7 +16,7 @@
         [measurementUnit]="'g'">
       </progress-circle>
     </div>
-    <div class="food-circle" cy-data="food-circle">
+    <div class="food-circle" data-cy="food-circle">
       <progress-circle class="carb"
         [headertext]="'GRAPH.DAILY_AVG_CARB' | translate"
         [value]="data.carbohydrate.avg / 1000"
@@ -28,7 +28,7 @@
       <p class="subtext">{{ 'GRAPH.DAILY_AVG_FIBER' | translate }} <span class="subtext-value">{{ data.fiber.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
       <p class="subtext">{{ 'GRAPH.DAILY_AVG_SUGAR' | translate }} <span class="subtext-value">{{ data.sugar.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
     </div>
-    <div class="food-circle" cy-data="food-circle">
+    <div class="food-circle" data-cy="food-circle">
       <progress-circle class="fat"
         [headertext]="'GRAPH.DAILY_AVG_FAT' | translate"
         [value]="data.totalFat.avg / 1000"
@@ -38,7 +38,7 @@
       </progress-circle>
       <p class="subtext">{{ 'GRAPH.DAILY_AVG_S_FAT' | translate }} <span class="subtext-value">{{ data.saturatedFat.avg / 1000 | number:'1.0-1' }}{{ 'UNIT.G' | translate }}</span></p>
     </div>
-    <div class="food-circle gray-box" cy-data="food-circle">
+    <div class="food-circle gray-box" data-cy="food-circle">
       <p class="subtext">{{ 'GRAPH.DAILY_AVG_SODIUM' | translate }} <span class="subtext-value">{{ data.sodium.avg | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
       <p class="subtext">{{ 'GRAPH.DAILY_AVG_CHOLESTEROL' | translate }} <span class="subtext-value">{{ data.cholesterol.avg | number:'1.0-1' }}{{ 'UNIT.MGR' | translate }}</span></p>
     </div>
