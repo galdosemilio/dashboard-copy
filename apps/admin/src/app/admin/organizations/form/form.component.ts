@@ -5,7 +5,9 @@ import { OrganizationsDatabase } from '@coachcare/backend/data'
 import {
   NamedEntity,
   OrganizationProvider,
-  OrganizationSingle
+  OrganizationSingle,
+  Timezone,
+  TimezoneResponse
 } from '@coachcare/sdk'
 import { FormUtils } from '@coachcare/backend/shared'
 import { _ } from '@coachcare/backend/shared'
@@ -16,6 +18,7 @@ import {
 } from '@coachcare/common/services'
 import { OrganizationRoutes } from '@board/services'
 import * as moment from 'moment'
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'ccr-organizations-form',
@@ -31,16 +34,20 @@ export class OrganizationsFormComponent implements OnInit {
   plans: NamedEntity[] = []
   readonly = true
   colSpan = 2
+  lang: string
+  timezones: Array<TimezoneResponse> = this.timezone.fetch()
 
   constructor(
     private builder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private database: OrganizationsDatabase,
+    private timezone: Timezone,
     private notifier: NotifierService,
     private dialogs: CcrOrganizationDialogs,
     private organization: OrganizationProvider,
-    public routes: OrganizationRoutes
+    public routes: OrganizationRoutes,
+    private translator: TranslateService
   ) {}
 
   ngOnInit() {
@@ -72,6 +79,11 @@ export class OrganizationsFormComponent implements OnInit {
         this.billingForm.controls['isBillable'].enable()
       }
     })
+
+    this.lang = this.translator.currentLang.split('-')[0]
+    this.translator.onLangChange.subscribe(
+      (event: LangChangeEvent) => (this.lang = event.lang.split('-')[0])
+    )
   }
 
   async createForms(): Promise<void> {
@@ -81,6 +93,7 @@ export class OrganizationsFormComponent implements OnInit {
         id: this.id,
         name: [null, Validators.required],
         shortcode: null,
+        timezone: 'America/New_York',
         contact: this.builder.group({
           firstName: [null, Validators.required],
           lastName: [null, Validators.required],

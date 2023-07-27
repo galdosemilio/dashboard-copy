@@ -24,6 +24,16 @@
             </mat-form-field>
           </mat-grid-tile>
 
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-select [disabled]="readonly" formControlName="timezone" [placeholder]="'GLOBAL.TIMEZONE' | translate">
+                <mat-option *ngFor="let timezone of timezones" [value]="timezone.code">
+                  {{ timezone.lang[lang] }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
         </mat-grid-list>
       </div>
     </div>
