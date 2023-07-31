@@ -20,6 +20,6 @@ export class RPMEntryCardComponent {
   @Input() rpmEntry: RPMStateEntry
 
   get serviceName(): string {
-    return (this.rpmEntry.rpmState as any).serviceType.name // @TODO: remove the 'any' once the property has been added to the SDK
+    return this.rpmEntry.rpmState.serviceType.name
   }
 }

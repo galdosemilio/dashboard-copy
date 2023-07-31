@@ -1,7 +1,7 @@
 import { SelectedOrganization } from '@app/service'
 import {
   CareManagementServiceType,
-  RPMState as SelveraRPMState
+  CareManagementStateEntity
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
 import * as moment from 'moment'
@@ -15,7 +15,7 @@ interface RPMEntryTrigger {
   displayName: string
 }
 
-interface RPMState extends SelveraRPMState {
+interface RPMState extends CareManagementStateEntity {
   status: RPMEntryStatus
   trigger: RPMEntryTrigger
 }
@@ -52,7 +52,7 @@ export class RPMStateEntry {
   isActive: boolean
   pending?: RPMStateEntryPendingStatus
   organization: SelectedOrganization
-  rpmState: RPMState // @TODO: add 'serviceType' property in the SDK
+  rpmState: RPMState
   serviceType: CareManagementServiceType
 
   constructor(args: any, opts: any = {}) {
