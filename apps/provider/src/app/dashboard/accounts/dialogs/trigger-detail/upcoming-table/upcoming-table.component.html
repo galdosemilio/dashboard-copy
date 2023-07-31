@@ -43,7 +43,7 @@ fxLayoutGap="10px">
                 fxLayoutAlign="start center"
                 fxLayoutAlign.xs=" center"
                 fxFlex.xs="grow">
-                    {{ row.transitionAt | amDateFormat:'h:mm a' }}
+                    {{ row.transitionAt.replace("Z", "") | amDateFormat:'h:mm a' }}
                 </mat-cell>
                 </ng-container>
 
