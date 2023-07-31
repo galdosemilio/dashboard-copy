@@ -191,6 +191,8 @@ jobs:
             echo "export GH_TOKEN=$COACHCARE_AUTH_TOKEN" >> $BASH_ENV
       - run:
           name: Publish new release
+          environment:
+            HUSKY: 0
           command: npx semantic-release
 
   provider_e2e_parallel:
