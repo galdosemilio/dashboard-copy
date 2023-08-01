@@ -59,7 +59,10 @@ export class AccountEditDialog implements OnInit {
 
       await this.account.update({
         ...data,
-        client: { ...acc.clientData, startedAt: data.startedAt }
+        client: {
+          ...acc.clientData,
+          startedAt: data.startedAt.format('YYYY-MM-DD')
+        }
       })
 
       // return the result to the caller component

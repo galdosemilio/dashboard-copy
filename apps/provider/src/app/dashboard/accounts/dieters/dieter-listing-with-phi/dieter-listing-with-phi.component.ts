@@ -451,7 +451,7 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
           this.csvSeparator +
           `"${d.weight?.change ? d.weight.change.percent + ' ' + '%' : ''}"` +
           this.csvSeparator +
-          `"${moment(d.startedAt).format('YYYY-MM-DD')}"` +
+          `"${d.startedAt}"` +
           this.csvSeparator +
           `"${
             d.weight?.start

@@ -53,7 +53,7 @@ export class CcrDateInputComponent
   datepickerMode: 'datepicker' | 'text' = 'datepicker'
   form: FormGroup
   format: string
-  lastValidDate: string
+  lastValidDate: moment.Moment
   private parentControl: AbstractControl
   propagateChange: (date: moment.Moment) => {}
 
@@ -137,7 +137,7 @@ export class CcrDateInputComponent
     this.datepickerMode = 'datepicker'
     this.cdr.detectChanges()
     if (this.lastValidDate) {
-      this.form.controls.date.setValue(moment(this.lastValidDate).toISOString())
+      this.form.controls.date.setValue(moment(this.lastValidDate))
     } else if (this.allowsEmpty) {
       this.form.controls.date.setValue(null)
     }
@@ -175,7 +175,7 @@ export class CcrDateInputComponent
       if (this.datepickerMode === 'text') {
         momentDate = moment(controls.textDate, this.format)
         this.lastValidDate = this.form.controls.textDate.valid
-          ? momentDate.toISOString()
+          ? momentDate
           : moment()
         if (this.form.controls.textDate.valid) {
           this.propagateChange(

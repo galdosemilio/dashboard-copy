@@ -76,53 +76,32 @@ const STORAGE_PATIENTS_FILTERS = 'ccrPatientsFilters'
 
 describe('Patient Listing', function () {
   it('Start Date not affected by time or timezone offset (ET)', function () {
-    cy.setTimezone('et')
-    standardSetup()
-
-    cy.visit(`/accounts/patients`)
-
-    cy.get('table', { timeout: 10000 })
+    goToPatients('et')
     cy.clock().tick(10000)
 
-    cy.get('[data-cy="startDate"]')
-      .eq(0)
-      .should('contain', 'Jun 21, 2019')
-      .should('contain', '(193 days)')
-
-    cy.get('[data-cy="startDate"]')
-      .eq(1)
-      .should('contain', 'Jun 21, 2019')
-      .should('contain', '(193 days)')
+    for (let i = 0; i < 3; i += 1) {
+      cy.get('[data-cy="startDate"]')
+        .eq(i)
+        .should('contain', 'Jun 21, 2019')
+        .should('contain', '(193 days)')
+    }
   })
 
   it('Start Date not affected by time or timezone offset (AET)', function () {
-    cy.setTimezone('aet')
-    standardSetup()
-
-    cy.visit(`/accounts/patients`)
-
-    cy.get('table', { timeout: 10000 })
+    goToPatients('aet')
     cy.clock().tick(10000)
 
-    cy.get('[data-cy="startDate"]')
-      .eq(0)
-      .should('contain', 'Jun 21, 2019')
-      .should('contain', '(194 days)')
-
-    cy.get('[data-cy="startDate"]')
-      .eq(1)
-      .should('contain', 'Jun 21, 2019')
-      .should('contain', '(194 days)')
+    for (let i = 0; i < 3; i += 1) {
+      cy.get('[data-cy="startDate"]')
+        .eq(i)
+        .should('contain', 'Jun 21, 2019')
+        .should('contain', '(194 days)')
+    }
   })
 
   it('Properly sorts the content based on the clicked header', function () {
-    cy.setTimezone('aet')
-    standardSetup()
-
-    cy.visit(`/accounts/patients`)
-
-    cy.get('table', { timeout: 10000 })
-    cy.tick(10000)
+    goToPatients('aet')
+    cy.clock().tick(10000)
 
     cy.get('thead').find('td').as('headerColumns')
 
@@ -230,12 +209,7 @@ describe('Patient Listing', function () {
 
   it('should change the pagination size and store the value', () => {
     window.localStorage.removeItem(STORAGE_PATIENTS_FILTERS)
-    cy.setTimezone('aet')
-    standardSetup()
-
-    cy.visit(`/accounts/patients`)
-
-    cy.get('table', { timeout: 10000 })
+    goToPatients('aet')
     cy.tick(10000)
 
     cy.wait('@patientListingGetRequest')
@@ -261,12 +235,7 @@ describe('Patient Listing', function () {
 
   it('should change the page and store the value', () => {
     window.localStorage.removeItem(STORAGE_PATIENTS_FILTERS)
-    cy.setTimezone('aet')
-    standardSetup()
-
-    cy.visit(`/accounts/patients`)
-
-    cy.get('table', { timeout: 10000 })
+    goToPatients('aet')
     cy.tick(10000)
 
     cy.wait('@patientListingGetRequest')
@@ -291,28 +260,25 @@ describe('Patient Listing', function () {
   })
 
   it('Properly exports csv report', function () {
-    cy.setTimezone('et')
-    standardSetup()
+    goToPatients('et')
 
-    cy.visit(`/accounts/patients`)
-
-    cy.get('table', { timeout: 10000 })
     cy.clock().tick(10000)
 
     cy.get('[data-cy="download-csv-button"]').click()
 
     cy.readFile(
       `${Cypress.config('downloadsFolder')}/CoachCare_Patient_List_csv.csv`
-    )
+    ).then((res) => {
+      const csv = csvJSON(res)
+
+      for (let i = 0; i < 3; i += 1) {
+        expect(csv[i]['Start Date']).to.equal('2019-06-21')
+      }
+    })
   })
 
   it('should display the correct color rating for blood pressure', () => {
-    cy.setTimezone('aet')
-    standardSetup()
-
-    cy.visit(`/accounts/patients`)
-
-    cy.get('table', { timeout: 10000 }).as('table')
+    goToPatients('aet')
     cy.tick(10000)
 
     cy.wait('@patientListingGetRequest')
@@ -378,12 +344,7 @@ const checkListFiltersAndPagination = (
   { page = 0, pageSize = 10, packages }: PatientsFilters,
   isClearedSession = false
 ) => {
-  cy.setTimezone('aet')
-  standardSetup()
-
-  cy.visit(`/accounts/patients`)
-
-  cy.get('table', { timeout: 10000 })
+  goToPatients('aet')
   cy.tick(10000)
 
   cy.wait('@patientListingGetRequest')
@@ -438,4 +399,31 @@ function getBloodPressureDateCell(patientIndex: number) {
     .eq(patientIndex)
     .find('td.column-bloodpressure')
     .next()
+}
+
+function goToPatients(timezone: string) {
+  cy.setTimezone(timezone)
+  standardSetup()
+
+  cy.visit(`/accounts/patients`)
+
+  cy.get('table', { timeout: 10000 }).as('table')
+}
+
+function csvJSON(csv) {
+  const lines = csv.split('\n')
+  const result = []
+  const headers = lines[1].split(',')
+
+  for (let i = 2; i < lines.length; i++) {
+    if (!lines[i]) continue
+    const obj = {}
+    const currentline = lines[i].split(',')
+
+    for (let j = 0; j < headers.length; j++) {
+      obj[headers[j]] = currentline[j].replace('"', '').replace('"', '')
+    }
+    result.push(obj)
+  }
+  return result
 }

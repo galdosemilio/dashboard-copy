@@ -19,7 +19,7 @@
     "height": 191,
     "gender": "male",
     "bmr": 2,
-    "startedAt": "2019-06-21T00:00:00.000+00:00"
+    "startedAt": "2019-06-21T00:00:00.000-10:00"
   },
   "preference": {
     "defaultOrganization": "1"

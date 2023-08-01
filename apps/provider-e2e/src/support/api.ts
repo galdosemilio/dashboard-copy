@@ -48,6 +48,12 @@ const interceptCoreApiCalls = (
 
   cy.intercept('GET', '/2.0/session', { fixture: 'api/session/get' })
   cy.intercept('GET', `/2.0/account/${Cypress.env('clientId')}`, {
+    fixture: fetchOverride(
+      `/2.0/account/${Cypress.env('clientId')}`,
+      'api/account/getSinglePatient'
+    )
+  })
+  cy.intercept('GET', `/2.0/account/${Cypress.env('clientId')}`, {
     fixture: 'api/account/getSinglePatient'
   })
   cy.intercept('GET', '/2.0/organization/*?**', {

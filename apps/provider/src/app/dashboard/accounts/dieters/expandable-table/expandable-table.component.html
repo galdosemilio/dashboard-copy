@@ -271,7 +271,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
 </ng-template>
 
 <ng-template #longdatereg let-date="date" let-totalDays="totalDays">
-    {{ date | amUtc | amDateFormat:'MMM D, YYYY' }}&nbsp;
+    {{ date | amDateFormat:'MMM D, YYYY' }}&nbsp;
     ({{ totalDays }} {{ 'UNIT.DAYS' | translate }})
 </ng-template>
 

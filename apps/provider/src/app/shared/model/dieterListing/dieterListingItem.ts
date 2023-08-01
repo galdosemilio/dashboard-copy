@@ -50,7 +50,7 @@ export class DieterListingItem implements ExpandableTableItem {
       args.packages && args.packages.length
         ? args.packages.map((pkg) => new DieterListingPackageItem(pkg))
         : []
-    this.startedAt = args.startedAt || ''
+    this.startedAt = args.startedAt?.split('T')[0] || ''
 
     if (args.weight) {
       this.weight = {} as any
@@ -77,9 +77,7 @@ export class DieterListingItem implements ExpandableTableItem {
     }
 
     if (this.startedAt) {
-      this.totalDays = Math.abs(
-        moment(this.startedAt.split('T')[0]).diff(moment(), 'days')
-      )
+      this.totalDays = Math.abs(moment(this.startedAt).diff(moment(), 'days'))
     }
 
     if (args.dateOfBirth) {

@@ -263,9 +263,8 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
           account['clientBirthday'] = moment(account.clientData.birthday).utc()
           break
         case 'startedAt':
-          account['clientStartedAt'] = moment(
-            account.clientData.startedAt
-          ).utc()
+          const startedAt = account.clientData.startedAt.split('T')[0]
+          account['clientStartedAt'] = moment(startedAt)
           break
         default:
           const key = 'client' + field.replace(/\b\w/g, (f) => f.toUpperCase())
@@ -295,7 +294,7 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
       data.clientBirthday = data.clientBirthday.format('YYYY-MM-DD')
     }
     if (data.clientStartedAt) {
-      data.clientStartedAt = data.clientStartedAt.toISOString().slice(0, 10)
+      data.clientStartedAt = data.clientStartedAt.format('YYYY-MM-DD')
     }
 
     // collect the goals
