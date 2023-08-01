@@ -62,7 +62,8 @@ export class AccountFormComponent implements OnInit {
           }
         }
 
-        if (!this.item.phone.countryCode) {
+        if (!this.item.phone?.countryCode) {
+          this.item.phone = this.item.phone ?? {}
           this.item.phone.countryCode = '+1'
         }
 
