@@ -696,6 +696,13 @@ export class ClinicPatientCodeComponent implements OnInit {
         iteration1,
         iteration2
       }
+      // The final case is to verify if the standalone code is satisfied.  We assume here that _all_ standalone codes are strictly monitoring time
+    } else if (
+      lastEligibilityValidForThisMonth === 0 &&
+      billingEntry.eligibility?.next?.monitoring?.total?.seconds?.tracked <
+        billingEntry.eligibility?.next?.monitoring?.total?.seconds?.required
+    ) {
+      return 0
     } else {
       return 1
     }

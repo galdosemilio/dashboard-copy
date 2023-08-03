@@ -35,13 +35,13 @@
     <div class="ccr-expandable-table">
       <table matSort matSortActive="uniqueRPMEpisodesOfCare" matSortDirection="desc" (matSortChange)="sortData($event)">
         <caption hidden>{{ 'REPORTS.CLINIC_PATIENT_CODE' | translate }}</caption>
-        <thead>
+        <thead data-cy="clinic-patient-code-report-table-header">
           <th mat-sort-header="id">ID</th>
           <th mat-sort-header="name">Name</th>
           <th mat-sort-header="uniqueRPMEpisodesOfCare">Episodes of Care</th>
           <th *ngFor="let heading of headings">{{ heading }}</th>
         </thead>
-        <tbody data-cy="clinic-patient-code-report-table">
+        <tbody data-cy="clinic-patient-code-report-table-body">
           <tr
             *ngFor="let org of tableData; let i = index"
             [ngClass]="{

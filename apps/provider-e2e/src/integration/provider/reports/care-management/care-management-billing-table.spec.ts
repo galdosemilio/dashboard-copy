@@ -1,5 +1,5 @@
 import { standardSetup } from '../../../../support'
-import { getRpmBillingRows } from '../../../../support/care-management'
+import { getCareManagementBillingRows } from '../../../../support/care-management'
 
 const billingCodes = {
   '1': ['99453', '99454', '99457', '99458 (1)', '99458 (2)'],
@@ -34,18 +34,22 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
 
   it('Table shows RPM billing data with proper names: no pagination', function () {
     standardSetup()
-    getRpmBillingRows()
+    getCareManagementBillingRows()
 
-    cy.get('@rpmBillingRows').should('have.length', 5)
+    cy.get('@careManagementBillingRows').should('have.length', 5)
 
-    cy.get('@rpmBillingRows')
+    cy.get('@careManagementBillingRows')
       .eq(2)
       .should('contain', 'Eric')
       .should('contain', 'Di Bari')
 
-    cy.get('@rpmBillingRows').eq(2).find('td').eq(6).should('contain', 'test')
+    cy.get('@careManagementBillingRows')
+      .eq(2)
+      .find('td')
+      .eq(6)
+      .should('contain', 'test')
 
-    cy.get('@rpmBillingRows')
+    cy.get('@careManagementBillingRows')
       .eq(0)
       .should('contain', 'Lascario')
       .should('contain', 'Pacheco')
@@ -73,16 +77,22 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       ]
     })
 
-    getRpmBillingRows()
+    getCareManagementBillingRows()
     cy.get('[data-cy="page-size-selector"]').select('10')
     cy.wait('@careManagementBillingSnapshot')
     cy.tick(1000)
     cy.get('button[aria-label="Next page"]').click()
-    cy.get('@rpmBillingRows').eq(0).find('.first-name-cell span').click()
+    cy.get('@careManagementBillingRows')
+      .eq(0)
+      .find('.first-name-cell span')
+      .click()
     cy.go('back')
-    getRpmBillingRows()
+    getCareManagementBillingRows()
 
-    cy.get('@rpmBillingRows').eq(0).find('.id-cell').should('contain', '11')
+    cy.get('@careManagementBillingRows')
+      .eq(0)
+      .find('.id-cell')
+      .should('contain', '11')
   })
 
   it('Table shows RTM billing data with proper names: no pagination', function () {
@@ -94,7 +104,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
         }
       ]
     })
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       serviceType: {
         id: '3',
         name: 'RTM',
@@ -104,7 +114,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
 
     checkBillingCodes('3')
     cy.get('table').find('th').eq(5).should('contain', 'Device Type')
-    cy.get('@rpmBillingRows').should('have.length', 5)
+    cy.get('@careManagementBillingRows').should('have.length', 5)
   })
 
   it('Table shows CCM billing data with proper names: no pagination', function () {
@@ -117,7 +127,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       ]
     })
 
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       serviceType: {
         id: '2',
         name: 'CCM',
@@ -128,7 +138,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
     checkBillingCodes('2')
 
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
-    cy.get('@rpmBillingRows').should('have.length', 1)
+    cy.get('@careManagementBillingRows').should('have.length', 1)
   })
 
   it('Table shows BHI billing data with proper names: no pagination', function () {
@@ -141,7 +151,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       ]
     })
 
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       serviceType: {
         id: '5',
         name: 'BHI',
@@ -152,7 +162,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
     checkBillingCodes('5')
 
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
-    cy.get('@rpmBillingRows').should('have.length', 2)
+    cy.get('@careManagementBillingRows').should('have.length', 2)
   })
 
   it('Table shows PCM billing data with proper names: no pagination', function () {
@@ -165,7 +175,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       ]
     })
 
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       serviceType: {
         id: '4',
         name: 'PCM',
@@ -175,15 +185,15 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
 
     checkBillingCodes('4')
     cy.get('table').find('th').eq(5).should('not.contain', 'Device Type')
-    cy.get('@rpmBillingRows').should('have.length', 1)
+    cy.get('@careManagementBillingRows').should('have.length', 1)
   })
 
   it('Shows the total count underneath the title', function () {
     standardSetup()
 
-    getRpmBillingRows()
+    getCareManagementBillingRows()
 
-    cy.get('@rpmBillingRows').should('have.length', 5)
+    cy.get('@careManagementBillingRows').should('have.length', 5)
     cy.get('app-reports-rpm-billing')
       .find('.count')
       .should('contain', '5 Patients')
@@ -192,7 +202,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
   it('Shows error message for no selected clinic', function () {
     standardSetup()
 
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       selectedClinicId: null,
       getTable: false
     })
@@ -210,7 +220,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       ]
     })
 
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       serviceType: {
         id: '2',
         name: 'CCM',
@@ -232,7 +242,7 @@ describe('Reports -> RPM -> Care Management Billing Table', function () {
       ]
     })
 
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       getTable: false
     })
 

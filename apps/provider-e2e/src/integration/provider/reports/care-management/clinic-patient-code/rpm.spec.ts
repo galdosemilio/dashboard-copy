@@ -1,6 +1,6 @@
-import { standardSetup } from '../../../../support'
+import { standardSetup } from '../../../../../support'
 
-describe('Reports -> Care Managment -> Clinic Patient Code Report', function () {
+describe('Reports -> Care Managment -> Clinic Patient Code Report -> RPM', function () {
   beforeEach(() => {
     cy.setTimezone('et')
   })
@@ -18,7 +18,9 @@ describe('Reports -> Care Managment -> Clinic Patient Code Report', function () 
     })
     cy.visit(`/reports/rpm/clinic-patient-code`)
 
-    cy.get('[data-cy="clinic-patient-code-report-table"]').as('reportTable')
+    cy.get('[data-cy="clinic-patient-code-report-table-body"]').as(
+      'reportTable'
+    )
 
     cy.tick(10000)
 
@@ -62,7 +64,9 @@ describe('Reports -> Care Managment -> Clinic Patient Code Report', function () 
     })
     cy.visit(`/reports/rpm/clinic-patient-code`)
 
-    cy.get('[data-cy="clinic-patient-code-report-table"]').as('reportTable')
+    cy.get('[data-cy="clinic-patient-code-report-table-body"]').as(
+      'reportTable'
+    )
 
     cy.tick(10000)
 
@@ -105,7 +109,9 @@ describe('Reports -> Care Managment -> Clinic Patient Code Report', function () 
     })
     cy.visit(`/reports/rpm/clinic-patient-code`)
 
-    cy.get('[data-cy="clinic-patient-code-report-table"]').as('reportTable')
+    cy.get('[data-cy="clinic-patient-code-report-table-body"]').as(
+      'reportTable'
+    )
 
     cy.tick(10000)
 
@@ -148,7 +154,9 @@ describe('Reports -> Care Managment -> Clinic Patient Code Report', function () 
     })
     cy.visit(`/reports/rpm/clinic-patient-code`)
 
-    cy.get('[data-cy="clinic-patient-code-report-table"]').as('reportTable')
+    cy.get('[data-cy="clinic-patient-code-report-table-body"]').as(
+      'reportTable'
+    )
 
     cy.tick(10000)
 
@@ -191,7 +199,9 @@ describe('Reports -> Care Managment -> Clinic Patient Code Report', function () 
     })
     cy.visit(`/reports/rpm/clinic-patient-code`)
 
-    cy.get('[data-cy="clinic-patient-code-report-table"]').as('reportTable')
+    cy.get('[data-cy="clinic-patient-code-report-table-body"]').as(
+      'reportTable'
+    )
 
     cy.tick(10000)
 
@@ -233,13 +243,17 @@ describe('Reports -> Care Managment -> Clinic Patient Code Report', function () 
       ]
     })
     cy.visit(`/reports/rpm/clinic-patient-code`)
-    cy.get('[data-cy="clinic-patient-code-report-table"]').as('reportTable')
+    cy.get('[data-cy="clinic-patient-code-report-table-body"]').as(
+      'reportTable'
+    )
     cy.tick(10000)
     cy.get('@reportTable').get('tr').eq(0).as('firstRow')
     cy.get('[data-cy="download-csv-button"]')
       .should('be.visible')
       .should('contain', 'Export CSV')
       .click()
+
+    cy.wait(1500)
 
     cy.readFile(
       Cypress.config().downloadsFolder +
