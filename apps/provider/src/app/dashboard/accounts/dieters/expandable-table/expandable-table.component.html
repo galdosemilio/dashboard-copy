@@ -178,7 +178,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
       </td>
       <td *ngIf="row.level === 0" [ngClass]="bloodPressureClasses(row.dataPoints?.['5']?.value, row.dataPoints?.['6']?.value)">
         <div *ngIf="row.dataPoints?.['5'] && row.dataPoints?.['6']; else empty">
-          {{ row.dataPoints['5'].recordedAt | amUtc | amDateFormat:'MMM D, YYYY' }}
+          {{ row.dataPoints['5'].recordedAt.utc | amUtc | amDateFormat:'MMM D, YYYY' }}
         </div>
       </td>
       <td *ngIf="row.level === 0" class="column-currentweight">

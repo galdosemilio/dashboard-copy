@@ -318,36 +318,59 @@ describe('Patient Listing', function () {
     cy.wait('@patientListingGetRequest')
     cy.wait('@patientListingGetRequest')
 
-    getBloodPressureCell(0).should(
+    getBloodPressureReadingCell(0).should(
       'have.class',
       'ccr-blood-pressure-hypotensive'
     )
-    getBloodPressureCell(1).should('have.class', 'ccr-blood-pressure-normal')
-    getBloodPressureCell(2).should('have.class', 'ccr-blood-pressure-elevated')
-    getBloodPressureCell(3).should(
+    getBloodPressureReadingCell(1).should(
+      'have.class',
+      'ccr-blood-pressure-normal'
+    )
+    getBloodPressureReadingCell(2).should(
+      'have.class',
+      'ccr-blood-pressure-elevated'
+    )
+    getBloodPressureReadingCell(3).should(
       'have.class',
       'ccr-blood-pressure-hypertension-stage-1'
     )
-    getBloodPressureCell(4).should(
+    getBloodPressureReadingCell(4).should(
       'have.class',
       'ccr-blood-pressure-hypertension-stage-2'
     )
-    getBloodPressureCell(5).should(
+    getBloodPressureReadingCell(5).should(
       'have.class',
       'ccr-blood-pressure-hypertensive-crisis'
     )
-    getBloodPressureCell(6).should(
+    getBloodPressureReadingCell(6).should(
       'have.class',
       'ccr-blood-pressure-hypertension-stage-1'
     )
-    getBloodPressureCell(7).should(
+    getBloodPressureReadingCell(7).should(
       'have.class',
       'ccr-blood-pressure-hypertension-stage-2'
     )
-    getBloodPressureCell(8).should(
+    getBloodPressureReadingCell(8).should(
       'have.class',
       'ccr-blood-pressure-hypertensive-crisis'
     )
+  })
+
+  it('should display the correct date for blood pressure reading', () => {
+    cy.setTimezone('aet')
+    standardSetup()
+
+    cy.visit(`/accounts/patients`)
+
+    cy.get('table', { timeout: 10000 }).as('table')
+    cy.tick(10000)
+
+    cy.wait('@patientListingGetRequest')
+    cy.wait('@patientListingGetRequest')
+
+    getBloodPressureDateCell(0).should('contain', 'Apr 25, 2022')
+    getBloodPressureDateCell(1).should('contain', 'Feb 25, 2022')
+    getBloodPressureDateCell(2).should('contain', 'Mar 25, 2022')
   })
 })
 
@@ -398,11 +421,21 @@ const checkListFiltersAndPagination = (
     .contains(`${page + 1} / ${Math.ceil(604 / pageSize)}`)
 }
 
-function getBloodPressureCell(patientIndex: number) {
+function getBloodPressureReadingCell(patientIndex: number) {
   return cy
     .get('@table')
     .find('tbody')
     .find('tr.level0')
     .eq(patientIndex)
     .find('td.column-bloodpressure')
+}
+
+function getBloodPressureDateCell(patientIndex: number) {
+  return cy
+    .get('@table')
+    .find('tbody')
+    .find('tr.level0')
+    .eq(patientIndex)
+    .find('td.column-bloodpressure')
+    .next()
 }
