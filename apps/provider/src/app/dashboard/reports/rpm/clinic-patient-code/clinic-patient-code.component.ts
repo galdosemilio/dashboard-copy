@@ -119,11 +119,16 @@ export class ClinicPatientCodeComponent implements OnInit {
     this.source.addDefault({ status: 'active', limit: 'all', offset: 0 })
     this.source.addRequired(
       this.form.valueChanges.pipe(debounceTime(500)),
-      () => ({
-        asOf: this.form.value.asOf.format('YYYY-MM-DD'),
-        serviceType: this.form.value.serviceType || undefined,
-        organization: environment.coachcareOrgId
-      })
+      () => {
+        const now = moment()
+        const asOf = this.form.value.asOf.endOf('day')
+
+        return {
+          asOf: asOf.isBefore(now) ? asOf.toISOString() : undefined,
+          serviceType: this.form.value.serviceType || undefined,
+          organization: environment.coachcareOrgId
+        }
+      }
     )
     this.form.controls.asOf.valueChanges
       .pipe(debounceTime(500), untilDestroyed(this))
@@ -158,10 +163,12 @@ export class ClinicPatientCodeComponent implements OnInit {
   }
 
   private async resolveBillingCodes() {
-    const asOf = this.form.value.asOf ?? moment()
+    const asOf = (this.form.value.asOf ?? moment()).endOf('day')
+    const now = moment()
+
     const billingCodesResponse =
       await this.database.fetchCareManagementBillingCodes({
-        asOf: asOf.format('YYYY-MM-DD')
+        asOf: asOf.isBefore(now) ? asOf.toISOString() : undefined
       })
 
     this.billingCodes = billingCodesResponse.data
@@ -209,11 +216,14 @@ export class ClinicPatientCodeComponent implements OnInit {
   public async downloadCSV(): Promise<void> {
     try {
       this.isLoading = true
+      const now = moment()
+      const asOf = this.form.value.asOf.endOf('day')
+
       const res = await this.database.fetchCareManagementBillingSnapshot({
         status: 'active',
         limit: 'all',
         offset: 0,
-        asOf: this.form.value.asOf.format('YYYY-MM-DD'),
+        asOf: asOf.isBefore(now) ? asOf.toISOString() : undefined,
         organization: environment.coachcareOrgId
       })
 
