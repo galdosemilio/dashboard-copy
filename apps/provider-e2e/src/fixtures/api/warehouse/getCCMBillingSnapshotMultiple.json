@@ -18,7 +18,7 @@
           "code": "99439",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
               "alreadyEligibleCount": 0,
               "monitoring": {
                 "total": {
@@ -47,7 +47,7 @@
           "code": "99490",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
               "monitoring": {
                 "total": {
                   "seconds": {
@@ -130,7 +130,7 @@
           "code": "99439",
           "eligibility": {
             "next": {
-              "earliestEligibleAt": "2020-02-01T11:00:00.000Z",
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
               "alreadyEligibleCount": 0,
               "monitoring": {
                 "total": {
@@ -158,31 +158,9 @@
         {
           "code": "99490",
           "eligibility": {
-            "next": {
-              "earliestEligibleAt": "2020-02-01T11:00:00.000Z",
-              "monitoring": {
-                "total": {
-                  "seconds": {
-                    "tracked": 1200,
-                    "required": 1200,
-                    "elapsed": 0
-                  }
-                },
-                "automated": {
-                  "seconds": {
-                    "elapsed": 0
-                  }
-                },
-                "calls": {
-                  "seconds": {
-                    "elapsed": 0
-                  }
-                }
-              },
-              "liveInteraction": {
-                "count": 0,
-                "required": 0
-              }
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 1
             }
           }
         }
@@ -241,8 +219,12 @@
         {
           "code": "99439",
           "eligibility": {
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 1
+            },
             "next": {
-              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "earliestEligibleAt": "2020-01-01T04:00:00Z",
               "alreadyEligibleCount": 1,
               "monitoring": {
                 "total": {
@@ -270,31 +252,9 @@
         {
           "code": "99490",
           "eligibility": {
-            "next": {
-              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
-              "monitoring": {
-                "total": {
-                  "seconds": {
-                    "tracked": 1200,
-                    "required": 1200,
-                    "elapsed": 0
-                  }
-                },
-                "automated": {
-                  "seconds": {
-                    "elapsed": 0
-                  }
-                },
-                "calls": {
-                  "seconds": {
-                    "elapsed": 0
-                  }
-                }
-              },
-              "liveInteraction": {
-                "count": 0,
-                "required": 0
-              }
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 1
             }
           }
         }
@@ -348,8 +308,12 @@
         {
           "code": "99439",
           "eligibility": {
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 1
+            },
             "next": {
-              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
+              "earliestEligibleAt": "2020-01-01T04:00:00Z",
               "alreadyEligibleCount": 2,
               "monitoring": {
                 "total": {
@@ -377,31 +341,9 @@
         {
           "code": "99490",
           "eligibility": {
-            "next": {
-              "earliestEligibleAt": "2020-02-01T04:00:00.000Z",
-              "monitoring": {
-                "total": {
-                  "seconds": {
-                    "tracked": 1200,
-                    "required": 1200,
-                    "elapsed": 0
-                  }
-                },
-                "automated": {
-                  "seconds": {
-                    "elapsed": 0
-                  }
-                },
-                "calls": {
-                  "seconds": {
-                    "elapsed": 0
-                  }
-                }
-              },
-              "liveInteraction": {
-                "count": 0,
-                "required": 0
-              }
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 1
             }
           }
         }

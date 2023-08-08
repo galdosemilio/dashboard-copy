@@ -109,6 +109,8 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
                 0
               )
             }
+          } else if (index === metStep) {
+            delete copiedBill.eligibility.last
           } else if (index < metStep) {
             if (monitoringRequired) {
               set(

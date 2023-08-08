@@ -55,6 +55,7 @@
                     </button>
 
                     <button
+                    data-cy="export-monitoring-report-button"
                     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
                     (click)="download('monitoring')"
                     mat-button class="ccr-align-center">
@@ -283,10 +284,10 @@
             <td *ngFor="let cptCode of cptCodes; let billingIndex = index" class="code-cell">
                 <div fxLayout="row" fxLayoutAlign="stretch center">
                     <div class="claim-date-subcell" fxFlex fxLayout="row" fxLayoutAlign="center center" data-cy="cpt-code-claim-date">
-                        <span *ngIf="row.state.plan; else empty" class="highlighted-cell">
+                        <span *ngIf="findBilling(row.billing, cptCode)?.eligibility.last" class="highlighted-cell">
                             {{ findBilling(row.billing, cptCode)?.eligibility.last?.timestamp | amDateFormat:'MM/DD/YYYY' }}
                         </span>
-                        <span *ngIf="!row.state.plan && billingIndex < 2" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
+                        <span *ngIf="!findBilling(row.billing, cptCode)?.eligibility.last" class="no-highlight">{{ 'GLOBAL.NA' | translate }}</span>
                     </div>
                     <div *ngIf="row.state.isActive; else emptyDiv" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" data-cy="cpt-code-next-claim-requirements">
                         <ng-container *ngFor="let codeRequirement of findBilling(row.billing, cptCode)?.eligibility.next?.relatedCodeRequirementsNotMet">
@@ -296,8 +297,6 @@
                             [text]="codeRequirement">
                             </ccr-rpm-dependency-icon>
                         </ng-container>
-
-                        <span *ngIf="!row.state.plan && billingIndex < 2" class="no-next-claim">{{ 'GLOBAL.NA' | translate }}</span>
 
                         <ccr-rpm-calendar-icon
                         *ngIf="findBilling(row.billing, cptCode)?.remainingDays"

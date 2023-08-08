@@ -1,5 +1,5 @@
 import { standardSetup } from '../../../../support'
-import { getRpmBillingRows } from '../../../../support/care-management'
+import { getCareManagementBillingRows } from '../../../../support/care-management'
 
 describe('Reports -> RPM -> Care Management Billing Codes', function () {
   beforeEach(() => {
@@ -7,115 +7,18 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
   })
 
   it('Table shows RPM CPT codes correctly', function () {
-    standardSetup()
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/warehouse/care-management/billing/snapshot**',
+          fixture: 'api/warehouse/getRPMBillingSnapshot-Codes'
+        }
+      ]
+    })
 
-    getRpmBillingRows()
+    getCareManagementBillingRows()
 
-    verifyCPTCode(
-      '99453',
-      0,
-      11,
-      '[data-cy="cpt-code-claim-date"]',
-      '11/16/2020'
-    )
-    verifyCPTCode(
-      '99453',
-      0,
-      12,
-      '[data-cy="cpt-code-next-claim-requirements"]',
-      null
-    )
-    verifyCPTCode('99454', 0, 12, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99454', 0, 12, 'ccr-rpm-calendar-icon', '31d')
-    verifyCPTCode('99454', 0, 12, 'ccr-rpm-scale-icon', '15')
-    verifyCPTCode('99457', 0, 13, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99457', 0, 13, 'ccr-rpm-calendar-icon', '31d')
-    verifyCPTCode('99457', 0, 13, 'ccr-rpm-clock-icon', '20m')
-    verifyCPTCode('99457', 0, 13, 'ccr-rpm-chat-icon', '1')
-
-    verifyCPTCode(
-      '99453',
-      1,
-      11,
-      '[data-cy="cpt-code-claim-date"]',
-      '01/31/2020'
-    )
-    verifyCPTCode('99453', 1, 12, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99454', 1, 12, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99454', 1, 12, 'ccr-rpm-calendar-icon', '32d')
-    verifyCPTCode('99454', 1, 12, 'ccr-rpm-scale-icon', '14')
-    verifyCPTCode('99457', 1, 13, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99457', 1, 13, 'ccr-rpm-calendar-icon', '32d')
-    verifyCPTCode('99457', 1, 13, 'ccr-rpm-clock-icon', '10m')
-    verifyCPTCode('99457', 1, 13, 'ccr-rpm-chat-icon', '1')
-
-    verifyCPTCode(
-      '99453',
-      2,
-      11,
-      '[data-cy="cpt-code-claim-date"]',
-      '02/01/2020'
-    )
-    verifyCPTCode(
-      '99453',
-      2,
-      12,
-      '[data-cy="cpt-code-next-claim-requirements"]',
-      null
-    )
-    verifyCPTCode('99454', 2, 12, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99454', 2, 12, 'ccr-rpm-calendar-icon', '31d')
-    verifyCPTCode('99454', 2, 12, 'ccr-rpm-scale-icon', null)
-    verifyCPTCode('99457', 2, 13, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99457', 2, 13, 'ccr-rpm-calendar-icon', '27d')
-    verifyCPTCode('99457', 2, 13, 'ccr-rpm-clock-icon', '10m')
-    verifyCPTCode('99457', 2, 13, 'ccr-rpm-chat-icon', null)
-
-    verifyCPTCode('99453', 3, 11, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99453', 3, 11, 'ccr-rpm-calendar-icon', '23d')
-    verifyCPTCode('99453', 3, 11, 'ccr-rpm-scale-icon', '5')
-    verifyCPTCode(
-      '99454',
-      3,
-      12,
-      '[data-cy="cpt-code-claim-date"]',
-      '12/31/2019'
-    )
-    verifyCPTCode('99454', 3, 12, 'ccr-rpm-calendar-icon', '16d')
-    verifyCPTCode('99454', 3, 12, 'ccr-rpm-scale-icon', null)
-    verifyCPTCode(
-      '99457',
-      3,
-      13,
-      '[data-cy="cpt-code-claim-date"]',
-      '12/31/2019'
-    )
-    verifyCPTCode('99457', 3, 13, 'ccr-rpm-calendar-icon', '31d')
-    verifyCPTCode('99457', 3, 13, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99457', 3, 13, 'ccr-rpm-chat-icon', null)
-
-    verifyCPTCode('99453', 4, 11, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99453', 4, 11, 'ccr-rpm-calendar-icon', '1d')
-    verifyCPTCode(
-      '99454',
-      4,
-      12,
-      '[data-cy="cpt-code-claim-date"]',
-      '01/01/2020'
-    )
-    verifyCPTCode('99454', 4, 12, 'ccr-rpm-calendar-icon', '1d')
-    verifyCPTCode('99454', 4, 12, 'ccr-rpm-scale-icon', null)
-    verifyCPTCode(
-      '99457',
-      4,
-      13,
-      '[data-cy="cpt-code-claim-date"]',
-      '12/31/2019'
-    )
-    verifyCPTCode('99457', 4, 13, '[data-cy="cpt-code-claim-date"]', null)
-    verifyCPTCode('99457', 4, 13, 'ccr-rpm-calendar-icon', null)
-    verifyCPTCode('99457', 4, 13, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99457', 4, 13, 'ccr-rpm-chat-icon', null)
+    checkRPMAndRTMRows(['99453', '99454', '99457', '99458'])
   })
 
   it('Table show CCM CPT codes correctly', () => {
@@ -128,7 +31,7 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       ]
     })
 
-    getRpmBillingRows({
+    getCareManagementBillingRows({
       serviceType: {
         id: '2',
         name: 'CCM',
@@ -136,7 +39,7 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       }
     })
 
-    // not started anything
+    verifyCPTCode('99490', 0, 10, '[data-cy="cpt-code-claim-date"]', null)
     verifyCPTCode(
       '99490',
       0,
@@ -144,11 +47,10 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99490', 0, 10, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99490', 0, 10, 'ccr-rpm-calendar-icon', '30d')
     verifyCPTCode('99490', 0, 10, 'ccr-rpm-clock-icon', '20m')
-    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode('99439 (1)', 0, 11, '[data-cy="cpt-code-claim-date"]', null)
     verifyCPTCode(
       '99439 (1)',
       0,
@@ -156,11 +58,10 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       '99490'
     )
-    verifyCPTCode('99439 (1)', 0, 11, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99439 (1)', 0, 11, 'ccr-rpm-calendar-icon', '30d')
     verifyCPTCode('99439 (1)', 0, 11, 'ccr-rpm-clock-icon', '20m')
-    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode('99439 (2)', 0, 12, '[data-cy="cpt-code-claim-date"]', null)
     verifyCPTCode(
       '99439 (2)',
       0,
@@ -168,12 +69,18 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       '99439'
     )
-    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-calendar-icon', '30d')
     verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-clock-icon', '20m')
-    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 0, 12, 'ccr-rpm-scale-icon', null)
 
-    // started but x1 is not satisfied and x2 is not satisfied
+    cy.wait(1000)
+
+    verifyCPTCode(
+      '99490',
+      1,
+      10,
+      '[data-cy="cpt-code-claim-date"]',
+      '01/31/2020'
+    )
     verifyCPTCode(
       '99490',
       1,
@@ -181,11 +88,10 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99490', 1, 10, 'ccr-rpm-calendar-icon', '32d')
+    verifyCPTCode('99490', 1, 10, 'ccr-rpm-calendar-icon', null)
     verifyCPTCode('99490', 1, 10, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode('99439 (1)', 1, 11, '[data-cy="cpt-code-claim-date"]', null)
     verifyCPTCode(
       '99439 (1)',
       1,
@@ -193,11 +99,10 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99439 (1)', 1, 11, 'ccr-rpm-calendar-icon', '32d')
+    verifyCPTCode('99439 (1)', 1, 11, 'ccr-rpm-calendar-icon', '30d')
     verifyCPTCode('99439 (1)', 1, 11, 'ccr-rpm-clock-icon', '15m')
-    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode('99439 (2)', 1, 12, '[data-cy="cpt-code-claim-date"]', null)
     verifyCPTCode(
       '99439 (2)',
       1,
@@ -205,12 +110,18 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       '99439'
     )
-    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-calendar-icon', '32d')
+    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-calendar-icon', '30d')
     verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-clock-icon', '20m')
-    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 1, 12, 'ccr-rpm-scale-icon', null)
 
-    // x1 is satisfied but x2 is not
+    cy.wait(1000)
+
+    verifyCPTCode(
+      '99490',
+      2,
+      10,
+      '[data-cy="cpt-code-claim-date"]',
+      '01/31/2020'
+    )
     verifyCPTCode(
       '99490',
       2,
@@ -218,11 +129,16 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99490', 2, 10, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99490', 2, 10, 'ccr-rpm-calendar-icon', null)
     verifyCPTCode('99490', 2, 10, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode(
+      '99439 (1)',
+      2,
+      11,
+      '[data-cy="cpt-code-claim-date"]',
+      '01/31/2020'
+    )
     verifyCPTCode(
       '99439 (1)',
       2,
@@ -230,11 +146,10 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99439 (1)', 2, 11, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99439 (1)', 2, 11, 'ccr-rpm-calendar-icon', null)
     verifyCPTCode('99439 (1)', 2, 11, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode('99439 (2)', 2, 12, '[data-cy="cpt-code-claim-date"]', null)
     verifyCPTCode(
       '99439 (2)',
       2,
@@ -242,12 +157,18 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-calendar-icon', null)
     verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-clock-icon', '10m')
-    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 2, 12, 'ccr-rpm-scale-icon', null)
 
-    // x1 is satisfied and x2 is satisfied
+    cy.wait(1000)
+
+    verifyCPTCode(
+      '99490',
+      3,
+      10,
+      '[data-cy="cpt-code-claim-date"]',
+      '01/31/2020'
+    )
     verifyCPTCode(
       '99490',
       3,
@@ -255,11 +176,16 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99490', 3, 10, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99490', 3, 10, 'ccr-rpm-calendar-icon', null)
     verifyCPTCode('99490', 3, 10, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode(
+      '99439 (1)',
+      3,
+      11,
+      '[data-cy="cpt-code-claim-date"]',
+      '01/31/2020'
+    )
     verifyCPTCode(
       '99439 (1)',
       3,
@@ -267,11 +193,16 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99439 (1)', 3, 11, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99439 (1)', 3, 11, 'ccr-rpm-calendar-icon', null)
     verifyCPTCode('99439 (1)', 3, 11, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-scale-icon', null)
 
+    verifyCPTCode(
+      '99439 (2)',
+      3,
+      12,
+      '[data-cy="cpt-code-claim-date"]',
+      '01/31/2020'
+    )
     verifyCPTCode(
       '99439 (2)',
       3,
@@ -279,12 +210,429 @@ describe('Reports -> RPM -> Care Management Billing Codes', function () {
       '[data-cy="cpt-code-next-claim-requirements"]',
       null
     )
-    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-calendar-icon', '31d')
+    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-calendar-icon', null)
     verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-clock-icon', null)
-    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-chat-icon', null)
-    verifyCPTCode('99439 (2)', 3, 12, 'ccr-rpm-scale-icon', null)
+  })
+
+  it('Table shows RTM CPT codes correctly', () => {
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/warehouse/care-management/billing/snapshot**',
+          fixture: 'api/warehouse/getRTMBillingSnapshot'
+        }
+      ]
+    })
+    getCareManagementBillingRows({
+      serviceType: {
+        id: '3',
+        name: 'RTM',
+        code: 'rtm'
+      }
+    })
+
+    checkRPMAndRTMRows(['98975', '98977', '98980', '98981'])
   })
 })
+
+function checkRPMAndRTMRows(codes: string[]) {
+  verifyCPTCode(codes[0], 0, 11, '[data-cy="cpt-code-claim-date"]', null)
+  verifyCPTCode(
+    codes[0],
+    0,
+    11,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[0], 0, 11, 'ccr-rpm-calendar-icon', '30d')
+
+  verifyCPTCode(codes[1], 0, 12, '[data-cy="cpt-code-claim-date"]', null)
+  verifyCPTCode(
+    codes[1],
+    0,
+    12,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[1], 0, 12, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(codes[1], 0, 12, 'ccr-rpm-scale-icon', '15')
+
+  verifyCPTCode(codes[2], 0, 13, '[data-cy="cpt-code-claim-date"]', null)
+  verifyCPTCode(
+    codes[2],
+    0,
+    13,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[2], 0, 13, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(codes[2], 0, 13, 'ccr-rpm-clock-icon', '20m')
+  verifyCPTCode(codes[2], 0, 13, 'ccr-rpm-chat-icon', '1')
+
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    0,
+    14,
+    '[data-cy="cpt-code-claim-date"]',
+    null
+  )
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    0,
+    14,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    codes[2]
+  )
+  verifyCPTCode(`${codes[3]} (1)`, 0, 14, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(`${codes[3]} (1)`, 0, 14, 'ccr-rpm-clock-icon', '20m')
+
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    0,
+    15,
+    '[data-cy="cpt-code-claim-date"]',
+    null
+  )
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    0,
+    15,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    codes[3]
+  )
+  verifyCPTCode(`${codes[3]} (2)`, 0, 15, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(`${codes[3]} (2)`, 0, 15, 'ccr-rpm-clock-icon', '20m')
+
+  cy.wait(1000)
+
+  verifyCPTCode(
+    codes[0],
+    1,
+    11,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[0],
+    1,
+    11,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[0], 1, 11, 'ccr-rpm-calendar-icon', null)
+
+  verifyCPTCode(codes[1], 1, 12, '[data-cy="cpt-code-claim-date"]', null)
+  verifyCPTCode(
+    codes[1],
+    1,
+    12,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[1], 1, 12, 'ccr-rpm-calendar-icon', '20d')
+  verifyCPTCode(codes[1], 1, 12, 'ccr-rpm-scale-icon', '15')
+
+  verifyCPTCode(codes[2], 1, 13, '[data-cy="cpt-code-claim-date"]', null)
+  verifyCPTCode(
+    codes[2],
+    1,
+    13,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[2], 1, 13, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(codes[2], 1, 13, 'ccr-rpm-clock-icon', '20m')
+  verifyCPTCode(codes[2], 1, 13, 'ccr-rpm-chat-icon', '1')
+
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    1,
+    14,
+    '[data-cy="cpt-code-claim-date"]',
+    null
+  )
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    1,
+    14,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    codes[2]
+  )
+  verifyCPTCode(`${codes[3]} (1)`, 1, 14, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(`${codes[3]} (1)`, 1, 14, 'ccr-rpm-clock-icon', '20m')
+
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    1,
+    15,
+    '[data-cy="cpt-code-claim-date"]',
+    null
+  )
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    1,
+    15,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    codes[3]
+  )
+  verifyCPTCode(`${codes[3]} (2)`, 1, 15, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(`${codes[3]} (2)`, 1, 15, 'ccr-rpm-clock-icon', '20m')
+
+  cy.wait(1000)
+
+  verifyCPTCode(
+    codes[0],
+    2,
+    11,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[0],
+    2,
+    11,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[0], 2, 11, 'ccr-rpm-calendar-icon', null)
+
+  verifyCPTCode(
+    codes[1],
+    2,
+    12,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[1],
+    2,
+    12,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[1], 2, 12, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(codes[1], 2, 12, 'ccr-rpm-scale-icon', null)
+
+  verifyCPTCode(codes[2], 2, 13, '[data-cy="cpt-code-claim-date"]', null)
+  verifyCPTCode(
+    codes[2],
+    2,
+    13,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[2], 2, 13, 'ccr-rpm-calendar-icon', '20d')
+  verifyCPTCode(codes[2], 2, 13, 'ccr-rpm-clock-icon', '10m')
+  verifyCPTCode(codes[2], 2, 13, 'ccr-rpm-chat-icon', '1')
+
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    2,
+    14,
+    '[data-cy="cpt-code-claim-date"]',
+    null
+  )
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    2,
+    14,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    codes[2]
+  )
+  verifyCPTCode(`${codes[3]} (1)`, 2, 14, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(`${codes[3]} (1)`, 2, 14, 'ccr-rpm-clock-icon', '20m')
+
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    2,
+    15,
+    '[data-cy="cpt-code-claim-date"]',
+    null
+  )
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    2,
+    15,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    codes[3]
+  )
+  verifyCPTCode(`${codes[3]} (2)`, 2, 15, 'ccr-rpm-calendar-icon', '30d')
+  verifyCPTCode(`${codes[3]} (2)`, 2, 15, 'ccr-rpm-clock-icon', '20m')
+
+  cy.wait(1000)
+
+  verifyCPTCode(
+    codes[0],
+    3,
+    11,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[0],
+    3,
+    11,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[0], 3, 11, 'ccr-rpm-calendar-icon', null)
+
+  verifyCPTCode(
+    codes[1],
+    3,
+    12,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[1],
+    3,
+    12,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[1], 3, 12, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(codes[1], 3, 12, 'ccr-rpm-scale-icon', null)
+
+  verifyCPTCode(
+    codes[2],
+    3,
+    13,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[2],
+    3,
+    13,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[2], 3, 13, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(codes[2], 3, 13, 'ccr-rpm-clock-icon', null)
+  verifyCPTCode(codes[2], 3, 13, 'ccr-rpm-chat-icon', null)
+
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    3,
+    14,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    3,
+    14,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(`${codes[3]} (1)`, 3, 14, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(`${codes[3]} (1)`, 3, 14, 'ccr-rpm-clock-icon', null)
+
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    3,
+    15,
+    '[data-cy="cpt-code-claim-date"]',
+    null
+  )
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    3,
+    15,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(`${codes[3]} (2)`, 3, 15, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(`${codes[3]} (2)`, 3, 15, 'ccr-rpm-clock-icon', '20m')
+
+  cy.wait(1000)
+
+  verifyCPTCode(
+    codes[0],
+    4,
+    11,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[0],
+    4,
+    11,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[0], 4, 11, 'ccr-rpm-calendar-icon', null)
+
+  verifyCPTCode(
+    codes[1],
+    4,
+    12,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[1],
+    4,
+    12,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[1], 4, 12, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(codes[1], 4, 12, 'ccr-rpm-scale-icon', null)
+
+  verifyCPTCode(
+    codes[2],
+    4,
+    13,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    codes[2],
+    4,
+    13,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(codes[2], 4, 13, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(codes[2], 4, 13, 'ccr-rpm-clock-icon', null)
+  verifyCPTCode(codes[2], 4, 13, 'ccr-rpm-chat-icon', null)
+
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    4,
+    14,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    `${codes[3]} (1)`,
+    4,
+    14,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(`${codes[3]} (1)`, 4, 14, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(`${codes[3]} (1)`, 4, 14, 'ccr-rpm-clock-icon', null)
+
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    4,
+    15,
+    '[data-cy="cpt-code-claim-date"]',
+    '01/31/2020'
+  )
+  verifyCPTCode(
+    `${codes[3]} (2)`,
+    4,
+    15,
+    '[data-cy="cpt-code-next-claim-requirements"]',
+    null
+  )
+  verifyCPTCode(`${codes[3]} (2)`, 4, 15, 'ccr-rpm-calendar-icon', null)
+  verifyCPTCode(`${codes[3]} (2)`, 4, 15, 'ccr-rpm-clock-icon', null)
+}
 
 function verifyCPTCode(
   cptCode: string,
@@ -303,14 +651,14 @@ function verifyCPTCode(
 
   // Test for the case where the icon is not shown
   if (element.includes('-icon') && displayedText === null) {
-    cy.get('@rpmBillingRows')
+    cy.get('@careManagementBillingRows')
       .eq(row)
       .find('td')
       .eq(column)
       .find(element)
       .should('not.exist')
   } else {
-    cy.get('@rpmBillingRows')
+    cy.get('@careManagementBillingRows')
       .eq(row)
       .find('td')
       .eq(column)

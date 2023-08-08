@@ -42,11 +42,7 @@ import {
   RPMBillingDataSource
 } from '../../services'
 import { criteriaSelector, ReportsState } from '../../store'
-import {
-  RPM_SINGLE_TIME_CODES,
-  RPMStateSummaryBilling,
-  RPMStateSummaryEntry
-} from '../models'
+import { RPMStateSummaryBilling, RPMStateSummaryEntry } from '../models'
 import {
   STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
   STORAGE_PAGE_SIZE_RPM_BILLING,
@@ -1094,7 +1090,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private getRPMBillingEntryContent(
-    billingEntry,
+    billingEntry: RPMStateSummaryBilling,
     entry: RPMStateSummaryEntry
   ): string {
     let csv = ''
@@ -1110,15 +1106,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     if (
       !billingEntry.eligibility.next ||
       !entry.state?.isActive ||
-      (billingEntry.code === '99458' &&
-        (billingEntry.eligibility.next?.alreadyEligibleCount ?? 0) >= 1 &&
-        !billingEntry.remainingDays)
+      (billingEntry.trackableCode?.maxEligibleAmount >= 2 &&
+        billingEntry.hasClaims)
     ) {
-      csv +=
-        billingEntry.hasClaims &&
-        RPM_SINGLE_TIME_CODES.indexOf(billingEntry.code) !== -1
-          ? '"N/A - once per episode of care"'
-          : '"N/A"'
+      csv += '"N/A"'
     } else {
       // Means we have next eligibility requirements that we should display
       csv += '"'
