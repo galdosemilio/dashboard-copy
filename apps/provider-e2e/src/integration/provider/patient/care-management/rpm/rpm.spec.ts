@@ -1,3 +1,4 @@
+import { Interception } from 'cypress/types/net-stubbing'
 import { standardSetup } from '../../../../../support'
 import { ApiOverrideEntry } from '../../../../../support/api'
 const STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE =
@@ -292,6 +293,94 @@ describe('Patient profile -> dashboard -> rpm', function () {
           isCompleted: true
         })
       })
+    })
+
+    describe('Time tracking paused modal', () => {
+      it(
+        'should display and send correct event data',
+        {
+          retries: {
+            runMode: 0,
+            openMode: 0
+          }
+        },
+        () => {
+          window.localStorage.setItem(
+            STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE,
+            '1'
+          )
+
+          standardSetup()
+
+          cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+          cy.get('app-rpm-tracker').click()
+
+          cy.tick(300300) // 5 minutes
+
+          cy.get('ccr-gesture-closing-dialog')
+            .should('contain', 'Time Tracking Paused')
+            .click()
+
+          cy.tick(60000) // 1 minute
+
+          cy.get('[data-cy="account-search-box"]')
+            .eq(1)
+            .type('eric')
+            .tick(10000) // 10 seconds
+            .wait(500)
+
+          cy.get('[data-cy="account-search-box"]').eq(1).focus()
+
+          cy.fixture('api/account/getSinglePatient').then((data) => {
+            data.id = 5
+            data.firstName = 'Alex'
+            data.lastName = 'Smith'
+            data.accountType.id = 5
+            data.email = 'eric.dibari2@gmail.com'
+
+            cy.intercept('GET', `/2.0/account/**`, {
+              body: data
+            })
+          })
+
+          cy.get('@accountActivityPostRequest.all').should('have.length', 3)
+          cy.get('.cdk-overlay-container').find('mat-option').eq(1).click()
+
+          cy.get('app-rpm-tracker').click()
+
+          cy.tick(60000)
+          cy.wait([
+            '@accountActivityPostRequest',
+            '@accountActivityPostRequest',
+            '@accountActivityPostRequest',
+            '@accountActivityPostRequest',
+            '@accountActivityPostRequest'
+          ])
+          cy.get<Interception>('@accountActivityPostRequest.all')
+            .should('have.length', 5)
+            .then((xhrs) => {
+              expect(xhrs[0].request.body.tags).to.include('mobile-app-warmup')
+              expect(xhrs[0].request.body.account).to.equal('3')
+              expect(xhrs[2].request.body.interaction.time.start).to.equal(
+                '2020-01-01T00:00:00.000Z'
+              )
+              expect(xhrs[2].request.body.interaction.time.end).to.equal(
+                '2020-01-01T00:05:00.300Z'
+              )
+              expect(xhrs[2].request.body.account).to.equal('3')
+              expect(xhrs[3].request.body.account).to.equal('5')
+              expect(xhrs[3].request.body.tags).to.include('mobile-app-warmup')
+              expect(xhrs[4].request.body.account).to.equal('5')
+              expect(xhrs[4].request.body.interaction.time.start).to.equal(
+                '2020-01-01T00:05:00.775Z'
+              )
+              expect(xhrs[4].request.body.interaction.time.end).to.equal(
+                '2020-01-01T00:06:10.600Z'
+              )
+            })
+        }
+      )
     })
   })
 

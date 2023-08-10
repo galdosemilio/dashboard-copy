@@ -167,7 +167,10 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
   private async handleSecondPassing(): Promise<void> {
     try {
-      if (this.seconds < this.requiredIterationSeconds) {
+      if (
+        this.seconds < this.requiredIterationSeconds ||
+        this.requiredIterationSeconds === 0
+      ) {
         return
       }
 
@@ -305,7 +308,10 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         this.showTimer = true
         this.cdr.detectChanges()
 
-        if (this.seconds < this.requiredIterationSeconds) {
+        if (
+          this.seconds < this.requiredIterationSeconds ||
+          this.requiredIterationSeconds === 0
+        ) {
           this.startTimer()
         } else {
           this.timeTrackingComplete = true

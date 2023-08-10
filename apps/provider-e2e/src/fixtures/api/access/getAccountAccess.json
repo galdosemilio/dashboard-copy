@@ -19,6 +19,24 @@
       ]
     },
     {
+      "id": "5",
+      "firstName": "Eric ",
+      "lastName": "Di Bari 2",
+      "email": "eric.dibari2@gmail.com",
+      "accountType": {
+        "id": "3",
+        "title": "Client"
+      },
+      "organizations": [
+        {
+          "id": "1",
+          "name": "CoachCare",
+          "createdAt": "2019-01-01T16:47:03.785945+00:00",
+          "accessType": "association"
+        }
+      ]
+    },
+    {
       "id": "3",
       "firstName": "Eric ",
       "lastName": "Di Bari",

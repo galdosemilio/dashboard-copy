@@ -827,6 +827,10 @@ const interceptCoreApiCalls = (
     body: { enrolled: true }
   })
 
+  cy.intercept('GET', '2.0/package/enrollment/latest?**', {
+    body: { data: [], pagination: {} }
+  })
+
   cy.intercept('GET', '1.0/warehouse/measurement/cohort/listing**', {
     fixture: 'api/warehouse/cohortListing'
   }).as('getCohortListingRequest')
