@@ -61,10 +61,12 @@ export function addStepAction(
     .contains('Add Action')
     .trigger('click')
 
+  cy.get('[data-cy="select-action-type-selector"]:last')
+    .trigger('click')
+    .wait(500)
+
   switch (actionType) {
     case StepActionType.NOTIFICATION:
-      cy.get('.mat-select-trigger:last').trigger('click').wait(500)
-
       cy.get('.mat-select-panel:last')
         .find('mat-option')
         .contains('Notification')
@@ -84,8 +86,6 @@ export function addStepAction(
         .type(values.message)
       break
     case StepActionType.EMAIL:
-      cy.get('.mat-select-trigger:last').trigger('click').wait(500)
-
       cy.get('.mat-select-panel:last')
         .find('mat-option')
         .contains('Email')
@@ -109,8 +109,6 @@ export function addStepAction(
         .type(values.message)
       break
     case StepActionType.SMS:
-      cy.get('.mat-select-trigger:last').trigger('click').wait(500)
-
       cy.get('.mat-select-panel:last')
         .find('mat-option')
         .contains('SMS')
@@ -396,6 +394,8 @@ export function selectEnrollmentStep(index: number): void {
     .find('.mat-select-trigger')
     .trigger('click', { force: true })
     .wait(500)
+
+  cy.tick(5000)
 
   cy.get('mat-option').eq(index).trigger('click', { force: true })
 

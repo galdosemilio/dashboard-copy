@@ -17,7 +17,7 @@
     <div class="message" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
         <div fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field class="ccr-form-field">
-                <mat-select formControlName="type">
+                <mat-select formControlName="type" data-cy="select-action-type-selector">
                     <mat-optgroup *ngIf="messageTypes && messageTypes.length" [label]="'SEQUENCING.MESSAGE' | translate">
                         <mat-option
                         *ngFor="let type of messageTypes"
@@ -74,7 +74,7 @@
         </div>
         <div *ngIf="messageType?.id === '2'" fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
             <mat-form-field class="ccr-form-field" fxFlex="31%">
-                <mat-select formControlName="deepLink">
+                <mat-select formControlName="deepLink" data-cy="sequence-deep-link-selector">
                     <mat-option value="">{{ 'SEQUENCING.NO_DEEP_LINK' | translate }}</mat-option>
                     <mat-option *ngFor="let deepLinkType of deepLinkTypes" [value]="deepLinkType.key">{{ deepLinkType.name }}</mat-option>
                 </mat-select>

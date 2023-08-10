@@ -14,7 +14,7 @@ fxLayoutGap="10px">
         [emptyMsg]="'SEQUENCING.TRIGGER_PENDING_EMPTY_LIST' | translate"
         [source]="source"
         class="ccr-table">
-            <mat-table [dataSource]="source">
+            <mat-table [dataSource]="rows">
                 <ng-container cdkColumnDef="type">
                 <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.TYPE' | translate }}</mat-header-cell>
                 <mat-cell
@@ -32,7 +32,7 @@ fxLayoutGap="10px">
                 fxLayoutAlign="start center"
                 fxLayoutAlign.xs=" center"
                 fxFlex.xs="grow">
-                    {{ row.transitionAt | amDateFormat:'ddd, MMM D YYYY' }}
+                    {{ row.transitionAt.replace('Z', '') | amDateFormat:'ddd, MMM D YYYY' }}
                 </mat-cell>
                 </ng-container>
 
@@ -43,7 +43,7 @@ fxLayoutGap="10px">
                 fxLayoutAlign="start center"
                 fxLayoutAlign.xs=" center"
                 fxFlex.xs="grow">
-                    {{ row.transitionAt.replace("Z", "") | amDateFormat:'h:mm a' }}
+                    {{ row.transitionAt.replace('Z', '') | amDateFormat:'h:mm a' }}
                 </mat-cell>
                 </ng-container>
 

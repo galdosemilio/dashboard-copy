@@ -2,7 +2,10 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatPaginator } from '@coachcare/material'
 import { Sequence } from '@app/dashboard/sequencing/models'
 import { ContextService } from '@app/service'
-import { GetAllSeqEnrollmentsResponse } from '@coachcare/sdk'
+import {
+  GetAllSeqEnrollmentsResponse,
+  TriggerHistoryItem
+} from '@coachcare/sdk'
 import {
   TriggerHistoryDatabase,
   TriggerHistoryDataSource
@@ -23,6 +26,7 @@ export class PreviousTableComponent implements OnInit {
 
   columns: string[] = ['type', 'createdAt', 'createdAtHour', 'content']
   source: TriggerHistoryDataSource
+  rows: TriggerHistoryItem[]
 
   constructor(
     private context: ContextService,
@@ -32,6 +36,9 @@ export class PreviousTableComponent implements OnInit {
   ngOnInit(): void {
     this.createSource()
     this.resolveData()
+    this.source.connect().subscribe((rows) => {
+      this.rows = rows.filter((item) => item.trigger)
+    })
   }
 
   private createSource(): void {

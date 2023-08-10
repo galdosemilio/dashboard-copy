@@ -18,7 +18,8 @@ export class TriggerHistoryDataSource
     PagedResponse<TriggerHistoryItem>,
     GetSequenceTriggerHistoryRequest
   >
-  implements OnInit {
+  implements OnInit
+{
   messageTypes: MessageType[] = []
 
   constructor(
@@ -28,8 +29,8 @@ export class TriggerHistoryDataSource
     super()
     if (this.paginator) {
       this.addOptional(this.paginator.page, () => ({
-        limit: this.paginator.pageSize,
-        offset: this.paginator.pageIndex * this.paginator.pageSize
+        limit: this.paginator.pageSize || 10,
+        offset: this.paginator.pageIndex * this.paginator.pageSize || 0
       }))
     }
   }
@@ -51,6 +52,8 @@ export class TriggerHistoryDataSource
   }
 
   mapResult(result: PagedResponse<TriggerHistoryItem>): TriggerHistoryItem[] {
+    this.getTotal(result)
+
     const mappedResult = result.data.map((triggerHistoryItem) => ({
       ...triggerHistoryItem,
       payload: {

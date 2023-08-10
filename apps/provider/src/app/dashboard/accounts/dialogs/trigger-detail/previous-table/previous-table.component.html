@@ -14,7 +14,7 @@ fxLayoutGap="10px">
         [emptyMsg]="'SEQUENCING.TRIGGER_HISTORY_EMPTY_LIST' | translate"
         [source]="source"
         class="ccr-table">
-            <mat-table [dataSource]="source">
+            <mat-table [dataSource]="rows">
                 <ng-container cdkColumnDef="type">
                 <mat-header-cell *cdkHeaderCellDef>{{ 'SEQUENCING.TYPE' | translate }}</mat-header-cell>
                 <mat-cell

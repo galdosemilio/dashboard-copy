@@ -23,6 +23,8 @@ describe('Sequence -> View -> Enrollments', function () {
   })
 
   it('Properly enrolls a bunch of patients', function () {
+    cy.wait(1500)
+
     cy.get('user-search').find('input').type('Test')
     cy.tick(10000)
     selectAutocompleteOption(0)
@@ -44,6 +46,9 @@ describe('Sequence -> View -> Enrollments', function () {
   })
 
   it('Properly enrolls a bunch of patients mid-sequence', function () {
+    cy.wait(1500)
+    cy.tick(5000)
+
     cy.get('user-search').find('input').type('Test')
     cy.tick(10000)
     cy.wait(1000)
@@ -62,16 +67,19 @@ describe('Sequence -> View -> Enrollments', function () {
       accounts: ['1', '3'],
       organization: '1',
       sequence: `${Cypress.env('sequenceId')}`,
-      executeAt: '2019-12-31T01:00:00',
+      executeAt: '2020-01-02T03:00:00',
       transition: '1836',
       createdBy: 1
     })
   })
 
   it('Properly enrolls all the patients in a clinic', function () {
+    cy.wait(1500)
+    cy.tick(5000)
+
     cy.get('[aria-label="All patients in clinic"]').click()
 
-    cy.tick(1000)
+    cy.tick(5000)
 
     cy.get('ccr-organization-search').find('input').type('Coachcare')
     selectAutocompleteOption(0)
@@ -115,9 +123,11 @@ describe('Sequence -> View -> Enrollments', function () {
   })
 
   it('Properly enrolls all the patients in selected phase(s)', function () {
+    cy.tick(5000)
+
     cy.get('[aria-label="All patients in selected phase(s)"]').click()
 
-    cy.tick(1000)
+    cy.tick(5000)
 
     cy.get('ccr-organization-search').find('input').type('Coachcare')
     selectAutocompleteOption(0)
@@ -167,6 +177,9 @@ describe('Sequence -> View -> Enrollments', function () {
   })
 
   it('Properly enrolls all the patients in a clinic mid-sequence', function () {
+    cy.wait(1500)
+    cy.tick(5000)
+
     cy.get('mat-dialog-container')
       .contains('All patients in clinic')
       .click({ force: true })
@@ -188,12 +201,13 @@ describe('Sequence -> View -> Enrollments', function () {
     assertSequenceBulkOrganizationEnrollmentRequest({
       organization: '1',
       sequence: `${Cypress.env('sequenceId')}`,
-      executeAt: '2019-12-31T01:00:00',
+      executeAt: '2020-01-02T03:00:00',
       transition: '1836'
     })
   })
 
   it('Steps for enrollment properly show as executing "immediately" when start date is in the past', function () {
+    cy.tick(1000)
     cy.get('[data-cy="sequence-preview-active-cell"]')
       .should('have.length', 26)
       .as('activeCells')
@@ -201,6 +215,7 @@ describe('Sequence -> View -> Enrollments', function () {
     cy.get('@activeCells').eq(25).contains('Wed, Apr 15 2020 5:00 am')
 
     selectDateOnCalendar('24')
+    cy.tick(1000)
 
     cy.get('[data-cy="sequence-preview-active-cell"]')
       .should('have.length', 26)
@@ -211,6 +226,9 @@ describe('Sequence -> View -> Enrollments', function () {
   })
 
   it('Proper previous start date is passed', function () {
+    cy.wait(1500)
+    cy.tick(5000)
+
     cy.get('user-search').find('input').type('Test')
     cy.tick(10000)
     selectAutocompleteOption(1)

@@ -147,8 +147,11 @@ const interceptCoreApiCalls = (
   })
 
   cy.intercept('GET', '/1.0/sequence/transition/pending?**', {
-    fixture: 'api/sequence/getPendingTransitions'
-  })
+    fixture: fetchOverride(
+      '/1.0/sequence/transition/pending?**',
+      'api/sequence/getPendingTransitions'
+    )
+  }).as('getPendingTransitions')
 
   cy.intercept('POST', `/1.0/sequence/transition`, {
     statusCode: 200,

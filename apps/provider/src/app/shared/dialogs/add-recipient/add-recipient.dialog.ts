@@ -33,12 +33,6 @@ interface AddRecipientDialogProps {
   sequence: Sequence
 }
 
-interface TableStep {
-  date: string
-  index: number
-  name: string
-}
-
 @UntilDestroy()
 @Component({
   selector: 'sequencing-add-recipient-dialog',
@@ -62,7 +56,6 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   public account: AccountAccessData
   public allowBulkEnrollment = false
   public bulkEnrollProgress = 0
-  public columns: string[] = ['step', 'title', 'date']
   public currentOrg: OrganizationEntity
   public form: FormGroup
   public isLoading: boolean
@@ -74,10 +67,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   public selectedTabIndex = 0
   public state: 'form' | 'processing' = 'form'
   public stepOptions: SequenceState[] = []
-  public steps: TableStep[] = []
   public today: moment.Moment = moment()
   public isFirstStepImmediateProcess = false
-  public firstStepDate: Date
   public packagesControl = new FormControl([])
   public packages: PackageAssociation[] = []
   public minDateForEnrollment = moment().subtract(8, 'days')
@@ -263,42 +254,26 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
 
   private calcDelayedDate(
     serverDelay: string,
-    resolution: 'full' | 'only-hours' = 'full'
+    stepOptionsLength: number,
+    currentIndex: number
   ): string | undefined {
-    const splitServerDelay = serverDelay.split(/\s/)
-    let hourAmount
-    let daysAmount
-
-    switch (splitServerDelay.length) {
-      case 1:
-        hourAmount = +splitServerDelay[0].split(/\:/)[0]
-        break
-
-      case 2:
-        daysAmount = +splitServerDelay[0]
-        break
-
-      case 3:
-        daysAmount = +splitServerDelay[0]
-        hourAmount = +splitServerDelay[2].split(/\:/)[0]
-        break
-    }
+    const duration = this.parseServerDelay(serverDelay)
 
     if (!this.delayAcc) {
-      this.delayAcc = moment(this.form.value.startDate || undefined).startOf(
-        'day'
-      )
+      this.delayAcc = moment(this.form.value.startDate).startOf('day')
     }
 
-    if (resolution !== 'only-hours') {
-      this.delayAcc = daysAmount
-        ? this.delayAcc.add(daysAmount, 'days')
-        : this.delayAcc
+    if (duration.toISOString() === 'P0D') {
+      this.delayAcc = this.delayAcc.add(1, 'days')
     }
 
-    this.delayAcc = hourAmount
-      ? this.delayAcc.add(hourAmount, 'hours')
-      : this.delayAcc
+    if (currentIndex === stepOptionsLength + 1) {
+      this.delayAcc = moment(this.delayAcc).add(1, 'days').startOf('day')
+    }
+
+    if (duration.toISOString() !== 'Invalid date') {
+      this.delayAcc = this.delayAcc.add(duration)
+    }
 
     return this.delayAcc.toISOString() > moment().toISOString()
       ? this.delayAcc.toISOString()
@@ -357,30 +332,46 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
 
     const stepsCopy = this.stepOptions.slice()
 
-    stepsCopy.splice(0, this.form.value.startStep || 0)
+    const missingSteps = stepsCopy.splice(0, this.form.value.startStep || 0)
 
-    this.steps = stepsCopy.map((state, index) => ({
+    const steps = stepsCopy.map((state, index) => ({
       index: index + 1,
       name: state.name,
-      date: this.calcDelayedDate(state.serverDelay)
+      date: this.calcDelayedDate(
+        state.serverDelay,
+        stepsCopy.length - missingSteps.length,
+        index + 1
+      )
     }))
 
-    const startDateMoment = moment(this.form.value.startDate || undefined)
+    const startDateMoment = moment(
+      this.form.value.startDate || undefined
+    ).startOf('day')
 
-    this.executeAt =
-      this.steps.length > 1 && this.form.value.startStep
-        ? this.steps[0].date
-        : moment(this.form.value.startDate || undefined)
-            .startOf('day')
-            .toISOString()
+    for (const missingStep of missingSteps) {
+      const duration = this.parseServerDelay(missingStep.serverDelay)
+      startDateMoment.add(duration)
+    }
 
-    const firstStepDateMoment = moment(this.steps[0].date)
+    this.executeAt = startDateMoment.toISOString()
 
-    this.firstStepDate = firstStepDateMoment.toDate()
-    this.isFirstStepImmediateProcess =
-      firstStepDateMoment.isSameOrBefore(startDateMoment)
+    this.isFirstStepImmediateProcess = steps.some(
+      (step) => step.date === undefined
+    )
 
     delete this.delayAcc
+  }
+
+  private parseServerDelay(serverDelay: string): moment.Duration {
+    const parsedDelay = serverDelay.replace(/\s?days?/, '')
+    const duration =
+      parsedDelay.length > 7
+        ? moment.duration(parsedDelay)
+        : moment.duration({
+            days: parseInt(parsedDelay, 10)
+          })
+
+    return duration
   }
 
   private unlockDialog(): void {

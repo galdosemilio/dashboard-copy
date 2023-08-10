@@ -24,7 +24,7 @@ export function selectOption(selectorElement, optionName: string): void {
 export function selectAutocompleteOption(index: number): void {
   cy.get('mat-option').eq(index).click({ force: true })
 
-  cy.tick(1000)
+  cy.tick(5000)
 }
 
 export function setupEcommerceLeftNavMenu(

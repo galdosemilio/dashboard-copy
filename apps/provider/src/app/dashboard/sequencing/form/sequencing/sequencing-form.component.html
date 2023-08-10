@@ -140,4 +140,8 @@
             fxFlex></sequencing-step-input>
         </div>
     </div>
+    <div class="step-list-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+        <h4 fxFlex>{{ 'SEQUENCING.SEQUENCE_PREVIEW' | translate }}</h4>
+        <ccr-sequence-preview [states]="states" [repeatable]="form.value?.endingAction === 'repeat' || sequence?.hasLoop" ></ccr-sequence-preview>
+    </div>
 </div>

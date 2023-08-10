@@ -112,6 +112,7 @@ export class SequencingFormComponent
   stepsIndexes: number[] = []
   stepHoursFilters: SequenceHour[][] = []
   stepServerDelays: string[] = []
+  states: SequenceState[] = []
   endingActionZendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360035966752-Understanding-Sequence-Delays'
   addStepZendeskLink =
@@ -513,7 +514,7 @@ export class SequencingFormComponent
       .pipe(untilDestroyed(this))
       .subscribe((controls) => {
         const currentTransitions = this.form.value.transitions || []
-
+        this.states = controls.map((entry) => entry.step)
         controls.forEach((stepObject, index) => {
           if (!stepObject || !stepObject.step) {
             return

@@ -126,36 +126,8 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="25px">
         <h3>{{ 'SEQUENCING.SEQUENCE_PREVIEW' | translate }}</h3>
-        <div class="ccr-table scrollable-v" fxFlex>
-            <mat-table [dataSource]="steps">
-                <ng-container cdkColumnDef="step">
-                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.STEP' | translate }}</mat-header-cell>
-                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
-                    {{ row.index }}
-                </mat-cell>
-                </ng-container>
 
-                <ng-container cdkColumnDef="title">
-                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.TITLE' | translate }}</mat-header-cell>
-                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
-                    {{ row.name }}
-                </mat-cell>
-                </ng-container>
-
-                <ng-container cdkColumnDef="date">
-                <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.ACTIVE' | translate }}</mat-header-cell>
-                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow" data-cy="sequence-preview-active-cell">
-                    {{ row.date ? (row.date | amDateFormat:'ddd, MMM D YYYY h:mm a') : ('GLOBAL.IMMEDIATELY' | translate) }}
-                </mat-cell>
-                </ng-container>
-
-                <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
-                <mat-row fxLayoutWrap
-                    *cdkRowDef="let row; columns: columns; let even = even; let odd = odd;"
-                    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
-                ></mat-row>
-            </mat-table>
-        </div>
+        <ccr-sequence-preview [states]="sequence.states" [repeatable]="sequence?.hasLoop" [step]="form.value.startStep" [startDate]="form.value.startDate" fxFlex></ccr-sequence-preview>
     </div>
     </div>
 

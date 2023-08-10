@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { ContextService } from '@app/service'
 import {
+  UpcomingTransition,
   UpcomingTransitionsDatabase,
   UpcomingTransitionsDataSource
 } from '../../../dieters/dieter/settings/services/upcoming-transitions'
@@ -17,6 +18,7 @@ export class UpcomingTableComponent implements OnInit {
 
   columns: string[] = ['type', 'createdAt', 'createdAtHour', 'content']
   source: UpcomingTransitionsDataSource
+  rows: UpcomingTransition[] = []
 
   constructor(
     private context: ContextService,
@@ -26,6 +28,11 @@ export class UpcomingTableComponent implements OnInit {
   ngOnInit(): void {
     this.createSource()
     this.resolveData()
+    this.source.connect().subscribe((rows) => {
+      this.rows = rows.filter(
+        (item: UpcomingTransition) => item.triggers.length > 0
+      )
+    })
   }
 
   private createSource(): void {

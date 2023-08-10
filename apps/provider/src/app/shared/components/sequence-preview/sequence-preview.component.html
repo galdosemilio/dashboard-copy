@@ -1,0 +1,30 @@
+<div class="ccr-table scrollable-v">
+    <mat-table data-cy="sequence-preview-table" [dataSource]="steps">
+        <ng-container cdkColumnDef="step">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.STEP' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+            {{ row.index }}
+        </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="title">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.TITLE' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
+            {{ row.name }}
+        </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="date">
+        <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.ACTIVE' | translate }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow" data-cy="sequence-preview-active-cell">
+            {{ row.date ? (row.date | ccrUtc | amDateFormat:'ddd, MMM D YYYY h:mm a') : ('GLOBAL.IMMEDIATELY' | translate) }}
+        </mat-cell>
+        </ng-container>
+
+        <mat-header-row *cdkHeaderRowDef="columns"></mat-header-row>
+        <mat-row fxLayoutWrap
+            *cdkRowDef="let row; columns: columns; let even = even; let odd = odd;"
+            [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+        ></mat-row>
+    </mat-table>
+  </div>

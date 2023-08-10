@@ -1,0 +1,145 @@
+{
+  "id": "11469",
+  "name": "2023-08-10 12",
+  "createdAt": "2023-08-10 18:43:55.673+00",
+  "createdBy": {
+    "id": "6"
+  },
+  "isActive": true,
+  "autoenrollment": {
+    "enabled": false
+  },
+  "organization": {
+    "id": "30",
+    "name": "CoachCare"
+  },
+  "states": [
+    {
+      "id": "3546",
+      "name": "root",
+      "createdBy": {
+        "id": "6"
+      },
+      "createdAt": "2023-08-10T18:43:55.772Z"
+    },
+    {
+      "id": "3547",
+      "name": "Step 1",
+      "createdBy": {
+        "id": "6"
+      },
+      "createdAt": "2023-08-10T18:43:55.820Z"
+    },
+    {
+      "id": "3548",
+      "name": "Step 2",
+      "createdBy": {
+        "id": "6"
+      },
+      "createdAt": "2023-08-10T18:43:55.870Z"
+    },
+    {
+      "id": "3549",
+      "name": "Step 3",
+      "createdBy": {
+        "id": "6"
+      },
+      "createdAt": "2023-08-10T18:43:55.919Z"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "5483",
+      "from": {
+        "id": "3547"
+      },
+      "to": {
+        "id": "3548"
+      },
+      "delay": "1 day 03:00:00",
+      "createdBy": {
+        "id": "6"
+      },
+      "createdAt": "2023-08-10T18:43:56.008Z",
+      "triggers": [
+        {
+          "id": "3518",
+          "type": {
+            "id": "2",
+            "name": "Push notification"
+          },
+          "isActive": true,
+          "payload": {
+            "title": "test",
+            "header": "test",
+            "content": "test",
+            "message": "test"
+          },
+          "localizations": []
+        }
+      ]
+    },
+    {
+      "id": "5484",
+      "from": {
+        "id": "3548"
+      },
+      "to": {
+        "id": "3549"
+      },
+      "delay": "3 days 01:00:00",
+      "createdBy": {
+        "id": "6"
+      },
+      "createdAt": "2023-08-10T18:43:56.100Z",
+      "triggers": [
+        {
+          "id": "3519",
+          "type": {
+            "id": "2",
+            "name": "Push notification"
+          },
+          "isActive": true,
+          "payload": {
+            "title": "test",
+            "header": "test",
+            "content": "test",
+            "message": "test"
+          },
+          "localizations": []
+        }
+      ]
+    },
+    {
+      "id": "5485",
+      "from": {
+        "id": "3546"
+      },
+      "to": {
+        "id": "3547"
+      },
+      "delay": "1 day 22:00:00",
+      "createdBy": {
+        "id": "6"
+      },
+      "createdAt": "2023-08-10T18:43:56.100Z",
+      "triggers": [
+        {
+          "id": "3517",
+          "type": {
+            "id": "2",
+            "name": "Push notification"
+          },
+          "isActive": true,
+          "payload": {
+            "title": "test",
+            "header": "test",
+            "content": "test",
+            "message": "test"
+          },
+          "localizations": []
+        }
+      ]
+    }
+  ]
+}

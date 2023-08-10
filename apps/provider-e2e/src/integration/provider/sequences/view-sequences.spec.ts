@@ -287,6 +287,30 @@ describe('Sequences -> view', function () {
     })
   })
 
+  it('Displays sequence preview', function () {
+    cy.setTimezone('et')
+    standardSetup()
+    cy.visit('/sequences/sequence/1;s=edit')
+    cy.intercept('GET', '/1.0/sequence/1?**', {
+      fixture: 'api/sequence/getSingleSimple'
+    }).as('getSequence')
+    cy.wait('@getSequence')
+    cy.tick(100000)
+
+    findSequencePreviewRow(0).should('contain', 'Wed, Jan 1 2020 10:00 pm')
+    findSequencePreviewRow(1).should('contain', 'Fri, Jan 3 2020 1:00 am')
+    findSequencePreviewRow(2).should('contain', 'Mon, Jan 6 2020 2:00 am')
+
+    cy.get('[data-cy="sequence-button-enrollees"]').click()
+    cy.get('[data-cy="sequence-enroll"]').click()
+    cy.tick(100000)
+    cy.get('mat-dialog-container').within(() => {
+      findSequencePreviewRow(0).should('contain', 'Wed, Jan 1 2020 10:00 pm')
+      findSequencePreviewRow(1).should('contain', 'Fri, Jan 3 2020 1:00 am')
+      findSequencePreviewRow(2).should('contain', 'Mon, Jan 6 2020 2:00 am')
+    })
+  })
+
   it('Clinic shows properly sequence enrollments message logs', function () {
     cy.setTimezone('et')
     standardSetup()
@@ -299,43 +323,61 @@ describe('Sequences -> view', function () {
     cy.contains('search').click()
     cy.get('[aria-label="Previously Sent"]').click()
 
-    cy.get('mat-table mat-row')
-      .eq(1)
+    findPreviousTableRow(0)
       .should('contain', 'Push notification')
       .should('contain', 'Test')
 
     cy.get('[aria-label="Upcoming"]').click()
 
-    cy.get('mat-table mat-row')
-      .eq(1)
+    findUpcomingTableRow(0)
       .should('contain', 'SMS message')
       .should('contain', 'Hellow')
 
-    cy.get('mat-table mat-row')
-      .eq(2)
+    findUpcomingTableRow(1)
       .should('contain', 'E-mail')
       .should('contain', 'Test email')
   })
 
-  it('Should display blank slate when no upcoming messages', function () {
+  it('Displays upcoming sequence messages correctly', function () {
     cy.setTimezone('et')
-    standardSetup()
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/sequence/transition/pending?**',
+          fixture: 'api/sequence/getSimplePendingTransitions'
+        }
+      ]
+    })
 
     cy.visit(`/sequences/sequence/${Cypress.env('sequenceId')}`)
 
-    cy.tick(10000)
+    getUpcomingTab()
 
-    cy.intercept('GET', '/1.0/sequence/transition/pending?**', {
-      statusCode: 200,
-      body: {
-        data: []
-      }
+    findUpcomingTableRow(0)
+      .should('contain', 'Fri, Aug 11 2023')
+      .should('contain', '10:00 pm')
+    findUpcomingTableRow(1)
+      .should('contain', 'Sun, Aug 13 2023')
+      .should('contain', '1:00 am')
+    findUpcomingTableRow(2)
+      .should('contain', 'Wed, Aug 16 2023')
+      .should('contain', '2:00 am')
+  })
+
+  it('Should display blank slate when no upcoming messages', function () {
+    cy.setTimezone('et')
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/sequence/transition/pending?**',
+          fixture: 'api/sequence/getEmptyPendingTransitions'
+        }
+      ]
     })
 
-    cy.get('[data-cy="sequence-button-enrollees"]').click()
-    cy.contains('search').click()
+    cy.visit(`/sequences/sequence/${Cypress.env('sequenceId')}`)
 
-    cy.get('[aria-label="Upcoming"]').click()
+    getUpcomingTab()
 
     cy.get('[data-cy="datasource-overlay-error"]').should(
       'have.text',
@@ -343,6 +385,37 @@ describe('Sequences -> view', function () {
     )
   })
 })
+
+function getUpcomingTab() {
+  cy.tick(10000)
+
+  cy.get('[data-cy="sequence-button-enrollees"]').click()
+  cy.contains('search').click()
+
+  cy.get('[aria-label="Upcoming"]').click()
+  cy.wait('@getPendingTransitions')
+}
+
+function findSequencePreviewRow(
+  rowNumber: number
+): Cypress.Chainable<JQuery<HTMLElement>> {
+  return cy
+    .get('[data-cy="sequence-preview-table"]')
+    .find('mat-row')
+    .eq(rowNumber)
+}
+
+function findPreviousTableRow(
+  rowNumber: number
+): Cypress.Chainable<JQuery<HTMLElement>> {
+  return cy.get('app-previous-table').find('mat-row').eq(rowNumber)
+}
+
+function findUpcomingTableRow(
+  rowNumber: number
+): Cypress.Chainable<JQuery<HTMLElement>> {
+  return cy.get('app-upcoming-table').find('mat-row').eq(rowNumber)
+}
 
 function assertStepStructure(): void {
   cy.get(getStepRowAlias('1')).contains('No delay')
