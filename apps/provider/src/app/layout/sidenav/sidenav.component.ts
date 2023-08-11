@@ -254,7 +254,7 @@ export class SidenavComponent implements OnInit {
               },
               {
                 code: SidenavOptions.RPM_BILLING,
-                navName: _('SIDENAV.RPM'),
+                navName: _('SIDENAV.CARE_MNGMNT'),
                 navRoute: 'reports/rpm',
                 icon: 'receipt'
               },
@@ -457,7 +457,7 @@ export class SidenavComponent implements OnInit {
     }
 
     const enabled = get(org, 'preferences.content.enabled', false)
-    const rpmEnabled = get(org, 'preferences.rpm.isActive', false)
+    const rpmEnabled = this.context.user.careManagementServiceTypes?.length > 0
     const clinicStoreSet =
       (!this.isProvider &&
         resolveConfig(
@@ -471,7 +471,9 @@ export class SidenavComponent implements OnInit {
     const rpmElementIndex = this.sidenavItems.findIndex(
       (item) =>
         item.children &&
-        !!item.children.find((child) => child.navName === _('SIDENAV.RPM'))
+        !!item.children.find(
+          (child) => child.navName === _('SIDENAV.CARE_MNGMNT')
+        )
     )
     const sequencesEnabled = get(org, 'preferences.sequences.isActive', false)
     const sequencesElementIndex = this.sidenavItems.findIndex(
@@ -521,7 +523,7 @@ export class SidenavComponent implements OnInit {
 
     if (rpmElementIndex > -1 && !rpmEnabled) {
       const childIndex = this.sidenavItems[rpmElementIndex].children.findIndex(
-        (item) => item.navName === _('SIDENAV.RPM')
+        (item) => item.navName === _('SIDENAV.CARE_MNGMNT')
       )
       this.sidenavItems[rpmElementIndex].children[childIndex] = {
         ...this.sidenavItems[rpmElementIndex].children[childIndex],
