@@ -1,3 +1,34 @@
+# [1.124.0](https://github.com/coachcare/dashboard/compare/v1.123.0...v1.124.0) (2023-08-11)
+
+
+### Bug Fixes
+
+* admin site profile doesn't load if missing country code or phone ([60173d9](https://github.com/coachcare/dashboard/commit/60173d9e3eb0d694ff27e61449c7ddf93f2d00a3))
+* blood pressure start date on patient listing [FRON-3268] ([420b6f2](https://github.com/coachcare/dashboard/commit/420b6f20d26a61328644948f89b758773d33aa4f))
+* clean up display of pending sequence transitions [FRON-3252] ([8efd391](https://github.com/coachcare/dashboard/commit/8efd3917df9c175f786d70c7d47e29e7bd8dc59b))
+* correct clinic code report for standalone ([6a49daa](https://github.com/coachcare/dashboard/commit/6a49daadfcd12ce902cf3213dd9030d0db6803f8))
+* disable husky in publish_release [FRON-3258] ([3a4e528](https://github.com/coachcare/dashboard/commit/3a4e52812f757d58a39e9a669bb6a1a86692390b))
+* fix time tracker issue with switch services [FRON-3207] ([8943695](https://github.com/coachcare/dashboard/commit/8943695ccdc08562ca76880827af54be1ca8b8fc))
+* improve ux of cellular device syncing modal [FRON-3233] ([3cdf149](https://github.com/coachcare/dashboard/commit/3cdf14930f8ab62a8da3eb9f91e22dd370f3696c))
+* pass top level org on csv download report ([49aea52](https://github.com/coachcare/dashboard/commit/49aea52b6f6a2292f55150e6029b72d149fdfddd))
+* retain patient listing view between page visits [FRON-3184] ([3044dff](https://github.com/coachcare/dashboard/commit/3044dffbcd91cb834d546f0736907c1bb5b70166))
+* send full timestamp for asOf [FRON-3282] ([dcd669f](https://github.com/coachcare/dashboard/commit/dcd669ff0d7f02524813f256bd10c9be7dd09c90))
+* style issue with mat panel title [FRON-3260] ([f075d1b](https://github.com/coachcare/dashboard/commit/f075d1b0b0481675c59370bb818954991fac3cfd))
+* upcoming sequence transitions are showing at the wrong time ([2bf92dc](https://github.com/coachcare/dashboard/commit/2bf92dcf75721f215a1ec0371fbafc0cd9beb0ab))
+
+
+### Features
+
+* add blood pressure rating color and date to patient listing ([6f89c65](https://github.com/coachcare/dashboard/commit/6f89c6599660fc9b7a815f4bec37a761147ef94e))
+* add organization timezone on the admin [FRON-3222] ([b536e57](https://github.com/coachcare/dashboard/commit/b536e57fa021ebe34eefc72da7f64a7be554b15d))
+* add week option to reports range option [FRON-3199] ([5a17b63](https://github.com/coachcare/dashboard/commit/5a17b63f9bf62ca52889a213d43fb61d770ab955))
+* added pre-commit hook with format check and restored husky hooks [FRON-3225] ([e72fec3](https://github.com/coachcare/dashboard/commit/e72fec3d402bfb528ff4c3d795cfd0ce7436054f))
+* allow backdated sequence enrollment ([2e45ea2](https://github.com/coachcare/dashboard/commit/2e45ea298bfbd214f0ea9a2b97ae19755f429d4e))
+* hide store link from Options Clinic providers [FRON-3249] ([657631c](https://github.com/coachcare/dashboard/commit/657631c6b370383c4787c78b2e2c1d9ec3aa4858))
+* remove Levl integration ([84f25a1](https://github.com/coachcare/dashboard/commit/84f25a1b68aced6e97c5f0a4657a0b08088d21a9))
+* show pending sequences transactions in message history [FRON-3195] ([7a9544a](https://github.com/coachcare/dashboard/commit/7a9544aa1404e2d259932bb988a5a67a9dd2a91c))
+* upgrade to angular 14 [FRON-2922] ([2d6216a](https://github.com/coachcare/dashboard/commit/2d6216a827e19b5d1a9cafadd8869935bcd3ca76))
+
 # [1.123.0](https://github.com/coachcare/dashboard/compare/v1.122.1...v1.123.0) (2023-07-24)
 
 
