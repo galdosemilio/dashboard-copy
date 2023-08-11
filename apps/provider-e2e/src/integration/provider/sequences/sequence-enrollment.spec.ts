@@ -4,6 +4,7 @@ import {
   assertSequenceBulkOrganizationEnrollmentRequest,
   attemptBulkEnrollPatients,
   attemptEnrollPatients,
+  selectDateOnCalendar,
   selectEnrollmentStep
 } from './helpers'
 import { selectAutocompleteOption } from '../../helpers'
@@ -189,6 +190,42 @@ describe('Sequence -> View -> Enrollments', function () {
       sequence: `${Cypress.env('sequenceId')}`,
       executeAt: '2019-12-31T01:00:00',
       transition: '1836'
+    })
+  })
+
+  it('Steps for enrollment properly show as executing "immediately" when start date is in the past', function () {
+    cy.get('[data-cy="sequence-preview-active-cell"]')
+      .should('have.length', 26)
+      .as('activeCells')
+    cy.get('@activeCells').eq(0).contains('Tue, Dec 31 2019 11:00 pm')
+    cy.get('@activeCells').eq(25).contains('Wed, Apr 15 2020 5:00 am')
+
+    selectDateOnCalendar('24')
+
+    cy.get('[data-cy="sequence-preview-active-cell"]')
+      .should('have.length', 26)
+      .as('activeCellsBackdated')
+    cy.get('@activeCellsBackdated').eq(0).contains('Immediately')
+    cy.get('@activeCellsBackdated').eq(24).contains('Immediately')
+    cy.get('@activeCellsBackdated').eq(25).contains('Wed, Apr 8 2020 5:00 am')
+  })
+
+  it('Proper previous start date is passed', function () {
+    cy.get('user-search').find('input').type('Test')
+    cy.tick(10000)
+    selectAutocompleteOption(1)
+
+    selectDateOnCalendar('24')
+
+    attemptEnrollPatients()
+
+    assertSequenceBulkEnrollmentRequest({
+      accounts: ['3'],
+      organization: '1',
+      sequence: `${Cypress.env('sequenceId')}`,
+      executeAt: '2019-12-24T00:00:00',
+      transition: '1674',
+      createdBy: 1
     })
   })
 })

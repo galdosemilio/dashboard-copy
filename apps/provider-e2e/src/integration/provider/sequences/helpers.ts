@@ -542,3 +542,15 @@ export function verifyAvailableTimes(stepName: string, timeName: string): void {
 
   cy.get('@hourOptions').contains(`${timeName}`).trigger('click').wait(500)
 }
+
+export function selectDateOnCalendar(day: string): void {
+  cy.get('.mat-datepicker-toggle-default-icon').trigger('click')
+  cy.get('mat-datepicker-content')
+    .find('td')
+    .contains(day)
+    .trigger('click', { force: true })
+  cy.get('mat-datepicker-content')
+    .find('button')
+    .contains('OK')
+    .trigger('click', { force: true })
+}

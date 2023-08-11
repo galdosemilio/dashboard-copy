@@ -104,7 +104,7 @@
             matInput
             required
             formControlName="startDate"
-            [min]="today"
+            [min]="minDateForEnrollment"
             [placeholder]="'SEQUENCING.START_DATE' | translate"
             [matDatepicker]="startDatePicker" readonly="true">
             <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
@@ -144,8 +144,8 @@
 
                 <ng-container cdkColumnDef="date">
                 <mat-header-cell *cdkHeaderCellDef>{{ 'GLOBAL.ACTIVE' | translate }}</mat-header-cell>
-                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow">
-                    {{ row.date | amDateFormat:'ddd, MMM D YYYY h:mm a' }}
+                <mat-cell *cdkCellDef="let row" fxLayoutAlign="start center" fxLayoutAlign.xs=" center" fxFlex.xs="grow" data-cy="sequence-preview-active-cell">
+                    {{ row.date ? (row.date | amDateFormat:'ddd, MMM D YYYY h:mm a') : ('GLOBAL.IMMEDIATELY' | translate) }}
                 </mat-cell>
                 </ng-container>
 

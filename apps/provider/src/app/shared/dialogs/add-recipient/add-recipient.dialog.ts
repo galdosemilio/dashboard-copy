@@ -80,6 +80,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   public firstStepDate: Date
   public packagesControl = new FormControl([])
   public packages: PackageAssociation[] = []
+  public minDateForEnrollment = moment().subtract(8, 'days')
 
   private _sequence: Sequence
   private delayAcc: moment.Moment
@@ -263,7 +264,7 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   private calcDelayedDate(
     serverDelay: string,
     resolution: 'full' | 'only-hours' = 'full'
-  ): string {
+  ): string | undefined {
     const splitServerDelay = serverDelay.split(/\s/)
     let hourAmount
     let daysAmount
@@ -299,7 +300,9 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       ? this.delayAcc.add(hourAmount, 'hours')
       : this.delayAcc
 
-    return this.delayAcc.toISOString()
+    return this.delayAcc.toISOString() > moment().toISOString()
+      ? this.delayAcc.toISOString()
+      : undefined
   }
 
   private calculateProgress(completed: number, total: number): number {
