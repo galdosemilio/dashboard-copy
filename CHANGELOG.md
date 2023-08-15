@@ -1,3 +1,15 @@
+# [1.125.0](https://github.com/coachcare/dashboard/compare/v1.124.0...v1.125.0) (2023-08-15)
+
+
+### Bug Fixes
+
+* patient start date issue [FRON-3202] ([f92a740](https://github.com/coachcare/dashboard/commit/f92a740873e6e4a3a533f31e64ab33599c1fe522))
+
+
+### Features
+
+* add preview to sequence form [FRON-3232] ([dd6d451](https://github.com/coachcare/dashboard/commit/dd6d4518bfb1d4a901ce9eec716e67e548c6ff40))
+
 # [1.124.0](https://github.com/coachcare/dashboard/compare/v1.123.0...v1.124.0) (2023-08-11)
 
 
