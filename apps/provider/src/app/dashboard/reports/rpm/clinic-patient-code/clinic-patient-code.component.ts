@@ -245,9 +245,11 @@ export class ClinicPatientCodeComponent implements OnInit {
         this.csvSeparator
 
       for (const serviceType of this.serviceTypes()) {
-        headers += `${serviceType.name} Unique Episodes of Care${this.csvSeparator}`
+        headers += `"${serviceType.name} Unique Episodes of Care"`
+        headers += this.csvSeparator
         for (const heading of this.setHeadings(serviceType.id)) {
-          headers += `${heading}${this.csvSeparator}`
+          headers += `"${heading}"`
+          headers += this.csvSeparator
         }
       }
 
@@ -276,18 +278,22 @@ export class ClinicPatientCodeComponent implements OnInit {
         (item) => item.patientsUniqueCount,
         ['desc']
       )) {
-        csv += `${row.organization.id}${this.csvSeparator}`
-        csv += `${row.organization.name.replace(',', '')}${this.csvSeparator}`
-        csv += `${row.patientsUniqueCount}${this.csvSeparator}`
+        csv += `"${row.organization.id}"`
+        csv += this.csvSeparator
+        csv += `"${row.organization.name}"`
+        csv += this.csvSeparator
+        csv += `"${row.patientsUniqueCount}"`
+        csv += this.csvSeparator
         for (const serviceType of this.serviceTypes()) {
           const uniqueRPMEpisodesOfCare =
             row.codes[serviceType.id]?.uniqueRPMEpisodesOfCare
-          csv += `${uniqueRPMEpisodesOfCare}${this.csvSeparator}`
+          csv += `"${uniqueRPMEpisodesOfCare}"`
+          csv += this.csvSeparator
           for (const code of row.codes[serviceType.id].codes) {
-            csv += `${uniqueRPMEpisodesOfCare - code.satisfiedCount}${
-              this.csvSeparator
-            }`
-            csv += `${code.satisfiedCount}${this.csvSeparator}`
+            csv += `"${uniqueRPMEpisodesOfCare - code.satisfiedCount}"`
+            csv += this.csvSeparator
+            csv += `"${code.satisfiedCount}"`
+            csv += this.csvSeparator
           }
         }
         csv += '\n'
