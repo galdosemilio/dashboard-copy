@@ -83,6 +83,7 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
             'eligibility.next.alreadyEligibleCount',
             0
           )
+          const claimedCount = get(copiedBill, 'eligibility.last.count', 0)
 
           const monitoringRequired =
             copiedBill.eligibility?.next?.monitoring?.total?.seconds?.required
@@ -109,8 +110,6 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
                 0
               )
             }
-          } else if (index === metStep) {
-            delete copiedBill.eligibility.last
           } else if (index < metStep) {
             if (monitoringRequired) {
               set(
@@ -135,7 +134,12 @@ export class RPMStateSummaryEntry implements CareManagementStateSummaryItem {
             )
           }
 
+          if (index > claimedCount - 1) {
+            delete copiedBill.eligibility.last
+          }
+
           copiedBill.code = `${copiedBill.code} (${index + 1})`
+
           this.billing[billingsIndex] = {
             ...copiedBill,
             eligibility: {
