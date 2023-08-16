@@ -1,3 +1,11 @@
+## [1.125.1](https://github.com/coachcare/dashboard/compare/v1.125.0...v1.125.1) (2023-08-16)
+
+
+### Bug Fixes
+
+* fix csv parse issue in clinic patient code report [FRON-3253] ([8b7ec02](https://github.com/coachcare/dashboard/commit/8b7ec0200a8c2602382bf8e1e4b169245f7b2bce))
+* show correct claim date for multiple iterations [FRON-3285] ([0094509](https://github.com/coachcare/dashboard/commit/009450969ca3d350bde6c67e19dffd6b32a4fdd8))
+
 # [1.125.0](https://github.com/coachcare/dashboard/compare/v1.124.0...v1.125.0) (2023-08-15)
 
 
