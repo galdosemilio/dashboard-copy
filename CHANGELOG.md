@@ -1,3 +1,10 @@
+## [1.125.2](https://github.com/coachcare/dashboard/compare/v1.125.1...v1.125.2) (2023-08-16)
+
+
+### Bug Fixes
+
+* show correct claim date for multiple iterations [FRON-3285] ([7a57b51](https://github.com/coachcare/dashboard/commit/7a57b51c5eb98fa8c0742f33fa1747913134b23e))
+
 ## [1.125.1](https://github.com/coachcare/dashboard/compare/v1.125.0...v1.125.1) (2023-08-16)
 
 
